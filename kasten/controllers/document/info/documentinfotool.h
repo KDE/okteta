@@ -48,6 +48,8 @@ class OKTETAKASTENCONTROLLERS_EXPORT DocumentInfoTool : public AbstractTool
 
 public:
     explicit DocumentInfoTool(DocumentSyncManager* syncManager);
+    DocumentInfoTool() = delete;
+
     ~DocumentInfoTool() override;
 
 public: // AbstractTool API
@@ -76,10 +78,10 @@ private Q_SLOTS:
     void onUrlChanged(const QUrl& url);
 
 private:
-    ByteArrayDocument* mDocument;
-    Okteta::AbstractByteArrayModel* mByteArrayModel;
+    ByteArrayDocument* mDocument = nullptr;
+    Okteta::AbstractByteArrayModel* mByteArrayModel = nullptr;
 
-    AbstractModelSynchronizer* mSynchronizer;
+    AbstractModelSynchronizer* mSynchronizer = nullptr;
 
     DocumentSyncManager* mDocumentSyncManager;
 

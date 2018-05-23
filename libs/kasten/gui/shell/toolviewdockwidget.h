@@ -50,7 +50,7 @@ protected Q_SLOTS:
 protected:
     AbstractToolView* mToolView;
     // TODO: find out why isVisible does not work here
-    bool mIsShown;
+    bool mIsShown = false;
 };
 
 inline AbstractToolView* ToolViewDockWidget::toolView() const { return mToolView; }

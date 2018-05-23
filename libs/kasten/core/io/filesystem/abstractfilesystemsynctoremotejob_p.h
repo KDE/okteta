@@ -37,6 +37,7 @@ class AbstractFileSystemSyncToRemoteJobPrivate : public AbstractSyncToRemoteJobP
 {
 public:
     AbstractFileSystemSyncToRemoteJobPrivate(AbstractFileSystemSyncToRemoteJob* parent, AbstractModelFileSystemSynchronizer* synchronizer);
+    AbstractFileSystemSyncToRemoteJobPrivate() = delete;
 
     ~AbstractFileSystemSyncToRemoteJobPrivate() override;
 
@@ -58,7 +59,7 @@ protected:
 
 protected:
     AbstractModelFileSystemSynchronizer* const mSynchronizer;
-    QFile* mFile;
+    QFile* mFile = nullptr;
     QString mWorkFilePath;
 };
 
@@ -66,7 +67,6 @@ inline AbstractFileSystemSyncToRemoteJobPrivate::AbstractFileSystemSyncToRemoteJ
                                                                                           AbstractModelFileSystemSynchronizer* synchronizer)
     : AbstractSyncToRemoteJobPrivate(parent)
     , mSynchronizer(synchronizer)
-    , mFile(nullptr)
 {}
 
 inline QFile* AbstractFileSystemSyncToRemoteJobPrivate::file()     const { return mFile; }

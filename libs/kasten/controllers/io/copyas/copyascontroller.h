@@ -60,8 +60,8 @@ private:
     ModelCodecViewManager* mModelCodecViewManager;
     ModelCodecManager* mModelCodecManager;
 
-    AbstractModel* mModel;
-    If::DataSelectable* mSelectionControl;
+    AbstractModel* mModel = nullptr;
+    If::DataSelectable* mSelectionControl = nullptr;
 
     KSelectAction* mCopyAsSelectAction;
 };

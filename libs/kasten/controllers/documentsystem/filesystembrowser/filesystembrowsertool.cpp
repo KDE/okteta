@@ -39,7 +39,6 @@ namespace Kasten {
 FileSystemBrowserTool::FileSystemBrowserTool(DocumentSyncManager* documentSyncManager)
     : AbstractTool()
     , mDocumentSyncManager(documentSyncManager)
-    , mDocument(nullptr)
 {
     setObjectName(QStringLiteral("FileSystemBrowser"));
 }

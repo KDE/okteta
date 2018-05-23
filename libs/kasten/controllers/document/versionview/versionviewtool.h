@@ -53,7 +53,7 @@ Q_SIGNALS:
     void modelChanged(Kasten::AbstractModel* model);
 
 private: // sources
-    AbstractModel* mModel;
+    AbstractModel* mModel = nullptr;
 };
 
 inline AbstractModel* VersionViewTool::model() const { return mModel; }

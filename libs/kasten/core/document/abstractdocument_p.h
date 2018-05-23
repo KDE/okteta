@@ -35,6 +35,7 @@ class AbstractDocumentPrivate : public AbstractModelPrivate
 {
 public:
     explicit AbstractDocumentPrivate(AbstractDocument* parent);
+    AbstractDocumentPrivate() = delete;
 
     ~AbstractDocumentPrivate() override;
 
@@ -51,12 +52,11 @@ protected:
 
 protected:
     QString mId;
-    AbstractModelSynchronizer* mSynchronizer; // TODO: should this be here, with public setters and getters?
+    AbstractModelSynchronizer* mSynchronizer = nullptr; // TODO: should this be here, with public setters and getters?
 };
 
 inline AbstractDocumentPrivate::AbstractDocumentPrivate(AbstractDocument* parent)
     : AbstractModelPrivate(parent)
-    , mSynchronizer(nullptr)
 {}
 
 inline AbstractDocumentPrivate::~AbstractDocumentPrivate()

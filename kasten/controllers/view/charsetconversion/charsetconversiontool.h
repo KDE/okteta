@@ -92,13 +92,13 @@ private Q_SLOTS:
 
 private: // settings
     QString mOtherCharCodecName;
-    ConversionDirection mConversionDirection;
-    bool mSubstitutingMissingChars;
-    Okteta::Byte mSubstituteByte;
+    ConversionDirection mConversionDirection = ConvertFrom;
+    bool mSubstitutingMissingChars = false;
+    Okteta::Byte mSubstituteByte = 0;
 
 private: // sources
-    ByteArrayView* mByteArrayView;
-    Okteta::AbstractByteArrayModel* mByteArrayModel;
+    ByteArrayView* mByteArrayView = nullptr;
+    Okteta::AbstractByteArrayModel* mByteArrayModel = nullptr;
 };
 
 }

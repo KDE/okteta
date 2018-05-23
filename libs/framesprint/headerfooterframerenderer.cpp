@@ -34,16 +34,7 @@
 
 HeaderFooterFrameRenderer::HeaderFooterFrameRenderer(const PrintInfo* info)
     : mInfo(info)
-    , mHeight(0)
-    , mWidth(0)
-    , mBoxStyle(NoBox)
-    , mLineWidth(1)
-    , mBoxMargin(6)
-    , mBgColor(Qt::lightGray)
-    , mFgColor(Qt::black)
-    , mGloballyReplacedTextList()
 {
-    mOriginalTextList << QString() << QString() << QString();
     calculateHeight();
 }
 

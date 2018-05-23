@@ -54,14 +54,13 @@ protected:
     QFile* mFile;
     const QByteArray mHeader;
 
-    TestDocument* mDocument;
+    TestDocument* mDocument = nullptr;
 };
 
 inline TestDocumentFileLoadThread::TestDocumentFileLoadThread(QObject* parent, const QByteArray& header, QFile* file)
     : QThread(parent)
     , mFile(file)
     , mHeader(header)
-    , mDocument(nullptr)
 {}
 
 inline TestDocument* TestDocumentFileLoadThread::document() const { return mDocument; }

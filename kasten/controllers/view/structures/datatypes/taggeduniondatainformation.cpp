@@ -30,7 +30,6 @@
 
 TaggedUnionDataInformation::TaggedUnionDataInformation(const QString& name, DataInformation* parent)
     : DataInformationWithChildren(name, QVector<DataInformation*>(), parent)
-    , mLastIndex(-1)
 {
 }
 

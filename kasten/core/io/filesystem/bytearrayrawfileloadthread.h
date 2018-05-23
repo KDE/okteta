@@ -55,14 +55,13 @@ Q_SIGNALS:
 protected:
     QFile* mFile;
 
-    ByteArrayDocument* mDocument;
+    ByteArrayDocument* mDocument = nullptr;
     QString mErrorString;
 };
 
 inline ByteArrayRawFileLoadThread::ByteArrayRawFileLoadThread(QObject* parent, QFile* file)
     : QThread(parent)
     , mFile(file)
-    , mDocument(nullptr)
 {}
 
 inline ByteArrayDocument* ByteArrayRawFileLoadThread::document() const { return mDocument; }

@@ -105,16 +105,16 @@ private Q_SLOTS:
 //     void onUndefinedCharChanged( const QChar& undefinedChar );
 
 private: // source
-    ByteArrayView* mByteArrayView;
-    Okteta::AbstractByteArrayModel* mByteArrayModel;
-    Okteta::Address mCursorIndex;
+    ByteArrayView* mByteArrayView = nullptr;
+    Okteta::AbstractByteArrayModel* mByteArrayModel = nullptr;
+    Okteta::Address mCursorIndex = 0;
 
     bool mReadOnly : 1;
     bool mIsPodMarked : 1;
 
     QVector<Okteta::AbstractTypeCodec*> mTypeCodecs;
     Okteta::CharCodec* mCharCodec;
-    AbstractDifferentSizeDialog* mDifferentSizeDialog;
+    AbstractDifferentSizeDialog* mDifferentSizeDialog = nullptr;
 
 private: // settings
     bool mUnsignedAsHex : 1;

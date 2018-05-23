@@ -40,10 +40,6 @@
 namespace Kasten {
 
 ReplaceTool::ReplaceTool()
-    : mCaseSensitivity(Qt::CaseSensitive)
-    , mUserQueryAgent(nullptr)
-    , mByteArrayView(nullptr)
-    , mByteArrayModel(nullptr)
 {
     setObjectName(QStringLiteral("Replace"));
 }

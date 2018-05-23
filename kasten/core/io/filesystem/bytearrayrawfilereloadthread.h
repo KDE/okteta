@@ -55,7 +55,7 @@ Q_SIGNALS:
 protected:
     QFile* mFile;
 
-    bool mSuccess;
+    bool mSuccess = false;
     QString mErrorString;
 
     QByteArray mData;

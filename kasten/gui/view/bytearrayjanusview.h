@@ -156,8 +156,8 @@ Q_SIGNALS:
     void viewModusChanged(int viewModus);
 
 private:
-    AbstractByteArrayView* mView;
-    int mViewModus;
+    AbstractByteArrayView* mView = nullptr;
+    int mViewModus = -1;
     QHBoxLayout* mLayout;
 };
 

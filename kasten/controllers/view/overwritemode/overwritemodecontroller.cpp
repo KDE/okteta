@@ -33,7 +33,6 @@
 namespace Kasten {
 
 OverwriteModeController::OverwriteModeController(KXMLGUIClient* guiClient)
-    : mByteArrayView(nullptr)
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 

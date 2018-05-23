@@ -37,7 +37,6 @@ namespace Kasten {
 ByteArrayRawFileReloadThread::ByteArrayRawFileReloadThread(QObject* parent, QFile* file)
     : QThread(parent)
     , mFile(file)
-    , mSuccess(false)
 {
 }
 

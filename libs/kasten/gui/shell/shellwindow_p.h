@@ -72,9 +72,9 @@ protected:
     MultiViewAreas* mGroupedViews;
     // hack:
     // used to store a pointer to the current, so we can disconnect to its signals... well, not perfect
-    AbstractView* mCurrentView;
-    AbstractDocument* mCurrentDocument;
-    AbstractModelSynchronizer* mCurrentSynchronizer;
+    AbstractView* mCurrentView = nullptr;
+    AbstractDocument* mCurrentDocument = nullptr;
+    AbstractModelSynchronizer* mCurrentSynchronizer = nullptr;
 
     ViewManager* mViewManager;
     QList<AbstractXmlGuiController*> mControllers;

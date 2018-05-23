@@ -32,13 +32,7 @@ static inline void copyInvertedBytes(Byte* data, const Byte* sourceData, const i
     }
 }
 
-PODData::PODData()
-    : mCurrentOriginalData(nullptr)
-    , mCurrentEndiannessSetData(nullptr)
-    , mCurrentSize(0)
-    , mByteOrder(QSysInfo::ByteOrder)
-{
-}
+PODData::PODData() = default;
 
 const Byte* PODData::originalData()     const { return mCurrentOriginalData; }
 const Byte* PODData::byteOrderSetData() const { return mCurrentEndiannessSetData; }

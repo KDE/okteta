@@ -46,7 +46,7 @@ public:
     Base32StreamEncoderSettings();
 
 public:
-    AlgorithmId algorithmId;
+    AlgorithmId algorithmId = AlgorithmId::Classic;
 };
 
 class ByteArrayBase32StreamEncoder : public AbstractByteArrayStreamEncoder

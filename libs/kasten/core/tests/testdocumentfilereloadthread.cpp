@@ -39,7 +39,6 @@ TestDocumentFileReloadThread::TestDocumentFileReloadThread(QObject* parent, cons
 //     , mDocument(document)
     , mHeader(header)
     , mFile(file)
-    , mSuccess(false)
 {
 //     mDocument->content()->moveToThread( this );
 //     mDocument->moveToThread( this );

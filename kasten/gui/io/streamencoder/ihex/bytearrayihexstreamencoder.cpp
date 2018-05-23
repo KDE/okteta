@@ -35,9 +35,7 @@
 
 namespace Kasten {
 
-IHexStreamEncoderSettings::IHexStreamEncoderSettings()
-    : addressSizeId(AddressSizeId::Bits32)
-{}
+IHexStreamEncoderSettings::IHexStreamEncoderSettings() = default;
 
 const char ByteArrayIHexStreamEncoder::hexDigits[16] = {
     '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'

@@ -39,10 +39,6 @@
 namespace Kasten {
 
 SearchTool::SearchTool()
-    : mCaseSensitivity(Qt::CaseSensitive)
-    , mUserQueryAgent(nullptr)
-    , mByteArrayView(nullptr)
-    , mByteArrayModel(nullptr)
 {
     setObjectName(QStringLiteral("Search"));
 }

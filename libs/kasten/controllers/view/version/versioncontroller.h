@@ -60,8 +60,8 @@ private Q_SLOTS: // action slots
     void onReadOnlyChanged(bool isReadOnly);
 
 private:
-    AbstractModel* mModel;
-    If::Versionable* mVersionControl;
+    AbstractModel* mModel = nullptr;
+    If::Versionable* mVersionControl = nullptr;
 
     KToolBarPopupAction* mSetToOlderVersionAction;
     KToolBarPopupAction* mSetToNewerVersionAction;

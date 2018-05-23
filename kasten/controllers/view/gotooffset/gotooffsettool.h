@@ -83,14 +83,14 @@ private:
     int finalTargetOffset() const;
 
 private: // settings
-    int mTargetOffset;
-    bool mIsRelative;
-    bool mIsSelectionToExtent;
-    bool mIsBackwards;
+    int mTargetOffset = 0;
+    bool mIsRelative = false;
+    bool mIsSelectionToExtent = false;
+    bool mIsBackwards = false;
 
 private: // target
-    ByteArrayView* mByteArrayView;
-    Okteta::AbstractByteArrayModel* mByteArrayModel;
+    ByteArrayView* mByteArrayView = nullptr;
+    Okteta::AbstractByteArrayModel* mByteArrayModel = nullptr;
 };
 
 inline int GotoOffsetTool::targetOffset()         const { return mTargetOffset; }

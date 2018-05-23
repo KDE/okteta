@@ -31,11 +31,7 @@ namespace Okteta {
 
 ByteArrayValidator::ByteArrayValidator(QObject* parent, Coding codecId, int charCodecId)
     : QValidator(parent)
-    , mCodecId(InvalidCoding)
-    , mValueCodec(nullptr)
     , mCharCodec(CharCodec::createCodec(Okteta::LocalEncoding))
-    , mMaxLength(32767)
-    , mMinLength(0)
 {
     Q_UNUSED(charCodecId)
     setCodec(codecId);

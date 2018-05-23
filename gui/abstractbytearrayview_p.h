@@ -57,6 +57,8 @@ class AbstractByteArrayViewPrivate
 {
 public:
     explicit AbstractByteArrayViewPrivate(AbstractByteArrayView* parent);
+    AbstractByteArrayViewPrivate() = delete;
+
     virtual ~AbstractByteArrayViewPrivate();
 
 public: // value access
@@ -294,7 +296,7 @@ protected:
 
     /** font size as set by user (used for zooming) */
     int mDefaultFontSize;
-    double mZoomLevel;
+    double mZoomLevel = 1.0;
 
     // parameters
     /** */

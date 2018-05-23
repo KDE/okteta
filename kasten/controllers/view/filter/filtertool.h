@@ -73,9 +73,9 @@ private Q_SLOTS:
     void onApplyableChanged();
 
 private:
-    ByteArrayView* mByteArrayView;
-    Okteta::AbstractByteArrayModel* mByteArrayModel;
-    bool mHasWritable;
+    ByteArrayView* mByteArrayView = nullptr;
+    Okteta::AbstractByteArrayModel* mByteArrayModel = nullptr;
+    bool mHasWritable = false;
 
     QList<AbstractByteArrayFilter*> mFilterList;
 };

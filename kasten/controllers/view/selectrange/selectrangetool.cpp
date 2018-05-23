@@ -34,12 +34,8 @@
 namespace Kasten {
 
 SelectRangeTool::SelectRangeTool()
-    : mTargetStart(0)
-    , mTargetEnd(-1)
-    , mIsEndRelative(false)
+    : mIsEndRelative(false)
     , mIsEndBackwards(false)
-    , mByteArrayView(nullptr)
-    , mByteArrayModel(nullptr)
 {
     setObjectName(QStringLiteral("SelectRange"));
 }

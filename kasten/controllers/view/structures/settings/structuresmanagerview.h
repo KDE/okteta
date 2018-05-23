@@ -71,7 +71,7 @@ private:
     QStringList mSelectedStructures;
     KNS3::Button* mGetNewStructuresButton;
     QPushButton* mAdvancedSelectionButton;
-    KPluginSelector* mStructuresSelector;
+    KPluginSelector* mStructuresSelector = nullptr;
     bool mRebuildingPluginsList : 1;
 
 };

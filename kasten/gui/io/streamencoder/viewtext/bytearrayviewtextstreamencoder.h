@@ -45,10 +45,10 @@ public:
     int firstLineOffset;
     int startOffset;
     int delta;
-    Okteta::ValueCoding valueCoding;
+    Okteta::ValueCoding valueCoding = Okteta::HexadecimalCoding;
     QString codecName;
-    QChar undefinedChar;
-    QChar substituteChar;
+    QChar undefinedChar = {QLatin1Char('?')};
+    QChar substituteChar = {QLatin1Char('.')};
     QString separation;
 //     Okteta::CharCodec *CharCodec;
 //     Okteta::OffsetFormat::print printFunction;

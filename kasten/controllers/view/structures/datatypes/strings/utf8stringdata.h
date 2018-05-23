@@ -46,11 +46,11 @@ public:
 private:
     QHash<int, quint8> mErrorIndices;
     QVector<quint32> mCodePoints;
-    uint mOneByteCount;
-    uint mTwoByteCount;
-    uint mThreeByteCount;
-    uint mFourByteCount;
-    uint mNonBMPCount;
+    uint mOneByteCount = 0;
+    uint mTwoByteCount = 0;
+    uint mThreeByteCount = 0;
+    uint mFourByteCount = 0;
+    uint mNonBMPCount = 0;
 };
 
 #endif // UTF8STRINGDATA_H

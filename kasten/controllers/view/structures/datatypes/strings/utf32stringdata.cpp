@@ -35,7 +35,6 @@
 
 Utf32StringData::Utf32StringData(StringDataInformation* parent)
     : StringData(parent)
-    , mNonBMPCount(0)
 {
 }
 

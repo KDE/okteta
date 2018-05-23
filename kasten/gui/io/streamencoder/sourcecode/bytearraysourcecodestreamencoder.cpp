@@ -61,9 +61,6 @@ inline QString hexadecimalFormattedNumberPlaceHolder() { return QStringLiteral("
 
 SourceCodeStreamEncoderSettings::SourceCodeStreamEncoderSettings()
     : variableName(QStringLiteral("array"))
-    , dataType(PrimitiveDataType::UnsignedChar)
-    , elementsPerLine(4)
-    , unsignedAsHexadecimal(true)
 {}
 
 ByteArraySourceCodeStreamEncoder::ByteArraySourceCodeStreamEncoder()

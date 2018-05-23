@@ -46,12 +46,7 @@
 
 namespace Kasten {
 
-PrintTool::PrintTool()
-    : mDocument(nullptr)
-    , mByteArrayView(nullptr)
-    , mByteArrayModel(nullptr)
-{
-}
+PrintTool::PrintTool() = default;
 
 PrintTool::~PrintTool() = default;
 

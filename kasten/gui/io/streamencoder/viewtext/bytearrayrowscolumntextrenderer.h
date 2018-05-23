@@ -87,7 +87,7 @@ protected:
     mutable Okteta::Address mOffset;
 
     /** buffered value of how many chars a line needs */
-    int mNoOfCharsPerLine;
+    int mNoOfCharsPerLine = 0;
     // positions where to paint the
     int* const mLinePositions;
 };

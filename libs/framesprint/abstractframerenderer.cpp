@@ -33,13 +33,10 @@ public:
     Private();
 
 public:
-    int mX;
-    int mY;
+    int mX = 0;
+    int mY = 0;
 };
-AbstractFrameRenderer::Private::Private()
-    : mX(0)
-    , mY(0)
-{}
+AbstractFrameRenderer::Private::Private() = default;
 
 AbstractFrameRenderer::AbstractFrameRenderer() : d(new Private()) {}
 AbstractFrameRenderer::~AbstractFrameRenderer() { delete d; }

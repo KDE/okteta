@@ -37,10 +37,10 @@ public:
     QString toString() const;
 
 public:
-    float value;
+    float value = 0;
 };
 
-inline Float32::Float32() : value(0) {}
+inline Float32::Float32() = default;
 inline Float32::Float32(float v) : value(v) {}
 
 inline QString Float32::toString() const

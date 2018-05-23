@@ -48,7 +48,6 @@ ByteArrayRowsColumnTextRenderer::ByteArrayRowsColumnTextRenderer(const Okteta::A
     , mSubstituteChar(substituteChar)
     , mUndefinedChar(undefinedChar)
     , mOffset(offset)
-    , mNoOfCharsPerLine(0)
     , mLinePositions(new int[mNoOfBytesPerLine])
 {
     const int encodingWidth = (mVisibleCodings & 1) ? mValueCodec->encodingWidth() : 1;

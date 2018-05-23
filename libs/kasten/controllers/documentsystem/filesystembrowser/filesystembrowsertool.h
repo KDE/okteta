@@ -62,7 +62,7 @@ Q_SIGNALS:
 private: // sources
     DocumentSyncManager* mDocumentSyncManager;
 
-    AbstractDocument* mDocument;
+    AbstractDocument* mDocument = nullptr;
 };
 
 }

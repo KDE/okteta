@@ -63,7 +63,7 @@ public:
     Piece subPiece(const AddressRange& local) const;
 
 protected:
-    int mStorageId;
+    int mStorageId = OriginalStorage;
 };
 
 inline Piece::Piece(Address storageOffset, Size size, int storageId)
@@ -74,7 +74,7 @@ inline Piece::Piece(const AddressRange& storageRange, int storageId)
     : AddressRange(storageRange)
     , mStorageId(storageId)
 {}
-inline Piece::Piece() : mStorageId(OriginalStorage) {}
+inline Piece::Piece() = default;
 
 inline int Piece::storageId() const { return mStorageId; }
 

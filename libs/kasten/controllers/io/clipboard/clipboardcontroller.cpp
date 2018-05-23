@@ -41,9 +41,6 @@
 namespace Kasten {
 
 ClipboardController::ClipboardController(KXMLGUIClient* guiClient)
-    : mModel(nullptr)
-    , mSelectionControl(nullptr)
-    , mMimeDataControl(nullptr)
 {
     mCutAction =   KStandardAction::cut(  this, &ClipboardController::cut,   this);
     mCopyAction =  KStandardAction::copy( this, &ClipboardController::copy,  this);

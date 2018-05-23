@@ -104,7 +104,7 @@ public:
     void toFront() override;
 
 private:
-    int mCurrent;
+    int mCurrent = -1;
     DefaultScriptClass* mClass;
     DataInformation* mData;
 };

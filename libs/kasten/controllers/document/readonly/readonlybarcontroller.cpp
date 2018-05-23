@@ -33,7 +33,6 @@
 namespace Kasten {
 
 ReadOnlyBarController::ReadOnlyBarController(StatusBar* statusBar)
-    : mDocument(nullptr)
 {
     const QString readWriteText = i18nc("@option:check the document is read-write", "Read-write");
     const QString readOnlyText = i18nc("@option:check the document is read-only", "Read-only");

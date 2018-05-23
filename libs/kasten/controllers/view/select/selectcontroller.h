@@ -55,8 +55,8 @@ private Q_SLOTS:
     void onHasSelectedDataChanged(bool hasSelectedData);
 
 private:
-    AbstractModel* mModel;
-    If::DataSelectable* mSelectControl;
+    AbstractModel* mModel = nullptr;
+    If::DataSelectable* mSelectControl = nullptr;
 
     QAction* mSelectAllAction;
     QAction* mDeselectAction;

@@ -37,9 +37,6 @@ namespace Kasten {
 SingleViewWindowPrivate::SingleViewWindowPrivate(SingleViewWindow* parent,
                                                  AbstractView* view)
     : q_ptr(parent)
-    , mView(nullptr)
-    , mDocument(nullptr)
-    , mSynchronizer(nullptr)
     , mViewArea(new SingleViewArea())
 {
     parent->setCentralWidget(mViewArea->widget());

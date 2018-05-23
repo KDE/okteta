@@ -37,7 +37,6 @@ namespace Kasten {
 // TODO: catch area focues change!
 MultiViewAreasPrivate::MultiViewAreasPrivate(MultiViewAreas* parent)
     : AbstractGroupedViewsPrivate(parent)
-    , mCurrentInlineToolViewArea(nullptr)
 {
 }
 

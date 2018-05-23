@@ -53,6 +53,7 @@ public:
     explicit ByteArrayValidator(QObject* parent = nullptr,
                                 Coding codecId = CharCoding,
                                 int charCodecId = LocalEncoding);
+    ByteArrayValidator() = delete;
 
     ~ByteArrayValidator() override;
 
@@ -88,11 +89,11 @@ private:
      */
 //     QString zeroExtend( const QString &src, int destLen ) const;
 
-    Coding mCodecId;
-    ValueCodec* mValueCodec;
+    Coding mCodecId = InvalidCoding;
+    ValueCodec* mValueCodec = nullptr;
     CharCodec* mCharCodec;
-    int mMaxLength;
-    int mMinLength;
+    int mMaxLength = 32767;
+    int mMinLength = 0;
 };
 
 inline int ByteArrayValidator::maxLength() const { return mMaxLength; }

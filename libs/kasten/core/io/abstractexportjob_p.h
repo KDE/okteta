@@ -31,6 +31,7 @@ class AbstractExportJobPrivate
 {
 public:
     explicit AbstractExportJobPrivate(AbstractExportJob* parent);
+    AbstractExportJobPrivate() = delete;
 
     virtual ~AbstractExportJobPrivate();
 
@@ -41,12 +42,11 @@ public:
 protected:
     AbstractExportJob* const q_ptr;
 
-    AbstractDocument* mDocument;
+    AbstractDocument* mDocument = nullptr;
 };
 
 inline AbstractExportJobPrivate::AbstractExportJobPrivate(AbstractExportJob* parent)
     : q_ptr(parent)
-    , mDocument(nullptr)
 {}
 
 inline AbstractExportJobPrivate::~AbstractExportJobPrivate() = default;

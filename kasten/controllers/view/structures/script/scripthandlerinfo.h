@@ -68,7 +68,7 @@ public:
 
 private:
     ScriptLogger* mLogger;
-    Mode mMode;
+    Mode mMode = Mode::None;
 
     Q_DISABLE_COPY(ScriptHandlerInfo)
 };

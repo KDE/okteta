@@ -36,6 +36,7 @@ class AbstractFileSystemExportJobPrivate : public AbstractExportJobPrivate
 public:
     AbstractFileSystemExportJobPrivate(AbstractFileSystemExportJob* parent,
                                        AbstractModel* model, const AbstractModelSelection* selection, const QUrl& url);
+    AbstractFileSystemExportJobPrivate() = delete;
 
     ~AbstractFileSystemExportJobPrivate() override;
 
@@ -60,7 +61,7 @@ protected:
     AbstractModel* const mModel;
     const AbstractModelSelection* const mSelection;
     const QUrl mUrl;
-    QFile* mFile;
+    QFile* mFile = nullptr;
     QString mWorkFilePath;
 };
 
@@ -71,7 +72,6 @@ inline AbstractFileSystemExportJobPrivate::AbstractFileSystemExportJobPrivate(Ab
     , mModel(model)
     , mSelection(selection)
     , mUrl(url)
-    , mFile(nullptr)
 {}
 
 inline AbstractFileSystemExportJobPrivate::~AbstractFileSystemExportJobPrivate() = default;

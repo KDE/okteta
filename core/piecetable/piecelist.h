@@ -51,12 +51,11 @@ public:
 
 protected:
     QList<Piece> mList;
-    Size mTotalLength;
+    Size mTotalLength = 0;
 };
 
-inline PieceList::PieceList() : mTotalLength(0) {}
+inline PieceList::PieceList() = default;
 inline PieceList::PieceList(const Piece& piece)
-    : mTotalLength(0)
 {
     append(piece);
 }

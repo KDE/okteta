@@ -90,7 +90,7 @@ protected Q_SLOTS:
 protected: // settings
     QByteArray mSearchData;
     QByteArray mReplaceData;
-    Qt::CaseSensitivity mCaseSensitivity;
+    Qt::CaseSensitivity mCaseSensitivity = Qt::CaseSensitive;
     bool mDoPrompt : 1;
 
 protected: // status
@@ -100,11 +100,11 @@ protected: // status
     Okteta::Address mReplaceLastIndex;
 
 protected:
-    If::ReplaceUserQueryable* mUserQueryAgent;
+    If::ReplaceUserQueryable* mUserQueryAgent = nullptr;
 
 protected: // target
-    ByteArrayView* mByteArrayView;
-    Okteta::AbstractByteArrayModel* mByteArrayModel;
+    ByteArrayView* mByteArrayView = nullptr;
+    Okteta::AbstractByteArrayModel* mByteArrayModel = nullptr;
 };
 
 inline QByteArray ReplaceTool::searchData() const { return mSearchData; }

@@ -40,8 +40,6 @@ namespace Kasten {
 TerminalView::TerminalView(TerminalTool* tool, QWidget* parent)
     : QWidget(parent)
     , mTool(tool)
-    , mTerminalPart(nullptr)
-    , mTerminalInterface(nullptr)
 {
     QVBoxLayout* layout = new QVBoxLayout(this);
     layout->setMargin(0);

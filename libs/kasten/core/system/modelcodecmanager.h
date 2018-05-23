@@ -75,7 +75,7 @@ private:
     // unless there is a singleton
     DocumentManager* mManager;
     // used for dialogs, TODO: create (or use?) global instance for this
-    AbstractOverwriteDialog* mOverwriteDialog;
+    AbstractOverwriteDialog* mOverwriteDialog = nullptr;
 
     // temporary hack: hard coded codecs for byte arrays
     QList<AbstractModelStreamEncoder*> mEncoderList;

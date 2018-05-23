@@ -111,7 +111,7 @@ private:
 private:
     QScopedPointer<DummyDataInformation> mDummy;
     QScopedPointer<StringData> mData;
-    StringType mEncoding;
+    StringType mEncoding = StringType::InvalidEncoding;
 };
 
 inline StringDataInformation::StringType StringDataInformation::encoding() const

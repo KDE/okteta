@@ -48,7 +48,7 @@ private Q_SLOTS: // action slots
     void setReadOnly(bool isReadOnly);
 
 private:
-    AbstractDocument* mDocument;
+    AbstractDocument* mDocument = nullptr;
 
     ToggleButton* mReadOnlyButton;
 };

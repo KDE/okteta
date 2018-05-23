@@ -31,7 +31,6 @@ namespace Kasten {
 ViewAreaBox::ViewAreaBox(QWidget* centralWidget, QWidget* parent)
     : QWidget(parent)
     , mCentralWidget(centralWidget)
-    , mBottomWidget(nullptr)
 {
     setFocusProxy(mCentralWidget);
 

@@ -50,9 +50,9 @@ public:
 
 public:
     QString variableName;
-    PrimitiveDataType dataType;
-    int elementsPerLine;
-    bool unsignedAsHexadecimal;
+    PrimitiveDataType dataType = PrimitiveDataType::UnsignedChar;
+    int elementsPerLine = 4;
+    bool unsignedAsHexadecimal = true;
 };
 
 // TODO: General synchronizer would load matching encoder and decoder

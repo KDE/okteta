@@ -22,9 +22,7 @@
 
 #include "modsumbytearraychecksumparameterset.h"
 
-ModSumByteArrayChecksumParameterSet::ModSumByteArrayChecksumParameterSet()
-    : mEndianness(ThisMachineEndianness)
-{}
+ModSumByteArrayChecksumParameterSet::ModSumByteArrayChecksumParameterSet() = default;
 
 ModSumByteArrayChecksumParameterSet::~ModSumByteArrayChecksumParameterSet() = default;
 

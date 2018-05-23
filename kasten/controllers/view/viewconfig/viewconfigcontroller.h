@@ -67,7 +67,7 @@ private Q_SLOTS: // action slots
     void onVisibleByteArrayCodingsChanged(int visibleByteArrayCodings);
 
 private:
-    ByteArrayView* mByteArrayView;
+    ByteArrayView* mByteArrayView = nullptr;
 
     // view menu
     KSelectAction* mCodingAction;

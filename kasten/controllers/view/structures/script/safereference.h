@@ -45,8 +45,8 @@ public:
 
 private:
     using Container = QMultiHash<DataInformation*, SafeReference*>;
-    int safeRefDestroyCnt;
-    int safeRefRegisterCnt;
+    int safeRefDestroyCnt = 0;
+    int safeRefRegisterCnt = 0;
     Container mRefs;
 };
 
@@ -67,12 +67,12 @@ private:
     inline void invalidate();
 
 private:
-    DataInformation* mData;
+    DataInformation* mData = nullptr;
 };
 
 Q_DECLARE_METATYPE(SafeReference)
 
-inline SafeReference::SafeReference() : mData(nullptr)
+inline SafeReference::SafeReference()
 {
     qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "default constructed safe reference";
 }

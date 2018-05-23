@@ -56,12 +56,12 @@ public:
     void setOffset(Address offset);
 
 protected:
-    Address mOffset;
+    Address mOffset = InvalidAddress;
     QString mName;
 };
 
 inline Bookmark::Bookmark(Address offset) : mOffset(offset) {}
-inline Bookmark::Bookmark() : mOffset(InvalidAddress) {}
+inline Bookmark::Bookmark() = default;
 inline bool Bookmark::operator==(const Bookmark& other) const { return mOffset == other.mOffset; }
 inline bool Bookmark::isValid() const { return mOffset != InvalidAddress; }
 inline Address Bookmark::offset() const { return mOffset; }

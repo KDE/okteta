@@ -46,8 +46,6 @@ static const int ZoomSliderWidth = 150;
 
 ZoomSlider::ZoomSlider(QWidget* parent)
     : QWidget(parent)
-    , mModel(nullptr)
-    , mZoomControl(nullptr)
 {
     mZoomOutButton = new QToolButton(this);
     mZoomOutButton->setIcon(QIcon::fromTheme(QStringLiteral("zoom-out")));

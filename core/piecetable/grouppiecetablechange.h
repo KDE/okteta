@@ -46,6 +46,7 @@ class GroupPieceTableChange : public AbstractPieceTableChange
 {
 public:
     GroupPieceTableChange(GroupPieceTableChange* parent, const QString& description);
+    GroupPieceTableChange() = delete;
 
     ~GroupPieceTableChange() override;
 
@@ -94,19 +95,16 @@ protected:
 
     QString mDescription;
     ///
-    int mAppliedChangesCount;
+    int mAppliedChangesCount = 0;
     ///
-    Size mAppliedChangesDataSize;
+    Size mAppliedChangesDataSize = 0;
     /// if true, try to merge changes
-    bool mTryToMergeAppendedChange;
+    bool mTryToMergeAppendedChange = true;
 };
 
 inline GroupPieceTableChange::GroupPieceTableChange(GroupPieceTableChange* parent, const QString& description)
     : mParent(parent)
     , mDescription(description)
-    , mAppliedChangesCount(0)
-    , mAppliedChangesDataSize(0)
-    , mTryToMergeAppendedChange(true)
 {}
 
 inline void GroupPieceTableChange::setDescription(const QString& description) { mDescription = description; }

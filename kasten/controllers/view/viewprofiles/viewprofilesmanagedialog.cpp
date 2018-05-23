@@ -44,7 +44,6 @@ ViewProfilesManageDialog::ViewProfilesManageDialog(ByteArrayViewProfileManager* 
                                                    QWidget* parent)
     : QDialog(parent)
     , mViewProfileManager(viewProfileManager)
-    , mCurrentViewProfileId()
 {
     setWindowTitle(i18nc("@title:window", "View Profiles"));
 

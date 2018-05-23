@@ -73,10 +73,10 @@ Q_SIGNALS:
     void viewChanged(bool hasView);
 
 protected:
-    ByteArrayDocument* mDocument;
+    ByteArrayDocument* mDocument = nullptr;
 
-    ByteArrayView* mByteArrayView;
-    Okteta::AbstractByteArrayModel* mByteArrayModel;
+    ByteArrayView* mByteArrayView = nullptr;
+    Okteta::AbstractByteArrayModel* mByteArrayModel = nullptr;
 };
 
 }

@@ -114,9 +114,9 @@ private:
 
 private:
     // source
-    ByteArrayView* mByteArrayView;
-    Okteta::AbstractByteArrayModel* mByteArrayModel;
-    Okteta::Address mCursorIndex;
+    ByteArrayView* mByteArrayView = nullptr;
+    Okteta::AbstractByteArrayModel* mByteArrayModel = nullptr;
+    Okteta::Address mCursorIndex = 0;
 
     // settings
     QSysInfo::Endian mByteOrder;

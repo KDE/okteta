@@ -61,7 +61,7 @@ protected:
     void setDocument(TestDocument* document);
 
 protected:
-    TestDocument* mDocument;
+    TestDocument* mDocument = nullptr;
     const QByteArray mHeader;
 };
 

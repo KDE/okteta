@@ -55,7 +55,6 @@ CopyAsController::CopyAsController(ModelCodecViewManager* modelCodecViewManager,
     : AbstractXmlGuiController()
     , mModelCodecViewManager(modelCodecViewManager)
     , mModelCodecManager(modelCodecManager)
-    , mModel(nullptr)
 {
     mCopyAsSelectAction = new KSelectAction(QIcon::fromTheme(QStringLiteral("edit-copy")),
                                             i18nc("@title:menu", "Copy As"),

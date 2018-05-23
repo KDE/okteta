@@ -44,7 +44,6 @@ StringDataInformation::StringDataInformation(const QString& name, StringType enc
     : DataInformationWithDummyChildren(name, parent)
     , mDummy(new DummyDataInformation(this))
     , mData(nullptr)
-    , mEncoding(StringType::InvalidEncoding)
 {
     setEncoding(encoding); // sets mData
 }

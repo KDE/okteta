@@ -33,8 +33,6 @@ namespace Okteta {
 
 ByteArrayJanusView::ByteArrayJanusView(QWidget* parent)
     : QWidget(parent)
-    , mView(nullptr)
-    , mViewModus(-1)
 {
     mLayout = new QHBoxLayout(this);
     mLayout->setMargin(0);

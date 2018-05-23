@@ -85,11 +85,11 @@ private Q_SLOTS:
     void onBookmarksModified();
 
 private: // sources
-    ByteArrayView* mByteArrayView;
-    Okteta::AbstractByteArrayModel* mByteArray;
-    Okteta::Bookmarkable* mBookmarks;
+    ByteArrayView* mByteArrayView = nullptr;
+    Okteta::AbstractByteArrayModel* mByteArray = nullptr;
+    Okteta::Bookmarkable* mBookmarks = nullptr;
 
-    bool mCanCreateBookmark;
+    bool mCanCreateBookmark = false;
 };
 
 }

@@ -41,6 +41,8 @@ class KASTENCORE_EXPORT DocumentCreateManager : public QObject
 
 public:
     explicit DocumentCreateManager(DocumentManager* manager);
+    DocumentCreateManager() = delete;
+
     ~DocumentCreateManager() override;
 
 public:
@@ -58,7 +60,7 @@ private:
     DocumentManager* mManager;
 
     // temporary hack: hard coded factory for byte arrays
-    AbstractDocumentFactory* mFactory;
+    AbstractDocumentFactory* mFactory = nullptr;
 };
 
 }

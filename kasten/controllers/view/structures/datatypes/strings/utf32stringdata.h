@@ -41,7 +41,7 @@ public:
 
 private:
     QVector<quint32> mCodePoints;
-    int mNonBMPCount;
+    int mNonBMPCount = 0;
 };
 
 #endif // UTF32STRINGDATA_H

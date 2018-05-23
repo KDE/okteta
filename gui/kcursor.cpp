@@ -24,11 +24,7 @@
 
 namespace Okteta {
 
-KCursor::KCursor()
-    : CursorX(0)
-    , CursorW(-1)
-{
-}
+KCursor::KCursor() = default;
 
 KCursor::~KCursor() = default;
 

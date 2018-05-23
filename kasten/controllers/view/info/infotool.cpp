@@ -40,10 +40,6 @@ namespace Kasten {
 
 InfoTool::InfoTool()
     : mStatisticTableModel(new StatisticTableModel(mByteCount, this))
-    , mByteArrayView(nullptr)
-    , mByteArrayModel(nullptr)
-    , mSourceByteArrayModelUptodate(false)
-    , mSourceByteArrayModel(nullptr)
 {
     setObjectName(QStringLiteral("Info"));
     updateStatistic();

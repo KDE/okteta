@@ -46,8 +46,6 @@ ViewProfileController::ViewProfileController(ByteArrayViewProfileManager* viewPr
     , mGuiClient(guiClient)
     , mViewProfileManager(viewProfileManager)
     , mParentWidget(parentWidget)
-    , mByteArrayView(nullptr)
-    , mByteArrayViewProfileSynchronizer(nullptr)
 {
     mViewProfileActionMenu =
         new KActionMenu(i18nc("@title:menu submenu to select the view profile or change it",

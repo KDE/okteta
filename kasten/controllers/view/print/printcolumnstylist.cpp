@@ -27,11 +27,7 @@
 
 namespace Okteta {
 
-PrintColumnStylist::PrintColumnStylist()
-    : AbstractColumnStylist()
-    , mPalette(Qt::white)
-{
-}
+PrintColumnStylist::PrintColumnStylist() = default;
 
 PrintColumnStylist::~PrintColumnStylist() = default;
 

@@ -46,7 +46,7 @@ public:
 
 public:
     QString fileName;
-    AlgorithmId algorithmId;
+    AlgorithmId algorithmId = AlgorithmId::Base64;
 };
 
 class ByteArrayUuencodingStreamEncoder : public AbstractByteArrayStreamEncoder

@@ -68,7 +68,7 @@ private:
     KComboBox* mByteOrderSelection;
     QCheckBox* mUnsignedAsHexCheck;
 
-    QWidget* mPODTableViewFocusChild;
+    QWidget* mPODTableViewFocusChild = nullptr;
 };
 
 inline PODDecoderTool* PODTableView::tool() const { return mTool; }

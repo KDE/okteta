@@ -38,7 +38,6 @@
 namespace Kasten {
 
 ViewConfigController::ViewConfigController(KXMLGUIClient* guiClient)
-    : mByteArrayView(nullptr)
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 

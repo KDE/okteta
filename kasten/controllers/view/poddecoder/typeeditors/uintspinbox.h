@@ -64,20 +64,17 @@ protected:
     void updateEditLine() const;
 
 protected:
-    mutable quint64 mValue;
+    mutable quint64 mValue = 0;
 
-    quint64 mMaximum;
+    quint64 mMaximum = std::numeric_limits<quint64>::max();
     // TODO minimum
-    int mBase;
+    int mBase = 0;
 
     QString mPrefix;
 };
 
 inline UIntSpinBox::UIntSpinBox(QWidget* parent, int base)
     : QAbstractSpinBox(parent)
-    , mValue(0)
-    , mMaximum(std::numeric_limits<quint64>::max())
-    , mBase(0)
 {
     setBase(base);
 }

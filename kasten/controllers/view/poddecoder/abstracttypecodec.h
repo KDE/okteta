@@ -36,6 +36,7 @@ class AbstractTypeCodec
 {
 protected:
     explicit AbstractTypeCodec(const QString& name);
+    AbstractTypeCodec() = delete;
 
 public:
     virtual ~AbstractTypeCodec();

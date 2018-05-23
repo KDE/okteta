@@ -48,20 +48,17 @@ public: // calculated
     /** collection of all the columns. All columns will be autodeleted. */
     QList<AbstractColumnRenderer*> Columns;
     /** the number of lines which the column view has */
-    LineSize NoOfLines;
+    LineSize NoOfLines = 0;
     /** the height of each line in pixels */
-    PixelY LineHeight;
+    PixelY LineHeight = 0;
     /** the width of all visible columns together */
-    PixelX ColumnsWidth;
+    PixelX ColumnsWidth = 0;
 
 public:
 //    bool Reversed;
 };
 
 ColumnsViewPrivate::ColumnsViewPrivate(/*bool R,*/)
-    : NoOfLines(0)
-    , LineHeight(0)
-    , ColumnsWidth(0)
 //    Reversed( R )
 {}
 

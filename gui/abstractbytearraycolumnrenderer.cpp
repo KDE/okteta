@@ -50,17 +50,10 @@ AbstractByteArrayColumnRenderer::AbstractByteArrayColumnRenderer(AbstractColumnS
     , mLayout(layout)
     , mRanges(ranges)
     , mBookmarks(qobject_cast<Bookmarkable*>(byteArrayModel))
-    , mDigitWidth(0)
-    , mDigitBaseLine(0)
     , mFontMetrics(QFont())
-    , mByteWidth(0)
     , mByteSpacingWidth(DefaultByteSpacingWidth)
     , mGroupSpacingWidth(DefaultGroupSpacingWidth)
     , mNoOfGroupedBytes(DefaultNoOfGroupedBytes)
-    , mLinePosLeftPixelX(nullptr)
-    , mLinePosRightPixelX(nullptr)
-    , mLastLinePos(0)
-    , mByteTypeColored(true)
 {
 }
 

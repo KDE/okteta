@@ -49,7 +49,6 @@ ExportController::ExportController(ModelCodecViewManager* modelCodecViewManager,
     : AbstractXmlGuiController()
     , mModelCodecViewManager(modelCodecViewManager)
     , mModelCodecManager(modelCodecManager)
-    , mModel(nullptr)
 {
     mExportSelectAction = new KSelectAction(QIcon::fromTheme(QStringLiteral("document-export")),
                                             i18nc("@title:menu", "Export"),

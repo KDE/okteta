@@ -57,8 +57,8 @@ private Q_SLOTS:
 private:
     TerminalTool* const mTool;
 
-    KParts::ReadOnlyPart* mTerminalPart;
-    TerminalInterface* mTerminalInterface;
+    KParts::ReadOnlyPart* mTerminalPart = nullptr;
+    TerminalInterface* mTerminalInterface = nullptr;
 };
 
 inline TerminalTool* TerminalView::tool() const { return mTool; }

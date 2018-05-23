@@ -59,9 +59,9 @@ private Q_SLOTS:
     void onClipboardDataChanged();
 
 private:
-    AbstractModel* mModel;
-    If::DataSelectable* mSelectionControl;
-    If::SelectedDataWriteable* mMimeDataControl;
+    AbstractModel* mModel = nullptr;
+    If::DataSelectable* mSelectionControl = nullptr;
+    If::SelectedDataWriteable* mMimeDataControl = nullptr;
 
     QAction* mCutAction;
     QAction* mCopyAction;

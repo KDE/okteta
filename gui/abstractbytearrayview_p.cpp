@@ -133,8 +133,7 @@ AbstractByteArrayViewPrivate::AbstractByteArrayViewPrivate(AbstractByteArrayView
     , mInZooming(false)
     , mCursorPaused(false)
     , mBlinkCursorVisible(false)
-    ,//    mDefaultFontSize( p->font().pointSize() ), crashes in font()
-    mZoomLevel(1.0)
+    // , mDefaultFontSize( p->font().pointSize() ) crashes in font()
     , mResizeStyle(DefaultResizeStyle)
     , q_ptr(parent)
 {

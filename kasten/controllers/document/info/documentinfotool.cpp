@@ -44,12 +44,8 @@ namespace Kasten {
 static const int mimeTypeUpdateTimeInterval = 500; // msec
 
 DocumentInfoTool::DocumentInfoTool(DocumentSyncManager* syncManager)
-    : mDocument(nullptr)
-    , mByteArrayModel(nullptr)
-    , mSynchronizer(nullptr)
-    , mDocumentSyncManager(syncManager)
+    : mDocumentSyncManager(syncManager)
     , mMimeTypeUpdateTimer(new QTimer(this))
-    , mMimeType()
 {
     setObjectName(QStringLiteral("DocumentInfo"));
 

@@ -74,9 +74,9 @@ protected:
 protected:
     SingleViewWindow* const q_ptr;
 
-    AbstractView* mView;
-    AbstractDocument* mDocument;
-    AbstractModelSynchronizer* mSynchronizer;
+    AbstractView* mView = nullptr;
+    AbstractDocument* mDocument = nullptr;
+    AbstractModelSynchronizer* mSynchronizer = nullptr;
 
     SingleViewArea* const mViewArea;
     QList<AbstractXmlGuiController*> mControllers;

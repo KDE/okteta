@@ -38,6 +38,8 @@ class ByteArrayModelIoDevice : public QIODevice
 
 public:
     explicit ByteArrayModelIoDevice(AbstractByteArrayModel* byteArrayModel, QObject* parent = nullptr);
+    ByteArrayModelIoDevice() = delete;
+
     ~ByteArrayModelIoDevice() override;
 
 public: // QIODevice API
@@ -53,7 +55,7 @@ protected:
 
 protected:
     AbstractByteArrayModel* mByteArrayModel;
-    Address mReadOffset;
+    Address mReadOffset = 0;
 };
 
 }

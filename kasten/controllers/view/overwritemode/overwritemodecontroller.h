@@ -48,7 +48,7 @@ private Q_SLOTS: // action slots
     void setOverWrite(bool isOverWrite);
 
 private:
-    ByteArrayView* mByteArrayView;
+    ByteArrayView* mByteArrayView = nullptr;
 
     KToggleAction* mSetOverWriteAction;
 };

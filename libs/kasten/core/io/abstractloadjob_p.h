@@ -32,6 +32,7 @@ class AbstractLoadJobPrivate
 {
 public:
     explicit AbstractLoadJobPrivate(AbstractLoadJob* parent);
+    AbstractLoadJobPrivate() = delete;
 
     virtual ~AbstractLoadJobPrivate();
 
@@ -47,12 +48,11 @@ protected:
 protected:
     AbstractLoadJob* const q_ptr;
 
-    AbstractDocument* mDocument;
+    AbstractDocument* mDocument = nullptr;
 };
 
 inline AbstractLoadJobPrivate::AbstractLoadJobPrivate(AbstractLoadJob* parent)
     : q_ptr(parent)
-    , mDocument(nullptr)
 {}
 
 inline AbstractLoadJobPrivate::~AbstractLoadJobPrivate() = default;

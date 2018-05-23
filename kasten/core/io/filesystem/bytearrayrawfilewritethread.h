@@ -55,7 +55,7 @@ protected:
     ByteArrayDocument* mDocument;
     QFile* mFile;
 
-    bool mSuccess;
+    bool mSuccess = false;
 };
 
 inline ByteArrayRawFileWriteThread::ByteArrayRawFileWriteThread(QObject* parent,
@@ -63,7 +63,6 @@ inline ByteArrayRawFileWriteThread::ByteArrayRawFileWriteThread(QObject* parent,
     : QThread(parent)
     , mDocument(document)
     , mFile(file)
-    , mSuccess(false)
 {}
 
 inline bool ByteArrayRawFileWriteThread::success() const { return mSuccess; }

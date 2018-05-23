@@ -43,10 +43,7 @@
 namespace Kasten {
 
 StructuresTool::StructuresTool()
-    : mByteArrayView(nullptr)
-    , mByteArrayModel(nullptr)
-    , mCursorIndex(0)
-    , mByteOrder(StructureViewPreferences::byteOrder())
+    : mByteOrder(StructureViewPreferences::byteOrder())
     , mManager(new StructuresManager(this))
     , mWritingData(false)
     , mCurrentItemDataChanged(false)

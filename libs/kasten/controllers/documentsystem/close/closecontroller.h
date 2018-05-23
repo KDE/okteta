@@ -59,7 +59,7 @@ private Q_SLOTS:
 private:
     AbstractDocumentStrategy* mDocumentStrategy;
 
-    AbstractDocument* mDocument;
+    AbstractDocument* mDocument = nullptr;
     QAction* mCloseAction;
     QAction* mCloseAllAction;
     QAction* mCloseAllOtherAction;

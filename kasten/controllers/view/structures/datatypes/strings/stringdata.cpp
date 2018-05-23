@@ -25,7 +25,6 @@
 
 StringData::StringData(StringDataInformation* parent)
     : mParent(parent)
-    , mTerminationCodePoint(0)
     , mMode(None)
     , mLittleEndian(true)
     , mEofReached(false)

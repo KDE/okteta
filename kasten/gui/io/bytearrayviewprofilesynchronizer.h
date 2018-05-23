@@ -103,10 +103,10 @@ private:
     void connectViewSignals();
 
 private:
-    ByteArrayView* mView;
+    ByteArrayView* mView = nullptr;
     ByteArrayViewProfile::Id mViewProfileId;
-    int mDirtyFlags;
-    bool mUpdatingView;
+    int mDirtyFlags = 0;
+    bool mUpdatingView = false;
 
     ByteArrayViewProfileManager* mViewProfileManager;
 };

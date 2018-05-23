@@ -44,9 +44,6 @@ protected: // AbstractFileSystemSyncToRemoteJob API
 
 protected Q_SLOTS:
 //     void onDataPulled();
-
-protected:
-    TestDocumentFileWriteThread* mWriteThread;
 };
 
 }

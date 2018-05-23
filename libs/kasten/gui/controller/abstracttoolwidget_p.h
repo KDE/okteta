@@ -46,7 +46,7 @@ public:
 private:
     AbstractToolWidget* const p;
 
-    QPushButton* mDefaultButton;
+    QPushButton* mDefaultButton = nullptr;
     QShortcut* mReturnShortcut;
 };
 

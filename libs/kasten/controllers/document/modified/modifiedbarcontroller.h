@@ -55,8 +55,8 @@ private Q_SLOTS:
     void onSynchronizerDeleted(QObject* synchronizer);
 
 private:
-    AbstractDocument* mDocument;
-    AbstractModelSynchronizer* mSynchronizer;
+    AbstractDocument* mDocument = nullptr;
+    AbstractModelSynchronizer* mSynchronizer = nullptr;
 
     QLabel* mLocalStateLabel;
     QLabel* mRemoteStateLabel;

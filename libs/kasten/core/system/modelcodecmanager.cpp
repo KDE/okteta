@@ -43,7 +43,6 @@ namespace Kasten {
 
 ModelCodecManager::ModelCodecManager(DocumentManager* manager)
     : mManager(manager)
-    , mOverwriteDialog(nullptr)
 {
 }
 

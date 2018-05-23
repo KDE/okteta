@@ -38,7 +38,6 @@ ScriptHandlerInfo::ScriptHandlerInfo(QScriptEngine* engine, ScriptLogger* logger
     , mBitfieldClass(new BitfieldScriptClass(engine, this))
     , mPointerClass(new PointerScriptClass(engine, this))
     , mLogger(logger)
-    , mMode(Mode::None)
 {
     Q_CHECK_PTR(mLogger);
 }

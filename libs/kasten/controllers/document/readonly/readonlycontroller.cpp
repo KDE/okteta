@@ -34,7 +34,6 @@
 namespace Kasten {
 
 ReadOnlyController::ReadOnlyController(KXMLGUIClient* guiClient)
-    : mDocument(nullptr)
 {
     mSetReadOnlyAction = new KToggleAction(QIcon::fromTheme(QStringLiteral("object-unlocked")),
                                            i18nc("@option:check set the document to read-only", "Set Read-only"),

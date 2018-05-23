@@ -44,8 +44,7 @@
 namespace Kasten {
 
 ViewStatusController::ViewStatusController(StatusBar* statusBar)
-    : mByteArrayView(nullptr)
-    , mStatusBar(statusBar)
+    : mStatusBar(statusBar)
 {
     mPrintFunction = Okteta::OffsetFormat::printFunction(Okteta::OffsetFormat::Hexadecimal);
 

@@ -34,7 +34,6 @@ namespace Kasten {
 
 ByteArrayTextStreamEncoderPreview::ByteArrayTextStreamEncoderPreview(AbstractByteArrayStreamEncoder* encoder)
     : mEncoder(encoder)
-    , mModel(nullptr)
 {
     mWidget = new QTextEdit(); // TODO: use Kate for syntax highlighting
     mWidget->setReadOnly(true);

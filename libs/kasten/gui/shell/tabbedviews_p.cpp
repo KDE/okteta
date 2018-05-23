@@ -36,7 +36,6 @@ namespace Kasten {
 
 TabbedViewsPrivate::TabbedViewsPrivate(TabbedViews* parent)
     : AbstractGroupedViewsPrivate(parent)
-    , mCurrentView(nullptr)
 {
 }
 

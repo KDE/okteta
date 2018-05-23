@@ -84,7 +84,7 @@ protected:
 
 protected: // settings
     QByteArray mSearchData;
-    Qt::CaseSensitivity mCaseSensitivity;
+    Qt::CaseSensitivity mCaseSensitivity{Qt::CaseSensitive};
 
 protected: // status
     bool mPreviousFound : 1;
@@ -92,11 +92,11 @@ protected: // status
     Okteta::Address mSearchLastIndex;
 
 protected:
-    If::SearchUserQueryable* mUserQueryAgent;
+    If::SearchUserQueryable* mUserQueryAgent = nullptr;
 
 protected: // target
-    ByteArrayView* mByteArrayView;
-    Okteta::AbstractByteArrayModel* mByteArrayModel;
+    ByteArrayView* mByteArrayView = nullptr;
+    Okteta::AbstractByteArrayModel* mByteArrayModel = nullptr;
 };
 
 inline QByteArray SearchTool::searchData() const { return mSearchData; }

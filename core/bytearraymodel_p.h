@@ -39,6 +39,7 @@ public:
     ByteArrayModelPrivate(ByteArrayModel* parent, Byte* data, int size, int rawSize, bool keepsMemory);
     ByteArrayModelPrivate(ByteArrayModel* parent, const Byte* data, int size);
     ByteArrayModelPrivate(ByteArrayModel* parent, int size, int maxSize);
+    ByteArrayModelPrivate() = delete;
 
     ~ByteArrayModelPrivate();
 
@@ -105,7 +106,7 @@ protected:
     /** mSize of data array */
     int mRawSize;
     /** maximal size of array, unlimited if -1 */
-    int mMaxSize;
+    int mMaxSize = -1;
     /** flag whether the initially given memory should be kept */
     bool mKeepsMemory : 1;
     /** flag whether the  */

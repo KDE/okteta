@@ -84,18 +84,18 @@ public: // Swapping properties
     Size secondLength() const;
 
 protected:
-    Type mType;
-    Address mOffset;
+    Type mType = Invalid;
+    Address mOffset = InvalidAddress;
     // TODO: how to make the arguments of the size of the largest union member?
     union
     {
-        qint32 mSecondArgument;
+        qint32 mSecondArgument = 0;
         Size mRemoveLength;
         Address mSecondStart;
     };
     union
     {
-        qint32 mThirdArgument;
+        qint32 mThirdArgument = 0;
         Size mInsertLength;
         Size mSecondLength;
     };
@@ -118,10 +118,7 @@ inline ArrayChangeMetrics::ArrayChangeMetrics(Type type, Address offset, qint32 
     , mSecondArgument(secondArgument)
     , mThirdArgument(thirdArgument)
 {}
-inline ArrayChangeMetrics::ArrayChangeMetrics() : mType(Invalid)
-    , mOffset(InvalidAddress)
-    , mSecondArgument(0)
-    , mThirdArgument(0) {}
+inline ArrayChangeMetrics::ArrayChangeMetrics() = default;
 inline bool ArrayChangeMetrics::operator==(const ArrayChangeMetrics& other) const
 {
     return mType == other.mType

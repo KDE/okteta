@@ -43,6 +43,8 @@ class OKTETACORE_EXPORT WordByteArrayService
 {
 public:
     WordByteArrayService(const AbstractByteArrayModel* byteArrayModel, const CharCodec* charCodec);
+    WordByteArrayService() = delete;
+
     ~WordByteArrayService();
 
 public:

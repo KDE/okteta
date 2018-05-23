@@ -74,13 +74,9 @@ enum PODTypes
 };
 
 PODDecoderTool::PODDecoderTool()
-    : mByteArrayView(nullptr)
-    , mByteArrayModel(nullptr)
-    , mCursorIndex(0)
-    , mReadOnly(true)
+    : mReadOnly(true)
     , mIsPodMarked(false)
     , mCharCodec(Okteta::CharCodec::createCodec(Okteta::LocalEncoding))
-    , mDifferentSizeDialog(nullptr)
     , mUnsignedAsHex(true)
 {
     setObjectName(QStringLiteral("PODDecoder"));

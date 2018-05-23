@@ -40,7 +40,6 @@ DataInformation::DataInformation(const QString& name, DataInformationBase* paren
     , mHasBeenValidated(false)
     , mHasBeenUpdated(false)
     , mWasAbleToRead(false)
-    , mByteOrder(DataInformationEndianess::EndianessInherit)
     , mLoggedData(ScriptLogger::LogInvalid)
 {
 }

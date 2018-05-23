@@ -60,7 +60,7 @@ Q_SIGNALS:
 private: // sources
     DocumentManager* mDocumentManager;
 
-    AbstractDocument* mFocussedDocument;
+    AbstractDocument* mFocussedDocument = nullptr;
 };
 
 inline AbstractDocument* DocumentsTool::focussedDocument() const { return mFocussedDocument; }

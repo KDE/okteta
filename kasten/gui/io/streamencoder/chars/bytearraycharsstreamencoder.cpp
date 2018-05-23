@@ -35,11 +35,7 @@
 
 namespace Kasten {
 
-CharsStreamEncoderSettings::CharsStreamEncoderSettings()
-    : codecName()
-    , undefinedChar(QLatin1Char('?'))
-    , substituteChar(QLatin1Char('.'))
-{}
+CharsStreamEncoderSettings::CharsStreamEncoderSettings() = default;
 
 ByteArrayCharsStreamEncoder::ByteArrayCharsStreamEncoder()
     : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "Characters"), QStringLiteral("text/plain"))

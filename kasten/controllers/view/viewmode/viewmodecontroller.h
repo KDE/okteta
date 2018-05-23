@@ -49,7 +49,7 @@ private Q_SLOTS: // action slots
     void setViewMode(int viewMode);
 
 private:
-    ByteArrayView* mByteArrayView;
+    ByteArrayView* mByteArrayView = nullptr;
 
     KSelectAction* mViewModeAction;
 };

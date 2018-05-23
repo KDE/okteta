@@ -37,8 +37,8 @@ public:
     ByteArrayPatternGeneratorSettings();
 
 public:
-    QByteArray pattern;
-    int count;
+    QByteArray pattern = QByteArray(1, 0);
+    int count = 1;
 };
 
 class ByteArrayPatternGenerator : public AbstractModelDataGenerator

@@ -37,9 +37,7 @@
 struct ExpectedResults
 {
     ExpectedResults()
-        : parent(nullptr)
-        , size(0)
-        , isTopLevel(false)
+        : isTopLevel(false)
         , isEnum(false)
         , isStruct(false)
         , isUnion(false)
@@ -58,8 +56,8 @@ struct ExpectedResults
         noFileColumnFlags[DataInformation::ColumnType] = Qt::ItemIsSelectable | Qt::ItemIsEnabled;
         noFileColumnFlags[DataInformation::ColumnValue] = Qt::ItemIsSelectable | Qt::ItemIsEnabled;
     }
-    DataInformationBase* parent;
-    BitCount32 size;
+    DataInformationBase* parent = nullptr;
+    BitCount32 size = 0;
     bool isTopLevel : 1;
     bool isEnum : 1;
     bool isStruct : 1;

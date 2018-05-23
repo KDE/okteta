@@ -63,7 +63,7 @@ private:
     QString typeNameImpl() const override;
 
 private:
-    uint mIndex;
+    uint mIndex = 0;
     DataInformationWithDummyChildren* parentHelper() const;
 };
 

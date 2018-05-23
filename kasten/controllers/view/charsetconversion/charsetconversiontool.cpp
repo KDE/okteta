@@ -40,11 +40,6 @@
 namespace Kasten {
 
 CharsetConversionTool::CharsetConversionTool()
-    : mConversionDirection(ConvertFrom)
-    , mSubstitutingMissingChars(false)
-    , mSubstituteByte(0)
-    , mByteArrayView(nullptr)
-    , mByteArrayModel(nullptr)
 {
     setObjectName(QStringLiteral("CharsetConversion"));
 }

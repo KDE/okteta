@@ -86,9 +86,7 @@ static const Base32EncodingData
     {base32ZHexEncodeMap, &noPadding}
 };
 
-Base32StreamEncoderSettings::Base32StreamEncoderSettings()
-    : algorithmId(AlgorithmId::Classic)
-{}
+Base32StreamEncoderSettings::Base32StreamEncoderSettings() = default;
 
 ByteArrayBase32StreamEncoder::ByteArrayBase32StreamEncoder()
     : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "Base32"), QStringLiteral("text/x-base32"))

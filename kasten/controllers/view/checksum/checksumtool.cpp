@@ -56,11 +56,6 @@ ChecksumTool::ChecksumTool()
     : AbstractTool()
     , mChecksumUptodate(false)
     , mSourceByteArrayModelUptodate(false)
-    , mAlgorithmId(0)
-    , mByteArrayView(nullptr)
-    , mByteArrayModel(nullptr)
-    , mSourceAlgorithmId(-1)
-    , mSourceByteArrayModel(nullptr)
 {
     setObjectName(QStringLiteral("Checksum"));
 

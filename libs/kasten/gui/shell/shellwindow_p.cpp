@@ -43,9 +43,6 @@ ShellWindowPrivate::ShellWindowPrivate(ShellWindow* parent,
                                        ViewManager* viewManager)
     : q_ptr(parent)
     , mGroupedViews(new MultiViewAreas())
-    , mCurrentView(nullptr)
-    , mCurrentDocument(nullptr)
-    , mCurrentSynchronizer(nullptr)
     , mViewManager(viewManager)
 {
     parent->setCentralWidget(mGroupedViews->widget());

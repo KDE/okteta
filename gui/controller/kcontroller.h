@@ -31,6 +31,7 @@ class KController
 {
 protected:
     explicit KController(KController* parent);
+    KController() = delete;
 
 public:
     virtual ~KController();

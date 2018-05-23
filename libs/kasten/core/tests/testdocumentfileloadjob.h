@@ -44,9 +44,6 @@ protected: // AbstractFileSystemLoadJob API
 
 protected Q_SLOTS:
 //     void onDataPulled();
-
-protected:
-    TestDocumentFileLoadThread* mLoadThread;
 };
 
 }

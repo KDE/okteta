@@ -38,6 +38,7 @@ class AbstractModelFileSystemSynchronizerPrivate : public AbstractModelSynchroni
 {
 public:
     explicit AbstractModelFileSystemSynchronizerPrivate(AbstractModelFileSystemSynchronizer* parent);
+    AbstractModelFileSystemSynchronizerPrivate() = delete;
 
     ~AbstractModelFileSystemSynchronizerPrivate() override;
 
@@ -64,9 +65,9 @@ public:
 
 protected:
     QDateTime mFileDateTime;
-    RemoteSyncState mRemoteState;
-    QNetworkConfigurationManager* mNetworkConfigurationManager;
-    mutable KDirWatch* mDirWatch;
+    RemoteSyncState mRemoteState = RemoteUnknown;
+    QNetworkConfigurationManager* mNetworkConfigurationManager = nullptr;
+    mutable KDirWatch* mDirWatch = nullptr;
 
 protected:
     Q_DECLARE_PUBLIC(AbstractModelFileSystemSynchronizer)
@@ -74,9 +75,6 @@ protected:
 
 inline AbstractModelFileSystemSynchronizerPrivate::AbstractModelFileSystemSynchronizerPrivate(AbstractModelFileSystemSynchronizer* parent)
     : AbstractModelSynchronizerPrivate(parent)
-    , mRemoteState(RemoteUnknown)
-    , mNetworkConfigurationManager(nullptr)
-    , mDirWatch(nullptr)
 {
 }
 inline RemoteSyncState AbstractModelFileSystemSynchronizerPrivate::remoteSyncState() const { return mRemoteState; }

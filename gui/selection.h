@@ -117,10 +117,10 @@ protected:
     /** mRange */
     AddressRange mRange;
     /** cursor index where the selection starts */
-    Address mAnchor;
+    Address mAnchor = -1;
 };
 
-inline Selection::Selection() : mAnchor(-1) {}
+inline Selection::Selection() = default;
 inline Selection::Selection(const Selection& other) = default;
 inline Selection::Selection(Address index) : mAnchor(index)  {}
 inline Selection::~Selection() = default;

@@ -94,18 +94,18 @@ protected:
 protected:
     const PrintInfo* mInfo;
 
-    int mHeight;
-    int mWidth;
+    int mHeight = 0;
+    int mWidth = 0;
 
-    int mBoxStyle;
-    int mLineWidth;
-    int mBoxMargin;
+    int mBoxStyle = NoBox;
+    int mLineWidth = 1;
+    int mBoxMargin = 6;
     QColor mLineColor;
-    QColor mBgColor;
-    QColor mFgColor;
+    QColor mBgColor = {Qt::lightGray};
+    QColor mFgColor = {Qt::black};
     QFont mFont;
 
-    QStringList mOriginalTextList;
+    QStringList mOriginalTextList = {QString(), QString(), QString()};
     QStringList mGloballyReplacedTextList;
 };
 

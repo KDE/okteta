@@ -38,6 +38,7 @@ public:
     AbstractFileSystemConnectJobPrivate(AbstractFileSystemConnectJob* parent,
                                         AbstractModelFileSystemSynchronizer* synchronizer, AbstractDocument* document,
                                         const QUrl& url, AbstractModelSynchronizer::ConnectOption option);
+    AbstractFileSystemConnectJobPrivate() = delete;
 
     ~AbstractFileSystemConnectJobPrivate() override;
 
@@ -63,7 +64,7 @@ protected:
     AbstractDocument* const mDocument;
     const QUrl mUrl;
     const AbstractModelSynchronizer::ConnectOption mOption;
-    QFile* mFile;
+    QFile* mFile = nullptr;
     QString mWorkFilePath;
     QString mTempFilePath;
 };
@@ -76,7 +77,6 @@ inline AbstractFileSystemConnectJobPrivate::AbstractFileSystemConnectJobPrivate(
     , mDocument(document)
     , mUrl(url)
     , mOption(option)
-    , mFile(nullptr)
 {}
 
 inline AbstractFileSystemConnectJobPrivate::~AbstractFileSystemConnectJobPrivate() = default;

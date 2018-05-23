@@ -69,8 +69,8 @@ private Q_SLOTS:
 private:
     ByteTableModel* mByteTableModel;
 
-    ByteArrayView* mByteArrayView;
-    Okteta::AbstractByteArrayModel* mByteArrayModel;
+    ByteArrayView* mByteArrayView = nullptr;
+    Okteta::AbstractByteArrayModel* mByteArrayModel = nullptr;
 };
 
 }

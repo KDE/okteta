@@ -42,9 +42,6 @@
 namespace Kasten {
 
 FilterTool::FilterTool()
-    : mByteArrayView(nullptr)
-    , mByteArrayModel(nullptr)
-    , mHasWritable(false)
 {
     setObjectName(QStringLiteral("BinaryFilter"));
 

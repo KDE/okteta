@@ -56,10 +56,10 @@ private Q_SLOTS: // test functions
 
 private: // used in all tests
     /** pointer to the change to test */
-    AbstractPieceTableChange* mPieceTableChange;
+    AbstractPieceTableChange* mPieceTableChange = nullptr;
 };
 
-inline AbstractPieceTableChangeIfTest::AbstractPieceTableChangeIfTest() : mPieceTableChange(nullptr) {}
+inline AbstractPieceTableChangeIfTest::AbstractPieceTableChangeIfTest() = default;
 
 }
 

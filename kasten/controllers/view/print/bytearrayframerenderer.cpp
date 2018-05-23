@@ -57,8 +57,6 @@ static const int BAFInitialWidth = 50;
 ByteArrayFrameRenderer::ByteArrayFrameRenderer()
     : mHeight(BAFInitialHeight)
     , mWidth(BAFInitialWidth)
-    , mByteArrayModel(nullptr)
-    , mCharCodec(nullptr)
     , mResizeStyle(DefaultResizeStyle)
 {
     mLayout = new Okteta::ByteArrayTableLayout(DefaultNoOfBytesPerLine, DefaultFirstLineOffset, DefaultStartOffset, 0, 0);

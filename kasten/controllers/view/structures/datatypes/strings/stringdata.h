@@ -86,7 +86,7 @@ protected:
         uint maxChars;
         uint maxBytes;
     } mLength;
-    quint32 mTerminationCodePoint;
+    quint32 mTerminationCodePoint = 0;
     uint mMode : 4;
     bool mLittleEndian : 1;
     bool mEofReached : 1;

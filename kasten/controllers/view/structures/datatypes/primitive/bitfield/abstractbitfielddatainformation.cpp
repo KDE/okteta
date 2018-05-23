@@ -31,7 +31,6 @@
 AbstractBitfieldDataInformation::AbstractBitfieldDataInformation(const QString& name, BitCount32 width,
                                                                  DataInformation* parent)
     : PrimitiveDataInformation(name, parent)
-    , mValue(0)
     , mWidth(qMin(width, 64u))
 {
     Q_ASSERT(width <= 64);

@@ -62,14 +62,14 @@ protected:
     };
 
 protected:
-    Byte* mCurrentOriginalData;
-    Byte* mCurrentEndiannessSetData;
+    Byte* mCurrentOriginalData = nullptr;
+    Byte* mCurrentEndiannessSetData = nullptr;
 
     Aligned64Bit mOriginalAligned64Bit;
     Aligned64Bit mByteOrderSetAligned64Bit;
 
-    int mCurrentSize;
-    QSysInfo::Endian mByteOrder;
+    int mCurrentSize = 0;
+    QSysInfo::Endian mByteOrder = QSysInfo::ByteOrder;
 };
 
 }

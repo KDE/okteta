@@ -37,10 +37,10 @@ public:
     QString toString(bool asHex) const;
 
 public:
-    quint32 value;
+    quint32 value = 0;
 };
 
-inline UInt32::UInt32() : value(0) {}
+inline UInt32::UInt32() = default;
 inline UInt32::UInt32(quint32 v) : value(v) {}
 
 inline QString UInt32::toString(bool asHex) const

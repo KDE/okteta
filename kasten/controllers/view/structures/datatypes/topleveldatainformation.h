@@ -132,12 +132,12 @@ private:
      * so that no dangling pointers remain
      */
     QHash<const Okteta::AbstractByteArrayModel*, quint64> mLockedPositions;
-    int mIndex;
+    int mIndex = -1;
     bool mValid : 1;
     bool mChildDataChanged : 1;
-    quint64 mDefaultLockOffset;
-    quint64 mLastReadOffset;
-    Okteta::AbstractByteArrayModel* mLastModel;
+    quint64 mDefaultLockOffset = INVALID_OFFSET;
+    quint64 mLastReadOffset = INVALID_OFFSET;
+    Okteta::AbstractByteArrayModel* mLastModel = nullptr;
     QQueue<PointerDataInformation*> mDelayedRead;
 
     friend class LockToOffsetTest; // needs to call isReadingNecessary()

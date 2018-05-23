@@ -45,12 +45,8 @@ TopLevelDataInformation::TopLevelDataInformation(DataInformation* data, ScriptLo
     , mData(data)
     , mLogger(logger)
     , mStructureFile(structureFile)
-    , mIndex(-1)
     , mValid(!data->isDummy())
     , mChildDataChanged(false)
-    , mDefaultLockOffset(INVALID_OFFSET)
-    , mLastReadOffset(INVALID_OFFSET)
-    , mLastModel(nullptr)
 {
     Q_CHECK_PTR(mData);
     mData->setParent(this);

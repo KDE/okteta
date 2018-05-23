@@ -45,6 +45,8 @@ class KASTENCORE_EXPORT DocumentSyncManager : public QObject
 
 public:
     explicit DocumentSyncManager(DocumentManager* manager);
+
+    DocumentSyncManager() = delete;
     ~DocumentSyncManager() override;
 
 public:
@@ -79,10 +81,10 @@ private:
     DocumentManager* mManager;
 
     // temporary hack: hard coded factories for byte arrays
-    AbstractModelSynchronizerFactory* mSynchronizerFactory;
+    AbstractModelSynchronizerFactory* mSynchronizerFactory = nullptr;
 
-    AbstractSaveDiscardDialog* mSaveDiscardDialog;
-    AbstractOverwriteDialog* mOverwriteDialog;
+    AbstractSaveDiscardDialog* mSaveDiscardDialog = nullptr;
+    AbstractOverwriteDialog* mOverwriteDialog = nullptr;
 };
 
 }

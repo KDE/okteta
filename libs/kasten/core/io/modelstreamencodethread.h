@@ -46,6 +46,8 @@ public:
                             QIODevice* ioDevice,
                             AbstractModel* model, const AbstractModelSelection* selection,
                             AbstractModelStreamEncoder* encoder);
+    ModelStreamEncodeThread() = delete;
+
     ~ModelStreamEncodeThread() override;
 
 public: // QThread API
@@ -63,7 +65,7 @@ protected:
     const AbstractModelSelection* mSelection;
     AbstractModelStreamEncoder* mEncoder;
 
-    bool mSuccess;
+    bool mSuccess = false;
 };
 
 inline ModelStreamEncodeThread::ModelStreamEncodeThread(QObject* parent,
@@ -75,7 +77,6 @@ inline ModelStreamEncodeThread::ModelStreamEncodeThread(QObject* parent,
     , mModel(model)
     , mSelection(selection)
     , mEncoder(encoder)
-    , mSuccess(false)
 {}
 
 inline bool ModelStreamEncodeThread::success() const { return mSuccess; }

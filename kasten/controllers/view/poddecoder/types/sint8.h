@@ -37,10 +37,10 @@ public:
     QString toString() const;
 
 public:
-    qint8 value;
+    qint8 value = 0;
 };
 
-inline SInt8::SInt8() : value(0) {}
+inline SInt8::SInt8() = default;
 inline SInt8::SInt8(qint8 v) : value(v) {}
 
 inline QString SInt8::toString() const { return QString::number(value); }

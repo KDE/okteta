@@ -35,8 +35,7 @@
 namespace Kasten {
 
 ValuesStreamEncoderSettings::ValuesStreamEncoderSettings()
-    : valueCoding(Okteta::HexadecimalCoding)
-    , separation(QStringLiteral(" "))
+    : separation(QStringLiteral(" "))
 {}
 
 ByteArrayValuesStreamEncoder::ByteArrayValuesStreamEncoder()

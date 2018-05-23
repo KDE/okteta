@@ -29,12 +29,7 @@
 namespace Kasten {
 
 ByteArrayViewProfileSynchronizer::ByteArrayViewProfileSynchronizer(ByteArrayViewProfileManager* viewProfileManager)
-    : QObject()
-    , mView(nullptr)
-    , mViewProfileId()
-    , mDirtyFlags(0)
-    , mUpdatingView(false)
-    , mViewProfileManager(viewProfileManager)
+    : mViewProfileManager(viewProfileManager)
 {
 }
 

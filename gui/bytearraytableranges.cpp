@@ -30,8 +30,7 @@
 namespace Okteta {
 
 ByteArrayTableRanges::ByteArrayTableRanges(ByteArrayTableLayout* layout)
-    : mModified(false)
-    , mLayout(layout)
+    : mLayout(layout)
 {
 }
 

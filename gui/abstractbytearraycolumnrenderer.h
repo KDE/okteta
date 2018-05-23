@@ -204,15 +204,15 @@ protected:
     const CharCodec* mCharCodec;
 
     /** */
-    PixelX mDigitWidth;
+    PixelX mDigitWidth = 0;
     /** */
-    PixelY mDigitBaseLine;
+    PixelY mDigitBaseLine = 0;
 
     QFontMetrics mFontMetrics;
 
 protected: // individual data
     /** total width of byte display in pixel */
-    PixelX mByteWidth;
+    PixelX mByteWidth = 0;
     /** width of inserting cursor in pixel */
 //     PixelX mCursorWidth;
     /** size of the line margin */
@@ -226,13 +226,13 @@ protected: // individual data
     /** pointer to array with buffered linePositions (relative to column position)
      * a spacing gets assigned to the left byte -> ...c|c|c |c|c...
      */
-    PixelX* mLinePosLeftPixelX;
-    PixelX* mLinePosRightPixelX;
+    PixelX* mLinePosLeftPixelX = nullptr;
+    PixelX* mLinePosRightPixelX = nullptr;
     /** index of right position */
-    LinePosition mLastLinePos;
+    LinePosition mLastLinePos = 0;
 
     /** */
-    bool mByteTypeColored;
+    bool mByteTypeColored = true;
 
 protected: // buffering rendering data
     LinePositionRange mRenderLinePositions;

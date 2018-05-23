@@ -85,8 +85,8 @@ protected:
     QList<TabbedViews*> mViewAreaList;
     QSplitter* mMainSplitter;
 
-    TabbedViews* mCurrentViewArea;
-    TabbedViews* mCurrentInlineToolViewArea;
+    TabbedViews* mCurrentViewArea = nullptr;
+    TabbedViews* mCurrentInlineToolViewArea = nullptr;
 };
 
 inline QWidget* MultiViewAreasPrivate::widget()                 const { return mMainSplitter; }

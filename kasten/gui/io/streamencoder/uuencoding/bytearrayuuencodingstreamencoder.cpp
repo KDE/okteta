@@ -75,7 +75,6 @@ static const UumapEncodeData base64UumapEncodeData =
 
 UuencodingStreamEncoderSettings::UuencodingStreamEncoderSettings()
     : fileName(QStringLiteral("okteta-export"))
-    , algorithmId(AlgorithmId::Base64)
 {}
 
 ByteArrayUuencodingStreamEncoder::ByteArrayUuencodingStreamEncoder()

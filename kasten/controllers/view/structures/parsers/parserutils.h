@@ -87,10 +87,7 @@ public:
 template <typename T>
 struct ParsedNumber
 {
-    ParsedNumber()
-        : value(0)
-        , isValid(false)
-    {}
+    ParsedNumber() = default;
     ParsedNumber(T val, const QString& str, bool ok)
         : string(str)
         , value(val)
@@ -98,8 +95,8 @@ struct ParsedNumber
     {}
 
     QString string;
-    T value;
-    bool isValid;
+    T value = 0;
+    bool isValid = false;
 
     static ParsedNumber<T> badInput(const QString& str) { return ParsedNumber<T>(T(), str, false); }
     inline bool isError() { return !isValid && !string.isEmpty(); }

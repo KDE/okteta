@@ -37,6 +37,7 @@ class AbstractColumnRendererPrivate
 {
 public:
     explicit AbstractColumnRendererPrivate(AbstractColumnStylist* stylist);
+    AbstractColumnRendererPrivate() = delete;
 
 public:
     void renderBlankLine(QPainter* painter) const;
@@ -46,20 +47,17 @@ public: // general column data
     /** pointer to the view */
     AbstractColumnStylist* mStylist;
     /** should Column be displayed? */
-    bool mIsVisible;
+    bool mIsVisible = true;  // TODO: would false be better?
 
     /** buffered value */
-    PixelY mLineHeight;
+    PixelY mLineHeight = 0;
 
     /** span of the column in pixel */
-    PixelXRange mXSpan;
+    PixelXRange mXSpan = PixelXRange::fromWidth(0, 0);
 };
 
 inline AbstractColumnRendererPrivate::AbstractColumnRendererPrivate(AbstractColumnStylist* stylist)
     : mStylist(stylist)
-    , mIsVisible(true)  // TODO: would false be better?
-    , mLineHeight(0)
-    , mXSpan(PixelXRange::fromWidth(0, 0))
 {
 }
 

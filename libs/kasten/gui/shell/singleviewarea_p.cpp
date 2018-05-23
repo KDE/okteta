@@ -31,8 +31,6 @@ namespace Kasten {
 
 SingleViewAreaPrivate::SingleViewAreaPrivate(SingleViewArea* parent)
     : AbstractViewAreaPrivate(parent)
-    , mViewAreaBox(nullptr)
-    , mCurrentView(nullptr)
 {
 }
 

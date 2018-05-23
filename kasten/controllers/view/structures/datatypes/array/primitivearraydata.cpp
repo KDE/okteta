@@ -37,7 +37,6 @@ template <PrimitiveDataType type>
 inline PrimitiveArrayData<type>::PrimitiveArrayData(unsigned int initialLength, PrimitiveDataInformation* childType,
                                                     ArrayDataInformation* parent)
     : AbstractArrayData(childType, parent)
-    , mNumReadValues(0)
     , mDummy(parent)
 {
     Q_ASSERT(childType->type() == type);

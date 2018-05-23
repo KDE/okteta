@@ -37,10 +37,10 @@ public:
     QString toString(bool asHex) const;
 
 public:
-    quint64 value;
+    quint64 value = 0;
 };
 
-inline UInt64::UInt64() : value(0) {}
+inline UInt64::UInt64() = default;
 inline UInt64::UInt64(quint64 v) : value(v) {}
 
 inline QString UInt64::toString(bool asHex) const

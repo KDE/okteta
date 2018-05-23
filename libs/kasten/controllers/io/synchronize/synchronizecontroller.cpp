@@ -39,8 +39,6 @@ namespace Kasten {
 
 SynchronizeController::SynchronizeController(DocumentSyncManager* syncManager, KXMLGUIClient* guiClient)
     : mSyncManager(syncManager)
-    , mDocument(nullptr)
-    , mSynchronizer(nullptr)
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 

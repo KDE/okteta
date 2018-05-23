@@ -34,10 +34,7 @@
 
 namespace Kasten {
 
-ByteArrayRandomDataGeneratorSettings::ByteArrayRandomDataGeneratorSettings()
-    : size(256)
-{
-}
+ByteArrayRandomDataGeneratorSettings::ByteArrayRandomDataGeneratorSettings() = default;
 
 // TODO: support insert to selection, cmp. fill in painting program
 // there are two kinds of generated datam fixed size (e.g. sequence) and endless size?

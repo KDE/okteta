@@ -37,6 +37,7 @@ public:
     AbstractFileSystemSyncWithRemoteJobPrivate(AbstractFileSystemSyncWithRemoteJob* parent,
                                                AbstractModelFileSystemSynchronizer* synchronizer,
                                                const QUrl& url, AbstractModelSynchronizer::ConnectOption option);
+    AbstractFileSystemSyncWithRemoteJobPrivate() = delete;
 
     ~AbstractFileSystemSyncWithRemoteJobPrivate() override;
 
@@ -60,7 +61,7 @@ protected:
     AbstractModelFileSystemSynchronizer* const mSynchronizer;
     const QUrl mUrl;
     const AbstractModelSynchronizer::ConnectOption mOption;
-    QFile* mFile;
+    QFile* mFile = nullptr;
     QString mWorkFilePath;
     QString mTempFilePath;
 };
@@ -72,7 +73,6 @@ inline AbstractFileSystemSyncWithRemoteJobPrivate::AbstractFileSystemSyncWithRem
     , mSynchronizer(synchronizer)
     , mUrl(url)
     , mOption(option)
-    , mFile(nullptr)
 {}
 
 inline AbstractFileSystemSyncWithRemoteJobPrivate::~AbstractFileSystemSyncWithRemoteJobPrivate() = default;

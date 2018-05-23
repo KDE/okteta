@@ -37,10 +37,10 @@ public:
     QString toString() const;
 
 public:
-    quint8 value;
+    quint8 value = 0;
 };
 
-inline Octal8::Octal8() : value(0) {}
+inline Octal8::Octal8() = default;
 inline Octal8::Octal8(quint8 v) : value(v) {}
 
 inline QString Octal8::toString() const

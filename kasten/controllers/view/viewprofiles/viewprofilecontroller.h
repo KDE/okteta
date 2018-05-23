@@ -70,8 +70,8 @@ private:
     ByteArrayViewProfileManager* mViewProfileManager;
     QWidget* mParentWidget;
 
-    ByteArrayView* mByteArrayView;
-    ByteArrayViewProfileSynchronizer* mByteArrayViewProfileSynchronizer;
+    ByteArrayView* mByteArrayView = nullptr;
+    ByteArrayViewProfileSynchronizer* mByteArrayViewProfileSynchronizer = nullptr;
 
     // menu
     KActionMenu* mViewProfileActionMenu;

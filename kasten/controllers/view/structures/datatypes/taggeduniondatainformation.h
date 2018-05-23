@@ -85,7 +85,7 @@ private:
 //     * child is highlighted. Otherwise only the correct fields will be appended after mChildren
 //     */
 //    QScopedPointer<UnionDataInformation> mUnion;
-    int mLastIndex;
+    int mLastIndex = -1;
 };
 
 inline const QVector<DataInformation*>& TaggedUnionDataInformation::currentChildren() const

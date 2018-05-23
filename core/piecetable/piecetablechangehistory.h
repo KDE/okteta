@@ -88,27 +88,21 @@ public:
 
 protected:
     /// if true, try to merge changes
-    bool mTryToMergeAppendedChange;
+    bool mTryToMergeAppendedChange = false;
     ///
-    int mAppliedChangesCount;
+    int mAppliedChangesCount = 0;
     ///
-    int mBaseBeforeChangeIndex;
+    int mBaseBeforeChangeIndex = 0;
     ///
     QStack<AbstractPieceTableChange*> mChangeStack;
     ///
-    Size mAppliedChangesDataSize;
+    Size mAppliedChangesDataSize = 0;
 
     /// if 0, there is no
-    GroupPieceTableChange* mActiveGroupChange;
+    GroupPieceTableChange* mActiveGroupChange = nullptr;
 };
 
-inline PieceTableChangeHistory::PieceTableChangeHistory()
-    : mTryToMergeAppendedChange(false)
-    , mAppliedChangesCount(0)
-    , mBaseBeforeChangeIndex(0)
-    , mAppliedChangesDataSize(0)
-    , mActiveGroupChange(nullptr)
-{}
+inline PieceTableChangeHistory::PieceTableChangeHistory() = default;
 
 inline PieceTableChangeHistory::~PieceTableChangeHistory() { clear(); }
 

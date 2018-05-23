@@ -69,7 +69,7 @@ private Q_SLOTS:
     void onCharCodecChanged(const QString& charCodecName);
 
 private:
-    ByteArrayView* mByteArrayView;
+    ByteArrayView* mByteArrayView = nullptr;
 
     StatusBar* mStatusBar;
     QLabel* mOffsetLabel;

@@ -41,6 +41,8 @@ class OKTETAGUI_EXPORT OffsetColumnRenderer : public AbstractColumnRenderer
 {
 public:
     OffsetColumnRenderer(AbstractColumnStylist* stylist, ByteArrayTableLayout* layout, OffsetFormat::Format format);
+    OffsetColumnRenderer() = delete;
+
     ~OffsetColumnRenderer() override;
 
 public:    // AbstractColumnRenderer API
@@ -72,9 +74,9 @@ protected: // user settings
 
 protected: // pixel related
     /** */
-    PixelX mOffsetTextWidth;
+    PixelX mOffsetTextWidth = 0;
     /** */
-    PixelY mDigitBaseLine;
+    PixelY mDigitBaseLine = 0;
 
 protected: // general layout
     OffsetFormat::Format mFormat;

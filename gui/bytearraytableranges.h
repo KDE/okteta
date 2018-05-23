@@ -44,6 +44,8 @@ class OKTETAGUI_EXPORT ByteArrayTableRanges
 {
 public:
     explicit ByteArrayTableRanges(ByteArrayTableLayout* layout);
+    ByteArrayTableRanges() = delete;
+
     ~ByteArrayTableRanges();
 
 public: // modifcation access
@@ -104,7 +106,7 @@ public: // calculated logic access
 
 protected:
     /** true if something changed */
-    bool mModified;
+    bool mModified = false;
 
     AddressRange mMarking;
     Selection mSelection;

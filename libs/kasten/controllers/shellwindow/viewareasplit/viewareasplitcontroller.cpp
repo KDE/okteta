@@ -39,8 +39,6 @@ namespace Kasten {
 ViewAreaSplitController::ViewAreaSplitController(ViewManager* viewManager, AbstractGroupedViews* groupedViews, KXMLGUIClient* guiClient)
     : mViewManager(viewManager)
     , mGroupedViews(groupedViews)
-    , mViewAreaSplitable(nullptr)
-    , mCurrentViewArea(nullptr)
 {
     mViewAreaSplitable = mGroupedViews ? qobject_cast<If::ViewAreaSplitable*>(mGroupedViews) : nullptr;
     if (mViewAreaSplitable) {

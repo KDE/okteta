@@ -41,7 +41,7 @@ public:
     int mOffsetCoding;
     QString mCharCodingName;
     int mValueCoding;
-    bool mOffsetColumnVisible;
+    bool mOffsetColumnVisible = true;
     int mVisibleByteArrayCodings;
     int mNoOfBytesPerLine;
     int mLayoutStyle;
@@ -49,7 +49,7 @@ public:
     QChar mUndefinedChar;
     bool mShowsNonprinting;
     int mNoOfGroupedBytes;
-    int mViewModus;
+    int mViewModus = 0;
 };
 
 QString DefaultViewProfileCharCodingName() { return QStringLiteral("ISO-8859-1"); }
@@ -72,7 +72,6 @@ ByteArrayViewProfilePrivate::ByteArrayViewProfilePrivate()
     , mOffsetCoding(DefaultViewProfileOffsetCoding)
     , mCharCodingName(DefaultViewProfileCharCodingName())
     , mValueCoding(DefaultViewProfileValueCoding)
-    , mOffsetColumnVisible(true)
     , mVisibleByteArrayCodings(DefaultViewProfileVisibleByteArrayCodings)
     , mNoOfBytesPerLine(DefaultViewProfileNoOfBytesPerLine)
     , mLayoutStyle(DefaultViewProfileResizeStyle)
@@ -80,7 +79,6 @@ ByteArrayViewProfilePrivate::ByteArrayViewProfilePrivate()
     , mUndefinedChar(DefaultViewProfileUndefinedChar)
     , mShowsNonprinting(DefaultViewProfileShowingNonprinting)
     , mNoOfGroupedBytes(DefaultViewProfileNoOfGroupedBytes)
-    , mViewModus(0)
 {
 }
 

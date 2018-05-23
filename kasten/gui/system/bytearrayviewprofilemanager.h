@@ -39,9 +39,9 @@ class ByteArrayViewProfileLock;
 class ByteArrayViewProfileFileInfo
 {
 public:
-    ByteArrayViewProfileFileInfo(const QDateTime& lastModified, bool)
+    ByteArrayViewProfileFileInfo(const QDateTime& lastModified, bool locked)
         : mLastModified(lastModified)
-        , mLocked(false)
+        , mLocked(locked)
     {}
 
     const QDateTime& lastModified() const { return mLastModified; }

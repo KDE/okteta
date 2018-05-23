@@ -37,10 +37,10 @@ public:
     QString toString() const;
 
 public:
-    quint8 value;
+    quint8 value = 0;
 };
 
-inline Hexadecimal8::Hexadecimal8() : value(0) {}
+inline Hexadecimal8::Hexadecimal8() = default;
 inline Hexadecimal8::Hexadecimal8(quint8 v) : value(v) {}
 
 inline QString Hexadecimal8::toString() const

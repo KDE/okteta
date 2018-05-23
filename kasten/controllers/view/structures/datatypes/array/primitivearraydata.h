@@ -79,7 +79,7 @@ protected:
     void setNewParentForChildren() override;
 
     QVector<T> mData;
-    uint mNumReadValues; // the number of values read before EOF
+    uint mNumReadValues = 0; // the number of values read before EOF
     DummyDataInformation mDummy;
 };
 

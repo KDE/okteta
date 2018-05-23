@@ -176,15 +176,12 @@ public: // state value access
 
 private: // member variables
     /** Position in mLine */
-    LinePosition mPos;
+    LinePosition mPos = 0;
     /** mLine */
-    Line mLine;
+    Line mLine = 0;
 };
 
-inline Coord::Coord()
-    : mPos(0)
-    , mLine(0)
-{}
+inline Coord::Coord() = default;
 inline Coord::Coord(LinePosition pos, Line line)
     : mPos(pos)
     , mLine(line)

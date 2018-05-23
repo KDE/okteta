@@ -41,9 +41,7 @@ int addressSize(SRecStreamEncoderSettings::AddressSizeId id)
     return 4 - static_cast<int>(id);
 }
 
-SRecStreamEncoderSettings::SRecStreamEncoderSettings()
-    : addressSizeId(AddressSizeId::FourBytes)
-{}
+SRecStreamEncoderSettings::SRecStreamEncoderSettings() = default;
 
 const char ByteArraySRecStreamEncoder::hexDigits[16] = {
     '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'

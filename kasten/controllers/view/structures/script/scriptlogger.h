@@ -58,7 +58,7 @@ public:
     };
     struct Data
     {
-        inline Data() : level(LogInvalid) {}
+        inline Data() = default;
         inline Data(LogLevel lvl, const QString& o)
             : level(lvl)
             , origin(o)
@@ -66,7 +66,7 @@ public:
         {}
         inline Data(const Data& d) = default;
         inline ~Data() = default;
-        ScriptLogger::LogLevel level;
+        ScriptLogger::LogLevel level = LogInvalid;
         QString message;
         QString origin;
         QTime time;
@@ -102,7 +102,7 @@ public:
 
 private:
     QVector<Data> mData;
-    bool mLogToStdOut;
+    bool mLogToStdOut = false;
 };
 
 struct LoggerWithContext

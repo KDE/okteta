@@ -37,8 +37,6 @@ namespace Kasten {
 static const int modifiedPixmapWidth = 16;
 
 ModifiedBarController::ModifiedBarController(StatusBar* statusBar)
-    : mDocument(nullptr)
-    , mSynchronizer(nullptr)
 {
     // TODO: depend an statusbar height
     const QSize modifiedPixmapSize = QSize(modifiedPixmapWidth, modifiedPixmapWidth);

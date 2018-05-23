@@ -31,9 +31,6 @@ FileByteArrayModelPrivate::FileByteArrayModelPrivate(int pageNumber, int pageSiz
     : mNoOfUsedPages(pageNumber)
     , mNoOfFreePages(pageNumber)
     , mPageSize(pageSize)
-    , mFirstPage(-1)
-    , mLastPage(-1)
-    , mSize(0)
 {
     mIsOpen = false;
 

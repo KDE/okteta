@@ -33,7 +33,6 @@ AbstractByteArrayColumnTextRenderer::AbstractByteArrayColumnTextRenderer(const O
     , mCoordRange(coordRange)
     , mNoOfBytesPerLine(noOfBytesPerLine)
     , mOffset(offset)
-    , mNoOfCharsPerLine(0)
     , mLinePositions(new int[mNoOfBytesPerLine])
 {
 }

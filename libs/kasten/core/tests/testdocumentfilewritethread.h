@@ -56,7 +56,7 @@ protected:
     const TestDocument* mDocument;
     QFile* mFile;
 
-    bool mSuccess;
+    bool mSuccess = false;
 };
 
 inline TestDocumentFileWriteThread::TestDocumentFileWriteThread(QObject* parent, const QByteArray& header,
@@ -65,7 +65,6 @@ inline TestDocumentFileWriteThread::TestDocumentFileWriteThread(QObject* parent,
     , mHeader(header)
     , mDocument(document)
     , mFile(file)
-    , mSuccess(false)
 {}
 
 inline bool TestDocumentFileWriteThread::success() const { return mSuccess; }

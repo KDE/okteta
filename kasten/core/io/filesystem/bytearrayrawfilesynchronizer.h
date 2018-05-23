@@ -62,7 +62,7 @@ private Q_SLOTS:
     void onModelModified(bool isModified);
 
 private:
-    ByteArrayDocument* mDocument;
+    ByteArrayDocument* mDocument = nullptr;
 };
 
 }

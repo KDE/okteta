@@ -44,8 +44,8 @@ public:
     int moveBitWidth() const;
 
 protected:
-    int mGroupSize;
-    int mMoveBitWidth;
+    int mGroupSize = 1;
+    int mMoveBitWidth = 0;
 };
 
 #endif

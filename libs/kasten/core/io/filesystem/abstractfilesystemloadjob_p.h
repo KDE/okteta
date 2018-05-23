@@ -35,6 +35,7 @@ class AbstractFileSystemLoadJobPrivate : public AbstractLoadJobPrivate
 {
 public:
     AbstractFileSystemLoadJobPrivate(AbstractFileSystemLoadJob* parent, AbstractModelFileSystemSynchronizer* synchronizer, const QUrl& url);
+    AbstractFileSystemLoadJobPrivate() = delete;
 
     ~AbstractFileSystemLoadJobPrivate() override;
 
@@ -58,7 +59,7 @@ protected:
 protected:
     AbstractModelFileSystemSynchronizer* const mSynchronizer;
     const QUrl mUrl;
-    QFile* mFile;
+    QFile* mFile = nullptr;
     QString mWorkFilePath;
     QString mTempFilePath;
 };
@@ -68,7 +69,6 @@ inline AbstractFileSystemLoadJobPrivate::AbstractFileSystemLoadJobPrivate(Abstra
     : AbstractLoadJobPrivate(parent)
     , mSynchronizer(synchronizer)
     , mUrl(url)
-    , mFile(nullptr)
 {}
 
 inline AbstractFileSystemLoadJobPrivate::~AbstractFileSystemLoadJobPrivate() = default;

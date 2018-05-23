@@ -59,8 +59,8 @@ protected:
     Q_DECLARE_PUBLIC(SingleViewArea)
 
 protected:
-    ViewAreaBox* mViewAreaBox;
-    AbstractView* mCurrentView;
+    ViewAreaBox* mViewAreaBox = nullptr;
+    AbstractView* mCurrentView = nullptr;
 };
 
 inline QWidget* SingleViewAreaPrivate::widget()  const { return mViewAreaBox; }

@@ -37,6 +37,7 @@ class FileByteArrayModelPrivate
 
 public:
     FileByteArrayModelPrivate(int pageNumber, int pageSize);
+    FileByteArrayModelPrivate() = delete;
 
     ~FileByteArrayModelPrivate();
 
@@ -69,13 +70,13 @@ protected:
     /** number of bytes in a page */
     unsigned int mPageSize;
     /** first currently loaded page */
-    mutable int mFirstPage;
+    mutable int mFirstPage = -1;
     /** last currently loaded page */
-    mutable int mLastPage;
+    mutable int mLastPage = -1;
     /** */
     mutable KPageOfChar mData;
     /** */
-    int mSize;
+    int mSize = 0;
 
     /** current offset */
     mutable unsigned int mOffsetOfActualPage;

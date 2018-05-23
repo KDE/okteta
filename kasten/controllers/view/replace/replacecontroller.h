@@ -69,8 +69,8 @@ private:
 
     QAction* mReplaceAction;
 
-    KReplaceDialog* mReplaceDialog;
-    mutable KReplacePrompt* mReplacePrompt;
+    KReplaceDialog* mReplaceDialog = nullptr;
+    mutable KReplacePrompt* mReplacePrompt = nullptr;
     ReplaceTool* mTool;
 };
 

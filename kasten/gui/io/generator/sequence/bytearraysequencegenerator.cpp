@@ -32,11 +32,7 @@
 
 namespace Kasten {
 
-ByteArraySequenceGeneratorSettings::ByteArraySequenceGeneratorSettings()
-    : pattern("test")
-    , count(1)
-{
-}
+ByteArraySequenceGeneratorSettings::ByteArraySequenceGeneratorSettings() = default;
 
 // TODO: support insert to selection, cmp. fill in painting program
 // there are two kinds of generated datam fixed size (e.g. sequence) and endless size?

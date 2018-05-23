@@ -59,8 +59,8 @@ private Q_SLOTS:
 
 private:
     DocumentSyncManager* mSyncManager;
-    AbstractDocument* mDocument;
-    AbstractModelFileSystemSynchronizer* mSynchronizer;
+    AbstractDocument* mDocument = nullptr;
+    AbstractModelFileSystemSynchronizer* mSynchronizer = nullptr;
 
     QAction* mSaveAction;
     QAction* mReloadAction;

@@ -27,11 +27,7 @@
 
 SafeReferenceHolder SafeReferenceHolder::instance;
 
-SafeReferenceHolder::SafeReferenceHolder()
-    : safeRefDestroyCnt(0)
-    , safeRefRegisterCnt(0)
-{
-}
+SafeReferenceHolder::SafeReferenceHolder() = default;
 
 SafeReferenceHolder::~SafeReferenceHolder()
 {

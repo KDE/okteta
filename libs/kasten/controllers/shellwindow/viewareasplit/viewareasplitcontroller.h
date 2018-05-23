@@ -65,8 +65,8 @@ private Q_SLOTS:
 private:
     ViewManager* mViewManager;
     AbstractGroupedViews* mGroupedViews;
-    If::ViewAreaSplitable* mViewAreaSplitable;
-    AbstractGroupedViews* mCurrentViewArea;
+    If::ViewAreaSplitable* mViewAreaSplitable = nullptr;
+    AbstractGroupedViews* mCurrentViewArea = nullptr;
 
     QAction* mSplitVerticallyAction;
     QAction* mSplitHorizontallyAction;

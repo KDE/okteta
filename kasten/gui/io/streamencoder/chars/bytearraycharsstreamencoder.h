@@ -37,8 +37,8 @@ public:
 
 public:
     QString codecName;
-    QChar undefinedChar;
-    QChar substituteChar;
+    QChar undefinedChar = {QLatin1Char('?')};
+    QChar substituteChar = {QLatin1Char('.')};
 };
 
 // TODO: this could rather be one of the default cop

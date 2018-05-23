@@ -30,7 +30,6 @@ namespace Kasten {
 
 AbstractToolWidgetPrivate::AbstractToolWidgetPrivate(AbstractToolWidget* parent)
     : p(parent)
-    , mDefaultButton(nullptr)
 
 {
     mReturnShortcut = new QShortcut(Qt::Key_Return, p);   // TODO: what about Enter?

@@ -41,10 +41,10 @@ public:
     QString toString(/** TODO: undefinedChar */) const;
 
 public:
-    Okteta::Character character;
+    Okteta::Character character = {QChar(0)};
 };
 
-inline Char8::Char8() : character(QChar(0)) {}
+inline Char8::Char8() = default;
 inline Char8::Char8(Okteta::Character c) : character(c) {}
 
 inline QString Char8::toString() const

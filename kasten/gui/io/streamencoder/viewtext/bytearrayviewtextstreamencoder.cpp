@@ -46,11 +46,7 @@ namespace Kasten {
 
 ByteArrayViewTextStreamEncoderSettings::ByteArrayViewTextStreamEncoderSettings()
     // : offsetFormat(DefaultOffsetFormat)
-    : valueCoding(Okteta::HexadecimalCoding)
-    , codecName()
-    , undefinedChar(QLatin1Char('?'))
-    , substituteChar(QLatin1Char('.'))
-    , separation(QStringLiteral(" "))
+    : separation(QStringLiteral(" "))
 {}
 
 ByteArrayViewTextStreamEncoder::ByteArrayViewTextStreamEncoder()

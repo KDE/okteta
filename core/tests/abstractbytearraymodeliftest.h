@@ -76,12 +76,12 @@ private Q_SLOTS: // test functions
 
 private: // used in all tests
     /** pointer to the model to test */
-    AbstractByteArrayModel* mByteArrayModel;
+    AbstractByteArrayModel* mByteArrayModel = nullptr;
 
-    QSignalSpy* ContentsChangeListSpy;
+    QSignalSpy* ContentsChangeListSpy = nullptr;
 };
 
-inline AbstractByteArrayModelIfTest::AbstractByteArrayModelIfTest()  : mByteArrayModel(nullptr) {}
+inline AbstractByteArrayModelIfTest::AbstractByteArrayModelIfTest() = default;
 
 }
 

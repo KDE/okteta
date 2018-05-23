@@ -34,12 +34,6 @@
 namespace Kasten {
 
 GotoOffsetTool::GotoOffsetTool()
-    : mTargetOffset(0)
-    , mIsRelative(false)
-    , mIsSelectionToExtent(false)
-    , mIsBackwards(false)
-    , mByteArrayView(nullptr)
-    , mByteArrayModel(nullptr)
 {
     setObjectName(QStringLiteral("GotoOffset"));
 }

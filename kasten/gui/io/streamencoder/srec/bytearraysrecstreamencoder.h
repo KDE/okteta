@@ -48,7 +48,7 @@ public:
     SRecStreamEncoderSettings();
 
 public:
-    AddressSizeId addressSizeId;
+    AddressSizeId addressSizeId = AddressSizeId::FourBytes;
 };
 
 class ByteArraySRecStreamEncoder : public AbstractByteArrayStreamEncoder

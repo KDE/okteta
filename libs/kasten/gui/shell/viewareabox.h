@@ -62,7 +62,7 @@ protected Q_SLOTS:
 protected:
     QWidget* mCentralWidget;
 
-    QWidget* mBottomWidget;
+    QWidget* mBottomWidget = nullptr;
     QShortcut* mEscapeShortcut;
 };
 

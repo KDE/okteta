@@ -42,18 +42,14 @@ public: // calculated
     /** collection of all the columns. All columns will be autodeleted. */
     QList<Okteta::AbstractColumnRenderer*> mColumns;
     /** the number of lines which the columnRenderer view has */
-    Okteta::LineSize mNoOfLines;
+    Okteta::LineSize mNoOfLines = 0;
     /** the height of each line in pixels */
-    Okteta::PixelY mLineHeight;
+    Okteta::PixelY mLineHeight = 1;
     /** the width of all visible columns together */
-    Okteta::PixelX mColumnsWidth;
+    Okteta::PixelX mColumnsWidth = 0;
 };
 
-AbstractColumnFrameRendererPrivate::AbstractColumnFrameRendererPrivate()
-    : mNoOfLines(0)
-    , mLineHeight(1)
-    , mColumnsWidth(0)
-{}
+AbstractColumnFrameRendererPrivate::AbstractColumnFrameRendererPrivate() = default;
 
 AbstractColumnFrameRendererPrivate::~AbstractColumnFrameRendererPrivate()
 {

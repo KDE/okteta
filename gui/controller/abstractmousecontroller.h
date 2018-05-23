@@ -33,6 +33,7 @@ class AbstractMouseController
 {
 protected:
     AbstractMouseController(AbstractByteArrayView* view, AbstractMouseController* parent);
+    AbstractMouseController() = delete;
 
 public:
     virtual ~AbstractMouseController();

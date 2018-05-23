@@ -32,7 +32,6 @@ namespace Kasten {
 ToolViewDockWidget::ToolViewDockWidget(AbstractToolView* toolView, QWidget* parent)
     : QDockWidget(toolView->title(), parent)
     , mToolView(toolView)
-    , mIsShown(false)
 {
     setObjectName(toolView->tool()->objectName());
     setWidget(toolView->widget());

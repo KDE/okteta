@@ -27,7 +27,6 @@
 
 DummyDataInformation::DummyDataInformation(DataInformationBase* parent, const QString& name)
     : DataInformation(name, parent)
-    , mIndex(0)
 {
 }
 

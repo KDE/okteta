@@ -61,7 +61,7 @@ private:
     QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const override;
 
 protected:
-    AllPrimitiveTypes mValue;
+    AllPrimitiveTypes mValue = 0;
     quint8 mWidth; // cannot be more than 64 since a quint64 is used for storage
 };
 

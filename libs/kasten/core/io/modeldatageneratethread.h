@@ -58,14 +58,13 @@ Q_SIGNALS:
 protected:
     AbstractModelDataGenerator* mGenerator;
 
-    QMimeData* mMimeData;
+    QMimeData* mMimeData = nullptr;
 };
 
 inline ModelDataGenerateThread::ModelDataGenerateThread(QObject* parent,
                                                         AbstractModelDataGenerator* generator)
     : QThread(parent)
     , mGenerator(generator)
-    , mMimeData(nullptr)
 {}
 
 inline QMimeData* ModelDataGenerateThread::data() const { return mMimeData; }

@@ -36,8 +36,6 @@
 namespace Kasten {
 
 SelectController::SelectController(KXMLGUIClient* guiClient)
-    : mModel(nullptr)
-    , mSelectControl(nullptr)
 {
     mSelectAllAction = KStandardAction::selectAll(this, &SelectController::selectAll, this);
     mDeselectAction =  KStandardAction::deselect( this, &SelectController::unselect,  this);

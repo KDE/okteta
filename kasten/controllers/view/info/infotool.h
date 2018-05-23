@@ -79,15 +79,15 @@ private:
 
     StatisticTableModel* mStatisticTableModel;
 
-    ByteArrayView* mByteArrayView;
-    Okteta::AbstractByteArrayModel* mByteArrayModel;
+    ByteArrayView* mByteArrayView = nullptr;
+    Okteta::AbstractByteArrayModel* mByteArrayModel = nullptr;
 
     //
-    bool mSourceByteArrayModelUptodate;
+    bool mSourceByteArrayModelUptodate = false;
     // selection source
     Okteta::AddressRange mSourceSelection;
     // source of strings
-    Okteta::AbstractByteArrayModel* mSourceByteArrayModel;
+    Okteta::AbstractByteArrayModel* mSourceByteArrayModel = nullptr;
 };
 
 }

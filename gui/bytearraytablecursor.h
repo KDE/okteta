@@ -58,6 +58,8 @@ class ByteArrayTableCursor
 {
 public:
     explicit ByteArrayTableCursor(const ByteArrayTableLayout* layout);
+    ByteArrayTableCursor() = delete;
+
     ~ByteArrayTableCursor();
 
 public: // modificator

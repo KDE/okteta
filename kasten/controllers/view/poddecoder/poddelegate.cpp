@@ -50,7 +50,6 @@ namespace Kasten {
 PODDelegate::PODDelegate(PODDecoderTool* tool, QObject* parent)
     : QStyledItemDelegate(parent)
     , mTool(tool)
-    , mEditor(nullptr)
 {
     qRegisterMetaType<Binary8>();
     qRegisterMetaType<Octal8>();

@@ -37,10 +37,10 @@ public:
     QString toString() const;
 
 public:
-    qint32 value;
+    qint32 value = 0;
 };
 
-inline SInt32::SInt32() : value(0) {}
+inline SInt32::SInt32() = default;
 inline SInt32::SInt32(qint32 v) : value(v) {}
 
 inline QString SInt32::toString() const { return QString::number(value); }

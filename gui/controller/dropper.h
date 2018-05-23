@@ -38,6 +38,7 @@ class Dropper
 {
 public:
     explicit Dropper(AbstractByteArrayView* view);
+    Dropper() = delete;
 
     ~Dropper();
 

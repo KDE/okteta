@@ -36,6 +36,8 @@ class AbstractLinePopupPrivate
 {
 public:
     explicit AbstractLinePopupPrivate(AbstractLinePopup* parent);
+    AbstractLinePopupPrivate() = delete;
+
     ~AbstractLinePopupPrivate();
 
 public:
@@ -61,17 +63,14 @@ private:
 
     QHBoxLayout* mBaseLayout;
     QLabel* mIconLabel;
-    QWidget* mWidget;
+    QWidget* mWidget = nullptr;
 
-    QEventLoop* mEventLoop;
-    int mResult;
+    QEventLoop* mEventLoop = nullptr;
+    int mResult = 0;
 };
 
 inline AbstractLinePopupPrivate::AbstractLinePopupPrivate(AbstractLinePopup* parent)
     : p(parent)
-    , mWidget(nullptr)
-    , mEventLoop(nullptr)
-    , mResult(0)
 {
 }
 

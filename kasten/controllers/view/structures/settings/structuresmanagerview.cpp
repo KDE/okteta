@@ -45,7 +45,6 @@
 StructuresManagerView::StructuresManagerView(Kasten::StructuresTool* tool, QWidget* parent)
     : QWidget(parent)
     , mTool(tool)
-    , mStructuresSelector(nullptr)
     , mRebuildingPluginsList(false)
 {
     mSelectedStructures = Kasten::StructureViewPreferences::loadedStructures();

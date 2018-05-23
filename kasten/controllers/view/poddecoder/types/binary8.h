@@ -37,10 +37,10 @@ public:
     QString toString() const;
 
 public:
-    quint8 value;
+    quint8 value = 0;
 };
 
-inline Binary8::Binary8() : value(0) {}
+inline Binary8::Binary8() = default;
 inline Binary8::Binary8(quint8 v) : value(v) {}
 
 inline QString Binary8::toString() const

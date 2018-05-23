@@ -59,7 +59,7 @@ private Q_SLOTS:
 private:
     PODDecoderTool* mTool;
 
-    mutable QPointer<QWidget> mEditor;
+    mutable QPointer<QWidget> mEditor = nullptr;
 };
 
 }

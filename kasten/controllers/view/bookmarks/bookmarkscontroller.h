@@ -78,9 +78,10 @@ private Q_SLOTS:
 
 private:
     KXMLGUIClient* mGuiClient;
-    ByteArrayView* mByteArrayView;
-    Okteta::AbstractByteArrayModel* mByteArray;
-    Okteta::Bookmarkable* mBookmarks;
+
+    ByteArrayView* mByteArrayView = nullptr;
+    Okteta::AbstractByteArrayModel* mByteArray = nullptr;
+    Okteta::Bookmarkable* mBookmarks = nullptr;
 
     QAction* mCreateAction;
     QAction* mDeleteAction;

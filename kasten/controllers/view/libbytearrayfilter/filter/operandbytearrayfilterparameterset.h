@@ -49,8 +49,8 @@ public:
 
 protected:
     QByteArray mOperand;
-    int mOperandFormat;
-    bool mAlignAtEnd;
+    int mOperandFormat = 0;
+    bool mAlignAtEnd = false;
 };
 
 #endif

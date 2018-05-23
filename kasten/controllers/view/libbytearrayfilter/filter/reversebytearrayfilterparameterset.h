@@ -42,7 +42,7 @@ public:
     bool invertsBits() const;
 
 protected:
-    bool mInvertsBits;
+    bool mInvertsBits = false;
 };
 
 #endif

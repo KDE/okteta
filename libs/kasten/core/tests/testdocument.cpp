@@ -24,13 +24,9 @@
 
 namespace Kasten {
 
-TestDocument::TestDocument()
-    : mContentFlags(ContentStateNormal)
-{
-}
+TestDocument::TestDocument() = default;
 TestDocument::TestDocument(const QByteArray& data)
     : mData(data)
-    , mContentFlags(ContentStateNormal)
 {
 }
 

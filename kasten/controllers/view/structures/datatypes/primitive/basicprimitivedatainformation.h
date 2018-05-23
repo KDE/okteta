@@ -59,14 +59,13 @@ private:
     QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const override;
 
 protected:
-    T mValue;
+    T mValue = 0;
 };
 
 template <typename T, typename C>
 inline BasicPrimitiveDataInformation<T, C>::BasicPrimitiveDataInformation(const QString& name,
                                                                           DataInformation* parent)
     : PrimitiveDataInformation(name, parent)
-    , mValue(0)
 {
 }
 

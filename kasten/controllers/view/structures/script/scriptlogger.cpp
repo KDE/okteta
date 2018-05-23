@@ -42,10 +42,7 @@ QIcon ScriptLogger::iconForLevel(ScriptLogger::LogLevel level)
     }
 }
 
-ScriptLogger::ScriptLogger()
-    : mLogToStdOut(false)
-{
-}
+ScriptLogger::ScriptLogger() = default;
 
 ScriptLogger::~ScriptLogger() = default;
 

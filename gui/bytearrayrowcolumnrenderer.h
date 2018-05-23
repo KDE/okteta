@@ -253,17 +253,17 @@ protected:
 
     AbstractByteArrayView::CodingTypes mVisibleCodings;
     /** */
-    PixelX mDigitWidth;
+    PixelX mDigitWidth = 0;
     /** */
-    PixelY mDigitBaseLine;
+    PixelY mDigitBaseLine = 0;
     /** */
-    PixelY mDigitHeight;
+    PixelY mDigitHeight = 0;
 
     QFontMetrics mFontMetrics;
 
 protected: // individual data
     /** total width of byte display in pixel */
-    PixelX mByteWidth;
+    PixelX mByteWidth = 0;
     /** width of inserting cursor in pixel */
 //     PixelX mCursorWidth;
     /** size of the line margin */
@@ -277,19 +277,19 @@ protected: // individual data
     /** pointer to array with buffered linePositions (relative to column position)
      * any spacing gets assigned to the byte left to it -> ...|c|c|c |c|c...
      */
-    PixelX* mLinePosLeftPixelX;
-    PixelX* mLinePosRightPixelX;
+    PixelX* mLinePosLeftPixelX = nullptr;
+    PixelX* mLinePosRightPixelX = nullptr;
     /** index of right position */
-    LinePosition mLastLinePos;
+    LinePosition mLastLinePos = 0;
 
     /** */
-    bool mByteTypeColored;
+    bool mByteTypeColored = true;
 
 protected: // value specifics
     /** */
     ValueCoding mValueCoding;
     /** */
-    const ValueCodec* mValueCodec;
+    const ValueCodec* mValueCodec = nullptr;
     /** */
     PixelX mBinaryGapWidth;
 

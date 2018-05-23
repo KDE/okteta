@@ -49,10 +49,10 @@ private Q_SLOTS: // test functions
 
 private:
     /** pointer to the buffer to test */
-    CharCodec* mCharCodec;
+    CharCodec* mCharCodec = nullptr;
 };
 
-inline CharCodecIfTest::CharCodecIfTest() : mCharCodec(nullptr) {}
+inline CharCodecIfTest::CharCodecIfTest() = default;
 
 }
 

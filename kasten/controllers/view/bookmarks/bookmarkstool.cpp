@@ -44,10 +44,6 @@
 namespace Kasten {
 
 BookmarksTool::BookmarksTool()
-    : mByteArrayView(nullptr)
-    , mByteArray(nullptr)
-    , mBookmarks(nullptr)
-    , mCanCreateBookmark(false)
 {
     setObjectName(QStringLiteral("Bookmarks"));
 }

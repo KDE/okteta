@@ -352,7 +352,6 @@ QScriptClassPropertyIterator* DefaultScriptClass::newIterator(const QScriptValue
 
 DefaultscriptClassIterator::DefaultscriptClassIterator(const QScriptValue& object, DefaultScriptClass* cls)
     : QScriptClassPropertyIterator(object)
-    , mCurrent(-1)
     , mClass(cls)
 {
     DataInformation* data = DefaultScriptClass::toDataInformation(object);

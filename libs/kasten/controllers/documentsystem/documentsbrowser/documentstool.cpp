@@ -32,7 +32,6 @@ namespace Kasten {
 
 DocumentsTool::DocumentsTool(DocumentManager* documentManager)
     : mDocumentManager(documentManager)
-    , mFocussedDocument(nullptr)
 {
     setObjectName(QStringLiteral("Documents"));
 

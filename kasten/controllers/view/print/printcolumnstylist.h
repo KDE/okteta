@@ -40,7 +40,7 @@ public: // AbstractColumnStylist API
     const QPalette& palette() const override;
 
 protected:
-    QPalette mPalette;
+    QPalette mPalette = {Qt::white};
 };
 
 }

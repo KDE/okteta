@@ -54,9 +54,6 @@ static const char BookmarkListActionListId[] = "bookmark_list";
 
 BookmarksController::BookmarksController(KXMLGUIClient* guiClient)
     : mGuiClient(guiClient)
-    , mByteArrayView(nullptr)
-    , mByteArray(nullptr)
-    , mBookmarks(nullptr)
 {
     KActionCollection* actionCollection = mGuiClient->actionCollection();
 

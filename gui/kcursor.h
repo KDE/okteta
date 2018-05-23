@@ -55,8 +55,8 @@ protected:
     QPixmap OnPixmap;
     QPixmap OffPixmap;
 
-    PixelX CursorX;
-    PixelX CursorW;
+    PixelX CursorX = 0;
+    PixelX CursorW = -1;
 };
 
 inline QPixmap& KCursor::onPixmap()  { return OnPixmap; }

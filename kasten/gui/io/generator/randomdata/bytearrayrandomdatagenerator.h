@@ -37,7 +37,7 @@ public:
     ByteArrayRandomDataGeneratorSettings();
 
 public:
-    int size;
+    int size = 256;
 };
 
 class ByteArrayRandomDataGenerator : public AbstractModelDataGenerator

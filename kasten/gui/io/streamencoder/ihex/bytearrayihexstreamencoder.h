@@ -48,7 +48,7 @@ public:
     IHexStreamEncoderSettings();
 
 public:
-    AddressSizeId addressSizeId;
+    AddressSizeId addressSizeId = AddressSizeId::Bits32;
 };
 
 class ByteArrayIHexStreamEncoder : public AbstractByteArrayStreamEncoder

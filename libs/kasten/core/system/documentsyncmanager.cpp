@@ -47,9 +47,6 @@ namespace Kasten {
 
 DocumentSyncManager::DocumentSyncManager(DocumentManager* manager)
     : mManager(manager)
-    , mSynchronizerFactory(nullptr)
-    , mSaveDiscardDialog(nullptr)
-    , mOverwriteDialog(nullptr)
 {}
 
 DocumentSyncManager::~DocumentSyncManager()

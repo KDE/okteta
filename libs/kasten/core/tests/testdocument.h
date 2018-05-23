@@ -57,7 +57,7 @@ public: // instruction functions
 protected:
     QString mTitle;
     QByteArray mData;
-    ContentFlags mContentFlags;
+    ContentFlags mContentFlags = ContentStateNormal;
 };
 
 }

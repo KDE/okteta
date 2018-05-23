@@ -39,8 +39,6 @@ namespace Kasten {
 
 ByteTableTool::ByteTableTool()
     : mByteTableModel(new ByteTableModel(this))
-    , mByteArrayView(nullptr)
-    , mByteArrayModel(nullptr)
 {
     setObjectName(QStringLiteral("ByteTable"));
 }

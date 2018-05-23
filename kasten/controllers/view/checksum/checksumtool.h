@@ -100,16 +100,16 @@ private: // settings
 #ifdef HAVE_QCA2
     QCA::Initializer* mQcaInitializer;
 #endif
-    int mAlgorithmId;
+    int mAlgorithmId = 0;
 
 private: // sources
-    ByteArrayView* mByteArrayView;
+    ByteArrayView* mByteArrayView = nullptr;
     // current
-    Okteta::AbstractByteArrayModel* mByteArrayModel;
+    Okteta::AbstractByteArrayModel* mByteArrayModel = nullptr;
 
-    int mSourceAlgorithmId;
+    int mSourceAlgorithmId = -1;
     Okteta::AddressRange mSourceSelection;
-    Okteta::AbstractByteArrayModel* mSourceByteArrayModel;
+    Okteta::AbstractByteArrayModel* mSourceByteArrayModel = nullptr;
 };
 
 inline int ChecksumTool::algorithmId() const { return mAlgorithmId; }

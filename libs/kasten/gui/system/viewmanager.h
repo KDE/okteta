@@ -68,7 +68,7 @@ Q_SIGNALS:
 
 private:
     QList<AbstractView*> mViewList;
-    AbstractViewFactory* mFactory;
+    AbstractViewFactory* mFactory = nullptr;
 
     // TODO: remove into own singleton
     ModelCodecViewManager* mCodecViewManager;

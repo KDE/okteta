@@ -38,7 +38,7 @@ public:
 
 public:
     QByteArray pattern;
-    int count;
+    int count = 1;
 };
 
 class ByteArraySequenceGenerator : public AbstractModelDataGenerator

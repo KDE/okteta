@@ -41,7 +41,6 @@ CloseController::CloseController(AbstractDocumentStrategy* documentStrategy,
                                  bool supportMultiple)
     : AbstractXmlGuiController()
     , mDocumentStrategy(documentStrategy)
-    , mDocument(nullptr)
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 

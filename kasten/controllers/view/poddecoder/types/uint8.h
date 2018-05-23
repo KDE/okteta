@@ -37,10 +37,10 @@ public:
     QString toString(bool asHex) const;
 
 public:
-    quint8 value;
+    quint8 value = 0;
 };
 
-inline UInt8::UInt8() : value(0) {}
+inline UInt8::UInt8() = default;
 inline UInt8::UInt8(quint8 v) : value(v) {}
 
 inline QString UInt8::toString(bool asHex) const

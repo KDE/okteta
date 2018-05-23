@@ -43,11 +43,6 @@ StringsExtractTool::StringsExtractTool()
     : mExtractedStringsUptodate(false)
     , mSourceByteArrayModelUptodate(false)
     , mMinLength(DefaultMinLength)
-    , mByteArrayView(nullptr)
-    , mByteArrayModel(nullptr)
-    , mSourceByteArrayView(nullptr)
-    , mSourceByteArrayModel(nullptr)
-    , mSourceMinLength(0)
 {
     setObjectName(QStringLiteral("Strings"));
 }

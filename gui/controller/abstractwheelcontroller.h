@@ -31,6 +31,7 @@ class AbstractWheelController
 {
 protected:
     explicit AbstractWheelController(AbstractWheelController* parent);
+    AbstractWheelController() = delete;
 
 public:
     virtual ~AbstractWheelController();

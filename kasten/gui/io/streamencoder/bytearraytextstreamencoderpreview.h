@@ -57,8 +57,8 @@ private Q_SLOTS:
 private:
     AbstractByteArrayStreamEncoder* const mEncoder;
 
-    AbstractModel* mModel;
-    const AbstractModelSelection* mSelection;
+    AbstractModel* mModel = nullptr;
+    const AbstractModelSelection* mSelection = nullptr;
 
     QTextEdit* mWidget;
 };

@@ -36,11 +36,6 @@
 
 Utf8StringData::Utf8StringData(StringDataInformation* parent)
     : StringData(parent)
-    , mOneByteCount(0)
-    , mTwoByteCount(0)
-    , mThreeByteCount(0)
-    , mFourByteCount(0)
-    , mNonBMPCount(0)
 {
 }
 

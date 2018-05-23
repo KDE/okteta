@@ -30,7 +30,6 @@ namespace Okteta {
 ByteArrayModelIoDevice::ByteArrayModelIoDevice(AbstractByteArrayModel* byteArrayModel, QObject* parent)
     : QIODevice(parent)
     , mByteArrayModel(byteArrayModel)
-    , mReadOffset(0)
 {
     open(ReadOnly);   // krazy:exclude=syscalls
 }

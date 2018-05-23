@@ -38,6 +38,8 @@ class OKTETAGUI_EXPORT ValueByteArrayColumnRenderer : public AbstractByteArrayCo
 public:
     ValueByteArrayColumnRenderer(AbstractColumnStylist* stylist,
                                  AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges);
+    ValueByteArrayColumnRenderer() = delete;
+
     ~ValueByteArrayColumnRenderer() override;
 
 public:
@@ -65,7 +67,7 @@ protected: // settings
     /** */
     ValueCoding mValueCoding;
     /** */
-    const ValueCodec* mValueCodec;
+    const ValueCodec* mValueCodec = nullptr;
     /** */
     PixelX mBinaryGapWidth;
 

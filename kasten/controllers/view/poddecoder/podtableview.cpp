@@ -44,7 +44,6 @@ namespace Kasten {
 PODTableView::PODTableView(PODDecoderTool* tool, QWidget* parent)
     : QWidget(parent)
     , mTool(tool)
-    , mPODTableViewFocusChild(nullptr)
 {
     QBoxLayout* baseLayout = new QVBoxLayout(this);
     baseLayout->setMargin(0);

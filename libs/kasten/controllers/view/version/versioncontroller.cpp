@@ -40,7 +40,6 @@ namespace Kasten {
 static const int MaxMenuEntries = 10;
 
 VersionController::VersionController(KXMLGUIClient* guiClient)
-    : mModel(nullptr)
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 

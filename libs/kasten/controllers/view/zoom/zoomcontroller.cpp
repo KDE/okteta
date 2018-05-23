@@ -37,8 +37,6 @@
 namespace Kasten {
 
 ZoomController::ZoomController(KXMLGUIClient* guiClient)
-    : mModel(nullptr)
-    , mZoomControl(nullptr)
 {
     mZoomInAction = KStandardAction::zoomIn(  this, &ZoomController::zoomIn,  this);
     mZoomOutAction = KStandardAction::zoomOut(this, &ZoomController::zoomOut, this);

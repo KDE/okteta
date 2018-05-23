@@ -38,7 +38,7 @@ public:
     ValuesStreamEncoderSettings();
 
 public:
-    Okteta::ValueCoding valueCoding;
+    Okteta::ValueCoding valueCoding = Okteta::HexadecimalCoding;
     QString separation;
     QChar undefinedChar;
     QChar substituteChar;

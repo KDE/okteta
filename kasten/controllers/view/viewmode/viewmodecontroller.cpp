@@ -33,7 +33,6 @@
 namespace Kasten {
 
 ViewModeController::ViewModeController(KXMLGUIClient* guiClient)
-    : mByteArrayView(nullptr)
 {
     // view style
     mViewModeAction = new KSelectAction(i18nc("@title:menu", "&View Mode"), this);

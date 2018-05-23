@@ -40,8 +40,6 @@ OffsetColumnRenderer::OffsetColumnRenderer(AbstractColumnStylist* stylist,
                                            ByteArrayTableLayout* layout, OffsetFormat::Format format)
     : AbstractColumnRenderer(stylist)
     , mLayout(layout)
-    , mOffsetTextWidth(0)
-    , mDigitBaseLine(0)
     , mFormat(format)
     , PrintFunction(OffsetFormat::printFunction(format))
 {

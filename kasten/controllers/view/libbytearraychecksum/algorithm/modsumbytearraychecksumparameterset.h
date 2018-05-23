@@ -43,7 +43,7 @@ public:
     Endianness endianness() const;
 
 protected:
-    Endianness mEndianness;
+    Endianness mEndianness = ThisMachineEndianness;
 };
 
 #endif

@@ -31,7 +31,6 @@
 namespace Kasten {
 
 VersionViewTool::VersionViewTool()
-    : mModel(nullptr)
 {
     setObjectName(QStringLiteral("Versions"));
 }

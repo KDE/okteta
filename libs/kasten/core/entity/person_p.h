@@ -35,6 +35,8 @@ class Q_DECL_HIDDEN Person::Private : public QSharedData
 {
 public:
     Private(const QString& name, const QIcon& faceIcon);
+    Private() = delete;
+
     ~Private();
 
 public:
@@ -48,7 +50,8 @@ protected:
 
 inline Person::Private::Private(const QString& name, const QIcon& faceIcon)
     : mName(name)
-    , mFaceIcon(faceIcon) {}
+    , mFaceIcon(faceIcon)
+{}
 
 inline Person::Private::~Private() = default;
 

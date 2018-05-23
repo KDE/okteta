@@ -57,18 +57,15 @@ private Q_SLOTS: // test functions
 
 private: // used in all tests
     /** pointer to the class to test */
-    QObject* mObject;
-    Versionable* mVersionableControl;
+    QObject* mObject = nullptr;
+    Versionable* mVersionableControl = nullptr;
 
-    QSignalSpy* mRevertedToVersionIndexSpy;
-    QSignalSpy* mHeadVersionDescriptionChangedSpy;
-    QSignalSpy* mHeadVersionChangedSpy;
+    QSignalSpy* mRevertedToVersionIndexSpy = nullptr;
+    QSignalSpy* mHeadVersionDescriptionChangedSpy = nullptr;
+    QSignalSpy* mHeadVersionChangedSpy = nullptr;
 };
 
-inline VersionableIfTest::VersionableIfTest()
-    : mObject(nullptr)
-    , mVersionableControl(nullptr)
-{}
+inline VersionableIfTest::VersionableIfTest() = default;
 
 }
 

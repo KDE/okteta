@@ -56,7 +56,6 @@ InsertController::InsertController(ModelCodecViewManager* modelCodecViewManager,
     : AbstractXmlGuiController()
     , mModelCodecViewManager(modelCodecViewManager)
     , mModelCodecManager(modelCodecManager)
-    , mModel(nullptr)
 {
     mInsertSelectAction = new KSelectAction(i18nc("@title:menu", "Insert"), this);
 //     mInsertSelectAction->setIcon( QIcon::fromTheme( QStringLiteral("insert-text") ) );

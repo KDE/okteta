@@ -55,7 +55,7 @@ protected:
     const QByteArray mHeader;
     QFile* mFile;
 
-    bool mSuccess;
+    bool mSuccess = false;
     QByteArray mByteArray;
 };
 

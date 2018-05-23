@@ -50,7 +50,7 @@ private Q_SLOTS: // action slots
     void setOverwriteOnly(bool isOverwriteOnly);
 
 private:
-    Okteta::AbstractByteArrayModel* mByteArrayModel;
+    Okteta::AbstractByteArrayModel* mByteArrayModel = nullptr;
 
     KToggleAction* mSetOverwriteOnlyAction;
 };

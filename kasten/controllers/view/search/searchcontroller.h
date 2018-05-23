@@ -73,7 +73,7 @@ private:
     QAction* mFindNextAction;
     QAction* mFindPrevAction;
 
-    KSearchDialog* mSearchDialog;
+    KSearchDialog* mSearchDialog = nullptr;
     SearchTool* mTool;
 };
 

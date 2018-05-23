@@ -63,8 +63,8 @@ private:
     ModelCodecViewManager* mModelCodecViewManager;
     ModelCodecManager* mModelCodecManager;
 
-    AbstractModel* mModel;
-    If::SelectedDataWriteable* mSelectedDataWriteableControl;
+    AbstractModel* mModel = nullptr;
+    If::SelectedDataWriteable* mSelectedDataWriteableControl = nullptr;
 
     KSelectAction* mInsertSelectAction;
 };

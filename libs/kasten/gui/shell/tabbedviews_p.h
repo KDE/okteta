@@ -80,7 +80,7 @@ protected:
     ViewAreaBox* mViewAreaBox;
     TabWidget* mTabWidget;
 
-    AbstractView* mCurrentView;
+    AbstractView* mCurrentView = nullptr;
 };
 
 inline QWidget* TabbedViewsPrivate::widget() const { return mViewAreaBox; }

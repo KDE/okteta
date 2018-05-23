@@ -148,7 +148,7 @@ protected:
     int mWidth;
     QFont mFont;
 
-    Okteta::AbstractByteArrayModel* mByteArrayModel;
+    Okteta::AbstractByteArrayModel* mByteArrayModel = nullptr;
 
 protected:
     /** holds the logical layout */
@@ -169,7 +169,7 @@ protected:
     /** */
     Okteta::ValueCoding mValueCoding;
     /** */
-    Okteta::CharCodec* mCharCodec;
+    Okteta::CharCodec* mCharCodec = nullptr;
     /** */
     Okteta::CharCoding mCharCoding;
 

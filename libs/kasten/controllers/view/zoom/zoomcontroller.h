@@ -55,8 +55,8 @@ private Q_SLOTS:
     void onZoomLevelChange(double level);
 
 private:
-    AbstractModel* mModel;
-    If::Zoomable* mZoomControl;
+    AbstractModel* mModel = nullptr;
+    If::Zoomable* mZoomControl = nullptr;
 
     double mZoomLevel;
 

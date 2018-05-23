@@ -85,14 +85,14 @@ private Q_SLOTS:
     void onContentsChanged();
 
 private: // settings
-    int mTargetStart;
-    int mTargetEnd;
+    int mTargetStart = 0;
+    int mTargetEnd = -1;
     bool mIsEndRelative : 1;
     bool mIsEndBackwards : 1;
 
 private: // target
-    ByteArrayView* mByteArrayView;
-    Okteta::AbstractByteArrayModel* mByteArrayModel;
+    ByteArrayView* mByteArrayView = nullptr;
+    Okteta::AbstractByteArrayModel* mByteArrayModel = nullptr;
 };
 
 inline int SelectRangeTool::targetSelectionStart()   const { return mTargetStart; }

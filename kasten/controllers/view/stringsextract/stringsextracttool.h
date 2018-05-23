@@ -99,18 +99,18 @@ private: // settings
     int mMinLength;
 
 private: // sources
-    ByteArrayView* mByteArrayView;
+    ByteArrayView* mByteArrayView = nullptr;
     // current
-    Okteta::AbstractByteArrayModel* mByteArrayModel;
+    Okteta::AbstractByteArrayModel* mByteArrayModel = nullptr;
 
     // marked view
-    ByteArrayView* mSourceByteArrayView;
+    ByteArrayView* mSourceByteArrayView = nullptr;
     // selection source
     Okteta::AddressRange mSourceSelection;
     // source of strings
-    Okteta::AbstractByteArrayModel* mSourceByteArrayModel;
+    Okteta::AbstractByteArrayModel* mSourceByteArrayModel = nullptr;
     // minLength source
-    int mSourceMinLength;
+    int mSourceMinLength = 0;
 };
 
 inline const QList<ContainedString>* StringsExtractTool::containedStringList() const { return &mContainedStringList; }
