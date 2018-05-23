@@ -58,9 +58,8 @@ public:
 Q_SIGNALS: // TODO: add check for signal to tests
     void calculatedBytes(int bytes) const;
 
-protected:
-    class Private;
-    Private* const d;
+private:
+    QScopedPointer<class AbstractByteArrayChecksumAlgorithmPrivate> const d;
 };
 
 #endif

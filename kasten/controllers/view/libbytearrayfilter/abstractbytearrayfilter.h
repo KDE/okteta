@@ -59,9 +59,8 @@ public:
 Q_SIGNALS: // TODO: add check for signal to tests
     void filteredBytes(int bytes) const;
 
-protected:
-    class Private;
-    Private* const d;
+private:
+    QScopedPointer<class AbstractByteArrayFilterPrivate> const d;
 };
 
 #endif

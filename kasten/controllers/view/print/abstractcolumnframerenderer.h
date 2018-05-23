@@ -37,8 +37,6 @@ namespace Okteta {
 class AbstractColumnRenderer;
 }
 
-class AbstractColumnFrameRendererPrivate;
-
 /** class to render columns with the same lineheight for all lines
  *
  * lines are only completely rendered, so contentHeight <= framesCount*height
@@ -102,7 +100,7 @@ protected: // recalculations
     void updateWidths();
 
 private:
-    AbstractColumnFrameRendererPrivate* const d;
+    QScopedPointer<class AbstractColumnFrameRendererPrivate> const d;
 };
 
 #endif

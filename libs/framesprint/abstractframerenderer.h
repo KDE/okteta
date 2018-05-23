@@ -23,6 +23,8 @@
 #ifndef ABSTRACTFRAMERENDERER_H
 #define ABSTRACTFRAMERENDERER_H
 
+#include <QScopedPointer>
+
 class QSize;
 class QPoint;
 class QRect;
@@ -60,9 +62,8 @@ public:
     int x() const;
     int y() const;
 
-protected:
-    class Private;
-    Private* const d;
+private:
+    QScopedPointer<class AbstractFrameRendererPrivate> const d;
 };
 
 #endif

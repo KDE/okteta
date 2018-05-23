@@ -22,18 +22,15 @@
 
 #include "abstractbytearraychecksumparametersetedit.h"
 
-class AbstractByteArrayChecksumParameterSetEdit::Private
+class AbstractByteArrayChecksumParameterSetEditPrivate
 {
 };
 
 AbstractByteArrayChecksumParameterSetEdit::AbstractByteArrayChecksumParameterSetEdit(QWidget* parent)
     : QWidget(parent)
-    , d(new Private())
+    , d(new AbstractByteArrayChecksumParameterSetEditPrivate())
 {}
 
-AbstractByteArrayChecksumParameterSetEdit::~AbstractByteArrayChecksumParameterSetEdit()
-{
-    delete d;
-}
+AbstractByteArrayChecksumParameterSetEdit::~AbstractByteArrayChecksumParameterSetEdit() = default;
 
 bool AbstractByteArrayChecksumParameterSetEdit::isValid() const { return true; }

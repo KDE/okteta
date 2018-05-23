@@ -23,6 +23,8 @@
 #ifndef ABSTRACTBYTEARRAYFILTERPARAMETERSET_H
 #define ABSTRACTBYTEARRAYFILTERPARAMETERSET_H
 
+#include <QScopedPointer>
+
 class AbstractByteArrayFilterParameterSet
 {
 protected:
@@ -34,9 +36,8 @@ public:
 public:
     virtual const char* id() const = 0;
 
-protected:
-    class Private;
-    Private* const d;
+private:
+    QScopedPointer<class AbstractByteArrayFilterParameterSetPrivate> const d;
 };
 
 #endif

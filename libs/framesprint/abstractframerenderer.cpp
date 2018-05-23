@@ -27,19 +27,19 @@
 #include <QSize>
 #include <QRect>
 
-class AbstractFrameRenderer::Private
+class AbstractFrameRendererPrivate
 {
 public:
-    Private();
+    AbstractFrameRendererPrivate();
 
 public:
     int mX = 0;
     int mY = 0;
 };
-AbstractFrameRenderer::Private::Private() = default;
+AbstractFrameRendererPrivate::AbstractFrameRendererPrivate() = default;
 
-AbstractFrameRenderer::AbstractFrameRenderer() : d(new Private()) {}
-AbstractFrameRenderer::~AbstractFrameRenderer() { delete d; }
+AbstractFrameRenderer::AbstractFrameRenderer() : d(new AbstractFrameRendererPrivate()) {}
+AbstractFrameRenderer::~AbstractFrameRenderer() = default;
 
 QPoint AbstractFrameRenderer::pos() const { return {d->mX, d->mY}; }
 QSize AbstractFrameRenderer::size() const { return {width(), height()}; }

@@ -50,9 +50,8 @@ Q_SIGNALS:
     // TODO: hack, see checksum source
     void valuesChanged();
 
-protected:
-    class Private;
-    Private* const d;
+private:
+    QScopedPointer<class AbstractByteArrayChecksumParameterSetEditPrivate> const d;
 };
 
 #endif

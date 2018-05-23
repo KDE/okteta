@@ -72,10 +72,7 @@ AbstractColumnFrameRenderer::AbstractColumnFrameRenderer()
 {
 }
 
-AbstractColumnFrameRenderer::~AbstractColumnFrameRenderer()
-{
-    delete d;
-}
+AbstractColumnFrameRenderer::~AbstractColumnFrameRenderer() = default;
 
 Okteta::LineSize AbstractColumnFrameRenderer::noOfLines()          const { return d->mNoOfLines; }
 Okteta::PixelY AbstractColumnFrameRenderer::lineHeight()     const { return d->mLineHeight; }

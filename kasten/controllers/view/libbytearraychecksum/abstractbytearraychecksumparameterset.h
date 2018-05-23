@@ -23,6 +23,8 @@
 #ifndef ABSTRACTBYTEARRAYCHECKSUMPARAMETERSET_H
 #define ABSTRACTBYTEARRAYCHECKSUMPARAMETERSET_H
 
+#include <QScopedPointer>
+
 class AbstractByteArrayChecksumParameterSet
 {
 protected:
@@ -34,9 +36,8 @@ public:
 public:
     virtual const char* id() const = 0;
 
-protected:
-    class Private;
-    Private* const d;
+private:
+    QScopedPointer<class AbstractByteArrayChecksumParameterSetPrivate> const d;
 };
 
 #endif

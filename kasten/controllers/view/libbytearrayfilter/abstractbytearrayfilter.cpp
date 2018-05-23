@@ -25,10 +25,10 @@
 // Qt
 #include <QString>
 
-class AbstractByteArrayFilter::Private
+class AbstractByteArrayFilterPrivate
 {
 public:
-    explicit Private(const QString& name);
+    explicit AbstractByteArrayFilterPrivate(const QString& name);
 
 public:
     QString name() const;
@@ -37,19 +37,16 @@ protected:
     const QString mName;
 };
 
-inline AbstractByteArrayFilter::Private::Private(const QString& name)
+inline AbstractByteArrayFilterPrivate::AbstractByteArrayFilterPrivate(const QString& name)
     : mName(name)
 {}
 
-inline QString AbstractByteArrayFilter::Private::name() const { return mName; }
+inline QString AbstractByteArrayFilterPrivate::name() const { return mName; }
 
 AbstractByteArrayFilter::AbstractByteArrayFilter(const QString& name)
-    : d(new Private(name))
+    : d(new AbstractByteArrayFilterPrivate(name))
 {}
 
-AbstractByteArrayFilter::~AbstractByteArrayFilter()
-{
-    delete d;
-}
+AbstractByteArrayFilter::~AbstractByteArrayFilter() = default;
 
 QString AbstractByteArrayFilter::name() const { return d->name(); }
