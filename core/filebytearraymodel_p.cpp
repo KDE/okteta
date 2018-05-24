@@ -80,10 +80,7 @@ bool FileByteArrayModelPrivate::open(const QString& fileName)
     int noOfPages = fileSize / mPageSize + 1;
 
     // initialize Page pointers
-    mData.resize(noOfPages);
-    for (KPageOfChar::iterator D = mData.begin(); D != mData.end(); ++D) {
-        *D = nullptr;
-    }
+    mData.fill(nullptr, noOfPages);
 
     mFirstPage = mLastPage = 0;
 
@@ -103,9 +100,10 @@ bool FileByteArrayModelPrivate::close()
     }
 
     // free pages
-    for (KPageOfChar::iterator D = mData.begin(); D != mData.end(); ++D) {
-        delete [] *D;
-    }
+    std::for_each(mData.begin(), mData.end(), [](char*& pageData) {
+        delete [] pageData;
+        pageData = nullptr;
+    });
 
     mFirstPage = mLastPage = -1;
     mNoOfFreePages = mNoOfUsedPages;

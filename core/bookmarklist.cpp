@@ -176,10 +176,11 @@ QList<Okteta::Bookmark> BookmarkList::list() const
 const Bookmark& BookmarkList::bookmark(Address offset) const
 {
     const ConstIterator endIt = end();
-    for (ConstIterator it = begin(); it != endIt; ++it) {
-        if (it->offset() == offset) {
-            return *it;
-        }
+    auto it = std::find_if(begin(), endIt, [offset](const Bookmark& bookmark) {
+        return (bookmark.offset() == offset);
+    });
+    if (it != endIt) {
+        return *it;
     }
 
     static const Bookmark* const noBookmark = nullptr;
@@ -189,17 +190,9 @@ const Bookmark& BookmarkList::bookmark(Address offset) const
 
 bool BookmarkList::contains(Address offset) const
 {
-    bool result = false;
-
-    const_iterator B = begin();
-    for (; B != end(); ++B) {
-        if (B->offset() == offset) {
-            result = true;
-            break;
-        }
-    }
-
-    return result;
+    return std::any_of(begin(), end(), [offset](const Bookmark& bookmark) {
+        return (bookmark.offset() == offset);
+    });
 }
 
 const Bookmark& BookmarkList::at(unsigned int index) const

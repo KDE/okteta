@@ -216,20 +216,17 @@ void ByteArrayViewProfileManager::saveViewProfiles(QList<ByteArrayViewProfile>& 
 {
     // TODO: do not save if locked by someone else -> needs passing of our lock? or just registering our own and check?
     // create and set unique id
-    for (QList<ByteArrayViewProfile>::Iterator it = viewProfiles.begin(); it != viewProfiles.end(); ++it) {
-        ByteArrayViewProfile& viewProfile = *it;
+    std::for_each(viewProfiles.begin(), viewProfiles.end(), [this](ByteArrayViewProfile& viewProfile) {
         const ByteArrayViewProfile::Id viewProfileId = viewProfile.id();
 
         bool needsId = true;
         if (!viewProfileId.isEmpty()) {
             // already existing?
-            QList<ByteArrayViewProfile>::ConstIterator existingIt = mViewProfiles.constBegin();
-            QList<ByteArrayViewProfile>::ConstIterator existingEnd = mViewProfiles.constEnd();
-            for (; existingIt != existingEnd; ++existingIt) {
-                if (viewProfileId == existingIt->id()) {
-                    needsId = false;
-                    break;
-                }
+            auto hasViewProfileId = [&viewProfileId] (const ByteArrayViewProfile& existingProfile) {
+                return (viewProfileId == existingProfile.id());
+            };
+            if (std::any_of(mViewProfiles.constBegin(), mViewProfiles.constEnd(), hasViewProfileId)) {
+                needsId = false;
             }
         }
 
@@ -239,7 +236,7 @@ void ByteArrayViewProfileManager::saveViewProfiles(QList<ByteArrayViewProfile>& 
         }
 
         saveViewProfile(viewProfile);
-    }
+    });
 }
 
 void
@@ -474,13 +471,12 @@ ByteArrayViewProfileManager::onViewProfilesFolderChanged(const QString& viewProf
         }
 
         if (isKnown) {
-            QList<ByteArrayViewProfile>::Iterator it = mViewProfiles.begin();
-            QList<ByteArrayViewProfile>::Iterator end = mViewProfiles.end();
-            for (; it != end; ++it) {
-                if (it->id() == viewProfileId) {
-                    *it = viewProfile;
-                    break;
-                }
+            auto it = std::find_if(mViewProfiles.begin(), mViewProfiles.end(),
+                                   [&viewProfileId](const ByteArrayViewProfile& existingProfile) {
+                return (existingProfile.id() == viewProfileId);
+            });
+            if (it != mViewProfiles.end()) {
+                *it = viewProfile;
             }
         } else {
             newViewProfiles.append(viewProfile);
@@ -490,16 +486,13 @@ ByteArrayViewProfileManager::onViewProfilesFolderChanged(const QString& viewProf
 
     // remove all removed viewprofiles
     {
-        QList<ByteArrayViewProfile>::Iterator it = mViewProfiles.begin();
-        while (it != mViewProfiles.end()) {
-            // contained in removed?
-            if (removedViewProfileIds.contains(it->id())) {
-                it = mViewProfiles.erase(it);
-            } else {
-                ++it;
-            }
-        }
+        auto isProfileToRemove = [&removedViewProfileIds](const ByteArrayViewProfile& profile) {
+            return removedViewProfileIds.contains(profile.id());
+        };
+        mViewProfiles.erase(std::remove_if(mViewProfiles.begin(), mViewProfiles.end(), isProfileToRemove),
+                            mViewProfiles.end());
     }
+
     for (const ByteArrayViewProfile::Id& viewProfileId : qAsConst(removedViewProfileIds)) {
         viewProfileFileInfoLookup.remove(viewProfileId);
         if (viewProfileId == mDefaultViewProfileId) {

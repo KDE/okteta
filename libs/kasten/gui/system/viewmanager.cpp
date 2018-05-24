@@ -60,17 +60,11 @@ QList<AbstractView*> ViewManager::views() const
 
 AbstractView* ViewManager::viewByWidget(QWidget* widget) const
 {
-    AbstractView* result = nullptr;
+    auto it = std::find_if(mViewList.constBegin(), mViewList.constEnd(), [widget](AbstractView* view) {
+        return (view->widget() == widget);
+    });
 
-    QListIterator<AbstractView*> it(mViewList);
-    while (it.hasNext()) {
-        AbstractView* view = it.next();
-        if (view->widget() == widget) {
-            result = view;
-            break;
-        }
-    }
-    return result;
+    return (it != mViewList.constEnd()) ? *it : nullptr;
 }
 
 void ViewManager::createCopyOfView(AbstractView* view, Qt::Alignment alignment)

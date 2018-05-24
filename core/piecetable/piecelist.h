@@ -91,9 +91,9 @@ inline void PieceList::append(const PieceList& other)
         ++it;
     }
 
-    for (; it != other.mList.end(); ++it) {
-        mList.append(*it);
-    }
+    std::for_each(it, other.mList.end(), [this](const Piece& piece) {
+        mList.append(piece);
+    });
 // was:     mList += other.mList;
 
     mTotalLength += other.mTotalLength;
@@ -112,9 +112,9 @@ inline void PieceList::prepend(const PieceList& other)
         ++it;
     }
 
-    for (; it != mList.end(); ++it) {
-        otherCopy.append(*it);
-    }
+    std::for_each(it, mList.end(), [&otherCopy](const Piece& piece) mutable {
+        otherCopy.append(piece);
+    });
 
     mList = otherCopy;
 // was:     mList = other.mList + mList;

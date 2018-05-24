@@ -238,9 +238,9 @@ PieceList PieceTable::remove(const AddressRange& removeRange)
                         ++lastRemoved;
                     }
 
-                    for (QLinkedList<Piece>::Iterator it = firstRemoved; it != lastRemoved; ++it) {
-                        removedPieceList.append(*it);
-                    }
+                    std::for_each(firstRemoved, lastRemoved, [&removedPieceList](const Piece& piece) mutable {
+                        removedPieceList.append(piece);
+                    });
 
                     if (removedPartialPieceFromLast.isValid()) {
                         removedPieceList.append(removedPartialPieceFromLast);

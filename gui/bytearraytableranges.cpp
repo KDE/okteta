@@ -228,14 +228,14 @@ bool ByteArrayTableRanges::overlapsChanges( AddressRange Indizes, AddressRange *
 bool ByteArrayTableRanges::overlapsChanges(const CoordRange& Range, CoordRange* ChangedRange) const
 {
     // TODO: add a lastusedrange pointer for quicker access
-    for (CoordRangeList::ConstIterator R = ChangedRanges.begin(); R != ChangedRanges.end(); ++R) {
-        if ((*R).overlaps(Range)) {
-            *ChangedRange = *R;
+    return std::any_of(ChangedRanges.begin(), ChangedRanges.end(),
+                       [Range, ChangedRange](const CoordRange& changedRange) mutable {
+        if (changedRange.overlaps(Range)) {
+            *ChangedRange = changedRange;
             return true;
         }
-    }
-
-    return false;
+        return false;
+    });
 }
 
 void ByteArrayTableRanges::addChangedOffsetLines(const LineRange& changedLines)
