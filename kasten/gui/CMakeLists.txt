@@ -23,11 +23,7 @@ include_directories(
   liboktetawidgets
 )
 
-# if(KDE4_BUILD_TESTS)
-#   add_subdirectory(tests)
-# endif(KDE4_BUILD_TESTS)
-
-set( oktetawidgets_LIB_SRCS
+set( liboktetawidgets_SRCS
   liboktetawidgets/bytearrayvalidator.cpp
   liboktetawidgets/bytearraycombobox_p.cpp
   liboktetawidgets/bytearraycombobox.cpp
@@ -35,7 +31,7 @@ set( oktetawidgets_LIB_SRCS
   liboktetawidgets/addresscombobox_p.cpp
   liboktetawidgets/addresscombobox.cpp
 )
-oktetakastengui_generate_headers(oktetawidgets liboktetawidgets
+oktetakastengui_generate_headers(liboktetawidgets liboktetawidgets
   AddressValidator
   AddressComboBox
   ByteArrayComboBox
@@ -202,7 +198,7 @@ ecm_generate_headers(okteta_kastengui_CCHDRS
 )
 
 set( okteta_kastengui_LIB_SRCS
-  ${oktetawidgets_LIB_SRCS}
+  ${liboktetawidgets_SRCS}
   ${okteta_kastengui_SRCS}
   ${okteta_kastengui_view_SRCS}
   ${okteta_kastengui_io_SRCS}
@@ -211,14 +207,14 @@ set( okteta_kastengui_LIB_SRCS
 
 set( okteta_kastengui_LIB_HDRS
   ${CMAKE_CURRENT_BINARY_DIR}/kasten/okteta/oktetakastengui_export.h
-  ${oktetawidgets_LIB_HDRS}
+  ${liboktetawidgets_HDRS}
   ${okteta_kastengui_HDRS}
   ${okteta_kastengui_view_HDRS}
   ${okteta_kastengui_io_HDRS}
   ${okteta_kastengui_system_HDRS}
 )
 set( okteta_kastengui_LIB_CCHDRS
-  ${oktetawidgets_LIB_CCHDRS}
+  ${liboktetawidgets_CCHDRS}
   ${okteta_kastengui_CCHDRS}
   ${okteta_kastengui_view_CCHDRS}
   ${okteta_kastengui_io_CCHDRS}
