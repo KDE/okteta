@@ -23,10 +23,6 @@ include_directories(
   liboktetawidgets
 )
 
-# if(KDE4_BUILD_TESTS)
-#   add_subdirectory(tests)
-# endif(KDE4_BUILD_TESTS)
-
 set( oktetawidgets_LIB_SRCS
   liboktetawidgets/bytearrayvalidator.cpp
   liboktetawidgets/bytearraycombobox_p.cpp
