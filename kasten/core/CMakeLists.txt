@@ -10,124 +10,68 @@ include_directories(
   document
 )
 
-set( okteta_kastencore_document_SRCS
-  document/bytearraydocumentfactory.cpp
-  document/bytearraydocument.cpp
-  document/bytearrayselection.cpp
-)
-ecm_generate_headers(OKTETA_KASTEN_CORE_DOCUMENT_CCHDRS
-  HEADER_NAMES
-    ByteArrayDocumentFactory
-    ByteArrayDocument
-    ByteArraySelection
-  RELATIVE document
-  PREFIX Kasten/Okteta
-  REQUIRED_HEADERS OKTETA_KASTEN_CORE_DOCUMENT_HDRS
+macro(OKTETAKASTENCORE_ADD_SUBLIBRARY _subdir)
+    okteta_add_sublibrary(Core NAMESPACE Okteta Kasten
+        REVERSE_NAMESPACE_INCLUDEDIR
+        SUBDIR ${_subdir}
+        ${ARGN}
+    )
+endmacro()
+
+oktetakastencore_add_sublibrary(document
+    PUBLIC
+        ByteArrayDocument
+        ByteArrayDocumentFactory
+        ByteArraySelection
 )
 
-set( okteta_kastencore_io_filesystem_SRCS
-#   io/filesystem/externalbookmarkstorage.cpp
-  io/filesystem/bytearrayrawfileloadthread.cpp
-  io/filesystem/bytearrayrawfilereloadthread.cpp
-  io/filesystem/bytearrayrawfilewritethread.cpp
-  io/filesystem/bytearrayrawfileloadjob.cpp
-  io/filesystem/bytearrayrawfileconnectjob.cpp
-  io/filesystem/bytearrayrawfilewritejob.cpp
-  io/filesystem/bytearrayrawfilereloadjob.cpp
-  io/filesystem/bytearrayrawfilewritetojob.cpp
-  io/filesystem/bytearrayrawfilesynchronizer.cpp
-  io/filesystem/bytearrayrawfilesynchronizerfactory.cpp
-)
-ecm_generate_headers(OKTETA_KASTEN_CORE_IO_FILESYSTEM_CCHDRS
-  HEADER_NAMES
-    ByteArrayRawFileSynchronizer
-    ByteArrayRawFileSynchronizerFactory
-  RELATIVE io/filesystem
-  PREFIX Kasten/Okteta
-  REQUIRED_HEADERS OKTETA_KASTEN_CORE_IO_FILESYSTEM_HDRS
+oktetakastencore_add_sublibrary(io/filesystem
+    PUBLIC
+        ByteArrayRawFileSynchronizer
+        ByteArrayRawFileSynchronizerFactory
+    PRIVATE
+        #   io/filesystem/externalbookmarkstorage
+        ByteArrayRawFileLoadThread
+        ByteArrayRawFilereloadThread
+        ByteArrayRawFilewriteThread
+        ByteArrayRawFileLoadJob
+        ByteArrayRawFileConnectjob
+        ByteArrayRawFileWriteJob
+        ByteArrayRawFileReloadJob
+        ByteArrayRawFileWriteToJob
 )
 
 
-set( okteta_kastencore_io_SRCS
-  ${okteta_kastencore_io_filesystem_SRCS}
-)
-set( OKTETA_KASTEN_CORE_IO_HDRS
-  ${OKTETA_KASTEN_CORE_IO_FILESYSTEM_HDRS}
-)
-set( OKTETA_KASTEN_CORE_IO_CCHDRS
-  ${OKTETA_KASTEN_CORE_IO_FILESYSTEM_CCHDRS}
-)
-
-set( okteta_kastencore_LIB_SRCS
-  ${okteta_kastencore_document_SRCS}
-  ${okteta_kastencore_io_SRCS}
-)
-
-set( okteta_kastencore_LIB_HDRS
-  ${CMAKE_CURRENT_BINARY_DIR}/kasten/okteta/oktetakastencore_export.h
-  ${OKTETA_KASTEN_CORE_DOCUMENT_HDRS}
-  ${OKTETA_KASTEN_CORE_IO_HDRS}
-)
-
-set( okteta_kastencore_LIB_CCHDRS
-  ${OKTETA_KASTEN_CORE_DOCUMENT_CCHDRS}
-  ${OKTETA_KASTEN_CORE_IO_CCHDRS}
+okteta_add_library(Core NAMESPACE Okteta Kasten
+    PUBLIC
+        KastenCore
+        OktetaCore
+    PRIVATE
+        KF5::I18n
+        KF5::Bookmarks
+    VERSION     ${OKTETAKASTENCORE_VERSION}
+    SOVERSION   ${OKTETAKASTENCORE_SOVERSION}
+    ABIVERSION  ${OKTETAKASTEN_ABI_VERSION} ${KASTEN_ABI_VERSION}
+    SOURCES   ${oktetakastencore_LIB_SRCS}
+    HEADERS   ${oktetakastencore_LIB_HDRS}
+    CCHEADERS ${oktetakastencore_LIB_CCHDRS}
+    INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR}
+    NO_TARGET_NAMESPACE
+    NO_VERSIONED_INCLUDEDIR
+    REVERSE_NAMESPACE_INCLUDEDIR
+    LOWERCASE_LIB
+    REVERSE_NAMESPACE_LIB
+    EXPORT OktetaKastenCoreTargets
 )
 
-add_library( OktetaKastenCore  SHARED ${okteta_kastencore_LIB_SRCS} )
-
-generate_export_header( OktetaKastenCore EXPORT_FILE_NAME ${CMAKE_CURRENT_BINARY_DIR}/kasten/okteta/oktetakastencore_export.h)
-
-target_link_libraries( OktetaKastenCore
-PUBLIC
-  KastenCore
-  OktetaCore
-PRIVATE
-  KF5::I18n
-  KF5::Bookmarks
+okteta_add_cmakeconfig(Core NAMESPACE Okteta Kasten
+    NO_TARGET_NAMESPACE
+    CONFIG_TEMPLATE "${CMAKE_CURRENT_SOURCE_DIR}/OktetaKastenCoreConfig.cmake.in"
+    EXPORT OktetaKastenCoreTargets
+#     ABIVERSION ${KASTEN_ABI_VERSION}
+    FILES
+        "${CMAKE_CURRENT_BINARY_DIR}/OktetaKastenCoreConfigVersion.cmake"
 )
-
-target_include_directories(OktetaKastenCore PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>")
-
-set_target_properties( OktetaKastenCore PROPERTIES
-  EXPORT_NAME "OktetaKastenCore"
-  OUTPUT_NAME kasten${KASTEN_ABI_VERSION}okteta${OKTETAKASTEN_ABI_VERSION}core
-  VERSION     ${OKTETAKASTENCORE_VERSION}
-  SOVERSION   ${OKTETAKASTENCORE_SOVERSION}
-)
-
-install( TARGETS OktetaKastenCore  EXPORT OktetaKastenCoreTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
-
-install( FILES ${okteta_kastencore_LIB_HDRS}
-  DESTINATION ${OKTETAKASTEN_INCLUDE_INSTALL_DIR}
-  COMPONENT Devel
-)
-install( FILES ${okteta_kastencore_LIB_CCHDRS}
-  DESTINATION ${OKTETAKASTEN_CCINCLUDE_INSTALL_DIR}
-  COMPONENT Devel
-)
-
-# create a Config.cmake and a ConfigVersion.cmake file and install them
-set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/OktetaKastenCore")
-
-configure_package_config_file(
-  "${CMAKE_CURRENT_SOURCE_DIR}/OktetaKastenCoreConfig.cmake.in"
-  "${CMAKE_CURRENT_BINARY_DIR}/OktetaKastenCoreConfig.cmake"
-  INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR}
-)
-
-install( FILES
-    "${CMAKE_CURRENT_BINARY_DIR}/OktetaKastenCoreConfig.cmake"
-    "${CMAKE_CURRENT_BINARY_DIR}/OktetaKastenCoreConfigVersion.cmake"
-  DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
-  COMPONENT Devel
-)
-
-install(EXPORT OktetaKastenCoreTargets
-  DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
-  FILE OktetaKastenCoreTargets.cmake
-)
-
 
 if(BUILD_TESTING)
   add_subdirectory(document/tests)

@@ -27,6 +27,14 @@ include_directories(
 set(HAVE_QCA2 ${Qca-qt5_FOUND})
 configure_file( config-qca2.h.cmake  ${CMAKE_CURRENT_BINARY_DIR}/config-qca2.h )
 
+macro(OKTETAKASTENCONTROLLERS_ADD_SUBLIBRARY _subdir)
+    okteta_add_sublibrary(Controllers NAMESPACE Okteta Kasten
+        REVERSE_NAMESPACE_INCLUDEDIR
+        SUBDIR ${_subdir}
+        ${ARGN}
+    )
+endmacro()
+
 set( DOCUMENTINFOCONTROLLER_SRCS
   document/info/bytearraymodeliodevice.cpp
   document/info/documentinfotool.cpp
@@ -571,7 +579,6 @@ if(BUILD_TESTING)
 endif()
 
 set( okteta_kastencontrollers_LIB_HDRS
-  ${CMAKE_CURRENT_BINARY_DIR}/kasten/okteta/oktetakastencontrollers_export.h
   ${CMAKE_CURRENT_BINARY_DIR}/config-qca2.h
 #   ${overwriteonlycontroller_HDRS}
   ${overwritemodecontroller_HDRS}
@@ -625,54 +632,47 @@ set( okteta_kastencontrollers_LIB_CCHDRS
   ${structureview_other_CCHDRS}
 )
 
-add_library( OktetaKastenControllers  SHARED ${OKTETA_KASTEN_CONTROLLERS_SRCS} )
-
-generate_export_header( OktetaKastenControllers EXPORT_FILE_NAME ${CMAKE_CURRENT_BINARY_DIR}/kasten/okteta/oktetakastencontrollers_export.h )
-
-target_link_libraries( OktetaKastenControllers
-PUBLIC
-  OktetaKastenGui
-  OktetaKastenCore
-  KastenGui
-  KastenCore
-PRIVATE
-  structureview-tested-srcs
-  poddecoder-typeeditors
-  KF5::NewStuff
-  KF5::I18n
-  KF5::ConfigWidgets
-  KF5::KCMUtils
-  KF5::IconThemes
-  KF5::Completion
-  Qt5::PrintSupport
-  Qt5::Script
-)
+set(OPTIONAL_PRIVATE)
 if( Qca-qt5_FOUND )
-  target_link_libraries( OktetaKastenControllers
-  PRIVATE
-    qca-qt5
-  )
+    set(OPTIONAL_PRIVATE qca-qt5)
 endif( Qca-qt5_FOUND )
 
-target_include_directories(OktetaKastenControllers PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>")
 
-set_target_properties( OktetaKastenControllers  PROPERTIES
-  EXPORT_NAME "OktetaKastenControllers"
-  OUTPUT_NAME kasten${KASTEN_ABI_VERSION}okteta${OKTETAKASTEN_ABI_VERSION}controllers
-  VERSION     ${OKTETAKASTENCONTROLLERS_VERSION}
-  SOVERSION   ${OKTETAKASTENCONTROLLERS_SOVERSION}
+okteta_add_library(Controllers NAMESPACE Okteta Kasten
+    PUBLIC
+        OktetaKastenGui
+        OktetaKastenCore
+        KastenGui
+        KastenCore
+    PRIVATE
+        structureview-tested-srcs
+        poddecoder-typeeditors
+        KF5::NewStuff
+        KF5::I18n
+        KF5::ConfigWidgets
+        KF5::KCMUtils
+        KF5::IconThemes
+        KF5::Completion
+        Qt5::PrintSupport
+        Qt5::Script
+        ${OPTIONAL_PRIVATE}
+    VERSION     ${OKTETAKASTENCONTROLLERS_VERSION}
+    SOVERSION   ${OKTETAKASTENCONTROLLERS_SOVERSION}
+    ABIVERSION  ${OKTETAKASTEN_ABI_VERSION} ${KASTEN_ABI_VERSION}
+    SOURCES   ${OKTETA_KASTEN_CONTROLLERS_SRCS}
+    HEADERS   ${okteta_kastencontrollers_LIB_HDRS}
+    CCHEADERS ${okteta_kastencontrollers_LIB_CCHDRS}
+    INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR}
+    NO_VERSIONED_INCLUDEDIR
+    REVERSE_NAMESPACE_INCLUDEDIR
+    LOWERCASE_LIB
+    REVERSE_NAMESPACE_LIB
+    NO_TARGET_NAMESPACE
+    EXPORT OktetaKastenControllersTargets
 )
 
-install( TARGETS OktetaKastenControllers  EXPORT OktetaKastenControllersTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
-install( FILES ${okteta_kastencontrollers_LIB_HDRS}
-  DESTINATION ${OKTETAKASTEN_INCLUDE_INSTALL_DIR}
-  COMPONENT Devel
-)
-install( FILES ${okteta_kastencontrollers_LIB_CCHDRS}
-  DESTINATION ${OKTETAKASTEN_CCINCLUDE_INSTALL_DIR}
-  COMPONENT Devel
-)
+
 install( FILES view/structures/kns/okteta-structures.knsrc  DESTINATION  ${KDE_INSTALL_CONFDIR} )
 
 set( elf_structure_FILES
@@ -693,25 +693,13 @@ configure_file( view/structures/struct2osd.in ${CMAKE_CURRENT_BINARY_DIR}/struct
 install( PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/struct2osd DESTINATION ${KDE_INSTALL_BINDIR} )
 install( FILES view/structures/gccxml-to-osd.xsl DESTINATION ${KDE_INSTALL_DATADIR}/okteta/structures/ )
 
-# create a Config.cmake and a ConfigVersion.cmake file and install them
-set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/OktetaKastenControllers")
-
-configure_package_config_file(
-  "${CMAKE_CURRENT_SOURCE_DIR}/OktetaKastenControllersConfig.cmake.in"
-  "${CMAKE_CURRENT_BINARY_DIR}/OktetaKastenControllersConfig.cmake"
-  INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR}
-)
-
-install( FILES
-    "${CMAKE_CURRENT_BINARY_DIR}/OktetaKastenControllersConfig.cmake"
-    "${CMAKE_CURRENT_BINARY_DIR}/OktetaKastenControllersConfigVersion.cmake"
-  DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
-  COMPONENT Devel
-)
-
-install(EXPORT OktetaKastenControllersTargets
-  DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
-  FILE OktetaKastenControllersTargets.cmake
+okteta_add_cmakeconfig(Controllers NAMESPACE Okteta Kasten
+    NO_TARGET_NAMESPACE
+    CONFIG_TEMPLATE "${CMAKE_CURRENT_SOURCE_DIR}/OktetaKastenControllersConfig.cmake.in"
+    EXPORT OktetaKastenControllersTargets
+#     ABIVERSION ${KASTEN_ABI_VERSION}
+    FILES
+        "${CMAKE_CURRENT_BINARY_DIR}/OktetaKastenControllersConfigVersion.cmake"
 )
 
 

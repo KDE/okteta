@@ -7,238 +7,122 @@ ecm_setup_version( ${KASTEN_LIB_VERSION}
 add_definitions(-DTRANSLATION_DOMAIN=\"libkasten\")
 
 include_directories(
-  entity
-  document
-  io
-  io/filesystem
-  system
+    entity
+    document
+    io
+    io/filesystem
+    system
 )
 
-set( KASTEN_CORE_ENTITY_SRCS
-#   entity/group.cpp
-  entity/person.cpp
-#   entity/abstractentity.cpp
-)
-ecm_generate_headers(KASTEN_CORE_ENTITY_CCHDRS
-  HEADER_NAMES
-    Person
-  RELATIVE entity
-  PREFIX Kasten
-  REQUIRED_HEADERS KASTEN_CORE_ENTITY_HDRS
+macro(KASTENCORE_ADD_SUBLIBRARY _subdir)
+    okteta_add_sublibrary(Core  NAMESPACE Kasten
+        SUBDIR ${_subdir}
+        ${ARGN}
+    )
+endmacro()
+
+kastencore_add_sublibrary(entity
+    PUBLIC
+#         AbstractEntity
+#         Group
+        Person
 )
 
-set( KASTEN_CORE_DOCUMENT_SRCS
-  document/abstractmodel.cpp
-  document/abstractmodelselection.cpp
-  document/abstracttool.cpp
-  document/abstractdocument.cpp
-  document/abstractdocumentfactory.cpp
-  document/documentversiondata.cpp
-)
-set( KASTEN_CORE_DOCUMENT_HDRS
-  document/documentversionid.h
-)
-ecm_generate_headers(KASTEN_CORE_DOCUMENT_CCHDRS
-  HEADER_NAMES
-    AbstractModel
-    AbstractModelSelection
-    AbstractDocument
-    AbstractDocumentFactory
-    AbstractTool
-    AbstractToolFactory
-    DocumentVersionId
-    DocumentVersionData
-    Versionable
-    UserListable
-  RELATIVE document
-  PREFIX Kasten
-  REQUIRED_HEADERS KASTEN_CORE_DOCUMENT_HDRS
+kastencore_add_sublibrary(document
+    PUBLIC
+        Versionable
+        UserListable
+
+        AbstractModel
+        AbstractModelSelection
+        AbstractDocument
+        AbstractDocumentFactory
+        AbstractTool
+        AbstractToolFactory
+
+        DocumentVersionId
+        DocumentVersionData
 )
 
-set( KASTEN_CORE_IO_SRCS
-  io/abstractloadjob.cpp
-  io/abstractconnectjob.cpp
-  io/abstractsynctoremotejob.cpp
-  io/abstractsyncfromremotejob.cpp
-  io/abstractsyncwithremotejob.cpp
-  io/abstractmodelstreamencoder.cpp
-  io/abstractexportjob.cpp
-  io/abstractmodelexporter.cpp
-  io/modeldatageneratethread.cpp
-  io/abstractmodeldatagenerator.cpp
-  io/modelstreamencodethread.cpp
-  io/abstractmodelsynchronizer.cpp
-  io/abstractmodelsynchronizerfactory.cpp
-)
-ecm_generate_headers(KASTEN_CORE_IO_CCHDRS
-  HEADER_NAMES
-    AbstractSyncToRemoteJob
-    AbstractModelSynchronizer
-    AbstractSyncWithRemoteJob
-    AbstractSyncFromRemoteJob
-    AbstractConnectJob
-    AbstractModelStreamEncoder
-    AbstractModelDataGenerator
-    AbstractExportJob
-    AbstractModelExporter
-    ModelStreamEncodeThread
-    ModelDataGenerateThread
-    AbstractLoadJob
-    AbstractModelSynchronizerFactory
-  RELATIVE io
-  PREFIX Kasten
-  REQUIRED_HEADERS KASTEN_CORE_IO_HDRS
+kastencore_add_sublibrary(io
+    PUBLIC
+        AbstractSyncToRemoteJob
+        AbstractModelSynchronizer
+        AbstractSyncWithRemoteJob
+        AbstractSyncFromRemoteJob
+        AbstractConnectJob
+        AbstractModelStreamEncoder
+        AbstractModelDataGenerator
+        AbstractExportJob
+        AbstractModelExporter
+        ModelStreamEncodeThread
+        ModelDataGenerateThread
+        AbstractLoadJob
+        AbstractModelSynchronizerFactory
 )
 
-set( KASTEN_CORE_IO_FILESYSTEM_SRCS
-  io/filesystem/abstractfilesystemloadjob_p.cpp
-  io/filesystem/abstractfilesystemloadjob.cpp
-  io/filesystem/abstractfilesystemsynctoremotejob_p.cpp
-  io/filesystem/abstractfilesystemsynctoremotejob.cpp
-  io/filesystem/abstractfilesystemsyncfromremotejob_p.cpp
-  io/filesystem/abstractfilesystemsyncfromremotejob.cpp
-  io/filesystem/abstractfilesystemsyncwithremotejob_p.cpp
-  io/filesystem/abstractfilesystemsyncwithremotejob.cpp
-  io/filesystem/abstractfilesystemconnectjob_p.cpp
-  io/filesystem/abstractfilesystemconnectjob.cpp
-  io/filesystem/abstractfilesystemexportjob_p.cpp
-  io/filesystem/abstractfilesystemexportjob.cpp
-  io/filesystem/modelencoderfilesystemexportjob_p.cpp
-  io/filesystem/modelencoderfilesystemexportjob.cpp
-  io/filesystem/modelencoderfilesystemexporter.cpp
-  io/filesystem/abstractmodelfilesystemsynchronizer_p.cpp
-  io/filesystem/abstractmodelfilesystemsynchronizer.cpp
-)
-ecm_generate_headers(KASTEN_CORE_IO_FILESYSTEM_CCHDRS
-  HEADER_NAMES
-    AbstractFileSystemSyncWithRemoteJob
-    AbstractFileSystemSyncFromRemoteJob
-    AbstractFileSystemSyncToRemoteJob
-    AbstractModelFileSystemSynchronizer
-    AbstractFileSystemConnectJob
-    AbstractFileSystemLoadJob
-    AbstractFileSystemExportJob
-    ModelEncoderFileSystemExporter
-    ModelEncoderFileSystemExportJob
-  RELATIVE io/filesystem
-  PREFIX Kasten
-  REQUIRED_HEADERS KASTEN_CORE_IO_FILESYSTEM_HDRS
+kastencore_add_sublibrary(io/filesystem
+    PUBLIC
+        AbstractFileSystemSyncWithRemoteJob
+        AbstractFileSystemSyncFromRemoteJob
+        AbstractFileSystemSyncToRemoteJob
+        AbstractModelFileSystemSynchronizer
+        AbstractFileSystemConnectJob
+        AbstractFileSystemLoadJob
+        AbstractFileSystemExportJob
+        ModelEncoderFileSystemExporter
+        ModelEncoderFileSystemExportJob
 )
 
-set( KASTEN_CORE_SYSTEM_SRCS
-  system/jobmanager.cpp
-  system/documentmanager.cpp
-  system/documentcreatemanager.cpp
-  system/documentsyncmanager.cpp
-  system/modelcodecmanager.cpp
-)
-ecm_generate_headers(KASTEN_CORE_SYSTEM_CCHDRS
-  HEADER_NAMES
-    AbstractOverwriteDialog
-    AbstractSaveDiscardDialog
-    JobManager
-    DocumentManager
-    DocumentCreateManager
-    DocumentSyncManager
-    ModelCodecManager
-  RELATIVE system
-  PREFIX Kasten
-  REQUIRED_HEADERS KASTEN_CORE_SYSTEM_HDRS
-)
-set( KASTEN_CORE_SRCS
-  kastencore.cpp
-)
-ecm_generate_headers(KASTEN_CORE_CCHDRS
-  HEADER_NAMES
-    KastenCore
-  PREFIX Kasten
-  REQUIRED_HEADERS KASTEN_CORE_HDRS
+kastencore_add_sublibrary(system
+    PUBLIC
+        AbstractOverwriteDialog
+        AbstractSaveDiscardDialog
+
+        JobManager
+        DocumentManager
+        DocumentCreateManager
+        DocumentSyncManager
+        ModelCodecManager
 )
 
-set( kastencore_LIB_SRCS
-  ${KASTEN_CORE_SRCS}
-  ${KASTEN_CORE_ENTITY_SRCS}
-  ${KASTEN_CORE_DOCUMENT_SRCS}
-  ${KASTEN_CORE_IO_SRCS}
-  ${KASTEN_CORE_IO_FILESYSTEM_SRCS}
-  ${KASTEN_CORE_SYSTEM_SRCS}
-)
-
-set( kastencore_LIB_HDRS
-  ${CMAKE_CURRENT_BINARY_DIR}/kasten/kastencore_export.h
-  ${KASTEN_CORE_HDRS}
-  ${KASTEN_CORE_ENTITY_HDRS}
-  ${KASTEN_CORE_DOCUMENT_HDRS}
-  ${KASTEN_CORE_IO_HDRS}
-  ${KASTEN_CORE_IO_FILESYSTEM_HDRS}
-  ${KASTEN_CORE_SYSTEM_HDRS}
-)
-
-set( kastencore_LIB_CCHDRS
-  ${KASTEN_CORE_CCHDRS}
-  ${KASTEN_CORE_ENTITY_CCHDRS}
-  ${KASTEN_CORE_DOCUMENT_CCHDRS}
-  ${KASTEN_CORE_IO_CCHDRS}
-  ${KASTEN_CORE_IO_FILESYSTEM_CCHDRS}
-  ${KASTEN_CORE_SYSTEM_CCHDRS}
+okteta_add_sublibrary(Core  NAMESPACE Kasten
+    PUBLIC
+        KastenCore
 )
 
 
-add_library( KastenCore SHARED ${kastencore_LIB_SRCS} )
-generate_export_header( KastenCore  EXPORT_FILE_NAME ${CMAKE_CURRENT_BINARY_DIR}/kasten/kastencore_export.h)
-target_link_libraries( KastenCore
-PUBLIC
-  KF5::KIOCore
-  Qt5::Core
-  Qt5::Gui
-PRIVATE
-  KF5::I18n
-  KF5::JobWidgets
-  KF5::WidgetsAddons
-  Qt5::Network
+okteta_add_library(Core NAMESPACE Kasten
+    PUBLIC
+        KF5::KIOCore
+        Qt5::Core
+        Qt5::Gui
+    PRIVATE
+        KF5::I18n
+        KF5::JobWidgets
+        KF5::WidgetsAddons
+        Qt5::Network
+    VERSION     ${KASTENCORE_VERSION}
+    SOVERSION   ${KASTENCORE_SOVERSION}
+    ABIVERSION  ${KASTEN_ABI_VERSION}
+    SOURCES   ${kastencore_LIB_SRCS}
+    HEADERS   ${kastencore_LIB_HDRS}
+    CCHEADERS ${kastencore_LIB_CCHDRS}
+    INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR}
+    NO_TARGET_NAMESPACE
+    NO_VERSIONED_INCLUDEDIR
+    LOWERCASE_LIB
+    EXPORT KastenCoreTargets
 )
 
-target_include_directories(KastenCore PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>")
-
-set_target_properties( KastenCore PROPERTIES
-  EXPORT_NAME "KastenCore"
-  OUTPUT_NAME kasten${KASTEN_ABI_VERSION}core
-  VERSION     ${KASTENCORE_VERSION}
-  SOVERSION   ${KASTENCORE_SOVERSION}
+okteta_add_cmakeconfig(Core NAMESPACE Kasten
+    NO_TARGET_NAMESPACE
+    CONFIG_TEMPLATE "${CMAKE_CURRENT_SOURCE_DIR}/KastenCoreConfig.cmake.in"
+    EXPORT KastenCoreTargets
+#     ABIVERSION ${KASTEN_ABI_VERSION}
+    FILES
+        "${CMAKE_CURRENT_BINARY_DIR}/KastenCoreConfigVersion.cmake"
 )
-
-install( TARGETS KastenCore  EXPORT KastenCoreTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
-
-install( FILES ${kastencore_LIB_HDRS}
-  DESTINATION ${KASTEN_INCLUDE_INSTALL_DIR}
-  COMPONENT   Devel
-)
-install( FILES ${kastencore_LIB_CCHDRS}
-  DESTINATION ${KASTEN_CCINCLUDE_INSTALL_DIR}
-  COMPONENT Devel
-)
-
-# create a Config.cmake and a ConfigVersion.cmake file and install them
-set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KastenCore")
-
-configure_package_config_file(
-  "${CMAKE_CURRENT_SOURCE_DIR}/KastenCoreConfig.cmake.in"
-  "${CMAKE_CURRENT_BINARY_DIR}/KastenCoreConfig.cmake"
-  INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR}
-)
-
-install( FILES
-    "${CMAKE_CURRENT_BINARY_DIR}/KastenCoreConfig.cmake"
-    "${CMAKE_CURRENT_BINARY_DIR}/KastenCoreConfigVersion.cmake"
-  DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
-  COMPONENT Devel
-)
-
-install(EXPORT KastenCoreTargets
-  DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
-  FILE KastenCoreTargets.cmake
-)
-
 
 if(BUILD_TESTING)
   add_subdirectory( tests )

@@ -5,8 +5,7 @@ project( okteta )
 set(REQUIRED_ECM_VERSION "5.38.0")
 find_package(ECM ${REQUIRED_ECM_VERSION} REQUIRED NO_MODULE)
 
-# where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
+set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake ${ECM_MODULE_PATH})
 
 # ECM KDE macros (include first, to have their policies and settings effect all other macros)
 include(KDEInstallDirs)
@@ -23,6 +22,8 @@ include(GenerateExportHeader)
 if(BUILD_TESTING)
   include(ECMAddTests)
 endif()
+# Okteta macros
+include(OktetaInternalMacros)
 
 # control build scope, default to examples if BUILD_TESTING is ON
 if( NOT DEFINED OMIT_EXAMPLES AND NOT BUILD_TESTING )

@@ -14,247 +14,132 @@ include_directories(
   controller
 )
 
+macro(KASTENGUI_ADD_SUBLIBRARY _subdir)
+    okteta_add_sublibrary(Gui  NAMESPACE Kasten
+        SUBDIR ${_subdir}
+        ${ARGN}
+    )
+endmacro()
 
-set( kastengui_view_SRCS
-  view/abstractview.cpp
-  view/abstractselectionview.cpp
-  view/abstracttoolinlineview.cpp
-  view/abstracttoolview.cpp
-)
-ecm_generate_headers(kastengui_view_CCHDRS
-  HEADER_NAMES
-    AbstractViewFactory
-    SelectedDataWriteable
-    AbstractToolInlineView
-    AbstractView
-    AbstractSelectionView
-    AbstractToolView
-    AbstractToolViewFactory
-    DataSelectable
-    Zoomable
-  RELATIVE view
-  PREFIX Kasten
-  REQUIRED_HEADERS kastengui_view_HDRS
-)
+kastengui_add_sublibrary(view
+    PUBLIC
+        SelectedDataWriteable
+        DataSelectable
+        Zoomable
 
-set( kastengui_io_configeditor_SRCS
-  io/filesystem/modelencoderfilesystemexporterconfigeditorfactory.cpp
-  io/filesystem/modelencoderfilesystemexporterconfigeditor.cpp
-  io/abstractmodelstreamencoderconfigeditor.cpp
-  io/abstractmodelexporterconfigeditor.cpp
-  io/abstractmodeldatageneratorconfigeditor.cpp
-)
-set( kastengui_io_SRCS
-  ${kastengui_io_configeditor_SRCS}
-)
-ecm_generate_headers(kastengui_io_CCHDRS
-  HEADER_NAMES
-    ModelEncoderFileSystemExporterConfigEditor
-    ModelEncoderFileSystemExporterConfigEditorFactory
-  RELATIVE io/filesystem
-  PREFIX Kasten
-  REQUIRED_HEADERS kastengui_io_HDRS
-)
-ecm_generate_headers(kastengui_io_CCHDRS
-  HEADER_NAMES
-    AbstractModelStreamEncoderConfigEditor
-    AbstractModelExporterConfigEditor
-    AbstractModelDataGeneratorConfigEditor
-    AbstractModelStreamEncoderConfigEditorFactory
-    AbstractModelExporterConfigEditorFactory
-    AbstractModelDataGeneratorConfigEditorFactory
-  RELATIVE io
-  PREFIX Kasten
-  REQUIRED_HEADERS kastengui_io_HDRS
+        AbstractView
+        AbstractViewFactory
+        AbstractToolView
+        AbstractToolViewFactory
+
+        AbstractSelectionView
+        AbstractToolInlineView
 )
 
-
-set( kastengui_system_SRCS
-  system/abstractdocumentstrategy.cpp
-  system/createdialog.cpp
-  system/dialoghandler.cpp
-  system/dummyview.cpp
-  system/modelcodecviewmanager.cpp
-  system/multidocumentstrategy_p.cpp
-  system/multidocumentstrategy.cpp
-  system/singledocumentstrategy_p.cpp
-  system/singledocumentstrategy.cpp
-  system/viewmanager.cpp
-)
-ecm_generate_headers(kastengui_system_CCHDRS
-  HEADER_NAMES
-    AbstractDocumentStrategy
-    DialogHandler
-    DummyView
-    ModelCodecViewManager
-    MultiDocumentStrategy
-    SingleDocumentStrategy
-    ViewManager
-  RELATIVE system
-  PREFIX Kasten
-  REQUIRED_HEADERS kastengui_system_HDRS
+kastengui_add_sublibrary(io/filesystem
+    PUBLIC
+        ModelEncoderFileSystemExporterConfigEditor
+        ModelEncoderFileSystemExporterConfigEditorFactory
 )
 
-set( kastengui_shell_SRCS
-  shell/viewbox.cpp
-  shell/tabbar.cpp
-  shell/tabwidget.cpp
-  shell/toolinlineviewwidget.cpp
-  shell/toolviewdockwidget.cpp
-  shell/abstractviewarea.cpp
-  shell/abstractgroupedviews.cpp
-  shell/viewareabox.cpp
-  shell/singleviewarea_p.cpp
-  shell/singleviewarea.cpp
-  shell/tabbedviews_p.cpp
-  shell/tabbedviews.cpp
-  shell/multiviewareas_p.cpp
-  shell/multiviewareas.cpp
-  shell/singleviewwindow_p.cpp
-  shell/singleviewwindow.cpp
-  shell/shellwindow_p.cpp
-  shell/shellwindow.cpp
-  shell/statusbar.cpp
-  shell/statusbarlayout.cpp
-)
-ecm_generate_headers(kastengui_shell_CCHDRS
-  HEADER_NAMES
-    ShellWindow
-    AbstractViewArea
-    AbstractGroupedViews
-    StatusBar
-    SingleViewArea
-    SingleViewWindow
-    TabbedViews
-    MultiViewAreas
-    ToolViewDockWidget
-    ToolInlineViewable
-    WidgetsDockable
-    ViewAreaSplitable
+kastengui_add_sublibrary(io
+    PUBLIC
+        AbstractModelStreamEncoderConfigEditor
+        AbstractModelStreamEncoderConfigEditorFactory
 
-    # remove on next API change, accidentally here
-    StatusBarLayout
-    ToolInlineViewWidget
-    ViewAreaBox
-    ViewBox
-  RELATIVE shell
-  PREFIX Kasten
-  REQUIRED_HEADERS kastengui_shell_HDRS
+        AbstractModelExporterConfigEditor
+        AbstractModelExporterConfigEditorFactory
+
+        AbstractModelDataGeneratorConfigEditor
+        AbstractModelDataGeneratorConfigEditorFactory
 )
 
-set( kastengui_controller_widgets_SRCS
-  controller/togglebutton_p.cpp
-  controller/togglebutton.cpp
-  controller/abstractlinepopup_p.cpp
-  controller/abstractlinepopup.cpp
-  controller/abstracttoolwidget_p.cpp
-  controller/abstracttoolwidget.cpp
-)
-set( kastengui_controller_SRCS
-  ${kastengui_controller_widgets_SRCS}
-  controller/abstractcontroller.cpp
-  controller/abstractxmlguicontroller.cpp
-)
-ecm_generate_headers(kastengui_controller_CCHDRS
-  HEADER_NAMES
-    AbstractController
-    AbstractXmlGuiController
-    AbstractLinePopup
-    ToggleButton
-    AbstractToolWidget
-  RELATIVE controller
-  PREFIX Kasten
-  REQUIRED_HEADERS kastengui_controller_HDRS
+kastengui_add_sublibrary(system
+    PUBLIC
+        AbstractDocumentStrategy
+        MultiDocumentStrategy
+        SingleDocumentStrategy
+
+        DialogHandler
+        DummyView
+        ModelCodecViewManager
+        ViewManager
+
+    PRIVATE
+        CreateDialog
 )
 
-set( kastengui_SRCS
-  kastengui.cpp
-)
-ecm_generate_headers(kastengui_CCHDRS
-  HEADER_NAMES
-    KastenGui
-  PREFIX Kasten
-  REQUIRED_HEADERS kastengui_HDRS
-)
+kastengui_add_sublibrary(shell
+    PUBLIC
+        ToolInlineViewable
+        WidgetsDockable
+        ViewAreaSplitable
 
-set( kastengui_LIB_SRCS
-  ${kastengui_SRCS}
-  ${kastengui_view_SRCS}
-  ${kastengui_io_SRCS}
-  ${kastengui_system_SRCS}
-  ${kastengui_shell_SRCS}
-  ${kastengui_controller_SRCS}
-)
+        AbstractViewArea
+        AbstractGroupedViews
 
-set( kastengui_LIB_HDRS
-  ${CMAKE_CURRENT_BINARY_DIR}/kasten/kastengui_export.h
-  ${kastengui_HDRS}
-  ${kastengui_view_HDRS}
-  ${kastengui_io_HDRS}
-  ${kastengui_system_HDRS}
-  ${kastengui_shell_HDRS}
-  ${kastengui_controller_HDRS}
-)
+        SingleViewArea
+        SingleViewWindow
 
-set( kastengui_LIB_CCHDRS
-  ${kastengui_CCHDRS}
-  ${kastengui_view_CCHDRS}
-  ${kastengui_io_CCHDRS}
-  ${kastengui_system_CCHDRS}
-  ${kastengui_shell_CCHDRS}
-  ${kastengui_controller_CCHDRS}
+        MultiViewAreas
+        ShellWindow
+
+        TabbedViews
+        StatusBar
+        ToolViewDockWidget
+
+        # remove on next API change, accidentally here
+        StatusBarLayout
+        ToolInlineViewWidget
+        ViewAreaBox
+        ViewBox
+
+    PRIVATE
+        TabBar
+        TabWidget
 )
 
-add_library( KastenGui SHARED ${kastengui_LIB_SRCS} )
+kastengui_add_sublibrary(controller
+    PUBLIC
+        AbstractController
+        AbstractXmlGuiController
 
-generate_export_header( KastenGui EXPORT_FILE_NAME ${CMAKE_CURRENT_BINARY_DIR}/kasten/kastengui_export.h)
-
-target_link_libraries( KastenGui
-PUBLIC
-  KastenCore
-  Qt5::Widgets
-  KF5::XmlGui
-PRIVATE
-  KF5::I18n
+        AbstractLinePopup
+        AbstractToolWidget
+        ToggleButton
 )
 
-target_include_directories(KastenGui PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>")
-
-set_target_properties( KastenGui  PROPERTIES
-  EXPORT_NAME "KastenGui"
-  OUTPUT_NAME kasten${KASTEN_ABI_VERSION}gui
-  VERSION     ${KASTENGUI_VERSION}
-  SOVERSION   ${KASTENGUI_SOVERSION}
+okteta_add_sublibrary(Gui  NAMESPACE Kasten
+    PUBLIC
+        KastenGui
 )
 
-install( TARGETS KastenGui  EXPORT KastenGuiTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
-install( FILES ${kastengui_LIB_HDRS}
-  DESTINATION ${KASTEN_INCLUDE_INSTALL_DIR}
-  COMPONENT   Devel
-)
-install( FILES ${kastengui_LIB_CCHDRS}
-  DESTINATION ${KASTEN_CCINCLUDE_INSTALL_DIR}
-  COMPONENT Devel
-)
-
-# create a Config.cmake and a ConfigVersion.cmake file and install them
-set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KastenGui")
-
-configure_package_config_file(
-  "${CMAKE_CURRENT_SOURCE_DIR}/KastenGuiConfig.cmake.in"
-  "${CMAKE_CURRENT_BINARY_DIR}/KastenGuiConfig.cmake"
-  INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR}
-)
-
-install( FILES
-    "${CMAKE_CURRENT_BINARY_DIR}/KastenGuiConfig.cmake"
-    "${CMAKE_CURRENT_BINARY_DIR}/KastenGuiConfigVersion.cmake"
-  DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
-  COMPONENT Devel
+okteta_add_library(Gui NAMESPACE Kasten
+    PUBLIC
+        KastenCore
+        Qt5::Widgets
+        KF5::XmlGui
+    PRIVATE
+        KF5::I18n
+    VERSION     ${KASTENGUI_VERSION}
+    SOVERSION   ${KASTENGUI_SOVERSION}
+    ABIVERSION  ${KASTEN_ABI_VERSION}
+    SOURCES   ${kastengui_LIB_SRCS}
+    HEADERS   ${kastengui_LIB_HDRS}
+    CCHEADERS ${kastengui_LIB_CCHDRS}
+    INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR}
+    NO_TARGET_NAMESPACE
+    NO_VERSIONED_INCLUDEDIR
+    LOWERCASE_LIB
+    EXPORT KastenGuiTargets
 )
 
-install(EXPORT KastenGuiTargets
-  DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
-  FILE KastenGuiTargets.cmake
+okteta_add_cmakeconfig(Gui NAMESPACE Kasten
+    NO_TARGET_NAMESPACE
+    CONFIG_TEMPLATE "${CMAKE_CURRENT_SOURCE_DIR}/KastenGuiConfig.cmake.in"
+    EXPORT KastenGuiTargets
+#     ABIVERSION ${KASTEN_ABI_VERSION}
+    FILES
+        "${CMAKE_CURRENT_BINARY_DIR}/KastenGuiConfigVersion.cmake"
 )
