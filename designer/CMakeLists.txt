@@ -24,4 +24,4 @@ install( TARGETS oktetadesignerplugin  DESTINATION ${KDE_INSTALL_QTPLUGINDIR}/de
 
 if( OKTETA_BUILD_EXAMPLES )
 add_subdirectory( examples )
-endif( OKTETA_BUILD_EXAMPLES )
+endif()

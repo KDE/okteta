@@ -84,7 +84,7 @@ kastencontrollers_add_sublibrary(document/versionview
         VersionTableModel
         VersionView
 )
-endif(CMAKE_BUILD_TYPE_TOLOWER MATCHES release)
+endif()
 
 kastencontrollers_add_sublibrary(view/version
     PUBLIC

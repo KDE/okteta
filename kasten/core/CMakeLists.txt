@@ -76,4 +76,4 @@ okteta_add_cmakeconfig(Core NAMESPACE Okteta Kasten
 if(BUILD_TESTING)
   add_subdirectory(document/tests)
   add_subdirectory(io/tests)
-endif(BUILD_TESTING)
+endif()

@@ -92,7 +92,7 @@ if( Qca-qt5_FOUND )
     set( QCA2CHECKSUM_CLASSES
         Qca2ByteArrayChecksumAlgorithm
     )
-endif( Qca-qt5_FOUND )
+endif()
 oktetakastencontrollers_add_sublibrary(view/libbytearraychecksum/algorithm
     PRIVATE
         Crc32ByteArrayChecksumAlgorithm
@@ -562,7 +562,7 @@ list(APPEND oktetakastencontrollers_LIB_HDRS
 set(OPTIONAL_PRIVATE)
 if( Qca-qt5_FOUND )
     set(OPTIONAL_PRIVATE qca-qt5)
-endif( Qca-qt5_FOUND )
+endif()
 
 
 okteta_add_library(Controllers NAMESPACE Okteta Kasten
@@ -656,4 +656,4 @@ add_library( oktetakastencontrollertemplates  STATIC ${oktetakastencontrollerste
 target_compile_definitions( oktetakastencontrollertemplates PUBLIC OKTETAKASTENCONTROLLERS_STATIC_DEFINE=1 )
 target_link_libraries( oktetakastencontrollertemplates   KF5::I18n Qt5::Widgets OktetaCore )
 
-endif( KASTEN_BUILD_INTERNAL_TEMPLATES )
+endif()
