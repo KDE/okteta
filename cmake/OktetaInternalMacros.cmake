@@ -35,27 +35,36 @@ macro(okteta_add_sublibrary _baseName)
     )
     set(oneValueArgs
         SUBDIR
+        SOURCE_TAG
     )
     set(multiValueArgs
         NAMESPACE
         PUBLIC
         PRIVATE
+        KCFG
+        UI
     )
     cmake_parse_arguments(OKTETA_ADD_SUBLIBRARY "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
     string(CONCAT _namespaceConcat ${OKTETA_ADD_SUBLIBRARY_NAMESPACE})
     string(TOLOWER "${_namespaceConcat}${_baseName}" _libname)
+    if (OKTETA_ADD_SUBLIBRARY_SOURCE_TAG)
+        set(_sourceTag "_${OKTETA_ADD_SUBLIBRARY_SOURCE_TAG}")
+    else()
+        set(_sourceTag)
+    endif()
     if (OKTETA_ADD_SUBLIBRARY_SUBDIR)
         set(_relativePath "${OKTETA_ADD_SUBLIBRARY_SUBDIR}/")
         set(_egh_relative_param RELATIVE ${OKTETA_ADD_SUBLIBRARY_SUBDIR})
-        string(REPLACE "/" "_" _subdir_id ${OKTETA_ADD_SUBLIBRARY_SUBDIR})
-        set(_SRCS   ${_libname}_${_subdir_id}_SRCS)
+        string(REPLACE ".." "PARENTDIR" _subdir_id ${OKTETA_ADD_SUBLIBRARY_SUBDIR})
+        string(REPLACE "/" "_" _subdir_id ${_subdir_id})
+        set(_SRCS   ${_libname}_${_subdir_id}${_sourceTag}_SRCS)
         set(_HDRS   ${_libname}_${_subdir_id}_HDRS)
         set(_CCHDRS ${_libname}_${_subdir_id}_CCHDRS)
     else()
         set(_relativePath)
         set(_egh_relative_param)
-        set(_SRCS   ${_libname}_LIB_SRCS)
+        set(_SRCS   ${_libname}${_sourceTag}_LIB_SRCS)
         set(_HDRS   ${_libname}_LIB_HDRS)
         set(_CCHDRS ${_libname}_LIB_CCHDRS)
     endif()
@@ -76,6 +85,14 @@ macro(okteta_add_sublibrary _baseName)
         endif()
     endforeach()
 
+    foreach(_kcfg ${OKTETA_ADD_SUBLIBRARY_KCFG})
+        kconfig_add_kcfg_files(${_SRCS} "${_relativePath}${_kcfg}")
+    endforeach()
+
+    foreach(_ui ${OKTETA_ADD_SUBLIBRARY_UI})
+        ki18n_wrap_ui(${_SRCS} "${_relativePath}${_ui}")
+    endforeach()
+
     if (OKTETA_ADD_SUBLIBRARY_PUBLIC)
         set(_cc_include_dir ${OKTETA_ADD_SUBLIBRARY_NAMESPACE})
         if (OKTETA_ADD_SUBLIBRARY_REVERSE_NAMESPACE_INCLUDEDIR)
@@ -93,7 +110,7 @@ macro(okteta_add_sublibrary _baseName)
     endif()
 
     if (OKTETA_ADD_SUBLIBRARY_SUBDIR)
-        list(APPEND ${_libname}_LIB_SRCS   ${${_SRCS}})
+        list(APPEND ${_libname}${_sourceTag}_LIB_SRCS   ${${_SRCS}})
         list(APPEND ${_libname}_LIB_HDRS   ${${_HDRS}})
         list(APPEND ${_libname}_LIB_CCHDRS ${${_CCHDRS}})
     endif()

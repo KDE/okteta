@@ -8,15 +8,6 @@ ecm_setup_version( ${OKTETAKASTEN_LIB_VERSION}
 
 add_definitions(-DTRANSLATION_DOMAIN=\"liboktetakasten\")
 
-macro(OKTETAKASTENCONTROLLERS_GENERATE_HEADERS _SUBLIB _RELATIVE)
-    ecm_generate_headers("${_SUBLIB}_CCHDRS"
-        HEADER_NAMES ${ARGN}
-        RELATIVE ${_RELATIVE}
-        PREFIX Kasten/Okteta
-        REQUIRED_HEADERS "${_SUBLIB}_HDRS"
-    )
-endmacro()
-
 include_directories(
   view/libbytearraychecksum
   view/libbytearrayfilter
@@ -35,473 +26,489 @@ macro(OKTETAKASTENCONTROLLERS_ADD_SUBLIBRARY _subdir)
     )
 endmacro()
 
-set( DOCUMENTINFOCONTROLLER_SRCS
-  document/info/bytearraymodeliodevice.cpp
-  document/info/documentinfotool.cpp
-  document/info/documentinfoview.cpp
-  document/info/documentinfotoolview.cpp
-)
-oktetakastencontrollers_generate_headers(documentinfocontroller document/info
-  DocumentInfoTool
-  DocumentInfoToolView
-)
-set( OVERWRITEONLYCONTROLLER_SRCS
-  document/overwriteonly/overwriteonlycontroller.cpp
-)
-oktetakastencontrollers_generate_headers(overwriteonlycontroller document/overwriteonly
-  OverwriteOnlyController
-)
-set( OVERWRITEMODECONTROLLER_SRCS
-  view/overwritemode/overwritemodecontroller.cpp
-)
-oktetakastencontrollers_generate_headers(overwritemodecontroller view/overwritemode
-  OverwriteModeController
-)
-set( INFOCONTROLLER_SRCS
-  view/info/createstatisticjob.cpp
-  view/info/statistictablemodel.cpp
-  view/info/infotool.cpp
-  view/info/infoview.cpp
-  view/info/infotoolview.cpp
-  view/info/infotoolfactory.cpp
-  view/info/infotoolviewfactory.cpp
-)
-kconfig_add_kcfg_files( INFOCONTROLLER_SRCS view/info/infoviewsettings.kcfgc )
-oktetakastencontrollers_generate_headers(infocontroller view/info
-  InfoTool
-  InfoToolView
-  InfoToolFactory
-  InfoToolViewFactory
+macro(OKTETAKASTENCONTROLLERS_ADD_SUBLIBRARY_STRUCTURES_TESTED _subdir)
+    okteta_add_sublibrary(Controllers NAMESPACE Okteta Kasten
+        REVERSE_NAMESPACE_INCLUDEDIR
+        SOURCE_TAG structures_tested
+        SUBDIR ${_subdir}
+        ${ARGN}
+    )
+endmacro()
+
+
+oktetakastencontrollers_add_sublibrary(document/info
+    PUBLIC
+        DocumentInfoTool
+        DocumentInfoToolView
+    PRIVATE
+        ByteArrayModelIoDevice
+        DocumentInfoView
 )
 
-set( STRINGSEXTRACTCONTROLLER_SRCS
-  view/stringsextract/extractstringsjob.cpp
-  view/stringsextract/stringsextracttool.cpp
-  view/stringsextract/containedstringtablemodel.cpp
-  view/stringsextract/stringsextractview.cpp
-  view/stringsextract/stringsextracttoolview.cpp
-  view/stringsextract/stringsextracttoolfactory.cpp
-  view/stringsextract/stringsextracttoolviewfactory.cpp
+oktetakastencontrollers_add_sublibrary(document/overwriteonly
+    PUBLIC
+        OverwriteOnlyController
 )
-oktetakastencontrollers_generate_headers(stringsextractcontroller view/stringsextract
-  ContainedString
-  StringsExtractTool
-  StringsExtractToolView
-  StringsExtractToolFactory
-  StringsExtractToolViewFactory
+oktetakastencontrollers_add_sublibrary(view/overwritemode
+    PUBLIC
+        OverwriteModeController
+)
+oktetakastencontrollers_add_sublibrary(view/info
+    PUBLIC
+        InfoTool
+        InfoToolFactory
+        InfoToolView
+        InfoToolViewFactory
+    PRIVATE
+        CreateStatisticJob
+        StatisticTableModel
+        InfoView
+    KCFG
+        infoviewsettings.kcfgc
 )
 
+oktetakastencontrollers_add_sublibrary(view/stringsextract
+    PUBLIC
+        ContainedString
+        StringsExtractTool
+        StringsExtractToolFactory
+        StringsExtractToolView
+        StringsExtractToolViewFactory
+    PRIVATE
+        ExtractStringsJob
+        ContainedStringTableModel
+        StringsExtractView
+)
+
+oktetakastencontrollers_add_sublibrary(view/libbytearraychecksum
+    PRIVATE
+        AbstractByteArrayChecksumAlgorithm
+        AbstractByteArrayChecksumParameterSet
+        AbstractByteArrayChecksumParameterSetEdit
+        ByteArrayChecksumAlgorithmFactory
+        ByteArrayChecksumParameterSetEditFactory
+)
 if( Qca-qt5_FOUND )
-    set( QCA2CHECKSUM_SRCS
-      view/libbytearraychecksum/algorithm/qca2bytearraychecksumalgorithm.cpp
+    set( QCA2CHECKSUM_CLASSES
+        Qca2ByteArrayChecksumAlgorithm
     )
 endif( Qca-qt5_FOUND )
-set( LIBCHECKSUM_SRCS
-  view/libbytearraychecksum/abstractbytearraychecksumalgorithm.cpp
-  view/libbytearraychecksum/abstractbytearraychecksumparameterset.cpp
-  view/libbytearraychecksum/abstractbytearraychecksumparametersetedit.cpp
-  view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp
-  view/libbytearraychecksum/bytearraychecksumparameterseteditfactory.cpp
-  view/libbytearraychecksum/algorithm/crc32bytearraychecksumalgorithm.cpp
-  view/libbytearraychecksum/algorithm/adler32bytearraychecksumalgorithm.cpp
-  view/libbytearraychecksum/algorithm/modsum8bytearraychecksumalgorithm.cpp
-  view/libbytearraychecksum/algorithm/modsum16bytearraychecksumalgorithm.cpp
-  view/libbytearraychecksum/algorithm/modsum32bytearraychecksumalgorithm.cpp
-  view/libbytearraychecksum/algorithm/modsum64bytearraychecksumalgorithm.cpp
+oktetakastencontrollers_add_sublibrary(view/libbytearraychecksum/algorithm
+    PRIVATE
+        Crc32ByteArrayChecksumAlgorithm
+        Adler32ByteArrayChecksumAlgorithm
+        ModSum8ByteArrayChecksumAlgorithm
+        ModSum16ByteArrayChecksumAlgorithm
+        ModSum32ByteArrayChecksumAlgorithm
+        ModSum64ByteArrayChecksumAlgorithm
 ## NEWCHECKSUM(start)
-## Here add the names of your source files of your checksum algorithm,
+## Here add the names of your classes of your checksum algorithm,
 ## e.g.
-##   view/libbytearraychecksum/algorithm/mybytearraychecksumalgorithm.cpp
+##         MyByteArrayChecksumAlgorithm
 ## NEWCHECKSUM(end)
-  view/libbytearraychecksum/algorithm/nobytearraychecksumparameterset.cpp
-  view/libbytearraychecksum/algorithm/nobytearraychecksumparametersetedit.cpp
-  view/libbytearraychecksum/algorithm/modsumbytearraychecksumparameterset.cpp
-  view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp
+        NoByteArrayChecksumParameterSet
+        NoByteArrayChecksumParameterSetEdit
+        ModSumByteArrayChecksumParameterSet
+        ModSumByteArrayChecksumParameterSetEdit
 ## NEWCHECKSUMPARAMETERSET(start)
-## Here add the names of your source files of your checksum parameter set and
+## Here add the names of your classes of your checksum parameter set and
 ## of the widget to edit the checksum parameter set,
 ## e.g.
-##   view/libbytearraychecksum/algorithm/mybytearraychecksumparameterset.cpp
-##   view/libbytearraychecksum/algorithm/mybytearraychecksumparametersetedit.cpp
+##         MyByteArrayChecksumParameterSet
+##         MyByteArrayChecksumParameterSetEdit
 ## NEWCHECKSUMPARAMETERSET(end)
-  ${QCA2CHECKSUM_SRCS}
-)
-set( CHECKSUMCONTROLLER_SRCS
-  view/checksum/checksumcalculatejob.cpp
-  view/checksum/checksumlogging.cpp
-  view/checksum/checksumtool.cpp
-  view/checksum/checksumview.cpp
-  view/checksum/checksumtoolview.cpp
-  view/checksum/checksumtoolfactory.cpp
-  view/checksum/checksumtoolviewfactory.cpp
-)
-oktetakastencontrollers_generate_headers(checksumcontroller view/checksum
-  ChecksumTool
-  ChecksumToolView
-  ChecksumToolFactory
-  ChecksumToolViewFactory
+        ${QCA2CHECKSUM_CLASSES}
 )
 
-set( LIBFINDDIALOG_SRCS
-  view/libfinddialog/kabstractfinddialog.cpp
-)
-oktetakastencontrollers_generate_headers(libfinddialog view/libfinddialog
-  KFindDirection
-)
-
-set( PODDECODERCONTROLLER_SRCS
-  view/poddecoder/typecodecs/binary8codec.cpp
-  view/poddecoder/typecodecs/octal8codec.cpp
-  view/poddecoder/typecodecs/hexadecimal8codec.cpp
-  view/poddecoder/typecodecs/uint8codec.cpp
-  view/poddecoder/typecodecs/uint16codec.cpp
-  view/poddecoder/typecodecs/uint32codec.cpp
-  view/poddecoder/typecodecs/uint64codec.cpp
-  view/poddecoder/typecodecs/sint8codec.cpp
-  view/poddecoder/typecodecs/sint16codec.cpp
-  view/poddecoder/typecodecs/sint32codec.cpp
-  view/poddecoder/typecodecs/sint64codec.cpp
-  view/poddecoder/typecodecs/float32codec.cpp
-  view/poddecoder/typecodecs/float64codec.cpp
-  view/poddecoder/typecodecs/char8codec.cpp
-  view/poddecoder/typecodecs/utf8codec.cpp
-  view/poddecoder/poddata.cpp
-  view/poddecoder/poddecodertool.cpp
-  view/poddecoder/podtablemodel.cpp
-  view/poddecoder/poddelegate.cpp
-  view/poddecoder/podtableview.cpp
-  view/poddecoder/poddecodertoolview.cpp
-  view/poddecoder/poddecodertoolfactory.cpp
-  view/poddecoder/poddecodertoolviewfactory.cpp
-)
-oktetakastencontrollers_generate_headers(poddecodercontroller view/poddecoder
-  PODData
-  PODDecoderTool
-  PODDecoderToolView
-  PODDecoderToolFactory
-  PODDecoderToolViewFactory
+oktetakastencontrollers_add_sublibrary(view/checksum
+    PUBLIC
+        ChecksumTool
+        ChecksumToolView
+        ChecksumToolFactory
+        ChecksumToolViewFactory
+    PRIVATE
+        ChecksumCalculateJob
+        ChecksumLogging
+        ChecksumView
 )
 
-set( PODDECODER_TYPEEDITOR_SRCS
-  view/poddecoder/typeeditors/abstractvalue8editor.cpp
-  view/poddecoder/typeeditors/binary8editor.cpp
-  view/poddecoder/typeeditors/octal8editor.cpp
-  view/poddecoder/typeeditors/hexadecimal8editor.cpp
-  view/poddecoder/typeeditors/uintspinbox.cpp
-  view/poddecoder/typeeditors/sintspinbox.cpp
-  view/poddecoder/typeeditors/float32editor.cpp
-  view/poddecoder/typeeditors/float64editor.cpp
-  view/poddecoder/typeeditors/char8editor.cpp
-  view/poddecoder/typeeditors/utf8editor.cpp
+oktetakastencontrollers_add_sublibrary(view/libfinddialog
+    PUBLIC
+        KFindDirection
+    PRIVATE
+        KAbstractFindDialog
 )
 
-set( BYTETABLECONTROLLER_SRCS
-  view/bytetable/bytetablemodel.cpp
-  view/bytetable/bytetabletool.cpp
-  view/bytetable/bytetableview.cpp
-  view/bytetable/bytetabletoolview.cpp
-  view/bytetable/bytetabletoolfactory.cpp
-  view/bytetable/bytetabletoolviewfactory.cpp
-)
-kconfig_add_kcfg_files( BYTETABLECONTROLLER_SRCS view/bytetable/bytetableviewsettings.kcfgc )
-oktetakastencontrollers_generate_headers(bytetablecontroller view/bytetable
-  ByteTableTool
-  ByteTableToolView
-  ByteTableToolFactory
-  ByteTableToolViewFactory
-)
-
-set( SEARCHCONTROLLER_SRCS
-  view/search/ksearchdialog.cpp
-  view/search/searchjob.cpp
-  view/search/searchtool.cpp
-  view/search/searchcontroller.cpp
-)
-oktetakastencontrollers_generate_headers(searchcontroller view/search
-  SearchController
-  SearchUserQueryable
+oktetakastencontrollers_add_sublibrary(view/poddecoder/typecodecs
+    PRIVATE
+        Binary8Codec
+        Octal8Codec
+        Hexadecimal8Codec
+        UInt8Codec
+        UInt16Codec
+        UInt32Codec
+        UInt64Codec
+        SInt8Codec
+        SInt16Codec
+        SInt32Codec
+        SInt64Codec
+        Float32Codec
+        Float64Codec
+        Char8Codec
+        Utf8Codec
 )
 
-set( REPLACECONTROLLER_SRCS
-  view/replace/kreplacedialog.cpp
-  view/replace/kreplaceprompt.cpp
-  view/replace/replacetool.cpp
-  view/replace/replacecontroller.cpp
-)
-oktetakastencontrollers_generate_headers(replacecontroller view/replace
-  ReplaceController
-  ReplaceUserQueryable
+oktetakastencontrollers_add_sublibrary(view/poddecoder
+    PUBLIC
+        PODData
+        PODDecoderTool
+        PODDecoderToolView
+        PODDecoderToolFactory
+        PODDecoderToolViewFactory
+    PRIVATE
+        PODTableModel
+        PODDelegate
+        PODTableView
 )
 
-set( LIBFILTER_SRCS
-  view/libbytearrayfilter/abstractbytearrayfilter.cpp
-  view/libbytearrayfilter/abstractbytearrayfilterparameterset.cpp
-  view/libbytearrayfilter/abstractbytearrayfilterparametersetedit.cpp
-  view/libbytearrayfilter/bytearrayfilterfactory.cpp
-  view/libbytearrayfilter/bytearrayfilterparameterseteditfactory.cpp
-  view/libbytearrayfilter/filter/nobytearrayfilterparameterset.cpp
-  view/libbytearrayfilter/filter/operandbytearrayfilterparameterset.cpp
-  view/libbytearrayfilter/filter/reversebytearrayfilterparameterset.cpp
-  view/libbytearrayfilter/filter/rotatebytearrayfilterparameterset.cpp
+oktetakastencontrollers_add_sublibrary(view/poddecoder/typeeditors
+    SOURCE_TAG typeeditor
+    PRIVATE
+        AbstractValue8Editor
+        Binary8Editor
+        Octal8Editor
+        Hexadecimal8Editor
+        UIntSpinBox
+        SIntSpinBox
+        Float32Editor
+        Float64Editor
+        Char8Editor
+        Utf8Editor
+)
+
+oktetakastencontrollers_add_sublibrary(view/bytetable
+    PUBLIC
+        ByteTableTool
+        ByteTableToolView
+        ByteTableToolFactory
+        ByteTableToolViewFactory
+    PRIVATE
+        ByteTableModel
+        ByteTableView
+    KCFG
+        bytetableviewsettings.kcfgc
+)
+
+oktetakastencontrollers_add_sublibrary(view/search
+    PUBLIC
+        SearchController
+        SearchUserQueryable
+    PRIVATE
+        KSearchDialog
+        SearchJob
+        SearchTool
+)
+
+oktetakastencontrollers_add_sublibrary(view/replace
+    PUBLIC
+        ReplaceController
+        ReplaceUserQueryable
+    PRIVATE
+        KReplaceDialog
+        KReplacePrompt
+        ReplaceTool
+)
+
+oktetakastencontrollers_add_sublibrary(view/libbytearrayfilter
+    PRIVATE
+        AbstractByteArrayFilter
+        AbstractByteArrayFilterParameterSet
+        AbstractByteArrayFilterParameterSetEdit
+        ByteArrayFilterFactory
+        ByteArrayFilterParameterSetEditFactory
+)
+
+oktetakastencontrollers_add_sublibrary(view/libbytearrayfilter/filter
+    PRIVATE
+        NoByteArrayFilterParameterSet
+        OperandByteArrayFilterParameterSet
+        ReverseByteArrayFilterParameterSet
+        RotateByteArrayFilterParameterSet
 ## NEWFILTERPARAMETERSET(start)
-## Here add the names of your source files of your filter parameter set,
+## Here add the names of your classes of your filter parameter set,
 ## e.g.
-##  view/libbytearrayfilter/filter/mybytearrayfilterparameterset.cpp
+##         MyByteArrayFilterParameterSet
 ## NEWFILTERPARAMETERSET(end)
-  view/libbytearrayfilter/filter/andbytearrayfilter.cpp
-  view/libbytearrayfilter/filter/orbytearrayfilter.cpp
-  view/libbytearrayfilter/filter/xorbytearrayfilter.cpp
-  view/libbytearrayfilter/filter/invertbytearrayfilter.cpp
-  view/libbytearrayfilter/filter/reversebytearrayfilter.cpp
-  view/libbytearrayfilter/filter/rotatebytearrayfilter.cpp
-  view/libbytearrayfilter/filter/shiftbytearrayfilter.cpp
+        AndByteArrayFilter
+        OrByteArrayFilter
+        XorByteArrayFilter
+        InvertByteArrayFilter
+        ReverseByteArrayFilter
+        RotateByteArrayFilter
+        ShiftByteArrayFilter
 ## NEWFILTER(start)
-## Here add the names of your source files of your filter,
+## Here add the names of your classes of your filter,
 ## e.g.
-##   view/libbytearrayfilter/filter/mybytearrayfilter.cpp
+##         MyByteArrayFilter
 ## NEWFILTER(end)
-  view/libbytearrayfilter/filter/nobytearrayfilterparametersetedit.cpp
-  view/libbytearrayfilter/filter/operandbytearrayfilterparametersetedit.cpp
-  view/libbytearrayfilter/filter/reversebytearrayfilterparametersetedit.cpp
-  view/libbytearrayfilter/filter/rotatebytearrayfilterparametersetedit.cpp
+        NoByteArrayFilterParameterSetedit
+        OperandByteArrayFilterParameterSetedit
+        ReverseByteArrayFilterParameterSetedit
+        RotateByteArrayFilterParameterSetedit
 ## NEWFILTERPARAMETERSET(start)
-## Here add the names of your source files of your widget to edit the filter parameter set,
+## Here add the names of your classes of your widget to edit the filter parameter set,
 ## e.g.
-##   view/libbytearrayfilter/filter/mybytearrayfilterparametersetedit.cpp
+##         MyByteArrayFilterParameterSetedit
 ## NEWFILTERPARAMETERSET(end)
 )
-set( FILTERCONTROLLER_SRCS
-  view/filter/filterjob.cpp
-  view/filter/filtertool.cpp
-  view/filter/filterview.cpp
-  view/filter/filtertoolview.cpp
-  view/filter/filtertoolfactory.cpp
-  view/filter/filtertoolviewfactory.cpp
-)
-oktetakastencontrollers_generate_headers(filtercontroller view/filter
-  FilterTool
-  FilterToolView
-  FilterToolFactory
-  FilterToolViewFactory
+oktetakastencontrollers_add_sublibrary(view/filter
+    PUBLIC
+        FilterTool
+        FilterToolView
+        FilterToolFactory
+        FilterToolViewFactory
+    PRIVATE
+        FilterJob
+        FilterView
 )
 
-set( CHARSETCONVERSIONTOOL_SRCS
-  view/charsetconversion/charsetconversionjob.cpp
-  view/charsetconversion/charsetconversiontool.cpp
-  view/charsetconversion/charsetconversionview.cpp
-  view/charsetconversion/charsetconversiontoolview.cpp
-  view/charsetconversion/charsetconversiontoolfactory.cpp
-  view/charsetconversion/charsetconversiontoolviewfactory.cpp
-)
-oktetakastencontrollers_generate_headers(charsetconversiontool view/charsetconversion
-  CharsetConversionTool
-  CharsetConversionToolView
-  CharsetConversionToolFactory
-  CharsetConversionToolViewFactory
+oktetakastencontrollers_add_sublibrary(view/charsetconversion
+    PUBLIC
+        CharsetConversionTool
+        CharsetConversionToolView
+        CharsetConversionToolFactory
+        CharsetConversionToolViewFactory
+    PRIVATE
+        CharsetConversionJob
+        CharsetConversionView
 )
 
-set( GOTOOFFSETCONTROLLER_SRCS
-  view/gotooffset/gotooffsettool.cpp
-  view/gotooffset/gotooffsetview.cpp
-  view/gotooffset/gotooffsettoolview.cpp
-  view/gotooffset/gotooffsetcontroller.cpp
-)
-oktetakastencontrollers_generate_headers(gotooffsetcontroller view/gotooffset
-  GotoOffsetController
-)
-
-set( SELECTRANGECONTROLLER_SRCS
-  view/selectrange/selectrangetool.cpp
-  view/selectrange/selectrangeview.cpp
-  view/selectrange/selectrangetoolview.cpp
-  view/selectrange/selectrangecontroller.cpp
-)
-oktetakastencontrollers_generate_headers(selectrangecontroller view/selectrange
-  SelectRangeController
+oktetakastencontrollers_add_sublibrary(view/gotooffset
+    PUBLIC
+        GotoOffsetController
+    PRIVATE
+        GotoOffsetTool
+        GotoOffsetView
+        GotoOffsetToolView
 )
 
-set( BOOKMARKSCONTROLLER_SRCS
-  view/bookmarks/bookmarkeditpopup.cpp
-  view/bookmarks/bookmarkscontroller.cpp
-)
-oktetakastencontrollers_generate_headers(bookmarkscontroller view/bookmarks
-  BookmarksController
-)
-
-set( BOOKMARKSTOOL_SRCS
-  view/bookmarks/bookmarklistmodel.cpp
-  view/bookmarks/bookmarkstool.cpp
-  view/bookmarks/bookmarksview.cpp
-  view/bookmarks/bookmarkstoolview.cpp
-  view/bookmarks/bookmarkstoolfactory.cpp
-  view/bookmarks/bookmarkstoolviewfactory.cpp
-)
-oktetakastencontrollers_generate_headers(bookmarkstool view/bookmarks
-  BookmarksTool
-  BookmarksToolView
-  BookmarksToolFactory
-  BookmarksToolViewFactory
+oktetakastencontrollers_add_sublibrary(view/selectrange
+    PUBLIC
+        SelectRangeController
+    PRIVATE
+        SelectRangeTool
+        SelectRangeView
+        SelectRangeToolView
 )
 
-set( STRUCTVIEW_TESTED_SRCS
-  view/structures/allprimitivetypes.cpp
-  view/structures/datatypes/topleveldatainformation.cpp
-  view/structures/datatypes/datainformation.cpp
-  view/structures/datatypes/datainformationbase.cpp
-  view/structures/datatypes/dummydatainformation.cpp
-  view/structures/datatypes/datainformationwithchildren.cpp
-  view/structures/datatypes/structuredatainformation.cpp
-  view/structures/datatypes/taggeduniondatainformation.cpp
-  view/structures/datatypes/uniondatainformation.cpp
-  view/structures/datatypes/array/arraydatainformation.cpp
-  view/structures/datatypes/array/abstractarraydata.cpp
-  view/structures/datatypes/array/complexarraydata.cpp
-  view/structures/datatypes/array/primitivearraydata.cpp
-  view/structures/datatypes/primitive/pointerdatainformation.cpp
-  view/structures/datatypes/primitive/chardatainformation.cpp
-  view/structures/datatypes/primitive/doubledatainformation.cpp
-  view/structures/datatypes/primitive/floatdatainformation.cpp
-  view/structures/datatypes/primitive/sintdatainformation.cpp
-  view/structures/datatypes/primitive/uintdatainformation.cpp
-  view/structures/datatypes/primitive/booldatainformation.cpp
-  view/structures/datatypes/primitive/flagdatainformation.cpp
-  view/structures/datatypes/primitive/primitivedatainformation.cpp
-  view/structures/datatypes/primitive/basicprimitivedatainformation.cpp
-  view/structures/datatypes/primitive/bitfield/abstractbitfielddatainformation.cpp
-  view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.cpp
-  view/structures/datatypes/primitive/bitfield/signedbitfielddatainformation.cpp
-  view/structures/datatypes/primitive/bitfield/unsignedbitfielddatainformation.cpp
-  view/structures/datatypes/primitive/enumdatainformation.cpp
-  view/structures/datatypes/primitive/enumdefinition.cpp
-  view/structures/datatypes/primitivefactory.cpp
-  view/structures/datatypes/primitivedatatype.cpp
-  view/structures/datatypes/strings/stringdatainformation.cpp
-  view/structures/datatypes/strings/stringdata.cpp
-  view/structures/datatypes/strings/asciistringdata.cpp
-  view/structures/datatypes/strings/latin1stringdata.cpp
-  view/structures/datatypes/strings/utf8stringdata.cpp
-  view/structures/datatypes/strings/utf16stringdata.cpp
-  view/structures/datatypes/strings/utf32stringdata.cpp
-  view/structures/datatypes/strings/ebcdicstringdata.cpp
-  ../../core/codecs/ebcdic1047charcodec.cpp
-  view/structures/script/scriptengineinitializer.cpp
-  view/structures/script/scripthandler.cpp
-  view/structures/script/scripthandlerinfo.cpp
-  view/structures/script/scriptutils.cpp
-  view/structures/script/scriptlogger.cpp
-  view/structures/script/scriptloggerview.cpp
-  view/structures/script/safereference.cpp
-  view/structures/script/classes/defaultscriptclass.cpp
-  view/structures/script/classes/arrayscriptclass.cpp
-  view/structures/script/classes/primitivescriptclass.cpp
-  view/structures/script/classes/enumscriptclass.cpp
-  view/structures/script/classes/pointerscriptclass.cpp
-  view/structures/script/classes/bitfieldscriptclass.cpp
-  view/structures/script/classes/stringscriptclass.cpp
-  view/structures/script/classes/structunionscriptclass.cpp
-  view/structures/parsers/abstractstructureparser.cpp
-  view/structures/parsers/osdparser.cpp
-  view/structures/parsers/scriptfileparser.cpp
-  view/structures/parsers/scriptvalueconverter.cpp
-  view/structures/parsers/scriptvalueconverter_p.cpp
-  view/structures/parsers/datainformationfactory.cpp
-  view/structures/parsers/parserutils.cpp
-  view/structures/structlogging.cpp
+oktetakastencontrollers_add_sublibrary(view/bookmarks
+    PUBLIC
+        BookmarksController
+    PRIVATE
+        BookmarkEditPopup
+)
+
+oktetakastencontrollers_add_sublibrary(view/bookmarks
+    PUBLIC
+        BookmarksTool
+        BookmarksToolView
+        BookmarksToolFactory
+        BookmarksToolViewFactory
+    PRIVATE
+        BookmarkListModel
+        BookmarksView
+)
+
+
+oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/datatypes
+    PRIVATE
+        TopLevelDataInformation
+        DataInformation
+        DataInformationbase
+        DummyDataInformation
+        DataInformationwithchildren
+        StructureDataInformation
+        TaggedUnionDataInformation
+        UnionDataInformation
+        PrimitiveFactory
+        PrimitiveDataType
+)
+
+oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/datatypes/array
+    PRIVATE
+        ArrayDataInformation
+        AbstractArrayData
+        ComplexArrayData
+        PrimitiveArrayData
+)
+
+oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/datatypes/primitive
+    PRIVATE
+        PointerDataInformation
+        CharDataInformation
+        DoubleDataInformation
+        FloatDataInformation
+        SIntDataInformation
+        UIntDataInformation
+        BoolDataInformation
+        FlagDataInformation
+        PrimitiveDataInformation
+        BasicPrimitiveDataInformation
+        EnumDataInformation
+        EnumDefinition
+)
+
+oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/datatypes/primitive/bitfield
+    PRIVATE
+        AbstractBitfieldDataInformation
+        BoolBitfieldDataInformation
+        SignedBitfieldDataInformation
+        UnsignedBitfieldDataInformation
+)
+
+oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/datatypes/strings
+    PRIVATE
+        StringDataInformation
+        StringData
+        AsciiStringData
+        Latin1StringData
+        Utf8StringData
+        Utf16StringData
+        Utf32StringData
+        EbcdicStringData
+)
+oktetakastencontrollers_add_sublibrary_structures_tested(../../core/codecs
+    PRIVATE
+        Ebcdic1047CharCodec
+)
+
+oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/script
+    PRIVATE
+        ScriptEngineInitializer
+        ScriptHandler
+        ScriptHandlerInfo
+        ScriptUtils
+        ScriptLogger
+        ScriptLoggerView
+        SafeReference
+)
+
+oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/script/classes
+    PRIVATE
+        DefaultScriptClass
+        ArrayScriptClass
+        PrimitiveScriptClass
+        EnumScriptClass
+        PointerScriptClass
+        BitfieldScriptClass
+        StringScriptClass
+        StructUnionScriptClass
+)
+
+oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/parsers
+    PRIVATE
+        AbstractStructureParser
+        OsdParser
+        ScriptFileParser
+        ScriptValueConverter
+        DataInformationFactory
+        ParserUtils
+)
+
+oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/settings
+    KCFG
+        structureviewpreferences.kcfgc
+)
+
+oktetakastencontrollers_add_sublibrary_structures_tested(view/structures
+    PRIVATE
+        AllPrimitiveTypes
+        StructLogging
 )
 
 #these source files are not needed by the static library for unit tests, therefore keep them separate
-set( STRUCTVIEW_OTHER_SRCS
-  view/structures/structurestoolfactory.cpp
-  view/structures/structurestoolviewfactory.cpp
-  view/structures/structuresmanager.cpp
-  view/structures/structurestool.cpp
-  view/structures/structuretreemodel.cpp
-  view/structures/structuredefinitionfile.cpp
+oktetakastencontrollers_add_sublibrary(view/structures/settings
+    PRIVATE
+        StructureAddRemoveWidget
+        StructureViewSettingsWidget
+        StructuresManagerView
+    UI structureviewsettingswidget.ui
+)
+oktetakastencontrollers_add_sublibrary(view/structures
+    PUBLIC
+        StructToolView
+        StructuresToolFactory
+        StructuresToolViewFactory
+    PRIVATE
+        StructuresManager
+        StructuresTool
+        StructureTreeModel
+        StructureDefinitionFile
 #   view/structures/modeltest.cpp
-  view/structures/structureview.cpp
-  view/structures/structurestoolview.cpp
-  view/structures/structureviewitemdelegate.cpp
-  view/structures/settings/structureaddremovewidget.cpp
-  view/structures/settings/structureviewsettingswidget.cpp
-  view/structures/settings/structuresmanagerview.cpp
+        StructureView
+        StructuresToolView
+        StructureViewItemDelegate
 )
 
-kconfig_add_kcfg_files( STRUCTVIEW_TESTED_SRCS view/structures/settings/structureviewpreferences.kcfgc )
-ki18n_wrap_ui( STRUCTVIEW_OTHER_SRCS view/structures/settings/structureviewsettingswidget.ui )
 # structurestool.h cannot be installed as it pulls (too) many private uninstalled headers
 # KF5 TODO: any tools/controllers and views should be created by the resp. factories
 # since some time, no more directly.
 # So on next ABI change depublish tools/controllers & their views
 # For now keeping all installed, in case someone is using them still/already.
 # structtoolview.h is not useful, but we keep installing the header just in case someone includes it
-oktetakastencontrollers_generate_headers(structureview_other view/structures
-  StructToolView
-  StructuresToolFactory
-  StructuresToolViewFactory
+
+oktetakastencontrollers_add_sublibrary(${LIBFRAMESPRINT_REL_DIR}
+    PRIVATE
+        AbstractFrameRenderer
+        FramesToPaperPrinter
+        HeaderFooterFrameRenderer
 )
 
-set( LIBFRAMESPRINT_SRCS
-  ${LIBFRAMESPRINT_REL_DIR}/abstractframerenderer.cpp
-  ${LIBFRAMESPRINT_REL_DIR}/framestopaperprinter.cpp
-  ${LIBFRAMESPRINT_REL_DIR}/headerfooterframerenderer.cpp
-)
-set( PRINTCONTROLLER_SRCS
-  ${LIBFRAMESPRINT_SRCS}
-  view/print/printcontroller.cpp
-  view/print/printtool.cpp
-  view/print/printjob.cpp
-  view/print/abstractcolumnframerenderer.cpp
-  view/print/printcolumnstylist.cpp
-  view/print/bytearrayframerenderer.cpp
-)
-oktetakastencontrollers_generate_headers(printcontroller view/print
-  PrintController
+oktetakastencontrollers_add_sublibrary(view/print
+    PUBLIC
+        PrintController
+    PRIVATE
+        PrintTool
+        PrintJob
+        AbstractColumnFrameRenderer
+        PrintColumnStylist
+        ByteArrayFrameRenderer
 )
 
-set( VIEWCONFIGCONTROLLER_SRCS
-  view/viewconfig/bytesperlinedialog.cpp
-  view/viewconfig/bytespergroupdialog.cpp
-  view/viewconfig/viewconfigcontroller.cpp
-)
-oktetakastencontrollers_generate_headers(viewconfigcontroller view/viewconfig
-  ViewConfigController
-)
-
-set( VIEWSTATUSCONTROLLER_SRCS
-  view/viewstatus/viewstatuscontroller.cpp
-)
-oktetakastencontrollers_generate_headers(viewstatuscontroller view/viewstatus
-  ViewStatusController
+oktetakastencontrollers_add_sublibrary(view/viewconfig
+    PUBLIC
+        ViewConfigController
+    PRIVATE
+        BytesPerLineDialog
+        BytesPerGroupDialog
 )
 
-set( VIEWMODECONTROLLER_SRCS
-  view/viewmode/viewmodecontroller.cpp
-)
-oktetakastencontrollers_generate_headers(viewmodecontroller view/viewmode
-  ViewModeController
+oktetakastencontrollers_add_sublibrary(view/viewstatus
+    PUBLIC
+        ViewStatusController
 )
 
-set( VIEWPROFILESCONTROLLER_SRCS
-  view/viewprofiles/viewprofileedit.cpp
-  view/viewprofiles/viewprofileeditdialog.cpp
-  view/viewprofiles/viewprofiletablemodel.cpp
-  view/viewprofiles/viewprofilecontroller.cpp
-)
-oktetakastencontrollers_generate_headers(viewprofilescontroller view/viewprofiles
-  ViewProfileController
+oktetakastencontrollers_add_sublibrary(view/viewmode
+    PUBLIC
+        ViewModeController
 )
 
-set( VIEWPROFILESMANAGECONTROLLER_SRCS
-  view/viewprofiles/viewprofilesmanagedialog.cpp
-  view/viewprofiles/viewprofilesmanagecontroller.cpp
-)
-oktetakastencontrollers_generate_headers(viewprofilesmanagecontroller view/viewprofiles
-  ViewProfilesManageController
+oktetakastencontrollers_add_sublibrary(view/viewprofiles
+    PUBLIC
+        ViewProfilesManageController
+        # TODO: two controllers in one subdir
+        ViewProfileController
+    PRIVATE
+        ViewProfileEdit
+        ViewProfileEditDialog
+        ViewProfileTableModel
+
+        ViewProfilesManageDialog
 )
 
 # create a static library for the unit tests. This means we don't have to compile the sources twice
 
-add_library( poddecoder-typeeditors STATIC ${PODDECODER_TYPEEDITOR_SRCS} )
+add_library(poddecoder-typeeditors STATIC ${oktetakastencontrollers_typeeditor_LIB_SRCS})
 set_target_properties( poddecoder-typeeditors PROPERTIES POSITION_INDEPENDENT_CODE TRUE )
 target_link_libraries( poddecoder-typeeditors
 PUBLIC
@@ -510,7 +517,7 @@ PRIVATE
   KF5::Completion
 )
 
-add_library( structureview-tested-srcs STATIC ${STRUCTVIEW_TESTED_SRCS} )
+add_library( structureview-tested-srcs STATIC ${oktetakastencontrollers_structures_tested_LIB_SRCS} )
 set_target_properties( structureview-tested-srcs PROPERTIES POSITION_INDEPENDENT_CODE TRUE )
 target_link_libraries( structureview-tested-srcs
 PUBLIC
@@ -525,36 +532,6 @@ PRIVATE
   KF5::Completion
   KF5::ConfigWidgets
 )
-
-set( OKTETA_KASTEN_CONTROLLERS_SRCS
-#   ${OVERWRITEONLYCONTROLLER_SRCS}
-  ${OVERWRITEMODECONTROLLER_SRCS}
-  ${DOCUMENTINFOCONTROLLER_SRCS}
-  ${LIBCHECKSUM_SRCS}
-  ${CHECKSUMCONTROLLER_SRCS}
-  ${STRINGSEXTRACTCONTROLLER_SRCS}
-  ${BYTETABLECONTROLLER_SRCS}
-  ${INFOCONTROLLER_SRCS}
-  ${LIBFINDDIALOG_SRCS}
-  ${SEARCHCONTROLLER_SRCS}
-  ${REPLACECONTROLLER_SRCS}
-  ${LIBFILTER_SRCS}
-  ${FILTERCONTROLLER_SRCS}
-  ${CHARSETCONVERSIONTOOL_SRCS}
-  ${GOTOOFFSETCONTROLLER_SRCS}
-  ${SELECTRANGECONTROLLER_SRCS}
-  ${PRINTCONTROLLER_SRCS}
-  ${BOOKMARKSCONTROLLER_SRCS}
-  ${BOOKMARKSTOOL_SRCS}
-  ${VIEWCONFIGCONTROLLER_SRCS}
-  ${VIEWSTATUSCONTROLLER_SRCS}
-  ${VIEWMODECONTROLLER_SRCS}
-  ${VIEWPROFILESCONTROLLER_SRCS}
-  ${VIEWPROFILESMANAGECONTROLLER_SRCS}
-  ${PODDECODERCONTROLLER_SRCS}
-  ${STRUCTVIEW_OTHER_SRCS}
-)
-
 
 if(BUILD_TESTING)
   #structures view unit tests
@@ -578,58 +555,8 @@ if(BUILD_TESTING)
   )
 endif()
 
-set( okteta_kastencontrollers_LIB_HDRS
-  ${CMAKE_CURRENT_BINARY_DIR}/config-qca2.h
-#   ${overwriteonlycontroller_HDRS}
-  ${overwritemodecontroller_HDRS}
-  ${documentinfocontroller_HDRS}
-  ${checksumcontroller_HDRS}
-  ${stringsextractcontroller_HDRS}
-  ${bytetablecontroller_HDRS}
-  ${infocontroller_HDRS}
-  ${libfinddialog_HDRS}
-  ${searchcontroller_HDRS}
-  ${replacecontroller_HDRS}
-  ${filtercontroller_HDRS}
-  ${charsetconversiontool_HDRS}
-  ${gotooffsetcontroller_HDRS}
-  ${selectrangecontroller_HDRS}
-  ${printcontroller_HDRS}
-  ${bookmarkscontroller_HDRS}
-  ${bookmarkstool_HDRS}
-  ${viewconfigcontroller_HDRS}
-  ${viewstatuscontroller_HDRS}
-  ${viewmodecontroller_HDRS}
-  ${viewprofilescontroller_HDRS}
-  ${viewprofilesmanagecontroller_HDRS}
-  ${poddecodercontroller_HDRS}
-  ${structureview_other_HDRS}
-)
-set( okteta_kastencontrollers_LIB_CCHDRS
-#   ${overwriteonlycontroller_CCHDRS}
-  ${overwritemodecontroller_CCHDRS}
-  ${documentinfocontroller_CCHDRS}
-  ${checksumcontroller_CCHDRS}
-  ${stringsextractcontroller_CCHDRS}
-  ${bytetablecontroller_CCHDRS}
-  ${infocontroller_CCHDRS}
-  ${libfinddialog_CCHDRS}
-  ${searchcontroller_CCHDRS}
-  ${replacecontroller_CCHDRS}
-  ${filtercontroller_CCHDRS}
-  ${charsetconversiontool_CCHDRS}
-  ${gotooffsetcontroller_CCHDRS}
-  ${selectrangecontroller_CCHDRS}
-  ${printcontroller_CCHDRS}
-  ${bookmarkscontroller_CCHDRS}
-  ${bookmarkstool_CCHDRS}
-  ${viewconfigcontroller_CCHDRS}
-  ${viewstatuscontroller_CCHDRS}
-  ${viewmodecontroller_CCHDRS}
-  ${viewprofilescontroller_CCHDRS}
-  ${viewprofilesmanagecontroller_CCHDRS}
-  ${poddecodercontroller_CCHDRS}
-  ${structureview_other_CCHDRS}
+list(APPEND oktetakastencontrollers_LIB_HDRS
+    ${CMAKE_CURRENT_BINARY_DIR}/config-qca2.h
 )
 
 set(OPTIONAL_PRIVATE)
@@ -659,9 +586,9 @@ okteta_add_library(Controllers NAMESPACE Okteta Kasten
     VERSION     ${OKTETAKASTENCONTROLLERS_VERSION}
     SOVERSION   ${OKTETAKASTENCONTROLLERS_SOVERSION}
     ABIVERSION  ${OKTETAKASTEN_ABI_VERSION} ${KASTEN_ABI_VERSION}
-    SOURCES   ${OKTETA_KASTEN_CONTROLLERS_SRCS}
-    HEADERS   ${okteta_kastencontrollers_LIB_HDRS}
-    CCHEADERS ${okteta_kastencontrollers_LIB_CCHDRS}
+    SOURCES   ${oktetakastencontrollers_LIB_SRCS}
+    HEADERS   ${oktetakastencontrollers_LIB_HDRS}
+    CCHEADERS ${oktetakastencontrollers_LIB_CCHDRS}
     INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR}
     NO_VERSIONED_INCLUDEDIR
     REVERSE_NAMESPACE_INCLUDEDIR
@@ -708,23 +635,23 @@ include_directories(
   view/libbytearrayfilter/filter
   view/libbytearraychecksum/algorithm
 )
-set( libfilter_templates_SRCS
-  view/libbytearrayfilter/filter/template/template_bytearrayfilter.cpp
-  view/libbytearrayfilter/filter/template/template_bytearrayfilterparameterset.cpp
-  view/libbytearrayfilter/filter/template/template_bytearrayfilterparametersetedit.cpp
+
+okteta_add_sublibrary(ControllersTemplates NAMESPACE Okteta Kasten
+    SUBDIR view/libbytearrayfilter/filter/template
+    PRIVATE
+        Template_ByteArrayFilter
+        Template_ByteArrayFilterParameterSet
+        Template_ByteArrayFilterParameterSetEdit
 )
-set( libchecksum_templates_SRCS
-  view/libbytearraychecksum/algorithm/template/template_bytearraychecksumalgorithm.cpp
-  view/libbytearraychecksum/algorithm/template/template_bytearraychecksumparameterset.cpp
-  view/libbytearraychecksum/algorithm/template/template_bytearraychecksumparametersetedit.cpp
+okteta_add_sublibrary(ControllersTemplates NAMESPACE Okteta Kasten
+    SUBDIR view/libbytearraychecksum/algorithm/template
+    PRIVATE
+        Template_ByteArrayCheckSumAlgorithm
+        Template_ByteArrayChecksumParameterSet
+        Template_ByteArrayChecksumParameterSetEdit
 )
 
-set( okteta_kastencontrollers_templates_SRCS
-  ${libfilter_templates_SRCS}
-  ${libchecksum_templates_SRCS}
-)
-
-add_library( oktetakastencontrollertemplates  STATIC ${okteta_kastencontrollers_templates_SRCS} )
+add_library( oktetakastencontrollertemplates  STATIC ${oktetakastencontrollerstemplates_LIB_SRCS} )
 # MSVC needs this
 target_compile_definitions( oktetakastencontrollertemplates PUBLIC OKTETAKASTENCONTROLLERS_STATIC_DEFINE=1 )
 target_link_libraries( oktetakastencontrollertemplates   KF5::I18n Qt5::Widgets OktetaCore )
