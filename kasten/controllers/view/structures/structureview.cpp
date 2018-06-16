@@ -285,6 +285,7 @@ void StructureView::setLockButtonState(bool structureLocked)
 void StructureView::openScriptConsole()
 {
     QDialog* dialog = new QDialog(this);
+    dialog->setWindowTitle(i18nc("@title:window", "Structures Script Console"));
     QVBoxLayout* layout = new QVBoxLayout;
     QDialogButtonBox* dialogButtonBox = new QDialogButtonBox;
     QPushButton* closeButton = dialogButtonBox->addButton(QDialogButtonBox::Close);

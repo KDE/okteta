@@ -101,6 +101,7 @@ void StructuresManagerView::advancedSelection()
 {
     StructureAddRemoveWidget* advancedSelectionWidget = new StructureAddRemoveWidget(mSelectedStructures, mTool, this);
     QPointer<QDialog> dlg = new QDialog(this); // the dlg-on-heap-variant
+    dlg->setWindowTitle(i18nc("@title:window", "Advanced Structures Selection"));
     QVBoxLayout* layout = new QVBoxLayout;
     QDialogButtonBox* dialogButtonBox = new QDialogButtonBox;
     dialogButtonBox->addButton(QDialogButtonBox::Ok);
