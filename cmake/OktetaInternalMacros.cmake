@@ -26,7 +26,13 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 # THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+# ECM
+include(ECMGenerateHeaders)
+# CMake
+include(GenerateExportHeader)
+include(CMakePackageConfigHelpers)
 include(CMakeParseArguments)
+
 
 macro(okteta_add_sublibrary _baseName)
     set(options
@@ -121,6 +127,7 @@ function(okteta_add_library _baseName)
     set(options
         NO_TARGET_NAMESPACE
         NO_VERSIONED_INCLUDEDIR
+        NO_PACKAGE_NAMESPACED_INCLUDEDIR
         REVERSE_NAMESPACE_LIB
         REVERSE_NAMESPACE_INCLUDEDIR
         LOWERCASE_LIB
@@ -128,7 +135,6 @@ function(okteta_add_library _baseName)
     set(oneValueArgs
         VERSION
         SOVERSION
-        INCLUDE_INSTALL_DIR
         EXPORT
     )
     set(multiValueArgs
@@ -210,7 +216,7 @@ function(okteta_add_library _baseName)
 
     target_include_directories(${_targetName}
         PUBLIC "$<BUILD_INTERFACE:${${_targetName}_BINARY_DIR};${CMAKE_CURRENT_BINARY_DIR}>"
-        INTERFACE "$<INSTALL_INTERFACE:${OKTETA_ADD_LIBRARY_INCLUDE_INSTALL_DIR}>")
+    )
 
     set_target_properties(${_targetName} PROPERTIES
         ${_export_name_args}
@@ -224,14 +230,24 @@ function(okteta_add_library _baseName)
         ${KDE_INSTALL_TARGETS_DEFAULT_ARGS}
     )
 
-    install( FILES ${OKTETA_ADD_LIBRARY_HEADERS} ${_exportHeaderFilePath}
-        DESTINATION "${OKTETA_ADD_LIBRARY_INCLUDE_INSTALL_DIR}/${_include_dir}"
-        COMPONENT Devel
-    )
-    install( FILES ${OKTETA_ADD_LIBRARY_CCHEADERS}
-        DESTINATION "${OKTETA_ADD_LIBRARY_INCLUDE_INSTALL_DIR}/${_cc_include_dir}"
-        COMPONENT Devel
-    )
+    if (OKTETA_ADD_LIBRARY_HEADERS OR OKTETA_ADD_LIBRARY_CCHEADERS)
+        if (OKTETA_ADD_LIBRARY_NO_PACKAGE_NAMESPACED_INCLUDEDIR)
+            set(_include_install_dir "${KDE_INSTALL_INCLUDEDIR}")
+        else()
+            set(_include_install_dir "${KDE_INSTALL_INCLUDEDIR}/${_versionedNamespacePrefix}${_baseName}")
+        endif()
+        target_include_directories(${_targetName}
+            INTERFACE "$<INSTALL_INTERFACE:${_include_install_dir}>"
+        )
+        install( FILES ${OKTETA_ADD_LIBRARY_HEADERS} ${_exportHeaderFilePath}
+            DESTINATION "${_include_install_dir}/${_include_dir}"
+            COMPONENT Devel
+        )
+        install( FILES ${OKTETA_ADD_LIBRARY_CCHEADERS}
+            DESTINATION "${_include_install_dir}/${_cc_include_dir}"
+            COMPONENT Devel
+        )
+    endif()
 endfunction()
 
 
@@ -240,13 +256,12 @@ function(okteta_add_cmakeconfig _baseName)
         NO_TARGET_NAMESPACE
     )
     set(oneValueArgs
-        CONFIG_TEMPLATE
         EXPORT
+        VERSION
     )
     set(multiValueArgs
         NAMESPACE
         ABIVERSION
-        FILES
     )
     cmake_parse_arguments(OKTETA_ADD_CMAKECONFIG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
@@ -272,15 +287,30 @@ function(okteta_add_cmakeconfig _baseName)
     # create a Config.cmake and a ConfigVersion.cmake file and install them
     set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/${_fullVersionedName}")
 
+    if (OKTETA_ADD_CMAKECONFIG_VERSION)
+        set(_configVersionFilePath "${CMAKE_CURRENT_BINARY_DIR}/${_fullVersionedName}ConfigVersion.cmake")
+        if(NOT OKTETA_ADD_CMAKECONFIG_COMPATIBILITY)
+            set(OKTETA_ADD_CMAKECONFIG_COMPATIBILITY AnyNewerVersion)
+        endif()
+        write_basic_package_version_file("${_configVersionFilePath}"
+            VERSION ${OKTETA_ADD_CMAKECONFIG_VERSION}
+            COMPATIBILITY ${OKTETA_ADD_CMAKECONFIG_COMPATIBILITY}
+        )
+    else()
+        set(_configVersionFilePath)
+    endif()
+
+    set(_configFileTemplatePath "${CMAKE_CURRENT_SOURCE_DIR}/${_fullVersionedName}Config.cmake.in")
+    set(_configFilePath "${CMAKE_CURRENT_BINARY_DIR}/${_fullVersionedName}Config.cmake")
     configure_package_config_file(
-        "${OKTETA_ADD_CMAKECONFIG_CONFIG_TEMPLATE}"
-        "${CMAKE_CURRENT_BINARY_DIR}/${_fullVersionedName}Config.cmake"
+        "${_configFileTemplatePath}"
+        "${_configFilePath}"
         INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR}
     )
 
     install( FILES
-            "${CMAKE_CURRENT_BINARY_DIR}/${_fullVersionedName}Config.cmake"
-            "${OKTETA_ADD_CMAKECONFIG_FILES}"
+            "${_configFilePath}"
+            "${_configVersionFilePath}"
         DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
         COMPONENT Devel
     )

@@ -1,8 +1,5 @@
-ecm_setup_version( ${KASTEN_LIB_VERSION}
-    VARIABLE_PREFIX KASTENCONTROLLERS
-    SOVERSION ${KASTEN_LIB_SOVERSION}
-    PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KastenControllersConfigVersion.cmake"
-)
+set(KASTENCONTROLLERS_VERSION ${KASTEN_LIB_VERSION})
+set(KASTENCONTROLLERS_SO_VERSION ${KASTEN_LIB_SOVERSION})
 
 add_definitions(-DTRANSLATION_DOMAIN=\"libkasten\")
 
@@ -176,23 +173,21 @@ okteta_add_library(Controllers NAMESPACE Kasten
         KF5::KIOFileWidgets
         KF5::Parts
     VERSION     ${KASTENCONTROLLERS_VERSION}
-    SOVERSION   ${KASTENCONTROLLERS_SOVERSION}
+    SOVERSION   ${KASTENCONTROLLERS_SO_VERSION}
     ABIVERSION  ${KASTEN_ABI_VERSION}
     SOURCES   ${kastencontrollers_LIB_SRCS}
     HEADERS   ${kastencontrollers_LIB_HDRS}
     CCHEADERS ${kastencontrollers_LIB_CCHDRS}
-    INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR}
     NO_TARGET_NAMESPACE
     NO_VERSIONED_INCLUDEDIR
+    NO_PACKAGE_NAMESPACED_INCLUDEDIR
     LOWERCASE_LIB
     EXPORT KastenControllersTargets
 )
 
 okteta_add_cmakeconfig(Controllers NAMESPACE Kasten
     NO_TARGET_NAMESPACE
-    CONFIG_TEMPLATE "${CMAKE_CURRENT_SOURCE_DIR}/KastenControllersConfig.cmake.in"
-    EXPORT KastenControllersTargets
+    VERSION     ${KASTENCONTROLLERS_VERSION}
 #     ABIVERSION ${KASTEN_ABI_VERSION}
-    FILES
-        "${CMAKE_CURRENT_BINARY_DIR}/KastenControllersConfigVersion.cmake"
+    EXPORT KastenControllersTargets
 )
