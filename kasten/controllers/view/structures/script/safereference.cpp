@@ -34,7 +34,9 @@ SafeReferenceHolder::~SafeReferenceHolder()
     if (mRefs.size() > 0) {
         qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << mRefs.size() << "safe references were not removed";
     }
-    printf("register count: %d, destroy count %d: ", safeRefRegisterCnt, safeRefDestroyCnt);
+#ifndef NDEBUG
+   printf("register count: %d, destroy count: %d\n", safeRefRegisterCnt, safeRefDestroyCnt);
+#endif
 }
 
 void SafeReferenceHolder::invalidateAll(DataInformation* data)
