@@ -182,12 +182,10 @@ okteta_add_library(Controllers NAMESPACE Kasten
     NO_VERSIONED_INCLUDEDIR
     NO_PACKAGE_NAMESPACED_INCLUDEDIR
     LOWERCASE_LIB
-    EXPORT KastenControllersTargets
 )
 
 okteta_add_cmakeconfig(Controllers NAMESPACE Kasten
     NO_TARGET_NAMESPACE
     VERSION     ${KASTENCONTROLLERS_VERSION}
 #     ABIVERSION ${KASTEN_ABI_VERSION}
-    EXPORT KastenControllersTargets
 )

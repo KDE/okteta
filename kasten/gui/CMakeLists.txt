@@ -182,12 +182,10 @@ okteta_add_library(Gui NAMESPACE Okteta Kasten
     LOWERCASE_LIB
     REVERSE_NAMESPACE_LIB
     NO_TARGET_NAMESPACE
-    EXPORT OktetaKastenGuiTargets
 )
 
 okteta_add_cmakeconfig(Gui NAMESPACE Okteta Kasten
     NO_TARGET_NAMESPACE
     VERSION     ${OKTETAKASTENGUI_VERSION}
 #     ABIVERSION ${KASTEN_ABI_VERSION}
-    EXPORT OktetaKastenGuiTargets
 )

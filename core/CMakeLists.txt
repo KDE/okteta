@@ -108,14 +108,12 @@ okteta_add_library(Core NAMESPACE Okteta
     NO_VERSIONED_INCLUDEDIR
     NO_PACKAGE_NAMESPACED_INCLUDEDIR
     LOWERCASE_LIB
-    EXPORT OktetaCoreTargets
 )
 
 okteta_add_cmakeconfig(Core NAMESPACE Okteta
     NO_TARGET_NAMESPACE
     VERSION   ${OKTETACORE_VERSION}
 #     ABIVERSION ${OKTETALIBS_ABI_VERSION}
-    EXPORT OktetaCoreTargets
 )
 
 if(BUILD_TESTING)

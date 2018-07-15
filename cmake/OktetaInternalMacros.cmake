@@ -133,9 +133,9 @@ function(okteta_add_library _baseName)
         LOWERCASE_LIB
     )
     set(oneValueArgs
+        INTERNAL_BASENAME
         VERSION
         SOVERSION
-        EXPORT
     )
     set(multiValueArgs
         NAMESPACE
@@ -148,6 +148,9 @@ function(okteta_add_library _baseName)
     )
     cmake_parse_arguments(OKTETA_ADD_LIBRARY "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
+    if (NOT OKTETA_ADD_LIBRARY_INTERNAL_BASENAME)
+        set(OKTETA_ADD_LIBRARY_INTERNAL_BASENAME ${_baseName})
+    endif()
     string(CONCAT _namespacePrefix ${OKTETA_ADD_LIBRARY_NAMESPACE})
     if (OKTETA_ADD_LIBRARY_ABIVERSION)
         list(LENGTH OKTETA_ADD_LIBRARY_ABIVERSION _abiversionCount)
@@ -170,6 +173,9 @@ function(okteta_add_library _baseName)
     endif()
 
     set(_fullName "${_namespacePrefix}${_baseName}")
+    set(_fullInternalName "${_namespacePrefix}${OKTETA_ADD_LIBRARY_INTERNAL_BASENAME}")
+
+    set(_targets_export_name "${_fullName}Targets")
 
     set(_libraryName ${_versioned_namespace})
     if (OKTETA_ADD_LIBRARY_REVERSE_NAMESPACE_LIB)
@@ -181,7 +187,7 @@ function(okteta_add_library _baseName)
     endif()
 
     set(_targetName ${_fullName})
-    string(TOLOWER ${_fullName} _lc_fullName)
+    string(TOLOWER ${_fullInternalName} _lc_fullInternalName)
     if (OKTETA_ADD_LIBRARY_NO_VERSIONED_INCLUDEDIR)
         set(_cc_include_dir ${OKTETA_ADD_LIBRARY_NAMESPACE})
     else()
@@ -201,9 +207,9 @@ function(okteta_add_library _baseName)
         set(_export_name_args)
     endif()
 
-    set(_exportHeaderFilePath ${CMAKE_CURRENT_BINARY_DIR}/${_include_dir}/${_lc_fullName}_export.h)
+    set(_exportHeaderFilePath ${CMAKE_CURRENT_BINARY_DIR}/${_include_dir}/${_lc_fullInternalName}_export.hpp)
     generate_export_header(${_targetName}
-        BASE_NAME ${_fullName}
+        BASE_NAME ${_fullInternalName}
         EXPORT_FILE_NAME ${_exportHeaderFilePath}
     )
 
@@ -226,7 +232,7 @@ function(okteta_add_library _baseName)
     )
 
     install( TARGETS ${_targetName}
-        EXPORT ${OKTETA_ADD_LIBRARY_EXPORT}
+        EXPORT ${_targets_export_name}
         ${KDE_INSTALL_TARGETS_DEFAULT_ARGS}
     )
 
@@ -256,7 +262,6 @@ function(okteta_add_cmakeconfig _baseName)
         NO_TARGET_NAMESPACE
     )
     set(oneValueArgs
-        EXPORT
         VERSION
     )
     set(multiValueArgs
@@ -283,6 +288,8 @@ function(okteta_add_cmakeconfig _baseName)
     else()
         set(_fullVersionedName "${_namespacePrefix}${_baseName}")
     endif()
+
+    set(_targets_export_name "${_fullVersionedName}Targets")
 
     # create a Config.cmake and a ConfigVersion.cmake file and install them
     set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/${_fullVersionedName}")
@@ -317,7 +324,7 @@ function(okteta_add_cmakeconfig _baseName)
     if(NOT OKTETA_ADD_CMAKECONFIG_NO_TARGET_NAMESPACE)
         set(_namespace_args NAMESPACE "${_namespacePrefix}::")
     endif()
-    install(EXPORT ${OKTETA_ADD_CMAKECONFIG_EXPORT}
+    install(EXPORT ${_targets_export_name}
         FILE "${_fullVersionedName}Targets.cmake"
         ${_namespace_args}
         DESTINATION "${CMAKECONFIG_INSTALL_DIR}"

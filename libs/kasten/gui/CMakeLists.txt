@@ -129,12 +129,10 @@ okteta_add_library(Gui NAMESPACE Kasten
     NO_VERSIONED_INCLUDEDIR
     NO_PACKAGE_NAMESPACED_INCLUDEDIR
     LOWERCASE_LIB
-    EXPORT KastenGuiTargets
 )
 
 okteta_add_cmakeconfig(Gui NAMESPACE Kasten
     NO_TARGET_NAMESPACE
     VERSION     ${KASTENGUI_VERSION}
 #     ABIVERSION ${KASTEN_ABI_VERSION}
-    EXPORT KastenGuiTargets
 )

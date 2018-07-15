@@ -592,7 +592,6 @@ okteta_add_library(Controllers NAMESPACE Okteta Kasten
     LOWERCASE_LIB
     REVERSE_NAMESPACE_LIB
     NO_TARGET_NAMESPACE
-    EXPORT OktetaKastenControllersTargets
 )
 
 
@@ -621,7 +620,6 @@ okteta_add_cmakeconfig(Controllers NAMESPACE Okteta Kasten
     NO_TARGET_NAMESPACE
     VERSION     ${OKTETAKASTENCONTROLLERS_VERSION}
 #     ABIVERSION ${KASTEN_ABI_VERSION}
-    EXPORT OktetaKastenControllersTargets
 )
 
 

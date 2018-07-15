@@ -58,14 +58,12 @@ okteta_add_library(Core NAMESPACE Okteta Kasten
     REVERSE_NAMESPACE_INCLUDEDIR
     LOWERCASE_LIB
     REVERSE_NAMESPACE_LIB
-    EXPORT OktetaKastenCoreTargets
 )
 
 okteta_add_cmakeconfig(Core NAMESPACE Okteta Kasten
     NO_TARGET_NAMESPACE
     VERSION    ${OKTETAKASTENCORE_VERSION}
 #     ABIVERSION ${KASTEN_ABI_VERSION}
-    EXPORT OktetaKastenCoreTargets
 )
 
 if(BUILD_TESTING)
