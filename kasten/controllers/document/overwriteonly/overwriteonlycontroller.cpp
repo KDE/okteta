@@ -39,7 +39,7 @@ OverwriteOnlyController::OverwriteOnlyController(KXMLGUIClient* guiClient)
 
     guiClient->actionCollection()->addAction(QStringLiteral("isoverwriteonly"), mSetOverwriteOnlyAction);
 
-    setTargetModel(0);
+    setTargetModel(nullptr);
 }
 
 void OverwriteOnlyController::setTargetModel(AbstractModel* model)
@@ -47,7 +47,7 @@ void OverwriteOnlyController::setTargetModel(AbstractModel* model)
     Q_UNUSED(model)
 //     if( mByteArrayModel ) mByteArrayModel->disconnect( mSetOverwriteOnlyAction );
 
-    mByteArrayModel = 0; // view ? view->baseModel() : 0;
+    mByteArrayModel = nullptr; // view ? view->baseModel() : nullptr;
 
     if (mByteArrayModel) {
 //         mSetOverwriteOnlyAction->setChecked( mByteArrayModel->isOverwriteOnly() );
