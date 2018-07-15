@@ -207,7 +207,7 @@ function(okteta_add_library _baseName)
         set(_export_name_args)
     endif()
 
-    set(_exportHeaderFilePath ${CMAKE_CURRENT_BINARY_DIR}/${_include_dir}/${_lc_fullInternalName}_export.hpp)
+    set(_exportHeaderFilePath ${CMAKE_CURRENT_BINARY_DIR}/${_include_dir}/${_lc_fullInternalName}_export.h)
     generate_export_header(${_targetName}
         BASE_NAME ${_fullInternalName}
         EXPORT_FILE_NAME ${_exportHeaderFilePath}
