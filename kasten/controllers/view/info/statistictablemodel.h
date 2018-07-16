@@ -65,6 +65,7 @@ public:
 public Q_SLOTS:
     void setCharCodec(const QString& codecName);
     void setValueCoding(int valueCoding);
+    void setSubstituteChar(QChar substituteChar);
     void setUndefinedChar(QChar undefinedChar);
 
 Q_SIGNALS:
@@ -78,6 +79,7 @@ private:
     Okteta::ValueCoding mValueCoding;
     Okteta::ValueCodec* mValueCodec;
     Okteta::CharCodec* mCharCodec;
+    QChar mSubstituteChar;
     QChar mUndefinedChar;
 };
 
