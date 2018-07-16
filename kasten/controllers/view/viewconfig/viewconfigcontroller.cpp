@@ -127,7 +127,7 @@ ViewConfigController::ViewConfigController(KXMLGUIClient* guiClient)
     actionCollection->addActions({
         mCodingAction,
         mEncodingAction,
-        mShowsNonprintingAction,
+        // mShowsNonprintingAction, TODOSHOWNONPRINTING hide from UI for now
         mSetBytesPerLineAction,
         mSetBytesPerGroupAction,
         mResizeStyleAction,
