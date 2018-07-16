@@ -28,16 +28,21 @@
 #include <okteta/valuecodec.h>
 // KF5
 #include <KLocalizedString>
+#include <KColorScheme>
+// Qt
+#include <QApplication>
 
 namespace Kasten {
 
-static const unsigned char ByteTableDefaultUndefinedChar = '?';
+static const QChar ByteTableDefaultSubstituteChar =  QLatin1Char('.');
+static const QChar ByteTableDefaultUndefinedChar =   QChar(QChar::ReplacementCharacter);
 static const int ByteSetSize = 256;
 
 ByteTableModel::ByteTableModel(QObject* parent)
     : QAbstractTableModel(parent)
     , mCharCodec(Okteta::CharCodec::createCodec(Okteta::LocalEncoding))
-    , mUndefinedChar(QLatin1Char(ByteTableDefaultUndefinedChar))
+    , mSubstituteChar(ByteTableDefaultSubstituteChar)
+    , mUndefinedChar(ByteTableDefaultUndefinedChar)
 {
     static const Okteta::ValueCoding CodingIds[NofOfValueCodings] = {
         Okteta::DecimalCoding,
@@ -59,8 +64,31 @@ ByteTableModel::~ByteTableModel()
     delete mCharCodec;
 }
 
+void ByteTableModel::setSubstituteChar(QChar substituteChar)
+{
+    if (substituteChar.isNull()) {
+        substituteChar = ByteTableDefaultSubstituteChar;
+    }
+
+    if (mSubstituteChar == substituteChar) {
+        return;
+    }
+
+    mSubstituteChar = substituteChar;
+
+    emit dataChanged(index(0, CharacterId), index(ByteSetSize - 1, CharacterId));
+}
+
 void ByteTableModel::setUndefinedChar(QChar undefinedChar)
 {
+    if (undefinedChar.isNull()) {
+        undefinedChar = ByteTableDefaultUndefinedChar;
+    }
+
+    if (mUndefinedChar == undefinedChar) {
+        return;
+    }
+
     mUndefinedChar = undefinedChar;
 
     emit dataChanged(index(0, CharacterId), index(ByteSetSize - 1, CharacterId));
@@ -101,8 +129,8 @@ QVariant ByteTableModel::data(const QModelIndex& index, int role) const
             content =
                 decodedChar.isUndefined() ?
                     i18nc("@item:intable character is not defined", "undef.") :
-                (decodedChar.unicode() == 0x09) ? // tab only creates a wider column
-                    QString() :
+                !decodedChar.isPrint() ?
+                    QString(mSubstituteChar) :
                     QString(static_cast<QChar>(decodedChar));
             // TODO: show proper descriptions for all control values, incl. space and delete
             // cmp. KCharSelect
@@ -111,6 +139,17 @@ QVariant ByteTableModel::data(const QModelIndex& index, int role) const
         }
 
         result = content;
+    } else if (role == Qt::ForegroundRole) {
+        const int column = index.column();
+        if (column == CharacterId) {
+            const unsigned char byte = index.row();
+            const Okteta::Character decodedChar = mCharCodec->decode(byte);
+            if (decodedChar.isUndefined() || !decodedChar.isPrint()) {
+                const QPalette& palette = QApplication::palette();
+                const KColorScheme colorScheme(palette.currentColorGroup(), KColorScheme::View);
+                result = colorScheme.foreground(KColorScheme::InactiveText);
+            }
+        }
     } else if (role == Qt::TextAlignmentRole) {
         result = Qt::AlignRight;
     }

@@ -34,7 +34,8 @@
 
 namespace Kasten {
 
-static const unsigned char StatisticsDefaultUndefinedChar = '?';
+static const QChar StatisticsDefaultSubstituteChar =  QLatin1Char('.');
+static const QChar StatisticsDefaultUndefinedChar =   QChar(QChar::ReplacementCharacter);
 static const Okteta::ValueCoding DefaultValueCoding =  Okteta::HexadecimalCoding;
 static const int StatisticsByteSetSize = 256;
 
@@ -44,7 +45,8 @@ StatisticTableModel::StatisticTableModel(int* byteCount, QObject* parent)
     , mValueCoding(DefaultValueCoding)
     , mValueCodec(Okteta::ValueCodec::createCodec(DefaultValueCoding))
     , mCharCodec(Okteta::CharCodec::createCodec(Okteta::LocalEncoding))
-    , mUndefinedChar(QLatin1Char(StatisticsDefaultUndefinedChar))
+    , mSubstituteChar(StatisticsDefaultSubstituteChar)
+    , mUndefinedChar(StatisticsDefaultUndefinedChar)
 {
 }
 
@@ -61,8 +63,31 @@ void StatisticTableModel::update(int size)
     emit sizeChanged(mSize);
 }
 
+void StatisticTableModel::setSubstituteChar(QChar substituteChar)
+{
+    if (substituteChar.isNull()) {
+        substituteChar = StatisticsDefaultSubstituteChar;
+    }
+
+    if (mSubstituteChar == substituteChar) {
+        return;
+    }
+
+    mSubstituteChar = substituteChar;
+
+    emit dataChanged(index(0, CharacterId), index(StatisticsByteSetSize - 1, CharacterId));
+}
+
 void StatisticTableModel::setUndefinedChar(QChar undefinedChar)
 {
+    if (undefinedChar.isNull()) {
+        undefinedChar = StatisticsDefaultUndefinedChar;
+    }
+
+    if (mUndefinedChar == undefinedChar) {
+        return;
+    }
+
     mUndefinedChar = undefinedChar;
 
     emit dataChanged(index(0, CharacterId), index(StatisticsByteSetSize - 1, CharacterId));
@@ -120,10 +145,10 @@ QVariant StatisticTableModel::data(const QModelIndex& index, int role) const
             const Okteta::Character decodedChar = mCharCodec->decode(byte);
             result =
                 decodedChar.isUndefined() ?
-                i18nc("@item:intable character is not defined", "undef.") :
-                (decodedChar.unicode() == 0x09) ?     // tab only creates a wider column
-                QString() :
-                QString(static_cast<QChar>(decodedChar));
+                    i18nc("@item:intable character is not defined", "undef.") :
+                !decodedChar.isPrint() ?
+                    QString(mSubstituteChar) :
+                    QString(static_cast<QChar>(decodedChar));
             // TODO: show proper descriptions for all control values, incl. space and delete
             // cmp. KCharSelect
             break;
@@ -157,6 +182,13 @@ QVariant StatisticTableModel::data(const QModelIndex& index, int role) const
         bool isInactive = false;
         switch (column)
         {
+        case CharacterId:
+        {
+            const unsigned char byte = index.row();
+            const Okteta::Character decodedChar = mCharCodec->decode(byte);
+            isInactive = decodedChar.isUndefined() || !decodedChar.isPrint();
+            break;
+        }
         case CountId:
             isInactive = (mSize == -1);
             break;

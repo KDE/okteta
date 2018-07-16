@@ -167,7 +167,9 @@ ViewProfileEdit::ViewProfileEdit(QWidget* parent)
     charsBoxFormLayout->addRow(i18n("Coding:"), mCharCodingComboBox);
     // line offset shown
     mNonPrintableShownCheckBox = new QCheckBox(charsBox);
-    charsBoxFormLayout->addRow(i18n("Show Non-printable:"), mNonPrintableShownCheckBox);
+    // TODOSHOWNONPRINTING hide from UI for now
+    mNonPrintableShownCheckBox->hide();
+    // charsBoxFormLayout->addRow(i18n("Show Non-printable:"), mNonPrintableShownCheckBox);
     // char for non-printable bytes
     mNonPrintableCharEdit = new QLineEdit(charsBox);   // TODO: use a validator to ensure always one char
     mNonPrintableCharEdit->setClearButtonEnabled(true);

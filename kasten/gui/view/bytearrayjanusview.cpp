@@ -250,7 +250,7 @@ void ByteArrayJanusView::insert(const QByteArray& byteArray)
 
 bool ByteArrayJanusView::showsNonprinting() const
 {
-    return mView->showsNonprinting();
+    return false; // TODOSHOWNONPRINTING pin to false for now return mView->showsNonprinting();
 }
 
 bool ByteArrayJanusView::offsetColumnVisible() const
@@ -280,7 +280,8 @@ bool ByteArrayJanusView::isOverwriteMode() const
 
 void ByteArrayJanusView::setShowsNonprinting(bool on)
 {
-    mView->setShowsNonprinting(on);
+    Q_UNUSED(on);
+    // TODOSHOWNONPRINTING mView->setShowsNonprinting(on);
 }
 
 void ByteArrayJanusView::setNoOfGroupedBytes(int noOfGroupedBytes)

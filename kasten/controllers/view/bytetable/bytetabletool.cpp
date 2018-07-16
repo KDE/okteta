@@ -68,14 +68,21 @@ void ByteTableTool::setTargetModel(AbstractModel* model)
     const bool hasView = (mByteArrayView && mByteArrayModel);
     if (hasView) {
         mByteTableModel->setCharCodec(mByteArrayView->charCodingName());
+        mByteTableModel->setSubstituteChar(mByteArrayView->substituteChar());
         mByteTableModel->setUndefinedChar(mByteArrayView->undefinedChar());
         connect(mByteArrayView,  &ByteArrayView::charCodecChanged,
                 mByteTableModel, &ByteTableModel::setCharCodec);
+        connect(mByteArrayView, &ByteArrayView::substituteCharChanged,
+                mByteTableModel, &ByteTableModel::setSubstituteChar);
         connect(mByteArrayView, &ByteArrayView::undefinedCharChanged,
                 mByteTableModel, &ByteTableModel::setUndefinedChar);
 
         connect(mByteArrayView, &ByteArrayView::readOnlyChanged,
                 this, &ByteTableTool::onReadOnlyChanged);
+    } else {
+        // TODO: use default view profile chars and char codec
+        mByteTableModel->setSubstituteChar(QChar());
+        mByteTableModel->setUndefinedChar(QChar());
     }
 
     const bool isWriteable = (hasView && !mByteArrayView->isReadOnly());

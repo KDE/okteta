@@ -77,16 +77,23 @@ void InfoTool::setTargetModel(AbstractModel* model)
     if (mByteArrayView && mByteArrayModel) {
         mStatisticTableModel->setCharCodec(mByteArrayView->charCodingName());
         mStatisticTableModel->setValueCoding(mByteArrayView->valueCoding());
+        mStatisticTableModel->setSubstituteChar(mByteArrayView->substituteChar());
         mStatisticTableModel->setUndefinedChar(mByteArrayView->undefinedChar());
         connect(mByteArrayView,  &ByteArrayView::charCodecChanged,
                 mStatisticTableModel, &StatisticTableModel::setCharCodec);
         connect(mByteArrayView,  &ByteArrayView::valueCodingChanged,
                 mStatisticTableModel, &StatisticTableModel::setValueCoding);
+        connect(mByteArrayView,  &ByteArrayView::substituteCharChanged,
+                mStatisticTableModel, &StatisticTableModel::setSubstituteChar);
         connect(mByteArrayView,  &ByteArrayView::undefinedCharChanged,
                 mStatisticTableModel, &StatisticTableModel::setUndefinedChar);
 
         connect(mByteArrayView,  &ByteArrayView::selectedDataChanged,
                 this, &InfoTool::onSelectionChanged);
+    } else {
+        // TODO: set based on default view profile, also char codec
+        mStatisticTableModel->setSubstituteChar(QChar());
+        mStatisticTableModel->setUndefinedChar(QChar());
     }
 
     emit statisticDirty(!isStatisticUptodate());
