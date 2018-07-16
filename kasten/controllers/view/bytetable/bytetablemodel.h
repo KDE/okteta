@@ -60,6 +60,7 @@ public: // QAbstractTableModel API
 
 public Q_SLOTS:
     void setCharCodec(const QString& codecName);
+    void setSubstituteChar(QChar substituteChar);
     void setUndefinedChar(QChar undefinedChar);
 
 private:
@@ -68,6 +69,7 @@ private:
 private:
     Okteta::ValueCodec* mValueCodec[NofOfValueCodings];
     Okteta::CharCodec* mCharCodec;
+    QChar mSubstituteChar;
     QChar mUndefinedChar;
 };
 
