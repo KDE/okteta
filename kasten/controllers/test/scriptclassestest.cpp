@@ -282,9 +282,7 @@ void ScriptClassesTest::checkProperties(const QVector<PropertyPair>& expected,
 
 void ScriptClassesTest::checkIterators()
 {
-
-    for (int i = 0; i < primitives.size(); ++i) {
-        TopLevelDataInformation* top = primitives.at(i);
+    for (auto* top : qAsConst(primitives)) {
         checkProperties(primitiveProperties, top->actualDataInformation(), "primitives");
     }
 

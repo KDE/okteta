@@ -78,13 +78,13 @@ QVector<TopLevelDataInformation*> StructureDefinitionFile::structures() const
 TopLevelDataInformation* StructureDefinitionFile::structure(const QString& name) const
 {
     Q_CHECK_PTR(mParser);
-    QVector<TopLevelDataInformation*> list = mParser->parseStructures();
+    const QVector<TopLevelDataInformation*> list = mParser->parseStructures();
     TopLevelDataInformation* ret = nullptr;
-    for (int i = 0; i < list.size(); ++i) {
-        if (list.at(i)->actualDataInformation()->name() == name) {
-            ret = list.at(i);
+    for (auto* info : list) {
+        if (info->actualDataInformation()->name() == name) {
+            ret = info;
         } else {
-            delete list.at(i); // we have no use for this element
+            delete info; // we have no use for this element
         }
     }
 

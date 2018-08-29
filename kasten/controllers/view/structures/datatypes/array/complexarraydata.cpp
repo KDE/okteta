@@ -112,8 +112,8 @@ QString ComplexArrayData::typeName() const
 
 void ComplexArrayData::setNewParentForChildren()
 {
-    for (int i = 0; i < mChildren.size(); ++i) {
-        mChildren.at(i)->setParent(mParent);
+    for (auto* child : qAsConst(mChildren)) {
+        child->setParent(mParent);
     }
 }
 
@@ -121,8 +121,7 @@ BitCount64 ComplexArrayData::offset(const DataInformation* child) const
 {
     BitCount64 offset = 0;
     // sum size of elements up to index
-    for (int i = 0; i < mChildren.size(); ++i) {
-        DataInformation* current = mChildren.at(i);
+    for (auto* current : qAsConst(mChildren)) {
         if (current == child) {
             return offset;
         }

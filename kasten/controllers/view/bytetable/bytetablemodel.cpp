@@ -57,8 +57,8 @@ ByteTableModel::ByteTableModel(QObject* parent)
 
 ByteTableModel::~ByteTableModel()
 {
-    for (int i = 0; i < NofOfValueCodings; ++i) {
-        delete mValueCodec[i];
+    for (auto* codec : qAsConst(mValueCodec)) {
+        delete codec;
     }
 
     delete mCharCodec;

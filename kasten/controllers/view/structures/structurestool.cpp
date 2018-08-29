@@ -268,9 +268,9 @@ void StructuresTool::setSelectedStructuresInView()
             // should be valid now
             if (name == QLatin1String("*")) {
                 // add all of them
-                QVector<TopLevelDataInformation*> structs = def->structures();
-                for (int i = 0; i < structs.size(); ++i) {
-                    addChildItem(structs.at(i));
+                const QVector<TopLevelDataInformation*> structs = def->structures();
+                for (auto* structure : structs) {
+                    addChildItem(structure);
                 }
             } else {
                 TopLevelDataInformation* data = def->structure(name);

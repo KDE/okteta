@@ -36,8 +36,8 @@ DataInformationWithChildren::DataInformationWithChildren(const QString& name,
     : DataInformation(name, parent)
     , mChildren(children)
 {
-    for (int i = 0; i < mChildren.size(); ++i) {
-        mChildren.at(i)->setParent(this);
+    for (auto* child : qAsConst(mChildren)) {
+        child->setParent(this);
     }
 }
 
@@ -101,8 +101,8 @@ BitCount32 DataInformationWithChildren::size() const
 void DataInformationWithChildren::resetValidationState()
 {
     DataInformation::resetValidationState();
-    for (int i = 0; i < mChildren.size(); ++i) {
-        mChildren.at(i)->resetValidationState();
+    for (auto* child : qAsConst(mChildren)) {
+        child->resetValidationState();
     }
 }
 
@@ -146,8 +146,8 @@ void DataInformationWithChildren::setChildren(const QVector<DataInformation*>& n
     const uint count = newChildren.size();
     topLevelDataInformation()->_childCountAboutToChange(this, 0, count);
     mChildren = newChildren;
-    for (int i = 0; i < mChildren.size(); ++i) {
-        mChildren.at(i)->setParent(this);
+    for (auto* child : qAsConst(mChildren)) {
+        child->setParent(this);
     }
 
     topLevelDataInformation()->_childCountChanged(this, 0, count);
@@ -205,8 +205,8 @@ void DataInformationWithChildren::appendChildren(const QVector<DataInformation*>
     if (emitSignal) {
         topLevelDataInformation()->_childCountAboutToChange(this, mChildren.size(), mChildren.size() + added);
     }
-    for (int i = 0; i < newChildren.size(); ++i) {
-        newChildren.at(i)->setParent(this);
+    for (auto* child : newChildren) {
+        child->setParent(this);
     }
 
     mChildren << newChildren;

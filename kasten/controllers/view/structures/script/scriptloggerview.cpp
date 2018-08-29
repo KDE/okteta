@@ -35,8 +35,8 @@ ScriptLoggerView::ScriptLoggerView(const TopLevelDataInformation::List& data, QW
     , mView(new QTableView(this))
     , mList(data)
 {
-    for (int i = 0; i < mList.size(); ++i) {
-        mSelector->addItem(mList.at(i)->objectName());
+    for (const auto& info : qAsConst(mList)) {
+        mSelector->addItem(info->objectName());
     }
 
     mView->setShowGrid(false);
