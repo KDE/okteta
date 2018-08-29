@@ -22,9 +22,9 @@
 
 #include "bytearraymodel_p.h"
 
-// C
-#include <string.h>
-#include <stdlib.h>
+// Std
+#include <cstring>
+#include <cstdlib>
 
 static const int minChunkSize = 512;
 static const int maxChunkSize = 1024 * 10; // TODO: get max. memory page size

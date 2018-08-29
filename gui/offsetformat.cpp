@@ -22,8 +22,8 @@
 
 #include "offsetformat.h"
 
-// C
-#include <stdio.h>
+// Std
+#include <cstdio>
 
 namespace Okteta {
 

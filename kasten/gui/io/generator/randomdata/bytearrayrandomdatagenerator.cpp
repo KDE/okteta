@@ -29,8 +29,8 @@
 // Qt
 #include <QMimeData>
 #include <QByteArray>
-// C++
-#include <time.h>
+// Std
+#include <ctime>
 
 namespace Kasten {
 

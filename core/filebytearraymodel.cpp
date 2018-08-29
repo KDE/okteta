@@ -24,8 +24,8 @@
 
 // lib
 #include "filebytearraymodel_p.h"
-// C
-#include <stdlib.h>
+// Std
+#include <cstdlib>
 
 namespace Okteta {
 

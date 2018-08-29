@@ -24,8 +24,8 @@
 
 // lib
 #include <arraychangemetricslist.h>
-// C
-#include <string.h>
+// Std
+#include <cstring>
 
 namespace Okteta {
 

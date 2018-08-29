@@ -22,7 +22,7 @@
 
 #include "filebytearraymodel_p.h"
 
-// C
+// Std
 #include <cstdlib>
 
 namespace Okteta {
