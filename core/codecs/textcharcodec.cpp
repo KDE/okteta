@@ -72,16 +72,14 @@ const encodingDataList[] =
     { KOI8_UEncoding, "KOI8-U" }
 };
 // TODO: WS2
-static const unsigned int encodingDataListSize =
-    sizeof(encodingDataList) / sizeof(struct EncodingData);
 
 static bool is8Bit(QTextCodec* codec)
 {
     bool result = false;
 
     const QByteArray& codecName = codec->name();
-    for (unsigned int i = 0; i < encodingDataListSize; ++i) {
-        if (qstrcmp(codecName, encodingDataList[i].name) == 0) {
+    for (auto& encodingData : encodingDataList) {
+        if (qstrcmp(codecName, encodingData.name) == 0) {
             result = true;
             break;
         }
@@ -190,9 +188,9 @@ const QStringList& TextCharCodec::codecNames()
     // first call?
     if (textCodecNames.isEmpty()) {
         KCharsets* charsets = KCharsets::charsets();
-        for (unsigned int i = 0; i < encodingDataListSize; ++i) {
+        for (auto& encodingData : encodingDataList) {
             bool isCodecFound = false;
-            const QString codecName = QString::fromLatin1(encodingDataList[i].name);
+            const QString codecName = QString::fromLatin1(encodingData.name);
             QTextCodec* codec = charsets->codecForName(codecName, isCodecFound);
             if (isCodecFound) {
                 textCodecNames.append(QString::fromLatin1(codec->name()));

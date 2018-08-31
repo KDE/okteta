@@ -28,7 +28,7 @@
 #include <KLocalizedString>
 // Qt
 #include <QtGlobal>
-// C
+// Std
 #include <cstdlib>
 
 // TODO: add option which bit (0/1) to insert

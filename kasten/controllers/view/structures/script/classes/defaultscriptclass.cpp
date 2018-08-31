@@ -316,9 +316,9 @@ QScriptValue::PropertyFlags DefaultScriptClass::propertyFlags(const QScriptValue
         result |= QScriptValue::ReadOnly;
     }
 
-    for (int i = 0, size = mIterableProperties.size(); i < size; ++i) {
-        if (mIterableProperties.at(i).first == name) {
-            return result | mIterableProperties.at(i).second;
+    for (const auto& property : qAsConst(mIterableProperties)) {
+        if (property.first == name) {
+            return result | property.second;
         }
     }
 

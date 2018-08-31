@@ -46,8 +46,8 @@ BitCount32 UnionDataInformation::size() const
 {
     // since this is a union return size of biggest element
     BitCount32 size = 0;
-    for (int i = 0; i < mChildren.size(); i++) {
-        size = qMax(size, mChildren.at(i)->size());
+    for (auto* child : mChildren) {
+        size = qMax(size, child->size());
     }
 
     return size;

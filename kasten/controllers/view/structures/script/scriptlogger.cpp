@@ -138,8 +138,7 @@ void ScriptLogger::clear()
 QStringList ScriptLogger::messages(LogLevel minLevel) const
 {
     QStringList ret;
-    for (int i = 0; i < mData.size(); ++i) {
-        const Data& d = mData.at(i);
+    for (const auto& d : mData) {
         if (d.level >= minLevel) {
             ret << d.message;
         }

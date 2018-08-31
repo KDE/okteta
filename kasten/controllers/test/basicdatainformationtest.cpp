@@ -312,8 +312,8 @@ void BasicDataInformationTest::testBitfields()
     exp.isBitfield = true;
     exp.size = 24;
     exp.columnFlags[DataInformation::ColumnValue] = Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable;
-    for (int i = 0; i < bitfields.size(); ++i) {
-        basicTest(bitfields.at(i), exp);
+    for (auto* bitField : qAsConst(bitfields)) {
+        basicTest(bitField, exp);
     }
 }
 

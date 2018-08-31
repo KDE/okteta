@@ -91,8 +91,8 @@ void TaggedUnionDataInformation::setAlternatives(const QVector<FieldInfo>& alter
     mAlternatives = alternatives;
     // set parent
     for (const FieldInfo& fi : qAsConst(mAlternatives)) {
-        for (int i = 0; i <  fi.fields.size(); ++i) {
-            fi.fields.at(i)->setParent(this);
+        for (auto* field : fi.fields) {
+            field->setParent(this);
         }
     }
 
@@ -170,8 +170,8 @@ qint64 TaggedUnionDataInformation::readData(Okteta::AbstractByteArrayModel* inpu
 
     // this is important since the remaining children might have changed since before the read
     // where beginRead was called on the children at that time
-    for (int i = 0; i < others.size(); i++) {
-        others.at(i)->beginRead();
+    for (auto* other : others) {
+        other->beginRead();
     }
 
     if (!mWasAbleToRead) {
@@ -190,8 +190,7 @@ BitCount64 TaggedUnionDataInformation::childPosition(const DataInformation* chil
     BitCount64 offset = 0;
     bool found = false;
     // sum size of elements up to index
-    for (int i = 0; i < mChildren.size(); ++i) {
-        DataInformation* current = mChildren.at(i);
+    for (auto* current : mChildren) {
         if (current == child) {
             found = true;
             break;
@@ -201,8 +200,7 @@ BitCount64 TaggedUnionDataInformation::childPosition(const DataInformation* chil
 
     if (!found) {
         const QVector<DataInformation*> others = currentChildren();
-        for (int i = 0; i < others.size(); ++i) {
-            DataInformation* current = others.at(i);
+        for (auto* current : others) {
             if (current == child) {
                 found = true;
                 break;
@@ -221,13 +219,13 @@ BitCount64 TaggedUnionDataInformation::childPosition(const DataInformation* chil
 BitCount32 TaggedUnionDataInformation::size() const
 {
     BitCount32 total = 0;
-    for (int i = 0; i < mChildren.size(); ++i) {
-        total += mChildren.at(i)->size();
+    for (auto* child : mChildren) {
+        total += child->size();
     }
 
     const QVector<DataInformation*> others = currentChildren();
-    for (int i = 0; i < others.size(); ++i) {
-        total += others.at(i)->size();
+    for (auto* other : others) {
+        total += other->size();
     }
 
     return total;
@@ -244,16 +242,16 @@ bool TaggedUnionDataInformation::replaceChildAt(unsigned int index, DataInformat
 int TaggedUnionDataInformation::indexOf(const DataInformation* const data) const
 {
     int index = 0;
-    for (int i = 0; i < mChildren.size(); ++i) {
-        if (mChildren.at(i) == data) {
+    for (auto* child : mChildren) {
+        if (child == data) {
             return index;
         }
         index++;
     }
 
     const QVector<DataInformation*> others = currentChildren();
-    for (int i = 0; i < others.size(); ++i) {
-        if (others.at(i) == data) {
+    for (auto* other : others) {
+        if (other == data) {
             return index;
         }
         index++;

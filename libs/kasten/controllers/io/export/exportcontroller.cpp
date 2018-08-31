@@ -90,8 +90,7 @@ void ExportController::updateActions()
     const bool hasExporters = (exporterList.size() > 0);
 
     if (hasExporters) {
-        for (int c = 0; c < exporterList.size(); ++c) {
-            AbstractModelExporter* exporter = exporterList.at(c);
+        for (auto* exporter : exporterList) {
             const QString title = exporter->remoteTypeName();
             QAction* action = new QAction(title, mExportSelectAction);
 

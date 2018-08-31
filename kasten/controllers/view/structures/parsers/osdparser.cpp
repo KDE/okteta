@@ -472,8 +472,7 @@ DataInformation* OsdParser::parseElement(const QDomElement& elem, const OsdParse
 
 EnumDefinition::Ptr OsdParser::findEnum(const QString& defName, const OsdParserInfo& info)
 {
-    for (int i = 0; i < info.enums.size(); ++i) {
-        const EnumDefinition::Ptr def = info.enums.at(i);
+    for (const auto& def : info.enums) {
         if (def->name() == defName) {
             return def;
         }

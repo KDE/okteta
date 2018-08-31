@@ -96,8 +96,7 @@ void CopyAsController::updateActions()
     const bool hasEncoders = (encoderList.size() > 0);
 
     if (hasEncoders) {
-        for (int c = 0; c < encoderList.size(); ++c) {
-            AbstractModelStreamEncoder* encoder = encoderList.at(c);
+        for (auto* encoder : encoderList) {
             const QString title = encoder->remoteTypeName();
             QAction* action = new QAction(title, mCopyAsSelectAction);
 
