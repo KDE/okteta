@@ -28,7 +28,7 @@
 OktetaAboutData::OktetaAboutData()
     : KAboutData(QStringLiteral("okteta"),
                  i18n("Okteta"), // name
-                 QStringLiteral("0.25.2"),
+                 QStringLiteral("0.25.3"),
                  i18n("Hex editor"), // description
                  KAboutLicense::GPL_V2,
                  i18n("Copyright 2006-2018 Friedrich W. H. Kossebau"), // copyright
