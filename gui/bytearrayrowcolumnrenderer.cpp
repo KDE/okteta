@@ -845,14 +845,15 @@ void ByteArrayRowColumnRenderer::renderFramedByte(QPainter* painter,
     const KColorScheme::ForegroundRole foregroundRole =
         mByteTypeColored ? foregroundRoleForChar(byteChar) : KColorScheme::NormalText;
     const QBrush brush = colorScheme.foreground(foregroundRole);
-    const QColor& charColor = brush.color();
-    painter->setPen(charColor);
+    QPen pen(brush.color());
+    pen.setJoinStyle(Qt::MiterJoin);
+    painter->setPen(pen);
     if (frameStyle == Frame) {
-        painter->drawRect(0, 0, mByteWidth - 1, mDigitHeight - 1);
+        painter->drawRect(QRectF(0.5, 0.5, mByteWidth - 1, mDigitHeight - 1));
     } else if (frameStyle == Left) {
-        painter->drawLine(0, 0, 0, mDigitHeight - 1);
+        painter->drawLine(QPointF(0.5, 0.5), QPointF(0.5, mDigitHeight - 0.5));
     } else {
-        painter->drawLine(mByteWidth - 1, 0, mByteWidth - 1, mDigitHeight - 1);
+        painter->drawLine(QPointF(mByteWidth - 0.5, 0), QPointF(mByteWidth - 0.5, mDigitHeight - 0.5));
     }
 }
 
