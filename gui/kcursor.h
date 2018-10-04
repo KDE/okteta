@@ -41,29 +41,32 @@ public:
 
 public:
     /** sets size of the full cursor */
-    void setSize(PixelX Width, PixelY Height);
+    void setSize(PixelX Width, PixelY Height, qreal devicePixelRatio);
     /** sets the shape of the cursor to be drawn */
-    void setShape(PixelX X, PixelX W);
+    void setShape(PixelX X, PixelX W, qreal devicePixelRatio);
 
 public: // access
     QPixmap& onPixmap();
     QPixmap& offPixmap();
     PixelX cursorX() const;
-    PixelX cursorW() const;
+    PixelX shapeX() const;
+    PixelX shapeW() const;
 
 protected:
     QPixmap OnPixmap;
     QPixmap OffPixmap;
 
     PixelX CursorX = 0;
-    PixelX CursorW = -1;
+    PixelX ShapeX = -1;
+    PixelX ShapeW = -1;
 };
 
 inline QPixmap& KCursor::onPixmap()  { return OnPixmap; }
 inline QPixmap& KCursor::offPixmap() { return OffPixmap; }
 
 inline PixelX KCursor::cursorX() const { return CursorX; }
-inline PixelX KCursor::cursorW() const { return CursorW; }
+inline PixelX KCursor::shapeX() const { return ShapeX; }
+inline PixelX KCursor::shapeW() const { return ShapeW; }
 
 }
 

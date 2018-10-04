@@ -633,8 +633,10 @@ void ByteArrayColumnViewPrivate::createCursorPixmaps()
 {
     Q_Q(ByteArrayColumnView);
 
+    const PixelX byteWidth = mActiveColumn->byteWidth();
+
     // create mCursorPixmaps
-    mCursorPixmaps->setSize(mActiveColumn->byteWidth(), q->lineHeight());
+    mCursorPixmaps->setSize(byteWidth, q->lineHeight(), q->devicePixelRatio());
 
     const Address index = mTableCursor->validIndex();
 
@@ -653,13 +655,13 @@ void ByteArrayColumnViewPrivate::createCursorPixmaps()
     PixelX cursorX;
     PixelX cursorW;
     if (isCursorBehind()) {
-        cursorX = qMax(0, mCursorPixmaps->onPixmap().width() - InsertCursorWidth);
+        cursorX = qMax(0, byteWidth - InsertCursorWidth);
         cursorW = InsertCursorWidth;
     } else {
         cursorX = 0;
         cursorW = mOverWrite ? -1 : InsertCursorWidth;
     }
-    mCursorPixmaps->setShape(cursorX, cursorW);
+    mCursorPixmaps->setShape(cursorX, cursorW, q->devicePixelRatio());
 }
 
 void ByteArrayColumnViewPrivate::drawActiveCursor(QPainter* painter)
@@ -691,7 +693,7 @@ void ByteArrayColumnViewPrivate::drawActiveCursor(QPainter* painter)
     } else {
         painter->drawPixmap(mCursorPixmaps->cursorX(), 0,
                             mBlinkCursorVisible ? mCursorPixmaps->onPixmap() : mCursorPixmaps->offPixmap(),
-                            mCursorPixmaps->cursorX(), 0, mCursorPixmaps->cursorW(), -1);
+                            mCursorPixmaps->shapeX(), 0, mCursorPixmaps->shapeW(), -1);
     }
 
     painter->translate(-x, -y);
