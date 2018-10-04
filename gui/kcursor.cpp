@@ -28,18 +28,23 @@ KCursor::KCursor() = default;
 
 KCursor::~KCursor() = default;
 
-void KCursor::setSize(PixelX Width, PixelY Height)
+void KCursor::setSize(PixelX Width, PixelY Height, qreal devicePixelRatio)
 {
-    if (Width != OnPixmap.width() || Height != OnPixmap.height()) {
-        OnPixmap = QPixmap(Width, Height);
-        OffPixmap = QPixmap(Width, Height);
+    const int scaledWidth = Width * devicePixelRatio;
+    const int scaledHeight = Height * devicePixelRatio;
+    if (scaledWidth != OnPixmap.width() || scaledHeight != OnPixmap.height()) {
+        OnPixmap = QPixmap(scaledWidth, scaledHeight);
+        OffPixmap = QPixmap(scaledWidth, scaledHeight);
     }
+    OnPixmap.setDevicePixelRatio(devicePixelRatio);
+    OffPixmap.setDevicePixelRatio(devicePixelRatio);
 }
 
-void KCursor::setShape(PixelX X, PixelX W)
+void KCursor::setShape(PixelX X, PixelX W, qreal devicePixelRatio)
 {
     CursorX = X;
-    CursorW = W;
+    ShapeX = X * devicePixelRatio;
+    ShapeW = W * devicePixelRatio;
 }
 
 }

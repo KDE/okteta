@@ -603,8 +603,10 @@ void ByteArrayRowViewPrivate::createCursorPixmaps()
 {
     Q_Q(ByteArrayRowView);
 
+    const PixelX byteWidth = mByteArrayColumn->byteWidth();
+
     // create mCursorPixmaps
-    mCursorPixmaps->setSize(mByteArrayColumn->byteWidth(), mByteArrayColumn->digitHeight());
+    mCursorPixmaps->setSize(byteWidth, mByteArrayColumn->digitHeight(), q->devicePixelRatio());
 
     const Address index = mTableCursor->validIndex();
 
@@ -623,13 +625,13 @@ void ByteArrayRowViewPrivate::createCursorPixmaps()
     PixelX cursorX;
     PixelX cursorW;
     if (isCursorBehind()) {
-        cursorX = qMax(0, mCursorPixmaps->onPixmap().width() - InsertCursorWidth);
+        cursorX = qMax(0, byteWidth - InsertCursorWidth);
         cursorW = InsertCursorWidth;
     } else {
         cursorX = 0;
         cursorW = mOverWrite ? -1 : InsertCursorWidth;
     }
-    mCursorPixmaps->setShape(cursorX, cursorW);
+    mCursorPixmaps->setShape(cursorX, cursorW, q->devicePixelRatio());
 }
 
 void ByteArrayRowViewPrivate::drawActiveCursor(QPainter* painter)
@@ -659,7 +661,7 @@ void ByteArrayRowViewPrivate::drawActiveCursor(QPainter* painter)
     } else {
         painter->drawPixmap(mCursorPixmaps->cursorX(), 0,
                             mBlinkCursorVisible ? mCursorPixmaps->onPixmap() : mCursorPixmaps->offPixmap(),
-                            mCursorPixmaps->cursorX(), 0, mCursorPixmaps->cursorW(), -1);
+                            mCursorPixmaps->shapeX(), 0, mCursorPixmaps->shapeW(), -1);
     }
 
     painter->translate(-x, -y);
