@@ -126,6 +126,7 @@ Notes:
     <comment xml:lang="pl">Dane zakodowane Base64</comment>
     <comment xml:lang="pt">Dados codificados em Base64</comment>
     <comment xml:lang="pt_BR">Dados codificados Base64</comment>
+    <comment xml:lang="ru">Данные в формате Base64</comment>
     <comment xml:lang="sk">Dáta zakódované Base64</comment>
     <comment xml:lang="sl">Podatki kodirani z Base64</comment>
     <comment xml:lang="sr">база64 кодирани подаци</comment>
@@ -162,6 +163,7 @@ Notes:
     <comment xml:lang="pl">Dane zakodowane Base32</comment>
     <comment xml:lang="pt">Dados codificados em Base32</comment>
     <comment xml:lang="pt_BR">Dados codificados Base32</comment>
+    <comment xml:lang="ru">Данные в формате Base32</comment>
     <comment xml:lang="sk">Dáta zakódované Base32</comment>
     <comment xml:lang="sl">Podatki kodirani z Base32</comment>
     <comment xml:lang="sr">база32 кодирани подаци</comment>
@@ -236,6 +238,7 @@ Notes:
     <comment xml:lang="pl">Dane zakodowane Ascii85</comment>
     <comment xml:lang="pt">Dados codificados em Ascii85</comment>
     <comment xml:lang="pt_BR">Dados codificados Ascii85</comment>
+    <comment xml:lang="ru">Данные в формате Ascii85</comment>
     <comment xml:lang="sk">Dáta zakódované Ascii85</comment>
     <comment xml:lang="sl">Podatki kodirani z Ascii85</comment>
     <comment xml:lang="sr">аски‑85 кодирани подаци</comment>
@@ -274,6 +277,7 @@ Notes:
     <comment xml:lang="pl">Plik Uuencoded</comment>
     <comment xml:lang="pt">Ficheiro codificado com UUencode</comment>
     <comment xml:lang="pt_BR">Arquivo Uuencoded</comment>
+    <comment xml:lang="ru">Данные в формате UUE</comment>
     <comment xml:lang="sk">Uuencoded súbor</comment>
     <comment xml:lang="sl">Datoteka Uuencoded</comment>
     <comment xml:lang="sr">уу‑кодни фајл</comment>
@@ -315,6 +319,7 @@ Notes:
     <comment xml:lang="pl">Plik Xxencoded</comment>
     <comment xml:lang="pt">Ficheiro codificado com Xxencode</comment>
     <comment xml:lang="pt_BR">Arquivo Xxencoded</comment>
+    <comment xml:lang="ru">Данные в формате XXE</comment>
     <comment xml:lang="sk">Xxencoded súbor</comment>
     <comment xml:lang="sl">Datoteka Xxencoded</comment>
     <comment xml:lang="sr">иксикс-кодни фајл</comment>
