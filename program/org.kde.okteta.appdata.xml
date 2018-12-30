@@ -18,6 +18,7 @@
   <name xml:lang="fr">Okteta</name>
   <name xml:lang="gl">Okteta</name>
   <name xml:lang="hu">Okteta</name>
+  <name xml:lang="id">Okteta</name>
   <name xml:lang="it">Okteta</name>
   <name xml:lang="nl">Okteta</name>
   <name xml:lang="nn">Okteta</name>
@@ -52,6 +53,7 @@
   <summary xml:lang="fr">Éditeur hexadécimal</summary>
   <summary xml:lang="gl">Editor de bytes</summary>
   <summary xml:lang="hu">Hexaszerkesztő</summary>
+  <summary xml:lang="id">Editor Hex</summary>
   <summary xml:lang="it">Editor esadecimale</summary>
   <summary xml:lang="nl">Hexbewerker</summary>
   <summary xml:lang="nn">Heksadesimal-redigering</summary>
@@ -84,6 +86,7 @@
     <p xml:lang="fr">Okteta est un simple éditeur pour les données brutes des fichiers.</p>
     <p xml:lang="gl">Okteta é un editor sinxelo para os datos en bruto de ficheiros.</p>
     <p xml:lang="hu">Az Oktate egy egyszerű program fájlok nyers adatainak szerkesztéséhez.</p>
+    <p xml:lang="id">Okteta adalah editor sederhana untuk file-file data mentah (raw)</p>
     <p xml:lang="it">Okteta è un semplice editor dei dati grezzi di un file.</p>
     <p xml:lang="nl">Okteta is een eenvoudige bewerker voor de ruwe gegevens van bestanden.</p>
     <p xml:lang="nn">Okteta er eit veldig enkelt redigeringsprogram for rådata i filer.</p>
@@ -118,6 +121,7 @@
     <p xml:lang="fr">Fonctionnalités :</p>
     <p xml:lang="gl">Funcionalidades:</p>
     <p xml:lang="hu">Szolgáltatások:</p>
+    <p xml:lang="id">Fitur:</p>
     <p xml:lang="it">Funzionalità:</p>
     <p xml:lang="nl">Mogelijkheden:</p>
     <p xml:lang="nn">Funksjonar:</p>
@@ -150,6 +154,7 @@
       <li xml:lang="fr">Les valeurs et les caractères sont affichés soit en deux colonnes (affichage traditionnel des éditeurs hexadécimaux) soit en rangées avec la valeur au-dessus du caractère</li>
       <li xml:lang="gl">Os valores e caracteres poden mostrarse tanto en dúas columnas (a vista tradicional de editores de bytes) como en filas cos valores sobre os caracteres.</li>
       <li xml:lang="hu">Értékek és karakterek megjelenítése hagyományos (kétoszlopos) módon, vagy sorokban (az értékek a karakterek fölött helyezkednek el)</li>
+      <li xml:lang="id">Nilai dan karakter ditampilkan antara dua kolom (displai tradisional dalam editor hex) atau dalam row dengan nilai di atas karakter</li>
       <li xml:lang="it">I valori e i caratteri visualizzati in due colonne (la visualizzazione normale degli editor esadecimali) o in righe con il valore sopra il carattere</li>
       <li xml:lang="nl">Waarden en tekens worden getoond ofwel in twee kolommen (de traditionele weergave in hex-editors) of in rijen met de waarde boven het teken.</li>
       <li xml:lang="nn">Verdiar og teikn kan visast i to kolonnar (kjend frå klassiske heks-redigeringsprogram) eller i rader, med verdiane viste over teikna</li>
@@ -180,6 +185,7 @@
       <li xml:lang="fr">Édition et navigation similaires à un éditeur de texte</li>
       <li xml:lang="gl">Permite editar e examinar de maneira similar a un editor de texto simple.</li>
       <li xml:lang="hu">Szerkesztés és navigálás egy szövegszerkesztőhöz hasonlóan</li>
+      <li xml:lang="id">Pengeditan dan penavigasian mirip dengan editor teks</li>
       <li xml:lang="it">Modifica e navigazione simili ad un editor di testo</li>
       <li xml:lang="nl">Bewerken en navigeren is gelijk aan die in een tekstbewerker</li>
       <li xml:lang="nn">Redigering og navigering som eit vanleg skriveprogram</li>
@@ -210,6 +216,7 @@
       <li xml:lang="fr">Vues de données personnalisables ; il est possible de charger et d'enregistrer des profils</li>
       <li xml:lang="gl">As vistas de datos poden personalizarse, e poden cargarse e almacenarse perfís.</li>
       <li xml:lang="hu">Testre szabható adatnézetek, betölthető és menthető profilokkal</li>
+      <li xml:lang="id">Tampilan data yang dapat dikustomisasi, dapat dimuat, dan profil yang dapat disimpan</li>
       <li xml:lang="it">Viste dei dati configurabili, con profili caricabili e salvabili</li>
       <li xml:lang="nl">Aan te passen weergave met profielen die zijn te laden en op te slaan</li>
       <li xml:lang="nn">Kan skreddarsy datavisingar og lagra dei som eigne profilar</li>
@@ -240,6 +247,7 @@
       <li xml:lang="fr">Les outils peuvent être disposés de chaque côté ou flottants</li>
       <li xml:lang="gl">As ferramentas poden acoplarse por toda a interface ou quedar flotando sobre ela.</li>
       <li xml:lang="hu">Bármely oldalon dokkolható vagy lebegő eszköztárak</li>
+      <li xml:lang="id">Alat-alat yang dapat di-dock pada semua sisi atau mengambang</li>
       <li xml:lang="it">Strumenti agganciabili su qualsiasi lato o liberi</li>
       <li xml:lang="nl">Hulpmiddelen die aan alle kanten zijn te verankeren of zweven</li>
       <li xml:lang="nn">Verktøya kan dokkast på alle sidene, eller flyta fritt</li>
@@ -270,6 +278,7 @@
       <li xml:lang="fr">Codage des valeurs : hexadécimal, décimal, octal, binaire</li>
       <li xml:lang="gl">Pode mostrar os valores numéricos en notacións hexadecimal, decimal, octal e binaria.</li>
       <li xml:lang="hu">Numerikus kódolások: hexadecimális, decimális, oktális, bináris</li>
+      <li xml:lang="id">Pengenkodean nomerik: Heksadesimal, Desimal, Oktal, Biner</li>
       <li xml:lang="it">Codifiche numeriche: esadecimale, decimale, ottale e binaria</li>
       <li xml:lang="nl">Numerieke coderingen: hexadecimaal, decimaal, octaal, binair</li>
       <li xml:lang="nn">Numeriske kodingar: heksadesimal, desimal, oktal, binær</li>
@@ -300,6 +309,7 @@
       <li xml:lang="fr">Codage des caractères : tout les codages 8 bits fournis par Qt, EBCDIC</li>
       <li xml:lang="gl">Pode mostrar os caracteres en todas as codificacións baseadas en 8 bits que fornece Qt, así como en EBCDIC.</li>
       <li xml:lang="hu">Karakterkódolások: minden, a Qt és EBCDIC által biztosított 8 bites kódolás</li>
+      <li xml:lang="id">Pengenkodean karakter: Semua pengenkodean 8-bit sebagai asupan oleh Qt, EBCDIC</li>
       <li xml:lang="it">Codifiche dei caratteri: tutte le codifiche a 8 bit fornite da Qt, EBCDIC</li>
       <li xml:lang="nl">Tekencoderingen: alle 8-bits coderingen zoals geleverd door Qt, EBCDIC</li>
       <li xml:lang="nn">Teiknkodingar: Alle 8-bits teiknkodingar tilgjengeleg i Qt, EBCDIC</li>
@@ -330,6 +340,7 @@
       <li xml:lang="fr">Rendu rapide des données à l'écran</li>
       <li xml:lang="gl">Os datos móstranse rapidamente na pantalla.</li>
       <li xml:lang="hu">Gyors adatrenderelés a kijelzőn</li>
+      <li xml:lang="id">Perenderan data yang cepat pada layar</li>
       <li xml:lang="it">Resa veloce dei dati sullo schermo</li>
       <li xml:lang="nl">Snelle weergave van gegevens op het scherm</li>
       <li xml:lang="nn">Rask datavising på skjermen</li>
@@ -362,6 +373,7 @@
       <li xml:lang="fr">Ouverture de fichiers multiples</li>
       <li xml:lang="gl">Poden abrirse varios ficheiros de maneira simultánea.</li>
       <li xml:lang="hu">Több fájl megnyitása egyszerre</li>
+      <li xml:lang="id">Multi pembukaan file</li>
       <li xml:lang="it">Più file aperti</li>
       <li xml:lang="nl">Meerdere geopende bestanden</li>
       <li xml:lang="nn">Fleire opne filer samtidig</li>
@@ -395,6 +407,7 @@
       <li xml:lang="fr">Prise en charge de « annuler » et « refaire »</li>
       <li xml:lang="gl">Permite desfacer e refacer operacións.</li>
       <li xml:lang="hu">Visszavonás/újra műveletek támogatása</li>
+      <li xml:lang="id">Dukungan takjadi/jadilagi</li>
       <li xml:lang="it">Supporto per annulla/rifai</li>
       <li xml:lang="nl">Ondersteuning ongedaan maken/opnieuw</li>
       <li xml:lang="nn">Støtte for angring/omgjering</li>
@@ -425,6 +438,7 @@
       <li xml:lang="fr">Outil de structures pour l'analyse et l'édition basé des définitions de structures créées par l'utilisateur</li>
       <li xml:lang="gl">Conta cunha ferramenta de estruturas para analizar e editar baseándose en definicións de estruturas creadas polo usuario.</li>
       <li xml:lang="hu">Struktúra eszközök a felhasználó által létrehozott struktúradefiníciók elemzésére és szerkesztésére</li>
+      <li xml:lang="id">Alat struktur untuk menganalisis dan mengedit berdasarkan pada struktur pengguna yang dapat diciptakan</li>
       <li xml:lang="it">Strumento per le strutture per analizzare e modificare in base a definizioni di strutture dell'utente</li>
       <li xml:lang="nl">Het hulpmiddel Structuren voor analyseren en bewerking op door de gebruiker gemaakte structuurdefinities</li>
       <li xml:lang="nn">Strukturverktøy for analyse og redigering basert på strukturar som du sjølv kan definera</li>
@@ -458,6 +472,7 @@
       <li xml:lang="fr">Et plus…</li>
       <li xml:lang="gl">E máis…</li>
       <li xml:lang="hu">És még sok minden más…</li>
+      <li xml:lang="id">Dan selebihnya...</li>
       <li xml:lang="it">E altro ancora...</li>
       <li xml:lang="nl">En meer...</li>
       <li xml:lang="nn">Og mykje meir …</li>
