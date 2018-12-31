@@ -16,6 +16,7 @@ include(ECMInstallIcons)
 include(ECMAddAppIcon)
 # CMake macros
 include(FeatureSummary)
+include(CMakeDependentOption)
 if(BUILD_TESTING)
   include(ECMAddTests)
 endif()
@@ -38,46 +39,69 @@ if( NOT OMIT_INTERNAL_TEMPLATES )
 endif()
 
 option(BUILD_DESIGNERPLUGIN "Build the Designer plugin." ON)
+add_feature_info(DESIGNERPLUGIN ${BUILD_DESIGNERPLUGIN} "Qt Designer plugin")
+option(BUILD_OKTETAKASTENLIBS "Build the Okteta Kasten libraries." ON)
+add_feature_info(OKTETAKASTENLIBS ${BUILD_OKTETAKASTENLIBS} "Okteta Kasten libraries")
 
+cmake_dependent_option(BUILD_KPARTSPLUGIN "Build the KParts plugin." ON "BUILD_OKTETAKASTENLIBS" OFF)
+add_feature_info(KPARTSPLUGIN ${BUILD_KPARTSPLUGIN} "KParts plugin")
+cmake_dependent_option(BUILD_DESKTOPPROGRAM "Build the program." ON "BUILD_OKTETAKASTENLIBS" OFF)
+add_feature_info(DESKTOPPROGRAM ${BUILD_DESKTOPPROGRAM} "Program")
+
+set(REQUIRED_QT_VERSION "5.9.0")
+set(ADDITIONAL_REQUIRED_QT_COMPONENTS)
 if(BUILD_TESTING)
-    set(ADDITIONAL_REQUIRED_QT_COMPONENTS Test)
+    list(APPEND ADDITIONAL_REQUIRED_QT_COMPONENTS Test)
 endif()
 if( BUILD_DESIGNERPLUGIN )
     list(APPEND ADDITIONAL_REQUIRED_QT_COMPONENTS UiPlugin)
 endif()
-set(REQUIRED_QT_VERSION "5.9.0")
+if( BUILD_OKTETAKASTENLIBS )
+    list(APPEND ADDITIONAL_REQUIRED_QT_COMPONENTS
+        Network
+        PrintSupport
+        Qml
+        Script
+        ScriptTools
+        Xml
+    )
+endif()
 find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED
     COMPONENTS
     Core
-    Network
-    PrintSupport
-    Qml
-    Script
-    ScriptTools
     Widgets
-    Xml
     ${ADDITIONAL_REQUIRED_QT_COMPONENTS}
 )
 
 set(REQUIRED_KF5_VERSION "5.38.0")
+set(ADDITIONAL_REQUIRED_KF_COMPONENTS)
+if( BUILD_OKTETAKASTENLIBS )
+    list(APPEND ADDITIONAL_REQUIRED_KF_COMPONENTS
+        Bookmarks
+        Completion
+        IconThemes
+        KCMUtils
+        KIO
+        NewStuff
+        Parts
+        Service
+        WidgetsAddons
+        XmlGui
+    )
+endif()
+if( BUILD_DESKTOPPROGRAM )
+    list(APPEND ADDITIONAL_REQUIRED_KF_COMPONENTS
+        Crash
+        DBusAddons
+        DocTools
+    )
+endif()
 find_package(KF5 ${REQUIRED_KF5_VERSION} REQUIRED
     COMPONENTS
-    Bookmarks
     Codecs
-    Completion
     ConfigWidgets
-    Crash
-    DBusAddons
-    DocTools
-    IconThemes
     I18n
-    KCMUtils
-    KIO
-    NewStuff
-    Parts
-    Service
-    WidgetsAddons
-    XmlGui
+    ${ADDITIONAL_REQUIRED_KF_COMPONENTS}
 )
 
 find_package(Qca-qt5 2.1.0)
@@ -100,7 +124,9 @@ add_definitions(
 
 # helper libs
 add_subdirectory( libs )
-add_subdirectory( doc )
+if( BUILD_DESKTOPPROGRAM )
+    add_subdirectory( doc )
+endif()
 
 set( OKTETALIBS_MAJOR_VERSION 0 )
 set( OKTETALIBS_MINOR_VERSION 9 )
@@ -120,12 +146,18 @@ if( BUILD_DESIGNERPLUGIN )
 endif()
 
 # Okteta Kasten components
-add_subdirectory( kasten )
+if( BUILD_OKTETAKASTENLIBS )
+    add_subdirectory( kasten )
+endif()
 # special mimetypes
-add_subdirectory( mimetypes )
+if( BUILD_OKTETAKASTENLIBS )
+    add_subdirectory( mimetypes )
+endif()
 
 # programs and parts for desktop
 add_subdirectory( parts )
-add_subdirectory( program )
+if( BUILD_DESKTOPPROGRAM )
+    add_subdirectory( program )
+endif()
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
