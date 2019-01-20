@@ -127,6 +127,7 @@ function(okteta_add_library _baseName)
     set(options
         NO_TARGET_NAMESPACE
         NO_VERSIONED_INCLUDEDIR
+        NO_VERSIONED_PACKAGE_NAMESPACE
         NO_PACKAGE_NAMESPACED_INCLUDEDIR
         REVERSE_NAMESPACE_LIB
         REVERSE_NAMESPACE_INCLUDEDIR
@@ -134,6 +135,7 @@ function(okteta_add_library _baseName)
     )
     set(oneValueArgs
         INTERNAL_BASENAME
+        INCLUDEDIR_PACKAGE_NAMESPACE
         VERSION
         SOVERSION
     )
@@ -240,7 +242,16 @@ function(okteta_add_library _baseName)
         if (OKTETA_ADD_LIBRARY_NO_PACKAGE_NAMESPACED_INCLUDEDIR)
             set(_include_install_dir "${KDE_INSTALL_INCLUDEDIR}")
         else()
-            set(_include_install_dir "${KDE_INSTALL_INCLUDEDIR}/${_versionedNamespacePrefix}${_baseName}")
+            if (OKTETA_ADD_LIBRARY_INCLUDEDIR_PACKAGE_NAMESPACE)
+                set(_include_dir_package_namespace "${OKTETA_ADD_LIBRARY_INCLUDEDIR_PACKAGE_NAMESPACE}")
+            else()
+                if (OKTETA_ADD_LIBRARY_NO_VERSIONED_PACKAGE_NAMESPACE)
+                    set(_include_dir_package_namespace "${_namespacePrefix}${_baseName}")
+                else()
+                    set(_include_dir_package_namespace "${_versionedNamespacePrefix}${_baseName}")
+                endif()
+            endif()
+            set(_include_install_dir "${KDE_INSTALL_INCLUDEDIR}/${_include_dir_package_namespace}")
         endif()
         target_include_directories(${_targetName}
             INTERFACE "$<INSTALL_INTERFACE:${_include_install_dir}>"
