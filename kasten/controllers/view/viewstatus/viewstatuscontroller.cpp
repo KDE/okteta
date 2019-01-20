@@ -85,7 +85,7 @@ ViewStatusController::ViewStatusController(StatusBar* statusBar)
             this, &ViewStatusController::setCharCoding);
     statusBar->addWidget(mCharCodingComboBox);
 
-    fixWidths(0);
+    fixWidths(Okteta::OffsetFormat::Hexadecimal);
 
     setTargetModel(nullptr);
 }
@@ -108,10 +108,10 @@ void ViewStatusController::fixWidths(int offsetCoding)
     int largestOffsetWidth = 0;
     int largestSelectionWidth = 0;
     int widestDigitIndex = 0;
-    const int digitsCount = (offsetCoding == 0) ? hexDigitsCount : decimalDigitsCount;
+    const int digitsCount = (offsetCoding == Okteta::OffsetFormat::Hexadecimal) ? hexDigitsCount : decimalDigitsCount;
     for (int i = 0; i < digitsCount; ++i) {
         QString offset;
-        if (offsetCoding == 0) {
+        if (offsetCoding == Okteta::OffsetFormat::Hexadecimal) {
             offset = QString(9, QLatin1Char(digits[i]));
             offset[4] = QLatin1Char(':');
         } else {
