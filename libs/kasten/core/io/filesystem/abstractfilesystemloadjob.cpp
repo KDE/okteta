@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "abstractfilesystemloadjob.h"
-#include "abstractfilesystemloadjob_p.h"
+#include "abstractfilesystemloadjob.hpp"
+#include "abstractfilesystemloadjob_p.hpp"
 
 namespace Kasten {
 

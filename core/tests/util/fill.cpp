@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "fill.h"
+#include "fill.hpp"
 
 //
-#include <abstractbytearraymodel.h>
+#include <abstractbytearraymodel.hpp>
 // Qt
 #include <QByteArray>
 

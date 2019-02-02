@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "abstractdocument.h"
-#include "abstractdocument_p.h"
+#include "abstractdocument.hpp"
+#include "abstractdocument_p.hpp"
 
 namespace Kasten {
 

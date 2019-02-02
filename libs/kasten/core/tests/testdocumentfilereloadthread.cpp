@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "testdocumentfilereloadthread.h"
+#include "testdocumentfilereloadthread.hpp"
 
 // lib
-#include "testdocument.h"
+#include "testdocument.hpp"
 // KF5
 #include <KLocalizedString>
 // Qt

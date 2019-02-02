@@ -20,16 +20,16 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "partfactory.h"
+#include "partfactory.hpp"
 
 // part
-#include "part.h"
+#include "part.hpp"
 // Okteta Kasten
-#include <kasten/okteta/bytearrayviewprofilemanager.h>
-#include <kasten/okteta/bytearraystreamencoderconfigeditorfactoryfactory.h>
-#include <kasten/okteta/bytearraydatageneratorconfigeditorfactoryfactory.h>
-#include <kasten/okteta/bytearraystreamencoderfactory.h>
-#include <kasten/okteta/bytearraydatageneratorfactory.h>
+#include <kasten/okteta/bytearrayviewprofilemanager.hpp>
+#include <kasten/okteta/bytearraystreamencoderconfigeditorfactoryfactory.hpp>
+#include <kasten/okteta/bytearraydatageneratorconfigeditorfactoryfactory.hpp>
+#include <kasten/okteta/bytearraystreamencoderfactory.hpp>
+#include <kasten/okteta/bytearraydatageneratorfactory.hpp>
 // KF5
 #include <KLocalizedString>
 

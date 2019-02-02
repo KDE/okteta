@@ -19,17 +19,17 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#include "arraydatainformation.h"
+#include "arraydatainformation.hpp"
 
-#include "../primitivefactory.h"
-#include "../dummydatainformation.h"
-#include "../../parsers/scriptvalueconverter.h"
-#include "../../script/classes/arrayscriptclass.h"
-#include "../../script/scripthandlerinfo.h"
-#include "../../script/scriptlogger.h"
+#include "../primitivefactory.hpp"
+#include "../dummydatainformation.hpp"
+#include "../../parsers/scriptvalueconverter.hpp"
+#include "../../script/classes/arrayscriptclass.hpp"
+#include "../../script/scripthandlerinfo.hpp"
+#include "../../script/scriptlogger.hpp"
 
-#include "complexarraydata.h"
-#include "primitivearraydata.h"
+#include "complexarraydata.hpp"
+#include "primitivearraydata.hpp"
 
 ArrayDataInformation::ArrayDataInformation(const QString& name, uint length, DataInformation* childType,
                                            DataInformation* parent, const QScriptValue& lengthFunction)

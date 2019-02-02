@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bookmarktest.h"
+#include "bookmarktest.hpp"
 
 // test object
-#include <bookmark.h>
+#include <bookmark.hpp>
 // Qt
 #include <QTest>
 

@@ -21,11 +21,11 @@
 #include <QTest>
 #include <QScriptEngine>
 
-#include "view/structures/script/scriptengineinitializer.h"
-#include "view/structures/parsers/scriptvalueconverter.h"
-#include "view/structures/datatypes/topleveldatainformation.h"
-#include "testutils.h"
-#include <okteta/bytearraymodel.h>
+#include "view/structures/script/scriptengineinitializer.hpp"
+#include "view/structures/parsers/scriptvalueconverter.hpp"
+#include "view/structures/datatypes/topleveldatainformation.hpp"
+#include "testutils.hpp"
+#include <okteta/bytearraymodel.hpp>
 
 class CustomToStringTest : public QObject
 {

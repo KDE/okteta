@@ -20,20 +20,20 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearrayfilterfactory.h"
+#include "bytearrayfilterfactory.hpp"
 
 // lib
-#include "filter/andbytearrayfilter.h"
-#include "filter/orbytearrayfilter.h"
-#include "filter/xorbytearrayfilter.h"
-#include "filter/invertbytearrayfilter.h"
-#include "filter/reversebytearrayfilter.h"
-#include "filter/rotatebytearrayfilter.h"
-#include "filter/shiftbytearrayfilter.h"
+#include "filter/andbytearrayfilter.hpp"
+#include "filter/orbytearrayfilter.hpp"
+#include "filter/xorbytearrayfilter.hpp"
+#include "filter/invertbytearrayfilter.hpp"
+#include "filter/reversebytearrayfilter.hpp"
+#include "filter/rotatebytearrayfilter.hpp"
+#include "filter/shiftbytearrayfilter.hpp"
 // NEWFILTER(start)
 // Here add the name of your header file of your filter,
 // e.g.
-// #include "filter/my_bytearrayfilter.h"
+// #include "filter/my_bytearrayfilter.hpp"
 // NEWFILTER(end)
 
 QList<AbstractByteArrayFilter*> ByteArrayFilterFactory::createFilters()

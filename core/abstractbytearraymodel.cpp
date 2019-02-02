@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <okteta/abstractbytearraymodel.h>
+#include <okteta/abstractbytearraymodel.hpp>
 
 // lib
-#include "charcodec.h"
-#include "character.h"
+#include "charcodec.hpp"
+#include "character.hpp"
 
 namespace Okteta {
 

@@ -20,16 +20,16 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "terminaltool.h"
+#include "terminaltool.hpp"
 
 // Kasten core
-#include <kasten/documentsyncmanager.h>
-#include <kasten/abstractdocument.h>
-#include <kasten/abstractmodelsynchronizer.h>
+#include <kasten/documentsyncmanager.hpp>
+#include <kasten/abstractdocument.hpp>
+#include <kasten/abstractmodelsynchronizer.hpp>
 
 // KF5
 #include <KLocalizedString>
-#include <kio/global.h>
+#include <KIO/Global>
 // Qt
 #include <QUrl>
 

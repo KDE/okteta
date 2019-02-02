@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "ksearchdialog.h"
+#include "ksearchdialog.hpp"
 
 // controller
-#include "searchtool.h"
+#include "searchtool.hpp"
 // KF5
 #include <KLocalizedString>
 

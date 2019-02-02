@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "filterjob.h"
+#include "filterjob.hpp"
 
 // filter
-#include <abstractbytearrayfilter.h>
+#include <abstractbytearrayfilter.hpp>
 // Qt
 #include <QCoreApplication>
 

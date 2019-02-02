@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "filesystembrowsertoolview.h"
+#include "filesystembrowsertoolview.hpp"
 
 // tool
-#include "filesystembrowserview.h"
-#include "filesystembrowsertool.h"
+#include "filesystembrowserview.hpp"
+#include "filesystembrowsertool.hpp"
 
 namespace Kasten {
 

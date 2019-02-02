@@ -20,14 +20,14 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "enumdatainformation.h"
-#include "../topleveldatainformation.h"
+#include "enumdatainformation.hpp"
+#include "../topleveldatainformation.hpp"
 
 #include <KLocalizedString>
 #include <QScriptValue>
 
-#include "../../script/classes/enumscriptclass.h"
-#include "../../script/scriptlogger.h"
+#include "../../script/classes/enumscriptclass.hpp"
+#include "../../script/scriptlogger.hpp"
 
 EnumDataInformation::EnumDataInformation(const QString& name, PrimitiveDataInformation* type,
                                          const EnumDefinition::Ptr& enumDef, DataInformation* parent)

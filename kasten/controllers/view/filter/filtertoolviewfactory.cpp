@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "filtertoolviewfactory.h"
+#include "filtertoolviewfactory.hpp"
 
 // lib
-#include "filtertoolview.h"
-#include "filtertool.h"
+#include "filtertoolview.hpp"
+#include "filtertool.hpp"
 // KF5
 #include <KLocalizedString>
 

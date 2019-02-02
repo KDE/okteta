@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "oktetawidgetdesignerfactorycollection.h"
+#include "oktetawidgetdesignerfactorycollection.hpp"
 
 // plugin
-#include "bytearraycolumnviewdesignerfactory.h"
-#include "bytearrayrowviewdesignerfactory.h"
+#include "bytearraycolumnviewdesignerfactory.hpp"
+#include "bytearrayrowviewdesignerfactory.hpp"
 
 OktetaWidgetDesignerFactoryCollection::OktetaWidgetDesignerFactoryCollection(QObject* parent)
     : QObject(parent)

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "widgetcolumnstylist.h"
-#include "widgetcolumnstylist_p.h"
+#include "widgetcolumnstylist.hpp"
+#include "widgetcolumnstylist_p.hpp"
 
 // Qt
 #include <QWidget>

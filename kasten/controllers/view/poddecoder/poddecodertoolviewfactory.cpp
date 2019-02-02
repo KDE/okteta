@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "poddecodertoolviewfactory.h"
+#include "poddecodertoolviewfactory.hpp"
 
 // lib
-#include "poddecodertoolview.h"
-#include "poddecodertool.h"
+#include "poddecodertoolview.hpp"
+#include "poddecodertool.hpp"
 // KF5
 #include <KLocalizedString>
 

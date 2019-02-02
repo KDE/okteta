@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "documentsview.h"
+#include "documentsview.hpp"
 
 // tool
-#include "documentlistmodel.h"
-#include "documentstool.h"
+#include "documentlistmodel.hpp"
+#include "documentstool.hpp"
 // Qt
 #include <QTreeView>
 #include <QLayout>

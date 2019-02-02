@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "testdocumentfilewritethread.h"
+#include "testdocumentfilewritethread.hpp"
 
 // lib
-#include "testdocument.h"
+#include "testdocument.hpp"
 // Qt
 #include <QDataStream>
 #include <QFile>

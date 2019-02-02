@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "containedstringtablemodel.h"
+#include "containedstringtablemodel.hpp"
 
 // KF5
 #include <KLocalizedString>

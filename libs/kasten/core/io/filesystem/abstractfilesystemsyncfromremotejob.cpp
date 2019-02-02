@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "abstractfilesystemsyncfromremotejob.h"
-#include "abstractfilesystemsyncfromremotejob_p.h"
+#include "abstractfilesystemsyncfromremotejob.hpp"
+#include "abstractfilesystemsyncfromremotejob_p.hpp"
 
 namespace Kasten {
 

@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "char8editor.h"
+#include "char8editor.hpp"
 
 // Okteta core
-#include <okteta/character.h>
-#include <okteta/charcodec.h>
+#include <okteta/character.hpp>
+#include <okteta/charcodec.hpp>
 // Qt
 #include <QValidator>
 

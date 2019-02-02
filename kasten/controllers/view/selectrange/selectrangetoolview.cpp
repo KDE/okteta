@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "selectrangetoolview.h"
+#include "selectrangetoolview.hpp"
 
 // tool
-#include "selectrangeview.h"
-#include "selectrangetool.h"
+#include "selectrangeview.hpp"
+#include "selectrangetool.hpp"
 
 namespace Kasten {
 

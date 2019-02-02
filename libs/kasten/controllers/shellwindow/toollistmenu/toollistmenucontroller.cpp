@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "toollistmenucontroller.h"
+#include "toollistmenucontroller.hpp"
 
 // lib
-#include <kasten/widgetsdockable.h>
-#include <kasten/toolviewdockwidget.h>
+#include <kasten/widgetsdockable.hpp>
+#include <kasten/toolviewdockwidget.hpp>
 // KF5
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>

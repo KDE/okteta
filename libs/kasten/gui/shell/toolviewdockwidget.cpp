@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "toolviewdockwidget.h"
+#include "toolviewdockwidget.hpp"
 
 // lib
-#include <abstracttoolview.h>
+#include <abstracttoolview.hpp>
 // Kasten core
-#include <kasten/abstracttool.h>
+#include <kasten/abstracttool.hpp>
 
 namespace Kasten {
 

@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bordercolumnrenderer.h"
+#include "bordercolumnrenderer.hpp"
 
 // lib
-#include <abstractcolumnstylist.h>
+#include <abstractcolumnstylist.hpp>
 // Qt
 #include <QPainter>
 #include <QStyle>

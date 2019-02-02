@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "checksumtoolviewfactory.h"
+#include "checksumtoolviewfactory.hpp"
 
 // lib
-#include "checksumtoolview.h"
-#include "checksumtool.h"
+#include "checksumtoolview.hpp"
+#include "checksumtool.hpp"
 // KF5
 #include <KLocalizedString>
 

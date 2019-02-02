@@ -20,14 +20,14 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "knavigator.h"
+#include "knavigator.hpp"
 
 // lib
-#include <bytearraytableranges.h>
-#include <bytearraytablecursor.h>
-#include <abstractbytearrayview.h>
+#include <bytearraytableranges.hpp>
+#include <bytearraytablecursor.hpp>
+#include <abstractbytearrayview.hpp>
 // lib
-#include <okteta/wordbytearrayservice.h>
+#include <okteta/wordbytearrayservice.hpp>
 // Qt
 #include <QKeyEvent>
 

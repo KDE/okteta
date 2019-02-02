@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytetabletoolview.h"
+#include "bytetabletoolview.hpp"
 
 // tool
-#include "bytetableview.h"
-#include "bytetabletool.h"
+#include "bytetableview.hpp"
+#include "bytetabletool.hpp"
 
 namespace Kasten {
 

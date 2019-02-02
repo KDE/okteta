@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "piecetabletest.h"
+#include "piecetabletest.hpp"
 
 // test object
-#include <piecetable/piecetable.h>
+#include <piecetable/piecetable.hpp>
 // Qt
 #include <QTest>
 

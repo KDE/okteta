@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "stringsextractview.h"
+#include "stringsextractview.hpp"
 
 // tool
-#include "containedstringtablemodel.h"
-#include "stringsextracttool.h"
+#include "containedstringtablemodel.hpp"
+#include "stringsextracttool.hpp"
 // KF5
 #include <KGuiItem>
 #include <KLocalizedString>

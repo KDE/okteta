@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "abstractbytearraycolumntextrenderer.h"
+#include "abstractbytearraycolumntextrenderer.hpp"
 
 // Qt
 #include <QTextStream>

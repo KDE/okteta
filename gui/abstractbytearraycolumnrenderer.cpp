@@ -20,21 +20,21 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "abstractbytearraycolumnrenderer.h"
+#include "abstractbytearraycolumnrenderer.hpp"
 
 // lib
-#include "oktetagui.h"
-#include "bytearraytableranges.h"
-#include "bytearraytablecursor.h"
-#include "bytearraytablelayout.h"
-#include "helper.h"
+#include "oktetagui.hpp"
+#include "bytearraytableranges.hpp"
+#include "bytearraytablecursor.hpp"
+#include "bytearraytablelayout.hpp"
+#include "helper.hpp"
 // lib
-#include <abstractcolumnstylist.h>
+#include <abstractcolumnstylist.hpp>
 // Okteta core
-#include <okteta/bookmarkable.h>
-#include <okteta/bookmarksconstiterator.h>
-#include <okteta/bookmark.h>
-#include <okteta/charcodec.h>
+#include <okteta/bookmarkable.hpp>
+#include <okteta/bookmarksconstiterator.hpp>
+#include <okteta/bookmark.hpp>
+#include <okteta/charcodec.hpp>
 // KF5
 #include <KColorScheme>
 // Qt

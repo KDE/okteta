@@ -20,12 +20,12 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "structuretreemodel.h"
-#include "structurestool.h"
-#include "structlogging.h"
-#include "datatypes/datainformationwithchildren.h"
-#include "datatypes/topleveldatainformation.h"
-#include "datatypes/array/arraydatainformation.h"
+#include "structuretreemodel.hpp"
+#include "structurestool.hpp"
+#include "structlogging.hpp"
+#include "datatypes/datainformationwithchildren.hpp"
+#include "datatypes/topleveldatainformation.hpp"
+#include "datatypes/array/arraydatainformation.hpp"
 
 #include <QFont>
 

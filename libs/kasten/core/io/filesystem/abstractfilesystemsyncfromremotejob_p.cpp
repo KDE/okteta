@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "abstractfilesystemsyncfromremotejob_p.h"
+#include "abstractfilesystemsyncfromremotejob_p.hpp"
 
 // library
-#include "abstractmodelfilesystemsynchronizer.h"
+#include "abstractmodelfilesystemsynchronizer.hpp"
 // KF5
 #include <KIO/FileCopyJob>
 #include <KJobWidgets>

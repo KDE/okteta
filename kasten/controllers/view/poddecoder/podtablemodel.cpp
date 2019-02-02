@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "podtablemodel.h"
+#include "podtablemodel.hpp"
 
 // lib
-#include "poddecodertool.h"
+#include "poddecodertool.hpp"
 // KF5
 #include <KLocalizedString>
 #include <KColorScheme>

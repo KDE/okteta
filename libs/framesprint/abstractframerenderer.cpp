@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "abstractframerenderer.h"
+#include "abstractframerenderer.hpp"
 
 // Qt
 #include <QPoint>

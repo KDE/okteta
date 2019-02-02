@@ -20,21 +20,21 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearrayviewtextstreamencoder.h"
+#include "bytearrayviewtextstreamencoder.hpp"
 
 // lib
-#include "offsetcolumntextrenderer.h"
-#include "bordercolumntextrenderer.h"
-#include "valuebytearraycolumntextrenderer.h"
-#include "charbytearraycolumntextrenderer.h"
-#include "bytearrayrowscolumntextrenderer.h"
-#include <bytearrayview.h>
+#include "offsetcolumntextrenderer.hpp"
+#include "bordercolumntextrenderer.hpp"
+#include "valuebytearraycolumntextrenderer.hpp"
+#include "charbytearraycolumntextrenderer.hpp"
+#include "bytearrayrowscolumntextrenderer.hpp"
+#include <bytearrayview.hpp>
 // Okteta gui
-#include <okteta/bytearraytablelayout.h>
-#include <okteta/abstractbytearrayview.h>
+#include <okteta/bytearraytablelayout.hpp>
+#include <okteta/abstractbytearrayview.hpp>
 // Okteta core
-#include <okteta/abstractbytearraymodel.h>
-#include <okteta/character.h>
+#include <okteta/abstractbytearraymodel.hpp>
+#include <okteta/character.hpp>
 // KF5
 #include <KLocalizedString>
 // Qt

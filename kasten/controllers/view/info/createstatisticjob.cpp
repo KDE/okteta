@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "createstatisticjob.h"
+#include "createstatisticjob.hpp"
 
 // Okteta core
-#include <okteta/abstractbytearraymodel.h>
+#include <okteta/abstractbytearraymodel.hpp>
 // Qt
 #include <QCoreApplication>
 

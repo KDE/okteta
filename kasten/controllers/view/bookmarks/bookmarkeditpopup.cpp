@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bookmarkeditpopup.h"
+#include "bookmarkeditpopup.hpp"
 
 // Okteta core
-// #include <okteta/bookmark.h>
+// #include <okteta/bookmark.hpp>
 // Qt
 #include <QLineEdit>
 #include <QIcon>

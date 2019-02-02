@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "tabbedviews_p.h"
+#include "tabbedviews_p.hpp"
 
 // lib
-#include "toolinlineviewwidget.h"
-#include <abstracttoolinlineview.h>
-#include <kasten/abstractdocument.h>
+#include "toolinlineviewwidget.hpp"
+#include <abstracttoolinlineview.hpp>
+#include <kasten/abstractdocument.hpp>
 // Qt
 #include <QDragMoveEvent>
 #include <QDropEvent>

@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "dummyview.h"
+#include "dummyview.hpp"
 
 // lib
-#include <kasten/abstractdocument.h>
+#include <kasten/abstractdocument.hpp>
 // Qt
 #include <QLabel>
 

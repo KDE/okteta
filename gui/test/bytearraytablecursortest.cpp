@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearraytablecursortest.h"
+#include "bytearraytablecursortest.hpp"
 
 // test object
-#include <bytearraytablecursor.h>
+#include <bytearraytablecursor.hpp>
 // lib
-#include <bytearraytablelayout.h>
+#include <bytearraytablelayout.hpp>
 // Qt
 #include <QTest>
 

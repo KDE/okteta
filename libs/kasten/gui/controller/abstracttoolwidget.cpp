@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "abstracttoolwidget.h"
-#include "abstracttoolwidget_p.h"
+#include "abstracttoolwidget.hpp"
+#include "abstracttoolwidget_p.hpp"
 
 namespace Kasten {
 

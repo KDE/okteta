@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kchareditor.h"
+#include "kchareditor.hpp"
 
 // lib
-#include <abstractbytearrayview.h>
+#include <abstractbytearrayview.hpp>
 // commonlib
-#include <okteta/charcodec.h>
+#include <okteta/charcodec.hpp>
 // Qt
 #include <QKeyEvent>
 

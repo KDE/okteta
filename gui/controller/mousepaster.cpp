@@ -20,13 +20,13 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "mousepaster.h"
+#include "mousepaster.hpp"
 
 // lib
-#include <bytearraycolumnview.h>
-#include <bytearraytableranges.h>
-#include <bytearraytablecursor.h>
-#include <bytearraytablelayout.h>
+#include <bytearraycolumnview.hpp>
+#include <bytearraytableranges.hpp>
+#include <bytearraytablecursor.hpp>
+#include <bytearraytablelayout.hpp>
 // Qt
 #include <QMouseEvent>
 

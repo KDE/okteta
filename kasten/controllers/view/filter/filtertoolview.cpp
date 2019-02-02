@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "filtertoolview.h"
+#include "filtertoolview.hpp"
 
 // tool
-#include "filterview.h"
-#include "filtertool.h"
+#include "filterview.hpp"
+#include "filtertool.hpp"
 
 namespace Kasten {
 

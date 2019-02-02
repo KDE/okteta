@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "abstractlinepopup.h"
-#include "abstractlinepopup_p.h"
+#include "abstractlinepopup.hpp"
+#include "abstractlinepopup_p.hpp"
 
 // Qt
 #include <QEvent>

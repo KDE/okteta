@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "coordtest.h"
+#include "coordtest.hpp"
 
 // test object
-#include <coord.h>
+#include <coord.hpp>
 // Qt
 #include <QTest>
 

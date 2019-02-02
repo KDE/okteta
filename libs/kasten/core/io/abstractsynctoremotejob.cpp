@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "abstractsynctoremotejob.h"
-#include "abstractsynctoremotejob_p.h"
+#include "abstractsynctoremotejob.hpp"
+#include "abstractsynctoremotejob_p.hpp"
 
 namespace Kasten {
 

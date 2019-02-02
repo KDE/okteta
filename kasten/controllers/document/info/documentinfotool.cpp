@@ -20,18 +20,18 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "documentinfotool.h"
+#include "documentinfotool.hpp"
 
 // lib
-#include "bytearraymodeliodevice.h"
-#include <kasten/okteta/bytearraydocument.h>
+#include "bytearraymodeliodevice.hpp"
+#include <kasten/okteta/bytearraydocument.hpp>
 // Kasten core
-#include <kasten/documentsyncmanager.h>
-#include <kasten/abstractmodelsynchronizer.h>
+#include <kasten/documentsyncmanager.hpp>
+#include <kasten/abstractmodelsynchronizer.hpp>
 
 // Okteta core
-#include <okteta/abstractbytearraymodel.h>
-#include <okteta/arraychangemetricslist.h>
+#include <okteta/abstractbytearraymodel.hpp>
+#include <okteta/arraychangemetricslist.hpp>
 // KF5
 #include <KLocalizedString>
 // Qt

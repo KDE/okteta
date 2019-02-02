@@ -20,13 +20,13 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "enumdefinition.h"
+#include "enumdefinition.hpp"
 
 #include <QScriptValue>
 #include <QScriptValueIterator>
 #include <limits>
 
-#include "../../script/scriptlogger.h"
+#include "../../script/scriptlogger.hpp"
 
 QMap<AllPrimitiveTypes, QString> EnumDefinition::parseEnumValues(const QScriptValue& val,
                                                                  const LoggerWithContext& logger, PrimitiveDataType type)

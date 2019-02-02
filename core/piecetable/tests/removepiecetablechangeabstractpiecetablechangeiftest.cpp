@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "removepiecetablechangeabstractpiecetablechangeiftest.h"
+#include "removepiecetablechangeabstractpiecetablechangeiftest.hpp"
 
 // test object
-#include <piecetable/removepiecetablechange.h>
+#include <piecetable/removepiecetablechange.hpp>
 // lib
-#include <piecetable/piecetable.h>
+#include <piecetable/piecetable.hpp>
 // Qt
 #include <QTest>
 

@@ -20,14 +20,14 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "scriptloggerview.h"
+#include "scriptloggerview.hpp"
 
 #include <KComboBox>
 #include <QTableView>
 #include <QHeaderView>
 #include <QVBoxLayout>
 
-#include "scriptlogger.h"
+#include "scriptlogger.hpp"
 
 ScriptLoggerView::ScriptLoggerView(const TopLevelDataInformation::List& data, QWidget* parent)
     : QWidget(parent)

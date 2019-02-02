@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "abstractcolumnframerenderer.h"
+#include "abstractcolumnframerenderer.hpp"
 
 // Okteta gui
-#include <okteta/linerange.h>
-#include <okteta/abstractcolumnrenderer.h>
+#include <okteta/linerange.hpp>
+#include <okteta/abstractcolumnrenderer.hpp>
 // Qt
 #include <QPainter>
 #include <QListIterator>

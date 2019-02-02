@@ -20,6 +20,6 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "structlogging.h"
+#include "structlogging.hpp"
 
 Q_LOGGING_CATEGORY(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES, "kasten.okteta.controllers.structures", QtInfoMsg)

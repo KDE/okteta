@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "addresscombobox.h"
-#include "addresscombobox_p.h"
+#include "addresscombobox.hpp"
+#include "addresscombobox_p.hpp"
 
 namespace Okteta {
 

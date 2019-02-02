@@ -20,14 +20,14 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "unsignedbitfielddatainformation.h"
+#include "unsignedbitfielddatainformation.hpp"
 
 #include <KLocalizedString>
 
 #include <QScriptValue>
 
-#include "../poddecoder/typeeditors/uintspinbox.h"
-#include "../uintdatainformation.h"
+#include "../poddecoder/typeeditors/uintspinbox.hpp"
+#include "../uintdatainformation.hpp"
 
 QString UnsignedBitfieldDataInformation::valueStringImpl() const
 {

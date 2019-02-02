@@ -20,15 +20,15 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "multiviewareas_p.h"
+#include "multiviewareas_p.hpp"
 
 // lib
-#include "viewbox.h"
-#include "toolinlineviewwidget.h"
-#include <abstracttoolinlineview.h>
-#include <abstractview.h>
+#include "viewbox.hpp"
+#include "toolinlineviewwidget.hpp"
+#include <abstracttoolinlineview.hpp>
+#include <abstractview.hpp>
 // Kasten core
-#include <kasten/abstractdocument.h>
+#include <kasten/abstractdocument.hpp>
 
 // Qt
 #include <QMimeData>

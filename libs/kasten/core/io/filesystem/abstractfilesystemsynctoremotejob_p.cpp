@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "abstractfilesystemsynctoremotejob_p.h"
+#include "abstractfilesystemsynctoremotejob_p.hpp"
 
 // KF5
 #include <KIO/FileCopyJob>

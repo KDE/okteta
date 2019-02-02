@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "hexadecimal8editor.h"
+#include "hexadecimal8editor.hpp"
 
 Hexadecimal8Editor::Hexadecimal8Editor(QWidget* parent)
     : AbstractValue8Editor(Okteta::HexadecimalCoding, parent)

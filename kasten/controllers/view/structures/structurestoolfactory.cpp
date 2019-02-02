@@ -20,10 +20,10 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "structurestoolfactory.h"
+#include "structurestoolfactory.hpp"
 
 // lib
-#include "structurestool.h"
+#include "structurestool.hpp"
 
 namespace Kasten {
 

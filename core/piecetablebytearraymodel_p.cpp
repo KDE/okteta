@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "piecetablebytearraymodel_p.h"
-#include "piecetablebytearraymodel.h"
+#include "piecetablebytearraymodel_p.hpp"
+#include "piecetablebytearraymodel.hpp"
 
 // lib
-#include <addressrangelist.h>
+#include <addressrangelist.hpp>
 
 namespace Okteta {
 

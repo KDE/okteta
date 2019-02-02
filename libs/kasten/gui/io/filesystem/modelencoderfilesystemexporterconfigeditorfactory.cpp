@@ -20,13 +20,13 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "modelencoderfilesystemexporterconfigeditorfactory.h"
+#include "modelencoderfilesystemexporterconfigeditorfactory.hpp"
 
 // lib
-#include "modelencoderfilesystemexporterconfigeditor.h"
-#include <abstractmodelstreamencoderconfigeditorfactory.h>
+#include "modelencoderfilesystemexporterconfigeditor.hpp"
+#include <abstractmodelstreamencoderconfigeditorfactory.hpp>
 // Kasten core
-#include <kasten/modelencoderfilesystemexporter.h>
+#include <kasten/modelencoderfilesystemexporter.hpp>
 
 namespace Kasten {
 

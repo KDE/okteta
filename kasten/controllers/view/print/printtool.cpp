@@ -20,20 +20,20 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "printtool.h"
+#include "printtool.hpp"
 
 // controller
-#include "printjob.h"
-#include "framestopaperprinter.h"
-#include "headerfooterframerenderer.h"
-#include "bytearrayframerenderer.h"
+#include "printjob.hpp"
+#include "framestopaperprinter.hpp"
+#include "headerfooterframerenderer.hpp"
+#include "bytearrayframerenderer.hpp"
 // lib
-#include <kasten/okteta/bytearrayview.h>
-#include <kasten/okteta/bytearraydocument.h>
+#include <kasten/okteta/bytearrayview.hpp>
+#include <kasten/okteta/bytearraydocument.hpp>
 // Okteta core
-#include <okteta/abstractbytearraymodel.h>
+#include <okteta/abstractbytearraymodel.hpp>
 // Kasten core
-#include <kasten/abstractmodelsynchronizer.h>
+#include <kasten/abstractmodelsynchronizer.hpp>
 // KF5
 #include <KLocalizedString>
 #include <KMessageBox>

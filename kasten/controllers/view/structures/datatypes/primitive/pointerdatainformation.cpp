@@ -21,13 +21,13 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "pointerdatainformation.h"
-#include "../topleveldatainformation.h"
-#include "../primitivedatatype.h"
-#include "../../allprimitivetypes.h"
-#include "../../script/scripthandlerinfo.h"
-#include "../../script/classes/pointerscriptclass.h"
-#include "../../script/scriptlogger.h"
+#include "pointerdatainformation.hpp"
+#include "../topleveldatainformation.hpp"
+#include "../primitivedatatype.hpp"
+#include "../../allprimitivetypes.hpp"
+#include "../../script/scripthandlerinfo.hpp"
+#include "../../script/classes/pointerscriptclass.hpp"
+#include "../../script/scriptlogger.hpp"
 
 #include <QScriptEngine>
 #include <KLocalizedString>

@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearrayrawfilewritethread.h"
+#include "bytearrayrawfilewritethread.hpp"
 
 // lib
-#include "bytearraydocument.h"
+#include "bytearraydocument.hpp"
 // Okteta core
-#include <okteta/piecetablebytearraymodel.h>
+#include <okteta/piecetablebytearraymodel.hpp>
 // Qt
 #include <QDataStream>
 #include <QFile>

@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "valuecodectest.h"
+#include "valuecodectest.hpp"
 
 // test object
-#include <valuecodec.h>
+#include <valuecodec.hpp>
 // Qt
 #include <QTest>
 #include <QBitArray>

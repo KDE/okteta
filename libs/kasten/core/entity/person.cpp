@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "person.h"
-#include "person_p.h"
+#include "person.hpp"
+#include "person_p.hpp"
 
 namespace Kasten {
 

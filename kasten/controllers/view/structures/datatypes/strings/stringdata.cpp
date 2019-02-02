@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "stringdata.h"
-#include "stringdatainformation.h"
+#include "stringdata.hpp"
+#include "stringdatainformation.hpp"
 
 StringData::StringData(StringDataInformation* parent)
     : mParent(parent)

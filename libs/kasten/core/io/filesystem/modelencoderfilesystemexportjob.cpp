@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "modelencoderfilesystemexportjob.h"
-#include "modelencoderfilesystemexportjob_p.h"
+#include "modelencoderfilesystemexportjob.hpp"
+#include "modelencoderfilesystemexportjob_p.hpp"
 
 namespace Kasten {
 

@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "filtertoolfactory.h"
+#include "filtertoolfactory.hpp"
 
 // lib
-#include "filtertool.h"
+#include "filtertool.hpp"
 
 namespace Kasten {
 

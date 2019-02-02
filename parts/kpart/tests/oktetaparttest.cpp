@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "oktetaparttest.h"
+#include "oktetaparttest.hpp"
 
 // test object
-#include <partfactory.h>
-#include <part.h>
+#include <partfactory.hpp>
+#include <part.hpp>
 // Qt
 #include <QTest>
 

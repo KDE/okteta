@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "selectiontest.h"
+#include "selectiontest.hpp"
 
 // test object
-#include <selection.h>
+#include <selection.hpp>
 // Qt
 #include <QTest>
 

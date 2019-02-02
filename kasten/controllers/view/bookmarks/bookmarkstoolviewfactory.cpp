@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bookmarkstoolviewfactory.h"
+#include "bookmarkstoolviewfactory.hpp"
 
 // lib
-#include "bookmarkstoolview.h"
-#include "bookmarkstool.h"
+#include "bookmarkstoolview.hpp"
+#include "bookmarkstool.hpp"
 // KF5
 #include <KLocalizedString>
 

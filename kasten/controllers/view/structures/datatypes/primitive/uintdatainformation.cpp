@@ -19,9 +19,9 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#include "uintdatainformation.h"
+#include "uintdatainformation.hpp"
 
-#include "../../structlogging.h"
+#include "../../structlogging.hpp"
 
 // KF5
 #include <KLocalizedString>
@@ -29,7 +29,7 @@
 #include <QScriptValue>
 #include <QLocale>
 
-#include "../../../poddecoder/typeeditors/uintspinbox.h"
+#include "../../../poddecoder/typeeditors/uintspinbox.hpp"
 #include "structureviewpreferences.h"
 
 template <typename T>

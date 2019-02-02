@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearraybase32streamencoder.h"
+#include "bytearraybase32streamencoder.hpp"
 
 // Okteta core
-#include <okteta/abstractbytearraymodel.h>
+#include <okteta/abstractbytearraymodel.hpp>
 // KF5
 #include <KLocalizedString>
 // Qt

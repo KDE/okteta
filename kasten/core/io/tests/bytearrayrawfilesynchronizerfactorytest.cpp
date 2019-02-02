@@ -20,17 +20,17 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearrayrawfilesynchronizerfactorytest.h"
+#include "bytearrayrawfilesynchronizerfactorytest.hpp"
 
 // test object
-#include <bytearrayrawfilesynchronizerfactory.h>
+#include <bytearrayrawfilesynchronizerfactory.hpp>
 // lib
-#include <bytearraydocument.h>
+#include <bytearraydocument.hpp>
 // test utils
-#include <util/filesystem.h>
-#include <util/fill.h>
+#include <util/filesystem.hpp>
+#include <util/fill.hpp>
 // Okteta core
-#include <okteta/piecetablebytearraymodel.h>
+#include <okteta/piecetablebytearraymodel.hpp>
 // Qt
 #include <QTest>
 #include <QSignalSpy>

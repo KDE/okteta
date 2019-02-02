@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "charsetconversionjob.h"
+#include "charsetconversionjob.hpp"
 
 // Okteta core
-#include <okteta/abstractbytearraymodel.h>
-#include <okteta/charcodec.h>
-#include <okteta/character.h>
+#include <okteta/abstractbytearraymodel.hpp>
+#include <okteta/charcodec.hpp>
+#include <okteta/character.hpp>
 // Qt
 #include <QCoreApplication>
 

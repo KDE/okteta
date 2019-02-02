@@ -14,7 +14,7 @@
 *                                                                         *
 ***************************************************************************/
 
-#include "filesystem.h"
+#include "filesystem.hpp"
 
 // Qt
 #include <QDir>

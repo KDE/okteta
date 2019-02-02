@@ -20,14 +20,14 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearrayihexstreamencoder.h"
+#include "bytearrayihexstreamencoder.hpp"
 
 // lib
-#include <bytearrayview.h>
+#include <bytearrayview.hpp>
 // Okteta gui
-#include <okteta/bytearraytablelayout.h>
+#include <okteta/bytearraytablelayout.hpp>
 // Okteta core
-#include <okteta/abstractbytearraymodel.h>
+#include <okteta/abstractbytearraymodel.hpp>
 // KF5
 #include <KLocalizedString>
 // Qt

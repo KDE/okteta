@@ -20,12 +20,12 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "arrayscriptclass.h"
-#include "../../datatypes/array/arraydatainformation.h"
-#include "../../parsers/parserutils.h"
-#include "../../parsers/scriptvalueconverter.h"
-#include "../scriptlogger.h"
-#include "../../structlogging.h"
+#include "arrayscriptclass.hpp"
+#include "../../datatypes/array/arraydatainformation.hpp"
+#include "../../parsers/parserutils.hpp"
+#include "../../parsers/scriptvalueconverter.hpp"
+#include "../scriptlogger.hpp"
+#include "../../structlogging.hpp"
 
 ArrayScriptClass::ArrayScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : DefaultScriptClass(engine, handlerInfo)

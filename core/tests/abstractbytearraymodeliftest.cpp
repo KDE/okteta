@@ -20,14 +20,14 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "abstractbytearraymodeliftest.h"
+#include "abstractbytearraymodeliftest.hpp"
 
 // test object
-#include <fixedsizebytearraymodel.h>
+#include <fixedsizebytearraymodel.hpp>
 // test util
-#include <util/fill.h>
+#include <util/fill.hpp>
 // lib
-#include <arraychangemetricslist.h>
+#include <arraychangemetricslist.hpp>
 // Qt
 #include <QTest>
 #include <QSignalSpy>

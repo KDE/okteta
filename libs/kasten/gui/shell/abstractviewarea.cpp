@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "abstractviewarea.h"
-#include "abstractviewarea_p.h"
+#include "abstractviewarea.hpp"
+#include "abstractviewarea_p.hpp"
 
 // Qt
 #include <Qt>

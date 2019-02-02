@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "infotoolview.h"
+#include "infotoolview.hpp"
 
 // tool
-#include "infoview.h"
-#include "infotool.h"
+#include "infoview.hpp"
+#include "infotool.hpp"
 
 namespace Kasten {
 

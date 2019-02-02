@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "coordrangetest.h"
+#include "coordrangetest.hpp"
 
 // test object
-#include <coordrange.h>
+#include <coordrange.hpp>
 // Qt
 #include <QtTest>
 

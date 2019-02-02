@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "zoomwheelcontroller.h"
+#include "zoomwheelcontroller.hpp"
 
 // lib
-#include <abstractbytearrayview.h>
+#include <abstractbytearrayview.hpp>
 // Qt
 #include <QWheelEvent>
 

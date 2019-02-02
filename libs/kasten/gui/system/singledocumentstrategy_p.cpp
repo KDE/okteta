@@ -20,20 +20,20 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "singledocumentstrategy_p.h"
+#include "singledocumentstrategy_p.hpp"
 
 // lib
-#include "createdialog.h"
+#include "createdialog.hpp"
 // Kasten gui
-#include <abstractmodeldatageneratorconfigeditor.h>
-#include <modelcodecviewmanager.h>
-#include <viewmanager.h>
+#include <abstractmodeldatageneratorconfigeditor.hpp>
+#include <modelcodecviewmanager.hpp>
+#include <viewmanager.hpp>
 // Kasten core
-#include <kasten/modeldatageneratethread.h>
-#include <kasten/documentsyncmanager.h>
-#include <kasten/documentcreatemanager.h>
-#include <kasten/abstractmodeldatagenerator.h>
-#include <kasten/abstractmodel.h>
+#include <kasten/modeldatageneratethread.hpp>
+#include <kasten/documentsyncmanager.hpp>
+#include <kasten/documentcreatemanager.hpp>
+#include <kasten/abstractmodeldatagenerator.hpp>
+#include <kasten/abstractmodel.hpp>
 // KF5
 #include <KProcess>
 // Qt

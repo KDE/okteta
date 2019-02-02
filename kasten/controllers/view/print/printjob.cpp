@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "printjob.h"
+#include "printjob.hpp"
 
 // controller
-#include "framestopaperprinter.h"
-// #include "printthread.h"
+#include "framestopaperprinter.hpp"
+// #include "printthread.hpp"
 // Qt
 #include <QCoreApplication>
 // #include <QFontDatabase>

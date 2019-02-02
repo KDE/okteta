@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "sint64codec.h"
+#include "sint64codec.hpp"
 
 // tool
-#include "../types/sint64.h"
-#include "../poddata.h"
+#include "../types/sint64.hpp"
+#include "../poddata.hpp"
 // KF5
 #include <KLocalizedString>
 

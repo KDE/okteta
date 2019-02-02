@@ -20,14 +20,14 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "creatorcontroller.h"
+#include "creatorcontroller.hpp"
 
 // Kasten gui
-#include <kasten/abstractdocumentstrategy.h>
-#include <kasten/selecteddatawriteable.h>
+#include <kasten/abstractdocumentstrategy.hpp>
+#include <kasten/selecteddatawriteable.hpp>
 // Kasten core
-#include <kasten/modelcodecmanager.h>
-#include <kasten/abstractmodeldatagenerator.h>
+#include <kasten/modelcodecmanager.hpp>
+#include <kasten/abstractmodeldatagenerator.hpp>
 // KF5
 #include <KLocalizedString>
 #include <KActionCollection>

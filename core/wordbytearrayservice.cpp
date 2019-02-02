@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "wordbytearrayservice.h"
+#include "wordbytearrayservice.hpp"
 
 // lib
-#include "abstractbytearraymodel.h"
-#include "character.h"
-#include "charcodec.h"
+#include "abstractbytearraymodel.hpp"
+#include "character.hpp"
+#include "charcodec.hpp"
 
 namespace Okteta {
 

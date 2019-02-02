@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kabstractfinddialog.h"
+#include "kabstractfinddialog.hpp"
 
 // lib
-#include <kasten/okteta/bytearraycombobox.h>
+#include <kasten/okteta/bytearraycombobox.hpp>
 // Okteta core
-#include <okteta/oktetacore.h>
+#include <okteta/oktetacore.hpp>
 // KF5
 #include <KLocalizedString>
 // Qt

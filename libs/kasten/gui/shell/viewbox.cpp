@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "viewbox.h"
+#include "viewbox.hpp"
 
 // lib
-#include "abstractview.h"
+#include "abstractview.hpp"
 // Qt
 #include <QVBoxLayout>
 

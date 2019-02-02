@@ -22,7 +22,7 @@
 
 // QCA
 // need to have this first, as QCA needs QT_NO_CAST_FROM_ASCII disabled when included
-#include <config-qca2.h> // krazy:excludeall=includes
+#include <config-qca2.hpp> // krazy:excludeall=includes
 #ifdef HAVE_QCA2
 // disable QT_NO_CAST_FROM_ASCII
 #ifdef QT_NO_CAST_FROM_ASCII
@@ -31,22 +31,22 @@
 #include <QtCrypto>
 #endif
 
-#include "bytearraychecksumalgorithmfactory.h"
+#include "bytearraychecksumalgorithmfactory.hpp"
 
 // lib
-#include "algorithm/crc32bytearraychecksumalgorithm.h"
-#include "algorithm/adler32bytearraychecksumalgorithm.h"
-#include "algorithm/modsum8bytearraychecksumalgorithm.h"
-#include "algorithm/modsum16bytearraychecksumalgorithm.h"
-#include "algorithm/modsum32bytearraychecksumalgorithm.h"
-#include "algorithm/modsum64bytearraychecksumalgorithm.h"
+#include "algorithm/crc32bytearraychecksumalgorithm.hpp"
+#include "algorithm/adler32bytearraychecksumalgorithm.hpp"
+#include "algorithm/modsum8bytearraychecksumalgorithm.hpp"
+#include "algorithm/modsum16bytearraychecksumalgorithm.hpp"
+#include "algorithm/modsum32bytearraychecksumalgorithm.hpp"
+#include "algorithm/modsum64bytearraychecksumalgorithm.hpp"
 #ifdef HAVE_QCA2
-#include "algorithm/qca2bytearraychecksumalgorithm.h"
+#include "algorithm/qca2bytearraychecksumalgorithm.hpp"
 #endif
 // NEWCHECKSUM(start)
 // Here add the name of your header file of your checksum algorithm,
 // e.g.
-// #include "algorithm/mybytearraychecksumalgorithm.h"
+// #include "algorithm/mybytearraychecksumalgorithm.hpp"
 // NEWCHECKSUM(end)
 // KF5
 #include <KLocalizedString>

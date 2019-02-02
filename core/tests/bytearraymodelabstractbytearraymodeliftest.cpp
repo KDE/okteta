@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearraymodelabstractbytearraymodeliftest.h"
+#include "bytearraymodelabstractbytearraymodeliftest.hpp"
 
 // test object
-#include <bytearraymodel.h>
+#include <bytearraymodel.hpp>
 // Qt
 #include <QTest>
 

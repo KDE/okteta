@@ -19,12 +19,12 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#include "taggeduniondatainformation.h"
+#include "taggeduniondatainformation.hpp"
 
-#include "topleveldatainformation.h"
-#include "structuredatainformation.h"
-#include "primitive/primitivedatainformation.h"
-#include "../parsers/parserutils.h"
+#include "topleveldatainformation.hpp"
+#include "structuredatainformation.hpp"
+#include "primitive/primitivedatainformation.hpp"
+#include "../parsers/parserutils.hpp"
 
 #include <KLocalizedString>
 

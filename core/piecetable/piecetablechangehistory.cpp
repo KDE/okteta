@@ -20,13 +20,13 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "piecetablechangehistory.h"
+#include "piecetablechangehistory.hpp"
 
 // lib
-#include "grouppiecetablechange.h"
+#include "grouppiecetablechange.hpp"
 //
-#include <addressrangelist.h>
-#include <arraychangemetricslist.h>
+#include <addressrangelist.hpp>
+#include <arraychangemetricslist.hpp>
 
 namespace KPieceTable {
 

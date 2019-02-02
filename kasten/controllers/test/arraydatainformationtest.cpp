@@ -21,12 +21,12 @@
 #include <QTest>
 #include <QSignalSpy>
 
-#include "view/structures/datatypes/array/arraydatainformation.h"
-#include "view/structures/datatypes/array/primitivearraydata.h"
-#include "view/structures/datatypes/topleveldatainformation.h"
-#include "view/structures/datatypes/primitive/primitivetemplateinfo.h"
-#include "view/structures/datatypes/primitivefactory.h"
-#include "view/structures/datatypes/structuredatainformation.h"
+#include "view/structures/datatypes/array/arraydatainformation.hpp"
+#include "view/structures/datatypes/array/primitivearraydata.hpp"
+#include "view/structures/datatypes/topleveldatainformation.hpp"
+#include "view/structures/datatypes/primitive/primitivetemplateinfo.hpp"
+#include "view/structures/datatypes/primitivefactory.hpp"
+#include "view/structures/datatypes/structuredatainformation.hpp"
 
 class ArrayDataInformationTest : public QObject
 {

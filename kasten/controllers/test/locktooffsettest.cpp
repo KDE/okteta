@@ -22,10 +22,10 @@
 
 #include <limits>
 
-#include <okteta/bytearraymodel.h>
-#include "view/structures/datatypes/topleveldatainformation.h"
-#include "view/structures/datatypes/structuredatainformation.h"
-#include "view/structures/datatypes/primitive/primitivetemplateinfo.h"
+#include <okteta/bytearraymodel.hpp>
+#include "view/structures/datatypes/topleveldatainformation.hpp"
+#include "view/structures/datatypes/structuredatainformation.hpp"
+#include "view/structures/datatypes/primitive/primitivetemplateinfo.hpp"
 
 class LockToOffsetTest : public QObject
 {

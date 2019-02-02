@@ -20,19 +20,19 @@
 
 #include <QTest>
 
-#include "view/structures/datatypes/array/arraydatainformation.h"
-#include "view/structures/datatypes/array/primitivearraydata.h"
-#include "view/structures/datatypes/strings/stringdatainformation.h"
-#include "view/structures/datatypes/topleveldatainformation.h"
-#include "view/structures/datatypes/primitive/primitivetemplateinfo.h"
-#include "view/structures/datatypes/primitive/enumdatainformation.h"
-#include "view/structures/datatypes/primitive/flagdatainformation.h"
-#include "view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.h"
-#include "view/structures/datatypes/primitive/bitfield/signedbitfielddatainformation.h"
-#include "view/structures/datatypes/primitive/bitfield/unsignedbitfielddatainformation.h"
-#include "view/structures/datatypes/primitivefactory.h"
-#include "view/structures/datatypes/uniondatainformation.h"
-#include "view/structures/datatypes/structuredatainformation.h"
+#include "view/structures/datatypes/array/arraydatainformation.hpp"
+#include "view/structures/datatypes/array/primitivearraydata.hpp"
+#include "view/structures/datatypes/strings/stringdatainformation.hpp"
+#include "view/structures/datatypes/topleveldatainformation.hpp"
+#include "view/structures/datatypes/primitive/primitivetemplateinfo.hpp"
+#include "view/structures/datatypes/primitive/enumdatainformation.hpp"
+#include "view/structures/datatypes/primitive/flagdatainformation.hpp"
+#include "view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.hpp"
+#include "view/structures/datatypes/primitive/bitfield/signedbitfielddatainformation.hpp"
+#include "view/structures/datatypes/primitive/bitfield/unsignedbitfielddatainformation.hpp"
+#include "view/structures/datatypes/primitivefactory.hpp"
+#include "view/structures/datatypes/uniondatainformation.hpp"
+#include "view/structures/datatypes/structuredatainformation.hpp"
 
 struct ExpectedResults
 {

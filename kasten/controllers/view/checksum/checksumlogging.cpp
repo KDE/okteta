@@ -20,6 +20,6 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "checksumlogging.h"
+#include "checksumlogging.hpp"
 
 Q_LOGGING_CATEGORY(LOG_OKTETA_KASTEN_CONTROLLER_CHECKSUM, "kasten.okteta.controllers.checksum", QtInfoMsg)

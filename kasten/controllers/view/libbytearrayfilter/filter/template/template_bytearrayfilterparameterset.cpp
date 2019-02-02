@@ -7,9 +7,9 @@
 */
 
 //// ADAPT(start)
-//// rename "template_bytearrayfilter.h" to the name of the header of your filter,
-//// e.g. "mybytearrayfilter.h"
-#include "template_bytearrayfilterparameterset.h"
+//// rename "template_bytearrayfilter.hpp" to the name of the header of your filter,
+//// e.g. "mybytearrayfilter.hpp"
+#include "template_bytearrayfilterparameterset.hpp"
 //// ADAPT(end)
 
 //// ADAPT(start)

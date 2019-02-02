@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearrayviewprofile.h"
+#include "bytearrayviewprofile.hpp"
 
 // Okteta Gui
-#include <okteta/bytearraycolumnview.h>
+#include <okteta/bytearraycolumnview.hpp>
 // Qt
 #include <QString>
 

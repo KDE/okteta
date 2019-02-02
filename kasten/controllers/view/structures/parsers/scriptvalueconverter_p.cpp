@@ -20,16 +20,16 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "scriptvalueconverter.h"
-#include "scriptvalueconverter_p.h"
+#include "scriptvalueconverter.hpp"
+#include "scriptvalueconverter_p.hpp"
 
-#include "datainformationfactory.h"
-#include "parserutils.h"
-#include "../datatypes/uniondatainformation.h"
-#include "../datatypes/structuredatainformation.h"
-#include "../datatypes/strings/stringdata.h"
-#include "../datatypes/strings/stringdatainformation.h"
-#include "../script/scriptlogger.h"
+#include "datainformationfactory.hpp"
+#include "parserutils.hpp"
+#include "../datatypes/uniondatainformation.hpp"
+#include "../datatypes/structuredatainformation.hpp"
+#include "../datatypes/strings/stringdata.hpp"
+#include "../datatypes/strings/stringdatainformation.hpp"
+#include "../script/scriptlogger.hpp"
 
 using namespace ParserStrings;
 

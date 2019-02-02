@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "stringsextracttoolview.h"
+#include "stringsextracttoolview.hpp"
 
 // tool
-#include "stringsextractview.h"
-#include "stringsextracttool.h"
+#include "stringsextractview.hpp"
+#include "stringsextracttool.hpp"
 
 namespace Kasten {
 

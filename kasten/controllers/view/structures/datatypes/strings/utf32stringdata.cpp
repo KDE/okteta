@@ -19,19 +19,19 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#include "utf32stringdata.h"
+#include "utf32stringdata.hpp"
 
-#include "../../structlogging.h"
+#include "../../structlogging.hpp"
 
 #include <QVarLengthArray>
 
 #include <KLocalizedString>
 
-#include <okteta/abstractbytearraymodel.h>
+#include <okteta/abstractbytearraymodel.hpp>
 
-#include "../topleveldatainformation.h"
-#include "../dummydatainformation.h"
-#include "stringdatainformation.h"
+#include "../topleveldatainformation.hpp"
+#include "../dummydatainformation.hpp"
+#include "stringdatainformation.hpp"
 
 Utf32StringData::Utf32StringData(StringDataInformation* parent)
     : StringData(parent)

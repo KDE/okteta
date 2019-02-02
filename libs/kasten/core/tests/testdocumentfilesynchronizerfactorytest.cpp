@@ -20,14 +20,14 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "testdocumentfilesynchronizerfactorytest.h"
+#include "testdocumentfilesynchronizerfactorytest.hpp"
 
 // test object
-#include <testdocumentfilesynchronizerfactory.h>
+#include <testdocumentfilesynchronizerfactory.hpp>
 // lib
-#include <testdocument.h>
+#include <testdocument.hpp>
 // test utils
-#include <util/filesystem.h>
+#include <util/filesystem.hpp>
 // Qt
 #include <QTest>
 #include <QSignalSpy>

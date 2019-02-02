@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "ebcdic1047charcodec.h"
+#include "ebcdic1047charcodec.hpp"
 
 // lib
-#include <character.h>
+#include <character.hpp>
 // Qt
 #include <QString>
 

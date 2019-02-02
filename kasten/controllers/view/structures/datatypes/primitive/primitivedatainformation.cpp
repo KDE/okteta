@@ -19,9 +19,9 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#include "primitivedatainformation.h"
-#include "../datainformation.h"
-#include "../topleveldatainformation.h"
+#include "primitivedatainformation.hpp"
+#include "../datainformation.hpp"
+#include "../topleveldatainformation.hpp"
 #include "structureviewpreferences.h"
 
 PrimitiveDataInformationWrapper::PrimitiveDataInformationWrapper(const PrimitiveDataInformationWrapper& d)

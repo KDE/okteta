@@ -20,18 +20,18 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "topleveldatainformation.h"
-#include "datainformation.h"
-#include "primitive/pointerdatainformation.h"
-#include "datainformationwithchildren.h"
+#include "topleveldatainformation.hpp"
+#include "datainformation.hpp"
+#include "primitive/pointerdatainformation.hpp"
+#include "datainformationwithchildren.hpp"
 
-#include "../script/scripthandler.h"
-#include "../script/scriptlogger.h"
-#include "../script/scriptengineinitializer.h"
-#include "../structlogging.h"
-#include "primitivefactory.h"
+#include "../script/scripthandler.hpp"
+#include "../script/scriptlogger.hpp"
+#include "../script/scriptengineinitializer.hpp"
+#include "../structlogging.hpp"
+#include "primitivefactory.hpp"
 
-#include <okteta/abstractbytearraymodel.h>
+#include <okteta/abstractbytearraymodel.hpp>
 
 #include <QScriptEngine>
 

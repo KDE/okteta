@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "replacecontroller.h"
+#include "replacecontroller.hpp"
 
 // controller
-#include "kreplacedialog.h"
-#include "kreplaceprompt.h"
-#include "replacetool.h"
+#include "kreplacedialog.hpp"
+#include "kreplaceprompt.hpp"
+#include "replacetool.hpp"
 // KF5
 #include <KXmlGuiWindow>
 #include <KLocalizedString>

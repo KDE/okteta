@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "tabbedviews.h"
-#include "tabbedviews_p.h"
+#include "tabbedviews.hpp"
+#include "tabbedviews_p.hpp"
 
 namespace Kasten {
 

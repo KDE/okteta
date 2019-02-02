@@ -21,23 +21,23 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "structurestool.h"
-#include "structuredefinitionfile.h"
-#include "structuresmanager.h"
-#include "structlogging.h"
+#include "structurestool.hpp"
+#include "structuredefinitionfile.hpp"
+#include "structuresmanager.hpp"
+#include "structlogging.hpp"
 // lib
-#include <kasten/okteta/bytearraydocument.h>
+#include <kasten/okteta/bytearraydocument.hpp>
 // Okteta core
-#include <okteta/character.h>
-#include <okteta/charcodec.h>
-#include <okteta/abstractbytearraymodel.h>
+#include <okteta/character.hpp>
+#include <okteta/charcodec.hpp>
+#include <okteta/abstractbytearraymodel.hpp>
 // KF5
 #include <KLocalizedString>
 // Qt
 #include <QModelIndex>
 
-#include "script/scripthandler.h"
-#include "datatypes/datainformation.h"
+#include "script/scripthandler.hpp"
+#include "datatypes/datainformation.hpp"
 #include "structureviewpreferences.h"
 
 namespace Kasten {

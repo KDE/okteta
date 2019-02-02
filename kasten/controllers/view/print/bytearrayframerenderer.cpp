@@ -20,21 +20,21 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearrayframerenderer.h"
+#include "bytearrayframerenderer.hpp"
 
 // lib
-#include "printcolumnstylist.h"
+#include "printcolumnstylist.hpp"
 // Okteta gui
-#include <okteta/offsetcolumnrenderer.h>
-#include <okteta/bordercolumnrenderer.h>
-#include <okteta/valuebytearraycolumnrenderer.h>
-#include <okteta/charbytearraycolumnrenderer.h>
-#include <okteta/bytearraytablelayout.h>
-#include <okteta/bytearraytableranges.h>
+#include <okteta/offsetcolumnrenderer.hpp>
+#include <okteta/bordercolumnrenderer.hpp>
+#include <okteta/valuebytearraycolumnrenderer.hpp>
+#include <okteta/charbytearraycolumnrenderer.hpp>
+#include <okteta/bytearraytablelayout.hpp>
+#include <okteta/bytearraytableranges.hpp>
 // Okteta core
-#include <okteta/abstractbytearraymodel.h>
-#include <okteta/valuecodec.h>
-#include <okteta/charcodec.h>
+#include <okteta/abstractbytearraymodel.hpp>
+#include <okteta/valuecodec.hpp>
+#include <okteta/charcodec.hpp>
 // Qt
 #include <QHash>
 #include <QDateTime>

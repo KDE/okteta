@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "documentstoolview.h"
+#include "documentstoolview.hpp"
 
 // tool
-#include "documentsview.h"
-#include "documentstool.h"
+#include "documentsview.hpp"
+#include "documentstool.hpp"
 
 namespace Kasten {
 

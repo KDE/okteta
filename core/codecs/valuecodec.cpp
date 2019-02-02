@@ -20,13 +20,13 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "valuecodec.h"
+#include "valuecodec.hpp"
 
 // lib
-#include "binarybytecodec.h"
-#include "octalbytecodec.h"
-#include "decimalbytecodec.h"
-#include "hexadecimalbytecodec.h"
+#include "binarybytecodec.hpp"
+#include "octalbytecodec.hpp"
+#include "decimalbytecodec.hpp"
+#include "hexadecimalbytecodec.hpp"
 // Qt
 #include <QString>
 

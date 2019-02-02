@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "piecetablebytearraymodelversionableiftest.h"
+#include "piecetablebytearraymodelversionableiftest.hpp"
 
 // test object
-#include <piecetablebytearraymodel.h>
+#include <piecetablebytearraymodel.hpp>
 // Qt
 #include <QTest>
 

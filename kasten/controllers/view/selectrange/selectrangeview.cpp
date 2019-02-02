@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "selectrangeview.h"
+#include "selectrangeview.hpp"
 
 // tool
-#include "selectrangetool.h"
+#include "selectrangetool.hpp"
 // lib
-#include <kasten/okteta/addresscombobox.h>
+#include <kasten/okteta/addresscombobox.hpp>
 // KF5
 #include <QPushButton>
 #include <KGuiItem>

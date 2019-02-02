@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "testdocumentfileloadjob.h"
+#include "testdocumentfileloadjob.hpp"
 
 // lib
-#include "testdocumentfilesynchronizer.h"
-#include "testdocumentfileloadthread.h"
-#include "testdocument.h"
+#include "testdocumentfilesynchronizer.hpp"
+#include "testdocumentfileloadthread.hpp"
+#include "testdocument.hpp"
 // Qt
 #include <QCoreApplication>
 

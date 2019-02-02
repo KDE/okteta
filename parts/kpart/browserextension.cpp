@@ -20,14 +20,14 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "browserextension.h"
+#include "browserextension.hpp"
 
 // part
-#include "part.h"
+#include "part.hpp"
 // Okteta Kasten
-#include <kasten/okteta/printcontroller.h>
-#include <kasten/okteta/bytearrayview.h>
-#include <kasten/okteta/bytearraydocument.h>
+#include <kasten/okteta/printcontroller.hpp>
+#include <kasten/okteta/bytearrayview.hpp>
+#include <kasten/okteta/bytearraydocument.hpp>
 // Qt
 #include <QClipboard>
 #include <QApplication>

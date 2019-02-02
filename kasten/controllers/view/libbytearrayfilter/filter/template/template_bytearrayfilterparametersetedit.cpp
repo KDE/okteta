@@ -7,16 +7,16 @@
 */
 
 //// ADAPT(start)
-//// rename "template_bytearrayfilterparametersetedit.h" to the name of the header of your filter,
-//// e.g. "mybytearrayfilterparametersetedit.h"
-#include "template_bytearrayfilterparametersetedit.h"
+//// rename "template_bytearrayfilterparametersetedit.hpp" to the name of the header of your filter,
+//// e.g. "mybytearrayfilterparametersetedit.hpp"
+#include "template_bytearrayfilterparametersetedit.hpp"
 //// ADAPT(end)
 
 // parameterset
 //// ADAPT(start)
-//// rename "template_bytearrayfilterparameterset.h" to the name of the header of your filter,
-//// e.g. "mybytearrayfilterparameterset.h"
-#include "template_bytearrayfilterparameterset.h"
+//// rename "template_bytearrayfilterparameterset.hpp" to the name of the header of your filter,
+//// e.g. "mybytearrayfilterparameterset.hpp"
+#include "template_bytearrayfilterparameterset.hpp"
 //// ADAPT(end)
 // KF5
 #include <KLocalizedString>

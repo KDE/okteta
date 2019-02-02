@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "framestopaperprinter.h"
+#include "framestopaperprinter.hpp"
 
 // lib
-#include "abstractframerenderer.h"
+#include "abstractframerenderer.hpp"
 // Qt
 #include <QPainter>
 #include <QPrinter>

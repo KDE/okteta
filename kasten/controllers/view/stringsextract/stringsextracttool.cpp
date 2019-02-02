@@ -20,16 +20,16 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "stringsextracttool.h"
+#include "stringsextracttool.hpp"
 
 // lib
-#include "extractstringsjob.h"
-#include <kasten/okteta/bytearrayview.h>
-#include <kasten/okteta/bytearraydocument.h>
+#include "extractstringsjob.hpp"
+#include <kasten/okteta/bytearrayview.hpp>
+#include <kasten/okteta/bytearraydocument.hpp>
 // Okteta core
-#include <okteta/charcodec.h>
-#include <okteta/abstractbytearraymodel.h>
-#include <okteta/arraychangemetricslist.h>
+#include <okteta/charcodec.hpp>
+#include <okteta/abstractbytearraymodel.hpp>
+#include <okteta/arraychangemetricslist.hpp>
 // KF5
 #include <KLocalizedString>
 // Qt

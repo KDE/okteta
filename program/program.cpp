@@ -20,31 +20,31 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "program.h"
+#include "program.hpp"
 
 // program
-#include "about.h"
-#include "mainwindow.h"
+#include "about.hpp"
+#include "mainwindow.hpp"
 // Okteta Kasten
-#include <kasten/okteta/bytearraydocumentfactory.h>
-#include <kasten/okteta/bytearrayviewfactory.h>
-#include <kasten/okteta/bytearrayrawfilesynchronizerfactory.h>
-#include <kasten/okteta/bytearraystreamencoderconfigeditorfactoryfactory.h>
-#include <kasten/okteta/bytearraydatageneratorconfigeditorfactoryfactory.h>
-#include <kasten/okteta/bytearraystreamencoderfactory.h>
-#include <kasten/okteta/bytearraydatageneratorfactory.h>
+#include <kasten/okteta/bytearraydocumentfactory.hpp>
+#include <kasten/okteta/bytearrayviewfactory.hpp>
+#include <kasten/okteta/bytearrayrawfilesynchronizerfactory.hpp>
+#include <kasten/okteta/bytearraystreamencoderconfigeditorfactoryfactory.hpp>
+#include <kasten/okteta/bytearraydatageneratorconfigeditorfactoryfactory.hpp>
+#include <kasten/okteta/bytearraystreamencoderfactory.hpp>
+#include <kasten/okteta/bytearraydatageneratorfactory.hpp>
 // tmp
-#include <kasten/okteta/bytearrayviewprofilemanager.h>
+#include <kasten/okteta/bytearrayviewprofilemanager.hpp>
 // Kasten gui
-#include <kasten/multidocumentstrategy.h>
-#include <kasten/dialoghandler.h>
-#include <kasten/viewmanager.h>
-#include <kasten/modelcodecviewmanager.h>
+#include <kasten/multidocumentstrategy.hpp>
+#include <kasten/dialoghandler.hpp>
+#include <kasten/viewmanager.hpp>
+#include <kasten/modelcodecviewmanager.hpp>
 // Kasten core
-#include <kasten/documentmanager.h>
-#include <kasten/documentcreatemanager.h>
-#include <kasten/documentsyncmanager.h>
-#include <kasten/modelcodecmanager.h>
+#include <kasten/documentmanager.hpp>
+#include <kasten/documentcreatemanager.hpp>
+#include <kasten/documentsyncmanager.hpp>
+#include <kasten/modelcodecmanager.hpp>
 // KF5
 #include <KDBusService>
 #include <KLocalizedString>

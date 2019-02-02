@@ -2,7 +2,7 @@
 <kcfg xmlns="http://www.kde.org/standards/kcfg/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0 http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
   <include>QSysInfo</include>
-  <include>view/structures/datatypes/datainformationbase.h</include>
+  <include>view/structures/datatypes/datainformationbase.hpp</include>
   <kcfgfile name="oktetastructuresrc" />
   <group name="ValueDisplay">
     <entry name="UnsignedDisplayBase" type="Int">

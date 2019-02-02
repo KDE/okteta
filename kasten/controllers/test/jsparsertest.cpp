@@ -23,9 +23,9 @@
 
 #include <QTest>
 #include <QScriptEngine>
-#include "view/structures/script/scriptengineinitializer.h"
-#include "view/structures/parsers/scriptvalueconverter.h"
-#include "testutils.h"
+#include "view/structures/script/scriptengineinitializer.hpp"
+#include "view/structures/parsers/scriptvalueconverter.hpp"
+#include "testutils.hpp"
 #include <functional>
 
 struct JsTestData

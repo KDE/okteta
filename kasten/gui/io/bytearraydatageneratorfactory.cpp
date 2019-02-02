@@ -20,16 +20,16 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearraydatageneratorfactory.h"
+#include "bytearraydatageneratorfactory.hpp"
 
 // lib
-#include "generator/pattern/bytearraypatterngenerator.h"
-#include "generator/randomdata/bytearrayrandomdatagenerator.h"
-#include "generator/sequence/bytearraysequencegenerator.h"
+#include "generator/pattern/bytearraypatterngenerator.hpp"
+#include "generator/randomdata/bytearrayrandomdatagenerator.hpp"
+#include "generator/sequence/bytearraysequencegenerator.hpp"
 //// NEWBYTEARRAYDATAGENERATOR(start)
 //// Here add the name of your header file of your datagenerator,
 //// e.g.
-//// #include "my_bytearraydatagenerator.h"
+//// #include "my_bytearraydatagenerator.hpp"
 //// NEWBYTEARRAYDATAGENERATOR(end)
 // Qt
 #include <QList>

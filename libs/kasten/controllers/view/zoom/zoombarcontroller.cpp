@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "zoombarcontroller.h"
+#include "zoombarcontroller.hpp"
 
 // lib
-#include "zoomslider.h"
+#include "zoomslider.hpp"
 //
-#include <kasten/statusbar.h>
+#include <kasten/statusbar.hpp>
 
 namespace Kasten {
 

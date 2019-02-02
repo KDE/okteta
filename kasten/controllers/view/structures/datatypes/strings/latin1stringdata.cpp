@@ -20,13 +20,13 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "latin1stringdata.h"
+#include "latin1stringdata.hpp"
 
-#include "../topleveldatainformation.h"
-#include "stringdatainformation.h"
-#include "../../structlogging.h"
+#include "../topleveldatainformation.hpp"
+#include "stringdatainformation.hpp"
+#include "../../structlogging.hpp"
 
-#include <okteta/abstractbytearraymodel.h>
+#include <okteta/abstractbytearraymodel.hpp>
 
 #include <KLocalizedString>
 #include <QVarLengthArray>

@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "viewprofiletablemodel.h"
+#include "viewprofiletablemodel.hpp"
 
 // Okteta Gui Kasten
-#include <kasten/okteta/bytearrayviewprofilemanager.h>
+#include <kasten/okteta/bytearrayviewprofilemanager.hpp>
 // KF5
 #include <KColorScheme>
 #include <KLocalizedString>

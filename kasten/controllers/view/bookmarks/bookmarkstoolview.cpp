@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bookmarkstoolview.h"
+#include "bookmarkstoolview.hpp"
 
 // tool
-#include "bookmarksview.h"
-#include "bookmarkstool.h"
+#include "bookmarksview.hpp"
+#include "bookmarkstool.hpp"
 
 namespace Kasten {
 

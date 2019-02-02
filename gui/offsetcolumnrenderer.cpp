@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "offsetcolumnrenderer.h"
+#include "offsetcolumnrenderer.hpp"
 
 // lib
-#include "bytearraytablelayout.h"
+#include "bytearraytablelayout.hpp"
 // lib
-#include <abstractcolumnstylist.h>
+#include <abstractcolumnstylist.hpp>
 // Qt
 #include <QPainter>
 #include <QPalette>

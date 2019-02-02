@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "reversebytearrayfilterparametersetedit.h"
+#include "reversebytearrayfilterparametersetedit.hpp"
 
 //
-#include "reversebytearrayfilterparameterset.h"
+#include "reversebytearrayfilterparameterset.hpp"
 // KF5
 #include <KLocalizedString>
 // Qt

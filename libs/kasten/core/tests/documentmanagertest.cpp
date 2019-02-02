@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "documentmanagertest.h"
+#include "documentmanagertest.hpp"
 
 // sut
-#include <documentmanager.h>
+#include <documentmanager.hpp>
 // test
-#include <testdocument.h>
+#include <testdocument.hpp>
 // Qt
 #include <QTest>
 #include <QSignalSpy>

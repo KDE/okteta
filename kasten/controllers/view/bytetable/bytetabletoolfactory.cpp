@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytetabletoolfactory.h"
+#include "bytetabletoolfactory.hpp"
 
 // lib
-#include "bytetabletool.h"
+#include "bytetabletool.hpp"
 
 namespace Kasten {
 

@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearrayrawfilesynchronizerfactory.h"
+#include "bytearrayrawfilesynchronizerfactory.hpp"
 
 // lib
-#include "bytearrayrawfilesynchronizer.h"
-#include "bytearraydocument.h"
+#include "bytearrayrawfilesynchronizer.hpp"
+#include "bytearraydocument.hpp"
 // Qt
 #include <QString>
 

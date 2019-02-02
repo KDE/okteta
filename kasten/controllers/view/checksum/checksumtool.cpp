@@ -22,7 +22,7 @@
 
 // QCA
 // need to have this first, as QCA needs QT_NO_CAST_FROM_ASCII disabled when included
-#include <config-qca2.h> // krazy:excludeall=includes
+#include <config-qca2.hpp> // krazy:excludeall=includes
 #ifdef HAVE_QCA2
 // disable QT_NO_CAST_FROM_ASCII
 #ifdef QT_NO_CAST_FROM_ASCII
@@ -31,20 +31,20 @@
 #include <QtCrypto>
 #endif
 
-#include "checksumtool.h"
+#include "checksumtool.hpp"
 
 // lib
-#include "checksumcalculatejob.h"
-#include "checksumlogging.h"
+#include "checksumcalculatejob.hpp"
+#include "checksumlogging.hpp"
 //
-#include <bytearraychecksumalgorithmfactory.h>
-#include <abstractbytearraychecksumalgorithm.h>
+#include <bytearraychecksumalgorithmfactory.hpp>
+#include <abstractbytearraychecksumalgorithm.hpp>
 //
-#include <kasten/okteta/bytearrayview.h>
-#include <kasten/okteta/bytearraydocument.h>
+#include <kasten/okteta/bytearrayview.hpp>
+#include <kasten/okteta/bytearraydocument.hpp>
 // Okteta core
-#include <okteta/abstractbytearraymodel.h>
-#include <okteta/arraychangemetricslist.h>
+#include <okteta/abstractbytearraymodel.hpp>
+#include <okteta/arraychangemetricslist.hpp>
 // KF5
 #include <KLocalizedString>
 // Qt

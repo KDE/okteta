@@ -20,13 +20,13 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearrayvaluesstreamencoder.h"
+#include "bytearrayvaluesstreamencoder.hpp"
 
 // lib
-#include <bytearrayview.h>
+#include <bytearrayview.hpp>
 // Okteta core
-#include <okteta/abstractbytearraymodel.h>
-#include <okteta/valuecodec.h>
+#include <okteta/abstractbytearraymodel.hpp>
+#include <okteta/valuecodec.hpp>
 // KF5
 #include <KLocalizedString>
 // Qt

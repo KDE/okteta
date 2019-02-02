@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "charcodeciftest.h"
+#include "charcodeciftest.hpp"
 
 // test object
-#include <charcodec.h>
+#include <charcodec.hpp>
 // lib
-#include <character.h>
+#include <character.hpp>
 // Qt
 #include <QTest>
 

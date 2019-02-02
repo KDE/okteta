@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "stringsextracttoolviewfactory.h"
+#include "stringsextracttoolviewfactory.hpp"
 
 // lib
-#include "stringsextracttoolview.h"
-#include "stringsextracttool.h"
+#include "stringsextracttoolview.hpp"
+#include "stringsextracttool.hpp"
 // KF5
 #include <KLocalizedString>
 

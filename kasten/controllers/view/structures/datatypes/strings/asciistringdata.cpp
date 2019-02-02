@@ -20,12 +20,12 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "asciistringdata.h"
-#include "stringdatainformation.h"
-#include "../topleveldatainformation.h"
-#include "../../structlogging.h"
+#include "asciistringdata.hpp"
+#include "stringdatainformation.hpp"
+#include "../topleveldatainformation.hpp"
+#include "../../structlogging.hpp"
 
-#include <okteta/abstractbytearraymodel.h>
+#include <okteta/abstractbytearraymodel.hpp>
 
 #include <KLocalizedString>
 #include <QVarLengthArray>

@@ -20,13 +20,13 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "modifiedbarcontroller.h"
+#include "modifiedbarcontroller.hpp"
 
 // Kasten ui
-#include <kasten/statusbar.h>
+#include <kasten/statusbar.hpp>
 // Kasten core
-#include <kasten/abstractmodelsynchronizer.h>
-#include <kasten/abstractdocument.h>
+#include <kasten/abstractmodelsynchronizer.hpp>
+#include <kasten/abstractdocument.hpp>
 // KF5
 #include <KLocalizedString>
 // Qt

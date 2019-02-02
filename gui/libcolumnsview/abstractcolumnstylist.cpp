@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "abstractcolumnstylist.h"
-#include "abstractcolumnstylist_p.h"
+#include "abstractcolumnstylist.hpp"
+#include "abstractcolumnstylist_p.hpp"
 
 namespace Okteta {
 

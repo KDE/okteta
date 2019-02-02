@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "testpiecetablechange.h"
+#include "testpiecetablechange.hpp"
 
 // lib
-#include <piecetable/piecetable.h>
-#include <arraychangemetrics.h>
+#include <piecetable/piecetable.hpp>
+#include <arraychangemetrics.hpp>
 // Qt
 #include <QString>
 

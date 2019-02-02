@@ -20,11 +20,11 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "abstractstructureparser.h"
+#include "abstractstructureparser.hpp"
 
-#include "../structuredefinitionfile.h"
-#include "../script/scriptlogger.h"
-#include "../structlogging.h"
+#include "../structuredefinitionfile.hpp"
+#include "../script/scriptlogger.hpp"
+#include "../structlogging.hpp"
 
 #include <QFile>
 

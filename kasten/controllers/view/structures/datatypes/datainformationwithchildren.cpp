@@ -19,13 +19,13 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#include "datainformationwithchildren.h"
-#include "topleveldatainformation.h"
-#include "../parsers/scriptvalueconverter.h"
-#include "../script/scriptutils.h"
-#include "../script/scripthandlerinfo.h"
-#include "../script/classes/structunionscriptclass.h"
-#include "../script/scriptlogger.h"
+#include "datainformationwithchildren.hpp"
+#include "topleveldatainformation.hpp"
+#include "../parsers/scriptvalueconverter.hpp"
+#include "../script/scriptutils.hpp"
+#include "../script/scripthandlerinfo.hpp"
+#include "../script/classes/structunionscriptclass.hpp"
+#include "../script/scriptlogger.hpp"
 
 #include <KLocalizedString>
 #include <QScriptEngine>

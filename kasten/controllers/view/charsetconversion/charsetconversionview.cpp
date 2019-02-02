@@ -20,14 +20,14 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "charsetconversionview.h"
+#include "charsetconversionview.hpp"
 
 // tool
-#include "charsetconversiontool.h"
+#include "charsetconversiontool.hpp"
 // Okteta Kasten gui
-#include <kasten/okteta/bytearraycombobox.h>
+#include <kasten/okteta/bytearraycombobox.hpp>
 // Okteta core
-#include <okteta/charcodec.h>
+#include <okteta/charcodec.hpp>
 // KF5
 #include <KMessageBox>
 #include <KComboBox>

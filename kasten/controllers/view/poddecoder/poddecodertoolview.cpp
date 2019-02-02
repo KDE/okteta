@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "poddecodertoolview.h"
+#include "poddecodertoolview.hpp"
 
 // tool
-#include "podtableview.h"
-#include "poddecodertool.h"
+#include "podtableview.hpp"
+#include "poddecodertool.hpp"
 
 namespace Kasten {
 

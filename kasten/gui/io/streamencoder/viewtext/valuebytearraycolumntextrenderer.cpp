@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "valuebytearraycolumntextrenderer.h"
+#include "valuebytearraycolumntextrenderer.hpp"
 
 // Okteta core
-#include <okteta/valuecodec.h>
-#include <okteta/abstractbytearraymodel.h>
+#include <okteta/valuecodec.hpp>
+#include <okteta/abstractbytearraymodel.hpp>
 // Qt
 #include <QTextStream>
 

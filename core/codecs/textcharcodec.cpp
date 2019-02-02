@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "textcharcodec.h"
+#include "textcharcodec.hpp"
 
 // lib
-#include <character.h>
+#include <character.hpp>
 // KF5
 #include <KCharsets>
 // Qt

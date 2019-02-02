@@ -20,17 +20,17 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "singleviewwindow_p.h"
+#include "singleviewwindow_p.hpp"
 
 // this lib
-#include "singleviewarea.h"
-#include <abstractxmlguicontroller.h>
-#include <toolviewdockwidget.h>
-#include <abstracttoolview.h>
-#include <abstractview.h>
+#include "singleviewarea.hpp"
+#include <abstractxmlguicontroller.hpp>
+#include <toolviewdockwidget.hpp>
+#include <abstracttoolview.hpp>
+#include <abstractview.hpp>
 // Kasten core
-#include <kasten/abstracttool.h>
-#include <kasten/abstractmodelsynchronizer.h>
+#include <kasten/abstracttool.hpp>
+#include <kasten/abstractmodelsynchronizer.hpp>
 
 namespace Kasten {
 

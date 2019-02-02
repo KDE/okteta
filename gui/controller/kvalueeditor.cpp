@@ -20,15 +20,15 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kvalueeditor.h"
+#include "kvalueeditor.hpp"
 
 // lib
-#include <bytearraytablecursor.h>
-#include <abstractbytearrayview.h>
+#include <bytearraytablecursor.hpp>
+#include <abstractbytearrayview.hpp>
 // Okteta core
-#include <okteta/abstractbytearraymodel.h>
-#include <okteta/changesdescribable.h>
-#include <okteta/valuecodec.h>
+#include <okteta/abstractbytearraymodel.hpp>
+#include <okteta/changesdescribable.hpp>
+#include <okteta/valuecodec.hpp>
 // KF5
 #include <KLocalizedString>
 // Qt

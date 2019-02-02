@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "swaprangespiecetablechange.h"
+#include "swaprangespiecetablechange.hpp"
 
 // lib
-#include "piecetable.h"
+#include "piecetable.hpp"
 //
-#include <arraychangemetrics.h>
+#include <arraychangemetrics.hpp>
 // KF5
 #include <KLocalizedString>
 

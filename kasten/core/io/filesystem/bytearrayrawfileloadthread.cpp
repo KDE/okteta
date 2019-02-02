@@ -20,14 +20,14 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearrayrawfileloadthread.h"
+#include "bytearrayrawfileloadthread.hpp"
 
 // lib
-#include "bytearraydocument.h"
+#include "bytearraydocument.hpp"
 // Kasten core
-#include <kasten/person.h>
+#include <kasten/person.hpp>
 // Okteta core
-#include <okteta/piecetablebytearraymodel.h>
+#include <okteta/piecetablebytearraymodel.hpp>
 // KF5
 #include <KLocalizedString>
 // Qt

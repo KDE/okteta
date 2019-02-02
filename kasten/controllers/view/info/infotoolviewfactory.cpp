@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "infotoolviewfactory.h"
+#include "infotoolviewfactory.hpp"
 
 // lib
-#include "infotoolview.h"
-#include "infotool.h"
+#include "infotoolview.hpp"
+#include "infotool.hpp"
 // KF5
 #include <KLocalizedString>
 

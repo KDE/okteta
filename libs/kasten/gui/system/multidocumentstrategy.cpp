@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "multidocumentstrategy.h"
-#include "multidocumentstrategy_p.h"
+#include "multidocumentstrategy.hpp"
+#include "multidocumentstrategy_p.hpp"
 
 namespace Kasten {
 

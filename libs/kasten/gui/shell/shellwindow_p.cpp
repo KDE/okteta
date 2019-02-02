@@ -20,20 +20,20 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "shellwindow_p.h"
+#include "shellwindow_p.hpp"
 
 // lib
-#include <multiviewareas.h>
-#include <tabbedviews.h>
-#include <viewmanager.h>
-#include <abstractview.h>
-#include <abstracttoolview.h>
-#include <abstractxmlguicontroller.h>
-#include <toolviewdockwidget.h>
+#include <multiviewareas.hpp>
+#include <tabbedviews.hpp>
+#include <viewmanager.hpp>
+#include <abstractview.hpp>
+#include <abstracttoolview.hpp>
+#include <abstractxmlguicontroller.hpp>
+#include <toolviewdockwidget.hpp>
 // Kasten core
-#include <kasten/abstracttool.h>
-#include <kasten/abstractmodelsynchronizer.h>
-#include <kasten/abstractdocument.h>
+#include <kasten/abstracttool.hpp>
+#include <kasten/abstractmodelsynchronizer.hpp>
+#include <kasten/abstractdocument.hpp>
 // Qt
 #include <QHash>
 

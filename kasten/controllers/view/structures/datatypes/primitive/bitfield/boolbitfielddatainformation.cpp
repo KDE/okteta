@@ -19,15 +19,15 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#include "boolbitfielddatainformation.h"
+#include "boolbitfielddatainformation.hpp"
 
 #include <KLocalizedString>
 #include <KComboBox>
 
 #include <QScriptValue>
 
-#include "../booldatainformation.h"
-#include "../../../../poddecoder/typeeditors/uintspinbox.h"
+#include "../booldatainformation.hpp"
+#include "../../../../poddecoder/typeeditors/uintspinbox.hpp"
 
 QString BoolBitfieldDataInformation::valueStringImpl() const
 {

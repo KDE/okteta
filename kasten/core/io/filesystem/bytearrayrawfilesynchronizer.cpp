@@ -20,17 +20,17 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearrayrawfilesynchronizer.h"
+#include "bytearrayrawfilesynchronizer.hpp"
 
 // lib
-#include "bytearrayrawfileloadjob.h"
-#include "bytearrayrawfileconnectjob.h"
-#include "bytearrayrawfilewritejob.h"
-#include "bytearrayrawfilereloadjob.h"
-#include "bytearrayrawfilewritetojob.h"
-#include "bytearraydocument.h"
+#include "bytearrayrawfileloadjob.hpp"
+#include "bytearrayrawfileconnectjob.hpp"
+#include "bytearrayrawfilewritejob.hpp"
+#include "bytearrayrawfilereloadjob.hpp"
+#include "bytearrayrawfilewritetojob.hpp"
+#include "bytearraydocument.hpp"
 // Okteta core
-#include <okteta/piecetablebytearraymodel.h>
+#include <okteta/piecetablebytearraymodel.hpp>
 // Qt
 #include <QUrl>
 

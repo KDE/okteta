@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearraymodel_p.h"
+#include "bytearraymodel_p.hpp"
 
 // Std
 #include <cstring>

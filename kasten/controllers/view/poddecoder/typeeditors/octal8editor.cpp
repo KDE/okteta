@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "octal8editor.h"
+#include "octal8editor.hpp"
 
 Octal8Editor::Octal8Editor(QWidget* parent)
     : AbstractValue8Editor(Okteta::OctalCoding, parent)

@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "addressrangetest.h"
+#include "addressrangetest.hpp"
 
 // test object
-#include <addressrange.h>
+#include <addressrange.hpp>
 // Qt
 #include <QTest>
 

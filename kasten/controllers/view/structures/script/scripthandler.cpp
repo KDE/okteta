@@ -20,15 +20,15 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "scripthandler.h"
-#include "scriptengineinitializer.h"
-#include "scriptutils.h"
-#include "scriptlogger.h"
-#include "classes/defaultscriptclass.h"
-#include "../datatypes/datainformation.h"
-#include "../datatypes/topleveldatainformation.h"
-#include "../datatypes/array/arraydatainformation.h"
-#include "../parsers/parserutils.h"
+#include "scripthandler.hpp"
+#include "scriptengineinitializer.hpp"
+#include "scriptutils.hpp"
+#include "scriptlogger.hpp"
+#include "classes/defaultscriptclass.hpp"
+#include "../datatypes/datainformation.hpp"
+#include "../datatypes/topleveldatainformation.hpp"
+#include "../datatypes/array/arraydatainformation.hpp"
+#include "../parsers/parserutils.hpp"
 
 #include <QStringList>
 #include <QScriptValue>

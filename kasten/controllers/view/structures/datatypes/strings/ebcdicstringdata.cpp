@@ -21,14 +21,14 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "ebcdicstringdata.h"
-#include "stringdatainformation.h"
-#include "../topleveldatainformation.h"
-#include "../../structlogging.h"
+#include "ebcdicstringdata.hpp"
+#include "stringdatainformation.hpp"
+#include "../topleveldatainformation.hpp"
+#include "../../structlogging.hpp"
 
-#include <character.h>
-#include <codecs/ebcdic1047charcodec.h>
-#include <okteta/abstractbytearraymodel.h>
+#include <character.hpp>
+#include <codecs/ebcdic1047charcodec.hpp>
+#include <okteta/abstractbytearraymodel.hpp>
 
 #include <KLocalizedString>
 #include <QVarLengthArray>

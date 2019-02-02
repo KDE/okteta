@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "exportdialog.h"
+#include "exportdialog.hpp"
 
 // Kasten gui
-#include <kasten/abstractmodelexporterconfigeditor.h>
-#include <kasten/abstractselectionview.h>
+#include <kasten/abstractmodelexporterconfigeditor.hpp>
+#include <kasten/abstractselectionview.hpp>
 // KF5
 #include <KLocalizedString>
 // Qt

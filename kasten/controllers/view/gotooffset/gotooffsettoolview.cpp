@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "gotooffsettoolview.h"
+#include "gotooffsettoolview.hpp"
 
 // tool
-#include "gotooffsetview.h"
-#include "gotooffsettool.h"
+#include "gotooffsetview.hpp"
+#include "gotooffsettool.hpp"
 
 namespace Kasten {
 

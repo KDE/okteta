@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "closecontroller.h"
+#include "closecontroller.hpp"
 
 // Kasten gui
-#include <kasten/viewmanager.h>
+#include <kasten/viewmanager.hpp>
 // KF5
 #include <KActionCollection>
 #include <KStandardAction>

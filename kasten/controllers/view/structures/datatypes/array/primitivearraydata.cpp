@@ -20,15 +20,15 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "primitivearraydata.h"
+#include "primitivearraydata.hpp"
 
-#include "arraydatainformation.h"
-#include "../primitive/primitivedatainformation.h"
-#include "../../script/scriptlogger.h"
-#include "../../script/safereference.h"
-#include "../../structlogging.h"
+#include "arraydatainformation.hpp"
+#include "../primitive/primitivedatainformation.hpp"
+#include "../../script/scriptlogger.hpp"
+#include "../../script/safereference.hpp"
+#include "../../structlogging.hpp"
 
-#include <okteta/abstractbytearraymodel.h>
+#include <okteta/abstractbytearraymodel.hpp>
 
 #include <limits>
 #include <KLocalizedString>

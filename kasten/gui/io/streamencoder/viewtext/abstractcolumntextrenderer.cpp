@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "abstractcolumntextrenderer.h"
+#include "abstractcolumntextrenderer.hpp"
 
 // Qt
 #include <QString>

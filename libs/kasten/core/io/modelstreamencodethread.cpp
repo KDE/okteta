@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "modelstreamencodethread.h"
+#include "modelstreamencodethread.hpp"
 
 // lib
-#include "abstractmodelstreamencoder.h"
+#include "abstractmodelstreamencoder.hpp"
 
 namespace Kasten {
 

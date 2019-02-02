@@ -20,44 +20,44 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "part.h"
+#include "part.hpp"
 
 // part
-#include "partfactory.h"
-#include "browserextension.h"
+#include "partfactory.hpp"
+#include "browserextension.hpp"
 // Okteta Kasten
-#include <kasten/okteta/bytearraydocument.h>
-#include <kasten/okteta/bytearrayview.h>
-#include <kasten/okteta/bytearrayviewprofilesynchronizer.h>
-#include <kasten/okteta/bytearrayviewprofilemanager.h>
-#include <kasten/okteta/bytearrayrawfilesynchronizerfactory.h>
-#include <kasten/okteta/overwriteonlycontroller.h>
-#include <kasten/okteta/overwritemodecontroller.h>
-#include <kasten/okteta/gotooffsetcontroller.h>
-#include <kasten/okteta/selectrangecontroller.h>
-#include <kasten/okteta/searchcontroller.h>
-#include <kasten/okteta/replacecontroller.h>
-#include <kasten/okteta/bookmarkscontroller.h>
-#include <kasten/okteta/printcontroller.h>
-#include <kasten/okteta/viewconfigcontroller.h>
-#include <kasten/okteta/viewmodecontroller.h>
-#include <kasten/okteta/viewstatuscontroller.h>
-#include <kasten/okteta/viewprofilecontroller.h>
+#include <kasten/okteta/bytearraydocument.hpp>
+#include <kasten/okteta/bytearrayview.hpp>
+#include <kasten/okteta/bytearrayviewprofilesynchronizer.hpp>
+#include <kasten/okteta/bytearrayviewprofilemanager.hpp>
+#include <kasten/okteta/bytearrayrawfilesynchronizerfactory.hpp>
+#include <kasten/okteta/overwriteonlycontroller.hpp>
+#include <kasten/okteta/overwritemodecontroller.hpp>
+#include <kasten/okteta/gotooffsetcontroller.hpp>
+#include <kasten/okteta/selectrangecontroller.hpp>
+#include <kasten/okteta/searchcontroller.hpp>
+#include <kasten/okteta/replacecontroller.hpp>
+#include <kasten/okteta/bookmarkscontroller.hpp>
+#include <kasten/okteta/printcontroller.hpp>
+#include <kasten/okteta/viewconfigcontroller.hpp>
+#include <kasten/okteta/viewmodecontroller.hpp>
+#include <kasten/okteta/viewstatuscontroller.hpp>
+#include <kasten/okteta/viewprofilecontroller.hpp>
 // Kasten
-#include <kasten/jobmanager.h>
-#include <kasten/abstractloadjob.h>
-#include <kasten/abstractsyncwithremotejob.h>
-#include <kasten/readonlycontroller.h>
-// #include <kasten/readonlybarcontroller.h>
-// #include <kasten/synchronizecontroller.h>
-#include <kasten/clipboardcontroller.h>
-#include <kasten/insertcontroller.h>
-#include <kasten/copyascontroller.h>
-#include <kasten/exportcontroller.h>
-#include <kasten/versioncontroller.h>
-#include <kasten/zoomcontroller.h>
-#include <kasten/zoombarcontroller.h>
-#include <kasten/selectcontroller.h>
+#include <kasten/jobmanager.hpp>
+#include <kasten/abstractloadjob.hpp>
+#include <kasten/abstractsyncwithremotejob.hpp>
+#include <kasten/readonlycontroller.hpp>
+// #include <kasten/readonlybarcontroller.hpp>
+// #include <kasten/synchronizecontroller.hpp>
+#include <kasten/clipboardcontroller.hpp>
+#include <kasten/insertcontroller.hpp>
+#include <kasten/copyascontroller.hpp>
+#include <kasten/exportcontroller.hpp>
+#include <kasten/versioncontroller.hpp>
+#include <kasten/zoomcontroller.hpp>
+#include <kasten/zoombarcontroller.hpp>
+#include <kasten/selectcontroller.hpp>
 // KF5
 #include <KActionCollection>
 // Qt

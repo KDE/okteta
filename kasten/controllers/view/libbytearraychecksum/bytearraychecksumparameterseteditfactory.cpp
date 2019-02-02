@@ -20,15 +20,15 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearraychecksumparameterseteditfactory.h"
+#include "bytearraychecksumparameterseteditfactory.hpp"
 
 // lib
-#include "algorithm/modsumbytearraychecksumparametersetedit.h"
-#include "algorithm/nobytearraychecksumparametersetedit.h"
+#include "algorithm/modsumbytearraychecksumparametersetedit.hpp"
+#include "algorithm/nobytearraychecksumparametersetedit.hpp"
 //// NEWCHECKSUMPARAMETERSET(start)
 //// Here add the name of your header file of your edit widget for the parameterset,
 //// e.g.
-//// #include "algorithm/mybytearraychecksumparametersetedit.h"
+//// #include "algorithm/mybytearraychecksumparametersetedit.hpp"
 //// NEWCHECKSUMPARAMETERSET(end)
 
 AbstractByteArrayChecksumParameterSetEdit* ByteArrayChecksumParameterSetEditFactory::createEdit(const char* id)

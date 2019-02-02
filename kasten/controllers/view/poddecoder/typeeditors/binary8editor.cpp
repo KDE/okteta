@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "binary8editor.h"
+#include "binary8editor.hpp"
 
 Binary8Editor::Binary8Editor(QWidget* parent)
     : AbstractValue8Editor(Okteta::BinaryCoding, parent)

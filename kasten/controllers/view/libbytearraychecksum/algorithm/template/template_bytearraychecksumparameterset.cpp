@@ -7,9 +7,9 @@
 */
 
 //// ADAPT(start)
-//// rename "template_bytearraychecksumparameterset.h" to the name of the header of your filter,
-//// e.g. "mybytearraychecksumparameterset.h"
-#include "template_bytearraychecksumparameterset.h"
+//// rename "template_bytearraychecksumparameterset.hpp" to the name of the header of your filter,
+//// e.g. "mybytearraychecksumparameterset.hpp"
+#include "template_bytearraychecksumparameterset.hpp"
 //// ADAPT(end)
 
 //// ADAPT(start)

@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "abstractmodelfilesystemsynchronizer.h"
-#include "abstractmodelfilesystemsynchronizer_p.h"
+#include "abstractmodelfilesystemsynchronizer.hpp"
+#include "abstractmodelfilesystemsynchronizer_p.hpp"
 
 // lib
-#include <abstractdocument.h>
+#include <abstractdocument.hpp>
 
 namespace Kasten {
 

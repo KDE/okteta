@@ -21,24 +21,24 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "structureview.h"
+#include "structureview.hpp"
 
 // controller
-#include "structuretreemodel.h"
-#include "structurestool.h"
-#include "structuresmanager.h"
-#include "structureviewitemdelegate.h"
-#include "structlogging.h"
+#include "structuretreemodel.hpp"
+#include "structurestool.hpp"
+#include "structuresmanager.hpp"
+#include "structureviewitemdelegate.hpp"
+#include "structlogging.hpp"
 // settings
 #include "structureviewpreferences.h"
-#include "settings/structureviewsettingswidget.h"
-#include "settings/structuresmanagerview.h"
-#include "settings/structureaddremovewidget.h"
+#include "settings/structureviewsettingswidget.hpp"
+#include "settings/structuresmanagerview.hpp"
+#include "settings/structureaddremovewidget.hpp"
 
-#include "script/scriptutils.h"
-#include "script/scriptloggerview.h"
+#include "script/scriptutils.hpp"
+#include "script/scriptloggerview.hpp"
 
-// #include "modeltest.h"
+// #include "modeltest.hpp"
 
 // KF5
 #include <KComboBox>

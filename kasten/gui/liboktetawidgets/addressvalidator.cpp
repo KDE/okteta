@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "addressvalidator.h"
+#include "addressvalidator.hpp"
 
 // lib
-#include <oktetakastengui.h>
+#include <oktetakastengui.hpp>
 // Okteta core
-#include <okteta/valuecodec.h>
+#include <okteta/valuecodec.hpp>
 // KF5
 #include <KLocalizedString>
 // Qt

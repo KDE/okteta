@@ -110,6 +110,7 @@ macro(okteta_add_sublibrary _baseName)
             HEADER_NAMES
                 ${OKTETA_ADD_SUBLIBRARY_PUBLIC}
             ${_egh_relative_param}
+            HEADER_EXTENSION hpp
             PREFIX ${_cc_include_dir}
             REQUIRED_HEADERS ${_HDRS}
         )
@@ -209,7 +210,7 @@ function(okteta_add_library _baseName)
         set(_export_name_args)
     endif()
 
-    set(_exportHeaderFilePath ${CMAKE_CURRENT_BINARY_DIR}/${_include_dir}/${_lc_fullInternalName}_export.h)
+    set(_exportHeaderFilePath ${CMAKE_CURRENT_BINARY_DIR}/${_include_dir}/${_lc_fullInternalName}_export.hpp)
     generate_export_header(${_targetName}
         BASE_NAME ${_fullInternalName}
         EXPORT_FILE_NAME ${_exportHeaderFilePath}

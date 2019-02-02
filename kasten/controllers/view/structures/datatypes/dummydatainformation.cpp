@@ -20,7 +20,7 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "dummydatainformation.h"
+#include "dummydatainformation.hpp"
 
 #include <QScriptValue>
 #include <QVariant>

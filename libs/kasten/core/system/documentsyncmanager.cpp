@@ -20,20 +20,20 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "documentsyncmanager.h"
+#include "documentsyncmanager.hpp"
 
 // lib
-#include "abstractoverwritedialog.h"
-#include "abstractsavediscarddialog.h"
-#include "jobmanager.h"
-#include "documentmanager.h"
-#include <abstractloadjob.h>
-#include <abstractconnectjob.h>
-#include <abstractsynctoremotejob.h>
-#include <abstractsyncwithremotejob.h>
-#include <abstractsyncfromremotejob.h>
-#include <abstractmodelsynchronizerfactory.h>
-#include <abstractdocument.h>
+#include "abstractoverwritedialog.hpp"
+#include "abstractsavediscarddialog.hpp"
+#include "jobmanager.hpp"
+#include "documentmanager.hpp"
+#include <abstractloadjob.hpp>
+#include <abstractconnectjob.hpp>
+#include <abstractsynctoremotejob.hpp>
+#include <abstractsyncwithremotejob.hpp>
+#include <abstractsyncfromremotejob.hpp>
+#include <abstractmodelsynchronizerfactory.hpp>
+#include <abstractdocument.hpp>
 // KF5
 #include <KIO/StatJob>
 #include <KJobWidgets>

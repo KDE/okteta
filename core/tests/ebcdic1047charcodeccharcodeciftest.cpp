@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "ebcdic1047charcodeccharcodeciftest.h"
+#include "ebcdic1047charcodeccharcodeciftest.hpp"
 
 // test object
-#include <codecs/ebcdic1047charcodec.h>
+#include <codecs/ebcdic1047charcodec.hpp>
 // Qt
 #include <QTest>
 

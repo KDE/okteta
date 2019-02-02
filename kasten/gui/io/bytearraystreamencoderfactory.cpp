@@ -20,24 +20,24 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearraystreamencoderfactory.h"
+#include "bytearraystreamencoderfactory.hpp"
 
 // lib
-#include "streamencoder/chars/bytearraycharsstreamencoder.h"
-#include "streamencoder/values/bytearrayvaluesstreamencoder.h"
-#include "streamencoder/sourcecode/bytearraysourcecodestreamencoder.h"
-#include "streamencoder/viewtext/bytearrayviewtextstreamencoder.h"
-#include "streamencoder/base64/bytearraybase64streamencoder.h"
-#include "streamencoder/base32/bytearraybase32streamencoder.h"
-#include "streamencoder/base85/bytearraybase85streamencoder.h"
-#include "streamencoder/uuencoding/bytearrayuuencodingstreamencoder.h"
-#include "streamencoder/xxencoding/bytearrayxxencodingstreamencoder.h"
-#include "streamencoder/srec/bytearraysrecstreamencoder.h"
-#include "streamencoder/ihex/bytearrayihexstreamencoder.h"
+#include "streamencoder/chars/bytearraycharsstreamencoder.hpp"
+#include "streamencoder/values/bytearrayvaluesstreamencoder.hpp"
+#include "streamencoder/sourcecode/bytearraysourcecodestreamencoder.hpp"
+#include "streamencoder/viewtext/bytearrayviewtextstreamencoder.hpp"
+#include "streamencoder/base64/bytearraybase64streamencoder.hpp"
+#include "streamencoder/base32/bytearraybase32streamencoder.hpp"
+#include "streamencoder/base85/bytearraybase85streamencoder.hpp"
+#include "streamencoder/uuencoding/bytearrayuuencodingstreamencoder.hpp"
+#include "streamencoder/xxencoding/bytearrayxxencodingstreamencoder.hpp"
+#include "streamencoder/srec/bytearraysrecstreamencoder.hpp"
+#include "streamencoder/ihex/bytearrayihexstreamencoder.hpp"
 //// NEWBYTEARRAYSTREAMENCODER(start)
 //// Here add the name of your header file of your streamencoder,
 //// e.g.
-//// #include "my_bytearraystreamencoder.h"
+//// #include "my_bytearraystreamencoder.hpp"
 //// NEWBYTEARRAYSTREAMENCODER(end)
 // Qt
 #include <QList>

@@ -20,19 +20,19 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "defaultscriptclass.h"
+#include "defaultscriptclass.hpp"
 
-#include "../../datatypes/datainformation.h"
-#include "../../datatypes/topleveldatainformation.h"
-#include "../../datatypes/uniondatainformation.h"
-#include "../../datatypes/structuredatainformation.h"
-#include "../../datatypes/primitive/pointerdatainformation.h"
-#include "../../parsers/parserutils.h"
-#include "../../parsers/scriptvalueconverter.h"
-#include "../scriptlogger.h"
-#include "../scripthandlerinfo.h"
-#include "../safereference.h"
-#include "../../structlogging.h"
+#include "../../datatypes/datainformation.hpp"
+#include "../../datatypes/topleveldatainformation.hpp"
+#include "../../datatypes/uniondatainformation.hpp"
+#include "../../datatypes/structuredatainformation.hpp"
+#include "../../datatypes/primitive/pointerdatainformation.hpp"
+#include "../../parsers/parserutils.hpp"
+#include "../../parsers/scriptvalueconverter.hpp"
+#include "../scriptlogger.hpp"
+#include "../scripthandlerinfo.hpp"
+#include "../safereference.hpp"
+#include "../../structlogging.hpp"
 
 DefaultScriptClass::DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : QScriptClass(engine)

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "singleviewwindow.h"
-#include "singleviewwindow_p.h"
+#include "singleviewwindow.hpp"
+#include "singleviewwindow_p.hpp"
 
 namespace Kasten {
 

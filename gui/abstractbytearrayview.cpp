@@ -20,13 +20,13 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "abstractbytearrayview.h"
-#include "abstractbytearrayview_p.h"
+#include "abstractbytearrayview.hpp"
+#include "abstractbytearrayview_p.hpp"
 
 // lib
-#include "controller/kcontroller.h"
-#include "controller/abstractwheelcontroller.h"
-#include "bytearraytablelayout.h"
+#include "controller/kcontroller.hpp"
+#include "controller/abstractwheelcontroller.hpp"
+#include "bytearraytablelayout.hpp"
 
 namespace Okteta {
 

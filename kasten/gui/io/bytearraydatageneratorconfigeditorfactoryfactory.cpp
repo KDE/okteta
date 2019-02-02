@@ -20,15 +20,15 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearraydatageneratorconfigeditorfactoryfactory.h"
+#include "bytearraydatageneratorconfigeditorfactoryfactory.hpp"
 
 // lib
-#include "generator/pattern/bytearraypatterngeneratorconfigeditorfactory.h"
-#include "generator/randomdata/bytearrayrandomdatageneratorconfigeditorfactory.h"
+#include "generator/pattern/bytearraypatterngeneratorconfigeditorfactory.hpp"
+#include "generator/randomdata/bytearrayrandomdatageneratorconfigeditorfactory.hpp"
 //// NEWBYTEARRAYDATAGENERATORCONFIGEDITORFACTORY(start)
 //// Here add the name of your header file of your configeditorfactory,
 //// e.g.
-//// #include "my_bytearraydatageneratorconfigeditorfactory.h"
+//// #include "my_bytearraydatageneratorconfigeditorfactory.hpp"
 //// NEWBYTEARRAYDATAGENERATORCONFIGEDITORFACTORY(end)
 // Qt
 #include <QList>

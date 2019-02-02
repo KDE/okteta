@@ -20,14 +20,14 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "mousenavigator.h"
+#include "mousenavigator.hpp"
 
 // lib
-#include <abstractbytearrayview.h>
-#include <bytearraytableranges.h>
-#include <bytearraytablecursor.h>
-#include <bytearraytablelayout.h>
-#include <okteta/wordbytearrayservice.h>
+#include <abstractbytearrayview.hpp>
+#include <bytearraytableranges.hpp>
+#include <bytearraytablecursor.hpp>
+#include <bytearraytablelayout.hpp>
+#include <okteta/wordbytearrayservice.hpp>
 // Qt
 #include <QApplication>
 #include <QClipboard>

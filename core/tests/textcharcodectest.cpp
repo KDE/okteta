@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "textcharcodectest.h"
+#include "textcharcodectest.hpp"
 
 // test object
-#include <codecs/textcharcodec.h>
+#include <codecs/textcharcodec.hpp>
 // KF5
 #include <QTest>
 

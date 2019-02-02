@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "modelencoderfilesystemexportjob_p.h"
+#include "modelencoderfilesystemexportjob_p.hpp"
 
 // lib
-#include "modelstreamencodethread.h"
+#include "modelstreamencodethread.hpp"
 // Qt
 #include <QCoreApplication>
 #include <QFile>

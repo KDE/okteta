@@ -20,19 +20,19 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "filtertool.h"
+#include "filtertool.hpp"
 
 // tool
-#include "filterjob.h"
+#include "filterjob.hpp"
 // filter
-#include <bytearrayfilterfactory.h>
-#include <abstractbytearrayfilter.h>
+#include <bytearrayfilterfactory.hpp>
+#include <abstractbytearrayfilter.hpp>
 // lib
-#include <kasten/okteta/bytearrayview.h>
-#include <kasten/okteta/bytearraydocument.h>
+#include <kasten/okteta/bytearrayview.hpp>
+#include <kasten/okteta/bytearraydocument.hpp>
 // Okteta core
-#include <okteta/abstractbytearraymodel.h>
-#include <okteta/changesdescribable.h>
+#include <okteta/abstractbytearraymodel.hpp>
+#include <okteta/changesdescribable.hpp>
 // KF5
 #include <KLocalizedString>
 // Qt

@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearraypatterngeneratorconfigeditor.h"
+#include "bytearraypatterngeneratorconfigeditor.hpp"
 
 // lib
-#include <bytearraycombobox.h>
+#include <bytearraycombobox.hpp>
 // KF5
 #include <KLocalizedString>
 // Qt

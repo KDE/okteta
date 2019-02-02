@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearrayviewprofilelock.h"
+#include "bytearrayviewprofilelock.hpp"
 
 // library
-#include <oktetakastengui.h>
+#include <oktetakastengui.hpp>
 // Qt
 #include <QLockFile>
 #include <QSharedPointer>

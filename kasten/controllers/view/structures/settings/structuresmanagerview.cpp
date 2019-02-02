@@ -21,13 +21,13 @@
  License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "structuresmanagerview.h"
-#include "structureaddremovewidget.h"
+#include "structuresmanagerview.hpp"
+#include "structureaddremovewidget.hpp"
 
 #include "structureviewpreferences.h"
-#include "../structuresmanager.h"
-#include "../structurestool.h"
-#include "../structlogging.h"
+#include "../structuresmanager.hpp"
+#include "../structurestool.hpp"
+#include "../structlogging.hpp"
 // KF5
 #include <KPluginSelector>
 #include <KConfigDialogManager>

@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "uint64codec.h"
+#include "uint64codec.hpp"
 
 // tool
-#include "../types/uint64.h"
-#include "../poddata.h"
+#include "../types/uint64.hpp"
+#include "../poddata.hpp"
 // KF5
 #include <KLocalizedString>
 

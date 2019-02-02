@@ -20,15 +20,15 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "checksumview.h"
+#include "checksumview.hpp"
 
 // tool
-#include "checksumtool.h"
+#include "checksumtool.hpp"
 // lib
-#include <bytearraychecksumparameterseteditfactory.h>
-#include <abstractbytearraychecksumparametersetedit.h>
-#include <abstractbytearraychecksumparameterset.h>
-#include <abstractbytearraychecksumalgorithm.h>
+#include <bytearraychecksumparameterseteditfactory.hpp>
+#include <abstractbytearraychecksumparametersetedit.hpp>
+#include <abstractbytearraychecksumparameterset.hpp>
+#include <abstractbytearraychecksumalgorithm.hpp>
 // KF5
 #include <KComboBox>
 #include <KGuiItem>

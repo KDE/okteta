@@ -20,16 +20,16 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearrayview.h"
+#include "bytearrayview.hpp"
 
 // lib
-#include "bytearrayjanusview.h"
-#include <bytearrayviewprofilesynchronizer.h>
-#include <kasten/okteta/bytearraydocument.h>
+#include "bytearrayjanusview.hpp"
+#include <bytearrayviewprofilesynchronizer.hpp>
+#include <kasten/okteta/bytearraydocument.hpp>
 // Okteta gui
-#include <okteta/abstractbytearrayview.h>
+#include <okteta/abstractbytearrayview.hpp>
 // Okteta core
-#include <okteta/abstractbytearraymodel.h>
+#include <okteta/abstractbytearraymodel.hpp>
 // Qt
 #include <QFontDatabase>
 

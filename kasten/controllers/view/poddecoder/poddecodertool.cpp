@@ -20,33 +20,33 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "poddecodertool.h"
+#include "poddecodertool.hpp"
 
 // lib
-#include "typecodecs/binary8codec.h"
-#include "typecodecs/octal8codec.h"
-#include "typecodecs/hexadecimal8codec.h"
-#include "typecodecs/uint8codec.h"
-#include "typecodecs/uint16codec.h"
-#include "typecodecs/uint32codec.h"
-#include "typecodecs/uint64codec.h"
-#include "typecodecs/sint8codec.h"
-#include "typecodecs/sint16codec.h"
-#include "typecodecs/sint32codec.h"
-#include "typecodecs/sint64codec.h"
-#include "typecodecs/float32codec.h"
-#include "typecodecs/float64codec.h"
-#include "typecodecs/char8codec.h"
-#include "typecodecs/utf8codec.h"
-#include "abstracttypecodec.h"
-#include "abstractdifferentsizedialog.h"
-#include <kasten/okteta/bytearraydocument.h>
-#include <kasten/okteta/bytearrayview.h>
+#include "typecodecs/binary8codec.hpp"
+#include "typecodecs/octal8codec.hpp"
+#include "typecodecs/hexadecimal8codec.hpp"
+#include "typecodecs/uint8codec.hpp"
+#include "typecodecs/uint16codec.hpp"
+#include "typecodecs/uint32codec.hpp"
+#include "typecodecs/uint64codec.hpp"
+#include "typecodecs/sint8codec.hpp"
+#include "typecodecs/sint16codec.hpp"
+#include "typecodecs/sint32codec.hpp"
+#include "typecodecs/sint64codec.hpp"
+#include "typecodecs/float32codec.hpp"
+#include "typecodecs/float64codec.hpp"
+#include "typecodecs/char8codec.hpp"
+#include "typecodecs/utf8codec.hpp"
+#include "abstracttypecodec.hpp"
+#include "abstractdifferentsizedialog.hpp"
+#include <kasten/okteta/bytearraydocument.hpp>
+#include <kasten/okteta/bytearrayview.hpp>
 // Okteta core
-#include <okteta/charcodec.h>
-#include <okteta/abstractbytearraymodel.h>
-#include <okteta/arraychangemetricslist.h>
-#include <okteta/changesdescribable.h>
+#include <okteta/charcodec.hpp>
+#include <okteta/abstractbytearraymodel.hpp>
+#include <okteta/arraychangemetricslist.hpp>
+#include <okteta/changesdescribable.hpp>
 // KF5
 #include <KLocalizedString>
 

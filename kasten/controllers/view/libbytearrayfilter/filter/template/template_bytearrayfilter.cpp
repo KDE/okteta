@@ -7,13 +7,13 @@
 */
 
 //// ADAPT(start)
-//// rename "template_bytearrayfilter.h" to the name of the header of your filter,
-//// e.g. "mybytearrayfilter.h"
-#include "template_bytearrayfilter.h"
+//// rename "template_bytearrayfilter.hpp" to the name of the header of your filter,
+//// e.g. "mybytearrayfilter.hpp"
+#include "template_bytearrayfilter.hpp"
 //// ADAPT(end)
 
 // Okteta core
-#include <okteta/abstractbytearraymodel.h>
+#include <okteta/abstractbytearraymodel.hpp>
 // KF5
 #include <KLocalizedString>
 

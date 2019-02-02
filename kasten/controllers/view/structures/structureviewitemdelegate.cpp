@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "structureviewitemdelegate.h"
-#include "datatypes/datainformation.h"
+#include "structureviewitemdelegate.hpp"
+#include "datatypes/datainformation.hpp"
 
 #include <QScopedPointer>
 

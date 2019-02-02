@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "abstractfilesystemexportjob.h"
-#include "abstractfilesystemexportjob_p.h"
+#include "abstractfilesystemexportjob.hpp"
+#include "abstractfilesystemexportjob_p.hpp"
 
 namespace Kasten {
 

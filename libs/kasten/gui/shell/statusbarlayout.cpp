@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "statusbarlayout.h"
+#include "statusbarlayout.hpp"
 
 // lib
-#include <kastengui.h>
+#include <kastengui.hpp>
 // Qt
 #include <QWidgetItem>
 #include <QWidget>

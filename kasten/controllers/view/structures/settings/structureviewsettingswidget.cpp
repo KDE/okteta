@@ -20,10 +20,10 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "structureviewsettingswidget.h"
+#include "structureviewsettingswidget.hpp"
 
 #include "structureviewpreferences.h"
-#include "../structlogging.h"
+#include "../structlogging.hpp"
 
 #include <KLocalizedString>
 

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "shellwindow.h"
-#include "shellwindow_p.h"
+#include "shellwindow.hpp"
+#include "shellwindow_p.hpp"
 
 namespace Kasten {
 

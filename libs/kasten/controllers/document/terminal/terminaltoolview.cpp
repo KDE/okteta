@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "terminaltoolview.h"
+#include "terminaltoolview.hpp"
 
 // tool
-#include "terminalview.h"
-#include "terminaltool.h"
+#include "terminalview.hpp"
+#include "terminaltool.hpp"
 
 namespace Kasten {
 

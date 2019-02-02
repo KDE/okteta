@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "abstractgroupedviews.h"
-#include "abstractgroupedviews_p.h"
+#include "abstractgroupedviews.hpp"
+#include "abstractgroupedviews_p.hpp"
 
 namespace Kasten {
 

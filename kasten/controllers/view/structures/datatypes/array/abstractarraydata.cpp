@@ -20,11 +20,11 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "abstractarraydata.h"
-#include "arraydatainformation.h"
-#include "primitivearraydata.h"
-#include "complexarraydata.h"
-#include "../primitive/primitivedatainformation.h"
+#include "abstractarraydata.hpp"
+#include "arraydatainformation.hpp"
+#include "primitivearraydata.hpp"
+#include "complexarraydata.hpp"
+#include "../primitive/primitivedatainformation.hpp"
 
 AbstractArrayData::AbstractArrayData(DataInformation* childType, ArrayDataInformation* parent)
     : mParent(parent)

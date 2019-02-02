@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "abstractmodelexporter.h"
-#include "abstractmodelexporter_p.h"
+#include "abstractmodelexporter.hpp"
+#include "abstractmodelexporter_p.hpp"
 
 namespace Kasten {
 

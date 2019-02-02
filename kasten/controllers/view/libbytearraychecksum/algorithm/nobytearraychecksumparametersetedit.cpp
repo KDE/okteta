@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "nobytearraychecksumparametersetedit.h"
+#include "nobytearraychecksumparametersetedit.hpp"
 
 const char NoByteArrayChecksumParameterSetEdit::Id[] = "None";
 

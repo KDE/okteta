@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "documentcreatemanager.h"
+#include "documentcreatemanager.hpp"
 
 // lib
-#include "abstractdocumentfactory.h"
-#include "documentmanager.h"
-#include <abstractdocument.h>
+#include "abstractdocumentfactory.hpp"
+#include "documentmanager.hpp"
+#include <abstractdocument.hpp>
 
 namespace Kasten {
 

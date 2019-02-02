@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "filesystembrowserview.h"
+#include "filesystembrowserview.hpp"
 
 // lib
-#include "filesystembrowsertool.h"
+#include "filesystembrowsertool.hpp"
 // KF5
 #include <KUrlNavigator>
 #include <KFilePlacesModel>

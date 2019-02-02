@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "abstractconnectjob.h"
-#include "abstractconnectjob_p.h"
+#include "abstractconnectjob.hpp"
+#include "abstractconnectjob_p.hpp"
 
 namespace Kasten {
 

@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "readonlycontroller.h"
+#include "readonlycontroller.hpp"
 
 // Kasten core
-#include <kasten/abstractdocument.h>
+#include <kasten/abstractdocument.hpp>
 // KF5
 #include <KXMLGUIClient>
 #include <KLocalizedString>

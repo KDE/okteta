@@ -20,19 +20,19 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "documentmanager.h"
+#include "documentmanager.hpp"
 
 // lib
-#include <abstractdocument.h>
+#include <abstractdocument.hpp>
 // Qt
 #include <QUrl>
 #include <QMutableListIterator>
 #include <QStringList>
 
 // temporary
-#include "documentcreatemanager.h"
-#include "documentsyncmanager.h"
-#include "modelcodecmanager.h"
+#include "documentcreatemanager.hpp"
+#include "documentsyncmanager.hpp"
+#include "modelcodecmanager.hpp"
 
 namespace Kasten {
 

@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "charbytearraycolumnrenderer.h"
+#include "charbytearraycolumnrenderer.hpp"
 
 // lib
-#include "oktetagui.h"
+#include "oktetagui.hpp"
 // Qt
 #include <QPainter>
 

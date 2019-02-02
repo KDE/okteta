@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearraypatterngeneratorconfigeditorfactory.h"
+#include "bytearraypatterngeneratorconfigeditorfactory.hpp"
 
 // lib
-#include "bytearraypatterngeneratorconfigeditor.h"
-#include "bytearraypatterngenerator.h"
+#include "bytearraypatterngeneratorconfigeditor.hpp"
+#include "bytearraypatterngenerator.hpp"
 
 namespace Kasten {
 

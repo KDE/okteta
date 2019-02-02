@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "abstractvalue8editor.h"
+#include "abstractvalue8editor.hpp"
 
 // Okteta core
-#include <okteta/valuecodec.h>
+#include <okteta/valuecodec.hpp>
 // C++
 #include <limits>
 

@@ -20,18 +20,18 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "exportcontroller.h"
+#include "exportcontroller.hpp"
 
 // lib
-#include "exportdialog.h"
+#include "exportdialog.hpp"
 // Kasten gui
-#include <kasten/modelcodecviewmanager.h>
-#include <kasten/dataselectable.h>
-#include <kasten/abstractmodelexporterconfigeditor.h>
+#include <kasten/modelcodecviewmanager.hpp>
+#include <kasten/dataselectable.hpp>
+#include <kasten/abstractmodelexporterconfigeditor.hpp>
 // Kasten core
-#include <kasten/modelcodecmanager.h>
-#include <kasten/abstractdocument.h>
-#include <kasten/abstractmodelexporter.h>
+#include <kasten/modelcodecmanager.hpp>
+#include <kasten/abstractdocument.hpp>
+#include <kasten/abstractmodelexporter.hpp>
 // KF5
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>

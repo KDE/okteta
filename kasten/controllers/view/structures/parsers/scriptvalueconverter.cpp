@@ -20,9 +20,9 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "scriptvalueconverter.h"
-#include "scriptvalueconverter_p.h"
-#include "../script/scriptlogger.h"
+#include "scriptvalueconverter.hpp"
+#include "scriptvalueconverter_p.hpp"
+#include "../script/scriptlogger.hpp"
 
 #include <QString>
 #include <QVector>

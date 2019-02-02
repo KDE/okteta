@@ -20,13 +20,13 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "gotooffsetcontroller.h"
+#include "gotooffsetcontroller.hpp"
 
 // controller
-#include "gotooffsettoolview.h"
-#include "gotooffsettool.h"
+#include "gotooffsettoolview.hpp"
+#include "gotooffsettool.hpp"
 // Kasten gui
-#include <kasten/toolinlineviewable.h>
+#include <kasten/toolinlineviewable.hpp>
 // KF5
 #include <KXMLGUIClient>
 #include <KLocalizedString>

@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "fillerbytearraymodel.h"
+#include "fillerbytearraymodel.hpp"
 
 // Okteta core
-#include <okteta/piecetablebytearraymodel.h>
+#include <okteta/piecetablebytearraymodel.hpp>
 
 static const char fillerData[] =
     "This is some filler data for the Okteta byte array widgets:"

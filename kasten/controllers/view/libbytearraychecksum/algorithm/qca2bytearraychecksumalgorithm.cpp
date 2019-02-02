@@ -22,7 +22,7 @@
 
 // QCA
 // need to have this first, as QCA needs QT_NO_CAST_FROM_ASCII disabled when included
-#include <config-qca2.h> // krazy:excludeall=includes
+#include <config-qca2.hpp> // krazy:excludeall=includes
 #ifdef HAVE_QCA2
 // disable QT_NO_CAST_FROM_ASCII
 #ifdef QT_NO_CAST_FROM_ASCII
@@ -31,10 +31,10 @@
 #include <QtCrypto>
 #endif
 
-#include "qca2bytearraychecksumalgorithm.h"
+#include "qca2bytearraychecksumalgorithm.hpp"
 
 // Okteta core
-#include <okteta/abstractbytearraymodel.h>
+#include <okteta/abstractbytearraymodel.hpp>
 // Qt
 #include <QByteArray>
 

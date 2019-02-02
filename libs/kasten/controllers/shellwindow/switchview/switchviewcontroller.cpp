@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "switchviewcontroller.h"
+#include "switchviewcontroller.hpp"
 
 // lib
-#include <kasten/abstractgroupedviews.h>
-#include <kasten/abstractview.h>
+#include <kasten/abstractgroupedviews.hpp>
+#include <kasten/abstractview.hpp>
 // KF5
 #include <KXMLGUIClient>
 #include <KActionCollection>

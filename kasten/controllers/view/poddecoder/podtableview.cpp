@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "podtableview.h"
+#include "podtableview.hpp"
 
 // controller
-#include "podtablemodel.h"
-#include "poddelegate.h"
-#include "poddecodertool.h"
+#include "podtablemodel.hpp"
+#include "poddelegate.hpp"
+#include "poddecodertool.hpp"
 // KF5
 #include <KComboBox>
 #include <KLocalizedString>

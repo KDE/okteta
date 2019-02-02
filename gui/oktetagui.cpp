@@ -20,6 +20,6 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "oktetagui.h"
+#include "oktetagui.hpp"
 
 Q_LOGGING_CATEGORY(LOG_OKTETA_GUI, "okteta.gui", QtInfoMsg)

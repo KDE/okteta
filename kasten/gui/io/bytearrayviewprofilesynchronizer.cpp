@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearrayviewprofilesynchronizer.h"
+#include "bytearrayviewprofilesynchronizer.hpp"
 
 // library
-#include <bytearrayviewprofilemanager.h>
-#include <bytearrayview.h>
+#include <bytearrayviewprofilemanager.hpp>
+#include <bytearrayview.hpp>
 
 namespace Kasten {
 

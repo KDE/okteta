@@ -19,7 +19,7 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#include "scriptutils.h"
+#include "scriptutils.hpp"
 
 #include <QScriptValueIterator>
 #include <QScriptValue>
@@ -27,7 +27,7 @@
 #include <QScriptContext>
 #include <QScriptEngine>
 
-#include "../allprimitivetypes.h"
+#include "../allprimitivetypes.hpp"
 
 QString ScriptUtils::qScriptValueToString(const QScriptValue& val)
 {

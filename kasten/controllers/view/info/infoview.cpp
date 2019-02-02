@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "infoview.h"
+#include "infoview.hpp"
 
 // tool
-#include "infotool.h"
-#include "statistictablemodel.h"
-#include "infoviewsettings.h"
+#include "infotool.hpp"
+#include "statistictablemodel.hpp"
+#include <infoviewsettings.h>
 // KF5
 #include <KGuiItem>
 #include <KLocalizedString>

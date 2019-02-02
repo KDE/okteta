@@ -20,15 +20,15 @@
 
 #include <QTest>
 
-#include <okteta/bytearraymodel.h>
-#include <okteta/byte.h>
+#include <okteta/bytearraymodel.hpp>
+#include <okteta/byte.hpp>
 
-#include "testutils.h"
+#include "testutils.hpp"
 
-#include "view/structures/datatypes/uniondatainformation.h"
-#include "view/structures/datatypes/topleveldatainformation.h"
-#include "view/structures/datatypes/primitivefactory.h"
-#include "view/structures/datatypes/primitive/bitfield/unsignedbitfielddatainformation.h"
+#include "view/structures/datatypes/uniondatainformation.hpp"
+#include "view/structures/datatypes/topleveldatainformation.hpp"
+#include "view/structures/datatypes/primitivefactory.hpp"
+#include "view/structures/datatypes/primitive/bitfield/unsignedbitfielddatainformation.hpp"
 
 class UnionDataInformationTest : public QObject
 {

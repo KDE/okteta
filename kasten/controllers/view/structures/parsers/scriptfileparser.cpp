@@ -20,14 +20,14 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "scriptfileparser.h"
+#include "scriptfileparser.hpp"
 
-#include "scriptvalueconverter.h"
-#include "parserutils.h"
-#include "../datatypes/topleveldatainformation.h"
-#include "../datatypes/dummydatainformation.h"
-#include "../script/scriptengineinitializer.h"
-#include "../script/scriptlogger.h"
+#include "scriptvalueconverter.hpp"
+#include "parserutils.hpp"
+#include "../datatypes/topleveldatainformation.hpp"
+#include "../datatypes/dummydatainformation.hpp"
+#include "../script/scriptengineinitializer.hpp"
+#include "../script/scriptlogger.hpp"
 
 #include <QScriptEngine>
 

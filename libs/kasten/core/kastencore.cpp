@@ -20,6 +20,6 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kastencore.h"
+#include "kastencore.hpp"
 
 Q_LOGGING_CATEGORY(LOG_KASTEN_CORE, "kasten.core", QtInfoMsg)

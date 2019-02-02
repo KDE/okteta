@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "abstractmodelstreamencoder.h"
-#include "abstractmodelstreamencoder_p.h"
+#include "abstractmodelstreamencoder.hpp"
+#include "abstractmodelstreamencoder_p.hpp"
 
 namespace Kasten {
 

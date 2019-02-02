@@ -20,16 +20,16 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "documentinfoview.h"
+#include "documentinfoview.hpp"
 
 //
-#include "documentinfotool.h"
+#include "documentinfotool.hpp"
 // KF5
 #include <KLocalizedString>
 #include <KIconLoader>
 #include <KSeparator>
 #include <KSqueezedTextLabel>
-#include <kio/global.h>
+#include <KIO/Global>
 // Qt
 #include <QFont>
 #include <QLabel>

@@ -20,14 +20,14 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "scripthandlerinfo.h"
-#include "classes/arrayscriptclass.h"
-#include "classes/primitivescriptclass.h"
-#include "classes/structunionscriptclass.h"
-#include "classes/stringscriptclass.h"
-#include "classes/enumscriptclass.h"
-#include "classes/bitfieldscriptclass.h"
-#include "classes/pointerscriptclass.h"
+#include "scripthandlerinfo.hpp"
+#include "classes/arrayscriptclass.hpp"
+#include "classes/primitivescriptclass.hpp"
+#include "classes/structunionscriptclass.hpp"
+#include "classes/stringscriptclass.hpp"
+#include "classes/enumscriptclass.hpp"
+#include "classes/bitfieldscriptclass.hpp"
+#include "classes/pointerscriptclass.hpp"
 
 ScriptHandlerInfo::ScriptHandlerInfo(QScriptEngine* engine, ScriptLogger* logger)
     : mArrayClass(new ArrayScriptClass(engine, this))

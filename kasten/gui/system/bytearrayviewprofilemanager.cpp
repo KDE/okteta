@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearrayviewprofilemanager.h"
+#include "bytearrayviewprofilemanager.hpp"
 
 // library
-#include "bytearrayviewprofilelock.h"
-#include <oktetakastengui.h>
+#include "bytearrayviewprofilelock.hpp"
+#include <oktetakastengui.hpp>
 // KF5
 #include <KConfigGroup>
 #include <KConfig>

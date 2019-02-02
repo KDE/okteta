@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "toolinlineviewwidget.h"
+#include "toolinlineviewwidget.hpp"
 
 // lib
-#include <abstracttoolinlineview.h>
+#include <abstracttoolinlineview.hpp>
 // Qt
 #include <QIcon>
 #include <QHBoxLayout>

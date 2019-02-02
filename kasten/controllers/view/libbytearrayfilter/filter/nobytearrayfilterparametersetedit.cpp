@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "nobytearrayfilterparametersetedit.h"
+#include "nobytearrayfilterparametersetedit.hpp"
 
 const char NoByteArrayFilterParameterSetEdit::Id[] = "None";
 

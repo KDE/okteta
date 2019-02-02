@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearrayrandomdatageneratorconfigeditorfactory.h"
+#include "bytearrayrandomdatageneratorconfigeditorfactory.hpp"
 
 // lib
-#include "bytearrayrandomdatageneratorconfigeditor.h"
-#include "bytearrayrandomdatagenerator.h"
+#include "bytearrayrandomdatageneratorconfigeditor.hpp"
+#include "bytearrayrandomdatagenerator.hpp"
 
 namespace Kasten {
 

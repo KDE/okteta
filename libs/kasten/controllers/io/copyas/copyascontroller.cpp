@@ -20,19 +20,19 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "copyascontroller.h"
+#include "copyascontroller.hpp"
 
 // lib
-#include "copyasdialog.h"
+#include "copyasdialog.hpp"
 // Kasten gui
-#include <kasten/modelcodecviewmanager.h>
-#include <kasten/dataselectable.h>
-#include <kasten/abstractmodelstreamencoderconfigeditor.h>
+#include <kasten/modelcodecviewmanager.hpp>
+#include <kasten/dataselectable.hpp>
+#include <kasten/abstractmodelstreamencoderconfigeditor.hpp>
 // Kasten core
-#include <kasten/modelstreamencodethread.h>
-#include <kasten/modelcodecmanager.h>
-#include <kasten/abstractmodelstreamencoder.h>
-#include <kasten/abstractmodel.h>
+#include <kasten/modelstreamencodethread.hpp>
+#include <kasten/modelcodecmanager.hpp>
+#include <kasten/abstractmodelstreamencoder.hpp>
+#include <kasten/abstractmodel.hpp>
 // KF5
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>

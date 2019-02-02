@@ -19,14 +19,14 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#include "abstractbitfielddatainformation.h"
+#include "abstractbitfielddatainformation.hpp"
 
 #include <KLocalizedString>
 
-#include "../../topleveldatainformation.h"
+#include "../../topleveldatainformation.hpp"
 
-#include "../../../script/classes/bitfieldscriptclass.h"
-#include "../../../script/scripthandlerinfo.h"
+#include "../../../script/classes/bitfieldscriptclass.hpp"
+#include "../../../script/scripthandlerinfo.hpp"
 
 AbstractBitfieldDataInformation::AbstractBitfieldDataInformation(const QString& name, BitCount32 width,
                                                                  DataInformation* parent)

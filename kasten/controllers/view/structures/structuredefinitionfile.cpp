@@ -19,19 +19,19 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#include "structuredefinitionfile.h"
+#include "structuredefinitionfile.hpp"
 
-#include "structlogging.h"
+#include "structlogging.hpp"
 
 #include <QFile>
 #include <QDir>
 #include <QStringList>
 
-#include "datatypes/topleveldatainformation.h"
+#include "datatypes/topleveldatainformation.hpp"
 
-#include "parsers/abstractstructureparser.h"
-#include "parsers/osdparser.h"
-#include "parsers/scriptfileparser.h"
+#include "parsers/abstractstructureparser.hpp"
+#include "parsers/osdparser.hpp"
+#include "parsers/scriptfileparser.hpp"
 
 namespace Kasten {
 

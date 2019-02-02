@@ -22,14 +22,14 @@
 #include <QScriptEngine>
 #include <limits>
 
-#include <okteta/bytearraymodel.h>
+#include <okteta/bytearraymodel.hpp>
 
-#include "view/structures/datatypes/array/arraydatainformation.h"
-#include "view/structures/datatypes/array/primitivearraydata.h"
-#include "view/structures/datatypes/topleveldatainformation.h"
-#include "view/structures/datatypes/primitive/primitivetemplateinfo.h"
-#include "view/structures/datatypes/primitivefactory.h"
-#include "view/structures/script/scriptengineinitializer.h"
+#include "view/structures/datatypes/array/arraydatainformation.hpp"
+#include "view/structures/datatypes/array/primitivearraydata.hpp"
+#include "view/structures/datatypes/topleveldatainformation.hpp"
+#include "view/structures/datatypes/primitive/primitivetemplateinfo.hpp"
+#include "view/structures/datatypes/primitivefactory.hpp"
+#include "view/structures/script/scriptengineinitializer.hpp"
 
 class PrimitiveArrayTest : public QObject
 {

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "abstractdocumentstrategy.h"
-#include "abstractdocumentstrategy_p.h"
+#include "abstractdocumentstrategy.hpp"
+#include "abstractdocumentstrategy_p.hpp"
 
 namespace Kasten {
 

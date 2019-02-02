@@ -19,14 +19,14 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#include "datainformationfactory.h"
+#include "datainformationfactory.hpp"
 
-#include "../datatypes/primitive/bitfield/boolbitfielddatainformation.h"
-#include "../datatypes/primitive/bitfield/unsignedbitfielddatainformation.h"
-#include "../datatypes/primitive/bitfield/signedbitfielddatainformation.h"
-#include "../datatypes/primitivefactory.h"
+#include "../datatypes/primitive/bitfield/boolbitfielddatainformation.hpp"
+#include "../datatypes/primitive/bitfield/unsignedbitfielddatainformation.hpp"
+#include "../datatypes/primitive/bitfield/signedbitfielddatainformation.hpp"
+#include "../datatypes/primitivefactory.hpp"
 
-#include "../script/scriptlogger.h"
+#include "../script/scriptlogger.hpp"
 #include <QScriptEngine>
 
 AbstractBitfieldDataInformation* DataInformationFactory::newBitfield(const BitfieldParsedData& pd)

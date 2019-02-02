@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearraytablelayouttest.h"
+#include "bytearraytablelayouttest.hpp"
 
 // test object
-#include <bytearraytablelayout.h>
+#include <bytearraytablelayout.hpp>
 // Qt
 #include <QTest>
 

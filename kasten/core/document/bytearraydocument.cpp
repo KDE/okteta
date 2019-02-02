@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearraydocument.h"
+#include "bytearraydocument.hpp"
 
 //
-#include <kasten/person.h>
+#include <kasten/person.hpp>
 // Okteta core
-#include <okteta/piecetablebytearraymodel.h>
+#include <okteta/piecetablebytearraymodel.hpp>
 // KF5
 #include <KLocalizedString>
 

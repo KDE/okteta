@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "piecetablebytearraymodel.h"
-#include "piecetablebytearraymodel_p.h"
+#include "piecetablebytearraymodel.hpp"
+#include "piecetablebytearraymodel_p.hpp"
 
 namespace Okteta {
 // TODO: a wrapper to a raw data, plus a function to dump the current version to the original data

@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearraysourcecodestreamencoderconfigeditorfactory.h"
+#include "bytearraysourcecodestreamencoderconfigeditorfactory.hpp"
 
 // lib
-#include "bytearraysourcecodestreamencoderconfigeditor.h"
-#include "bytearraysourcecodestreamencoder.h"
+#include "bytearraysourcecodestreamencoderconfigeditor.hpp"
+#include "bytearraysourcecodestreamencoder.hpp"
 
 namespace Kasten {
 

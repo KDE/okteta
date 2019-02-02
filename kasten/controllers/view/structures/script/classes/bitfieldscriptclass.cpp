@@ -20,9 +20,9 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "bitfieldscriptclass.h"
-#include "../../datatypes/primitive/bitfield/abstractbitfielddatainformation.h"
-#include "../../parsers/parserutils.h"
+#include "bitfieldscriptclass.hpp"
+#include "../../datatypes/primitive/bitfield/abstractbitfielddatainformation.hpp"
+#include "../../parsers/parserutils.hpp"
 
 BitfieldScriptClass::BitfieldScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : PrimitiveScriptClass(engine, handlerInfo)

@@ -20,10 +20,10 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "structurestoolview.h"
+#include "structurestoolview.hpp"
 // tool
-#include "structureview.h"
-#include "structurestool.h"
+#include "structureview.hpp"
+#include "structurestool.hpp"
 
 namespace Kasten {
 

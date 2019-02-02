@@ -20,17 +20,17 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearrayfilterparameterseteditfactory.h"
+#include "bytearrayfilterparameterseteditfactory.hpp"
 
 // lib
-#include "filter/nobytearrayfilterparametersetedit.h"
-#include "filter/operandbytearrayfilterparametersetedit.h"
-#include "filter/reversebytearrayfilterparametersetedit.h"
-#include "filter/rotatebytearrayfilterparametersetedit.h"
+#include "filter/nobytearrayfilterparametersetedit.hpp"
+#include "filter/operandbytearrayfilterparametersetedit.hpp"
+#include "filter/reversebytearrayfilterparametersetedit.hpp"
+#include "filter/rotatebytearrayfilterparametersetedit.hpp"
 //// NEWFILTERPARAMETERSET(start)
 //// Here add the name of your header file of your edit widget for the parameterset,
 //// e.g.
-//// #include "filter/my_bytearrayfilterparametersetedit.h"
+//// #include "filter/my_bytearrayfilterparametersetedit.hpp"
 //// NEWFILTERPARAMETERSET(end)
 
 AbstractByteArrayFilterParameterSetEdit* ByteArrayFilterParameterSetEditFactory::createEdit(const char* id)

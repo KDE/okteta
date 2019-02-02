@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "versionviewtool.h"
+#include "versionviewtool.hpp"
 
 // Kasten core
-#include <kasten/versionable.h>
-#include <kasten/abstractdocument.h>
+#include <kasten/versionable.hpp>
+#include <kasten/abstractdocument.hpp>
 // KF5
 #include <KLocalizedString>
 

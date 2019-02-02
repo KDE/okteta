@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "selectcontroller.h"
+#include "selectcontroller.hpp"
 
 // Kasten gui
-#include <kasten/dataselectable.h>
-#include <kasten/abstractview.h>
+#include <kasten/dataselectable.hpp>
+#include <kasten/abstractview.hpp>
 // KF5
 #include <KXMLGUIClient>
 #include <KLocalizedString>

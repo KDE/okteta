@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "testdocumentfilesynchronizerfactory.h"
+#include "testdocumentfilesynchronizerfactory.hpp"
 
 // lib
-#include "testdocument.h"
-#include "testdocumentfilesynchronizer.h"
+#include "testdocument.hpp"
+#include "testdocumentfilesynchronizer.hpp"
 // Qt
 #include <QString>
 

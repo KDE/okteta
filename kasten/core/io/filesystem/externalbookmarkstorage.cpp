@@ -20,15 +20,15 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "externalbookmarkstorage.h"
+#include "externalbookmarkstorage.hpp"
 
 // lib
-#include "bytearraydocument.h"
+#include "bytearraydocument.hpp"
 // Okteta core
-#include <okteta/bookmarkable.h>
-#include <okteta/bookmarksconstiterator.h>
-#include <okteta/bookmark.h>
-#include <okteta/abstractbytearraymodel.h>
+#include <okteta/bookmarkable.hpp>
+#include <okteta/bookmarksconstiterator.hpp>
+#include <okteta/bookmark.hpp>
+#include <okteta/abstractbytearraymodel.hpp>
 // KF5
 #include <KBookmarkManager>
 // Qt

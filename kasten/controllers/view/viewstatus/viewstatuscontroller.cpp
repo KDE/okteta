@@ -20,16 +20,16 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "viewstatuscontroller.h"
+#include "viewstatuscontroller.hpp"
 
 // lib
-#include <kasten/okteta/bytearrayview.h>
+#include <kasten/okteta/bytearrayview.hpp>
 // Kasten ui
-#include <kasten/togglebutton.h>
-#include <kasten/statusbar.h>
+#include <kasten/togglebutton.hpp>
+#include <kasten/statusbar.hpp>
 // Okteta core
-#include <okteta/charcodec.h>
-#include <okteta/oktetacore.h>
+#include <okteta/charcodec.hpp>
+#include <okteta/oktetacore.hpp>
 // KF5
 #include <KSqueezedTextLabel>
 #include <KComboBox>

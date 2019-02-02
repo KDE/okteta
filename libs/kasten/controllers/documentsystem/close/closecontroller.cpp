@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "closecontroller.h"
+#include "closecontroller.hpp"
 
 // Kasten gui
-#include <kasten/abstractdocumentstrategy.h>
+#include <kasten/abstractdocumentstrategy.hpp>
 // Kasten core
-#include <kasten/abstractdocument.h>
+#include <kasten/abstractdocument.hpp>
 // KF5
 #include <KActionCollection>
 #include <KStandardAction>

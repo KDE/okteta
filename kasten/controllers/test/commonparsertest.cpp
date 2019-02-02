@@ -26,7 +26,7 @@
 #include <QScriptEngine>
 #include <limits>
 
-#include "view/structures/parsers/parserutils.h"
+#include "view/structures/parsers/parserutils.hpp"
 
 class CommonParserTest : public QObject
 {

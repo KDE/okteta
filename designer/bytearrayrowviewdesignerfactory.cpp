@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearrayrowviewdesignerfactory.h"
+#include "bytearrayrowviewdesignerfactory.hpp"
 
 // plugin
-#include "fillerbytearraymodel.h"
+#include "fillerbytearraymodel.hpp"
 // Okteta gui
-#include <okteta/bytearrayrowview.h>
+#include <okteta/bytearrayrowview.hpp>
 
 // TODO: add translations for visible names
 ByteArrayRowViewDesignerFactory::ByteArrayRowViewDesignerFactory(QObject* parent)
@@ -52,7 +52,7 @@ QIcon ByteArrayRowViewDesignerFactory::icon() const
 
 QString ByteArrayRowViewDesignerFactory::includeFile() const
 {
-    return QStringLiteral("okteta/bytearrayrowview.h");
+    return QStringLiteral("okteta/bytearrayrowview.hpp");
 }
 
 QString ByteArrayRowViewDesignerFactory::toolTip() const

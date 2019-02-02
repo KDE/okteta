@@ -25,14 +25,14 @@
 #include <QLocale>
 
 #include <limits>
-#include <okteta/bytearraymodel.h>
+#include <okteta/bytearraymodel.hpp>
 
-#include "view/structures/datatypes/primitive/primitivetemplateinfo.h"
-#include "view/structures/datatypes/primitive/primitivedatainformation.h"
-#include "view/structures/datatypes/primitive/bitfield/signedbitfielddatainformation.h"
-#include "view/structures/datatypes/primitive/bitfield/unsignedbitfielddatainformation.h"
-#include "view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.h"
-#include "view/structures/datatypes/primitivefactory.h"
+#include "view/structures/datatypes/primitive/primitivetemplateinfo.hpp"
+#include "view/structures/datatypes/primitive/primitivedatainformation.hpp"
+#include "view/structures/datatypes/primitive/bitfield/signedbitfielddatainformation.hpp"
+#include "view/structures/datatypes/primitive/bitfield/unsignedbitfielddatainformation.hpp"
+#include "view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.hpp"
+#include "view/structures/datatypes/primitivefactory.hpp"
 #include "structureviewpreferences.h"
 
 inline uint qHash(PrimitiveDataType type)

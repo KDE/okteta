@@ -20,11 +20,11 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "structurestoolviewfactory.h"
+#include "structurestoolviewfactory.hpp"
 
 // lib
-#include "structurestoolview.h"
-#include "structurestool.h"
+#include "structurestoolview.hpp"
+#include "structurestool.hpp"
 // KF5
 #include <KLocalizedString>
 

@@ -20,16 +20,16 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearraycolumnview_p.h"
+#include "bytearraycolumnview_p.hpp"
 
 // lib
-#include "oktetagui.h"
-#include "bordercolumnrenderer.h"
-#include "widgetcolumnstylist.h"
-#include "controller/dropper.h"
-#include "kcursor.h"
+#include "oktetagui.hpp"
+#include "bordercolumnrenderer.hpp"
+#include "widgetcolumnstylist.hpp"
+#include "controller/dropper.hpp"
+#include "kcursor.hpp"
 // Okteta core
-#include <okteta/valuecodec.h>
+#include <okteta/valuecodec.hpp>
 // Qt
 #include <QStyle>
 #include <QFontDatabase>

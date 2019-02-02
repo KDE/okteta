@@ -20,13 +20,13 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "grouppiecetablechange.h"
+#include "grouppiecetablechange.hpp"
 
 // lib
-#include "piecetable.h"
+#include "piecetable.hpp"
 //
-#include <addressrangelist.h>
-#include <arraychangemetricslist.h>
+#include <addressrangelist.hpp>
+#include <arraychangemetricslist.hpp>
 // KF5
 #include <KLocalizedString>
 

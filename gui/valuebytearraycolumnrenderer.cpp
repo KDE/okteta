@@ -20,16 +20,16 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "valuebytearraycolumnrenderer.h"
+#include "valuebytearraycolumnrenderer.hpp"
 
 // lib
-#include "helper.h"
-#include "oktetagui.h"
+#include "helper.hpp"
+#include "oktetagui.hpp"
 // lib
-#include <abstractcolumnstylist.h>
+#include <abstractcolumnstylist.hpp>
 // Okteta core
-#include <okteta/valuecodec.h>
-#include <okteta/charcodec.h>
+#include <okteta/valuecodec.hpp>
+#include <okteta/charcodec.hpp>
 // KF5
 #include <KColorScheme>
 // Qt

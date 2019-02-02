@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "setremotecontroller.h"
+#include "setremotecontroller.hpp"
 
 // Kasten core
-#include <kasten/documentsyncmanager.h>
-#include <kasten/abstractdocument.h>
+#include <kasten/documentsyncmanager.hpp>
+#include <kasten/abstractdocument.hpp>
 // KF5
 #include <KActionCollection>
 #include <KStandardAction>

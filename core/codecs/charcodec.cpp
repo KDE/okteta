@@ -20,13 +20,13 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "charcodec.h"
+#include "charcodec.hpp"
 
 // lib
-#include "textcharcodec.h"
-#include "ebcdic1047charcodec.h"
-#include "jisx0201charcodec.h"
-#include "usasciicharcodec.h"
+#include "textcharcodec.hpp"
+#include "ebcdic1047charcodec.hpp"
+#include "jisx0201charcodec.hpp"
+#include "usasciicharcodec.hpp"
 // Qt
 #include <QStringList>
 

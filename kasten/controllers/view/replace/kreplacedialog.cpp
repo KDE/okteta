@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kreplacedialog.h"
+#include "kreplacedialog.hpp"
 
 // controller
-#include "replacetool.h"
+#include "replacetool.hpp"
 //  lib
-#include <kasten/okteta/bytearraycombobox.h>
+#include <kasten/okteta/bytearraycombobox.hpp>
 // KF5
 #include <KLocalizedString>
 // Qt

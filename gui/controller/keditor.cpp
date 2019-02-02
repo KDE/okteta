@@ -20,15 +20,15 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "keditor.h"
+#include "keditor.hpp"
 
 // lib
-#include <bytearraytablelayout.h>
-#include <bytearraytablecursor.h>
-#include <abstractbytearrayview.h>
+#include <bytearraytablelayout.hpp>
+#include <bytearraytablecursor.hpp>
+#include <abstractbytearrayview.hpp>
 // Okteta core
-#include <okteta/abstractbytearraymodel.h>
-#include <okteta/wordbytearrayservice.h>
+#include <okteta/abstractbytearraymodel.hpp>
+#include <okteta/wordbytearrayservice.hpp>
 // Qt
 #include <QKeyEvent>
 

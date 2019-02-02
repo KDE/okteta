@@ -19,9 +19,9 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#include "sintdatainformation.h"
-#include "../poddecoder/typeeditors/sintspinbox.h"
-#include "../../structlogging.h"
+#include "sintdatainformation.hpp"
+#include "../poddecoder/typeeditors/sintspinbox.hpp"
+#include "../../structlogging.hpp"
 
 // KF5
 #include <KLocalizedString>

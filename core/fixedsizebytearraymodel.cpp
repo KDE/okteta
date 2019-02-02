@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "fixedsizebytearraymodel.h"
+#include "fixedsizebytearraymodel.hpp"
 
 // lib
-#include <arraychangemetricslist.h>
+#include <arraychangemetricslist.hpp>
 // Std
 #include <cstring>
 

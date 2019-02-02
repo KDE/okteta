@@ -20,13 +20,13 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bookmarksview.h"
+#include "bookmarksview.hpp"
 
 // tool
-#include "bookmarklistmodel.h"
-#include "bookmarkstool.h"
+#include "bookmarklistmodel.hpp"
+#include "bookmarkstool.hpp"
 // Okteta core
-#include <okteta/bookmark.h>
+#include <okteta/bookmark.hpp>
 // KF5
 #include <KLocalizedString>
 #include <KGuiItem>

@@ -20,11 +20,11 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "enumscriptclass.h"
+#include "enumscriptclass.hpp"
 
-#include "../../datatypes/primitive/enumdatainformation.h"
-#include "../../parsers/parserutils.h"
-#include "../scriptlogger.h"
+#include "../../datatypes/primitive/enumdatainformation.hpp"
+#include "../../parsers/parserutils.hpp"
+#include "../scriptlogger.hpp"
 
 EnumScriptClass::EnumScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : PrimitiveScriptClass(engine, handlerInfo)

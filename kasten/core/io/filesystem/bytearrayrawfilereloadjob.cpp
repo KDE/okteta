@@ -20,15 +20,15 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearrayrawfilereloadjob.h"
+#include "bytearrayrawfilereloadjob.hpp"
 
 // lib
-// #include "externalbookmarkstorage.h"
-#include "bytearrayrawfilesynchronizer.h"
-#include "bytearrayrawfilereloadthread.h"
-#include "bytearraydocument.h"
+// #include "externalbookmarkstorage.hpp"
+#include "bytearrayrawfilesynchronizer.hpp"
+#include "bytearrayrawfilereloadthread.hpp"
+#include "bytearraydocument.hpp"
 // Okteta core
-#include <okteta/piecetablebytearraymodel.h>
+#include <okteta/piecetablebytearraymodel.hpp>
 // Qt
 #include <QCoreApplication>
 

@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "viewprofilesmanagecontroller.h"
+#include "viewprofilesmanagecontroller.hpp"
 
 // Okteta Gui Kasten
-#include <kasten/okteta/bytearrayviewprofilemanager.h>
+#include <kasten/okteta/bytearrayviewprofilemanager.hpp>
 // controller
-#include "viewprofilesmanagedialog.h"
+#include "viewprofilesmanagedialog.hpp"
 // KF5
 #include <KXMLGUIClient>
 #include <KLocalizedString>

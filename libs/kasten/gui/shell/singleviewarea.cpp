@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "singleviewarea.h"
-#include "singleviewarea_p.h"
+#include "singleviewarea.hpp"
+#include "singleviewarea_p.hpp"
 
 namespace Kasten {
 // TODO: catch area focues change!

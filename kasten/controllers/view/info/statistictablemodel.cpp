@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "statistictablemodel.h"
+#include "statistictablemodel.hpp"
 
 // Okteta core
-#include <okteta/character.h>
-#include <okteta/charcodec.h>
-#include <okteta/valuecodec.h>
+#include <okteta/character.hpp>
+#include <okteta/charcodec.hpp>
+#include <okteta/valuecodec.hpp>
 // KF5
 #include <KLocalizedString>
 #include <KColorScheme>

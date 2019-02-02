@@ -13,7 +13,7 @@ include_directories(
 )
 
 set(HAVE_QCA2 ${Qca-qt5_FOUND})
-configure_file( config-qca2.h.cmake  ${CMAKE_CURRENT_BINARY_DIR}/config-qca2.h )
+configure_file( config-qca2.hpp.cmake  ${CMAKE_CURRENT_BINARY_DIR}/config-qca2.hpp )
 
 macro(OKTETAKASTENCONTROLLERS_ADD_SUBLIBRARY _subdir)
     okteta_add_sublibrary(Controllers NAMESPACE Okteta Kasten
@@ -553,7 +553,7 @@ if(BUILD_TESTING)
 endif()
 
 list(APPEND oktetakastencontrollers_LIB_HDRS
-    ${CMAKE_CURRENT_BINARY_DIR}/config-qca2.h
+    ${CMAKE_CURRENT_BINARY_DIR}/config-qca2.hpp
 )
 
 set(OPTIONAL_PRIVATE)

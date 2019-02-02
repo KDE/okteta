@@ -21,12 +21,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytetableview.h"
+#include "bytetableview.hpp"
 
 // tool
-#include "bytetabletool.h"
-#include "bytetablemodel.h"
-#include "bytetableviewsettings.h"
+#include "bytetabletool.hpp"
+#include "bytetablemodel.hpp"
+#include <bytetableviewsettings.h>
 // KF5
 #include <QPushButton>
 #include <KLocalizedString>

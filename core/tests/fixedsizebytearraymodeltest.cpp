@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "fixedsizebytearraymodeltest.h"
+#include "fixedsizebytearraymodeltest.hpp"
 
 // test object
-#include <fixedsizebytearraymodel.h>
+#include <fixedsizebytearraymodel.hpp>
 // Qt
 #include <QTest>
 

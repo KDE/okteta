@@ -20,15 +20,15 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "testdocumentfilesynchronizer.h"
+#include "testdocumentfilesynchronizer.hpp"
 
 // lib
-#include "testdocumentfileloadjob.h"
-#include "testdocumentfileconnectjob.h"
-#include "testdocumentfilewritejob.h"
-#include "testdocumentfilereloadjob.h"
-#include "testdocumentfilewritetojob.h"
-#include "testdocument.h"
+#include "testdocumentfileloadjob.hpp"
+#include "testdocumentfileconnectjob.hpp"
+#include "testdocumentfilewritejob.hpp"
+#include "testdocumentfilereloadjob.hpp"
+#include "testdocumentfilewritetojob.hpp"
+#include "testdocument.hpp"
 // Qt
 #include <QUrl>
 

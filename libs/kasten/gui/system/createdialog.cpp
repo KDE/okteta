@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "createdialog.h"
+#include "createdialog.hpp"
 
 // Kasten gui
-#include <abstractmodeldatageneratorconfigeditor.h>
+#include <abstractmodeldatageneratorconfigeditor.hpp>
 // KF5
 #include <KLocalizedString>
 // Qt

@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "stringsextracttoolfactory.h"
+#include "stringsextracttoolfactory.hpp"
 
 // lib
-#include "stringsextracttool.h"
+#include "stringsextracttool.hpp"
 
 namespace Kasten {
 

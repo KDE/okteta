@@ -20,24 +20,24 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bookmarkscontroller.h"
+#include "bookmarkscontroller.hpp"
 
 // controller
-#include "bookmarkeditpopup.h"
+#include "bookmarkeditpopup.hpp"
 // lib
-#include <kasten/okteta/bytearrayview.h>
-#include <kasten/okteta/bytearraydocument.h>
+#include <kasten/okteta/bytearrayview.hpp>
+#include <kasten/okteta/bytearraydocument.hpp>
 // Kasten core
-#include <kasten/abstractmodel.h>
+#include <kasten/abstractmodel.hpp>
 // Okteta gui
-#include <okteta/offsetformat.h>
+#include <okteta/offsetformat.hpp>
 // Okteta core
-#include <okteta/wordbytearrayservice.h>
-#include <okteta/charcodec.h>
-#include <okteta/bookmarkable.h>
-#include <okteta/bookmarksconstiterator.h>
-#include <okteta/bookmark.h>
-#include <okteta/abstractbytearraymodel.h>
+#include <okteta/wordbytearrayservice.hpp>
+#include <okteta/charcodec.hpp>
+#include <okteta/bookmarkable.hpp>
+#include <okteta/bookmarksconstiterator.hpp>
+#include <okteta/bookmark.hpp>
+#include <okteta/abstractbytearraymodel.hpp>
 // KF5
 #include <KXMLGUIClient>
 #include <KLocalizedString>

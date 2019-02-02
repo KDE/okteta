@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "togglebutton.h"
-#include "togglebutton_p.h"
+#include "togglebutton.hpp"
+#include "togglebutton_p.hpp"
 
 namespace Kasten {
 

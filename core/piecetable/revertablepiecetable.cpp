@@ -20,15 +20,15 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "revertablepiecetable.h"
+#include "revertablepiecetable.hpp"
 
 // lib
-#include "insertpiecetablechange.h"
-#include "removepiecetablechange.h"
-#include "replacepiecetablechange.h"
-#include "swaprangespiecetablechange.h"
+#include "insertpiecetablechange.hpp"
+#include "removepiecetablechange.hpp"
+#include "replacepiecetablechange.hpp"
+#include "swaprangespiecetablechange.hpp"
 //
-#include <arraychangemetricslist.h>
+#include <arraychangemetricslist.hpp>
 
 namespace KPieceTable {
 

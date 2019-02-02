@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "viewprofileeditdialog.h"
+#include "viewprofileeditdialog.hpp"
 
 // lib
-#include "viewprofileedit.h"
+#include "viewprofileedit.hpp"
 // Okteta Gui Kasten
-#include <kasten/okteta/bytearrayviewprofile.h>
+#include <kasten/okteta/bytearrayviewprofile.hpp>
 // Qt
 #include <QVBoxLayout>
 #include <QPushButton>

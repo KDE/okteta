@@ -20,13 +20,13 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearrayrawfileloadjob.h"
+#include "bytearrayrawfileloadjob.hpp"
 
 // lib
-// #include "externalbookmarkstorage.h"
-#include "bytearrayrawfilesynchronizer.h"
-#include "bytearrayrawfileloadthread.h"
-#include "bytearraydocument.h"
+// #include "externalbookmarkstorage.hpp"
+#include "bytearrayrawfilesynchronizer.hpp"
+#include "bytearrayrawfileloadthread.hpp"
+#include "bytearraydocument.hpp"
 // Qt
 #include <QCoreApplication>
 #include <QUrl>

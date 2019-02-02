@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearraycolumnview.h"
-#include "bytearraycolumnview_p.h"
+#include "bytearraycolumnview.hpp"
+#include "bytearraycolumnview_p.hpp"
 
 namespace Okteta {
 

@@ -20,19 +20,19 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "testdocumentfilesynchronizertest.h"
+#include "testdocumentfilesynchronizertest.hpp"
 
 // test object
-#include <testdocumentfilesynchronizer.h>
+#include <testdocumentfilesynchronizer.hpp>
 // test utils
-#include <util/filesystem.h>
-#include <testdocument.h>
+#include <util/filesystem.hpp>
+#include <testdocument.hpp>
 // lib
-#include <abstractloadjob.h>
-#include <abstractconnectjob.h>
-#include <abstractsynctoremotejob.h>
-#include <abstractsyncfromremotejob.h>
-#include <abstractsyncwithremotejob.h>
+#include <abstractloadjob.hpp>
+#include <abstractconnectjob.hpp>
+#include <abstractsynctoremotejob.hpp>
+#include <abstractsyncfromremotejob.hpp>
+#include <abstractsyncwithremotejob.hpp>
 // Qt
 #include <QTest>
 #include <QSignalSpy>

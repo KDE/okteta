@@ -20,13 +20,13 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearrayrowscolumntextrenderer.h"
+#include "bytearrayrowscolumntextrenderer.hpp"
 
 // Okteta core
-#include <okteta/valuecodec.h>
-#include <okteta/charcodec.h>
-#include <okteta/character.h>
-#include <okteta/abstractbytearraymodel.h>
+#include <okteta/valuecodec.hpp>
+#include <okteta/charcodec.hpp>
+#include <okteta/character.hpp>
+#include <okteta/abstractbytearraymodel.hpp>
 // Qt
 #include <QTextStream>
 

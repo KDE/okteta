@@ -20,14 +20,14 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "abstractbytearraystreamencoder.h"
+#include "abstractbytearraystreamencoder.hpp"
 
 // lib
-#include <bytearrayview.h>
-#include <kasten/okteta/bytearraydocument.h>
-#include <kasten/okteta/bytearrayselection.h>
+#include <bytearrayview.hpp>
+#include <kasten/okteta/bytearraydocument.hpp>
+#include <kasten/okteta/bytearrayselection.hpp>
 // Okteta core
-#include <okteta/abstractbytearraymodel.h>
+#include <okteta/abstractbytearraymodel.hpp>
 // Qt
 #include <QBuffer>
 

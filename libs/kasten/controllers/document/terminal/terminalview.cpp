@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "terminalview.h"
+#include "terminalview.hpp"
 
 // lib
-#include "terminaltool.h"
+#include "terminaltool.hpp"
 // KF5
 #include <KLocalizedString>
 #include <KServiceTypeTrader>

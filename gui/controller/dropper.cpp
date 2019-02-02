@@ -20,15 +20,15 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "dropper.h"
+#include "dropper.hpp"
 
 // lib
-#include <bytearraytableranges.h>
-#include <bytearraytablecursor.h>
-#include <bytearraytablelayout.h>
-#include <abstractbytearrayview.h>
+#include <bytearraytableranges.hpp>
+#include <bytearraytablecursor.hpp>
+#include <bytearraytablelayout.hpp>
+#include <abstractbytearrayview.hpp>
 // Okteta core
-#include <okteta/abstractbytearraymodel.h>
+#include <okteta/abstractbytearraymodel.hpp>
 // Qt
 #include <QApplication>
 #include <QDragEnterEvent>

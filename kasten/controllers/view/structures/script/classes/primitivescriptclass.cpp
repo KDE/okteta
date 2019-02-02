@@ -20,11 +20,11 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "primitivescriptclass.h"
-#include "../../datatypes/primitive/primitivedatainformation.h"
-#include "../../parsers/parserutils.h"
-#include "../../allprimitivetypes.h"
-#include "../../structlogging.h"
+#include "primitivescriptclass.hpp"
+#include "../../datatypes/primitive/primitivedatainformation.hpp"
+#include "../../parsers/parserutils.hpp"
+#include "../../allprimitivetypes.hpp"
+#include "../../structlogging.hpp"
 
 PrimitiveScriptClass::PrimitiveScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : DefaultScriptClass(engine, handlerInfo)

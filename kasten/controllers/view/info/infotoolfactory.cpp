@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "infotoolfactory.h"
+#include "infotoolfactory.hpp"
 
 // lib
-#include "infotool.h"
+#include "infotool.hpp"
 
 namespace Kasten {
 

@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "testdocumentfilewritetojob.h"
+#include "testdocumentfilewritetojob.hpp"
 
 // lib
-#include "testdocumentfilesynchronizer.h"
-#include "testdocumentfilewritethread.h"
-#include "testdocument.h"
+#include "testdocumentfilesynchronizer.hpp"
+#include "testdocumentfilewritethread.hpp"
+#include "testdocument.hpp"
 // Qt
 #include <QCoreApplication>
 

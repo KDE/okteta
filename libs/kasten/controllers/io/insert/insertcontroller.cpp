@@ -20,19 +20,19 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "insertcontroller.h"
+#include "insertcontroller.hpp"
 
 // lib
-#include "insertdialog.h"
+#include "insertdialog.hpp"
 // Kasten gui
-#include <kasten/modelcodecviewmanager.h>
-#include <kasten/selecteddatawriteable.h>
-#include <kasten/abstractmodeldatageneratorconfigeditor.h>
+#include <kasten/modelcodecviewmanager.hpp>
+#include <kasten/selecteddatawriteable.hpp>
+#include <kasten/abstractmodeldatageneratorconfigeditor.hpp>
 // Kasten core
-#include <kasten/modeldatageneratethread.h>
-#include <kasten/modelcodecmanager.h>
-#include <kasten/abstractmodeldatagenerator.h>
-#include <kasten/abstractmodel.h>
+#include <kasten/modeldatageneratethread.hpp>
+#include <kasten/modelcodecmanager.hpp>
+#include <kasten/abstractmodeldatagenerator.hpp>
+#include <kasten/abstractmodel.hpp>
 // KF5
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>

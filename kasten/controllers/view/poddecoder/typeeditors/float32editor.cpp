@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "float32editor.h"
+#include "float32editor.hpp"
 
 // Qt
 #include <QDoubleValidator>

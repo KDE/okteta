@@ -19,25 +19,25 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#include "basicprimitivedatainformation.h"
+#include "basicprimitivedatainformation.hpp"
 
-#include "booldatainformation.h"
-#include "chardatainformation.h"
-#include "doubledatainformation.h"
-#include "floatdatainformation.h"
-#include "sintdatainformation.h"
-#include "uintdatainformation.h"
-#include "../topleveldatainformation.h"
-#include "../../script/scripthandlerinfo.h"
-#include "../../script/scriptlogger.h"
-#include "../../script/classes/primitivescriptclass.h"
+#include "booldatainformation.hpp"
+#include "chardatainformation.hpp"
+#include "doubledatainformation.hpp"
+#include "floatdatainformation.hpp"
+#include "sintdatainformation.hpp"
+#include "uintdatainformation.hpp"
+#include "../topleveldatainformation.hpp"
+#include "../../script/scripthandlerinfo.hpp"
+#include "../../script/scriptlogger.hpp"
+#include "../../script/classes/primitivescriptclass.hpp"
 
 #include <QScriptValue>
 #include <QScriptEngine>
 
 #include <KLocalizedString>
 
-#include <okteta/abstractbytearraymodel.h>
+#include <okteta/abstractbytearraymodel.hpp>
 
 template <typename T, class C>
 inline QScriptClass* BasicPrimitiveDataInformation<T, C>::scriptClass(ScriptHandlerInfo* handlerInfo) const

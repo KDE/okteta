@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "viewmodecontroller.h"
+#include "viewmodecontroller.hpp"
 
 // lib
-#include <kasten/okteta/bytearrayview.h>
+#include <kasten/okteta/bytearrayview.hpp>
 // KF5
 #include <KXMLGUIClient>
 #include <KLocalizedString>

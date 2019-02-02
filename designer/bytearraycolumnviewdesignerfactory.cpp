@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearraycolumnviewdesignerfactory.h"
+#include "bytearraycolumnviewdesignerfactory.hpp"
 
 // plugin
-#include "fillerbytearraymodel.h"
+#include "fillerbytearraymodel.hpp"
 // Okteta gui
-#include <okteta/bytearraycolumnview.h>
+#include <okteta/bytearraycolumnview.hpp>
 
 // TODO: add translations for visible names
 ByteArrayColumnViewDesignerFactory::ByteArrayColumnViewDesignerFactory(QObject* parent)
@@ -52,7 +52,7 @@ QIcon ByteArrayColumnViewDesignerFactory::icon() const
 
 QString ByteArrayColumnViewDesignerFactory::includeFile() const
 {
-    return QStringLiteral("okteta/bytearraycolumnview.h");
+    return QStringLiteral("okteta/bytearraycolumnview.hpp");
 }
 
 QString ByteArrayColumnViewDesignerFactory::toolTip() const

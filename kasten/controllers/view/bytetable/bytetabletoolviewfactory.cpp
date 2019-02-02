@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytetabletoolviewfactory.h"
+#include "bytetabletoolviewfactory.hpp"
 
 // lib
-#include "bytetabletoolview.h"
-#include "bytetabletool.h"
+#include "bytetabletoolview.hpp"
+#include "bytetabletool.hpp"
 // KF5
 #include <KLocalizedString>
 

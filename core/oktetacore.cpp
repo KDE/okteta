@@ -20,6 +20,6 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "oktetacore.h"
+#include "oktetacore.hpp"
 
 Q_LOGGING_CATEGORY(LOG_OKTETA_CORE, "okteta.core", QtInfoMsg)

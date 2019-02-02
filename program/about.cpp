@@ -20,7 +20,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "about.h"
+#include "about.hpp"
 
 // KF5
 #include <KLocalizedString>

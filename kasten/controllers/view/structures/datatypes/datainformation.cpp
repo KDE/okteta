@@ -19,12 +19,14 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#include "datainformation.h"
-#include "topleveldatainformation.h"
-#include "additionaldata.h"
-#include "structureviewpreferences.h"
-#include "../script/scriptlogger.h"
-#include "../script/safereference.h"
+
+#include "datainformation.hpp"
+
+#include "topleveldatainformation.hpp"
+#include "additionaldata.hpp"
+#include <structureviewpreferences.h>
+#include "../script/scriptlogger.hpp"
+#include "../script/safereference.hpp"
 
 #include <QScriptValue>
 #include <QScriptEngine>

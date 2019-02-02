@@ -7,16 +7,16 @@
 */
 
 //// ADAPT(start)
-//// rename "template_bytearraychecksumparametersetedit.h" to the name of the header of your filter,
-//// e.g. "mybytearraychecksumparametersetedit.h"
-#include "template_bytearraychecksumparametersetedit.h"
+//// rename "template_bytearraychecksumparametersetedit.hpp" to the name of the header of your filter,
+//// e.g. "mybytearraychecksumparametersetedit.hpp"
+#include "template_bytearraychecksumparametersetedit.hpp"
 //// ADAPT(end)
 
 // parameterset
 //// ADAPT(start)
-//// rename "template_bytearraychecksumparameterset.h" to the name of the header of your filter,
-//// e.g. "mybytearraychecksumparameterset.h"
-#include "template_bytearraychecksumparameterset.h"
+//// rename "template_bytearraychecksumparameterset.hpp" to the name of the header of your filter,
+//// e.g. "mybytearraychecksumparameterset.hpp"
+#include "template_bytearraychecksumparameterset.hpp"
 //// ADAPT(end)
 // KF5
 #include <KLocalizedString>

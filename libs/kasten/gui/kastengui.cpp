@@ -20,6 +20,6 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kastengui.h"
+#include "kastengui.hpp"
 
 Q_LOGGING_CATEGORY(LOG_KASTEN_GUI, "kasten.gui", QtInfoMsg)

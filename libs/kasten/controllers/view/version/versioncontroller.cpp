@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "versioncontroller.h"
+#include "versioncontroller.hpp"
 
 // Kasten core
-#include <kasten/documentversiondata.h>
-#include <kasten/versionable.h>
-#include <kasten/abstractmodel.h>
+#include <kasten/documentversiondata.hpp>
+#include <kasten/versionable.hpp>
+#include <kasten/abstractmodel.hpp>
 // KF5
 #include <KXMLGUIClient>
 #include <KLocalizedString>

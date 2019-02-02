@@ -20,18 +20,18 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "replacetool.h"
+#include "replacetool.hpp"
 
 // controller
-#include "replaceuserqueryable.h"
+#include "replaceuserqueryable.hpp"
 // search controller
-#include "../search/searchjob.h"
+#include "../search/searchjob.hpp"
 // lib
-#include <kasten/okteta/bytearrayview.h>
-#include <kasten/okteta/bytearraydocument.h>
+#include <kasten/okteta/bytearrayview.hpp>
+#include <kasten/okteta/bytearraydocument.hpp>
 // Okteta core
-#include <okteta/charcodec.h>
-#include <okteta/abstractbytearraymodel.h>
+#include <okteta/charcodec.hpp>
+#include <okteta/abstractbytearraymodel.hpp>
 // KF5
 #include <KLocalizedString>
 // Qt

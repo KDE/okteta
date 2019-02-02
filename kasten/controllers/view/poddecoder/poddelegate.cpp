@@ -20,27 +20,27 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "poddelegate.h"
+#include "poddelegate.hpp"
 
 // tool
-#include "typeeditors/binary8editor.h"
-#include "typeeditors/octal8editor.h"
-#include "typeeditors/hexadecimal8editor.h"
-#include "typeeditors/float32editor.h"
-#include "typeeditors/float64editor.h"
-#include "typeeditors/char8editor.h"
-#include "typeeditors/utf8editor.h"
-#include "typeeditors/sintspinbox.h"
-#include "typeeditors/uintspinbox.h"
-#include "poddecodertool.h"
-#include "types/sint8.h"
-#include "types/sint16.h"
-#include "types/sint32.h"
-#include "types/sint64.h"
-#include "types/uint8.h"
-#include "types/uint16.h"
-#include "types/uint32.h"
-#include "types/uint64.h"
+#include "typeeditors/binary8editor.hpp"
+#include "typeeditors/octal8editor.hpp"
+#include "typeeditors/hexadecimal8editor.hpp"
+#include "typeeditors/float32editor.hpp"
+#include "typeeditors/float64editor.hpp"
+#include "typeeditors/char8editor.hpp"
+#include "typeeditors/utf8editor.hpp"
+#include "typeeditors/sintspinbox.hpp"
+#include "typeeditors/uintspinbox.hpp"
+#include "poddecodertool.hpp"
+#include "types/sint8.hpp"
+#include "types/sint16.hpp"
+#include "types/sint32.hpp"
+#include "types/sint64.hpp"
+#include "types/uint8.hpp"
+#include "types/uint16.hpp"
+#include "types/uint32.hpp"
+#include "types/uint64.hpp"
 
 // TODO: Stranger that you are reading this: please help out and show how to add QVariant::Types for custom datatypes,
 // so that instead of this unflexible maintanance mess^WWWunlooped code QItemEditorCreator can be used!

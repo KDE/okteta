@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearraycombobox.h"
-#include "bytearraycombobox_p.h"
+#include "bytearraycombobox.hpp"
+#include "bytearraycombobox_p.hpp"
 
 namespace Okteta {
 

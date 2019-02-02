@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "abstractmodelsynchronizer.h"
-#include "abstractmodelsynchronizer_p.h"
+#include "abstractmodelsynchronizer.hpp"
+#include "abstractmodelsynchronizer_p.hpp"
 
 namespace Kasten {
 

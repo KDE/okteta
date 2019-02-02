@@ -20,18 +20,18 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytetabletool.h"
+#include "bytetabletool.hpp"
 
 // controller
-#include "bytetablemodel.h"
+#include "bytetablemodel.hpp"
 // lib
-#include <kasten/okteta/bytearrayview.h>
-#include <kasten/okteta/bytearraydocument.h>
+#include <kasten/okteta/bytearrayview.hpp>
+#include <kasten/okteta/bytearraydocument.hpp>
 // Okteta core
-#include <okteta/character.h>
-#include <okteta/charcodec.h>
-#include <okteta/abstractbytearraymodel.h>
-#include <okteta/changesdescribable.h>
+#include <okteta/character.hpp>
+#include <okteta/charcodec.hpp>
+#include <okteta/abstractbytearraymodel.hpp>
+#include <okteta/changesdescribable.hpp>
 // KF5
 #include <KLocalizedString>
 

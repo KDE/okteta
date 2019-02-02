@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearraytablecursor.h"
+#include "bytearraytablecursor.hpp"
 
 // lib
-#include "bytearraytablelayout.h"
+#include "bytearraytablelayout.hpp"
 // Okteta core
-#include <okteta/arraychangemetricslist.h>
+#include <okteta/arraychangemetricslist.hpp>
 
 namespace Okteta {
 

@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearrayxxencodingstreamencoderconfigeditor.h"
+#include "bytearrayxxencodingstreamencoderconfigeditor.hpp"
 
 // lib
-#include "bytearraytextstreamencoderpreview.h"
+#include "bytearraytextstreamencoderpreview.hpp"
 // KF5
 #include <KLocalizedString>
 // Qt

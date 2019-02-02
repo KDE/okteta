@@ -20,20 +20,20 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "modelcodecviewmanager.h"
+#include "modelcodecviewmanager.hpp"
 
 // lib
-#include <filesystem/modelencoderfilesystemexporterconfigeditorfactory.h>
-#include <abstractmodelstreamencoderconfigeditorfactory.h>
-#include <abstractmodelstreamencoderconfigeditor.h>
-#include <abstractmodelexporterconfigeditorfactory.h>
-#include <abstractmodelexporterconfigeditor.h>
-#include <abstractmodeldatageneratorconfigeditorfactory.h>
-#include <abstractmodeldatageneratorconfigeditor.h>
+#include <filesystem/modelencoderfilesystemexporterconfigeditorfactory.hpp>
+#include <abstractmodelstreamencoderconfigeditorfactory.hpp>
+#include <abstractmodelstreamencoderconfigeditor.hpp>
+#include <abstractmodelexporterconfigeditorfactory.hpp>
+#include <abstractmodelexporterconfigeditor.hpp>
+#include <abstractmodeldatageneratorconfigeditorfactory.hpp>
+#include <abstractmodeldatageneratorconfigeditor.hpp>
 // Kasten core
-#include <kasten/abstractmodelexporter.h>
-#include <kasten/abstractmodeldatagenerator.h>
-#include <kasten/abstractmodelstreamencoder.h>
+#include <kasten/abstractmodelexporter.hpp>
+#include <kasten/abstractmodeldatagenerator.hpp>
+#include <kasten/abstractmodelstreamencoder.hpp>
 
 namespace Kasten {
 

@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearrayvalidator.h"
+#include "bytearrayvalidator.hpp"
 
 // Okteta core
-#include <okteta/valuecodec.h>
-#include <okteta/character.h>
-#include <okteta/charcodec.h>
+#include <okteta/valuecodec.hpp>
+#include <okteta/character.hpp>
+#include <okteta/charcodec.hpp>
 
 namespace Okteta {
 

@@ -20,22 +20,22 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearrayrawfilesynchronizertest.h"
+#include "bytearrayrawfilesynchronizertest.hpp"
 
 // test object
-#include <bytearrayrawfilesynchronizer.h>
+#include <bytearrayrawfilesynchronizer.hpp>
 // lib
-#include <bytearraydocument.h>
+#include <bytearraydocument.hpp>
 // test utils
-#include <util/filesystem.h>
-#include <util/fill.h>
+#include <util/filesystem.hpp>
+#include <util/fill.hpp>
 // Kasten core
-#include <kasten/abstractloadjob.h>
-#include <kasten/abstractconnectjob.h>
-#include <kasten/abstractsynctoremotejob.h>
-#include <kasten/abstractsyncwithremotejob.h>
+#include <kasten/abstractloadjob.hpp>
+#include <kasten/abstractconnectjob.hpp>
+#include <kasten/abstractsynctoremotejob.hpp>
+#include <kasten/abstractsyncwithremotejob.hpp>
 // Okteta core
-#include <okteta/piecetablebytearraymodel.h>
+#include <okteta/piecetablebytearraymodel.hpp>
 // Qt
 #include <QTest>
 #include <QSignalSpy>

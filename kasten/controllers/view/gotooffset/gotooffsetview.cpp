@@ -20,13 +20,13 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "gotooffsetview.h"
+#include "gotooffsetview.hpp"
 
 // tool
-#include "gotooffsettool.h"
+#include "gotooffsettool.hpp"
 // lib
-#include <kasten/okteta/addresscombobox.h>
-#include <kasten/okteta/addressvalidator.h>
+#include <kasten/okteta/addresscombobox.hpp>
+#include <kasten/okteta/addressvalidator.hpp>
 // KF5
 #include <QPushButton>
 #include <KGuiItem>

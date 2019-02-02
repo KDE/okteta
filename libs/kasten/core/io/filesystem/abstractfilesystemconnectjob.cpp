@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "abstractfilesystemconnectjob.h"
-#include "abstractfilesystemconnectjob_p.h"
+#include "abstractfilesystemconnectjob.hpp"
+#include "abstractfilesystemconnectjob_p.hpp"
 
 namespace Kasten {
 

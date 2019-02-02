@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "hexadecimalbytecodec.h"
+#include "hexadecimalbytecodec.hpp"
 
 // Qt
 #include <QString>

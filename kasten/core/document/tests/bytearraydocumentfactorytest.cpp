@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearraydocumentfactorytest.h"
+#include "bytearraydocumentfactorytest.hpp"
 
 // test object
-#include <bytearraydocumentfactory.h>
+#include <bytearraydocumentfactory.hpp>
 // lib
-#include <bytearraydocument.h>
+#include <bytearraydocument.hpp>
 // Qt
 #include <QTest>
 

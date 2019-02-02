@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "searchjob.h"
+#include "searchjob.hpp"
 
 // Okteta core
-#include <okteta/abstractbytearraymodel.h>
-#include <okteta/charcodec.h>
+#include <okteta/abstractbytearraymodel.hpp>
+#include <okteta/charcodec.hpp>
 // Qt
 #include <QCoreApplication>
 

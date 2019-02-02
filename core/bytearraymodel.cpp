@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearraymodel.h"
+#include "bytearraymodel.hpp"
 
 // lib
-#include "bytearraymodel_p.h"
-#include "arraychangemetricslist.h"
+#include "bytearraymodel_p.hpp"
+#include "arraychangemetricslist.hpp"
 
 namespace Okteta {
 

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "abstractsyncwithremotejob.h"
-#include "abstractsyncwithremotejob_p.h"
+#include "abstractsyncwithremotejob.hpp"
+#include "abstractsyncwithremotejob_p.hpp"
 
 namespace Kasten {
 

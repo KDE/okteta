@@ -19,11 +19,11 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#include "structureaddremovewidget.h"
-#include "../structurestool.h"
-#include "../structuresmanager.h"
-#include "../structuredefinitionfile.h"
-#include "../structlogging.h"
+#include "structureaddremovewidget.hpp"
+#include "../structurestool.hpp"
+#include "../structuresmanager.hpp"
+#include "../structuredefinitionfile.hpp"
+#include "../structlogging.hpp"
 
 #include <QPushButton>
 #include <QLabel>

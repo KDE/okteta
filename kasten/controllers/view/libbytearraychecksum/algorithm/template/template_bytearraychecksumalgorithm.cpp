@@ -7,13 +7,13 @@
 */
 
 //// ADAPT(start)
-//// rename "template_bytearraychecksumalgorithm.h" to the name of the header of your checksum algorithm,
-//// e.g. "mybytearraychecksumalgorithm.h"
-#include "template_bytearraychecksumalgorithm.h"
+//// rename "template_bytearraychecksumalgorithm.hpp" to the name of the header of your checksum algorithm,
+//// e.g. "mybytearraychecksumalgorithm.hpp"
+#include "template_bytearraychecksumalgorithm.hpp"
 //// ADAPT(end)
 
 // Okteta core
-#include <okteta/abstractbytearraymodel.h>
+#include <okteta/abstractbytearraymodel.hpp>
 // KF5
 #include <KLocalizedString>
 

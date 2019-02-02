@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "charsetconversiontoolviewfactory.h"
+#include "charsetconversiontoolviewfactory.hpp"
 
 // lib
-#include "charsetconversiontoolview.h"
-#include "charsetconversiontool.h"
+#include "charsetconversiontoolview.hpp"
+#include "charsetconversiontool.hpp"
 // KF5
 #include <KLocalizedString>
 

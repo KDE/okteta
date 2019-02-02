@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "copyasdialog.h"
+#include "copyasdialog.hpp"
 
 // Kasten gui
-#include <kasten/abstractmodelstreamencoderconfigeditor.h>
-#include <kasten/abstractselectionview.h>
+#include <kasten/abstractmodelstreamencoderconfigeditor.hpp>
+#include <kasten/abstractselectionview.hpp>
 // KF5
 #include <KLocalizedString>
 // Qt

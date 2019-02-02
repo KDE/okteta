@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bordercolumntextrenderer.h"
+#include "bordercolumntextrenderer.hpp"
 
 // Qt
 #include <QTextStream>

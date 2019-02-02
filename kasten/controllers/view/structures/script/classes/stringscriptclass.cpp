@@ -20,10 +20,10 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "stringscriptclass.h"
-#include "../../datatypes/strings/stringdatainformation.h"
-#include "../../parsers/parserutils.h"
-#include "../../structlogging.h"
+#include "stringscriptclass.hpp"
+#include "../../datatypes/strings/stringdatainformation.hpp"
+#include "../../parsers/parserutils.hpp"
+#include "../../structlogging.hpp"
 
 StringScriptClass::StringScriptClass(QScriptEngine* eng, ScriptHandlerInfo* handlerInfo)
     : DefaultScriptClass(eng, handlerInfo)

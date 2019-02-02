@@ -20,17 +20,17 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "viewmanager.h"
+#include "viewmanager.hpp"
 
 // lib
-#include "abstractviewfactory.h"
-#include "dummyview.h"
+#include "abstractviewfactory.hpp"
+#include "dummyview.hpp"
 // Qt
 #include <QListIterator>
 #include <QMutableListIterator>
 
 // temporary
-#include "modelcodecviewmanager.h"
+#include "modelcodecviewmanager.hpp"
 
 namespace Kasten {
 

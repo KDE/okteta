@@ -20,17 +20,17 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "modelcodecmanager.h"
+#include "modelcodecmanager.hpp"
 
 // lib
-#include "modelencoderfilesystemexporter.h"
-#include "abstractmodelstreamencoder.h"
-// #include "abstractmodelstreamdecoder.h"
-#include "abstractmodeldatagenerator.h"
-#include "abstractoverwritedialog.h"
-#include "jobmanager.h"
-#include "documentmanager.h"
-#include "abstractexportjob.h"
+#include "modelencoderfilesystemexporter.hpp"
+#include "abstractmodelstreamencoder.hpp"
+// #include "abstractmodelstreamdecoder.hpp"
+#include "abstractmodeldatagenerator.hpp"
+#include "abstractoverwritedialog.hpp"
+#include "jobmanager.hpp"
+#include "documentmanager.hpp"
+#include "abstractexportjob.hpp"
 // KF5
 #include <KIO/StatJob>
 #include <KJobWidgets>

@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "charsetconversiontoolview.h"
+#include "charsetconversiontoolview.hpp"
 
 // tool
-#include "charsetconversionview.h"
-#include "charsetconversiontool.h"
+#include "charsetconversionview.hpp"
+#include "charsetconversiontool.hpp"
 
 namespace Kasten {
 

@@ -20,15 +20,15 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "filterview.h"
+#include "filterview.hpp"
 
 //
-#include "filtertool.h"
+#include "filtertool.hpp"
 // filter
-#include <bytearrayfilterparameterseteditfactory.h>
-#include <abstractbytearrayfilterparametersetedit.h>
-#include <abstractbytearrayfilterparameterset.h>
-#include <abstractbytearrayfilter.h>
+#include <bytearrayfilterparameterseteditfactory.hpp>
+#include <abstractbytearrayfilterparametersetedit.hpp>
+#include <abstractbytearrayfilterparameterset.hpp>
+#include <abstractbytearrayfilter.hpp>
 // KF5
 #include <KLocalizedString>
 #include <KComboBox>

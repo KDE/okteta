@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "testdocumenttest.h"
+#include "testdocumenttest.hpp"
 
 // test object
-#include <testdocument.h>
+#include <testdocument.hpp>
 // Qt
 #include <QTest>
 #include <QSignalSpy>

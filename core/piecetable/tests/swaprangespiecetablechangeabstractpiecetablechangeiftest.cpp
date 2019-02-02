@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "swaprangespiecetablechangeabstractpiecetablechangeiftest.h"
+#include "swaprangespiecetablechangeabstractpiecetablechangeiftest.hpp"
 
 // test object
-#include <piecetable/swaprangespiecetablechange.h>
+#include <piecetable/swaprangespiecetablechange.hpp>
 // lib
-#include <piecetable/piecetable.h>
+#include <piecetable/piecetable.hpp>
 // Qt
 #include <QTest>
 

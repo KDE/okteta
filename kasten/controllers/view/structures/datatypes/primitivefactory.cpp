@@ -20,9 +20,9 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "primitivefactory.h"
-#include "primitive/primitivetemplateinfo.h"
-#include "../script/scriptlogger.h"
+#include "primitivefactory.hpp"
+#include "primitive/primitivetemplateinfo.hpp"
+#include "../script/scriptlogger.hpp"
 
 namespace PrimitiveFactory {
 

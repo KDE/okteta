@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "tabwidget.h"
+#include "tabwidget.hpp"
 
 // lib
-#include "tabbar.h"
+#include "tabbar.hpp"
 // Qt
 #include <QMouseEvent>
 #include <QDragEnterEvent>

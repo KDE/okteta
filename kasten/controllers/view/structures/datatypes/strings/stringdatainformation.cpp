@@ -21,18 +21,18 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "stringdatainformation.h"
-#include "../dummydatainformation.h"
-#include "../topleveldatainformation.h"
-#include "utf32stringdata.h"
-#include "utf16stringdata.h"
-#include "utf8stringdata.h"
-#include "asciistringdata.h"
-#include "ebcdicstringdata.h"
-#include "latin1stringdata.h"
-#include "../../script/classes/stringscriptclass.h"
-#include "../../script/scripthandlerinfo.h"
-#include "../../script/scriptlogger.h"
+#include "stringdatainformation.hpp"
+#include "../dummydatainformation.hpp"
+#include "../topleveldatainformation.hpp"
+#include "utf32stringdata.hpp"
+#include "utf16stringdata.hpp"
+#include "utf8stringdata.hpp"
+#include "asciistringdata.hpp"
+#include "ebcdicstringdata.hpp"
+#include "latin1stringdata.hpp"
+#include "../../script/classes/stringscriptclass.hpp"
+#include "../../script/scripthandlerinfo.hpp"
+#include "../../script/scriptlogger.hpp"
 
 #include <QScriptEngine>
 #include <QBrush>

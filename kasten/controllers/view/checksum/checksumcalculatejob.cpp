@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "checksumcalculatejob.h"
+#include "checksumcalculatejob.hpp"
 
 //
-#include <abstractbytearraychecksumalgorithm.h>
+#include <abstractbytearraychecksumalgorithm.hpp>
 // Okteta core
-#include <okteta/abstractbytearraymodel.h>
+#include <okteta/abstractbytearraymodel.hpp>
 // Qt
 #include <QCoreApplication>
 

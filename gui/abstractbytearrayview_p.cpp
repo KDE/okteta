@@ -20,25 +20,25 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "abstractbytearrayview_p.h"
+#include "abstractbytearrayview_p.hpp"
 
 // lib
-#include "controller/knavigator.h"
-#include "controller/kchareditor.h"
-#include "controller/dropper.h"
-#include "controller/mousenavigator.h"
-#include "controller/mousepaster.h"
-#include "controller/zoomwheelcontroller.h"
-#include "widgetcolumnstylist.h"
-#include "kcursor.h"
-#include "bordercolumnrenderer.h"
-#include "oktetagui.h"
+#include "controller/knavigator.hpp"
+#include "controller/kchareditor.hpp"
+#include "controller/dropper.hpp"
+#include "controller/mousenavigator.hpp"
+#include "controller/mousepaster.hpp"
+#include "controller/zoomwheelcontroller.hpp"
+#include "widgetcolumnstylist.hpp"
+#include "kcursor.hpp"
+#include "bordercolumnrenderer.hpp"
+#include "oktetagui.hpp"
 // Okteta core
-#include <okteta/valuecodec.h>
-#include <okteta/bookmarkable.h>
-#include <okteta/versionable.h>
-#include <okteta/wordbytearrayservice.h>
-#include <okteta/bookmark.h>
+#include <okteta/valuecodec.hpp>
+#include <okteta/bookmarkable.hpp>
+#include <okteta/versionable.hpp>
+#include <okteta/wordbytearrayservice.hpp>
+#include <okteta/bookmark.hpp>
 // Qt
 #include <QDragEnterEvent>
 #include <QDragMoveEvent>

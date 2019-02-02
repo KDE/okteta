@@ -20,18 +20,18 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "charsetconversiontool.h"
+#include "charsetconversiontool.hpp"
 
 // tool
-#include "charsetconversionjob.h"
+#include "charsetconversionjob.hpp"
 // Okteta Kasten gui
-#include <kasten/okteta/bytearrayview.h>
+#include <kasten/okteta/bytearrayview.hpp>
 // Okteta Kasten core
-#include <kasten/okteta/bytearraydocument.h>
+#include <kasten/okteta/bytearraydocument.hpp>
 // Okteta core
-#include <okteta/charcodec.h>
-#include <okteta/abstractbytearraymodel.h>
-#include <okteta/changesdescribable.h>
+#include <okteta/charcodec.hpp>
+#include <okteta/abstractbytearraymodel.hpp>
+#include <okteta/changesdescribable.hpp>
 // KF5
 #include <KLocalizedString>
 // Qt

@@ -20,14 +20,14 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearrayviewfactory.h"
+#include "bytearrayviewfactory.hpp"
 
 // lib
-#include "bytearrayview.h"
-#include <bytearrayviewprofilemanager.h>
-#include <bytearrayviewprofilesynchronizer.h>
+#include "bytearrayview.hpp"
+#include <bytearrayviewprofilemanager.hpp>
+#include <bytearrayviewprofilesynchronizer.hpp>
 // core
-#include <kasten/okteta/bytearraydocument.h>
+#include <kasten/okteta/bytearraydocument.hpp>
 
 namespace Kasten {
 

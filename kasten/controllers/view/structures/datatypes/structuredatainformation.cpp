@@ -19,9 +19,9 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#include "structuredatainformation.h"
+#include "structuredatainformation.hpp"
 
-#include "topleveldatainformation.h"
+#include "topleveldatainformation.hpp"
 
 #include <KLocalizedString>
 #include <limits>

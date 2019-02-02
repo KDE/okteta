@@ -20,14 +20,14 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "viewconfigcontroller.h"
+#include "viewconfigcontroller.hpp"
 
 // lib
-#include "bytesperlinedialog.h"
-#include "bytespergroupdialog.h"
-#include <kasten/okteta/bytearrayview.h>
+#include "bytesperlinedialog.hpp"
+#include "bytespergroupdialog.hpp"
+#include <kasten/okteta/bytearrayview.hpp>
 // Okteta core
-#include <okteta/charcodec.h>
+#include <okteta/charcodec.hpp>
 // KF5
 #include <KXMLGUIClient>
 #include <KLocalizedString>

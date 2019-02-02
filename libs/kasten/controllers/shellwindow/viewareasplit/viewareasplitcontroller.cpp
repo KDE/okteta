@@ -20,13 +20,13 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "viewareasplitcontroller.h"
+#include "viewareasplitcontroller.hpp"
 
 // lib
-#include <kasten/abstractgroupedviews.h>
-#include <kasten/viewareasplitable.h>
-#include <kasten/abstractviewarea.h>
-#include <kasten/viewmanager.h>
+#include <kasten/abstractgroupedviews.hpp>
+#include <kasten/viewareasplitable.hpp>
+#include <kasten/abstractviewarea.hpp>
+#include <kasten/viewmanager.hpp>
 // KF5
 #include <KXMLGUIClient>
 #include <KActionCollection>

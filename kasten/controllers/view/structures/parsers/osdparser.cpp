@@ -20,21 +20,21 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "osdparser.h"
+#include "osdparser.hpp"
 
-#include "datainformationfactory.h"
-#include "../datatypes/array/arraydatainformation.h"
-#include "../datatypes/uniondatainformation.h"
-#include "../datatypes/structuredatainformation.h"
-#include "../datatypes/strings/stringdatainformation.h"
-#include "../datatypes/strings/stringdata.h"
-#include "../datatypes/primitivefactory.h"
-#include "../datatypes/topleveldatainformation.h"
-#include "../datatypes/dummydatainformation.h"
-#include "../structuredefinitionfile.h"
-#include "../script/scriptlogger.h"
-#include "../script/scriptengineinitializer.h"
-#include "../structlogging.h"
+#include "datainformationfactory.hpp"
+#include "../datatypes/array/arraydatainformation.hpp"
+#include "../datatypes/uniondatainformation.hpp"
+#include "../datatypes/structuredatainformation.hpp"
+#include "../datatypes/strings/stringdatainformation.hpp"
+#include "../datatypes/strings/stringdata.hpp"
+#include "../datatypes/primitivefactory.hpp"
+#include "../datatypes/topleveldatainformation.hpp"
+#include "../datatypes/dummydatainformation.hpp"
+#include "../structuredefinitionfile.hpp"
+#include "../script/scriptlogger.hpp"
+#include "../script/scriptengineinitializer.hpp"
+#include "../structlogging.hpp"
 
 #include <QFile>
 #include <QFileInfo>

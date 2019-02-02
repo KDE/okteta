@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "testdocumentfilereloadjob.h"
+#include "testdocumentfilereloadjob.hpp"
 
 // lib
-#include "testdocumentfilesynchronizer.h"
-#include "testdocumentfilereloadthread.h"
-#include "testdocument.h"
+#include "testdocumentfilesynchronizer.hpp"
+#include "testdocumentfilereloadthread.hpp"
+#include "testdocument.hpp"
 // Qt
 #include <QCoreApplication>
 

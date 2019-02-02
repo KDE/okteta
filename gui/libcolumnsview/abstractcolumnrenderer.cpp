@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "abstractcolumnrenderer.h"
-#include "abstractcolumnrenderer_p.h"
+#include "abstractcolumnrenderer.hpp"
+#include "abstractcolumnrenderer_p.hpp"
 
 // lib
-#include "columnsview.h"
+#include "columnsview.hpp"
 // Qt
 #include <QPainter>
 

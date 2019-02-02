@@ -20,20 +20,20 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearraystreamencoderconfigeditorfactoryfactory.h"
+#include "bytearraystreamencoderconfigeditorfactoryfactory.hpp"
 
 // lib
-#include "streamencoder/sourcecode//bytearraysourcecodestreamencoderconfigeditorfactory.h"
-#include "streamencoder/values/bytearrayvaluesstreamencoderconfigeditorfactory.h"
-#include "streamencoder/base32/bytearraybase32streamencoderconfigeditorfactory.h"
-#include "streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditorfactory.h"
-#include "streamencoder/xxencoding/bytearrayxxencodingstreamencoderconfigeditorfactory.h"
-#include "streamencoder/srec/bytearraysrecstreamencoderconfigeditorfactory.h"
-#include "streamencoder/ihex/bytearrayihexstreamencoderconfigeditorfactory.h"
+#include "streamencoder/sourcecode//bytearraysourcecodestreamencoderconfigeditorfactory.hpp"
+#include "streamencoder/values/bytearrayvaluesstreamencoderconfigeditorfactory.hpp"
+#include "streamencoder/base32/bytearraybase32streamencoderconfigeditorfactory.hpp"
+#include "streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditorfactory.hpp"
+#include "streamencoder/xxencoding/bytearrayxxencodingstreamencoderconfigeditorfactory.hpp"
+#include "streamencoder/srec/bytearraysrecstreamencoderconfigeditorfactory.hpp"
+#include "streamencoder/ihex/bytearrayihexstreamencoderconfigeditorfactory.hpp"
 //// NEWBYTEARRAYSTREAMENCODERCONFIGEDITORFACTORY(start)
 //// Here add the name of your header file of your streamencoder,
 //// e.g.
-//// #include "my_bytearraystreamencoder.h"
+//// #include "my_bytearraystreamencoder.hpp"
 //// NEWBYTEARRAYSTREAMENCODERCONFIGEDITORFACTORY(end)
 // Qt
 #include <QList>

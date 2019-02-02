@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "octal8codec.h"
+#include "octal8codec.hpp"
 
 // tool
-#include "../types/octal8.h"
-#include "../poddata.h"
+#include "../types/octal8.hpp"
+#include "../poddata.hpp"
 // KF5
 #include <KLocalizedString>
 

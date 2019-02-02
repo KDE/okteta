@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "scriptlogger.h"
-#include "../datatypes/datainformation.h"
+#include "scriptlogger.hpp"
+#include "../datatypes/datainformation.hpp"
 
 #include <KLocalizedString>
 #include <QIcon>

@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kreplaceprompt.h"
+#include "kreplaceprompt.hpp"
 
 // KF5
 #include <KLocalizedString>

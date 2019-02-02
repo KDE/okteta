@@ -20,11 +20,11 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "pointerscriptclass.h"
+#include "pointerscriptclass.hpp"
 
-#include "../../datatypes/primitive/pointerdatainformation.h"
-#include "../../parsers/parserutils.h"
-#include "../../parsers/scriptvalueconverter.h"
+#include "../../datatypes/primitive/pointerdatainformation.hpp"
+#include "../../parsers/parserutils.hpp"
+#include "../../parsers/scriptvalueconverter.hpp"
 
 PointerScriptClass::PointerScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : PrimitiveScriptClass(engine, handlerInfo)

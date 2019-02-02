@@ -20,13 +20,13 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "viewlistmenucontroller.h"
+#include "viewlistmenucontroller.hpp"
 
 // lib
-#include <kasten/abstractgroupedviews.h>
-#include <kasten/viewmanager.h>
+#include <kasten/abstractgroupedviews.hpp>
+#include <kasten/viewmanager.hpp>
 // Kasten core
-#include <kasten/abstractdocument.h>
+#include <kasten/abstractdocument.hpp>
 // KF5
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>

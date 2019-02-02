@@ -20,14 +20,14 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "versionview.h"
+#include "versionview.hpp"
 
 // tool
-#include "versiontablemodel.h"
-#include "versionviewtool.h"
+#include "versiontablemodel.hpp"
+#include "versionviewtool.hpp"
 // Kasten core
-#include <kasten/versionable.h>
-#include <kasten/abstractmodel.h>
+#include <kasten/versionable.hpp>
+#include <kasten/abstractmodel.hpp>
 // Qt
 #include <QLayout>
 #include <QTreeView>

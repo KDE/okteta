@@ -22,9 +22,9 @@
 #include <QString>
 #include <QScriptEngine>
 #include <QScriptValue>
-#include "view/structures/parsers/osdparser.h"
-#include "view/structures/datatypes/primitive/primitivedatainformation.h"
-#include "view/structures/datatypes/topleveldatainformation.h"
+#include "view/structures/parsers/osdparser.hpp"
+#include "view/structures/datatypes/primitive/primitivedatainformation.hpp"
+#include "view/structures/datatypes/topleveldatainformation.hpp"
 
 class OsdParserTest : public QObject
 {

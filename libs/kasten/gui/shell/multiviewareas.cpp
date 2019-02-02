@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "multiviewareas.h"
-#include "multiviewareas_p.h"
+#include "multiviewareas.hpp"
+#include "multiviewareas_p.hpp"
 
 namespace Kasten {
 // TODO: catch area focues change!

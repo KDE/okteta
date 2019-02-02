@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "viewprofileedit.h"
+#include "viewprofileedit.hpp"
 
 // Okteta Gui Kasten
-#include <kasten/okteta/bytearrayviewprofile.h>
+#include <kasten/okteta/bytearrayviewprofile.hpp>
 // Okteta core
-#include <okteta/charcodec.h>
+#include <okteta/charcodec.hpp>
 // KF5
 #include <KLocalizedString>
 #include <KComboBox>

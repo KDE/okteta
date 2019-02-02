@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "versionviewtoolview.h"
+#include "versionviewtoolview.hpp"
 
 // tool
-#include "versionview.h"
-#include "versionviewtool.h"
+#include "versionview.hpp"
+#include "versionviewtool.hpp"
 
 namespace Kasten {
 

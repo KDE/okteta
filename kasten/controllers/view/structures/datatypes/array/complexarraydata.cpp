@@ -20,16 +20,16 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "complexarraydata.h"
+#include "complexarraydata.hpp"
 
 #include <QScriptValue>
 #include <QVariant>
 #include <KLocalizedString>
-#include "arraydatainformation.h"
-#include "../topleveldatainformation.h"
-#include "../structuredatainformation.h"
-#include "../../script/scripthandlerinfo.h"
-#include "../../script/scriptlogger.h"
+#include "arraydatainformation.hpp"
+#include "../topleveldatainformation.hpp"
+#include "../structuredatainformation.hpp"
+#include "../../script/scripthandlerinfo.hpp"
+#include "../../script/scriptlogger.hpp"
 
 ComplexArrayData::ComplexArrayData(unsigned int initialLength, DataInformation* data,
                                    ArrayDataInformation* parent) : AbstractArrayData(data, parent)

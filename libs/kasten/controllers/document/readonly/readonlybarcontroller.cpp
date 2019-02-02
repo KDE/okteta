@@ -20,13 +20,13 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "readonlybarcontroller.h"
+#include "readonlybarcontroller.hpp"
 
 // lib
-#include <kasten/abstractdocument.h>
+#include <kasten/abstractdocument.hpp>
 // Kasten ui
-#include <kasten/togglebutton.h>
-#include <kasten/statusbar.h>
+#include <kasten/togglebutton.hpp>
+#include <kasten/statusbar.hpp>
 // KF5
 #include <KLocalizedString>
 

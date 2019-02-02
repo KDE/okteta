@@ -1,7 +1,7 @@
 set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 
 include_directories(
-  ${CMAKE_CURRENT_BINARY_DIR}/.. # for oktetacore_export.h
+  ${CMAKE_CURRENT_BINARY_DIR}/.. # for oktetacore_export.hpp
   ${CMAKE_CURRENT_SOURCE_DIR}/.. # okteta core includes
 )
 

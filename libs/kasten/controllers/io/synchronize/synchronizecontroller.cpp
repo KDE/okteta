@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "synchronizecontroller.h"
+#include "synchronizecontroller.hpp"
 
 // Kasten core
-#include <kasten/documentsyncmanager.h>
-#include <kasten/abstractmodelfilesystemsynchronizer.h>
-#include <kasten/abstractdocument.h>
+#include <kasten/documentsyncmanager.hpp>
+#include <kasten/abstractmodelfilesystemsynchronizer.hpp>
+#include <kasten/abstractdocument.hpp>
 // KF5
 #include <KActionCollection>
 #include <KStandardAction>

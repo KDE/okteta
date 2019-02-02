@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "loadercontroller.h"
+#include "loadercontroller.hpp"
 
 // Kasten Gui
-#include <kasten/abstractdocumentstrategy.h>
+#include <kasten/abstractdocumentstrategy.hpp>
 // KF5
 #include <KRecentFilesAction>
 #include <KActionCollection>

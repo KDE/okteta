@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearrayjanusview.h"
+#include "bytearrayjanusview.hpp"
 
 // Okteta gui
-#include <okteta/bytearraycolumnview.h>
-#include <okteta/bytearrayrowview.h>
+#include <okteta/bytearraycolumnview.hpp>
+#include <okteta/bytearrayrowview.hpp>
 // Qt
 #include <QLayout>
 #include <QScrollBar>

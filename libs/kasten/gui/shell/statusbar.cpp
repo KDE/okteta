@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "statusbar.h"
+#include "statusbar.hpp"
 
 // lib
-#include "statusbarlayout.h"
+#include "statusbarlayout.hpp"
 // Qt
 #include <QEvent>
 

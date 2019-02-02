@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "checksumtoolfactory.h"
+#include "checksumtoolfactory.hpp"
 
 // lib
-#include "checksumtool.h"
+#include "checksumtool.hpp"
 
 namespace Kasten {
 

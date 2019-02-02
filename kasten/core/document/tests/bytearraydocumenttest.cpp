@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearraydocumenttest.h"
+#include "bytearraydocumenttest.hpp"
 
 // test object
-#include <bytearraydocument.h>
+#include <bytearraydocument.hpp>
 // Okteta core
-#include <okteta/piecetablebytearraymodel.h>
+#include <okteta/piecetablebytearraymodel.hpp>
 // Qt
 #include <QTest>
 #include <QSignalSpy>

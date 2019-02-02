@@ -20,12 +20,12 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "structuresmanager.h"
+#include "structuresmanager.hpp"
 
 // tool
 #include "structureviewpreferences.h"
-#include "structuredefinitionfile.h"
-#include "structlogging.h"
+#include "structuredefinitionfile.hpp"
+#include "structlogging.hpp"
 // Qt
 #include <QStandardPaths>
 #include <QDir>
