@@ -26,10 +26,10 @@
 // lib
 #include "abstractframerenderer.hpp"
 // Okteta gui
-#include <okteta/kadds.hpp>
-#include <okteta/line.hpp>
+#include <Okteta/KAdds>
+#include <Okteta/Line>
 // Okteta core
-#include <okteta/addressrange.hpp>
+#include <Okteta/AddressRange>
 // Qt
 #include <QList>
 

@@ -24,8 +24,8 @@
 
 // controller
 #include "replacetool.hpp"
-//  lib
-#include <kasten/okteta/bytearraycombobox.hpp>
+// Okteta Kasten gui
+#include <Kasten/Okteta/ByteArrayComboBox>
 // KF5
 #include <KLocalizedString>
 // Qt

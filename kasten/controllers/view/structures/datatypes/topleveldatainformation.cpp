@@ -31,7 +31,7 @@
 #include "../structlogging.hpp"
 #include "primitivefactory.hpp"
 
-#include <okteta/abstractbytearraymodel.hpp>
+#include <Okteta/AbstractByteArrayModel>
 
 #include <QScriptEngine>
 

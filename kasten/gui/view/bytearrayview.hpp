@@ -25,15 +25,15 @@
 
 // lib
 #include <kasten/okteta/oktetakastengui_export.hpp>
-// lib
-#include <kasten/okteta/bytearrayselection.hpp>
+// Okteta Kasten core
+#include <Kasten/Okteta/ByteArraySelection>
 // Kasten gui
-#include <kasten/abstractview.hpp>
-#include <kasten/zoomable.hpp> // TODO: able instead of interface? or else?
-#include <kasten/dataselectable.hpp>
-#include <kasten/selecteddatawriteable.hpp>
+#include <Kasten/AbstractView>
+#include <Kasten/Zoomable> // TODO: able instead of interface? or else?
+#include <Kasten/DataSelectable>
+#include <Kasten/SelectedDataWriteable>
 // Okteta core
-#include <okteta/addressrange.hpp>
+#include <Okteta/AddressRange>
 
 namespace Okteta {
 class ByteArrayJanusView;

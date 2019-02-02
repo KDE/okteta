@@ -26,7 +26,7 @@
 // lib
 #include <kasten/okteta/oktetakastencore_export.hpp>
 // Kasten core
-#include <kasten/abstractmodelsynchronizerfactory.hpp>
+#include <Kasten/AbstractModelSynchronizerFactory>
 
 namespace Kasten {
 

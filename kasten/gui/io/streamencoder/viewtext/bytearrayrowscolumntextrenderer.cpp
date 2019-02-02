@@ -23,10 +23,10 @@
 #include "bytearrayrowscolumntextrenderer.hpp"
 
 // Okteta core
-#include <okteta/valuecodec.hpp>
-#include <okteta/charcodec.hpp>
-#include <okteta/character.hpp>
-#include <okteta/abstractbytearraymodel.hpp>
+#include <Okteta/ValueCodec>
+#include <Okteta/CharCodec>
+#include <Okteta/Character>
+#include <Okteta/AbstractByteArrayModel>
 // Qt
 #include <QTextStream>
 

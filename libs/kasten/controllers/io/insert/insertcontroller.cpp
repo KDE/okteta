@@ -25,14 +25,14 @@
 // lib
 #include "insertdialog.hpp"
 // Kasten gui
-#include <kasten/modelcodecviewmanager.hpp>
-#include <kasten/selecteddatawriteable.hpp>
-#include <kasten/abstractmodeldatageneratorconfigeditor.hpp>
+#include <Kasten/ModelCodecViewManager>
+#include <Kasten/SelectedDataWriteable>
+#include <Kasten/AbstractModelDataGeneratorConfigEditor>
 // Kasten core
-#include <kasten/modeldatageneratethread.hpp>
-#include <kasten/modelcodecmanager.hpp>
-#include <kasten/abstractmodeldatagenerator.hpp>
-#include <kasten/abstractmodel.hpp>
+#include <Kasten/ModelDataGenerateThread>
+#include <Kasten/ModelCodecManager>
+#include <Kasten/AbstractModelDataGenerator>
+#include <Kasten/AbstractModel>
 // KF5
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>

@@ -24,10 +24,11 @@
 
 // lib
 #include <bytearrayview.hpp>
-#include <kasten/okteta/bytearraydocument.hpp>
-#include <kasten/okteta/bytearrayselection.hpp>
+// Okteta Kasten core
+#include <Kasten/Okteta/ByteArrayDocument>
+#include <Kasten/Okteta/ByteArraySelection>
 // Okteta core
-#include <okteta/abstractbytearraymodel.hpp>
+#include <Okteta/AbstractByteArrayModel>
 // Qt
 #include <QBuffer>
 

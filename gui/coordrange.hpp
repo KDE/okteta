@@ -28,7 +28,7 @@
 #include <okteta/linepositionrange.hpp>
 #include <okteta/linerange.hpp>
 // Okteta core
-#include <okteta/range.hpp>
+#include <Okteta/Range>
 
 namespace KDE {
 

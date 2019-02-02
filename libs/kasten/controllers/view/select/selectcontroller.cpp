@@ -23,8 +23,8 @@
 #include "selectcontroller.hpp"
 
 // Kasten gui
-#include <kasten/dataselectable.hpp>
-#include <kasten/abstractview.hpp>
+#include <Kasten/DataSelectable>
+#include <Kasten/AbstractView>
 // KF5
 #include <KXMLGUIClient>
 #include <KLocalizedString>

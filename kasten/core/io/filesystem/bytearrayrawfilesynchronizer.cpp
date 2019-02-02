@@ -30,7 +30,7 @@
 #include "bytearrayrawfilewritetojob.hpp"
 #include "bytearraydocument.hpp"
 // Okteta core
-#include <okteta/piecetablebytearraymodel.hpp>
+#include <Okteta/PieceTableByteArrayModel>
 // Qt
 #include <QUrl>
 

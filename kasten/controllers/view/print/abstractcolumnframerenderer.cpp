@@ -23,8 +23,8 @@
 #include "abstractcolumnframerenderer.hpp"
 
 // Okteta gui
-#include <okteta/linerange.hpp>
-#include <okteta/abstractcolumnrenderer.hpp>
+#include <Okteta/LineRange>
+#include <Okteta/AbstractColumnRenderer>
 // Qt
 #include <QPainter>
 #include <QListIterator>

@@ -26,7 +26,7 @@
 // tool
 #include "containedstring.hpp"
 // Okteta core
-#include <okteta/addressrange.hpp>
+#include <Okteta/AddressRange>
 // Qt
 #include <QObject>
 #include <QList>

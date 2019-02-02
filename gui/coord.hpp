@@ -27,8 +27,8 @@
 #include <okteta/lineposition.hpp>
 #include <okteta/line.hpp>
 // Okteta core
-#include <okteta/address.hpp>
-#include <okteta/size.hpp>
+#include <Okteta/Address>
+#include <Okteta/Size>
 
 namespace Okteta {
 

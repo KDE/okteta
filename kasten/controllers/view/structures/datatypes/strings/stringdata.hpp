@@ -23,7 +23,7 @@
 #ifndef STRINGDATA_HPP
 #define STRINGDATA_HPP
 
-#include <okteta/address.hpp>
+#include <Okteta/Address>
 #include "../datainformationbase.hpp"
 
 class StringDataInformation;

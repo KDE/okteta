@@ -24,7 +24,7 @@
 #define GOTOOFFSETTOOLVIEW_HPP
 
 // Kasten gui
-#include <kasten/abstracttoolinlineview.hpp>
+#include <Kasten/AbstractToolInlineView>
 
 namespace Kasten {
 

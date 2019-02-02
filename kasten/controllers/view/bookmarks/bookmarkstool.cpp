@@ -22,20 +22,21 @@
 
 #include "bookmarkstool.hpp"
 
+// Okteta Kasten gui
+#include <Kasten/Okteta/ByteArrayView>
+// Okteta Kasten core
+#include <Kasten/Okteta/ByteArrayDocument>
 // Kasten core
-#include <kasten/okteta/bytearrayview.hpp>
-#include <kasten/okteta/bytearraydocument.hpp>
-// Kasten core
-#include <kasten/abstractmodel.hpp>
+#include <Kasten/AbstractModel>
 // Okteta gui
-#include <okteta/offsetformat.hpp>
+#include <Okteta/OffsetFormat>
 // Okteta core
-#include <okteta/wordbytearrayservice.hpp>
-#include <okteta/charcodec.hpp>
-#include <okteta/bookmarkable.hpp>
-#include <okteta/bookmarksconstiterator.hpp>
-#include <okteta/bookmark.hpp>
-#include <okteta/abstractbytearraymodel.hpp>
+#include <Okteta/WordByteArrayService>
+#include <Okteta/CharCodec>
+#include <Okteta/Bookmarkable>
+#include <Okteta/BookmarksConstIterator>
+#include <Okteta/Bookmark>
+#include <Okteta/AbstractByteArrayModel>
 // KF5
 #include <KLocalizedString>
 // Qt

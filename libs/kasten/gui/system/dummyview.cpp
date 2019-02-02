@@ -22,8 +22,8 @@
 
 #include "dummyview.hpp"
 
-// lib
-#include <kasten/abstractdocument.hpp>
+// Kasten core
+#include <Kasten/AbstractDocument>
 // Qt
 #include <QLabel>
 

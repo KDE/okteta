@@ -34,11 +34,11 @@
 #include "bordercolumnrenderer.hpp"
 #include "oktetagui.hpp"
 // Okteta core
-#include <okteta/valuecodec.hpp>
-#include <okteta/bookmarkable.hpp>
-#include <okteta/versionable.hpp>
-#include <okteta/wordbytearrayservice.hpp>
-#include <okteta/bookmark.hpp>
+#include <Okteta/ValueCodec>
+#include <Okteta/Bookmarkable>
+#include <Okteta/Versionable>
+#include <Okteta/WordByteArrayService>
+#include <Okteta/Bookmark>
 // Qt
 #include <QDragEnterEvent>
 #include <QDragMoveEvent>

@@ -24,14 +24,15 @@
 
 // controller
 #include "bytetablemodel.hpp"
-// lib
-#include <kasten/okteta/bytearrayview.hpp>
-#include <kasten/okteta/bytearraydocument.hpp>
+// Okteta Kasten gui
+#include <Kasten/Okteta/ByteArrayView>
+// Okteta Kasten core
+#include <Kasten/Okteta/ByteArrayDocument>
 // Okteta core
-#include <okteta/character.hpp>
-#include <okteta/charcodec.hpp>
-#include <okteta/abstractbytearraymodel.hpp>
-#include <okteta/changesdescribable.hpp>
+#include <Okteta/Character>
+#include <Okteta/CharCodec>
+#include <Okteta/AbstractByteArrayModel>
+#include <Okteta/ChangesDescribable>
 // KF5
 #include <KLocalizedString>
 

@@ -26,7 +26,7 @@
 // lib
 #include "../types/binary8.hpp"
 // OKteta core
-#include <okteta/oktetacore.hpp>
+#include <Okteta/OktetaCore>
 // Qt
 #include <QSpinBox>
 

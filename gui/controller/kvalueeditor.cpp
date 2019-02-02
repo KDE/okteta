@@ -26,9 +26,9 @@
 #include <bytearraytablecursor.hpp>
 #include <abstractbytearrayview.hpp>
 // Okteta core
-#include <okteta/abstractbytearraymodel.hpp>
-#include <okteta/changesdescribable.hpp>
-#include <okteta/valuecodec.hpp>
+#include <Okteta/AbstractByteArrayModel>
+#include <Okteta/ChangesDescribable>
+#include <Okteta/ValueCodec>
 // KF5
 #include <KLocalizedString>
 // Qt

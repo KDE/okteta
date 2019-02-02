@@ -25,7 +25,7 @@
 // lib
 #include "bookmarkstool.hpp"
 // Okteta core
-#include <okteta/bookmark.hpp>
+#include <Okteta/Bookmark>
 // KF5
 #include <KLocalizedString>
 

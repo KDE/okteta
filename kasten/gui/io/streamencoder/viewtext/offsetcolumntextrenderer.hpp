@@ -26,7 +26,7 @@
 // lib
 #include "abstractcolumntextrenderer.hpp"
 // Okteta gui
-#include <okteta/offsetformat.hpp>
+#include <Okteta/OffsetFormat>
 
 namespace Kasten {
 

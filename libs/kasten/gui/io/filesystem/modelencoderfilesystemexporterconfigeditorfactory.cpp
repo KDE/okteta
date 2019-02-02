@@ -26,7 +26,7 @@
 #include "modelencoderfilesystemexporterconfigeditor.hpp"
 #include <abstractmodelstreamencoderconfigeditorfactory.hpp>
 // Kasten core
-#include <kasten/modelencoderfilesystemexporter.hpp>
+#include <Kasten/ModelEncoderFileSystemExporter>
 
 namespace Kasten {
 

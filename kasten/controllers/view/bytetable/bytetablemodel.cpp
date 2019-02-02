@@ -23,9 +23,9 @@
 #include "bytetablemodel.hpp"
 
 // Okteta core
-#include <okteta/character.hpp>
-#include <okteta/charcodec.hpp>
-#include <okteta/valuecodec.hpp>
+#include <Okteta/Character>
+#include <Okteta/CharCodec>
+#include <Okteta/ValueCodec>
 // KF5
 #include <KLocalizedString>
 #include <KColorScheme>

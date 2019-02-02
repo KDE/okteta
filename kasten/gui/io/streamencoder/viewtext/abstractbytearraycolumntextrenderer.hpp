@@ -26,7 +26,7 @@
 // lib
 #include "abstractcolumntextrenderer.hpp"
 // Okteta gui
-#include <okteta/coordrange.hpp>
+#include <Okteta/CoordRange>
 
 namespace Okteta {
 class AbstractByteArrayModel;

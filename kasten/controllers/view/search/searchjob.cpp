@@ -23,8 +23,8 @@
 #include "searchjob.hpp"
 
 // Okteta core
-#include <okteta/abstractbytearraymodel.hpp>
-#include <okteta/charcodec.hpp>
+#include <Okteta/AbstractByteArrayModel>
+#include <Okteta/CharCodec>
 // Qt
 #include <QCoreApplication>
 

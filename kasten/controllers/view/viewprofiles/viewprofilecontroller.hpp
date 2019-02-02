@@ -25,11 +25,12 @@
 
 // lib
 #include <kasten/okteta/oktetakastencontrollers_export.hpp>
-#include <kasten/okteta/bytearrayviewprofile.hpp>
+// Okteta Kasten gui
+#include <Kasten/Okteta/ByteArrayViewProfile>
 // Kasten gui
-#include <kasten/abstractxmlguicontroller.hpp>
+#include <Kasten/AbstractXmlGuiController>
 // Kasten core
-#include <kasten/kastencore.hpp>
+#include <Kasten/KastenCore>
 
 class KXMLGUIClient;
 class KActionMenu;

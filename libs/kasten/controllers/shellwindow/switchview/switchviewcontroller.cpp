@@ -22,9 +22,9 @@
 
 #include "switchviewcontroller.hpp"
 
-// lib
-#include <kasten/abstractgroupedviews.hpp>
-#include <kasten/abstractview.hpp>
+// Kasten gui
+#include <Kasten/AbstractGroupedViews>
+#include <Kasten/AbstractView>
 // KF5
 #include <KXMLGUIClient>
 #include <KActionCollection>

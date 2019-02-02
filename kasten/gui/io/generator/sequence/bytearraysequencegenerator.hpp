@@ -24,7 +24,7 @@
 #define BYTEARRAYSEQUENCEGENERATOR_HPP
 
 // Kasten core
-#include <kasten/abstractmodeldatagenerator.hpp>
+#include <Kasten/AbstractModelDataGenerator>
 // Qt
 #include <QObject>
 #include <QString>

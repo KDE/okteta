@@ -26,7 +26,7 @@
 // lib
 #include <kasten/okteta/oktetakastencontrollers_export.hpp>
 // Kasten core
-#include <kasten/abstracttool.hpp>
+#include <Kasten/AbstractTool>
 // Qt
 #include <QList>
 

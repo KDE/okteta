@@ -22,14 +22,14 @@
 
 #include "viewstatuscontroller.hpp"
 
-// lib
-#include <kasten/okteta/bytearrayview.hpp>
+// Okteta Kasten gui
+#include <Kasten/Okteta/ByteArrayView>
 // Kasten ui
-#include <kasten/togglebutton.hpp>
-#include <kasten/statusbar.hpp>
+#include <Kasten/ToggleButton>
+#include <Kasten/StatusBar>
 // Okteta core
-#include <okteta/charcodec.hpp>
-#include <okteta/oktetacore.hpp>
+#include <Okteta/CharCodec>
+#include <Okteta/OktetaCore>
 // KF5
 #include <KSqueezedTextLabel>
 #include <KComboBox>

@@ -26,9 +26,9 @@
 #include "../topleveldatainformation.hpp"
 #include "../../structlogging.hpp"
 
-#include <character.hpp>
+#include <Okteta/Character>
 #include <codecs/ebcdic1047charcodec.hpp>
-#include <okteta/abstractbytearraymodel.hpp>
+#include <Okteta/AbstractByteArrayModel>
 
 #include <KLocalizedString>
 #include <QVarLengthArray>

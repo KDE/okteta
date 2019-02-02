@@ -26,8 +26,8 @@
 #include <bytearraytableranges.hpp>
 #include <bytearraytablecursor.hpp>
 #include <abstractbytearrayview.hpp>
-// lib
-#include <okteta/wordbytearrayservice.hpp>
+// Okteta core
+#include <Okteta/WordByteArrayService>
 // Qt
 #include <QKeyEvent>
 

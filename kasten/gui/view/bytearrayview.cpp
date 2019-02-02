@@ -25,11 +25,12 @@
 // lib
 #include "bytearrayjanusview.hpp"
 #include <bytearrayviewprofilesynchronizer.hpp>
-#include <kasten/okteta/bytearraydocument.hpp>
+// Okteta Kasten core
+#include <Kasten/Okteta/ByteArrayDocument>
 // Okteta gui
-#include <okteta/abstractbytearrayview.hpp>
+#include <Okteta/AbstractByteArrayView>
 // Okteta core
-#include <okteta/abstractbytearraymodel.hpp>
+#include <Okteta/AbstractByteArrayModel>
 // Qt
 #include <QFontDatabase>
 

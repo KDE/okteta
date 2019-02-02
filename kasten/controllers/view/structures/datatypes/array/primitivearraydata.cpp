@@ -28,7 +28,7 @@
 #include "../../script/safereference.hpp"
 #include "../../structlogging.hpp"
 
-#include <okteta/abstractbytearraymodel.hpp>
+#include <Okteta/AbstractByteArrayModel>
 
 #include <limits>
 #include <KLocalizedString>

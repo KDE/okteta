@@ -26,7 +26,7 @@
 // lib
 #include <kasten/okteta/oktetakastengui_export.hpp>
 // Okteta core
-#include <okteta/address.hpp>
+#include <Okteta/Address>
 // Qt
 #include <QWidget>
 

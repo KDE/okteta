@@ -24,8 +24,8 @@
 #define ADDRESSVALIDATOR_HPP
 
 // Okteta core
-#include <okteta/oktetacore.hpp>
-#include <okteta/address.hpp>
+#include <Okteta/OktetaCore>
+#include <Okteta/Address>
 // Qt
 #include <QValidator>
 

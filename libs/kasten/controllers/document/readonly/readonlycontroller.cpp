@@ -23,7 +23,7 @@
 #include "readonlycontroller.hpp"
 
 // Kasten core
-#include <kasten/abstractdocument.hpp>
+#include <Kasten/AbstractDocument>
 // KF5
 #include <KXMLGUIClient>
 #include <KLocalizedString>

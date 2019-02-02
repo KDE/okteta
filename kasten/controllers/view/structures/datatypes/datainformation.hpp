@@ -29,8 +29,8 @@
 #include <QMetaType>
 
 // Okteta
-#include <size.hpp>
-#include <okteta/address.hpp>
+#include <Okteta/Size>
+#include <Okteta/Address>
 
 #include "datainformationbase.hpp"
 #include "additionaldata.hpp"

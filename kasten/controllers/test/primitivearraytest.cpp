@@ -22,7 +22,7 @@
 #include <QScriptEngine>
 #include <limits>
 
-#include <okteta/bytearraymodel.hpp>
+#include <Okteta/ByteArrayModel>
 
 #include "view/structures/datatypes/array/arraydatainformation.hpp"
 #include "view/structures/datatypes/array/primitivearraydata.hpp"

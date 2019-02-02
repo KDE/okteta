@@ -24,7 +24,7 @@
 #define BYTEARRAYRAWFILELOADJOB_HPP
 
 // Kasten core
-#include <kasten/abstractfilesystemloadjob.hpp>
+#include <Kasten/AbstractFileSystemLoadJob>
 
 namespace Kasten {
 

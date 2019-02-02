@@ -24,7 +24,7 @@
 #define SEARCHJOB_HPP
 
 // Okteta core
-#include <okteta/address.hpp>
+#include <Okteta/Address>
 // Qt
 #include <QObject>
 #include <QByteArray>

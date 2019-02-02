@@ -20,8 +20,8 @@
 
 #include <QTest>
 
-#include <okteta/bytearraymodel.hpp>
-#include <okteta/byte.hpp>
+#include <Okteta/ByteArrayModel>
+#include <Okteta/Byte>
 
 #include "testutils.hpp"
 

@@ -26,7 +26,7 @@
 // lib
 #include <kasten/okteta/oktetakastengui_export.hpp>
 // Kasten ui
-#include <kasten/abstractselectionview.hpp>
+#include <Kasten/AbstractSelectionView>
 
 class QTextEdit;
 

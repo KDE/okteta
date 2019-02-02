@@ -29,11 +29,11 @@
 #include <modelcodecviewmanager.hpp>
 #include <viewmanager.hpp>
 // Kasten core
-#include <kasten/modeldatageneratethread.hpp>
-#include <kasten/documentsyncmanager.hpp>
-#include <kasten/documentcreatemanager.hpp>
-#include <kasten/abstractmodeldatagenerator.hpp>
-#include <kasten/abstractmodel.hpp>
+#include <Kasten/ModelDataGenerateThread>
+#include <Kasten/DocumentSyncManager>
+#include <Kasten/DocumentCreateManager>
+#include <Kasten/AbstractModelDataGenerator>
+#include <Kasten/AbstractModel>
 // KF5
 #include <KProcess>
 // Qt

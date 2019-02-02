@@ -29,8 +29,8 @@
 #include <abstracttoolview.hpp>
 #include <abstractview.hpp>
 // Kasten core
-#include <kasten/abstracttool.hpp>
-#include <kasten/abstractmodelsynchronizer.hpp>
+#include <Kasten/AbstractTool>
+#include <Kasten/AbstractModelSynchronizer>
 
 namespace Kasten {
 

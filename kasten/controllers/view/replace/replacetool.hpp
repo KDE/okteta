@@ -26,9 +26,9 @@
 // libfinddialog
 #include <kfinddirection.hpp>
 // Kasten core
-#include <kasten/abstracttool.hpp>
+#include <Kasten/AbstractTool>
 // Okteta core
-#include <okteta/address.hpp>
+#include <Okteta/Address>
 
 namespace Okteta {
 class AbstractByteArrayModel;

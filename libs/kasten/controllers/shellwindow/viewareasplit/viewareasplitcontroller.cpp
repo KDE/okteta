@@ -22,11 +22,11 @@
 
 #include "viewareasplitcontroller.hpp"
 
-// lib
-#include <kasten/abstractgroupedviews.hpp>
-#include <kasten/viewareasplitable.hpp>
-#include <kasten/abstractviewarea.hpp>
-#include <kasten/viewmanager.hpp>
+// Kasten gui
+#include <Kasten/AbstractGroupedViews>
+#include <Kasten/ViewAreaSplitable>
+#include <Kasten/AbstractViewArea>
+#include <Kasten/ViewManager>
 // KF5
 #include <KXMLGUIClient>
 #include <KActionCollection>

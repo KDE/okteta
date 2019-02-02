@@ -26,7 +26,7 @@
 #include <kasten/okteta/oktetakastencontrollers_export.hpp>
 
 // Kasten gui
-#include <kasten/abstracttoolview.hpp>
+#include <Kasten/AbstractToolView>
 
 namespace Kasten {
 class StructView;

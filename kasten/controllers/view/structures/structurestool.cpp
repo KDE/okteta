@@ -25,12 +25,12 @@
 #include "structuredefinitionfile.hpp"
 #include "structuresmanager.hpp"
 #include "structlogging.hpp"
-// lib
-#include <kasten/okteta/bytearraydocument.hpp>
+// Okteta Kasten core
+#include <Kasten/Okteta/ByteArrayDocument>
 // Okteta core
-#include <okteta/character.hpp>
-#include <okteta/charcodec.hpp>
-#include <okteta/abstractbytearraymodel.hpp>
+#include <Okteta/Character>
+#include <Okteta/CharCodec>
+#include <Okteta/AbstractByteArrayModel>
 // KF5
 #include <KLocalizedString>
 // Qt

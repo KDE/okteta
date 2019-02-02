@@ -25,16 +25,16 @@
 // lib
 #include "printcolumnstylist.hpp"
 // Okteta gui
-#include <okteta/offsetcolumnrenderer.hpp>
-#include <okteta/bordercolumnrenderer.hpp>
-#include <okteta/valuebytearraycolumnrenderer.hpp>
-#include <okteta/charbytearraycolumnrenderer.hpp>
-#include <okteta/bytearraytablelayout.hpp>
-#include <okteta/bytearraytableranges.hpp>
+#include <Okteta/OffsetColumnRenderer>
+#include <Okteta/BorderColumnRenderer>
+#include <Okteta/ValueByteArrayColumnRenderer>
+#include <Okteta/CharByteArrayColumnRenderer>
+#include <Okteta/ByteArrayTableLayout>
+#include <Okteta/ByteArrayTableRanges>
 // Okteta core
-#include <okteta/abstractbytearraymodel.hpp>
-#include <okteta/valuecodec.hpp>
-#include <okteta/charcodec.hpp>
+#include <Okteta/AbstractByteArrayModel>
+#include <Okteta/ValueCodec>
+#include <Okteta/CharCodec>
 // Qt
 #include <QHash>
 #include <QDateTime>

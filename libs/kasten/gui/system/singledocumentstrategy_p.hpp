@@ -27,8 +27,8 @@
 #include "abstractdocumentstrategy_p.hpp"
 #include "singledocumentstrategy.hpp"
 // Kasten core
-#include <kasten/documentmanager.hpp>
-#include <kasten/documentsyncmanager.hpp>
+#include <Kasten/DocumentManager>
+#include <Kasten/DocumentSyncManager>
 // Qt Core
 #include <QStringList>
 

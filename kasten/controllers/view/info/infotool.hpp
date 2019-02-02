@@ -26,9 +26,9 @@
 // lib
 #include <kasten/okteta/oktetakastencontrollers_export.hpp>
 // Kasten core
-#include <kasten/abstracttool.hpp>
+#include <Kasten/AbstractTool>
 // Okteta core
-#include <okteta/addressrange.hpp>
+#include <Okteta/AddressRange>
 
 namespace Okteta {
 class AbstractByteArrayModel;

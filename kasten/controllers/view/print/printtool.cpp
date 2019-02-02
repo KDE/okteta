@@ -27,13 +27,14 @@
 #include "framestopaperprinter.hpp"
 #include "headerfooterframerenderer.hpp"
 #include "bytearrayframerenderer.hpp"
-// lib
-#include <kasten/okteta/bytearrayview.hpp>
-#include <kasten/okteta/bytearraydocument.hpp>
+// Okteta Kasten gui
+#include <Kasten/Okteta/ByteArrayView>
+// Okteta Kasten core
+#include <Kasten/Okteta/ByteArrayDocument>
 // Okteta core
-#include <okteta/abstractbytearraymodel.hpp>
+#include <Okteta/AbstractByteArrayModel>
 // Kasten core
-#include <kasten/abstractmodelsynchronizer.hpp>
+#include <Kasten/AbstractModelSynchronizer>
 // KF5
 #include <KLocalizedString>
 #include <KMessageBox>

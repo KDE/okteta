@@ -28,7 +28,7 @@
 #include <abstracttoolinlineview.hpp>
 #include <abstractview.hpp>
 // Kasten core
-#include <kasten/abstractdocument.hpp>
+#include <Kasten/AbstractDocument>
 
 // Qt
 #include <QMimeData>

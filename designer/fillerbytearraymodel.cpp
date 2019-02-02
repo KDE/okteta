@@ -23,7 +23,7 @@
 #include "fillerbytearraymodel.hpp"
 
 // Okteta core
-#include <okteta/piecetablebytearraymodel.hpp>
+#include <Okteta/PieceTableByteArrayModel>
 
 static const char fillerData[] =
     "This is some filler data for the Okteta byte array widgets:"

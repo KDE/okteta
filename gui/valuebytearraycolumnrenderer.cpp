@@ -28,8 +28,8 @@
 // lib
 #include <abstractcolumnstylist.hpp>
 // Okteta core
-#include <okteta/valuecodec.hpp>
-#include <okteta/charcodec.hpp>
+#include <Okteta/ValueCodec>
+#include <Okteta/CharCodec>
 // KF5
 #include <KColorScheme>
 // Qt

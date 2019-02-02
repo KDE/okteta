@@ -23,8 +23,8 @@
 #include "copyasdialog.hpp"
 
 // Kasten gui
-#include <kasten/abstractmodelstreamencoderconfigeditor.hpp>
-#include <kasten/abstractselectionview.hpp>
+#include <Kasten/AbstractModelStreamEncoderConfigEditor>
+#include <Kasten/AbstractSelectionView>
 // KF5
 #include <KLocalizedString>
 // Qt

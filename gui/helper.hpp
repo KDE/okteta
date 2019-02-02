@@ -23,8 +23,8 @@
 #ifndef OKTETA_HELPER
 #define OKTETA_HELPER
 
-// lib
-#include <okteta/character.hpp>
+// Okteta core
+#include <Okteta/Character>
 // KF5
 #include <KColorScheme>
 // Qt

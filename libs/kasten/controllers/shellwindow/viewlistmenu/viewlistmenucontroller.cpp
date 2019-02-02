@@ -22,11 +22,11 @@
 
 #include "viewlistmenucontroller.hpp"
 
-// lib
-#include <kasten/abstractgroupedviews.hpp>
-#include <kasten/viewmanager.hpp>
+// Kasten gui
+#include <Kasten/AbstractGroupedViews>
+#include <Kasten/ViewManager>
 // Kasten core
-#include <kasten/abstractdocument.hpp>
+#include <Kasten/AbstractDocument>
 // KF5
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>

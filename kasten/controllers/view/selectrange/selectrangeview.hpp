@@ -24,7 +24,7 @@
 #define SELECTRANGEVIEW_HPP
 
 // Kasten gui
-#include <kasten/abstracttoolwidget.hpp>
+#include <Kasten/AbstractToolWidget>
 
 namespace Okteta {
 class AddressComboBox;

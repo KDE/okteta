@@ -23,10 +23,10 @@
 #include "filesystembrowsertool.hpp"
 
 // Kasten core
-#include <kasten/documentsyncmanager.hpp>
-#include <kasten/versionable.hpp>
-#include <kasten/abstractdocument.hpp>
-#include <kasten/abstractmodelsynchronizer.hpp>
+#include <Kasten/DocumentSyncManager>
+#include <Kasten/Versionable>
+#include <Kasten/AbstractDocument>
+#include <Kasten/AbstractModelSynchronizer>
 
 // KF5
 #include <KLocalizedString>

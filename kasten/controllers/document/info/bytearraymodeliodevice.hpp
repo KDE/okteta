@@ -23,8 +23,8 @@
 #ifndef BYTEARRAYMODELIODEVICE_HPP
 #define BYTEARRAYMODELIODEVICE_HPP
 
-// Okteta
-#include <okteta/address.hpp>
+// Okteta core
+#include <Okteta/Address>
 // Qt
 #include <QIODevice>
 

@@ -25,7 +25,7 @@
 // lib
 #include <oktetakastengui.hpp>
 // Okteta core
-#include <okteta/valuecodec.hpp>
+#include <Okteta/ValueCodec>
 // KF5
 #include <KLocalizedString>
 // Qt

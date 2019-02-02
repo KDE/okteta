@@ -27,10 +27,10 @@
 #include <kasten/okteta/oktetakastencore_export.hpp>
 // #include "kbytearrayinterface.hpp"
 // Kasten core
-#include <kasten/person.hpp>
-#include <kasten/userlistable.hpp>
-#include <kasten/versionable.hpp>
-#include <kasten/abstractdocument.hpp>
+#include <Kasten/Person>
+#include <Kasten/UserListable>
+#include <Kasten/Versionable>
+#include <Kasten/AbstractDocument>
 // Qt
 #include <QString>
 

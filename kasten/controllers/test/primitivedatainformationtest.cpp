@@ -25,7 +25,7 @@
 #include <QLocale>
 
 #include <limits>
-#include <okteta/bytearraymodel.hpp>
+#include <Okteta/ByteArrayModel>
 
 #include "view/structures/datatypes/primitive/primitivetemplateinfo.hpp"
 #include "view/structures/datatypes/primitive/primitivedatainformation.hpp"

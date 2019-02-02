@@ -26,25 +26,25 @@
 #include "about.hpp"
 #include "mainwindow.hpp"
 // Okteta Kasten
-#include <kasten/okteta/bytearraydocumentfactory.hpp>
-#include <kasten/okteta/bytearrayviewfactory.hpp>
-#include <kasten/okteta/bytearrayrawfilesynchronizerfactory.hpp>
-#include <kasten/okteta/bytearraystreamencoderconfigeditorfactoryfactory.hpp>
-#include <kasten/okteta/bytearraydatageneratorconfigeditorfactoryfactory.hpp>
-#include <kasten/okteta/bytearraystreamencoderfactory.hpp>
-#include <kasten/okteta/bytearraydatageneratorfactory.hpp>
+#include <Kasten/Okteta/ByteArrayDocumentFactory>
+#include <Kasten/Okteta/ByteArrayViewFactory>
+#include <Kasten/Okteta/ByteArrayRawFileSynchronizerFactory>
+#include <Kasten/Okteta/ByteArrayStreamEncoderConfigEditorFactoryFactory>
+#include <Kasten/Okteta/ByteArrayDataGeneratorConfigEditorFactoryFactory>
+#include <Kasten/Okteta/ByteArrayStreamEncoderFactory>
+#include <Kasten/Okteta/ByteArrayDataGeneratorFactory>
 // tmp
-#include <kasten/okteta/bytearrayviewprofilemanager.hpp>
+#include <Kasten/Okteta/ByteArrayViewProfileManager>
 // Kasten gui
-#include <kasten/multidocumentstrategy.hpp>
-#include <kasten/dialoghandler.hpp>
-#include <kasten/viewmanager.hpp>
-#include <kasten/modelcodecviewmanager.hpp>
+#include <Kasten/MultiDocumentStrategy>
+#include <Kasten/DialogHandler>
+#include <Kasten/ViewManager>
+#include <Kasten/ModelCodecViewManager>
 // Kasten core
-#include <kasten/documentmanager.hpp>
-#include <kasten/documentcreatemanager.hpp>
-#include <kasten/documentsyncmanager.hpp>
-#include <kasten/modelcodecmanager.hpp>
+#include <Kasten/DocumentManager>
+#include <Kasten/DocumentCreateManager>
+#include <Kasten/DocumentSyncManager>
+#include <Kasten/ModelCodecManager>
 // KF5
 #include <KDBusService>
 #include <KLocalizedString>

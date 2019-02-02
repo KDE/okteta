@@ -23,7 +23,7 @@
 #ifndef ABSTRACTARRAYDATA_HPP
 #define ABSTRACTARRAYDATA_HPP
 
-#include <okteta/address.hpp>
+#include <Okteta/Address>
 #include "../datainformationbase.hpp"
 #include "../primitivedatatype.hpp"
 

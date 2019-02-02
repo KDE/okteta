@@ -26,12 +26,13 @@
 #include "replaceuserqueryable.hpp"
 // search controller
 #include "../search/searchjob.hpp"
-// lib
-#include <kasten/okteta/bytearrayview.hpp>
-#include <kasten/okteta/bytearraydocument.hpp>
+// Okteta Kasten gui
+#include <Kasten/Okteta/ByteArrayView>
+// Okteta Kasten core
+#include <Kasten/Okteta/ByteArrayDocument>
 // Okteta core
-#include <okteta/charcodec.hpp>
-#include <okteta/abstractbytearraymodel.hpp>
+#include <Okteta/CharCodec>
+#include <Okteta/AbstractByteArrayModel>
 // KF5
 #include <KLocalizedString>
 // Qt

@@ -23,11 +23,11 @@
 #include "creatorcontroller.hpp"
 
 // Kasten gui
-#include <kasten/abstractdocumentstrategy.hpp>
-#include <kasten/selecteddatawriteable.hpp>
+#include <Kasten/AbstractDocumentStrategy>
+#include <Kasten/SelectedDataWriteable>
 // Kasten core
-#include <kasten/modelcodecmanager.hpp>
-#include <kasten/abstractmodeldatagenerator.hpp>
+#include <Kasten/ModelCodecManager>
+#include <Kasten/AbstractModelDataGenerator>
 // KF5
 #include <KLocalizedString>
 #include <KActionCollection>

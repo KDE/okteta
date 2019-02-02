@@ -23,9 +23,9 @@
 #include "extractstringsjob.hpp"
 
 // Okteta core
-#include <okteta/abstractbytearraymodel.hpp>
-#include <okteta/charcodec.hpp>
-#include <okteta/character.hpp>
+#include <Okteta/AbstractByteArrayModel>
+#include <Okteta/CharCodec>
+#include <Okteta/Character>
 // Qt
 #include <QCoreApplication>
 

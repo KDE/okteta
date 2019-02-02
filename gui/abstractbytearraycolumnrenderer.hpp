@@ -28,9 +28,9 @@
 #include <okteta/linepositionrange.hpp>
 #include <okteta/linerange.hpp>
 // Okteta core
-#include <okteta/oktetacore.hpp>
-#include <okteta/abstractbytearraymodel.hpp>
-#include <okteta/character.hpp>
+#include <Okteta/OktetaCore>
+#include <Okteta/AbstractByteArrayModel>
+#include <Okteta/Character>
 // Qt
 #include <QFontMetrics>
 

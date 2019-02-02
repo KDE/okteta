@@ -22,10 +22,10 @@
 
 #include "kabstractfinddialog.hpp"
 
-// lib
-#include <kasten/okteta/bytearraycombobox.hpp>
+// Okteta Kasten gui
+#include <Kasten/Okteta/ByteArrayComboBox>
 // Okteta core
-#include <okteta/oktetacore.hpp>
+#include <Okteta/OktetaCore>
 // KF5
 #include <KLocalizedString>
 // Qt

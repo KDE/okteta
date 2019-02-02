@@ -24,9 +24,9 @@
 #define SELECTRANGETOOL_HPP
 
 // Okteta core
-#include <okteta/address.hpp>
+#include <Okteta/Address>
 // Kasten core
-#include <kasten/abstracttool.hpp>
+#include <Kasten/AbstractTool>
 
 namespace Okteta {
 class AbstractByteArrayModel;

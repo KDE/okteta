@@ -24,14 +24,15 @@
 
 // lib
 #include "bytearraymodeliodevice.hpp"
-#include <kasten/okteta/bytearraydocument.hpp>
+// Okteta Kasten core
+#include <Kasten/Okteta/ByteArrayDocument>
 // Kasten core
-#include <kasten/documentsyncmanager.hpp>
-#include <kasten/abstractmodelsynchronizer.hpp>
+#include <Kasten/DocumentSyncManager>
+#include <Kasten/AbstractModelSynchronizer>
 
 // Okteta core
-#include <okteta/abstractbytearraymodel.hpp>
-#include <okteta/arraychangemetricslist.hpp>
+#include <Okteta/AbstractByteArrayModel>
+#include <Okteta/ArrayChangeMetricsList>
 // KF5
 #include <KLocalizedString>
 // Qt

@@ -27,7 +27,7 @@
 #include <QSharedPointer>
 #include <QQueue>
 
-#include <okteta/arraychangemetricslist.hpp>
+#include <Okteta/ArrayChangeMetricsList>
 #include "datainformationbase.hpp"
 #include "../script/scripthandler.hpp"
 

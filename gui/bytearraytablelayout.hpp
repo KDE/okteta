@@ -27,7 +27,7 @@
 #include <okteta/coordrange.hpp>
 #include <okteta/oktetagui_export.hpp>
 // Okteta core
-#include <okteta/addressrange.hpp>
+#include <Okteta/AddressRange>
 
 // TODO: rename things like startOffset and firstLineOffset, not really descriptive
 namespace Okteta {

@@ -26,7 +26,7 @@
 // lib
 #include <kasten/okteta/oktetakastencontrollers_export.hpp>
 // Kasten gui
-#include <kasten/abstracttoolviewfactory.hpp>
+#include <Kasten/AbstractToolViewFactory>
 
 namespace Kasten {
 

@@ -23,8 +23,8 @@
 #include "versiontablemodel.hpp"
 
 // Kasten core
-#include <kasten/versionable.hpp>
-#include <kasten/abstractmodel.hpp>
+#include <Kasten/Versionable>
+#include <Kasten/AbstractModel>
 // KF5
 #include <KLocalizedString>
 

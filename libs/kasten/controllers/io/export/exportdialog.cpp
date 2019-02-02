@@ -23,8 +23,8 @@
 #include "exportdialog.hpp"
 
 // Kasten gui
-#include <kasten/abstractmodelexporterconfigeditor.hpp>
-#include <kasten/abstractselectionview.hpp>
+#include <Kasten/AbstractModelExporterConfigEditor>
+#include <Kasten/AbstractSelectionView>
 // KF5
 #include <KLocalizedString>
 // Qt

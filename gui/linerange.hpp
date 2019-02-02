@@ -26,7 +26,7 @@
 // lib
 #include <okteta/line.hpp>
 // Okteta core
-#include <okteta/numberrange.hpp>
+#include <Okteta/NumberRange>
 
 namespace Okteta {
 

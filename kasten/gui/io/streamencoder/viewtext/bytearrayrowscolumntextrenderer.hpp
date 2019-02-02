@@ -26,9 +26,9 @@
 // lib
 #include "abstractcolumntextrenderer.hpp"
 // Okteta gui
-#include <okteta/coordrange.hpp>
+#include <Okteta/CoordRange>
 // Okteta core
-#include <okteta/oktetacore.hpp>
+#include <Okteta/OktetaCore>
 // Qt
 #include <QChar>
 

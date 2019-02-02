@@ -23,9 +23,9 @@
 #include "versioncontroller.hpp"
 
 // Kasten core
-#include <kasten/documentversiondata.hpp>
-#include <kasten/versionable.hpp>
-#include <kasten/abstractmodel.hpp>
+#include <Kasten/DocumentVersionData>
+#include <Kasten/Versionable>
+#include <Kasten/AbstractModel>
 // KF5
 #include <KXMLGUIClient>
 #include <KLocalizedString>

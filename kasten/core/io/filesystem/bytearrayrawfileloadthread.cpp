@@ -25,9 +25,9 @@
 // lib
 #include "bytearraydocument.hpp"
 // Kasten core
-#include <kasten/person.hpp>
+#include <Kasten/Person>
 // Okteta core
-#include <okteta/piecetablebytearraymodel.hpp>
+#include <Okteta/PieceTableByteArrayModel>
 // KF5
 #include <KLocalizedString>
 // Qt

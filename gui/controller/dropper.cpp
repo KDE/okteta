@@ -28,7 +28,7 @@
 #include <bytearraytablelayout.hpp>
 #include <abstractbytearrayview.hpp>
 // Okteta core
-#include <okteta/abstractbytearraymodel.hpp>
+#include <Okteta/AbstractByteArrayModel>
 // Qt
 #include <QApplication>
 #include <QDragEnterEvent>

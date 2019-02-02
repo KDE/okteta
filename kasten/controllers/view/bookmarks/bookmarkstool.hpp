@@ -26,9 +26,9 @@
 // lib
 #include <kasten/okteta/oktetakastencontrollers_export.hpp>
 // Kasten core
-#include <kasten/abstracttool.hpp>
+#include <Kasten/AbstractTool>
 // Okteta core
-#include <okteta/address.hpp>
+#include <Okteta/Address>
 
 namespace Okteta {
 class Bookmarkable;

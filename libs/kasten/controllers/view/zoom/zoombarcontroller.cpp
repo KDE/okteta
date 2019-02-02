@@ -24,8 +24,8 @@
 
 // lib
 #include "zoomslider.hpp"
-//
-#include <kasten/statusbar.hpp>
+// Kasten gui
+#include <Kasten/StatusBar>
 
 namespace Kasten {
 

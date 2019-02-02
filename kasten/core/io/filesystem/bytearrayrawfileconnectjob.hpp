@@ -24,7 +24,7 @@
 #define BYTEARRAYRAWFILECONNECTJOB_HPP
 
 // Kasten core
-#include <kasten/abstractfilesystemconnectjob.hpp>
+#include <Kasten/AbstractFileSystemConnectJob>
 
 namespace Kasten {
 

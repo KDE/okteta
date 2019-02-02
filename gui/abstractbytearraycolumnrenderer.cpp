@@ -31,10 +31,10 @@
 // lib
 #include <abstractcolumnstylist.hpp>
 // Okteta core
-#include <okteta/bookmarkable.hpp>
-#include <okteta/bookmarksconstiterator.hpp>
-#include <okteta/bookmark.hpp>
-#include <okteta/charcodec.hpp>
+#include <Okteta/Bookmarkable>
+#include <Okteta/BookmarksConstIterator>
+#include <Okteta/Bookmark>
+#include <Okteta/CharCodec>
 // KF5
 #include <KColorScheme>
 // Qt

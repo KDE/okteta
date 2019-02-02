@@ -25,9 +25,9 @@
 // lib
 #include <bytearrayview.hpp>
 // Okteta gui
-#include <okteta/bytearraytablelayout.hpp>
+#include <Okteta/ByteArrayTableLayout>
 // Okteta core
-#include <okteta/abstractbytearraymodel.hpp>
+#include <Okteta/AbstractByteArrayModel>
 // KF5
 #include <KLocalizedString>
 // Qt

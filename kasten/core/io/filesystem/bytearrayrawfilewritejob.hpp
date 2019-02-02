@@ -24,7 +24,7 @@
 #define BYTEARRAYRAWFILEWRITEJOB_HPP
 
 // Kasten core
-#include <kasten/abstractfilesystemsynctoremotejob.hpp>
+#include <Kasten/AbstractFileSystemSyncToRemoteJob>
 
 namespace Kasten {
 

@@ -26,8 +26,8 @@
 #include "bytearrayview.hpp"
 #include <bytearrayviewprofilemanager.hpp>
 #include <bytearrayviewprofilesynchronizer.hpp>
-// core
-#include <kasten/okteta/bytearraydocument.hpp>
+// Okteta Kasten core
+#include <Kasten/Okteta/ByteArrayDocument>
 
 namespace Kasten {
 

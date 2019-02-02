@@ -25,7 +25,7 @@
 #include "../topleveldatainformation.hpp"
 #include "../../structlogging.hpp"
 
-#include <okteta/abstractbytearraymodel.hpp>
+#include <Okteta/AbstractByteArrayModel>
 
 #include <KLocalizedString>
 #include <QVarLengthArray>

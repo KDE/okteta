@@ -23,7 +23,7 @@
 #include "insertdialog.hpp"
 
 // Kasten gui
-#include <kasten/abstractmodeldatageneratorconfigeditor.hpp>
+#include <Kasten/AbstractModelDataGeneratorConfigEditor>
 // KF5
 #include <KLocalizedString>
 // Qt

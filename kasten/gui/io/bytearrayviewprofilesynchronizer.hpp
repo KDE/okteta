@@ -27,7 +27,7 @@
 #include <kasten/okteta/oktetakastengui_export.hpp>
 #include <kasten/okteta/bytearrayviewprofile.hpp>
 // Kasten core
-#include <kasten/kastencore.hpp>
+#include <Kasten/KastenCore>
 // Qt Core
 #include <QObject>
 

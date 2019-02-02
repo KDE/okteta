@@ -24,7 +24,7 @@
 #define VIEWPROFILETABLEMODEL_HPP
 
 // Okteta Gui Kasten
-#include <kasten/okteta/bytearrayviewprofile.hpp>
+#include <Kasten/Okteta/ByteArrayViewProfile>
 // Qt
 #include <QAbstractTableModel>
 

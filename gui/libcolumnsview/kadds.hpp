@@ -24,7 +24,7 @@
 #define OKTETA_KADDS_HPP
 
 // Okteta core
-#include <okteta/numberrange.hpp>
+#include <Okteta/NumberRange>
 
 namespace Okteta {
 // some possibly useful additions to KDE

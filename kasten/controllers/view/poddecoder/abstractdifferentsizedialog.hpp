@@ -24,7 +24,7 @@
 #define ABSTRACTDIFFERENTSIZEDIALOG_HPP
 
 // Kasten core
-#include <kasten/kastencore.hpp>
+#include <Kasten/KastenCore>
 
 namespace Kasten {
 

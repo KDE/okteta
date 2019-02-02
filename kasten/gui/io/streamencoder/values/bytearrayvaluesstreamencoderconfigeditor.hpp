@@ -26,7 +26,7 @@
 // lib
 #include "bytearrayvaluesstreamencoder.hpp"
 // Kasten gui
-#include <kasten/abstractmodelstreamencoderconfigeditor.hpp>
+#include <Kasten/AbstractModelStreamEncoderConfigEditor>
 
 class KComboBox;
 class QLineEdit;

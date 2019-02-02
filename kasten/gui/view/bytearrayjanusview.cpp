@@ -23,8 +23,8 @@
 #include "bytearrayjanusview.hpp"
 
 // Okteta gui
-#include <okteta/bytearraycolumnview.hpp>
-#include <okteta/bytearrayrowview.hpp>
+#include <Okteta/ByteArrayColumnView>
+#include <Okteta/ByteArrayRowView>
 // Qt
 #include <QLayout>
 #include <QScrollBar>

@@ -24,7 +24,7 @@
 #define OKTETAPART_HPP
 
 // Kasten
-#include <kasten/kastencore.hpp>
+#include <Kasten/KastenCore>
 // KF5
 #include <KParts/ReadWritePart>
 

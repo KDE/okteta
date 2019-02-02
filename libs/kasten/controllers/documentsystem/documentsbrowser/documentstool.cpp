@@ -23,8 +23,8 @@
 #include "documentstool.hpp"
 
 // Kasten core
-#include <kasten/documentmanager.hpp>
-#include <kasten/abstractdocument.hpp>
+#include <Kasten/DocumentManager>
+#include <Kasten/AbstractDocument>
 // KF5
 #include <KLocalizedString>
 

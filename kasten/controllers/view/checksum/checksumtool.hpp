@@ -27,9 +27,9 @@
 #include <kasten/okteta/oktetakastencontrollers_export.hpp>
 #include <config-qca2.hpp>
 // Kasten core
-#include <kasten/abstracttool.hpp>
+#include <Kasten/AbstractTool>
 // Okteta core
-#include <okteta/addressrange.hpp>
+#include <Okteta/AddressRange>
 
 class AbstractByteArrayChecksumParameterSet;
 class AbstractByteArrayChecksumAlgorithm;

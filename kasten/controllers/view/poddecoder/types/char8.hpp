@@ -24,9 +24,9 @@
 #define CHAR8_HPP
 
 // Okteta gui
-#include <okteta/oktetagui.hpp>
+#include <Okteta/OktetaGui>
 // Okteta core
-#include <okteta/character.hpp>
+#include <Okteta/Character>
 // Qt
 #include <QMetaType>
 #include <QString>

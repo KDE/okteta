@@ -25,9 +25,9 @@
 // part
 #include "part.hpp"
 // Okteta Kasten
-#include <kasten/okteta/printcontroller.hpp>
-#include <kasten/okteta/bytearrayview.hpp>
-#include <kasten/okteta/bytearraydocument.hpp>
+#include <Kasten/Okteta/PrintController>
+#include <Kasten/Okteta/ByteArrayView>
+#include <Kasten/Okteta/ByteArrayDocument>
 // Qt
 #include <QClipboard>
 #include <QApplication>

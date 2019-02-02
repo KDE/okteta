@@ -25,7 +25,7 @@
 // plugin
 #include "fillerbytearraymodel.hpp"
 // Okteta gui
-#include <okteta/bytearraycolumnview.hpp>
+#include <Okteta/ByteArrayColumnView>
 
 // TODO: add translations for visible names
 ByteArrayColumnViewDesignerFactory::ByteArrayColumnViewDesignerFactory(QObject* parent)

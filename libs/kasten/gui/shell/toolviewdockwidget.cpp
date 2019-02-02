@@ -25,7 +25,7 @@
 // lib
 #include <abstracttoolview.hpp>
 // Kasten core
-#include <kasten/abstracttool.hpp>
+#include <Kasten/AbstractTool>
 
 namespace Kasten {
 

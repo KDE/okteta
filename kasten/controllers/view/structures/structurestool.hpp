@@ -26,13 +26,14 @@
 
 // lib
 #include <kasten/okteta/oktetakastencontrollers_export.hpp>
-#include <kasten/okteta/bytearrayview.hpp>
+// Okteta Kasten gui
+#include <Kasten/Okteta/ByteArrayView>
 // tool
 #include "datatypes/topleveldatainformation.hpp"
 // Kasten core
-#include <kasten/abstracttool.hpp>
+#include <Kasten/AbstractTool>
 // Okteta core
-#include <okteta/address.hpp>
+#include <Okteta/Address>
 
 class QModelIndex;
 

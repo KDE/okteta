@@ -25,7 +25,7 @@
 // test object
 #include <bytearraydocument.hpp>
 // Okteta core
-#include <okteta/piecetablebytearraymodel.hpp>
+#include <Okteta/PieceTableByteArrayModel>
 // Qt
 #include <QTest>
 #include <QSignalSpy>

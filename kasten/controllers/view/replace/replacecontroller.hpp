@@ -30,7 +30,7 @@
 // lib
 #include <kasten/okteta/kfinddirection.hpp>
 // Kasten gui
-#include <kasten/abstractxmlguicontroller.hpp>
+#include <Kasten/AbstractXmlGuiController>
 
 class KXMLGUIClient;
 class QAction;

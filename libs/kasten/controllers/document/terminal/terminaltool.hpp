@@ -26,7 +26,7 @@
 // lib
 #include <kasten/kastencontrollers_export.hpp>
 // Kasten core
-#include <kasten/abstracttool.hpp>
+#include <Kasten/AbstractTool>
 
 class QUrl;
 

@@ -25,7 +25,7 @@
 //
 #include <abstractbytearraychecksumalgorithm.hpp>
 // Okteta core
-#include <okteta/abstractbytearraymodel.hpp>
+#include <Okteta/AbstractByteArrayModel>
 // Qt
 #include <QCoreApplication>
 

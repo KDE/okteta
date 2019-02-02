@@ -23,8 +23,8 @@
 #include "setremotecontroller.hpp"
 
 // Kasten core
-#include <kasten/documentsyncmanager.hpp>
-#include <kasten/abstractdocument.hpp>
+#include <Kasten/DocumentSyncManager>
+#include <Kasten/AbstractDocument>
 // KF5
 #include <KActionCollection>
 #include <KStandardAction>

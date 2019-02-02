@@ -26,9 +26,9 @@
 // lib
 #include <kasten/okteta/oktetakastencore_export.hpp>
 // Kasten core
-#include <kasten/abstractmodelselection.hpp>
+#include <Kasten/AbstractModelSelection>
 // Okteta core
-#include <okteta/addressrange.hpp>
+#include <Okteta/AddressRange>
 
 namespace Kasten {
 

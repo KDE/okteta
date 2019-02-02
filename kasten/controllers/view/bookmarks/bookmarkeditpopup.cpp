@@ -23,7 +23,7 @@
 #include "bookmarkeditpopup.hpp"
 
 // Okteta core
-// #include <okteta/bookmark.hpp>
+// #include <Okteta/Bookmark>
 // Qt
 #include <QLineEdit>
 #include <QIcon>

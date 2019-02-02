@@ -25,11 +25,11 @@
 // part
 #include "part.hpp"
 // Okteta Kasten
-#include <kasten/okteta/bytearrayviewprofilemanager.hpp>
-#include <kasten/okteta/bytearraystreamencoderconfigeditorfactoryfactory.hpp>
-#include <kasten/okteta/bytearraydatageneratorconfigeditorfactoryfactory.hpp>
-#include <kasten/okteta/bytearraystreamencoderfactory.hpp>
-#include <kasten/okteta/bytearraydatageneratorfactory.hpp>
+#include <Kasten/Okteta/ByteArrayViewProfileManager>
+#include <Kasten/Okteta/ByteArrayStreamEncoderConfigEditorFactoryFactory>
+#include <Kasten/Okteta/ByteArrayDataGeneratorConfigEditorFactoryFactory>
+#include <Kasten/Okteta/ByteArrayStreamEncoderFactory>
+#include <Kasten/Okteta/ByteArrayDataGeneratorFactory>
 // KF5
 #include <KLocalizedString>
 

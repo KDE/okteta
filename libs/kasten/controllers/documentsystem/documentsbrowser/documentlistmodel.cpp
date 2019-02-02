@@ -25,8 +25,8 @@
 // lib
 #include "documentstool.hpp"
 // Kasten core
-#include <kasten/abstractmodelsynchronizer.hpp>
-#include <kasten/abstractdocument.hpp>
+#include <Kasten/AbstractModelSynchronizer>
+#include <Kasten/AbstractDocument>
 // KF5
 #include <KLocalizedString>
 

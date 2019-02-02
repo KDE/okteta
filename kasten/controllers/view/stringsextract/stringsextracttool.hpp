@@ -28,9 +28,9 @@
 // tool
 #include "containedstring.hpp"
 // Kasten core
-#include <kasten/abstracttool.hpp>
+#include <Kasten/AbstractTool>
 // Okteta core
-#include <okteta/addressrange.hpp>
+#include <Okteta/AddressRange>
 // Qt
 #include <QList>
 

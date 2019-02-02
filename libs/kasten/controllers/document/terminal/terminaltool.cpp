@@ -23,9 +23,9 @@
 #include "terminaltool.hpp"
 
 // Kasten core
-#include <kasten/documentsyncmanager.hpp>
-#include <kasten/abstractdocument.hpp>
-#include <kasten/abstractmodelsynchronizer.hpp>
+#include <Kasten/DocumentSyncManager>
+#include <Kasten/AbstractDocument>
+#include <Kasten/AbstractModelSynchronizer>
 
 // KF5
 #include <KLocalizedString>

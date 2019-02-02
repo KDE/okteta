@@ -22,11 +22,11 @@
 
 #include "readonlybarcontroller.hpp"
 
-// lib
-#include <kasten/abstractdocument.hpp>
+// Kasten core
+#include <Kasten/AbstractDocument>
 // Kasten ui
-#include <kasten/togglebutton.hpp>
-#include <kasten/statusbar.hpp>
+#include <Kasten/ToggleButton>
+#include <Kasten/StatusBar>
 // KF5
 #include <KLocalizedString>
 

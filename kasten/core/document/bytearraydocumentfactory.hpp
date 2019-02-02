@@ -26,7 +26,7 @@
 // lib
 #include <kasten/okteta/oktetakastencore_export.hpp>
 // Kasten core
-#include <kasten/abstractdocumentfactory.hpp>
+#include <Kasten/AbstractDocumentFactory>
 
 namespace Kasten {
 

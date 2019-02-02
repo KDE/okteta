@@ -26,9 +26,9 @@
 // lib
 #include <kasten/kastencontrollers_export.hpp>
 // Kasten gui
-#include <kasten/abstractxmlguicontroller.hpp>
+#include <Kasten/AbstractXmlGuiController>
 // Kasten core
-#include <kasten/kastencore.hpp>
+#include <Kasten/KastenCore>
 
 class QLabel;
 

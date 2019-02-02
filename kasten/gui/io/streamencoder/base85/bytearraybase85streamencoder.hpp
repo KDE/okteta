@@ -26,7 +26,7 @@
 // lib
 #include "abstractbytearraystreamencoder.hpp"
 // Okteta core
-#include <okteta/oktetacore.hpp>
+#include <Okteta/OktetaCore>
 // Qt
 #include <QString>
 

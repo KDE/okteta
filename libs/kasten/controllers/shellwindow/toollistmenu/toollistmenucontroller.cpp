@@ -22,9 +22,9 @@
 
 #include "toollistmenucontroller.hpp"
 
-// lib
-#include <kasten/widgetsdockable.hpp>
-#include <kasten/toolviewdockwidget.hpp>
+// Kasten gui
+#include <Kasten/WidgetsDockable>
+#include <Kasten/ToolViewDockWidget>
 // KF5
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>

@@ -13,7 +13,7 @@
 //// ADAPT(end)
 
 // Okteta core
-#include <okteta/abstractbytearraymodel.hpp>
+#include <Okteta/AbstractByteArrayModel>
 // KF5
 #include <KLocalizedString>
 

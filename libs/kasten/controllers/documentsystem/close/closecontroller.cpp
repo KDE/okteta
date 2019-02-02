@@ -23,9 +23,9 @@
 #include "closecontroller.hpp"
 
 // Kasten gui
-#include <kasten/abstractdocumentstrategy.hpp>
+#include <Kasten/AbstractDocumentStrategy>
 // Kasten core
-#include <kasten/abstractdocument.hpp>
+#include <Kasten/AbstractDocument>
 // KF5
 #include <KActionCollection>
 #include <KStandardAction>

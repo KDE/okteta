@@ -37,7 +37,7 @@
 
 #include <KLocalizedString>
 
-#include <okteta/abstractbytearraymodel.hpp>
+#include <Okteta/AbstractByteArrayModel>
 
 template <typename T, class C>
 inline QScriptClass* BasicPrimitiveDataInformation<T, C>::scriptClass(ScriptHandlerInfo* handlerInfo) const

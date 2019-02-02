@@ -30,11 +30,11 @@
 #include "bytearrayrowscolumntextrenderer.hpp"
 #include <bytearrayview.hpp>
 // Okteta gui
-#include <okteta/bytearraytablelayout.hpp>
-#include <okteta/abstractbytearrayview.hpp>
+#include <Okteta/ByteArrayTableLayout>
+#include <Okteta/AbstractByteArrayView>
 // Okteta core
-#include <okteta/abstractbytearraymodel.hpp>
-#include <okteta/character.hpp>
+#include <Okteta/AbstractByteArrayModel>
+#include <Okteta/Character>
 // KF5
 #include <KLocalizedString>
 // Qt

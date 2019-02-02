@@ -26,9 +26,9 @@
 // lib
 #include "abstractbytearraystreamencoder.hpp"
 // Okteta gui
-// #include <okteta/offsetformat.hpp>
+// #include <Okteta/OffsetFormat>
 // Okteta core
-#include <okteta/oktetacore.hpp>
+#include <Okteta/OktetaCore>
 // Qt
 #include <QString>
 

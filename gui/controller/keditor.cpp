@@ -27,8 +27,8 @@
 #include <bytearraytablecursor.hpp>
 #include <abstractbytearrayview.hpp>
 // Okteta core
-#include <okteta/abstractbytearraymodel.hpp>
-#include <okteta/wordbytearrayservice.hpp>
+#include <Okteta/AbstractByteArrayModel>
+#include <Okteta/WordByteArrayService>
 // Qt
 #include <QKeyEvent>
 

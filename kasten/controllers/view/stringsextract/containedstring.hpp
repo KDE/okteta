@@ -24,8 +24,8 @@
 #define CONTAINEDSTRING_HPP
 
 // Okteta core
-#include <okteta/address.hpp>
-#include <okteta/size.hpp>
+#include <Okteta/Address>
+#include <Okteta/Size>
 // Qt
 #include <QString>
 

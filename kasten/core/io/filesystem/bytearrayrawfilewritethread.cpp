@@ -25,7 +25,7 @@
 // lib
 #include "bytearraydocument.hpp"
 // Okteta core
-#include <okteta/piecetablebytearraymodel.hpp>
+#include <Okteta/PieceTableByteArrayModel>
 // Qt
 #include <QDataStream>
 #include <QFile>

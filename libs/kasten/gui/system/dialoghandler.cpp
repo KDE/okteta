@@ -23,7 +23,7 @@
 #include "dialoghandler.hpp"
 
 // Kasten core
-#include <kasten/abstractdocument.hpp>
+#include <Kasten/AbstractDocument>
 // KF5
 #include <KMessageBox>
 #include <KLocalizedString>

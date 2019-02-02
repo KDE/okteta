@@ -25,7 +25,8 @@
 // lib
 #include "toolinlineviewwidget.hpp"
 #include <abstracttoolinlineview.hpp>
-#include <kasten/abstractdocument.hpp>
+// Kasten core
+#include <Kasten/AbstractDocument>
 // Qt
 #include <QDragMoveEvent>
 #include <QDropEvent>

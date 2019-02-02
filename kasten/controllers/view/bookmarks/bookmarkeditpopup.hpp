@@ -24,7 +24,7 @@
 #define BOOKMARKEDITPOPUP_HPP
 
 // Kasten gui
-#include <kasten/abstractlinepopup.hpp>
+#include <Kasten/AbstractLinePopup>
 
 // class Bookmark;
 class QLineEdit;

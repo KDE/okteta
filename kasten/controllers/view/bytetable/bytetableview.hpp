@@ -24,7 +24,7 @@
 #define BYTETABLEVIEW_HPP
 
 // Kasten gui
-#include <kasten/abstracttoolwidget.hpp>
+#include <Kasten/AbstractToolWidget>
 
 class QPushButton;
 class QSpinBox;

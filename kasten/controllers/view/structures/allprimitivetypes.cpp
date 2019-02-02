@@ -23,7 +23,7 @@
 #include "allprimitivetypes.hpp"
 #include "datatypes/primitive/primitivedatainformation.hpp"
 
-#include <okteta/abstractbytearraymodel.hpp>
+#include <Okteta/AbstractByteArrayModel>
 
 Q_STATIC_ASSERT(sizeof(double) == 8);
 Q_STATIC_ASSERT(sizeof(float) == 4);

@@ -25,14 +25,14 @@
 // lib
 #include "copyasdialog.hpp"
 // Kasten gui
-#include <kasten/modelcodecviewmanager.hpp>
-#include <kasten/dataselectable.hpp>
-#include <kasten/abstractmodelstreamencoderconfigeditor.hpp>
+#include <Kasten/ModelCodecViewManager>
+#include <Kasten/DataSelectable>
+#include <Kasten/AbstractModelStreamEncoderConfigEditor>
 // Kasten core
-#include <kasten/modelstreamencodethread.hpp>
-#include <kasten/modelcodecmanager.hpp>
-#include <kasten/abstractmodelstreamencoder.hpp>
-#include <kasten/abstractmodel.hpp>
+#include <Kasten/ModelStreamEncodeThread>
+#include <Kasten/ModelCodecManager>
+#include <Kasten/AbstractModelStreamEncoder>
+#include <Kasten/AbstractModel>
 // KF5
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>

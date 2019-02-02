@@ -26,7 +26,7 @@
 // lib
 #include <kasten/kastengui_export.hpp>
 // Kasten core
-#include <kasten/abstractdocument.hpp>
+#include <Kasten/AbstractDocument>
 
 class QWidget;
 

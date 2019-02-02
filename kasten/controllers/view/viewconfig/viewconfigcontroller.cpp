@@ -25,9 +25,10 @@
 // lib
 #include "bytesperlinedialog.hpp"
 #include "bytespergroupdialog.hpp"
-#include <kasten/okteta/bytearrayview.hpp>
+// Okteta Kasten gui
+#include <Kasten/Okteta/ByteArrayView>
 // Okteta core
-#include <okteta/charcodec.hpp>
+#include <Okteta/CharCodec>
 // KF5
 #include <KXMLGUIClient>
 #include <KLocalizedString>

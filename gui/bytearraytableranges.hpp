@@ -28,7 +28,7 @@
 #include <okteta/coordrangelist.hpp>
 #include <okteta/oktetagui_export.hpp>
 // Okteta core
-#include <okteta/addressrange.hpp>
+#include <Okteta/AddressRange>
 
 namespace Okteta {
 class ArrayChangeMetricsList;

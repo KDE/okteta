@@ -24,7 +24,7 @@
 #define ABSTRACTBYTEARRAYCHECKSUMALGORITHM_HPP
 
 // Okteta core
-#include <okteta/addressrange.hpp>
+#include <Okteta/AddressRange>
 // Qt
 #include <QObject>
 

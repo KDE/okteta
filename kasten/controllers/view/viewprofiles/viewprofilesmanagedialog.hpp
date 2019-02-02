@@ -23,8 +23,8 @@
 #ifndef VIEWPROFILESMANAGEDIALOG_HPP
 #define VIEWPROFILESMANAGEDIALOG_HPP
 
-// lib
-#include <kasten/okteta/bytearrayviewprofile.hpp>
+// Okteta Kasten gui
+#include <Kasten/Okteta/ByteArrayViewProfile>
 // Qt
 #include <QDialog>
 

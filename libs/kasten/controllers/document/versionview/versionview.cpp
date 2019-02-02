@@ -26,8 +26,8 @@
 #include "versiontablemodel.hpp"
 #include "versionviewtool.hpp"
 // Kasten core
-#include <kasten/versionable.hpp>
-#include <kasten/abstractmodel.hpp>
+#include <Kasten/Versionable>
+#include <Kasten/AbstractModel>
 // Qt
 #include <QLayout>
 #include <QTreeView>

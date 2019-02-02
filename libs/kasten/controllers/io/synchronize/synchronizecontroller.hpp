@@ -26,7 +26,7 @@
 // lib
 #include <kasten/kastencontrollers_export.hpp>
 // Kasten gui
-#include <kasten/abstractxmlguicontroller.hpp>
+#include <Kasten/AbstractXmlGuiController>
 
 class QAction;
 class KXMLGUIClient;

@@ -26,7 +26,7 @@
 // lib
 #include <kasten/okteta/oktetakastengui_export.hpp>
 // Kasten gui
-#include <kasten/abstractviewfactory.hpp>
+#include <Kasten/AbstractViewFactory>
 
 namespace Kasten {
 class ByteArrayViewProfileManager;

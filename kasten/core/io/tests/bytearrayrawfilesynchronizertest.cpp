@@ -30,12 +30,12 @@
 #include <util/filesystem.hpp>
 #include <util/fill.hpp>
 // Kasten core
-#include <kasten/abstractloadjob.hpp>
-#include <kasten/abstractconnectjob.hpp>
-#include <kasten/abstractsynctoremotejob.hpp>
-#include <kasten/abstractsyncwithremotejob.hpp>
+#include <Kasten/AbstractLoadJob>
+#include <Kasten/AbstractConnectJob>
+#include <Kasten/AbstractSyncToRemoteJob>
+#include <Kasten/AbstractSyncWithRemoteJob>
 // Okteta core
-#include <okteta/piecetablebytearraymodel.hpp>
+#include <Okteta/PieceTableByteArrayModel>
 // Qt
 #include <QTest>
 #include <QSignalSpy>

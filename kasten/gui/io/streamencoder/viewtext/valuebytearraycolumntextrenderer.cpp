@@ -23,8 +23,8 @@
 #include "valuebytearraycolumntextrenderer.hpp"
 
 // Okteta core
-#include <okteta/valuecodec.hpp>
-#include <okteta/abstractbytearraymodel.hpp>
+#include <Okteta/ValueCodec>
+#include <Okteta/AbstractByteArrayModel>
 // Qt
 #include <QTextStream>
 

@@ -24,7 +24,7 @@
 #define FILTERVIEW_HPP
 
 // Kasten gui
-#include <kasten/abstracttoolwidget.hpp>
+#include <Kasten/AbstractToolWidget>
 
 class AbstractByteArrayFilterParameterSet;
 

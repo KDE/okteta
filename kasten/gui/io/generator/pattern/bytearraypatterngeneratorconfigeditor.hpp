@@ -26,7 +26,7 @@
 // lib
 #include "bytearraypatterngenerator.hpp"
 // Kasten gui
-#include <kasten/abstractmodeldatageneratorconfigeditor.hpp>
+#include <Kasten/AbstractModelDataGeneratorConfigEditor>
 
 namespace Okteta {
 class ByteArrayComboBox;

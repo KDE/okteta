@@ -24,8 +24,8 @@
 
 // lib
 #include <abstractbytearrayview.hpp>
-// commonlib
-#include <okteta/charcodec.hpp>
+// Okteta core
+#include <Okteta/CharCodec>
 // Qt
 #include <QKeyEvent>
 

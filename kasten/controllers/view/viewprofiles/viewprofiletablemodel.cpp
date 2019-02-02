@@ -23,7 +23,7 @@
 #include "viewprofiletablemodel.hpp"
 
 // Okteta Gui Kasten
-#include <kasten/okteta/bytearrayviewprofilemanager.hpp>
+#include <Kasten/Okteta/ByteArrayViewProfileManager>
 // KF5
 #include <KColorScheme>
 #include <KLocalizedString>

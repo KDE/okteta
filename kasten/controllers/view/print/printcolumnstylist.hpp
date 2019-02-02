@@ -24,7 +24,7 @@
 #define PRINTCOLUMNSTYLIST_HPP
 
 // Okteta gui
-#include <okteta/abstractcolumnstylist.hpp>
+#include <Okteta/AbstractColumnStylist>
 // Qt
 #include <QPalette>
 

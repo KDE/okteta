@@ -24,7 +24,7 @@
 #define OKTETA_DROPPER_HPP
 
 // Okteta core
-#include <okteta/address.hpp>
+#include <Okteta/Address>
 
 class QDragEnterEvent;
 class QDragMoveEvent;

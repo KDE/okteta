@@ -26,11 +26,11 @@
 // lib
 #include <kasten/okteta/oktetakastencontrollers_export.hpp>
 // Kasten gui
-#include <kasten/abstractxmlguicontroller.hpp>
+#include <Kasten/AbstractXmlGuiController>
 // Okteta gui
-#include <okteta/offsetformat.hpp>
+#include <Okteta/OffsetFormat>
 // Okteta core
-#include <okteta/address.hpp>
+#include <Okteta/Address>
 
 class KComboBox;
 class KSqueezedTextLabel;

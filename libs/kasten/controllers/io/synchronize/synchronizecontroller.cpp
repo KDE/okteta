@@ -23,9 +23,9 @@
 #include "synchronizecontroller.hpp"
 
 // Kasten core
-#include <kasten/documentsyncmanager.hpp>
-#include <kasten/abstractmodelfilesystemsynchronizer.hpp>
-#include <kasten/abstractdocument.hpp>
+#include <Kasten/DocumentSyncManager>
+#include <Kasten/AbstractModelFileSystemSynchronizer>
+#include <Kasten/AbstractDocument>
 // KF5
 #include <KActionCollection>
 #include <KStandardAction>

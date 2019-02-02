@@ -23,9 +23,9 @@
 #include "zoomslider.hpp"
 
 // Kasten gui
-#include <kasten/zoomable.hpp>
+#include <Kasten/Zoomable>
 // Kasten core
-#include <kasten/abstractmodel.hpp>
+#include <Kasten/AbstractModel>
 // KF5
 #include <KLocalizedString>
 // Qt

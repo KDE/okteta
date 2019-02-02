@@ -26,8 +26,8 @@
 #include "viewprofileeditdialog.hpp"
 #include "viewprofiletablemodel.hpp"
 // Okteta Gui Kasten
-#include <kasten/okteta/bytearrayviewprofilemanager.hpp>
-#include <kasten/okteta/bytearrayviewprofilelock.hpp>
+#include <Kasten/Okteta/ByteArrayViewProfileManager>
+#include <Kasten/Okteta/ByteArrayViewProfileLock>
 // KF5
 #include <KLocalizedString>
 #include <KGuiItem>

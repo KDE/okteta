@@ -26,8 +26,8 @@
 #include <QtEndian>
 
 #include <size.hpp>
-#include <okteta/address.hpp>
-#include <okteta/abstractbytearraymodel.hpp>
+#include <Okteta/Address>
+#include <Okteta/AbstractByteArrayModel>
 
 #include "datatypes/datainformationbase.hpp"
 

@@ -31,9 +31,9 @@
 #include <abstractxmlguicontroller.hpp>
 #include <toolviewdockwidget.hpp>
 // Kasten core
-#include <kasten/abstracttool.hpp>
-#include <kasten/abstractmodelsynchronizer.hpp>
-#include <kasten/abstractdocument.hpp>
+#include <Kasten/AbstractTool>
+#include <Kasten/AbstractModelSynchronizer>
+#include <Kasten/AbstractDocument>
 // Qt
 #include <QHash>
 

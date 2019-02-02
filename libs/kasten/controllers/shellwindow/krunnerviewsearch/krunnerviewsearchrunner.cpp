@@ -26,8 +26,8 @@
 #include "dbusutils_p.hpp"
 #include "krunner1adaptor.hpp"
 // Kasten core
-#include <kasten/documentmanager.hpp>
-#include <kasten/abstractdocument.hpp>
+#include <Kasten/DocumentManager>
+#include <Kasten/AbstractDocument>
 // KF5
 #include <KRun>
 #include <KRunner/QueryMatch>

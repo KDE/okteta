@@ -25,7 +25,7 @@
 // plugin
 #include "fillerbytearraymodel.hpp"
 // Okteta gui
-#include <okteta/bytearrayrowview.hpp>
+#include <Okteta/ByteArrayRowView>
 
 // TODO: add translations for visible names
 ByteArrayRowViewDesignerFactory::ByteArrayRowViewDesignerFactory(QObject* parent)

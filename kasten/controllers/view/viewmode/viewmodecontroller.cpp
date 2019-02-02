@@ -22,8 +22,8 @@
 
 #include "viewmodecontroller.hpp"
 
-// lib
-#include <kasten/okteta/bytearrayview.hpp>
+// Okteta Kasten gui
+#include <Kasten/Okteta/ByteArrayView>
 // KF5
 #include <KXMLGUIClient>
 #include <KLocalizedString>

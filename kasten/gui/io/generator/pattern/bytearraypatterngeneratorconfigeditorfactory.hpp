@@ -26,7 +26,7 @@
 // lib
 #include <kasten/okteta/oktetakastengui_export.hpp>
 // Kasten gui
-#include <kasten/abstractmodeldatageneratorconfigeditorfactory.hpp>
+#include <Kasten/AbstractModelDataGeneratorConfigEditorFactory>
 
 namespace Kasten {
 

@@ -26,9 +26,9 @@
 // lib
 #include <kasten/okteta/oktetakastencontrollers_export.hpp>
 // Kasten gui
-#include <kasten/abstractxmlguicontroller.hpp>
+#include <Kasten/AbstractXmlGuiController>
 // Okteta core
-#include <okteta/address.hpp>
+#include <Okteta/Address>
 // Qt
 #include <QList>
 

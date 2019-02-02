@@ -23,10 +23,10 @@
 #include "modifiedbarcontroller.hpp"
 
 // Kasten ui
-#include <kasten/statusbar.hpp>
+#include <Kasten/StatusBar>
 // Kasten core
-#include <kasten/abstractmodelsynchronizer.hpp>
-#include <kasten/abstractdocument.hpp>
+#include <Kasten/AbstractModelSynchronizer>
+#include <Kasten/AbstractDocument>
 // KF5
 #include <KLocalizedString>
 // Qt

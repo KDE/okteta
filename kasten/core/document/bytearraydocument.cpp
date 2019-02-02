@@ -22,10 +22,10 @@
 
 #include "bytearraydocument.hpp"
 
-//
-#include <kasten/person.hpp>
+// Kasten core
+#include <Kasten/Person>
 // Okteta core
-#include <okteta/piecetablebytearraymodel.hpp>
+#include <Okteta/PieceTableByteArrayModel>
 // KF5
 #include <KLocalizedString>
 

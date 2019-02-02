@@ -31,9 +31,9 @@
 #include <abstractmodeldatageneratorconfigeditorfactory.hpp>
 #include <abstractmodeldatageneratorconfigeditor.hpp>
 // Kasten core
-#include <kasten/abstractmodelexporter.hpp>
-#include <kasten/abstractmodeldatagenerator.hpp>
-#include <kasten/abstractmodelstreamencoder.hpp>
+#include <Kasten/AbstractModelExporter>
+#include <Kasten/AbstractModelDataGenerator>
+#include <Kasten/AbstractModelStreamEncoder>
 
 namespace Kasten {
 

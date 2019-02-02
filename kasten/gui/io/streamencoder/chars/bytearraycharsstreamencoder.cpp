@@ -25,9 +25,9 @@
 // lib
 #include <bytearrayview.hpp>
 // Okteta core
-#include <okteta/abstractbytearraymodel.hpp>
-#include <okteta/character.hpp>
-#include <okteta/charcodec.hpp>
+#include <Okteta/AbstractByteArrayModel>
+#include <Okteta/Character>
+#include <Okteta/CharCodec>
 // KF5
 #include <KLocalizedString>
 // Qt

@@ -23,7 +23,7 @@
 #include "loadercontroller.hpp"
 
 // Kasten Gui
-#include <kasten/abstractdocumentstrategy.hpp>
+#include <Kasten/AbstractDocumentStrategy>
 // KF5
 #include <KRecentFilesAction>
 #include <KActionCollection>

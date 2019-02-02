@@ -24,9 +24,9 @@
 
 // tool
 #include "gotooffsettool.hpp"
-// lib
-#include <kasten/okteta/addresscombobox.hpp>
-#include <kasten/okteta/addressvalidator.hpp>
+// Okteta Kasten gui
+#include <Kasten/Okteta/AddressComboBox>
+#include <Kasten/Okteta/AddressValidator>
 // KF5
 #include <QPushButton>
 #include <KGuiItem>

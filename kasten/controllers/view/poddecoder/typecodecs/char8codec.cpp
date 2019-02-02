@@ -26,8 +26,8 @@
 #include "../types/char8.hpp"
 #include "../poddata.hpp"
 // Okteta core
-#include <okteta/charcodec.hpp>
-#include <okteta/character.hpp>
+#include <Okteta/CharCodec>
+#include <Okteta/Character>
 // KF5
 #include <KLocalizedString>
 

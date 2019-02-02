@@ -23,9 +23,9 @@
 #include "bytearrayvalidator.hpp"
 
 // Okteta core
-#include <okteta/valuecodec.hpp>
-#include <okteta/character.hpp>
-#include <okteta/charcodec.hpp>
+#include <Okteta/ValueCodec>
+#include <Okteta/Character>
+#include <Okteta/CharCodec>
 
 namespace Okteta {
 

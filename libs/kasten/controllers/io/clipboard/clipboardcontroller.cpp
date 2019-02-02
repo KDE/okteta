@@ -23,10 +23,10 @@
 #include "clipboardcontroller.hpp"
 
 // Kasten gui
-#include <kasten/dataselectable.hpp>
-#include <kasten/selecteddatawriteable.hpp>
+#include <Kasten/DataSelectable>
+#include <Kasten/SelectedDataWriteable>
 // Kasten core
-#include <kasten/abstractmodel.hpp>
+#include <Kasten/AbstractModel>
 // KF5
 #include <KXMLGUIClient>
 #include <KLocalizedString>
