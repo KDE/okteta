@@ -107,7 +107,6 @@ okteta_add_library(Core NAMESPACE Okteta
     NO_TARGET_NAMESPACE
     NO_VERSIONED_INCLUDEDIR
     NO_VERSIONED_PACKAGE_NAMESPACE
-    LOWERCASE_LIB
 )
 
 okteta_add_cmakeconfig(Core NAMESPACE Okteta
