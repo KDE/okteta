@@ -82,6 +82,11 @@ macro(okteta_add_sublibrary _baseName)
         set(_actualsource "${CMAKE_CURRENT_SOURCE_DIR}/${_source}")
         if (EXISTS ${_actualsource})
             list(APPEND ${_SRCS} "${_source}")
+        else()
+            # experimental: without a source add header to sources
+            # perhaps helps with windows dll & exported symbols for otherwise not included headers
+            set(_header "${_relativePath}${_lc_classname}.hpp")
+            list(APPEND ${_SRCS} "${_header}")
         endif()
 
         set(_source "${_relativePath}${_lc_classname}_p.cpp")
