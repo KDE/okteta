@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kabstractfinddialog.hpp"
+#include "abstractfinddialog.hpp"
 
 // Okteta Kasten gui
 #include <Kasten/Okteta/ByteArrayComboBox>
@@ -38,7 +38,7 @@
 
 namespace Kasten {
 
-KAbstractFindDialog::KAbstractFindDialog(QWidget* parent)
+AbstractFindDialog::AbstractFindDialog(QWidget* parent)
     : QDialog(parent)
 {
     // main widget
@@ -50,7 +50,7 @@ KAbstractFindDialog::KAbstractFindDialog(QWidget* parent)
     QDialogButtonBox* dialogButtonBox = new QDialogButtonBox;
     FindButton = new QPushButton;
     dialogButtonBox->addButton(FindButton, QDialogButtonBox::AcceptRole);
-    connect(dialogButtonBox, &QDialogButtonBox::accepted, this, &KAbstractFindDialog::forwardFindButtonClicked);
+    connect(dialogButtonBox, &QDialogButtonBox::accepted, this, &AbstractFindDialog::forwardFindButtonClicked);
     dialogButtonBox->addButton(QDialogButtonBox::Cancel);
     connect(dialogButtonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
@@ -66,10 +66,10 @@ KAbstractFindDialog::KAbstractFindDialog(QWidget* parent)
     // which has no parameter for enabled and defaults to true
 }
 
-KAbstractFindDialog::~KAbstractFindDialog() = default;
+AbstractFindDialog::~AbstractFindDialog() = default;
 
-void KAbstractFindDialog::setFindButton(const QString& buttonText, const QString& buttonIconName,
-                                        const QString& buttonToolTip, const QString& buttonWhatsThis)
+void AbstractFindDialog::setFindButton(const QString& buttonText, const QString& buttonIconName,
+                                       const QString& buttonToolTip, const QString& buttonWhatsThis)
 {
     FindButton->setText(buttonText);
     FindButton->setIcon(QIcon::fromTheme(buttonIconName));
@@ -77,12 +77,12 @@ void KAbstractFindDialog::setFindButton(const QString& buttonText, const QString
     FindButton->setWhatsThis(buttonWhatsThis);
 }
 
-void KAbstractFindDialog::setFindButtonEnabled(bool enabled)
+void AbstractFindDialog::setFindButtonEnabled(bool enabled)
 {
     FindButton->setEnabled(enabled);
 }
 
-void KAbstractFindDialog::setupFindBox()
+void AbstractFindDialog::setupFindBox()
 {
     // find term
     QGroupBox* findBox = new QGroupBox(i18nc("@title:window", "Find"));
@@ -92,9 +92,9 @@ void KAbstractFindDialog::setupFindBox()
 
     SearchDataEdit = new Okteta::ByteArrayComboBox(findBox);
     connect(SearchDataEdit, &Okteta::ByteArrayComboBox::byteArrayChanged,
-            this, &KAbstractFindDialog::onSearchDataChanged);
+            this, &AbstractFindDialog::onSearchDataChanged);
     connect(SearchDataEdit, &Okteta::ByteArrayComboBox::formatChanged,
-            this, &KAbstractFindDialog::onSearchDataFormatChanged);
+            this, &AbstractFindDialog::onSearchDataFormatChanged);
     const QString toolTip =
         i18nc("@info:tooltip",
               "Enter the bytes to search for, or select bytes previously searched for from the list.");
@@ -104,7 +104,7 @@ void KAbstractFindDialog::setupFindBox()
     findBox->setLayout(findBoxLayout);
 }
 
-void KAbstractFindDialog::setupOperationBox(QGroupBox* operationBox)
+void AbstractFindDialog::setupOperationBox(QGroupBox* operationBox)
 {
     // operation box
     if (operationBox) {
@@ -112,7 +112,7 @@ void KAbstractFindDialog::setupOperationBox(QGroupBox* operationBox)
     }
 }
 
-void KAbstractFindDialog::setupCheckBoxes(QCheckBox* optionCheckBox)
+void AbstractFindDialog::setupCheckBoxes(QCheckBox* optionCheckBox)
 {
     // options
     QGroupBox* optionsBox = new QGroupBox(i18nc("@title:group", "Options"));
@@ -152,65 +152,65 @@ void KAbstractFindDialog::setupCheckBoxes(QCheckBox* optionCheckBox)
     onSearchDataFormatChanged(SearchDataEdit->format());
 }
 
-bool KAbstractFindDialog::fromCursor()            const { return AtCursorCheckBox->isChecked(); }
-bool KAbstractFindDialog::inSelection()           const { return SelectedCheckBox->isChecked(); }
-KFindDirection KAbstractFindDialog::direction() const
+bool AbstractFindDialog::fromCursor()            const { return AtCursorCheckBox->isChecked(); }
+bool AbstractFindDialog::inSelection()           const { return SelectedCheckBox->isChecked(); }
+KFindDirection AbstractFindDialog::direction() const
 {
     return BackwardsCheckBox->isChecked() ? FindBackward : FindForward;
 }
-Qt::CaseSensitivity KAbstractFindDialog::caseSensitivity() const
+Qt::CaseSensitivity AbstractFindDialog::caseSensitivity() const
 {
     return (SearchDataEdit->format() == Okteta::ByteArrayComboBox::CharCoding)
            && !CaseSensitiveCheckBox->isChecked() ? Qt::CaseInsensitive : Qt::CaseSensitive;
 }
 
-QByteArray KAbstractFindDialog::data()  const
+QByteArray AbstractFindDialog::data()  const
 {
     return SearchDataEdit->byteArray();
 }
 
-void KAbstractFindDialog::setDirection(KFindDirection Direction)
+void AbstractFindDialog::setDirection(KFindDirection Direction)
 {
     BackwardsCheckBox->setChecked(Direction == FindBackward);
 }
 
-void KAbstractFindDialog::setInSelection(bool InSelection)
+void AbstractFindDialog::setInSelection(bool InSelection)
 {
     SelectedCheckBox->setChecked(InSelection);
 }
 
-void KAbstractFindDialog::setCharCodec(const QString& codecName)
+void AbstractFindDialog::setCharCodec(const QString& codecName)
 {
     SearchDataEdit->setCharCodec(codecName);
 }
 
-void KAbstractFindDialog::rememberCurrentSettings()
+void AbstractFindDialog::rememberCurrentSettings()
 {
     SearchDataEdit->rememberCurrentByteArray();
 }
 
-void KAbstractFindDialog::onFindButtonClicked()
+void AbstractFindDialog::onFindButtonClicked()
 {
 }
 
-void KAbstractFindDialog::onSearchDataFormatChanged(int index)
+void AbstractFindDialog::onSearchDataFormatChanged(int index)
 {
     const bool isCharCoding = (index == Okteta::ByteArrayComboBox::CharCoding);
     CaseSensitiveCheckBox->setEnabled(isCharCoding);
     WholeWordsCheckBox->setEnabled(false);  // isCharCoding ); TODO: not implemented!
 }
 
-void KAbstractFindDialog::onSearchDataChanged(const QByteArray& data)
+void AbstractFindDialog::onSearchDataChanged(const QByteArray& data)
 {
     FindButton->setEnabled(!data.isEmpty());
 }
 
-void KAbstractFindDialog::forwardFindButtonClicked()
+void AbstractFindDialog::forwardFindButtonClicked()
 {
     onFindButtonClicked();
 }
 
-void KAbstractFindDialog::showEvent(QShowEvent* showEvent)
+void AbstractFindDialog::showEvent(QShowEvent* showEvent)
 {
     QDialog::showEvent(showEvent);
     SearchDataEdit->setFocus();

@@ -24,13 +24,13 @@
 #define KREPLACEDIALOG_HPP
 
 // lib
-#include <kabstractfinddialog.hpp>
+#include <abstractfinddialog.hpp>
 
 namespace Kasten {
 
 class ReplaceTool;
 
-class KReplaceDialog : public KAbstractFindDialog
+class KReplaceDialog : public AbstractFindDialog
 {
     Q_OBJECT
 
@@ -46,7 +46,7 @@ public: // get
     QByteArray replaceData() const;
     bool prompt() const;
 
-protected: // KAbstractFindDialog API
+protected: // AbstractFindDialog API
     void onFindButtonClicked() override;
     void rememberCurrentSettings() override;
 

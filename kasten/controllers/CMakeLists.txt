@@ -133,7 +133,7 @@ oktetakastencontrollers_add_sublibrary(view/libfinddialog
     PUBLIC
         KFindDirection
     PRIVATE
-        KAbstractFindDialog
+        AbstractFindDialog
 )
 
 oktetakastencontrollers_add_sublibrary(view/poddecoder/typecodecs

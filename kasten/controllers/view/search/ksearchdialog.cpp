@@ -30,7 +30,7 @@
 namespace Kasten {
 
 KSearchDialog::KSearchDialog(SearchTool* tool, QWidget* parent)
-    : KAbstractFindDialog(parent)
+    : AbstractFindDialog(parent)
     , mTool(tool)
 {
     setWindowTitle(i18nc("@title:window", "Find Bytes"));
@@ -71,7 +71,7 @@ void KSearchDialog::onFindButtonClicked()
 
 void KSearchDialog::showEvent(QShowEvent* showEvent)
 {
-    KAbstractFindDialog::showEvent(showEvent);
+    AbstractFindDialog::showEvent(showEvent);
 
     setInSelection(mTool->hasSelectedData());
 }

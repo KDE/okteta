@@ -37,7 +37,7 @@
 namespace Kasten {
 
 KReplaceDialog::KReplaceDialog(ReplaceTool* tool, QWidget* parent)
-    : KAbstractFindDialog(parent)
+    : AbstractFindDialog(parent)
     , mTool(tool)
 {
     setWindowTitle(i18nc("@title:window", "Replace Bytes"));
@@ -94,7 +94,7 @@ bool KReplaceDialog::prompt() const
 void KReplaceDialog::setCharCodec(const QString& codecName)
 {
     ReplaceDataEdit->setCharCodec(codecName);
-    KAbstractFindDialog::setCharCodec(codecName);
+    AbstractFindDialog::setCharCodec(codecName);
 }
 
 void KReplaceDialog::onFindButtonClicked()
@@ -113,7 +113,7 @@ void KReplaceDialog::onFindButtonClicked()
 
 void KReplaceDialog::showEvent(QShowEvent* showEvent)
 {
-    KAbstractFindDialog::showEvent(showEvent);
+    AbstractFindDialog::showEvent(showEvent);
 
     setInSelection(mTool->hasSelectedData());
     setCharCodec(mTool->charCodingName());
@@ -121,7 +121,7 @@ void KReplaceDialog::showEvent(QShowEvent* showEvent)
 
 void KReplaceDialog::rememberCurrentSettings()
 {
-    KAbstractFindDialog::rememberCurrentSettings();
+    AbstractFindDialog::rememberCurrentSettings();
 
     ReplaceDataEdit->rememberCurrentByteArray();
 }

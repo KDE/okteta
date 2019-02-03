@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KABSTRACTFINDDIALOG_HPP
-#define KABSTRACTFINDDIALOG_HPP
+#ifndef KASTEN_ABSTRACTFINDDIALOG_HPP
+#define KASTEN_ABSTRACTFINDDIALOG_HPP
 
 // lib
 #include "kfinddirection.hpp"
@@ -41,13 +41,13 @@ class QVBoxLayout;
 
 namespace Kasten {
 
-class KAbstractFindDialog : public QDialog
+class AbstractFindDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit KAbstractFindDialog(QWidget* parent = nullptr);
-    ~KAbstractFindDialog() override;
+    explicit AbstractFindDialog(QWidget* parent = nullptr);
+    ~AbstractFindDialog() override;
 
 public: // set
     void setDirection(KFindDirection Direction);

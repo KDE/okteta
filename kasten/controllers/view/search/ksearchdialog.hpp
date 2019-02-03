@@ -24,13 +24,13 @@
 #define KSEARCHDIALOG_HPP
 
 // lib
-#include <kabstractfinddialog.hpp>
+#include <abstractfinddialog.hpp>
 
 namespace Kasten {
 
 class SearchTool;
 
-class KSearchDialog : public KAbstractFindDialog
+class KSearchDialog : public AbstractFindDialog
 {
     Q_OBJECT
 
@@ -38,7 +38,7 @@ public:
     explicit KSearchDialog(SearchTool* tool, QWidget* parent = nullptr);
     ~KSearchDialog() override;
 
-protected: // KAbstractFindDialog API
+protected: // AbstractFindDialog API
     void onFindButtonClicked() override;
 
 protected: // QWidget API
