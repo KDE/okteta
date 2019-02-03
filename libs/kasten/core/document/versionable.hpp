@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KDE_IF_VERSIONABLE_HPP
-#define KDE_IF_VERSIONABLE_HPP
+#ifndef KASTEN_IF_VERSIONABLE_HPP
+#define KASTEN_IF_VERSIONABLE_HPP
 
 // lib
 // #include <kasten/documentversionid.hpp>

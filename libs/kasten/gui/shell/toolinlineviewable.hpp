@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KDE_IF_TOOLINLINEVIEWABLE_HPP
-#define KDE_IF_TOOLINLINEVIEWABLE_HPP
+#ifndef KASTEN_IF_TOOLINLINEVIEWABLE_HPP
+#define KASTEN_IF_TOOLINLINEVIEWABLE_HPP
 
 // Qt
 #include <QtPlugin>

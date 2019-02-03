@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KDE_IF_SEARCHUSERQUERYABLE_HPP
-#define KDE_IF_SEARCHUSERQUERYABLE_HPP
+#ifndef KASTEN_IF_SEARCHUSERQUERYABLE_HPP
+#define KASTEN_IF_SEARCHUSERQUERYABLE_HPP
 
 // libfinddialog
 #include <kasten/okteta/kfinddirection.hpp>
