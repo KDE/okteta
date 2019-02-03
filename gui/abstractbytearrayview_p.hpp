@@ -50,7 +50,7 @@ class MousePaster;
 class ZoomWheelController;
 
 class WidgetColumnStylist;
-class KCursor;
+class Cursor;
 class BorderColumnRenderer;
 
 class AbstractByteArrayViewPrivate
@@ -278,7 +278,7 @@ protected:
     QTimer* mCursorBlinkTimer;
 
     /** object to store the blinking cursor pixmaps */
-    KCursor* mCursorPixmaps;
+    Cursor* mCursorPixmaps;
 
 protected:
     /** flag whether the widget is set to readonly. Cannot override the databuffer's setting, of course. */

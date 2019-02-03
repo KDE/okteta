@@ -30,7 +30,7 @@
 #include "controller/mousepaster.hpp"
 #include "controller/zoomwheelcontroller.hpp"
 #include "widgetcolumnstylist.hpp"
-#include "kcursor.hpp"
+#include "cursor.hpp"
 #include "bordercolumnrenderer.hpp"
 #include "oktetagui.hpp"
 // Okteta core
@@ -126,7 +126,7 @@ AbstractByteArrayViewPrivate::AbstractByteArrayViewPrivate(AbstractByteArrayView
     , mTableLayout(new ByteArrayTableLayout(DefaultNoOfBytesPerLine, DefaultFirstLineOffset, DefaultStartOffset, 0, 0))
     , mTableCursor(new ByteArrayTableCursor(mTableLayout))
     , mTableRanges(new ByteArrayTableRanges(mTableLayout))
-    , mCursorPixmaps(new KCursor())
+    , mCursorPixmaps(new Cursor())
     , mReadOnly(false)
     , mOverWriteOnly(false)
     , mOverWrite(true)

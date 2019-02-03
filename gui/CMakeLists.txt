@@ -75,7 +75,7 @@ okteta_add_sublibrary(Gui  NAMESPACE Okteta
 
     PRIVATE
         ByteArrayTableCursor
-        KCursor
+        Cursor
 )
 
 

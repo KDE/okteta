@@ -20,15 +20,15 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kcursor.hpp"
+#include "cursor.hpp"
 
 namespace Okteta {
 
-KCursor::KCursor() = default;
+Cursor::Cursor() = default;
 
-KCursor::~KCursor() = default;
+Cursor::~Cursor() = default;
 
-void KCursor::setSize(PixelX Width, PixelY Height, qreal devicePixelRatio)
+void Cursor::setSize(PixelX Width, PixelY Height, qreal devicePixelRatio)
 {
     const int scaledWidth = Width * devicePixelRatio;
     const int scaledHeight = Height * devicePixelRatio;
@@ -40,7 +40,7 @@ void KCursor::setSize(PixelX Width, PixelY Height, qreal devicePixelRatio)
     OffPixmap.setDevicePixelRatio(devicePixelRatio);
 }
 
-void KCursor::setShape(PixelX X, PixelX W, qreal devicePixelRatio)
+void Cursor::setShape(PixelX X, PixelX W, qreal devicePixelRatio)
 {
     CursorX = X;
     ShapeX = X * devicePixelRatio;

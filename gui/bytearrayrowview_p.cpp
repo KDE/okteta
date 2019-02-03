@@ -27,7 +27,7 @@
 #include "bordercolumnrenderer.hpp"
 #include "widgetcolumnstylist.hpp"
 #include "controller/dropper.hpp"
-#include "kcursor.hpp"
+#include "cursor.hpp"
 // Okteta core
 #include <Okteta/ValueCodec>
 // Qt

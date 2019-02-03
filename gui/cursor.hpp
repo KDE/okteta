@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef OKTETA_KCURSOR_HPP
-#define OKTETA_KCURSOR_HPP
+#ifndef OKTETA_CURSOR_HPP
+#define OKTETA_CURSOR_HPP
 
 // lib
 #include "kadds.hpp"
@@ -33,11 +33,11 @@ namespace Okteta {
 /**
  * @author Friedrich W. H. Kossebau
  */
-class KCursor
+class Cursor
 {
 public:
-    KCursor();
-    virtual ~KCursor();
+    Cursor();
+    virtual ~Cursor();
 
 public:
     /** sets size of the full cursor */
@@ -61,12 +61,12 @@ protected:
     PixelX ShapeW = -1;
 };
 
-inline QPixmap& KCursor::onPixmap()  { return OnPixmap; }
-inline QPixmap& KCursor::offPixmap() { return OffPixmap; }
+inline QPixmap& Cursor::onPixmap()  { return OnPixmap; }
+inline QPixmap& Cursor::offPixmap() { return OffPixmap; }
 
-inline PixelX KCursor::cursorX() const { return CursorX; }
-inline PixelX KCursor::shapeX() const { return ShapeX; }
-inline PixelX KCursor::shapeW() const { return ShapeW; }
+inline PixelX Cursor::cursorX() const { return CursorX; }
+inline PixelX Cursor::shapeX() const { return ShapeX; }
+inline PixelX Cursor::shapeW() const { return ShapeW; }
 
 }
 
