@@ -23,11 +23,14 @@
 #ifndef ABSTRACTTOOLFACTORY_HPP
 #define ABSTRACTTOOLFACTORY_HPP
 
+// lib
+#include <kasten/kastencore_export.hpp>
+
 namespace Kasten {
 
 class AbstractTool;
 
-class AbstractToolFactory
+class KASTENCORE_EXPORT AbstractToolFactory
 {
 public:
     virtual ~AbstractToolFactory();

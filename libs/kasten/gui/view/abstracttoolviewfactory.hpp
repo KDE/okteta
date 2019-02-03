@@ -23,13 +23,15 @@
 #ifndef ABSTRACTTOOLVIEWFACTORY_HPP
 #define ABSTRACTTOOLVIEWFACTORY_HPP
 
+// lib
+#include <kasten/kastengui_export.hpp>
 #include <kasten/kastengui.hpp>
 
 namespace Kasten {
 class AbstractToolView;
 class AbstractTool;
 
-class AbstractToolViewFactory
+class KASTENGUI_EXPORT AbstractToolViewFactory
 {
 public:
     virtual ~AbstractToolViewFactory();
