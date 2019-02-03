@@ -184,7 +184,7 @@ void AbstractByteArrayViewPrivate::init()
     mCharCodec = CharCodec::createCodec((CharCoding)DefaultCharCoding);
     mCharCoding = DefaultCharCoding;
 
-    mTabController = new KTabController(q, nullptr);
+    mTabController = new TabController(q, nullptr);
     mNavigator = new KNavigator(q, mTabController);
     mValueEditor = new ValueEditor(mTableCursor, q, mNavigator);
     mCharEditor = new CharEditor(mTableCursor, q, mNavigator);

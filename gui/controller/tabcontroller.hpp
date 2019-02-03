@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef OKTETA_KTABCONTROLLER_HPP
-#define OKTETA_KTABCONTROLLER_HPP
+#ifndef OKTETA_TABCONTROLLER_HPP
+#define OKTETA_TABCONTROLLER_HPP
 
 // lib
 #include "kcontroller.hpp"
@@ -29,10 +29,10 @@
 namespace Okteta {
 class AbstractByteArrayView;
 
-class KTabController : public KController
+class TabController : public KController
 {
 public:
-    KTabController(AbstractByteArrayView* view, KController* parent);
+    TabController(AbstractByteArrayView* view, KController* parent);
 
 public: // KController API
     bool handleKeyPress(QKeyEvent* keyEvent) override;
@@ -48,8 +48,8 @@ protected:
     bool mTabChangesFocus : 1;
 };
 
-inline bool KTabController::tabChangesFocus()    const { return mTabChangesFocus; }
-inline void KTabController::setTabChangesFocus(bool tabChangesFocus) { mTabChangesFocus = tabChangesFocus; }
+inline bool TabController::tabChangesFocus()    const { return mTabChangesFocus; }
+inline void TabController::setTabChangesFocus(bool tabChangesFocus) { mTabChangesFocus = tabChangesFocus; }
 
 }
 

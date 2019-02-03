@@ -52,7 +52,7 @@ class AbstractByteArrayViewPrivate;
 // so it's AbstractByteArrayView < ColumnsView < {ByteArrayRowView,ByteArrayColumnView}
 class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
 {
-    friend class KTabController;
+    friend class TabController;
     friend class KNavigator;
     friend class KEditor;
     friend class ValueEditor;

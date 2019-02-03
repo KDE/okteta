@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "ktabcontroller.hpp"
+#include "tabcontroller.hpp"
 
 // lib
 #include <abstractbytearrayview.hpp>
@@ -29,14 +29,14 @@
 
 namespace Okteta {
 
-KTabController::KTabController(AbstractByteArrayView* view, KController* parent)
+TabController::TabController(AbstractByteArrayView* view, KController* parent)
     : KController(parent)
     , mView(view)
     , mTabChangesFocus(true)
 {
 }
 
-bool KTabController::handleKeyPress(QKeyEvent* keyEvent)
+bool TabController::handleKeyPress(QKeyEvent* keyEvent)
 {
     bool keyUsed = false;
 

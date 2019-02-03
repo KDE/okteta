@@ -29,7 +29,7 @@
 #include "bytearraytableranges.hpp"
 #include "bytearraytablelayout.hpp"
 #include "controller/valueeditor.hpp"
-#include "controller/ktabcontroller.hpp"
+#include "controller/tabcontroller.hpp"
 #include "offsetcolumnrenderer.hpp"
 // Okteta core
 #include <Okteta/AbstractByteArrayModel>
@@ -256,7 +256,7 @@ protected:
 
 protected:
     /** */
-    KTabController* mTabController;
+    TabController* mTabController;
     /** */
     KNavigator* mNavigator;
     /** */
