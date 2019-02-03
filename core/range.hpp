@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KDE_RANGE_HPP
-#define KDE_RANGE_HPP
+#ifndef OKTETA_RANGE_HPP
+#define OKTETA_RANGE_HPP
 
-namespace KDE {
+namespace Okteta {
 
 /** This template describes a range.
  * A range is something with a start and an end.

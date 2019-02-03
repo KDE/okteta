@@ -33,8 +33,8 @@ namespace Okteta {
 using PixelX = int;
 using PixelY = int;
 
-using PixelXRange = KDE::NumberRange<PixelX>;
-using PixelYRange = KDE::NumberRange<PixelY>;
+using PixelXRange = NumberRange<PixelX>;
+using PixelYRange = NumberRange<PixelY>;
 
 }
 

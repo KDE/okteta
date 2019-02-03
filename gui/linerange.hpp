@@ -30,7 +30,7 @@
 
 namespace Okteta {
 
-using LineRange = KDE::NumberRange<Line, LineSize>;
+using LineRange = NumberRange<Line, LineSize>;
 
 }
 

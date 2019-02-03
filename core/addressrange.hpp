@@ -30,7 +30,7 @@
 
 namespace Okteta {
 
-using AddressRange = KDE::NumberRange<Address, Size>;
+using AddressRange = NumberRange<Address, Size>;
 
 }
 

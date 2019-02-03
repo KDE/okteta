@@ -127,14 +127,14 @@ void GroupPieceTableChangeTest::testRevertBeforeChange()
     TestPieceTableChange* change2 = new TestPieceTableChange(type2Id, description2, 2);
     TestPieceTableChange* change3 = new TestPieceTableChange(type3Id, description3, 3);
     TestPieceTableChange* change4 = new TestPieceTableChange(type4Id, description4, 4);
-    KDE::ArrayChangeMetrics changeMetrics1 = change1->metrics();
-    KDE::ArrayChangeMetrics changeMetrics2 = change2->metrics();
-    KDE::ArrayChangeMetrics changeMetrics3 = change3->metrics();
-    KDE::ArrayChangeMetrics changeMetrics4 = change4->metrics();
-    KDE::ArrayChangeMetrics revertedChangeMetrics1 = change1->metrics(); revertedChangeMetrics1.revert();
-    KDE::ArrayChangeMetrics revertedChangeMetrics2 = change2->metrics(); revertedChangeMetrics2.revert();
-    KDE::ArrayChangeMetrics revertedChangeMetrics3 = change3->metrics(); revertedChangeMetrics3.revert();
-    KDE::ArrayChangeMetrics revertedChangeMetrics4 = change4->metrics(); revertedChangeMetrics4.revert();
+    Okteta::ArrayChangeMetrics changeMetrics1 = change1->metrics();
+    Okteta::ArrayChangeMetrics changeMetrics2 = change2->metrics();
+    Okteta::ArrayChangeMetrics changeMetrics3 = change3->metrics();
+    Okteta::ArrayChangeMetrics changeMetrics4 = change4->metrics();
+    Okteta::ArrayChangeMetrics revertedChangeMetrics1 = change1->metrics(); revertedChangeMetrics1.revert();
+    Okteta::ArrayChangeMetrics revertedChangeMetrics2 = change2->metrics(); revertedChangeMetrics2.revert();
+    Okteta::ArrayChangeMetrics revertedChangeMetrics3 = change3->metrics(); revertedChangeMetrics3.revert();
+    Okteta::ArrayChangeMetrics revertedChangeMetrics4 = change4->metrics(); revertedChangeMetrics4.revert();
 
     bool result = groupPieceTableChange.appendChange(change1);
     result = groupPieceTableChange.appendChange(change2);

@@ -20,13 +20,13 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KDE_NUMBERRANGE_HPP
-#define KDE_NUMBERRANGE_HPP
+#ifndef OKTETA_NUMBERRANGE_HPP
+#define OKTETA_NUMBERRANGE_HPP
 
 // lib
 #include <okteta/range.hpp>
 
-namespace KDE {
+namespace Okteta {
 
 /** describes a range of numbers which have a distance of 1 each
  * @author Friedrich W. H.  Kossebau
