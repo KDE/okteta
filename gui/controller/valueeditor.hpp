@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef OKTETA_KVALUEEDITOR_HPP
-#define OKTETA_KVALUEEDITOR_HPP
+#ifndef OKTETA_VALUEEDITOR_HPP
+#define OKTETA_VALUEEDITOR_HPP
 
 // lib
 #include "keditor.hpp"
@@ -33,7 +33,7 @@
 namespace Okteta {
 class AbstractByteArrayView;
 
-class KValueEditor : public KEditor
+class ValueEditor : public KEditor
 {
 protected:
     enum KValueEditAction
@@ -48,8 +48,8 @@ protected:
     };
 
 public:
-    KValueEditor(ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KController* parent);
-    ~KValueEditor() override;
+    ValueEditor(ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KController* parent);
+    ~ValueEditor() override;
 
 public: // KController API
     bool handleKeyPress(QKeyEvent* keyEvent) override;
@@ -90,10 +90,10 @@ protected:
     QString mValueString;
 };
 
-inline bool KValueEditor::isInEditMode() const { return mInEditMode; }
-inline void KValueEditor::reset() { mInEditMode = false; }
-inline Byte KValueEditor::value() const { return mEditValue; }
-inline QString KValueEditor::valueAsString() const { return mValueString; }
+inline bool ValueEditor::isInEditMode() const { return mInEditMode; }
+inline void ValueEditor::reset() { mInEditMode = false; }
+inline Byte ValueEditor::value() const { return mEditValue; }
+inline QString ValueEditor::valueAsString() const { return mValueString; }
 
 }
 

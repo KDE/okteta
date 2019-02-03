@@ -28,7 +28,7 @@
 #include "bytearraytablecursor.hpp"
 #include "bytearraytableranges.hpp"
 #include "bytearraytablelayout.hpp"
-#include "controller/kvalueeditor.hpp"
+#include "controller/valueeditor.hpp"
 #include "controller/ktabcontroller.hpp"
 #include "offsetcolumnrenderer.hpp"
 // Okteta core
@@ -98,7 +98,7 @@ public: // value access
     KController* controller() const;
     AbstractWheelController* wheelController() const;
 
-    KValueEditor* valueEditor() const;
+    ValueEditor* valueEditor() const;
     Dropper* dropper() const;
 
     ByteArrayTableLayout* layout() const;
@@ -260,7 +260,7 @@ protected:
     /** */
     KNavigator* mNavigator;
     /** */
-    KValueEditor* mValueEditor;
+    ValueEditor* mValueEditor;
     /** */
     KCharEditor* mCharEditor;
 
@@ -352,7 +352,7 @@ inline AddressRange AbstractByteArrayViewPrivate::marking() const { return mTabl
 
 inline bool AbstractByteArrayViewPrivate::tabChangesFocus()      const { return mTabController->tabChangesFocus(); }
 inline bool AbstractByteArrayViewPrivate::isByteEditorActive()   const { return mValueEditor->isInEditMode(); }
-inline KValueEditor* AbstractByteArrayViewPrivate::valueEditor() const { return mValueEditor; }
+inline ValueEditor* AbstractByteArrayViewPrivate::valueEditor()  const { return mValueEditor; }
 inline Dropper* AbstractByteArrayViewPrivate::dropper()          const { return mDropper; }
 inline bool AbstractByteArrayViewPrivate::offsetColumnVisible()  const { return mOffsetColumn->isVisible(); }
 inline AbstractByteArrayView::OffsetCoding AbstractByteArrayViewPrivate::offsetCoding() const

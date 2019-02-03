@@ -186,7 +186,7 @@ void AbstractByteArrayViewPrivate::init()
 
     mTabController = new KTabController(q, nullptr);
     mNavigator = new KNavigator(q, mTabController);
-    mValueEditor = new KValueEditor(mTableCursor, q, mNavigator);
+    mValueEditor = new ValueEditor(mTableCursor, q, mNavigator);
     mCharEditor = new KCharEditor(mTableCursor, q, mNavigator);
 
     mMousePaster = new MousePaster(q, nullptr);

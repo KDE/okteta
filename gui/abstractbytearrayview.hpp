@@ -55,7 +55,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     friend class KTabController;
     friend class KNavigator;
     friend class KEditor;
-    friend class KValueEditor;
+    friend class ValueEditor;
     friend class KCharEditor;
     friend class Dropper;
     friend class MouseNavigator;

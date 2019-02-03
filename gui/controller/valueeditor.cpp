@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kvalueeditor.hpp"
+#include "valueeditor.hpp"
 
 // lib
 #include <bytearraytablecursor.hpp>
@@ -36,22 +36,22 @@
 
 namespace Okteta {
 
-KValueEditor::KValueEditor(ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KController* parent)
+ValueEditor::ValueEditor(ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KController* parent)
     : KEditor(cursor, view, parent)
     , mInEditMode(false)
     , mEditModeByInsert(false)
 {
 }
 
-KValueEditor::~KValueEditor() = default;
+ValueEditor::~ValueEditor() = default;
 
-void KValueEditor::adaptToValueCodecChange()
+void ValueEditor::adaptToValueCodecChange()
 {
     const uint newCodingWidth = mView->valueCodec()->encodingWidth();
     mValueString.resize(newCodingWidth);
 }
 
-void KValueEditor::startEdit(const QString& description)
+void ValueEditor::startEdit(const QString& description)
 {
     Q_ASSERT(!mInEditMode);
 
@@ -66,7 +66,7 @@ void KValueEditor::startEdit(const QString& description)
     mInEditMode = true;
 }
 
-void KValueEditor::cancelEdit(bool undoChanges)
+void ValueEditor::cancelEdit(bool undoChanges)
 {
 //     Q_ASSERT( mInEditMode );
     if (!mInEditMode) {
@@ -87,7 +87,7 @@ void KValueEditor::cancelEdit(bool undoChanges)
     }
 }
 
-void KValueEditor::finishEdit()
+void ValueEditor::finishEdit()
 {
     if (!mInEditMode) {
         return;
@@ -104,7 +104,7 @@ void KValueEditor::finishEdit()
     }
 }
 
-bool KValueEditor::handleKeyPress(QKeyEvent* keyEvent)
+bool ValueEditor::handleKeyPress(QKeyEvent* keyEvent)
 {
     bool keyUsed = true;
 
@@ -199,7 +199,7 @@ bool KValueEditor::handleKeyPress(QKeyEvent* keyEvent)
     return keyUsed ? true : KEditor::handleKeyPress(keyEvent);
 }
 
-void KValueEditor::doValueEditAction(KValueEditAction Action, int input)
+void ValueEditor::doValueEditAction(KValueEditAction Action, int input)
 {
     const Okteta::ValueCodec* valueCodec = mView->valueCodec();
 
