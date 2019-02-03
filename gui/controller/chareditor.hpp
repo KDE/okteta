@@ -20,47 +20,24 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kchareditor.hpp"
+#ifndef OKTETA_CHAREDITOR_HPP
+#define OKTETA_CHAREDITOR_HPP
 
 // lib
-#include <abstractbytearrayview.hpp>
-// Okteta core
-#include <Okteta/CharCodec>
-// Qt
-#include <QKeyEvent>
+#include "keditor.hpp"
 
 namespace Okteta {
 
-KCharEditor::KCharEditor(ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KController* parent)
-    : KEditor(cursor, view, parent)
+class CharEditor : public KEditor
 {
-}
+public:
+    CharEditor(ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KController* parent);
+    ~CharEditor() override;
 
-KCharEditor::~KCharEditor() = default;
-
-bool KCharEditor::handleKeyPress(QKeyEvent* keyEvent)
-{
-    bool keyUsed = false;
-
-    const QString text = keyEvent->text();
-
-    // some input that should be inserted?
-    if (text.length() > 0
-        && !(keyEvent->modifiers() & (Qt::CTRL | Qt::ALT | Qt::META))) {
-
-        const QChar enteredChar = text.at(0);
-        if (enteredChar.isPrint()) {
-            Byte byte;
-            if (mView->charCodec()->encode(&byte, enteredChar)) {
-                QByteArray data(1, byte);
-                mView->insert(data);
-
-                keyUsed = true;
-            }
-        }
-    }
-
-    return keyUsed ? true : KEditor::handleKeyPress(keyEvent);
-}
+public: // KController API
+    bool handleKeyPress(QKeyEvent* keyEvent) override;
+};
 
 }
+
+#endif

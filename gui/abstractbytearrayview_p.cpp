@@ -24,7 +24,7 @@
 
 // lib
 #include "controller/knavigator.hpp"
-#include "controller/kchareditor.hpp"
+#include "controller/chareditor.hpp"
 #include "controller/dropper.hpp"
 #include "controller/mousenavigator.hpp"
 #include "controller/mousepaster.hpp"
@@ -187,7 +187,7 @@ void AbstractByteArrayViewPrivate::init()
     mTabController = new KTabController(q, nullptr);
     mNavigator = new KNavigator(q, mTabController);
     mValueEditor = new ValueEditor(mTableCursor, q, mNavigator);
-    mCharEditor = new KCharEditor(mTableCursor, q, mNavigator);
+    mCharEditor = new CharEditor(mTableCursor, q, mNavigator);
 
     mMousePaster = new MousePaster(q, nullptr);
     mMouseNavigator = new MouseNavigator(q, mMousePaster);

@@ -22,7 +22,7 @@ oktetagui_add_sublibrary(controller
         KEditor
         KNavigator
         KTabController
-        KCharEditor
+        CharEditor
         ValueEditor
         MouseNavigator
         MousePaster
