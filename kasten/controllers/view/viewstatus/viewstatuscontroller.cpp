@@ -91,7 +91,7 @@ ViewStatusController::ViewStatusController(StatusBar* statusBar)
 }
 
 // the letter C can be very wide, that is why with proportinal fonts there seems too much space used, but isn't
-// see http://frinring.wordpress.com/2008/10/14/better-width-with-open-sources/
+// see https://frinring.wordpress.com/2008/10/14/better-width-with-open-sources/
 void ViewStatusController::fixWidths(int offsetCoding)
 {
     const QFontMetrics metrics = mStatusBar->fontMetrics();

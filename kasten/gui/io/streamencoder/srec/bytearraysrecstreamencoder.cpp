@@ -71,7 +71,7 @@ void ByteArraySRecStreamEncoder::streamBlockHeader(QTextStream& textStream, unsi
 //                         const char* moduleName = 0, const char* description = 0,
 //                         quint8 version = 0, quint8 revision = 0 )
 {
-    // cmp. http://linux.die.net/man/5/srec
+    // cmp. https://linux.die.net/man/1/srec_cat
     // WP says: vendor specific data rather than program data
 //     static const int moduleNameLineOffset = 3;
 //     static const int moduleNameLength = 10;

@@ -123,7 +123,7 @@ function cp_info() {
 }
 
 function init() {
-    //from http://docs.oracle.com/javase/specs/jvms/se7/html/jvms-4.html
+    //from https://docs.oracle.com/javase/specs/jvms/se7/html/jvms-4.html
     /*
     ClassFile {
         u4             magic;

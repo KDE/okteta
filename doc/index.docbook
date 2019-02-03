@@ -580,7 +580,7 @@ Support for strings (various Unicode encodings) in definitions
         X-KDE-PluginInfo-Email=foo.bar@email.org
         X-KDE-PluginInfo-Name=simplestruct
         X-KDE-PluginInfo-Version=1.0
-        X-KDE-PluginInfo-Website=http://www.plugin.org/
+        X-KDE-PluginInfo-Website=https://www.plugin.org/
         X-KDE-PluginInfo-Category=structure
         X-KDE-PluginInfo-License=LGPL
         X-KDE-PluginInfo-EnabledByDefault=false

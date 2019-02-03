@@ -43,7 +43,7 @@ QVariant Utf8Codec::value(const PODData& data, int* byteCount) const
 {
     // UTF-8
     // interpreted as a sequence of bytes, there is no endian problem
-    // source: http://unicode.org/faq/utf_bom.html#3
+    // source: https://unicode.org/faq/utf_bom.html#3
     const QChar replacementChar(QChar::ReplacementCharacter);
     const char* originalData = (const char*)data.originalData();
     const int maxUtf8DataSize = data.size();

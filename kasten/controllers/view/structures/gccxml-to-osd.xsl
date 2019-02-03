@@ -10,8 +10,8 @@ xsltproc -stringparam structs complex gccxml-to-osd.xsl example.gcc.xml > exampl
 
 See:
 https://frinring.wordpress.com/2010/01/16/tutorial-create-your-own-okteta-structure-definitions/
-http://www.gccxml.org/
-http://utils.kde.org/projects/okteta/
+https://gccxml.github.io/HTML/Index.html
+https://www.kde.org/applications/utilities/okteta/
 
 In case of doubts you can contact me at ale@clearmind.me
 
