@@ -156,7 +156,7 @@ QVariant StatisticTableModel::data(const QModelIndex& index, int role) const
         case ValueId:
         {
             QString value;
-            mValueCodec->encode(value, 0, byte);
+            mValueCodec->encode(&value, 0, byte);
             result = value;
             break;
         }

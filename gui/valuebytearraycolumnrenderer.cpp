@@ -81,7 +81,7 @@ bool ValueByteArrayColumnRenderer::setBinaryGapWidth(PixelX binaryGapWidth)
 void ValueByteArrayColumnRenderer::recalcByteWidth()
 {
     // use 0 as reference, using a fixed font should always yield same width
-    mValueCodec->encode(mDecodedByteText, 0, Byte(0));
+    mValueCodec->encode(&mDecodedByteText, 0, Byte(0));
     if (mValueCoding == BinaryCoding) {
         const int binaryHalfWidth = mFontMetrics.width(mDecodedByteText.left(4));
         mBinaryHalfOffset = binaryHalfWidth + mBinaryGapWidth;
@@ -113,7 +113,7 @@ void ValueByteArrayColumnRenderer::renderByteText(QPainter* painter,
 {
     Q_UNUSED(byteChar)
 
-    mValueCodec->encode(mDecodedByteText, 0, byte);
+    mValueCodec->encode(&mDecodedByteText, 0, byte);
     renderCode(painter, mDecodedByteText, color);
 }
 

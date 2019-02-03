@@ -135,7 +135,7 @@ QVariant ByteTableModel::data(const QModelIndex& index, int role) const
             // TODO: show proper descriptions for all control values, incl. space and delete
             // cmp. KCharSelect
         } else if (column < CharacterId) {
-            mValueCodec[column]->encode(content, 0, byte);
+            mValueCodec[column]->encode(&content, 0, byte);
         }
 
         result = content;

@@ -63,19 +63,19 @@ bool HexadecimalByteCodec::isLowerCaseDigits() const { return mDigits == lowerCa
 unsigned int HexadecimalByteCodec::encodingWidth() const { return 2; }
 Byte HexadecimalByteCodec::digitsFilledLimit() const { return hexadecimalDigitsFilledLimit; }
 
-void HexadecimalByteCodec::encode(QString& digits, unsigned int pos, Byte byte) const
+void HexadecimalByteCodec::encode(QString* digits, unsigned int pos, Byte byte) const
 {
-    digits[pos++] = mDigits[byte >> 4];
-    digits[pos] = mDigits[byte & 0x0F];
+    (*digits)[pos++] = mDigits[byte >> 4];
+    (*digits)[pos] = mDigits[byte & 0x0F];
 }
 
-void HexadecimalByteCodec::encodeShort(QString& digits, unsigned int pos, Byte byte) const
+void HexadecimalByteCodec::encodeShort(QString* digits, unsigned int pos, Byte byte) const
 {
     unsigned char digitValue = byte >> 4;
     if (digitValue > 0) {
-        digits[pos++] = mDigits[digitValue];
+        (*digits)[pos++] = mDigits[digitValue];
     }
-    digits[pos] = mDigits[byte & 0x0F];
+    (*digits)[pos] = mDigits[byte & 0x0F];
 }
 
 static inline bool isValidBigDigit(unsigned char digit)

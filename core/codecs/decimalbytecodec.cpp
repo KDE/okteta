@@ -30,30 +30,30 @@ namespace Okteta {
 unsigned int DecimalByteCodec::encodingWidth() const { return 3; }
 Byte DecimalByteCodec::digitsFilledLimit() const { return 26; }
 
-void DecimalByteCodec::encode(QString& digits, unsigned int pos, Byte byte) const
+void DecimalByteCodec::encode(QString* digits, unsigned int pos, Byte byte) const
 {
     unsigned char digitValue = byte / 100;
-    digits[pos++] = QLatin1Char('0' + digitValue);
+    (*digits)[pos++] = QLatin1Char('0' + digitValue);
     byte -= digitValue * 100;
     digitValue = byte / 10;
-    digits[pos++] = QLatin1Char('0' + digitValue);
+    (*digits)[pos++] = QLatin1Char('0' + digitValue);
     byte -= digitValue * 10;
-    digits[pos] = QLatin1Char('0' + byte);
+    (*digits)[pos] = QLatin1Char('0' + byte);
 }
 
-void DecimalByteCodec::encodeShort(QString& digits, unsigned int pos, Byte byte) const
+void DecimalByteCodec::encodeShort(QString* digits, unsigned int pos, Byte byte) const
 {
     const unsigned char firstDigitValue = byte / 100;
     if (firstDigitValue > 0) {
-        digits[pos++] = QLatin1Char('0' + firstDigitValue);
+        (*digits)[pos++] = QLatin1Char('0' + firstDigitValue);
         byte -= firstDigitValue * 100;
     }
     const unsigned char secondDigitValue = byte / 10;
     if (secondDigitValue > 0 || firstDigitValue > 0) {
-        digits[pos++] = QLatin1Char('0' + secondDigitValue);
+        (*digits)[pos++] = QLatin1Char('0' + secondDigitValue);
         byte -= secondDigitValue * 10;
     }
-    digits[pos] = QLatin1Char('0' + byte);
+    (*digits)[pos] = QLatin1Char('0' + byte);
 }
 
 bool DecimalByteCodec::isValidDigit(unsigned char digit) const

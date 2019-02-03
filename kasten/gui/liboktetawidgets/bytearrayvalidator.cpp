@@ -185,7 +185,7 @@ QString ByteArrayValidator::toString(const QByteArray& byteArray) const
         result.resize(byteArraySize * encodingWidth);
         int r = 0;
         for (int i = 0; i < byteArraySize; ++i, r += encodingWidth) {
-            mValueCodec->encode(result, r, byteArray[i]);
+            mValueCodec->encode(&result, r, byteArray[i]);
         }
     }
     return result;

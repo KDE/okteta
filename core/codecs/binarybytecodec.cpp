@@ -31,14 +31,14 @@ static const Byte binaryDigitsFilledLimit = 128;
 unsigned int BinaryByteCodec::encodingWidth() const { return 8; }
 Byte BinaryByteCodec::digitsFilledLimit() const { return binaryDigitsFilledLimit; }
 
-void BinaryByteCodec::encode(QString& digits, unsigned int pos, Byte byte) const
+void BinaryByteCodec::encode(QString* digits, unsigned int pos, Byte byte) const
 {
     for (Byte mask = 1 << 7; mask > 0; mask >>= 1) {
-        digits[pos++] = QLatin1Char((byte & mask) ? '1' : '0');
+        (*digits)[pos++] = QLatin1Char((byte & mask) ? '1' : '0');
     }
 }
 
-void BinaryByteCodec::encodeShort(QString& digits, unsigned int pos, Byte byte) const
+void BinaryByteCodec::encodeShort(QString* digits, unsigned int pos, Byte byte) const
 {
     Byte mask = 1 << 7;
     // find first set bit, at last break on LSB
@@ -50,7 +50,7 @@ void BinaryByteCodec::encodeShort(QString& digits, unsigned int pos, Byte byte) 
 
     // now set the
     for (; mask > 0; mask >>= 1) {
-        digits[pos++] = QLatin1Char((byte & mask) ? '1' : '0');
+        (*digits)[pos++] = QLatin1Char((byte & mask) ? '1' : '0');
     }
 }
 

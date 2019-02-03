@@ -43,8 +43,8 @@ public: // ValueCodec API
     unsigned int encodingWidth() const override;
     Byte digitsFilledLimit() const override;
 
-    void encode(QString& digits, unsigned int pos, Byte byte) const override;
-    void encodeShort(QString& digits, unsigned int pos, Byte byte) const override;
+    void encode(QString* digits, unsigned int pos, Byte byte) const override;
+    void encodeShort(QString* digits, unsigned int pos, Byte byte) const override;
     bool appendDigit(Byte* byte, unsigned char digit) const override;
     void removeLastDigit(Byte* byte) const override;
     bool isValidDigit(unsigned char digit) const override;

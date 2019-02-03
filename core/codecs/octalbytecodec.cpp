@@ -31,25 +31,25 @@ static const Byte octalDigitsFilledLimit = 32;
 unsigned int OctalByteCodec::encodingWidth() const { return 3; }
 Byte OctalByteCodec::digitsFilledLimit() const { return octalDigitsFilledLimit; }
 
-void OctalByteCodec::encode(QString& digits, unsigned int pos, Byte byte) const
+void OctalByteCodec::encode(QString* digits, unsigned int pos, Byte byte) const
 {
-    digits[pos++] = QLatin1Char('0' + (byte >> 6));
-    digits[pos++] = QLatin1Char('0' + ((byte >> 3) & 0x07));
-    digits[pos] =   QLatin1Char('0' + ((byte)      & 0x07));
+    (*digits)[pos++] = QLatin1Char('0' + (byte >> 6));
+    (*digits)[pos++] = QLatin1Char('0' + ((byte >> 3) & 0x07));
+    (*digits)[pos] =   QLatin1Char('0' + ((byte)      & 0x07));
 }
 
-void OctalByteCodec::encodeShort(QString& digits, unsigned int pos, Byte byte) const
+void OctalByteCodec::encodeShort(QString* digits, unsigned int pos, Byte byte) const
 {
     const unsigned char firstDigitValue = byte >> 6;
     if (firstDigitValue > 0) {
-        digits[pos++] = QLatin1Char('0' + firstDigitValue);
+        (*digits)[pos++] = QLatin1Char('0' + firstDigitValue);
     }
     const unsigned char secondDigitValue = (byte >> 3) & 0x07;
     if (secondDigitValue > 0 || firstDigitValue > 0) {
-        digits[pos++] = QLatin1Char('0' + secondDigitValue);
+        (*digits)[pos++] = QLatin1Char('0' + secondDigitValue);
     }
     const unsigned char lastDigitValue = byte & 0x07;
-    digits[pos] = QLatin1Char('0' + lastDigitValue);
+    (*digits)[pos] = QLatin1Char('0' + lastDigitValue);
 }
 
 bool OctalByteCodec::isValidDigit(unsigned char digit) const

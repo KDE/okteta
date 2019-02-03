@@ -175,7 +175,7 @@ bool ValueEditor::handleKeyPress(QKeyEvent* keyEvent)
                                 mEditModeByInsert = true;
                                 mOldValue = mEditValue = inputValue;
                                 mInsertedDigitsCount = 1;
-                                valueCodec->encode(mValueString, 0, mEditValue);
+                                valueCodec->encode(&mValueString, 0, mEditValue);
 
                                 mCursor->gotoIndex(index);
                                 mView->ensureCursorVisible();
@@ -275,7 +275,7 @@ void ValueEditor::doValueEditAction(KValueEditAction Action, int input)
     if (newValue != mEditValue) {
         // sync value
         mEditValue = newValue;
-        valueCodec->encode(mValueString, 0, mEditValue);
+        valueCodec->encode(&mValueString, 0, mEditValue);
         mView->byteArrayModel()->replace(mCursor->index(), 1, &mEditValue, 1);
     }
 

@@ -47,7 +47,7 @@ QString AbstractValue8Editor::textFromValue(int value) const
 {
     QString result;
 
-    mValueCodec->encodeShort(result, 0, (Okteta::Byte)value);
+    mValueCodec->encodeShort(&result, 0, (Okteta::Byte)value);
 
     return result;
 }

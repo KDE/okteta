@@ -68,16 +68,14 @@ public: // API to be implemented
      * @param pos offset in digits where to write the code to
      * @param byte data to encode
      */
-    virtual void encode(QString& digits, unsigned int pos, Byte byte) const = 0;
-    // TODO: make this QString* digits
+    virtual void encode(QString* digits, unsigned int pos, Byte byte) const = 0;
     /**
      * Encodes the byte and writes the result to digits, no leading 0s.
      * @param digits string to write the digits into
      * @param pos offset in digits where to write the code to
      * @param byte data to encode
      */
-    virtual void encodeShort(QString& digits, unsigned int pos, Byte byte) const = 0;
-    // TODO: make this QString* digits
+    virtual void encodeShort(QString* digits, unsigned int pos, Byte byte) const = 0;
 
     /**
      * Tries to increase the byte value by appending a digit to the digits of

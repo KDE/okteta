@@ -99,7 +99,7 @@ void ValueCodecTest::testEncodeDecode()
     ValueCodec* codec = ValueCodec::createCodec((ValueCoding)codecId);
 
     QString digits;
-    codec->encode(digits, 0, byte);
+    codec->encode(&digits, 0, byte);
     QCOMPARE(digits.length(), (int)codec->encodingWidth());
 
     Byte decodedByte;
@@ -136,7 +136,7 @@ void ValueCodecTest::testEncodeShortDecode()
     ValueCodec* codec = ValueCodec::createCodec((ValueCoding)codecId);
 
     QString digits;
-    codec->encodeShort(digits, 0, byte);
+    codec->encodeShort(&digits, 0, byte);
     QVERIFY(!digits.isEmpty());
     QVERIFY(digits.length() <= (int)codec->encodingWidth());
 
@@ -174,7 +174,7 @@ void ValueCodecTest::testAppendDigit()
     ValueCodec* codec = ValueCodec::createCodec((ValueCoding)codecId);
 
     QString digits;
-    codec->encode(digits, 0, byte);
+    codec->encode(&digits, 0, byte);
 
     Byte decodedByte = 0;
     for (auto d : qAsConst(digits)) {
@@ -217,7 +217,7 @@ void ValueCodecTest::testRemoveLastDigit()
     ValueCodec* codec = ValueCodec::createCodec((ValueCoding)codecId);
 
     QString digits;
-    codec->encode(digits, 0, byte);
+    codec->encode(&digits, 0, byte);
 
     Byte modifiedByte = byte;
     for (uint i = 0; i < removedDigitCount; ++i) {
@@ -225,7 +225,7 @@ void ValueCodecTest::testRemoveLastDigit()
     }
 
     QString modifiedDigits;
-    codec->encode(modifiedDigits, 0, modifiedByte);
+    codec->encode(&modifiedDigits, 0, modifiedByte);
 
     QVERIFY(digits.startsWith(modifiedDigits.mid(removedDigitCount)));
     QVERIFY(modifiedDigits.startsWith(QString(removedDigitCount, QLatin1Char('0'))));

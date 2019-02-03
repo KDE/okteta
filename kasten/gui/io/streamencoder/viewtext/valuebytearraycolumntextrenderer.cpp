@@ -70,7 +70,7 @@ void ValueByteArrayColumnTextRenderer::renderLine(QTextStream* stream, bool isSu
         const uint t = mLinePositions[p];
         // clear spacing
         *stream << whiteSpace(t - e);
-        mValueCodec->encode(E, 0, mByteArrayModel->byte(mOffset));
+        mValueCodec->encode(&E, 0, mByteArrayModel->byte(mOffset));
         *stream << E;
         e = t + mValueCodec->encodingWidth();
     }

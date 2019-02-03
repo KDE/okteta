@@ -70,7 +70,7 @@ bool ByteArrayValuesStreamEncoder::encodeDataToStream(QIODevice* device,
             textStream << mSettings.separation;
         }
 
-        valueCodec->encode(valueString, 0, byteArrayModel->byte(i));
+        valueCodec->encode(&valueString, 0, byteArrayModel->byte(i));
 
         textStream << valueString;
     }
