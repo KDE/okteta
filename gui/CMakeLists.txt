@@ -16,7 +16,7 @@ endmacro()
 
 oktetagui_add_sublibrary(controller
     PRIVATE
-        KController
+        AbstractController
         AbstractMouseController
         AbstractWheelController
         AbstractEditor

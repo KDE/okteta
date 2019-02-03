@@ -29,8 +29,8 @@
 
 namespace Okteta {
 
-TabController::TabController(AbstractByteArrayView* view, KController* parent)
-    : KController(parent)
+TabController::TabController(AbstractByteArrayView* view, AbstractController* parent)
+    : AbstractController(parent)
     , mView(view)
     , mTabChangesFocus(true)
 {
@@ -63,7 +63,7 @@ bool TabController::handleKeyPress(QKeyEvent* keyEvent)
         }
     }
 
-    return keyUsed ? true : KController::handleKeyPress(keyEvent);
+    return keyUsed ? true : AbstractController::handleKeyPress(keyEvent);
 }
 
 }

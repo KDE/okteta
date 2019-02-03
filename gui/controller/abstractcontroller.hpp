@@ -20,20 +20,29 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kcontroller.hpp"
+#ifndef OKTETA_ABSTRACTCONTROLLER_HPP
+#define OKTETA_ABSTRACTCONTROLLER_HPP
+
+class QKeyEvent;
 
 namespace Okteta {
 
-KController::KController(KController* parent)
-    : mParent(parent)
+class AbstractController
 {
+protected:
+    explicit AbstractController(AbstractController* parent);
+    AbstractController() = delete;
+
+public:
+    virtual ~AbstractController();
+
+public: // API to be implemented
+    virtual bool handleKeyPress(QKeyEvent* keyEvent);
+
+protected:
+    AbstractController* mParent;
+};
+
 }
 
-KController::~KController() = default;
-
-bool KController::handleKeyPress(QKeyEvent* keyEvent)
-{
-    return mParent ? mParent->handleKeyPress(keyEvent) : false;
-}
-
-}
+#endif

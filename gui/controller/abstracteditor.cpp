@@ -34,8 +34,8 @@
 
 namespace Okteta {
 
-AbstractEditor::AbstractEditor(ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KController* parent)
-    : KController(parent)
+AbstractEditor::AbstractEditor(ByteArrayTableCursor* cursor, AbstractByteArrayView* view, AbstractController* parent)
+    : AbstractController(parent)
     , mCursor(cursor)
     , mView(view)
 {
@@ -97,7 +97,7 @@ bool AbstractEditor::handleKeyPress(QKeyEvent* keyEvent)
         keyUsed = false;
     }
 
-    return keyUsed ? true : KController::handleKeyPress(keyEvent);
+    return keyUsed ? true : AbstractController::handleKeyPress(keyEvent);
 }
 
 void AbstractEditor::doEditAction(EditAction action)

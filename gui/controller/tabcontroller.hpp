@@ -24,17 +24,17 @@
 #define OKTETA_TABCONTROLLER_HPP
 
 // lib
-#include "kcontroller.hpp"
+#include "abstractcontroller.hpp"
 
 namespace Okteta {
 class AbstractByteArrayView;
 
-class TabController : public KController
+class TabController : public AbstractController
 {
 public:
-    TabController(AbstractByteArrayView* view, KController* parent);
+    TabController(AbstractByteArrayView* view, AbstractController* parent);
 
-public: // KController API
+public: // AbstractController API
     bool handleKeyPress(QKeyEvent* keyEvent) override;
 
 public:

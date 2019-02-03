@@ -24,13 +24,13 @@
 #define OKTETA_ABSTRACTEDITOR_HPP
 
 // lib
-#include "kcontroller.hpp"
+#include "abstractcontroller.hpp"
 
 namespace Okteta {
 class AbstractByteArrayView;
 class ByteArrayTableCursor;
 
-class AbstractEditor : public KController
+class AbstractEditor : public AbstractController
 {
 protected:
     enum EditAction
@@ -42,12 +42,12 @@ protected:
     };
 
 protected:
-    AbstractEditor(ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KController* parent);
+    AbstractEditor(ByteArrayTableCursor* cursor, AbstractByteArrayView* view, AbstractController* parent);
 
 public:
     ~AbstractEditor() override;
 
-public: // KController API
+public: // AbstractController API
     bool handleKeyPress(QKeyEvent* keyEvent) override;
 
 protected:

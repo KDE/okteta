@@ -40,7 +40,7 @@ class CharCodec;
 class AbstractByteArrayModel;
 class ArrayChangeMetricsList;
 
-class KController;
+class AbstractController;
 class AbstractWheelController;
 class ByteArrayTableLayout;
 class ByteArrayTableCursor;

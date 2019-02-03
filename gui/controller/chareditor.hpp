@@ -31,10 +31,10 @@ namespace Okteta {
 class CharEditor : public AbstractEditor
 {
 public:
-    CharEditor(ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KController* parent);
+    CharEditor(ByteArrayTableCursor* cursor, AbstractByteArrayView* view, AbstractController* parent);
     ~CharEditor() override;
 
-public: // KController API
+public: // AbstractController API
     bool handleKeyPress(QKeyEvent* keyEvent) override;
 };
 

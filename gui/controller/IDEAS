@@ -1,5 +1,5 @@
 Keyboard-Controller is simpler than the Mouse-Controller:
-The KController::handleKeyPress(keyEvent) is a stateless method which passes
+The AbstractController::handleKeyPress(keyEvent) is a stateless method which passes
 the input event in a priority chain of controllers until one accepts it.
 The controller may only depend on the state of the view, but not on previous input.
 (This may change in the future with VI-like control)

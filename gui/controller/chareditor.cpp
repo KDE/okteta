@@ -31,7 +31,7 @@
 
 namespace Okteta {
 
-CharEditor::CharEditor(ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KController* parent)
+CharEditor::CharEditor(ByteArrayTableCursor* cursor, AbstractByteArrayView* view, AbstractController* parent)
     : AbstractEditor(cursor, view, parent)
 {
 }

@@ -24,12 +24,12 @@
 #define OKTETA_KEYNAVIGATOR_HPP
 
 // lib
-#include "kcontroller.hpp"
+#include "abstractcontroller.hpp"
 
 namespace Okteta {
 class AbstractByteArrayView;
 
-class KeyNavigator : public KController
+class KeyNavigator : public AbstractController
 {
 protected:
     enum MoveAction
@@ -49,9 +49,9 @@ protected:
     };
 
 public:
-    KeyNavigator(AbstractByteArrayView* view, KController* parent);
+    KeyNavigator(AbstractByteArrayView* view, AbstractController* parent);
 
-public: // KController API
+public: // AbstractController API
     bool handleKeyPress(QKeyEvent* keyEvent) override;
 
 protected:

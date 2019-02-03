@@ -36,7 +36,7 @@
 
 namespace Okteta {
 
-ValueEditor::ValueEditor(ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KController* parent)
+ValueEditor::ValueEditor(ByteArrayTableCursor* cursor, AbstractByteArrayView* view, AbstractController* parent)
     : AbstractEditor(cursor, view, parent)
     , mInEditMode(false)
     , mEditModeByInsert(false)

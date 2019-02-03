@@ -33,8 +33,8 @@
 
 namespace Okteta {
 
-KeyNavigator::KeyNavigator(AbstractByteArrayView* view, KController* parent)
-    : KController(parent)
+KeyNavigator::KeyNavigator(AbstractByteArrayView* view, AbstractController* parent)
+    : AbstractController(parent)
     , mView(view)
 {
 }
@@ -88,7 +88,7 @@ bool KeyNavigator::handleKeyPress(QKeyEvent* keyEvent)
         }
     }
 
-    return keyUsed ? true : KController::handleKeyPress(keyEvent);
+    return keyUsed ? true : AbstractController::handleKeyPress(keyEvent);
 }
 
 void KeyNavigator::moveCursor(MoveAction action, bool select)

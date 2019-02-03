@@ -24,7 +24,7 @@
 #include "abstractbytearrayview_p.hpp"
 
 // lib
-#include "controller/kcontroller.hpp"
+#include "controller/abstractcontroller.hpp"
 #include "controller/abstractwheelcontroller.hpp"
 #include "bytearraytablelayout.hpp"
 

@@ -48,10 +48,10 @@ protected:
     };
 
 public:
-    ValueEditor(ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KController* parent);
+    ValueEditor(ByteArrayTableCursor* cursor, AbstractByteArrayView* view, AbstractController* parent);
     ~ValueEditor() override;
 
-public: // KController API
+public: // AbstractController API
     bool handleKeyPress(QKeyEvent* keyEvent) override;
 
 public:

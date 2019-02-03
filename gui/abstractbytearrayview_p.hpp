@@ -95,7 +95,7 @@ public: // value access
 
     AddressRange marking() const;
 
-    KController* controller() const;
+    AbstractController* controller() const;
     AbstractWheelController* wheelController() const;
 
     ValueEditor* valueEditor() const;
@@ -117,7 +117,7 @@ public:
     void init();
     void setByteArrayModel(AbstractByteArrayModel* byteArrayModel);
     // TODO: delete old controller?
-    void setController(KController* controller);
+    void setController(AbstractController* controller);
     void setWheelController(AbstractWheelController* wheelController);
     void setReadOnly(bool readOnly);
     void setOverwriteOnly(bool overwriteOnly);
@@ -240,7 +240,7 @@ protected:
     AbstractByteArrayModel* mByteArrayModel;
 
     /** the current input controller */
-    KController* mController;
+    AbstractController* mController;
     AbstractMouseController* mMouseController;
     AbstractWheelController* mWheelController;
 
@@ -316,7 +316,7 @@ protected:
 };
 
 inline AbstractByteArrayModel* AbstractByteArrayViewPrivate::byteArrayModel() const { return mByteArrayModel; }
-inline KController* AbstractByteArrayViewPrivate::controller() const { return mController; }
+inline AbstractController* AbstractByteArrayViewPrivate::controller() const { return mController; }
 inline AbstractWheelController* AbstractByteArrayViewPrivate::wheelController() const { return mWheelController; }
 
 inline bool AbstractByteArrayViewPrivate::isOverwriteMode() const { return mOverWrite; }
@@ -373,7 +373,7 @@ inline void AbstractByteArrayViewPrivate::setTabChangesFocus(bool tabChangesFocu
     mTabController->setTabChangesFocus(tabChangesFocus);
 }
 
-inline void AbstractByteArrayViewPrivate::setController(KController* controller) { mController = controller; }
+inline void AbstractByteArrayViewPrivate::setController(AbstractController* controller) { mController = controller; }
 inline void AbstractByteArrayViewPrivate::setWheelController(AbstractWheelController* wheelController) { mWheelController = wheelController; }
 inline void AbstractByteArrayViewPrivate::setModified(bool modified) { mByteArrayModel->setModified(modified); }
 

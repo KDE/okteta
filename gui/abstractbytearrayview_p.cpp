@@ -959,10 +959,10 @@ bool AbstractByteArrayViewPrivate::getNextChangedRange(CoordRange* changedRange,
 
 void AbstractByteArrayViewPrivate::adaptController()
 {
-    KController* controller =
-        isEffectiveReadOnly() ?                                 (KController*)mKeyNavigator :
-        activeCoding() == AbstractByteArrayView::CharCodingId ? (KController*)mCharEditor :
-        (KController*)mValueEditor;
+    AbstractController* controller =
+        isEffectiveReadOnly() ?                                 static_cast<AbstractController*>(mKeyNavigator) :
+        activeCoding() == AbstractByteArrayView::CharCodingId ? static_cast<AbstractController*>(mCharEditor) :
+                                                                static_cast<AbstractController*>(mValueEditor);
     setController(controller);
 }
 
