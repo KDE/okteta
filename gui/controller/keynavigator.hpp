@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef OKTETA_KNAVIGATOR_HPP
-#define OKTETA_KNAVIGATOR_HPP
+#ifndef OKTETA_KEYNAVIGATOR_HPP
+#define OKTETA_KEYNAVIGATOR_HPP
 
 // lib
 #include "kcontroller.hpp"
@@ -29,10 +29,10 @@
 namespace Okteta {
 class AbstractByteArrayView;
 
-class KNavigator : public KController
+class KeyNavigator : public KController
 {
 protected:
-    enum KMoveAction
+    enum MoveAction
     {
         MoveBackward,
         MoveWordBackward,
@@ -49,14 +49,14 @@ protected:
     };
 
 public:
-    KNavigator(AbstractByteArrayView* view, KController* parent);
+    KeyNavigator(AbstractByteArrayView* view, KController* parent);
 
 public: // KController API
     bool handleKeyPress(QKeyEvent* keyEvent) override;
 
 protected:
     /** moves the cursor according to the action, handles all drawing */
-    void moveCursor(KMoveAction Action, bool Select);
+    void moveCursor(MoveAction action, bool select);
 
 protected:
     AbstractByteArrayView* mView;

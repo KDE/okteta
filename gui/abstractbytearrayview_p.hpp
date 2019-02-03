@@ -38,7 +38,7 @@
 class QTimer;
 
 namespace Okteta {
-class KNavigator;
+class KeyNavigator;
 class CharEditor;
 
 class Dropper;
@@ -258,7 +258,7 @@ protected:
     /** */
     TabController* mTabController;
     /** */
-    KNavigator* mNavigator;
+    KeyNavigator* mKeyNavigator;
     /** */
     ValueEditor* mValueEditor;
     /** */

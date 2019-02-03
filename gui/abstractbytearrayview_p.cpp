@@ -23,7 +23,7 @@
 #include "abstractbytearrayview_p.hpp"
 
 // lib
-#include "controller/knavigator.hpp"
+#include "controller/keynavigator.hpp"
 #include "controller/chareditor.hpp"
 #include "controller/dropper.hpp"
 #include "controller/mousenavigator.hpp"
@@ -150,7 +150,7 @@ AbstractByteArrayViewPrivate::~AbstractByteArrayViewPrivate()
 
     delete mCharEditor;
     delete mValueEditor;
-    delete mNavigator;
+    delete mKeyNavigator;
     delete mTabController;
 
     delete mStylist;
@@ -185,9 +185,9 @@ void AbstractByteArrayViewPrivate::init()
     mCharCoding = DefaultCharCoding;
 
     mTabController = new TabController(q, nullptr);
-    mNavigator = new KNavigator(q, mTabController);
-    mValueEditor = new ValueEditor(mTableCursor, q, mNavigator);
-    mCharEditor = new CharEditor(mTableCursor, q, mNavigator);
+    mKeyNavigator = new KeyNavigator(q, mTabController);
+    mValueEditor = new ValueEditor(mTableCursor, q, mKeyNavigator);
+    mCharEditor = new CharEditor(mTableCursor, q, mKeyNavigator);
 
     mMousePaster = new MousePaster(q, nullptr);
     mMouseNavigator = new MouseNavigator(q, mMousePaster);
@@ -960,7 +960,7 @@ bool AbstractByteArrayViewPrivate::getNextChangedRange(CoordRange* changedRange,
 void AbstractByteArrayViewPrivate::adaptController()
 {
     KController* controller =
-        isEffectiveReadOnly() ?                                 (KController*)mNavigator :
+        isEffectiveReadOnly() ?                                 (KController*)mKeyNavigator :
         activeCoding() == AbstractByteArrayView::CharCodingId ? (KController*)mCharEditor :
         (KController*)mValueEditor;
     setController(controller);

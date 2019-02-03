@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "knavigator.hpp"
+#include "keynavigator.hpp"
 
 // lib
 #include <bytearraytableranges.hpp>
@@ -33,13 +33,13 @@
 
 namespace Okteta {
 
-KNavigator::KNavigator(AbstractByteArrayView* view, KController* parent)
+KeyNavigator::KeyNavigator(AbstractByteArrayView* view, KController* parent)
     : KController(parent)
     , mView(view)
 {
 }
 
-bool KNavigator::handleKeyPress(QKeyEvent* keyEvent)
+bool KeyNavigator::handleKeyPress(QKeyEvent* keyEvent)
 {
     bool keyUsed;
 
@@ -91,7 +91,7 @@ bool KNavigator::handleKeyPress(QKeyEvent* keyEvent)
     return keyUsed ? true : KController::handleKeyPress(keyEvent);
 }
 
-void KNavigator::moveCursor(KMoveAction action, bool select)
+void KeyNavigator::moveCursor(MoveAction action, bool select)
 {
     mView->pauseCursor();
     mView->finishByteEdit();
