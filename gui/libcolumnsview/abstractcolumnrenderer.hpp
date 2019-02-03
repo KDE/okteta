@@ -24,7 +24,7 @@
 #define OKTETA_ABSTRACTCOLUMNRENDERER_HPP
 
 // lib
-#include <okteta/kadds.hpp>
+#include <okteta/pixelmetrics.hpp>
 #include <okteta/oktetagui_export.hpp>
 
 class QPainter;

@@ -25,7 +25,7 @@
 
 // lib
 #include <okteta/oktetagui_export.hpp>
-#include <okteta/kadds.hpp>
+#include <okteta/pixelmetrics.hpp>
 #include <okteta/linerange.hpp>
 // Qt
 #include <QList>

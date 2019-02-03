@@ -20,14 +20,13 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef OKTETA_KADDS_HPP
-#define OKTETA_KADDS_HPP
+#ifndef OKTETA_PIXELMETRICS_HPP
+#define OKTETA_PIXELMETRICS_HPP
 
 // Okteta core
 #include <Okteta/NumberRange>
 
 namespace Okteta {
-// some possibly useful additions to KDE
 
 // these are to emphasize that measuring unit is pixel and which direction
 using PixelX = int;

@@ -26,7 +26,7 @@
 // this
 #include <okteta/lineposition.hpp>
 // ColumnsView
-#include <okteta/kadds.hpp>
+#include <okteta/pixelmetrics.hpp>
 // Okteta core
 #include <Okteta/Byte>
 #include <Okteta/OktetaCore>

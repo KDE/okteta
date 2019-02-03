@@ -24,7 +24,7 @@
 #define OKTETA_CURSOR_HPP
 
 // lib
-#include "kadds.hpp"
+#include "pixelmetrics.hpp"
 // Qt
 #include <QPixmap>
 

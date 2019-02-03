@@ -26,7 +26,7 @@
 // lib
 #include "abstractframerenderer.hpp"
 // Okteta gui
-#include <Okteta/KAdds>
+#include <Okteta/PixelMetrics>
 #include <Okteta/Line>
 // Okteta core
 #include <Okteta/AddressRange>

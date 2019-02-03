@@ -33,10 +33,10 @@ oktetagui_add_sublibrary(controller
 
 oktetagui_add_sublibrary(libcolumnsview
     PUBLIC
-        KAdds # TODO: this header needs to be redone
         AbstractColumnStylist
         AbstractColumnRenderer
         ColumnsView
+        PixelMetrics # TODO: this header needs to be redone
 
     PRIVATE
         AbstractColumnStylist
