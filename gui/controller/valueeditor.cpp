@@ -37,7 +37,7 @@
 namespace Okteta {
 
 ValueEditor::ValueEditor(ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KController* parent)
-    : KEditor(cursor, view, parent)
+    : AbstractEditor(cursor, view, parent)
     , mInEditMode(false)
     , mEditModeByInsert(false)
 {
@@ -196,7 +196,7 @@ bool ValueEditor::handleKeyPress(QKeyEvent* keyEvent)
         keyUsed = false;
     }
 
-    return keyUsed ? true : KEditor::handleKeyPress(keyEvent);
+    return keyUsed ? true : AbstractEditor::handleKeyPress(keyEvent);
 }
 
 void ValueEditor::doValueEditAction(KValueEditAction Action, int input)

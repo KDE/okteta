@@ -32,7 +32,7 @@
 namespace Okteta {
 
 CharEditor::CharEditor(ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KController* parent)
-    : KEditor(cursor, view, parent)
+    : AbstractEditor(cursor, view, parent)
 {
 }
 
@@ -60,7 +60,7 @@ bool CharEditor::handleKeyPress(QKeyEvent* keyEvent)
         }
     }
 
-    return keyUsed ? true : KEditor::handleKeyPress(keyEvent);
+    return keyUsed ? true : AbstractEditor::handleKeyPress(keyEvent);
 }
 
 }

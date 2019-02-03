@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "keditor.hpp"
+#include "abstracteditor.hpp"
 
 // lib
 #include <bytearraytablelayout.hpp>
@@ -34,16 +34,16 @@
 
 namespace Okteta {
 
-KEditor::KEditor(ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KController* parent)
+AbstractEditor::AbstractEditor(ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KController* parent)
     : KController(parent)
     , mCursor(cursor)
     , mView(view)
 {
 }
 
-KEditor::~KEditor() = default;
+AbstractEditor::~AbstractEditor() = default;
 
-bool KEditor::handleKeyPress(QKeyEvent* keyEvent)
+bool AbstractEditor::handleKeyPress(QKeyEvent* keyEvent)
 {
     const bool shiftPressed =   keyEvent->modifiers() & Qt::SHIFT;
     const bool controlPressed = keyEvent->modifiers() & Qt::CTRL;
@@ -100,7 +100,7 @@ bool KEditor::handleKeyPress(QKeyEvent* keyEvent)
     return keyUsed ? true : KController::handleKeyPress(keyEvent);
 }
 
-void KEditor::doEditAction(KEditAction action)
+void AbstractEditor::doEditAction(EditAction action)
 {
     Okteta::AbstractByteArrayModel* byteArrayModel = mView->byteArrayModel();
     switch (action)

@@ -24,11 +24,11 @@
 #define OKTETA_CHAREDITOR_HPP
 
 // lib
-#include "keditor.hpp"
+#include "abstracteditor.hpp"
 
 namespace Okteta {
 
-class CharEditor : public KEditor
+class CharEditor : public AbstractEditor
 {
 public:
     CharEditor(ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KController* parent);

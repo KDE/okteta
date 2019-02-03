@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef OKTETA_KEDITOR_HPP
-#define OKTETA_KEDITOR_HPP
+#ifndef OKTETA_ABSTRACTEDITOR_HPP
+#define OKTETA_ABSTRACTEDITOR_HPP
 
 // lib
 #include "kcontroller.hpp"
@@ -30,10 +30,10 @@ namespace Okteta {
 class AbstractByteArrayView;
 class ByteArrayTableCursor;
 
-class KEditor : public KController
+class AbstractEditor : public KController
 {
 protected:
-    enum KEditAction
+    enum EditAction
     {
         CharDelete,
         WordDelete,
@@ -42,17 +42,17 @@ protected:
     };
 
 protected:
-    KEditor(ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KController* parent);
+    AbstractEditor(ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KController* parent);
 
 public:
-    ~KEditor() override;
+    ~AbstractEditor() override;
 
 public: // KController API
     bool handleKeyPress(QKeyEvent* keyEvent) override;
 
 protected:
-    /** executes keyboard Action \a Action. This is normally called by a key event handler. */
-    void doEditAction(KEditAction Action);
+    /** executes edit action \p action. This is normally called by a key event handler. */
+    void doEditAction(EditAction action);
 
 protected:
     ByteArrayTableCursor* mCursor;

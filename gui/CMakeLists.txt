@@ -19,7 +19,7 @@ oktetagui_add_sublibrary(controller
         KController
         AbstractMouseController
         AbstractWheelController
-        KEditor
+        AbstractEditor
         KeyNavigator
         TabController
         CharEditor

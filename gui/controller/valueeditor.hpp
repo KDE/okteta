@@ -24,7 +24,7 @@
 #define OKTETA_VALUEEDITOR_HPP
 
 // lib
-#include "keditor.hpp"
+#include "abstracteditor.hpp"
 // Okteta core
 #include <Okteta/Byte>
 // Qt
@@ -33,7 +33,7 @@
 namespace Okteta {
 class AbstractByteArrayView;
 
-class ValueEditor : public KEditor
+class ValueEditor : public AbstractEditor
 {
 protected:
     enum KValueEditAction

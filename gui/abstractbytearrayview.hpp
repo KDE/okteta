@@ -54,7 +54,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
 {
     friend class TabController;
     friend class KeyNavigator;
-    friend class KEditor;
+    friend class AbstractEditor;
     friend class ValueEditor;
     friend class CharEditor;
     friend class Dropper;
