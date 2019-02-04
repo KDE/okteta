@@ -509,4 +509,5 @@
   <provides>
     <binary>okteta</binary>
   </provides>
+  <launchable type="desktop-id">org.kde.okteta.desktop</launchable>
 </component>
