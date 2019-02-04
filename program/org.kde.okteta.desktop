@@ -97,6 +97,7 @@ Type=Application
 X-DocPath=okteta/index.html
 Terminal=false
 StartupNotify=true
+StartupWMClass=okteta
 X-DBUS-StartupType=Multi
 X-DBUS-ServiceName=org.kde.okteta
 Categories=Qt;KDE;Utility;X-KDE-Utilities-File;
