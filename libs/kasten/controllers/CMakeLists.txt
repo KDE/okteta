@@ -181,7 +181,6 @@ okteta_add_library(Controllers NAMESPACE Kasten
     NO_TARGET_NAMESPACE
     NO_VERSIONED_INCLUDEDIR
     NO_VERSIONED_PACKAGE_NAMESPACE
-    LOWERCASE_LIB
 )
 
 okteta_add_cmakeconfig(Controllers NAMESPACE Kasten
