@@ -65,7 +65,7 @@ void PieceTableByteArrayModelPrivate::setData(const QByteArray& data)
 {
     const int oldSize = mPieceTable.size();
     const bool wasModifiedBefore = isModified();
-    const QList<Bookmark> bookmarks = mBookmarks.list();
+    const QVector<Bookmark> bookmarks = mBookmarks.list();
 
     mInitialData = data;
     mPieceTable.init(data.size());

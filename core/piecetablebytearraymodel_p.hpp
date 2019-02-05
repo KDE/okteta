@@ -71,8 +71,8 @@ public: // set/action
     void revertToVersionByIndex(int versionIndex);
 
 public:
-    void addBookmarks(const QList<Bookmark>& bookmarks);
-    void removeBookmarks(const QList<Bookmark>& bookmarks);
+    void addBookmarks(const QVector<Bookmark>& bookmarks);
+    void removeBookmarks(const QVector<Bookmark>& bookmarks);
     void removeAllBookmarks();
     void setBookmark(unsigned int index, const Bookmark& bookmark);
 
@@ -155,12 +155,12 @@ inline int PieceTableByteArrayModelPrivate::versionCount() const { return mPiece
 inline QString PieceTableByteArrayModelPrivate::versionDescription(int versionIndex) const
 { return mPieceTable.changeDescription(versionIndex - 1); }
 
-inline void PieceTableByteArrayModelPrivate::addBookmarks(const QList<Bookmark>& bookmarks)
+inline void PieceTableByteArrayModelPrivate::addBookmarks(const QVector<Bookmark>& bookmarks)
 {
     mBookmarks.addBookmarks(bookmarks);
     emit p->bookmarksAdded(bookmarks);
 }
-inline void PieceTableByteArrayModelPrivate::removeBookmarks(const QList<Bookmark>& bookmarks)
+inline void PieceTableByteArrayModelPrivate::removeBookmarks(const QVector<Bookmark>& bookmarks)
 {
     mBookmarks.removeBookmarks(bookmarks);
     emit p->bookmarksRemoved(bookmarks);
@@ -168,7 +168,7 @@ inline void PieceTableByteArrayModelPrivate::removeBookmarks(const QList<Bookmar
 
 inline void PieceTableByteArrayModelPrivate::removeAllBookmarks()
 {
-    const QList<Bookmark> bookmarks = mBookmarks.list();
+    const QVector<Bookmark> bookmarks = mBookmarks.list();
     mBookmarks.clear();
     emit p->bookmarksRemoved(bookmarks);
 }

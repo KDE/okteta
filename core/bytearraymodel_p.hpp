@@ -77,8 +77,8 @@ public:
     bool autoDelete() const;
 
 public: // Bookmarkable API
-    void addBookmarks(const QList<Bookmark>& bookmarks);
-    void removeBookmarks(const QList<Bookmark>& bookmarks);
+    void addBookmarks(const QVector<Bookmark>& bookmarks);
+    void removeBookmarks(const QVector<Bookmark>& bookmarks);
     void removeAllBookmarks();
     void setBookmark(unsigned int index, const Bookmark& bookmark);
 
@@ -164,12 +164,12 @@ inline int ByteArrayModelPrivate::maxSize()      const { return mMaxSize; }
 inline bool ByteArrayModelPrivate::keepsMemory() const { return mKeepsMemory; }
 inline bool ByteArrayModelPrivate::autoDelete()  const { return mAutoDelete; }
 
-inline void ByteArrayModelPrivate::addBookmarks(const QList<Bookmark>& bookmarks)
+inline void ByteArrayModelPrivate::addBookmarks(const QVector<Bookmark>& bookmarks)
 {
     m_bookmarks.addBookmarks(bookmarks);
     emit p->bookmarksAdded(bookmarks);
 }
-inline void ByteArrayModelPrivate::removeBookmarks(const QList<Bookmark>& bookmarks)
+inline void ByteArrayModelPrivate::removeBookmarks(const QVector<Bookmark>& bookmarks)
 {
     m_bookmarks.removeBookmarks(bookmarks);
     emit p->bookmarksRemoved(bookmarks);
@@ -177,7 +177,7 @@ inline void ByteArrayModelPrivate::removeBookmarks(const QList<Bookmark>& bookma
 
 inline void ByteArrayModelPrivate::removeAllBookmarks()
 {
-    QList<Bookmark> bookmarks = m_bookmarks.list();
+    const QVector<Bookmark> bookmarks = m_bookmarks.list();
     m_bookmarks.clear();
     emit p->bookmarksRemoved(bookmarks);
 }

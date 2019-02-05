@@ -64,7 +64,7 @@ void ExternalBookmarkStorage::readBookmarks(ByteArrayDocument* document, const Q
         if (bm.fullText() == urlString) {
             KBookmarkGroup bmGroup = bm.toGroup();
 
-            QList<Okteta::Bookmark> bookmarksToBeCreated;
+            QVector<Okteta::Bookmark> bookmarksToBeCreated;
             Okteta::Bookmark bookmark;
             for (bm = bmGroup.first(); !bm.isNull(); bm = bmGroup.next(bm)) {
                 if (bm.isSeparator() || bm.isGroup()) {

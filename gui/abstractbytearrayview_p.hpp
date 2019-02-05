@@ -185,7 +185,7 @@ public: // events
 
 public: // slots
     void onContentsChanged(const ArrayChangeMetricsList& changeList);
-    void onBookmarksChange(const QList<Bookmark>& bookmarks);
+    void onBookmarksChange(const QVector<Bookmark>& bookmarks);
     void onRevertedToVersionIndex(int versionIndex);
     void onByteArrayReadOnlyChange(bool isByteArrayReadOnly);
 //     void onClipboardChanged();

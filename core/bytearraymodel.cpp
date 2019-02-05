@@ -106,12 +106,12 @@ Size ByteArrayModel::fill(Byte fillByte, Address offset, Size fillLength)
     return d->fill(fillByte, offset, fillLength);
 }
 
-void ByteArrayModel::addBookmarks(const QList<Okteta::Bookmark>& bookmarks)
+void ByteArrayModel::addBookmarks(const QVector<Okteta::Bookmark>& bookmarks)
 {
     d->addBookmarks(bookmarks);
 }
 
-void ByteArrayModel::removeBookmarks(const QList<Okteta::Bookmark>& bookmarks)
+void ByteArrayModel::removeBookmarks(const QVector<Okteta::Bookmark>& bookmarks)
 {
     d->removeBookmarks(bookmarks);
 }

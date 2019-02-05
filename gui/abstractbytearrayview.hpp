@@ -472,7 +472,7 @@ protected:
 
 private:
     Q_DECLARE_PRIVATE(AbstractByteArrayView)
-    Q_PRIVATE_SLOT(d_func(), void onBookmarksChange(const QList<Okteta::Bookmark> &bookmarks))
+    Q_PRIVATE_SLOT(d_func(), void onBookmarksChange(const QVector<Okteta::Bookmark> &bookmarks))
     Q_PRIVATE_SLOT(d_func(), void onRevertedToVersionIndex(int versionIndex))
 //     Q_PRIVATE_SLOT( d_func(), void onClipboardChanged() )
 };

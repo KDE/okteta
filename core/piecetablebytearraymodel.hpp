@@ -88,8 +88,8 @@ public: // set/action
     void revertToVersionByIndex(int versionIndex) override;
 
 public: // Bookmarkable API
-    void addBookmarks(const QList<Okteta::Bookmark>& bookmarks) override;
-    void removeBookmarks(const QList<Okteta::Bookmark>& bookmarks) override;
+    void addBookmarks(const QVector<Okteta::Bookmark>& bookmarks) override;
+    void removeBookmarks(const QVector<Okteta::Bookmark>& bookmarks) override;
     void removeAllBookmarks() override;
     void setBookmark(unsigned int index, const Okteta::Bookmark& bookmark) override;
 
@@ -119,8 +119,8 @@ Q_SIGNALS: // Versionable signals
     void headVersionChanged(int newHeadVersionIndex) override;
 
 Q_SIGNALS: // Bookmarkable signals
-    void bookmarksAdded(const QList<Okteta::Bookmark>& bookmarks) override;
-    void bookmarksRemoved(const QList<Okteta::Bookmark>& bookmarks) override;
+    void bookmarksAdded(const QVector<Okteta::Bookmark>& bookmarks) override;
+    void bookmarksRemoved(const QVector<Okteta::Bookmark>& bookmarks) override;
     void bookmarksModified(bool modified) override;
     void bookmarksModified(const QList<int>& indizes) override;
 

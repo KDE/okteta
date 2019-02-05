@@ -94,13 +94,13 @@ void BookmarksTool::setTargetModel(AbstractModel* model)
     if (hasViewWithBookmarks) {
         onCursorPositionChanged(mByteArrayView->cursorPosition());
 
-        connect(mByteArray, SIGNAL(bookmarksAdded(QList<Okteta::Bookmark>)),
-                SIGNAL(bookmarksAdded(QList<Okteta::Bookmark>)));
-        connect(mByteArray, SIGNAL(bookmarksRemoved(QList<Okteta::Bookmark>)),
-                SIGNAL(bookmarksRemoved(QList<Okteta::Bookmark>)));
-        connect(mByteArray, SIGNAL(bookmarksAdded(QList<Okteta::Bookmark>)),
+        connect(mByteArray, SIGNAL(bookmarksAdded(QVector<Okteta::Bookmark>)),
+                SIGNAL(bookmarksAdded(QVector<Okteta::Bookmark>)));
+        connect(mByteArray, SIGNAL(bookmarksRemoved(QVector<Okteta::Bookmark>)),
+                SIGNAL(bookmarksRemoved(QVector<Okteta::Bookmark>)));
+        connect(mByteArray, SIGNAL(bookmarksAdded(QVector<Okteta::Bookmark>)),
                 SLOT(onBookmarksModified()));
-        connect(mByteArray, SIGNAL(bookmarksRemoved(QList<Okteta::Bookmark>)),
+        connect(mByteArray, SIGNAL(bookmarksRemoved(QVector<Okteta::Bookmark>)),
                 SLOT(onBookmarksModified()));
         connect(mByteArray, SIGNAL(bookmarksModified(QList<int>)),
                 SIGNAL(bookmarksModified(QList<int>)));
@@ -144,14 +144,14 @@ Okteta::Bookmark BookmarksTool::createBookmark()
         bookmark.setOffset(mByteArrayView->cursorPosition());
         bookmark.setName(bookmarkName);
 
-        const QList<Okteta::Bookmark> bookmarksToBeCreated { bookmark };
+        const QVector<Okteta::Bookmark> bookmarksToBeCreated { bookmark };
         mBookmarks->addBookmarks(bookmarksToBeCreated);
     }
 
     return bookmark;
 }
 
-void BookmarksTool::deleteBookmarks(const QList<Okteta::Bookmark>& bookmarks)
+void BookmarksTool::deleteBookmarks(const QVector<Okteta::Bookmark>& bookmarks)
 {
     if (mBookmarks) {
         mBookmarks->removeBookmarks(bookmarks);

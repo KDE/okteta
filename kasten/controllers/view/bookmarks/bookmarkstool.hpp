@@ -70,12 +70,12 @@ public:
     Okteta::Bookmark createBookmark();
     void gotoBookmark(const Okteta::Bookmark& bookmark);
     void setBookmarkName(unsigned int bookmarkIndex, const QString& name);
-    void deleteBookmarks(const QList<Okteta::Bookmark>& bookmarks);
+    void deleteBookmarks(const QVector<Okteta::Bookmark>& bookmarks);
 
 Q_SIGNALS:
     void hasBookmarksChanged(bool hasBookmarks);
-    void bookmarksAdded(const QList<Okteta::Bookmark>& bookmarks);
-    void bookmarksRemoved(const QList<Okteta::Bookmark>& bookmarks);
+    void bookmarksAdded(const QVector<Okteta::Bookmark>& bookmarks);
+    void bookmarksRemoved(const QVector<Okteta::Bookmark>& bookmarks);
     void bookmarksModified(const QList<int>& indizes);
     void canCreateBookmarkChanged(bool canCreateBookmark);
     void offsetCodingChanged(int offsetCoding);

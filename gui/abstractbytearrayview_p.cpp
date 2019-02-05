@@ -232,10 +232,10 @@ void AbstractByteArrayViewPrivate::setByteArrayModel(AbstractByteArrayModel* byt
 
     Bookmarkable* bookmarks = qobject_cast<Bookmarkable*>(mByteArrayModel);
     if (bookmarks) {
-        q->connect(mByteArrayModel, SIGNAL(bookmarksAdded(QList<Okteta::Bookmark>)),
-                   q, SLOT(onBookmarksChange(QList<Okteta::Bookmark>)));
-        q->connect(mByteArrayModel, SIGNAL(bookmarksRemoved(QList<Okteta::Bookmark>)),
-                   q, SLOT(onBookmarksChange(QList<Okteta::Bookmark>)));
+        q->connect(mByteArrayModel, SIGNAL(bookmarksAdded(QVector<Okteta::Bookmark>)),
+                   q, SLOT(onBookmarksChange(QVector<Okteta::Bookmark>)));
+        q->connect(mByteArrayModel, SIGNAL(bookmarksRemoved(QVector<Okteta::Bookmark>)),
+                   q, SLOT(onBookmarksChange(QVector<Okteta::Bookmark>)));
     }
     Versionable* versionControl = qobject_cast<Versionable*>(mByteArrayModel);
     if (versionControl) {
@@ -1203,7 +1203,7 @@ void AbstractByteArrayViewPrivate::dropEvent(QDropEvent* dropEvent)
     }
 }
 
-void AbstractByteArrayViewPrivate::onBookmarksChange(const QList<Bookmark>& bookmarks)
+void AbstractByteArrayViewPrivate::onBookmarksChange(const QVector<Bookmark>& bookmarks)
 {
     for (const Bookmark& bookmark : bookmarks) {
         const Address position = bookmark.offset();

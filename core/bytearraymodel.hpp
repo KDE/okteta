@@ -70,8 +70,8 @@ public: // AbstractByteArrayModel API
     void setReadOnly(bool isReadOnly = true) override;
 
 public: // Okteta::Bookmarkable API
-    void addBookmarks(const QList<Okteta::Bookmark>& bookmarks) override;
-    void removeBookmarks(const QList<Okteta::Bookmark>& bookmarks) override;
+    void addBookmarks(const QVector<Okteta::Bookmark>& bookmarks) override;
+    void removeBookmarks(const QVector<Okteta::Bookmark>& bookmarks) override;
     void removeAllBookmarks() override;
     void setBookmark(unsigned int index, const Okteta::Bookmark& bookmark) override;
 
@@ -82,8 +82,8 @@ public: // Okteta::Bookmarkable API
     unsigned int bookmarksCount() const override;
 
 Q_SIGNALS: // Okteta::Bookmarkable API
-    void bookmarksAdded(const QList<Okteta::Bookmark>& bookmarks) override;
-    void bookmarksRemoved(const QList<Okteta::Bookmark>& bookmarks) override;
+    void bookmarksAdded(const QVector<Okteta::Bookmark>& bookmarks) override;
+    void bookmarksRemoved(const QVector<Okteta::Bookmark>& bookmarks) override;
     void bookmarksModified(bool modified) override;
     void bookmarksModified(const QList<int>& indizes) override;
 

@@ -102,12 +102,12 @@ QString PieceTableByteArrayModel::versionDescription(int versionIndex) const { r
 void PieceTableByteArrayModel::revertToVersionByIndex(int versionIndex)
 { d->revertToVersionByIndex(versionIndex); }
 
-void PieceTableByteArrayModel::addBookmarks(const QList<Okteta::Bookmark>& bookmarks)
+void PieceTableByteArrayModel::addBookmarks(const QVector<Okteta::Bookmark>& bookmarks)
 {
     d->addBookmarks(bookmarks);
 }
 
-void PieceTableByteArrayModel::removeBookmarks(const QList<Okteta::Bookmark>& bookmarks)
+void PieceTableByteArrayModel::removeBookmarks(const QVector<Okteta::Bookmark>& bookmarks)
 {
     d->removeBookmarks(bookmarks);
 }
