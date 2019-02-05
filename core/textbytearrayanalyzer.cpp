@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "wordbytearrayservice.hpp"
+#include "textbytearrayanalyzer.hpp"
 
 // lib
 #include "abstractbytearraymodel.hpp"
@@ -29,27 +29,27 @@
 
 namespace Okteta {
 
-WordByteArrayService::WordByteArrayService(const AbstractByteArrayModel* byteArrayModel, const CharCodec* charCodec)
+TextByteArrayAnalyzer::TextByteArrayAnalyzer(const AbstractByteArrayModel* byteArrayModel, const CharCodec* charCodec)
     : mByteArrayModel(byteArrayModel)
     , mCharCodec(charCodec)
 {}
 
-WordByteArrayService::~WordByteArrayService() = default;
+TextByteArrayAnalyzer::~TextByteArrayAnalyzer() = default;
 
-AddressRange WordByteArrayService::wordSection(Address index) const
+AddressRange TextByteArrayAnalyzer::wordSection(Address index) const
 {
     return isWordChar(index) ?
            AddressRange(indexOfWordStart(index), indexOfWordEnd(index)) :
            AddressRange();
 }
 
-bool WordByteArrayService::isWordChar(Address index) const
+bool TextByteArrayAnalyzer::isWordChar(Address index) const
 {
     const Character decodedChar = mCharCodec->decode(mByteArrayModel->byte(index));
     return !decodedChar.isUndefined() && decodedChar.isLetterOrNumber();
 }
 
-Address WordByteArrayService::indexOfPreviousWordStart(Address index) const
+Address TextByteArrayAnalyzer::indexOfPreviousWordStart(Address index) const
 {
     const Size size = mByteArrayModel->size();
     // already at the start or can the result only be 0?
@@ -74,7 +74,7 @@ Address WordByteArrayService::indexOfPreviousWordStart(Address index) const
     return 0;
 }
 
-Address WordByteArrayService::indexOfNextWordStart(Address index) const
+Address TextByteArrayAnalyzer::indexOfNextWordStart(Address index) const
 {
     const Size size = mByteArrayModel->size();
     bool lookingForFirstWordChar = false;
@@ -93,7 +93,7 @@ Address WordByteArrayService::indexOfNextWordStart(Address index) const
     return size;
 }
 
-Address WordByteArrayService::indexOfBeforeNextWordStart(Address index) const
+Address TextByteArrayAnalyzer::indexOfBeforeNextWordStart(Address index) const
 {
     const Size size = mByteArrayModel->size();
     bool lookingForFirstWordChar = false;
@@ -112,7 +112,7 @@ Address WordByteArrayService::indexOfBeforeNextWordStart(Address index) const
     return size - 1;
 }
 
-Address WordByteArrayService::indexOfWordStart(Address index) const
+Address TextByteArrayAnalyzer::indexOfWordStart(Address index) const
 {
     for (; index > 0; --index) {
         if (!isWordChar(index - 1)) {
@@ -123,7 +123,7 @@ Address WordByteArrayService::indexOfWordStart(Address index) const
     return 0;
 }
 
-Address WordByteArrayService::indexOfWordEnd(Address index) const
+Address TextByteArrayAnalyzer::indexOfWordEnd(Address index) const
 {
     const Size size = mByteArrayModel->size();
     for (++index; index < size; ++index) {
@@ -136,7 +136,7 @@ Address WordByteArrayService::indexOfWordEnd(Address index) const
     return size - 1;
 }
 
-Address WordByteArrayService::indexOfLeftWordSelect(Address index) const
+Address TextByteArrayAnalyzer::indexOfLeftWordSelect(Address index) const
 {
     // word at index?
     if (isWordChar(index)) {
@@ -163,7 +163,7 @@ Address WordByteArrayService::indexOfLeftWordSelect(Address index) const
     }
 }
 
-Address WordByteArrayService::indexOfRightWordSelect(Address index) const
+Address TextByteArrayAnalyzer::indexOfRightWordSelect(Address index) const
 {
     // TODO: should this check be here or with the caller?
     // the later would need another function to search the previous word end
@@ -200,14 +200,14 @@ Address WordByteArrayService::indexOfRightWordSelect(Address index) const
 }
 
 /*
-Address WordByteArrayService::indexOfBehindWordEnd( Address index ) const
+Address TextByteArrayAnalyzer::indexOfBehindWordEnd( Address index ) const
 {
    // no word at index?
    return !::isWordChar(byte(index)) ? indexOfBehindLeftWordEnd(index) : indexOfBehindRightWordEnd(index+1)
 }
 
 
-Address WordByteArrayService::indexOfBehindRightWordEnd( Address index ) const
+Address TextByteArrayAnalyzer::indexOfBehindRightWordEnd( Address index ) const
 {
    for( ; index<size(); ++index )
    {
@@ -219,7 +219,7 @@ Address WordByteArrayService::indexOfBehindRightWordEnd( Address index ) const
 }
 
 
-Address WordByteArrayService::indexOfBehindLeftWordEnd( Address index ) const
+Address TextByteArrayAnalyzer::indexOfBehindLeftWordEnd( Address index ) const
 {
    for( --index; index>=0; --index )
    {
@@ -231,8 +231,7 @@ Address WordByteArrayService::indexOfBehindLeftWordEnd( Address index ) const
 }
 */
 
-// TODO: rename WordByteArrayService to TextByteArrayService or TextByteArrayAnalyser
-QString WordByteArrayService::text(Address index, Address lastIndex) const
+QString TextByteArrayAnalyzer::text(Address index, Address lastIndex) const
 {
     QString result;
 

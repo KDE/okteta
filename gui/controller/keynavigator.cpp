@@ -27,7 +27,7 @@
 #include <bytearraytablecursor.hpp>
 #include <abstractbytearrayview.hpp>
 // Okteta core
-#include <Okteta/WordByteArrayService>
+#include <Okteta/TextByteArrayAnalyzer>
 // Qt
 #include <QKeyEvent>
 
@@ -111,15 +111,15 @@ void KeyNavigator::moveCursor(MoveAction action, bool select)
     {
     case MoveBackward:     tableCursor->gotoPreviousByte(); break;
     case MoveWordBackward: {
-        const Okteta::WordByteArrayService WBS(mView->byteArrayModel(), mView->charCodec());
-        const int newIndex = WBS.indexOfPreviousWordStart(tableCursor->realIndex());
+        const Okteta::TextByteArrayAnalyzer textAnalyzer(mView->byteArrayModel(), mView->charCodec());
+        const int newIndex = textAnalyzer.indexOfPreviousWordStart(tableCursor->realIndex());
         tableCursor->gotoIndex(newIndex);
         break;
     }
     case MoveForward:      tableCursor->gotoNextByte();     break;
     case MoveWordForward:  {
-        const Okteta::WordByteArrayService WBS(mView->byteArrayModel(), mView->charCodec());
-        const int newIndex = WBS.indexOfNextWordStart(tableCursor->realIndex());
+        const Okteta::TextByteArrayAnalyzer textAnalyzer(mView->byteArrayModel(), mView->charCodec());
+        const int newIndex = textAnalyzer.indexOfNextWordStart(tableCursor->realIndex());
         tableCursor->gotoCIndex(newIndex);
         break;
     }

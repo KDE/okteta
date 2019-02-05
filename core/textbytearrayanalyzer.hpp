@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef OKTETA_WORDBYTEARRAYSERVICE_HPP
-#define OKTETA_WORDBYTEARRAYSERVICE_HPP
+#ifndef OKTETA_TEXTBYTEARRAYANALYZER_HPP
+#define OKTETA_TEXTBYTEARRAYANALYZER_HPP
 
 // lib
 #include <okteta/oktetacore_export.hpp>
@@ -39,13 +39,13 @@ class CharCodec;
  * @author Friedrich W. H. Kossebau
  */
 
-class OKTETACORE_EXPORT WordByteArrayService
+class OKTETACORE_EXPORT TextByteArrayAnalyzer
 {
 public:
-    WordByteArrayService(const AbstractByteArrayModel* byteArrayModel, const CharCodec* charCodec);
-    WordByteArrayService() = delete;
+    TextByteArrayAnalyzer(const AbstractByteArrayModel* byteArrayModel, const CharCodec* charCodec);
+    TextByteArrayAnalyzer() = delete;
 
-    ~WordByteArrayService();
+    ~TextByteArrayAnalyzer();
 
 public:
     /** searches for the start of the word including the given index.

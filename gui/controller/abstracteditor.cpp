@@ -28,7 +28,7 @@
 #include <abstractbytearrayview.hpp>
 // Okteta core
 #include <Okteta/AbstractByteArrayModel>
-#include <Okteta/WordByteArrayService>
+#include <Okteta/TextByteArrayAnalyzer>
 // Qt
 #include <QKeyEvent>
 
@@ -117,8 +117,8 @@ void AbstractEditor::doEditAction(EditAction action)
         if (!mView->isOverwriteMode()) {
             const Address index = mCursor->realIndex();
             if (index < mView->layout()->length()) {
-                const WordByteArrayService WBS(byteArrayModel, mView->charCodec());
-                const Address end = WBS.indexOfBeforeNextWordStart(index);
+                const TextByteArrayAnalyzer textAnalyzer(byteArrayModel, mView->charCodec());
+                const Address end = textAnalyzer.indexOfBeforeNextWordStart(index);
                 byteArrayModel->remove(AddressRange(index, end));
             }
         }
@@ -140,8 +140,8 @@ void AbstractEditor::doEditAction(EditAction action)
     {
         const int leftIndex = mCursor->realIndex() - 1;
         if (leftIndex >= 0) {
-            const WordByteArrayService WBS(byteArrayModel, mView->charCodec());
-            const Address wordStart = WBS.indexOfPreviousWordStart(leftIndex);
+            const TextByteArrayAnalyzer textAnalyzer(byteArrayModel, mView->charCodec());
+            const Address wordStart = textAnalyzer.indexOfPreviousWordStart(leftIndex);
             if (!mView->isOverwriteMode()) {
                 byteArrayModel->remove(AddressRange(wordStart, leftIndex));
             }

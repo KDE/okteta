@@ -173,7 +173,7 @@ void StringsExtractTool::onSourceViewDestroyed()
     mSourceByteArrayView = nullptr;
 }
 
-// TODO: use WordByteArrayService
+// TODO: use TextByteArrayAnalyzer
 void StringsExtractTool::extractStrings()
 {
     // forget old string source

@@ -37,7 +37,7 @@
 #include <Okteta/ValueCodec>
 #include <Okteta/Bookmarkable>
 #include <Okteta/Versionable>
-#include <Okteta/WordByteArrayService>
+#include <Okteta/TextByteArrayAnalyzer>
 #include <Okteta/Bookmark>
 // Qt
 #include <QDragEnterEvent>
@@ -620,8 +620,8 @@ bool AbstractByteArrayViewPrivate::selectWord(Address index)
     bool result = false;
 
     if (0 <= index && index < mTableLayout->length()) {
-        const WordByteArrayService WBS(mByteArrayModel, mCharCodec);
-        const AddressRange wordSection = WBS.wordSection(index);
+        const TextByteArrayAnalyzer textAnalyzer(mByteArrayModel, mCharCodec);
+        const AddressRange wordSection = textAnalyzer.wordSection(index);
         if (wordSection.isValid()) {
             const bool oldHasSelection = mTableRanges->hasSelection();
 

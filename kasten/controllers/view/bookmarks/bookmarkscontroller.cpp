@@ -33,7 +33,7 @@
 // Okteta gui
 #include <Okteta/OffsetFormat>
 // Okteta core
-#include <Okteta/WordByteArrayService>
+#include <Okteta/TextByteArrayAnalyzer>
 #include <Okteta/CharCodec>
 #include <Okteta/Bookmarkable>
 #include <Okteta/BookmarksConstIterator>
@@ -246,8 +246,8 @@ void BookmarksController::createBookmark()
 
     // search for text at cursor
     const Okteta::CharCodec* charCodec = Okteta::CharCodec::createCodec(mByteArrayView->charCodingName());
-    const Okteta::WordByteArrayService textService(mByteArray, charCodec);
-    QString bookmarkName = textService.text(cursorPosition, cursorPosition + MaxBookmarkNameSize - 1);
+    const Okteta::TextByteArrayAnalyzer textAnalyzer(mByteArray, charCodec);
+    QString bookmarkName = textAnalyzer.text(cursorPosition, cursorPosition + MaxBookmarkNameSize - 1);
     delete charCodec;
 
     if (bookmarkName.isEmpty()) {

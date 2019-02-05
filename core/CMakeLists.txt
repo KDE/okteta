@@ -68,7 +68,7 @@ okteta_add_sublibrary(Core  NAMESPACE Okteta
         BookmarksConstIteratorAdapter # TODO: make private or move adapter class to iterator
         BookmarksConstIterator
 
-        WordByteArrayService
+        TextByteArrayAnalyzer
         ValueCodec
         CharCodec
 

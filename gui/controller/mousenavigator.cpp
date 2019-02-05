@@ -28,7 +28,7 @@
 #include <bytearraytablecursor.hpp>
 #include <bytearraytablelayout.hpp>
 // Okteta core
-#include <Okteta/WordByteArrayService>
+#include <Okteta/TextByteArrayAnalyzer>
 // Qt
 #include <QApplication>
 #include <QClipboard>
@@ -321,16 +321,16 @@ void MouseNavigator::handleMouseMove(const QPoint& point)   // handles the move 
     if (mInLMBDoubleClick && tableRanges->hasFirstWordSelection()) {
         Address newIndex = tableCursor->realIndex();
         const AddressRange firstWordSelection = tableRanges->firstWordSelection();
-        const WordByteArrayService WBS(mView->byteArrayModel(), mView->charCodec());
+        const TextByteArrayAnalyzer textAnalyzer(mView->byteArrayModel(), mView->charCodec());
         // are we before the selection?
         if (firstWordSelection.startsBehind(newIndex)) {
             tableRanges->ensureWordSelectionForward(false);
-            newIndex = WBS.indexOfLeftWordSelect(newIndex);
+            newIndex = textAnalyzer.indexOfLeftWordSelect(newIndex);
         }
         // or behind?
         else if (firstWordSelection.endsBefore(newIndex)) {
             tableRanges->ensureWordSelectionForward(true);
-            newIndex = WBS.indexOfRightWordSelect(newIndex);
+            newIndex = textAnalyzer.indexOfRightWordSelect(newIndex);
         }
         // or inside?
         else {
