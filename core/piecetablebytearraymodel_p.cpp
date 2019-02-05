@@ -100,8 +100,9 @@ void PieceTableByteArrayModelPrivate::setByte(Address offset, Byte byte)
     const ArrayChangeMetrics metrics =
         ArrayChangeMetrics::asReplacement(offset, 1, 1);
     const ByteArrayChange modification(metrics, mChangesDataStorage.data(storageOffset, 1));
-    QList<Okteta::ByteArrayChange> modificationsList;
-    modificationsList.append(modification);
+    const QVector<Okteta::ByteArrayChange> modificationsList {
+        modification
+    };
 
     emit p->contentsChanged(ArrayChangeMetricsList(metrics));
     emit p->changesDone(modificationsList, oldVersionIndex, versionIndex());
@@ -275,9 +276,9 @@ void PieceTableByteArrayModelPrivate::closeGroupedChange(const QString& descript
     emit p->headVersionDescriptionChanged(mPieceTable.headChangeDescription());
 }
 
-QList<ByteArrayChange> PieceTableByteArrayModelPrivate::changes(int firstVersionIndex, int lastVersionIndex) const
+QVector<ByteArrayChange> PieceTableByteArrayModelPrivate::changes(int firstVersionIndex, int lastVersionIndex) const
 {
-    QList<ByteArrayChange> result;
+    QVector<ByteArrayChange> result;
 
     result.reserve(lastVersionIndex - firstVersionIndex);
     for (int i = firstVersionIndex; i < lastVersionIndex; ++i) {
@@ -295,7 +296,7 @@ QList<ByteArrayChange> PieceTableByteArrayModelPrivate::changes(int firstVersion
     return result;
 }
 
-void PieceTableByteArrayModelPrivate::doChanges(const QList<ByteArrayChange>& changes,
+void PieceTableByteArrayModelPrivate::doChanges(const QVector<ByteArrayChange>& changes,
                                                 int oldVersionIndex, int newVersionIndex)
 {
 // qCDebug(LOG_OKTETA_CORE) << this<<" is at "<<versionIndex()<<", should from "<<oldVersionIndex<<" to "<<newVersionIndex;

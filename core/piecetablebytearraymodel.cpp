@@ -162,7 +162,7 @@ void PieceTableByteArrayModel::closeGroupedChange(const QString& description)
     d->closeGroupedChange(description);
 }
 
-QList<ByteArrayChange> PieceTableByteArrayModel::changes(int firstVersionIndex, int lastVersionIndex) const
+QVector<ByteArrayChange> PieceTableByteArrayModel::changes(int firstVersionIndex, int lastVersionIndex) const
 {
     return d->changes(firstVersionIndex, lastVersionIndex);
 }
@@ -172,7 +172,7 @@ QByteArray PieceTableByteArrayModel::initialData() const
     return d->initialData();
 }
 
-void PieceTableByteArrayModel::doChanges(const QList<Okteta::ByteArrayChange>& changes,
+void PieceTableByteArrayModel::doChanges(const QVector<Okteta::ByteArrayChange>& changes,
                                          int oldVersionIndex, int newVersionIndex)
 {
     d->doChanges(changes, oldVersionIndex, newVersionIndex);

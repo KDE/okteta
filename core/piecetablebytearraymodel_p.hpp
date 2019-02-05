@@ -88,9 +88,9 @@ public: // ChangesDescribable API
     void closeGroupedChange(const QString& description);
 
 public: // ChangeHistory API
-    QList<ByteArrayChange> changes(int firstVersionIndex, int lastVersionIndex) const;
+    QVector<ByteArrayChange> changes(int firstVersionIndex, int lastVersionIndex) const;
     const QByteArray& initialData() const;
-    void doChanges(const QList<Okteta::ByteArrayChange>& changes,
+    void doChanges(const QVector<Okteta::ByteArrayChange>& changes,
                    int oldVersionIndex, int newVersionIndex);
 
 public:
@@ -122,7 +122,7 @@ protected: // data
 
     int mBeforeChangesVersionIndex;
     ArrayChangeMetricsList mChangeMetrics;
-    QList<ByteArrayChange> mChanges;
+    QVector<ByteArrayChange> mChanges;
     bool mBeforeChangesModified : 1;
     bool mBookmarksModified : 1;
 };

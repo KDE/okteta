@@ -105,9 +105,9 @@ public: // ChangesDescribable API
     void closeGroupedChange(const QString& description) override;
 
 public: // ChangeHistory API
-    QList<ByteArrayChange> changes(int firstVersionIndex, int lastVersionIndex) const override;
+    QVector<ByteArrayChange> changes(int firstVersionIndex, int lastVersionIndex) const override;
     QByteArray initialData() const override;
-    void doChanges(const QList<Okteta::ByteArrayChange>& changes,
+    void doChanges(const QVector<Okteta::ByteArrayChange>& changes,
                    int oldVersionIndex, int newVersionIndex) override;
 
 public:
@@ -125,7 +125,7 @@ Q_SIGNALS: // Bookmarkable signals
     void bookmarksModified(const QList<int>& indizes) override;
 
 Q_SIGNALS: // ChangeHistory signals
-    void changesDone(const QList<Okteta::ByteArrayChange>& changes,
+    void changesDone(const QVector<Okteta::ByteArrayChange>& changes,
                      int oldVersionIndex, int newVersionIndex) override;
 
 protected:
