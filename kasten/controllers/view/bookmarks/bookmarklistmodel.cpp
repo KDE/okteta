@@ -44,7 +44,7 @@ BookmarkListModel::BookmarkListModel(BookmarksTool* tool, QObject* parent)
     connect(mTool, &BookmarksTool::bookmarksRemoved,
             this, QOverload<>::of(&BookmarkListModel::onBookmarksChanged));
     connect(mTool, &BookmarksTool::bookmarksModified,
-            this, QOverload<const QList<int>&>::of(&BookmarkListModel::onBookmarksChanged));
+            this, QOverload<const QVector<int>&>::of(&BookmarkListModel::onBookmarksChanged));
     connect(mTool, &BookmarksTool::offsetCodingChanged,
             this, &BookmarkListModel::onOffsetCodingChanged);
 }
@@ -191,7 +191,7 @@ void BookmarkListModel::onBookmarksChanged()
     endResetModel();
 }
 
-void BookmarkListModel::onBookmarksChanged(const QList<int>& bookmarkIndizes)
+void BookmarkListModel::onBookmarksChanged(const QVector<int>& bookmarkIndizes)
 {
     for (int row : bookmarkIndizes) {
         emit dataChanged(index(row, OffsetColumnId), index(row, TitleColumnId));

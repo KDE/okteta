@@ -126,7 +126,7 @@ void BookmarksController::setTargetModel(AbstractModel* model)
                 SLOT(onBookmarksAdded(QVector<Okteta::Bookmark>)));
         connect(mByteArray, SIGNAL(bookmarksRemoved(QVector<Okteta::Bookmark>)),
                 SLOT(onBookmarksRemoved(QVector<Okteta::Bookmark>)));
-        connect(mByteArray, SIGNAL(bookmarksModified(QList<int>)),
+        connect(mByteArray, SIGNAL(bookmarksModified(QVector<int>)),
                 SLOT(updateBookmarks()));
         connect(mByteArrayView, &ByteArrayView::cursorPositionChanged,
                 this, &BookmarksController::onCursorPositionChanged);

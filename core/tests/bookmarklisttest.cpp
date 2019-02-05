@@ -25,6 +25,7 @@
 // test object
 #include <bookmarklist.hpp>
 // Qt
+#include <QVector>
 #include <QTest>
 
 using namespace Okteta;
@@ -228,14 +229,14 @@ void BookmarkListTest::testAdjustToSwapped()
     bookmarkList.addBookmark(bookmark4);
     bool adjusted = bookmarkList.adjustToSwapped(behindOffset1, Offset3, secondLength);
 
-    QList<int> newOffsets;
+    QVector<int> newOffsets;
     newOffsets << bookmark1.offset() << bookmark3.offset() - firstLength << bookmark2.offset() + secondLength
                << bookmark3_1.offset() + secondLength << bookmark4.offset();
 
     QVERIFY(adjusted);
     QVERIFY(!bookmarkList.isEmpty());
     QCOMPARE(bookmarkList.count(), 5);
-    QList<int>::ConstIterator oit = newOffsets.constBegin();
+    QVector<int>::ConstIterator oit = newOffsets.constBegin();
     for (const Bookmark& bookmark : qAsConst(bookmarkList)) {
         QCOMPARE(bookmark.offset(), *oit++);
     }

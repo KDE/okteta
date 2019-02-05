@@ -85,7 +85,7 @@ Q_SIGNALS: // Okteta::Bookmarkable API
     void bookmarksAdded(const QVector<Okteta::Bookmark>& bookmarks) override;
     void bookmarksRemoved(const QVector<Okteta::Bookmark>& bookmarks) override;
     void bookmarksModified(bool modified) override;
-    void bookmarksModified(const QList<int>& indizes) override;
+    void bookmarksModified(const QVector<int>& indizes) override;
 
 public:
     void setMaxSize(int maxSize);

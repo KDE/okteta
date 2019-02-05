@@ -122,7 +122,7 @@ Q_SIGNALS: // Bookmarkable signals
     void bookmarksAdded(const QVector<Okteta::Bookmark>& bookmarks) override;
     void bookmarksRemoved(const QVector<Okteta::Bookmark>& bookmarks) override;
     void bookmarksModified(bool modified) override;
-    void bookmarksModified(const QList<int>& indizes) override;
+    void bookmarksModified(const QVector<int>& indizes) override;
 
 Q_SIGNALS: // ChangeHistory signals
     void changesDone(const QVector<Okteta::ByteArrayChange>& changes,

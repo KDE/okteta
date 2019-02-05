@@ -176,8 +176,9 @@ inline void PieceTableByteArrayModelPrivate::setBookmark(unsigned int index, con
 {
     mBookmarks.setBookmark(index, bookmark);
 
-    QList<int> changedBookmarkIndizes;
-    changedBookmarkIndizes.append(index);
+    const QVector<int> changedBookmarkIndizes {
+        static_cast<int>(index)
+    };
     emit p->bookmarksModified(changedBookmarkIndizes);
 }
 

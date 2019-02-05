@@ -185,8 +185,9 @@ inline void ByteArrayModelPrivate::setBookmark(unsigned int index, const Bookmar
 {
     m_bookmarks.setBookmark(index, bookmark);
 
-    QList<int> changedBookmarkIndizes;
-    changedBookmarkIndizes.append(index);
+    const QVector<int> changedBookmarkIndizes {
+        static_cast<int>(index)
+    };
     emit p->bookmarksModified(changedBookmarkIndizes);
 }
 

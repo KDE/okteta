@@ -69,7 +69,7 @@ public:
 private Q_SLOTS:
     void onHasBookmarksChanged(bool hasBookmarks);
     void onBookmarksChanged();
-    void onBookmarksChanged(const QList<int>& bookmarkIndizes);
+    void onBookmarksChanged(const QVector<int>& bookmarkIndizes);
 //     void onHeadVersionChanged( int newHeadVersionIndex );
 //     void onHeadVersionDataChanged( const DocumentVersionData &newVersionData );
     void onOffsetCodingChanged(int offsetCoding);

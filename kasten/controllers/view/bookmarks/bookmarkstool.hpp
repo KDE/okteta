@@ -76,7 +76,7 @@ Q_SIGNALS:
     void hasBookmarksChanged(bool hasBookmarks);
     void bookmarksAdded(const QVector<Okteta::Bookmark>& bookmarks);
     void bookmarksRemoved(const QVector<Okteta::Bookmark>& bookmarks);
-    void bookmarksModified(const QList<int>& indizes);
+    void bookmarksModified(const QVector<int>& indizes);
     void canCreateBookmarkChanged(bool canCreateBookmark);
     void offsetCodingChanged(int offsetCoding);
 

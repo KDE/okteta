@@ -26,7 +26,6 @@
 // Qt
 #include <QtPlugin>
 
-template <class T> class QList;
 template <class T> class QVector;
 
 namespace Okteta {
@@ -55,10 +54,10 @@ public: // get
     virtual unsigned int bookmarksCount() const = 0;
 
 public: // signal
-    // TODO: use also QList<int> for added?
+    // TODO: use also QVector<int> for added?
     virtual void bookmarksAdded(const QVector<Okteta::Bookmark>& bookmarks) = 0;
     virtual void bookmarksRemoved(const QVector<Okteta::Bookmark>& bookmarks) = 0;
-    virtual void bookmarksModified(const QList<int>& indizes) = 0;
+    virtual void bookmarksModified(const QVector<int>& indizes) = 0;
     virtual void bookmarksModified(bool modified) = 0;
 };
 
