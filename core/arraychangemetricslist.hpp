@@ -26,12 +26,12 @@
 // lib
 #include <okteta/arraychangemetrics.hpp>
 //
-#include <QList>
+#include <QVector>
 
 namespace Okteta {
 
 // TODO: do we need the invalid status?
-class ArrayChangeMetricsList : public QList<ArrayChangeMetrics>
+class ArrayChangeMetricsList : public QVector<ArrayChangeMetrics>
 {
 public:
     static ArrayChangeMetricsList oneReplacement(Address offset, Size removeLength, Size insertLength);

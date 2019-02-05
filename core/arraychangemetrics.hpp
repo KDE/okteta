@@ -169,4 +169,6 @@ inline QDataStream& operator>>(QDataStream& inStream, ArrayChangeMetrics& metric
 
 }
 
+Q_DECLARE_TYPEINFO(Okteta::ArrayChangeMetrics, Q_MOVABLE_TYPE);
+
 #endif
