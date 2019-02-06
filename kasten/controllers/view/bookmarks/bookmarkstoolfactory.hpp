@@ -37,7 +37,7 @@ public:
     ~BookmarksToolFactory() override;
 
 public: // AbstractToolFactory API
-    AbstractTool* create() override;
+    AbstractTool* create() const override;
 };
 
 }

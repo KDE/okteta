@@ -31,7 +31,7 @@ ChecksumToolFactory::ChecksumToolFactory() = default;
 
 ChecksumToolFactory::~ChecksumToolFactory() = default;
 
-AbstractTool* ChecksumToolFactory::create()
+AbstractTool* ChecksumToolFactory::create() const
 {
     return new ChecksumTool();
 }

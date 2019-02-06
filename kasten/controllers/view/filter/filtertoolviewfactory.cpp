@@ -39,7 +39,7 @@ QString FilterToolViewFactory::title()       const { return i18nc("@title:window
 QString FilterToolViewFactory:: id()      const { return QStringLiteral("org.kde.okteta.FilterToolView"); }
 SidePosition FilterToolViewFactory::defaultPosition() const { return BottomSidePosition; }
 
-AbstractToolView* FilterToolViewFactory::create(AbstractTool* tool)
+AbstractToolView* FilterToolViewFactory::create(AbstractTool* tool) const
 {
     return new FilterToolView(qobject_cast<FilterTool*>(tool));
 }

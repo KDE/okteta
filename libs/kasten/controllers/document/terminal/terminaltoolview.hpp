@@ -23,8 +23,6 @@
 #ifndef TERMINALTOOLVIEW_HPP
 #define TERMINALTOOLVIEW_HPP
 
-// lib
-#include <kasten/kastencontrollers_export.hpp>
 // Kasten gui
 #include <Kasten/AbstractToolView>
 
@@ -33,7 +31,7 @@ namespace Kasten {
 class TerminalView;
 class TerminalTool;
 
-class KASTENCONTROLLERS_EXPORT TerminalToolView : public AbstractToolView
+class TerminalToolView : public AbstractToolView
 {
 public:
     explicit TerminalToolView(TerminalTool* tool);

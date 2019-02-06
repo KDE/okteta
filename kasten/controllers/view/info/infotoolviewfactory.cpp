@@ -39,7 +39,7 @@ QString InfoToolViewFactory::title()       const { return i18nc("@title:window",
 QString InfoToolViewFactory::id()       const { return QStringLiteral("org.kde.okteta.StatisticsToolView"); }
 SidePosition InfoToolViewFactory::defaultPosition() const { return RightSidePosition; }
 
-AbstractToolView* InfoToolViewFactory::create(AbstractTool* tool)
+AbstractToolView* InfoToolViewFactory::create(AbstractTool* tool) const
 {
     return new InfoToolView(qobject_cast<InfoTool*>(tool));
 }

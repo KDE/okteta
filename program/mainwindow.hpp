@@ -33,6 +33,8 @@ namespace Kasten {
 
 class OktetaProgram;
 class DocumentManager;
+class AbstractToolViewFactory;
+class AbstractToolFactory;
 
 class OktetaMainWindow : public ShellWindow
 {
@@ -50,6 +52,8 @@ protected: // KMainWindow API
 
 protected:
     void setupControllers();
+    void addToolFromFactory(const AbstractToolViewFactory& toolViewFactory,
+                            const AbstractToolFactory& toolFactory);
 
 protected Q_SLOTS:
     void onDataOffered(const QMimeData* mimeData, bool& accept);

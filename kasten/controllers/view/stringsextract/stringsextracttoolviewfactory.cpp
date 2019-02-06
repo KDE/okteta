@@ -39,7 +39,7 @@ QString StringsExtractToolViewFactory::title()       const { return i18nc("@titl
 QString StringsExtractToolViewFactory::id()       const { return QStringLiteral("org.kde.okteta.StringsToolView"); }
 SidePosition StringsExtractToolViewFactory::defaultPosition() const { return RightSidePosition; }
 
-AbstractToolView* StringsExtractToolViewFactory::create(AbstractTool* tool)
+AbstractToolView* StringsExtractToolViewFactory::create(AbstractTool* tool) const
 {
     return new StringsExtractToolView(qobject_cast<StringsExtractTool*>(tool));
 }

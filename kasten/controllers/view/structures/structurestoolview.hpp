@@ -23,9 +23,6 @@
 #ifndef STRUCTURESTOOLVIEW_HPP
 #define STRUCTURESTOOLVIEW_HPP
 
-// lib
-#include <kasten/okteta/oktetakastencontrollers_export.hpp>
-
 // Kasten gui
 #include <Kasten/AbstractToolView>
 
@@ -33,7 +30,7 @@ namespace Kasten {
 class StructureView;
 class StructuresTool;
 
-class OKTETAKASTENCONTROLLERS_EXPORT StructuresToolView : public AbstractToolView
+class StructuresToolView : public AbstractToolView
 {
 public:
     explicit StructuresToolView(StructuresTool* tool);

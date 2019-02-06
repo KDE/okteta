@@ -39,7 +39,7 @@ QString PodDecoderToolViewFactory::title()       const { return i18nc("@title:wi
 QString PodDecoderToolViewFactory::id()       const { return QStringLiteral("org.kde.okteta.PodDecoderToolView"); }
 SidePosition PodDecoderToolViewFactory::defaultPosition() const { return RightSidePosition; }
 
-AbstractToolView* PodDecoderToolViewFactory::create(AbstractTool* tool)
+AbstractToolView* PodDecoderToolViewFactory::create(AbstractTool* tool) const
 {
     return new PODDecoderToolView(qobject_cast<PODDecoderTool*>(tool));
 }

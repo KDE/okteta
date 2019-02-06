@@ -23,8 +23,6 @@
 #ifndef DOCUMENTSTOOL_HPP
 #define DOCUMENTSTOOL_HPP
 
-// lib
-#include <kasten/kastencontrollers_export.hpp>
 // Kasten core
 #include <Kasten/AbstractTool>
 
@@ -33,7 +31,7 @@ namespace Kasten {
 class DocumentManager;
 class AbstractDocument;
 
-class KASTENCONTROLLERS_EXPORT DocumentsTool : public AbstractTool
+class DocumentsTool : public AbstractTool
 {
     Q_OBJECT
 

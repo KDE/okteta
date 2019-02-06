@@ -23,8 +23,6 @@
 #ifndef FILTERTOOLVIEW_HPP
 #define FILTERTOOLVIEW_HPP
 
-// lib
-#include <kasten/okteta/oktetakastencontrollers_export.hpp>
 // Kasten gui
 #include <Kasten/AbstractToolView>
 
@@ -33,7 +31,7 @@ namespace Kasten {
 class FilterView;
 class FilterTool;
 
-class OKTETAKASTENCONTROLLERS_EXPORT FilterToolView : public AbstractToolView
+class FilterToolView : public AbstractToolView
 {
 public:
     explicit FilterToolView(FilterTool* tool);

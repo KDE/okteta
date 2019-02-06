@@ -23,8 +23,6 @@
 #ifndef FILESYSTEMBROWSERTOOLVIEW_HPP
 #define FILESYSTEMBROWSERTOOLVIEW_HPP
 
-// lib
-#include <kasten/kastencontrollers_export.hpp>
 // Kasten gui
 #include <Kasten/AbstractToolView>
 
@@ -33,7 +31,7 @@ namespace Kasten {
 class FileSystemBrowserView;
 class FileSystemBrowserTool;
 
-class KASTENCONTROLLERS_EXPORT FileSystemBrowserToolView : public AbstractToolView
+class FileSystemBrowserToolView : public AbstractToolView
 {
 public:
     explicit FileSystemBrowserToolView(FileSystemBrowserTool* tool);

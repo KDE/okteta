@@ -23,8 +23,6 @@
 #ifndef BOOKMARKSTOOLVIEW_HPP
 #define BOOKMARKSTOOLVIEW_HPP
 
-// lib
-#include <kasten/okteta/oktetakastencontrollers_export.hpp>
 // Kasten gui
 #include <Kasten/AbstractToolView>
 
@@ -33,7 +31,7 @@ namespace Kasten {
 class BookmarksView;
 class BookmarksTool;
 
-class OKTETAKASTENCONTROLLERS_EXPORT BookmarksToolView : public AbstractToolView
+class BookmarksToolView : public AbstractToolView
 {
 public:
     explicit BookmarksToolView(BookmarksTool* tool);

@@ -23,8 +23,6 @@
 #ifndef FILESYSTEMBROWSERTOOL_HPP
 #define FILESYSTEMBROWSERTOOL_HPP
 
-// lib
-#include <kasten/kastencontrollers_export.hpp>
 // Kasten core
 #include <Kasten/AbstractTool>
 
@@ -35,7 +33,7 @@ namespace Kasten {
 class DocumentSyncManager;
 class AbstractDocument;
 
-class KASTENCONTROLLERS_EXPORT FileSystemBrowserTool : public AbstractTool
+class FileSystemBrowserTool : public AbstractTool
 {
     Q_OBJECT
 

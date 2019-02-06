@@ -23,8 +23,6 @@
 #ifndef CHECKSUMTOOLVIEW_HPP
 #define CHECKSUMTOOLVIEW_HPP
 
-// lib
-#include <kasten/okteta/oktetakastencontrollers_export.hpp>
 // Kasten gui
 #include <Kasten/AbstractToolView>
 
@@ -33,7 +31,7 @@ namespace Kasten {
 class ChecksumView;
 class ChecksumTool;
 
-class OKTETAKASTENCONTROLLERS_EXPORT ChecksumToolView : public AbstractToolView
+class ChecksumToolView : public AbstractToolView
 {
 public:
     explicit ChecksumToolView(ChecksumTool* tool);

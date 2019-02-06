@@ -23,8 +23,6 @@
 #ifndef DOCUMENTINFOTOOL_HPP
 #define DOCUMENTINFOTOOL_HPP
 
-// lib
-#include <kasten/okteta/oktetakastencontrollers_export.hpp>
 // Kasten core
 #include <Kasten/AbstractTool>
 // Qt
@@ -42,7 +40,7 @@ class ByteArrayDocument;
 class AbstractModelSynchronizer;
 class DocumentSyncManager;
 
-class OKTETAKASTENCONTROLLERS_EXPORT DocumentInfoTool : public AbstractTool
+class DocumentInfoTool : public AbstractTool
 {
     Q_OBJECT
 

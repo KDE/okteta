@@ -31,7 +31,7 @@ CharsetConversionToolFactory::CharsetConversionToolFactory() = default;
 
 CharsetConversionToolFactory::~CharsetConversionToolFactory() = default;
 
-AbstractTool* CharsetConversionToolFactory::create()
+AbstractTool* CharsetConversionToolFactory::create() const
 {
     return new CharsetConversionTool();
 }

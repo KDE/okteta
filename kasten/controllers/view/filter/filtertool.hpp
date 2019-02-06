@@ -23,8 +23,6 @@
 #ifndef FILTERTOOL_HPP
 #define FILTERTOOL_HPP
 
-// lib
-#include <kasten/okteta/oktetakastencontrollers_export.hpp>
 // Kasten core
 #include <Kasten/AbstractTool>
 // Qt
@@ -42,7 +40,7 @@ namespace Kasten {
 
 class ByteArrayView;
 
-class OKTETAKASTENCONTROLLERS_EXPORT FilterTool : public AbstractTool
+class FilterTool : public AbstractTool
 {
     Q_OBJECT
 

@@ -23,8 +23,6 @@
 #ifndef STRINGSEXTRACTTOOL_HPP
 #define STRINGSEXTRACTTOOL_HPP
 
-// lib
-#include <kasten/okteta/oktetakastencontrollers_export.hpp>
 // tool
 #include "containedstring.hpp"
 // Kasten core
@@ -45,7 +43,7 @@ class ByteArrayView;
 
 /**
  */
-class OKTETAKASTENCONTROLLERS_EXPORT StringsExtractTool : public AbstractTool
+class StringsExtractTool : public AbstractTool
 {
     Q_OBJECT
 

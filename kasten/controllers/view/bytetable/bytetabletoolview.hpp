@@ -23,8 +23,6 @@
 #ifndef BYTETABLETOOLVIEW_HPP
 #define BYTETABLETOOLVIEW_HPP
 
-// lib
-#include <kasten/okteta/oktetakastencontrollers_export.hpp>
 // Kasten gui
 #include <Kasten/AbstractToolView>
 
@@ -33,7 +31,7 @@ namespace Kasten {
 class ByteTableView;
 class ByteTableTool;
 
-class OKTETAKASTENCONTROLLERS_EXPORT ByteTableToolView : public AbstractToolView
+class ByteTableToolView : public AbstractToolView
 {
 public:
     explicit ByteTableToolView(ByteTableTool* tool);

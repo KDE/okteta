@@ -37,7 +37,7 @@ public:
     virtual ~AbstractToolViewFactory();
 
 public: // API to be implemented
-    virtual AbstractToolView* create(AbstractTool* tool) = 0;
+    virtual AbstractToolView* create(AbstractTool* tool) const = 0;
 
     // TODO: find out of iconName an id can be QByteArray
     virtual QString iconName() const = 0;

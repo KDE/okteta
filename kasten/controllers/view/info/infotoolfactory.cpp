@@ -31,7 +31,7 @@ InfoToolFactory::InfoToolFactory() = default;
 
 InfoToolFactory::~InfoToolFactory() = default;
 
-AbstractTool* InfoToolFactory::create()
+AbstractTool* InfoToolFactory::create() const
 {
     return new InfoTool();
 }

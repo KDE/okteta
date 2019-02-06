@@ -31,7 +31,7 @@ FilterToolFactory::FilterToolFactory() = default;
 
 FilterToolFactory::~FilterToolFactory() = default;
 
-AbstractTool* FilterToolFactory::create()
+AbstractTool* FilterToolFactory::create() const
 {
     return new FilterTool();
 }

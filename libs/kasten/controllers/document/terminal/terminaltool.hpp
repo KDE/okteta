@@ -23,8 +23,6 @@
 #ifndef TERMINALTOOL_HPP
 #define TERMINALTOOL_HPP
 
-// lib
-#include <kasten/kastencontrollers_export.hpp>
 // Kasten core
 #include <Kasten/AbstractTool>
 
@@ -35,7 +33,7 @@ namespace Kasten {
 class DocumentSyncManager;
 class AbstractDocument;
 
-class KASTENCONTROLLERS_EXPORT TerminalTool : public AbstractTool
+class TerminalTool : public AbstractTool
 {
     Q_OBJECT
 

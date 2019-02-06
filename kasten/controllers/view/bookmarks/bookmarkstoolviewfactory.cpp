@@ -39,7 +39,7 @@ QString BookmarksToolViewFactory::title()       const { return i18nc("@title:win
 QString BookmarksToolViewFactory::id()       const { return QStringLiteral("org.kde.okteta.BookmarksToolView"); }
 SidePosition BookmarksToolViewFactory::defaultPosition() const { return LeftSidePosition; }
 
-AbstractToolView* BookmarksToolViewFactory::create(AbstractTool* tool)
+AbstractToolView* BookmarksToolViewFactory::create(AbstractTool* tool) const
 {
     return new BookmarksToolView(qobject_cast<BookmarksTool*>(tool));
 }

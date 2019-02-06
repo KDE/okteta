@@ -23,8 +23,6 @@
 #ifndef CHARSETCONVERSIONTOOLVIEW_HPP
 #define CHARSETCONVERSIONTOOLVIEW_HPP
 
-// lib
-#include <kasten/okteta/oktetakastencontrollers_export.hpp>
 // Kasten gui
 #include <Kasten/AbstractToolView>
 
@@ -33,7 +31,7 @@ namespace Kasten {
 class CharsetConversionView;
 class CharsetConversionTool;
 
-class OKTETAKASTENCONTROLLERS_EXPORT CharsetConversionToolView : public AbstractToolView
+class CharsetConversionToolView : public AbstractToolView
 {
 public:
     explicit CharsetConversionToolView(CharsetConversionTool* tool);

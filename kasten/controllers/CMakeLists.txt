@@ -35,11 +35,13 @@ endmacro()
 
 oktetakastencontrollers_add_sublibrary(document/info
     PUBLIC
-        DocumentInfoTool
-        DocumentInfoToolView
+        DocumentInfoToolFactory
+        DocumentInfoToolViewFactory
     PRIVATE
         ByteArrayModelIoDevice
         DocumentInfoView
+        DocumentInfoTool
+        DocumentInfoToolView
 )
 
 oktetakastencontrollers_add_sublibrary(document/overwriteonly
@@ -52,29 +54,29 @@ oktetakastencontrollers_add_sublibrary(view/overwritemode
 )
 oktetakastencontrollers_add_sublibrary(view/info
     PUBLIC
-        InfoTool
         InfoToolFactory
-        InfoToolView
         InfoToolViewFactory
     PRIVATE
         CreateStatisticJob
         StatisticTableModel
         InfoView
+        InfoTool
+        InfoToolView
     KCFG
         infoviewsettings.kcfgc
 )
 
 oktetakastencontrollers_add_sublibrary(view/stringsextract
     PUBLIC
-        ContainedString
-        StringsExtractTool
         StringsExtractToolFactory
-        StringsExtractToolView
         StringsExtractToolViewFactory
     PRIVATE
         ExtractStringsJob
         ContainedStringTableModel
         StringsExtractView
+        ContainedString
+        StringsExtractTool
+        StringsExtractToolView
 )
 
 oktetakastencontrollers_add_sublibrary(view/libbytearraychecksum
@@ -119,14 +121,14 @@ oktetakastencontrollers_add_sublibrary(view/libbytearraychecksum/algorithm
 
 oktetakastencontrollers_add_sublibrary(view/checksum
     PUBLIC
-        ChecksumTool
-        ChecksumToolView
         ChecksumToolFactory
         ChecksumToolViewFactory
     PRIVATE
         ChecksumCalculateJob
         ChecksumLogging
         ChecksumView
+        ChecksumTool
+        ChecksumToolView
 )
 
 oktetakastencontrollers_add_sublibrary(view/libfinddialog
@@ -157,15 +159,15 @@ oktetakastencontrollers_add_sublibrary(view/poddecoder/typecodecs
 
 oktetakastencontrollers_add_sublibrary(view/poddecoder
     PUBLIC
-        PODData
-        PODDecoderTool
-        PODDecoderToolView
         PODDecoderToolFactory
         PODDecoderToolViewFactory
     PRIVATE
+        PODData
         PODTableModel
         PODDelegate
         PODTableView
+        PODDecoderTool
+        PODDecoderToolView
 )
 
 oktetakastencontrollers_add_sublibrary(view/poddecoder/typeeditors
@@ -185,13 +187,13 @@ oktetakastencontrollers_add_sublibrary(view/poddecoder/typeeditors
 
 oktetakastencontrollers_add_sublibrary(view/bytetable
     PUBLIC
-        ByteTableTool
-        ByteTableToolView
         ByteTableToolFactory
         ByteTableToolViewFactory
     PRIVATE
         ByteTableModel
         ByteTableView
+        ByteTableTool
+        ByteTableToolView
     KCFG
         bytetableviewsettings.kcfgc
 )
@@ -260,24 +262,24 @@ oktetakastencontrollers_add_sublibrary(view/libbytearrayfilter/filter
 )
 oktetakastencontrollers_add_sublibrary(view/filter
     PUBLIC
-        FilterTool
-        FilterToolView
         FilterToolFactory
         FilterToolViewFactory
     PRIVATE
         FilterJob
         FilterView
+        FilterTool
+        FilterToolView
 )
 
 oktetakastencontrollers_add_sublibrary(view/charsetconversion
     PUBLIC
-        CharsetConversionTool
-        CharsetConversionToolView
         CharsetConversionToolFactory
         CharsetConversionToolViewFactory
     PRIVATE
         CharsetConversionJob
         CharsetConversionView
+        CharsetConversionTool
+        CharsetConversionToolView
 )
 
 oktetakastencontrollers_add_sublibrary(view/gotooffset
@@ -307,13 +309,13 @@ oktetakastencontrollers_add_sublibrary(view/bookmarks
 
 oktetakastencontrollers_add_sublibrary(view/bookmarks
     PUBLIC
-        BookmarksTool
-        BookmarksToolView
         BookmarksToolFactory
         BookmarksToolViewFactory
     PRIVATE
         BookmarkListModel
         BookmarksView
+        BookmarksTool
+        BookmarksToolView
 )
 
 
@@ -433,7 +435,6 @@ oktetakastencontrollers_add_sublibrary(view/structures/settings
 )
 oktetakastencontrollers_add_sublibrary(view/structures
     PUBLIC
-        StructToolView
         StructuresToolFactory
         StructuresToolViewFactory
     PRIVATE

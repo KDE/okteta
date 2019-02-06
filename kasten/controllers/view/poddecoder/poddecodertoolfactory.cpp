@@ -31,7 +31,7 @@ PodDecoderToolFactory::PodDecoderToolFactory() = default;
 
 PodDecoderToolFactory::~PodDecoderToolFactory() = default;
 
-AbstractTool* PodDecoderToolFactory::create()
+AbstractTool* PodDecoderToolFactory::create() const
 {
     return new PODDecoderTool();
 }

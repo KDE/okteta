@@ -39,7 +39,7 @@ QString ChecksumToolViewFactory::title()       const { return i18nc("@title:wind
 QString ChecksumToolViewFactory:: id()      const { return QStringLiteral("org.kde.okteta.ChecksumToolView"); }
 SidePosition ChecksumToolViewFactory::defaultPosition() const { return BottomSidePosition; }
 
-AbstractToolView* ChecksumToolViewFactory::create(AbstractTool* tool)
+AbstractToolView* ChecksumToolViewFactory::create(AbstractTool* tool) const
 {
     return new ChecksumToolView(qobject_cast<ChecksumTool*>(tool));
 }

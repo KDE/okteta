@@ -23,8 +23,6 @@
 #ifndef STRINGSEXTRACTTOOLVIEW_HPP
 #define STRINGSEXTRACTTOOLVIEW_HPP
 
-// lib
-#include <kasten/okteta/oktetakastencontrollers_export.hpp>
 // Kasten gui
 #include <Kasten/AbstractToolView>
 
@@ -33,7 +31,7 @@ namespace Kasten {
 class StringsExtractView;
 class StringsExtractTool;
 
-class OKTETAKASTENCONTROLLERS_EXPORT StringsExtractToolView : public AbstractToolView
+class StringsExtractToolView : public AbstractToolView
 {
 public:
     explicit StringsExtractToolView(StringsExtractTool* tool);

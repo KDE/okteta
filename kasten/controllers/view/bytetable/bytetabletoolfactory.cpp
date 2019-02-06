@@ -31,7 +31,7 @@ ByteTableToolFactory::ByteTableToolFactory() = default;
 
 ByteTableToolFactory::~ByteTableToolFactory() = default;
 
-AbstractTool* ByteTableToolFactory::create()
+AbstractTool* ByteTableToolFactory::create() const
 {
     return new ByteTableTool();
 }

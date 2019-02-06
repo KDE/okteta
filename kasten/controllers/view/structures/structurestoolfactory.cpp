@@ -31,7 +31,7 @@ StructuresToolFactory::StructuresToolFactory() = default;
 
 StructuresToolFactory::~StructuresToolFactory() = default;
 
-AbstractTool* StructuresToolFactory::create()
+AbstractTool* StructuresToolFactory::create() const
 {
     return new StructuresTool();
 }

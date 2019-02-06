@@ -23,8 +23,6 @@
 #ifndef CHARSETCONVERSIONTOOL_HPP
 #define CHARSETCONVERSIONTOOL_HPP
 
-// lib
-#include <kasten/okteta/oktetakastencontrollers_export.hpp>
 // Kasten core
 #include <Kasten/AbstractTool>
 // Okteta core
@@ -44,7 +42,7 @@ class ByteArrayView;
 
 /**
  */
-class OKTETAKASTENCONTROLLERS_EXPORT CharsetConversionTool : public AbstractTool
+class CharsetConversionTool : public AbstractTool
 {
     Q_OBJECT
 

@@ -23,8 +23,6 @@
 #ifndef INFOTOOLVIEW_HPP
 #define INFOTOOLVIEW_HPP
 
-// lib
-#include <kasten/okteta/oktetakastencontrollers_export.hpp>
 // Kasten gui
 #include <Kasten/AbstractToolView>
 
@@ -33,7 +31,7 @@ namespace Kasten {
 class InfoView;
 class InfoTool;
 
-class OKTETAKASTENCONTROLLERS_EXPORT InfoToolView : public AbstractToolView
+class InfoToolView : public AbstractToolView
 {
 public:
     explicit InfoToolView(InfoTool* tool);

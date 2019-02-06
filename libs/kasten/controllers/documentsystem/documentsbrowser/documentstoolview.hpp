@@ -23,8 +23,6 @@
 #ifndef DOCUMENTSTOOLVIEW_HPP
 #define DOCUMENTSTOOLVIEW_HPP
 
-// lib
-#include <kasten/kastencontrollers_export.hpp>
 // Kasten gui
 #include <Kasten/AbstractToolView>
 
@@ -33,7 +31,7 @@ namespace Kasten {
 class DocumentsView;
 class DocumentsTool;
 
-class KASTENCONTROLLERS_EXPORT DocumentsToolView : public AbstractToolView
+class DocumentsToolView : public AbstractToolView
 {
 public:
     explicit DocumentsToolView(DocumentsTool* tool);

@@ -31,7 +31,7 @@ BookmarksToolFactory::BookmarksToolFactory() = default;
 
 BookmarksToolFactory::~BookmarksToolFactory() = default;
 
-AbstractTool* BookmarksToolFactory::create()
+AbstractTool* BookmarksToolFactory::create() const
 {
     return new BookmarksTool();
 }

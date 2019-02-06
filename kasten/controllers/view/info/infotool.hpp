@@ -23,8 +23,6 @@
 #ifndef INFOTOOL_HPP
 #define INFOTOOL_HPP
 
-// lib
-#include <kasten/okteta/oktetakastencontrollers_export.hpp>
 // Kasten core
 #include <Kasten/AbstractTool>
 // Okteta core
@@ -42,7 +40,7 @@ class ByteArrayView;
 
 /**
  */
-class OKTETAKASTENCONTROLLERS_EXPORT InfoTool : public AbstractTool
+class InfoTool : public AbstractTool
 {
     Q_OBJECT
 

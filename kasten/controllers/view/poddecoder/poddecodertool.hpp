@@ -23,8 +23,6 @@
 #ifndef PODDECODERTOOL_HPP
 #define PODDECODERTOOL_HPP
 
-// lib
-#include <kasten/okteta/oktetakastencontrollers_export.hpp>
 // tool
 #include "poddata.hpp"
 // Kasten core
@@ -45,7 +43,7 @@ namespace Kasten {
 class AbstractDifferentSizeDialog;
 class ByteArrayView;
 
-class OKTETAKASTENCONTROLLERS_EXPORT PODDecoderTool : public AbstractTool
+class PODDecoderTool : public AbstractTool
 {
     Q_OBJECT
 

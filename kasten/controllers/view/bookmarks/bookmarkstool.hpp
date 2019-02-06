@@ -23,8 +23,6 @@
 #ifndef BOOKMARKSTOOL_HPP
 #define BOOKMARKSTOOL_HPP
 
-// lib
-#include <kasten/okteta/oktetakastencontrollers_export.hpp>
 // Kasten core
 #include <Kasten/AbstractTool>
 // Okteta core
@@ -41,7 +39,7 @@ namespace Kasten {
 
 class ByteArrayView;
 
-class OKTETAKASTENCONTROLLERS_EXPORT BookmarksTool : public AbstractTool
+class BookmarksTool : public AbstractTool
 {
     Q_OBJECT
 

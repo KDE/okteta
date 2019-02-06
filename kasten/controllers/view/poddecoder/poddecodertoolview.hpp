@@ -23,8 +23,6 @@
 #ifndef PODDECODERTOOLVIEW_HPP
 #define PODDECODERTOOLVIEW_HPP
 
-// lib
-#include <kasten/okteta/oktetakastencontrollers_export.hpp>
 // Kasten gui
 #include <Kasten/AbstractToolView>
 
@@ -33,7 +31,7 @@ namespace Kasten {
 class PODTableView;
 class PODDecoderTool;
 
-class OKTETAKASTENCONTROLLERS_EXPORT PODDecoderToolView : public AbstractToolView
+class PODDecoderToolView : public AbstractToolView
 {
 public:
     explicit PODDecoderToolView(PODDecoderTool* tool);

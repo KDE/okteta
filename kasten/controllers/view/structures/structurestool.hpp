@@ -24,8 +24,6 @@
 #ifndef STRUCTURESTOOL_HPP
 #define STRUCTURESTOOL_HPP
 
-// lib
-#include <kasten/okteta/oktetakastencontrollers_export.hpp>
 // Okteta Kasten gui
 #include <Kasten/Okteta/ByteArrayView>
 // tool
@@ -48,7 +46,7 @@ namespace Kasten {
 class StructuresManager;
 class StructuresToolPrivate;
 
-class OKTETAKASTENCONTROLLERS_EXPORT StructuresTool : public AbstractTool
+class StructuresTool : public AbstractTool
 {
     Q_OBJECT
 

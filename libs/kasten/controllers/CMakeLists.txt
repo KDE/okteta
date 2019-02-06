@@ -37,27 +37,33 @@ kastencontrollers_add_sublibrary(documentsystem/close
 
 kastencontrollers_add_sublibrary(documentsystem/filesystembrowser
     PUBLIC
-        FileSystemBrowserTool
-        FileSystemBrowserToolView
+        FileSystemBrowserToolFactory
+        FileSystemBrowserToolViewFactory
     PRIVATE
         FileSystemBrowserView
+        FileSystemBrowserTool
+        FileSystemBrowserToolView
 )
 
 kastencontrollers_add_sublibrary(documentsystem/documentsbrowser
     PUBLIC
-        DocumentsTool
-        DocumentsToolView
+        DocumentsToolFactory
+        DocumentsToolViewFactory
     PRIVATE
         DocumentsView
         DocumentListModel
+        DocumentsTool
+        DocumentsToolView
 )
 
 kastencontrollers_add_sublibrary(document/terminal
     PUBLIC
-        TerminalTool
-        TerminalToolView
+        TerminalToolFactory
+        TerminalToolViewFactory
     PRIVATE
         TerminalView
+        TerminalTool
+        TerminalToolView
 )
 
 kastencontrollers_add_sublibrary(document/modified
@@ -75,11 +81,13 @@ kastencontrollers_add_sublibrary(document/readonly
 if(NOT CMAKE_BUILD_TYPE_TOLOWER MATCHES release)
 kastencontrollers_add_sublibrary(document/versionview
     PUBLIC
-        VersionViewTool
-        VersionViewToolView
+        VersionViewToolFactory
+        VersionViewToolViewFactory
     PRIVATE
         VersionTableModel
         VersionView
+        VersionViewTool
+        VersionViewToolView
 )
 endif()
 

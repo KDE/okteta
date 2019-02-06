@@ -51,7 +51,7 @@ SidePosition StructuresToolViewFactory::defaultPosition() const
     return RightSidePosition;
 }
 
-AbstractToolView* StructuresToolViewFactory::create(AbstractTool* tool)
+AbstractToolView* StructuresToolViewFactory::create(AbstractTool* tool) const
 {
     return new StructuresToolView(qobject_cast<StructuresTool*> (tool));
 }

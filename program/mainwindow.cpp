@@ -27,38 +27,36 @@
 // tmp
 #include <Kasten/Okteta/ByteArrayViewProfileManager>
 // tools
-#include <Kasten/Okteta/StringsExtractToolView>
-#include <Kasten/Okteta/StringsExtractTool>
-#include <Kasten/Okteta/InfoToolView>
-#include <Kasten/Okteta/InfoTool>
-#include <Kasten/Okteta/FilterToolView>
-#include <Kasten/Okteta/FilterTool>
-#include <Kasten/Okteta/CharsetConversionToolView>
-#include <Kasten/Okteta/CharsetConversionTool>
-#include <Kasten/Okteta/ChecksumToolView>
-#include <Kasten/Okteta/ChecksumTool>
-#include <Kasten/Okteta/DocumentInfoToolView>
-#include <Kasten/Okteta/DocumentInfoTool>
-#include <Kasten/Okteta/PODDecoderToolView>
-#include <Kasten/Okteta/PODDecoderTool>
-#include <Kasten/Okteta/ByteTableToolView>
-#include <Kasten/Okteta/ByteTableTool>
-#include <Kasten/Okteta/BookmarksToolView>
-#include <Kasten/Okteta/BookmarksTool>
-
-// see comment in kasten/controllers/CMakeLists.txt
-#include <view/structures/structurestoolview.hpp>
-#include <view/structures/structurestool.hpp>
+#include <Kasten/Okteta/StringsExtractToolViewFactory>
+#include <Kasten/Okteta/StringsExtractToolFactory>
+#include <Kasten/Okteta/InfoToolViewFactory>
+#include <Kasten/Okteta/InfoToolFactory>
+#include <Kasten/Okteta/FilterToolViewFactory>
+#include <Kasten/Okteta/FilterToolFactory>
+#include <Kasten/Okteta/CharsetConversionToolViewFactory>
+#include <Kasten/Okteta/CharsetConversionToolFactory>
+#include <Kasten/Okteta/ChecksumToolViewFactory>
+#include <Kasten/Okteta/ChecksumToolFactory>
+#include <Kasten/Okteta/DocumentInfoToolViewFactory>
+#include <Kasten/Okteta/DocumentInfoToolFactory>
+#include <Kasten/Okteta/PODDecoderToolViewFactory>
+#include <Kasten/Okteta/PODDecoderToolFactory>
+#include <Kasten/Okteta/ByteTableToolViewFactory>
+#include <Kasten/Okteta/ByteTableToolFactory>
+#include <Kasten/Okteta/BookmarksToolViewFactory>
+#include <Kasten/Okteta/BookmarksToolFactory>
+#include <Kasten/Okteta/StructuresToolViewFactory>
+#include <Kasten/Okteta/StructuresToolFactory>
 
 // Kasten tools
-#include <Kasten/VersionViewToolView>
-#include <Kasten/VersionViewTool>
-#include <Kasten/FileSystemBrowserToolView>
-#include <Kasten/FileSystemBrowserTool>
-#include <Kasten/DocumentsToolView>
-#include <Kasten/DocumentsTool>
-#include <Kasten/TerminalToolView>
-#include <Kasten/TerminalTool>
+#include <Kasten/VersionViewToolViewFactory>
+#include <Kasten/VersionViewToolFactory>
+#include <Kasten/FileSystemBrowserToolViewFactory>
+#include <Kasten/FileSystemBrowserToolFactory>
+#include <Kasten/DocumentsToolViewFactory>
+#include <Kasten/DocumentsToolFactory>
+#include <Kasten/TerminalToolViewFactory>
+#include <Kasten/TerminalToolFactory>
 // controllers
 #include <Kasten/Okteta/OverwriteOnlyController>
 #include <Kasten/Okteta/OverwriteModeController>
@@ -197,11 +195,11 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiController(new CopyAsController(codecViewManager,
                                              codecManager, this));
 
-    addTool(new FileSystemBrowserToolView(new FileSystemBrowserTool(syncManager)));
-    addTool(new DocumentsToolView(new DocumentsTool(documentManager)));
-    addTool(new TerminalToolView(new TerminalTool(syncManager)));
+    addToolFromFactory(FileSystemBrowserToolViewFactory(), FileSystemBrowserToolFactory(syncManager));
+    addToolFromFactory(DocumentsToolViewFactory(), DocumentsToolFactory(documentManager));
+    addToolFromFactory(TerminalToolViewFactory(), TerminalToolFactory(syncManager));
 #ifndef NDEBUG
-    addTool(new VersionViewToolView(new VersionViewTool()));
+    addToolFromFactory(VersionViewToolViewFactory(), VersionViewToolFactory());
 #endif
 
     // Okteta specific
@@ -224,16 +222,25 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiController(new ReadOnlyBarController(bottomBar));
     addXmlGuiController(new ZoomBarController(bottomBar));
 
-    addTool(new DocumentInfoToolView(new DocumentInfoTool(syncManager)));
-    addTool(new ChecksumToolView(new ChecksumTool()));
-    addTool(new FilterToolView(new FilterTool()));
-    addTool(new CharsetConversionToolView(new CharsetConversionTool()));
-    addTool(new StringsExtractToolView(new StringsExtractTool()));
-    addTool(new ByteTableToolView(new ByteTableTool()));
-    addTool(new InfoToolView(new InfoTool()));
-    addTool(new PODDecoderToolView(new PODDecoderTool()));
-    addTool(new StructuresToolView(new StructuresTool()));
-    addTool(new BookmarksToolView(new BookmarksTool()));
+    addToolFromFactory(DocumentInfoToolViewFactory(), DocumentInfoToolFactory(syncManager));
+    addToolFromFactory(ChecksumToolViewFactory(), ChecksumToolFactory());
+    addToolFromFactory(FilterToolViewFactory(), FilterToolFactory());
+    addToolFromFactory(CharsetConversionToolViewFactory(), CharsetConversionToolFactory());
+    addToolFromFactory(StringsExtractToolViewFactory(), StringsExtractToolFactory());
+    addToolFromFactory(ByteTableToolViewFactory(), ByteTableToolFactory());
+    addToolFromFactory(InfoToolViewFactory(), InfoToolFactory());
+    addToolFromFactory(PodDecoderToolViewFactory(), PodDecoderToolFactory());
+    addToolFromFactory(StructuresToolViewFactory(), StructuresToolFactory());
+    addToolFromFactory(BookmarksToolViewFactory(), BookmarksToolFactory());
+}
+
+void OktetaMainWindow::addToolFromFactory(const AbstractToolViewFactory& toolViewFactory,
+                                          const AbstractToolFactory& toolFactory)
+{
+    AbstractTool* tool = toolFactory.create();
+    AbstractToolView* toolView = toolViewFactory.create(tool);
+
+    addTool(toolView);
 }
 
 bool OktetaMainWindow::queryClose()

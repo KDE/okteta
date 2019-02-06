@@ -23,8 +23,6 @@
 #ifndef BYTETABLETOOL_HPP
 #define BYTETABLETOOL_HPP
 
-// lib
-#include <kasten/okteta/oktetakastencontrollers_export.hpp>
 // Kasten core
 #include <Kasten/AbstractTool>
 
@@ -39,7 +37,7 @@ class ByteArrayView;
 
 /**
  */
-class OKTETAKASTENCONTROLLERS_EXPORT ByteTableTool : public AbstractTool
+class ByteTableTool : public AbstractTool
 {
     Q_OBJECT
 

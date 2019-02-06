@@ -24,7 +24,6 @@
 #define CHECKSUMTOOL_HPP
 
 // lib
-#include <kasten/okteta/oktetakastencontrollers_export.hpp>
 #include <config-qca2.hpp>
 // Kasten core
 #include <Kasten/AbstractTool>
@@ -45,7 +44,7 @@ namespace Kasten {
 
 class ByteArrayView;
 
-class OKTETAKASTENCONTROLLERS_EXPORT ChecksumTool : public AbstractTool
+class ChecksumTool : public AbstractTool
 {
     Q_OBJECT
 

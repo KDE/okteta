@@ -31,7 +31,7 @@ StringsExtractToolFactory::StringsExtractToolFactory() = default;
 
 StringsExtractToolFactory::~StringsExtractToolFactory() = default;
 
-AbstractTool* StringsExtractToolFactory::create()
+AbstractTool* StringsExtractToolFactory::create() const
 {
     return new StringsExtractTool();
 }
