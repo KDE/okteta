@@ -21,60 +21,18 @@
 */
 
 #include "columnsview.hpp"
+#include "columnsview_p.hpp"
 
-// lib
-#include "abstractcolumnrenderer.hpp"
 // Qt
 #include <QPaintEvent>
 #include <QPainter>
 #include <QStyle>
 #include <QScrollBar>
-#include <QVector>
 
 namespace Okteta {
 
 static const int DefaultSingleStep = 20;
 
-class ColumnsViewPrivate
-{
-public:
-    ColumnsViewPrivate(/*bool R,*/);
-    ~ColumnsViewPrivate();
-
-public:
-    void updateWidths();
-
-public: // calculated
-    /** collection of all the columns. All columns will be autodeleted. */
-    QVector<AbstractColumnRenderer*> columns;
-    /** the number of lines which the column view has */
-    LineSize NoOfLines = 0;
-    /** the height of each line in pixels */
-    PixelY LineHeight = 0;
-    /** the width of all visible columns together */
-    PixelX ColumnsWidth = 0;
-
-public:
-//    bool Reversed;
-};
-
-ColumnsViewPrivate::ColumnsViewPrivate(/*bool R,*/)
-//    Reversed( R )
-{}
-
-ColumnsViewPrivate::~ColumnsViewPrivate()
-{
-    qDeleteAll(columns);
-}
-
-void ColumnsViewPrivate::updateWidths()
-{
-    ColumnsWidth = 0;
-    for (auto column : qAsConst(columns)) {
-        column->setX(ColumnsWidth);
-        ColumnsWidth += column->visibleWidth();
-    }
-}
 
 ColumnsView::ColumnsView(/*bool R,*/ QWidget* parent)
     : QAbstractScrollArea(parent)
