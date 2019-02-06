@@ -723,7 +723,7 @@ void ByteArrayRowViewPrivate::updateChanged()
     }
 
     // collect affected buffer columns
-    QList<ByteArrayRowColumnRenderer*> dirtyColumns;
+    QVector<ByteArrayRowColumnRenderer*> dirtyColumns;
 
     if (mByteArrayColumn->overlaps(Xs)) {
         dirtyColumns.append(mByteArrayColumn);
@@ -731,7 +731,7 @@ void ByteArrayRowViewPrivate::updateChanged()
     }
 
     // any columns to paint?
-    if (dirtyColumns.size() > 0) {
+    if (!dirtyColumns.isEmpty()) {
         // calculate affected lines/indizes
         const LinePositionRange fullPositions(0, mTableLayout->noOfBytesPerLine() - 1);
         CoordRange visibleRange(fullPositions, q->visibleLines());
@@ -742,12 +742,11 @@ void ByteArrayRowViewPrivate::updateChanged()
         while (getNextChangedRange(&changedRange, visibleRange)) {
             PixelY cy = q->yOffsetOfLine(changedRange.start().line());
 
-            QListIterator<ByteArrayRowColumnRenderer*> columnIt(dirtyColumns);
             // only one line?
             if (changedRange.start().line() == changedRange.end().line()) {
                 const LinePositionRange changedPositions(changedRange.start().pos(), changedRange.end().pos());
-                while (columnIt.hasNext()) {
-                    const PixelXRange xPixels = columnIt.next()->xsOfLinePositionsInclSpaces(changedPositions);
+                for (auto column : qAsConst(dirtyColumns)) {
+                    const PixelXRange xPixels = column->xsOfLinePositionsInclSpaces(changedPositions);
 
                     q->viewport()->update(xPixels.start() - xOffset, cy, xPixels.width(), lineHeight);
                 }
@@ -756,8 +755,8 @@ void ByteArrayRowViewPrivate::updateChanged()
             else {
                 // first line
                 const LinePositionRange firstChangedPositions(changedRange.start().pos(), fullPositions.end());
-                while (columnIt.hasNext()) {
-                    const PixelXRange XPixels = columnIt.next()->xsOfLinePositionsInclSpaces(firstChangedPositions);
+                for (auto column : qAsConst(dirtyColumns)) {
+                    const PixelXRange XPixels = column->xsOfLinePositionsInclSpaces(firstChangedPositions);
 
                     q->viewport()->update(XPixels.start() - xOffset, cy, XPixels.width(), lineHeight);
                 }
@@ -765,9 +764,8 @@ void ByteArrayRowViewPrivate::updateChanged()
                 // at least one full line?
                 for (int l = changedRange.start().line() + 1; l < changedRange.end().line(); ++l) {
                     cy += lineHeight;
-                    columnIt.toFront();
-                    while (columnIt.hasNext()) {
-                        const PixelXRange XPixels = columnIt.next()->xsOfLinePositionsInclSpaces(fullPositions);
+                    for (auto column : qAsConst(dirtyColumns)) {
+                        const PixelXRange XPixels = column->xsOfLinePositionsInclSpaces(fullPositions);
 
                         q->viewport()->update(XPixels.start() - xOffset, cy, XPixels.width(), lineHeight);
                     }
@@ -775,10 +773,9 @@ void ByteArrayRowViewPrivate::updateChanged()
 
                 // last line
                 cy += lineHeight;
-                columnIt.toFront();
                 const LinePositionRange lastChangedPositions(fullPositions.start(), changedRange.end().pos());
-                while (columnIt.hasNext()) {
-                    const PixelXRange XPixels = columnIt.next()->xsOfLinePositionsInclSpaces(lastChangedPositions);
+                for (auto column : qAsConst(dirtyColumns)) {
+                    const PixelXRange XPixels = column->xsOfLinePositionsInclSpaces(lastChangedPositions);
 
                     q->viewport()->update(XPixels.start() - xOffset, cy, XPixels.width(), lineHeight);
                 }

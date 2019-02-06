@@ -25,11 +25,11 @@
 // lib
 #include "abstractcolumnrenderer.hpp"
 // Qt
-#include <QListIterator>
 #include <QPaintEvent>
 #include <QPainter>
 #include <QStyle>
 #include <QScrollBar>
+#include <QVector>
 
 namespace Okteta {
 
@@ -46,7 +46,7 @@ public:
 
 public: // calculated
     /** collection of all the columns. All columns will be autodeleted. */
-    QList<AbstractColumnRenderer*> Columns;
+    QVector<AbstractColumnRenderer*> columns;
     /** the number of lines which the column view has */
     LineSize NoOfLines = 0;
     /** the height of each line in pixels */
@@ -64,17 +64,13 @@ ColumnsViewPrivate::ColumnsViewPrivate(/*bool R,*/)
 
 ColumnsViewPrivate::~ColumnsViewPrivate()
 {
-    while (!Columns.isEmpty()) {
-        delete Columns.takeFirst();
-    }
+    qDeleteAll(columns);
 }
 
 void ColumnsViewPrivate::updateWidths()
 {
     ColumnsWidth = 0;
-    QListIterator<AbstractColumnRenderer*> it(Columns);
-    while (it.hasNext()) {
-        AbstractColumnRenderer* column = it.next();
+    for (auto column : qAsConst(columns)) {
         column->setX(ColumnsWidth);
         ColumnsWidth += column->visibleWidth();
     }
@@ -154,9 +150,8 @@ void ColumnsView::setLineHeight(PixelY newLineHeight)
 
     d->LineHeight = newLineHeight;
 
-    QListIterator<AbstractColumnRenderer*> it(d->Columns);
-    while (it.hasNext()) {
-        it.next()->setLineHeight(d->LineHeight);
+    for (auto column : qAsConst(d->columns)) {
+        column->setLineHeight(d->LineHeight);
     }
 
     verticalScrollBar()->setSingleStep(d->LineHeight);
@@ -244,16 +239,16 @@ void ColumnsView::addColumn(AbstractColumnRenderer* columnRenderer)
 //   if( Reversed )
 //     Columns.prepend( C );
 //   else
-    d->Columns.append(columnRenderer);
+    d->columns.append(columnRenderer);
 
     updateWidths();
 }
 
 void ColumnsView::removeColumn(AbstractColumnRenderer* columnRenderer)
 {
-    const int columnRendererIndex = d->Columns.indexOf(columnRenderer);
+    const int columnRendererIndex = d->columns.indexOf(columnRenderer);
     if (columnRendererIndex != -1) {
-        d->Columns.removeAt(columnRendererIndex);
+        d->columns.removeAt(columnRendererIndex);
     }
 
     delete columnRenderer;
@@ -307,10 +302,9 @@ void ColumnsView::renderColumns(QPainter* painter, int cx, int cy, int cw, int c
         PixelYRange dirtyYs = PixelYRange::fromWidth(cy, ch);
 
         // collect affected columns
-        QList<AbstractColumnRenderer*> dirtyColumns;
-        QListIterator<AbstractColumnRenderer*> it(d->Columns);
-        while (it.hasNext()) {
-            AbstractColumnRenderer* column = it.next();
+        QVector<AbstractColumnRenderer*> dirtyColumns;
+        dirtyColumns.reserve(d->columns.size());
+        for (auto column : qAsConst(d->columns)) {
             if (column->isVisible() && column->overlaps(dirtyXs)) {
                 dirtyColumns.append(column);
             }
@@ -324,26 +318,26 @@ void ColumnsView::renderColumns(QPainter* painter, int cx, int cy, int cw, int c
 
             if (dirtyLines.isValid()) {
                 // paint full columns
-                QListIterator<AbstractColumnRenderer*> fit(d->Columns);   // TODO: reuse later, see some lines below
-                while (fit.hasNext()) {
-                    fit.next()->renderColumn(painter, dirtyXs, dirtyYs);
+                for (auto column : qAsConst(d->columns)) {
+                    column->renderColumn(painter, dirtyXs, dirtyYs);
                 }
 
                 PixelY cy = dirtyLines.start() * d->LineHeight;
                 // qCDebug(LOG_OKTETA_GUI)<<"Dirty lines: "<<dirtyLines.start()<<"-"<<dirtyLines.end();
                 // starting painting with the first line
                 Line line = dirtyLines.start();
-                QListIterator<AbstractColumnRenderer*> it(dirtyColumns);
-                AbstractColumnRenderer* column = it.next();
+                auto it = dirtyColumns.constBegin();
+                AbstractColumnRenderer* column = *it;
                 painter->translate(column->x(), cy);
 
                 while (true) {
                     column->renderFirstLine(painter, dirtyXs, line);
-                    if (!it.hasNext()) {
+                    ++it;
+                    if (it == dirtyColumns.constEnd()) {
                         break;
                     }
                     painter->translate(column->width(), 0);
-                    column = it.next();
+                    column = *it;
                 }
                 painter->translate(-column->x(), 0);
 
@@ -355,17 +349,18 @@ void ColumnsView::renderColumns(QPainter* painter, int cx, int cy, int cw, int c
                         break;
                     }
 
-                    QListIterator<AbstractColumnRenderer*> it(dirtyColumns);
-                    column = it.next();
+                    it = dirtyColumns.constBegin();
+                    column = *it;
                     painter->translate(column->x(), d->LineHeight);
 
                     while (true) {
                         column->renderNextLine(painter);
-                        if (!it.hasNext()) {
+                        ++it;
+                        if (it == dirtyColumns.constEnd()) {
                             break;
                         }
                         painter->translate(column->width(), 0);
-                        column = it.next();
+                        column = *it;
                     }
                     painter->translate(-column->x(), 0);
                 }
@@ -378,9 +373,8 @@ void ColumnsView::renderColumns(QPainter* painter, int cx, int cy, int cw, int c
         // draw empty columns?
         dirtyYs.setStart(columnsHeight());
         if (dirtyYs.isValid()) {
-            QListIterator<AbstractColumnRenderer*> it(dirtyColumns);
-            while (it.hasNext()) {
-                it.next()->renderEmptyColumn(painter, dirtyXs, dirtyYs);
+            for (auto column : qAsConst(dirtyColumns)) {
+                column->renderEmptyColumn(painter, dirtyXs, dirtyYs);
             }
         }
     }
