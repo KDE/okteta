@@ -25,7 +25,7 @@
 
 // Qt
 #include <QObject>
-#include <QList>
+#include <QVector>
 #include <QRect>
 
 class QPrinter;
@@ -54,7 +54,7 @@ Q_SIGNALS:
     void printedPage(int pageIndex);
 
 protected:
-    QList<AbstractFrameRenderer*> mFrameRendererList;
+    QVector<AbstractFrameRenderer*> mFrameRendererList;
     QRect mPaperRect;
     QRect mPageRect;
 };
