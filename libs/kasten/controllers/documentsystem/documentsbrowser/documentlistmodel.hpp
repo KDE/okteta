@@ -57,8 +57,8 @@ public: // QAbstractTableModel API
     QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
 
 private Q_SLOTS:
-    void onDocumentsAdded(const QList<Kasten::AbstractDocument*>& documents);
-    void onDocumentsClosing(const QList<Kasten::AbstractDocument*>& documents);
+    void onDocumentsAdded(const QVector<Kasten::AbstractDocument*>& documents);
+    void onDocumentsClosing(const QVector<Kasten::AbstractDocument*>& documents);
     void onFocussedDocumentChanged(Kasten::AbstractDocument* document);
     void onSyncStatesChanged();
     void onSynchronizerChanged(Kasten::AbstractModelSynchronizer* synchronizer);

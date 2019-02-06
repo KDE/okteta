@@ -81,7 +81,7 @@ void ViewManager::createCopyOfView(AbstractView* view, Qt::Alignment alignment)
     emit opened(views);
 }
 
-void ViewManager::createViewsFor(const QList<Kasten::AbstractDocument*>& documents)
+void ViewManager::createViewsFor(const QVector<Kasten::AbstractDocument*>& documents)
 {
     QList<Kasten::AbstractView*> openedViews;
 
@@ -102,7 +102,7 @@ void ViewManager::createViewsFor(const QList<Kasten::AbstractDocument*>& documen
     }
 }
 
-void ViewManager::removeViewsFor(const QList<Kasten::AbstractDocument*>& documents)
+void ViewManager::removeViewsFor(const QVector<Kasten::AbstractDocument*>& documents)
 {
     QList<Kasten::AbstractView*> closedViews;
 

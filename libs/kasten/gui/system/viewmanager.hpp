@@ -57,8 +57,8 @@ public:
     ModelCodecViewManager* codecViewManager();
 
 public Q_SLOTS:
-    void createViewsFor(const QList<Kasten::AbstractDocument*>& documents);
-    void removeViewsFor(const QList<Kasten::AbstractDocument*>& documents);
+    void createViewsFor(const QVector<Kasten::AbstractDocument*>& documents);
+    void removeViewsFor(const QVector<Kasten::AbstractDocument*>& documents);
 
 Q_SIGNALS:
     // view was created and already added to the list

@@ -157,7 +157,7 @@ void DocumentListModel::onFocussedDocumentChanged(AbstractDocument* document)
 #endif
 }
 
-void DocumentListModel::onDocumentsAdded(const QList<Kasten::AbstractDocument*>& documents)
+void DocumentListModel::onDocumentsAdded(const QVector<Kasten::AbstractDocument*>& documents)
 {
     for (AbstractDocument* document : documents) {
         connect(document, &AbstractDocument::synchronizerChanged,
@@ -176,7 +176,7 @@ void DocumentListModel::onDocumentsAdded(const QList<Kasten::AbstractDocument*>&
     endResetModel();
 }
 
-void DocumentListModel::onDocumentsClosing(const QList<Kasten::AbstractDocument*>& documents)
+void DocumentListModel::onDocumentsClosing(const QVector<Kasten::AbstractDocument*>& documents)
 {
     Q_UNUSED(documents)
     // TODO: try to understand how this whould be done with {begin,end}{Insert,Remove}Columns

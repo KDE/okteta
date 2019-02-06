@@ -108,7 +108,7 @@ void CloseController::closeAllOther()
 
 void CloseController::onDocumentsChanged()
 {
-    const QList<AbstractDocument*> documents = mDocumentStrategy->documents();
+    const QVector<AbstractDocument*> documents = mDocumentStrategy->documents();
 
     const bool hasDocuments = !documents.isEmpty();
     // TODO: there could be just one, but not set for this tool?

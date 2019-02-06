@@ -73,8 +73,8 @@ Q_SIGNALS:
 private Q_SLOTS:
     void onDocumentLoaded(Kasten::AbstractDocument* document);
 
-    void onDocumentsAdded(const QList<Kasten::AbstractDocument*>& documents);
-    void onDocumentsClosing(const QList<Kasten::AbstractDocument*>& documents);
+    void onDocumentsAdded(const QVector<Kasten::AbstractDocument*>& documents);
+    void onDocumentsClosing(const QVector<Kasten::AbstractDocument*>& documents);
 
 private:
     // unless there is a singleton

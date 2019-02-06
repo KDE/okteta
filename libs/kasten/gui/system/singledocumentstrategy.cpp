@@ -38,7 +38,7 @@ SingleDocumentStrategy::SingleDocumentStrategy(DocumentManager* documentManager,
 
 SingleDocumentStrategy::~SingleDocumentStrategy() = default;
 
-QList<AbstractDocument*> SingleDocumentStrategy::documents() const
+QVector<AbstractDocument*> SingleDocumentStrategy::documents() const
 {
     Q_D(const SingleDocumentStrategy);
 

@@ -253,7 +253,7 @@ void OktetaMainWindow::saveProperties(KConfigGroup& configGroup)
 {
     DocumentManager* const documentManager = mProgram->documentManager();
     DocumentSyncManager* const syncManager = documentManager->syncManager();
-    const QList<AbstractDocument*> documents = documentManager->documents();
+    const QVector<AbstractDocument*> documents = documentManager->documents();
 
     QStringList urls;
     urls.reserve(documents.size());
@@ -329,7 +329,7 @@ void OktetaMainWindow::onCloseRequest(const QList<Kasten::AbstractView*>& views)
         }
     }
 
-    const QList<AbstractDocument*> documentsWithoutViews = viewsToClosePerDocument.keys();
+    const QVector<AbstractDocument*> documentsWithoutViews = viewsToClosePerDocument.keys().toVector();
 
     DocumentManager* const documentManager = mProgram->documentManager();
     if (documentManager->canClose(documentsWithoutViews)) {

@@ -43,7 +43,7 @@ DocumentsTool::DocumentsTool(DocumentManager* documentManager)
 
 DocumentsTool::~DocumentsTool() = default;
 
-QList<AbstractDocument*> DocumentsTool::documents() const { return mDocumentManager->documents(); }
+QVector<AbstractDocument*> DocumentsTool::documents() const { return mDocumentManager->documents(); }
 
 QString DocumentsTool::title() const { return i18nc("@title:window", "Documents"); }
 

@@ -271,12 +271,12 @@ void DocumentSyncManager::onDocumentLoaded(AbstractDocument* document)
     }
 }
 
-void DocumentSyncManager::onDocumentsAdded(const QList<Kasten::AbstractDocument*>& documents)
+void DocumentSyncManager::onDocumentsAdded(const QVector<Kasten::AbstractDocument*>& documents)
 {
     Q_UNUSED(documents)
 }
 
-void DocumentSyncManager::onDocumentsClosing(const QList<Kasten::AbstractDocument*>& documents)
+void DocumentSyncManager::onDocumentsClosing(const QVector<Kasten::AbstractDocument*>& documents)
 {
     Q_UNUSED(documents)
 }

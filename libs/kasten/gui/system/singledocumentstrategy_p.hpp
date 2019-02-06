@@ -58,7 +58,7 @@ public: // AbstractDocumentStrategy API
     void closeAllOther(AbstractDocument* document);
 
 public: // const AbstractDocumentStrategy API
-    QList<AbstractDocument*> documents() const;
+    QVector<AbstractDocument*> documents() const;
     QStringList supportedRemoteTypes() const;
 
     bool canClose(AbstractDocument* document) const;
@@ -85,7 +85,7 @@ SingleDocumentStrategyPrivate::SingleDocumentStrategyPrivate(SingleDocumentStrat
 
 inline SingleDocumentStrategyPrivate::~SingleDocumentStrategyPrivate() = default;
 
-inline QList<AbstractDocument*> SingleDocumentStrategyPrivate::documents() const
+inline QVector<AbstractDocument*> SingleDocumentStrategyPrivate::documents() const
 {
     return mDocumentManager->documents();
 }

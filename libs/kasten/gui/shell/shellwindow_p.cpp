@@ -108,7 +108,7 @@ void ShellWindowPrivate::showDocument(AbstractDocument* document)
     if (viewOfDocument) {
         mGroupedViews->setViewFocus(viewOfDocument);
     } else {
-        const QList<Kasten::AbstractDocument*> documents { document };
+        const QVector<Kasten::AbstractDocument*> documents { document };
         mViewManager->createViewsFor(documents);
     }
 }
