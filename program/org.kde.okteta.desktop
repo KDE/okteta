@@ -1,4 +1,5 @@
 [Desktop Entry]
+Type=Application
 Name=Okteta
 Name[bs]=Okteta
 Name[ca]=Okteta
@@ -93,7 +94,6 @@ GenericName[zh_CN]=十六进制编辑器
 GenericName[zh_TW]=十六進位資料編輯器
 Icon=okteta
 Exec=okteta %U
-Type=Application
 X-DocPath=okteta/index.html
 Terminal=false
 StartupNotify=true
