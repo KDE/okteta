@@ -127,4 +127,6 @@ inline bool Piece::append(const Piece& other)
 
 }
 
+Q_DECLARE_TYPEINFO(KPieceTable::Piece, Q_MOVABLE_TYPE);
+
 #endif

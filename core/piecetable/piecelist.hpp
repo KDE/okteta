@@ -26,7 +26,7 @@
 // lib
 #include "piece.hpp"
 // Qt
-#include <QList>
+#include <QVector>
 
 namespace KPieceTable {
 
@@ -50,7 +50,7 @@ public:
     void prepend(const PieceList& other);
 
 protected:
-    QList<Piece> mList;
+    QVector<Piece> mList;
     Size mTotalLength = 0;
 };
 
@@ -80,7 +80,7 @@ inline void PieceList::append(const Piece& piece)
 }
 inline void PieceList::append(const PieceList& other)
 {
-    QList<Piece>::ConstIterator it = other.mList.begin();
+    QVector<Piece>::ConstIterator it = other.mList.begin();
 
     // see if the ones at the border can be merged
     bool isMerged = false;
@@ -100,8 +100,8 @@ inline void PieceList::append(const PieceList& other)
 }
 inline void PieceList::prepend(const PieceList& other)
 {
-    QList<Piece> otherCopy = other.mList;
-    QList<Piece>::Iterator it = mList.begin();
+    QVector<Piece> otherCopy = other.mList;
+    QVector<Piece>::Iterator it = mList.begin();
 
     // see if the ones at the border can be merged
     bool isMerged = false;
