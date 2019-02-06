@@ -28,7 +28,6 @@
 #include <okteta/pixelmetrics.hpp>
 #include <okteta/linerange.hpp>
 // Qt
-#include <QList>
 #include <QAbstractScrollArea>
 
 namespace Okteta {
