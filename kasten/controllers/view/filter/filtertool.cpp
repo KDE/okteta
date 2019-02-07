@@ -55,7 +55,7 @@ FilterTool::~FilterTool()
 }
 
 QString FilterTool::title() const { return i18nc("@title:window", "Binary Filter"); }
-QList<AbstractByteArrayFilter*> FilterTool::filterList() const { return mFilterList; }
+QVector<AbstractByteArrayFilter*> FilterTool::filterList() const { return mFilterList; }
 QString FilterTool::charCodecName() const
 {
     return mByteArrayView ? mByteArrayView->charCodingName() : QString();

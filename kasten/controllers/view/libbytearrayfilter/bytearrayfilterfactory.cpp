@@ -35,10 +35,12 @@
 // e.g.
 // #include "filter/my_bytearrayfilter.hpp"
 // NEWFILTER(end)
+// Qt
+#include <QVector>
 
-QList<AbstractByteArrayFilter*> ByteArrayFilterFactory::createFilters()
+QVector<AbstractByteArrayFilter*> ByteArrayFilterFactory::createFilters()
 {
-    QList<AbstractByteArrayFilter*> result {
+    const QVector<AbstractByteArrayFilter*> result {
         new AndByteArrayFilter(),
         new OrByteArrayFilter(),
         new XOrByteArrayFilter(),

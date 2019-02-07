@@ -24,7 +24,7 @@
 #define BYTEARRAYFILTERFACTORY_HPP
 
 class AbstractByteArrayFilter;
-template <class T> class QList;
+template <class T> class QVector;
 
 class ByteArrayFilterFactory
 {
@@ -32,7 +32,7 @@ protected:
     ByteArrayFilterFactory();
 
 public:
-    static QList<AbstractByteArrayFilter*> createFilters();
+    static QVector<AbstractByteArrayFilter*> createFilters();
 
 };
 
