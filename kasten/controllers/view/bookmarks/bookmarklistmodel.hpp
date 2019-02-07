@@ -31,7 +31,7 @@
 namespace Okteta {
 class Bookmark;
 }
-template <class T> class QList;
+template <class T> class QVector;
 
 namespace Kasten {
 

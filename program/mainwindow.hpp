@@ -26,7 +26,7 @@
 // Kasten gui
 #include <Kasten/ShellWindow>
 
-template <class T> class QList;
+template <class T> class QVector;
 class QMimeData;
 
 namespace Kasten {

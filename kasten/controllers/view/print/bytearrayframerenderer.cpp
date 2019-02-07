@@ -42,7 +42,6 @@
 #include <QFontMetrics>
 #include <QFontDatabase>
 #include <QApplication>
-#include <QListIterator>
 
 static const Okteta::Address DefaultStartOffset = 0;
 static const Okteta::Address DefaultFirstLineOffset = 0;

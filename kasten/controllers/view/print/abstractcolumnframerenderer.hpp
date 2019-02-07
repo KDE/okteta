@@ -30,8 +30,6 @@
 #include <Okteta/Line>
 // Okteta core
 #include <Okteta/AddressRange>
-// Qt
-#include <QList>
 
 namespace Okteta {
 class AbstractColumnRenderer;

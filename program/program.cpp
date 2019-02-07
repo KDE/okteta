@@ -51,7 +51,7 @@
 #include <KCrash>
 // Qt
 #include <QCommandLineParser>
-#include <QList>
+#include <QVector>
 #include <QUrl>
 #include <QDir>
 #include <QLoggingCategory>

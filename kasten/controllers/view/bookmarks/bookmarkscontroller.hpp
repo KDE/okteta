@@ -29,8 +29,8 @@
 #include <Kasten/AbstractXmlGuiController>
 // Okteta core
 #include <Okteta/Address>
-// Qt
-#include <QList>
+
+template <class T> class QVector;
 
 namespace Okteta {
 class Bookmarkable;

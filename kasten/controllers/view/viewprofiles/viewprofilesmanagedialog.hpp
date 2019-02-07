@@ -28,7 +28,7 @@
 // Qt
 #include <QDialog>
 
-template <class C> class QList;
+template <class C> class QVector;
 class QTreeView;
 class QPushButton;
 

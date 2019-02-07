@@ -28,7 +28,7 @@
 // Qt
 #include <QAbstractTableModel>
 
-template <class C> class QList;
+template <class C> class QVector;
 
 namespace Kasten {
 class ByteArrayViewProfileManager;

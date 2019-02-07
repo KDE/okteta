@@ -25,7 +25,6 @@
 
 #include "structuredefinitionfile.hpp"
 // Qt
-#include <QList>
 #include <QStringList>
 #include <QDir>
 // KF5

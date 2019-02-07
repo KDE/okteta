@@ -27,8 +27,6 @@
 #include <Kasten/AbstractTool>
 // Okteta core
 #include <Okteta/Byte>
-// Qt
-#include <QList>
 
 namespace Okteta {
 class AbstractByteArrayModel;
