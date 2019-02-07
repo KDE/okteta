@@ -28,6 +28,7 @@
 // Qt
 #include <QObject>
 #include <QList>
+#include <QVector>
 
 class QString;
 
@@ -58,12 +59,12 @@ public:
     AbstractModelDataGeneratorConfigEditor* createConfigEditor(AbstractModelDataGenerator* generator) const;
 
 public:
-    void setEncoderConfigEditorFactories(const QList<AbstractModelStreamEncoderConfigEditorFactory*>& factoryList);
+    void setEncoderConfigEditorFactories(const QVector<AbstractModelStreamEncoderConfigEditorFactory*>& factoryList);
     void setExporterConfigEditorFactories(const QList<AbstractModelExporterConfigEditorFactory*>& factoryList);
     void setGeneratorConfigEditorFactories(const QList<AbstractModelDataGeneratorConfigEditorFactory*>& factoryList);
 
 private:
-    QList<AbstractModelStreamEncoderConfigEditorFactory*> mEncoderFactoryList;
+    QVector<AbstractModelStreamEncoderConfigEditorFactory*> mEncoderFactoryList;
     QList<AbstractModelExporterConfigEditorFactory*> mExporterFactoryList;
     QList<AbstractModelDataGeneratorConfigEditorFactory*> mGeneratorFactoryList;
 };

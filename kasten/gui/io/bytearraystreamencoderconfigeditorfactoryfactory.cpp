@@ -36,13 +36,13 @@
 //// #include "my_bytearraystreamencoder.hpp"
 //// NEWBYTEARRAYSTREAMENCODERCONFIGEDITORFACTORY(end)
 // Qt
-#include <QList>
+#include <QVector>
 
 namespace Kasten {
 
-QList<AbstractModelStreamEncoderConfigEditorFactory*> ByteArrayStreamEncoderConfigEditorFactoryFactory::createFactorys()
+QVector<AbstractModelStreamEncoderConfigEditorFactory*> ByteArrayStreamEncoderConfigEditorFactoryFactory::createFactorys()
 {
-    QList<AbstractModelStreamEncoderConfigEditorFactory*> result {
+    const QVector<AbstractModelStreamEncoderConfigEditorFactory*> result {
         new ByteArraySourceCodeStreamEncoderConfigEditorFactory(),
         new ByteArrayValuesStreamEncoderConfigEditorFactory(),
         new ByteArrayBase32StreamEncoderConfigEditorFactory(),

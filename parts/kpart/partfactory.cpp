@@ -52,7 +52,7 @@ OktetaPartFactory::OktetaPartFactory()
 //     const QVector<AbstractModelDataGenerator*> generatorList =
 //         ByteArrayDataGeneratorFactory::createDataGenerators();
 
-//     const QList<AbstractModelStreamEncoderConfigEditorFactory*> encoderConfigEditorFactoryList =
+//     const QVector<AbstractModelStreamEncoderConfigEditorFactory*> encoderConfigEditorFactoryList =
 //         ByteArrayStreamEncoderConfigEditorFactoryFactory::createFactorys();
 
 //     const QList<AbstractModelDataGeneratorConfigEditorFactory*> generatorConfigEditorFactoryList =

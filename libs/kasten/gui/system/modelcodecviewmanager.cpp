@@ -46,7 +46,7 @@ ModelCodecViewManager::~ModelCodecViewManager()
     qDeleteAll(mGeneratorFactoryList);
 }
 
-void ModelCodecViewManager::setEncoderConfigEditorFactories(const QList<AbstractModelStreamEncoderConfigEditorFactory*>& factoryList)
+void ModelCodecViewManager::setEncoderConfigEditorFactories(const QVector<AbstractModelStreamEncoderConfigEditorFactory*>& factoryList)
 {
     qDeleteAll(mEncoderFactoryList);
     mEncoderFactoryList = factoryList;
