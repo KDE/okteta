@@ -47,7 +47,7 @@ public:
     const ArrayChangeMetrics& metrics() const;
     const QByteArray& data() const;
 
-protected:
+private:
     ArrayChangeMetrics mMetrics;
     QByteArray mData;
 //     UserId mUserId;

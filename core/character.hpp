@@ -39,7 +39,7 @@ public:
 public:
     bool isUndefined() const;
 
-protected:
+private:
     // the byte is not defined
     bool mIsUndefined : 1;
 };

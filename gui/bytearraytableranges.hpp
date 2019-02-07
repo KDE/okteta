@@ -104,7 +104,7 @@ public: // calculated logic access
     const AddressRange* firstOverlappingSelection(const AddressRange& range) const;
     const AddressRange* overlappingMarking(const AddressRange& range) const;
 
-protected:
+private:
     /** true if something changed */
     bool mModified = false;
 

@@ -68,7 +68,7 @@ public: // value access
 protected: // AbstractByteArrayColumnRenderer API
     void renderByteText(QPainter* painter, Byte byte, Character byteChar, const QColor& color) const override;
 
-protected:
+private:
     /** */
     bool mShowingNonprinting;
     /** */

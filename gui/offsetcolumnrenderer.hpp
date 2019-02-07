@@ -69,16 +69,16 @@ protected:
     /** */
     void renderColumnBackground(QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys);
 
-protected: // user settings
+private: // user settings
     ByteArrayTableLayout* mLayout;
 
-protected: // pixel related
+private: // pixel related
     /** */
     PixelX mOffsetTextWidth = 0;
     /** */
     PixelY mDigitBaseLine = 0;
 
-protected: // general layout
+private: // general layout
     OffsetFormat::Format mFormat;
 
     OffsetFormat::print PrintFunction;
@@ -86,7 +86,7 @@ protected: // general layout
     /** buffer to hold the formatted coding */
     mutable char mCodedOffset[OffsetFormat::MaxFormatWidth + 1];
 
-protected: // firstnext trips related
+private: // firstnext trips related
     /** */
     Line mRenderLineIndex;
 };

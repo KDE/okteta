@@ -239,7 +239,7 @@ protected:
     bool getNextSelectedAddressRange(AddressRange* selectedRange, unsigned int* flag, const AddressRange& range) const;
     bool getNextMarkedAddressRange(AddressRange* markedRange, unsigned int* flag, const AddressRange& range) const;
 
-protected:
+private:
     /** pointer to the buffer */
     AbstractByteArrayModel* mByteArrayModel;
     /** pointer to the layout */
@@ -261,7 +261,7 @@ protected:
 
     QFontMetrics mFontMetrics;
 
-protected: // individual data
+private: // individual data
     /** total width of byte display in pixel */
     PixelX mByteWidth = 0;
     /** width of inserting cursor in pixel */
@@ -285,7 +285,7 @@ protected: // individual data
     /** */
     bool mByteTypeColored = true;
 
-protected: // value specifics
+private: // value specifics
     /** */
     ValueCoding mValueCoding;
     /** */
@@ -293,13 +293,13 @@ protected: // value specifics
     /** */
     PixelX mBinaryGapWidth;
 
-protected: // buffered data
+private: // buffered data
     /** buffer to hold the formatted valueCoding */
     mutable QString mDecodedByteText;
     /** calculated: Offset in pixels of the second half of the binary */
     PixelX mBinaryHalfOffset;
 
-protected: // char specifics
+private: // char specifics
     /** */
     bool mShowingNonprinting;
     /** */
@@ -307,7 +307,7 @@ protected: // char specifics
     /** */
     QChar mUndefinedChar;
 
-protected: // buffering rendering data
+private: // buffering rendering data
     LinePositionRange mRenderLinePositions;
     Line mRenderLine;
     PixelX mRenderX;

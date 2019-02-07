@@ -113,7 +113,7 @@ public: // logic access
      */
     bool isForward() const;
 
-protected:
+private:
     /** mRange */
     AddressRange mRange;
     /** cursor index where the selection starts */

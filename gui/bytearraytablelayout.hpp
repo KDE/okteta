@@ -175,7 +175,7 @@ protected:
     /** calculates the final coord by startoffset, length, and number of bytes per line */
     void calcEnd();
 
-protected:
+private:
     /** how many chars per line */
     Size mNoOfBytesPerLine;
     /** starting offset of the first displayed line */
@@ -191,7 +191,7 @@ protected:
     /** number of lines that are moved by page up/down */
     LineSize mNoOfLinesPerPage;
 
-protected: // calculated values, buffered
+private: // calculated values, buffered
     /** */
     CoordRange mCoordRange;
 };

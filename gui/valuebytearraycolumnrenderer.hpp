@@ -63,7 +63,7 @@ protected: // AbstractByteArrayColumnRenderer API
 protected:
     void renderCode(QPainter* painter, const QString& code, const QColor& color) const;
 
-protected: // settings
+private: // settings
     /** */
     ValueCoding mValueCoding;
     /** */
@@ -71,7 +71,7 @@ protected: // settings
     /** */
     PixelX mBinaryGapWidth;
 
-protected: // buffered data
+private: // buffered data
     /** buffer to hold the formatted valueCoding */
     mutable QString mDecodedByteText;
     /** calculated: Offset in pixels of the second half of the binary */

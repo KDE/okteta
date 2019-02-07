@@ -55,7 +55,7 @@ public:
     void setName(const QString& name);
     void setOffset(Address offset);
 
-protected:
+private:
     Address mOffset = InvalidAddress;
     QString mName;
 };

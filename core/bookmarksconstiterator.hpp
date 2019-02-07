@@ -55,7 +55,7 @@ public:
     void toBack();
     void toFront();
 
-protected:
+private:
     QExplicitlySharedDataPointer<BookmarksConstIteratorAdapter> mAdapter;
 };
 

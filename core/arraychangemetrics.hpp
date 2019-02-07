@@ -83,7 +83,7 @@ public: // Swapping properties
     Address secondEnd() const;
     Size secondLength() const;
 
-protected:
+private:
     Type mType = Invalid;
     Address mOffset = InvalidAddress;
     // TODO: how to make the arguments of the size of the largest union member?

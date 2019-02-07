@@ -46,7 +46,7 @@ public: // AbstractColumnRenderer-API
 protected:
     void renderBorderLine(QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys);
 
-protected:
+private:
     /** true if we are between two columns and should show a line */
     bool mLineDrawn;
     /** true if the line is also drawn in empty space */
