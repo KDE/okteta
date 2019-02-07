@@ -22,8 +22,6 @@
 
 #include "bytearraydocument.hpp"
 
-// Kasten core
-#include <Kasten/Person>
 // Okteta core
 #include <Okteta/PieceTableByteArrayModel>
 // KF5
@@ -102,37 +100,6 @@ void ByteArrayDocument::onHeadVersionDescriptionChanged(const QString& newDescri
 {
     const DocumentVersionData data(mByteArray->versionIndex(), newDescription);
     emit headVersionDataChanged(data);
-}
-
-Person ByteArrayDocument::owner() const
-{
-    return mUserList.size() > 0 ? mUserList.at(0) : Person();
-}
-
-QList<Person> ByteArrayDocument::userList() const
-{
-    return mUserList;
-}
-
-void ByteArrayDocument::setOwner(const Person& owner)
-{
-    mUserList.append(owner);
-}
-
-void ByteArrayDocument::addUsers(const QList<Person>& users)
-{
-    mUserList.append(users);
-
-    emit usersAdded(users);
-}
-
-void ByteArrayDocument::removeUsers(const QList<Person>& users)
-{
-    for (const Person& user : users) {
-        mUserList.removeOne(user);
-    }
-
-    emit usersRemoved(users);
 }
 
 }

@@ -27,8 +27,6 @@
 #include <kasten/okteta/oktetakastencore_export.hpp>
 // #include "kbytearrayinterface.hpp"
 // Kasten core
-#include <Kasten/Person>
-#include <Kasten/UserListable>
 #include <Kasten/Versionable>
 #include <Kasten/AbstractDocument>
 // Qt
@@ -43,13 +41,13 @@ namespace Kasten {
 
 class OKTETAKASTENCORE_EXPORT ByteArrayDocument : public AbstractDocument
                                                 , public If::Versionable
-                                                , public If::UserListable
+                                                // , public If::UserListable
                                                 // ,public If::ByteArray
 {
     Q_OBJECT
     Q_INTERFACES(
         Kasten::If::Versionable
-        Kasten::If::UserListable
+//         Kasten::If::UserListable
 //         Kasten::If::ByteArray
     )
 
@@ -75,28 +73,16 @@ public: // If::Versionable
     int versionCount() const override;
     void revertToVersionByIndex(int versionIndex) override;
 
-public: // If::UserListable
-    Person owner() const override;
-    QList<Person> userList() const override;
-
 public: // If::ByteArray
     virtual Okteta::AbstractByteArrayModel* content() const;
 
 public:
     void setTitle(const QString& title);
 
-    void setOwner(const Person& owner);
-    void addUsers(const QList<Person>& users);
-    void removeUsers(const QList<Person>& users);
-
 Q_SIGNALS: // If::Versionable
     void revertedToVersionIndex(int versionIndex) override;
     void headVersionDataChanged(const Kasten::DocumentVersionData& versionData) override;
     void headVersionChanged(int newHeadVersionIndex) override;
-
-Q_SIGNALS: // If::UserListable
-    void usersAdded(const QList<Kasten::Person>& newUserList) override;
-    void usersRemoved(const QList<Kasten::Person>& newUserList) override;
 
 private Q_SLOTS:
     void onModelModified(bool newState);
@@ -108,8 +94,6 @@ private:
     mutable QString mTitle;
 
     const QString mInitDescription;
-
-    QList<Person> mUserList;
 };
 
 }

@@ -27,7 +27,7 @@
 // Okteta core
 #include <Okteta/PieceTableByteArrayModel>
 // Kasten core
-#include <Kasten/Person>
+// #include <Kasten/Person>
 // KF5
 #include <KLocalizedString>
 // Qt
@@ -56,7 +56,7 @@ AbstractDocument* ByteArrayDocumentFactory::create()
         i18ncp("numbered title for a created document without a filename",
                "[New Byte Array]", "[New Byte Array %1]", newByteArrayDocumentCounter));
 
-    document->setOwner(Person::createEgo());
+//     document->setOwner(Person::createEgo());
 
     return document;
 }
@@ -94,7 +94,7 @@ AbstractDocument* ByteArrayDocumentFactory::createFromData(const QMimeData* mime
         i18ncp("numbered title for a created document without a filename",
                "[New Byte Array]", "[New Byte Array %1]", newByteArrayDocumentCounter));
 
-    document->setOwner(Person::createEgo());
+//     document->setOwner(Person::createEgo());
 
     return document;
 }

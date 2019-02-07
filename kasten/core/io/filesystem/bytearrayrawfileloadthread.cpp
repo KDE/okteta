@@ -25,7 +25,7 @@
 // lib
 #include "bytearraydocument.hpp"
 // Kasten core
-#include <Kasten/Person>
+// #include <Kasten/Person>
 // Okteta core
 #include <Okteta/PieceTableByteArrayModel>
 // KF5
@@ -67,7 +67,7 @@ void ByteArrayRawFileLoadThread::run()
                 byteArray->setModified(false);
 
                 mDocument = new ByteArrayDocument(byteArray, i18nc("destination of the byte array", "Loaded from file."));
-                mDocument->setOwner(Person::createEgo());
+//                 mDocument->setOwner(Person::createEgo());
                 // TODO: make PieceTableByteArrayModel a child by constructor argument parent
                 byteArray->moveToThread(QCoreApplication::instance()->thread());
                 mDocument->moveToThread(QCoreApplication::instance()->thread());

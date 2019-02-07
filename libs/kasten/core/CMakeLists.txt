@@ -4,7 +4,7 @@ set(KASTENCORE_SO_VERSION ${KASTEN_LIB_SOVERSION})
 add_definitions(-DTRANSLATION_DOMAIN=\"libkasten\")
 
 include_directories(
-    entity
+#     entity
     document
     io
     io/filesystem
@@ -18,17 +18,17 @@ macro(KASTENCORE_ADD_SUBLIBRARY _subdir)
     )
 endmacro()
 
-kastencore_add_sublibrary(entity
-    PUBLIC
+# kastencore_add_sublibrary(entity
+#     PUBLIC
 #         AbstractEntity
 #         Group
-        Person
-)
+#         Person
+# )
 
 kastencore_add_sublibrary(document
     PUBLIC
         Versionable
-        UserListable
+#         UserListable
 
         AbstractModel
         AbstractModelSelection
