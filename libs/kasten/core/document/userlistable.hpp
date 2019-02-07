@@ -26,7 +26,7 @@
 // Qt
 #include <QtPlugin>
 
-template <class T> class QList;
+template <class T> class QVector;
 
 namespace Kasten {
 
@@ -42,7 +42,7 @@ public:
 
 public: // get
     virtual Person owner() const = 0;
-    virtual QList<Person> userList() const = 0;
+    virtual QVector<Person> userList() const = 0;
 
 public: // set/action
 //     virtual void setVersion( DocumentVersionId id ) = 0;
@@ -50,8 +50,8 @@ public: // set/action
 
 public: // signal
 //     virtual void ownerChange( const Person& newOwner ) = 0;
-    virtual void usersAdded(const QList<Person>& newUserList) = 0;
-    virtual void usersRemoved(const QList<Person>& newUserList) = 0;
+    virtual void usersAdded(const QVector<Person>& newUserList) = 0;
+    virtual void usersRemoved(const QVector<Person>& newUserList) = 0;
 };
 
 inline UserListable::~UserListable() = default;

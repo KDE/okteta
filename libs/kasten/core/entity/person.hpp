@@ -62,4 +62,6 @@ protected:
 
 }
 
+Q_DECLARE_TYPEINFO(Kasten::Person, Q_MOVABLE_TYPE);
+
 #endif
