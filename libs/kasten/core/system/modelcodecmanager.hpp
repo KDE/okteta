@@ -27,7 +27,6 @@
 #include <kasten/kastencore_export.hpp>
 // Qt
 #include <QObject>
-#include <QList>
 #include <QVector>
 
 class QString;
@@ -64,7 +63,7 @@ public:
     QVector<AbstractModelStreamDecoder*> decoderList() const;
     QVector<AbstractModelDataGenerator*> generatorList() const;
 
-    QList<AbstractModelExporter*> exporterList(AbstractModel* model, const AbstractModelSelection* selection) const;
+    QVector<AbstractModelExporter*> exporterList(AbstractModel* model, const AbstractModelSelection* selection) const;
 
 public:
     void setEncoders(const QVector<AbstractModelStreamEncoder*>& encoderList);
@@ -82,7 +81,7 @@ private:
     QVector<AbstractModelStreamEncoder*> mEncoderList;
     QVector<AbstractModelStreamDecoder*> mDecoderList;
     QVector<AbstractModelDataGenerator*> mGeneratorList;
-    QList<AbstractModelExporter*> mExporterList;
+    QVector<AbstractModelExporter*> mExporterList;
 };
 
 }

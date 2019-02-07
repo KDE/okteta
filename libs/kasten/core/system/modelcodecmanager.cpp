@@ -67,11 +67,11 @@ ModelCodecManager::decoderList() const { return mDecoderList; }
 QVector<AbstractModelDataGenerator*>
 ModelCodecManager::generatorList() const { return mGeneratorList; }
 
-QList<AbstractModelExporter*>
+QVector<AbstractModelExporter*>
 ModelCodecManager::exporterList(AbstractModel* model, const AbstractModelSelection* selection) const
 {
     Q_UNUSED(selection)
-    return model ? mExporterList : QList<AbstractModelExporter*>();
+    return model ? mExporterList : QVector<AbstractModelExporter*>();
 }
 
 void ModelCodecManager::setOverwriteDialog(AbstractOverwriteDialog* overwriteDialog)
