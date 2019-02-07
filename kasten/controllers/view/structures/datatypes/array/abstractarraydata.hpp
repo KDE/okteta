@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef ABSTRACTARRAYDATA_HPP
-#define ABSTRACTARRAYDATA_HPP
+#ifndef KASTEN_ABSTRACTARRAYDATA_HPP
+#define KASTEN_ABSTRACTARRAYDATA_HPP
 
 #include <Okteta/Address>
 #include "../datainformationbase.hpp"
@@ -98,4 +98,4 @@ inline DataInformation* AbstractArrayData::childType() const
     return mChildType.data();
 }
 
-#endif // ABSTRACTARRAYDATA_HPP
+#endif // KASTEN_ABSTRACTARRAYDATA_HPP

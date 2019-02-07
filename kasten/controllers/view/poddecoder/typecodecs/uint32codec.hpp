@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef UINT32CODEC_HPP
-#define UINT32CODEC_HPP
+#ifndef KASTEN_UINT32CODEC_HPP
+#define KASTEN_UINT32CODEC_HPP
 
 // tool
 #include "../abstracttypecodec.hpp"

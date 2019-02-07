@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FILTERTOOL_HPP
-#define FILTERTOOL_HPP
+#ifndef KASTEN_FILTERTOOL_HPP
+#define KASTEN_FILTERTOOL_HPP
 
 // Kasten core
 #include <Kasten/AbstractTool>

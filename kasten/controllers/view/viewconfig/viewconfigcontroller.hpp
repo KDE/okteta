@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef VIEWCONFIGCONTROLLER_HPP
-#define VIEWCONFIGCONTROLLER_HPP
+#ifndef KASTEN_VIEWCONFIGCONTROLLER_HPP
+#define KASTEN_VIEWCONFIGCONTROLLER_HPP
 
 // lib
 #include <kasten/okteta/oktetakastencontrollers_export.hpp>

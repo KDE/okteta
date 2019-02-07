@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PODDECODERTOOL_HPP
-#define PODDECODERTOOL_HPP
+#ifndef KASTEN_PODDECODERTOOL_HPP
+#define KASTEN_PODDECODERTOOL_HPP
 
 // tool
 #include "poddata.hpp"

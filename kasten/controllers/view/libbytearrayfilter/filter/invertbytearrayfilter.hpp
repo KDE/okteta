@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INVERTBYTEARRAYFILTER_HPP
-#define INVERTBYTEARRAYFILTER_HPP
+#ifndef KASTEN_INVERTBYTEARRAYFILTER_HPP
+#define KASTEN_INVERTBYTEARRAYFILTER_HPP
 
 //
 #include "nobytearrayfilterparameterset.hpp"

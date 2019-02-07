@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTTYPECODEC_HPP
-#define ABSTRACTTYPECODEC_HPP
+#ifndef KASTEN_ABSTRACTTYPECODEC_HPP
+#define KASTEN_ABSTRACTTYPECODEC_HPP
 
 // Qt
 #include <QString>

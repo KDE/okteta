@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTETABLETOOL_HPP
-#define BYTETABLETOOL_HPP
+#ifndef KASTEN_BYTETABLETOOL_HPP
+#define KASTEN_BYTETABLETOOL_HPP
 
 // Kasten core
 #include <Kasten/AbstractTool>

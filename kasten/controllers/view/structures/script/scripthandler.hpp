@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SCRIPTHANDLER_H_
-#define SCRIPTHANDLER_H_
+#ifndef KASTEN_SCRIPTHANDLER_HPP
+#define KASTEN_SCRIPTHANDLER_HPP
 
 #include <QScopedPointer>
 
@@ -61,4 +61,4 @@ private:
     ScriptHandlerInfo mHandlerInfo;
 };
 
-#endif /* SCRIPTHANDLER_H_ */
+#endif /* KASTEN_SCRIPTHANDLER_HPP */

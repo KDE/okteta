@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTESPERGROUPDIALOG_HPP
-#define BYTESPERGROUPDIALOG_HPP
+#ifndef KASTEN_BYTESPERGROUPDIALOG_HPP
+#define KASTEN_BYTESPERGROUPDIALOG_HPP
 
 // Qt
 #include <QDialog>

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FLOAT64EDITOR_HPP
-#define FLOAT64EDITOR_HPP
+#ifndef KASTEN_FLOAT64EDITOR_HPP
+#define KASTEN_FLOAT64EDITOR_HPP
 
 // lib
 #include "../types/float64.hpp"

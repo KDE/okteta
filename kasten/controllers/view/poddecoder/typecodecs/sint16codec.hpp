@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SINT16CODEC_HPP
-#define SINT16CODEC_HPP
+#ifndef KASTEN_SINT16CODEC_HPP
+#define KASTEN_SINT16CODEC_HPP
 
 // tool
 #include "../abstracttypecodec.hpp"

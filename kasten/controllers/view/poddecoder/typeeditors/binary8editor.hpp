@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BINARY8EDITOR_HPP
-#define BINARY8EDITOR_HPP
+#ifndef KASTEN_BINARY8EDITOR_HPP
+#define KASTEN_BINARY8EDITOR_HPP
 
 // lib
 #include "../types/binary8.hpp"

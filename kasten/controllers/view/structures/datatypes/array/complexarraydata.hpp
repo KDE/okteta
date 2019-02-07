@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef COMPLEXARRAYDATA_HPP
-#define COMPLEXARRAYDATA_HPP
+#ifndef KASTEN_COMPLEXARRAYDATA_HPP
+#define KASTEN_COMPLEXARRAYDATA_HPP
 
 #include "abstractarraydata.hpp"
 
@@ -76,4 +76,4 @@ private:
     QVector<DataInformation*> mChildren;
 };
 
-#endif // COMPLEXARRAYDATA_HPP
+#endif // KASTEN_COMPLEXARRAYDATA_HPP

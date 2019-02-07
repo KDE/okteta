@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SINT16_HPP
-#define SINT16_HPP
+#ifndef KASTEN_SINT16_HPP
+#define KASTEN_SINT16_HPP
 
 // Qt
 #include <QMetaType>

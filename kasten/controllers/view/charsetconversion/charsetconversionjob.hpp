@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CHARSETCONVERSIONJOB_HPP
-#define CHARSETCONVERSIONJOB_HPP
+#ifndef KASTEN_CHARSETCONVERSIONJOB_HPP
+#define KASTEN_CHARSETCONVERSIONJOB_HPP
 
 // Okteta core
 #include <Okteta/AddressRange>

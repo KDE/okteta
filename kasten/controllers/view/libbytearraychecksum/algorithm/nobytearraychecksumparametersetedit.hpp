@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef NOBYTEARRAYCHECKSUMPARAMETERSETEDIT_HPP
-#define NOBYTEARRAYCHECKSUMPARAMETERSETEDIT_HPP
+#ifndef KASTEN_NOBYTEARRAYCHECKSUMPARAMETERSETEDIT_HPP
+#define KASTEN_NOBYTEARRAYCHECKSUMPARAMETERSETEDIT_HPP
 
 // lib
 #include "abstractbytearraychecksumparametersetedit.hpp"

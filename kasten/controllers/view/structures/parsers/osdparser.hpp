@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef OSDPARSER_H_
-#define OSDPARSER_H_
+#ifndef KASTEN_OSDPARSER_HPP
+#define KASTEN_OSDPARSER_HPP
 
 #include "abstractstructureparser.hpp"
 #include "parserutils.hpp"
@@ -128,4 +128,4 @@ protected:
     bool mParsed;
 };
 
-#endif /* OSDPARSER_H_ */
+#endif /* KASTEN_OSDPARSER_HPP */

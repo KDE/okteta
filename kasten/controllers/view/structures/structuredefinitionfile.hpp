@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef STRUCTUREDEFINITIONFILE_H_
-#define STRUCTUREDEFINITIONFILE_H_
+#ifndef KASTEN_STRUCTUREDEFINITIONFILE_HPP
+#define KASTEN_STRUCTUREDEFINITIONFILE_HPP
 
 #include <QString>
 #include <QVector>
@@ -70,4 +70,4 @@ private:
 
 } // namespace Kasten
 
-#endif /* STRUCTUREDEFINITIONFILE_H_ */
+#endif /* KASTEN_STRUCTUREDEFINITIONFILE_HPP */

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef VIEWPROFILEEDITDIALOG_HPP
-#define VIEWPROFILEEDITDIALOG_HPP
+#ifndef KASTEN_VIEWPROFILEEDITDIALOG_HPP
+#define KASTEN_VIEWPROFILEEDITDIALOG_HPP
 
 // Qt
 #include <QDialog>

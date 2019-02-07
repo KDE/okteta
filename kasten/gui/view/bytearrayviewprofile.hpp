@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTEARRAYVIEWPROFILE_HPP
-#define BYTEARRAYVIEWPROFILE_HPP
+#ifndef KASTEN_BYTEARRAYVIEWPROFILE_HPP
+#define KASTEN_BYTEARRAYVIEWPROFILE_HPP
 
 // lib
 #include <kasten/okteta/oktetakastengui_export.hpp>

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef EXTRACTSTRINGSJOB_HPP
-#define EXTRACTSTRINGSJOB_HPP
+#ifndef KASTEN_EXTRACTSTRINGSJOB_HPP
+#define KASTEN_EXTRACTSTRINGSJOB_HPP
 
 // tool
 #include "containedstring.hpp"

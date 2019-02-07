@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef STRINGSEXTRACTVIEW_HPP
-#define STRINGSEXTRACTVIEW_HPP
+#ifndef KASTEN_STRINGSEXTRACTVIEW_HPP
+#define KASTEN_STRINGSEXTRACTVIEW_HPP
 
 // Qt
 #include <QWidget>

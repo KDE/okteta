@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef VIEWPROFILETABLEMODEL_HPP
-#define VIEWPROFILETABLEMODEL_HPP
+#ifndef KASTEN_VIEWPROFILETABLEMODEL_HPP
+#define KASTEN_VIEWPROFILETABLEMODEL_HPP
 
 // Okteta Gui Kasten
 #include <Kasten/Okteta/ByteArrayViewProfile>

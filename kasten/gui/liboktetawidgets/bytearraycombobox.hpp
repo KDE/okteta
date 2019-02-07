@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTEARRAYCOMBOBOX_HPP
-#define BYTEARRAYCOMBOBOX_HPP
+#ifndef KASTEN_BYTEARRAYCOMBOBOX_HPP
+#define KASTEN_BYTEARRAYCOMBOBOX_HPP
 
 // lib
 #include <kasten/okteta/oktetakastengui_export.hpp>

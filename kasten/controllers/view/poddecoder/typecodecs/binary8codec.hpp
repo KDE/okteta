@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BINARY8CODEC_HPP
-#define BINARY8CODEC_HPP
+#ifndef KASTEN_BINARY8CODEC_HPP
+#define KASTEN_BINARY8CODEC_HPP
 
 // tool
 #include "../abstracttypecodec.hpp"

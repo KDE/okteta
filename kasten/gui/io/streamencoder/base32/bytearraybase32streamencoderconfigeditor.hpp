@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTEARRAYBASE32STREAMENCODERCONFIGEDITOR_HPP
-#define BYTEARRAYBASE32STREAMENCODERCONFIGEDITOR_HPP
+#ifndef KASTEN_BYTEARRAYBASE32STREAMENCODERCONFIGEDITOR_HPP
+#define KASTEN_BYTEARRAYBASE32STREAMENCODERCONFIGEDITOR_HPP
 
 // lib
 #include "bytearraybase32streamencoder.hpp"

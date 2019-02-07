@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CHARSETCONVERSIONTOOLVIEW_HPP
-#define CHARSETCONVERSIONTOOLVIEW_HPP
+#ifndef KASTEN_CHARSETCONVERSIONTOOLVIEW_HPP
+#define KASTEN_CHARSETCONVERSIONTOOLVIEW_HPP
 
 // Kasten gui
 #include <Kasten/AbstractToolView>

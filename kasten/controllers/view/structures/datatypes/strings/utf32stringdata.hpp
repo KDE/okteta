@@ -17,8 +17,8 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#ifndef UTF32STRINGDATA_HPP
-#define UTF32STRINGDATA_HPP
+#ifndef KASTEN_UTF32STRINGDATA_HPP
+#define KASTEN_UTF32STRINGDATA_HPP
 
 #include "stringdata.hpp"
 
@@ -44,4 +44,4 @@ private:
     int mNonBMPCount = 0;
 };
 
-#endif // UTF32STRINGDATA_HPP
+#endif // KASTEN_UTF32STRINGDATA_HPP

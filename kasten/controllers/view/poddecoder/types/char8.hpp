@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CHAR8_HPP
-#define CHAR8_HPP
+#ifndef KASTEN_CHAR8_HPP
+#define KASTEN_CHAR8_HPP
 
 // Okteta gui
 #include <Okteta/OktetaGui>

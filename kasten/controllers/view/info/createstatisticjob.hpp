@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CREATESTATISTICJOB_HPP
-#define CREATESTATISTICJOB_HPP
+#ifndef KASTEN_CREATESTATISTICJOB_HPP
+#define KASTEN_CREATESTATISTICJOB_HPP
 
 // Okteta core
 #include <Okteta/AddressRange>

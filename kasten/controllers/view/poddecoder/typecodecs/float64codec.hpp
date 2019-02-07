@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FLOAT64CODEC_HPP
-#define FLOAT64CODEC_HPP
+#ifndef KASTEN_FLOAT64CODEC_HPP
+#define KASTEN_FLOAT64CODEC_HPP
 
 // tool
 #include "../abstracttypecodec.hpp"

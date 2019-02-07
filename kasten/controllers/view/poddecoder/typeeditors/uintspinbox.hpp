@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef UINTSPINBOX_HPP
-#define UINTSPINBOX_HPP
+#ifndef KASTEN_UINTSPINBOX_HPP
+#define KASTEN_UINTSPINBOX_HPP
 
 // Qt
 #include <QAbstractSpinBox>

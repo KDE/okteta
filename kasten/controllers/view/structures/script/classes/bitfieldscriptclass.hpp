@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef BITFIELDSCRIPTCLASS_HPP
-#define BITFIELDSCRIPTCLASS_HPP
+#ifndef KASTEN_BITFIELDSCRIPTCLASS_HPP
+#define KASTEN_BITFIELDSCRIPTCLASS_HPP
 
 #include "primitivescriptclass.hpp"
 
@@ -42,4 +42,4 @@ protected:
     QScriptString s_width;
 };
 
-#endif // BITFIELDSCRIPTCLASS_HPP
+#endif // KASTEN_BITFIELDSCRIPTCLASS_HPP

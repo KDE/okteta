@@ -21,8 +21,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef STRUCTUREVIEW_HPP
-#define STRUCTUREVIEW_HPP
+#ifndef KASTEN_STRUCTUREVIEW_HPP
+#define KASTEN_STRUCTUREVIEW_HPP
 
 #include <QWidget>
 #include "structureviewitemdelegate.hpp"

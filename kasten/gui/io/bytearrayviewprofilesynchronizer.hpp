@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTEARRAYVIEWPROFILESYNCHRONIZER_HPP
-#define BYTEARRAYVIEWPROFILESYNCHRONIZER_HPP
+#ifndef KASTEN_BYTEARRAYVIEWPROFILESYNCHRONIZER_HPP
+#define KASTEN_BYTEARRAYVIEWPROFILESYNCHRONIZER_HPP
 
 // lib
 #include <kasten/okteta/oktetakastengui_export.hpp>

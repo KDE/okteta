@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef DATAINFORMATIONFACTORY_H_
-#define DATAINFORMATIONFACTORY_H_
+#ifndef KASTEN_DATAINFORMATIONFACTORY_HPP
+#define KASTEN_DATAINFORMATIONFACTORY_HPP
 
 #include <QScriptValue>
 #include <QSharedPointer>
@@ -169,4 +169,4 @@ TaggedUnionDataInformation* newTaggedUnion(const TaggedUnionParsedData& pd);
 bool commonInitialization(DataInformation* data, const CommonParsedData& pd);
 }
 
-#endif /* DATAINFORMATIONFACTORY_H_ */
+#endif /* KASTEN_DATAINFORMATIONFACTORY_HPP */

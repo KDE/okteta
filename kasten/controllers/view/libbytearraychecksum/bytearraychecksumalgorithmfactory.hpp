@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTEARRAYCHECKSUMALGORITHMFACTORY_HPP
-#define BYTEARRAYCHECKSUMALGORITHMFACTORY_HPP
+#ifndef KASTEN_BYTEARRAYCHECKSUMALGORITHMFACTORY_HPP
+#define KASTEN_BYTEARRAYCHECKSUMALGORITHMFACTORY_HPP
 
 class AbstractByteArrayChecksumAlgorithm;
 template <class T> class QVector;

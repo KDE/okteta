@@ -19,8 +19,8 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef PRIMITIVEDATAINFORMATION_H_
-#define PRIMITIVEDATAINFORMATION_H_
+#ifndef KASTEN_PRIMITIVEDATAINFORMATION_HPP
+#define KASTEN_PRIMITIVEDATAINFORMATION_HPP
 
 #include "../datainformation.hpp"
 #include "../primitivedatatype.hpp"
@@ -133,4 +133,4 @@ inline QString PrimitiveDataInformation::basePrefix(int base)
     }
 }
 
-#endif /* PRIMITIVEDATAINFORMATION_H_ */
+#endif /* KASTEN_PRIMITIVEDATAINFORMATION_HPP */

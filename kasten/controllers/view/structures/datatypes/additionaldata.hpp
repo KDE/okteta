@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef ADDITIONALDATA_H_
-#define ADDITIONALDATA_H_
+#ifndef KASTEN_ADDITIONALDATA_HPP
+#define KASTEN_ADDITIONALDATA_HPP
 
 #include <QScriptValue>
 #include <QVariant>
@@ -74,4 +74,4 @@ inline void AdditionalData::remove(AdditionalData::AdditionalDataType entry)
     mData.remove((int)entry);
 }
 
-#endif /* ADDITIONALDATA_H_ */
+#endif /* KASTEN_ADDITIONALDATA_HPP */

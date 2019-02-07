@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BINARY8_HPP
-#define BINARY8_HPP
+#ifndef KASTEN_BINARY8_HPP
+#define KASTEN_BINARY8_HPP
 
 // Qt
 #include <QMetaType>

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTCOLUMNFRAMERENDERER_HPP
-#define ABSTRACTCOLUMNFRAMERENDERER_HPP
+#ifndef KASTEN_ABSTRACTCOLUMNFRAMERENDERER_HPP
+#define KASTEN_ABSTRACTCOLUMNFRAMERENDERER_HPP
 
 // lib
 #include "abstractframerenderer.hpp"

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BOOKMARKSVIEW_HPP
-#define BOOKMARKSVIEW_HPP
+#ifndef KASTEN_BOOKMARKSVIEW_HPP
+#define KASTEN_BOOKMARKSVIEW_HPP
 
 // Qt
 #include <QWidget>

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ENDIANNESS_HPP
-#define ENDIANNESS_HPP
+#ifndef KASTEN_ENDIANNESS_HPP
+#define KASTEN_ENDIANNESS_HPP
 
 // Qt
 #include <Qt>

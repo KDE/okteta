@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTEARRAYPATTERNGENERATORCONFIGEDITOR_HPP
-#define BYTEARRAYPATTERNGENERATORCONFIGEDITOR_HPP
+#ifndef KASTEN_BYTEARRAYPATTERNGENERATORCONFIGEDITOR_HPP
+#define KASTEN_BYTEARRAYPATTERNGENERATORCONFIGEDITOR_HPP
 
 // lib
 #include "bytearraypatterngenerator.hpp"

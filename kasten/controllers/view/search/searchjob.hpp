@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SEARCHJOB_HPP
-#define SEARCHJOB_HPP
+#ifndef KASTEN_SEARCHJOB_HPP
+#define KASTEN_SEARCHJOB_HPP
 
 // Okteta core
 #include <Okteta/Address>

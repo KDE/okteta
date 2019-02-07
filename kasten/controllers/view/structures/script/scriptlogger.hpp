@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SCRIPTLOGGER_HPP
-#define SCRIPTLOGGER_HPP
+#ifndef KASTEN_SCRIPTLOGGER_HPP
+#define KASTEN_SCRIPTLOGGER_HPP
 
 #include <QAbstractTableModel>
 #include <QVector>
@@ -121,4 +121,4 @@ private:
     QString context;
 };
 
-#endif // SCRIPTLOGGER_HPP
+#endif // KASTEN_SCRIPTLOGGER_HPP

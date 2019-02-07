@@ -19,8 +19,8 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef SCRIPTVALUECONVERTER_P_H_
-#define SCRIPTVALUECONVERTER_P_H_
+#ifndef KASTEN_SCRIPTVALUECONVERTER_P_HPP
+#define KASTEN_SCRIPTVALUECONVERTER_P_HPP
 
 #include "../parsers/parserutils.hpp"
 
@@ -57,4 +57,4 @@ private:
 
 }
 
-#endif // SCRIPTVALUECONVERTER_P_H_
+#endif // KASTEN_SCRIPTVALUECONVERTER_P_HPP

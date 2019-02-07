@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef STRUCTUNIONSCRIPTCLASS_HPP
-#define STRUCTUNIONSCRIPTCLASS_HPP
+#ifndef KASTEN_STRUCTUNIONSCRIPTCLASS_HPP
+#define KASTEN_STRUCTUNIONSCRIPTCLASS_HPP
 
 #include "defaultscriptclass.hpp"
 
@@ -50,4 +50,4 @@ protected:
     QScriptValue mStructUnionPrototype;
 };
 
-#endif // STRUCTUNIONSCRIPTCLASS_HPP
+#endif // KASTEN_STRUCTUNIONSCRIPTCLASS_HPP

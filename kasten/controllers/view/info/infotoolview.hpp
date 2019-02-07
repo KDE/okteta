@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INFOTOOLVIEW_HPP
-#define INFOTOOLVIEW_HPP
+#ifndef KASTEN_INFOTOOLVIEW_HPP
+#define KASTEN_INFOTOOLVIEW_HPP
 
 // Kasten gui
 #include <Kasten/AbstractToolView>

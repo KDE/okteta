@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FILTERTOOLVIEWFACTORY_HPP
-#define FILTERTOOLVIEWFACTORY_HPP
+#ifndef KASTEN_FILTERTOOLVIEWFACTORY_HPP
+#define KASTEN_FILTERTOOLVIEWFACTORY_HPP
 
 // lib
 #include <kasten/okteta/oktetakastencontrollers_export.hpp>

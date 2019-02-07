@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef UINT32_HPP
-#define UINT32_HPP
+#ifndef KASTEN_UINT32_HPP
+#define KASTEN_UINT32_HPP
 
 // Qt
 #include <QMetaType>

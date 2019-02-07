@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef OCTAL8EDITOR_HPP
-#define OCTAL8EDITOR_HPP
+#ifndef KASTEN_OCTAL8EDITOR_HPP
+#define KASTEN_OCTAL8EDITOR_HPP
 
 // lib
 #include "../types/octal8.hpp"

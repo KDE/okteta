@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef STRINGSCRIPTCLASS_HPP
-#define STRINGSCRIPTCLASS_HPP
+#ifndef KASTEN_STRINGSCRIPTCLASS_HPP
+#define KASTEN_STRINGSCRIPTCLASS_HPP
 
 #include "defaultscriptclass.hpp"
 
@@ -52,4 +52,4 @@ protected:
     QScriptValue mStringPrototype;
 };
 
-#endif // STRINGSCRIPTCLASS_HPP
+#endif // KASTEN_STRINGSCRIPTCLASS_HPP

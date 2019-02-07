@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FLOAT32EDITOR_HPP
-#define FLOAT32EDITOR_HPP
+#ifndef KASTEN_FLOAT32EDITOR_HPP
+#define KASTEN_FLOAT32EDITOR_HPP
 
 // lib
 #include "../types/float32.hpp"

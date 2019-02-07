@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef STRUCTURESTOOLVIEWFACTORY_HPP
-#define STRUCTURESTOOLVIEWFACTORY_HPP
+#ifndef KASTEN_STRUCTURESTOOLVIEWFACTORY_HPP
+#define KASTEN_STRUCTURESTOOLVIEWFACTORY_HPP
 
 // lib
 #include <kasten/okteta/oktetakastencontrollers_export.hpp>

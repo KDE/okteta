@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CHARBYTEARRAYCOLUMNTEXTRENDERER_HPP
-#define CHARBYTEARRAYCOLUMNTEXTRENDERER_HPP
+#ifndef KASTEN_CHARBYTEARRAYCOLUMNTEXTRENDERER_HPP
+#define KASTEN_CHARBYTEARRAYCOLUMNTEXTRENDERER_HPP
 
 // lib
 #include "abstractbytearraycolumntextrenderer.hpp"

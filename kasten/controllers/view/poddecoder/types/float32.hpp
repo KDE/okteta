@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FLOAT32_HPP
-#define FLOAT32_HPP
+#ifndef KASTEN_FLOAT32_HPP
+#define KASTEN_FLOAT32_HPP
 
 // Qt
 #include <QMetaType>

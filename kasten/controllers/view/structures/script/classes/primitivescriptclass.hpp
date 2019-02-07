@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef PRIMITIVESCRIPTCLASS_HPP
-#define PRIMITIVESCRIPTCLASS_HPP
+#ifndef KASTEN_PRIMITIVESCRIPTCLASS_HPP
+#define KASTEN_PRIMITIVESCRIPTCLASS_HPP
 
 #include "defaultscriptclass.hpp"
 
@@ -68,4 +68,4 @@ protected:
     QScriptValue mPrimitivePrototype;
 };
 
-#endif // PRIMITIVESCRIPTCLASS_HPP
+#endif // KASTEN_PRIMITIVESCRIPTCLASS_HPP

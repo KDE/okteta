@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SCRIPTUTILS_H_
-#define SCRIPTUTILS_H_
+#ifndef KASTEN_SCRIPTUTILS_HPP
+#define KASTEN_SCRIPTUTILS_HPP
 
 #include "../datatypes/primitivedatatype.hpp"
 
@@ -39,4 +39,4 @@ void wrapAllPrimitiveTypes(QScriptValue& out, AllPrimitiveTypes allPrim,
 
 }
 
-#endif /* SCRIPTUTILS_H_ */
+#endif /* KASTEN_SCRIPTUTILS_HPP */

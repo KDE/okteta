@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PODDATA_HPP
-#define PODDATA_HPP
+#ifndef KASTEN_PODDATA_HPP
+#define KASTEN_PODDATA_HPP
 
 // Okteta core
 #include <Okteta/Byte>

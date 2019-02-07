@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ANDBYTEARRAYFILTER_HPP
-#define ANDBYTEARRAYFILTER_HPP
+#ifndef KASTEN_ANDBYTEARRAYFILTER_HPP
+#define KASTEN_ANDBYTEARRAYFILTER_HPP
 
 // lib
 #include "operandbytearrayfilterparameterset.hpp"

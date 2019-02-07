@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MODSUMBYTEARRAYCHECKSUMPARAMETERSET_HPP
-#define MODSUMBYTEARRAYCHECKSUMPARAMETERSET_HPP
+#ifndef KASTEN_MODSUMBYTEARRAYCHECKSUMPARAMETERSET_HPP
+#define KASTEN_MODSUMBYTEARRAYCHECKSUMPARAMETERSET_HPP
 
 // lib
 #include "abstractbytearraychecksumparameterset.hpp"

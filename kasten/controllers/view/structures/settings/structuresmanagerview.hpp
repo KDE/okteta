@@ -21,8 +21,8 @@
  License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef STRUCTURESMANAGERVIEW_HPP
-#define STRUCTURESMANAGERVIEW_HPP
+#ifndef KASTEN_STRUCTURESMANAGERVIEW_HPP
+#define KASTEN_STRUCTURESMANAGERVIEW_HPP
 
 // KF5
 #include <KNS3/Entry>

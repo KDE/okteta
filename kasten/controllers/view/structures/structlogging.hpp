@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef STRUCTLOGGING_H_
-#define STRUCTLOGGING_H_
+#ifndef KASTEN_STRUCTLOGGING_HPP
+#define KASTEN_STRUCTLOGGING_HPP
 
 #include <QLoggingCategory>
 

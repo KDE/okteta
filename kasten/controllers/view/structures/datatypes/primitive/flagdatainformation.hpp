@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef FLAGDATAINFORMATION_HPP
-#define FLAGDATAINFORMATION_HPP
+#ifndef KASTEN_FLAGDATAINFORMATION_HPP
+#define KASTEN_FLAGDATAINFORMATION_HPP
 
 #include "enumdatainformation.hpp"
 
@@ -38,4 +38,4 @@ private:
     QString typeNameImpl() const override;
 };
 
-#endif // FLAGDATAINFORMATION_HPP
+#endif // KASTEN_FLAGDATAINFORMATION_HPP

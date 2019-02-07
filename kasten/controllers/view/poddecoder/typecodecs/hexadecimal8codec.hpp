@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef HEXADECIMAL8CODEC_HPP
-#define HEXADECIMAL8CODEC_HPP
+#ifndef KASTEN_HEXADECIMAL8CODEC_HPP
+#define KASTEN_HEXADECIMAL8CODEC_HPP
 
 // tool
 #include "../abstracttypecodec.hpp"

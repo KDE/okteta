@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef REVERSEBYTEARRAYFILTERPARAMETERSETEDIT_HPP
-#define REVERSEBYTEARRAYFILTERPARAMETERSETEDIT_HPP
+#ifndef KASTEN_REVERSEBYTEARRAYFILTERPARAMETERSETEDIT_HPP
+#define KASTEN_REVERSEBYTEARRAYFILTERPARAMETERSETEDIT_HPP
 
 // lib
 #include "abstractbytearrayfilterparametersetedit.hpp"

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CHARSETCONVERSIONTOOLVIEWFACTORY_HPP
-#define CHARSETCONVERSIONTOOLVIEWFACTORY_HPP
+#ifndef KASTEN_CHARSETCONVERSIONTOOLVIEWFACTORY_HPP
+#define KASTEN_CHARSETCONVERSIONTOOLVIEWFACTORY_HPP
 
 // lib
 #include <kasten/okteta/oktetakastencontrollers_export.hpp>

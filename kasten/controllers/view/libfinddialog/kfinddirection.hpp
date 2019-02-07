@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KFINDDIRECTION_HPP
-#define KFINDDIRECTION_HPP
+#ifndef KASTEN_KFINDDIRECTION_HPP
+#define KASTEN_KFINDDIRECTION_HPP
 
 namespace Kasten {
 

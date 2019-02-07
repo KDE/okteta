@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CHECKSUMCALCULATEJOB_HPP
-#define CHECKSUMCALCULATEJOB_HPP
+#ifndef KASTEN_CHECKSUMCALCULATEJOB_HPP
+#define KASTEN_CHECKSUMCALCULATEJOB_HPP
 
 // Okteta core
 #include <Okteta/AddressRange>

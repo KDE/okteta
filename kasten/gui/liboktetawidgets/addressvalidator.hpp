@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ADDRESSVALIDATOR_HPP
-#define ADDRESSVALIDATOR_HPP
+#ifndef KASTEN_ADDRESSVALIDATOR_HPP
+#define KASTEN_ADDRESSVALIDATOR_HPP
 
 // Okteta core
 #include <Okteta/OktetaCore>

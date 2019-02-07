@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTBYTEARRAYFILTER_HPP
-#define ABSTRACTBYTEARRAYFILTER_HPP
+#ifndef KASTEN_ABSTRACTBYTEARRAYFILTER_HPP
+#define KASTEN_ABSTRACTBYTEARRAYFILTER_HPP
 
 // Okteta core
 #include <Okteta/AddressRange>

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef QCA2BYTEARRAYCHECKSUMALGORITHM_HPP
-#define QCA2BYTEARRAYCHECKSUMALGORITHM_HPP
+#ifndef KASTEN_QCA2BYTEARRAYCHECKSUMALGORITHM_HPP
+#define KASTEN_QCA2BYTEARRAYCHECKSUMALGORITHM_HPP
 
 //
 #include "nobytearraychecksumparameterset.hpp"

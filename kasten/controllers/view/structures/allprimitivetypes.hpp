@@ -19,8 +19,9 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef ALLPRIMITIVETYPES_H_
-#define ALLPRIMITIVETYPES_H_
+
+#ifndef KASTEN_ALLPRIMITIVETYPES_HPP
+#define KASTEN_ALLPRIMITIVETYPES_HPP
 
 #include <QSysInfo>
 #include <QtEndian>
@@ -272,4 +273,4 @@ inline quint8 AllPrimitiveTypes::readRawBytes<1>(
     return input->byte(address);
 }
 
-#endif /* ALLPRIMITIVETYPES_H_ */
+#endif /* KASTEN_ALLPRIMITIVETYPES_HPP */

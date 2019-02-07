@@ -19,8 +19,8 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef PRIMITIVETEMPLATEINFO_HPP
-#define PRIMITIVETEMPLATEINFO_HPP
+#ifndef KASTEN_PRIMITIVETEMPLATEINFO_HPP
+#define KASTEN_PRIMITIVETEMPLATEINFO_HPP
 
 #include "../primitivedatatype.hpp"
 #include "booldatainformation.hpp"
@@ -152,4 +152,4 @@ template <> struct PrimitiveInfo<PrimitiveDataType::Double>
     using Methods =   DoubleDataInformationMethods;
 };
 
-#endif // PRIMITIVETEMPLATEINFO_HPP
+#endif // KASTEN_PRIMITIVETEMPLATEINFO_HPP

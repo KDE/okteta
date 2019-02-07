@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef STRINGSEXTRACTTOOLFACTORY_HPP
-#define STRINGSEXTRACTTOOLFACTORY_HPP
+#ifndef KASTEN_STRINGSEXTRACTTOOLFACTORY_HPP
+#define KASTEN_STRINGSEXTRACTTOOLFACTORY_HPP
 
 // lib
 #include <kasten/okteta/oktetakastencontrollers_export.hpp>

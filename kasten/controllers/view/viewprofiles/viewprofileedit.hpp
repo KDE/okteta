@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef VIEWPROFILEEDIT_HPP
-#define VIEWPROFILEEDIT_HPP
+#ifndef KASTEN_VIEWPROFILEEDIT_HPP
+#define KASTEN_VIEWPROFILEEDIT_HPP
 
 // Qt
 #include <QWidget>

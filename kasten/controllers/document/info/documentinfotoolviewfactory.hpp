@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DOCUMENTINFOTOOLVIEWFACTORY_HPP
-#define DOCUMENTINFOTOOLVIEWFACTORY_HPP
+#ifndef KASTEN_DOCUMENTINFOTOOLVIEWFACTORY_HPP
+#define KASTEN_DOCUMENTINFOTOOLVIEWFACTORY_HPP
 
 // lib
 #include <kasten/okteta/oktetakastencontrollers_export.hpp>

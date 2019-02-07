@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef REPLACETOOL_HPP
-#define REPLACETOOL_HPP
+#ifndef KASTEN_REPLACETOOL_HPP
+#define KASTEN_REPLACETOOL_HPP
 
 // libfinddialog
 #include <kfinddirection.hpp>

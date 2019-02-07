@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTEARRAYSTREAMENCODERFACTORY_HPP
-#define BYTEARRAYSTREAMENCODERFACTORY_HPP
+#ifndef KASTEN_BYTEARRAYSTREAMENCODERFACTORY_HPP
+#define KASTEN_BYTEARRAYSTREAMENCODERFACTORY_HPP
 
 // lib
 #include <kasten/okteta/oktetakastengui_export.hpp>

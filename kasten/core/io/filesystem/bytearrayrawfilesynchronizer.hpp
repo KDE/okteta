@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTEARRAYRAWFILESYNCHRONIZER_HPP
-#define BYTEARRAYRAWFILESYNCHRONIZER_HPP
+#ifndef KASTEN_BYTEARRAYRAWFILESYNCHRONIZER_HPP
+#define KASTEN_BYTEARRAYRAWFILESYNCHRONIZER_HPP
 
 // lib
 #include <kasten/okteta/oktetakastencore_export.hpp>

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef XORBYTEARRAYFILTER_HPP
-#define XORBYTEARRAYFILTER_HPP
+#ifndef KASTEN_XORBYTEARRAYFILTER_HPP
+#define KASTEN_XORBYTEARRAYFILTER_HPP
 
 ////
 #include "operandbytearrayfilterparameterset.hpp"

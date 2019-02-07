@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef ENUMDATAINFORMATION_H_
-#define ENUMDATAINFORMATION_H_
+#ifndef KASTEN_ENUMDATAINFORMATION_HPP
+#define KASTEN_ENUMDATAINFORMATION_HPP
 
 #include "primitivedatainformation.hpp"
 #include "enumdefinition.hpp"
@@ -59,4 +59,4 @@ inline void EnumDataInformation::setEnumValues(const QMap<AllPrimitiveTypes, QSt
 {
     mEnum->setValues(newValues);
 }
-#endif /* ENUMDATAINFORMATION_H_ */
+#endif /* KASTEN_ENUMDATAINFORMATION_HPP */

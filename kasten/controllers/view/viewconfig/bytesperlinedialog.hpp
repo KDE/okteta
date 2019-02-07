@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTESPERLINEDIALOG_HPP
-#define BYTESPERLINEDIALOG_HPP
+#ifndef KASTEN_BYTESPERLINEDIALOG_HPP
+#define KASTEN_BYTESPERLINEDIALOG_HPP
 
 // Qt
 #include <QDialog>

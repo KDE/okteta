@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef ARRAYDATAINFORMATION_H_
-#define ARRAYDATAINFORMATION_H_
+#ifndef KASTEN_ARRAYDATAINFORMATION_HPP
+#define KASTEN_ARRAYDATAINFORMATION_HPP
 
 #include "../dummydatainformation.hpp"
 #include "abstractarraydata.hpp"
@@ -119,4 +119,4 @@ inline void ArrayDataInformation::setLengthFunction(const QScriptValue& newFunc)
     setAdditionalFunction(AdditionalData::AdditionalDataType::ArrayLengthFunction, newFunc, "array length function");
 }
 
-#endif /* ARRAYDATAINFORMATION_H_ */
+#endif /* KASTEN_ARRAYDATAINFORMATION_HPP */

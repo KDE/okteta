@@ -19,8 +19,8 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef DATAINFORMATION_H_
-#define DATAINFORMATION_H_
+#ifndef KASTEN_DATAINFORMATION_HPP
+#define KASTEN_DATAINFORMATION_HPP
 
 // Qt core
 #include <QString>
@@ -433,4 +433,4 @@ inline QString DataInformation::valueString() const
     return valueStringImpl();
 }
 
-#endif /* DATAINFORMATION_H_ */
+#endif /* KASTEN_DATAINFORMATION_HPP */

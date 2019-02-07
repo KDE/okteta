@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef ENUMDEFINITION_H_
-#define ENUMDEFINITION_H_
+#ifndef KASTEN_ENUMDEFINITION_HPP
+#define KASTEN_ENUMDEFINITION_HPP
 #include "../../allprimitivetypes.hpp"
 #include "../primitivedatatype.hpp"
 // Qt core
@@ -101,4 +101,4 @@ inline void EnumDefinition::setValues(const QMap<AllPrimitiveTypes, QString>& ne
     mValues = newValues; // causes the QSharedPointer to detach and copy
 }
 
-#endif /* ENUMDEFINITION_H_ */
+#endif /* KASTEN_ENUMDEFINITION_HPP */

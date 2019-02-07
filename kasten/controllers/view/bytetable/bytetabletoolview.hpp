@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTETABLETOOLVIEW_HPP
-#define BYTETABLETOOLVIEW_HPP
+#ifndef KASTEN_BYTETABLETOOLVIEW_HPP
+#define KASTEN_BYTETABLETOOLVIEW_HPP
 
 // Kasten gui
 #include <Kasten/AbstractToolView>

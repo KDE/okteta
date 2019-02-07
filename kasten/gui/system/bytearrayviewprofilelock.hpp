@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTEARRAYVIEWPROFILELOCK_HPP
-#define BYTEARRAYVIEWPROFILELOCK_HPP
+#ifndef KASTEN_BYTEARRAYVIEWPROFILELOCK_HPP
+#define KASTEN_BYTEARRAYVIEWPROFILELOCK_HPP
 
 // lib
 #include <kasten/okteta/bytearrayviewprofile.hpp>

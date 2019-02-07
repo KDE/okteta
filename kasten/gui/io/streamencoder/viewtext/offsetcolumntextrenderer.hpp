@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef OFFSETCOLUMNTEXTRENDERER_HPP
-#define OFFSETCOLUMNTEXTRENDERER_HPP
+#ifndef KASTEN_OFFSETCOLUMNTEXTRENDERER_HPP
+#define KASTEN_OFFSETCOLUMNTEXTRENDERER_HPP
 
 // lib
 #include "abstractcolumntextrenderer.hpp"

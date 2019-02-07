@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef VIEWPROFILESMANAGECONTROLLER_HPP
-#define VIEWPROFILESMANAGECONTROLLER_HPP
+#ifndef KASTEN_VIEWPROFILESMANAGECONTROLLER_HPP
+#define KASTEN_VIEWPROFILESMANAGECONTROLLER_HPP
 
 // lib
 #include <kasten/okteta/oktetakastencontrollers_export.hpp>

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INFOVIEW_HPP
-#define INFOVIEW_HPP
+#ifndef KASTEN_INFOVIEW_HPP
+#define KASTEN_INFOVIEW_HPP
 
 // Qt
 #include <QWidget>

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ADDRESSCOMBOBOX_HPP
-#define ADDRESSCOMBOBOX_HPP
+#ifndef KASTEN_ADDRESSCOMBOBOX_HPP
+#define KASTEN_ADDRESSCOMBOBOX_HPP
 
 // lib
 #include <kasten/okteta/oktetakastengui_export.hpp>

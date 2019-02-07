@@ -19,8 +19,8 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef DATAINFORMATIONBASE_HPP
-#define DATAINFORMATIONBASE_HPP
+#ifndef KASTEN_DATAINFORMATIONBASE_HPP
+#define KASTEN_DATAINFORMATIONBASE_HPP
 
 class EnumDataInformation;
 class StringDataInformation;
@@ -127,4 +127,4 @@ inline const DataInformation* DataInformationBase::asDataInformation() const
 #undef CAST_FUNCS_2
 #undef CAST_FUNCS
 
-#endif // DATAINFORMATIONBASE_HPP
+#endif // KASTEN_DATAINFORMATIONBASE_HPP

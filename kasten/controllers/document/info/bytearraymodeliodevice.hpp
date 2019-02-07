@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTEARRAYMODELIODEVICE_HPP
-#define BYTEARRAYMODELIODEVICE_HPP
+#ifndef KASTEN_BYTEARRAYMODELIODEVICE_HPP
+#define KASTEN_BYTEARRAYMODELIODEVICE_HPP
 
 // Okteta core
 #include <Okteta/Address>

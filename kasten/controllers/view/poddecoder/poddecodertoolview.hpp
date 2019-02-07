@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PODDECODERTOOLVIEW_HPP
-#define PODDECODERTOOLVIEW_HPP
+#ifndef KASTEN_PODDECODERTOOLVIEW_HPP
+#define KASTEN_PODDECODERTOOLVIEW_HPP
 
 // Kasten gui
 #include <Kasten/AbstractToolView>

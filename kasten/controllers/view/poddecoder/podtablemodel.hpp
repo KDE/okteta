@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PODTABLEMODEL_HPP
-#define PODTABLEMODEL_HPP
+#ifndef KASTEN_PODTABLEMODEL_HPP
+#define KASTEN_PODTABLEMODEL_HPP
 
 // Qt
 #include <QAbstractTableModel>

@@ -21,8 +21,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef STRUCTURESTOOL_HPP
-#define STRUCTURESTOOL_HPP
+#ifndef KASTEN_STRUCTURESTOOL_HPP
+#define KASTEN_STRUCTURESTOOL_HPP
 
 // Okteta Kasten gui
 #include <Kasten/Okteta/ByteArrayView>

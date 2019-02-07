@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTETABLETOOLFACTORY_HPP
-#define BYTETABLETOOLFACTORY_HPP
+#ifndef KASTEN_BYTETABLETOOLFACTORY_HPP
+#define KASTEN_BYTETABLETOOLFACTORY_HPP
 
 // lib
 #include <kasten/okteta/oktetakastencontrollers_export.hpp>

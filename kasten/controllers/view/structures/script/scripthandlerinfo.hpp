@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SCRIPTHANDLERINFO_HPP
-#define SCRIPTHANDLERINFO_HPP
+#ifndef KASTEN_SCRIPTHANDLERINFO_HPP
+#define KASTEN_SCRIPTHANDLERINFO_HPP
 
 #include <QtGlobal>
 #include <QScopedPointer>
@@ -73,4 +73,4 @@ private:
     Q_DISABLE_COPY(ScriptHandlerInfo)
 };
 
-#endif // SCRIPTHANDLERINFO_HPP
+#endif // KASTEN_SCRIPTHANDLERINFO_HPP

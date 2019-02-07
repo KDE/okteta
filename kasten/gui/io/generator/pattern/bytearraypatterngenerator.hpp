@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTEARRAYPATTERNGENERATOR_HPP
-#define BYTEARRAYPATTERNGENERATOR_HPP
+#ifndef KASTEN_BYTEARRAYPATTERNGENERATOR_HPP
+#define KASTEN_BYTEARRAYPATTERNGENERATOR_HPP
 
 // Kasten core
 #include <Kasten/AbstractModelDataGenerator>

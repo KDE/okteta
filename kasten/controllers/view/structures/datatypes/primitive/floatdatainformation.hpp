@@ -19,8 +19,8 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef FLOATDATAINFORMATION_H_
-#define FLOATDATAINFORMATION_H_
+#ifndef KASTEN_FLOATDATAINFORMATION_HPP
+#define KASTEN_FLOATDATAINFORMATION_HPP
 
 #include "primitivedatainformation.hpp"
 
@@ -53,4 +53,4 @@ inline float FloatDataInformationMethods::fromVariant(const QVariant& value, boo
     return result;
 }
 
-#endif /* FLOATDATAINFORMATION_H_ */
+#endif /* KASTEN_FLOATDATAINFORMATION_HPP */

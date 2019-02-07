@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PRINTTOOL_HPP
-#define PRINTTOOL_HPP
+#ifndef KASTEN_PRINTTOOL_HPP
+#define KASTEN_PRINTTOOL_HPP
 
 // Qt
 #include <QObject>

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SELECTRANGEVIEW_HPP
-#define SELECTRANGEVIEW_HPP
+#ifndef KASTEN_SELECTRANGEVIEW_HPP
+#define KASTEN_SELECTRANGEVIEW_HPP
 
 // Kasten gui
 #include <Kasten/AbstractToolWidget>

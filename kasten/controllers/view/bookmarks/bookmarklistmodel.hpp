@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BOOKMARKLISTMODEL_HPP
-#define BOOKMARKLISTMODEL_HPP
+#ifndef KASTEN_BOOKMARKLISTMODEL_HPP
+#define KASTEN_BOOKMARKLISTMODEL_HPP
 
 // Okteta gui
 #include <Okteta/OffsetFormat>

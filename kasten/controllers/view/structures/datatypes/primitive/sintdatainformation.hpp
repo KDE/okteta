@@ -19,8 +19,8 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef SINTDATAINFORMATION_HPP
-#define SINTDATAINFORMATION_HPP
+#ifndef KASTEN_SINTDATAINFORMATION_HPP
+#define KASTEN_SINTDATAINFORMATION_HPP
 
 #include "primitivedatainformation.hpp"
 #include "structureviewpreferences.h"
@@ -72,4 +72,4 @@ inline T SIntDataInformationMethods<T>::fromVariant(const QVariant& value, bool*
     return result;
 }
 
-#endif // SINTDATAINFORMATION_HPP
+#endif // KASTEN_SINTDATAINFORMATION_HPP

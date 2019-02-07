@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef DEFAULTSCRIPTCLASS_HPP
-#define DEFAULTSCRIPTCLASS_HPP
+#ifndef KASTEN_DEFAULTSCRIPTCLASS_HPP
+#define KASTEN_DEFAULTSCRIPTCLASS_HPP
 
 #include <QVector>
 #include <QScriptClass>
@@ -109,4 +109,4 @@ private:
     DataInformation* mData;
 };
 
-#endif // DEFAULTSCRIPTCLASS_HPP
+#endif // KASTEN_DEFAULTSCRIPTCLASS_HPP

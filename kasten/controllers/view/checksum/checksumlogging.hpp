@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CHECKSUMLOGGING_HPP
-#define CHECKSUMLOGGING_HPP
+#ifndef KASTEN_CHECKSUMLOGGING_HPP
+#define KASTEN_CHECKSUMLOGGING_HPP
 
 #include <QLoggingCategory>
 

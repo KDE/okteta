@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTCOLUMNTEXTRENDERER_HPP
-#define ABSTRACTCOLUMNTEXTRENDERER_HPP
+#ifndef KASTEN_ABSTRACTCOLUMNTEXTRENDERER_HPP
+#define KASTEN_ABSTRACTCOLUMNTEXTRENDERER_HPP
 
 class QTextStream;
 class QString;

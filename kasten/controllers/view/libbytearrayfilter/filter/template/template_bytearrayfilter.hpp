@@ -9,8 +9,8 @@
 //// ADAPT(start)
 //// rename "TEMPLATE_BYTEARRAYFILTER_HPP" to an include guard matching your class/file name
 //// e.g. "MYBYTEARRAYFILTER_HPP"
-#ifndef TEMPLATE_BYTEARRAYFILTER_HPP
-#define TEMPLATE_BYTEARRAYFILTER_HPP
+#ifndef KASTEN_TEMPLATE_BYTEARRAYFILTER_HPP
+#define KASTEN_TEMPLATE_BYTEARRAYFILTER_HPP
 // ADAPT(end)
 
 // lib

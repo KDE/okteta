@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MODSUM32BYTEARRAYCHECKSUMALGORITHM_HPP
-#define MODSUM32BYTEARRAYCHECKSUMALGORITHM_HPP
+#ifndef KASTEN_MODSUM32BYTEARRAYCHECKSUMALGORITHM_HPP
+#define KASTEN_MODSUM32BYTEARRAYCHECKSUMALGORITHM_HPP
 
 //
 #include "modsumbytearraychecksumparameterset.hpp"

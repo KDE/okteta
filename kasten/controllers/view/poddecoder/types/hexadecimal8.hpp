@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef HEXADECIMAL8_HPP
-#define HEXADECIMAL8_HPP
+#ifndef KASTEN_HEXADECIMAL8_HPP
+#define KASTEN_HEXADECIMAL8_HPP
 
 // Qt
 #include <QMetaType>

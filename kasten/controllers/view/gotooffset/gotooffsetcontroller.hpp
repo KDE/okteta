@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef GOTOOFFSETCONTROLLER_HPP
-#define GOTOOFFSETCONTROLLER_HPP
+#ifndef KASTEN_GOTOOFFSETCONTROLLER_HPP
+#define KASTEN_GOTOOFFSETCONTROLLER_HPP
 
 // lib
 #include <kasten/okteta/oktetakastencontrollers_export.hpp>

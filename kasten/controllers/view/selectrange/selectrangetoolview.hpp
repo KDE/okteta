@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SELECTRANGETOOLVIEW_HPP
-#define SELECTRANGETOOLVIEW_HPP
+#ifndef KASTEN_SELECTRANGETOOLVIEW_HPP
+#define KASTEN_SELECTRANGETOOLVIEW_HPP
 
 // Kasten gui
 #include <Kasten/AbstractToolInlineView>

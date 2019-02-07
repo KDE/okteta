@@ -19,8 +19,8 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef ABSTRACTBITFIELDDATAINFORMATION_H_
-#define ABSTRACTBITFIELDDATAINFORMATION_H_
+#ifndef KASTEN_ABSTRACTBITFIELDDATAINFORMATION_HPP
+#define KASTEN_ABSTRACTBITFIELDDATAINFORMATION_HPP
 
 #include "../primitivedatainformation.hpp"
 #include "../../../allprimitivetypes.hpp"
@@ -91,4 +91,4 @@ inline void AbstractBitfieldDataInformation::setWidth(BitCount32 newWidth)
     mWidth = qMin(newWidth, BitCount32(64u)); // maximum width is 64 bits
 }
 
-#endif /* ABSTRACTBITFIELDDATAINFORMATION_H_ */
+#endif /* KASTEN_ABSTRACTBITFIELDDATAINFORMATION_HPP */

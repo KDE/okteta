@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KREPLACEPROMPT_HPP
-#define KREPLACEPROMPT_HPP
+#ifndef KASTEN_KREPLACEPROMPT_HPP
+#define KASTEN_KREPLACEPROMPT_HPP
 
 // controller
 #include "replaceuserqueryable.hpp"

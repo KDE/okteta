@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ROTATEBYTEARRAYFILTER_HPP
-#define ROTATEBYTEARRAYFILTER_HPP
+#ifndef KASTEN_ROTATEBYTEARRAYFILTER_HPP
+#define KASTEN_ROTATEBYTEARRAYFILTER_HPP
 
 //
 #include "rotatebytearrayfilterparameterset.hpp"

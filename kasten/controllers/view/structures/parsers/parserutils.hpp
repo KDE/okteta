@@ -19,8 +19,8 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef PARSERUTILS_H_
-#define PARSERUTILS_H_
+#ifndef KASTEN_PARSERUTILS_HPP
+#define KASTEN_PARSERUTILS_HPP
 
 #include <QDebug>
 #include <QStringList>
@@ -208,4 +208,4 @@ QScriptValue functionSafeEval(QScriptEngine* engine, const QString& str);
 
 }
 
-#endif /* PARSERUTILS_H_ */
+#endif /* KASTEN_PARSERUTILS_HPP */

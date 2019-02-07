@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef UTF8STRINGDATA_HPP
-#define UTF8STRINGDATA_HPP
+#ifndef KASTEN_UTF8STRINGDATA_HPP
+#define KASTEN_UTF8STRINGDATA_HPP
 
 #include "stringdata.hpp"
 
@@ -53,4 +53,4 @@ private:
     uint mNonBMPCount = 0;
 };
 
-#endif // UTF8STRINGDATA_HPP
+#endif // KASTEN_UTF8STRINGDATA_HPP

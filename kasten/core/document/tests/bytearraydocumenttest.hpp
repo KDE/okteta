@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTEARRAYDOCUMENTTEST_HPP
-#define BYTEARRAYDOCUMENTTEST_HPP
+#ifndef KASTEN_BYTEARRAYDOCUMENTTEST_HPP
+#define KASTEN_BYTEARRAYDOCUMENTTEST_HPP
 
 // Qt
 #include <QObject>

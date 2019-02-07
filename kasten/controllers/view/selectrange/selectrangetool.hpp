@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SELECTRANGETOOL_HPP
-#define SELECTRANGETOOL_HPP
+#ifndef KASTEN_SELECTRANGETOOL_HPP
+#define KASTEN_SELECTRANGETOOL_HPP
 
 // Okteta core
 #include <Okteta/Address>

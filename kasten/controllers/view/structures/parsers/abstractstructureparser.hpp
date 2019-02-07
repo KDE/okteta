@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef ABSTRACTSTRUCTUREPARSER_H_
-#define ABSTRACTSTRUCTUREPARSER_H_
+#ifndef KASTEN_ABSTRACTSTRUCTUREPARSER_HPP
+#define KASTEN_ABSTRACTSTRUCTUREPARSER_HPP
 
 #include <QVector>
 #include <QStringList>
@@ -47,4 +47,4 @@ protected:
     const QString mAbsolutePath;
 };
 
-#endif /* ABSTRACTSTRUCTUREPARSER_H_ */
+#endif /* KASTEN_ABSTRACTSTRUCTUREPARSER_HPP */

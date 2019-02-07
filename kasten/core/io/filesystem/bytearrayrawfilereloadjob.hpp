@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTEARRAYRAWFILERELOADJOB_HPP
-#define BYTEARRAYRAWFILERELOADJOB_HPP
+#ifndef KASTEN_BYTEARRAYRAWFILERELOADJOB_HPP
+#define KASTEN_BYTEARRAYRAWFILERELOADJOB_HPP
 
 // Kasten core
 #include <Kasten/AbstractFileSystemSyncFromRemoteJob>

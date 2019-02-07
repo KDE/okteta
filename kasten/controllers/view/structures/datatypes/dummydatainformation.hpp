@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef DUMMYDATAINFORMATION_HPP
-#define DUMMYDATAINFORMATION_HPP
+#ifndef KASTEN_DUMMYDATAINFORMATION_HPP
+#define KASTEN_DUMMYDATAINFORMATION_HPP
 
 #include "datainformation.hpp"
 
@@ -99,4 +99,4 @@ public:
     bool isDataInformationWithDummyChildren() const override;
 };
 
-#endif // DUMMYDATAINFORMATION_HPP
+#endif // KASTEN_DUMMYDATAINFORMATION_HPP

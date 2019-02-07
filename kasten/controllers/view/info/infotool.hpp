@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INFOTOOL_HPP
-#define INFOTOOL_HPP
+#ifndef KASTEN_INFOTOOL_HPP
+#define KASTEN_INFOTOOL_HPP
 
 // Kasten core
 #include <Kasten/AbstractTool>

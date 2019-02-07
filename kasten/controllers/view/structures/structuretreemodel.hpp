@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef STRUCTURETREEMODEL_HPP
-#define STRUCTURETREEMODEL_HPP
+#ifndef KASTEN_STRUCTURETREEMODEL_HPP
+#define KASTEN_STRUCTURETREEMODEL_HPP
 
 #include <QAbstractItemModel>
 #include <QSet>

@@ -19,8 +19,8 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef UINTDATAINFORMATION_HPP
-#define UINTDATAINFORMATION_HPP
+#ifndef KASTEN_UINTDATAINFORMATION_HPP
+#define KASTEN_UINTDATAINFORMATION_HPP
 
 #include "primitivedatainformation.hpp"
 #include "structureviewpreferences.h"
@@ -60,4 +60,4 @@ inline T UIntDataInformationMethods<T>::fromVariant(const QVariant& value, bool*
     return result;
 }
 
-#endif // UINTDATAINFORMATION_HPP
+#endif // KASTEN_UINTDATAINFORMATION_HPP

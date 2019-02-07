@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef OKTETAKASTENGUI_HPP
-#define OKTETAKASTENGUI_HPP
+#ifndef KASTEN_OKTETAKASTENGUI_HPP
+#define KASTEN_OKTETAKASTENGUI_HPP
 
 // Qt
 #include <QLoggingCategory>

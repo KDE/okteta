@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef ENUMSCRIPTCLASS_HPP
-#define ENUMSCRIPTCLASS_HPP
+#ifndef KASTEN_ENUMSCRIPTCLASS_HPP
+#define KASTEN_ENUMSCRIPTCLASS_HPP
 
 #include "primitivescriptclass.hpp"
 
@@ -42,4 +42,4 @@ protected:
     QScriptString s_values;
 };
 
-#endif // ENUMSCRIPTCLASS_HPP
+#endif // KASTEN_ENUMSCRIPTCLASS_HPP

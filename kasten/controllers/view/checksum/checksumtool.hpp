@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CHECKSUMTOOL_HPP
-#define CHECKSUMTOOL_HPP
+#ifndef KASTEN_CHECKSUMTOOL_HPP
+#define KASTEN_CHECKSUMTOOL_HPP
 
 // lib
 #include <config-qca2.hpp>

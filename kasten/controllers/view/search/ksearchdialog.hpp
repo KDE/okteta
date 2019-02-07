@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KSEARCHDIALOG_HPP
-#define KSEARCHDIALOG_HPP
+#ifndef KASTEN_KSEARCHDIALOG_HPP
+#define KASTEN_KSEARCHDIALOG_HPP
 
 // lib
 #include <abstractfinddialog.hpp>

@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SCRIPTLOGGERVIEW_H_
-#define SCRIPTLOGGERVIEW_H_
+#ifndef KASTEN_SCRIPTLOGGERVIEW_HPP
+#define KASTEN_SCRIPTLOGGERVIEW_HPP
 
 #include <QWidget>
 #include "../datatypes/topleveldatainformation.hpp"
@@ -49,4 +49,4 @@ private:
     const TopLevelDataInformation::List mList;
 };
 
-#endif /* SCRIPTLOGGERVIEW_H_ */
+#endif /* KASTEN_SCRIPTLOGGERVIEW_HPP */

@@ -21,8 +21,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef EBCDICSTRINGDATA_HPP
-#define EBCDICSTRINGDATA_HPP
+#ifndef KASTEN_EBCDICSTRINGDATA_HPP
+#define KASTEN_EBCDICSTRINGDATA_HPP
 
 #include "stringdata.hpp"
 
@@ -52,4 +52,4 @@ private:
     Okteta::CharCodec* mCodec;
 };
 
-#endif // EBCDICSTRINGDATA_HPP
+#endif // KASTEN_EBCDICSTRINGDATA_HPP

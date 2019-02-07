@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ADDRESSCOMBOBOX_P_HPP
-#define ADDRESSCOMBOBOX_P_HPP
+#ifndef KASTEN_ADDRESSCOMBOBOX_P_HPP
+#define KASTEN_ADDRESSCOMBOBOX_P_HPP
 
 // lib
 #include "addresscombobox.hpp"

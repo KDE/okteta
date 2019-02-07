@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BOOKMARKSTOOLVIEW_HPP
-#define BOOKMARKSTOOLVIEW_HPP
+#ifndef KASTEN_BOOKMARKSTOOLVIEW_HPP
+#define KASTEN_BOOKMARKSTOOLVIEW_HPP
 
 // Kasten gui
 #include <Kasten/AbstractToolView>

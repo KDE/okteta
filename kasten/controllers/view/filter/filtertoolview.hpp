@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FILTERTOOLVIEW_HPP
-#define FILTERTOOLVIEW_HPP
+#ifndef KASTEN_FILTERTOOLVIEW_HPP
+#define KASTEN_FILTERTOOLVIEW_HPP
 
 // Kasten gui
 #include <Kasten/AbstractToolView>

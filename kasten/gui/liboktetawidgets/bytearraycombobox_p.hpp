@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTEARRAYCOMBOBOX_P_HPP
-#define BYTEARRAYCOMBOBOX_P_HPP
+#ifndef KASTEN_BYTEARRAYCOMBOBOX_P_HPP
+#define KASTEN_BYTEARRAYCOMBOBOX_P_HPP
 
 // lib
 #include "bytearraycombobox.hpp"

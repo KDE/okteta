@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef OVERWRITEMODECONTROLLER_HPP
-#define OVERWRITEMODECONTROLLER_HPP
+#ifndef KASTEN_OVERWRITEMODECONTROLLER_HPP
+#define KASTEN_OVERWRITEMODECONTROLLER_HPP
 
 // lib
 #include <kasten/okteta/oktetakastencontrollers_export.hpp>

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef STRINGSEXTRACTTOOLVIEW_HPP
-#define STRINGSEXTRACTTOOLVIEW_HPP
+#ifndef KASTEN_STRINGSEXTRACTTOOLVIEW_HPP
+#define KASTEN_STRINGSEXTRACTTOOLVIEW_HPP
 
 // Kasten gui
 #include <Kasten/AbstractToolView>

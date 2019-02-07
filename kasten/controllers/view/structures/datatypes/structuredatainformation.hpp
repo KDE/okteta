@@ -19,8 +19,8 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef STRUCTUREDATAINFORMATION_H_
-#define STRUCTUREDATAINFORMATION_H_
+#ifndef KASTEN_STRUCTUREDATAINFORMATION_HPP
+#define KASTEN_STRUCTUREDATAINFORMATION_HPP
 
 #include "datainformationwithchildren.hpp"
 
@@ -49,4 +49,4 @@ private:
     QString typeNameImpl() const override;
 };
 
-#endif /* STRUCTUREDATAINFORMATION_H_ */
+#endif /* KASTEN_STRUCTUREDATAINFORMATION_HPP */

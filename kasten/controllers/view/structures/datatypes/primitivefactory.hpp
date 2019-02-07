@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef PRIMITIVEFACTORY_H_
-#define PRIMITIVEFACTORY_H_
+#ifndef KASTEN_PRIMITIVEFACTORY_HPP
+#define KASTEN_PRIMITIVEFACTORY_HPP
 
 #include "primitivedatatype.hpp"
 
@@ -48,4 +48,4 @@ inline PrimitiveDataInformation* newInstance(const QString& name, const QString&
 
 }
 
-#endif /* PRIMITIVEFACTORY_H_ */
+#endif /* KASTEN_PRIMITIVEFACTORY_HPP */

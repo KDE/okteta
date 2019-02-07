@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTEARRAYRANDOMDATAGENERATORCONFIGEDITOR_HPP
-#define BYTEARRAYRANDOMDATAGENERATORCONFIGEDITOR_HPP
+#ifndef KASTEN_BYTEARRAYRANDOMDATAGENERATORCONFIGEDITOR_HPP
+#define KASTEN_BYTEARRAYRANDOMDATAGENERATORCONFIGEDITOR_HPP
 
 // lib
 #include "bytearrayrandomdatagenerator.hpp"

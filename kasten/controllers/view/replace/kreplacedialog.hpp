@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KREPLACEDIALOG_HPP
-#define KREPLACEDIALOG_HPP
+#ifndef KASTEN_KREPLACEDIALOG_HPP
+#define KASTEN_KREPLACEDIALOG_HPP
 
 // lib
 #include <abstractfinddialog.hpp>

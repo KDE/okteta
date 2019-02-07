@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef NOBYTEARRAYFILTERPARAMETERSETEDIT_HPP
-#define NOBYTEARRAYFILTERPARAMETERSETEDIT_HPP
+#ifndef KASTEN_NOBYTEARRAYFILTERPARAMETERSETEDIT_HPP
+#define KASTEN_NOBYTEARRAYFILTERPARAMETERSETEDIT_HPP
 
 // lib
 #include "abstractbytearrayfilterparametersetedit.hpp"

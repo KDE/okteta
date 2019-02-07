@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef EXTERNALBOOKMARKSTORAGE_HPP
-#define EXTERNALBOOKMARKSTORAGE_HPP
+#ifndef KASTEN_EXTERNALBOOKMARKSTORAGE_HPP
+#define KASTEN_EXTERNALBOOKMARKSTORAGE_HPP
 
 class KBookmarkManager;
 class QUrl;

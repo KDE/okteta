@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef STRUCTURESTOOLVIEW_HPP
-#define STRUCTURESTOOLVIEW_HPP
+#ifndef KASTEN_STRUCTURESTOOLVIEW_HPP
+#define KASTEN_STRUCTURESTOOLVIEW_HPP
 
 // Kasten gui
 #include <Kasten/AbstractToolView>

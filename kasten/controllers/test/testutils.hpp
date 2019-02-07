@@ -18,8 +18,8 @@
  *    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-#ifndef TESTUTILS_H_
-#define TESTUTILS_H_
+#ifndef KASTEN_TESTUTILS_HPP
+#define KASTEN_TESTUTILS_HPP
 
 #include <QString>
 #include <QTest>
@@ -110,4 +110,4 @@ QScriptValue property(const QScriptValue& value, const char* property)
 
 }
 
-#endif /* TESTUTILS_H_ */
+#endif /* KASTEN_TESTUTILS_HPP */

@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef BOOLDATAINFORMATION_HPP
-#define BOOLDATAINFORMATION_HPP
+#ifndef KASTEN_BOOLDATAINFORMATION_HPP
+#define KASTEN_BOOLDATAINFORMATION_HPP
 
 #include <QScriptValue>
 
@@ -77,4 +77,4 @@ inline T BoolDataInformationMethods<T>::fromVariant(const QVariant& value, bool*
     return UIntDataInformationMethods<T>::fromVariant(value, ok);
 }
 
-#endif // BOOLDATAINFORMATION_HPP
+#endif // KASTEN_BOOLDATAINFORMATION_HPP

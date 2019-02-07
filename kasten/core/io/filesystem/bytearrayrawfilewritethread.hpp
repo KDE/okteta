@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTEARRAYRAWFILEWRITETHREAD_HPP
-#define BYTEARRAYRAWFILEWRITETHREAD_HPP
+#ifndef KASTEN_BYTEARRAYRAWFILEWRITETHREAD_HPP
+#define KASTEN_BYTEARRAYRAWFILEWRITETHREAD_HPP
 
 // Qt
 #include <QThread>

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PODDELEGATE_HPP
-#define PODDELEGATE_HPP
+#ifndef KASTEN_PODDELEGATE_HPP
+#define KASTEN_PODDELEGATE_HPP
 
 // Qt
 #include <QStyledItemDelegate>

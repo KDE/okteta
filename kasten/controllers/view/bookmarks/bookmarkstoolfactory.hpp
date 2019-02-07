@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BOOKMARKSTOOLFACTORY_HPP
-#define BOOKMARKSTOOLFACTORY_HPP
+#ifndef KASTEN_BOOKMARKSTOOLFACTORY_HPP
+#define KASTEN_BOOKMARKSTOOLFACTORY_HPP
 
 // lib
 #include <kasten/okteta/oktetakastencontrollers_export.hpp>

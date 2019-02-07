@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTEARRAYDOCUMENTFACTORY_HPP
-#define BYTEARRAYDOCUMENTFACTORY_HPP
+#ifndef KASTEN_BYTEARRAYDOCUMENTFACTORY_HPP
+#define KASTEN_BYTEARRAYDOCUMENTFACTORY_HPP
 
 // lib
 #include <kasten/okteta/oktetakastencore_export.hpp>

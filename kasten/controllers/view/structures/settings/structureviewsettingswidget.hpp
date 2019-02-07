@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef STRUCTUREVIEWSETTINGSWIDGET_HPP
-#define STRUCTUREVIEWSETTINGSWIDGET_HPP
+#ifndef KASTEN_STRUCTUREVIEWSETTINGSWIDGET_HPP
+#define KASTEN_STRUCTUREVIEWSETTINGSWIDGET_HPP
 
 #include <ui_structureviewsettingswidget.h>
 #include <QWidget>

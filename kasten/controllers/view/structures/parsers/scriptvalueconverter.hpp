@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SCRIPTVALUECONVERTER_H_
-#define SCRIPTVALUECONVERTER_H_
+#ifndef KASTEN_SCRIPTVALUECONVERTER_HPP
+#define KASTEN_SCRIPTVALUECONVERTER_HPP
 
 class QString;
 class QScriptValue;
@@ -41,4 +41,4 @@ QVector<DataInformation*> convertValues(const QScriptValue& value, ScriptLogger*
 
 }
 
-#endif /* SCRIPTVALUECONVERTER_H_ */
+#endif /* KASTEN_SCRIPTVALUECONVERTER_HPP */

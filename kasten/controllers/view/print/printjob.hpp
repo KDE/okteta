@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PRINTJOB_HPP
-#define PRINTJOB_HPP
+#ifndef KASTEN_PRINTJOB_HPP
+#define KASTEN_PRINTJOB_HPP
 
 // KF5
 // #include <KJob>

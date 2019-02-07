@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PODDECODERTOOLFACTORY_HPP
-#define PODDECODERTOOLFACTORY_HPP
+#ifndef KASTEN_PODDECODERTOOLFACTORY_HPP
+#define KASTEN_PODDECODERTOOLFACTORY_HPP
 
 // lib
 #include <kasten/okteta/oktetakastencontrollers_export.hpp>

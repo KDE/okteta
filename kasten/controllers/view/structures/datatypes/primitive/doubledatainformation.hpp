@@ -19,8 +19,8 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef DOUBLEDATAINFORMATION_H_
-#define DOUBLEDATAINFORMATION_H_
+#ifndef KASTEN_DOUBLEDATAINFORMATION_HPP
+#define KASTEN_DOUBLEDATAINFORMATION_HPP
 
 #include "primitivedatainformation.hpp"
 
@@ -48,4 +48,4 @@ inline double DoubleDataInformationMethods::fromVariant(const QVariant& value, b
     return result;
 }
 
-#endif /* DOUBLEDATAINFORMATION_H_ */
+#endif /* KASTEN_DOUBLEDATAINFORMATION_HPP */

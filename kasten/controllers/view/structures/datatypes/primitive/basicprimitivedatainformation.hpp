@@ -19,8 +19,8 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef BASICPRIMITIVEDATAINFORMATION_H_
-#define BASICPRIMITIVEDATAINFORMATION_H_
+#ifndef KASTEN_BASICPRIMITIVEDATAINFORMATION_HPP
+#define KASTEN_BASICPRIMITIVEDATAINFORMATION_HPP
 
 #include "primitivedatainformation.hpp"
 #include "../../allprimitivetypes.hpp"
@@ -142,4 +142,4 @@ QString BasicPrimitiveDataInformation<T, C>::valueStringImpl() const
     return C::staticValueString(mValue);
 }
 
-#endif /* BASICPRIMITIVEDATAINFORMATION_H_ */
+#endif /* KASTEN_BASICPRIMITIVEDATAINFORMATION_HPP */

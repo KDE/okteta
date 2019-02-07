@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CHECKSUMTOOLFACTORY_HPP
-#define CHECKSUMTOOLFACTORY_HPP
+#ifndef KASTEN_CHECKSUMTOOLFACTORY_HPP
+#define KASTEN_CHECKSUMTOOLFACTORY_HPP
 
 // lib
 #include <kasten/okteta/oktetakastencontrollers_export.hpp>

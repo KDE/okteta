@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef HEXADECIMAL8EDITOR_HPP
-#define HEXADECIMAL8EDITOR_HPP
+#ifndef KASTEN_HEXADECIMAL8EDITOR_HPP
+#define KASTEN_HEXADECIMAL8EDITOR_HPP
 
 // lib
 #include "../types/hexadecimal8.hpp"

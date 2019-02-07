@@ -19,8 +19,8 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef TOPLEVELDATAINFORMATION_H_
-#define TOPLEVELDATAINFORMATION_H_
+#ifndef KASTEN_TOPLEVELDATAINFORMATION_HPP
+#define KASTEN_TOPLEVELDATAINFORMATION_HPP
 
 #include <QHash>
 #include <QFileInfo>
@@ -196,4 +196,4 @@ inline void TopLevelDataInformation::_childCountChanged(DataInformation* sender,
     }
 }
 
-#endif /* TOPLEVELDATAINFORMATION_H_ */
+#endif /* KASTEN_TOPLEVELDATAINFORMATION_HPP */

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PRINTCONTROLLER_HPP
-#define PRINTCONTROLLER_HPP
+#ifndef KASTEN_PRINTCONTROLLER_HPP
+#define KASTEN_PRINTCONTROLLER_HPP
 
 // lib
 #include <kasten/okteta/oktetakastencontrollers_export.hpp>

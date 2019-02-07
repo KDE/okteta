@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CHAR8EDITOR_HPP
-#define CHAR8EDITOR_HPP
+#ifndef KASTEN_CHAR8EDITOR_HPP
+#define KASTEN_CHAR8EDITOR_HPP
 
 // lib
 #include "../types/char8.hpp"

@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef STRUCTURESMANAGER_HPP
-#define STRUCTURESMANAGER_HPP
+#ifndef KASTEN_STRUCTURESMANAGER_HPP
+#define KASTEN_STRUCTURESMANAGER_HPP
 
 #include "structuredefinitionfile.hpp"
 // Qt

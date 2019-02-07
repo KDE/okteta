@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef OCTAL8_HPP
-#define OCTAL8_HPP
+#ifndef KASTEN_OCTAL8_HPP
+#define KASTEN_OCTAL8_HPP
 
 // Qt
 #include <QMetaType>

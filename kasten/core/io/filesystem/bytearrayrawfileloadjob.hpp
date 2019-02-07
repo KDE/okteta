@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTEARRAYRAWFILELOADJOB_HPP
-#define BYTEARRAYRAWFILELOADJOB_HPP
+#ifndef KASTEN_BYTEARRAYRAWFILELOADJOB_HPP
+#define KASTEN_BYTEARRAYRAWFILELOADJOB_HPP
 
 // Kasten core
 #include <Kasten/AbstractFileSystemLoadJob>

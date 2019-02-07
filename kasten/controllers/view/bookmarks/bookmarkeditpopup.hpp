@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BOOKMARKEDITPOPUP_HPP
-#define BOOKMARKEDITPOPUP_HPP
+#ifndef KASTEN_BOOKMARKEDITPOPUP_HPP
+#define KASTEN_BOOKMARKEDITPOPUP_HPP
 
 // Kasten gui
 #include <Kasten/AbstractLinePopup>

@@ -19,8 +19,8 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef CHARDATAINFORMATION_H_
-#define CHARDATAINFORMATION_H_
+#ifndef KASTEN_CHARDATAINFORMATION_HPP
+#define KASTEN_CHARDATAINFORMATION_HPP
 
 #include "primitivedatainformation.hpp"
 
@@ -54,4 +54,4 @@ inline quint8 CharDataInformationMethods::fromVariant(const QVariant& value, boo
     return result;
 }
 
-#endif /* CHARDATAINFORMATION_H_ */
+#endif /* KASTEN_CHARDATAINFORMATION_HPP */

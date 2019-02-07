@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SCRIPTFILEPARSER_H_
-#define SCRIPTFILEPARSER_H_
+#ifndef KASTEN_SCRIPTFILEPARSER_HPP
+#define KASTEN_SCRIPTFILEPARSER_HPP
 
 #include "abstractstructureparser.hpp"
 
@@ -46,4 +46,4 @@ private:
     QScriptValue loadScriptValue(ScriptLogger* logger, QScriptEngine* engine) const;
 };
 
-#endif /* SCRIPTFILEPARSER_H_ */
+#endif /* KASTEN_SCRIPTFILEPARSER_HPP */

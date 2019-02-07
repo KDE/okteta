@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CHARSETCONVERSIONTOOL_HPP
-#define CHARSETCONVERSIONTOOL_HPP
+#ifndef KASTEN_CHARSETCONVERSIONTOOL_HPP
+#define KASTEN_CHARSETCONVERSIONTOOL_HPP
 
 // Kasten core
 #include <Kasten/AbstractTool>

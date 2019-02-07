@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTEARRAYSELECTION_HPP
-#define BYTEARRAYSELECTION_HPP
+#ifndef KASTEN_BYTEARRAYSELECTION_HPP
+#define KASTEN_BYTEARRAYSELECTION_HPP
 
 // lib
 #include <kasten/okteta/oktetakastencore_export.hpp>

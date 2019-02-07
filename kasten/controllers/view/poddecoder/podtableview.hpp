@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PODTABLEVIEW_HPP
-#define PODTABLEVIEW_HPP
+#ifndef KASTEN_PODTABLEVIEW_HPP
+#define KASTEN_PODTABLEVIEW_HPP
 
 // lib
 #include "abstractdifferentsizedialog.hpp"

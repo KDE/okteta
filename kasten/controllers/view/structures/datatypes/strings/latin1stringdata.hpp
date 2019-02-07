@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LATIN1STRINGDATA_HPP
-#define LATIN1STRINGDATA_HPP
+#ifndef KASTEN_LATIN1STRINGDATA_HPP
+#define KASTEN_LATIN1STRINGDATA_HPP
 
 #include "stringdata.hpp"
 
@@ -46,4 +46,4 @@ private:
     QVector<quint8> mData;
 };
 
-#endif // LATIN1STRINGDATA_HPP
+#endif // KASTEN_LATIN1STRINGDATA_HPP

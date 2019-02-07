@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef STATISTICTABLEMODEL_HPP
-#define STATISTICTABLEMODEL_HPP
+#ifndef KASTEN_STATISTICTABLEMODEL_HPP
+#define KASTEN_STATISTICTABLEMODEL_HPP
 
 // Okteta core
 #include <Okteta/OktetaCore>

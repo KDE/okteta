@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef ASCIISTRINGDATA_HPP
-#define ASCIISTRINGDATA_HPP
+#ifndef KASTEN_ASCIISTRINGDATA_HPP
+#define KASTEN_ASCIISTRINGDATA_HPP
 
 #include "stringdata.hpp"
 
@@ -46,4 +46,4 @@ private:
     QVector<quint8> mData;
 };
 
-#endif // ASCIISTRINGDATA_HPP
+#endif // KASTEN_ASCIISTRINGDATA_HPP

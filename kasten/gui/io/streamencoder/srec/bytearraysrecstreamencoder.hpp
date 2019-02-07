@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTEARRAYSRECSTREAMENCODER_HPP
-#define BYTEARRAYSRECSTREAMENCODER_HPP
+#ifndef KASTEN_BYTEARRAYSRECSTREAMENCODER_HPP
+#define KASTEN_BYTEARRAYSRECSTREAMENCODER_HPP
 
 // lib
 #include "abstractbytearraystreamencoder.hpp"

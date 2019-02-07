@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef GOTOOFFSETTOOLVIEW_HPP
-#define GOTOOFFSETTOOLVIEW_HPP
+#ifndef KASTEN_GOTOOFFSETTOOLVIEW_HPP
+#define KASTEN_GOTOOFFSETTOOLVIEW_HPP
 
 // Kasten gui
 #include <Kasten/AbstractToolInlineView>

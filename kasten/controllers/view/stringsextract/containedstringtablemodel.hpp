@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CONTAINEDSTRINGTABLEMODEL_HPP
-#define CONTAINEDSTRINGTABLEMODEL_HPP
+#ifndef KASTEN_CONTAINEDSTRINGTABLEMODEL_HPP
+#define KASTEN_CONTAINEDSTRINGTABLEMODEL_HPP
 
 // tool
 #include "containedstring.hpp"

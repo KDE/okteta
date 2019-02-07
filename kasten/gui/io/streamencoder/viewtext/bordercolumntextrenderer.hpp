@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BORDERCOLUMNTEXTRENDERER_HPP
-#define BORDERCOLUMNTEXTRENDERER_HPP
+#ifndef KASTEN_BORDERCOLUMNTEXTRENDERER_HPP
+#define KASTEN_BORDERCOLUMNTEXTRENDERER_HPP
 
 // lib
 #include "abstractcolumntextrenderer.hpp"

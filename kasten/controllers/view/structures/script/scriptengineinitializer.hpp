@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SCRIPTENGINEINITIALIZER_H_
-#define SCRIPTENGINEINITIALIZER_H_
+#ifndef KASTEN_SCRIPTENGINEINITIALIZER_HPP
+#define KASTEN_SCRIPTENGINEINITIALIZER_HPP
 
 class QScriptEngine;
 class QScriptContext;
@@ -159,4 +159,4 @@ QScriptValue addCustomPropertiesFunc(QScriptContext* ctx, QScriptEngine* eng);
 
 }
 
-#endif /* SCRIPTENGINEINITIALIZER_H_ */
+#endif /* KASTEN_SCRIPTENGINEINITIALIZER_HPP */

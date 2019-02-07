@@ -19,8 +19,8 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef PRIMITIVEDATATYPE_H_
-#define PRIMITIVEDATATYPE_H_
+#ifndef KASTEN_PRIMITIVEDATATYPE_HPP
+#define KASTEN_PRIMITIVEDATATYPE_HPP
 
 class QDebug;
 class QString;
@@ -65,4 +65,4 @@ QString longTypeName(PrimitiveDataType type);
 
 QDebug operator<<(QDebug dbg, PrimitiveDataType type);
 
-#endif /* PRIMITIVEDATATYPE_H_ */
+#endif /* KASTEN_PRIMITIVEDATATYPE_HPP */

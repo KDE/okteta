@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef REPLACECONTROLLER_HPP
-#define REPLACECONTROLLER_HPP
+#ifndef KASTEN_REPLACECONTROLLER_HPP
+#define KASTEN_REPLACECONTROLLER_HPP
 
 // lib
 #include <kasten/okteta/oktetakastencontrollers_export.hpp>

@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef STRINGDATA_HPP
-#define STRINGDATA_HPP
+#ifndef KASTEN_STRINGDATA_HPP
+#define KASTEN_STRINGDATA_HPP
 
 #include <Okteta/Address>
 #include "../datainformationbase.hpp"
@@ -146,4 +146,4 @@ inline bool StringData::wasEof() const
     return mEofReached;
 }
 
-#endif // STRINGDATA_HPP
+#endif // KASTEN_STRINGDATA_HPP

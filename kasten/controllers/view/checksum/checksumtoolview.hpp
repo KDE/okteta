@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CHECKSUMTOOLVIEW_HPP
-#define CHECKSUMTOOLVIEW_HPP
+#ifndef KASTEN_CHECKSUMTOOLVIEW_HPP
+#define KASTEN_CHECKSUMTOOLVIEW_HPP
 
 // Kasten gui
 #include <Kasten/AbstractToolView>

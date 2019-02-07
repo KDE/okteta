@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef ARRAYSCRIPTCLASS_HPP
-#define ARRAYSCRIPTCLASS_HPP
+#ifndef KASTEN_ARRAYSCRIPTCLASS_HPP
+#define KASTEN_ARRAYSCRIPTCLASS_HPP
 
 #include "defaultscriptclass.hpp"
 
@@ -49,4 +49,4 @@ protected:
     QScriptValue mArrayPrototype;
 };
 
-#endif // ARRAYSCRIPTCLASS_HPP
+#endif // KASTEN_ARRAYSCRIPTCLASS_HPP

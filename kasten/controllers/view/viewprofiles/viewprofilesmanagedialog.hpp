@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef VIEWPROFILESMANAGEDIALOG_HPP
-#define VIEWPROFILESMANAGEDIALOG_HPP
+#ifndef KASTEN_VIEWPROFILESMANAGEDIALOG_HPP
+#define KASTEN_VIEWPROFILESMANAGEDIALOG_HPP
 
 // Okteta Kasten gui
 #include <Kasten/Okteta/ByteArrayViewProfile>

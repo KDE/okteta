@@ -19,8 +19,8 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef TAGGEDUNIONDATAINFORMATION_H_
-#define TAGGEDUNIONDATAINFORMATION_H_
+#ifndef KASTEN_TAGGEDUNIONDATAINFORMATION_HPP
+#define KASTEN_TAGGEDUNIONDATAINFORMATION_HPP
 
 #include "datainformationwithchildren.hpp"
 #include "../allprimitivetypes.hpp"
@@ -94,4 +94,4 @@ inline const QVector<DataInformation*>& TaggedUnionDataInformation::currentChild
     return mLastIndex >= 0 ? mAlternatives.at(mLastIndex).fields : mDefaultFields;
 }
 
-#endif /* TAGGEDUNIONDATAINFORMATION_H_ */
+#endif /* KASTEN_TAGGEDUNIONDATAINFORMATION_HPP */

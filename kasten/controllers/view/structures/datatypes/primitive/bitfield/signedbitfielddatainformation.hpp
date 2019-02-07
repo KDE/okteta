@@ -19,8 +19,8 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef SIGNEDBITFIELDDATAINFORMATION_H_
-#define SIGNEDBITFIELDDATAINFORMATION_H_
+#ifndef KASTEN_SIGNEDBITFIELDDATAINFORMATION_HPP
+#define KASTEN_SIGNEDBITFIELDDATAINFORMATION_HPP
 
 #include "abstractbitfielddatainformation.hpp"
 
@@ -48,4 +48,4 @@ private:
     QString typeNameImpl() const override;
 };
 
-#endif /* SIGNEDBITFIELDDATAINFORMATION_H_ */
+#endif /* KASTEN_SIGNEDBITFIELDDATAINFORMATION_HPP */

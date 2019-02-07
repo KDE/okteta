@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SEARCHTOOL_HPP
-#define SEARCHTOOL_HPP
+#ifndef KASTEN_SEARCHTOOL_HPP
+#define KASTEN_SEARCHTOOL_HPP
 
 // libfinddialog
 #include <kfinddirection.hpp>

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTEARRAYFRAMERENDERER_HPP
-#define BYTEARRAYFRAMERENDERER_HPP
+#ifndef KASTEN_BYTEARRAYFRAMERENDERER_HPP
+#define KASTEN_BYTEARRAYFRAMERENDERER_HPP
 
 // lib
 #include "abstractcolumnframerenderer.hpp"

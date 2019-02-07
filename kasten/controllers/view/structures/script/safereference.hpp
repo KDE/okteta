@@ -19,8 +19,8 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef SAFEREFERENCE_HPP
-#define SAFEREFERENCE_HPP
+#ifndef KASTEN_SAFEREFERENCE_HPP
+#define KASTEN_SAFEREFERENCE_HPP
 
 #include "../structlogging.hpp"
 
@@ -127,4 +127,4 @@ inline void SafeReferenceHolder::registerSafeReference(SafeReference* ref, DataI
     }
 }
 
-#endif // SAFEREFERENCE_HPP
+#endif // KASTEN_SAFEREFERENCE_HPP

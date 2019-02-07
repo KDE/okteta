@@ -19,8 +19,8 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef DATAINFORMATIONWITHCHILDREN_H_
-#define DATAINFORMATIONWITHCHILDREN_H_
+#ifndef KASTEN_DATAINFORMATIONWITHCHILDREN_HPP
+#define KASTEN_DATAINFORMATIONWITHCHILDREN_HPP
 
 #include "datainformation.hpp"
 
@@ -78,4 +78,4 @@ protected:
     QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const override;
 };
 
-#endif /* DATAINFORMATIONWITHCHILDREN_H_ */
+#endif /* KASTEN_DATAINFORMATIONWITHCHILDREN_HPP */

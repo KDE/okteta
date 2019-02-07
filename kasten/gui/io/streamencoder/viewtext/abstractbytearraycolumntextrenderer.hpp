@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTBYTEARRAYCOLUMNTEXTRENDERER_HPP
-#define ABSTRACTBYTEARRAYCOLUMNTEXTRENDERER_HPP
+#ifndef KASTEN_ABSTRACTBYTEARRAYCOLUMNTEXTRENDERER_HPP
+#define KASTEN_ABSTRACTBYTEARRAYCOLUMNTEXTRENDERER_HPP
 
 // lib
 #include "abstractcolumntextrenderer.hpp"
