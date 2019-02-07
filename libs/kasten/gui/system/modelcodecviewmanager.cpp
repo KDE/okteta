@@ -60,7 +60,7 @@ void ModelCodecViewManager::setEncoderConfigEditorFactories(const QVector<Abstra
     }
 }
 
-void ModelCodecViewManager::setExporterConfigEditorFactories(const QList<AbstractModelExporterConfigEditorFactory*>& factoryList)
+void ModelCodecViewManager::setExporterConfigEditorFactories(const QVector<AbstractModelExporterConfigEditorFactory*>& factoryList)
 {
     qDeleteAll(mExporterFactoryList);
     mExporterFactoryList = factoryList;

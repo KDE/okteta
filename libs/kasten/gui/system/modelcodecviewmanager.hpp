@@ -60,12 +60,12 @@ public:
 
 public:
     void setEncoderConfigEditorFactories(const QVector<AbstractModelStreamEncoderConfigEditorFactory*>& factoryList);
-    void setExporterConfigEditorFactories(const QList<AbstractModelExporterConfigEditorFactory*>& factoryList);
+    void setExporterConfigEditorFactories(const QVector<AbstractModelExporterConfigEditorFactory*>& factoryList);
     void setGeneratorConfigEditorFactories(const QList<AbstractModelDataGeneratorConfigEditorFactory*>& factoryList);
 
 private:
     QVector<AbstractModelStreamEncoderConfigEditorFactory*> mEncoderFactoryList;
-    QList<AbstractModelExporterConfigEditorFactory*> mExporterFactoryList;
+    QVector<AbstractModelExporterConfigEditorFactory*> mExporterFactoryList;
     QList<AbstractModelDataGeneratorConfigEditorFactory*> mGeneratorFactoryList;
 };
 
