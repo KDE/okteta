@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef HEADERFOOTERFRAMERENDERER_HPP
-#define HEADERFOOTERFRAMERENDERER_HPP
+#ifndef FRAMESPRINT_HEADERFOOTERFRAMERENDERER_HPP
+#define FRAMESPRINT_HEADERFOOTERFRAMERENDERER_HPP
 
 // lib
 #include "abstractframerenderer.hpp"

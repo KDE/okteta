@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTFRAMERENDERER_HPP
-#define ABSTRACTFRAMERENDERER_HPP
+#ifndef FRAMESPRINT_ABSTRACTFRAMERENDERER_HPP
+#define FRAMESPRINT_ABSTRACTFRAMERENDERER_HPP
 
 #include <QScopedPointer>
 

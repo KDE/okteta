@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FRAMESTOPAPERPRINTER_HPP
-#define FRAMESTOPAPERPRINTER_HPP
+#ifndef FRAMESPRINT_FRAMESTOPAPERPRINTER_HPP
+#define FRAMESPRINT_FRAMESTOPAPERPRINTER_HPP
 
 // Qt
 #include <QObject>
