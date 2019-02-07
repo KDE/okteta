@@ -83,7 +83,7 @@ protected:
     SingleViewArea* const mViewArea;
     QVector<AbstractXmlGuiController*> mControllers;
     QVector<ToolViewDockWidget*> mDockWidgets;
-    QList<AbstractTool*> mTools;
+    QVector<AbstractTool*> mTools;
 };
 
 inline QVector<ToolViewDockWidget*> SingleViewWindowPrivate::dockWidgets() const { return mDockWidgets; }

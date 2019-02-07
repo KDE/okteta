@@ -29,7 +29,6 @@
 #include <kastencore.hpp>
 // Qt
 #include <QVector>
-#include <QList>
 
 namespace Kasten {
 class AbstractModelSynchronizer;
@@ -81,7 +80,7 @@ protected:
     QVector<AbstractXmlGuiController*> mControllers;
 
     QVector<ToolViewDockWidget*> mDockWidgets;
-    QList<AbstractTool*> mTools;
+    QVector<AbstractTool*> mTools;
 };
 
 inline MultiViewAreas* ShellWindowPrivate::viewArea() const { return mGroupedViews; }
