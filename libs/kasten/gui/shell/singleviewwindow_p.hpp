@@ -81,7 +81,7 @@ protected:
     AbstractModelSynchronizer* mSynchronizer = nullptr;
 
     SingleViewArea* const mViewArea;
-    QList<AbstractXmlGuiController*> mControllers;
+    QVector<AbstractXmlGuiController*> mControllers;
     QVector<ToolViewDockWidget*> mDockWidgets;
     QList<AbstractTool*> mTools;
 };

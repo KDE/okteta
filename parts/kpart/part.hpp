@@ -27,6 +27,8 @@
 #include <Kasten/KastenCore>
 // KF5
 #include <KParts/ReadWritePart>
+// Qt
+#include <QVector>
 
 namespace Kasten {
 class ByteArrayViewProfileManager;
@@ -37,7 +39,6 @@ class AbstractXmlGuiController;
 class AbstractDocument;
 }
 class QVBoxLayout;
-template <class T> class QList;
 
 class OktetaPart : public KParts::ReadWritePart
 {
@@ -94,7 +95,7 @@ private:
     Kasten::ByteArrayView* mByteArrayView;
 
     Kasten::PrintController* mPrintController;
-    QList<Kasten::AbstractXmlGuiController*> mControllers;
+    QVector<Kasten::AbstractXmlGuiController*> mControllers;
 
     Kasten::ByteArrayViewProfileManager* mViewProfileManager;
 };

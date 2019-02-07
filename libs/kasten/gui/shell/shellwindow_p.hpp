@@ -78,7 +78,7 @@ protected:
     AbstractModelSynchronizer* mCurrentSynchronizer = nullptr;
 
     ViewManager* mViewManager;
-    QList<AbstractXmlGuiController*> mControllers;
+    QVector<AbstractXmlGuiController*> mControllers;
 
     QVector<ToolViewDockWidget*> mDockWidgets;
     QList<AbstractTool*> mTools;
