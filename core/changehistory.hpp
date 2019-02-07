@@ -56,6 +56,6 @@ inline ChangeHistory::~ChangeHistory() = default;
 
 }
 
-Q_DECLARE_INTERFACE(Okteta::ChangeHistory, "org.kde.khecore.changehistory/1.0")
+Q_DECLARE_INTERFACE(Okteta::ChangeHistory, "org.kde.okteta.changehistory/1.0")
 
 #endif

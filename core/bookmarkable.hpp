@@ -65,6 +65,6 @@ inline Bookmarkable::~Bookmarkable() = default;
 
 }
 
-Q_DECLARE_INTERFACE(Okteta::Bookmarkable, "org.kde.khecore.bookmarkable/1.0")
+Q_DECLARE_INTERFACE(Okteta::Bookmarkable, "org.kde.okteta.bookmarkable/1.0")
 
 #endif

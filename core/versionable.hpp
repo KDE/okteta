@@ -53,6 +53,6 @@ inline Versionable::~Versionable() = default;
 
 }
 
-Q_DECLARE_INTERFACE(Okteta::Versionable, "org.kde.khecore.versionable/1.0")
+Q_DECLARE_INTERFACE(Okteta::Versionable, "org.kde.okteta.versionable/1.0")
 
 #endif

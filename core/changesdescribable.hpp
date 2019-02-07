@@ -48,6 +48,6 @@ inline ChangesDescribable::~ChangesDescribable() = default;
 
 }
 
-Q_DECLARE_INTERFACE(Okteta::ChangesDescribable, "org.kde.khecore.changesdescribable/1.0")
+Q_DECLARE_INTERFACE(Okteta::ChangesDescribable, "org.kde.okteta.changesdescribable/1.0")
 
 #endif
