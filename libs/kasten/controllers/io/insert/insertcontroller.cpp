@@ -94,7 +94,7 @@ void InsertController::updateActions()
     // TODO: pass model to find which mimetypes it can read
     // mSelectedDataWriteableControl->canReadData( QMimeData() ) needs already data
     // TODO: it this depend on the current selection/focus? So it needs to be updated on every change?
-    const QList<AbstractModelDataGenerator*> generatorList =
+    const QVector<AbstractModelDataGenerator*> generatorList =
         mModelCodecManager->generatorList();
     const bool hasGenerators = (generatorList.size() > 0);
 

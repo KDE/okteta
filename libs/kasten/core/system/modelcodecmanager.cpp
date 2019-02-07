@@ -64,7 +64,7 @@ ModelCodecManager::encoderList(AbstractModel* model, const AbstractModelSelectio
 QVector<AbstractModelStreamDecoder*>
 ModelCodecManager::decoderList() const { return mDecoderList; }
 
-QList<AbstractModelDataGenerator*>
+QVector<AbstractModelDataGenerator*>
 ModelCodecManager::generatorList() const { return mGeneratorList; }
 
 QList<AbstractModelExporter*>
@@ -97,7 +97,7 @@ void ModelCodecManager::setDecoders(const QVector<AbstractModelStreamDecoder*>& 
     mDecoderList = decoderList;
 }
 
-void ModelCodecManager::setGenerators(const QList<AbstractModelDataGenerator*>& generatorList)
+void ModelCodecManager::setGenerators(const QVector<AbstractModelDataGenerator*>& generatorList)
 {
     mGeneratorList = generatorList;
 }

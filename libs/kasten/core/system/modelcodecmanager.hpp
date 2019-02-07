@@ -62,14 +62,14 @@ public:
 public:
     QList<AbstractModelStreamEncoder*> encoderList(AbstractModel* model, const AbstractModelSelection* selection) const;
     QVector<AbstractModelStreamDecoder*> decoderList() const;
-    QList<AbstractModelDataGenerator*> generatorList() const;
+    QVector<AbstractModelDataGenerator*> generatorList() const;
 
     QList<AbstractModelExporter*> exporterList(AbstractModel* model, const AbstractModelSelection* selection) const;
 
 public:
     void setEncoders(const QList<AbstractModelStreamEncoder*>& encoderList);
     void setDecoders(const QVector<AbstractModelStreamDecoder*>& decoderList);
-    void setGenerators(const QList<AbstractModelDataGenerator*>& generatorList);
+    void setGenerators(const QVector<AbstractModelDataGenerator*>& generatorList);
     void setOverwriteDialog(AbstractOverwriteDialog* overwriteDialog);
 
 private:
@@ -81,7 +81,7 @@ private:
     // temporary hack: hard coded codecs for byte arrays
     QList<AbstractModelStreamEncoder*> mEncoderList;
     QVector<AbstractModelStreamDecoder*> mDecoderList;
-    QList<AbstractModelDataGenerator*> mGeneratorList;
+    QVector<AbstractModelDataGenerator*> mGeneratorList;
     QList<AbstractModelExporter*> mExporterList;
 };
 

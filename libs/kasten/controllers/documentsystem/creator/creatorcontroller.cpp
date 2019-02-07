@@ -86,7 +86,7 @@ CreatorController::CreatorController(ModelCodecManager* modelCodecManager,
     newMenuAction->addAction(newFromClipboardDocumentAction);
 
     // generators
-    const QList<AbstractModelDataGenerator*> generatorList =
+    const QVector<AbstractModelDataGenerator*> generatorList =
         mModelCodecManager->generatorList();
 
     const bool hasGenerators = (generatorList.size() > 0);
