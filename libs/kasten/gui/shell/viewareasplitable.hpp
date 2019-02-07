@@ -53,12 +53,12 @@ public: // set/action
 
 public: // get
     virtual AbstractViewArea* viewAreaFocus() const = 0;
-//     virtual QList<Kasten::AbstractViewArea*> viewAreas() const = 0;
+//     virtual QVector<Kasten::AbstractViewArea*> viewAreas() const = 0;
     virtual int viewAreasCount() const = 0;
 
 public: // signal
-    virtual void viewAreasAdded(const QList<Kasten::AbstractViewArea*>& viewAreas) = 0;
-    virtual void viewAreasRemoved(const QList<Kasten::AbstractViewArea*>& viewAreas) = 0;
+    virtual void viewAreasAdded(const QVector<Kasten::AbstractViewArea*>& viewAreas) = 0;
+    virtual void viewAreasRemoved(const QVector<Kasten::AbstractViewArea*>& viewAreas) = 0;
     virtual void viewAreaFocusChanged(Kasten::AbstractViewArea* viewArea) = 0;
 };
 

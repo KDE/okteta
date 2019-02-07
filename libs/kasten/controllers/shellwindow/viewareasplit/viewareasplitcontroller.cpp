@@ -44,9 +44,9 @@ ViewAreaSplitController::ViewAreaSplitController(ViewManager* viewManager, Abstr
     if (mViewAreaSplitable) {
         connect(mGroupedViews, SIGNAL(viewAreaFocusChanged(Kasten::AbstractViewArea*)),
                 SLOT(onViewAreaFocusChanged(Kasten::AbstractViewArea*)));
-        connect(mGroupedViews, SIGNAL(viewAreasAdded(QList<Kasten::AbstractViewArea*>)),
+        connect(mGroupedViews, SIGNAL(viewAreasAdded(QVector<Kasten::AbstractViewArea*>)),
                 SLOT(onViewAreasChanged()));
-        connect(mGroupedViews, SIGNAL(viewAreasRemoved(QList<Kasten::AbstractViewArea*>)),
+        connect(mGroupedViews, SIGNAL(viewAreasRemoved(QVector<Kasten::AbstractViewArea*>)),
                 SLOT(onViewAreasChanged()));
     }
 

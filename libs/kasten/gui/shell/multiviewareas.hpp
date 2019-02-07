@@ -74,8 +74,8 @@ public: // If::ViewAreaSplitable API
     int viewAreasCount() const override;
 
 Q_SIGNALS: // If::ViewAreaSplitable API
-    void viewAreasAdded(const QList<Kasten::AbstractViewArea*>& viewAreas) override;
-    void viewAreasRemoved(const QList<Kasten::AbstractViewArea*>& viewAreas) override;
+    void viewAreasAdded(const QVector<Kasten::AbstractViewArea*>& viewAreas) override;
+    void viewAreasRemoved(const QVector<Kasten::AbstractViewArea*>& viewAreas) override;
     void viewAreaFocusChanged(Kasten::AbstractViewArea* viewArea) override;
 
 Q_SIGNALS:
