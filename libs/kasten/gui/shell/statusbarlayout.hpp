@@ -25,7 +25,7 @@
 
 // Qt
 #include <QLayout>
-#include <QList>
+#include <QVector>
 
 class QWidgetItem;
 
@@ -64,7 +64,7 @@ protected:
     void updateLayoutStructs() const;
 
 protected:
-    QList<QWidgetItem*> mWidgetList;
+    QVector<QWidgetItem*> mWidgetList;
 
     bool mIsDirty : 1;
     bool mIsEmpty : 1;
