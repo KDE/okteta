@@ -82,7 +82,7 @@ protected:
     Q_DECLARE_PUBLIC(MultiViewAreas)
 
 protected:
-    QList<TabbedViews*> mViewAreaList;
+    QVector<TabbedViews*> mViewAreaList;
     QSplitter* mMainSplitter;
 
     TabbedViews* mCurrentViewArea = nullptr;
