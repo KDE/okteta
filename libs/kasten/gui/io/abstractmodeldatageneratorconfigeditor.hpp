@@ -29,7 +29,6 @@
 #include <QWidget>
 
 namespace Kasten {
-class AbstractModelDataGeneratorConfigEditorPrivate;
 
 class KASTENGUI_EXPORT AbstractModelDataGeneratorConfigEditor : public QWidget
 {
@@ -50,8 +49,8 @@ public: // API to be implemented
 Q_SIGNALS:
     void validityChanged(bool isValid);
 
-protected:
-    AbstractModelDataGeneratorConfigEditorPrivate* const d;
+private:
+    const QScopedPointer<class AbstractModelDataGeneratorConfigEditorPrivate> d;
 };
 
 }

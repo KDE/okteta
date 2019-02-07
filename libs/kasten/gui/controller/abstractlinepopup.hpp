@@ -32,8 +32,6 @@ class QIcon;
 
 namespace Kasten {
 
-class AbstractLinePopupPrivate;
-
 // TODO: find better name then popup for this kind of view
 // TODO: add cancel/ok button concept of KDialog, add to the right end
 // TODO: add option to resize, perhaps also move
@@ -65,7 +63,7 @@ protected:
     void setResult(int result);
 
 private:
-    AbstractLinePopupPrivate* const d;
+    const QScopedPointer<class AbstractLinePopupPrivate> d;
 };
 
 }

@@ -31,10 +31,7 @@ AbstractToolWidget::AbstractToolWidget(QWidget* parent)
 {
 }
 
-AbstractToolWidget::~AbstractToolWidget()
-{
-    delete d;
-}
+AbstractToolWidget::~AbstractToolWidget() = default;
 
 void AbstractToolWidget::addButton(QPushButton* button, DefaultType defaultType)
 {

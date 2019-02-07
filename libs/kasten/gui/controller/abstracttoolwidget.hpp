@@ -32,8 +32,6 @@ class QPushButton;
 
 namespace Kasten {
 
-class AbstractToolWidgetPrivate;
-
 // TODO: this could also be implemented by some magic where the childWidgets are scanned for toolbuttons
 
 class KASTENGUI_EXPORT AbstractToolWidget : public QWidget
@@ -57,7 +55,7 @@ public:
     void addButton(QPushButton* button, DefaultType defaultType = AutoDefault);
 
 private:
-    AbstractToolWidgetPrivate* const d;
+    const QScopedPointer<class AbstractToolWidgetPrivate> d;
 };
 
 }

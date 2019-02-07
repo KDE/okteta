@@ -42,10 +42,7 @@ ToggleButton::ToggleButton(const QString& text, const QString& toolTip, QWidget*
     setToolTip(toolTip);
 }
 
-ToggleButton::~ToggleButton()
-{
-    delete d;
-}
+ToggleButton::~ToggleButton() = default;
 
 void ToggleButton::setCheckedState(const QIcon& icon, const QString& text, const QString& toolTip)
 {

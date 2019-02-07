@@ -24,15 +24,16 @@
 
 namespace Kasten {
 
+class AbstractModelDataGeneratorConfigEditorPrivate
+{
+};
+
+
 AbstractModelDataGeneratorConfigEditor::AbstractModelDataGeneratorConfigEditor(QWidget* parent)
     : QWidget(parent)
-    , d(nullptr)
 {}
 
-AbstractModelDataGeneratorConfigEditor::~AbstractModelDataGeneratorConfigEditor()
-{
-//     delete d;
-}
+AbstractModelDataGeneratorConfigEditor::~AbstractModelDataGeneratorConfigEditor() = default;
 
 bool AbstractModelDataGeneratorConfigEditor::isValid() const
 {

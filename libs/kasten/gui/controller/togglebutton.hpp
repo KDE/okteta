@@ -30,8 +30,6 @@
 
 namespace Kasten {
 
-class ToggleButtonPrivate;
-
 class KASTENGUI_EXPORT ToggleButton : public QToolButton
 {
     Q_OBJECT
@@ -46,7 +44,7 @@ public:
     void setCheckedState(const QString& text, const QString& toolTip);
 
 private:
-    ToggleButtonPrivate* const d;
+    const QScopedPointer<class ToggleButtonPrivate> d;
 };
 
 }
