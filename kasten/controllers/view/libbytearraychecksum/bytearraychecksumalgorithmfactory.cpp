@@ -50,9 +50,11 @@
 // NEWCHECKSUM(end)
 // KF5
 #include <KLocalizedString>
+// Qt
+#include <QVector>
 
 #ifdef HAVE_QCA2
-static inline void addQca2Algorithm(QList<AbstractByteArrayChecksumAlgorithm*>& algorithmList, const QString& name, const char* type)
+static inline void addQca2Algorithm(QVector<AbstractByteArrayChecksumAlgorithm*>& algorithmList, const QString& name, const char* type)
 {
     if (QCA::isSupported(type)) {
         algorithmList << new Qca2ByteArrayChecksumAlgorithm(name, QString::fromLatin1(type));
@@ -60,9 +62,9 @@ static inline void addQca2Algorithm(QList<AbstractByteArrayChecksumAlgorithm*>& 
 }
 #endif
 
-QList<AbstractByteArrayChecksumAlgorithm*> ByteArrayChecksumAlgorithmFactory::createAlgorithms()
+QVector<AbstractByteArrayChecksumAlgorithm*> ByteArrayChecksumAlgorithmFactory::createAlgorithms()
 {
-    QList<AbstractByteArrayChecksumAlgorithm*> result {
+    QVector<AbstractByteArrayChecksumAlgorithm*> result {
         new ModSum8ByteArrayChecksumAlgorithm(),
         new ModSum16ByteArrayChecksumAlgorithm(),
         new ModSum32ByteArrayChecksumAlgorithm(),

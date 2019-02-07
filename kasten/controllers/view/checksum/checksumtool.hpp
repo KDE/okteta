@@ -29,6 +29,8 @@
 #include <Kasten/AbstractTool>
 // Okteta core
 #include <Okteta/AddressRange>
+// Qt
+#include <QVector>
 
 class AbstractByteArrayChecksumParameterSet;
 class AbstractByteArrayChecksumAlgorithm;
@@ -64,7 +66,7 @@ public: // status
     bool isApplyable() const; // candidate for AbstractTool API
     bool isUptodate() const;
 
-    QList<AbstractByteArrayChecksumAlgorithm*> algorithmList() const;
+    QVector<AbstractByteArrayChecksumAlgorithm*> algorithmList() const;
 
 public:
     AbstractByteArrayChecksumParameterSet* parameterSet();
@@ -95,7 +97,7 @@ private: // created data
     bool mSourceByteArrayModelUptodate : 1;
 
 private: // settings
-    QList<AbstractByteArrayChecksumAlgorithm*> mAlgorithmList;
+    QVector<AbstractByteArrayChecksumAlgorithm*> mAlgorithmList;
 #ifdef HAVE_QCA2
     QCA::Initializer* mQcaInitializer;
 #endif

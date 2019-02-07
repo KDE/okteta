@@ -127,7 +127,7 @@ ChecksumView::~ChecksumView() = default;
 void ChecksumView::addAlgorithms()
 {
     //
-    const QList<AbstractByteArrayChecksumAlgorithm*> algorithmList = mTool->algorithmList();
+    const QVector<AbstractByteArrayChecksumAlgorithm*> algorithmList = mTool->algorithmList();
     for (AbstractByteArrayChecksumAlgorithm* algorithm : algorithmList) {
         mAlgorithmComboBox->addItem(algorithm->name());
 

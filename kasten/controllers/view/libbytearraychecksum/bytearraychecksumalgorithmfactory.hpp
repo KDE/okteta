@@ -24,7 +24,7 @@
 #define BYTEARRAYCHECKSUMALGORITHMFACTORY_HPP
 
 class AbstractByteArrayChecksumAlgorithm;
-template <class T> class QList;
+template <class T> class QVector;
 
 class ByteArrayChecksumAlgorithmFactory
 {
@@ -32,7 +32,7 @@ protected:
     ByteArrayChecksumAlgorithmFactory();
 
 public:
-    static QList<AbstractByteArrayChecksumAlgorithm*> createAlgorithms();
+    static QVector<AbstractByteArrayChecksumAlgorithm*> createAlgorithms();
 
 };
 

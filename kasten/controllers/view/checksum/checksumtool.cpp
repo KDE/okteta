@@ -77,7 +77,7 @@ ChecksumTool::~ChecksumTool()
 #endif
 }
 
-QList<AbstractByteArrayChecksumAlgorithm*> ChecksumTool::algorithmList() const { return mAlgorithmList; }
+QVector<AbstractByteArrayChecksumAlgorithm*> ChecksumTool::algorithmList() const { return mAlgorithmList; }
 
 bool ChecksumTool::isApplyable() const
 {
