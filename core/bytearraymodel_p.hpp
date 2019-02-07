@@ -24,16 +24,16 @@
 #define OKTETA_BYTEARRAYMODEL_P_HPP
 
 // lib
+#include "abstractbytearraymodel_p.hpp"
 #include "bytearraymodel.hpp"
 #include "bookmarksconstiterator.hpp"
 #include "bookmarklistconstiteratoradapter.hpp"
 #include "bookmarklist.hpp"
-//
-#include <arraychangemetricslist.hpp>
+#include "arraychangemetricslist.hpp"
 
 namespace Okteta {
 
-class ByteArrayModelPrivate
+class ByteArrayModelPrivate : public AbstractByteArrayModelPrivate
 {
 public:
     ByteArrayModelPrivate(ByteArrayModel* parent, Byte* data, int size, int rawSize, bool keepsMemory);
@@ -41,7 +41,7 @@ public:
     ByteArrayModelPrivate(ByteArrayModel* parent, int size, int maxSize);
     ByteArrayModelPrivate() = delete;
 
-    ~ByteArrayModelPrivate();
+    ~ByteArrayModelPrivate() override;
 
 public: // AbstractByteArrayModel API
     Byte byte(Address offset) const;
@@ -98,7 +98,6 @@ protected:
     int addSize(int AddSize, int splitOffset = -1, bool saveUpperPart = true);
 
 protected:
-    ByteArrayModel* p;
     /** */
     Byte* mData;
     /** size of the data */
@@ -117,6 +116,9 @@ protected:
     bool mModified : 1;
     /** */
     BookmarkList m_bookmarks;
+
+private:
+    Q_DECLARE_PUBLIC(ByteArrayModel)
 };
 
 // use delete [], since usually mData should be allocated by calling new Byte[n]
@@ -135,9 +137,11 @@ inline bool ByteArrayModelPrivate::isModified()   const { return mModified; }
 
 inline void ByteArrayModelPrivate::setReadOnly(bool isReadOnly)
 {
+    Q_Q(ByteArrayModel);
+
     if (mReadOnly != isReadOnly) {
         mReadOnly = isReadOnly;
-        emit p->readOnlyChanged(isReadOnly);
+        emit q->readOnlyChanged(isReadOnly);
     }
 }
 inline void ByteArrayModelPrivate::setMaxSize(int maxSize)          { mMaxSize = maxSize; }
@@ -145,18 +149,22 @@ inline void ByteArrayModelPrivate::setKeepsMemory(bool keepsMemory) { mKeepsMemo
 inline void ByteArrayModelPrivate::setAutoDelete(bool autoDelete)   { mAutoDelete = autoDelete; }
 inline void ByteArrayModelPrivate::setByte(Address offset, Byte byte)
 {
+    Q_Q(ByteArrayModel);
+
     const bool wasModifiedBefore = mModified;
     mData[offset] = byte;
     mModified = true;
-    emit p->contentsChanged(ArrayChangeMetricsList::oneReplacement(offset, 1, 1));
+    emit q->contentsChanged(ArrayChangeMetricsList::oneReplacement(offset, 1, 1));
     if (!wasModifiedBefore) {
-        emit p->modifiedChanged(true);
+        emit q->modifiedChanged(true);
     }
 }
 inline void ByteArrayModelPrivate::setModified(bool modified)
 {
+    Q_Q(ByteArrayModel);
+
     mModified = modified;
-    emit p->modifiedChanged(mModified);
+    emit q->modifiedChanged(mModified);
 }
 
 inline Byte* ByteArrayModelPrivate::data()       const { return mData; }
@@ -166,29 +174,37 @@ inline bool ByteArrayModelPrivate::autoDelete()  const { return mAutoDelete; }
 
 inline void ByteArrayModelPrivate::addBookmarks(const QVector<Bookmark>& bookmarks)
 {
+    Q_Q(ByteArrayModel);
+
     m_bookmarks.addBookmarks(bookmarks);
-    emit p->bookmarksAdded(bookmarks);
+    emit q->bookmarksAdded(bookmarks);
 }
 inline void ByteArrayModelPrivate::removeBookmarks(const QVector<Bookmark>& bookmarks)
 {
+    Q_Q(ByteArrayModel);
+
     m_bookmarks.removeBookmarks(bookmarks);
-    emit p->bookmarksRemoved(bookmarks);
+    emit q->bookmarksRemoved(bookmarks);
 }
 
 inline void ByteArrayModelPrivate::removeAllBookmarks()
 {
+    Q_Q(ByteArrayModel);
+
     const QVector<Bookmark> bookmarks = m_bookmarks.list();
     m_bookmarks.clear();
-    emit p->bookmarksRemoved(bookmarks);
+    emit q->bookmarksRemoved(bookmarks);
 }
 inline void ByteArrayModelPrivate::setBookmark(unsigned int index, const Bookmark& bookmark)
 {
+    Q_Q(ByteArrayModel);
+
     m_bookmarks.setBookmark(index, bookmark);
 
     const QVector<int> changedBookmarkIndizes {
         static_cast<int>(index)
     };
-    emit p->bookmarksModified(changedBookmarkIndizes);
+    emit q->bookmarksModified(changedBookmarkIndizes);
 }
 
 inline BookmarksConstIterator ByteArrayModelPrivate::createBookmarksConstIterator() const

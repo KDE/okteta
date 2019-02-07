@@ -35,7 +35,7 @@ namespace Okteta {
 
 ByteArrayModelPrivate::ByteArrayModelPrivate(ByteArrayModel* parent,
                                              Byte* data, int size, int rawSize, bool keepsMemory)
-    : p(parent)
+    : AbstractByteArrayModelPrivate(parent)
     , mData(data)
     , mSize(size)
     , mRawSize(rawSize < size ? size : rawSize)
@@ -48,7 +48,7 @@ ByteArrayModelPrivate::ByteArrayModelPrivate(ByteArrayModel* parent,
 
 ByteArrayModelPrivate::ByteArrayModelPrivate(ByteArrayModel* parent,
                                              const Byte* data, int size)
-    : p(parent)
+    : AbstractByteArrayModelPrivate(parent)
     , mData(const_cast<Byte*>(data))
     , mSize(size)
     , mRawSize(size)
@@ -61,7 +61,7 @@ ByteArrayModelPrivate::ByteArrayModelPrivate(ByteArrayModel* parent,
 
 ByteArrayModelPrivate::ByteArrayModelPrivate(ByteArrayModel* parent,
                                              int size, int maxSize)
-    : p(parent)
+    : AbstractByteArrayModelPrivate(parent)
     , mData((size > 0) ? new Byte[size] : nullptr)
     , mSize(size)
     , mRawSize(size)
@@ -75,6 +75,8 @@ ByteArrayModelPrivate::ByteArrayModelPrivate(ByteArrayModel* parent,
 
 void ByteArrayModelPrivate::setData(Byte* data, int size, int rawSize, bool keepMemory)
 {
+    Q_Q(ByteArrayModel);
+
     // use delete [], since usually mData should be allocated by calling new Byte[n]
     if (mAutoDelete) {
         delete [] mData;
@@ -90,12 +92,14 @@ void ByteArrayModelPrivate::setData(Byte* data, int size, int rawSize, bool keep
     mKeepsMemory = keepMemory;
 
     mModified = false;
-    emit p->contentsChanged(ArrayChangeMetricsList::oneReplacement(0, oldSize, size));
-    emit p->modifiedChanged(false);
+    emit q->contentsChanged(ArrayChangeMetricsList::oneReplacement(0, oldSize, size));
+    emit q->modifiedChanged(false);
 }
 
 Size ByteArrayModelPrivate::insert(Address offset, const Byte* insertData, int insertLength)
 {
+    Q_Q(ByteArrayModel);
+
     if (mReadOnly) {
         return 0;
     }
@@ -119,12 +123,12 @@ Size ByteArrayModelPrivate::insert(Address offset, const Byte* insertData, int i
     const bool bookmarksModified = m_bookmarks.adjustToReplaced(offset, 0, insertLength);
     mModified = true;
 
-    emit p->contentsChanged(ArrayChangeMetricsList::oneReplacement(offset, 0, insertLength));
+    emit q->contentsChanged(ArrayChangeMetricsList::oneReplacement(offset, 0, insertLength));
     if (bookmarksModified) {
-        emit p->bookmarksModified(true);
+        emit q->bookmarksModified(true);
     }
     if (!wasModifiedBefore) {
-        emit p->modifiedChanged(true);
+        emit q->modifiedChanged(true);
     }
 
     return insertLength;
@@ -132,6 +136,8 @@ Size ByteArrayModelPrivate::insert(Address offset, const Byte* insertData, int i
 
 Size ByteArrayModelPrivate::remove(const AddressRange& _removeRange)
 {
+    Q_Q(ByteArrayModel);
+
     if (mReadOnly) {
         return 0;
     }
@@ -155,12 +161,12 @@ Size ByteArrayModelPrivate::remove(const AddressRange& _removeRange)
     const bool bookmarksModified = m_bookmarks.adjustToReplaced(removeRange.start(), removeRange.width(), 0);
     mModified = true;
 
-    emit p->contentsChanged(ArrayChangeMetricsList::oneReplacement(removeRange.start(), removeRange.width(), 0));
+    emit q->contentsChanged(ArrayChangeMetricsList::oneReplacement(removeRange.start(), removeRange.width(), 0));
     if (bookmarksModified) {
-        emit p->bookmarksModified(true);
+        emit q->bookmarksModified(true);
     }
     if (!wasModifiedBefore) {
-        emit p->modifiedChanged(true);
+        emit q->modifiedChanged(true);
     }
 
     return removeRange.width();
@@ -168,6 +174,8 @@ Size ByteArrayModelPrivate::remove(const AddressRange& _removeRange)
 
 Size ByteArrayModelPrivate::replace(const AddressRange& _removeRange, const Byte* insertData, int insertLength)
 {
+    Q_Q(ByteArrayModel);
+
     if (mReadOnly) {
         return 0;
     }
@@ -233,19 +241,21 @@ Size ByteArrayModelPrivate::replace(const AddressRange& _removeRange, const Byte
     const bool bookmarksModified = m_bookmarks.adjustToReplaced(removeRange.start(), removeRange.width(), insertLength);
     mModified = true;
 
-    emit p->contentsChanged(
+    emit q->contentsChanged(
         ArrayChangeMetricsList::oneReplacement(removeRange.start(), removeRange.width(), insertLength));
     if (bookmarksModified) {
-        emit p->bookmarksModified(true);
+        emit q->bookmarksModified(true);
     }
     if (!wasModifiedBefore) {
-        emit p->modifiedChanged(true);
+        emit q->modifiedChanged(true);
     }
     return insertLength;
 }
 
 bool ByteArrayModelPrivate::swap(Address firstStart, const AddressRange& _secondRange)
 {
+    Q_Q(ByteArrayModel);
+
     if (mReadOnly) {
         return false;
     }
@@ -313,19 +323,21 @@ bool ByteArrayModelPrivate::swap(Address firstStart, const AddressRange& _second
                                    m_bookmarks.adjustToSwapped(firstStart, secondRange.start(), secondRange.width());
     mModified = true;
 
-    emit p->contentsChanged(
+    emit q->contentsChanged(
         ArrayChangeMetricsList::oneSwapping(firstStart, secondRange.start(), secondRange.width()));
     if (bookmarksModified) {
-        emit p->bookmarksModified(true);
+        emit q->bookmarksModified(true);
     }
     if (!wasModifiedBefore) {
-        emit p->modifiedChanged(true);
+        emit q->modifiedChanged(true);
     }
     return true;
 }
 
 Size ByteArrayModelPrivate::fill(Byte fillByte, Address offset, Size fillLength)
 {
+    Q_Q(ByteArrayModel);
+
     if (mReadOnly) {
         return 0;
     }
@@ -359,9 +371,9 @@ Size ByteArrayModelPrivate::fill(Byte fillByte, Address offset, Size fillLength)
     memset(&mData[offset], fillByte, fillLength);
     mModified = true;
 
-    emit p->contentsChanged(ArrayChangeMetricsList::oneReplacement(offset, replacedLength, fillLength));
+    emit q->contentsChanged(ArrayChangeMetricsList::oneReplacement(offset, replacedLength, fillLength));
     if (!wasModifiedBefore) {
-        emit p->modifiedChanged(true);
+        emit q->modifiedChanged(true);
     }
     return fillLength;
 }

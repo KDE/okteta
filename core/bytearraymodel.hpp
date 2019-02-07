@@ -106,8 +106,8 @@ public:
     bool keepsMemory() const;
     bool autoDelete() const;
 
-protected:
-    ByteArrayModelPrivate* const d;
+private:
+    Q_DECLARE_PRIVATE(ByteArrayModel)
 };
 
 }

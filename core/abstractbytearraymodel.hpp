@@ -36,6 +36,7 @@ namespace Okteta {
 
 class ArrayChangeMetricsList;
 class CharCodec;
+class AbstractByteArrayModelPrivate;
 
 /** could it be useful to hide the data access behind an iterator? *
 class KDataBufferIterator
@@ -81,6 +82,7 @@ class OKTETACORE_EXPORT AbstractByteArrayModel : public QObject
     Q_OBJECT
 
 protected:
+    explicit AbstractByteArrayModel(AbstractByteArrayModelPrivate* d, QObject* parent = nullptr);
     explicit AbstractByteArrayModel(QObject* parent = nullptr);
 
 public:
@@ -257,6 +259,12 @@ Q_SIGNALS:
 
     // TODO: how to handle a typedef with signals
     void searchedBytes(Okteta::Size bytes) const;
+
+protected:
+    const QScopedPointer<AbstractByteArrayModelPrivate> d_ptr;
+
+private:
+    Q_DECLARE_PRIVATE(AbstractByteArrayModel)
 };
 
 // TODO: find why static_cast fails

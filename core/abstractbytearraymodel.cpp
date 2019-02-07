@@ -20,7 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <okteta/abstractbytearraymodel.hpp>
+#include "abstractbytearraymodel.hpp"
+#include "abstractbytearraymodel_p.hpp"
 
 // lib
 #include "charcodec.hpp"
@@ -30,8 +31,14 @@ namespace Okteta {
 
 static const int SearchedByteCountSignalLimit = 10000;
 
+AbstractByteArrayModel::AbstractByteArrayModel(AbstractByteArrayModelPrivate* dd, QObject* parent)
+    : QObject(parent)
+    , d_ptr(dd)
+{}
+
 AbstractByteArrayModel::AbstractByteArrayModel(QObject* parent)
     : QObject(parent)
+    , d_ptr(new AbstractByteArrayModelPrivate(this))
 {}
 
 AbstractByteArrayModel::~AbstractByteArrayModel() = default;
