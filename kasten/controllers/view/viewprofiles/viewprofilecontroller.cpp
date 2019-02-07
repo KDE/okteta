@@ -141,7 +141,7 @@ void ViewProfileController::onViewProfilesChanged()
 {
     qDeleteAll(mViewProfilesActionGroup->actions());
 
-    const QList<ByteArrayViewProfile> viewProfiles = mViewProfileManager->viewProfiles();
+    const QVector<ByteArrayViewProfile> viewProfiles = mViewProfileManager->viewProfiles();
     const ByteArrayViewProfile::Id currentViewProfileId = mByteArrayViewProfileSynchronizer ?
                                                           mByteArrayViewProfileSynchronizer->viewProfileId() :
                                                           ByteArrayViewProfile::Id();
@@ -213,7 +213,7 @@ void ViewProfileController::onCreateNewActionTriggered()
     const int answer = dialog->exec();
 
     if (answer == QDialog::Accepted) {
-        QList<ByteArrayViewProfile> viewProfiles {
+        QVector<ByteArrayViewProfile> viewProfiles {
             dialog->viewProfile()
         };
         mViewProfileManager->saveViewProfiles(viewProfiles);

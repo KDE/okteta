@@ -79,7 +79,7 @@ Q_SIGNALS:
     void viewProfileChanged(const Kasten::ByteArrayViewProfile::Id& viewProfileId);
 
 private Q_SLOTS:
-    void onViewProfilesChanged(const QList<Kasten::ByteArrayViewProfile>& viewProfiles);
+    void onViewProfilesChanged(const QVector<Kasten::ByteArrayViewProfile>& viewProfiles);
     void onViewProfilesRemoved(const QVector<Kasten::ByteArrayViewProfile::Id>& viewProfileIds);
 
     // TODO: turn to one signal/slot with enum parameter for property and QVariant as new value

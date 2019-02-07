@@ -195,7 +195,7 @@ ViewProfilesManageDialog::onCreateNewButtonClicked()
     const int answer = dialog->exec();
 
     if (answer == QDialog::Accepted) {
-        QList<ByteArrayViewProfile> viewProfiles {
+        QVector<ByteArrayViewProfile> viewProfiles {
             dialog->viewProfile()
         };
         mViewProfileManager->saveViewProfiles(viewProfiles);
@@ -230,7 +230,7 @@ ViewProfilesManageDialog::onEditButtonClicked()
 
     const int answer = dialog->exec();
     if (answer == QDialog::Accepted) {
-        QList<ByteArrayViewProfile> viewProfiles {
+        QVector<ByteArrayViewProfile> viewProfiles {
             dialog->viewProfile()
         };
         mViewProfileManager->saveViewProfiles(viewProfiles);

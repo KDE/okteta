@@ -132,7 +132,7 @@ ViewProfileTableModel::row(const ByteArrayViewProfile::Id& viewProfileId) const
 {
     int result = -1;
 
-    const QList<ByteArrayViewProfile> viewProfiles = mViewProfileManager->viewProfiles();
+    const QVector<ByteArrayViewProfile> viewProfiles = mViewProfileManager->viewProfiles();
     const int viewProfilesCount = viewProfiles.count();
     for (int i = 0; i < viewProfilesCount; ++i) {
         if (viewProfileId == viewProfiles.at(i).id()) {
@@ -159,7 +159,7 @@ void ViewProfileTableModel::onViewProfilesChanged()
 
 void ViewProfileTableModel::onViewProfileLocksChanged(const QVector<ByteArrayViewProfile::Id>& viewProfileIds)
 {
-    const QList<ByteArrayViewProfile> viewProfiles = mViewProfileManager->viewProfiles();
+    const QVector<ByteArrayViewProfile> viewProfiles = mViewProfileManager->viewProfiles();
     const int viewProfilesCount = viewProfiles.count();
     for (int i = 0; i < viewProfilesCount; ++i) {
         const ByteArrayViewProfile::Id viewProfileId = viewProfiles.at(i).id();

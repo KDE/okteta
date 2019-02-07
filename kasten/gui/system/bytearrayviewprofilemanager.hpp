@@ -27,7 +27,7 @@
 #include <kasten/okteta/bytearrayviewprofile.hpp>
 // Qt
 #include <QObject>
-#include <QList>
+#include <QVector>
 #include <QDateTime>
 #include <QHash>
 
@@ -67,7 +67,7 @@ public:
     ~ByteArrayViewProfileManager() override;
 
 public:
-    QList<ByteArrayViewProfile> viewProfiles() const;
+    QVector<ByteArrayViewProfile> viewProfiles() const;
     int viewProfilesCount() const;
     ByteArrayViewProfile viewProfile(const ByteArrayViewProfile::Id& id) const;
     ByteArrayViewProfile::Id defaultViewProfileId() const;
@@ -75,14 +75,14 @@ public:
     bool isViewProfileLocked(const ByteArrayViewProfile::Id& id) const;
 
 public:
-    void saveViewProfiles(QList<ByteArrayViewProfile>& viewProfiles);
+    void saveViewProfiles(QVector<ByteArrayViewProfile>& viewProfiles);
     void removeViewProfiles(const QVector<ByteArrayViewProfile::Id>& viewProfileIds);
     void setDefaultViewProfile(const ByteArrayViewProfile::Id& viewProfileId);
 
     ByteArrayViewProfileLock createLock(const ByteArrayViewProfile::Id& viewProfileId);
 
 Q_SIGNALS:
-    void viewProfilesChanged(const QList<Kasten::ByteArrayViewProfile>& viewProfiles);
+    void viewProfilesChanged(const QVector<Kasten::ByteArrayViewProfile>& viewProfiles);
     void viewProfilesRemoved(const QVector<Kasten::ByteArrayViewProfile::Id>& viewProfileIds);
     void defaultViewProfileChanged(const Kasten::ByteArrayViewProfile::Id& viewProfileId);
     void viewProfilesLocked(const QVector<Kasten::ByteArrayViewProfile::Id>& viewProfileIds);
@@ -101,7 +101,7 @@ private Q_SLOTS:
     void onDefaultViewProfileChanged(const QString& path);
 
 private:
-    QList<ByteArrayViewProfile> mViewProfiles;
+    QVector<ByteArrayViewProfile> mViewProfiles;
 
     ByteArrayViewProfile::Id mDefaultViewProfileId;
 

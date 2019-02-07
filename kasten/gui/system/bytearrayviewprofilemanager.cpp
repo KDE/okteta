@@ -161,7 +161,7 @@ ByteArrayViewProfileManager::viewProfilesCount() const
     return mViewProfiles.count();
 }
 
-QList<ByteArrayViewProfile>
+QVector<ByteArrayViewProfile>
 ByteArrayViewProfileManager::viewProfiles() const
 {
     return mViewProfiles;
@@ -212,7 +212,7 @@ ByteArrayViewProfileManager::isViewProfileLocked(const ByteArrayViewProfile::Id&
     return result;
 }
 
-void ByteArrayViewProfileManager::saveViewProfiles(QList<ByteArrayViewProfile>& viewProfiles)
+void ByteArrayViewProfileManager::saveViewProfiles(QVector<ByteArrayViewProfile>& viewProfiles)
 {
     // TODO: do not save if locked by someone else -> needs passing of our lock? or just registering our own and check?
     // create and set unique id
@@ -416,8 +416,8 @@ ByteArrayViewProfileManager::onViewProfilesFolderChanged(const QString& viewProf
     // TODO: reparse for new, removed and changed files
     // assume all are removed and unlocked in the beginning
     QVector<ByteArrayViewProfile::Id> removedViewProfileIds = viewProfileFileInfoLookup.keys().toVector();
-    QList<ByteArrayViewProfile> newViewProfiles;
-    QList<ByteArrayViewProfile> changedViewProfiles;
+    QVector<ByteArrayViewProfile> newViewProfiles;
+    QVector<ByteArrayViewProfile> changedViewProfiles;
 
     QVector<ByteArrayViewProfile::Id> newUnlockedViewProfileIds = lockedViewProfileIds(viewProfileFileInfoLookup);
     QVector<ByteArrayViewProfile::Id> newLockedViewProfileIds;
