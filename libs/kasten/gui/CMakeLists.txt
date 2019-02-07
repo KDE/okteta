@@ -85,15 +85,13 @@ kastengui_add_sublibrary(shell
         StatusBar
         ToolViewDockWidget
 
-        # remove on next API change, accidentally here
+    PRIVATE
         StatusBarLayout
+        TabBar
+        TabWidget
         ToolInlineViewWidget
         ViewAreaBox
         ViewBox
-
-    PRIVATE
-        TabBar
-        TabWidget
 )
 
 kastengui_add_sublibrary(controller
