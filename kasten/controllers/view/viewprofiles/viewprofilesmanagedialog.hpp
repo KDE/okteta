@@ -56,8 +56,8 @@ protected Q_SLOTS:
     void onDeleteButtonClicked();
 
     void onModelReset();
-    void onViewProfilesLocked(const QList<Kasten::ByteArrayViewProfile::Id>& viewProfileIds);
-    void onViewProfilesUnlocked(const QList<Kasten::ByteArrayViewProfile::Id>& viewProfileIds);
+    void onViewProfilesLocked(const QVector<Kasten::ByteArrayViewProfile::Id>& viewProfileIds);
+    void onViewProfilesUnlocked(const QVector<Kasten::ByteArrayViewProfile::Id>& viewProfileIds);
     void onDefaultViewProfileChanged(const Kasten::ByteArrayViewProfile::Id& viewProfileId);
 
 private:

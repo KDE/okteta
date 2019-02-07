@@ -48,10 +48,10 @@ static const int DefaultOffsetCoding = 0;
 static const int DefaultValueCoding = 0;
 QString DefaultCharCoding() { return {}; }
 
-static QList<ByteArrayViewProfile::Id>
+static QVector<ByteArrayViewProfile::Id>
 lockedViewProfileIds(const ByteArrayViewProfileFileInfoLookup& viewProfileFileInfoLookup)
 {
-    QList<ByteArrayViewProfile::Id> result;
+    QVector<ByteArrayViewProfile::Id> result;
 
     ByteArrayViewProfileFileInfoLookup::ConstIterator end =
         viewProfileFileInfoLookup.constEnd();
@@ -69,8 +69,8 @@ lockedViewProfileIds(const ByteArrayViewProfileFileInfoLookup& viewProfileFileIn
 
 static void
 updateLockStatus(ByteArrayViewProfileFileInfoLookup& viewProfileFileInfoLookup,
-                 const QList<ByteArrayViewProfile::Id>& lockedViewProfileIds,
-                 const QList<ByteArrayViewProfile::Id>& unlockedViewProfileIds)
+                 const QVector<ByteArrayViewProfile::Id>& lockedViewProfileIds,
+                 const QVector<ByteArrayViewProfile::Id>& unlockedViewProfileIds)
 {
     if (lockedViewProfileIds.isEmpty() && unlockedViewProfileIds.isEmpty()) {
         return;
@@ -240,7 +240,7 @@ void ByteArrayViewProfileManager::saveViewProfiles(QList<ByteArrayViewProfile>& 
 }
 
 void
-ByteArrayViewProfileManager::removeViewProfiles(const QList<ByteArrayViewProfile::Id>& viewProfileIds)
+ByteArrayViewProfileManager::removeViewProfiles(const QVector<ByteArrayViewProfile::Id>& viewProfileIds)
 {
     for (const ByteArrayViewProfile::Id& viewProfileId : viewProfileIds) {
         removeViewProfile(viewProfileId);
@@ -415,12 +415,12 @@ ByteArrayViewProfileManager::onViewProfilesFolderChanged(const QString& viewProf
 
     // TODO: reparse for new, removed and changed files
     // assume all are removed and unlocked in the beginning
-    QList<ByteArrayViewProfile::Id> removedViewProfileIds = viewProfileFileInfoLookup.keys();
+    QVector<ByteArrayViewProfile::Id> removedViewProfileIds = viewProfileFileInfoLookup.keys().toVector();
     QList<ByteArrayViewProfile> newViewProfiles;
     QList<ByteArrayViewProfile> changedViewProfiles;
 
-    QList<ByteArrayViewProfile::Id> newUnlockedViewProfileIds = lockedViewProfileIds(viewProfileFileInfoLookup);
-    QList<ByteArrayViewProfile::Id> newLockedViewProfileIds;
+    QVector<ByteArrayViewProfile::Id> newUnlockedViewProfileIds = lockedViewProfileIds(viewProfileFileInfoLookup);
+    QVector<ByteArrayViewProfile::Id> newLockedViewProfileIds;
     // iterate all files in folder
     const QFileInfoList viewProfileFileInfoList =
         QDir(viewProfileFolderPath).entryInfoList(viewProfileFileNameFilter(), QDir::Files);

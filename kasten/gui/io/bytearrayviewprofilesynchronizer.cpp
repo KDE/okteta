@@ -297,7 +297,7 @@ void ByteArrayViewProfileSynchronizer::connectViewSignals()
             this, &ByteArrayViewProfileSynchronizer::onViewModusChanged);
 }
 
-void ByteArrayViewProfileSynchronizer::onViewProfilesRemoved(const QList<ByteArrayViewProfile::Id>& viewProfileIds)
+void ByteArrayViewProfileSynchronizer::onViewProfilesRemoved(const QVector<ByteArrayViewProfile::Id>& viewProfileIds)
 {
     if (!mView) {
         return;

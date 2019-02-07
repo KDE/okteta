@@ -157,7 +157,7 @@ void ViewProfileTableModel::onViewProfilesChanged()
     endResetModel();
 }
 
-void ViewProfileTableModel::onViewProfileLocksChanged(const QList<ByteArrayViewProfile::Id>& viewProfileIds)
+void ViewProfileTableModel::onViewProfileLocksChanged(const QVector<ByteArrayViewProfile::Id>& viewProfileIds)
 {
     const QList<ByteArrayViewProfile> viewProfiles = mViewProfileManager->viewProfiles();
     const int viewProfilesCount = viewProfiles.count();

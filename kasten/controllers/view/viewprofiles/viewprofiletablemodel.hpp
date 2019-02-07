@@ -62,7 +62,7 @@ public:
 protected Q_SLOTS:
     void onDefaultIndexChanged();
     void onViewProfilesChanged();
-    void onViewProfileLocksChanged(const QList<Kasten::ByteArrayViewProfile::Id>& viewProfileIds);
+    void onViewProfileLocksChanged(const QVector<Kasten::ByteArrayViewProfile::Id>& viewProfileIds);
 
 protected:
     const ByteArrayViewProfileManager* mViewProfileManager;

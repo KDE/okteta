@@ -76,17 +76,17 @@ public:
 
 public:
     void saveViewProfiles(QList<ByteArrayViewProfile>& viewProfiles);
-    void removeViewProfiles(const QList<ByteArrayViewProfile::Id>& viewProfileIds);
+    void removeViewProfiles(const QVector<ByteArrayViewProfile::Id>& viewProfileIds);
     void setDefaultViewProfile(const ByteArrayViewProfile::Id& viewProfileId);
 
     ByteArrayViewProfileLock createLock(const ByteArrayViewProfile::Id& viewProfileId);
 
 Q_SIGNALS:
     void viewProfilesChanged(const QList<Kasten::ByteArrayViewProfile>& viewProfiles);
-    void viewProfilesRemoved(const QList<Kasten::ByteArrayViewProfile::Id>& viewProfileIds);
+    void viewProfilesRemoved(const QVector<Kasten::ByteArrayViewProfile::Id>& viewProfileIds);
     void defaultViewProfileChanged(const Kasten::ByteArrayViewProfile::Id& viewProfileId);
-    void viewProfilesLocked(const QList<Kasten::ByteArrayViewProfile::Id>& viewProfileIds);
-    void viewProfilesUnlocked(const QList<Kasten::ByteArrayViewProfile::Id>& viewProfileIds);
+    void viewProfilesLocked(const QVector<Kasten::ByteArrayViewProfile::Id>& viewProfileIds);
+    void viewProfilesUnlocked(const QVector<Kasten::ByteArrayViewProfile::Id>& viewProfileIds);
 
 private:
     QString filePathOfViewProfile(const ByteArrayViewProfile::Id& viewProfileId) const;
