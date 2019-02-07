@@ -44,7 +44,6 @@ class AbstractByteArrayModel;
 
 namespace Kasten {
 class StructuresManager;
-class StructuresToolPrivate;
 
 class StructuresTool : public AbstractTool
 {
