@@ -46,7 +46,7 @@ OktetaPartFactory::OktetaPartFactory()
 
     mByteArrayViewProfileManager = new Kasten::ByteArrayViewProfileManager();
 
-//     const QList<AbstractModelStreamEncoder*> encoderList =
+//     const QVector<AbstractModelStreamEncoder*> encoderList =
 //         ByteArrayStreamEncoderFactory::createStreamEncoders();
 
 //     const QVector<AbstractModelDataGenerator*> generatorList =

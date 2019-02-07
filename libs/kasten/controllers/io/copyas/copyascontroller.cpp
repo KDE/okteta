@@ -91,7 +91,7 @@ void CopyAsController::updateActions()
 
     const AbstractModelSelection* selection = mSelectionControl ? mSelectionControl->modelSelection() : nullptr;
 
-    const QList<AbstractModelStreamEncoder*> encoderList =
+    const QVector<AbstractModelStreamEncoder*> encoderList =
         mModelCodecManager->encoderList(mModel, selection);
     const bool hasEncoders = (encoderList.size() > 0);
 

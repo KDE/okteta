@@ -54,11 +54,11 @@ ModelCodecManager::~ModelCodecManager()
     qDeleteAll(mGeneratorList);
 }
 
-QList<AbstractModelStreamEncoder*>
+QVector<AbstractModelStreamEncoder*>
 ModelCodecManager::encoderList(AbstractModel* model, const AbstractModelSelection* selection) const
 {
     Q_UNUSED(selection)
-    return model ? mEncoderList : QList<AbstractModelStreamEncoder*>();
+    return model ? mEncoderList : QVector<AbstractModelStreamEncoder*>();
 }
 
 QVector<AbstractModelStreamDecoder*>
@@ -79,7 +79,7 @@ void ModelCodecManager::setOverwriteDialog(AbstractOverwriteDialog* overwriteDia
     mOverwriteDialog = overwriteDialog;
 }
 
-void ModelCodecManager::setEncoders(const QList<AbstractModelStreamEncoder*>& encoderList)
+void ModelCodecManager::setEncoders(const QVector<AbstractModelStreamEncoder*>& encoderList)
 {
     mEncoderList = encoderList;
 

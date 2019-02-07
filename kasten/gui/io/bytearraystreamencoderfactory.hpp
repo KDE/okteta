@@ -26,7 +26,7 @@
 // lib
 #include <kasten/okteta/oktetakastengui_export.hpp>
 
-template <class T> class QList;
+template <class T> class QVector;
 
 namespace Kasten {
 class AbstractModelStreamEncoder;
@@ -37,7 +37,7 @@ private:
     ByteArrayStreamEncoderFactory() = delete;
 
 public:
-    static QList<AbstractModelStreamEncoder*> createStreamEncoders();
+    static QVector<AbstractModelStreamEncoder*> createStreamEncoders();
 
 };
 

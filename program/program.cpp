@@ -117,7 +117,7 @@ int OktetaProgram::execute()
     mByteArrayViewProfileManager = new ByteArrayViewProfileManager();
     // mModelManagerManager->addModelManager( byteArrayViewProfileManager );
 
-    const QList<AbstractModelStreamEncoder*> encoderList =
+    const QVector<AbstractModelStreamEncoder*> encoderList =
         ByteArrayStreamEncoderFactory::createStreamEncoders();
 
     const QVector<AbstractModelDataGenerator*> generatorList =

@@ -40,13 +40,13 @@
 //// #include "my_bytearraystreamencoder.hpp"
 //// NEWBYTEARRAYSTREAMENCODER(end)
 // Qt
-#include <QList>
+#include <QVector>
 
 namespace Kasten {
 
-QList<AbstractModelStreamEncoder*> ByteArrayStreamEncoderFactory::createStreamEncoders()
+QVector<AbstractModelStreamEncoder*> ByteArrayStreamEncoderFactory::createStreamEncoders()
 {
-    QList<AbstractModelStreamEncoder*> result {
+    const QVector<AbstractModelStreamEncoder*> result {
         new ByteArrayValuesStreamEncoder(),
         new ByteArrayCharsStreamEncoder(),
         new ByteArrayBase64StreamEncoder(),
