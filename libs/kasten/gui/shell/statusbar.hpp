@@ -26,7 +26,6 @@
 // lib
 #include <kasten/kastengui_export.hpp>
 // Qt
-#include <QList>
 #include <QStatusBar>
 
 namespace Kasten {
