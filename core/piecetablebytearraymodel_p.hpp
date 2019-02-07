@@ -24,6 +24,7 @@
 #define OKTETA_PIECETABLEBYTEARRAYMODEL_P_HPP
 
 // lib
+#include "abstractbytearraymodel_p.hpp"
 #include "piecetablebytearraymodel.hpp"
 #include "bookmarksconstiterator.hpp"
 #include "bookmarklistconstiteratoradapter.hpp"
@@ -35,7 +36,7 @@
 
 namespace Okteta {
 
-class PieceTableByteArrayModelPrivate
+class PieceTableByteArrayModelPrivate : public AbstractByteArrayModelPrivate
 {
 public:
     /**  */
@@ -44,7 +45,7 @@ public:
     explicit PieceTableByteArrayModelPrivate(PieceTableByteArrayModel* parent, int size, Byte fillByte = '\0');
     PieceTableByteArrayModelPrivate() = delete;
 
-    ~PieceTableByteArrayModelPrivate();
+    ~PieceTableByteArrayModelPrivate() override;
 
 public: // AbstractByteArrayModel API
     Byte byte(Address offset) const;
@@ -108,7 +109,6 @@ protected:
     void endChanges();
 
 protected: // data
-    PieceTableByteArrayModel* p;
     /**  */
     bool mReadOnly : 1;
 
@@ -125,6 +125,9 @@ protected: // data
     QVector<ByteArrayChange> mChanges;
     bool mBeforeChangesModified : 1;
     bool mBookmarksModified : 1;
+
+private:
+    Q_DECLARE_PUBLIC(PieceTableByteArrayModel)
 };
 
 inline const QByteArray& PieceTableByteArrayModelPrivate::initialData() const { return mInitialData; }
@@ -135,18 +138,22 @@ inline bool PieceTableByteArrayModelPrivate::isModified()   const { return !mPie
 
 inline void PieceTableByteArrayModelPrivate::setReadOnly(bool readOnly)
 {
+    Q_Q(PieceTableByteArrayModel);
+
     if (mReadOnly != readOnly) {
         mReadOnly = readOnly;
-        emit p->readOnlyChanged(readOnly);
+        emit q->readOnlyChanged(readOnly);
     }
 }
 inline void PieceTableByteArrayModelPrivate::setModified(bool modified)
 {
+    Q_Q(PieceTableByteArrayModel);
+
     if (isModified() != modified) {
         mPieceTable.setBeforeCurrentChangeAsBase(modified);
         // TODO: is the call setModified of any use?
         // shouldn't there be only a setUnmodified(void) or else call?
-        emit p->modifiedChanged(modified);
+        emit q->modifiedChanged(modified);
     }
 }
 
@@ -157,29 +164,37 @@ inline QString PieceTableByteArrayModelPrivate::versionDescription(int versionIn
 
 inline void PieceTableByteArrayModelPrivate::addBookmarks(const QVector<Bookmark>& bookmarks)
 {
+    Q_Q(PieceTableByteArrayModel);
+
     mBookmarks.addBookmarks(bookmarks);
-    emit p->bookmarksAdded(bookmarks);
+    emit q->bookmarksAdded(bookmarks);
 }
 inline void PieceTableByteArrayModelPrivate::removeBookmarks(const QVector<Bookmark>& bookmarks)
 {
+    Q_Q(PieceTableByteArrayModel);
+
     mBookmarks.removeBookmarks(bookmarks);
-    emit p->bookmarksRemoved(bookmarks);
+    emit q->bookmarksRemoved(bookmarks);
 }
 
 inline void PieceTableByteArrayModelPrivate::removeAllBookmarks()
 {
+    Q_Q(PieceTableByteArrayModel);
+
     const QVector<Bookmark> bookmarks = mBookmarks.list();
     mBookmarks.clear();
-    emit p->bookmarksRemoved(bookmarks);
+    emit q->bookmarksRemoved(bookmarks);
 }
 inline void PieceTableByteArrayModelPrivate::setBookmark(unsigned int index, const Bookmark& bookmark)
 {
+    Q_Q(PieceTableByteArrayModel);
+
     mBookmarks.setBookmark(index, bookmark);
 
     const QVector<int> changedBookmarkIndizes {
         static_cast<int>(index)
     };
-    emit p->bookmarksModified(changedBookmarkIndizes);
+    emit q->bookmarksModified(changedBookmarkIndizes);
 }
 
 inline BookmarksConstIterator PieceTableByteArrayModelPrivate::createBookmarksConstIterator() const

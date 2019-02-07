@@ -31,7 +31,7 @@ namespace Okteta {
 static const int InvalidVersionIndex = -1;
 
 PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate(PieceTableByteArrayModel* parent, const QByteArray& data)
-    : p(parent)
+    : AbstractByteArrayModelPrivate(parent)
     , mReadOnly(false)
     , mInitialData(data)
 {
@@ -39,7 +39,7 @@ PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate(PieceTableByteA
 }
 
 PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate(PieceTableByteArrayModel* parent, int size, Byte fillByte)
-    : p(parent)
+    : AbstractByteArrayModelPrivate(parent)
     , mReadOnly(false)
     , mInitialData(size, fillByte)
 {
@@ -63,6 +63,8 @@ Byte PieceTableByteArrayModelPrivate::byte(Address offset) const
 
 void PieceTableByteArrayModelPrivate::setData(const QByteArray& data)
 {
+    Q_Q(PieceTableByteArrayModel);
+
     const int oldSize = mPieceTable.size();
     const bool wasModifiedBefore = isModified();
     const QVector<Bookmark> bookmarks = mBookmarks.list();
@@ -73,19 +75,21 @@ void PieceTableByteArrayModelPrivate::setData(const QByteArray& data)
     mBookmarks.clear();
 
     // TODO: how to tell this to the synchronizer?
-    emit p->contentsChanged(ArrayChangeMetricsList::oneReplacement(0, oldSize, data.size()));
+    emit q->contentsChanged(ArrayChangeMetricsList::oneReplacement(0, oldSize, data.size()));
     if (wasModifiedBefore) {
-        emit p->modifiedChanged(false);
+        emit q->modifiedChanged(false);
     }
     if (!bookmarks.empty()) {
-        emit p->bookmarksRemoved(bookmarks);
+        emit q->bookmarksRemoved(bookmarks);
     }
-    emit p->headVersionChanged(0);
-    emit p->revertedToVersionIndex(0);
+    emit q->headVersionChanged(0);
+    emit q->revertedToVersionIndex(0);
 }
 
 void PieceTableByteArrayModelPrivate::setByte(Address offset, Byte byte)
 {
+    Q_Q(PieceTableByteArrayModel);
+
     if (mReadOnly) {
         return;
     }
@@ -104,15 +108,15 @@ void PieceTableByteArrayModelPrivate::setByte(Address offset, Byte byte)
         modification
     };
 
-    emit p->contentsChanged(ArrayChangeMetricsList(metrics));
-    emit p->changesDone(modificationsList, oldVersionIndex, versionIndex());
+    emit q->contentsChanged(ArrayChangeMetricsList(metrics));
+    emit q->changesDone(modificationsList, oldVersionIndex, versionIndex());
     if (!wasModifiedBefore) {
-        emit p->modifiedChanged(true);
+        emit q->modifiedChanged(true);
     }
     if (newChange) {
-        emit p->headVersionChanged(mPieceTable.changesCount());
+        emit q->headVersionChanged(mPieceTable.changesCount());
     } else {
-        emit p->headVersionDescriptionChanged(mPieceTable.headChangeDescription());
+        emit q->headVersionDescriptionChanged(mPieceTable.headChangeDescription());
     }
 }
 
@@ -224,6 +228,8 @@ Size PieceTableByteArrayModelPrivate::fill(Byte fillByte, Address offset, Size f
 
 void PieceTableByteArrayModelPrivate::revertToVersionByIndex(int versionIndex)
 {
+    Q_Q(PieceTableByteArrayModel);
+
     ArrayChangeMetricsList changeList;
     AddressRangeList changedRanges;
 
@@ -242,23 +248,25 @@ void PieceTableByteArrayModelPrivate::revertToVersionByIndex(int versionIndex)
 // TODO: what about the bookmarks? They need version support, too.
 // Modell of the bookmarks. But shouldn't they be independent?
 
-    emit p->contentsChanged(changeList);
+    emit q->contentsChanged(changeList);
     if (isModificationChanged) {
-        emit p->modifiedChanged(newModified);
+        emit q->modifiedChanged(newModified);
     }
-    emit p->revertedToVersionIndex(versionIndex);
+    emit q->revertedToVersionIndex(versionIndex);
 }
 
 void PieceTableByteArrayModelPrivate::openGroupedChange(const QString& description)
 {
+    Q_Q(PieceTableByteArrayModel);
+
     const bool isModifiedBefore = isModified();
     mBeforeGroupedChangeVersionIndex = mPieceTable.appliedChangesCount();
     mPieceTable.openGroupedChange(description);
 
     if (!isModifiedBefore) {
-        emit p->modifiedChanged(true);
+        emit q->modifiedChanged(true);
     }
-    emit p->headVersionChanged(mPieceTable.changesCount());
+    emit q->headVersionChanged(mPieceTable.changesCount());
 }
 
 void PieceTableByteArrayModelPrivate::cancelGroupedChange()
@@ -270,10 +278,12 @@ void PieceTableByteArrayModelPrivate::cancelGroupedChange()
 
 void PieceTableByteArrayModelPrivate::closeGroupedChange(const QString& description)
 {
+    Q_Q(PieceTableByteArrayModel);
+
     mPieceTable.closeGroupedChange(description);
     mBeforeGroupedChangeVersionIndex = InvalidVersionIndex;
 
-    emit p->headVersionDescriptionChanged(mPieceTable.headChangeDescription());
+    emit q->headVersionDescriptionChanged(mPieceTable.headChangeDescription());
 }
 
 QVector<ByteArrayChange> PieceTableByteArrayModelPrivate::changes(int firstVersionIndex, int lastVersionIndex) const
@@ -357,23 +367,25 @@ void PieceTableByteArrayModelPrivate::beginChanges()
 
 void PieceTableByteArrayModelPrivate::endChanges()
 {
+    Q_Q(PieceTableByteArrayModel);
+
     const int currentVersionIndex = versionIndex();
     const bool newChange = (mBeforeChangesVersionIndex != currentVersionIndex);
     const bool currentIsModified = isModified();
     const bool modifiedChanged = (mBeforeChangesModified != currentIsModified);
 
-    emit p->contentsChanged(mChangeMetrics);
-    emit p->changesDone(mChanges, mBeforeChangesVersionIndex, currentVersionIndex);
+    emit q->contentsChanged(mChangeMetrics);
+    emit q->changesDone(mChanges, mBeforeChangesVersionIndex, currentVersionIndex);
     if (mBookmarksModified) {
-        emit p->bookmarksModified(true);
+        emit q->bookmarksModified(true);
     }
     if (modifiedChanged) {
-        emit p->modifiedChanged(currentIsModified);
+        emit q->modifiedChanged(currentIsModified);
     }
     if (newChange) {
-        emit p->headVersionChanged(mPieceTable.changesCount());
+        emit q->headVersionChanged(mPieceTable.changesCount());
     } else {
-        emit p->headVersionDescriptionChanged(mPieceTable.headChangeDescription());
+        emit q->headVersionDescriptionChanged(mPieceTable.headChangeDescription());
     }
 
     // clean

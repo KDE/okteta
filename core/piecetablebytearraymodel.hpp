@@ -128,8 +128,8 @@ Q_SIGNALS: // ChangeHistory signals
     void changesDone(const QVector<Okteta::ByteArrayChange>& changes,
                      int oldVersionIndex, int newVersionIndex) override;
 
-protected:
-    PieceTableByteArrayModelPrivate* const d;
+private:
+    Q_DECLARE_PRIVATE(PieceTableByteArrayModel)
 };
 
 }
