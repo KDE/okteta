@@ -29,10 +29,26 @@
 
 namespace Okteta {
 
-TextByteArrayAnalyzer::TextByteArrayAnalyzer(const AbstractByteArrayModel* byteArrayModel, const CharCodec* charCodec)
-    : mByteArrayModel(byteArrayModel)
-    , mCharCodec(charCodec)
+class TextByteArrayAnalyzerPrivate
+{
+public:
+    const AbstractByteArrayModel* const byteArrayModel;
+    const CharCodec* const charCodec;
+
+public:
+    TextByteArrayAnalyzerPrivate(const AbstractByteArrayModel* byteArrayModel, const CharCodec* charCodec);
+};
+
+TextByteArrayAnalyzerPrivate::TextByteArrayAnalyzerPrivate(const AbstractByteArrayModel* byteArrayModel, const CharCodec* charCodec)
+    : byteArrayModel(byteArrayModel)
+    , charCodec(charCodec)
 {}
+
+
+TextByteArrayAnalyzer::TextByteArrayAnalyzer(const AbstractByteArrayModel* byteArrayModel, const CharCodec* charCodec)
+    : d(new TextByteArrayAnalyzerPrivate(byteArrayModel, charCodec))
+{
+}
 
 TextByteArrayAnalyzer::~TextByteArrayAnalyzer() = default;
 
@@ -45,13 +61,13 @@ AddressRange TextByteArrayAnalyzer::wordSection(Address index) const
 
 bool TextByteArrayAnalyzer::isWordChar(Address index) const
 {
-    const Character decodedChar = mCharCodec->decode(mByteArrayModel->byte(index));
+    const Character decodedChar = d->charCodec->decode(d->byteArrayModel->byte(index));
     return !decodedChar.isUndefined() && decodedChar.isLetterOrNumber();
 }
 
 Address TextByteArrayAnalyzer::indexOfPreviousWordStart(Address index) const
 {
-    const Size size = mByteArrayModel->size();
+    const Size size = d->byteArrayModel->size();
     // already at the start or can the result only be 0?
     if (index == 0 || size < 3) {
         return 0;
@@ -76,7 +92,7 @@ Address TextByteArrayAnalyzer::indexOfPreviousWordStart(Address index) const
 
 Address TextByteArrayAnalyzer::indexOfNextWordStart(Address index) const
 {
-    const Size size = mByteArrayModel->size();
+    const Size size = d->byteArrayModel->size();
     bool lookingForFirstWordChar = false;
     for (; index < size; ++index) {
         if (isWordChar(index)) {
@@ -95,7 +111,7 @@ Address TextByteArrayAnalyzer::indexOfNextWordStart(Address index) const
 
 Address TextByteArrayAnalyzer::indexOfBeforeNextWordStart(Address index) const
 {
-    const Size size = mByteArrayModel->size();
+    const Size size = d->byteArrayModel->size();
     bool lookingForFirstWordChar = false;
     for (; index < size; ++index) {
         if (isWordChar(index)) {
@@ -125,7 +141,7 @@ Address TextByteArrayAnalyzer::indexOfWordStart(Address index) const
 
 Address TextByteArrayAnalyzer::indexOfWordEnd(Address index) const
 {
-    const Size size = mByteArrayModel->size();
+    const Size size = d->byteArrayModel->size();
     for (++index; index < size; ++index) {
         if (!isWordChar(index)) {
             return index - 1;
@@ -150,7 +166,7 @@ Address TextByteArrayAnalyzer::indexOfLeftWordSelect(Address index) const
         // reached start, so return it
         return 0;
     } else {
-        const Size size = mByteArrayModel->size();
+        const Size size = d->byteArrayModel->size();
         // search for word start to the right
         for (++index; index < size; ++index) {
             if (isWordChar(index)) {
@@ -167,7 +183,7 @@ Address TextByteArrayAnalyzer::indexOfRightWordSelect(Address index) const
 {
     // TODO: should this check be here or with the caller?
     // the later would need another function to search the previous word end
-    const Size size = mByteArrayModel->size();
+    const Size size = d->byteArrayModel->size();
     bool searchToLeft;
     if (index >= size) {
         index = size;
@@ -235,7 +251,7 @@ QString TextByteArrayAnalyzer::text(Address index, Address lastIndex) const
 {
     QString result;
 
-    const Address lastValidIndex = mByteArrayModel->size() - 1;
+    const Address lastValidIndex = d->byteArrayModel->size() - 1;
     const Address behindLastIndex =
         ((lastIndex <0 || lastIndex> lastValidIndex) ? lastValidIndex : lastIndex) + 1;
 
@@ -243,7 +259,7 @@ QString TextByteArrayAnalyzer::text(Address index, Address lastIndex) const
     result.reserve(maxTextLength);
 
     for (; index < behindLastIndex; ++index) {
-        const Character decodedChar = mCharCodec->decode(mByteArrayModel->byte(index));
+        const Character decodedChar = d->charCodec->decode(d->byteArrayModel->byte(index));
         // TODO: handle line breaks, separators and spacing, controlled by flags given as parameter
         const bool isTextChar = (!decodedChar.isUndefined() &&
                                  (decodedChar.isLetterOrNumber() || decodedChar.isSpace() || decodedChar.isPunct()));
