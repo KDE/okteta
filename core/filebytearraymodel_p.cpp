@@ -27,8 +27,9 @@
 
 namespace Okteta {
 
-FileByteArrayModelPrivate::FileByteArrayModelPrivate(int pageNumber, int pageSize)
-    : mNoOfUsedPages(pageNumber)
+FileByteArrayModelPrivate::FileByteArrayModelPrivate(FileByteArrayModel* parent, int pageNumber, int pageSize)
+    : AbstractByteArrayModelPrivate(parent)
+    , mNoOfUsedPages(pageNumber)
     , mNoOfFreePages(pageNumber)
     , mPageSize(pageSize)
 {

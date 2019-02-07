@@ -24,6 +24,7 @@
 #define OKTETA_FILEBYTEARRAYMODEL_P_HPP
 
 // lib
+#include "abstractbytearraymodel_p.hpp"
 #include "filebytearraymodel.hpp"
 // Qt
 #include <QVector>
@@ -31,15 +32,15 @@
 
 namespace Okteta {
 
-class FileByteArrayModelPrivate
+class FileByteArrayModelPrivate : public AbstractByteArrayModelPrivate
 {
     using KPageOfChar = QVector<char*>;
 
 public:
-    FileByteArrayModelPrivate(int pageNumber, int pageSize);
+    FileByteArrayModelPrivate(FileByteArrayModel* parent, int pageNumber, int pageSize);
     FileByteArrayModelPrivate() = delete;
 
-    ~FileByteArrayModelPrivate();
+    ~FileByteArrayModelPrivate() override;
 
 public:
     Byte byte(Address offset) const;

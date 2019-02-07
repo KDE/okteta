@@ -66,8 +66,8 @@ public:
     bool open(const QString& filename);
     bool close();
 
-protected:
-    FileByteArrayModelPrivate* const d;
+private:
+    Q_DECLARE_PRIVATE(FileByteArrayModel)
 };
 
 }
