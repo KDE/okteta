@@ -122,7 +122,8 @@ void NullModel::setModified(bool modified)
 Q_GLOBAL_STATIC(NullModel, nullModel)
 
 AbstractByteArrayViewPrivate::AbstractByteArrayViewPrivate(AbstractByteArrayView* parent)
-    : mByteArrayModel(nullModel())
+    : ColumnsViewPrivate(parent)
+    , mByteArrayModel(nullModel())
     , mTableLayout(new ByteArrayTableLayout(DefaultNoOfBytesPerLine, DefaultFirstLineOffset, DefaultStartOffset, 0, 0))
     , mTableCursor(new ByteArrayTableCursor(mTableLayout))
     , mTableRanges(new ByteArrayTableRanges(mTableLayout))
@@ -135,7 +136,6 @@ AbstractByteArrayViewPrivate::AbstractByteArrayViewPrivate(AbstractByteArrayView
     , mBlinkCursorVisible(false)
     // , mDefaultFontSize( p->font().pointSize() ) crashes in font()
     , mResizeStyle(DefaultResizeStyle)
-    , q_ptr(parent)
 {
 }
 

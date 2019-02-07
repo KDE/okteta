@@ -31,30 +31,47 @@
 
 namespace Okteta {
 
-static const int DefaultSingleStep = 20;
+ColumnsView::ColumnsView(ColumnsViewPrivate* dd, QWidget* parent)
+    : QAbstractScrollArea(parent)
+    , d_ptr(dd)
+{
+    Q_D(ColumnsView);
 
+    d->init();
+}
 
 ColumnsView::ColumnsView(/*bool R,*/ QWidget* parent)
     : QAbstractScrollArea(parent)
-    , d(new ColumnsViewPrivate())
+    , d_ptr(new ColumnsViewPrivate(this))
 {
-    viewport()->setAttribute(Qt::WA_StaticContents);
-    viewport()->setBackgroundRole(QPalette::Base);
-    horizontalScrollBar()->setSingleStep(DefaultSingleStep);
-    verticalScrollBar()->setSingleStep(DefaultSingleStep);
+    Q_D(ColumnsView);
 
-    viewport()->setFocusProxy(this);
-    viewport()->setFocusPolicy(Qt::WheelFocus);
+    d->init();
 }
 
-ColumnsView::~ColumnsView()
+ColumnsView::~ColumnsView() = default;
+
+LineSize ColumnsView::noOfLines() const
 {
-    delete d;
+    Q_D(const ColumnsView);
+
+    return d->NoOfLines;
 }
 
-LineSize ColumnsView::noOfLines()    const { return d->NoOfLines; }
-PixelY ColumnsView::lineHeight()     const { return d->LineHeight; }
-Line ColumnsView::lineAt(PixelY y) const { return (d->LineHeight != 0) ? y / d->LineHeight : 0; }
+PixelY ColumnsView::lineHeight() const
+{
+    Q_D(const ColumnsView);
+
+    return d->LineHeight;
+}
+
+Line ColumnsView::lineAt(PixelY y) const
+{
+    Q_D(const ColumnsView);
+
+    return (d->LineHeight != 0) ? y / d->LineHeight : 0;
+}
+
 LineRange ColumnsView::visibleLines() const
 {
     const PixelYRange ySpan = PixelYRange::fromWidth(yOffset(), visibleHeight());
@@ -65,21 +82,49 @@ LineRange ColumnsView::visibleLines(const PixelYRange& yPixels) const
     return LineRange(lineAt(yPixels.start()), lineAt(yPixels.end()));
 }
 
-PixelX ColumnsView::visibleWidth()  const { return viewport()->width(); }
-PixelY ColumnsView::visibleHeight() const { return viewport()->height(); }
+PixelX ColumnsView::visibleWidth() const
+{
+    return viewport()->width();
+}
 
-PixelY ColumnsView::columnsHeight() const { return d->NoOfLines * d->LineHeight; }
-PixelX ColumnsView::columnsWidth()  const { return d->ColumnsWidth; }
+PixelY ColumnsView::visibleHeight() const
+{
+    return viewport()->height();
+}
+
+PixelY ColumnsView::columnsHeight() const
+{
+    Q_D(const ColumnsView);
+
+    return d->NoOfLines * d->LineHeight;
+}
+
+PixelX ColumnsView::columnsWidth() const
+{
+    Q_D(const ColumnsView);
+
+    return d->ColumnsWidth;
+}
 
 QPoint ColumnsView::viewportToColumns(const QPoint& point) const
 {
     return QPoint(xOffset(), yOffset()) + point;
 }
 
-PixelX ColumnsView::xOffset() const { return horizontalScrollBar()->value(); }
-PixelY ColumnsView::yOffset() const { return verticalScrollBar()->value(); }
+PixelX ColumnsView::xOffset() const
+{
+    return horizontalScrollBar()->value();
+}
+
+PixelY ColumnsView::yOffset() const
+{
+    return verticalScrollBar()->value();
+}
+
 PixelY ColumnsView::yOffsetOfLine(Line lineIndex) const
 {
+    Q_D(const ColumnsView);
+
     return lineIndex * d->LineHeight - yOffset();
 }
 
@@ -91,6 +136,8 @@ void ColumnsView::setColumnsPos(PixelX x, PixelY y)
 
 void ColumnsView::setNoOfLines(LineSize newNoOfLines)
 {
+    Q_D(ColumnsView);
+
     if (d->NoOfLines == newNoOfLines) {
         return;
     }
@@ -102,6 +149,8 @@ void ColumnsView::setNoOfLines(LineSize newNoOfLines)
 
 void ColumnsView::setLineHeight(PixelY newLineHeight)
 {
+    Q_D(ColumnsView);
+
     if (newLineHeight == d->LineHeight) {
         return;
     }
@@ -118,6 +167,8 @@ void ColumnsView::setLineHeight(PixelY newLineHeight)
 
 void ColumnsView::updateWidths()
 {
+    Q_D(ColumnsView);
+
     d->updateWidths();
 
     updateScrollBars();
@@ -163,6 +214,8 @@ void ColumnsView::updateColumn(AbstractColumnRenderer& columnRenderer)
 
 void ColumnsView::updateColumn(AbstractColumnRenderer& columnRenderer, const LineRange& lines)
 {
+    Q_D(ColumnsView);
+
     if (columnRenderer.isVisible()) { // TODO: catch hidden range && columnRenderer.overlaps(Xs) )
         LineRange linesToUpdate = visibleLines();
         linesToUpdate.restrictTo(lines);
@@ -178,6 +231,8 @@ void ColumnsView::updateColumn(AbstractColumnRenderer& columnRenderer, const Lin
 
 LineSize ColumnsView::noOfLinesPerPage() const
 {
+    Q_D(const ColumnsView);
+
     if (d->LineHeight < 1) {
         return 1;
     }
@@ -194,6 +249,8 @@ LineSize ColumnsView::noOfLinesPerPage() const
 
 void ColumnsView::addColumn(AbstractColumnRenderer* columnRenderer)
 {
+    Q_D(ColumnsView);
+
 //   if( Reversed )
 //     Columns.prepend( C );
 //   else
@@ -204,6 +261,8 @@ void ColumnsView::addColumn(AbstractColumnRenderer* columnRenderer)
 
 void ColumnsView::removeColumn(AbstractColumnRenderer* columnRenderer)
 {
+    Q_D(ColumnsView);
+
     const int columnRendererIndex = d->columns.indexOf(columnRenderer);
     if (columnRendererIndex != -1) {
         d->columns.removeAt(columnRendererIndex);
@@ -253,6 +312,8 @@ void ColumnsView::paintEvent(QPaintEvent* paintEvent)
 
 void ColumnsView::renderColumns(QPainter* painter, int cx, int cy, int cw, int ch)
 {
+    Q_D(ColumnsView);
+
     PixelXRange dirtyXs = PixelXRange::fromWidth(cx, cw);
 
     // content to be shown?

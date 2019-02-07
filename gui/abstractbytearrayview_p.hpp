@@ -24,6 +24,7 @@
 #define OKTETA_ABSTRACTBYTEARRAYVIEW_P_HPP
 
 // lib
+#include "columnsview_p.hpp"
 #include "abstractbytearrayview.hpp"
 #include "bytearraytablecursor.hpp"
 #include "bytearraytableranges.hpp"
@@ -53,13 +54,13 @@ class WidgetColumnStylist;
 class Cursor;
 class BorderColumnRenderer;
 
-class AbstractByteArrayViewPrivate
+class AbstractByteArrayViewPrivate : public ColumnsViewPrivate
 {
 public:
     explicit AbstractByteArrayViewPrivate(AbstractByteArrayView* parent);
     AbstractByteArrayViewPrivate() = delete;
 
-    virtual ~AbstractByteArrayViewPrivate();
+    ~AbstractByteArrayViewPrivate() override;
 
 public: // value access
     AbstractByteArrayModel* byteArrayModel() const;
@@ -311,7 +312,6 @@ protected:
     AbstractByteArrayView::LayoutStyle mResizeStyle;
 
 protected:
-    AbstractByteArrayView* const q_ptr;
     Q_DECLARE_PUBLIC(AbstractByteArrayView)
 };
 

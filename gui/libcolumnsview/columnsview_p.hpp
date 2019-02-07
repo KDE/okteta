@@ -34,10 +34,12 @@ namespace Okteta {
 class ColumnsViewPrivate
 {
 public:
-    ColumnsViewPrivate(/*bool R,*/);
-    ~ColumnsViewPrivate();
+    explicit ColumnsViewPrivate(/*bool R,*/ ColumnsView* parent);
+    ColumnsViewPrivate() = delete;
+    virtual ~ColumnsViewPrivate();
 
 public:
+    void init();
     void updateWidths();
 
 public: // calculated
@@ -52,18 +54,25 @@ public: // calculated
 
 public:
 //    bool Reversed;
+
+protected:
+    ColumnsView* const q_ptr;
+    Q_DECLARE_PUBLIC(ColumnsView)
 };
 
-ColumnsViewPrivate::ColumnsViewPrivate(/*bool R,*/)
-//    Reversed( R )
-{}
 
-ColumnsViewPrivate::~ColumnsViewPrivate()
+inline ColumnsViewPrivate::ColumnsViewPrivate(/*bool R,*/ ColumnsView* parent)
+    : q_ptr(parent)
+//    Reversed( R )
+{
+}
+
+inline ColumnsViewPrivate::~ColumnsViewPrivate()
 {
     qDeleteAll(columns);
 }
 
-void ColumnsViewPrivate::updateWidths()
+inline void ColumnsViewPrivate::updateWidths()
 {
     ColumnsWidth = 0;
     for (auto column : qAsConst(columns)) {

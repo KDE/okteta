@@ -139,6 +139,9 @@ public:
     };
     Q_ENUM(CodingTypes)
 
+protected:
+    AbstractByteArrayView(AbstractByteArrayViewPrivate* d, QWidget* parent);
+
 public:
     ~AbstractByteArrayView() override;
 
@@ -465,10 +468,6 @@ protected: // ColumnsView API
 
 protected: // Q_SLOTS QWidget API
     void changeEvent(QEvent* event) override;
-
-protected:
-    AbstractByteArrayViewPrivate* const d_ptr;
-    AbstractByteArrayView(AbstractByteArrayViewPrivate* d, QWidget* parent);
 
 private:
     Q_DECLARE_PRIVATE(AbstractByteArrayView)

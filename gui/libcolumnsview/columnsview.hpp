@@ -45,6 +45,9 @@ class OKTETAGUI_EXPORT ColumnsView : public QAbstractScrollArea
 {
     Q_OBJECT
 
+protected:
+    explicit ColumnsView(ColumnsViewPrivate* d, QWidget* parent = nullptr);
+
 public:
     explicit ColumnsView(/*bool R = false,*/ QWidget* parent = nullptr);
     ~ColumnsView() override;
@@ -135,8 +138,11 @@ protected: // recalculations
     /** calls updateContent for the Column for the given lines, if needed */
     void updateColumn(AbstractColumnRenderer& columnRenderer, const LineRange& lines);
 
+protected:
+    const QScopedPointer<ColumnsViewPrivate> d_ptr;
+
 private:
-    ColumnsViewPrivate* const d;
+    Q_DECLARE_PRIVATE(ColumnsView)
 };
 
 }

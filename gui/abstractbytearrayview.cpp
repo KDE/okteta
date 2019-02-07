@@ -31,17 +31,13 @@
 namespace Okteta {
 
 AbstractByteArrayView::AbstractByteArrayView(AbstractByteArrayViewPrivate* dd, QWidget* parent)
-    : ColumnsView(parent)
-    , d_ptr(dd)
+    : ColumnsView(dd, parent)
 {
     Q_D(AbstractByteArrayView);
     d->init();
 }
 
-AbstractByteArrayView::~AbstractByteArrayView()
-{
-    delete d_ptr;
-}
+AbstractByteArrayView::~AbstractByteArrayView() = default;
 
 Okteta::AbstractByteArrayModel* AbstractByteArrayView::byteArrayModel() const
 {
