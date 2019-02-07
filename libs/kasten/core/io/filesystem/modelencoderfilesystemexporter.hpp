@@ -49,7 +49,7 @@ public: // AbstractModelExporter API
                                    const QUrl& url) override;
     QString modelTypeName(AbstractModel* model, const AbstractModelSelection* selection) const override;
 
-protected:
+private:
     Q_DECLARE_PRIVATE(ModelEncoderFileSystemExporter)
 };
 

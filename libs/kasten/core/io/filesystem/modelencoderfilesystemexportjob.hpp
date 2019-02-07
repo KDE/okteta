@@ -44,7 +44,7 @@ public:
 protected: // AbstractFileSystemExportJob API
     void startExportToFile() override;
 
-protected:
+private:
     Q_DECLARE_PRIVATE(ModelEncoderFileSystemExportJob)
 };
 

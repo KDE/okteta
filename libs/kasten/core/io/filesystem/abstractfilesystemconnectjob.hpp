@@ -59,10 +59,10 @@ protected:
     AbstractDocument* document() const;
     QFile* file() const;
 
-protected:
+private:
     Q_PRIVATE_SLOT(d_func(), void connectWithFile())
 
-protected:
+private:
     Q_DECLARE_PRIVATE(AbstractFileSystemConnectJob)
 };
 

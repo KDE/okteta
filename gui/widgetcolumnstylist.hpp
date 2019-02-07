@@ -41,7 +41,7 @@ public:
 public: // AbstractColumnStylist API
     const QPalette& palette() const override;
 
-protected:
+private:
     Q_DECLARE_PRIVATE(WidgetColumnStylist)
 };
 

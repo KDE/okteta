@@ -70,7 +70,7 @@ Q_SIGNALS:
 protected:
     void setId(const QString& id);
 
-protected:
+private:
     Q_DECLARE_PRIVATE(AbstractDocument)
 };
 

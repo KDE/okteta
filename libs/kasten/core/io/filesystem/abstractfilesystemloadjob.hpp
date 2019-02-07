@@ -58,10 +58,10 @@ protected:
     QUrl url() const;
     QFile* file() const;
 
-protected:
+private:
     Q_PRIVATE_SLOT(d_func(), void load())
 
-protected:
+private:
     Q_DECLARE_PRIVATE(AbstractFileSystemLoadJob)
 };
 

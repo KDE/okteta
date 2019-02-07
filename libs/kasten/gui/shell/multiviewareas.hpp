@@ -85,7 +85,7 @@ Q_SIGNALS:
 protected:
     int indexOf(AbstractView* view) const;
 
-protected:
+private:
     Q_DECLARE_PRIVATE(MultiViewAreas)
 };
 

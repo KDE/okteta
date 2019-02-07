@@ -82,6 +82,8 @@ protected:
 
 protected:
     const QScopedPointer<AbstractModelPrivate> d_ptr;
+
+private:
     Q_DECLARE_PRIVATE(AbstractModel)
 };
 

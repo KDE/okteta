@@ -58,10 +58,10 @@ protected:
 protected:
     void completeSync(bool success);
 
-protected:
+private:
     Q_PRIVATE_SLOT(d_func(), void syncWithRemote())
 
-protected:
+private:
     Q_DECLARE_PRIVATE(AbstractFileSystemSyncWithRemoteJob)
 };
 

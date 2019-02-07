@@ -59,7 +59,7 @@ public: // const AbstractDocumentStrategy API
     bool canCloseAll() const override;
     bool canCloseAllOther(AbstractDocument* document) const override;
 
-protected:
+private:
     Q_DECLARE_PRIVATE(MultiDocumentStrategy)
 };
 

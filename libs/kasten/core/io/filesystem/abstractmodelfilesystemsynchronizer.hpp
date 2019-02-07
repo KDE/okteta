@@ -68,7 +68,7 @@ protected:
     void startNetworkWatching();
     void stopNetworkWatching();
 
-protected:
+private:
     Q_DECLARE_PRIVATE(AbstractModelFileSystemSynchronizer)
 };
 

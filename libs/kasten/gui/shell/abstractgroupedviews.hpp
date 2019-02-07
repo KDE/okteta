@@ -64,7 +64,7 @@ Q_SIGNALS:
     void closeRequest(const QVector<Kasten::AbstractView*>& views);
     void viewFocusChanged(Kasten::AbstractView* view);
 
-protected:
+private:
     Q_DECLARE_PRIVATE(AbstractGroupedViews)
 };
 
