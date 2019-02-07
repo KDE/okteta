@@ -73,7 +73,7 @@ void ViewListMenuController::updateActions()
 
     qDeleteAll(mWindowsActionGroup->actions());
 
-    const QList<AbstractView*> views = mViewManager->views();
+    const QVector<AbstractView*> views = mViewManager->views();
     const bool hasViews = (views.size() > 0);
 
     if (hasViews) {

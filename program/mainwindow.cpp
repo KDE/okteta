@@ -304,24 +304,24 @@ void OktetaMainWindow::onDataDropped(const QMimeData* mimeData)
     }
 }
 
-void OktetaMainWindow::onCloseRequest(const QList<Kasten::AbstractView*>& views)
+void OktetaMainWindow::onCloseRequest(const QVector<Kasten::AbstractView*>& views)
 {
     // group views per document
-    QHash<AbstractDocument*, QList<AbstractView*>> viewsToClosePerDocument;
+    QHash<AbstractDocument*, QVector<AbstractView*>> viewsToClosePerDocument;
     for (AbstractView* view : views) {
         AbstractDocument* document = view->findBaseModel<AbstractDocument*>();
         viewsToClosePerDocument[document].append(view);
     }
 
     // find documents which lose all views
-    const QList<AbstractView*> allViews = viewManager()->views();
+    const QVector<AbstractView*> allViews = viewManager()->views();
     for (AbstractView* view : allViews) {
         AbstractDocument* document = view->findBaseModel<AbstractDocument*>();
-        QHash<AbstractDocument*, QList<AbstractView*>>::Iterator it =
+        QHash<AbstractDocument*, QVector<AbstractView*>>::Iterator it =
             viewsToClosePerDocument.find(document);
 
         if (it != viewsToClosePerDocument.end()) {
-            const QList<AbstractView*>& viewsOfDocument = it.value();
+            const QVector<AbstractView*>& viewsOfDocument = it.value();
             const bool isAnotherView = !viewsOfDocument.contains(view);
             if (isAnotherView) {
                 viewsToClosePerDocument.erase(it);

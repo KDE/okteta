@@ -26,8 +26,7 @@
 #include "abstractviewfactory.hpp"
 #include "dummyview.hpp"
 // Qt
-#include <QListIterator>
-#include <QMutableListIterator>
+#include <QMutableVectorIterator>
 
 // temporary
 #include "modelcodecviewmanager.hpp"
@@ -53,7 +52,7 @@ void ViewManager::setViewFactory(AbstractViewFactory* factory)
     mFactory = factory;
 }
 
-QList<AbstractView*> ViewManager::views() const
+QVector<AbstractView*> ViewManager::views() const
 {
     return mViewList;
 }
@@ -77,13 +76,13 @@ void ViewManager::createCopyOfView(AbstractView* view, Qt::Alignment alignment)
 
     mViewList.append(viewCopy);
 
-    const QList<Kasten::AbstractView*> views { viewCopy };
+    const QVector<Kasten::AbstractView*> views { viewCopy };
     emit opened(views);
 }
 
 void ViewManager::createViewsFor(const QVector<Kasten::AbstractDocument*>& documents)
 {
-    QList<Kasten::AbstractView*> openedViews;
+    QVector<Kasten::AbstractView*> openedViews;
 
     openedViews.reserve(documents.size());
     mViewList.reserve(mViewList.size() + documents.size());
@@ -104,9 +103,9 @@ void ViewManager::createViewsFor(const QVector<Kasten::AbstractDocument*>& docum
 
 void ViewManager::removeViewsFor(const QVector<Kasten::AbstractDocument*>& documents)
 {
-    QList<Kasten::AbstractView*> closedViews;
+    QVector<Kasten::AbstractView*> closedViews;
 
-    QMutableListIterator<AbstractView*> it(mViewList);
+    QMutableVectorIterator<AbstractView*> it(mViewList);
     for (AbstractDocument* document : documents) {
         while (it.hasNext()) {
             AbstractView* view = it.next();
@@ -127,7 +126,7 @@ void ViewManager::removeViewsFor(const QVector<Kasten::AbstractDocument*>& docum
     }
 }
 
-void ViewManager::removeViews(const QList<AbstractView*>& views)
+void ViewManager::removeViews(const QVector<AbstractView*>& views)
 {
     for (AbstractView* view : views) {
         mViewList.removeOne(view);

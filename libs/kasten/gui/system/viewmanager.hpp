@@ -26,7 +26,7 @@
 // lib
 #include <kasten/abstractview.hpp>
 // Qt
-#include <QList>
+#include <QVector>
 #include <QObject>
 
 namespace Kasten {
@@ -47,10 +47,10 @@ public:
     void setViewFactory(AbstractViewFactory* factory);
 
     void createCopyOfView(AbstractView* view, Qt::Alignment alignment = {});
-    void removeViews(const QList<AbstractView*>& views);
+    void removeViews(const QVector<AbstractView*>& views);
 
 public:
-    QList<AbstractView*> views() const;
+    QVector<AbstractView*> views() const;
     AbstractView* viewByWidget(QWidget* widget) const;
 
 public:
@@ -62,12 +62,12 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     // view was created and already added to the list
-    void opened(const QList<Kasten::AbstractView*>& views);
+    void opened(const QVector<Kasten::AbstractView*>& views);
     // view will be closed, already removed from list
-    void closing(const QList<Kasten::AbstractView*>& views);
+    void closing(const QVector<Kasten::AbstractView*>& views);
 
 private:
-    QList<AbstractView*> mViewList;
+    QVector<AbstractView*> mViewList;
     AbstractViewFactory* mFactory = nullptr;
 
     // TODO: remove into own singleton

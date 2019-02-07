@@ -26,6 +26,8 @@
 // lib
 #include <kasten/abstractviewarea.hpp>
 
+template <class T> class QVector;
+
 namespace Kasten {
 
 class AbstractView;
@@ -43,23 +45,23 @@ public:
     ~AbstractGroupedViews() override;
 
 public Q_SLOTS: // set/action API to be implemented
-    virtual void addViews(const QList<Kasten::AbstractView*>& views) = 0;
-    virtual void removeViews(const QList<Kasten::AbstractView*>& views) = 0;
+    virtual void addViews(const QVector<Kasten::AbstractView*>& views) = 0;
+    virtual void removeViews(const QVector<Kasten::AbstractView*>& views) = 0;
     virtual void setViewFocus(Kasten::AbstractView* view) = 0;
 
 public: // get API to be implemented
     // returns the list in the order of display
-    virtual QList<AbstractView*> viewList() const = 0;
+    virtual QVector<AbstractView*> viewList() const = 0;
     virtual int viewCount() const = 0;
     virtual AbstractView* viewFocus() const = 0;
 
 Q_SIGNALS:
     // view was created and already added to the list
-    void added(const QList<Kasten::AbstractView*>& views);
+    void added(const QVector<Kasten::AbstractView*>& views);
     // view will be removed, already removed from list
-    void removing(const QList<Kasten::AbstractView*>& views);
+    void removing(const QVector<Kasten::AbstractView*>& views);
     // closing the view is requested
-    void closeRequest(const QList<Kasten::AbstractView*>& views);
+    void closeRequest(const QVector<Kasten::AbstractView*>& views);
     void viewFocusChanged(Kasten::AbstractView* view);
 
 protected:

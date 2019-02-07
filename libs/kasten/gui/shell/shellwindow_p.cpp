@@ -95,7 +95,7 @@ void ShellWindowPrivate::addTool(AbstractToolView* toolView)
 void ShellWindowPrivate::showDocument(AbstractDocument* document)
 {
     AbstractGroupedViews* currentGroupedViews = static_cast<AbstractGroupedViews*>(mGroupedViews->viewAreaFocus());
-    const QList<AbstractView*> viewList = currentGroupedViews->viewList();
+    const QVector<AbstractView*> viewList = currentGroupedViews->viewList();
 
     AbstractView* viewOfDocument = nullptr;
     for (AbstractView* view : viewList) {

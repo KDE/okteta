@@ -25,7 +25,8 @@
 
 // Qt
 #include <QtPlugin>
-#include <QList>
+
+template <typename C> class QVector;
 
 namespace Kasten {
 
