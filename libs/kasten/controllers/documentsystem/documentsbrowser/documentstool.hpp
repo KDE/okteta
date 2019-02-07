@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DOCUMENTSTOOL_HPP
-#define DOCUMENTSTOOL_HPP
+#ifndef KASTEN_DOCUMENTSTOOL_HPP
+#define KASTEN_DOCUMENTSTOOL_HPP
 
 // Kasten core
 #include <Kasten/AbstractTool>

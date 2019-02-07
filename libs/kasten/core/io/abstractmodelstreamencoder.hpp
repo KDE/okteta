@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTMODELSTREAMENCODER_HPP
-#define ABSTRACTMODELSTREAMENCODER_HPP
+#ifndef KASTEN_ABSTRACTMODELSTREAMENCODER_HPP
+#define KASTEN_ABSTRACTMODELSTREAMENCODER_HPP
 
 // lib
 #include <kasten/kastencore_export.hpp>

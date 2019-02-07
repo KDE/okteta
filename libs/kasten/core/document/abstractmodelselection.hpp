@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTMODELSELECTION_HPP
-#define ABSTRACTMODELSELECTION_HPP
+#ifndef KASTEN_ABSTRACTMODELSELECTION_HPP
+#define KASTEN_ABSTRACTMODELSELECTION_HPP
 
 // lib
 #include <kasten/kastencore_export.hpp>

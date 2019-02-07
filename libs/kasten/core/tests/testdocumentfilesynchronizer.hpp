@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TESTDOCUMENTFILESYNCHRONIZER_HPP
-#define TESTDOCUMENTFILESYNCHRONIZER_HPP
+#ifndef KASTEN_TESTDOCUMENTFILESYNCHRONIZER_HPP
+#define KASTEN_TESTDOCUMENTFILESYNCHRONIZER_HPP
 
 // Kasten
 #include <abstractmodelfilesystemsynchronizer.hpp>

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTEXPORTJOB_HPP
-#define ABSTRACTEXPORTJOB_HPP
+#ifndef KASTEN_ABSTRACTEXPORTJOB_HPP
+#define KASTEN_ABSTRACTEXPORTJOB_HPP
 
 // lib
 #include <kasten/kastencore_export.hpp>

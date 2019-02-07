@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTMODELSYNCHRONIZERFACTORY_HPP
-#define ABSTRACTMODELSYNCHRONIZERFACTORY_HPP
+#ifndef KASTEN_ABSTRACTMODELSYNCHRONIZERFACTORY_HPP
+#define KASTEN_ABSTRACTMODELSYNCHRONIZERFACTORY_HPP
 
 // lib
 #include <kasten/abstractmodelsynchronizer.hpp>

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef QUITCONTROLLER_HPP
-#define QUITCONTROLLER_HPP
+#ifndef KASTEN_QUITCONTROLLER_HPP
+#define KASTEN_QUITCONTROLLER_HPP
 
 // lib
 #include <kasten/kastencontrollers_export.hpp>

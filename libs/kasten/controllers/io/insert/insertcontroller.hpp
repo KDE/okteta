@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INSERTCONTROLLER_HPP
-#define INSERTCONTROLLER_HPP
+#ifndef KASTEN_INSERTCONTROLLER_HPP
+#define KASTEN_INSERTCONTROLLER_HPP
 
 // lib
 #include <kasten/kastencontrollers_export.hpp>

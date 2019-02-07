@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef VERSIONCONTROLLER_HPP
-#define VERSIONCONTROLLER_HPP
+#ifndef KASTEN_VERSIONCONTROLLER_HPP
+#define KASTEN_VERSIONCONTROLLER_HPP
 
 // lib
 #include <kasten/kastencontrollers_export.hpp>

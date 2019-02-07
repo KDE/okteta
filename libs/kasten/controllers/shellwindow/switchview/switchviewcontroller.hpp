@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SWITCHVIEWCONTROLLER_HPP
-#define SWITCHVIEWCONTROLLER_HPP
+#ifndef KASTEN_SWITCHVIEWCONTROLLER_HPP
+#define KASTEN_SWITCHVIEWCONTROLLER_HPP
 
 // lib
 #include <kasten/kastencontrollers_export.hpp>

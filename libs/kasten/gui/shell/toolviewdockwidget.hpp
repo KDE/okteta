@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TOOLVIEWDOCKWIDGET_HPP
-#define TOOLVIEWDOCKWIDGET_HPP
+#ifndef KASTEN_TOOLVIEWDOCKWIDGET_HPP
+#define KASTEN_TOOLVIEWDOCKWIDGET_HPP
 
 // lib
 #include <kasten/kastengui_export.hpp>

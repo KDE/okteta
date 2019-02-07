@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTVIEWFACTORY_HPP
-#define ABSTRACTVIEWFACTORY_HPP
+#ifndef KASTEN_ABSTRACTVIEWFACTORY_HPP
+#define KASTEN_ABSTRACTVIEWFACTORY_HPP
 
 // lib
 #include <kasten/abstractview.hpp>

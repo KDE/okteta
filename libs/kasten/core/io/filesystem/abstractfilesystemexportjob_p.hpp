@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTFILESYSTEMEXPORTJOB_P_HPP
-#define ABSTRACTFILESYSTEMEXPORTJOB_P_HPP
+#ifndef KASTEN_ABSTRACTFILESYSTEMEXPORTJOB_P_HPP
+#define KASTEN_ABSTRACTFILESYSTEMEXPORTJOB_P_HPP
 
 // lib
 #include "abstractfilesystemexportjob.hpp"

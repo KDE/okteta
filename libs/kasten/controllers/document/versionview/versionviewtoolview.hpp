@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef VERSIONVIEWTOOLVIEW_HPP
-#define VERSIONVIEWTOOLVIEW_HPP
+#ifndef KASTEN_VERSIONVIEWTOOLVIEW_HPP
+#define KASTEN_VERSIONVIEWTOOLVIEW_HPP
 
 // Kasten gui
 #include <Kasten/AbstractToolView>

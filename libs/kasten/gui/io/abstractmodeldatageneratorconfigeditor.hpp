@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTMODELDATAGENERATORCONFIGEDITOR_HPP
-#define ABSTRACTMODELDATAGENERATORCONFIGEDITOR_HPP
+#ifndef KASTEN_ABSTRACTMODELDATAGENERATORCONFIGEDITOR_HPP
+#define KASTEN_ABSTRACTMODELDATAGENERATORCONFIGEDITOR_HPP
 
 // lib
 #include <kasten/kastengui_export.hpp>

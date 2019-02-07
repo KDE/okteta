@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTVIEW_HPP
-#define ABSTRACTVIEW_HPP
+#ifndef KASTEN_ABSTRACTVIEW_HPP
+#define KASTEN_ABSTRACTVIEW_HPP
 
 // lib
 #include <kasten/kastengui_export.hpp>

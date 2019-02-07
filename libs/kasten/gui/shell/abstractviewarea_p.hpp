@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTVIEWAREA_P_HPP
-#define ABSTRACTVIEWAREA_P_HPP
+#ifndef KASTEN_ABSTRACTVIEWAREA_P_HPP
+#define KASTEN_ABSTRACTVIEWAREA_P_HPP
 
 // lib
 #include "abstractviewarea.hpp"

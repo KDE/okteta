@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef EXPORTDIALOG_HPP
-#define EXPORTDIALOG_HPP
+#ifndef KASTEN_EXPORTDIALOG_HPP
+#define KASTEN_EXPORTDIALOG_HPP
 
 // Qt
 #include <QDialog>

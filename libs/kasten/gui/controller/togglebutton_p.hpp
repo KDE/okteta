@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TOGGLEBUTTON_P_HPP
-#define TOGGLEBUTTON_P_HPP
+#ifndef KASTEN_TOGGLEBUTTON_P_HPP
+#define KASTEN_TOGGLEBUTTON_P_HPP
 
 // Qt
 #include <QIcon>

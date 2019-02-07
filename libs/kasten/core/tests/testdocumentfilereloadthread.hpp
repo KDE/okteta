@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TESTDOCUMENTFILERELOADTHREAD_HPP
-#define TESTDOCUMENTFILERELOADTHREAD_HPP
+#ifndef KASTEN_TESTDOCUMENTFILERELOADTHREAD_HPP
+#define KASTEN_TESTDOCUMENTFILERELOADTHREAD_HPP
 
 // Qt
 #include <QByteArray>

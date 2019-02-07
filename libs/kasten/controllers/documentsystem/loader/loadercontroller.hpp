@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef LOADERCONTROLLER_HPP
-#define LOADERCONTROLLER_HPP
+#ifndef KASTEN_LOADERCONTROLLER_HPP
+#define KASTEN_LOADERCONTROLLER_HPP
 
 // lib
 #include <kasten/kastencontrollers_export.hpp>

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef READONLYBARCONTROLLER_HPP
-#define READONLYBARCONTROLLER_HPP
+#ifndef KASTEN_READONLYBARCONTROLLER_HPP
+#define KASTEN_READONLYBARCONTROLLER_HPP
 
 // lib
 #include <kasten/kastencontrollers_export.hpp>

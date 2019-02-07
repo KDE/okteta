@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CREATORCONTROLLER_HPP
-#define CREATORCONTROLLER_HPP
+#ifndef KASTEN_CREATORCONTROLLER_HPP
+#define KASTEN_CREATORCONTROLLER_HPP
 
 // lib
 #include <kasten/kastencontrollers_export.hpp>

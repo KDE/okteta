@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TOOLLISTMENUCONTROLLER_HPP
-#define TOOLLISTMENUCONTROLLER_HPP
+#ifndef KASTEN_TOOLLISTMENUCONTROLLER_HPP
+#define KASTEN_TOOLLISTMENUCONTROLLER_HPP
 
 // lib
 #include <kasten/kastencontrollers_export.hpp>

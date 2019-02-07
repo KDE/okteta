@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTFILESYSTEMSYNCTOREMOTEJOB_HPP
-#define ABSTRACTFILESYSTEMSYNCTOREMOTEJOB_HPP
+#ifndef KASTEN_ABSTRACTFILESYSTEMSYNCTOREMOTEJOB_HPP
+#define KASTEN_ABSTRACTFILESYSTEMSYNCTOREMOTEJOB_HPP
 
 // library
 #include <kasten/abstractsynctoremotejob.hpp>

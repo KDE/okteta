@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTFILESYSTEMCONNECTJOB_P_HPP
-#define ABSTRACTFILESYSTEMCONNECTJOB_P_HPP
+#ifndef KASTEN_ABSTRACTFILESYSTEMCONNECTJOB_P_HPP
+#define KASTEN_ABSTRACTFILESYSTEMCONNECTJOB_P_HPP
 
 // library
 #include "abstractfilesystemconnectjob.hpp"

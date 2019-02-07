@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef VERSIONTABLEMODEL_HPP
-#define VERSIONTABLEMODEL_HPP
+#ifndef KASTEN_VERSIONTABLEMODEL_HPP
+#define KASTEN_VERSIONTABLEMODEL_HPP
 
 // Qt
 #include <QAbstractTableModel>

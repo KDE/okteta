@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TESTDOCUMENTTEST_HPP
-#define TESTDOCUMENTTEST_HPP
+#ifndef KASTEN_TESTDOCUMENTTEST_HPP
+#define KASTEN_TESTDOCUMENTTEST_HPP
 
 // sut
 #include <kastencore.hpp>

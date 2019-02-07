@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SINGLEDOCUMENTSTRATEGY_HPP
-#define SINGLEDOCUMENTSTRATEGY_HPP
+#ifndef KASTEN_SINGLEDOCUMENTSTRATEGY_HPP
+#define KASTEN_SINGLEDOCUMENTSTRATEGY_HPP
 
 // lib
 #include <kasten/abstractdocumentstrategy.hpp>

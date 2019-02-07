@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TESTDOCUMENTFILELOADJOB_HPP
-#define TESTDOCUMENTFILELOADJOB_HPP
+#ifndef KASTEN_TESTDOCUMENTFILELOADJOB_HPP
+#define KASTEN_TESTDOCUMENTFILELOADJOB_HPP
 
 // Kasten core
 #include <abstractfilesystemloadjob.hpp>

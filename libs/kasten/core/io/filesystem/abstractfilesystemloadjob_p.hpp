@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTFILESYSTEMLOADJOB_P_HPP
-#define ABSTRACTFILESYSTEMLOADJOB_P_HPP
+#ifndef KASTEN_ABSTRACTFILESYSTEMLOADJOB_P_HPP
+#define KASTEN_ABSTRACTFILESYSTEMLOADJOB_P_HPP
 
 // lib
 #include "abstractfilesystemloadjob.hpp"

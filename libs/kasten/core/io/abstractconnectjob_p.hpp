@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTCONNECTJOB_P_HPP
-#define ABSTRACTCONNECTJOB_P_HPP
+#ifndef KASTEN_ABSTRACTCONNECTJOB_P_HPP
+#define KASTEN_ABSTRACTCONNECTJOB_P_HPP
 
 #include "abstractconnectjob.hpp"
 

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTDOCUMENTSTRATEGY_P_HPP
-#define ABSTRACTDOCUMENTSTRATEGY_P_HPP
+#ifndef KASTEN_ABSTRACTDOCUMENTSTRATEGY_P_HPP
+#define KASTEN_ABSTRACTDOCUMENTSTRATEGY_P_HPP
 
 #include "abstractdocumentstrategy.hpp"
 

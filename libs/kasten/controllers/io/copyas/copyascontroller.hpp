@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef COPYASCONTROLLER_HPP
-#define COPYASCONTROLLER_HPP
+#ifndef KASTEN_COPYASCONTROLLER_HPP
+#define KASTEN_COPYASCONTROLLER_HPP
 
 // lib
 #include <kasten/kastencontrollers_export.hpp>

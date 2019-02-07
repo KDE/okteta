@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ZOOMBARCONTROLLER_HPP
-#define ZOOMBARCONTROLLER_HPP
+#ifndef KASTEN_ZOOMBARCONTROLLER_HPP
+#define KASTEN_ZOOMBARCONTROLLER_HPP
 
 // lib
 #include <kasten/kastencontrollers_export.hpp>

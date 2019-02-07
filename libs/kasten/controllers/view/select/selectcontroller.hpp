@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SELECTCONTROLLER_HPP
-#define SELECTCONTROLLER_HPP
+#ifndef KASTEN_SELECTCONTROLLER_HPP
+#define KASTEN_SELECTCONTROLLER_HPP
 
 // lib
 #include <kasten/kastencontrollers_export.hpp>

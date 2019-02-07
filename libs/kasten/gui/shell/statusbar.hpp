@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef STATUSBAR_HPP
-#define STATUSBAR_HPP
+#ifndef KASTEN_STATUSBAR_HPP
+#define KASTEN_STATUSBAR_HPP
 
 // lib
 #include <kasten/kastengui_export.hpp>

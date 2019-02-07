@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INSERTDIALOG_HPP
-#define INSERTDIALOG_HPP
+#ifndef KASTEN_INSERTDIALOG_HPP
+#define KASTEN_INSERTDIALOG_HPP
 
 // Qt
 #include <QDialog>

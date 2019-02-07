@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KASTENCORE_HPP
-#define KASTENCORE_HPP
+#ifndef KASTEN_KASTENCORE_HPP
+#define KASTEN_KASTENCORE_HPP
 
 // Qt core
 #include <QFlags>

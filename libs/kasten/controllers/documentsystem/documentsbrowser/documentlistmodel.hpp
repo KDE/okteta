@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DOCUMENTLISTMODEL_HPP
-#define DOCUMENTLISTMODEL_HPP
+#ifndef KASTEN_DOCUMENTLISTMODEL_HPP
+#define KASTEN_DOCUMENTLISTMODEL_HPP
 
 // Qt
 #include <QAbstractTableModel>

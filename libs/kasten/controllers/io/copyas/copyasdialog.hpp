@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef COPYASDIALOG_HPP
-#define COPYASDIALOG_HPP
+#ifndef KASTEN_COPYASDIALOG_HPP
+#define KASTEN_COPYASDIALOG_HPP
 
 // Qt
 #include <QDialog>

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KASTENGUI_HPP
-#define KASTENGUI_HPP
+#ifndef KASTEN_KASTENGUI_HPP
+#define KASTEN_KASTENGUI_HPP
 
 // Qt
 #include <QFlags>

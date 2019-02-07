@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef VERSIONVIEW_HPP
-#define VERSIONVIEW_HPP
+#ifndef KASTEN_VERSIONVIEW_HPP
+#define KASTEN_VERSIONVIEW_HPP
 
 // Qt
 #include <QWidget>

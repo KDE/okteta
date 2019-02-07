@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTCONTROLLER_HPP
-#define ABSTRACTCONTROLLER_HPP
+#ifndef KASTEN_ABSTRACTCONTROLLER_HPP
+#define KASTEN_ABSTRACTCONTROLLER_HPP
 
 // lib
 #include <kasten/kastengui_export.hpp>

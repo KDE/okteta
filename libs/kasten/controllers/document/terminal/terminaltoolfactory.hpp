@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TERMINALTOOLFACTORY_HPP
-#define TERMINALTOOLFACTORY_HPP
+#ifndef KASTEN_TERMINALTOOLFACTORY_HPP
+#define KASTEN_TERMINALTOOLFACTORY_HPP
 
 // lib
 #include <kasten/kastencontrollers_export.hpp>

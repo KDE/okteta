@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTXMLGUICONTROLLER_HPP
-#define ABSTRACTXMLGUICONTROLLER_HPP
+#ifndef KASTEN_ABSTRACTXMLGUICONTROLLER_HPP
+#define KASTEN_ABSTRACTXMLGUICONTROLLER_HPP
 
 // lib
 #include <kasten/abstractcontroller.hpp>

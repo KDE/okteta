@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTDOCUMENTSTRATEGY_HPP
-#define ABSTRACTDOCUMENTSTRATEGY_HPP
+#ifndef KASTEN_ABSTRACTDOCUMENTSTRATEGY_HPP
+#define KASTEN_ABSTRACTDOCUMENTSTRATEGY_HPP
 
 // lib
 #include <kasten/kastengui_export.hpp>

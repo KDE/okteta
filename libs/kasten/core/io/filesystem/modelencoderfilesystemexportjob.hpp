@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MODELENCODERFILESYSTEMEXPORTJOB_HPP
-#define MODELENCODERFILESYSTEMEXPORTJOB_HPP
+#ifndef KASTEN_MODELENCODERFILESYSTEMEXPORTJOB_HPP
+#define KASTEN_MODELENCODERFILESYSTEMEXPORTJOB_HPP
 
 // lib
 #include <kasten/abstractfilesystemexportjob.hpp>

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTFILESYSTEMSYNCWITHREMOTEJOB_P_HPP
-#define ABSTRACTFILESYSTEMSYNCWITHREMOTEJOB_P_HPP
+#ifndef KASTEN_ABSTRACTFILESYSTEMSYNCWITHREMOTEJOB_P_HPP
+#define KASTEN_ABSTRACTFILESYSTEMSYNCWITHREMOTEJOB_P_HPP
 
 // library
 #include "abstractfilesystemsyncwithremotejob.hpp"

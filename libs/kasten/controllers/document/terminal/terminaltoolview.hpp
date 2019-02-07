@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TERMINALTOOLVIEW_HPP
-#define TERMINALTOOLVIEW_HPP
+#ifndef KASTEN_TERMINALTOOLVIEW_HPP
+#define KASTEN_TERMINALTOOLVIEW_HPP
 
 // Kasten gui
 #include <Kasten/AbstractToolView>

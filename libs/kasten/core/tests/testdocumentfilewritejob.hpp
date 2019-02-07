@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TESTDOCUMENTFILEWRITEJOB_HPP
-#define TESTDOCUMENTFILEWRITEJOB_HPP
+#ifndef KASTEN_TESTDOCUMENTFILEWRITEJOB_HPP
+#define KASTEN_TESTDOCUMENTFILEWRITEJOB_HPP
 
 // Kasten core
 #include <abstractfilesystemsynctoremotejob.hpp>

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTSYNCWITHREMOTEJOB_P_HPP
-#define ABSTRACTSYNCWITHREMOTEJOB_P_HPP
+#ifndef KASTEN_ABSTRACTSYNCWITHREMOTEJOB_P_HPP
+#define KASTEN_ABSTRACTSYNCWITHREMOTEJOB_P_HPP
 
 #include "abstractsyncwithremotejob.hpp"
 

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TOGGLEBUTTON_HPP
-#define TOGGLEBUTTON_HPP
+#ifndef KASTEN_TOGGLEBUTTON_HPP
+#define KASTEN_TOGGLEBUTTON_HPP
 
 // lib
 #include <kasten/kastengui_export.hpp>

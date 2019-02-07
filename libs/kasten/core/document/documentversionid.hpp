@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DOCUMENTVERSIONID_HPP
-#define DOCUMENTVERSIONID_HPP
+#ifndef KASTEN_DOCUMENTVERSIONID_HPP
+#define KASTEN_DOCUMENTVERSIONID_HPP
 
 namespace Kasten {
 

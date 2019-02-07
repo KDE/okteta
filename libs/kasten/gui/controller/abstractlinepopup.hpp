@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTLINEPOPUP_HPP
-#define ABSTRACTLINEPOPUP_HPP
+#ifndef KASTEN_ABSTRACTLINEPOPUP_HPP
+#define KASTEN_ABSTRACTLINEPOPUP_HPP
 
 // lib
 #include <kasten/kastengui_export.hpp>

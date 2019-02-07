@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTMODELEXPORTER_P_HPP
-#define ABSTRACTMODELEXPORTER_P_HPP
+#ifndef KASTEN_ABSTRACTMODELEXPORTER_P_HPP
+#define KASTEN_ABSTRACTMODELEXPORTER_P_HPP
 
 #include "abstractmodelexporter.hpp"
 

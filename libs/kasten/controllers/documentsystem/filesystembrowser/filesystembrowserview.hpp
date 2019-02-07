@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FILESYSTEMBROWSERVIEW_HPP
-#define FILESYSTEMBROWSERVIEW_HPP
+#ifndef KASTEN_FILESYSTEMBROWSERVIEW_HPP
+#define KASTEN_FILESYSTEMBROWSERVIEW_HPP
 
 // Qt
 #include <QWidget>

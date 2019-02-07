@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTTOOL_HPP
-#define ABSTRACTTOOL_HPP
+#ifndef KASTEN_ABSTRACTTOOL_HPP
+#define KASTEN_ABSTRACTTOOL_HPP
 
 // lib
 #include <kasten/kastencore_export.hpp>

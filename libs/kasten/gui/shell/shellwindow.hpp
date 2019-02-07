@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SHELLWINDOW_HPP
-#define SHELLWINDOW_HPP
+#ifndef KASTEN_SHELLWINDOW_HPP
+#define KASTEN_SHELLWINDOW_HPP
 
 // Kasten gui
 #include <kasten/kastengui_export.hpp>

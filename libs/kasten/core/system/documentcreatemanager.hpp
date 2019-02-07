@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DOCUMENTCREATEMANAGER_HPP
-#define DOCUMENTCREATEMANAGER_HPP
+#ifndef KASTEN_DOCUMENTCREATEMANAGER_HPP
+#define KASTEN_DOCUMENTCREATEMANAGER_HPP
 
 // lib
 #include <kasten/kastencore_export.hpp>

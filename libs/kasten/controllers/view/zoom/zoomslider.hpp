@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ZOOMSLIDER_HPP
-#define ZOOMSLIDER_HPP
+#ifndef KASTEN_ZOOMSLIDER_HPP
+#define KASTEN_ZOOMSLIDER_HPP
 
 // Qt
 #include <QWidget>

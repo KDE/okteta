@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTFILESYSTEMSYNCFROMREMOTEJOB_HPP
-#define ABSTRACTFILESYSTEMSYNCFROMREMOTEJOB_HPP
+#ifndef KASTEN_ABSTRACTFILESYSTEMSYNCFROMREMOTEJOB_HPP
+#define KASTEN_ABSTRACTFILESYSTEMSYNCFROMREMOTEJOB_HPP
 
 // library
 #include <kasten/abstractsyncfromremotejob.hpp>

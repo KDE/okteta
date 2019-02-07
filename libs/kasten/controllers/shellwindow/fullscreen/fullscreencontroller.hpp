@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FULLSCREENCONTROLLER_HPP
-#define FULLSCREENCONTROLLER_HPP
+#ifndef KASTEN_FULLSCREENCONTROLLER_HPP
+#define KASTEN_FULLSCREENCONTROLLER_HPP
 
 // lib
 #include <kasten/kastencontrollers_export.hpp>

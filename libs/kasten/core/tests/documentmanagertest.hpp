@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DOCUMENTMANAGERTEST_HPP
-#define DOCUMENTMANAGERTEST_HPP
+#ifndef KASTEN_DOCUMENTMANAGERTEST_HPP
+#define KASTEN_DOCUMENTMANAGERTEST_HPP
 
 // Qt
 #include <QObject>

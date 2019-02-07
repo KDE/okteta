@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TESTDOCUMENTFILESYNCHRONIZERFACTORY_HPP
-#define TESTDOCUMENTFILESYNCHRONIZERFACTORY_HPP
+#ifndef KASTEN_TESTDOCUMENTFILESYNCHRONIZERFACTORY_HPP
+#define KASTEN_TESTDOCUMENTFILESYNCHRONIZERFACTORY_HPP
 
 // Kasten
 #include <abstractmodelsynchronizerfactory.hpp>

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTGROUPEDVIEWS_P_HPP
-#define ABSTRACTGROUPEDVIEWS_P_HPP
+#ifndef KASTEN_ABSTRACTGROUPEDVIEWS_P_HPP
+#define KASTEN_ABSTRACTGROUPEDVIEWS_P_HPP
 
 // lib
 #include "abstractgroupedviews.hpp"

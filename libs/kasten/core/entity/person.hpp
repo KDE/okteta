@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PERSON_HPP
-#define PERSON_HPP
+#ifndef KASTEN_PERSON_HPP
+#define KASTEN_PERSON_HPP
 
 // lib
 #include <kasten/kastencore_export.hpp>

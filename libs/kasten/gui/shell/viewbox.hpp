@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef VIEWBOX_HPP
-#define VIEWBOX_HPP
+#ifndef KASTEN_VIEWBOX_HPP
+#define KASTEN_VIEWBOX_HPP
 
 // Qt
 #include <QWidget>

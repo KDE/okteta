@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CLIPBOARDCONTROLLER_HPP
-#define CLIPBOARDCONTROLLER_HPP
+#ifndef KASTEN_CLIPBOARDCONTROLLER_HPP
+#define KASTEN_CLIPBOARDCONTROLLER_HPP
 
 // lib
 #include <kasten/kastencontrollers_export.hpp>

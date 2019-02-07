@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SINGLEVIEWWINDOW_HPP
-#define SINGLEVIEWWINDOW_HPP
+#ifndef KASTEN_SINGLEVIEWWINDOW_HPP
+#define KASTEN_SINGLEVIEWWINDOW_HPP
 
 // lib
 #include <kasten/kastengui_export.hpp>

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DOCUMENTVERSIONDATA_HPP
-#define DOCUMENTVERSIONDATA_HPP
+#ifndef KASTEN_DOCUMENTVERSIONDATA_HPP
+#define KASTEN_DOCUMENTVERSIONDATA_HPP
 
 // lib
 #include <kasten/kastencore_export.hpp>

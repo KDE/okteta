@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FILESYSTEMBROWSERTOOL_HPP
-#define FILESYSTEMBROWSERTOOL_HPP
+#ifndef KASTEN_FILESYSTEMBROWSERTOOL_HPP
+#define KASTEN_FILESYSTEMBROWSERTOOL_HPP
 
 // Kasten core
 #include <Kasten/AbstractTool>

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef VERSIONVIEWTOOL_HPP
-#define VERSIONVIEWTOOL_HPP
+#ifndef KASTEN_VERSIONVIEWTOOL_HPP
+#define KASTEN_VERSIONVIEWTOOL_HPP
 
 // Kasten core
 #include <Kasten/AbstractTool>

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TABWIDGET_HPP
-#define TABWIDGET_HPP
+#ifndef KASTEN_TABWIDGET_HPP
+#define KASTEN_TABWIDGET_HPP
 
 // Qt
 #include <QTabWidget>

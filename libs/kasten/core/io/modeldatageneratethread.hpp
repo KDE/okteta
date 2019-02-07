@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MODELDATAGENERATETHREAD_HPP
-#define MODELDATAGENERATETHREAD_HPP
+#ifndef KASTEN_MODELDATAGENERATETHREAD_HPP
+#define KASTEN_MODELDATAGENERATETHREAD_HPP
 
 // lib
 #include <kasten/kastencore_export.hpp>

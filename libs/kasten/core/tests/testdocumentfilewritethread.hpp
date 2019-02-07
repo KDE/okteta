@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TESTDOCUMENTFILEWRITETHREAD_HPP
-#define TESTDOCUMENTFILEWRITETHREAD_HPP
+#ifndef KASTEN_TESTDOCUMENTFILEWRITETHREAD_HPP
+#define KASTEN_TESTDOCUMENTFILEWRITETHREAD_HPP
 
 // Qt
 #include <QByteArray>

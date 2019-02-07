@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TABBEDVIEWS_HPP
-#define TABBEDVIEWS_HPP
+#ifndef KASTEN_TABBEDVIEWS_HPP
+#define KASTEN_TABBEDVIEWS_HPP
 
 // lib
 #include <kasten/abstractgroupedviews.hpp>

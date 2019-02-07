@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TABBAR_HPP
-#define TABBAR_HPP
+#ifndef KASTEN_TABBAR_HPP
+#define KASTEN_TABBAR_HPP
 
 // Qt
 #include <QTabBar>

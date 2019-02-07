@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SINGLEVIEWAREA_HPP
-#define SINGLEVIEWAREA_HPP
+#ifndef KASTEN_SINGLEVIEWAREA_HPP
+#define KASTEN_SINGLEVIEWAREA_HPP
 
 // lib
 #include <kasten/abstractviewarea.hpp>

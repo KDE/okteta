@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef VIEWAREASPLITCONTROLLER_HPP
-#define VIEWAREASPLITCONTROLLER_HPP
+#ifndef KASTEN_VIEWAREASPLITCONTROLLER_HPP
+#define KASTEN_VIEWAREASPLITCONTROLLER_HPP
 
 // lib
 #include <kasten/kastencontrollers_export.hpp>

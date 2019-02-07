@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TESTDOCUMENTFILESYNCHRONIZERTEST_HPP
-#define TESTDOCUMENTFILESYNCHRONIZERTEST_HPP
+#ifndef KASTEN_TESTDOCUMENTFILESYNCHRONIZERTEST_HPP
+#define KASTEN_TESTDOCUMENTFILESYNCHRONIZERTEST_HPP
 
 // Qt
 #include <QObject>

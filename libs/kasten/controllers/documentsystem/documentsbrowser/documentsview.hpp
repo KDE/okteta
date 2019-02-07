@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DOCUMENTSVIEW_HPP
-#define DOCUMENTSVIEW_HPP
+#ifndef KASTEN_DOCUMENTSVIEW_HPP
+#define KASTEN_DOCUMENTSVIEW_HPP
 
 // Qt
 #include <QWidget>

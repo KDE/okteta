@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SYNCHRONIZECONTROLLER_HPP
-#define SYNCHRONIZECONTROLLER_HPP
+#ifndef KASTEN_SYNCHRONIZECONTROLLER_HPP
+#define KASTEN_SYNCHRONIZECONTROLLER_HPP
 
 // lib
 #include <kasten/kastencontrollers_export.hpp>

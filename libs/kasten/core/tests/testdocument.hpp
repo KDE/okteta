@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TESTDOCUMENT_HPP
-#define TESTDOCUMENT_HPP
+#ifndef KASTEN_TESTDOCUMENT_HPP
+#define KASTEN_TESTDOCUMENT_HPP
 
 // lib
 #include "abstractdocument.hpp"

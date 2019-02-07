@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TESTDOCUMENTFILECONNECTJOB_HPP
-#define TESTDOCUMENTFILECONNECTJOB_HPP
+#ifndef KASTEN_TESTDOCUMENTFILECONNECTJOB_HPP
+#define KASTEN_TESTDOCUMENTFILECONNECTJOB_HPP
 
 // Kasten core
 #include <abstractfilesystemconnectjob.hpp>

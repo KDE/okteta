@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PERSON_P_HPP
-#define PERSON_P_HPP
+#ifndef KASTEN_PERSON_P_HPP
+#define KASTEN_PERSON_P_HPP
 
 #include "person.hpp"
 

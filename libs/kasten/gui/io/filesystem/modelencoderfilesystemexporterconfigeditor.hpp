@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MODELENCODERFILESYSTEMEXPORTERCONFIGEDITOR_HPP
-#define MODELENCODERFILESYSTEMEXPORTERCONFIGEDITOR_HPP
+#ifndef KASTEN_MODELENCODERFILESYSTEMEXPORTERCONFIGEDITOR_HPP
+#define KASTEN_MODELENCODERFILESYSTEMEXPORTERCONFIGEDITOR_HPP
 
 // lib
 #include <kasten/abstractmodelexporterconfigeditor.hpp>

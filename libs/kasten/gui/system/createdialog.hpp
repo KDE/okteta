@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CREATEDIALOG_HPP
-#define CREATEDIALOG_HPP
+#ifndef KASTEN_CREATEDIALOG_HPP
+#define KASTEN_CREATEDIALOG_HPP
 
 // Qt
 #include <QDialog>

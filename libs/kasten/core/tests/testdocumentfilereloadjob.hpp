@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TESTDOCUMENTFILERELOADJOB_HPP
-#define TESTDOCUMENTFILERELOADJOB_HPP
+#ifndef KASTEN_TESTDOCUMENTFILERELOADJOB_HPP
+#define KASTEN_TESTDOCUMENTFILERELOADJOB_HPP
 
 // Kasten core
 #include <abstractfilesystemsyncfromremotejob.hpp>

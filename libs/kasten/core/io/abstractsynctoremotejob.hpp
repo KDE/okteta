@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTSYNCTOREMOTEJOB_HPP
-#define ABSTRACTSYNCTOREMOTEJOB_HPP
+#ifndef KASTEN_ABSTRACTSYNCTOREMOTEJOB_HPP
+#define KASTEN_ABSTRACTSYNCTOREMOTEJOB_HPP
 
 // lib
 #include <kasten/kastencore_export.hpp>

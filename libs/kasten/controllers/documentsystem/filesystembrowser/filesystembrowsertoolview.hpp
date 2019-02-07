@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FILESYSTEMBROWSERTOOLVIEW_HPP
-#define FILESYSTEMBROWSERTOOLVIEW_HPP
+#ifndef KASTEN_FILESYSTEMBROWSERTOOLVIEW_HPP
+#define KASTEN_FILESYSTEMBROWSERTOOLVIEW_HPP
 
 // Kasten gui
 #include <Kasten/AbstractToolView>

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef VIEWMANAGER_HPP
-#define VIEWMANAGER_HPP
+#ifndef KASTEN_VIEWMANAGER_HPP
+#define KASTEN_VIEWMANAGER_HPP
 
 // lib
 #include <kasten/abstractview.hpp>

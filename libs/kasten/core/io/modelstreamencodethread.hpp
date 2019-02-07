@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MODELSTREAMENCODETHREAD_HPP
-#define MODELSTREAMENCODETHREAD_HPP
+#ifndef KASTEN_MODELSTREAMENCODETHREAD_HPP
+#define KASTEN_MODELSTREAMENCODETHREAD_HPP
 
 // lib
 #include <kasten/kastencore_export.hpp>

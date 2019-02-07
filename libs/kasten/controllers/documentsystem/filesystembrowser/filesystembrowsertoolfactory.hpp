@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FILESYSTEMBROWSERTOOLFACTORY_HPP
-#define FILESYSTEMBROWSERTOOLFACTORY_HPP
+#ifndef KASTEN_FILESYSTEMBROWSERTOOLFACTORY_HPP
+#define KASTEN_FILESYSTEMBROWSERTOOLFACTORY_HPP
 
 // lib
 #include <kasten/kastencontrollers_export.hpp>

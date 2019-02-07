@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTMODELSTREAMENCODER_P_HPP
-#define ABSTRACTMODELSTREAMENCODER_P_HPP
+#ifndef KASTEN_ABSTRACTMODELSTREAMENCODER_P_HPP
+#define KASTEN_ABSTRACTMODELSTREAMENCODER_P_HPP
 
 #include "abstractmodelstreamencoder.hpp"
 

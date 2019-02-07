@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SETREMOTECONTROLLER_HPP
-#define SETREMOTECONTROLLER_HPP
+#ifndef KASTEN_SETREMOTECONTROLLER_HPP
+#define KASTEN_SETREMOTECONTROLLER_HPP
 
 // lib
 #include <kasten/kastencontrollers_export.hpp>

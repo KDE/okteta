@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MULTIVIEWAREAS_HPP
-#define MULTIVIEWAREAS_HPP
+#ifndef KASTEN_MULTIVIEWAREAS_HPP
+#define KASTEN_MULTIVIEWAREAS_HPP
 
 // lib
 #include <kasten/abstractgroupedviews.hpp>

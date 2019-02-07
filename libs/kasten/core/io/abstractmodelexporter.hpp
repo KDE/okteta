@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTMODELEXPORTER_HPP
-#define ABSTRACTMODELEXPORTER_HPP
+#ifndef KASTEN_ABSTRACTMODELEXPORTER_HPP
+#define KASTEN_ABSTRACTMODELEXPORTER_HPP
 
 // lib
 #include <kasten/kastencore_export.hpp>

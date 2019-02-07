@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTSYNCFROMREMOTEJOB_HPP
-#define ABSTRACTSYNCFROMREMOTEJOB_HPP
+#ifndef KASTEN_ABSTRACTSYNCFROMREMOTEJOB_HPP
+#define KASTEN_ABSTRACTSYNCFROMREMOTEJOB_HPP
 
 // lib
 #include <kasten/kastencore_export.hpp>

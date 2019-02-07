@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MULTIDOCUMENTSTRATEGY_HPP
-#define MULTIDOCUMENTSTRATEGY_HPP
+#ifndef KASTEN_MULTIDOCUMENTSTRATEGY_HPP
+#define KASTEN_MULTIDOCUMENTSTRATEGY_HPP
 
 // lib
 #include <kasten/abstractdocumentstrategy.hpp>

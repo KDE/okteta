@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef JOBMANAGER_HPP
-#define JOBMANAGER_HPP
+#ifndef KASTEN_JOBMANAGER_HPP
+#define KASTEN_JOBMANAGER_HPP
 
 // lib
 #include <kasten/kastencore_export.hpp>

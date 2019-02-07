@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DIALOGHANDLER_HPP
-#define DIALOGHANDLER_HPP
+#ifndef KASTEN_DIALOGHANDLER_HPP
+#define KASTEN_DIALOGHANDLER_HPP
 
 // lib
 #include <kasten/kastengui_export.hpp>

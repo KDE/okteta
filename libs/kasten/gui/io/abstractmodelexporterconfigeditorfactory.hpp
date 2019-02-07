@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTMODELEXPORTERCONFIGEDITORFACTORY_HPP
-#define ABSTRACTMODELEXPORTERCONFIGEDITORFACTORY_HPP
+#ifndef KASTEN_ABSTRACTMODELEXPORTERCONFIGEDITORFACTORY_HPP
+#define KASTEN_ABSTRACTMODELEXPORTERCONFIGEDITORFACTORY_HPP
 
 // lib
 #include <kasten/kastengui_export.hpp>

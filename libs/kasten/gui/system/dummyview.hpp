@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DUMMYVIEW_HPP
-#define DUMMYVIEW_HPP
+#ifndef KASTEN_DUMMYVIEW_HPP
+#define KASTEN_DUMMYVIEW_HPP
 
 // lib
 #include <kasten/abstractview.hpp>

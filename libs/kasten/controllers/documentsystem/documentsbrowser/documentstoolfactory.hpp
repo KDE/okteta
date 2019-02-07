@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DOCUMENTSTOOLFACTORY_HPP
-#define DOCUMENTSTOOLFACTORY_HPP
+#ifndef KASTEN_DOCUMENTSTOOLFACTORY_HPP
+#define KASTEN_DOCUMENTSTOOLFACTORY_HPP
 
 // lib
 #include <kasten/kastencontrollers_export.hpp>

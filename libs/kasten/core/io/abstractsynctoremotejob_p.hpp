@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTSYNCTOREMOTEJOB_P_HPP
-#define ABSTRACTSYNCTOREMOTEJOB_P_HPP
+#ifndef KASTEN_ABSTRACTSYNCTOREMOTEJOB_P_HPP
+#define KASTEN_ABSTRACTSYNCTOREMOTEJOB_P_HPP
 
 #include "abstractsynctoremotejob.hpp"
 

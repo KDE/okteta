@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TOOLINLINEVIEWWIDGET_HPP
-#define TOOLINLINEVIEWWIDGET_HPP
+#ifndef KASTEN_TOOLINLINEVIEWWIDGET_HPP
+#define KASTEN_TOOLINLINEVIEWWIDGET_HPP
 
 // Qt
 #include <QWidget>

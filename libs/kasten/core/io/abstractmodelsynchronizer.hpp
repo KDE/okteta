@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTMODELSYNCHRONIZER_HPP
-#define ABSTRACTMODELSYNCHRONIZER_HPP
+#ifndef KASTEN_ABSTRACTMODELSYNCHRONIZER_HPP
+#define KASTEN_ABSTRACTMODELSYNCHRONIZER_HPP
 
 // lib
 #include <kasten/kastencore_export.hpp>
