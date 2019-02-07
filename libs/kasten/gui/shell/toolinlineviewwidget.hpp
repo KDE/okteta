@@ -54,7 +54,7 @@ public:
 Q_SIGNALS:
     void done();
 
-protected:
+private:
     AbstractToolInlineView* mView;
 };
 

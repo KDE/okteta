@@ -39,7 +39,7 @@ public:
 public:
     AbstractModelExporterConfigEditor* tryCreateConfigEditor(AbstractModelExporter* exporter) const override;
 
-protected:
+private:
     AbstractModelStreamEncoderConfigEditorFactory* mEncoderConfigEditorFactory;
 };
 

@@ -47,7 +47,7 @@ public:
 protected Q_SLOTS:
     void onVisibilityChanged(bool isVisible);
 
-protected:
+private:
     AbstractToolView* mToolView;
     // TODO: find out why isVisible does not work here
     bool mIsShown = false;

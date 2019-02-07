@@ -59,7 +59,7 @@ public:
 protected Q_SLOTS:
     void onDone();
 
-protected:
+private:
     QWidget* mCentralWidget;
 
     QWidget* mBottomWidget = nullptr;

@@ -63,7 +63,7 @@ protected:
 //     void updateMarginAndSpacing();
     void updateLayoutStructs() const;
 
-protected:
+private:
     QVector<QWidgetItem*> mWidgetList;
 
     bool mIsDirty : 1;

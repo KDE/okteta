@@ -59,7 +59,7 @@ public:
 Q_SIGNALS:
     void modelExported(bool success);
 
-protected:
+private:
     QIODevice* mIODevice;
     AbstractModel* mModel;
     const AbstractModelSelection* mSelection;

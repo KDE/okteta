@@ -49,7 +49,7 @@ public:
 protected: // QWidget API
     void changeEvent(QEvent* changeEvent) override;
 
-protected:
+private:
     StatusBarLayout* mLayout;
 };
 

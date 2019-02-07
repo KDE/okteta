@@ -42,7 +42,7 @@ public: // AbstractModelExporterConfigEditor API
     bool isValid() const override;
     AbstractSelectionView* createPreviewView() const override;
 
-protected:
+private:
     AbstractModelStreamEncoderConfigEditor* mEncoderConfigEditor;
 };
 

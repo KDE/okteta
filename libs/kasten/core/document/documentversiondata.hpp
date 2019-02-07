@@ -41,7 +41,7 @@ public:
     DocumentVersionId id() const;
     QString changeComment() const;
 
-protected:
+private:
     DocumentVersionId mId;
     QString mChangeComment;
 };

@@ -51,7 +51,7 @@ public:
 public:
     void add(ViewBox::Area area);
 
-protected:
+private:
     AbstractView* mView;
 };
 

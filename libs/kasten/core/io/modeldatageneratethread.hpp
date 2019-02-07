@@ -55,7 +55,7 @@ public:
 Q_SIGNALS:
     void generated(QMimeData* data);
 
-protected:
+private:
     AbstractModelDataGenerator* mGenerator;
 
     QMimeData* mMimeData = nullptr;
