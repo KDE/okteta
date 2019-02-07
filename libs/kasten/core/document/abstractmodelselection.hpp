@@ -26,7 +26,7 @@
 // lib
 #include <kasten/kastencore_export.hpp>
 // Qt
-#include <QObject>
+#include <QScopedPointer>
 
 namespace Kasten {
 
@@ -41,9 +41,8 @@ public:
 public: // API to be implemented
 //     virtual bool isValid() const = 0;
 
-protected:
-    class Private;
-    Private* const d;
+private:
+    const QScopedPointer<class AbstractModelSelectionPrivate> d;
 };
 
 }

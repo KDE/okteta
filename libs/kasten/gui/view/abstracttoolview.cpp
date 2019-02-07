@@ -27,21 +27,14 @@
 
 namespace Kasten {
 
-class Q_DECL_HIDDEN AbstractToolView::Private
+class AbstractToolViewPrivate
 {
 public:
-    explicit Private(AbstractToolView* view);
 };
 
-AbstractToolView::Private::Private(AbstractToolView* view) { Q_UNUSED(view) }
 
-AbstractToolView::AbstractToolView()
-    : d(new Private(this))
-{}
+AbstractToolView::AbstractToolView() = default;
 
-AbstractToolView::~AbstractToolView()
-{
-    delete d;
-}
+AbstractToolView::~AbstractToolView() = default;
 
 }

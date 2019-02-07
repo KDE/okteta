@@ -25,6 +25,8 @@
 
 // lib
 #include <kasten/kastengui_export.hpp>
+// Qt
+#include <QScopedPointer>
 
 class QWidget;
 class QString;
@@ -50,9 +52,8 @@ public: // API to be implemented
 public:
     void activate();
 
-protected:
-    class Private;
-    Private* const d;
+private:
+    const QScopedPointer<class AbstractToolInlineViewPrivate> d;
 };
 
 }

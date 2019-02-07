@@ -55,9 +55,8 @@ public: // API to be implemented
 Q_SIGNALS:
     void titleChanged(const QString& newTitle);
 
-protected:
-    class Private;
-    Private* const d;
+private:
+    const QScopedPointer<class AbstractToolPrivate> d;
 };
 
 }

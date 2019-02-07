@@ -55,9 +55,8 @@ public:
     QString name() const;
     QIcon faceIcon() const;
 
-protected:
-    class Private;
-    QExplicitlySharedDataPointer<Private> d;
+private:
+    QExplicitlySharedDataPointer<class PersonPrivate> d;
 };
 
 }

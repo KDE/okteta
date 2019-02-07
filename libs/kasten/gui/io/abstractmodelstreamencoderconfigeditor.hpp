@@ -51,9 +51,8 @@ public: // API to be implemented
 Q_SIGNALS:
     void validityChanged(bool isValid);
 
-protected:
-    class Private;
-    Private* const d;
+private:
+    const QScopedPointer<class AbstractModelStreamEncoderConfigEditorPrivate> d;
 };
 
 }

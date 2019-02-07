@@ -31,13 +31,13 @@
 
 namespace Kasten {
 
-class Q_DECL_HIDDEN Person::Private : public QSharedData
+class PersonPrivate : public QSharedData
 {
 public:
-    Private(const QString& name, const QIcon& faceIcon);
-    Private() = delete;
+    PersonPrivate(const QString& name, const QIcon& faceIcon);
+    PersonPrivate() = delete;
 
-    ~Private();
+    ~PersonPrivate();
 
 public:
     QString name() const;
@@ -48,15 +48,15 @@ protected:
     QIcon mFaceIcon;
 };
 
-inline Person::Private::Private(const QString& name, const QIcon& faceIcon)
+inline PersonPrivate::PersonPrivate(const QString& name, const QIcon& faceIcon)
     : mName(name)
     , mFaceIcon(faceIcon)
 {}
 
-inline Person::Private::~Private() = default;
+inline PersonPrivate::~PersonPrivate() = default;
 
-inline QString Person::Private::name()   const { return mName; }
-inline QIcon Person::Private::faceIcon() const { return mFaceIcon; }
+inline QString PersonPrivate::name()   const { return mName; }
+inline QIcon PersonPrivate::faceIcon() const { return mFaceIcon; }
 
 }
 

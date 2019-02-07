@@ -24,15 +24,16 @@
 
 namespace Kasten {
 
+class AbstractModelStreamEncoderConfigEditorPrivate
+{
+};
+
+
 AbstractModelStreamEncoderConfigEditor::AbstractModelStreamEncoderConfigEditor(QWidget* parent)
     : QWidget(parent)
-    , d(nullptr)
 {}
 
-AbstractModelStreamEncoderConfigEditor::~AbstractModelStreamEncoderConfigEditor()
-{
-//     delete d;
-}
+AbstractModelStreamEncoderConfigEditor::~AbstractModelStreamEncoderConfigEditor() = default;
 
 bool AbstractModelStreamEncoderConfigEditor::isValid() const
 {

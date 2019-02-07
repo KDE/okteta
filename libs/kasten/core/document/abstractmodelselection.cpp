@@ -24,17 +24,13 @@
 
 namespace Kasten {
 
-class Q_DECL_HIDDEN AbstractModelSelection::Private
+class AbstractModelSelectionPrivate
 {
 };
 
-AbstractModelSelection::AbstractModelSelection()
-    : d(new Private())
-{}
 
-AbstractModelSelection::~AbstractModelSelection()
-{
-    delete d;
-}
+AbstractModelSelection::AbstractModelSelection() = default;
+
+AbstractModelSelection::~AbstractModelSelection() = default;
 
 }

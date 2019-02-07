@@ -49,9 +49,8 @@ public: // API to be implemented
     virtual QWidget* widget() const = 0;
     virtual void setData(AbstractModel* model, const AbstractModelSelection* selection) = 0;
 
-protected:
-    class Private;
-    Private* const d;
+private:
+    const QScopedPointer<class AbstractSelectionViewPrivate> d;
 };
 
 }

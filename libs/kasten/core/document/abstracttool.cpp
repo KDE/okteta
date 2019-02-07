@@ -24,21 +24,14 @@
 
 namespace Kasten {
 
-class Q_DECL_HIDDEN AbstractTool::Private
+class AbstractToolPrivate
 {
 public:
-    explicit Private(AbstractTool* tool);
 };
 
-AbstractTool::Private::Private(AbstractTool* tool) { Q_UNUSED(tool) }
 
-AbstractTool::AbstractTool()
-    : d(new Private(this))
-{}
+AbstractTool::AbstractTool() = default;
 
-AbstractTool::~AbstractTool()
-{
-    delete d;
-}
+AbstractTool::~AbstractTool() = default;
 
 }

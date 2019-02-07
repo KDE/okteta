@@ -59,11 +59,11 @@ void Person::setEgoId(int egoId)
 }
 
 Person::Person(const QString& name, const QIcon& faceIcon)
-    : d(new Private(name, faceIcon))
+    : d(new PersonPrivate(name, faceIcon))
 {
 }
 Person::Person()
-    : d(new Private(QString(), QIcon()))
+    : d(new PersonPrivate(QString(), QIcon()))
 {
 }
 Person::Person(const Person& other) = default;

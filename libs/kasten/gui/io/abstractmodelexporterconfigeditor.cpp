@@ -24,15 +24,16 @@
 
 namespace Kasten {
 
+class AbstractModelExporterConfigEditorPrivate
+{
+};
+
+
 AbstractModelExporterConfigEditor::AbstractModelExporterConfigEditor(QWidget* parent)
     : QWidget(parent)
-    , d(nullptr)
 {}
 
-AbstractModelExporterConfigEditor::~AbstractModelExporterConfigEditor()
-{
-//     delete d;
-}
+AbstractModelExporterConfigEditor::~AbstractModelExporterConfigEditor() = default;
 
 bool AbstractModelExporterConfigEditor::isValid() const
 {

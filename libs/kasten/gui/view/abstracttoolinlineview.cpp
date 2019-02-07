@@ -27,22 +27,15 @@
 
 namespace Kasten {
 
-class Q_DECL_HIDDEN AbstractToolInlineView::Private
+class AbstractToolInlineViewPrivate
 {
 public:
-    explicit Private(AbstractToolInlineView* view);
 };
 
-AbstractToolInlineView::Private::Private(AbstractToolInlineView* view) { Q_UNUSED(view) }
 
-AbstractToolInlineView::AbstractToolInlineView()
-    : d(new Private(this))
-{}
+AbstractToolInlineView::AbstractToolInlineView() = default;
 
-AbstractToolInlineView::~AbstractToolInlineView()
-{
-    delete d;
-}
+AbstractToolInlineView::~AbstractToolInlineView() = default;
 
 void AbstractToolInlineView::activate()
 {
