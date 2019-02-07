@@ -50,7 +50,7 @@ SingleViewArea* SingleViewWindow::viewArea() const
     return d->viewArea();
 }
 
-QList<ToolViewDockWidget*> SingleViewWindow::dockWidgets() const
+QVector<ToolViewDockWidget*> SingleViewWindow::dockWidgets() const
 {
     Q_D(const SingleViewWindow);
 

@@ -28,6 +28,7 @@
 // Okteta core
 #include <kastencore.hpp>
 // Qt
+#include <QVector>
 #include <QList>
 
 namespace Kasten {
@@ -53,7 +54,7 @@ public:
     void showDocument(AbstractDocument* document);
 
 public: // If::WidgetsDockable API
-    QList<ToolViewDockWidget*> dockWidgets() const;
+    QVector<ToolViewDockWidget*> dockWidgets() const;
 
 private: // Q_SLOTS
     void onTitleChanged(const QString& newTitle);
@@ -79,13 +80,13 @@ protected:
     ViewManager* mViewManager;
     QList<AbstractXmlGuiController*> mControllers;
 
-    QList<ToolViewDockWidget*> mDockWidgets;
+    QVector<ToolViewDockWidget*> mDockWidgets;
     QList<AbstractTool*> mTools;
 };
 
 inline MultiViewAreas* ShellWindowPrivate::viewArea() const { return mGroupedViews; }
 inline ViewManager* ShellWindowPrivate::viewManager() const { return mViewManager; }
-inline QList<ToolViewDockWidget*> ShellWindowPrivate::dockWidgets() const { return mDockWidgets; }
+inline QVector<ToolViewDockWidget*> ShellWindowPrivate::dockWidgets() const { return mDockWidgets; }
 
 inline void ShellWindowPrivate::addXmlGuiController(AbstractXmlGuiController* controller)
 {

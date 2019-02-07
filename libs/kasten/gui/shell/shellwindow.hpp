@@ -29,8 +29,6 @@
 // KF5
 #include <KXmlGuiWindow>
 
-template <class T> class QList;
-
 namespace Kasten {
 class ShellWindowPrivate;
 
@@ -62,7 +60,7 @@ public:
     void addTool(AbstractToolView* toolView);
 
 public: // If::WidgetsDockable API
-    QList<ToolViewDockWidget*> dockWidgets() const override;
+    QVector<ToolViewDockWidget*> dockWidgets() const override;
 
 protected:
     MultiViewAreas* viewArea() const;

@@ -29,7 +29,6 @@
 // KF5
 #include <KXmlGuiWindow>
 
-template <class T> class QList;
 class QMimeData;
 
 namespace Kasten {
@@ -60,7 +59,7 @@ public:
     void setView(AbstractView* view);
 
 public: // If::WidgetsDockable API
-    QList<ToolViewDockWidget*> dockWidgets() const override;
+    QVector<ToolViewDockWidget*> dockWidgets() const override;
 
 protected:
     AbstractView* view() const;

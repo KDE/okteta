@@ -56,7 +56,7 @@ void ToolListMenuController::updateActions()
     qDeleteAll(mToolActionList);
     mToolActionList.clear();
 
-    const QList<ToolViewDockWidget*> dockWidgets = mWidgetsDockable->dockWidgets();
+    const QVector<ToolViewDockWidget*> dockWidgets = mWidgetsDockable->dockWidgets();
 
     mToolActionList.reserve(dockWidgets.size());
     for (const ToolViewDockWidget* dockWidget : dockWidgets) {

@@ -27,6 +27,8 @@
 #include "singleviewwindow.hpp"
 // Kasten core
 #include <Kasten/KastenCore>
+// Qt
+#include <QVector>
 
 class QDragMoveEvent;
 class QDropEvent;
@@ -55,7 +57,7 @@ public:
     void addTool(AbstractToolView* toolView);
 
 public: // If::WidgetsDockable API
-    QList<ToolViewDockWidget*> dockWidgets() const;
+    QVector<ToolViewDockWidget*> dockWidgets() const;
 
 protected:
     AbstractView* view() const;
@@ -80,11 +82,11 @@ protected:
 
     SingleViewArea* const mViewArea;
     QList<AbstractXmlGuiController*> mControllers;
-    QList<ToolViewDockWidget*> mDockWidgets;
+    QVector<ToolViewDockWidget*> mDockWidgets;
     QList<AbstractTool*> mTools;
 };
 
-inline QList<ToolViewDockWidget*> SingleViewWindowPrivate::dockWidgets() const { return mDockWidgets; }
+inline QVector<ToolViewDockWidget*> SingleViewWindowPrivate::dockWidgets() const { return mDockWidgets; }
 inline AbstractView* SingleViewWindowPrivate::view() const { return mView; }
 inline SingleViewArea* SingleViewWindowPrivate::viewArea() const { return mViewArea; }
 
