@@ -26,7 +26,7 @@
 // lib
 #include <kasten/okteta/oktetakastengui_export.hpp>
 
-template <class T> class QList;
+template <class T> class QVector;
 
 namespace Kasten {
 class AbstractModelDataGeneratorConfigEditorFactory;
@@ -37,7 +37,7 @@ private:
     ByteArrayDataGeneratorConfigEditorFactoryFactory();
 
 public:
-    static QList<AbstractModelDataGeneratorConfigEditorFactory*> createFactorys();
+    static QVector<AbstractModelDataGeneratorConfigEditorFactory*> createFactorys();
 
 };
 

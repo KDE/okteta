@@ -55,7 +55,7 @@ OktetaPartFactory::OktetaPartFactory()
 //     const QVector<AbstractModelStreamEncoderConfigEditorFactory*> encoderConfigEditorFactoryList =
 //         ByteArrayStreamEncoderConfigEditorFactoryFactory::createFactorys();
 
-//     const QList<AbstractModelDataGeneratorConfigEditorFactory*> generatorConfigEditorFactoryList =
+//     const QVector<AbstractModelDataGeneratorConfigEditorFactory*> generatorConfigEditorFactoryList =
 //         ByteArrayDataGeneratorConfigEditorFactoryFactory::createFactorys();
 
 //     mDocumentManager->codecManager()->setEncoders( encoderList );

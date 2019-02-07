@@ -66,7 +66,7 @@ void ModelCodecViewManager::setExporterConfigEditorFactories(const QVector<Abstr
     mExporterFactoryList = factoryList;
 }
 
-void ModelCodecViewManager::setGeneratorConfigEditorFactories(const QList<AbstractModelDataGeneratorConfigEditorFactory*>& factoryList)
+void ModelCodecViewManager::setGeneratorConfigEditorFactories(const QVector<AbstractModelDataGeneratorConfigEditorFactory*>& factoryList)
 {
     qDeleteAll(mGeneratorFactoryList);
     mGeneratorFactoryList = factoryList;

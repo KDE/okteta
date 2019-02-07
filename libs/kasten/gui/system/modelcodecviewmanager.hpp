@@ -27,7 +27,6 @@
 #include <kasten/kastengui_export.hpp>
 // Qt
 #include <QObject>
-#include <QList>
 #include <QVector>
 
 class QString;
@@ -61,12 +60,12 @@ public:
 public:
     void setEncoderConfigEditorFactories(const QVector<AbstractModelStreamEncoderConfigEditorFactory*>& factoryList);
     void setExporterConfigEditorFactories(const QVector<AbstractModelExporterConfigEditorFactory*>& factoryList);
-    void setGeneratorConfigEditorFactories(const QList<AbstractModelDataGeneratorConfigEditorFactory*>& factoryList);
+    void setGeneratorConfigEditorFactories(const QVector<AbstractModelDataGeneratorConfigEditorFactory*>& factoryList);
 
 private:
     QVector<AbstractModelStreamEncoderConfigEditorFactory*> mEncoderFactoryList;
     QVector<AbstractModelExporterConfigEditorFactory*> mExporterFactoryList;
-    QList<AbstractModelDataGeneratorConfigEditorFactory*> mGeneratorFactoryList;
+    QVector<AbstractModelDataGeneratorConfigEditorFactory*> mGeneratorFactoryList;
 };
 
 }
