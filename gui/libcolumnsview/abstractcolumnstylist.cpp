@@ -35,9 +35,6 @@ AbstractColumnStylist::AbstractColumnStylist(AbstractColumnStylistPrivate* d)
 {
 }
 
-AbstractColumnStylist::~AbstractColumnStylist()
-{
-    delete d_ptr;
-}
+AbstractColumnStylist::~AbstractColumnStylist() = default;
 
 }

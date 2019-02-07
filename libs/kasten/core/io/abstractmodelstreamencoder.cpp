@@ -37,10 +37,7 @@ AbstractModelStreamEncoder::AbstractModelStreamEncoder(const QString& remoteType
 {
 }
 
-AbstractModelStreamEncoder::~AbstractModelStreamEncoder()
-{
-    delete d_ptr;
-}
+AbstractModelStreamEncoder::~AbstractModelStreamEncoder() = default;
 
 QString AbstractModelStreamEncoder::remoteTypeName() const
 {

@@ -58,10 +58,10 @@ protected:
     virtual void setDocument(AbstractDocument* document);
 
 protected:
-    Q_DECLARE_PRIVATE(AbstractExportJob)
+    const QScopedPointer<AbstractExportJobPrivate> d_ptr;
 
-protected:
-    AbstractExportJobPrivate* const d_ptr;
+private:
+    Q_DECLARE_PRIVATE(AbstractExportJob)
 };
 
 }

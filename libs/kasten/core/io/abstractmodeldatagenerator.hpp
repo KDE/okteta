@@ -63,10 +63,10 @@ public:
     Flags flags() const;
 
 protected:
-    Q_DECLARE_PRIVATE(AbstractModelDataGenerator)
+    const QScopedPointer<AbstractModelDataGeneratorPrivate> d_ptr;
 
-protected:
-    AbstractModelDataGeneratorPrivate* const d_ptr;
+private:
+    Q_DECLARE_PRIVATE(AbstractModelDataGenerator)
 };
 
 }

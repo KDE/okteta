@@ -74,7 +74,7 @@ Q_SIGNALS:
     void formatChanged(int index);
 
 protected:
-    ByteArrayComboBoxPrivate* const d_ptr;
+    const QScopedPointer<ByteArrayComboBoxPrivate> d_ptr;
 
 private:
     Q_DECLARE_PRIVATE(ByteArrayComboBox)

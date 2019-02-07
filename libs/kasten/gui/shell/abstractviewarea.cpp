@@ -37,9 +37,6 @@ AbstractViewArea::AbstractViewArea(AbstractViewAreaPrivate* d)
 {
 }
 
-AbstractViewArea::~AbstractViewArea()
-{
-    delete d_ptr;
-}
+AbstractViewArea::~AbstractViewArea() = default;
 
 }

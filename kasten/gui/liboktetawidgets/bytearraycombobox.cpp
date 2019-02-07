@@ -34,10 +34,7 @@ ByteArrayComboBox::ByteArrayComboBox(QWidget* parent)
     d->init();
 }
 
-ByteArrayComboBox::~ByteArrayComboBox()
-{
-    delete d_ptr;
-}
+ByteArrayComboBox::~ByteArrayComboBox() = default;
 
 void ByteArrayComboBox::setByteArray(const QByteArray& byteArray)
 {

@@ -74,7 +74,7 @@ Q_SIGNALS:
     void formatChanged(int index);
 
 protected:
-    AddressComboBoxPrivate* const d_ptr;
+    const QScopedPointer<AddressComboBoxPrivate> d_ptr;
 
 private:
     Q_DECLARE_PRIVATE(AddressComboBox)

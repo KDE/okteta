@@ -33,10 +33,7 @@ AbstractExportJob::AbstractExportJob()
     : d_ptr(new AbstractExportJobPrivate(this))
 {}
 
-AbstractExportJob::~AbstractExportJob()
-{
-    delete d_ptr;
-}
+AbstractExportJob::~AbstractExportJob() = default;
 
 AbstractDocument* AbstractExportJob::document() const
 {

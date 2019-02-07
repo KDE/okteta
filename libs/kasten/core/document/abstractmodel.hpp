@@ -81,7 +81,7 @@ protected:
     void setBaseModel(AbstractModel* baseModel);
 
 protected:
-    AbstractModelPrivate* const d_ptr;
+    const QScopedPointer<AbstractModelPrivate> d_ptr;
     Q_DECLARE_PRIVATE(AbstractModel)
 };
 

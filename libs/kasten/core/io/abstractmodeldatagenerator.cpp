@@ -36,10 +36,7 @@ AbstractModelDataGenerator::AbstractModelDataGenerator(const QString& typeName,
 {
 }
 
-AbstractModelDataGenerator::~AbstractModelDataGenerator()
-{
-    delete d_ptr;
-}
+AbstractModelDataGenerator::~AbstractModelDataGenerator() = default;
 
 QString AbstractModelDataGenerator::typeName() const
 {

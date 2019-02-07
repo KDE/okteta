@@ -61,10 +61,10 @@ public:
     QString remoteMimeType() const;
 
 protected:
-    Q_DECLARE_PRIVATE(AbstractModelExporter)
+    const QScopedPointer<AbstractModelExporterPrivate> d_ptr;
 
-protected:
-    AbstractModelExporterPrivate* const d_ptr;
+private:
+    Q_DECLARE_PRIVATE(AbstractModelExporter)
 };
 
 }

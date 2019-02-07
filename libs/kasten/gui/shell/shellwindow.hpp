@@ -67,7 +67,9 @@ protected:
     ViewManager* viewManager() const;
 
 protected:
-    ShellWindowPrivate* const d_ptr;
+    const QScopedPointer<ShellWindowPrivate> d_ptr;
+
+private:
     Q_DECLARE_PRIVATE(ShellWindow)
 };
 

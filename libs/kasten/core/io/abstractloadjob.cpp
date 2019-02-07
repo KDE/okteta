@@ -35,10 +35,7 @@ AbstractLoadJob::AbstractLoadJob()
 {
 }
 
-AbstractLoadJob::~AbstractLoadJob()
-{
-    delete d_ptr;
-}
+AbstractLoadJob::~AbstractLoadJob() = default;
 
 AbstractDocument* AbstractLoadJob::document() const
 {

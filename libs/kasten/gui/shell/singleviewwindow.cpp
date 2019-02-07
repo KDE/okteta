@@ -31,10 +31,7 @@ SingleViewWindow::SingleViewWindow(AbstractView* view)
 {
 }
 
-SingleViewWindow::~SingleViewWindow()
-{
-    delete d_ptr;
-}
+SingleViewWindow::~SingleViewWindow() = default;
 
 AbstractView* SingleViewWindow::view() const
 {

@@ -34,9 +34,6 @@ AbstractConnectJob::AbstractConnectJob()
     : d_ptr(new AbstractConnectJobPrivate(this))
 {}
 
-AbstractConnectJob::~AbstractConnectJob()
-{
-    delete d_ptr;
-}
+AbstractConnectJob::~AbstractConnectJob() = default;
 
 }

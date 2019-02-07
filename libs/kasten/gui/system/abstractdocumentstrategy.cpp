@@ -39,9 +39,6 @@ AbstractDocumentStrategy::AbstractDocumentStrategy(AbstractDocumentStrategyPriva
 {
 }
 
-AbstractDocumentStrategy::~AbstractDocumentStrategy()
-{
-    delete d_ptr;
-}
+AbstractDocumentStrategy::~AbstractDocumentStrategy() = default;
 
 }

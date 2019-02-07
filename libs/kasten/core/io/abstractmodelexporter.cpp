@@ -35,10 +35,7 @@ AbstractModelExporter::AbstractModelExporter(const QString& remoteTypeName, cons
 {
 }
 
-AbstractModelExporter::~AbstractModelExporter()
-{
-    delete d_ptr;
-}
+AbstractModelExporter::~AbstractModelExporter() = default;
 
 QString AbstractModelExporter::remoteTypeName() const
 {

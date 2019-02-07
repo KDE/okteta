@@ -86,7 +86,9 @@ Q_SIGNALS:
     void urlUsed(const QUrl& url);
 
 protected:
-    AbstractDocumentStrategyPrivate* const d_ptr;
+    const QScopedPointer<AbstractDocumentStrategyPrivate> d_ptr;
+
+private:
     Q_DECLARE_PRIVATE(AbstractDocumentStrategy)
 };
 

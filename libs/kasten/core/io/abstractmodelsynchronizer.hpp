@@ -128,10 +128,10 @@ protected: // get
     void setUrl(const QUrl& url);
 
 protected:
-    Q_DECLARE_PRIVATE(AbstractModelSynchronizer)
+    const QScopedPointer<AbstractModelSynchronizerPrivate> d_ptr;
 
-protected:
-    AbstractModelSynchronizerPrivate* const d_ptr;
+private:
+    Q_DECLARE_PRIVATE(AbstractModelSynchronizer)
 };
 
 }

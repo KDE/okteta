@@ -33,10 +33,7 @@ AbstractModel::AbstractModel(AbstractModelPrivate* d)
     : d_ptr(d)
 {}
 
-AbstractModel::~AbstractModel()
-{
-    delete d_ptr;
-}
+AbstractModel::~AbstractModel() = default;
 
 bool AbstractModel::isModifiable()        const { return false; }
 bool AbstractModel::isReadOnly()          const { return true; }

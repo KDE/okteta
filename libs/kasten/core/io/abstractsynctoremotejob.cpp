@@ -35,9 +35,6 @@ AbstractSyncToRemoteJob::AbstractSyncToRemoteJob()
 {
 }
 
-AbstractSyncToRemoteJob::~AbstractSyncToRemoteJob()
-{
-    delete d_ptr;
-}
+AbstractSyncToRemoteJob::~AbstractSyncToRemoteJob() = default;
 
 }

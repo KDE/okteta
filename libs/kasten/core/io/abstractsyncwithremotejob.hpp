@@ -45,7 +45,7 @@ public:
     ~AbstractSyncWithRemoteJob() override;
 
 protected:
-    AbstractSyncWithRemoteJobPrivate* const d_ptr;
+    const QScopedPointer<AbstractSyncWithRemoteJobPrivate> d_ptr;
 };
 
 }

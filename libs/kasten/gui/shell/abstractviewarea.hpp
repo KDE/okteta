@@ -59,7 +59,9 @@ Q_SIGNALS:
     void focusChanged(bool hasFocus);
 
 protected:
-    AbstractViewAreaPrivate* const d_ptr;
+    const QScopedPointer<AbstractViewAreaPrivate> d_ptr;
+
+private:
     Q_DECLARE_PRIVATE(AbstractViewArea)
 };
 

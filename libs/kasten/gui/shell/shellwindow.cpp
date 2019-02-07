@@ -31,10 +31,7 @@ ShellWindow::ShellWindow(ViewManager* viewManager)
 {
 }
 
-ShellWindow::~ShellWindow()
-{
-    delete d_ptr;
-}
+ShellWindow::~ShellWindow() = default;
 
 ViewManager* ShellWindow::viewManager() const
 {

@@ -66,7 +66,9 @@ protected:
     SingleViewArea* viewArea() const;
 
 protected:
-    SingleViewWindowPrivate* const d_ptr;
+    const QScopedPointer<SingleViewWindowPrivate> d_ptr;
+
+private:
     Q_DECLARE_PRIVATE(SingleViewWindow)
 };
 

@@ -68,10 +68,10 @@ public:
     QString remoteClipboardMimeType() const;
 
 protected:
-    Q_DECLARE_PRIVATE(AbstractModelStreamEncoder)
+    const QScopedPointer<AbstractModelStreamEncoderPrivate> d_ptr;
 
-protected:
-    AbstractModelStreamEncoderPrivate* const d_ptr;
+private:
+    Q_DECLARE_PRIVATE(AbstractModelStreamEncoder)
 };
 
 }

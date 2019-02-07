@@ -49,7 +49,7 @@ protected:
     // TODO: or better name property LoadedDocument?
 
 protected:
-    AbstractConnectJobPrivate* const d_ptr;
+    const QScopedPointer<AbstractConnectJobPrivate> d_ptr;
 };
 
 }

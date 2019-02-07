@@ -35,10 +35,7 @@ AbstractModelSynchronizer::AbstractModelSynchronizer()
 {
 }
 
-AbstractModelSynchronizer::~AbstractModelSynchronizer()
-{
-    delete d_ptr;
-}
+AbstractModelSynchronizer::~AbstractModelSynchronizer() = default;
 
 QUrl AbstractModelSynchronizer::url() const
 {

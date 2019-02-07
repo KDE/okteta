@@ -27,6 +27,7 @@
 #include <okteta/oktetagui_export.hpp>
 // Qt
 #include <QtGlobal>
+#include <QScopedPointer>
 
 class QPalette;
 
@@ -47,7 +48,7 @@ protected:
     explicit AbstractColumnStylist(AbstractColumnStylistPrivate* d);
 
 protected:
-    AbstractColumnStylistPrivate* const d_ptr;
+    const QScopedPointer<AbstractColumnStylistPrivate> d_ptr;
 
 private:
     Q_DECLARE_PRIVATE(AbstractColumnStylist)
