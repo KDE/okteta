@@ -214,7 +214,7 @@ oktetakastencontrollers_add_sublibrary(view/replace
         ReplaceUserQueryable
     PRIVATE
         KReplaceDialog
-        KReplacePrompt
+        ReplacePrompt
         ReplaceTool
 )
 

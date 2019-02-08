@@ -39,7 +39,7 @@ class QWidget;
 namespace Kasten {
 
 class KReplaceDialog;
-class KReplacePrompt;
+class ReplacePrompt;
 class ReplaceTool;
 
 class OKTETAKASTENCONTROLLERS_EXPORT ReplaceController : public AbstractXmlGuiController
@@ -70,7 +70,7 @@ private:
     QAction* mReplaceAction;
 
     KReplaceDialog* mReplaceDialog = nullptr;
-    mutable KReplacePrompt* mReplacePrompt = nullptr;
+    mutable ReplacePrompt* mReplacePrompt = nullptr;
     ReplaceTool* mTool;
 };
 

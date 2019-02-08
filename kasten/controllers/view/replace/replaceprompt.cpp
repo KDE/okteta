@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kreplaceprompt.hpp"
+#include "replaceprompt.hpp"
 
 // KF5
 #include <KLocalizedString>
@@ -32,7 +32,7 @@
 
 namespace Kasten {
 
-KReplacePrompt::KReplacePrompt(QWidget* parent)
+ReplacePrompt::ReplacePrompt(QWidget* parent)
     : QDialog(parent)
 {
     setModal(true);
@@ -42,15 +42,15 @@ KReplacePrompt::KReplacePrompt(QWidget* parent)
     QDialogButtonBox* dialogButtonBox = new QDialogButtonBox;
     QPushButton* button = dialogButtonBox->addButton(i18nc("@action:button", "Replace &All"),
                                                      QDialogButtonBox::ApplyRole);
-    connect(button, &QAbstractButton::clicked, this, &KReplacePrompt::onReplaceAllButton);
+    connect(button, &QAbstractButton::clicked, this, &ReplacePrompt::onReplaceAllButton);
     button = dialogButtonBox->addButton(i18nc("@action:button", "&Skip"),
                                         QDialogButtonBox::ApplyRole);
-    connect(button, &QAbstractButton::clicked, this, &KReplacePrompt::onSkipButton);
+    connect(button, &QAbstractButton::clicked, this, &ReplacePrompt::onSkipButton);
     QPushButton* replaceButton = dialogButtonBox->addButton(i18nc("@action:button", "Replace"),
                                                             QDialogButtonBox::ApplyRole);
-    connect(replaceButton, &QAbstractButton::clicked, this, &KReplacePrompt::onReplaceButton);
+    connect(replaceButton, &QAbstractButton::clicked, this, &ReplacePrompt::onReplaceButton);
     button = dialogButtonBox->addButton(QDialogButtonBox::Close);
-    connect(button, &QAbstractButton::clicked, this, &KReplacePrompt::onCloseButton);
+    connect(button, &QAbstractButton::clicked, this, &ReplacePrompt::onCloseButton);
 
     // main layout
     QVBoxLayout* layout = new QVBoxLayout;
@@ -62,7 +62,7 @@ KReplacePrompt::KReplacePrompt(QWidget* parent)
     replaceButton->setDefault(true);
 }
 
-ReplaceBehaviour KReplacePrompt::query()
+ReplaceBehaviour ReplacePrompt::query()
 {
     QEventLoop eventLoop;
     mEventLoop = &eventLoop;
@@ -71,25 +71,25 @@ ReplaceBehaviour KReplacePrompt::query()
     return mResult;
 }
 
-void KReplacePrompt::onReplaceAllButton()
+void ReplacePrompt::onReplaceAllButton()
 {
     mResult = ReplaceAll;
     mEventLoop->quit();
 }
 
-void KReplacePrompt::onSkipButton()
+void ReplacePrompt::onSkipButton()
 {
     mResult = SkipCurrent;
     mEventLoop->quit();
 }
 
-void KReplacePrompt::onReplaceButton()
+void ReplacePrompt::onReplaceButton()
 {
     mResult = ReplaceCurrent;
     mEventLoop->quit();
 }
 
-void KReplacePrompt::onCloseButton()
+void ReplacePrompt::onCloseButton()
 {
     mResult = CancelReplacing;
     mEventLoop->quit();

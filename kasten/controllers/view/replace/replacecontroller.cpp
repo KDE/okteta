@@ -24,7 +24,7 @@
 
 // controller
 #include "kreplacedialog.hpp"
-#include "kreplaceprompt.hpp"
+#include "replaceprompt.hpp"
 #include "replacetool.hpp"
 // KF5
 #include <KXmlGuiWindow>
@@ -118,7 +118,7 @@ bool ReplaceController::queryContinue(FindDirection direction, int noOfReplaceme
 ReplaceBehaviour ReplaceController::queryReplaceCurrent() const
 {
     if (!mReplacePrompt) {
-        mReplacePrompt = new KReplacePrompt(mParentWidget);
+        mReplacePrompt = new ReplacePrompt(mParentWidget);
     }
 
     mReplacePrompt->show();

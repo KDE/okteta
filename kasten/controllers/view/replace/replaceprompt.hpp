@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KASTEN_KREPLACEPROMPT_HPP
-#define KASTEN_KREPLACEPROMPT_HPP
+#ifndef KASTEN_REPLACEPROMPT_HPP
+#define KASTEN_REPLACEPROMPT_HPP
 
 // controller
 #include "replaceuserqueryable.hpp"
@@ -32,12 +32,12 @@ class QEventLoop;
 
 namespace Kasten {
 
-class KReplacePrompt : public QDialog
+class ReplacePrompt : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit KReplacePrompt(QWidget* parent);
+    explicit ReplacePrompt(QWidget* parent);
 
 public:
     ReplaceBehaviour query();
