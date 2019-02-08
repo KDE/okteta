@@ -96,7 +96,7 @@ void ReplaceController::onFinished(bool previousFound, int noOfReplacements)
     }
 }
 
-bool ReplaceController::queryContinue(KFindDirection direction, int noOfReplacements) const
+bool ReplaceController::queryContinue(FindDirection direction, int noOfReplacements) const
 {
     const QString messageBoxTitle = i18nc("@title:window", "Replace");
     const QString replacementReport = (noOfReplacements == 0) ?

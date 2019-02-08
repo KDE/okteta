@@ -116,7 +116,7 @@ void SearchTool::setCaseSensitivity(Qt::CaseSensitivity caseSensitivity)
 //         emit isApplyableChanged( newIsApplyable );
 }
 
-void SearchTool::search(KFindDirection direction, bool fromCursor, bool inSelection)
+void SearchTool::search(FindDirection direction, bool fromCursor, bool inSelection)
 {
     mPreviousFound = false;
 
@@ -144,7 +144,7 @@ void SearchTool::search(KFindDirection direction, bool fromCursor, bool inSelect
     doSearch(direction);
 }
 
-void SearchTool::doSearch(KFindDirection direction)
+void SearchTool::doSearch(FindDirection direction)
 {
     // TODO: should start at last
     Okteta::Address startIndex = (direction == FindForward) ? mSearchFirstIndex : mSearchLastIndex /*-mSearchData.size()*/;

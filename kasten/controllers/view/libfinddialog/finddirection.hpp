@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KASTEN_KFINDDIRECTION_HPP
-#define KASTEN_KFINDDIRECTION_HPP
+#ifndef KASTEN_FINDDIRECTION_HPP
+#define KASTEN_FINDDIRECTION_HPP
 
 namespace Kasten {
 
-enum KFindDirection
+enum FindDirection
 {
     FindForward = 0,
     FindBackward = 1

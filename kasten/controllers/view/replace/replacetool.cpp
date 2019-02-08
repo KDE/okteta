@@ -132,7 +132,7 @@ void ReplaceTool::setDoPrompt(int doPrompt)
     mDoPrompt = doPrompt;
 }
 
-void ReplaceTool::replace(KFindDirection direction, bool fromCursor, bool inSelection)
+void ReplaceTool::replace(FindDirection direction, bool fromCursor, bool inSelection)
 {
     mPreviousFound = false;
 
@@ -167,7 +167,7 @@ void ReplaceTool::replace(KFindDirection direction, bool fromCursor, bool inSele
     doReplace(direction, startIndex);
 }
 
-void ReplaceTool::doReplace(KFindDirection direction, Okteta::Address startIndex)
+void ReplaceTool::doReplace(FindDirection direction, Okteta::Address startIndex)
 {
     QApplication::setOverrideCursor(Qt::WaitCursor);
 

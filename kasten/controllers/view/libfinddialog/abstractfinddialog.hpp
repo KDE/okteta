@@ -24,7 +24,7 @@
 #define KASTEN_ABSTRACTFINDDIALOG_HPP
 
 // lib
-#include "kfinddirection.hpp"
+#include "finddirection.hpp"
 // Qt
 #include <QDialog>
 #include <QByteArray>
@@ -50,7 +50,7 @@ public:
     ~AbstractFindDialog() override;
 
 public: // set
-    void setDirection(KFindDirection Direction);
+    void setDirection(FindDirection Direction);
     void setInSelection(bool InSelection);
 
 public: // get
@@ -58,7 +58,7 @@ public: // get
     bool fromCursor() const;
     bool inSelection() const;
     Qt::CaseSensitivity caseSensitivity() const;
-    KFindDirection direction() const;
+    FindDirection direction() const;
 
 public Q_SLOTS:
     void setCharCodec(const QString& codecName);

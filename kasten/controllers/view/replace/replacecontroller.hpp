@@ -28,7 +28,7 @@
 // controller
 #include <kasten/okteta/replaceuserqueryable.hpp>
 // lib
-#include <kasten/okteta/kfinddirection.hpp>
+#include <kasten/okteta/finddirection.hpp>
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
 
@@ -56,7 +56,7 @@ public: // AbstractXmlGuiController API
     void setTargetModel(AbstractModel* model) override;
 
 public: // If::ReplaceUserQueryable API
-    bool queryContinue(KFindDirection direction, int noOfReplacements) const override;
+    bool queryContinue(FindDirection direction, int noOfReplacements) const override;
     ReplaceBehaviour queryReplaceCurrent() const override;
 
 private Q_SLOTS: // action slots

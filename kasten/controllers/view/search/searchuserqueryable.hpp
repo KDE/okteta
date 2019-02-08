@@ -24,7 +24,7 @@
 #define KASTEN_IF_SEARCHUSERQUERYABLE_HPP
 
 // libfinddialog
-#include <kasten/okteta/kfinddirection.hpp>
+#include <kasten/okteta/finddirection.hpp>
 // Qt
 #include <QtPlugin>
 
@@ -38,7 +38,7 @@ public:
     virtual ~SearchUserQueryable();
 
 public: // API to be implemented
-    virtual bool queryContinue(KFindDirection direction) const = 0;
+    virtual bool queryContinue(FindDirection direction) const = 0;
 };
 
 inline SearchUserQueryable::~SearchUserQueryable() = default;

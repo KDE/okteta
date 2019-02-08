@@ -24,7 +24,7 @@
 #define KASTEN_IF_REPLACEUSERQUERYABLE_HPP
 
 // libfinddialog
-#include <kasten/okteta/kfinddirection.hpp>
+#include <kasten/okteta/finddirection.hpp>
 // Qt
 #include <QtPlugin>
 
@@ -46,7 +46,7 @@ public:
     virtual ~ReplaceUserQueryable();
 
 public: // API to be implemented
-    virtual bool queryContinue(KFindDirection direction, int noOfReplacements) const = 0;
+    virtual bool queryContinue(FindDirection direction, int noOfReplacements) const = 0;
     virtual ReplaceBehaviour queryReplaceCurrent() const = 0;
 };
 

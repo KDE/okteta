@@ -133,7 +133,7 @@ oktetakastencontrollers_add_sublibrary(view/checksum
 
 oktetakastencontrollers_add_sublibrary(view/libfinddialog
     PUBLIC
-        KFindDirection
+        FindDirection
     PRIVATE
         AbstractFindDialog
 )

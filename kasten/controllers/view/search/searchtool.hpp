@@ -24,7 +24,7 @@
 #define KASTEN_SEARCHTOOL_HPP
 
 // libfinddialog
-#include <kfinddirection.hpp>
+#include <finddirection.hpp>
 // Kasten core
 #include <Kasten/AbstractTool>
 // Okteta core
@@ -64,7 +64,7 @@ public: // status
     bool isApplyable() const; // candidate for AbstractTool API
 
 public: // actions
-    void search(KFindDirection direction, bool fromCursor, bool inSelection);
+    void search(FindDirection direction, bool fromCursor, bool inSelection);
 
 public:
     void setUserQueryAgent(If::SearchUserQueryable* userQueryAgent);
@@ -80,7 +80,7 @@ Q_SIGNALS:
     void dataNotFound();
 
 protected:
-    void doSearch(KFindDirection direction);
+    void doSearch(FindDirection direction);
 
 protected: // settings
     QByteArray mSearchData;

@@ -154,7 +154,7 @@ void AbstractFindDialog::setupCheckBoxes(QCheckBox* optionCheckBox)
 
 bool AbstractFindDialog::fromCursor()            const { return AtCursorCheckBox->isChecked(); }
 bool AbstractFindDialog::inSelection()           const { return SelectedCheckBox->isChecked(); }
-KFindDirection AbstractFindDialog::direction() const
+FindDirection AbstractFindDialog::direction() const
 {
     return BackwardsCheckBox->isChecked() ? FindBackward : FindForward;
 }
@@ -169,7 +169,7 @@ QByteArray AbstractFindDialog::data()  const
     return SearchDataEdit->byteArray();
 }
 
-void AbstractFindDialog::setDirection(KFindDirection Direction)
+void AbstractFindDialog::setDirection(FindDirection Direction)
 {
     BackwardsCheckBox->setChecked(Direction == FindBackward);
 }

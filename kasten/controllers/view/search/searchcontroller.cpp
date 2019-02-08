@@ -103,7 +103,7 @@ void SearchController::findPrevious()
     }
 }
 
-void SearchController::showDialog(KFindDirection direction)
+void SearchController::showDialog(FindDirection direction)
 {
     // ensure dialog
     if (!mSearchDialog) {
@@ -121,7 +121,7 @@ void SearchController::onDataNotFound()
     KMessageBox::sorry(mParentWidget, i18nc("@info", "Search key not found in byte array."), messageBoxTitle);
 }
 
-bool SearchController::queryContinue(KFindDirection direction) const
+bool SearchController::queryContinue(FindDirection direction) const
 {
     const QString messageBoxTitle = i18nc("@title:window", "Find");
     const QString question = (direction == FindForward) ?

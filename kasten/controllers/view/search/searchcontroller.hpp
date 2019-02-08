@@ -28,7 +28,7 @@
 // controller
 #include <kasten/okteta/searchuserqueryable.hpp>
 // libfinddialog
-#include <kasten/okteta/kfinddirection.hpp>
+#include <kasten/okteta/finddirection.hpp>
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
 
@@ -54,10 +54,10 @@ public: // AbstractXmlGuiController API
     void setTargetModel(AbstractModel* model) override;
 
 public: // SearchUserQueryable API
-    bool queryContinue(KFindDirection direction) const override;
+    bool queryContinue(FindDirection direction) const override;
 
 private:
-    void showDialog(KFindDirection Direction);
+    void showDialog(FindDirection Direction);
 
 private Q_SLOTS: // action slots
     void find();

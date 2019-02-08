@@ -24,7 +24,7 @@
 #define KASTEN_REPLACETOOL_HPP
 
 // libfinddialog
-#include <kfinddirection.hpp>
+#include <finddirection.hpp>
 // Kasten core
 #include <Kasten/AbstractTool>
 // Okteta core
@@ -66,7 +66,7 @@ public: // status
     bool isApplyable() const; // candidate for AbstractTool API
 
 public: // actions
-    void replace(KFindDirection direction, bool fromCursor, bool inSelection);
+    void replace(FindDirection direction, bool fromCursor, bool inSelection);
 
 public:
     void setUserQueryAgent(If::ReplaceUserQueryable* userQueryAgent);
@@ -82,7 +82,7 @@ Q_SIGNALS:
     void finished(bool previousFound, int noOfReplacements);
 
 protected:
-    void doReplace(KFindDirection direction, Okteta::Address startIndex);
+    void doReplace(FindDirection direction, Okteta::Address startIndex);
 
 protected Q_SLOTS:
     void onReadOnlyChanged(bool isReadOnly);
