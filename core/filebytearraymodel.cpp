@@ -52,8 +52,6 @@ bool FileByteArrayModel::isReadOnly() const
 
 bool FileByteArrayModel::isModified() const
 {
-    Q_D(const FileByteArrayModel);
-
     return false;
 }
 
