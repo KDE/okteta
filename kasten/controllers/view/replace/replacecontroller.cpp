@@ -23,7 +23,7 @@
 #include "replacecontroller.hpp"
 
 // controller
-#include "kreplacedialog.hpp"
+#include "replacedialog.hpp"
 #include "replaceprompt.hpp"
 #include "replacetool.hpp"
 // KF5
@@ -72,7 +72,7 @@ void ReplaceController::replace()
 {
     // ensure dialog
     if (!mReplaceDialog) {
-        mReplaceDialog = new KReplaceDialog(mTool, mParentWidget);
+        mReplaceDialog = new ReplaceDialog(mTool, mParentWidget);
     }
 
     mReplaceDialog->show();

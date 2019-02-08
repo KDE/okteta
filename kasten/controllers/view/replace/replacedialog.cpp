@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kreplacedialog.hpp"
+#include "replacedialog.hpp"
 
 // controller
 #include "replacetool.hpp"
@@ -36,7 +36,7 @@
 
 namespace Kasten {
 
-KReplaceDialog::KReplaceDialog(ReplaceTool* tool, QWidget* parent)
+ReplaceDialog::ReplaceDialog(ReplaceTool* tool, QWidget* parent)
     : AbstractFindDialog(parent)
     , mTool(tool)
 {
@@ -79,25 +79,25 @@ KReplaceDialog::KReplaceDialog(ReplaceTool* tool, QWidget* parent)
     setModal(true);
 }
 
-KReplaceDialog::~KReplaceDialog() = default;
+ReplaceDialog::~ReplaceDialog() = default;
 
-QByteArray KReplaceDialog::replaceData()  const
+QByteArray ReplaceDialog::replaceData()  const
 {
     return ReplaceDataEdit->byteArray();
 }
 
-bool KReplaceDialog::prompt() const
+bool ReplaceDialog::prompt() const
 {
     return PromptCheckBox->isChecked();
 }
 
-void KReplaceDialog::setCharCodec(const QString& codecName)
+void ReplaceDialog::setCharCodec(const QString& codecName)
 {
     ReplaceDataEdit->setCharCodec(codecName);
     AbstractFindDialog::setCharCodec(codecName);
 }
 
-void KReplaceDialog::onFindButtonClicked()
+void ReplaceDialog::onFindButtonClicked()
 {
     hide();
 
@@ -111,7 +111,7 @@ void KReplaceDialog::onFindButtonClicked()
     mTool->replace(direction(), fromCursor(), inSelection());
 }
 
-void KReplaceDialog::showEvent(QShowEvent* showEvent)
+void ReplaceDialog::showEvent(QShowEvent* showEvent)
 {
     AbstractFindDialog::showEvent(showEvent);
 
@@ -119,7 +119,7 @@ void KReplaceDialog::showEvent(QShowEvent* showEvent)
     setCharCodec(mTool->charCodingName());
 }
 
-void KReplaceDialog::rememberCurrentSettings()
+void ReplaceDialog::rememberCurrentSettings()
 {
     AbstractFindDialog::rememberCurrentSettings();
 

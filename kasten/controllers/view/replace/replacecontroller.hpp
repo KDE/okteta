@@ -38,7 +38,7 @@ class QWidget;
 
 namespace Kasten {
 
-class KReplaceDialog;
+class ReplaceDialog;
 class ReplacePrompt;
 class ReplaceTool;
 
@@ -69,7 +69,7 @@ private:
 
     QAction* mReplaceAction;
 
-    KReplaceDialog* mReplaceDialog = nullptr;
+    ReplaceDialog* mReplaceDialog = nullptr;
     mutable ReplacePrompt* mReplacePrompt = nullptr;
     ReplaceTool* mTool;
 };

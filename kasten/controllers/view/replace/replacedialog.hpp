@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KASTEN_KREPLACEDIALOG_HPP
-#define KASTEN_KREPLACEDIALOG_HPP
+#ifndef KASTEN_REPLACEDIALOG_HPP
+#define KASTEN_REPLACEDIALOG_HPP
 
 // lib
 #include <abstractfinddialog.hpp>
@@ -30,13 +30,13 @@ namespace Kasten {
 
 class ReplaceTool;
 
-class KReplaceDialog : public AbstractFindDialog
+class ReplaceDialog : public AbstractFindDialog
 {
     Q_OBJECT
 
 public:
-    explicit KReplaceDialog(ReplaceTool* tool, QWidget* parent = nullptr);
-    ~KReplaceDialog() override;
+    explicit ReplaceDialog(ReplaceTool* tool, QWidget* parent = nullptr);
+    ~ReplaceDialog() override;
 
 public: // set
 //     void setDirection( KReplaceDirection Direction );
