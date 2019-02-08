@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2006,2008,2010 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006,2008,2010,2019 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -24,16 +24,43 @@
 #define KASTEN_ABSTRACTXMLGUICONTROLLER_HPP
 
 // lib
-#include <kasten/abstractcontroller.hpp>
+#include <kasten/kastengui_export.hpp>
+// Qt
+#include <QObject>
+
+class KXMLGUIClient;
 
 namespace Kasten {
 
-class KASTENGUI_EXPORT AbstractXmlGuiController : public AbstractController
+class AbstractModel;
+
+/* there are controllers for 
+* (focused) documents
+* document collections (projects)
+  * static (related (or dependant) data)
+  * dynamic (session)
+* views
+* view collections, like tabbed view or mdi
+* program
+* ...
+Controllers can plug into the 
+*/
+class KASTENGUI_EXPORT AbstractXmlGuiController : public QObject
 {
     Q_OBJECT
 
+protected:
+    AbstractXmlGuiController();
+
+public:
+    ~AbstractXmlGuiController() override;
+
 public: // API to be implemented
 //    void plug( KXMLGUIClient* guiClient );
+    virtual void setTargetModel(AbstractModel* model);   // = 0;
+
+private:
+    const QScopedPointer<class AbstractXmlGuiControllerPrivate> d;
 };
 
 }
