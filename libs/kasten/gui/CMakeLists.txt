@@ -97,6 +97,7 @@ kastengui_add_sublibrary(shell
 kastengui_add_sublibrary(controller
     PUBLIC
         AbstractXmlGuiController
+        AbstractXmlGuiControllerFactory
 
         AbstractLinePopup
         AbstractToolWidget
