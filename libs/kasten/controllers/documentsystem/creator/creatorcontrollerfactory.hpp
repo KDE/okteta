@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2019 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,33 +20,32 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KASTEN_QUITCONTROLLER_HPP
-#define KASTEN_QUITCONTROLLER_HPP
+#ifndef KASTEN_CREATORCONTROLLERFACTORY_HPP
+#define KASTEN_CREATORCONTROLLERFACTORY_HPP
 
 // lib
 #include <kasten/kastencontrollers_export.hpp>
-// Kasten gui
-#include <Kasten/AbstractXmlGuiController>
-
-class KXmlGuiWindow;
+// Kasten core
+#include <Kasten/AbstractXmlGuiControllerFactory>
 
 namespace Kasten {
 
-class KASTENCONTROLLERS_EXPORT QuitController : public AbstractXmlGuiController
+class ModelCodecManager;
+class AbstractDocumentStrategy;
+
+class KASTENCONTROLLERS_EXPORT CreatorControllerFactory : public AbstractXmlGuiControllerFactory
 {
-    Q_OBJECT
-
 public:
-    explicit QuitController(KXmlGuiWindow* window);
+    explicit CreatorControllerFactory(ModelCodecManager* modelCodecManager,
+                                      AbstractDocumentStrategy* documentStrategy);
+    ~CreatorControllerFactory() override;
 
-public: // AbstractXmlGuiController API
-    void setTargetModel(AbstractModel* model) override;
-
-private Q_SLOTS:
-    void quit();
+public: // AbstractXmlGuiControllerFactory API
+    AbstractXmlGuiController* create(KXMLGUIClient* guiClient) const override;
 
 private:
-    KXmlGuiWindow* mMainWindow;
+    ModelCodecManager* const m_modelCodecManager;
+    AbstractDocumentStrategy* const m_documentStrategy;
 };
 
 }

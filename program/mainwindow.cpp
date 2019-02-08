@@ -58,42 +58,42 @@
 #include <Kasten/TerminalToolViewFactory>
 #include <Kasten/TerminalToolFactory>
 // controllers
-#include <Kasten/Okteta/OverwriteOnlyController>
-#include <Kasten/Okteta/OverwriteModeController>
-#include <Kasten/Okteta/GotoOffsetController>
-#include <Kasten/Okteta/SelectRangeController>
-#include <Kasten/Okteta/SearchController>
-#include <Kasten/Okteta/ReplaceController>
-#include <Kasten/Okteta/BookmarksController>
-#include <Kasten/Okteta/PrintController>
-#include <Kasten/Okteta/ViewConfigController>
-#include <Kasten/Okteta/ViewModeController>
-#include <Kasten/Okteta/ViewStatusController>
-#include <Kasten/Okteta/ViewProfileController>
-#include <Kasten/Okteta/ViewProfilesManageController>
+#include <Kasten/Okteta/OverwriteOnlyControllerFactory>
+#include <Kasten/Okteta/OverwriteModeControllerFactory>
+#include <Kasten/Okteta/GotoOffsetControllerFactory>
+#include <Kasten/Okteta/SelectRangeControllerFactory>
+#include <Kasten/Okteta/SearchControllerFactory>
+#include <Kasten/Okteta/ReplaceControllerFactory>
+#include <Kasten/Okteta/BookmarksControllerFactory>
+#include <Kasten/Okteta/PrintControllerFactory>
+#include <Kasten/Okteta/ViewConfigControllerFactory>
+#include <Kasten/Okteta/ViewModeControllerFactory>
+#include <Kasten/Okteta/ViewStatusControllerFactory>
+#include <Kasten/Okteta/ViewProfileControllerFactory>
+#include <Kasten/Okteta/ViewProfilesManageControllerFactory>
 // Kasten controllers
-#include <Kasten/ModifiedBarController>
-#include <Kasten/ReadOnlyController>
-#include <Kasten/ReadOnlyBarController>
-#include <Kasten/CreatorController>
-#include <Kasten/LoaderController>
-#include <Kasten/CloseController>
-#include <Kasten/SetRemoteController>
-#include <Kasten/SynchronizeController>
-#include <Kasten/ClipboardController>
-#include <Kasten/InsertController>
-#include <Kasten/CopyAsController>
-#include <Kasten/ExportController>
-#include <Kasten/VersionController>
-#include <Kasten/ZoomController>
-#include <Kasten/ZoomBarController>
-#include <Kasten/SelectController>
-#include <Kasten/SwitchViewController>
-#include <Kasten/ViewListMenuController>
-#include <Kasten/ViewAreaSplitController>
-#include <Kasten/ToolListMenuController>
-#include <Kasten/FullScreenController>
-#include <Kasten/QuitController>
+#include <Kasten/ModifiedBarControllerFactory>
+#include <Kasten/ReadOnlyControllerFactory>
+#include <Kasten/ReadOnlyBarControllerFactory>
+#include <Kasten/CreatorControllerFactory>
+#include <Kasten/LoaderControllerFactory>
+#include <Kasten/CloseControllerFactory>
+#include <Kasten/SetRemoteControllerFactory>
+#include <Kasten/SynchronizeControllerFactory>
+#include <Kasten/ClipboardControllerFactory>
+#include <Kasten/InsertControllerFactory>
+#include <Kasten/CopyAsControllerFactory>
+#include <Kasten/ExportControllerFactory>
+#include <Kasten/VersionControllerFactory>
+#include <Kasten/ZoomControllerFactory>
+#include <Kasten/ZoomBarControllerFactory>
+#include <Kasten/SelectControllerFactory>
+#include <Kasten/SwitchViewControllerFactory>
+#include <Kasten/ViewListMenuControllerFactory>
+#include <Kasten/ViewAreaSplitControllerFactory>
+#include <Kasten/ToolListMenuControllerFactory>
+#include <Kasten/FullScreenControllerFactory>
+#include <Kasten/QuitControllerFactory>
 // Kasten gui
 #include <Kasten/MultiDocumentStrategy>
 #include <Kasten/ModelCodecViewManager>
@@ -153,8 +153,8 @@ OktetaMainWindow::OktetaMainWindow(OktetaProgram* program)
     // all controllers which use plugActionList have to do so after(!) setupGUI() or their entries will be removed
     // TODO: why is this so?
     // tmp
-    addXmlGuiController(new ToolListMenuController(this, this));
-    addXmlGuiController(new ViewListMenuController(viewManager(), viewArea(), this));
+    addXmlGuiControllerFromFactory(ToolListMenuControllerFactory(this));
+    addXmlGuiControllerFromFactory(ViewListMenuControllerFactory(viewManager(), viewArea()));
 }
 
 OktetaMainWindow::~OktetaMainWindow() = default;
@@ -172,28 +172,24 @@ void OktetaMainWindow::setupControllers()
     ByteArrayViewProfileManager* const byteArrayViewProfileManager = mProgram->byteArrayViewProfileManager();
 
     // general, part of Kasten
-    addXmlGuiController(new CreatorController(codecManager,
-                                              documentStrategy, this));
-    addXmlGuiController(new LoaderController(documentStrategy, this));
-    addXmlGuiController(new SetRemoteController(syncManager, this));
-    addXmlGuiController(new SynchronizeController(syncManager, this));
-    addXmlGuiController(new ExportController(codecViewManager,
-                                             codecManager, this));
-    addXmlGuiController(new CloseController(documentStrategy, this));
-    addXmlGuiController(new VersionController(this));
-    addXmlGuiController(new ReadOnlyController(this));
-    addXmlGuiController(new SwitchViewController(viewArea, this));
-    addXmlGuiController(new ViewAreaSplitController(viewManager, viewArea, this));
-    addXmlGuiController(new FullScreenController(this));
-    addXmlGuiController(new QuitController(nullptr, this));
+    addXmlGuiControllerFromFactory(CreatorControllerFactory(codecManager, documentStrategy));
+    addXmlGuiControllerFromFactory(LoaderControllerFactory(documentStrategy));
+    addXmlGuiControllerFromFactory(SetRemoteControllerFactory(syncManager));
+    addXmlGuiControllerFromFactory(SynchronizeControllerFactory(syncManager));
+    addXmlGuiControllerFromFactory(ExportControllerFactory(codecViewManager, codecManager));
+    addXmlGuiControllerFromFactory(CloseControllerFactory(documentStrategy));
+    addXmlGuiControllerFromFactory(VersionControllerFactory());
+    addXmlGuiControllerFromFactory(ReadOnlyControllerFactory());
+    addXmlGuiControllerFromFactory(SwitchViewControllerFactory(viewArea));
+    addXmlGuiControllerFromFactory(ViewAreaSplitControllerFactory(viewManager, viewArea));
+    addXmlGuiControllerFromFactory(FullScreenControllerFactory(this));
+    addXmlGuiControllerFromFactory(QuitControllerFactory(this));
 
-    addXmlGuiController(new ZoomController(this));
-    addXmlGuiController(new SelectController(this));
-    addXmlGuiController(new ClipboardController(this));
-    addXmlGuiController(new InsertController(codecViewManager,
-                                             codecManager, this));
-    addXmlGuiController(new CopyAsController(codecViewManager,
-                                             codecManager, this));
+    addXmlGuiControllerFromFactory(ZoomControllerFactory());
+    addXmlGuiControllerFromFactory(SelectControllerFactory());
+    addXmlGuiControllerFromFactory(ClipboardControllerFactory());
+    addXmlGuiControllerFromFactory(InsertControllerFactory(codecViewManager, codecManager));
+    addXmlGuiControllerFromFactory(CopyAsControllerFactory(codecViewManager, codecManager));
 
     addToolFromFactory(FileSystemBrowserToolViewFactory(), FileSystemBrowserToolFactory(syncManager));
     addToolFromFactory(DocumentsToolViewFactory(), DocumentsToolFactory(documentManager));
@@ -203,24 +199,24 @@ void OktetaMainWindow::setupControllers()
 #endif
 
     // Okteta specific
-//     addXmlGuiController( new OverwriteOnlyController(this) );
-    addXmlGuiController(new OverwriteModeController(this));
-    addXmlGuiController(new SearchController(this, this));
-    addXmlGuiController(new ReplaceController(this, this));
-    addXmlGuiController(new GotoOffsetController(viewArea, this));
-    addXmlGuiController(new SelectRangeController(viewArea, this));
-    addXmlGuiController(new BookmarksController(this));
-    addXmlGuiController(new PrintController(this));
-    addXmlGuiController(new ViewConfigController(this));
-    addXmlGuiController(new ViewModeController(this));
-    addXmlGuiController(new ViewProfileController(byteArrayViewProfileManager, this, this));
-    addXmlGuiController(new ViewProfilesManageController(this, byteArrayViewProfileManager, this));
+//     addXmlGuiControllerFromFactory(OverwriteOnlyControllerFactory() );
+    addXmlGuiControllerFromFactory(OverwriteModeControllerFactory());
+    addXmlGuiControllerFromFactory(SearchControllerFactory(this));
+    addXmlGuiControllerFromFactory(ReplaceControllerFactory(this));
+    addXmlGuiControllerFromFactory(GotoOffsetControllerFactory(viewArea));
+    addXmlGuiControllerFromFactory(SelectRangeControllerFactory(viewArea));
+    addXmlGuiControllerFromFactory(BookmarksControllerFactory());
+    addXmlGuiControllerFromFactory(PrintControllerFactory());
+    addXmlGuiControllerFromFactory(ViewConfigControllerFactory());
+    addXmlGuiControllerFromFactory(ViewModeControllerFactory());
+    addXmlGuiControllerFromFactory(ViewProfileControllerFactory(byteArrayViewProfileManager, this));
+    addXmlGuiControllerFromFactory(ViewProfilesManageControllerFactory(byteArrayViewProfileManager, this));
 
     Kasten::StatusBar* const bottomBar = static_cast<Kasten::StatusBar*>(statusBar());
-    addXmlGuiController(new ViewStatusController(bottomBar));
-    addXmlGuiController(new ModifiedBarController(bottomBar));
-    addXmlGuiController(new ReadOnlyBarController(bottomBar));
-    addXmlGuiController(new ZoomBarController(bottomBar));
+    addXmlGuiControllerFromFactory(ViewStatusControllerFactory(bottomBar));
+    addXmlGuiControllerFromFactory(ModifiedBarControllerFactory(bottomBar));
+    addXmlGuiControllerFromFactory(ReadOnlyBarControllerFactory(bottomBar));
+    addXmlGuiControllerFromFactory(ZoomBarControllerFactory(bottomBar));
 
     addToolFromFactory(DocumentInfoToolViewFactory(), DocumentInfoToolFactory(syncManager));
     addToolFromFactory(ChecksumToolViewFactory(), ChecksumToolFactory());
@@ -242,6 +238,13 @@ void OktetaMainWindow::addToolFromFactory(const AbstractToolViewFactory& toolVie
 
     addTool(toolView);
 }
+
+void OktetaMainWindow::addXmlGuiControllerFromFactory(const AbstractXmlGuiControllerFactory& factory)
+{
+    AbstractXmlGuiController* controller = factory.create(this);
+    addXmlGuiController(controller);
+}
+
 
 bool OktetaMainWindow::queryClose()
 {

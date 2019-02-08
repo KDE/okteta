@@ -47,10 +47,12 @@ oktetakastencontrollers_add_sublibrary(document/info
 oktetakastencontrollers_add_sublibrary(document/overwriteonly
     PUBLIC
         OverwriteOnlyController
+        OverwriteOnlyControllerFactory
 )
 oktetakastencontrollers_add_sublibrary(view/overwritemode
     PUBLIC
         OverwriteModeController
+        OverwriteModeControllerFactory
 )
 oktetakastencontrollers_add_sublibrary(view/info
     PUBLIC
@@ -201,6 +203,7 @@ oktetakastencontrollers_add_sublibrary(view/bytetable
 oktetakastencontrollers_add_sublibrary(view/search
     PUBLIC
         SearchController
+        SearchControllerFactory
         SearchUserQueryable
     PRIVATE
         SearchDialog
@@ -211,6 +214,7 @@ oktetakastencontrollers_add_sublibrary(view/search
 oktetakastencontrollers_add_sublibrary(view/replace
     PUBLIC
         ReplaceController
+        ReplaceControllerFactory
         ReplaceUserQueryable
     PRIVATE
         ReplaceDialog
@@ -285,6 +289,7 @@ oktetakastencontrollers_add_sublibrary(view/charsetconversion
 oktetakastencontrollers_add_sublibrary(view/gotooffset
     PUBLIC
         GotoOffsetController
+        GotoOffsetControllerFactory
     PRIVATE
         GotoOffsetTool
         GotoOffsetView
@@ -294,6 +299,7 @@ oktetakastencontrollers_add_sublibrary(view/gotooffset
 oktetakastencontrollers_add_sublibrary(view/selectrange
     PUBLIC
         SelectRangeController
+        SelectRangeControllerFactory
     PRIVATE
         SelectRangeTool
         SelectRangeView
@@ -303,6 +309,7 @@ oktetakastencontrollers_add_sublibrary(view/selectrange
 oktetakastencontrollers_add_sublibrary(view/bookmarks
     PUBLIC
         BookmarksController
+        BookmarksControllerFactory
     PRIVATE
         BookmarkEditPopup
 )
@@ -465,6 +472,7 @@ oktetakastencontrollers_add_sublibrary(${LIBFRAMESPRINT_REL_DIR}
 oktetakastencontrollers_add_sublibrary(view/print
     PUBLIC
         PrintController
+        PrintControllerFactory
     PRIVATE
         PrintTool
         PrintJob
@@ -476,6 +484,7 @@ oktetakastencontrollers_add_sublibrary(view/print
 oktetakastencontrollers_add_sublibrary(view/viewconfig
     PUBLIC
         ViewConfigController
+        ViewConfigControllerFactory
     PRIVATE
         BytesPerLineDialog
         BytesPerGroupDialog
@@ -484,18 +493,22 @@ oktetakastencontrollers_add_sublibrary(view/viewconfig
 oktetakastencontrollers_add_sublibrary(view/viewstatus
     PUBLIC
         ViewStatusController
+        ViewStatusControllerFactory
 )
 
 oktetakastencontrollers_add_sublibrary(view/viewmode
     PUBLIC
         ViewModeController
+        ViewModeControllerFactory
 )
 
 oktetakastencontrollers_add_sublibrary(view/viewprofiles
     PUBLIC
         ViewProfilesManageController
+        ViewProfilesManageControllerFactory
         # TODO: two controllers in one subdir
         ViewProfileController
+        ViewProfileControllerFactory
     PRIVATE
         ViewProfileEdit
         ViewProfileEditDialog

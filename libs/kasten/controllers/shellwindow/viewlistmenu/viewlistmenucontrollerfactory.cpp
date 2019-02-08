@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2019 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,35 +20,25 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KASTEN_QUITCONTROLLER_HPP
-#define KASTEN_QUITCONTROLLER_HPP
+#include "viewlistmenucontrollerfactory.hpp"
 
 // lib
-#include <kasten/kastencontrollers_export.hpp>
-// Kasten gui
-#include <Kasten/AbstractXmlGuiController>
-
-class KXmlGuiWindow;
+#include "viewlistmenucontroller.hpp"
 
 namespace Kasten {
 
-class KASTENCONTROLLERS_EXPORT QuitController : public AbstractXmlGuiController
+ViewListMenuControllerFactory::ViewListMenuControllerFactory(ViewManager* viewManager,
+                                                             AbstractGroupedViews* groupedViews)
+    : m_viewManager(viewManager)
+    , m_groupedViews(groupedViews)
 {
-    Q_OBJECT
-
-public:
-    explicit QuitController(KXmlGuiWindow* window);
-
-public: // AbstractXmlGuiController API
-    void setTargetModel(AbstractModel* model) override;
-
-private Q_SLOTS:
-    void quit();
-
-private:
-    KXmlGuiWindow* mMainWindow;
-};
-
 }
 
-#endif
+ViewListMenuControllerFactory::~ViewListMenuControllerFactory() = default;
+
+AbstractXmlGuiController* ViewListMenuControllerFactory::create(KXMLGUIClient* guiClient) const
+{
+    return new ViewListMenuController(m_viewManager, m_groupedViews, guiClient);
+}
+
+}

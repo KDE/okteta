@@ -1,7 +1,7 @@
 /*
-    This file is part of the Kasten Framework, made within the KDE community.
+    This file is part of the Okteta Kasten module, made within the KDE community.
 
-    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2019 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,35 +20,23 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KASTEN_QUITCONTROLLER_HPP
-#define KASTEN_QUITCONTROLLER_HPP
+#include "searchcontrollerfactory.hpp"
 
 // lib
-#include <kasten/kastencontrollers_export.hpp>
-// Kasten gui
-#include <Kasten/AbstractXmlGuiController>
-
-class KXmlGuiWindow;
+#include "searchcontroller.hpp"
 
 namespace Kasten {
 
-class KASTENCONTROLLERS_EXPORT QuitController : public AbstractXmlGuiController
+SearchControllerFactory::SearchControllerFactory(QWidget* parentWidget)
+    : m_parentWidget(parentWidget)
 {
-    Q_OBJECT
-
-public:
-    explicit QuitController(KXmlGuiWindow* window);
-
-public: // AbstractXmlGuiController API
-    void setTargetModel(AbstractModel* model) override;
-
-private Q_SLOTS:
-    void quit();
-
-private:
-    KXmlGuiWindow* mMainWindow;
-};
-
 }
 
-#endif
+SearchControllerFactory::~SearchControllerFactory() = default;
+
+AbstractXmlGuiController* SearchControllerFactory::create(KXMLGUIClient* guiClient) const
+{
+    return new SearchController(guiClient, m_parentWidget);
+}
+
+}

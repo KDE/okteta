@@ -25,13 +25,15 @@
 // part
 #include "part.hpp"
 // Okteta Kasten
-#include <Kasten/Okteta/PrintController>
 #include <Kasten/Okteta/ByteArrayView>
 #include <Kasten/Okteta/ByteArrayDocument>
+// KF5
+#include <KActionCollection>
 // Qt
 #include <QClipboard>
 #include <QApplication>
 #include <QDataStream>
+#include <QAction>
 
 OktetaBrowserExtension::OktetaBrowserExtension(OktetaPart* part)
     : KParts::BrowserExtension(part)
@@ -58,7 +60,10 @@ void OktetaBrowserExtension::copy()
 
 void OktetaBrowserExtension::print()
 {
-    mPart->printController()->print();
+    auto printAction = mPart->actionCollection()->action(QStringLiteral("file_print"));
+    if (printAction) {
+        printAction->trigger();
+    }
 }
 
 void OktetaBrowserExtension::onSelectionChanged(bool hasSelection)

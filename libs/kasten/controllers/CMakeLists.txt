@@ -13,26 +13,31 @@ endmacro()
 kastencontrollers_add_sublibrary(io/synchronize
     PUBLIC
         SynchronizeController
+        SynchronizeControllerFactory
 )
 
 kastencontrollers_add_sublibrary(io/setremote
     PUBLIC
         SetRemoteController
+        SetRemoteControllerFactory
 )
 
 kastencontrollers_add_sublibrary(documentsystem/creator
     PUBLIC
         CreatorController
+        CreatorControllerFactory
 )
 
 kastencontrollers_add_sublibrary(documentsystem/loader
     PUBLIC
         LoaderController
+        LoaderControllerFactory
 )
 
 kastencontrollers_add_sublibrary(documentsystem/close
     PUBLIC
         CloseController
+        CloseControllerFactory
 )
 
 kastencontrollers_add_sublibrary(documentsystem/filesystembrowser
@@ -69,13 +74,16 @@ kastencontrollers_add_sublibrary(document/terminal
 kastencontrollers_add_sublibrary(document/modified
     PUBLIC
         ModifiedBarController
+        ModifiedBarControllerFactory
 )
 
 kastencontrollers_add_sublibrary(document/readonly
     PUBLIC
         ReadOnlyController
+        ReadOnlyControllerFactory
         # TODO: two plugins in one subdir
         ReadOnlyBarController
+        ReadOnlyBarControllerFactory
 )
 
 if(NOT CMAKE_BUILD_TYPE_TOLOWER MATCHES release)
@@ -94,13 +102,16 @@ endif()
 kastencontrollers_add_sublibrary(view/version
     PUBLIC
         VersionController
+        VersionControllerFactory
 )
 
 kastencontrollers_add_sublibrary(view/zoom
     PUBLIC
         ZoomController
+        ZoomControllerFactory
         # TODO: two plugins in one subdir
         ZoomBarController
+        ZoomBarControllerFactory
     PRIVATE
         ZoomSlider
 )
@@ -108,16 +119,19 @@ kastencontrollers_add_sublibrary(view/zoom
 kastencontrollers_add_sublibrary(view/select
     PUBLIC
         SelectController
+        SelectControllerFactory
 )
 
 kastencontrollers_add_sublibrary(io/clipboard
     PUBLIC
         ClipboardController
+        ClipboardControllerFactory
 )
 
 kastencontrollers_add_sublibrary(io/insert
     PUBLIC
         InsertController
+        InsertControllerFactory
     PRIVATE
         InsertDialog
 )
@@ -125,6 +139,7 @@ kastencontrollers_add_sublibrary(io/insert
 kastencontrollers_add_sublibrary(io/copyas
     PUBLIC
         CopyAsController
+        CopyAsControllerFactory
     PRIVATE
         CopyAsDialog
 )
@@ -132,6 +147,7 @@ kastencontrollers_add_sublibrary(io/copyas
 kastencontrollers_add_sublibrary(io/export
     PUBLIC
         ExportController
+        ExportControllerFactory
     PRIVATE
         ExportDialog
 )
@@ -142,31 +158,37 @@ kastencontrollers_add_sublibrary(io/export
 kastencontrollers_add_sublibrary(shellwindow/switchview
     PUBLIC
         SwitchViewController
+        SwitchViewControllerFactory
 )
 
 kastencontrollers_add_sublibrary(shellwindow/viewlistmenu
     PUBLIC
         ViewListMenuController
+        ViewListMenuControllerFactory
 )
 
 kastencontrollers_add_sublibrary(shellwindow/viewareasplit
     PUBLIC
         ViewAreaSplitController
+        ViewAreaSplitControllerFactory
 )
 
 kastencontrollers_add_sublibrary(shellwindow/toollistmenu
     PUBLIC
         ToolListMenuController
+        ToolListMenuControllerFactory
 )
 
 kastencontrollers_add_sublibrary(shellwindow/fullscreen
     PUBLIC
         FullScreenController
+        FullScreenControllerFactory
 )
 
 kastencontrollers_add_sublibrary(program/quit
     PUBLIC
         QuitController
+        QuitControllerFactory
 )
 
 

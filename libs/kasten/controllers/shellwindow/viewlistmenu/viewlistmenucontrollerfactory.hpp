@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2019 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,33 +20,31 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KASTEN_QUITCONTROLLER_HPP
-#define KASTEN_QUITCONTROLLER_HPP
+#ifndef KASTEN_VIEWLISTMENUCONTROLLERFACTORY_HPP
+#define KASTEN_VIEWLISTMENUCONTROLLERFACTORY_HPP
 
 // lib
 #include <kasten/kastencontrollers_export.hpp>
-// Kasten gui
-#include <Kasten/AbstractXmlGuiController>
-
-class KXmlGuiWindow;
+// Kasten core
+#include <Kasten/AbstractXmlGuiControllerFactory>
 
 namespace Kasten {
 
-class KASTENCONTROLLERS_EXPORT QuitController : public AbstractXmlGuiController
+class ViewManager;
+class AbstractGroupedViews;
+
+class KASTENCONTROLLERS_EXPORT ViewListMenuControllerFactory : public AbstractXmlGuiControllerFactory
 {
-    Q_OBJECT
-
 public:
-    explicit QuitController(KXmlGuiWindow* window);
+    explicit ViewListMenuControllerFactory(ViewManager* viewManager, AbstractGroupedViews* groupedViews);
+    ~ViewListMenuControllerFactory() override;
 
-public: // AbstractXmlGuiController API
-    void setTargetModel(AbstractModel* model) override;
-
-private Q_SLOTS:
-    void quit();
+public: // AbstractXmlGuiControllerFactory API
+    AbstractXmlGuiController* create(KXMLGUIClient* guiClient) const override;
 
 private:
-    KXmlGuiWindow* mMainWindow;
+    ViewManager* const m_viewManager;
+    AbstractGroupedViews* const m_groupedViews;
 };
 
 }

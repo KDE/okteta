@@ -35,6 +35,7 @@ class OktetaProgram;
 class DocumentManager;
 class AbstractToolViewFactory;
 class AbstractToolFactory;
+class AbstractXmlGuiControllerFactory;
 
 class OktetaMainWindow : public ShellWindow
 {
@@ -54,6 +55,7 @@ protected:
     void setupControllers();
     void addToolFromFactory(const AbstractToolViewFactory& toolViewFactory,
                             const AbstractToolFactory& toolFactory);
+    void addXmlGuiControllerFromFactory(const AbstractXmlGuiControllerFactory& factory);
 
 protected Q_SLOTS:
     void onDataOffered(const QMimeData* mimeData, bool& accept);

@@ -34,8 +34,8 @@ namespace Kasten {
 class ByteArrayViewProfileManager;
 class ByteArrayView;
 class ByteArrayDocument;
-class PrintController;
 class AbstractXmlGuiController;
+class AbstractXmlGuiControllerFactory;
 class AbstractDocument;
 }
 class QVBoxLayout;
@@ -62,9 +62,6 @@ public:
 
     ~OktetaPart() override;
 
-public:
-    Kasten::PrintController* printController() const;
-
 public: // KParts::ReadWritePart API
     void setReadWrite(bool readWrite = true) override;
 
@@ -79,6 +76,7 @@ protected: // KParts::ReadOnlyPart API
 
 protected:
     void setupActions(bool browserViewWanted);
+    void addController(const Kasten::AbstractXmlGuiControllerFactory& factory);
 
 protected:
     Kasten::ByteArrayView* byteArrayView() const;
@@ -94,7 +92,6 @@ private:
     Kasten::ByteArrayDocument* mDocument;
     Kasten::ByteArrayView* mByteArrayView;
 
-    Kasten::PrintController* mPrintController;
     QVector<Kasten::AbstractXmlGuiController*> mControllers;
 
     Kasten::ByteArrayViewProfileManager* mViewProfileManager;

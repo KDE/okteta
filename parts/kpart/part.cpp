@@ -25,41 +25,42 @@
 // part
 #include "partfactory.hpp"
 #include "browserextension.hpp"
+// Okteta Kasten controllers
+#include <Kasten/Okteta/OverwriteOnlyControllerFactory>
+#include <Kasten/Okteta/OverwriteModeControllerFactory>
+#include <Kasten/Okteta/GotoOffsetControllerFactory>
+#include <Kasten/Okteta/SelectRangeControllerFactory>
+#include <Kasten/Okteta/SearchControllerFactory>
+#include <Kasten/Okteta/ReplaceControllerFactory>
+#include <Kasten/Okteta/BookmarksControllerFactory>
+#include <Kasten/Okteta/PrintControllerFactory>
+#include <Kasten/Okteta/ViewConfigControllerFactory>
+#include <Kasten/Okteta/ViewModeControllerFactory>
+#include <Kasten/Okteta/ViewStatusControllerFactory>
+#include <Kasten/Okteta/ViewProfileControllerFactory>
 // Okteta Kasten
 #include <Kasten/Okteta/ByteArrayDocument>
 #include <Kasten/Okteta/ByteArrayView>
 #include <Kasten/Okteta/ByteArrayViewProfileSynchronizer>
 #include <Kasten/Okteta/ByteArrayViewProfileManager>
 #include <Kasten/Okteta/ByteArrayRawFileSynchronizerFactory>
-#include <Kasten/Okteta/OverwriteOnlyController>
-#include <Kasten/Okteta/OverwriteModeController>
-#include <Kasten/Okteta/GotoOffsetController>
-#include <Kasten/Okteta/SelectRangeController>
-#include <Kasten/Okteta/SearchController>
-#include <Kasten/Okteta/ReplaceController>
-#include <Kasten/Okteta/BookmarksController>
-#include <Kasten/Okteta/PrintController>
-#include <Kasten/Okteta/ViewConfigController>
-#include <Kasten/Okteta/ViewModeController>
-#include <Kasten/Okteta/ViewStatusController>
-#include <Kasten/Okteta/ViewProfileController>
+// Kasten controllers
+#include <Kasten/ReadOnlyControllerFactory>
+// #include <Kasten/ReadOnlyBarController>
+// #include <Kasten/SynchronizeController>
+#include <Kasten/ClipboardControllerFactory>
+// #include <Kasten/InsertControllerFactory>
+// #include <Kasten/CopyAsControllerFactory>
+// #include <Kasten/ExportControllerFactory>
+#include <Kasten/VersionControllerFactory>
+#include <Kasten/ZoomControllerFactory>
+// #include <Kasten/ZoomBarControllerFactory>
+#include <Kasten/SelectControllerFactory>
 // Kasten
+#include <Kasten/AbstractXmlGuiController>
 #include <Kasten/JobManager>
 #include <Kasten/AbstractLoadJob>
 #include <Kasten/AbstractSyncWithRemoteJob>
-#include <Kasten/ReadOnlyController>
-// #include <Kasten/ReadOnlyBarController>
-// #include <Kasten/SynchronizeController>
-#include <Kasten/ClipboardController>
-#include <Kasten/InsertController>
-#include <Kasten/CopyAsController>
-#include <Kasten/ExportController>
-#include <Kasten/VersionController>
-#include <Kasten/ZoomController>
-#include <Kasten/ZoomBarController>
-#include <Kasten/SelectController>
-// KF5
-#include <KActionCollection>
 // Qt
 #include <QWidget>
 #include <QLayout>
@@ -91,41 +92,40 @@ OktetaPart::OktetaPart(QObject* parent,
     setXMLFile(QLatin1String(UIFileName[modus]));
 
     if (modus == Modus::ReadWrite) {
-        mControllers.append(new Kasten::VersionController(this));
+        addController(Kasten::VersionControllerFactory());
     }
     if (modus == Modus::ReadWrite) {
-        mControllers.append(new Kasten::ReadOnlyController(this));
+        addController(Kasten::ReadOnlyControllerFactory());
     }
     // TODO: save_as
-//     mControllers.append( new ExportController(mProgram->viewManager(),mProgram->documentManager(),this) );
-    mControllers.append(new Kasten::ZoomController(this));
-    mControllers.append(new Kasten::SelectController(this));
+//     addController(ExportControllerFactory(mProgram->viewManager(),mProgram->documentManager()));
+    addController(Kasten::ZoomControllerFactory());
+    addController(Kasten::SelectControllerFactory());
     if (modus != Modus::BrowserView) {
-        mControllers.append(new Kasten::ClipboardController(this));
+        addController(Kasten::ClipboardControllerFactory());
     }
 //     if( modus != BrowserViewModus )
-//         mControllers.append( new Kasten::InsertController(mProgram->viewManager(),mProgram->documentManager(),this) );
-//     mControllers.append( new Kasten::CopyAsController(mProgram->viewManager(),mProgram->documentManager(),this) );
+//         addController(Kasten::InsertControllerFactory(mProgram->viewManager(),mProgram->documentManager()));
+//     addController(Kasten::CopyAsControllerFactory(mProgram->viewManager(),mProgram->documentManager()));
     if (modus == Modus::ReadWrite) {
-        mControllers.append(new Kasten::OverwriteModeController(this));
+        addController(Kasten::OverwriteModeControllerFactory());
     }
-    mControllers.append(new Kasten::SearchController(this, widget));
+    addController(Kasten::SearchControllerFactory(widget));
     if (modus == Modus::ReadWrite) {
-        mControllers.append(new Kasten::ReplaceController(this, widget));
+        addController(Kasten::ReplaceControllerFactory(widget));
     }
-//     mControllers.append( new Kasten::GotoOffsetController(mGroupedViews,this) );
-//     mControllers.append( new Kasten::SelectRangeController(mGroupedViews,this) );
-//     mControllers.append( new Kasten::BookmarksController(this) );
-    mPrintController = new Kasten::PrintController(this);
-    mControllers.append(mPrintController);
-    mControllers.append(new Kasten::ViewConfigController(this));
-    mControllers.append(new Kasten::ViewModeController(this));
-    mControllers.append(new Kasten::ViewProfileController(mViewProfileManager, widget, this));
+//     addController(Kasten::GotoOffsetControllerFactory(mGroupedViews));
+//     addController(Kasten::SelectRangeControllerFactory(mGroupedViews));
+//     addController(Kasten::BookmarksControllerFactory());
+    addController(Kasten::PrintControllerFactory());
+    addController(Kasten::ViewConfigControllerFactory());
+    addController(Kasten::ViewModeControllerFactory());
+    addController(Kasten::ViewProfileControllerFactory(mViewProfileManager, widget));
 
 //     Kasten::StatusBar* bottomBar = static_cast<Kasten::StatusBar*>( statusBar() );
-//     mControllers.append( new ViewStatusController(bottomBar) );
-//     mControllers.append( new ReadOnlyBarController(bottomBar) );
-//     mControllers.append( new ZoomBarController(bottomBar) );
+//     addController(ViewStatusControllerFactory(bottomBar) );
+//     addController(ReadOnlyBarControllerFactory(bottomBar) );
+//     addController(ZoomBarControllerFactory(bottomBar) );
 
 //     addTool( new DocumentInfoToolView(new DocumentInfoTool(mProgram->documentManager()->syncManager())) );
 //     addTool( new ChecksumToolView(new ChecksumTool()) );
@@ -155,7 +155,11 @@ OktetaPart::~OktetaPart()
     delete mDocument;
 }
 
-Kasten::PrintController* OktetaPart::printController() const { return mPrintController; }
+void OktetaPart::addController(const Kasten::AbstractXmlGuiControllerFactory& factory)
+{
+    Kasten::AbstractXmlGuiController* controller = factory.create(this);
+    mControllers.append(controller);
+}
 
 void OktetaPart::setReadWrite(bool readWrite)
 {
