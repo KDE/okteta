@@ -203,7 +203,7 @@ oktetakastencontrollers_add_sublibrary(view/search
         SearchController
         SearchUserQueryable
     PRIVATE
-        KSearchDialog
+        SearchDialog
         SearchJob
         SearchTool
 )

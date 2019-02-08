@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KASTEN_KSEARCHDIALOG_HPP
-#define KASTEN_KSEARCHDIALOG_HPP
+#ifndef KASTEN_SEARCHDIALOG_HPP
+#define KASTEN_SEARCHDIALOG_HPP
 
 // lib
 #include <abstractfinddialog.hpp>
@@ -30,13 +30,13 @@ namespace Kasten {
 
 class SearchTool;
 
-class KSearchDialog : public AbstractFindDialog
+class SearchDialog : public AbstractFindDialog
 {
     Q_OBJECT
 
 public:
-    explicit KSearchDialog(SearchTool* tool, QWidget* parent = nullptr);
-    ~KSearchDialog() override;
+    explicit SearchDialog(SearchTool* tool, QWidget* parent = nullptr);
+    ~SearchDialog() override;
 
 protected: // AbstractFindDialog API
     void onFindButtonClicked() override;

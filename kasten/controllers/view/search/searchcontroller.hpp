@@ -38,7 +38,7 @@ class QWidget;
 
 namespace Kasten {
 
-class KSearchDialog;
+class SearchDialog;
 class SearchTool;
 
 class OKTETAKASTENCONTROLLERS_EXPORT SearchController : public AbstractXmlGuiController
@@ -73,7 +73,7 @@ private:
     QAction* mFindNextAction;
     QAction* mFindPrevAction;
 
-    KSearchDialog* mSearchDialog = nullptr;
+    SearchDialog* mSearchDialog = nullptr;
     SearchTool* mTool;
 };
 

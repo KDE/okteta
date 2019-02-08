@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "ksearchdialog.hpp"
+#include "searchdialog.hpp"
 
 // controller
 #include "searchtool.hpp"
@@ -29,7 +29,7 @@
 
 namespace Kasten {
 
-KSearchDialog::KSearchDialog(SearchTool* tool, QWidget* parent)
+SearchDialog::SearchDialog(SearchTool* tool, QWidget* parent)
     : AbstractFindDialog(parent)
     , mTool(tool)
 {
@@ -52,12 +52,12 @@ KSearchDialog::KSearchDialog(SearchTool* tool, QWidget* parent)
 
     setCharCodec(mTool->charCodingName());
     connect(mTool,  &SearchTool::charCodecChanged,
-            this, &KSearchDialog::setCharCodec);
+            this, &SearchDialog::setCharCodec);
 }
 
-KSearchDialog::~KSearchDialog() = default;
+SearchDialog::~SearchDialog() = default;
 
-void KSearchDialog::onFindButtonClicked()
+void SearchDialog::onFindButtonClicked()
 {
     hide();
 
@@ -69,7 +69,7 @@ void KSearchDialog::onFindButtonClicked()
     mTool->search(direction(), fromCursor(), inSelection());
 }
 
-void KSearchDialog::showEvent(QShowEvent* showEvent)
+void SearchDialog::showEvent(QShowEvent* showEvent)
 {
     AbstractFindDialog::showEvent(showEvent);
 

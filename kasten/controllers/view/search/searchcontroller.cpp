@@ -23,7 +23,7 @@
 #include "searchcontroller.hpp"
 
 // controller
-#include "ksearchdialog.hpp"
+#include "searchdialog.hpp"
 #include "searchtool.hpp"
 // KF5
 #include <KXMLGUIClient>
@@ -107,7 +107,7 @@ void SearchController::showDialog(FindDirection direction)
 {
     // ensure dialog
     if (!mSearchDialog) {
-        mSearchDialog = new KSearchDialog(mTool, mParentWidget);
+        mSearchDialog = new SearchDialog(mTool, mParentWidget);
     }
 
     mSearchDialog->setDirection(direction);
