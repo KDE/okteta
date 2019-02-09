@@ -23,8 +23,6 @@
 #ifndef KASTEN_VIEWCONFIGCONTROLLER_HPP
 #define KASTEN_VIEWCONFIGCONTROLLER_HPP
 
-// lib
-#include <kasten/okteta/oktetakastencontrollers_export.hpp>
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
 
@@ -37,7 +35,7 @@ namespace Kasten {
 
 class ByteArrayView;
 
-class OKTETAKASTENCONTROLLERS_EXPORT ViewConfigController : public AbstractXmlGuiController
+class ViewConfigController : public AbstractXmlGuiController
 {
     Q_OBJECT
 

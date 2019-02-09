@@ -46,13 +46,15 @@ oktetakastencontrollers_add_sublibrary(document/info
 
 oktetakastencontrollers_add_sublibrary(document/overwriteonly
     PUBLIC
-        OverwriteOnlyController
         OverwriteOnlyControllerFactory
+    PRIVATE
+        OverwriteOnlyController
 )
 oktetakastencontrollers_add_sublibrary(view/overwritemode
     PUBLIC
-        OverwriteModeController
         OverwriteModeControllerFactory
+    PRIVATE
+        OverwriteModeController
 )
 oktetakastencontrollers_add_sublibrary(view/info
     PUBLIC
@@ -202,21 +204,21 @@ oktetakastencontrollers_add_sublibrary(view/bytetable
 
 oktetakastencontrollers_add_sublibrary(view/search
     PUBLIC
-        SearchController
         SearchControllerFactory
-        SearchUserQueryable
     PRIVATE
+        SearchUserQueryable
         SearchDialog
         SearchJob
         SearchTool
+        SearchController
 )
 
 oktetakastencontrollers_add_sublibrary(view/replace
     PUBLIC
-        ReplaceController
         ReplaceControllerFactory
-        ReplaceUserQueryable
     PRIVATE
+        ReplaceUserQueryable
+        ReplaceController
         ReplaceDialog
         ReplacePrompt
         ReplaceTool
@@ -288,30 +290,30 @@ oktetakastencontrollers_add_sublibrary(view/charsetconversion
 
 oktetakastencontrollers_add_sublibrary(view/gotooffset
     PUBLIC
-        GotoOffsetController
         GotoOffsetControllerFactory
     PRIVATE
         GotoOffsetTool
         GotoOffsetView
         GotoOffsetToolView
+        GotoOffsetController
 )
 
 oktetakastencontrollers_add_sublibrary(view/selectrange
     PUBLIC
-        SelectRangeController
         SelectRangeControllerFactory
     PRIVATE
         SelectRangeTool
         SelectRangeView
         SelectRangeToolView
+        SelectRangeController
 )
 
 oktetakastencontrollers_add_sublibrary(view/bookmarks
     PUBLIC
-        BookmarksController
         BookmarksControllerFactory
     PRIVATE
         BookmarkEditPopup
+        BookmarksController
 )
 
 oktetakastencontrollers_add_sublibrary(view/bookmarks
@@ -471,7 +473,6 @@ oktetakastencontrollers_add_sublibrary(${LIBFRAMESPRINT_REL_DIR}
 
 oktetakastencontrollers_add_sublibrary(view/print
     PUBLIC
-        PrintController
         PrintControllerFactory
     PRIVATE
         PrintTool
@@ -479,35 +480,36 @@ oktetakastencontrollers_add_sublibrary(view/print
         AbstractColumnFrameRenderer
         PrintColumnStylist
         ByteArrayFrameRenderer
+        PrintController
 )
 
 oktetakastencontrollers_add_sublibrary(view/viewconfig
     PUBLIC
-        ViewConfigController
         ViewConfigControllerFactory
     PRIVATE
         BytesPerLineDialog
         BytesPerGroupDialog
+        ViewConfigController
 )
 
 oktetakastencontrollers_add_sublibrary(view/viewstatus
     PUBLIC
-        ViewStatusController
         ViewStatusControllerFactory
+    PRIVATE
+        ViewStatusController
 )
 
 oktetakastencontrollers_add_sublibrary(view/viewmode
     PUBLIC
-        ViewModeController
         ViewModeControllerFactory
+    PRIVATE
+        ViewModeController
 )
 
 oktetakastencontrollers_add_sublibrary(view/viewprofiles
     PUBLIC
-        ViewProfilesManageController
         ViewProfilesManageControllerFactory
         # TODO: two controllers in one subdir
-        ViewProfileController
         ViewProfileControllerFactory
     PRIVATE
         ViewProfileEdit
@@ -515,6 +517,9 @@ oktetakastencontrollers_add_sublibrary(view/viewprofiles
         ViewProfileTableModel
 
         ViewProfilesManageDialog
+
+        ViewProfileController
+        ViewProfilesManageController
 )
 
 # create a static library for the unit tests. This means we don't have to compile the sources twice

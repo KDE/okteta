@@ -23,8 +23,6 @@
 #ifndef KASTEN_BOOKMARKSCONTROLLER_HPP
 #define KASTEN_BOOKMARKSCONTROLLER_HPP
 
-// lib
-#include <kasten/okteta/oktetakastencontrollers_export.hpp>
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
 // Okteta core
@@ -46,7 +44,7 @@ namespace Kasten {
 
 class ByteArrayView;
 
-class OKTETAKASTENCONTROLLERS_EXPORT BookmarksController : public AbstractXmlGuiController
+class BookmarksController : public AbstractXmlGuiController
 {
     Q_OBJECT
 

@@ -23,8 +23,6 @@
 #ifndef KASTEN_SELECTCONTROLLER_HPP
 #define KASTEN_SELECTCONTROLLER_HPP
 
-// lib
-#include <kasten/kastencontrollers_export.hpp>
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
 
@@ -37,7 +35,7 @@ namespace If {
 class DataSelectable;
 }
 
-class KASTENCONTROLLERS_EXPORT SelectController : public AbstractXmlGuiController
+class SelectController : public AbstractXmlGuiController
 {
     Q_OBJECT
 

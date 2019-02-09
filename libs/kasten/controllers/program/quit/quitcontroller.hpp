@@ -23,8 +23,6 @@
 #ifndef KASTEN_QUITCONTROLLER_HPP
 #define KASTEN_QUITCONTROLLER_HPP
 
-// lib
-#include <kasten/kastencontrollers_export.hpp>
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
 
@@ -32,7 +30,7 @@ class KXmlGuiWindow;
 
 namespace Kasten {
 
-class KASTENCONTROLLERS_EXPORT QuitController : public AbstractXmlGuiController
+class QuitController : public AbstractXmlGuiController
 {
     Q_OBJECT
 

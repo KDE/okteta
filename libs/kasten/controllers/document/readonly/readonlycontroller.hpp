@@ -23,8 +23,6 @@
 #ifndef KASTEN_READONLYCONTROLLER_HPP
 #define KASTEN_READONLYCONTROLLER_HPP
 
-// lib
-#include <kasten/kastencontrollers_export.hpp>
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
 
@@ -34,7 +32,7 @@ namespace Kasten {
 
 class AbstractDocument;
 
-class KASTENCONTROLLERS_EXPORT ReadOnlyController : public AbstractXmlGuiController
+class ReadOnlyController : public AbstractXmlGuiController
 {
     Q_OBJECT
 

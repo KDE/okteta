@@ -23,10 +23,8 @@
 #ifndef KASTEN_REPLACECONTROLLER_HPP
 #define KASTEN_REPLACECONTROLLER_HPP
 
-// lib
-#include <kasten/okteta/oktetakastencontrollers_export.hpp>
 // controller
-#include <kasten/okteta/replaceuserqueryable.hpp>
+#include "replaceuserqueryable.hpp"
 // lib
 #include <kasten/okteta/finddirection.hpp>
 // Kasten gui
@@ -42,8 +40,8 @@ class ReplaceDialog;
 class ReplacePrompt;
 class ReplaceTool;
 
-class OKTETAKASTENCONTROLLERS_EXPORT ReplaceController : public AbstractXmlGuiController
-                                                       , public If::ReplaceUserQueryable
+class ReplaceController : public AbstractXmlGuiController
+                        , public If::ReplaceUserQueryable
 {
     Q_OBJECT
 

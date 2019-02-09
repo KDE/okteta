@@ -23,8 +23,6 @@
 #ifndef KASTEN_SELECTRANGECONTROLLER_HPP
 #define KASTEN_SELECTRANGECONTROLLER_HPP
 
-// lib
-#include <kasten/okteta/oktetakastencontrollers_export.hpp>
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
 
@@ -39,7 +37,7 @@ namespace If {
 class ToolInlineViewable;
 }
 
-class OKTETAKASTENCONTROLLERS_EXPORT SelectRangeController : public AbstractXmlGuiController
+class SelectRangeController : public AbstractXmlGuiController
 {
     Q_OBJECT
 

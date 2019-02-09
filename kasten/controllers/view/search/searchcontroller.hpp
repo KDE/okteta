@@ -23,10 +23,8 @@
 #ifndef KASTEN_SEARCHCONTROLLER_HPP
 #define KASTEN_SEARCHCONTROLLER_HPP
 
-// lib
-#include <kasten/okteta/oktetakastencontrollers_export.hpp>
 // controller
-#include <kasten/okteta/searchuserqueryable.hpp>
+#include "searchuserqueryable.hpp"
 // libfinddialog
 #include <kasten/okteta/finddirection.hpp>
 // Kasten gui
@@ -41,8 +39,8 @@ namespace Kasten {
 class SearchDialog;
 class SearchTool;
 
-class OKTETAKASTENCONTROLLERS_EXPORT SearchController : public AbstractXmlGuiController
-                                                      , public If::SearchUserQueryable
+class SearchController : public AbstractXmlGuiController
+                       , public If::SearchUserQueryable
 {
     Q_OBJECT
 

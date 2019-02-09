@@ -23,8 +23,6 @@
 #ifndef KASTEN_VIEWLISTMENUCONTROLLER_HPP
 #define KASTEN_VIEWLISTMENUCONTROLLER_HPP
 
-// lib
-#include <kasten/kastencontrollers_export.hpp>
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
 
@@ -37,7 +35,7 @@ namespace Kasten {
 class ViewManager;
 class AbstractGroupedViews;
 
-class KASTENCONTROLLERS_EXPORT ViewListMenuController : public AbstractXmlGuiController
+class ViewListMenuController : public AbstractXmlGuiController
 {
     Q_OBJECT
 

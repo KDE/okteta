@@ -23,8 +23,6 @@
 #ifndef KASTEN_FULLSCREENCONTROLLER_HPP
 #define KASTEN_FULLSCREENCONTROLLER_HPP
 
-// lib
-#include <kasten/kastencontrollers_export.hpp>
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
 
@@ -32,7 +30,7 @@ class KXmlGuiWindow;
 
 namespace Kasten {
 
-class KASTENCONTROLLERS_EXPORT FullScreenController : public AbstractXmlGuiController
+class FullScreenController : public AbstractXmlGuiController
 {
     Q_OBJECT
 

@@ -23,8 +23,6 @@
 #ifndef KASTEN_GOTOOFFSETCONTROLLER_HPP
 #define KASTEN_GOTOOFFSETCONTROLLER_HPP
 
-// lib
-#include <kasten/okteta/oktetakastencontrollers_export.hpp>
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
 
@@ -39,7 +37,7 @@ namespace If {
 class ToolInlineViewable;
 }
 
-class OKTETAKASTENCONTROLLERS_EXPORT GotoOffsetController : public AbstractXmlGuiController
+class GotoOffsetController : public AbstractXmlGuiController
 {
     Q_OBJECT
 

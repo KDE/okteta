@@ -23,8 +23,6 @@
 #ifndef KASTEN_LOADERCONTROLLER_HPP
 #define KASTEN_LOADERCONTROLLER_HPP
 
-// lib
-#include <kasten/kastencontrollers_export.hpp>
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
 
@@ -36,7 +34,7 @@ namespace Kasten {
 
 class AbstractDocumentStrategy;
 
-class KASTENCONTROLLERS_EXPORT LoaderController : public AbstractXmlGuiController
+class LoaderController : public AbstractXmlGuiController
 {
     Q_OBJECT
 

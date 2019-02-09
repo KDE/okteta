@@ -23,8 +23,6 @@
 #ifndef KASTEN_ZOOMBARCONTROLLER_HPP
 #define KASTEN_ZOOMBARCONTROLLER_HPP
 
-// lib
-#include <kasten/kastencontrollers_export.hpp>
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
 
@@ -36,7 +34,7 @@ class Zoomable;
 }
 class StatusBar;
 
-class KASTENCONTROLLERS_EXPORT ZoomBarController : public AbstractXmlGuiController
+class ZoomBarController : public AbstractXmlGuiController
 {
     Q_OBJECT
 

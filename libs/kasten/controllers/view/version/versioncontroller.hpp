@@ -23,8 +23,6 @@
 #ifndef KASTEN_VERSIONCONTROLLER_HPP
 #define KASTEN_VERSIONCONTROLLER_HPP
 
-// lib
-#include <kasten/kastencontrollers_export.hpp>
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
 
@@ -38,7 +36,7 @@ namespace If {
 class Versionable;
 }
 
-class KASTENCONTROLLERS_EXPORT VersionController : public AbstractXmlGuiController
+class VersionController : public AbstractXmlGuiController
 {
     Q_OBJECT
 

@@ -23,8 +23,6 @@
 #ifndef KASTEN_CREATORCONTROLLER_HPP
 #define KASTEN_CREATORCONTROLLER_HPP
 
-// lib
-#include <kasten/kastencontrollers_export.hpp>
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
 
@@ -35,7 +33,7 @@ namespace Kasten {
 class ModelCodecManager;
 class AbstractDocumentStrategy;
 
-class KASTENCONTROLLERS_EXPORT CreatorController : public AbstractXmlGuiController
+class CreatorController : public AbstractXmlGuiController
 {
     Q_OBJECT
 

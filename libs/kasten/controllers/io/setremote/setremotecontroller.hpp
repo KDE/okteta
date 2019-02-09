@@ -23,8 +23,6 @@
 #ifndef KASTEN_SETREMOTECONTROLLER_HPP
 #define KASTEN_SETREMOTECONTROLLER_HPP
 
-// lib
-#include <kasten/kastencontrollers_export.hpp>
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
 
@@ -36,7 +34,7 @@ namespace Kasten {
 class AbstractDocument;
 class DocumentSyncManager;
 
-class KASTENCONTROLLERS_EXPORT SetRemoteController : public AbstractXmlGuiController
+class SetRemoteController : public AbstractXmlGuiController
 {
     Q_OBJECT
 

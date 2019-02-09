@@ -23,8 +23,6 @@
 #ifndef KASTEN_TOOLLISTMENUCONTROLLER_HPP
 #define KASTEN_TOOLLISTMENUCONTROLLER_HPP
 
-// lib
-#include <kasten/kastencontrollers_export.hpp>
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
 // Qt
@@ -41,7 +39,7 @@ namespace If {
 class WidgetsDockable;
 }
 
-class KASTENCONTROLLERS_EXPORT ToolListMenuController : public AbstractXmlGuiController
+class ToolListMenuController : public AbstractXmlGuiController
 {
     Q_OBJECT
 

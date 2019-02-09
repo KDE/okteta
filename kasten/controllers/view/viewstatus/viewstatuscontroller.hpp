@@ -23,8 +23,6 @@
 #ifndef KASTEN_VIEWSTATUSCONTROLLER_HPP
 #define KASTEN_VIEWSTATUSCONTROLLER_HPP
 
-// lib
-#include <kasten/okteta/oktetakastencontrollers_export.hpp>
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
 // Okteta gui
@@ -44,7 +42,7 @@ class ToggleButton;
 class StatusBar;
 class AbstractModelSelection;
 
-class OKTETAKASTENCONTROLLERS_EXPORT ViewStatusController : public AbstractXmlGuiController
+class ViewStatusController : public AbstractXmlGuiController
 {
     Q_OBJECT
 

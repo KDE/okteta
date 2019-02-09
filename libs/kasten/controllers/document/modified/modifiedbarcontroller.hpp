@@ -23,8 +23,6 @@
 #ifndef KASTEN_MODIFIEDBARCONTROLLER_HPP
 #define KASTEN_MODIFIEDBARCONTROLLER_HPP
 
-// lib
-#include <kasten/kastencontrollers_export.hpp>
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
 // Kasten core
@@ -37,7 +35,7 @@ class AbstractModelSynchronizer;
 class AbstractDocument;
 class StatusBar;
 
-class KASTENCONTROLLERS_EXPORT ModifiedBarController : public AbstractXmlGuiController
+class ModifiedBarController : public AbstractXmlGuiController
 {
     Q_OBJECT
 

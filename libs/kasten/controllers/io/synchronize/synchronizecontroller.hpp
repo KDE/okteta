@@ -23,8 +23,6 @@
 #ifndef KASTEN_SYNCHRONIZECONTROLLER_HPP
 #define KASTEN_SYNCHRONIZECONTROLLER_HPP
 
-// lib
-#include <kasten/kastencontrollers_export.hpp>
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
 
@@ -38,7 +36,7 @@ class AbstractModelFileSystemSynchronizer;
 class DocumentSyncManager;
 class AbstractDocument;
 
-class KASTENCONTROLLERS_EXPORT SynchronizeController : public AbstractXmlGuiController
+class SynchronizeController : public AbstractXmlGuiController
 {
     Q_OBJECT
 

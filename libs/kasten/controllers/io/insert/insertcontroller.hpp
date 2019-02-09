@@ -23,8 +23,6 @@
 #ifndef KASTEN_INSERTCONTROLLER_HPP
 #define KASTEN_INSERTCONTROLLER_HPP
 
-// lib
-#include <kasten/kastencontrollers_export.hpp>
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
 
@@ -40,7 +38,7 @@ namespace If {
 class SelectedDataWriteable;
 }
 
-class KASTENCONTROLLERS_EXPORT InsertController : public AbstractXmlGuiController
+class InsertController : public AbstractXmlGuiController
 {
     Q_OBJECT
 

@@ -23,8 +23,6 @@
 #ifndef KASTEN_VIEWPROFILESMANAGECONTROLLER_HPP
 #define KASTEN_VIEWPROFILESMANAGECONTROLLER_HPP
 
-// lib
-#include <kasten/okteta/oktetakastencontrollers_export.hpp>
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
 
@@ -34,7 +32,7 @@ class QAction;
 namespace Kasten {
 class ByteArrayViewProfileManager;
 
-class OKTETAKASTENCONTROLLERS_EXPORT ViewProfilesManageController : public AbstractXmlGuiController
+class ViewProfilesManageController : public AbstractXmlGuiController
 {
     Q_OBJECT
 

@@ -23,8 +23,6 @@
 #ifndef KASTEN_READONLYBARCONTROLLER_HPP
 #define KASTEN_READONLYBARCONTROLLER_HPP
 
-// lib
-#include <kasten/kastencontrollers_export.hpp>
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
 
@@ -34,7 +32,7 @@ class ToggleButton;
 class AbstractDocument;
 class StatusBar;
 
-class KASTENCONTROLLERS_EXPORT ReadOnlyBarController : public AbstractXmlGuiController
+class ReadOnlyBarController : public AbstractXmlGuiController
 {
     Q_OBJECT
 

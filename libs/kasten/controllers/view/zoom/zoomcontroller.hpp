@@ -23,8 +23,6 @@
 #ifndef KASTEN_ZOOMCONTROLLER_HPP
 #define KASTEN_ZOOMCONTROLLER_HPP
 
-// lib
-#include <kasten/kastencontrollers_export.hpp>
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
 
@@ -37,7 +35,7 @@ namespace If {
 class Zoomable;
 }
 
-class KASTENCONTROLLERS_EXPORT ZoomController : public AbstractXmlGuiController
+class ZoomController : public AbstractXmlGuiController
 {
     Q_OBJECT
 

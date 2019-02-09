@@ -12,32 +12,37 @@ endmacro()
 
 kastencontrollers_add_sublibrary(io/synchronize
     PUBLIC
-        SynchronizeController
         SynchronizeControllerFactory
+    PRIVATE
+        SynchronizeController
 )
 
 kastencontrollers_add_sublibrary(io/setremote
     PUBLIC
-        SetRemoteController
         SetRemoteControllerFactory
+    PRIVATE
+        SetRemoteController
 )
 
 kastencontrollers_add_sublibrary(documentsystem/creator
     PUBLIC
-        CreatorController
         CreatorControllerFactory
+    PRIVATE
+        CreatorController
 )
 
 kastencontrollers_add_sublibrary(documentsystem/loader
     PUBLIC
-        LoaderController
         LoaderControllerFactory
+    PRIVATE
+        LoaderController
 )
 
 kastencontrollers_add_sublibrary(documentsystem/close
     PUBLIC
-        CloseController
         CloseControllerFactory
+    PRIVATE
+        CloseController
 )
 
 kastencontrollers_add_sublibrary(documentsystem/filesystembrowser
@@ -73,17 +78,19 @@ kastencontrollers_add_sublibrary(document/terminal
 
 kastencontrollers_add_sublibrary(document/modified
     PUBLIC
-        ModifiedBarController
         ModifiedBarControllerFactory
+    PRIVATE
+        ModifiedBarController
 )
 
 kastencontrollers_add_sublibrary(document/readonly
     PUBLIC
-        ReadOnlyController
         ReadOnlyControllerFactory
         # TODO: two plugins in one subdir
-        ReadOnlyBarController
         ReadOnlyBarControllerFactory
+    PRIVATE
+        ReadOnlyController
+        ReadOnlyBarController
 )
 
 if(NOT CMAKE_BUILD_TYPE_TOLOWER MATCHES release)
@@ -101,55 +108,58 @@ endif()
 
 kastencontrollers_add_sublibrary(view/version
     PUBLIC
-        VersionController
         VersionControllerFactory
+    PRIVATE
+        VersionController
 )
 
 kastencontrollers_add_sublibrary(view/zoom
     PUBLIC
-        ZoomController
         ZoomControllerFactory
         # TODO: two plugins in one subdir
-        ZoomBarController
         ZoomBarControllerFactory
     PRIVATE
         ZoomSlider
+        ZoomController
+        ZoomBarController
 )
 
 kastencontrollers_add_sublibrary(view/select
     PUBLIC
-        SelectController
         SelectControllerFactory
+    PRIVATE
+        SelectController
 )
 
 kastencontrollers_add_sublibrary(io/clipboard
     PUBLIC
-        ClipboardController
         ClipboardControllerFactory
+    PRIVATE
+        ClipboardController
 )
 
 kastencontrollers_add_sublibrary(io/insert
     PUBLIC
-        InsertController
         InsertControllerFactory
     PRIVATE
         InsertDialog
+        InsertController
 )
 
 kastencontrollers_add_sublibrary(io/copyas
     PUBLIC
-        CopyAsController
         CopyAsControllerFactory
     PRIVATE
         CopyAsDialog
+        CopyAsController
 )
 
 kastencontrollers_add_sublibrary(io/export
     PUBLIC
-        ExportController
         ExportControllerFactory
     PRIVATE
         ExportDialog
+        ExportController
 )
 
 # set( CLOSECONTROLLER_SRCS
@@ -157,38 +167,44 @@ kastencontrollers_add_sublibrary(io/export
 # )
 kastencontrollers_add_sublibrary(shellwindow/switchview
     PUBLIC
-        SwitchViewController
         SwitchViewControllerFactory
+    PRIVATE
+        SwitchViewController
 )
 
 kastencontrollers_add_sublibrary(shellwindow/viewlistmenu
     PUBLIC
-        ViewListMenuController
         ViewListMenuControllerFactory
+    PRIVATE
+        ViewListMenuController
 )
 
 kastencontrollers_add_sublibrary(shellwindow/viewareasplit
     PUBLIC
-        ViewAreaSplitController
         ViewAreaSplitControllerFactory
+    PRIVATE
+        ViewAreaSplitController
 )
 
 kastencontrollers_add_sublibrary(shellwindow/toollistmenu
     PUBLIC
-        ToolListMenuController
         ToolListMenuControllerFactory
+    PRIVATE
+        ToolListMenuController
 )
 
 kastencontrollers_add_sublibrary(shellwindow/fullscreen
     PUBLIC
-        FullScreenController
         FullScreenControllerFactory
+    PRIVATE
+        FullScreenController
 )
 
 kastencontrollers_add_sublibrary(program/quit
     PUBLIC
-        QuitController
         QuitControllerFactory
+    PRIVATE
+        QuitController
 )
 
 

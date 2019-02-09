@@ -23,8 +23,6 @@
 #ifndef KASTEN_CLOSECONTROLLER_HPP
 #define KASTEN_CLOSECONTROLLER_HPP
 
-// lib
-#include <kasten/kastencontrollers_export.hpp>
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
 
@@ -35,7 +33,7 @@ namespace Kasten {
 
 class ViewManager;
 
-class KASTENCONTROLLERS_EXPORT CloseController : public AbstractXmlGuiController
+class CloseController : public AbstractXmlGuiController
 {
     Q_OBJECT
 

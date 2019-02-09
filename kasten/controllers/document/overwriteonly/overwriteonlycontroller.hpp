@@ -23,8 +23,6 @@
 #ifndef KASTEN_OVERWRITEONLYCONTROLLER_HPP
 #define KASTEN_OVERWRITEONLYCONTROLLER_HPP
 
-// lib
-#include <kasten/okteta/oktetakastencontrollers_export.hpp>
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
 
@@ -36,7 +34,7 @@ class KToggleAction;
 
 namespace Kasten {
 
-class OKTETAKASTENCONTROLLERS_EXPORT OverwriteOnlyController : public AbstractXmlGuiController
+class OverwriteOnlyController : public AbstractXmlGuiController
 {
     Q_OBJECT
 

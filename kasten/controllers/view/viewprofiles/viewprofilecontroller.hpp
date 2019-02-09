@@ -23,8 +23,6 @@
 #ifndef KASTEN_VIEWPROFILECONTROLLER_HPP
 #define KASTEN_VIEWPROFILECONTROLLER_HPP
 
-// lib
-#include <kasten/okteta/oktetakastencontrollers_export.hpp>
 // Okteta Kasten gui
 #include <Kasten/Okteta/ByteArrayViewProfile>
 // Kasten gui
@@ -42,7 +40,7 @@ class ByteArrayViewProfileManager;
 class ByteArrayViewProfileSynchronizer;
 class ByteArrayView;
 
-class OKTETAKASTENCONTROLLERS_EXPORT ViewProfileController : public AbstractXmlGuiController
+class ViewProfileController : public AbstractXmlGuiController
 {
     Q_OBJECT
 

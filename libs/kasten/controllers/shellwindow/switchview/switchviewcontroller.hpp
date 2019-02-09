@@ -23,8 +23,6 @@
 #ifndef KASTEN_SWITCHVIEWCONTROLLER_HPP
 #define KASTEN_SWITCHVIEWCONTROLLER_HPP
 
-// lib
-#include <kasten/kastencontrollers_export.hpp>
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
 
@@ -35,7 +33,7 @@ namespace Kasten {
 
 class AbstractGroupedViews;
 
-class KASTENCONTROLLERS_EXPORT SwitchViewController : public AbstractXmlGuiController
+class SwitchViewController : public AbstractXmlGuiController
 {
     Q_OBJECT
 
