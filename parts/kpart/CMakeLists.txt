@@ -24,7 +24,7 @@ target_link_libraries( oktetapart
   KF5::Parts
 )
 
-install( TARGETS oktetapart  DESTINATION ${KDE_INSTALL_PLUGINDIR})
+install( TARGETS oktetapart  DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf5/parts)
 kcoreaddons_desktop_to_json(oktetapart oktetapart.desktop  SERVICE_TYPES kpart.desktop)
 
 install( FILES oktetapart.desktop  DESTINATION ${KDE_INSTALL_KSERVICES5DIR} )
