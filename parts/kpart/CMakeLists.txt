@@ -27,6 +27,8 @@ target_link_libraries( oktetapart
 install( TARGETS oktetapart  DESTINATION ${KDE_INSTALL_PLUGINDIR})
 kcoreaddons_desktop_to_json(oktetapart oktetapart.desktop  SERVICE_TYPES kpart.desktop)
 
+install( FILES oktetapart.desktop  DESTINATION ${KDE_INSTALL_KSERVICES5DIR} )
+
 if(BUILD_TESTING)
     add_subdirectory(tests)
 endif()
