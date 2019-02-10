@@ -1,7 +1,7 @@
 #
 # Okteta Private Macros
 #
-# Copyright 2018 Friedrich W. H. Kossebau <kossebau@kde.org>
+# Copyright 2018,2019 Friedrich W. H. Kossebau <kossebau@kde.org>
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions
@@ -32,6 +32,55 @@ include(ECMGenerateHeaders)
 include(GenerateExportHeader)
 include(CMakePackageConfigHelpers)
 include(CMakeParseArguments)
+
+# helper macro
+function(_okteta_setup_namespace)
+    set(options
+    )
+    set(oneValueArgs
+        BASE_NAME
+        NAMESPACEPREFIX_VAR
+        VERSIONEDNAMESPACEPREFIX_VAR
+        VERSIONEDNAMESPACE_VAR
+    )
+    set(multiValueArgs
+        NAMESPACE
+        ABIVERSION
+    )
+    cmake_parse_arguments(OKTETA_SETUP_NAMESPACE "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+
+    string(CONCAT _namespacePrefix ${OKTETA_SETUP_NAMESPACE_NAMESPACE})
+
+    if (OKTETA_SETUP_NAMESPACE_ABIVERSION)
+        list(LENGTH OKTETA_SETUP_NAMESPACE_ABIVERSION _abiversionCount)
+        list(LENGTH OKTETA_SETUP_NAMESPACE_NAMESPACE _namespaceCount)
+        if (NOT _abiversionCount EQUAL _namespaceCount)
+            message(FATAL_ERROR "ABIVERSION needs to have as many elements as NAMESPACE if used")
+        endif()
+        math(EXPR _namespaceLastIndex "${_namespaceCount} - 1")
+
+        set(_versioned_namespace)
+        foreach(val RANGE ${_namespaceLastIndex})
+            list(GET OKTETA_SETUP_NAMESPACE_NAMESPACE ${val} _namespace)
+            list(GET OKTETA_SETUP_NAMESPACE_ABIVERSION ${val} _abiversion)
+            list(APPEND _versioned_namespace "${_namespace}${_abiversion}")
+        endforeach()
+        string(CONCAT _versionedNamespacePrefix ${_versioned_namespace})
+    else()
+        set(_versioned_namespace ${OKTETA_SETUP_NAMESPACE_NAMESPACE})
+        set(_versionedNamespacePrefix "${_namespacePrefix}")
+    endif()
+
+    if (OKTETA_SETUP_NAMESPACE_NAMESPACEPREFIX_VAR)
+        set(${OKTETA_SETUP_NAMESPACE_NAMESPACEPREFIX_VAR} ${_namespacePrefix} PARENT_SCOPE)
+    endif()
+    if (OKTETA_SETUP_NAMESPACE_VERSIONEDNAMESPACEPREFIX_VAR)
+        set(${OKTETA_SETUP_NAMESPACE_VERSIONEDNAMESPACEPREFIX_VAR} ${_versionedNamespacePrefix} PARENT_SCOPE)
+    endif()
+    if (OKTETA_SETUP_NAMESPACE_VERSIONEDNAMESPACE_VAR)
+        set(${OKTETA_SETUP_NAMESPACE_VERSIONEDNAMESPACE_VAR} ${_versioned_namespace} PARENT_SCOPE)
+    endif()
+endfunction()
 
 
 macro(okteta_add_sublibrary _baseName)
@@ -154,26 +203,15 @@ function(okteta_add_library _baseName)
     if (NOT OKTETA_ADD_LIBRARY_INTERNAL_BASENAME)
         set(OKTETA_ADD_LIBRARY_INTERNAL_BASENAME ${_baseName})
     endif()
-    string(CONCAT _namespacePrefix ${OKTETA_ADD_LIBRARY_NAMESPACE})
-    if (OKTETA_ADD_LIBRARY_ABIVERSION)
-        list(LENGTH OKTETA_ADD_LIBRARY_ABIVERSION _abiversionCount)
-        list(LENGTH OKTETA_ADD_LIBRARY_NAMESPACE _namespaceCount)
-        if (NOT _abiversionCount EQUAL _namespaceCount)
-            message(FATAL_ERROR "ABIVERSION needs to have as many elements as NAMESPACE if used")
-        endif()
-        math(EXPR _namespaceLastIndex "${_namespaceCount} - 1")
 
-        set(_versioned_namespace)
-        foreach(val RANGE ${_namespaceLastIndex})
-            list(GET OKTETA_ADD_LIBRARY_NAMESPACE ${val} _namespace)
-            list(GET OKTETA_ADD_LIBRARY_ABIVERSION ${val} _abiversion)
-            list(APPEND _versioned_namespace "${_namespace}${_abiversion}")
-        endforeach()
-        string(CONCAT _versionedNamespacePrefix ${_versioned_namespace})
-    else()
-        set(_versioned_namespace ${OKTETA_ADD_LIBRARY_NAMESPACE})
-        set(_versionedNamespacePrefix "${_namespacePrefix}")
-    endif()
+    _okteta_setup_namespace(
+        NAMESPACEPREFIX_VAR _namespacePrefix
+        VERSIONEDNAMESPACEPREFIX_VAR _versionedNamespacePrefix
+        VERSIONEDNAMESPACE_VAR _versioned_namespace
+        BASE_NAME ${_baseName}
+        NAMESPACE ${OKTETA_ADD_LIBRARY_NAMESPACE}
+        ABIVERSION ${OKTETA_ADD_LIBRARY_ABIVERSION}
+    )
 
     set(_fullName "${_namespacePrefix}${_baseName}")
     set(_fullInternalName "${_namespacePrefix}${OKTETA_ADD_LIBRARY_INTERNAL_BASENAME}")
@@ -282,24 +320,14 @@ function(okteta_add_cmakeconfig _baseName)
     )
     cmake_parse_arguments(OKTETA_ADD_CMAKECONFIG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
-    string(CONCAT _namespacePrefix ${OKTETA_ADD_CMAKECONFIG_NAMESPACE})
-    if (OKTETA_ADD_CMAKECONFIG_ABIVERSION)
-        list(LENGTH OKTETA_ADD_CMAKECONFIG_ABIVERSION _abiversionCount)
-        list(LENGTH OKTETA_ADD_CMAKECONFIG_NAMESPACE _namespaceCount)
-        if (NOT _abiversionCount EQUAL _namespaceCount)
-            message(FATAL_ERROR "ABIVERSION needs to have as many elements as NAMESPACE if used")
-        endif()
-        math(EXPR _namespaceLastIndex "${_namespaceCount} - 1")
-
-        foreach(val RANGE ${_namespaceLastIndex})
-            list(GET OKTETA_ADD_CMAKECONFIG_NAMESPACE ${val} _namespace)
-            list(GET OKTETA_ADD_CMAKECONFIG_ABIVERSION ${val} _abiversion)
-            string(APPEND _fullVersionedName ${_namespace} ${_abiversion})
-        endforeach()
-        string(APPEND _fullVersionedName ${_baseName})
-    else()
-        set(_fullVersionedName "${_namespacePrefix}${_baseName}")
-    endif()
+    _okteta_setup_namespace(
+        NAMESPACEPREFIX_VAR _namespacePrefix
+        VERSIONEDNAMESPACEPREFIX_VAR _versionedNamespacePrefix
+        BASE_NAME ${_baseName}
+        NAMESPACE ${OKTETA_ADD_CMAKECONFIG_NAMESPACE}
+        ABIVERSION ${OKTETA_ADD_CMAKECONFIG_ABIVERSION}
+    )
+    set(_fullVersionedName "${_versionedNamespacePrefix}${_baseName}")
 
     set(_targets_export_name "${_fullVersionedName}Targets")
 
