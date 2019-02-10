@@ -377,7 +377,6 @@ endfunction()
 
 function(okteta_add_qmakeconfig _baseName)
     set(options
-        NO_TARGET_NAMESPACE
     )
     set(oneValueArgs
         VERSION

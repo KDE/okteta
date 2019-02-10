@@ -104,7 +104,6 @@ okteta_add_cmakeconfig(Gui NAMESPACE Okteta
 )
 
 okteta_add_qmakeconfig(Gui NAMESPACE Okteta
-    NO_TARGET_NAMESPACE
     VERSION     ${OKTETAGUI_VERSION}
     ABIVERSION  ${OKTETALIBS_ABI_VERSION}
     DEPS OktetaCore widgets

@@ -116,7 +116,6 @@ okteta_add_cmakeconfig(Core NAMESPACE Okteta
 )
 
 okteta_add_qmakeconfig(Core NAMESPACE Okteta
-    NO_TARGET_NAMESPACE
     VERSION     ${OKTETACORE_VERSION}
     ABIVERSION  ${OKTETALIBS_ABI_VERSION}
     DEPS core
