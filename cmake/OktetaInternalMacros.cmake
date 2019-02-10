@@ -28,6 +28,7 @@
 
 # ECM
 include(ECMGenerateHeaders)
+include(ECMGeneratePriFile)
 # CMake
 include(GenerateExportHeader)
 include(CMakePackageConfigHelpers)
@@ -292,6 +293,7 @@ function(okteta_add_library _baseName)
             endif()
             set(_include_install_dir "${KDE_INSTALL_INCLUDEDIR}/${_include_dir_package_namespace}")
         endif()
+        set_property(TARGET ${_targetName} PROPERTY OKTETA_INSTALL_INCLUDEDIR ${_include_install_dir})
         target_include_directories(${_targetName}
             INTERFACE "$<INSTALL_INTERFACE:${_include_install_dir}>"
         )
@@ -368,6 +370,50 @@ function(okteta_add_cmakeconfig _baseName)
         FILE "${_fullVersionedName}Targets.cmake"
         ${_namespace_args}
         DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+        COMPONENT Devel
+    )
+endfunction()
+
+
+function(okteta_add_qmakeconfig _baseName)
+    set(options
+        NO_TARGET_NAMESPACE
+    )
+    set(oneValueArgs
+        VERSION
+    )
+    set(multiValueArgs
+        NAMESPACE
+        ABIVERSION
+        DEPS
+    )
+    cmake_parse_arguments(OKTETA_ADD_QMAKECONFIG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+
+    _okteta_setup_namespace(
+        NAMESPACEPREFIX_VAR _namespacePrefix
+        VERSIONEDNAMESPACEPREFIX_VAR _versionedNamespacePrefix
+        BASE_NAME ${_baseName}
+        NAMESPACE ${OKTETA_ADD_QMAKECONFIG_NAMESPACE}
+        ABIVERSION ${OKTETA_ADD_QMAKECONFIG_ABIVERSION}
+    )
+    set(_fullName "${_namespacePrefix}${_baseName}")
+    set(_fullVersionedName "${_versionedNamespacePrefix}${_baseName}")
+    set(_targetName ${_fullName})
+
+    get_target_property(_libraryName ${_targetName} OUTPUT_NAME)
+    get_property(_include_install_dir TARGET ${_targetName} PROPERTY OKTETA_INSTALL_INCLUDEDIR)
+
+    set(PROJECT_VERSION_STRING ${OKTETA_ADD_QMAKECONFIG_VERSION})
+    string(REPLACE ";" " " _deps "${OKTETA_ADD_QMAKECONFIG_DEPS}")
+    ecm_generate_pri_file(
+        BASE_NAME ${_fullName}
+        LIB_NAME ${_libraryName}
+        DEPS ${_deps}
+        FILENAME_VAR _pri_filename
+        INCLUDE_INSTALL_DIR  ${_include_install_dir}
+    )
+    install(FILES ${_pri_filename}
+        DESTINATION ${ECM_MKSPECS_INSTALL_DIR}
         COMPONENT Devel
     )
 endfunction()

@@ -115,6 +115,14 @@ okteta_add_cmakeconfig(Core NAMESPACE Okteta
 #     ABIVERSION ${OKTETALIBS_ABI_VERSION}
 )
 
+okteta_add_qmakeconfig(Core NAMESPACE Okteta
+    NO_TARGET_NAMESPACE
+    VERSION     ${OKTETACORE_VERSION}
+    ABIVERSION  ${OKTETALIBS_ABI_VERSION}
+    DEPS core
+)
+
+
 if(BUILD_TESTING)
   add_library( testoktetacore STATIC ${oktetacore_LIB_OBJS} )
   set_target_properties( testoktetacore PROPERTIES COMPILE_FLAGS -DOKTETACORE_STATIC_DEFINE )

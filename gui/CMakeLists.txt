@@ -103,6 +103,13 @@ okteta_add_cmakeconfig(Gui NAMESPACE Okteta
 #     ABIVERSION ${OKTETALIBS_ABI_VERSION}
 )
 
+okteta_add_qmakeconfig(Gui NAMESPACE Okteta
+    NO_TARGET_NAMESPACE
+    VERSION     ${OKTETAGUI_VERSION}
+    ABIVERSION  ${OKTETALIBS_ABI_VERSION}
+    DEPS OktetaCore widgets
+)
+
 if(BUILD_TESTING)
   add_subdirectory( test )
 #   add_library( testoktetacore STATIC ${oktetagui_LIB_SRCS} )
