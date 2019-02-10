@@ -121,6 +121,13 @@ okteta_add_qmakeconfig(Core NAMESPACE Okteta
     DEPS core
 )
 
+okteta_add_pkgconfig(Core NAMESPACE Okteta
+    VERSION     ${OKTETACORE_VERSION}
+    ABIVERSION  ${OKTETALIBS_ABI_VERSION}
+    DEPS Qt5Core
+    DESCRIPTION "Okteta Core"
+)
+
 
 if(BUILD_TESTING)
   add_library( testoktetacore STATIC ${oktetacore_LIB_OBJS} )

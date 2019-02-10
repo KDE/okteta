@@ -29,6 +29,7 @@
 # ECM
 include(ECMGenerateHeaders)
 include(ECMGeneratePriFile)
+include(ECMGeneratePkgConfigFile)
 # CMake
 include(GenerateExportHeader)
 include(CMakePackageConfigHelpers)
@@ -414,5 +415,46 @@ function(okteta_add_qmakeconfig _baseName)
     install(FILES ${_pri_filename}
         DESTINATION ${ECM_MKSPECS_INSTALL_DIR}
         COMPONENT Devel
+    )
+endfunction()
+
+function(okteta_add_pkgconfig _baseName)
+    set(options
+    )
+    set(oneValueArgs
+        VERSION
+        DESCRIPTION
+    )
+    set(multiValueArgs
+        NAMESPACE
+        ABIVERSION
+        DEPS
+    )
+    cmake_parse_arguments(OKTETA_ADD_PKGCONFIG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+
+    _okteta_setup_namespace(
+        NAMESPACEPREFIX_VAR _namespacePrefix
+        VERSIONEDNAMESPACEPREFIX_VAR _versionedNamespacePrefix
+        BASE_NAME ${_baseName}
+        NAMESPACE ${OKTETA_ADD_PKGCONFIG_NAMESPACE}
+        ABIVERSION ${OKTETA_ADD_PKGCONFIG_ABIVERSION}
+    )
+    set(_fullName "${_namespacePrefix}${_baseName}")
+    set(_fullVersionedName "${_versionedNamespacePrefix}${_baseName}")
+    set(_targetName ${_fullName})
+
+    get_target_property(_libraryName ${_targetName} OUTPUT_NAME)
+    get_property(_include_install_dir TARGET ${_targetName} PROPERTY OKTETA_INSTALL_INCLUDEDIR)
+
+    string(REPLACE ";" " " _deps "${OKTETA_ADD_PKGCONFIG_DEPS}")
+
+    set(PROJECT_VERSION ${OKTETA_ADD_PKGCONFIG_VERSION})
+    ecm_generate_pkgconfig_file(
+        BASE_NAME ${_fullName}
+        LIB_NAME ${_libraryName}
+        DEPS ${_deps}
+        INCLUDE_INSTALL_DIR  ${_include_install_dir}
+        DESCRIPTION ${OKTETA_ADD_PKGCONFIG_DESCRIPTION}
+        INSTALL
     )
 endfunction()

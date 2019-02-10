@@ -109,6 +109,13 @@ okteta_add_qmakeconfig(Gui NAMESPACE Okteta
     DEPS OktetaCore widgets
 )
 
+okteta_add_pkgconfig(Gui NAMESPACE Okteta
+    VERSION     ${OKTETAGUI_VERSION}
+    ABIVERSION  ${OKTETALIBS_ABI_VERSION}
+    DEPS OktetaCore Qt5Widgets
+    DESCRIPTION "Okteta Gui"
+)
+
 if(BUILD_TESTING)
   add_subdirectory( test )
 #   add_library( testoktetacore STATIC ${oktetagui_LIB_SRCS} )
