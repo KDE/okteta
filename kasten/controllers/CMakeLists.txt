@@ -635,9 +635,7 @@ install( PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/struct2osd DESTINATION ${KDE_INSTA
 install( FILES view/structures/gccxml-to-osd.xsl DESTINATION ${KDE_INSTALL_DATADIR}/okteta/structures/ )
 
 okteta_add_cmakeconfig(Controllers NAMESPACE Okteta Kasten
-    NO_TARGET_NAMESPACE
-    VERSION     ${OKTETAKASTENCONTROLLERS_VERSION}
-#     ABIVERSION ${KASTEN_ABI_VERSION}
+    NO_VERSIONED_CONFIGFILES
 )
 
 

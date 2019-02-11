@@ -98,22 +98,18 @@ okteta_add_library(Gui NAMESPACE Okteta
 )
 
 okteta_add_cmakeconfig(Gui NAMESPACE Okteta
-    NO_TARGET_NAMESPACE
-    VERSION   ${OKTETAGUI_VERSION}
-#     ABIVERSION ${OKTETALIBS_ABI_VERSION}
+    NO_VERSIONED_CONFIGFILES
 )
 
 okteta_add_qmakeconfig(Gui NAMESPACE Okteta
-    VERSION     ${OKTETAGUI_VERSION}
-    ABIVERSION  ${OKTETALIBS_ABI_VERSION}
     DEPS OktetaCore widgets
+    NO_VERSIONED_CONFIGFILES
 )
 
 okteta_add_pkgconfig(Gui NAMESPACE Okteta
-    VERSION     ${OKTETAGUI_VERSION}
-    ABIVERSION  ${OKTETALIBS_ABI_VERSION}
     DEPS OktetaCore Qt5Widgets
     DESCRIPTION "Okteta Gui"
+    NO_VERSIONED_CONFIGFILES
 )
 
 if(BUILD_TESTING)

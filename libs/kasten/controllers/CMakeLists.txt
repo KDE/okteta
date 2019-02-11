@@ -230,7 +230,5 @@ okteta_add_library(Controllers NAMESPACE Kasten
 )
 
 okteta_add_cmakeconfig(Controllers NAMESPACE Kasten
-    NO_TARGET_NAMESPACE
-    VERSION     ${KASTENCONTROLLERS_VERSION}
-#     ABIVERSION ${KASTEN_ABI_VERSION}
+    NO_VERSIONED_CONFIGFILES
 )

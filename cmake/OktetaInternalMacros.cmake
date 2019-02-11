@@ -35,7 +35,14 @@ include(GenerateExportHeader)
 include(CMakePackageConfigHelpers)
 include(CMakeParseArguments)
 
-# helper macro
+
+# helper macros
+function(_okteta_target_name _varName _baseName)
+    string(CONCAT _namespacePrefix ${ARGN})
+    set(${_varName} "${_namespacePrefix}${_baseName}" PARENT_SCOPE)
+endfunction()
+
+
 function(_okteta_setup_namespace)
     set(options
     )
@@ -217,6 +224,7 @@ function(okteta_add_library _baseName)
 
     set(_fullName "${_namespacePrefix}${_baseName}")
     set(_fullInternalName "${_namespacePrefix}${OKTETA_ADD_LIBRARY_INTERNAL_BASENAME}")
+    set(_fullVersionedName "${_versionedNamespacePrefix}${_baseName}")
 
     set(_targets_export_name "${_fullName}Targets")
 
@@ -273,6 +281,9 @@ function(okteta_add_library _baseName)
         VERSION     ${OKTETA_ADD_LIBRARY_VERSION}
         SOVERSION   ${OKTETA_ADD_LIBRARY_SOVERSION}
     )
+    set_property(TARGET ${_targetName} PROPERTY OKTETA_FULLNAME ${_fullName})
+    set_property(TARGET ${_targetName} PROPERTY OKTETA_FULLVERSIONEDNAME ${_fullVersionedName})
+    set_property(TARGET ${_targetName} PROPERTY OKTETA_NO_TARGETNAMESPACE ${OKTETA_ADD_LIBRARY_NO_TARGET_NAMESPACE})
 
     install( TARGETS ${_targetName}
         EXPORT ${_targets_export_name}
@@ -287,9 +298,9 @@ function(okteta_add_library _baseName)
                 set(_include_dir_package_namespace "${OKTETA_ADD_LIBRARY_INCLUDEDIR_PACKAGE_NAMESPACE}")
             else()
                 if (OKTETA_ADD_LIBRARY_NO_VERSIONED_PACKAGE_NAMESPACE)
-                    set(_include_dir_package_namespace "${_namespacePrefix}${_baseName}")
+                    set(_include_dir_package_namespace "${_fullName}")
                 else()
-                    set(_include_dir_package_namespace "${_versionedNamespacePrefix}${_baseName}")
+                    set(_include_dir_package_namespace "${_fullVersionedName}")
                 endif()
             endif()
             set(_include_install_dir "${KDE_INSTALL_INCLUDEDIR}/${_include_dir_package_namespace}")
@@ -312,46 +323,44 @@ endfunction()
 
 function(okteta_add_cmakeconfig _baseName)
     set(options
-        NO_TARGET_NAMESPACE
+        NO_VERSIONED_CONFIGFILES
     )
     set(oneValueArgs
-        VERSION
     )
     set(multiValueArgs
         NAMESPACE
-        ABIVERSION
     )
     cmake_parse_arguments(OKTETA_ADD_CMAKECONFIG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
-    _okteta_setup_namespace(
-        NAMESPACEPREFIX_VAR _namespacePrefix
-        VERSIONEDNAMESPACEPREFIX_VAR _versionedNamespacePrefix
-        BASE_NAME ${_baseName}
-        NAMESPACE ${OKTETA_ADD_CMAKECONFIG_NAMESPACE}
-        ABIVERSION ${OKTETA_ADD_CMAKECONFIG_ABIVERSION}
-    )
-    set(_fullVersionedName "${_versionedNamespacePrefix}${_baseName}")
+    _okteta_target_name(_targetName ${_baseName} ${OKTETA_ADD_CMAKECONFIG_NAMESPACE})
 
-    set(_targets_export_name "${_fullVersionedName}Targets")
+    if (OKTETA_ADD_CMAKECONFIG_NO_VERSIONED_CONFIGFILES)
+        get_property(_configName TARGET ${_targetName} PROPERTY OKTETA_FULLNAME)
+    else()
+        get_property(_configName TARGET ${_targetName} PROPERTY OKTETA_FULLVERSIONEDNAME)
+    endif()
+
+    set(_targets_export_name "${_configName}Targets")
 
     # create a Config.cmake and a ConfigVersion.cmake file and install them
-    set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/${_fullVersionedName}")
+    set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/${_configName}")
 
-    if (OKTETA_ADD_CMAKECONFIG_VERSION)
-        set(_configVersionFilePath "${CMAKE_CURRENT_BINARY_DIR}/${_fullVersionedName}ConfigVersion.cmake")
+    get_target_property(_version ${_targetName} VERSION)
+    if (_version)
+        set(_configVersionFilePath "${CMAKE_CURRENT_BINARY_DIR}/${_configName}ConfigVersion.cmake")
         if(NOT OKTETA_ADD_CMAKECONFIG_COMPATIBILITY)
             set(OKTETA_ADD_CMAKECONFIG_COMPATIBILITY AnyNewerVersion)
         endif()
         write_basic_package_version_file("${_configVersionFilePath}"
-            VERSION ${OKTETA_ADD_CMAKECONFIG_VERSION}
+            VERSION ${_version}
             COMPATIBILITY ${OKTETA_ADD_CMAKECONFIG_COMPATIBILITY}
         )
     else()
         set(_configVersionFilePath)
     endif()
 
-    set(_configFileTemplatePath "${CMAKE_CURRENT_SOURCE_DIR}/${_fullVersionedName}Config.cmake.in")
-    set(_configFilePath "${CMAKE_CURRENT_BINARY_DIR}/${_fullVersionedName}Config.cmake")
+    set(_configFileTemplatePath "${CMAKE_CURRENT_SOURCE_DIR}/${_configName}Config.cmake.in")
+    set(_configFilePath "${CMAKE_CURRENT_BINARY_DIR}/${_configName}Config.cmake")
     configure_package_config_file(
         "${_configFileTemplatePath}"
         "${_configFilePath}"
@@ -364,11 +373,13 @@ function(okteta_add_cmakeconfig _baseName)
         DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
         COMPONENT Devel
     )
-    if(NOT OKTETA_ADD_CMAKECONFIG_NO_TARGET_NAMESPACE)
+    get_property(_no_target_namespace TARGET ${_targetName} PROPERTY OKTETA_NO_TARGETNAMESPACE)
+
+    if(NOT _no_target_namespace)
         set(_namespace_args NAMESPACE "${_namespacePrefix}::")
     endif()
     install(EXPORT ${_targets_export_name}
-        FILE "${_fullVersionedName}Targets.cmake"
+        FILE "${_configName}Targets.cmake"
         ${_namespace_args}
         DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
         COMPONENT Devel
@@ -378,35 +389,32 @@ endfunction()
 
 function(okteta_add_qmakeconfig _baseName)
     set(options
+        NO_VERSIONED_CONFIGFILES
     )
     set(oneValueArgs
-        VERSION
     )
     set(multiValueArgs
         NAMESPACE
-        ABIVERSION
         DEPS
     )
     cmake_parse_arguments(OKTETA_ADD_QMAKECONFIG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
-    _okteta_setup_namespace(
-        NAMESPACEPREFIX_VAR _namespacePrefix
-        VERSIONEDNAMESPACEPREFIX_VAR _versionedNamespacePrefix
-        BASE_NAME ${_baseName}
-        NAMESPACE ${OKTETA_ADD_QMAKECONFIG_NAMESPACE}
-        ABIVERSION ${OKTETA_ADD_QMAKECONFIG_ABIVERSION}
-    )
-    set(_fullName "${_namespacePrefix}${_baseName}")
-    set(_fullVersionedName "${_versionedNamespacePrefix}${_baseName}")
-    set(_targetName ${_fullName})
+    _okteta_target_name(_targetName ${_baseName} ${OKTETA_ADD_QMAKECONFIG_NAMESPACE})
 
     get_target_property(_libraryName ${_targetName} OUTPUT_NAME)
     get_property(_include_install_dir TARGET ${_targetName} PROPERTY OKTETA_INSTALL_INCLUDEDIR)
+    get_property(_fullName TARGET ${_targetName} PROPERTY OKTETA_FULLNAME)
+    if (OKTETA_ADD_QMAKECONFIG_NO_VERSIONED_CONFIGFILES)
+        get_property(_configName TARGET ${_targetName} PROPERTY OKTETA_FULLNAME)
+    else()
+        get_property(_configName TARGET ${_targetName} PROPERTY OKTETA_FULLVERSIONEDNAME)
+    endif()
 
-    set(PROJECT_VERSION_STRING ${OKTETA_ADD_QMAKECONFIG_VERSION})
+    # ecm_generate_pri_file only knows PROJECT_VERSION_STRING
+    get_target_property(PROJECT_VERSION_STRING ${_targetName} VERSION)
     string(REPLACE ";" " " _deps "${OKTETA_ADD_QMAKECONFIG_DEPS}")
     ecm_generate_pri_file(
-        BASE_NAME ${_fullName}
+        BASE_NAME ${_configName}
         LIB_NAME ${_libraryName}
         DEPS ${_deps}
         FILENAME_VAR _pri_filename
@@ -420,37 +428,32 @@ endfunction()
 
 function(okteta_add_pkgconfig _baseName)
     set(options
+        NO_VERSIONED_CONFIGFILES
     )
     set(oneValueArgs
-        VERSION
         DESCRIPTION
     )
     set(multiValueArgs
         NAMESPACE
-        ABIVERSION
         DEPS
     )
     cmake_parse_arguments(OKTETA_ADD_PKGCONFIG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
-    _okteta_setup_namespace(
-        NAMESPACEPREFIX_VAR _namespacePrefix
-        VERSIONEDNAMESPACEPREFIX_VAR _versionedNamespacePrefix
-        BASE_NAME ${_baseName}
-        NAMESPACE ${OKTETA_ADD_PKGCONFIG_NAMESPACE}
-        ABIVERSION ${OKTETA_ADD_PKGCONFIG_ABIVERSION}
-    )
-    set(_fullName "${_namespacePrefix}${_baseName}")
-    set(_fullVersionedName "${_versionedNamespacePrefix}${_baseName}")
-    set(_targetName ${_fullName})
+    _okteta_target_name(_targetName ${_baseName} ${OKTETA_ADD_PKGCONFIG_NAMESPACE})
 
     get_target_property(_libraryName ${_targetName} OUTPUT_NAME)
     get_property(_include_install_dir TARGET ${_targetName} PROPERTY OKTETA_INSTALL_INCLUDEDIR)
+    if (OKTETA_ADD_PKGCONFIG_NO_VERSIONED_CONFIGFILES)
+        get_property(_configName TARGET ${_targetName} PROPERTY OKTETA_FULLNAME)
+    else()
+        get_property(_configName TARGET ${_targetName} PROPERTY OKTETA_FULLVERSIONEDNAME)
+    endif()
 
     string(REPLACE ";" " " _deps "${OKTETA_ADD_PKGCONFIG_DEPS}")
 
-    set(PROJECT_VERSION ${OKTETA_ADD_PKGCONFIG_VERSION})
+    get_target_property(PROJECT_VERSION ${_targetName} VERSION)
     ecm_generate_pkgconfig_file(
-        BASE_NAME ${_fullName}
+        BASE_NAME ${_configName}
         LIB_NAME ${_libraryName}
         DEPS ${_deps}
         INCLUDE_INSTALL_DIR  ${_include_install_dir}

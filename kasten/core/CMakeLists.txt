@@ -60,9 +60,7 @@ okteta_add_library(Core NAMESPACE Okteta Kasten
 )
 
 okteta_add_cmakeconfig(Core NAMESPACE Okteta Kasten
-    NO_TARGET_NAMESPACE
-    VERSION    ${OKTETAKASTENCORE_VERSION}
-#     ABIVERSION ${KASTEN_ABI_VERSION}
+    NO_VERSIONED_CONFIGFILES
 )
 
 if(BUILD_TESTING)

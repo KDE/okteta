@@ -184,7 +184,5 @@ okteta_add_library(Gui NAMESPACE Okteta Kasten
 )
 
 okteta_add_cmakeconfig(Gui NAMESPACE Okteta Kasten
-    NO_TARGET_NAMESPACE
-    VERSION     ${OKTETAKASTENGUI_VERSION}
-#     ABIVERSION ${KASTEN_ABI_VERSION}
+    NO_VERSIONED_CONFIGFILES
 )
