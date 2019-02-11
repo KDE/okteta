@@ -226,9 +226,8 @@ okteta_add_library(Controllers NAMESPACE Kasten
     CCHEADERS ${kastencontrollers_LIB_CCHDRS}
     NO_TARGET_NAMESPACE
     NO_VERSIONED_INCLUDEDIR
-    NO_VERSIONED_PACKAGE_NAMESPACE
+    NO_VERSIONED_PACKAGE_NAME
 )
 
 okteta_add_cmakeconfig(Controllers NAMESPACE Kasten
-    NO_VERSIONED_CONFIGFILES
 )

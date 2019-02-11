@@ -186,7 +186,7 @@ function(okteta_add_library _baseName)
     set(options
         NO_TARGET_NAMESPACE
         NO_VERSIONED_INCLUDEDIR
-        NO_VERSIONED_PACKAGE_NAMESPACE
+        NO_VERSIONED_PACKAGE_NAME
         NO_PACKAGE_NAMESPACED_INCLUDEDIR
         REVERSE_NAMESPACE_LIB
         REVERSE_NAMESPACE_INCLUDEDIR
@@ -209,6 +209,9 @@ function(okteta_add_library _baseName)
     )
     cmake_parse_arguments(OKTETA_ADD_LIBRARY "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
+    if (NOT OKTETA_ADD_LIBRARY_NO_VERSIONED_PACKAGE_NAME)
+        set(_use_versioned_package_name TRUE)
+    endif()
     if (NOT OKTETA_ADD_LIBRARY_INTERNAL_BASENAME)
         set(OKTETA_ADD_LIBRARY_INTERNAL_BASENAME ${_baseName})
     endif()
@@ -284,6 +287,7 @@ function(okteta_add_library _baseName)
     set_property(TARGET ${_targetName} PROPERTY OKTETA_FULLNAME ${_fullName})
     set_property(TARGET ${_targetName} PROPERTY OKTETA_FULLVERSIONEDNAME ${_fullVersionedName})
     set_property(TARGET ${_targetName} PROPERTY OKTETA_NO_TARGETNAMESPACE ${OKTETA_ADD_LIBRARY_NO_TARGET_NAMESPACE})
+    set_property(TARGET ${_targetName} PROPERTY OKTETA_USE_VERSIONED_PACKAGE_NAME ${_use_versioned_package_name})
 
     install( TARGETS ${_targetName}
         EXPORT ${_targets_export_name}
@@ -297,10 +301,10 @@ function(okteta_add_library _baseName)
             if (OKTETA_ADD_LIBRARY_INCLUDEDIR_PACKAGE_NAMESPACE)
                 set(_include_dir_package_namespace "${OKTETA_ADD_LIBRARY_INCLUDEDIR_PACKAGE_NAMESPACE}")
             else()
-                if (OKTETA_ADD_LIBRARY_NO_VERSIONED_PACKAGE_NAMESPACE)
-                    set(_include_dir_package_namespace "${_fullName}")
-                else()
+                if (_use_versioned_package_name)
                     set(_include_dir_package_namespace "${_fullVersionedName}")
+                else()
+                    set(_include_dir_package_namespace "${_fullName}")
                 endif()
             endif()
             set(_include_install_dir "${KDE_INSTALL_INCLUDEDIR}/${_include_dir_package_namespace}")
@@ -323,7 +327,6 @@ endfunction()
 
 function(okteta_add_cmakeconfig _baseName)
     set(options
-        NO_VERSIONED_CONFIGFILES
     )
     set(oneValueArgs
     )
@@ -334,10 +337,11 @@ function(okteta_add_cmakeconfig _baseName)
 
     _okteta_target_name(_targetName ${_baseName} ${OKTETA_ADD_CMAKECONFIG_NAMESPACE})
 
-    if (OKTETA_ADD_CMAKECONFIG_NO_VERSIONED_CONFIGFILES)
-        get_property(_configName TARGET ${_targetName} PROPERTY OKTETA_FULLNAME)
-    else()
+    get_property(_use_versioned_package_name TARGET ${_targetName} PROPERTY OKTETA_USE_VERSIONED_PACKAGE_NAME)
+    if (_use_versioned_package_name)
         get_property(_configName TARGET ${_targetName} PROPERTY OKTETA_FULLVERSIONEDNAME)
+    else()
+        get_property(_configName TARGET ${_targetName} PROPERTY OKTETA_FULLNAME)
     endif()
 
     set(_targets_export_name "${_configName}Targets")
@@ -389,7 +393,6 @@ endfunction()
 
 function(okteta_add_qmakeconfig _baseName)
     set(options
-        NO_VERSIONED_CONFIGFILES
     )
     set(oneValueArgs
     )
@@ -404,10 +407,11 @@ function(okteta_add_qmakeconfig _baseName)
     get_target_property(_libraryName ${_targetName} OUTPUT_NAME)
     get_property(_include_install_dir TARGET ${_targetName} PROPERTY OKTETA_INSTALL_INCLUDEDIR)
     get_property(_fullName TARGET ${_targetName} PROPERTY OKTETA_FULLNAME)
-    if (OKTETA_ADD_QMAKECONFIG_NO_VERSIONED_CONFIGFILES)
-        get_property(_configName TARGET ${_targetName} PROPERTY OKTETA_FULLNAME)
-    else()
+    get_property(_use_versioned_package_name TARGET ${_targetName} PROPERTY OKTETA_USE_VERSIONED_PACKAGE_NAME)
+    if (_use_versioned_package_name)
         get_property(_configName TARGET ${_targetName} PROPERTY OKTETA_FULLVERSIONEDNAME)
+    else()
+        get_property(_configName TARGET ${_targetName} PROPERTY OKTETA_FULLNAME)
     endif()
 
     # ecm_generate_pri_file only knows PROJECT_VERSION_STRING
@@ -428,7 +432,6 @@ endfunction()
 
 function(okteta_add_pkgconfig _baseName)
     set(options
-        NO_VERSIONED_CONFIGFILES
     )
     set(oneValueArgs
         DESCRIPTION
@@ -443,10 +446,11 @@ function(okteta_add_pkgconfig _baseName)
 
     get_target_property(_libraryName ${_targetName} OUTPUT_NAME)
     get_property(_include_install_dir TARGET ${_targetName} PROPERTY OKTETA_INSTALL_INCLUDEDIR)
-    if (OKTETA_ADD_PKGCONFIG_NO_VERSIONED_CONFIGFILES)
-        get_property(_configName TARGET ${_targetName} PROPERTY OKTETA_FULLNAME)
-    else()
+    get_property(_use_versioned_package_name TARGET ${_targetName} PROPERTY OKTETA_USE_VERSIONED_PACKAGE_NAME)
+    if (_use_versioned_package_name)
         get_property(_configName TARGET ${_targetName} PROPERTY OKTETA_FULLVERSIONEDNAME)
+    else()
+        get_property(_configName TARGET ${_targetName} PROPERTY OKTETA_FULLNAME)
     endif()
 
     string(REPLACE ";" " " _deps "${OKTETA_ADD_PKGCONFIG_DEPS}")

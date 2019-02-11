@@ -106,22 +106,19 @@ okteta_add_library(Core NAMESPACE Okteta
     CCHEADERS ${oktetacore_LIB_CCHDRS}
     NO_TARGET_NAMESPACE
     NO_VERSIONED_INCLUDEDIR
-    NO_VERSIONED_PACKAGE_NAMESPACE
+    NO_VERSIONED_PACKAGE_NAME
 )
 
 okteta_add_cmakeconfig(Core NAMESPACE Okteta
-    NO_VERSIONED_CONFIGFILES
 )
 
 okteta_add_qmakeconfig(Core NAMESPACE Okteta
     DEPS core
-    NO_VERSIONED_CONFIGFILES
 )
 
 okteta_add_pkgconfig(Core NAMESPACE Okteta
     DEPS Qt5Core
     DESCRIPTION "Okteta Core"
-    NO_VERSIONED_CONFIGFILES
 )
 
 

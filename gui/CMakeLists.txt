@@ -94,22 +94,19 @@ okteta_add_library(Gui NAMESPACE Okteta
     CCHEADERS ${oktetagui_LIB_CCHDRS}
     NO_TARGET_NAMESPACE
     NO_VERSIONED_INCLUDEDIR
-    NO_VERSIONED_PACKAGE_NAMESPACE
+    NO_VERSIONED_PACKAGE_NAME
 )
 
 okteta_add_cmakeconfig(Gui NAMESPACE Okteta
-    NO_VERSIONED_CONFIGFILES
 )
 
 okteta_add_qmakeconfig(Gui NAMESPACE Okteta
     DEPS OktetaCore widgets
-    NO_VERSIONED_CONFIGFILES
 )
 
 okteta_add_pkgconfig(Gui NAMESPACE Okteta
     DEPS OktetaCore Qt5Widgets
     DESCRIPTION "Okteta Gui"
-    NO_VERSIONED_CONFIGFILES
 )
 
 if(BUILD_TESTING)

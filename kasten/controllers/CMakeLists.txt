@@ -606,7 +606,7 @@ okteta_add_library(Controllers NAMESPACE Okteta Kasten
     HEADERS   ${oktetakastencontrollers_LIB_HDRS}
     CCHEADERS ${oktetakastencontrollers_LIB_CCHDRS}
     NO_VERSIONED_INCLUDEDIR
-    NO_VERSIONED_PACKAGE_NAMESPACE
+    NO_VERSIONED_PACKAGE_NAME
     REVERSE_NAMESPACE_INCLUDEDIR
     REVERSE_NAMESPACE_LIB
     NO_TARGET_NAMESPACE
@@ -635,7 +635,6 @@ install( PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/struct2osd DESTINATION ${KDE_INSTA
 install( FILES view/structures/gccxml-to-osd.xsl DESTINATION ${KDE_INSTALL_DATADIR}/okteta/structures/ )
 
 okteta_add_cmakeconfig(Controllers NAMESPACE Okteta Kasten
-    NO_VERSIONED_CONFIGFILES
 )
 
 
