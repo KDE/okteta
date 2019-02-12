@@ -50,14 +50,14 @@ public: // AbstractByteArrayFilterParameterSetEdit API
 //// define slots to catch changes in the values to check if the current state is valid or not
 //// not needed if there cannot be invalid states
 
-protected Q_SLOTS:
+private Q_SLOTS:
     void onBitNumberChanged(int value);
 //// ADAPT(end)
 
 //// ADAPT(start)
 //// here list the UI elements as usual
 
-protected:
+private:
     QSpinBox* mBitNumberEdit;
 
     bool mIsValid : 1;

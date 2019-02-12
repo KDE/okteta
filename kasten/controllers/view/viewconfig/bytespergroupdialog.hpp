@@ -45,7 +45,7 @@ public:
 public:
     int groupedBytesCount() const;
 
-protected:
+private:
     QSpinBox* mGroupedBytesCountEdit;
 };
 

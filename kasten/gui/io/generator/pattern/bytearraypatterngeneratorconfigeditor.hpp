@@ -51,11 +51,11 @@ public: // AbstractModelDataGeneratorConfigEditor API
 public:
     void rememberCurrentSettings();
 
-protected Q_SLOTS:
+private Q_SLOTS:
     void onSettingsChanged();
     void onPatternChanged(const QByteArray& pattern);
 
-protected:
+private:
     ByteArrayPatternGenerator* mGenerator;
     ByteArrayPatternGeneratorSettings mSettings;
 

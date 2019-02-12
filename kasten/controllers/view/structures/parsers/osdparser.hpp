@@ -124,7 +124,7 @@ public:
     DataInformation* next() override;
     bool hasNext() override;
 
-protected:
+private:
     bool mParsed;
 };
 

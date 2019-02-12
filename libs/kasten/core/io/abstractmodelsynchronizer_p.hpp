@@ -45,10 +45,12 @@ public:
 
 protected:
     AbstractModelSynchronizer* const q_ptr;
-    Q_DECLARE_PUBLIC(AbstractModelSynchronizer)
 
 protected:
     QUrl mUrl;
+
+private:
+    Q_DECLARE_PUBLIC(AbstractModelSynchronizer)
 };
 
 inline AbstractModelSynchronizerPrivate::AbstractModelSynchronizerPrivate(AbstractModelSynchronizer* parent)

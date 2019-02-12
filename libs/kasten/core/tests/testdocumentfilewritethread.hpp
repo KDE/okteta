@@ -51,7 +51,7 @@ public:
 Q_SIGNALS:
     void documentWritten(bool success);
 
-protected:
+private:
     const QByteArray mHeader;
     const TestDocument* mDocument;
     QFile* mFile;

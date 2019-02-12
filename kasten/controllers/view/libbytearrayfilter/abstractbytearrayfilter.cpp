@@ -33,7 +33,7 @@ public:
 public:
     QString name() const;
 
-protected:
+private:
     const QString mName;
 };
 

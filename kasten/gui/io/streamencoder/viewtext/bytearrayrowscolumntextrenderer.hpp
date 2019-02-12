@@ -62,13 +62,13 @@ public: // AbstractColumnTextRenderer API
     void renderNextLine(QTextStream* stream, bool isSubline) const override;
     int noOfSublinesNeeded() const override;
 
-protected:
+private:
     void renderLine(QTextStream* stream, bool isSubline) const;
 
-protected:
+private:
     void setWidths(int byteWidth, int byteSpacingWidth, int noOfGroupedBytes);
 
-protected:
+private:
     const Okteta::AbstractByteArrayModel* mByteArrayModel;
 
     const Okteta::CoordRange mCoordRange;

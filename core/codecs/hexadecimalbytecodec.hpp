@@ -50,7 +50,7 @@ public: // ValueCodec API
     bool isValidDigit(unsigned char digit) const override;
     bool turnToValue(unsigned char* digit) const override;
 
-protected:
+private:
     const QChar* mDigits;
 };
 

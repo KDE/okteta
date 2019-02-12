@@ -49,7 +49,7 @@ public: // AbstractPieceTableChange API
     ArrayChangeMetrics metrics() const override;
     Size dataSize() const override;
 
-protected:
+private:
     Address mInsertOffset;
     Size mInsertLength;
     Address mStorageOffset;

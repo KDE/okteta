@@ -82,7 +82,7 @@ Q_SIGNALS:
     void dataOffered(const QMimeData* mimeData, bool& accepted);
     void dataDropped(const QMimeData* mimeData);
 
-protected:
+private:
     int indexOf(AbstractView* view) const;
 
 private:

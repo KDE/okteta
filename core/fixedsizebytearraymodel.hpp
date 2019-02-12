@@ -70,10 +70,10 @@ public:
 public:
     Byte* rawData() const;
 
-protected:
+private:
     void reset(unsigned int pos, unsigned int length);
 
-protected:
+private:
     /** */
     Byte* mData;
     /***/

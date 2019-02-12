@@ -60,10 +60,10 @@ protected: // QAbstractSpinBox API
     void fixup(QString& input) const override;
     StepEnabled stepEnabled() const override;
 
-protected:
+private:
     void updateEditLine() const;
 
-protected:
+private:
     mutable quint64 mValue = 0;
 
     quint64 mMaximum = std::numeric_limits<quint64>::max();

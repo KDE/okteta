@@ -45,7 +45,7 @@ public: // AbstractPieceTableChange API
     AddressRange revert(PieceTable* pieceTable) const override;
     ArrayChangeMetrics metrics() const override;
 
-protected:
+private:
     Address mFirstStart;
     AddressRange mSecondRange;
 };

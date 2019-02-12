@@ -40,10 +40,10 @@ public: // AbstractColumnTextRenderer API
     void renderFirstLine(QTextStream* stream, int lineIndex) const override;
     void renderNextLine(QTextStream* stream, bool isSubline) const override;
 
-protected:
+private:
     void renderLine(QTextStream* stream, bool isSubline) const;
 
-protected:
+private:
     const int mFirstLineOffset;
     const int mDelta;
     const Okteta::OffsetFormat::print printFunction;

@@ -43,7 +43,7 @@ public: // AbstractByteArrayFilterParameterSetEdit API
     void setValues(const AbstractByteArrayFilterParameterSet* parameterSet) override;
     void getParameterSet(AbstractByteArrayFilterParameterSet* parameterSet) const override;
 
-protected:
+private:
     QCheckBox* mInvertsBitsCheckBox;
 };
 

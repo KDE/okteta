@@ -33,8 +33,8 @@ public:
 public:
     QString name() const;
 
-protected:
-    QString mName;
+private:
+    const QString mName;
 };
 
 AbstractByteArrayChecksumAlgorithmPrivate::AbstractByteArrayChecksumAlgorithmPrivate(const QString& name)

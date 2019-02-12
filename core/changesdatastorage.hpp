@@ -44,7 +44,7 @@ public: // get
     QByteArray data(int offset, int length) const;
     char operator[](int offset) const;
 
-protected:
+private:
     QByteArray mData;
 };
 

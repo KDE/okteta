@@ -79,22 +79,22 @@ Q_SIGNALS:
 
     void dataNotFound();
 
-protected:
+private:
     void doSearch(FindDirection direction);
 
-protected: // settings
+private: // settings
     QByteArray mSearchData;
     Qt::CaseSensitivity mCaseSensitivity{Qt::CaseSensitive};
 
-protected: // status
+private: // status
     bool mPreviousFound : 1;
     Okteta::Address mSearchFirstIndex;
     Okteta::Address mSearchLastIndex;
 
-protected:
+private:
     If::SearchUserQueryable* mUserQueryAgent = nullptr;
 
-protected: // target
+private: // target
     ByteArrayView* mByteArrayView = nullptr;
     Okteta::AbstractByteArrayModel* mByteArrayModel = nullptr;
 };

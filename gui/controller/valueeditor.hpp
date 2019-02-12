@@ -35,7 +35,7 @@ class AbstractByteArrayView;
 
 class ValueEditor : public AbstractEditor
 {
-protected:
+private:
     enum KValueEditAction
     {
         EnterValue,
@@ -66,7 +66,7 @@ public:
     Byte value() const;
     QString valueAsString() const;
 
-protected:
+private:
     void startEdit(const QString& description);
     /**
      * executes keyboard Action \a Action. This is normally called by a key event handler.
@@ -75,7 +75,7 @@ protected:
      */
     void doValueEditAction(KValueEditAction action, int input = -1);
 
-protected:
+private:
     /** flag whether we are in editing mode */
     bool mInEditMode : 1;
     /** flag whether byte edit mode was reached by inserting */

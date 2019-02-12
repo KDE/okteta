@@ -59,7 +59,7 @@ public: // QLayoutItem API
     void invalidate() override;
     void setGeometry(const QRect& rect) override;
 
-protected:
+private:
 //     void updateMarginAndSpacing();
     void updateLayoutStructs() const;
 

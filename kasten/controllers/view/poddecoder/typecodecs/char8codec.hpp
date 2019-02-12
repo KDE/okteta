@@ -45,7 +45,7 @@ public: // AbstractTypeCodec API
 public:
     void setCharCodec(CharCodec* charCodec);
 
-protected:
+private:
     CharCodec* mCharCodec;
     QChar mUndefinedChar;
 };

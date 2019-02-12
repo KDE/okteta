@@ -45,7 +45,7 @@ public:
 public:
     int bytesPerLine() const;
 
-protected:
+private:
     QSpinBox* mBytesPerLineEdit;
 };
 

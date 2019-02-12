@@ -44,7 +44,7 @@ public: // AbstractByteArrayFilterParameterSetEdit API
     void getParameterSet(AbstractByteArrayChecksumParameterSet* parameterSet) const override;
     bool isValid() const override;
 
-protected:
+private:
     KComboBox* mByteOrderComboBox;
 };
 

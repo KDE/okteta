@@ -53,7 +53,7 @@ public:
 Q_SIGNALS:
     void printedPage(int pageIndex);
 
-protected:
+private:
     QVector<AbstractFrameRenderer*> mFrameRendererList;
     QRect mPaperRect;
     QRect mPageRect;

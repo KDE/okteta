@@ -50,7 +50,7 @@ public:
 Q_SIGNALS:
     void documentRead(Kasten::TestDocument* document);
 
-protected:
+private:
     QFile* mFile;
     const QByteArray mHeader;
 

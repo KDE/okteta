@@ -59,12 +59,12 @@ public:
     ByteArrayViewProfile::Id viewProfileId(const QModelIndex& index) const;
     int row(const ByteArrayViewProfile::Id& viewProfileId) const;
 
-protected Q_SLOTS:
+private Q_SLOTS:
     void onDefaultIndexChanged();
     void onViewProfilesChanged();
     void onViewProfileLocksChanged(const QVector<Kasten::ByteArrayViewProfile::Id>& viewProfileIds);
 
-protected:
+private:
     const ByteArrayViewProfileManager* mViewProfileManager;
 };
 

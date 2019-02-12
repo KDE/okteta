@@ -51,14 +51,14 @@ public:
 public:
     Okteta::Address exec();
 
-protected:
+private:
     int indexOfIgnoreCase();
     int lastIndexOfIgnoreCase();
 
-protected Q_SLOTS:
+private Q_SLOTS:
     void onBytesSearched();
 
-protected:
+private:
     const Okteta::AbstractByteArrayModel* mByteArrayModel;
 
     QByteArray mSearchData;

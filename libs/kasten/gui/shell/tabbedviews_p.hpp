@@ -73,10 +73,10 @@ public: // Q_SLOTS:
     void onDragMoveEvent(const QDragMoveEvent* event, bool& accept);
     void onDropEvent(QDropEvent* event);
 
-protected:
+private:
     Q_DECLARE_PUBLIC(TabbedViews)
 
-protected:
+private:
     ViewAreaBox* mViewAreaBox;
     TabWidget* mTabWidget;
 

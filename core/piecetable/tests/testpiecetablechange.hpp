@@ -49,7 +49,7 @@ public: // AbstractPieceTableChange API
     ArrayChangeMetrics metrics() const override;
     int dataSize() const override;
 
-protected:
+private:
     int mTypeId;
     QString mDescription;
     int mPosition;

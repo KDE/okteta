@@ -56,7 +56,7 @@ public: // CharCodec API
     bool canEncode(const QChar& _char) const override;
     const QString& name() const override;
 
-protected:
+private:
     QTextCodec* mCodec;
     /** decodes the chars to unicode */
     QTextDecoder* mDecoder;

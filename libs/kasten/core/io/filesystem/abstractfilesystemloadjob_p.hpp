@@ -54,14 +54,14 @@ public: // slots
     void load();
 
 protected:
-    Q_DECLARE_PUBLIC(AbstractFileSystemLoadJob)
-
-protected:
     AbstractModelFileSystemSynchronizer* const mSynchronizer;
     const QUrl mUrl;
     QFile* mFile = nullptr;
     QString mWorkFilePath;
     QString mTempFilePath;
+
+private:
+    Q_DECLARE_PUBLIC(AbstractFileSystemLoadJob)
 };
 
 inline AbstractFileSystemLoadJobPrivate::AbstractFileSystemLoadJobPrivate(AbstractFileSystemLoadJob* parent,

@@ -90,7 +90,7 @@ public:
     void setCharCoding(const QString& charCodingName);
     void setByteTypeColored(bool isColored);
 
-protected: // drawing related operations
+private: // drawing related operations
     /** recreates the cursor pixmaps and paints active and inactive cursors if doable */
     void createCursorPixmaps();
     /** draws the blinking cursor or removes it */
@@ -98,10 +98,10 @@ protected: // drawing related operations
     void drawInactiveCursor(QPainter* painter);
     void updateCursor(const AbstractByteArrayColumnRenderer& column);
 
-protected: // partial operations
+private: // partial operations
     void changeEvent(QEvent* event);
 
-protected:
+private:
     /** recalcs a layout due to the resize style that fits into the view size
      * and updates the dependant values
      */
@@ -123,7 +123,7 @@ protected: // AbstractByteArrayViewPrivate API
     void adjustToLayoutNoOfBytesPerLine() override;
     void updateChanged() override;
 
-protected:
+private:
     ValueByteArrayColumnRenderer* mValueColumn;
     BorderColumnRenderer*         mMiddleBorderColumn;
     CharByteArrayColumnRenderer*  mCharColumn;

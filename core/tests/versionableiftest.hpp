@@ -43,7 +43,7 @@ protected: // our API
     virtual QObject* createVersionable() = 0;
     virtual void deleteVersionable(QObject* versionable) = 0;
 
-protected:
+private:
     void checkRevertedToVersionIndex(int versionIndex);
     void checkHeadVersionDescriptionChanged(const QString& versionDescription);
     void checkHeadVersionChanged(int newHeadVersionIndex);

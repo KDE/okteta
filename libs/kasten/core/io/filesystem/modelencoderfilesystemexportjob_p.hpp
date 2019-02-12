@@ -46,10 +46,10 @@ public: // AbstractFileSystemExportJob API
 public:
     AbstractModelStreamEncoder* encoder() const;
 
-protected:
+private:
     Q_DECLARE_PUBLIC(ModelEncoderFileSystemExportJob)
 
-protected:
+private:
     AbstractModelStreamEncoder* const mEncoder;
 };
 

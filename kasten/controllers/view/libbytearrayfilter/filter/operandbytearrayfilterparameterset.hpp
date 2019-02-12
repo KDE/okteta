@@ -47,7 +47,7 @@ public:
     int operandFormat() const;
     bool alignAtEnd() const;
 
-protected:
+private:
     QByteArray mOperand;
     int mOperandFormat = 0;
     bool mAlignAtEnd = false;

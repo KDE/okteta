@@ -61,7 +61,7 @@ public:
     static void printHexadecimalSmallOffset(char* Buffer, unsigned int Offset);
     static void printDecimalOffset(char* Buffer, unsigned int Offset);
 
-protected:
+private:
     /** */
     static const unsigned int CodingWidth[2]; // TODO: would sizeof(Coding} work?
     /** */

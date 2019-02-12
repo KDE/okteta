@@ -49,11 +49,11 @@ public: // KJob API
 public:
     bool exec();
 
-protected Q_SLOTS:
+private Q_SLOTS:
 //     void onFinished();
     void onPagePrinted();
 
-protected:
+private:
 //     PrintThread *mPrintThread;
     FramesToPaperPrinter* mFramesPrinter;
     const int mFirstPage;

@@ -54,7 +54,7 @@ public: // instruction functions
     void setTitle(const QString& title);
     void setContentFlags(ContentFlags contentFlags);
 
-protected:
+private:
     QString mTitle;
     QByteArray mData;
     ContentFlags mContentFlags = ContentStateNormal;

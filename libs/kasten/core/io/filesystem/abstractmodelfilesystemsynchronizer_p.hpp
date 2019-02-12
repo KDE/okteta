@@ -69,7 +69,7 @@ protected:
     QNetworkConfigurationManager* mNetworkConfigurationManager = nullptr;
     mutable KDirWatch* mDirWatch = nullptr;
 
-protected:
+private:
     Q_DECLARE_PUBLIC(AbstractModelFileSystemSynchronizer)
 };
 

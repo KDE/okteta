@@ -44,10 +44,10 @@ public:
 public: // AbstractModelStreamEncoderConfigEditor API
     AbstractSelectionView* createPreviewView() const override;
 
-protected Q_SLOTS:
+private Q_SLOTS:
     void onSettingsChanged();
 
-protected:
+private:
     ByteArrayValuesStreamEncoder* mEncoder;
     ValuesStreamEncoderSettings mSettings;
 

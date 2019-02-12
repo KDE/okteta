@@ -47,10 +47,10 @@ public: // AbstractModelDataGeneratorConfigEditor API
 public:
     void rememberCurrentSettings();
 
-protected Q_SLOTS:
+private Q_SLOTS:
     void onSettingsChanged();
 
-protected:
+private:
     ByteArrayRandomDataGenerator* mGenerator;
     ByteArrayRandomDataGeneratorSettings mSettings;
 

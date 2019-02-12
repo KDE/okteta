@@ -55,14 +55,14 @@ public: // slot
     void exportToFile();
 
 protected:
-    Q_DECLARE_PUBLIC(AbstractFileSystemExportJob)
-
-protected:
     AbstractModel* const mModel;
     const AbstractModelSelection* const mSelection;
     const QUrl mUrl;
     QFile* mFile = nullptr;
     QString mWorkFilePath;
+
+private:
+    Q_DECLARE_PUBLIC(AbstractFileSystemExportJob)
 };
 
 inline AbstractFileSystemExportJobPrivate::AbstractFileSystemExportJobPrivate(AbstractFileSystemExportJob* parent,

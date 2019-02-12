@@ -38,7 +38,7 @@ public: // AbstractByteArrayChecksumAlgorithm API
     bool calculateChecksum(QString* result, const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const override;
     AbstractByteArrayChecksumParameterSet* parameterSet() override;
 
-protected:
+private:
 //// ADAPT(start)
 //// change "Template_ByteArrayChecksumParameterSet" to the name of the class of the used parameterset
 //// in case of no parameters use "NoByteArrayChecksumParameterSet"

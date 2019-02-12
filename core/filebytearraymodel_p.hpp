@@ -53,11 +53,11 @@ public:
     bool open(const QString& fileName);
     bool close();
 
-protected:
+private:
     bool ensurePageLoaded(unsigned int pageIndex) const;
     bool freePage(unsigned int pageIndex) const;
 
-protected:
+private:
     /** */
     mutable QFile mFile;
     /**  */

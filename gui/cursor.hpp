@@ -52,7 +52,7 @@ public: // access
     PixelX shapeX() const;
     PixelX shapeW() const;
 
-protected:
+private:
     QPixmap OnPixmap;
     QPixmap OffPixmap;
 

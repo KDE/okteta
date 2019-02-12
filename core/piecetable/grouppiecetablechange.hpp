@@ -89,7 +89,7 @@ public:
     /// @return size of the data used by the applied changes
     int appliedChangesDataSize() const;
 
-protected:
+private:
     QStack<AbstractPieceTableChange*> mChangeStack;
     GroupPieceTableChange* mParent;
 

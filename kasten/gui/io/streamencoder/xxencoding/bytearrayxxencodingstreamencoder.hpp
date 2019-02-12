@@ -67,7 +67,7 @@ protected: // AbstractByteArrayStreamEncoder API
                             const Okteta::AbstractByteArrayModel* byteArrayModel,
                             const Okteta::AddressRange& range) override;
 
-protected:
+private:
     XxencodingStreamEncoderSettings mSettings;
 };
 

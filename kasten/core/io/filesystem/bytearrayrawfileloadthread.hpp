@@ -52,7 +52,7 @@ public:
 Q_SIGNALS:
     void documentRead(Kasten::ByteArrayDocument* document);
 
-protected:
+private:
     QFile* mFile;
 
     ByteArrayDocument* mDocument = nullptr;

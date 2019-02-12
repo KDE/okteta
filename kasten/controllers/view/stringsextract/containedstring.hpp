@@ -41,7 +41,7 @@ public:
     const QString& string() const;
     Okteta::Address offset() const;
 
-protected:
+private:
     QString mString;
     Okteta::Address mOffset;
 };

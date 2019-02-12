@@ -52,7 +52,7 @@ public:
 Q_SIGNALS:
     void documentReloaded(bool success);
 
-protected:
+private:
     QFile* mFile;
 
     bool mSuccess = false;

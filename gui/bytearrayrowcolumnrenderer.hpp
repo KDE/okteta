@@ -223,7 +223,7 @@ protected: // API to be redefined
     /** default implementation sets byte width to one digit width */
     void recalcByteWidth();
 
-protected:
+private:
     void renderPlain(QPainter* painter, const LinePositionRange& linePositions, Address byteIndex);
     void renderSelection(QPainter* painter, const LinePositionRange& linePositions, Address byteIndex, int flag);
     void renderMarking(QPainter* painter, const LinePositionRange& linePositions, Address byteIndex, int flag);

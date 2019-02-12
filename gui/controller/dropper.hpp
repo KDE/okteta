@@ -51,10 +51,10 @@ public: // AbstractMouseController API
 public:
     bool isActive() const;
 
-protected:
+private:
     void handleInternalDrag(QDropEvent* dropEvent, AbstractByteArrayView* sourceByteArrayView);
 
-protected:
+private:
     AbstractByteArrayView* mByteArrayView;
 
     Address mBeforeDragCursorPos;

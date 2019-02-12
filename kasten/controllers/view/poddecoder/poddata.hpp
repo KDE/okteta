@@ -54,7 +54,7 @@ public:
     const void* pointer(int byteCount) const;
     int size() const;
 
-protected:
+private:
     // ensure strict alignment for double as needed on some architectures (e.g. PA-RISC)
     using Aligned64Bit = union
     {
@@ -62,7 +62,7 @@ protected:
         Byte mBytes[Size];
     };
 
-protected:
+private:
     Byte* mCurrentOriginalData = nullptr;
     Byte* mCurrentEndiannessSetData = nullptr;
 

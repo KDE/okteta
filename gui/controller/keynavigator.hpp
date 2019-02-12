@@ -31,7 +31,7 @@ class AbstractByteArrayView;
 
 class KeyNavigator : public AbstractController
 {
-protected:
+private:
     enum MoveAction
     {
         MoveBackward,
@@ -54,11 +54,11 @@ public:
 public: // AbstractController API
     bool handleKeyPress(QKeyEvent* keyEvent) override;
 
-protected:
+private:
     /** moves the cursor according to the action, handles all drawing */
     void moveCursor(MoveAction action, bool select);
 
-protected:
+private:
     AbstractByteArrayView* mView;
 };
 

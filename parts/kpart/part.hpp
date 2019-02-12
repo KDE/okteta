@@ -74,14 +74,14 @@ protected: // KParts::ReadWritePart API
 protected: // KParts::ReadOnlyPart API
     bool openFile() override;
 
-protected:
+private:
     void setupActions(bool browserViewWanted);
     void addController(const Kasten::AbstractXmlGuiControllerFactory& factory);
 
-protected:
+private:
     Kasten::ByteArrayView* byteArrayView() const;
 
-protected Q_SLOTS:
+private Q_SLOTS:
     void onDocumentLoaded(Kasten::AbstractDocument* document);
     void onModified(Kasten::LocalSyncState state);
 

@@ -43,7 +43,7 @@ public:
     void setUrl(const QUrl& url);
     void setNoOfPages(int noOfPages);
 
-protected:
+private:
     QUrl mUrl;
     int mNoOfPages;
 };
@@ -88,10 +88,10 @@ public:
     void setTexts(const QString& leftText, const QString& centerText, const QString& rightText);
     void setBoxStyle(int boxStyle);
 
-protected:
+private:
     void calculateHeight();
 
-protected:
+private:
     const PrintInfo* mInfo;
 
     int mHeight = 0;

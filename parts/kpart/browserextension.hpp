@@ -52,7 +52,7 @@ private Q_SLOTS:
     /** selection has changed */
     void onSelectionChanged(bool hasSelection);
 
-protected:
+private:
     OktetaPart* mPart;
 };
 

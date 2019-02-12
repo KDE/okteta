@@ -57,9 +57,6 @@ public:
     void connectWithFile();
 
 protected:
-    Q_DECLARE_PUBLIC(AbstractFileSystemConnectJob)
-
-protected:
     AbstractModelFileSystemSynchronizer* const mSynchronizer;
     AbstractDocument* const mDocument;
     const QUrl mUrl;
@@ -67,6 +64,9 @@ protected:
     QFile* mFile = nullptr;
     QString mWorkFilePath;
     QString mTempFilePath;
+
+private:
+    Q_DECLARE_PUBLIC(AbstractFileSystemConnectJob)
 };
 
 inline AbstractFileSystemConnectJobPrivate::AbstractFileSystemConnectJobPrivate(AbstractFileSystemConnectJob* parent,

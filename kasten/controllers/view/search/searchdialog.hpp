@@ -44,7 +44,7 @@ protected: // AbstractFindDialog API
 protected: // QWidget API
     void showEvent(QShowEvent* showEvent) override;
 
-protected:
+private:
     SearchTool* mTool;
 };
 

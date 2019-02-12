@@ -54,7 +54,7 @@ public:
     bool getStorageData(int* storageId, Address* storageOffset, Address dataOffset) const;
     Size size() const;
 
-protected:
+private:
     QLinkedList<Piece> mList;
     Size mSize;
 };

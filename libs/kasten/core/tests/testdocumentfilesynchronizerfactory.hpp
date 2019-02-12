@@ -44,7 +44,7 @@ public: // AbstractModelSynchronizerFactory API
     QString supportedWorkType() const override;
     QString supportedRemoteType() const override;
 
-protected:
+private:
     QByteArray mHeader;
 };
 

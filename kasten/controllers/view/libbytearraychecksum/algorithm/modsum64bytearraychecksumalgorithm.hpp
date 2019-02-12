@@ -40,11 +40,11 @@ public: // AbstractByteArrayChecksumAlgorithm API
     bool calculateChecksum(QString* result, const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const override;
     AbstractByteArrayChecksumParameterSet* parameterSet() override;
 
-protected:
+private:
     quint64 calculateModSumWithBigEndian(const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const;
     quint64 calculateModSumWithLittleEndian(const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const;
 
-protected:
+private:
     ModSumByteArrayChecksumParameterSet mParameterSet;
 };
 

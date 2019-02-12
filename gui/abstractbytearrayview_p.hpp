@@ -311,7 +311,7 @@ protected:
     /** style of resizing */
     AbstractByteArrayView::LayoutStyle mResizeStyle;
 
-protected:
+private:
     Q_DECLARE_PUBLIC(AbstractByteArrayView)
 };
 

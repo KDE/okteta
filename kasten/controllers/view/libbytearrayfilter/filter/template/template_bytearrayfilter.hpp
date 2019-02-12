@@ -38,7 +38,7 @@ public: // AbstractByteArrayFilter API
     bool filter(Okteta::Byte* result, Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const override;
     AbstractByteArrayFilterParameterSet* parameterSet() override;
 
-protected:
+private:
 //// ADAPT(start)
 //// change "Template_ByteArrayFilterParameterSet" to the name of the class of the used parameterset
 //// in case of no parameters use "NoByteArrayFilterParameterSet"

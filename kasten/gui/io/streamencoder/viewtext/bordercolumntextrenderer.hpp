@@ -37,7 +37,7 @@ public: // AbstractColumnTextRenderer API
     void renderFirstLine(QTextStream* stream, int lineIndex) const override;
     void renderNextLine(QTextStream* stream, bool isSubline) const override;
 
-protected:
+private:
     void render(QTextStream* stream) const;
 };
 

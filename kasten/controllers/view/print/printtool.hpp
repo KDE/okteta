@@ -72,7 +72,7 @@ public Q_SLOTS:
 Q_SIGNALS:
     void viewChanged(bool hasView);
 
-protected:
+private:
     ByteArrayDocument* mDocument = nullptr;
 
     ByteArrayView* mByteArrayView = nullptr;

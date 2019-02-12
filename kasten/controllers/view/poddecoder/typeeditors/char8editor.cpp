@@ -40,7 +40,7 @@ public:
 public: // QValidator API
     QValidator::State validate(QString& input, int& pos) const override;
 
-protected:
+private:
     Okteta::CharCodec* mCharCodec;
 };
 

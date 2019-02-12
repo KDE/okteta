@@ -52,7 +52,7 @@ public:
 public:
     void exec();
 
-protected:
+private:
     const Okteta::AbstractByteArrayModel* mByteArrayModel;
     const Okteta::AddressRange mSelection;
     const Okteta::CharCodec* mCharCodec;

@@ -58,7 +58,7 @@ public Q_SLOTS:
     void update();
     void setOffsetCoding(int offsetCoding);
 
-protected:
+private:
     const QList<ContainedString>* const mContainedStringList;
 
     Okteta::OffsetFormat::print mPrintFunction;

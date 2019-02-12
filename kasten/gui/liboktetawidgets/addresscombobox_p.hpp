@@ -49,7 +49,7 @@ public:
     void onValueEdited(const QString& value);
     void onValueActivated(int index);
 
-protected:
+private:
     AddressComboBox* const q_ptr;
     Q_DECLARE_PUBLIC(AddressComboBox)
 

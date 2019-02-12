@@ -63,10 +63,10 @@ private: // Q_SLOTS
     void onToolVisibilityChanged(bool isVisible);
     void onSynchronizerDeleted(QObject* synchronizer);
 
-protected:
+private:
     Q_DECLARE_PUBLIC(ShellWindow)
 
-protected:
+private:
     ShellWindow* const q_ptr;
 
     MultiViewAreas* mGroupedViews;

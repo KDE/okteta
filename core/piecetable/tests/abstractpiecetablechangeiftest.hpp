@@ -44,7 +44,7 @@ protected: // our API
 
     virtual void changePieceTable(PieceTable* pieceTable) = 0;
 
-protected:
+private:
     struct KTestData* prepareTestInsert();
 
 private Q_SLOTS: // test functions

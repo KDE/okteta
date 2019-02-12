@@ -50,17 +50,17 @@ public: // AbstractMouseController API
     bool handleMouseReleaseEvent(QMouseEvent* mouseEvent) override;
     bool handleMouseDoubleClickEvent(QMouseEvent* mouseEvent) override;
 
-protected:
+private:
     /** handles the move of the mouse with pressed buttons */
     void handleMouseMove(const QPoint& point);
 
-protected Q_SLOTS:
+private Q_SLOTS:
     /** gets called by the scroll timer (for mouse selection) */
     void autoScrollTimerDone();
     /** */
     void startDrag();
 
-protected:
+private:
     /** Timer that triggers ensureCursorVisible function calls */
     QTimer* mScrollTimer;
 /*     QTimer *ChangeIntervalTimer, */
@@ -69,7 +69,7 @@ protected:
     /** timer to measure whether the time between a double click and the following counts for a tripleclick */
     QTimer* mTrippleClickTimer;
 
-protected:
+private:
     /** point at which the current double click happended (used by TrippleClick) */
     QPoint mDoubleClickPoint;
     /** line in which the current double click happended (used by TrippleClick) */
@@ -77,7 +77,7 @@ protected:
     /** point at which the current dragging started */
     QPoint mDragStartPoint;
 
-protected: // parameters
+private: // parameters
     /** flag if the left mouse button is pressed */
     bool mLMBPressed : 1;
     /** flag if a double click is happening */

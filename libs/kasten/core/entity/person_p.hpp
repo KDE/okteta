@@ -43,7 +43,7 @@ public:
     QString name() const;
     QIcon faceIcon() const;
 
-protected:
+private:
     QString mName;
     QIcon mFaceIcon;
 };

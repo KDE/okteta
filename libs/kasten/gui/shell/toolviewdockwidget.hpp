@@ -44,7 +44,7 @@ public:
     AbstractToolView* toolView() const;
     bool isShown() const;
 
-protected Q_SLOTS:
+private Q_SLOTS:
     void onVisibilityChanged(bool isVisible);
 
 private:

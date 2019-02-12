@@ -53,7 +53,7 @@ protected:
     qint64 readData(char* data, qint64 maxlength) override;
     qint64 writeData(const char* data, qint64 length) override;
 
-protected:
+private:
     AbstractByteArrayModel* mByteArrayModel;
     Address mReadOffset = 0;
 };

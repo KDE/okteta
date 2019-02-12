@@ -54,27 +54,27 @@ public:
 Q_SIGNALS:
     void profileTitleChanged(const QString& title);
 
-protected Q_SLOTS:
+private Q_SLOTS:
     void onLineBreakIndexChanged(int lineBreakIndex);
 
-protected: // title
+private: // title
     QLineEdit* mTitleEdit;
 
-protected: // display
+private: // display
     QCheckBox* mLineOffsetShownCheckBox;
     KComboBox* mOffsetCodingComboBox;
     KComboBox* mValuesCharsShownComboBox;
     KComboBox* mDisplayModeComboBox;
 
-protected: // layout
+private: // layout
     KComboBox* mLineBreakComboBox;
     QSpinBox* mGroupedBytesCountEdit;
     QSpinBox* mBytesPerLineEdit;
 
-protected: // value
+private: // value
     KComboBox* mValueCodingComboBox;
 
-protected: // char
+private: // char
     KComboBox* mCharCodingComboBox;
     QCheckBox* mNonPrintableShownCheckBox;
     QLineEdit* mUndefinedCharEdit;

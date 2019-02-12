@@ -43,7 +43,7 @@ public:
     int groupSize() const;
     int moveBitWidth() const;
 
-protected:
+private:
     int mGroupSize = 1;
     int mMoveBitWidth = 0;
 };

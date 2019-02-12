@@ -135,27 +135,27 @@ public:
 protected: // AbstractColumnFrameRenderer API
 //     virtual void setNoOfLines( int newNoOfLines );
 
-protected:
+private:
     void adjustToWidth();
     void adjustLayoutToSize();
     void adjustToLayoutNoOfBytesPerLine();
 
-protected:
+private:
     int fittingBytesPerLine() const;
 
-protected:
+private:
     int mHeight;
     int mWidth;
     QFont mFont;
 
     Okteta::AbstractByteArrayModel* mByteArrayModel = nullptr;
 
-protected:
+private:
     /** holds the logical layout */
     Okteta::ByteArrayTableLayout* mLayout;
     Okteta::ByteArrayTableRanges* mTableRanges;
 
-protected:
+private:
     Okteta::OffsetColumnRenderer*         mOffsetColumnRenderer;
     Okteta::BorderColumnRenderer*         mFirstBorderColumnRenderer;
     Okteta::ValueByteArrayColumnRenderer* mValueColumnRenderer;
@@ -163,7 +163,7 @@ protected:
     Okteta::CharByteArrayColumnRenderer*  mCharColumnRenderer;
     Okteta::PrintColumnStylist* mStylist;
 
-protected:
+private:
     /** */
     Okteta::ValueCodec* mValueCodec;
     /** */
@@ -173,7 +173,7 @@ protected:
     /** */
     Okteta::CharCoding mCharCoding;
 
-protected: // parameters
+private: // parameters
     LayoutStyle mResizeStyle;
 };
 

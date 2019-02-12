@@ -56,7 +56,7 @@ public:
     /// takes ownership of @p bottomWidget, deletes current bottom widget. Can be 0.
     void setBottomWidget(QWidget* bottomWidget);
 
-protected Q_SLOTS:
+private Q_SLOTS:
     void onDone();
 
 private:

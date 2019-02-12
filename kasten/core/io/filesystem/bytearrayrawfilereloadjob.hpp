@@ -42,10 +42,10 @@ public:
 protected: // AbstractFileSystemSyncFromRemoteJob API
     void startReadFromFile() override;
 
-protected Q_SLOTS:
+private Q_SLOTS:
 //     void onDataPulled();
 
-protected:
+private:
     ByteArrayRawFileReloadThread* mLoadThread;
 };
 

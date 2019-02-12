@@ -81,28 +81,28 @@ Q_SIGNALS:
     void isApplyableChanged(bool isApplyable);    // candidate for AbstractTool API
     void finished(bool previousFound, int noOfReplacements);
 
-protected:
+private:
     void doReplace(FindDirection direction, Okteta::Address startIndex);
 
-protected Q_SLOTS:
+private Q_SLOTS:
     void onReadOnlyChanged(bool isReadOnly);
 
-protected: // settings
+private: // settings
     QByteArray mSearchData;
     QByteArray mReplaceData;
     Qt::CaseSensitivity mCaseSensitivity = Qt::CaseSensitive;
     bool mDoPrompt : 1;
 
-protected: // status
+private: // status
     bool mPreviousFound : 1;
     bool mDoWrap : 1;
     Okteta::Address mReplaceFirstIndex;
     Okteta::Address mReplaceLastIndex;
 
-protected:
+private:
     If::ReplaceUserQueryable* mUserQueryAgent = nullptr;
 
-protected: // target
+private: // target
     ByteArrayView* mByteArrayView = nullptr;
     Okteta::AbstractByteArrayModel* mByteArrayModel = nullptr;
 };

@@ -47,10 +47,10 @@ public:
     void setId(const QString& id);
     void setSynchronizer(AbstractModelSynchronizer* synchronizer);
 
-protected:
+private:
     Q_DECLARE_PUBLIC(AbstractDocument)
 
-protected:
+private:
     QString mId;
     AbstractModelSynchronizer* mSynchronizer = nullptr; // TODO: should this be here, with public setters and getters?
 };

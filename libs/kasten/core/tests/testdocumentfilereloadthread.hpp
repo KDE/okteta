@@ -50,7 +50,7 @@ public:
 Q_SIGNALS:
     void documentReloaded(bool success);
 
-protected:
+private:
 //     TestDocument* mDocument;
     const QByteArray mHeader;
     QFile* mFile;

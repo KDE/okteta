@@ -52,7 +52,7 @@ public: // BookmarksConstIteratorAdapter API
     void toBack() override;
     void toFront() override;
 
-protected:
+private:
     QLinkedListIterator<Bookmark> mIterator;
 };
 

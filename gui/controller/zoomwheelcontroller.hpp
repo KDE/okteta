@@ -38,7 +38,7 @@ public:
 public: // AbstractWheelController API
     bool handleWheelEvent(QWheelEvent* wheelEvent) override;
 
-protected:
+private:
     AbstractByteArrayView* mView;
 };
 

@@ -97,7 +97,7 @@ public: // ChangeHistory API
 public:
     void setData(const QByteArray& data);
 
-protected:
+private:
     void doInsertChange(Address offset, const Byte* insertData, int insertLength);
     void doRemoveChange(const AddressRange& removeRange);
     void doReplaceChange(const AddressRange& removeRange, const Byte* insertData, int insertLength);
@@ -108,7 +108,7 @@ protected:
     void beginChanges();
     void endChanges();
 
-protected: // data
+private: // data
     /**  */
     bool mReadOnly : 1;
 

@@ -44,10 +44,10 @@ public: // AbstractByteArrayFilterParameterSetEdit API
     void getParameterSet(AbstractByteArrayFilterParameterSet* parameterSet) const override;
     bool isValid() const override;
 
-protected Q_SLOTS:
+private Q_SLOTS:
     void onValueChanged(int value);
 
-protected:
+private:
     QSpinBox* mGroupSizeEdit;
     QSpinBox* mMoveBitWidthEdit;
 };

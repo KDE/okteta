@@ -88,7 +88,7 @@ public: // Bookmarkable API
     bool containsBookmarkFor(int offset) const;
     unsigned int bookmarksCount() const;
 
-protected:
+private:
     /** resizes the buffer, if possible, saving the data and splitting the data, if demanded
      * @param AddSize additional size the buffer should grow
      * @param splitOffset if -1 does not split
@@ -97,7 +97,7 @@ protected:
      */
     int addSize(int AddSize, int splitOffset = -1, bool saveUpperPart = true);
 
-protected:
+private:
     /** */
     Byte* mData;
     /** size of the data */

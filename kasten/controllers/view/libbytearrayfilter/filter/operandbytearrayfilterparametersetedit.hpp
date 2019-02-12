@@ -49,10 +49,10 @@ public: // AbstractByteArrayFilterParameterSetEdit API
     bool isValid() const override;
     void rememberCurrentSettings() override;
 
-protected Q_SLOTS:
+private Q_SLOTS:
     void onInputChanged(const QByteArray& data);
 
-protected:
+private:
     Okteta::ByteArrayComboBox* mOperandEdit;
     QCheckBox* mAlignAtEndCheckBox;
 };

@@ -57,7 +57,7 @@ public:
     ByteArraySequenceGeneratorSettings settings() const;
     void setSettings(const ByteArraySequenceGeneratorSettings& settings);
 
-protected:
+private:
     ByteArraySequenceGeneratorSettings mSettings;
 };
 

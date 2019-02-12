@@ -42,7 +42,7 @@ public:
 protected: // AbstractFileSystemLoadJob API
     void startLoadFromFile() override;
 
-protected Q_SLOTS:
+private Q_SLOTS:
 //     void onDataPulled();
 };
 

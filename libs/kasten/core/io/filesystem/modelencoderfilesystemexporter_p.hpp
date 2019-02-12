@@ -48,7 +48,7 @@ public: // AbstractModelExporter API
 public:
     AbstractModelStreamEncoder* encoder() const;
 
-protected:
+private:
     AbstractModelStreamEncoder* const mEncoder;
 };
 

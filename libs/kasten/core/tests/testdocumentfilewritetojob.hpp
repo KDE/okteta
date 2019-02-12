@@ -43,7 +43,7 @@ public:
 protected: // AbstractFileSystemSyncWithRemoteJob API
     void startSyncWithRemote() override;
 
-protected Q_SLOTS:
+private Q_SLOTS:
 //     void onDataPulled();
 };
 

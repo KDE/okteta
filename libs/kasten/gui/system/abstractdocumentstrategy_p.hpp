@@ -36,6 +36,7 @@ public:
 
 protected:
     AbstractDocumentStrategy* const q_ptr;
+private:
     Q_DECLARE_PUBLIC(AbstractDocumentStrategy)
 };
 

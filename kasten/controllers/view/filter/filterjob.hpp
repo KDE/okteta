@@ -48,10 +48,10 @@ public:
 public:
     bool exec();
 
-protected Q_SLOTS:
+private Q_SLOTS:
     void onFilteredBytes();
 
-protected:
+private:
     AbstractByteArrayFilter* mByteArrayFilter;
 
     Okteta::Byte* mResult;

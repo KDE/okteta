@@ -47,7 +47,7 @@ public:
 
     ~ViewProfilesManageDialog() override;
 
-protected Q_SLOTS:
+private Q_SLOTS:
     void onViewProfileSelectionChanged();
 
     void onCreateNewButtonClicked();

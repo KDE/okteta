@@ -56,7 +56,7 @@ public:
     void onValueEdited(const QString& value);
     void onValueActivated(int index);
 
-protected:
+private:
     ByteArrayComboBox* const q_ptr;
     Q_DECLARE_PUBLIC(ByteArrayComboBox)
 

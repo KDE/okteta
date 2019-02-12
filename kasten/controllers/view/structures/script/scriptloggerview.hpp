@@ -38,7 +38,7 @@ public:
     explicit ScriptLoggerView(const TopLevelDataInformation::List& data, QWidget* parent = nullptr);
     ~ScriptLoggerView() override;
 
-protected Q_SLOTS:
+private Q_SLOTS:
     void updateModel(int index);
 
 private:

@@ -139,7 +139,7 @@ public: // logical state access
     bool atLineStart() const;
     bool atLineEnd() const;
 
-protected:
+private:
     /** if newpos allowed steps at a coord behind the last existing
      * or, if that is at a line end, behind the line
      * does not check for empty content!

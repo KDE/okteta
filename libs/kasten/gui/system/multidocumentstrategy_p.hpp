@@ -67,10 +67,10 @@ public: // const AbstractDocumentStrategy API
     bool canCloseAll() const;
     bool canCloseAllOther(AbstractDocument* document) const;
 
-protected:
+private:
     Q_DECLARE_PUBLIC(MultiDocumentStrategy)
 
-protected:
+private:
     DocumentManager* mDocumentManager;
     ViewManager* mViewManager;
 };

@@ -44,10 +44,10 @@ public:
 protected: // AbstractFileSystemLoadJob API
     void startConnectWithFile() override;
 
-protected Q_SLOTS:
+private Q_SLOTS:
 //     void onDataPulled();
 
-protected:
+private:
 //     TestDocumentFileWriteThread* mWriteThread;
 };
 

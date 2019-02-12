@@ -35,10 +35,10 @@ public:
 public:
     const quint32& operator[](int i) const;
 
-protected:
+private:
     static quint32 reverseBits(quint32 bits, char bitCount);
 
-protected:
+private:
     quint32 mTable[256];
 };
 

@@ -60,7 +60,7 @@ public:
 protected:
     void setDocument(TestDocument* document);
 
-protected:
+private:
     TestDocument* mDocument = nullptr;
     const QByteArray mHeader;
 };

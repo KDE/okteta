@@ -39,7 +39,7 @@ public: // getters
 public: // setters
     void setBitNumber(int bitNumber);
 
-protected: // parameters
+private: // parameters
     int mBitNumber;
 //// ADAPT(end)
 };

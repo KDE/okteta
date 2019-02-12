@@ -39,7 +39,7 @@ public: // AbstractMouseController API
     bool handleMousePressEvent(QMouseEvent* mouseEvent) override;
     bool handleMouseReleaseEvent(QMouseEvent* mouseEvent) override;
 
-protected:
+private:
 };
 
 }

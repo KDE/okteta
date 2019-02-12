@@ -45,7 +45,7 @@ protected: // our API
     virtual void deleteByteArrayModel(AbstractByteArrayModel* byteArrayModel) = 0;
     virtual bool byteArrayModelSizeCanBeChanged() const;
 
-protected:
+private:
     void checkContentsReplaced(Address Position, Size removedLength, int insertedLength);
     void checkContentsReplaced(const AddressRange& removeSection, int insertedLength);
     void checkContentsSwapped(Address firstStart, Address secondStart, Size secondLength);

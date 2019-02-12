@@ -55,10 +55,10 @@ public: // If::ToolInlineViewable API
 public:
     void setView(AbstractView* view);
 
-protected:
+private:
     Q_DECLARE_PUBLIC(SingleViewArea)
 
-protected:
+private:
     ViewAreaBox* mViewAreaBox = nullptr;
     AbstractView* mCurrentView = nullptr;
 };

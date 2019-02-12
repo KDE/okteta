@@ -92,7 +92,7 @@ public:
     QString headChangeDescription() const;
     bool isAtBase() const;
 
-protected:
+private:
     PieceTable mPieceTable;
     PieceTableChangeHistory mChangeHistory;
 };

@@ -40,7 +40,7 @@ public: // AbstractByteArrayChecksumAlgorithm API
     bool calculateChecksum(QString* result, const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const override;
     AbstractByteArrayChecksumParameterSet* parameterSet() override;
 
-protected:
+private:
     NoByteArrayChecksumParameterSet mParameterSet;
 };
 

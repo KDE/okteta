@@ -54,13 +54,14 @@ public:
 public:
     QStringList values() const;
 
-protected Q_SLOTS:
-    void onGetNewStructuresClicked(const KNS3::Entry::List& changedEntries);
-    void onPluginSelectorChange(bool change);
-    void advancedSelection();
 Q_SIGNALS:
     void selectedPluginsChanged();
     void changed(const QStringList& newValues);
+
+private Q_SLOTS:
+    void onGetNewStructuresClicked(const KNS3::Entry::List& changedEntries);
+    void onPluginSelectorChange(bool change);
+    void advancedSelection();
 
 private:
     void rebuildPluginSelectorEntries();

@@ -62,7 +62,7 @@ public:
 public:
     Piece subPiece(const AddressRange& local) const;
 
-protected:
+private:
     int mStorageId = OriginalStorage;
 };
 

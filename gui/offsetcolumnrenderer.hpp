@@ -61,7 +61,7 @@ public: // read access
     OffsetFormat::Format format() const;
     OffsetFormat::print printFunction() const;
 
-protected:
+private:
     /** recalculates all x values */
     void recalcX();
     /** paints full line */

@@ -42,9 +42,10 @@ public:
 
 protected:
     AbstractModel* const q_ptr;
+
+private:
     Q_DECLARE_PUBLIC(AbstractModel)
 
-protected:
     AbstractModel* mBaseModel;
 };
 

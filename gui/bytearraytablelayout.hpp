@@ -169,7 +169,7 @@ public: // modification access; return true if changes
     /** sets number of lines per page, 1 as default */
     void setNoOfLinesPerPage(LineSize noOfLinesPerPage);
 
-protected:
+private:
     /** calculates the start coord by startoffset and number of bytes per line */
     void calcStart();
     /** calculates the final coord by startoffset, length, and number of bytes per line */

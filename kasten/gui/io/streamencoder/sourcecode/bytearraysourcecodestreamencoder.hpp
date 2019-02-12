@@ -79,10 +79,10 @@ protected: // AbstractByteArrayStreamEncoder API
                             const Okteta::AbstractByteArrayModel* byteArrayModel,
                             const Okteta::AddressRange& range) override;
 
-protected:
+private:
     QString printFormatted(const Okteta::AbstractByteArrayModel* byteArrayModel, Okteta::Address offset, unsigned int dataSize) const;
 
-protected:
+private:
     SourceCodeStreamEncoderSettings mSettings;
 };
 

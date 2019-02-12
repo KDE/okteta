@@ -49,10 +49,10 @@ public:
 public:
     void exec();
 
-protected Q_SLOTS:
+private Q_SLOTS:
     void onCalculatedBytes();
 
-protected:
+private:
     QString* mChecksum;
 
     const AbstractByteArrayChecksumAlgorithm* mAlgorithm;

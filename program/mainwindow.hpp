@@ -51,18 +51,18 @@ protected: // KMainWindow API
     void saveProperties(KConfigGroup& configGroup) override;
     void readProperties(const KConfigGroup& configGroup) override;
 
-protected:
+private:
     void setupControllers();
     void addToolFromFactory(const AbstractToolViewFactory& toolViewFactory,
                             const AbstractToolFactory& toolFactory);
     void addXmlGuiControllerFromFactory(const AbstractXmlGuiControllerFactory& factory);
 
-protected Q_SLOTS:
+private Q_SLOTS:
     void onDataOffered(const QMimeData* mimeData, bool& accept);
     void onDataDropped(const QMimeData* mimeData);
     void onCloseRequest(const QVector<Kasten::AbstractView*>& views);
 
-protected:
+private:
     OktetaProgram* mProgram;
 };
 

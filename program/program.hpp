@@ -51,7 +51,7 @@ public:
     MultiDocumentStrategy* documentStrategy();
     ByteArrayViewProfileManager* byteArrayViewProfileManager();
 
-protected:
+private:
     QApplication mApp;
 
     DocumentManager* mDocumentManager;

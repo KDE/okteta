@@ -39,7 +39,7 @@ public: // getters
 public: // setters
     void setLevel(unsigned int level);
 
-protected: // parameters
+private: // parameters
     unsigned char mLevel;
 //// ADAPT(end)
 };

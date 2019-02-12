@@ -71,17 +71,17 @@ public: // If::ViewAreaSplitable API
     AbstractViewArea* viewAreaFocus() const;
     int viewAreasCount() const;
 
-protected:
+private:
     int indexOf(AbstractView* view) const;
 
-protected:  // slots
+private:  // slots
     void onViewsRemoved();
     void onViewAreaFocusChanged(bool hasFocus);
 
-protected:
+private:
     Q_DECLARE_PUBLIC(MultiViewAreas)
 
-protected:
+private:
     QVector<TabbedViews*> mViewAreaList;
     QSplitter* mMainSplitter;
 

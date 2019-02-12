@@ -51,7 +51,7 @@ public:
 Q_SIGNALS:
     void documentWritten(bool success);
 
-protected:
+private:
     ByteArrayDocument* mDocument;
     QFile* mFile;
 

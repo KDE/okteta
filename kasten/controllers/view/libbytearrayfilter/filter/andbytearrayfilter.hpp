@@ -41,7 +41,7 @@ public: // AbstractByteArrayFilter API
     bool filter(Okteta::Byte* result, Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const override;
     AbstractByteArrayFilterParameterSet* parameterSet() override;
 
-protected:
+private:
     OperandByteArrayFilterParameterSet mParameterSet;
 };
 

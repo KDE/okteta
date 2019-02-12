@@ -45,7 +45,7 @@ public:
 public:
     void setName(const QString& name);
 
-protected Q_SLOTS:
+private Q_SLOTS:
     void onReturnPressed();
 
 private:

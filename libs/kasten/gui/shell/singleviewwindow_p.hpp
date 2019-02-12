@@ -59,7 +59,7 @@ public:
 public: // If::WidgetsDockable API
     QVector<ToolViewDockWidget*> dockWidgets() const;
 
-protected:
+private:
     AbstractView* view() const;
     SingleViewArea* viewArea() const;
 
@@ -70,10 +70,10 @@ private: // Q_SLOTS
     void onToolVisibilityChanged(bool isVisible);
     void onSynchronizerDeleted(QObject* synchronizer);
 
-protected:
+private:
     Q_DECLARE_PUBLIC(SingleViewWindow)
 
-protected:
+private:
     SingleViewWindow* const q_ptr;
 
     AbstractView* mView = nullptr;

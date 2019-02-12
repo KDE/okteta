@@ -43,7 +43,7 @@ public: // AbstractColumnRenderer-API
     void renderColumn(QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys) override;
     void renderEmptyColumn(QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys) override;
 
-protected:
+private:
     void renderBorderLine(QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys);
 
 private:

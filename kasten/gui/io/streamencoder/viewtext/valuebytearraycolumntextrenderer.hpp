@@ -47,7 +47,7 @@ public:
 protected: // AbstractByteArrayColumnTextRenderer API
     void renderLine(QTextStream* stream, bool isSubline) const override;
 
-protected:
+private:
     const Okteta::ValueCodec* mValueCodec;
 };
 

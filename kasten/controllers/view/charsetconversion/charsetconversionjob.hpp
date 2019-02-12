@@ -57,7 +57,7 @@ public:
     int convertedBytesCount() const;
     const QMap<Okteta::Byte, int>& failedPerByteCount() const;
 
-protected:
+private:
     Okteta::Byte* const mResult;
     Okteta::AbstractByteArrayModel* const mByteArrayModel;
     const Okteta::AddressRange mRange;

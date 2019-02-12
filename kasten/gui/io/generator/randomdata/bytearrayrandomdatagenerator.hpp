@@ -56,7 +56,7 @@ public:
     ByteArrayRandomDataGeneratorSettings settings() const;
     void setSettings(const ByteArrayRandomDataGeneratorSettings& settings);
 
-protected:
+private:
     ByteArrayRandomDataGeneratorSettings mSettings;
 };
 

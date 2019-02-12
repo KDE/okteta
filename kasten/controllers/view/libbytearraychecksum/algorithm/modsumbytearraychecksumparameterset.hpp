@@ -42,7 +42,7 @@ public:
 public:
     Endianness endianness() const;
 
-protected:
+private:
     Endianness mEndianness = ThisMachineEndianness;
 };
 

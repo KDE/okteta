@@ -43,7 +43,7 @@ public: // AbstractTypeCodec API
 
     bool areEqual(const QVariant& value, QVariant& otherValue) const override;
 
-protected:
+private:
     QTextCodec* mUtf8Codec;
 };
 

@@ -60,7 +60,7 @@ protected: // AbstractByteArrayColumnRenderer API
     void renderByteText(QPainter* painter, Byte byte, Character byteChar, const QColor& color) const override;
     void recalcByteWidth() override;
 
-protected:
+private:
     void renderCode(QPainter* painter, const QString& code, const QColor& color) const;
 
 private: // settings

@@ -46,7 +46,7 @@ public:
     // return size of selected byte array
     int exec();
 
-protected:
+private:
     const Okteta::AbstractByteArrayModel* mByteArrayModel;
     const Okteta::AddressRange mSelection;
 

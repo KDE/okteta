@@ -40,7 +40,7 @@ public:
     void readBookmarks(ByteArrayDocument* document, const QUrl& url);
     void writeBookmarks(ByteArrayDocument* document, const QUrl& url);
 
-protected:
+private:
     KBookmarkManager* mBookmarkManager;
 };
 

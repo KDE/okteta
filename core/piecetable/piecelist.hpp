@@ -49,7 +49,7 @@ public:
     void append(const Piece& piece);
     void prepend(const PieceList& other);
 
-protected:
+private:
     QVector<Piece> mList;
     Size mTotalLength = 0;
 };

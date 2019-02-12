@@ -86,7 +86,7 @@ public:
 
     void getChangeData(ArrayChangeMetrics* metrics, Address* storageOffset, int versionIndex) const;
 
-protected:
+private:
     /// if true, try to merge changes
     bool mTryToMergeAppendedChange = false;
     ///

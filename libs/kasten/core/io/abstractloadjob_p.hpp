@@ -43,10 +43,10 @@ public:
     void setDocument(AbstractDocument* document);
 
 protected:
-    Q_DECLARE_PUBLIC(AbstractLoadJob)
-
-protected:
     AbstractLoadJob* const q_ptr;
+
+private:
+    Q_DECLARE_PUBLIC(AbstractLoadJob)
 
     AbstractDocument* mDocument = nullptr;
 };

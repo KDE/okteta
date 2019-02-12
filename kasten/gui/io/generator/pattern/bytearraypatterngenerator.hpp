@@ -57,7 +57,7 @@ public:
     ByteArrayPatternGeneratorSettings settings() const;
     void setSettings(const ByteArrayPatternGeneratorSettings& settings);
 
-protected:
+private:
     ByteArrayPatternGeneratorSettings mSettings;
 };
 
