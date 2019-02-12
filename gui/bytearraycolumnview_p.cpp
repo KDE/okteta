@@ -366,13 +366,13 @@ int ByteArrayColumnViewPrivate::fittingBytesPerLine() const
         availableWidth -= scrollbarExtent;
     }
 
-    enum KMatchTrial
+    enum MatchTrial
     {
         FirstRun,
         RerunWithScrollbarOn,
         TestWithoutScrollbar
     };
-    KMatchTrial matchRun = FirstRun;
+    MatchTrial matchRun = FirstRun;
 
     // prepare needed values
     const PixelX digitWidth = mValueColumn->digitWidth();
