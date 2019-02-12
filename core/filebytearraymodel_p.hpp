@@ -63,7 +63,6 @@ private:
     /**  */
     bool mReadOnly : 1;
     bool mIsOpen : 1;
-    bool mAtEof : 1;
     /** maximum number of pages which could be currently loaded */
     unsigned int mNoOfUsedPages;
     /**  number of actually not used pages (in terms of NoOfUsedPages) */
