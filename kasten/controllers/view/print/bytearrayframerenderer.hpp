@@ -58,7 +58,7 @@ enum LayoutStyle
 class ByteArrayFrameRenderer : public AbstractColumnFrameRenderer
 {
 public:
-    enum KDataColumnId
+    enum DataColumnId
     {
         ValueCodingId = 1,
         CharCodingId = 2
