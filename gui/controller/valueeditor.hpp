@@ -36,7 +36,7 @@ class AbstractByteArrayView;
 class ValueEditor : public AbstractEditor
 {
 private:
-    enum KValueEditAction
+    enum ValueEditAction
     {
         EnterValue,
         IncValue,
@@ -73,7 +73,7 @@ private:
      * @param action action to be done
      * @param input data to be used for the action
      */
-    void doValueEditAction(KValueEditAction action, int input = -1);
+    void doValueEditAction(ValueEditAction action, int input = -1);
 
 private:
     /** flag whether we are in editing mode */

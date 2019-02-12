@@ -199,7 +199,7 @@ bool ValueEditor::handleKeyPress(QKeyEvent* keyEvent)
     return keyUsed ? true : AbstractEditor::handleKeyPress(keyEvent);
 }
 
-void ValueEditor::doValueEditAction(KValueEditAction Action, int input)
+void ValueEditor::doValueEditAction(ValueEditAction Action, int input)
 {
     const Okteta::ValueCodec* valueCodec = mView->valueCodec();
 
