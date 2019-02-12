@@ -98,8 +98,8 @@ private:
     int mWidth = 0;
 
     int mBoxStyle = NoBox;
-    int mLineWidth = 1;
-    int mBoxMargin = 6;
+//     int mLineWidth = 1;
+//     int mBoxMargin = 6;
     QColor mLineColor;
     QColor mBgColor = {Qt::lightGray};
     QColor mFgColor = {Qt::black};
