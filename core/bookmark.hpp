@@ -36,7 +36,7 @@ namespace Okteta {
 class OKTETACORE_EXPORT Bookmark
 {
 private:
-    static const Address InvalidAddress = -1;
+    static constexpr Address InvalidAddress = -1;
 
 public:
     Bookmark(Address offset);   // krazy:exclude=explicit

@@ -51,18 +51,18 @@
 
 namespace Okteta {
 
-static const Address DefaultStartOffset = 0;// 5;
-static const Address DefaultFirstLineOffset = 0;
+static constexpr Address DefaultStartOffset = 0;// 5;
+static constexpr Address DefaultFirstLineOffset = 0;
 
 // zooming is done in steps of font size points
-static const int DefaultZoomStep = 1;
-static const int MinFontPointSize = 4;
-static const int MaxFontPointSize = 128;
+static constexpr int DefaultZoomStep = 1;
+static constexpr int MinFontPointSize = 4;
+static constexpr int MaxFontPointSize = 128;
 
-static const AbstractByteArrayView::ValueCoding DefaultValueCoding =  AbstractByteArrayView::HexadecimalCoding;
-static const AbstractByteArrayView::CharCoding DefaultCharCoding = AbstractByteArrayView::LocalEncoding;
+static constexpr AbstractByteArrayView::ValueCoding DefaultValueCoding =  AbstractByteArrayView::HexadecimalCoding;
+static constexpr AbstractByteArrayView::CharCoding DefaultCharCoding = AbstractByteArrayView::LocalEncoding;
 
-static const AbstractByteArrayView::LayoutStyle DefaultResizeStyle = AbstractByteArrayView::FixedLayoutStyle;
+static constexpr AbstractByteArrayView::LayoutStyle DefaultResizeStyle = AbstractByteArrayView::FixedLayoutStyle;
 
 inline QString octetStreamFormatName() { return QStringLiteral("application/octet-stream"); }
 

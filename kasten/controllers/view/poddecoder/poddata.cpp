@@ -59,8 +59,8 @@ void PODData::setByteOrder(QSysInfo::Endian byteOrder)
 
 unsigned long PODData::bitValue(int noOfBitsToRead) const
 {
-    static const int BitsPerByte = 8;
-    static const unsigned char BitMask[9] = {
+    constexpr int BitsPerByte = 8;
+    constexpr unsigned char BitMask[9] = {
         0, 1 << 7, 3 << 6, 7 << 5, 15 << 4, 31 << 3, 63 << 2, 127 << 1, 255
     };
 
@@ -132,8 +132,8 @@ bool PODData::updateRawData(int size)
 
 void PODData::getPointers(const void** P8Bit, const void** P16Bit, const void** P32Bit, const void** P64Bit) const
 {
-    static const int MachineOffsets[4] = { 0, 0, 0, 0 };
-    static const int ReversedOffsets[4] = { 7, 6, 4, 0 };
+    constexpr int MachineOffsets[4] = { 0, 0, 0, 0 };
+    constexpr int ReversedOffsets[4] = { 7, 6, 4, 0 };
 
     const int* offsets = (mByteOrder == QSysInfo::ByteOrder) ? MachineOffsets : ReversedOffsets;
     const Byte* data = mByteOrderSetAligned64Bit.mBytes;

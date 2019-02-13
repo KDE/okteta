@@ -28,7 +28,7 @@
 #include <QTest>
 #include <QSignalSpy>
 
-static const char TestData[] = "TestData";
+static constexpr char TestData[] = "TestData";
 
 void TestDocumentTest::checkTitleChanged(QSignalSpy* titleChangedSpy, const QString& title)
 {

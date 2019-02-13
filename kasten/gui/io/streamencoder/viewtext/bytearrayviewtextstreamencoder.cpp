@@ -42,7 +42,7 @@
 
 namespace Kasten {
 
-// static const Okteta::OffsetFormat::Format DefaultOffsetFormat = Okteta::OffsetFormat::Hexadecimal;
+// static constexpr Okteta::OffsetFormat::Format DefaultOffsetFormat = Okteta::OffsetFormat::Hexadecimal;
 
 ByteArrayViewTextStreamEncoderSettings::ByteArrayViewTextStreamEncoderSettings()
     // : offsetFormat(DefaultOffsetFormat)

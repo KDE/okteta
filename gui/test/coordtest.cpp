@@ -30,12 +30,12 @@
 namespace Okteta {
 
 // local variables
-static const Line LineIndex =          3;
-static const LinePosition Pos =        15;
-static const LineSize LineWidth =      19;
-static const Address Index =           LineIndex * LineWidth + Pos;
-static const LinePositionSize MaxPos = LineWidth - 1;
-static const LinePositionSize Steps =  5;
+static constexpr Line LineIndex =          3;
+static constexpr LinePosition Pos =        15;
+static constexpr LineSize LineWidth =      19;
+static constexpr Address Index =           LineIndex * LineWidth + Pos;
+static constexpr LinePositionSize MaxPos = LineWidth - 1;
+static constexpr LinePositionSize Steps =  5;
 
 void CoordTest::testConstructor()
 {

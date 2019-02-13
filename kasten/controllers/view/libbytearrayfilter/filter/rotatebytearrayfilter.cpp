@@ -31,7 +31,7 @@
 // Std
 #include <cstdlib>
 
-static const int RotateBitsPerByte = 8;
+static constexpr int RotateBitsPerByte = 8;
 
 RotateByteArrayFilter::RotateByteArrayFilter()
     : AbstractByteArrayFilter(

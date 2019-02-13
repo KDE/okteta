@@ -33,7 +33,7 @@
 
 namespace Kasten {
 
-static const char ToolListActionListId[] = "tools_list";
+static constexpr char ToolListActionListId[] = "tools_list";
 
 ToolListMenuController::ToolListMenuController(If::WidgetsDockable* widgetsDockable,
                                                KXMLGUIClient* guiClient)

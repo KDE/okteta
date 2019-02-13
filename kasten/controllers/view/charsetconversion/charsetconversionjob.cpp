@@ -31,7 +31,7 @@
 
 namespace Kasten {
 
-static const int CharsetConversionBlockSize = 100000;
+static constexpr int CharsetConversionBlockSize = 100000;
 
 bool CharsetConversionJob::exec()
 {

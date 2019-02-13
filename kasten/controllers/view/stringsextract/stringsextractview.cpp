@@ -44,7 +44,7 @@
 
 namespace Kasten {
 
-static const int MinimumStringLength = 1;
+static constexpr int MinimumStringLength = 1;
 
 StringsExtractView::StringsExtractView(StringsExtractTool* tool, QWidget* parent)
     : QWidget(parent)

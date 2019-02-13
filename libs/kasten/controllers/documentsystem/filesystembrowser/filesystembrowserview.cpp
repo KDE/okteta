@@ -75,7 +75,7 @@ void FileSystemBrowserView::init()
     layout->addWidget(mDirOperator);
 
     // fill toolbar
-    static const char* const ToolbarActionNames[] =
+    constexpr const char* ToolbarActionNames[] =
     { "back", "forward", "up", "home", "short view", "detailed view", "tree view"  };
 
     const KActionCollection* dirOperatorActionCollection = mDirOperator->actionCollection();

@@ -14,7 +14,7 @@
 
 //// ADAPT(start)
 //// define the default values for all parameters
-static const int DefaultBitNumber = 1;
+static constexpr int DefaultBitNumber = 1;
 //// ADAPT(end)
 
 Template_ByteArrayChecksumParameterSet::Template_ByteArrayChecksumParameterSet()

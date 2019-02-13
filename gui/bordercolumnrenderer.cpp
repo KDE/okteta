@@ -30,10 +30,10 @@
 
 namespace Okteta {
 
-static const PixelX BorderMargin = 4;
-static const PixelX LineWidth = 1;
-static const PixelX BorderWidth = 2 * BorderMargin + LineWidth;
-static const PixelX LineX = BorderMargin;
+static constexpr PixelX BorderMargin = 4;
+static constexpr PixelX LineWidth = 1;
+static constexpr PixelX BorderWidth = 2 * BorderMargin + LineWidth;
+static constexpr PixelX LineX = BorderMargin;
 
 BorderColumnRenderer::BorderColumnRenderer(AbstractColumnStylist* stylist, bool lineDrawn, bool inEmpty)
     : AbstractColumnRenderer(stylist)

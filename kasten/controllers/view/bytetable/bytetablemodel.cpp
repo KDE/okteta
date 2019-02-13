@@ -34,9 +34,9 @@
 
 namespace Kasten {
 
-static const QChar ByteTableDefaultSubstituteChar =  QLatin1Char('.');
-static const QChar ByteTableDefaultUndefinedChar =   QChar(QChar::ReplacementCharacter);
-static const int ByteSetSize = 256;
+static constexpr QChar ByteTableDefaultSubstituteChar =  QLatin1Char('.');
+static constexpr QChar ByteTableDefaultUndefinedChar =   QChar(QChar::ReplacementCharacter);
+static constexpr int ByteSetSize = 256;
 
 ByteTableModel::ByteTableModel(QObject* parent)
     : QAbstractTableModel(parent)
@@ -44,7 +44,7 @@ ByteTableModel::ByteTableModel(QObject* parent)
     , mSubstituteChar(ByteTableDefaultSubstituteChar)
     , mUndefinedChar(ByteTableDefaultUndefinedChar)
 {
-    static const Okteta::ValueCoding CodingIds[NofOfValueCodings] = {
+    constexpr Okteta::ValueCoding CodingIds[NofOfValueCodings] = {
         Okteta::DecimalCoding,
         Okteta::HexadecimalCoding,
         Okteta::OctalCoding,

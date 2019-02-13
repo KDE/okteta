@@ -33,10 +33,10 @@
 
 namespace Kasten {
 
-static const int defaultUuInputLineLength = 45;
-static const int uuInputLineLength = defaultUuInputLineLength;
-static const int uuInputGroupLength = 3;
-static const int maxInputGroupsPerLine = uuInputLineLength / uuInputGroupLength;
+static constexpr int defaultUuInputLineLength = 45;
+static constexpr int uuInputLineLength = defaultUuInputLineLength;
+static constexpr int uuInputGroupLength = 3;
+static constexpr int maxInputGroupsPerLine = uuInputLineLength / uuInputGroupLength;
 
 static inline char uumapByteHistorical(char byte) { return (byte > 0) ? (byte + 32) : '`'; }
 static inline char uumapByteBase64(char byte)     { return base64EncodeMap[(int)byte]; }
@@ -55,7 +55,7 @@ struct UumapEncodeData
     }
 };
 
-static const UumapEncodeData historicalUumapEncodeData =
+static constexpr UumapEncodeData historicalUumapEncodeData =
 {
     &uumapByteHistorical,
     "begin",
@@ -64,7 +64,7 @@ static const UumapEncodeData historicalUumapEncodeData =
     true
 };
 
-static const UumapEncodeData base64UumapEncodeData =
+static constexpr UumapEncodeData base64UumapEncodeData =
 {
     &uumapByteBase64,
     "begin-base64",

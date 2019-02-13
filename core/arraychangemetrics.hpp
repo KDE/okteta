@@ -39,7 +39,7 @@ class OKTETACORE_EXPORT ArrayChangeMetrics
     friend QDataStream& operator>>(QDataStream& inStream, ArrayChangeMetrics& metrics);
 
 private:
-    static const Address InvalidAddress = -1;
+    static constexpr Address InvalidAddress = -1;
 
 public:
     enum Type

@@ -30,16 +30,16 @@
 namespace Okteta {
 
 // local variables
-static const Address Offset = 15;
+static constexpr Address Offset = 15;
 
-static const Size LengthDiff = 5;
-static const Size InsertLength = 15;
-static const Size SmallerRemoveLength = InsertLength - LengthDiff;
+static constexpr Size LengthDiff = 5;
+static constexpr Size InsertLength = 15;
+static constexpr Size SmallerRemoveLength = InsertLength - LengthDiff;
 
-static const Size FirstLength = 15;
-static const Address SecondOffset = Offset + FirstLength;
-static const Size SecondLength = 10;
-static const Address SecondEnd = SecondOffset + SecondLength - 1;
+static constexpr Size FirstLength = 15;
+static constexpr Address SecondOffset = Offset + FirstLength;
+static constexpr Size SecondLength = 10;
+static constexpr Address SecondEnd = SecondOffset + SecondLength - 1;
 
 void ArrayChangeMetricsTest::testConstructorAsReplacement()
 {

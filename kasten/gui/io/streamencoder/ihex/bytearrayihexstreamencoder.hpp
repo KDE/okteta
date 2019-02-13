@@ -56,22 +56,22 @@ class ByteArrayIHexStreamEncoder : public AbstractByteArrayStreamEncoder
     Q_OBJECT
 
 private:
-    static const unsigned char dataRecordCode = 0x0;
-    static const unsigned char endOfFileRecordCode = 0x1;
-    static const unsigned char extendedSegmentAddressRecordCode = 0x2;
-    static const unsigned char startSegmentAddressRecordCode = 0x3;
-    static const unsigned char extendedLinearAddressRecordCode = 0x4;
-    static const unsigned char startLinearAddressRecordCode = 0x5;
+    static constexpr unsigned char dataRecordCode = 0x0;
+    static constexpr unsigned char endOfFileRecordCode = 0x1;
+    static constexpr unsigned char extendedSegmentAddressRecordCode = 0x2;
+    static constexpr unsigned char startSegmentAddressRecordCode = 0x3;
+    static constexpr unsigned char extendedLinearAddressRecordCode = 0x4;
+    static constexpr unsigned char startLinearAddressRecordCode = 0x5;
 
-    static const char startCode = ':';
+    static constexpr char startCode = ':';
 
-    static const int byteCountLineOffset = 0;
-    static const int byteCountLineSize = 1;
-    static const int addressLineOffset = byteCountLineOffset + byteCountLineSize;
-    static const int addressLineSize = 2;
-    static const int recordTypeLineOffset = addressLineOffset + addressLineSize;
-    static const int recordTypeLineSize = 1;
-    static const int dataLineOffset = recordTypeLineOffset + recordTypeLineSize;
+    static constexpr int byteCountLineOffset = 0;
+    static constexpr int byteCountLineSize = 1;
+    static constexpr int addressLineOffset = byteCountLineOffset + byteCountLineSize;
+    static constexpr int addressLineSize = 2;
+    static constexpr int recordTypeLineOffset = addressLineOffset + addressLineSize;
+    static constexpr int recordTypeLineSize = 1;
+    static constexpr int dataLineOffset = recordTypeLineOffset + recordTypeLineSize;
     static const char hexDigits[16];
 
 private:

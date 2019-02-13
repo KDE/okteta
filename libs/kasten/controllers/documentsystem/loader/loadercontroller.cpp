@@ -38,7 +38,7 @@
 
 namespace Kasten {
 
-static const char CreatorConfigGroupId[] = "Recent Files";
+static constexpr char CreatorConfigGroupId[] = "Recent Files";
 
 LoaderController::LoaderController(AbstractDocumentStrategy* documentStrategy,
                                    KXMLGUIClient* guiClient)

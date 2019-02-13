@@ -30,12 +30,12 @@
 namespace Okteta {
 
 // local variables
-static const Address Start1 = 15;
-static const Address End1 = 27;
-static const Size Width = End1 - Start1 + 1;
-static const Size Distance = 10;
-static const Address Start2 = End1 + Distance;
-static const Address End2 = Start2 + Width - 1;
+static constexpr Address Start1 = 15;
+static constexpr Address End1 = 27;
+static constexpr Size Width = End1 - Start1 + 1;
+static constexpr Size Distance = 10;
+static constexpr Address Start2 = End1 + Distance;
+static constexpr Address End2 = Start2 + Width - 1;
 
 void AddressRangeListTest::testSimpleConstructor()
 {

@@ -37,7 +37,7 @@
 #include <QTimer>
 
 namespace Okteta {
-static const int DefaultScrollTimerPeriod = 100;
+static constexpr int DefaultScrollTimerPeriod = 100;
 
 MouseNavigator::MouseNavigator(AbstractByteArrayView* view, AbstractMouseController* parent)
     : AbstractMouseController(view, parent)

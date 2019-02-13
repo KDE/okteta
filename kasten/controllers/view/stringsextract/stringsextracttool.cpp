@@ -39,7 +39,7 @@
 
 namespace Kasten {
 
-static const int DefaultMinLength = 3;
+static constexpr int DefaultMinLength = 3;
 
 StringsExtractTool::StringsExtractTool()
     : mExtractedStringsUptodate(false)

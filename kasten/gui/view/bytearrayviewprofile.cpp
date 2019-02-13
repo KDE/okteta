@@ -53,18 +53,18 @@ public:
 };
 
 QString DefaultViewProfileCharCodingName() { return QStringLiteral("ISO-8859-1"); }
-static const bool DefaultViewProfileShowingNonprinting = false;
-static const QChar DefaultViewProfileSubstituteChar =  QLatin1Char('.');
-static const QChar DefaultViewProfileUndefinedChar =   QChar(QChar::ReplacementCharacter);
-static const int DefaultViewProfileNoOfGroupedBytes = 4;
-static const int DefaultViewProfileNoOfBytesPerLine =  16;
-static const Okteta::AbstractByteArrayView::OffsetCoding DefaultViewProfileOffsetCoding =
+static constexpr bool DefaultViewProfileShowingNonprinting = false;
+static constexpr QChar DefaultViewProfileSubstituteChar =  QLatin1Char('.');
+static constexpr QChar DefaultViewProfileUndefinedChar =   QChar(QChar::ReplacementCharacter);
+static constexpr int DefaultViewProfileNoOfGroupedBytes = 4;
+static constexpr int DefaultViewProfileNoOfBytesPerLine =  16;
+static constexpr Okteta::AbstractByteArrayView::OffsetCoding DefaultViewProfileOffsetCoding =
     Okteta::AbstractByteArrayView::HexadecimalOffset;
-static const Okteta::AbstractByteArrayView::ValueCoding DefaultViewProfileValueCoding =
+static constexpr Okteta::AbstractByteArrayView::ValueCoding DefaultViewProfileValueCoding =
     Okteta::AbstractByteArrayView::HexadecimalCoding;
-static const Okteta::AbstractByteArrayView::LayoutStyle DefaultViewProfileResizeStyle =
+static constexpr Okteta::AbstractByteArrayView::LayoutStyle DefaultViewProfileResizeStyle =
     Okteta::AbstractByteArrayView::FixedLayoutStyle;
-static const Okteta::AbstractByteArrayView::CodingTypes DefaultViewProfileVisibleByteArrayCodings =
+static constexpr Okteta::AbstractByteArrayView::CodingTypes DefaultViewProfileVisibleByteArrayCodings =
     Okteta::AbstractByteArrayView::ValueAndCharCodings;
 
 ByteArrayViewProfilePrivate::ByteArrayViewProfilePrivate()

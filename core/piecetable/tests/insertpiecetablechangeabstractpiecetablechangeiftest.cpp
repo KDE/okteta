@@ -31,9 +31,9 @@
 
 namespace KPieceTable {
 
-static const Address InsertOffset = 30;
-static const Size InsertLength = 80;
-static const Address StorageOffset = 67;
+static constexpr Address InsertOffset = 30;
+static constexpr Size InsertLength = 80;
+static constexpr Address StorageOffset = 67;
 
 AbstractPieceTableChange* InsertPieceTableChangeAbstractPieceTableChangeIfTest::createPieceTableChange()
 {

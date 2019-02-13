@@ -37,7 +37,7 @@
 
 namespace Kasten {
 
-static const int ZoomSliderWidth = 150;
+static constexpr int ZoomSliderWidth = 150;
 
 // TODO: look at Dolphin/Krita/KOffice zoom tool
 

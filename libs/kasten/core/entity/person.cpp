@@ -25,7 +25,7 @@
 
 namespace Kasten {
 
-static const struct EgoDataStruct
+static constexpr struct EgoDataStruct
 {
     const char* name;
     const char* faceIconName;
@@ -37,7 +37,7 @@ EgoData[] =
     {"Konqui", "face-laugh"},
     {"Hans Entwickler", "user-identity"}
 };
-static const int lastEgoDataIndex = sizeof(EgoData) / sizeof(EgoDataStruct) - 1;
+static constexpr int lastEgoDataIndex = sizeof(EgoData) / sizeof(EgoDataStruct) - 1;
 static int currentEgoDataIndex = 0;
 
 Person Person::createEgo()

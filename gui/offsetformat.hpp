@@ -44,7 +44,7 @@ public:
         Decimal
     };
     /** */
-    static const int MaxFormatWidth = 10;
+    static constexpr int MaxFormatWidth = 10;
 
 private:
     OffsetFormat() = delete;

@@ -42,7 +42,7 @@ enum ValueCoding
     InvalidCoding = 0xFFFE,
     MaxCodingId = 0xFFFF
 };
-static const int NoOfCodings = 4;
+static constexpr int NoOfCodings = 4;
 
 /** */
 enum CharCoding

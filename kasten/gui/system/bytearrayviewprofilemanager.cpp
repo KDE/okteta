@@ -36,16 +36,16 @@
 
 namespace Kasten {
 QStringList viewProfileFileNameFilter() { return QStringList { QStringLiteral("*.obavp"), QStringLiteral("*.olock") }; }
-static const QLatin1String viewProfileFileSuffix = QLatin1String(".obavp");
-static const QLatin1String viewProfileDirSubPath = QLatin1String("/okteta/viewprofiles");
-static const QLatin1String defaultViewProfileFileSubPath = QLatin1String("/okteta/defaultviewprofile");
-static const int DefaultNoOfBytesPerLine = 16;
-static const int DefaultNoOfBytesPerGroup = 4;
-static const int DefaultLayoutStyle = 0;
-static const int DefaultViewModus = 0;
-static const int DefaultVisibleByteArrayCodings = 3;
-static const int DefaultOffsetCoding = 0;
-static const int DefaultValueCoding = 0;
+static constexpr QLatin1String viewProfileFileSuffix = QLatin1String(".obavp");
+static constexpr QLatin1String viewProfileDirSubPath = QLatin1String("/okteta/viewprofiles");
+static constexpr QLatin1String defaultViewProfileFileSubPath = QLatin1String("/okteta/defaultviewprofile");
+static constexpr int DefaultNoOfBytesPerLine = 16;
+static constexpr int DefaultNoOfBytesPerGroup = 4;
+static constexpr int DefaultLayoutStyle = 0;
+static constexpr int DefaultViewModus = 0;
+static constexpr int DefaultVisibleByteArrayCodings = 3;
+static constexpr int DefaultOffsetCoding = 0;
+static constexpr int DefaultValueCoding = 0;
 QString DefaultCharCoding() { return {}; }
 
 static QVector<ByteArrayViewProfile::Id>

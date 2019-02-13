@@ -39,7 +39,7 @@
 
 namespace Okteta {
 
-static const char DropperOctetStreamFormatName[] = "application/octet-stream";
+static constexpr char DropperOctetStreamFormatName[] = "application/octet-stream";
 
 Dropper::Dropper(AbstractByteArrayView* view)
     : mByteArrayView(view)

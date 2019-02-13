@@ -43,15 +43,15 @@
 #include <QFontDatabase>
 #include <QApplication>
 
-static const Okteta::Address DefaultStartOffset = 0;
-static const Okteta::Address DefaultFirstLineOffset = 0;
-static const int DefaultNoOfBytesPerLine =  16;
-static const LayoutStyle DefaultResizeStyle = FixedLayoutStyle; // krazy:exclude=staticobjects
-static const Okteta::ValueCoding DefaultValueCoding =  Okteta::HexadecimalCoding; // krazy:exclude=staticobjects
-static const Okteta::CharCoding DefaultCharCoding = Okteta::LocalEncoding; // krazy:exclude=staticobjects
+static constexpr Okteta::Address DefaultStartOffset = 0;
+static constexpr Okteta::Address DefaultFirstLineOffset = 0;
+static constexpr int DefaultNoOfBytesPerLine =  16;
+static constexpr LayoutStyle DefaultResizeStyle = FixedLayoutStyle; // krazy:exclude=staticobjects
+static constexpr Okteta::ValueCoding DefaultValueCoding =  Okteta::HexadecimalCoding; // krazy:exclude=staticobjects
+static constexpr Okteta::CharCoding DefaultCharCoding = Okteta::LocalEncoding; // krazy:exclude=staticobjects
 
-static const int BAFInitialHeight = 50;
-static const int BAFInitialWidth = 50;
+static constexpr int BAFInitialHeight = 50;
+static constexpr int BAFInitialWidth = 50;
 
 ByteArrayFrameRenderer::ByteArrayFrameRenderer()
     : mHeight(BAFInitialHeight)

@@ -114,7 +114,7 @@
 
 namespace Kasten {
 
-static const char LoadedUrlsKey[] = "LoadedUrls";
+static constexpr char LoadedUrlsKey[] = "LoadedUrls";
 
 OktetaMainWindow::OktetaMainWindow(OktetaProgram* program)
     : ShellWindow(program->viewManager())

@@ -38,13 +38,13 @@
 #include <QFile>
 #include <QDataStream>
 
-static const char TestDirectory[] = "bytearrayrawfilesynchronizertest";
-static const char TestFileName[] = "test.data";
+static constexpr char TestDirectory[] = "bytearrayrawfilesynchronizertest";
+static constexpr char TestFileName[] = "test.data";
 #if 0
-static const char NotExistingUrl[] = "notexisting://";
+static constexpr char NotExistingUrl[] = "notexisting://";
 #endif
-static const int TestDataSize = 50;
-static const char TestDataChar = 0;
+static constexpr int TestDataSize = 50;
+static constexpr char TestDataChar = 0;
 
 void ByteArrayRawFileSynchronizerFactoryTest::initTestCase()
 {

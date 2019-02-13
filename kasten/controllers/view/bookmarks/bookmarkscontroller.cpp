@@ -49,7 +49,7 @@
 
 namespace Kasten {
 
-static const char BookmarkListActionListId[] = "bookmark_list";
+static constexpr char BookmarkListActionListId[] = "bookmark_list";
 
 // TODO: Sortieren nach Offset oder Zeit
 
@@ -164,8 +164,8 @@ void BookmarksController::updateBookmarks()
 
     char codedOffset[Okteta::OffsetFormat::MaxFormatWidth + 1];
 
-    static const int firstWithNumericShortCut = 1;
-    static const int lastWithNumericShortCut = 9;
+    constexpr int firstWithNumericShortCut = 1;
+    constexpr int lastWithNumericShortCut = 9;
     int b = firstWithNumericShortCut;
 
     Okteta::BookmarksConstIterator bit = mBookmarks->createBookmarksConstIterator();

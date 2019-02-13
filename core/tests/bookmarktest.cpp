@@ -29,8 +29,8 @@
 
 using namespace Okteta;
 
-static const int Offset1 = 7;
-static const int Offset2 = 23;
+static constexpr int Offset1 = 7;
+static constexpr int Offset2 = 23;
 
 void BookmarkTest::testSimpleConstructor()
 {

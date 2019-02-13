@@ -26,8 +26,8 @@
 #include <cstring>
 #include <cstdlib>
 
-static const int minChunkSize = 512;
-static const int maxChunkSize = 1024 * 10; // TODO: get max. memory page size
+static constexpr int minChunkSize = 512;
+static constexpr int maxChunkSize = 1024 * 10; // TODO: get max. memory page size
 
 // TODO: think about realloc & Co.
 

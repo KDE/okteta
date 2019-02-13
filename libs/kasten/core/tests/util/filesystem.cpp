@@ -22,7 +22,7 @@
 #include <QTest>
 
 // TODO QStringLiteral
-static const char basePath[] = "/.kde-unit-test/";
+static constexpr char basePath[] = "/.kde-unit-test/";
 
 TestFileSystem::TestFileSystem(const QString& name)
     : mBasePath(QDir::homePath() + QLatin1Char('/')

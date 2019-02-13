@@ -38,26 +38,26 @@ Q_DECLARE_LOGGING_CATEGORY(LOG_OKTETA_GUI)
 
 namespace Okteta {
 
-static const LinePosition NoByteFound = -1;
+static constexpr LinePosition NoByteFound = -1;
 
-static const unsigned int StartsBefore = 1;
-static const unsigned int EndsLater = 2;
-static const Byte EmptyByte = ' ';
+static constexpr unsigned int StartsBefore = 1;
+static constexpr unsigned int EndsLater = 2;
+static constexpr Byte EmptyByte = ' ';
 
-static const PixelX DefaultCursorWidth = 2;
-static const PixelX DefaultByteSpacingWidth = 3;
-static const PixelX DefaultGroupSpacingWidth = 9;
-static const PixelX DefaultRowSpacingHeight = 0;
-static const int DefaultNoOfGroupedBytes = 4;
-static const int DefaultNoOfBytesPerLine =  16;
+static constexpr PixelX DefaultCursorWidth = 2;
+static constexpr PixelX DefaultByteSpacingWidth = 3;
+static constexpr PixelX DefaultGroupSpacingWidth = 9;
+static constexpr PixelX DefaultRowSpacingHeight = 0;
+static constexpr int DefaultNoOfGroupedBytes = 4;
+static constexpr int DefaultNoOfBytesPerLine =  16;
 
-static const int DefaultBinaryGapWidth = 1;
+static constexpr int DefaultBinaryGapWidth = 1;
 
-static const int InsertCursorWidth = 2;
+static constexpr int InsertCursorWidth = 2;
 
-static const bool DefaultShowingNonprinting = false;
-static const QChar DefaultSubstituteChar =  QLatin1Char('.');
-static const QChar DefaultUndefinedChar =   QChar(QChar::ReplacementCharacter);
+static constexpr bool DefaultShowingNonprinting = false;
+static constexpr QChar DefaultSubstituteChar =  QLatin1Char('.');
+static constexpr QChar DefaultUndefinedChar =   QChar(QChar::ReplacementCharacter);
 
 }
 

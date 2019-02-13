@@ -34,21 +34,21 @@
 
 namespace KPieceTable {
 
-static const Address ReplacedOldStorageOffset = 80;
-static const Address ReplacedStart = 32;
-static const Address ReplacedEnd = 78;
-static const Size ReplacedWidth = ReplacedEnd - ReplacedStart + 1;
-static const Size ReplaceLength = 30;
-static const Address ReplaceInsertStorageOffset = 67;
+static constexpr Address ReplacedOldStorageOffset = 80;
+static constexpr Address ReplacedStart = 32;
+static constexpr Address ReplacedEnd = 78;
+static constexpr Size ReplacedWidth = ReplacedEnd - ReplacedStart + 1;
+static constexpr Size ReplaceLength = 30;
+static constexpr Address ReplaceInsertStorageOffset = 67;
 
-static const Address InsertOffset = 50;
-static const Size InsertLength = 80;
-static const Address InsertStorageOffset = 67;
+static constexpr Address InsertOffset = 50;
+static constexpr Size InsertLength = 80;
+static constexpr Address InsertStorageOffset = 67;
 
-static const Address RemovedStart = 40;
-static const Address RemovedEnd = 78;
-static const Size RemovedWidth = RemovedEnd - RemovedStart + 1;
-static const Address RemovedOldStorageOffset = 23;
+static constexpr Address RemovedStart = 40;
+static constexpr Address RemovedEnd = 78;
+static constexpr Size RemovedWidth = RemovedEnd - RemovedStart + 1;
+static constexpr Address RemovedOldStorageOffset = 23;
 
 AbstractPieceTableChange* GroupPieceTableChangeAbstractPieceTableChangeIfTest::createPieceTableChange()
 {

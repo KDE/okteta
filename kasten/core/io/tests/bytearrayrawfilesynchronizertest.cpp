@@ -45,11 +45,11 @@
 
 namespace Kasten {
 
-static const char TestDirectory[] = "bytearrayrawfilesynchronizertest";
-static const char TestFileName[] = "test.data";
-static const char NotExistingUrl[] = "notexisting://";
-static const int TestDataSize = 50;
-static const char TestDataChar = 0;
+static constexpr char TestDirectory[] = "bytearrayrawfilesynchronizertest";
+static constexpr char TestFileName[] = "test.data";
+static constexpr char NotExistingUrl[] = "notexisting://";
+static constexpr int TestDataSize = 50;
+static constexpr char TestDataChar = 0;
 
 void ByteArrayRawFileSynchronizerTest::initTestCase()
 {

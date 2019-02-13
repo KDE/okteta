@@ -66,8 +66,8 @@ void ByteArrayIHexStreamEncoder::streamExtendedSegmentAddress(QTextStream& textS
                                                               unsigned char* line,
                                                               quint16 upperSegmentBaseAddress)
 {
-    static const int nullAddress = 0;
-    static const int upperSegmentBaseAddressSize = 2;
+    constexpr int nullAddress = 0;
+    constexpr int upperSegmentBaseAddressSize = 2;
 
     line[byteCountLineOffset] = upperSegmentBaseAddressSize;
     writeBigEndian(&line[addressLineOffset], nullAddress, addressLineSize);
@@ -82,8 +82,8 @@ void ByteArrayIHexStreamEncoder::streamExtendedLinearAddress(QTextStream& textSt
                                                              unsigned char* line,
                                                              quint16 upperLinearBaseAddress)
 {
-    static const int nullAddress = 0;
-    static const int upperLinearBaseAddressSize = 2;
+    constexpr int nullAddress = 0;
+    constexpr int upperLinearBaseAddressSize = 2;
 
     line[byteCountLineOffset] = upperLinearBaseAddressSize;
     writeBigEndian(&line[addressLineOffset], nullAddress, addressLineSize);
@@ -98,7 +98,7 @@ void ByteArrayIHexStreamEncoder::streamEndOfFile(QTextStream& textStream,
                                                  unsigned char* line,
                                                  quint16 startAddress)
 {
-    static const int endOfFileByteCount = 0;
+    constexpr int endOfFileByteCount = 0;
 
     line[byteCountLineOffset] = endOfFileByteCount;
     writeBigEndian(&line[addressLineOffset], startAddress, addressLineSize);
@@ -126,8 +126,8 @@ bool ByteArrayIHexStreamEncoder::encodeDataToStream(QIODevice* device,
     QTextStream textStream(device);
 
     // prepare
-    static const int maxDataPerLineCount = 255;
-    static const int maxLineLength =
+    constexpr int maxDataPerLineCount = 255;
+    constexpr int maxLineLength =
         maxDataPerLineCount + byteCountLineSize + addressLineSize + recordTypeLineSize;
 
     const Okteta::ByteArrayTableLayout layout(byteArrayView->noOfBytesPerLine(),

@@ -77,8 +77,8 @@ private:
 #error unknown byte order
 #endif
 
-static const uint SIZE = 8192;
-static const uint ENDIAN_SIZE = 16;
+static constexpr uint SIZE = 8192;
+static constexpr uint ENDIAN_SIZE = 16;
 
 void PrimitiveArrayTest::initTestCase()
 {

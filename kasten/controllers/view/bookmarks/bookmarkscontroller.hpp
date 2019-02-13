@@ -49,8 +49,8 @@ class BookmarksController : public AbstractXmlGuiController
     Q_OBJECT
 
 private:
-    static const int MaxEntryLength = 150;
-    static const int MaxBookmarkNameSize = 40;
+    static constexpr int MaxEntryLength = 150;
+    static constexpr int MaxBookmarkNameSize = 40;
 
 public:
     explicit BookmarksController(KXMLGUIClient* guiClient);

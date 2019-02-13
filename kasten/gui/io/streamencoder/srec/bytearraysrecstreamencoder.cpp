@@ -73,15 +73,15 @@ void ByteArraySRecStreamEncoder::streamBlockHeader(QTextStream& textStream, unsi
 {
     // cmp. https://linux.die.net/man/1/srec_cat
     // WP says: vendor specific data rather than program data
-//     static const int moduleNameLineOffset = 3;
-//     static const int moduleNameLength = 10;
-//     static const int versionLineOffset = moduleNameLineOffset + moduleNameLength;
-//     static const int versionLength = 1;
-//     static const int revisionLineOffset = versionLineOffset + versionLength;
-//     static const int revisionLength = 1;
-//     static const int descriptionLineOffset = revisionLineOffset + revisionLength;
-//     static const int descriptionLength = 18;
-    static const int headerByteCount = 3;
+//     constexpr int moduleNameLineOffset = 3;
+//     constexpr int moduleNameLength = 10;
+//     constexpr int versionLineOffset = moduleNameLineOffset + moduleNameLength;
+//     constexpr int versionLength = 1;
+//     constexpr int revisionLineOffset = versionLineOffset + versionLength;
+//     constexpr int revisionLength = 1;
+//     constexpr int descriptionLineOffset = revisionLineOffset + revisionLength;
+//     constexpr int descriptionLength = 18;
+    constexpr int headerByteCount = 3;
 
     line[addressLineOffset] = 0; // address unused
     line[addressLineOffset + 1] = 0; // address unused
@@ -95,8 +95,8 @@ void ByteArraySRecStreamEncoder::streamBlockHeader(QTextStream& textStream, unsi
 void ByteArraySRecStreamEncoder::streamRecordCount(QTextStream& textStream, unsigned char* line,
                                                    quint16 recordCount)
 {
-    static const int recordCountLineSize = 2;
-    static const int recordCountByteCount = byteCountLineSize + recordCountLineSize;
+    constexpr int recordCountLineSize = 2;
+    constexpr int recordCountByteCount = byteCountLineSize + recordCountLineSize;
 
     line[byteCountLineOffset] = recordCountByteCount;
     writeBigEndian(&line[addressLineOffset], recordCount, recordCountLineSize);
@@ -146,7 +146,7 @@ bool ByteArraySRecStreamEncoder::encodeDataToStream(QIODevice* device,
     QTextStream textStream(device);
 
     // prepare
-    static const int maxLineLength = 64 / 2;
+    constexpr int maxLineLength = 64 / 2;
     const int addressLineSize = addressSize(mSettings.addressSizeId);
     const int maxDataPerLineCount = maxLineLength - byteCountLineSize - addressLineSize;
     const int dataLineOffset = addressLineOffset + addressLineSize;

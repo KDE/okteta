@@ -109,7 +109,7 @@ void BookmarksTool::setTargetModel(AbstractModel* model)
         connect(mByteArrayView, &ByteArrayView::offsetCodingChanged,
                 this, &BookmarksTool::offsetCodingChanged);
     } else {
-        static const bool cantCreateBookmark = false;
+        constexpr bool cantCreateBookmark = false;
         if (mCanCreateBookmark != cantCreateBookmark) {
             mCanCreateBookmark = cantCreateBookmark;
             emit canCreateBookmarkChanged(cantCreateBookmark);

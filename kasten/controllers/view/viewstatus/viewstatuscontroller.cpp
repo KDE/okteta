@@ -97,10 +97,10 @@ void ViewStatusController::fixWidths(int offsetCoding)
     const QFontMetrics metrics = mStatusBar->fontMetrics();
 
     // mOffsetLabel
-    static const int hexDigitsCount = 16;
-    static const int decimalDigitsCount = 10;
-    static const int firstLetterIndex = 10;
-    static const char digits[hexDigitsCount] = {
+    constexpr int hexDigitsCount = 16;
+    constexpr int decimalDigitsCount = 10;
+    constexpr int firstLetterIndex = 10;
+    constexpr char digits[hexDigitsCount] = {
         '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
         'A', 'B', 'C', 'D', 'E', 'F'
     };

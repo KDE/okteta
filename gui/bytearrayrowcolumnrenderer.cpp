@@ -44,7 +44,7 @@
 
 namespace Okteta {
 
-static const AbstractByteArrayView::CodingTypes DefaultVisibleCodings =
+static constexpr AbstractByteArrayView::CodingTypes DefaultVisibleCodings =
     (AbstractByteArrayView::CodingTypes)(AbstractByteArrayView::ValueCodingId | AbstractByteArrayView::CharCodingId);
 
 ByteArrayRowColumnRenderer::ByteArrayRowColumnRenderer(AbstractColumnStylist* stylist,

@@ -14,7 +14,7 @@
 
 //// ADAPT(start)
 //// define the default values for all parameters
-static const unsigned int DefaultLevel = 127;
+static constexpr unsigned int DefaultLevel = 127;
 //// ADAPT(end)
 
 Template_ByteArrayFilterParameterSet::Template_ByteArrayFilterParameterSet()

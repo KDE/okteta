@@ -64,7 +64,7 @@ public Q_SLOTS:
     void setUndefinedChar(QChar undefinedChar);
 
 private:
-    static const int NofOfValueCodings = 4;
+    static constexpr int NofOfValueCodings = 4;
 
 private:
     Okteta::ValueCodec* mValueCodec[NofOfValueCodings];

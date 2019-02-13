@@ -34,10 +34,10 @@
 
 namespace Kasten {
 
-static const QChar StatisticsDefaultSubstituteChar =  QLatin1Char('.');
-static const QChar StatisticsDefaultUndefinedChar =   QChar(QChar::ReplacementCharacter);
-static const Okteta::ValueCoding DefaultValueCoding =  Okteta::HexadecimalCoding;
-static const int StatisticsByteSetSize = 256;
+static constexpr QChar StatisticsDefaultSubstituteChar =  QLatin1Char('.');
+static constexpr QChar StatisticsDefaultUndefinedChar =   QChar(QChar::ReplacementCharacter);
+static constexpr Okteta::ValueCoding DefaultValueCoding =  Okteta::HexadecimalCoding;
+static constexpr int StatisticsByteSetSize = 256;
 
 StatisticTableModel::StatisticTableModel(int* byteCount, QObject* parent)
     : QAbstractTableModel(parent)

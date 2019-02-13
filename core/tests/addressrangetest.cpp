@@ -32,10 +32,10 @@
 namespace Okteta {
 
 // local variables
-static const Address Start = 15;
-static const Address End = 27;
+static constexpr Address Start = 15;
+static constexpr Address End = 27;
 
-static const Size Width = End - Start + 1;
+static constexpr Size Width = End - Start + 1;
 
 void AddressRangeTest::testConstructorByEnd()
 {

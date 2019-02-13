@@ -36,7 +36,7 @@ namespace KPieceTable {
 
 // local variables
 // TODO QStringLiteral
-static const char Description[] = "description";
+static constexpr char Description[] = "description";
 
 void GroupPieceTableChangeTest::testConstructor()
 {

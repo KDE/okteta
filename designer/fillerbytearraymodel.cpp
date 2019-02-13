@@ -25,7 +25,7 @@
 // Okteta core
 #include <Okteta/PieceTableByteArrayModel>
 
-static const char fillerData[] =
+static constexpr char fillerData[] =
     "This is some filler data for the Okteta byte array widgets:"
     "\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0A\x0B\x0C\x0D\x0E\x0F"
     "\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1A\x1B\x1C\x1D\x1E\x1F"
@@ -44,7 +44,7 @@ static const char fillerData[] =
     "\xE0\xE1\xE2\xE3\xE4\xE5\xE6\xE7\xE8\xE9\xEA\xEB\xEC\xED\xEE\xEF"
     "\xF0\xF1\xF2\xF3\xF4\xF5\xF6\xF7\xF8\xF9\xFA\xFB\xFC\xFD\xFE\xFF";
 
-static const int fillerDataSize = sizeof(fillerData) / sizeof(fillerData[0]);
+static constexpr int fillerDataSize = sizeof(fillerData) / sizeof(fillerData[0]);
 
 Okteta::AbstractByteArrayModel* createFillerByteArrayModel(QObject* parent)
 {

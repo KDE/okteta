@@ -42,7 +42,8 @@
 #include <QMimeDatabase>
 
 namespace Kasten {
-static const int mimeTypeUpdateTimeInterval = 500; // msec
+
+static constexpr int mimeTypeUpdateTimeInterval = 500; // msec
 
 DocumentInfoTool::DocumentInfoTool(DocumentSyncManager* syncManager)
     : mDocumentSyncManager(syncManager)

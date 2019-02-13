@@ -30,14 +30,14 @@
 namespace Okteta {
 
 // local variables
-static const LinePosition Pos1 = 15;
-static const LinePosition Pos2 = 25;
-static const Line Line1 = 10;
-static const LineSize LineCount = 10;
-static const Line Line2 = Line1 + LineCount - 1;
-static const LineSize LineDistance = 5;
-static const Line Line3 = Line2 + LineDistance;
-static const Line Line4 = Line3 + LineCount - 1;
+static constexpr LinePosition Pos1 = 15;
+static constexpr LinePosition Pos2 = 25;
+static constexpr Line Line1 = 10;
+static constexpr LineSize LineCount = 10;
+static constexpr Line Line2 = Line1 + LineCount - 1;
+static constexpr LineSize LineDistance = 5;
+static constexpr Line Line3 = Line2 + LineDistance;
+static constexpr Line Line4 = Line3 + LineCount - 1;
 
 static Coord Start1(Pos1, Line1);
 static Coord End1(Pos2, Line2);

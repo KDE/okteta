@@ -24,7 +24,7 @@
 
 namespace Okteta {
 
-static const LineSize DefaultNoOfLinesPerPage = 1;
+static constexpr LineSize DefaultNoOfLinesPerPage = 1;
 
 ByteArrayTableLayout::ByteArrayTableLayout(Size noOfBytesPerLine, Address firstLineOffset, Address startOffset,
                                            Address byteArrayOffset, Size byteArrayLength)

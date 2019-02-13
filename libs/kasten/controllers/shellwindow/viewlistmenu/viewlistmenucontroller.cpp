@@ -40,8 +40,8 @@ Q_DECLARE_METATYPE(Kasten::AbstractView*)
 
 namespace Kasten {
 
-static const int MaxEntryLength = 150;
-static const char WindowsListActionListId[] = "windows_list";
+static constexpr int MaxEntryLength = 150;
+static constexpr char WindowsListActionListId[] = "windows_list";
 
 ViewListMenuController::ViewListMenuController(ViewManager* viewManager, AbstractGroupedViews* groupedViews,
                                                KXMLGUIClient* guiClient)

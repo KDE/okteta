@@ -37,7 +37,7 @@
 
 namespace Kasten {
 
-static const int MaxMenuEntries = 10;
+static constexpr int MaxMenuEntries = 10;
 
 VersionController::VersionController(KXMLGUIClient* guiClient)
 {

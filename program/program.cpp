@@ -58,8 +58,8 @@
 
 namespace Kasten {
 
-// static const char OffsetOptionId[] = "offset";
-// static const char OffsetOptionShortId[] = "o";
+// static constexpr char OffsetOptionId[] = "offset";
+// static constexpr char OffsetOptionShortId[] = "o";
 
 static
 int& preConstructionHookHack(int& argc)

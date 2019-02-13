@@ -29,7 +29,7 @@
 
 namespace Okteta {
 
-static const Size FixedSizeByteArrayModelSize = 60;
+static constexpr Size FixedSizeByteArrayModelSize = 60;
 
 bool FixedSizeByteArrayModelAbstractByteArrayModelIfTest::byteArrayModelSizeCanBeChanged() const
 {

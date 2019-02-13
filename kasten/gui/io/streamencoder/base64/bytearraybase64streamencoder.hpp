@@ -38,11 +38,11 @@ class ByteArrayBase64StreamEncoder : public AbstractByteArrayStreamEncoder
     Q_OBJECT
 
 public:
-    static const int inputGroupLength = 3;
+    static constexpr int inputGroupLength = 3;
 
-    static const int outputLineLength = 76;
-    static const int outputGroupLength = 4;
-    static const int maxOutputGroupsPerLine = outputLineLength / outputGroupLength;
+    static constexpr int outputLineLength = 76;
+    static constexpr int outputGroupLength = 4;
+    static constexpr int maxOutputGroupsPerLine = outputLineLength / outputGroupLength;
 
     enum class InputByteIndex
     {

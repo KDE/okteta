@@ -41,7 +41,7 @@ struct ValueCodecDescription
     const char* validDigits;
 };
 
-static const ValueCodecDescription valueCodecDescriptions[] =
+static constexpr ValueCodecDescription valueCodecDescriptions[] =
 {
     {"HexadecimalByteCodec", HexadecimalCoding, 2, "0123456789ABCDEFabcdef"},
     {"DecimalByteCodec", DecimalCoding, 3, "0123456789"},
@@ -239,7 +239,7 @@ void ValueCodecTest::testIsValidDigit_data()
     QTest::addColumn<uchar>("digit");
     QTest::addColumn<bool>("isValid");
 
-    static const int digitCount = 256;
+    constexpr int digitCount = 256;
 
     for (auto& valueCodecDescription : valueCodecDescriptions) {
         QBitArray validnessPerDigitField = QBitArray(digitCount, false);

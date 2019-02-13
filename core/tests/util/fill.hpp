@@ -33,10 +33,10 @@ class AbstractByteArrayModel;
 class QByteArray;
 
 // some defines
-static const Okteta::Byte FirstMarkChar = 2;
-static const Okteta::Byte SecondMarkChar = 3;
-static const Okteta::Byte PaintChar = 1;
-static const Okteta::Byte BlankChar = '\0';
+static constexpr Okteta::Byte FirstMarkChar = 2;
+static constexpr Okteta::Byte SecondMarkChar = 3;
+static constexpr Okteta::Byte PaintChar = 1;
+static constexpr Okteta::Byte BlankChar = '\0';
 
 void textureByteArrayModel(Okteta::AbstractByteArrayModel* ByteArrayModel,
                            unsigned char b = 1, unsigned char e = 255,

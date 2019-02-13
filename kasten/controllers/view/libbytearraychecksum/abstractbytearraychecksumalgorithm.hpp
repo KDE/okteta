@@ -39,7 +39,7 @@ class AbstractByteArrayChecksumAlgorithm : public QObject
     Q_OBJECT
 
 protected:
-    static const int CalculatedByteCountSignalLimit = 10000;
+    static constexpr int CalculatedByteCountSignalLimit = 10000;
 
 protected:
     explicit AbstractByteArrayChecksumAlgorithm(const QString& name);

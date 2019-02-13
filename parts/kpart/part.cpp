@@ -66,7 +66,7 @@
 #include <QLayout>
 #include <QUrl>
 
-static const char* const UIFileName[] =
+static constexpr const char* UIFileName[] =
 {
     "oktetapartreadonlyui.rc",
     "oktetapartbrowserui.rc",

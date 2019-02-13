@@ -34,7 +34,7 @@ namespace Okteta {
 class PODData
 {
 public:
-    static const int Size = sizeof(double);
+    static constexpr int Size = sizeof(double);
 
 public:
     PODData();

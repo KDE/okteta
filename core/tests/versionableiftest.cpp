@@ -110,7 +110,7 @@ void VersionableIfTest::testFill()
         return;
     }
 
-    static const unsigned int FillSize = 10;
+    constexpr unsigned int FillSize = 10;
     unsigned int Size = mVersionable->size();
     Section FillSection = Section::fromWidth(0, Size);
 

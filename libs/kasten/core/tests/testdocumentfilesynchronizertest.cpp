@@ -41,14 +41,14 @@
 #include <QDataStream>
 #include <QUrl>
 
-static const char TestDirectory[] = "testdocumentfile1synchronizertest";
-static const char TestFileName1[] = "test1.data";
-static const char TestFileName2[] = "test2.data";
-static const char NotExistingFileName[] = "not.existing";
-static const char NotExistingUrlName[] = "not://existing";
-static const char TestData1[] = "TestData1";
-static const char TestData2[] = "TestData2";
-static const char Header1[] = "Header1";
+static constexpr char TestDirectory[] = "testdocumentfile1synchronizertest";
+static constexpr char TestFileName1[] = "test1.data";
+static constexpr char TestFileName2[] = "test2.data";
+static constexpr char NotExistingFileName[] = "not.existing";
+static constexpr char NotExistingUrlName[] = "not://existing";
+static constexpr char TestData1[] = "TestData1";
+static constexpr char TestData2[] = "TestData2";
+static constexpr char Header1[] = "Header1";
 
 void TestDocumentFileSynchronizerTest::writeToFile(const QString& filePath, const QByteArray& data, const QByteArray& header)
 {

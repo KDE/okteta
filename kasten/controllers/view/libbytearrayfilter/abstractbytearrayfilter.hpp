@@ -40,7 +40,7 @@ class AbstractByteArrayFilter : public QObject
     Q_OBJECT
 
 protected:
-    static const int FilteredByteCountSignalLimit = 10000;
+    static constexpr int FilteredByteCountSignalLimit = 10000;
 
 protected:
     explicit AbstractByteArrayFilter(const QString& name);

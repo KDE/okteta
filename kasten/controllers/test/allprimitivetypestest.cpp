@@ -48,7 +48,7 @@ private:
     QScopedPointer<Okteta::ByteArrayModel> model;
 };
 
-static const Okteta::Byte data[9] =
+static constexpr Okteta::Byte data[9] =
 { 0x12, 0x34, 0x56, 0x78, 0x9a, 0xbc, 0xde, 0xf0, 0x00 };
 
 inline void AllPrimitiveTypesTest::initTestCase()

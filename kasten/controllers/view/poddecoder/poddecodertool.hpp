@@ -48,7 +48,7 @@ class PODDecoderTool : public AbstractTool
     Q_OBJECT
 
 public:
-    static const int MaxPODSize = sizeof(double);
+    static constexpr int MaxPODSize = sizeof(double);
     // ensure strict alignment for double as needed on some architectures (e.g. PA-RISC)
     using Aligned64Bit = union { unsigned char Data[MaxPODSize]; double Dummy; };
 

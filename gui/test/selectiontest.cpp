@@ -30,8 +30,8 @@
 namespace Okteta {
 
 // local variables
-static const Address Start = 15;
-static const Address End = 27;
+static constexpr Address Start = 15;
+static constexpr Address End = 27;
 
 void SelectionTest::testPlainConstructor()
 {

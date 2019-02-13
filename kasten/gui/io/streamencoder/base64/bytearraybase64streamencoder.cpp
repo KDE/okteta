@@ -42,11 +42,11 @@ const char base64EncodeMap[64] = {
     '4', '5', '6', '7', '8', '9', '+', '/'
 };
 
-static const char* const base64PaddingData[2] = {
+static constexpr const char* base64PaddingData[2] = {
     "==",
     "="
 };
-static inline const char* base64Padding(ByteArrayBase64StreamEncoder::InputByteIndex index)
+static constexpr inline const char* base64Padding(ByteArrayBase64StreamEncoder::InputByteIndex index)
 {
     return base64PaddingData[static_cast<int>(index) - 1];
 }

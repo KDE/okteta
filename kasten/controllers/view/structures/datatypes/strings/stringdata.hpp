@@ -76,9 +76,9 @@ public:
 
     void copyTerminationFrom(const StringData* data);
 
-    static const uint UNICODE_MAX = 0x10ffff;
-    static const uint BMP_MAX = 0xffff;
-    static const char ASCII_MAX = 0x7f;
+    static constexpr uint UNICODE_MAX = 0x10ffff;
+    static constexpr uint BMP_MAX = 0xffff;
+    static constexpr char ASCII_MAX = 0x7f;
 
 protected:
     StringDataInformation* mParent;

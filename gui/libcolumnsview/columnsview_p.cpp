@@ -27,7 +27,7 @@
 
 namespace Okteta {
 
-static const int DefaultSingleStep = 20;
+static constexpr int DefaultSingleStep = 20;
 
 void ColumnsViewPrivate::init()
 {

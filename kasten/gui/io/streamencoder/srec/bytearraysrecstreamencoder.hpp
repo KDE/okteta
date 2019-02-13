@@ -68,11 +68,11 @@ private:
         EndOfBlock2B = 9
     };
 
-    static const char startCode = 'S';
+    static constexpr char startCode = 'S';
 
-    static const int byteCountLineOffset = 0;
-    static const int byteCountLineSize = 1;
-    static const int addressLineOffset = byteCountLineOffset + byteCountLineSize;
+    static constexpr int byteCountLineOffset = 0;
+    static constexpr int byteCountLineSize = 1;
+    static constexpr int addressLineOffset = byteCountLineOffset + byteCountLineSize;
 
     static const char hexDigits[16];
 

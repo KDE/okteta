@@ -27,7 +27,7 @@
 
 namespace Kasten {
 
-static const int DefaultNoOfSublines = 1;
+static constexpr int DefaultNoOfSublines = 1;
 
 AbstractColumnTextRenderer::~AbstractColumnTextRenderer() = default;
 

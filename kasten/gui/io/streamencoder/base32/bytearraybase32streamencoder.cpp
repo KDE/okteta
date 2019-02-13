@@ -31,21 +31,21 @@
 
 namespace Kasten {
 
-static const char base32ClassicEncodeMap[32] =
+static constexpr char base32ClassicEncodeMap[32] =
 {
     'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
     'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
     'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
     'Y', 'Z', '2', '3', '4', '5', '6', '7'
 };
-static const char base32HexEncodeMap[32] =
+static constexpr char base32HexEncodeMap[32] =
 {
     '0', '1', '2', '3', '4', '5', '6', '7',
     '8', '9', 'A', 'B', 'C', 'D', 'E', 'F',
     'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
     'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V'
 };
-static const char base32ZHexEncodeMap[32] =
+static constexpr char base32ZHexEncodeMap[32] =
 {
     'y', 'b', 'n', 'd', 'r', 'f', 'g', '8',
     'e', 'j', 'k', 'm', 'c', 'p', 'q', 'x',
@@ -53,7 +53,7 @@ static const char base32ZHexEncodeMap[32] =
     'a', '3', '4', '5', 'h', '7', '6', '9'
 };
 
-static const char* const base32PaddingData[4] =
+static constexpr const char* base32PaddingData[4] =
 {
     "======",
     "====",
@@ -78,7 +78,7 @@ struct Base32EncodingData
     const char* (* padding)(ByteArrayBase32StreamEncoder::InputByteIndex);
 };
 
-static const Base32EncodingData
+static constexpr Base32EncodingData
     base32EncodingData[3] =
 {
     {base32ClassicEncodeMap, &base32Padding},

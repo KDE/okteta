@@ -31,13 +31,13 @@
 
 namespace KPieceTable {
 
-static const Address Start = 32;
-static const Address End = 78;
-static const Size Width = End - Start + 1;
-static const Size InsertLength = 80;
-static const Address InsertStorageOffset = 67;
+static constexpr Address Start = 32;
+static constexpr Address End = 78;
+static constexpr Size Width = End - Start + 1;
+static constexpr Size InsertLength = 80;
+static constexpr Address InsertStorageOffset = 67;
 
-static const Address ChangeStorageOffset = 23;
+static constexpr Address ChangeStorageOffset = 23;
 
 AbstractPieceTableChange* ReplacePieceTableChangeAbstractPieceTableChangeIfTest::createPieceTableChange()
 {

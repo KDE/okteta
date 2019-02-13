@@ -130,7 +130,7 @@ void AbstractByteArrayModelIfTest::testCopyTo()
     }
 
     //
-    static const Size copySize = 10;
+    constexpr Size copySize = 10;
     Size size = mByteArrayModel->size();
     AddressRange copyRange(0, copySize - 1);
 
@@ -178,7 +178,7 @@ void AbstractByteArrayModelIfTest::testFill()
         return;
     }
 
-    static const Size fillSize = 10;
+    constexpr Size fillSize = 10;
     Size size = mByteArrayModel->size();
     AddressRange fillRange = AddressRange::fromWidth(0, size);
 
@@ -219,7 +219,7 @@ void AbstractByteArrayModelIfTest::testFill()
     checkContentsReplaced(fillRange, fillRange.width());
 
     // fill() at end with length reaching behind end
-    static const Size behindEndSize = 2;
+    constexpr Size behindEndSize = 2;
     mByteArrayModel->setModified(false);
     mByteArrayModel->fill(BlankChar);
     fillRange.moveToEnd(size - 1 + behindEndSize);
@@ -295,7 +295,7 @@ void AbstractByteArrayModelIfTest::testRemove()
     }
 
     textureByteArrayModel(mByteArrayModel);
-    static const Size removeSize = 10;
+    constexpr Size removeSize = 10;
     // create copy
     Size size = mByteArrayModel->size();
     FixedSizeByteArrayModel copy(size);
@@ -343,7 +343,7 @@ void AbstractByteArrayModelIfTest::testRemove()
     checkContentsReplaced(removeRange, 0);
 }
 
-static const Size insertSize = 10;
+static constexpr Size insertSize = 10;
 
 struct KTestData
 {
@@ -469,7 +469,7 @@ void AbstractByteArrayModelIfTest::testSwap()
     }
 
     // prepare copy
-    static const Size moveSize = 10;
+    constexpr Size moveSize = 10;
     Size size = mByteArrayModel->size();
     const AddressRange origin = AddressRange::fromWidth(size - moveSize, moveSize);
     FixedSizeByteArrayModel copy(size);
@@ -565,8 +565,8 @@ void AbstractByteArrayModelIfTest::testReplaceEqual()
     }
 
     // create insertData
-    static const Size removeSize = 10;
-    static const Size insertSize = removeSize;
+    constexpr Size removeSize = 10;
+    constexpr Size insertSize = removeSize;
     FixedSizeByteArrayModel insertData(insertSize);
     textureByteArrayModel(&insertData, 10, 99);
 
@@ -639,9 +639,9 @@ void AbstractByteArrayModelIfTest::testReplaceLess()
     }
 
     // create insertData
-    static const Size removeSize = 10;
-    static const Size diff = 4;
-    static const Size insertSize = removeSize - diff;
+    constexpr Size removeSize = 10;
+    constexpr Size diff = 4;
+    constexpr Size insertSize = removeSize - diff;
     FixedSizeByteArrayModel insertData(insertSize);
     textureByteArrayModel(&insertData, 10, 99);
 
@@ -716,9 +716,9 @@ void AbstractByteArrayModelIfTest::testReplaceMore()
     }
 
     // create insertData
-    static const Size removeSize = 10;
-    static const Size diff = 4;
-    static const Size insertSize = removeSize + diff;
+    constexpr Size removeSize = 10;
+    constexpr Size diff = 4;
+    constexpr Size insertSize = removeSize + diff;
     FixedSizeByteArrayModel insertData(insertSize);
     textureByteArrayModel(&insertData, 10, 99);
 

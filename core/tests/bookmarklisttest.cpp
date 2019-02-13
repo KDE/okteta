@@ -30,14 +30,14 @@
 
 using namespace Okteta;
 
-static const int Offset1 = 7;
-static const int Offset2 = 23;
-static const int Offset3 = 45;
-static const int Offset4 = 67;
-static const int Distance12 = Offset2 - Offset1;
-static const int Distance23 = Offset3 - Offset2;
-static const int Distance34 = Offset4 - Offset3;
-static const int Distance13 = Distance12 + Distance23;
+static constexpr int Offset1 = 7;
+static constexpr int Offset2 = 23;
+static constexpr int Offset3 = 45;
+static constexpr int Offset4 = 67;
+static constexpr int Distance12 = Offset2 - Offset1;
+static constexpr int Distance23 = Offset3 - Offset2;
+static constexpr int Distance34 = Offset4 - Offset3;
+static constexpr int Distance13 = Distance12 + Distance23;
 
 void BookmarkListTest::testSimpleConstructor()
 {
@@ -145,7 +145,7 @@ void BookmarkListTest::testAdjustToReplaced()
     BookmarkList bookmarkList;
 
     // replace after last -> no changes
-    static const int behindOffset3 = Offset3 + 1;
+    constexpr int behindOffset3 = Offset3 + 1;
     bookmarkList.addBookmark(bookmark1);
     bookmarkList.addBookmark(bookmark2);
     bookmarkList.addBookmark(bookmark3);
@@ -168,8 +168,8 @@ void BookmarkListTest::testAdjustToReplaced()
     QVERIFY(!adjusted);
 
     // replace after 1 and before 3 with same length
-    static const int replaceLength = Distance13 - 1;
-    static const int behindOffset1 = Offset1 + 1;
+    constexpr int replaceLength = Distance13 - 1;
+    constexpr int behindOffset1 = Offset1 + 1;
     bookmarkList.clear();
     bookmarkList.addBookmark(bookmark1);
     bookmarkList.addBookmark(bookmark2);
@@ -182,7 +182,7 @@ void BookmarkListTest::testAdjustToReplaced()
     QVERIFY(!bookmarkList.isEmpty());
 
     // replace after 1 and before 3 with longer length
-    static const int longer = 5;
+    constexpr int longer = 5;
     bookmarkList.clear();
     bookmarkList.addBookmark(bookmark1);
     bookmarkList.addBookmark(bookmark2);
@@ -195,7 +195,7 @@ void BookmarkListTest::testAdjustToReplaced()
     QVERIFY(!bookmarkList.isEmpty());
 
     // replace after 1 and before 3 with shorter length
-    static const int shorter = 5;
+    constexpr int shorter = 5;
     bookmarkList.clear();
     bookmarkList.addBookmark(bookmark1);
     bookmarkList.addBookmark(bookmark2);
@@ -219,9 +219,9 @@ void BookmarkListTest::testAdjustToSwapped()
     BookmarkList bookmarkList;
 
     // move all between 1 and 3 right before 4
-    static const int secondLength = Distance34;
-    static const int firstLength = Distance13 - 1;
-    static const int behindOffset1 = Offset1 + 1;
+    constexpr int secondLength = Distance34;
+    constexpr int firstLength = Distance13 - 1;
+    constexpr int behindOffset1 = Offset1 + 1;
     bookmarkList.addBookmark(bookmark1);
     bookmarkList.addBookmark(bookmark2);
     bookmarkList.addBookmark(bookmark3_1);

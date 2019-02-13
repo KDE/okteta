@@ -31,7 +31,7 @@
 
 namespace Kasten {
 
-static const int ExtractStringBlockSize = 100000;
+static constexpr int ExtractStringBlockSize = 100000;
 
 void ExtractStringsJob::exec()
 {

@@ -31,7 +31,7 @@
 
 namespace Kasten {
 
-static const char xxencodeMap[64] = {
+static constexpr char xxencodeMap[64] = {
     '+', '-', '0', '1', '2', '3', '4', '5',
     '6', '7', '8', '9', 'A', 'B', 'C', 'D',
     'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
@@ -42,10 +42,10 @@ static const char xxencodeMap[64] = {
     's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
 };
 
-static const int defaultxxInputLineLength = 45;
-static const int xxInputLineLength = defaultxxInputLineLength;
-static const int xxInputGroupLength = 3;
-static const int maxXxInputGroupsPerLine = xxInputLineLength / xxInputGroupLength;
+static constexpr int defaultxxInputLineLength = 45;
+static constexpr int xxInputLineLength = defaultxxInputLineLength;
+static constexpr int xxInputGroupLength = 3;
+static constexpr int maxXxInputGroupsPerLine = xxInputLineLength / xxInputGroupLength;
 
 static inline char xxmapByte(char byte) { return xxencodeMap[(int)byte]; }
 

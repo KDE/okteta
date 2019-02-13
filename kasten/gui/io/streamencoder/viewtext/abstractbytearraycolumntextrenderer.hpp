@@ -39,8 +39,8 @@ namespace Kasten {
 class AbstractByteArrayColumnTextRenderer : public AbstractColumnTextRenderer
 {
 private:
-    static const int DefaultTRByteSpacingWidth = 1;
-    static const int TRGroupSpacingWidth = 2;
+    static constexpr int DefaultTRByteSpacingWidth = 1;
+    static constexpr int TRGroupSpacingWidth = 2;
 
 public:
     AbstractByteArrayColumnTextRenderer(const Okteta::AbstractByteArrayModel* byteArrayModel, Okteta::Address offset,

@@ -32,31 +32,31 @@
 namespace Okteta {
 
 // local variables
-static const Size NoOfBytesPerLine = 8;
-static const Address StartOffset = 22;
-static const Address FirstLineOffset = 10;
-static const Address RelativeStartOffset = StartOffset - FirstLineOffset;
-static const Address ByteArrayOffset = 9;
-static const Size Length = 250;
-static const Address FinalOffset = (StartOffset + Length - 1);
-static const Address RelativeFinalOffset = FinalOffset - FirstLineOffset;
+static constexpr Size NoOfBytesPerLine = 8;
+static constexpr Address StartOffset = 22;
+static constexpr Address FirstLineOffset = 10;
+static constexpr Address RelativeStartOffset = StartOffset - FirstLineOffset;
+static constexpr Address ByteArrayOffset = 9;
+static constexpr Size Length = 250;
+static constexpr Address FinalOffset = (StartOffset + Length - 1);
+static constexpr Address RelativeFinalOffset = FinalOffset - FirstLineOffset;
 
-static const Address FirstIndex = ByteArrayOffset;
-static const Address LastIndex = Length - 1 + ByteArrayOffset;
+static constexpr Address FirstIndex = ByteArrayOffset;
+static constexpr Address LastIndex = Length - 1 + ByteArrayOffset;
 
-static const Line StartLine = RelativeStartOffset / NoOfBytesPerLine;
-static const LinePosition StartLinePosition = RelativeStartOffset % NoOfBytesPerLine;
+static constexpr Line StartLine = RelativeStartOffset / NoOfBytesPerLine;
+static constexpr LinePosition StartLinePosition = RelativeStartOffset % NoOfBytesPerLine;
 static Coord StartCoord(StartLinePosition, StartLine);
 
-static const Line FinalLine =  RelativeFinalOffset / NoOfBytesPerLine;
-static const LinePosition FinalLinePosition = RelativeFinalOffset % NoOfBytesPerLine;
+static constexpr Line FinalLine =  RelativeFinalOffset / NoOfBytesPerLine;
+static constexpr LinePosition FinalLinePosition = RelativeFinalOffset % NoOfBytesPerLine;
 static Coord FinalCoord(FinalLinePosition, FinalLine);
 
-static const LinePosition Pos1 = 15;
-static const LinePosition Pos2 = 25;
-static const Line Line1 = 10;
-static const LineSize LineCount = 10;
-static const Line Line2 = Line1 + LineCount - 1;
+static constexpr LinePosition Pos1 = 15;
+static constexpr LinePosition Pos2 = 25;
+static constexpr Line Line1 = 10;
+static constexpr LineSize LineCount = 10;
+static constexpr Line Line2 = Line1 + LineCount - 1;
 static Coord Start(Pos1, Line1);
 static Coord End(Pos2, Line2);
 

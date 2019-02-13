@@ -30,10 +30,10 @@
 namespace KPieceTable {
 
 // local variables
-static const Address Start = 15;
-static const Address End = 27;
+static constexpr Address Start = 15;
+static constexpr Address End = 27;
 
-static const Address Width = End - Start + 1;
+static constexpr Address Width = End - Start + 1;
 
 void PieceTest::testSimpleConstructor()
 {

@@ -33,8 +33,8 @@
 
 namespace Okteta {
 
-static const PixelX leftOffsetMargin = 2;
-static const PixelX rightOffsetMargin = 2;
+static constexpr PixelX leftOffsetMargin = 2;
+static constexpr PixelX rightOffsetMargin = 2;
 
 OffsetColumnRenderer::OffsetColumnRenderer(AbstractColumnStylist* stylist,
                                            ByteArrayTableLayout* layout, OffsetFormat::Format format)

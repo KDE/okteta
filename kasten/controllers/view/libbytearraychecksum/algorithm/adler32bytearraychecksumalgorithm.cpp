@@ -27,7 +27,7 @@
 // KF5
 #include <KLocalizedString>
 
-static const int MOD_ADLER = 65521;
+static constexpr int MOD_ADLER = 65521;
 
 Adler32ByteArrayChecksumAlgorithm::Adler32ByteArrayChecksumAlgorithm()
     : AbstractByteArrayChecksumAlgorithm(

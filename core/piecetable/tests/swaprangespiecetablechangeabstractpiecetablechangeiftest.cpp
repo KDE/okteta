@@ -31,9 +31,9 @@
 
 namespace KPieceTable {
 
-static const Address FirstRangeStart = 30;
-static const Address SecondRangeStart = 50;
-static const Address SecondRangeEnd = 66;
+static constexpr Address FirstRangeStart = 30;
+static constexpr Address SecondRangeStart = 50;
+static constexpr Address SecondRangeEnd = 66;
 
 AbstractPieceTableChange* SwapRangesPieceTableChangeAbstractPieceTableChangeIfTest::createPieceTableChange()
 {

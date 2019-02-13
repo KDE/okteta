@@ -34,7 +34,7 @@
 #include <QIcon>
 
 namespace Kasten {
-static const int modifiedPixmapWidth = 16;
+static constexpr int modifiedPixmapWidth = 16;
 
 ModifiedBarController::ModifiedBarController(StatusBar* statusBar)
 {

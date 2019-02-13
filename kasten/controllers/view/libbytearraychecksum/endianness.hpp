@@ -32,7 +32,7 @@ enum Endianness
     BigEndian =    1 // Sun, Motorola, ...
 };
 
-static const Endianness ThisMachineEndianness =
+static constexpr Endianness ThisMachineEndianness =
 #if Q_BYTE_ORDER == Q_LITTLE_ENDIAN
     LittleEndian;
 #else

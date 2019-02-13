@@ -26,7 +26,7 @@
 #include <QString>
 
 namespace Okteta {
-static const Byte binaryDigitsFilledLimit = 128;
+static constexpr Byte binaryDigitsFilledLimit = 128;
 
 unsigned int BinaryByteCodec::encodingWidth() const { return 8; }
 Byte BinaryByteCodec::digitsFilledLimit() const { return binaryDigitsFilledLimit; }

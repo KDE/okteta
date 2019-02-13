@@ -29,7 +29,7 @@
 
 namespace Kasten {
 
-static const int StatisticBlockSize = 100000;
+static constexpr int StatisticBlockSize = 100000;
 
 int CreateStatisticJob::exec()
 {

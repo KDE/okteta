@@ -33,7 +33,7 @@
 
 namespace Kasten {
 
-static const char Title[] = "title";
+static constexpr char Title[] = "title";
 
 void ByteArrayDocumentTest::testCreateNew()
 {

@@ -32,8 +32,8 @@
 
 namespace KPieceTable {
 
-static const Size BaseSize = 100;
-static const Address ChangeStorageOffset = 23;
+static constexpr Size BaseSize = 100;
+static constexpr Address ChangeStorageOffset = 23;
 
 //---------------------------------------------------------------- Tests -----
 
