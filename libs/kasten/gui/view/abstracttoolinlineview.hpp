@@ -26,7 +26,7 @@
 // lib
 #include <kasten/kastengui_export.hpp>
 // Qt
-#include <QScopedPointer>
+#include <QObject>
 
 class QWidget;
 class QString;
@@ -36,8 +36,10 @@ namespace Kasten {
 class AbstractTool;
 
 // TODO: is there a common base for view and document?
-class KASTENGUI_EXPORT AbstractToolInlineView
+class KASTENGUI_EXPORT AbstractToolInlineView : public QObject
 {
+    Q_OBJECT
+
 protected:
     AbstractToolInlineView();
 
