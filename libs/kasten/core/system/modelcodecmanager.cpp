@@ -29,7 +29,6 @@
 #include "abstractmodeldatagenerator.hpp"
 #include "abstractoverwritedialog.hpp"
 #include "jobmanager.hpp"
-#include "documentmanager.hpp"
 #include "abstractexportjob.hpp"
 // KF5
 #include <KIO/StatJob>
@@ -41,8 +40,7 @@
 
 namespace Kasten {
 
-ModelCodecManager::ModelCodecManager(DocumentManager* manager)
-    : mManager(manager)
+ModelCodecManager::ModelCodecManager()
 {
 }
 

@@ -41,7 +41,7 @@ static int lastDocumentId = 0;
 DocumentManager::DocumentManager()
     : mCreateManager(new DocumentCreateManager(this))
     , mSyncManager(new DocumentSyncManager(this))
-    , mCodecManager(new ModelCodecManager(this))
+    , mCodecManager(new ModelCodecManager())
 {
 }
 

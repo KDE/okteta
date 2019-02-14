@@ -39,7 +39,6 @@ class AbstractModelStreamEncoder;
 class AbstractModelStreamDecoder;
 class AbstractModelDataGenerator;
 class AbstractModelExporter;
-class DocumentManager;
 class AbstractOverwriteDialog;
 
 class KASTENCORE_EXPORT ModelCodecManager : public QObject
@@ -47,7 +46,7 @@ class KASTENCORE_EXPORT ModelCodecManager : public QObject
     Q_OBJECT
 
 public:
-    explicit ModelCodecManager(DocumentManager* manager);
+    explicit ModelCodecManager();
     ~ModelCodecManager() override;
 
 public:
@@ -72,8 +71,6 @@ public:
     void setOverwriteDialog(AbstractOverwriteDialog* overwriteDialog);
 
 private:
-    // unless there is a singleton
-    DocumentManager* mManager;
     // used for dialogs, TODO: create (or use?) global instance for this
     AbstractOverwriteDialog* mOverwriteDialog = nullptr;
 
