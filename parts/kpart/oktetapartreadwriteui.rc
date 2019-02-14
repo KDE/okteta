@@ -62,8 +62,6 @@
   <Action name="edit_redo" group="edit_operations" />
   <Separator/>
   <Action name="edit_find" group="edit_operations" />
-  <Action name="edit_find_next" group="edit_operations" />
-  <Action name="edit_find_last" group="edit_operations" />
 </ToolBar>
 
 </gui>
