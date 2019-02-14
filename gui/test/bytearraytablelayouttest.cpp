@@ -49,12 +49,6 @@ static constexpr Coord FinalCoord(FinalLinePosition, FinalLine);
 
 static constexpr LineSize NoOfLinesPerPage = 5;
 
-static constexpr LinePosition Pos1 = 15;
-static constexpr LinePosition Pos2 = 25;
-static constexpr Line Line1 = 10;
-static constexpr LineSize LineCount = 10;
-static constexpr Line Line2 = Line1 + LineCount - 1;
-
 
 void ByteArrayTableLayoutTest::testConstructor()
 {
