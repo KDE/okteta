@@ -49,9 +49,9 @@
 // #include <Kasten/ReadOnlyBarController>
 // #include <Kasten/SynchronizeController>
 #include <Kasten/ClipboardControllerFactory>
-// #include <Kasten/InsertControllerFactory>
-// #include <Kasten/CopyAsControllerFactory>
-// #include <Kasten/ExportControllerFactory>
+#include <Kasten/InsertControllerFactory>
+#include <Kasten/CopyAsControllerFactory>
+#include <Kasten/ExportControllerFactory>
 #include <Kasten/VersionControllerFactory>
 #include <Kasten/ZoomControllerFactory>
 // #include <Kasten/ZoomBarControllerFactory>
@@ -76,7 +76,9 @@ static constexpr const char* UIFileName[] =
 OktetaPart::OktetaPart(QObject* parent,
                        const KAboutData& componentData,
                        Modus modus,
-                       Kasten::ByteArrayViewProfileManager* viewProfileManager)
+                       Kasten::ByteArrayViewProfileManager* viewProfileManager,
+                       Kasten::ModelCodecManager* modelCodecManager,
+                       Kasten::ModelCodecViewManager* modelCodecViewManager)
     : KParts::ReadWritePart(parent)
     , mModus(modus)
     , mViewProfileManager(viewProfileManager)
@@ -98,15 +100,16 @@ OktetaPart::OktetaPart(QObject* parent,
         addController(Kasten::ReadOnlyControllerFactory());
     }
     // TODO: save_as
-//     addController(ExportControllerFactory(mProgram->viewManager(),mProgram->documentManager()));
+    addController(Kasten::ExportControllerFactory(modelCodecViewManager, modelCodecManager));
     addController(Kasten::ZoomControllerFactory());
     addController(Kasten::SelectControllerFactory());
     if (modus != Modus::BrowserView) {
         addController(Kasten::ClipboardControllerFactory());
     }
-//     if( modus != BrowserViewModus )
-//         addController(Kasten::InsertControllerFactory(mProgram->viewManager(),mProgram->documentManager()));
-//     addController(Kasten::CopyAsControllerFactory(mProgram->viewManager(),mProgram->documentManager()));
+    if (modus == Modus::ReadWrite) {
+        addController(Kasten::InsertControllerFactory(modelCodecViewManager, modelCodecManager));
+    }
+    addController(Kasten::CopyAsControllerFactory(modelCodecViewManager, modelCodecManager));
     if (modus == Modus::ReadWrite) {
         addController(Kasten::OverwriteModeControllerFactory());
     }

@@ -34,6 +34,8 @@ namespace Kasten {
 class ByteArrayViewProfileManager;
 class ByteArrayView;
 class ByteArrayDocument;
+class ModelCodecViewManager;
+class ModelCodecManager;
 class AbstractXmlGuiController;
 class AbstractXmlGuiControllerFactory;
 class AbstractDocument;
@@ -58,7 +60,9 @@ public:
     OktetaPart(QObject* parent,
                const KAboutData& componentData,
                Modus modus,
-               Kasten::ByteArrayViewProfileManager* viewProfileManager);
+               Kasten::ByteArrayViewProfileManager* viewProfileManager,
+               Kasten::ModelCodecManager* modelCodecManager,
+               Kasten::ModelCodecViewManager* modelCodecViewManager);
 
     ~OktetaPart() override;
 

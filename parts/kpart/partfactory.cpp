@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta KPart module, made within the KDE community.
 
-    Copyright 2003,2007,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2007,2009,2019 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -30,6 +30,9 @@
 #include <Kasten/Okteta/ByteArrayDataGeneratorConfigEditorFactoryFactory>
 #include <Kasten/Okteta/ByteArrayStreamEncoderFactory>
 #include <Kasten/Okteta/ByteArrayDataGeneratorFactory>
+// Kasten
+#include <Kasten/ModelCodecViewManager>
+#include <Kasten/ModelCodecManager>
 // KF5
 #include <KLocalizedString>
 
@@ -41,34 +44,37 @@ OktetaPartFactory::OktetaPartFactory()
                  KAboutLicense::GPL_V2,
                  i18n("2003-2014 Friedrich W. H. Kossebau"))
 {
-// TODO: also load encoder and other plugins here
     mAboutData.addAuthor(i18n("Friedrich W. H. Kossebau"), i18n("Author"), QStringLiteral("kossebau@kde.org"));
 
     mByteArrayViewProfileManager = new Kasten::ByteArrayViewProfileManager();
 
-//     const QVector<AbstractModelStreamEncoder*> encoderList =
-//         ByteArrayStreamEncoderFactory::createStreamEncoders();
+    mModelCodecViewManager = new Kasten::ModelCodecViewManager();
+    mModelCodecManager = new Kasten::ModelCodecManager();
 
-//     const QVector<AbstractModelDataGenerator*> generatorList =
-//         ByteArrayDataGeneratorFactory::createDataGenerators();
+    const QVector<Kasten::AbstractModelStreamEncoder*> encoderList =
+        Kasten::ByteArrayStreamEncoderFactory::createStreamEncoders();
 
-//     const QVector<AbstractModelStreamEncoderConfigEditorFactory*> encoderConfigEditorFactoryList =
-//         ByteArrayStreamEncoderConfigEditorFactoryFactory::createFactorys();
+    const QVector<Kasten::AbstractModelDataGenerator*> generatorList =
+        Kasten::ByteArrayDataGeneratorFactory::createDataGenerators();
 
-//     const QVector<AbstractModelDataGeneratorConfigEditorFactory*> generatorConfigEditorFactoryList =
-//         ByteArrayDataGeneratorConfigEditorFactoryFactory::createFactorys();
+    const QVector<Kasten::AbstractModelStreamEncoderConfigEditorFactory*> encoderConfigEditorFactoryList =
+        Kasten::ByteArrayStreamEncoderConfigEditorFactoryFactory::createFactorys();
 
-//     mDocumentManager->codecManager()->setEncoders( encoderList );
-//     mDocumentManager->codecManager()->setGenerators( generatorList );
-//     mDocumentManager->syncManager()->setDocumentSynchronizerFactory( new ByteArrayRawFileSynchronizerFactory() );
+    const QVector<Kasten::AbstractModelDataGeneratorConfigEditorFactory*> generatorConfigEditorFactoryList =
+        Kasten::ByteArrayDataGeneratorConfigEditorFactoryFactory::createFactorys();
 
-//     mViewManager->codecViewManager()->setEncoderConfigEditorFactories( encoderConfigEditorFactoryList );
-//     mViewManager->codecViewManager()->setGeneratorConfigEditorFactories( generatorConfigEditorFactoryList );
+    mModelCodecManager->setEncoders( encoderList );
+    mModelCodecManager->setGenerators( generatorList );
+
+    mModelCodecViewManager->setEncoderConfigEditorFactories(encoderConfigEditorFactoryList);
+    mModelCodecViewManager->setGeneratorConfigEditorFactories(generatorConfigEditorFactoryList);
 }
 
 OktetaPartFactory::~OktetaPartFactory()
 {
     delete mByteArrayViewProfileManager;
+    delete mModelCodecViewManager;
+    delete mModelCodecManager;
 }
 
 QObject* OktetaPartFactory::create(const char* iface,
@@ -87,7 +93,7 @@ QObject* OktetaPartFactory::create(const char* iface,
         (className == "Browser/View") ?         OktetaPart::Modus::BrowserView :
         /* else */                              OktetaPart::Modus::ReadWrite;
 
-    OktetaPart* part = new OktetaPart(parent, mAboutData, modus, mByteArrayViewProfileManager);
+    OktetaPart* part = new OktetaPart(parent, mAboutData, modus, mByteArrayViewProfileManager, mModelCodecManager, mModelCodecViewManager);
 
     return part;
 }

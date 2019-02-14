@@ -29,6 +29,8 @@
 
 namespace Kasten {
 class ByteArrayViewProfileManager;
+class ModelCodecViewManager;
+class ModelCodecManager;
 }
 
 class OktetaPartFactory : public KPluginFactory
@@ -56,6 +58,8 @@ public: // KPluginFactory API
 private:
     KAboutData mAboutData;
     Kasten::ByteArrayViewProfileManager* mByteArrayViewProfileManager;
+    Kasten::ModelCodecViewManager* mModelCodecViewManager;
+    Kasten::ModelCodecManager* mModelCodecManager;
 };
 
 #endif
