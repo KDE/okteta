@@ -127,9 +127,9 @@ static inline void addRow(const char* tag, TopLevelDataInformation* structure, O
 
 static Okteta::ArrayChangeMetricsList oneReplacement(int start, int length, int replacementSize)
 {
-    Okteta::ArrayChangeMetricsList ret;
-    ret << Okteta::ArrayChangeMetrics::asReplacement(start, length, replacementSize);
-    return ret;
+    return Okteta::ArrayChangeMetricsList {
+        Okteta::ArrayChangeMetrics::asReplacement(start, length, replacementSize)
+    };
 }
 
 void LockToOffsetTest::testReadingNecessary_data()
