@@ -2,7 +2,7 @@
 <gui name="oktetapartreadwrite" version="2" translationDomain="oktetapart">
 
 <MenuBar>
-  <Menu name="file">
+  <Menu name="file"><text>&amp;File</text>
     <Action name="file_save" group="save_merge" /> <!-- TODO: why isn't this offered by the host? -->
     <Action name="file_save_as" group="save_merge" />
     <Action name="export" group="save_merge" />
@@ -13,7 +13,7 @@
       <Action name="isoverwriteonly" />
     </Menu>
   </Menu>
-  <Menu name="edit">
+  <Menu name="edit"><text>&amp;Edit</text>
     <Action name="edit_undo" group="edit_undo_merge" />
     <Action name="edit_redo" group="edit_undo_merge" />
     <Separator group="edit_undo_merge" />
@@ -36,7 +36,7 @@
     <Separator group="edit_find_merge" />
     <Action name="goto_offset" group="edit_find_merge" />
   </Menu>
-  <Menu name="view">
+  <Menu name="view"><text>&amp;View</text>
     <Action name="view_zoom_in" group="view_operations" />
     <Action name="view_zoom_out" group="view_operations" />
     <Separator group="view_operations" />

@@ -2,12 +2,12 @@
 <gui name="oktetapartreadonly" version="2" translationDomain="oktetapart">
 
 <MenuBar>
-  <Menu name="file">
+  <Menu name="file"><text>&amp;File</text>
     <Action name="file_save_as" group="save_merge" />
     <Action name="export" group="save_merge" />
     <Action name="file_print" group="print_merge" />
   </Menu>
-  <Menu name="edit">
+  <Menu name="edit"><text>&amp;Edit</text>
     <Action name="edit_copy" group="edit_paste_merge" />
     <Action name="copy_as" group="edit_paste_merge" />
     <Separator group="edit_paste_merge" />
@@ -23,7 +23,7 @@
     <Separator group="edit_find_merge" />
     <Action name="goto_offset" group="edit_find_merge" />
   </Menu>
-  <Menu name="view">
+  <Menu name="view"><text>&amp;View</text>
     <Action name="view_zoom_in" group="view_operations" />
     <Action name="view_zoom_out" group="view_operations" />
     <Separator group="view_operations" />

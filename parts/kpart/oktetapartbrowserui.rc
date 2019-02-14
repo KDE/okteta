@@ -2,10 +2,10 @@
 <gui name="oktetapartbrowser" version="2" translationDomain="oktetapart">
 
 <MenuBar>
-  <Menu name="file">
+  <Menu name="file"><text>&amp;File</text>
     <Action name="export" /><!--TODO: non-standard, needs group to add to-->
   </Menu>
-  <Menu name="edit">
+  <Menu name="edit"><text>&amp;Edit</text>
     <Action name="copy_as" /><!--TODO: non-standard, needs group to add to-->
     <Separator/>
     <Action name="edit_select_all"/>
@@ -18,7 +18,7 @@
     <Separator/>
     <Action name="goto_offset" /><!--TODO: non-standard, needs group to add to-->
   </Menu>
-  <Menu name="view">
+  <Menu name="view"><text>&amp;View</text>
     <Separator/>
     <Action name="view_zoom_in"/>
     <Action name="view_zoom_out"/>
