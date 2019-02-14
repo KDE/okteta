@@ -42,6 +42,7 @@ Name[uk]=Шістнадцятковий переглядач Okteta
 Name[x-test]=xxOkteta Hex Viewerxx
 Name[zh_CN]=Okteta 十六进制查看器
 Name[zh_TW]=Okteta 十六進位碼檢視器
-MimeType=application/octet-stream;
+# FIXME: kservice system moves this handler by default surprisingly before some others more-format-specific
+# MimeType=application/octet-stream;
 X-KDE-ServiceTypes=KParts/ReadOnlyPart,Browser/View,KParts/ReadWritePart
 X-KDE-Library=kf5/parts/oktetapart
