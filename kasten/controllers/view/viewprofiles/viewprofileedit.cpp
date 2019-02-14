@@ -39,13 +39,13 @@
 
 namespace Kasten {
 
-static int
+static constexpr int
 listIndexFromByteArrayCodingsFlags(int byteArrayCodingsFlags)
 {
     return byteArrayCodingsFlags - 1;
 }
 
-static int
+static constexpr int
 byteArrayCodingsFlagsFromListIndex(int listIndex)
 {
     return listIndex + 1;

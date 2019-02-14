@@ -35,7 +35,7 @@
 
 namespace Kasten {
 
-static inline
+static inline constexpr
 int addressSize(SRecStreamEncoderSettings::AddressSizeId id)
 {
     return 4 - static_cast<int>(id);

@@ -48,7 +48,7 @@ private:
  *  00010010 00110100 01010110 01111000
  *  10011010 10111100 11011110 11110000
  */
-static Okteta::Byte testData[8] = {
+static constexpr Okteta::Byte testData[8] = {
     0x12, 0x34, 0x56, 0x78, 0x9a, 0xbc, 0xde, 0xf0
 };
 

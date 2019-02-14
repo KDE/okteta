@@ -33,12 +33,12 @@ namespace Okteta {
 
 // static const char QTextCodecWhiteSpace = 63;
 
-static struct EncodingData
+static constexpr struct EncodingData
 {
     CharCoding encodingId;
     const char* name;
 }
-const encodingDataList[] =
+encodingDataList[] =
 {
     { ISO8859_1Encoding, "ISO-8859-1" },
     { ISO8859_2Encoding, "ISO-8859-2" },

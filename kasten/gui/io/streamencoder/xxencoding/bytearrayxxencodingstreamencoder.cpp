@@ -41,18 +41,17 @@ static constexpr char xxencodeMap[64] = {
     'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
     's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
 };
+static constexpr const char* paddingData[2] = {"++", "+"};
 
 static constexpr int defaultxxInputLineLength = 45;
 static constexpr int xxInputLineLength = defaultxxInputLineLength;
 static constexpr int xxInputGroupLength = 3;
 static constexpr int maxXxInputGroupsPerLine = xxInputLineLength / xxInputGroupLength;
 
-static inline char xxmapByte(char byte) { return xxencodeMap[(int)byte]; }
+static inline constexpr char xxmapByte(char byte) { return xxencodeMap[static_cast<int>(byte)]; }
 
-static inline const char* xxpadding(ByteArrayXxencodingStreamEncoder::InputByteIndex index)
+static inline constexpr const char* xxpadding(ByteArrayXxencodingStreamEncoder::InputByteIndex index)
 {
-    const char* const paddingData[2] = {"++", "+"};
-
     return paddingData[static_cast<int>(index) - 1];
 }
 

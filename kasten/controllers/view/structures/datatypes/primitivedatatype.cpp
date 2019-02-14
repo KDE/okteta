@@ -25,7 +25,7 @@
 #include <KLocalizedString>
 #include <QDebug>
 
-static const char* const longTypeNames[static_cast<int>(PrimitiveDataType::END) + 1] = {
+static constexpr const char* longTypeNames[static_cast<int>(PrimitiveDataType::END) + 1] = {
     I18N_NOOP2("data type", "bool (1 byte)"),
     I18N_NOOP2("data type", "signed byte"),
     I18N_NOOP2("data type", "unsigned byte"),
@@ -44,7 +44,7 @@ static const char* const longTypeNames[static_cast<int>(PrimitiveDataType::END) 
     I18N_NOOP2("data type", "bitfield"),
 };
 
-static const char* const typeNames[static_cast<int>(PrimitiveDataType::END) + 1] = {
+static constexpr const char* typeNames[static_cast<int>(PrimitiveDataType::END) + 1] = {
     "bool8",
     "int8",
     "uint8",
