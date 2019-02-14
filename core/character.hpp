@@ -33,26 +33,29 @@ namespace Okteta {
 class OKTETACORE_EXPORT Character : public QChar
 {
 public:
-    Character(QChar qchar);   // krazy:exclude=explicit
-    Character(QChar qchar, bool isUndefined);
+    constexpr Character(QChar qchar);   // krazy:exclude=explicit
+    constexpr Character(QChar qchar, bool isUndefined);
 
 public:
-    bool isUndefined() const;
+    constexpr bool isUndefined() const;
 
 private:
     // the byte is not defined
     bool mIsUndefined : 1;
 };
 
-inline Character::Character(QChar qchar)
+
+inline constexpr Character::Character(QChar qchar)
     : QChar(qchar)
     , mIsUndefined(false)
 {}
-inline Character::Character(QChar qchar, bool isUndefined)
+
+inline constexpr Character::Character(QChar qchar, bool isUndefined)
     : QChar(qchar)
     , mIsUndefined(isUndefined)
 {}
-inline bool Character::isUndefined() const { return mIsUndefined; }
+
+inline constexpr bool Character::isUndefined() const { return mIsUndefined; }
 
 }
 
