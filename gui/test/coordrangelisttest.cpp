@@ -39,10 +39,10 @@ static constexpr LineSize LineDistance = 5;
 static constexpr Line Line3 = Line2 + LineDistance;
 static constexpr Line Line4 = Line3 + LineCount - 1;
 
-static Coord Start1(Pos1, Line1);
-static Coord End1(Pos2, Line2);
-static Coord Start2(Pos1, Line3);
-static Coord End2(Pos2, Line4);
+static constexpr Coord Start1(Pos1, Line1);
+static constexpr Coord End1(Pos2, Line2);
+static constexpr Coord Start2(Pos1, Line3);
+static constexpr Coord End2(Pos2, Line4);
 
 void CoordRangeListTest::testSimpleConstructor()
 {

@@ -46,19 +46,17 @@ static constexpr Address LastIndex = Length - 1 + ByteArrayOffset;
 
 static constexpr Line StartLine = RelativeStartOffset / NoOfBytesPerLine;
 static constexpr LinePosition StartLinePosition = RelativeStartOffset % NoOfBytesPerLine;
-static Coord StartCoord(StartLinePosition, StartLine);
+static constexpr Coord StartCoord(StartLinePosition, StartLine);
 
 static constexpr Line FinalLine =  RelativeFinalOffset / NoOfBytesPerLine;
 static constexpr LinePosition FinalLinePosition = RelativeFinalOffset % NoOfBytesPerLine;
-static Coord FinalCoord(FinalLinePosition, FinalLine);
 
 static constexpr LinePosition Pos1 = 15;
 static constexpr LinePosition Pos2 = 25;
 static constexpr Line Line1 = 10;
 static constexpr LineSize LineCount = 10;
 static constexpr Line Line2 = Line1 + LineCount - 1;
-static Coord Start(Pos1, Line1);
-static Coord End(Pos2, Line2);
+
 
 void ByteArrayTableCursorTest::testConstructor()
 {

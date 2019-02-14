@@ -35,8 +35,8 @@ static constexpr LinePosition Pos2 = 25;
 static constexpr Line Line1 = 10;
 static constexpr LineSize LineCount = 10;
 static constexpr Line Line2 = Line1 + LineCount - 1;
-static Coord Start(Pos1, Line1);
-static Coord End(Pos2, Line2);
+static constexpr Coord Start(Pos1, Line1);
+static constexpr Coord End(Pos2, Line2);
 
 static constexpr Size BufferWidth = Pos2 + 5;
 
