@@ -25,6 +25,7 @@
 
 // Qt
 #include <QWidget>
+#include <QPointer>
 
 namespace Kasten {
 
@@ -55,6 +56,7 @@ Q_SIGNALS:
     void done();
 
 private:
+    QPointer<QWidget> mViewWidget;
     AbstractToolInlineView* mView;
 };
 
