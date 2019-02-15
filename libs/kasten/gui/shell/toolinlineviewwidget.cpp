@@ -22,8 +22,6 @@
 
 #include "toolinlineviewwidget.hpp"
 
-// lib
-#include <abstracttoolinlineview.hpp>
 // Qt
 #include <QIcon>
 #include <QHBoxLayout>
@@ -32,13 +30,12 @@
 
 namespace Kasten {
 
-ToolInlineViewWidget::ToolInlineViewWidget(AbstractToolInlineView* view, QWidget* parent)
+ToolInlineViewWidget::ToolInlineViewWidget(QWidget* viewWidget, QWidget* parent)
     : QWidget(parent)
-    , mViewWidget(view->widget())
-    , mView(view)
+    , mViewWidget(viewWidget)
 {
     QHBoxLayout* layout = new QHBoxLayout(this);
-    layout->addWidget(view->widget(), 10);
+    layout->addWidget(mViewWidget, 10);
 
     // TODO: use style buttons instead, like QDockWidget
     QToolButton* closeButton = new QToolButton(this);
@@ -56,7 +53,5 @@ ToolInlineViewWidget::~ToolInlineViewWidget()
         mViewWidget->setParent(nullptr);
     }
 }
-
-AbstractToolInlineView* ToolInlineViewWidget::view() const { return mView; }
 
 }

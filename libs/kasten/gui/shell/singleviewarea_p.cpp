@@ -55,34 +55,16 @@ void SingleViewAreaPrivate::init()
 
 void SingleViewAreaPrivate::setCurrentToolInlineView(AbstractToolInlineView* view)
 {
-    ToolInlineViewWidget* currentViewWidget =
-        qobject_cast<ToolInlineViewWidget*>(mViewAreaBox->bottomWidget());
-    AbstractToolInlineView* currentToolInlineView =
-        currentViewWidget ? currentViewWidget->view() : nullptr;
-
-    if (currentToolInlineView != view) {
-        ToolInlineViewWidget* toolInlineViewWidget =
-            view ? new ToolInlineViewWidget(view /*->widget()*/) : nullptr;
-        mViewAreaBox->setBottomWidget(toolInlineViewWidget);
+    if (mCurrentToolInlineView != view) {
+        mCurrentToolInlineView = view;
+        QWidget* toolInlineViewWidget = mCurrentToolInlineView ? mCurrentToolInlineView->widget() : nullptr;
+        mViewAreaBox->setBottomToolWidget(toolInlineViewWidget);
     }
 
-    if (view) {
-        view->widget()->setFocus();
-    } else if (mCurrentView) {
-        mCurrentView->setFocus();
+    if (mCurrentToolInlineView) {
+        mViewAreaBox->showBottomToolWidget();
     }
 }
-
-AbstractToolInlineView* SingleViewAreaPrivate::currentToolInlineView() const
-{
-    ToolInlineViewWidget* currentViewWidget =
-        qobject_cast<ToolInlineViewWidget*>(mViewAreaBox->bottomWidget());
-    AbstractToolInlineView* currentToolInlineView =
-        currentViewWidget ? currentViewWidget->view() : nullptr;
-
-    return currentToolInlineView;
-}
-
 
 void SingleViewAreaPrivate::setView(AbstractView* view)
 {

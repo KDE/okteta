@@ -29,35 +29,19 @@
 
 namespace Kasten {
 
-class AbstractToolInlineView;
-
 class ToolInlineViewWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    enum Area
-    {
-        TopArea,
-        BottomArea
-    };
-
-public:
-    explicit ToolInlineViewWidget(AbstractToolInlineView* view, QWidget* parent = nullptr);
+    explicit ToolInlineViewWidget(QWidget* viewWidget, QWidget* parent = nullptr);
     ~ToolInlineViewWidget() override;
-
-public:
-    AbstractToolInlineView* view() const;
-
-public:
-//     void add( ToolInlineViewWidget::Area area );
 
 Q_SIGNALS:
     void done();
 
 private:
     QPointer<QWidget> mViewWidget;
-    AbstractToolInlineView* mView;
 };
 
 }

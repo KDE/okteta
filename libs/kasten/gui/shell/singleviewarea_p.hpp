@@ -62,6 +62,7 @@ private:
 private:
     ViewAreaBox* mViewAreaBox = nullptr;
     AbstractView* mCurrentView = nullptr;
+    AbstractToolInlineView* mCurrentToolInlineView = nullptr;
 };
 
 inline QWidget* SingleViewAreaPrivate::widget()  const { return mViewAreaBox; }
@@ -71,6 +72,11 @@ inline bool SingleViewAreaPrivate::hasFocus()    const
 }
 
 inline void SingleViewAreaPrivate::setFocus()    { mCurrentView->setFocus(); }
+
+inline AbstractToolInlineView* SingleViewAreaPrivate::currentToolInlineView() const
+{
+    return mCurrentToolInlineView;
+}
 
 }
 

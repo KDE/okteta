@@ -22,6 +22,8 @@
 
 #include "viewareabox.hpp"
 
+// lib
+#include "toolinlineviewwidget.hpp"
 // Qt
 #include <QVBoxLayout>
 #include <QShortcut>
@@ -49,14 +51,13 @@ ViewAreaBox::ViewAreaBox(QWidget* centralWidget, QWidget* parent)
 
 ViewAreaBox::~ViewAreaBox()
 {
-    delete mBottomWidget;
     if (mCentralWidget) {
         mCentralWidget->setParent(nullptr);
     }
 }
 
 QWidget* ViewAreaBox::centralWidget() const { return mCentralWidget; }
-QWidget* ViewAreaBox::bottomWidget()  const { return mBottomWidget; }
+QWidget* ViewAreaBox::bottomToolWidget()  const { return mBottomToolWidget; }
 
 void ViewAreaBox::setCentralWidget(QWidget* centralWidget)
 {
@@ -88,33 +89,53 @@ void ViewAreaBox::setCentralWidget(QWidget* centralWidget)
     }
 }
 
-void ViewAreaBox::setBottomWidget(QWidget* bottomWidget)
+void ViewAreaBox::setBottomToolWidget(QWidget* bottomToolWidget)
 {
-    QVBoxLayout* layout = static_cast<QVBoxLayout*>(this->layout());
-
-    if (mBottomWidget) {
-        mBottomWidget->disconnect(this);
-        layout->removeWidget(mBottomWidget);
-        delete mBottomWidget;
+    if (mBottomToolWidget == bottomToolWidget) {
+        return;
     }
 
-    mBottomWidget = bottomWidget;
-    if (bottomWidget) {
-        setFocusProxy(bottomWidget);
-        connect(bottomWidget, SIGNAL(done()), SLOT(onDone()));
-        layout->addWidget(bottomWidget);
-        bottomWidget->show();
-        bottomWidget->setFocus();
-    } else {
+    QVBoxLayout* layout = static_cast<QVBoxLayout*>(this->layout());
+
+    if (mToolInlineViewWidget) {
+        layout->removeWidget(mToolInlineViewWidget);
+        delete mToolInlineViewWidget;
+        mToolInlineViewWidget = nullptr;
         setFocusProxy(mCentralWidget);
     }
 
-    mEscapeShortcut->setEnabled((bottomWidget != nullptr));
+    mBottomToolWidget = bottomToolWidget;
+
+    if (mBottomToolWidget) {
+        mToolInlineViewWidget = new ToolInlineViewWidget(mBottomToolWidget);
+
+        connect(mToolInlineViewWidget, &ToolInlineViewWidget::done, this, &ViewAreaBox::onDone);
+        layout->addWidget(mToolInlineViewWidget);
+    }
+}
+
+void ViewAreaBox::showBottomToolWidget()
+{
+    if (!mToolInlineViewWidget) {
+        return;
+    }
+
+    setFocusProxy(mToolInlineViewWidget);
+    mToolInlineViewWidget->show();
+    mBottomToolWidget->setFocus();
+
+    mEscapeShortcut->setEnabled(true);
 }
 
 void ViewAreaBox::onDone()
 {
-    setBottomWidget(nullptr);
+    if (!mToolInlineViewWidget) {
+        return;
+    }
+
+    setFocusProxy(mCentralWidget);
+    mToolInlineViewWidget->hide();
+    mEscapeShortcut->setEnabled(false);
 }
 
 }

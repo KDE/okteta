@@ -82,6 +82,7 @@ private:
     TabWidget* mTabWidget;
 
     AbstractView* mCurrentView = nullptr;
+    AbstractToolInlineView* mCurrentToolInlineView = nullptr;
 };
 
 inline QWidget* TabbedViewsPrivate::widget() const { return mViewAreaBox; }
@@ -112,6 +113,12 @@ inline void TabbedViewsPrivate::setFocus()
     // TODO: would ensure the bottomwidget gets focus if there is one. Just, it didn't work at all
 //     mViewAreaBox->setFocus();
 }
+
+inline AbstractToolInlineView* TabbedViewsPrivate::currentToolInlineView() const
+{
+    return mCurrentToolInlineView;
+}
+
 
 }
 

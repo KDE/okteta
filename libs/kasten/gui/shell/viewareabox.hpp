@@ -30,6 +30,8 @@ class QShortcut;
 
 namespace Kasten {
 
+class ToolInlineViewWidget;
+
 class ViewAreaBox : public QWidget
 {
     Q_OBJECT
@@ -48,13 +50,15 @@ public:
 
 public:
     QWidget* centralWidget() const;
-    QWidget* bottomWidget() const;
+    QWidget* bottomToolWidget() const;
 
 public:
     /// does not take ownership of @p centralWidget, can be 0.
     void setCentralWidget(QWidget* centralWidget);
-    /// takes ownership of @p bottomWidget, deletes current bottom widget. Can be 0.
-    void setBottomWidget(QWidget* bottomWidget);
+    /// does not take ownership of @p bottomWidget. Can be nullptr.
+    void setBottomToolWidget(QWidget* bottomWidget);
+
+    void showBottomToolWidget();
 
 private Q_SLOTS:
     void onDone();
@@ -62,7 +66,8 @@ private Q_SLOTS:
 private:
     QWidget* mCentralWidget;
 
-    QWidget* mBottomWidget = nullptr;
+    QWidget* mBottomToolWidget = nullptr;
+    ToolInlineViewWidget* mToolInlineViewWidget = nullptr;
     QShortcut* mEscapeShortcut;
 };
 

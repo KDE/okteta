@@ -158,36 +158,16 @@ void TabbedViewsPrivate::removeViews(const QVector<AbstractView*>& views)
 
 void TabbedViewsPrivate::setCurrentToolInlineView(AbstractToolInlineView* view)
 {
-    ToolInlineViewWidget* currentViewWidget =
-        qobject_cast<ToolInlineViewWidget*>(mViewAreaBox->bottomWidget());
-    AbstractToolInlineView* currentToolInlineView =
-        currentViewWidget ? currentViewWidget->view() : nullptr;
-
-    if (currentToolInlineView != view) {
-        ToolInlineViewWidget* toolInlineViewWidget =
-            view ? new ToolInlineViewWidget(view /*->widget()*/) : nullptr;
-        mViewAreaBox->setBottomWidget(toolInlineViewWidget);
+    if (mCurrentToolInlineView != view) {
+        mCurrentToolInlineView = view;
+        QWidget* toolInlineViewWidget = mCurrentToolInlineView ? mCurrentToolInlineView->widget() : nullptr;
+        mViewAreaBox->setBottomToolWidget(toolInlineViewWidget);
     }
 
-    if (view) {
-        view->widget()->setFocus();
+    if (mCurrentToolInlineView) {
+        mViewAreaBox->showBottomToolWidget();
     }
-//     else
-//         if( mCurrentView )
-//             mCurrentView->setFocus();
 }
-
-
-AbstractToolInlineView* TabbedViewsPrivate::currentToolInlineView() const
-{
-    ToolInlineViewWidget* currentViewWidget =
-        qobject_cast<ToolInlineViewWidget*>(mViewAreaBox->bottomWidget());
-    AbstractToolInlineView* currentToolInlineView =
-        currentViewWidget ? currentViewWidget->view() : nullptr;
-
-    return currentToolInlineView;
-}
-
 
 void TabbedViewsPrivate::onCurrentChanged(int index)
 {
@@ -200,7 +180,7 @@ void TabbedViewsPrivate::onCurrentChanged(int index)
         return;
     }
 
-    mViewAreaBox->setBottomWidget(nullptr);
+    setCurrentToolInlineView(nullptr);
 
     if (mCurrentView) {
         mCurrentView->disconnect(q);
