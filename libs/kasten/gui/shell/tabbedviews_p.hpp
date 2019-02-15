@@ -59,6 +59,7 @@ public: // AbstractGroupedViews API
 
 public: // If::ToolInlineViewable API
     void setCurrentToolInlineView(AbstractToolInlineView* view);
+    AbstractToolInlineView* currentToolInlineView() const;
 
 public:
     int indexOf(AbstractView* view) const;

@@ -119,6 +119,13 @@ void MultiViewAreas::setCurrentToolInlineView(AbstractToolInlineView* view)
     d->setCurrentToolInlineView(view);
 }
 
+AbstractToolInlineView* MultiViewAreas::currentToolInlineView() const
+{
+    Q_D(const MultiViewAreas);
+
+    return d->currentToolInlineView();
+}
+
 void MultiViewAreas::setViewFocus(AbstractView* view)
 {
     Q_D(MultiViewAreas);

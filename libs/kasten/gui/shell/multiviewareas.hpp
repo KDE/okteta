@@ -65,6 +65,7 @@ public: // AbstractGroupedViews API
 
 public: // If::ToolInlineViewable API
     void setCurrentToolInlineView(AbstractToolInlineView* view) override;
+    AbstractToolInlineView* currentToolInlineView() const override;
 
 public: // If::ViewAreaSplitable API
     AbstractViewArea* splitViewArea(AbstractViewArea* viewArea, Qt::Orientation orientation) override;

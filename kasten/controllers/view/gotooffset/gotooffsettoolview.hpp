@@ -33,6 +33,8 @@ class GotoOffsetTool;
 
 class GotoOffsetToolView : public AbstractToolInlineView
 {
+    Q_OBJECT
+
 public:
     explicit GotoOffsetToolView(GotoOffsetTool* tool);
     ~GotoOffsetToolView() override;

@@ -60,6 +60,10 @@ SelectRangeController::SelectRangeController(If::ToolInlineViewable* toolInlineV
 
 SelectRangeController::~SelectRangeController()
 {
+    if (mToolInlineViewable->currentToolInlineView() == mView) {
+        mToolInlineViewable->setCurrentToolInlineView(nullptr);
+    }
+
     delete mView;
     delete mTool;
 }

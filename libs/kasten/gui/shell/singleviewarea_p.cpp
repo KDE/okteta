@@ -73,6 +73,17 @@ void SingleViewAreaPrivate::setCurrentToolInlineView(AbstractToolInlineView* vie
     }
 }
 
+AbstractToolInlineView* SingleViewAreaPrivate::currentToolInlineView() const
+{
+    ToolInlineViewWidget* currentViewWidget =
+        qobject_cast<ToolInlineViewWidget*>(mViewAreaBox->bottomWidget());
+    AbstractToolInlineView* currentToolInlineView =
+        currentViewWidget ? currentViewWidget->view() : nullptr;
+
+    return currentToolInlineView;
+}
+
+
 void SingleViewAreaPrivate::setView(AbstractView* view)
 {
     mCurrentView = view;

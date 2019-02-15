@@ -54,6 +54,7 @@ public: // AbstractViewArea API
 
 public: // If::ToolInlineViewable API
     void setCurrentToolInlineView(AbstractToolInlineView* view) override;
+    AbstractToolInlineView* currentToolInlineView() const override;
 
 public:
     void setView(AbstractView* view);

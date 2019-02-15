@@ -51,6 +51,7 @@ public: // AbstractViewArea API
 
 public: // If::ToolInlineViewable API
     void setCurrentToolInlineView(AbstractToolInlineView* view);
+    AbstractToolInlineView* currentToolInlineView() const;
 
 public:
     void setView(AbstractView* view);

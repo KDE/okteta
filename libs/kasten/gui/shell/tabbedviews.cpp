@@ -106,6 +106,13 @@ void TabbedViews::setCurrentToolInlineView(AbstractToolInlineView* view)
     d->setCurrentToolInlineView(view);
 }
 
+AbstractToolInlineView* TabbedViews::currentToolInlineView() const
+{
+    Q_D(const TabbedViews);
+
+    return d->currentToolInlineView();
+}
+
 void TabbedViews::setViewFocus(AbstractView* view)
 {
     Q_D(TabbedViews);

@@ -63,6 +63,13 @@ void SingleViewArea::setCurrentToolInlineView(AbstractToolInlineView* view)
     d->setCurrentToolInlineView(view);
 }
 
+AbstractToolInlineView* SingleViewArea::currentToolInlineView() const
+{
+    Q_D(const SingleViewArea);
+
+    return d->currentToolInlineView();
+}
+
 void SingleViewArea::setView(AbstractView* view)
 {
     Q_D(SingleViewArea);

@@ -59,6 +59,10 @@ GotoOffsetController::GotoOffsetController(If::ToolInlineViewable* toolInlineVie
 
 GotoOffsetController::~GotoOffsetController()
 {
+    if (mToolInlineViewable->currentToolInlineView() == mView) {
+        mToolInlineViewable->setCurrentToolInlineView(nullptr);
+    }
+
     delete mView;
     delete mTool;
 }

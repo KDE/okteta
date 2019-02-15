@@ -63,6 +63,7 @@ public: // AbstractGroupedViews API
 
 public: // If::ToolInlineViewable API
     void setCurrentToolInlineView(AbstractToolInlineView* view);
+    AbstractToolInlineView* currentToolInlineView() const;
 
 public: // If::ViewAreaSplitable API
     AbstractViewArea* splitViewArea(AbstractViewArea* viewArea, Qt::Orientation orientation);
@@ -171,6 +172,11 @@ inline void MultiViewAreasPrivate::setCurrentToolInlineView(AbstractToolInlineVi
     mCurrentInlineToolViewArea = mCurrentViewArea;
 
     mCurrentViewArea->setCurrentToolInlineView(view);
+}
+
+inline AbstractToolInlineView* MultiViewAreasPrivate::currentToolInlineView() const
+{
+    return mCurrentInlineToolViewArea->currentToolInlineView();
 }
 
 inline void MultiViewAreasPrivate::setViewFocus(AbstractView* view)

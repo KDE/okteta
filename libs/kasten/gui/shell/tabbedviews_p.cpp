@@ -177,6 +177,18 @@ void TabbedViewsPrivate::setCurrentToolInlineView(AbstractToolInlineView* view)
 //             mCurrentView->setFocus();
 }
 
+
+AbstractToolInlineView* TabbedViewsPrivate::currentToolInlineView() const
+{
+    ToolInlineViewWidget* currentViewWidget =
+        qobject_cast<ToolInlineViewWidget*>(mViewAreaBox->bottomWidget());
+    AbstractToolInlineView* currentToolInlineView =
+        currentViewWidget ? currentViewWidget->view() : nullptr;
+
+    return currentToolInlineView;
+}
+
+
 void TabbedViewsPrivate::onCurrentChanged(int index)
 {
     Q_Q(TabbedViews);

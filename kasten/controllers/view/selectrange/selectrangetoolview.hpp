@@ -33,6 +33,8 @@ class SelectRangeTool;
 
 class SelectRangeToolView : public AbstractToolInlineView
 {
+    Q_OBJECT
+
 public:
     explicit SelectRangeToolView(SelectRangeTool* tool);
     ~SelectRangeToolView() override;
