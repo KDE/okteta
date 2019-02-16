@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta KPart module, made within the KDE community.
 
-    Copyright 2003,2007,2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2007,2009,2011,2019 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -57,6 +57,7 @@
 // #include <Kasten/ZoomBarControllerFactory>
 #include <Kasten/SelectControllerFactory>
 // Kasten
+#include <Kasten/SingleViewArea>
 #include <Kasten/AbstractXmlGuiController>
 #include <Kasten/JobManager>
 #include <Kasten/AbstractLoadJob>
@@ -93,6 +94,11 @@ OktetaPart::OktetaPart(QObject* parent,
 
     setXMLFile(QLatin1String(UIFileName[modus]));
 
+    mSingleViewArea = new Kasten::SingleViewArea();
+    auto areaWidget = mSingleViewArea->widget();
+    mLayout->addWidget(areaWidget);
+    mLayout->parentWidget()->setFocusProxy(areaWidget);
+
     if (modus == Modus::ReadWrite) {
         addController(Kasten::VersionControllerFactory());
     }
@@ -117,8 +123,8 @@ OktetaPart::OktetaPart(QObject* parent,
     if (modus == Modus::ReadWrite) {
         addController(Kasten::ReplaceControllerFactory(widget));
     }
-//     addController(Kasten::GotoOffsetControllerFactory(mGroupedViews));
-//     addController(Kasten::SelectRangeControllerFactory(mGroupedViews));
+    addController(Kasten::GotoOffsetControllerFactory(mSingleViewArea));
+    addController(Kasten::SelectRangeControllerFactory(mSingleViewArea));
 //     addController(Kasten::BookmarksControllerFactory());
     addController(Kasten::PrintControllerFactory());
     addController(Kasten::ViewConfigControllerFactory());
@@ -154,6 +160,7 @@ OktetaPart::OktetaPart(QObject* parent,
 OktetaPart::~OktetaPart()
 {
     qDeleteAll(mControllers);
+    delete mSingleViewArea;
     delete mByteArrayView;
     delete mDocument;
 }
@@ -203,7 +210,7 @@ void OktetaPart::onDocumentLoaded(Kasten::AbstractDocument* document)
         for (Kasten::AbstractXmlGuiController* controller : qAsConst(mControllers)) {
             controller->setTargetModel(nullptr);
         }
-
+        mSingleViewArea->setView(nullptr);
         delete mByteArrayView;
         delete mDocument;
 
@@ -219,9 +226,7 @@ void OktetaPart::onDocumentLoaded(Kasten::AbstractDocument* document)
         mByteArrayView = new Kasten::ByteArrayView(mDocument, viewProfileSynchronizer);
         connect(mByteArrayView, SIGNAL(hasSelectedDataChanged(bool)), SIGNAL(hasSelectedDataChanged(bool)));
 
-        QWidget* displayWidget = mByteArrayView->widget();
-        mLayout->addWidget(displayWidget);
-        mLayout->parentWidget()->setFocusProxy(displayWidget);
+        mSingleViewArea->setView(mByteArrayView);
 
         for (Kasten::AbstractXmlGuiController* controller : qAsConst(mControllers)) {
             controller->setTargetModel(mByteArrayView);

@@ -34,6 +34,7 @@ namespace Kasten {
 class ByteArrayViewProfileManager;
 class ByteArrayView;
 class ByteArrayDocument;
+class SingleViewArea;
 class ModelCodecViewManager;
 class ModelCodecManager;
 class AbstractXmlGuiController;
@@ -96,6 +97,7 @@ private:
     Kasten::ByteArrayDocument* mDocument;
     Kasten::ByteArrayView* mByteArrayView;
 
+    Kasten::SingleViewArea* mSingleViewArea;
     QVector<Kasten::AbstractXmlGuiController*> mControllers;
 
     Kasten::ByteArrayViewProfileManager* mViewProfileManager;
