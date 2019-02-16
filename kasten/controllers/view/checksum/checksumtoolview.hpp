@@ -33,6 +33,8 @@ class ChecksumTool;
 
 class ChecksumToolView : public AbstractToolView
 {
+    Q_OBJECT
+
 public:
     explicit ChecksumToolView(ChecksumTool* tool);
     ~ChecksumToolView() override;

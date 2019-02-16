@@ -33,6 +33,8 @@ class FilterTool;
 
 class FilterToolView : public AbstractToolView
 {
+    Q_OBJECT
+
 public:
     explicit FilterToolView(FilterTool* tool);
     ~FilterToolView() override;

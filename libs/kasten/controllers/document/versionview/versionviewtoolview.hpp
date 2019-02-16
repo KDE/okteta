@@ -33,6 +33,8 @@ class VersionViewTool;
 
 class VersionViewToolView : public AbstractToolView
 {
+    Q_OBJECT
+
 public:
     explicit VersionViewToolView(VersionViewTool* tool);
     ~VersionViewToolView() override;

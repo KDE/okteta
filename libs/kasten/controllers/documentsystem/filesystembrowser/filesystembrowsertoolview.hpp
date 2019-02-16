@@ -33,6 +33,8 @@ class FileSystemBrowserTool;
 
 class FileSystemBrowserToolView : public AbstractToolView
 {
+    Q_OBJECT
+
 public:
     explicit FileSystemBrowserToolView(FileSystemBrowserTool* tool);
     ~FileSystemBrowserToolView() override;

@@ -33,6 +33,8 @@ class CharsetConversionTool;
 
 class CharsetConversionToolView : public AbstractToolView
 {
+    Q_OBJECT
+
 public:
     explicit CharsetConversionToolView(CharsetConversionTool* tool);
     ~CharsetConversionToolView() override;

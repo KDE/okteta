@@ -33,6 +33,8 @@ class InfoTool;
 
 class InfoToolView : public AbstractToolView
 {
+    Q_OBJECT
+
 public:
     explicit InfoToolView(InfoTool* tool);
     ~InfoToolView() override;

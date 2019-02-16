@@ -33,6 +33,8 @@ class StringsExtractTool;
 
 class StringsExtractToolView : public AbstractToolView
 {
+    Q_OBJECT
+
 public:
     explicit StringsExtractToolView(StringsExtractTool* tool);
     ~StringsExtractToolView() override;

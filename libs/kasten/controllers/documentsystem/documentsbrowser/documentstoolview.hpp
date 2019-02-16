@@ -33,6 +33,8 @@ class DocumentsTool;
 
 class DocumentsToolView : public AbstractToolView
 {
+    Q_OBJECT
+
 public:
     explicit DocumentsToolView(DocumentsTool* tool);
     ~DocumentsToolView() override;

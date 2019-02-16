@@ -33,6 +33,8 @@ class PODDecoderTool;
 
 class PODDecoderToolView : public AbstractToolView
 {
+    Q_OBJECT
+
 public:
     explicit PODDecoderToolView(PODDecoderTool* tool);
     ~PODDecoderToolView() override;

@@ -33,6 +33,8 @@ class TerminalTool;
 
 class TerminalToolView : public AbstractToolView
 {
+    Q_OBJECT
+
 public:
     explicit TerminalToolView(TerminalTool* tool);
     ~TerminalToolView() override;

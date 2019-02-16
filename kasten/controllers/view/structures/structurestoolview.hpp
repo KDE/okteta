@@ -32,6 +32,8 @@ class StructuresTool;
 
 class StructuresToolView : public AbstractToolView
 {
+    Q_OBJECT
+
 public:
     explicit StructuresToolView(StructuresTool* tool);
     ~StructuresToolView() override;

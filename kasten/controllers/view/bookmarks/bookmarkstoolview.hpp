@@ -33,6 +33,8 @@ class BookmarksTool;
 
 class BookmarksToolView : public AbstractToolView
 {
+    Q_OBJECT
+
 public:
     explicit BookmarksToolView(BookmarksTool* tool);
     ~BookmarksToolView() override;

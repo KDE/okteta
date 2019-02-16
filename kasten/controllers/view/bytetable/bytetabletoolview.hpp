@@ -33,6 +33,8 @@ class ByteTableTool;
 
 class ByteTableToolView : public AbstractToolView
 {
+    Q_OBJECT
+
 public:
     explicit ByteTableToolView(ByteTableTool* tool);
     ~ByteTableToolView() override;
