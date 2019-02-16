@@ -37,7 +37,7 @@ class AbstractModel;
 /* there are controllers for 
 * (focused) documents
 * document collections (projects)
-  * static (related (or dependant) data)
+  * static (related (or dependent) data)
   * dynamic (session)
 * views
 * view collections, like tabbed view or mdi

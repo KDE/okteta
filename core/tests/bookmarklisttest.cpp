@@ -155,7 +155,7 @@ void BookmarkListTest::testAdjustToReplaced()
     QVERIFY(!bookmarkList.isEmpty());
     QVERIFY(!adjusted);
 
-    // replace beore first with same length -> no changes
+    // replace before first with same length -> no changes
     bookmarkList.clear();
     bookmarkList.addBookmark(bookmark1);
     bookmarkList.addBookmark(bookmark2);

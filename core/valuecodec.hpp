@@ -81,7 +81,7 @@ public: // API to be implemented
      * Tries to increase the byte value by appending a digit to the digits of
      * the current encoding.
      * @param digit digit to append to encoding of current value.
-     * @param pos offset in digits where to write the code to
+     * @param byte offset in digits where to write the code to
      * @return true if successful, false otherwise
      */
     virtual bool appendDigit(Byte* byte, unsigned char digit) const = 0;

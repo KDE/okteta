@@ -152,7 +152,7 @@ void VersionTableModel::onRevertedToVersionIndex(int versionIndex)
 void VersionTableModel::onHeadVersionChanged(int newHeadVersionIndex)
 {
     mVersionIndex = newHeadVersionIndex;
-    // TODO: try to understand how this whould be done with {begin,end}{Insert,Remove}Columns
+    // TODO: try to understand how this would be done with {begin,end}{Insert,Remove}Columns
     beginResetModel();
     endResetModel();
 }

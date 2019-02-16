@@ -171,7 +171,7 @@ void DocumentListModel::onDocumentsAdded(const QVector<Kasten::AbstractDocument*
         }
     }
 
-    // TODO: try to understand how this whould be done with {begin,end}{Insert,Remove}Columns
+    // TODO: try to understand how this would be done with {begin,end}{Insert,Remove}Columns
     beginResetModel();
     endResetModel();
 }
@@ -179,7 +179,7 @@ void DocumentListModel::onDocumentsAdded(const QVector<Kasten::AbstractDocument*
 void DocumentListModel::onDocumentsClosing(const QVector<Kasten::AbstractDocument*>& documents)
 {
     Q_UNUSED(documents)
-    // TODO: try to understand how this whould be done with {begin,end}{Insert,Remove}Columns
+    // TODO: try to understand how this would be done with {begin,end}{Insert,Remove}Columns
     beginResetModel();
     endResetModel();
 }
@@ -193,14 +193,14 @@ void DocumentListModel::onSynchronizerChanged(AbstractModelSynchronizer* synchro
         connect(synchronizer, &AbstractModelSynchronizer::remoteSyncStateChanged,
                 this, &DocumentListModel::onSyncStatesChanged);
     }
-    // TODO: try to understand how this whould be done with {begin,end}{Insert,Remove}Columns
+    // TODO: try to understand how this would be done with {begin,end}{Insert,Remove}Columns
     beginResetModel();
     endResetModel();
 }
 
 void DocumentListModel::onSyncStatesChanged()
 {
-    // TODO: try to understand how this whould be done with {begin,end}{Insert,Remove}Columns
+    // TODO: try to understand how this would be done with {begin,end}{Insert,Remove}Columns
     beginResetModel();
     endResetModel();
 }

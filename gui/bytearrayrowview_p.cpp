@@ -280,7 +280,7 @@ void ByteArrayRowViewPrivate::changeEvent(QEvent* event)
 
     q->setLineHeight(rowHeight);
 
-    // update all dependant structures
+    // update all dependent structures
     mTableLayout->setNoOfLinesPerPage(q->noOfLinesPerPage());
 
     updateViewByWidth();
@@ -621,7 +621,7 @@ void ByteArrayRowViewPrivate::createCursorPixmaps()
     mByteArrayColumn->renderCursor(&painter, index, mActiveCoding);
     painter.end();
 
-    // calculat the shape
+    // calculate the shape
     PixelX cursorX;
     PixelX cursorW;
     if (isCursorBehind()) {

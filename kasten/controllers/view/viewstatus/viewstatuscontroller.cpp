@@ -90,7 +90,7 @@ ViewStatusController::ViewStatusController(StatusBar* statusBar)
     setTargetModel(nullptr);
 }
 
-// the letter C can be very wide, that is why with proportinal fonts there seems too much space used, but isn't
+// the letter C can be very wide, that is why with proportional fonts there seems too much space used, but isn't
 // see https://frinring.wordpress.com/2008/10/14/better-width-with-open-sources/
 void ViewStatusController::fixWidths(int offsetCoding)
 {

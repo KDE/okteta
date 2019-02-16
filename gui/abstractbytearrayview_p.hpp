@@ -232,7 +232,7 @@ protected: // API to be implemented
     virtual AbstractByteArrayView::CodingTypeId activeCoding() const = 0;
     virtual AbstractByteArrayView::CodingTypes visibleCodings() const = 0;
     virtual int fittingBytesPerLine() const = 0;
-    /** recalcs all dependant values with the actual NoOfBytesPerLine  */
+    /** recalcs all dependent values with the actual NoOfBytesPerLine  */
     virtual void adjustToLayoutNoOfBytesPerLine() = 0;
     /** repaints all the parts that are signed as changed */
     virtual void updateChanged() = 0;

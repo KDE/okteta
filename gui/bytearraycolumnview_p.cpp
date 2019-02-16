@@ -304,7 +304,7 @@ void ByteArrayColumnViewPrivate::changeEvent(QEvent* event)
 
     q->setLineHeight(digitHeight);
 
-    // update all dependant structures
+    // update all dependent structures
     mTableLayout->setNoOfLinesPerPage(q->noOfLinesPerPage());
 
     updateViewByWidth();

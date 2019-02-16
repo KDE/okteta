@@ -330,7 +330,7 @@ void ByteArrayRowColumnRenderer::recalcX()
 }
 
 // TODO: why are inlined functions not available as symbols when defined before their use
-// TODO: works not precisly for the byte rects but includes spacing and left and right
+// TODO: works not precisely for the byte rects but includes spacing and left and right
 /*inline*/ LinePosition ByteArrayRowColumnRenderer::linePositionOfX(PixelX PX) const
 {
     if (!mLinePosLeftPixelX) {

@@ -24,7 +24,7 @@
 #include "singleviewarea_p.hpp"
 
 namespace Kasten {
-// TODO: catch area focues change!
+// TODO: catch area focus change!
 SingleViewArea::SingleViewArea()
     : AbstractViewArea(new SingleViewAreaPrivate(this))
 {

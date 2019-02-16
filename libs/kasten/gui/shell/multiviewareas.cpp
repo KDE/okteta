@@ -24,7 +24,7 @@
 #include "multiviewareas_p.hpp"
 
 namespace Kasten {
-// TODO: catch area focues change!
+// TODO: catch area focus change!
 MultiViewAreas::MultiViewAreas()
     : AbstractGroupedViews(new MultiViewAreasPrivate(this))
 {

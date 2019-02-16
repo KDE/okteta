@@ -34,7 +34,7 @@
 #include <QMimeData>
 
 namespace Kasten {
-// TODO: catch area focues change!
+// TODO: catch area focus change!
 MultiViewAreasPrivate::MultiViewAreasPrivate(MultiViewAreas* parent)
     : AbstractGroupedViewsPrivate(parent)
 {

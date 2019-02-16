@@ -100,7 +100,7 @@ void AbstractFileSystemSyncWithRemoteJobPrivate::syncWithRemote()
     } else {
         q->setError(KJob::KilledJobError);
         delete mFile;
-        // TODO: should we rather skip completeSync in successthe API?
+        // TODO: should we rather skip completeSync in success API?
         q->emitResult();
     }
 }

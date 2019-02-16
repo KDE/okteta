@@ -127,7 +127,7 @@ public:
      *  @param out the byte array the value is read from
      *  @param byteOrder the byteOrder used for reading values
      *  @param address the address in @p out
-     *  @param remaining number of bytes remaining in @p input
+     *  @param bitsRemaining remaining number of bits remaining in @p input
      *  @param bitOffset the bit to start at in the first byte
      *  @return @c true on success, @c false otherwise
      */

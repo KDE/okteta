@@ -161,7 +161,7 @@ public:
     void beginRead();
     /** Writes the current data contained in this object to out.
      *
-     *  @param value a @link QVariant object holding the new data to write
+     *  @param value a QVariant object holding the new data to write
      *  @param out the byte array the value is written to
      *  @param address the address in @p out
      *  @param bitsRemaining number of bits remaining in @p out

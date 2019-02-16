@@ -350,7 +350,7 @@ void ByteArrayFrameRenderer::setFont(const QFont& font)
 
     setLineHeight(fontMetrics.height());
 
-    // update all dependant structures
+    // update all dependent structures
     mLayout->setNoOfLinesPerPage(noOfLinesPerFrame());
 
     mOffsetColumnRenderer->setFontMetrics(fontMetrics);

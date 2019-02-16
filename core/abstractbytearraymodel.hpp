@@ -175,7 +175,7 @@ public: // modification API
      * which is the same as moving the first behind the second.
      * @param firstStart position of the data where the section should be moved behind
      * @param secondRange data range to be moved
-     * @return @true if operation was successful, @false otherwise
+     * @return @p true if operation was successful, @p false otherwise
      */
     virtual bool swap(Address firstStart, const AddressRange& secondRange) = 0;
 

@@ -91,7 +91,7 @@ public:
     QDebug log(LogLevel level, const QString& origin);
     void clear();
     /**
-     * @param info the minimum level that the messages must have
+     * @param minLevel the minimum level that the messages must have
      * @return all the messages, mainly used for testing
      */
     QStringList messages(LogLevel minLevel = LogInfo) const;

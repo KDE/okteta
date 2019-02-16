@@ -100,7 +100,7 @@ private: // partial operations
 
 private:
     /** recalcs a layout due to the resize style that fits into the view size
-     * and updates the dependant values
+     * and updates the dependent values
      */
     void ensureVisible(const ByteArrayRowColumnRenderer& column, const Coord& coord);
     void renderColumns(QPainter* painter, int cx, int cy, int cw, int ch);
