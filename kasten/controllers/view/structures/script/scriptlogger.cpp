@@ -130,7 +130,11 @@ QDebug ScriptLogger::log(LogLevel level, const QString& origin)
 
 void ScriptLogger::clear()
 {
-    beginRemoveRows(QModelIndex(), 0, qMax(0, mData.size() - 1));
+    if (mData.isEmpty()) {
+        return;
+    }
+
+    beginRemoveRows(QModelIndex(), 0, mData.size() - 1);
     mData.clear();
     endRemoveRows();
 }
