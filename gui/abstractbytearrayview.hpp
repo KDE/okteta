@@ -342,7 +342,9 @@ public: // modification access
     void setMarking(const AddressRange& marking);
 
     /**
-     * @param ensureStartVisible if true , otherwise the end
+     * @param range an address range
+     * @param ensureStartVisible if @c true scrolls the view as much as needed to have the start of the range
+     * fully visible, otherwise to the end of the range
      */
     void ensureVisible(const AddressRange& range, bool ensureStartVisible = false);
     /** scrolls the view as much as needed to have the cursor fully visible */

@@ -83,15 +83,21 @@ public:
     // void renderLine( QPainter* painter, int lineIndex );
     void renderLinePositions(QPainter* painter, Line lineIndex, const LinePositionRange& linePositions);
     /** paints a cursor based on the type of the byte.
+     * @param painter The QPainter.
      * @param byteIndex Index of the byte to paint the cursor for. If -1 a space is used as char.
+     * @param codingId The coding identifier.
      */
     void renderCursor(QPainter* painter, Address byteIndex, AbstractByteArrayView::CodingTypeId codingId);
     /** paints the byte with background.
+     * @param painter The QPainter.
      * @param byteIndex Index of the byte to paint. If -1 only the background is painted.
+     * @param codingId The coding identifier.
      */
     void renderByte(QPainter* painter, Address byteIndex, AbstractByteArrayView::CodingTypeId codingId);
     /** paints the byte with background and a frame around.
+     * @param painter The QPainter.
      * @param byteIndex Index of the byte to paint the frame for. If -1 a space is used as char.
+     * @param codingId The coding identifier.
      * @param style the style of the framing
      */
     void renderFramedByte(QPainter* painter, Address byteIndex, AbstractByteArrayView::CodingTypeId codingId, FrameStyle style);

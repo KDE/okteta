@@ -223,7 +223,8 @@ public: // finding API
      * @param pattern
      * @param patternLength length of search string
      * @param fromOffset the position to start the search
-     * @return index of the first  or -1
+     * @param toOffset the position to end the search (-1 is to the end of the data stream)
+     * @return index of the first or -1
      */
     virtual Address indexOf(const Byte* pattern, int patternLength, Address fromOffset = 0, Address toOffset = -1) const;
     Address indexOf(const QByteArray& pattern, Address fromOffset = 0, Address toOffset = -1) const;
