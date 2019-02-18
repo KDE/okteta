@@ -1,5 +1,5 @@
 <!DOCTYPE gui SYSTEM "kpartgui.dtd">
-<gui name="oktetapartbrowser" version="2" translationDomain="oktetapart">
+<gui name="oktetapartbrowser" version="3" translationDomain="oktetapart">
 
 <MenuBar>
   <Menu name="file"><text>&amp;File</text>
@@ -46,5 +46,14 @@
   <Separator/>
   <Action name="edit_find" />
 </ToolBar>
+
+<Menu name="viewContextMenu">
+  <Action name="edit_copy"/>
+  <Action name="copy_as"/>
+  <Separator/>
+  <Action name="edit_select_all"/>
+  <Action name="edit_deselect"/>
+  <Action name="edit_select"/>
+</Menu>
 
 </gui>

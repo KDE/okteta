@@ -36,6 +36,7 @@
 #include <Kasten/Okteta/PrintControllerFactory>
 #include <Kasten/Okteta/ViewConfigControllerFactory>
 #include <Kasten/Okteta/ViewModeControllerFactory>
+#include <Kasten/Okteta/ViewContextMenuControllerFactory>
 #include <Kasten/Okteta/ViewStatusControllerFactory>
 #include <Kasten/Okteta/ViewProfileControllerFactory>
 // Okteta Kasten
@@ -129,6 +130,7 @@ OktetaPart::OktetaPart(QObject* parent,
     addController(Kasten::PrintControllerFactory());
     addController(Kasten::ViewConfigControllerFactory());
     addController(Kasten::ViewModeControllerFactory());
+    addController(Kasten::ViewContextMenuControllerFactory());
     addController(Kasten::ViewProfileControllerFactory(mViewProfileManager, widget));
 
 //     Kasten::StatusBar* bottomBar = static_cast<Kasten::StatusBar*>( statusBar() );

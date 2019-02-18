@@ -154,6 +154,7 @@ Q_SIGNALS:
     void noOfGroupedBytesChanged(int noOfGroupedBytes);
     void zoomLevelChanged(double level);
     void viewModusChanged(int viewModus);
+    void viewContextMenuRequested(const QPoint& pos);
 
 private:
     AbstractByteArrayView* mView = nullptr;

@@ -95,6 +95,9 @@ void ByteArrayJanusView::setViewModus(int viewModus)
     }
     mViewModus = viewModus;
 
+    mView->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(mView, &QWidget::customContextMenuRequested, this, &ByteArrayJanusView::viewContextMenuRequested);
+
     connect(mView, &AbstractByteArrayView::hasSelectedDataChanged, this, &ByteArrayJanusView::hasSelectedDataChanged);
     connect(mView, &AbstractByteArrayView::selectionChanged, this, &ByteArrayJanusView::selectionChanged);
     connect(mView, &AbstractByteArrayView::readOnlyChanged, this, &ByteArrayJanusView::readOnlyChanged);

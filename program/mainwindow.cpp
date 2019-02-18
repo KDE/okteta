@@ -68,6 +68,7 @@
 #include <Kasten/Okteta/PrintControllerFactory>
 #include <Kasten/Okteta/ViewConfigControllerFactory>
 #include <Kasten/Okteta/ViewModeControllerFactory>
+#include <Kasten/Okteta/ViewContextMenuControllerFactory>
 #include <Kasten/Okteta/ViewStatusControllerFactory>
 #include <Kasten/Okteta/ViewProfileControllerFactory>
 #include <Kasten/Okteta/ViewProfilesManageControllerFactory>
@@ -209,6 +210,7 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiControllerFromFactory(PrintControllerFactory());
     addXmlGuiControllerFromFactory(ViewConfigControllerFactory());
     addXmlGuiControllerFromFactory(ViewModeControllerFactory());
+    addXmlGuiControllerFromFactory(ViewContextMenuControllerFactory());
     addXmlGuiControllerFromFactory(ViewProfileControllerFactory(byteArrayViewProfileManager, this));
     addXmlGuiControllerFromFactory(ViewProfilesManageControllerFactory(byteArrayViewProfileManager, this));
 

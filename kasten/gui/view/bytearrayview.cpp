@@ -144,6 +144,8 @@ void ByteArrayView::init()
     connect(mWidget, &ByteArrayJanusView::noOfGroupedBytesChanged, this, &ByteArrayView::noOfGroupedBytesChanged);
     connect(mWidget, &ByteArrayJanusView::zoomLevelChanged, this, &ByteArrayView::zoomLevelChanged);
     connect(mWidget, &ByteArrayJanusView::viewModusChanged, this, &ByteArrayView::viewModusChanged);
+
+    connect(mWidget, &ByteArrayJanusView::viewContextMenuRequested, this, &ByteArrayView::viewContextMenuRequested);
 }
 
 ByteArrayViewProfileSynchronizer* ByteArrayView::synchronizer() const { return mByteArrayViewProfileSynchronizer; }

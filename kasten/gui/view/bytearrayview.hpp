@@ -39,6 +39,7 @@ namespace Okteta {
 class ByteArrayJanusView;
 }
 class QRect;
+class QPoint;
 
 namespace Kasten {
 class ByteArrayViewProfileSynchronizer;
@@ -186,6 +187,9 @@ public:
     int viewModus() const;
 Q_SIGNALS:
     void viewModusChanged(int viewModus);
+
+Q_SIGNALS:
+    void viewContextMenuRequested(const QPoint& pos);
 
 public:
     ByteArrayViewProfileSynchronizer* synchronizer() const;

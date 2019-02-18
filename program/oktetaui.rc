@@ -1,5 +1,5 @@
 <!DOCTYPE gui SYSTEM "kpartgui.dtd">
-<gui name="Okteta" version="4">
+<gui name="Okteta" version="5">
 <MenuBar>
   <Menu name="file">
     <Action name="connect_to" append="open_merge" />
@@ -99,4 +99,16 @@
   <Action name="cancel"/>
   <Action name="help"/>
 </ToolBar>
+
+<Menu name="viewContextMenu">
+  <Action name="edit_cut"/>
+  <Action name="edit_copy"/>
+  <Action name="edit_paste"/>
+  <Action name="copy_as"/>
+  <Action name="insert"/>
+  <Separator/>
+  <Action name="edit_select_all"/>
+  <Action name="edit_deselect"/>
+  <Action name="edit_select"/>
+</Menu>
 </gui>

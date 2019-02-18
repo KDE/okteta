@@ -522,6 +522,13 @@ oktetakastencontrollers_add_sublibrary(view/viewprofiles
         ViewProfilesManageController
 )
 
+oktetakastencontrollers_add_sublibrary(view/viewcontextmenu
+    PUBLIC
+        ViewContextMenuControllerFactory
+    PRIVATE
+        ViewContextMenuController
+)
+
 # create a static library for the unit tests. This means we don't have to compile the sources twice
 
 add_library(poddecoder-typeeditors STATIC ${oktetakastencontrollers_typeeditor_LIB_SRCS})
