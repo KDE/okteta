@@ -39,7 +39,7 @@
 OktetaPartFactory::OktetaPartFactory()
     : mAboutData(QStringLiteral("oktetapart"),
                  i18n("OktetaPart"),
-                 QStringLiteral("0.25.60"),
+                 QStringLiteral(OKTETA_VERSION),
                  i18n("Embedded hex editor"),
                  KAboutLicense::GPL_V2,
                  i18n("2003-2019 Friedrich W. H. Kossebau"))

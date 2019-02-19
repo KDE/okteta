@@ -5,6 +5,10 @@ set( okteta_SRCS
   mainwindow.cpp
 )
 
+set_source_files_properties(about.cpp PROPERTIES
+    COMPILE_FLAGS -DOKTETA_VERSION=\\\"${Okteta_VERSION}\\\"
+)
+
 qt5_add_resources(okteta_SRCS
     okteta.qrc
 )

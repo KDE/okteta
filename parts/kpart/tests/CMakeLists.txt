@@ -7,6 +7,10 @@ add_definitions(
     -DTESTPATH2=\"${CMAKE_CURRENT_SOURCE_DIR}/oktetaparttest.cpp\"
 )
 
+set_source_files_properties(../partfactory.cpp PROPERTIES
+    COMPILE_FLAGS -DOKTETA_VERSION=\\\"${Okteta_VERSION}\\\"
+)
+
 # TODO: deduplicate object file generation of
 ecm_add_test(
   ../part.cpp

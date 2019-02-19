@@ -6,6 +6,10 @@ set( oktetapart_SRCS
   partfactory.cpp
 )
 
+set_source_files_properties(partfactory.cpp PROPERTIES
+    COMPILE_FLAGS -DOKTETA_VERSION=\\\"${Okteta_VERSION}\\\"
+)
+
 qt5_add_resources(oktetapart_SRCS
     oktetapart.qrc
 )
