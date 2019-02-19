@@ -84,14 +84,13 @@ QObject* OktetaPartFactory::create(const char* iface,
                                    const QString& keyword)
 {
     Q_UNUSED(parentWidget)
-    Q_UNUSED(args)
     Q_UNUSED(keyword);
 
-    const QByteArray className(iface);
     const OktetaPart::Modus modus =
-        (className == "KParts::ReadOnlyPart") ? OktetaPart::Modus::ReadOnly :
-        (className == "Browser/View") ?         OktetaPart::Modus::BrowserView :
-        /* else */                              OktetaPart::Modus::ReadWrite;
+        (args.contains(QStringLiteral("Browser/View")) ||
+         (strcmp(iface, "Browser/View") == 0)) ?       OktetaPart::Modus::BrowserView :
+        (strcmp(iface, "KParts::ReadOnlyPart") == 0) ? OktetaPart::Modus::ReadOnly :
+        /* else */                                     OktetaPart::Modus::ReadWrite;
 
     OktetaPart* part = new OktetaPart(parent, mAboutData, modus, mByteArrayViewProfileManager, mModelCodecManager, mModelCodecViewManager);
 
