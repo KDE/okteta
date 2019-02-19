@@ -25,6 +25,7 @@
 // part
 #include "part.hpp"
 // Okteta Kasten
+#include <Kasten/Okteta/ByteArrayViewProfileSynchronizer>
 #include <Kasten/Okteta/ByteArrayView>
 #include <Kasten/Okteta/ByteArrayDocument>
 // KF5
@@ -76,14 +77,32 @@ void OktetaBrowserExtension::saveState(QDataStream& stream)
     KParts::BrowserExtension::saveState(stream);
 
     Kasten::ByteArrayView* view = mPart->byteArrayView();
+    Kasten::ByteArrayViewProfileSynchronizer* viewProfileSynchronizer = view->synchronizer();
 
-    stream << (int)view->offsetColumnVisible() << view->visibleByteArrayCodings()
-           << (int)view->layoutStyle() << (int)view->valueCoding()
-           << view->charCodingName() << (int)view->showsNonprinting()
+    const QString viewProfileId = viewProfileSynchronizer ? viewProfileSynchronizer->viewProfileId() : QString();
+
+    stream
+        << view->zoomLevel()
+
+        << (int)view->offsetColumnVisible()
+        << view->offsetCoding()
+        << view->visibleByteArrayCodings()
+
+        << (int)view->layoutStyle()
+        << view->noOfBytesPerLine()
+        << view->noOfGroupedBytes()
+
+        << (int)view->valueCoding()
+        << view->charCodingName()
+        << (int)view->showsNonprinting()
 //         << view->xOffset() << view->yOffset()
-           << view->cursorPosition()
+        << view->cursorPosition()
 //         << (int)view->isCursorBehind()
 //         << view->activeCoding()
+
+        << view->viewModus()
+
+        << viewProfileId
     ;
 }
 
@@ -91,9 +110,16 @@ void OktetaBrowserExtension::restoreState(QDataStream& stream)
 {
     KParts::BrowserExtension::restoreState(stream);
 
+    double zoomLevel;
+
     int offsetColumnVisible;
+    int offsetCoding;
     int visibleCodings;
+
     int layoutStyle;
+    int noOfBytesPerLine;
+    int noOfGroupedBytes;
+
     int valueCoding;
     QString charCodingName;
     int showsNonprinting;
@@ -102,18 +128,50 @@ void OktetaBrowserExtension::restoreState(QDataStream& stream)
 //     int cursorBehind;
 //     int activeCoding;
 
-    stream >> offsetColumnVisible >> visibleCodings >> layoutStyle >> valueCoding >> charCodingName >> showsNonprinting
-//            >> x >> y
-    >> position
+    int viewModus;
+
+    QString viewProfileId;
+
+    stream
+        >> zoomLevel
+
+        >> offsetColumnVisible
+        >> offsetCoding
+        >> visibleCodings
+
+        >> layoutStyle
+        >> noOfBytesPerLine
+        >> noOfGroupedBytes
+
+        >> valueCoding
+        >> charCodingName
+        >> showsNonprinting
+        >> position
 //            >> cursorBehind
 //            >> activeCoding
+        >> viewModus
+        >> viewProfileId
     ;
 
     Kasten::ByteArrayView* view = mPart->byteArrayView();
 
+    Kasten::ByteArrayViewProfileSynchronizer* viewProfileSynchronizer = view->synchronizer();
+    if (viewProfileSynchronizer) {
+        viewProfileSynchronizer->setViewProfileId(viewProfileId);
+    }
+
+    view->setZoomLevel(zoomLevel);
+
+    view->setViewModus(viewModus);
+
     view->toggleOffsetColumn(offsetColumnVisible);
+    view->setOffsetCoding(offsetCoding);
     view->setVisibleByteArrayCodings(visibleCodings);
+
     view->setLayoutStyle(layoutStyle);
+    view->setNoOfBytesPerLine(noOfBytesPerLine);
+    view->setNoOfGroupedBytes(noOfGroupedBytes);
+
     view->setValueCoding(valueCoding);
     view->setCharCoding(charCodingName);
     view->setShowsNonprinting(showsNonprinting);
