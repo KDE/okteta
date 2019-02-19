@@ -41,9 +41,6 @@
 </MenuBar>
 
 <ToolBar name="mainToolBar"><text>Main Toolbar</text>
-  <Action name="view_zoom_in" />
-  <Action name="view_zoom_out" />
-  <Separator/>
   <Action name="edit_find" />
 </ToolBar>
 
