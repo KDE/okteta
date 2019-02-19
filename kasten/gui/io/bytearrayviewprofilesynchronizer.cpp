@@ -96,6 +96,7 @@ void ByteArrayViewProfileSynchronizer::setViewProfileId(const ByteArrayViewProfi
         }
     }
 
+    emit viewProfileChanged(mViewProfileId);
     if (mView) {
         emit localSyncStateChanged(LocalInSync);
     }
