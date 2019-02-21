@@ -576,9 +576,7 @@ QRect ByteArrayRowViewPrivate::cursorRect() const
     Q_Q(const ByteArrayRowView);
 
     QRect cursorRect = mByteArrayColumn->byteRect(mTableCursor->coord(), mActiveCoding);
-    const QPoint viewportPoint(cursorRect.x() - q->xOffset(), cursorRect.y() - q->yOffset());
-    const QPoint globalPoint = q->viewport()->mapToParent(viewportPoint);   // TODO: seems still missing some offset
-    cursorRect.setTopLeft(globalPoint);
+    cursorRect.translate(-q->xOffset(), -q->yOffset());
 
     return cursorRect;
 }

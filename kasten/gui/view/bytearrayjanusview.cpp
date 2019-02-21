@@ -178,7 +178,12 @@ Address ByteArrayJanusView::cursorPosition() const
 }
 QRect ByteArrayJanusView::cursorRect() const
 {
-    return mView->cursorRect();
+    // Okteta Gui uses viewport coordinates like QTextEdit,
+    // but here view coordinates are used, so map the rect as needed
+    QRect cursorRect = mView->cursorRect();
+    const QPoint viewTopLeft = mView->viewport()->mapToParent(cursorRect.topLeft());
+    cursorRect.moveTopLeft(viewTopLeft);
+    return cursorRect;
 }
 
 void ByteArrayJanusView::setStartOffset(Address startOffset)
