@@ -60,7 +60,7 @@ void ViewContextMenuController::showContextMenu(const QPoint& pos)
 
     const auto popupPoint = mByteArrayView->widget()->mapToGlobal(pos);
 
-    popup->exec(popupPoint);
+    popup->popup(popupPoint);
 }
 
 }
