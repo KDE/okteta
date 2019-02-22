@@ -30,6 +30,7 @@
 // Qt
 #include <QClipboard>
 
+class QMenu;
 class QMimeData;
 class QByteArray;
 
@@ -382,6 +383,7 @@ public:
 
 public:
     QRect cursorRect() const;
+    QMenu* createStandardContextMenu(const QPoint& position);
 
 public: // QWidget API
     QSize sizeHint() const override;
@@ -459,7 +461,7 @@ protected: // QWidget API
     void dragMoveEvent(QDragMoveEvent* dragMoveEvent) override;
     void dragLeaveEvent(QDragLeaveEvent* dragLeaveEvent) override;
     void dropEvent(QDropEvent* dropEvent) override;
-//    virtual void contextMenuEvent( QContextMenuEvent* contextMenuEvent );
+    void contextMenuEvent(QContextMenuEvent* contextMenuEvent) override;
 
 protected: // QAbstractScrollArea API
     void wheelEvent(QWheelEvent* e) override;

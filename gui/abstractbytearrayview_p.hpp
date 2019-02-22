@@ -39,6 +39,9 @@
 class QTimer;
 
 namespace Okteta {
+
+class ClipboardController;
+class UndoRedoController;
 class KeyNavigator;
 class CharEditor;
 
@@ -159,6 +162,9 @@ public: // interaction
     void setCursorPosition(Address index, bool isBehind);
     void setSelectionCursorPosition(Address index);
 
+public:
+    QMenu* createStandardContextMenu(const QPoint& position);
+
 public: // API to be implemented
     virtual void ensureVisible(const AddressRange& range, bool ensureStartVisible) = 0;
     virtual void ensureCursorVisible() = 0;
@@ -177,6 +183,7 @@ public: // events
     void dragMoveEvent(QDragMoveEvent* dragMoveEvent);
     void dragLeaveEvent(QDragLeaveEvent* dragLeaveEvent);
     void dropEvent(QDropEvent* dropEvent);
+    void contextMenuEvent(QContextMenuEvent* contextMenuEvent);
     bool viewportEvent(QEvent* event);
 
     void mousePressEvent(QMouseEvent* mousePressEvent);
@@ -259,7 +266,11 @@ protected:
     /** */
     TabController* mTabController;
     /** */
+    UndoRedoController* mUndoRedoController;
+    /** */
     KeyNavigator* mKeyNavigator;
+    /** */
+    ClipboardController* mClipboardController;
     /** */
     ValueEditor* mValueEditor;
     /** */

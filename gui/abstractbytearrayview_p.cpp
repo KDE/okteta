@@ -23,6 +23,8 @@
 #include "abstractbytearrayview_p.hpp"
 
 // lib
+#include "controller/undoredocontroller.hpp"
+#include "controller/clipboardcontroller.hpp"
 #include "controller/keynavigator.hpp"
 #include "controller/chareditor.hpp"
 #include "controller/dropper.hpp"
@@ -39,6 +41,8 @@
 #include <Okteta/Versionable>
 #include <Okteta/TextByteArrayAnalyzer>
 #include <Okteta/Bookmark>
+// KF
+#include <KLocalizedString>
 // Qt
 #include <QDragEnterEvent>
 #include <QDragMoveEvent>
@@ -47,6 +51,9 @@
 #include <QApplication>
 #include <QToolTip>
 #include <QMimeData>
+#include <QMenu>
+#include <QAction>
+#include <QIcon>
 #include <QTimer>
 
 namespace Okteta {
@@ -151,6 +158,8 @@ AbstractByteArrayViewPrivate::~AbstractByteArrayViewPrivate()
     delete mCharEditor;
     delete mValueEditor;
     delete mKeyNavigator;
+    delete mClipboardController;
+    delete mUndoRedoController;
     delete mTabController;
 
     delete mStylist;
@@ -185,7 +194,9 @@ void AbstractByteArrayViewPrivate::init()
     mCharCoding = DefaultCharCoding;
 
     mTabController = new TabController(q, nullptr);
-    mKeyNavigator = new KeyNavigator(q, mTabController);
+    mUndoRedoController = new UndoRedoController(q, mTabController);
+    mClipboardController = new ClipboardController(q, mUndoRedoController);
+    mKeyNavigator = new KeyNavigator(q, mClipboardController);
     mValueEditor = new ValueEditor(mTableCursor, q, mKeyNavigator);
     mCharEditor = new CharEditor(mTableCursor, q, mKeyNavigator);
 
@@ -1027,6 +1038,31 @@ void AbstractByteArrayViewPrivate::unpauseCursor()
     }
 }
 
+QMenu* AbstractByteArrayViewPrivate::createStandardContextMenu(const QPoint& position)
+{
+    Q_UNUSED(position);
+
+    Q_Q(AbstractByteArrayView);
+
+    auto menu = new QMenu(q);
+
+    if (mUndoRedoController->addContextMenuActions(menu) > 0) {
+        menu->addSeparator();
+    }
+
+    if (mClipboardController->addContextMenuActions(menu) > 0) {
+        menu->addSeparator();
+    }
+
+    auto selectAllAction = menu->addAction(QIcon::fromTheme(QStringLiteral("edit-select-all")),
+                                           i18n("Select &All"),
+                                           q, [q]() { q->selectAll(true); });
+    selectAllAction->setEnabled(mByteArrayModel->size() > 0);
+    selectAllAction->setObjectName(QStringLiteral("select-all"));
+
+    return menu;
+}
+
 void AbstractByteArrayViewPrivate::mousePressEvent(QMouseEvent* mouseEvent)
 {
     Q_Q(AbstractByteArrayView);
@@ -1085,6 +1121,19 @@ bool AbstractByteArrayViewPrivate::event(QEvent* event)
                 return true;
             }
         }
+    } else if ((event->type() == QEvent::ContextMenu) &&
+               (static_cast<QContextMenuEvent*>(event)->reason() == QContextMenuEvent::Keyboard)) {
+        ensureCursorVisible();
+
+        const QPoint cursorPos = cursorRect().center();
+        QContextMenuEvent adaptedContextMenuEvent(QContextMenuEvent::Keyboard, cursorPos,
+                                                  q->viewport()->mapToGlobal(cursorPos));
+        adaptedContextMenuEvent.setAccepted(event->isAccepted());
+
+        const bool result = q->ColumnsView::event(&adaptedContextMenuEvent);
+        event->setAccepted(adaptedContextMenuEvent.isAccepted());
+
+        return result;
     }
 
     return q->ColumnsView::event(event);
@@ -1201,6 +1250,14 @@ void AbstractByteArrayViewPrivate::dropEvent(QDropEvent* dropEvent)
     } else {
         dropEvent->ignore();
     }
+}
+
+void AbstractByteArrayViewPrivate::contextMenuEvent(QContextMenuEvent* contextMenuEvent)
+{
+    auto menu = createStandardContextMenu(contextMenuEvent->pos());
+    menu->setAttribute(Qt::WA_DeleteOnClose);
+
+    menu->popup(contextMenuEvent->globalPos());
 }
 
 void AbstractByteArrayViewPrivate::onBookmarksChange(const QVector<Bookmark>& bookmarks)

@@ -22,6 +22,8 @@ oktetagui_add_sublibrary(controller
         AbstractEditor
         KeyNavigator
         TabController
+        ClipboardController
+        UndoRedoController
         CharEditor
         ValueEditor
         MouseNavigator

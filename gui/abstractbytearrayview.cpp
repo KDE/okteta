@@ -518,6 +518,12 @@ QRect AbstractByteArrayView::cursorRect() const
     return d->cursorRect();
 }
 
+QMenu* AbstractByteArrayView::createStandardContextMenu(const QPoint& position)
+{
+    Q_D(AbstractByteArrayView);
+    return d->createStandardContextMenu(position);
+}
+
 bool AbstractByteArrayView::event(QEvent* event)
 {
     Q_D(AbstractByteArrayView);
@@ -611,6 +617,11 @@ void AbstractByteArrayView::dropEvent(QDropEvent* dropEvent)
 {
     Q_D(AbstractByteArrayView);
     d->dropEvent(dropEvent);
+}
+void AbstractByteArrayView::contextMenuEvent(QContextMenuEvent* contextMenuEvent)
+{
+    Q_D(AbstractByteArrayView);
+    d->contextMenuEvent(contextMenuEvent);
 }
 
 bool AbstractByteArrayView::viewportEvent(QEvent* event)
