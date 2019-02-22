@@ -46,7 +46,7 @@ public:
     /** */
     static constexpr int MaxFormatWidth = 10;
 
-private:
+public:
     OffsetFormat() = delete;
     ~OffsetFormat() = delete;
 

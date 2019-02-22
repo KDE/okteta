@@ -33,8 +33,8 @@ class AbstractModelStreamEncoderConfigEditorFactory;
 
 class OKTETAKASTENGUI_EXPORT ByteArrayStreamEncoderConfigEditorFactoryFactory
 {
-private:
-    ByteArrayStreamEncoderConfigEditorFactoryFactory();
+public:
+    ByteArrayStreamEncoderConfigEditorFactoryFactory() = delete;
 
 public:
     static QVector<AbstractModelStreamEncoderConfigEditorFactory*> createFactorys();

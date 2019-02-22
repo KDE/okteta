@@ -33,8 +33,8 @@ class AbstractModelDataGenerator;
 
 class OKTETAKASTENGUI_EXPORT ByteArrayDataGeneratorFactory
 {
-private:
-    ByteArrayDataGeneratorFactory();
+public:
+    ByteArrayDataGeneratorFactory() = delete;
 
 public:
     static QVector<AbstractModelDataGenerator*> createDataGenerators();

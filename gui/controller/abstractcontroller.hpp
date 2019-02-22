@@ -31,9 +31,9 @@ class AbstractController
 {
 protected:
     explicit AbstractController(AbstractController* parent);
-    AbstractController() = delete;
 
 public:
+    AbstractController() = delete;
     virtual ~AbstractController();
 
 public: // API to be implemented

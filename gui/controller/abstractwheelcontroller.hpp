@@ -31,9 +31,9 @@ class AbstractWheelController
 {
 protected:
     explicit AbstractWheelController(AbstractWheelController* parent);
-    AbstractWheelController() = delete;
 
 public:
+    AbstractWheelController() = delete;
     virtual ~AbstractWheelController();
 
 public: // API to be implemented

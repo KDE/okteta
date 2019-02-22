@@ -33,7 +33,7 @@ class AbstractModelStreamEncoder;
 
 class OKTETAKASTENGUI_EXPORT ByteArrayStreamEncoderFactory
 {
-private:
+public:
     ByteArrayStreamEncoderFactory() = delete;
 
 public:
