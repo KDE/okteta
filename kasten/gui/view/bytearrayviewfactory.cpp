@@ -32,8 +32,7 @@
 namespace Kasten {
 
 ByteArrayViewFactory::ByteArrayViewFactory(ByteArrayViewProfileManager* byteArrayViewProfileManager)
-    : AbstractViewFactory()
-    , mByteArrayViewProfileManager(byteArrayViewProfileManager)
+    : mByteArrayViewProfileManager(byteArrayViewProfileManager)
 {
 }
 

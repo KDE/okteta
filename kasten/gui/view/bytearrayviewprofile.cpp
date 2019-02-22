@@ -68,8 +68,7 @@ static constexpr Okteta::AbstractByteArrayView::CodingTypes DefaultViewProfileVi
     Okteta::AbstractByteArrayView::ValueAndCharCodings;
 
 ByteArrayViewProfilePrivate::ByteArrayViewProfilePrivate()
-    : QSharedData()
-    , mOffsetCoding(DefaultViewProfileOffsetCoding)
+    : mOffsetCoding(DefaultViewProfileOffsetCoding)
     , mCharCodingName(DefaultViewProfileCharCodingName())
     , mValueCoding(DefaultViewProfileValueCoding)
     , mVisibleByteArrayCodings(DefaultViewProfileVisibleByteArrayCodings)

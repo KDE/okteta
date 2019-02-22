@@ -54,8 +54,7 @@
 namespace Kasten {
 
 ChecksumTool::ChecksumTool()
-    : AbstractTool()
-    , mChecksumUptodate(false)
+    : mChecksumUptodate(false)
     , mSourceByteArrayModelUptodate(false)
 {
     setObjectName(QStringLiteral("Checksum"));

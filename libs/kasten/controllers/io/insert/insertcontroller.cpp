@@ -53,8 +53,7 @@ namespace Kasten {
 InsertController::InsertController(ModelCodecViewManager* modelCodecViewManager,
                                    ModelCodecManager* modelCodecManager,
                                    KXMLGUIClient* guiClient)
-    : AbstractXmlGuiController()
-    , mModelCodecViewManager(modelCodecViewManager)
+    : mModelCodecViewManager(modelCodecViewManager)
     , mModelCodecManager(modelCodecManager)
 {
     mInsertSelectAction = new KSelectAction(i18nc("@title:menu", "Insert"), this);

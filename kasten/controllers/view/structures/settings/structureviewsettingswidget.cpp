@@ -28,7 +28,6 @@
 #include <KLocalizedString>
 
 StructureViewSettingsWidget::StructureViewSettingsWidget()
-    : QWidget()
 {
     ui.setupUi(this);
     ui.combo_CharDisplayBase->setEnabled(ui.kcfg_ShowCharNumericalValue->isChecked());

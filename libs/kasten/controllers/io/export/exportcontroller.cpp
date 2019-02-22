@@ -46,8 +46,7 @@ namespace Kasten {
 ExportController::ExportController(ModelCodecViewManager* modelCodecViewManager,
                                    ModelCodecManager* modelCodecManager,
                                    KXMLGUIClient* guiClient)
-    : AbstractXmlGuiController()
-    , mModelCodecViewManager(modelCodecViewManager)
+    : mModelCodecViewManager(modelCodecViewManager)
     , mModelCodecManager(modelCodecManager)
 {
     mExportSelectAction = new KSelectAction(QIcon::fromTheme(QStringLiteral("document-export")),

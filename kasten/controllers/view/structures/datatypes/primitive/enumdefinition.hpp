@@ -41,8 +41,7 @@ public:
 
     EnumDefinition(const QMap<AllPrimitiveTypes, QString>& values, const QString& name,
                    PrimitiveDataType type)
-        : QSharedData()
-        , mName(name)
+        : mName(name)
         , mValues(values)
         , mType(type)
     {}

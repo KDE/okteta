@@ -42,8 +42,7 @@ static constexpr char CreatorConfigGroupId[] = "Recent Files";
 
 LoaderController::LoaderController(AbstractDocumentStrategy* documentStrategy,
                                    KXMLGUIClient* guiClient)
-    : AbstractXmlGuiController()
-    , mDocumentStrategy(documentStrategy)
+    : mDocumentStrategy(documentStrategy)
 {
     auto* openAction = KStandardAction::open(this, &LoaderController::load, this);
     mOpenRecentAction = KStandardAction::openRecent(this, &LoaderController::loadRecent, this);

@@ -26,8 +26,7 @@
 namespace Kasten {
 
 SingleViewWindow::SingleViewWindow(AbstractView* view)
-    : KXmlGuiWindow()
-    , d_ptr(new SingleViewWindowPrivate(this, view))
+    : d_ptr(new SingleViewWindowPrivate(this, view))
 {
 }
 

@@ -36,8 +36,7 @@
 namespace Kasten {
 
 TerminalTool::TerminalTool(DocumentSyncManager* documentSyncManager)
-    : AbstractTool()
-    , mDocumentSyncManager(documentSyncManager)
+    : mDocumentSyncManager(documentSyncManager)
 {
     setObjectName(QStringLiteral("Terminal"));
 }

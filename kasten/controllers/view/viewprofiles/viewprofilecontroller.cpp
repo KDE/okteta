@@ -42,8 +42,7 @@ namespace Kasten {
 ViewProfileController::ViewProfileController(ByteArrayViewProfileManager* viewProfileManager,
                                              QWidget* parentWidget,
                                              KXMLGUIClient* guiClient)
-    : AbstractXmlGuiController()
-    , mGuiClient(guiClient)
+    : mGuiClient(guiClient)
     , mViewProfileManager(viewProfileManager)
     , mParentWidget(parentWidget)
 {

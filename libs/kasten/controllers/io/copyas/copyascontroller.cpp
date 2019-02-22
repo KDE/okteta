@@ -52,8 +52,7 @@ namespace Kasten {
 CopyAsController::CopyAsController(ModelCodecViewManager* modelCodecViewManager,
                                    ModelCodecManager* modelCodecManager,
                                    KXMLGUIClient* guiClient)
-    : AbstractXmlGuiController()
-    , mModelCodecViewManager(modelCodecViewManager)
+    : mModelCodecViewManager(modelCodecViewManager)
     , mModelCodecManager(modelCodecManager)
 {
     mCopyAsSelectAction = new KSelectAction(QIcon::fromTheme(QStringLiteral("edit-copy")),

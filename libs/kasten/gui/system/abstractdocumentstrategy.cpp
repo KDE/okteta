@@ -26,16 +26,12 @@
 namespace Kasten {
 
 AbstractDocumentStrategy::AbstractDocumentStrategy()
-    : QObject()
-    , d_ptr(new AbstractDocumentStrategyPrivate(this))
-
+    : d_ptr(new AbstractDocumentStrategyPrivate(this))
 {
 }
 
 AbstractDocumentStrategy::AbstractDocumentStrategy(AbstractDocumentStrategyPrivate* d)
-    : QObject()
-    , d_ptr(d)
-
+    : d_ptr(d)
 {
 }
 

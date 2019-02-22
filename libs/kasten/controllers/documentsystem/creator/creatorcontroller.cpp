@@ -48,8 +48,7 @@ namespace Kasten {
 CreatorController::CreatorController(ModelCodecManager* modelCodecManager,
                                      AbstractDocumentStrategy* documentStrategy,
                                      KXMLGUIClient* guiClient)
-    : AbstractXmlGuiController()
-    , mModelCodecManager(modelCodecManager)
+    : mModelCodecManager(modelCodecManager)
     , mDocumentStrategy(documentStrategy)
 {
     KActionCollection* actionCollection = guiClient->actionCollection();

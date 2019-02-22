@@ -26,8 +26,7 @@
 namespace Kasten {
 
 ShellWindow::ShellWindow(ViewManager* viewManager)
-    : KXmlGuiWindow()
-    , d_ptr(new ShellWindowPrivate(this, viewManager))
+    : d_ptr(new ShellWindowPrivate(this, viewManager))
 {
 }
 

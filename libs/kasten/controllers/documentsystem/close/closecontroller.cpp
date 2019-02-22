@@ -39,8 +39,7 @@ namespace Kasten {
 CloseController::CloseController(AbstractDocumentStrategy* documentStrategy,
                                  KXMLGUIClient* guiClient,
                                  bool supportMultiple)
-    : AbstractXmlGuiController()
-    , mDocumentStrategy(documentStrategy)
+    : mDocumentStrategy(documentStrategy)
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
