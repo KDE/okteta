@@ -359,7 +359,7 @@ KTestData* AbstractByteArrayModelIfTest::prepareTestInsert()
 {
     Size size = mByteArrayModel->size();
 
-    KTestData* testData = new KTestData(size + 3 * insertSize, insertSize);
+    auto* testData = new KTestData(size + 3 * insertSize, insertSize);
 
     // prepare insertData
     textureByteArrayModel(&testData->insertData, 10, 99);

@@ -83,7 +83,7 @@ void ByteArrayRawFileSynchronizerFactoryTest::init()
 
 void ByteArrayRawFileSynchronizerFactoryTest::testCreate()
 {
-    Kasten::ByteArrayRawFileSynchronizerFactory* factory = new Kasten::ByteArrayRawFileSynchronizerFactory();
+    auto* factory = new Kasten::ByteArrayRawFileSynchronizerFactory();
 
     QVERIFY(factory != nullptr);
 

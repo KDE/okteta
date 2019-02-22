@@ -37,7 +37,7 @@ QString UnsignedBitfieldDataInformation::valueStringImpl() const
 
 QWidget* UnsignedBitfieldDataInformation::createEditWidget(QWidget* parent) const
 {
-    UIntSpinBox* ret = new UIntSpinBox(parent);
+    auto* ret = new UIntSpinBox(parent);
     ret->setBase(Kasten::StructureViewPreferences::unsignedDisplayBase());
     ret->setMaximum(mask());
     return ret;
@@ -45,7 +45,7 @@ QWidget* UnsignedBitfieldDataInformation::createEditWidget(QWidget* parent) cons
 
 QVariant UnsignedBitfieldDataInformation::dataFromWidget(const QWidget* w) const
 {
-    const UIntSpinBox* spin = qobject_cast<const UIntSpinBox*> (w);
+    const auto* spin = qobject_cast<const UIntSpinBox*> (w);
     if (spin) {
         return spin->value();
     }
@@ -54,7 +54,7 @@ QVariant UnsignedBitfieldDataInformation::dataFromWidget(const QWidget* w) const
 
 void UnsignedBitfieldDataInformation::setWidgetData(QWidget* w) const
 {
-    UIntSpinBox* spin = qobject_cast<UIntSpinBox*> (w);
+    auto* spin = qobject_cast<UIntSpinBox*> (w);
     if (spin) {
         spin->setValue(mValue.value<quint64>());
     }

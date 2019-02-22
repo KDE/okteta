@@ -70,7 +70,7 @@ void ViewManager::createCopyOfView(AbstractView* view, Qt::Alignment alignment)
 {
     AbstractView* viewCopy = mFactory->createCopyOfView(view, alignment);
     if (!viewCopy) {
-        AbstractDocument* documentOfView = view->findBaseModel<AbstractDocument*>();
+        auto* documentOfView = view->findBaseModel<AbstractDocument*>();
         viewCopy = new DummyView(documentOfView);
     }
 
@@ -109,7 +109,7 @@ void ViewManager::removeViewsFor(const QVector<Kasten::AbstractDocument*>& docum
     for (AbstractDocument* document : documents) {
         while (it.hasNext()) {
             AbstractView* view = it.next();
-            AbstractDocument* documentOfView = view->findBaseModel<AbstractDocument*>();
+            auto* documentOfView = view->findBaseModel<AbstractDocument*>();
             if (documentOfView == document) {
                 it.remove();
                 closedViews.append(view);

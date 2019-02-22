@@ -92,7 +92,7 @@ QObject* OktetaPartFactory::create(const char* iface,
         (strcmp(iface, "KParts::ReadOnlyPart") == 0) ? OktetaPart::Modus::ReadOnly :
         /* else */                                     OktetaPart::Modus::ReadWrite;
 
-    OktetaPart* part = new OktetaPart(parent, mAboutData, modus, mByteArrayViewProfileManager, mModelCodecManager, mModelCodecViewManager);
+    auto* part = new OktetaPart(parent, mAboutData, modus, mByteArrayViewProfileManager, mModelCodecManager, mModelCodecViewManager);
 
     return part;
 }

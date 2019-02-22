@@ -36,7 +36,7 @@ ByteArrayRandomDataGeneratorConfigEditor::ByteArrayRandomDataGeneratorConfigEdit
 {
     mSettings = mGenerator->settings();
 
-    QFormLayout* pageLayout = new QFormLayout(this);
+    auto* pageLayout = new QFormLayout(this);
     pageLayout->setMargin(0);
 
     // number

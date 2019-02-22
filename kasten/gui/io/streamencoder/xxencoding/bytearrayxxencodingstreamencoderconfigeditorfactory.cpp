@@ -35,8 +35,7 @@ ByteArrayXxencodingStreamEncoderConfigEditorFactory::~ByteArrayXxencodingStreamE
 AbstractModelStreamEncoderConfigEditor* ByteArrayXxencodingStreamEncoderConfigEditorFactory::tryCreateConfigEditor(AbstractModelStreamEncoder* encoder) const
 {
     AbstractModelStreamEncoderConfigEditor* result = nullptr;
-    ByteArrayXxencodingStreamEncoder* xxencodingStreamEncoder =
-        qobject_cast<ByteArrayXxencodingStreamEncoder*>(encoder);
+    auto* xxencodingStreamEncoder = qobject_cast<ByteArrayXxencodingStreamEncoder*>(encoder);
 
     if (xxencodingStreamEncoder) {
         result = new ByteArrayXxencodingStreamEncoderConfigEditor(xxencodingStreamEncoder);

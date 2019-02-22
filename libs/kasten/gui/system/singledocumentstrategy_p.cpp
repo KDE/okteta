@@ -118,7 +118,7 @@ void SingleDocumentStrategyPrivate::createNewWithGenerator(AbstractModelDataGene
 
     if (configEditor) {
         // TODO: make dialog abstract for different UIs
-        CreateDialog* dialog = new CreateDialog(configEditor);
+        auto* dialog = new CreateDialog(configEditor);
 //         dialog->setData( mModel, selection ); TODO
         if (!dialog->exec()) {
             return;
@@ -127,8 +127,7 @@ void SingleDocumentStrategyPrivate::createNewWithGenerator(AbstractModelDataGene
 
     QApplication::setOverrideCursor(Qt::WaitCursor);
 
-    ModelDataGenerateThread* generateThread =
-        new ModelDataGenerateThread(q, generator);
+    auto* generateThread = new ModelDataGenerateThread(q, generator);
     generateThread->start();
     while (!generateThread->wait(100)) {
         QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);

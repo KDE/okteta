@@ -131,9 +131,9 @@ void CreatorController::onNewFromClipboardActionTriggered()
 
 void CreatorController::onNewFromGeneratorActionTriggered()
 {
-    QAction* action = static_cast<QAction*>(sender());
+    auto* action = static_cast<QAction*>(sender());
 
-    AbstractModelDataGenerator* generator = action->data().value<AbstractModelDataGenerator*>();
+    auto* generator = action->data().value<AbstractModelDataGenerator*>();
 
     mDocumentStrategy->createNewWithGenerator(generator);
 }

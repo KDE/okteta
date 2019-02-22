@@ -39,7 +39,7 @@ ByteArraySRecStreamEncoderConfigEditor::ByteArraySRecStreamEncoderConfigEditor(B
 {
     mSettings = mEncoder->settings();
 
-    QFormLayout* pageLayout = new QFormLayout(this);
+    auto* pageLayout = new QFormLayout(this);
     pageLayout->setMargin(0);
 
     // data type

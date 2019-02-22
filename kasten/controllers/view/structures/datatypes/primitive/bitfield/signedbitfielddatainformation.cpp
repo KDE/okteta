@@ -36,7 +36,7 @@ QString SignedBitfieldDataInformation::valueStringImpl() const
 
 QWidget* SignedBitfieldDataInformation::createEditWidget(QWidget* parent) const
 {
-    SIntSpinBox* ret = new SIntSpinBox(parent);
+    auto* ret = new SIntSpinBox(parent);
     ret->setBase(Kasten::StructureViewPreferences::signedDisplayBase());
     ret->setRange(~mask(), mask() >> 1); // mask is unsigned, so shift will do the right thing
     return ret;
@@ -44,7 +44,7 @@ QWidget* SignedBitfieldDataInformation::createEditWidget(QWidget* parent) const
 
 QVariant SignedBitfieldDataInformation::dataFromWidget(const QWidget* w) const
 {
-    const SIntSpinBox* spin = qobject_cast<const SIntSpinBox*> (w);
+    const auto* spin = qobject_cast<const SIntSpinBox*> (w);
     if (spin) {
         return spin->value();
     }
@@ -54,7 +54,7 @@ QVariant SignedBitfieldDataInformation::dataFromWidget(const QWidget* w) const
 
 void SignedBitfieldDataInformation::setWidgetData(QWidget* w) const
 {
-    SIntSpinBox* spin = qobject_cast<SIntSpinBox*> (w);
+    auto* spin = qobject_cast<SIntSpinBox*> (w);
     if (spin) {
         spin->setValue(mValue.value<qint64>());
     }

@@ -72,7 +72,7 @@ void MultiDocumentStrategyPrivate::createNewWithGenerator(AbstractModelDataGener
         mViewManager->codecViewManager()->createConfigEditor(generator);
 
     if (configEditor) {
-        CreateDialog* dialog = new CreateDialog(configEditor);
+        auto* dialog = new CreateDialog(configEditor);
 //         dialog->setData( mModel, selection ); TODO
         if (!dialog->exec()) {
             return;
@@ -81,8 +81,7 @@ void MultiDocumentStrategyPrivate::createNewWithGenerator(AbstractModelDataGener
 
     QApplication::setOverrideCursor(Qt::WaitCursor);
 
-    ModelDataGenerateThread* generateThread =
-        new ModelDataGenerateThread(q, generator);
+    auto* generateThread = new ModelDataGenerateThread(q, generator);
     generateThread->start();
     while (!generateThread->wait(100)) {
         QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);

@@ -153,7 +153,7 @@ void ViewProfileController::onViewProfilesChanged()
     bool isCurrentViewProfileExisting = false;
     for (const ByteArrayViewProfile& viewProfile : viewProfiles) {
         const QString title = viewProfile.viewProfileTitle();
-        QAction* action = new QAction(title, mViewProfilesActionGroup);
+        auto* action = new QAction(title, mViewProfilesActionGroup);
         action->setCheckable(true);
         const ByteArrayViewProfile::Id viewProfileId = viewProfile.id();
         action->setData(viewProfileId);
@@ -188,7 +188,7 @@ void ViewProfileController::onLocalSyncStateChanged(Kasten::LocalSyncState local
 
 void ViewProfileController::onCreateNewActionTriggered()
 {
-    ViewProfileEditDialog* dialog = new ViewProfileEditDialog(mParentWidget);
+    auto* dialog = new ViewProfileEditDialog(mParentWidget);
     const QString dialogTitle = i18nc("@window:title",
                                       "New View Profile");
     dialog->setWindowTitle(dialogTitle);

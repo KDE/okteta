@@ -37,8 +37,7 @@ static constexpr Address StorageOffset = 67;
 
 AbstractPieceTableChange* InsertPieceTableChangeAbstractPieceTableChangeIfTest::createPieceTableChange()
 {
-    InsertPieceTableChange* pieceTableChange =
-        new InsertPieceTableChange(InsertOffset, InsertLength, StorageOffset);
+    auto* pieceTableChange = new InsertPieceTableChange(InsertOffset, InsertLength, StorageOffset);
 
     return pieceTableChange;
 }

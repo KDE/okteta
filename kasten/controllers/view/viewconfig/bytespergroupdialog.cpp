@@ -35,7 +35,7 @@ namespace Kasten {
 BytesPerGroupDialog::BytesPerGroupDialog(QWidget* parent)
     : QDialog(parent)
 {
-    QFormLayout* pageLayout = new QFormLayout();
+    auto* pageLayout = new QFormLayout();
 
     mGroupedBytesCountEdit = new QSpinBox(this);
     mGroupedBytesCountEdit->setRange(0, INT_MAX);
@@ -47,12 +47,12 @@ BytesPerGroupDialog::BytesPerGroupDialog(QWidget* parent)
               "Bytes per Group:");
     pageLayout->addRow(groupedBytesCountLabel, mGroupedBytesCountEdit);
 
-    QDialogButtonBox* dialogButtonBox = new QDialogButtonBox;
+    auto* dialogButtonBox = new QDialogButtonBox;
     dialogButtonBox->setStandardButtons(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
     connect(dialogButtonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
     connect(dialogButtonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
-    QVBoxLayout* layout = new QVBoxLayout;
+    auto* layout = new QVBoxLayout;
 
     layout->addLayout(pageLayout);
     layout->addWidget(dialogButtonBox);

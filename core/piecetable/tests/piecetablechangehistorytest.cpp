@@ -55,10 +55,10 @@ void PieceTableChangeHistoryTest::testAppendChange()
     const QString description2 = QStringLiteral("2");
     const QString description3 = QStringLiteral("3");
     const QString description4 = QStringLiteral("4");
-    TestPieceTableChange* change1 = new TestPieceTableChange(type1Id, description1);
-    TestPieceTableChange* change2 = new TestPieceTableChange(type2Id, description2);
-    TestPieceTableChange* change3 = new TestPieceTableChange(type3Id, description3);
-    TestPieceTableChange* change4 = new TestPieceTableChange(type4Id, description4);
+    auto* change1 = new TestPieceTableChange(type1Id, description1);
+    auto* change2 = new TestPieceTableChange(type2Id, description2);
+    auto* change3 = new TestPieceTableChange(type3Id, description3);
+    auto* change4 = new TestPieceTableChange(type4Id, description4);
 
     // adding first
     bool result = pieceTableChangeHistory.appendChange(change1);
@@ -116,10 +116,10 @@ void PieceTableChangeHistoryTest::testRevertBeforeChange()
     const QString description2 = QStringLiteral("2");
     const QString description3 = QStringLiteral("3");
     const QString description4 = QStringLiteral("4");
-    TestPieceTableChange* change1 = new TestPieceTableChange(type1Id, description1, 1);
-    TestPieceTableChange* change2 = new TestPieceTableChange(type2Id, description2, 2);
-    TestPieceTableChange* change3 = new TestPieceTableChange(type3Id, description3, 3);
-    TestPieceTableChange* change4 = new TestPieceTableChange(type4Id, description4, 4);
+    auto* change1 = new TestPieceTableChange(type1Id, description1, 1);
+    auto* change2 = new TestPieceTableChange(type2Id, description2, 2);
+    auto* change3 = new TestPieceTableChange(type3Id, description3, 3);
+    auto* change4 = new TestPieceTableChange(type4Id, description4, 4);
     ArrayChangeMetrics changeMetrics1 = change1->metrics();
     ArrayChangeMetrics changeMetrics2 = change2->metrics();
     ArrayChangeMetrics changeMetrics3 = change3->metrics();

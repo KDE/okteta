@@ -40,8 +40,8 @@ ByteArrayRawFileWriteJob::~ByteArrayRawFileWriteJob() = default;
 
 void ByteArrayRawFileWriteJob::startWriteToFile()
 {
-    ByteArrayDocument* document = qobject_cast<ByteArrayDocument*>(synchronizer()->document());
-    ByteArrayRawFileWriteThread* writeThread = new ByteArrayRawFileWriteThread(this, document, file());
+    auto* document = qobject_cast<ByteArrayDocument*>(synchronizer()->document());
+    auto* writeThread = new ByteArrayRawFileWriteThread(this, document, file());
     writeThread->start();
     while (!writeThread->wait(100)) {
         QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);

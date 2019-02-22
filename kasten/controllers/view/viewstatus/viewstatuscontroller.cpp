@@ -217,7 +217,7 @@ void ViewStatusController::onCursorPositionChanged(Okteta::Address offset)
 // TODO: fix selection by cursor not sending updates
 void ViewStatusController::onSelectedDataChanged(const Kasten::AbstractModelSelection* modelSelection)
 {
-    const ByteArraySelection* byteArraySelection = static_cast<const ByteArraySelection*>(modelSelection);
+    const auto* byteArraySelection = static_cast<const ByteArraySelection*>(modelSelection);
     const Okteta::AddressRange selection = byteArraySelection->range();
 
     QString selectionString;

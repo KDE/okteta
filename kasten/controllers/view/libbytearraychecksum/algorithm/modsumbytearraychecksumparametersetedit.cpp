@@ -35,7 +35,7 @@ const char ModSumByteArrayChecksumParameterSetEdit::Id[] = "ModSum";
 ModSumByteArrayChecksumParameterSetEdit::ModSumByteArrayChecksumParameterSetEdit(QWidget* parent)
     : AbstractByteArrayChecksumParameterSetEdit(parent)
 {
-    QFormLayout* baseLayout = new QFormLayout(this);
+    auto* baseLayout = new QFormLayout(this);
     baseLayout->setMargin(0);
 
     mByteOrderComboBox = new KComboBox(this);
@@ -61,7 +61,7 @@ bool ModSumByteArrayChecksumParameterSetEdit::isValid() const { return true; }
 
 void ModSumByteArrayChecksumParameterSetEdit::setParameterSet(const AbstractByteArrayChecksumParameterSet* parameterSet)
 {
-    const ModSumByteArrayChecksumParameterSet* modSumParameterSet =
+    const auto* modSumParameterSet =
         static_cast<const ModSumByteArrayChecksumParameterSet*>(parameterSet);
 
     mByteOrderComboBox->setCurrentIndex(modSumParameterSet->endianness());
@@ -69,7 +69,7 @@ void ModSumByteArrayChecksumParameterSetEdit::setParameterSet(const AbstractByte
 
 void ModSumByteArrayChecksumParameterSetEdit::getParameterSet(AbstractByteArrayChecksumParameterSet* parameterSet) const
 {
-    ModSumByteArrayChecksumParameterSet* modSumParameterSet =
+    auto* modSumParameterSet =
         static_cast<ModSumByteArrayChecksumParameterSet*>(parameterSet);
 
     modSumParameterSet->setEndianness(static_cast<Endianness>(mByteOrderComboBox->currentIndex()));

@@ -51,8 +51,7 @@ bool RevertablePieceTable::insert(Address dataOffset, Size length, Address* stor
 
     mPieceTable.insert(dataOffset, length, *storageOffset);
 
-    InsertPieceTableChange* change =
-        new InsertPieceTableChange(dataOffset, length, *storageOffset);
+    auto* change = new InsertPieceTableChange(dataOffset, length, *storageOffset);
 
     return mChangeHistory.appendChange(change);
 }
@@ -61,8 +60,7 @@ bool RevertablePieceTable::remove(const AddressRange& removeRange)
 {
     const PieceList removedPieces = mPieceTable.remove(removeRange);
 
-    RemovePieceTableChange* change =
-        new RemovePieceTableChange(removeRange, removedPieces);
+    auto* change = new RemovePieceTableChange(removeRange, removedPieces);
 
     return mChangeHistory.appendChange(change);
 }
@@ -74,8 +72,7 @@ bool RevertablePieceTable::replace(const AddressRange& removeRange, Size insertL
     const PieceList replacedPieces = mPieceTable.remove(removeRange);
     mPieceTable.insert(removeRange.start(), insertLength, *storageSize);
 
-    ReplacePieceTableChange* change =
-        new ReplacePieceTableChange(removeRange, insertLength, *storageSize, replacedPieces);
+    auto* change = new ReplacePieceTableChange(removeRange, insertLength, *storageSize, replacedPieces);
 
     return mChangeHistory.appendChange(change);
 }
@@ -84,8 +81,7 @@ bool RevertablePieceTable::swap(Address firstStart, const AddressRange& secondRa
 {
     mPieceTable.swap(firstStart, secondRange);
 
-    SwapRangesPieceTableChange* change =
-        new SwapRangesPieceTableChange(firstStart, secondRange);
+    auto* change = new SwapRangesPieceTableChange(firstStart, secondRange);
 
     return mChangeHistory.appendChange(change);
 }

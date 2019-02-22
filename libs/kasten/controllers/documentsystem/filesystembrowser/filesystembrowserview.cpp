@@ -49,7 +49,7 @@ FileSystemBrowserView::~FileSystemBrowserView() = default;
 
 void FileSystemBrowserView::init()
 {
-    QVBoxLayout* layout = new QVBoxLayout(this);
+    auto* layout = new QVBoxLayout(this);
     layout->setMargin(0);
     layout->setSpacing(0);
 
@@ -62,7 +62,7 @@ void FileSystemBrowserView::init()
     layout->addWidget(mToolbar);
 
     // url bar
-    KFilePlacesModel* filePlacesModel = new KFilePlacesModel(this);
+    auto* filePlacesModel = new KFilePlacesModel(this);
     mUrlNavigator = new KUrlNavigator(filePlacesModel, QUrl::fromLocalFile(QDir::homePath()), this);
     connect(mUrlNavigator, &KUrlNavigator::urlChanged, this, &FileSystemBrowserView::setDirOperatorUrl);
     layout->addWidget(mUrlNavigator);

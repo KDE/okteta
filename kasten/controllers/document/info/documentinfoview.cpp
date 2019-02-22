@@ -44,7 +44,7 @@ DocumentInfoView::DocumentInfoView(DocumentInfoTool* tool, QWidget* parent)
     : QWidget(parent)
     , mTool(tool)
 {
-    QVBoxLayout* baseLayout = new QVBoxLayout(this);
+    auto* baseLayout = new QVBoxLayout(this);
     baseLayout->setMargin(0);
 
     // icon
@@ -71,7 +71,7 @@ DocumentInfoView::DocumentInfoView(DocumentInfoTool* tool, QWidget* parent)
     baseLayout->addWidget(separator);
 
     // property grid
-    QGridLayout* propertyGrid = new QGridLayout(); // unknown rows
+    auto* propertyGrid = new QGridLayout(); // unknown rows
     propertyGrid->setColumnStretch(0, 0);
     propertyGrid->setColumnStretch(1, 1);
 

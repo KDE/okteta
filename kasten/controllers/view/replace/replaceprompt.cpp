@@ -39,7 +39,7 @@ ReplacePrompt::ReplacePrompt(QWidget* parent)
     setWindowTitle(i18nc("@title:window prompt for iterative replacement", "Replace"));
 
     // dialog buttons
-    QDialogButtonBox* dialogButtonBox = new QDialogButtonBox;
+    auto* dialogButtonBox = new QDialogButtonBox;
     QPushButton* button = dialogButtonBox->addButton(i18nc("@action:button", "Replace &All"),
                                                      QDialogButtonBox::ApplyRole);
     connect(button, &QAbstractButton::clicked, this, &ReplacePrompt::onReplaceAllButton);
@@ -53,7 +53,7 @@ ReplacePrompt::ReplacePrompt(QWidget* parent)
     connect(button, &QAbstractButton::clicked, this, &ReplacePrompt::onCloseButton);
 
     // main layout
-    QVBoxLayout* layout = new QVBoxLayout;
+    auto* layout = new QVBoxLayout;
     layout->addWidget(dialogButtonBox);
 
     setLayout(layout);

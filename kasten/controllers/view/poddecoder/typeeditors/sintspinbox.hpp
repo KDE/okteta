@@ -138,21 +138,21 @@ inline SIntSpinBox* SIntSpinBox::createSInt64Spinbox(QWidget* parent)
 
 inline SIntSpinBox* SIntSpinBox::createSInt32Spinbox(QWidget* parent)
 {
-    SIntSpinBox* ret = new SIntSpinBox(parent);
+    auto* ret = new SIntSpinBox(parent);
     ret->setRange(std::numeric_limits<qint32>::min(), std::numeric_limits<qint32>::max());
     return ret;
 }
 
 inline SIntSpinBox* SIntSpinBox::createSInt16Spinbox(QWidget* parent)
 {
-    SIntSpinBox* ret = new SIntSpinBox(parent);
+    auto* ret = new SIntSpinBox(parent);
     ret->setRange(std::numeric_limits<qint16>::min(), std::numeric_limits<qint16>::max());
     return ret;
 }
 
 inline SIntSpinBox* SIntSpinBox::createSInt8Spinbox(QWidget* parent)
 {
-    SIntSpinBox* ret = new SIntSpinBox(parent);
+    auto* ret = new SIntSpinBox(parent);
     ret->setRange(std::numeric_limits<qint8>::min(), std::numeric_limits<qint8>::max());
     return ret;
 }

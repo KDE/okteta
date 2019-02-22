@@ -44,8 +44,7 @@ AbstractModelExporterConfigEditor* ModelEncoderFileSystemExporterConfigEditorFac
 {
     AbstractModelExporterConfigEditor* result = nullptr;
 
-    ModelEncoderFileSystemExporter* modelEncoderFileSystemExporter =
-        qobject_cast<ModelEncoderFileSystemExporter*>(exporter);
+    auto* modelEncoderFileSystemExporter = qobject_cast<ModelEncoderFileSystemExporter*>(exporter);
 
     if (modelEncoderFileSystemExporter) {
         AbstractModelStreamEncoderConfigEditor* encoderConfigEditor =

@@ -40,7 +40,7 @@ ByteArrayValuesStreamEncoderConfigEditor::ByteArrayValuesStreamEncoderConfigEdit
 {
     mSettings = mEncoder->settings();
 
-    QGridLayout* pageLayout = new QGridLayout(this);   // unknown rows
+    auto* pageLayout = new QGridLayout(this);   // unknown rows
     pageLayout->setMargin(0);
     pageLayout->setColumnStretch(0, 0);
     pageLayout->setColumnStretch(1, 0);

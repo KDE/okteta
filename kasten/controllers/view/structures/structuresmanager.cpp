@@ -80,7 +80,7 @@ void StructuresManager::addStructDef(const KPluginInfo& info)
         return;
     }
 
-    StructureDefinitionFile* def = new StructureDefinitionFile(info);
+    auto* def = new StructureDefinitionFile(info);
     mDefs.insert(pluginName, def);
 }
 

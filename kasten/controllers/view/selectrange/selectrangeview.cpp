@@ -41,15 +41,15 @@ SelectRangeView::SelectRangeView(SelectRangeTool* tool, QWidget* parent)
     : AbstractToolWidget(parent)
     , mTool(tool)
 {
-    QHBoxLayout* baseLayout = new QHBoxLayout(this);
+    auto* baseLayout = new QHBoxLayout(this);
     baseLayout->setMargin(0);
 
     // offsets
-    QVBoxLayout* offsetLayout = new QVBoxLayout();
+    auto* offsetLayout = new QVBoxLayout();
     offsetLayout->setMargin(0);
 
     // start offset
-    QHBoxLayout* startOffsetLayout = new QHBoxLayout();
+    auto* startOffsetLayout = new QHBoxLayout();
     startOffsetLayout->setMargin(0);
 
     QLabel* label = new QLabel(i18nc("@label:listbox", "Start offset:"), this);
@@ -69,7 +69,7 @@ SelectRangeView::SelectRangeView(SelectRangeTool* tool, QWidget* parent)
     offsetLayout->addLayout(startOffsetLayout);
 
     // end offset
-    QHBoxLayout* endOffsetLayout = new QHBoxLayout();
+    auto* endOffsetLayout = new QHBoxLayout();
     endOffsetLayout->setMargin(0);
 
     label = new QLabel(i18nc("@label:listbox", "End offset:"), this);
@@ -89,7 +89,7 @@ SelectRangeView::SelectRangeView(SelectRangeTool* tool, QWidget* parent)
     baseLayout->addLayout(offsetLayout);
 
     // options
-    QVBoxLayout* optionsLayout = new QVBoxLayout();
+    auto* optionsLayout = new QVBoxLayout();
     optionsLayout->setMargin(0);
 
     mRelativeCheckBox = new QCheckBox(i18nc("@option:check", "End relative"), this);

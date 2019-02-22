@@ -42,11 +42,11 @@ GotoOffsetView::GotoOffsetView(GotoOffsetTool* tool, QWidget* parent)
     : AbstractToolWidget(parent)
     , mTool(tool)
 {
-    QHBoxLayout* baseLayout = new QHBoxLayout(this);
+    auto* baseLayout = new QHBoxLayout(this);
     baseLayout->setMargin(0);
 
     // offset
-    QHBoxLayout* offsetLayout = new QHBoxLayout();
+    auto* offsetLayout = new QHBoxLayout();
     offsetLayout->setMargin(0);
 
     QLabel* label = new QLabel(i18nc("@label:listbox", "O&ffset:"), this);
@@ -72,7 +72,7 @@ GotoOffsetView::GotoOffsetView(GotoOffsetTool* tool, QWidget* parent)
     setFocusProxy(mAddressEdit);   // TODO: see how KDialog does it, e.g. see if there is already a focuswidget as child
 
     // options
-    QVBoxLayout* optionsLayout = new QVBoxLayout();
+    auto* optionsLayout = new QVBoxLayout();
     optionsLayout->setMargin(0);
 
     mAtCursorCheckBox = new QCheckBox(i18nc("@option:check", "From c&ursor"), this);
@@ -90,7 +90,7 @@ GotoOffsetView::GotoOffsetView(GotoOffsetTool* tool, QWidget* parent)
         i18nc("@info:whatsthis", "Go backwards from the end or the current cursor location."));
     connect(mBackwardsCheckBox, &QCheckBox::toggled, mTool, &GotoOffsetTool::setIsBackwards);
 
-    QHBoxLayout* upperOptionsLayout = new QHBoxLayout();
+    auto* upperOptionsLayout = new QHBoxLayout();
     upperOptionsLayout->setMargin(0);
     upperOptionsLayout->addWidget(mAtCursorCheckBox);
     upperOptionsLayout->addWidget(mBackwardsCheckBox);

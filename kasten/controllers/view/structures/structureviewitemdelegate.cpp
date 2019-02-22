@@ -39,7 +39,7 @@ QWidget* StructureViewItemDelegate::createEditor(QWidget* parent, const QStyleOp
     if (!index.isValid()) {
         return nullptr;
     }
-    DataInformationBase* dataB = static_cast<DataInformationBase*> (index.internalPointer());
+    auto* dataB = static_cast<DataInformationBase*> (index.internalPointer());
     if (!dataB || dataB->isTopLevel()) {
         return nullptr;
     }
@@ -55,7 +55,7 @@ void StructureViewItemDelegate::setModelData(QWidget* editor, QAbstractItemModel
     if (!index.isValid()) {
         return;
     }
-    DataInformationBase* dataB = static_cast<DataInformationBase*> (index.internalPointer());
+    auto* dataB = static_cast<DataInformationBase*> (index.internalPointer());
     if (!dataB || dataB->isTopLevel()) {
         return;
     }
@@ -70,7 +70,7 @@ void StructureViewItemDelegate::setEditorData(QWidget* editor, const QModelIndex
     if (!index.isValid()) {
         return;
     }
-    DataInformationBase* dataB = static_cast<DataInformationBase*> (index.internalPointer());
+    auto* dataB = static_cast<DataInformationBase*> (index.internalPointer());
     if (!dataB || dataB->isTopLevel()) {
         return;
     }

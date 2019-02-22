@@ -40,7 +40,7 @@ VersionView::VersionView(VersionViewTool* tool, QWidget* parent)
 {
     mVersionTableModel = new VersionTableModel(nullptr, nullptr, this);
 
-    QVBoxLayout* baseLayout = new QVBoxLayout(this);
+    auto* baseLayout = new QVBoxLayout(this);
     baseLayout->setMargin(0);
 
     mVersionTableView = new QTreeView(this);

@@ -98,7 +98,7 @@ void CopyAsController::updateActions()
     if (hasEncoders) {
         for (auto* encoder : encoderList) {
             const QString title = encoder->remoteTypeName();
-            QAction* action = new QAction(title, mCopyAsSelectAction);
+            auto* action = new QAction(title, mCopyAsSelectAction);
 
             action->setData(QVariant::fromValue(encoder));
             mCopyAsSelectAction->addAction(action);
@@ -115,7 +115,7 @@ void CopyAsController::updateActions()
 
 void CopyAsController::onActionTriggered(QAction* action)
 {
-    AbstractModelStreamEncoder* encoder = action->data().value<AbstractModelStreamEncoder*>();
+    auto* encoder = action->data().value<AbstractModelStreamEncoder*>();
 
     const AbstractModelSelection* selection = mSelectionControl->modelSelection();
 
@@ -136,8 +136,7 @@ void CopyAsController::onActionTriggered(QAction* action)
     QBuffer exportDataBuffer(&exportData);
     exportDataBuffer.open(QIODevice::WriteOnly);
 
-    ModelStreamEncodeThread* encodeThread =
-        new ModelStreamEncodeThread(this, &exportDataBuffer, mModel, selection, encoder);
+    auto* encodeThread = new ModelStreamEncodeThread(this, &exportDataBuffer, mModel, selection, encoder);
     encodeThread->start();
     while (!encodeThread->wait(100)) {
         QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
@@ -147,7 +146,7 @@ void CopyAsController::onActionTriggered(QAction* action)
 
     exportDataBuffer.close();
 
-    QMimeData* mimeData = new QMimeData;
+    auto* mimeData = new QMimeData;
     mimeData->setData(encoder->remoteClipboardMimeType(), exportData);
     QApplication::clipboard()->setMimeData(mimeData, QClipboard::Clipboard);
 

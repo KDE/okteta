@@ -33,10 +33,10 @@ namespace Kasten {
 
 void ByteArrayDocumentFactoryTest::testCreate()
 {
-    ByteArrayDocumentFactory* factory = new ByteArrayDocumentFactory();
+    auto* factory = new ByteArrayDocumentFactory();
 
     AbstractDocument* document = factory->create();
-    ByteArrayDocument* byteArrayDocument = qobject_cast<ByteArrayDocument*>(document);
+    auto* byteArrayDocument = qobject_cast<ByteArrayDocument*>(document);
 
     QVERIFY(document != nullptr);
     QVERIFY(byteArrayDocument != nullptr);

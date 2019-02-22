@@ -52,7 +52,7 @@ void TestDocumentTest::checkContentFlagsChanged(QSignalSpy* changedSpy, Kasten::
 
 void TestDocumentTest::testPlainConstructor()
 {
-    Kasten::TestDocument* document = new Kasten::TestDocument();
+    auto* document = new Kasten::TestDocument();
 
     QVERIFY(document != nullptr);
     QCOMPARE(*document->data(), QByteArray());
@@ -65,7 +65,7 @@ void TestDocumentTest::testPlainConstructor()
 void TestDocumentTest::testDataConstructor()
 {
     const QByteArray testData(TestData);
-    Kasten::TestDocument* document = new Kasten::TestDocument(testData);
+    auto* document = new Kasten::TestDocument(testData);
 
     QVERIFY(document != nullptr);
     QCOMPARE(*document->data(), testData);
@@ -80,9 +80,9 @@ void TestDocumentTest::testChangeData()
     qRegisterMetaType<Kasten::ContentFlags>("Kasten::ContentFlags");
     const QByteArray testData(TestData);
 
-    Kasten::TestDocument* document = new Kasten::TestDocument();
+    auto* document = new Kasten::TestDocument();
 
-    QSignalSpy* changedSpy = new QSignalSpy(document, SIGNAL(contentFlagsChanged(Kasten::ContentFlags)));
+    auto* changedSpy = new QSignalSpy(document, SIGNAL(contentFlagsChanged(Kasten::ContentFlags)));
 
     QCOMPARE(*document->data(), QByteArray());
     QCOMPARE(document->contentFlags(), Kasten::ContentStateNormal);
@@ -100,9 +100,9 @@ void TestDocumentTest::testChangeData()
 
 void TestDocumentTest::testSetTitle()
 {
-    Kasten::TestDocument* document = new Kasten::TestDocument();
+    auto* document = new Kasten::TestDocument();
 
-    QSignalSpy* titleChangedSpy = new QSignalSpy(document, SIGNAL(titleChanged(QString)));
+    auto* titleChangedSpy = new QSignalSpy(document, SIGNAL(titleChanged(QString)));
 
     const QLatin1String title("title");   // TODO QStringLiteral
     document->setTitle(title);
@@ -119,9 +119,9 @@ void TestDocumentTest::testSetContentFlags()
 {
     qRegisterMetaType<Kasten::ContentFlags>("Kasten::ContentFlags");
 
-    Kasten::TestDocument* document = new Kasten::TestDocument();
+    auto* document = new Kasten::TestDocument();
 
-    QSignalSpy* changedSpy = new QSignalSpy(document, SIGNAL(contentFlagsChanged(Kasten::ContentFlags)));
+    auto* changedSpy = new QSignalSpy(document, SIGNAL(contentFlagsChanged(Kasten::ContentFlags)));
 
     const Kasten::ContentFlags contentFlags = Kasten::ContentHasUnstoredChanges;
     document->setContentFlags(contentFlags);

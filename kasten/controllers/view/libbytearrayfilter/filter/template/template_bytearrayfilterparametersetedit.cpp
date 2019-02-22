@@ -40,7 +40,7 @@ Template_ByteArrayFilterParameterSetEdit::Template_ByteArrayFilterParameterSetEd
 //// setup the widget with all edit fields needed for the parameter set
 //// if there can be invalid states connect the change signals of the edit fields to some slots
 //// where you check if the validity changed
-    QFormLayout* baseLayout = new QFormLayout(this);
+    auto* baseLayout = new QFormLayout(this);
     // margin is provided by the container for this widget
     baseLayout->setMargin(0);
 
@@ -85,16 +85,14 @@ bool Template_ByteArrayFilterParameterSetEdit::isValid() const { return mLevelEd
 //// also adapt the passing of the values between the parameter set and the edit fields
 void Template_ByteArrayFilterParameterSetEdit::setValues(const AbstractByteArrayFilterParameterSet* parameterSet)
 {
-    const Template_ByteArrayFilterParameterSet* template_ParameterSet =
-        static_cast<const Template_ByteArrayFilterParameterSet*>(parameterSet);
+    const auto* template_ParameterSet = static_cast<const Template_ByteArrayFilterParameterSet*>(parameterSet);
 
     mLevelEdit->setValue(template_ParameterSet->level());
 }
 
 void Template_ByteArrayFilterParameterSetEdit::getParameterSet(AbstractByteArrayFilterParameterSet* parameterSet) const
 {
-    Template_ByteArrayFilterParameterSet* template_ParameterSet =
-        static_cast<Template_ByteArrayFilterParameterSet*>(parameterSet);
+    auto* template_ParameterSet = static_cast<Template_ByteArrayFilterParameterSet*>(parameterSet);
 
     template_ParameterSet->setLevel(mLevelEdit->value());
 }

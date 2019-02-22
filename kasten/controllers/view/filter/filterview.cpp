@@ -47,11 +47,11 @@ FilterView::FilterView(FilterTool* tool, QWidget* parent)
     : AbstractToolWidget(parent)
     , mTool(tool)
 {
-    QVBoxLayout* baseLayout = new QVBoxLayout(this);
+    auto* baseLayout = new QVBoxLayout(this);
     baseLayout->setMargin(0);
 
     // filter
-    QHBoxLayout* operationLayout = new QHBoxLayout();
+    auto* operationLayout = new QHBoxLayout();
     QLabel* label = new QLabel(i18nc("@label:listbox operation to use by the filter", "Operation:"), this);
     mOperationComboBox = new KComboBox(this);
     connect(mOperationComboBox, QOverload<int>::of(&KComboBox::activated),
@@ -74,7 +74,7 @@ FilterView::FilterView(FilterTool* tool, QWidget* parent)
     QGroupBox* parameterSetBox = new QGroupBox(i18nc("@title:group", "Parameters"), this);
     baseLayout->addWidget(parameterSetBox);
 
-    QVBoxLayout* parameterSetLayout = new QVBoxLayout;
+    auto* parameterSetLayout = new QVBoxLayout;
 
     parameterSetBox->setLayout(parameterSetLayout);
 
@@ -83,7 +83,7 @@ FilterView::FilterView(FilterTool* tool, QWidget* parent)
     parameterSetLayout->addWidget(mParameterSetEditStack);
 
     // filter button
-    QHBoxLayout* buttonLayout = new QHBoxLayout();
+    auto* buttonLayout = new QHBoxLayout();
     buttonLayout->addStretch(10);
     mFilterButton = new QPushButton(this);
     KGuiItem::assign(mFilterButton, KGuiItem(i18nc("@action:button", "&Filter"),
@@ -134,7 +134,7 @@ void FilterView::addFilters()
 
 void FilterView::getParameterSet(AbstractByteArrayFilterParameterSet* parameterSet) const
 {
-    AbstractByteArrayFilterParameterSetEdit* parametersetEdit =
+    auto* parametersetEdit =
         qobject_cast<AbstractByteArrayFilterParameterSetEdit*>(mParameterSetEditStack->currentWidget());
     if (parametersetEdit) {
         parametersetEdit->getParameterSet(parameterSet);
@@ -145,7 +145,7 @@ void FilterView::onFilterClicked()
 {
     const int filterId = mOperationComboBox->currentIndex();
 
-    AbstractByteArrayFilterParameterSetEdit* parametersetEdit =
+    auto* parametersetEdit =
         qobject_cast<AbstractByteArrayFilterParameterSetEdit*>(mParameterSetEditStack->currentWidget());
     if (parametersetEdit) {
         parametersetEdit->rememberCurrentSettings();
@@ -168,7 +168,7 @@ void FilterView::onOperationChange(int index)
 
     mParameterSetEditStack->setCurrentIndex(index);
 
-    AbstractByteArrayFilterParameterSetEdit* parametersetEdit =
+    auto* parametersetEdit =
         qobject_cast<AbstractByteArrayFilterParameterSetEdit*>(mParameterSetEditStack->currentWidget());
     if (parametersetEdit) {
         connect(parametersetEdit, &AbstractByteArrayFilterParameterSetEdit::validityChanged,
@@ -179,7 +179,7 @@ void FilterView::onOperationChange(int index)
 
 void FilterView::onHasWriteableChanged(bool hasWriteable)
 {
-    AbstractByteArrayFilterParameterSetEdit* parametersetEdit =
+    auto* parametersetEdit =
         qobject_cast<AbstractByteArrayFilterParameterSetEdit*>(mParameterSetEditStack->currentWidget());
     const bool isValid = (parametersetEdit ? parametersetEdit->isValid() : false);
 
@@ -188,7 +188,7 @@ void FilterView::onHasWriteableChanged(bool hasWriteable)
 
 void FilterView::onCharCodecChanged(const QString& charCodecName)
 {
-    AbstractByteArrayFilterParameterSetEdit* parametersetEdit =
+    auto* parametersetEdit =
         qobject_cast<AbstractByteArrayFilterParameterSetEdit*>(mParameterSetEditStack->currentWidget());
     if (parametersetEdit) {
         parametersetEdit->setCharCodec(charCodecName);

@@ -304,7 +304,7 @@ void ScriptClassesTest::checkIterators()
 void ScriptClassesTest::testReplaceObject()
 {
     QScriptEngine* eng = ScriptEngineInitializer::newEngine();
-    ScriptLogger* logger = new ScriptLogger();
+    auto* logger = new ScriptLogger();
     logger->setLogToStdOut(true);
     QString unionDef = QStringLiteral(
         "union({\n"

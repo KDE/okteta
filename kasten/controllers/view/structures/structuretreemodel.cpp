@@ -115,7 +115,7 @@ QVariant StructureTreeModel::data(const QModelIndex& index, int role) const
         return {};
     }
 
-    DataInformation* item = static_cast<DataInformation*> (index.internalPointer());
+    auto* item = static_cast<DataInformation*> (index.internalPointer());
     const int column = index.column();
     if (role == Qt::FontRole) {
         if (column == 0 && item->parent()->isTopLevel()) {
@@ -147,7 +147,7 @@ bool StructureTreeModel::setData(const QModelIndex& index, const QVariant& value
         return false;
     }
 
-    DataInformation* item = static_cast<DataInformation*> (index.internalPointer());
+    auto* item = static_cast<DataInformation*> (index.internalPointer());
     bool change = mTool->setData(value, role, item, index.row());
     if (change) {
         emit dataChanged(index, index);
@@ -160,7 +160,7 @@ Qt::ItemFlags StructureTreeModel::flags(const QModelIndex& index) const
     if (!index.isValid()) {
         return Qt::NoItemFlags;
     }
-    DataInformation* item = static_cast<DataInformation*> (index.internalPointer());
+    auto* item = static_cast<DataInformation*> (index.internalPointer());
     return item->flags(index.column(), mTool->isFileLoaded());
 }
 
@@ -187,7 +187,7 @@ QModelIndex StructureTreeModel::index(int row, int column, const QModelIndex& pa
         if (parent.column() != 0) {
             return {};
         }
-        DataInformation* parentItem = static_cast<DataInformation*> (parent.internalPointer());
+        auto* parentItem = static_cast<DataInformation*> (parent.internalPointer());
         childItem = parentItem->childAt(row);
     }
     if (childItem) {
@@ -203,7 +203,7 @@ QModelIndex StructureTreeModel::parent(const QModelIndex& index) const
         return {};
     }
 
-    DataInformation* childItem = static_cast<DataInformation*> (index.internalPointer());
+    auto* childItem = static_cast<DataInformation*> (index.internalPointer());
 
     DataInformationBase* parentObj = childItem->parent();
 
@@ -224,8 +224,7 @@ int StructureTreeModel::rowCount(const QModelIndex& parent) const
     if (parent.column() != 0) {
         return 0;
     }
-    DataInformation* parentItem =
-        static_cast<DataInformation*> (parent.internalPointer());
+    auto* parentItem = static_cast<DataInformation*> (parent.internalPointer());
     if (!parentItem) {
         qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "parentItem is NULL";
         return mTool->childCount();
@@ -238,8 +237,7 @@ bool StructureTreeModel::hasChildren(const QModelIndex& parent) const
     if (!parent.isValid()) {
         return mTool->childCount() > 0;
     }
-    DataInformation* parentItem =
-        static_cast<DataInformation*> (parent.internalPointer());
+    auto* parentItem = static_cast<DataInformation*> (parent.internalPointer());
     if (!parentItem) {
         return false;
     } else {

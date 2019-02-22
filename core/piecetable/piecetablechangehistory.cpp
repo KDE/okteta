@@ -60,7 +60,7 @@ void PieceTableChangeHistory::setBeforeCurrentChangeAsBase(bool hide)
 
 void PieceTableChangeHistory::openGroupedChange(const QString& description)
 {
-    GroupPieceTableChange* groupChange = new GroupPieceTableChange(mActiveGroupChange, description);
+    auto* groupChange = new GroupPieceTableChange(mActiveGroupChange, description);
 
     appendChange(groupChange);
     mActiveGroupChange = groupChange;
@@ -143,7 +143,7 @@ bool PieceTableChangeHistory::revertBeforeChange(PieceTable* pieceTable, int cha
             const AbstractPieceTableChange* change = mChangeStack[currentChangeId];
 
             if (change->type() == AbstractPieceTableChange::GroupId) {
-                const GroupPieceTableChange* groupChange = static_cast<const GroupPieceTableChange*>(change);
+                const auto* groupChange = static_cast<const GroupPieceTableChange*>(change);
                 const AddressRangeList changedRangeList = groupChange->applyGroup(pieceTable);
                 changedRanges->addAddressRangeList(changedRangeList);
 
@@ -164,7 +164,7 @@ bool PieceTableChangeHistory::revertBeforeChange(PieceTable* pieceTable, int cha
             const AbstractPieceTableChange* change = mChangeStack[currentChangeId];
 
             if (change->type() == AbstractPieceTableChange::GroupId) {
-                const GroupPieceTableChange* groupChange = static_cast<const GroupPieceTableChange*>(change);
+                const auto* groupChange = static_cast<const GroupPieceTableChange*>(change);
                 const AddressRangeList changedRangeList = groupChange->revertGroup(pieceTable);
                 changedRanges->addAddressRangeList(changedRangeList);
 

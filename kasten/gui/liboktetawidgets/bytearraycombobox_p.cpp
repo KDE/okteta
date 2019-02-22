@@ -50,7 +50,7 @@ void ByteArrayComboBoxPrivate::init()
 {
     Q_Q(ByteArrayComboBox);
 
-    QHBoxLayout* baseLayout = new QHBoxLayout(q);
+    auto* baseLayout = new QHBoxLayout(q);
     baseLayout->setMargin(0);
     baseLayout->setSpacing(0);
 

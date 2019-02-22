@@ -87,7 +87,7 @@ void CustomToStringTest::testUuid()
     QFETCH(QString, uuidString);
     QFETCH(bool, isGUID);
     QScriptEngine* eng = ScriptEngineInitializer::newEngine();
-    ScriptLogger* logger = new ScriptLogger();
+    auto* logger = new ScriptLogger();
     logger->setLogToStdOut(true);
     DataInformation* structure = nullptr;
     if (isGUID) {

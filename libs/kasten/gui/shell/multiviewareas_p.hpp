@@ -194,7 +194,7 @@ inline void MultiViewAreasPrivate::setViewFocus(AbstractView* view)
 // TODO: this method could be removed, as it is the same as _viewArea->setFocus(), or?
 inline void MultiViewAreasPrivate::setViewAreaFocus(AbstractViewArea* _viewArea)
 {
-    TabbedViews* viewArea = static_cast<TabbedViews*>(_viewArea);
+    auto* viewArea = static_cast<TabbedViews*>(_viewArea);
     if (viewArea == mCurrentViewArea) {
         return;
     }
@@ -208,7 +208,7 @@ inline void MultiViewAreasPrivate::closeViewArea(AbstractViewArea* _viewArea)
 {
     Q_Q(MultiViewAreas);
 
-    TabbedViews* viewArea = static_cast<TabbedViews*>(_viewArea);
+    auto* viewArea = static_cast<TabbedViews*>(_viewArea);
 
     const QVector<AbstractView*> views = viewArea->viewList();
 

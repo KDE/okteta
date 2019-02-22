@@ -120,7 +120,7 @@ AddressRangeList GroupPieceTableChange::applyGroup(PieceTable* pieceTable) const
 
     for (const AbstractPieceTableChange* change : mChangeStack) {
         if (change->type() == AbstractPieceTableChange::GroupId) {
-            const GroupPieceTableChange* groupChange = static_cast<const GroupPieceTableChange*>(change);
+            const auto* groupChange = static_cast<const GroupPieceTableChange*>(change);
             const AddressRangeList changedRangeList = groupChange->applyGroup(pieceTable);
             result.addAddressRangeList(changedRangeList);
         } else {
@@ -140,7 +140,7 @@ AddressRangeList GroupPieceTableChange::revertGroup(PieceTable* pieceTable) cons
         --it;
         AbstractPieceTableChange* change = *it;
         if (change->type() == AbstractPieceTableChange::GroupId) {
-            const GroupPieceTableChange* groupChange = static_cast<const GroupPieceTableChange*>(change);
+            const auto* groupChange = static_cast<const GroupPieceTableChange*>(change);
             const AddressRangeList changedRangeList = groupChange->revertGroup(pieceTable);
             result.addAddressRangeList(changedRangeList);
         } else {
@@ -157,7 +157,7 @@ ArrayChangeMetricsList GroupPieceTableChange::groupMetrics(bool reverted) const
 
     for (const AbstractPieceTableChange* change : mChangeStack) {
         if (change->type() == AbstractPieceTableChange::GroupId) {
-            const GroupPieceTableChange* groupChange = static_cast<const GroupPieceTableChange*>(change);
+            const auto* groupChange = static_cast<const GroupPieceTableChange*>(change);
             const ArrayChangeMetricsList metricsList = groupChange->groupMetrics(reverted);
             result += metricsList;
         } else {

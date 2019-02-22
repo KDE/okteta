@@ -100,7 +100,7 @@ void ViewListMenuController::updateActions()
 
 void ViewListMenuController::onActionTriggered(QAction* action)
 {
-    AbstractView* view = action->data().value<AbstractView*>();
+    auto* view = action->data().value<AbstractView*>();
     mGroupedViews->setViewFocus(view);
 }
 

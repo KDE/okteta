@@ -49,7 +49,7 @@ bool ReplacePieceTableChange::merge(const AbstractPieceTableChange* other)
     bool result = false;
 
     if (other->type() == ReplaceId) {
-        const ReplacePieceTableChange* otherReplaceChange = static_cast<const ReplacePieceTableChange*>(other);
+        const auto* otherReplaceChange = static_cast<const ReplacePieceTableChange*>(other);
         // other replaced after?
         if (mRemoveRange.start() + mInsertLength == otherReplaceChange->mRemoveRange.start()) {
             mRemoveRange.moveEndBy(otherReplaceChange->mRemoveRange.width());

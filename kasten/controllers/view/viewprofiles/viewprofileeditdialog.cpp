@@ -45,7 +45,7 @@ ViewProfileEditDialog::ViewProfileEditDialog(QWidget* parent)
     connect(dialogButtonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
     // main layout
-    QVBoxLayout* layout = new QVBoxLayout;
+    auto* layout = new QVBoxLayout;
     layout->addWidget(mViewProfileEdit);
     layout->addStretch();
     layout->addWidget(dialogButtonBox);

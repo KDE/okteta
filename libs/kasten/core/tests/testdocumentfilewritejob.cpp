@@ -39,10 +39,10 @@ TestDocumentFileWriteJob::~TestDocumentFileWriteJob() = default;
 
 void TestDocumentFileWriteJob::startWriteToFile()
 {
-    TestDocumentFileSynchronizer* testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>(synchronizer());
-    TestDocument* document = qobject_cast<TestDocument*>(synchronizer()->document());
+    auto* testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>(synchronizer());
+    auto* document = qobject_cast<TestDocument*>(synchronizer()->document());
 
-    TestDocumentFileWriteThread* writeThread = new TestDocumentFileWriteThread(this, testSynchronizer->header(),  document, file());
+    auto* writeThread = new TestDocumentFileWriteThread(this, testSynchronizer->header(),  document, file());
     writeThread->start();
     while (!writeThread->wait(100)) {
         QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);

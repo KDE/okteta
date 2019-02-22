@@ -40,7 +40,7 @@ Template_ByteArrayChecksumParameterSetEdit::Template_ByteArrayChecksumParameterS
 //// setup the widget with all edit fields needed for the parameter set
 //// if there can be invalid states connect the change signals of the edit fields to some slots
 //// where you check if the validity changed
-    QFormLayout* baseLayout = new QFormLayout(this);
+    auto* baseLayout = new QFormLayout(this);
     // margin is provided by the container for this widget
     baseLayout->setMargin(0);
 
@@ -85,7 +85,7 @@ bool Template_ByteArrayChecksumParameterSetEdit::isValid() const { return mBitNu
 //// also adapt the passing of the values between the parameter set and the edit fields
 void Template_ByteArrayChecksumParameterSetEdit::setParameterSet(const AbstractByteArrayChecksumParameterSet* parameterSet)
 {
-    const Template_ByteArrayChecksumParameterSet* template_ParameterSet =
+    const auto* template_ParameterSet =
         static_cast<const Template_ByteArrayChecksumParameterSet*>(parameterSet);
 
     mBitNumberEdit->setValue(template_ParameterSet->bitNumber());
@@ -93,7 +93,7 @@ void Template_ByteArrayChecksumParameterSetEdit::setParameterSet(const AbstractB
 
 void Template_ByteArrayChecksumParameterSetEdit::getParameterSet(AbstractByteArrayChecksumParameterSet* parameterSet) const
 {
-    Template_ByteArrayChecksumParameterSet* template_ParameterSet =
+    auto* template_ParameterSet =
         static_cast<Template_ByteArrayChecksumParameterSet*>(parameterSet);
 
     template_ParameterSet->setBitNumber(mBitNumberEdit->value());

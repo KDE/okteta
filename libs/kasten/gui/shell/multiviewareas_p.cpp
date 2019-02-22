@@ -53,7 +53,7 @@ void MultiViewAreasPrivate::init()
     mMainSplitter = new QSplitter();
 
     // create start view area
-    TabbedViews* viewArea = new TabbedViews();
+    auto* viewArea = new TabbedViews();
     QObject::connect(viewArea, &AbstractViewArea::focusChanged,
                      q, [&](bool hasFocus) { onViewAreaFocusChanged(hasFocus); });
     QObject::connect(viewArea, &AbstractGroupedViews::viewFocusChanged,
@@ -77,9 +77,9 @@ AbstractViewArea* MultiViewAreasPrivate::splitViewArea(AbstractViewArea* _viewAr
 {
     Q_Q(MultiViewAreas);
 
-    TabbedViews* firstViewArea = static_cast<TabbedViews*>(_viewArea);
+    auto* firstViewArea = static_cast<TabbedViews*>(_viewArea);
     QWidget* firstViewAreaWidget = firstViewArea->widget();
-    QSplitter* baseSplitter = static_cast<QSplitter*>(firstViewAreaWidget->parentWidget());
+    auto* baseSplitter = static_cast<QSplitter*>(firstViewAreaWidget->parentWidget());
 
     QSplitter* splitter;
     if (baseSplitter->count() == 1) { // only valid with mMainSplitter
@@ -93,7 +93,7 @@ AbstractViewArea* MultiViewAreasPrivate::splitViewArea(AbstractViewArea* _viewAr
         baseSplitter->setSizes(baseSplitterSizes);
     }
 
-    TabbedViews* secondViewArea = new TabbedViews();
+    auto* secondViewArea = new TabbedViews();
     QObject::connect(secondViewArea, &AbstractViewArea::focusChanged,
                      q, [&](bool hasFocus) { onViewAreaFocusChanged(hasFocus); });
     QObject::connect(secondViewArea, &AbstractGroupedViews::viewFocusChanged,
@@ -135,11 +135,11 @@ void MultiViewAreasPrivate::onViewsRemoved()
         return;
     }
 
-    TabbedViews* viewArea = qobject_cast<TabbedViews*>(q->sender());
+    auto* viewArea = qobject_cast<TabbedViews*>(q->sender());
 
     if (viewArea->viewCount() == 0) {
         QWidget* viewAreaWidget = viewArea->widget();
-        QSplitter* baseSplitter = static_cast<QSplitter*>(viewAreaWidget->parentWidget());
+        auto* baseSplitter = static_cast<QSplitter*>(viewAreaWidget->parentWidget());
 
         const int index = baseSplitter->indexOf(viewAreaWidget);
         const int otherIndex = 1 - index;
@@ -147,7 +147,7 @@ void MultiViewAreasPrivate::onViewsRemoved()
         QWidget* otherWidget = baseSplitter->widget(otherIndex);
         // do not delete the main splitter
         if (baseSplitter != mMainSplitter) {
-            QSplitter* baseOfBaseSplitter = static_cast<QSplitter*>(baseSplitter->parentWidget());
+            auto* baseOfBaseSplitter = static_cast<QSplitter*>(baseSplitter->parentWidget());
 
             const QList<int> baseOfBaseSplitterSizes = baseOfBaseSplitter->sizes();
             const int indexOfBaseSplitter = baseOfBaseSplitter->indexOf(baseSplitter);
@@ -166,7 +166,7 @@ void MultiViewAreasPrivate::onViewsRemoved()
         if (mCurrentViewArea == viewArea) {
             // search for the previous widget which is the next or the previous, using index
             while (true) {
-                QSplitter* splitter = qobject_cast<QSplitter*>(otherWidget);
+                auto* splitter = qobject_cast<QSplitter*>(otherWidget);
                 if (splitter) {
                     otherWidget = splitter->widget(index);
                 } else {
@@ -193,7 +193,7 @@ void MultiViewAreasPrivate::onViewAreaFocusChanged(bool hasFocus)
 {
     Q_Q(MultiViewAreas);
 
-    TabbedViews* viewArea = qobject_cast<TabbedViews*>(q->sender());
+    auto* viewArea = qobject_cast<TabbedViews*>(q->sender());
 
     if (mCurrentViewArea == viewArea) {
         return;

@@ -239,7 +239,7 @@ StringDataInformation* DataInformationFactory::newString(const StringParsedData&
         pd.error() << "Bad string encoding given:" << pd.encoding;
         return nullptr;
     }
-    StringDataInformation* data = new StringDataInformation(pd.name, encoding, pd.parent);
+    auto* data = new StringDataInformation(pd.name, encoding, pd.parent);
     bool modeSet = false;
     if (pd.termination.isValid) {
         data->setTerminationCodePoint(pd.termination.value);

@@ -47,7 +47,7 @@ bool RemovePieceTableChange::merge(const AbstractPieceTableChange* other)
     bool result = false;
 
     if (other->type() == RemoveId) {
-        const RemovePieceTableChange* otherRemoveChange = static_cast<const RemovePieceTableChange*>(other);
+        const auto* otherRemoveChange = static_cast<const RemovePieceTableChange*>(other);
         // other removed at the same start?
         if (mRemoveRange.start() == otherRemoveChange->mRemoveRange.start()) {
             mRemoveRange.moveEndBy(otherRemoveChange->mRemoveRange.width());

@@ -36,8 +36,7 @@ AbstractModelDataGeneratorConfigEditor* ByteArrayRandomDataGeneratorConfigEditor
 {
     AbstractModelDataGeneratorConfigEditor* result = nullptr;
 
-    ByteArrayRandomDataGenerator* randomDataGenerator =
-        qobject_cast<ByteArrayRandomDataGenerator*>(generator);
+    auto* randomDataGenerator = qobject_cast<ByteArrayRandomDataGenerator*>(generator);
 
     if (randomDataGenerator) {
         result = new ByteArrayRandomDataGeneratorConfigEditor(randomDataGenerator);

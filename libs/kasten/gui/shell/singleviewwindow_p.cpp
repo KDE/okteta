@@ -141,7 +141,7 @@ void SingleViewWindowPrivate::addTool(AbstractToolView* toolView)
 {
     Q_Q(SingleViewWindow);
 
-    ToolViewDockWidget* dockWidget = new ToolViewDockWidget(toolView, q);
+    auto* dockWidget = new ToolViewDockWidget(toolView, q);
     // TODO: where to set the initial area?
     q->addDockWidget(Qt::RightDockWidgetArea, dockWidget);
 
@@ -161,7 +161,7 @@ void SingleViewWindowPrivate::onTitleChanged(const QString& newTitle)
     Q_Q(SingleViewWindow);
 
     if (mView) {
-        AbstractDocument* document = mView->findBaseModel<AbstractDocument*>();
+        auto* document = mView->findBaseModel<AbstractDocument*>();
         AbstractModelSynchronizer* synchronizer = document->synchronizer();
         const bool hasChanges =
             synchronizer ? (synchronizer->localSyncState() == LocalHasChanges) :
@@ -212,7 +212,7 @@ void SingleViewWindowPrivate::onToolVisibilityChanged(bool isVisible)
 {
     Q_Q(SingleViewWindow);
 
-    ToolViewDockWidget* dockWidget = qobject_cast<ToolViewDockWidget*>(q->sender());
+    auto* dockWidget = qobject_cast<ToolViewDockWidget*>(q->sender());
     if (dockWidget) {
         AbstractView* view = isVisible ? mView : nullptr;
         dockWidget->toolView()->tool()->setTargetModel(view);

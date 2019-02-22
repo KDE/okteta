@@ -47,7 +47,7 @@ void AbstractFileSystemSyncToRemoteJobPrivate::syncToRemote()
 
         mSynchronizer->pauseFileWatching();
     } else {
-        QTemporaryFile* temporaryFile = new QTemporaryFile;
+        auto* temporaryFile = new QTemporaryFile;
         isWorkFileOk = temporaryFile->open();
 
         mWorkFilePath = temporaryFile->fileName();

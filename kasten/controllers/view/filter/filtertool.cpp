@@ -108,7 +108,7 @@ void FilterTool::filter(int filterId) const
 
         QApplication::setOverrideCursor(Qt::WaitCursor);
 
-        FilterJob* filterJob = new FilterJob(byteArrayFilter, reinterpret_cast<Okteta::Byte*>(filterResult.data()), mByteArrayModel, filteredSection);
+        auto* filterJob = new FilterJob(byteArrayFilter, reinterpret_cast<Okteta::Byte*>(filterResult.data()), mByteArrayModel, filteredSection);
         const bool success = filterJob->exec();
 
         QApplication::restoreOverrideCursor();

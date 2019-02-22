@@ -374,14 +374,14 @@ void MouseNavigator::startDrag()
         return;
     }
 
-    QDrag* drag = new QDrag(mView);
+    auto* drag = new QDrag(mView);
     drag->setMimeData(dragData);
 
     Qt::DropActions request = (mView->isReadOnly() || mView->isOverwriteMode()) ? Qt::CopyAction : Qt::CopyAction | Qt::MoveAction;
     Qt::DropAction dropAction = drag->exec(request);
 
     if (dropAction == Qt::MoveAction) {
-        AbstractByteArrayView* targetByteArrayView = qobject_cast<AbstractByteArrayView*>(drag->target());
+        auto* targetByteArrayView = qobject_cast<AbstractByteArrayView*>(drag->target());
         // Not inside this widget itself?
         if (!targetByteArrayView
             || targetByteArrayView->byteArrayModel() != mView->byteArrayModel()) {

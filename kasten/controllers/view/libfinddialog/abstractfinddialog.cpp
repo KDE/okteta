@@ -47,7 +47,7 @@ AbstractFindDialog::AbstractFindDialog(QWidget* parent)
     MainWidgetLayout->setMargin(0);
 
     // dialog buttons
-    QDialogButtonBox* dialogButtonBox = new QDialogButtonBox;
+    auto* dialogButtonBox = new QDialogButtonBox;
     FindButton = new QPushButton;
     dialogButtonBox->addButton(FindButton, QDialogButtonBox::AcceptRole);
     connect(dialogButtonBox, &QDialogButtonBox::accepted, this, &AbstractFindDialog::forwardFindButtonClicked);
@@ -55,7 +55,7 @@ AbstractFindDialog::AbstractFindDialog(QWidget* parent)
     connect(dialogButtonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
     // main layout
-    QVBoxLayout* layout = new QVBoxLayout;
+    auto* layout = new QVBoxLayout;
     layout->addWidget(mainWidget);
     layout->addStretch();
     layout->addWidget(dialogButtonBox);
@@ -88,7 +88,7 @@ void AbstractFindDialog::setupFindBox()
     QGroupBox* findBox = new QGroupBox(i18nc("@title:window", "Find"));
     MainWidgetLayout->addWidget(findBox);
 
-    QVBoxLayout* findBoxLayout = new QVBoxLayout;
+    auto* findBoxLayout = new QVBoxLayout;
 
     SearchDataEdit = new Okteta::ByteArrayComboBox(findBox);
     connect(SearchDataEdit, &Okteta::ByteArrayComboBox::byteArrayChanged,
@@ -118,7 +118,7 @@ void AbstractFindDialog::setupCheckBoxes(QCheckBox* optionCheckBox)
     QGroupBox* optionsBox = new QGroupBox(i18nc("@title:group", "Options"));
     MainWidgetLayout->addWidget(optionsBox);
 
-    QGridLayout* optionsBoxLayout = new QGridLayout(optionsBox);
+    auto* optionsBoxLayout = new QGridLayout(optionsBox);
 
     CaseSensitiveCheckBox = new QCheckBox(i18nc("@option:check", "C&ase sensitive"), optionsBox);
     CaseSensitiveCheckBox->setWhatsThis(i18nc("@info:whatsthis", "Perform a case sensitive search: "

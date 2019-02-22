@@ -305,7 +305,7 @@ void StructuresTool::mark(const QModelIndex& idx)
     if (!mByteArrayModel || !mByteArrayView || !idx.isValid()) {
         return;
     }
-    const DataInformation* data = static_cast<const DataInformation*>(idx.internalPointer());
+    const auto* data = static_cast<const DataInformation*>(idx.internalPointer());
     if (!data) {
         return;
     }
@@ -351,7 +351,7 @@ void StructuresTool::lockStructure(const QModelIndex& idx)
     if (!idx.isValid() || !idx.internalPointer()) {
         return;
     }
-    DataInformation* data = static_cast<DataInformation*>(idx.internalPointer());
+    auto* data = static_cast<DataInformation*>(idx.internalPointer());
     TopLevelDataInformation* top = data->topLevelDataInformation();
     Q_ASSERT(top);
     if (top) {
@@ -367,7 +367,7 @@ void StructuresTool::unlockStructure(const QModelIndex& idx)
     if (!idx.isValid() || !idx.internalPointer()) {
         return;
     }
-    DataInformation* data = static_cast<DataInformation*>(idx.internalPointer());
+    auto* data = static_cast<DataInformation*>(idx.internalPointer());
     TopLevelDataInformation* top = data->topLevelDataInformation();
     Q_CHECK_PTR(top);
 
@@ -386,7 +386,7 @@ bool StructuresTool::isStructureLocked(const QModelIndex& idx) const
     if (!idx.isValid() || !idx.internalPointer()) {
         return false;
     }
-    DataInformation* data = static_cast<DataInformation*>(idx.internalPointer());
+    auto* data = static_cast<DataInformation*>(idx.internalPointer());
     TopLevelDataInformation* top = data->topLevelDataInformation();
     Q_ASSERT(top);
     if (top) {

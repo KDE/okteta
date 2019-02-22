@@ -50,11 +50,11 @@ ChecksumView::ChecksumView(ChecksumTool* tool, QWidget* parent)
     : AbstractToolWidget(parent)
     , mTool(tool)
 {
-    QVBoxLayout* baseLayout = new QVBoxLayout(this);
+    auto* baseLayout = new QVBoxLayout(this);
     baseLayout->setMargin(0);
 
     // algorithm
-    QHBoxLayout* algorithmLayout = new QHBoxLayout();
+    auto* algorithmLayout = new QHBoxLayout();
     QLabel* label = new QLabel(i18nc("@label:listbox algorithm to use for the checksum", "Algorithm:"), this);
     mAlgorithmComboBox = new KComboBox(this);
     connect(mAlgorithmComboBox, QOverload<int>::of(&KComboBox::activated),
@@ -74,13 +74,13 @@ ChecksumView::ChecksumView(ChecksumTool* tool, QWidget* parent)
     QGroupBox* parameterSetBox = new QGroupBox(i18nc("@title:group", "Parameters"), this);
     baseLayout->addWidget(parameterSetBox);
 
-    QVBoxLayout* parameterSetLayout = new QVBoxLayout(parameterSetBox);
+    auto* parameterSetLayout = new QVBoxLayout(parameterSetBox);
 
     mParameterSetEditStack = new QStackedWidget(parameterSetBox);
     parameterSetLayout->addWidget(mParameterSetEditStack);
 
     // calculate
-    QHBoxLayout* calculateLayout = new QHBoxLayout();
+    auto* calculateLayout = new QHBoxLayout();
 
     calculateLayout->addStretch();
     const KGuiItem updateGuiItem =
@@ -143,7 +143,7 @@ void ChecksumView::addAlgorithms()
 
 void ChecksumView::getParameterSet(AbstractByteArrayChecksumParameterSet* parameterSet) const
 {
-    AbstractByteArrayChecksumParameterSetEdit* parametersetEdit =
+    auto* parametersetEdit =
         qobject_cast<AbstractByteArrayChecksumParameterSetEdit*>(mParameterSetEditStack->currentWidget());
     if (parametersetEdit) {
         parametersetEdit->getParameterSet(parameterSet);
@@ -171,7 +171,7 @@ void ChecksumView::onOperationChange(int index)
     mTool->setAlgorithm(index);
     mParameterSetEditStack->setCurrentIndex(index);
 
-    AbstractByteArrayChecksumParameterSetEdit* parametersetEdit =
+    auto* parametersetEdit =
         qobject_cast<AbstractByteArrayChecksumParameterSetEdit*>(mParameterSetEditStack->currentWidget());
     if (parametersetEdit) {
         connect(parametersetEdit, &AbstractByteArrayChecksumParameterSetEdit::validityChanged,

@@ -63,7 +63,7 @@ void ByteArrayRawFileLoadThread::run()
             success = (inStream.status() == QDataStream::Ok);
 
             if (success) {
-                Okteta::PieceTableByteArrayModel* byteArray = new Okteta::PieceTableByteArrayModel(data);
+                auto* byteArray = new Okteta::PieceTableByteArrayModel(data);
                 byteArray->setModified(false);
 
                 mDocument = new ByteArrayDocument(byteArray, i18nc("destination of the byte array", "Loaded from file."));

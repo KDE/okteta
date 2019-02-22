@@ -34,8 +34,7 @@ void ModelEncoderFileSystemExportJobPrivate::startExportToFile()
 {
     Q_Q(ModelEncoderFileSystemExportJob);
 
-    ModelStreamEncodeThread* exportThread =
-        new ModelStreamEncodeThread(q, file(), model(), selection(), mEncoder);
+    auto* exportThread = new ModelStreamEncodeThread(q, file(), model(), selection(), mEncoder);
     exportThread->start();
     while (!exportThread->wait(100)) {
         QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);

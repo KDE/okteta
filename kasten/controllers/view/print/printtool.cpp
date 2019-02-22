@@ -73,7 +73,7 @@ void PrintTool::print()
 //     LayoutDialogPage* layoutPage = new LayoutDialogPage();
 //     QList<QWidget*> customDialogPages;
 //     customDialogPages << layoutPage;
-    QPrintDialog* printDialog = new QPrintDialog(&printer, nullptr);
+    auto* printDialog = new QPrintDialog(&printer, nullptr);
     // Disable PrintPageRange, this tells Qt we can't do client-side page selection,
     // so it will try do server-side page selection if supported
     printDialog->setOption(QPrintDialog::PrintPageRange, false);
@@ -94,14 +94,14 @@ void PrintTool::print()
         const int left = pageRect.left();
         const int width = pageRect.width();
 
-        HeaderFooterFrameRenderer* headerFrameRenderer = new HeaderFooterFrameRenderer(&info);
+        auto* headerFrameRenderer = new HeaderFooterFrameRenderer(&info);
         headerFrameRenderer->setTexts(QStringLiteral("%d"),
                                       QStringLiteral("%f"),
                                       i18nc("in the header of the printed page, e.g. Page 2 of 20", "Page %p of %P"));
         headerFrameRenderer->setWidth(width);
         headerFrameRenderer->setPos(pageRect.topLeft());
 
-        HeaderFooterFrameRenderer* footerFrameRenderer = new HeaderFooterFrameRenderer(&info);
+        auto* footerFrameRenderer = new HeaderFooterFrameRenderer(&info);
         footerFrameRenderer->setTexts(i18nc("in the footer of the printed page, e.g. Printed by: Joe User",
                                             "Printed by: %U"),
                                       QString(),
@@ -112,7 +112,7 @@ void PrintTool::print()
 
         const int contentHeight = pageRect.height() - footerFrameRenderer->height() - headerFrameRenderer->height();
         const int contentTop = pageRect.top() + headerFrameRenderer->height();
-        ByteArrayFrameRenderer* byteArrayFrameRenderer = new ByteArrayFrameRenderer;
+        auto* byteArrayFrameRenderer = new ByteArrayFrameRenderer;
         byteArrayFrameRenderer->setPos(left, contentTop);
         byteArrayFrameRenderer->setWidth(width);
         byteArrayFrameRenderer->setHeight(contentHeight);
@@ -160,7 +160,7 @@ void PrintTool::print()
 
         QApplication::setOverrideCursor(Qt::WaitCursor);
 
-        PrintJob* printJob = new PrintJob(&framesPrinter, 0, byteArrayFrameRenderer->framesCount() - 1, &printer);
+        auto* printJob = new PrintJob(&framesPrinter, 0, byteArrayFrameRenderer->framesCount() - 1, &printer);
         const bool success = printJob->exec();
 
         QApplication::restoreOverrideCursor();

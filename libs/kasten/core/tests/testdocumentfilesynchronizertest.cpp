@@ -85,11 +85,11 @@ void TestDocumentFileSynchronizerTest::checkFileContent(const QUrl& fileUrl, con
                                                         const QByteArray& header)
 {
 
-    Kasten::TestDocumentFileSynchronizer* synchronizer = new Kasten::TestDocumentFileSynchronizer(header);
+    auto* synchronizer = new Kasten::TestDocumentFileSynchronizer(header);
     synchronizer->startLoad(fileUrl)->exec();
     Kasten::AbstractDocument* document = synchronizer->document();
 
-    Kasten::TestDocument* testDocument = qobject_cast<Kasten::TestDocument*>(document);
+    auto* testDocument = qobject_cast<Kasten::TestDocument*>(document);
 
     QVERIFY(testDocument != nullptr);
     QCOMPARE(*testDocument->data(), data);
@@ -108,7 +108,7 @@ void TestDocumentFileSynchronizerTest::testLoadFromFile()
     synchronizer->startLoad(fileUrl)->exec();
     Kasten::AbstractDocument* document = synchronizer->document();
 
-    Kasten::TestDocument* testDocument = qobject_cast<Kasten::TestDocument*>(document);
+    auto* testDocument = qobject_cast<Kasten::TestDocument*>(document);
 
     QVERIFY(document != nullptr);
     QVERIFY(testDocument != nullptr);
@@ -152,7 +152,7 @@ void TestDocumentFileSynchronizerTest::testLoadSaveFile()
     synchronizer->startLoad(fileUrl)->exec();
     Kasten::AbstractDocument* document = synchronizer->document();
 
-    Kasten::TestDocument* testDocument = qobject_cast<Kasten::TestDocument*>(document);
+    auto* testDocument = qobject_cast<Kasten::TestDocument*>(document);
     QVERIFY(testDocument != nullptr);
     // change and save
     testDocument->setData(otherData);
@@ -174,7 +174,7 @@ void TestDocumentFileSynchronizerTest::testLoadReloadFile()
     synchronizer->startLoad(fileUrl)->exec();
     Kasten::AbstractDocument* document = synchronizer->document();
 
-    Kasten::TestDocument* testDocument = qobject_cast<Kasten::TestDocument*>(document);
+    auto* testDocument = qobject_cast<Kasten::TestDocument*>(document);
     QVERIFY(testDocument != nullptr);
 
     // change on disc and reload
@@ -219,7 +219,7 @@ void TestDocumentFileSynchronizerTest::testConnectToFile()
     const QString filePath2 = mFileSystem->createFilePath(QLatin1String(TestFileName2));
     const QUrl fileUrl2 = QUrl::fromLocalFile(QString(filePath2));
 
-    Kasten::TestDocument* testDocument = new Kasten::TestDocument();
+    auto* testDocument = new Kasten::TestDocument();
     Kasten::AbstractDocument* document = testDocument;
     testDocument->setData(otherData);
 

@@ -57,7 +57,7 @@ ZoomSlider::ZoomSlider(QWidget* parent)
     mZoomInButton->setIcon(QIcon::fromTheme(QStringLiteral("zoom-in")));
     mZoomInButton->setAutoRaise(true);
 
-    QHBoxLayout* layout = new QHBoxLayout(this);
+    auto* layout = new QHBoxLayout(this);
     layout->setSpacing(0);
     layout->setMargin(0);
     layout->addWidget(mZoomOutButton);

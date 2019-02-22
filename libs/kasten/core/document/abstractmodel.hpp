@@ -90,7 +90,7 @@ private:
 template <typename T>
 T AbstractModel::findBaseModel() const
 {
-    AbstractModel* model = const_cast<AbstractModel*>(this);
+    auto* model = const_cast<AbstractModel*>(this);
     do {
         T castedModel = qobject_cast<T>(model);
         if (castedModel) {
@@ -105,7 +105,7 @@ T AbstractModel::findBaseModel() const
 template <typename T>
 AbstractModel* AbstractModel::findBaseModelWithInterface() const
 {
-    AbstractModel* model = const_cast<AbstractModel*>(this);
+    auto* model = const_cast<AbstractModel*>(this);
     do {
         T interface = qobject_cast<T>(model);
         if (interface) {

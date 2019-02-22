@@ -80,8 +80,7 @@ AbstractDocument* ByteArrayDocumentFactory::createFromData(const QMimeData* mime
 
     const QByteArray data = mimeData->data(dataFormatName);
 
-    Okteta::PieceTableByteArrayModel* byteArray =
-        new Okteta::PieceTableByteArrayModel(data);
+    auto* byteArray = new Okteta::PieceTableByteArrayModel(data);
     byteArray->setModified(setModified);
 
     // TODO: pass name of generator

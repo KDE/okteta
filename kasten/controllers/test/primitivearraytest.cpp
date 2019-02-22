@@ -103,7 +103,7 @@ void PrimitiveArrayTest::initTestCase()
         data[i] = char(qrand() & 0xff);
     }
 
-    Okteta::Byte* copy = new Okteta::Byte[SIZE];
+    auto* copy = new Okteta::Byte[SIZE];
     memcpy(copy, data.data(), SIZE);
     model.reset(new Okteta::ByteArrayModel(copy, SIZE));
     model->setAutoDelete(true);
@@ -114,7 +114,7 @@ void PrimitiveArrayTest::initTestCase()
         endianData[i] = i;
     }
 
-    Okteta::Byte* endianCopy = new Okteta::Byte[SIZE];
+    auto* endianCopy = new Okteta::Byte[SIZE];
     memcpy(endianCopy, endianData.data(), ENDIAN_SIZE);
     endianModel.reset(new Okteta::ByteArrayModel(endianCopy, ENDIAN_SIZE));
     endianModel->setAutoDelete(true);
@@ -199,9 +199,9 @@ void PrimitiveArrayTest::testReadCustomizedPrimitiveInternal()
     primInfo->setCustomTypeName(QStringLiteral("mytype"));
     primInfo->setToStringFunction(engine->newFunction(customToStringFunc));
 
-    ArrayDataInformation* dataInf = new ArrayDataInformation(QStringLiteral("values"),
-                                                             endianModel->size() / sizeof(T),
-                                                             primInfo);
+    auto* dataInf = new ArrayDataInformation(QStringLiteral("values"),
+                                             endianModel->size() / sizeof(T),
+                                             primInfo);
     QScopedPointer<TopLevelDataInformation> top(new TopLevelDataInformation(dataInf, nullptr, engine));
 
     QCOMPARE(dataInf->childCount(), uint(ENDIAN_SIZE / sizeof(T)));
@@ -210,8 +210,7 @@ void PrimitiveArrayTest::testReadCustomizedPrimitiveInternal()
     QCOMPARE(Okteta::Size(result), endianModel->size() * 8);
     T* dataAsT = reinterpret_cast<T*>(endianData.data());
     QVERIFY(!dataInf->mData->isComplex());
-    PrimitiveArrayData<primType>* arrayData =
-        static_cast<PrimitiveArrayData<primType>*>(dataInf->mData.data());
+    auto* arrayData = static_cast<PrimitiveArrayData<primType>*>(dataInf->mData.data());
 
     // Verify byteOrder of values. The data is set up without palindromes.
     if (sizeof(T) > 1) {
@@ -240,7 +239,7 @@ template <PrimitiveDataType primType, typename T>
 void PrimitiveArrayTest::testReadPrimitiveInternal()
 {
     LoggerWithContext lwc(nullptr, QString());
-    ArrayDataInformation* dataInf = new ArrayDataInformation(QStringLiteral("values"),
+    auto* dataInf = new ArrayDataInformation(QStringLiteral("values"),
                                                              model->size() / sizeof(T),
                                                              PrimitiveFactory::newInstance(QStringLiteral("value"), primType, lwc));
     dataInf->setByteOrder(CURRENT_BYTE_ORDER);
@@ -252,8 +251,7 @@ void PrimitiveArrayTest::testReadPrimitiveInternal()
     QCOMPARE(Okteta::Size(result), model->size() * 8);
     T* dataAsT = reinterpret_cast<T*>(data.data());
     QVERIFY(!dataInf->mData->isComplex());
-    PrimitiveArrayData<primType>* arrayData =
-        static_cast<PrimitiveArrayData<primType>*>(dataInf->mData.data());
+    auto* arrayData = static_cast<PrimitiveArrayData<primType>*>(dataInf->mData.data());
     for (uint i = 0; i < dataInf->childCount(); ++i) {
         AllPrimitiveTypes childDataAll = arrayData->valueAt(i);
         T childData = childDataAll.value<T>();

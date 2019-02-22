@@ -141,7 +141,7 @@ int OktetaProgram::execute()
     mViewManager->codecViewManager()->setEncoderConfigEditorFactories(encoderConfigEditorFactoryList);
     mViewManager->codecViewManager()->setGeneratorConfigEditorFactories(generatorConfigEditorFactoryList);
 
-    OktetaMainWindow* mainWindow = new OktetaMainWindow(this);
+    auto* mainWindow = new OktetaMainWindow(this);
     mDialogHandler->setWidget(mainWindow);
 
     // started by session management?

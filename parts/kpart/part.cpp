@@ -150,8 +150,7 @@ OktetaPart::OktetaPart(QObject* parent,
     // TODO: BrowserExtension might rely on existing objects (session snap while loadJob),
     // so this hack just creates some dummies
     mDocument = new Kasten::ByteArrayDocument(QString());
-    Kasten::ByteArrayViewProfileSynchronizer* viewProfileSynchronizer =
-        new Kasten::ByteArrayViewProfileSynchronizer(viewProfileManager);
+    auto* viewProfileSynchronizer = new Kasten::ByteArrayViewProfileSynchronizer(viewProfileManager);
     mByteArrayView = new Kasten::ByteArrayView(mDocument, viewProfileSynchronizer);
 
     if (modus == Modus::BrowserView) {
@@ -182,7 +181,7 @@ void OktetaPart::setReadWrite(bool readWrite)
 
 bool OktetaPart::openFile()
 {
-    Kasten::ByteArrayRawFileSynchronizerFactory* synchronizerFactory = new Kasten::ByteArrayRawFileSynchronizerFactory();
+    auto* synchronizerFactory = new Kasten::ByteArrayRawFileSynchronizerFactory();
     Kasten::AbstractModelSynchronizer* synchronizer = synchronizerFactory->createSynchronizer();
 
     Kasten::AbstractLoadJob* loadJob = synchronizer->startLoad(QUrl::fromLocalFile(localFilePath()));
@@ -221,8 +220,7 @@ void OktetaPart::onDocumentLoaded(Kasten::AbstractDocument* document)
         connect(mDocument->synchronizer(), &Kasten::AbstractModelSynchronizer::localSyncStateChanged,
                 this, &OktetaPart::onModified);
 
-        Kasten::ByteArrayViewProfileSynchronizer* viewProfileSynchronizer =
-            new Kasten::ByteArrayViewProfileSynchronizer(mViewProfileManager);
+        auto* viewProfileSynchronizer = new Kasten::ByteArrayViewProfileSynchronizer(mViewProfileManager);
         viewProfileSynchronizer->setViewProfileId(mViewProfileManager->defaultViewProfileId());
 
         mByteArrayView = new Kasten::ByteArrayView(mDocument, viewProfileSynchronizer);

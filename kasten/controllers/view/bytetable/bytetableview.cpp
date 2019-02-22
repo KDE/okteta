@@ -46,7 +46,7 @@ ByteTableView::ByteTableView(ByteTableTool* tool, QWidget* parent)
     : AbstractToolWidget(parent)
     , mTool(tool)
 {
-    QVBoxLayout* baseLayout = new QVBoxLayout(this);
+    auto* baseLayout = new QVBoxLayout(this);
     baseLayout->setMargin(0);
 
     mByteTableView = new QTreeView(this);
@@ -74,7 +74,7 @@ ByteTableView::ByteTableView(ByteTableTool* tool, QWidget* parent)
 
     baseLayout->addWidget(mByteTableView, 10);
 
-    QHBoxLayout* insertLayout = new QHBoxLayout();
+    auto* insertLayout = new QHBoxLayout();
 
     QLabel* label = new QLabel(i18nc("@label:spinbox number of bytes to insert", "Number (bytes):"), this);
     insertLayout->addWidget(label);

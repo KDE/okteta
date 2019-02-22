@@ -35,8 +35,7 @@ ByteArrayValuesStreamEncoderConfigEditorFactory::~ByteArrayValuesStreamEncoderCo
 AbstractModelStreamEncoderConfigEditor* ByteArrayValuesStreamEncoderConfigEditorFactory::tryCreateConfigEditor(AbstractModelStreamEncoder* encoder) const
 {
     AbstractModelStreamEncoderConfigEditor* result = nullptr;
-    ByteArrayValuesStreamEncoder* valuesStreamEncoder =
-        qobject_cast<ByteArrayValuesStreamEncoder*>(encoder);
+    auto* valuesStreamEncoder = qobject_cast<ByteArrayValuesStreamEncoder*>(encoder);
 
     if (valuesStreamEncoder) {
         result = new ByteArrayValuesStreamEncoderConfigEditor(valuesStreamEncoder);

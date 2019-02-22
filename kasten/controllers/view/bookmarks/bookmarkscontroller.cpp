@@ -178,7 +178,7 @@ void BookmarksController::updateBookmarks()
             // = KStringHandler::rsqueeze( view->title(), MaxEntryLength );
             ++b;
         }
-        QAction* action = new QAction(title, mBookmarksActionGroup);
+        auto* action = new QAction(title, mBookmarksActionGroup);
 
         action->setData(bookmark.offset());
         mBookmarksActionGroup->addAction(action);
@@ -254,7 +254,7 @@ void BookmarksController::createBookmark()
         bookmarkName = i18nc("default name of a bookmark", "Bookmark");  // %1").arg( 0 ) ); // TODO: use counter like with new file, globally
 
     }
-    BookmarkEditPopup* bookmarkEditPopup = new BookmarkEditPopup(mByteArrayView->widget());
+    auto* bookmarkEditPopup = new BookmarkEditPopup(mByteArrayView->widget());
     QPoint popupPoint = mByteArrayView->cursorRect().topLeft();
 //     popupPoint.ry() += mSlider->height() / 2;
     popupPoint = mByteArrayView->widget()->mapToGlobal(popupPoint);

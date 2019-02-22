@@ -41,7 +41,7 @@ TerminalView::TerminalView(TerminalTool* tool, QWidget* parent)
     : QWidget(parent)
     , mTool(tool)
 {
-    QVBoxLayout* layout = new QVBoxLayout(this);
+    auto* layout = new QVBoxLayout(this);
     layout->setMargin(0);
 
     connect(mTool, &TerminalTool::currentUrlChanged, this, &TerminalView::onCurrentUrlChanged);
@@ -71,12 +71,12 @@ void TerminalView::createTerminalPart()
         terminalWidget->setFocus();
         setFocusProxy(terminalWidget);
 
-        QFrame* frame = qobject_cast<QFrame*>(terminalWidget);
+        auto* frame = qobject_cast<QFrame*>(terminalWidget);
         if (frame) {
             frame->setFrameStyle(QFrame::Panel | QFrame::Sunken);
         }
 
-        QVBoxLayout* layout = static_cast<QVBoxLayout*>(this->layout());
+        auto* layout = static_cast<QVBoxLayout*>(this->layout());
         layout->addWidget(terminalWidget);
         terminalWidget->show();
 

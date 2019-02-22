@@ -142,7 +142,7 @@ void CharsetConversionTool::convertChars()
     const bool convertToOther = (mConversionDirection == ConvertTo);
     Okteta::CharCodec* fromCharCodec = convertToOther ? viewCharCodec : otherCharCodec;
     Okteta::CharCodec* toCharCodec = convertToOther ? otherCharCodec : viewCharCodec;
-    CharsetConversionJob* charsetConversionJob =
+    auto* charsetConversionJob =
         new CharsetConversionJob(reinterpret_cast<Okteta::Byte*>(conversionResult.data()),
                                  mByteArrayModel, convertedSection,
                                  convertToOther ? viewCharCodec : otherCharCodec,

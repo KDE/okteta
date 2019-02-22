@@ -77,7 +77,7 @@ void ShellWindowPrivate::addTool(AbstractToolView* toolView)
 {
     Q_Q(ShellWindow);
 
-    ToolViewDockWidget* dockWidget = new ToolViewDockWidget(toolView, q);
+    auto* dockWidget = new ToolViewDockWidget(toolView, q);
     // TODO: where to set the initial area?
     q->addDockWidget(Qt::RightDockWidgetArea, dockWidget);
 
@@ -94,7 +94,7 @@ void ShellWindowPrivate::addTool(AbstractToolView* toolView)
 
 void ShellWindowPrivate::showDocument(AbstractDocument* document)
 {
-    AbstractGroupedViews* currentGroupedViews = static_cast<AbstractGroupedViews*>(mGroupedViews->viewAreaFocus());
+    auto* currentGroupedViews = static_cast<AbstractGroupedViews*>(mGroupedViews->viewAreaFocus());
     const QVector<AbstractView*> viewList = currentGroupedViews->viewList();
 
     AbstractView* viewOfDocument = nullptr;
@@ -218,7 +218,7 @@ void ShellWindowPrivate::onToolVisibilityChanged(bool isVisible)
 {
     Q_Q(ShellWindow);
 
-    ToolViewDockWidget* dockWidget = qobject_cast<ToolViewDockWidget*>(q->sender());
+    auto* dockWidget = qobject_cast<ToolViewDockWidget*>(q->sender());
     if (dockWidget) {
         AbstractView* view = isVisible ? mCurrentView : nullptr;
         dockWidget->toolView()->tool()->setTargetModel(view);

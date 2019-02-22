@@ -33,7 +33,7 @@
 
 QWidget* FloatDataInformationMethods::staticCreateEditWidget(QWidget* parent)
 {
-    QDoubleSpinBox* ret = new QDoubleSpinBox(parent);
+    auto* ret = new QDoubleSpinBox(parent);
     ret->setMinimum(std::numeric_limits<float>::min());
     ret->setMaximum(std::numeric_limits<float>::max());
     return ret;
@@ -41,7 +41,7 @@ QWidget* FloatDataInformationMethods::staticCreateEditWidget(QWidget* parent)
 
 QVariant FloatDataInformationMethods::staticDataFromWidget(const QWidget* w)
 {
-    const QDoubleSpinBox* spin = qobject_cast<const QDoubleSpinBox*> (w);
+    const auto* spin = qobject_cast<const QDoubleSpinBox*> (w);
     Q_CHECK_PTR(spin);
     if (spin) {
         return ((float) spin->value());
@@ -51,7 +51,7 @@ QVariant FloatDataInformationMethods::staticDataFromWidget(const QWidget* w)
 
 void FloatDataInformationMethods::staticSetWidgetData(float value, QWidget* w)
 {
-    QDoubleSpinBox* spin = qobject_cast<QDoubleSpinBox*> (w);
+    auto* spin = qobject_cast<QDoubleSpinBox*> (w);
     Q_CHECK_PTR(spin);
     if (spin) {
         spin->setValue(value);

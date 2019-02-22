@@ -89,11 +89,11 @@ void ByteArrayRawFileSynchronizerTest::init()
 void ByteArrayRawFileSynchronizerTest::testLoadFromUrl()
 {
     const QUrl fileUrl = QUrl::fromLocalFile(mFileSystem->createFilePath(QLatin1String(TestFileName)));
-    ByteArrayRawFileSynchronizer* synchronizer = new ByteArrayRawFileSynchronizer();
+    auto* synchronizer = new ByteArrayRawFileSynchronizer();
     synchronizer->startLoad(fileUrl)->exec();
     AbstractDocument* document = synchronizer->document();
 
-    ByteArrayDocument* byteArrayDocument = qobject_cast<ByteArrayDocument*>(document);
+    auto* byteArrayDocument = qobject_cast<ByteArrayDocument*>(document);
 
     QVERIFY(document != nullptr);
     QVERIFY(byteArrayDocument != nullptr);
@@ -112,7 +112,7 @@ void ByteArrayRawFileSynchronizerTest::testLoadFromNotExistingUrl()
 {
     const QUrl fileUrl = QUrl(QLatin1String(NotExistingUrl));
 
-    ByteArrayRawFileSynchronizer* synchronizer = new ByteArrayRawFileSynchronizer();
+    auto* synchronizer = new ByteArrayRawFileSynchronizer();
     synchronizer->startLoad(fileUrl)->exec();
     AbstractDocument* document = synchronizer->document();
 
@@ -126,8 +126,7 @@ void ByteArrayRawFileSynchronizerTest::testNewSaveAsToUrl()
 
     ByteArrayDocument* document =
         new Kasten::ByteArrayDocument(QStringLiteral("New created for test."));
-    Okteta::PieceTableByteArrayModel* byteArray =
-        qobject_cast<Okteta::PieceTableByteArrayModel*>(document->content());
+    auto* byteArray = qobject_cast<Okteta::PieceTableByteArrayModel*>(document->content());
 
     // fill array
     QByteArray testData(TestDataSize, TestDataChar);
@@ -135,7 +134,7 @@ void ByteArrayRawFileSynchronizerTest::testNewSaveAsToUrl()
     byteArray->setData(testData);
 
     // save
-    ByteArrayRawFileSynchronizer* synchronizer = new ByteArrayRawFileSynchronizer();
+    auto* synchronizer = new ByteArrayRawFileSynchronizer();
     synchronizer->startConnect(document, fileUrl, AbstractModelSynchronizer::ReplaceRemote)->exec();
     QCOMPARE(synchronizer->document(), document);
 

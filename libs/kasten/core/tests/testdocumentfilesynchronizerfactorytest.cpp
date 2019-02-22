@@ -86,7 +86,7 @@ void TestDocumentFileSynchronizerFactoryTest::checkFileContent(const QUrl& fileU
 {
     Q_UNUSED(data)
     Q_UNUSED(fileUrl)
-    Kasten::TestDocumentFileSynchronizerFactory* factory = new Kasten::TestDocumentFileSynchronizerFactory(header);
+    auto* factory = new Kasten::TestDocumentFileSynchronizerFactory(header);
 #if 0
     AbstractDocument* document = factory->loadNewDocument(fileUrl);
     Kasten::TestDocument* testDocument = qobject_cast<Kasten::TestDocument*>(document);

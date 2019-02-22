@@ -44,8 +44,8 @@ ByteArrayRawFileConnectJob::~ByteArrayRawFileConnectJob() = default;
 
 void ByteArrayRawFileConnectJob::startConnectWithFile()
 {
-    ByteArrayDocument* byteArrayDocument = qobject_cast<ByteArrayDocument*>(document());
-    ByteArrayRawFileWriteThread* writeThread = new ByteArrayRawFileWriteThread(this, byteArrayDocument, file());
+    auto* byteArrayDocument = qobject_cast<ByteArrayDocument*>(document());
+    auto* writeThread = new ByteArrayRawFileWriteThread(this, byteArrayDocument, file());
     writeThread->start();
     while (!writeThread->wait(100)) {
         QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);

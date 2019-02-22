@@ -92,7 +92,7 @@ void ExportController::updateActions()
     if (hasExporters) {
         for (auto* exporter : exporterList) {
             const QString title = exporter->remoteTypeName();
-            QAction* action = new QAction(title, mExportSelectAction);
+            auto* action = new QAction(title, mExportSelectAction);
 
             action->setData(QVariant::fromValue(exporter));
             mExportSelectAction->addAction(action);
@@ -108,7 +108,7 @@ void ExportController::updateActions()
 
 void ExportController::onActionTriggered(QAction* action)
 {
-    AbstractModelExporter* exporter = action->data().value<AbstractModelExporter*>();
+    auto* exporter = action->data().value<AbstractModelExporter*>();
 
     const AbstractModelSelection* selection = mSelectionControl ? mSelectionControl->modelSelection() : nullptr;
 

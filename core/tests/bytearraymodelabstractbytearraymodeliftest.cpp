@@ -33,7 +33,7 @@ static constexpr Size ByteArrayModelSize = 60;
 
 AbstractByteArrayModel* ByteArrayModelAbstractByteArrayModelIfTest::createByteArrayModel()
 {
-    ByteArrayModel* byteArrayModel = new ByteArrayModel(ByteArrayModelSize);
+    auto* byteArrayModel = new ByteArrayModel(ByteArrayModelSize);
     byteArrayModel->setReadOnly(false);
 
     return byteArrayModel;

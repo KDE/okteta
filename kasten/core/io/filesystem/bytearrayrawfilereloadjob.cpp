@@ -42,8 +42,8 @@ ByteArrayRawFileReloadJob::~ByteArrayRawFileReloadJob() = default;
 
 void ByteArrayRawFileReloadJob::startReadFromFile()
 {
-    ByteArrayDocument* document = qobject_cast<ByteArrayDocument*>(synchronizer()->document());
-    ByteArrayRawFileReloadThread* reloadThread = new ByteArrayRawFileReloadThread(this, /*document, */ file());
+    auto* document = qobject_cast<ByteArrayDocument*>(synchronizer()->document());
+    auto* reloadThread = new ByteArrayRawFileReloadThread(this, /*document, */ file());
     reloadThread->start();
     while (!reloadThread->wait(100)) {
         QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
@@ -52,7 +52,7 @@ void ByteArrayRawFileReloadJob::startReadFromFile()
     bool success = reloadThread->success();
     // TODO: moved this here to avoid marshalling the change signals out of the thread. Good idea?
     if (success) {
-        Okteta::PieceTableByteArrayModel* byteArray = qobject_cast<Okteta::PieceTableByteArrayModel*>(document->content());
+        auto* byteArray = qobject_cast<Okteta::PieceTableByteArrayModel*>(document->content());
         byteArray->setData(reloadThread->data());
 
 //         ExternalBookmarkStorage().readBookmarks( document, synchronizer()->url() );

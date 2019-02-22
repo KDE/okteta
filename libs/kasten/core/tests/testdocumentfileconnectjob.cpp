@@ -43,9 +43,9 @@ TestDocumentFileConnectJob::~TestDocumentFileConnectJob() = default;
 
 void TestDocumentFileConnectJob::startConnectWithFile()
 {
-    TestDocumentFileSynchronizer* testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>(synchronizer());
-    TestDocument* testDocument = qobject_cast<TestDocument*>(document());
-    TestDocumentFileWriteThread* writeThread =
+    auto* testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>(synchronizer());
+    auto* testDocument = qobject_cast<TestDocument*>(document());
+    auto* writeThread =
         new TestDocumentFileWriteThread(this, testSynchronizer->header(), testDocument, file());
 
     writeThread->start();

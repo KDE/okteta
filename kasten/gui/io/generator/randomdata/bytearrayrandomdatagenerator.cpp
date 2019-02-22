@@ -62,7 +62,7 @@ QMimeData* ByteArrayRandomDataGenerator::generateData()
 
     }
 
-    QMimeData* mimeData = new QMimeData;
+    auto* mimeData = new QMimeData;
     mimeData->setData(mimeType(), insertData);
 
 // TODO: a method to get the description of the change, e.g.

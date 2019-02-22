@@ -35,7 +35,7 @@ ByteArrayRowViewDesignerFactory::ByteArrayRowViewDesignerFactory(QObject* parent
 
 QWidget* ByteArrayRowViewDesignerFactory::createWidget(QWidget* parent)
 {
-    Okteta::ByteArrayRowView* widget = new Okteta::ByteArrayRowView(parent);
+    auto* widget = new Okteta::ByteArrayRowView(parent);
     widget->setByteArrayModel(createFillerByteArrayModel(widget));
     return widget;
 }

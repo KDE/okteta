@@ -47,7 +47,7 @@ ViewProfilesManageDialog::ViewProfilesManageDialog(ByteArrayViewProfileManager* 
 {
     setWindowTitle(i18nc("@title:window", "View Profiles"));
 
-    QHBoxLayout* pageLayout = new QHBoxLayout;
+    auto* pageLayout = new QHBoxLayout;
 
     // profile list
     mViewProfileTableView = new QTreeView;
@@ -66,9 +66,9 @@ ViewProfilesManageDialog::ViewProfilesManageDialog(ByteArrayViewProfileManager* 
             this, &ViewProfilesManageDialog::onModelReset);
 
     // buttons
-    QVBoxLayout* buttonLayout = new QVBoxLayout;
-    QPushButton* createButton = // copy from selected
-                                new QPushButton;
+    auto* buttonLayout = new QVBoxLayout;
+    auto* createButton = // copy from selected
+                         new QPushButton;
     KGuiItem::assign(createButton,
                      KGuiItem(i18nc("@action:button",
                                     "&Create new..."),
@@ -125,12 +125,12 @@ ViewProfilesManageDialog::ViewProfilesManageDialog(ByteArrayViewProfileManager* 
     pageLayout->addLayout(buttonLayout);
 
     // dialog buttons
-    QDialogButtonBox* dialogButtonBox = new QDialogButtonBox;
+    auto* dialogButtonBox = new QDialogButtonBox;
     mCloseButton = dialogButtonBox->addButton(QDialogButtonBox::Close);
     connect(mCloseButton, &QAbstractButton::clicked, this, &QDialog::accept);
 
     // main layout
-    QVBoxLayout* layout = new QVBoxLayout;
+    auto* layout = new QVBoxLayout;
     layout->addLayout(pageLayout);
     layout->addWidget(dialogButtonBox);
     setLayout(layout);
@@ -172,7 +172,7 @@ ViewProfilesManageDialog::onViewProfileSelectionChanged()
 void
 ViewProfilesManageDialog::onCreateNewButtonClicked()
 {
-    ViewProfileEditDialog* dialog = new ViewProfileEditDialog(this);
+    auto* dialog = new ViewProfileEditDialog(this);
     {
         const bool isBasedOnExisting = (!mCurrentViewProfileId.isEmpty());
         ByteArrayViewProfile newByteArrayViewProfile = isBasedOnExisting ?
@@ -222,7 +222,7 @@ ViewProfilesManageDialog::onEditButtonClicked()
 
     const ByteArrayViewProfile viewProfile =
         mViewProfileManager->viewProfile(mCurrentViewProfileId);
-    ViewProfileEditDialog* dialog = new ViewProfileEditDialog(this);
+    auto* dialog = new ViewProfileEditDialog(this);
     dialog->setViewProfile(viewProfile);
     const QString dialogTitle = i18nc("@window:title",
                                       "\"%1\" View Profile", viewProfile.viewProfileTitle());

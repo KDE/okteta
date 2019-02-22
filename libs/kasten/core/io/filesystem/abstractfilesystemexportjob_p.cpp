@@ -41,7 +41,7 @@ void AbstractFileSystemExportJobPrivate::exportToFile()
         isWorkFileOk = mFile->open(QIODevice::WriteOnly);
     } else {
 
-        QTemporaryFile* temporaryFile = new QTemporaryFile();
+        auto* temporaryFile = new QTemporaryFile();
         isWorkFileOk = temporaryFile->open();
 
         mWorkFilePath = temporaryFile->fileName();

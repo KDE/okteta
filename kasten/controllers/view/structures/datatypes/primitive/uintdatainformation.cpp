@@ -69,7 +69,7 @@ QString UIntDataInformationMethods<T>::staticValueString(T value, int base)
 template <typename T>
 inline QWidget* UIntDataInformationMethods<T>::staticCreateEditWidget(QWidget* parent)
 {
-    UIntSpinBox* ret = new UIntSpinBox(parent, Kasten::StructureViewPreferences::unsignedDisplayBase());
+    auto* ret = new UIntSpinBox(parent, Kasten::StructureViewPreferences::unsignedDisplayBase());
     ret->setMaximum(std::numeric_limits<T>::max());
     return ret;
 }
@@ -77,7 +77,7 @@ inline QWidget* UIntDataInformationMethods<T>::staticCreateEditWidget(QWidget* p
 template <typename T>
 inline QVariant UIntDataInformationMethods<T>::staticDataFromWidget(const QWidget* w)
 {
-    const UIntSpinBox* spin = qobject_cast<const UIntSpinBox*> (w);
+    const auto* spin = qobject_cast<const UIntSpinBox*> (w);
     Q_CHECK_PTR(spin);
     if (spin) {
         return {spin->value()};
@@ -89,7 +89,7 @@ inline QVariant UIntDataInformationMethods<T>::staticDataFromWidget(const QWidge
 template <typename T>
 inline void UIntDataInformationMethods<T>::staticSetWidgetData(T value, QWidget* w)
 {
-    UIntSpinBox* spin = qobject_cast<UIntSpinBox*> (w);
+    auto* spin = qobject_cast<UIntSpinBox*> (w);
     Q_CHECK_PTR(spin);
     if (spin) {
         spin->setValue(value);

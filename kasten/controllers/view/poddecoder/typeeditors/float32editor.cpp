@@ -33,7 +33,7 @@ Float32Editor::Float32Editor(QWidget* parent)
     const float floatMax = std::numeric_limits<float>::max();
     const float floatMin = std::numeric_limits<float>::min();
 
-    QDoubleValidator* validator = new QDoubleValidator(this);
+    auto* validator = new QDoubleValidator(this);
     validator->setNotation(QDoubleValidator::ScientificNotation);
     validator->setRange(floatMin, floatMax);
 

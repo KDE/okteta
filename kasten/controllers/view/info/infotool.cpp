@@ -131,8 +131,7 @@ void InfoTool::updateStatistic()
     QApplication::setOverrideCursor(Qt::WaitCursor);
 
     const Okteta::AddressRange selection = (mByteArrayView ? mByteArrayView->selection() : Okteta::AddressRange());
-    CreateStatisticJob* createStatisticJob =
-        new CreateStatisticJob(mByteArrayModel, selection, mByteCount);
+    auto* createStatisticJob = new CreateStatisticJob(mByteArrayModel, selection, mByteCount);
     const int selectionSize = createStatisticJob->exec();
 
     QApplication::restoreOverrideCursor();

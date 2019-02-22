@@ -139,7 +139,7 @@ ByteArrayViewProfileManager::ByteArrayViewProfileManager()
     // default view profile
     // While there is no proper config syncing offer in the used frameworks, use a
     // single file with the id as content as workaround and watch for it changing
-    KDirWatch* defaultViewProfileWatcher = new KDirWatch(this);
+    auto* defaultViewProfileWatcher = new KDirWatch(this);
     connect(defaultViewProfileWatcher, &KDirWatch::created,
             this, &ByteArrayViewProfileManager::onDefaultViewProfileChanged);
     connect(defaultViewProfileWatcher, &KDirWatch::dirty,

@@ -163,17 +163,17 @@ void StructureView::openSettingsDlg()
     KConfigDialog* dialog = new KConfigDialog(this, QStringLiteral("Structures Tool Settings"),
                                               StructureViewPreferences::self());
 
-    StructureViewSettingsWidget* displaySettings = new StructureViewSettingsWidget();
+    auto* displaySettings = new StructureViewSettingsWidget();
     KPageWidgetItem* displ = dialog->addPage(displaySettings, i18n("Value Display"),
                                              QStringLiteral("configure"));
 
     // cannot use StructuresManagerView directly as page even if the only element
     // because KConfigDialogManager only scans the children of the page for kcfg_ elements
     QWidget* structSelectionPage = new QWidget();
-    QHBoxLayout* hbox = new QHBoxLayout();
+    auto* hbox = new QHBoxLayout();
     hbox->setMargin(0);
     structSelectionPage->setLayout(hbox);
-    StructuresManagerView* structureSettings = new StructuresManagerView(mTool, this);
+    auto* structureSettings = new StructuresManagerView(mTool, this);
     structureSettings->setObjectName(QStringLiteral("kcfg_LoadedStructures"));
     hbox->addWidget(structureSettings);
     dialog->addPage(structSelectionPage, i18n("Structures management"),
@@ -286,8 +286,8 @@ void StructureView::openScriptConsole()
 {
     QDialog* dialog = new QDialog(this);
     dialog->setWindowTitle(i18nc("@title:window", "Structures Script Console"));
-    QVBoxLayout* layout = new QVBoxLayout;
-    QDialogButtonBox* dialogButtonBox = new QDialogButtonBox;
+    auto* layout = new QVBoxLayout;
+    auto* dialogButtonBox = new QDialogButtonBox;
     QPushButton* closeButton = dialogButtonBox->addButton(QDialogButtonBox::Close);
     connect(closeButton, &QPushButton::clicked, dialog, &QDialog::accept);
     layout->addWidget(new ScriptLoggerView(mTool->allData()));

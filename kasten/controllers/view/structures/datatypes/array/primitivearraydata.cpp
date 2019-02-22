@@ -80,7 +80,7 @@ void PrimitiveArrayData<type>::readDataNativeOrder(uint numItems, Okteta::Abstra
     const Okteta::Size numBytes = numItems * sizeof(T);
     Q_ASSERT(input->size() >= numBytes + address);
     Q_UNUSED(numBytes);
-    Okteta::Byte* vectorBytes = reinterpret_cast<Okteta::Byte*>(this->mData.data());
+    auto* vectorBytes = reinterpret_cast<Okteta::Byte*>(this->mData.data());
     const Okteta::Size numCopied = input->copyTo(vectorBytes, address, numItems * sizeof(T));
     Q_ASSERT(numCopied == numBytes);
     Q_UNUSED(numCopied);
@@ -93,7 +93,7 @@ void PrimitiveArrayData<type>::readDataNonNativeOrder(uint numItems, Okteta::Abs
     Q_ASSERT(numItems <= length());
     const uint numBytes = numItems * sizeof(T);
     Q_ASSERT(uint(input->size()) >= numBytes + address);
-    Okteta::Byte* vectorBytes = reinterpret_cast<Okteta::Byte*>(this->mData.data());
+    auto* vectorBytes = reinterpret_cast<Okteta::Byte*>(this->mData.data());
     for (uint itemOffs = 0; itemOffs < numBytes; itemOffs += sizeof(T)) {
         // the compiler should unroll this loop
         for (uint byte = 0; byte < sizeof(T); byte++) {

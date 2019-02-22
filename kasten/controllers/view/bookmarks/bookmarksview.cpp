@@ -46,7 +46,7 @@ BookmarksView::BookmarksView(BookmarksTool* tool, QWidget* parent)
     connect(mBookmarkListModel, &BookmarkListModel::modelReset,
             this, &BookmarksView::onBookmarkSelectionChanged);
 
-    QVBoxLayout* baseLayout = new QVBoxLayout(this);
+    auto* baseLayout = new QVBoxLayout(this);
     baseLayout->setMargin(0);
 
     // bookmarks list
@@ -68,7 +68,7 @@ BookmarksView::BookmarksView(BookmarksTool* tool, QWidget* parent)
     baseLayout->addWidget(mBookmarkListView, 10);
 
     // actions TODO: make this view work like the filebrowser, with actions on top?
-    QHBoxLayout* actionsLayout = new QHBoxLayout();
+    auto* actionsLayout = new QHBoxLayout();
 
     const KGuiItem createBookmarkGuiItem =
         KGuiItem(QString() /*i18n("C&opy")*/,

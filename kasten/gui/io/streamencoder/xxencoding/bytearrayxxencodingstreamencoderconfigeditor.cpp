@@ -39,7 +39,7 @@ ByteArrayXxencodingStreamEncoderConfigEditor::ByteArrayXxencodingStreamEncoderCo
 {
     mSettings = mEncoder->settings();
 
-    QFormLayout* pageLayout = new QFormLayout(this);
+    auto* pageLayout = new QFormLayout(this);
     pageLayout->setMargin(0);
 
     // internal file name

@@ -33,7 +33,7 @@ static constexpr Size ByteArrayModelSize = 60;
 
 AbstractByteArrayModel* PieceTableByteArrayModelAbstractByteArrayModelIfTest::createByteArrayModel()
 {
-    PieceTableByteArrayModel* byteArrayModel = new PieceTableByteArrayModel(ByteArrayModelSize);
+    auto* byteArrayModel = new PieceTableByteArrayModel(ByteArrayModelSize);
     byteArrayModel->setReadOnly(false);
 
     return byteArrayModel;

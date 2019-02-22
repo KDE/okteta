@@ -214,7 +214,7 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiControllerFromFactory(ViewProfileControllerFactory(byteArrayViewProfileManager, this));
     addXmlGuiControllerFromFactory(ViewProfilesManageControllerFactory(byteArrayViewProfileManager, this));
 
-    Kasten::StatusBar* const bottomBar = static_cast<Kasten::StatusBar*>(statusBar());
+    auto* const bottomBar = static_cast<Kasten::StatusBar*>(statusBar());
     addXmlGuiControllerFromFactory(ViewStatusControllerFactory(bottomBar));
     addXmlGuiControllerFromFactory(ModifiedBarControllerFactory(bottomBar));
     addXmlGuiControllerFromFactory(ReadOnlyBarControllerFactory(bottomBar));
@@ -314,14 +314,14 @@ void OktetaMainWindow::onCloseRequest(const QVector<Kasten::AbstractView*>& view
     // group views per document
     QHash<AbstractDocument*, QVector<AbstractView*>> viewsToClosePerDocument;
     for (AbstractView* view : views) {
-        AbstractDocument* document = view->findBaseModel<AbstractDocument*>();
+        auto* document = view->findBaseModel<AbstractDocument*>();
         viewsToClosePerDocument[document].append(view);
     }
 
     // find documents which lose all views
     const QVector<AbstractView*> allViews = viewManager()->views();
     for (AbstractView* view : allViews) {
-        AbstractDocument* document = view->findBaseModel<AbstractDocument*>();
+        auto* document = view->findBaseModel<AbstractDocument*>();
         QHash<AbstractDocument*, QVector<AbstractView*>>::Iterator it =
             viewsToClosePerDocument.find(document);
 

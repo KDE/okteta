@@ -284,7 +284,7 @@ void AbstractByteArrayViewPrivate::setOffsetCoding(AbstractByteArrayView::Offset
 {
     Q_Q(AbstractByteArrayView);
 
-    const OffsetFormat::Format format = (OffsetFormat::Format)offsetCoding;
+    const OffsetFormat::Format format = static_cast<OffsetFormat::Format>(offsetCoding);
     const OffsetFormat::Format currentFormat = mOffsetColumn->format();
     // no change?
     if (currentFormat == format) {
@@ -813,7 +813,7 @@ QMimeData* AbstractByteArrayViewPrivate::selectionAsMimeData() const
         return nullptr;
     }
 
-    QMimeData* mimeData = new QMimeData;
+    auto* mimeData = new QMimeData;
     mimeData->setData(octetStreamFormatName(), selectedData());
     return mimeData;
 }
@@ -1114,7 +1114,7 @@ bool AbstractByteArrayViewPrivate::event(QEvent* event)
 
     //
     if (event->type() == QEvent::KeyPress) {
-        QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
+        auto* keyEvent = static_cast<QKeyEvent*>(event);
         if (keyEvent->key() == Qt::Key_Tab || keyEvent->key() == Qt::Key_Backtab) {
             q->keyPressEvent(keyEvent);
             if (keyEvent->isAccepted()) {
@@ -1144,7 +1144,7 @@ bool AbstractByteArrayViewPrivate::viewportEvent(QEvent* event)
     Q_Q(AbstractByteArrayView);
 
     if (event->type() == QEvent::ToolTip) {
-        QHelpEvent* helpEvent = static_cast<QHelpEvent*>(event);
+        auto* helpEvent = static_cast<QHelpEvent*>(event);
 
         QString toolTip;
 

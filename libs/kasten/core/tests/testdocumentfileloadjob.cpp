@@ -39,10 +39,9 @@ TestDocumentFileLoadJob::~TestDocumentFileLoadJob() = default;
 
 void TestDocumentFileLoadJob::startLoadFromFile()
 {
-    TestDocumentFileSynchronizer* testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>(synchronizer());
+    auto* testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>(synchronizer());
 
-    TestDocumentFileLoadThread* loadThread =
-        new TestDocumentFileLoadThread(this, testSynchronizer->header(), file());
+    auto* loadThread = new TestDocumentFileLoadThread(this, testSynchronizer->header(), file());
     loadThread->start();
     while (!loadThread->wait(100)) {
         QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);

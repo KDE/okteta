@@ -36,7 +36,7 @@ ByteArrayRawFileWriteThread::~ByteArrayRawFileWriteThread() = default;
 
 void ByteArrayRawFileWriteThread::run()
 {
-    Okteta::PieceTableByteArrayModel* byteArray = qobject_cast<Okteta::PieceTableByteArrayModel*>(mDocument->content());
+    auto* byteArray = qobject_cast<Okteta::PieceTableByteArrayModel*>(mDocument->content());
 
     QDataStream outStream(mFile);
 

@@ -47,11 +47,11 @@ ExportDialog::ExportDialog(const QString& remoteTypeName,
 {
     setWindowTitle(i18nc("@title:window", "Export"));
 
-    QSplitter* splitter = new QSplitter(this);
+    auto* splitter = new QSplitter(this);
 
     // config editor
     QWidget* editorPage = new QWidget(splitter);
-    QVBoxLayout* editorPageLayout = new QVBoxLayout(editorPage);
+    auto* editorPageLayout = new QVBoxLayout(editorPage);
     QLabel* editorLabel = new QLabel(remoteTypeName);
     QFont font = editorLabel->font();
     font.setBold(true);
@@ -70,13 +70,13 @@ ExportDialog::ExportDialog(const QString& remoteTypeName,
         QGroupBox* previewBox = new QGroupBox(i18nc("@title:group", "Preview"), this);
         splitter->addWidget(previewBox);
 
-        QHBoxLayout* previewBoxLayout = new QHBoxLayout(previewBox);
+        auto* previewBoxLayout = new QHBoxLayout(previewBox);
 
         previewBoxLayout->addWidget(mPreviewView->widget());
     }
 
     // dialog buttons
-    QDialogButtonBox* dialogButtonBox = new QDialogButtonBox;
+    auto* dialogButtonBox = new QDialogButtonBox;
     QPushButton* exportButton = new QPushButton(QIcon::fromTheme(QStringLiteral("document-export")),
                                                 i18nc("@action:button", "&Export to File..."));
     exportButton->setToolTip(i18nc("@info:tooltip",
@@ -96,7 +96,7 @@ ExportDialog::ExportDialog(const QString& remoteTypeName,
             exportButton, &QWidget::setEnabled);
 
     // main layout
-    QVBoxLayout* layout = new QVBoxLayout;
+    auto* layout = new QVBoxLayout;
     layout->addWidget(splitter);
     layout->addStretch();
     layout->addWidget(dialogButtonBox);

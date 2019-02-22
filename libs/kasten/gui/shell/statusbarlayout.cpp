@@ -215,7 +215,7 @@ void StatusBarLayout::setGeometry(const QRect& _rect)
 
 void StatusBarLayout::updateLayoutStructs() const
 {
-    StatusBarLayout* that = const_cast<StatusBarLayout*>(this);
+    auto* that = const_cast<StatusBarLayout*>(this);
 
 //     const int margin = this->margin();
     const int spacing = this->spacing();

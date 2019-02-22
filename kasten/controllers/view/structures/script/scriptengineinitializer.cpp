@@ -102,7 +102,7 @@ void addFuctionsToScriptEngine(QScriptEngine* engine)
 
 QScriptEngine* newEngine()
 {
-    QScriptEngine* ret = new QScriptEngine();
+    auto* ret = new QScriptEngine();
     addFuctionsToScriptEngine(ret);
     return ret;
 }

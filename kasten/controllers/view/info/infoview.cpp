@@ -46,10 +46,10 @@ InfoView::InfoView(InfoTool* tool, QWidget* parent)
     : QWidget(parent)
     , mTool(tool)
 {
-    QVBoxLayout* baseLayout = new QVBoxLayout(this);
+    auto* baseLayout = new QVBoxLayout(this);
     baseLayout->setMargin(0);
 
-    QHBoxLayout* topLineLayout = new QHBoxLayout();
+    auto* topLineLayout = new QHBoxLayout();
 
     QLabel* label = new QLabel(i18nc("@label size of selected bytes", "Size:"), this);
     topLineLayout->addWidget(label);
@@ -104,7 +104,7 @@ InfoView::InfoView(InfoTool* tool, QWidget* parent)
     header->setSectionResizeMode(QHeaderView::Interactive);
     header->setStretchLastSection(false);
     // TODO: write subclass to filter count and percent by num, not string
-    QSortFilterProxyModel* proxyModel = new QSortFilterProxyModel(this);
+    auto* proxyModel = new QSortFilterProxyModel(this);
     proxyModel->setDynamicSortFilter(true);
     proxyModel->setSourceModel(mTool->statisticTableModel());
     mStatisticTableView->setModel(proxyModel);

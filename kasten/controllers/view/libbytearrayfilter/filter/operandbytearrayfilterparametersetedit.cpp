@@ -37,7 +37,7 @@ const char OperandByteArrayFilterParameterSetEdit::Id[] = "Operand";
 OperandByteArrayFilterParameterSetEdit::OperandByteArrayFilterParameterSetEdit(QWidget* parent)
     : AbstractByteArrayFilterParameterSetEdit(parent)
 {
-    QFormLayout* baseLayout = new QFormLayout(this);
+    auto* baseLayout = new QFormLayout(this);
     baseLayout->setMargin(0);
 
     const QString operandLabelText =
@@ -80,8 +80,7 @@ bool OperandByteArrayFilterParameterSetEdit::isValid() const { return !mOperandE
 
 void OperandByteArrayFilterParameterSetEdit::setValues(const AbstractByteArrayFilterParameterSet* parameterSet)
 {
-    const OperandByteArrayFilterParameterSet* operandParameterSet =
-        static_cast<const OperandByteArrayFilterParameterSet*>(parameterSet);
+    const auto* operandParameterSet = static_cast<const OperandByteArrayFilterParameterSet*>(parameterSet);
 
 //     mOperandEdit->setValue( operandParameterSet->operand() ); TODO: not yet implemented
     mAlignAtEndCheckBox->setChecked(operandParameterSet->alignAtEnd());
@@ -94,8 +93,7 @@ void OperandByteArrayFilterParameterSetEdit::setCharCodec(const QString& charCod
 
 void OperandByteArrayFilterParameterSetEdit::getParameterSet(AbstractByteArrayFilterParameterSet* parameterSet) const
 {
-    OperandByteArrayFilterParameterSet* operandParameterSet =
-        static_cast<OperandByteArrayFilterParameterSet*>(parameterSet);
+    auto* operandParameterSet = static_cast<OperandByteArrayFilterParameterSet*>(parameterSet);
 
     operandParameterSet->setOperand(mOperandEdit->byteArray());
     operandParameterSet->setOperandFormat(mOperandEdit->format());

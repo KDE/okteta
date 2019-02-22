@@ -41,10 +41,9 @@ AbstractView* ByteArrayViewFactory::createViewFor(AbstractDocument* _document)
 {
     ByteArrayView* result = nullptr;
 
-    ByteArrayDocument* document = static_cast<ByteArrayDocument*>(_document);
+    auto* document = static_cast<ByteArrayDocument*>(_document);
     if (document) {
-        ByteArrayViewProfileSynchronizer* synchronizer =
-            new ByteArrayViewProfileSynchronizer(mByteArrayViewProfileManager);
+        auto* synchronizer = new ByteArrayViewProfileSynchronizer(mByteArrayViewProfileManager);
 
         synchronizer->setViewProfileId(mByteArrayViewProfileManager->defaultViewProfileId());
 
@@ -58,10 +57,9 @@ AbstractView* ByteArrayViewFactory::createCopyOfView(AbstractView* _view, Qt::Al
 {
     ByteArrayView* result = nullptr;
 
-    ByteArrayView* view = qobject_cast<ByteArrayView*>(_view);
+    auto* view = qobject_cast<ByteArrayView*>(_view);
     if (view) {
-        ByteArrayViewProfileSynchronizer* synchronizer =
-            new ByteArrayViewProfileSynchronizer(mByteArrayViewProfileManager);
+        auto* synchronizer = new ByteArrayViewProfileSynchronizer(mByteArrayViewProfileManager);
 
         synchronizer->setViewProfileId(view->synchronizer()->viewProfileId());
 

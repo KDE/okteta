@@ -80,7 +80,7 @@ int main(int argc, char* argv[])
 {
     QApplication programCore(argc, argv);
 
-    Widget* widget = new Widget;
+    auto* widget = new Widget;
     widget->show();
 
     return programCore.exec();

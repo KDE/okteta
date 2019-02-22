@@ -50,11 +50,11 @@ StringsExtractView::StringsExtractView(StringsExtractTool* tool, QWidget* parent
     : QWidget(parent)
     , mTool(tool)
 {
-    QVBoxLayout* baseLayout = new QVBoxLayout(this);
+    auto* baseLayout = new QVBoxLayout(this);
     baseLayout->setMargin(0);
 
     // update
-    QHBoxLayout* updateLayout = new QHBoxLayout();
+    auto* updateLayout = new QHBoxLayout();
 
     updateLayout->addStretch();
     QLabel* label = new QLabel(i18nc("@label:spinbox minimum length for consecutive chars to be seen as a string",
@@ -87,12 +87,12 @@ StringsExtractView::StringsExtractView(StringsExtractTool* tool, QWidget* parent
     baseLayout->addLayout(updateLayout);
 
     // filter
-    QHBoxLayout* filterLayout = new QHBoxLayout();
+    auto* filterLayout = new QHBoxLayout();
 
     label = new QLabel(i18nc("@label:lineedit filter term for displayed strings", "Filter:"), this);
     filterLayout->addWidget(label);
 
-    QLineEdit* mFilterEdit = new QLineEdit(this);
+    auto* mFilterEdit = new QLineEdit(this);
     mFilterEdit->setClearButtonEnabled(true);
     mFilterEdit->setPlaceholderText(i18n("Enter a term to limit the list."));
     label->setBuddy(mFilterEdit);
@@ -141,7 +141,7 @@ StringsExtractView::StringsExtractView(StringsExtractTool* tool, QWidget* parent
     baseLayout->addWidget(mContainedStringTableView, 10);
 
     // actions
-    QHBoxLayout* actionsLayout = new QHBoxLayout();
+    auto* actionsLayout = new QHBoxLayout();
 
     const KGuiItem copyGuiItem =
         KGuiItem(i18n("C&opy"),
@@ -186,7 +186,7 @@ bool StringsExtractView::eventFilter(QObject* object, QEvent* event)
 {
     if (object == mContainedStringTableView) {
         if (event->type() == QEvent::FocusOut) {
-            QFocusEvent* focusEvent = static_cast<QFocusEvent*>(event);
+            auto* focusEvent = static_cast<QFocusEvent*>(event);
             const Qt::FocusReason focusReason = focusEvent->reason();
             if (focusReason != Qt::ActiveWindowFocusReason
                 && focusReason != Qt::PopupFocusReason) {

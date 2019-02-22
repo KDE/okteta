@@ -49,13 +49,13 @@ StructuresManagerView::StructuresManagerView(Kasten::StructuresTool* tool, QWidg
 {
     mSelectedStructures = Kasten::StructureViewPreferences::loadedStructures();
 
-    QVBoxLayout* pageLayout = new QVBoxLayout();
+    auto* pageLayout = new QVBoxLayout();
     pageLayout->setMargin(0);
     setLayout(pageLayout);
 
     rebuildPluginSelectorEntries();
 
-    QHBoxLayout* buttonsLayout = new QHBoxLayout();
+    auto* buttonsLayout = new QHBoxLayout();
     pageLayout->addLayout(buttonsLayout);
 
     mGetNewStructuresButton = new KNS3::Button(i18n("Get New Structures..."),
@@ -99,11 +99,11 @@ QStringList StructuresManagerView::values() const
 
 void StructuresManagerView::advancedSelection()
 {
-    StructureAddRemoveWidget* advancedSelectionWidget = new StructureAddRemoveWidget(mSelectedStructures, mTool, this);
+    auto* advancedSelectionWidget = new StructureAddRemoveWidget(mSelectedStructures, mTool, this);
     QPointer<QDialog> dlg = new QDialog(this); // the dlg-on-heap-variant
     dlg->setWindowTitle(i18nc("@title:window", "Advanced Structures Selection"));
-    QVBoxLayout* layout = new QVBoxLayout;
-    QDialogButtonBox* dialogButtonBox = new QDialogButtonBox;
+    auto* layout = new QVBoxLayout;
+    auto* dialogButtonBox = new QDialogButtonBox;
     dialogButtonBox->addButton(QDialogButtonBox::Ok);
     connect(dialogButtonBox, &QDialogButtonBox::accepted, dlg.data(), &QDialog::accept);
     dialogButtonBox->addButton(QDialogButtonBox::Cancel);
@@ -175,7 +175,7 @@ void StructuresManagerView::rebuildPluginSelectorEntries()
     }
 
     // XXX is there any way to clear the plugins selector?
-    QBoxLayout* layoutObj = qobject_cast<QBoxLayout*>(layout());
+    auto* layoutObj = qobject_cast<QBoxLayout*>(layout());
     Q_CHECK_PTR(layoutObj);
     if (mStructuresSelector) {
         layoutObj->removeWidget(mStructuresSelector);

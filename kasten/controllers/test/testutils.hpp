@@ -68,7 +68,7 @@ DataInformation* evalAndParse(QScriptEngine* eng, const char* code, ScriptLogger
 
 TopLevelDataInformation* evalAndParse(const QString& code)
 {
-    ScriptLogger* l = new ScriptLogger();
+    auto* l = new ScriptLogger();
     l->setLogToStdOut(true);
     QScriptEngine* engine = ScriptEngineInitializer::newEngine();
     DataInformation* inf = evalAndParse(engine, code, l);

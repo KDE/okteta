@@ -101,7 +101,7 @@ void InsertController::updateActions()
     if (hasGenerators) {
         for (AbstractModelDataGenerator* generator : generatorList) {
             const QString title = generator->typeName();
-            QAction* action = new QAction(title, mInsertSelectAction);
+            auto* action = new QAction(title, mInsertSelectAction);
 
             action->setData(QVariant::fromValue(generator));
             mInsertSelectAction->addAction(action);
@@ -119,13 +119,13 @@ void InsertController::updateActions()
 
 void InsertController::onActionTriggered(QAction* action)
 {
-    AbstractModelDataGenerator* generator = action->data().value<AbstractModelDataGenerator*>();
+    auto* generator = action->data().value<AbstractModelDataGenerator*>();
 
     AbstractModelDataGeneratorConfigEditor* configEditor =
         mModelCodecViewManager->createConfigEditor(generator);
 
     if (configEditor) {
-        InsertDialog* dialog = new InsertDialog(configEditor);
+        auto* dialog = new InsertDialog(configEditor);
 //         dialog->setData( mModel, selection ); TODO
         if (!dialog->exec()) {
             return;
@@ -134,8 +134,7 @@ void InsertController::onActionTriggered(QAction* action)
 
     QApplication::setOverrideCursor(Qt::WaitCursor);
 
-    ModelDataGenerateThread* generateThread =
-        new ModelDataGenerateThread(this, generator);
+    auto* generateThread = new ModelDataGenerateThread(this, generator);
     generateThread->start();
     while (!generateThread->wait(100)) {
         QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);

@@ -49,7 +49,7 @@ CreateDialog::CreateDialog(AbstractModelDataGeneratorConfigEditor* configEditor,
     editorLabel->setFont(font);
 
     // dialog buttons
-    QDialogButtonBox* dialogButtonBox = new QDialogButtonBox;
+    auto* dialogButtonBox = new QDialogButtonBox;
     QPushButton* createButton = new QPushButton(QIcon::fromTheme(QStringLiteral("document-new")),
                                                 i18nc("@action:button create the new document", "&Create"));
     createButton->setToolTip(i18nc("@info:tooltip",
@@ -69,7 +69,7 @@ CreateDialog::CreateDialog(AbstractModelDataGeneratorConfigEditor* configEditor,
             createButton, &QWidget::setEnabled);
 
     // main layout
-    QVBoxLayout* layout = new QVBoxLayout;
+    auto* layout = new QVBoxLayout;
     layout->addWidget(editorLabel);
     layout->addWidget(mConfigEditor);
     layout->addStretch();

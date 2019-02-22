@@ -47,7 +47,7 @@ QString AbstractByteArrayStreamEncoder::modelTypeName(AbstractModel* model, cons
 {
     Q_UNUSED(selection)
 
-    const ByteArrayDocument * byteArrayDocument = model->findBaseModel<const ByteArrayDocument*>();
+    const auto * byteArrayDocument = model->findBaseModel<const ByteArrayDocument*>();
 
     return byteArrayDocument ? byteArrayDocument->typeName() : QString();
 }
@@ -55,7 +55,7 @@ QString AbstractByteArrayStreamEncoder::modelTypeName(AbstractModel* model, cons
 bool AbstractByteArrayStreamEncoder::encodeToStream(QIODevice* device,
                                                     AbstractModel* model, const AbstractModelSelection* selection)
 {
-    const ByteArrayView* byteArrayView = qobject_cast<const ByteArrayView*>(model);
+    const auto* byteArrayView = qobject_cast<const ByteArrayView*>(model);
 
     const ByteArrayDocument* byteArrayDocument =
         byteArrayView ? qobject_cast<const ByteArrayDocument*>(byteArrayView->baseModel()) : nullptr;
@@ -79,7 +79,7 @@ bool AbstractByteArrayStreamEncoder::encodeToStream(QIODevice* device,
 
 QString AbstractByteArrayStreamEncoder::previewData(AbstractModel* model, const AbstractModelSelection* selection)
 {
-    const ByteArrayView* byteArrayView = qobject_cast<const ByteArrayView*>(model);
+    const auto* byteArrayView = qobject_cast<const ByteArrayView*>(model);
 
     const ByteArrayDocument* byteArrayDocument =
         byteArrayView ? qobject_cast<const ByteArrayDocument*>(byteArrayView->baseModel()) : nullptr;

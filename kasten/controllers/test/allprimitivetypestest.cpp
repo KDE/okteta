@@ -53,7 +53,7 @@ static constexpr Okteta::Byte data[9] =
 
 inline void AllPrimitiveTypesTest::initTestCase()
 {
-    Okteta::Byte* copy = new Okteta::Byte[sizeof(data)];
+    auto* copy = new Okteta::Byte[sizeof(data)];
     memcpy(copy, data, sizeof(data));
     model.reset(new Okteta::ByteArrayModel(copy, sizeof(data)));
     model->setAutoDelete(true);

@@ -123,7 +123,7 @@ bool Dropper::handleDropEvent(QDropEvent* dropEvent)
         mIsActive = false;
 
         // is this an internal dnd?
-        AbstractByteArrayView* sourceByteArrayView = qobject_cast<AbstractByteArrayView*>(dropEvent->source());
+        auto* sourceByteArrayView = qobject_cast<AbstractByteArrayView*>(dropEvent->source());
         if (sourceByteArrayView
             && sourceByteArrayView->byteArrayModel() == mByteArrayView->byteArrayModel()) {
             handleInternalDrag(dropEvent, sourceByteArrayView);

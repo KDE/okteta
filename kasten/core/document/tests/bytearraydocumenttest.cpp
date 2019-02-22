@@ -42,7 +42,7 @@ void ByteArrayDocumentTest::testCreateNew()
     QVERIFY(document != nullptr);
     QCOMPARE(document->contentFlags(), Kasten::ContentStateNormal);
 
-    Okteta::PieceTableByteArrayModel* byteArray = qobject_cast<Okteta::PieceTableByteArrayModel*>(document->content());
+    auto* byteArray = qobject_cast<Okteta::PieceTableByteArrayModel*>(document->content());
     QVERIFY(byteArray != nullptr);
     QCOMPARE(byteArray->size(), 0);
     QVERIFY(!byteArray->isModified());
@@ -53,7 +53,7 @@ void ByteArrayDocumentTest::testCreateNew()
 void ByteArrayDocumentTest::testSetTitle()
 {
     ByteArrayDocument* document = new ByteArrayDocument(QStringLiteral("New created for test."));
-    QSignalSpy* titleChangeSpy =  new QSignalSpy(document, SIGNAL(titleChanged(QString)));
+    auto* titleChangeSpy =  new QSignalSpy(document, SIGNAL(titleChanged(QString)));
 
     const QLatin1String title(Title);
     document->setTitle(title);

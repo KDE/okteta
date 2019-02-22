@@ -43,7 +43,7 @@ bool TestPieceTableChange::merge(const AbstractPieceTableChange* other)
 {
     bool result = false;
     if (other->type() == mTypeId) {
-        const TestPieceTableChange* otherTestChange = static_cast<const TestPieceTableChange*>(other);
+        const auto* otherTestChange = static_cast<const TestPieceTableChange*>(other);
         mDescription += otherTestChange->mDescription;
         result = true;
     }

@@ -63,19 +63,19 @@ void DocumentManagerTest::initTestCase()
 
 void DocumentManagerTest::testConstructor()
 {
-    Kasten::DocumentManager* documentManager = new Kasten::DocumentManager();
+    auto* documentManager = new Kasten::DocumentManager();
     delete documentManager;
 }
 
 void DocumentManagerTest::testAddRemove()
 {
-    Kasten::TestDocument* doc1 = new Kasten::TestDocument();
-    Kasten::TestDocument* doc2 = new Kasten::TestDocument();
-    Kasten::TestDocument* doc3 = new Kasten::TestDocument();
+    auto* doc1 = new Kasten::TestDocument();
+    auto* doc2 = new Kasten::TestDocument();
+    auto* doc3 = new Kasten::TestDocument();
 
-    Kasten::DocumentManager* documentManager = new Kasten::DocumentManager();
-    QSignalSpy* addedSpy = new QSignalSpy(documentManager, SIGNAL(added(QVector<Kasten::AbstractDocument*>)));
-    QSignalSpy* closingSpy = new QSignalSpy(documentManager, SIGNAL(closing(QVector<Kasten::AbstractDocument*>)));
+    auto* documentManager = new Kasten::DocumentManager();
+    auto* addedSpy = new QSignalSpy(documentManager, SIGNAL(added(QVector<Kasten::AbstractDocument*>)));
+    auto* closingSpy = new QSignalSpy(documentManager, SIGNAL(closing(QVector<Kasten::AbstractDocument*>)));
 
     documentManager->addDocument(doc1);
     checkAdded(addedSpy, doc1);
@@ -100,9 +100,9 @@ void DocumentManagerTest::testAddRemove()
 
 void DocumentManagerTest::testCanClose()
 {
-    Kasten::TestDocument* doc = new Kasten::TestDocument();
+    auto* doc = new Kasten::TestDocument();
 
-    Kasten::DocumentManager* documentManager = new Kasten::DocumentManager();
+    auto* documentManager = new Kasten::DocumentManager();
     documentManager->addDocument(doc);
     QVERIFY(documentManager->canClose(doc));
 

@@ -48,7 +48,7 @@ InsertDialog::InsertDialog(AbstractModelDataGeneratorConfigEditor* configEditor,
     editorLabel->setFont(font);
 
     // dialog buttons
-    QDialogButtonBox* dialogButtonBox = new QDialogButtonBox;
+    auto* dialogButtonBox = new QDialogButtonBox;
     QPushButton* insertButton = new QPushButton(i18nc("@action:button", "&Insert"));
     insertButton->setToolTip(i18nc("@info:tooltip",
                                    "Insert the generated data into the document."));
@@ -67,7 +67,7 @@ InsertDialog::InsertDialog(AbstractModelDataGeneratorConfigEditor* configEditor,
             insertButton, &QWidget::setEnabled);
 
     // main layout
-    QVBoxLayout* layout = new QVBoxLayout;
+    auto* layout = new QVBoxLayout;
     layout->addWidget(editorLabel);
     layout->addWidget(mConfigEditor);
     layout->addStretch();
