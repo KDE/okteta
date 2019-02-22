@@ -32,7 +32,7 @@ struct JsTestData
 {
     using CheckCallback = std::function<void(DataInformation*)>;
     JsTestData() = default;
-    JsTestData(const char* tag, const char* constructor, CheckCallback check)
+    JsTestData(const char* tag, const char* constructor, const CheckCallback& check)
         : tag(tag)
         , constructorCall(QString::fromUtf8(constructor))
         , check(check)
