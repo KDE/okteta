@@ -44,7 +44,7 @@ protected:
     AbstractToolInlineView();
 
 public:
-    virtual ~AbstractToolInlineView();
+    ~AbstractToolInlineView() override;
 
 public: // API to be implemented
     virtual QWidget* widget() const = 0;
