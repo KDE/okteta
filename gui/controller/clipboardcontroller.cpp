@@ -66,7 +66,7 @@ bool ClipboardController::handleKeyPress(QKeyEvent* keyEvent)
 int ClipboardController::addContextMenuActions(QMenu* menu)
 {
     auto copyAction = menu->addAction(QIcon::fromTheme(QStringLiteral("edit-copy")),
-                                      i18n("&Copy") + QLatin1Char('\t') + QKeySequence(QKeySequence::Copy).toString(QKeySequence::NativeText),
+                                      i18nc("@action:inmenu", "&Copy") + QLatin1Char('\t') + QKeySequence(QKeySequence::Copy).toString(QKeySequence::NativeText),
                                       mView, &AbstractByteArrayView::copy);
     copyAction->setEnabled(mView->hasSelectedData());
     copyAction->setObjectName(QStringLiteral("edit-copy"));
@@ -76,13 +76,13 @@ int ClipboardController::addContextMenuActions(QMenu* menu)
     }
 
     auto cutAction = menu->addAction(QIcon::fromTheme(QStringLiteral("edit-cut")),
-                                     i18n("Cu&t") + QLatin1Char('\t') + QKeySequence(QKeySequence::Cut).toString(QKeySequence::NativeText),
+                                     i18nc("@action:inmenu", "Cu&t") + QLatin1Char('\t') + QKeySequence(QKeySequence::Cut).toString(QKeySequence::NativeText),
                                      mView, &AbstractByteArrayView::cut);
     cutAction->setEnabled(mView->hasSelectedData());
     cutAction->setObjectName(QStringLiteral("edit-cut"));
 
     auto pasteAction = menu->addAction(QIcon::fromTheme(QStringLiteral("edit-paste")),
-                                        i18n("&Paste") + QLatin1Char('\t') + QKeySequence(QKeySequence::Paste).toString(QKeySequence::NativeText),
+                                        i18nc("@action:inmenu", "&Paste") + QLatin1Char('\t') + QKeySequence(QKeySequence::Paste).toString(QKeySequence::NativeText),
                                         mView, &AbstractByteArrayView::paste);
     const QMimeData* clipboardMimeData = QApplication::clipboard()->mimeData(QClipboard::Clipboard);
     const bool canReadData = mView->canReadData(clipboardMimeData);

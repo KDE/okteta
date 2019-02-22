@@ -75,13 +75,13 @@ int UndoRedoController::addContextMenuActions(QMenu* menu)
     const auto versionCount = versionable->versionCount();
 
     auto undoAction = menu->addAction(QIcon::fromTheme(QStringLiteral("edit-undo")),
-                                      i18n("&Undo") + QLatin1Char('\t') + QKeySequence(QKeySequence::Undo).toString(QKeySequence::NativeText),
+                                      i18nc("@action:inmenu", "&Undo") + QLatin1Char('\t') + QKeySequence(QKeySequence::Undo).toString(QKeySequence::NativeText),
                                       mView, [this] { undo(); });
     undoAction->setEnabled(0 < versionIndex);
     undoAction->setObjectName(QStringLiteral("edit-undo"));
 
     auto redoAction = menu->addAction(QIcon::fromTheme(QStringLiteral("edit-redo")),
-                                      i18n("Re&do") + QLatin1Char('\t') + QKeySequence(QKeySequence::Redo).toString(QKeySequence::NativeText),
+                                      i18nc("@action:inmenu", "Re&do") + QLatin1Char('\t') + QKeySequence(QKeySequence::Redo).toString(QKeySequence::NativeText),
                                       mView, [this] { redo(); });
     redoAction->setEnabled(versionIndex+1 < versionCount);
     redoAction->setObjectName(QStringLiteral("edit-redo"));

@@ -1055,7 +1055,7 @@ QMenu* AbstractByteArrayViewPrivate::createStandardContextMenu(const QPoint& pos
     }
 
     auto selectAllAction = menu->addAction(QIcon::fromTheme(QStringLiteral("edit-select-all")),
-                                           i18n("Select &All"),
+                                           i18nc("@action:inmenu", "Select &All"),
                                            q, [q]() { q->selectAll(true); });
     selectAllAction->setEnabled(mByteArrayModel->size() > 0);
     selectAllAction->setObjectName(QStringLiteral("select-all"));
