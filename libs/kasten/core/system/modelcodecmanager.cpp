@@ -40,9 +40,7 @@
 
 namespace Kasten {
 
-ModelCodecManager::ModelCodecManager()
-{
-}
+ModelCodecManager::ModelCodecManager() = default;
 
 ModelCodecManager::~ModelCodecManager()
 {

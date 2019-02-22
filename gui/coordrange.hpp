@@ -94,7 +94,7 @@ inline CoordRange::CoordRange() = default;
 
 inline CoordRange::~CoordRange() = default;
 
-inline CoordRange& CoordRange::operator=(const CoordRange& other) {  BaseCoordRange::operator=(other); return *this; }
+inline CoordRange& CoordRange::operator=(const CoordRange& other) = default;
 
 inline bool CoordRange::operator==(const CoordRange& other) const { return BaseCoordRange::operator==(other); }
 
