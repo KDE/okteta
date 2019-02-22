@@ -55,21 +55,21 @@ ViewProfileController::ViewProfileController(ByteArrayViewProfileManager* viewPr
     mCreateNewAction =
         new QAction(QIcon::fromTheme(QStringLiteral("document-new")),
                     i18nc("@action:inmenu create a new view profile",
-                          "Create new..."),
+                          "Create New..."),
                     this);
     connect(mCreateNewAction, &QAction::triggered, this, &ViewProfileController::onCreateNewActionTriggered);
 
     mSaveChangesAction =
         new QAction(QIcon::fromTheme(QStringLiteral("document-save")),
                     i18nc("@action:inmenu save changed to the view profile to the base profile",
-                          "Save changes"),
+                          "Save Changes"),
                     this);
     connect(mSaveChangesAction, &QAction::triggered, this, &ViewProfileController::onSaveChangesActionTriggered);
 
     mResetChangesAction =
         new QAction(QIcon::fromTheme(QStringLiteral("document-revert")),
                     i18nc("@action:inmenu reset settings back to those of the saved base profile",
-                          "Reset changes"),
+                          "Reset Changes"),
                     this);
     connect(mResetChangesAction, &QAction::triggered, this, &ViewProfileController::onResetChangesActionTriggered);
 
