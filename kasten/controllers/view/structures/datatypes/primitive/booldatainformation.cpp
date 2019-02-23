@@ -28,13 +28,13 @@ QString BoolDataInformationMethods<T>::staticValueString(T value, int base)
 {
     if (value == 0) {
         return i18nc("boolean value", "false");
-    } else if (value == 1) {
-        return i18nc("boolean value", "true");
-    } else {
-        // we can reuse the uint valueString() here
-        QString num = UIntDataInformationMethods<T>::staticValueString(value, base);
-        return i18nc("boolean value with actual value", "true (%1)", num);
     }
+    if (value == 1) {
+        return i18nc("boolean value", "true");
+    }
+    // we can reuse the uint valueString() here
+    QString num = UIntDataInformationMethods<T>::staticValueString(value, base);
+    return i18nc("boolean value with actual value", "true (%1)", num);
 }
 
 template <typename T>

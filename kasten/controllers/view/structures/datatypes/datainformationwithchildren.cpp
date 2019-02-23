@@ -248,11 +248,11 @@ QString DataInformationWithChildren::tooltipString() const
         return i18np("Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 child)\n\n %6",
                      "Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 children)\n\n %6",
                      childCount(), name(), valueStr, typeName(), sizeString(), validationMsg);
-    } else {
-        return i18np("Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 child)",
-                     "Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 children)",
-                     childCount(), name(), valueStr, typeName(), sizeString());
     }
+
+    return i18np("Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 child)",
+                 "Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 children)",
+                 childCount(), name(), valueStr, typeName(), sizeString());
 }
 
 QVector<DataInformation*> DataInformationWithChildren::cloneList(const QVector<DataInformation*>& other,

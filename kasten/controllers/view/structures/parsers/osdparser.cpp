@@ -340,7 +340,8 @@ PointerDataInformation* OsdParser::pointerFromXML(const QDomElement& xmlElem, co
         if (childElement.isNull()) {
             info.error() << "Pointer target is missing! Please add a <target> child element.";
             return nullptr;
-        } else if (childElement != xmlElem.lastChildElement()) {
+        }
+        if (childElement != xmlElem.lastChildElement()) {
             // there is more than one child element
             info.error() << "There is more than one child element, cannot determine which one "
                 "is the pointer target. Wrap the correct one in a <target> element.";
@@ -399,9 +400,9 @@ EnumDataInformation* OsdParser::enumFromXML(const QDomElement& xmlElem, bool isF
 
     if (isFlags) {
         return DataInformationFactory::newFlags(epd);
-    } else {
-        return DataInformationFactory::newEnum(epd);
     }
+
+    return DataInformationFactory::newEnum(epd);
 }
 
 StringDataInformation* OsdParser::stringFromXML(const QDomElement& xmlElem,
@@ -492,9 +493,9 @@ QString OsdParser::readProperty(const QDomElement& elem, const QString& property
     const QDomElement childElem = elem.firstChildElement(property);
     if (!elem.isNull()) {
         return elem.text();
-    } else {
-        return defaultVal;
     }
+
+    return defaultVal;
 }
 
 TaggedUnionDataInformation* OsdParser::taggedUnionFromXML(const QDomElement& xmlElem,

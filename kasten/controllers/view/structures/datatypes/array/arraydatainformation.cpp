@@ -135,9 +135,9 @@ BitCount64 ArrayDataInformation::childPosition(const DataInformation* child, Okt
 {
     if (mParent->isTopLevel()) {
         return start * 8 + mData->offset(child);
-    } else {
-        return mParent->asDataInformation()->childPosition(this, start) + mData->offset(child);
-    }
+    } 
+
+    return mParent->asDataInformation()->childPosition(this, start) + mData->offset(child);
 }
 
 qint64 ArrayDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,

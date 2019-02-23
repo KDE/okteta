@@ -174,10 +174,10 @@ void BasicDataInformationTest::basicTest(DataInformationBase* data, const Expect
         CAST_CHECKER(false, data, asStruct, StructureDataInformation);
         CAST_CHECKER(false, data, asUnion, UnionDataInformation);
         return; // no more can be done with a TopLeveDataInformation
-    } else {
-        CAST_CHECKER(false, data, asTopLevel, TopLevelDataInformation);
-        CAST_CHECKER(true, data, asDataInformation, DataInformation);
     }
+
+    CAST_CHECKER(false, data, asTopLevel, TopLevelDataInformation);
+    CAST_CHECKER(true, data, asDataInformation, DataInformation);
 
     QCOMPARE(data->isArray(), expected.isArray);
     if (expected.isArray) {
@@ -232,9 +232,9 @@ void BasicDataInformationTest::basicTest(DataInformationBase* data, const Expect
     if (expected.isDummy) {
         CAST_CHECKER(true, data, asDummy, DummyDataInformation);
         return; // the other checks cannot be done with a dummy
-    } else {
-        CAST_CHECKER(false, data, asDummy, DummyDataInformation);
     }
+
+    CAST_CHECKER(false, data, asDummy, DummyDataInformation);
 
     DataInformation* dataInf = data->asDataInformation();
     QVERIFY(dataInf);

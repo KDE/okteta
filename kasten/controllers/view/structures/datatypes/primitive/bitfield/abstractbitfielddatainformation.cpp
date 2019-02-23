@@ -126,7 +126,7 @@ Qt::ItemFlags AbstractBitfieldDataInformation::flags(int column, bool fileLoaded
 {
     if (column == (int) DataInformation::ColumnValue && fileLoaded) {
         return Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsEditable;
-    } else {
-        return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
     }
+
+    return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
 }

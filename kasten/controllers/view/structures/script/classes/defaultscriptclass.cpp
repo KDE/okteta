@@ -108,16 +108,18 @@ QScriptClass::QueryFlags DefaultScriptClass::queryProperty(const QScriptValue& o
     if (name == s_byteOrder || name == s_name || name == s_updateFunc || name == s_validationFunc
         || name == s_datatype || name == s_customTypeName || name == s_asStringFunc) {
         return flags;
-    } else if (name == s_wasAbleToRead || name == s_parent) {
-        return flags & ~HandlesWriteAccess;
-    } else if (queryAdditionalProperty(data, name, &flags, id)) {
-        return flags;
-    } else {
-        data->logError() << "could not find property with name" << name.toString();
-        engine()->currentContext()->throwError(QScriptContext::ReferenceError,
-                                               QLatin1String("Could not find property with name ") + name.toString());
-        return {};
     }
+    if (name == s_wasAbleToRead || name == s_parent) {
+        return flags & ~HandlesWriteAccess;
+    }
+    if (queryAdditionalProperty(data, name, &flags, id)) {
+        return flags;
+    }
+
+    data->logError() << "could not find property with name" << name.toString();
+    engine()->currentContext()->throwError(QScriptContext::ReferenceError,
+                                               QLatin1String("Could not find property with name ") + name.toString());
+    return {};
 }
 
 QScriptValue DefaultScriptClass::property(const QScriptValue& object, const QScriptString& name, uint id)
@@ -131,40 +133,49 @@ QScriptValue DefaultScriptClass::property(const QScriptValue& object, const QScr
     }
     if (name == s_valid) {
         return data->validationSuccessful();
-    } else if (name == s_wasAbleToRead) {
+    }
+    if (name == s_wasAbleToRead) {
         return data->wasAbleToRead();
-    } else if (name == s_parent) {
+    }
+    if (name == s_parent) {
         Q_CHECK_PTR(data->parent());
         // parent() cannot be null
         if (data->parent()->isTopLevel()) {
             return engine()->nullValue();
         }
         return data->parent()->asDataInformation()->toScriptValue(engine(), mHandlerInfo);
-    } else if (name == s_datatype) {
+    }
+    if (name == s_datatype) {
         return data->typeName();
-    } else if (name == s_updateFunc) {
+    }
+    if (name == s_updateFunc) {
         return data->updateFunc();
-    } else if (name == s_validationFunc) {
+    }
+    if (name == s_validationFunc) {
         return data->validationFunc();
-    } else if (name == s_validationError) {
+    }
+    if (name == s_validationError) {
         return data->validationError();
-    } else if (name == s_byteOrder) {
+    }
+    if (name == s_byteOrder) {
         return ParserUtils::byteOrderToString(data->byteOrder());
-    } else if (name == s_name) {
+    }
+    if (name == s_name) {
         return data->name();
-    } else if (name == s_customTypeName) {
+    }
+    if (name == s_customTypeName) {
         return data->typeName();
-    } else if (name == s_asStringFunc) {
+    }
+    if (name == s_asStringFunc) {
         return data->toStringFunction();
     }
     QScriptValue other = additionalProperty(data, name, id);
     if (other.isValid()) {
         return other;
-    } else {
-        data->logError() << "could not find property with name" << name.toString();
-        return engine()->currentContext()->throwError(QScriptContext::ReferenceError,
-                                                      QLatin1String("Cannot read property ") + name.toString());
     }
+    data->logError() << "could not find property with name" << name.toString();
+    return engine()->currentContext()->throwError(QScriptContext::ReferenceError,
+                                                  QLatin1String("Cannot read property ") + name.toString());
 }
 
 void DefaultScriptClass::setDataType(const QScriptValue& value, DataInformation* data)
@@ -288,11 +299,10 @@ void DefaultScriptClass::setProperty(QScriptValue& object, const QScriptString& 
         bool setAdditional = setAdditionalProperty(data, name, id, value);
         if (setAdditional) {
             return;
-        } else {
-            data->logError() << "could not set property with name" << name.toString();
-            engine()->currentContext()->throwError(QScriptContext::ReferenceError,
-                                                   QLatin1String("Cannot write property ") + name.toString());
         }
+        data->logError() << "could not set property with name" << name.toString();
+        engine()->currentContext()->throwError(QScriptContext::ReferenceError,
+                                               QLatin1String("Cannot write property ") + name.toString());
     }
 }
 
@@ -324,10 +334,9 @@ QScriptValue::PropertyFlags DefaultScriptClass::propertyFlags(const QScriptValue
 
     if (additionalPropertyFlags(data, name, id, &result)) {
         return result; // is a child element
-    } else {
-        data->logError() << "could not find flags for property with name" << name.toString();
-        return {};
     }
+    data->logError() << "could not find flags for property with name" << name.toString();
+    return {};
 }
 
 QScriptValue DefaultScriptClass::prototype() const

@@ -50,9 +50,9 @@ QString EnumDataInformation::valueStringImpl() const
     QString enumVal = mEnum->value(mValue->value());
     if (!enumVal.isEmpty()) {
         return i18n("%1 (%2)", enumVal, mValue->valueString());
-    } else {
-        return i18n("%1 (value not in enum)", mValue->valueString());
     }
+
+    return i18n("%1 (value not in enum)", mValue->valueString());
 }
 
 QString EnumDataInformation::typeNameImpl() const

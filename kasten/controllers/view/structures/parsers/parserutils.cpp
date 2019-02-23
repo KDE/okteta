@@ -177,16 +177,19 @@ DataInformation::DataInformationEndianess ParserUtils::byteOrderFromString(const
     const QString lower = string.toLower();
     if (lower == QLatin1String("bigendian") || lower == QLatin1String("big-endian")) {
         return DataInformation::DataInformationEndianess::EndianessBig;
-    } else if (lower == QLatin1String("littleendian") || lower == QLatin1String("little-endian")) {
+    }
+    if (lower == QLatin1String("littleendian") || lower == QLatin1String("little-endian")) {
         return DataInformation::DataInformationEndianess::EndianessLittle;
-    } else if (lower == QLatin1String("fromsettings") || lower == QLatin1String("from-settings")) {
+    }
+    if (lower == QLatin1String("fromsettings") || lower == QLatin1String("from-settings")) {
         return DataInformation::DataInformationEndianess::EndianessFromSettings;
-    } else if (lower == QLatin1String("inherit")) {
-        return DataInformation::DataInformationEndianess::EndianessInherit;
-    } else {
-        logger.warn().nospace() << "Unrecognized byte order '" << string << "', defaulting to 'inherit'";
+    }
+    if (lower == QLatin1String("inherit")) {
         return DataInformation::DataInformationEndianess::EndianessInherit;
     }
+
+    logger.warn().nospace() << "Unrecognized byte order '" << string << "', defaulting to 'inherit'";
+    return DataInformation::DataInformationEndianess::EndianessInherit;
 }
 
 ParsedNumber<int> ParserUtils::intFromScriptValue(const QScriptValue& val)
@@ -199,11 +202,11 @@ ParsedNumber<int> ParserUtils::intFromScriptValue(const QScriptValue& val)
             return ParsedNumber<int>::badInput(val.toString());
         }
         return ParsedNumber<int>(value, val.toString(), true);
-    } else if (val.isString()) {
-        return intFromString(val.toString());
-    } else {
-        return ParsedNumber<int>::badInput(val.toString());
     }
+    if (val.isString()) {
+        return intFromString(val.toString());
+    }
+    return ParsedNumber<int>::badInput(val.toString());
 }
 
 ParsedNumber<uint> ParserUtils::uintFromScriptValue(const QScriptValue& val)
@@ -216,11 +219,11 @@ ParsedNumber<uint> ParserUtils::uintFromScriptValue(const QScriptValue& val)
             return ParsedNumber<uint>::badInput(val.toString());
         }
         return ParsedNumber<uint>(value, val.toString(), true);
-    } else if (val.isString()) {
-        return uintFromString(val.toString());
-    } else {
-        return ParsedNumber<uint>::badInput(val.toString());
     }
+    if (val.isString()) {
+        return uintFromString(val.toString());
+    }
+    return ParsedNumber<uint>::badInput(val.toString());
 }
 
 ParsedNumber<quint64> ParserUtils::uint64FromScriptValue(const QScriptValue& val)
@@ -233,11 +236,11 @@ ParsedNumber<quint64> ParserUtils::uint64FromScriptValue(const QScriptValue& val
             return ParsedNumber<quint64>::badInput(val.toString());
         }
         return ParsedNumber<quint64>(value, val.toString(), true);
-    } else if (val.isString()) {
-        return uint64FromString(val.toString());
-    } else {
-        return ParsedNumber<quint64>::badInput(val.toString());
     }
+    if (val.isString()) {
+        return uint64FromString(val.toString());
+    }
+    return ParsedNumber<quint64>::badInput(val.toString());
 }
 
 QString ParserUtils::byteOrderToString(DataInformation::DataInformationEndianess order)
@@ -259,11 +262,14 @@ StringDataInformation::StringType ParserUtils::toStringEncoding(const QString& s
     QString enc = str.toLower();
     if (enc == QLatin1String("ascii")) {
         return StringDataInformation::StringType::ASCII;
-    } else if (enc == QLatin1String("ebcdic")) {
+    }
+    if (enc == QLatin1String("ebcdic")) {
         return StringDataInformation::StringType::EBCDIC;
-    } else if (enc == QLatin1String("latin1") || enc == QLatin1String("latin-1")) {
+    }
+    if (enc == QLatin1String("latin1") || enc == QLatin1String("latin-1")) {
         return StringDataInformation::StringType::Latin1;
-    } else if (enc.startsWith(QLatin1String("utf"))) {
+    }
+    if (enc.startsWith(QLatin1String("utf"))) {
         QStringRef ref = enc.midRef(3);
         if (ref.at(0) == QLatin1Char('-')) {
             ref = enc.midRef(4); // strip '-'

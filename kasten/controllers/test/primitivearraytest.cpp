@@ -144,9 +144,9 @@ bool PrimitiveArrayTest::compareItems(float first, float second, uint index)
             firstUn.floating = first;
             secondUn.floating = second;
             return firstUn.integer == secondUn.integer;
-        } else {
-            return false;
         }
+
+        return false;
     }
     return first == second;
 }
@@ -167,9 +167,9 @@ bool PrimitiveArrayTest::compareItems(double first, double second, uint index)
             firstUn.floating = first;
             secondUn.floating = second;
             return firstUn.integer == secondUn.integer;
-        } else {
-            return false;
         }
+
+        return false;
     }
     return first == second;
 }

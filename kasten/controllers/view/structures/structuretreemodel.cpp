@@ -124,9 +124,8 @@ QVariant StructureTreeModel::data(const QModelIndex& index, int role) const
             QFont font;
             font.setBold(true);
             return font;
-        } else {
-            return {};
         }
+        return {};
     }
     if (item->parent()->isArray()) {
         ArrayDataInformation* array = item->parent()->asArray();
@@ -192,9 +191,9 @@ QModelIndex StructureTreeModel::index(int row, int column, const QModelIndex& pa
     }
     if (childItem) {
         return createIndex(row, column, childItem);
-    } else {
-        return {};
     }
+
+    return {};
 }
 
 QModelIndex StructureTreeModel::parent(const QModelIndex& index) const
@@ -240,9 +239,8 @@ bool StructureTreeModel::hasChildren(const QModelIndex& parent) const
     auto* parentItem = static_cast<DataInformation*> (parent.internalPointer());
     if (!parentItem) {
         return false;
-    } else {
-        return parentItem->childCount() > 0;
     }
+    return parentItem->childCount() > 0;
 }
 
 QModelIndex StructureTreeModel::findItemInModel(DataInformationBase* data) const

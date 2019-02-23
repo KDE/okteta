@@ -251,10 +251,9 @@ QScriptValue getChild(QScriptContext* ctx, QScriptEngine* eng)
     QScriptValue ret = ctx->thisObject().property(ParserStrings::PROPERTY_CHILDREN()).property(nameString);
     if (ret.isValid()) {
         return ret;
-    } else {
-        return ctx->throwError(
-            QString(QLatin1String("child(): could not find child with name=") + nameString));
     }
+    return ctx->throwError(
+        QString(QLatin1String("child(): could not find child with name=") + nameString));
 }
 
 QScriptValue addUpdateFunc(QScriptContext* ctx, QScriptEngine*)

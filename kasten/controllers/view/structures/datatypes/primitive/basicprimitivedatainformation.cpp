@@ -84,18 +84,18 @@ qint64 BasicPrimitiveDataInformation<T, C>::readData(Okteta::AbstractByteArrayMo
             topLevelDataInformation()->setChildDataChanged();
         }
         return -1;
-    } else {
-        Q_ASSERT(BitCount64(input->size() - address) * 8 - *bitOffset >= bitsRemaining);
-        mWasAbleToRead = true;
-        const T oldVal = this->mValue;
-        // bit offset will always stay the same since type T uses a full number of bytes
-        mValue = AllPrimitiveTypes::readValue<T>(input, address, effectiveByteOrder(), *bitOffset);
-
-        if (oldVal != mValue || wasValid != mWasAbleToRead) {
-            topLevelDataInformation()->setChildDataChanged();
-        }
-        return size();
     }
+
+    Q_ASSERT(BitCount64(input->size() - address) * 8 - *bitOffset >= bitsRemaining);
+    mWasAbleToRead = true;
+    const T oldVal = this->mValue;
+    // bit offset will always stay the same since type T uses a full number of bytes
+    mValue = AllPrimitiveTypes::readValue<T>(input, address, effectiveByteOrder(), *bitOffset);
+
+    if (oldVal != mValue || wasValid != mWasAbleToRead) {
+        topLevelDataInformation()->setChildDataChanged();
+    }
+    return size();
 }
 
 // specify all the specializations so we can move code to the cpp file

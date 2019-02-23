@@ -49,16 +49,17 @@ bool ArrayScriptClass::queryAdditionalProperty(const DataInformation* data, cons
     // no need to modify flags since both read and write are handled
     if (name == s_length) {
         return true;
-    } else if (name == s_type || name == s_childType) {
+    }
+    if (name == s_type || name == s_childType) {
         return true;
-    } else {
-        bool isArrayIndex;
-        quint32 pos = name.toArrayIndex(&isArrayIndex);
-        if (isArrayIndex && pos <= data->childCount()) {
-            *id = pos + 1; // add 1 to distinguish from the default value of 0
-            *flags &= ~HandlesWriteAccess; // writing is not yet supported
-            return true;
-        }
+    }
+
+    bool isArrayIndex;
+    quint32 pos = name.toArrayIndex(&isArrayIndex);
+    if (isArrayIndex && pos <= data->childCount()) {
+        *id = pos + 1; // add 1 to distinguish from the default value of 0
+        *flags &= ~HandlesWriteAccess; // writing is not yet supported
+        return true;
     }
     return false; // not found
 }
@@ -88,14 +89,17 @@ QScriptValue ArrayScriptClass::additionalProperty(const DataInformation* data, c
             return engine()->currentContext()->throwError(QScriptContext::RangeError,
                                                           QStringLiteral("Attempting to access array index %1, but length is %2").arg(
                                                               QString::number(pos), QString::number(data->childCount())));
-        } else {
-            return aData->childToScriptValue(pos, engine(), mHandlerInfo);
         }
-    } else if (name == s_length) {
+
+        return aData->childToScriptValue(pos, engine(), mHandlerInfo);
+    }
+    if (name == s_length) {
         return aData->length();
-    } else if (name == s_type) {
+    }
+    if (name == s_type) {
         return aData->childType();
-    } else if (name == s_childType) {
+    }
+    if (name == s_childType) {
         aData->logWarn() << "Using property 'childType' is deprecated, use the new name 'type' instead";
         return aData->childType();
     }
@@ -118,7 +122,8 @@ bool ArrayScriptClass::setAdditionalProperty(DataInformation* data, const QScrip
             }
         }
         return true;
-    } else if (name == s_type || name == s_childType) {
+    }
+    if (name == s_type || name == s_childType) {
         if (name == s_childType) {
             aData->logWarn() << "Using property 'childType' is deprecated, use the new name 'type' instead";
         }

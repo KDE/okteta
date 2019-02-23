@@ -97,7 +97,7 @@ BitCount64 UnionDataInformation::childPosition(const DataInformation* child, Okt
     Q_UNUSED(child)
     if (mParent->isTopLevel()) {
         return start * 8;
-    } else {
-        return mParent->asDataInformation()->childPosition(this, start);
     }
+
+    return mParent->asDataInformation()->childPosition(this, start);
 }

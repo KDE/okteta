@@ -67,27 +67,27 @@ QString PrimitiveType::typeName(PrimitiveDataType type)
 {
     if (Kasten::StructureViewPreferences::shortTypeNames()) {
         return standardTypeName(type);
-    } else {
-        return longTypeName(type);
     }
+
+    return longTypeName(type);
 }
 
 QString PrimitiveType::standardTypeName(PrimitiveDataType type)
 {
     if (type >= PrimitiveDataType::START && type <= PrimitiveDataType::END) {
         return QLatin1String(typeNames[static_cast<int>(type)]);
-    } else {
-        return QStringLiteral("invalid");
     }
+
+    return QStringLiteral("invalid");
 }
 
 QString PrimitiveType::longTypeName(PrimitiveDataType type)
 {
     if (type >= PrimitiveDataType::START && type <= PrimitiveDataType::END) {
         return i18n(longTypeNames[static_cast<int>(type)]);
-    } else {
-        return i18n("invalid type");
     }
+
+    return i18n("invalid type");
 }
 
 QDebug operator<<(QDebug dbg, PrimitiveDataType type)

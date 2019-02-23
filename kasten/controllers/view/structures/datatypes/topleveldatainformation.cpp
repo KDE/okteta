@@ -152,30 +152,29 @@ bool TopLevelDataInformation::isReadingNecessary(Okteta::AbstractByteArrayModel*
             continue;
         }
         // now handle special cases
-        else if (change.type() == Okteta::ArrayChangeMetrics::Replacement) {
+        if (change.type() == Okteta::ArrayChangeMetrics::Replacement) {
             // handle it for replacements
             if (change.lengthChange() == 0 && change.offset() + change.removeLength() <= address) {
                 // no length change and it doesn't affect structure since it is before
                 // could use insertLength() instead of removeLength() since they are the same
                 continue;
-            } else {
-                // something was removed/inserted before start of structure
-                // which means all bytes have moved forwards/backwards: reread all
-                return true;
             }
-        } else if (change.type() == Okteta::ArrayChangeMetrics::Swapping) {
+            // something was removed/inserted before start of structure
+            // which means all bytes have moved forwards/backwards: reread all
+            return true;
+        }
+        if (change.type() == Okteta::ArrayChangeMetrics::Swapping) {
             if (change.secondEnd() < address) {
                 // swapped ranges end before start, i.e. the range of interest does not change
                 continue;
-            } else {
-                // Not sure what other possibilities there are, but rather waste CPU or I/O rereading
-                // than showing outdated values
-                return true;
             }
-        } else {
-            qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "Invalid change";
-            continue;
+            // Not sure what other possibilities there are, but rather waste CPU or I/O rereading
+            // than showing outdated values
+            return true;
         }
+
+        qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "Invalid change";
+        continue;
     }
 
     return false; // nothing affected us

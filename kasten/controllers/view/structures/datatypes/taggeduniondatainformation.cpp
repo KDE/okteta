@@ -57,9 +57,9 @@ QString TaggedUnionDataInformation::typeNameImpl() const
 {
     if (mLastIndex >= 0) {
         return i18nc("data type in C/C++, then name", "struct %1", mAlternatives.at(mLastIndex).name);
-    } else {
-        return i18nc("data type, then name", "tagged union %1", name());
     }
+
+    return i18nc("data type, then name", "tagged union %1", name());
 }
 
 void TaggedUnionDataInformation::appendDefaultField(DataInformation* field, bool emitSignal)
@@ -211,9 +211,9 @@ BitCount64 TaggedUnionDataInformation::childPosition(const DataInformation* chil
     Q_ASSERT(found);
     if (mParent->isTopLevel()) {
         return start * 8 + offset;
-    } else {
-        return mParent->asDataInformation()->childPosition(this, start) + offset;
     }
+
+    return mParent->asDataInformation()->childPosition(this, start) + offset;
 }
 
 BitCount32 TaggedUnionDataInformation::size() const

@@ -150,9 +150,9 @@ inline Qt::ItemFlags PrimitiveArrayData<type>::childFlags(int row, int column, b
     Q_UNUSED(row)
     if (column == 2 && fileLoaded) {
         return Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsEditable;
-    } else {
-        return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
     }
+
+    return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
 }
 
 template <PrimitiveDataType type>

@@ -46,7 +46,8 @@ QScriptValue EnumScriptClass::additionalProperty(const DataInformation* data, co
             ret.setProperty(it.value(), QString::number(it.key().value<quint64>())); // should always work
         }
         return ret;
-    } else if (name == s_type) {
+    }
+    if (name == s_type) {
         return data->typeName();
     }
     return PrimitiveScriptClass::additionalProperty(data, name, id);

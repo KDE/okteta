@@ -151,10 +151,10 @@ bool PointerDataInformation::setPointerType(DataInformation* type)
         mValue.reset(prim);
         mValue->setParent(this);
         return true;
-    } else {
-        logError() << "New pointer type is not an unsigned integer: " << pdt;
-        return false;
     }
+
+    logError() << "New pointer type is not an unsigned integer: " << pdt;
+    return false;
 }
 
 QScriptClass* PointerDataInformation::scriptClass(ScriptHandlerInfo* handlerInfo) const

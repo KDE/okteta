@@ -152,7 +152,8 @@ QString generateLengthFunction(DataInformation* current, DataInformation* last, 
             info.info() << "Found element for dynamic array length: " << child->fullObjectPath()
                         << ", resulting function is: " << function;
             return function;
-        } else if (child->childCount() > 0) {
+        }
+        if (child->childCount() > 0) {
             QString func = generateLengthFunction(child, current, elemName,
                                                   currentString + childName + QLatin1Char('.'), info);
             // if func is empty no valid child was found, just continue
@@ -172,10 +173,10 @@ QString generateLengthFunction(DataInformation* current, DataInformation* last, 
     DataInformation* next = nextBase->asDataInformation();
     if (next == last) {
         return {}; // we moved one level down previously, don't move up again
-    } else {
-        return generateLengthFunction(current->parent()->asDataInformation(), current, elemName,
-                                      currentString + QLatin1String("parent."), info);
     }
+
+    return generateLengthFunction(current->parent()->asDataInformation(), current, elemName,
+                                  currentString + QLatin1String("parent."), info);
 }
 
 }
@@ -203,28 +204,29 @@ ArrayDataInformation* DataInformationFactory::newArray(const ArrayParsedData& pd
     const ParsedNumber<uint> fixedLength = ParserUtils::uintFromScriptValue(pd.length);
     if (fixedLength.isValid) {
         return new ArrayDataInformation(pd.name, fixedLength.value, pd.arrayType, pd.parent, QScriptValue());
-    } else if (pd.length.isFunction()) {
-        return new ArrayDataInformation(pd.name, 0, pd.arrayType, pd.parent, pd.length);
-    } else {
-        // neither integer nor function, must be a string containing the name of another element.
-        const QString lengthStr = pd.length.toString();
-        if (!pd.parent) {
-            pd.error() << "Toplevel array has length depending on other field (" << lengthStr
-                       << "). This is not possible.";
-            return nullptr;
-        }
-        if (lengthStr.contains(QLatin1Char('.'))) {
-            pd.error() << "Referenced array length element (" << lengthStr << ") contains '.', this is not allowed!";
-            return nullptr; // TODO maybe add possible shorthand length="this.parent.length"
-        }
-        QString lengthFunctionString = generateLengthFunction(pd.parent, nullptr, lengthStr, QString(), pd);
-        if (lengthFunctionString.isEmpty()) {
-            pd.error() << "Could not find element " << lengthStr << " referenced as array length!";
-            return nullptr;
-        }
-        QScriptValue lengthFunction = ParserUtils::functionSafeEval(pd.engine, lengthFunctionString);
-        return new ArrayDataInformation(pd.name, 0, pd.arrayType, pd.parent, lengthFunction);
     }
+    if (pd.length.isFunction()) {
+        return new ArrayDataInformation(pd.name, 0, pd.arrayType, pd.parent, pd.length);
+    }
+
+    // neither integer nor function, must be a string containing the name of another element.
+    const QString lengthStr = pd.length.toString();
+    if (!pd.parent) {
+        pd.error() << "Toplevel array has length depending on other field (" << lengthStr
+                    << "). This is not possible.";
+        return nullptr;
+    }
+    if (lengthStr.contains(QLatin1Char('.'))) {
+        pd.error() << "Referenced array length element (" << lengthStr << ") contains '.', this is not allowed!";
+        return nullptr; // TODO maybe add possible shorthand length="this.parent.length"
+    }
+    QString lengthFunctionString = generateLengthFunction(pd.parent, nullptr, lengthStr, QString(), pd);
+    if (lengthFunctionString.isEmpty()) {
+        pd.error() << "Could not find element " << lengthStr << " referenced as array length!";
+        return nullptr;
+    }
+    QScriptValue lengthFunction = ParserUtils::functionSafeEval(pd.engine, lengthFunctionString);
+    return new ArrayDataInformation(pd.name, 0, pd.arrayType, pd.parent, lengthFunction);
 }
 
 StringDataInformation* DataInformationFactory::newString(const StringParsedData& pd)
@@ -283,25 +285,25 @@ bool DataInformationFactory::commonInitialization(DataInformation* data, const C
         if (!pd.updateFunc.isFunction()) {
             pd.error() << "Update function is not a function: " << pd.updateFunc.toString();
             return false;
-        } else {
-            data->setUpdateFunc(pd.updateFunc);
         }
+
+        data->setUpdateFunc(pd.updateFunc);
     }
     if (pd.validationFunc.isValid()) {
         if (!pd.validationFunc.isFunction()) {
             pd.error() << "Validation function is not a function: " << pd.validationFunc.toString();
             return false;
-        } else {
-            data->setValidationFunc(pd.validationFunc);
         }
+
+        data->setValidationFunc(pd.validationFunc);
     }
     if (pd.toStringFunc.isValid()) {
         if (!pd.toStringFunc.isFunction()) {
             pd.error() << "To string function is not a function: " << pd.toStringFunc.toString();
             return false;
-        } else {
-            data->setToStringFunction(pd.toStringFunc);
         }
+
+        data->setToStringFunction(pd.toStringFunc);
     }
     if (!pd.customTypeName.isEmpty()) {
         data->setCustomTypeName(pd.customTypeName);

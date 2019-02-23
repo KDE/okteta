@@ -214,10 +214,9 @@ EnumDataInformation* toEnum(const QScriptValue& value, bool flags, const ParserI
 
     if (flags) {
         return DataInformationFactory::newFlags(epd);
-    } else {
-        return DataInformationFactory::newEnum(epd);
     }
 
+    return DataInformationFactory::newEnum(epd);
 }
 
 StringDataInformation* toString(const QScriptValue& value, const ParserInfo& info)
@@ -289,12 +288,11 @@ bool ScriptValueConverter::ScriptValueChildrenParser::hasNext()
         if (mIter.name() != QLatin1String("length")) {
             mIter.previous(); // go back and return true
             return true;
-        } else {
-            return mIter.hasNext(); // skipped length
         }
-    } else {
-        return true;
+        return mIter.hasNext(); // skipped length
     }
+
+    return true;
 }
 
 void ScriptValueConverter::ScriptValueChildrenParser::setParent(DataInformation* newParent)

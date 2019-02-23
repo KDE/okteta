@@ -229,9 +229,9 @@ bool TextCharCodec::encode(Byte* byte, const QChar& _char) const
     if (encoded.size() > 0) {
         *byte = encoded.at(0);
         return true;
-    } else {
-        return false;
     }
+
+    return false;
 }
 
 Character TextCharCodec::decode(Byte byte) const

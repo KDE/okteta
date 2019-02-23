@@ -64,9 +64,9 @@ QScriptValue UnsignedBitfieldDataInformation::valueAsQScriptValue() const
 {
     if (width() <= 32) {
         return mValue.value<quint32>() & quint32(mask());  // 32 bit or less -> can be put in as value
-    } else {
-        return QString::number(mValue.value<quint64>());
     }
+
+    return QString::number(mValue.value<quint64>());
 }
 
 QString UnsignedBitfieldDataInformation::typeNameImpl() const

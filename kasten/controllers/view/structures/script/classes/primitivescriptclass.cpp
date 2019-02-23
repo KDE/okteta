@@ -86,7 +86,8 @@ bool PrimitiveScriptClass::queryAdditionalProperty(const DataInformation* data, 
     if (name == s_value || name == s_type) {
         *flags &= ~HandlesWriteAccess;
         return true;
-    } else if (name == s_bool || name == s_char || name == s_int || name == s_uint || name == s_float
+    }
+    if (name == s_bool || name == s_char || name == s_int || name == s_uint || name == s_float
                || name == s_double || name == s_int64 || name == s_uint64 || name == s_int64low32
                || name == s_int64high32 || name == s_uint64low32 || name == s_uint64high32 || name == s_int8
                || name == s_int16 || name == s_int32 || name == s_uint8 || name == s_uint16 || name == s_uint32) {
@@ -117,45 +118,59 @@ QScriptValue PrimitiveScriptClass::additionalProperty(const DataInformation* dat
             pData->logError() << "Attempting to read from uninitialized value. Callee could not be determined";
         }
         return engine()->undefinedValue();
-    } else if (name == s_type) {
+    }
+    if (name == s_type) {
         // bitfields are handled by own scriptclass and NotPrimitive indicates an error
         Q_ASSERT(!pData->isBitfield());
         Q_ASSERT(pData->type() != PrimitiveDataType::Invalid);
         return PrimitiveType::standardTypeName(pData->type());
-    } else {
-        AllPrimitiveTypes value = pData->value();
-        if (name == s_bool) {
-            return value.value<quint64>() != 0;
-        } else if (name == s_char) {
-            return QString(value.value<quint8>() > 127 ? QChar::ReplacementCharacter : QChar(value.value<qint8>(), 0));
-        } else if (name == s_float) {
-            return value.value<float>();
-        } else if (name == s_double) {
-            return value.value<double>();
-        } else if (name == s_int || name == s_int32 || name == s_int64low32) {
-            return value.value<qint32>();
-        } else if (name == s_uint || name == s_uint32 || name == s_uint64low32) {
-            return value.value<quint32>();
-        } else if (name == s_int64) {
-            return QString::number(value.value<qint64>());
-        } else if (name == s_uint64) {
-            return QString::number(value.value<quint64>());
-        } else if (name == s_int64high32) {
-            return qint32(value.value<qint64>() >> 32);
-        } else if (name == s_uint64high32) {
-            return quint32(value.value<quint64>() >> 32);
-        } else if (name == s_int8) {
-            return qint32(value.value<qint8>());
-        } else if (name == s_int16) {
-            return qint32(value.value<qint16>());
-        } else if (name == s_uint8) {
-            return quint32(value.value<quint8>());
-        } else if (name == s_uint16) {
-            return quint32(value.value<quint16>());
-        } else {
-            return {};
-        }
     }
+
+    AllPrimitiveTypes value = pData->value();
+    if (name == s_bool) {
+        return value.value<quint64>() != 0;
+    }
+    if (name == s_char) {
+        return QString(value.value<quint8>() > 127 ? QChar::ReplacementCharacter : QChar(value.value<qint8>(), 0));
+    }
+    if (name == s_float) {
+        return value.value<float>();
+    }
+    if (name == s_double) {
+        return value.value<double>();
+    }
+    if (name == s_int || name == s_int32 || name == s_int64low32) {
+        return value.value<qint32>();
+    }
+    if (name == s_uint || name == s_uint32 || name == s_uint64low32) {
+        return value.value<quint32>();
+    }
+    if (name == s_int64) {
+        return QString::number(value.value<qint64>());
+    }
+    if (name == s_uint64) {
+        return QString::number(value.value<quint64>());
+    }
+    if (name == s_int64high32) {
+        return qint32(value.value<qint64>() >> 32);
+    }
+    if (name == s_uint64high32) {
+        return quint32(value.value<quint64>() >> 32);
+    }
+    if (name == s_int8) {
+        return qint32(value.value<qint8>());
+    }
+    if (name == s_int16) {
+        return qint32(value.value<qint16>());
+    }
+    if (name == s_uint8) {
+        return quint32(value.value<quint8>());
+    }
+    if (name == s_uint16) {
+        return quint32(value.value<quint16>());
+    }
+
+    return {};
 }
 
 bool PrimitiveScriptClass::setAdditionalProperty(DataInformation* data, const QScriptString& name, uint, const QScriptValue& value)

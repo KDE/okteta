@@ -67,14 +67,15 @@ QString Utf8StringData::stringValue(int row) const
     }
     if (val > UNICODE_MAX) {
         return i18n("Value too big: 0x%1", number);
-    } else if (val > BMP_MAX) {
+    }
+    if (val > BMP_MAX) {
         QString ret(2, Qt::Uninitialized);
         ret[0] = QChar::highSurrogate(val);
         ret[1] = QChar::lowSurrogate(val);
         return i18n("%1 (U+%2)", ret, number);
-    } else {
-        return i18n("%1 (U+%2)", QString(QChar(mCodePoints.at(row))), number);
     }
+
+    return i18n("%1 (U+%2)", QString(QChar(mCodePoints.at(row))), number);
 }
 
 QString Utf8StringData::completeString(bool skipInvalid) const
@@ -88,9 +89,9 @@ QString Utf8StringData::completeString(bool skipInvalid) const
         if (val > UNICODE_MAX || mErrorIndices.value(idx)) {
             if (skipInvalid) {
                 continue;
-            } else {
-                data[i] = QChar::ReplacementCharacter;
             }
+
+            data[i] = QChar::ReplacementCharacter;
         } else if (val > BMP_MAX) {
             data[i] = QChar::highSurrogate(val);
             i++;
@@ -311,11 +312,13 @@ BitCount32 Utf8StringData::sizeAt(uint i) const
     uint val = mCodePoints.at(i);
     if (val < 0x80) {
         return 8;
-    } else if (val < 0x7ff) {
-        return 16;
-    } else if (val < 0xffff) {
-        return 24;
-    } else {
-        return 32;
     }
+    if (val < 0x7ff) {
+        return 16;
+    }
+    if (val < 0xffff) {
+        return 24;
+    }
+
+    return 32;
 }

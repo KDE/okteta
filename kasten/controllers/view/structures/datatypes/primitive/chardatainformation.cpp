@@ -98,22 +98,24 @@ QVariant CharDataInformationMethods::staticDataFromWidget(const QWidget* w)
                     return val;
                 }
                 return {};
-            } else if (text.at(1) == QLatin1Char('n')) {
-                return (quint8) '\n'; // newline
-            } else if (text.at(1) == QLatin1Char('t')) {
-                return (quint8) '\t'; // tab
-            } else if (text.at(1) == QLatin1Char('r')) {
-                return (quint8) '\r'; // cr
-            } else {
-                // octal escape:
-                bool okay;
-                const QStringRef valStr = text.midRef(1, 3); // only 2 chars
-                quint8 val = valStr.toInt(&okay, 8);
-                if (okay) {
-                    return val;
-                }
-                return {};
             }
+            if (text.at(1) == QLatin1Char('n')) {
+                return (quint8) '\n'; // newline
+            }
+            if (text.at(1) == QLatin1Char('t')) {
+                return (quint8) '\t'; // tab
+            }
+            if (text.at(1) == QLatin1Char('r')) {
+                return (quint8) '\r'; // cr
+            }
+            // octal escape:
+            bool okay;
+            const QStringRef valStr = text.midRef(1, 3); // only 2 chars
+            quint8 val = valStr.toInt(&okay, 8);
+            if (okay) {
+                return val;
+            }
+            return {};
         }
     }
     return {};

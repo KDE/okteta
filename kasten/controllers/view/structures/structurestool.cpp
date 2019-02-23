@@ -295,9 +295,9 @@ Okteta::Address StructuresTool::startAddress(const TopLevelDataInformation* data
 {
     if (data->isLockedFor(mByteArrayModel)) {
         return Okteta::Address(data->lockPositionFor(mByteArrayModel));
-    } else {
-        return mCursorIndex;
     }
+
+    return mCursorIndex;
 }
 
 void StructuresTool::mark(const QModelIndex& idx)

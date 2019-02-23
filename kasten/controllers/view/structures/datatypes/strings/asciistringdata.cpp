@@ -130,9 +130,9 @@ QString AsciiStringData::completeString(bool skipInvalid) const
                 max--;
                 i--;
                 continue;
-            } else {
-                buf[i] = QChar::ReplacementCharacter;
             }
+
+            buf[i] = QChar::ReplacementCharacter;
         } else {
             buf[i] = QChar::fromLatin1(val);
         }
@@ -147,9 +147,9 @@ QString AsciiStringData::stringValue(int row) const
     uchar val = mData.at(row);
     if (val > ASCII_MAX) {
         return i18n("Non-ASCII char: 0x%1", val);
-    } else {
-        return QChar::fromLatin1(val);
     }
+
+    return QChar::fromLatin1(val);
 }
 
 QString AsciiStringData::charType() const

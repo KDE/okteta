@@ -38,7 +38,8 @@ QScriptValue BitfieldScriptClass::additionalProperty(const DataInformation* data
     const AbstractBitfieldDataInformation* pData = data->asBitfield();
     if (name == s_width) {
         return pData->width();
-    } else if (name == s_type) {
+    }
+    if (name == s_type) {
         return pData->typeName();
     }
     return PrimitiveScriptClass::additionalProperty(data, name, id);

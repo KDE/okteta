@@ -69,11 +69,11 @@ QString DataInformation::sizeString() const
 {
     if (size() % 8 == 0) { // no bits remaining
         return i18np("1 byte", "%1 bytes", size() / 8);
-    } else {
-        QString bytes = i18np("1 byte", "%1 bytes", size() / 8);
-        QString bits = i18np("1 bit", "%1 bits", size() % 8);
-        return i18nc("number of bytes, then number of bits", "%1 %2", bytes, bits);
     }
+
+    QString bytes = i18np("1 byte", "%1 bytes", size() / 8);
+    QString bits = i18np("1 bit", "%1 bits", size() % 8);
+    return i18nc("number of bytes, then number of bits", "%1 %2", bytes, bits);
 }
 
 QString DataInformation::valueStringImpl() const
@@ -97,10 +97,9 @@ DataInformation* DataInformation::mainStructure()
     Q_CHECK_PTR(mParent);
     if (mParent->isTopLevel()) {
         return this;
-    } else {
-        return mParent->asDataInformation()->mainStructure();
     }
 
+    return mParent->asDataInformation()->mainStructure();
 }
 
 void DataInformation::setValidationError(const QString& errorMessage)
@@ -170,9 +169,9 @@ QVariant DataInformation::data(int column, int role) const
         if (column == ColumnName) {
             if (mParent && mParent->isArray()) {
                 return QString(QLatin1Char('[') + QString::number(row()) + QLatin1Char(']'));
-            } else {
-                return name();
             }
+
+            return name();
         }
         if (column == ColumnType) {
             return typeName();
@@ -203,7 +202,8 @@ QVariant DataInformation::eofReachedData(int role)
 
     if (role == Qt::DisplayRole) {
         return i18nc("invalid value (End of file reached)", "<EOF reached>");
-    } else if (role == Qt::ForegroundRole) {
+    }
+    if (role == Qt::ForegroundRole) {
         return scheme.foreground(KColorScheme::NegativeText);
     }
     return {};
@@ -223,10 +223,10 @@ QString DataInformation::tooltipString() const
         }
         return i18n("Name: %1\nValue: %2\n\nType: %3\nSize: %4\n\n%5", name(),
                     valueStr, typeName(), sizeString(), validationMsg);
-    } else {
-        return i18n("Name: %1\nValue: %2\n\nType: %3\nSize: %4", name(),
-                    valueStr, typeName(), sizeString());
     }
+
+    return i18n("Name: %1\nValue: %2\n\nType: %3\nSize: %4", name(),
+                valueStr, typeName(), sizeString());
 }
 
 DataInformation* DataInformation::child(const QString& name) const
@@ -257,9 +257,9 @@ int DataInformation::row() const
     Q_CHECK_PTR(mParent);
     if (mParent->isTopLevel()) {
         return mParent->asTopLevel()->indexOf(this);
-    } else {
-        return mParent->asDataInformation()->indexOf(this);
     }
+
+    return mParent->asDataInformation()->indexOf(this);
 }
 
 QString DataInformation::fullObjectPath() const

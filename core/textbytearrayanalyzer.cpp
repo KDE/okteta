@@ -82,7 +82,8 @@ Address TextByteArrayAnalyzer::indexOfPreviousWordStart(Address index) const
                 continue;
             }
             return(index);
-        } else if (!lookingForFirstWordChar) {
+        }
+        if (!lookingForFirstWordChar) {
             lookingForFirstWordChar = true;
         }
     }
@@ -100,7 +101,8 @@ Address TextByteArrayAnalyzer::indexOfNextWordStart(Address index) const
                 continue;
             }
             return index;
-        } else if (!lookingForFirstWordChar) {
+        }
+        if (!lookingForFirstWordChar) {
             lookingForFirstWordChar = true;
         }
     }
@@ -119,7 +121,8 @@ Address TextByteArrayAnalyzer::indexOfBeforeNextWordStart(Address index) const
                 continue;
             }
             return index - 1;
-        } else if (!lookingForFirstWordChar) {
+        }
+        if (!lookingForFirstWordChar) {
             lookingForFirstWordChar = true;
         }
     }
@@ -165,18 +168,18 @@ Address TextByteArrayAnalyzer::indexOfLeftWordSelect(Address index) const
 
         // reached start, so return it
         return 0;
-    } else {
-        const Size size = d->byteArrayModel->size();
-        // search for word start to the right
-        for (++index; index < size; ++index) {
-            if (isWordChar(index)) {
-                return index;
-            }
-        }
-
-        // word reaches the end, so step behind
-        return size;
     }
+
+    const Size size = d->byteArrayModel->size();
+    // search for word start to the right
+    for (++index; index < size; ++index) {
+        if (isWordChar(index)) {
+            return index;
+        }
+    }
+
+    // word reaches the end, so step behind
+    return size;
 }
 
 Address TextByteArrayAnalyzer::indexOfRightWordSelect(Address index) const
@@ -202,17 +205,17 @@ Address TextByteArrayAnalyzer::indexOfRightWordSelect(Address index) const
 
         // reached start, so return it
         return 0;
-    } else {
-        for (++index; index < size; ++index) {
-            // search for word end to the right
-            if (!isWordChar(index)) {
-                return index;
-            }
-        }
-
-        // word reaches the end, so step behind
-        return size;
     }
+
+    for (++index; index < size; ++index) {
+        // search for word end to the right
+        if (!isWordChar(index)) {
+            return index;
+        }
+    }
+
+    // word reaches the end, so step behind
+    return size;
 }
 
 /*

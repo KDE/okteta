@@ -52,33 +52,34 @@ bool StructUnionScriptClass::queryAdditionalProperty(const DataInformation* data
     if (name == s_childCount) {
         *flags &= ~HandlesWriteAccess;
         return true;
-    } else if (name == s_children) {
+    }
+    if (name == s_children) {
         *flags &= ~HandlesReadAccess;
         return true;
+    }
+
+    bool isArrayIndex;
+    quint32 pos = name.toArrayIndex(&isArrayIndex);
+    uint count = data->childCount();
+    bool isValidChild = false;
+    if (isArrayIndex && pos < count) {
+        isValidChild = true;
     } else {
-        bool isArrayIndex;
-        quint32 pos = name.toArrayIndex(&isArrayIndex);
-        uint count = data->childCount();
-        bool isValidChild = false;
-        if (isArrayIndex && pos < count) {
-            isValidChild = true;
-        } else {
-            // compare name, names that match special properties/functions will be
-            // hidden since these were checked before
-            QString objName = name.toString();
-            for (uint i = 0; i < count; ++i) {
-                if (objName == data->childAt(i)->name()) {
-                    isValidChild = true;
-                    pos = i;
-                    break;
-                }
+        // compare name, names that match special properties/functions will be
+        // hidden since these were checked before
+        QString objName = name.toString();
+        for (uint i = 0; i < count; ++i) {
+            if (objName == data->childAt(i)->name()) {
+                isValidChild = true;
+                pos = i;
+                break;
             }
         }
-        if (isValidChild) {
-            *id = pos + 1; // add 1 to distinguish from the default value of 0
-            *flags &= ~HandlesWriteAccess; // writing is not yet supported
-            return true;
-        }
+    }
+    if (isValidChild) {
+        *id = pos + 1; // add 1 to distinguish from the default value of 0
+        *flags &= ~HandlesWriteAccess; // writing is not yet supported
+        return true;
     }
     return false; // not found
 }
@@ -121,27 +122,27 @@ QScriptValue StructUnionScriptClass::additionalProperty(const DataInformation* d
             return engine()->currentContext()->throwError(QScriptContext::RangeError,
                                                           QStringLiteral("Attempting to access struct index %1, but length is %2").arg(
                                                               QString::number(pos), QString::number(data->childCount())));
-        } else {
-            Q_CHECK_PTR(data->childAt(pos));
-            return data->childAt(pos)->toScriptValue(engine(), mHandlerInfo);
         }
-    } else if (name == s_childCount) {
+        Q_CHECK_PTR(data->childAt(pos));
+        return data->childAt(pos)->toScriptValue(engine(), mHandlerInfo);
+    }
+    if (name == s_childCount) {
         return dataW->childCount();
-    } else if (name == s_children) {
+    }
+    if (name == s_children) {
         dataW->logError() << "attempting to read read-only property" << s_children.toString();
         return engine()->undefinedValue();
-    } else {
-        // TODO is this necessary, will there be any way a child has no id set?
-        // TODO testing seems to indicate this is not necessary, will leave it thought until I'm sure
-        // check named children
-        QString objName = name.toString();
-        uint count = data->childCount();
-        for (uint i = 0; i < count; ++i) {
-            DataInformation* child = data->childAt(i);
-            Q_CHECK_PTR(child);
-            if (objName == child->name()) {
-                return child->toScriptValue(engine(), mHandlerInfo);
-            }
+    }
+    // TODO is this necessary, will there be any way a child has no id set?
+    // TODO testing seems to indicate this is not necessary, will leave it thought until I'm sure
+    // check named children
+    QString objName = name.toString();
+    uint count = data->childCount();
+    for (uint i = 0; i < count; ++i) {
+        DataInformation* child = data->childAt(i);
+        Q_CHECK_PTR(child);
+        if (objName == child->name()) {
+            return child->toScriptValue(engine(), mHandlerInfo);
         }
     }
     return {};

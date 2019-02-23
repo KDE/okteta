@@ -48,9 +48,9 @@ Qt::ItemFlags PrimitiveDataInformation::flags(int column, bool fileLoaded) const
 {
     if (column == (int) DataInformation::ColumnValue && fileLoaded) {
         return Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsEditable;
-    } else {
-        return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
     }
+
+    return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
 }
 
 bool PrimitiveDataInformation::isPrimitive() const

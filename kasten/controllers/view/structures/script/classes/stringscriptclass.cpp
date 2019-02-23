@@ -58,17 +58,18 @@ bool StringScriptClass::queryAdditionalProperty(const DataInformation* data, con
     if (name == s_maxByteCount || name == s_maxCharCount || name == s_terminatedBy
         || name == s_encoding) {
         return true;
-    } else if (name == s_lengthInCodepoints || name == s_lengthInBytes) {
+    }
+    if (name == s_lengthInCodepoints || name == s_lengthInBytes) {
         *flags &= ~HandlesWriteAccess;
         return true;
-    } else {
-        bool isArrayIndex;
-        quint32 pos = name.toArrayIndex(&isArrayIndex);
-        if (isArrayIndex && pos <= uint(data->asString()->stringLength())) {
-            *id = pos + 1; // add 1 to distinguish from the default value of 0
-            *flags &= ~HandlesWriteAccess; // writing is not yet supported
-            return true;
-        }
+    }
+
+    bool isArrayIndex;
+    quint32 pos = name.toArrayIndex(&isArrayIndex);
+    if (isArrayIndex && pos <= uint(data->asString()->stringLength())) {
+        *id = pos + 1; // add 1 to distinguish from the default value of 0
+        *flags &= ~HandlesWriteAccess; // writing is not yet supported
+        return true;
     }
     return false; // not found
 }
@@ -94,20 +95,25 @@ QScriptValue StringScriptClass::additionalProperty(const DataInformation* data, 
             return engine()->currentContext()->throwError(QScriptContext::RangeError,
                                                           QStringLiteral("Attempting to access string index %1, but length is %2").arg(
                                                               QString::number(pos), QString::number(sData->stringLength())));
-        } else {
-            return sData->valueAt(pos);
         }
-    } else if (name == s_lengthInCodepoints) {
+        return sData->valueAt(pos);
+    }
+    if (name == s_lengthInCodepoints) {
         return sData->stringLength();
-    } else if (name == s_lengthInBytes) {
+    }
+    if (name == s_lengthInBytes) {
         return sData->stringByteLength();
-    } else if (name == s_encoding) {
+    }
+    if (name == s_encoding) {
         return stringEncodings[static_cast<int>(sData->encoding())];
-    } else if (name == s_maxCharCount) {
+    }
+    if (name == s_maxCharCount) {
         return sData->maxCharCount();
-    } else if (name == s_maxByteCount) {
+    }
+    if (name == s_maxByteCount) {
         return sData->maxByteCount();
-    } else if (name == s_terminatedBy) {
+    }
+    if (name == s_terminatedBy) {
         return sData->terminationCodePoint();
     }
     return {};
@@ -130,7 +136,8 @@ bool StringScriptClass::setAdditionalProperty(DataInformation* data, const QScri
             }
         }
         return true;
-    } else if (name == s_maxByteCount) {
+    }
+    if (name == s_maxByteCount) {
         if (value.isNull()) {
             sData->logInfo() << "Unsetting max byte count.";
             sData->unsetTerminationMode(StringData::ByteCount);
@@ -143,7 +150,8 @@ bool StringScriptClass::setAdditionalProperty(DataInformation* data, const QScri
             }
         }
         return true;
-    } else if (name == s_terminatedBy) {
+    }
+    if (name == s_terminatedBy) {
         if (value.isNull()) {
             sData->logInfo() << "Unsetting termination character.";
             sData->unsetTerminationMode(StringData::Sequence);
@@ -167,7 +175,8 @@ bool StringScriptClass::setAdditionalProperty(DataInformation* data, const QScri
             }
         }
         return true;
-    } else if (name == s_encoding) {
+    }
+    if (name == s_encoding) {
         QString enc = value.toString();
         StringDataInformation::StringType encoding = ParserUtils::toStringEncoding(enc,
                                                                                    LoggerWithContext(sData->logger(), sData->fullObjectPath()));

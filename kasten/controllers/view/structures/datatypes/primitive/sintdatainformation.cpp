@@ -55,9 +55,9 @@ QString SIntDataInformationMethods<T>::staticValueString(T val, int base)
 
     if (val < 0) {
         return QLatin1Char('-') + PrimitiveDataInformation::basePrefix(base) + num;
-    } else {
-        return PrimitiveDataInformation::basePrefix(base) + num;
     }
+
+    return PrimitiveDataInformation::basePrefix(base) + num;
 }
 
 template <typename T>

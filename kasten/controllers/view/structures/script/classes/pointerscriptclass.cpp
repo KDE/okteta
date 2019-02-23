@@ -43,7 +43,8 @@ QScriptValue PointerScriptClass::additionalProperty(const DataInformation* data,
     Q_ASSERT(data->isPointer());
     if (name == s_type) {
         return PrimitiveType::standardTypeName(data->asPointer()->pointerType()->type());
-    } else if (name == s_target) {
+    }
+    if (name == s_target) {
         return data->asPointer()->pointerTarget()->toScriptValue(engine(), mHandlerInfo);
     }
     return PrimitiveScriptClass::additionalProperty(data, name, id);

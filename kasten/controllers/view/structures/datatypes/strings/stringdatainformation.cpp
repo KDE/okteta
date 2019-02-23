@@ -150,9 +150,11 @@ QVariant StringDataInformation::childData(int row, int column, int role) const
         if (column == ColumnName) {
             // TODO termination char
             return QString(QLatin1Char('[') + QString::number(row) + QLatin1Char(']'));
-        } else if (column == ColumnType) {
+        }
+        if (column == ColumnType) {
             return mData->charType();
-        } else if (column == ColumnValue) {
+        }
+        if (column == ColumnValue) {
             return mData->stringValue(row);
         }
     }
@@ -296,7 +298,8 @@ QVariant StringDataInformation::data(int column, int role) const
     if (mData->wasEof()) {
         if (role == Qt::BackgroundRole) {
             return QBrush(Qt::yellow);
-        } else if (role == Qt::ToolTipRole) {
+        }
+        if (role == Qt::ToolTipRole) {
             return i18n("End of file reached prematurely");
         }
     }

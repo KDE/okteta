@@ -64,9 +64,9 @@ QScriptValue SignedBitfieldDataInformation::valueAsQScriptValue() const
 {
     if (width() <= 32) {
         return qint32(mValue.value<qint32>());  // 32 bit or less -> can be put in as value
-    } else { // have to save it as string since 64 bit values are not supported
-        return QString::number(mValue.value<qint64>());
     }
+    // have to save it as string since 64 bit values are not supported
+    return QString::number(mValue.value<qint64>());
 }
 
 void SignedBitfieldDataInformation::setValue(AllPrimitiveTypes newVal)
