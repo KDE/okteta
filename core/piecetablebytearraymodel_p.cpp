@@ -95,7 +95,7 @@ void PieceTableByteArrayModelPrivate::setByte(Address offset, Byte byte)
     }
 
     const bool wasModifiedBefore = isModified();
-    const bool oldVersionIndex = versionIndex();
+    const int oldVersionIndex = versionIndex();
 
     Address storageOffset;
     const bool newChange = mPieceTable.replaceOne(offset, &storageOffset);
