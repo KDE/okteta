@@ -73,8 +73,8 @@ void ModifiedBarController::setTargetModel(AbstractModel* model)
                 this,      &ModifiedBarController::onSynchronizerChanged);
     }
 
-    mLocalStateLabel->setEnabled(mDocument);
-    mRemoteStateLabel->setEnabled(mDocument);
+    mLocalStateLabel->setEnabled(mDocument != nullptr);
+    mRemoteStateLabel->setEnabled(mDocument != nullptr);
 
     onSynchronizerChanged(mDocument ? mDocument->synchronizer() : nullptr);
 }
