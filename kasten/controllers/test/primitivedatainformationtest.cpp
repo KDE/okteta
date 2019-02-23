@@ -152,8 +152,8 @@ void valueCompareHelper(typename PrimitiveInfo<Type>::valueType value, QString b
 }
 
 template <PrimitiveDataType first, PrimitiveDataType second>
-void valueCompareHelperUnsigned(typename PrimitiveInfo<first>::valueType value, QString bin,
-                                QString hex, QString dec, QString oct, QString boolBase)
+void valueCompareHelperUnsigned(typename PrimitiveInfo<first>::valueType value, const QString& bin,
+                                const QString& hex, const QString& dec, const QString& oct, const QString& boolBase)
 {
     QCOMPARE(PrimitiveInfo<first>::Methods::staticValueString(value, 2), bin);
     QCOMPARE(PrimitiveInfo<first>::Methods::staticValueString(value, 16), hex);
