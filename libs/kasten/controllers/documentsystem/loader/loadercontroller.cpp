@@ -72,7 +72,7 @@ void LoaderController::load()
 {
     QFileDialog dialog;
     dialog.setMimeTypeFilters(mDocumentStrategy->supportedRemoteTypes());
-    if (dialog.exec()) {
+    if (dialog.exec() != 0) {
         const QList<QUrl> urls = dialog.selectedUrls();
 
         for (const QUrl& url : urls) {

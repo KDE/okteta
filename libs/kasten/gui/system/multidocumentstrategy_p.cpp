@@ -74,7 +74,7 @@ void MultiDocumentStrategyPrivate::createNewWithGenerator(AbstractModelDataGener
     if (configEditor) {
         auto* dialog = new CreateDialog(configEditor);
 //         dialog->setData( mModel, selection ); TODO
-        if (!dialog->exec()) {
+        if (dialog->exec() == 0) {
             return;
         }
     }

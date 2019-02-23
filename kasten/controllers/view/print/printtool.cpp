@@ -80,7 +80,7 @@ void PrintTool::print()
 //    printDialog->setOptionTabs(customDialogPages);
 
     printDialog->setWindowTitle(processTitle);
-    if (printDialog->exec()) {
+    if (printDialog->exec() != 0) {
         const QString creator = QStringLiteral("Print Plugin for Okteta " OKTETA_VERSION);   // no i18n(), keep space at end as separator
         printer.setCreator(creator);
 

@@ -206,7 +206,7 @@ void ViewConfigController::setBytesPerLine()
 {
     BytesPerLineDialog dialog;
     dialog.setBytesPerLine(mByteArrayView->noOfBytesPerLine());
-    if (dialog.exec()) {
+    if (dialog.exec() != 0) {
         mByteArrayView->setNoOfBytesPerLine(dialog.bytesPerLine());
 
         // TODO: change should be signalled and the action listen to that
@@ -218,7 +218,7 @@ void ViewConfigController::setBytesPerGroup()
 {
     BytesPerGroupDialog dialog;
     dialog.setGroupedBytesCount(mByteArrayView->noOfGroupedBytes());
-    if (dialog.exec()) {
+    if (dialog.exec() != 0) {
         mByteArrayView->setNoOfGroupedBytes(dialog.groupedBytesCount());
     }
 }

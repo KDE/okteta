@@ -117,7 +117,7 @@ void ExportController::onActionTriggered(QAction* action)
     if (configEditor) {
         ExportDialog* dialog = new ExportDialog(exporter->remoteTypeName(), configEditor);
         dialog->setData(mModel, selection);
-        if (!dialog->exec()) {
+        if (dialog->exec() == 0) {
             return;
         }
     }

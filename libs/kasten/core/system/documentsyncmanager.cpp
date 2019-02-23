@@ -125,7 +125,7 @@ bool DocumentSyncManager::setSynchronizer(AbstractDocument* document)
         QFileDialog dialog(/*mWidget*/ nullptr, processTitle, /*mWorkingUrl.url()*/ QString());
         dialog.setMimeTypeFilters(supportedRemoteTypes());
         dialog.setAcceptMode(QFileDialog::AcceptSave);
-        const QUrl newUrl = dialog.exec() ? dialog.selectedUrls().value(0) : QUrl();
+        const QUrl newUrl = (dialog.exec() != 0) ? dialog.selectedUrls().value(0) : QUrl();
 
         if (newUrl.isValid()) {
             const bool isNewUrl = (!currentSynchronizer)

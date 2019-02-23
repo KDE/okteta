@@ -126,7 +126,7 @@ void InsertController::onActionTriggered(QAction* action)
     if (configEditor) {
         auto* dialog = new InsertDialog(configEditor);
 //         dialog->setData( mModel, selection ); TODO
-        if (!dialog->exec()) {
+        if (dialog->exec() == 0) {
             return;
         }
     }
