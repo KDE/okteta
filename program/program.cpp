@@ -163,7 +163,7 @@ int OktetaProgram::execute()
 
     }
 
-    return mApp.exec();
+    return QApplication::exec();
 }
 
 void OktetaProgram::quit()

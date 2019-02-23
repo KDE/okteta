@@ -286,8 +286,8 @@ void PODDecoderTool::updateData()
     int dataSize;
     if (mByteArrayModel) {
         dataSize = mByteArrayModel->size() - mCursorIndex;
-        if (dataSize > mPODData.Size) {
-            dataSize = mPODData.Size;
+        if (dataSize > Okteta::PODData::Size) {
+            dataSize = Okteta::PODData::Size;
         } else if (dataSize < 0) {
             dataSize = 0;
         }
@@ -297,7 +297,7 @@ void PODDecoderTool::updateData()
 
     const bool hasDataSet = (dataSize > 0);
     if (hasDataSet) {
-        mByteArrayModel->copyTo(mPODData.rawData(), mCursorIndex, mPODData.Size);
+        mByteArrayModel->copyTo(mPODData.rawData(), mCursorIndex, Okteta::PODData::Size);
     }
 
     const bool hasChanged = mPODData.updateRawData(dataSize);

@@ -243,15 +243,15 @@ void AbstractByteArrayViewPrivate::setByteArrayModel(AbstractByteArrayModel* byt
 
     Bookmarkable* bookmarks = qobject_cast<Bookmarkable*>(mByteArrayModel);
     if (bookmarks) {
-        q->connect(mByteArrayModel, SIGNAL(bookmarksAdded(QVector<Okteta::Bookmark>)),
-                   q, SLOT(onBookmarksChange(QVector<Okteta::Bookmark>)));
-        q->connect(mByteArrayModel, SIGNAL(bookmarksRemoved(QVector<Okteta::Bookmark>)),
-                   q, SLOT(onBookmarksChange(QVector<Okteta::Bookmark>)));
+        QObject::connect(mByteArrayModel, SIGNAL(bookmarksAdded(QVector<Okteta::Bookmark>)),
+                         q, SLOT(onBookmarksChange(QVector<Okteta::Bookmark>)));
+        QObject::connect(mByteArrayModel, SIGNAL(bookmarksRemoved(QVector<Okteta::Bookmark>)),
+                         q, SLOT(onBookmarksChange(QVector<Okteta::Bookmark>)));
     }
     Versionable* versionControl = qobject_cast<Versionable*>(mByteArrayModel);
     if (versionControl) {
-        q->connect(mByteArrayModel, SIGNAL(revertedToVersionIndex(int)),
-                   q, SLOT(onRevertedToVersionIndex(int)));
+        QObject::connect(mByteArrayModel, SIGNAL(revertedToVersionIndex(int)),
+                         q, SLOT(onRevertedToVersionIndex(int)));
     }
 
     q->viewport()->update();

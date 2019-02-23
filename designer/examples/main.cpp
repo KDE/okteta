@@ -83,5 +83,5 @@ int main(int argc, char* argv[])
     auto* widget = new Widget;
     widget->show();
 
-    return programCore.exec();
+    return QApplication::exec();
 }

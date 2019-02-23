@@ -84,7 +84,7 @@ void ByteArrayComboBoxPrivate::init()
 
     baseLayout->addWidget(mFormatComboBox);
     baseLayout->addWidget(mValueComboBox, 1);
-    q->setTabOrder(mFormatComboBox, mValueComboBox);
+    QWidget::setTabOrder(mFormatComboBox, mValueComboBox);
 }
 
 void ByteArrayComboBoxPrivate::setByteArray(const QByteArray& byteArray)

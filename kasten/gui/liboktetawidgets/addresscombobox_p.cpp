@@ -84,7 +84,7 @@ void AddressComboBoxPrivate::init()
                      q, [&](int index) { onValueActivated(index); });
     baseLayout->addWidget(mFormatComboBox);
     baseLayout->addWidget(mValueComboBox, 1);
-    q->setTabOrder(mFormatComboBox, mValueComboBox);
+    QWidget::setTabOrder(mFormatComboBox, mValueComboBox);
 }
 
 void AddressComboBoxPrivate::rememberCurrentAddress()
