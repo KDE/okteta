@@ -164,7 +164,7 @@ void OktetaBrowserExtension::restoreState(QDataStream& stream)
 
     view->setViewModus(viewModus);
 
-    view->toggleOffsetColumn(offsetColumnVisible);
+    view->toggleOffsetColumn(offsetColumnVisible != 0);
     view->setOffsetCoding(offsetCoding);
     view->setVisibleByteArrayCodings(visibleCodings);
 
@@ -174,7 +174,7 @@ void OktetaBrowserExtension::restoreState(QDataStream& stream)
 
     view->setValueCoding(valueCoding);
     view->setCharCoding(charCodingName);
-    view->setShowsNonprinting(showsNonprinting);
+    view->setShowsNonprinting(showsNonprinting != 0);
 //     view->setColumnsPos( x, y );
     view->setCursorPosition(position);  // , cursorBehind );
 //     view->setActiveCoding( (Okteta::ByteArrayColumnView::CodingTypeId)activeCoding );

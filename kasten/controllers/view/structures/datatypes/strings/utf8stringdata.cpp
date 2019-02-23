@@ -306,7 +306,7 @@ BitCount32 Utf8StringData::sizeAt(uint i) const
 {
     Q_ASSERT(i <= count());
     quint8 isError = mErrorIndices[i];
-    if (isError) {
+    if (isError != 0) {
         return isError * 8; // error is number of bytes
     }
     uint val = mCodePoints.at(i);
