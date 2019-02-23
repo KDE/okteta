@@ -495,8 +495,8 @@ void ByteArrayColumnViewPrivate::setVisibleCodings(int newColumns)
         return;
     }
 
-    mValueColumn->setVisible(AbstractByteArrayView::ValueCodingId& newColumns);
-    mCharColumn->setVisible(AbstractByteArrayView::CharCodingId& newColumns);
+    mValueColumn->setVisible(AbstractByteArrayView::ValueCodingId & newColumns);
+    mCharColumn->setVisible(AbstractByteArrayView::CharCodingId & newColumns);
     mMiddleBorderColumn->setVisible(newColumns == AbstractByteArrayView::ValueAndCharCodings);
 
     // active column not visible anymore?
