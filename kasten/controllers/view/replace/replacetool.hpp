@@ -75,7 +75,7 @@ public Q_SLOTS: // settings
     void setSearchData(const QByteArray& searchData);
     void setReplaceData(const QByteArray& replaceData);
     void setCaseSensitivity(Qt::CaseSensitivity caseSensitivity);
-    void setDoPrompt(int doPrompt);
+    void setDoPrompt(bool doPrompt);
 
 Q_SIGNALS:
     void isApplyableChanged(bool isApplyable);    // candidate for AbstractTool API

@@ -127,7 +127,7 @@ void ReplaceTool::setCaseSensitivity(Qt::CaseSensitivity caseSensitivity)
 //         emit isApplyableChanged( newIsApplyable );
 }
 
-void ReplaceTool::setDoPrompt(int doPrompt)
+void ReplaceTool::setDoPrompt(bool doPrompt)
 {
     mDoPrompt = doPrompt;
 }
