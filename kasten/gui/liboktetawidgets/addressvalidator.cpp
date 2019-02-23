@@ -140,7 +140,7 @@ Address AddressValidator::toAddress(const QString& string, AddressType* addressT
 QString AddressValidator::toString(Address address, AddressType addressType) const
 {
     // ExpressionCoding just uses base 10 so no need to adjust this code
-    const int isHexadecimal = (mCodecId == HexadecimalCoding);
+    const bool isHexadecimal = (mCodecId == HexadecimalCoding);
     const int base = isHexadecimal ? 16 : 10;
 
     QString string = QString::number(address, base);
