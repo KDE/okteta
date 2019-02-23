@@ -95,7 +95,7 @@ void InsertController::updateActions()
     // TODO: it this depend on the current selection/focus? So it needs to be updated on every change?
     const QVector<AbstractModelDataGenerator*> generatorList =
         mModelCodecManager->generatorList();
-    const bool hasGenerators = (generatorList.size() > 0);
+    const bool hasGenerators = (!generatorList.isEmpty());
 
     if (hasGenerators) {
         for (AbstractModelDataGenerator* generator : generatorList) {

@@ -88,7 +88,7 @@ CreatorController::CreatorController(ModelCodecManager* modelCodecManager,
     const QVector<AbstractModelDataGenerator*> generatorList =
         mModelCodecManager->generatorList();
 
-    const bool hasGenerators = (generatorList.size() > 0);
+    const bool hasGenerators = (!generatorList.isEmpty());
 
     if (hasGenerators) {
         newMenuAction->addSeparator();

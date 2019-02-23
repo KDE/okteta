@@ -86,7 +86,7 @@ void ExportController::updateActions()
 
     const QVector<AbstractModelExporter*> exporterList =
         mModelCodecManager->exporterList(mModel, selection);
-    const bool hasExporters = (exporterList.size() > 0);
+    const bool hasExporters = (!exporterList.isEmpty());
 
     if (hasExporters) {
         for (auto* exporter : exporterList) {

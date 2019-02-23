@@ -74,7 +74,7 @@ void ViewListMenuController::updateActions()
     qDeleteAll(mWindowsActionGroup->actions());
 
     const QVector<AbstractView*> views = mViewManager->views();
-    const bool hasViews = (views.size() > 0);
+    const bool hasViews = (!views.isEmpty());
 
     if (hasViews) {
         // TODO: sortieren nach namen und erste 10 mit Zahl, siehe unten

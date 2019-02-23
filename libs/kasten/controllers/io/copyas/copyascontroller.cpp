@@ -92,7 +92,7 @@ void CopyAsController::updateActions()
 
     const QVector<AbstractModelStreamEncoder*> encoderList =
         mModelCodecManager->encoderList(mModel, selection);
-    const bool hasEncoders = (encoderList.size() > 0);
+    const bool hasEncoders = (!encoderList.isEmpty());
 
     if (hasEncoders) {
         for (auto* encoder : encoderList) {

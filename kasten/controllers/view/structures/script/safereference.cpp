@@ -31,7 +31,7 @@ SafeReferenceHolder::SafeReferenceHolder() = default;
 
 SafeReferenceHolder::~SafeReferenceHolder()
 {
-    if (mRefs.size() > 0) {
+    if (!mRefs.isEmpty()) {
         qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << mRefs.size() << "safe references were not removed";
     }
 #ifndef NDEBUG

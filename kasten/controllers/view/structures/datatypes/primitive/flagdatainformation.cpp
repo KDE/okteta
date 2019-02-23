@@ -85,7 +85,7 @@ QString FlagDataInformation::valueStringImpl() const
     }
 
     // if array has zero elements just return the value in hexadecimal
-    if (arr.size() == 0) {
+    if (arr.isEmpty()) {
         return i18n("0x%1 (no matching flags)", QString::number(value, 16));
     }
 
