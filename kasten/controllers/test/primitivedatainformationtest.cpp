@@ -420,7 +420,7 @@ void PrimitiveDataInformationTest::testValueStringUIntAndBool_data()
 }
 
 namespace {
-static QString charString(quint32 i)
+QString charString(quint32 i)
 {
     QString charString;
     if (i == '\n') {
