@@ -37,15 +37,15 @@ class AbstractColumnStylistPrivate;
 
 class OKTETAGUI_EXPORT AbstractColumnStylist
 {
+protected:
+    explicit AbstractColumnStylist(AbstractColumnStylistPrivate* d);
+
 public:
     AbstractColumnStylist();
     virtual ~AbstractColumnStylist();
 
 public: // API to be reimplemented in the subclasses
     virtual const QPalette& palette() const = 0;
-
-protected:
-    explicit AbstractColumnStylist(AbstractColumnStylistPrivate* d);
 
 protected:
     const QScopedPointer<AbstractColumnStylistPrivate> d_ptr;
