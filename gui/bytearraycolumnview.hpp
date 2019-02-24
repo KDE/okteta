@@ -105,10 +105,6 @@ protected: // Q_SLOTS QWidget API
 
 private:
     Q_DECLARE_PRIVATE(ByteArrayColumnView)
-
-private: // Disabling copy constructor and operator= - not useful
-    ByteArrayColumnView(const ByteArrayColumnView&);
-    ByteArrayColumnView& operator=(const ByteArrayColumnView&);
 };
 
 }
