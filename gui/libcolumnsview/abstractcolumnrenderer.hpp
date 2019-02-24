@@ -26,6 +26,8 @@
 // lib
 #include <okteta/pixelmetrics.hpp>
 #include <okteta/oktetagui_export.hpp>
+// Qt
+#include <QScopedPointer>
 
 class QPainter;
 
@@ -44,6 +46,9 @@ class AbstractColumnRendererPrivate;
 class OKTETAGUI_EXPORT AbstractColumnRenderer
 {
 //    friend class ColumnsView;
+
+protected:
+    explicit AbstractColumnRenderer(AbstractColumnRendererPrivate* d);
 
 public:
     explicit AbstractColumnRenderer(AbstractColumnStylist* stylist);
@@ -106,8 +111,11 @@ protected:
     /** */
     void renderBlankLine(QPainter* painter) const;
 
+protected:
+    const QScopedPointer<AbstractColumnRendererPrivate> d_ptr;
+
 private:
-    AbstractColumnRendererPrivate* const d;  // TODO: shared d
+    Q_DECLARE_PRIVATE(AbstractColumnRenderer)
 };
 
 }
