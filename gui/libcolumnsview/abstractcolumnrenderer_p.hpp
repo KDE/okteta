@@ -39,6 +39,8 @@ public:
     explicit AbstractColumnRendererPrivate(AbstractColumnStylist* stylist);
     AbstractColumnRendererPrivate() = delete;
 
+    virtual ~AbstractColumnRendererPrivate();
+
 public:
     void renderBlankLine(QPainter* painter) const;
     void renderEmptyColumn(QPainter* painter, const PixelXRange& xSpan, const PixelYRange& ySpan);
@@ -60,6 +62,8 @@ inline AbstractColumnRendererPrivate::AbstractColumnRendererPrivate(AbstractColu
     : mStylist(stylist)
 {
 }
+
+inline AbstractColumnRendererPrivate::~AbstractColumnRendererPrivate() = default;
 
 inline void AbstractColumnRendererPrivate::renderBlankLine(QPainter* painter) const
 {

@@ -28,6 +28,8 @@
 
 namespace Okteta {
 
+class CharByteArrayColumnRendererPrivate;
+
 /** buffer column that interprets the bytes as chars
  *
  * @author Friedrich W. H. Kossebau
@@ -65,51 +67,9 @@ public: // value access
     /** returns the actually used undefined character for "undefined" chars, default is '?' */
     QChar undefinedChar() const;
 
-protected: // AbstractByteArrayColumnRenderer API
-    void renderByteText(QPainter* painter, Byte byte, Character byteChar, const QColor& color) const override;
-
 private:
-    /** */
-    bool mShowingNonprinting;
-    /** */
-    QChar mSubstituteChar;
-    /** */
-    QChar mUndefinedChar;
+    Q_DECLARE_PRIVATE(CharByteArrayColumnRenderer)
 };
-
-inline bool CharByteArrayColumnRenderer::isShowingNonprinting()  const { return mShowingNonprinting; }
-inline QChar CharByteArrayColumnRenderer::substituteChar()       const { return mSubstituteChar; }
-inline QChar CharByteArrayColumnRenderer::undefinedChar()        const { return mUndefinedChar; }
-
-inline bool CharByteArrayColumnRenderer::setSubstituteChar(QChar substituteChar)
-{
-    if (mSubstituteChar == substituteChar) {
-        return false;
-    }
-
-    mSubstituteChar = substituteChar;
-    return true;
-}
-
-inline bool CharByteArrayColumnRenderer::setUndefinedChar(QChar undefinedChar)
-{
-    if (mUndefinedChar == undefinedChar) {
-        return false;
-    }
-
-    mUndefinedChar = undefinedChar;
-    return true;
-}
-
-inline bool CharByteArrayColumnRenderer::setShowingNonprinting(bool showingNonprinting)
-{
-    if (mShowingNonprinting == showingNonprinting) {
-        return false;
-    }
-
-    mShowingNonprinting = showingNonprinting;
-    return true;
-}
 
 }
 

@@ -20,35 +20,24 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef OKTETA_BORDERCOLUMNRENDERER_HPP
-#define OKTETA_BORDERCOLUMNRENDERER_HPP
+#include "charbytearraycolumnrenderer_p.hpp"
 
-// lib
-#include <okteta/abstractcolumnrenderer.hpp>
+// Qt
+#include <QPainter>
 
 namespace Okteta {
 
-class BorderColumnRendererPrivate;
-
-/** column that does nothing but draw a vertical line in the middle of the column
- *
- * @author Friedrich W. H. Kossebau
- */
-
-class OKTETAGUI_EXPORT BorderColumnRenderer : public AbstractColumnRenderer
+void CharByteArrayColumnRendererPrivate::renderByteText(QPainter* painter, Byte byte, Character byteChar, const QColor& color) const
 {
-public:
-    BorderColumnRenderer(AbstractColumnStylist* stylist, bool lineDrawn, bool inEmpty = true);
-    ~BorderColumnRenderer() override;
+    Q_UNUSED(byte)
 
-public: // AbstractColumnRenderer-API
-    void renderColumn(QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys) override;
-    void renderEmptyColumn(QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys) override;
+    // turn into a drawable String
+    const QString text(byteChar.isUndefined() ?                       Okteta::Character(mUndefinedChar) :
+                       !(mShowingNonprinting || byteChar.isPrint()) ? Okteta::Character(mSubstituteChar) :
+                                                                      byteChar);
 
-private:
-    Q_DECLARE_PRIVATE(BorderColumnRenderer)
-};
-
+    painter->setPen(color);
+    painter->drawText(0, mDigitBaseLine, text);
 }
 
-#endif
+}

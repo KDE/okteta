@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, made within the KDE community.
 
-    Copyright 2003,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2008,2019 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -21,37 +21,61 @@
 */
 
 #include "charbytearraycolumnrenderer.hpp"
-
-// lib
-#include "oktetagui.hpp"
-// Qt
-#include <QPainter>
+#include "charbytearraycolumnrenderer_p.hpp"
 
 namespace Okteta {
 
 CharByteArrayColumnRenderer::CharByteArrayColumnRenderer(AbstractColumnStylist* stylist,
                                                          AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges)
-    : AbstractByteArrayColumnRenderer(stylist, byteArrayModel, layout, ranges)
-    , mShowingNonprinting(DefaultShowingNonprinting)
-    , mSubstituteChar(DefaultSubstituteChar)
-    , mUndefinedChar(DefaultUndefinedChar)
+    : AbstractByteArrayColumnRenderer(new CharByteArrayColumnRendererPrivate(this, stylist, byteArrayModel, layout, ranges))
 {
-    setSpacing(0, 0, 0);
+    Q_D(CharByteArrayColumnRenderer);
+
+    d->init();
 }
 
 CharByteArrayColumnRenderer::~CharByteArrayColumnRenderer() = default;
 
-void CharByteArrayColumnRenderer::renderByteText(QPainter* painter, Byte byte, Character byteChar, const QColor& color) const
+bool CharByteArrayColumnRenderer::isShowingNonprinting() const
 {
-    Q_UNUSED(byte)
+    Q_D(const CharByteArrayColumnRenderer);
 
-    // turn into a drawable String
-    const QString text(byteChar.isUndefined() ?                       Okteta::Character(mUndefinedChar) :
-                       !(mShowingNonprinting || byteChar.isPrint()) ? Okteta::Character(mSubstituteChar) :
-                                                                      byteChar);
+    return d->isShowingNonprinting();
+}
 
-    painter->setPen(color);
-    painter->drawText(0, mDigitBaseLine, text);
+QChar CharByteArrayColumnRenderer::substituteChar() const
+{
+    Q_D(const CharByteArrayColumnRenderer);
+
+    return d->substituteChar();
+}
+
+QChar CharByteArrayColumnRenderer::undefinedChar() const
+{
+    Q_D(const CharByteArrayColumnRenderer);
+
+    return d->undefinedChar();
+}
+
+bool CharByteArrayColumnRenderer::setSubstituteChar(QChar substituteChar)
+{
+    Q_D(CharByteArrayColumnRenderer);
+
+    return d->setSubstituteChar(substituteChar);
+}
+
+bool CharByteArrayColumnRenderer::setUndefinedChar(QChar undefinedChar)
+{
+    Q_D(CharByteArrayColumnRenderer);
+
+    return d->setUndefinedChar(undefinedChar);
+}
+
+bool CharByteArrayColumnRenderer::setShowingNonprinting(bool showingNonprinting)
+{
+    Q_D(CharByteArrayColumnRenderer);
+
+    return d->setShowingNonprinting(showingNonprinting);
 }
 
 }

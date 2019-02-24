@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, made within the KDE community.
 
-    Copyright 2003,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2008,2019 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -25,9 +25,14 @@
 
 // lib
 #include <okteta/abstractbytearraycolumnrenderer.hpp>
+// Okteta core
+#include <Okteta/Byte>
 
 namespace Okteta {
+
 class ValueCodec;
+
+class ValueByteArrayColumnRendererPrivate;
 
 /** buffer column which displays the numerical values of the bytes
  *
@@ -56,29 +61,9 @@ public: // modification access
 public: // value access
     PixelX binaryGapWidth() const;
 
-protected: // AbstractByteArrayColumnRenderer API
-    void renderByteText(QPainter* painter, Byte byte, Character byteChar, const QColor& color) const override;
-    void recalcByteWidth() override;
-
 private:
-    void renderCode(QPainter* painter, const QString& code, const QColor& color) const;
-
-private: // settings
-    /** */
-    ValueCoding mValueCoding;
-    /** */
-    const ValueCodec* mValueCodec = nullptr;
-    /** */
-    PixelX mBinaryGapWidth;
-
-private: // buffered data
-    /** buffer to hold the formatted valueCoding */
-    mutable QString mDecodedByteText;
-    /** calculated: Offset in pixels of the second half of the binary */
-    PixelX mBinaryHalfOffset;
+    Q_DECLARE_PRIVATE(ValueByteArrayColumnRenderer)
 };
-
-inline PixelX ValueByteArrayColumnRenderer::binaryGapWidth()                 const { return mBinaryGapWidth; }
 
 }
 

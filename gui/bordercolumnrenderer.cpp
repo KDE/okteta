@@ -21,56 +21,33 @@
 */
 
 #include "bordercolumnrenderer.hpp"
+#include "bordercolumnrenderer_p.hpp"
 
-// lib
-#include <abstractcolumnstylist.hpp>
-// Qt
-#include <QPainter>
-#include <QStyle>
 
 namespace Okteta {
 
-static constexpr PixelX BorderMargin = 4;
-static constexpr PixelX LineWidth = 1;
-static constexpr PixelX BorderWidth = 2 * BorderMargin + LineWidth;
-static constexpr PixelX LineX = BorderMargin;
-
 BorderColumnRenderer::BorderColumnRenderer(AbstractColumnStylist* stylist, bool lineDrawn, bool inEmpty)
-    : AbstractColumnRenderer(stylist)
-    , mLineDrawn(lineDrawn)
-    , mInEmpty(inEmpty)
+    : AbstractColumnRenderer(new BorderColumnRendererPrivate(this, stylist, lineDrawn, inEmpty))
 {
-    setWidth(mLineDrawn ? BorderWidth : BorderMargin);
+    Q_D(BorderColumnRenderer);
+
+    d->init();
 }
 
 BorderColumnRenderer::~BorderColumnRenderer() = default;
 
 void BorderColumnRenderer::renderColumn(QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys)
 {
-    AbstractColumnRenderer::renderColumn(painter, Xs, Ys);
+    Q_D(BorderColumnRenderer);
 
-    renderBorderLine(painter, Xs, Ys);
+    d->renderColumn(painter, Xs, Ys);
 }
 
 void BorderColumnRenderer::renderEmptyColumn(QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys)
 {
-    AbstractColumnRenderer::renderEmptyColumn(painter, Xs, Ys);
+    Q_D(BorderColumnRenderer);
 
-    if (mInEmpty) {
-        renderBorderLine(painter, Xs, Ys);
-    }
-}
-
-void BorderColumnRenderer::renderBorderLine(QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys)
-{
-    const PixelX viewGlobalLineX = x() + LineX;
-
-    if (mLineDrawn && Xs.includes(viewGlobalLineX)) {
-        const int lineColor = -1; // TODO: viewport->style()->styleHint( QStyle::SH_Table_GridLineColor, 0, viewport );
-
-        painter->setPen(lineColor != -1 ? (QRgb)lineColor : stylist()->palette().mid().color());
-        painter->drawLine(viewGlobalLineX, Ys.start(), viewGlobalLineX, Ys.end());
-    }
+    d->renderEmptyColumn(painter, Xs, Ys);
 }
 
 }

@@ -30,25 +30,22 @@
 #include <okteta/linepositionrange.hpp>
 // Okteta core
 #include <Okteta/OktetaCore>
-#include <Okteta/AbstractByteArrayModel>
-#include <Okteta/Character>
-// Qt
-#include <QFontMetrics>
+#include <Okteta/Byte>
 
-class QPainter;
-class QColor;
-class QBrush;
+class QFontMetrics;
 class QRect;
 
 namespace Okteta {
+
 class Coord;
-class Bookmarkable;
 class CharCodec;
 class ValueCodec;
 
-// class KByteArrayView;
 class ByteArrayTableRanges;
 class ByteArrayTableLayout;
+class AbstractByteArrayModel;
+
+class ByteArrayRowColumnRendererPrivate;
 
 /** base class of all buffer column displayers
  * holds all information about the vertical layout of a buffer column
@@ -80,8 +77,6 @@ public:
     void prepareRendering(const PixelXRange& Xs);
 
 public:
-    // void renderLine( QPainter* painter, int lineIndex );
-    void renderLinePositions(QPainter* painter, Line lineIndex, const LinePositionRange& linePositions);
     /** paints a cursor based on the type of the byte.
      * @param painter The QPainter.
      * @param byteIndex Index of the byte to paint the cursor for. If -1 a space is used as char.
@@ -223,165 +218,9 @@ public: // value access
 
     AbstractByteArrayView::CodingTypes visibleCodings() const;
 
-protected: // API to be redefined
-    void renderByteText(QPainter* painter,
-                        Byte byte, Character charByte, int codings, const QColor& color) const;
-    /** default implementation sets byte width to one digit width */
-    void recalcByteWidth();
-
 private:
-    void renderPlain(QPainter* painter, const LinePositionRange& linePositions, Address byteIndex);
-    void renderSelection(QPainter* painter, const LinePositionRange& linePositions, Address byteIndex, int flag);
-    void renderMarking(QPainter* painter, const LinePositionRange& linePositions, Address byteIndex, int flag);
-    void renderRange(QPainter* painter, const QBrush& brush, const LinePositionRange& linePositions, int flag);
-    void renderSelectionSpaceBehind(QPainter* painter, LinePosition linePosition);
-    void renderSpaceBehind(QPainter* painter, const QBrush& brush, LinePosition linePosition);
-    void renderBookmark(QPainter* painter, const QBrush& brush);
-
-    void renderCode(QPainter* painter, const QString& code, const QColor& color) const;
-
-    void recalcX();
-
-    bool getNextSelectedAddressRange(AddressRange* selectedRange, unsigned int* flag, const AddressRange& range) const;
-    bool getNextMarkedAddressRange(AddressRange* markedRange, unsigned int* flag, const AddressRange& range) const;
-
-private:
-    /** pointer to the buffer */
-    AbstractByteArrayModel* mByteArrayModel;
-    /** pointer to the layout */
-    const ByteArrayTableLayout* mLayout;
-    /** pointer to the ranges */
-    ByteArrayTableRanges* mRanges;
-    /** */
-    Bookmarkable* mBookmarks;
-    /** */
-    const CharCodec* mCharCodec;
-
-    AbstractByteArrayView::CodingTypes mVisibleCodings;
-    /** */
-    PixelX mDigitWidth = 0;
-    /** */
-    PixelY mDigitBaseLine = 0;
-    /** */
-    PixelY mDigitHeight = 0;
-
-    QFontMetrics mFontMetrics;
-
-private: // individual data
-    /** total width of byte display in pixel */
-    PixelX mByteWidth = 0;
-    /** width of inserting cursor in pixel */
-//     PixelX mCursorWidth;
-    /** size of the line margin */
-    PixelX mByteSpacingWidth;
-    /** width of spacing in pixel */
-    PixelX mGroupSpacingWidth;
-
-    /** number of grouped bytes */
-    Size mNoOfGroupedBytes;
-
-    /** pointer to array with buffered linePositions (relative to column position)
-     * any spacing gets assigned to the byte left to it -> ...|c|c|c |c|c...
-     */
-    PixelX* mLinePosLeftPixelX = nullptr;
-    PixelX* mLinePosRightPixelX = nullptr;
-    /** index of right position */
-    LinePosition mLastLinePos = 0;
-
-    /** */
-    bool mByteTypeColored = true;
-
-private: // value specifics
-    /** */
-    ValueCoding mValueCoding;
-    /** */
-    const ValueCodec* mValueCodec = nullptr;
-    /** */
-    PixelX mBinaryGapWidth;
-
-private: // buffered data
-    /** buffer to hold the formatted valueCoding */
-    mutable QString mDecodedByteText;
-    /** calculated: Offset in pixels of the second half of the binary */
-    PixelX mBinaryHalfOffset;
-
-private: // char specifics
-    /** */
-    bool mShowingNonprinting;
-    /** */
-    QChar mSubstituteChar;
-    /** */
-    QChar mUndefinedChar;
-
-private: // buffering rendering data
-    LinePositionRange mRenderLinePositions;
-    Line mRenderLine;
-    PixelX mRenderX;
-    PixelX mRenderWidth;
-    int mSpacingTrigger;
+    Q_DECLARE_PRIVATE(ByteArrayRowColumnRenderer)
 };
-
-inline AbstractByteArrayView::CodingTypes ByteArrayRowColumnRenderer::visibleCodings() const { return mVisibleCodings; }
-
-inline PixelX ByteArrayRowColumnRenderer::byteWidth()         const { return mByteWidth; }
-inline PixelX ByteArrayRowColumnRenderer::digitWidth()        const { return mDigitWidth; }
-inline PixelX ByteArrayRowColumnRenderer::byteSpacingWidth()  const { return mByteSpacingWidth; }
-inline PixelX ByteArrayRowColumnRenderer::groupSpacingWidth() const { return mGroupSpacingWidth; }
-inline PixelY ByteArrayRowColumnRenderer::digitHeight()       const { return mDigitHeight; }
-inline Size ByteArrayRowColumnRenderer::noOfGroupedBytes()      const { return mNoOfGroupedBytes; }
-
-inline LinePosition ByteArrayRowColumnRenderer::firstLinePos() const { return mRenderLinePositions.start(); }
-inline LinePosition ByteArrayRowColumnRenderer::lastLinePos()  const { return mRenderLinePositions.end(); }
-inline LinePositionRange ByteArrayRowColumnRenderer::visibleLinePositions() const { return mRenderLinePositions; }
-
-inline const ByteArrayTableLayout* ByteArrayRowColumnRenderer::layout() const { return mLayout; }
-
-inline void ByteArrayRowColumnRenderer::setCharCodec(const CharCodec* charCodec)
-{
-    mCharCodec = charCodec;
-}
-
-inline void ByteArrayRowColumnRenderer::setByteTypeColored(bool byteTypeColored)
-{
-    mByteTypeColored = byteTypeColored;
-}
-inline bool ByteArrayRowColumnRenderer::isByteTypeColored() const { return mByteTypeColored; }
-
-inline PixelX ByteArrayRowColumnRenderer::binaryGapWidth()                 const { return mBinaryGapWidth; }
-
-inline bool ByteArrayRowColumnRenderer::isShowingNonprinting()  const { return mShowingNonprinting; }
-inline QChar ByteArrayRowColumnRenderer::substituteChar()       const { return mSubstituteChar; }
-inline QChar ByteArrayRowColumnRenderer::undefinedChar()        const { return mUndefinedChar; }
-
-inline bool ByteArrayRowColumnRenderer::setSubstituteChar(QChar substituteChar)
-{
-    if (mSubstituteChar == substituteChar) {
-        return false;
-    }
-
-    mSubstituteChar = substituteChar;
-    return true;
-}
-
-inline bool ByteArrayRowColumnRenderer::setUndefinedChar(QChar undefinedChar)
-{
-    if (mUndefinedChar == undefinedChar) {
-        return false;
-    }
-
-    mUndefinedChar = undefinedChar;
-    return true;
-}
-
-inline bool ByteArrayRowColumnRenderer::setShowingNonprinting(bool showingNonprinting)
-{
-    if (mShowingNonprinting == showingNonprinting) {
-        return false;
-    }
-
-    mShowingNonprinting = showingNonprinting;
-    return true;
-}
 
 }
 

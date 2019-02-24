@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, made within the KDE community.
 
-    Copyright 2003,2007-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2007-2009,2019 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -29,24 +29,22 @@
 #include <okteta/linerange.hpp>
 // Okteta core
 #include <Okteta/OktetaCore>
-#include <Okteta/AbstractByteArrayModel>
-#include <Okteta/Character>
-// Qt
-#include <QFontMetrics>
+#include <Okteta/Address>
 
 class QPainter;
-class QColor;
-class QBrush;
 class QRect;
+class QFontMetrics;
 
 namespace Okteta {
+
 class Coord;
-class Bookmarkable;
 class CharCodec;
 
-// class KByteArrayView;
 class ByteArrayTableRanges;
 class ByteArrayTableLayout;
+class AbstractByteArrayModel;
+
+class AbstractByteArrayColumnRendererPrivate;
 
 /** base class of all buffer column displayers
  * holds all information about the vertical layout of a buffer column
@@ -65,9 +63,10 @@ public:
         Right
     };
 
+protected:
+    explicit AbstractByteArrayColumnRenderer(AbstractByteArrayColumnRendererPrivate* d);
+
 public:
-    AbstractByteArrayColumnRenderer(AbstractColumnStylist* stylist,
-                                    AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges);
     ~AbstractByteArrayColumnRenderer() override;
 
 public: // AbstractColumnRenderer API
@@ -78,7 +77,6 @@ public:
     void prepareRendering(const PixelXRange& Xs);
 
 public:
-    // void renderLine( QPainter* painter, int lineIndex );
     void renderLinePositions(QPainter* painter, Line lineIndex, const LineRange& linePositions);
     /** paints a cursor based on the type of the byte.
      * @param painter The QPainter
@@ -173,103 +171,9 @@ public: // value access
     const ByteArrayTableLayout* layout() const;
     bool isByteTypeColored() const;
 
-protected: // API to be redefined
-    virtual void renderByteText(QPainter* painter, Byte byte, Character charByte, const QColor& color) const = 0;
-    /** default implementation sets byte width to one digit width */
-    virtual void recalcByteWidth();
-
-protected:
-    void renderPlain(QPainter* painter, const LinePositionRange& linePositions, Address byteIndex);
-    void renderSelection(QPainter* painter, const LinePositionRange& linePositions, Address byteIndex, int flag);
-    void renderMarking(QPainter* painter, const LinePositionRange& linePositions, Address byteIndex, int flag);
-    void renderRange(QPainter* painter, const QBrush& brush, const LinePositionRange& linePositions, int flag);
-    void renderSelectionSpaceBehind(QPainter* painter, LinePosition linePosition);
-    void renderSpaceBehind(QPainter* painter, const QBrush& brush, LinePosition linePosition);
-    void renderBookmark(QPainter* painter, const QBrush& brush);
-
-    void recalcX();
-
-    bool getNextSelectedAddressRange(AddressRange* selectedRange, unsigned int* flag, const AddressRange& range) const;
-    bool getNextMarkedAddressRange(AddressRange* markedRange, unsigned int* flag, const AddressRange& range) const;
-
-    void setByteWidth(int byteWidth);
-
-protected:
-    /** pointer to the buffer */
-    AbstractByteArrayModel* mByteArrayModel;
-    /** pointer to the layout */
-    const ByteArrayTableLayout* mLayout;
-    /** pointer to the ranges */
-    ByteArrayTableRanges* mRanges;
-    /** */
-    Bookmarkable* mBookmarks;
-    /** */
-    const CharCodec* mCharCodec;
-
-    /** */
-    PixelX mDigitWidth = 0;
-    /** */
-    PixelY mDigitBaseLine = 0;
-
-    QFontMetrics mFontMetrics;
-
-protected: // individual data
-    /** total width of byte display in pixel */
-    PixelX mByteWidth = 0;
-    /** width of inserting cursor in pixel */
-//     PixelX mCursorWidth;
-    /** size of the line margin */
-    PixelX mByteSpacingWidth;
-    /** width of spacing in pixel */
-    PixelX mGroupSpacingWidth;
-
-    /** number of grouped bytes */
-    int mNoOfGroupedBytes;
-
-    /** pointer to array with buffered linePositions (relative to column position)
-     * a spacing gets assigned to the left byte -> ...c|c|c |c|c...
-     */
-    PixelX* mLinePosLeftPixelX = nullptr;
-    PixelX* mLinePosRightPixelX = nullptr;
-    /** index of right position */
-    LinePosition mLastLinePos = 0;
-
-    /** */
-    bool mByteTypeColored = true;
-
-protected: // buffering rendering data
-    LinePositionRange mRenderLinePositions;
-    Line mRenderLine;
-    PixelX mRenderX;
-    PixelX mRenderWidth;
-    int mSpacingTrigger;
+private:
+    Q_DECLARE_PRIVATE(AbstractByteArrayColumnRenderer)
 };
-
-inline PixelX AbstractByteArrayColumnRenderer::byteWidth()         const { return mByteWidth; }
-inline PixelX AbstractByteArrayColumnRenderer::digitWidth()        const { return mDigitWidth; }
-inline PixelX AbstractByteArrayColumnRenderer::byteSpacingWidth()  const { return mByteSpacingWidth; }
-inline PixelX AbstractByteArrayColumnRenderer::groupSpacingWidth() const { return mGroupSpacingWidth; }
-
-inline int AbstractByteArrayColumnRenderer::noOfGroupedBytes()      const { return mNoOfGroupedBytes; }
-
-inline LinePosition AbstractByteArrayColumnRenderer::firstLinePos() const { return mRenderLinePositions.start(); }
-inline LinePosition AbstractByteArrayColumnRenderer::lastLinePos()  const { return mRenderLinePositions.end(); }
-inline LinePositionRange AbstractByteArrayColumnRenderer::visibleLinePositions() const { return mRenderLinePositions; }
-
-inline const ByteArrayTableLayout* AbstractByteArrayColumnRenderer::layout() const { return mLayout; }
-
-inline void AbstractByteArrayColumnRenderer::setCharCodec(const CharCodec* charCodec)
-{
-    mCharCodec = charCodec;
-}
-
-inline void AbstractByteArrayColumnRenderer::setByteTypeColored(bool byteTypeColored)
-{
-    mByteTypeColored = byteTypeColored;
-}
-inline bool AbstractByteArrayColumnRenderer::isByteTypeColored() const { return mByteTypeColored; }
-
-inline void AbstractByteArrayColumnRenderer::setByteWidth(int byteWidth) { mByteWidth = byteWidth; }
 
 }
 

@@ -31,7 +31,9 @@
 class QFontMetrics;
 
 namespace Okteta {
+
 class ByteArrayTableLayout;
+class OffsetColumnRendererPrivate;
 
 /**
  * @author Friedrich W. H. Kossebau
@@ -53,46 +55,15 @@ public:    // AbstractColumnRenderer API
 
 public:
     void setFormat(OffsetFormat::Format format, const QFontMetrics& fontMetrics);
-    OKTETAGUI_DEPRECATED void setFormat(OffsetFormat::Format format);
     void setFontMetrics(const QFontMetrics& fontMetrics);
 
 public: // read access
 //     int delta() const;
     OffsetFormat::Format format() const;
-    OffsetFormat::print printFunction() const;
 
 private:
-    /** recalculates all x values */
-    void recalcX();
-    /** paints full line */
-    void renderLine(QPainter* painter, Line lineIndex);
-    /** */
-    void renderColumnBackground(QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys);
-
-private: // user settings
-    ByteArrayTableLayout* mLayout;
-
-private: // pixel related
-    /** */
-    PixelX mOffsetTextWidth = 0;
-    /** */
-    PixelY mDigitBaseLine = 0;
-
-private: // general layout
-    OffsetFormat::Format mFormat;
-
-    OffsetFormat::print PrintFunction;
-
-    /** buffer to hold the formatted coding */
-    mutable char mCodedOffset[OffsetFormat::MaxFormatWidth + 1];
-
-private: // firstnext trips related
-    /** */
-    Line mRenderLineIndex;
+    Q_DECLARE_PRIVATE(OffsetColumnRenderer)
 };
-
-inline OffsetFormat::print OffsetColumnRenderer::printFunction()    const { return PrintFunction; }
-inline OffsetFormat::Format OffsetColumnRenderer::format()          const { return mFormat; }
 
 }
 
