@@ -27,7 +27,7 @@ namespace Kasten {
 
 AbstractToolWidget::AbstractToolWidget(QWidget* parent)
     : QWidget(parent)
-    , d(new AbstractToolWidgetPrivate(this))
+    , d_ptr(new AbstractToolWidgetPrivate(this))
 {
 }
 
@@ -35,6 +35,8 @@ AbstractToolWidget::~AbstractToolWidget() = default;
 
 void AbstractToolWidget::addButton(QPushButton* button, DefaultType defaultType)
 {
+    Q_D(AbstractToolWidget);
+
     d->addButton(button, defaultType);
 }
 

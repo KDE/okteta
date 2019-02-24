@@ -55,7 +55,8 @@ public:
     void addButton(QPushButton* button, DefaultType defaultType = AutoDefault);
 
 private:
-    const QScopedPointer<class AbstractToolWidgetPrivate> d;
+    const QScopedPointer<class AbstractToolWidgetPrivate> d_ptr;
+    Q_DECLARE_PRIVATE(AbstractToolWidget)
 };
 
 }

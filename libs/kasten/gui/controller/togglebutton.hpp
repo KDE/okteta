@@ -44,7 +44,8 @@ public:
     void setCheckedState(const QString& text, const QString& toolTip);
 
 private:
-    const QScopedPointer<class ToggleButtonPrivate> d;
+    const QScopedPointer<class ToggleButtonPrivate> d_ptr;
+    Q_DECLARE_PRIVATE(ToggleButton)
 };
 
 }

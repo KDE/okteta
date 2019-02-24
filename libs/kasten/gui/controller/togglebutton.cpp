@@ -27,7 +27,7 @@ namespace Kasten {
 
 ToggleButton::ToggleButton(const QIcon& icon, const QString& text, const QString& toolTip, QWidget* parent)
     : QToolButton(parent)
-    , d(new ToggleButtonPrivate(this))
+    , d_ptr(new ToggleButtonPrivate(this))
 {
     setIcon(icon);
     setText(text);
@@ -36,7 +36,7 @@ ToggleButton::ToggleButton(const QIcon& icon, const QString& text, const QString
 
 ToggleButton::ToggleButton(const QString& text, const QString& toolTip, QWidget* parent)
     : QToolButton(parent)
-    , d(new ToggleButtonPrivate(this))
+    , d_ptr(new ToggleButtonPrivate(this))
 {
     setText(text);
     setToolTip(toolTip);
@@ -46,11 +46,15 @@ ToggleButton::~ToggleButton() = default;
 
 void ToggleButton::setCheckedState(const QIcon& icon, const QString& text, const QString& toolTip)
 {
+    Q_D(ToggleButton);
+
     d->setOtherState(icon, text, toolTip);
 }
 
 void ToggleButton::setCheckedState(const QString& text, const QString& toolTip)
 {
+    Q_D(ToggleButton);
+
     d->setOtherState(QIcon(), text, toolTip);
 }
 

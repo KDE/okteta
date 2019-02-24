@@ -128,7 +128,8 @@ public:
     QString text(Address index, Address lastIndex = -1) const;
 
 private:
-    const QScopedPointer<class TextByteArrayAnalyzerPrivate> d;
+    const QScopedPointer<class TextByteArrayAnalyzerPrivate> d_ptr;
+    Q_DECLARE_PRIVATE(TextByteArrayAnalyzer)
 };
 
 }

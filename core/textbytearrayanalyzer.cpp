@@ -46,7 +46,7 @@ TextByteArrayAnalyzerPrivate::TextByteArrayAnalyzerPrivate(const AbstractByteArr
 
 
 TextByteArrayAnalyzer::TextByteArrayAnalyzer(const AbstractByteArrayModel* byteArrayModel, const CharCodec* charCodec)
-    : d(new TextByteArrayAnalyzerPrivate(byteArrayModel, charCodec))
+    : d_ptr(new TextByteArrayAnalyzerPrivate(byteArrayModel, charCodec))
 {
 }
 
@@ -61,12 +61,16 @@ AddressRange TextByteArrayAnalyzer::wordSection(Address index) const
 
 bool TextByteArrayAnalyzer::isWordChar(Address index) const
 {
+    Q_D(const TextByteArrayAnalyzer);
+
     const Character decodedChar = d->charCodec->decode(d->byteArrayModel->byte(index));
     return !decodedChar.isUndefined() && decodedChar.isLetterOrNumber();
 }
 
 Address TextByteArrayAnalyzer::indexOfPreviousWordStart(Address index) const
 {
+    Q_D(const TextByteArrayAnalyzer);
+
     const Size size = d->byteArrayModel->size();
     // already at the start or can the result only be 0?
     if (index == 0 || size < 3) {
@@ -93,6 +97,8 @@ Address TextByteArrayAnalyzer::indexOfPreviousWordStart(Address index) const
 
 Address TextByteArrayAnalyzer::indexOfNextWordStart(Address index) const
 {
+    Q_D(const TextByteArrayAnalyzer);
+
     const Size size = d->byteArrayModel->size();
     bool lookingForFirstWordChar = false;
     for (; index < size; ++index) {
@@ -113,6 +119,8 @@ Address TextByteArrayAnalyzer::indexOfNextWordStart(Address index) const
 
 Address TextByteArrayAnalyzer::indexOfBeforeNextWordStart(Address index) const
 {
+    Q_D(const TextByteArrayAnalyzer);
+
     const Size size = d->byteArrayModel->size();
     bool lookingForFirstWordChar = false;
     for (; index < size; ++index) {
@@ -144,6 +152,8 @@ Address TextByteArrayAnalyzer::indexOfWordStart(Address index) const
 
 Address TextByteArrayAnalyzer::indexOfWordEnd(Address index) const
 {
+    Q_D(const TextByteArrayAnalyzer);
+
     const Size size = d->byteArrayModel->size();
     for (++index; index < size; ++index) {
         if (!isWordChar(index)) {
@@ -157,6 +167,8 @@ Address TextByteArrayAnalyzer::indexOfWordEnd(Address index) const
 
 Address TextByteArrayAnalyzer::indexOfLeftWordSelect(Address index) const
 {
+    Q_D(const TextByteArrayAnalyzer);
+
     // word at index?
     if (isWordChar(index)) {
         // search for word start to the left
@@ -184,6 +196,8 @@ Address TextByteArrayAnalyzer::indexOfLeftWordSelect(Address index) const
 
 Address TextByteArrayAnalyzer::indexOfRightWordSelect(Address index) const
 {
+    Q_D(const TextByteArrayAnalyzer);
+
     // TODO: should this check be here or with the caller?
     // the later would need another function to search the previous word end
     const Size size = d->byteArrayModel->size();
@@ -252,6 +266,8 @@ Address TextByteArrayAnalyzer::indexOfBehindLeftWordEnd( Address index ) const
 
 QString TextByteArrayAnalyzer::text(Address index, Address lastIndex) const
 {
+    Q_D(const TextByteArrayAnalyzer);
+
     QString result;
 
     const Address lastValidIndex = d->byteArrayModel->size() - 1;

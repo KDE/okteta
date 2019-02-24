@@ -63,7 +63,8 @@ protected:
     void setResult(int result);
 
 private:
-    const QScopedPointer<class AbstractLinePopupPrivate> d;
+    const QScopedPointer<class AbstractLinePopupPrivate> d_ptr;
+    Q_DECLARE_PRIVATE(AbstractLinePopup)
 };
 
 }

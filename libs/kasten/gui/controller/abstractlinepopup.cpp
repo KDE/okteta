@@ -30,8 +30,10 @@ namespace Kasten {
 
 AbstractLinePopup::AbstractLinePopup(QWidget* parent)
     : QWidget(parent, Qt::Popup)
-    , d(new AbstractLinePopupPrivate(this))
+    , d_ptr(new AbstractLinePopupPrivate(this))
 {
+    Q_D(AbstractLinePopup);
+
     d->init();
 }
 
@@ -39,33 +41,50 @@ AbstractLinePopup::~AbstractLinePopup() = default;
 
 void AbstractLinePopup::setPosition(const QPoint& globalPosition)
 {
+    Q_D(AbstractLinePopup);
+
     d->setPosition(globalPosition);
 }
+
 void AbstractLinePopup::setIcon(const QIcon& icon)
 {
+    Q_D(AbstractLinePopup);
+
     d->setIcon(icon);
 }
+
 void AbstractLinePopup::setWidget(QWidget* widget)
 {
+    Q_D(AbstractLinePopup);
+
     d->setWidget(widget);
 }
+
 void AbstractLinePopup::setResult(int result)
 {
+    Q_D(AbstractLinePopup);
+
     d->setResult(result);
 }
 
 void AbstractLinePopup::setVisible(bool visible)
 {
+    Q_D(AbstractLinePopup);
+
     d->setVisible(visible);
 }
 
 int AbstractLinePopup::exec()
 {
+    Q_D(AbstractLinePopup);
+
     return d->exec();
 }
 
 bool AbstractLinePopup::eventFilter(QObject* object, QEvent* event)
 {
+    Q_D(AbstractLinePopup);
+
     switch (event->type())
     {
     case QEvent::WindowDeactivate:
