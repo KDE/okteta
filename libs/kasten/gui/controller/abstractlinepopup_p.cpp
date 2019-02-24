@@ -34,6 +34,7 @@ void AbstractLinePopupPrivate::init()
 {
     // TODO: what kind of border should there be? like a QMenu?
 
+    p->setAttribute(Qt::WA_X11NetWmWindowTypePopupMenu);
 //     setAttribute( Qt::WA_DeleteOnClose );
     p->setMouseTracking(true);
 
