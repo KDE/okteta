@@ -60,7 +60,7 @@ public: // API to be implemented
     virtual void setTargetModel(AbstractModel* model);   // = 0;
 
 private:
-    const QScopedPointer<class AbstractXmlGuiControllerPrivate> d;
+    const QScopedPointer<class AbstractXmlGuiControllerPrivate> d_ptr;
 };
 
 }

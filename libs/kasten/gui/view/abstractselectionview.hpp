@@ -50,7 +50,7 @@ public: // API to be implemented
     virtual void setData(AbstractModel* model, const AbstractModelSelection* selection) = 0;
 
 private:
-    const QScopedPointer<class AbstractSelectionViewPrivate> d;
+    const QScopedPointer<class AbstractSelectionViewPrivate> d_ptr;
 };
 
 }

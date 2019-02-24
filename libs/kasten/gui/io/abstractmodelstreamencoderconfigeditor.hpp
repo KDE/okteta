@@ -52,7 +52,7 @@ Q_SIGNALS:
     void validityChanged(bool isValid);
 
 private:
-    const QScopedPointer<class AbstractModelStreamEncoderConfigEditorPrivate> d;
+    const QScopedPointer<class AbstractModelStreamEncoderConfigEditorPrivate> d_ptr;
 };
 
 }

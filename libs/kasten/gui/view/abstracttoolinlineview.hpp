@@ -55,7 +55,7 @@ public:
     void activate();
 
 private:
-    const QScopedPointer<class AbstractToolInlineViewPrivate> d;
+    const QScopedPointer<class AbstractToolInlineViewPrivate> d_ptr;
 };
 
 }

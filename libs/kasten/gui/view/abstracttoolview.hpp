@@ -52,7 +52,7 @@ public: // API to be implemented
     virtual AbstractTool* tool() const = 0;
 
 private:
-    const QScopedPointer<class AbstractToolViewPrivate> d;
+    const QScopedPointer<class AbstractToolViewPrivate> d_ptr;
 };
 
 }

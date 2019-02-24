@@ -56,7 +56,7 @@ Q_SIGNALS:
     void titleChanged(const QString& newTitle);
 
 private:
-    const QScopedPointer<class AbstractToolPrivate> d;
+    const QScopedPointer<class AbstractToolPrivate> d_ptr;
 };
 
 }

@@ -42,7 +42,7 @@ public: // API to be implemented
 //     virtual bool isValid() const = 0;
 
 private:
-    const QScopedPointer<class AbstractModelSelectionPrivate> d;
+    const QScopedPointer<class AbstractModelSelectionPrivate> d_ptr;
 };
 
 }

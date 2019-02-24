@@ -50,7 +50,7 @@ Q_SIGNALS:
     void validityChanged(bool isValid);
 
 private:
-    const QScopedPointer<class AbstractModelDataGeneratorConfigEditorPrivate> d;
+    const QScopedPointer<class AbstractModelDataGeneratorConfigEditorPrivate> d_ptr;
 };
 
 }

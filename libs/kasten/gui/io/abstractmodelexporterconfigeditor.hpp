@@ -52,7 +52,7 @@ Q_SIGNALS:
     void validityChanged(bool isValid);
 
 private:
-    const QScopedPointer<class AbstractModelExporterConfigEditorPrivate> d;
+    const QScopedPointer<class AbstractModelExporterConfigEditorPrivate> d_ptr;
 };
 
 }
