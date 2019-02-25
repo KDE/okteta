@@ -144,6 +144,7 @@ protected:
     AbstractByteArrayView(AbstractByteArrayViewPrivate* d, QWidget* parent);
 
 public:
+    AbstractByteArrayView() = delete;
     ~AbstractByteArrayView() override;
 
 public: // value access
