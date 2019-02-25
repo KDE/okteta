@@ -20,40 +20,23 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KASTEN_DOCUMENTSYNCMANAGER_HPP
-#define KASTEN_DOCUMENTSYNCMANAGER_HPP
+#ifndef KASTEN_DOCUMENTSYNCMANAGER_P_HPP
+#define KASTEN_DOCUMENTSYNCMANAGER_P_HPP
 
 // lib
-#include <kasten/kastencore_export.hpp>
-// Qt
-#include <QObject>
-
-class QUrl;
-class QString;
+#include "documentsyncmanager.hpp"
 
 namespace Kasten {
 
-class AbstractDocument;
-class AbstractModelSynchronizerFactory;
-class DocumentManager;
-class AbstractSaveDiscardDialog;
-class AbstractOverwriteDialog;
-
-class DocumentSyncManagerPrivate;
-
-class KASTENCORE_EXPORT DocumentSyncManager : public QObject
+class DocumentSyncManagerPrivate
 {
-    Q_OBJECT
-
 public:
-    explicit DocumentSyncManager(DocumentManager* manager);
+    explicit DocumentSyncManagerPrivate(DocumentSyncManager* q, DocumentManager* manager);
 
-    DocumentSyncManager() = delete;
-    ~DocumentSyncManager() override;
+    ~DocumentSyncManagerPrivate();
 
 public:
     void load(const QUrl& url);
-// TODO: better name
     bool setSynchronizer(AbstractDocument* document);
     bool canClose(AbstractDocument* document);
     void reload(AbstractDocument* document);
@@ -69,12 +52,22 @@ public:
     void setSaveDiscardDialog(AbstractSaveDiscardDialog* saveDiscardDialog);
     void setOverwriteDialog(AbstractOverwriteDialog* overwriteDialog);
 
-Q_SIGNALS:
-    void urlUsed(const QUrl& url);
+private: // slots
+    void onDocumentLoaded(Kasten::AbstractDocument* document);
 
 private:
-    const QScopedPointer<class DocumentSyncManagerPrivate> d_ptr;
-    Q_DECLARE_PRIVATE(DocumentSyncManager)
+    DocumentSyncManager* const q_ptr;
+
+    // unless there is a singleton
+    DocumentManager* mManager;
+
+    // temporary hack: hard coded factories for byte arrays
+    AbstractModelSynchronizerFactory* mSynchronizerFactory = nullptr;
+
+    AbstractSaveDiscardDialog* mSaveDiscardDialog = nullptr;
+    AbstractOverwriteDialog* mOverwriteDialog = nullptr;
+
+    Q_DECLARE_PUBLIC(DocumentSyncManager)
 };
 
 }

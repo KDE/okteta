@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2007-2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2009,2011,2019 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -21,264 +21,95 @@
 */
 
 #include "documentsyncmanager.hpp"
+#include "documentsyncmanager_p.hpp"
 
-// lib
-#include "abstractoverwritedialog.hpp"
-#include "abstractsavediscarddialog.hpp"
-#include "jobmanager.hpp"
-#include "documentmanager.hpp"
-#include <abstractloadjob.hpp>
-#include <abstractconnectjob.hpp>
-#include <abstractsynctoremotejob.hpp>
-#include <abstractsyncwithremotejob.hpp>
-#include <abstractsyncfromremotejob.hpp>
-#include <abstractmodelsynchronizerfactory.hpp>
-#include <abstractdocument.hpp>
-// KF5
-#include <KIO/StatJob>
-#include <KJobWidgets>
-#include <KLocalizedString>
 // Qt
 #include <QUrl>
-#include <QFileDialog>
-#include <QMimeDatabase>
 
 namespace Kasten {
 
 DocumentSyncManager::DocumentSyncManager(DocumentManager* manager)
-    : mManager(manager)
+    : d_ptr(new DocumentSyncManagerPrivate(this, manager))
 {}
 
-DocumentSyncManager::~DocumentSyncManager()
-{
-    delete mSynchronizerFactory;
-}
+DocumentSyncManager::~DocumentSyncManager() = default;
 
 void DocumentSyncManager::setSaveDiscardDialog(AbstractSaveDiscardDialog* saveDiscardDialog)
 {
-    mSaveDiscardDialog = saveDiscardDialog;
+    Q_D(DocumentSyncManager);
+
+    d->setSaveDiscardDialog(saveDiscardDialog);
 }
 
 void DocumentSyncManager::setOverwriteDialog(AbstractOverwriteDialog* overwriteDialog)
 {
-    mOverwriteDialog = overwriteDialog;
+    Q_D(DocumentSyncManager);
+
+    d->setOverwriteDialog(overwriteDialog);
 }
 
 // TODO: make a difference between stream/storage formats and work/live formats?
 QStringList DocumentSyncManager::supportedRemoteTypes() const
 {
-    return {mSynchronizerFactory->supportedRemoteType()};
+    Q_D(const DocumentSyncManager);
+
+    return d->supportedRemoteTypes();
 }
 
 bool DocumentSyncManager::hasSynchronizerForLocal(const QString& workDocumentType) const
 {
-    // TODO: need synchronizerfactory classes to query for this or a local datastructure
-    return (mSynchronizerFactory->supportedWorkType() == workDocumentType);
+    Q_D(const DocumentSyncManager);
+
+    return d->hasSynchronizerForLocal(workDocumentType);
 }
 
 QUrl DocumentSyncManager::urlOf(AbstractDocument* document) const
 {
-    AbstractModelSynchronizer* synchronizer = document->synchronizer();
+    Q_D(const DocumentSyncManager);
 
-    return synchronizer ? synchronizer->url() : QUrl();
+    return d->urlOf(document);
 }
 
 void DocumentSyncManager::setDocumentSynchronizerFactory(AbstractModelSynchronizerFactory* synchronizerFactory)
 {
-    mSynchronizerFactory = synchronizerFactory;
+    Q_D(DocumentSyncManager);
+
+    d->setDocumentSynchronizerFactory(synchronizerFactory);
 }
 
 void DocumentSyncManager::load(const QUrl& url)
 {
-    const auto loadedDocuments = mManager->documents();
-    for (AbstractDocument* document : loadedDocuments) {
-        if (url == urlOf(document)) {
-            // TODO: query if file should be reloaded/synched from disk
-            emit mManager->focusRequested(document);
-            return;
-        }
-    }
+    Q_D(DocumentSyncManager);
 
-    AbstractModelSynchronizer* synchronizer = mSynchronizerFactory->createSynchronizer();
-    AbstractLoadJob* loadJob = synchronizer->startLoad(url);
-    connect(loadJob, &AbstractLoadJob::documentLoaded,
-            this, &DocumentSyncManager::onDocumentLoaded);
-
-    JobManager::executeJob(loadJob);   // TODO: pass a ui handler to jobmanager
-
-    // store path
-//     mWorkingUrl = url.upUrl();
-    emit urlUsed(url);
+    d->load(url);
 }
 
 bool DocumentSyncManager::setSynchronizer(AbstractDocument* document)
 {
-    bool storingDone = false;
+    Q_D(DocumentSyncManager);
 
-    AbstractModelSynchronizer* currentSynchronizer = document->synchronizer();
-    // TODO: warn if there were updates in the second before saveAs was activated
-//     if( currentSynchronizer )
-//         currentSynchronizer->pauseSynchronization(); also unpause below
-    const QString processTitle =
-        i18nc("@title:window", "Save As");
-    do {
-        QFileDialog dialog(/*mWidget*/ nullptr, processTitle, /*mWorkingUrl.url()*/ QString());
-        dialog.setMimeTypeFilters(supportedRemoteTypes());
-        dialog.setAcceptMode(QFileDialog::AcceptSave);
-        const QUrl newUrl = (dialog.exec() != 0) ? dialog.selectedUrls().value(0) : QUrl();
-
-        if (newUrl.isValid()) {
-            const bool isNewUrl = (!currentSynchronizer)
-                                  || (newUrl != currentSynchronizer->url());
-
-            if (isNewUrl) {
-                KIO::StatJob* statJob = KIO::stat(newUrl);
-                statJob->setSide(KIO::StatJob::DestinationSide);
-                KJobWidgets::setWindow(statJob, /*mWidget*/ nullptr);
-
-                const bool isUrlInUse = statJob->exec();
-
-                if (isUrlInUse) {
-                    // TODO: care for case that file from url is already loaded by (only?) this program
-//                     const bool otherFileLoaded = mManager->documentByUrl( newUrl );
-                    // TODO: replace "file" with synchronizer->storageTypeName() or such
-                    // TODO: offer "Synchronize" as alternative, if supported, see below
-                    // ask synchronizer for capabilities, as some can only overwrite
-                    const Answer answer =
-                        mOverwriteDialog ? mOverwriteDialog->queryOverwrite(newUrl, processTitle) : Cancel;
-
-                    if (answer == Cancel) {
-                        break;
-                    }
-                    if (answer == PreviousQuestion) {
-                        continue;
-                    }
-                }
-
-                // switch url and synchronizer
-                if (currentSynchronizer && true) {// TODO: same remote mimetype
-                    // TODO: overwrite for now
-                    AbstractSyncWithRemoteJob* syncJob = currentSynchronizer->startSyncWithRemote(newUrl,
-                                                                                                  AbstractModelSynchronizer::ReplaceRemote);
-                    const bool syncSucceeded = JobManager::executeJob(syncJob);
-//                     currentSynchronizer->unpauseSynchronization(); also pause above
-                    storingDone = syncSucceeded;
-                } else {
-                    // TODO: is overwrite for now, is this useful?
-                    AbstractModelSynchronizer* synchronizer = mSynchronizerFactory->createSynchronizer();
-                    AbstractConnectJob* connectJob = synchronizer->startConnect(document, newUrl,
-                                                                                AbstractModelSynchronizer::ReplaceRemote);
-                    const bool connectSucceeded = JobManager::executeJob(connectJob);
-
-                    storingDone = connectSucceeded;
-                }
-
-                if (storingDone) {
-                    emit urlUsed(newUrl);
-                }
-#if 0
-//     mWorkingUrl = Url.upUrl();
-                OpenRecentAction->addUrl(Url);
-#endif
-            }
-            // same url
-            else {
-                // TODO: what to do? synchTo? synchWith? synchFrom? Or does the synchronizer care for this?
-                // By e.g. warning that we might be overwriting something?
-                // synchTo might be the intention, after all the user wanted a new storage
-                //
-                AbstractSyncToRemoteJob* syncJob = document->synchronizer()->startSyncToRemote();
-                const bool syncFailed = JobManager::executeJob(syncJob);
-
-                storingDone = !syncFailed;
-            }
-        } else {
-            break;
-        }
-    } while (!storingDone);
-
-    return storingDone;
+    return d->setSynchronizer(document);
 }
 
 bool DocumentSyncManager::canClose(AbstractDocument* document)
 {
-    bool canClose = true;
+    Q_D(DocumentSyncManager);
 
-    if (document->contentFlags() & ContentHasUnstoredChanges) {
-        AbstractModelSynchronizer* synchronizer = document->synchronizer();
-        const bool couldSynchronize = hasSynchronizerForLocal(document->mimeType());
-
-        const QString processTitle = i18nc("@title:window", "Close");
-
-        if ((synchronizer && synchronizer->localSyncState() == LocalHasChanges) ||
-            couldSynchronize) {
-            const Answer answer =
-                mSaveDiscardDialog ? mSaveDiscardDialog->querySaveDiscard(document, processTitle) : Cancel;
-
-            if (answer == Save) {
-                if (synchronizer) {
-                    AbstractSyncToRemoteJob* syncJob = synchronizer->startSyncToRemote();
-                    const bool isSynced = JobManager::executeJob(syncJob);
-
-                    canClose = isSynced;
-                } else {
-                    canClose = setSynchronizer(document);
-                }
-            } else {
-                canClose = (answer == Discard);
-            }
-        } else {
-            const Answer answer =
-                mSaveDiscardDialog ? mSaveDiscardDialog->queryDiscard(document, processTitle) : Cancel;
-
-            canClose = (answer == Discard);
-        }
-    }
-
-    return canClose;
+    return d->canClose(document);
 }
 
 void DocumentSyncManager::reload(AbstractDocument* document)
 {
-    AbstractModelSynchronizer* synchronizer = document->synchronizer();
+    Q_D(DocumentSyncManager);
 
-    if (synchronizer->localSyncState() == LocalHasChanges) {
-        const QString processTitle = i18nc("@title:window", "Reload");
-
-        const Answer answer =
-            mSaveDiscardDialog ? mSaveDiscardDialog->queryDiscardOnReload(document, processTitle) : Cancel;
-
-        if (answer == Cancel) {
-            return;
-        }
-    }
-
-    AbstractSyncFromRemoteJob* syncJob = synchronizer->startSyncFromRemote();
-    JobManager::executeJob(syncJob);
+    d->reload(document);
 }
 
 void DocumentSyncManager::save(AbstractDocument* document)
 {
-    AbstractModelSynchronizer* synchronizer = document->synchronizer();
-    AbstractSyncToRemoteJob* syncJob = synchronizer->startSyncToRemote();
-    JobManager::executeJob(syncJob);
-}
+    Q_D(DocumentSyncManager);
 
-void DocumentSyncManager::onDocumentLoaded(AbstractDocument* document)
-{
-    if (document) {
-        mManager->addDocument(document);
-    }
-}
-
-void DocumentSyncManager::onDocumentsAdded(const QVector<Kasten::AbstractDocument*>& documents)
-{
-    Q_UNUSED(documents)
-}
-
-void DocumentSyncManager::onDocumentsClosing(const QVector<Kasten::AbstractDocument*>& documents)
-{
-    Q_UNUSED(documents)
+    d->save(document);
 }
 
 }
