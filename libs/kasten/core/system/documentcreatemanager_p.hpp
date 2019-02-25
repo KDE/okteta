@@ -20,32 +20,20 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KASTEN_DOCUMENTCREATEMANAGER_HPP
-#define KASTEN_DOCUMENTCREATEMANAGER_HPP
+#ifndef KASTEN_DOCUMENTCREATEMANAGER_P_HPP
+#define KASTEN_DOCUMENTCREATEMANAGER_P_HPP
 
 // lib
-#include <kasten/kastencore_export.hpp>
-// Qt
-#include <QObject>
-
-class QMimeData;
+#include "documentcreatemanager.hpp"
 
 namespace Kasten {
 
-class AbstractDocumentFactory;
-class DocumentManager;
-
-class DocumentCreateManagerPrivate;
-
-class KASTENCORE_EXPORT DocumentCreateManager : public QObject
+class DocumentCreateManagerPrivate
 {
-    Q_OBJECT
-
 public:
-    explicit DocumentCreateManager(DocumentManager* manager);
-    DocumentCreateManager() = delete;
+    explicit DocumentCreateManagerPrivate(DocumentManager* manager);
 
-    ~DocumentCreateManager() override;
+    ~DocumentCreateManagerPrivate();
 
 public:
     bool canCreateNewFromData(const QMimeData* mimeData) const;
@@ -58,8 +46,11 @@ public:
     void setDocumentFactory(AbstractDocumentFactory* factory);
 
 private:
-    const QScopedPointer<class DocumentCreateManagerPrivate> d_ptr;
-    Q_DECLARE_PRIVATE(DocumentCreateManager)
+    // unless there is a singleton
+    DocumentManager* mManager;
+
+    // temporary hack: hard coded factory for byte arrays
+    AbstractDocumentFactory* mFactory = nullptr;
 };
 
 }

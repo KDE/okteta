@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2006-2007,2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2007,2009,2011,2019 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -21,48 +21,43 @@
 */
 
 #include "documentcreatemanager.hpp"
-
-// lib
-#include "abstractdocumentfactory.hpp"
-#include "documentmanager.hpp"
-#include <abstractdocument.hpp>
+#include "documentcreatemanager_p.hpp"
 
 namespace Kasten {
 
 DocumentCreateManager::DocumentCreateManager(DocumentManager* manager)
-    : mManager(manager)
+    : d_ptr(new DocumentCreateManagerPrivate(manager))
 {
 }
 
-DocumentCreateManager::~DocumentCreateManager()
-{
-    delete mFactory;
-}
+DocumentCreateManager::~DocumentCreateManager() = default;
 
 bool DocumentCreateManager::canCreateNewFromData(const QMimeData* mimeData) const
 {
-    return mFactory->canCreateFromData(mimeData);
+    Q_D(const DocumentCreateManager);
+
+    return d->canCreateNewFromData(mimeData);
 }
 
 void DocumentCreateManager::setDocumentFactory(AbstractDocumentFactory* factory)
 {
-    mFactory = factory;
+    Q_D(DocumentCreateManager);
+
+    d->setDocumentFactory(factory);
 }
 
-void DocumentCreateManager::createNew()
+void DocumentCreateManager::createNew() const
 {
-    AbstractDocument* document = mFactory->create();
-    if (document) {
-        mManager->addDocument(document);
-    }
+    Q_D(const DocumentCreateManager);
+
+    d->createNew();
 }
 
-void DocumentCreateManager::createNewFromData(const QMimeData* mimeData, bool setModified)
+void DocumentCreateManager::createNewFromData(const QMimeData* mimeData, bool setModified) const
 {
-    AbstractDocument* document = mFactory->createFromData(mimeData, setModified);
-    if (document) {
-        mManager->addDocument(document);
-    }
+    Q_D(const DocumentCreateManager);
+
+    d->createNewFromData(mimeData, setModified);
 }
 
 }

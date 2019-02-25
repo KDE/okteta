@@ -20,48 +20,49 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KASTEN_DOCUMENTCREATEMANAGER_HPP
-#define KASTEN_DOCUMENTCREATEMANAGER_HPP
+#include "documentcreatemanager_p.hpp"
 
 // lib
-#include <kasten/kastencore_export.hpp>
-// Qt
-#include <QObject>
-
-class QMimeData;
+#include "abstractdocumentfactory.hpp"
+#include "documentmanager.hpp"
+#include <abstractdocument.hpp>
 
 namespace Kasten {
 
-class AbstractDocumentFactory;
-class DocumentManager;
-
-class DocumentCreateManagerPrivate;
-
-class KASTENCORE_EXPORT DocumentCreateManager : public QObject
+DocumentCreateManagerPrivate::DocumentCreateManagerPrivate(DocumentManager* manager)
+    : mManager(manager)
 {
-    Q_OBJECT
-
-public:
-    explicit DocumentCreateManager(DocumentManager* manager);
-    DocumentCreateManager() = delete;
-
-    ~DocumentCreateManager() override;
-
-public:
-    bool canCreateNewFromData(const QMimeData* mimeData) const;
-
-public:
-    void createNew() const;
-    void createNewFromData(const QMimeData* mimeData, bool setModified) const;
-
-public:
-    void setDocumentFactory(AbstractDocumentFactory* factory);
-
-private:
-    const QScopedPointer<class DocumentCreateManagerPrivate> d_ptr;
-    Q_DECLARE_PRIVATE(DocumentCreateManager)
-};
-
 }
 
-#endif
+DocumentCreateManagerPrivate::~DocumentCreateManagerPrivate()
+{
+    delete mFactory;
+}
+
+bool DocumentCreateManagerPrivate::canCreateNewFromData(const QMimeData* mimeData) const
+{
+    return mFactory->canCreateFromData(mimeData);
+}
+
+void DocumentCreateManagerPrivate::setDocumentFactory(AbstractDocumentFactory* factory)
+{
+    mFactory = factory;
+}
+
+void DocumentCreateManagerPrivate::createNew() const
+{
+    AbstractDocument* document = mFactory->create();
+    if (document) {
+        mManager->addDocument(document);
+    }
+}
+
+void DocumentCreateManagerPrivate::createNewFromData(const QMimeData* mimeData, bool setModified) const
+{
+    AbstractDocument* document = mFactory->createFromData(mimeData, setModified);
+    if (document) {
+        mManager->addDocument(document);
+    }
+}
+
+}
