@@ -20,30 +20,20 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KASTEN_VIEWMANAGER_HPP
-#define KASTEN_VIEWMANAGER_HPP
+#ifndef KASTEN_VIEWMANAGER_P_HPP
+#define KASTEN_VIEWMANAGER_P_HPP
 
 // lib
-#include <kasten/abstractview.hpp>
-// Qt
-#include <QVector>
-#include <QObject>
+#include "viewmanager.hpp"
 
 namespace Kasten {
 
-class ModelCodecViewManager;
-class AbstractViewFactory;
-
-class ViewManagerPrivate;
-
-class KASTENGUI_EXPORT ViewManager : public QObject
+class ViewManagerPrivate
 {
-    Q_OBJECT
-
 public:
-    ViewManager();
+    explicit ViewManagerPrivate(ViewManager* q);
 
-    ~ViewManager() override;
+    ~ViewManagerPrivate();
 
 public:
     void setViewFactory(AbstractViewFactory* factory);
@@ -58,20 +48,23 @@ public:
 public:
     ModelCodecViewManager* codecViewManager() const;
 
-public Q_SLOTS:
+public:
     void createViewsFor(const QVector<Kasten::AbstractDocument*>& documents);
     void removeViewsFor(const QVector<Kasten::AbstractDocument*>& documents);
 
-Q_SIGNALS:
-    // view was created and already added to the list
-    void opened(const QVector<Kasten::AbstractView*>& views);
-    // view will be closed, already removed from list
-    void closing(const QVector<Kasten::AbstractView*>& views);
-
 private:
-    const QScopedPointer<class ViewManagerPrivate> d_ptr;
-    Q_DECLARE_PRIVATE(ViewManager)
+    ViewManager* const q_ptr;
+
+    QVector<AbstractView*> mViewList;
+    AbstractViewFactory* mFactory = nullptr;
+
+    // TODO: remove into own singleton
+    ModelCodecViewManager* mCodecViewManager;
+
+    Q_DECLARE_PUBLIC(ViewManager)
 };
+
+inline ModelCodecViewManager* ViewManagerPrivate::codecViewManager() const { return mCodecViewManager; }
 
 }
 

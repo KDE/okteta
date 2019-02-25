@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2006,2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006,2008-2009,2019 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -21,123 +21,71 @@
 */
 
 #include "viewmanager.hpp"
-
-// lib
-#include "abstractviewfactory.hpp"
-#include "dummyview.hpp"
-// Qt
-#include <QMutableVectorIterator>
-
-// temporary
-#include "modelcodecviewmanager.hpp"
+#include "viewmanager_p.hpp"
 
 namespace Kasten {
 
 ViewManager::ViewManager()
-    : mCodecViewManager(new ModelCodecViewManager())
+    : d_ptr(new ViewManagerPrivate(this))
 {
 }
 
-ViewManager::~ViewManager()
-{
-    // TODO: signal closing here, too?
-    qDeleteAll(mViewList);
+ViewManager::~ViewManager() = default;
 
-    delete mCodecViewManager;
-    delete mFactory;
+ModelCodecViewManager* ViewManager::codecViewManager() const
+{
+    Q_D(const ViewManager);
+
+    return d->codecViewManager();
 }
 
 void ViewManager::setViewFactory(AbstractViewFactory* factory)
 {
-    mFactory = factory;
+    Q_D(ViewManager);
+
+    d->setViewFactory(factory);
 }
 
 QVector<AbstractView*> ViewManager::views() const
 {
-    return mViewList;
+    Q_D(const ViewManager);
+
+    return d->views();
 }
 
 AbstractView* ViewManager::viewByWidget(QWidget* widget) const
 {
-    auto it = std::find_if(mViewList.constBegin(), mViewList.constEnd(), [widget](AbstractView* view) {
-        return (view->widget() == widget);
-    });
+    Q_D(const ViewManager);
 
-    return (it != mViewList.constEnd()) ? *it : nullptr;
+    return d->viewByWidget(widget);
 }
 
 void ViewManager::createCopyOfView(AbstractView* view, Qt::Alignment alignment)
 {
-    AbstractView* viewCopy = mFactory->createCopyOfView(view, alignment);
-    if (!viewCopy) {
-        auto* documentOfView = view->findBaseModel<AbstractDocument*>();
-        viewCopy = new DummyView(documentOfView);
-    }
+    Q_D(ViewManager);
 
-    mViewList.append(viewCopy);
-
-    const QVector<Kasten::AbstractView*> views { viewCopy };
-    emit opened(views);
+    d->createCopyOfView(view, alignment);
 }
 
 void ViewManager::createViewsFor(const QVector<Kasten::AbstractDocument*>& documents)
 {
-    QVector<Kasten::AbstractView*> openedViews;
+    Q_D(ViewManager);
 
-    openedViews.reserve(documents.size());
-    mViewList.reserve(mViewList.size() + documents.size());
-    for (AbstractDocument* document : documents) {
-        AbstractView* view = mFactory->createViewFor(document);
-        if (!view) {
-            view = new DummyView(document);
-        }
-
-        mViewList.append(view);
-        openedViews.append(view);
-    }
-
-    if (!openedViews.isEmpty()) {
-        emit opened(openedViews);
-    }
+    d->createViewsFor(documents);
 }
 
 void ViewManager::removeViewsFor(const QVector<Kasten::AbstractDocument*>& documents)
 {
-    QVector<Kasten::AbstractView*> closedViews;
+    Q_D(ViewManager);
 
-    QMutableVectorIterator<AbstractView*> it(mViewList);
-    for (AbstractDocument* document : documents) {
-        while (it.hasNext()) {
-            AbstractView* view = it.next();
-            auto* documentOfView = view->findBaseModel<AbstractDocument*>();
-            if (documentOfView == document) {
-                it.remove();
-                closedViews.append(view);
-            }
-        }
-        it.toFront();
-    }
-
-    emit closing(closedViews);
-
-    for (AbstractView* view : qAsConst(closedViews)) {
-//         qCDebug(LOG_KASTEN_GUI) << view->title();
-        delete view;
-    }
+    d->removeViewsFor(documents);
 }
 
 void ViewManager::removeViews(const QVector<AbstractView*>& views)
 {
-    for (AbstractView* view : views) {
-        mViewList.removeOne(view);
-    }
+    Q_D(ViewManager);
 
-    emit closing(views);
-
-    for (AbstractView* view : views) {
-//         qCDebug(LOG_KASTEN_GUI)<<view->title();
-        delete view;
-    }
+    d->removeViews(views);
 }
 
 }
