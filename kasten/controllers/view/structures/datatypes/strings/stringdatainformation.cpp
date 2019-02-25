@@ -51,8 +51,6 @@ StringDataInformation::StringDataInformation(const QString& name, StringType enc
 StringDataInformation::StringDataInformation(const StringDataInformation& d)
     : DataInformationWithDummyChildren(d)
     , mDummy(new DummyDataInformation(this))
-    , mData(nullptr)
-    , mEncoding(StringType::InvalidEncoding)
 {
     setEncoding(d.mEncoding); // sets mData
     mData->copyTerminationFrom(d.mData.data());

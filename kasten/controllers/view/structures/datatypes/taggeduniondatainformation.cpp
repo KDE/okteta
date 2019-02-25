@@ -36,7 +36,6 @@ TaggedUnionDataInformation::TaggedUnionDataInformation(const QString& name, Data
 TaggedUnionDataInformation::TaggedUnionDataInformation(const TaggedUnionDataInformation& d)
     : DataInformationWithChildren(d)
     , mDefaultFields(cloneList(d.mDefaultFields, this))
-    , mLastIndex(-1)
 {
     Q_ASSERT(mDefaultFields.isEmpty() || mDefaultFields.at(0) != nullptr);
     mAlternatives.reserve(d.mAlternatives.size());
