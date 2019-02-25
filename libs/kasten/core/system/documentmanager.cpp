@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2006-2007,2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2007,2009,2011,2019 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -21,165 +21,119 @@
 */
 
 #include "documentmanager.hpp"
-
-// lib
-#include <abstractdocument.hpp>
-// Qt
-#include <QUrl>
-#include <QMutableVectorIterator>
-#include <QStringList>
-
-// temporary
-#include "documentcreatemanager.hpp"
-#include "documentsyncmanager.hpp"
-#include "modelcodecmanager.hpp"
+#include "documentmanager_p.hpp"
 
 namespace Kasten {
 
-static int lastDocumentId = 0;
-
 DocumentManager::DocumentManager()
-    : mCreateManager(new DocumentCreateManager(this))
-    , mSyncManager(new DocumentSyncManager(this))
-    , mCodecManager(new ModelCodecManager())
+    : d_ptr(new DocumentManagerPrivate(this))
 {
 }
 
-DocumentManager::~DocumentManager()
+DocumentManager::~DocumentManager() = default;
+
+DocumentCreateManager* DocumentManager::createManager() const
 {
-    // TODO: emit signal here, too?
-    qDeleteAll(mList);
+    Q_D(const DocumentManager);
 
-    delete mCreateManager;
-    delete mSyncManager;
-    delete mCodecManager;
-} // TODO: destroy all documents?
+    return d->createManager();
+}
 
-QVector<AbstractDocument*> DocumentManager::documents() const { return mList; }
-bool DocumentManager::isEmpty() const { return mList.isEmpty(); }
+DocumentSyncManager* DocumentManager::syncManager() const
+{
+    Q_D(const DocumentManager);
+
+    return d->syncManager();
+}
+ModelCodecManager* DocumentManager::codecManager() const
+{
+    Q_D(const DocumentManager);
+
+    return d->codecManager();
+}
+
+QVector<AbstractDocument*> DocumentManager::documents() const
+{
+    Q_D(const DocumentManager);
+
+    return d->documents();
+}
+
+bool DocumentManager::isEmpty() const
+{
+    Q_D(const DocumentManager);
+
+    return d->isEmpty();
+}
 
 void DocumentManager::addDocument(AbstractDocument* document)
 {
-    // TODO: check for double insert
-    document->setId(QString::number(++lastDocumentId));
-    mList.append(document);
-    // TODO: only emit if document was not included before
-    const QVector<AbstractDocument*> addedDocuments { document };
-    emit added(addedDocuments);
+    Q_D(DocumentManager);
+
+    d->addDocument(document);
 }
 
 void DocumentManager::closeDocument(AbstractDocument* document)
 {
-    QMutableVectorIterator<AbstractDocument*> iterator(mList);
+    Q_D(DocumentManager);
 
-    if (iterator.findNext(document)) {
-        // TODO: first check if unsaved and ask, only then close
-
-        iterator.remove();
-
-        const QVector<AbstractDocument*> closedDocuments { document };
-        emit closing(closedDocuments);
-
-        delete document;
-    }
+    d->closeDocument(document);
 }
 
 void DocumentManager::closeDocuments(const QVector<AbstractDocument*>& documents)
 {
-    // TODO: optimize
-    for (AbstractDocument* document : documents) {
-        mList.removeOne(document);
-    }
+    Q_D(DocumentManager);
 
-    emit closing(documents);
-
-    for (AbstractDocument* document : documents) {
-        delete document;
-    }
+    d->closeDocuments(documents);
 }
 
 void DocumentManager::closeAll()
 {
-    // TODO: is it better for remove the document from the list before emitting closing(document)?
-    // TODO: or better emit close(documentList)? who would use this?
-    const QVector<AbstractDocument*> closedDocuments = mList;
-    mList.clear();
+    Q_D(DocumentManager);
 
-    emit closing(closedDocuments);
-
-    for (AbstractDocument* document : closedDocuments) {
-        delete document;
-    }
+    d->closeAll();
 }
 
 void DocumentManager::closeAllOther(AbstractDocument* keptDocument)
 {
-    // TODO: is it better for remove the document from the list before emitting closing(document)?
-    // TODO: or better emit close(documentList)? who would use this?
-    QVector<AbstractDocument*> closedDocuments = mList;
-    closedDocuments.removeOne(keptDocument);
+    Q_D(DocumentManager);
 
-    mList.clear();
-    mList.append(keptDocument);
-
-    emit closing(closedDocuments);
-
-    for (AbstractDocument* document : qAsConst(closedDocuments)) {
-        delete document;
-    }
+    d->closeAllOther(keptDocument);
 }
 
-bool DocumentManager::canClose(AbstractDocument* document)
+bool DocumentManager::canClose(AbstractDocument* document) const
 {
-    return mSyncManager->canClose(document);
+    Q_D(const DocumentManager);
+
+    return d->canClose(document);
 }
 
-bool DocumentManager::canClose(const QVector<AbstractDocument*>& documents)
+bool DocumentManager::canClose(const QVector<AbstractDocument*>& documents) const
 {
-    bool canClose = true;
+    Q_D(const DocumentManager);
 
-    for (AbstractDocument* document : documents) {
-        if (!mSyncManager->canClose(document)) {
-            canClose = false;
-            break;
-        }
-    }
-
-    return canClose;
+    return d->canClose(documents);
 }
 
-bool DocumentManager::canCloseAll()
+bool DocumentManager::canCloseAll() const
 {
-    bool canCloseAll = true;
+    Q_D(const DocumentManager);
 
-    for (AbstractDocument* document : qAsConst(mList)) {
-        if (!mSyncManager->canClose(document)) {
-            canCloseAll = false;
-            break;
-        }
-    }
-
-    return canCloseAll;
+    return d->canCloseAll();
 }
 
-bool DocumentManager::canCloseAllOther(AbstractDocument* keptDocument)
+bool DocumentManager::canCloseAllOther(AbstractDocument* keptDocument) const
 {
-    bool canCloseAll = true;
+    Q_D(const DocumentManager);
 
-    for (AbstractDocument* document : qAsConst(mList)) {
-        if ((document != keptDocument) &&
-            !mSyncManager->canClose(document)) {
-            canCloseAll = false;
-            break;
-        }
-    }
-
-    return canCloseAll;
+    return canCloseAllOther(keptDocument);
 }
 
 void DocumentManager::requestFocus(AbstractDocument* document)
 {
-    emit focusRequested(document);
+    Q_D(DocumentManager);
+
+    d->requestFocus(document);
 }
 
 }

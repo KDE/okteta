@@ -42,7 +42,7 @@ class KASTENCORE_EXPORT AbstractDocument : public AbstractModel
     Q_OBJECT
 
     friend class AbstractModelSynchronizer;
-    friend class DocumentManager;
+    friend class DocumentManagerPrivate;
 
 protected:
     AbstractDocument();

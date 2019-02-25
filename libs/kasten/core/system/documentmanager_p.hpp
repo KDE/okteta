@@ -20,14 +20,13 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KASTEN_DOCUMENTMANAGER_HPP
-#define KASTEN_DOCUMENTMANAGER_HPP
+#ifndef KASTEN_DOCUMENTMANAGER_P_HPP
+#define KASTEN_DOCUMENTMANAGER_P_HPP
 
 // lib
-#include <kasten/kastencore_export.hpp>
+#include "documentmanager.hpp"
 // Qt
 #include <QVector>
-#include <QObject>
 
 class QStringList;
 
@@ -39,17 +38,11 @@ class DocumentCreateManager; // TODO: temporary
 class DocumentSyncManager; // TODO: temporary
 class ModelCodecManager; // TODO: temporary
 
-class DocumentManagerPrivate;
-
-class KASTENCORE_EXPORT DocumentManager : public QObject
+class DocumentManagerPrivate
 {
-    Q_OBJECT
-
-    friend class DocumentSyncManager;
-
 public:
-    DocumentManager();
-    ~DocumentManager() override;
+    explicit DocumentManagerPrivate(DocumentManager* q);
+    ~DocumentManagerPrivate();
 
 public:
     void addDocument(AbstractDocument* document);
@@ -77,24 +70,26 @@ public:
     DocumentSyncManager* syncManager() const;
     ModelCodecManager* codecManager() const;
 
-Q_SIGNALS:
-    // documents got added
-    void added(const QVector<Kasten::AbstractDocument*>& documents);
-    /// documents are about to be closed, cannot be stopped
-    void closing(const QVector<Kasten::AbstractDocument*>& documents);
-
-//     void closing( KCloseEvent* event );
-// TODO: other than QObject event gets modified by observers, take care of unsetting a close cancel
-// problem with a signal is that all(!) observers get notified, even if event is already cancelled
-// better a visitor pattern?
-
-    // TODO: or should the document be able to emit this?
-    void focusRequested(Kasten::AbstractDocument* document);
-
 private:
-    const QScopedPointer<class DocumentManagerPrivate> d_ptr;
-    Q_DECLARE_PRIVATE(DocumentManager)
+    DocumentManager* const q_ptr;
+
+    QVector<AbstractDocument*> mList;
+
+    // TODO: remove into own singleton
+    DocumentCreateManager* mCreateManager;
+    DocumentSyncManager* mSyncManager;
+    ModelCodecManager* mCodecManager;
+
+    Q_DECLARE_PUBLIC(DocumentManager)
 };
+
+
+inline DocumentCreateManager* DocumentManagerPrivate::createManager() const { return mCreateManager; }
+inline DocumentSyncManager* DocumentManagerPrivate::syncManager() const { return mSyncManager; }
+inline ModelCodecManager* DocumentManagerPrivate::codecManager() const { return mCodecManager; }
+
+inline QVector<AbstractDocument*> DocumentManagerPrivate::documents() const { return mList; }
+inline bool DocumentManagerPrivate::isEmpty() const { return mList.isEmpty(); }
 
 }
 
