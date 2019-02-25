@@ -20,14 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KASTEN_MODELCODECVIEWMANAGER_HPP
-#define KASTEN_MODELCODECVIEWMANAGER_HPP
+#ifndef KASTEN_MODELCODECVIEWMANAGER_P_HPP
+#define KASTEN_MODELCODECVIEWMANAGER_P_HPP
 
 // lib
-#include <kasten/kastengui_export.hpp>
-// Qt
-#include <QObject>
-#include <QVector>
+#include "modelcodecviewmanager.hpp"
 
 namespace Kasten {
 
@@ -41,15 +38,12 @@ class AbstractModelDataGeneratorConfigEditorFactory;
 class AbstractModelDataGeneratorConfigEditor;
 class AbstractModelDataGenerator;
 
-class ModelCodecViewManagerPrivate;
-
-class KASTENGUI_EXPORT ModelCodecViewManager : public QObject
+class ModelCodecViewManagerPrivate
 {
-    Q_OBJECT
-
 public:
-    ModelCodecViewManager();
-    ~ModelCodecViewManager() override;
+    ModelCodecViewManagerPrivate();
+
+    ~ModelCodecViewManagerPrivate();
 
 public:
     AbstractModelStreamEncoderConfigEditor* createConfigEditor(AbstractModelStreamEncoder* encoder) const;
@@ -62,8 +56,9 @@ public:
     void setGeneratorConfigEditorFactories(const QVector<AbstractModelDataGeneratorConfigEditorFactory*>& factoryList);
 
 private:
-    const QScopedPointer<class ModelCodecViewManagerPrivate> d_ptr;
-    Q_DECLARE_PRIVATE(ModelCodecViewManager)
+    QVector<AbstractModelStreamEncoderConfigEditorFactory*> mEncoderFactoryList;
+    QVector<AbstractModelExporterConfigEditorFactory*> mExporterFactoryList;
+    QVector<AbstractModelDataGeneratorConfigEditorFactory*> mGeneratorFactoryList;
 };
 
 }

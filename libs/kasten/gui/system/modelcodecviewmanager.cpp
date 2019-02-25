@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009,2019 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -21,97 +21,58 @@
 */
 
 #include "modelcodecviewmanager.hpp"
+#include "modelcodecviewmanager_p.hpp"
 
-// lib
-#include <filesystem/modelencoderfilesystemexporterconfigeditorfactory.hpp>
-#include <abstractmodelstreamencoderconfigeditorfactory.hpp>
-#include <abstractmodelstreamencoderconfigeditor.hpp>
-#include <abstractmodelexporterconfigeditorfactory.hpp>
-#include <abstractmodelexporterconfigeditor.hpp>
-#include <abstractmodeldatageneratorconfigeditorfactory.hpp>
-#include <abstractmodeldatageneratorconfigeditor.hpp>
-// Kasten core
-#include <Kasten/AbstractModelExporter>
-#include <Kasten/AbstractModelDataGenerator>
-#include <Kasten/AbstractModelStreamEncoder>
 
 namespace Kasten {
 
-ModelCodecViewManager::ModelCodecViewManager() = default;
-
-ModelCodecViewManager::~ModelCodecViewManager()
+ModelCodecViewManager::ModelCodecViewManager()
+    : d_ptr(new ModelCodecViewManagerPrivate())
 {
-    qDeleteAll(mEncoderFactoryList);
-    qDeleteAll(mExporterFactoryList);
-    qDeleteAll(mGeneratorFactoryList);
 }
+
+ModelCodecViewManager::~ModelCodecViewManager() = default;
 
 void ModelCodecViewManager::setEncoderConfigEditorFactories(const QVector<AbstractModelStreamEncoderConfigEditorFactory*>& factoryList)
 {
-    qDeleteAll(mEncoderFactoryList);
-    mEncoderFactoryList = factoryList;
+    Q_D(ModelCodecViewManager);
 
-    qDeleteAll(mExporterFactoryList);
-    mExporterFactoryList.clear();
-
-    mExporterFactoryList.reserve(mEncoderFactoryList.size());
-    for (AbstractModelStreamEncoderConfigEditorFactory* factory : qAsConst(mEncoderFactoryList)) {
-        mExporterFactoryList << new ModelEncoderFileSystemExporterConfigEditorFactory(factory);
-    }
+    d->setEncoderConfigEditorFactories(factoryList);
 }
 
 void ModelCodecViewManager::setExporterConfigEditorFactories(const QVector<AbstractModelExporterConfigEditorFactory*>& factoryList)
 {
-    qDeleteAll(mExporterFactoryList);
-    mExporterFactoryList = factoryList;
+    Q_D(ModelCodecViewManager);
+
+    d->setExporterConfigEditorFactories(factoryList);
 }
 
 void ModelCodecViewManager::setGeneratorConfigEditorFactories(const QVector<AbstractModelDataGeneratorConfigEditorFactory*>& factoryList)
 {
-    qDeleteAll(mGeneratorFactoryList);
-    mGeneratorFactoryList = factoryList;
+    Q_D(ModelCodecViewManager);
+
+    d->setGeneratorConfigEditorFactories(factoryList);
 }
 
 AbstractModelStreamEncoderConfigEditor* ModelCodecViewManager::createConfigEditor(AbstractModelStreamEncoder* encoder) const
 {
-    AbstractModelStreamEncoderConfigEditor* result = nullptr;
+    Q_D(const ModelCodecViewManager);
 
-    for (const AbstractModelStreamEncoderConfigEditorFactory* factory : mEncoderFactoryList) {
-        result = factory->tryCreateConfigEditor(encoder);
-        if (result) {
-            break;
-        }
-    }
-
-    return result;
+    return d->createConfigEditor(encoder);
 }
 
 AbstractModelExporterConfigEditor* ModelCodecViewManager::createConfigEditor(AbstractModelExporter* exporter) const
 {
-    AbstractModelExporterConfigEditor* result = nullptr;
+    Q_D(const ModelCodecViewManager);
 
-    for (const AbstractModelExporterConfigEditorFactory* factory : mExporterFactoryList) {
-        result = factory->tryCreateConfigEditor(exporter);
-        if (result) {
-            break;
-        }
-    }
-
-    return result;
+    return d->createConfigEditor(exporter);
 }
 
 AbstractModelDataGeneratorConfigEditor* ModelCodecViewManager::createConfigEditor(AbstractModelDataGenerator* generator) const
 {
-    AbstractModelDataGeneratorConfigEditor* result = nullptr;
+    Q_D(const ModelCodecViewManager);
 
-    for (const AbstractModelDataGeneratorConfigEditorFactory* factory : mGeneratorFactoryList) {
-        result = factory->tryCreateConfigEditor(generator);
-        if (result) {
-            break;
-        }
-    }
-
-    return result;
+    return d->createConfigEditor(generator);
 }
 
 }
