@@ -126,7 +126,7 @@ bool DocumentManager::canCloseAllOther(AbstractDocument* keptDocument) const
 {
     Q_D(const DocumentManager);
 
-    return canCloseAllOther(keptDocument);
+    return d->canCloseAllOther(keptDocument);
 }
 
 void DocumentManager::requestFocus(AbstractDocument* document)
