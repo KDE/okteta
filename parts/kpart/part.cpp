@@ -26,7 +26,7 @@
 #include "partfactory.hpp"
 #include "browserextension.hpp"
 // Okteta Kasten controllers
-#include <Kasten/Okteta/OverwriteOnlyControllerFactory>
+// #include <Kasten/Okteta/OverwriteOnlyControllerFactory>
 #include <Kasten/Okteta/OverwriteModeControllerFactory>
 #include <Kasten/Okteta/GotoOffsetControllerFactory>
 #include <Kasten/Okteta/SelectRangeControllerFactory>

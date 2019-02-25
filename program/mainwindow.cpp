@@ -58,7 +58,7 @@
 #include <Kasten/TerminalToolViewFactory>
 #include <Kasten/TerminalToolFactory>
 // controllers
-#include <Kasten/Okteta/OverwriteOnlyControllerFactory>
+// #include <Kasten/Okteta/OverwriteOnlyControllerFactory>
 #include <Kasten/Okteta/OverwriteModeControllerFactory>
 #include <Kasten/Okteta/GotoOffsetControllerFactory>
 #include <Kasten/Okteta/SelectRangeControllerFactory>

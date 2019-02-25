@@ -44,12 +44,16 @@ oktetakastencontrollers_add_sublibrary(document/info
         DocumentInfoToolView
 )
 
+# unused, TODO: remove?
+if (FALSE)
 oktetakastencontrollers_add_sublibrary(document/overwriteonly
     PUBLIC
         OverwriteOnlyControllerFactory
     PRIVATE
         OverwriteOnlyController
 )
+endif()
+
 oktetakastencontrollers_add_sublibrary(view/overwritemode
     PUBLIC
         OverwriteModeControllerFactory
