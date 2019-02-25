@@ -20,13 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KASTEN_MODELCODECMANAGER_HPP
-#define KASTEN_MODELCODECMANAGER_HPP
+#ifndef KASTEN_MODELCODECMANAGER_P_HPP
+#define KASTEN_MODELCODECMANAGER_P_HPP
 
-// lib
-#include <kasten/kastencore_export.hpp>
 // Qt
-#include <QObject>
 #include <QVector>
 
 namespace Kasten {
@@ -39,18 +36,12 @@ class AbstractModelDataGenerator;
 class AbstractModelExporter;
 class AbstractOverwriteDialog;
 
-class ModelCodecManagerPrivate;
-
-class KASTENCORE_EXPORT ModelCodecManager : public QObject
+class ModelCodecManagerPrivate
 {
-    Q_OBJECT
+public:
+    ~ModelCodecManagerPrivate();
 
 public:
-    explicit ModelCodecManager();
-    ~ModelCodecManager() override;
-
-public:
-    // or use the viewmodel here? on what should the export be based?
     void encodeToStream(AbstractModelStreamEncoder* encoder,
                         AbstractModel* model, const AbstractModelSelection* selection);
 
@@ -71,9 +62,17 @@ public:
     void setOverwriteDialog(AbstractOverwriteDialog* overwriteDialog);
 
 private:
-    const QScopedPointer<class ModelCodecManagerPrivate> d_ptr;
-    Q_DECLARE_PRIVATE(ModelCodecManager)
+    // used for dialogs, TODO: create (or use?) global instance for this
+    AbstractOverwriteDialog* mOverwriteDialog = nullptr;
+
+    // temporary hack: hard coded codecs for byte arrays
+    QVector<AbstractModelStreamEncoder*> mEncoderList;
+    QVector<AbstractModelStreamDecoder*> mDecoderList;
+    QVector<AbstractModelDataGenerator*> mGeneratorList;
+    QVector<AbstractModelExporter*> mExporterList;
 };
+
+
 
 }
 
