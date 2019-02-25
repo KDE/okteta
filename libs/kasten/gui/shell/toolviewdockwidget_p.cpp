@@ -20,37 +20,37 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "toolviewdockwidget.hpp"
 #include "toolviewdockwidget_p.hpp"
 
 // lib
 #include <abstracttoolview.hpp>
+// Kasten core
+#include <Kasten/AbstractTool>
 
 namespace Kasten {
 
-ToolViewDockWidget::ToolViewDockWidget(AbstractToolView* toolView, QWidget* parent)
-    : QDockWidget(toolView->title(), parent)
-    , d_ptr(new ToolViewDockWidgetPrivate(toolView))
+ToolViewDockWidgetPrivate::ToolViewDockWidgetPrivate(AbstractToolView* toolView)
+    : mToolView(toolView)
 {
-    Q_D(ToolViewDockWidget);
-
-    d->init(this);
 }
 
-ToolViewDockWidget::~ToolViewDockWidget() = default;
-
-AbstractToolView* ToolViewDockWidget::toolView() const
+ToolViewDockWidgetPrivate::~ToolViewDockWidgetPrivate()
 {
-    Q_D(const ToolViewDockWidget);
-
-    return d->toolView();
+    delete mToolView;
 }
 
-bool ToolViewDockWidget::isShown() const
+void ToolViewDockWidgetPrivate::init(ToolViewDockWidget* q)
 {
-    Q_D(const ToolViewDockWidget);
+    q->setObjectName(mToolView->tool()->objectName());
+    q->setWidget(mToolView->widget());
 
-    return d->isShown();
+    QObject::connect(q, &QDockWidget::visibilityChanged,
+                     q, [this](bool isVisible) { onVisibilityChanged(isVisible); });
+}
+
+void ToolViewDockWidgetPrivate::onVisibilityChanged(bool isVisible)
+{
+    mIsShown = isVisible;
 }
 
 }

@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008,2019 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -32,6 +32,8 @@ namespace Kasten {
 
 class AbstractToolView;
 
+class ToolViewDockWidgetPrivate;
+
 class KASTENGUI_EXPORT ToolViewDockWidget : public QDockWidget
 {
     Q_OBJECT
@@ -44,17 +46,10 @@ public:
     AbstractToolView* toolView() const;
     bool isShown() const;
 
-private Q_SLOTS:
-    void onVisibilityChanged(bool isVisible);
-
 private:
-    AbstractToolView* mToolView;
-    // TODO: find out why isVisible does not work here
-    bool mIsShown = false;
+    const QScopedPointer<class ToolViewDockWidgetPrivate> d_ptr;
+    Q_DECLARE_PRIVATE(ToolViewDockWidget)
 };
-
-inline AbstractToolView* ToolViewDockWidget::toolView() const { return mToolView; }
-inline bool ToolViewDockWidget::isShown() const { return mIsShown; }
 
 }
 

@@ -20,37 +20,39 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "toolviewdockwidget.hpp"
-#include "toolviewdockwidget_p.hpp"
+#ifndef KASTEN_TOOLVIEWDOCKWIDGET_P_HPP
+#define KASTEN_TOOLVIEWDOCKWIDGET_P_HPP
 
 // lib
-#include <abstracttoolview.hpp>
+#include "toolviewdockwidget.hpp"
 
 namespace Kasten {
 
-ToolViewDockWidget::ToolViewDockWidget(AbstractToolView* toolView, QWidget* parent)
-    : QDockWidget(toolView->title(), parent)
-    , d_ptr(new ToolViewDockWidgetPrivate(toolView))
+class ToolViewDockWidgetPrivate
 {
-    Q_D(ToolViewDockWidget);
+public:
+    explicit ToolViewDockWidgetPrivate(AbstractToolView* mToolView);
+    ~ToolViewDockWidgetPrivate();
 
-    d->init(this);
+public:
+    void init(ToolViewDockWidget* q);
+
+public:
+    AbstractToolView* toolView() const;
+    bool isShown() const;
+
+private: // slots
+    void onVisibilityChanged(bool isVisible);
+
+private:
+    AbstractToolView* const mToolView;
+    // TODO: find out why isVisible does not work here
+    bool mIsShown = false;
+};
+
+inline AbstractToolView* ToolViewDockWidgetPrivate::toolView() const { return mToolView; }
+inline bool ToolViewDockWidgetPrivate::isShown() const { return mIsShown; }
+
 }
 
-ToolViewDockWidget::~ToolViewDockWidget() = default;
-
-AbstractToolView* ToolViewDockWidget::toolView() const
-{
-    Q_D(const ToolViewDockWidget);
-
-    return d->toolView();
-}
-
-bool ToolViewDockWidget::isShown() const
-{
-    Q_D(const ToolViewDockWidget);
-
-    return d->isShown();
-}
-
-}
+#endif
