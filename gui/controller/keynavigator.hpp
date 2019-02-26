@@ -26,6 +26,8 @@
 // lib
 #include "abstractcontroller.hpp"
 
+class QMenu;
+
 namespace Okteta {
 class AbstractByteArrayView;
 
@@ -54,9 +56,13 @@ public:
 public: // AbstractController API
     bool handleKeyPress(QKeyEvent* keyEvent) override;
 
+public:
+    int addContextMenuActions(QMenu* menu);
+
 private:
     /** moves the cursor according to the action, handles all drawing */
     void moveCursor(MoveAction action, bool select);
+    void selectAll();
 
 private:
     AbstractByteArrayView* mView;
