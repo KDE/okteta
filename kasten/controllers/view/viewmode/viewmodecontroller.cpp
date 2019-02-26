@@ -50,13 +50,18 @@ ViewModeController::ViewModeController(KXMLGUIClient* guiClient)
 
 void ViewModeController::setTargetModel(AbstractModel* model)
 {
-//     if( mByteArrayView ) mByteArrayView->disconnect( this );
+    if (mByteArrayView) {
+        mByteArrayView->disconnect(this);
+    }
 
     mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
 
     const bool hasView = (mByteArrayView != nullptr);
     if (hasView) {
-        mViewModeAction->setCurrentItem((int)mByteArrayView->viewModus());
+        onViewModusChanged((int)mByteArrayView->viewModus());
+        connect(mByteArrayView, &ByteArrayView::viewModusChanged,
+                this, &ViewModeController::onViewModusChanged);
+
     }
     mViewModeAction->setEnabled(hasView);
 }
@@ -64,6 +69,11 @@ void ViewModeController::setTargetModel(AbstractModel* model)
 void ViewModeController::setViewMode(int viewMode)
 {
     mByteArrayView->setViewModus(viewMode);
+}
+
+void ViewModeController::onViewModusChanged(int viewModus)
+{
+    mViewModeAction->setCurrentItem(viewModus);
 }
 
 }
