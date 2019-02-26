@@ -46,6 +46,8 @@ public: // AbstractXmlGuiController API
 private Q_SLOTS: // action slots
     void setViewMode(int viewMode);
 
+    void onViewModusChanged(int viewModus);
+
 private:
     ByteArrayView* mByteArrayView = nullptr;
 

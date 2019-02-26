@@ -52,7 +52,6 @@
 #include <QToolTip>
 #include <QMimeData>
 #include <QMenu>
-#include <QAction>
 #include <QIcon>
 #include <QTimer>
 
@@ -1054,11 +1053,7 @@ QMenu* AbstractByteArrayViewPrivate::createStandardContextMenu(const QPoint& pos
         menu->addSeparator();
     }
 
-    auto selectAllAction = menu->addAction(QIcon::fromTheme(QStringLiteral("edit-select-all")),
-                                           i18nc("@action:inmenu", "Select &All"),
-                                           q, [q]() { q->selectAll(true); });
-    selectAllAction->setEnabled(mByteArrayModel->size() > 0);
-    selectAllAction->setObjectName(QStringLiteral("select-all"));
+    mKeyNavigator->addContextMenuActions(menu);
 
     return menu;
 }

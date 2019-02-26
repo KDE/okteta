@@ -28,8 +28,13 @@
 #include <abstractbytearrayview.hpp>
 // Okteta core
 #include <Okteta/TextByteArrayAnalyzer>
+#include <Okteta/AbstractByteArrayModel>
+// KF
+#include <KLocalizedString>
 // Qt
 #include <QKeyEvent>
+#include <QMenu>
+#include <QAction>
 
 namespace Okteta {
 
@@ -43,8 +48,10 @@ bool KeyNavigator::handleKeyPress(QKeyEvent* keyEvent)
 {
     bool keyUsed;
 
-    const bool altPressed = keyEvent->modifiers() & Qt::ALT;
-    if (altPressed) {
+    if (keyEvent == QKeySequence::SelectAll) {
+        selectAll();
+        keyUsed = true;
+    } else if (keyEvent->modifiers() & Qt::ALT) {
         // currently there is no input with the Alt modifier used, so ignore them all
         keyUsed = false;
     } else {
@@ -145,6 +152,23 @@ void KeyNavigator::moveCursor(MoveAction action, bool select)
     mView->ensureCursorVisible();
 
     mView->unpauseCursor();
+}
+
+int KeyNavigator::addContextMenuActions(QMenu* menu)
+{
+    auto selectAllAction = menu->addAction(QIcon::fromTheme(QStringLiteral("edit-select-all")),
+                                           i18nc("@action:inmenu", "Select &All") + QLatin1Char('\t') + QKeySequence(QKeySequence::SelectAll).toString(QKeySequence::NativeText),
+                                           mView, [this] { selectAll(); });
+    selectAllAction->setEnabled(mView->byteArrayModel()->size() > 0);
+
+    selectAllAction->setObjectName(QStringLiteral("select-all"));
+
+    return 1;
+}
+
+void KeyNavigator::selectAll()
+{
+    mView->selectAll(true);
 }
 
 }
