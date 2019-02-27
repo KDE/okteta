@@ -40,7 +40,7 @@ ByteArrayBase32StreamEncoderConfigEditor::ByteArrayBase32StreamEncoderConfigEdit
     mSettings = mEncoder->settings();
 
     auto* pageLayout = new QFormLayout(this);
-    pageLayout->setMargin(0);
+    pageLayout->setContentsMargins(0, 0, 0, 0);
 
     // data type
     const QString encodingTypeLabel =

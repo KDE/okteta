@@ -51,7 +51,7 @@ void ByteArrayComboBoxPrivate::init()
     Q_Q(ByteArrayComboBox);
 
     auto* baseLayout = new QHBoxLayout(q);
-    baseLayout->setMargin(0);
+    baseLayout->setContentsMargins(0, 0, 0, 0);
     baseLayout->setSpacing(0);
 
     mFormatComboBox = new KComboBox(q);

@@ -36,7 +36,7 @@ ReverseByteArrayFilterParameterSetEdit::ReverseByteArrayFilterParameterSetEdit(Q
     : AbstractByteArrayFilterParameterSetEdit(parent)
 {
     auto* baseLayout = new QFormLayout(this);
-    baseLayout->setMargin(0);
+    baseLayout->setContentsMargins(0, 0, 0, 0);
 
     const QString invertsBitsLabelText =
         i18nc("@option:check",

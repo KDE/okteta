@@ -36,7 +36,7 @@ ModSumByteArrayChecksumParameterSetEdit::ModSumByteArrayChecksumParameterSetEdit
     : AbstractByteArrayChecksumParameterSetEdit(parent)
 {
     auto* baseLayout = new QFormLayout(this);
-    baseLayout->setMargin(0);
+    baseLayout->setContentsMargins(0, 0, 0, 0);
 
     mByteOrderComboBox = new KComboBox(this);
     mByteOrderComboBox->addItem(i18nc("@item:inlistbox", "Little-endian"));  // add first for index

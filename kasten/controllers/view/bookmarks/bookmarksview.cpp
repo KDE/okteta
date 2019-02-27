@@ -47,7 +47,7 @@ BookmarksView::BookmarksView(BookmarksTool* tool, QWidget* parent)
             this, &BookmarksView::onBookmarkSelectionChanged);
 
     auto* baseLayout = new QVBoxLayout(this);
-    baseLayout->setMargin(0);
+    baseLayout->setContentsMargins(0, 0, 0, 0);
 
     // bookmarks list
     mBookmarkListView = new QTreeView(this);

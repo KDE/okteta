@@ -48,7 +48,7 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(const QStringList& selected, 
     QVBoxLayout* upDownLayout;
 
     baseLayout = new QHBoxLayout();
-    baseLayout->setMargin(0);
+    baseLayout->setContentsMargins(0, 0, 0, 0);
 
     tree1Layout = new QVBoxLayout();
     mTree1Label = new QLabel(i18nc("@info:label", "Installed structures:"), this);

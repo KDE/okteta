@@ -37,7 +37,7 @@ ByteArrayRandomDataGeneratorConfigEditor::ByteArrayRandomDataGeneratorConfigEdit
     mSettings = mGenerator->settings();
 
     auto* pageLayout = new QFormLayout(this);
-    pageLayout->setMargin(0);
+    pageLayout->setContentsMargins(0, 0, 0, 0);
 
     // number
     const QString numberInputLabel =

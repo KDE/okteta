@@ -41,7 +41,7 @@ VersionView::VersionView(VersionViewTool* tool, QWidget* parent)
     mVersionTableModel = new VersionTableModel(nullptr, nullptr, this);
 
     auto* baseLayout = new QVBoxLayout(this);
-    baseLayout->setMargin(0);
+    baseLayout->setContentsMargins(0, 0, 0, 0);
 
     mVersionTableView = new QTreeView(this);
     mVersionTableView->setObjectName(QStringLiteral("VersionsTable"));

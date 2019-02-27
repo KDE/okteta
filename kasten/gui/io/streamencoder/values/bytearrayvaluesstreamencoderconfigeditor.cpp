@@ -41,7 +41,7 @@ ByteArrayValuesStreamEncoderConfigEditor::ByteArrayValuesStreamEncoderConfigEdit
     mSettings = mEncoder->settings();
 
     auto* pageLayout = new QGridLayout(this);   // unknown rows
-    pageLayout->setMargin(0);
+    pageLayout->setContentsMargins(0, 0, 0, 0);
     pageLayout->setColumnStretch(0, 0);
     pageLayout->setColumnStretch(1, 0);
 

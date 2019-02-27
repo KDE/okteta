@@ -64,7 +64,7 @@ StructureView::StructureView(StructuresTool* tool, QWidget* parent)
 {
     QBoxLayout* baseLayout = new QVBoxLayout(this);
     setLayout(baseLayout);
-    baseLayout->setMargin(0);
+    baseLayout->setContentsMargins(0, 0, 0, 0);
     // table
     mStructureTreeModel = new StructureTreeModel(mTool, this);
     //  mModeltest = new ModelTest(mStructureTreeModel, this);
@@ -90,7 +90,7 @@ StructureView::StructureView(StructuresTool* tool, QWidget* parent)
 
     // settings
     QBoxLayout* settingsLayout = new QHBoxLayout();
-    settingsLayout->setMargin(0);
+    settingsLayout->setContentsMargins(0, 0, 0, 0);
 
     baseLayout->addLayout(settingsLayout);
 
@@ -171,7 +171,7 @@ void StructureView::openSettingsDlg()
     // because KConfigDialogManager only scans the children of the page for kcfg_ elements
     QWidget* structSelectionPage = new QWidget();
     auto* hbox = new QHBoxLayout();
-    hbox->setMargin(0);
+    hbox->setContentsMargins(0, 0, 0, 0);
     structSelectionPage->setLayout(hbox);
     auto* structureSettings = new StructuresManagerView(mTool, this);
     structureSettings->setObjectName(QStringLiteral("kcfg_LoadedStructures"));

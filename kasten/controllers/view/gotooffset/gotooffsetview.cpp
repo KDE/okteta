@@ -43,11 +43,11 @@ GotoOffsetView::GotoOffsetView(GotoOffsetTool* tool, QWidget* parent)
     , mTool(tool)
 {
     auto* baseLayout = new QHBoxLayout(this);
-    baseLayout->setMargin(0);
+    baseLayout->setContentsMargins(0, 0, 0, 0);
 
     // offset
     auto* offsetLayout = new QHBoxLayout();
-    offsetLayout->setMargin(0);
+    offsetLayout->setContentsMargins(0, 0, 0, 0);
 
     QLabel* label = new QLabel(i18nc("@label:listbox", "O&ffset:"), this);
     mAddressEdit = new Okteta::AddressComboBox(this);
@@ -73,7 +73,7 @@ GotoOffsetView::GotoOffsetView(GotoOffsetTool* tool, QWidget* parent)
 
     // options
     auto* optionsLayout = new QVBoxLayout();
-    optionsLayout->setMargin(0);
+    optionsLayout->setContentsMargins(0, 0, 0, 0);
 
     mAtCursorCheckBox = new QCheckBox(i18nc("@option:check", "From c&ursor"), this);
     mAtCursorCheckBox->setWhatsThis(
@@ -91,7 +91,7 @@ GotoOffsetView::GotoOffsetView(GotoOffsetTool* tool, QWidget* parent)
     connect(mBackwardsCheckBox, &QCheckBox::toggled, mTool, &GotoOffsetTool::setIsBackwards);
 
     auto* upperOptionsLayout = new QHBoxLayout();
-    upperOptionsLayout->setMargin(0);
+    upperOptionsLayout->setContentsMargins(0, 0, 0, 0);
     upperOptionsLayout->addWidget(mAtCursorCheckBox);
     upperOptionsLayout->addWidget(mBackwardsCheckBox);
 

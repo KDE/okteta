@@ -48,7 +48,7 @@ FilterView::FilterView(FilterTool* tool, QWidget* parent)
     , mTool(tool)
 {
     auto* baseLayout = new QVBoxLayout(this);
-    baseLayout->setMargin(0);
+    baseLayout->setContentsMargins(0, 0, 0, 0);
 
     // filter
     auto* operationLayout = new QHBoxLayout();

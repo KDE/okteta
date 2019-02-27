@@ -36,7 +36,7 @@ StatusBarLayout::StatusBarLayout(QWidget* parent)
     , mIsDirty(true)
     , mIsEmpty(true)
 {
-    setMargin(0);
+    setContentsMargins(0, 0, 0, 0);
 }
 
 StatusBarLayout::~StatusBarLayout()

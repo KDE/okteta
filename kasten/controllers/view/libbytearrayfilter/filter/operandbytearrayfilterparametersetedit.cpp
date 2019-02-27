@@ -38,7 +38,7 @@ OperandByteArrayFilterParameterSetEdit::OperandByteArrayFilterParameterSetEdit(Q
     : AbstractByteArrayFilterParameterSetEdit(parent)
 {
     auto* baseLayout = new QFormLayout(this);
-    baseLayout->setMargin(0);
+    baseLayout->setContentsMargins(0, 0, 0, 0);
 
     const QString operandLabelText =
         i18nc("@label:textbox operand to the arithmetic filter function",
