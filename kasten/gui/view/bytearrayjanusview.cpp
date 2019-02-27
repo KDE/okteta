@@ -35,7 +35,7 @@ ByteArrayJanusView::ByteArrayJanusView(QWidget* parent)
     : QWidget(parent)
 {
     mLayout = new QHBoxLayout(this);
-    mLayout->setMargin(0);
+    mLayout->setContentsMargins(0, 0, 0, 0);
     setViewModus(ColumnViewId);
 }
 

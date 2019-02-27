@@ -48,7 +48,7 @@ CharsetConversionView::CharsetConversionView(CharsetConversionTool* tool, QWidge
     , mTool(tool)
 {
     auto* baseLayout = new QVBoxLayout(this);
-    baseLayout->setMargin(0);
+    baseLayout->setContentsMargins(0, 0, 0, 0);
 
     // source/target charset
     auto* directionCharsetLayout = new QHBoxLayout();

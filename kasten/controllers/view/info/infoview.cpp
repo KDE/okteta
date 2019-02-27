@@ -47,7 +47,7 @@ InfoView::InfoView(InfoTool* tool, QWidget* parent)
     , mTool(tool)
 {
     auto* baseLayout = new QVBoxLayout(this);
-    baseLayout->setMargin(0);
+    baseLayout->setContentsMargins(0, 0, 0, 0);
 
     auto* topLineLayout = new QHBoxLayout();
 

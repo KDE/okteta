@@ -50,7 +50,7 @@ StructuresManagerView::StructuresManagerView(Kasten::StructuresTool* tool, QWidg
     mSelectedStructures = Kasten::StructureViewPreferences::loadedStructures();
 
     auto* pageLayout = new QVBoxLayout();
-    pageLayout->setMargin(0);
+    pageLayout->setContentsMargins(0, 0, 0, 0);
     setLayout(pageLayout);
 
     rebuildPluginSelectorEntries();

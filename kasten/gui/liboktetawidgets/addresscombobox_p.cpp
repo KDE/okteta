@@ -53,7 +53,7 @@ void AddressComboBoxPrivate::init()
     Q_Q(AddressComboBox);
 
     auto* baseLayout = new QHBoxLayout(q);
-    baseLayout->setMargin(0);
+    baseLayout->setContentsMargins(0, 0, 0, 0);
     baseLayout->setSpacing(0);
 
     mFormatComboBox = new KComboBox(q);

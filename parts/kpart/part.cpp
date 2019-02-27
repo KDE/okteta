@@ -89,7 +89,7 @@ OktetaPart::OktetaPart(QObject* parent,
 
     QWidget* widget = new QWidget();
     mLayout = new QVBoxLayout(widget);
-    mLayout->setMargin(0);
+    mLayout->setContentsMargins(0, 0, 0, 0);
 
     setWidget(widget);
 

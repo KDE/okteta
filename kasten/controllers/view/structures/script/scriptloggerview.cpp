@@ -54,7 +54,7 @@ ScriptLoggerView::ScriptLoggerView(const TopLevelDataInformation::List& data, QW
     connect(mSelector, QOverload<int>::of(&KComboBox::currentIndexChanged),
             this, &ScriptLoggerView::updateModel);
     auto* layout = new QVBoxLayout();
-    layout->setMargin(0);
+    layout->setContentsMargins(0, 0, 0, 0);
     layout->addWidget(mSelector, 0);
     layout->addWidget(mView, 1);
     setLayout(layout);

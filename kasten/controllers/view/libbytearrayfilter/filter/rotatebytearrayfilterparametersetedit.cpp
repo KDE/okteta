@@ -36,7 +36,7 @@ RotateByteArrayFilterParameterSetEdit::RotateByteArrayFilterParameterSetEdit(QWi
     : AbstractByteArrayFilterParameterSetEdit(parent)
 {
     auto* baseLayout = new QFormLayout(this);
-    baseLayout->setMargin(0);
+    baseLayout->setContentsMargins(0, 0, 0, 0);
 
     mGroupSizeEdit = new QSpinBox(this);
     mGroupSizeEdit->setRange(1, INT_MAX);

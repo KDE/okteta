@@ -39,7 +39,7 @@ void AbstractLinePopupPrivate::init()
     p->setMouseTracking(true);
 
     mBaseLayout = new QHBoxLayout(p);
-    mBaseLayout->setMargin(0);
+    mBaseLayout->setContentsMargins(0, 0, 0, 0);
     mBaseLayout->setSpacing(0);
 
     mIconLabel = new QLabel(p);

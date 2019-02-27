@@ -42,7 +42,7 @@ ByteArraySourceCodeStreamEncoderConfigEditor::ByteArraySourceCodeStreamEncoderCo
     mSettings = mEncoder->settings();
 
     auto* pageLayout = new QFormLayout(this);
-    pageLayout->setMargin(0);
+    pageLayout->setContentsMargins(0, 0, 0, 0);
 
     // variable name
     const QString variableNameLabel =

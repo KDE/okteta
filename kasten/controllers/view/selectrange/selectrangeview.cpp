@@ -42,15 +42,15 @@ SelectRangeView::SelectRangeView(SelectRangeTool* tool, QWidget* parent)
     , mTool(tool)
 {
     auto* baseLayout = new QHBoxLayout(this);
-    baseLayout->setMargin(0);
+    baseLayout->setContentsMargins(0, 0, 0, 0);
 
     // offsets
     auto* offsetLayout = new QVBoxLayout();
-    offsetLayout->setMargin(0);
+    offsetLayout->setContentsMargins(0, 0, 0, 0);
 
     // start offset
     auto* startOffsetLayout = new QHBoxLayout();
-    startOffsetLayout->setMargin(0);
+    startOffsetLayout->setContentsMargins(0, 0, 0, 0);
 
     QLabel* label = new QLabel(i18nc("@label:listbox", "Start offset:"), this);
     mStartEdit = new Okteta::AddressComboBox(this);
@@ -70,7 +70,7 @@ SelectRangeView::SelectRangeView(SelectRangeTool* tool, QWidget* parent)
 
     // end offset
     auto* endOffsetLayout = new QHBoxLayout();
-    endOffsetLayout->setMargin(0);
+    endOffsetLayout->setContentsMargins(0, 0, 0, 0);
 
     label = new QLabel(i18nc("@label:listbox", "End offset:"), this);
     mEndEdit = new Okteta::AddressComboBox(this);
@@ -90,7 +90,7 @@ SelectRangeView::SelectRangeView(SelectRangeTool* tool, QWidget* parent)
 
     // options
     auto* optionsLayout = new QVBoxLayout();
-    optionsLayout->setMargin(0);
+    optionsLayout->setContentsMargins(0, 0, 0, 0);
 
     mRelativeCheckBox = new QCheckBox(i18nc("@option:check", "End relative"), this);
     mRelativeCheckBox->setWhatsThis(

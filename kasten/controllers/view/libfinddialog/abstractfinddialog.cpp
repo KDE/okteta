@@ -44,7 +44,7 @@ AbstractFindDialog::AbstractFindDialog(QWidget* parent)
     // main widget
     QWidget* mainWidget = new QWidget;
     MainWidgetLayout = new QVBoxLayout(mainWidget);
-    MainWidgetLayout->setMargin(0);
+    MainWidgetLayout->setContentsMargins(0, 0, 0, 0);
 
     // dialog buttons
     auto* dialogButtonBox = new QDialogButtonBox;

@@ -42,7 +42,7 @@ Template_ByteArrayChecksumParameterSetEdit::Template_ByteArrayChecksumParameterS
 //// where you check if the validity changed
     auto* baseLayout = new QFormLayout(this);
     // margin is provided by the container for this widget
-    baseLayout->setMargin(0);
+    baseLayout->setContentsMargins(0, 0, 0, 0);
 
     mBitNumberEdit = new QSpinBox(this);
     // For demonstration purpose we start at 0, not 1, to show handling of an invalid state

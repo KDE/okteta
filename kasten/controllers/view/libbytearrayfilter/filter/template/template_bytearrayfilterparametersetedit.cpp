@@ -42,7 +42,7 @@ Template_ByteArrayFilterParameterSetEdit::Template_ByteArrayFilterParameterSetEd
 //// where you check if the validity changed
     auto* baseLayout = new QFormLayout(this);
     // margin is provided by the container for this widget
-    baseLayout->setMargin(0);
+    baseLayout->setContentsMargins(0, 0, 0, 0);
 
     mLevelEdit = new QSpinBox(this);
     // For demonstration purpose we start at -1, not 0, to show handling of an invalid state

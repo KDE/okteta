@@ -46,7 +46,7 @@ PODTableView::PODTableView(PODDecoderTool* tool, QWidget* parent)
     , mTool(tool)
 {
     QBoxLayout* baseLayout = new QVBoxLayout(this);
-    baseLayout->setMargin(0);
+    baseLayout->setContentsMargins(0, 0, 0, 0);
 
     // table
     mPODTableModel = new PODTableModel(mTool, this);
@@ -74,7 +74,7 @@ PODTableView::PODTableView(PODDecoderTool* tool, QWidget* parent)
 
     // settings
     QBoxLayout* settingsLayout = new QHBoxLayout();
-    settingsLayout->setMargin(0);
+    settingsLayout->setContentsMargins(0, 0, 0, 0);
 
     mByteOrderSelection = new KComboBox(this);
     mByteOrderSelection->addItem(i18nc("@item:inlistbox", "Big-endian"));     // add first for index

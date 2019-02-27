@@ -38,7 +38,7 @@ DocumentsView::DocumentsView(DocumentsTool* tool, QWidget* parent)
     mDocumentListModel = new DocumentListModel(mTool, this);
 
     auto* baseLayout = new QVBoxLayout(this);
-    baseLayout->setMargin(0);
+    baseLayout->setContentsMargins(0, 0, 0, 0);
     baseLayout->setSpacing(0);
 
     mDocumentListView = new QTreeView(this);
