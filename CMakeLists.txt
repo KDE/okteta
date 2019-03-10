@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0)
 
-project(Okteta VERSION 0.25.90)
+project(Okteta VERSION 0.26.0)
 
 set(REQUIRED_KF5_VERSION "5.48.0")
 find_package(ECM ${REQUIRED_KF5_VERSION} REQUIRED NO_MODULE)
