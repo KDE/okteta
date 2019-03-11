@@ -27,7 +27,6 @@
 #include "bytearrayrawfilesynchronizer.hpp"
 #include "bytearrayrawfilewritethread.hpp"
 #include "bytearraydocument.hpp"
-// KF5
 // Qt
 #include <QUrl>
 #include <QCoreApplication>

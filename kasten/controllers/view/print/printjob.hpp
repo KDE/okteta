@@ -23,7 +23,7 @@
 #ifndef KASTEN_PRINTJOB_HPP
 #define KASTEN_PRINTJOB_HPP
 
-// KF5
+// KF
 // #include <KJob>
 // Qt
 #include <QObject>

@@ -26,7 +26,7 @@
 // Qt
 #include <QWidget>
 
-// KF5
+// KF
 class KComboBox;
 // Qt
 class QCheckBox;

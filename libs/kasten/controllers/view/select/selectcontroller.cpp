@@ -25,7 +25,7 @@
 // Kasten gui
 #include <Kasten/DataSelectable>
 #include <Kasten/AbstractView>
-// KF5
+// KF
 #include <KXMLGUIClient>
 #include <KLocalizedString>
 #include <KActionCollection>

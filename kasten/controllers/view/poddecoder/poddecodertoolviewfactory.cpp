@@ -25,7 +25,7 @@
 // lib
 #include "poddecodertoolview.hpp"
 #include "poddecodertool.hpp"
-// KF5
+// KF
 #include <KLocalizedString>
 
 namespace Kasten {

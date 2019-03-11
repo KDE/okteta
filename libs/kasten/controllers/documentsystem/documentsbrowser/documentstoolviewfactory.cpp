@@ -25,7 +25,7 @@
 // lib
 #include "documentstoolview.hpp"
 #include "documentstool.hpp"
-// KF5
+// KF
 #include <KLocalizedString>
 
 namespace Kasten {

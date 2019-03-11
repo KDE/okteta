@@ -27,7 +27,7 @@
 // Okteta core
 #include <Okteta/AbstractByteArrayModel>
 #include <Okteta/ValueCodec>
-// KF5
+// KF
 #include <KLocalizedString>
 // Qt
 #include <QTextStream>

@@ -27,7 +27,7 @@
 #include <Kasten/SelectedDataWriteable>
 // Kasten core
 #include <Kasten/AbstractModel>
-// KF5
+// KF
 #include <KXMLGUIClient>
 #include <KLocalizedString>
 #include <KActionCollection>

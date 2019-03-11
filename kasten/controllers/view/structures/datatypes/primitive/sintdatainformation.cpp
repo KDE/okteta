@@ -23,7 +23,7 @@
 #include "../poddecoder/typeeditors/sintspinbox.hpp"
 #include "../../structlogging.hpp"
 
-// KF5
+// KF
 #include <KLocalizedString>
 // Qt
 #include <QScriptValue>

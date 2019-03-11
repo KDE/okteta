@@ -29,7 +29,7 @@
 #include <Kasten/Okteta/ByteArrayView>
 // Okteta core
 #include <Okteta/CharCodec>
-// KF5
+// KF
 #include <KXMLGUIClient>
 #include <KLocalizedString>
 #include <KActionCollection>

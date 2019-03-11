@@ -24,7 +24,7 @@
 
 // Okteta Gui Kasten
 #include <Kasten/Okteta/ByteArrayViewProfileManager>
-// KF5
+// KF
 #include <KColorScheme>
 #include <KLocalizedString>
 // Qt

@@ -24,7 +24,7 @@
 
 // lib
 #include "testdocument.hpp"
-// KF5
+// KF
 #include <KLocalizedString>
 // Qt
 #include <QUrl>

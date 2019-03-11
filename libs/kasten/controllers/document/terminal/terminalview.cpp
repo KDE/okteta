@@ -24,7 +24,7 @@
 
 // lib
 #include "terminaltool.hpp"
-// KF5
+// KF
 #include <KLocalizedString>
 #include <KServiceTypeTrader>
 #include <KParts/ReadOnlyPart>

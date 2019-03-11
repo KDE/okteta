@@ -48,7 +48,7 @@
 // e.g.
 // #include "algorithm/mybytearraychecksumalgorithm.hpp"
 // NEWCHECKSUM(end)
-// KF5
+// KF
 #include <KLocalizedString>
 // Qt
 #include <QVector>

@@ -25,7 +25,7 @@
 
 // Kasten
 #include <Kasten/KastenCore>
-// KF5
+// KF
 #include <KParts/ReadWritePart>
 // Qt
 #include <QVector>

@@ -24,7 +24,7 @@
 
 // parameterset
 #include "modsumbytearraychecksumparameterset.hpp"
-// KF5
+// KF
 #include <KLocalizedString>
 #include <KComboBox>
 // Qt

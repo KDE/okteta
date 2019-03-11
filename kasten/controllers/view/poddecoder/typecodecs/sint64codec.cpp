@@ -25,7 +25,7 @@
 // tool
 #include "../types/sint64.hpp"
 #include "../poddata.hpp"
-// KF5
+// KF
 #include <KLocalizedString>
 
 namespace Okteta {

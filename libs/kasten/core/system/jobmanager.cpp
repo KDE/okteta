@@ -22,7 +22,7 @@
 
 #include "jobmanager.hpp"
 
-// KF5
+// KF
 #include <KJob>
 #include <KMessageBox>
 // Qt

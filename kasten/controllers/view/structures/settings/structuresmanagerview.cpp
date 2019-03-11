@@ -28,7 +28,7 @@
 #include "../structuresmanager.hpp"
 #include "../structurestool.hpp"
 #include "../structlogging.hpp"
-// KF5
+// KF
 #include <KPluginSelector>
 #include <KConfigDialogManager>
 #include <KPluginInfo>

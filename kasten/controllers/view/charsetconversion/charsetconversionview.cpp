@@ -28,7 +28,7 @@
 #include <Kasten/Okteta/ByteArrayComboBox>
 // Okteta core
 #include <Okteta/CharCodec>
-// KF5
+// KF
 #include <KMessageBox>
 #include <KComboBox>
 #include <KGuiItem>

@@ -26,7 +26,7 @@
 // lib
 #include "addresscombobox.hpp"
 #include "addressvalidator.hpp"
-// KF5
+// KF
 #include <KComboBox>
 
 namespace Okteta {

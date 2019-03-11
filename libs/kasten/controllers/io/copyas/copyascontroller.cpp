@@ -33,7 +33,7 @@
 #include <Kasten/ModelCodecManager>
 #include <Kasten/AbstractModelStreamEncoder>
 #include <Kasten/AbstractModel>
-// KF5
+// KF
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>
 #include <KActionCollection>

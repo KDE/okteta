@@ -24,7 +24,7 @@
 
 // lib
 #include "filesystembrowsertool.hpp"
-// KF5
+// KF
 #include <KUrlNavigator>
 #include <KFilePlacesModel>
 #include <KDirOperator>

@@ -14,7 +14,7 @@
 
 // Okteta core
 #include <Okteta/AbstractByteArrayModel>
-// KF5
+// KF
 #include <KLocalizedString>
 
 Template_ByteArrayChecksumAlgorithm::Template_ByteArrayChecksumAlgorithm()

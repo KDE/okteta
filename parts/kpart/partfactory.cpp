@@ -33,7 +33,7 @@
 // Kasten
 #include <Kasten/ModelCodecViewManager>
 #include <Kasten/ModelCodecManager>
-// KF5
+// KF
 #include <KLocalizedString>
 
 OktetaPartFactory::OktetaPartFactory()

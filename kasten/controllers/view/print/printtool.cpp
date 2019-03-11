@@ -35,7 +35,7 @@
 #include <Okteta/AbstractByteArrayModel>
 // Kasten core
 #include <Kasten/AbstractModelSynchronizer>
-// KF5
+// KF
 #include <KLocalizedString>
 #include <KMessageBox>
 // Qt

@@ -25,7 +25,7 @@
 // Kasten core
 #include <Kasten/DocumentSyncManager>
 #include <Kasten/AbstractDocument>
-// KF5
+// KF
 #include <KActionCollection>
 #include <KStandardAction>
 #include <KXMLGUIClient>

@@ -26,7 +26,7 @@
 #include "selectrangetool.hpp"
 // Okteta Kasten gui
 #include <Kasten/Okteta/AddressComboBox>
-// KF5
+// KF
 #include <QPushButton>
 #include <KGuiItem>
 #include <KLocalizedString>

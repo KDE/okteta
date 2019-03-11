@@ -25,7 +25,7 @@
 
 // Okteta core
 #include <Okteta/Character>
-// KF5
+// KF
 #include <KColorScheme>
 // Qt
 #include <QColor>

@@ -25,7 +25,7 @@
 // Kasten gui
 #include <Kasten/AbstractModelExporterConfigEditor>
 #include <Kasten/AbstractSelectionView>
-// KF5
+// KF
 #include <KLocalizedString>
 // Qt
 #include <QSplitter>

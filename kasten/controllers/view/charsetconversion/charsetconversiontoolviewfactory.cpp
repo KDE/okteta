@@ -25,7 +25,7 @@
 // lib
 #include "charsetconversiontoolview.hpp"
 #include "charsetconversiontool.hpp"
-// KF5
+// KF
 #include <KLocalizedString>
 
 namespace Kasten {

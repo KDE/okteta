@@ -29,7 +29,7 @@
 #include <Okteta/AbstractByteArrayModel>
 #include <Okteta/ChangesDescribable>
 #include <Okteta/ValueCodec>
-// KF5
+// KF
 #include <KLocalizedString>
 // Qt
 #include <QKeyEvent>

@@ -24,7 +24,7 @@
 
 //
 #include "documentinfotool.hpp"
-// KF5
+// KF
 #include <KLocalizedString>
 #include <KIconLoader>
 #include <KSeparator>

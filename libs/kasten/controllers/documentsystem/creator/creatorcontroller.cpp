@@ -28,7 +28,7 @@
 // Kasten core
 #include <Kasten/ModelCodecManager>
 #include <Kasten/AbstractModelDataGenerator>
-// KF5
+// KF
 #include <KLocalizedString>
 #include <KActionCollection>
 #include <KActionMenu>

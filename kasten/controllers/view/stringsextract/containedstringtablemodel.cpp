@@ -22,7 +22,7 @@
 
 #include "containedstringtablemodel.hpp"
 
-// KF5
+// KF
 #include <KLocalizedString>
 
 ContainedStringTableModel::ContainedStringTableModel(const QList<ContainedString>* containedStringList,

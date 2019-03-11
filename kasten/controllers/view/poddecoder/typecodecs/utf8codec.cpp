@@ -25,7 +25,7 @@
 // tool
 #include "../types/utf8.hpp"
 #include "../poddata.hpp"
-// KF5
+// KF
 #include <KLocalizedString>
 // Qt
 #include <QTextCodec>

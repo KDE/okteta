@@ -28,7 +28,7 @@
 // Okteta core
 #include <Okteta/CharCodec>
 #include <Okteta/Character>
-// KF5
+// KF
 #include <KLocalizedString>
 
 namespace Okteta {

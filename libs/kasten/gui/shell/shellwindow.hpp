@@ -26,7 +26,7 @@
 // Kasten gui
 #include <kasten/kastengui_export.hpp>
 #include <kasten/widgetsdockable.hpp>
-// KF5
+// KF
 #include <KXmlGuiWindow>
 
 namespace Kasten {

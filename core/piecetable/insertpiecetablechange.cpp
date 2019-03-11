@@ -26,7 +26,7 @@
 #include "piecetable.hpp"
 //
 #include <arraychangemetrics.hpp>
-// KF5
+// KF
 #include <KLocalizedString>
 
 namespace KPieceTable {

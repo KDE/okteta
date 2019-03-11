@@ -24,7 +24,7 @@
 
 // Okteta core
 #include <Okteta/AbstractByteArrayModel>
-// KF5
+// KF
 #include <KLocalizedString>
 
 static constexpr int MOD_ADLER = 65521;

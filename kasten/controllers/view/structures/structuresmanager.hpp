@@ -27,7 +27,7 @@
 // Qt
 #include <QStringList>
 #include <QDir>
-// KF5
+// KF
 #include <KSharedConfig>
 #include <KPluginInfo>
 

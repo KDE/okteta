@@ -39,7 +39,7 @@
 #include <Okteta/BookmarksConstIterator>
 #include <Okteta/Bookmark>
 #include <Okteta/AbstractByteArrayModel>
-// KF5
+// KF
 #include <KXMLGUIClient>
 #include <KLocalizedString>
 #include <KActionCollection>

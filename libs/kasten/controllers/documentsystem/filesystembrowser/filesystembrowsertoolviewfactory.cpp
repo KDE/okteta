@@ -25,7 +25,7 @@
 // lib
 #include "filesystembrowsertoolview.hpp"
 #include "filesystembrowsertool.hpp"
-// KF5
+// KF
 #include <KLocalizedString>
 
 namespace Kasten {

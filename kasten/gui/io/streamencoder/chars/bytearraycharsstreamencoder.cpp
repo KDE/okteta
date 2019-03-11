@@ -28,7 +28,7 @@
 #include <Okteta/AbstractByteArrayModel>
 #include <Okteta/Character>
 #include <Okteta/CharCodec>
-// KF5
+// KF
 #include <KLocalizedString>
 // Qt
 #include <QTextStream>

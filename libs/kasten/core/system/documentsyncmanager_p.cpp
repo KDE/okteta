@@ -34,7 +34,7 @@
 #include <abstractsyncfromremotejob.hpp>
 #include <abstractmodelsynchronizerfactory.hpp>
 #include <abstractdocument.hpp>
-// KF5
+// KF
 #include <KIO/StatJob>
 #include <KJobWidgets>
 #include <KLocalizedString>

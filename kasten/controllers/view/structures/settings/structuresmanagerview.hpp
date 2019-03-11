@@ -24,7 +24,7 @@
 #ifndef KASTEN_STRUCTURESMANAGERVIEW_HPP
 #define KASTEN_STRUCTURESMANAGERVIEW_HPP
 
-// KF5
+// KF
 #include <KNS3/Entry>
 // Qt
 #include <QWidget>

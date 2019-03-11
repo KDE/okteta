@@ -106,7 +106,7 @@
 #include <Kasten/DocumentCreateManager>
 #include <Kasten/DocumentSyncManager>
 #include <Kasten/DocumentManager>
-// KF5
+// KF
 #include <KConfigGroup>
 #include <KSharedConfig>
 // Qt

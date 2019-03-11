@@ -23,7 +23,7 @@
 #include "addresscombobox_p.hpp"
 #include "addresscombobox.hpp"
 
-// KF5
+// KF
 #include <KLocalizedString>
 // Qt
 #include <QLayout>

@@ -22,7 +22,7 @@
 
 #include "about.hpp"
 
-// KF5
+// KF
 #include <KLocalizedString>
 
 OktetaAboutData::OktetaAboutData()

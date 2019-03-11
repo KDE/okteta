@@ -25,7 +25,7 @@
 // lib
 #include "infotoolview.hpp"
 #include "infotool.hpp"
-// KF5
+// KF
 #include <KLocalizedString>
 
 namespace Kasten {

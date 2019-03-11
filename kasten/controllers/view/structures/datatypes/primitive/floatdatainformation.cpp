@@ -22,7 +22,7 @@
 #include "floatdatainformation.hpp"
 
 #include <limits>
-// KF5
+// KF
 #include <KLocalizedString>
 // Qt
 #include <QScriptValue>

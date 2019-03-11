@@ -26,7 +26,7 @@
 #include <Kasten/Okteta/ByteArrayViewProfile>
 // Okteta core
 #include <Okteta/CharCodec>
-// KF5
+// KF
 #include <KLocalizedString>
 #include <KComboBox>
 // Qt
