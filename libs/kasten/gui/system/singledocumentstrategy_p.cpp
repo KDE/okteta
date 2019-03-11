@@ -34,7 +34,7 @@
 #include <Kasten/DocumentCreateManager>
 #include <Kasten/AbstractModelDataGenerator>
 #include <Kasten/AbstractModel>
-// KF5
+// KF
 #include <KProcess>
 // Qt
 #include <QMimeData>

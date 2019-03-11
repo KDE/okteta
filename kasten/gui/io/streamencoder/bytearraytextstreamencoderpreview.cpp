@@ -24,7 +24,7 @@
 
 // lib
 #include "abstractbytearraystreamencoder.hpp"
-// KF5
+// KF
 #include <KLocalizedString>
 // Qt
 #include <QFontDatabase>

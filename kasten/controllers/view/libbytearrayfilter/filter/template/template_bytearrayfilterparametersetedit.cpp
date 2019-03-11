@@ -18,7 +18,7 @@
 //// e.g. "mybytearrayfilterparameterset.hpp"
 #include "template_bytearrayfilterparameterset.hpp"
 //// ADAPT(end)
-// KF5
+// KF
 #include <KLocalizedString>
 //// ADAPT(start)
 //// add includes for all elements used in the widget

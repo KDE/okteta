@@ -26,7 +26,7 @@
 #include <Okteta/Character>
 #include <Okteta/CharCodec>
 #include <Okteta/ValueCodec>
-// KF5
+// KF
 #include <KLocalizedString>
 #include <KColorScheme>
 // Qt

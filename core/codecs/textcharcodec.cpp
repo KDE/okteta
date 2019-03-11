@@ -24,7 +24,7 @@
 
 // lib
 #include <character.hpp>
-// KF5
+// KF
 #include <KCharsets>
 // Qt
 #include <QTextCodec>

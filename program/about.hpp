@@ -23,7 +23,7 @@
 #ifndef OKTETAABOUT_HPP
 #define OKTETAABOUT_HPP
 
-// KF5
+// KF
 #include <KAboutData>
 
 class OktetaAboutData : public KAboutData

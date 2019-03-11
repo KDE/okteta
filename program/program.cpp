@@ -45,7 +45,7 @@
 #include <Kasten/DocumentCreateManager>
 #include <Kasten/DocumentSyncManager>
 #include <Kasten/ModelCodecManager>
-// KF5
+// KF
 #include <KDBusService>
 #include <KLocalizedString>
 #include <KCrash>

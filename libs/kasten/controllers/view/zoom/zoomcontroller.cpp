@@ -26,7 +26,7 @@
 #include <Kasten/Zoomable>
 // Kasten core
 #include <Kasten/AbstractModel>
-// KF5
+// KF
 #include <KXMLGUIClient>
 #include <KLocalizedString>
 #include <KActionCollection>

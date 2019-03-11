@@ -22,7 +22,7 @@
 
 #include "abstractmodelfilesystemsynchronizer_p.hpp"
 
-// KF5
+// KF
 #include <KDirWatch>
 // Qt
 #include <QNetworkConfigurationManager>

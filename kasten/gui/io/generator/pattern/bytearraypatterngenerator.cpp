@@ -22,7 +22,7 @@
 
 #include "bytearraypatterngenerator.hpp"
 
-// KF5
+// KF
 #include <KLocalizedString>
 // Qt
 #include <QMimeData>

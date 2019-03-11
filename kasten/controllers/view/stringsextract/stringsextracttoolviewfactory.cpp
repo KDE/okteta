@@ -25,7 +25,7 @@
 // lib
 #include "stringsextracttoolview.hpp"
 #include "stringsextracttool.hpp"
-// KF5
+// KF
 #include <KLocalizedString>
 
 namespace Kasten {

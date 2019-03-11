@@ -25,7 +25,7 @@
 // Kasten gui
 #include <Kasten/WidgetsDockable>
 #include <Kasten/ToolViewDockWidget>
-// KF5
+// KF
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>
 // Qt

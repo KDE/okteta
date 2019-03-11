@@ -40,7 +40,7 @@
 
 // #include "modeltest.hpp"
 
-// KF5
+// KF
 #include <KComboBox>
 #include <KLocalizedString>
 #include <KConfigDialog>

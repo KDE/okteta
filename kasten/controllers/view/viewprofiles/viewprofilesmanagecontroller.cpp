@@ -26,7 +26,7 @@
 #include <Kasten/Okteta/ByteArrayViewProfileManager>
 // controller
 #include "viewprofilesmanagedialog.hpp"
-// KF5
+// KF
 #include <KXMLGUIClient>
 #include <KLocalizedString>
 #include <KActionCollection>

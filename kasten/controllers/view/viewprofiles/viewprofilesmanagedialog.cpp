@@ -28,7 +28,7 @@
 // Okteta Gui Kasten
 #include <Kasten/Okteta/ByteArrayViewProfileManager>
 #include <Kasten/Okteta/ByteArrayViewProfileLock>
-// KF5
+// KF
 #include <KLocalizedString>
 #include <KGuiItem>
 // Qt

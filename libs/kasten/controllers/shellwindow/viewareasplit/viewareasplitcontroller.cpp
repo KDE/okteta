@@ -27,7 +27,7 @@
 #include <Kasten/ViewAreaSplitable>
 #include <Kasten/AbstractViewArea>
 #include <Kasten/ViewManager>
-// KF5
+// KF
 #include <KXMLGUIClient>
 #include <KActionCollection>
 #include <KLocalizedString>

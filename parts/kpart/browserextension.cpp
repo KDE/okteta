@@ -28,7 +28,7 @@
 #include <Kasten/Okteta/ByteArrayViewProfileSynchronizer>
 #include <Kasten/Okteta/ByteArrayView>
 #include <Kasten/Okteta/ByteArrayDocument>
-// KF5
+// KF
 #include <KActionCollection>
 // Qt
 #include <QClipboard>

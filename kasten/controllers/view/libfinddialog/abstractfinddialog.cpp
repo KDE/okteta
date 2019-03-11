@@ -26,7 +26,7 @@
 #include <Kasten/Okteta/ByteArrayComboBox>
 // Okteta core
 #include <Okteta/OktetaCore>
-// KF5
+// KF
 #include <KLocalizedString>
 // Qt
 #include <QCheckBox>

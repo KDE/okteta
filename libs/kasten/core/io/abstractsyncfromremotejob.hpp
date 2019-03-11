@@ -25,7 +25,7 @@
 
 // lib
 #include <kasten/kastencore_export.hpp>
-// KF5
+// KF
 #include <KJob>
 
 namespace Kasten {

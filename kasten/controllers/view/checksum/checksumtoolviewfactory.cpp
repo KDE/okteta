@@ -25,7 +25,7 @@
 // lib
 #include "checksumtoolview.hpp"
 #include "checksumtool.hpp"
-// KF5
+// KF
 #include <KLocalizedString>
 
 namespace Kasten {

@@ -29,7 +29,7 @@
 // Okteta core
 #include <Okteta/AbstractByteArrayModel>
 #include <Okteta/ArrayChangeMetricsList>
-// KF5
+// KF
 #include <KLocalizedString>
 
 namespace Kasten {

@@ -24,7 +24,7 @@
 
 //
 #include "reversebytearrayfilterparameterset.hpp"
-// KF5
+// KF
 #include <KLocalizedString>
 // Qt
 #include <QCheckBox>

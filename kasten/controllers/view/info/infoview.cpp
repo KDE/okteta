@@ -26,7 +26,7 @@
 #include "infotool.hpp"
 #include "statistictablemodel.hpp"
 #include <infoviewsettings.h>
-// KF5
+// KF
 #include <KGuiItem>
 #include <KLocalizedString>
 // Qt

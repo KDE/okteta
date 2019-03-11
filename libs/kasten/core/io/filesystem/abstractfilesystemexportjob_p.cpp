@@ -22,7 +22,7 @@
 
 #include "abstractfilesystemexportjob_p.hpp"
 
-// KF5
+// KF
 #include <KIO/FileCopyJob>
 #include <KJobWidgets>
 // Qt

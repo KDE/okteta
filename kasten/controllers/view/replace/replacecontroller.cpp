@@ -26,7 +26,7 @@
 #include "replacedialog.hpp"
 #include "replaceprompt.hpp"
 #include "replacetool.hpp"
-// KF5
+// KF
 #include <KXmlGuiWindow>
 #include <KLocalizedString>
 #include <KActionCollection>

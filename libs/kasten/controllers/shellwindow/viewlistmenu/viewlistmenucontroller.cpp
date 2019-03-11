@@ -27,7 +27,7 @@
 #include <Kasten/ViewManager>
 // Kasten core
 #include <Kasten/AbstractDocument>
-// KF5
+// KF
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>
 #include <KActionCollection>

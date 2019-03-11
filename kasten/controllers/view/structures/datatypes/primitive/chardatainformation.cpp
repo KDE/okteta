@@ -21,7 +21,7 @@
  */
 #include "chardatainformation.hpp"
 
-// KF5
+// KF
 #include <KLocalizedString>
 // Qt
 #include <QLocale>

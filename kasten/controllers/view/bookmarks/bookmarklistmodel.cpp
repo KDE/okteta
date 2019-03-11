@@ -26,7 +26,7 @@
 #include "bookmarkstool.hpp"
 // Okteta core
 #include <Okteta/Bookmark>
-// KF5
+// KF
 #include <KLocalizedString>
 
 namespace Kasten {

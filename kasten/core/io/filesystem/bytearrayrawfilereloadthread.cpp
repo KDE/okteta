@@ -24,7 +24,7 @@
 
 // Okteta core
 #include <Okteta/PieceTableByteArrayModel>
-// KF5
+// KF
 #include <KLocalizedString>
 // Qt
 #include <QDataStream>

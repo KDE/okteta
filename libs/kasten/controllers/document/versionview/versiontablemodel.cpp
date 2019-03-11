@@ -25,7 +25,7 @@
 // Kasten core
 #include <Kasten/Versionable>
 #include <Kasten/AbstractModel>
-// KF5
+// KF
 #include <KLocalizedString>
 
 #include <QIcon>

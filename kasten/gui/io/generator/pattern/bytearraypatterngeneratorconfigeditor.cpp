@@ -24,7 +24,7 @@
 
 // lib
 #include <bytearraycombobox.hpp>
-// KF5
+// KF
 #include <KLocalizedString>
 // Qt
 #include <QSpinBox>

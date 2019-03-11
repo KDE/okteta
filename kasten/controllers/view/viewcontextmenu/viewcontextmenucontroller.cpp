@@ -24,7 +24,7 @@
 
 // Okteta Kasten gui
 #include <Kasten/Okteta/ByteArrayView>
-// KF5
+// KF
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>
 #include <KLocalizedString>

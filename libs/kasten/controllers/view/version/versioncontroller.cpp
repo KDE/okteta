@@ -26,7 +26,7 @@
 #include <Kasten/DocumentVersionData>
 #include <Kasten/Versionable>
 #include <Kasten/AbstractModel>
-// KF5
+// KF
 #include <KXMLGUIClient>
 #include <KLocalizedString>
 #include <KActionCollection>

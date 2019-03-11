@@ -29,7 +29,7 @@
 #include <abstractbytearraychecksumparametersetedit.hpp>
 #include <abstractbytearraychecksumparameterset.hpp>
 #include <abstractbytearraychecksumalgorithm.hpp>
-// KF5
+// KF
 #include <KComboBox>
 #include <KGuiItem>
 #include <KLocalizedString>

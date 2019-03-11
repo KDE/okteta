@@ -22,7 +22,7 @@
 
 #include "headerfooterframerenderer.hpp"
 
-// KF5
+// KF
 #include <KLocalizedString>
 #include <KUser>
 // Qt

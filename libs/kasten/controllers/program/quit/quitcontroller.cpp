@@ -22,7 +22,7 @@
 
 #include "quitcontroller.hpp"
 
-// KF5
+// KF
 #include <KXmlGuiWindow>
 #include <KActionCollection>
 #include <KStandardAction>

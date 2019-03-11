@@ -29,7 +29,7 @@
 // Okteta core
 #include <Okteta/ValueCodec>
 #include <Okteta/CharCodec>
-// KF5
+// KF
 #include <KColorScheme>
 // Qt
 #include <QPainter>

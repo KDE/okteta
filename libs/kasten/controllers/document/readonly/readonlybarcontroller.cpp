@@ -27,7 +27,7 @@
 // Kasten ui
 #include <Kasten/ToggleButton>
 #include <Kasten/StatusBar>
-// KF5
+// KF
 #include <KLocalizedString>
 
 namespace Kasten {

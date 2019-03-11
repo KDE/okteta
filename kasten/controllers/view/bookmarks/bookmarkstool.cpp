@@ -37,7 +37,7 @@
 #include <Okteta/BookmarksConstIterator>
 #include <Okteta/Bookmark>
 #include <Okteta/AbstractByteArrayModel>
-// KF5
+// KF
 #include <KLocalizedString>
 // Qt
 #include <QWidget>

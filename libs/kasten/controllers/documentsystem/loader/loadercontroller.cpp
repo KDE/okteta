@@ -24,7 +24,7 @@
 
 // Kasten Gui
 #include <Kasten/AbstractDocumentStrategy>
-// KF5
+// KF
 #include <KRecentFilesAction>
 #include <KActionCollection>
 #include <KStandardAction>

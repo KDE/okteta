@@ -27,7 +27,7 @@
 // Kasten core
 #include <Kasten/AbstractModelSynchronizer>
 #include <Kasten/AbstractDocument>
-// KF5
+// KF
 #include <KLocalizedString>
 // Qt
 #include <QLabel>

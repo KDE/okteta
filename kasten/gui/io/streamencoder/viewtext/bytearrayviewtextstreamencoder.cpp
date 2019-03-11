@@ -35,7 +35,7 @@
 // Okteta core
 #include <Okteta/AbstractByteArrayModel>
 #include <Okteta/Character>
-// KF5
+// KF
 #include <KLocalizedString>
 // Qt
 #include <QTextStream>

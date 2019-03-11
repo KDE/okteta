@@ -23,7 +23,7 @@
 #ifndef OKTETAPARTFACTORY_HPP
 #define OKTETAPARTFACTORY_HPP
 
-// KF5
+// KF
 #include <KAboutData>
 #include <KPluginFactory>
 

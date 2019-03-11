@@ -26,7 +26,7 @@
 #include "operandbytearrayfilterparameterset.hpp"
 // Okteta Kasten gui
 #include <Kasten/Okteta/ByteArrayComboBox>
-// KF5
+// KF
 #include <KLocalizedString>
 // Qt
 #include <QCheckBox>

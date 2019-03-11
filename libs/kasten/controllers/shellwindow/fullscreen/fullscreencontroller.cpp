@@ -22,7 +22,7 @@
 
 #include "fullscreencontroller.hpp"
 
-// KF5
+// KF
 #include <KToggleFullScreenAction>
 #include <KXmlGuiWindow>
 #include <KActionCollection>

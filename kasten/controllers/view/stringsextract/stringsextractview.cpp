@@ -25,7 +25,7 @@
 // tool
 #include "containedstringtablemodel.hpp"
 #include "stringsextracttool.hpp"
-// KF5
+// KF
 #include <KGuiItem>
 #include <KLocalizedString>
 // Qt

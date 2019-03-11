@@ -33,7 +33,7 @@
 #include <Okteta/CharCodec>
 #include <Okteta/AbstractByteArrayModel>
 #include <Okteta/ChangesDescribable>
-// KF5
+// KF
 #include <KLocalizedString>
 
 namespace Kasten {

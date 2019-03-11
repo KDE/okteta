@@ -24,7 +24,7 @@
 
 // Kasten core
 #include <Kasten/AbstractDocument>
-// KF5
+// KF
 #include <KXMLGUIClient>
 #include <KLocalizedString>
 #include <KActionCollection>

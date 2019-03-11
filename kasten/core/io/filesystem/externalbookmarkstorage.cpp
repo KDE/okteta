@@ -29,7 +29,7 @@
 #include <Okteta/BookmarksConstIterator>
 #include <Okteta/Bookmark>
 #include <Okteta/AbstractByteArrayModel>
-// KF5
+// KF
 #include <KBookmarkManager>
 // Qt
 #include <QStandardPaths>

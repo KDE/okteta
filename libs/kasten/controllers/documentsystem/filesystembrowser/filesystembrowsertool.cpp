@@ -28,7 +28,7 @@
 #include <Kasten/AbstractDocument>
 #include <Kasten/AbstractModelSynchronizer>
 
-// KF5
+// KF
 #include <KLocalizedString>
 #include <KIO/Global>
 

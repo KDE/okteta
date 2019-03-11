@@ -25,7 +25,7 @@
 // Kasten core
 #include <Kasten/Versionable>
 #include <Kasten/AbstractDocument>
-// KF5
+// KF
 #include <KLocalizedString>
 
 namespace Kasten {

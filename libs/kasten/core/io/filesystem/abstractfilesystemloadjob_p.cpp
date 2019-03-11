@@ -25,7 +25,7 @@
 // library
 #include "abstractmodelfilesystemsynchronizer.hpp"
 #include <abstractdocument.hpp>
-// KF5
+// KF
 #include <KIO/FileCopyJob>
 #include <KJobWidgets>
 // Qt

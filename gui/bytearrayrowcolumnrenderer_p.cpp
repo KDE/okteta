@@ -34,7 +34,7 @@
 #include <Okteta/Bookmark>
 #include <Okteta/CharCodec>
 #include <Okteta/ValueCodec>
-// KF5
+// KF
 #include <KColorScheme>
 // Qt
 #include <QPainter>

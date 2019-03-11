@@ -28,7 +28,7 @@
 #include <Okteta/PieceTableByteArrayModel>
 // Kasten core
 // #include <Kasten/Person>
-// KF5
+// KF
 #include <KLocalizedString>
 // Qt
 #include <QMimeData>

@@ -24,7 +24,7 @@
 
 // lib
 #include "poddecodertool.hpp"
-// KF5
+// KF
 #include <KLocalizedString>
 #include <KColorScheme>
 // Qt

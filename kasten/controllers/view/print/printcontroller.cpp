@@ -24,7 +24,7 @@
 
 // controller
 #include "printtool.hpp"
-// KF5
+// KF
 #include <KXMLGUIClient>
 #include <KActionCollection>
 #include <KStandardAction>

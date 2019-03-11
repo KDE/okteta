@@ -24,7 +24,7 @@
 
 // controller
 #include "searchtool.hpp"
-// KF5
+// KF
 #include <KLocalizedString>
 
 namespace Kasten {

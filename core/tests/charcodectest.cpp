@@ -26,7 +26,7 @@
 #include <charcodec.hpp>
 // lib
 #include <character.hpp>
-// KF5
+// KF
 #include <QTest>
 
 namespace Okteta {

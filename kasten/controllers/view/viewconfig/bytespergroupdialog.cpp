@@ -22,7 +22,7 @@
 
 #include "bytespergroupdialog.hpp"
 
-// KF5
+// KF
 #include <KLocalizedString>
 // Qt
 #include <QFormLayout>

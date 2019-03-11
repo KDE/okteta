@@ -25,7 +25,7 @@
 // Kasten gui
 #include <Kasten/AbstractGroupedViews>
 #include <Kasten/AbstractView>
-// KF5
+// KF
 #include <KXMLGUIClient>
 #include <KActionCollection>
 // Qt

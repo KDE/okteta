@@ -28,7 +28,7 @@
 #include <Okteta/ByteArrayTableLayout>
 // Okteta core
 #include <Okteta/AbstractByteArrayModel>
-// KF5
+// KF
 #include <KLocalizedString>
 // Qt
 #include <QTextStream>

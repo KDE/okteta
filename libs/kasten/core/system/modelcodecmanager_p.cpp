@@ -30,7 +30,7 @@
 #include "abstractoverwritedialog.hpp"
 #include "jobmanager.hpp"
 #include "abstractexportjob.hpp"
-// KF5
+// KF
 #include <KIO/StatJob>
 #include <KJobWidgets>
 #include <KLocalizedString>

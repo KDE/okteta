@@ -26,7 +26,7 @@
 #include <Kasten/AbstractDocumentStrategy>
 // Kasten core
 #include <Kasten/AbstractDocument>
-// KF5
+// KF
 #include <KActionCollection>
 #include <KStandardAction>
 #include <KXMLGUIClient>

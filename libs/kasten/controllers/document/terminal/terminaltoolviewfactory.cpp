@@ -25,7 +25,7 @@
 // lib
 #include "terminaltoolview.hpp"
 #include "terminaltool.hpp"
-// KF5
+// KF
 #include <KLocalizedString>
 
 namespace Kasten {

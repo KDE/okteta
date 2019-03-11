@@ -28,7 +28,7 @@
 #include <Kasten/Okteta/ByteArrayViewProfileManager>
 #include <Kasten/Okteta/ByteArrayViewProfileSynchronizer>
 #include <Kasten/Okteta/ByteArrayView>
-// KF5
+// KF
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>
 #include <KActionMenu>

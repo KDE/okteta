@@ -25,7 +25,7 @@
 // tool
 #include "../types/hexadecimal8.hpp"
 #include "../poddata.hpp"
-// KF5
+// KF
 #include <KLocalizedString>
 
 namespace Okteta {

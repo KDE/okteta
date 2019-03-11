@@ -25,7 +25,7 @@
 // lib
 #include "filtertoolview.hpp"
 #include "filtertool.hpp"
-// KF5
+// KF
 #include <KLocalizedString>
 
 namespace Kasten {

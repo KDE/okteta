@@ -29,7 +29,7 @@
 #include <abstractbytearrayfilterparametersetedit.hpp>
 #include <abstractbytearrayfilterparameterset.hpp>
 #include <abstractbytearrayfilter.hpp>
-// KF5
+// KF
 #include <KLocalizedString>
 #include <KComboBox>
 #include <KGuiItem>

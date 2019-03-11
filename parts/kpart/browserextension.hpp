@@ -23,7 +23,7 @@
 #ifndef OKTETABROWSEREXTENSION_HPP
 #define OKTETABROWSEREXTENSION_HPP
 
-// KF5
+// KF
 #include <KParts/BrowserExtension>
 
 class OktetaPart;

@@ -27,7 +27,7 @@
 //
 #include <addressrangelist.hpp>
 #include <arraychangemetricslist.hpp>
-// KF5
+// KF
 #include <KLocalizedString>
 
 namespace KPieceTable {

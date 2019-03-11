@@ -26,7 +26,7 @@
 #include "../base64/bytearraybase64streamencoder.hpp"
 // Okteta core
 #include <Okteta/AbstractByteArrayModel>
-// KF5
+// KF
 #include <KLocalizedString>
 // Qt
 #include <QTextStream>

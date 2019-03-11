@@ -25,7 +25,7 @@
 // lib
 #include "bytetabletoolview.hpp"
 #include "bytetabletool.hpp"
-// KF5
+// KF
 #include <KLocalizedString>
 
 namespace Kasten {

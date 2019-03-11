@@ -25,7 +25,7 @@
 // controller
 #include "searchdialog.hpp"
 #include "searchtool.hpp"
-// KF5
+// KF
 #include <KXMLGUIClient>
 #include <KLocalizedString>
 #include <KActionCollection>

@@ -31,7 +31,7 @@
 #include <Okteta/Character>
 #include <Okteta/CharCodec>
 #include <Okteta/AbstractByteArrayModel>
-// KF5
+// KF
 #include <KLocalizedString>
 // Qt
 #include <QModelIndex>

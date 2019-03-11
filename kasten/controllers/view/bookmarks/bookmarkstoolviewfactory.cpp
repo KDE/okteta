@@ -25,7 +25,7 @@
 // lib
 #include "bookmarkstoolview.hpp"
 #include "bookmarkstool.hpp"
-// KF5
+// KF
 #include <KLocalizedString>
 
 namespace Kasten {

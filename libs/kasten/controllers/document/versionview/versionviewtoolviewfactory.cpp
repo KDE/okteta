@@ -25,7 +25,7 @@
 // lib
 #include "versionviewtoolview.hpp"
 #include "versionviewtool.hpp"
-// KF5
+// KF
 #include <KLocalizedString>
 
 namespace Kasten {

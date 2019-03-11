@@ -22,7 +22,7 @@
 
 #include "replaceprompt.hpp"
 
-// KF5
+// KF
 #include <KLocalizedString>
 // Qt
 #include <QDialogButtonBox>
