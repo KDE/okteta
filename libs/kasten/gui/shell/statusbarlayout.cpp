@@ -128,6 +128,8 @@ Qt::Orientations StatusBarLayout::expandingDirections() const { return {}; }
 void StatusBarLayout::addWidget(QWidget* widget)
 {
     if (widget) {
+        // TODO: ideally also called, but results in some endless loop, yet to be investigated
+        // addChildWidget(widget);
         mWidgetList.append(new QWidgetItem(widget));
         invalidate();
     }
@@ -157,8 +159,8 @@ void StatusBarLayout::setGeometry(const QRect& _rect)
     if (mIsDirty) {
         updateLayoutStructs();
     }
-
-    QRect rect(0, 0, _rect.width(), _rect.height());
+    const QPoint baseWidgetOffset = parentWidget()->pos();
+    QRect rect(baseWidgetOffset, _rect.size());
 
     const int margin = 0;// this->margin();
     const int spacing = this->spacing();
@@ -189,7 +191,7 @@ void StatusBarLayout::setGeometry(const QRect& _rect)
             break;
         }
 
-        const QPoint pos(margin + usedWidth + itemSpacing, margin);
+        const QPoint pos(baseWidgetOffset.x() + margin + usedWidth + itemSpacing, baseWidgetOffset.y() + margin);
         const QSize size(itemWidth, availableHeight);
         QRect r(pos, size);
 
