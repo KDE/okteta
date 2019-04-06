@@ -45,6 +45,8 @@ StatusBar::~StatusBar() = default;
 
 void StatusBar::addWidget(QWidget* widget)
 {
+    // ensure statusbar is the parent, as expected also with QStatusBar
+    widget->setParent(this);
     mLayout->addWidget(widget);
 }
 
