@@ -24,7 +24,7 @@
 #include "structuresmanagerview.hpp"
 #include "structureaddremovewidget.hpp"
 
-#include "structureviewpreferences.h"
+#include "structureviewpreferences.hpp"
 #include "../structuresmanager.hpp"
 #include "../structurestool.hpp"
 #include "../structlogging.hpp"

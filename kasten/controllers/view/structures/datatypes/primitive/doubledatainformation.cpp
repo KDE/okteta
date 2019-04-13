@@ -28,7 +28,7 @@
 #include <QLocale>
 #include <QDoubleSpinBox>
 
-#include "structureviewpreferences.h"
+#include "structureviewpreferences.hpp"
 
 QWidget* DoubleDataInformationMethods::staticCreateEditWidget(QWidget* parent)
 {

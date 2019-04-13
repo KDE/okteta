@@ -25,7 +25,7 @@
 // tool
 #include "infotool.hpp"
 #include "statistictablemodel.hpp"
-#include <infoviewsettings.h>
+#include <infoviewsettings.hpp>
 // KF
 #include <KGuiItem>
 #include <KLocalizedString>

@@ -22,7 +22,7 @@
 #include "primitivedatainformation.hpp"
 #include "../datainformation.hpp"
 #include "../topleveldatainformation.hpp"
-#include "structureviewpreferences.h"
+#include "structureviewpreferences.hpp"
 
 PrimitiveDataInformationWrapper::PrimitiveDataInformationWrapper(const PrimitiveDataInformationWrapper& d)
     : PrimitiveDataInformation(d)

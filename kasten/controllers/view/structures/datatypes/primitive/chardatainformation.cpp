@@ -28,7 +28,7 @@
 #include <QScriptValue>
 #include <QLineEdit>
 
-#include "structureviewpreferences.h"
+#include "structureviewpreferences.hpp"
 
 namespace {
 QString charString(quint8 value)

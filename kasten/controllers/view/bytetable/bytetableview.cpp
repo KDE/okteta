@@ -26,7 +26,7 @@
 // tool
 #include "bytetabletool.hpp"
 #include "bytetablemodel.hpp"
-#include <bytetableviewsettings.h>
+#include <bytetableviewsettings.hpp>
 // KF
 #include <QPushButton>
 #include <KLocalizedString>

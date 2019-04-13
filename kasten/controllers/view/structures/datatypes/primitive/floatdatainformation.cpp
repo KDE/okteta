@@ -29,7 +29,7 @@
 #include <QDoubleSpinBox>
 #include <QLocale>
 
-#include "structureviewpreferences.h"
+#include "structureviewpreferences.hpp"
 
 QWidget* FloatDataInformationMethods::staticCreateEditWidget(QWidget* parent)
 {

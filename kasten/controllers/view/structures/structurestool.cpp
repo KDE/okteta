@@ -38,7 +38,7 @@
 
 #include "script/scripthandler.hpp"
 #include "datatypes/datainformation.hpp"
-#include "structureviewpreferences.h"
+#include "structureviewpreferences.hpp"
 
 namespace Kasten {
 

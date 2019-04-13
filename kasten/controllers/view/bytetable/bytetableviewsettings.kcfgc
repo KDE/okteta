@@ -1,5 +1,6 @@
 # Code generation options for kconfig_compiler
 File=bytetableviewsettings.kcfg
+HeaderExtension=hpp
 ClassName=ByteTableViewSettings
 NameSpace=Kasten
 Singleton=true

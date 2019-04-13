@@ -24,7 +24,7 @@
 
 #include "topleveldatainformation.hpp"
 #include "additionaldata.hpp"
-#include <structureviewpreferences.h>
+#include "structureviewpreferences.hpp"
 #include "../script/scriptlogger.hpp"
 #include "../script/safereference.hpp"
 

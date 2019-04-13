@@ -23,7 +23,7 @@
 #define KASTEN_SINTDATAINFORMATION_HPP
 
 #include "primitivedatainformation.hpp"
-#include "structureviewpreferences.h"
+#include "structureviewpreferences.hpp"
 
 template <typename T>
 class SIntDataInformationMethods

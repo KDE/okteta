@@ -30,7 +30,7 @@
 #include "structureviewitemdelegate.hpp"
 #include "structlogging.hpp"
 // settings
-#include "structureviewpreferences.h"
+#include "structureviewpreferences.hpp"
 #include "settings/structureviewsettingswidget.hpp"
 #include "settings/structuresmanagerview.hpp"
 #include "settings/structureaddremovewidget.hpp"

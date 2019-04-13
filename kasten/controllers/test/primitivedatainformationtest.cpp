@@ -33,7 +33,7 @@
 #include "view/structures/datatypes/primitive/bitfield/unsignedbitfielddatainformation.hpp"
 #include "view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.hpp"
 #include "view/structures/datatypes/primitivefactory.hpp"
-#include "structureviewpreferences.h"
+#include "structureviewpreferences.hpp"
 
 inline uint qHash(PrimitiveDataType type)
 {

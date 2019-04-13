@@ -22,7 +22,7 @@
 
 #include "structureviewsettingswidget.hpp"
 
-#include "structureviewpreferences.h"
+#include "structureviewpreferences.hpp"
 #include "../structlogging.hpp"
 
 #include <KLocalizedString>

@@ -1,5 +1,6 @@
 # Code generation options for kconfig_compiler
 File=infoviewsettings.kcfg
+HeaderExtension=hpp
 ClassName=InfoViewSettings
 NameSpace=Kasten
 Singleton=true

@@ -20,7 +20,7 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "primitivedatatype.hpp"
-#include "structureviewpreferences.h"
+#include "structureviewpreferences.hpp"
 
 #include <KLocalizedString>
 #include <QDebug>

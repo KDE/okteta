@@ -241,7 +241,7 @@ private:
 
 private:
     void setValidationError(const QString& errorMessage); // only called by ScriptHandler
-    QSysInfo::Endian byteOrderFromSettings() const; // so there is no need to include structureviewpreferences.h here
+    QSysInfo::Endian byteOrderFromSettings() const; // so there is no need to include structureviewpreferences.hpp here
     QString customToString(const QScriptValue& func) const;
 
 protected:

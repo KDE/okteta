@@ -30,7 +30,7 @@
 #include <QLocale>
 
 #include "../../../poddecoder/typeeditors/uintspinbox.hpp"
-#include "structureviewpreferences.h"
+#include "structureviewpreferences.hpp"
 
 template <typename T>
 QScriptValue UIntDataInformationMethods<T>::asScriptValue(T value, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
