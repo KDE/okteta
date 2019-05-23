@@ -208,19 +208,20 @@ void ViewProfileController::onCreateNewActionTriggered()
     viewProfile.setUndefinedChar(mByteArrayView->undefinedChar());
     viewProfile.setSubstituteChar(mByteArrayView->substituteChar());
     dialog->setViewProfile(viewProfile);
+    connect(dialog, &ViewProfileEditDialog::viewProfileAccepted,
+            this, &ViewProfileController::addNewViewProfile);
 
-    const int answer = dialog->exec();
+    dialog->open();
+}
 
-    if (answer == QDialog::Accepted) {
-        QVector<ByteArrayViewProfile> viewProfiles {
-            dialog->viewProfile()
-        };
-        mViewProfileManager->saveViewProfiles(viewProfiles);
+void ViewProfileController::addNewViewProfile(const ByteArrayViewProfile& viewProfile)
+{
+    QVector<ByteArrayViewProfile> viewProfiles {
+        viewProfile
+    };
+    mViewProfileManager->saveViewProfiles(viewProfiles);
 
-        mByteArrayViewProfileSynchronizer->setViewProfileId(viewProfiles.at(0).id());
-    }
-
-    delete dialog;
+    mByteArrayViewProfileSynchronizer->setViewProfileId(viewProfiles.at(0).id());
 }
 
 void ViewProfileController::onResetChangesActionTriggered()

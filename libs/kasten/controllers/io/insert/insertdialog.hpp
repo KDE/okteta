@@ -29,17 +29,27 @@
 namespace Kasten {
 
 class AbstractModelDataGeneratorConfigEditor;
+class AbstractModelDataGenerator;
 
 class InsertDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit InsertDialog(AbstractModelDataGeneratorConfigEditor* configEditor, QWidget* parent = nullptr);
+    explicit InsertDialog(AbstractModelDataGeneratorConfigEditor* configEditor,
+                          AbstractModelDataGenerator* generator,
+                          QWidget* parent = nullptr);
     ~InsertDialog() override;
 
+Q_SIGNALS:
+    void insertAccepted(AbstractModelDataGenerator* generator);
+
+private Q_SLOTS:
+    void onFinished(int result);
+
 private:
-    AbstractModelDataGeneratorConfigEditor* mConfigEditor;
+    AbstractModelDataGeneratorConfigEditor* const mConfigEditor;
+    AbstractModelDataGenerator* const m_generator;
 };
 
 }

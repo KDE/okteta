@@ -57,9 +57,7 @@ void ViewProfilesManageController::setTargetModel(AbstractModel* model)
 void ViewProfilesManageController::manageProfiles()
 {
     auto* dialog = new ViewProfilesManageDialog(mViewProfileManager, mParentWidget);
-    dialog->exec();
-
-    delete dialog;
+    dialog->open();
 }
 
 }

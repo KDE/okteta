@@ -33,13 +33,17 @@ namespace Kasten {
 BookmarkEditPopup::BookmarkEditPopup(QWidget* parent)
     : AbstractLinePopup(parent)
 {
+    setAttribute(Qt::WA_DeleteOnClose, true);
+
     setIcon(QIcon::fromTheme(QStringLiteral("bookmark-new")));
 
     mBookmarkNameLineEdit = new QLineEdit(this);
     mBookmarkNameLineEdit->setClearButtonEnabled(true);
-    connect(mBookmarkNameLineEdit, &QLineEdit::returnPressed, this, &BookmarkEditPopup::onReturnPressed);
+    connect(mBookmarkNameLineEdit, &QLineEdit::returnPressed, this, &AbstractLinePopup::accept);
 
     setWidget(mBookmarkNameLineEdit);
+
+    connect(this, &AbstractLinePopup::finished, this, &BookmarkEditPopup::onFinished);
 }
 
 BookmarkEditPopup::~BookmarkEditPopup() = default;
@@ -52,10 +56,18 @@ void BookmarkEditPopup::setName(const QString& name)
     mBookmarkNameLineEdit->selectAll();
 }
 
-void BookmarkEditPopup::onReturnPressed()
+void BookmarkEditPopup::setCursorPosition(int cursorPosition)
 {
-    setResult(1);
-    close();
+    m_cursorPosition = cursorPosition;
+}
+
+void BookmarkEditPopup::onFinished(int result)
+{
+    if (result != Accepted) {
+        return;
+    }
+
+    emit bookmarkAccepted(m_cursorPosition, name());
 }
 
 }

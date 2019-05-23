@@ -32,9 +32,9 @@
 #include <KConfigGroup>
 #include <KSharedConfig>
 // Qt
-#include <QUrl>
 #include <QFileDialog>
 #include <QMimeDatabase>
+#include <QApplication>
 
 namespace Kasten {
 
@@ -70,14 +70,18 @@ void LoaderController::setTargetModel(AbstractModel* model)
 
 void LoaderController::load()
 {
-    QFileDialog dialog;
-    dialog.setMimeTypeFilters(mDocumentStrategy->supportedRemoteTypes());
-    if (dialog.exec() != 0) {
-        const QList<QUrl> urls = dialog.selectedUrls();
+    auto* dialog = new QFileDialog(QApplication::activeWindow());
+    dialog->setAttribute(Qt::WA_DeleteOnClose, true);
+    dialog->setFileMode(QFileDialog::ExistingFiles);
+    dialog->setMimeTypeFilters(mDocumentStrategy->supportedRemoteTypes());
+    connect(dialog, &QFileDialog::urlsSelected, this, &LoaderController::loadUrls);
+    dialog->open();
+}
 
-        for (const QUrl& url : urls) {
-            mDocumentStrategy->load(url);
-        }
+void LoaderController::loadUrls(const QList<QUrl>& urls)
+{
+    for (const QUrl& url : urls) {
+        mDocumentStrategy->load(url);
     }
 }
 

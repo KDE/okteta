@@ -81,6 +81,35 @@ int AbstractLinePopup::exec()
     return d->exec();
 }
 
+void AbstractLinePopup::open()
+{
+    Q_D(AbstractLinePopup);
+
+    d->open();
+}
+
+int AbstractLinePopup::result() const
+{
+    Q_D(const AbstractLinePopup);
+
+    return d->result();
+}
+
+
+void AbstractLinePopup::accept()
+{
+    Q_D(AbstractLinePopup);
+
+    d->accept();
+}
+
+void AbstractLinePopup::reject()
+{
+    Q_D(AbstractLinePopup);
+
+    d->reject();
+}
+
 bool AbstractLinePopup::eventFilter(QObject* object, QEvent* event)
 {
     Q_D(AbstractLinePopup);

@@ -66,6 +66,9 @@ public: // const AbstractDocumentStrategy API
     bool canCloseAllOther(AbstractDocument* document) const;
 
 private:
+    void triggerGeneration(AbstractModelDataGenerator* generator);
+
+private:
     Q_DECLARE_PUBLIC(SingleDocumentStrategy)
 
 private:

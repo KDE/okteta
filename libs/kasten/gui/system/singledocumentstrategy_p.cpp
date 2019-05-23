@@ -118,12 +118,21 @@ void SingleDocumentStrategyPrivate::createNewWithGenerator(AbstractModelDataGene
 
     if (configEditor) {
         // TODO: make dialog abstract for different UIs
-        auto* dialog = new CreateDialog(configEditor);
+        auto* dialog = new CreateDialog(configEditor, generator, QApplication::activeWindow());
 //         dialog->setData( mModel, selection ); TODO
-        if (dialog->exec() == 0) {
-            return;
-        }
+        QObject::connect(dialog, &CreateDialog::createAccepted, q, [this](AbstractModelDataGenerator* generator) {
+            triggerGeneration(generator);
+        });
+        dialog->open();
+        return;
     }
+
+    triggerGeneration(generator);
+}
+
+void SingleDocumentStrategyPrivate::triggerGeneration(AbstractModelDataGenerator* generator)
+{
+    Q_Q(SingleDocumentStrategy);
 
     QApplication::setOverrideCursor(Qt::WaitCursor);
 

@@ -69,6 +69,9 @@ private Q_SLOTS: // action slots
     void updateBookmarks();
     void onBookmarkTriggered(QAction*);
 
+private Q_SLOTS: // exectute slots
+    void addBookmark(int cursorPosition, const QString& name);
+
 private Q_SLOTS:
     void onBookmarksAdded(const QVector<Okteta::Bookmark>& bookmarks);
     void onBookmarksRemoved(const QVector<Okteta::Bookmark>& bookmarks);

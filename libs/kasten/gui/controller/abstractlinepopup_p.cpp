@@ -67,24 +67,52 @@ void AbstractLinePopupPrivate::setPosition(const QPoint& globalPosition)
 void AbstractLinePopupPrivate::setVisible(bool visible)
 {
     p->QWidget::setVisible(visible);
-    if (mEventLoop) {
+    if (!visible && mEventLoop) {
         mEventLoop->exit();
     }
 }
 
 int AbstractLinePopupPrivate::exec()
 {
-    if (mWidget) {
-        mWidget->setFocus();
-    }
-    p->show();
+    open();
 
     QEventLoop eventLoop;
     mEventLoop = &eventLoop;
     eventLoop.exec();
     mEventLoop = nullptr;
 
+    emit p->finished(mResult);
+
     return mResult;
+}
+
+void AbstractLinePopupPrivate::open()
+{
+    if (mWidget) {
+        mWidget->setFocus();
+    }
+    p->show();
+}
+
+void AbstractLinePopupPrivate::accept()
+{
+    done(AbstractLinePopup::Accepted);
+}
+
+void AbstractLinePopupPrivate::reject()
+{
+    done(AbstractLinePopup::Rejected);
+}
+
+void AbstractLinePopupPrivate::done(int result)
+{
+    setResult(result);
+
+    p->hide();
+
+    emit p->finished(result);
+
+    p->close();
 }
 
 }

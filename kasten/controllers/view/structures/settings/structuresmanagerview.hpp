@@ -62,6 +62,7 @@ private Q_SLOTS:
     void onGetNewStructuresClicked(const KNS3::Entry::List& changedEntries);
     void onPluginSelectorChange(bool change);
     void advancedSelection();
+    void setSelectedStructures(const QStringList& selectedStructures);
 
 private:
     void rebuildPluginSelectorEntries();

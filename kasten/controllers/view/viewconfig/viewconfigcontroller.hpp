@@ -49,8 +49,8 @@ private Q_SLOTS: // action slots
     void setValueCoding(int valueCoding);
     void setCharCoding(int valueCoding);
     void setShowsNonprinting(bool on);
-    void setBytesPerLine();
-    void setBytesPerGroup();
+    void showBytesPerLineDialog();
+    void showBytesPerGroupDialog();
     void setLayoutStyle(int layoutStyle);
     void setOffsetCoding(int offsetCoding);
     void toggleOffsetColumn(bool on);
@@ -63,6 +63,9 @@ private Q_SLOTS: // action slots
     void onCharCodecChanged(const QString& charCodecName);
     void onLayoutStyleChanged(int layoutStyle);
     void onVisibleByteArrayCodingsChanged(int visibleByteArrayCodings);
+
+    void setBytesPerLine(int bytesPerLine);
+    void setBytesPerGroup(int bytesPerGroup);
 
 private:
     ByteArrayView* mByteArrayView = nullptr;

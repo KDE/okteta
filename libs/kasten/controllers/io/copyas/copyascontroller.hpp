@@ -37,6 +37,8 @@ class ModelCodecManager;
 namespace If {
 class DataSelectable;
 }
+class AbstractModelStreamEncoder;
+class AbstractModelSelection;
 
 class CopyAsController : public AbstractXmlGuiController
 {
@@ -53,6 +55,8 @@ public: // AbstractXmlGuiController API
 private Q_SLOTS:
     void updateActions();
     void onActionTriggered(QAction* action);
+    void triggerExecution(AbstractModelStreamEncoder* encoder,
+                          const AbstractModelSelection* selection);
 
 private:
     ModelCodecViewManager* mModelCodecViewManager;

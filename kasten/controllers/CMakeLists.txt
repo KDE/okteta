@@ -442,6 +442,7 @@ oktetakastencontrollers_add_sublibrary_structures_tested(view/structures
 oktetakastencontrollers_add_sublibrary(view/structures/settings
     PRIVATE
         StructureAddRemoveWidget
+        StructuresSelectionDialog
         StructureViewSettingsWidget
         StructuresManagerView
     UI structureviewsettingswidget.ui
@@ -484,6 +485,7 @@ oktetakastencontrollers_add_sublibrary(view/print
         AbstractColumnFrameRenderer
         PrintColumnStylist
         ByteArrayFrameRenderer
+        PrintDialog
         PrintController
 )
 set_source_files_properties(view/print/printtool.cpp PROPERTIES

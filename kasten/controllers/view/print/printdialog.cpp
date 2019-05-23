@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    Copyright 2010,2014 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2019 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,41 +20,23 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KASTEN_BYTESPERGROUPDIALOG_HPP
-#define KASTEN_BYTESPERGROUPDIALOG_HPP
-
+#include "printdialog.hpp"
 // Qt
-#include <QDialog>
-
-class QSpinBox;
+#include <QPrinter>
 
 namespace Kasten {
 
-class BytesPerGroupDialog : public QDialog
+PrintDialog::PrintDialog(QPrinter* printer, QWidget* parent)
+    : QPrintDialog(printer, parent)
 {
-    Q_OBJECT
-
-public:
-    explicit BytesPerGroupDialog(QWidget* parent = nullptr);
-
-    ~BytesPerGroupDialog() override;
-
-public:
-    void setGroupedBytesCount(int groupedBytesCount);
-
-public:
-    int groupedBytesCount() const;
-
-Q_SIGNALS:
-    void bytesPerGroupAccepted(int groupedBytesCount);
-
-private Q_SLOTS:
-    void onFinished(int result);
-
-private:
-    QSpinBox* mGroupedBytesCountEdit;
-};
-
+    setAttribute(Qt::WA_DeleteOnClose, true);
 }
 
-#endif
+PrintDialog::~PrintDialog()
+{
+    if (result() != QDialog::Accepted) {
+        delete printer();
+    }
+}
+
+}

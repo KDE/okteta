@@ -30,6 +30,8 @@ namespace Okteta {
 class AbstractByteArrayModel;
 }
 
+class QPrinter;
+
 namespace Kasten {
 
 class ByteArrayView;
@@ -71,6 +73,9 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void viewChanged(bool hasView);
+
+private Q_SLOTS:
+    void triggerPrint(QPrinter* printer);
 
 private:
     ByteArrayDocument* mDocument = nullptr;
