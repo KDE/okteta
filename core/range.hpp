@@ -44,10 +44,11 @@ public:
         : Start(null())
         , End(null())
     {}
+    Range(const Range& R) = default;
     ~Range() = default;
 
 public:
-    Range& operator=(const Range& R) { Start = R.Start; End = R.End; return *this; }
+    Range& operator=(const Range& R) = default;
 
 public:
     bool operator==(const Range& R) const
