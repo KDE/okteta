@@ -81,6 +81,7 @@ protected: // API to be implemented
 private Q_SLOTS:
     void onSearchDataChanged(const QByteArray& ata);
     void onSearchDataFormatChanged(int Format);
+    void onSelectedToggled(bool checked);
     void forwardFindButtonClicked();
 
 private:

@@ -149,6 +149,9 @@ void AbstractFindDialog::setupCheckBoxes(QCheckBox* optionCheckBox)
 //     if( optionCheckBox )
 //         setTabOrder( SelectedCheckBox, optionCheckBox );
 
+    connect(SelectedCheckBox, &QAbstractButton::toggled,
+            this, &AbstractFindDialog::onSelectedToggled);
+
     onSearchDataFormatChanged(SearchDataEdit->format());
 }
 
@@ -187,6 +190,11 @@ void AbstractFindDialog::setCharCodec(const QString& codecName)
 void AbstractFindDialog::rememberCurrentSettings()
 {
     SearchDataEdit->rememberCurrentByteArray();
+}
+
+void AbstractFindDialog::onSelectedToggled(bool checked)
+{
+    AtCursorCheckBox->setEnabled(!checked);
 }
 
 void AbstractFindDialog::onFindButtonClicked()
