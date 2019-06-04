@@ -73,6 +73,7 @@ void SearchDialog::showEvent(QShowEvent* showEvent)
 {
     AbstractFindDialog::showEvent(showEvent);
 
+    setInSelectionEnabled(mTool->hasSelectedData());
     setInSelection(mTool->hasSelectedData());
 }
 

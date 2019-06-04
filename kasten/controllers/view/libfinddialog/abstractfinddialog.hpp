@@ -52,6 +52,7 @@ public:
 public: // set
     void setDirection(FindDirection Direction);
     void setInSelection(bool InSelection);
+    void setInSelectionEnabled(bool inSelectionEnabled);
 
 public: // get
     QByteArray data() const;

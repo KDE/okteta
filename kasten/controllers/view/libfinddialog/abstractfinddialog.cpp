@@ -182,6 +182,14 @@ void AbstractFindDialog::setInSelection(bool InSelection)
     SelectedCheckBox->setChecked(InSelection);
 }
 
+void AbstractFindDialog::setInSelectionEnabled(bool inSelectionEnabled)
+{
+    if (!inSelectionEnabled) {
+        SelectedCheckBox->setChecked(false);
+    }
+    SelectedCheckBox->setEnabled(inSelectionEnabled);
+}
+
 void AbstractFindDialog::setCharCodec(const QString& codecName)
 {
     SearchDataEdit->setCharCodec(codecName);
