@@ -48,7 +48,7 @@ SearchDialog::SearchDialog(SearchTool* tool, QWidget* parent)
     setupCheckBoxes();
 
     setFindButtonEnabled(false);
-    setModal(false);
+    setModal(true);
 
     setCharCodec(mTool->charCodingName());
     connect(mTool,  &SearchTool::charCodecChanged,
