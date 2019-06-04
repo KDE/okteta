@@ -50,6 +50,10 @@ public:
 
 public:
     Okteta::Address exec();
+    void start();
+
+Q_SIGNALS:
+    void finished(Okteta::Address position);
 
 private:
     int indexOfIgnoreCase();
@@ -66,6 +70,8 @@ private:
     Okteta::Address mEndIndex;
     Qt::CaseSensitivity mCaseSensitivity;
     const Okteta::CharCodec* mCharCodec;
+
+    Okteta::Address m_result = -1;
 };
 
 }

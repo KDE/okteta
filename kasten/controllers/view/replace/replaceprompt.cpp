@@ -28,7 +28,6 @@
 #include <QDialogButtonBox>
 #include <QVBoxLayout>
 #include <QPushButton>
-#include <QEventLoop>
 
 namespace Kasten {
 
@@ -62,37 +61,24 @@ ReplacePrompt::ReplacePrompt(QWidget* parent)
     replaceButton->setDefault(true);
 }
 
-ReplaceBehaviour ReplacePrompt::query()
-{
-    QEventLoop eventLoop;
-    mEventLoop = &eventLoop;
-    eventLoop.exec();
-
-    return mResult;
-}
-
 void ReplacePrompt::onReplaceAllButton()
 {
-    mResult = ReplaceAll;
-    mEventLoop->quit();
+    emit finished(ReplaceAll);
 }
 
 void ReplacePrompt::onSkipButton()
 {
-    mResult = SkipCurrent;
-    mEventLoop->quit();
+    emit finished(SkipCurrent);
 }
 
 void ReplacePrompt::onReplaceButton()
 {
-    mResult = ReplaceCurrent;
-    mEventLoop->quit();
+    emit finished(ReplaceCurrent);
 }
 
 void ReplacePrompt::onCloseButton()
 {
-    mResult = CancelReplacing;
-    mEventLoop->quit();
+    emit finished(CancelReplacing);
 }
 
 }

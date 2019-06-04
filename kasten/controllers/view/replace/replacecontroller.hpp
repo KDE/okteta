@@ -44,6 +44,9 @@ class ReplaceController : public AbstractXmlGuiController
                         , public If::ReplaceUserQueryable
 {
     Q_OBJECT
+    Q_INTERFACES(
+        Kasten::If::ReplaceUserQueryable
+    )
 
 public:
     ReplaceController(KXMLGUIClient* guiClient, QWidget* parentWidget);
@@ -54,12 +57,17 @@ public: // AbstractXmlGuiController API
     void setTargetModel(AbstractModel* model) override;
 
 public: // If::ReplaceUserQueryable API
-    bool queryContinue(FindDirection direction, int noOfReplacements) const override;
-    ReplaceBehaviour queryReplaceCurrent() const override;
+    void queryContinue(FindDirection direction, int noOfReplacements) override;
+    void queryReplaceCurrent() override;
+
+Q_SIGNALS: // If::ReplaceUserQueryable API
+    void queryContinueFinished(bool result) override;
+    void queryReplaceCurrentFinished(ReplaceBehaviour result) override;
 
 private Q_SLOTS: // action slots
     void replace();
 
+    void onPromptReply(ReplaceBehaviour behaviour);
     void onFinished(bool previousFound, int noOfReplacements);
 
 private:

@@ -225,6 +225,7 @@ oktetakastencontrollers_add_sublibrary(view/replace
         ReplaceController
         ReplaceDialog
         ReplacePrompt
+        ReplaceJob
         ReplaceTool
 )
 

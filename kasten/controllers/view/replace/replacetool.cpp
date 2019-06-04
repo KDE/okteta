@@ -23,20 +23,15 @@
 #include "replacetool.hpp"
 
 // controller
-#include "replaceuserqueryable.hpp"
-// search controller
-#include "../search/searchjob.hpp"
+#include "replacejob.hpp"
 // Okteta Kasten gui
 #include <Kasten/Okteta/ByteArrayView>
 // Okteta Kasten core
 #include <Kasten/Okteta/ByteArrayDocument>
 // Okteta core
-#include <Okteta/CharCodec>
 #include <Okteta/AbstractByteArrayModel>
 // KF
 #include <KLocalizedString>
-// Qt
-#include <QApplication>
 
 namespace Kasten {
 
@@ -49,7 +44,7 @@ ReplaceTool::~ReplaceTool() = default;
 
 bool ReplaceTool::isApplyable() const
 {
-    return (mByteArrayView && mByteArrayModel && !mByteArrayView->isReadOnly());
+    return (mByteArrayView && mByteArrayModel && !mByteArrayView->isReadOnly()) && !mReplaceJob;
 //     const int newPosition = finalTargetOffset();
 
 //     return ( mByteArrayView && mByteArrayModel
@@ -89,7 +84,7 @@ void ReplaceTool::setTargetModel(AbstractModel* model)
     }
 }
 
-void ReplaceTool::setUserQueryAgent(If::ReplaceUserQueryable* userQueryAgent)
+void ReplaceTool::setUserQueryAgent(QObject* userQueryAgent)
 {
     mUserQueryAgent = userQueryAgent;
 }
@@ -134,141 +129,51 @@ void ReplaceTool::setDoPrompt(bool doPrompt)
 
 void ReplaceTool::replace(FindDirection direction, bool fromCursor, bool inSelection)
 {
-    mPreviousFound = false;
-
     Okteta::Address startIndex;
+
+    Okteta::Address replaceFirstIndex;
+    Okteta::Address replaceLastIndex;
+    bool doWrap;
 
     if (inSelection) {
         const Okteta::AddressRange selection = mByteArrayView->selection();
         if (!selection.isValid()) {
+            mReplaceJob = nullptr;
             // nothing selected, so skip any search and finish now
             emit finished(false, 0);
             return;
         }
 
-        mReplaceFirstIndex = selection.start();
-        mReplaceLastIndex =  selection.end();
+        replaceFirstIndex = selection.start();
+        replaceLastIndex =  selection.end();
         startIndex = selection.start();
-        mDoWrap = true; // TODO: no wrapping needed, or?
-        direction = FindForward; // TODO: why only forward?
+        doWrap = false;
+        // TODO: support finding following selection direction
+        direction = FindForward;
     } else {
         const Okteta::Address cursorPosition = mByteArrayView->cursorPosition();
         if (fromCursor && (cursorPosition != 0)) {
-            mReplaceFirstIndex = cursorPosition;
-            mReplaceLastIndex =  cursorPosition - 1;
+            replaceFirstIndex = cursorPosition;
+            replaceLastIndex =  cursorPosition - 1;
         } else {
-            mReplaceFirstIndex = 0;
-            mReplaceLastIndex =  mByteArrayModel->size() - 1;
+            replaceFirstIndex = 0;
+            replaceLastIndex =  mByteArrayModel->size() - 1;
         }
-        startIndex = (direction == FindForward) ? mReplaceFirstIndex : mReplaceLastIndex /*-mSearchData.size()*/;
-        mDoWrap = (direction == FindForward) ? (mReplaceLastIndex < startIndex) : (startIndex < mReplaceFirstIndex);
+        startIndex = (direction == FindForward) ? replaceFirstIndex : replaceLastIndex /*-mSearchData.size()*/;
+        doWrap = (direction == FindForward) ? (replaceLastIndex < startIndex) : (startIndex < replaceFirstIndex);
     }
 
-    doReplace(direction, startIndex);
-}
+    mReplaceJob = new ReplaceJob(mByteArrayView, mByteArrayModel, mUserQueryAgent, this);
+    mReplaceJob->setSearchData(mSearchData);
+    mReplaceJob->setReplaceData(mReplaceData);
+    mReplaceJob->setCaseSensitivity(mCaseSensitivity);
+    mReplaceJob->setDoPrompt(mDoPrompt);
+    mReplaceJob->setRange(replaceFirstIndex, replaceLastIndex, direction, startIndex, doWrap);
+    connect(mReplaceJob, &ReplaceJob::finished, this, &ReplaceTool::onJobFinished);
 
-void ReplaceTool::doReplace(FindDirection direction, Okteta::Address startIndex)
-{
-    QApplication::setOverrideCursor(Qt::WaitCursor);
+    emit isApplyableChanged(isApplyable());
 
-    int noOfReplacements = 0;
-
-    while (true) {
-        const bool isForward = (direction == FindForward);
-        Okteta::Address endIndex = mDoWrap ?
-                                   (isForward ? mByteArrayModel->size() - 1 : 0) :
-                                   (isForward ? mReplaceLastIndex : mReplaceFirstIndex);
-
-        SearchJob* searchJob =
-            new SearchJob(mByteArrayModel, mSearchData, startIndex, endIndex, mCaseSensitivity, mByteArrayView->charCodingName());
-        const Okteta::Address pos = searchJob->exec();
-
-        if (pos != -1) {
-            mPreviousFound = true;
-
-            startIndex = pos;
-            bool currentToBeReplaced;
-            bool isCancelled;
-
-            if (mDoPrompt) {
-                QApplication::restoreOverrideCursor();
-
-                mByteArrayView->setSelection(pos, pos + mSearchData.size() - 1);
-
-                const ReplaceBehaviour replaceBehaviour = mUserQueryAgent ?
-                                                          mUserQueryAgent->queryReplaceCurrent() :
-                                                          ReplaceAll;
-
-                mByteArrayView->selectAllData(false);
-
-                switch (replaceBehaviour)
-                {
-                case ReplaceAll:
-                    mDoPrompt = false;
-                    currentToBeReplaced = true;
-                    isCancelled = false;
-                    break;
-                case ReplaceCurrent:
-                    currentToBeReplaced = true;
-                    isCancelled = false;
-                    break;
-                case SkipCurrent:
-                    if (isForward) {
-                        ++startIndex;
-                    } else {
-                        --startIndex;
-                    }
-                    currentToBeReplaced = false;
-                    isCancelled = false;
-                    break;
-                case CancelReplacing:
-                default:
-                    currentToBeReplaced = false;
-                    isCancelled = true;
-                    mDoWrap = false;
-                }
-            } else {
-                currentToBeReplaced = true;
-                isCancelled = false;
-            }
-
-            if (currentToBeReplaced) {
-                ++noOfReplacements;
-                const Okteta::Size inserted = mByteArrayModel->replace(startIndex, mSearchData.size(),
-                                                                       reinterpret_cast<const Okteta::Byte*>(mReplaceData.constData()),
-                                                                       mReplaceData.size());
-                if (isForward) {
-                    startIndex += inserted;
-                } else {
-                    startIndex -= inserted;
-                }
-            }
-
-            if (!isCancelled) {
-                continue;
-            }
-        }
-
-        QApplication::restoreOverrideCursor();
-        // reached end
-        if (mDoWrap) {
-            const bool wrapping = mUserQueryAgent ? mUserQueryAgent->queryContinue(direction, noOfReplacements) : true;
-
-            if (!wrapping) {
-                break;
-            }
-
-            startIndex = (direction == FindForward) ? 0 : mByteArrayModel->size() - 1;
-            mDoWrap = false;
-            noOfReplacements = 0;
-
-            QApplication::setOverrideCursor(Qt::WaitCursor);
-        } else {
-            emit finished(mPreviousFound, noOfReplacements);
-
-            break;
-        }
-    }
+    mReplaceJob->start();
 }
 
 void ReplaceTool::onReadOnlyChanged(bool isReadOnly)
@@ -276,6 +181,15 @@ void ReplaceTool::onReadOnlyChanged(bool isReadOnly)
     Q_UNUSED(isReadOnly)
 
     // TODO: find out if isApplyable really changed, perhaps by caching the readonly state?
+    emit isApplyableChanged(isApplyable());
+}
+
+void ReplaceTool::onJobFinished(bool previousFound, int noOfReplacements)
+{
+    delete mReplaceJob;
+    mReplaceJob = nullptr;
+
+    emit finished(previousFound, noOfReplacements);
     emit isApplyableChanged(isApplyable());
 }
 

@@ -28,8 +28,6 @@
 // Qt
 #include <QDialog>
 
-class QEventLoop;
-
 namespace Kasten {
 
 class ReplacePrompt : public QDialog
@@ -39,19 +37,14 @@ class ReplacePrompt : public QDialog
 public:
     explicit ReplacePrompt(QWidget* parent);
 
-public:
-    ReplaceBehaviour query();
+Q_SIGNALS:
+    void finished(ReplaceBehaviour behaviour);
 
 private Q_SLOTS:
     void onReplaceAllButton();
     void onSkipButton();
     void onReplaceButton();
     void onCloseButton();
-
-private:
-    QEventLoop* mEventLoop;
-
-    ReplaceBehaviour mResult;
 };
 
 }
