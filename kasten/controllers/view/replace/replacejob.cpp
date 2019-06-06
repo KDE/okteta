@@ -101,6 +101,13 @@ void ReplaceJob::start()
 void ReplaceJob::searchNextPosition()
 {
     const bool isForward = (m_direction == FindForward);
+
+    if ((isForward && m_startIndex > m_byteArrayModel->size() - 1) ||
+        (!isForward && m_startIndex < 0)) {
+        handleEndReached();
+        return;
+    }
+
     const Okteta::Address endIndex = m_doWrap ?
         (isForward ? m_byteArrayModel->size() - 1 : 0) :
         (isForward ? m_replaceLastIndex : m_replaceFirstIndex);
