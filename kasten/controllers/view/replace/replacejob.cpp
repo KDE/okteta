@@ -201,6 +201,9 @@ void ReplaceJob::handleEndReached()
         if (m_userQueryAgent) {
             QApplication::restoreOverrideCursor();
             qobject_cast<If::ReplaceUserQueryable*>(m_userQueryAgent)->queryContinue(m_direction, m_noOfReplacements);
+            // TODO: resetting the count as expected due to current already reported in query
+            // ruins the generic meaning of the value passed finished signal, perhaps add separate totalNo?
+            m_noOfReplacements = 0;
         } else {
             wrapAndSearchNextPosition();
         }
@@ -223,7 +226,6 @@ void ReplaceJob::wrapAndSearchNextPosition()
 {
     m_startIndex = (m_direction == FindForward) ? 0 : m_byteArrayModel->size() - 1;
     m_doWrap = false;
-    m_noOfReplacements = 0;
 
     searchNextPosition();
 }
