@@ -57,8 +57,8 @@ public:
     void setReplaceData(const QByteArray& replaceData);
     void setCaseSensitivity(Qt::CaseSensitivity caseSensitivity);
     void setDoPrompt(bool doPrompt);
-    void setRange(Okteta::Address replaceFirstIndex, Okteta::Address replaceLastIndex,
-                  FindDirection direction, Okteta::Address startIndex, bool doWrap);
+    void setRange(Okteta::Address replaceRangeStartIndex, Okteta::Address replaceRangeEndIndex,
+                  FindDirection direction);
 
 public:
     void start();
@@ -81,13 +81,15 @@ private:
 private: // settings
     QByteArray m_searchData;
     QByteArray m_replaceData;
+    Okteta::Address m_replaceRangeStartIndex;
+    Okteta::Address m_replaceRangeEndIndex;
     Qt::CaseSensitivity m_caseSensitivity = Qt::CaseSensitive;
     bool m_doPrompt = false;
 
 private: // status
-    Okteta::Address m_startIndex;
-    Okteta::Address m_replaceFirstIndex;
-    Okteta::Address m_replaceLastIndex;
+    Okteta::Address m_currentIndex;
+    Okteta::Address m_currentReplaceRangeStartIndex;
+    Okteta::Address m_currentReplaceRangeEndIndex;
     int m_noOfReplacements = 0;
     FindDirection m_direction;
     bool m_previousFound : 1;

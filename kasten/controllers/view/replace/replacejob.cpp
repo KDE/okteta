@@ -77,16 +77,17 @@ void ReplaceJob::setDoPrompt(bool doPrompt)
     m_doPrompt = doPrompt;
 }
 
-void ReplaceJob::setRange(Okteta::Address replaceFirstIndex, Okteta::Address replaceLastIndex,
-                          FindDirection direction, Okteta::Address startIndex, bool doWrap)
+void ReplaceJob::setRange(Okteta::Address replaceRangeStartIndex, Okteta::Address replaceRangeEndIndex,
+                          FindDirection direction)
 {
-    m_replaceFirstIndex = replaceFirstIndex;
-    m_replaceLastIndex = replaceLastIndex;
+    m_replaceRangeStartIndex = replaceRangeStartIndex;
+    m_replaceRangeEndIndex = replaceRangeEndIndex;
     
     m_direction = direction;
-    m_startIndex = startIndex;
 
-    m_doWrap = doWrap;
+    m_currentIndex = (m_direction == FindForward) ? m_replaceRangeStartIndex : m_replaceRangeEndIndex;
+
+    m_doWrap = (m_replaceRangeEndIndex < m_replaceRangeStartIndex);
 }
 
 void ReplaceJob::start()
@@ -94,6 +95,8 @@ void ReplaceJob::start()
     QApplication::setOverrideCursor(Qt::WaitCursor);
 
     m_noOfReplacements = 0;
+    m_currentReplaceRangeStartIndex = (!m_doWrap || (m_direction == FindForward)) ? m_replaceRangeStartIndex : 0;
+    m_currentReplaceRangeEndIndex = (!m_doWrap || (m_direction == FindBackward)) ? m_replaceRangeEndIndex : m_byteArrayModel->size() - 1;
 
     searchNextPosition();
 }
@@ -102,17 +105,15 @@ void ReplaceJob::searchNextPosition()
 {
     const bool isForward = (m_direction == FindForward);
 
-    if ((isForward && m_startIndex > m_byteArrayModel->size() - 1) ||
-        (!isForward && m_startIndex < 0)) {
+    if ((isForward && m_currentIndex > m_currentReplaceRangeEndIndex - m_searchData.size() + 1) ||
+        (!isForward && (m_currentIndex < m_currentReplaceRangeStartIndex + m_searchData.size() - 1))) {
         handleEndReached();
         return;
     }
 
-    const Okteta::Address endIndex = m_doWrap ?
-        (isForward ? m_byteArrayModel->size() - 1 : 0) :
-        (isForward ? m_replaceLastIndex : m_replaceFirstIndex);
+    const Okteta::Address endIndex = isForward ? m_currentReplaceRangeEndIndex : m_currentReplaceRangeStartIndex;
 
-    auto* searchJob = new SearchJob(m_byteArrayModel, m_searchData, m_startIndex, endIndex,
+    auto* searchJob = new SearchJob(m_byteArrayModel, m_searchData, m_currentIndex, endIndex,
                                     m_caseSensitivity, m_byteArrayView->charCodingName());
     // Qt::QueuedConnection to ensure passing the event loop, so we do not recursively fill the callstack
     // as any async calls (query user, search) could fire signal while being invoked
@@ -129,7 +130,7 @@ void ReplaceJob::handleSearchResult(Okteta::Address pos)
     }
 
     m_previousFound = true;
-    m_startIndex = pos;
+    m_currentIndex = pos;
 
     if (m_doPrompt && m_userQueryAgent) {
         QApplication::restoreOverrideCursor();
@@ -163,9 +164,9 @@ void ReplaceJob::handleReplaceCurrentFinished(ReplaceBehaviour replaceBehaviour)
         break;
     case SkipCurrent:
         if (m_direction == FindForward) {
-            ++m_startIndex;
+            ++m_currentIndex;
         } else {
-            --m_startIndex;
+            --m_currentIndex;
         }
         currentToBeReplaced = false;
         isCancelled = false;
@@ -189,13 +190,41 @@ void ReplaceJob::handleReplaceCurrentFinished(ReplaceBehaviour replaceBehaviour)
 void ReplaceJob::replaceCurrent()
 {
     ++m_noOfReplacements;
-    const Okteta::Size inserted = m_byteArrayModel->replace(m_startIndex, m_searchData.size(),
+    const Okteta::Size inserted = m_byteArrayModel->replace(m_currentIndex, m_searchData.size(),
                                                             reinterpret_cast<const Okteta::Byte*>(m_replaceData.constData()),
                                                             m_replaceData.size());
+    const Okteta::Size sizeDiff = inserted - m_searchData.size();
+
+    // TODO: cursors being automatically updated by the model would be nice to have here
+    if (m_replaceRangeEndIndex >= m_currentIndex) {
+        m_replaceRangeEndIndex += sizeDiff;
+        if (m_replaceRangeEndIndex < 0) {
+            m_replaceRangeEndIndex = 0;
+        }
+    }
+    if (m_currentReplaceRangeEndIndex >= m_currentIndex) {
+        m_currentReplaceRangeEndIndex += sizeDiff;
+        if (m_currentReplaceRangeEndIndex < 0) {
+            m_currentReplaceRangeEndIndex = 0;
+        }
+    }
+    if (m_replaceRangeStartIndex > m_currentIndex) {
+        m_replaceRangeStartIndex += sizeDiff;
+        if (m_replaceRangeStartIndex < 0) {
+            m_replaceRangeStartIndex = 0;
+        }
+    }
+    if (m_currentReplaceRangeStartIndex > m_currentIndex) {
+        m_currentReplaceRangeStartIndex += sizeDiff;
+        if (m_currentReplaceRangeStartIndex < 0) {
+            m_currentReplaceRangeStartIndex = 0;
+        }
+    }
+
     if (m_direction == FindForward) {
-        m_startIndex += inserted;
+        m_currentIndex += inserted;
     } else {
-        m_startIndex -= inserted;
+        --m_currentIndex;
     }
 
     searchNextPosition();
@@ -231,7 +260,9 @@ void ReplaceJob::handleContinueFinished(bool result)
 
 void ReplaceJob::wrapAndSearchNextPosition()
 {
-    m_startIndex = (m_direction == FindForward) ? 0 : m_byteArrayModel->size() - 1;
+    m_currentReplaceRangeStartIndex = (m_direction == FindForward) ? 0 : m_replaceRangeStartIndex;
+    m_currentReplaceRangeEndIndex = (m_direction == FindForward) ? m_replaceRangeEndIndex : m_byteArrayModel->size() - 1;
+    m_currentIndex = (m_direction == FindForward) ? 0 : m_byteArrayModel->size() - 1;
     m_doWrap = false;
 
     searchNextPosition();

@@ -129,11 +129,8 @@ void ReplaceTool::setDoPrompt(bool doPrompt)
 
 void ReplaceTool::replace(FindDirection direction, bool fromCursor, bool inSelection)
 {
-    Okteta::Address startIndex;
-
-    Okteta::Address replaceFirstIndex;
-    Okteta::Address replaceLastIndex;
-    bool doWrap;
+    Okteta::Address replaceRangeStartIndex;
+    Okteta::Address replaceRangeEndIndex;
 
     if (inSelection) {
         const Okteta::AddressRange selection = mByteArrayView->selection();
@@ -144,23 +141,19 @@ void ReplaceTool::replace(FindDirection direction, bool fromCursor, bool inSelec
             return;
         }
 
-        replaceFirstIndex = selection.start();
-        replaceLastIndex =  selection.end();
-        startIndex = selection.start();
-        doWrap = false;
+        replaceRangeStartIndex = selection.start();
+        replaceRangeEndIndex =  selection.end();
         // TODO: support finding following selection direction
         direction = FindForward;
     } else {
         const Okteta::Address cursorPosition = mByteArrayView->cursorPosition();
         if (fromCursor && (cursorPosition != 0)) {
-            replaceFirstIndex = cursorPosition;
-            replaceLastIndex =  cursorPosition - 1;
+            replaceRangeStartIndex = cursorPosition;
+            replaceRangeEndIndex =  cursorPosition - 1;
         } else {
-            replaceFirstIndex = 0;
-            replaceLastIndex =  mByteArrayModel->size() - 1;
+            replaceRangeStartIndex = 0;
+            replaceRangeEndIndex =  mByteArrayModel->size() - 1;
         }
-        startIndex = (direction == FindForward) ? replaceFirstIndex : replaceLastIndex /*-mSearchData.size()*/;
-        doWrap = (direction == FindForward) ? (replaceLastIndex < startIndex) : (startIndex < replaceFirstIndex);
     }
 
     mReplaceJob = new ReplaceJob(mByteArrayView, mByteArrayModel, mUserQueryAgent, this);
@@ -168,7 +161,7 @@ void ReplaceTool::replace(FindDirection direction, bool fromCursor, bool inSelec
     mReplaceJob->setReplaceData(mReplaceData);
     mReplaceJob->setCaseSensitivity(mCaseSensitivity);
     mReplaceJob->setDoPrompt(mDoPrompt);
-    mReplaceJob->setRange(replaceFirstIndex, replaceLastIndex, direction, startIndex, doWrap);
+    mReplaceJob->setRange(replaceRangeStartIndex, replaceRangeEndIndex, direction);
     connect(mReplaceJob, &ReplaceJob::finished, this, &ReplaceTool::onJobFinished);
 
     emit isApplyableChanged(isApplyable());
