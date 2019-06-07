@@ -42,7 +42,9 @@ ByteArrayView::ByteArrayView(ByteArrayDocument* document, ByteArrayViewProfileSy
     , mByteArrayViewProfileSynchronizer(synchronizer)
 {
     init();
-    synchronizer->setView(this);
+    if (synchronizer) {
+        synchronizer->setView(this);
+    }
 }
 
 ByteArrayView::ByteArrayView(ByteArrayView* other, ByteArrayViewProfileSynchronizer* synchronizer,
@@ -96,7 +98,9 @@ ByteArrayView::ByteArrayView(ByteArrayView* other, ByteArrayViewProfileSynchroni
     // and then ensureCursorVisible destroys the fun
     mWidget->setViewPos(viewPos);
 
-    synchronizer->setView(this);
+    if (synchronizer) {
+        synchronizer->setView(this);
+    }
 }
 
 ByteArrayView::~ByteArrayView()
