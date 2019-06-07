@@ -587,6 +587,19 @@ if(BUILD_TESTING)
     NAME_PREFIX structures-
     LINK_LIBRARIES structureview-tested-srcs Qt5::Test poddecoder-typeeditors
   )
+
+  #replace tool unit tests
+  ecm_add_test(
+    view/search/searchjob.cpp
+    view/replace/replacejob.cpp
+    test/replacejobtest.cpp
+
+    TEST_NAME replacejobtest
+    LINK_LIBRARIES
+        OktetaKastenGui
+        OktetaKastenCore
+        Qt5::Test
+  )
 endif()
 
 list(APPEND oktetakastencontrollers_LIB_HDRS
