@@ -100,6 +100,7 @@ public:
     inline AllPrimitiveTypes(quint8 val) { _ulong.value = 0; _ubyte.value = val; }
     inline AllPrimitiveTypes(float val) { _ulong.value = 0; _float.value = val; }
     inline AllPrimitiveTypes(double val) { _double.value = val; }
+    inline ~AllPrimitiveTypes() = default;
 
     inline AllPrimitiveTypes& operator=(const AllPrimitiveTypes &a)
     { _ulong.value = a._ulong.value; return *this; }
