@@ -96,7 +96,8 @@ private:
 
 private:
     QScopedPointer<AbstractArrayData> mData;
-    static constexpr uint MAX_LEN = 10000;
+    // Limit the length to 64K to avoid excessive memory consumption
+    static constexpr uint MAX_LEN = 65535;
 };
 
 inline uint ArrayDataInformation::length() const
