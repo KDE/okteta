@@ -42,8 +42,12 @@ class ModelCodecViewManagerPrivate
 {
 public:
     ModelCodecViewManagerPrivate();
+    ModelCodecViewManagerPrivate(const ModelCodecViewManagerPrivate&) = delete;
 
     ~ModelCodecViewManagerPrivate();
+
+public:
+    ModelCodecViewManagerPrivate& operator=(const ModelCodecViewManagerPrivate&) = delete;
 
 public:
     AbstractModelStreamEncoderConfigEditor* createConfigEditor(AbstractModelStreamEncoder* encoder) const;

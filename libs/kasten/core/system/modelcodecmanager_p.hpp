@@ -39,7 +39,12 @@ class AbstractOverwriteDialog;
 class ModelCodecManagerPrivate
 {
 public:
+    ModelCodecManagerPrivate() = default;
+    ModelCodecManagerPrivate(const ModelCodecManagerPrivate&) = delete;
     ~ModelCodecManagerPrivate();
+
+public:
+    ModelCodecManagerPrivate& operator=(const ModelCodecManagerPrivate&) = delete;
 
 public:
     void encodeToStream(AbstractModelStreamEncoder* encoder,

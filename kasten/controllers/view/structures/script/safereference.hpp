@@ -60,6 +60,7 @@ public:
     explicit SafeReference(DataInformation* data);
     SafeReference(const SafeReference& other);
     ~SafeReference();
+    SafeReference& operator=(const SafeReference& other) = delete;
     inline DataInformation* data() const;
 
 private:

@@ -32,8 +32,12 @@ class DocumentCreateManagerPrivate
 {
 public:
     explicit DocumentCreateManagerPrivate(DocumentManager* manager);
+    DocumentCreateManagerPrivate(const DocumentCreateManagerPrivate&) = delete;
 
     ~DocumentCreateManagerPrivate();
+
+public:
+    DocumentCreateManagerPrivate& operator=(const DocumentCreateManagerPrivate&) = delete;
 
 public:
     bool canCreateNewFromData(const QMimeData* mimeData) const;
