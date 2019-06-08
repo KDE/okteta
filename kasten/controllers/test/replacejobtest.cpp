@@ -71,13 +71,13 @@ void TestReplaceUserQueryAgent::queryContinue(Kasten::FindDirection direction, i
 {
     Q_UNUSED(direction);
     m_noOfReplacements = noOfReplacements;
-    return queryContinueFinished(true);
+    emit queryContinueFinished(true);
 }
 
 void TestReplaceUserQueryAgent::queryReplaceCurrent()
 {
     Q_ASSERT(!m_replies.isEmpty());
-    return queryReplaceCurrentFinished(m_replies.takeFirst());
+    emit queryReplaceCurrentFinished(m_replies.takeFirst());
 }
 
 
