@@ -36,10 +36,8 @@ class AbstractByteArrayModel;
 
 namespace Kasten {
 
-namespace If {
-class ReplaceUserQueryable;
-}
 class ByteArrayView;
+class ReplaceJob;
 
 // TODO: is queryAgent needed, or should the tool better be a state machine? same with search tool
 class ReplaceTool : public AbstractTool
@@ -69,7 +67,8 @@ public: // actions
     void replace(FindDirection direction, bool fromCursor, bool inSelection);
 
 public:
-    void setUserQueryAgent(If::ReplaceUserQueryable* userQueryAgent);
+    /// @param userQueryAgent expected to implement If::ReplaceUserQueryable
+    void setUserQueryAgent(QObject* userQueryAgent);
 
 public Q_SLOTS: // settings
     void setSearchData(const QByteArray& searchData);
@@ -86,6 +85,7 @@ private:
 
 private Q_SLOTS:
     void onReadOnlyChanged(bool isReadOnly);
+    void onJobFinished(bool previousFound, int noOfReplacements);
 
 private: // settings
     QByteArray mSearchData;
@@ -94,13 +94,11 @@ private: // settings
     bool mDoPrompt : 1;
 
 private: // status
-    bool mPreviousFound : 1;
-    bool mDoWrap : 1;
-    Okteta::Address mReplaceFirstIndex;
-    Okteta::Address mReplaceLastIndex;
+    ReplaceJob* mReplaceJob = nullptr;
 
 private:
-    If::ReplaceUserQueryable* mUserQueryAgent = nullptr;
+    // expected to implement If::ReplaceUserQueryable
+    QObject* mUserQueryAgent = nullptr;
 
 private: // target
     ByteArrayView* mByteArrayView = nullptr;

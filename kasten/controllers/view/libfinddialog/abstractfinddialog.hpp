@@ -52,6 +52,7 @@ public:
 public: // set
     void setDirection(FindDirection Direction);
     void setInSelection(bool InSelection);
+    void setInSelectionEnabled(bool inSelectionEnabled);
 
 public: // get
     QByteArray data() const;
@@ -81,6 +82,7 @@ protected: // API to be implemented
 private Q_SLOTS:
     void onSearchDataChanged(const QByteArray& ata);
     void onSearchDataFormatChanged(int Format);
+    void onSelectedToggled(bool checked);
     void forwardFindButtonClicked();
 
 private:

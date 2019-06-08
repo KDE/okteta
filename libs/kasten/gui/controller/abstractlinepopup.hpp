@@ -43,6 +43,13 @@ class KASTENGUI_EXPORT AbstractLinePopup : public QWidget
     Q_OBJECT
 
 public:
+    enum DialogCode
+    {
+        Rejected = 0,
+        Accepted = 1,
+    };
+
+public:
     explicit AbstractLinePopup(QWidget* parent = nullptr);
     ~AbstractLinePopup() override;
 
@@ -52,6 +59,15 @@ public:
     void setWidget(QWidget* widget);
 
     int exec();
+    void open();
+    int result() const;
+
+Q_SIGNALS:
+    void finished(int result);
+
+public Q_SLOTS:
+    void accept(); // TODO: virtual
+    void reject(); // TODO: virtual
 
 protected: // QObject API
     bool eventFilter(QObject* object, QEvent* event) override;

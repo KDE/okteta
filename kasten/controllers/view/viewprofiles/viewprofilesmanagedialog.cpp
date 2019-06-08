@@ -45,6 +45,8 @@ ViewProfilesManageDialog::ViewProfilesManageDialog(ByteArrayViewProfileManager* 
     : QDialog(parent)
     , mViewProfileManager(viewProfileManager)
 {
+    setAttribute(Qt::WA_DeleteOnClose, true);
+
     setWindowTitle(i18nc("@title:window", "View Profiles"));
 
     auto* pageLayout = new QHBoxLayout;
@@ -190,18 +192,12 @@ ViewProfilesManageDialog::onCreateNewButtonClicked()
         const QString dialogTitle = i18nc("@window:title",
                                           "New View Profile");
         dialog->setWindowTitle(dialogTitle);
+
+        connect(dialog, &ViewProfileEditDialog::viewProfileAccepted,
+                this, &ViewProfilesManageDialog::saveViewProfile);
     }
 
-    const int answer = dialog->exec();
-
-    if (answer == QDialog::Accepted) {
-        QVector<ByteArrayViewProfile> viewProfiles {
-            dialog->viewProfile()
-        };
-        mViewProfileManager->saveViewProfiles(viewProfiles);
-    }
-
-    delete dialog;
+    dialog->open();
 
     mCloseButton->setDefault(true);
 }
@@ -227,18 +223,20 @@ ViewProfilesManageDialog::onEditButtonClicked()
     const QString dialogTitle = i18nc("@window:title",
                                       "\"%1\" View Profile", viewProfile.viewProfileTitle());
     dialog->setWindowTitle(dialogTitle);
+    connect(dialog, &ViewProfileEditDialog::viewProfileAccepted,
+            this, &ViewProfilesManageDialog::saveViewProfile);
 
-    const int answer = dialog->exec();
-    if (answer == QDialog::Accepted) {
-        QVector<ByteArrayViewProfile> viewProfiles {
-            dialog->viewProfile()
-        };
-        mViewProfileManager->saveViewProfiles(viewProfiles);
-    }
-
-    delete dialog;
+    dialog->open();
 
     mCloseButton->setDefault(true);
+}
+
+void ViewProfilesManageDialog::saveViewProfile(const ByteArrayViewProfile& viewProfile)
+{
+    QVector<ByteArrayViewProfile> viewProfiles {
+        viewProfile
+    };
+    mViewProfileManager->saveViewProfiles(viewProfiles);
 }
 
 void

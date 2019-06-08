@@ -42,6 +42,7 @@ public:
     explicit AdditionalData();
     AdditionalData(const AdditionalData& data);
     ~AdditionalData();
+    AdditionalData& operator=(const AdditionalData& data);
     QVariant get(AdditionalDataType entry) const;
     void set(AdditionalDataType entry, const QVariant& value);
     void remove(AdditionalDataType entry);
@@ -58,6 +59,8 @@ inline AdditionalData::AdditionalData() = default;
 inline AdditionalData::AdditionalData(const AdditionalData& data) = default;
 
 inline AdditionalData::~AdditionalData() = default;
+
+inline AdditionalData& AdditionalData::operator=(const AdditionalData& data) = default;
 
 inline QVariant AdditionalData::get(AdditionalData::AdditionalDataType entry) const
 {

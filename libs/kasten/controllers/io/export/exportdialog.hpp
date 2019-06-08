@@ -30,6 +30,7 @@ namespace Kasten {
 
 class AbstractModelExporterConfigEditor;
 class AbstractSelectionView;
+class AbstractModelExporter;
 class AbstractModelSelection;
 class AbstractModel;
 
@@ -39,6 +40,7 @@ class ExportDialog : public QDialog
 
 public:
     ExportDialog(const QString& remoteTypeName, AbstractModelExporterConfigEditor* configEditor,
+                 AbstractModelExporter* exporter,
                  QWidget* parent = nullptr);
 
     ~ExportDialog() override;
@@ -46,9 +48,18 @@ public:
 public:
     void setData(AbstractModel* model, const AbstractModelSelection* selection);
 
+Q_SIGNALS:
+    void exportAccepted(Kasten::AbstractModelExporter* exporter,
+                        const Kasten::AbstractModelSelection* selection);
+
+private Q_SLOTS:
+    void onFinished(int result);
+
 private:
-    AbstractModelExporterConfigEditor* mConfigEditor;
+    AbstractModelExporterConfigEditor* const mConfigEditor;
+    AbstractModelExporter* const m_exporter;
     AbstractSelectionView* mPreviewView;
+    const AbstractModelSelection* m_selection = nullptr;
 };
 
 }

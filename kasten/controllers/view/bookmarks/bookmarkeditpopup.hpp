@@ -44,12 +44,17 @@ public:
 
 public:
     void setName(const QString& name);
+    void setCursorPosition(int cursorPosition);
+
+Q_SIGNALS:
+    void bookmarkAccepted(int cursorPosition, const QString& name);
 
 private Q_SLOTS:
-    void onReturnPressed();
+    void onFinished(int result);
 
 private:
     QLineEdit* mBookmarkNameLineEdit;
+    int m_cursorPosition;
 };
 
 }

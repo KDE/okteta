@@ -37,6 +37,7 @@ class ModelCodecManager;
 namespace If {
 class SelectedDataWriteable;
 }
+class AbstractModelDataGenerator;
 
 class InsertController : public AbstractXmlGuiController
 {
@@ -56,6 +57,7 @@ private:
 private Q_SLOTS:
     void onReadOnlyChanged(bool isReadOnly);
     void onActionTriggered(QAction* action);
+    void triggerExecution(Kasten::AbstractModelDataGenerator* generator);
 
 private:
     ModelCodecViewManager* mModelCodecViewManager;

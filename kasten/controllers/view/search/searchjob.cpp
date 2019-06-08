@@ -50,26 +50,31 @@ SearchJob::~SearchJob()
 
 Okteta::Address SearchJob::exec()
 {
+    start();
+    // no own event loop here or mutex, we know that start is sync call currently
+    return m_result;
+}
+
+void SearchJob::start()
+{
     // TODO: what kind of signal could a filter send?
     connect(mByteArrayModel, &Okteta::AbstractByteArrayModel::searchedBytes, this, &SearchJob::onBytesSearched);
 
-    Okteta::Address result;
-
     const bool searchForward = (mStartIndex < mEndIndex);
     if (searchForward) {
-        result = (mCaseSensitivity == Qt::CaseSensitive) ?
+        m_result = (mCaseSensitivity == Qt::CaseSensitive) ?
                  mByteArrayModel->indexOf(mSearchData, mStartIndex, mEndIndex) :
                  mByteArrayModel->indexOfCaseInsensitive(mCharCodec, mSearchData, mStartIndex, mEndIndex);
     } else {
         const Okteta::Address lastFromIndex = mStartIndex - mSearchData.size() + 1;
-        result = (mCaseSensitivity == Qt::CaseSensitive) ?
+        m_result = (mCaseSensitivity == Qt::CaseSensitive) ?
                  mByteArrayModel->lastIndexOf(mSearchData, lastFromIndex, mEndIndex) :
                  mByteArrayModel->lastIndexOfCaseInsensitive(mCharCodec, mSearchData, lastFromIndex, mEndIndex);
     }
 
-    deleteLater(); // TODO: could be reused on next search
+    emit finished(m_result);
 
-    return result;
+    deleteLater(); // TODO: could be reused on next search
 }
 
 void SearchJob::onBytesSearched()

@@ -45,6 +45,12 @@ public:
 public:
     int bytesPerLine() const;
 
+Q_SIGNALS:
+    void bytesPerLineAccepted(int bytesPerLine);
+
+private Q_SLOTS:
+    void onFinished(int result);
+
 private:
     QSpinBox* mBytesPerLineEdit;
 };

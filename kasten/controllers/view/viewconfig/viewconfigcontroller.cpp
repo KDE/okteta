@@ -35,6 +35,8 @@
 #include <KActionCollection>
 #include <KSelectAction>
 #include <KToggleAction>
+// Qt
+#include <QApplication>
 
 namespace Kasten {
 
@@ -86,13 +88,13 @@ ViewConfigController::ViewConfigController(KXMLGUIClient* guiClient)
     mSetBytesPerLineAction = new QAction(i18nc("@action:inmenu", "Set Bytes per Line..."), this);
     mSetBytesPerLineAction->setObjectName(QStringLiteral("view_bytesperline"));
     connect(mSetBytesPerLineAction, &QAction::triggered,
-            this, &ViewConfigController::setBytesPerLine);
+            this, &ViewConfigController::showBytesPerLineDialog);
 
     // byte groups size
     mSetBytesPerGroupAction = new QAction(i18nc("@action:inmenu", "Set Bytes per Group..."), this);
     mSetBytesPerGroupAction->setObjectName(QStringLiteral("view_bytespergroup"));
     connect(mSetBytesPerGroupAction, &QAction::triggered,
-            this, &ViewConfigController::setBytesPerGroup);
+            this, &ViewConfigController::showBytesPerGroupDialog);
 
     // resize style
     mResizeStyleAction = new KSelectAction(i18nc("@title:menu", "&Dynamic Layout"), this);
@@ -202,25 +204,35 @@ void ViewConfigController::setOffsetCoding(int offsetCoding)
     mByteArrayView->setOffsetCoding(offsetCoding);
 }
 
-void ViewConfigController::setBytesPerLine()
+void ViewConfigController::showBytesPerLineDialog()
 {
-    BytesPerLineDialog dialog;
-    dialog.setBytesPerLine(mByteArrayView->noOfBytesPerLine());
-    if (dialog.exec() != 0) {
-        mByteArrayView->setNoOfBytesPerLine(dialog.bytesPerLine());
-
-        // TODO: change should be signalled and the action listen to that
-        mResizeStyleAction->setCurrentItem(mByteArrayView->layoutStyle());
-    }
+    auto* dialog = new BytesPerLineDialog(QApplication::activeWindow());
+    dialog->setBytesPerLine(mByteArrayView->noOfBytesPerLine());
+    connect(dialog, &BytesPerLineDialog::bytesPerLineAccepted,
+            this, &ViewConfigController::setBytesPerLine);
+    dialog->open();
 }
 
-void ViewConfigController::setBytesPerGroup()
+void ViewConfigController::setBytesPerLine(int bytesPerLine)
 {
-    BytesPerGroupDialog dialog;
-    dialog.setGroupedBytesCount(mByteArrayView->noOfGroupedBytes());
-    if (dialog.exec() != 0) {
-        mByteArrayView->setNoOfGroupedBytes(dialog.groupedBytesCount());
-    }
+    mByteArrayView->setNoOfBytesPerLine(bytesPerLine);
+
+    // TODO: change should be signalled and the action listen to that
+    mResizeStyleAction->setCurrentItem(mByteArrayView->layoutStyle());
+}
+
+void ViewConfigController::showBytesPerGroupDialog()
+{
+    auto* dialog = new BytesPerGroupDialog(QApplication::activeWindow());
+    dialog->setGroupedBytesCount(mByteArrayView->noOfGroupedBytes());
+    connect(dialog, &BytesPerGroupDialog::bytesPerGroupAccepted,
+            this, &ViewConfigController::setBytesPerGroup);
+    dialog->open();
+}
+
+void ViewConfigController::setBytesPerGroup(int bytesPerGroup)
+{
+    mByteArrayView->setNoOfGroupedBytes(bytesPerGroup);
 }
 
 void ViewConfigController::setLayoutStyle(int layoutStyle)

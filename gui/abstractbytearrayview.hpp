@@ -64,32 +64,32 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     friend class Dragger;
 
     Q_OBJECT
-    Q_PROPERTY(bool OverwriteMode READ isOverwriteMode WRITE setOverwriteMode)
+    Q_PROPERTY(bool OverwriteMode READ isOverwriteMode WRITE setOverwriteMode NOTIFY overwriteModeChanged)
     Q_PROPERTY(bool OverwriteOnly READ isOverwriteOnly WRITE setOverwriteOnly)
     Q_PROPERTY(bool Modified READ isModified WRITE setModified DESIGNABLE false)
-    Q_PROPERTY(bool ReadOnly READ isReadOnly WRITE setReadOnly)
+    Q_PROPERTY(bool ReadOnly READ isReadOnly WRITE setReadOnly NOTIFY readOnlyChanged)
 
     // Q_PROPERTY( bool hasSelectedData READ hasSelectedData )
     // Q_PROPERTY( QByteArray SelectedData READ selectedData )
     Q_PROPERTY(bool TabChangesFocus READ tabChangesFocus WRITE setTabChangesFocus)
-    Q_PROPERTY(LayoutStyle LayoutStyle READ layoutStyle WRITE setLayoutStyle)
-    Q_PROPERTY(int NoOfBytesPerLine READ noOfBytesPerLine WRITE setNoOfBytesPerLine)
+    Q_PROPERTY(LayoutStyle LayoutStyle READ layoutStyle WRITE setLayoutStyle NOTIFY layoutStyleChanged)
+    Q_PROPERTY(int NoOfBytesPerLine READ noOfBytesPerLine WRITE setNoOfBytesPerLine NOTIFY noOfBytesPerLineChanged)
     Q_PROPERTY(int StartOffset READ startOffset WRITE setStartOffset)
     Q_PROPERTY(int FirstLineOffset READ firstLineOffset WRITE setFirstLineOffset)
-    Q_PROPERTY(bool OffsetColumnVisible READ offsetColumnVisible WRITE toggleOffsetColumn)
-    Q_PROPERTY(OffsetCoding OffsetCoding READ offsetCoding WRITE setOffsetCoding)
-    Q_PROPERTY(CodingTypes VisibleCodings READ visibleCodings WRITE setVisibleCodings)
+    Q_PROPERTY(bool OffsetColumnVisible READ offsetColumnVisible WRITE toggleOffsetColumn NOTIFY offsetColumnVisibleChanged)
+    Q_PROPERTY(OffsetCoding OffsetCoding READ offsetCoding WRITE setOffsetCoding NOTIFY offsetCodingChanged)
+    Q_PROPERTY(CodingTypes VisibleCodings READ visibleCodings WRITE setVisibleCodings NOTIFY visibleByteArrayCodingsChanged)
 
     Q_PROPERTY(bool ByteTypeColored READ isByteTypeColored WRITE setByteTypeColored)
     // value column
-    Q_PROPERTY(ValueCoding Coding READ valueCoding WRITE setValueCoding)
+    Q_PROPERTY(ValueCoding Coding READ valueCoding WRITE setValueCoding NOTIFY valueCodingChanged)
     Q_PROPERTY(int ByteSpacingWidth READ byteSpacingWidth WRITE setByteSpacingWidth)
-    Q_PROPERTY(int NoOfGroupedBytes READ noOfGroupedBytes WRITE setNoOfGroupedBytes)
+    Q_PROPERTY(int NoOfGroupedBytes READ noOfGroupedBytes WRITE setNoOfGroupedBytes NOTIFY noOfGroupedBytesChanged)
     Q_PROPERTY(int GroupSpacingWidth READ groupSpacingWidth WRITE setGroupSpacingWidth)
     Q_PROPERTY(int BinaryGapWidth READ binaryGapWidth WRITE setBinaryGapWidth)
     // char column
-    Q_PROPERTY(bool ShowNonprinting READ showsNonprinting WRITE setShowsNonprinting)
-    Q_PROPERTY(QChar SubstituteChar READ substituteChar WRITE setSubstituteChar)
+    Q_PROPERTY(bool ShowNonprinting READ showsNonprinting WRITE setShowsNonprinting NOTIFY showsNonprintingChanged)
+    Q_PROPERTY(QChar SubstituteChar READ substituteChar WRITE setSubstituteChar NOTIFY substituteCharChanged)
 
 public:
     enum OffsetCoding

@@ -35,10 +35,16 @@
 
 namespace Kasten {
 
-InsertDialog::InsertDialog(AbstractModelDataGeneratorConfigEditor* configEditor, QWidget* parent)
+InsertDialog::InsertDialog(AbstractModelDataGeneratorConfigEditor* configEditor,
+                           AbstractModelDataGenerator* generator,
+                           QWidget* parent)
     : QDialog(parent)
     , mConfigEditor(configEditor)
+    , m_generator(generator)
 {
+    setAttribute(Qt::WA_DeleteOnClose, true);
+    mConfigEditor->setParent(this);
+
     setWindowTitle(i18nc("@title:window", "Insert"));
 
     // editor
@@ -74,8 +80,19 @@ InsertDialog::InsertDialog(AbstractModelDataGeneratorConfigEditor* configEditor,
     layout->addWidget(dialogButtonBox);
 
     setLayout(layout);
+
+    connect(this, &QDialog::finished, this, &InsertDialog::onFinished);
 }
 
 InsertDialog::~InsertDialog() = default;
+
+void InsertDialog::onFinished(int result)
+{
+    if (result != QDialog::Accepted) {
+        return;
+    }
+
+    emit insertAccepted(m_generator);
+}
 
 }

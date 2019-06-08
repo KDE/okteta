@@ -41,10 +41,15 @@ namespace Kasten {
 
 CopyAsDialog::CopyAsDialog(const QString& remoteTypeName,
                            AbstractModelStreamEncoderConfigEditor* configEditor,
+                           AbstractModelStreamEncoder* encoder,
                            QWidget* parent)
     : QDialog(parent)
     , mConfigEditor(configEditor)
+    , m_encoder(encoder)
 {
+    setAttribute(Qt::WA_DeleteOnClose, true);
+    mConfigEditor->setParent(this);
+
     setWindowTitle(i18nc("@title:window", "Copy As"));
 
     auto* splitter = new QSplitter(this);
@@ -102,6 +107,8 @@ CopyAsDialog::CopyAsDialog(const QString& remoteTypeName,
     layout->addWidget(dialogButtonBox);
 
     setLayout(layout);
+
+    connect(this, &QDialog::finished, this, &CopyAsDialog::onFinished);
 }
 
 CopyAsDialog::~CopyAsDialog()
@@ -111,9 +118,20 @@ CopyAsDialog::~CopyAsDialog()
 
 void CopyAsDialog::setData(AbstractModel* model, const AbstractModelSelection* selection)
 {
+    m_selection = selection;
+
     if (mPreviewView) {
         mPreviewView->setData(model, selection);
     }
+}
+
+void CopyAsDialog::onFinished(int result)
+{
+    if (result != QDialog::Accepted) {
+        return;
+    }
+
+    emit copyAccepted(m_encoder, m_selection);
 }
 
 }

@@ -64,6 +64,9 @@ private Q_SLOTS: // action slots
     void onSaveChangesActionTriggered();
     void onViewProfileTriggered(QAction* action);
 
+private Q_SLOTS: // execute slots
+    void addNewViewProfile(const Kasten::ByteArrayViewProfile& viewProfile);
+
 private:
     KXMLGUIClient* mGuiClient;
     ByteArrayViewProfileManager* mViewProfileManager;

@@ -35,6 +35,8 @@ namespace Kasten {
 BytesPerLineDialog::BytesPerLineDialog(QWidget* parent)
     : QDialog(parent)
 {
+    setAttribute(Qt::WA_DeleteOnClose, true);
+
     auto* pageLayout = new QFormLayout();
 
     mBytesPerLineEdit = new QSpinBox(this);
@@ -58,6 +60,8 @@ BytesPerLineDialog::BytesPerLineDialog(QWidget* parent)
     const QString caption =
         i18nc("@title:window", "Bytes per Line");
     setWindowTitle(caption);
+
+    connect(this, &QDialog::finished, this, &BytesPerLineDialog::onFinished);
 }
 
 BytesPerLineDialog::~BytesPerLineDialog() = default;
@@ -67,6 +71,15 @@ int BytesPerLineDialog::bytesPerLine()      const { return mBytesPerLineEdit->va
 void BytesPerLineDialog::setBytesPerLine(int bytesPerLine)
 {
     mBytesPerLineEdit->setValue(bytesPerLine);
+}
+
+void BytesPerLineDialog::onFinished(int result)
+{
+    if (result != QDialog::Accepted) {
+        return;
+    }
+
+    emit bytesPerLineAccepted(bytesPerLine());
 }
 
 }

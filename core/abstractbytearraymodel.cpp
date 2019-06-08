@@ -79,7 +79,11 @@ Address AbstractByteArrayModel::indexOf(const Byte* pattern, int patternLength, 
     Address result = -1;
 
     const Address lastOffset = size() - 1;
-    const Address lastFrom = qMin(lastOffset, toOffset) - patternLength + 1;
+    if ((toOffset < 0) || lastOffset < toOffset) {
+        toOffset = lastOffset;
+    }
+
+    const Address lastFrom = toOffset - patternLength + 1;
     Size nextSignalByteCount = fromOffset + SearchedByteCountSignalLimit;
 
     for (Address i = fromOffset; i <= lastFrom; ++i) {
@@ -171,7 +175,10 @@ Address AbstractByteArrayModel::indexOfCaseInsensitive(const CharCodec* charCode
     const Byte* const pattern = reinterpret_cast<const Byte*>(lowerPattern.constData());
     const int patternLength = lowerPattern.size();
     const Address lastOffset = size() - 1;
-    const Address lastFrom = qMin(lastOffset, toOffset) - patternLength + 1;
+    if ((toOffset < 0) || lastOffset < toOffset) {
+        toOffset = lastOffset;
+    }
+    const Address lastFrom = toOffset - patternLength + 1;
 
     Address nextSignalByteCount = fromOffset + SearchedByteCountSignalLimit;
 

@@ -124,13 +124,18 @@ void InsertController::onActionTriggered(QAction* action)
         mModelCodecViewManager->createConfigEditor(generator);
 
     if (configEditor) {
-        auto* dialog = new InsertDialog(configEditor);
+        auto* dialog = new InsertDialog(configEditor, generator, QApplication::activeWindow());
 //         dialog->setData( mModel, selection ); TODO
-        if (dialog->exec() == 0) {
-            return;
-        }
+        connect(dialog, &InsertDialog::insertAccepted, this, &InsertController::triggerExecution);
+        dialog->open();
+        return;
     }
 
+    triggerExecution(generator);
+}
+
+void InsertController::triggerExecution(AbstractModelDataGenerator* generator)
+{
     QApplication::setOverrideCursor(Qt::WaitCursor);
 
     auto* generateThread = new ModelDataGenerateThread(this, generator);

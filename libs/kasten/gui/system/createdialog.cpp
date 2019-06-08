@@ -36,10 +36,16 @@
 
 namespace Kasten {
 
-CreateDialog::CreateDialog(AbstractModelDataGeneratorConfigEditor* configEditor, QWidget* parent)
+CreateDialog::CreateDialog(AbstractModelDataGeneratorConfigEditor* configEditor,
+                           AbstractModelDataGenerator* generator,
+                           QWidget* parent)
     : QDialog(parent)
     , mConfigEditor(configEditor)
+    , m_generator(generator)
 {
+    setAttribute(Qt::WA_DeleteOnClose, true);
+    mConfigEditor->setParent(this);
+
     setWindowTitle(i18nc("@title:window", "Create"));
 
     // editor
@@ -76,8 +82,19 @@ CreateDialog::CreateDialog(AbstractModelDataGeneratorConfigEditor* configEditor,
     layout->addWidget(dialogButtonBox);
 
     setLayout(layout);
+
+    connect(this, &QDialog::finished, this, &CreateDialog::onFinished);
 }
 
 CreateDialog::~CreateDialog() = default;
+
+void CreateDialog::onFinished(int result)
+{
+    if (result != QDialog::Accepted) {
+        return;
+    }
+
+    emit createAccepted(m_generator);
+}
 
 }

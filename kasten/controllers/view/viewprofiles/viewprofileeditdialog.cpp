@@ -36,6 +36,8 @@ namespace Kasten {
 ViewProfileEditDialog::ViewProfileEditDialog(QWidget* parent)
     : QDialog(parent)
 {
+    setAttribute(Qt::WA_DeleteOnClose, true);
+
     mViewProfileEdit = new ViewProfileEdit(this);
 
     // dialog buttons
@@ -58,6 +60,8 @@ ViewProfileEditDialog::ViewProfileEditDialog(QWidget* parent)
     // Disable it by default
     mOkButton = dialogButtonBox->button(QDialogButtonBox::Ok);
     mOkButton->setEnabled(false);
+
+    connect(this, &QDialog::finished, this, &ViewProfileEditDialog::onFinished);
 }
 
 ViewProfileEditDialog::~ViewProfileEditDialog() = default;
@@ -78,6 +82,15 @@ void ViewProfileEditDialog::setViewProfile(const ByteArrayViewProfile& viewProfi
 void ViewProfileEditDialog::onProfileTitleChanged(const QString& title)
 {
     mOkButton->setEnabled(!title.isEmpty());
+}
+
+void ViewProfileEditDialog::onFinished(int result)
+{
+    if (result != QDialog::Accepted) {
+        return;
+    }
+
+    emit viewProfileAccepted(viewProfile());
 }
 
 }

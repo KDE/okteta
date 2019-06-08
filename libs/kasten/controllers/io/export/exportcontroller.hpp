@@ -37,6 +37,8 @@ class ModelCodecManager;
 namespace If {
 class DataSelectable;
 }
+class AbstractModelExporter;
+class AbstractModelSelection;
 
 class ExportController : public AbstractXmlGuiController
 {
@@ -53,6 +55,8 @@ public: // AbstractXmlGuiController API
 private Q_SLOTS:
     void updateActions();
     void onActionTriggered(QAction* action);
+    void triggerExecution(Kasten::AbstractModelExporter* exporter,
+                          const Kasten::AbstractModelSelection* selection);
 
 private:
     ModelCodecViewManager* mModelCodecViewManager;

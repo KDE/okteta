@@ -41,10 +41,15 @@ namespace Kasten {
 
 ExportDialog::ExportDialog(const QString& remoteTypeName,
                            AbstractModelExporterConfigEditor* configEditor,
+                           AbstractModelExporter* exporter,
                            QWidget* parent)
     : QDialog(parent)
     , mConfigEditor(configEditor)
+    , m_exporter(exporter)
 {
+    setAttribute(Qt::WA_DeleteOnClose, true);
+    mConfigEditor->setParent(this);
+
     setWindowTitle(i18nc("@title:window", "Export"));
 
     auto* splitter = new QSplitter(this);
@@ -102,6 +107,8 @@ ExportDialog::ExportDialog(const QString& remoteTypeName,
     layout->addWidget(dialogButtonBox);
 
     setLayout(layout);
+
+    connect(this, &QDialog::finished, this, &ExportDialog::onFinished);
 }
 
 ExportDialog::~ExportDialog()
@@ -111,9 +118,20 @@ ExportDialog::~ExportDialog()
 
 void ExportDialog::setData(AbstractModel* model, const AbstractModelSelection* selection)
 {
+    m_selection = selection;
+
     if (mPreviewView) {
         mPreviewView->setData(model, selection);
     }
+}
+
+void ExportDialog::onFinished(int result)
+{
+    if (result != QDialog::Accepted) {
+        return;
+    }
+
+    emit exportAccepted(m_exporter, m_selection);
 }
 
 }

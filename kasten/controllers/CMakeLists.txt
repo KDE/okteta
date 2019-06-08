@@ -225,6 +225,7 @@ oktetakastencontrollers_add_sublibrary(view/replace
         ReplaceController
         ReplaceDialog
         ReplacePrompt
+        ReplaceJob
         ReplaceTool
 )
 
@@ -442,6 +443,7 @@ oktetakastencontrollers_add_sublibrary_structures_tested(view/structures
 oktetakastencontrollers_add_sublibrary(view/structures/settings
     PRIVATE
         StructureAddRemoveWidget
+        StructuresSelectionDialog
         StructureViewSettingsWidget
         StructuresManagerView
     UI structureviewsettingswidget.ui
@@ -484,6 +486,7 @@ oktetakastencontrollers_add_sublibrary(view/print
         AbstractColumnFrameRenderer
         PrintColumnStylist
         ByteArrayFrameRenderer
+        PrintDialog
         PrintController
 )
 set_source_files_properties(view/print/printtool.cpp PROPERTIES
@@ -583,6 +586,19 @@ if(BUILD_TESTING)
 
     NAME_PREFIX structures-
     LINK_LIBRARIES structureview-tested-srcs Qt5::Test poddecoder-typeeditors
+  )
+
+  #replace tool unit tests
+  ecm_add_test(
+    view/search/searchjob.cpp
+    view/replace/replacejob.cpp
+    test/replacejobtest.cpp
+
+    TEST_NAME replacejobtest
+    LINK_LIBRARIES
+        OktetaKastenGui
+        OktetaKastenCore
+        Qt5::Test
   )
 endif()
 

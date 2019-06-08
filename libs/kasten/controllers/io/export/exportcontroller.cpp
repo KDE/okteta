@@ -32,12 +32,15 @@
 #include <Kasten/ModelCodecManager>
 #include <Kasten/AbstractDocument>
 #include <Kasten/AbstractModelExporter>
+#include <Kasten/AbstractModelSelection>
 // KF
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>
 #include <KActionCollection>
 #include <KLocalizedString>
 #include <KSelectAction>
+// Qt
+#include <QApplication>
 
 Q_DECLARE_METATYPE(Kasten::AbstractModelExporter*)
 
@@ -115,13 +118,20 @@ void ExportController::onActionTriggered(QAction* action)
         mModelCodecViewManager->createConfigEditor(exporter);
 
     if (configEditor) {
-        ExportDialog* dialog = new ExportDialog(exporter->remoteTypeName(), configEditor);
+        ExportDialog* dialog = new ExportDialog(exporter->remoteTypeName(), configEditor, exporter,
+                                                QApplication::activeWindow());
         dialog->setData(mModel, selection);
-        if (dialog->exec() == 0) {
-            return;
-        }
+        connect(dialog, &ExportDialog::exportAccepted, this, &ExportController::triggerExecution);
+        dialog->open();
+        return;
     }
 
+    triggerExecution(exporter, selection);
+}
+
+void ExportController::triggerExecution(AbstractModelExporter* exporter,
+                                        const AbstractModelSelection* selection)
+{
     mModelCodecManager->exportDocument(exporter, mModel, selection);
 }
 

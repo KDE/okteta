@@ -49,6 +49,11 @@ public:
 
     void setResult(int result);
     int exec();
+    void open();
+    void accept();
+    void reject();
+
+    int result() const;
 
 public: // QWidget API
     void setVisible(bool visible);
@@ -56,7 +61,8 @@ public: // QWidget API
 public:
     bool isOrContainsObject(QObject* object) const;
 
-    void onReturnPressed();
+private:
+    void done(int result);
 
 private:
     AbstractLinePopup* const p;
@@ -66,7 +72,7 @@ private:
     QWidget* mWidget = nullptr;
 
     QEventLoop* mEventLoop = nullptr;
-    int mResult = 0;
+    int mResult = AbstractLinePopup::Rejected;
 };
 
 inline AbstractLinePopupPrivate::AbstractLinePopupPrivate(AbstractLinePopup* parent)
@@ -76,6 +82,7 @@ inline AbstractLinePopupPrivate::AbstractLinePopupPrivate(AbstractLinePopup* par
 
 inline AbstractLinePopupPrivate::~AbstractLinePopupPrivate() = default;
 
+inline int AbstractLinePopupPrivate::result() const { return mResult; }
 inline void AbstractLinePopupPrivate::setResult(int result) { mResult = result; }
 
 inline bool AbstractLinePopupPrivate::isOrContainsObject(QObject* object) const

@@ -96,7 +96,7 @@ void ReplaceController::onFinished(bool previousFound, int noOfReplacements)
     }
 }
 
-bool ReplaceController::queryContinue(FindDirection direction, int noOfReplacements) const
+void ReplaceController::queryContinue(FindDirection direction, int noOfReplacements)
 {
     const QString messageBoxTitle = i18nc("@title:window", "Replace");
     const QString replacementReport = (noOfReplacements == 0) ?
@@ -112,23 +112,26 @@ bool ReplaceController::queryContinue(FindDirection direction, int noOfReplaceme
 
     const bool result = (answer != KMessageBox::No);
 
-    return result;
+    emit queryContinueFinished(result);
 }
 
-ReplaceBehaviour ReplaceController::queryReplaceCurrent() const
+void ReplaceController::queryReplaceCurrent()
 {
     if (!mReplacePrompt) {
         mReplacePrompt = new ReplacePrompt(mParentWidget);
+        connect(mReplacePrompt, &ReplacePrompt::finished,
+                this, &ReplaceController::onPromptReply);
     }
-
     mReplacePrompt->show();
-    const ReplaceBehaviour answer = mReplacePrompt->query();
+}
 
-    if (answer == ReplaceAll || answer == CancelReplacing) {
+void ReplaceController::onPromptReply(ReplaceBehaviour behaviour)
+{
+    if (behaviour == ReplaceAll || behaviour == CancelReplacing) {
         mReplacePrompt->hide();
     }
 
-    return answer;
+    emit queryReplaceCurrentFinished(behaviour);
 }
 
 }

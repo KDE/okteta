@@ -48,7 +48,7 @@ SearchDialog::SearchDialog(SearchTool* tool, QWidget* parent)
     setupCheckBoxes();
 
     setFindButtonEnabled(false);
-    setModal(false);
+    setModal(true);
 
     setCharCodec(mTool->charCodingName());
     connect(mTool,  &SearchTool::charCodecChanged,
@@ -73,6 +73,7 @@ void SearchDialog::showEvent(QShowEvent* showEvent)
 {
     AbstractFindDialog::showEvent(showEvent);
 
+    setInSelectionEnabled(mTool->hasSelectedData());
     setInSelection(mTool->hasSelectedData());
 }
 

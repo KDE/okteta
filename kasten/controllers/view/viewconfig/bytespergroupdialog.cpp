@@ -35,6 +35,8 @@ namespace Kasten {
 BytesPerGroupDialog::BytesPerGroupDialog(QWidget* parent)
     : QDialog(parent)
 {
+    setAttribute(Qt::WA_DeleteOnClose, true);
+
     auto* pageLayout = new QFormLayout();
 
     mGroupedBytesCountEdit = new QSpinBox(this);
@@ -61,6 +63,8 @@ BytesPerGroupDialog::BytesPerGroupDialog(QWidget* parent)
     const QString caption =
         i18nc("@title:window", "Bytes per Group");
     setWindowTitle(caption);
+
+    connect(this, &QDialog::finished, this, &BytesPerGroupDialog::onFinished);
 }
 
 BytesPerGroupDialog::~BytesPerGroupDialog() = default;
@@ -70,6 +74,15 @@ int BytesPerGroupDialog::groupedBytesCount() const { return mGroupedBytesCountEd
 void BytesPerGroupDialog::setGroupedBytesCount(int groupedBytesCount)
 {
     mGroupedBytesCountEdit->setValue(groupedBytesCount);
+}
+
+void BytesPerGroupDialog::onFinished(int result)
+{
+    if (result != QDialog::Accepted) {
+        return;
+    }
+
+    emit bytesPerGroupAccepted(groupedBytesCount());
 }
 
 }

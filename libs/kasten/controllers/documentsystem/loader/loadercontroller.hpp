@@ -25,6 +25,9 @@
 
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
+// Qt
+#include <QList>
+#include <QUrl>
 
 class KRecentFilesAction;
 class KXMLGUIClient;
@@ -49,6 +52,7 @@ public: // AbstractXmlGuiController API
 private Q_SLOTS:
     void load();
     void loadRecent(const QUrl& url);
+    void loadUrls(const QList<QUrl>& urls);
 
     void onUrlUsed(const QUrl& url);
 

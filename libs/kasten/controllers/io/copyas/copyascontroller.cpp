@@ -32,6 +32,7 @@
 #include <Kasten/ModelStreamEncodeThread>
 #include <Kasten/ModelCodecManager>
 #include <Kasten/AbstractModelStreamEncoder>
+#include <Kasten/AbstractModelSelection>
 #include <Kasten/AbstractModel>
 // KF
 #include <KXMLGUIClient>
@@ -122,13 +123,20 @@ void CopyAsController::onActionTriggered(QAction* action)
         mModelCodecViewManager->createConfigEditor(encoder);
 
     if (configEditor) {
-        CopyAsDialog* dialog = new CopyAsDialog(encoder->remoteTypeName(), configEditor);
+        CopyAsDialog* dialog = new CopyAsDialog(encoder->remoteTypeName(), configEditor, encoder,
+                                                QApplication::activeWindow());
         dialog->setData(mModel, selection);
-        if (dialog->exec() == 0) {
-            return;
-        }
+        connect(dialog, &CopyAsDialog::copyAccepted, this, &CopyAsController::triggerExecution);
+        dialog->open();
+        return;
     }
 
+    triggerExecution(encoder, selection);
+}
+
+void CopyAsController::triggerExecution(AbstractModelStreamEncoder* encoder,
+                                        const AbstractModelSelection* selection)
+{
     QApplication::setOverrideCursor(Qt::WaitCursor);
 
     QByteArray exportData;

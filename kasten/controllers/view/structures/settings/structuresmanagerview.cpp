@@ -22,8 +22,9 @@
  */
 
 #include "structuresmanagerview.hpp"
-#include "structureaddremovewidget.hpp"
 
+// controller
+#include "structuresselectiondialog.hpp"
 #include "structureviewpreferences.hpp"
 #include "../structuresmanager.hpp"
 #include "../structurestool.hpp"
@@ -35,8 +36,6 @@
 #include <KLocalizedString>
 #include <KNS3/Button>
 // Qt
-#include <QDialog>
-#include <QDialogButtonBox>
 #include <QPushButton>
 #include <QListWidgetItem>
 #include <QLayout>
@@ -99,28 +98,22 @@ QStringList StructuresManagerView::values() const
 
 void StructuresManagerView::advancedSelection()
 {
-    auto* advancedSelectionWidget = new StructureAddRemoveWidget(mSelectedStructures, mTool, this);
-    QPointer<QDialog> dlg = new QDialog(this); // the dlg-on-heap-variant
-    dlg->setWindowTitle(i18nc("@title:window", "Advanced Structures Selection"));
-    auto* layout = new QVBoxLayout;
-    auto* dialogButtonBox = new QDialogButtonBox;
-    dialogButtonBox->addButton(QDialogButtonBox::Ok);
-    connect(dialogButtonBox, &QDialogButtonBox::accepted, dlg.data(), &QDialog::accept);
-    dialogButtonBox->addButton(QDialogButtonBox::Cancel);
-    connect(dialogButtonBox, &QDialogButtonBox::rejected, dlg.data(), &QDialog::reject);
-    layout->addWidget(advancedSelectionWidget);
-    layout->addWidget(dialogButtonBox);
-    dlg->setLayout(layout);
-    if (dlg->exec() == QDialog::Accepted) {
-        QStringList newVals = advancedSelectionWidget->values();
-        if (newVals != mSelectedStructures) {
-            qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES)
-                << "selection changed from " << mSelectedStructures << "to" << newVals;
-            mSelectedStructures = newVals;
-            emit changed(newVals);
-        }
+    auto* dialog = new StructuresSelectionDialog(mSelectedStructures, mTool, this);
+    connect(dialog, &StructuresSelectionDialog::structuresAccepted,
+            this, &StructuresManagerView::setSelectedStructures);
+    dialog->open();
+}
+
+void StructuresManagerView::setSelectedStructures(const QStringList& selectedStructures)
+{
+    if (selectedStructures == mSelectedStructures) {
+        return;
     }
-    delete dlg;
+
+    qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES)
+        << "selection changed from " << mSelectedStructures << "to" << selectedStructures;
+    mSelectedStructures = selectedStructures;
+    emit changed(selectedStructures);
 }
 
 void StructuresManagerView::onPluginSelectorChange(bool change)

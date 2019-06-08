@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    Copyright 2010,2014 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2019 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,41 +20,25 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KASTEN_BYTESPERGROUPDIALOG_HPP
-#define KASTEN_BYTESPERGROUPDIALOG_HPP
+#ifndef REPLACEJOBTEST_HPP
+#define REPLACEJOBTEST_HPP
 
 // Qt
-#include <QDialog>
+#include <QObject>
 
-class QSpinBox;
+namespace Okteta { class PieceTableByteArrayModel; }
+class QByteArray;
 
-namespace Kasten {
-
-class BytesPerGroupDialog : public QDialog
+class ReplaceJobTest : public QObject
 {
     Q_OBJECT
 
-public:
-    explicit BytesPerGroupDialog(QWidget* parent = nullptr);
-
-    ~BytesPerGroupDialog() override;
-
-public:
-    void setGroupedBytesCount(int groupedBytesCount);
-
-public:
-    int groupedBytesCount() const;
-
-Q_SIGNALS:
-    void bytesPerGroupAccepted(int groupedBytesCount);
-
-private Q_SLOTS:
-    void onFinished(int result);
+private Q_SLOTS: // test functions
+    void testReplace_data();
+    void testReplace();
 
 private:
-    QSpinBox* mGroupedBytesCountEdit;
+    void compare(const Okteta::PieceTableByteArrayModel* byteArrayModel, const QByteArray& data);
 };
-
-}
 
 #endif

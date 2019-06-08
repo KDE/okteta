@@ -149,6 +149,9 @@ void AbstractFindDialog::setupCheckBoxes(QCheckBox* optionCheckBox)
 //     if( optionCheckBox )
 //         setTabOrder( SelectedCheckBox, optionCheckBox );
 
+    connect(SelectedCheckBox, &QAbstractButton::toggled,
+            this, &AbstractFindDialog::onSelectedToggled);
+
     onSearchDataFormatChanged(SearchDataEdit->format());
 }
 
@@ -179,6 +182,14 @@ void AbstractFindDialog::setInSelection(bool InSelection)
     SelectedCheckBox->setChecked(InSelection);
 }
 
+void AbstractFindDialog::setInSelectionEnabled(bool inSelectionEnabled)
+{
+    if (!inSelectionEnabled) {
+        SelectedCheckBox->setChecked(false);
+    }
+    SelectedCheckBox->setEnabled(inSelectionEnabled);
+}
+
 void AbstractFindDialog::setCharCodec(const QString& codecName)
 {
     SearchDataEdit->setCharCodec(codecName);
@@ -187,6 +198,11 @@ void AbstractFindDialog::setCharCodec(const QString& codecName)
 void AbstractFindDialog::rememberCurrentSettings()
 {
     SearchDataEdit->rememberCurrentByteArray();
+}
+
+void AbstractFindDialog::onSelectedToggled(bool checked)
+{
+    AtCursorCheckBox->setEnabled(!checked);
 }
 
 void AbstractFindDialog::onFindButtonClicked()

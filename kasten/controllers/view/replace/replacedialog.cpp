@@ -115,6 +115,7 @@ void ReplaceDialog::showEvent(QShowEvent* showEvent)
 {
     AbstractFindDialog::showEvent(showEvent);
 
+    setInSelectionEnabled(mTool->hasSelectedData());
     setInSelection(mTool->hasSelectedData());
     setCharCodec(mTool->charCodingName());
 }

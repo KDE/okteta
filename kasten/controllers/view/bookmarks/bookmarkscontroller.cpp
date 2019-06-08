@@ -261,16 +261,19 @@ void BookmarksController::createBookmark()
 
     bookmarkEditPopup->setPosition(popupPoint);
     bookmarkEditPopup->setName(bookmarkName);
-    const bool success = (bookmarkEditPopup->exec() != 0);
+    bookmarkEditPopup->setCursorPosition(cursorPosition);
+    connect(bookmarkEditPopup, &BookmarkEditPopup::bookmarkAccepted,
+            this, &BookmarksController::addBookmark);
+    bookmarkEditPopup->open();
+}
 
-    if (success) {
-        Okteta::Bookmark bookmark(cursorPosition);
-        bookmark.setName(bookmarkEditPopup->name());
+void BookmarksController::addBookmark(int cursorPosition, const QString& name)
+{
+    Okteta::Bookmark bookmark(cursorPosition);
+    bookmark.setName(name);
 
-        const QVector<Okteta::Bookmark> bookmarks { bookmark };
-        mBookmarks->addBookmarks(bookmarks);
-    }
-    delete bookmarkEditPopup;
+    const QVector<Okteta::Bookmark> bookmarks { bookmark };
+    mBookmarks->addBookmarks(bookmarks);
 }
 
 void BookmarksController::deleteBookmark()
