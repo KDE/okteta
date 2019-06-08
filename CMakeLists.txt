@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.1)
 
 project(Okteta VERSION 0.26.60)
 
@@ -120,6 +120,9 @@ add_definitions(
     -DQT_NO_SIGNALS_SLOTS_KEYWORDS
     -DQT_NO_NARROWING_CONVERSIONS_IN_CONNECT
 )
+
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # helper libs
 add_subdirectory( libs )
