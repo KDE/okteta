@@ -49,7 +49,8 @@ public:
     void setData(AbstractModel* model, const AbstractModelSelection* selection);
 
 Q_SIGNALS:
-    void exportAccepted(AbstractModelExporter* exporter, const AbstractModelSelection* selection);
+    void exportAccepted(Kasten::AbstractModelExporter* exporter,
+                        const Kasten::AbstractModelSelection* selection);
 
 private Q_SLOTS:
     void onFinished(int result);

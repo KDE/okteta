@@ -42,7 +42,7 @@ public:
     ~InsertDialog() override;
 
 Q_SIGNALS:
-    void insertAccepted(AbstractModelDataGenerator* generator);
+    void insertAccepted(Kasten::AbstractModelDataGenerator* generator);
 
 private Q_SLOTS:
     void onFinished(int result);

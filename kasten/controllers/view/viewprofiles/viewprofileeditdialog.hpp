@@ -48,7 +48,7 @@ public:
     void setViewProfile(const ByteArrayViewProfile& viewProfile);
 
 Q_SIGNALS:
-    void viewProfileAccepted(const ByteArrayViewProfile& viewProfile);
+    void viewProfileAccepted(const Kasten::ByteArrayViewProfile& viewProfile);
 
 private Q_SLOTS:
     void onProfileTitleChanged(const QString& title);

@@ -57,7 +57,7 @@ private:
 private Q_SLOTS:
     void onReadOnlyChanged(bool isReadOnly);
     void onActionTriggered(QAction* action);
-    void triggerExecution(AbstractModelDataGenerator* generator);
+    void triggerExecution(Kasten::AbstractModelDataGenerator* generator);
 
 private:
     ModelCodecViewManager* mModelCodecViewManager;

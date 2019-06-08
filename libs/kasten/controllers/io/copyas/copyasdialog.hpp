@@ -52,7 +52,8 @@ public:
     void setData(AbstractModel* model, const AbstractModelSelection* selection);
 
 Q_SIGNALS:
-    void copyAccepted(AbstractModelStreamEncoder* encoder, const AbstractModelSelection* selection);
+    void copyAccepted(Kasten::AbstractModelStreamEncoder* encoder,
+                      const Kasten::AbstractModelSelection* selection);
 
 private Q_SLOTS:
 //     void onSelectorChanged( int index );

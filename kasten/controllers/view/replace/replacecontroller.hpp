@@ -67,7 +67,7 @@ Q_SIGNALS: // If::ReplaceUserQueryable API
 private Q_SLOTS: // action slots
     void replace();
 
-    void onPromptReply(ReplaceBehaviour behaviour);
+    void onPromptReply(Kasten::ReplaceBehaviour behaviour);
     void onFinished(bool previousFound, int noOfReplacements);
 
 private:

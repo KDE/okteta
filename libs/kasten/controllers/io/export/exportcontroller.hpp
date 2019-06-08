@@ -55,8 +55,8 @@ public: // AbstractXmlGuiController API
 private Q_SLOTS:
     void updateActions();
     void onActionTriggered(QAction* action);
-    void triggerExecution(AbstractModelExporter* exporter,
-                          const AbstractModelSelection* selection);
+    void triggerExecution(Kasten::AbstractModelExporter* exporter,
+                          const Kasten::AbstractModelSelection* selection);
 
 private:
     ModelCodecViewManager* mModelCodecViewManager;

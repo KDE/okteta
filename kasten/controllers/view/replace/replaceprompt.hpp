@@ -38,7 +38,7 @@ public:
     explicit ReplacePrompt(QWidget* parent);
 
 Q_SIGNALS:
-    void finished(ReplaceBehaviour behaviour);
+    void finished(Kasten::ReplaceBehaviour behaviour);
 
 private Q_SLOTS:
     void onReplaceAllButton();
