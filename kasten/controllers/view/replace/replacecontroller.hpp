@@ -62,7 +62,7 @@ public: // If::ReplaceUserQueryable API
 
 Q_SIGNALS: // If::ReplaceUserQueryable API
     void queryContinueFinished(bool result) override;
-    void queryReplaceCurrentFinished(ReplaceBehaviour result) override;
+    void queryReplaceCurrentFinished(Kasten::ReplaceBehaviour result) override;
 
 private Q_SLOTS: // action slots
     void replace();

@@ -51,7 +51,7 @@ public: // API to be implemented
 
 public: // signals
     virtual void queryContinueFinished(bool result) = 0;
-    virtual void queryReplaceCurrentFinished(ReplaceBehaviour result) = 0;
+    virtual void queryReplaceCurrentFinished(Kasten::ReplaceBehaviour result) = 0;
 };
 
 inline ReplaceUserQueryable::~ReplaceUserQueryable() = default;
@@ -59,6 +59,7 @@ inline ReplaceUserQueryable::~ReplaceUserQueryable() = default;
 }
 }
 
+Q_DECLARE_METATYPE(Kasten::ReplaceBehaviour)
 Q_DECLARE_INTERFACE(Kasten::If::ReplaceUserQueryable, "org.kde.kasten.if.replaceuserqueryable/1.0")
 
 #endif

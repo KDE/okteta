@@ -68,7 +68,7 @@ Q_SIGNALS:
 
 private Q_SLOTS:
     void handleSearchResult(Okteta::Address pos);
-    void handleReplaceCurrentFinished(ReplaceBehaviour replaceBehaviour);
+    void handleReplaceCurrentFinished(Kasten::ReplaceBehaviour replaceBehaviour);
     void handleContinueFinished(bool result);
 
 private:

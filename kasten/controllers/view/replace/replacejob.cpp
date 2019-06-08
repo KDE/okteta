@@ -46,10 +46,11 @@ ReplaceJob::ReplaceJob(ByteArrayView* byteArrayView, Okteta::AbstractByteArrayMo
 {
     auto* replaceUserQueryable = qobject_cast<If::ReplaceUserQueryable*>(m_userQueryAgent);
     if (replaceUserQueryable) {
+        qRegisterMetaType<Kasten::ReplaceBehaviour>();
         connect(m_userQueryAgent, SIGNAL(queryContinueFinished(bool)),
                 this, SLOT(handleContinueFinished(bool)), Qt::QueuedConnection);
-        connect(m_userQueryAgent, SIGNAL(queryReplaceCurrentFinished(ReplaceBehaviour)),
-                this, SLOT(handleReplaceCurrentFinished(ReplaceBehaviour)), Qt::QueuedConnection);
+        connect(m_userQueryAgent, SIGNAL(queryReplaceCurrentFinished(Kasten::ReplaceBehaviour)),
+                this, SLOT(handleReplaceCurrentFinished(Kasten::ReplaceBehaviour)), Qt::QueuedConnection);
     } else {
         m_userQueryAgent = nullptr;
     }
