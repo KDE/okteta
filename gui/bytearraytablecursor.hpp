@@ -100,9 +100,9 @@ public: // index calculation service
 
 public: // navigation commands
     void gotoIndex(Address index);
-    void gotoCoord(const Coord& coord);
+    void gotoCoord(Coord coord);
     void gotoCIndex(Address index);
-    void gotoCCoord(const Coord& coord);
+    void gotoCCoord(Coord coord);
     /** sets the index to the real index, i.e. if "behind" one index, sets it to the next.
      * Undefined if the real index is invalid, or on the append pos if not allowed.
      */

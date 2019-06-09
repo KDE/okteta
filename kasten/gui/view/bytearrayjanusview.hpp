@@ -127,7 +127,7 @@ public:
     void setViewModus(int viewModus);
     int viewModus() const;
 
-    void setViewPos(const QPoint& pos);
+    void setViewPos(QPoint pos);
     QRect viewRect() const;
 
     // needed, as the zooming logic currently changes the font for the real view,
@@ -154,7 +154,7 @@ Q_SIGNALS:
     void noOfGroupedBytesChanged(int noOfGroupedBytes);
     void zoomLevelChanged(double level);
     void viewModusChanged(int viewModus);
-    void viewContextMenuRequested(const QPoint& pos);
+    void viewContextMenuRequested(QPoint pos);
 
 private:
     AbstractByteArrayView* mView = nullptr;

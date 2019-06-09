@@ -202,7 +202,7 @@ void ByteArrayTableCursor::gotoCIndex(Address index)
     }
 }
 
-void ByteArrayTableCursor::gotoCCoord(const Coord& coord)
+void ByteArrayTableCursor::gotoCCoord(Coord coord)
 {
     if (mLayout->length() > 0) {
         mCoord = mLayout->correctCoord(coord);
@@ -245,7 +245,7 @@ void ByteArrayTableCursor::gotoRealIndex()
     }
 }
 
-void ByteArrayTableCursor::gotoCoord(const Coord& coord)
+void ByteArrayTableCursor::gotoCoord(Coord coord)
 {
     mIndex = mLayout->indexAtCoord(coord);
     mCoord = coord;

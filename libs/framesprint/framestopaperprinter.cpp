@@ -37,8 +37,8 @@ FramesToPaperPrinter::~FramesToPaperPrinter()
 
 QRect FramesToPaperPrinter::pageRect() const { return mPageRect; }
 
-void FramesToPaperPrinter::setPaperRect(const QRect& paperRect) { mPaperRect = paperRect; }
-void FramesToPaperPrinter::setPageRect(const QRect& pageRect) { mPageRect = pageRect; }
+void FramesToPaperPrinter::setPaperRect(QRect paperRect) { mPaperRect = paperRect; }
+void FramesToPaperPrinter::setPageRect(QRect pageRect) { mPageRect = pageRect; }
 
 void FramesToPaperPrinter::addFrameRenderer(AbstractFrameRenderer* frameRenderer)
 {

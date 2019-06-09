@@ -1037,7 +1037,7 @@ void AbstractByteArrayViewPrivate::unpauseCursor()
     }
 }
 
-QMenu* AbstractByteArrayViewPrivate::createStandardContextMenu(const QPoint& position)
+QMenu* AbstractByteArrayViewPrivate::createStandardContextMenu(QPoint position)
 {
     Q_UNUSED(position);
 

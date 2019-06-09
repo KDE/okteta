@@ -537,7 +537,7 @@ void ByteArrayColumnViewPrivate::setActiveCoding(AbstractByteArrayView::CodingTy
     unpauseCursor();
 }
 
-void ByteArrayColumnViewPrivate::placeCursor(const QPoint& point)
+void ByteArrayColumnViewPrivate::placeCursor(QPoint point)
 {
     Q_Q(ByteArrayColumnView);
 
@@ -560,7 +560,7 @@ void ByteArrayColumnViewPrivate::placeCursor(const QPoint& point)
     emit q->cursorPositionChanged(cursorPosition());
 }
 
-Address ByteArrayColumnViewPrivate::indexByPoint(const QPoint& point) const
+Address ByteArrayColumnViewPrivate::indexByPoint(QPoint point) const
 {
     Q_Q(const ByteArrayColumnView);
 
@@ -845,7 +845,7 @@ void ByteArrayColumnViewPrivate::ensureVisible(const AddressRange& range, bool e
     ensureVisible(*mActiveColumn, ensureStartVisible ? coords.start() : coords.end());
 }
 
-void ByteArrayColumnViewPrivate::ensureVisible(const AbstractByteArrayColumnRenderer& column, const Coord& coord)
+void ByteArrayColumnViewPrivate::ensureVisible(const AbstractByteArrayColumnRenderer& column, Coord coord)
 {
     Q_Q(ByteArrayColumnView);
 

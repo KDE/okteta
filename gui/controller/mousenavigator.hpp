@@ -52,7 +52,7 @@ public: // AbstractMouseController API
 
 private:
     /** handles the move of the mouse with pressed buttons */
-    void handleMouseMove(const QPoint& point);
+    void handleMouseMove(QPoint point);
 
 private Q_SLOTS:
     /** gets called by the scroll timer (for mouse selection) */

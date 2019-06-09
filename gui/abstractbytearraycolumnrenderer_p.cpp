@@ -341,7 +341,7 @@ PixelXRange AbstractByteArrayColumnRendererPrivate::columnXsOfLinePositionsInclS
     return PixelXRange(x, rightX);
 }
 
-QRect AbstractByteArrayColumnRendererPrivate::byteRect(const Coord& coord) const
+QRect AbstractByteArrayColumnRendererPrivate::byteRect(Coord coord) const
 {
     Q_Q(const AbstractByteArrayColumnRenderer);
 

@@ -139,7 +139,7 @@ public: // functional logic
     /** */
     PixelXRange columnXsOfLinePositionsInclSpaces(const LinePositionRange& linePositions) const;
 
-    QRect byteRect(const Coord& coord) const;
+    QRect byteRect(Coord coord) const;
 
 public: // value access
     PixelX byteWidth() const;
