@@ -23,6 +23,9 @@
 #include "abstractbytearraycolumnrenderer.hpp"
 #include "abstractbytearraycolumnrenderer_p.hpp"
 
+// lib
+#include "coord.hpp"
+
 namespace Okteta {
 
 AbstractByteArrayColumnRenderer::AbstractByteArrayColumnRenderer(AbstractByteArrayColumnRendererPrivate* d)

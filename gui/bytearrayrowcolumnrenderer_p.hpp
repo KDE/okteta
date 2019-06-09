@@ -172,8 +172,8 @@ public: // functional logic
     /** */
     PixelXRange columnXsOfLinePositionsInclSpaces(const LinePositionRange& linePositions) const;
 
-    QRect byteRect(const Coord& coord) const;
-    QRect byteRect(const Coord& coord, AbstractByteArrayView::CodingTypeId codingId) const;
+    QRect byteRect(Coord coord) const;
+    QRect byteRect(Coord coord, AbstractByteArrayView::CodingTypeId codingId) const;
 
     AbstractByteArrayView::CodingTypeId codingIdofY(PixelY y) const;
     PixelY yOfCodingId(AbstractByteArrayView::CodingTypeId codingId) const;

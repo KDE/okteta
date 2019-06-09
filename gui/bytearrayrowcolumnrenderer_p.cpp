@@ -464,7 +464,7 @@ PixelXRange ByteArrayRowColumnRendererPrivate::columnXsOfLinePositionsInclSpaces
     return PixelXRange(x, rightX);
 }
 
-QRect ByteArrayRowColumnRendererPrivate::byteRect(const Coord& coord) const
+QRect ByteArrayRowColumnRendererPrivate::byteRect(Coord coord) const
 {
     Q_Q(const ByteArrayRowColumnRenderer);
 
@@ -480,7 +480,7 @@ QRect ByteArrayRowColumnRendererPrivate::byteRect(const Coord& coord) const
     return result;
 }
 
-QRect ByteArrayRowColumnRendererPrivate::byteRect(const Coord& coord, AbstractByteArrayView::CodingTypeId codingId) const
+QRect ByteArrayRowColumnRendererPrivate::byteRect(Coord coord, AbstractByteArrayView::CodingTypeId codingId) const
 {
     Q_Q(const ByteArrayRowColumnRenderer);
 

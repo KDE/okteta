@@ -845,7 +845,7 @@ void ByteArrayColumnViewPrivate::ensureVisible(const AddressRange& range, bool e
     ensureVisible(*mActiveColumn, ensureStartVisible ? coords.start() : coords.end());
 }
 
-void ByteArrayColumnViewPrivate::ensureVisible(const AbstractByteArrayColumnRenderer& column, const Coord& coord)
+void ByteArrayColumnViewPrivate::ensureVisible(const AbstractByteArrayColumnRenderer& column, Coord coord)
 {
     Q_Q(ByteArrayColumnView);
 

@@ -23,6 +23,9 @@
 #include "bytearrayrowcolumnrenderer.hpp"
 #include "bytearrayrowcolumnrenderer_p.hpp"
 
+// lib
+#include "coord.hpp"
+
 namespace Okteta {
 
 ByteArrayRowColumnRenderer::ByteArrayRowColumnRenderer(AbstractColumnStylist* stylist,
