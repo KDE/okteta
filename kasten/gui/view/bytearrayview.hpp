@@ -189,7 +189,7 @@ Q_SIGNALS:
     void viewModusChanged(int viewModus);
 
 Q_SIGNALS:
-    void viewContextMenuRequested(const QPoint& pos);
+    void viewContextMenuRequested(QPoint pos);
 
 public:
     ByteArrayViewProfileSynchronizer* synchronizer() const;

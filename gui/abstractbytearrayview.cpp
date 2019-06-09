@@ -385,7 +385,7 @@ void AbstractByteArrayView::ensureCursorVisible()
     d->ensureCursorVisible();
 }
 
-void AbstractByteArrayView::placeCursor(const QPoint& point)
+void AbstractByteArrayView::placeCursor(QPoint point)
 {
     Q_D(AbstractByteArrayView);
     d->placeCursor(point);
@@ -468,7 +468,7 @@ QSize AbstractByteArrayView::sizeHint() const
     return {400, 120};  // {columnsWidth(), columnsHeight()};
 }
 
-Address AbstractByteArrayView::indexByPoint(const QPoint& point) const
+Address AbstractByteArrayView::indexByPoint(QPoint point) const
 {
     Q_D(const AbstractByteArrayView);
     return d->indexByPoint(point);
@@ -518,7 +518,7 @@ QRect AbstractByteArrayView::cursorRect() const
     return d->cursorRect();
 }
 
-QMenu* AbstractByteArrayView::createStandardContextMenu(const QPoint& position)
+QMenu* AbstractByteArrayView::createStandardContextMenu(QPoint position)
 {
     Q_D(AbstractByteArrayView);
     return d->createStandardContextMenu(position);

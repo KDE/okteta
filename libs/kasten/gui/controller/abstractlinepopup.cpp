@@ -39,7 +39,7 @@ AbstractLinePopup::AbstractLinePopup(QWidget* parent)
 
 AbstractLinePopup::~AbstractLinePopup() = default;
 
-void AbstractLinePopup::setPosition(const QPoint& globalPosition)
+void AbstractLinePopup::setPosition(QPoint globalPosition)
 {
     Q_D(AbstractLinePopup);
 

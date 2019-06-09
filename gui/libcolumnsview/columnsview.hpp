@@ -95,7 +95,7 @@ public: // services
     PixelY yOffsetOfLine(Line lineIndex) const;
 
     /** translates the point to coordinates in the columns */
-    QPoint viewportToColumns(const QPoint& point) const;
+    QPoint viewportToColumns(QPoint point) const;
 
 public:
     /**  */

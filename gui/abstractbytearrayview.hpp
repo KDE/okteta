@@ -352,7 +352,7 @@ public: // modification access
     /** scrolls the view as much as needed to have the cursor fully visible */
     void ensureCursorVisible();
     /** puts the cursor in the column at the pos of Point (in absolute coord), does not handle the drawing */
-    void placeCursor(const QPoint& point);
+    void placeCursor(QPoint point);
 
 public:
     bool canReadData(const QMimeData* data) const;
@@ -384,7 +384,7 @@ public:
 
 public:
     QRect cursorRect() const;
-    QMenu* createStandardContextMenu(const QPoint& position);
+    QMenu* createStandardContextMenu(QPoint position);
 
 public: // QWidget API
     QSize sizeHint() const override;
@@ -394,7 +394,7 @@ public: // logic value service
      * @param point in viewport coordinate system
      * @return index of the byte that covers the point
      */
-    Address indexByPoint(const QPoint& point) const;
+    Address indexByPoint(QPoint point) const;
 
 Q_SIGNALS:
     /** Index of the byte that was clicked */

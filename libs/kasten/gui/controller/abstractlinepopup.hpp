@@ -55,7 +55,7 @@ public:
 
 public:
     void setIcon(const QIcon& icon);
-    void setPosition(const QPoint& globalPosition);
+    void setPosition(QPoint globalPosition);
     void setWidget(QWidget* widget);
 
     int exec();

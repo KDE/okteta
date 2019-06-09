@@ -106,7 +106,7 @@ PixelX ColumnsView::columnsWidth() const
     return d->ColumnsWidth;
 }
 
-QPoint ColumnsView::viewportToColumns(const QPoint& point) const
+QPoint ColumnsView::viewportToColumns(QPoint point) const
 {
     return QPoint(xOffset(), yOffset()) + point;
 }
