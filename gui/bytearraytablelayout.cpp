@@ -172,7 +172,7 @@ Address ByteArrayTableLayout::indexAtCLastLinePosition(Line line) const
                                                  (line + 1) * mNoOfBytesPerLine - mRelativeStartOffset - 1 + mByteArrayOffset;
 }
 
-Address ByteArrayTableLayout::indexAtCCoord(const Coord& coord) const
+Address ByteArrayTableLayout::indexAtCCoord(Coord coord) const
 {
     const Address index = indexAtCoord(coord);
 
@@ -205,7 +205,7 @@ Address ByteArrayTableLayout::indexAtLastLinePosition(Line line) const
     return (line == mCoordRange.end().line()) ? mLastByteArrayOffset : (line + 1) * mNoOfBytesPerLine - mRelativeStartOffset + mByteArrayOffset - 1;
 }
 
-Address ByteArrayTableLayout::indexAtCoord(const Coord& coord) const
+Address ByteArrayTableLayout::indexAtCoord(Coord coord) const
 {
     return coord.indexByLineWidth(mNoOfBytesPerLine) - mRelativeStartOffset + mByteArrayOffset;
 }
@@ -234,7 +234,7 @@ Address ByteArrayTableLayout::correctIndex(Address index) const
                                              index;
 }
 
-Coord ByteArrayTableLayout::correctCoord(const Coord& coord) const
+Coord ByteArrayTableLayout::correctCoord(Coord coord) const
 {
     return (coord <= mCoordRange.start()) ?     mCoordRange.start() :
            (coord >= mCoordRange.end()) ?       mCoordRange.end() :
@@ -242,13 +242,13 @@ Coord ByteArrayTableLayout::correctCoord(const Coord& coord) const
                                                 coord;
 }
 
-bool ByteArrayTableLayout::atFirstLinePosition(const Coord& coord) const
+bool ByteArrayTableLayout::atFirstLinePosition(Coord coord) const
 {
     return (coord.line() == mCoordRange.start().line()) ? coord.pos() == mCoordRange.start().pos() :
                                                           coord.pos() == 0;
 }
 
-bool ByteArrayTableLayout::atLastLinePosition(const Coord& coord) const
+bool ByteArrayTableLayout::atLastLinePosition(Coord coord) const
 {
     return (coord.line() == mCoordRange.end().line()) ? coord.pos() == mCoordRange.end().pos() :
                                                         coord.pos() == mNoOfBytesPerLine - 1;
@@ -259,12 +259,12 @@ LinePositionRange ByteArrayTableLayout::linePositions(Line line) const
     return LinePositionRange(firstLinePosition(line), lastLinePosition(line));
 }
 
-LinePosition ByteArrayTableLayout::firstLinePosition(const Coord& coord) const
+LinePosition ByteArrayTableLayout::firstLinePosition(Coord coord) const
 {
     return (mCoordRange.start().isLaterInLineThan(coord)) ? mCoordRange.start().pos() : coord.pos();
 }
 
-LinePosition ByteArrayTableLayout::lastLinePosition(const Coord& coord) const
+LinePosition ByteArrayTableLayout::lastLinePosition(Coord coord) const
 {
     return (mCoordRange.end().isPriorInLineThan(coord)) ? mCoordRange.end().pos() : coord.pos();
 }

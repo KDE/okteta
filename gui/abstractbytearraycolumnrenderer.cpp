@@ -245,7 +245,7 @@ PixelXRange AbstractByteArrayColumnRenderer::columnXsOfLinePositionsInclSpaces(c
     return d->columnXsOfLinePositionsInclSpaces(linePositions);
 }
 
-QRect AbstractByteArrayColumnRenderer::byteRect(const Coord& coord) const
+QRect AbstractByteArrayColumnRenderer::byteRect(Coord coord) const
 {
     Q_D(const AbstractByteArrayColumnRenderer);
 

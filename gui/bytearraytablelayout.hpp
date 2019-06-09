@@ -98,7 +98,7 @@ public: // value calculation service
      * If the coord is before the first coord the first index is returned,
      * if the coord is behind the last coord the last index is returned
      */
-    Address indexAtCCoord(const Coord& coord) const;
+    Address indexAtCCoord(Coord coord) const;
     /** calculates the index of the first pos in line.
      * If the line is below the first line the first index is returned,
      * if the line is above the last line the last index is returned
@@ -121,7 +121,7 @@ public: // value calculation service
     Coord coordOfCIndex(Address index) const;
 
     /** calculates the index of coord. if coord is invalid the behaviour is undefinded */
-    Address indexAtCoord(const Coord& coord) const;
+    Address indexAtCoord(Coord coord) const;
     /** calculates the index of the first pos in line. if line is invalid the behaviour is undefinded */
     Address indexAtFirstLinePosition(Line line) const;
     /** calculates the index of last pos in line. if line is invalid the behaviour is undefinded */
@@ -140,20 +140,20 @@ public: // value calculation service
     /** returns the last Pos in line. if line is invalid the behaviour is undefinded */
     LinePosition lastLinePosition(Line line) const;
     /** returns the valid Pos or the first Pos in line. if coord is invalid the behaviour is undefinded */
-    LinePosition firstLinePosition(const Coord& coord) const;
+    LinePosition firstLinePosition(Coord coord) const;
     /** returns the valid Pos or the last Pos in line. if coord is invalid the behaviour is undefinded */
-    LinePosition lastLinePosition(const Coord& coord) const;
+    LinePosition lastLinePosition(Coord coord) const;
     /** returns true if the line has content */
     bool hasContent(Line line) const;
     /** returns true if the coord is the first in it's line. if coord is invalid the behaviour is undefinded */
-    bool atFirstLinePosition(const Coord& coord) const;
+    bool atFirstLinePosition(Coord coord) const;
     /** returns true if the coord is the last in it's line. if coord is invalid the behaviour is undefinded */
-    bool atLastLinePosition(const Coord& coord) const;
+    bool atLastLinePosition(Coord coord) const;
 
     /** returns the index if valid or the nearest valid index */
     Address correctIndex(Address index) const;
     /** returns the coord if valid or the nearest valid coord */
-    Coord correctCoord(const Coord& coord) const;
+    Coord correctCoord(Coord coord) const;
 
 public: // modification access; return true if changes
     /** sets mStartOffset, returns true if changed */

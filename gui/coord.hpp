@@ -72,12 +72,12 @@ public: // logic
      * If at least one of both is invalid the result is undefined.
      * @return true if the pos is left to the pos of other and both are in the same line, otherwise false.
      */
-    constexpr bool isPriorInLineThan(const Coord& other) const;
+    constexpr bool isPriorInLineThan(Coord other) const;
     /** tests if the coord is later in the same line than the given coord.
      * If at least one of both is invalid the result is undefined.
      * @return true if the pos is right to the pos of other and both are in the same line, otherwise false
      */
-    constexpr bool isLaterInLineThan(const Coord& other) const;
+    constexpr bool isLaterInLineThan(Coord other) const;
     /** @return true if the line is below lines, otherwise false */
     constexpr bool isBelow(Line line) const;
     /** @return true if the line is above lines, otherwise false */
@@ -145,14 +145,14 @@ public:
      * If one or more of the coords is invalid the behaviour is undefined.
      * @param other a possible line start coord
      */
-    void goLineStart(const Coord& other);
+    void goLineStart(Coord other);
     /** sets the position to the given pos or
      * if the line is the same as that of the given coord to the position of that.
      * If one or more of the coords is invalid the behaviour is undefined.
      * @param lastPos last position in normal line
      * @param other a possible line end coord
      */
-    void goLineEnd(LinePosition lastPos, const Coord& other);
+    void goLineEnd(LinePosition lastPos, Coord other);
     /** moves the coord 1 lines upwards. There is no check whether the first line is overstepped. */
     void goUp();
     /** moves the coord lines lines downwards. */
@@ -259,12 +259,12 @@ inline void Coord::gotoStartOfNextLine()
     mPos = 0;
 }
 
-inline void Coord::goLineStart(const Coord& other)
+inline void Coord::goLineStart(Coord other)
 {
     mPos = (mLine == other.mLine) ? other.mPos : 0;
 }
 
-inline void Coord::goLineEnd(LinePosition lastPos, const Coord& other)
+inline void Coord::goLineEnd(LinePosition lastPos, Coord other)
 {
     mPos = (mLine == other.mLine) ? other.mPos : lastPos;
 }
@@ -279,12 +279,12 @@ inline constexpr Address Coord::indexByLineWidth(LinePositionSize lineWidth) con
     return mLine * lineWidth + mPos;
 }
 
-inline constexpr bool Coord::isPriorInLineThan(const Coord& other) const
+inline constexpr bool Coord::isPriorInLineThan(Coord other) const
 {
     return mLine == other.mLine && mPos < other.mPos;
 }
 
-inline constexpr bool Coord::isLaterInLineThan(const Coord& other) const
+inline constexpr bool Coord::isLaterInLineThan(Coord other) const
 {
     return mLine == other.mLine && mPos > other.mPos;
 }
@@ -297,7 +297,7 @@ inline constexpr bool Coord::isBeforeLineEnd(LinePosition maxPos) const { return
 
 inline constexpr bool Coord::isAtStart()                   const { return mPos == 0 && mLine == 0; }
 
-inline Coord operator+(const Coord& other, LinePosition pos)
+inline Coord operator+(Coord other, LinePosition pos)
 {
     return Coord(other.pos() + pos, other.line());
 }

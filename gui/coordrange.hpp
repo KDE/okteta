@@ -49,7 +49,7 @@ public:
      * @param start start coord
      * @param end end coord
      */
-    CoordRange(const Coord& start, const Coord& end);
+    CoordRange(Coord start, Coord end);
     /**
      * @param posRange start and end pos
      * @param lineRange start and end line
@@ -85,7 +85,7 @@ public:
     bool includesLine(Line line) const;
 };
 
-inline CoordRange::CoordRange(const Coord& start, const Coord& end) : BaseCoordRange(start, end) {}
+inline CoordRange::CoordRange(Coord start, Coord end) : BaseCoordRange(start, end) {}
 inline CoordRange::CoordRange(const LinePositionRange& posRange, const LineRange& lineRange)
     : BaseCoordRange(Coord(posRange.start(), lineRange.start()), Coord(posRange.end(), lineRange.end()))
 {}
