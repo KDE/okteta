@@ -59,7 +59,7 @@ void AbstractLinePopupPrivate::setWidget(QWidget* widget)
     mBaseLayout->addWidget(widget, 10);
 }
 
-void AbstractLinePopupPrivate::setPosition(const QPoint& globalPosition)
+void AbstractLinePopupPrivate::setPosition(QPoint globalPosition)
 {
     p->move(globalPosition.x(), globalPosition.y() - p->height());
 }

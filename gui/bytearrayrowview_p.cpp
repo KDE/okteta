@@ -502,7 +502,7 @@ void ByteArrayRowViewPrivate::setActiveCoding(AbstractByteArrayView::CodingTypeI
     unpauseCursor();
 }
 
-void ByteArrayRowViewPrivate::placeCursor(const QPoint& point)
+void ByteArrayRowViewPrivate::placeCursor(QPoint point)
 {
     Q_Q(ByteArrayRowView);
 
@@ -529,7 +529,7 @@ void ByteArrayRowViewPrivate::placeCursor(const QPoint& point)
     emit q->cursorPositionChanged(cursorPosition());
 }
 
-Address ByteArrayRowViewPrivate::indexByPoint(const QPoint& point) const
+Address ByteArrayRowViewPrivate::indexByPoint(QPoint point) const
 {
     Q_Q(const ByteArrayRowView);
 

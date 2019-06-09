@@ -65,9 +65,9 @@ public: // modification access
 public: // AbstractByteArrayViewPrivate API
     void ensureVisible(const AddressRange& range, bool ensureStartVisible) override;
     void ensureCursorVisible() override;
-    void placeCursor(const QPoint& point) override;
+    void placeCursor(QPoint point) override;
     QRect cursorRect() const override;
-    Address indexByPoint(const QPoint& point) const override;
+    Address indexByPoint(QPoint point) const override;
     void blinkCursor() override;
 
 public:

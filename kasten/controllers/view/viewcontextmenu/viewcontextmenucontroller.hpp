@@ -44,7 +44,7 @@ public: // AbstractXmlGuiController API
     void setTargetModel(AbstractModel* model) override;
 
 private Q_SLOTS: // slots
-    void showContextMenu(const QPoint& pos);
+    void showContextMenu(QPoint pos);
 
 private:
     ByteArrayView* mByteArrayView = nullptr;

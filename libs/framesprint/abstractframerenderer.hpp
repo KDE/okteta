@@ -53,7 +53,7 @@ public: // API to be implemented
 
 public:
     void setPos(int x, int y);
-    void setPos(const QPoint& point);
+    void setPos(QPoint point);
 
 public:
     QPoint pos () const;

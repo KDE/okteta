@@ -363,7 +363,7 @@ void ByteArrayJanusView::setOverwriteMode(bool overwriteMode)
     mView->setOverwriteMode(overwriteMode);
 }
 
-void ByteArrayJanusView::setViewPos(const QPoint& pos)
+void ByteArrayJanusView::setViewPos(QPoint pos)
 {
     mView->horizontalScrollBar()->setValue(pos.x());
     mView->verticalScrollBar()->setValue(pos.y());

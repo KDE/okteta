@@ -292,7 +292,7 @@ void MouseNavigator::autoScrollTimerDone()
     }
 }
 
-void MouseNavigator::handleMouseMove(const QPoint& point)   // handles the move of the mouse with pressed buttons
+void MouseNavigator::handleMouseMove(QPoint point)   // handles the move of the mouse with pressed buttons
 {
     ByteArrayTableCursor* tableCursor = mView->tableCursor();
     ByteArrayTableRanges* tableRanges = mView->tableRanges();

@@ -163,14 +163,14 @@ public: // interaction
     void setSelectionCursorPosition(Address index);
 
 public:
-    QMenu* createStandardContextMenu(const QPoint& position);
+    QMenu* createStandardContextMenu(QPoint position);
 
 public: // API to be implemented
     virtual void ensureVisible(const AddressRange& range, bool ensureStartVisible) = 0;
     virtual void ensureCursorVisible() = 0;
-    virtual void placeCursor(const QPoint& point) = 0;
+    virtual void placeCursor(QPoint point) = 0;
     virtual QRect cursorRect() const = 0;
-    virtual Address indexByPoint(const QPoint& point) const = 0;
+    virtual Address indexByPoint(QPoint point) const = 0;
     virtual void blinkCursor() = 0;
 
 public: // events
