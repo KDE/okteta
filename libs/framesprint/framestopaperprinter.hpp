@@ -40,8 +40,8 @@ public:
     ~FramesToPaperPrinter() override;
 
 public:
-    void setPaperRect(const QRect& paperRect);
-    void setPageRect(const QRect& pageRect);
+    void setPaperRect(QRect paperRect);
+    void setPageRect(QRect pageRect);
 
     void addFrameRenderer(AbstractFrameRenderer* frameRenderer);
 
