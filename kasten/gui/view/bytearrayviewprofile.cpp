@@ -111,8 +111,8 @@ void ByteArrayViewProfile::setViewProfileTitle(const QString& title) { d->mViewP
 void ByteArrayViewProfile::setOffsetCoding(int offsetCoding) { d->mOffsetCoding = offsetCoding; }
 void ByteArrayViewProfile::setValueCoding(int valueCoding) { d->mValueCoding = valueCoding; }
 void ByteArrayViewProfile::setCharCoding(const QString& charCodingName) { d->mCharCodingName = charCodingName; }
-void ByteArrayViewProfile::setSubstituteChar(const QChar& substituteChar) { d->mSubstituteChar = substituteChar; }
-void ByteArrayViewProfile::setUndefinedChar(const QChar& undefinedChar) { d->mUndefinedChar = undefinedChar; }
+void ByteArrayViewProfile::setSubstituteChar(QChar substituteChar) { d->mSubstituteChar = substituteChar; }
+void ByteArrayViewProfile::setUndefinedChar(QChar undefinedChar) { d->mUndefinedChar = undefinedChar; }
 void ByteArrayViewProfile::setOffsetColumnVisible(bool visible) { d->mOffsetColumnVisible = visible; }
 void ByteArrayViewProfile::setVisibleByteArrayCodings(int columns) { d->mVisibleByteArrayCodings = columns; }
 void ByteArrayViewProfile::setLayoutStyle(int layoutStyle) { d->mLayoutStyle = layoutStyle; }

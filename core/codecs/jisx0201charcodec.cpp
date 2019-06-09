@@ -29,7 +29,7 @@
 
 namespace Okteta {
 
-bool JISX0201CharCodec::encode(Byte* byte, const QChar& _char) const
+bool JISX0201CharCodec::encode(Byte* byte, QChar _char) const
 {
     const ushort charUnicode = _char.unicode();
 
@@ -68,7 +68,7 @@ Character JISX0201CharCodec::decode(Byte byte) const
     return {QChar(unicode), (unicode == 0)};
 }
 
-bool JISX0201CharCodec::canEncode(const QChar& _char) const
+bool JISX0201CharCodec::canEncode(QChar _char) const
 {
     const ushort charUnicode = _char.unicode();
     return

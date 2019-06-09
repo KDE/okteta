@@ -214,12 +214,12 @@ TextCharCodec::~TextCharCodec()
     delete mEncoder;
 }
 
-bool TextCharCodec::canEncode(const QChar& _char) const
+bool TextCharCodec::canEncode(QChar _char) const
 {
     return mCodec->canEncode(_char);
 }
 
-bool TextCharCodec::encode(Byte* byte, const QChar& _char) const
+bool TextCharCodec::encode(Byte* byte, QChar _char) const
 {
     if (!mCodec->canEncode(_char)) { // TODO: do we really need the codec?
         return false;

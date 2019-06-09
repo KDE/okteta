@@ -65,8 +65,8 @@ public: // codings
     QString charCodingName() const;
     void setShowsNonprinting(bool showsNonprinting);
     bool showsNonprinting() const;
-    void setSubstituteChar(const QChar& substituteChar);
-    void setUndefinedChar(const QChar& undefinedChar);
+    void setSubstituteChar(QChar substituteChar);
+    void setUndefinedChar(QChar undefinedChar);
     QChar substituteChar() const;
     QChar undefinedChar() const;
 

@@ -50,8 +50,8 @@ public:
 
 public: // API to be implemented
     virtual Character decode(Byte byte) const = 0;
-    virtual bool encode(Byte* byte, const QChar& _char) const = 0;
-    virtual bool canEncode(const QChar& _char) const = 0;
+    virtual bool encode(Byte* byte, QChar _char) const = 0;
+    virtual bool canEncode(QChar _char) const = 0;
     virtual const QString& name() const = 0;
 };
 

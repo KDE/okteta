@@ -29,7 +29,7 @@
 
 namespace Okteta {
 
-bool USASCIICharCodec::encode(Byte* byte, const QChar& _char) const
+bool USASCIICharCodec::encode(Byte* byte, QChar _char) const
 {
     const int unicodeValue = _char.unicode();
     // not in range?
@@ -47,7 +47,7 @@ Character USASCIICharCodec::decode(Byte byte) const
     return {QChar(ushort(byte)), (byte > 0x007F)};
 }
 
-bool USASCIICharCodec::canEncode(const QChar& _char) const
+bool USASCIICharCodec::canEncode(QChar _char) const
 {
     return (_char.unicode() <= 0x007F);
 }

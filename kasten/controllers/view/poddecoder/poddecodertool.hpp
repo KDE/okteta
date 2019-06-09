@@ -100,7 +100,7 @@ private Q_SLOTS:
     void onReadOnlyChanged();
 
     void onCharCodecChange(const QString& codecName);
-//     void onUndefinedCharChanged( const QChar& undefinedChar );
+//     void onUndefinedCharChanged(QChar undefinedChar);
 
 private: // source
     ByteArrayView* mByteArrayView = nullptr;

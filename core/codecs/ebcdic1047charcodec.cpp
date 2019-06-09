@@ -101,7 +101,7 @@ static constexpr unsigned char EBCDICChars[256] =
     0x70, 0xDD, 0xDE, 0xDB, 0xDC, 0x8D, 0x8E, 0xDF
 };
 
-bool EBCDIC1047CharCodec::encode(Byte* byte, const QChar& _char) const
+bool EBCDIC1047CharCodec::encode(Byte* byte, QChar _char) const
 {
     const int unicodeValue = _char.unicode();
     // not in range?
@@ -119,7 +119,7 @@ Character EBCDIC1047CharCodec::decode(Byte byte) const
     return {QChar{UnicodeChars[byte]}};
 }
 
-bool EBCDIC1047CharCodec::canEncode(const QChar& _char) const
+bool EBCDIC1047CharCodec::canEncode(QChar _char) const
 {
     return (_char.unicode() <= 0x00FF);
 }
