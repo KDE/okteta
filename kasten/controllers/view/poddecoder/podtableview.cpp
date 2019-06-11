@@ -114,8 +114,13 @@ PODTableView::PODTableView(PODDecoderTool* tool, QWidget* parent)
     QFontMetrics metrics(f);
     // ideally we should check the width of the longest translated string, but this should be wide enough for most
     // anyway this is just an initial setting and the width can be changed manually
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 11, 0))
+    header->resizeSection(0, metrics.horizontalAdvance(QStringLiteral("Hexadecimal 8-bit")) + 30);
+    header->resizeSection(1, metrics.horizontalAdvance(QStringLiteral("1.01234567890123456789e-111")) + 15);
+#else
     header->resizeSection(0, metrics.width(QStringLiteral("Hexadecimal 8-bit")) + 30);
     header->resizeSection(1, metrics.width(QStringLiteral("1.01234567890123456789e-111")) + 15);
+#endif
 }
 
 PODTableView::~PODTableView() = default;
