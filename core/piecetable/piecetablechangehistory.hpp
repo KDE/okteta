@@ -44,8 +44,11 @@ class PieceTableChangeHistory
 {
 public:
     PieceTableChangeHistory();
+    PieceTableChangeHistory(const PieceTableChangeHistory&) = delete;
 
     ~PieceTableChangeHistory();
+
+    PieceTableChangeHistory& operator=(const PieceTableChangeHistory&) = delete;
 
 public:
     void clear();

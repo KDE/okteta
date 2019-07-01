@@ -154,7 +154,6 @@ void StructuresManagerView::reloadSelectedItems()
 void StructuresManagerView::rebuildPluginSelectorEntries()
 {
     mRebuildingPluginsList = true;
-    QStringList newVals;
     KPluginInfo::List plugins;
     KPluginInfo::List dynamicPlugins;
     const auto structureDefs = mTool->manager()->structureDefs();

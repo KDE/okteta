@@ -610,12 +610,12 @@ void ByteArrayRowViewPrivate::createCursorPixmaps()
 
     QPainter painter;
     painter.begin(&mCursorPixmaps->offPixmap());
-    painter.initFrom(q);
+    initPainterFromWidget(&painter);
     mByteArrayColumn->renderByte(&painter, index, mActiveCoding);
     painter.end();
 
     painter.begin(&mCursorPixmaps->onPixmap());
-    painter.initFrom(q);
+    initPainterFromWidget(&painter);
     mByteArrayColumn->renderCursor(&painter, index, mActiveCoding);
     painter.end();
 

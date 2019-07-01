@@ -286,6 +286,7 @@ function(okteta_add_library _baseName)
     )
     set_property(TARGET ${_targetName} PROPERTY OKTETA_FULLNAME ${_fullName})
     set_property(TARGET ${_targetName} PROPERTY OKTETA_FULLVERSIONEDNAME ${_fullVersionedName})
+    set_property(TARGET ${_targetName} PROPERTY OKTETA_NAMESPACEPREFIX ${_namespacePrefix})
     set_property(TARGET ${_targetName} PROPERTY OKTETA_NO_TARGETNAMESPACE ${OKTETA_ADD_LIBRARY_NO_TARGET_NAMESPACE})
     set_property(TARGET ${_targetName} PROPERTY OKTETA_USE_VERSIONED_PACKAGE_NAME ${_use_versioned_package_name})
 
@@ -378,8 +379,8 @@ function(okteta_add_cmakeconfig _baseName)
         COMPONENT Devel
     )
     get_property(_no_target_namespace TARGET ${_targetName} PROPERTY OKTETA_NO_TARGETNAMESPACE)
-
     if(NOT _no_target_namespace)
+        get_property(_namespacePrefix TARGET ${_targetName} PROPERTY OKTETA_NAMESPACEPREFIX)
         set(_namespace_args NAMESPACE "${_namespacePrefix}::")
     endif()
     install(EXPORT ${_targets_export_name}

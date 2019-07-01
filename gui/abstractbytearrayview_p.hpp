@@ -206,6 +206,7 @@ protected:
     void adaptController();
     void cancelByteEditor();
     void finishByteEditor();
+    void initPainterFromWidget(QPainter* painter) const;
 
 protected:
     bool getNextChangedRange(CoordRange* changedRange, const CoordRange& visibleRange) const;
