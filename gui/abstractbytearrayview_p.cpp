@@ -44,6 +44,7 @@
 // KF
 #include <KLocalizedString>
 // Qt
+#include <QPainter>
 #include <QDragEnterEvent>
 #include <QDragMoveEvent>
 #include <QDragLeaveEvent>
@@ -1035,6 +1036,16 @@ void AbstractByteArrayViewPrivate::unpauseCursor()
     if (mCursorBlinkTimer->isActive()) {
         updateCursors();
     }
+}
+
+void AbstractByteArrayViewPrivate::initPainterFromWidget(QPainter* painter) const
+{
+    Q_Q(const AbstractByteArrayView);
+
+    const QPalette& palette = q->palette();
+    painter->setPen(QPen(palette.brush(q->foregroundRole()), 1));
+    painter->setBrush(palette.brush(q->backgroundRole()));
+    painter->setFont(q->font());
 }
 
 QMenu* AbstractByteArrayViewPrivate::createStandardContextMenu(QPoint position)
