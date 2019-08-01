@@ -520,10 +520,14 @@
       <image>https://kde.org/images/screenshots/okteta.png</image>
     </screenshot>
   </screenshots>
-  <update_contact>kossebau_at_kde.org</update_contact>
   <project_group>KDE</project_group>
+  <icon type="stock">okteta</icon>
+  <categories>
+    <category>Utility</category>
+  </categories>
   <provides>
     <binary>okteta</binary>
   </provides>
   <launchable type="desktop-id">org.kde.okteta.desktop</launchable>
+  <update_contact>kossebau_at_kde.org</update_contact>
 </component>
