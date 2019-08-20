@@ -109,9 +109,7 @@ inline constexpr ArrayChangeMetrics ArrayChangeMetrics::asReplacement(Address of
 inline constexpr ArrayChangeMetrics ArrayChangeMetrics::asSwapping(Address firstOffset, Address secondOffset, Size secondLength)
 {
     return
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
         Q_ASSERT(firstOffset < secondOffset),
-#endif
         ArrayChangeMetrics{Swapping, firstOffset, secondOffset, secondLength};
 }
 

@@ -100,11 +100,7 @@ void OffsetColumnRendererPrivate::setFontMetrics(const QFontMetrics& fontMetrics
 
     // use 0 as reference, using a fixed font should always yield same width
     PrintFunction(mCodedOffset, 0);
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 11, 0))
     const int newOffsetTextWidth = fontMetrics.horizontalAdvance(QLatin1String(mCodedOffset));
-#else
-    const int newOffsetTextWidth = fontMetrics.width(QLatin1String(mCodedOffset));
-#endif
 
     if (newOffsetTextWidth == mOffsetTextWidth) {
         return;

@@ -213,19 +213,11 @@ void ByteArrayRowColumnRendererPrivate::recalcByteWidth()
     // use 0 as reference, using a fixed font should always yield same width
     mValueCodec->encode(&mDecodedByteText, 0, Byte(0));
     if (mValueCoding == BinaryCoding) {
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 11, 0))
         const int binaryHalfWidth = mFontMetrics.horizontalAdvance(mDecodedByteText.left(4));
-#else
-        const int binaryHalfWidth = mFontMetrics.width(mDecodedByteText.left(4));
-#endif
         mBinaryHalfOffset = binaryHalfWidth + mBinaryGapWidth;
         mByteWidth = mBinaryHalfOffset + binaryHalfWidth;
     } else {
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 11, 0))
         mByteWidth = mFontMetrics.horizontalAdvance(mDecodedByteText);
-#else
-        mByteWidth = mFontMetrics.width(mDecodedByteText);
-#endif
     }
 }
 
