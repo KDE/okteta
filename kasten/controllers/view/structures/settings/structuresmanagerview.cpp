@@ -137,7 +137,7 @@ void StructuresManagerView::reloadSelectedItems()
     for (const Kasten::StructureDefinitionFile* def : structureDefs) {
         KPluginInfo info = def->pluginInfo();
         if (info.isPluginEnabled()) {
-            newVals.append(QString(QStringLiteral("\'%1\':\'*\'")).arg(info.pluginName()));
+            newVals.append(QStringLiteral("\'%1\':\'*\'").arg(info.pluginName()));
         }
     }
 
