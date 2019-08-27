@@ -49,7 +49,7 @@ QString ScriptUtils::qScriptValueToString(const QScriptValue& val)
     QScriptValueIterator it(val);
     bool first = true;
     while (it.hasNext()) {
-        if (it.name().startsWith(QLatin1String("_"))) {
+        if (it.name().startsWith(QLatin1Char('_'))) {
             continue; // skip all names starting with _ like e.g. __proto__
 
         }
