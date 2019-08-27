@@ -40,6 +40,18 @@
 
 #include <KLocalizedString>
 
+const QString StringDataInformation::encodingNames[static_cast<int>(StringDataInformation::StringType::EBCDIC)+2] = {
+    QStringLiteral("<invalid>"), // -1
+    QStringLiteral("ascii"),
+    QStringLiteral("latin1"),
+    QStringLiteral("utf-8"),
+    QStringLiteral("utf-16le"),
+    QStringLiteral("utf-16-be"),
+    QStringLiteral("utf32-le"),
+    QStringLiteral("utf32-be"),
+    QStringLiteral("ebcdic"),
+};
+
 StringDataInformation::StringDataInformation(const QString& name, StringType encoding, DataInformationBase* parent)
     : DataInformationWithDummyChildren(name, parent)
     , mDummy(new DummyDataInformation(this))

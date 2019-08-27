@@ -30,12 +30,6 @@
 
 class DummyDataInformation;
 
-// TODO QStringLiteral
-const QLatin1String stringEncodings[] = {
-    QLatin1String("ascii"), QLatin1String("latin1"), QLatin1String("utf-8"), QLatin1String("utf-16le"),
-    QLatin1String("utf-16-be"), QLatin1String("utf32-le"), QLatin1String("utf32-be"), QLatin1String("ebcdic")
-};
-
 class StringDataInformation : public DataInformationWithDummyChildren
 {
     DATAINFORMATION_CLONE_DECL(StringDataInformation, DataInformationWithDummyChildren);
@@ -87,6 +81,7 @@ public:
     BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const override;
 
     StringType encoding() const;
+    QString encodingName() const;
     void setEncoding(StringType encoding);
     uint terminationCodePoint() const;
     void setTerminationCodePoint(uint term);
@@ -112,11 +107,17 @@ private:
     QScopedPointer<DummyDataInformation> mDummy;
     QScopedPointer<StringData> mData;
     StringType mEncoding = StringType::InvalidEncoding;
+
+    static const QString encodingNames[static_cast<int>(StringDataInformation::StringType::EBCDIC)+2];
 };
 
 inline StringDataInformation::StringType StringDataInformation::encoding() const
 {
     return mEncoding;
+}
+inline QString StringDataInformation::encodingName() const
+{
+    return encodingNames[static_cast<int>(mEncoding)+1];
 }
 
 inline uint StringDataInformation::maxByteCount() const

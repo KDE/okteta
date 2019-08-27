@@ -105,7 +105,7 @@ QScriptValue StringScriptClass::additionalProperty(const DataInformation* data, 
         return sData->stringByteLength();
     }
     if (name == s_encoding) {
-        return stringEncodings[static_cast<int>(sData->encoding())];
+        return sData->encodingName();
     }
     if (name == s_maxCharCount) {
         return sData->maxCharCount();
