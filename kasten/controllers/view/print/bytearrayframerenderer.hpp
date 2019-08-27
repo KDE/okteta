@@ -104,7 +104,7 @@ public:
     QChar substituteChar() const;
     QChar undefinedChar() const;
     Okteta::CharCoding charCoding() const;
-    const QString& charCodingName() const;
+    QString charCodingName() const;
 
     bool offsetColumnVisible() const;
     int visibleByteArrayCodings() const;

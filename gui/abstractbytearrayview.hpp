@@ -188,7 +188,7 @@ public: // value access
     /**
      * @return name of the encoding used for the chars
      */
-    const QString& charCodingName() const;
+    QString charCodingName() const;
 
     double zoomLevel() const;
 

@@ -52,7 +52,7 @@ bool USASCIICharCodec::canEncode(QChar _char) const
     return (_char.unicode() <= 0x007F);
 }
 
-const QString& USASCIICharCodec::name() const
+QString USASCIICharCodec::name() const
 {
     return codecName();
 }

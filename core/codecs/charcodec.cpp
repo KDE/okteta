@@ -32,7 +32,7 @@
 
 namespace Okteta {
 
-const QStringList& CharCodec::codecNames()
+QStringList CharCodec::codecNames()
 {
     static QStringList codecNames;
     // first call?

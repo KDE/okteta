@@ -78,7 +78,7 @@ bool JISX0201CharCodec::canEncode(QChar _char) const
         (0xFF61 <= charUnicode && charUnicode <= 0xFF9F);
 }
 
-const QString& JISX0201CharCodec::name() const
+QString JISX0201CharCodec::name() const
 {
     return codecName();
 }

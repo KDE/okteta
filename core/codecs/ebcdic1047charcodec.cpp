@@ -124,7 +124,7 @@ bool EBCDIC1047CharCodec::canEncode(QChar _char) const
     return (_char.unicode() <= 0x00FF);
 }
 
-const QString& EBCDIC1047CharCodec::name() const
+QString EBCDIC1047CharCodec::name() const
 {
     return codecName();
 }

@@ -121,7 +121,7 @@ bool ByteArrayFrameRenderer::showsNonprinting()              const { return mCha
 QChar ByteArrayFrameRenderer::substituteChar()               const { return mCharColumnRenderer->substituteChar(); }
 QChar ByteArrayFrameRenderer::undefinedChar()                const { return mCharColumnRenderer->undefinedChar(); }
 Okteta::CharCoding ByteArrayFrameRenderer::charCoding()     const { return mCharCoding; }
-const QString& ByteArrayFrameRenderer::charCodingName()      const { return mCharCodec->name(); }
+QString ByteArrayFrameRenderer::charCodingName()             const { return mCharCodec->name(); }
 
 bool ByteArrayFrameRenderer::offsetColumnVisible() const { return mOffsetColumnRenderer->isVisible(); }
 int ByteArrayFrameRenderer::visibleByteArrayCodings() const

@@ -38,7 +38,7 @@ public: // CharCodec API
     Character decode(Byte byte) const override;
     bool encode(Byte* byte, QChar _char) const override;
     bool canEncode(QChar _char) const override;
-    const QString& name() const override;
+    QString name() const override;
 
 public:
     static EBCDIC1047CharCodec* create();

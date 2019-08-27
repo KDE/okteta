@@ -90,7 +90,7 @@ AbstractByteArrayView::CharCoding AbstractByteArrayView::charCoding() const
     Q_D(const AbstractByteArrayView);
     return d->charCoding();
 }
-const QString& AbstractByteArrayView::charCodingName() const
+QString AbstractByteArrayView::charCodingName() const
 {
     Q_D(const AbstractByteArrayView);
     return d->charCodingName();

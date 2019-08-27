@@ -113,7 +113,7 @@ public: // value access
     AbstractByteArrayView::ValueCoding valueCoding() const;
     const CharCodec* charCodec() const;
     AbstractByteArrayView::CharCoding charCoding() const;
-    const QString& charCodingName() const;
+    QString charCodingName() const;
 
     double zoomLevel() const;
 
@@ -348,7 +348,7 @@ inline AbstractByteArrayView::CharCoding AbstractByteArrayViewPrivate::charCodin
 {
     return (AbstractByteArrayView::CharCoding)mCharCoding;
 }
-inline const QString& AbstractByteArrayViewPrivate::charCodingName() const { return mCharCodec->name(); }
+inline QString AbstractByteArrayViewPrivate::charCodingName() const { return mCharCodec->name(); }
 inline AbstractByteArrayView::LayoutStyle AbstractByteArrayViewPrivate::layoutStyle() const { return mResizeStyle; }
 inline Address AbstractByteArrayViewPrivate::cursorPosition()   const { return mTableCursor->realIndex(); }
 inline bool AbstractByteArrayViewPrivate::isCursorBehind()  const { return mTableCursor->isBehind(); }

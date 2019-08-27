@@ -245,7 +245,7 @@ Character TextCharCodec::decode(Byte byte) const
     return {qchar, !isDecoded};
 }
 
-const QString& TextCharCodec::name() const
+QString TextCharCodec::name() const
 {
     if (mName.isNull()) {
         mName = QString::fromLatin1(mCodec->name());

@@ -46,13 +46,13 @@ public:
     /** */
     static CharCodec* createCodec(const QString& name);
 
-    static const QStringList& codecNames();
+    static QStringList codecNames();
 
 public: // API to be implemented
     virtual Character decode(Byte byte) const = 0;
     virtual bool encode(Byte* byte, QChar _char) const = 0;
     virtual bool canEncode(QChar _char) const = 0;
-    virtual const QString& name() const = 0;
+    virtual QString name() const = 0;
 };
 
 inline CharCodec::~CharCodec() = default;
