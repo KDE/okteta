@@ -38,8 +38,6 @@
 #include "script/scriptutils.hpp"
 #include "script/scriptloggerview.hpp"
 
-// #include "modeltest.hpp"
-
 // KF
 #include <KComboBox>
 #include <KLocalizedString>
@@ -53,6 +51,7 @@
 #include <QPushButton>
 #include <QHeaderView>
 #include <QFocusEvent>
+// #include <QAbstractItemModelTester>
 
 namespace Kasten {
 
@@ -67,7 +66,7 @@ StructureView::StructureView(StructuresTool* tool, QWidget* parent)
     baseLayout->setContentsMargins(0, 0, 0, 0);
     // table
     mStructureTreeModel = new StructureTreeModel(mTool, this);
-    //  mModeltest = new ModelTest(mStructureTreeModel, this);
+    // mModeltester = new QAbstractItemModelTester(mStructureTreeModel, this);
     mStructTreeView = new QTreeView(this);
     mStructTreeView->setObjectName(QStringLiteral("StructTree"));
     mStructTreeView->setRootIsDecorated(true);

@@ -457,7 +457,6 @@ oktetakastencontrollers_add_sublibrary(view/structures
         StructuresTool
         StructureTreeModel
         StructureDefinitionFile
-#   view/structures/modeltest.cpp
         StructureView
         StructuresToolView
         StructureViewItemDelegate
@@ -629,6 +628,7 @@ okteta_add_library(Controllers NAMESPACE Okteta Kasten
         KF5::Completion
         Qt5::PrintSupport
         Qt5::Script
+#         Qt5::Test # QAbstractItemModelTester
         ${OPTIONAL_PRIVATE}
     VERSION     ${OKTETAKASTENCONTROLLERS_VERSION}
     SOVERSION   ${OKTETAKASTENCONTROLLERS_SO_VERSION}
