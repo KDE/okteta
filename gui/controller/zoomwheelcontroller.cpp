@@ -42,7 +42,7 @@ bool ZoomWheelController::handleWheelEvent(QWheelEvent* wheelEvent)
     bool eventUsed = false;
 
     if (wheelEvent->modifiers() & Qt::CTRL) {
-        const int delta = wheelEvent->delta();
+        const int delta = wheelEvent->angleDelta().y();
         if (delta > 0) {
             mView->zoomIn();
         } else if (delta < 0) {
