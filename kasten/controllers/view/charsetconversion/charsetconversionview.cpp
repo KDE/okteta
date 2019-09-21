@@ -90,8 +90,14 @@ CharsetConversionView::CharsetConversionView(CharsetConversionTool* tool, QWidge
         i18nc("@info:whatsthis",
               "Select the charset the bytes are converted to.");
     mOtherCharSetComboBox->setWhatsThis(targetCharsetWhatsThis);
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
     connect(mOtherCharSetComboBox, QOverload<const QString&>::of(&KComboBox::activated),
             mTool, &CharsetConversionTool::setOtherCharCodecName);
+#else
+    connect(mOtherCharSetComboBox, &KComboBox::textActivated,
+            mTool, &CharsetConversionTool::setOtherCharCodecName);
+#endif
 
     directionCharsetLayout->addWidget(mOtherCharSetComboBox, 10);
     baseLayout->addLayout(directionCharsetLayout);
