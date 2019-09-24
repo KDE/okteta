@@ -199,6 +199,7 @@ Notes:
     <comment xml:lang="pl">Dane zakodowane Btoa</comment>
     <comment xml:lang="pt">Dados codificados em Btoa</comment>
     <comment xml:lang="pt_BR">Arquivo codificado Btoa</comment>
+    <comment xml:lang="ru">Данные в формате Btoa</comment>
     <comment xml:lang="sk">Súbor zakódovaný Btoa</comment>
     <comment xml:lang="sl">Datoteka kodirana z Btoa</comment>
     <comment xml:lang="sr">бтоа кодирани подаци</comment>
@@ -357,6 +358,7 @@ Notes:
     <comment xml:lang="pl">Definicja struktury Okteta</comment>
     <comment xml:lang="pt">Definição de estrutura do Okteta</comment>
     <comment xml:lang="pt_BR">Definição de estrutura Okteta</comment>
+    <comment xml:lang="ru">Определение структуры Okteta</comment>
     <comment xml:lang="sk">Definícia štruktúry Okteta</comment>
     <comment xml:lang="sl">Določilo zgradbe za Okteto</comment>
     <comment xml:lang="sr">Октетина дефиниција структуре</comment>
