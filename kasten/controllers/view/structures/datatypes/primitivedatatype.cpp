@@ -84,7 +84,7 @@ QString PrimitiveType::standardTypeName(PrimitiveDataType type)
 QString PrimitiveType::longTypeName(PrimitiveDataType type)
 {
     if (type >= PrimitiveDataType::START && type <= PrimitiveDataType::END) {
-        return i18n(longTypeNames[static_cast<int>(type)]);
+        return i18nc("data type", longTypeNames[static_cast<int>(type)]);
     }
 
     return i18n("invalid type");
