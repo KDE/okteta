@@ -731,7 +731,7 @@ Structures Script Console-->
 <sect1 id="menu-commands">
 <title>Menu Items</title>
 
-<para>Apart from the common &kde; menus described in the <ulink url="help:/fundamentals/ui.html#menus">Menu</ulink>
+<para>Apart from the common &kde; menus described in the <ulink url="help:/fundamentals/menus.html">Menu</ulink>
 chapter of the &kde; Fundamentals documentation &okteta; has these application specific menu entries:
 </para>
 
