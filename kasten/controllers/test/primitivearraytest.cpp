@@ -20,6 +20,9 @@
 
 #include <QTest>
 #include <QScriptEngine>
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
+#include <QRandomGenerator>
+#endif
 #include <limits>
 
 #include <Okteta/ByteArrayModel>
@@ -82,7 +85,9 @@ static constexpr uint ENDIAN_SIZE = 16;
 
 void PrimitiveArrayTest::initTestCase()
 {
+#if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
     qsrand(QTime::currentTime().msec());
+#endif
     data.reset(new Okteta::Byte[SIZE]);
     // ensure that we have at least one NaN (quiet + signalling)
     AllPrimitiveTypes quietDouble(std::numeric_limits<double>::quiet_NaN());
@@ -99,8 +104,15 @@ void PrimitiveArrayTest::initTestCase()
         data[20 + i] = signallingFloat.allBytes[i];
     }
 
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
+    auto* randomGenerator = QRandomGenerator::global();
+#endif
     for (uint i = 24; i < SIZE; ++i) {
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
+        data[i] = static_cast<Okteta::Byte>(randomGenerator->bounded(256));
+#else
         data[i] = char(qrand() & 0xff);
+#endif
     }
 
     auto* copy = new Okteta::Byte[SIZE];
