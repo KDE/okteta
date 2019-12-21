@@ -27,10 +27,9 @@
 // KF
 #include <KLocalizedString>
 // Qt
+#include <QRandomGenerator>
 #include <QMimeData>
 #include <QByteArray>
-// Std
-#include <ctime>
 
 namespace Kasten {
 
@@ -52,14 +51,12 @@ ByteArrayRandomDataGenerator::~ByteArrayRandomDataGenerator() = default;
 // TODO: use different RNG, with multiple characteristics and offer them in the config
 QMimeData* ByteArrayRandomDataGenerator::generateData()
 {
-    qsrand((unsigned int)time(nullptr));
-
     const int insertDataSize = mSettings.size;
     QByteArray insertData(insertDataSize, '\0');
 
+    auto* randomGenerator = QRandomGenerator::global();
     for (int i = 0; i < insertDataSize; ++i) {
-        insertData[i] = qrand() % 256; // TODO: modulo is expensive, even if easy to use
-
+        insertData[i] = static_cast<char>(randomGenerator->bounded(256));
     }
 
     auto* mimeData = new QMimeData;

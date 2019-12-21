@@ -20,6 +20,7 @@
 
 #include <QTest>
 #include <QScriptEngine>
+#include <QRandomGenerator>
 #include <limits>
 
 #include <Okteta/ByteArrayModel>
@@ -82,7 +83,6 @@ static constexpr uint ENDIAN_SIZE = 16;
 
 void PrimitiveArrayTest::initTestCase()
 {
-    qsrand(QTime::currentTime().msec());
     data.reset(new Okteta::Byte[SIZE]);
     // ensure that we have at least one NaN (quiet + signalling)
     AllPrimitiveTypes quietDouble(std::numeric_limits<double>::quiet_NaN());
@@ -99,8 +99,9 @@ void PrimitiveArrayTest::initTestCase()
         data[20 + i] = signallingFloat.allBytes[i];
     }
 
+    auto* randomGenerator = QRandomGenerator::global();
     for (uint i = 24; i < SIZE; ++i) {
-        data[i] = char(qrand() & 0xff);
+        data[i] = static_cast<Okteta::Byte>(randomGenerator->bounded(256));
     }
 
     auto* copy = new Okteta::Byte[SIZE];
