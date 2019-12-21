@@ -57,6 +57,10 @@ ByteArrayRandomDataGenerator::~ByteArrayRandomDataGenerator() = default;
 // TODO: use different RNG, with multiple characteristics and offer them in the config
 QMimeData* ByteArrayRandomDataGenerator::generateData()
 {
+#if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
+    qsrand((unsigned int)time(nullptr));
+#endif
+
     const int insertDataSize = mSettings.size;
     QByteArray insertData(insertDataSize, '\0');
 
