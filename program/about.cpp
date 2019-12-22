@@ -31,7 +31,7 @@ OktetaAboutData::OktetaAboutData()
                  QStringLiteral(OKTETA_VERSION),
                  i18n("Hex editor"), // description
                  KAboutLicense::GPL_V2,
-                 i18n("Copyright 2006-2019 Friedrich W. H. Kossebau"), // copyright
+                 i18n("Copyright 2006-2020 Friedrich W. H. Kossebau"), // copyright
                  i18n("Edit the raw data of files"), // comment
                  QStringLiteral("https://userbase.kde.org/Okteta"))
 {
