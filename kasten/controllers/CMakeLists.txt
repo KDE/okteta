@@ -644,8 +644,11 @@ okteta_add_library(Controllers NAMESPACE Okteta Kasten
 )
 
 
-
+if(NOT KF5_VERSION VERSION_LESS "5.57.0")
+install(FILES view/structures/kns/okteta-structures.knsrc  DESTINATION  ${KDE_INSTALL_KNSRCDIR})
+else()
 install( FILES view/structures/kns/okteta-structures.knsrc  DESTINATION  ${KDE_INSTALL_CONFDIR} )
+endif()
 
 set( elf_structure_FILES
   view/structures/examples/okteta/structures/elf/metadata.desktop
