@@ -648,8 +648,7 @@ okteta_add_library(Controllers NAMESPACE Okteta Kasten
 )
 
 
-
-install( FILES view/structures/kns/okteta-structures.knsrc  DESTINATION  ${KDE_INSTALL_CONFDIR} )
+install(FILES view/structures/kns/okteta-structures.knsrc  DESTINATION ${KDE_INSTALL_KNSRCDIR})
 
 set( elf_structure_FILES
   view/structures/examples/okteta/structures/elf/metadata.desktop
