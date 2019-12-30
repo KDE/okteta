@@ -189,7 +189,13 @@ void TopLevelDataInformation::lockPositionToOffset(Okteta::Address offset, const
     }
     mLockedPositions.insert(model, quint64(offset));
     qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES)
-        << mData->name() << ": Locking start offset in model" << model << "to position" << hex << offset;
+            << mData->name() << ": Locking start offset in model" << model << "to position"
+           #if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
+            << hex
+           #else
+            << Qt::hex
+           #endif
+            << offset;
     // remove when deleted
     connect(model, &Okteta::AbstractByteArrayModel::destroyed, this, &TopLevelDataInformation::removeByteArrayModelFromList);
 }
