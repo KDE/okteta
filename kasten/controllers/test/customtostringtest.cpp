@@ -27,6 +27,15 @@
 #include "testutils.hpp"
 #include <Okteta/ByteArrayModel>
 
+namespace Okteta {
+using TextStreamFunction = QTextStream& (*)(QTextStream&);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+constexpr TextStreamFunction hex = Qt::hex;
+#else
+constexpr TextStreamFunction hex = ::hex;
+#endif
+}
+
 class CustomToStringTest : public QObject
 {
     Q_OBJECT
@@ -117,13 +126,7 @@ void CustomToStringTest::testUuid()
     QVERIFY(ok);
     quint16 val3 = uuidString.midRef(15, 4).toUShort(&ok, 16);
     QVERIFY(ok);
-    qDebug() <<
-            #if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
-                hex
-            #else
-                Qt::hex
-            #endif
-             << val1 << val2 << val3;
+    qDebug() << Okteta::hex << val1 << val2 << val3;
     QCOMPARE(structure->childAt(0)->asPrimitive()->value().value<quint32>(), val1);
     QCOMPARE(structure->childAt(1)->asPrimitive()->value().value<quint16>(), val2);
     QCOMPARE(structure->childAt(2)->asPrimitive()->value().value<quint16>(), val3);

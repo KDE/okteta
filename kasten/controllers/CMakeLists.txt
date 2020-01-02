@@ -103,6 +103,7 @@ endif()
 oktetakastencontrollers_add_sublibrary(view/libbytearraychecksum/algorithm
     PRIVATE
         Crc32ByteArrayChecksumAlgorithm
+        Crc64ByteArrayChecksumAlgorithm
         Adler32ByteArrayChecksumAlgorithm
         ModSum8ByteArrayChecksumAlgorithm
         ModSum16ByteArrayChecksumAlgorithm
@@ -117,6 +118,8 @@ oktetakastencontrollers_add_sublibrary(view/libbytearraychecksum/algorithm
         NoByteArrayChecksumParameterSetEdit
         ModSumByteArrayChecksumParameterSet
         ModSumByteArrayChecksumParameterSetEdit
+        Crc64ByteArrayChecksumParameterSet
+        Crc64ByteArrayChecksumParameterSetEdit
 ## NEWCHECKSUMPARAMETERSET(start)
 ## Here add the names of your classes of your checksum parameter set and
 ## of the widget to edit the checksum parameter set,

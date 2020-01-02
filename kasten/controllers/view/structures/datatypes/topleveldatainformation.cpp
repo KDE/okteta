@@ -37,6 +37,15 @@
 
 #include <limits>
 
+namespace Okteta {
+using TextStreamFunction = QTextStream& (*)(QTextStream&);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+constexpr TextStreamFunction hex = Qt::hex;
+#else
+constexpr TextStreamFunction hex = ::hex;
+#endif
+}
+
 const quint64 TopLevelDataInformation::INVALID_OFFSET = std::numeric_limits<quint64>::max();
 
 TopLevelDataInformation::TopLevelDataInformation(DataInformation* data, ScriptLogger* logger,
@@ -189,13 +198,7 @@ void TopLevelDataInformation::lockPositionToOffset(Okteta::Address offset, const
     }
     mLockedPositions.insert(model, quint64(offset));
     qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES)
-            << mData->name() << ": Locking start offset in model" << model << "to position"
-           #if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
-            << hex
-           #else
-            << Qt::hex
-           #endif
-            << offset;
+        << mData->name() << ": Locking start offset in model" << model << "to position" << Okteta::hex << offset;
     // remove when deleted
     connect(model, &Okteta::AbstractByteArrayModel::destroyed, this, &TopLevelDataInformation::removeByteArrayModelFromList);
 }
