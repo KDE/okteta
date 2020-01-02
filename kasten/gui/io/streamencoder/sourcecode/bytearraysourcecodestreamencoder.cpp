@@ -59,6 +59,13 @@ static constexpr int NoOfPrimitiveDataTypes = 8;
 inline QString decimalFormattedNumberPlaceHolder() { return QStringLiteral("%1"); }
 inline QString hexadecimalFormattedNumberPlaceHolder() { return QStringLiteral("0x%1"); }
 
+using TextStreamFunction = QTextStream& (*)(QTextStream&);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+constexpr TextStreamFunction endl = Qt::endl;
+#else
+constexpr TextStreamFunction endl = ::endl;
+#endif
+
 SourceCodeStreamEncoderSettings::SourceCodeStreamEncoderSettings()
     : variableName(QStringLiteral("array"))
 {}

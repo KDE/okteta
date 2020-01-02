@@ -44,6 +44,13 @@ namespace Kasten {
 
 // static constexpr Okteta::OffsetFormat::Format DefaultOffsetFormat = Okteta::OffsetFormat::Hexadecimal;
 
+using TextStreamFunction = QTextStream& (*)(QTextStream&);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+constexpr TextStreamFunction endl = Qt::endl;
+#else
+constexpr TextStreamFunction endl = ::endl;
+#endif
+
 ByteArrayViewTextStreamEncoderSettings::ByteArrayViewTextStreamEncoderSettings()
     // : offsetFormat(DefaultOffsetFormat)
     : separation(QStringLiteral(" "))
