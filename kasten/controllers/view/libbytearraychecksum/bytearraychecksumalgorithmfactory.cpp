@@ -34,8 +34,9 @@
 #include "bytearraychecksumalgorithmfactory.hpp"
 
 // lib
-#include "algorithm/crc32bytearraychecksumalgorithm.hpp"
 #include "algorithm/adler32bytearraychecksumalgorithm.hpp"
+#include "algorithm/crc32bytearraychecksumalgorithm.hpp"
+#include "algorithm/crc64bytearraychecksumalgorithm.hpp"
 #include "algorithm/modsum8bytearraychecksumalgorithm.hpp"
 #include "algorithm/modsum16bytearraychecksumalgorithm.hpp"
 #include "algorithm/modsum32bytearraychecksumalgorithm.hpp"
@@ -71,6 +72,7 @@ QVector<AbstractByteArrayChecksumAlgorithm*> ByteArrayChecksumAlgorithmFactory::
         new ModSum64ByteArrayChecksumAlgorithm(),
         new Adler32ByteArrayChecksumAlgorithm(),
         new Crc32ByteArrayChecksumAlgorithm(),
+        new Crc64ByteArrayChecksumAlgorithm(),
 // NEWCHECKSUM(start)
 // Here add the creation of an object of your checksum algorithm class and add it to the list,
 // e.g.

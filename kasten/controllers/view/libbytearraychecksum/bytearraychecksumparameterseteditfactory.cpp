@@ -23,6 +23,7 @@
 #include "bytearraychecksumparameterseteditfactory.hpp"
 
 // lib
+#include "algorithm/crc64bytearraychecksumparametersetedit.hpp"
 #include "algorithm/modsumbytearraychecksumparametersetedit.hpp"
 #include "algorithm/nobytearraychecksumparametersetedit.hpp"
 //// NEWCHECKSUMPARAMETERSET(start)
@@ -37,6 +38,8 @@ AbstractByteArrayChecksumParameterSetEdit* ByteArrayChecksumParameterSetEditFact
 
     if (qstrcmp(id, ModSumByteArrayChecksumParameterSetEdit::Id) == 0) {
         result = new ModSumByteArrayChecksumParameterSetEdit();
+    } else if (qstrcmp(id, Crc64ByteArrayChecksumParameterSetEdit::Id) == 0) {
+        result = new Crc64ByteArrayChecksumParameterSetEdit();
     }
 //// NEWCHECKSUMPARAMETERSET(start)
 //// Here add the check for the id of your parameter set
