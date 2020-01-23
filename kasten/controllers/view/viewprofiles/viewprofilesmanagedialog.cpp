@@ -61,6 +61,7 @@ ViewProfilesManageDialog::ViewProfilesManageDialog(ByteArrayViewProfileManager* 
     mViewProfileTableView->setUniformRowHeights(true);
     mViewProfileTableView->setAllColumnsShowFocus(true);
     mViewProfileTableView->setModel(mViewProfileTableModel);
+    mViewProfileTableView->resizeColumnToContents(ViewProfileTableModel::CurrentColumnId);
     connect(mViewProfileTableView->selectionModel(),
             &QItemSelectionModel::selectionChanged,
             this, &ViewProfilesManageDialog::onViewProfileSelectionChanged);
@@ -101,7 +102,7 @@ ViewProfilesManageDialog::ViewProfilesManageDialog(ByteArrayViewProfileManager* 
     KGuiItem::assign(mSetDefaultButton,
                      KGuiItem(i18nc("@action:button",
                                     "&Set as Default"),
-                              QString(),
+                              QStringLiteral("starred-symbolic"),
                               i18nc("@info:tooltip",
                                     "Sets the selected view profile as default for all views."),
                               xi18nc("@info:whatsthis",
