@@ -61,6 +61,7 @@ ViewProfilesManageDialog::ViewProfilesManageDialog(ByteArrayViewProfileManager* 
     mViewProfileTableView->setUniformRowHeights(true);
     mViewProfileTableView->setAllColumnsShowFocus(true);
     mViewProfileTableView->setModel(mViewProfileTableModel);
+    mViewProfileTableView->resizeColumnToContents(ViewProfileTableModel::CurrentColumnId);
     connect(mViewProfileTableView->selectionModel(),
             &QItemSelectionModel::selectionChanged,
             this, &ViewProfilesManageDialog::onViewProfileSelectionChanged);
