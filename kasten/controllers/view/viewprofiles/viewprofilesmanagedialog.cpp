@@ -101,7 +101,7 @@ ViewProfilesManageDialog::ViewProfilesManageDialog(ByteArrayViewProfileManager* 
     KGuiItem::assign(mSetDefaultButton,
                      KGuiItem(i18nc("@action:button",
                                     "&Set as Default"),
-                              QString(),
+                              QStringLiteral("starred-symbolic"),
                               i18nc("@info:tooltip",
                                     "Sets the selected view profile as default for all views."),
                               xi18nc("@info:whatsthis",

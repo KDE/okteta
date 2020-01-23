@@ -94,7 +94,7 @@ QVariant ViewProfileTableModel::data(const QModelIndex& index, int role) const
                 mViewProfileManager->viewProfiles().at(viewProfileIndex).id();
 
             if (mViewProfileManager->defaultViewProfileId() == viewProfileId) {
-                result = QIcon::fromTheme(QStringLiteral("arrow-right"));
+                result = QIcon::fromTheme(QStringLiteral("starred-symbolic"));
             }
         }
         break;
