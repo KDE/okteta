@@ -537,5 +537,8 @@
     <binary>okteta</binary>
   </provides>
   <launchable type="desktop-id">org.kde.okteta.desktop</launchable>
+  <releases>
+    <release version="0.26.3" date="2020-02-02"/>
+  </releases>
   <update_contact>kossebau_at_kde.org</update_contact>
 </component>
