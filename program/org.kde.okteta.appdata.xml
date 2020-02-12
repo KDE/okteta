@@ -18,6 +18,7 @@
   <name xml:lang="fr">Okteta</name>
   <name xml:lang="gl">Okteta</name>
   <name xml:lang="hu">Okteta</name>
+  <name xml:lang="ia">Okteta</name>
   <name xml:lang="id">Okteta</name>
   <name xml:lang="it">Okteta</name>
   <name xml:lang="ko">Okteta</name>
@@ -54,6 +55,7 @@
   <summary xml:lang="fr">Éditeur hexadécimal</summary>
   <summary xml:lang="gl">Editor de bytes</summary>
   <summary xml:lang="hu">Hexaszerkesztő</summary>
+  <summary xml:lang="ia">Editor (Redactor) Hexadecimal</summary>
   <summary xml:lang="id">Editor Hex</summary>
   <summary xml:lang="it">Editor esadecimale</summary>
   <summary xml:lang="ko">16진수 편집기</summary>
@@ -89,6 +91,7 @@
     <p xml:lang="fr">Okteta est un simple éditeur pour les données brutes des fichiers.</p>
     <p xml:lang="gl">Okteta é un editor sinxelo para os datos en bruto de ficheiros.</p>
     <p xml:lang="hu">Az Oktate egy egyszerű program fájlok nyers adatainak szerkesztéséhez.</p>
+    <p xml:lang="ia">Okteta es un simple editor per le datos drude de files.</p>
     <p xml:lang="id">Okteta adalah editor sederhana untuk file-file data mentah (raw)</p>
     <p xml:lang="it">Okteta è un semplice editor dei dati grezzi di un file.</p>
     <p xml:lang="ko">Okteta는 파일의 원시 데이터에 대한 간단한 편집기입니다.</p>
@@ -125,6 +128,7 @@
     <p xml:lang="fr">Fonctionnalités :</p>
     <p xml:lang="gl">Funcionalidades:</p>
     <p xml:lang="hu">Szolgáltatások:</p>
+    <p xml:lang="ia">Characteristicas:</p>
     <p xml:lang="id">Fitur:</p>
     <p xml:lang="it">Funzionalità:</p>
     <p xml:lang="ko">기능:</p>
@@ -193,6 +197,7 @@
       <li xml:lang="fr">Édition et navigation similaires à un éditeur de texte</li>
       <li xml:lang="gl">Permite editar e examinar de maneira similar a un editor de texto simple.</li>
       <li xml:lang="hu">Szerkesztés és navigálás egy szövegszerkesztőhöz hasonlóan</li>
+      <li xml:lang="ia">Editar e navigar de modo simile a un editor de texto</li>
       <li xml:lang="id">Pengeditan dan penavigasian mirip dengan editor teks</li>
       <li xml:lang="it">Modifica e navigazione simili ad un editor di testo</li>
       <li xml:lang="ko">텍스트 편집기와 유사한 편집 및 탐색</li>
@@ -292,6 +297,7 @@
       <li xml:lang="fr">Codage des valeurs : hexadécimal, décimal, octal, binaire</li>
       <li xml:lang="gl">Pode mostrar os valores numéricos en notacións hexadecimal, decimal, octal e binaria.</li>
       <li xml:lang="hu">Numerikus kódolások: hexadecimális, decimális, oktális, bináris</li>
+      <li xml:lang="ia">Codificationes Numeric: Hexadecimal, Decimal, Octal, Binari</li>
       <li xml:lang="id">Pengenkodean nomerik: Heksadesimal, Desimal, Oktal, Biner</li>
       <li xml:lang="it">Codifiche numeriche: esadecimale, decimale, ottale e binaria</li>
       <li xml:lang="ko">숫자 인코딩: 16진수, 10진수, 8진수, 2진수</li>
@@ -392,6 +398,7 @@
       <li xml:lang="fr">Ouverture de fichiers multiples</li>
       <li xml:lang="gl">Poden abrirse varios ficheiros de maneira simultánea.</li>
       <li xml:lang="hu">Több fájl megnyitása egyszerre</li>
+      <li xml:lang="ia">Files multiple aperite</li>
       <li xml:lang="id">Multi pembukaan file</li>
       <li xml:lang="it">Più file aperti</li>
       <li xml:lang="ko">여러 개의 열린 파일</li>
@@ -427,6 +434,7 @@
       <li xml:lang="fr">Prise en charge de « annuler » et « refaire »</li>
       <li xml:lang="gl">Permite desfacer e refacer operacións.</li>
       <li xml:lang="hu">Visszavonás/újra műveletek támogatása</li>
+      <li xml:lang="ia">Supporto de annulla/reface</li>
       <li xml:lang="id">Dukungan urungkan/lanjurkan</li>
       <li xml:lang="it">Supporto per annulla/rifai</li>
       <li xml:lang="ko">실행 취소 / 다시 실행 지원</li>
@@ -495,6 +503,7 @@
       <li xml:lang="fr">Et plus…</li>
       <li xml:lang="gl">E máis…</li>
       <li xml:lang="hu">És még sok minden más…</li>
+      <li xml:lang="ia">E altere ...</li>
       <li xml:lang="id">Dan selebihnya...</li>
       <li xml:lang="it">E altro ancora...</li>
       <li xml:lang="ko">그리고 더...</li>
