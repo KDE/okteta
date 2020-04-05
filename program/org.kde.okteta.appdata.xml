@@ -171,7 +171,7 @@
       <li xml:lang="hu">Értékek és karakterek megjelenítése hagyományos (kétoszlopos) módon, vagy sorokban (az értékek a karakterek fölött helyezkednek el)</li>
       <li xml:lang="id">Nilai dan karakter ditampilkan antara dua kolom (displai tradisional dalam editor hex) atau dalam row dengan nilai di atas karakter</li>
       <li xml:lang="it">I valori e i caratteri visualizzati in due colonne (la visualizzazione normale degli editor esadecimali) o in righe con il valore sopra il carattere</li>
-      <li xml:lang="ko">두 개의 열(16진수 편집기의 기존 디스플레이) 또는 문자의 맨 위에 값이 있는 행에 표시되는 값 및 문자</li>
+      <li xml:lang="ko">열 두 개(16진수 편집기의 기존 디스플레이) 또는 문자의 맨 위에 값이 있는 행에 표시되는 값 및 문자</li>
       <li xml:lang="nl">Waarden en tekens worden getoond ofwel in twee kolommen (de traditionele weergave in hex-editors) of in rijen met de waarde boven het teken.</li>
       <li xml:lang="nn">Verdiar og teikn kan visast i to kolonnar (kjend frå klassiske heks-redigeringsprogram) eller i rader, med verdiane viste over teikna</li>
       <li xml:lang="pl">Wartości i znaki są pokazywane albo w dwóch kolumnach (tradycyjne wyświetlanie w edytorach szesnastkowych) lub w wierszach z wartością nad znakiem</li>
@@ -413,7 +413,7 @@
       <li xml:lang="ia">Files multiple aperite</li>
       <li xml:lang="id">Multi pembukaan file</li>
       <li xml:lang="it">Più file aperti</li>
-      <li xml:lang="ko">여러 개의 열린 파일</li>
+      <li xml:lang="ko">열린 파일 여러 개</li>
       <li xml:lang="nl">Meerdere geopende bestanden</li>
       <li xml:lang="nn">Fleire opne filer samtidig</li>
       <li xml:lang="pl">Otwieranie wielu plików</li>
