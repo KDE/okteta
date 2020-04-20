@@ -97,7 +97,7 @@ void DocumentSyncManagerPrivate::load(const QUrl& url)
     for (AbstractDocument* document : loadedDocuments) {
         if (url == urlOf(document)) {
             // TODO: query if file should be reloaded/synched from disk
-            emit mManager->focusRequested(document);
+            Q_EMIT mManager->focusRequested(document);
             return;
         }
     }
@@ -111,7 +111,7 @@ void DocumentSyncManagerPrivate::load(const QUrl& url)
 
     // store path
 //     mWorkingUrl = url.upUrl();
-    emit q->urlUsed(url);
+    Q_EMIT q->urlUsed(url);
 }
 
 bool DocumentSyncManagerPrivate::setSynchronizer(AbstractDocument* document)
@@ -179,7 +179,7 @@ bool DocumentSyncManagerPrivate::setSynchronizer(AbstractDocument* document)
                 }
 
                 if (storingDone) {
-                    emit q->urlUsed(newUrl);
+                    Q_EMIT q->urlUsed(newUrl);
                 }
 #if 0
 //     mWorkingUrl = Url.upUrl();

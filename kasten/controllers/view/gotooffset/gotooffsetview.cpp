@@ -143,7 +143,7 @@ void GotoOffsetView::onGotoButtonClicked()
     mAddressEdit->rememberCurrentAddress();
 
     mTool->gotoOffset();
-//     emit toolUsed();
+//     Q_EMIT toolUsed();
 }
 
 void GotoOffsetView::onAddressTypeChanged(int addressType)

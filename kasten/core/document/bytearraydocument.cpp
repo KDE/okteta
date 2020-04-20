@@ -78,7 +78,7 @@ ContentFlags ByteArrayDocument::contentFlags() const
 void ByteArrayDocument::setTitle(const QString& title)
 {
     mTitle = title;
-    emit titleChanged(mTitle);
+    Q_EMIT titleChanged(mTitle);
 }
 
 int ByteArrayDocument::versionIndex() const { return mByteArray->versionIndex(); }
@@ -93,13 +93,13 @@ void ByteArrayDocument::revertToVersionByIndex(int versionIndex) { mByteArray->r
 
 void ByteArrayDocument::onModelModified(bool isModified)
 {
-    emit contentFlagsChanged((isModified ? ContentHasUnstoredChanges : ContentStateNormal));
+    Q_EMIT contentFlagsChanged((isModified ? ContentHasUnstoredChanges : ContentStateNormal));
 }
 
 void ByteArrayDocument::onHeadVersionDescriptionChanged(const QString& newDescription)
 {
     const DocumentVersionData data(mByteArray->versionIndex(), newDescription);
-    emit headVersionDataChanged(data);
+    Q_EMIT headVersionDataChanged(data);
 }
 
 }

@@ -45,8 +45,8 @@ OktetaBrowserExtension::OktetaBrowserExtension(OktetaPart* part)
     connect(mPart, SIGNAL(hasSelectedDataChanged(bool)),
             SLOT(onSelectionChanged(bool)));
 
-    emit enableAction("copy", false);
-    emit enableAction("print", true);
+    Q_EMIT enableAction("copy", false);
+    Q_EMIT enableAction("print", true);
 }
 
 void OktetaBrowserExtension::copy()
@@ -69,7 +69,7 @@ void OktetaBrowserExtension::print()
 
 void OktetaBrowserExtension::onSelectionChanged(bool hasSelection)
 {
-    emit enableAction("copy", hasSelection);
+    Q_EMIT enableAction("copy", hasSelection);
 }
 
 void OktetaBrowserExtension::saveState(QDataStream& stream)

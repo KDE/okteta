@@ -147,7 +147,7 @@ bool BookmarkListModel::setData(const QModelIndex& index, const QVariant& value,
         const int column = index.column();
         if (column == TitleColumnId) {
             mTool->setBookmarkName(bookmarkIndex, value.toString());
-//             emit dataChanged( index, index );
+//             Q_EMIT dataChanged( index, index );
             result = true;
         } else {
             result = false;
@@ -194,7 +194,7 @@ void BookmarkListModel::onBookmarksChanged()
 void BookmarkListModel::onBookmarksChanged(const QVector<int>& bookmarkIndizes)
 {
     for (int row : bookmarkIndizes) {
-        emit dataChanged(index(row, OffsetColumnId), index(row, TitleColumnId));
+        Q_EMIT dataChanged(index(row, OffsetColumnId), index(row, TitleColumnId));
     }
 }
 
@@ -215,15 +215,15 @@ void BookmarkListModel::onRevertedToVersionIndex(int versionIndex)
     const int oldVersionIndex = mVersionIndex;
     mVersionIndex = versionIndex;
 
-    emit dataChanged(index(versionIndex, CurrentColumnId), index(versionIndex, CurrentColumnId));
-    emit dataChanged(index(oldVersionIndex, CurrentColumnId), index(oldVersionIndex, CurrentColumnId));
+    Q_EMIT dataChanged(index(versionIndex, CurrentColumnId), index(versionIndex, CurrentColumnId));
+    Q_EMIT dataChanged(index(oldVersionIndex, CurrentColumnId), index(oldVersionIndex, CurrentColumnId));
 }
 
 void BookmarkListModel::onHeadVersionDataChanged(const DocumentVersionData& versionData)
 {
     Q_UNUSED(versionData)
     const int headVersionIndex = mVersionControl->versionCount() - 1;
-    emit dataChanged(index(headVersionIndex, CurrentColumnId), index(headVersionIndex, ChangeDescriptionColumnId));
+    Q_EMIT dataChanged(index(headVersionIndex, CurrentColumnId), index(headVersionIndex, ChangeDescriptionColumnId));
 }
 #endif
 

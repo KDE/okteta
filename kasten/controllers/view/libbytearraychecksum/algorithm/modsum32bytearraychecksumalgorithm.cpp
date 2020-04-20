@@ -85,7 +85,7 @@ quint32 ModSum32ByteArrayChecksumAlgorithm::calculateModSumWithBigEndian(const O
 #endif
         if (i >= nextBlockEnd) {
             nextBlockEnd += CalculatedByteCountSignalLimit;
-            emit calculatedBytes(range.localIndex(i) + 1);
+            Q_EMIT calculatedBytes(range.localIndex(i) + 1);
         }
     }
 
@@ -117,7 +117,7 @@ quint32 ModSum32ByteArrayChecksumAlgorithm::calculateModSumWithLittleEndian(cons
 
         if (i >= nextBlockEnd) {
             nextBlockEnd += CalculatedByteCountSignalLimit;
-            emit calculatedBytes(range.localIndex(i) + 1);
+            Q_EMIT calculatedBytes(range.localIndex(i) + 1);
         }
     }
 

@@ -91,7 +91,7 @@ inline Base32StreamEncoderSettings ByteArrayBase32StreamEncoder::settings() cons
 inline void ByteArrayBase32StreamEncoder::setSettings(const Base32StreamEncoderSettings& settings)
 {
     mSettings = settings;
-    emit settingsChanged();
+    Q_EMIT settingsChanged();
 }
 
 }

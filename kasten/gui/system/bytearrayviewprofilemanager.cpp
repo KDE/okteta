@@ -514,20 +514,20 @@ ByteArrayViewProfileManager::onViewProfilesFolderChanged(const QString& viewProf
 
     // signal changes
     if (!changedViewProfiles.isEmpty()) {
-        emit viewProfilesChanged(changedViewProfiles);
+        Q_EMIT viewProfilesChanged(changedViewProfiles);
     }
     if (!removedViewProfileIds.isEmpty()) {
-        emit viewProfilesRemoved(removedViewProfileIds);
+        Q_EMIT viewProfilesRemoved(removedViewProfileIds);
     }
 
     if (!newUnlockedViewProfileIds.isEmpty()) {
-        emit viewProfilesUnlocked(newUnlockedViewProfileIds);
+        Q_EMIT viewProfilesUnlocked(newUnlockedViewProfileIds);
     }
     if (!newLockedViewProfileIds.isEmpty()) {
-        emit viewProfilesLocked(newLockedViewProfileIds);
+        Q_EMIT viewProfilesLocked(newLockedViewProfileIds);
     }
     if (isDefaultViewProfileChanged) {
-        emit defaultViewProfileChanged(mDefaultViewProfileId);
+        Q_EMIT defaultViewProfileChanged(mDefaultViewProfileId);
     }
 }
 
@@ -563,7 +563,7 @@ void ByteArrayViewProfileManager::onDefaultViewProfileChanged(const QString& pat
 
     if (isExisting) {
         mDefaultViewProfileId = viewProfileId;
-        emit defaultViewProfileChanged(mDefaultViewProfileId);
+        Q_EMIT defaultViewProfileChanged(mDefaultViewProfileId);
     }
 }
 

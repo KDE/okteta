@@ -66,7 +66,7 @@ void TestDocumentFileLoadThread::run()
         }
     }
 
-    emit documentRead(mDocument);
+    Q_EMIT documentRead(mDocument);
 }
 
 }

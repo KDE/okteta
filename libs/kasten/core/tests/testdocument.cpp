@@ -47,7 +47,7 @@ void TestDocument::setData(const QByteArray& data)
     mContentFlags = mContentFlags | ContentHasUnstoredChanges;
 
     if (oldContentFlags != mContentFlags) {
-        emit contentFlagsChanged(mContentFlags);
+        Q_EMIT contentFlagsChanged(mContentFlags);
     }
 }
 
@@ -55,7 +55,7 @@ void TestDocument::setTitle(const QString& title)
 {
     if (mTitle != title) {
         mTitle = title;
-        emit titleChanged(title);
+        Q_EMIT titleChanged(title);
     }
 }
 
@@ -64,7 +64,7 @@ void TestDocument::setContentFlags(ContentFlags contentFlags)
     if (mContentFlags != contentFlags) {
         mContentFlags = contentFlags;
 
-        emit contentFlagsChanged(contentFlags);
+        Q_EMIT contentFlagsChanged(contentFlags);
     }
 }
 

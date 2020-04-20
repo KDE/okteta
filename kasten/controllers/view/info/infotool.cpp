@@ -97,22 +97,22 @@ void InfoTool::setTargetModel(AbstractModel* model)
         mStatisticTableModel->setUndefinedChar(QChar());
     }
 
-    emit statisticDirty(!isStatisticUptodate());
-    emit isApplyableChanged(isApplyable());
+    Q_EMIT statisticDirty(!isStatisticUptodate());
+    Q_EMIT isApplyableChanged(isApplyable());
 }
 
 void InfoTool::onSelectionChanged()
 {
 // TODO: could be quicker using the selection data
-    emit statisticDirty(!isStatisticUptodate());
-    emit isApplyableChanged(isApplyable());
+    Q_EMIT statisticDirty(!isStatisticUptodate());
+    Q_EMIT isApplyableChanged(isApplyable());
 }
 
 void InfoTool::onSourceChanged()
 {
     mSourceByteArrayModelUptodate = false;
-    emit statisticDirty(true);
-    emit isApplyableChanged(isApplyable());
+    Q_EMIT statisticDirty(true);
+    Q_EMIT isApplyableChanged(isApplyable());
 }
 
 void InfoTool::onSourceDestroyed()
@@ -149,8 +149,8 @@ void InfoTool::updateStatistic()
     }
 
     mSourceByteArrayModelUptodate = true;
-    emit statisticDirty(false);
-    emit isApplyableChanged(false);
+    Q_EMIT statisticDirty(false);
+    Q_EMIT isApplyableChanged(false);
 
     if (mByteArrayView) {
         mByteArrayView->setFocus();

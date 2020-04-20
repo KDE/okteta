@@ -159,7 +159,7 @@ void SelectRangeView::onSelectButtonClicked()
     mEndEdit->rememberCurrentAddress();
 
     mTool->select();
-//     emit toolUsed();
+//     Q_EMIT toolUsed();
 }
 
 }

@@ -110,6 +110,6 @@ void Template_ByteArrayFilterParameterSetEdit::onLevelChanged(int value)
     }
 
     mIsValid = isValid;
-    emit validityChanged(isValid);
+    Q_EMIT validityChanged(isValid);
 }
 //// ADAPT(end)

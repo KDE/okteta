@@ -72,7 +72,7 @@ void SearchJob::start()
                  mByteArrayModel->lastIndexOfCaseInsensitive(mCharCodec, mSearchData, lastFromIndex, mEndIndex);
     }
 
-    emit finished(m_result);
+    Q_EMIT finished(m_result);
 
     deleteLater(); // TODO: could be reused on next search
 }

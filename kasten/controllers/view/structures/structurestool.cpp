@@ -67,7 +67,7 @@ void StructuresTool::onByteOrderChanged()
 void StructuresTool::setByteOrder(QSysInfo::Endian order)
 {
     if (order != StructureViewPreferences::byteOrder() || order != mByteOrder) {
-        emit byteOrderChanged();
+        Q_EMIT byteOrderChanged();
         StructureViewPreferences::setByteOrder(order);
         mByteOrder = order;
         updateData(Okteta::ArrayChangeMetricsList());
@@ -101,7 +101,7 @@ void StructuresTool::setTargetModel(AbstractModel* model)
         connect(mByteArrayModel, &Okteta::AbstractByteArrayModel::contentsChanged,
                 this, &StructuresTool::onContentsChange);
     }
-    emit byteArrayModelChanged(mByteArrayModel);
+    Q_EMIT byteArrayModelChanged(mByteArrayModel);
     updateData(Okteta::ArrayChangeMetricsList());
 }
 
@@ -110,7 +110,7 @@ void StructuresTool::onCursorPositionChange(Okteta::Address pos)
     if (mCursorIndex != pos) {
         mCursorIndex = pos;
         updateData(Okteta::ArrayChangeMetricsList());
-        emit cursorIndexChanged();
+        Q_EMIT cursorIndexChanged();
     }
 }
 
@@ -175,7 +175,7 @@ void StructuresTool::updateData(const Okteta::ArrayChangeMetricsList& list)
         const TopLevelDataInformation::Ptr& dat = mData.at(i);
         dat->read(mByteArrayModel, mCursorIndex, list, false);
         if (mCurrentItemDataChanged) {
-            emit dataChanged(i, mData.at(i)->actualDataInformation());
+            Q_EMIT dataChanged(i, mData.at(i)->actualDataInformation());
         }
         mCurrentItemDataChanged = false;
     }
@@ -246,7 +246,7 @@ void StructuresTool::setSelectedStructuresInView()
 {
     mData.clear();
     mInvalidData.clear();
-    emit dataCleared();
+    Q_EMIT dataCleared();
 
     QRegExp regex(QStringLiteral("'(.+)':'(.+)'"));
     QStringList loadedStructs = StructureViewPreferences::loadedStructures();
@@ -284,7 +284,7 @@ void StructuresTool::setSelectedStructuresInView()
     }
 
     for (int i = 0; i < mData.count(); ++i) {
-        emit dataChanged(i, mData.at(i)->actualDataInformation());
+        Q_EMIT dataChanged(i, mData.at(i)->actualDataInformation());
     }
 
     updateData(Okteta::ArrayChangeMetricsList());

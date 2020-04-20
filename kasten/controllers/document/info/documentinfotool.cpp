@@ -119,8 +119,8 @@ void DocumentInfoTool::setTargetModel(AbstractModel* model)
 
     onSynchronizerChanged(synchronizer);
 
-    emit documentTitleChanged(documentTitle);
-    emit documentSizeChanged(documentSize);
+    Q_EMIT documentTitleChanged(documentTitle);
+    Q_EMIT documentSizeChanged(documentSize);
 }
 
 // TODO: should this be done in a worker thread, to not block the UI?
@@ -141,7 +141,7 @@ void DocumentInfoTool::updateMimeType()
 
     if (mMimeType != currentMimeType) {
         mMimeType = currentMimeType;
-        emit documentMimeTypeChanged(currentMimeType);
+        Q_EMIT documentMimeTypeChanged(currentMimeType);
     }
 }
 
@@ -151,7 +151,7 @@ void DocumentInfoTool::onContentsChanged()
         mMimeTypeUpdateTimer->start();
     }
 
-    emit documentSizeChanged(mByteArrayModel->size());
+    Q_EMIT documentSizeChanged(mByteArrayModel->size());
 }
 
 void DocumentInfoTool::onSynchronizerChanged(AbstractModelSynchronizer* synchronizer)
@@ -172,14 +172,14 @@ void DocumentInfoTool::onSynchronizerChanged(AbstractModelSynchronizer* synchron
                 this, &DocumentInfoTool::onUrlChanged);
     }
 
-    emit locationChanged(location());
+    Q_EMIT locationChanged(location());
 }
 
 void DocumentInfoTool::onUrlChanged(const QUrl& url)
 {
     Q_UNUSED(url);
 
-    emit locationChanged(location());
+    Q_EMIT locationChanged(location());
 }
 
 }

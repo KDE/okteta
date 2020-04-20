@@ -118,7 +118,7 @@ void TopLevelDataInformation::read(Okteta::AbstractByteArrayModel* input, Okteta
     }
 
     if (mChildDataChanged) {
-        emit dataChanged();
+        Q_EMIT dataChanged();
         mChildDataChanged = false;
     }
     mLastModel = input;

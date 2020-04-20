@@ -109,7 +109,7 @@ void CharsetConversionTool::setOtherCharCodecName(const QString& codecName)
     }
 
     mOtherCharCodecName = codecName;
-    emit isApplyableChanged(isApplyable());
+    Q_EMIT isApplyableChanged(isApplyable());
 }
 
 void CharsetConversionTool::setConversionDirection(int conversionDirection)
@@ -177,12 +177,12 @@ void CharsetConversionTool::convertChars()
 
     mByteArrayView->setFocus();
 
-    emit conversionDone(success, convertedBytesCount, failedPerByteCount);
+    Q_EMIT conversionDone(success, convertedBytesCount, failedPerByteCount);
 }
 
 void CharsetConversionTool::onViewChanged()
 {
-    emit isApplyableChanged(isApplyable());
+    Q_EMIT isApplyableChanged(isApplyable());
 }
 
 }

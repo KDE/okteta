@@ -80,7 +80,7 @@ inline void AbstractDocumentPrivate::setSynchronizer(AbstractModelSynchronizer* 
     delete mSynchronizer;
     mSynchronizer = synchronizer;
 
-    emit q->synchronizerChanged(synchronizer);
+    Q_EMIT q->synchronizerChanged(synchronizer);
 }
 
 }

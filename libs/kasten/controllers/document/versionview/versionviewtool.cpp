@@ -42,7 +42,7 @@ QString VersionViewTool::title() const { return i18nc("@title:window", "Versions
 void VersionViewTool::setTargetModel(AbstractModel* model)
 {
     mModel = model ? model->findBaseModelWithInterface<If::Versionable*>() : nullptr;
-    emit modelChanged(mModel);
+    Q_EMIT modelChanged(mModel);
 }
 
 }

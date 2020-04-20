@@ -76,7 +76,7 @@ void ByteTableModel::setSubstituteChar(QChar substituteChar)
 
     mSubstituteChar = substituteChar;
 
-    emit dataChanged(index(0, CharacterId), index(ByteSetSize - 1, CharacterId));
+    Q_EMIT dataChanged(index(0, CharacterId), index(ByteSetSize - 1, CharacterId));
 }
 
 void ByteTableModel::setUndefinedChar(QChar undefinedChar)
@@ -91,7 +91,7 @@ void ByteTableModel::setUndefinedChar(QChar undefinedChar)
 
     mUndefinedChar = undefinedChar;
 
-    emit dataChanged(index(0, CharacterId), index(ByteSetSize - 1, CharacterId));
+    Q_EMIT dataChanged(index(0, CharacterId), index(ByteSetSize - 1, CharacterId));
 }
 
 void ByteTableModel::setCharCodec(const QString& codeName)
@@ -103,7 +103,7 @@ void ByteTableModel::setCharCodec(const QString& codeName)
     delete mCharCodec;
     mCharCodec = Okteta::CharCodec::createCodec(codeName);
 
-    emit dataChanged(index(0, CharacterId), index(ByteSetSize - 1, CharacterId));
+    Q_EMIT dataChanged(index(0, CharacterId), index(ByteSetSize - 1, CharacterId));
 }
 
 int ByteTableModel::rowCount(const QModelIndex& parent) const

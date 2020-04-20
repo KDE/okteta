@@ -51,7 +51,7 @@ QString DocumentsTool::title() const { return i18nc("@title:window", "Documents"
 void DocumentsTool::setTargetModel(AbstractModel* model)
 {
     mFocussedDocument = model ? model->findBaseModel<AbstractDocument*>() : nullptr;
-    emit focussedDocumentChanged(mFocussedDocument);
+    Q_EMIT focussedDocumentChanged(mFocussedDocument);
 }
 
 void DocumentsTool::setFocussedDocument(AbstractDocument* document)

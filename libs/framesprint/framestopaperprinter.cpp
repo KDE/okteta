@@ -64,7 +64,7 @@ bool FramesToPaperPrinter::print(QPrinter* printer, int firstPageIndex, int last
             painter.translate(-x, -y);
         }
 
-        emit printedPage(pageIndex);
+        Q_EMIT printedPage(pageIndex);
         if (pageIndex < lastPageIndex) {
             printer->newPage();
             ++pageIndex;

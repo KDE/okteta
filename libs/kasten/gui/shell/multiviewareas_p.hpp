@@ -147,7 +147,7 @@ inline void MultiViewAreasPrivate::addViews(const QVector<AbstractView*>& views)
 
     mCurrentViewArea->addViews(views);
 
-    emit q->added(views);
+    Q_EMIT q->added(views);
 }
 
 inline void MultiViewAreasPrivate::removeViews(const QVector<AbstractView*>& views)
@@ -160,7 +160,7 @@ inline void MultiViewAreasPrivate::removeViews(const QVector<AbstractView*>& vie
     }
 
     // TODO: above might trigger removal of areas before, is this a problem?
-    emit q->removing(views);
+    Q_EMIT q->removing(views);
 }
 
 inline void MultiViewAreasPrivate::setCurrentToolInlineView(AbstractToolInlineView* view)
@@ -212,7 +212,7 @@ inline void MultiViewAreasPrivate::closeViewArea(AbstractViewArea* _viewArea)
 
     const QVector<AbstractView*> views = viewArea->viewList();
 
-    emit q->closeRequest(views);
+    Q_EMIT q->closeRequest(views);
 }
 
 }

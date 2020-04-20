@@ -145,8 +145,8 @@ void VersionTableModel::onRevertedToVersionIndex(int versionIndex)
     const int oldVersionIndex = mVersionIndex;
     mVersionIndex = versionIndex;
 
-    emit dataChanged(index(versionIndex, CurrentColumnId), index(versionIndex, CurrentColumnId));
-    emit dataChanged(index(oldVersionIndex, CurrentColumnId), index(oldVersionIndex, CurrentColumnId));
+    Q_EMIT dataChanged(index(versionIndex, CurrentColumnId), index(versionIndex, CurrentColumnId));
+    Q_EMIT dataChanged(index(oldVersionIndex, CurrentColumnId), index(oldVersionIndex, CurrentColumnId));
 }
 
 void VersionTableModel::onHeadVersionChanged(int newHeadVersionIndex)
@@ -161,7 +161,7 @@ void VersionTableModel::onHeadVersionDataChanged(const DocumentVersionData& vers
 {
     Q_UNUSED(versionData)
     const int headVersionIndex = mVersionControl->versionCount() - 1;
-    emit dataChanged(index(headVersionIndex, CurrentColumnId), index(headVersionIndex, ChangeDescriptionColumnId));
+    Q_EMIT dataChanged(index(headVersionIndex, CurrentColumnId), index(headVersionIndex, ChangeDescriptionColumnId));
 }
 
 }

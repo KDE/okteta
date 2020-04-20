@@ -52,7 +52,7 @@ bool Template_ByteArrayFilter::filter(Okteta::Byte* result,
 
         if (r >= nextBlockEnd) {
             nextBlockEnd += FilteredByteCountSignalLimit;
-            emit filteredBytes(r);
+            Q_EMIT filteredBytes(r);
         }
     }
 //// ADAPT(end)

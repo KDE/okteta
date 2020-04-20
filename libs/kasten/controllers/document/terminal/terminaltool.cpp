@@ -65,7 +65,7 @@ void TerminalTool::setTargetModel(AbstractModel* model)
     const QUrl newCurrentUrl = currentUrl();
 
     if (oldCurrentUrl != newCurrentUrl) {
-        emit currentUrlChanged(newCurrentUrl);
+        Q_EMIT currentUrlChanged(newCurrentUrl);
     }
 }
 

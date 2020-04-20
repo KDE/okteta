@@ -90,10 +90,10 @@ void GotoOffsetTool::setTargetModel(AbstractModel* model)
     const bool newIsUsable = isUsable();
     const bool newIsApplyable = isApplyable();
     if (oldIsUsable != newIsUsable) {
-        emit isUsableChanged(newIsUsable);
+        Q_EMIT isUsableChanged(newIsUsable);
     }
     if (oldIsApplyable != newIsApplyable) {
-        emit isApplyableChanged(newIsApplyable);
+        Q_EMIT isApplyableChanged(newIsApplyable);
     }
 }
 
@@ -105,7 +105,7 @@ void GotoOffsetTool::setTargetOffset(Okteta::Address targetOffset)
 
     const bool newIsApplyable = isApplyable();
     if (oldIsApplyable != newIsApplyable) {
-        emit isApplyableChanged(newIsApplyable);
+        Q_EMIT isApplyableChanged(newIsApplyable);
     }
 }
 
@@ -117,7 +117,7 @@ void GotoOffsetTool::setIsRelative(bool isRelative)
 
     const bool newIsApplyable = isApplyable();
     if (oldIsApplyable != newIsApplyable) {
-        emit isApplyableChanged(newIsApplyable);
+        Q_EMIT isApplyableChanged(newIsApplyable);
     }
 }
 
@@ -129,7 +129,7 @@ void GotoOffsetTool::setIsSelectionToExtent(bool isSelectionToExtent)
 
     const bool newIsApplyable = isApplyable();
     if (oldIsApplyable != newIsApplyable) {
-        emit isApplyableChanged(newIsApplyable);
+        Q_EMIT isApplyableChanged(newIsApplyable);
     }
 }
 
@@ -141,7 +141,7 @@ void GotoOffsetTool::setIsBackwards(bool isBackwards)
 
     const bool newIsApplyable = isApplyable();
     if (oldIsApplyable != newIsApplyable) {
-        emit isApplyableChanged(newIsApplyable);
+        Q_EMIT isApplyableChanged(newIsApplyable);
     }
 }
 
@@ -173,7 +173,7 @@ int GotoOffsetTool::finalTargetOffset() const
 void GotoOffsetTool::onContentsChanged()
 {
     // TODO: find status before content changed, e.g. by caching
-    emit isUsableChanged(isUsable());
+    Q_EMIT isUsableChanged(isUsable());
 }
 
 }

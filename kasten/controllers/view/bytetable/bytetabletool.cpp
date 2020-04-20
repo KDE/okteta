@@ -88,7 +88,7 @@ void ByteTableTool::setTargetModel(AbstractModel* model)
 
     const bool isWriteable = (hasView && !mByteArrayView->isReadOnly());
 
-    emit hasWriteableChanged(isWriteable);
+    Q_EMIT hasWriteableChanged(isWriteable);
 }
 
 void ByteTableTool::insert(unsigned char byte, int count)
@@ -123,7 +123,7 @@ void ByteTableTool::onReadOnlyChanged(bool isReadOnly)
 {
     const bool isWriteable = !isReadOnly;
 
-    emit hasWriteableChanged(isWriteable);
+    Q_EMIT hasWriteableChanged(isWriteable);
 }
 
 }

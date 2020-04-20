@@ -137,7 +137,7 @@ void ByteArrayColumnViewPrivate::setValueCoding(AbstractByteArrayView::ValueCodi
         updateViewByWidth();
     }
 
-    emit q->valueCodingChanged(valueCoding);
+    Q_EMIT q->valueCodingChanged(valueCoding);
 }
 
 void ByteArrayColumnViewPrivate::setByteSpacingWidth(int /*PixelX*/ byteSpacingWidth)
@@ -157,7 +157,7 @@ void ByteArrayColumnViewPrivate::setNoOfGroupedBytes(int noOfGroupedBytes)
     }
     updateViewByWidth();
 
-    emit q->noOfGroupedBytesChanged(noOfGroupedBytes);
+    Q_EMIT q->noOfGroupedBytesChanged(noOfGroupedBytes);
 }
 
 void ByteArrayColumnViewPrivate::setGroupSpacingWidth(int /*PixelX*/ groupSpacingWidth)
@@ -187,7 +187,7 @@ void ByteArrayColumnViewPrivate::setSubstituteChar(QChar substituteChar)
     q->updateColumn(*mCharColumn);
     unpauseCursor();
 
-    emit q->substituteCharChanged(substituteChar);
+    Q_EMIT q->substituteCharChanged(substituteChar);
 }
 
 void ByteArrayColumnViewPrivate::setUndefinedChar(QChar undefinedChar)
@@ -201,7 +201,7 @@ void ByteArrayColumnViewPrivate::setUndefinedChar(QChar undefinedChar)
     q->updateColumn(*mCharColumn);
     unpauseCursor();
 
-    emit q->undefinedCharChanged(undefinedChar);
+    Q_EMIT q->undefinedCharChanged(undefinedChar);
 }
 
 void ByteArrayColumnViewPrivate::setShowsNonprinting(bool showingNonprinting)
@@ -215,7 +215,7 @@ void ByteArrayColumnViewPrivate::setShowsNonprinting(bool showingNonprinting)
     q->updateColumn(*mCharColumn);
     unpauseCursor();
 
-    emit q->showsNonprintingChanged(showingNonprinting);
+    Q_EMIT q->showsNonprintingChanged(showingNonprinting);
 }
 
 void ByteArrayColumnViewPrivate::setCharCoding(AbstractByteArrayView::CharCoding charCoding)
@@ -238,7 +238,7 @@ void ByteArrayColumnViewPrivate::setCharCoding(AbstractByteArrayView::CharCoding
 
     unpauseCursor();
 
-    emit q->charCodecChanged(charCodingName());
+    Q_EMIT q->charCodecChanged(charCodingName());
 }
 
 // TODO: join with function above!
@@ -262,7 +262,7 @@ void ByteArrayColumnViewPrivate::setCharCoding(const QString& newCharCodingName)
 
     unpauseCursor();
 
-    emit q->charCodecChanged(charCodingName());
+    Q_EMIT q->charCodecChanged(charCodingName());
 }
 
 void ByteArrayColumnViewPrivate::setByteTypeColored(bool isColored)
@@ -509,7 +509,7 @@ void ByteArrayColumnViewPrivate::setVisibleCodings(int newColumns)
 
     updateViewByWidth();
 
-    emit q->visibleByteArrayCodingsChanged(newColumns);
+    Q_EMIT q->visibleByteArrayCodingsChanged(newColumns);
 }
 
 void ByteArrayColumnViewPrivate::setActiveCoding(AbstractByteArrayView::CodingTypeId codingId)
@@ -557,7 +557,7 @@ void ByteArrayColumnViewPrivate::placeCursor(QPoint point)
     const Coord coord(linePosition, lineIndex);
 
     mTableCursor->gotoCCoord(coord);
-    emit q->cursorPositionChanged(cursorPosition());
+    Q_EMIT q->cursorPositionChanged(cursorPosition());
 }
 
 Address ByteArrayColumnViewPrivate::indexByPoint(QPoint point) const

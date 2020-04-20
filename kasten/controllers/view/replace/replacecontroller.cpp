@@ -112,7 +112,7 @@ void ReplaceController::queryContinue(FindDirection direction, int noOfReplaceme
 
     const bool result = (answer != KMessageBox::No);
 
-    emit queryContinueFinished(result);
+    Q_EMIT queryContinueFinished(result);
 }
 
 void ReplaceController::queryReplaceCurrent()
@@ -131,7 +131,7 @@ void ReplaceController::onPromptReply(ReplaceBehaviour behaviour)
         mReplacePrompt->hide();
     }
 
-    emit queryReplaceCurrentFinished(behaviour);
+    Q_EMIT queryReplaceCurrentFinished(behaviour);
 }
 
 }

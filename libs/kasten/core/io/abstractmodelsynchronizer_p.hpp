@@ -67,7 +67,7 @@ inline void AbstractModelSynchronizerPrivate::setUrl(const QUrl& url)
     Q_Q(AbstractModelSynchronizer);
 
     mUrl = url;
-    emit q->urlChanged(url);
+    Q_EMIT q->urlChanged(url);
 }
 
 }

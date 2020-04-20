@@ -143,7 +143,7 @@ bool ByteArrayModel::autoDelete() const
 void ByteArrayModel::signalContentsChanged(int start, int end)
 {
     const int length = end - start + 1;
-    emit contentsChanged(ArrayChangeMetricsList::oneReplacement(start, length, length));
+    Q_EMIT contentsChanged(ArrayChangeMetricsList::oneReplacement(start, length, length));
 }
 
 void ByteArrayModel::setByte(Address offset, Byte byte)

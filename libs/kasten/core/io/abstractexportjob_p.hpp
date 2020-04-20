@@ -56,7 +56,7 @@ inline void AbstractExportJobPrivate::setDocument(AbstractDocument* document)
 {
     mDocument = document;
 
-    emit q_ptr->documentLoaded(document);
+    Q_EMIT q_ptr->documentLoaded(document);
     q_ptr->emitResult();
 }
 

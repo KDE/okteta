@@ -43,9 +43,9 @@ void TabBar::mouseReleaseEvent(QMouseEvent* event)
         if (event->button() == Qt::MidButton) {
             const int tabIndex = tabAt(event->pos());
             if (tabIndex != -1) {
-                emit tabCloseRequested(tabIndex);
+                Q_EMIT tabCloseRequested(tabIndex);
             } else {
-                emit mouseMiddleClick();
+                Q_EMIT mouseMiddleClick();
             }
             event->setAccepted(true);
             return;
@@ -62,7 +62,7 @@ void TabBar::dragEnterEvent(QDragEnterEvent* event)
     bool accept = false;
     // The receivers of the testCanDecode() signal has to adjust
     // 'accept' accordingly.
-    emit testCanDecode(event, accept);
+    Q_EMIT testCanDecode(event, accept);
 
     event->setAccepted(accept);
 }
@@ -73,7 +73,7 @@ void TabBar::dragMoveEvent(QDragMoveEvent* event)
     if (tabAt(event->pos()) == -1) {
         // The receivers of the testCanDecode() signal has to adjust
         // 'accept' accordingly.
-        emit testCanDecode(event, accept);
+        Q_EMIT testCanDecode(event, accept);
     }
 
     event->setAccepted(accept);
@@ -82,7 +82,7 @@ void TabBar::dragMoveEvent(QDragMoveEvent* event)
 void TabBar::dropEvent(QDropEvent* event)
 {
     if (tabAt(event->pos()) == -1) {
-        emit receivedDropEvent(event);
+        Q_EMIT receivedDropEvent(event);
         return;
     }
 

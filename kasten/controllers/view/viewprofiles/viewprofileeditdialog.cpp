@@ -90,7 +90,7 @@ void ViewProfileEditDialog::onFinished(int result)
         return;
     }
 
-    emit viewProfileAccepted(viewProfile());
+    Q_EMIT viewProfileAccepted(viewProfile());
 }
 
 }

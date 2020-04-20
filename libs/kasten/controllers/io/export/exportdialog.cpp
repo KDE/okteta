@@ -131,7 +131,7 @@ void ExportDialog::onFinished(int result)
         return;
     }
 
-    emit exportAccepted(m_exporter, m_selection);
+    Q_EMIT exportAccepted(m_exporter, m_selection);
 }
 
 }

@@ -221,7 +221,7 @@ void ByteArrayView::onSelectionChanged(const Okteta::AddressRange& selection)
 {
     // TODO: how to make sure the signal hasSelectedDataChanged() is not emitted before?
     mSelection.setRange(selection);
-    emit selectedDataChanged(&mSelection);
+    Q_EMIT selectedDataChanged(&mSelection);
 }
 
 void ByteArrayView::setCursorPosition(Okteta::Address cursorPosition)

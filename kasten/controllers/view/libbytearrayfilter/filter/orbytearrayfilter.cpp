@@ -57,7 +57,7 @@ bool OrByteArrayFilter::filter(Okteta::Byte* result,
 
             if (r <= nextBlockEnd) {
                 nextBlockEnd -= FilteredByteCountSignalLimit;
-                emit filteredBytes(behindLastResult - r);
+                Q_EMIT filteredBytes(behindLastResult - r);
             }
         }
     } else {
@@ -73,7 +73,7 @@ bool OrByteArrayFilter::filter(Okteta::Byte* result,
 
             if (r >= nextBlockEnd) {
                 nextBlockEnd += FilteredByteCountSignalLimit;
-                emit filteredBytes(r);
+                Q_EMIT filteredBytes(r);
             }
         }
     }

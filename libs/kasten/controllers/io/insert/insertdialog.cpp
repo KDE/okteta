@@ -92,7 +92,7 @@ void InsertDialog::onFinished(int result)
         return;
     }
 
-    emit insertAccepted(m_generator);
+    Q_EMIT insertAccepted(m_generator);
 }
 
 }

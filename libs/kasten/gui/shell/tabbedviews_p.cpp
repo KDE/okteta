@@ -123,7 +123,7 @@ void TabbedViewsPrivate::addViews(const QVector<AbstractView*>& views)
         onCurrentChanged(0);
     }
 
-    emit q->added(views);
+    Q_EMIT q->added(views);
 }
 
 void TabbedViewsPrivate::removeViews(const QVector<AbstractView*>& views)
@@ -153,7 +153,7 @@ void TabbedViewsPrivate::removeViews(const QVector<AbstractView*>& views)
         onCurrentChanged(currentIndex);
     }
 
-    emit q->removing(views);
+    Q_EMIT q->removing(views);
 }
 
 void TabbedViewsPrivate::setCurrentToolInlineView(AbstractToolInlineView* view)
@@ -194,7 +194,7 @@ void TabbedViewsPrivate::onCurrentChanged(int index)
         view->widget()->setFocus();
     }
 
-    emit q->viewFocusChanged(view);
+    Q_EMIT q->viewFocusChanged(view);
 }
 
 void TabbedViewsPrivate::onTabCloseRequest(int tabIndex)
@@ -206,7 +206,7 @@ void TabbedViewsPrivate::onTabCloseRequest(int tabIndex)
     AbstractView* view = viewBox->view();
 
     const QVector<Kasten::AbstractView*> views { view };
-    emit q->closeRequest(views);
+    Q_EMIT q->closeRequest(views);
 }
 
 void TabbedViewsPrivate::onTitleChanged(const QString& newTitle)
@@ -248,7 +248,7 @@ void TabbedViewsPrivate::onViewFocusChanged(bool hasFocus)
 //     AbstractView* view = qobject_cast<AbstractView *>( q->sender() );
 // qCDebug(LOG_KASTEN_GUI)<<view<<view->title()<<hasFocus;
 
-    emit q->focusChanged(hasFocus);
+    Q_EMIT q->focusChanged(hasFocus);
 }
 
 void TabbedViewsPrivate::onMouseMiddleClick()
@@ -257,7 +257,7 @@ void TabbedViewsPrivate::onMouseMiddleClick()
 
     const QMimeData* mimeData = QApplication::clipboard()->mimeData(QClipboard::Selection);
 
-    emit q->dataDropped(mimeData);
+    Q_EMIT q->dataDropped(mimeData);
 }
 
 void TabbedViewsPrivate::onDragMoveEvent(const QDragMoveEvent* event, bool& accepted)
@@ -266,7 +266,7 @@ void TabbedViewsPrivate::onDragMoveEvent(const QDragMoveEvent* event, bool& acce
 
     const QMimeData* mimeData = event->mimeData();
 
-    emit q->dataOffered(mimeData, accepted);
+    Q_EMIT q->dataOffered(mimeData, accepted);
 }
 
 void TabbedViewsPrivate::onDropEvent(QDropEvent* event)
@@ -275,7 +275,7 @@ void TabbedViewsPrivate::onDropEvent(QDropEvent* event)
 
     const QMimeData* mimeData = event->mimeData();
 
-    emit q->dataDropped(mimeData);
+    Q_EMIT q->dataDropped(mimeData);
 }
 
 }

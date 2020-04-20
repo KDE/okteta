@@ -67,7 +67,7 @@ void BookmarkEditPopup::onFinished(int result)
         return;
     }
 
-    emit bookmarkAccepted(m_cursorPosition, name());
+    Q_EMIT bookmarkAccepted(m_cursorPosition, name());
 }
 
 }

@@ -141,7 +141,7 @@ inline void ByteArrayModelPrivate::setReadOnly(bool isReadOnly)
 
     if (mReadOnly != isReadOnly) {
         mReadOnly = isReadOnly;
-        emit q->readOnlyChanged(isReadOnly);
+        Q_EMIT q->readOnlyChanged(isReadOnly);
     }
 }
 inline void ByteArrayModelPrivate::setMaxSize(int maxSize)          { mMaxSize = maxSize; }
@@ -154,9 +154,9 @@ inline void ByteArrayModelPrivate::setByte(Address offset, Byte byte)
     const bool wasModifiedBefore = mModified;
     mData[offset] = byte;
     mModified = true;
-    emit q->contentsChanged(ArrayChangeMetricsList::oneReplacement(offset, 1, 1));
+    Q_EMIT q->contentsChanged(ArrayChangeMetricsList::oneReplacement(offset, 1, 1));
     if (!wasModifiedBefore) {
-        emit q->modifiedChanged(true);
+        Q_EMIT q->modifiedChanged(true);
     }
 }
 inline void ByteArrayModelPrivate::setModified(bool modified)
@@ -164,7 +164,7 @@ inline void ByteArrayModelPrivate::setModified(bool modified)
     Q_Q(ByteArrayModel);
 
     mModified = modified;
-    emit q->modifiedChanged(mModified);
+    Q_EMIT q->modifiedChanged(mModified);
 }
 
 inline Byte* ByteArrayModelPrivate::data()       const { return mData; }
@@ -177,14 +177,14 @@ inline void ByteArrayModelPrivate::addBookmarks(const QVector<Bookmark>& bookmar
     Q_Q(ByteArrayModel);
 
     m_bookmarks.addBookmarks(bookmarks);
-    emit q->bookmarksAdded(bookmarks);
+    Q_EMIT q->bookmarksAdded(bookmarks);
 }
 inline void ByteArrayModelPrivate::removeBookmarks(const QVector<Bookmark>& bookmarks)
 {
     Q_Q(ByteArrayModel);
 
     m_bookmarks.removeBookmarks(bookmarks);
-    emit q->bookmarksRemoved(bookmarks);
+    Q_EMIT q->bookmarksRemoved(bookmarks);
 }
 
 inline void ByteArrayModelPrivate::removeAllBookmarks()
@@ -193,7 +193,7 @@ inline void ByteArrayModelPrivate::removeAllBookmarks()
 
     const QVector<Bookmark> bookmarks = m_bookmarks.list();
     m_bookmarks.clear();
-    emit q->bookmarksRemoved(bookmarks);
+    Q_EMIT q->bookmarksRemoved(bookmarks);
 }
 inline void ByteArrayModelPrivate::setBookmark(unsigned int index, const Bookmark& bookmark)
 {
@@ -204,7 +204,7 @@ inline void ByteArrayModelPrivate::setBookmark(unsigned int index, const Bookmar
     const QVector<int> changedBookmarkIndizes {
         static_cast<int>(index)
     };
-    emit q->bookmarksModified(changedBookmarkIndizes);
+    Q_EMIT q->bookmarksModified(changedBookmarkIndizes);
 }
 
 inline BookmarksConstIterator ByteArrayModelPrivate::createBookmarksConstIterator() const

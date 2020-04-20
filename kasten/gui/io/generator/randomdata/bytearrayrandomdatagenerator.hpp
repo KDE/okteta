@@ -64,7 +64,7 @@ inline ByteArrayRandomDataGeneratorSettings ByteArrayRandomDataGenerator::settin
 inline void ByteArrayRandomDataGenerator::setSettings(const ByteArrayRandomDataGeneratorSettings& settings)
 {
     mSettings = settings;
-//     emit settingsChanged();
+//     Q_EMIT settingsChanged();
 }
 
 }

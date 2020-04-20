@@ -79,7 +79,7 @@ void BytesPerLineDialog::onFinished(int result)
         return;
     }
 
-    emit bytesPerLineAccepted(bytesPerLine());
+    Q_EMIT bytesPerLineAccepted(bytesPerLine());
 }
 
 }

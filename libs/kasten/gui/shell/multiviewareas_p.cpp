@@ -120,8 +120,8 @@ AbstractViewArea* MultiViewAreasPrivate::splitViewArea(AbstractViewArea* _viewAr
     splitter->setSizes(splitterSizes);
 
     const QVector<AbstractViewArea*> viewAreas { secondViewArea };
-    emit q->viewAreasAdded(viewAreas);
-    emit q->viewAreaFocusChanged(secondViewArea);
+    Q_EMIT q->viewAreasAdded(viewAreas);
+    Q_EMIT q->viewAreaFocusChanged(secondViewArea);
 
     return secondViewArea;
 }
@@ -183,7 +183,7 @@ void MultiViewAreasPrivate::onViewsRemoved()
         }
 
         const QVector<AbstractViewArea*> viewAreas { viewArea };
-        emit q->viewAreasRemoved(viewAreas);
+        Q_EMIT q->viewAreasRemoved(viewAreas);
 
         delete viewArea;
     }
@@ -207,8 +207,8 @@ void MultiViewAreasPrivate::onViewAreaFocusChanged(bool hasFocus)
     if (hasFocus) {
         mCurrentViewArea = viewArea;
 
-        emit q->viewAreaFocusChanged(viewArea);
-        emit q->viewFocusChanged(viewArea->viewFocus());
+        Q_EMIT q->viewAreaFocusChanged(viewArea);
+        Q_EMIT q->viewFocusChanged(viewArea->viewFocus());
     }
 }
 

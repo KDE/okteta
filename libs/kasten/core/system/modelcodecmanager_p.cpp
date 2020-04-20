@@ -155,7 +155,7 @@ void ModelCodecManagerPrivate::exportDocument(AbstractModelExporter* exporter,
             exportDone = JobManager::executeJob(exportJob);
 
 //                 if( exportDone )
-//                     emit urlUsed( exportUrl );
+//                     Q_EMIT urlUsed( exportUrl );
         } else {
             break;
         }

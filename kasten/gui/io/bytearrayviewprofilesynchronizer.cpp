@@ -96,9 +96,9 @@ void ByteArrayViewProfileSynchronizer::setViewProfileId(const ByteArrayViewProfi
         }
     }
 
-    emit viewProfileChanged(mViewProfileId);
+    Q_EMIT viewProfileChanged(mViewProfileId);
     if (mView) {
-        emit localSyncStateChanged(LocalInSync);
+        Q_EMIT localSyncStateChanged(LocalInSync);
     }
 }
 
@@ -120,7 +120,7 @@ ByteArrayViewProfileSynchronizer::syncToRemote()
     mViewProfileManager->saveViewProfiles(viewProfiles);
 
     if (mView) {
-        emit localSyncStateChanged(LocalInSync);
+        Q_EMIT localSyncStateChanged(LocalInSync);
     }
 }
 
@@ -137,7 +137,7 @@ ByteArrayViewProfileSynchronizer::syncFromRemote()
     updateView(viewProfile);
 
     if (mView) {
-        emit localSyncStateChanged(LocalInSync);
+        Q_EMIT localSyncStateChanged(LocalInSync);
     }
 }
 
@@ -325,7 +325,7 @@ ByteArrayViewProfileSynchronizer::setDirtyFlag(int dirtyFlag)
     mDirtyFlags |= dirtyFlag;
 
     if (isCleanBefore) {
-        emit localSyncStateChanged(LocalHasChanges);
+        Q_EMIT localSyncStateChanged(LocalHasChanges);
     }
 }
 

@@ -71,7 +71,7 @@ void FileSystemBrowserTool::setTargetModel(AbstractModel* model)
     const bool newHasCurrentUrl = hasCurrentUrl();
 
     if (oldHasCurrentUrl != newHasCurrentUrl) {
-        emit hasCurrentUrlChanged(newHasCurrentUrl);
+        Q_EMIT hasCurrentUrlChanged(newHasCurrentUrl);
     }
 }
 

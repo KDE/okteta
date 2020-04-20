@@ -95,11 +95,11 @@ void StringsExtractTool::setTargetModel(AbstractModel* model)
     // TODO: if there is no view, there is nothing to extract.
     // or this could be the view where we got the strings from and it did not change
     checkUptoDate();
-    emit uptodateChanged(mExtractedStringsUptodate);
-    emit isApplyableChanged(isApplyable());
-    emit canHighlightStringChanged(canHighlightString());
+    Q_EMIT uptodateChanged(mExtractedStringsUptodate);
+    Q_EMIT isApplyableChanged(isApplyable());
+    Q_EMIT canHighlightStringChanged(canHighlightString());
     if (mSourceByteArrayModel == mByteArrayModel && mByteArrayView) {
-        emit offsetCodingChanged(mByteArrayView->offsetCoding());
+        Q_EMIT offsetCodingChanged(mByteArrayView->offsetCoding());
     }
 }
 
@@ -109,7 +109,7 @@ void StringsExtractTool::setMinLength(int minLength)
 {
     mMinLength = minLength;
     checkUptoDate();
-    emit uptodateChanged(mExtractedStringsUptodate);
+    Q_EMIT uptodateChanged(mExtractedStringsUptodate);
 }
 
 void StringsExtractTool::checkUptoDate()
@@ -150,16 +150,16 @@ void StringsExtractTool::onSelectionChanged()
 {
 // TODO: could be quicker using the selection data
     checkUptoDate();
-    emit uptodateChanged(mExtractedStringsUptodate);
-    emit isApplyableChanged(isApplyable());
+    Q_EMIT uptodateChanged(mExtractedStringsUptodate);
+    Q_EMIT isApplyableChanged(isApplyable());
 }
 
 void StringsExtractTool::onSourceChanged()
 {
     mExtractedStringsUptodate = false;
     mSourceByteArrayModelUptodate = false;
-    emit uptodateChanged(false);
-    emit canHighlightStringChanged(false);
+    Q_EMIT uptodateChanged(false);
+    Q_EMIT canHighlightStringChanged(false);
 }
 
 void StringsExtractTool::onSourceDestroyed()
@@ -205,9 +205,9 @@ void StringsExtractTool::extractStrings()
 
     mExtractedStringsUptodate = true;
     mSourceByteArrayModelUptodate = true;
-    emit uptodateChanged(true);
-    emit canHighlightStringChanged(true);
-    emit offsetCodingChanged(mByteArrayView->offsetCoding());
+    Q_EMIT uptodateChanged(true);
+    Q_EMIT canHighlightStringChanged(true);
+    Q_EMIT offsetCodingChanged(mByteArrayView->offsetCoding());
 }
 
 }

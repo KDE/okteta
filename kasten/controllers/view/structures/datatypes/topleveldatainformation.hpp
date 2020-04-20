@@ -180,18 +180,18 @@ inline ScriptHandler* TopLevelDataInformation::scriptHandler() const
 inline void TopLevelDataInformation::_childCountAboutToChange(DataInformation* sender, uint oldCount, uint newCount)
 {
     if (newCount < oldCount) { // newCount is smaller so oldCount is at least 1 -> no underflow
-        emit childrenAboutToBeRemoved(sender, newCount, oldCount - 1);
+        Q_EMIT childrenAboutToBeRemoved(sender, newCount, oldCount - 1);
     } else if (newCount > oldCount) { // newCount is larger so it is at least 1 -> no underflow
-        emit childrenAboutToBeInserted(sender, oldCount, newCount - 1);
+        Q_EMIT childrenAboutToBeInserted(sender, oldCount, newCount - 1);
     }
 }
 
 inline void TopLevelDataInformation::_childCountChanged(DataInformation* sender, uint oldCount, uint newCount)
 {
     if (newCount < oldCount) { // newCount is smaller so oldCount is at least 1 -> no underflow
-        emit childrenRemoved(sender, newCount, oldCount - 1);
+        Q_EMIT childrenRemoved(sender, newCount, oldCount - 1);
     } else if (newCount > oldCount) { // newCount is larger so it is at least 1 -> no underflow
-        emit childrenInserted(sender, oldCount, newCount - 1);
+        Q_EMIT childrenInserted(sender, oldCount, newCount - 1);
     }
 }
 

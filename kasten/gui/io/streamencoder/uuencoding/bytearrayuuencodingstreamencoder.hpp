@@ -83,7 +83,7 @@ inline UuencodingStreamEncoderSettings ByteArrayUuencodingStreamEncoder::setting
 inline void ByteArrayUuencodingStreamEncoder::setSettings(const UuencodingStreamEncoderSettings& settings)
 {
     mSettings = settings;
-    emit settingsChanged();
+    Q_EMIT settingsChanged();
 }
 
 }

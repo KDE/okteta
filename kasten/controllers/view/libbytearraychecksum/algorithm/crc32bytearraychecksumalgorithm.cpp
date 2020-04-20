@@ -98,7 +98,7 @@ bool Crc32ByteArrayChecksumAlgorithm::calculateChecksum(QString* result,
 
         if (i >= nextBlockEnd) {
             nextBlockEnd += CalculatedByteCountSignalLimit;
-            emit calculatedBytes(range.localIndex(i) + 1);
+            Q_EMIT calculatedBytes(range.localIndex(i) + 1);
         }
     }
 

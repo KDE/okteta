@@ -149,7 +149,7 @@ bool StructureTreeModel::setData(const QModelIndex& index, const QVariant& value
     auto* item = static_cast<DataInformation*> (index.internalPointer());
     bool change = mTool->setData(value, role, item, index.row());
     if (change) {
-        emit dataChanged(index, index);
+        Q_EMIT dataChanged(index, index);
     }
     return change;
 }
@@ -254,7 +254,7 @@ QModelIndex StructureTreeModel::findItemInModel(DataInformationBase* data) const
 
 void StructureTreeModel::onToolDataChange(int row, void* data)
 {
-    emit dataChanged(createIndex(row, 0, data), createIndex(row, 2, data));
+    Q_EMIT dataChanged(createIndex(row, 0, data), createIndex(row, 2, data));
 }
 
 void StructureTreeModel::onToolDataClear()

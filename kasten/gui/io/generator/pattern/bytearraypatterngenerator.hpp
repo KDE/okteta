@@ -65,7 +65,7 @@ inline ByteArrayPatternGeneratorSettings ByteArrayPatternGenerator::settings() c
 inline void ByteArrayPatternGenerator::setSettings(const ByteArrayPatternGeneratorSettings& settings)
 {
     mSettings = settings;
-//     emit settingsChanged();
+//     Q_EMIT settingsChanged();
 }
 
 }

@@ -63,5 +63,5 @@ void StructuresSelectionDialog::onFinished(int result)
         return;
     }
 
-    emit structuresAccepted(m_structureAddRemoveWidget->values());
+    Q_EMIT structuresAccepted(m_structureAddRemoveWidget->values());
 }

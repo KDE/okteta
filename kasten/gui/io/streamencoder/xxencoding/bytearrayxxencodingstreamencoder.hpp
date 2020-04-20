@@ -75,7 +75,7 @@ inline XxencodingStreamEncoderSettings ByteArrayXxencodingStreamEncoder::setting
 inline void ByteArrayXxencodingStreamEncoder::setSettings(const XxencodingStreamEncoderSettings& settings)
 {
     mSettings = settings;
-    emit settingsChanged();
+    Q_EMIT settingsChanged();
 }
 
 }

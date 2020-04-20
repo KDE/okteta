@@ -60,7 +60,7 @@ bool ReverseByteArrayFilter::filter(Okteta::Byte* result,
         ++filteredBytesCount;
         if (filteredBytesCount >= FilteredByteCountSignalLimit) {
             filteredBytesCount = 0;
-            emit filteredBytes(m - range.start());
+            Q_EMIT filteredBytes(m - range.start());
         }
     }
 

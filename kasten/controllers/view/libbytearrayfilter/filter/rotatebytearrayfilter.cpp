@@ -86,7 +86,7 @@ bool RotateByteArrayFilter::filter(Okteta::Byte* result,
             filteredBytesCount += g;
             if (filteredBytesCount >= FilteredByteCountSignalLimit) {
                 filteredBytesCount = 0;
-                emit filteredBytes(m - range.start());
+                Q_EMIT filteredBytes(m - range.start());
             }
         }
     } else {
@@ -119,7 +119,7 @@ bool RotateByteArrayFilter::filter(Okteta::Byte* result,
             filteredBytesCount += g;
             if (filteredBytesCount >= FilteredByteCountSignalLimit) {
                 filteredBytesCount = 0;
-                emit filteredBytes(m - range.start());
+                Q_EMIT filteredBytes(m - range.start());
             }
         }
     }

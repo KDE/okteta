@@ -118,7 +118,7 @@ void ByteArrayJanusView::setViewModus(int viewModus)
     connect(mView, &AbstractByteArrayView::noOfGroupedBytesChanged, this, &ByteArrayJanusView::noOfGroupedBytesChanged);
     connect(mView, &AbstractByteArrayView::zoomLevelChanged, this, &ByteArrayJanusView::zoomLevelChanged);
 
-    emit viewModusChanged(mViewModus);
+    Q_EMIT viewModusChanged(mViewModus);
 }
 
 bool ByteArrayJanusView::isReadOnly()             const { return mView->isReadOnly(); }

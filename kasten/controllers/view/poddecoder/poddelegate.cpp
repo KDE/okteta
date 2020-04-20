@@ -362,8 +362,8 @@ void PODDelegate::onEditorDone()
 {
     QWidget* editor = qobject_cast<QWidget*>(sender());
     mEditor = nullptr;
-    emit commitData(editor);
-    emit closeEditor(editor);
+    Q_EMIT commitData(editor);
+    Q_EMIT closeEditor(editor);
 }
 
 void PODDelegate::onReadOnlyChanged(bool isReadOnly) const

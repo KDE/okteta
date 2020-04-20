@@ -112,6 +112,6 @@ void Template_ByteArrayChecksumParameterSetEdit::onBitNumberChanged(int value)
     }
 
     mIsValid = isValid;
-    emit validityChanged(isValid);
+    Q_EMIT validityChanged(isValid);
 }
 //// ADAPT(end)

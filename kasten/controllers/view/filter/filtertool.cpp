@@ -93,7 +93,7 @@ void FilterTool::setTargetModel(AbstractModel* model)
     }
 
     onApplyableChanged();
-    emit charCodecChanged(newCharCodecName);
+    Q_EMIT charCodecChanged(newCharCodecName);
 }
 
 void FilterTool::filter(int filterId) const
@@ -136,7 +136,7 @@ void FilterTool::onApplyableChanged()
                                   && !mByteArrayView->isReadOnly() && mByteArrayView->hasSelectedData());
     if (newHasWriteable != mHasWritable) {
         mHasWritable = newHasWriteable;
-        emit hasWriteableChanged(newHasWriteable);
+        Q_EMIT hasWriteableChanged(newHasWriteable);
     }
 }
 

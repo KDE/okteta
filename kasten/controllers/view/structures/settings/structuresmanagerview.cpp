@@ -113,7 +113,7 @@ void StructuresManagerView::setSelectedStructures(const QStringList& selectedStr
     qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES)
         << "selection changed from " << mSelectedStructures << "to" << selectedStructures;
     mSelectedStructures = selectedStructures;
-    emit changed(selectedStructures);
+    Q_EMIT changed(selectedStructures);
 }
 
 void StructuresManagerView::onPluginSelectorChange(bool change)
@@ -145,7 +145,7 @@ void StructuresManagerView::reloadSelectedItems()
         qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES)
             << "selection changed from " << mSelectedStructures << "to" << newVals;
         mSelectedStructures = newVals;
-        emit changed(newVals);
+        Q_EMIT changed(newVals);
     } else {
         qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "no change:" << mSelectedStructures;
     }

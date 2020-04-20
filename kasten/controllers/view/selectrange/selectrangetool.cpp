@@ -101,10 +101,10 @@ void SelectRangeTool::setTargetModel(AbstractModel* model)
     const bool newIsUsable = isUsable();
     const bool newIsApplyable = isApplyable();
     if (oldIsUsable != newIsUsable) {
-        emit isUsableChanged(newIsUsable);
+        Q_EMIT isUsableChanged(newIsUsable);
     }
     if (oldIsApplyable != newIsApplyable) {
-        emit isApplyableChanged(newIsApplyable);
+        Q_EMIT isApplyableChanged(newIsApplyable);
     }
 }
 
@@ -116,7 +116,7 @@ void SelectRangeTool::setTargetStart(Okteta::Address start)
 
     const bool newIsApplyable = isApplyable();
     if (oldIsApplyable != newIsApplyable) {
-        emit isApplyableChanged(newIsApplyable);
+        Q_EMIT isApplyableChanged(newIsApplyable);
     }
 }
 
@@ -128,7 +128,7 @@ void SelectRangeTool::setTargetEnd(Okteta::Address end)
 
     const bool newIsApplyable = isApplyable();
     if (oldIsApplyable != newIsApplyable) {
-        emit isApplyableChanged(newIsApplyable);
+        Q_EMIT isApplyableChanged(newIsApplyable);
     }
 }
 
@@ -140,7 +140,7 @@ void SelectRangeTool::setIsEndRelative(bool isEndRelative)
 
     const bool newIsApplyable = isApplyable();
     if (oldIsApplyable != newIsApplyable) {
-        emit isApplyableChanged(newIsApplyable);
+        Q_EMIT isApplyableChanged(newIsApplyable);
     }
 }
 
@@ -152,7 +152,7 @@ void SelectRangeTool::setIsEndBackwards(bool isEndBackwards)
 
     const bool newIsApplyable = isApplyable();
     if (oldIsApplyable != newIsApplyable) {
-        emit isApplyableChanged(newIsApplyable);
+        Q_EMIT isApplyableChanged(newIsApplyable);
     }
 }
 
@@ -196,7 +196,7 @@ int SelectRangeTool::finalTargetSelectionEnd() const
 void SelectRangeTool::onContentsChanged()
 {
     // TODO: find status before content changed, e.g. by caching
-    emit isUsableChanged(isUsable());
+    Q_EMIT isUsableChanged(isUsable());
 }
 
 }

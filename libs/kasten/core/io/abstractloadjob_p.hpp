@@ -64,7 +64,7 @@ inline void AbstractLoadJobPrivate::setDocument(AbstractDocument* document)
 
     if (document) {
         mDocument = document;
-        emit q->documentLoaded(document);
+        Q_EMIT q->documentLoaded(document);
     }
 
     q->emitResult();

@@ -107,5 +107,5 @@ void OperandByteArrayFilterParameterSetEdit::rememberCurrentSettings()
 
 void OperandByteArrayFilterParameterSetEdit::onInputChanged(const QByteArray& data)
 {
-    emit validityChanged(!data.isEmpty());
+    Q_EMIT validityChanged(!data.isEmpty());
 }

@@ -94,7 +94,7 @@ void CreateDialog::onFinished(int result)
         return;
     }
 
-    emit createAccepted(m_generator);
+    Q_EMIT createAccepted(m_generator);
 }
 
 }

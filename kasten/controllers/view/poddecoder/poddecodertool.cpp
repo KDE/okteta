@@ -132,7 +132,7 @@ void PODDecoderTool::setTargetModel(AbstractModel* model)
     onReadOnlyChanged();
     const bool newIsApplyable = isApplyable();
     if (oldIsApplyable != newIsApplyable) {
-        emit isApplyableChanged(newIsApplyable);
+        Q_EMIT isApplyableChanged(newIsApplyable);
     }
 }
 
@@ -313,8 +313,8 @@ void PODDecoderTool::updateData()
         mDecodedValueByteCountList[podId] = byteCount;
     }
 
-    // TODO: only emit for those strings that changed
-    emit dataChanged();
+    // TODO: only Q_EMIT for those strings that changed
+    Q_EMIT dataChanged();
 }
 
 void PODDecoderTool::markPOD(int podId)
@@ -338,7 +338,7 @@ void PODDecoderTool::onReadOnlyChanged()
                               || mByteArrayView->isReadOnly());
     if (newReadOnly != mReadOnly) {
         mReadOnly = newReadOnly;
-        emit readOnlyChanged(newReadOnly);
+        Q_EMIT readOnlyChanged(newReadOnly);
     }
 }
 

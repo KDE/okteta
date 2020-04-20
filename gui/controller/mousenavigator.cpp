@@ -88,14 +88,14 @@ bool MouseNavigator::handleMousePressEvent(QMouseEvent* mouseEvent)
             mView->unpauseCursor();
 
             const bool newHasSelection = tableRanges->hasSelection();
-            emit mView->cursorPositionChanged(mView->cursorPosition());
-            emit mView->selectionChanged(tableRanges->selection());
+            Q_EMIT mView->cursorPositionChanged(mView->cursorPosition());
+            Q_EMIT mView->selectionChanged(tableRanges->selection());
             if (oldHasSelection != newHasSelection) {
                 if (!mView->isOverwriteMode()) {
-                    emit mView->cutAvailable(newHasSelection);
+                    Q_EMIT mView->cutAvailable(newHasSelection);
                 }
-                emit mView->copyAvailable(newHasSelection);
-                emit mView->hasSelectedDataChanged(newHasSelection);
+                Q_EMIT mView->copyAvailable(newHasSelection);
+                Q_EMIT mView->hasSelectedDataChanged(newHasSelection);
             }
         } else {
             // TODO: pos() is now, not at the moment of the event, use globalPos() for that,.says dox
@@ -137,13 +137,13 @@ bool MouseNavigator::handleMousePressEvent(QMouseEvent* mouseEvent)
             mView->unpauseCursor();
 
             const bool newHasSelection = tableRanges->hasSelection();
-            emit mView->selectionChanged(tableRanges->selection());
+            Q_EMIT mView->selectionChanged(tableRanges->selection());
             if (oldHasSelection != newHasSelection) {
                 if (!mView->isOverwriteMode()) {
-                    emit mView->cutAvailable(newHasSelection);
+                    Q_EMIT mView->cutAvailable(newHasSelection);
                 }
-                emit mView->copyAvailable(newHasSelection);
-                emit mView->hasSelectedDataChanged(newHasSelection);
+                Q_EMIT mView->copyAvailable(newHasSelection);
+                Q_EMIT mView->hasSelectedDataChanged(newHasSelection);
             }
         }
         eventUsed = true;
@@ -202,7 +202,7 @@ bool MouseNavigator::handleMouseReleaseEvent(QMouseEvent* mouseEvent)
 //             const int line = mView->lineAt( releasePoint.y() );
 //             const int pos = mActiveColumn->linePositionOfX( releasePoint.x() ); // TODO: can we be sure here about the active column?
 //             const Address index = tableLayout->indexAtCCoord( Coord(pos,line) ); // TODO: can this be another index than the one of the cursor???
-//             emit mView->clicked( index ); // TODO: who needs this?
+//             Q_EMIT mView->clicked( index ); // TODO: who needs this?
         }
 
         if (mLMBPressed) {
@@ -231,7 +231,7 @@ bool MouseNavigator::handleMouseReleaseEvent(QMouseEvent* mouseEvent)
             }
         }
 
-        emit mView->cursorPositionChanged(mView->cursorPosition());
+        Q_EMIT mView->cursorPositionChanged(mView->cursorPosition());
 
         mInLMBDoubleClick = false;
 
@@ -240,13 +240,13 @@ bool MouseNavigator::handleMouseReleaseEvent(QMouseEvent* mouseEvent)
         }
 
         const bool newHasSelection = tableRanges->hasSelection();
-        emit mView->selectionChanged(tableRanges->selection());
+        Q_EMIT mView->selectionChanged(tableRanges->selection());
         if (oldHasSelection != newHasSelection) {
             if (!mView->isOverwriteMode()) {
-                emit mView->cutAvailable(newHasSelection);
+                Q_EMIT mView->cutAvailable(newHasSelection);
             }
-            emit mView->copyAvailable(newHasSelection);
-            emit mView->hasSelectedDataChanged(newHasSelection);
+            Q_EMIT mView->copyAvailable(newHasSelection);
+            Q_EMIT mView->hasSelectedDataChanged(newHasSelection);
         }
         eventUsed = true;
     }
@@ -278,7 +278,7 @@ bool MouseNavigator::handleMouseDoubleClickEvent(QMouseEvent* mouseEvent)
         mInLMBDoubleClick = true; //
         mLMBPressed = true;
 
-        emit mView->doubleClicked(index);
+        Q_EMIT mView->doubleClicked(index);
         eventUsed = true;
     }
 
@@ -350,14 +350,14 @@ void MouseNavigator::handleMouseMove(QPoint point)   // handles the move of the 
     mView->unpauseCursor();
 
     const bool newHasSelection = tableRanges->hasSelection();
-    emit mView->cursorPositionChanged(mView->cursorPosition());
-    emit mView->selectionChanged(tableRanges->selection());
+    Q_EMIT mView->cursorPositionChanged(mView->cursorPosition());
+    Q_EMIT mView->selectionChanged(tableRanges->selection());
     if (oldHasSelection != newHasSelection) {
         if (!mView->isOverwriteMode()) {
-            emit mView->cutAvailable(newHasSelection);
+            Q_EMIT mView->cutAvailable(newHasSelection);
         }
-        emit mView->copyAvailable(newHasSelection);
-        emit mView->hasSelectedDataChanged(newHasSelection);
+        Q_EMIT mView->copyAvailable(newHasSelection);
+        Q_EMIT mView->hasSelectedDataChanged(newHasSelection);
     }
 }
 

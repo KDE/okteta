@@ -55,7 +55,7 @@ void TabWidget::mouseReleaseEvent(QMouseEvent* event)
 {
     if (event->button() == Qt::MidButton) {
         if (count() == 0) {
-            emit mouseMiddleClick();
+            Q_EMIT mouseMiddleClick();
             event->setAccepted(true);
             return;
         }
@@ -70,7 +70,7 @@ void TabWidget::dragEnterEvent(QDragEnterEvent* event)
         bool accept = false;
         // The receivers of the testCanDecode() signal has to adjust
         // 'accept' accordingly.
-        emit testCanDecode(event, accept);
+        Q_EMIT testCanDecode(event, accept);
         event->setAccepted(accept);
         return;
     }
@@ -84,7 +84,7 @@ void TabWidget::dragMoveEvent(QDragMoveEvent* event)
         bool accept = false;
         // The receivers of the testCanDecode() signal has to adjust
         // 'accept' accordingly.
-        emit testCanDecode(event, accept);
+        Q_EMIT testCanDecode(event, accept);
 
         event->setAccepted(accept);
         return;
@@ -96,7 +96,7 @@ void TabWidget::dragMoveEvent(QDragMoveEvent* event)
 void TabWidget::dropEvent(QDropEvent* event)
 {
     if (count() == 0) {
-        emit receivedDropEvent(event);
+        Q_EMIT receivedDropEvent(event);
         return;
     }
 

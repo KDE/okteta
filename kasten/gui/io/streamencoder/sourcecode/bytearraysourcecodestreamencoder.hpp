@@ -90,7 +90,7 @@ inline SourceCodeStreamEncoderSettings ByteArraySourceCodeStreamEncoder::setting
 inline void ByteArraySourceCodeStreamEncoder::setSettings(const SourceCodeStreamEncoderSettings& settings)
 {
     mSettings = settings;
-    emit settingsChanged();
+    Q_EMIT settingsChanged();
 }
 
 }

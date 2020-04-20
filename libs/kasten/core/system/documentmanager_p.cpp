@@ -65,7 +65,7 @@ void DocumentManagerPrivate::addDocument(AbstractDocument* document)
     mList.append(document);
     // TODO: only emit if document was not included before
     const QVector<AbstractDocument*> addedDocuments { document };
-    emit q->added(addedDocuments);
+    Q_EMIT q->added(addedDocuments);
 }
 
 void DocumentManagerPrivate::closeDocument(AbstractDocument* document)
@@ -80,7 +80,7 @@ void DocumentManagerPrivate::closeDocument(AbstractDocument* document)
         iterator.remove();
 
         const QVector<AbstractDocument*> closedDocuments { document };
-        emit q->closing(closedDocuments);
+        Q_EMIT q->closing(closedDocuments);
 
         delete document;
     }
@@ -95,7 +95,7 @@ void DocumentManagerPrivate::closeDocuments(const QVector<AbstractDocument*>& do
         mList.removeOne(document);
     }
 
-    emit q->closing(documents);
+    Q_EMIT q->closing(documents);
 
     for (AbstractDocument* document : documents) {
         delete document;
@@ -111,7 +111,7 @@ void DocumentManagerPrivate::closeAll()
     const QVector<AbstractDocument*> closedDocuments = mList;
     mList.clear();
 
-    emit q->closing(closedDocuments);
+    Q_EMIT q->closing(closedDocuments);
 
     for (AbstractDocument* document : closedDocuments) {
         delete document;
@@ -130,7 +130,7 @@ void DocumentManagerPrivate::closeAllOther(AbstractDocument* keptDocument)
     mList.clear();
     mList.append(keptDocument);
 
-    emit q->closing(closedDocuments);
+    Q_EMIT q->closing(closedDocuments);
 
     for (AbstractDocument* document : qAsConst(closedDocuments)) {
         delete document;
@@ -189,7 +189,7 @@ void DocumentManagerPrivate::requestFocus(AbstractDocument* document)
 {
     Q_Q(DocumentManager);
 
-    emit q->focusRequested(document);
+    Q_EMIT q->focusRequested(document);
 }
 
 }

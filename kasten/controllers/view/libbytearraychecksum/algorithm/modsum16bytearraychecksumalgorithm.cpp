@@ -77,7 +77,7 @@ quint16 ModSum16ByteArrayChecksumAlgorithm::calculateModSumWithBigEndian(const O
 #endif
         if (i >= nextBlockEnd) {
             nextBlockEnd += CalculatedByteCountSignalLimit;
-            emit calculatedBytes(range.localIndex(i) + 1);
+            Q_EMIT calculatedBytes(range.localIndex(i) + 1);
         }
     }
 
@@ -101,7 +101,7 @@ quint16 ModSum16ByteArrayChecksumAlgorithm::calculateModSumWithLittleEndian(cons
 
         if (i >= nextBlockEnd) {
             nextBlockEnd += CalculatedByteCountSignalLimit;
-            emit calculatedBytes(range.localIndex(i) + 1);
+            Q_EMIT calculatedBytes(range.localIndex(i) + 1);
         }
     }
 

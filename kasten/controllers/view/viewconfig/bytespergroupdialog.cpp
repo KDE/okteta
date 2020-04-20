@@ -82,7 +82,7 @@ void BytesPerGroupDialog::onFinished(int result)
         return;
     }
 
-    emit bytesPerGroupAccepted(groupedBytesCount());
+    Q_EMIT bytesPerGroupAccepted(groupedBytesCount());
 }
 
 }

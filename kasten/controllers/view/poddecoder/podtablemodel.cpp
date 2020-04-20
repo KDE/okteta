@@ -44,7 +44,7 @@ PODTableModel::~PODTableModel() = default;
 
 void PODTableModel::onDataChanged()
 {
-    emit dataChanged(index(0, ValueId), index(mTool->podCount() - 1, ValueId));
+    Q_EMIT dataChanged(index(0, ValueId), index(mTool->podCount() - 1, ValueId));
 }
 
 int PODTableModel::rowCount(const QModelIndex& parent) const

@@ -33,7 +33,7 @@ void ModelStreamEncodeThread::run()
 {
     mSuccess = mEncoder->encodeToStream(mIODevice, mModel, mSelection);
 
-    emit modelExported(mSuccess);
+    Q_EMIT modelExported(mSuccess);
 }
 
 }

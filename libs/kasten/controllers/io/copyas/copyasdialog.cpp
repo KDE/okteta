@@ -131,7 +131,7 @@ void CopyAsDialog::onFinished(int result)
         return;
     }
 
-    emit copyAccepted(m_encoder, m_selection);
+    Q_EMIT copyAccepted(m_encoder, m_selection);
 }
 
 }

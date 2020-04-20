@@ -147,7 +147,7 @@ void KeyNavigator::moveCursor(MoveAction action, bool select)
     if (tableRanges->isModified()) {
         mView->emitSelectionSignals(); // TODO: can this be moved somewhere
     }
-    emit mView->cursorPositionChanged(tableCursor->realIndex());
+    Q_EMIT mView->cursorPositionChanged(tableCursor->realIndex());
     mView->updateChanged();
     mView->ensureCursorVisible();
 

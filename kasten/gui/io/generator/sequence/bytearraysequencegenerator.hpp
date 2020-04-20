@@ -65,7 +65,7 @@ inline ByteArraySequenceGeneratorSettings ByteArraySequenceGenerator::settings()
 inline void ByteArraySequenceGenerator::setSettings(const ByteArraySequenceGeneratorSettings& settings)
 {
     mSettings = settings;
-//     emit settingsChanged();
+//     Q_EMIT settingsChanged();
 }
 
 }

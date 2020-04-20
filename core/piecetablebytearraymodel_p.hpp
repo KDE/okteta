@@ -142,7 +142,7 @@ inline void PieceTableByteArrayModelPrivate::setReadOnly(bool readOnly)
 
     if (mReadOnly != readOnly) {
         mReadOnly = readOnly;
-        emit q->readOnlyChanged(readOnly);
+        Q_EMIT q->readOnlyChanged(readOnly);
     }
 }
 inline void PieceTableByteArrayModelPrivate::setModified(bool modified)
@@ -153,7 +153,7 @@ inline void PieceTableByteArrayModelPrivate::setModified(bool modified)
         mPieceTable.setBeforeCurrentChangeAsBase(modified);
         // TODO: is the call setModified of any use?
         // shouldn't there be only a setUnmodified(void) or else call?
-        emit q->modifiedChanged(modified);
+        Q_EMIT q->modifiedChanged(modified);
     }
 }
 
@@ -167,14 +167,14 @@ inline void PieceTableByteArrayModelPrivate::addBookmarks(const QVector<Bookmark
     Q_Q(PieceTableByteArrayModel);
 
     mBookmarks.addBookmarks(bookmarks);
-    emit q->bookmarksAdded(bookmarks);
+    Q_EMIT q->bookmarksAdded(bookmarks);
 }
 inline void PieceTableByteArrayModelPrivate::removeBookmarks(const QVector<Bookmark>& bookmarks)
 {
     Q_Q(PieceTableByteArrayModel);
 
     mBookmarks.removeBookmarks(bookmarks);
-    emit q->bookmarksRemoved(bookmarks);
+    Q_EMIT q->bookmarksRemoved(bookmarks);
 }
 
 inline void PieceTableByteArrayModelPrivate::removeAllBookmarks()
@@ -183,7 +183,7 @@ inline void PieceTableByteArrayModelPrivate::removeAllBookmarks()
 
     const QVector<Bookmark> bookmarks = mBookmarks.list();
     mBookmarks.clear();
-    emit q->bookmarksRemoved(bookmarks);
+    Q_EMIT q->bookmarksRemoved(bookmarks);
 }
 inline void PieceTableByteArrayModelPrivate::setBookmark(unsigned int index, const Bookmark& bookmark)
 {
@@ -194,7 +194,7 @@ inline void PieceTableByteArrayModelPrivate::setBookmark(unsigned int index, con
     const QVector<int> changedBookmarkIndizes {
         static_cast<int>(index)
     };
-    emit q->bookmarksModified(changedBookmarkIndizes);
+    Q_EMIT q->bookmarksModified(changedBookmarkIndizes);
 }
 
 inline BookmarksConstIterator PieceTableByteArrayModelPrivate::createBookmarksConstIterator() const

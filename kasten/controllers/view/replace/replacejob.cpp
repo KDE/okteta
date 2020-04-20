@@ -272,7 +272,7 @@ void ReplaceJob::wrapAndSearchNextPosition()
 void ReplaceJob::finish()
 {
     QApplication::restoreOverrideCursor();
-    emit finished(m_previousFound, m_noOfReplacements);
+    Q_EMIT finished(m_previousFound, m_noOfReplacements);
 }
 
 }

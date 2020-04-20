@@ -180,7 +180,7 @@ bool ValueEditor::handleKeyPress(QKeyEvent* keyEvent)
                                 mCursor->gotoIndex(index);
                                 mView->ensureCursorVisible();
 //                                 mView->updateCursors();
-                                emit mView->cursorPositionChanged(mCursor->realIndex());
+                                Q_EMIT mView->cursorPositionChanged(mCursor->realIndex());
                             } else {
                                 cancelEdit();
                             }
@@ -291,7 +291,7 @@ void ValueEditor::doValueEditAction(ValueEditAction Action, int input)
 
         mView->unpauseCursor();
         if (moveToNext) {
-            emit mView->cursorPositionChanged(mCursor->realIndex());
+            Q_EMIT mView->cursorPositionChanged(mCursor->realIndex());
         }
     }
 }

@@ -85,7 +85,7 @@ void ByteArrayRawFileLoadThread::run()
         mDocument = nullptr;
     }
 
-    emit documentRead(mDocument);
+    Q_EMIT documentRead(mDocument);
 }
 
 }

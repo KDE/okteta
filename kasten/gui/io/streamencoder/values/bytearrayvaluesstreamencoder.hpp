@@ -70,7 +70,7 @@ inline ValuesStreamEncoderSettings ByteArrayValuesStreamEncoder::settings() cons
 inline void ByteArrayValuesStreamEncoder::setSettings(const ValuesStreamEncoderSettings& settings)
 {
     mSettings = settings;
-    emit settingsChanged();
+    Q_EMIT settingsChanged();
 }
 
 }

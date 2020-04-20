@@ -96,7 +96,7 @@ Address AbstractByteArrayModel::indexOf(const Byte* pattern, int patternLength, 
 
         if (nextSignalByteCount <= i) {
             nextSignalByteCount += SearchedByteCountSignalLimit;
-            emit searchedBytes(i - fromOffset + 1);
+            Q_EMIT searchedBytes(i - fromOffset + 1);
         }
 
         if (c == patternLength) {
@@ -136,7 +136,7 @@ Address AbstractByteArrayModel::lastIndexOf(const Byte* pattern, int patternLeng
 
         if (nextSignalByteCount >= i) {
             nextSignalByteCount -= SearchedByteCountSignalLimit;
-            emit searchedBytes(i - fromOffset + 1);
+            Q_EMIT searchedBytes(i - fromOffset + 1);
         }
 
         if (c == patternLength) {
@@ -201,7 +201,7 @@ Address AbstractByteArrayModel::indexOfCaseInsensitive(const CharCodec* charCode
 
         if (nextSignalByteCount <= i) {
             nextSignalByteCount += SearchedByteCountSignalLimit;
-            emit searchedBytes(i - fromOffset + 1);
+            Q_EMIT searchedBytes(i - fromOffset + 1);
         }
 
         if (c == patternLength) {
@@ -253,7 +253,7 @@ Address AbstractByteArrayModel::lastIndexOfCaseInsensitive(const CharCodec* char
 
         if (nextSignalByteCount >= i) {
             nextSignalByteCount -= SearchedByteCountSignalLimit;
-            emit searchedBytes(i - fromOffset + 1);
+            Q_EMIT searchedBytes(i - fromOffset + 1);
         }
 
         if (c == patternLength) {

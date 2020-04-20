@@ -63,22 +63,22 @@ ReplacePrompt::ReplacePrompt(QWidget* parent)
 
 void ReplacePrompt::onReplaceAllButton()
 {
-    emit finished(ReplaceAll);
+    Q_EMIT finished(ReplaceAll);
 }
 
 void ReplacePrompt::onSkipButton()
 {
-    emit finished(SkipCurrent);
+    Q_EMIT finished(SkipCurrent);
 }
 
 void ReplacePrompt::onReplaceButton()
 {
-    emit finished(ReplaceCurrent);
+    Q_EMIT finished(ReplaceCurrent);
 }
 
 void ReplacePrompt::onCloseButton()
 {
-    emit finished(CancelReplacing);
+    Q_EMIT finished(CancelReplacing);
 }
 
 }

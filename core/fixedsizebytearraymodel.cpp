@@ -66,9 +66,9 @@ void FixedSizeByteArrayModel::setByte(Address offset, Byte byte)
     mData[offset] = byte;
     mModified = true;
 
-    emit contentsChanged(ArrayChangeMetricsList::oneReplacement(offset, 1, 1));
+    Q_EMIT contentsChanged(ArrayChangeMetricsList::oneReplacement(offset, 1, 1));
     if (!wasModifiedBefore) {
-        emit modifiedChanged(true);
+        Q_EMIT modifiedChanged(true);
     }
 }
 
@@ -93,10 +93,10 @@ Size FixedSizeByteArrayModel::insert(Address offset, const Byte* insertData, int
 
     mModified = true;
 
-    emit contentsChanged(ArrayChangeMetricsList::oneReplacement(offset, 0, insertLength));
-    // emit contentsReplaced( offset, , 0 ); TODO: how to signal the removed data?
+    Q_EMIT contentsChanged(ArrayChangeMetricsList::oneReplacement(offset, 0, insertLength));
+    // Q_EMIT contentsReplaced( offset, , 0 ); TODO: how to signal the removed data?
     if (!wasModifiedBefore) {
-        emit modifiedChanged(true);
+        Q_EMIT modifiedChanged(true);
     }
 
     return insertLength;
@@ -122,10 +122,10 @@ Size FixedSizeByteArrayModel::remove(const AddressRange& _removeRange)
 
     mModified = true;
 
-    emit contentsChanged(ArrayChangeMetricsList::oneReplacement(removeRange.start(), removeRange.width(), 0));
-    // emit contentsReplaced( offset, 0,  ); TODO: how to signal the inserted data?
+    Q_EMIT contentsChanged(ArrayChangeMetricsList::oneReplacement(removeRange.start(), removeRange.width(), 0));
+    // Q_EMIT contentsReplaced( offset, 0,  ); TODO: how to signal the inserted data?
     if (!wasModifiedBefore) {
-        emit modifiedChanged(true);
+        Q_EMIT modifiedChanged(true);
     }
 
     return removeLength;
@@ -167,10 +167,10 @@ Size FixedSizeByteArrayModel::replace(const AddressRange& _removeRange, const By
 
     mModified = true;
 
-    emit contentsChanged(ArrayChangeMetricsList::oneReplacement(removeRange.start(), removeRange.width(), insertLength));
-    // emit contentsReplaced( offset, 0,  ); TODO: how to signal the changed data at the end?
+    Q_EMIT contentsChanged(ArrayChangeMetricsList::oneReplacement(removeRange.start(), removeRange.width(), insertLength));
+    // Q_EMIT contentsReplaced( offset, 0,  ); TODO: how to signal the changed data at the end?
     if (!wasModifiedBefore) {
-        emit modifiedChanged(true);
+        Q_EMIT modifiedChanged(true);
     }
 
     return insertLength;
@@ -238,9 +238,9 @@ bool FixedSizeByteArrayModel::swap(Address firstStart, const AddressRange& _seco
 
     mModified = true;
 
-    emit contentsChanged(ArrayChangeMetricsList::oneSwapping(firstStart, secondRange.start(), secondRange.width()));
+    Q_EMIT contentsChanged(ArrayChangeMetricsList::oneSwapping(firstStart, secondRange.start(), secondRange.width()));
     if (!wasModifiedBefore) {
-        emit modifiedChanged(true);
+        Q_EMIT modifiedChanged(true);
     }
 
     return true;
@@ -268,9 +268,9 @@ Size FixedSizeByteArrayModel::fill(Byte fillByte, Address offset, Size fillLengt
     memset(&mData[offset], fillByte, fillLength);
     mModified = true;
 
-    emit contentsChanged(ArrayChangeMetricsList::oneReplacement(offset, fillLength, fillLength));
+    Q_EMIT contentsChanged(ArrayChangeMetricsList::oneReplacement(offset, fillLength, fillLength));
     if (!wasModifiedBefore) {
-        emit modifiedChanged(true);
+        Q_EMIT modifiedChanged(true);
     }
 
     return fillLength;

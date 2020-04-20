@@ -175,7 +175,7 @@ void ByteArrayComboBoxPrivate::onFormatChanged(int index)
         mValueComboBox->setEditText(convertedValueText);
     }
 
-    emit q->formatChanged(index);
+    Q_EMIT q->formatChanged(index);
 }
 
 void ByteArrayComboBoxPrivate::onValueEdited(const QString& value)
@@ -184,7 +184,7 @@ void ByteArrayComboBoxPrivate::onValueEdited(const QString& value)
 
     const QByteArray byteArray = mValidator->toByteArray(value);
 
-    emit q->byteArrayChanged(byteArray);
+    Q_EMIT q->byteArrayChanged(byteArray);
 }
 
 void ByteArrayComboBoxPrivate::onValueActivated(int index)
@@ -204,9 +204,9 @@ void ByteArrayComboBoxPrivate::onValueActivated(int index)
         const QString currentValueText = mValueComboBox->currentText();
         const QByteArray byteArray = mValidator->toByteArray(currentValueText);
 
-        emit q->byteArrayChanged(byteArray);
+        Q_EMIT q->byteArrayChanged(byteArray);
         if (isOtherFormat) {
-            emit q->formatChanged(itemFormatIndex);
+            Q_EMIT q->formatChanged(itemFormatIndex);
         }
     }
 }

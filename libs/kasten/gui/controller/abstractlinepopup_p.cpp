@@ -81,7 +81,7 @@ int AbstractLinePopupPrivate::exec()
     eventLoop.exec();
     mEventLoop = nullptr;
 
-    emit p->finished(mResult);
+    Q_EMIT p->finished(mResult);
 
     return mResult;
 }
@@ -110,7 +110,7 @@ void AbstractLinePopupPrivate::done(int result)
 
     p->hide();
 
-    emit p->finished(result);
+    Q_EMIT p->finished(result);
 
     p->close();
 }

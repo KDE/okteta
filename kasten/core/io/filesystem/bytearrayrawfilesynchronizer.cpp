@@ -91,7 +91,7 @@ void ByteArrayRawFileSynchronizer::onUrlChange(const QUrl& url)
 
 void ByteArrayRawFileSynchronizer::onModelModified(bool isModified)
 {
-    emit localSyncStateChanged((isModified ? LocalHasChanges : LocalInSync));
+    Q_EMIT localSyncStateChanged((isModified ? LocalHasChanges : LocalInSync));
 }
 
 }

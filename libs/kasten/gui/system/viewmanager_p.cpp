@@ -80,7 +80,7 @@ void ViewManagerPrivate::createCopyOfView(AbstractView* view, Qt::Alignment alig
     mViewList.append(viewCopy);
 
     const QVector<Kasten::AbstractView*> views { viewCopy };
-    emit q->opened(views);
+    Q_EMIT q->opened(views);
 }
 
 void ViewManagerPrivate::createViewsFor(const QVector<Kasten::AbstractDocument*>& documents)
@@ -102,7 +102,7 @@ void ViewManagerPrivate::createViewsFor(const QVector<Kasten::AbstractDocument*>
     }
 
     if (!openedViews.isEmpty()) {
-        emit q->opened(openedViews);
+        Q_EMIT q->opened(openedViews);
     }
 }
 
@@ -125,7 +125,7 @@ void ViewManagerPrivate::removeViewsFor(const QVector<Kasten::AbstractDocument*>
         it.toFront();
     }
 
-    emit q->closing(closedViews);
+    Q_EMIT q->closing(closedViews);
 
     for (AbstractView* view : qAsConst(closedViews)) {
 //         qCDebug(LOG_KASTEN_GUI) << view->title();
@@ -141,7 +141,7 @@ void ViewManagerPrivate::removeViews(const QVector<AbstractView*>& views)
         mViewList.removeOne(view);
     }
 
-    emit q->closing(views);
+    Q_EMIT q->closing(views);
 
     for (AbstractView* view : views) {
 //         qCDebug(LOG_KASTEN_GUI)<<view->title();

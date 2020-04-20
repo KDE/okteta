@@ -108,7 +108,7 @@ inline IHexStreamEncoderSettings ByteArrayIHexStreamEncoder::settings() const { 
 inline void ByteArrayIHexStreamEncoder::setSettings(const IHexStreamEncoderSettings& settings)
 {
     mSettings = settings;
-    emit settingsChanged();
+    Q_EMIT settingsChanged();
 }
 
 inline char ByteArrayIHexStreamEncoder::hexValueOfNibble(int nibble)

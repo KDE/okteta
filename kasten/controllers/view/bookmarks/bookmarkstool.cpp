@@ -112,15 +112,15 @@ void BookmarksTool::setTargetModel(AbstractModel* model)
         constexpr bool cantCreateBookmark = false;
         if (mCanCreateBookmark != cantCreateBookmark) {
             mCanCreateBookmark = cantCreateBookmark;
-            emit canCreateBookmarkChanged(cantCreateBookmark);
+            Q_EMIT canCreateBookmarkChanged(cantCreateBookmark);
         }
     }
 
     const int newOffsetCoding = offsetCoding();
     if (oldOffsetCoding != newOffsetCoding) {
-        emit offsetCodingChanged(newOffsetCoding);
+        Q_EMIT offsetCodingChanged(newOffsetCoding);
     }
-    emit hasBookmarksChanged(hasViewWithBookmarks);
+    Q_EMIT hasBookmarksChanged(hasViewWithBookmarks);
 }
 
 Okteta::Bookmark BookmarksTool::createBookmark()
@@ -187,7 +187,7 @@ void BookmarksTool::onCursorPositionChanged(Okteta::Address newPosition)
 
     if (canCreateBookmark != mCanCreateBookmark) {
         mCanCreateBookmark = canCreateBookmark;
-        emit canCreateBookmarkChanged(canCreateBookmark);
+        Q_EMIT canCreateBookmarkChanged(canCreateBookmark);
     }
 }
 

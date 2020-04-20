@@ -97,5 +97,5 @@ void RotateByteArrayFilterParameterSetEdit::getParameterSet(AbstractByteArrayFil
 
 void RotateByteArrayFilterParameterSetEdit::onValueChanged(int value)
 {
-    emit validityChanged(value != 0);
+    Q_EMIT validityChanged(value != 0);
 }

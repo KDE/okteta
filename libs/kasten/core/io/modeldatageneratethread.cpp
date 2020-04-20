@@ -33,7 +33,7 @@ void ModelDataGenerateThread::run()
 {
     mMimeData = mGenerator->generateData();
 
-    emit generated(mMimeData);
+    Q_EMIT generated(mMimeData);
 }
 
 }

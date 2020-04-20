@@ -89,17 +89,17 @@ bool MousePaster::handleMouseReleaseEvent(QMouseEvent* mouseEvent)
         mView->ensureCursorVisible();
         mView->unpauseCursor();
 
-        emit mView->cursorPositionChanged(tableCursor->realIndex());
+        Q_EMIT mView->cursorPositionChanged(tableCursor->realIndex());
 
         if (tableRanges->selectionJustStarted()) {
             tableRanges->removeSelection();
         }
 
         if (!mView->isOverwriteMode()) {
-            emit mView->cutAvailable(tableRanges->hasSelection());
+            Q_EMIT mView->cutAvailable(tableRanges->hasSelection());
         }
-        emit mView->copyAvailable(tableRanges->hasSelection());
-        emit mView->hasSelectedDataChanged(tableRanges->hasSelection());
+        Q_EMIT mView->copyAvailable(tableRanges->hasSelection());
+        Q_EMIT mView->hasSelectedDataChanged(tableRanges->hasSelection());
 
         eventUsed = true;
     }

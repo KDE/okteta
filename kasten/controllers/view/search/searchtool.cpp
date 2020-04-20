@@ -85,7 +85,7 @@ void SearchTool::setTargetModel(AbstractModel* model)
 
     const bool newIsApplyable = isApplyable();
     if (oldIsApplyable != newIsApplyable) {
-        emit isApplyableChanged(newIsApplyable);
+        Q_EMIT isApplyableChanged(newIsApplyable);
     }
 }
 
@@ -102,7 +102,7 @@ void SearchTool::setSearchData(const QByteArray& searchData)
 
 //     const bool newIsApplyable = isApplyable();
 //     if( oldIsApplyable != newIsApplyable )
-//         emit isApplyableChanged( newIsApplyable );
+//         Q_EMIT isApplyableChanged( newIsApplyable );
 }
 
 void SearchTool::setCaseSensitivity(Qt::CaseSensitivity caseSensitivity)
@@ -113,7 +113,7 @@ void SearchTool::setCaseSensitivity(Qt::CaseSensitivity caseSensitivity)
 
 //     const bool newIsApplyable = isApplyable();
 //     if( oldIsApplyable != newIsApplyable )
-//         emit isApplyableChanged( newIsApplyable );
+//         Q_EMIT isApplyableChanged( newIsApplyable );
 }
 
 void SearchTool::search(FindDirection direction, bool fromCursor, bool inSelection)
@@ -124,7 +124,7 @@ void SearchTool::search(FindDirection direction, bool fromCursor, bool inSelecti
         const Okteta::AddressRange selection = mByteArrayView->selection();
         if (!selection.isValid()) {
             // nothing selected, so skip any search and finish now
-            emit dataNotFound();
+            Q_EMIT dataNotFound();
             return;
         }
 
@@ -179,7 +179,7 @@ void SearchTool::doSearch(FindDirection direction)
             wrapEnabled = false;
         } else {
             if (!mPreviousFound) {
-                emit dataNotFound();
+                Q_EMIT dataNotFound();
             }
             break;
         }

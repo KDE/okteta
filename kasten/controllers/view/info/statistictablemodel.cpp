@@ -59,8 +59,8 @@ StatisticTableModel::~StatisticTableModel()
 void StatisticTableModel::update(int size)
 {
     mSize = size;
-    emit dataChanged(index(0, CountId), index(StatisticsByteSetSize - 1, PercentId));
-    emit sizeChanged(mSize);
+    Q_EMIT dataChanged(index(0, CountId), index(StatisticsByteSetSize - 1, PercentId));
+    Q_EMIT sizeChanged(mSize);
 }
 
 void StatisticTableModel::setSubstituteChar(QChar substituteChar)
@@ -75,7 +75,7 @@ void StatisticTableModel::setSubstituteChar(QChar substituteChar)
 
     mSubstituteChar = substituteChar;
 
-    emit dataChanged(index(0, CharacterId), index(StatisticsByteSetSize - 1, CharacterId));
+    Q_EMIT dataChanged(index(0, CharacterId), index(StatisticsByteSetSize - 1, CharacterId));
 }
 
 void StatisticTableModel::setUndefinedChar(QChar undefinedChar)
@@ -90,7 +90,7 @@ void StatisticTableModel::setUndefinedChar(QChar undefinedChar)
 
     mUndefinedChar = undefinedChar;
 
-    emit dataChanged(index(0, CharacterId), index(StatisticsByteSetSize - 1, CharacterId));
+    Q_EMIT dataChanged(index(0, CharacterId), index(StatisticsByteSetSize - 1, CharacterId));
 }
 
 void StatisticTableModel::setValueCoding(int valueCoding)
@@ -106,8 +106,8 @@ void StatisticTableModel::setValueCoding(int valueCoding)
     mValueCodec = Okteta::ValueCodec::createCodec(mValueCoding);
 //     CodedByte.resize( ByteCodec->encodingWidth() );
 
-    emit dataChanged(index(0, ValueId), index(StatisticsByteSetSize - 1, ValueId));
-    emit headerChanged();
+    Q_EMIT dataChanged(index(0, ValueId), index(StatisticsByteSetSize - 1, ValueId));
+    Q_EMIT headerChanged();
 }
 
 void StatisticTableModel::setCharCodec(const QString& codeName)
@@ -119,7 +119,7 @@ void StatisticTableModel::setCharCodec(const QString& codeName)
     delete mCharCodec;
     mCharCodec = Okteta::CharCodec::createCodec(codeName);
 
-    emit dataChanged(index(0, CharacterId), index(StatisticsByteSetSize - 1, CharacterId));
+    Q_EMIT dataChanged(index(0, CharacterId), index(StatisticsByteSetSize - 1, CharacterId));
 }
 
 int StatisticTableModel::rowCount(const QModelIndex& parent) const

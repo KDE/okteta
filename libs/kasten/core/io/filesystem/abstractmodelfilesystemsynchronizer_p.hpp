@@ -88,7 +88,7 @@ inline void AbstractModelFileSystemSynchronizerPrivate::setRemoteState(RemoteSyn
     }
 
     mRemoteState = remoteState;
-    emit q->remoteSyncStateChanged(remoteState);
+    Q_EMIT q->remoteSyncStateChanged(remoteState);
 }
 inline void AbstractModelFileSystemSynchronizerPrivate::setFileDateTimeOnSync(const QDateTime& fileDateTime)
 {

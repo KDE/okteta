@@ -48,7 +48,7 @@ bool InvertByteArrayFilter::filter(Okteta::Byte* result,
 
         if (r >= nextBlockEnd) {
             nextBlockEnd += FilteredByteCountSignalLimit;
-            emit filteredBytes(r);
+            Q_EMIT filteredBytes(r);
         }
     }
 

@@ -260,7 +260,7 @@ void AbstractByteArrayViewPrivate::setByteArrayModel(AbstractByteArrayModel* byt
     ensureCursorVisible();
     unpauseCursor();
 
-    emit q->cursorPositionChanged(cursorPosition());
+    Q_EMIT q->cursorPositionChanged(cursorPosition());
 }
 
 void AbstractByteArrayViewPrivate::toggleOffsetColumn(bool showOffsetColumn)
@@ -277,7 +277,7 @@ void AbstractByteArrayViewPrivate::toggleOffsetColumn(bool showOffsetColumn)
 
     updateViewByWidth();
 
-    emit q->offsetColumnVisibleChanged(showOffsetColumn);
+    Q_EMIT q->offsetColumnVisibleChanged(showOffsetColumn);
 }
 
 void AbstractByteArrayViewPrivate::setOffsetCoding(AbstractByteArrayView::OffsetCoding offsetCoding)
@@ -295,7 +295,7 @@ void AbstractByteArrayViewPrivate::setOffsetCoding(AbstractByteArrayView::Offset
 
     updateViewByWidth();
 
-    emit q->offsetCodingChanged(offsetCoding);
+    Q_EMIT q->offsetCodingChanged(offsetCoding);
 }
 
 void AbstractByteArrayViewPrivate::changeEvent(QEvent* event)
@@ -332,7 +332,7 @@ void AbstractByteArrayViewPrivate::zoomIn(int pointIncrement)
     q->setFont(newFont);
     mInZooming = false;
 
-    emit q->zoomLevelChanged(mZoomLevel);
+    Q_EMIT q->zoomLevelChanged(mZoomLevel);
 }
 
 void AbstractByteArrayViewPrivate::zoomOut(int pointDecrement)
@@ -352,7 +352,7 @@ void AbstractByteArrayViewPrivate::zoomOut(int pointDecrement)
     q->setFont(newFont);
     mInZooming = false;
 
-    emit q->zoomLevelChanged(mZoomLevel);
+    Q_EMIT q->zoomLevelChanged(mZoomLevel);
 }
 
 void AbstractByteArrayViewPrivate::zoomTo(int newPointSize)
@@ -377,7 +377,7 @@ void AbstractByteArrayViewPrivate::zoomTo(int newPointSize)
     q->setFont(newFont);
     mInZooming = false;
 
-    emit q->zoomLevelChanged(mZoomLevel);
+    Q_EMIT q->zoomLevelChanged(mZoomLevel);
 }
 
 void AbstractByteArrayViewPrivate::unZoom()
@@ -417,7 +417,7 @@ void AbstractByteArrayViewPrivate::setZoomLevel(double zoomLevel)
     q->setFont(newFont);
     mInZooming = false;
 
-    emit q->zoomLevelChanged(mZoomLevel);
+    Q_EMIT q->zoomLevelChanged(mZoomLevel);
 }
 
 void AbstractByteArrayViewPrivate::setStartOffset(Address startOffset)
@@ -438,7 +438,7 @@ void AbstractByteArrayViewPrivate::setStartOffset(Address startOffset)
     mTableCursor->updateCoord();
     ensureCursorVisible();
     unpauseCursor();
-    emit q->cursorPositionChanged(cursorPosition());
+    Q_EMIT q->cursorPositionChanged(cursorPosition());
 }
 
 void AbstractByteArrayViewPrivate::setFirstLineOffset(Address firstLineOffset)
@@ -459,7 +459,7 @@ void AbstractByteArrayViewPrivate::setFirstLineOffset(Address firstLineOffset)
     mTableCursor->updateCoord();
     ensureCursorVisible();
     unpauseCursor();
-    emit q->cursorPositionChanged(cursorPosition());
+    Q_EMIT q->cursorPositionChanged(cursorPosition());
 }
 
 void AbstractByteArrayViewPrivate::setLayoutStyle(AbstractByteArrayView::LayoutStyle layoutStyle)
@@ -475,7 +475,7 @@ void AbstractByteArrayViewPrivate::setLayoutStyle(AbstractByteArrayView::LayoutS
     mResizeStyle = layoutStyle;
     updateViewByWidth();
 
-    emit q->layoutStyleChanged(mResizeStyle);
+    Q_EMIT q->layoutStyleChanged(mResizeStyle);
 }
 
 void AbstractByteArrayViewPrivate::setNoOfBytesPerLine(int noOfBytesPerLine)
@@ -491,7 +491,7 @@ void AbstractByteArrayViewPrivate::setNoOfBytesPerLine(int noOfBytesPerLine)
 
     updateViewByWidth();
 
-    emit q->noOfBytesPerLineChanged(mTableLayout->noOfBytesPerLine());
+    Q_EMIT q->noOfBytesPerLineChanged(mTableLayout->noOfBytesPerLine());
 }
 
 void AbstractByteArrayViewPrivate::setReadOnly(bool readOnly)
@@ -509,7 +509,7 @@ void AbstractByteArrayViewPrivate::setReadOnly(bool readOnly)
     adaptController();
 
     if (mByteArrayModel->isReadOnly()) {
-        emit q->readOnlyChanged(mReadOnly);
+        Q_EMIT q->readOnlyChanged(mReadOnly);
     }
 }
 
@@ -539,8 +539,8 @@ void AbstractByteArrayViewPrivate::setOverwriteMode(bool overwriteMode)
         unpauseCursor();
     }
 
-    emit q->overwriteModeChanged(mOverWrite);
-    emit q->cutAvailable(!mOverWrite && mTableRanges->hasSelection());
+    Q_EMIT q->overwriteModeChanged(mOverWrite);
+    Q_EMIT q->cutAvailable(!mOverWrite && mTableRanges->hasSelection());
 }
 
 void AbstractByteArrayViewPrivate::setOverwriteOnly(bool overwriteOnly)
@@ -646,15 +646,15 @@ bool AbstractByteArrayViewPrivate::selectWord(Address index)
             unpauseCursor();
 
             const bool newHasSelection = mTableRanges->hasSelection();
-            emit q->selectionChanged(wordSection);
+            Q_EMIT q->selectionChanged(wordSection);
             if (oldHasSelection != newHasSelection) {
                 if (!mOverWrite) {
-                    emit q->cutAvailable(newHasSelection);
+                    Q_EMIT q->cutAvailable(newHasSelection);
                 }
-                emit q->copyAvailable(newHasSelection);
-                emit q->hasSelectedDataChanged(newHasSelection);
+                Q_EMIT q->copyAvailable(newHasSelection);
+                Q_EMIT q->hasSelectedDataChanged(newHasSelection);
             }
-            emit q->cursorPositionChanged(cursorPosition());
+            Q_EMIT q->cursorPositionChanged(cursorPosition());
 
             result = true;
         }
@@ -684,15 +684,15 @@ void AbstractByteArrayViewPrivate::selectAll(bool select)
     unpauseCursor();
 
     const bool newHasSelection = mTableRanges->hasSelection();
-    emit q->selectionChanged(mTableRanges->selection());
+    Q_EMIT q->selectionChanged(mTableRanges->selection());
     if (oldHasSelection != newHasSelection) {
         if (!mOverWrite) {
-            emit q->cutAvailable(newHasSelection);
+            Q_EMIT q->cutAvailable(newHasSelection);
         }
-        emit q->copyAvailable(newHasSelection);
-        emit q->hasSelectedDataChanged(newHasSelection);
+        Q_EMIT q->copyAvailable(newHasSelection);
+        Q_EMIT q->hasSelectedDataChanged(newHasSelection);
     }
-    emit q->cursorPositionChanged(cursorPosition());
+    Q_EMIT q->cursorPositionChanged(cursorPosition());
 }
 
 void AbstractByteArrayViewPrivate::setCursorPosition(Address index, bool behind)
@@ -717,19 +717,19 @@ void AbstractByteArrayViewPrivate::setCursorPosition(Address index, bool behind)
         updateChanged();
 
         const bool newHasSelection = mTableRanges->hasSelection();
-        emit q->selectionChanged(mTableRanges->selection());
+        Q_EMIT q->selectionChanged(mTableRanges->selection());
         if (oldHasSelection != newHasSelection) {
             if (!mOverWrite) {
-                emit q->cutAvailable(newHasSelection);
+                Q_EMIT q->cutAvailable(newHasSelection);
             }
-            emit q->copyAvailable(newHasSelection);
-            emit q->hasSelectedDataChanged(newHasSelection);
+            Q_EMIT q->copyAvailable(newHasSelection);
+            Q_EMIT q->hasSelectedDataChanged(newHasSelection);
         }
     }
     ensureCursorVisible();
 
     unpauseCursor();
-    emit q->cursorPositionChanged(cursorPosition());
+    Q_EMIT q->cursorPositionChanged(cursorPosition());
 }
 
 void AbstractByteArrayViewPrivate::setSelectionCursorPosition(Address index)
@@ -755,7 +755,7 @@ void AbstractByteArrayViewPrivate::setSelectionCursorPosition(Address index)
     if (mTableRanges->isModified()) {
         q->emitSelectionSignals(); // TODO: can this be moved somewhere
     }
-    emit q->cursorPositionChanged(mTableCursor->realIndex());
+    Q_EMIT q->cursorPositionChanged(mTableCursor->realIndex());
 }
 
 void AbstractByteArrayViewPrivate::setSelection(const AddressRange& _selection)
@@ -783,15 +783,15 @@ void AbstractByteArrayViewPrivate::setSelection(const AddressRange& _selection)
 
     unpauseCursor();
 
-    emit q->selectionChanged(selection);
+    Q_EMIT q->selectionChanged(selection);
     if (oldSelection.isEmpty()) {
         if (!mOverWrite) {
-            emit q->cutAvailable(true);
+            Q_EMIT q->cutAvailable(true);
         }
-        emit q->copyAvailable(true);
-        emit q->hasSelectedDataChanged(true);
+        Q_EMIT q->copyAvailable(true);
+        Q_EMIT q->hasSelectedDataChanged(true);
     }
-    emit q->cursorPositionChanged(cursorPosition());
+    Q_EMIT q->cursorPositionChanged(cursorPosition());
 }
 
 QByteArray AbstractByteArrayViewPrivate::selectedData() const
@@ -922,7 +922,7 @@ void AbstractByteArrayViewPrivate::insert(const QByteArray& data)
             pauseCursor();
             mTableCursor->gotoNextByte(lengthOfInserted);
             unpauseCursor();
-            emit q->cursorPositionChanged(cursorPosition());
+            Q_EMIT q->cursorPositionChanged(cursorPosition());
         }
     } else {
         if (mTableRanges->hasSelection()) {
@@ -935,9 +935,9 @@ void AbstractByteArrayViewPrivate::insert(const QByteArray& data)
     }
 
     const bool newHasSelection = mTableRanges->hasSelection();
-    emit q->selectionChanged(mTableRanges->selection());
+    Q_EMIT q->selectionChanged(mTableRanges->selection());
     if (oldHasSelection != newHasSelection) {
-        emit q->hasSelectedDataChanged(newHasSelection);
+        Q_EMIT q->hasSelectedDataChanged(newHasSelection);
     }
 }
 
@@ -954,7 +954,7 @@ void AbstractByteArrayViewPrivate::removeSelectedData()
 
 //     clearUndoRedo();
 
-    // emit q->selectionChanged( -1, -1 );
+    // Q_EMIT q->selectionChanged( -1, -1 );
 }
 
 bool AbstractByteArrayViewPrivate::getNextChangedRange(CoordRange* changedRange, const CoordRange& visibleRange) const
@@ -995,7 +995,7 @@ void AbstractByteArrayViewPrivate::updateViewByWidth()
     // ensureCursorVisible();
 
     unpauseCursor();
-    emit q->cursorPositionChanged(cursorPosition());
+    Q_EMIT q->cursorPositionChanged(cursorPosition());
 }
 
 void AbstractByteArrayViewPrivate::adjustLayoutToSize()
@@ -1204,7 +1204,7 @@ void AbstractByteArrayViewPrivate::focusInEvent(QFocusEvent* focusEvent)
     const Qt::FocusReason focusReason = focusEvent->reason();
     if (focusReason != Qt::ActiveWindowFocusReason
         && focusReason != Qt::PopupFocusReason) {
-        emit q->focusChanged(true);
+        Q_EMIT q->focusChanged(true);
     }
 }
 
@@ -1218,7 +1218,7 @@ void AbstractByteArrayViewPrivate::focusOutEvent(QFocusEvent* focusEvent)
     const Qt::FocusReason focusReason = focusEvent->reason();
     if (focusReason != Qt::ActiveWindowFocusReason
         && focusReason != Qt::PopupFocusReason) {
-        emit q->focusChanged(false);
+        Q_EMIT q->focusChanged(false);
     }
 }
 
@@ -1291,7 +1291,7 @@ void AbstractByteArrayViewPrivate::onByteArrayReadOnlyChange(bool isByteArrayRea
     adaptController();
 
     if (!mReadOnly) {
-        emit q->readOnlyChanged(isByteArrayReadOnly);
+        Q_EMIT q->readOnlyChanged(isByteArrayReadOnly);
     }
 }
 
@@ -1330,7 +1330,7 @@ void AbstractByteArrayViewPrivate::onContentsChanged(const ArrayChangeMetricsLis
     updateChanged();
     unpauseCursor();
 
-    emit q->cursorPositionChanged(cursorPosition());
+    Q_EMIT q->cursorPositionChanged(cursorPosition());
 }
 
 #if 0

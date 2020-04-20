@@ -113,7 +113,7 @@ inline SRecStreamEncoderSettings ByteArraySRecStreamEncoder::settings() const { 
 inline void ByteArraySRecStreamEncoder::setSettings(const SRecStreamEncoderSettings& settings)
 {
     mSettings = settings;
-    emit settingsChanged();
+    Q_EMIT settingsChanged();
 }
 
 inline char ByteArraySRecStreamEncoder::charOfRecordType(RecordType type)

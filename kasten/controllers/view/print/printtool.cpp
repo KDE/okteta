@@ -61,7 +61,7 @@ void PrintTool::setTargetModel(AbstractModel* model)
     mByteArrayModel = mDocument ? mDocument->content() : nullptr;
 
     const bool hasView = (mByteArrayView && mByteArrayModel);
-    emit viewChanged(hasView);
+    Q_EMIT viewChanged(hasView);
 }
 
 void PrintTool::print()

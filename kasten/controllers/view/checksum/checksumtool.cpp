@@ -112,8 +112,8 @@ void ChecksumTool::setTargetModel(AbstractModel* model)
     // TODO: if there is no view, there is nothing calculate a checksum from
     // or this could be the view where we did the checksum from and it did not change
     checkUptoDate();
-    emit uptodateChanged(mChecksumUptodate);
-    emit isApplyableChanged(isApplyable());
+    Q_EMIT uptodateChanged(mChecksumUptodate);
+    Q_EMIT isApplyableChanged(isApplyable());
 }
 
 void ChecksumTool::checkUptoDate()
@@ -154,8 +154,8 @@ void ChecksumTool::calculateChecksum()
 
         mChecksumUptodate = true;
         mSourceByteArrayModelUptodate = true;
-        emit checksumChanged(mCheckSum);
-        emit uptodateChanged(true);
+        Q_EMIT checksumChanged(mCheckSum);
+        Q_EMIT uptodateChanged(true);
     }
 }
 
@@ -163,8 +163,8 @@ void ChecksumTool::setAlgorithm(int algorithmId)
 {
     mAlgorithmId = algorithmId;
     checkUptoDate();
-    emit uptodateChanged(mChecksumUptodate);
-    emit isApplyableChanged(isApplyable());
+    Q_EMIT uptodateChanged(mChecksumUptodate);
+    Q_EMIT isApplyableChanged(isApplyable());
 }
 
 // TODO: hack!
@@ -175,23 +175,23 @@ void ChecksumTool::resetSourceTool()
     mSourceAlgorithmId = -1;
 
     checkUptoDate();
-    emit uptodateChanged(mChecksumUptodate);
-    emit isApplyableChanged(isApplyable());
+    Q_EMIT uptodateChanged(mChecksumUptodate);
+    Q_EMIT isApplyableChanged(isApplyable());
 }
 
 void ChecksumTool::onSelectionChanged()
 {
 // TODO: could be quicker using the selection data
     checkUptoDate();
-    emit uptodateChanged(mChecksumUptodate);
-    emit isApplyableChanged(isApplyable());
+    Q_EMIT uptodateChanged(mChecksumUptodate);
+    Q_EMIT isApplyableChanged(isApplyable());
 }
 
 void ChecksumTool::onSourceChanged()
 {
     mChecksumUptodate = false;
     mSourceByteArrayModelUptodate = false;
-    emit uptodateChanged(false);
+    Q_EMIT uptodateChanged(false);
 }
 
 void ChecksumTool::onSourceDestroyed()

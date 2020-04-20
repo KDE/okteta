@@ -65,7 +65,7 @@ void TestDocumentFileReloadThread::run()
         mSuccess = (inStream.status() == QDataStream::Ok);
     }
 
-    emit documentReloaded(mSuccess);
+    Q_EMIT documentReloaded(mSuccess);
 }
 
 }

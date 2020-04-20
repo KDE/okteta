@@ -46,7 +46,7 @@ void TestDocumentFileWriteThread::run()
 
     mSuccess = (outStream.status() == QDataStream::Ok);
 
-    emit documentWritten(mSuccess);
+    Q_EMIT documentWritten(mSuccess);
 }
 
 }

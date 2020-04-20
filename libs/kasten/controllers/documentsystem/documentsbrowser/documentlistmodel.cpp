@@ -152,8 +152,8 @@ void DocumentListModel::onFocussedDocumentChanged(AbstractDocument* document)
     const int oldVersionIndex = mVersionIndex;
     mVersionIndex = versionIndex;
 
-    emit dataChanged(index(versionIndex, CurrentColumnId), index(versionIndex, CurrentColumnId));
-    emit dataChanged(index(oldVersionIndex, CurrentColumnId), index(oldVersionIndex, CurrentColumnId));
+    Q_EMIT dataChanged(index(versionIndex, CurrentColumnId), index(versionIndex, CurrentColumnId));
+    Q_EMIT dataChanged(index(oldVersionIndex, CurrentColumnId), index(oldVersionIndex, CurrentColumnId));
 #endif
 }
 

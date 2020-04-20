@@ -80,7 +80,7 @@ void ReplaceTool::setTargetModel(AbstractModel* model)
 
     const bool newIsApplyable = isApplyable();
     if (oldIsApplyable != newIsApplyable) {
-        emit isApplyableChanged(newIsApplyable);
+        Q_EMIT isApplyableChanged(newIsApplyable);
     }
 }
 
@@ -97,7 +97,7 @@ void ReplaceTool::setSearchData(const QByteArray& searchData)
 
 //     const bool newIsApplyable = isApplyable();
 //     if( oldIsApplyable != newIsApplyable )
-//         emit isApplyableChanged( newIsApplyable );
+//         Q_EMIT isApplyableChanged( newIsApplyable );
 }
 
 void ReplaceTool::setReplaceData(const QByteArray& replaceData)
@@ -108,7 +108,7 @@ void ReplaceTool::setReplaceData(const QByteArray& replaceData)
 
 //     const bool newIsApplyable = isApplyable();
 //     if( oldIsApplyable != newIsApplyable )
-//         emit isApplyableChanged( newIsApplyable );
+//         Q_EMIT isApplyableChanged( newIsApplyable );
 }
 
 void ReplaceTool::setCaseSensitivity(Qt::CaseSensitivity caseSensitivity)
@@ -119,7 +119,7 @@ void ReplaceTool::setCaseSensitivity(Qt::CaseSensitivity caseSensitivity)
 
 //     const bool newIsApplyable = isApplyable();
 //     if( oldIsApplyable != newIsApplyable )
-//         emit isApplyableChanged( newIsApplyable );
+//         Q_EMIT isApplyableChanged( newIsApplyable );
 }
 
 void ReplaceTool::setDoPrompt(bool doPrompt)
@@ -137,7 +137,7 @@ void ReplaceTool::replace(FindDirection direction, bool fromCursor, bool inSelec
         if (!selection.isValid()) {
             mReplaceJob = nullptr;
             // nothing selected, so skip any search and finish now
-            emit finished(false, 0);
+            Q_EMIT finished(false, 0);
             return;
         }
 
@@ -164,7 +164,7 @@ void ReplaceTool::replace(FindDirection direction, bool fromCursor, bool inSelec
     mReplaceJob->setRange(replaceRangeStartIndex, replaceRangeEndIndex, direction);
     connect(mReplaceJob, &ReplaceJob::finished, this, &ReplaceTool::onJobFinished);
 
-    emit isApplyableChanged(isApplyable());
+    Q_EMIT isApplyableChanged(isApplyable());
 
     mReplaceJob->start();
 }
@@ -174,7 +174,7 @@ void ReplaceTool::onReadOnlyChanged(bool isReadOnly)
     Q_UNUSED(isReadOnly)
 
     // TODO: find out if isApplyable really changed, perhaps by caching the readonly state?
-    emit isApplyableChanged(isApplyable());
+    Q_EMIT isApplyableChanged(isApplyable());
 }
 
 void ReplaceTool::onJobFinished(bool previousFound, int noOfReplacements)
@@ -182,8 +182,8 @@ void ReplaceTool::onJobFinished(bool previousFound, int noOfReplacements)
     delete mReplaceJob;
     mReplaceJob = nullptr;
 
-    emit finished(previousFound, noOfReplacements);
-    emit isApplyableChanged(isApplyable());
+    Q_EMIT finished(previousFound, noOfReplacements);
+    Q_EMIT isApplyableChanged(isApplyable());
 }
 
 }

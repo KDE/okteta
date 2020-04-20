@@ -100,7 +100,7 @@ void ByteArrayPatternGeneratorConfigEditor::onSettingsChanged()
 
 void ByteArrayPatternGeneratorConfigEditor::onPatternChanged(const QByteArray& pattern)
 {
-    emit validityChanged(!pattern.isEmpty());
+    Q_EMIT validityChanged(!pattern.isEmpty());
 }
 
 }

@@ -163,7 +163,7 @@ void Dropper::handleInternalDrag(QDropEvent* dropEvent, AbstractByteArrayView* s
         const bool success = byteArrayModel->swap(insertIndex, selection);
         if (success) {
             tableCursor->gotoCIndex(newCursorIndex);
-            emit mByteArrayView->cursorPositionChanged(tableCursor->realIndex());
+            Q_EMIT mByteArrayView->cursorPositionChanged(tableCursor->realIndex());
         }
     }
     // is a copy
