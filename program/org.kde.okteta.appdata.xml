@@ -556,4 +556,5 @@
     <release version="0.26.3" date="2020-02-02"/>
   </releases>
   <update_contact>kossebau_at_kde.org</update_contact>
+  <content_rating type="oars-1.1" />
 </component>
