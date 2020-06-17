@@ -47,7 +47,6 @@ Name[sr@latin]=Još jedna prosta proba
 Name[sv]=En annan enkel test
 Name[tr]=Başka bir basit test
 Name[uk]=Ще один простий тест
-Name[x-test]=xxAnother simple testxx
 Name[zh_CN]=其它简单测试
 Name[zh_TW]=另一個簡單測試
 Comment=A few more test structures
@@ -89,7 +88,6 @@ Comment[sr@latin]=Još nekoliko probnih struktura
 Comment[sv]=Några fler teststrukturer
 Comment[tr]=Birkaç ek test yapısı
 Comment[uk]=Ще декілька тестових структур
-Comment[x-test]=xxA few more test structuresxx
 Comment[zh_CN]=更多测试结构
 Comment[zh_TW]=更多測試結構
 

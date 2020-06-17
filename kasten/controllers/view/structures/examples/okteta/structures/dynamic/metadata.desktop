@@ -43,7 +43,6 @@ Name[sr@latin]=Proba nizova dinamičke dužine
 Name[sv]=Testar fält med dynamisk längd
 Name[tr]=Hareketli uzunluk dizileri test ediliyor
 Name[uk]=Тестування масивів зі змінною розмірністю
-Name[x-test]=xxTesting dynamic length arraysxx
 Name[zh_CN]=测试动态数组
 Name[zh_TW]=測試動態長度陣列
 Comment=A test structure for dynamic arrays
@@ -85,7 +84,6 @@ Comment[sr@latin]=Probna struktura za dinamičke nizove
 Comment[sv]=En teststruktur för dynamiska fält
 Comment[tr]=Hareketli uzunluk dizileri için bir test yapısı
 Comment[uk]=Тестова структура для динамічних масивів
-Comment[x-test]=xxA test structure for dynamic arraysxx
 Comment[zh_CN]=测试动态数组的结构
 Comment[zh_TW]=測試動態陣列的測試結構
 
