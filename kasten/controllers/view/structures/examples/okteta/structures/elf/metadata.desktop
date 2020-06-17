@@ -45,7 +45,6 @@ Name[sr@latin]=ELF struktura
 Name[sv]=ELF-struktur
 Name[tr]=ELF yapısı
 Name[uk]=Структура ELF
-Name[x-test]=xxELF structurexx
 Name[zh_CN]=ELF 结构
 Name[zh_TW]=ELF 結構
 Comment=Structure for Executable and Linkable Format (ELF)
@@ -86,7 +85,6 @@ Comment[sr@latin]=Struktura za format izvršnih fajlova ELF
 Comment[sv]=Struktur för formatet Executable and Linkable Format (ELF)
 Comment[tr]=Çalıştırılabilir ve Bağlanabilir Biçim (ELF) için Yapı
 Comment[uk]=Структура файлів у форматі Executable and Linkable Format (ELF)
-Comment[x-test]=xxStructure for Executable and Linkable Format (ELF)xx
 Comment[zh_CN]=可执行链接格式(ELF)的结构
 Comment[zh_TW]=ELF （執行檔連結格式，Executable and Linkable Format）的結構
 
