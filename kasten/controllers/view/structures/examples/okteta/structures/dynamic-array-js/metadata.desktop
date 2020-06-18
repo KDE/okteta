@@ -40,6 +40,7 @@ Name[sr@latin]=Proba nizova dinamičke dužine (JavaScript)
 Name[sv]=Testar fält med dynamisk längd (JS). Översätt inte, det är bortkastad tid.
 Name[tr]=Hareketli uzunluk dizileri (JS) test ediliyor. Çevirmeyin, zaman kaybı
 Name[uk]=Тестування масивів зі змінною розмірністю (JS). Не перекладайте.
+Name[x-test]=xxTesting dynamic length arrays (JS). Do not translate, it's a waste of timexx
 Name[zh_CN]=测试动态数组(JS)。
 Name[zh_TW]=Testing dynamic length arrays (JS). Do not translate, it's a waste of time
 Comment=A test structure for dynamic arrays (JS). Do not translate, it's a waste of time
@@ -78,6 +79,7 @@ Comment[sr@latin]=Probna struktura za dinamičke nizove (JavaScript)
 Comment[sv]=En teststruktur för dynamiska fält (JS). Översätt inte, det är bortkastad tid.
 Comment[tr]=Hareketli uzunluk dizileri (JS) için bir test yapısı. Çevirmeyin, zaman kaybı
 Comment[uk]=Тестова структура для динамічних масивів (JS). Не перекладайте.
+Comment[x-test]=xxA test structure for dynamic arrays (JS). Do not translate, it's a waste of timexx
 Comment[zh_CN]=测试动态数组的结构(JS)。
 Comment[zh_TW]=A test structure for dynamic arrays (JS). Do not translate, it's a waste of time
 
