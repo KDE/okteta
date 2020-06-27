@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta project, made within the KDE community.
 
-    Copyright 2009,2011,2015 Friedrich W. H. Kossebau <kossebau@kde.org>
+    SPDX-FileCopyrightText: 2009, 2011, 2015 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     Public domain.
 */

@@ -1,18 +1,10 @@
-/***************************************************************************
-                          filesystem.cpp  -  description
-                            -------------------
-    begin                : Wed Mai 30 2007
-    copyright            : 2007 by Friedrich W. H. Kossebau
-    email                : kossebau@kde.org
-***************************************************************************/
+/*
+    This file is part of the Kasten Framework, made within the KDE community.
 
-/***************************************************************************
-*                                                                         *
-*   This library is free software; you can redistribute it and/or         *
-*   modify it under the terms of the GNU Library General Public           *
-*   License version 2 as published by the Free Software Foundation.       *
-*                                                                         *
-***************************************************************************/
+    SPDX-FileCopyrightText: 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+
+    SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
+*/
 
 #include "filesystem.hpp"
 
