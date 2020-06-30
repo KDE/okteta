@@ -28,7 +28,7 @@ OktetaPartFactory::OktetaPartFactory()
                  QStringLiteral(OKTETA_VERSION),
                  i18n("Embedded hex editor"),
                  KAboutLicense::GPL_V2,
-                 i18n("SPDX-FileCopyrightText: 2003-2020 Friedrich W. H. Kossebau "))
+                 i18n("Copyright 2003-2020 Friedrich W. H. Kossebau"))
 {
     mAboutData.addAuthor(i18n("Friedrich W. H. Kossebau"), i18n("Author"), QStringLiteral("kossebau@kde.org"));
 
