@@ -28,8 +28,6 @@
 // Qt
 #include <QApplication>
 
-Q_DECLARE_METATYPE(Kasten::AbstractModelExporter*)
-
 namespace Kasten {
 
 ExportController::ExportController(ModelCodecViewManager* modelCodecViewManager,

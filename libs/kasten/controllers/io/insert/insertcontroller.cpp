@@ -29,11 +29,6 @@
 #include <QMimeData>
 #include <QApplication>
 
-#ifndef KASTEN_ABSTRACTMODELDATAGENERATOR_METATYPE
-#define KASTEN_ABSTRACTMODELDATAGENERATOR_METATYPE
-Q_DECLARE_METATYPE(Kasten::AbstractModelDataGenerator*)
-#endif
-
 namespace Kasten {
 
 InsertController::InsertController(ModelCodecViewManager* modelCodecViewManager,
