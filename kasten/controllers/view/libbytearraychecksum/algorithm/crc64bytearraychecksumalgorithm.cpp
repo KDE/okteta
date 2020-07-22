@@ -53,7 +53,7 @@ static quint64 reflect64(quint64 x)
     quint64 y = 0;
     for (size_t i = 0; i < 64; i++) {
         if ((x >> i) & 0x01u) {
-            y |= 0x01lu << (63 - i);
+            y |= 0x01llu << (63 - i);
         }
     }
 
