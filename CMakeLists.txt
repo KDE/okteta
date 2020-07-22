@@ -106,7 +106,7 @@ find_package(KF5 ${REQUIRED_KF5_VERSION} REQUIRED
 find_package(Qca-qt5 2.1.0)
 set_package_properties(Qca-qt5 PROPERTIES
     DESCRIPTION "Qt Cryptographic Architecture"
-    URL "https:/commits.kde.org/qca"
+    URL "https://commits.kde.org/qca"
     TYPE OPTIONAL
     PURPOSE "Needed for most of the algorithms of the checksum tool"
 )
