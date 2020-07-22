@@ -19,6 +19,11 @@ Byte OctalByteCodec::digitsFilledLimit() const { return octalDigitsFilledLimit; 
 
 void OctalByteCodec::encode(QString* digits, unsigned int pos, Byte byte) const
 {
+    const int minSizeNeeded = pos + 3;
+    if (digits->size() < minSizeNeeded) {
+        digits->resize(minSizeNeeded);
+    }
+
     (*digits)[pos++] = QLatin1Char('0' + (byte >> 6));
     (*digits)[pos++] = QLatin1Char('0' + ((byte >> 3) & 0x07));
     (*digits)[pos] =   QLatin1Char('0' + ((byte)      & 0x07));
@@ -26,6 +31,12 @@ void OctalByteCodec::encode(QString* digits, unsigned int pos, Byte byte) const
 
 void OctalByteCodec::encodeShort(QString* digits, unsigned int pos, Byte byte) const
 {
+    const int encodingLength = (byte > 077) ? 3 : (byte > 07) ? 2 : 1;
+    const int minSizeNeeded = pos + encodingLength;
+    if (digits->size() < minSizeNeeded) {
+        digits->resize(minSizeNeeded);
+    }
+
     const unsigned char firstDigitValue = byte >> 6;
     if (firstDigitValue > 0) {
         (*digits)[pos++] = QLatin1Char('0' + firstDigitValue);
