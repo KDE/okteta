@@ -16,8 +16,6 @@
 #include <QTest>
 #include <QSignalSpy>
 
-Q_DECLARE_METATYPE(QVector<Kasten::AbstractDocument*>)
-
 void DocumentManagerTest::checkAdded(QSignalSpy* changedSpy, Kasten::AbstractDocument* document)
 {
     QVERIFY(changedSpy->isValid());

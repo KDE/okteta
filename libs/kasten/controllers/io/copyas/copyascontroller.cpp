@@ -32,8 +32,6 @@
 #include <QClipboard>
 #include <QApplication>
 
-Q_DECLARE_METATYPE(Kasten::AbstractModelStreamEncoder*)
-
 namespace Kasten {
 
 CopyAsController::CopyAsController(ModelCodecViewManager* modelCodecViewManager,

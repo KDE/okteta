@@ -51,13 +51,25 @@ Byte HexadecimalByteCodec::digitsFilledLimit() const { return hexadecimalDigitsF
 
 void HexadecimalByteCodec::encode(QString* digits, unsigned int pos, Byte byte) const
 {
+    const int minSizeNeeded = pos + 2;
+    if (digits->size() < minSizeNeeded) {
+        digits->resize(minSizeNeeded);
+    }
+
     (*digits)[pos++] = mDigits[byte >> 4];
     (*digits)[pos] = mDigits[byte & 0x0F];
 }
 
 void HexadecimalByteCodec::encodeShort(QString* digits, unsigned int pos, Byte byte) const
 {
+    const int encodingLength = (byte > 0xF) ? 2 : 1;
+    const int minSizeNeeded = pos + encodingLength;
+    if (digits->size() < minSizeNeeded) {
+        digits->resize(minSizeNeeded);
+    }
+
     unsigned char digitValue = byte >> 4;
+
     if (digitValue > 0) {
         (*digits)[pos++] = mDigits[digitValue];
     }

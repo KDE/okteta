@@ -22,8 +22,6 @@
 // Qt
 #include <QActionGroup>
 
-Q_DECLARE_METATYPE(Kasten::AbstractView*)
-
 namespace Kasten {
 
 static constexpr int MaxEntryLength = 150;

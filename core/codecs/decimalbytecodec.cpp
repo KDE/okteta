@@ -18,6 +18,11 @@ Byte DecimalByteCodec::digitsFilledLimit() const { return 26; }
 
 void DecimalByteCodec::encode(QString* digits, unsigned int pos, Byte byte) const
 {
+    const int minSizeNeeded = pos + 3;
+    if (digits->size() < minSizeNeeded) {
+        digits->resize(minSizeNeeded);
+    }
+
     unsigned char digitValue = byte / 100;
     (*digits)[pos++] = QLatin1Char('0' + digitValue);
     byte -= digitValue * 100;
@@ -29,6 +34,12 @@ void DecimalByteCodec::encode(QString* digits, unsigned int pos, Byte byte) cons
 
 void DecimalByteCodec::encodeShort(QString* digits, unsigned int pos, Byte byte) const
 {
+    const int encodingLength = (byte > 99) ? 3 : (byte > 9) ? 2 : 1;
+    const int minSizeNeeded = pos + encodingLength;
+    if (digits->size() < minSizeNeeded) {
+        digits->resize(minSizeNeeded);
+    }
+
     const unsigned char firstDigitValue = byte / 100;
     if (firstDigitValue > 0) {
         (*digits)[pos++] = QLatin1Char('0' + firstDigitValue);
