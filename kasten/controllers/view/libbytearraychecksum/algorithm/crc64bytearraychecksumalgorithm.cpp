@@ -38,7 +38,7 @@ static void fillTable(quint64 poly, quint64 *table)
         quint64 crc = 0;
         for (size_t j = 0; j < 8; j++) {
             bool b = (i >> (7u - j)) & 0x01u;
-            if ((crc >> 63u) != b) {
+            if (((crc >> 63u) != 0) != b) {
                 crc = (crc << 1u) ^ poly;
             } else {
                 crc = (crc << 1u);
@@ -53,7 +53,7 @@ static quint64 reflect64(quint64 x)
     quint64 y = 0;
     for (size_t i = 0; i < 64; i++) {
         if ((x >> i) & 0x01u) {
-            y |= 0x01lu << (63 - i);
+            y |= 0x01llu << (63 - i);
         }
     }
 
