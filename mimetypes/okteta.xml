@@ -357,8 +357,8 @@ Notes:
   <mime-type type="application/x-vnd.kde.okteta.structure">
     <sub-class-of type="application/xml"/>
     <comment>Okteta Structure definition</comment>
-    <comment xml:lang="ca">Definició d'estructura de l'Okteta</comment>
-    <comment xml:lang="ca@valencia">Definició d'estructura de l'Okteta</comment>
+    <comment xml:lang="ca">Definició de l'estructura de l'Okteta</comment>
+    <comment xml:lang="ca@valencia">Definició de l'estructura de l'Okteta</comment>
     <comment xml:lang="de">Okteta-Strukturdefinition</comment>
     <comment xml:lang="el">Okteta δομή ορισμού</comment>
     <comment xml:lang="en_GB">Okteta Structure definition</comment>
