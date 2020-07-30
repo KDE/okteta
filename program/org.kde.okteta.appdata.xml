@@ -82,8 +82,8 @@
   <summary xml:lang="zh-TW">十六進位資料編輯器</summary>
   <description>
     <p>Okteta is a simple editor for the raw data of files.</p>
-    <p xml:lang="ca">L'Okteta és un editor senzill per les dades de fitxers.</p>
-    <p xml:lang="ca-valencia">L'Okteta és un editor senzill per les dades de fitxers.</p>
+    <p xml:lang="ca">L'Okteta és un editor senzill per a les dades sense processar dels fitxers.</p>
+    <p xml:lang="ca-valencia">L'Okteta és un editor senzill per a les dades sense processar dels fitxers.</p>
     <p xml:lang="de">Okteta ist ein einfacher Editor für die Rohdaten von Dateien.</p>
     <p xml:lang="el">Το Okteta είναι ένας απλός επεξεργαστής για τα ακατέργαστα δεδομένα αρχείων.</p>
     <p xml:lang="en-GB">Okteta is a simple editor for the raw data of files.</p>
@@ -363,8 +363,8 @@
       <li xml:lang="zh-CN">字符编码：Qt 提供的全部 8 位编码，EBCDIC</li>
       <li xml:lang="zh-TW">字元編碼：所有 Qt 與 EBCDIC 5 支援的八位元編碼方式</li>
       <li>Fast data rendering on screen</li>
-      <li xml:lang="ca">Renderització ràpida de dades en la pantalla</li>
-      <li xml:lang="ca-valencia">Renderització ràpida de dades en la pantalla</li>
+      <li xml:lang="ca">Renderització ràpida de les dades a la pantalla</li>
+      <li xml:lang="ca-valencia">Renderització ràpida de les dades a la pantalla</li>
       <li xml:lang="de">Schnelles Rendern der Daten auf dem Bildschirm</li>
       <li xml:lang="el">Γρήγορη αποτύπωση χαρακτήρων στην οθόνη</li>
       <li xml:lang="en-GB">Fast data rendering on screen</li>
@@ -470,8 +470,8 @@
       <li xml:lang="zh-CN">支持撤销/重做</li>
       <li xml:lang="zh-TW">復原/重做支援</li>
       <li>Structures tool for analyzing and editing based on user-creatable structure definitions</li>
-      <li xml:lang="ca">Eina d'estructures per analitzar i editar basada en definicions d'estructures que pot crear l'usuari</li>
-      <li xml:lang="ca-valencia">Eina d'estructures per analitzar i editar basada en definicions d'estructures que pot crear l'usuari</li>
+      <li xml:lang="ca">Eina d'estructures per a analitzar i editar, basada en definicions de l'estructura que pot crear l'usuari</li>
+      <li xml:lang="ca-valencia">Eina d'estructures per a analitzar i editar, basada en definicions de l'estructura que pot crear l'usuari</li>
       <li xml:lang="de">Strukturen-Werkzeug für die Untersuchung und Bearbeitung auf der Basis von benutzerdefinierten Strukturdefinitionen</li>
       <li xml:lang="el">Εργαλείο δομών για ανάλυση και επεξεργασία με βάση ορισμούς δομών που δημιουργεί ο χρήστης</li>
       <li xml:lang="en-GB">Structures tool for analysing and editing based on user-creatable structure definitions</li>
