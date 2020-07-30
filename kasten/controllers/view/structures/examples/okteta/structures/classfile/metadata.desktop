@@ -5,8 +5,8 @@ Type=Service
 ServiceTypes=KPluginInfo
 
 Name=Java .class file format
-Name[ca]=Format de fitxer .class del Java
-Name[ca@valencia]=Format de fitxer .class del Java
+Name[ca]=Format de fitxer .class de Java
+Name[ca@valencia]=Format de fitxer .class de Java
 Name[da]=Java .class-filformat
 Name[de]=Java-„.class“-Dateiformat
 Name[el]=Μορφή αρχείου Java .class
