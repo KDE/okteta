@@ -39,7 +39,7 @@ TabWidget::~TabWidget() = default;
 
 void TabWidget::mouseReleaseEvent(QMouseEvent* event)
 {
-    if (event->button() == Qt::MidButton) {
+    if (event->button() == Qt::MiddleButton) {
         if (count() == 0) {
             emit mouseMiddleClick();
             event->setAccepted(true);

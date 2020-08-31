@@ -29,7 +29,7 @@ bool MousePaster::handleMousePressEvent(QMouseEvent* mouseEvent)
 {
     bool eventUsed = false;
 
-    if (mouseEvent->button() == Qt::MidButton && !mView->isReadOnly()) {
+    if (mouseEvent->button() == Qt::MiddleButton && !mView->isReadOnly()) {
         mView->pauseCursor();
         mView->finishByteEdit();
 
@@ -52,7 +52,7 @@ bool MousePaster::handleMouseReleaseEvent(QMouseEvent* mouseEvent)
 {
     bool eventUsed = false;
     // middle mouse button paste?
-    if (mouseEvent->button() == Qt::MidButton && !mView->isReadOnly()) {
+    if (mouseEvent->button() == Qt::MiddleButton && !mView->isReadOnly()) {
         const QPoint releasePoint = mView->viewportToColumns(mouseEvent->pos());
 
         mView->pauseCursor();
