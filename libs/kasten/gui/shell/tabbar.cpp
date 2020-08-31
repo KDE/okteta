@@ -26,7 +26,7 @@ TabBar::~TabBar() = default;
 void TabBar::mouseReleaseEvent(QMouseEvent* event)
 {
     if (tabsClosable()) {
-        if (event->button() == Qt::MidButton) {
+        if (event->button() == Qt::MiddleButton) {
             const int tabIndex = tabAt(event->pos());
             if (tabIndex != -1) {
                 Q_EMIT tabCloseRequested(tabIndex);
