@@ -21,9 +21,11 @@ Notes:
     <comment>Motorola S-Records</comment>
     <comment xml:lang="ca">Registres S de Motorola</comment>
     <comment xml:lang="ca@valencia">Registres S de Motorola</comment>
+    <comment xml:lang="el">Motorola S-Records</comment>
     <comment xml:lang="it">S-Records Motorola</comment>
     <comment xml:lang="nl">Motorola S-records</comment>
     <comment xml:lang="pt">Registos-S da Motorola</comment>
+    <comment xml:lang="sl">Motorola S-Records</comment>
     <comment xml:lang="sv">Motorola S-Records</comment>
     <comment xml:lang="uk">S-записи Motorola</comment>
     <magic priority="70">
@@ -45,9 +47,11 @@ Notes:
     <comment>Intel hexadecimal object file</comment>
     <comment xml:lang="ca">Fitxer objecte hexadecimal d'Intel</comment>
     <comment xml:lang="ca@valencia">Fitxer objecte hexadecimal d'Intel</comment>
+    <comment xml:lang="el">Δεκαεξαδικό μεταφρασμένο αρχείο Intel</comment>
     <comment xml:lang="it">File oggetto esadecimale Intel</comment>
     <comment xml:lang="nl">Intel hexadecimaal objectbestand</comment>
     <comment xml:lang="pt">Ficheiro de objectos em hexadecimal da Intel</comment>
+    <comment xml:lang="sl">Intelova šestnajstiška predmetna datoteka</comment>
     <comment xml:lang="sv">Intel hexadecimal objektfil</comment>
     <comment xml:lang="uk">шістнадцятковий об’єктний файл Intel®</comment>
 <!--  Intel MCS-86 Object is alternative name?  -->
@@ -66,9 +70,11 @@ Notes:
     <comment>Base64 encoded data</comment>
     <comment xml:lang="ca">Dades codificades en Base64</comment>
     <comment xml:lang="ca@valencia">Dades codificades en Base64</comment>
+    <comment xml:lang="el">Κρυπτογραφημένα δεδομένα με Base64</comment>
     <comment xml:lang="it">Dati codificati in Base64</comment>
     <comment xml:lang="nl">Base64 gecodeerde gegevens</comment>
     <comment xml:lang="pt">Dados codificados em Base64</comment>
+    <comment xml:lang="sl">Podatki kodirani z Base64</comment>
     <comment xml:lang="sv">Base64-kodad data</comment>
     <comment xml:lang="uk">дані у кодуванні Base64</comment>
     <glob pattern="*.base64"/>
@@ -81,9 +87,11 @@ Notes:
     <comment>Base32 encoded data</comment>
     <comment xml:lang="ca">Dades codificades en Base32</comment>
     <comment xml:lang="ca@valencia">Dades codificades en Base32</comment>
+    <comment xml:lang="el">Κρυπτογραφημένα δεδομένα με Base32</comment>
     <comment xml:lang="it">Dati codificati in Base32</comment>
     <comment xml:lang="nl">Base32 gecodeerde gegevens</comment>
     <comment xml:lang="pt">Dados codificados em Base32</comment>
+    <comment xml:lang="sl">Podatki kodirani z Base32</comment>
     <comment xml:lang="sv">Base32-kodad data</comment>
     <comment xml:lang="uk">дані у кодуванні Base32</comment>
     <glob pattern="*.base32"/>
@@ -95,9 +103,11 @@ Notes:
     <comment>Btoa Encoded File</comment>
     <comment xml:lang="ca">Fitxer BTOA codificat</comment>
     <comment xml:lang="ca@valencia">Fitxer BTOA codificat</comment>
+    <comment xml:lang="el">Κρυπτογραφημένο αρχείο με Btoa</comment>
     <comment xml:lang="it">File codificato in Btoa</comment>
     <comment xml:lang="nl">Btoa gecodeerd bestand</comment>
     <comment xml:lang="pt">Dados codificados em Btoa</comment>
+    <comment xml:lang="sl">Datoteka kodirana z Btoa</comment>
     <comment xml:lang="sv">BTOA-kodad data</comment>
     <comment xml:lang="uk">файл у кодуванні Btoa</comment>
     <magic priority="50">
@@ -113,9 +123,11 @@ Notes:
     <comment>Ascii85 encoded data</comment>
     <comment xml:lang="ca">Dades codificades en ASCII85</comment>
     <comment xml:lang="ca@valencia">Dades codificades en ASCII85</comment>
+    <comment xml:lang="el">Κρυπτογραφημένα δεδομένα με Ascii85</comment>
     <comment xml:lang="it">File codificato in Ascii85</comment>
     <comment xml:lang="nl">Ascii85 gecodeerde gegevens</comment>
     <comment xml:lang="pt">Dados codificados em Ascii85</comment>
+    <comment xml:lang="sl">Podatki kodirani z Ascii85</comment>
     <comment xml:lang="sv">ASCII85-kodad data</comment>
     <comment xml:lang="uk">дані у кодуванні Ascii85</comment>
     <magic priority="50">
@@ -130,9 +142,11 @@ Notes:
     <comment>Uuencoded file</comment>
     <comment xml:lang="ca">Fitxer «uuencoded»</comment>
     <comment xml:lang="ca@valencia">Fitxer «uuencoded»</comment>
+    <comment xml:lang="el">Uu κρυπτογραφημένο αρχείο</comment>
     <comment xml:lang="it">File con codifica UUencode</comment>
     <comment xml:lang="nl">Uuencoded bestand</comment>
     <comment xml:lang="pt">Ficheiro codificado com UUencode</comment>
+    <comment xml:lang="sl">Datoteka uuencoded</comment>
     <comment xml:lang="sv">Uuencoded fil</comment>
     <comment xml:lang="uk">файл даних у форматі UUE</comment>
     <magic priority="50">
@@ -150,9 +164,11 @@ Notes:
     <comment>Xxencoded file</comment>
     <comment xml:lang="ca">Fitxer «xxencoded»</comment>
     <comment xml:lang="ca@valencia">Fitxer «xxencoded»</comment>
+    <comment xml:lang="el">Xx κρυπτογραφημένο αρχείο</comment>
     <comment xml:lang="it">File con codifica Xxencoded</comment>
     <comment xml:lang="nl">Xxencoded bestand</comment>
     <comment xml:lang="pt">Ficheiro codificado com Xxencode</comment>
+    <comment xml:lang="sl">Datoteka xxencoded</comment>
     <comment xml:lang="sv">Xxencoded fil</comment>
     <comment xml:lang="uk">файл даних у форматі xxe</comment>
     <magic priority="50">
@@ -166,9 +182,11 @@ Notes:
     <comment>Okteta Structure definition</comment>
     <comment xml:lang="ca">Definició d'estructura de l'Okteta</comment>
     <comment xml:lang="ca@valencia">Definició d'estructura de l'Okteta</comment>
+    <comment xml:lang="el">Okteta δομή ορισμού</comment>
     <comment xml:lang="it">Definizione di struttura di Okteta</comment>
     <comment xml:lang="nl">Okteta structuurdefinitie</comment>
     <comment xml:lang="pt">Definição de estrutura do Okteta</comment>
+    <comment xml:lang="sl">Določilo zgradbe za Okteto</comment>
     <comment xml:lang="sv">Okteta strukturdefinition</comment>
     <comment xml:lang="uk">визначення структури Okteta</comment>
     <glob pattern="*.osd"/>
