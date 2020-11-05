@@ -29,6 +29,7 @@ Notes:
     <comment xml:lang="nl">Motorola S-records</comment>
     <comment xml:lang="nn">Motorola S-Records</comment>
     <comment xml:lang="pt">Registos-S da Motorola</comment>
+    <comment xml:lang="pt_BR">Motorola S-Records</comment>
     <comment xml:lang="sl">Motorola S-Records</comment>
     <comment xml:lang="sv">Motorola S-Records</comment>
     <comment xml:lang="uk">S-записи Motorola</comment>
@@ -59,6 +60,7 @@ Notes:
     <comment xml:lang="nl">Intel hexadecimaal objectbestand</comment>
     <comment xml:lang="nn">Intel-heksobjektfil</comment>
     <comment xml:lang="pt">Ficheiro de objectos em hexadecimal da Intel</comment>
+    <comment xml:lang="pt_BR">Arquivo de objeto hexadecimal Intel</comment>
     <comment xml:lang="sl">Intelova šestnajstiška predmetna datoteka</comment>
     <comment xml:lang="sv">Intel hexadecimal objektfil</comment>
     <comment xml:lang="uk">шістнадцятковий об’єктний файл Intel®</comment>
@@ -86,6 +88,7 @@ Notes:
     <comment xml:lang="nl">Base64 gecodeerde gegevens</comment>
     <comment xml:lang="nn">Base64-koda data</comment>
     <comment xml:lang="pt">Dados codificados em Base64</comment>
+    <comment xml:lang="pt_BR">Dados codificados Base64</comment>
     <comment xml:lang="sl">Podatki kodirani z Base64</comment>
     <comment xml:lang="sv">Base64-kodad data</comment>
     <comment xml:lang="uk">дані у кодуванні Base64</comment>
@@ -107,6 +110,7 @@ Notes:
     <comment xml:lang="nl">Base32 gecodeerde gegevens</comment>
     <comment xml:lang="nn">Base32-koda data</comment>
     <comment xml:lang="pt">Dados codificados em Base32</comment>
+    <comment xml:lang="pt_BR">Dados codificados Base32</comment>
     <comment xml:lang="sl">Podatki kodirani z Base32</comment>
     <comment xml:lang="sv">Base32-kodad data</comment>
     <comment xml:lang="uk">дані у кодуванні Base32</comment>
@@ -127,6 +131,7 @@ Notes:
     <comment xml:lang="nl">Btoa gecodeerd bestand</comment>
     <comment xml:lang="nn">Btoa-koda fil</comment>
     <comment xml:lang="pt">Dados codificados em Btoa</comment>
+    <comment xml:lang="pt_BR">Arquivo codificado Btoa</comment>
     <comment xml:lang="sl">Datoteka kodirana z Btoa</comment>
     <comment xml:lang="sv">BTOA-kodad data</comment>
     <comment xml:lang="uk">файл у кодуванні Btoa</comment>
@@ -151,6 +156,7 @@ Notes:
     <comment xml:lang="nl">Ascii85 gecodeerde gegevens</comment>
     <comment xml:lang="nn">Ascii85-koda data</comment>
     <comment xml:lang="pt">Dados codificados em Ascii85</comment>
+    <comment xml:lang="pt_BR">Dados codificados Ascii85</comment>
     <comment xml:lang="sl">Podatki kodirani z Ascii85</comment>
     <comment xml:lang="sv">ASCII85-kodad data</comment>
     <comment xml:lang="uk">дані у кодуванні Ascii85</comment>
@@ -174,6 +180,7 @@ Notes:
     <comment xml:lang="nl">Uuencoded bestand</comment>
     <comment xml:lang="nn">Uuencoding-koda fil</comment>
     <comment xml:lang="pt">Ficheiro codificado com UUencode</comment>
+    <comment xml:lang="pt_BR">Arquivo Uuencoded</comment>
     <comment xml:lang="sl">Datoteka uuencoded</comment>
     <comment xml:lang="sv">Uuencoded fil</comment>
     <comment xml:lang="uk">файл даних у форматі UUE</comment>
@@ -200,6 +207,7 @@ Notes:
     <comment xml:lang="nl">Xxencoded bestand</comment>
     <comment xml:lang="nn">Xxencoding-koda fil</comment>
     <comment xml:lang="pt">Ficheiro codificado com Xxencode</comment>
+    <comment xml:lang="pt_BR">Arquivo Xxencoded</comment>
     <comment xml:lang="sl">Datoteka xxencoded</comment>
     <comment xml:lang="sv">Xxencoded fil</comment>
     <comment xml:lang="uk">файл даних у форматі xxe</comment>
@@ -222,6 +230,7 @@ Notes:
     <comment xml:lang="nl">Okteta structuurdefinitie</comment>
     <comment xml:lang="nn">Okteta strukturdefinisjon</comment>
     <comment xml:lang="pt">Definição de estrutura do Okteta</comment>
+    <comment xml:lang="pt_BR">Definição de estrutura Okteta</comment>
     <comment xml:lang="sl">Določilo zgradbe za Okteto</comment>
     <comment xml:lang="sv">Okteta strukturdefinition</comment>
     <comment xml:lang="uk">визначення структури Okteta</comment>
