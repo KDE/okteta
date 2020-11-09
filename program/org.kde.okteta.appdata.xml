@@ -170,6 +170,7 @@
       <li xml:lang="fr">Les valeurs et les caractères sont affichés soit en deux colonnes (affichage traditionnel des éditeurs hexadécimaux) soit en rangées avec la valeur au-dessus du caractère</li>
       <li xml:lang="gl">Os valores e caracteres poden mostrarse tanto en dúas columnas (a vista tradicional de editores de bytes) como en filas cos valores sobre os caracteres.</li>
       <li xml:lang="hu">Értékek és karakterek megjelenítése hagyományos (kétoszlopos) módon, vagy sorokban (az értékek a karakterek fölött helyezkednek el)</li>
+      <li xml:lang="ia">Valores e characteres monstrate o in duo columnas (le monstrator traditional in redactores hexadecimal) o in rangos con le valor al culmine del character</li>
       <li xml:lang="id">Nilai dan karakter ditampilkan antara dua kolom (displai tradisional dalam editor hex) atau dalam row dengan nilai di atas karakter</li>
       <li xml:lang="it">I valori e i caratteri visualizzati in due colonne (la visualizzazione normale degli editor esadecimali) o in righe con il valore sopra il carattere</li>
       <li xml:lang="ko">열 두 개(16진수 편집기의 기존 디스플레이) 또는 문자의 맨 위에 값이 있는 행에 표시되는 값 및 문자</li>
@@ -239,6 +240,7 @@
       <li xml:lang="fr">Vues de données personnalisables ; il est possible de charger et d'enregistrer des profils</li>
       <li xml:lang="gl">As vistas de datos poden personalizarse, e poden cargarse e almacenarse perfís.</li>
       <li xml:lang="hu">Testre szabható adatnézetek, betölthető és menthető profilokkal</li>
+      <li xml:lang="ia">Vistas de datos personalisabile, con profilos cargabile e immagazinabile</li>
       <li xml:lang="id">Tampilan data yang dapat dikustomisasi, dapat dimuat, dan profil yang dapat disimpan</li>
       <li xml:lang="it">Viste dei dati configurabili, con profili caricabili e salvabili</li>
       <li xml:lang="ko">불러오기 및 저장이 가능한 프로필을 사용하여 사용자 정의 가능한 데이터 보기</li>
@@ -273,6 +275,7 @@
       <li xml:lang="fr">Les outils peuvent être disposés de chaque côté ou flottants</li>
       <li xml:lang="gl">As ferramentas poden acoplarse por toda a interface ou quedar flotando sobre ela.</li>
       <li xml:lang="hu">Bármely oldalon dokkolható vagy lebegő eszköztárak</li>
+      <li xml:lang="ia">Instrumentos stivabile sur omne lateres o fluctuante</li>
       <li xml:lang="id">Peralatan yang dapat di-dock pada semua sisi atau mengambang</li>
       <li xml:lang="it">Strumenti agganciabili su qualsiasi lato o liberi</li>
       <li xml:lang="ko">모든 측면 또는 플로팅 시 도킹 가능</li>
@@ -342,6 +345,7 @@
       <li xml:lang="fr">Codage des caractères : tout les codages 8 bits fournis par Qt, EBCDIC</li>
       <li xml:lang="gl">Pode mostrar os caracteres en todas as codificacións baseadas en 8 bits que fornece Qt, así como en EBCDIC.</li>
       <li xml:lang="hu">Karakterkódolások: minden, a Qt és EBCDIC által biztosított 8 bites kódolás</li>
+      <li xml:lang="ia">Codificationes de character: Omne codificationes de 8bits como fornite per Qt, EBCDIC</li>
       <li xml:lang="id">Pengenkodean karakter: Semua pengenkodean 8-bit sebagai asupan oleh Qt, EBCDIC</li>
       <li xml:lang="it">Codifiche dei caratteri: tutte le codifiche a 8 bit fornite da Qt, EBCDIC</li>
       <li xml:lang="ko">문자 인코딩: Qt, EBCDIC에서 제공하는 모든 8비트 인코딩</li>
@@ -376,6 +380,7 @@
       <li xml:lang="fr">Rendu rapide des données à l'écran</li>
       <li xml:lang="gl">Os datos móstranse rapidamente na pantalla.</li>
       <li xml:lang="hu">Gyors adatrenderelés a kijelzőn</li>
+      <li xml:lang="ia">Rendition rapide de datos sur schermo</li>
       <li xml:lang="id">Perenderan data yang cepat pada layar</li>
       <li xml:lang="it">Resa veloce dei dati sullo schermo</li>
       <li xml:lang="ko">화면에서의 빠른 데이터 렌더링</li>
@@ -483,6 +488,7 @@
       <li xml:lang="fr">Outil de structures pour l'analyse et l'édition basé des définitions de structures créées par l'utilisateur</li>
       <li xml:lang="gl">Ferramenta de estruturas para analizar e editar baseándose en definicións de estruturas creadas polo usuario.</li>
       <li xml:lang="hu">Struktúra eszközök a felhasználó által létrehozott struktúradefiníciók elemzésére és szerkesztésére</li>
+      <li xml:lang="ia">Instrumento de structuras per analysar e modificar basate sur definitiones de structure creabile de usator (user-creatable structure)</li>
       <li xml:lang="id">Alat struktur untuk menganalisis dan mengedit berdasarkan pada struktur pengguna yang dapat diciptakan</li>
       <li xml:lang="it">Strumento per le strutture per analizzare e modificare in base a definizioni di strutture dell'utente</li>
       <li xml:lang="ko">사용자가 만들 수 있는 구조 정의를 기반으로 분석 및 편집하는 구조 도구</li>
