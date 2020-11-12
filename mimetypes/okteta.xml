@@ -19,6 +19,13 @@ Notes:
     <sub-class-of type="text/plain"/>
     <generic-icon name="text-x-hex"/>
     <comment>Motorola S-Records</comment>
+    <comment xml:lang="ca">Registres S de Motorola</comment>
+    <comment xml:lang="es">Motorola S-Records</comment>
+    <comment xml:lang="it">S-Records Motorola</comment>
+    <comment xml:lang="nl">Motorola S-records</comment>
+    <comment xml:lang="nn">Motorola S-Records</comment>
+    <comment xml:lang="sv">Motorola S-Records</comment>
+    <comment xml:lang="uk">S-записи Motorola</comment>
     <magic priority="70">
       <match offset="0" value="S0" type="string">
         <match offset="4" value="0000" type="string"/>
@@ -36,6 +43,13 @@ Notes:
     <generic-icon name="text-x-hex"/>
 <!--     <generic-icon name="application-octet-stream"/> -->
     <comment>Intel hexadecimal object file</comment>
+    <comment xml:lang="ca">Fitxer objecte hexadecimal d'Intel</comment>
+    <comment xml:lang="es">Archivo objeto hexadecimal de Intel</comment>
+    <comment xml:lang="it">File oggetto esadecimale Intel</comment>
+    <comment xml:lang="nl">Intel hexadecimaal objectbestand</comment>
+    <comment xml:lang="nn">Intel-heksobjektfil</comment>
+    <comment xml:lang="sv">Intel hexadecimal objektfil</comment>
+    <comment xml:lang="uk">шістнадцятковий об’єктний файл Intel®</comment>
 <!--  Intel MCS-86 Object is alternative name?  -->
     <magic priority="70">
       <match type="string" offset="0" value=":">
@@ -50,6 +64,13 @@ Notes:
     <sub-class-of type="text/plain"/>
     <generic-icon name="text-x-hex"/>
     <comment>Base64 encoded data</comment>
+    <comment xml:lang="ca">Dades codificades en Base64</comment>
+    <comment xml:lang="es">Datos codificados en Base64</comment>
+    <comment xml:lang="it">Dati codificati in Base64</comment>
+    <comment xml:lang="nl">Base64 gecodeerde gegevens</comment>
+    <comment xml:lang="nn">Base64-koda data</comment>
+    <comment xml:lang="sv">Base64-kodad data</comment>
+    <comment xml:lang="uk">дані у кодуванні Base64</comment>
     <glob pattern="*.base64"/>
     <glob pattern="*.b64"/>
   </mime-type>
@@ -58,6 +79,13 @@ Notes:
     <sub-class-of type="text/plain"/>
     <generic-icon name="text-x-hex"/>
     <comment>Base32 encoded data</comment>
+    <comment xml:lang="ca">Dades codificades en Base32</comment>
+    <comment xml:lang="es">Datos codificados en Base32</comment>
+    <comment xml:lang="it">Dati codificati in Base32</comment>
+    <comment xml:lang="nl">Base32 gecodeerde gegevens</comment>
+    <comment xml:lang="nn">Base32-koda data</comment>
+    <comment xml:lang="sv">Base32-kodad data</comment>
+    <comment xml:lang="uk">дані у кодуванні Base32</comment>
     <glob pattern="*.base32"/>
   </mime-type>
 
@@ -65,6 +93,13 @@ Notes:
     <sub-class-of type="text/plain"/>
     <generic-icon name="text-x-hex"/>
     <comment>Btoa Encoded File</comment>
+    <comment xml:lang="ca">Fitxer BTOA codificat</comment>
+    <comment xml:lang="es">Archivo codificado en Btoa</comment>
+    <comment xml:lang="it">File codificato in Btoa</comment>
+    <comment xml:lang="nl">Btoa gecodeerd bestand</comment>
+    <comment xml:lang="nn">Btoa-koda fil</comment>
+    <comment xml:lang="sv">BTOA-kodad data</comment>
+    <comment xml:lang="uk">файл у кодуванні Btoa</comment>
     <magic priority="50">
       <match type="string" offset="0" value="xbtoa Begin"/>
     </magic>
@@ -76,6 +111,13 @@ Notes:
     <sub-class-of type="text/plain"/>
     <generic-icon name="text-x-hex"/>
     <comment>Ascii85 encoded data</comment>
+    <comment xml:lang="ca">Dades codificades en ASCII85</comment>
+    <comment xml:lang="es">Datos codificados en Ascii85</comment>
+    <comment xml:lang="it">File codificato in Ascii85</comment>
+    <comment xml:lang="nl">Ascii85 gecodeerde gegevens</comment>
+    <comment xml:lang="nn">Ascii85-koda data</comment>
+    <comment xml:lang="sv">ASCII85-kodad data</comment>
+    <comment xml:lang="uk">дані у кодуванні Ascii85</comment>
     <magic priority="50">
       <match type="string" offset="0" value="$lt;~"/>
     </magic>
@@ -86,6 +128,13 @@ Notes:
     <sub-class-of type="text/plain"/>
     <generic-icon name="text-x-hex"/>
     <comment>Uuencoded file</comment>
+    <comment xml:lang="ca">Fitxer «uuencoded»</comment>
+    <comment xml:lang="es">Archivo codificado con Uuencode</comment>
+    <comment xml:lang="it">File con codifica UUencode</comment>
+    <comment xml:lang="nl">Uuencoded bestand</comment>
+    <comment xml:lang="nn">Uuencoding-koda fil</comment>
+    <comment xml:lang="sv">Uuencoded fil</comment>
+    <comment xml:lang="uk">файл даних у форматі UUE</comment>
     <magic priority="50">
       <match type="string" offset="0" value="begin"/>
       <match type="string" offset="0" value="begin-base64"/>
@@ -99,6 +148,13 @@ Notes:
     <sub-class-of type="text/plain"/>
     <generic-icon name="text-x-hex"/>
     <comment>Xxencoded file</comment>
+    <comment xml:lang="ca">Fitxer «xxencoded»</comment>
+    <comment xml:lang="es">Archivo codificado con Xxencode</comment>
+    <comment xml:lang="it">File con codifica Xxencoded</comment>
+    <comment xml:lang="nl">Xxencoded bestand</comment>
+    <comment xml:lang="nn">Xxencoding-koda fil</comment>
+    <comment xml:lang="sv">Xxencoded fil</comment>
+    <comment xml:lang="uk">файл даних у форматі xxe</comment>
     <magic priority="50">
       <match type="string" offset="0" value="begin"/>
     </magic>
@@ -108,6 +164,13 @@ Notes:
   <mime-type type="application/x-vnd.kde.okteta.structure">
     <sub-class-of type="application/xml"/>
     <comment>Okteta Structure definition</comment>
+    <comment xml:lang="ca">Definició d'estructura de l'Okteta</comment>
+    <comment xml:lang="es">Definición de estructura de Okteta</comment>
+    <comment xml:lang="it">Definizione di struttura di Okteta</comment>
+    <comment xml:lang="nl">Okteta structuurdefinitie</comment>
+    <comment xml:lang="nn">Okteta strukturdefinisjon</comment>
+    <comment xml:lang="sv">Okteta strukturdefinition</comment>
+    <comment xml:lang="uk">визначення структури Okteta</comment>
     <glob pattern="*.osd"/>
   </mime-type>
 </mime-info>
