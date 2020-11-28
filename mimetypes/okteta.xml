@@ -29,6 +29,7 @@ Notes:
     <comment xml:lang="it">S-Records Motorola</comment>
     <comment xml:lang="nl">Motorola S-records</comment>
     <comment xml:lang="nn">Motorola S-Records</comment>
+    <comment xml:lang="pt_BR">Motorola S-Records</comment>
     <comment xml:lang="sv">Motorola S-Records</comment>
     <comment xml:lang="uk">S-записи Motorola</comment>
     <magic priority="70">
@@ -58,6 +59,7 @@ Notes:
     <comment xml:lang="it">File oggetto esadecimale Intel</comment>
     <comment xml:lang="nl">Intel hexadecimaal objectbestand</comment>
     <comment xml:lang="nn">Intel-heksobjektfil</comment>
+    <comment xml:lang="pt_BR">Arquivo de objeto hexadecimal Intel</comment>
     <comment xml:lang="sv">Intel hexadecimal objektfil</comment>
     <comment xml:lang="uk">шістнадцятковий об’єктний файл Intel®</comment>
 <!--  Intel MCS-86 Object is alternative name?  -->
@@ -84,6 +86,7 @@ Notes:
     <comment xml:lang="it">Dati codificati in Base64</comment>
     <comment xml:lang="nl">Base64 gecodeerde gegevens</comment>
     <comment xml:lang="nn">Base64-koda data</comment>
+    <comment xml:lang="pt_BR">Dados codificados Base64</comment>
     <comment xml:lang="sv">Base64-kodad data</comment>
     <comment xml:lang="uk">дані у кодуванні Base64</comment>
     <glob pattern="*.base64"/>
@@ -104,6 +107,7 @@ Notes:
     <comment xml:lang="it">Dati codificati in Base32</comment>
     <comment xml:lang="nl">Base32 gecodeerde gegevens</comment>
     <comment xml:lang="nn">Base32-koda data</comment>
+    <comment xml:lang="pt_BR">Dados codificados Base32</comment>
     <comment xml:lang="sv">Base32-kodad data</comment>
     <comment xml:lang="uk">дані у кодуванні Base32</comment>
     <glob pattern="*.base32"/>
@@ -123,6 +127,7 @@ Notes:
     <comment xml:lang="it">File codificato in Btoa</comment>
     <comment xml:lang="nl">Btoa gecodeerd bestand</comment>
     <comment xml:lang="nn">Btoa-koda fil</comment>
+    <comment xml:lang="pt_BR">Arquivo codificado Btoa</comment>
     <comment xml:lang="sv">BTOA-kodad data</comment>
     <comment xml:lang="uk">файл у кодуванні Btoa</comment>
     <magic priority="50">
@@ -146,6 +151,7 @@ Notes:
     <comment xml:lang="it">File codificato in Ascii85</comment>
     <comment xml:lang="nl">Ascii85 gecodeerde gegevens</comment>
     <comment xml:lang="nn">Ascii85-koda data</comment>
+    <comment xml:lang="pt_BR">Dados codificados Ascii85</comment>
     <comment xml:lang="sv">ASCII85-kodad data</comment>
     <comment xml:lang="uk">дані у кодуванні Ascii85</comment>
     <magic priority="50">
@@ -168,6 +174,7 @@ Notes:
     <comment xml:lang="it">File con codifica UUencode</comment>
     <comment xml:lang="nl">Uuencoded bestand</comment>
     <comment xml:lang="nn">Uuencoding-koda fil</comment>
+    <comment xml:lang="pt_BR">Arquivo Uuencoded</comment>
     <comment xml:lang="sv">Uuencoded fil</comment>
     <comment xml:lang="uk">файл даних у форматі UUE</comment>
     <magic priority="50">
@@ -193,6 +200,7 @@ Notes:
     <comment xml:lang="it">File con codifica Xxencoded</comment>
     <comment xml:lang="nl">Xxencoded bestand</comment>
     <comment xml:lang="nn">Xxencoding-koda fil</comment>
+    <comment xml:lang="pt_BR">Arquivo Xxencoded</comment>
     <comment xml:lang="sv">Xxencoded fil</comment>
     <comment xml:lang="uk">файл даних у форматі xxe</comment>
     <magic priority="50">
@@ -214,6 +222,7 @@ Notes:
     <comment xml:lang="it">Definizione di struttura di Okteta</comment>
     <comment xml:lang="nl">Okteta structuurdefinitie</comment>
     <comment xml:lang="nn">Okteta strukturdefinisjon</comment>
+    <comment xml:lang="pt_BR">Definição de estrutura Okteta</comment>
     <comment xml:lang="sv">Okteta strukturdefinition</comment>
     <comment xml:lang="uk">визначення структури Okteta</comment>
     <glob pattern="*.osd"/>
