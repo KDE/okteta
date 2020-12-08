@@ -31,5 +31,5 @@ ecm_add_test(
   Qt5::Test
 )
 
-kcoreaddons_desktop_to_json(oktetaparttest ../oktetapart.desktop  SERVICE_TYPES kpart.desktop)
+kcoreaddons_desktop_to_json(oktetaparttest ${CMAKE_CURRENT_BINARY_DIR}/../oktetapart.desktop)
 

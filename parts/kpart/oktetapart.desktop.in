@@ -47,3 +47,11 @@ Name[zh_TW]=Okteta 十六進位碼檢視器
 MimeType=application/octet-stream;
 X-KDE-ServiceTypes=KParts/ReadOnlyPart,Browser/View,KParts/ReadWritePart
 X-KDE-Library=kf5/parts/oktetapart
+
+X-KDE-PluginInfo-Name=oktetapart
+X-KDE-PluginInfo-Version=@Okteta_VERSION@
+X-KDE-PluginInfo-License=LGPLv2.1
+X-KDE-PluginInfo-Copyright=Copyright 2003-2020 Friedrich W. H. Kossebau
+X-KDE-PluginInfo-Author=Friedrich W. H. Kossebau
+X-KDE-PluginInfo-Email=kossebau@kde.org
+X-KDE-PluginInfo-Website=https://userbase.kde.org/Okteta
