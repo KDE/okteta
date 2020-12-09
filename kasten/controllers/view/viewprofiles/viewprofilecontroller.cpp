@@ -15,6 +15,7 @@
 #include <Kasten/Okteta/ByteArrayViewProfileSynchronizer>
 #include <Kasten/Okteta/ByteArrayView>
 // KF
+#include <kwidgetsaddons_version.h>
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>
 #include <KActionMenu>
@@ -36,7 +37,11 @@ ViewProfileController::ViewProfileController(ByteArrayViewProfileManager* viewPr
         new KActionMenu(i18nc("@title:menu submenu to select the view profile or change it",
                               "View Profile"),
                         this);
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 77, 0)
+    mViewProfileActionMenu->setPopupMode(QToolButton::InstantPopup);
+#else
     mViewProfileActionMenu->setDelayed(false);
+#endif
 
     mCreateNewAction =
         new QAction(QIcon::fromTheme(QStringLiteral("document-new")),

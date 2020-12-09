@@ -171,4 +171,8 @@ endif()
 
 ki18n_install(po)
 
+if( BUILD_DESKTOPPROGRAM )
+    kdoctools_install(po)
+endif()
+
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)

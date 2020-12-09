@@ -1,5 +1,7 @@
 add_definitions(-DTRANSLATION_DOMAIN=\"oktetapart\")
 
+configure_file(oktetapart.desktop.in ${CMAKE_CURRENT_BINARY_DIR}/oktetapart.desktop @ONLY)
+
 set( oktetapart_SRCS
   part.cpp
   browserextension.cpp
@@ -29,9 +31,9 @@ target_link_libraries( oktetapart
 )
 
 install( TARGETS oktetapart  DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf5/parts)
-kcoreaddons_desktop_to_json(oktetapart oktetapart.desktop  SERVICE_TYPES kpart.desktop)
+kcoreaddons_desktop_to_json(oktetapart ${CMAKE_CURRENT_BINARY_DIR}/oktetapart.desktop)
 
-install( FILES oktetapart.desktop  DESTINATION ${KDE_INSTALL_KSERVICES5DIR} )
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/oktetapart.desktop  DESTINATION ${KDE_INSTALL_KSERVICES5DIR})
 
 if(BUILD_TESTING)
     add_subdirectory(tests)
