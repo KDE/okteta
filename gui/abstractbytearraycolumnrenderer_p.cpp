@@ -716,6 +716,8 @@ void AbstractByteArrayColumnRendererPrivate::renderCursor(QPainter* painter, Add
         mByteTypeColored ? foregroundRoleForChar(byteChar) : KColorScheme::NormalText;
     const QBrush brush = colorScheme.foreground(foregroundRole);
     painter->fillRect(0, 0, mByteWidth, q->lineHeight(), brush);
+    const QColor& charColor = colorScheme.background(KColorScheme::NormalBackground).color();
+    renderByteText(painter, byte, byteChar, charColor);
 }
 
 bool AbstractByteArrayColumnRendererPrivate::getNextSelectedAddressRange(AddressRange* _selection, unsigned int* _flag,

@@ -195,10 +195,14 @@ void AbstractByteArrayViewPrivate::init()
 
     setWheelController(mZoomWheelController);
 
-    mCursorBlinkTimer = new QTimer(q);
-
-    QObject::connect(mCursorBlinkTimer, &QTimer::timeout,
-                     q, [&]() { blinkCursor(); });
+    if (QApplication::cursorFlashTime() > 0) {
+        mCursorBlinkTimer = new QTimer(q);
+        QObject::connect(mCursorBlinkTimer, &QTimer::timeout,
+                         q, [&]() { blinkCursor(); });
+    } else {
+        mCursorBlinkTimer = nullptr;
+        QObject::connect(q, &AbstractByteArrayView::cursorPositionChanged, q, [&]() { updateCursors();});
+    }
 
     q->setAcceptDrops(true);
 }
@@ -1005,12 +1009,16 @@ void AbstractByteArrayViewPrivate::startCursor()
 
     updateCursors();
 
-    mCursorBlinkTimer->start(QApplication::cursorFlashTime() / 2);
+    if (mCursorBlinkTimer != nullptr) {
+        mCursorBlinkTimer->start(QApplication::cursorFlashTime() / 2);
+    }
 }
 
-void AbstractByteArrayViewPrivate::stopCursor()
+    void AbstractByteArrayViewPrivate::stopCursor()
 {
-    mCursorBlinkTimer->stop();
+    if (mCursorBlinkTimer != nullptr) {
+        mCursorBlinkTimer->stop();
+    }
 
     pauseCursor();
 }
@@ -1019,7 +1027,7 @@ void AbstractByteArrayViewPrivate::unpauseCursor()
 {
     mCursorPaused = false;
 
-    if (mCursorBlinkTimer->isActive()) {
+    if (mCursorBlinkTimer != nullptr && mCursorBlinkTimer->isActive()) {
         updateCursors();
     }
 }
