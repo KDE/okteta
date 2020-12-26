@@ -16,6 +16,7 @@
 // Okteta core
 #include <Okteta/CharCodec>
 // KF
+#include <kwidgetsaddons_version.h>
 #include <KXMLGUIClient>
 #include <KLocalizedString>
 #include <KActionCollection>
@@ -39,7 +40,11 @@ ViewConfigController::ViewConfigController(KXMLGUIClient* guiClient)
         i18nc("@item:inmenu offset in the decimal format",
               "&Decimal"),
     });
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 78, 0)
+    connect(mOffsetCodingAction, &KSelectAction::indexTriggered,
+#else
     connect(mOffsetCodingAction, QOverload<int>::of(&KSelectAction::triggered),
+#endif
             this, &ViewConfigController::setOffsetCoding);
 
     // value valueCoding
@@ -55,14 +60,22 @@ ViewConfigController::ViewConfigController(KXMLGUIClient* guiClient)
         i18nc("@item:inmenu encoding of the bytes as values in the binary format",
               "&Binary"),
     });
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 78, 0)
+    connect(mCodingAction, &KSelectAction::indexTriggered,
+#else
     connect(mCodingAction, QOverload<int>::of(&KSelectAction::triggered),
+#endif
             this, &ViewConfigController::setValueCoding);
 
     // char valueCoding
     mEncodingAction = new KSelectAction(i18nc("@title:menu", "&Char Coding"), this);
     mEncodingAction->setObjectName(QStringLiteral("view_charencoding"));
     mEncodingAction->setItems(Okteta::CharCodec::codecNames());
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 78, 0)
+    connect(mEncodingAction, &KSelectAction::indexTriggered,
+#else
     connect(mEncodingAction, QOverload<int>::of(&KSelectAction::triggered),
+#endif
             this, &ViewConfigController::setCharCoding);
 
     mShowsNonprintingAction = new KToggleAction(i18nc("@option:check", "Show &Non-printing Chars"), this);
@@ -93,7 +106,11 @@ ViewConfigController::ViewConfigController(KXMLGUIClient* guiClient)
         i18nc("@item:inmenu  The layout will adapt to the size and fit in as much bytes per line as possible.",
               "&On"),
     });
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 78, 0)
+    connect(mResizeStyleAction, &KSelectAction::indexTriggered,
+#else
     connect(mResizeStyleAction, QOverload<int>::of(&KSelectAction::triggered),
+#endif
             this, &ViewConfigController::setLayoutStyle);
 
     mShowOffsetColumnAction = new KToggleAction(i18nc("@option:check", "Show &Line Offset"), this);
@@ -110,7 +127,11 @@ ViewConfigController::ViewConfigController(KXMLGUIClient* guiClient)
         i18nc("@item:inmenu", "&Chars"),
         i18nc("@item:inmenu", "Values && Chars"),
     });
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 78, 0)
+    connect(mToggleColumnsAction, &KSelectAction::indexTriggered,
+#else
     connect(mToggleColumnsAction, QOverload<int>::of(&KSelectAction::triggered),
+#endif
             this, &ViewConfigController::toggleValueCharColumns);
 
     actionCollection->addActions({
