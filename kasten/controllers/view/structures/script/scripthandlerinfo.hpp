@@ -36,7 +36,8 @@ public:
         Updating = 2,
         DeterminingLength = 4,
         TaggedUnionSelection = 8,
-        CustomToString = 16
+        CustomToString = 16,
+        InterpretingPointer = 32,
     };
 
     QScopedPointer<ArrayScriptClass> mArrayClass;

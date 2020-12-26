@@ -173,6 +173,12 @@ UnionDataInformation* toUnion(const QScriptValue& value, const ParserInfo& info)
 PointerDataInformation* toPointer(const QScriptValue& value, const ParserInfo& info)
 {
     PointerParsedData ppd(info);
+    QScriptValue pointerScale = value.property(PROPERTY_SCALE());
+    if (pointerScale.isNumber()) {
+        // A pointer scale of magnitude > 2^53 is extremely unlikely.
+        ppd.pointerScale = pointerScale.toInteger();
+    }
+    ppd.interpretFunc = value.property(PROPERTY_INTERPRET_FUNC());
 
     ParserInfo childInfo(info);
     DummyDataInformation dummy(info.parent, info.name);

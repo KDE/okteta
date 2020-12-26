@@ -213,6 +213,25 @@ QScriptValue scriptNewPointer(QScriptContext* ctx, QScriptEngine* eng)
 
     object.setProperty(ParserStrings::PROPERTY_TYPE(), ctx->argument(0));
     object.setProperty(ParserStrings::PROPERTY_TARGET(), ctx->argument(1));
+
+    if (ctx->argumentCount() >= 3 && ctx->argument(2).isValid()) {
+        if (ctx->argument(2).isNumber()) {
+            object.setProperty(ParserStrings::PROPERTY_SCALE(), ctx->argument(2));
+        } else {
+            return ctx->throwError(QStringLiteral("pointer(): if provided, scale must be integer!"));
+        }
+    } else {
+        object.setProperty(ParserStrings::PROPERTY_SCALE(), eng->toScriptValue(1));
+    }
+
+    if (ctx->argumentCount() >= 4 && ctx->argument(3).isValid()) {
+        if (ctx->argument(3).isFunction()) {
+            object.setProperty(ParserStrings::PROPERTY_INTERPRET_FUNC(), ctx->argument(3));
+        } else {
+            return ctx->throwError(QStringLiteral("pointer(): if provided, interpreterFunc must be a function!"));
+        }
+    }
+
     return object;
 }
 

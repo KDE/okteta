@@ -21,7 +21,8 @@ public:
      *  takes ownership over @p childType and @p valueType
      */
     PointerDataInformation(const QString& name, DataInformation* childType,
-                           PrimitiveDataInformation* valueType, DataInformation* parent);
+                           PrimitiveDataInformation* valueType, DataInformation* parent,
+                           qint64 pointerScale, const QScriptValue& interpretFunction);
     ~PointerDataInformation() override;
 
     bool canHaveChildren() const override;
@@ -50,6 +51,17 @@ public:
      */
     bool setPointerType(DataInformation* type);
 
+    qint64 pointerScale() const;
+    /** Set a new pointer scale
+     * @param scale the new pointer scale, in bytes.
+     */
+    void setPointerScale(qint64 scale);
+
+    QScriptValue interpreterFunction() const;
+    void setInterpreterFunction(const QScriptValue& newFunc);
+
+    quint64 interpret(Okteta::Address start) const;
+
 private:
     QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const override;
     QString valueStringImpl() const override;
@@ -57,6 +69,7 @@ private:
 
 protected:
     QScopedPointer<DataInformation> mPointerTarget;
+    qint64 mPointerScale;
 };
 
 inline DataInformation* PointerDataInformation::pointerTarget() const
@@ -74,6 +87,26 @@ inline void PointerDataInformation::setPointerTarget(DataInformation* target)
 inline PrimitiveDataInformation* PointerDataInformation::pointerType() const
 {
     return mValue.data();
+}
+
+inline void PointerDataInformation::setPointerScale(qint64 scale)
+{
+    mPointerScale = scale;
+}
+
+inline qint64 PointerDataInformation::pointerScale() const
+{
+    return mPointerScale;
+}
+
+inline QScriptValue PointerDataInformation::interpreterFunction() const
+{
+    return mAdditionalData.get(AdditionalData::AdditionalDataType::PointerInterpreterFunction).value<QScriptValue>();
+}
+
+inline void PointerDataInformation::setInterpreterFunction(const QScriptValue& newFunc)
+{
+    setAdditionalFunction(AdditionalData::AdditionalDataType::PointerInterpreterFunction, newFunc, "pointer interpreter function");
 }
 
 #endif // KASTEN_POINTERDATAINFORMATION_HPP

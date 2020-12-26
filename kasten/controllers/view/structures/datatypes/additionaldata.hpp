@@ -23,7 +23,8 @@ public:
         ValidationError,
         ArrayLengthFunction,
         CustomTypeName,
-        ToStringFunction
+        ToStringFunction,
+        PointerInterpreterFunction,
     };
     explicit AdditionalData();
     AdditionalData(const AdditionalData& data);

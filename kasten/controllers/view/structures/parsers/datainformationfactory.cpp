@@ -313,13 +313,18 @@ PointerDataInformation* DataInformationFactory::newPointer(const PointerParsedDa
         pd.error() << "Bad pointer type, only unsigned integers are allowed";
         return nullptr;
     }
+    if (pd.interpretFunc.isValid() && !pd.interpretFunc.isFunction()) {
+        pd.error() << "Bad pointer interpretation, only functions are allowed";
+        return nullptr;
+    }
     PrimitiveDataInformation* primValue = pd.valueType->asPrimitive();
     if (!(primValue->type() == PrimitiveDataType::UInt8 || primValue->type() == PrimitiveDataType::UInt16
           || primValue->type() == PrimitiveDataType::UInt32 || primValue->type() == PrimitiveDataType::UInt64)) {
         pd.error() << "Bad pointer type, only unsigned integers are allowed"; // TODO offsets (signed int + bitfields)
         return nullptr;
     }
-    return new PointerDataInformation(pd.name, pd.pointerTarget, primValue, pd.parent);
+    return new PointerDataInformation(pd.name, pd.pointerTarget, primValue, pd.parent,
+                                      pd.pointerScale, pd.interpretFunc);
 }
 
 TaggedUnionDataInformation* DataInformationFactory::newTaggedUnion(const TaggedUnionParsedData& pd)

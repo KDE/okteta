@@ -106,9 +106,12 @@ struct PointerParsedData : public ParserInfo
         : ParserInfo(i)
         , valueType(nullptr)
         , pointerTarget(nullptr)
+        , pointerScale(1)
     {}
     DataInformation* valueType;
     DataInformation* pointerTarget;
+    qint64           pointerScale;
+    QScriptValue     interpretFunc;
 
 private:
     Q_DISABLE_COPY(PointerParsedData)

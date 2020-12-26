@@ -14,6 +14,7 @@
 #include "../../script/scripthandlerinfo.hpp"
 #include "../../script/classes/pointerscriptclass.hpp"
 #include "../../script/scriptlogger.hpp"
+#include "../../parsers/parserutils.hpp"
 
 #include <QScriptEngine>
 #include <KLocalizedString>
@@ -21,11 +22,16 @@
 #include <limits>
 
 PointerDataInformation::PointerDataInformation(const QString& name, DataInformation* childType,
-                                               PrimitiveDataInformation* valueType, DataInformation* parent)
+                                               PrimitiveDataInformation* valueType, DataInformation* parent,
+                                               qint64 pointerScale, const QScriptValue& interpretFunction)
     : PrimitiveDataInformationWrapper(name, valueType, parent)
-    , mPointerTarget(childType)
+    , mPointerTarget(childType), mPointerScale(pointerScale)
 {
     Q_CHECK_PTR(childType);
+
+    if (interpretFunction.isValid() && interpretFunction.isFunction()) {
+        setInterpreterFunction(interpretFunction);
+    }
 
     // currently only absolute unsigned pointers are allowed
     const PrimitiveDataType pdt = mValue->type();
@@ -36,9 +42,13 @@ PointerDataInformation::PointerDataInformation(const QString& name, DataInformat
 
 PointerDataInformation::PointerDataInformation(const PointerDataInformation& d)
     : PrimitiveDataInformationWrapper(d)
-    , mPointerTarget(d.mPointerTarget->clone())
+    , mPointerTarget(d.mPointerTarget->clone()), mPointerScale(d.mPointerScale)
 {
     mPointerTarget->setParent(this);
+    if (d.interpreterFunction().isValid() &&
+        d.interpreterFunction().isFunction()) {
+        setInterpreterFunction(d.interpreterFunction());
+    }
 }
 
 PointerDataInformation::~PointerDataInformation() = default;
@@ -50,8 +60,8 @@ qint64 PointerDataInformation::readData(Okteta::AbstractByteArrayModel* input, O
     if (!mWasAbleToRead) {
         mPointerTarget->mWasAbleToRead = false;
     }
-    // If the pointer it's outside the boundaries of the input simply ignore it
-    else if (mValue->value().value<quint64>() < quint64(input->size())) {
+    // If the pointer is outside the boundaries of the input simply ignore it
+    else if (interpret(address) < quint64(input->size())) {
         // Enqueue for later reading of the destination
         topLevelDataInformation()->enqueueReadData(this);
     }
@@ -60,11 +70,11 @@ qint64 PointerDataInformation::readData(Okteta::AbstractByteArrayModel* input, O
 
 BitCount64 PointerDataInformation::childPosition(const DataInformation* child, Okteta::Address start) const
 {
-    Q_UNUSED(start)
     // TODO other pointer modes
     Q_ASSERT(child == mPointerTarget.data());
     Q_UNUSED(child);
-    return mWasAbleToRead ? mValue->value().value<quint64>() * 8 : 0;
+
+    return mWasAbleToRead ? interpret(start) * 8 : 0;
 }
 
 int PointerDataInformation::indexOf(const DataInformation* const data) const
@@ -75,12 +85,11 @@ int PointerDataInformation::indexOf(const DataInformation* const data) const
 
 void PointerDataInformation::delayedReadData(Okteta::AbstractByteArrayModel* input, Okteta::Address address)
 {
-    Q_UNUSED(address); // TODO offsets
     Q_ASSERT(mHasBeenUpdated); // update must have been called prior to reading
     Q_ASSERT(mWasAbleToRead);
     quint8 childBitOffset = 0;
     // Compute the destination offset
-    const quint64 pointer = mValue->value().value<quint64>();
+    const quint64 pointer = interpret(address);
     if (pointer > quint64(std::numeric_limits<Okteta::Address>::max())) {
         logError() << "Pointer" << mValue->valueString() << "does not point to an existing address.";
         return;
@@ -156,4 +165,31 @@ bool PointerDataInformation::canHaveChildren() const
 bool PointerDataInformation::isPointer() const
 {
     return true;
+}
+
+quint64 PointerDataInformation::interpret(Okteta::Address start) const
+{
+    Q_UNUSED(start) // TODO offsets
+    const QScriptValue& interpretFunc = interpreterFunction();
+    if (!interpretFunc.isValid()) {
+        return mValue->value().value<quint64>() * (quint64)pointerScale();
+    }
+
+    Q_ASSERT(interpretFunc.isFunction());
+    ScriptHandler* handler = topLevelDataInformation()->scriptHandler();
+    QScriptValue result = handler->callFunction(interpretFunc,
+                                                const_cast<DataInformation*>(asDataInformation()),
+                                                ScriptHandlerInfo::Mode::InterpretingPointer);
+    if (result.isError()) {
+        logError() << "interpretFunc caused an error:" << result.toString();
+        return 0;
+    }
+
+    ParsedNumber<quint64> value = ParserUtils::uint64FromScriptValue(result);
+    if (!value.isValid) {
+        logError() << "Pointer interpreter function did not return a valid number! Result was: " << result.toString();
+        return 0;
+    } else {
+        return value.value;
+    }
 }

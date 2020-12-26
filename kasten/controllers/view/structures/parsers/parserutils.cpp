@@ -66,6 +66,8 @@ QString PROPERTY_ENCODING() { return QStringLiteral("encoding"); }
 QString PROPERTY_VALUE() { return QStringLiteral("value"); }
 // pointer
 QString PROPERTY_TARGET() { return QStringLiteral("target"); }
+QString PROPERTY_SCALE() { return QStringLiteral("scale"); }
+QString PROPERTY_INTERPRET_FUNC() { return QStringLiteral("interpretFunc"); }
 // tagged union
 QString PROPERTY_ALTERNATIVES() { return QStringLiteral("alternatives"); }
 QString PROPERTY_DEFAULT_CHILDREN() { return QStringLiteral("defaultFields"); }
@@ -92,11 +94,13 @@ QStringList ALL_PROPERTIES()
         PROPERTY_ENUM_NAME(),
         PROPERTY_ENUM_VALUES(),
         PROPERTY_INTERNAL_TYPE(),
+        PROPERTY_INTERPRET_FUNC(),
         PROPERTY_LENGTH(),
         PROPERTY_MAX_BYTE_COUNT(),
         PROPERTY_MAX_CHAR_COUNT(),
         PROPERTY_NAME(),
         PROPERTY_PARENT(),
+        PROPERTY_SCALE(),
         PROPERTY_SELECT_IF(),
         PROPERTY_STRUCT_NAME(),
         PROPERTY_TARGET(),
