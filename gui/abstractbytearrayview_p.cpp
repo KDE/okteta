@@ -35,12 +35,13 @@
 #include <QDragMoveEvent>
 #include <QDragLeaveEvent>
 #include <QDropEvent>
+#include <QTimerEvent>
+#include <QStyleHints>
 #include <QApplication>
 #include <QToolTip>
 #include <QMimeData>
 #include <QMenu>
 #include <QIcon>
-#include <QTimer>
 
 namespace Okteta {
 
@@ -194,11 +195,6 @@ void AbstractByteArrayViewPrivate::init()
     mDropper = new Dropper(q);
 
     setWheelController(mZoomWheelController);
-
-    mCursorBlinkTimer = new QTimer(q);
-
-    QObject::connect(mCursorBlinkTimer, &QTimer::timeout,
-                     q, [&]() { blinkCursor(); });
 
     q->setAcceptDrops(true);
 }
@@ -1001,16 +997,24 @@ void AbstractByteArrayViewPrivate::adjustLayoutToSize()
 
 void AbstractByteArrayViewPrivate::startCursor()
 {
+    Q_Q(AbstractByteArrayView);
+
     mCursorPaused = false;
 
     updateCursors();
 
-    mCursorBlinkTimer->start(QApplication::cursorFlashTime() / 2);
+    const int flashTime = QGuiApplication::styleHints()->cursorFlashTime();
+    mCursorBlinkTimerId = q->startTimer(flashTime / 2);
 }
 
 void AbstractByteArrayViewPrivate::stopCursor()
 {
-    mCursorBlinkTimer->stop();
+    Q_Q(AbstractByteArrayView);
+
+    if (mCursorBlinkTimerId != 0) {
+        q->killTimer(mCursorBlinkTimerId);
+        mCursorBlinkTimerId = 0;
+    }
 
     pauseCursor();
 }
@@ -1019,7 +1023,7 @@ void AbstractByteArrayViewPrivate::unpauseCursor()
 {
     mCursorPaused = false;
 
-    if (mCursorBlinkTimer->isActive()) {
+    if (mCursorBlinkTimerId != 0) {
         updateCursors();
     }
 }
@@ -1250,6 +1254,17 @@ void AbstractByteArrayViewPrivate::contextMenuEvent(QContextMenuEvent* contextMe
     menu->setAttribute(Qt::WA_DeleteOnClose);
 
     menu->popup(contextMenuEvent->globalPos());
+}
+
+void AbstractByteArrayViewPrivate::timerEvent(QTimerEvent* timerEvent)
+{
+    Q_Q(AbstractByteArrayView);
+
+    if (timerEvent->timerId() == mCursorBlinkTimerId) {
+        blinkCursor();
+    }
+
+    q->ColumnsView::timerEvent(timerEvent);
 }
 
 void AbstractByteArrayViewPrivate::onBookmarksChange(const QVector<Bookmark>& bookmarks)

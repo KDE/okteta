@@ -610,6 +610,12 @@ void AbstractByteArrayView::contextMenuEvent(QContextMenuEvent* contextMenuEvent
     d->contextMenuEvent(contextMenuEvent);
 }
 
+void AbstractByteArrayView::timerEvent(QTimerEvent* timerEvent)
+{
+    Q_D(AbstractByteArrayView);
+    d->timerEvent(timerEvent);
+}
+
 bool AbstractByteArrayView::viewportEvent(QEvent* event)
 {
     Q_D(AbstractByteArrayView);

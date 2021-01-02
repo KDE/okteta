@@ -22,8 +22,6 @@
 #include <Okteta/AbstractByteArrayModel>
 #include <Okteta/CharCodec>
 
-class QTimer;
-
 namespace Okteta {
 
 class ClipboardController;
@@ -170,6 +168,7 @@ public: // events
     void dragLeaveEvent(QDragLeaveEvent* dragLeaveEvent);
     void dropEvent(QDropEvent* dropEvent);
     void contextMenuEvent(QContextMenuEvent* contextMenuEvent);
+    void timerEvent(QTimerEvent* timerEvent);
     bool viewportEvent(QEvent* event);
 
     void mousePressEvent(QMouseEvent* mousePressEvent);
@@ -274,7 +273,7 @@ protected:
 
 protected:
     /** Timer that controls the blinking of the cursor */
-    QTimer* mCursorBlinkTimer;
+    int mCursorBlinkTimerId = 0;
 
     /** object to store the blinking cursor pixmaps */
     Cursor* mCursorPixmaps;
