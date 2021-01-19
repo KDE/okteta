@@ -327,6 +327,9 @@ void JsParserTest::testCustomTypeName()
 void JsParserTest::testImport()
 {
     QScopedPointer<QScriptEngine> eng(ScriptEngineInitializer::newEngine());
+#if defined(Q_OS_MACOS) || defined(Q_OS_WINDOWS)
+    QEXPECT_FAIL("", "QStandardPaths::GenericDataLocation can't be modified on macOS/Windows", Continue);
+#endif
     QScriptValue val = eng->evaluate(QStringLiteral("s = importScript('simpleImport.js');s.foo()"));
     QCOMPARE(val.toString(), QStringLiteral("100"));
 }

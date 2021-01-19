@@ -92,6 +92,9 @@ void CustomToStringTest::testUuid()
     } else {
         structure = Utils::evalAndParse(eng, "var u = importScript('uuid.js'); u.UUID();", logger);
     }
+#if defined(Q_OS_MACOS) || defined(Q_OS_WINDOWS)
+  QEXPECT_FAIL("", "QStandardPaths::GenericDataLocation can't be modified on macOS/Windows", Abort);
+#endif
     QVERIFY(structure);
     TopLevelDataInformation top(structure, logger, eng);
     QCOMPARE(structure->childCount(), 4u);
