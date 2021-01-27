@@ -128,6 +128,7 @@ AbstractByteArrayViewPrivate::AbstractByteArrayViewPrivate(AbstractByteArrayView
     , mInZooming(false)
     , mCursorPaused(false)
     , mBlinkCursorVisible(false)
+    , mCursorVisible(false)
     // , mDefaultFontSize( p->font().pointSize() ) crashes in font()
     , mResizeStyle(DefaultResizeStyle)
 {
@@ -1000,16 +1001,21 @@ void AbstractByteArrayViewPrivate::startCursor()
     Q_Q(AbstractByteArrayView);
 
     mCursorPaused = false;
+    mCursorVisible = true;
 
     updateCursors();
 
     const int flashTime = QGuiApplication::styleHints()->cursorFlashTime();
-    mCursorBlinkTimerId = q->startTimer(flashTime / 2);
+    if (flashTime >= 2) {
+        mCursorBlinkTimerId = q->startTimer(flashTime / 2);
+    }
 }
 
 void AbstractByteArrayViewPrivate::stopCursor()
 {
     Q_Q(AbstractByteArrayView);
+
+    mCursorVisible = false;
 
     if (mCursorBlinkTimerId != 0) {
         q->killTimer(mCursorBlinkTimerId);
@@ -1023,7 +1029,7 @@ void AbstractByteArrayViewPrivate::unpauseCursor()
 {
     mCursorPaused = false;
 
-    if (mCursorBlinkTimerId != 0) {
+    if (mCursorVisible) {
         updateCursors();
     }
 }

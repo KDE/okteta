@@ -289,8 +289,10 @@ protected:
     bool mInZooming : 1;
     /** flag if the cursor should be invisible */
     bool mCursorPaused : 1;
-    /** flag if the cursor is visible */
+    /** flag if the cursor is visible when blinking */
     bool mBlinkCursorVisible : 1;
+    /** flag if the cursor is visible */
+    bool mCursorVisible : 1;
 
     /** font size as set by user (used for zooming) */
     int mDefaultFontSize;
