@@ -230,6 +230,9 @@ protected: // API to be implemented
     /** repaints all the parts that are signed as changed */
     virtual void updateChanged() = 0;
 
+private:
+    void onCursorFlashTimeChanged(int flashTime);
+
 protected:
     AbstractByteArrayModel* mByteArrayModel;
 

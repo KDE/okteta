@@ -197,6 +197,9 @@ void AbstractByteArrayViewPrivate::init()
 
     setWheelController(mZoomWheelController);
 
+    QObject::connect(QGuiApplication::styleHints(), &QStyleHints::cursorFlashTimeChanged,
+                     q, [&](int flashTime) { onCursorFlashTimeChanged(flashTime); });
+
     q->setAcceptDrops(true);
 }
 
@@ -994,6 +997,30 @@ void AbstractByteArrayViewPrivate::adjustLayoutToSize()
     }
 
     q->setNoOfLines(mTableLayout->noOfLines());
+}
+
+void AbstractByteArrayViewPrivate::onCursorFlashTimeChanged(int flashTime)
+{
+    Q_Q(AbstractByteArrayView);
+
+    if (!mCursorVisible) {
+        return;
+    }
+
+    if (mCursorBlinkTimerId != 0) {
+        q->killTimer(mCursorBlinkTimerId);
+    }
+
+    if (flashTime >= 2) {
+        mCursorBlinkTimerId = q->startTimer(flashTime / 2);
+    } else {
+        mCursorBlinkTimerId = 0;
+    }
+
+    // ensure cursor is drawn if set to not-blinking and currently in off-blink state
+    if (!mBlinkCursorVisible && (mCursorBlinkTimerId == 0)) {
+        blinkCursor();
+    }
 }
 
 void AbstractByteArrayViewPrivate::startCursor()
