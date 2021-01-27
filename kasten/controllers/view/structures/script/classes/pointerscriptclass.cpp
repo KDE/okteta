@@ -18,7 +18,11 @@ PointerScriptClass::PointerScriptClass(QScriptEngine* engine, ScriptHandlerInfo*
     s_type = engine->toStringHandle(ParserStrings::PROPERTY_TYPE());
     mIterableProperties.append(qMakePair(s_type, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
     s_target = engine->toStringHandle(ParserStrings::PROPERTY_TARGET());
-    mIterableProperties.append(qMakePair(s_type, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
+    mIterableProperties.append(qMakePair(s_target, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
+    s_scale = engine->toStringHandle(ParserStrings::PROPERTY_SCALE());
+    mIterableProperties.append(qMakePair(s_scale, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
+    s_interpretFunc = engine->toStringHandle(ParserStrings::PROPERTY_INTERPRET_FUNC());
+    mIterableProperties.append(qMakePair(s_interpretFunc, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
 }
 
 PointerScriptClass::~PointerScriptClass() = default;
@@ -33,13 +37,19 @@ QScriptValue PointerScriptClass::additionalProperty(const DataInformation* data,
     if (name == s_target) {
         return data->asPointer()->pointerTarget()->toScriptValue(engine(), mHandlerInfo);
     }
+    if (name == s_scale) {
+        return engine()->toScriptValue(data->asPointer()->pointerScale());
+    }
+    if (name == s_interpretFunc) {
+        return data->asPointer()->interpreterFunction();
+    }
     return PrimitiveScriptClass::additionalProperty(data, name, id);
 }
 
 bool PointerScriptClass::queryAdditionalProperty(const DataInformation* data, const QScriptString& name,
                                                  QScriptClass::QueryFlags* flags, uint* id)
 {
-    if (name == s_type || name == s_target) {
+    if (name == s_type || name == s_target || name == s_scale || name == s_interpretFunc) {
         *flags = QScriptClass::HandlesReadAccess | QScriptClass::HandlesWriteAccess;
         return true;
     }
@@ -67,6 +77,22 @@ bool PointerScriptClass::setAdditionalProperty(DataInformation* data, const QScr
             data->logError() << "Could not set new pointer target.";
         } else {
             data->asPointer()->setPointerTarget(newTarget);
+        }
+        return true;
+    }
+    if (name == s_scale) {
+        if (!value.isNumber()) {
+            data->logError() << "Could not set new pointer scale.";
+        } else {
+            data->asPointer()->setPointerScale(value.toInteger());
+        }
+        return true;
+    }
+    if (name == s_interpretFunc) {
+        if (!value.isFunction()) {
+            data->logError() << "Could not set new pointer interpreter function.";
+        } else {
+            data->asPointer()->setInterpreterFunction(value);
         }
         return true;
     }

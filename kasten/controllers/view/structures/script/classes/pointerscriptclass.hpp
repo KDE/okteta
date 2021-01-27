@@ -27,6 +27,8 @@ protected:
 protected:
     QScriptString s_target;
     QScriptString s_type;
+    QScriptString s_scale;
+    QScriptString s_interpretFunc;
 };
 
 #endif // KASTEN_POINTERSCRIPTCLASS_HPP

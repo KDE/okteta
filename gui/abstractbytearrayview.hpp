@@ -449,6 +449,7 @@ protected: // QWidget API
     void dragLeaveEvent(QDragLeaveEvent* dragLeaveEvent) override;
     void dropEvent(QDropEvent* dropEvent) override;
     void contextMenuEvent(QContextMenuEvent* contextMenuEvent) override;
+    void timerEvent(QTimerEvent* timerEvent) override;
 
 protected: // QAbstractScrollArea API
     void wheelEvent(QWheelEvent* e) override;

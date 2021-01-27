@@ -35,12 +35,13 @@
 #include <QDragMoveEvent>
 #include <QDragLeaveEvent>
 #include <QDropEvent>
+#include <QTimerEvent>
+#include <QStyleHints>
 #include <QApplication>
 #include <QToolTip>
 #include <QMimeData>
 #include <QMenu>
 #include <QIcon>
-#include <QTimer>
 
 namespace Okteta {
 
@@ -127,6 +128,7 @@ AbstractByteArrayViewPrivate::AbstractByteArrayViewPrivate(AbstractByteArrayView
     , mInZooming(false)
     , mCursorPaused(false)
     , mBlinkCursorVisible(false)
+    , mCursorVisible(false)
     // , mDefaultFontSize( p->font().pointSize() ) crashes in font()
     , mResizeStyle(DefaultResizeStyle)
 {
@@ -195,10 +197,8 @@ void AbstractByteArrayViewPrivate::init()
 
     setWheelController(mZoomWheelController);
 
-    mCursorBlinkTimer = new QTimer(q);
-
-    QObject::connect(mCursorBlinkTimer, &QTimer::timeout,
-                     q, [&]() { blinkCursor(); });
+    QObject::connect(QGuiApplication::styleHints(), &QStyleHints::cursorFlashTimeChanged,
+                     q, [&](int flashTime) { onCursorFlashTimeChanged(flashTime); });
 
     q->setAcceptDrops(true);
 }
@@ -999,18 +999,55 @@ void AbstractByteArrayViewPrivate::adjustLayoutToSize()
     q->setNoOfLines(mTableLayout->noOfLines());
 }
 
+void AbstractByteArrayViewPrivate::onCursorFlashTimeChanged(int flashTime)
+{
+    Q_Q(AbstractByteArrayView);
+
+    if (!mCursorVisible) {
+        return;
+    }
+
+    if (mCursorBlinkTimerId != 0) {
+        q->killTimer(mCursorBlinkTimerId);
+    }
+
+    if (flashTime >= 2) {
+        mCursorBlinkTimerId = q->startTimer(flashTime / 2);
+    } else {
+        mCursorBlinkTimerId = 0;
+    }
+
+    // ensure cursor is drawn if set to not-blinking and currently in off-blink state
+    if (!mBlinkCursorVisible && (mCursorBlinkTimerId == 0)) {
+        blinkCursor();
+    }
+}
+
 void AbstractByteArrayViewPrivate::startCursor()
 {
+    Q_Q(AbstractByteArrayView);
+
     mCursorPaused = false;
+    mCursorVisible = true;
 
     updateCursors();
 
-    mCursorBlinkTimer->start(QApplication::cursorFlashTime() / 2);
+    const int flashTime = QGuiApplication::styleHints()->cursorFlashTime();
+    if (flashTime >= 2) {
+        mCursorBlinkTimerId = q->startTimer(flashTime / 2);
+    }
 }
 
 void AbstractByteArrayViewPrivate::stopCursor()
 {
-    mCursorBlinkTimer->stop();
+    Q_Q(AbstractByteArrayView);
+
+    mCursorVisible = false;
+
+    if (mCursorBlinkTimerId != 0) {
+        q->killTimer(mCursorBlinkTimerId);
+        mCursorBlinkTimerId = 0;
+    }
 
     pauseCursor();
 }
@@ -1019,7 +1056,7 @@ void AbstractByteArrayViewPrivate::unpauseCursor()
 {
     mCursorPaused = false;
 
-    if (mCursorBlinkTimer->isActive()) {
+    if (mCursorVisible) {
         updateCursors();
     }
 }
@@ -1250,6 +1287,17 @@ void AbstractByteArrayViewPrivate::contextMenuEvent(QContextMenuEvent* contextMe
     menu->setAttribute(Qt::WA_DeleteOnClose);
 
     menu->popup(contextMenuEvent->globalPos());
+}
+
+void AbstractByteArrayViewPrivate::timerEvent(QTimerEvent* timerEvent)
+{
+    Q_Q(AbstractByteArrayView);
+
+    if (timerEvent->timerId() == mCursorBlinkTimerId) {
+        blinkCursor();
+    }
+
+    q->ColumnsView::timerEvent(timerEvent);
 }
 
 void AbstractByteArrayViewPrivate::onBookmarksChange(const QVector<Bookmark>& bookmarks)

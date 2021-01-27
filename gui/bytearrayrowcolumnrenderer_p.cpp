@@ -853,6 +853,13 @@ void ByteArrayRowColumnRendererPrivate::renderCursor(QPainter* painter, Address 
         mByteTypeColored ? foregroundRoleForChar(byteChar) : KColorScheme::NormalText;
     const QBrush brush = colorScheme.foreground(foregroundRole);
     painter->fillRect(0, 0, mByteWidth, mDigitHeight, brush);
+
+    const bool isBookmark = (byteIndex > -1 && mBookmarks && mBookmarks->containsBookmarkFor(byteIndex));
+    const KColorScheme::BackgroundRole backgroundRole =
+        isBookmark ? KColorScheme::NeutralBackground : KColorScheme::NormalBackground;
+    const QBrush charBrush = colorScheme.background(backgroundRole);
+    const QColor& charColor = charBrush.color();
+    renderByteText(painter, byte, byteChar, codingId, charColor);
 }
 
 bool ByteArrayRowColumnRendererPrivate::getNextSelectedAddressRange(AddressRange* _selection, unsigned int* _flag,

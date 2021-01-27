@@ -22,8 +22,6 @@
 #include <Okteta/AbstractByteArrayModel>
 #include <Okteta/CharCodec>
 
-class QTimer;
-
 namespace Okteta {
 
 class ClipboardController;
@@ -170,6 +168,7 @@ public: // events
     void dragLeaveEvent(QDragLeaveEvent* dragLeaveEvent);
     void dropEvent(QDropEvent* dropEvent);
     void contextMenuEvent(QContextMenuEvent* contextMenuEvent);
+    void timerEvent(QTimerEvent* timerEvent);
     bool viewportEvent(QEvent* event);
 
     void mousePressEvent(QMouseEvent* mousePressEvent);
@@ -231,6 +230,9 @@ protected: // API to be implemented
     /** repaints all the parts that are signed as changed */
     virtual void updateChanged() = 0;
 
+private:
+    void onCursorFlashTimeChanged(int flashTime);
+
 protected:
     AbstractByteArrayModel* mByteArrayModel;
 
@@ -274,7 +276,7 @@ protected:
 
 protected:
     /** Timer that controls the blinking of the cursor */
-    QTimer* mCursorBlinkTimer;
+    int mCursorBlinkTimerId = 0;
 
     /** object to store the blinking cursor pixmaps */
     Cursor* mCursorPixmaps;
@@ -290,8 +292,10 @@ protected:
     bool mInZooming : 1;
     /** flag if the cursor should be invisible */
     bool mCursorPaused : 1;
-    /** flag if the cursor is visible */
+    /** flag if the cursor is visible when blinking */
     bool mBlinkCursorVisible : 1;
+    /** flag if the cursor is visible */
+    bool mCursorVisible : 1;
 
     /** font size as set by user (used for zooming) */
     int mDefaultFontSize;
