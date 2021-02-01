@@ -200,6 +200,17 @@ kastencontrollers_add_sublibrary(shellwindow/fullscreen
         FullScreenController
 )
 
+# KColorSchemeManager::createSchemeSelectionMenu misses to set UI string before 5.67
+if(NOT KF5_VERSION VERSION_LESS "5.67.0")
+set(HAVE_UICOLORSCHEMECONTROLLER TRUE)
+kastencontrollers_add_sublibrary(program/uicolorscheme
+    PUBLIC
+        UiColorSchemeControllerFactory
+    PRIVATE
+        UiColorSchemeController
+)
+endif()
+
 kastencontrollers_add_sublibrary(program/quit
     PUBLIC
         QuitControllerFactory
@@ -228,6 +239,10 @@ okteta_add_library(Controllers NAMESPACE Kasten
     NO_VERSIONED_INCLUDEDIR
     NO_VERSIONED_PACKAGE_NAME
 )
+
+if (NOT HAVE_UICOLORSCHEMECONTROLLER)
+    target_compile_definitions(KastenControllers INTERFACE KASTEN_NO_UICOLORSCHEMECONTROLLER)
+endif()
 
 okteta_add_cmakeconfig(Controllers NAMESPACE Kasten
 )
