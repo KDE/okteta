@@ -1,5 +1,5 @@
 <!DOCTYPE gui SYSTEM "kpartgui.dtd">
-<gui name="Okteta" version="5">
+<gui name="Okteta" version="6">
 <MenuBar>
   <Menu name="file">
     <Action name="connect_to" append="open_merge" />
@@ -73,6 +73,7 @@
     <ActionList name="windows_list"/>
   </Menu>
   <Menu name="settings">
+    <Action name="settings_uicolorscheme"/>
     <Action name="settings_viewprofiles_manage" />
   </Menu>
 </MenuBar>

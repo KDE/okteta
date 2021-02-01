@@ -80,6 +80,9 @@
 #include <Kasten/ViewAreaSplitControllerFactory>
 #include <Kasten/ToolListMenuControllerFactory>
 #include <Kasten/FullScreenControllerFactory>
+#ifndef KASTEN_NO_UICOLORSCHEMECONTROLLER
+#include <Kasten/UiColorSchemeControllerFactory>
+#endif
 #include <Kasten/QuitControllerFactory>
 // Kasten gui
 #include <Kasten/MultiDocumentStrategy>
@@ -170,6 +173,9 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiControllerFromFactory(SwitchViewControllerFactory(viewArea));
     addXmlGuiControllerFromFactory(ViewAreaSplitControllerFactory(viewManager, viewArea));
     addXmlGuiControllerFromFactory(FullScreenControllerFactory(this));
+#ifndef KASTEN_NO_UICOLORSCHEMECONTROLLER
+    addXmlGuiControllerFromFactory(UiColorSchemeControllerFactory(this));
+#endif
     addXmlGuiControllerFromFactory(QuitControllerFactory(this));
 
     addXmlGuiControllerFromFactory(ZoomControllerFactory());
