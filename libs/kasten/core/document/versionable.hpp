@@ -10,8 +10,8 @@
 #define KASTEN_IF_VERSIONABLE_HPP
 
 // lib
-// #include <kasten/documentversionid.hpp>
-#include <kasten/documentversiondata.hpp>
+// #include "documentversionid.hpp"
+#include "documentversiondata.hpp"
 // Qt
 #include <QtPlugin>
 

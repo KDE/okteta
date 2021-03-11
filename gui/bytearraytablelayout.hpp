@@ -10,8 +10,8 @@
 #define OKTETA_BYTEARRAYTABLELAYOUT_HPP
 
 // lib
-#include <okteta/coordrange.hpp>
-#include <okteta/oktetagui_export.hpp>
+#include "oktetagui_export.hpp"
+#include "coordrange.hpp"
 // Okteta core
 #include <Okteta/AddressRange>
 

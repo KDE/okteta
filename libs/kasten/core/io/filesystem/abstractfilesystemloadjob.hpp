@@ -10,7 +10,7 @@
 #define KASTEN_ABSTRACTFILESYSTEMLOADJOB_HPP
 
 // library
-#include <kasten/abstractloadjob.hpp>
+#include "abstractloadjob.hpp"
 
 class QUrl;
 class QFile;

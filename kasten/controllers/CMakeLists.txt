@@ -5,13 +5,6 @@ set( LIBFRAMESPRINT_REL_DIR ../../libs/framesprint )
 
 add_definitions(-DTRANSLATION_DOMAIN=\"liboktetakasten\")
 
-include_directories(
-  view/libbytearraychecksum
-  view/libbytearrayfilter
-  view/libfinddialog
-  ${LIBFRAMESPRINT_REL_DIR}
-)
-
 set(HAVE_QCA2 ${Qca-qt5_FOUND})
 configure_file(config-qca2.hpp.in  ${CMAKE_CURRENT_BINARY_DIR}/config-qca2.hpp)
 
@@ -616,6 +609,10 @@ if(BUILD_TESTING)
         OktetaKastenCore
         Qt5::Test
   )
+  target_include_directories(replacejobtest
+        PUBLIC
+            view/libfinddialog
+  )
 endif()
 
 list(APPEND oktetakastencontrollers_LIB_HDRS
@@ -660,6 +657,13 @@ okteta_add_library(Controllers NAMESPACE Okteta Kasten
     NO_TARGET_NAMESPACE
 )
 
+target_include_directories(OktetaKastenControllers
+    PRIVATE
+        view/libbytearraychecksum
+        view/libbytearrayfilter
+        view/libfinddialog
+        ${LIBFRAMESPRINT_REL_DIR}
+)
 
 install(FILES view/structures/kns/okteta-structures.knsrc  DESTINATION ${KDE_INSTALL_KNSRCDIR})
 
@@ -686,10 +690,6 @@ okteta_add_cmakeconfig(Controllers NAMESPACE Okteta Kasten
 
 
 if( KASTEN_BUILD_INTERNAL_TEMPLATES )
-include_directories(
-  view/libbytearrayfilter/filter
-  view/libbytearraychecksum/algorithm
-)
 
 okteta_add_sublibrary(ControllersTemplates NAMESPACE Okteta Kasten
     SUBDIR view/libbytearrayfilter/filter/template
@@ -707,6 +707,13 @@ okteta_add_sublibrary(ControllersTemplates NAMESPACE Okteta Kasten
 )
 
 add_library( oktetakastencontrollertemplates  STATIC ${oktetakastencontrollerstemplates_LIB_SRCS} )
+target_include_directories(oktetakastencontrollertemplates
+    PRIVATE
+        view/libbytearrayfilter
+        view/libbytearrayfilter/filter
+        view/libbytearraychecksum
+        view/libbytearraychecksum/algorithm
+)
 # MSVC needs this
 target_compile_definitions( oktetakastencontrollertemplates PUBLIC OKTETAKASTENCONTROLLERS_STATIC_DEFINE=1 )
 target_link_libraries( oktetakastencontrollertemplates   KF5::I18n Qt5::Widgets OktetaCore )

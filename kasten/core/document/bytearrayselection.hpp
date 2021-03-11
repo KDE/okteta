@@ -10,7 +10,7 @@
 #define KASTEN_BYTEARRAYSELECTION_HPP
 
 // lib
-#include <kasten/okteta/oktetakastencore_export.hpp>
+#include "oktetakastencore_export.hpp"
 // Kasten core
 #include <Kasten/AbstractModelSelection>
 // Okteta core

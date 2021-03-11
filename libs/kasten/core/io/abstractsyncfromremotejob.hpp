@@ -10,7 +10,7 @@
 #define KASTEN_ABSTRACTSYNCFROMREMOTEJOB_HPP
 
 // lib
-#include <kasten/kastencore_export.hpp>
+#include "kastencore_export.hpp"
 // KF
 #include <KJob>
 

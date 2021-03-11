@@ -10,7 +10,7 @@
 #define OKTETA_BOOKMARKLIST_HPP
 
 // lib
-#include <okteta/bookmark.hpp>
+#include "bookmark.hpp"
 // Qt
 #include <QLinkedList>
 

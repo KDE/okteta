@@ -12,7 +12,7 @@
 // controller
 #include "searchuserqueryable.hpp"
 // libfinddialog
-#include <kasten/okteta/finddirection.hpp>
+#include "finddirection.hpp"
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
 

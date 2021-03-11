@@ -10,7 +10,7 @@
 #define KASTEN_ABSTRACTCONNECTJOB_HPP
 
 // lib
-#include <kasten/kastencore_export.hpp>
+#include "kastencore_export.hpp"
 // KF
 #include <KJob>
 

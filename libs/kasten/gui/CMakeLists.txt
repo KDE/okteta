@@ -3,14 +3,6 @@ set(KASTENGUI_SO_VERSION ${KASTEN_LIB_SOVERSION})
 
 add_definitions(-DTRANSLATION_DOMAIN=\"libkasten\")
 
-include_directories(
-  view
-  io
-  system
-  shell
-  controller
-)
-
 macro(KASTENGUI_ADD_SUBLIBRARY _subdir)
     okteta_add_sublibrary(Gui  NAMESPACE Kasten
         SUBDIR ${_subdir}
@@ -126,6 +118,15 @@ okteta_add_library(Gui NAMESPACE Kasten
     NO_TARGET_NAMESPACE
     NO_VERSIONED_INCLUDEDIR
     NO_VERSIONED_PACKAGE_NAME
+)
+
+target_include_directories(KastenGui
+    PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/view>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/io>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/system>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/shell>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/controller>
 )
 
 okteta_add_cmakeconfig(Gui NAMESPACE Kasten

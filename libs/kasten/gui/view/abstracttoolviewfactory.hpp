@@ -10,8 +10,8 @@
 #define KASTEN_ABSTRACTTOOLVIEWFACTORY_HPP
 
 // lib
-#include <kasten/kastengui_export.hpp>
-#include <kasten/kastengui.hpp>
+#include "kastengui_export.hpp"
+#include "kastengui.hpp"
 
 namespace Kasten {
 class AbstractToolView;

@@ -10,7 +10,7 @@
 #define OKTETA_VALUEBYTEARRAYCOLUMNRENDERER_HPP
 
 // lib
-#include <okteta/abstractbytearraycolumnrenderer.hpp>
+#include "abstractbytearraycolumnrenderer.hpp"
 // Okteta core
 #include <Okteta/Byte>
 

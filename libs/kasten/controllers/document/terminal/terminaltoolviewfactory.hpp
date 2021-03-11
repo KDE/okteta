@@ -10,7 +10,7 @@
 #define KASTEN_TERMINALTOOLVIEWFACTORY_HPP
 
 // lib
-#include <kasten/kastencontrollers_export.hpp>
+#include "kastencontrollers_export.hpp"
 // Kasten gui
 #include <Kasten/AbstractToolViewFactory>
 

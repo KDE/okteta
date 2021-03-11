@@ -10,7 +10,7 @@
 #define OKTETA_BOOKMARKSCONSTITERATORADAPTER_HPP
 
 // lib
-#include <okteta/address.hpp>
+#include "address.hpp"
 // Qt
 #include <QSharedData>
 

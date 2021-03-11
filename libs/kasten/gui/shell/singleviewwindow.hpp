@@ -10,8 +10,8 @@
 #define KASTEN_SINGLEVIEWWINDOW_HPP
 
 // lib
-#include <kasten/kastengui_export.hpp>
-#include <kasten/widgetsdockable.hpp>
+#include "kastengui_export.hpp"
+#include "widgetsdockable.hpp"
 // KF
 #include <KXmlGuiWindow>
 

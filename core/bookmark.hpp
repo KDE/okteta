@@ -10,9 +10,9 @@
 #define OKTETA_BOOKMARK_HPP
 
 // lib
-#include <okteta/oktetacore_export.hpp>
-#include <okteta/address.hpp>
-#include <okteta/size.hpp>
+#include "oktetacore_export.hpp"
+#include "address.hpp"
+#include "size.hpp"
 // Qt
 #include <QString>
 

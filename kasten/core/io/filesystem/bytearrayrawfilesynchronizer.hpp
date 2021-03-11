@@ -10,7 +10,7 @@
 #define KASTEN_BYTEARRAYRAWFILESYNCHRONIZER_HPP
 
 // lib
-#include <kasten/okteta/oktetakastencore_export.hpp>
+#include "oktetakastencore_export.hpp"
 // Kasten core
 #include <Kasten/AbstractModelFileSystemSynchronizer>
 

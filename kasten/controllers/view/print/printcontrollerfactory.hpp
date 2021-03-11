@@ -10,7 +10,7 @@
 #define KASTEN_PRINTCONTROLLERFACTORY_HPP
 
 // lib
-#include <kasten/okteta/oktetakastencontrollers_export.hpp>
+#include "oktetakastencontrollers_export.hpp"
 // Kasten core
 #include <Kasten/AbstractXmlGuiControllerFactory>
 

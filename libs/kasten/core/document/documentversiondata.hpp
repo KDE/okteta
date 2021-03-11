@@ -10,8 +10,8 @@
 #define KASTEN_DOCUMENTVERSIONDATA_HPP
 
 // lib
-#include <kasten/kastencore_export.hpp>
-#include <kasten/documentversionid.hpp>
+#include "kastencore_export.hpp"
+#include "documentversionid.hpp"
 // Qt
 #include <QString>
 

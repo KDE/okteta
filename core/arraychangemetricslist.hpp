@@ -10,7 +10,7 @@
 #define OKTETA_ARRAYCHANGEMETRICSLIST_HPP
 
 // lib
-#include <okteta/arraychangemetrics.hpp>
+#include "arraychangemetrics.hpp"
 //
 #include <QVector>
 

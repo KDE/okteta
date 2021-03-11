@@ -10,8 +10,8 @@
 #define OKTETA_BOOKMARKSCONSTITERATOR_HPP
 
 // lib
-#include <okteta/bookmarksconstiteratoradapter.hpp>
-#include <okteta/oktetacore_export.hpp>
+#include "bookmarksconstiteratoradapter.hpp"
+#include "oktetacore_export.hpp"
 // Qt
 #include <QExplicitlySharedDataPointer>
 

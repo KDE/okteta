@@ -10,7 +10,7 @@
 #define KASTEN_SINGLEDOCUMENTSTRATEGY_HPP
 
 // lib
-#include <kasten/abstractdocumentstrategy.hpp>
+#include "abstractdocumentstrategy.hpp"
 
 namespace Kasten {
 class ViewManager;

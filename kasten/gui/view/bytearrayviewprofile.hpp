@@ -10,7 +10,7 @@
 #define KASTEN_BYTEARRAYVIEWPROFILE_HPP
 
 // lib
-#include <kasten/okteta/oktetakastengui_export.hpp>
+#include "oktetakastengui_export.hpp"
 // Qt
 #include <QSharedDataPointer>
 

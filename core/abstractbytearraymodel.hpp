@@ -10,10 +10,10 @@
 #define OKTETA_ABSTRACTBYTEARRAYMODEL_HPP
 
 // lib
-#include <okteta/oktetacore_export.hpp>
-#include <okteta/addressrange.hpp>
-#include <okteta/size.hpp>
-#include <okteta/byte.hpp>
+#include "oktetacore_export.hpp"
+#include "addressrange.hpp"
+#include "size.hpp"
+#include "byte.hpp"
 // Qt
 #include <QObject>
 #include <QByteArray>

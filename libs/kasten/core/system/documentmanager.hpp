@@ -10,7 +10,7 @@
 #define KASTEN_DOCUMENTMANAGER_HPP
 
 // lib
-#include <kasten/kastencore_export.hpp>
+#include "kastencore_export.hpp"
 // Qt
 #include <QVector>
 #include <QObject>

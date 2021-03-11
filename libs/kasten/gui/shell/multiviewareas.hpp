@@ -10,9 +10,9 @@
 #define KASTEN_MULTIVIEWAREAS_HPP
 
 // lib
-#include <kasten/abstractgroupedviews.hpp>
-#include <kasten/viewareasplitable.hpp>
-#include <kasten/toolinlineviewable.hpp>
+#include "abstractgroupedviews.hpp"
+#include "viewareasplitable.hpp"
+#include "toolinlineviewable.hpp"
 
 class QMimeData;
 

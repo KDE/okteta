@@ -10,7 +10,7 @@
 #define OKTETA_OFFSETFORMAT_HPP
 
 // lib
-#include <okteta/oktetagui_export.hpp>
+#include "oktetagui_export.hpp"
 
 namespace Okteta {
 

@@ -10,7 +10,7 @@
 #define KASTEN_IF_REPLACEUSERQUERYABLE_HPP
 
 // libfinddialog
-#include <kasten/okteta/finddirection.hpp>
+#include "finddirection.hpp"
 // Qt
 #include <QtPlugin>
 

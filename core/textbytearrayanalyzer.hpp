@@ -10,8 +10,8 @@
 #define OKTETA_TEXTBYTEARRAYANALYZER_HPP
 
 // lib
-#include <okteta/oktetacore_export.hpp>
-#include <okteta/addressrange.hpp>
+#include "oktetacore_export.hpp"
+#include "addressrange.hpp"
 // Qt
 #include <QScopedPointer>
 

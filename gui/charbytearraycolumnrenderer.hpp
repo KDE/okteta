@@ -10,7 +10,7 @@
 #define OKTETA_CHARBYTEARRAYCOLUMNRENDERER_HPP
 
 // lib
-#include <okteta/abstractbytearraycolumnrenderer.hpp>
+#include "abstractbytearraycolumnrenderer.hpp"
 
 namespace Okteta {
 

@@ -10,7 +10,7 @@
 #define KASTEN_MODELENCODERFILESYSTEMEXPORTERCONFIGEDITORFACTORY_HPP
 
 // lib
-#include <kasten/abstractmodelexporterconfigeditorfactory.hpp>
+#include "abstractmodelexporterconfigeditorfactory.hpp"
 
 namespace Kasten {
 

@@ -241,11 +241,17 @@ function(okteta_add_library _baseName)
         set(_export_name_args)
     endif()
 
-    set(_exportHeaderFilePath ${CMAKE_CURRENT_BINARY_DIR}/${_include_dir}/${_lc_fullInternalName}_export.hpp)
+    set(_exportHeaderFileName ${_lc_fullInternalName}_export.hpp)
+    set(_exportHeaderFilePath ${CMAKE_CURRENT_BINARY_DIR}/${_exportHeaderFileName})
     generate_export_header(${_targetName}
         BASE_NAME ${_fullInternalName}
         EXPORT_FILE_NAME ${_exportHeaderFilePath}
     )
+    # Local forwarding header
+    set(_forwardexportHeaderFilePath ${CMAKE_CURRENT_BINARY_DIR}/${_include_dir}/${_exportHeaderFileName})
+    if (NOT EXISTS ${_forwardexportHeaderFilePath})
+        file(WRITE ${_forwardexportHeaderFilePath} "#include \"${_exportHeaderFilePath}\"\n")
+    endif()
 
     target_link_libraries(${_targetName}
         PUBLIC

@@ -10,9 +10,9 @@
 #define OKTETA_BYTEARRAYTABLERANGES_HPP
 
 // lib
-#include <okteta/selection.hpp>
-#include <okteta/coordrangelist.hpp>
-#include <okteta/oktetagui_export.hpp>
+#include "oktetagui_export.hpp"
+#include "selection.hpp"
+#include "coordrangelist.hpp"
 // Okteta core
 #include <Okteta/AddressRange>
 

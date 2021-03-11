@@ -10,9 +10,9 @@
 #define OKTETA_OFFSETCOLUMNRENDERER_HPP
 
 // lib
-#include <okteta/offsetformat.hpp>
-#include <okteta/abstractcolumnrenderer.hpp>
-#include <okteta/line.hpp>
+#include "offsetformat.hpp"
+#include "abstractcolumnrenderer.hpp"
+#include "line.hpp"
 
 class QFontMetrics;
 

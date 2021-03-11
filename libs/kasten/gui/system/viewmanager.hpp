@@ -10,7 +10,7 @@
 #define KASTEN_VIEWMANAGER_HPP
 
 // lib
-#include <kasten/abstractview.hpp>
+#include "abstractview.hpp"
 // Qt
 #include <QVector>
 #include <QObject>

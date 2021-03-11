@@ -10,9 +10,9 @@
 #define OKTETA_ARRAYCHANGEMETRICS_HPP
 
 // lib
-#include <okteta/oktetacore_export.hpp>
-#include <okteta/size.hpp>
-#include <okteta/address.hpp>
+#include "oktetacore_export.hpp"
+#include "size.hpp"
+#include "address.hpp"
 // Qt
 #include <QDataStream>
 

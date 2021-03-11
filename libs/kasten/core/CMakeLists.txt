@@ -3,14 +3,6 @@ set(KASTENCORE_SO_VERSION ${KASTEN_LIB_SOVERSION})
 
 add_definitions(-DTRANSLATION_DOMAIN=\"libkasten\")
 
-include_directories(
-#     entity
-    document
-    io
-    io/filesystem
-    system
-)
-
 macro(KASTENCORE_ADD_SUBLIBRARY _subdir)
     okteta_add_sublibrary(Core  NAMESPACE Kasten
         SUBDIR ${_subdir}
@@ -108,6 +100,15 @@ okteta_add_library(Core NAMESPACE Kasten
     NO_TARGET_NAMESPACE
     NO_VERSIONED_INCLUDEDIR
     NO_VERSIONED_PACKAGE_NAME
+)
+
+target_include_directories(KastenCore
+    PUBLIC
+        #$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/entity>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/document>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/io>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/io/filesystem>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/system>
 )
 
 okteta_add_cmakeconfig(Core NAMESPACE Kasten

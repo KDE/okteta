@@ -10,8 +10,8 @@
 #define OKTETA_COORD_HPP
 
 // lib
-#include <okteta/lineposition.hpp>
-#include <okteta/line.hpp>
+#include "lineposition.hpp"
+#include "line.hpp"
 // Okteta core
 #include <Okteta/Address>
 #include <Okteta/Size>

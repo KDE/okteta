@@ -7,8 +7,8 @@
 */
 
 #include "sintdatainformation.hpp"
-#include "../poddecoder/typeeditors/sintspinbox.hpp"
 #include "../../structlogging.hpp"
+#include <view/poddecoder/typeeditors/sintspinbox.hpp>
 
 // KF
 #include <KLocalizedString>

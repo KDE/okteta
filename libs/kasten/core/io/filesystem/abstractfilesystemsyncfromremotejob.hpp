@@ -10,7 +10,7 @@
 #define KASTEN_ABSTRACTFILESYSTEMSYNCFROMREMOTEJOB_HPP
 
 // library
-#include <kasten/abstractsyncfromremotejob.hpp>
+#include "abstractsyncfromremotejob.hpp"
 
 class QFile;
 

@@ -10,7 +10,7 @@
 #define OKTETA_WIDGETCOLUMNSTYLIST_HPP
 
 // lib
-#include <okteta/abstractcolumnstylist.hpp>
+#include "abstractcolumnstylist.hpp"
 
 class QWidget;
 

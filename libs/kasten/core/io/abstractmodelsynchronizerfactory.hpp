@@ -10,7 +10,7 @@
 #define KASTEN_ABSTRACTMODELSYNCHRONIZERFACTORY_HPP
 
 // lib
-#include <kasten/abstractmodelsynchronizer.hpp>
+#include "abstractmodelsynchronizer.hpp"
 // Qt
 #include <QObject>
 

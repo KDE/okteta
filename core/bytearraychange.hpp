@@ -10,8 +10,8 @@
 #define OKTETA_BYTEARRAYCHANGE_HPP
 
 // lib
-#include <okteta/oktetacore_export.hpp>
-#include <okteta/arraychangemetrics.hpp>
+#include "oktetacore_export.hpp"
+#include "arraychangemetrics.hpp"
 // Qt
 #include <QByteArray>
 

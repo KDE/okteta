@@ -12,7 +12,7 @@
 
 #include <QScriptValue>
 
-#include "../poddecoder/typeeditors/uintspinbox.hpp"
+#include <view/poddecoder/typeeditors/uintspinbox.hpp>
 #include "../uintdatainformation.hpp"
 
 QString UnsignedBitfieldDataInformation::valueStringImpl() const

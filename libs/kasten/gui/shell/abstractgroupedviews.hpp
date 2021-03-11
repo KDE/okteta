@@ -10,7 +10,7 @@
 #define KASTEN_ABSTRACTGROUPEDVIEWS_HPP
 
 // lib
-#include <kasten/abstractviewarea.hpp>
+#include "abstractviewarea.hpp"
 
 template <class T> class QVector;
 

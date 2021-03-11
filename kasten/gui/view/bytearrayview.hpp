@@ -10,7 +10,7 @@
 #define KASTEN_BYTEARRAYVIEW_HPP
 
 // lib
-#include <kasten/okteta/oktetakastengui_export.hpp>
+#include "oktetakastengui_export.hpp"
 // Okteta Kasten core
 #include <Kasten/Okteta/ByteArraySelection>
 // Kasten gui

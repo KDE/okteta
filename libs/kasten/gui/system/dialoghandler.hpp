@@ -10,10 +10,10 @@
 #define KASTEN_DIALOGHANDLER_HPP
 
 // lib
-#include <kasten/kastengui_export.hpp>
+#include "kastengui_export.hpp"
 // Kasten core
-#include <kasten/abstractoverwritedialog.hpp>
-#include <kasten/abstractsavediscarddialog.hpp>
+#include <Kasten/AbstractOverwriteDialog>
+#include <Kasten/AbstractSaveDiscardDialog>
 
 class QWidget;
 

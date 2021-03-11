@@ -10,7 +10,7 @@
 #define OKTETA_FILEBYTEARRAYMODEL_HPP
 
 // lib
-#include <okteta/abstractbytearraymodel.hpp>
+#include "abstractbytearraymodel.hpp"
 
 namespace Okteta {
 

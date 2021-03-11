@@ -10,7 +10,7 @@
 #define OKTETA_COORDRANGELIST_HPP
 
 // lib
-#include <okteta/coordrange.hpp>
+#include "coordrange.hpp"
 // Qt
 #include <QLinkedList>
 

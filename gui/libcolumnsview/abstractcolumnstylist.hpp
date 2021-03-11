@@ -10,7 +10,7 @@
 #define OKTETA_ABSTRACTCOLUMNSTYLIST_HPP
 
 // lib
-#include <okteta/oktetagui_export.hpp>
+#include "oktetagui_export.hpp"
 // Qt
 #include <QtGlobal>
 #include <QScopedPointer>
