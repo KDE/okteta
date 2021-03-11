@@ -10,8 +10,8 @@
 #define KASTEN_ABSTRACTMODELSYNCHRONIZER_HPP
 
 // lib
-#include <kasten/kastencore_export.hpp>
-#include <kasten/kastencore.hpp>
+#include "kastencore_export.hpp"
+#include "kastencore.hpp"
 // Qt
 #include <QObject>
 

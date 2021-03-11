@@ -10,7 +10,7 @@
 #define KASTEN_ABSTRACTMODELDATAGENERATORCONFIGEDITORFACTORY_HPP
 
 // lib
-#include <kasten/kastengui_export.hpp>
+#include "kastengui_export.hpp"
 
 namespace Kasten {
 

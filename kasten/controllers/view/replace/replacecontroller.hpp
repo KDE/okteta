@@ -11,8 +11,8 @@
 
 // controller
 #include "replaceuserqueryable.hpp"
-// lib
-#include <kasten/okteta/finddirection.hpp>
+// libfinddialog
+#include "finddirection.hpp"
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
 

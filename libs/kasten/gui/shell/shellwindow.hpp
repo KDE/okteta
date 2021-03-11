@@ -10,8 +10,8 @@
 #define KASTEN_SHELLWINDOW_HPP
 
 // Kasten gui
-#include <kasten/kastengui_export.hpp>
-#include <kasten/widgetsdockable.hpp>
+#include "kastengui_export.hpp"
+#include "widgetsdockable.hpp"
 // KF
 #include <KXmlGuiWindow>
 

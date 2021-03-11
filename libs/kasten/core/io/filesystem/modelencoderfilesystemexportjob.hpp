@@ -10,7 +10,7 @@
 #define KASTEN_MODELENCODERFILESYSTEMEXPORTJOB_HPP
 
 // lib
-#include <kasten/abstractfilesystemexportjob.hpp>
+#include "abstractfilesystemexportjob.hpp"
 
 namespace Kasten {
 

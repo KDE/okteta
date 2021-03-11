@@ -10,7 +10,7 @@
 #define KASTEN_ABSTRACTFILESYSTEMSYNCTOREMOTEJOB_HPP
 
 // library
-#include <kasten/abstractsynctoremotejob.hpp>
+#include "abstractsynctoremotejob.hpp"
 
 class QFile;
 

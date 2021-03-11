@@ -10,7 +10,7 @@
 #define KASTEN_BYTEARRAYDOCUMENT_HPP
 
 // lib
-#include <kasten/okteta/oktetakastencore_export.hpp>
+#include "oktetakastencore_export.hpp"
 // #include "kbytearrayinterface.hpp"
 // Kasten core
 #include <Kasten/Versionable>

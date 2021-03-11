@@ -10,7 +10,7 @@
 #define OKTETA_ABSTRACTBYTEARRAYVIEW_HPP
 
 // lib
-#include <okteta/columnsview.hpp>
+#include "columnsview.hpp"
 // Okteta core
 #include <Okteta/AddressRange>
 // Qt

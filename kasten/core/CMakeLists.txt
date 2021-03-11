@@ -3,10 +3,6 @@ set(OKTETAKASTENCORE_SO_VERSION ${OKTETAKASTEN_LIB_SOVERSION})
 
 add_definitions(-DTRANSLATION_DOMAIN=\"liboktetakasten\")
 
-include_directories(
-  document
-)
-
 macro(OKTETAKASTENCORE_ADD_SUBLIBRARY _subdir)
     okteta_add_sublibrary(Core NAMESPACE Okteta Kasten
         REVERSE_NAMESPACE_INCLUDEDIR
@@ -58,6 +54,11 @@ okteta_add_library(Core NAMESPACE Okteta Kasten
     REVERSE_NAMESPACE_INCLUDEDIR
     REVERSE_NAMESPACE_LIB
 )
+target_include_directories(OktetaKastenCore
+    PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/document>
+)
+
 
 okteta_add_cmakeconfig(Core NAMESPACE Okteta Kasten
 )

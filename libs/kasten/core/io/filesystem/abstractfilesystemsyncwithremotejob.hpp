@@ -10,8 +10,8 @@
 #define KASTEN_ABSTRACTFILESYSTEMSYNCWITHREMOTEJOB_HPP
 
 // library
-#include <kasten/abstractsyncwithremotejob.hpp>
-#include <kasten/abstractmodelsynchronizer.hpp>
+#include "abstractsyncwithremotejob.hpp"
+#include "abstractmodelsynchronizer.hpp"
 
 class QUrl;
 class QFile;

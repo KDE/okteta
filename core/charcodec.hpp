@@ -10,9 +10,9 @@
 #define OKTETA_CHARCODEC_HPP
 
 // lib
-#include <okteta/oktetacore.hpp>
-#include <okteta/oktetacore_export.hpp>
-#include <okteta/byte.hpp>
+#include "oktetacore_export.hpp"
+#include "oktetacore.hpp"
+#include "byte.hpp"
 
 class QStringList;
 class QChar;

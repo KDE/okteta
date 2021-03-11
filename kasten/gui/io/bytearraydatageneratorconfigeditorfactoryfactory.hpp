@@ -10,7 +10,7 @@
 #define KASTEN_BYTEARRAYDATAGENERATORCONFIGEDITORFACTORYFACTORY_HPP
 
 // lib
-#include <kasten/okteta/oktetakastengui_export.hpp>
+#include "oktetakastengui_export.hpp"
 
 template <class T> class QVector;
 

@@ -12,7 +12,7 @@
 
 #include <QScriptValue>
 
-#include "../poddecoder/typeeditors/sintspinbox.hpp"
+#include <view/poddecoder/typeeditors/sintspinbox.hpp>
 #include "../sintdatainformation.hpp"
 
 QString SignedBitfieldDataInformation::valueStringImpl() const

@@ -9,7 +9,7 @@
 #include "fixedsizebytearraymodel.hpp"
 
 // lib
-#include <arraychangemetricslist.hpp>
+#include "arraychangemetricslist.hpp"
 // Std
 #include <cstring>
 

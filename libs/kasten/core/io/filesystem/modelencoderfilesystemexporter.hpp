@@ -10,7 +10,7 @@
 #define KASTEN_MODELENCODERFILESYSTEMEXPORTER_HPP
 
 // lib
-#include <kasten/abstractmodelexporter.hpp>
+#include "abstractmodelexporter.hpp"
 
 namespace Kasten {
 

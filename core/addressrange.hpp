@@ -10,9 +10,9 @@
 #define OKTETA_ADDRESSRANGE_HPP
 
 // lib
-#include <okteta/numberrange.hpp>
-#include <okteta/address.hpp>
-#include <okteta/size.hpp>
+#include "numberrange.hpp"
+#include "address.hpp"
+#include "size.hpp"
 
 namespace Okteta {
 

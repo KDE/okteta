@@ -10,7 +10,7 @@
 #define KASTEN_DUMMYVIEW_HPP
 
 // lib
-#include <kasten/abstractview.hpp>
+#include "abstractview.hpp"
 
 class QLabel;
 

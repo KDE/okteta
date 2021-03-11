@@ -10,8 +10,8 @@
 #define KASTEN_ABSTRACTFILESYSTEMCONNECTJOB_HPP
 
 // library
-#include <kasten/abstractconnectjob.hpp>
-#include <kasten/abstractmodelsynchronizer.hpp>
+#include "abstractconnectjob.hpp"
+#include "abstractmodelsynchronizer.hpp"
 
 class QFile;
 

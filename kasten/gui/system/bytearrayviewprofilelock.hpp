@@ -10,7 +10,7 @@
 #define KASTEN_BYTEARRAYVIEWPROFILELOCK_HPP
 
 // lib
-#include <kasten/okteta/bytearrayviewprofile.hpp>
+#include "bytearrayviewprofile.hpp"
 // Qt
 #include <QSharedDataPointer>
 

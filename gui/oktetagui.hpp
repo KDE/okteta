@@ -10,9 +10,9 @@
 #define OKTETAGUI_HPP
 
 // this
-#include <okteta/lineposition.hpp>
+#include "lineposition.hpp"
 // ColumnsView
-#include <okteta/pixelmetrics.hpp>
+#include "pixelmetrics.hpp"
 // Okteta core
 #include <Okteta/Byte>
 #include <Okteta/OktetaCore>

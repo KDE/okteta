@@ -10,7 +10,7 @@
 #define OKTETA_BORDERCOLUMNRENDERER_HPP
 
 // lib
-#include <okteta/abstractcolumnrenderer.hpp>
+#include "abstractcolumnrenderer.hpp"
 
 namespace Okteta {
 

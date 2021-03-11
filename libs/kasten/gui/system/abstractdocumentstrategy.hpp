@@ -10,7 +10,7 @@
 #define KASTEN_ABSTRACTDOCUMENTSTRATEGY_HPP
 
 // lib
-#include <kasten/kastengui_export.hpp>
+#include "kastengui_export.hpp"
 // Qt
 #include <QObject>
 

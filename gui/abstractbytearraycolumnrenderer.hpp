@@ -10,9 +10,9 @@
 #define OKTETA_ABSTRACTBYTEARRAYCOLUMNRENDERER_HPP
 
 // ColumnsView
-#include <okteta/abstractcolumnrenderer.hpp>
-#include <okteta/linepositionrange.hpp>
-#include <okteta/linerange.hpp>
+#include "abstractcolumnrenderer.hpp"
+#include "linepositionrange.hpp"
+#include "linerange.hpp"
 // Okteta core
 #include <Okteta/OktetaCore>
 #include <Okteta/Address>

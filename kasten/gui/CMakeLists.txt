@@ -3,14 +3,6 @@ set(OKTETAKASTENGUI_SO_VERSION ${OKTETAKASTEN_LIB_SOVERSION})
 
 add_definitions(-DTRANSLATION_DOMAIN=\"liboktetakasten\")
 
-include_directories(
-    system
-    io
-    view
-    io/streamencoder
-    liboktetawidgets
-)
-
 macro(OKTETAKASTENGUI_ADD_SUBLIBRARY _subdir)
     okteta_add_sublibrary(Gui NAMESPACE Okteta Kasten
         REVERSE_NAMESPACE_INCLUDEDIR
@@ -181,6 +173,15 @@ okteta_add_library(Gui NAMESPACE Okteta Kasten
     REVERSE_NAMESPACE_INCLUDEDIR
     REVERSE_NAMESPACE_LIB
     NO_TARGET_NAMESPACE
+)
+
+target_include_directories(OktetaKastenGui
+    PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/system>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/io>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/view>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/io/streamencoder>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/liboktetawidgets>
 )
 
 okteta_add_cmakeconfig(Gui NAMESPACE Okteta Kasten

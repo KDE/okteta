@@ -10,9 +10,9 @@
 #define OKTETA_VALUECODEC_HPP
 
 // lib
-#include <okteta/oktetacore.hpp>
-#include <okteta/oktetacore_export.hpp>
-#include <okteta/byte.hpp>
+#include "oktetacore.hpp"
+#include "oktetacore_export.hpp"
+#include "byte.hpp"
 
 class QString;
 

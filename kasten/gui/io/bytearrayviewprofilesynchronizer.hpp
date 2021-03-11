@@ -10,8 +10,8 @@
 #define KASTEN_BYTEARRAYVIEWPROFILESYNCHRONIZER_HPP
 
 // lib
-#include <kasten/okteta/oktetakastengui_export.hpp>
-#include <kasten/okteta/bytearrayviewprofile.hpp>
+#include "oktetakastengui_export.hpp"
+#include "bytearrayviewprofile.hpp"
 // Kasten core
 #include <Kasten/KastenCore>
 // Qt Core

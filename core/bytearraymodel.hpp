@@ -10,9 +10,9 @@
 #define OKTETA_BYTEARRAYMODEL_HPP
 
 // lib
-#include <okteta/abstractbytearraymodel.hpp>
-#include <okteta/bookmarkable.hpp>
-#include <okteta/bookmarksconstiterator.hpp>
+#include "abstractbytearraymodel.hpp"
+#include "bookmarkable.hpp"
+#include "bookmarksconstiterator.hpp"
 
 namespace Okteta {
 

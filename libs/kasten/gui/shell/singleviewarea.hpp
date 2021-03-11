@@ -10,8 +10,8 @@
 #define KASTEN_SINGLEVIEWAREA_HPP
 
 // lib
-#include <kasten/abstractviewarea.hpp>
-#include <kasten/toolinlineviewable.hpp>
+#include "abstractviewarea.hpp"
+#include "toolinlineviewable.hpp"
 
 class QMimeData;
 

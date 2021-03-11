@@ -10,7 +10,7 @@
 #define OKTETA_LINERANGE_HPP
 
 // lib
-#include <okteta/line.hpp>
+#include "line.hpp"
 // Okteta core
 #include <Okteta/NumberRange>
 

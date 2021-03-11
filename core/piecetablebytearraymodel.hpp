@@ -10,11 +10,11 @@
 #define OKTETA_PIECETABLEBYTEARRAYMODEL_HPP
 
 // lib
-#include <okteta/abstractbytearraymodel.hpp>
-#include <okteta/versionable.hpp>
-#include <okteta/bookmarkable.hpp>
-#include <okteta/changesdescribable.hpp>
-#include <okteta/changehistory.hpp>
+#include "abstractbytearraymodel.hpp"
+#include "versionable.hpp"
+#include "bookmarkable.hpp"
+#include "changesdescribable.hpp"
+#include "changehistory.hpp"
 
 namespace Okteta {
 

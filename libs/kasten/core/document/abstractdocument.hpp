@@ -10,10 +10,9 @@
 #define KASTEN_ABSTRACTDOCUMENT_HPP
 
 // lib
-#include <kasten/kastencore_export.hpp>
-#include <kasten/kastencore.hpp>
-// lib
-#include <kasten/abstractmodel.hpp>
+#include "kastencore_export.hpp"
+#include "kastencore.hpp"
+#include "abstractmodel.hpp"
 
 namespace Kasten {
 class AbstractModelSynchronizer;

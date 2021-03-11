@@ -3,10 +3,6 @@ set(OKTETAGUI_SO_VERSION ${OKTETALIBS_LIB_SOVERSION})
 
 add_definitions(-DTRANSLATION_DOMAIN=\"liboktetagui\")
 
-include_directories(
-    libcolumnsview
-)
-
 macro(OKTETAGUI_ADD_SUBLIBRARY _subdir)
     okteta_add_sublibrary(Gui NAMESPACE Okteta
         SUBDIR ${_subdir}
@@ -97,6 +93,10 @@ okteta_add_library(Gui NAMESPACE Okteta
     NO_TARGET_NAMESPACE
     NO_VERSIONED_INCLUDEDIR
     NO_VERSIONED_PACKAGE_NAME
+)
+
+target_include_directories(OktetaGui
+    PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/libcolumnsview>
 )
 
 okteta_add_cmakeconfig(Gui NAMESPACE Okteta

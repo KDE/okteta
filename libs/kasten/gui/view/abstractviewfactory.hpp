@@ -10,7 +10,7 @@
 #define KASTEN_ABSTRACTVIEWFACTORY_HPP
 
 // lib
-#include <kasten/abstractview.hpp>
+#include "abstractview.hpp"
 
 namespace Kasten {
 

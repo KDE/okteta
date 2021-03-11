@@ -10,7 +10,7 @@
 #define OKTETA_ADDRESSRANGELIST_HPP
 
 // lib
-#include <okteta/addressrange.hpp>
+#include "addressrange.hpp"
 // Qt
 #include <QLinkedList>
 

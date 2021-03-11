@@ -10,7 +10,7 @@
 #define OKTETA_CHANGEHISTORY_HPP
 
 // lib
-#include <okteta/bytearraychange.hpp>
+#include "bytearraychange.hpp"
 // Qt
 #include <QVector>
 #include <QtPlugin>

@@ -10,7 +10,7 @@
 #define KASTEN_ABSTRACTMODELFILESYSTEMSYNCHRONIZER_HPP
 
 // lib
-#include <kasten/abstractmodelsynchronizer.hpp>
+#include "abstractmodelsynchronizer.hpp"
 
 class KDirWatch;
 class QDateTime;

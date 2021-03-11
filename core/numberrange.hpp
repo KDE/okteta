@@ -10,7 +10,7 @@
 #define OKTETA_NUMBERRANGE_HPP
 
 // lib
-#include <okteta/range.hpp>
+#include "range.hpp"
 
 namespace Okteta {
 

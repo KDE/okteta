@@ -10,10 +10,10 @@
 #define OKTETA_BYTEARRAYROWCOLUMNRENDERER_HPP
 
 // lib
-#include <okteta/abstractbytearrayview.hpp>
+#include "abstractbytearrayview.hpp"
 // ColumnsView
-#include <okteta/abstractcolumnrenderer.hpp>
-#include <okteta/linepositionrange.hpp>
+#include "abstractcolumnrenderer.hpp"
+#include "linepositionrange.hpp"
 // Okteta core
 #include <Okteta/OktetaCore>
 #include <Okteta/Byte>

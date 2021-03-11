@@ -10,7 +10,7 @@
 #define KASTEN_PODDECODERTOOLVIEWFACTORY_HPP
 
 // lib
-#include <kasten/okteta/oktetakastencontrollers_export.hpp>
+#include "oktetakastencontrollers_export.hpp"
 // Kasten gui
 #include <Kasten/AbstractToolViewFactory>
 

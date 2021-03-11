@@ -10,9 +10,9 @@
 #define OKTETA_COLUMNSVIEW_HPP
 
 // lib
-#include <okteta/oktetagui_export.hpp>
-#include <okteta/pixelmetrics.hpp>
-#include <okteta/linerange.hpp>
+#include "oktetagui_export.hpp"
+#include "pixelmetrics.hpp"
+#include "linerange.hpp"
 // Qt
 #include <QAbstractScrollArea>
 

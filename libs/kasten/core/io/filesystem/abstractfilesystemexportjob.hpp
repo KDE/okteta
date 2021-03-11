@@ -10,7 +10,7 @@
 #define KASTEN_ABSTRACTFILESYSTEMEXPORTJOB_HPP
 
 // lib
-#include <kasten/abstractexportjob.hpp>
+#include "abstractexportjob.hpp"
 
 class QUrl;
 class QFile;

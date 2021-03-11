@@ -10,7 +10,7 @@
 #define KASTEN_ABSTRACTVIEW_HPP
 
 // lib
-#include <kasten/kastengui_export.hpp>
+#include "kastengui_export.hpp"
 // Kasten core
 #include <Kasten/AbstractDocument>
 

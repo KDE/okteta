@@ -10,7 +10,7 @@
 #define KASTEN_LOADERCONTROLLERFACTORY_HPP
 
 // lib
-#include <kasten/kastencontrollers_export.hpp>
+#include "kastencontrollers_export.hpp"
 // Kasten core
 #include <Kasten/AbstractXmlGuiControllerFactory>
 

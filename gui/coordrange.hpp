@@ -10,9 +10,9 @@
 #define OKTETA_COORDRANGE_HPP
 
 // lib
-#include <okteta/coord.hpp>
-#include <okteta/linepositionrange.hpp>
-#include <okteta/linerange.hpp>
+#include "coord.hpp"
+#include "linepositionrange.hpp"
+#include "linerange.hpp"
 // Okteta core
 #include <Okteta/Range>
 

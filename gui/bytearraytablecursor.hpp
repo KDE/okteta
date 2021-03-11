@@ -10,7 +10,7 @@
 #define OKTETA_BYTEARRAYTABLECURSOR_HPP
 
 // lib
-#include <okteta/coord.hpp>
+#include "coord.hpp"
 
 namespace Okteta {
 class ArrayChangeMetricsList;

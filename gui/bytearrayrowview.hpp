@@ -10,7 +10,7 @@
 #define OKTETA_BYTEARRAYROWVIEW_HPP
 
 // lib
-#include <okteta/abstractbytearrayview.hpp>
+#include "abstractbytearrayview.hpp"
 
 namespace Okteta {
 class ByteArrayRowViewPrivate;

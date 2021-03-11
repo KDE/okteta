@@ -10,7 +10,7 @@
 #define OKTETA_CHARACTER_HPP
 
 // lib
-#include <okteta/oktetacore_export.hpp>
+#include "oktetacore_export.hpp"
 // Qt
 #include <QChar>
 
