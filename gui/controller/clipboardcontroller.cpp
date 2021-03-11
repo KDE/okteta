@@ -36,7 +36,7 @@ bool ClipboardController::handleKeyPress(QKeyEvent* keyEvent)
     if (keyEvent == QKeySequence::Copy) {
         mView->copy();
         keyUsed = true;
-    } else if (!mView->isReadOnly() && !mView->byteArrayModel()->isReadOnly()) {
+    } else if (!mView->isReadOnly()) {
         if (keyEvent == QKeySequence::Cut) {
             mView->cut();
             keyUsed = true;
@@ -57,7 +57,7 @@ int ClipboardController::addContextMenuActions(QMenu* menu)
     copyAction->setEnabled(mView->hasSelectedData());
     copyAction->setObjectName(QStringLiteral("edit-copy"));
 
-    if (mView->isReadOnly() || mView->byteArrayModel()->isReadOnly()) {
+    if (mView->isReadOnly()) {
         return 1;
     }
 
