@@ -13,10 +13,10 @@
 // Okteta Kasten gui
 #include <Kasten/Okteta/AddressComboBox>
 // KF
-#include <QPushButton>
 #include <KGuiItem>
 #include <KLocalizedString>
 // Qt
+#include <QPushButton>
 #include <QCheckBox>
 #include <QLabel>
 #include <QLayout>
