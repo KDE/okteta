@@ -1150,6 +1150,10 @@ bool AbstractByteArrayViewPrivate::event(QEvent* event)
                 return true;
             }
         }
+    } else if ((event->type() == QEvent::PaletteChange)) {
+        if (mCursorVisible) {
+            updateCursors();
+        }
     } else if ((event->type() == QEvent::ContextMenu) &&
                (static_cast<QContextMenuEvent*>(event)->reason() == QContextMenuEvent::Keyboard)) {
         ensureCursorVisible();
