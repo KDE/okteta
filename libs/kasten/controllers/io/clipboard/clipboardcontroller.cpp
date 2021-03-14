@@ -61,18 +61,31 @@ void ClipboardController::setTargetModel(AbstractModel* model)
             connect(mModel, &AbstractModel::readOnlyChanged,
                     this, &ClipboardController::onReadOnlyChanged);
         }
+
+        mCutControl = nullptr;
+        const auto children = mModel->findChildren<QObject*>(QString(), Qt::FindDirectChildrenOnly);
+        for (auto* child : children) {
+            mCutControl = qobject_cast<If::SelectedDataCutable*>(child);
+            if (mCutControl) {
+                connect(child, SIGNAL(canCutSelectedDataChanged(bool)),
+                        this, SLOT(onCanCutSelectedDataChanged(bool)));
+                break;
+            }
+        }
     } else {
         mMimeDataControl = nullptr;
+        mCutControl = nullptr;
     }
 
     const QMimeData* mimeData = QApplication::clipboard()->mimeData(QClipboard::Clipboard);
 
     const bool hasSelectedData = mSelectionControl ? mSelectionControl->hasSelectedData() : false;
     const bool isWriteable = (mMimeDataControl && !mModel->isReadOnly());
+    const bool isCutable = (hasSelectedData && isWriteable && (!mCutControl || mCutControl->canCutSelectedData()));
     const bool isPastable = isWriteable && !mimeData->formats().isEmpty() && mMimeDataControl->canReadData(mimeData);
 
     mCopyAction->setEnabled(hasSelectedData);
-    mCutAction->setEnabled(hasSelectedData && isWriteable);
+    mCutAction->setEnabled(isCutable);
     mPasteAction->setEnabled(isPastable);
 }
 
@@ -109,18 +122,33 @@ void ClipboardController::onReadOnlyChanged(bool isReadOnly)
 
     const bool hasSelectedData = mSelectionControl ? mSelectionControl->hasSelectedData() : false;
     const bool isWriteable = !isReadOnly;
+    // backward compatibility: assume true by default
+    const bool canCutSelectedData = mCutControl ? mCutControl->canCutSelectedData() : true;
+    const bool isCutable = (hasSelectedData && isWriteable && canCutSelectedData);
     const bool isPastable = isWriteable && !mimeData->formats().isEmpty() && mMimeDataControl->canReadData(mimeData);
 
-    mCutAction->setEnabled(hasSelectedData && isWriteable);
+    mCutAction->setEnabled(isCutable);
     mPasteAction->setEnabled(isPastable);
 }
 
 void ClipboardController::onHasSelectedDataChanged(bool hasSelectedData)
 {
     const bool isWriteable = (mMimeDataControl && !mModel->isReadOnly());
+    // backward compatibility: assume true by default
+    const bool canCutSelectedData = mCutControl ? mCutControl->canCutSelectedData() : true;
+    const bool isCutable = (hasSelectedData && isWriteable && canCutSelectedData);
 
     mCopyAction->setEnabled(hasSelectedData);
-    mCutAction->setEnabled(hasSelectedData && isWriteable);
+    mCutAction->setEnabled(isCutable);
+}
+
+void ClipboardController::onCanCutSelectedDataChanged(bool canCutSelectedData)
+{
+    const bool hasSelectedData = mSelectionControl ? mSelectionControl->hasSelectedData() : false;
+    const bool isWriteable = (mMimeDataControl && !mModel->isReadOnly());
+    const bool isCutable = (hasSelectedData && isWriteable && canCutSelectedData);
+
+    mCutAction->setEnabled(isCutable);
 }
 
 void ClipboardController::onClipboardDataChanged()

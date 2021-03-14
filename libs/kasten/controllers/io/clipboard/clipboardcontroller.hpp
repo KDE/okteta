@@ -20,6 +20,7 @@ namespace Kasten {
 namespace If {
 class DataSelectable;
 class SelectedDataWriteable;
+class SelectedDataCutable;
 }
 
 class ClipboardController : public AbstractXmlGuiController
@@ -39,6 +40,7 @@ private Q_SLOTS: // action slots
 
 private Q_SLOTS:
     void onHasSelectedDataChanged(bool hasSelectedData);
+    void onCanCutSelectedDataChanged(bool canCutSelectedData);
     void onReadOnlyChanged(bool isReadOnly);
     void onClipboardDataChanged();
 
@@ -46,6 +48,7 @@ private:
     AbstractModel* mModel = nullptr;
     If::DataSelectable* mSelectionControl = nullptr;
     If::SelectedDataWriteable* mMimeDataControl = nullptr;
+    If::SelectedDataCutable* mCutControl = nullptr;
 
     QAction* mCutAction;
     QAction* mCopyAction;

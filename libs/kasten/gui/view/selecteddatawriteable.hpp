@@ -40,9 +40,29 @@ public:
 
 inline SelectedDataWriteable::~SelectedDataWriteable() = default;
 
+// TODO: merge into SelectedDataWriteable and solve overwrite question in general on next ABI break
+// Expected to be defined on a direct QObject child of the actual object, not the object itself
+// Since 0.4.1
+class SelectedDataCutable
+{
+public:
+    virtual ~SelectedDataCutable();
+
+public: // get
+    // reports principle ability to cut selecteed data if there is some, also if currently there is none
+    // TODO; does that make sense, or should be changed to also match only if there is selected data?
+    virtual bool canCutSelectedData() const = 0;
+
+public: // signal
+    virtual void canCutSelectedDataChanged(bool canCutSelectedData) = 0;
+};
+
+inline SelectedDataCutable::~SelectedDataCutable() = default;
+
 }
 }
 
 Q_DECLARE_INTERFACE(Kasten::If::SelectedDataWriteable, "org.kde.kasten.if.selecteddatawriteable/1.0")
+Q_DECLARE_INTERFACE(Kasten::If::SelectedDataCutable, "org.kde.kasten.if.selecteddatacutable/1.0")
 
 #endif

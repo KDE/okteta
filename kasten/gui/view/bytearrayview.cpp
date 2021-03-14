@@ -22,6 +22,43 @@
 
 namespace Kasten {
 
+// TODO: merge into ByteArrayView on next ABI break
+class SelectedDataCutExtension : public QObject, public If::SelectedDataCutable
+{
+    Q_OBJECT
+    Q_INTERFACES(
+        Kasten::If::SelectedDataCutable
+    )
+
+public:
+    explicit SelectedDataCutExtension(ByteArrayView* view);
+
+public: // If::SelectedDataCutable API
+    bool canCutSelectedData() const override;
+Q_SIGNALS:
+    void canCutSelectedDataChanged(bool canCutSelectedData) override;
+
+private Q_SLOTS:
+    void onOverwriteModeChanged(bool overwriteMode);
+};
+
+SelectedDataCutExtension::SelectedDataCutExtension(ByteArrayView* view)
+    : QObject(view)
+{
+    connect(view, &ByteArrayView::overwriteModeChanged, this, &SelectedDataCutExtension::onOverwriteModeChanged);
+}
+
+bool SelectedDataCutExtension::canCutSelectedData() const
+{
+    return !static_cast<ByteArrayView*>(parent())->isOverwriteMode();
+}
+
+void SelectedDataCutExtension::onOverwriteModeChanged(bool overwriteMode)
+{
+    emit canCutSelectedDataChanged(!overwriteMode);
+}
+
+
 ByteArrayView::ByteArrayView(ByteArrayDocument* document, ByteArrayViewProfileSynchronizer* synchronizer)
     : AbstractView(document)
     , mDocument(document)
@@ -136,6 +173,8 @@ void ByteArrayView::init()
     connect(mWidget, &ByteArrayJanusView::viewModusChanged, this, &ByteArrayView::viewModusChanged);
 
     connect(mWidget, &ByteArrayJanusView::viewContextMenuRequested, this, &ByteArrayView::viewContextMenuRequested);
+
+    new SelectedDataCutExtension(this);
 }
 
 ByteArrayViewProfileSynchronizer* ByteArrayView::synchronizer() const { return mByteArrayViewProfileSynchronizer; }
@@ -411,3 +450,6 @@ void ByteArrayView::setFontByGlobalSettings()
 }
 
 }
+
+// needed for SelectedDataCutExtension
+#include "bytearrayview.moc"
