@@ -42,6 +42,9 @@ public:
     Selection& operator=(const Selection& other);
     Selection& operator=(const AddressRange& range);
 
+    bool operator==(const Selection& other) const;
+    bool operator!=(const Selection& other) const;
+
 public: // modification access
     /** starts the selection.
      * For this the anchor, start and end are set to the given index,
@@ -118,6 +121,15 @@ inline Selection& Selection::operator=(const AddressRange& range)
     mRange = range;
     mAnchor = range.start();
     return *this;
+}
+
+inline bool Selection::operator==(const Selection& other) const
+{
+    return (mRange == other.mRange) && (mAnchor == other.mAnchor);
+}
+inline bool Selection::operator!=(const Selection& other) const
+{
+    return (mRange != other.mRange) || (mAnchor != other.mAnchor);
 }
 
 inline void Selection::setStart(Address index)

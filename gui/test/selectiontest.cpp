@@ -66,6 +66,45 @@ void SelectionTest::testCopyConstructor()
     QVERIFY(selection.isForward());
 }
 
+void SelectionTest::testCompare()
+{
+    // invalid
+    Selection selection;
+    Selection otherSelection;
+    QVERIFY(selection == otherSelection);
+    QVERIFY(!(selection != otherSelection));
+
+    // justStarted
+    // same
+    selection.setStart(Start);
+    otherSelection.setStart(Start);
+    QVERIFY(selection == otherSelection);
+    QVERIFY(!(selection != otherSelection));
+
+    // different start
+    otherSelection.setStart(Start+1);
+    QVERIFY(!(selection == otherSelection));
+    QVERIFY(selection != otherSelection);
+
+    // range
+    // same
+    selection.setStart(Start);
+    selection.setEnd(End);
+    otherSelection.setStart(Start);
+    otherSelection.setEnd(End);
+    QVERIFY(selection == otherSelection);
+    QVERIFY(!(selection != otherSelection));
+    // different start
+    otherSelection.setStart(Start + 1);
+    QVERIFY(!(selection == otherSelection));
+    QVERIFY(selection != otherSelection);
+    // different end
+    otherSelection.setStart(Start);
+    otherSelection.setEnd(End+1);
+    QVERIFY(!(selection == otherSelection));
+    QVERIFY(selection != otherSelection);
+}
+
 void SelectionTest::testSetStart()
 {
     Selection selection;
