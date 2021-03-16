@@ -39,6 +39,8 @@ public:
 public:
     bool operator==(const Range& R) const
     { return (Start == R.Start && End == R.End) || (!isValid() && !R.isValid()); }
+    bool operator!=(const Range& R) const
+    { return ((Start != R.Start) || (End != R.End)) && (isValid() || R.isValid()); }
 
 public: // modification access
     /** sets the first and the last index of the range */
