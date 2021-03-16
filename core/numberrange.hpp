@@ -43,9 +43,6 @@ public:
     NumberRange& operator=(const NumberRange& other);
 
 public:
-    bool operator==(const NumberRange& other) const;
-
-public:
     void setByWidth(N other, S width);
     /** sets the first index of the range's range one behind the other's end
      * If one of both is invalid the behaviour is undefined
@@ -122,9 +119,6 @@ template <typename N, typename S>
 inline NumberRange<N, S> NumberRange<N, S>::fromWidth(N startIndex, S width) { return NumberRange(startIndex, startIndex + width - 1); }
 template <typename N, typename S>
 inline NumberRange<N, S> NumberRange<N, S>::fromWidth(S width) { return NumberRange<N, S>(0, width - 1); }
-
-template <typename N, typename S>
-inline bool NumberRange<N, S>::operator==(const NumberRange<N, S>& other) const { return Range<N>::operator==(other); }
 
 template <typename N, typename S>
 inline NumberRange<N, S>& NumberRange<N, S>::operator=(const NumberRange<N, S>& other) { Range<N>::operator=(other); return *this; }
