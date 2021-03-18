@@ -15,10 +15,13 @@
 #include "coordrangelist.hpp"
 // Okteta core
 #include <Okteta/AddressRange>
+// Qt
+#include <QScopedPointer>
 
 namespace Okteta {
 class ArrayChangeMetricsList;
 class ByteArrayTableLayout;
+class ByteArrayTableRangesPrivate;
 
 /** a class to control all the ranges like marking and selections
  * holds also all modified ranges and merges them so a repaint can take its info from here
@@ -58,6 +61,7 @@ public: // modifcation access
     void adaptToChanges(const ArrayChangeMetricsList& changeList, Size oldLength);
     void resetChangedRanges();
 
+    void takeHasSelectionChanged(bool* hasSelectionChanged, bool* selectionChanged);
     void setModified(bool M = true);
     /** removes all ranges */
     void reset();
@@ -104,7 +108,8 @@ private:
 
     CoordRangeList ChangedRanges;
 
-    ByteArrayTableLayout* mLayout;
+    const QScopedPointer<ByteArrayTableRangesPrivate> d_ptr;
+    Q_DECLARE_PRIVATE(ByteArrayTableRanges)
 };
 
 inline int ByteArrayTableRanges::noOfSelections()  const { return 1; }

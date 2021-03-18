@@ -130,14 +130,11 @@ void KeyNavigator::moveCursor(MoveAction action, bool select)
         tableRanges->setSelectionEnd(tableCursor->realIndex());
     }
 
-    if (tableRanges->isModified()) {
-        mView->emitSelectionSignals(); // TODO: can this be moved somewhere
-    }
-    emit mView->cursorPositionChanged(tableCursor->realIndex());
-    mView->updateChanged();
     mView->ensureCursorVisible();
 
+    mView->updateChanged();
     mView->unpauseCursor();
+    mView->emitSelectionSignals();
 }
 
 int KeyNavigator::addContextMenuActions(QMenu* menu)

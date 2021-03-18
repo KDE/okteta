@@ -231,6 +231,9 @@ protected: // API to be implemented
     virtual void updateChanged() = 0;
 
 private:
+    /** Emits updates on selection & cursor position after a change */
+    void emitSelectionUpdates();
+    void endViewUpdate();
     void onCursorFlashTimeChanged(int flashTime);
 
 protected:

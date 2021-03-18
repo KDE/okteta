@@ -471,13 +471,7 @@ void AbstractByteArrayView::emitSelectionSignals()
 {
     Q_D(AbstractByteArrayView);
 
-    const bool hasSelection = tableRanges()->hasSelection();
-    if (!d->isOverwriteMode()) {
-        emit cutAvailable(hasSelection);
-    }
-    emit copyAvailable(hasSelection);
-    emit selectionChanged(selection());
-    emit hasSelectedDataChanged(hasSelection);
+    d->emitSelectionUpdates();
 }
 
 void AbstractByteArrayView::updateChanged()

@@ -7,6 +7,7 @@
 */
 
 #include "bytearraytableranges.hpp"
+#include "bytearraytableranges_p.hpp"
 
 // lib
 #include "bytearraytablelayout.hpp"
@@ -16,7 +17,7 @@
 namespace Okteta {
 
 ByteArrayTableRanges::ByteArrayTableRanges(ByteArrayTableLayout* layout)
-    : mLayout(layout)
+    : d_ptr(new ByteArrayTableRangesPrivate(layout))
 {
 }
 
@@ -24,10 +25,12 @@ ByteArrayTableRanges::~ByteArrayTableRanges() = default;
 
 void ByteArrayTableRanges::reset()
 {
+    Q_D(ByteArrayTableRanges);
     mSelection.cancel();
     FirstWordSelection.unset();
     mMarking.unset();
     ChangedRanges.clear();
+    d->previousSelection = mSelection;
 }
 
 void ByteArrayTableRanges::setMarking(const AddressRange& marking)
@@ -241,8 +244,9 @@ void ByteArrayTableRanges::addChangedRange(Address startIndex, Address endIndex)
 
 void ByteArrayTableRanges::addChangedRange(const AddressRange& range)
 {
+    Q_D(ByteArrayTableRanges);
 // qCDebug(LOG_OKTETA_GUI) << "adding change range "<<S.start()<<","<<S.end();
-    addChangedRange(mLayout->coordRangeOfIndizes(range));
+    addChangedRange(d->layout->coordRangeOfIndizes(range));
 }
 
 void ByteArrayTableRanges::addChangedRange(const CoordRange& range)
@@ -259,6 +263,21 @@ void ByteArrayTableRanges::resetChangedRanges()
     mChangedOffsetLines.unset();
     ChangedRanges.clear();
     mModified = false;
+}
+
+void ByteArrayTableRanges::takeHasSelectionChanged(bool* hasSelectionChanged, bool* selectionChanged)
+{
+    Q_D(ByteArrayTableRanges);
+
+    const bool hadSelection = d->previousSelection.isValid();
+    const bool hasSelection = mSelection.isValid();
+    *hasSelectionChanged = (hadSelection != hasSelection);
+
+    *selectionChanged = (d->previousSelection != mSelection);
+
+    if (*selectionChanged) {
+        d->previousSelection = mSelection;
+    }
 }
 
 void ByteArrayTableRanges::setFirstWordSelection(const AddressRange& range)

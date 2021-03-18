@@ -53,8 +53,6 @@ bool MouseNavigator::handleMousePressEvent(QMouseEvent* mouseEvent)
         ByteArrayTableRanges* tableRanges = mView->tableRanges();
         ByteArrayTableLayout* tableLayout = mView->layout();
 
-        const bool oldHasSelection = tableRanges->hasSelection();
-
         mView->pauseCursor();
         mView->finishByteEdit();
 
@@ -69,20 +67,8 @@ bool MouseNavigator::handleMousePressEvent(QMouseEvent* mouseEvent)
             tableCursor->gotoIndex(indexAtFirstDoubleClickLinePosition);
             tableCursor->gotoLineEnd();
             tableRanges->setSelectionEnd(mView->cursorPosition());
+
             mView->updateChanged();
-
-            mView->unpauseCursor();
-
-            const bool newHasSelection = tableRanges->hasSelection();
-            emit mView->cursorPositionChanged(mView->cursorPosition());
-            emit mView->selectionChanged(tableRanges->selection());
-            if (oldHasSelection != newHasSelection) {
-                if (!mView->isOverwriteMode()) {
-                    emit mView->cutAvailable(newHasSelection);
-                }
-                emit mView->copyAvailable(newHasSelection);
-                emit mView->hasSelectedDataChanged(newHasSelection);
-            }
         } else {
             // TODO: pos() is now, not at the moment of the event, use globalPos() for that,.says dox
             const QPoint mousePoint = mView->viewportToColumns(mouseEvent->pos());
@@ -119,19 +105,11 @@ bool MouseNavigator::handleMousePressEvent(QMouseEvent* mouseEvent)
                 mView->updateChanged();
                 mView->viewport()->setCursor(mView->isReadOnly() ? Qt::ArrowCursor : Qt::IBeamCursor);
             }
-
-            mView->unpauseCursor();
-
-            const bool newHasSelection = tableRanges->hasSelection();
-            emit mView->selectionChanged(tableRanges->selection());
-            if (oldHasSelection != newHasSelection) {
-                if (!mView->isOverwriteMode()) {
-                    emit mView->cutAvailable(newHasSelection);
-                }
-                emit mView->copyAvailable(newHasSelection);
-                emit mView->hasSelectedDataChanged(newHasSelection);
-            }
         }
+
+        mView->unpauseCursor();
+        mView->emitSelectionSignals();
+
         eventUsed = true;
     }
 
@@ -180,7 +158,6 @@ bool MouseNavigator::handleMouseReleaseEvent(QMouseEvent* mouseEvent)
     if (mouseEvent->button() == Qt::LeftButton) {
         ByteArrayTableRanges* tableRanges = mView->tableRanges();
 
-        const bool oldHasSelection = tableRanges->hasSelection();
 //         const QPoint releasePoint = mView->viewportToColumns( mouseEvent->pos() );
 
         // this is not the release of a doubleclick so we need to process it?
@@ -225,15 +202,7 @@ bool MouseNavigator::handleMouseReleaseEvent(QMouseEvent* mouseEvent)
             tableRanges->removeSelection();
         }
 
-        const bool newHasSelection = tableRanges->hasSelection();
-        emit mView->selectionChanged(tableRanges->selection());
-        if (oldHasSelection != newHasSelection) {
-            if (!mView->isOverwriteMode()) {
-                emit mView->cutAvailable(newHasSelection);
-            }
-            emit mView->copyAvailable(newHasSelection);
-            emit mView->hasSelectedDataChanged(newHasSelection);
-        }
+        mView->emitSelectionSignals();
         eventUsed = true;
     }
 
@@ -283,7 +252,6 @@ void MouseNavigator::handleMouseMove(QPoint point)   // handles the move of the 
     ByteArrayTableCursor* tableCursor = mView->tableCursor();
     ByteArrayTableRanges* tableRanges = mView->tableRanges();
 
-    const bool oldHasSelection = tableRanges->hasSelection();
     const int yOffset = mView->yOffset();
     const int behindLastYOffset = yOffset + mView->visibleHeight();
     // scrolltimer but inside of viewport?
@@ -332,19 +300,8 @@ void MouseNavigator::handleMouseMove(QPoint point)   // handles the move of the 
     }
 
     mView->updateChanged();
-
     mView->unpauseCursor();
-
-    const bool newHasSelection = tableRanges->hasSelection();
-    emit mView->cursorPositionChanged(mView->cursorPosition());
-    emit mView->selectionChanged(tableRanges->selection());
-    if (oldHasSelection != newHasSelection) {
-        if (!mView->isOverwriteMode()) {
-            emit mView->cutAvailable(newHasSelection);
-        }
-        emit mView->copyAvailable(newHasSelection);
-        emit mView->hasSelectedDataChanged(newHasSelection);
-    }
+    mView->emitSelectionSignals();
 }
 
 void MouseNavigator::startDrag()
