@@ -825,13 +825,15 @@ void AbstractByteArrayViewPrivate::insert(const QByteArray& data)
 {
     Q_Q(AbstractByteArrayView);
 
+    Size lengthOfInserted;
+    Address insertionOffset = -1;
     if (mOverWrite) {
-        Size lengthOfInserted;
         if (mTableRanges->hasSelection()) {
             // replacing the selection:
             // we restrict the replacement to the minimum length of selection and input
             AddressRange selection = mTableRanges->removeSelection();
             selection.restrictEndByWidth(data.size());
+            insertionOffset = selection.start();
             lengthOfInserted = mByteArrayModel->replace(selection, reinterpret_cast<const Byte*>(data.constData()), selection.width());
         } else {
             const Size length = mTableLayout->length();
@@ -839,25 +841,31 @@ void AbstractByteArrayViewPrivate::insert(const QByteArray& data)
                 // replacing the normal data, at least until the end
                 AddressRange insertRange = AddressRange::fromWidth(cursorPosition(), data.size());
                 insertRange.restrictEndTo(length - 1);
+                insertionOffset = insertRange.start();
                 lengthOfInserted = mByteArrayModel->replace(insertRange, reinterpret_cast<const Byte*>(data.constData()), insertRange.width());
             } else {
                 lengthOfInserted = 0;
             }
         }
-        // if inserting ourself we want to place the cursor at the end of the inserted data
-        if (lengthOfInserted > 0) {
-            pauseCursor();
-            mTableCursor->gotoNextByte(lengthOfInserted);
-            unpauseCursor();
-            emit q->cursorPositionChanged(cursorPosition());
-        }
     } else {
         if (mTableRanges->hasSelection()) {
             // replacing the selection
             const AddressRange selection = mTableRanges->removeSelection();
-            mByteArrayModel->replace(selection, data);
+            insertionOffset = selection.start();
+            lengthOfInserted = mByteArrayModel->replace(selection, data);
         } else {
-            mByteArrayModel->insert(cursorPosition(), data);
+            insertionOffset = cursorPosition();
+            lengthOfInserted = mByteArrayModel->insert(insertionOffset, data);
+        }
+    }
+    // if inserting ourself we want to place the cursor at the end of the inserted data
+    if (lengthOfInserted > 0) {
+        const Address postInsertionOffset = insertionOffset + lengthOfInserted;
+        if (postInsertionOffset != cursorPosition()) {
+            pauseCursor();
+            mTableCursor->gotoCIndex(postInsertionOffset);
+            unpauseCursor();
+            emit q->cursorPositionChanged(cursorPosition());
         }
     }
 }
