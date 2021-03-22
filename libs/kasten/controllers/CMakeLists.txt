@@ -81,6 +81,7 @@ kastencontrollers_add_sublibrary(document/modified
         ModifiedBarControllerFactory
     PRIVATE
         ModifiedBarController
+        IconLabel
 )
 
 kastencontrollers_add_sublibrary(document/readonly
