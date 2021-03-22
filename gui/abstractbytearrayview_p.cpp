@@ -16,7 +16,12 @@
 #include "controller/dropper.hpp"
 #include "controller/mousenavigator.hpp"
 #include "controller/mousepaster.hpp"
+#include "controller/tapnavigator.hpp"
 #include "controller/zoomwheelcontroller.hpp"
+#include "controller/zoompinchcontroller.hpp"
+#include "controller/touchonlytapandholdgesture.hpp"
+#include "controller/touchonlytapandholdgesturerecognizer.hpp"
+
 #include "widgetcolumnstylist.hpp"
 #include "cursor.hpp"
 #include "bordercolumnrenderer.hpp"
@@ -30,18 +35,24 @@
 // KF
 #include <KLocalizedString>
 // Qt
+#include <QScroller>
 #include <QPainter>
 #include <QDragEnterEvent>
 #include <QDragMoveEvent>
 #include <QDragLeaveEvent>
 #include <QDropEvent>
 #include <QTimerEvent>
+#include <QGestureEvent>
+#include <QTapGesture>
+#include <QPinchGesture>
 #include <QStyleHints>
 #include <QApplication>
 #include <QToolTip>
 #include <QMimeData>
 #include <QMenu>
 #include <QIcon>
+#include <QScroller>
+#include <QScrollerProperties>
 
 namespace Okteta {
 
@@ -115,6 +126,13 @@ void NullModel::setModified(bool modified)
 
 Q_GLOBAL_STATIC(NullModel, nullModel)
 
+Qt::GestureType touchOnlyTapAndHoldGestureType()
+{
+    static Qt::GestureType type =
+        QGestureRecognizer::registerRecognizer(new TouchOnlyTapAndHoldGestureRecognizer);
+    return type;
+}
+
 AbstractByteArrayViewPrivate::AbstractByteArrayViewPrivate(AbstractByteArrayView* parent)
     : ColumnsViewPrivate(parent)
     , mByteArrayModel(nullModel())
@@ -149,6 +167,9 @@ AbstractByteArrayViewPrivate::~AbstractByteArrayViewPrivate()
     delete mClipboardController;
     delete mUndoRedoController;
     delete mTabController;
+
+    delete mZoomPinchController;
+    delete mTapNavigator;
 
     delete mStylist;
 
@@ -191,9 +212,11 @@ void AbstractByteArrayViewPrivate::init()
     mMousePaster = new MousePaster(q, nullptr);
     mMouseNavigator = new MouseNavigator(q, mMousePaster);
     mMouseController = mMouseNavigator;
+    mTapNavigator = new TapNavigator(q);
 
     mZoomWheelController = new ZoomWheelController(q, nullptr);
     mDropper = new Dropper(q);
+    mZoomPinchController = new ZoomPinchController(q);
 
     setWheelController(mZoomWheelController);
 
@@ -201,6 +224,26 @@ void AbstractByteArrayViewPrivate::init()
                      q, [&](int flashTime) { onCursorFlashTimeChanged(flashTime); });
 
     q->setAcceptDrops(true);
+
+    q->grabGesture(Qt::TapGesture);
+    q->grabGesture(touchOnlyTapAndHoldGestureType());
+    q->grabGesture(Qt::PinchGesture);
+
+    // there seems no way to generate a QScroller explicitly (using QScroller::scroller(widget))
+    // while also setting it to use the touch gesture
+    // So we implicitly generate one with QScroller::grabGesture(widget) and the pick it as current active
+    // by QScroller::scroller(widget)
+    QScroller::grabGesture(q->viewport(), QScroller::TouchGesture);
+    QScroller* scroller = QScroller::scroller(q->viewport());
+    QScrollerProperties scrollerProperties = scroller->scrollerProperties();
+    scrollerProperties.setScrollMetric(QScrollerProperties::HorizontalOvershootPolicy, QScrollerProperties::OvershootAlwaysOff);
+    scrollerProperties.setScrollMetric(QScrollerProperties::VerticalOvershootPolicy, QScrollerProperties::OvershootAlwaysOff);
+    // values used in other KDE apps
+    scrollerProperties.setScrollMetric(QScrollerProperties::DecelerationFactor, 0.3);
+    scrollerProperties.setScrollMetric(QScrollerProperties::MaximumVelocity, 1);
+    scrollerProperties.setScrollMetric(QScrollerProperties::AcceleratingFlickMaximumTime, 0.2); // Workaround for QTBUG-88249 (non-flick gestures recognized as accelerating flick)
+    scrollerProperties.setScrollMetric(QScrollerProperties::DragStartDistance, 0.0);
+    scroller->setScrollerProperties(scrollerProperties);
 }
 
 void AbstractByteArrayViewPrivate::setByteArrayModel(AbstractByteArrayModel* byteArrayModel)
@@ -1091,6 +1134,15 @@ bool AbstractByteArrayViewPrivate::event(QEvent* event)
                 return true;
             }
         }
+    } else if ((event->type() == QEvent::MouseMove) ||
+               (event->type() == QEvent::MouseButtonPress) ||
+               (event->type() == QEvent::MouseButtonRelease)) {
+        // discard any events synthesized from touch input
+        auto* mouseEvent = static_cast<QMouseEvent*>(event);
+        if (mouseEvent->source() == Qt::MouseEventSynthesizedByQt) {
+            event->accept();
+            return true;
+        }
     } else if ((event->type() == QEvent::PaletteChange)) {
         if (mCursorVisible) {
             updateCursors();
@@ -1108,6 +1160,34 @@ bool AbstractByteArrayViewPrivate::event(QEvent* event)
         event->setAccepted(adaptedContextMenuEvent.isAccepted());
 
         return result;
+    } else if (event->type() == QEvent::Gesture) {
+        auto* gestureEvent = static_cast<QGestureEvent*>(event);
+        if (auto* tapGesture = static_cast<QTapGesture*>(gestureEvent->gesture(Qt::TapGesture))) {
+            return mTapNavigator->handleTapGesture(tapGesture);
+        } else if (auto* tapAndHoldGesture = static_cast<TouchOnlyTapAndHoldGesture*>(gestureEvent->gesture(touchOnlyTapAndHoldGestureType()))) {
+            if (tapAndHoldGesture->state() == Qt::GestureFinished) {
+                const QPoint viewPortPos = tapAndHoldGesture->position().toPoint();
+                const QPoint pos = viewPortPos + q->viewport()->pos();
+                // TODO: QScrollArea for some reason only deals with QContextMenuEvent::Keyboard, ignores others?
+                // case QEvent::ContextMenu:
+                //     if (static_cast<QContextMenuEvent *>(e)->reason() == QContextMenuEvent::Keyboard)
+                //         return QFrame::event(e);
+                //     e->ignore();
+                //     break;
+                // why that? QFrame delegates to QWidget, which does the normal policy dance
+                // context menu
+                QContextMenuEvent simulatedContextMenuEvent(QContextMenuEvent::Keyboard, pos,
+                                                          q->viewport()->mapToGlobal(viewPortPos));
+                simulatedContextMenuEvent.setAccepted(event->isAccepted());
+
+                const bool result = q->ColumnsView::event(&simulatedContextMenuEvent);
+                event->setAccepted(simulatedContextMenuEvent.isAccepted());
+
+                return result;
+            }
+        } else if (auto* pinchGesture = static_cast<QPinchGesture*>(gestureEvent->gesture(Qt::PinchGesture))) {
+            return mZoomPinchController->handlePinchGesture(pinchGesture);
+        };
     }
 
     return q->ColumnsView::event(event);
@@ -1140,6 +1220,15 @@ bool AbstractByteArrayViewPrivate::viewportEvent(QEvent* event)
         }
 
         return true;
+    } else if ((event->type() == QEvent::MouseMove) ||
+               (event->type() == QEvent::MouseButtonPress) ||
+               (event->type() == QEvent::MouseButtonRelease)) {
+        // discard any events synthesized from touch input
+        auto* mouseEvent = static_cast<QMouseEvent*>(event);
+        if (mouseEvent->source() == Qt::MouseEventSynthesizedByQt) {
+            event->accept();
+            return true;
+        }
     }
 
     return q->ColumnsView::viewportEvent(event);

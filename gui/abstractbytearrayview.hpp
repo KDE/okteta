@@ -48,6 +48,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     friend class MouseNavigator;
     friend class MousePaster;
     friend class Dragger;
+    friend class TapNavigator;
 
     Q_OBJECT
     Q_PROPERTY(bool OverwriteMode READ isOverwriteMode WRITE setOverwriteMode NOTIFY overwriteModeChanged)

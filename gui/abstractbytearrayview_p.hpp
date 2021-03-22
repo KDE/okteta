@@ -29,6 +29,8 @@ class UndoRedoController;
 class KeyNavigator;
 class CharEditor;
 
+class ZoomPinchController;
+class TapNavigator;
 class Dropper;
 
 class AbstractMouseController;
@@ -274,6 +276,9 @@ protected:
     MousePaster* mMousePaster;
 
     ZoomWheelController* mZoomWheelController;
+
+    ZoomPinchController* mZoomPinchController;
+    TapNavigator* mTapNavigator;
 
     WidgetColumnStylist* mStylist;
 
