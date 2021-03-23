@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, made within the KDE community.
 
-    SPDX-FileCopyrightText: 2003, 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    SPDX-FileCopyrightText: 2003, 2008-2009, 2021 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
@@ -41,6 +41,9 @@ public:
 public:
     Selection& operator=(const Selection& other);
     Selection& operator=(const AddressRange& range);
+
+    bool operator==(const Selection& other) const;
+    bool operator!=(const Selection& other) const;
 
 public: // modification access
     /** starts the selection.
@@ -118,6 +121,15 @@ inline Selection& Selection::operator=(const AddressRange& range)
     mRange = range;
     mAnchor = range.start();
     return *this;
+}
+
+inline bool Selection::operator==(const Selection& other) const
+{
+    return (mRange == other.mRange) && (mAnchor == other.mAnchor);
+}
+inline bool Selection::operator!=(const Selection& other) const
+{
+    return (mRange != other.mRange) || (mAnchor != other.mAnchor);
 }
 
 inline void Selection::setStart(Address index)

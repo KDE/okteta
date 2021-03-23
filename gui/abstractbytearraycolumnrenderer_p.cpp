@@ -717,12 +717,14 @@ void AbstractByteArrayColumnRendererPrivate::renderCursor(QPainter* painter, Add
     const QBrush brush = colorScheme.foreground(foregroundRole);
     painter->fillRect(0, 0, mByteWidth, q->lineHeight(), brush);
 
-    const bool isBookmark = (byteIndex > -1 && mBookmarks && mBookmarks->containsBookmarkFor(byteIndex));
-    const KColorScheme::BackgroundRole backgroundRole =
-        isBookmark ? KColorScheme::NeutralBackground : KColorScheme::NormalBackground;
-    const QBrush charBrush = colorScheme.background(backgroundRole);
-    const QColor& charColor = charBrush.color();
-    renderByteText(painter, byte, byteChar, charColor);
+    if (byteIndex > -1) {
+        const bool isBookmark = (byteIndex > -1 && mBookmarks && mBookmarks->containsBookmarkFor(byteIndex));
+        const KColorScheme::BackgroundRole backgroundRole =
+            isBookmark ? KColorScheme::NeutralBackground : KColorScheme::NormalBackground;
+        const QBrush charBrush = colorScheme.background(backgroundRole);
+        const QColor& charColor = charBrush.color();
+        renderByteText(painter, byte, byteChar, charColor);
+    }
 }
 
 bool AbstractByteArrayColumnRendererPrivate::getNextSelectedAddressRange(AddressRange* _selection, unsigned int* _flag,

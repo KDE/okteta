@@ -69,23 +69,16 @@ bool MousePaster::handleMouseReleaseEvent(QMouseEvent* mouseEvent)
 
         mView->pasteFromClipboard(QClipboard::Selection);
 
-        // ensure selection changes to be drawn TODO: create a insert/pasteAtCursor that leaves out drawing
-        mView->updateChanged();
-
         mView->ensureCursorVisible();
-        mView->unpauseCursor();
-
-        Q_EMIT mView->cursorPositionChanged(tableCursor->realIndex());
 
         if (tableRanges->selectionJustStarted()) {
             tableRanges->removeSelection();
         }
 
-        if (!mView->isOverwriteMode()) {
-            Q_EMIT mView->cutAvailable(tableRanges->hasSelection());
-        }
-        Q_EMIT mView->copyAvailable(tableRanges->hasSelection());
-        Q_EMIT mView->hasSelectedDataChanged(tableRanges->hasSelection());
+        // ensure selection changes to be drawn TODO: create a insert/pasteAtCursor that leaves out drawing
+        mView->updateChanged();
+        mView->unpauseCursor();
+        mView->emitSelectionSignals();
 
         eventUsed = true;
     }

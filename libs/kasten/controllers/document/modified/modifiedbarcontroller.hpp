@@ -14,12 +14,11 @@
 // Kasten core
 #include <Kasten/KastenCore>
 
-class QLabel;
-
 namespace Kasten {
 class AbstractModelSynchronizer;
 class AbstractDocument;
 class StatusBar;
+class IconLabel;
 
 class ModifiedBarController : public AbstractXmlGuiController
 {
@@ -42,8 +41,8 @@ private:
     AbstractDocument* mDocument = nullptr;
     AbstractModelSynchronizer* mSynchronizer = nullptr;
 
-    QLabel* mLocalStateLabel;
-    QLabel* mRemoteStateLabel;
+    IconLabel* mLocalStateLabel;
+    IconLabel* mRemoteStateLabel;
 };
 
 }

@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, made within the KDE community.
 
-    SPDX-FileCopyrightText: 2003, 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    SPDX-FileCopyrightText: 2003, 2008-2009, 2021 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
@@ -28,6 +28,7 @@ void ByteArrayTableRanges::reset()
     FirstWordSelection.unset();
     mMarking.unset();
     ChangedRanges.clear();
+    mPreviousSelection = mSelection;
 }
 
 void ByteArrayTableRanges::setMarking(const AddressRange& marking)
@@ -259,6 +260,19 @@ void ByteArrayTableRanges::resetChangedRanges()
     mChangedOffsetLines.unset();
     ChangedRanges.clear();
     mModified = false;
+}
+
+void ByteArrayTableRanges::takeHasSelectionChanged(bool* hasSelectionChanged, bool* selectionChanged)
+{
+    const bool hadSelection = mPreviousSelection.isValid();
+    const bool hasSelection = mSelection.isValid();
+    *hasSelectionChanged = (hadSelection != hasSelection);
+
+    *selectionChanged = (mPreviousSelection != mSelection);
+
+    if (*selectionChanged) {
+        mPreviousSelection = mSelection;
+    }
 }
 
 void ByteArrayTableRanges::setFirstWordSelection(const AddressRange& range)

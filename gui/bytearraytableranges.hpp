@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, made within the KDE community.
 
-    SPDX-FileCopyrightText: 2003, 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    SPDX-FileCopyrightText: 2003, 2008-2009, 2021 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
@@ -58,6 +58,7 @@ public: // modifcation access
     void adaptToChanges(const ArrayChangeMetricsList& changeList, Size oldLength);
     void resetChangedRanges();
 
+    void takeHasSelectionChanged(bool* hasSelectionChanged, bool* selectionChanged);
     void setModified(bool M = true);
     /** removes all ranges */
     void reset();
@@ -103,8 +104,9 @@ private:
     LineRange mChangedOffsetLines;
 
     CoordRangeList ChangedRanges;
+    Selection mPreviousSelection;
 
-    ByteArrayTableLayout* mLayout;
+    ByteArrayTableLayout* const mLayout;
 };
 
 inline int ByteArrayTableRanges::noOfSelections()  const { return 1; }

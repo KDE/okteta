@@ -24,9 +24,14 @@ oktetagui_add_sublibrary(controller
         ValueEditor
         MouseNavigator
         MousePaster
+        TapNavigator
         # Dragger
         ZoomWheelController
+        ZoomPinchController
         Dropper
+
+        TouchOnlyTapAndHoldGesture
+        TouchOnlyTapAndHoldGestureRecognizer
 )
 
 oktetagui_add_sublibrary(libcolumnsview

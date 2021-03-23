@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, made within the KDE community.
 
-    SPDX-FileCopyrightText: 2008-2010 Friedrich W. H. Kossebau <kossebau@kde.org>
+    SPDX-FileCopyrightText: 2008-2010, 2021 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
@@ -29,6 +29,8 @@ class UndoRedoController;
 class KeyNavigator;
 class CharEditor;
 
+class ZoomPinchController;
+class TapNavigator;
 class Dropper;
 
 class AbstractMouseController;
@@ -231,6 +233,9 @@ protected: // API to be implemented
     virtual void updateChanged() = 0;
 
 private:
+    /** Emits updates on selection & cursor position after a change */
+    void emitSelectionUpdates();
+    void endViewUpdate();
     void onCursorFlashTimeChanged(int flashTime);
 
 protected:
@@ -271,6 +276,9 @@ protected:
     MousePaster* mMousePaster;
 
     ZoomWheelController* mZoomWheelController;
+
+    ZoomPinchController* mZoomPinchController;
+    TapNavigator* mTapNavigator;
 
     WidgetColumnStylist* mStylist;
 

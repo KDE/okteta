@@ -94,6 +94,9 @@ public: // If::SelectedDataWriteable API
     QMimeData* cutSelectedData() override;
     void deleteSelectedData() override;
     bool canReadData(const QMimeData* data) const override;
+    bool canCutSelectedData() const override;
+Q_SIGNALS:
+    void canCutSelectedDataChanged(bool canCutSelectedData) override;
 
 public: // cursor API
     void setCursorPosition(Okteta::Address cursorPosition);
@@ -187,6 +190,7 @@ private Q_SLOTS:
     void setFontByGlobalSettings();
 
     void onSelectionChanged(const Okteta::AddressRange& selection);
+    void onOverwriteModeChanged(bool overwriteMode);
 
 private:
     Okteta::ByteArrayJanusView* mWidget;

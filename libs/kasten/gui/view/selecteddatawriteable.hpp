@@ -34,8 +34,14 @@ public: // operate
     virtual QMimeData* cutSelectedData() = 0;
     virtual void deleteSelectedData() = 0;
 
-public:
+public: // get
     virtual bool canReadData(const QMimeData* data) const = 0;
+    // reports principle ability to cut selecteed data if there is some, also if currently there is none
+    // TODO; does that make sense, or should be changed to also match only if there is selected data?
+    virtual bool canCutSelectedData() const = 0;
+
+public: // signal
+    virtual void canCutSelectedDataChanged(bool canCutSelectedData) = 0;
 };
 
 inline SelectedDataWriteable::~SelectedDataWriteable() = default;

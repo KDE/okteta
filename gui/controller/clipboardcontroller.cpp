@@ -36,10 +36,12 @@ bool ClipboardController::handleKeyPress(QKeyEvent* keyEvent)
     if (keyEvent == QKeySequence::Copy) {
         mView->copy();
         keyUsed = true;
-    } else if (!mView->isReadOnly() && !mView->byteArrayModel()->isReadOnly()) {
+    } else if (!mView->isReadOnly()) {
         if (keyEvent == QKeySequence::Cut) {
-            mView->cut();
-            keyUsed = true;
+            if (!mView->isOverwriteMode()) {
+                mView->cut();
+                keyUsed = true;
+            }
         } else if (keyEvent == QKeySequence::Paste) {
             mView->paste();
             keyUsed = true;
@@ -57,14 +59,15 @@ int ClipboardController::addContextMenuActions(QMenu* menu)
     copyAction->setEnabled(mView->hasSelectedData());
     copyAction->setObjectName(QStringLiteral("edit-copy"));
 
-    if (mView->isReadOnly() || mView->byteArrayModel()->isReadOnly()) {
+    if (mView->isReadOnly()) {
         return 1;
     }
 
     auto cutAction = menu->addAction(QIcon::fromTheme(QStringLiteral("edit-cut")),
                                      i18nc("@action:inmenu", "Cu&t") + QLatin1Char('\t') + QKeySequence(QKeySequence::Cut).toString(QKeySequence::NativeText),
                                      mView, &AbstractByteArrayView::cut);
-    cutAction->setEnabled(mView->hasSelectedData());
+    const bool canCutData = mView->hasSelectedData() && !mView->isOverwriteMode();
+    cutAction->setEnabled(canCutData);
     cutAction->setObjectName(QStringLiteral("edit-cut"));
 
     auto pasteAction = menu->addAction(QIcon::fromTheme(QStringLiteral("edit-paste")),

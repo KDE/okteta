@@ -34,7 +34,7 @@ bool UndoRedoController::handleKeyPress(QKeyEvent* keyEvent)
 {
     bool keyUsed = false;
 
-    if (!mView->isReadOnly() && !mView->byteArrayModel()->isReadOnly()) {
+    if (!mView->isReadOnly()) {
         if (keyEvent == QKeySequence::Undo) {
             keyUsed = undo();
         } else if (keyEvent == QKeySequence::Redo) {
@@ -47,7 +47,7 @@ bool UndoRedoController::handleKeyPress(QKeyEvent* keyEvent)
 
 int UndoRedoController::addContextMenuActions(QMenu* menu)
 {
-    if (mView->isReadOnly() || mView->byteArrayModel()->isReadOnly()) {
+    if (mView->isReadOnly()) {
         return 0;
     }
 

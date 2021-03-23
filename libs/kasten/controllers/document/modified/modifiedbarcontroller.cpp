@@ -8,6 +8,8 @@
 
 #include "modifiedbarcontroller.hpp"
 
+// controller
+#include "iconlabel.hpp"
 // Kasten ui
 #include <Kasten/StatusBar>
 // Kasten core
@@ -16,25 +18,15 @@
 // KF
 #include <KLocalizedString>
 // Qt
-#include <QLabel>
 #include <QIcon>
 
 namespace Kasten {
-static constexpr int modifiedPixmapWidth = 16;
-
 ModifiedBarController::ModifiedBarController(StatusBar* statusBar)
 {
-    // TODO: depend an statusbar height
-    const QSize modifiedPixmapSize = QSize(modifiedPixmapWidth, modifiedPixmapWidth);
-
-    mLocalStateLabel = new QLabel(statusBar);
-    mLocalStateLabel->setAlignment(Qt::AlignCenter);
-    mLocalStateLabel->setFixedSize(modifiedPixmapSize);
+    mLocalStateLabel = new IconLabel(statusBar);
     statusBar->addWidget(mLocalStateLabel);
 
-    mRemoteStateLabel = new QLabel(statusBar);
-    mRemoteStateLabel->setAlignment(Qt::AlignCenter);
-    mRemoteStateLabel->setFixedSize(modifiedPixmapSize);
+    mRemoteStateLabel = new IconLabel(statusBar);
     statusBar->addWidget(mRemoteStateLabel);
 
     setTargetModel(nullptr);
@@ -75,11 +67,8 @@ void ModifiedBarController::onLocalSyncStateChanged(LocalSyncState localSyncStat
 {
     const bool isModified = (localSyncState == LocalHasChanges);
 
-    // TODO: depend an statusbar height
-    const QPixmap pixmap = isModified ?
-                           QIcon::fromTheme(QStringLiteral("document-save")).pixmap(modifiedPixmapWidth) :
-                           QPixmap();
-    mLocalStateLabel->setPixmap(pixmap);
+    const QIcon icon = isModified ? QIcon::fromTheme(QStringLiteral("document-save")) : QIcon();
+    mLocalStateLabel->setIcon(icon);
 
     mLocalStateLabel->setToolTip(isModified ?
                                  i18nc("@tooltip the document is modified", "Modified.") :
@@ -97,11 +86,8 @@ void ModifiedBarController::onRemoteSyncStateChanged(RemoteSyncState remoteSyncS
         (remoteSyncState == RemoteUnreachable) ? "network-disconnect" :
         /* else */ nullptr;
 
-    // TODO: depend an statusbar height
-    const QPixmap pixmap = iconName ?
-                           QIcon::fromTheme(QLatin1String(iconName)).pixmap(modifiedPixmapWidth) :
-                           QPixmap();
-    mRemoteStateLabel->setPixmap(pixmap);
+    const QIcon icon = iconName ? QIcon::fromTheme(QLatin1String(iconName)) : QIcon();
+    mRemoteStateLabel->setIcon(icon);
 
     // TODO: tooltips
 }

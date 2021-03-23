@@ -39,6 +39,7 @@ private Q_SLOTS: // action slots
 
 private Q_SLOTS:
     void onHasSelectedDataChanged(bool hasSelectedData);
+    void onCanCutSelectedDataChanged(bool canCutSelectedData);
     void onReadOnlyChanged(bool isReadOnly);
     void onClipboardDataChanged();
 

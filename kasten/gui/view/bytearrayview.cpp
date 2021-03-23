@@ -117,6 +117,7 @@ void ByteArrayView::init()
     connect(mWidget, &ByteArrayJanusView::hasSelectedDataChanged, this, &ByteArrayView::hasSelectedDataChanged);
     connect(mWidget, &ByteArrayJanusView::readOnlyChanged, this, &ByteArrayView::readOnlyChanged);
     connect(mWidget, &ByteArrayJanusView::overwriteModeChanged, this, &ByteArrayView::overwriteModeChanged);
+    connect(mWidget, &ByteArrayJanusView::overwriteModeChanged, this, &ByteArrayView::onOverwriteModeChanged);
     connect(mWidget, &ByteArrayJanusView::selectionChanged, this, &ByteArrayView::onSelectionChanged);
     connect(mWidget, &ByteArrayJanusView::cursorPositionChanged, this, &ByteArrayView::cursorPositionChanged);
     connect(mWidget, &ByteArrayJanusView::valueCodingChanged, this, &ByteArrayView::valueCodingChanged);
@@ -203,11 +204,21 @@ bool ByteArrayView::canReadData(const QMimeData* data) const
     return mWidget->canReadData(data);
 }
 
+bool ByteArrayView::canCutSelectedData() const
+{
+    return !isOverwriteMode();
+}
+
 void ByteArrayView::onSelectionChanged(const Okteta::AddressRange& selection)
 {
     // TODO: how to make sure the signal hasSelectedDataChanged() is not emitted before?
     mSelection.setRange(selection);
     Q_EMIT selectedDataChanged(&mSelection);
+}
+
+void ByteArrayView::onOverwriteModeChanged(bool overwriteMode)
+{
+    Q_EMIT canCutSelectedDataChanged(!overwriteMode);
 }
 
 void ByteArrayView::setCursorPosition(Okteta::Address cursorPosition)

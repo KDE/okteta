@@ -21,6 +21,8 @@ class SelectionTest : public QObject
 private Q_SLOTS: // test functions
     void testPlainConstructor();
     void testAnchorConstructor();
+    void testCopyConstructor();
+    void testCompare();
     void testSetStart();
     void testSetStartEnd();
     void testCancel();

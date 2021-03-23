@@ -106,12 +106,15 @@ void AddressRangeTest::testCompare()
     // same
     AddressRange otherAddressRange(Start, End);
     QVERIFY(addressRange == otherAddressRange);
+    QVERIFY(!(addressRange != otherAddressRange));
     // different start
     otherAddressRange.set(Start + 1, End);
     QVERIFY(!(addressRange == otherAddressRange));
+    QVERIFY(addressRange != otherAddressRange);
     // different end
     otherAddressRange.set(Start, End + 1);
     QVERIFY(!(addressRange == otherAddressRange));
+    QVERIFY(addressRange != otherAddressRange);
 }
 
 void AddressRangeTest::testIncludes()

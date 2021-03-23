@@ -36,6 +36,75 @@ void SelectionTest::testAnchorConstructor()
     QVERIFY(selection.justStarted());
 }
 
+void SelectionTest::testCopyConstructor()
+{
+    const Selection otherInvalidSelection;
+
+    const Selection inValidSelection(otherInvalidSelection);
+    QVERIFY(!inValidSelection.isValid());
+    QVERIFY(!inValidSelection.started());
+    QVERIFY(!inValidSelection.justStarted());
+
+    const Selection otherJustStartedSelection(Start);
+
+    const Selection justStartedSelection(otherJustStartedSelection);
+    QCOMPARE(justStartedSelection.anchor(), Start);
+    QVERIFY(!justStartedSelection.isValid());
+    QVERIFY(justStartedSelection.started());
+    QVERIFY(justStartedSelection.justStarted());
+
+    Selection otherSelection(Start);
+    otherSelection.setEnd(End);
+
+    const Selection selection(otherSelection);
+    QCOMPARE(selection.start(), Start);
+    QCOMPARE(selection.end(), End - 1);
+    QCOMPARE(selection.anchor(), Start);
+    QVERIFY(selection.isValid());
+    QVERIFY(selection.started());
+    QVERIFY(!selection.justStarted());
+    QVERIFY(selection.isForward());
+}
+
+void SelectionTest::testCompare()
+{
+    // invalid
+    Selection selection;
+    Selection otherSelection;
+    QVERIFY(selection == otherSelection);
+    QVERIFY(!(selection != otherSelection));
+
+    // justStarted
+    // same
+    selection.setStart(Start);
+    otherSelection.setStart(Start);
+    QVERIFY(selection == otherSelection);
+    QVERIFY(!(selection != otherSelection));
+
+    // different start
+    otherSelection.setStart(Start+1);
+    QVERIFY(!(selection == otherSelection));
+    QVERIFY(selection != otherSelection);
+
+    // range
+    // same
+    selection.setStart(Start);
+    selection.setEnd(End);
+    otherSelection.setStart(Start);
+    otherSelection.setEnd(End);
+    QVERIFY(selection == otherSelection);
+    QVERIFY(!(selection != otherSelection));
+    // different start
+    otherSelection.setStart(Start + 1);
+    QVERIFY(!(selection == otherSelection));
+    QVERIFY(selection != otherSelection);
+    // different end
+    otherSelection.setStart(Start);
+    otherSelection.setEnd(End+1);
+    QVERIFY(!(selection == otherSelection));
+    QVERIFY(selection != otherSelection);
+}
+
 void SelectionTest::testSetStart()
 {
     Selection selection;

@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, made within the KDE community.
 
-    SPDX-FileCopyrightText: 2008-2010 Friedrich W. H. Kossebau <kossebau@kde.org>
+    SPDX-FileCopyrightText: 2008-2010, 2021 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
@@ -16,7 +16,12 @@
 #include "controller/dropper.hpp"
 #include "controller/mousenavigator.hpp"
 #include "controller/mousepaster.hpp"
+#include "controller/tapnavigator.hpp"
 #include "controller/zoomwheelcontroller.hpp"
+#include "controller/zoompinchcontroller.hpp"
+#include "controller/touchonlytapandholdgesture.hpp"
+#include "controller/touchonlytapandholdgesturerecognizer.hpp"
+
 #include "widgetcolumnstylist.hpp"
 #include "cursor.hpp"
 #include "bordercolumnrenderer.hpp"
@@ -30,18 +35,24 @@
 // KF
 #include <KLocalizedString>
 // Qt
+#include <QScroller>
 #include <QPainter>
 #include <QDragEnterEvent>
 #include <QDragMoveEvent>
 #include <QDragLeaveEvent>
 #include <QDropEvent>
 #include <QTimerEvent>
+#include <QGestureEvent>
+#include <QTapGesture>
+#include <QPinchGesture>
 #include <QStyleHints>
 #include <QApplication>
 #include <QToolTip>
 #include <QMimeData>
 #include <QMenu>
 #include <QIcon>
+#include <QScroller>
+#include <QScrollerProperties>
 
 namespace Okteta {
 
@@ -115,6 +126,13 @@ void NullModel::setModified(bool modified)
 
 Q_GLOBAL_STATIC(NullModel, nullModel)
 
+Qt::GestureType touchOnlyTapAndHoldGestureType()
+{
+    static Qt::GestureType type =
+        QGestureRecognizer::registerRecognizer(new TouchOnlyTapAndHoldGestureRecognizer);
+    return type;
+}
+
 AbstractByteArrayViewPrivate::AbstractByteArrayViewPrivate(AbstractByteArrayView* parent)
     : ColumnsViewPrivate(parent)
     , mByteArrayModel(nullModel())
@@ -149,6 +167,9 @@ AbstractByteArrayViewPrivate::~AbstractByteArrayViewPrivate()
     delete mClipboardController;
     delete mUndoRedoController;
     delete mTabController;
+
+    delete mZoomPinchController;
+    delete mTapNavigator;
 
     delete mStylist;
 
@@ -191,9 +212,11 @@ void AbstractByteArrayViewPrivate::init()
     mMousePaster = new MousePaster(q, nullptr);
     mMouseNavigator = new MouseNavigator(q, mMousePaster);
     mMouseController = mMouseNavigator;
+    mTapNavigator = new TapNavigator(q);
 
     mZoomWheelController = new ZoomWheelController(q, nullptr);
     mDropper = new Dropper(q);
+    mZoomPinchController = new ZoomPinchController(q);
 
     setWheelController(mZoomWheelController);
 
@@ -201,6 +224,26 @@ void AbstractByteArrayViewPrivate::init()
                      q, [&](int flashTime) { onCursorFlashTimeChanged(flashTime); });
 
     q->setAcceptDrops(true);
+
+    q->grabGesture(Qt::TapGesture);
+    q->grabGesture(touchOnlyTapAndHoldGestureType());
+    q->grabGesture(Qt::PinchGesture);
+
+    // there seems no way to generate a QScroller explicitly (using QScroller::scroller(widget))
+    // while also setting it to use the touch gesture
+    // So we implicitly generate one with QScroller::grabGesture(widget) and the pick it as current active
+    // by QScroller::scroller(widget)
+    QScroller::grabGesture(q->viewport(), QScroller::TouchGesture);
+    QScroller* scroller = QScroller::scroller(q->viewport());
+    QScrollerProperties scrollerProperties = scroller->scrollerProperties();
+    scrollerProperties.setScrollMetric(QScrollerProperties::HorizontalOvershootPolicy, QScrollerProperties::OvershootAlwaysOff);
+    scrollerProperties.setScrollMetric(QScrollerProperties::VerticalOvershootPolicy, QScrollerProperties::OvershootAlwaysOff);
+    // values used in other KDE apps
+    scrollerProperties.setScrollMetric(QScrollerProperties::DecelerationFactor, 0.3);
+    scrollerProperties.setScrollMetric(QScrollerProperties::MaximumVelocity, 1);
+    scrollerProperties.setScrollMetric(QScrollerProperties::AcceleratingFlickMaximumTime, 0.2); // Workaround for QTBUG-88249 (non-flick gestures recognized as accelerating flick)
+    scrollerProperties.setScrollMetric(QScrollerProperties::DragStartDistance, 0.0);
+    scroller->setScrollerProperties(scrollerProperties);
 }
 
 void AbstractByteArrayViewPrivate::setByteArrayModel(AbstractByteArrayModel* byteArrayModel)
@@ -244,6 +287,7 @@ void AbstractByteArrayViewPrivate::setByteArrayModel(AbstractByteArrayModel* byt
 
     mTableCursor->gotoStart();
     ensureCursorVisible();
+
     unpauseCursor();
 
     Q_EMIT q->cursorPositionChanged(cursorPosition());
@@ -415,6 +459,7 @@ void AbstractByteArrayViewPrivate::setStartOffset(Address startOffset)
     }
 
     pauseCursor();
+
     // affects:
     // the no of lines -> width
     adjustLayoutToSize();
@@ -423,6 +468,7 @@ void AbstractByteArrayViewPrivate::setStartOffset(Address startOffset)
 
     mTableCursor->updateCoord();
     ensureCursorVisible();
+
     unpauseCursor();
     Q_EMIT q->cursorPositionChanged(cursorPosition());
 }
@@ -436,6 +482,7 @@ void AbstractByteArrayViewPrivate::setFirstLineOffset(Address firstLineOffset)
     }
 
     pauseCursor();
+
     // affects:
     // the no of lines -> width
     adjustLayoutToSize();
@@ -444,6 +491,7 @@ void AbstractByteArrayViewPrivate::setFirstLineOffset(Address firstLineOffset)
 
     mTableCursor->updateCoord();
     ensureCursorVisible();
+
     unpauseCursor();
     Q_EMIT q->cursorPositionChanged(cursorPosition());
 }
@@ -620,27 +668,13 @@ bool AbstractByteArrayViewPrivate::selectWord(Address index)
         const TextByteArrayAnalyzer textAnalyzer(mByteArrayModel, mCharCodec);
         const AddressRange wordSection = textAnalyzer.wordSection(index);
         if (wordSection.isValid()) {
-            const bool oldHasSelection = mTableRanges->hasSelection();
-
             pauseCursor();
             finishByteEditor();
 
             mTableRanges->setFirstWordSelection(wordSection);
             mTableCursor->gotoIndex(wordSection.nextBehindEnd());
-            updateChanged();
 
-            unpauseCursor();
-
-            const bool newHasSelection = mTableRanges->hasSelection();
-            Q_EMIT q->selectionChanged(wordSection);
-            if (oldHasSelection != newHasSelection) {
-                if (!mOverWrite) {
-                    Q_EMIT q->cutAvailable(newHasSelection);
-                }
-                Q_EMIT q->copyAvailable(newHasSelection);
-                Q_EMIT q->hasSelectedDataChanged(newHasSelection);
-            }
-            Q_EMIT q->cursorPositionChanged(cursorPosition());
+            endViewUpdate();
 
             result = true;
         }
@@ -653,8 +687,6 @@ void AbstractByteArrayViewPrivate::selectAll(bool select)
 {
     Q_Q(AbstractByteArrayView);
 
-    const bool oldHasSelection = mTableRanges->hasSelection();
-
     pauseCursor();
     finishByteEditor();
 
@@ -665,27 +697,12 @@ void AbstractByteArrayViewPrivate::selectAll(bool select)
         mTableRanges->removeSelection();
     }
 
-    updateChanged();
-
-    unpauseCursor();
-
-    const bool newHasSelection = mTableRanges->hasSelection();
-    Q_EMIT q->selectionChanged(mTableRanges->selection());
-    if (oldHasSelection != newHasSelection) {
-        if (!mOverWrite) {
-            Q_EMIT q->cutAvailable(newHasSelection);
-        }
-        Q_EMIT q->copyAvailable(newHasSelection);
-        Q_EMIT q->hasSelectedDataChanged(newHasSelection);
-    }
-    Q_EMIT q->cursorPositionChanged(cursorPosition());
+    endViewUpdate();
 }
 
 void AbstractByteArrayViewPrivate::setCursorPosition(Address index, bool behind)
 {
     Q_Q(AbstractByteArrayView);
-
-    const bool oldHasSelection = mTableRanges->hasSelection();
 
     pauseCursor();
     finishByteEditor();
@@ -699,23 +716,9 @@ void AbstractByteArrayViewPrivate::setCursorPosition(Address index, bool behind)
     }
 
     mTableRanges->removeSelection();
-    if (mTableRanges->isModified()) {
-        updateChanged();
-
-        const bool newHasSelection = mTableRanges->hasSelection();
-        Q_EMIT q->selectionChanged(mTableRanges->selection());
-        if (oldHasSelection != newHasSelection) {
-            if (!mOverWrite) {
-                Q_EMIT q->cutAvailable(newHasSelection);
-            }
-            Q_EMIT q->copyAvailable(newHasSelection);
-            Q_EMIT q->hasSelectedDataChanged(newHasSelection);
-        }
-    }
     ensureCursorVisible();
 
-    unpauseCursor();
-    Q_EMIT q->cursorPositionChanged(cursorPosition());
+    endViewUpdate();
 }
 
 void AbstractByteArrayViewPrivate::setSelectionCursorPosition(Address index)
@@ -732,16 +735,9 @@ void AbstractByteArrayViewPrivate::setSelectionCursorPosition(Address index)
     mTableCursor->gotoCIndex(index);
 
     mTableRanges->setSelectionEnd(mTableCursor->realIndex());
-
     ensureCursorVisible();
-    updateChanged();
 
-    unpauseCursor();
-
-    if (mTableRanges->isModified()) {
-        q->emitSelectionSignals(); // TODO: can this be moved somewhere
-    }
-    Q_EMIT q->cursorPositionChanged(mTableCursor->realIndex());
+    endViewUpdate();
 }
 
 void AbstractByteArrayViewPrivate::setSelection(const AddressRange& _selection)
@@ -763,21 +759,11 @@ void AbstractByteArrayViewPrivate::setSelection(const AddressRange& _selection)
 
     mTableRanges->setSelection(selection);
     mTableCursor->gotoCIndex(selection.nextBehindEnd());
+
 // TODO:            ensureVisible( *mActiveColumn, mTableLayout->coordOfIndex(selection.start()) );
     ensureCursorVisible();
-    updateChanged();
 
-    unpauseCursor();
-
-    Q_EMIT q->selectionChanged(selection);
-    if (oldSelection.isEmpty()) {
-        if (!mOverWrite) {
-            Q_EMIT q->cutAvailable(true);
-        }
-        Q_EMIT q->copyAvailable(true);
-        Q_EMIT q->hasSelectedDataChanged(true);
-    }
-    Q_EMIT q->cursorPositionChanged(cursorPosition());
+    endViewUpdate();
 }
 
 QByteArray AbstractByteArrayViewPrivate::selectedData() const
@@ -882,15 +868,15 @@ void AbstractByteArrayViewPrivate::insert(const QByteArray& data)
 {
     Q_Q(AbstractByteArrayView);
 
-    const bool oldHasSelection = mTableRanges->hasSelection();
-
+    Size lengthOfInserted;
+    Address insertionOffset = -1;
     if (mOverWrite) {
-        Size lengthOfInserted;
         if (mTableRanges->hasSelection()) {
             // replacing the selection:
             // we restrict the replacement to the minimum length of selection and input
             AddressRange selection = mTableRanges->removeSelection();
             selection.restrictEndByWidth(data.size());
+            insertionOffset = selection.start();
             lengthOfInserted = mByteArrayModel->replace(selection, reinterpret_cast<const Byte*>(data.constData()), selection.width());
         } else {
             const Size length = mTableLayout->length();
@@ -898,32 +884,32 @@ void AbstractByteArrayViewPrivate::insert(const QByteArray& data)
                 // replacing the normal data, at least until the end
                 AddressRange insertRange = AddressRange::fromWidth(cursorPosition(), data.size());
                 insertRange.restrictEndTo(length - 1);
+                insertionOffset = insertRange.start();
                 lengthOfInserted = mByteArrayModel->replace(insertRange, reinterpret_cast<const Byte*>(data.constData()), insertRange.width());
             } else {
                 lengthOfInserted = 0;
             }
         }
-        // if inserting ourself we want to place the cursor at the end of the inserted data
-        if (lengthOfInserted > 0) {
-            pauseCursor();
-            mTableCursor->gotoNextByte(lengthOfInserted);
-            unpauseCursor();
-            Q_EMIT q->cursorPositionChanged(cursorPosition());
-        }
     } else {
         if (mTableRanges->hasSelection()) {
             // replacing the selection
             const AddressRange selection = mTableRanges->removeSelection();
-            mByteArrayModel->replace(selection, data);
+            insertionOffset = selection.start();
+            lengthOfInserted = mByteArrayModel->replace(selection, data);
         } else {
-            mByteArrayModel->insert(cursorPosition(), data);
+            insertionOffset = cursorPosition();
+            lengthOfInserted = mByteArrayModel->insert(insertionOffset, data);
         }
     }
-
-    const bool newHasSelection = mTableRanges->hasSelection();
-    Q_EMIT q->selectionChanged(mTableRanges->selection());
-    if (oldHasSelection != newHasSelection) {
-        Q_EMIT q->hasSelectedDataChanged(newHasSelection);
+    // if inserting ourself we want to place the cursor at the end of the inserted data
+    if (lengthOfInserted > 0) {
+        const Address postInsertionOffset = insertionOffset + lengthOfInserted;
+        if (postInsertionOffset != cursorPosition()) {
+            pauseCursor();
+            mTableCursor->gotoCIndex(postInsertionOffset);
+            unpauseCursor();
+            Q_EMIT q->cursorPositionChanged(cursorPosition());
+        }
     }
 }
 
@@ -939,8 +925,6 @@ void AbstractByteArrayViewPrivate::removeSelectedData()
     mByteArrayModel->remove(selection);
 
 //     clearUndoRedo();
-
-    // Q_EMIT q->selectionChanged( -1, -1 );
 }
 
 bool AbstractByteArrayViewPrivate::getNextChangedRange(CoordRange* changedRange, const CoordRange& visibleRange) const
@@ -1150,6 +1134,19 @@ bool AbstractByteArrayViewPrivate::event(QEvent* event)
                 return true;
             }
         }
+    } else if ((event->type() == QEvent::MouseMove) ||
+               (event->type() == QEvent::MouseButtonPress) ||
+               (event->type() == QEvent::MouseButtonRelease)) {
+        // discard any events synthesized from touch input
+        auto* mouseEvent = static_cast<QMouseEvent*>(event);
+        if (mouseEvent->source() == Qt::MouseEventSynthesizedByQt) {
+            event->accept();
+            return true;
+        }
+    } else if ((event->type() == QEvent::PaletteChange)) {
+        if (mCursorVisible) {
+            updateCursors();
+        }
     } else if ((event->type() == QEvent::ContextMenu) &&
                (static_cast<QContextMenuEvent*>(event)->reason() == QContextMenuEvent::Keyboard)) {
         ensureCursorVisible();
@@ -1163,6 +1160,34 @@ bool AbstractByteArrayViewPrivate::event(QEvent* event)
         event->setAccepted(adaptedContextMenuEvent.isAccepted());
 
         return result;
+    } else if (event->type() == QEvent::Gesture) {
+        auto* gestureEvent = static_cast<QGestureEvent*>(event);
+        if (auto* tapGesture = static_cast<QTapGesture*>(gestureEvent->gesture(Qt::TapGesture))) {
+            return mTapNavigator->handleTapGesture(tapGesture);
+        } else if (auto* tapAndHoldGesture = static_cast<TouchOnlyTapAndHoldGesture*>(gestureEvent->gesture(touchOnlyTapAndHoldGestureType()))) {
+            if (tapAndHoldGesture->state() == Qt::GestureFinished) {
+                const QPoint viewPortPos = tapAndHoldGesture->position().toPoint();
+                const QPoint pos = viewPortPos + q->viewport()->pos();
+                // TODO: QScrollArea for some reason only deals with QContextMenuEvent::Keyboard, ignores others?
+                // case QEvent::ContextMenu:
+                //     if (static_cast<QContextMenuEvent *>(e)->reason() == QContextMenuEvent::Keyboard)
+                //         return QFrame::event(e);
+                //     e->ignore();
+                //     break;
+                // why that? QFrame delegates to QWidget, which does the normal policy dance
+                // context menu
+                QContextMenuEvent simulatedContextMenuEvent(QContextMenuEvent::Keyboard, pos,
+                                                          q->viewport()->mapToGlobal(viewPortPos));
+                simulatedContextMenuEvent.setAccepted(event->isAccepted());
+
+                const bool result = q->ColumnsView::event(&simulatedContextMenuEvent);
+                event->setAccepted(simulatedContextMenuEvent.isAccepted());
+
+                return result;
+            }
+        } else if (auto* pinchGesture = static_cast<QPinchGesture*>(gestureEvent->gesture(Qt::PinchGesture))) {
+            return mZoomPinchController->handlePinchGesture(pinchGesture);
+        };
     }
 
     return q->ColumnsView::event(event);
@@ -1195,6 +1220,15 @@ bool AbstractByteArrayViewPrivate::viewportEvent(QEvent* event)
         }
 
         return true;
+    } else if ((event->type() == QEvent::MouseMove) ||
+               (event->type() == QEvent::MouseButtonPress) ||
+               (event->type() == QEvent::MouseButtonRelease)) {
+        // discard any events synthesized from touch input
+        auto* mouseEvent = static_cast<QMouseEvent*>(event);
+        if (mouseEvent->source() == Qt::MouseEventSynthesizedByQt) {
+            event->accept();
+            return true;
+        }
     }
 
     return q->ColumnsView::viewportEvent(event);
@@ -1307,8 +1341,8 @@ void AbstractByteArrayViewPrivate::onBookmarksChange(const QVector<Bookmark>& bo
         mTableRanges->addChangedRange(position, position);
     }
 
-    unpauseCursor();
     updateChanged();
+    unpauseCursor();
 }
 
 void AbstractByteArrayViewPrivate::onRevertedToVersionIndex(int versionIndex)
@@ -1359,11 +1393,39 @@ void AbstractByteArrayViewPrivate::onContentsChanged(const ArrayChangeMetricsLis
     mTableRanges->adaptToChanges(changeList, oldLength);
     // qCDebug(LOG_OKTETA_GUI) << "Cursor:"<<mDataCursor->index()<<", selection:"<<mTableRanges->selectionStart()<<"-"<<mTableRanges->selectionEnd()
     //          <<", BytesPerLine: "<<mTableLayout->noOfBytesPerLine()<<endl;
-
     ensureCursorVisible();
+
+    endViewUpdate();
+}
+
+void AbstractByteArrayViewPrivate::endViewUpdate()
+{
     updateChanged();
+
     unpauseCursor();
 
+    emitSelectionUpdates();
+}
+
+void AbstractByteArrayViewPrivate::emitSelectionUpdates()
+{
+    Q_Q(AbstractByteArrayView);
+
+    bool selectionChanged = false;
+    bool hasSelectionChanged = false;
+    mTableRanges->takeHasSelectionChanged(&hasSelectionChanged, &selectionChanged);
+
+    if (selectionChanged) {
+        Q_EMIT q->selectionChanged(mTableRanges->selection());
+    }
+    if (hasSelectionChanged) {
+        const bool hasSelection = mTableRanges->hasSelection();
+        if (!mOverWrite) {
+            Q_EMIT q->cutAvailable(hasSelection);
+        }
+        Q_EMIT q->copyAvailable(hasSelection);
+        Q_EMIT q->hasSelectedDataChanged(hasSelection);
+    }
     Q_EMIT q->cursorPositionChanged(cursorPosition());
 }
 
