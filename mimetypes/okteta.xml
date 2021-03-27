@@ -57,6 +57,7 @@ Notes:
     <comment>Intel hexadecimal object file</comment>
     <comment xml:lang="ca">Fitxer objecte hexadecimal d'Intel</comment>
     <comment xml:lang="ca@valencia">Fitxer objecte hexadecimal d'Intel</comment>
+    <comment xml:lang="cs">Hexadecimální objektový soubor Intel®</comment>
     <comment xml:lang="de">Intel-Hexadezimal-Objektdatei</comment>
     <comment xml:lang="en_GB">Intel hexadecimal object file</comment>
     <comment xml:lang="es">Archivo objeto hexadecimal de Intel</comment>
@@ -90,6 +91,7 @@ Notes:
     <comment>Base64 encoded data</comment>
     <comment xml:lang="ca">Dades codificades en Base64</comment>
     <comment xml:lang="ca@valencia">Dades codificades en Base64</comment>
+    <comment xml:lang="cs">Data kódovaná Base64</comment>
     <comment xml:lang="de">Base64-kodierte Daten</comment>
     <comment xml:lang="en_GB">Base64 encoded data</comment>
     <comment xml:lang="es">Datos codificados en Base64</comment>
@@ -117,6 +119,7 @@ Notes:
     <comment>Base32 encoded data</comment>
     <comment xml:lang="ca">Dades codificades en Base32</comment>
     <comment xml:lang="ca@valencia">Dades codificades en Base32</comment>
+    <comment xml:lang="cs">Data kódovaná Base32</comment>
     <comment xml:lang="de">Base32-kodierte Daten</comment>
     <comment xml:lang="en_GB">Base32 encoded data</comment>
     <comment xml:lang="es">Datos codificados en Base32</comment>
@@ -143,6 +146,7 @@ Notes:
     <comment>Btoa Encoded File</comment>
     <comment xml:lang="ca">Fitxer BTOA codificat</comment>
     <comment xml:lang="ca@valencia">Fitxer BTOA codificat</comment>
+    <comment xml:lang="cs">Data kódovaná Btoa</comment>
     <comment xml:lang="de">Btoa-kodierte Datei</comment>
     <comment xml:lang="en_GB">Btoa Encoded File</comment>
     <comment xml:lang="es">Archivo codificado en Btoa</comment>
@@ -173,6 +177,7 @@ Notes:
     <comment>Ascii85 encoded data</comment>
     <comment xml:lang="ca">Dades codificades en ASCII85</comment>
     <comment xml:lang="ca@valencia">Dades codificades en ASCII85</comment>
+    <comment xml:lang="cs">Data kódovaná Ascii85</comment>
     <comment xml:lang="de">ASCII85-kodierte Daten</comment>
     <comment xml:lang="en_GB">Ascii85 encoded data</comment>
     <comment xml:lang="es">Datos codificados en Ascii85</comment>
@@ -262,6 +267,7 @@ Notes:
     <comment>Okteta Structure definition</comment>
     <comment xml:lang="ca">Definició d'estructura de l'Okteta</comment>
     <comment xml:lang="ca@valencia">Definició d'estructura de l'Okteta</comment>
+    <comment xml:lang="cs">Definice struktury Okteta</comment>
     <comment xml:lang="de">Okteta-Strukturdefinition</comment>
     <comment xml:lang="en_GB">Okteta Structure definition</comment>
     <comment xml:lang="es">Definición de estructura de Okteta</comment>
