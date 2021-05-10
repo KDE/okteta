@@ -660,8 +660,6 @@ void AbstractByteArrayViewPrivate::setMarking(const AddressRange& _marking)
 // TODO: make this use select( start, end )
 bool AbstractByteArrayViewPrivate::selectWord(Address index)
 {
-    Q_Q(AbstractByteArrayView);
-
     bool result = false;
 
     if (0 <= index && index < mTableLayout->length()) {
@@ -685,8 +683,6 @@ bool AbstractByteArrayViewPrivate::selectWord(Address index)
 // TODO: make this use select( start, end )
 void AbstractByteArrayViewPrivate::selectAll(bool select)
 {
-    Q_Q(AbstractByteArrayView);
-
     pauseCursor();
     finishByteEditor();
 
@@ -702,8 +698,6 @@ void AbstractByteArrayViewPrivate::selectAll(bool select)
 
 void AbstractByteArrayViewPrivate::setCursorPosition(Address index, bool behind)
 {
-    Q_Q(AbstractByteArrayView);
-
     pauseCursor();
     finishByteEditor();
 
@@ -723,8 +717,6 @@ void AbstractByteArrayViewPrivate::setCursorPosition(Address index, bool behind)
 
 void AbstractByteArrayViewPrivate::setSelectionCursorPosition(Address index)
 {
-    Q_Q(AbstractByteArrayView);
-
     pauseCursor();
     finishByteEditor();
 
@@ -742,8 +734,6 @@ void AbstractByteArrayViewPrivate::setSelectionCursorPosition(Address index)
 
 void AbstractByteArrayViewPrivate::setSelection(const AddressRange& _selection)
 {
-    Q_Q(AbstractByteArrayView);
-
     AddressRange selection(_selection);
     selection.restrictEndTo(mTableLayout->length() - 1);
 
