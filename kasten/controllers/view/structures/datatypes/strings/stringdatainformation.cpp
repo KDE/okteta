@@ -51,7 +51,7 @@ StringDataInformation::StringDataInformation(const StringDataInformation& d)
     , mDummy(new DummyDataInformation(this))
 {
     setEncoding(d.mEncoding); // sets mData
-    mData->copyTerminationFrom(d.mData.data());
+    mData->copyTerminationFrom(d.mData.get());
 }
 
 StringDataInformation::~StringDataInformation() = default;
@@ -60,7 +60,7 @@ DataInformation* StringDataInformation::childAt(unsigned int index) const
 {
     Q_ASSERT(index < childCount());
     mDummy->setDummyIndex(index);
-    return mDummy.data();
+    return mDummy.get();
 }
 
 bool StringDataInformation::setData(const QVariant&, Okteta::AbstractByteArrayModel*,
@@ -222,7 +222,7 @@ void StringDataInformation::setEncoding(StringDataInformation::StringType encodi
             break;
         }
         if (mData) {
-            data->copyTerminationFrom(mData.data());
+            data->copyTerminationFrom(mData.get());
         }
         mData.reset(data);
     }
@@ -277,7 +277,7 @@ BitCount64 StringDataInformation::childPosition(const DataInformation* child, Ok
     Q_UNUSED(start)
     Q_ASSERT(child->isDummy());
     Q_ASSERT(child->parent() == this);
-    Q_ASSERT(child == mDummy.data());
+    Q_ASSERT(child == mDummy.get());
     Q_UNUSED(child)
     uint index = mDummy->dummyIndex();
     Q_ASSERT(index < mData->count());
@@ -318,7 +318,7 @@ void StringDataInformation::unsetTerminationMode(StringData::TerminationMode mod
 
 QScriptClass* StringDataInformation::scriptClass(ScriptHandlerInfo* handlerInfo) const
 {
-    return handlerInfo->mStringClass.data();
+    return handlerInfo->mStringClass.get();
 }
 
 bool StringDataInformation::canHaveChildren() const

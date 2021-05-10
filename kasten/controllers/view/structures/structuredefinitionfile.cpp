@@ -53,7 +53,7 @@ KPluginInfo StructureDefinitionFile::pluginInfo() const
 
 bool StructureDefinitionFile::isValid() const
 {
-    return !mParser.isNull();
+    return !mParser;
 }
 
 QVector<TopLevelDataInformation*> StructureDefinitionFile::structures() const

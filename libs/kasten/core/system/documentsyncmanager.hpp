@@ -13,6 +13,8 @@
 #include "kastencore_export.hpp"
 // Qt
 #include <QObject>
+// Std
+#include <memory>
 
 class QUrl;
 class QString;
@@ -59,7 +61,7 @@ Q_SIGNALS:
     void urlUsed(const QUrl& url);
 
 private:
-    const QScopedPointer<class DocumentSyncManagerPrivate> d_ptr;
+    const std::unique_ptr<class DocumentSyncManagerPrivate> d_ptr;
     Q_DECLARE_PRIVATE(DocumentSyncManager)
 };
 

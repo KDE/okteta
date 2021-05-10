@@ -18,6 +18,8 @@
 #include <Kasten/AbstractTool>
 // Okteta core
 #include <Okteta/Address>
+// Std
+#include <memory>
 
 class QModelIndex;
 
@@ -104,7 +106,7 @@ private:
 
     // settings
     QSysInfo::Endian mByteOrder;
-    QScopedPointer<StructuresManager> mManager;
+    std::unique_ptr<StructuresManager> mManager;
     TopLevelDataInformation::List mData;
     TopLevelDataInformation::List mInvalidData;
     bool mWritingData : 1;

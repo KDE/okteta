@@ -17,6 +17,8 @@
 #include "view/structures/datatypes/topleveldatainformation.hpp"
 #include "view/structures/datatypes/primitivefactory.hpp"
 #include "view/structures/datatypes/primitive/bitfield/unsignedbitfielddatainformation.hpp"
+// Std
+#include <memory>
 
 class UnionDataInformationTest : public QObject
 {
@@ -29,7 +31,7 @@ private Q_SLOTS:
     void testReadData1_data();
 
 private:
-    QScopedPointer<Okteta::ByteArrayModel> model;
+    std::unique_ptr<Okteta::ByteArrayModel> model;
 };
 
 /** In binary:
@@ -82,7 +84,7 @@ void UnionDataInformationTest::testReadData1()
     QFETCH(quint64, bitsRemaining);
     // update needed before read
     top.scriptHandler()->updateDataInformation(un);
-    qint64 read = un->readData(model.data(), address, bitsRemaining, &offset);
+    qint64 read = un->readData(model.get(), address, bitsRemaining, &offset);
     QFETCH(qint64, readBitsTotal);
     QCOMPARE(read, readBitsTotal);
     QFETCH(quint8, offsetAfterRead);

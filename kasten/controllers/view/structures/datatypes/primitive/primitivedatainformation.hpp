@@ -12,6 +12,8 @@
 #include "../datainformation.hpp"
 #include "../primitivedatatype.hpp"
 #include "../../allprimitivetypes.hpp"
+// Std
+#include <memory>
 
 union AllPrimitiveTypes;
 
@@ -96,7 +98,7 @@ public:
                     BitCount64 bitsRemaining, quint8* bitOffset) override;
 
 protected:
-    QScopedPointer<PrimitiveDataInformation> mValue;
+    std::unique_ptr<PrimitiveDataInformation> mValue;
 };
 
 inline PrimitiveDataInformation::PrimitiveDataInformation(const QString& name,

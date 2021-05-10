@@ -13,6 +13,8 @@
 #include "kastencore_export.hpp"
 // Qt
 #include <QObject>
+// Std
+#include <memory>
 
 class QString;
 
@@ -42,7 +44,7 @@ Q_SIGNALS:
     void titleChanged(const QString& newTitle);
 
 private:
-    const QScopedPointer<class AbstractToolPrivate> d_ptr;
+    const std::unique_ptr<class AbstractToolPrivate> d_ptr;
 };
 
 }

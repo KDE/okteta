@@ -9,7 +9,8 @@
 #ifndef KASTEN_ABSTRACTBYTEARRAYCHECKSUMPARAMETERSET_HPP
 #define KASTEN_ABSTRACTBYTEARRAYCHECKSUMPARAMETERSET_HPP
 
-#include <QScopedPointer>
+// Std
+#include <memory>
 
 class AbstractByteArrayChecksumParameterSet
 {
@@ -23,7 +24,7 @@ public:
     virtual const char* id() const = 0;
 
 private:
-    QScopedPointer<class AbstractByteArrayChecksumParameterSetPrivate> const d;
+    const std::unique_ptr<class AbstractByteArrayChecksumParameterSetPrivate> d;
 };
 
 #endif

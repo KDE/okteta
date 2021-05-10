@@ -9,9 +9,9 @@
 #ifndef KASTEN_SCRIPTHANDLER_HPP
 #define KASTEN_SCRIPTHANDLER_HPP
 
-#include <QScopedPointer>
-
 #include "scripthandlerinfo.hpp"
+// Std
+#include <memory>
 
 class DataInformation;
 class ArrayDataInformation;
@@ -42,7 +42,7 @@ public:
     QScriptValue callFunction(QScriptValue func, DataInformation* data, ScriptHandlerInfo::Mode mode);
 
 private:
-    QScopedPointer<QScriptEngine> mEngine;
+    std::unique_ptr<QScriptEngine> mEngine;
     TopLevelDataInformation* mTopLevel;
     ScriptHandlerInfo mHandlerInfo;
 };

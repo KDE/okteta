@@ -9,14 +9,16 @@
 #ifndef KASTEN_TOPLEVELDATAINFORMATION_HPP
 #define KASTEN_TOPLEVELDATAINFORMATION_HPP
 
+#include "datainformationbase.hpp"
+#include "../script/scripthandler.hpp"
+#include <Okteta/ArrayChangeMetricsList>
+// Qt
 #include <QHash>
 #include <QFileInfo>
 #include <QSharedPointer>
 #include <QQueue>
-
-#include <Okteta/ArrayChangeMetricsList>
-#include "datainformationbase.hpp"
-#include "../script/scripthandler.hpp"
+// Std
+#include <memory>
 
 namespace Okteta {
 class AbstractByteArrayModel;
@@ -109,9 +111,9 @@ Q_SIGNALS:
     void childrenRemoved(const DataInformation* sender, uint startIndex, uint endIndex);
 
 private:
-    QScopedPointer<DataInformation> mData;
-    QScopedPointer<ScriptHandler> mScriptHandler;
-    QScopedPointer<ScriptLogger> mLogger;
+    std::unique_ptr<DataInformation> mData;
+    std::unique_ptr<ScriptHandler> mScriptHandler;
+    std::unique_ptr<ScriptLogger> mLogger;
     QFileInfo mStructureFile;
     /** Save the position this structure is locked to for each ByteArrayModel
      * QObject::destroyed() has to be connected to slot removeByteArrayModel()
@@ -131,7 +133,7 @@ private:
 
 inline DataInformation* TopLevelDataInformation::actualDataInformation() const
 {
-    return mData.data();
+    return mData.get();
 }
 
 inline bool TopLevelDataInformation::isValid() const
@@ -156,12 +158,12 @@ inline void TopLevelDataInformation::setChildDataChanged()
 
 inline ScriptLogger* TopLevelDataInformation::logger() const
 {
-    return mLogger.data();
+    return mLogger.get();
 }
 
 inline ScriptHandler* TopLevelDataInformation::scriptHandler() const
 {
-    return mScriptHandler.data();
+    return mScriptHandler.get();
 }
 
 inline void TopLevelDataInformation::_childCountAboutToChange(DataInformation* sender, uint oldCount, uint newCount)

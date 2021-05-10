@@ -14,6 +14,8 @@
 // Qt
 #include <QVector>
 #include <QObject>
+// Std
+#include <memory>
 
 namespace Kasten {
 
@@ -55,7 +57,7 @@ Q_SIGNALS:
     void closing(const QVector<Kasten::AbstractView*>& views);
 
 private:
-    const QScopedPointer<class ViewManagerPrivate> d_ptr;
+    const std::unique_ptr<class ViewManagerPrivate> d_ptr;
     Q_DECLARE_PRIVATE(ViewManager)
 };
 

@@ -14,6 +14,8 @@
 // Qt
 #include <QObject>
 #include <QVector>
+// Std
+#include <memory>
 
 namespace Kasten {
 
@@ -48,7 +50,7 @@ public:
     void setGeneratorConfigEditorFactories(const QVector<AbstractModelDataGeneratorConfigEditorFactory*>& factoryList);
 
 private:
-    const QScopedPointer<class ModelCodecViewManagerPrivate> d_ptr;
+    const std::unique_ptr<class ModelCodecViewManagerPrivate> d_ptr;
     Q_DECLARE_PRIVATE(ModelCodecViewManager)
 };
 

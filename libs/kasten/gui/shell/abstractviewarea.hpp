@@ -13,6 +13,8 @@
 #include "kastengui_export.hpp"
 // Qt
 #include <QObject>
+// Std
+#include <memory>
 
 class QWidget;
 
@@ -45,7 +47,7 @@ Q_SIGNALS:
     void focusChanged(bool hasFocus);
 
 protected:
-    const QScopedPointer<AbstractViewAreaPrivate> d_ptr;
+    const std::unique_ptr<AbstractViewAreaPrivate> d_ptr;
 
 private:
     Q_DECLARE_PRIVATE(AbstractViewArea)

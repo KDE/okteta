@@ -9,9 +9,6 @@
 #ifndef KASTEN_DATAINFORMATIONFACTORY_HPP
 #define KASTEN_DATAINFORMATIONFACTORY_HPP
 
-#include <QScriptValue>
-#include <QSharedPointer>
-
 #include "../datatypes/primitive/bitfield/abstractbitfielddatainformation.hpp"
 #include "../datatypes/primitive/primitivedatainformation.hpp"
 #include "../datatypes/primitive/enumdefinition.hpp"
@@ -26,6 +23,11 @@
 
 #include "../script/scriptlogger.hpp"
 #include "parserutils.hpp"
+// Qt
+#include <QScriptValue>
+#include <QSharedPointer>
+// Std
+#include <memory>
 
 struct CommonParsedData : public ParserInfo
 {
@@ -126,9 +128,9 @@ struct TaggedUnionParsedData : public ParserInfo
         QSharedPointer<ChildrenParser> fields;
     };
     inline explicit TaggedUnionParsedData(const ParserInfo& i) : ParserInfo(i) {}
-    QScopedPointer<ChildrenParser> children;
+    std::unique_ptr<ChildrenParser> children;
     QVector<Alternatives> alternatives;
-    QScopedPointer<ChildrenParser> defaultFields;
+    std::unique_ptr<ChildrenParser> defaultFields;
 
 private:
     Q_DISABLE_COPY(TaggedUnionParsedData)
@@ -137,7 +139,7 @@ private:
 struct StructOrUnionParsedData : public ParserInfo
 {
     inline explicit StructOrUnionParsedData(const ParserInfo& i) : ParserInfo(i) {}
-    QScopedPointer<ChildrenParser> children;
+    std::unique_ptr<ChildrenParser> children;
 
 private:
     Q_DISABLE_COPY(StructOrUnionParsedData)

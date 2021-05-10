@@ -12,9 +12,10 @@
 #include <Okteta/Address>
 #include "../datainformationbase.hpp"
 #include "../primitivedatatype.hpp"
-
+// Qt
 #include <Qt>
-#include <QScopedPointer>
+// Std
+#include <memory>
 
 class QWidget;
 class QScriptEngine;
@@ -76,12 +77,12 @@ protected:
 
 protected:
     ArrayDataInformation* mParent;
-    QScopedPointer<DataInformation> mChildType;
+    std::unique_ptr<DataInformation> mChildType;
 };
 
 inline DataInformation* AbstractArrayData::childType() const
 {
-    return mChildType.data();
+    return mChildType.get();
 }
 
 #endif // KASTEN_ABSTRACTARRAYDATA_HPP

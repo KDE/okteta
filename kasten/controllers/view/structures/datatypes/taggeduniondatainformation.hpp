@@ -71,7 +71,7 @@ private:
 //    /** If mUnion is non-null the children are displayed inside a union and the correct
 //     * child is highlighted. Otherwise only the correct fields will be appended after mChildren
 //     */
-//    QScopedPointer<UnionDataInformation> mUnion;
+//    std::unique_ptr<UnionDataInformation> mUnion;
     int mLastIndex = -1;
 };
 

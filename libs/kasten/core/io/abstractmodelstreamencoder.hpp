@@ -14,6 +14,8 @@
 // Qt
 #include <QObject>
 #include <QString>
+// Std
+#include <memory>
 
 class QIODevice;
 
@@ -54,7 +56,7 @@ public:
     QString remoteClipboardMimeType() const;
 
 protected:
-    const QScopedPointer<AbstractModelStreamEncoderPrivate> d_ptr;
+    const std::unique_ptr<AbstractModelStreamEncoderPrivate> d_ptr;
 
 private:
     Q_DECLARE_PRIVATE(AbstractModelStreamEncoder)

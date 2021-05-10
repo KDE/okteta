@@ -13,6 +13,8 @@
 #include <Okteta/AddressRange>
 // Qt
 #include <QObject>
+// Std
+#include <memory>
 
 class AbstractByteArrayChecksumParameterSet;
 namespace Okteta {
@@ -45,7 +47,7 @@ Q_SIGNALS: // TODO: add check for signal to tests
     void calculatedBytes(int bytes) const;
 
 private:
-    QScopedPointer<class AbstractByteArrayChecksumAlgorithmPrivate> const d;
+    const std::unique_ptr<class AbstractByteArrayChecksumAlgorithmPrivate> d;
 };
 
 #endif

@@ -7,12 +7,14 @@
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
+#include "view/structures/parsers/parserutils.hpp"
+// Qt
 #include <QTest>
 #include <QScriptValue>
 #include <QScriptEngine>
+// Std
+#include <memory>
 #include <limits>
-
-#include "view/structures/parsers/parserutils.hpp"
 
 class CommonParserTest : public QObject
 {
@@ -239,9 +241,9 @@ inline void CommonParserTest::testToStringEncoding()
 {
     QFETCH(QString, str);
     QFETCH(int, expected);
-    QScopedPointer<ScriptLogger> logger(new ScriptLogger());
+    std::unique_ptr<ScriptLogger> logger(new ScriptLogger());
     StringDataInformation::StringType type =
-        ParserUtils::toStringEncoding(str, LoggerWithContext(logger.data(), QString()));
+        ParserUtils::toStringEncoding(str, LoggerWithContext(logger.get(), QString()));
     QCOMPARE((int)type, expected);
 }
 

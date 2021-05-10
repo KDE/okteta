@@ -71,7 +71,7 @@ qint64 PointerDataInformation::readData(Okteta::AbstractByteArrayModel* input, O
 BitCount64 PointerDataInformation::childPosition(const DataInformation* child, Okteta::Address start) const
 {
     // TODO other pointer modes
-    Q_ASSERT(child == mPointerTarget.data());
+    Q_ASSERT(child == mPointerTarget.get());
     Q_UNUSED(child);
 
     return mWasAbleToRead ? interpret(start) * 8 : 0;
@@ -79,8 +79,8 @@ BitCount64 PointerDataInformation::childPosition(const DataInformation* child, O
 
 int PointerDataInformation::indexOf(const DataInformation* const data) const
 {
-    Q_ASSERT(data == mPointerTarget.data());
-    return data == mPointerTarget.data() ? 0 : -1;
+    Q_ASSERT(data == mPointerTarget.get());
+    return data == mPointerTarget.get() ? 0 : -1;
 }
 
 void PointerDataInformation::delayedReadData(Okteta::AbstractByteArrayModel* input, Okteta::Address address)
@@ -101,10 +101,10 @@ void PointerDataInformation::delayedReadData(Okteta::AbstractByteArrayModel* inp
         return;
     }
     // update the child now
-    DataInformation* oldTarget = mPointerTarget.data();
-    topLevelDataInformation()->scriptHandler()->updateDataInformation(mPointerTarget.data());
+    DataInformation* oldTarget = mPointerTarget.get();
+    topLevelDataInformation()->scriptHandler()->updateDataInformation(mPointerTarget.get());
     // Let the child do the work (maybe different than before now)
-    if (mPointerTarget.data() != oldTarget) {
+    if (mPointerTarget.get() != oldTarget) {
         logInfo() << "Pointer target was replaced.";
         topLevelDataInformation()->setChildDataChanged();
     }
@@ -130,7 +130,7 @@ uint PointerDataInformation::childCount() const
 DataInformation* PointerDataInformation::childAt(uint index) const
 {
     Q_ASSERT(index == 0);
-    return index == 0 ? mPointerTarget.data() : nullptr;
+    return index == 0 ? mPointerTarget.get() : nullptr;
 }
 
 bool PointerDataInformation::setPointerType(DataInformation* type)
@@ -154,7 +154,7 @@ bool PointerDataInformation::setPointerType(DataInformation* type)
 
 QScriptClass* PointerDataInformation::scriptClass(ScriptHandlerInfo* handlerInfo) const
 {
-    return handlerInfo->mPointerClass.data();
+    return handlerInfo->mPointerClass.get();
 }
 
 bool PointerDataInformation::canHaveChildren() const

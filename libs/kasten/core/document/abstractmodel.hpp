@@ -13,6 +13,8 @@
 #include "kastencore_export.hpp"
 // Qt
 #include <QObject>
+// Std
+#include <memory>
 
 class QString;
 
@@ -67,7 +69,7 @@ protected:
     void setBaseModel(AbstractModel* baseModel);
 
 protected:
-    const QScopedPointer<AbstractModelPrivate> d_ptr;
+    const std::unique_ptr<AbstractModelPrivate> d_ptr;
 
 private:
     Q_DECLARE_PRIVATE(AbstractModel)

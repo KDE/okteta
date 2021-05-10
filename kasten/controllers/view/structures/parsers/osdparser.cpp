@@ -21,12 +21,13 @@
 #include "../script/scriptlogger.hpp"
 #include "../script/scriptengineinitializer.hpp"
 #include "../structlogging.hpp"
-
+// Qt
 #include <QFile>
 #include <QFileInfo>
-
 #include <QDomDocument>
 #include <QScriptEngine>
+// Std
+#include <memory>
 
 using namespace ParserStrings;
 
@@ -98,9 +99,9 @@ QDomDocument OsdParser::openDocFromFile(ScriptLogger* logger) const
 QStringList OsdParser::parseStructureNames() const
 {
     QStringList ret;
-    QScopedPointer<ScriptLogger> rootLogger(new ScriptLogger); // only needed if we get an error right now
+    std::unique_ptr<ScriptLogger> rootLogger(new ScriptLogger); // only needed if we get an error right now
     rootLogger->setLogToStdOut(true); // we cannot get our messages into the script console, so do this instead
-    QDomDocument document = openDoc(rootLogger.data());
+    QDomDocument document = openDoc(rootLogger.get());
     if (document.isNull()) {
         return {};
     }
@@ -129,11 +130,11 @@ QVector<TopLevelDataInformation*> OsdParser::parseStructures() const
     QFileInfo fileInfo(mAbsolutePath);
 
     QVector<TopLevelDataInformation*> structures;
-    QScopedPointer<ScriptLogger> rootLogger(new ScriptLogger()); // only needed in we get an error right now
-    QDomDocument document = openDoc(rootLogger.data());
+    std::unique_ptr<ScriptLogger> rootLogger(new ScriptLogger()); // only needed in we get an error right now
+    QDomDocument document = openDoc(rootLogger.get());
     if (document.isNull()) {
         structures.append(new TopLevelDataInformation(
-                              new DummyDataInformation(nullptr, fileInfo.fileName()), rootLogger.take(), nullptr, fileInfo));
+                              new DummyDataInformation(nullptr, fileInfo.fileName()), rootLogger.release(), nullptr, fileInfo));
         return structures;
     }
 
@@ -141,7 +142,7 @@ QVector<TopLevelDataInformation*> OsdParser::parseStructures() const
     if (rootElem.isNull()) {
         rootLogger->error() << "Missing top level <data> element!";
         structures.append(new TopLevelDataInformation(
-                              new DummyDataInformation(nullptr, fileInfo.fileName()), rootLogger.take(), nullptr, fileInfo));
+                              new DummyDataInformation(nullptr, fileInfo.fileName()), rootLogger.release(), nullptr, fileInfo));
         return structures;
     }
     int count = 1;

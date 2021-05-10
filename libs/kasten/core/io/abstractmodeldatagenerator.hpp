@@ -14,6 +14,8 @@
 // Qt
 #include <QObject>
 #include <QString>
+// Std
+#include <memory>
 
 class QMimeData;
 
@@ -49,7 +51,7 @@ public:
     Flags flags() const;
 
 protected:
-    const QScopedPointer<AbstractModelDataGeneratorPrivate> d_ptr;
+    const std::unique_ptr<AbstractModelDataGeneratorPrivate> d_ptr;
 
 private:
     Q_DECLARE_PRIVATE(AbstractModelDataGenerator)

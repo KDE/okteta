@@ -9,7 +9,8 @@
 #ifndef KASTEN_ABSTRACTBYTEARRAYFILTERPARAMETERSET_HPP
 #define KASTEN_ABSTRACTBYTEARRAYFILTERPARAMETERSET_HPP
 
-#include <QScopedPointer>
+// Std
+#include <memory>
 
 class AbstractByteArrayFilterParameterSet
 {
@@ -23,7 +24,7 @@ public:
     virtual const char* id() const = 0;
 
 private:
-    QScopedPointer<class AbstractByteArrayFilterParameterSetPrivate> const d;
+    const std::unique_ptr<class AbstractByteArrayFilterParameterSetPrivate> d;
 };
 
 #endif

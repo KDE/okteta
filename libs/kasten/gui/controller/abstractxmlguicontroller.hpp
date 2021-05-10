@@ -13,6 +13,8 @@
 #include "kastengui_export.hpp"
 // Qt
 #include <QObject>
+// Std
+#include <memory>
 
 class KXMLGUIClient;
 
@@ -46,7 +48,7 @@ public: // API to be implemented
     virtual void setTargetModel(AbstractModel* model);   // = 0;
 
 private:
-    const QScopedPointer<class AbstractXmlGuiControllerPrivate> d_ptr;
+    const std::unique_ptr<class AbstractXmlGuiControllerPrivate> d_ptr;
 };
 
 }

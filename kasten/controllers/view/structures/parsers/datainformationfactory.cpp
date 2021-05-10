@@ -329,8 +329,8 @@ PointerDataInformation* DataInformationFactory::newPointer(const PointerParsedDa
 
 TaggedUnionDataInformation* DataInformationFactory::newTaggedUnion(const TaggedUnionParsedData& pd)
 {
-    QScopedPointer<TaggedUnionDataInformation> tagged(new TaggedUnionDataInformation(pd.name, pd.parent));
-    pd.children->setParent(tagged.data());
+    std::unique_ptr<TaggedUnionDataInformation> tagged(new TaggedUnionDataInformation(pd.name, pd.parent));
+    pd.children->setParent(tagged.get());
     while (pd.children->hasNext()) {
         DataInformation* data = pd.children->next();
         if (data) {
@@ -385,7 +385,7 @@ TaggedUnionDataInformation* DataInformationFactory::newTaggedUnion(const TaggedU
     }
     tagged->setAlternatives(altInfo, false);
 
-    pd.defaultFields->setParent(tagged.data());
+    pd.defaultFields->setParent(tagged.get());
     while (pd.defaultFields->hasNext()) {
         DataInformation* data = pd.defaultFields->next();
         if (data) {
@@ -394,5 +394,5 @@ TaggedUnionDataInformation* DataInformationFactory::newTaggedUnion(const TaggedU
             return nullptr; // error message should be logged already
         }
     }
-    return tagged.take();
+    return tagged.release();
 }

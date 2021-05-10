@@ -13,7 +13,8 @@
 #include "oktetagui_export.hpp"
 // Qt
 #include <QtGlobal>
-#include <QScopedPointer>
+// Std
+#include <memory>
 
 class QPalette;
 
@@ -34,7 +35,7 @@ public: // API to be reimplemented in the subclasses
     virtual const QPalette& palette() const = 0;
 
 protected:
-    const QScopedPointer<AbstractColumnStylistPrivate> d_ptr;
+    const std::unique_ptr<AbstractColumnStylistPrivate> d_ptr;
 
 private:
     Q_DECLARE_PRIVATE(AbstractColumnStylist)

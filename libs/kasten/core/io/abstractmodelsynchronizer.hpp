@@ -14,6 +14,8 @@
 #include "kastencore.hpp"
 // Qt
 #include <QObject>
+// Std
+#include <memory>
 
 class QUrl;
 
@@ -114,7 +116,7 @@ protected: // get
     void setUrl(const QUrl& url);
 
 protected:
-    const QScopedPointer<AbstractModelSynchronizerPrivate> d_ptr;
+    const std::unique_ptr<AbstractModelSynchronizerPrivate> d_ptr;
 
 private:
     Q_DECLARE_PRIVATE(AbstractModelSynchronizer)

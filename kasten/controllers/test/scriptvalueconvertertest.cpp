@@ -8,17 +8,19 @@
 
 #include "view/structures/script/scriptengineinitializer.hpp"
 #include "view/structures/allprimitivetypes.hpp"
-
-#include <QTest>
-#include <QString>
-#include <QDebug>
-#include <QScriptEngine>
 #include "view/structures/parsers/scriptvalueconverter.hpp"
 #include "view/structures/datatypes/datainformation.hpp"
 #include "view/structures/datatypes/primitive/primitivedatainformation.hpp"
 #include "view/structures/datatypes/primitive/enumdatainformation.hpp"
 #include "view/structures/script/scriptlogger.hpp"
 #include "view/structures/parsers/parserutils.hpp"
+// Qt
+#include <QTest>
+#include <QString>
+#include <QDebug>
+#include <QScriptEngine>
+// Std
+#include <memory>
 
 class ScriptValueConverterTest : public QObject
 {
@@ -37,19 +39,19 @@ private:
     DataInformation* convert(const QScriptValue& value);
     QScriptValue evaluate(const char* code);
     void dumpLoggerOutput();
-    QScopedPointer<QScriptEngine> engine;
-    QScopedPointer<ScriptLogger> logger;
+    std::unique_ptr<QScriptEngine> engine;
+    std::unique_ptr<ScriptLogger> logger;
 };
 
 DataInformation* ScriptValueConverterTest::convert(const QString& code)
 {
     QScriptValue value = engine->evaluate(code);
-    return ScriptValueConverter::convert(value, QStringLiteral("value"), logger.data());
+    return ScriptValueConverter::convert(value, QStringLiteral("value"), logger.get());
 }
 
 DataInformation* ScriptValueConverterTest::convert(const QScriptValue& value)
 {
-    return ScriptValueConverter::convert(value, QStringLiteral("value"), logger.data());
+    return ScriptValueConverter::convert(value, QStringLiteral("value"), logger.get());
 }
 
 QScriptValue ScriptValueConverterTest::evaluate(const char* code)
@@ -70,7 +72,7 @@ void ScriptValueConverterTest::basicConverterTest()
     QScriptValue sVal = evaluate("var foo = { value : uint8(),\n"
                                  " str : struct({first : uint8(), second : uint16()}),\n"
                                  " obj : array(uint32(), 10) \n}\n foo");
-    QVector<DataInformation*> converted = ScriptValueConverter::convertValues(sVal, logger.data());
+    QVector<DataInformation*> converted = ScriptValueConverter::convertValues(sVal, logger.get());
     QCOMPARE(converted.size(), 3);
     QVERIFY(converted[0]->isPrimitive());
     QCOMPARE(converted[0]->name(), QStringLiteral("value"));
@@ -84,7 +86,7 @@ void ScriptValueConverterTest::basicConverterTest()
     // test with an array now
     sVal = evaluate("var foo = [uint8(), uint16(), uint32()]; foo");
     qDeleteAll(converted);
-    converted = ScriptValueConverter::convertValues(sVal, logger.data());
+    converted = ScriptValueConverter::convertValues(sVal, logger.get());
     QCOMPARE(converted.size(), 3);
     QVERIFY(converted[0]->isPrimitive());
     QVERIFY(converted[1]->isPrimitive());
@@ -149,7 +151,7 @@ void ScriptValueConverterTest::basicConverterTest()
                     " str : struct({first : uint8(), second : uint16()}),\n"
                     " obj : array(uint32(), 10) \n}\n foo");
     qDeleteAll(converted);
-    converted = ScriptValueConverter::convertValues(sVal, logger.data());
+    converted = ScriptValueConverter::convertValues(sVal, logger.get());
     QCOMPARE(converted.size(), 2);
     // first entry is invalid
     QCOMPARE(logger->rowCount(QModelIndex()), 11);
@@ -201,10 +203,10 @@ void ScriptValueConverterTest::testPrimitives()
     if (type == PrimitiveDataType::Invalid) {
         return; // the cast will fail
     }
-    QScopedPointer<DataInformation> data1(ScriptValueConverter::convert(val1, QStringLiteral("val1"),
-                                                                        logger.data()));
-    QScopedPointer<DataInformation> data2(ScriptValueConverter::convert(val2, QStringLiteral("val2"),
-                                                                        logger.data()));
+    std::unique_ptr<DataInformation> data1(ScriptValueConverter::convert(val1, QStringLiteral("val1"),
+                                                                        logger.get()));
+    std::unique_ptr<DataInformation> data2(ScriptValueConverter::convert(val2, QStringLiteral("val2"),
+                                                                        logger.get()));
     QVERIFY(data1);
     QVERIFY(data2);
     PrimitiveDataInformation* p1 = data1->asPrimitive();
@@ -216,7 +218,7 @@ void ScriptValueConverterTest::testPrimitives()
     if (type == PrimitiveDataType::Bitfield) {
         return; // the following tests don't work with bitfields
     }
-    QScopedPointer<DataInformation> data3(convert(QStringLiteral("\"%1\"").arg(typeString)));
+    std::unique_ptr<DataInformation> data3(convert(QStringLiteral("\"%1\"").arg(typeString)));
     QVERIFY(data3);
     PrimitiveDataInformation* p3 = data3->asPrimitive();
     QVERIFY(p3);
@@ -237,7 +239,7 @@ void ScriptValueConverterTest::testParseEnum()
     QVERIFY(val.isObject());
     QCOMPARE(val.property(ParserStrings::PROPERTY_INTERNAL_TYPE()).toString(), QStringLiteral("enum"));
 
-    QScopedPointer<DataInformation> data(ScriptValueConverter::convert(val, QStringLiteral("val"), logger.data()));
+    std::unique_ptr<DataInformation> data(ScriptValueConverter::convert(val, QStringLiteral("val"), logger.get()));
     if (expectedCount > 0) {
         QVERIFY(data);
     } else {

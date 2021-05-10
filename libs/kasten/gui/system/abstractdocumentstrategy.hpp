@@ -13,6 +13,8 @@
 #include "kastengui_export.hpp"
 // Qt
 #include <QObject>
+// Std
+#include <memory>
 
 template <typename C> class QVector;
 class QUrl;
@@ -72,7 +74,7 @@ Q_SIGNALS:
     void urlUsed(const QUrl& url);
 
 protected:
-    const QScopedPointer<AbstractDocumentStrategyPrivate> d_ptr;
+    const std::unique_ptr<AbstractDocumentStrategyPrivate> d_ptr;
 
 private:
     Q_DECLARE_PRIVATE(AbstractDocumentStrategy)

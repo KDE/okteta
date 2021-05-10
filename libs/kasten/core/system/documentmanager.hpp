@@ -14,6 +14,8 @@
 // Qt
 #include <QVector>
 #include <QObject>
+// Std
+#include <memory>
 
 class QStringList;
 
@@ -78,7 +80,7 @@ Q_SIGNALS:
     void focusRequested(Kasten::AbstractDocument* document);
 
 private:
-    const QScopedPointer<class DocumentManagerPrivate> d_ptr;
+    const std::unique_ptr<class DocumentManagerPrivate> d_ptr;
     Q_DECLARE_PRIVATE(DocumentManager)
 };
 

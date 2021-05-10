@@ -13,6 +13,8 @@
 #include "../datainformation.hpp"
 #include "../dummydatainformation.hpp"
 #include "stringdata.hpp"
+// Std
+#include <memory>
 
 class DummyDataInformation;
 
@@ -90,8 +92,8 @@ private:
     QString valueStringImpl() const override;
 
 private:
-    QScopedPointer<DummyDataInformation> mDummy;
-    QScopedPointer<StringData> mData;
+    std::unique_ptr<DummyDataInformation> mDummy;
+    std::unique_ptr<StringData> mData;
     StringType mEncoding = StringType::InvalidEncoding;
 
     static const QString encodingNames[static_cast<int>(StringDataInformation::StringType::EBCDIC)+2];

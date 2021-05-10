@@ -13,6 +13,8 @@
 #include "kastencore_export.hpp"
 // KF
 #include <KJob>
+// Std
+#include <memory>
 
 namespace Kasten {
 
@@ -35,7 +37,7 @@ protected:
     // TODO: or better name property LoadedDocument?
 
 protected:
-    const QScopedPointer<AbstractConnectJobPrivate> d_ptr;
+    const std::unique_ptr<AbstractConnectJobPrivate> d_ptr;
 };
 
 }

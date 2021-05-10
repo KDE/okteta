@@ -399,7 +399,7 @@ Okteta::AbstractByteArrayModel* StructuresTool::byteArrayModel() const
 
 StructuresManager* StructuresTool::manager() const
 {
-    return mManager.data();
+    return mManager.get();
 }
 
 QSysInfo::Endian StructuresTool::byteOrder() const

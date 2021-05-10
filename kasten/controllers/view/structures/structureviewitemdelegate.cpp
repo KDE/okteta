@@ -9,8 +9,6 @@
 #include "structureviewitemdelegate.hpp"
 #include "datatypes/datainformation.hpp"
 
-#include <QScopedPointer>
-
 StructureViewItemDelegate::StructureViewItemDelegate(QObject* parent)
     : QStyledItemDelegate(parent)
 {

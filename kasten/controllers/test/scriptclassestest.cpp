@@ -6,12 +6,6 @@
  *    SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <QTest>
-
-#include <QObject>
-#include <QScriptValueIterator>
-#include <QScriptEngine>
-
 #include "view/structures/datatypes/primitive/primitivetemplateinfo.hpp"
 #include "view/structures/datatypes/primitive/primitivedatainformation.hpp"
 #include "view/structures/datatypes/primitive/enumdatainformation.hpp"
@@ -39,6 +33,13 @@
 #include "view/structures/script/safereference.hpp"
 #include "view/structures/parsers/scriptvalueconverter.hpp"
 #include "testutils.hpp"
+// Qt
+#include <QTest>
+#include <QObject>
+#include <QScriptValueIterator>
+#include <QScriptEngine>
+// Std
+#include <memory>
 
 class ScriptClassesTest : public QObject
 {
@@ -73,31 +74,31 @@ private:
 
     QVector<PropertyPair> enumProperties;
     EnumDataInformation* enumData;
-    QScopedPointer<TopLevelDataInformation> enumDataTop;
+    std::unique_ptr<TopLevelDataInformation> enumDataTop;
     FlagDataInformation* flagData;
-    QScopedPointer<TopLevelDataInformation> flagDataTop;
+    std::unique_ptr<TopLevelDataInformation> flagDataTop;
 
     QVector<PropertyPair> bitfieldProperties;
     SignedBitfieldDataInformation* signedBitfield;
-    QScopedPointer<TopLevelDataInformation> signedBitfieldTop;
+    std::unique_ptr<TopLevelDataInformation> signedBitfieldTop;
     UnsignedBitfieldDataInformation* unsignedBitfield;
-    QScopedPointer<TopLevelDataInformation> unsignedBitfieldTop;
+    std::unique_ptr<TopLevelDataInformation> unsignedBitfieldTop;
     BoolBitfieldDataInformation* boolBitfield;
-    QScopedPointer<TopLevelDataInformation> boolBitfieldTop;
+    std::unique_ptr<TopLevelDataInformation> boolBitfieldTop;
 
     QVector<PropertyPair> structUnionProperties; // without children
     StructureDataInformation* structData;
-    QScopedPointer<TopLevelDataInformation> structDataTop;
+    std::unique_ptr<TopLevelDataInformation> structDataTop;
     UnionDataInformation* unionData;
-    QScopedPointer<TopLevelDataInformation> unionDataTop;
+    std::unique_ptr<TopLevelDataInformation> unionDataTop;
 
     QVector<PropertyPair> arrayProperties; // without children
     ArrayDataInformation* arrayData;
-    QScopedPointer<TopLevelDataInformation> arrayDataTop;
+    std::unique_ptr<TopLevelDataInformation> arrayDataTop;
 
     QVector<PropertyPair> stringProperties; // without children
     StringDataInformation* stringData;
-    QScopedPointer<TopLevelDataInformation> stringDataTop;
+    std::unique_ptr<TopLevelDataInformation> stringDataTop;
 
 };
 
@@ -205,13 +206,13 @@ void ScriptClassesTest::testScriptValueContents_data()
     QTest::addColumn<QScriptClass*>("scriptClass");
 
     scriptValueContentsAddRow("struct", structData,
-                              structDataTop->scriptHandler()->handlerInfo()->mStructUnionClass.data());
+                              structDataTop->scriptHandler()->handlerInfo()->mStructUnionClass.get());
     scriptValueContentsAddRow("union", unionData,
-                              unionDataTop->scriptHandler()->handlerInfo()->mStructUnionClass.data());
+                              unionDataTop->scriptHandler()->handlerInfo()->mStructUnionClass.get());
     scriptValueContentsAddRow("array", arrayData,
-                              arrayDataTop->scriptHandler()->handlerInfo()->mArrayClass.data());
+                              arrayDataTop->scriptHandler()->handlerInfo()->mArrayClass.get());
     scriptValueContentsAddRow("string", stringData,
-                              stringDataTop->scriptHandler()->handlerInfo()->mStringClass.data());
+                              stringDataTop->scriptHandler()->handlerInfo()->mStringClass.get());
 }
 
 void ScriptClassesTest::testScriptValueContents()
@@ -386,7 +387,7 @@ void ScriptClassesTest::testSafePrimitiveArrayReference()
     QScriptEngine* eng = arrayDataTop->scriptEngine();
     eng->pushContext();
     eng->currentContext()->activationObject().setProperty(QStringLiteral("myArray"),
-                                                          arrayData->toScriptValue(arrayDataTop.data()));
+                                                          arrayData->toScriptValue(arrayDataTop.get()));
     arrayDataTop->scriptHandler()->handlerInfo()->setMode(ScriptHandlerInfo::Mode::Updating);
     QScriptValue v0 = eng->evaluate(QStringLiteral("myArray[0]"));
     QCOMPARE(Utils::property(v0, "name").toString(), QString::number(0));
@@ -409,10 +410,10 @@ void ScriptClassesTest::testSafePrimitiveArrayReference()
 
 void ScriptClassesTest::testSafeReferenceDeleteObject()
 {
-    QScopedPointer<TopLevelDataInformation> top(Utils::evalAndParse("struct({bar: uint8()}).set({name: 'foo'});"));
+    std::unique_ptr<TopLevelDataInformation> top(Utils::evalAndParse("struct({bar: uint8()}).set({name: 'foo'});"));
     QVERIFY(top->actualDataInformation()->isStruct());
     top->scriptHandler()->handlerInfo()->setMode(ScriptHandlerInfo::Mode::TaggedUnionSelection);
-    QScriptValue val = top->actualDataInformation()->toScriptValue(top.data());
+    QScriptValue val = top->actualDataInformation()->toScriptValue(top.get());
     QScriptValue name = Utils::property(val, "name");
     QVERIFY(name.isValid());
     QVERIFY(!name.isError());

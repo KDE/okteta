@@ -164,7 +164,7 @@ void PrimitiveArrayData<type>::activateIndex(uint index)
 {
     Q_ASSERT(index < length());
     // invalidate all previous references
-    SafeReferenceHolder::instance.invalidateAll(mChildType.data());
+    SafeReferenceHolder::instance.invalidateAll(mChildType.get());
     mChildType->mWasAbleToRead = mNumReadValues > index;
     mChildType->asPrimitive()->setValue(mData.at(index));
     mChildType->setName(QString::number(index));
@@ -213,7 +213,7 @@ int PrimitiveArrayData<type>::indexOf(const DataInformation* data) const
     if (data == &mDummy) {
         return this->mDummy.dummyIndex();
     }
-    if (data == mChildType.data()) {
+    if (data == mChildType.get()) {
         return this->mDummy.dummyIndex();
     }
     Q_ASSERT_X(false, "PrimitiveArrayData::indexOf", "Logic error, should never be reached");

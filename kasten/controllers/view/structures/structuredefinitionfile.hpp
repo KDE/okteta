@@ -9,15 +9,19 @@
 #ifndef KASTEN_STRUCTUREDEFINITIONFILE_HPP
 #define KASTEN_STRUCTUREDEFINITIONFILE_HPP
 
+// tool
+#include "datatypes/primitive/enumdefinition.hpp"
+// KF
+#include <KPluginInfo>
+// Qt
 #include <QString>
 #include <QVector>
 #include <QDir>
 #include <QStringList>
 #include <QDomNodeList>
 #include <QFileInfo>
-#include <KPluginInfo>
-
-#include "datatypes/primitive/enumdefinition.hpp"
+// Std
+#include <memory>
 
 class TopLevelDataInformation;
 class AbstractStructureParser;
@@ -51,7 +55,7 @@ public:
 
 private:
     KPluginInfo mPluginInfo;
-    QScopedPointer<AbstractStructureParser> mParser;
+    std::unique_ptr<AbstractStructureParser> mParser;
 };
 
 } // namespace Kasten

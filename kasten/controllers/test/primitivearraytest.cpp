@@ -6,19 +6,21 @@
  *    SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <QTest>
-#include <QScriptEngine>
-#include <QRandomGenerator>
-#include <limits>
-
-#include <Okteta/ByteArrayModel>
-
 #include "view/structures/datatypes/array/arraydatainformation.hpp"
 #include "view/structures/datatypes/array/primitivearraydata.hpp"
 #include "view/structures/datatypes/topleveldatainformation.hpp"
 #include "view/structures/datatypes/primitive/primitivetemplateinfo.hpp"
 #include "view/structures/datatypes/primitivefactory.hpp"
 #include "view/structures/script/scriptengineinitializer.hpp"
+// Okteta
+#include <Okteta/ByteArrayModel>
+// Qt
+#include <QTest>
+#include <QScriptEngine>
+#include <QRandomGenerator>
+// Std
+#include <memory>
+#include <limits>
 
 class PrimitiveArrayTest : public QObject
 {
@@ -51,9 +53,9 @@ private Q_SLOTS:
 
 private:
     QScopedArrayPointer<Okteta::Byte> data;
-    QScopedPointer<Okteta::ByteArrayModel> model;
+    std::unique_ptr<Okteta::ByteArrayModel> model;
     QScopedArrayPointer<Okteta::Byte> endianData;
-    QScopedPointer<Okteta::ByteArrayModel> endianModel;
+    std::unique_ptr<Okteta::ByteArrayModel> endianModel;
 };
 
 #if Q_BYTE_ORDER == Q_LITTLE_ENDIAN
@@ -191,15 +193,15 @@ void PrimitiveArrayTest::testReadCustomizedPrimitiveInternal()
     auto* dataInf = new ArrayDataInformation(QStringLiteral("values"),
                                              endianModel->size() / sizeof(T),
                                              primInfo);
-    QScopedPointer<TopLevelDataInformation> top(new TopLevelDataInformation(dataInf, nullptr, engine));
+    std::unique_ptr<TopLevelDataInformation> top(new TopLevelDataInformation(dataInf, nullptr, engine));
 
     QCOMPARE(dataInf->childCount(), uint(ENDIAN_SIZE / sizeof(T)));
     quint8 bitOffs = 0;
-    qint64 result = dataInf->readData(endianModel.data(), 0, endianModel->size() * 8, &bitOffs);
+    qint64 result = dataInf->readData(endianModel.get(), 0, endianModel->size() * 8, &bitOffs);
     QCOMPARE(Okteta::Size(result), endianModel->size() * 8);
     T* dataAsT = reinterpret_cast<T*>(endianData.data());
     QVERIFY(!dataInf->mData->isComplex());
-    auto* arrayData = static_cast<PrimitiveArrayData<primType>*>(dataInf->mData.data());
+    auto* arrayData = static_cast<PrimitiveArrayData<primType>*>(dataInf->mData.get());
 
     // Verify byteOrder of values. The data is set up without palindromes.
     if (sizeof(T) > 1) {
@@ -232,15 +234,15 @@ void PrimitiveArrayTest::testReadPrimitiveInternal()
                                                              model->size() / sizeof(T),
                                                              PrimitiveFactory::newInstance(QStringLiteral("value"), primType, lwc));
     dataInf->setByteOrder(CURRENT_BYTE_ORDER);
-    QScopedPointer<TopLevelDataInformation> top(new TopLevelDataInformation(dataInf, nullptr,
+    std::unique_ptr<TopLevelDataInformation> top(new TopLevelDataInformation(dataInf, nullptr,
                                                                             ScriptEngineInitializer::newEngine()));
     QCOMPARE(dataInf->childCount(), uint(SIZE / sizeof(T)));
     quint8 bitOffs = 0;
-    qint64 result = dataInf->readData(model.data(), 0, model->size() * 8, &bitOffs);
+    qint64 result = dataInf->readData(model.get(), 0, model->size() * 8, &bitOffs);
     QCOMPARE(Okteta::Size(result), model->size() * 8);
-    T* dataAsT = reinterpret_cast<T*>(data.data());
+    T* dataAsT = reinterpret_cast<T*>(data.get());
     QVERIFY(!dataInf->mData->isComplex());
-    auto* arrayData = static_cast<PrimitiveArrayData<primType>*>(dataInf->mData.data());
+    auto* arrayData = static_cast<PrimitiveArrayData<primType>*>(dataInf->mData.get());
     for (uint i = 0; i < dataInf->childCount(); ++i) {
         AllPrimitiveTypes childDataAll = arrayData->valueAt(i);
         T childData = childDataAll.value<T>();

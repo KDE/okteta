@@ -14,6 +14,8 @@
 #include "widgetsdockable.hpp"
 // KF
 #include <KXmlGuiWindow>
+// Std
+#include <memory>
 
 namespace Kasten {
 class ShellWindowPrivate;
@@ -53,7 +55,7 @@ protected:
     ViewManager* viewManager() const;
 
 protected:
-    const QScopedPointer<ShellWindowPrivate> d_ptr;
+    const std::unique_ptr<ShellWindowPrivate> d_ptr;
 
 private:
     Q_DECLARE_PRIVATE(ShellWindow)

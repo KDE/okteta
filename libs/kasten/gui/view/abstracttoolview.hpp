@@ -13,6 +13,8 @@
 #include "kastengui_export.hpp"
 // Qt
 #include <QObject>
+// Std
+#include <memory>
 
 class QWidget;
 class QString;
@@ -38,7 +40,7 @@ public: // API to be implemented
     virtual AbstractTool* tool() const = 0;
 
 private:
-    const QScopedPointer<class AbstractToolViewPrivate> d_ptr;
+    const std::unique_ptr<class AbstractToolViewPrivate> d_ptr;
 };
 
 }

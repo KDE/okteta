@@ -6,8 +6,6 @@
  *    SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <QTest>
-
 #include "view/structures/datatypes/array/arraydatainformation.hpp"
 #include "view/structures/datatypes/array/primitivearraydata.hpp"
 #include "view/structures/datatypes/strings/stringdatainformation.hpp"
@@ -21,6 +19,10 @@
 #include "view/structures/datatypes/primitivefactory.hpp"
 #include "view/structures/datatypes/uniondatainformation.hpp"
 #include "view/structures/datatypes/structuredatainformation.hpp"
+// Qt
+#include <QTest>
+// Std
+#include <memory>
 
 struct ExpectedResults
 {
@@ -231,11 +233,11 @@ void BasicDataInformationTest::basicTest(DataInformationBase* data, const Expect
     QCOMPARE(dataInf->parent(), expected.parent);
 
     DataInformation* clone1 = (dataInf->clone());
-    QScopedPointer<TopLevelDataInformation> top(new TopLevelDataInformation(clone1));
-    QCOMPARE(clone1->parent(), top.data()); // top takes ownership of clone1
+    std::unique_ptr<TopLevelDataInformation> top(new TopLevelDataInformation(clone1));
+    QCOMPARE(clone1->parent(), top.get()); // top takes ownership of clone1
     QCOMPARE(top->actualDataInformation(), clone1);
 
-    QScopedPointer<DataInformation> clone2(clone1->clone());
+    std::unique_ptr<DataInformation> clone2(clone1->clone());
     QVERIFY(clone2->parent() == nullptr); // cloning should reset parent to NULL, else we get dangling pointers
 
     QCOMPARE(dataInf->flags(DataInformation::ColumnName, true), expected.columnFlags[DataInformation::ColumnName]);

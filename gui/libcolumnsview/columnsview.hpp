@@ -15,6 +15,8 @@
 #include "linerange.hpp"
 // Qt
 #include <QAbstractScrollArea>
+// Std
+#include <memory>
 
 namespace Okteta {
 
@@ -125,7 +127,7 @@ protected: // recalculations
     void updateColumn(AbstractColumnRenderer& columnRenderer, const LineRange& lines);
 
 protected:
-    const QScopedPointer<ColumnsViewPrivate> d_ptr;
+    const std::unique_ptr<ColumnsViewPrivate> d_ptr;
 
 private:
     Q_DECLARE_PRIVATE(ColumnsView)

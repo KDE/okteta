@@ -6,11 +6,13 @@
  *    SPDX-License-Identifier: LGPL-2.1-or-later
 */
 
-#include <QTest>
-#include <QScopedPointer>
-
-#include <Okteta/ByteArrayModel>
 #include "view/structures/allprimitivetypes.hpp"
+// Okteta
+#include <Okteta/ByteArrayModel>
+// Qt
+#include <QTest>
+// Std
+#include <memory>
 
 class AllPrimitiveTypesTest : public QObject
 {
@@ -25,15 +27,15 @@ private Q_SLOTS:
 private:
     template <typename T> inline T readLittle(quint8 bitOffset)
     {
-        return AllPrimitiveTypes::readValue<T>(model.data(), 0, QSysInfo::LittleEndian, bitOffset);
+        return AllPrimitiveTypes::readValue<T>(model.get(), 0, QSysInfo::LittleEndian, bitOffset);
     }
     template <typename T> inline T readBig(quint8 bitOffset)
     {
-        return AllPrimitiveTypes::readValue<T>(model.data(), 0, QSysInfo::BigEndian, bitOffset);
+        return AllPrimitiveTypes::readValue<T>(model.get(), 0, QSysInfo::BigEndian, bitOffset);
     }
 
 private:
-    QScopedPointer<Okteta::ByteArrayModel> model;
+    std::unique_ptr<Okteta::ByteArrayModel> model;
 };
 
 static constexpr Okteta::Byte data[9] =

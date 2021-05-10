@@ -14,6 +14,8 @@
 // Qt
 #include <QObject>
 #include <QString>
+// Std
+#include <memory>
 
 class QUrl;
 
@@ -47,7 +49,7 @@ public:
     QString remoteMimeType() const;
 
 protected:
-    const QScopedPointer<AbstractModelExporterPrivate> d_ptr;
+    const std::unique_ptr<AbstractModelExporterPrivate> d_ptr;
 
 private:
     Q_DECLARE_PRIVATE(AbstractModelExporter)

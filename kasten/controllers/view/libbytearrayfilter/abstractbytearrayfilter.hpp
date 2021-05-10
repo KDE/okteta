@@ -14,6 +14,8 @@
 #include <Okteta/Byte>
 // Qt
 #include <QObject>
+// Std
+#include <memory>
 
 class AbstractByteArrayFilterParameterSet;
 namespace Okteta {
@@ -46,7 +48,7 @@ Q_SIGNALS: // TODO: add check for signal to tests
     void filteredBytes(int bytes) const;
 
 private:
-    QScopedPointer<class AbstractByteArrayFilterPrivate> const d;
+    const std::unique_ptr<class AbstractByteArrayFilterPrivate> d;
 };
 
 #endif

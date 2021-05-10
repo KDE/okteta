@@ -12,8 +12,8 @@
 // lib
 #include "oktetacore_export.hpp"
 #include "addressrange.hpp"
-// Qt
-#include <QScopedPointer>
+// Std
+#include <memory>
 
 class QString;
 
@@ -114,7 +114,7 @@ public:
     QString text(Address index, Address lastIndex = -1) const;
 
 private:
-    const QScopedPointer<class TextByteArrayAnalyzerPrivate> d_ptr;
+    const std::unique_ptr<class TextByteArrayAnalyzerPrivate> d_ptr;
     Q_DECLARE_PRIVATE(TextByteArrayAnalyzer)
 };
 

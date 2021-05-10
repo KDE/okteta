@@ -17,6 +17,8 @@
 // Qt
 #include <QObject>
 #include <QByteArray>
+// Std
+#include <memory>
 
 namespace Okteta {
 
@@ -248,7 +250,7 @@ Q_SIGNALS:
     void searchedBytes(Okteta::Size bytes) const;
 
 protected:
-    const QScopedPointer<AbstractByteArrayModelPrivate> d_ptr;
+    const std::unique_ptr<AbstractByteArrayModelPrivate> d_ptr;
 
 private:
     Q_DECLARE_PRIVATE(AbstractByteArrayModel)

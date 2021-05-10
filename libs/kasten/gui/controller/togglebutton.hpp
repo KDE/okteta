@@ -13,6 +13,8 @@
 #include "kastengui_export.hpp"
 // Qt
 #include <QToolButton>
+// Std
+#include <memory>
 
 namespace Kasten {
 
@@ -30,7 +32,7 @@ public:
     void setCheckedState(const QString& text, const QString& toolTip);
 
 private:
-    const QScopedPointer<class ToggleButtonPrivate> d_ptr;
+    const std::unique_ptr<class ToggleButtonPrivate> d_ptr;
     Q_DECLARE_PRIVATE(ToggleButton)
 };
 

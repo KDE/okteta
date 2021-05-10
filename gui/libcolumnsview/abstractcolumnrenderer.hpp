@@ -13,7 +13,9 @@
 #include "oktetagui_export.hpp"
 #include "pixelmetrics.hpp"
 // Qt
-#include <QScopedPointer>
+#include <QtGlobal>
+// Std
+#include <memory>
 
 class QPainter;
 
@@ -98,7 +100,7 @@ protected:
     void renderBlankLine(QPainter* painter) const;
 
 protected:
-    const QScopedPointer<AbstractColumnRendererPrivate> d_ptr;
+    const std::unique_ptr<AbstractColumnRendererPrivate> d_ptr;
 
 private:
     Q_DECLARE_PRIVATE(AbstractColumnRenderer)

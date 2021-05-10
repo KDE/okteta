@@ -217,7 +217,7 @@ bool DataInformationWithChildren::replaceChildAt(unsigned int index, DataInforma
 
 QScriptClass* DataInformationWithChildren::scriptClass(ScriptHandlerInfo* handlerInfo) const
 {
-    return handlerInfo->mStructUnionClass.data();
+    return handlerInfo->mStructUnionClass.get();
 }
 
 QString DataInformationWithChildren::tooltipString() const

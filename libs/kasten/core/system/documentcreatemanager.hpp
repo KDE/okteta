@@ -13,6 +13,8 @@
 #include "kastencore_export.hpp"
 // Qt
 #include <QObject>
+// Std
+#include <memory>
 
 class QMimeData;
 
@@ -44,7 +46,7 @@ public:
     void setDocumentFactory(AbstractDocumentFactory* factory);
 
 private:
-    const QScopedPointer<class DocumentCreateManagerPrivate> d_ptr;
+    const std::unique_ptr<class DocumentCreateManagerPrivate> d_ptr;
     Q_DECLARE_PRIVATE(DocumentCreateManager)
 };
 

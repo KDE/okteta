@@ -11,6 +11,8 @@
 
 // Qt
 #include <QWidget>
+// Std
+#include <memory>
 
 class AbstractByteArrayFilterParameterSet;
 
@@ -38,7 +40,7 @@ Q_SIGNALS:
     void validityChanged(bool isValid);
 
 private:
-    QScopedPointer<class AbstractByteArrayFilterParameterSetEditPrivate> const d;
+    const std::unique_ptr<class AbstractByteArrayFilterParameterSetEditPrivate> d;
 };
 
 #endif

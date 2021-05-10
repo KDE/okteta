@@ -13,6 +13,8 @@
 #include "kastengui_export.hpp"
 // Qt
 #include <QDockWidget>
+// Std
+#include <memory>
 
 namespace Kasten {
 
@@ -33,7 +35,7 @@ public:
     bool isShown() const;
 
 private:
-    const QScopedPointer<class ToolViewDockWidgetPrivate> d_ptr;
+    const std::unique_ptr<class ToolViewDockWidgetPrivate> d_ptr;
     Q_DECLARE_PRIVATE(ToolViewDockWidget)
 };
 

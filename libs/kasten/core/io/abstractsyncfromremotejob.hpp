@@ -13,6 +13,8 @@
 #include "kastencore_export.hpp"
 // KF
 #include <KJob>
+// Std
+#include <memory>
 
 namespace Kasten {
 
@@ -31,7 +33,7 @@ public:
     ~AbstractSyncFromRemoteJob() override;
 
 protected:
-    const QScopedPointer<AbstractSyncFromRemoteJobPrivate> d_ptr;
+    const std::unique_ptr<AbstractSyncFromRemoteJobPrivate> d_ptr;
 };
 
 }

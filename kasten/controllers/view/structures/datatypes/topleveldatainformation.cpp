@@ -61,8 +61,8 @@ TopLevelDataInformation::~TopLevelDataInformation() = default;
 
 void TopLevelDataInformation::validate()
 {
-    logger()->info(mData.data()) << "Validation requested.";
-    mScriptHandler->validateData(mData.data());
+    logger()->info(mData.get()) << "Validation requested.";
+    mScriptHandler->validateData(mData.get());
 }
 
 QScriptEngine* TopLevelDataInformation::scriptEngine() const
@@ -88,9 +88,9 @@ void TopLevelDataInformation::read(Okteta::AbstractByteArrayModel* input, Okteta
     quint8 bitOffset = 0;
     mData->beginRead(); // before reading set wasAbleToRead to false
     mData->resetValidationState(); // reading new data -> validation state is old
-    const DataInformation* oldData = mData.data();
-    mScriptHandler->updateDataInformation(mData.data()); // unlikely that this is useful, but maybe someone needs it
-    if (mData.data() != oldData) {
+    const DataInformation* oldData = mData.get();
+    mScriptHandler->updateDataInformation(mData.get()); // unlikely that this is useful, but maybe someone needs it
+    if (mData.get() != oldData) {
         mLogger->info() << "Main element was replaced!";
     }
     mData->readData(input, address, remainingBits, &bitOffset);
@@ -248,7 +248,7 @@ quint64 TopLevelDataInformation::lockPositionFor(const Okteta::AbstractByteArray
 
 int TopLevelDataInformation::indexOf(const DataInformation* const data) const
 {
-    Q_ASSERT(data == mData.data());
+    Q_ASSERT(data == mData.get());
     Q_UNUSED(data)
     return mIndex;
 }

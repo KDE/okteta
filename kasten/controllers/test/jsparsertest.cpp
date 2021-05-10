@@ -9,11 +9,14 @@
 // TODO: find better way to work-around simple name creation for QTest::newRow
 #undef QT_USE_QSTRINGBUILDER
 
-#include <QTest>
-#include <QScriptEngine>
 #include "view/structures/script/scriptengineinitializer.hpp"
 #include "view/structures/parsers/scriptvalueconverter.hpp"
 #include "testutils.hpp"
+// Qt
+#include <QTest>
+#include <QScriptEngine>
+// Std
+#include <memory>
 #include <functional>
 
 struct JsTestData
@@ -175,12 +178,12 @@ void JsParserTest::testCommon(DataInformation** dataPtr)
     QVERIFY(!value.isError());
     QVERIFY(value.isObject());
     ScriptLogger logger;
-    QScopedPointer<DataInformation> data
+    std::unique_ptr<DataInformation> data
         (ScriptValueConverter::convert(value, QStringLiteral("converted"), &logger));
     QVERIFY(logger.rowCount() == 0);
     QVERIFY(data);
-    checkFunction(data.data());
-    *dataPtr = data.take();
+    checkFunction(data.get());
+    *dataPtr = data.release();
 }
 
 void JsParserTest::testByteOrder()
@@ -326,7 +329,7 @@ void JsParserTest::testCustomTypeName()
 
 void JsParserTest::testImport()
 {
-    QScopedPointer<QScriptEngine> eng(ScriptEngineInitializer::newEngine());
+    std::unique_ptr<QScriptEngine> eng(ScriptEngineInitializer::newEngine());
 #if defined(Q_OS_MACOS) || defined(Q_OS_WINDOWS)
     QEXPECT_FAIL("", "QStandardPaths::GenericDataLocation can't be modified on macOS/Windows", Continue);
 #endif
@@ -336,7 +339,7 @@ void JsParserTest::testImport()
 
 void JsParserTest::testImportPathTraversal()
 {
-    QScopedPointer<QScriptEngine> eng(ScriptEngineInitializer::newEngine());
+    std::unique_ptr<QScriptEngine> eng(ScriptEngineInitializer::newEngine());
     QScriptValue val = eng->evaluate(QStringLiteral("s = importScript('../../pathtraversal.js');s.foo()"));
     QVERIFY(val.isError());
     QCOMPARE(val.toString(), QStringLiteral("Error: importScript(): You may only access installed structure files! Path traversal detected."));

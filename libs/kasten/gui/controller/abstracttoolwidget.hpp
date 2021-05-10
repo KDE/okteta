@@ -13,6 +13,8 @@
 #include "kastengui_export.hpp"
 // Qt
 #include <QWidget>
+// Std
+#include <memory>
 
 class QPushButton;
 
@@ -41,7 +43,7 @@ public:
     void addButton(QPushButton* button, DefaultType defaultType = AutoDefault);
 
 private:
-    const QScopedPointer<class AbstractToolWidgetPrivate> d_ptr;
+    const std::unique_ptr<class AbstractToolWidgetPrivate> d_ptr;
     Q_DECLARE_PRIVATE(AbstractToolWidget)
 };
 

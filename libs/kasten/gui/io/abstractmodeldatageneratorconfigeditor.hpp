@@ -13,6 +13,8 @@
 #include "kastengui_export.hpp"
 // Qt
 #include <QWidget>
+// Std
+#include <memory>
 
 namespace Kasten {
 
@@ -36,7 +38,7 @@ Q_SIGNALS:
     void validityChanged(bool isValid);
 
 private:
-    const QScopedPointer<class AbstractModelDataGeneratorConfigEditorPrivate> d_ptr;
+    const std::unique_ptr<class AbstractModelDataGeneratorConfigEditorPrivate> d_ptr;
 };
 
 }

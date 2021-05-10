@@ -15,6 +15,8 @@
 #include <Okteta/Address>
 // Qt
 #include <QWidget>
+// Std
+#include <memory>
 
 class QString;
 class QByteArray;
@@ -60,7 +62,7 @@ Q_SIGNALS:
     void formatChanged(int index);
 
 protected:
-    const QScopedPointer<AddressComboBoxPrivate> d_ptr;
+    const std::unique_ptr<AddressComboBoxPrivate> d_ptr;
 
 private:
     Q_DECLARE_PRIVATE(AddressComboBox)

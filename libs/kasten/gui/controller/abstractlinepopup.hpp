@@ -13,6 +13,8 @@
 #include "kastengui_export.hpp"
 // Qt
 #include <QWidget>
+// Std
+#include <memory>
 
 class QIcon;
 
@@ -65,7 +67,7 @@ protected:
     void setResult(int result);
 
 private:
-    const QScopedPointer<class AbstractLinePopupPrivate> d_ptr;
+    const std::unique_ptr<class AbstractLinePopupPrivate> d_ptr;
     Q_DECLARE_PRIVATE(AbstractLinePopup)
 };
 

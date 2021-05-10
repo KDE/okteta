@@ -9,8 +9,10 @@
 #ifndef KASTEN_SCRIPTHANDLERINFO_HPP
 #define KASTEN_SCRIPTHANDLERINFO_HPP
 
+// Qt
 #include <QtGlobal>
-#include <QScopedPointer>
+// Std
+#include <memory>
 
 class EnumScriptClass;
 class StructUnionScriptClass;
@@ -40,13 +42,13 @@ public:
         InterpretingPointer = 32,
     };
 
-    QScopedPointer<ArrayScriptClass> mArrayClass;
-    QScopedPointer<PrimitiveScriptClass> mPrimitiveClass;
-    QScopedPointer<EnumScriptClass> mEnumClass;
-    QScopedPointer<StructUnionScriptClass> mStructUnionClass;
-    QScopedPointer<StringScriptClass> mStringClass;
-    QScopedPointer<BitfieldScriptClass> mBitfieldClass;
-    QScopedPointer<PointerScriptClass> mPointerClass;
+    std::unique_ptr<ArrayScriptClass> mArrayClass;
+    std::unique_ptr<PrimitiveScriptClass> mPrimitiveClass;
+    std::unique_ptr<EnumScriptClass> mEnumClass;
+    std::unique_ptr<StructUnionScriptClass> mStructUnionClass;
+    std::unique_ptr<StringScriptClass> mStringClass;
+    std::unique_ptr<BitfieldScriptClass> mBitfieldClass;
+    std::unique_ptr<PointerScriptClass> mPointerClass;
 
     /** @return The mode this handler is currently in (determines which properties are accessible */
     Mode mode() const;

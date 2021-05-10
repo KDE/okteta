@@ -14,6 +14,8 @@
 // Qt
 #include <QObject>
 #include <QVector>
+// Std
+#include <memory>
 
 namespace Kasten {
 
@@ -57,7 +59,7 @@ public:
     void setOverwriteDialog(AbstractOverwriteDialog* overwriteDialog);
 
 private:
-    const QScopedPointer<class ModelCodecManagerPrivate> d_ptr;
+    const std::unique_ptr<class ModelCodecManagerPrivate> d_ptr;
     Q_DECLARE_PRIVATE(ModelCodecManager)
 };
 

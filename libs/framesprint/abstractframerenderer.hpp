@@ -9,7 +9,8 @@
 #ifndef FRAMESPRINT_ABSTRACTFRAMERENDERER_HPP
 #define FRAMESPRINT_ABSTRACTFRAMERENDERER_HPP
 
-#include <QScopedPointer>
+// Std
+#include <memory>
 
 class QSize;
 class QPoint;
@@ -49,7 +50,7 @@ public:
     int y() const;
 
 private:
-    QScopedPointer<class AbstractFrameRendererPrivate> const d;
+    const std::unique_ptr<class AbstractFrameRendererPrivate> d;
 };
 
 #endif

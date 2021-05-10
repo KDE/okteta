@@ -11,6 +11,8 @@
 
 // Qt
 #include <QWidget>
+// Std
+#include <memory>
 
 class AbstractByteArrayChecksumParameterSet;
 
@@ -37,7 +39,7 @@ Q_SIGNALS:
     void valuesChanged();
 
 private:
-    QScopedPointer<class AbstractByteArrayChecksumParameterSetEditPrivate> const d;
+    const std::unique_ptr<class AbstractByteArrayChecksumParameterSetEditPrivate> d;
 };
 
 #endif

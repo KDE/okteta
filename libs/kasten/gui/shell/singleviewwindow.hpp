@@ -14,6 +14,8 @@
 #include "widgetsdockable.hpp"
 // KF
 #include <KXmlGuiWindow>
+// Std
+#include <memory>
 
 class QMimeData;
 
@@ -52,7 +54,7 @@ protected:
     SingleViewArea* viewArea() const;
 
 protected:
-    const QScopedPointer<SingleViewWindowPrivate> d_ptr;
+    const std::unique_ptr<SingleViewWindowPrivate> d_ptr;
 
 private:
     Q_DECLARE_PRIVATE(SingleViewWindow)

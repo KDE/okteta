@@ -13,6 +13,8 @@
 #include "kastengui_export.hpp"
 // Qt
 #include <QObject>
+// Std
+#include <memory>
 
 class QWidget;
 
@@ -36,7 +38,7 @@ public: // API to be implemented
     virtual void setData(AbstractModel* model, const AbstractModelSelection* selection) = 0;
 
 private:
-    const QScopedPointer<class AbstractSelectionViewPrivate> d_ptr;
+    const std::unique_ptr<class AbstractSelectionViewPrivate> d_ptr;
 };
 
 }

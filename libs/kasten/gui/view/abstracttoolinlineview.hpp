@@ -13,6 +13,8 @@
 #include "kastengui_export.hpp"
 // Qt
 #include <QObject>
+// Std
+#include <memory>
 
 class QWidget;
 class QString;
@@ -41,7 +43,7 @@ public:
     void activate();
 
 private:
-    const QScopedPointer<class AbstractToolInlineViewPrivate> d_ptr;
+    const std::unique_ptr<class AbstractToolInlineViewPrivate> d_ptr;
 };
 
 }

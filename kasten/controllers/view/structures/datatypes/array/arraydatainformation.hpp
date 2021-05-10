@@ -11,9 +11,11 @@
 
 #include "../dummydatainformation.hpp"
 #include "abstractarraydata.hpp"
-
+// Qt
 #include <QVariant>
 #include <QScriptValue>
+// Std
+#include <memory>
 
 class DummyDataInformation;
 class AbstractArrayData;
@@ -81,7 +83,7 @@ private:
     QString typeNameImpl() const override;
 
 private:
-    QScopedPointer<AbstractArrayData> mData;
+    std::unique_ptr<AbstractArrayData> mData;
     // Limit the length to 64K to avoid excessive memory consumption
     static constexpr uint MAX_LEN = 65535;
 };

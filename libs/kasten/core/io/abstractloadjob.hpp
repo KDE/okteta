@@ -13,6 +13,8 @@
 #include "kastencore_export.hpp"
 // KF
 #include <KJob>
+// Std
+#include <memory>
 
 namespace Kasten {
 
@@ -44,7 +46,7 @@ protected:
     virtual void setDocument(AbstractDocument* document);
 
 protected:
-    const QScopedPointer<AbstractLoadJobPrivate> d_ptr;
+    const std::unique_ptr<AbstractLoadJobPrivate> d_ptr;
 
 private:
     Q_DECLARE_PRIVATE(AbstractLoadJob)

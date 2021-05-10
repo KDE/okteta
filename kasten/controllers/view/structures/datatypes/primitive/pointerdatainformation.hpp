@@ -11,6 +11,8 @@
 #define KASTEN_POINTERDATAINFORMATION_HPP
 
 #include "primitivedatainformation.hpp"
+// Std
+#include <memory>
 
 class PointerDataInformation : public PrimitiveDataInformationWrapper
 {
@@ -68,13 +70,13 @@ private:
     QString typeNameImpl() const override;
 
 protected:
-    QScopedPointer<DataInformation> mPointerTarget;
+    std::unique_ptr<DataInformation> mPointerTarget;
     qint64 mPointerScale;
 };
 
 inline DataInformation* PointerDataInformation::pointerTarget() const
 {
-    return mPointerTarget.data();
+    return mPointerTarget.get();
 }
 
 inline void PointerDataInformation::setPointerTarget(DataInformation* target)
@@ -86,7 +88,7 @@ inline void PointerDataInformation::setPointerTarget(DataInformation* target)
 
 inline PrimitiveDataInformation* PointerDataInformation::pointerType() const
 {
-    return mValue.data();
+    return mValue.get();
 }
 
 inline void PointerDataInformation::setPointerScale(qint64 scale)

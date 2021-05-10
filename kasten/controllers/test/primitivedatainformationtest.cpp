@@ -6,15 +6,6 @@
  *    SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <KLocalizedString>
-
-#include <QTest>
-#include <QtGlobal>
-#include <QLocale>
-
-#include <limits>
-#include <Okteta/ByteArrayModel>
-
 #include "view/structures/datatypes/primitive/primitivetemplateinfo.hpp"
 #include "view/structures/datatypes/primitive/primitivedatainformation.hpp"
 #include "view/structures/datatypes/primitive/bitfield/signedbitfielddatainformation.hpp"
@@ -22,6 +13,17 @@
 #include "view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.hpp"
 #include "view/structures/datatypes/primitivefactory.hpp"
 #include "structureviewpreferences.hpp"
+// Okteta
+#include <Okteta/ByteArrayModel>
+// KF
+#include <KLocalizedString>
+// Qt
+#include <QTest>
+#include <QtGlobal>
+#include <QLocale>
+// Std
+#include <memory>
+#include <limits>
 
 inline uint qHash(PrimitiveDataType type)
 {
@@ -64,7 +66,7 @@ private:
     BoolBitfieldDataInformation* boolBitfield;
     // TODO enum
 //     Okteta::Byte* data;
-//     QScopedPointer<Okteta::ByteArrayModel> model;
+//     std::unique_ptr<Okteta::ByteArrayModel> model;
 };
 
 Q_DECLARE_METATYPE(PrimitiveDataInformation*)
@@ -504,7 +506,7 @@ void PrimitiveDataInformationTest::testGetAndSetValue()
     QFETCH(AllPrimitiveTypes, newVal);
     QFETCH(AllPrimitiveTypes, expected);
 
-    QScopedPointer<PrimitiveDataInformation> clone(data->clone());
+    std::unique_ptr<PrimitiveDataInformation> clone(data->clone());
     clone->setValue(newVal);
     QCOMPARE(clone->value(), expected);
 }

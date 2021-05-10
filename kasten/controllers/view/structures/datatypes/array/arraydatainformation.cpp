@@ -41,7 +41,7 @@ ArrayDataInformation::ArrayDataInformation(const ArrayDataInformation& d)
     , mData(nullptr)
 {
     uint length = d.mData->length();
-    DataInformation* childType = d.mData.data()->childType();
+    DataInformation* childType = d.mData->childType();
     mData.reset(AbstractArrayData::newArrayData(length, childType->clone(), this));
 }
 
@@ -168,7 +168,7 @@ bool ArrayDataInformation::setData(const QVariant&, Okteta::AbstractByteArrayMod
 
 QScriptClass* ArrayDataInformation::scriptClass(ScriptHandlerInfo* handlerInfo) const
 {
-    return handlerInfo->mArrayClass.data();
+    return handlerInfo->mArrayClass.get();
 }
 
 QScriptValue ArrayDataInformation::childToScriptValue(uint index, QScriptEngine* engine,

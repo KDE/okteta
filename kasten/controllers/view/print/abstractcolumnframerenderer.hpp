@@ -16,6 +16,8 @@
 #include <Okteta/Line>
 // Okteta core
 #include <Okteta/AddressRange>
+// Std
+#include <memory>
 
 namespace Okteta {
 class AbstractColumnRenderer;
@@ -84,7 +86,7 @@ protected: // recalculations
     void updateWidths();
 
 private:
-    QScopedPointer<class AbstractColumnFrameRendererPrivate> const d;
+    const std::unique_ptr<class AbstractColumnFrameRendererPrivate> d;
 };
 
 #endif
