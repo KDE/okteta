@@ -130,7 +130,6 @@ void ByteArrayTableRanges::setSelectionEnd(Address endIndex)
     if (Changed) {
         addChangedRange(C);
     }
-    return;
 }
 
 AddressRange ByteArrayTableRanges::removeSelection(int id)

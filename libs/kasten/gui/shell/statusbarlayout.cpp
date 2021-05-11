@@ -86,7 +86,6 @@ void StatusBarLayout::addItem(QLayoutItem* item)
 {
     Q_UNUSED(item)
     qCWarning(LOG_KASTEN_GUI) << "not implemented!  Please use addWidget() instead";
-    return;
 }
 
 QLayoutItem* StatusBarLayout::takeAt(int index)
