@@ -78,10 +78,10 @@ void ScriptValueConverterTest::basicConverterTest()
     QCOMPARE(converted[0]->name(), QStringLiteral("value"));
     QVERIFY(converted[1]->isStruct());
     QCOMPARE(converted[1]->name(), QStringLiteral("str"));
-    QCOMPARE(converted[1]->childCount(), 2u);
+    QCOMPARE(converted[1]->childCount(), 2U);
     QVERIFY(converted[2]->isArray());
     QCOMPARE(converted[2]->name(), QStringLiteral("obj"));
-    QCOMPARE(converted[2]->childCount(), 10u);
+    QCOMPARE(converted[2]->childCount(), 10U);
 
     // test with an array now
     sVal = evaluate("var foo = [uint8(), uint16(), uint32()]; foo");

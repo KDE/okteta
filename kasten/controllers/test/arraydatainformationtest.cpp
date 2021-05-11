@@ -58,9 +58,9 @@ void ArrayDataInformationTest::initTestCase()
     QCOMPARE(primitive->isUnion(), false);
     QCOMPARE(primitive->mainStructure(), primitive);
     QCOMPARE(primitive->canHaveChildren(), true);
-    QCOMPARE(primitive->childCount(), 0u);
-    QCOMPARE(primitive->length(), 0u);
-    QCOMPARE(primitive->size(), 0u);
+    QCOMPARE(primitive->childCount(), 0U);
+    QCOMPARE(primitive->length(), 0U);
+    QCOMPARE(primitive->size(), 0U);
     QCOMPARE(primitive->isTopLevel(), false);
     QCOMPARE(primitiveTop->isTopLevel(), true);
     QCOMPARE(primitive->positionInFile(3), BitCount64(24));
@@ -85,9 +85,9 @@ void ArrayDataInformationTest::initTestCase()
     QCOMPARE(complex->isUnion(), false);
     QCOMPARE(complex->mainStructure(), complex);
     QCOMPARE(complex->canHaveChildren(), true);
-    QCOMPARE(complex->childCount(), 0u);
-    QCOMPARE(complex->length(), 0u);
-    QCOMPARE(complex->size(), 0u);
+    QCOMPARE(complex->childCount(), 0U);
+    QCOMPARE(complex->length(), 0U);
+    QCOMPARE(complex->size(), 0U);
     QCOMPARE(complex->isTopLevel(), false);
     QCOMPARE(complexTop->isTopLevel(), true);
     QCOMPARE(complex->positionInFile(3), BitCount64(24));
@@ -150,14 +150,14 @@ void ArrayDataInformationTest::testResize_data()
     QTest::addColumn<bool>("removeCalled");
     QTest::addColumn<uint>("removeFirstArg");
     QTest::addColumn<uint>("removeSecondArg");
-    QTest::newRow("1. (10)") << 10u << 10u << true << 0u << 9u << false << -1u << -1u;
-    QTest::newRow("2. (10)") << 10u << 10u << false << -1u << -1u << false << -1u << -1u;
-    QTest::newRow("3. (9)") << 9u << 9u << false << -1u << -1u << true << 9u << 9u;
-    QTest::newRow("4. (18)") << 18u << 18u << true << 9u << 17u << false << -1u << -1u;
-    QTest::newRow("5. (0)") << 0u << 0u << false << -1u << -1u << true << 0u << 17u;
-    QTest::newRow("6. (1)") << 1u << 1u << true << 0u << 0u << false << -1u << -1u;
-    QTest::newRow("7. (0)") << 0u << 0u << false << -1u << -1u << true << 0u << 0u;
-    QTest::newRow("8. (0)") << 0u << 0u << false << -1u << -1u << false << -1u << -1u;
+    QTest::newRow("1. (10)") << 10U << 10U << true << 0U << 9U << false << -1U << -1U;
+    QTest::newRow("2. (10)") << 10U << 10U << false << -1U << -1U << false << -1U << -1U;
+    QTest::newRow("3. (9)") << 9U << 9U << false << -1U << -1U << true << 9U << 9U;
+    QTest::newRow("4. (18)") << 18U << 18U << true << 9U << 17U << false << -1U << -1U;
+    QTest::newRow("5. (0)") << 0U << 0U << false << -1U << -1U << true << 0U << 17U;
+    QTest::newRow("6. (1)") << 1U << 1U << true << 0U << 0U << false << -1U << -1U;
+    QTest::newRow("7. (0)") << 0U << 0U << false << -1U << -1U << true << 0U << 0U;
+    QTest::newRow("8. (0)") << 0U << 0U << false << -1U << -1U << false << -1U << -1U;
 
 }
 

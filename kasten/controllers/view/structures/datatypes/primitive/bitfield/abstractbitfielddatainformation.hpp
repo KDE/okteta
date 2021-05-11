@@ -61,7 +61,7 @@ inline quint64 AbstractBitfieldDataInformation::mask() const
      *     ret |= 1 << i;
      * return ret;
      */
-    if (Q_UNLIKELY(mWidth == 64u)) {
+    if (Q_UNLIKELY(mWidth == 64U)) {
         return ~quint64(0);
     }
     return (quint64(1) << mWidth) - 1;
@@ -75,7 +75,7 @@ inline BitCount32 AbstractBitfieldDataInformation::width() const
 inline void AbstractBitfieldDataInformation::setWidth(BitCount32 newWidth)
 {
     Q_ASSERT(newWidth > 0 && newWidth <= 64);
-    mWidth = qMin(newWidth, BitCount32(64u)); // maximum width is 64 bits
+    mWidth = qMin(newWidth, BitCount32(64U)); // maximum width is 64 bits
 }
 
 #endif /* KASTEN_ABSTRACTBITFIELDDATAINFORMATION_HPP */

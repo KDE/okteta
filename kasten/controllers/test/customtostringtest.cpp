@@ -97,7 +97,7 @@ void CustomToStringTest::testUuid()
 #endif
     QVERIFY(structure);
     TopLevelDataInformation top(structure, logger, eng);
-    QCOMPARE(structure->childCount(), 4u);
+    QCOMPARE(structure->childCount(), 4U);
 
     QVERIFY(structure->toStringFunction().isFunction());
     Okteta::ByteArrayModel model(reinterpret_cast<const uchar*>(data.constData()), data.size());

@@ -68,25 +68,25 @@ void AllPrimitiveTypesTest::testValuesMatch()
 
 inline void AllPrimitiveTypesTest::readLittleEndian()
 {
-    QCOMPARE(readLittle<quint8>(0), quint8(0x12u));
-    QCOMPARE(readLittle<quint16>(0), quint16(0x3412u));
-    QCOMPARE(readLittle<quint32>(0), quint32(0x78563412u));
+    QCOMPARE(readLittle<quint8>(0), quint8(0x12U));
+    QCOMPARE(readLittle<quint16>(0), quint16(0x3412U));
+    QCOMPARE(readLittle<quint32>(0), quint32(0x78563412U));
     QCOMPARE(readLittle<quint64>(0), Q_UINT64_C(0xf0debc9a78563412));
     // shifted by 4
     // this is the way gcc handles it on little endian systems
-    QCOMPARE(readLittle<quint8>(4), quint8(0x41u));
-    QCOMPARE(readLittle<quint16>(4), quint16(0x6341u));
-    QCOMPARE(readLittle<quint32>(4), quint32(0xa7856341u));
+    QCOMPARE(readLittle<quint8>(4), quint8(0x41U));
+    QCOMPARE(readLittle<quint16>(4), quint16(0x6341U));
+    QCOMPARE(readLittle<quint32>(4), quint32(0xa7856341U));
     QCOMPARE(readLittle<quint64>(4), Q_UINT64_C(0x0f0debc9a7856341));
 
     // now read a quint16 with bitOffset 1 to 7
-    QCOMPARE(readLittle<quint16>(1), quint16(0x1a09u));
-    QCOMPARE(readLittle<quint16>(2), quint16(0x8d04u));
-    QCOMPARE(readLittle<quint16>(3), quint16(0xc682u));
-    QCOMPARE(readLittle<quint16>(4), quint16(0x6341u));
-    QCOMPARE(readLittle<quint16>(5), quint16(0xb1a0u));
-    QCOMPARE(readLittle<quint16>(6), quint16(0x58d0u));
-    QCOMPARE(readLittle<quint16>(7), quint16(0xac68u));
+    QCOMPARE(readLittle<quint16>(1), quint16(0x1a09U));
+    QCOMPARE(readLittle<quint16>(2), quint16(0x8d04U));
+    QCOMPARE(readLittle<quint16>(3), quint16(0xc682U));
+    QCOMPARE(readLittle<quint16>(4), quint16(0x6341U));
+    QCOMPARE(readLittle<quint16>(5), quint16(0xb1a0U));
+    QCOMPARE(readLittle<quint16>(6), quint16(0x58d0U));
+    QCOMPARE(readLittle<quint16>(7), quint16(0xac68U));
 
 }
 
@@ -98,21 +98,21 @@ inline void AllPrimitiveTypesTest::readLittleEndian()
 
 inline void AllPrimitiveTypesTest::readBigEndian()
 {
-    QCOMPARE(readBig<quint8>(0), quint8(0x12u));
-    QCOMPARE(readBig<quint16>(0), quint16(0x1234u));
-    QCOMPARE(readBig<quint32>(0), quint32(0x12345678u));
+    QCOMPARE(readBig<quint8>(0), quint8(0x12U));
+    QCOMPARE(readBig<quint16>(0), quint16(0x1234U));
+    QCOMPARE(readBig<quint32>(0), quint32(0x12345678U));
     QCOMPARE(readBig<quint64>(0), Q_UINT64_C(0x123456789abcdef0));
 
-    QCOMPARE(readBig<quint8>(4), quint8(0x23u));
-    QCOMPARE(readBig<quint16>(4), quint16(0x2345u));
+    QCOMPARE(readBig<quint8>(4), quint8(0x23U));
+    QCOMPARE(readBig<quint16>(4), quint16(0x2345U));
 
-    QCOMPARE(readBig<quint16>(1), quint16(0x2468u));
-    QCOMPARE(readBig<quint16>(2), quint16(0x48d1u));
-    QCOMPARE(readBig<quint16>(3), quint16(0x91a2u));
-    QCOMPARE(readBig<quint16>(4), quint16(0x2345u));
-    QCOMPARE(readBig<quint16>(5), quint16(0x468au));
-    QCOMPARE(readBig<quint16>(6), quint16(0x8d15u));
-    QCOMPARE(readBig<quint16>(7), quint16(0x1a2bu));
+    QCOMPARE(readBig<quint16>(1), quint16(0x2468U));
+    QCOMPARE(readBig<quint16>(2), quint16(0x48d1U));
+    QCOMPARE(readBig<quint16>(3), quint16(0x91a2U));
+    QCOMPARE(readBig<quint16>(4), quint16(0x2345U));
+    QCOMPARE(readBig<quint16>(5), quint16(0x468aU));
+    QCOMPARE(readBig<quint16>(6), quint16(0x8d15U));
+    QCOMPARE(readBig<quint16>(7), quint16(0x1a2bU));
 
 }
 

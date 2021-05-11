@@ -134,12 +134,12 @@ void UnionDataInformationTest::testReadData1_data()
      *  11110000 11011110 10111100 10011010
      *  01111000 01010110 00110100 00010010
      */
-    QTest::newRow("0 bytes 0 bits") << 0u << quint8(0) << quint64(64) << qint64(54) << quint8(6) << true
-        /* now b8 and i16 */ << quint8(0x12u) << true << qint16(0x3412) << true
-        /* u32 and u54 */ << quint32(0x78563412u) << true << Q_UINT64_C(0x1ebc9a78563412) << true;
+    QTest::newRow("0 bytes 0 bits") << 0U << quint8(0) << quint64(64) << qint64(54) << quint8(6) << true
+        /* now b8 and i16 */ << quint8(0x12U) << true << qint16(0x3412) << true
+        /* u32 and u54 */ << quint32(0x78563412U) << true << Q_UINT64_C(0x1ebc9a78563412) << true;
     // shifted by two bytes in little endian:
     // 11110000 11011110 10111100 10011010 01111000 01010110 00110100 000100xx
-    QTest::newRow("0 bytes 2 bits") << 0u << quint8(2) << quint64(62) << qint64(54) << quint8(0) << true
+    QTest::newRow("0 bytes 2 bits") << 0U << quint8(2) << quint64(62) << qint64(54) << quint8(0) << true
         /* b8 */ << Utils::binary<quint8>("00 000100") << true
         /* i16 */ << Utils::binary<qint16>("10 00110100 000100") << true
         /* u32 */ << Utils::binary<quint32>("10 01111000 01010110 00110100 000100") << true
@@ -148,7 +148,7 @@ void UnionDataInformationTest::testReadData1_data()
     // now so that the 54bit value fits in exactly, i.e. 10 bits shifted
     // shifted by 10 bytes in little endian:
     // 11110000 11011110 10111100 10011010 01111000 01010110 001101xx xxxxxxxx
-    QTest::newRow("1 bytes 2 bits") << 1u << quint8(2) << quint64(54) << qint64(54) << quint8(0) << true
+    QTest::newRow("1 bytes 2 bits") << 1U << quint8(2) << quint64(54) << qint64(54) << quint8(0) << true
         /* b8 */ << Utils::binary<quint8>("10 001101") << true
         /* i16 */ << Utils::binary<qint16>("00 01010110 001101") << true
         /* u32 */ << Utils::binary<quint32>("00 10011010 01111000 01010110 001101") << true
@@ -157,7 +157,7 @@ void UnionDataInformationTest::testReadData1_data()
     // now make the 54 bit value go past eof (11 bits)
     // shifted by 10 bytes in little endian:
     // 11110000 11011110 10111100 10011010 01111000 01010110 00110xxx xxxxxxxx
-    QTest::newRow("1 bytes 3 bits") << 1u << quint8(3) << quint64(53) << qint64(-1) << quint8(3) << false
+    QTest::newRow("1 bytes 3 bits") << 1U << quint8(3) << quint64(53) << qint64(-1) << quint8(3) << false
         /* b8 */ << Utils::binary<quint8>("110 00110") << true
         /* i16 */ << Utils::binary<qint16>("000 01010110 00110") << true
         /* u32 */ << Utils::binary<quint32>("100 10011010 01111000 01010110 00110") << true

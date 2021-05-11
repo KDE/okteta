@@ -232,7 +232,7 @@ inline typename QIntegerForSize<size>::Unsigned AllPrimitiveTypes::readValuePriv
             // the coming bits are the most significant bits and range from 0..bitOffset
             unsignedValue >>= bitOffset;
             // promote lastByte to unsigned T and mask off the interesting bits
-            typename QIntegerForSize<size>::Unsigned tmp = lastByte & ((1u << bitOffset) - 1);
+            typename QIntegerForSize<size>::Unsigned tmp = lastByte & ((1U << bitOffset) - 1);
             tmp <<= (size * 8) - bitOffset;
             unsignedValue |= tmp;
         }

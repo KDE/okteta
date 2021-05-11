@@ -337,13 +337,13 @@ void ScriptClassesTest::testReplaceObject()
     main->setUpdateFunc(unionUpdate);
 
     // now just call update
-    QCOMPARE(structData->childCount(), 2u);
+    QCOMPARE(structData->childCount(), 2U);
     QCOMPARE((int)structData->childAt(0)->asPrimitive()->type(), (int)PrimitiveDataType::UInt8);
     QCOMPARE(structData->childAt(0)->name(), QStringLiteral("first"));
     QCOMPARE(structData->childAt(1)->name(), QStringLiteral("second"));
     top.scriptHandler()->updateDataInformation(structData);
     // now structdata should have different children
-    QCOMPARE(structData->childCount(), 2u);
+    QCOMPARE(structData->childCount(), 2U);
     QCOMPARE((int)structData->childAt(0)->asPrimitive()->type(), (int)PrimitiveDataType::Int32); // different now
     QCOMPARE(structData->childAt(0)->name(), QStringLiteral("changed")); // different now
     QCOMPARE(structData->childAt(1)->name(), QStringLiteral("second")); // still the same

@@ -89,8 +89,8 @@ void CommonParserTest::testUIntFromString_data()
     QTest::addColumn<uint>("value");
 
     QTest::newRow("-1") << "-1" << false;
-    QTest::newRow("0xff") << "0xff" << true << 0xffu;
-    QTest::newRow("1234") << "1234" << true << 1234u;
+    QTest::newRow("0xff") << "0xff" << true << 0xffU;
+    QTest::newRow("1234") << "1234" << true << 1234U;
 
     uint maxUint = 0xffffffff;
     QTEST_ASSERT(maxUint == std::numeric_limits<uint>::max());
@@ -199,10 +199,10 @@ void CommonParserTest::testUIntFromScriptValue_data()
     QTest::newRow("object") << engine->newObject() << false;
     QTest::newRow("float") << QScriptValue(1234.5) << false;
 
-    QTest::newRow("1234 number") << QScriptValue(1234) << true << 1234u;
-    QTest::newRow("1234 string") << QScriptValue(QStringLiteral("1234")) << true << 1234u;
-    QTest::newRow("0xff number") << QScriptValue(0xff) << true << 0xffu;
-    QTest::newRow("0xff string") << QScriptValue(QStringLiteral("0xff")) << true << 0xffu;
+    QTest::newRow("1234 number") << QScriptValue(1234) << true << 1234U;
+    QTest::newRow("1234 string") << QScriptValue(QStringLiteral("1234")) << true << 1234U;
+    QTest::newRow("0xff number") << QScriptValue(0xff) << true << 0xffU;
+    QTest::newRow("0xff string") << QScriptValue(QStringLiteral("0xff")) << true << 0xffU;
 
     QTest::newRow("negative string") << QScriptValue(QStringLiteral("-1")) << false;
     QTest::newRow("negative number") << QScriptValue(-1) << false;

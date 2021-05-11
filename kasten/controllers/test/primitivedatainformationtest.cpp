@@ -192,7 +192,7 @@ void PrimitiveDataInformationTest::testValueStringInt()
         // check bitfield now
         SignedBitfieldDataInformation bitfield(QStringLiteral("signed"), minSize);
         bitfield.setValue(value);
-        for (uint width = minSize; width <= 64u; ++width) {
+        for (uint width = minSize; width <= 64U; ++width) {
             bitfield.setWidth(width);
             bitfield.mWasAbleToRead = true;
             Kasten::StructureViewPreferences::setSignedDisplayBase(2);
@@ -280,7 +280,7 @@ void PrimitiveDataInformationTest::testValueStringInt_data()
 void PrimitiveDataInformationTest::testFromVariant()
 {
     bool ok = false;
-    FloatDataInformationMethods::fromVariant(QVariant(float(42.0f)), &ok);
+    FloatDataInformationMethods::fromVariant(QVariant(float(42.0F)), &ok);
     QCOMPARE(ok, true); // float in range
     FloatDataInformationMethods::fromVariant(QVariant(double(42.0)), &ok);
     QCOMPARE(ok, true); // double should be fine too
@@ -295,7 +295,7 @@ void PrimitiveDataInformationTest::testFromVariant()
     FloatDataInformationMethods::fromVariant(QVariant(std::numeric_limits<double>::max()), &ok);
     QCOMPARE(ok, false); // out of range
 
-    DoubleDataInformationMethods::fromVariant(QVariant(float(42.0f)), &ok);
+    DoubleDataInformationMethods::fromVariant(QVariant(float(42.0F)), &ok);
     QCOMPARE(ok, true); // float should be fine too QVariant::type() == Float
     DoubleDataInformationMethods::fromVariant(QVariant(std::numeric_limits<double>::max()), &ok);
     QCOMPARE(ok, true); // double
@@ -356,7 +356,7 @@ void PrimitiveDataInformationTest::testValueStringUIntAndBool()
         boolBitfield.setValue(value);
         bitfield.mWasAbleToRead = true;
         boolBitfield.mWasAbleToRead = true;
-        for (uint width = minSize; width <= 64u; ++width) {
+        for (uint width = minSize; width <= 64U; ++width) {
             bitfield.setWidth(width);
             bitfield.setWidth(width);
             Kasten::StructureViewPreferences::setUnsignedDisplayBase(2);

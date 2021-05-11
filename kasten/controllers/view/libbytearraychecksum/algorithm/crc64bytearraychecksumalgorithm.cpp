@@ -27,7 +27,7 @@ static const Crc64AlgorithmSpec algorithms[] = {
     { 0x42F0E1EBA9EA3693, 0x0, 0x0, false, false },
 
     // ISO 3309
-    { 0x000000000000001B, 0xFFFFFFFFFFFFFFFFllu,0xFFFFFFFFFFFFFFFFllu, true, true}
+    { 0x000000000000001B, 0xFFFFFFFFFFFFFFFFLLU,0xFFFFFFFFFFFFFFFFLLU, true, true}
 
     // Add more algorithms here
 };
@@ -37,11 +37,11 @@ static void fillTable(quint64 poly, quint64 *table)
     for (size_t i = 0; i < 256; i++) {
         quint64 crc = 0;
         for (size_t j = 0; j < 8; j++) {
-            bool b = (i >> (7u - j)) & 0x01u;
-            if (((crc >> 63u) != 0) != b) {
-                crc = (crc << 1u) ^ poly;
+            bool b = (i >> (7U - j)) & 0x01U;
+            if (((crc >> 63U) != 0) != b) {
+                crc = (crc << 1U) ^ poly;
             } else {
-                crc = (crc << 1u);
+                crc = (crc << 1U);
             }
         }
         table[i] = crc;
@@ -52,8 +52,8 @@ static quint64 reflect64(quint64 x)
 {
     quint64 y = 0;
     for (size_t i = 0; i < 64; i++) {
-        if ((x >> i) & 0x01u) {
-            y |= 0x01llu << (63 - i);
+        if ((x >> i) & 0x01U) {
+            y |= 0x01LLU << (63 - i);
         }
     }
 
@@ -65,8 +65,8 @@ static uchar reflect8(uchar x)
     uchar y = 0;
 
     for (size_t i = 0; i < 8; i++) {
-        if ((x >> i) & 0x01u) {
-            y |= 0x01u << (7 - i);
+        if ((x >> i) & 0x01U) {
+            y |= 0x01U << (7 - i);
         }
     }
 
@@ -100,8 +100,8 @@ bool Crc64ByteArrayChecksumAlgorithm::calculateChecksum(QString* result,
             value = reflect8(value);
         }
 
-        const uchar idx = (crcBits >> 56u) ^ value;
-        crcBits = (crcBits << 8u) ^ lookupTable[idx & 0xffu];
+        const uchar idx = (crcBits >> 56U) ^ value;
+        crcBits = (crcBits << 8U) ^ lookupTable[idx & 0xffU];
 
         if (i >= nextBlockEnd) {
             nextBlockEnd += CalculatedByteCountSignalLimit;
