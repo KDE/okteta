@@ -16,7 +16,7 @@ ToggleButtonPrivate::ToggleButtonPrivate(ToggleButton* parent) : p(parent)
     p->setCheckable(true);
     p->setAutoRaise(true);
     QObject::connect(p, &QAbstractButton::toggled,
-                     p, [&](bool checked) { onToggled(checked); });
+                     p, [&]() { onToggled(); });
 }
 
 void ToggleButtonPrivate::setOtherState(const QIcon& icon, const QString& text, const QString& toolTip)
@@ -41,7 +41,7 @@ void ToggleButtonPrivate::setOtherState(const QIcon& icon, const QString& text, 
     }
 }
 
-void ToggleButtonPrivate::onToggled(bool)
+void ToggleButtonPrivate::onToggled()
 {
     const QIcon otherIcon = mOtherIcon;
     if (!otherIcon.isNull()) {

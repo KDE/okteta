@@ -26,7 +26,7 @@ public:
     void setOtherState(const QIcon& icon, const QString& text, const QString& toolTip);
 
 public:
-    void onToggled(bool);
+    void onToggled();
 
 private:
     QIcon mOtherIcon;
