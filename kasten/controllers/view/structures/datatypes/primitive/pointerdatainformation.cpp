@@ -189,7 +189,6 @@ quint64 PointerDataInformation::interpret(Okteta::Address start) const
     if (!value.isValid) {
         logError() << "Pointer interpreter function did not return a valid number! Result was: " << result.toString();
         return 0;
-    } else {
-        return value.value;
     }
+    return value.value;
 }
