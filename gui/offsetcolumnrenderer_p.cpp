@@ -45,8 +45,10 @@ void OffsetColumnRendererPrivate::renderColumnBackground(QPainter* painter, cons
     painter->fillRect(Xs.start(), Ys.start(), Xs.width(), Ys.width(), buttonBrush);
 }
 
-void OffsetColumnRendererPrivate::renderFirstLine(QPainter* painter, const PixelXRange&, Line firstLineIndex)
+void OffsetColumnRendererPrivate::renderFirstLine(QPainter* painter, const PixelXRange& Xs, Line firstLineIndex)
 {
+    Q_UNUSED(Xs);
+
     mRenderLineIndex = firstLineIndex;
     renderLine(painter, mRenderLineIndex++);
 }
