@@ -26,9 +26,9 @@ class FixedSizeByteArrayModel : public AbstractByteArrayModel
 
 public:
     /** creates a readonly buffer around the given data */
-    FixedSizeByteArrayModel(Byte* data, int size, Byte fillUpChar = '\0', QObject* parent = nullptr);
+    FixedSizeByteArrayModel(Byte* data, int size, Byte fillUpByte = '\0', QObject* parent = nullptr);
     /** creates a writeable buffer which is deleted at the end */
-    explicit FixedSizeByteArrayModel(int size, Byte fillUpChar = '\0', QObject* parent = nullptr);
+    explicit FixedSizeByteArrayModel(int size, Byte fillUpByte = '\0', QObject* parent = nullptr);
 
     ~FixedSizeByteArrayModel() override;
 
@@ -57,7 +57,7 @@ public:
     Byte* rawData() const;
 
 private:
-    void reset(unsigned int pos, unsigned int length);
+    void reset(unsigned int offset, unsigned int length);
 
 private:
     /** */

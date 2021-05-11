@@ -78,7 +78,7 @@ public: // overwrite
     bool isOverwriteOnly() const;
 
 public: // elements
-    void toggleOffsetColumn(bool visible);
+    void toggleOffsetColumn(bool offsetColumnVisible);
     void setOffsetCoding(int offsetCoding);
     void setVisibleCodings(int columns);
     bool offsetColumnVisible() const;

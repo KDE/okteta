@@ -32,8 +32,8 @@ protected: // our API
     virtual bool byteArrayModelSizeCanBeChanged() const;
 
 private:
-    void checkContentsReplaced(Address Position, Size removedLength, int insertedLength);
-    void checkContentsReplaced(const AddressRange& removeSection, int insertedLength);
+    void checkContentsReplaced(Address offset, Size removeLength, int insertLength);
+    void checkContentsReplaced(const AddressRange& removeRange, int insertLength);
     void checkContentsSwapped(Address firstStart, Address secondStart, Size secondLength);
     void checkContentsSwapped(Address firstStart, const AddressRange& secondSection);
     void clearSignalSpys();

@@ -33,7 +33,7 @@ class StructuresManagerView : public QWidget
 
 public:
     Q_PROPERTY(QStringList values READ values NOTIFY changed USER true)
-    explicit StructuresManagerView(Kasten::StructuresTool* manager, QWidget* parent = nullptr);
+    explicit StructuresManagerView(Kasten::StructuresTool* tool, QWidget* parent = nullptr);
 
     ~StructuresManagerView() override;
 

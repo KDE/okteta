@@ -33,7 +33,7 @@ class OKTETACORE_EXPORT ByteArrayModel : public AbstractByteArrayModel
     friend class ByteArrayModelPrivate;
 
 public:
-    ByteArrayModel(Byte* data, int size, int rawSize = -1, bool keepsMemory = true, QObject* parent = nullptr);
+    ByteArrayModel(Byte* data, int size, int rawSize = -1, bool keepMemory = true, QObject* parent = nullptr);
     ByteArrayModel(const Byte* data, int size, QObject* parent = nullptr);
     explicit ByteArrayModel(int size = 0, int maxSize = -1, QObject* parent = nullptr);
 
@@ -82,8 +82,8 @@ public:
      * or when new data is set. The data MUST have been allocated using new[] otherwise behaviour
      * is undefined */
     void setAutoDelete(bool autoDelete = true);
-    void setData(Byte* data, int size, int rawSize = -1, bool keepsMemory = true);
-    void signalContentsChanged(int i1, int i2);
+    void setData(Byte* data, int size, int rawSize = -1, bool keepMemory = true);
+    void signalContentsChanged(int start, int end);
 
 public:
     Byte* data() const;

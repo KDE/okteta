@@ -30,7 +30,7 @@ public:
 
 public:
     QStringList supportedRemoteTypes() const;
-    bool hasSynchronizerForLocal(const QString& mimeType) const;
+    bool hasSynchronizerForLocal(const QString& workDocumentType) const;
     QUrl urlOf(AbstractDocument* document) const;
 
 public:

@@ -190,18 +190,18 @@ void ByteArrayColumnViewPrivate::setUndefinedChar(QChar undefinedChar)
     Q_EMIT q->undefinedCharChanged(undefinedChar);
 }
 
-void ByteArrayColumnViewPrivate::setShowsNonprinting(bool showingNonprinting)
+void ByteArrayColumnViewPrivate::setShowsNonprinting(bool showsNonprinting)
 {
     Q_Q(ByteArrayColumnView);
 
-    if (!mCharColumn->setShowingNonprinting(showingNonprinting)) {
+    if (!mCharColumn->setShowingNonprinting(showsNonprinting)) {
         return;
     }
     pauseCursor();
     q->updateColumn(*mCharColumn);
     unpauseCursor();
 
-    Q_EMIT q->showsNonprintingChanged(showingNonprinting);
+    Q_EMIT q->showsNonprintingChanged(showsNonprinting);
 }
 
 void ByteArrayColumnViewPrivate::setCharCoding(AbstractByteArrayView::CharCoding charCoding)

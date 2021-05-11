@@ -41,8 +41,8 @@ public:
 public:
     /// does not take ownership of @p centralWidget, can be 0.
     void setCentralWidget(QWidget* centralWidget);
-    /// does not take ownership of @p bottomWidget. Can be nullptr.
-    void setBottomToolWidget(QWidget* bottomWidget);
+    /// does not take ownership of @p bottomToolWidget. Can be nullptr.
+    void setBottomToolWidget(QWidget* bottomToolWidget);
 
     void showBottomToolWidget();
 

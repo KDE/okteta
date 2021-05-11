@@ -44,7 +44,7 @@ public:
     ~ByteArrayValidator() override;
 
 public: // QValidator API
-    QValidator::State validate(QString& input, int& pos) const override;
+    QValidator::State validate(QString& string, int& pos) const override;
 
 public:
     /// Sets one of the value codecs or the current char codec.

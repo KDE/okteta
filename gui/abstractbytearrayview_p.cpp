@@ -293,21 +293,21 @@ void AbstractByteArrayViewPrivate::setByteArrayModel(AbstractByteArrayModel* byt
     Q_EMIT q->cursorPositionChanged(cursorPosition());
 }
 
-void AbstractByteArrayViewPrivate::toggleOffsetColumn(bool showOffsetColumn)
+void AbstractByteArrayViewPrivate::toggleOffsetColumn(bool offsetColumnVisible)
 {
     Q_Q(AbstractByteArrayView);
 
     const bool isVisible = mOffsetColumn->isVisible();
     // no change?
-    if (isVisible == showOffsetColumn) {
+    if (isVisible == offsetColumnVisible) {
         return;
     }
 
-    mOffsetColumn->setVisible(showOffsetColumn);
+    mOffsetColumn->setVisible(offsetColumnVisible);
 
     updateViewByWidth();
 
-    Q_EMIT q->offsetColumnVisibleChanged(showOffsetColumn);
+    Q_EMIT q->offsetColumnVisibleChanged(offsetColumnVisible);
 }
 
 void AbstractByteArrayViewPrivate::setOffsetCoding(AbstractByteArrayView::OffsetCoding offsetCoding)
@@ -1066,48 +1066,48 @@ QMenu* AbstractByteArrayViewPrivate::createStandardContextMenu(QPoint position)
     return menu;
 }
 
-void AbstractByteArrayViewPrivate::mousePressEvent(QMouseEvent* mouseEvent)
+void AbstractByteArrayViewPrivate::mousePressEvent(QMouseEvent* mousePressEvent)
 {
     Q_Q(AbstractByteArrayView);
 
-    if (mMouseController->handleMousePressEvent(mouseEvent)) {
-        mouseEvent->accept();
+    if (mMouseController->handleMousePressEvent(mousePressEvent)) {
+        mousePressEvent->accept();
     } else {
-        q->ColumnsView::mousePressEvent(mouseEvent);
+        q->ColumnsView::mousePressEvent(mousePressEvent);
     }
 }
 
-void AbstractByteArrayViewPrivate::mouseMoveEvent(QMouseEvent* mouseEvent)
+void AbstractByteArrayViewPrivate::mouseMoveEvent(QMouseEvent* mouseMoveEvent)
 {
     Q_Q(AbstractByteArrayView);
 
-    if (mMouseController->handleMouseMoveEvent(mouseEvent)) {
-        mouseEvent->accept();
+    if (mMouseController->handleMouseMoveEvent(mouseMoveEvent)) {
+        mouseMoveEvent->accept();
     } else {
-        q->ColumnsView::mouseMoveEvent(mouseEvent);
+        q->ColumnsView::mouseMoveEvent(mouseMoveEvent);
     }
 }
 
-void AbstractByteArrayViewPrivate::mouseReleaseEvent(QMouseEvent* mouseEvent)
+void AbstractByteArrayViewPrivate::mouseReleaseEvent(QMouseEvent* mouseReleaseEvent)
 {
     Q_Q(AbstractByteArrayView);
 
-    if (mMouseController->handleMouseReleaseEvent(mouseEvent)) {
-        mouseEvent->accept();
+    if (mMouseController->handleMouseReleaseEvent(mouseReleaseEvent)) {
+        mouseReleaseEvent->accept();
     } else {
-        q->ColumnsView::mouseReleaseEvent(mouseEvent);
+        q->ColumnsView::mouseReleaseEvent(mouseReleaseEvent);
     }
 }
 
 // gets called after press and release instead of a plain press event (?)
-void AbstractByteArrayViewPrivate::mouseDoubleClickEvent(QMouseEvent* mouseEvent)
+void AbstractByteArrayViewPrivate::mouseDoubleClickEvent(QMouseEvent* mouseDoubleClickEvent)
 {
     Q_Q(AbstractByteArrayView);
 
-    if (mMouseController->handleMouseDoubleClickEvent(mouseEvent)) {
-        mouseEvent->accept();
+    if (mMouseController->handleMouseDoubleClickEvent(mouseDoubleClickEvent)) {
+        mouseDoubleClickEvent->accept();
     } else {
-        q->ColumnsView::mouseDoubleClickEvent(mouseEvent);
+        q->ColumnsView::mouseDoubleClickEvent(mouseDoubleClickEvent);
     }
 }
 

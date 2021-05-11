@@ -96,14 +96,14 @@ void StatisticTableModel::setValueCoding(int valueCoding)
     Q_EMIT headerChanged();
 }
 
-void StatisticTableModel::setCharCodec(const QString& codeName)
+void StatisticTableModel::setCharCodec(const QString& codecName)
 {
-    if (codeName == mCharCodec->name()) {
+    if (codecName == mCharCodec->name()) {
         return;
     }
 
     delete mCharCodec;
-    mCharCodec = Okteta::CharCodec::createCodec(codeName);
+    mCharCodec = Okteta::CharCodec::createCodec(codecName);
 
     Q_EMIT dataChanged(index(0, CharacterId), index(StatisticsByteSetSize - 1, CharacterId));
 }

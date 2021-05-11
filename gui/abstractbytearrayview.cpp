@@ -282,10 +282,10 @@ AbstractByteArrayView::CodingTypeId AbstractByteArrayView::activeCoding() const
     return d->activeCoding();
 }
 
-void AbstractByteArrayView::setVisibleCodings(int visibleByteArrayCodings)
+void AbstractByteArrayView::setVisibleCodings(int visibleCodings)
 {
     Q_D(AbstractByteArrayView);
-    d->setVisibleCodings(visibleByteArrayCodings);
+    d->setVisibleCodings(visibleCodings);
 }
 void AbstractByteArrayView::setActiveCoding(CodingTypeId codingId)
 {
@@ -299,10 +299,10 @@ void AbstractByteArrayView::setTabChangesFocus(bool tabChangesFocus)
     d->setTabChangesFocus(tabChangesFocus);
 }
 
-void AbstractByteArrayView::toggleOffsetColumn(bool showOffsetColumn)
+void AbstractByteArrayView::toggleOffsetColumn(bool offsetColumnVisible)
 {
     Q_D(AbstractByteArrayView);
-    d->toggleOffsetColumn(showOffsetColumn);
+    d->toggleOffsetColumn(offsetColumnVisible);
 }
 
 void AbstractByteArrayView::setOffsetCoding(AbstractByteArrayView::OffsetCoding offsetCoding)
@@ -545,29 +545,29 @@ void AbstractByteArrayView::keyPressEvent(QKeyEvent* keyEvent)
     }
 }
 
-void AbstractByteArrayView::mousePressEvent(QMouseEvent* mouseEvent)
+void AbstractByteArrayView::mousePressEvent(QMouseEvent* mousePressEvent)
 {
     Q_D(AbstractByteArrayView);
-    d->mousePressEvent(mouseEvent);
+    d->mousePressEvent(mousePressEvent);
 }
 
-void AbstractByteArrayView::mouseMoveEvent(QMouseEvent* mouseEvent)
+void AbstractByteArrayView::mouseMoveEvent(QMouseEvent* mouseMoveEvent)
 {
     Q_D(AbstractByteArrayView);
-    d->mouseMoveEvent(mouseEvent);
+    d->mouseMoveEvent(mouseMoveEvent);
 }
 
-void AbstractByteArrayView::mouseReleaseEvent(QMouseEvent* mouseEvent)
+void AbstractByteArrayView::mouseReleaseEvent(QMouseEvent* mouseReleaseEvent)
 {
     Q_D(AbstractByteArrayView);
-    d->mouseReleaseEvent(mouseEvent);
+    d->mouseReleaseEvent(mouseReleaseEvent);
 }
 
 // gets called after press and release instead of a plain press event (?)
-void AbstractByteArrayView::mouseDoubleClickEvent(QMouseEvent* mouseEvent)
+void AbstractByteArrayView::mouseDoubleClickEvent(QMouseEvent* mouseDoubleClickEvent)
 {
     Q_D(AbstractByteArrayView);
-    d->mouseDoubleClickEvent(mouseEvent);
+    d->mouseDoubleClickEvent(mouseDoubleClickEvent);
 }
 
 void AbstractByteArrayView::wheelEvent(QWheelEvent* wheelEvent)

@@ -272,9 +272,9 @@ bool ByteArrayJanusView::isOverwriteMode() const
     return mView->isOverwriteMode();
 }
 
-void ByteArrayJanusView::setShowsNonprinting(bool on)
+void ByteArrayJanusView::setShowsNonprinting(bool showsNonprinting)
 {
-    Q_UNUSED(on);
+    Q_UNUSED(showsNonprinting);
     // TODOSHOWNONPRINTING mView->setShowsNonprinting(on);
 }
 
@@ -293,9 +293,9 @@ void ByteArrayJanusView::setUndefinedChar(QChar undefinedChar)
     mView->setUndefinedChar(undefinedChar);
 }
 
-void ByteArrayJanusView::toggleOffsetColumn(bool on)
+void ByteArrayJanusView::toggleOffsetColumn(bool offsetColumnVisible)
 {
-    mView->toggleOffsetColumn(on);
+    mView->toggleOffsetColumn(offsetColumnVisible);
 }
 
 void ByteArrayJanusView::setOffsetCoding(int offsetCoding)

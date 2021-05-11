@@ -37,7 +37,7 @@ public:
     int indexOf(const DataInformation* data) const override;
     BitCount64 offset(const DataInformation* child) const override;
     BitCount32 sizeAt(uint index) override;
-    Qt::ItemFlags childFlags(int row, int column, bool fileLoaded) override;
+    Qt::ItemFlags childFlags(int index, int column, bool fileLoaded) override;
 
     PrimitiveDataType primitiveType() const override;
     bool isComplex() const override;

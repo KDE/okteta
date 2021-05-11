@@ -36,7 +36,7 @@ public: // QAbstractItemDelegate
     void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const override;
 
 public: // QStyledItemDelegate API
-    QString displayText(const QVariant& value, const QLocale& locale) const override;
+    QString displayText(const QVariant& data, const QLocale& locale) const override;
 
 private Q_SLOTS:
     void onEditorDone();

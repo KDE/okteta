@@ -71,7 +71,7 @@ Q_SIGNALS: // If::Versionable
     void headVersionChanged(int newHeadVersionIndex) override;
 
 private Q_SLOTS:
-    void onModelModified(bool newState);
+    void onModelModified(bool isModified);
     void onHeadVersionDescriptionChanged(const QString& newDescription);
 
 private:

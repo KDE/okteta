@@ -115,7 +115,7 @@ public:
     void setShowsNonprinting(bool showsNonprinting);
     void setCharCoding(Okteta::CharCoding charCoding);
     void setCharCoding(const QString& charCodingName);
-    void showByteArrayColumns(int CCs);
+    void showByteArrayColumns(int newColumns);
     void showOffsetColumn(bool visible);
 
 protected: // AbstractColumnFrameRenderer API

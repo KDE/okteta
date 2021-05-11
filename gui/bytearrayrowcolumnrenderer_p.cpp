@@ -94,15 +94,15 @@ void ByteArrayRowColumnRendererPrivate::setFontMetrics(const QFontMetrics& fontM
     }
 }
 
-bool ByteArrayRowColumnRendererPrivate::setSpacing(PixelX byteSpacingWidth, Size NoGB, PixelX groupSpacingWidth)
+bool ByteArrayRowColumnRendererPrivate::setSpacing(PixelX byteSpacingWidth, Size noOfGroupedBytes, PixelX groupSpacingWidth)
 {
     // no changes?
-    if (mByteSpacingWidth == byteSpacingWidth && mNoOfGroupedBytes == NoGB && mGroupSpacingWidth == groupSpacingWidth) {
+    if (mByteSpacingWidth == byteSpacingWidth && mNoOfGroupedBytes == noOfGroupedBytes && mGroupSpacingWidth == groupSpacingWidth) {
         return false;
     }
 
     mByteSpacingWidth = byteSpacingWidth;
-    mNoOfGroupedBytes = NoGB;
+    mNoOfGroupedBytes = noOfGroupedBytes;
     mGroupSpacingWidth = groupSpacingWidth;
 
     // recalculate depend sizes
@@ -130,14 +130,14 @@ bool ByteArrayRowColumnRendererPrivate::setByteSpacingWidth(PixelX byteSpacingWi
     return true;
 }
 
-bool ByteArrayRowColumnRendererPrivate::setNoOfGroupedBytes(Size NoGB)
+bool ByteArrayRowColumnRendererPrivate::setNoOfGroupedBytes(Size noOfGroupedBytes)
 {
     // no changes?
-    if (mNoOfGroupedBytes == NoGB) {
+    if (mNoOfGroupedBytes == noOfGroupedBytes) {
         return false;
     }
 
-    mNoOfGroupedBytes = NoGB;
+    mNoOfGroupedBytes = noOfGroupedBytes;
 
     if (mLinePosLeftPixelX) {
         recalcX();
@@ -333,7 +333,7 @@ LinePosition ByteArrayRowColumnRendererPrivate::magneticLinePositionOfX(PixelX P
     return 0; // NoByteFound;
 }
 
-LinePositionRange ByteArrayRowColumnRendererPrivate::linePositionsOfX(PixelX PX, PixelX PW) const
+LinePositionRange ByteArrayRowColumnRendererPrivate::linePositionsOfX(PixelX x, PixelX width) const
 {
     Q_Q(const ByteArrayRowColumnRenderer);
 
@@ -342,16 +342,16 @@ LinePositionRange ByteArrayRowColumnRendererPrivate::linePositionsOfX(PixelX PX,
     }
 
     // translate
-    PX -= q->x();
-    const PixelX PRX = PX + PW - 1;
+    x -= q->x();
+    const PixelX rx = x + width - 1;
 
     LinePositionRange positions;
     // search backwards for the first byte that is equalleft to x
     for (LinePosition p = mLastLinePos; p >= 0; --p) {
-        if (mLinePosLeftPixelX[p] <= PRX) {
+        if (mLinePosLeftPixelX[p] <= rx) {
             positions.setEnd(p);
             for (; p >= 0; --p) {
-                if (mLinePosLeftPixelX[p] <= PX) {
+                if (mLinePosLeftPixelX[p] <= x) {
                     positions.setStart(p);
                     break;
                 }

@@ -126,11 +126,11 @@ void AbstractByteArrayColumnRenderer::setFontMetrics(const QFontMetrics& fontMet
     d->setFontMetrics(fontMetrics);
 }
 
-bool AbstractByteArrayColumnRenderer::setSpacing(PixelX byteSpacingWidth, int NoGB, PixelX groupSpacingWidth)
+bool AbstractByteArrayColumnRenderer::setSpacing(PixelX byteSpacingWidth, int noOfGroupedBytes, PixelX groupSpacingWidth)
 {
     Q_D(AbstractByteArrayColumnRenderer);
 
-    return d->setSpacing(byteSpacingWidth, NoGB, groupSpacingWidth);
+    return d->setSpacing(byteSpacingWidth, noOfGroupedBytes, groupSpacingWidth);
 }
 
 bool AbstractByteArrayColumnRenderer::setByteSpacingWidth(PixelX byteSpacingWidth)
@@ -140,11 +140,11 @@ bool AbstractByteArrayColumnRenderer::setByteSpacingWidth(PixelX byteSpacingWidt
     return d->setByteSpacingWidth(byteSpacingWidth);
 }
 
-bool AbstractByteArrayColumnRenderer::setNoOfGroupedBytes(int NoGB)
+bool AbstractByteArrayColumnRenderer::setNoOfGroupedBytes(int noOfGroupedBytes)
 {
     Q_D(AbstractByteArrayColumnRenderer);
 
-    return d->setNoOfGroupedBytes(NoGB);
+    return d->setNoOfGroupedBytes(noOfGroupedBytes);
 }
 
 bool AbstractByteArrayColumnRenderer::setGroupSpacingWidth(PixelX groupSpacingWidth)
@@ -168,11 +168,11 @@ LinePosition AbstractByteArrayColumnRenderer::magneticLinePositionOfX(PixelX PX)
     return d->magneticLinePositionOfX(PX);
 }
 
-LinePositionRange AbstractByteArrayColumnRenderer::linePositionsOfX(PixelX PX, PixelX PW) const
+LinePositionRange AbstractByteArrayColumnRenderer::linePositionsOfX(PixelX x, PixelX width) const
 {
     Q_D(const AbstractByteArrayColumnRenderer);
 
-    return d->linePositionsOfX(PX, PW);
+    return d->linePositionsOfX(x, width);
 }
 
 PixelX AbstractByteArrayColumnRenderer::xOfLinePosition(LinePosition linePosition) const

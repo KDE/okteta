@@ -20,7 +20,7 @@ public:
     ChangesDataStorage();
 
 public: // set/action
-    void append(int from, char byte);
+    void append(int from, char datum);
     void append(int from, const char* data, int dataLength);
     void appendFill(int from, char fillDatum, int fillLength);
 

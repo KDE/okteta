@@ -46,9 +46,9 @@ private Q_SLOTS: // gui
     void onCopyButtonClicked();
 
 private Q_SLOTS: // tool
-    void onStringsUptodateChanged(bool stringUptodate);
+    void onStringsUptodateChanged(bool stringsUptodate);
     void onApplyableChanged(bool isApplyable);
-    void onCanHighlightStringChanged(bool isSelectable);
+    void onCanHighlightStringChanged(bool canHighlightString);
 
 private Q_SLOTS:
     void setFixedFontByGlobalSettings();

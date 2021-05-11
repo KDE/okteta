@@ -37,7 +37,7 @@ public:
 public: // modifcation access
     void setMarking(const AddressRange& marking);
     void setSelectionStart(Address startIndex);
-    void setSelectionEnd(Address startIndex);
+    void setSelectionEnd(Address endIndex);
     void setSelection(const AddressRange& selection);
     /** */
     void setFirstWordSelection(const AddressRange& selection);
@@ -50,7 +50,7 @@ public: // modifcation access
     void removeFurtherSelections();
 
     /** assumes all added lines to overlap */
-    void addChangedOffsetLines(const LineRange& changesLines);
+    void addChangedOffsetLines(const LineRange& changedLines);
 
     void addChangedRange(const AddressRange& range);
     void addChangedRange(Address start, Address end);
@@ -83,8 +83,8 @@ public: // calculated logic access
     bool selectionIncludes(Address index) const;
     bool markingIncludes(Address index) const;
     // TODO: next three are deprecated
-    bool overlapsSelection(Address FirstIndex, Address LastIndex, Address* SI, Address* EI) const;
-    bool overlapsMarking(Address FirstIndex, Address LastIndex, Address* SI, Address* EI) const;
+    bool overlapsSelection(Address FirstIndex, Address LastIndex, Address* startIndex, Address* endIndex) const;
+    bool overlapsMarking(Address FirstIndex, Address LastIndex, Address* startIndex, Address* endIndex) const;
 //    bool overlapsChanges( int FirstIndex, int LastIndex, int *SI, int *EI ) const;
 //    bool overlapsChanges( AddressRange Indizes, AddressRange *ChangedRange ) const;
     bool overlapsChanges(const CoordRange& range, CoordRange* ChangedRange) const;

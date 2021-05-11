@@ -77,10 +77,10 @@ void ByteArrayTableRanges::setSelectionStart(Address startIndex)
     mSelection.setStart(startIndex);
 }
 
-void ByteArrayTableRanges::setSelectionEnd(Address EndIndex)
+void ByteArrayTableRanges::setSelectionEnd(Address endIndex)
 {
     AddressRange OldSelection = mSelection.range();
-    mSelection.setEnd(EndIndex);
+    mSelection.setEnd(endIndex);
 
     // TODO: think about rather building a diff of the sections
     if (!OldSelection.isValid()) {
@@ -275,9 +275,9 @@ void ByteArrayTableRanges::takeHasSelectionChanged(bool* hasSelectionChanged, bo
     }
 }
 
-void ByteArrayTableRanges::setFirstWordSelection(const AddressRange& range)
+void ByteArrayTableRanges::setFirstWordSelection(const AddressRange& selection)
 {
-    FirstWordSelection = range;
+    FirstWordSelection = selection;
     setSelection(FirstWordSelection);
 }
 

@@ -46,7 +46,7 @@ public:
     ~AddressValidator() override;
 
 public: // QValidator API
-    QValidator::State validate(QString& input, int& pos) const override;
+    QValidator::State validate(QString& string, int& pos) const override;
 
 public:
     AddressType addressType() const;

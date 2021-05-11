@@ -76,9 +76,9 @@ Q_SIGNALS:
 
 private:
     QString filePathOfViewProfile(const ByteArrayViewProfile::Id& viewProfileId) const;
-    // Returns the viewProfile as loaded from the file with the given fileName.
+    // Returns the viewProfile as loaded from the file with the given absoluteFilePath.
     // If the loading fails the viewProfile has no id set.
-    ByteArrayViewProfile loadViewProfile(const QString& fileName) const;
+    ByteArrayViewProfile loadViewProfile(const QString& absoluteFilePath) const;
     void saveViewProfile(const ByteArrayViewProfile& viewProfile) const;
     void removeViewProfile(const ByteArrayViewProfile::Id& viewProfileId);
 

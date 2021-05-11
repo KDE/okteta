@@ -453,7 +453,7 @@ protected: // QWidget API
     void timerEvent(QTimerEvent* timerEvent) override;
 
 protected: // QAbstractScrollArea API
-    void wheelEvent(QWheelEvent* e) override;
+    void wheelEvent(QWheelEvent* wheelEvent) override;
     bool viewportEvent(QEvent* event) override;
 
 protected: // ColumnsView API

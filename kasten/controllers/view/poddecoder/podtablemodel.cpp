@@ -166,14 +166,14 @@ QVariant PODTableModel::headerData(int section, Qt::Orientation orientation, int
     return result;
 }
 
-bool PODTableModel::setData(const QModelIndex& index, const QVariant& data, int role)
+bool PODTableModel::setData(const QModelIndex& index, const QVariant& value, int role)
 {
     bool result;
 
     if (index.isValid() && role == Qt::EditRole) {
         const int podId = index.row();
 
-        mTool->setData(data, podId);
+        mTool->setData(value, podId);
 
         result = true;
     } else {

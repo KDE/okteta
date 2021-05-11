@@ -39,7 +39,7 @@ public:
     int indexOf(const DataInformation* data) const override;
     unsigned int length() const override;
     void setLength(uint newLength) override;
-    BitCount64 offset(const DataInformation* child) const override;
+    BitCount64 offset(const DataInformation* data) const override;
     BitCount32 size() const override;
     PrimitiveDataType primitiveType() const override;
     BitCount32 sizeAt(uint index) override;

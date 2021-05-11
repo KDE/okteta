@@ -129,7 +129,7 @@ Q_SIGNALS:
     void overwriteModeChanged(bool overwriteMode);
 
 public: // elements
-    void toggleOffsetColumn(bool visible);
+    void toggleOffsetColumn(bool offsetColumnVisible);
     void setOffsetCoding(int offsetCoding);
     void setVisibleByteArrayCodings(int columns);
     void setMarking(const Okteta::AddressRange& range, bool ensureVisible = false);

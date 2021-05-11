@@ -53,7 +53,7 @@ public:
     QStringList parseStructureNames() const override;
     QVector<TopLevelDataInformation*> parseStructures() const override;
 
-    static DataInformation* parseElement(const QDomElement& node, const OsdParserInfo& info);
+    static DataInformation* parseElement(const QDomElement& elem, const OsdParserInfo& oldInfo);
 
 private:
     static PrimitiveDataInformation* primitiveFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
@@ -82,8 +82,8 @@ private:
     QDomDocument openDocFromString(ScriptLogger* logger) const;
 
     /** Reads an property of the QDomElement. First it is checked whether an attribute exists, if this is not the case
-     * the inner text of an element with tag equal to @p attrib is returned*/
-    static QString readProperty(const QDomElement& elem, const QString& attrib, const QString& defaultVal = QString());
+     * the inner text of an element with tag equal to @p property is returned*/
+    static QString readProperty(const QDomElement& elem, const QString& property, const QString& defaultVal = QString());
     /** if not empty construct the document from this, instead of opening file */
     const QString mXmlString;
 };

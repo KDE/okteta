@@ -116,10 +116,10 @@ void ByteArrayColumnView::setUndefinedChar(QChar undefinedChar)
     d->setUndefinedChar(undefinedChar);
 }
 
-void ByteArrayColumnView::setShowsNonprinting(bool showingNonprinting)
+void ByteArrayColumnView::setShowsNonprinting(bool showsNonprinting)
 {
     Q_D(ByteArrayColumnView);
-    d->setShowsNonprinting(showingNonprinting);
+    d->setShowsNonprinting(showsNonprinting);
 }
 
 void ByteArrayColumnView::setCharCoding(CharCoding charCoding)

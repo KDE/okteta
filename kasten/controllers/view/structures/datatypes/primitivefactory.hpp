@@ -21,7 +21,7 @@ namespace PrimitiveFactory {
 /** Converts @p typeStr to a PrimitiveDataType case-insensitively
  * @return The corresponding type or PrimitiveDataType::Invalid if string is not regcognized
  */
-PrimitiveDataType typeStringToType(const QString& typeStr, const LoggerWithContext& logger);
+PrimitiveDataType typeStringToType(const QString& string, const LoggerWithContext& logger);
 
 PrimitiveDataInformation* newInstance(const QString& name, PrimitiveDataType type,
                                       const LoggerWithContext& logger, DataInformation* parent = nullptr);

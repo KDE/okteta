@@ -55,7 +55,7 @@ public: // Q_SLOTS:
     void onTabCloseRequest(int tabIndex);
     void onTitleChanged(const QString& newTitle);
 //     void onModifiedChanged( Kasten::AbstractDocument::SyncStates newStates );
-    void onViewFocusChanged(bool focusChanged);
+    void onViewFocusChanged(bool hasFocus);
     void onMouseMiddleClick();
     void onDragMoveEvent(const QDragMoveEvent* event, bool& accept);
     void onDropEvent(QDropEvent* event);

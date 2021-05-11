@@ -98,7 +98,7 @@ public Q_SLOTS:
     void newModelActivated(Okteta::AbstractByteArrayModel* model);
 
 private Q_SLOTS:
-    void removeByteArrayModelFromList(QObject* model);
+    void removeByteArrayModelFromList(QObject* obj);
 Q_SIGNALS:
     void dataChanged();
     /** items are inserted before @p startIndex */

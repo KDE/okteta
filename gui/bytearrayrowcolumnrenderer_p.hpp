@@ -139,18 +139,18 @@ public: // functional logic
     LinePosition linePositionOfX(PixelX x) const;
     /** returns byte pos at pixel with absolute x-coord x, and sets the flag to true if we are closer to the right */
     LinePosition magneticLinePositionOfX(PixelX x) const;
-    /** returns absolute x-coord of byte at position posInLine */
-    PixelX xOfLinePosition(LinePosition posInLine) const;
-    /** returns right absolute x-coord of byte at position posInLine */
-    PixelX rightXOfLinePosition(LinePosition posInLine) const;
+    /** returns absolute x-coord of byte at position linePosition */
+    PixelX xOfLinePosition(LinePosition linePosition) const;
+    /** returns right absolute x-coord of byte at position linePosition */
+    PixelX rightXOfLinePosition(LinePosition linePosition) const;
     /** returns byte pos at pixel with relative x-coord x */
     LinePosition linePositionOfColumnX(PixelX x) const;
     /** returns byte linePositions covered by pixels with relative x-coord x */
     LinePositionRange linePositionsOfColumnXs(PixelX x, PixelX width) const;
-    /** returns relative x-coord of byte at position posInLine */
-    PixelX columnXOfLinePosition(LinePosition posInLine) const;
-    /** returns right relative x-coord of byte at position posInLine */
-    PixelX columnRightXOfLinePosition(LinePosition posInLine) const;
+    /** returns relative x-coord of byte at position linePosition */
+    PixelX columnXOfLinePosition(LinePosition linePosition) const;
+    /** returns right relative x-coord of byte at position linePosition */
+    PixelX columnRightXOfLinePosition(LinePosition linePosition) const;
     /** returns the linePositions that overlap with the x-coords relative to the view */
     LinePositionRange visibleLinePositions(PixelX x, PixelX width) const;
     /** returns the */
@@ -194,7 +194,7 @@ public: // value access
 
 private: // API to be redefined
     void renderByteText(QPainter* painter,
-                        Byte byte, Character charByte, int codings, const QColor& color) const;
+                        Byte byte, Character byteChar, int codings, const QColor& color) const;
     /** default implementation sets byte width to one digit width */
     void recalcByteWidth();
 

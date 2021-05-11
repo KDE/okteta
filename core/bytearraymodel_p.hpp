@@ -51,7 +51,7 @@ public:
      */
     void setKeepsMemory(bool keepsMemory = true);
     void setAutoDelete(bool autoDelete = true);
-    void setData(Byte* data, int size, int rawSize = -1, bool keepsMemory = true);
+    void setData(Byte* data, int size, int rawSize = -1, bool keepMemory = true);
 
 public:
     Byte* data() const;
@@ -81,7 +81,7 @@ private:
      * @param saveUpperPart true if upper part should be copied into new buffer
      * @return additional size the buffer has grown
      */
-    int addSize(int AddSize, int splitOffset = -1, bool saveUpperPart = true);
+    int addSize(int AddSize, int splitPosition = -1, bool saveUpperPart = true);
 
 private:
     /** */

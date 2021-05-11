@@ -39,12 +39,12 @@ DataInformationWithChildren::~DataInformationWithChildren()
     qDeleteAll(mChildren);
 }
 
-DataInformation* DataInformationWithChildren::childAt(unsigned int idx) const
+DataInformation* DataInformationWithChildren::childAt(unsigned int index) const
 {
-    if (idx >= (unsigned) mChildren.size()) {
+    if (index >= (unsigned) mChildren.size()) {
         return nullptr;
     }
-    return mChildren[idx];
+    return mChildren[index];
 }
 
 bool DataInformationWithChildren::setData(const QVariant&, Okteta::AbstractByteArrayModel*,

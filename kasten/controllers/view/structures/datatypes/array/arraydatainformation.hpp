@@ -32,7 +32,7 @@ public:
      *  length should be > 0
      */
     ArrayDataInformation(const QString& name, uint length, DataInformation* childType,
-                         DataInformation* parent = nullptr, const QScriptValue& lengthFuntion = QScriptValue());
+                         DataInformation* parent = nullptr, const QScriptValue& lengthFunction = QScriptValue());
     ~ArrayDataInformation() override;
 
 public:

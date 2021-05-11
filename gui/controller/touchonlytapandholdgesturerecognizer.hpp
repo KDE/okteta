@@ -21,7 +21,7 @@ public:
 
 public:
     QGesture* create(QObject* target) override;
-    QGestureRecognizer::Result recognize(QGesture* state, QObject* watched, QEvent* event) override;
+    QGestureRecognizer::Result recognize(QGesture* state, QObject* object, QEvent* event) override;
     void reset(QGesture* state) override;
 };
 

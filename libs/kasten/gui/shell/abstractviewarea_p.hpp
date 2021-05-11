@@ -19,7 +19,7 @@ namespace Kasten {
 class AbstractViewAreaPrivate
 {
 public:
-    explicit AbstractViewAreaPrivate(AbstractViewArea* viewArea);
+    explicit AbstractViewAreaPrivate(AbstractViewArea* parent);
 
     virtual ~AbstractViewAreaPrivate();
 

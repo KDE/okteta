@@ -98,7 +98,7 @@ public:
      * @param pos offset in the text to start with decoding
      * @return used chars of the string for the decoding, beginning with pos
      */
-    unsigned int decode(Byte* byte, const QString& text, unsigned int pos = 0) const;
+    unsigned int decode(Byte* byte, const QString& digits, unsigned int pos = 0) const;
 };
 
 inline ValueCodec::ValueCodec() = default;

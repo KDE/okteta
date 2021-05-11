@@ -80,14 +80,14 @@ void ByteTableModel::setUndefinedChar(QChar undefinedChar)
     Q_EMIT dataChanged(index(0, CharacterId), index(ByteSetSize - 1, CharacterId));
 }
 
-void ByteTableModel::setCharCodec(const QString& codeName)
+void ByteTableModel::setCharCodec(const QString& codecName)
 {
-    if (codeName == mCharCodec->name()) {
+    if (codecName == mCharCodec->name()) {
         return;
     }
 
     delete mCharCodec;
-    mCharCodec = Okteta::CharCodec::createCodec(codeName);
+    mCharCodec = Okteta::CharCodec::createCodec(codecName);
 
     Q_EMIT dataChanged(index(0, CharacterId), index(ByteSetSize - 1, CharacterId));
 }

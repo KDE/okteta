@@ -43,7 +43,7 @@ public:
      * @param val the value to convert. Do not call .data() on it.
      * @return @p val converted to a Datainformation*
      */
-    static DataInformation* toDataInformation(const QScriptValue& val);
+    static DataInformation* toDataInformation(const QScriptValue& obj);
 
 protected:
     virtual bool queryAdditionalProperty(const DataInformation* data, const QScriptString& name, QueryFlags* flags, uint* id) = 0;

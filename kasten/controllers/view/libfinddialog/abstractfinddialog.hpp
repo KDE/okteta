@@ -51,7 +51,7 @@ public Q_SLOTS:
     void setCharCodec(const QString& codecName);
 
 protected: // QWidget API
-    void showEvent(QShowEvent* e) override;
+    void showEvent(QShowEvent* showEvent) override;
 
 protected:
     void setFindButton(const QString& buttonText, const QString& buttonIconName,
@@ -66,8 +66,8 @@ protected: // API to be implemented
     virtual void rememberCurrentSettings();
 
 private Q_SLOTS:
-    void onSearchDataChanged(const QByteArray& ata);
-    void onSearchDataFormatChanged(int Format);
+    void onSearchDataChanged(const QByteArray& data);
+    void onSearchDataFormatChanged(int index);
     void onSelectedToggled(bool checked);
     void forwardFindButtonClicked();
 

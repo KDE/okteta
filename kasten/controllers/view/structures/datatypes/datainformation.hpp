@@ -173,7 +173,7 @@ public:
     bool hasBeenValidated() const;
     DataInformationEndianess byteOrder() const;
     QSysInfo::Endian effectiveByteOrder() const;
-    void setByteOrder(DataInformationEndianess newEndianess);
+    void setByteOrder(DataInformationEndianess newByteOrder);
     QString fullObjectPath() const;
 
     virtual void resetValidationState(); // virtual for DataInformationWithChildren
@@ -213,7 +213,7 @@ public:
      */
     void setCustomTypeName(const QString& customTypeName);
     QScriptValue toStringFunction() const;
-    void setToStringFunction(const QScriptValue& value);
+    void setToStringFunction(const QScriptValue& func);
 
 protected:
     static QVariant eofReachedData(int role);

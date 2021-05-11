@@ -24,7 +24,7 @@ public:
     void init(Size size);
 
 public: // operations return true if it results in a new change and is not merged to the current
-    bool insert(Address pos, Size length, Size* storageSize);
+    bool insert(Address dataOffset, Size length, Address* storageOffset);
     bool remove(const AddressRange& removeRange);
 //     bool remove( Address start, Address end );
     bool replace(const AddressRange& removeRange, Size insertLength, Size* storageSize);

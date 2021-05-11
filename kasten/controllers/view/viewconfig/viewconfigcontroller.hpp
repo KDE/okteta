@@ -33,14 +33,14 @@ public: // AbstractXmlGuiController API
 
 private Q_SLOTS: // action slots
     void setValueCoding(int valueCoding);
-    void setCharCoding(int valueCoding);
+    void setCharCoding(int charCoding);
     void setShowsNonprinting(bool on);
     void showBytesPerLineDialog();
     void showBytesPerGroupDialog();
     void setLayoutStyle(int layoutStyle);
     void setOffsetCoding(int offsetCoding);
     void toggleOffsetColumn(bool on);
-    void toggleValueCharColumns(int visibleColunms);
+    void toggleValueCharColumns(int visibleColumns);
 
     void onOffsetColumnVisibleChanged(bool offsetColumnVisible);
     void onOffsetCodingChanged(int offsetCoding);

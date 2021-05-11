@@ -38,7 +38,7 @@ public:
 private Q_SLOTS: // gui
     void onGotoButtonClicked();
     void onFormatChanged(int index);
-    void onAddressTypeChanged(int newType);
+    void onAddressTypeChanged(int addressType);
 
 private Q_SLOTS: // tool
     void onApplyableChanged(bool isApplyable);

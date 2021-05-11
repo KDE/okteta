@@ -318,9 +318,9 @@ bool ByteArrayView::isOverwriteMode() const
     return mWidget->isOverwriteMode();
 }
 
-void ByteArrayView::setShowsNonprinting(bool on)
+void ByteArrayView::setShowsNonprinting(bool showsNonprinting)
 {
-    mWidget->setShowsNonprinting(on);
+    mWidget->setShowsNonprinting(showsNonprinting);
 }
 
 void ByteArrayView::setNoOfGroupedBytes(int noOfGroupedBytes)
@@ -328,9 +328,9 @@ void ByteArrayView::setNoOfGroupedBytes(int noOfGroupedBytes)
     mWidget->setNoOfGroupedBytes(noOfGroupedBytes);
 }
 
-void ByteArrayView::toggleOffsetColumn(bool on)
+void ByteArrayView::toggleOffsetColumn(bool offsetColumnVisible)
 {
-    mWidget->toggleOffsetColumn(on);
+    mWidget->toggleOffsetColumn(offsetColumnVisible);
 }
 
 void ByteArrayView::setOffsetCoding(int offsetCoding)
