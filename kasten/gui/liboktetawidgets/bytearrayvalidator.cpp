@@ -144,8 +144,9 @@ QByteArray ByteArrayValidator::toByteArray(const QString& string) const
                 i += readChars;
                 result.append(byte);
             } else {
-                while (i < stringLength && !mValueCodec->isValidDigit(string[i].toLatin1()))
+                while (i < stringLength && !mValueCodec->isValidDigit(string[i].toLatin1())) {
                     ++i;
+                }
             }
         }
     }
