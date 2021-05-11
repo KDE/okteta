@@ -314,7 +314,7 @@ void AbstractByteArrayViewPrivate::setOffsetCoding(AbstractByteArrayView::Offset
 {
     Q_Q(AbstractByteArrayView);
 
-    const OffsetFormat::Format format = static_cast<OffsetFormat::Format>(offsetCoding);
+    const auto format = static_cast<OffsetFormat::Format>(offsetCoding);
     const OffsetFormat::Format currentFormat = mOffsetColumn->format();
     // no change?
     if (currentFormat == format) {
@@ -1051,7 +1051,7 @@ QMenu* AbstractByteArrayViewPrivate::createStandardContextMenu(QPoint position)
 
     Q_Q(AbstractByteArrayView);
 
-    auto menu = new QMenu(q);
+    auto* menu = new QMenu(q);
 
     if (mUndoRedoController->addContextMenuActions(menu) > 0) {
         menu->addSeparator();
@@ -1307,7 +1307,7 @@ void AbstractByteArrayViewPrivate::dropEvent(QDropEvent* dropEvent)
 
 void AbstractByteArrayViewPrivate::contextMenuEvent(QContextMenuEvent* contextMenuEvent)
 {
-    auto menu = createStandardContextMenu(contextMenuEvent->pos());
+    QMenu* menu = createStandardContextMenu(contextMenuEvent->pos());
     menu->setAttribute(Qt::WA_DeleteOnClose);
 
     menu->popup(contextMenuEvent->globalPos());

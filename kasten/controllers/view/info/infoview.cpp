@@ -37,7 +37,7 @@ InfoView::InfoView(InfoTool* tool, QWidget* parent)
 
     auto* topLineLayout = new QHBoxLayout();
 
-    QLabel* label = new QLabel(i18nc("@label size of selected bytes", "Size:"), this);
+    auto* label = new QLabel(i18nc("@label size of selected bytes", "Size:"), this);
     topLineLayout->addWidget(label);
 
     mSizeLabel = new QLabel(this);

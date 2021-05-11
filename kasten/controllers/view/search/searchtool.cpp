@@ -143,7 +143,7 @@ void SearchTool::doSearch(FindDirection direction)
                                    ((direction == FindForward) ? mByteArrayModel->size() - 1 : 0) :
                                    ((direction == FindForward) ? mSearchLastIndex : mSearchFirstIndex);
 
-        SearchJob* searchJob =
+        auto* searchJob =
             new SearchJob(mByteArrayModel, mSearchData, startIndex, endIndex, mCaseSensitivity, mByteArrayView->charCodingName());
         const Okteta::Address pos = searchJob->exec();
 

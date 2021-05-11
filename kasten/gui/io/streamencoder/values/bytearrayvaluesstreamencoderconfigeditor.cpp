@@ -48,7 +48,7 @@ ByteArrayValuesStreamEncoderConfigEditor::ByteArrayValuesStreamEncoderConfigEdit
     pageLayout->addWidget(mValueCodingSelect, 0, 1);
 #endif
     // separation string
-    QLabel* label = new QLabel(i18nc("@label:textbox substring which separates the values", "Separation:"), this);
+    auto* label = new QLabel(i18nc("@label:textbox substring which separates the values", "Separation:"), this);
     pageLayout->addWidget(label, 0, 0, Qt::AlignRight);
 
     mSeparationEdit = new QLineEdit(this);

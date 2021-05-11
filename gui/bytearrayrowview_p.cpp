@@ -729,7 +729,7 @@ void ByteArrayRowViewPrivate::updateChanged()
             // only one line?
             if (changedRange.start().line() == changedRange.end().line()) {
                 const LinePositionRange changedPositions(changedRange.start().pos(), changedRange.end().pos());
-                for (auto column : qAsConst(dirtyColumns)) {
+                for (auto* column : qAsConst(dirtyColumns)) {
                     const PixelXRange xPixels = column->xsOfLinePositionsInclSpaces(changedPositions);
 
                     q->viewport()->update(xPixels.start() - xOffset, cy, xPixels.width(), lineHeight);
@@ -739,7 +739,7 @@ void ByteArrayRowViewPrivate::updateChanged()
             else {
                 // first line
                 const LinePositionRange firstChangedPositions(changedRange.start().pos(), fullPositions.end());
-                for (auto column : qAsConst(dirtyColumns)) {
+                for (auto* column : qAsConst(dirtyColumns)) {
                     const PixelXRange XPixels = column->xsOfLinePositionsInclSpaces(firstChangedPositions);
 
                     q->viewport()->update(XPixels.start() - xOffset, cy, XPixels.width(), lineHeight);
@@ -748,7 +748,7 @@ void ByteArrayRowViewPrivate::updateChanged()
                 // at least one full line?
                 for (int l = changedRange.start().line() + 1; l < changedRange.end().line(); ++l) {
                     cy += lineHeight;
-                    for (auto column : qAsConst(dirtyColumns)) {
+                    for (auto* column : qAsConst(dirtyColumns)) {
                         const PixelXRange XPixels = column->xsOfLinePositionsInclSpaces(fullPositions);
 
                         q->viewport()->update(XPixels.start() - xOffset, cy, XPixels.width(), lineHeight);
@@ -758,7 +758,7 @@ void ByteArrayRowViewPrivate::updateChanged()
                 // last line
                 cy += lineHeight;
                 const LinePositionRange lastChangedPositions(fullPositions.start(), changedRange.end().pos());
-                for (auto column : qAsConst(dirtyColumns)) {
+                for (auto* column : qAsConst(dirtyColumns)) {
                     const PixelXRange XPixels = column->xsOfLinePositionsInclSpaces(lastChangedPositions);
 
                     q->viewport()->update(XPixels.start() - xOffset, cy, XPixels.width(), lineHeight);

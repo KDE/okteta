@@ -110,8 +110,7 @@ void ByteArrayRawFileSynchronizerTest::testNewSaveAsToUrl()
 {
     const QUrl fileUrl = QUrl::fromLocalFile(mFileSystem->createFilePath(QLatin1String(TestFileName)));
 
-    ByteArrayDocument* document =
-        new Kasten::ByteArrayDocument(QStringLiteral("New created for test."));
+    auto* document = new Kasten::ByteArrayDocument(QStringLiteral("New created for test."));
     auto* byteArray = qobject_cast<Okteta::PieceTableByteArrayModel*>(document->content());
 
     // fill array

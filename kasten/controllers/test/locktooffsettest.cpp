@@ -94,7 +94,7 @@ TopLevelDataInformation* LockToOffsetTest::newStructure(Okteta::AbstractByteArra
     children.append(new UInt64DataInformation(QStringLiteral("second")));
     DataInformation* data = new StructureDataInformation(QStringLiteral("container"), children);
     data->setByteOrder(DataInformation::DataInformationEndianess::EndianessBig);
-    TopLevelDataInformation* top = new TopLevelDataInformation(data);
+    auto* top = new TopLevelDataInformation(data);
     top->mLastModel = lastModel;
     if (lastModel) {
         top->newModelActivated(lastModel);

@@ -65,7 +65,7 @@ void FileSystemBrowserView::init()
     { "back", "forward", "up", "home", "short view", "detailed view", "tree view"  };
 
     const KActionCollection* dirOperatorActionCollection = mDirOperator->actionCollection();
-    for (auto* actionName : ToolbarActionNames) {
+    for (const auto* actionName : ToolbarActionNames) {
         QAction* action = dirOperatorActionCollection->action(QLatin1String(actionName));
         if (action) {
             mToolbar->addAction(action);

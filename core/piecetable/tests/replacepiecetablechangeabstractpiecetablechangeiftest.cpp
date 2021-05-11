@@ -29,7 +29,7 @@ AbstractPieceTableChange* ReplacePieceTableChangeAbstractPieceTableChangeIfTest:
 {
     const Piece replacedPiece(AddressRange::fromWidth(Start + ChangeStorageOffset, Width), Piece::ChangeStorage);
 
-    ReplacePieceTableChange* pieceTableChange =
+    auto* pieceTableChange =
         new ReplacePieceTableChange(AddressRange(Start, End), InsertLength, InsertStorageOffset,
                                     PieceList(replacedPiece));
 

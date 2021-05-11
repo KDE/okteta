@@ -85,7 +85,7 @@ OktetaPart::OktetaPart(QObject* parent,
     setComponentData(componentData);
 #endif
 
-    QWidget* widget = new QWidget();
+    auto* widget = new QWidget();
     mLayout = new QVBoxLayout(widget);
     mLayout->setContentsMargins(0, 0, 0, 0);
 
@@ -94,7 +94,7 @@ OktetaPart::OktetaPart(QObject* parent,
     setXMLFile(QLatin1String(UIFileName[modus]));
 
     mSingleViewArea = new Kasten::SingleViewArea();
-    auto areaWidget = mSingleViewArea->widget();
+    QWidget* areaWidget = mSingleViewArea->widget();
     mLayout->addWidget(areaWidget);
     mLayout->parentWidget()->setFocusProxy(areaWidget);
 

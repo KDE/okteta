@@ -45,7 +45,7 @@ AbstractColumnFrameRendererPrivate::~AbstractColumnFrameRendererPrivate()
 void AbstractColumnFrameRendererPrivate::updateWidths()
 {
     mColumnsWidth = 0;
-    for (auto columnRenderer : qAsConst(mColumns)) {
+    for (auto* columnRenderer : qAsConst(mColumns)) {
         columnRenderer->setX(mColumnsWidth);
         mColumnsWidth += columnRenderer->visibleWidth();
     }
@@ -84,7 +84,7 @@ void AbstractColumnFrameRenderer::setLineHeight(Okteta::PixelY newLineHeight)
     }
     d->mLineHeight = newLineHeight;
 
-    for (auto columnRenderer : qAsConst(d->mColumns)) {
+    for (auto* columnRenderer : qAsConst(d->mColumns)) {
         columnRenderer->setLineHeight(d->mLineHeight);
     }
 }
@@ -139,7 +139,7 @@ void AbstractColumnFrameRenderer::renderFrame(QPainter* painter, int frameIndex)
         // collect affected columns
         QVector<Okteta::AbstractColumnRenderer*> columnRenderers;
         columnRenderers.reserve(d->mColumns.size());
-        for (auto columnRenderer : qAsConst(d->mColumns)) {
+        for (auto* columnRenderer : qAsConst(d->mColumns)) {
             if (columnRenderer->isVisible() && columnRenderer->overlaps(renderedXs)) {
                 columnRenderers.append(columnRenderer);
             }
@@ -155,7 +155,7 @@ void AbstractColumnFrameRenderer::renderFrame(QPainter* painter, int frameIndex)
         // any lines of any columns to be drawn?
         if (renderedLines.isValid()) {
             // paint full columns
-            for (auto columnRenderer : qAsConst(columnRenderers)) {
+            for (auto* columnRenderer : qAsConst(columnRenderers)) {
                 columnRenderer->renderColumn(painter, renderedXs, renderedYs);
             }
 
@@ -208,7 +208,7 @@ void AbstractColumnFrameRenderer::renderFrame(QPainter* painter, int frameIndex)
         // draw empty columns?
         renderedYs.set(renderedYs.nextBehindEnd(), height() - 1);
         if (renderedYs.isValid()) {
-            for (auto columnRenderer : qAsConst(columnRenderers)) {
+            for (auto* columnRenderer : qAsConst(columnRenderers)) {
                 columnRenderer->renderEmptyColumn(painter, renderedXs, renderedYs);
             }
         }

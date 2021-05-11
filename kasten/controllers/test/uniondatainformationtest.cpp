@@ -71,11 +71,11 @@ void UnionDataInformationTest::testReadData1()
     PrimitiveDataInformation* b8 = PrimitiveFactory::newInstance(QStringLiteral("8"), PrimitiveDataType::Bool8, lwc);
     PrimitiveDataInformation* u32 = PrimitiveFactory::newInstance(QStringLiteral("32"), PrimitiveDataType::UInt32, lwc);
     PrimitiveDataInformation* i16 = PrimitiveFactory::newInstance(QStringLiteral("16"), PrimitiveDataType::Int16, lwc);
-    UnsignedBitfieldDataInformation* u54 = new UnsignedBitfieldDataInformation(QStringLiteral("54"),
+    auto* u54 = new UnsignedBitfieldDataInformation(QStringLiteral("54"),
                                                                                54);
     QVector<DataInformation*> children;
     children << b8 << u32 << i16 << u54;
-    UnionDataInformation* un = new UnionDataInformation(QStringLiteral("un"), children);
+    auto* un = new UnionDataInformation(QStringLiteral("un"), children);
     un->setByteOrder(DataInformation::DataInformationEndianess::EndianessLittle);
     TopLevelDataInformation top(un);
     // read from bit 0

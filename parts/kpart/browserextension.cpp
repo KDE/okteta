@@ -47,7 +47,7 @@ void OktetaBrowserExtension::copy()
 
 void OktetaBrowserExtension::print()
 {
-    auto printAction = mPart->actionCollection()->action(QStringLiteral("file_print"));
+    QAction* printAction = mPart->actionCollection()->action(QStringLiteral("file_print"));
     if (printAction) {
         printAction->trigger();
     }

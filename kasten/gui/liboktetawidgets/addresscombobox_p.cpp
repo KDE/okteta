@@ -62,8 +62,7 @@ void AddressComboBoxPrivate::init()
     QObject::connect(formatComboBoxListView, &QAbstractItemView::pressed,
                      mValueComboBox, QOverload<>::of(&KComboBox::setFocus));
     mValidator = new AddressValidator(mValueComboBox, AddressValidator::HexadecimalCoding);
-    const AddressValidator::Coding coding =
-        static_cast<AddressValidator::Coding>(mFormatComboBox->currentIndex());
+    const auto coding = static_cast<AddressValidator::Coding>(mFormatComboBox->currentIndex());
     mValidator->setCodec(coding);
     mValueComboBox->setValidator(mValidator);
     QObject::connect(mValueComboBox, QOverload<int>::of(&QComboBox::activated),

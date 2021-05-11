@@ -101,16 +101,14 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(const QStringList& selected, 
                     }
                     for (int i = 0; i < avail->childCount(); i++) {
                         QTreeWidgetItem* selStruct = avail->child(i);
-                        QTreeWidgetItem* item = new QTreeWidgetItem(mTreeSelected,
-                                                                    QStringList { selStruct->text(0), pluginName });
+                        auto* item = new QTreeWidgetItem(mTreeSelected, QStringList { selStruct->text(0), pluginName });
                         mTreeSelected->addTopLevelItem(item);
                     }
 
                     break;
                 }
             } else {
-                QTreeWidgetItem* item = new QTreeWidgetItem(mTreeSelected,
-                                                            QStringList { structName, pluginName });
+                auto* item = new QTreeWidgetItem(mTreeSelected, QStringList { structName, pluginName });
                 mTreeSelected->addTopLevelItem(item);
             }
         }
@@ -138,12 +136,10 @@ void StructureAddRemoveWidget::buildAvailableList()
         if (!def->pluginInfo().isPluginEnabled()) {
             continue;
         }
-        QTreeWidgetItem* item = new QTreeWidgetItem(mTreeAvailable,
-                                                    QStringList { def->pluginInfo().pluginName(), pluginName });
+        auto* item = new QTreeWidgetItem(mTreeAvailable, QStringList { def->pluginInfo().pluginName(), pluginName });
         const auto structureNames = def->structureNames();
         for (const QString& name : structureNames) {
-            QTreeWidgetItem* subItem = new QTreeWidgetItem(item,
-                                                           QStringList { name, pluginName });
+            auto* subItem = new QTreeWidgetItem(item, QStringList { name, pluginName });
             item->addChild(subItem);
         }
 
@@ -177,8 +173,7 @@ void StructureAddRemoveWidget::moveRight()
         if (!item->parent()) {
             continue;     // maybe sometime add all subitems
         }
-        QTreeWidgetItem* moveOver = new QTreeWidgetItem(mTreeSelected,
-                                                        QStringList { item->text(0), item->text(1) });
+        auto* moveOver = new QTreeWidgetItem(mTreeSelected, QStringList { item->text(0), item->text(1) });
         // item name then parent name then path
         mTreeSelected->addTopLevelItem(moveOver);
         changed = true;

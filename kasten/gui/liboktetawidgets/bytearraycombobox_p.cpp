@@ -60,8 +60,7 @@ void ByteArrayComboBoxPrivate::init()
     QObject::connect(formatComboBoxListView, &QAbstractItemView::pressed,
                      mValueComboBox, QOverload<>::of(&KComboBox::setFocus));
     mValidator = new ByteArrayValidator(mValueComboBox);
-    const ByteArrayValidator::Coding coding =
-        static_cast<ByteArrayValidator::Coding>(mFormatComboBox->currentIndex());
+    const auto coding = static_cast<ByteArrayValidator::Coding>(mFormatComboBox->currentIndex());
     mValidator->setCodec(coding);
 
     mValueComboBox->setValidator(mValidator);

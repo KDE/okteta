@@ -143,7 +143,7 @@ void ColumnsView::setLineHeight(PixelY newLineHeight)
 
     d->LineHeight = newLineHeight;
 
-    for (auto column : qAsConst(d->columns)) {
+    for (auto* column : qAsConst(d->columns)) {
         column->setLineHeight(d->LineHeight);
     }
 
@@ -309,7 +309,7 @@ void ColumnsView::renderColumns(QPainter* painter, int cx, int cy, int cw, int c
         // collect affected columns
         QVector<AbstractColumnRenderer*> dirtyColumns;
         dirtyColumns.reserve(d->columns.size());
-        for (auto column : qAsConst(d->columns)) {
+        for (auto* column : qAsConst(d->columns)) {
             if (column->isVisible() && column->overlaps(dirtyXs)) {
                 dirtyColumns.append(column);
             }
@@ -323,7 +323,7 @@ void ColumnsView::renderColumns(QPainter* painter, int cx, int cy, int cw, int c
 
             if (dirtyLines.isValid()) {
                 // paint full columns
-                for (auto column : qAsConst(d->columns)) {
+                for (auto* column : qAsConst(d->columns)) {
                     column->renderColumn(painter, dirtyXs, dirtyYs);
                 }
 
@@ -378,7 +378,7 @@ void ColumnsView::renderColumns(QPainter* painter, int cx, int cy, int cw, int c
         // draw empty columns?
         dirtyYs.setStart(columnsHeight());
         if (dirtyYs.isValid()) {
-            for (auto column : qAsConst(dirtyColumns)) {
+            for (auto* column : qAsConst(dirtyColumns)) {
                 column->renderEmptyColumn(painter, dirtyXs, dirtyYs);
             }
         }

@@ -38,7 +38,7 @@ SelectRangeView::SelectRangeView(SelectRangeTool* tool, QWidget* parent)
     auto* startOffsetLayout = new QHBoxLayout();
     startOffsetLayout->setContentsMargins(0, 0, 0, 0);
 
-    QLabel* label = new QLabel(i18nc("@label:listbox", "Start offset:"), this);
+    auto* label = new QLabel(i18nc("@label:listbox", "Start offset:"), this);
     mStartEdit = new Okteta::AddressComboBox(this);
     connect(mStartEdit, &Okteta::AddressComboBox::addressChanged,
             mTool, &SelectRangeTool::setTargetStart);

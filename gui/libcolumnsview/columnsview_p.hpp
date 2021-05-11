@@ -63,7 +63,7 @@ inline ColumnsViewPrivate::~ColumnsViewPrivate()
 inline void ColumnsViewPrivate::updateWidths()
 {
     ColumnsWidth = 0;
-    for (auto column : qAsConst(columns)) {
+    for (auto* column : qAsConst(columns)) {
         column->setX(ColumnsWidth);
         ColumnsWidth += column->visibleWidth();
     }

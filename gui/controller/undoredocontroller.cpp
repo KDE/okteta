@@ -51,7 +51,7 @@ int UndoRedoController::addContextMenuActions(QMenu* menu)
         return 0;
     }
 
-    auto versionable = qobject_cast<Versionable*>(mView->byteArrayModel());
+    auto* versionable = qobject_cast<Versionable*>(mView->byteArrayModel());
 
     if (!versionable) {
         return 0;
@@ -60,15 +60,15 @@ int UndoRedoController::addContextMenuActions(QMenu* menu)
     const auto versionIndex = versionable->versionIndex();
     const auto versionCount = versionable->versionCount();
 
-    auto undoAction = menu->addAction(QIcon::fromTheme(QStringLiteral("edit-undo")),
-                                      i18nc("@action:inmenu", "&Undo") + QLatin1Char('\t') + QKeySequence(QKeySequence::Undo).toString(QKeySequence::NativeText),
-                                      mView, [this] { undo(); });
+    QAction* undoAction = menu->addAction(QIcon::fromTheme(QStringLiteral("edit-undo")),
+                                          i18nc("@action:inmenu", "&Undo") + QLatin1Char('\t') + QKeySequence(QKeySequence::Undo).toString(QKeySequence::NativeText),
+                                          mView, [this] { undo(); });
     undoAction->setEnabled(0 < versionIndex);
     undoAction->setObjectName(QStringLiteral("edit-undo"));
 
-    auto redoAction = menu->addAction(QIcon::fromTheme(QStringLiteral("edit-redo")),
-                                      i18nc("@action:inmenu", "Re&do") + QLatin1Char('\t') + QKeySequence(QKeySequence::Redo).toString(QKeySequence::NativeText),
-                                      mView, [this] { redo(); });
+    QAction* redoAction = menu->addAction(QIcon::fromTheme(QStringLiteral("edit-redo")),
+                                          i18nc("@action:inmenu", "Re&do") + QLatin1Char('\t') + QKeySequence(QKeySequence::Redo).toString(QKeySequence::NativeText),
+                                          mView, [this] { redo(); });
     redoAction->setEnabled(versionIndex+1 < versionCount);
     redoAction->setObjectName(QStringLiteral("edit-redo"));
 
@@ -77,7 +77,7 @@ int UndoRedoController::addContextMenuActions(QMenu* menu)
 
 bool UndoRedoController::undo()
 {
-    auto versionable = qobject_cast<Okteta::Versionable*>(mView->byteArrayModel());
+    auto* versionable = qobject_cast<Okteta::Versionable*>(mView->byteArrayModel());
 
     if (!versionable) {
         return false;
@@ -95,7 +95,7 @@ bool UndoRedoController::undo()
 
 bool UndoRedoController::redo()
 {
-    auto versionable = qobject_cast<Okteta::Versionable*>(mView->byteArrayModel());
+    auto* versionable = qobject_cast<Okteta::Versionable*>(mView->byteArrayModel());
 
     if (!versionable) {
         return false;

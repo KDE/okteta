@@ -90,7 +90,7 @@ void TestDocumentFileSynchronizerTest::testLoadFromFile()
     const QByteArray testData(TestData1);
     const QUrl fileUrl = QUrl::fromLocalFile(mFileSystem->createFilePath(QLatin1String(TestFileName1)));
 
-    Kasten::TestDocumentFileSynchronizer* synchronizer = new Kasten::TestDocumentFileSynchronizer();
+    auto* synchronizer = new Kasten::TestDocumentFileSynchronizer();
     synchronizer->startLoad(fileUrl)->exec();
     Kasten::AbstractDocument* document = synchronizer->document();
 
@@ -110,7 +110,7 @@ void TestDocumentFileSynchronizerTest::testLoadFromFile()
 void TestDocumentFileSynchronizerTest::testLoadFromNotExistingUrl()
 {
     const QUrl fileUrl = QUrl(QLatin1String(NotExistingUrlName));
-    Kasten::TestDocumentFileSynchronizer* synchronizer = new Kasten::TestDocumentFileSynchronizer();
+    auto* synchronizer = new Kasten::TestDocumentFileSynchronizer();
     Kasten::AbstractLoadJob* loadJob = synchronizer->startLoad(fileUrl);
     loadJob->exec();
     Kasten::AbstractDocument* document = synchronizer->document();
@@ -122,7 +122,7 @@ void TestDocumentFileSynchronizerTest::testLoadFromNotExistingUrl()
 void TestDocumentFileSynchronizerTest::testLoadFromNotExistingFile()
 {
     const QUrl fileUrl = QUrl::fromLocalFile(mFileSystem->createFilePath(QLatin1String(NotExistingFileName)));
-    Kasten::TestDocumentFileSynchronizer* synchronizer = new Kasten::TestDocumentFileSynchronizer();
+    auto* synchronizer = new Kasten::TestDocumentFileSynchronizer();
     synchronizer->startLoad(fileUrl)->exec();
     Kasten::AbstractDocument* document = synchronizer->document();
 
@@ -134,7 +134,7 @@ void TestDocumentFileSynchronizerTest::testLoadSaveFile()
 {
     const QByteArray otherData(TestData2);
     const QUrl fileUrl = QUrl::fromLocalFile(mFileSystem->createFilePath(QLatin1String(TestFileName1)));
-    Kasten::TestDocumentFileSynchronizer* synchronizer = new Kasten::TestDocumentFileSynchronizer();
+    auto* synchronizer = new Kasten::TestDocumentFileSynchronizer();
     synchronizer->startLoad(fileUrl)->exec();
     Kasten::AbstractDocument* document = synchronizer->document();
 
@@ -156,7 +156,7 @@ void TestDocumentFileSynchronizerTest::testLoadReloadFile()
     const QString filePath = mFileSystem->createFilePath(QLatin1String(TestFileName1));
     const QUrl fileUrl = QUrl::fromLocalFile(QString(filePath));
 
-    Kasten::TestDocumentFileSynchronizer* synchronizer = new Kasten::TestDocumentFileSynchronizer();
+    auto* synchronizer = new Kasten::TestDocumentFileSynchronizer();
     synchronizer->startLoad(fileUrl)->exec();
     Kasten::AbstractDocument* document = synchronizer->document();
 
@@ -184,7 +184,7 @@ void TestDocumentFileSynchronizerTest::testChangeFile()
     const QUrl fileUrl2 = QUrl::fromLocalFile(filePath2);
 
     // load from 1
-    Kasten::TestDocumentFileSynchronizer* synchronizer = new Kasten::TestDocumentFileSynchronizer();
+    auto* synchronizer = new Kasten::TestDocumentFileSynchronizer();
     synchronizer->startLoad(fileUrl1)->exec();
     Kasten::AbstractDocument* document = synchronizer->document();
 
@@ -210,8 +210,7 @@ void TestDocumentFileSynchronizerTest::testConnectToFile()
     testDocument->setData(otherData);
 
     // file 1
-    Kasten::TestDocumentFileSynchronizer* synchronizer =
-        new Kasten::TestDocumentFileSynchronizer();
+    auto* synchronizer = new Kasten::TestDocumentFileSynchronizer();
     synchronizer->startConnect(document, fileUrl1, Kasten::TestDocumentFileSynchronizer::ReplaceRemote)->exec();
     QCOMPARE(synchronizer->document(), document);
 

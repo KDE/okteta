@@ -74,7 +74,7 @@ PODTableView::PODTableView(PODDecoderTool* tool, QWidget* parent)
     mByteOrderSelection->setToolTip(byteOrderToolTip);
     settingsLayout->addWidget(mByteOrderSelection);
 
-    QLabel* unsignedAsHexLabel = new QLabel(i18nc("@option:check", "Unsigned as hexadecimal:"), this);
+    auto* unsignedAsHexLabel = new QLabel(i18nc("@option:check", "Unsigned as hexadecimal:"), this);
     settingsLayout->addWidget(unsignedAsHexLabel);
 
     mUnsignedAsHexCheck = new QCheckBox(this);

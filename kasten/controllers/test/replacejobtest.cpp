@@ -144,7 +144,7 @@ void ReplaceJobTest::testReplace_data()
         byteArrayFromLiteral("2")
     }};
 
-    for (auto& data : testData) {
+    for (const auto& data : testData) {
         QTest::newRow(QString(data.name+QLatin1String("-forward-frombegin")).toLatin1().constData())
             << data.originalData << data.searchData
             << data.replaceData << data.expectedData << data.expectedReplacementCount
@@ -239,9 +239,9 @@ void ReplaceJobTest::testReplace()
 
     TestReplaceUserQueryAgent* queryAgent = replies.isEmpty() ? nullptr : new TestReplaceUserQueryAgent(replies);
 
-    auto byteArray = new Okteta::PieceTableByteArrayModel(originalData);
-    auto document = new Kasten::ByteArrayDocument(byteArray, QStringLiteral("init"));
-    auto view = new Kasten::ByteArrayView(document, nullptr);
+    auto* byteArray = new Okteta::PieceTableByteArrayModel(originalData);
+    auto* document = new Kasten::ByteArrayDocument(byteArray, QStringLiteral("init"));
+    auto* view = new Kasten::ByteArrayView(document, nullptr);
 
     Okteta::Address  replaceFirstIndex;
     Okteta::Address  replaceLastIndex;
@@ -256,7 +256,7 @@ void ReplaceJobTest::testReplace()
         replaceLastIndex =  byteArray->size() - 1;
     }
 
-    auto job = new Kasten::ReplaceJob(view, byteArray, queryAgent);
+    auto* job = new Kasten::ReplaceJob(view, byteArray, queryAgent);
     job->setSearchData(searchData);
     job->setReplaceData(replaceData);
     job->setRange(replaceFirstIndex, replaceLastIndex,

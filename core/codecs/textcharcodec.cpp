@@ -64,7 +64,7 @@ static bool is8Bit(QTextCodec* codec)
     bool result = false;
 
     const QByteArray& codecName = codec->name();
-    for (auto& encodingData : encodingDataList) {
+    for (const auto& encodingData : encodingDataList) {
         if (qstrcmp(codecName, encodingData.name) == 0) {
             result = true;
             break;
@@ -174,7 +174,7 @@ const QStringList& TextCharCodec::codecNames()
     // first call?
     if (textCodecNames.isEmpty()) {
         KCharsets* charsets = KCharsets::charsets();
-        for (auto& encodingData : encodingDataList) {
+        for (const auto& encodingData : encodingDataList) {
             bool isCodecFound = false;
             const QString codecName = QString::fromLatin1(encodingData.name);
             QTextCodec* codec = charsets->codecForName(codecName, isCodecFound);

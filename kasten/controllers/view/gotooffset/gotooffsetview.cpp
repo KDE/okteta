@@ -35,7 +35,7 @@ GotoOffsetView::GotoOffsetView(GotoOffsetTool* tool, QWidget* parent)
     auto* offsetLayout = new QHBoxLayout();
     offsetLayout->setContentsMargins(0, 0, 0, 0);
 
-    QLabel* label = new QLabel(i18nc("@label:listbox", "O&ffset:"), this);
+    auto* label = new QLabel(i18nc("@label:listbox", "O&ffset:"), this);
     mAddressEdit = new Okteta::AddressComboBox(this);
     connect(mAddressEdit, &Okteta::AddressComboBox::addressChanged,
             mTool, &GotoOffsetTool::setTargetOffset);

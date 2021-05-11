@@ -39,7 +39,7 @@ void ValueCodecTest::testCreateCodec_data()
     QTest::addColumn<int>("codecId");
     QTest::addColumn<uint>("encodingWidth");
 
-    for (auto& valueCodecDescription : valueCodecDescriptions) {
+    for (const auto& valueCodecDescription : valueCodecDescriptions) {
         QTest::newRow(valueCodecDescription.name)
             << valueCodecDescription.id
             << valueCodecDescription.encodingWidth;
@@ -64,7 +64,7 @@ void ValueCodecTest::testEncodeDecode_data()
     QTest::addColumn<int>("codecId");
     QTest::addColumn<Byte>("byte");
 
-    for (auto& valueCodecDescription : valueCodecDescriptions) {
+    for (const auto& valueCodecDescription : valueCodecDescriptions) {
         for (int j = 0; j < 256; ++j) {
             const QString rowTitle =
                 QLatin1String(valueCodecDescription.name) +
@@ -101,7 +101,7 @@ void ValueCodecTest::testEncodeShortDecode_data()
     QTest::addColumn<int>("codecId");
     QTest::addColumn<Byte>("byte");
 
-    for (auto& valueCodecDescription : valueCodecDescriptions) {
+    for (const auto& valueCodecDescription : valueCodecDescriptions) {
         for (int j = 0; j < 256; ++j) {
             const QString rowTitle =
                 QLatin1String(valueCodecDescription.name) +
@@ -139,7 +139,7 @@ void ValueCodecTest::testAppendDigit_data()
     QTest::addColumn<int>("codecId");
     QTest::addColumn<Byte>("byte");
 
-    for (auto& valueCodecDescription : valueCodecDescriptions) {
+    for (const auto& valueCodecDescription : valueCodecDescriptions) {
         for (int j = 0; j < 256; ++j) {
             const QString rowTitle =
                 QLatin1String(valueCodecDescription.name) +
@@ -178,7 +178,7 @@ void ValueCodecTest::testRemoveLastDigit_data()
     QTest::addColumn<Byte>("byte");
     QTest::addColumn<uint>("removedDigitCount");
 
-    for (auto& valueCodecDescription : valueCodecDescriptions) {
+    for (const auto& valueCodecDescription : valueCodecDescriptions) {
         for (int b = 0; b < 256; ++b) {
             for (uint r = 1; r <= valueCodecDescription.encodingWidth; ++r) {
                 const QString rowTitle =
@@ -227,7 +227,7 @@ void ValueCodecTest::testIsValidDigit_data()
 
     constexpr int digitCount = 256;
 
-    for (auto& valueCodecDescription : valueCodecDescriptions) {
+    for (const auto& valueCodecDescription : valueCodecDescriptions) {
         QBitArray validnessPerDigitField = QBitArray(digitCount, false);
         const QByteArray validDigits =
             QByteArray(valueCodecDescription.validDigits);
@@ -237,7 +237,7 @@ void ValueCodecTest::testIsValidDigit_data()
         }
 
         for (int j = 0; j < validnessPerDigitField.count(); ++j) {
-            const uchar digit = uchar(j);
+            const auto digit = static_cast<uchar>(j);
             const bool isValid = validnessPerDigitField.testBit(j);
             const QString rowTitle =
                 QLatin1String(valueCodecDescription.name) +

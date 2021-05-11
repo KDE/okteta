@@ -377,7 +377,7 @@ TaggedUnionDataInformation* DataInformationFactory::newTaggedUnion(const TaggedU
     }
 
     if (!alternativesValid) {
-        for (auto& info : qAsConst(altInfo)) {
+        for (const auto& info : qAsConst(altInfo)) {
             qDeleteAll(info.fields);
         }
 

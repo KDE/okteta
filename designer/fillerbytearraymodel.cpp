@@ -34,7 +34,7 @@ static constexpr int fillerDataSize = sizeof(fillerData) / sizeof(fillerData[0])
 
 Okteta::AbstractByteArrayModel* createFillerByteArrayModel(QObject* parent)
 {
-    Okteta::PieceTableByteArrayModel* fillerByteArrayModel =
+    auto* fillerByteArrayModel =
         new Okteta::PieceTableByteArrayModel(QByteArray::fromRawData(fillerData, fillerDataSize), parent);
 
     return fillerByteArrayModel;

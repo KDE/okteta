@@ -43,8 +43,8 @@ StringsExtractView::StringsExtractView(StringsExtractTool* tool, QWidget* parent
     auto* updateLayout = new QHBoxLayout();
 
     updateLayout->addStretch();
-    QLabel* label = new QLabel(i18nc("@label:spinbox minimum length for consecutive chars to be seen as a string",
-                                     "Minimum length:"), this);
+    auto* label = new QLabel(i18nc("@label:spinbox minimum length for consecutive chars to be seen as a string",
+                                   "Minimum length:"), this);
     updateLayout->addWidget(label);
 
     mMinLengthSpinBox = new QSpinBox(this);

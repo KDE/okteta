@@ -88,7 +88,7 @@ void CopyAsController::updateActions()
             mCopyAsSelectAction->addAction(action);
         }
     } else {
-        QAction* noneAction = new QAction(i18nc("@item There are no encoders.", "Not available."), mCopyAsSelectAction);
+        auto* noneAction = new QAction(i18nc("@item There are no encoders.", "Not available."), mCopyAsSelectAction);
         noneAction->setEnabled(false);
         mCopyAsSelectAction->addAction(noneAction);
     }
@@ -107,7 +107,7 @@ void CopyAsController::onActionTriggered(QAction* action)
         mModelCodecViewManager->createConfigEditor(encoder);
 
     if (configEditor) {
-        CopyAsDialog* dialog = new CopyAsDialog(encoder->remoteTypeName(), configEditor, encoder,
+        auto* dialog = new CopyAsDialog(encoder->remoteTypeName(), configEditor, encoder,
                                                 QApplication::activeWindow());
         dialog->setData(mModel, selection);
         connect(dialog, &CopyAsDialog::copyAccepted, this, &CopyAsController::triggerExecution);

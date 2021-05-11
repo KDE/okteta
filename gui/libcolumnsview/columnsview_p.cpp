@@ -19,7 +19,7 @@ void ColumnsViewPrivate::init()
 {
     Q_Q(ColumnsView);
 
-    auto viewport = q->viewport();
+    QWidget* viewport = q->viewport();
     viewport->setAttribute(Qt::WA_StaticContents);
     viewport->setBackgroundRole(QPalette::Base);
     q->horizontalScrollBar()->setSingleStep(DefaultSingleStep);

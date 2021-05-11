@@ -79,7 +79,7 @@ bool RevertablePieceTable::replaceOne(Address dataOffset, Size* storageSize)
     const Piece replacedPiece = mPieceTable.replaceOne(dataOffset, *storageSize);
     const PieceList replacedPieces(replacedPiece);
 
-    ReplacePieceTableChange* change =
+    auto* change =
         new ReplacePieceTableChange(AddressRange::fromWidth(dataOffset, 1), 1, *storageSize, replacedPieces);
 
     return mChangeHistory.appendChange(change);

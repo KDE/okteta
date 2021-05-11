@@ -23,7 +23,7 @@ namespace KPieceTable {
 
 KPieceTable::AbstractPieceTableChange* TestPieceTableChangeAbstractPieceTableChangeIfTest::createPieceTableChange()
 {
-    TestPieceTableChange* pieceTableChange =
+    auto* pieceTableChange =
         new TestPieceTableChange(0, QString(),
                                  TestOffset, StorageOffset, Piece::ChangeStorage,
                                  ReplacedStorageOffset);

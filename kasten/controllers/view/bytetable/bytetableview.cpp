@@ -62,7 +62,7 @@ ByteTableView::ByteTableView(ByteTableTool* tool, QWidget* parent)
 
     auto* insertLayout = new QHBoxLayout();
 
-    QLabel* label = new QLabel(i18nc("@label:spinbox number of bytes to insert", "Number (bytes):"), this);
+    auto* label = new QLabel(i18nc("@label:spinbox number of bytes to insert", "Number (bytes):"), this);
     insertLayout->addWidget(label);
 
     mInsertCountEdit = new QSpinBox(this);

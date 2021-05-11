@@ -26,7 +26,7 @@ static constexpr Address ChangeStorageOffset = 23;
 AbstractPieceTableChange* RemovePieceTableChangeAbstractPieceTableChangeIfTest::createPieceTableChange()
 {
     const Piece removedPiece(AddressRange::fromWidth(Start + ChangeStorageOffset, Width), Piece::ChangeStorage);
-    RemovePieceTableChange* pieceTableChange =
+    auto* pieceTableChange =
         new RemovePieceTableChange(AddressRange(Start, End), PieceList(removedPiece));
 
     return pieceTableChange;

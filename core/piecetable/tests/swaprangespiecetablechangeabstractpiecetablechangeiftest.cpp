@@ -23,7 +23,7 @@ static constexpr Address SecondRangeEnd = 66;
 
 AbstractPieceTableChange* SwapRangesPieceTableChangeAbstractPieceTableChangeIfTest::createPieceTableChange()
 {
-    SwapRangesPieceTableChange* pieceTableChange =
+    auto* pieceTableChange =
         new SwapRangesPieceTableChange(FirstRangeStart, AddressRange(SecondRangeStart, SecondRangeEnd));
 
     return pieceTableChange;

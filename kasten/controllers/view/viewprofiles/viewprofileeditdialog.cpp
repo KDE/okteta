@@ -27,8 +27,7 @@ ViewProfileEditDialog::ViewProfileEditDialog(QWidget* parent)
     mViewProfileEdit = new ViewProfileEdit(this);
 
     // dialog buttons
-    QDialogButtonBox* dialogButtonBox = new QDialogButtonBox(QDialogButtonBox::Ok
-                                                             | QDialogButtonBox::Cancel);
+    auto* dialogButtonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
     connect(dialogButtonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
     connect(dialogButtonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 

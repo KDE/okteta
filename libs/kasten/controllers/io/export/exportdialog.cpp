@@ -41,9 +41,9 @@ ExportDialog::ExportDialog(const QString& remoteTypeName,
     auto* splitter = new QSplitter(this);
 
     // config editor
-    QWidget* editorPage = new QWidget(splitter);
+    auto* editorPage = new QWidget(splitter);
     auto* editorPageLayout = new QVBoxLayout(editorPage);
-    QLabel* editorLabel = new QLabel(remoteTypeName);
+    auto* editorLabel = new QLabel(remoteTypeName);
     QFont font = editorLabel->font();
     font.setBold(true);
     editorLabel->setFont(font);
@@ -58,7 +58,7 @@ ExportDialog::ExportDialog(const QString& remoteTypeName,
     mPreviewView = configEditor->createPreviewView();
 
     if (mPreviewView) {
-        QGroupBox* previewBox = new QGroupBox(i18nc("@title:group", "Preview"), this);
+        auto* previewBox = new QGroupBox(i18nc("@title:group", "Preview"), this);
         splitter->addWidget(previewBox);
 
         auto* previewBoxLayout = new QHBoxLayout(previewBox);
@@ -68,7 +68,7 @@ ExportDialog::ExportDialog(const QString& remoteTypeName,
 
     // dialog buttons
     auto* dialogButtonBox = new QDialogButtonBox;
-    QPushButton* exportButton = new QPushButton(QIcon::fromTheme(QStringLiteral("document-export")),
+    auto* exportButton = new QPushButton(QIcon::fromTheme(QStringLiteral("document-export")),
                                                 i18nc("@action:button", "&Export to File..."));
     exportButton->setToolTip(i18nc("@info:tooltip",
                                    "Export the selected data to a file."));

@@ -59,7 +59,7 @@ bool RotateByteArrayFilter::filter(Okteta::Byte* result,
             }
 
             // bit layer shift
-            const unsigned char last = (unsigned char) result[r - 1];
+            const auto last = static_cast<unsigned char>(result[r - 1]);
             for (int b = 1; b <= g; ++b) {
                 result[r - b] = (unsigned char)result[r - b] >> shiftBitWidth;
                 if (b < g) {

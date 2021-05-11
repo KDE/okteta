@@ -40,7 +40,7 @@ ReplaceDialog::ReplaceDialog(ReplaceTool* tool, QWidget* parent)
     setupFindBox();
 
     // replace term
-    QGroupBox* ReplaceBox = new QGroupBox(i18nc("@title:group", "Replace With"));
+    auto* ReplaceBox = new QGroupBox(i18nc("@title:group", "Replace With"));
 
     auto* ReplaceBoxLayout = new QVBoxLayout;
 

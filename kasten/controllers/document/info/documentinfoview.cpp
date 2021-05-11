@@ -53,7 +53,7 @@ DocumentInfoView::DocumentInfoView(DocumentInfoTool* tool, QWidget* parent)
     baseLayout->addWidget(mDocumentTitleLabel);
 
     // separator
-    KSeparator* separator = new KSeparator(Qt::Horizontal, this);
+    auto* separator = new KSeparator(Qt::Horizontal, this);
     baseLayout->addWidget(separator);
 
     // property grid
@@ -64,7 +64,7 @@ DocumentInfoView::DocumentInfoView(DocumentInfoTool* tool, QWidget* parent)
     int currentPropertyRow = 0;
 
     // type property
-    QLabel* label = new QLabel(i18n("Type:"), this);
+    auto* label = new QLabel(i18n("Type:"), this);
     propertyGrid->addWidget(label, currentPropertyRow, 0, Qt::AlignRight);
 
     mMimeTypeLabel = new QLabel(QString(), this);
