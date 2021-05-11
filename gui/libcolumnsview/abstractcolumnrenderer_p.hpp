@@ -29,7 +29,7 @@ public:
 
 public:
     void renderBlankLine(QPainter* painter) const;
-    void renderEmptyColumn(QPainter* painter, const PixelXRange& xSpan, const PixelYRange& ySpan);
+    void renderEmptyColumn(QPainter* painter, const PixelXRange& xSpan, const PixelYRange& ySpan) const;
 
 public: // general column data
     /** pointer to the view */
@@ -59,7 +59,7 @@ inline void AbstractColumnRendererPrivate::renderBlankLine(QPainter* painter) co
     }
 }
 
-inline void AbstractColumnRendererPrivate::renderEmptyColumn(QPainter* painter, const PixelXRange& _xSpan, const PixelYRange& ySpan)
+inline void AbstractColumnRendererPrivate::renderEmptyColumn(QPainter* painter, const PixelXRange& _xSpan, const PixelYRange& ySpan) const
 {
     PixelXRange xSpan(_xSpan);
     xSpan.restrictTo(mXSpan);
