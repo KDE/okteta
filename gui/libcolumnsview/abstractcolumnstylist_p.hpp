@@ -18,7 +18,7 @@ class AbstractColumnStylistPrivate
 {
 public:
     AbstractColumnStylistPrivate();
-    ~AbstractColumnStylistPrivate();
+    virtual ~AbstractColumnStylistPrivate();
 
 public:
 
