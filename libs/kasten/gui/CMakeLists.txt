@@ -1,7 +1,22 @@
 set(KASTENGUI_VERSION ${KASTEN_LIB_VERSION})
 set(KASTENGUI_SO_VERSION ${KASTEN_LIB_SOVERSION})
 
-add_definitions(-DTRANSLATION_DOMAIN=\"libkasten\")
+okteta_add_library(Gui NAMESPACE Kasten
+    PUBLIC
+        KastenCore
+        Qt5::Widgets
+        KF5::XmlGui
+    PRIVATE
+        KF5::I18n
+    VERSION     ${KASTENGUI_VERSION}
+    SOVERSION   ${KASTENGUI_SO_VERSION}
+    ABIVERSION  ${KASTEN_ABI_VERSION}
+    NO_TARGET_NAMESPACE
+    NO_VERSIONED_INCLUDEDIR
+    NO_VERSIONED_PACKAGE_NAME
+)
+
+target_compile_definitions(KastenGui PRIVATE -DTRANSLATION_DOMAIN=\"libkasten\")
 
 macro(KASTENGUI_ADD_SUBLIBRARY _subdir)
     okteta_add_sublibrary(Gui  NAMESPACE Kasten
@@ -11,6 +26,7 @@ macro(KASTENGUI_ADD_SUBLIBRARY _subdir)
 endmacro()
 
 kastengui_add_sublibrary(view
+    BUILD_INCLUDEDIR
     PUBLIC
         SelectedDataWriteable
         DataSelectable
@@ -32,6 +48,7 @@ kastengui_add_sublibrary(io/filesystem
 )
 
 kastengui_add_sublibrary(io
+    BUILD_INCLUDEDIR
     PUBLIC
         AbstractModelStreamEncoderConfigEditor
         AbstractModelStreamEncoderConfigEditorFactory
@@ -44,6 +61,7 @@ kastengui_add_sublibrary(io
 )
 
 kastengui_add_sublibrary(system
+    BUILD_INCLUDEDIR
     PUBLIC
         AbstractDocumentStrategy
         MultiDocumentStrategy
@@ -59,6 +77,7 @@ kastengui_add_sublibrary(system
 )
 
 kastengui_add_sublibrary(shell
+    BUILD_INCLUDEDIR
     PUBLIC
         ToolInlineViewable
         WidgetsDockable
@@ -87,6 +106,7 @@ kastengui_add_sublibrary(shell
 )
 
 kastengui_add_sublibrary(controller
+    BUILD_INCLUDEDIR
     PUBLIC
         AbstractXmlGuiController
         AbstractXmlGuiControllerFactory
@@ -99,34 +119,6 @@ kastengui_add_sublibrary(controller
 okteta_add_sublibrary(Gui  NAMESPACE Kasten
     PUBLIC
         KastenGui
-)
-
-
-okteta_add_library(Gui NAMESPACE Kasten
-    PUBLIC
-        KastenCore
-        Qt5::Widgets
-        KF5::XmlGui
-    PRIVATE
-        KF5::I18n
-    VERSION     ${KASTENGUI_VERSION}
-    SOVERSION   ${KASTENGUI_SO_VERSION}
-    ABIVERSION  ${KASTEN_ABI_VERSION}
-    SOURCES   ${kastengui_LIB_SRCS}
-    HEADERS   ${kastengui_LIB_HDRS}
-    CCHEADERS ${kastengui_LIB_CCHDRS}
-    NO_TARGET_NAMESPACE
-    NO_VERSIONED_INCLUDEDIR
-    NO_VERSIONED_PACKAGE_NAME
-)
-
-target_include_directories(KastenGui
-    PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/view>
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/io>
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/system>
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/shell>
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/controller>
 )
 
 okteta_add_cmakeconfig(Gui NAMESPACE Kasten

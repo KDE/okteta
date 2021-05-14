@@ -1,7 +1,25 @@
 set(KASTENCONTROLLERS_VERSION ${KASTEN_LIB_VERSION})
 set(KASTENCONTROLLERS_SO_VERSION ${KASTEN_LIB_SOVERSION})
 
-add_definitions(-DTRANSLATION_DOMAIN=\"libkasten\")
+okteta_add_library(Controllers NAMESPACE Kasten
+    PUBLIC
+        KastenGui
+        KastenCore
+    PRIVATE
+        KF5::I18n
+        KF5::ConfigWidgets
+        KF5::XmlGui
+        KF5::KIOFileWidgets
+        KF5::Parts
+    VERSION     ${KASTENCONTROLLERS_VERSION}
+    SOVERSION   ${KASTENCONTROLLERS_SO_VERSION}
+    ABIVERSION  ${KASTEN_ABI_VERSION}
+    NO_TARGET_NAMESPACE
+    NO_VERSIONED_INCLUDEDIR
+    NO_VERSIONED_PACKAGE_NAME
+)
+
+target_compile_definitions(KastenControllers PRIVATE -DTRANSLATION_DOMAIN=\"libkasten\")
 
 macro(KASTENCONTROLLERS_ADD_SUBLIBRARY _subdir)
     okteta_add_sublibrary(Controllers  NAMESPACE Kasten
@@ -201,16 +219,12 @@ kastencontrollers_add_sublibrary(shellwindow/fullscreen
         FullScreenController
 )
 
-# KColorSchemeManager::createSchemeSelectionMenu misses to set UI string before 5.67
-if(NOT KF5_VERSION VERSION_LESS "5.67.0")
-set(HAVE_UICOLORSCHEMECONTROLLER TRUE)
 kastencontrollers_add_sublibrary(program/uicolorscheme
     PUBLIC
         UiColorSchemeControllerFactory
     PRIVATE
         UiColorSchemeController
 )
-endif()
 
 kastencontrollers_add_sublibrary(program/quit
     PUBLIC
@@ -218,32 +232,6 @@ kastencontrollers_add_sublibrary(program/quit
     PRIVATE
         QuitController
 )
-
-
-okteta_add_library(Controllers NAMESPACE Kasten
-    PUBLIC
-        KastenGui
-        KastenCore
-    PRIVATE
-        KF5::I18n
-        KF5::ConfigWidgets
-        KF5::XmlGui
-        KF5::KIOFileWidgets
-        KF5::Parts
-    VERSION     ${KASTENCONTROLLERS_VERSION}
-    SOVERSION   ${KASTENCONTROLLERS_SO_VERSION}
-    ABIVERSION  ${KASTEN_ABI_VERSION}
-    SOURCES   ${kastencontrollers_LIB_SRCS}
-    HEADERS   ${kastencontrollers_LIB_HDRS}
-    CCHEADERS ${kastencontrollers_LIB_CCHDRS}
-    NO_TARGET_NAMESPACE
-    NO_VERSIONED_INCLUDEDIR
-    NO_VERSIONED_PACKAGE_NAME
-)
-
-if (NOT HAVE_UICOLORSCHEMECONTROLLER)
-    target_compile_definitions(KastenControllers INTERFACE KASTEN_NO_UICOLORSCHEMECONTROLLER)
-endif()
 
 okteta_add_cmakeconfig(Controllers NAMESPACE Kasten
 )

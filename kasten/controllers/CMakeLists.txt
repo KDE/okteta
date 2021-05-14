@@ -3,10 +3,72 @@ set(OKTETAKASTENCONTROLLERS_SO_VERSION ${OKTETAKASTEN_LIB_SOVERSION})
 
 set( LIBFRAMESPRINT_REL_DIR ../../libs/framesprint )
 
-add_definitions(-DTRANSLATION_DOMAIN=\"liboktetakasten\")
-
 set(HAVE_QCA2 ${Qca-qt5_FOUND})
 configure_file(config-qca2.hpp.in  ${CMAKE_CURRENT_BINARY_DIR}/config-qca2.hpp)
+
+set(OPTIONAL_PRIVATE)
+if(Qca-qt5_FOUND)
+    set(OPTIONAL_PRIVATE qca-qt5)
+endif()
+
+# create static libraries for sharing between unit tests and actual library product
+# This means we don't have to compile the sources twice
+
+add_library(poddecoder-typeeditors STATIC)
+set_target_properties(poddecoder-typeeditors PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
+target_link_libraries(poddecoder-typeeditors
+    PUBLIC
+        OktetaGui
+    PRIVATE
+        KF5::Completion
+)
+
+add_library(structureview-tested-srcs STATIC)
+set_target_properties(structureview-tested-srcs PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
+target_link_libraries(structureview-tested-srcs
+    PUBLIC
+        OktetaCore
+        KF5::ConfigGui
+        KF5::I18n
+        KF5::Service
+        Qt5::Script
+        Qt5::Xml
+        Qt5::Widgets
+    PRIVATE
+        KF5::Completion
+        KF5::ConfigWidgets
+)
+
+okteta_add_library(Controllers NAMESPACE Okteta Kasten
+    PUBLIC
+        OktetaKastenGui
+        OktetaKastenCore
+        KastenGui
+        KastenCore
+    PRIVATE
+        structureview-tested-srcs
+        poddecoder-typeeditors
+        KF5::NewStuff
+        KF5::I18n
+        KF5::ConfigWidgets
+        KF5::KCMUtils
+        KF5::IconThemes
+        KF5::Completion
+        Qt5::PrintSupport
+        Qt5::Script
+#         Qt5::Test # QAbstractItemModelTester
+        ${OPTIONAL_PRIVATE}
+    VERSION     ${OKTETAKASTENCONTROLLERS_VERSION}
+    SOVERSION   ${OKTETAKASTENCONTROLLERS_SO_VERSION}
+    ABIVERSION  ${OKTETAKASTEN_ABI_VERSION} ${KASTEN_ABI_VERSION}
+    NO_VERSIONED_INCLUDEDIR
+    NO_VERSIONED_PACKAGE_NAME
+    REVERSE_NAMESPACE_INCLUDEDIR
+    REVERSE_NAMESPACE_LIB
+    NO_TARGET_NAMESPACE
+)
+
+target_compile_definitions(OktetaKastenControllers PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")
 
 macro(OKTETAKASTENCONTROLLERS_ADD_SUBLIBRARY _subdir)
     okteta_add_sublibrary(Controllers NAMESPACE Okteta Kasten
@@ -19,7 +81,7 @@ endmacro()
 macro(OKTETAKASTENCONTROLLERS_ADD_SUBLIBRARY_STRUCTURES_TESTED _subdir)
     okteta_add_sublibrary(Controllers NAMESPACE Okteta Kasten
         REVERSE_NAMESPACE_INCLUDEDIR
-        SOURCE_TAG structures_tested
+        LIBRARY structureview-tested-srcs
         SUBDIR ${_subdir}
         ${ARGN}
     )
@@ -81,6 +143,7 @@ oktetakastencontrollers_add_sublibrary(view/stringsextract
 )
 
 oktetakastencontrollers_add_sublibrary(view/libbytearraychecksum
+    BUILD_INCLUDEDIR
     PRIVATE
         AbstractByteArrayChecksumAlgorithm
         AbstractByteArrayChecksumParameterSet
@@ -136,6 +199,7 @@ oktetakastencontrollers_add_sublibrary(view/checksum
 )
 
 oktetakastencontrollers_add_sublibrary(view/libfinddialog
+    BUILD_INCLUDEDIR
     PUBLIC
         FindDirection
     PRIVATE
@@ -175,7 +239,7 @@ oktetakastencontrollers_add_sublibrary(view/poddecoder
 )
 
 oktetakastencontrollers_add_sublibrary(view/poddecoder/typeeditors
-    SOURCE_TAG typeeditor
+    LIBRARY poddecoder-typeeditors
     PRIVATE
         AbstractValue8Editor
         Binary8Editor
@@ -226,6 +290,7 @@ oktetakastencontrollers_add_sublibrary(view/replace
 )
 
 oktetakastencontrollers_add_sublibrary(view/libbytearrayfilter
+    BUILD_INCLUDEDIR
     PRIVATE
         AbstractByteArrayFilter
         AbstractByteArrayFilterParameterSet
@@ -470,6 +535,7 @@ oktetakastencontrollers_add_sublibrary(view/structures
 # structtoolview.h is not useful, but we keep installing the header just in case someone includes it
 
 oktetakastencontrollers_add_sublibrary(${LIBFRAMESPRINT_REL_DIR}
+    BUILD_INCLUDEDIR
     PRIVATE
         AbstractFrameRenderer
         FramesToPaperPrinter
@@ -539,143 +605,66 @@ oktetakastencontrollers_add_sublibrary(view/viewcontextmenu
         ViewContextMenuController
 )
 
-# create a static library for the unit tests. This means we don't have to compile the sources twice
-
-add_library(poddecoder-typeeditors STATIC ${oktetakastencontrollers_typeeditor_LIB_SRCS})
-set_target_properties( poddecoder-typeeditors PROPERTIES POSITION_INDEPENDENT_CODE TRUE )
-target_link_libraries( poddecoder-typeeditors
-PUBLIC
-  OktetaGui
-PRIVATE
-  KF5::Completion
-)
-
-add_library( structureview-tested-srcs STATIC ${oktetakastencontrollers_structures_tested_LIB_SRCS} )
-set_target_properties( structureview-tested-srcs PROPERTIES POSITION_INDEPENDENT_CODE TRUE )
-target_link_libraries( structureview-tested-srcs
-PUBLIC
-  OktetaCore
-  KF5::ConfigGui
-  KF5::I18n
-  KF5::Service
-  Qt5::Script
-  Qt5::Xml
-  Qt5::Widgets
-PRIVATE
-  KF5::Completion
-  KF5::ConfigWidgets
-)
-
 if(BUILD_TESTING)
-  #structures view unit tests
-  ecm_add_tests(
-    test/primitivearraytest.cpp
-    test/arraydatainformationtest.cpp
-    test/basicdatainformationtest.cpp
-    test/primitivedatainformationtest.cpp
-    test/scriptclassestest.cpp
-    test/uniondatainformationtest.cpp
-    test/allprimitivetypestest.cpp
-    test/scriptvalueconvertertest.cpp
-    test/osdparsertest.cpp
-    test/commonparsertest.cpp
-    test/jsparsertest.cpp
-    test/customtostringtest.cpp
-    test/locktooffsettest.cpp
+    #structures view unit tests
+    ecm_add_tests(
+        test/primitivearraytest.cpp
+        test/arraydatainformationtest.cpp
+        test/basicdatainformationtest.cpp
+        test/primitivedatainformationtest.cpp
+        test/scriptclassestest.cpp
+        test/uniondatainformationtest.cpp
+        test/allprimitivetypestest.cpp
+        test/scriptvalueconvertertest.cpp
+        test/osdparsertest.cpp
+        test/commonparsertest.cpp
+        test/jsparsertest.cpp
+        test/customtostringtest.cpp
+        test/locktooffsettest.cpp
 
-    NAME_PREFIX structures-
-    LINK_LIBRARIES structureview-tested-srcs Qt5::Test poddecoder-typeeditors
-  )
+        NAME_PREFIX structures-
+        LINK_LIBRARIES structureview-tested-srcs Qt5::Test poddecoder-typeeditors
+    )
 
-  # remove useless default definition of QT_TESTCASE_BUILDDIR in interface from imported target Qt5::Test
-  get_target_property(qttestdefs Qt5::Test INTERFACE_COMPILE_DEFINITIONS)
-  list(FILTER qttestdefs EXCLUDE REGEX [[^QT_TESTCASE_BUILDDIR=]])
-  set_property(TARGET Qt5::Test PROPERTY INTERFACE_COMPILE_DEFINITIONS ${qttestdefs})
-  # set the definition as needed for our tests
-  target_compile_definitions(customtostringtest PRIVATE QT_TESTCASE_BUILDDIR="${CMAKE_CURRENT_BINARY_DIR}")
-  target_compile_definitions(jsparsertest       PRIVATE QT_TESTCASE_BUILDDIR="${CMAKE_CURRENT_BINARY_DIR}")
-  # TODO: still fragile once __FILE__ is neither absolute or full relative path to this build dir
-  # look into using custom code intead of simple QFINDTESTDATA usage
+    # remove useless default definition of QT_TESTCASE_BUILDDIR in interface from imported target Qt5::Test
+    get_target_property(qttestdefs Qt5::Test INTERFACE_COMPILE_DEFINITIONS)
+    list(FILTER qttestdefs EXCLUDE REGEX [[^QT_TESTCASE_BUILDDIR=]])
+    set_property(TARGET Qt5::Test PROPERTY INTERFACE_COMPILE_DEFINITIONS ${qttestdefs})
+    # set the definition as needed for our tests
+    target_compile_definitions(customtostringtest PRIVATE QT_TESTCASE_BUILDDIR="${CMAKE_CURRENT_BINARY_DIR}")
+    target_compile_definitions(jsparsertest       PRIVATE QT_TESTCASE_BUILDDIR="${CMAKE_CURRENT_BINARY_DIR}")
+    # TODO: still fragile once __FILE__ is neither absolute or full relative path to this build dir
+    # look into using custom code intead of simple QFINDTESTDATA usage
 
-  #replace tool unit tests
-  ecm_add_test(
-    view/search/searchjob.cpp
-    view/replace/replacejob.cpp
-    test/replacejobtest.cpp
+    #replace tool unit tests
+    ecm_add_test(
+        view/search/searchjob.cpp
+        view/replace/replacejob.cpp
+        test/replacejobtest.cpp
 
-    TEST_NAME replacejobtest
-    LINK_LIBRARIES
-        OktetaKastenGui
-        OktetaKastenCore
-        Qt5::Test
-  )
-  target_include_directories(replacejobtest
+        TEST_NAME replacejobtest
+        LINK_LIBRARIES
+            OktetaKastenGui
+            OktetaKastenCore
+            Qt5::Test
+    )
+    target_include_directories(replacejobtest
         PUBLIC
             view/libfinddialog
-  )
+    )
 endif()
-
-list(APPEND oktetakastencontrollers_LIB_HDRS
-    ${CMAKE_CURRENT_BINARY_DIR}/config-qca2.hpp
-)
-
-set(OPTIONAL_PRIVATE)
-if( Qca-qt5_FOUND )
-    set(OPTIONAL_PRIVATE qca-qt5)
-endif()
-
-
-okteta_add_library(Controllers NAMESPACE Okteta Kasten
-    PUBLIC
-        OktetaKastenGui
-        OktetaKastenCore
-        KastenGui
-        KastenCore
-    PRIVATE
-        structureview-tested-srcs
-        poddecoder-typeeditors
-        KF5::NewStuff
-        KF5::I18n
-        KF5::ConfigWidgets
-        KF5::KCMUtils
-        KF5::IconThemes
-        KF5::Completion
-        Qt5::PrintSupport
-        Qt5::Script
-#         Qt5::Test # QAbstractItemModelTester
-        ${OPTIONAL_PRIVATE}
-    VERSION     ${OKTETAKASTENCONTROLLERS_VERSION}
-    SOVERSION   ${OKTETAKASTENCONTROLLERS_SO_VERSION}
-    ABIVERSION  ${OKTETAKASTEN_ABI_VERSION} ${KASTEN_ABI_VERSION}
-    SOURCES   ${oktetakastencontrollers_LIB_SRCS}
-    HEADERS   ${oktetakastencontrollers_LIB_HDRS}
-    CCHEADERS ${oktetakastencontrollers_LIB_CCHDRS}
-    NO_VERSIONED_INCLUDEDIR
-    NO_VERSIONED_PACKAGE_NAME
-    REVERSE_NAMESPACE_INCLUDEDIR
-    REVERSE_NAMESPACE_LIB
-    NO_TARGET_NAMESPACE
-)
-
-target_include_directories(OktetaKastenControllers
-    PRIVATE
-        view/libbytearraychecksum
-        view/libbytearrayfilter
-        view/libfinddialog
-        ${LIBFRAMESPRINT_REL_DIR}
-)
 
 install(FILES view/structures/kns/okteta-structures.knsrc  DESTINATION ${KDE_INSTALL_KNSRCDIR})
 
 set( elf_structure_FILES
-  view/structures/examples/okteta/structures/elf/metadata.desktop
-  view/structures/examples/okteta/structures/elf/main.osd
+    view/structures/examples/okteta/structures/elf/metadata.desktop
+    view/structures/examples/okteta/structures/elf/main.osd
 )
 install( FILES ${elf_structure_FILES}  DESTINATION  ${KDE_INSTALL_DATADIR}/okteta/structures/elf )
 
 set( png_structure_FILES
-  view/structures/examples/okteta/structures/png/metadata.desktop
-  view/structures/examples/okteta/structures/png/main.osd
+    view/structures/examples/okteta/structures/png/metadata.desktop
+    view/structures/examples/okteta/structures/png/main.osd
 )
 install( FILES ${png_structure_FILES}  DESTINATION  ${KDE_INSTALL_DATADIR}/okteta/structures/png )
 install( FILES view/structures/examples/okteta/structures/uuid.js  DESTINATION  ${KDE_INSTALL_DATADIR}/okteta/structures/ )
@@ -691,6 +680,7 @@ okteta_add_cmakeconfig(Controllers NAMESPACE Okteta Kasten
 
 if( KASTEN_BUILD_INTERNAL_TEMPLATES )
 
+add_library(OktetaKastenControllersTemplates  STATIC)
 okteta_add_sublibrary(ControllersTemplates NAMESPACE Okteta Kasten
     SUBDIR view/libbytearrayfilter/filter/template
     PRIVATE
@@ -706,8 +696,7 @@ okteta_add_sublibrary(ControllersTemplates NAMESPACE Okteta Kasten
         Template_ByteArrayChecksumParameterSetEdit
 )
 
-add_library( oktetakastencontrollertemplates  STATIC ${oktetakastencontrollerstemplates_LIB_SRCS} )
-target_include_directories(oktetakastencontrollertemplates
+target_include_directories(OktetaKastenControllersTemplates
     PRIVATE
         view/libbytearrayfilter
         view/libbytearrayfilter/filter
@@ -715,7 +704,7 @@ target_include_directories(oktetakastencontrollertemplates
         view/libbytearraychecksum/algorithm
 )
 # MSVC needs this
-target_compile_definitions( oktetakastencontrollertemplates PUBLIC OKTETAKASTENCONTROLLERS_STATIC_DEFINE=1 )
-target_link_libraries( oktetakastencontrollertemplates   KF5::I18n Qt5::Widgets OktetaCore )
+target_compile_definitions(OktetaKastenControllersTemplates PUBLIC OKTETAKASTENCONTROLLERS_STATIC_DEFINE=1)
+target_link_libraries(OktetaKastenControllersTemplates  KF5::I18n Qt5::Widgets OktetaCore)
 
 endif()

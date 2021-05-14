@@ -1,7 +1,26 @@
 set(OKTETAKASTENGUI_VERSION ${OKTETAKASTEN_LIB_VERSION})
 set(OKTETAKASTENGUI_SO_VERSION ${OKTETAKASTEN_LIB_SOVERSION})
 
-add_definitions(-DTRANSLATION_DOMAIN=\"liboktetakasten\")
+okteta_add_library(Gui NAMESPACE Okteta Kasten
+    PUBLIC
+        OktetaKastenCore
+        KastenGui
+        OktetaGui
+    PRIVATE
+        Qt5::Qml
+        KF5::I18n
+        KF5::Completion
+    VERSION     ${OKTETAKASTENGUI_VERSION}
+    SOVERSION   ${OKTETAKASTENGUI_SO_VERSION}
+    ABIVERSION  ${OKTETAKASTEN_ABI_VERSION} ${KASTEN_ABI_VERSION}
+    NO_VERSIONED_INCLUDEDIR
+    NO_VERSIONED_PACKAGE_NAME
+    REVERSE_NAMESPACE_INCLUDEDIR
+    REVERSE_NAMESPACE_LIB
+    NO_TARGET_NAMESPACE
+)
+
+target_compile_definitions(OktetaKastenGui PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")
 
 macro(OKTETAKASTENGUI_ADD_SUBLIBRARY _subdir)
     okteta_add_sublibrary(Gui NAMESPACE Okteta Kasten
@@ -12,6 +31,7 @@ macro(OKTETAKASTENGUI_ADD_SUBLIBRARY _subdir)
 endmacro()
 
 oktetakastengui_add_sublibrary(liboktetawidgets
+    BUILD_INCLUDEDIR
     PUBLIC
         AddressValidator
         AddressComboBox
@@ -95,6 +115,7 @@ oktetakastengui_add_sublibrary(io/streamencoder/base85
 )
 
 oktetakastengui_add_sublibrary(io/streamencoder
+    BUILD_INCLUDEDIR
     PUBLIC
         AbstractByteArrayStreamEncoder
     PRIVATE
@@ -121,6 +142,7 @@ oktetakastengui_add_sublibrary(io/generator/sequence
 )
 
 oktetakastengui_add_sublibrary(io
+    BUILD_INCLUDEDIR
     PUBLIC
         ByteArrayStreamEncoderFactory
         ByteArrayStreamEncoderConfigEditorFactoryFactory
@@ -132,6 +154,7 @@ oktetakastengui_add_sublibrary(io
 )
 
 oktetakastengui_add_sublibrary(view
+    BUILD_INCLUDEDIR
     PUBLIC
         ByteArrayView
         ByteArrayViewFactory
@@ -141,6 +164,7 @@ oktetakastengui_add_sublibrary(view
 )
 
 oktetakastengui_add_sublibrary(system
+    BUILD_INCLUDEDIR
     PUBLIC
         ByteArrayViewProfileLock
         ByteArrayViewProfileManager
@@ -150,38 +174,6 @@ okteta_add_sublibrary(Gui NAMESPACE Okteta Kasten
     REVERSE_NAMESPACE_INCLUDEDIR
     PUBLIC
         OktetaKastenGui
-)
-
-
-okteta_add_library(Gui NAMESPACE Okteta Kasten
-    PUBLIC
-        OktetaKastenCore
-        KastenGui
-        OktetaGui
-    PRIVATE
-        Qt5::Qml
-        KF5::I18n
-        KF5::Completion
-    VERSION     ${OKTETAKASTENGUI_VERSION}
-    SOVERSION   ${OKTETAKASTENGUI_SO_VERSION}
-    ABIVERSION  ${OKTETAKASTEN_ABI_VERSION} ${KASTEN_ABI_VERSION}
-    SOURCES   ${oktetakastengui_LIB_SRCS}
-    HEADERS   ${oktetakastengui_LIB_HDRS}
-    CCHEADERS ${oktetakastengui_LIB_CCHDRS}
-    NO_VERSIONED_INCLUDEDIR
-    NO_VERSIONED_PACKAGE_NAME
-    REVERSE_NAMESPACE_INCLUDEDIR
-    REVERSE_NAMESPACE_LIB
-    NO_TARGET_NAMESPACE
-)
-
-target_include_directories(OktetaKastenGui
-    PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/system>
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/io>
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/view>
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/io/streamencoder>
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/liboktetawidgets>
 )
 
 okteta_add_cmakeconfig(Gui NAMESPACE Okteta Kasten

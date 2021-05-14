@@ -1,8 +1,8 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.16)
 
 project(Okteta VERSION 0.26.60)
 
-set(REQUIRED_KF5_VERSION "5.57.0")
+set(REQUIRED_KF5_VERSION "5.67.0")
 find_package(ECM ${REQUIRED_KF5_VERSION} REQUIRED NO_MODULE)
 
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake ${ECM_MODULE_PATH})
@@ -18,7 +18,7 @@ include(ECMAddAppIcon)
 include(FeatureSummary)
 include(CMakeDependentOption)
 if(BUILD_TESTING)
-  include(ECMAddTests)
+    include(ECMAddTests)
 endif()
 # Okteta macros
 include(OktetaInternalMacros)

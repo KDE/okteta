@@ -71,15 +71,16 @@ function(_okteta_setup_namespace)
     endif()
 endfunction()
 
-
+# TODO: consider renaming to okteta_add_classes
 macro(okteta_add_sublibrary _baseName)
     set(options
         NO_VERSIONED_INCLUDEDIR
         REVERSE_NAMESPACE_INCLUDEDIR
+        BUILD_INCLUDEDIR
     )
     set(oneValueArgs
         SUBDIR
-        SOURCE_TAG
+        LIBRARY
     )
     set(multiValueArgs
         NAMESPACE
@@ -87,31 +88,27 @@ macro(okteta_add_sublibrary _baseName)
         PRIVATE
         KCFG
         UI
+        QRC
     )
     cmake_parse_arguments(OKTETA_ADD_SUBLIBRARY "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
+    _okteta_target_name(_targetName ${_baseName} ${OKTETA_ADD_SUBLIBRARY_NAMESPACE})
+
     string(CONCAT _namespaceConcat ${OKTETA_ADD_SUBLIBRARY_NAMESPACE})
     string(TOLOWER "${_namespaceConcat}${_baseName}" _libname)
-    if (OKTETA_ADD_SUBLIBRARY_SOURCE_TAG)
-        set(_sourceTag "_${OKTETA_ADD_SUBLIBRARY_SOURCE_TAG}")
+    if (OKTETA_ADD_SUBLIBRARY_LIBRARY)
+        set(_library_target ${OKTETA_ADD_SUBLIBRARY_LIBRARY})
     else()
-        set(_sourceTag)
+        set(_library_target ${_targetName})
     endif()
     if (OKTETA_ADD_SUBLIBRARY_SUBDIR)
         set(_relativePath "${OKTETA_ADD_SUBLIBRARY_SUBDIR}/")
         set(_egh_relative_param RELATIVE ${OKTETA_ADD_SUBLIBRARY_SUBDIR})
-        string(REPLACE ".." "PARENTDIR" _subdir_id ${OKTETA_ADD_SUBLIBRARY_SUBDIR})
-        string(REPLACE "/" "_" _subdir_id ${_subdir_id})
-        set(_SRCS   ${_libname}_${_subdir_id}${_sourceTag}_SRCS)
-        set(_HDRS   ${_libname}_${_subdir_id}_HDRS)
-        set(_CCHDRS ${_libname}_${_subdir_id}_CCHDRS)
     else()
         set(_relativePath)
         set(_egh_relative_param)
-        set(_SRCS   ${_libname}${_sourceTag}_LIB_SRCS)
-        set(_HDRS   ${_libname}_LIB_HDRS)
-        set(_CCHDRS ${_libname}_LIB_CCHDRS)
     endif()
+    set(_srcs )
 
     foreach(_classname ${OKTETA_ADD_SUBLIBRARY_PUBLIC} ${OKTETA_ADD_SUBLIBRARY_PRIVATE})
         string(TOLOWER "${_classname}" _lc_classname)
@@ -119,24 +116,29 @@ macro(okteta_add_sublibrary _baseName)
         set(_source "${_relativePath}${_lc_classname}.cpp")
         set(_actualsource "${CMAKE_CURRENT_SOURCE_DIR}/${_source}")
         if (EXISTS ${_actualsource})
-            list(APPEND ${_SRCS} "${_source}")
+            list(APPEND _srcs "${_source}")
         endif()
 
         set(_source "${_relativePath}${_lc_classname}_p.cpp")
         set(_actualsource "${CMAKE_CURRENT_SOURCE_DIR}/${_source}")
         if (EXISTS ${_actualsource})
-            list(APPEND ${_SRCS} "${_source}")
+            list(APPEND _srcs "${_source}")
         endif()
     endforeach()
 
     foreach(_kcfg ${OKTETA_ADD_SUBLIBRARY_KCFG})
-        kconfig_add_kcfg_files(${_SRCS} "${_relativePath}${_kcfg}")
+        kconfig_add_kcfg_files(${_library_target} "${_relativePath}${_kcfg}")
     endforeach()
 
     foreach(_ui ${OKTETA_ADD_SUBLIBRARY_UI})
-        ki18n_wrap_ui(${_SRCS} "${_relativePath}${_ui}")
+        ki18n_wrap_ui(${_library_target} "${_relativePath}${_ui}")
     endforeach()
 
+    foreach(_qrc ${OKTETA_ADD_SUBLIBRARY_QRC})
+        qt5_add_resources(_srcs "${_relativePath}${_qrc}")
+    endforeach()
+
+    target_sources(${_library_target} PRIVATE ${_srcs})
     if (OKTETA_ADD_SUBLIBRARY_PUBLIC)
         set(_cc_include_dir ${OKTETA_ADD_SUBLIBRARY_NAMESPACE})
         if (OKTETA_ADD_SUBLIBRARY_REVERSE_NAMESPACE_INCLUDEDIR)
@@ -144,20 +146,35 @@ macro(okteta_add_sublibrary _baseName)
         endif()
         string(REPLACE ";" "/" _cc_include_dir "${_cc_include_dir}")
 
-        ecm_generate_headers(${_CCHDRS}
+        ecm_generate_headers(_cchdrs
             HEADER_NAMES
                 ${OKTETA_ADD_SUBLIBRARY_PUBLIC}
             ${_egh_relative_param}
             HEADER_EXTENSION hpp
             PREFIX ${_cc_include_dir}
-            REQUIRED_HEADERS ${_HDRS}
+            REQUIRED_HEADERS _hdrs
         )
     endif()
 
-    if (OKTETA_ADD_SUBLIBRARY_SUBDIR)
-        list(APPEND ${_libname}${_sourceTag}_LIB_SRCS   ${${_SRCS}})
-        list(APPEND ${_libname}_LIB_HDRS   ${${_HDRS}})
-        list(APPEND ${_libname}_LIB_CCHDRS ${${_CCHDRS}})
+    if (OKTETA_ADD_SUBLIBRARY_BUILD_INCLUDEDIR)
+        target_include_directories( ${_library_target}
+            PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/${_relativePath}>
+        )
+    endif()
+
+    # install
+    get_property(_include_install_dir TARGET ${_targetName} PROPERTY OKTETA_INSTALL_INCLUDEDIR)
+    if (_include_install_dir)
+        get_property(_include_dir TARGET ${_targetName} PROPERTY OKTETA_INSTALL_NORMAL_HEADERS_SUBDIR)
+        get_property(_cc_include_dir TARGET ${_targetName} PROPERTY OKTETA_INSTALL_CAMELCASE_HEADERS_SUBDIR)
+        install( FILES ${_hdrs}
+            DESTINATION "${_include_install_dir}/${_include_dir}"
+            COMPONENT Devel
+        )
+        install( FILES ${_cchdrs}
+            DESTINATION "${_include_install_dir}/${_cc_include_dir}"
+            COMPONENT Devel
+        )
     endif()
 endmacro()
 
@@ -183,9 +200,6 @@ function(okteta_add_library _baseName)
         ABIVERSION
         PUBLIC
         PRIVATE
-        SOURCES
-        HEADERS
-        CCHEADERS
     )
     cmake_parse_arguments(OKTETA_ADD_LIBRARY "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
@@ -233,7 +247,7 @@ function(okteta_add_library _baseName)
     string(REPLACE ";" "/" _cc_include_dir "${_cc_include_dir}")
     string(TOLOWER ${_cc_include_dir} _include_dir)
 
-    add_library(${_targetName} SHARED ${OKTETA_ADD_LIBRARY_SOURCES} )
+    add_library(${_targetName} SHARED)
     if (NOT OKTETA_ADD_LIBRARY_NO_TARGET_NAMESPACE)
         add_library("${_namespacePrefix}::${_baseName}" ALIAS ${_targetName})
         set(_export_name_args EXPORT_NAME ${_baseName})
@@ -281,34 +295,31 @@ function(okteta_add_library _baseName)
         ${KDE_INSTALL_TARGETS_DEFAULT_ARGS}
     )
 
-    if (OKTETA_ADD_LIBRARY_HEADERS OR OKTETA_ADD_LIBRARY_CCHEADERS)
-        if (OKTETA_ADD_LIBRARY_NO_PACKAGE_NAMESPACED_INCLUDEDIR)
-            set(_include_install_dir "${KDE_INSTALL_INCLUDEDIR}")
+    # TODO: perhaps only do on first PUBLIC usage in okteta_add_sublibrary?
+    if (OKTETA_ADD_LIBRARY_NO_PACKAGE_NAMESPACED_INCLUDEDIR)
+        set(_include_install_dir "${KDE_INSTALL_INCLUDEDIR}")
+    else()
+        if (OKTETA_ADD_LIBRARY_INCLUDEDIR_PACKAGE_NAMESPACE)
+            set(_include_dir_package_namespace "${OKTETA_ADD_LIBRARY_INCLUDEDIR_PACKAGE_NAMESPACE}")
         else()
-            if (OKTETA_ADD_LIBRARY_INCLUDEDIR_PACKAGE_NAMESPACE)
-                set(_include_dir_package_namespace "${OKTETA_ADD_LIBRARY_INCLUDEDIR_PACKAGE_NAMESPACE}")
+            if (_use_versioned_package_name)
+                set(_include_dir_package_namespace "${_fullVersionedName}")
             else()
-                if (_use_versioned_package_name)
-                    set(_include_dir_package_namespace "${_fullVersionedName}")
-                else()
-                    set(_include_dir_package_namespace "${_fullName}")
-                endif()
+                set(_include_dir_package_namespace "${_fullName}")
             endif()
-            set(_include_install_dir "${KDE_INSTALL_INCLUDEDIR}/${_include_dir_package_namespace}")
         endif()
-        set_property(TARGET ${_targetName} PROPERTY OKTETA_INSTALL_INCLUDEDIR ${_include_install_dir})
-        target_include_directories(${_targetName}
-            INTERFACE "$<INSTALL_INTERFACE:${_include_install_dir}>"
-        )
-        install( FILES ${OKTETA_ADD_LIBRARY_HEADERS} ${_exportHeaderFilePath}
-            DESTINATION "${_include_install_dir}/${_include_dir}"
-            COMPONENT Devel
-        )
-        install( FILES ${OKTETA_ADD_LIBRARY_CCHEADERS}
-            DESTINATION "${_include_install_dir}/${_cc_include_dir}"
-            COMPONENT Devel
-        )
+        set(_include_install_dir "${KDE_INSTALL_INCLUDEDIR}/${_include_dir_package_namespace}")
     endif()
+    set_property(TARGET ${_targetName} PROPERTY OKTETA_INSTALL_INCLUDEDIR ${_include_install_dir})
+    set_property(TARGET ${_targetName} PROPERTY OKTETA_INSTALL_NORMAL_HEADERS_SUBDIR ${_include_dir})
+    set_property(TARGET ${_targetName} PROPERTY OKTETA_INSTALL_CAMELCASE_HEADERS_SUBDIR ${_cc_include_dir})
+    target_include_directories(${_targetName}
+        INTERFACE "$<INSTALL_INTERFACE:${_include_install_dir}>"
+    )
+    install( FILES ${_exportHeaderFilePath}
+        DESTINATION "${_include_install_dir}/${_include_dir}"
+        COMPONENT Devel
+    )
 endfunction()
 
 
