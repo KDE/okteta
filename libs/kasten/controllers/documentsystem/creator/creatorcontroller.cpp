@@ -40,12 +40,7 @@ CreatorController::CreatorController(ModelCodecManager* modelCodecManager,
                         i18nc("@title:menu create new byte arrays from different sources",
                               "New"),
                         this);
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 77, 0)
     newMenuAction->setPopupMode(QToolButton::MenuButtonPopup);
-#else
-    newMenuAction->setStickyMenu(false);
-    newMenuAction->setDelayed(false);
-#endif
     actionCollection->setDefaultShortcuts(newMenuAction, KStandardShortcut::openNew());
     connect(newMenuAction, &QAction::triggered,
             this, &CreatorController::onNewActionTriggered);

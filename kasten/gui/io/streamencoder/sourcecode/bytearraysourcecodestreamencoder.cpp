@@ -45,13 +45,6 @@ static constexpr int NoOfPrimitiveDataTypes = 8;
 inline QString decimalFormattedNumberPlaceHolder() { return QStringLiteral("%1"); }
 inline QString hexadecimalFormattedNumberPlaceHolder() { return QStringLiteral("0x%1"); }
 
-using TextStreamFunction = QTextStream& (*)(QTextStream&);
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
-constexpr TextStreamFunction endl = Qt::endl;
-#else
-constexpr TextStreamFunction endl = ::endl;
-#endif
-
 SourceCodeStreamEncoderSettings::SourceCodeStreamEncoderSettings()
     : variableName(QStringLiteral("array"))
 {}
@@ -84,8 +77,8 @@ bool ByteArraySourceCodeStreamEncoder::encodeDataToStream(QIODevice* device,
     const int sizeOfArray = (size + dataTypeSize - 1) / dataTypeSize;
 
     textStream << "const " << QLatin1String(PrimitiveDataTypeName[static_cast<int>(mSettings.dataType)]) << ' '
-               << mSettings.variableName << '[' << sizeOfArray << "] =" << endl
-               << '{' << endl;
+               << mSettings.variableName << '[' << sizeOfArray << "] =" << Qt::endl
+               << '{' << Qt::endl;
 
     int elementAddedOnLine = 0;
     for (Okteta::Address i = range.start(); i <= range.end(); i += dataTypeSize) {
@@ -98,16 +91,16 @@ bool ByteArraySourceCodeStreamEncoder::encodeDataToStream(QIODevice* device,
         }
 
         if (++elementAddedOnLine >= mSettings.elementsPerLine) {
-            textStream << endl;
+            textStream << Qt::endl;
             elementAddedOnLine = 0;
         }
     }
 
     if (elementAddedOnLine > 0) {
-        textStream << endl;
+        textStream << Qt::endl;
     }
 
-    textStream << "};" << endl;
+    textStream << "};" << Qt::endl;
 
     return success;
 }

@@ -20,24 +20,11 @@
 #include <Kasten/ModelCodecViewManager>
 #include <Kasten/ModelCodecManager>
 // KF
-#if KPARTS_VERSION >= QT_VERSION_CHECK(5, 77, 0)
 #include <KPluginMetaData>
-#endif
 #include <KLocalizedString>
 
 OktetaPartFactory::OktetaPartFactory()
-#if KPARTS_VERSION >= QT_VERSION_CHECK(5, 77, 0)
 {
-#else
-    : mAboutData(QStringLiteral("oktetapart"),
-                 i18n("OktetaPart"),
-                 QStringLiteral(OKTETA_VERSION),
-                 i18n("Embedded hex editor"),
-                 KAboutLicense::LGPL_V2_1,
-                 i18n("Copyright 2003-%1 Friedrich W. H. Kossebau", QStringLiteral("2021")))
-{
-    mAboutData.addAuthor(i18n("Friedrich W. H. Kossebau"), i18n("Author"), QStringLiteral("kossebau@kde.org"));
-#endif
     mByteArrayViewProfileManager = new Kasten::ByteArrayViewProfileManager();
 
     mModelCodecViewManager = new Kasten::ModelCodecViewManager();
@@ -84,11 +71,7 @@ QObject* OktetaPartFactory::create(const char* iface,
         (strcmp(iface, "KParts::ReadOnlyPart") == 0) ? OktetaPart::Modus::ReadOnly :
         /* else */                                     OktetaPart::Modus::ReadWrite;
 
-#if KPARTS_VERSION >= QT_VERSION_CHECK(5, 77, 0)
     auto* part = new OktetaPart(parent, metaData(), modus, mByteArrayViewProfileManager, mModelCodecManager, mModelCodecViewManager);
-#else
-    auto* part = new OktetaPart(parent, mAboutData, modus, mByteArrayViewProfileManager, mModelCodecManager, mModelCodecViewManager);
-#endif
 
     return part;
 }

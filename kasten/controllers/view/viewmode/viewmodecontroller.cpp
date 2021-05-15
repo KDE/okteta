@@ -27,11 +27,7 @@ ViewModeController::ViewModeController(KXMLGUIClient* guiClient)
         i18nc("@item:inmenu", "&Columns"),
         i18nc("@item:inmenu", "&Rows"),
     });
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 78, 0)
     connect(mViewModeAction, &KSelectAction::indexTriggered,
-#else
-    connect(mViewModeAction, QOverload<int>::of(&KSelectAction::triggered),
-#endif
             this, &ViewModeController::setViewMode);
 
     guiClient->actionCollection()->addAction(QStringLiteral("viewmode"), mViewModeAction);

@@ -12,9 +12,6 @@
 // KF
 #include <kparts_version.h>
 #include <KPluginFactory>
-#if KPARTS_VERSION < QT_VERSION_CHECK(5, 77, 0)
-#include <KAboutData>
-#endif
 
 namespace Kasten {
 class ByteArrayViewProfileManager;
@@ -45,9 +42,6 @@ public: // KPluginFactory API
                     const QString& keyword) override;
 
 private:
-#if KPARTS_VERSION < QT_VERSION_CHECK(5, 77, 0)
-    KAboutData mAboutData;
-#endif
     Kasten::ByteArrayViewProfileManager* mByteArrayViewProfileManager;
     Kasten::ModelCodecViewManager* mModelCodecViewManager;
     Kasten::ModelCodecManager* mModelCodecManager;

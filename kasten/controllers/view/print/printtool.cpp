@@ -75,15 +75,10 @@ void PrintTool::triggerPrint(QPrinter* printer)
     printer->setCreator(creator);
 
     FramesToPaperPrinter framesPrinter;
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     const QPageLayout pageLayout = printer->pageLayout();
     const int printerResolution = printer->resolution();
     framesPrinter.setPaperRect(pageLayout.fullRectPixels(printerResolution));
     framesPrinter.setPageRect(pageLayout.paintRectPixels(printerResolution));
-#else
-    framesPrinter.setPaperRect(printer->paperRect());
-    framesPrinter.setPageRect(printer->pageRect());
-#endif
     printer->setFullPage(true);
 
     PrintInfo info;

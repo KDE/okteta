@@ -50,9 +50,7 @@
 #include <Kasten/AbstractLoadJob>
 #include <Kasten/AbstractSyncWithRemoteJob>
 // KF
-#if KPARTS_VERSION >= QT_VERSION_CHECK(5, 77, 0)
 #include <KPluginMetaData>
-#endif
 // Qt
 #include <QWidget>
 #include <QLayout>
@@ -66,11 +64,7 @@ static constexpr const char* UIFileName[] =
 };
 
 OktetaPart::OktetaPart(QObject* parent,
-#if KPARTS_VERSION >= QT_VERSION_CHECK(5, 77, 0)
                        const KPluginMetaData& metaData,
-#else
-                       const KAboutData& componentData,
-#endif
                        Modus modus,
                        Kasten::ByteArrayViewProfileManager* viewProfileManager,
                        Kasten::ModelCodecManager* modelCodecManager,
@@ -79,11 +73,7 @@ OktetaPart::OktetaPart(QObject* parent,
     , mModus(modus)
     , mViewProfileManager(viewProfileManager)
 {
-#if KPARTS_VERSION >= QT_VERSION_CHECK(5, 77, 0)
     setMetaData(metaData);
-#else
-    setComponentData(componentData);
-#endif
 
     auto* widget = new QWidget();
     mLayout = new QVBoxLayout(widget);

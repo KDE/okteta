@@ -28,11 +28,7 @@ class AbstractXmlGuiController;
 class AbstractXmlGuiControllerFactory;
 class AbstractDocument;
 }
-#if KPARTS_VERSION >= QT_VERSION_CHECK(5, 77, 0)
 class KPluginMetaData;
-#else
-class KAboutData;
-#endif
 class QVBoxLayout;
 
 class OktetaPart : public KParts::ReadWritePart
@@ -51,11 +47,7 @@ public:
 
 public:
     OktetaPart(QObject* parent,
-#if KPARTS_VERSION >= QT_VERSION_CHECK(5, 77, 0)
                const KPluginMetaData& metaData,
-#else
-               const KAboutData& componentData,
-#endif
                Modus modus,
                Kasten::ByteArrayViewProfileManager* viewProfileManager,
                Kasten::ModelCodecManager* modelCodecManager,
