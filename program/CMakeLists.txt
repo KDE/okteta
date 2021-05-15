@@ -28,7 +28,7 @@ set_source_files_properties(about.cpp PROPERTIES
     COMPILE_FLAGS -DOKTETA_VERSION=\\\"${Okteta_VERSION}\\\"
 )
 
-ecm_add_app_icon(okteta_APPICON_SRCS
+ecm_add_app_icon(okteta
     ICONS
         ${CMAKE_CURRENT_SOURCE_DIR}/16-apps-okteta.png
         ${CMAKE_CURRENT_SOURCE_DIR}/22-apps-okteta.png
@@ -36,10 +36,6 @@ ecm_add_app_icon(okteta_APPICON_SRCS
         ${CMAKE_CURRENT_SOURCE_DIR}/48-apps-okteta.png
         ${CMAKE_CURRENT_SOURCE_DIR}/64-apps-okteta.png
         ${CMAKE_CURRENT_SOURCE_DIR}/128-apps-okteta.png
-)
-target_sources(okteta
-    PRIVATE
-        ${okteta_APPICON_SRCS}
 )
 
 install(TARGETS okteta  ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
