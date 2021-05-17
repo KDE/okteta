@@ -29,6 +29,7 @@ Notes:
     <comment xml:lang="fr">Motorola « S-Record »</comment>
     <comment xml:lang="ia">Motorola S-Records</comment>
     <comment xml:lang="it">S-Records Motorola</comment>
+    <comment xml:lang="ko">모토로라 S-레코드</comment>
     <comment xml:lang="nl">Motorola S-records</comment>
     <comment xml:lang="nn">Motorola S-Records</comment>
     <comment xml:lang="pl">Motorola S-Records</comment>
@@ -66,6 +67,7 @@ Notes:
     <comment xml:lang="fr">Fichier objet hexadécimal « Intel® »</comment>
     <comment xml:lang="ia">File objecto hexadecimal de Intel</comment>
     <comment xml:lang="it">File oggetto esadecimale Intel</comment>
+    <comment xml:lang="ko">인텔 16진수 개체 파일</comment>
     <comment xml:lang="nl">Intel hexadecimaal objectbestand</comment>
     <comment xml:lang="nn">Intel-heksobjektfil</comment>
     <comment xml:lang="pl">Plik obiektu szesnastkowego Intel</comment>
@@ -100,6 +102,7 @@ Notes:
     <comment xml:lang="fr">Données encodées en « Base64 »</comment>
     <comment xml:lang="ia">Datos codificate Base64</comment>
     <comment xml:lang="it">Dati codificati in Base64</comment>
+    <comment xml:lang="ko">Base64 인코딩된 데이터</comment>
     <comment xml:lang="nl">Base64 gecodeerde gegevens</comment>
     <comment xml:lang="nn">Base64-koda data</comment>
     <comment xml:lang="pl">Dane zakodowane Base64</comment>
@@ -128,6 +131,7 @@ Notes:
     <comment xml:lang="fr">Données encodées en « Base32 »</comment>
     <comment xml:lang="ia">Datos codificate Base32</comment>
     <comment xml:lang="it">Dati codificati in Base32</comment>
+    <comment xml:lang="ko">Base32 인코딩된 데이터</comment>
     <comment xml:lang="nl">Base32 gecodeerde gegevens</comment>
     <comment xml:lang="nn">Base32-koda data</comment>
     <comment xml:lang="pl">Dane zakodowane Base32</comment>
@@ -155,6 +159,7 @@ Notes:
     <comment xml:lang="fr">Fichier encodé en « Btoa »</comment>
     <comment xml:lang="ia">File codificate Btoa</comment>
     <comment xml:lang="it">File codificato in Btoa</comment>
+    <comment xml:lang="ko">Btoa 인코딩된 데이터</comment>
     <comment xml:lang="nl">Btoa gecodeerd bestand</comment>
     <comment xml:lang="nn">Btoa-koda fil</comment>
     <comment xml:lang="pl">Dane zakodowane Btoa</comment>
@@ -186,6 +191,7 @@ Notes:
     <comment xml:lang="fr">Fichier encodé en « Ascii85 »</comment>
     <comment xml:lang="ia">Datos codificate Ascii85</comment>
     <comment xml:lang="it">File codificato in Ascii85</comment>
+    <comment xml:lang="ko">Ascii85 인코딩된 데이터</comment>
     <comment xml:lang="nl">Ascii85 gecodeerde gegevens</comment>
     <comment xml:lang="nn">Ascii85-koda data</comment>
     <comment xml:lang="pl">Dane zakodowane Ascii85</comment>
@@ -215,6 +221,7 @@ Notes:
     <comment xml:lang="fr">Fichier encodé en « Uuencode »</comment>
     <comment xml:lang="ia">file codificate Uu</comment>
     <comment xml:lang="it">File con codifica UUencode</comment>
+    <comment xml:lang="ko">Uuencode 인코딩된 파일</comment>
     <comment xml:lang="nl">Uuencoded bestand</comment>
     <comment xml:lang="nn">Uuencoding-koda fil</comment>
     <comment xml:lang="pl">Plik Uuencoded</comment>
@@ -247,6 +254,7 @@ Notes:
     <comment xml:lang="fr">Fichier encodé en « Xxencode »</comment>
     <comment xml:lang="ia">File codificate Xx</comment>
     <comment xml:lang="it">File con codifica Xxencoded</comment>
+    <comment xml:lang="ko">Xxencode 인코딩된 파일</comment>
     <comment xml:lang="nl">Xxencoded bestand</comment>
     <comment xml:lang="nn">Xxencoding-koda fil</comment>
     <comment xml:lang="pl">Plik Xxencoded</comment>
@@ -276,6 +284,7 @@ Notes:
     <comment xml:lang="fr">Définition de structure pour Okteta</comment>
     <comment xml:lang="ia">Definition de structura Okteta</comment>
     <comment xml:lang="it">Definizione di struttura di Okteta</comment>
+    <comment xml:lang="ko">Okteta 구조체 정의</comment>
     <comment xml:lang="nl">Okteta structuurdefinitie</comment>
     <comment xml:lang="nn">Okteta strukturdefinisjon</comment>
     <comment xml:lang="pl">Definicja struktury Okteta</comment>
