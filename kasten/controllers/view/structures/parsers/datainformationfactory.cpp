@@ -15,6 +15,8 @@
 
 #include "../script/scriptlogger.hpp"
 #include <QScriptEngine>
+// Std
+#include <utility>
 
 AbstractBitfieldDataInformation* DataInformationFactory::newBitfield(const BitfieldParsedData& pd)
 {
@@ -377,7 +379,7 @@ TaggedUnionDataInformation* DataInformationFactory::newTaggedUnion(const TaggedU
     }
 
     if (!alternativesValid) {
-        for (const auto& info : qAsConst(altInfo)) {
+        for (const auto& info : std::as_const(altInfo)) {
             qDeleteAll(info.fields);
         }
 

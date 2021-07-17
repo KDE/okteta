@@ -20,6 +20,8 @@
 #include <QRegExp>
 #include <KLocalizedString>
 #include <KConfigDialogManager>
+// Std
+#include <utility>
 
 using namespace Kasten;
 
@@ -281,7 +283,7 @@ void StructureAddRemoveWidget::updateAvailable()
         }
     }
 
-    for (QTreeWidgetItem* itm : qAsConst(toRemove)) {
+    for (QTreeWidgetItem* itm : std::as_const(toRemove)) {
         qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES)
             << "item " << QStringLiteral("\'%1\':\'%2\'").arg(itm->text(1),
                                                               itm->text(0)) << "removed";

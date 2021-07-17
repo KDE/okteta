@@ -17,6 +17,8 @@
 // Kasten core
 #include <Kasten/AbstractTool>
 #include <Kasten/AbstractModelSynchronizer>
+// Std
+#include <utility>
 
 namespace Kasten {
 
@@ -63,11 +65,11 @@ void SingleViewWindowPrivate::setView(AbstractView* view)
     mView = view;
     mViewArea->setView(view);
 
-    for (AbstractXmlGuiController* controller : qAsConst(mControllers)) {
+    for (AbstractXmlGuiController* controller : std::as_const(mControllers)) {
         controller->setTargetModel(view);
     }
 
-    for (ToolViewDockWidget* dockWidget : qAsConst(mDockWidgets)) {
+    for (ToolViewDockWidget* dockWidget : std::as_const(mDockWidgets)) {
         if (dockWidget->isShown()) {
             dockWidget->toolView()->tool()->setTargetModel(view);
         }

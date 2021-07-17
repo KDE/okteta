@@ -15,6 +15,8 @@
 #include "tabbedviews.hpp"
 // Qt
 #include <QSplitter>
+// Std
+#include <utility>
 
 class QDragMoveEvent;
 class QDropEvent;
@@ -141,7 +143,7 @@ inline void MultiViewAreasPrivate::removeViews(const QVector<AbstractView*>& vie
     Q_Q(MultiViewAreas);
 
     // TODO: possible to just send the views of the given area?
-    for (TabbedViews* viewArea : qAsConst(mViewAreaList)) {
+    for (TabbedViews* viewArea : std::as_const(mViewAreaList)) {
         viewArea->removeViews(views);
     }
 
@@ -168,7 +170,7 @@ inline AbstractToolInlineView* MultiViewAreasPrivate::currentToolInlineView() co
 inline void MultiViewAreasPrivate::setViewFocus(AbstractView* view)
 {
     // TODO: makes this more efficient!
-    for (TabbedViews* viewArea : qAsConst(mViewAreaList)) {
+    for (TabbedViews* viewArea : std::as_const(mViewAreaList)) {
         const int localIndex = viewArea->indexOf(view);
         if (localIndex != -1) {
             viewArea->setViewFocus(view);

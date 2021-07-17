@@ -12,6 +12,8 @@
 #include <QTableView>
 #include <QHeaderView>
 #include <QVBoxLayout>
+// Std
+#include <utility>
 
 #include "scriptlogger.hpp"
 
@@ -21,7 +23,7 @@ ScriptLoggerView::ScriptLoggerView(const TopLevelDataInformation::List& data, QW
     , mView(new QTableView(this))
     , mList(data)
 {
-    for (const auto& info : qAsConst(mList)) {
+    for (const auto& info : std::as_const(mList)) {
         mSelector->addItem(info->objectName());
     }
 

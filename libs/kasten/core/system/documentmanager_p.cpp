@@ -14,6 +14,8 @@
 #include <QUrl>
 #include <QMutableVectorIterator>
 #include <QStringList>
+// Std
+#include <utility>
 
 // temporary
 #include "documentcreatemanager.hpp"
@@ -118,7 +120,7 @@ void DocumentManagerPrivate::closeAllOther(AbstractDocument* keptDocument)
 
     Q_EMIT q->closing(closedDocuments);
 
-    for (AbstractDocument* document : qAsConst(closedDocuments)) {
+    for (AbstractDocument* document : std::as_const(closedDocuments)) {
         delete document;
     }
 }
@@ -146,7 +148,7 @@ bool DocumentManagerPrivate::canCloseAll() const
 {
     bool canCloseAll = true;
 
-    for (AbstractDocument* document : qAsConst(mList)) {
+    for (AbstractDocument* document : std::as_const(mList)) {
         if (!mSyncManager->canClose(document)) {
             canCloseAll = false;
             break;
@@ -160,7 +162,7 @@ bool DocumentManagerPrivate::canCloseAllOther(AbstractDocument* keptDocument) co
 {
     bool canCloseAll = true;
 
-    for (AbstractDocument* document : qAsConst(mList)) {
+    for (AbstractDocument* document : std::as_const(mList)) {
         if ((document != keptDocument) &&
             !mSyncManager->canClose(document)) {
             canCloseAll = false;

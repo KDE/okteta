@@ -55,6 +55,8 @@
 #include <QWidget>
 #include <QLayout>
 #include <QUrl>
+// Std
+#include <utility>
 
 static constexpr const char* UIFileName[] =
 {
@@ -196,7 +198,7 @@ bool OktetaPart::saveFile()
 void OktetaPart::onDocumentLoaded(Kasten::AbstractDocument* document)
 {
     if (document) {
-        for (Kasten::AbstractXmlGuiController* controller : qAsConst(mControllers)) {
+        for (Kasten::AbstractXmlGuiController* controller : std::as_const(mControllers)) {
             controller->setTargetModel(nullptr);
         }
         mSingleViewArea->setView(nullptr);
@@ -216,7 +218,7 @@ void OktetaPart::onDocumentLoaded(Kasten::AbstractDocument* document)
 
         mSingleViewArea->setView(mByteArrayView);
 
-        for (Kasten::AbstractXmlGuiController* controller : qAsConst(mControllers)) {
+        for (Kasten::AbstractXmlGuiController* controller : std::as_const(mControllers)) {
             controller->setTargetModel(mByteArrayView);
         }
 

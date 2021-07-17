@@ -40,6 +40,7 @@
 #include <QScriptEngine>
 // Std
 #include <memory>
+#include <utility>
 
 class ScriptClassesTest : public QObject
 {
@@ -271,7 +272,7 @@ void ScriptClassesTest::checkProperties(const QVector<PropertyPair>& expected,
 
 void ScriptClassesTest::checkIterators()
 {
-    for (auto* top : qAsConst(primitives)) {
+    for (auto* top : std::as_const(primitives)) {
         checkProperties(primitiveProperties, top->actualDataInformation(), "primitives");
     }
 

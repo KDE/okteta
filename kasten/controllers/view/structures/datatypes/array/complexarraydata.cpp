@@ -16,6 +16,8 @@
 #include "../structuredatainformation.hpp"
 #include "../../script/scripthandlerinfo.hpp"
 #include "../../script/scriptlogger.hpp"
+// Std
+#include <utility>
 
 ComplexArrayData::ComplexArrayData(unsigned int initialLength, DataInformation* data,
                                    ArrayDataInformation* parent) : AbstractArrayData(data, parent)
@@ -98,7 +100,7 @@ QString ComplexArrayData::typeName() const
 
 void ComplexArrayData::setNewParentForChildren()
 {
-    for (auto* child : qAsConst(mChildren)) {
+    for (auto* child : std::as_const(mChildren)) {
         child->setParent(mParent);
     }
 }
@@ -107,7 +109,7 @@ BitCount64 ComplexArrayData::offset(const DataInformation* child) const
 {
     BitCount64 offset = 0;
     // sum size of elements up to index
-    for (auto* current : qAsConst(mChildren)) {
+    for (auto* current : std::as_const(mChildren)) {
         if (current == child) {
             return offset;
         }

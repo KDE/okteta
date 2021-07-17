@@ -14,6 +14,8 @@
 #include "../parsers/parserutils.hpp"
 
 #include <KLocalizedString>
+// Std
+#include <utility>
 
 TaggedUnionDataInformation::TaggedUnionDataInformation(const QString& name, DataInformation* parent)
     : DataInformationWithChildren(name, QVector<DataInformation*>(), parent)
@@ -34,7 +36,7 @@ TaggedUnionDataInformation::TaggedUnionDataInformation(const TaggedUnionDataInfo
 TaggedUnionDataInformation::~TaggedUnionDataInformation()
 {
     qDeleteAll(mDefaultFields);
-    for (const FieldInfo& fi : qAsConst(mAlternatives)) {
+    for (const FieldInfo& fi : std::as_const(mAlternatives)) {
         qDeleteAll(fi.fields);
     }
 }
@@ -69,14 +71,14 @@ void TaggedUnionDataInformation::setAlternatives(const QVector<FieldInfo>& alter
         topLevelDataInformation()->_childCountAboutToChange(this, oldChildCount, newChidCount);
     }
     // remove them all
-    for (const FieldInfo& fi : qAsConst(mAlternatives)) {
+    for (const FieldInfo& fi : std::as_const(mAlternatives)) {
         qDeleteAll(fi.fields);
     }
 
     mAlternatives.clear();
     mAlternatives = alternatives;
     // set parent
-    for (const FieldInfo& fi : qAsConst(mAlternatives)) {
+    for (const FieldInfo& fi : std::as_const(mAlternatives)) {
         for (auto* field : fi.fields) {
             field->setParent(this);
         }

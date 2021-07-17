@@ -10,6 +10,8 @@
 
 // Qt
 #include <QVector>
+// Std
+#include <utility>
 
 namespace Okteta {
 
@@ -136,7 +138,7 @@ bool BookmarkList::adjustToSwapped(Address firstPartStart, Address secondPartSta
 
     // append bookmarks from first part as second
     if (!bookmarksInFirstPart.isEmpty()) {
-        for (Bookmark bookmark : qAsConst(bookmarksInFirstPart)) { // krazy:exclude=foreach
+        for (Bookmark bookmark : std::as_const(bookmarksInFirstPart)) {
             bookmark.move(secondPartLength);
             insert(bIt, bookmark);
         }

@@ -17,13 +17,15 @@
 #include <KLocalizedString>
 #include <QScriptEngine>
 #include <QLineEdit>
+// Std
+#include <utility>
 
 DataInformationWithChildren::DataInformationWithChildren(const QString& name,
                                                          const QVector<DataInformation*>& children, DataInformation* parent)
     : DataInformation(name, parent)
     , mChildren(children)
 {
-    for (auto* child : qAsConst(mChildren)) {
+    for (auto* child : std::as_const(mChildren)) {
         child->setParent(this);
     }
 }
@@ -88,7 +90,7 @@ BitCount32 DataInformationWithChildren::size() const
 void DataInformationWithChildren::resetValidationState()
 {
     DataInformation::resetValidationState();
-    for (auto* child : qAsConst(mChildren)) {
+    for (auto* child : std::as_const(mChildren)) {
         child->resetValidationState();
     }
 }
@@ -133,7 +135,7 @@ void DataInformationWithChildren::setChildren(const QVector<DataInformation*>& n
     const uint count = newChildren.size();
     topLevelDataInformation()->_childCountAboutToChange(this, 0, count);
     mChildren = newChildren;
-    for (auto* child : qAsConst(mChildren)) {
+    for (auto* child : std::as_const(mChildren)) {
         child->setParent(this);
     }
 

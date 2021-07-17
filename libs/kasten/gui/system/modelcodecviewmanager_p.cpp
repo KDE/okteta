@@ -20,6 +20,8 @@
 #include <Kasten/AbstractModelExporter>
 #include <Kasten/AbstractModelDataGenerator>
 #include <Kasten/AbstractModelStreamEncoder>
+// Std
+#include <utility>
 
 namespace Kasten {
 
@@ -41,7 +43,7 @@ void ModelCodecViewManagerPrivate::setEncoderConfigEditorFactories(const QVector
     mExporterFactoryList.clear();
 
     mExporterFactoryList.reserve(mEncoderFactoryList.size());
-    for (AbstractModelStreamEncoderConfigEditorFactory* factory : qAsConst(mEncoderFactoryList)) {
+    for (AbstractModelStreamEncoderConfigEditorFactory* factory : std::as_const(mEncoderFactoryList)) {
         mExporterFactoryList << new ModelEncoderFileSystemExporterConfigEditorFactory(factory);
     }
 }

@@ -17,6 +17,8 @@
 #include <KColorScheme>
 // Qt
 #include <QApplication>
+// Std
+#include <utility>
 
 namespace Kasten {
 
@@ -43,7 +45,7 @@ ByteTableModel::ByteTableModel(QObject* parent)
 
 ByteTableModel::~ByteTableModel()
 {
-    for (auto* codec : qAsConst(mValueCodec)) {
+    for (auto* codec : std::as_const(mValueCodec)) {
         delete codec;
     }
 

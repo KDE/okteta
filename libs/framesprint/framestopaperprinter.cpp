@@ -13,6 +13,8 @@
 // Qt
 #include <QPainter>
 #include <QPrinter>
+// Std
+#include <utility>
 
 FramesToPaperPrinter::FramesToPaperPrinter() = default;
 
@@ -35,14 +37,14 @@ bool FramesToPaperPrinter::print(QPrinter* printer, int firstPageIndex, int last
 {
     bool success = true;
 
-    for (AbstractFrameRenderer* frameRenderer : qAsConst(mFrameRendererList)) {
+    for (AbstractFrameRenderer* frameRenderer : std::as_const(mFrameRendererList)) {
         frameRenderer->prepare();
     }
 
     QPainter painter(printer);
     int pageIndex = firstPageIndex;
     while (true) {
-        for (AbstractFrameRenderer* frameRenderer : qAsConst(mFrameRendererList)) {
+        for (AbstractFrameRenderer* frameRenderer : std::as_const(mFrameRendererList)) {
             const int x = frameRenderer->x();
             const int y = frameRenderer->y();
             painter.translate(x, y);

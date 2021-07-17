@@ -14,6 +14,8 @@
 #include "abstractcolumnrenderer.hpp"
 // Qt
 #include <QVector>
+// Std
+#include <utility>
 
 namespace Okteta {
 
@@ -63,7 +65,7 @@ inline ColumnsViewPrivate::~ColumnsViewPrivate()
 inline void ColumnsViewPrivate::updateWidths()
 {
     ColumnsWidth = 0;
-    for (auto* column : qAsConst(columns)) {
+    for (auto* column : std::as_const(columns)) {
         column->setX(ColumnsWidth);
         ColumnsWidth += column->visibleWidth();
     }

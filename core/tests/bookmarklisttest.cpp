@@ -13,6 +13,8 @@
 // Qt
 #include <QVector>
 #include <QTest>
+// Std
+#include <utility>
 
 using namespace Okteta;
 
@@ -223,7 +225,7 @@ void BookmarkListTest::testAdjustToSwapped()
     QVERIFY(!bookmarkList.isEmpty());
     QCOMPARE(bookmarkList.count(), 5);
     QVector<int>::ConstIterator oit = newOffsets.constBegin();
-    for (const Bookmark& bookmark : qAsConst(bookmarkList)) {
+    for (const Bookmark& bookmark : std::as_const(bookmarkList)) {
         QCOMPARE(bookmark.offset(), *oit++);
     }
 }

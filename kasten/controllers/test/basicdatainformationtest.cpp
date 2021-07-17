@@ -23,6 +23,7 @@
 #include <QTest>
 // Std
 #include <memory>
+#include <utility>
 
 struct ExpectedResults
 {
@@ -302,7 +303,7 @@ void BasicDataInformationTest::testBitfields()
     exp.isBitfield = true;
     exp.size = 24;
     exp.columnFlags[DataInformation::ColumnValue] = Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable;
-    for (auto* bitField : qAsConst(bitfields)) {
+    for (auto* bitField : std::as_const(bitfields)) {
         basicTest(bitField, exp);
     }
 }

@@ -18,6 +18,8 @@
 
 // Qt
 #include <QMimeData>
+// Std
+#include <utility>
 
 namespace Kasten {
 // TODO: catch area focus change!
@@ -160,7 +162,7 @@ void MultiViewAreasPrivate::onViewsRemoved()
                 }
             }
 
-            for (TabbedViews* viewArea : qAsConst(mViewAreaList)) {
+            for (TabbedViews* viewArea : std::as_const(mViewAreaList)) {
                 if (viewArea->widget() == otherWidget) {
                     viewArea->setFocus();
                     break;

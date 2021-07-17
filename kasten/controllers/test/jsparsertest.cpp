@@ -18,6 +18,7 @@
 // Std
 #include <memory>
 #include <functional>
+#include <utility>
 
 struct JsTestData
 {
@@ -133,7 +134,7 @@ void JsParserTest::testByteOrder_data()
     QTest::addColumn<JsTestData::CheckCallback>("checkFunction");
     QTest::addColumn<int>("expectedByteOrder");
     // verify that default is inherit
-    for (const JsTestData& data : qAsConst(allData)) {
+    for (const JsTestData& data : std::as_const(allData)) {
         // default should be inherit
         QString codeStr = QStringLiteral("%1;");
         QTest::newRow(data.tag.constData()) << codeStr.arg(data.constructorCall)
@@ -206,7 +207,7 @@ void JsParserTest::testUpdateFunc_data()
     QTest::addColumn<QString>("code");
     QTest::addColumn<JsTestData::CheckCallback>("checkFunction");
 
-    for (const JsTestData& data : qAsConst(allData)) {
+    for (const JsTestData& data : std::as_const(allData)) {
         QString codeStr = QStringLiteral("%1.setUpdate(") + updateFunction() + QStringLiteral(");");
         QTest::newRow((data.tag + "-setUpdate()").constData())
             << codeStr.arg(data.constructorCall) << data.check;
@@ -244,7 +245,7 @@ void JsParserTest::testValidationFunc_data()
     QTest::addColumn<QString>("code");
     QTest::addColumn<JsTestData::CheckCallback>("checkFunction");
 
-    for (const JsTestData& data : qAsConst(allData)) {
+    for (const JsTestData& data : std::as_const(allData)) {
         QString codeStr = QStringLiteral("%1.setValidation(") + validationFunction() + QStringLiteral(");");
         QTest::newRow((data.tag + "-setUpdate()").constData())
             << codeStr.arg(data.constructorCall) << data.check;
@@ -278,7 +279,7 @@ void JsParserTest::testName_data()
     QTest::addColumn<QString>("code");
     QTest::addColumn<JsTestData::CheckCallback>("checkFunction");
 
-    for (const JsTestData& data : qAsConst(allData)) {
+    for (const JsTestData& data : std::as_const(allData)) {
         QString codeStr = QStringLiteral("%1.set({name: \"expectedName\"});");
         QTest::newRow((data.tag + "-set()").constData())
             << codeStr.arg(data.constructorCall) << data.check;
@@ -305,7 +306,7 @@ void JsParserTest::testCustomTypeName_data()
     QTest::addColumn<QString>("code");
     QTest::addColumn<JsTestData::CheckCallback>("checkFunction");
 
-    for (const JsTestData& data : qAsConst(allData)) {
+    for (const JsTestData& data : std::as_const(allData)) {
         QString codeStr = QStringLiteral("%1.set({typeName: 'myCustomType'});");
         QTest::newRow((data.tag + "-set()").constData())
             << codeStr.arg(data.constructorCall) << data.check;

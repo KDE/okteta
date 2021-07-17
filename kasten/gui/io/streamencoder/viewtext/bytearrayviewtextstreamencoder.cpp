@@ -25,6 +25,8 @@
 #include <KLocalizedString>
 // Qt
 #include <QTextStream>
+// Std
+#include <utility>
 
 namespace Kasten {
 
@@ -105,7 +107,7 @@ bool ByteArrayViewTextStreamEncoder::encodeDataToStream(QIODevice* device,
     }
 
     int subLinesCount = 1;
-    for (const AbstractColumnTextRenderer* renderer : qAsConst(columnTextRendererList)) {
+    for (const AbstractColumnTextRenderer* renderer : std::as_const(columnTextRendererList)) {
         if (renderer->noOfSublinesNeeded() > subLinesCount) {
             subLinesCount = renderer->noOfSublinesNeeded();
         }
@@ -115,7 +117,7 @@ bool ByteArrayViewTextStreamEncoder::encodeDataToStream(QIODevice* device,
     QTextStream textStream(device);
 
     int l = coordRange.start().line();
-    for (const AbstractColumnTextRenderer* renderer : qAsConst(columnTextRendererList)) {
+    for (const AbstractColumnTextRenderer* renderer : std::as_const(columnTextRendererList)) {
         renderer->renderFirstLine(&textStream, l);
     }
 
@@ -131,7 +133,7 @@ bool ByteArrayViewTextStreamEncoder::encodeDataToStream(QIODevice* device,
             subLine = 0;
         }
         const bool isSubline = (subLine > 0);
-        for (const AbstractColumnTextRenderer* renderer : qAsConst(columnTextRendererList)) {
+        for (const AbstractColumnTextRenderer* renderer : std::as_const(columnTextRendererList)) {
             renderer->renderNextLine(&textStream, isSubline);
         }
 

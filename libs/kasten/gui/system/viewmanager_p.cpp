@@ -13,6 +13,8 @@
 #include "dummyview.hpp"
 // Qt
 #include <QMutableVectorIterator>
+// Std
+#include <utility>
 
 // temporary
 #include "modelcodecviewmanager.hpp"
@@ -113,7 +115,7 @@ void ViewManagerPrivate::removeViewsFor(const QVector<Kasten::AbstractDocument*>
 
     Q_EMIT q->closing(closedViews);
 
-    for (AbstractView* view : qAsConst(closedViews)) {
+    for (AbstractView* view : std::as_const(closedViews)) {
 //         qCDebug(LOG_KASTEN_GUI) << view->title();
         delete view;
     }

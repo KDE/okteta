@@ -23,6 +23,8 @@
 // Qt
 #include <QFileDialog>
 #include <QUrl>
+// Std
+#include <utility>
 
 namespace Kasten {
 
@@ -67,7 +69,7 @@ void ModelCodecManagerPrivate::setEncoders(const QVector<AbstractModelStreamEnco
     mExporterList.clear();
 
     mExporterList.reserve(mEncoderList.size());
-    for (AbstractModelStreamEncoder* encoder : qAsConst(mEncoderList)) {
+    for (AbstractModelStreamEncoder* encoder : std::as_const(mEncoderList)) {
         mExporterList << new ModelEncoderFileSystemExporter(encoder);
     }
 }

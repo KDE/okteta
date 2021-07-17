@@ -19,6 +19,8 @@
 #include "../scripthandlerinfo.hpp"
 #include "../safereference.hpp"
 #include "../../structlogging.hpp"
+// Std
+#include <utility>
 
 DefaultScriptClass::DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : QScriptClass(engine)
@@ -312,7 +314,7 @@ QScriptValue::PropertyFlags DefaultScriptClass::propertyFlags(const QScriptValue
         result |= QScriptValue::ReadOnly;
     }
 
-    for (const auto& property : qAsConst(mIterableProperties)) {
+    for (const auto& property : std::as_const(mIterableProperties)) {
         if (property.first == name) {
             return result | property.second;
         }

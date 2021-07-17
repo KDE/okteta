@@ -19,6 +19,8 @@
 #include <QFileInfo>
 #include <QDir>
 #include <QUuid>
+// Std
+#include <utility>
 
 namespace Kasten {
 QStringList viewProfileFileNameFilter() { return QStringList { QStringLiteral("*.obavp"), QStringLiteral("*.olock") }; }
@@ -479,7 +481,7 @@ ByteArrayViewProfileManager::onViewProfilesFolderChanged(const QString& viewProf
                             mViewProfiles.end());
     }
 
-    for (const ByteArrayViewProfile::Id& viewProfileId : qAsConst(removedViewProfileIds)) {
+    for (const ByteArrayViewProfile::Id& viewProfileId : std::as_const(removedViewProfileIds)) {
         viewProfileFileInfoLookup.remove(viewProfileId);
         if (viewProfileId == mDefaultViewProfileId) {
             mDefaultViewProfileId.clear();
@@ -540,7 +542,7 @@ void ByteArrayViewProfileManager::onDefaultViewProfileChanged(const QString& pat
     }
 
     bool isExisting = false;
-    for (const ByteArrayViewProfile& viewProfile : qAsConst(mViewProfiles)) {
+    for (const ByteArrayViewProfile& viewProfile : std::as_const(mViewProfiles)) {
         if (viewProfile.id() == viewProfileId) {
             isExisting = true;
             break;

@@ -13,6 +13,8 @@
 // Qt
 #include <QTest>
 #include <QBitArray>
+// Std
+#include <utility>
 
 namespace Okteta {
 
@@ -163,7 +165,7 @@ void ValueCodecTest::testAppendDigit()
     codec->encode(&digits, 0, byte);
 
     Byte decodedByte = 0;
-    for (auto d : qAsConst(digits)) {
+    for (auto d : std::as_const(digits)) {
         codec->appendDigit(&decodedByte, d.toLatin1());
     }
 
