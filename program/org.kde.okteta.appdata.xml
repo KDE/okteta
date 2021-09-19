@@ -260,7 +260,7 @@
       <li xml:lang="tr">Yüklenebilir ve saklanabilir profillerle özelleştirilebilir veri görünümleri</li>
       <li xml:lang="uk">Придатні до налаштовування панелі перегляду даних з можливістю завантаження та збереження профілів.</li>
       <li xml:lang="x-test">xxCustomizable data views, with loadable and storable profilesxx</li>
-      <li xml:lang="zh-CN">可自定义数据视图，装入和保存视图配置</li>
+      <li xml:lang="zh-CN">可自定义数据视图，加载和保存视图配置</li>
       <li xml:lang="zh-TW">客製化的資料檢視，可載入並儲存設定檔</li>
       <li>Tools dockable on all sides or floating</li>
       <li xml:lang="ca">Eines acoblables en totes les vores o flotants</li>
