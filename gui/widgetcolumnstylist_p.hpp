@@ -18,7 +18,7 @@ class WidgetColumnStylistPrivate : public AbstractColumnStylistPrivate
 {
 public:
     explicit WidgetColumnStylistPrivate(QWidget* mWidget);
-    ~WidgetColumnStylistPrivate();
+    ~WidgetColumnStylistPrivate() override;
 
 public:
     QWidget* widget() const;
