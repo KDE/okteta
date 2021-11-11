@@ -56,6 +56,7 @@ public: // Q_SLOTS:
     void onTitleChanged(const QString& newTitle);
 //     void onModifiedChanged( Kasten::AbstractDocument::SyncStates newStates );
     void onViewFocusChanged(bool focusChanged);
+    void onContextMenuRequested(QPoint pos);
     void onMouseMiddleClick();
     void onDragMoveEvent(const QDragMoveEvent* event, bool& accept);
     void onDropEvent(QDropEvent* event);

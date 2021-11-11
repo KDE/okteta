@@ -16,6 +16,7 @@
 // Qt
 #include <QDragMoveEvent>
 #include <QDropEvent>
+#include <QTabBar>
 #include <QApplication>
 #include <QClipboard>
 
@@ -36,6 +37,7 @@ void TabbedViewsPrivate::init()
     Q_Q(TabbedViews);
 
     mTabWidget = new TabWidget();
+    mTabWidget->setContextMenuPolicy(Qt::CustomContextMenu);
 
     mViewAreaBox = new ViewAreaBox(mTabWidget);
 
@@ -43,6 +45,9 @@ void TabbedViewsPrivate::init()
                      q, [&](int index) { onTabCloseRequest(index); });
     QObject::connect(mTabWidget, &QTabWidget::currentChanged,
                      q, [&](int index) { onCurrentChanged(index); });
+
+    QObject::connect(mTabWidget, &QWidget::customContextMenuRequested,
+                     q, [&](const QPoint& pos) { onContextMenuRequested(pos); });
 
     QObject::connect(mTabWidget, &TabWidget::testCanDecode,
                      q, [&](const QDragMoveEvent* event, bool& accept) { onDragMoveEvent(event, accept); });
@@ -235,6 +240,21 @@ void TabbedViewsPrivate::onViewFocusChanged(bool hasFocus)
 // qCDebug(LOG_KASTEN_GUI)<<view<<view->title()<<hasFocus;
 
     emit q->focusChanged(hasFocus);
+}
+
+void TabbedViewsPrivate::onContextMenuRequested(QPoint pos)
+{
+    Q_Q(TabbedViews);
+
+    AbstractView* view = nullptr;
+    QTabBar* tabBar = mTabWidget->tabBar();
+    const int tabIndex = tabBar->tabAt(tabBar->mapFrom(mTabWidget, pos));
+    if (tabIndex != -1) {
+        const QWidget* widget = mTabWidget->widget(tabIndex);
+        const auto* viewBox = static_cast<const ViewBox*>(widget);
+        view = viewBox->view();
+    }
+    emit q->contextMenuRequested(view, mTabWidget->mapTo(mViewAreaBox, pos));
 }
 
 void TabbedViewsPrivate::onMouseMiddleClick()

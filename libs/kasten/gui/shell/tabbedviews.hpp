@@ -59,6 +59,7 @@ public:
 Q_SIGNALS:
     void dataOffered(const QMimeData* mimeData, bool& accepted);
     void dataDropped(const QMimeData* mimeData);
+    void contextMenuRequested(AbstractView* view, QPoint pos);
 
 private:
     Q_DECLARE_PRIVATE(TabbedViews)

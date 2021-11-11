@@ -75,6 +75,7 @@
 #include <Kasten/ZoomControllerFactory>
 #include <Kasten/ZoomBarControllerFactory>
 #include <Kasten/SelectControllerFactory>
+#include <Kasten/ViewAreaContextMenuControllerFactory>
 #include <Kasten/SwitchViewControllerFactory>
 #include <Kasten/ViewListMenuControllerFactory>
 #include <Kasten/ViewAreaSplitControllerFactory>
@@ -170,6 +171,7 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiControllerFromFactory(CloseControllerFactory(documentStrategy));
     addXmlGuiControllerFromFactory(VersionControllerFactory());
     addXmlGuiControllerFromFactory(ReadOnlyControllerFactory());
+    addXmlGuiControllerFromFactory(ViewAreaContextMenuControllerFactory(viewArea, syncManager));
     addXmlGuiControllerFromFactory(SwitchViewControllerFactory(viewArea));
     addXmlGuiControllerFromFactory(ViewAreaSplitControllerFactory(viewManager, viewArea));
     addXmlGuiControllerFromFactory(FullScreenControllerFactory(this));

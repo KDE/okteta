@@ -1,5 +1,5 @@
 <!DOCTYPE gui SYSTEM "kpartgui.dtd">
-<gui name="Okteta" version="6">
+<gui name="Okteta" version="7">
 <MenuBar>
   <Menu name="file">
     <Action name="connect_to" append="open_merge" />
@@ -106,5 +106,14 @@
   <Action name="edit_select_all"/>
   <Action name="edit_deselect"/>
   <Action name="edit_select"/>
+</Menu>
+
+<Menu name="viewAreaContextMenu">
+  <Action name="file_new"/>
+  <Action name="viewarea_reload"/>
+  <Separator/>
+  <Action name="viewarea_close"/>
+  <Action name="viewarea_close_all_other"/>
+  <Action name="viewarea_close_all"/>
 </Menu>
 </gui>
