@@ -37,6 +37,7 @@ void TabbedViewsPrivate::init()
     Q_Q(TabbedViews);
 
     mTabWidget = new TabWidget();
+    mTabWidget->setMovable(true);
     mTabWidget->setContextMenuPolicy(Qt::CustomContextMenu);
 
     mViewAreaBox = new ViewAreaBox(mTabWidget);
