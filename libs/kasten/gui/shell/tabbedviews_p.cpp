@@ -56,6 +56,8 @@ void TabbedViewsPrivate::init()
                      q, [&](QDropEvent* event) { onDropEvent(event); });
     QObject::connect(mTabWidget, &TabWidget::mouseMiddleClick,
                      q, [&]() { onMouseMiddleClick(); });
+    QObject::connect(mTabWidget, &TabWidget::emptySpaceMouseDoubleClicked,
+                     q, [&]() { onEmptySpaceMouseDoubleClicked(); });
 }
 
 QVector<AbstractView*> TabbedViewsPrivate::viewList() const
@@ -265,6 +267,13 @@ void TabbedViewsPrivate::onMouseMiddleClick()
     const QMimeData* mimeData = QApplication::clipboard()->mimeData(QClipboard::Selection);
 
     emit q->dataDropped(mimeData);
+}
+
+void TabbedViewsPrivate::onEmptySpaceMouseDoubleClicked()
+{
+    Q_Q(TabbedViews);
+
+    emit q->newDocumentRequested();
 }
 
 void TabbedViewsPrivate::onDragMoveEvent(const QDragMoveEvent* event, bool& accepted)

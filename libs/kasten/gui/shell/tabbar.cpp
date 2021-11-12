@@ -19,6 +19,12 @@ TabBar::TabBar(QWidget* parent)
     : QTabBar(parent)
 {
     setAcceptDrops(true);
+
+    // catch non-LMB double clicks
+    installEventFilter(this);
+
+    connect(this, &QTabBar::tabBarDoubleClicked,
+            this, &TabBar::onTabBarDoubleClicked);
 }
 
 TabBar::~TabBar() = default;
@@ -73,6 +79,30 @@ void TabBar::dropEvent(QDropEvent* event)
     }
 
     QTabBar::dropEvent(event);
+}
+
+
+bool TabBar::eventFilter(QObject* object, QEvent* event)
+{
+    if (object == this) {
+        // TODO Qt6: Move to mouseDoubleClickEvent when fixme in qttabbar.cpp is resolved
+        // see "fixme Qt 6: move to mouseDoubleClickEvent(), here for BC reasons." in qtabbar.cpp
+        if (event->type() == QEvent::MouseButtonDblClick) {
+            // block tabBarDoubleClicked signals with RMB, see https://bugs.kde.org/show_bug.cgi?id=356016
+            auto* mouseEvent = static_cast<const QMouseEvent*>(event);
+            if (mouseEvent->button() != Qt::LeftButton) {
+                return true;
+            }
+        }
+    }
+    return QObject::eventFilter(object, event);
+}
+
+void TabBar::onTabBarDoubleClicked(int index)
+{
+    if (index == -1) {
+        emit emptySpaceMouseDoubleClicked();
+    }
 }
 
 }

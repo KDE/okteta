@@ -25,11 +25,13 @@ public:
 
 Q_SIGNALS:
     void mouseMiddleClick();
+    void emptySpaceMouseDoubleClicked();
     void testCanDecode(const QDragMoveEvent* event, bool& accept);
     void receivedDropEvent(QDropEvent* event);
 
 protected:
     void mouseReleaseEvent(QMouseEvent* event) override;
+    void mouseDoubleClickEvent(QMouseEvent* event) override;
     void dragEnterEvent(QDragEnterEvent* event) override;
     void dragMoveEvent(QDragMoveEvent* event) override;
     void dropEvent(QDropEvent* event) override;

@@ -58,6 +58,7 @@ public: // Q_SLOTS:
     void onViewFocusChanged(bool focusChanged);
     void onContextMenuRequested(QPoint pos);
     void onMouseMiddleClick();
+    void onEmptySpaceMouseDoubleClicked();
     void onDragMoveEvent(const QDragMoveEvent* event, bool& accept);
     void onDropEvent(QDropEvent* event);
 

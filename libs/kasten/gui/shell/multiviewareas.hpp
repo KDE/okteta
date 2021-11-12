@@ -69,6 +69,7 @@ Q_SIGNALS:
     void dataOffered(const QMimeData* mimeData, bool& accepted);
     void dataDropped(const QMimeData* mimeData);
     void contextMenuRequested(AbstractGroupedViews* viewArea, AbstractView* view, QPoint pos);
+    void newDocumentRequested();
 
 private:
     int indexOf(AbstractView* view) const;

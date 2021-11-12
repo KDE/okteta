@@ -55,6 +55,8 @@ void MultiViewAreasPrivate::init()
                      q, &MultiViewAreas::dataOffered);
     QObject::connect(viewArea, &TabbedViews::dataDropped,
                      q, &MultiViewAreas::dataDropped);
+    QObject::connect(viewArea, &TabbedViews::newDocumentRequested,
+                     q, &MultiViewAreas::newDocumentRequested);
 
     mViewAreaList.append(viewArea);
     mCurrentViewArea = viewArea;

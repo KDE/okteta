@@ -120,6 +120,8 @@ OktetaMainWindow::OktetaMainWindow(OktetaProgram* program)
             this, &OktetaMainWindow::onDataOffered);
     connect(viewArea(), &MultiViewAreas::dataDropped,
             this, &OktetaMainWindow::onDataDropped);
+    connect(viewArea(), &MultiViewAreas::newDocumentRequested,
+            this, &OktetaMainWindow::onNewDocumentRequested);
     connect(viewArea(), &AbstractGroupedViews::closeRequest,
             this, &OktetaMainWindow::onCloseRequest);
 
@@ -301,6 +303,11 @@ void OktetaMainWindow::onDataDropped(const QMimeData* mimeData)
     } else {
         documentManager->createManager()->createNewFromData(mimeData, true);
     }
+}
+
+void OktetaMainWindow::onNewDocumentRequested()
+{
+    mProgram->documentManager()->createManager()->createNew();
 }
 
 void OktetaMainWindow::onCloseRequest(const QVector<Kasten::AbstractView*>& views)
