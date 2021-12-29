@@ -58,7 +58,12 @@ QString StringsExtractTool::title() const { return i18nc("@title:window of the t
 void StringsExtractTool::setTargetModel(AbstractModel* model)
 {
     if (mByteArrayView) {
-        mByteArrayView->disconnect(this);
+        // disconnect explicitly from all connects but QObject::detroyed,
+        // for the case mSourceByteArrayView is mByteArrayView
+        disconnect(mByteArrayView,  &ByteArrayView::selectedDataChanged,
+                   this, &StringsExtractTool::onSelectionChanged);
+        disconnect(mByteArrayView, &ByteArrayView::offsetCodingChanged,
+                   this, &StringsExtractTool::offsetCodingChanged);
     }
 
     mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;

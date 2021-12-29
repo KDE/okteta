@@ -50,10 +50,15 @@ void MultiViewAreasPrivate::init()
                      q, &AbstractGroupedViews::closeRequest);
     QObject::connect(viewArea, &AbstractGroupedViews::removing,
                      q, [&]() { onViewsRemoved(); });
+
+    QObject::connect(viewArea, &TabbedViews::contextMenuRequested,
+                     q, [&](AbstractView* view, QPoint pos) { onContextMenuRequested(view, pos); });
     QObject::connect(viewArea, &TabbedViews::dataOffered,
                      q, &MultiViewAreas::dataOffered);
     QObject::connect(viewArea, &TabbedViews::dataDropped,
                      q, &MultiViewAreas::dataDropped);
+    QObject::connect(viewArea, &TabbedViews::newDocumentRequested,
+                     q, &MultiViewAreas::newDocumentRequested);
 
     mViewAreaList.append(viewArea);
     mCurrentViewArea = viewArea;
@@ -90,6 +95,9 @@ AbstractViewArea* MultiViewAreasPrivate::splitViewArea(AbstractViewArea* _viewAr
                      q, &AbstractGroupedViews::closeRequest);
     QObject::connect(secondViewArea, &AbstractGroupedViews::removing,
                      q, [&]() { onViewsRemoved(); });
+
+    QObject::connect(secondViewArea, &TabbedViews::contextMenuRequested,
+                     q, [&](AbstractView* view, QPoint pos) { onContextMenuRequested(view, pos); });
     QObject::connect(secondViewArea, &TabbedViews::dataOffered,
                      q, &MultiViewAreas::dataOffered);
     QObject::connect(secondViewArea, &TabbedViews::dataDropped,
@@ -198,6 +206,16 @@ void MultiViewAreasPrivate::onViewAreaFocusChanged(bool hasFocus)
         Q_EMIT q->viewAreaFocusChanged(viewArea);
         Q_EMIT q->viewFocusChanged(viewArea->viewFocus());
     }
+}
+
+void MultiViewAreasPrivate::onContextMenuRequested(AbstractView* view, QPoint pos)
+{
+    Q_Q(MultiViewAreas);
+
+    auto* viewArea = qobject_cast<TabbedViews*>(q->sender());
+
+    auto* viewAreaWidget = viewArea->widget();
+    Q_EMIT q->contextMenuRequested(viewArea, view, viewAreaWidget->mapTo(mMainSplitter, pos));
 }
 
 #if 0

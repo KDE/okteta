@@ -24,6 +24,7 @@ public:
 
 Q_SIGNALS:
     void mouseMiddleClick();
+    void emptySpaceMouseDoubleClicked();
     void testCanDecode(const QDragMoveEvent* event, bool& accept);
     void receivedDropEvent(QDropEvent* event);
 
@@ -32,6 +33,10 @@ protected:
     void dragEnterEvent(QDragEnterEvent* event) override;
     void dragMoveEvent(QDragMoveEvent* event) override;
     void dropEvent(QDropEvent* event) override;
+    bool eventFilter(QObject* object, QEvent* event) override;
+
+private:
+    void onTabBarDoubleClicked(int index);
 };
 
 }

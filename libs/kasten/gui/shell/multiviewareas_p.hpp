@@ -66,6 +66,7 @@ private:
 private:  // slots
     void onViewsRemoved();
     void onViewAreaFocusChanged(bool hasFocus);
+    void onContextMenuRequested(AbstractView* view, QPoint pos);
 
 private:
     Q_DECLARE_PUBLIC(MultiViewAreas)

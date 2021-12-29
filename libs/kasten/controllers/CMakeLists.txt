@@ -184,6 +184,13 @@ kastencontrollers_add_sublibrary(io/export
 # set( CLOSECONTROLLER_SRCS
 #   viewsystem/close/closecontroller.cpp
 # )
+kastencontrollers_add_sublibrary(shellwindow/viewareacontextmenu
+    PUBLIC
+        ViewAreaContextMenuControllerFactory
+    PRIVATE
+        ViewAreaContextMenuController
+)
+
 kastencontrollers_add_sublibrary(shellwindow/switchview
     PUBLIC
         SwitchViewControllerFactory

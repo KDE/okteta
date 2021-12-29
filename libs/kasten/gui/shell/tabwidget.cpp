@@ -29,6 +29,8 @@ TabWidget::TabWidget(QWidget* parent)
             this, &TabWidget::receivedDropEvent);
     connect(tabBar, &TabBar::mouseMiddleClick,
             this, &TabWidget::mouseMiddleClick);
+    connect(tabBar, &TabBar::emptySpaceMouseDoubleClicked,
+            this, &TabWidget::emptySpaceMouseDoubleClicked);
 
     setTabsClosable(true);
     setDocumentMode(true);
@@ -48,6 +50,17 @@ void TabWidget::mouseReleaseEvent(QMouseEvent* event)
     }
 
     QTabWidget::mouseReleaseEvent(event);
+}
+
+void TabWidget::mouseDoubleClickEvent(QMouseEvent *event)
+{
+    if ((count() == 0) && (event->button() == Qt::LeftButton)) {
+        Q_EMIT emptySpaceMouseDoubleClicked();
+        event->setAccepted(true);
+        return;
+    }
+
+    QTabWidget::mouseDoubleClickEvent(event);
 }
 
 void TabWidget::dragEnterEvent(QDragEnterEvent* event)

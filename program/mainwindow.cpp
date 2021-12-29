@@ -75,6 +75,7 @@
 #include <Kasten/ZoomControllerFactory>
 #include <Kasten/ZoomBarControllerFactory>
 #include <Kasten/SelectControllerFactory>
+#include <Kasten/ViewAreaContextMenuControllerFactory>
 #include <Kasten/SwitchViewControllerFactory>
 #include <Kasten/ViewListMenuControllerFactory>
 #include <Kasten/ViewAreaSplitControllerFactory>
@@ -117,6 +118,8 @@ OktetaMainWindow::OktetaMainWindow(OktetaProgram* program)
             this, &OktetaMainWindow::onDataOffered);
     connect(viewArea(), &MultiViewAreas::dataDropped,
             this, &OktetaMainWindow::onDataDropped);
+    connect(viewArea(), &MultiViewAreas::newDocumentRequested,
+            this, &OktetaMainWindow::onNewDocumentRequested);
     connect(viewArea(), &AbstractGroupedViews::closeRequest,
             this, &OktetaMainWindow::onCloseRequest);
 
@@ -168,6 +171,7 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiControllerFromFactory(CloseControllerFactory(documentStrategy));
     addXmlGuiControllerFromFactory(VersionControllerFactory());
     addXmlGuiControllerFromFactory(ReadOnlyControllerFactory());
+    addXmlGuiControllerFromFactory(ViewAreaContextMenuControllerFactory(viewArea, syncManager));
     addXmlGuiControllerFromFactory(SwitchViewControllerFactory(viewArea));
     addXmlGuiControllerFromFactory(ViewAreaSplitControllerFactory(viewManager, viewArea));
     addXmlGuiControllerFromFactory(FullScreenControllerFactory(this));
@@ -295,6 +299,11 @@ void OktetaMainWindow::onDataDropped(const QMimeData* mimeData)
     } else {
         documentManager->createManager()->createNewFromData(mimeData, true);
     }
+}
+
+void OktetaMainWindow::onNewDocumentRequested()
+{
+    mProgram->documentManager()->createManager()->createNew();
 }
 
 void OktetaMainWindow::onCloseRequest(const QVector<Kasten::AbstractView*>& views)

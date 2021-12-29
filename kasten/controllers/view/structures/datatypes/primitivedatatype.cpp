@@ -9,10 +9,23 @@
 #include "primitivedatatype.hpp"
 #include "structureviewpreferences.hpp"
 
+#include <ki18n_version.h>
+#if KI18N_VERSION >= QT_VERSION_CHECK(5, 89, 0)
+#include <KLazyLocalizedString>
+#endif
 #include <KLocalizedString>
 #include <QDebug>
 
+#if KI18N_VERSION >= QT_VERSION_CHECK(5, 89, 0)
+#undef I18N_NOOP2
+#define I18N_NOOP2 kli18nc
+#endif
+
+#if KI18N_VERSION >= QT_VERSION_CHECK(5, 89, 0)
+static constexpr const KLazyLocalizedString longTypeNames[static_cast<int>(PrimitiveDataType::END) + 1] = {
+#else
 static constexpr const char* longTypeNames[static_cast<int>(PrimitiveDataType::END) + 1] = {
+#endif
     I18N_NOOP2("data type", "bool (1 byte)"),
     I18N_NOOP2("data type", "signed byte"),
     I18N_NOOP2("data type", "unsigned byte"),
@@ -71,7 +84,11 @@ QString PrimitiveType::standardTypeName(PrimitiveDataType type)
 QString PrimitiveType::longTypeName(PrimitiveDataType type)
 {
     if (type >= PrimitiveDataType::START && type <= PrimitiveDataType::END) {
+#if KI18N_VERSION >= QT_VERSION_CHECK(5, 89, 0)
+        return longTypeNames[static_cast<int>(type)].toString();
+#else
         return i18nc("data type", longTypeNames[static_cast<int>(type)]);
+#endif
     }
 
     return i18n("invalid type");

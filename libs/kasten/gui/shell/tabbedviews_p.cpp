@@ -16,6 +16,7 @@
 // Qt
 #include <QDragMoveEvent>
 #include <QDropEvent>
+#include <QTabBar>
 #include <QApplication>
 #include <QClipboard>
 
@@ -36,6 +37,8 @@ void TabbedViewsPrivate::init()
     Q_Q(TabbedViews);
 
     mTabWidget = new TabWidget();
+    mTabWidget->setMovable(true);
+    mTabWidget->setContextMenuPolicy(Qt::CustomContextMenu);
 
     mViewAreaBox = new ViewAreaBox(mTabWidget);
 
@@ -44,12 +47,17 @@ void TabbedViewsPrivate::init()
     QObject::connect(mTabWidget, &QTabWidget::currentChanged,
                      q, [&](int index) { onCurrentChanged(index); });
 
+    QObject::connect(mTabWidget, &QWidget::customContextMenuRequested,
+                     q, [&](const QPoint& pos) { onContextMenuRequested(pos); });
+
     QObject::connect(mTabWidget, &TabWidget::testCanDecode,
                      q, [&](const QDragMoveEvent* event, bool& accept) { onDragMoveEvent(event, accept); });
     QObject::connect(mTabWidget, &TabWidget::receivedDropEvent,
                      q, [&](QDropEvent* event) { onDropEvent(event); });
     QObject::connect(mTabWidget, &TabWidget::mouseMiddleClick,
                      q, [&]() { onMouseMiddleClick(); });
+    QObject::connect(mTabWidget, &TabWidget::emptySpaceMouseDoubleClicked,
+                     q, [&]() { onEmptySpaceMouseDoubleClicked(); });
 }
 
 QVector<AbstractView*> TabbedViewsPrivate::viewList() const
@@ -237,6 +245,21 @@ void TabbedViewsPrivate::onViewFocusChanged(bool hasFocus)
     Q_EMIT q->focusChanged(hasFocus);
 }
 
+void TabbedViewsPrivate::onContextMenuRequested(QPoint pos)
+{
+    Q_Q(TabbedViews);
+
+    AbstractView* view = nullptr;
+    QTabBar* tabBar = mTabWidget->tabBar();
+    const int tabIndex = tabBar->tabAt(tabBar->mapFrom(mTabWidget, pos));
+    if (tabIndex != -1) {
+        const QWidget* widget = mTabWidget->widget(tabIndex);
+        const auto* viewBox = static_cast<const ViewBox*>(widget);
+        view = viewBox->view();
+    }
+    Q_EMIT q->contextMenuRequested(view, mTabWidget->mapTo(mViewAreaBox, pos));
+}
+
 void TabbedViewsPrivate::onMouseMiddleClick()
 {
     Q_Q(TabbedViews);
@@ -244,6 +267,13 @@ void TabbedViewsPrivate::onMouseMiddleClick()
     const QMimeData* mimeData = QApplication::clipboard()->mimeData(QClipboard::Selection);
 
     Q_EMIT q->dataDropped(mimeData);
+}
+
+void TabbedViewsPrivate::onEmptySpaceMouseDoubleClicked()
+{
+    Q_Q(TabbedViews);
+
+    Q_EMIT q->newDocumentRequested();
 }
 
 void TabbedViewsPrivate::onDragMoveEvent(const QDragMoveEvent* event, bool& accepted)

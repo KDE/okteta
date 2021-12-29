@@ -47,6 +47,7 @@ private Q_SLOTS:
     void onDataOffered(const QMimeData* mimeData, bool& accept);
     void onDataDropped(const QMimeData* mimeData);
     void onCloseRequest(const QVector<Kasten::AbstractView*>& views);
+    void onNewDocumentRequested();
 
 private:
     OktetaProgram* mProgram;

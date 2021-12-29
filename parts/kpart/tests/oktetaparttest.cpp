@@ -17,7 +17,7 @@
 void OktetaPartTest::testPartReuseWithAnotherUrl()
 {
     KPluginFactory* factory = new OktetaPartFactory();
-    auto* part = factory->create<KParts::ReadOnlyPart>(nullptr, nullptr);
+    auto* part = factory->create<KParts::ReadOnlyPart>(nullptr, nullptr, QVariantList());
     QVERIFY(part != nullptr);
 
     const QUrl url1 = QUrl::fromLocalFile(QStringLiteral(TESTPATH1));
