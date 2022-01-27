@@ -34,7 +34,7 @@ OktetaPartFactory::OktetaPartFactory()
                  QStringLiteral(OKTETA_VERSION),
                  i18n("Embedded hex editor"),
                  KAboutLicense::LGPL_V2_1,
-                 i18n("Copyright 2003-%1 Friedrich W. H. Kossebau", QStringLiteral("2021")))
+                 i18n("Copyright 2003-%1 Friedrich W. H. Kossebau", QStringLiteral("2022")))
 {
     mAboutData.addAuthor(i18n("Friedrich W. H. Kossebau"), i18n("Author"), QStringLiteral("kossebau@kde.org"));
 #endif
