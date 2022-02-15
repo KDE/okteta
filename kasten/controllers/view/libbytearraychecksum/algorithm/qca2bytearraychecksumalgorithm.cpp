@@ -24,8 +24,8 @@
 // Qt
 #include <QByteArray>
 
-Qca2ByteArrayChecksumAlgorithm::Qca2ByteArrayChecksumAlgorithm(const QString& name, const QString& type)
-    : AbstractByteArrayChecksumAlgorithm(name)
+Qca2ByteArrayChecksumAlgorithm::Qca2ByteArrayChecksumAlgorithm(const QString& name, const QString& id, const QString& type)
+    : AbstractByteArrayChecksumAlgorithm(name, id)
     , mType(type)
 {}
 

@@ -12,6 +12,8 @@
 // lib
 #include "abstractbytearrayfilterparameterset.hpp"
 
+class KConfigGroup;
+
 class RotateByteArrayFilterParameterSet : public AbstractByteArrayFilterParameterSet
 {
 public:
@@ -28,6 +30,10 @@ public:
 public:
     int groupSize() const;
     int moveBitWidth() const;
+
+public:
+    void loadConfig(const KConfigGroup& configGroup);
+    void saveConfig(KConfigGroup& configGroup) const;
 
 private:
     int mGroupSize = 1;

@@ -39,6 +39,7 @@ public Q_SLOTS:
 private Q_SLOTS:
     void setFixedFontByGlobalSettings();
     void resizeColumnsWidth();
+    void onInsertCountEditChanged();
 
 private:
     ByteTableTool* mTool;

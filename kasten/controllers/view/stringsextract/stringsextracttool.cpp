@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    SPDX-FileCopyrightText: 2007-2009, 2012 Friedrich W. H. Kossebau <kossebau@kde.org>
+    SPDX-FileCopyrightText: 2007-2009, 2012, 2022 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
@@ -19,6 +19,8 @@
 #include <Okteta/AbstractByteArrayModel>
 #include <Okteta/ArrayChangeMetricsList>
 // KF
+#include <KConfigGroup>
+#include <KSharedConfig>
 #include <KLocalizedString>
 // Qt
 #include <QApplication>
@@ -27,12 +29,18 @@ namespace Kasten {
 
 static constexpr int DefaultMinLength = 3;
 
+static constexpr char StringsExtractConfigGroupId[] = "StringsExtractTool";
+static constexpr char MinimumLengthConfigKey[] = "MinimumLength";
+
 StringsExtractTool::StringsExtractTool()
     : mExtractedStringsUptodate(false)
     , mSourceByteArrayModelUptodate(false)
-    , mMinLength(DefaultMinLength)
 {
     setObjectName(QStringLiteral("Strings"));
+
+    const KConfigGroup configGroup(KSharedConfig::openConfig(), StringsExtractConfigGroupId);
+
+    mMinLength = configGroup.readEntry(MinimumLengthConfigKey, DefaultMinLength);
 }
 
 StringsExtractTool::~StringsExtractTool() = default;
@@ -98,7 +106,15 @@ int StringsExtractTool::offsetCoding() const { return (mByteArrayView ? mByteArr
 
 void StringsExtractTool::setMinLength(int minLength)
 {
+    if (mMinLength == minLength) {
+        return;
+    }
+
     mMinLength = minLength;
+
+    KConfigGroup configGroup(KSharedConfig::openConfig(), StringsExtractConfigGroupId);
+    configGroup.writeEntry(MinimumLengthConfigKey, mMinLength);
+
     checkUptoDate();
     emit uptodateChanged(mExtractedStringsUptodate);
 }

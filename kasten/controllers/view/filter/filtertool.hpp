@@ -41,15 +41,21 @@ public: // AbstractTool API
     void setTargetModel(AbstractModel* model) override;
 
 public:
-    void filter(int filterId) const;
+    int filterId() const;
     bool hasWriteable() const;
     QVector<AbstractByteArrayFilter*> filterList() const;
 
 public:
     QString charCodecName() const;
     AbstractByteArrayFilterParameterSet* parameterSet(int filterId);
+    void saveParameterSet(int filterId);
+
+public Q_SLOTS:
+    void filter() const;
+    void setFilter(int filterId);
 
 Q_SIGNALS:
+    void filterChanged(int filterId);
     void hasWriteableChanged(bool hasWriteable);
     void charCodecChanged(const QString& charCodecName);
 
@@ -62,7 +68,11 @@ private:
     bool mHasWritable = false;
 
     QVector<AbstractByteArrayFilter*> mFilterList;
+
+    int mFilterId = 0;
 };
+
+inline int FilterTool::filterId() const { return mFilterId; }
 
 }
 

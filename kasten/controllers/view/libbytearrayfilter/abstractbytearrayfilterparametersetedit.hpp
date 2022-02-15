@@ -36,6 +36,7 @@ public: // API to be implemented
 
 Q_SIGNALS:
     void validityChanged(bool isValid);
+    void valuesChanged();
 
 private:
     QScopedPointer<class AbstractByteArrayFilterParameterSetEditPrivate> const d;

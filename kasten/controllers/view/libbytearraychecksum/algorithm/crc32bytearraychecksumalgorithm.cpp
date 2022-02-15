@@ -64,7 +64,9 @@ inline const quint32& Crc32LookupTable::operator[](int i) const { return mTable[
 
 Crc32ByteArrayChecksumAlgorithm::Crc32ByteArrayChecksumAlgorithm()
     : AbstractByteArrayChecksumAlgorithm(
-        i18nc("name of the checksum algorithm, Cyclic Redundancy Check 32", "CRC-32"))
+        i18nc("name of the checksum algorithm, Cyclic Redundancy Check 32", "CRC-32"),
+        QStringLiteral("CRC32")
+      )
 {}
 
 Crc32ByteArrayChecksumAlgorithm::~Crc32ByteArrayChecksumAlgorithm() = default;

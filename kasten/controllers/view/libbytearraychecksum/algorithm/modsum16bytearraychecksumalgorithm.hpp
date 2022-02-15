@@ -25,6 +25,8 @@ public:
 public: // AbstractByteArrayChecksumAlgorithm API
     bool calculateChecksum(QString* result, const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const override;
     AbstractByteArrayChecksumParameterSet* parameterSet() override;
+    void loadConfig(const KConfigGroup& configGroup) override;
+    void saveConfig(KConfigGroup& configGroup) const override;
 
 private:
     quint16 calculateModSumWithBigEndian(const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const;

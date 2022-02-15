@@ -12,6 +12,8 @@
 // lib
 #include "abstractbytearraychecksumparameterset.hpp"
 
+class KConfigGroup;
+
 enum class Crc64Variant
 {
     ECMA182 = 0,
@@ -32,6 +34,10 @@ public:
 
 public:
     Crc64Variant crc64Variant() const;
+
+public:
+    void loadConfig(const KConfigGroup& configGroup);
+    void saveConfig(KConfigGroup& configGroup) const;
 
 private:
     Crc64Variant mVariant = Crc64Variant::ECMA182;

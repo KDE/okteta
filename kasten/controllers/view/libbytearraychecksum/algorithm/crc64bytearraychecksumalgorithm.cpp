@@ -2,6 +2,7 @@
     This file is part of the Okteta Kasten module, made within the KDE community.
 
     SPDX-FileCopyrightText: 2019 Lars Maier <lars.maier@tefax.net>
+    SPDX-FileCopyrightText: 2022 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
@@ -11,7 +12,10 @@
 // Okteta core
 #include <Okteta/AbstractByteArrayModel>
 // KF
+#include <KConfigGroup>
 #include <KLocalizedString>
+
+static constexpr char Crc64ChecksumConfigGroupId[] = "CRC64";
 
 struct Crc64AlgorithmSpec
 {
@@ -75,13 +79,29 @@ static uchar reflect8(uchar x)
 
 Crc64ByteArrayChecksumAlgorithm::Crc64ByteArrayChecksumAlgorithm()
     : AbstractByteArrayChecksumAlgorithm(
-        i18nc("name of the checksum algorithm, Cyclic Redundancy Check 64", "CRC-64"))
+          i18nc("name of the checksum algorithm, Cyclic Redundancy Check 64", "CRC-64"),
+          QStringLiteral("CRC64")
+      )
 {}
 
 Crc64ByteArrayChecksumAlgorithm::~Crc64ByteArrayChecksumAlgorithm() = default;
 
 AbstractByteArrayChecksumParameterSet*
 Crc64ByteArrayChecksumAlgorithm::parameterSet() { return &mParameterSet; }
+
+void Crc64ByteArrayChecksumAlgorithm::loadConfig(const KConfigGroup& configGroup)
+{
+    const KConfigGroup algorithmConfigGroup = configGroup.group(Crc64ChecksumConfigGroupId);
+
+    mParameterSet.loadConfig(algorithmConfigGroup);
+}
+
+void Crc64ByteArrayChecksumAlgorithm::saveConfig(KConfigGroup& configGroup) const
+{
+    KConfigGroup algorithmConfigGroup = configGroup.group(Crc64ChecksumConfigGroupId);
+
+    mParameterSet.saveConfig(algorithmConfigGroup);
+}
 
 bool Crc64ByteArrayChecksumAlgorithm::calculateChecksum(QString* result,
                                                         const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const

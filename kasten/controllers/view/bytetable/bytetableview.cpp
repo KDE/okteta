@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    SPDX-FileCopyrightText: 2007, 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    SPDX-FileCopyrightText: 2007, 2009, 2022 Friedrich W. H. Kossebau <kossebau@kde.org>
     SPDX-FileCopyrightText: 2011 Alex Richardson <alex.richardson@gmx.de>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
@@ -27,6 +27,12 @@
 #include <QTreeView>
 
 namespace Kasten {
+
+// TODO: move config store/restore to tool
+static constexpr int DefaultInsertCount = 1;
+
+static constexpr char ByteTableConfigGroupId[] = "ByteTableTool";
+static constexpr char InsertCountConfigKey[] = "InsertCount";
 
 ByteTableView::ByteTableView(ByteTableTool* tool, QWidget* parent)
     : AbstractToolWidget(parent)
@@ -67,7 +73,6 @@ ByteTableView::ByteTableView(ByteTableTool* tool, QWidget* parent)
 
     mInsertCountEdit = new QSpinBox(this);
     mInsertCountEdit->setRange(1, INT_MAX);
-    mInsertCountEdit->setValue(1);
     label->setBuddy(mInsertCountEdit);
     insertLayout->addWidget(mInsertCountEdit);
     const QString insertCountToolTip =
@@ -75,6 +80,8 @@ ByteTableView::ByteTableView(ByteTableTool* tool, QWidget* parent)
               "Number of repeats of the currently selected byte in the table to be inserted.");
     label->setToolTip(insertCountToolTip);
     mInsertCountEdit->setToolTip(insertCountToolTip);
+    connect(mInsertCountEdit, QOverload<int>::of(&QSpinBox::valueChanged),
+            this, &ByteTableView::onInsertCountEditChanged);
 
     insertLayout->addStretch();
 
@@ -105,6 +112,12 @@ ByteTableView::ByteTableView(ByteTableTool* tool, QWidget* parent)
             header->resizeSection(i, columnsWidth.at(i));
         }
     }
+
+    const KConfigGroup configGroup(KSharedConfig::openConfig(), ByteTableConfigGroupId);
+    const int insertCount = configGroup.readEntry(InsertCountConfigKey, DefaultInsertCount);
+
+    mInsertCountEdit->setValue(insertCount);
+
 }
 
 ByteTableView::~ByteTableView()
@@ -142,6 +155,12 @@ void ByteTableView::resizeColumnsWidth()
 void ByteTableView::setFixedFontByGlobalSettings()
 {
     mByteTableView->setFont(QFontDatabase::systemFont(QFontDatabase::FixedFont));
+}
+
+void ByteTableView::onInsertCountEditChanged()
+{
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ByteTableConfigGroupId);
+    configGroup.writeEntry(InsertCountConfigKey, mInsertCountEdit->value());
 }
 
 void ByteTableView::onDoubleClicked(const QModelIndex& index)

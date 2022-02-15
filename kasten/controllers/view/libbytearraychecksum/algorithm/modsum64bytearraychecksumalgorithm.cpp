@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    SPDX-FileCopyrightText: 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    SPDX-FileCopyrightText: 2009, 2022 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
@@ -11,18 +11,37 @@
 // Okteta core
 #include <Okteta/AbstractByteArrayModel>
 // KF
+#include <KConfigGroup>
 #include <KLocalizedString>
 // Qt
 #include <QtEndian>
 
+static constexpr char ModSum64ConfigGroupId[] = "ModularSum64";
+
 ModSum64ByteArrayChecksumAlgorithm::ModSum64ByteArrayChecksumAlgorithm()
     : AbstractByteArrayChecksumAlgorithm(
-        i18nc("name of the checksum algorithm", "Modular sum 64-bit"))
+        i18nc("name of the checksum algorithm", "Modular sum 64-bit"),
+        QStringLiteral("ModularSum64")
+      )
 {}
 
 ModSum64ByteArrayChecksumAlgorithm::~ModSum64ByteArrayChecksumAlgorithm() = default;
 
 AbstractByteArrayChecksumParameterSet* ModSum64ByteArrayChecksumAlgorithm::parameterSet() { return &mParameterSet; }
+
+void ModSum64ByteArrayChecksumAlgorithm::loadConfig(const KConfigGroup& configGroup)
+{
+    const KConfigGroup algorithmConfigGroup = configGroup.group(ModSum64ConfigGroupId);
+
+    mParameterSet.loadConfig(algorithmConfigGroup);
+}
+
+void ModSum64ByteArrayChecksumAlgorithm::saveConfig(KConfigGroup& configGroup) const
+{
+    KConfigGroup algorithmConfigGroup = configGroup.group(ModSum64ConfigGroupId);
+
+    mParameterSet.saveConfig(algorithmConfigGroup);
+}
 
 bool ModSum64ByteArrayChecksumAlgorithm::calculateChecksum(QString* result,
                                                            const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const

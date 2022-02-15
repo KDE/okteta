@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    SPDX-FileCopyrightText: 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    SPDX-FileCopyrightText: 2008, 2022 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
@@ -11,11 +11,14 @@
 // Okteta core
 #include <Okteta/AbstractByteArrayModel>
 // KF
+#include <KConfigGroup>
 #include <KLocalizedString>
 // Qt
 #include <QtGlobal>
 // Std
 #include <cstdlib>
+
+static constexpr char ShiftFilterConfigGroupId[] = "Shift";
 
 // TODO: add option which bit (0/1) to insert
 static constexpr int ShiftBitsPerByte = 8;
@@ -23,12 +26,28 @@ static constexpr int ShiftBitsPerByte = 8;
 ShiftByteArrayFilter::ShiftByteArrayFilter()
     : AbstractByteArrayFilter(
         i18nc("name of the filter; it moves the bits, setting freed ones to zero",
-              "SHIFT data"))
+              "SHIFT data"),
+        QStringLiteral("Shift")
+      )
 {}
 
 ShiftByteArrayFilter::~ShiftByteArrayFilter() = default;
 
 AbstractByteArrayFilterParameterSet* ShiftByteArrayFilter::parameterSet() { return &mParameterSet; }
+
+void ShiftByteArrayFilter::loadConfig(const KConfigGroup& configGroup)
+{
+    const KConfigGroup filterConfigGroup = configGroup.group(ShiftFilterConfigGroupId);
+
+    mParameterSet.loadConfig(filterConfigGroup);
+}
+
+void ShiftByteArrayFilter::saveConfig(KConfigGroup& configGroup) const
+{
+    KConfigGroup filterConfigGroup = configGroup.group(ShiftFilterConfigGroupId);
+
+    mParameterSet.saveConfig(filterConfigGroup);
+}
 
 bool ShiftByteArrayFilter::filter(Okteta::Byte* result,
                                   Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const

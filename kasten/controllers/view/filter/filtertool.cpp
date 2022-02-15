@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    SPDX-FileCopyrightText: 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    SPDX-FileCopyrightText: 2008, 2022 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
@@ -21,10 +21,15 @@
 #include <Okteta/AbstractByteArrayModel>
 #include <Okteta/ChangesDescribable>
 // KF
+#include <KConfigGroup>
+#include <KSharedConfig>
 #include <KLocalizedString>
 // Qt
 #include <QApplication>
 #include <QByteArray>
+
+static constexpr char FilterConfigGroupId[] = "FilterTool";
+static constexpr char OperationConfigKey[] = "Operation";
 
 namespace Kasten {
 
@@ -33,6 +38,22 @@ FilterTool::FilterTool()
     setObjectName(QStringLiteral("BinaryFilter"));
 
     mFilterList = ByteArrayFilterFactory::createFilters();
+
+    const KConfigGroup configGroup(KSharedConfig::openConfig(), FilterConfigGroupId);
+    for (auto* filter : qAsConst(mFilterList)) {
+        filter->loadConfig(configGroup);
+    }
+
+    mFilterId = 0;
+    const QString operationId = configGroup.readEntry(OperationConfigKey);
+    if (!operationId.isEmpty()) {
+        for (int i = 0; i < mFilterList.size(); ++i) {
+            if (mFilterList[i]->id() == operationId) {
+                mFilterId = i;
+                break;
+            }
+        }
+    }
 }
 
 FilterTool::~FilterTool()
@@ -82,9 +103,38 @@ void FilterTool::setTargetModel(AbstractModel* model)
     emit charCodecChanged(newCharCodecName);
 }
 
-void FilterTool::filter(int filterId) const
+void FilterTool::saveParameterSet(int filterId)
 {
     AbstractByteArrayFilter* byteArrayFilter = mFilterList.at(filterId);
+
+    if (!byteArrayFilter) {
+        return;
+    }
+
+    KConfigGroup configGroup(KSharedConfig::openConfig(), FilterConfigGroupId);
+    byteArrayFilter->saveConfig(configGroup);
+}
+
+void FilterTool::setFilter(int filterId)
+{
+    if (mFilterId == filterId) {
+        return;
+    }
+
+    mFilterId = filterId;
+
+    AbstractByteArrayFilter* byteArrayFilter = mFilterList.at(mFilterId);
+    if (byteArrayFilter) {
+        KConfigGroup configGroup(KSharedConfig::openConfig(), FilterConfigGroupId);
+        configGroup.writeEntry(OperationConfigKey, byteArrayFilter->id());
+    }
+
+    emit filterChanged(mFilterId);
+}
+
+void FilterTool::filter() const
+{
+    AbstractByteArrayFilter* byteArrayFilter = mFilterList.at(mFilterId);
 
     if (byteArrayFilter) {
         const Okteta::AddressRange filteredSection = mByteArrayView->selection();

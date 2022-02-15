@@ -65,6 +65,7 @@ public Q_SLOTS: // actions
     void resetSourceTool();
 
 Q_SIGNALS:
+    void algorithmChanged(int algorithmId);
     void checksumChanged(const QString& checksum);
     void uptodateChanged(bool isUptodate);
     void isApplyableChanged(bool isApplyable); // candidate for AbstractTool API

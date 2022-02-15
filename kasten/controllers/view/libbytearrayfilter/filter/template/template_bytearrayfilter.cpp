@@ -22,7 +22,10 @@ Template_ByteArrayFilter::Template_ByteArrayFilter()
 //// ADAPT(start)
 //// change "TEMPLATE OPERATION ON" to a short and descriptive name of the operation of this filter, also in upper case
         i18nc("name of the filter; it does a TEMPLATE OPERATION ON operation",
-              "TEMPLATE OPERATION ON data"))
+              "TEMPLATE OPERATION ON data"),
+//// change "TEMPLATE OPERATION" to an id of the operation of this filter
+        QStringLiteral("TEMPLATE OPERATION")
+      )
 //// ADAPT(end)
 {}
 

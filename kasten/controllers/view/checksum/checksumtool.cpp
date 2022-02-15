@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    SPDX-FileCopyrightText: 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    SPDX-FileCopyrightText: 2009, 2022 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
@@ -33,9 +33,14 @@
 #include <Okteta/AbstractByteArrayModel>
 #include <Okteta/ArrayChangeMetricsList>
 // KF
+#include <KConfigGroup>
+#include <KSharedConfig>
 #include <KLocalizedString>
 // Qt
 #include <QApplication>
+
+static constexpr char ChecksumConfigGroupId[] = "ChecksumTool";
+static constexpr char AlgorithmConfigKey[] = "Algorithm";
 
 namespace Kasten {
 
@@ -52,6 +57,22 @@ ChecksumTool::ChecksumTool()
 #endif
 
     mAlgorithmList = ByteArrayChecksumAlgorithmFactory::createAlgorithms();
+
+    const KConfigGroup configGroup(KSharedConfig::openConfig(), ChecksumConfigGroupId);
+    for (auto *algorithm : qAsConst(mAlgorithmList)) {
+        algorithm->loadConfig(configGroup);
+    }
+
+    mAlgorithmId = 0;
+    const QString algorithmId = configGroup.readEntry(AlgorithmConfigKey);
+    if (!algorithmId.isEmpty()) {
+        for (int i = 0; i < mAlgorithmList.size(); ++i) {
+            if (mAlgorithmList[i]->id() == algorithmId) {
+                mAlgorithmId = i;
+                break;
+            }
+        }
+    }
 }
 
 ChecksumTool::~ChecksumTool()
@@ -147,8 +168,20 @@ void ChecksumTool::calculateChecksum()
 
 void ChecksumTool::setAlgorithm(int algorithmId)
 {
+    if (mAlgorithmId == algorithmId) {
+        return;
+    }
+
     mAlgorithmId = algorithmId;
     checkUptoDate();
+
+    AbstractByteArrayChecksumAlgorithm* algorithm = mAlgorithmList.at(mAlgorithmId);
+    if (algorithm) {
+        KConfigGroup configGroup(KSharedConfig::openConfig(), ChecksumConfigGroupId);
+        configGroup.writeEntry(AlgorithmConfigKey, algorithm->id());
+    }
+
+    emit algorithmChanged(mAlgorithmId);
     emit uptodateChanged(mChecksumUptodate);
     emit isApplyableChanged(isApplyable());
 }
@@ -159,6 +192,12 @@ void ChecksumTool::setAlgorithm(int algorithmId)
 void ChecksumTool::resetSourceTool()
 {
     mSourceAlgorithmId = -1;
+
+    AbstractByteArrayChecksumAlgorithm* algorithm = mAlgorithmList.at(mAlgorithmId);
+    if (algorithm) {
+        KConfigGroup configGroup(KSharedConfig::openConfig(), ChecksumConfigGroupId);
+        algorithm->saveConfig(configGroup);
+    }
 
     checkUptoDate();
     emit uptodateChanged(mChecksumUptodate);

@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    SPDX-FileCopyrightText: 2007-2010 Friedrich W. H. Kossebau <kossebau@kde.org>
+    SPDX-FileCopyrightText: 2007-2010, 2022 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
@@ -36,9 +36,39 @@
 #include <Okteta/ArrayChangeMetricsList>
 #include <Okteta/ChangesDescribable>
 // KF
+#include <KConfigGroup>
+#include <KSharedConfig>
 #include <KLocalizedString>
 
+// TODO: move to helper interface lib?
+template <>
+inline QSysInfo::Endian KConfigGroup::readEntry(const char *key, const QSysInfo::Endian &defaultValue) const
+{
+    const QString entry = readEntry(key, QString());
+    const QSysInfo::Endian endianess =
+        (entry == QLatin1String("BigEndian")) ?    QSysInfo::BigEndian :
+        (entry == QLatin1String("LittleEndian")) ? QSysInfo::LittleEndian :
+        /* else */                                 defaultValue;
+    return endianess;
+}
+
+template <>
+inline void KConfigGroup::writeEntry(const char *key, const QSysInfo::Endian &value,
+                                     KConfigBase::WriteConfigFlags flags)
+{
+    const QString valueString =
+        (value == QSysInfo::BigEndian) ? QLatin1String("BigEndian") : QLatin1String("LittleEndian");
+    writeEntry(key, valueString, flags);
+}
+
 namespace Kasten {
+
+static constexpr QSysInfo::Endian DefaultByteOrder = QSysInfo::ByteOrder;
+static constexpr bool DefaultUnsignedAsHex = true;
+
+static constexpr char PODDecoderConfigGroupId[] = "PODDecoderTool";
+static constexpr char ByteOrderConfigKey[] = "ByteOrder";
+static constexpr char UnsignedAsHexConfigKey[] = "UnsignedAsHexadecimal";
 
 enum PODTypes
 {
@@ -65,9 +95,16 @@ PODDecoderTool::PODDecoderTool()
     : mReadOnly(true)
     , mIsPodMarked(false)
     , mCharCodec(Okteta::CharCodec::createCodec(Okteta::LocalEncoding))
-    , mUnsignedAsHex(true)
 {
     setObjectName(QStringLiteral("PODDecoder"));
+
+    const KConfigGroup configGroup(KSharedConfig::openConfig(), PODDecoderConfigGroupId);
+
+    const QSysInfo::Endian byteOrder = configGroup.readEntry(ByteOrderConfigKey, DefaultByteOrder);
+    mPODData.setByteOrder(byteOrder);
+
+    const bool unsignedAsHex = configGroup.readEntry(UnsignedAsHexConfigKey, DefaultUnsignedAsHex);
+    mUnsignedAsHex = unsignedAsHex;
 
     setupDecoder();
 }
@@ -163,13 +200,21 @@ void PODDecoderTool::setUnsignedAsHex(bool unsignedAsHex)
 
     mUnsignedAsHex = unsignedAsHex;
 
+    KConfigGroup configGroup(KSharedConfig::openConfig(), PODDecoderConfigGroupId);
+    configGroup.writeEntry(UnsignedAsHexConfigKey, mUnsignedAsHex);
+
     updateData();
 }
 
-void PODDecoderTool::setByteOrder(int byteOrder)
+void PODDecoderTool::setByteOrder(int byteOrderValue)
 {
+    const auto byteOrder = static_cast<QSysInfo::Endian>(byteOrderValue);
     // TODO: test on no change is done in PODData, not this level
-    mPODData.setByteOrder((QSysInfo::Endian)byteOrder);
+    mPODData.setByteOrder(byteOrder);
+
+    KConfigGroup configGroup(KSharedConfig::openConfig(), PODDecoderConfigGroupId);
+    configGroup.writeEntry(ByteOrderConfigKey, byteOrder);
+
     updateData();
 }
 

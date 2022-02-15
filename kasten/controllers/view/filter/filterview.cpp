@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    SPDX-FileCopyrightText: 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    SPDX-FileCopyrightText: 2008-2009, 2022 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
@@ -41,7 +41,7 @@ FilterView::FilterView(FilterTool* tool, QWidget* parent)
     QLabel* label = new QLabel(i18nc("@label:listbox operation to use by the filter", "Operation:"), this);
     mOperationComboBox = new KComboBox(this);
     connect(mOperationComboBox, QOverload<int>::of(&KComboBox::activated),
-            this, &FilterView::onOperationChange);
+            mTool, &FilterTool::setFilter);
 
     label->setBuddy(mOperationComboBox);
     const QString operationToolTip =
@@ -79,6 +79,7 @@ FilterView::FilterView(FilterTool* tool, QWidget* parent)
                                                     "If you press the <interface>Filter</interface> button, the operation you selected "
                                                     "above is executed for the bytes in the selected range with the given options.")));
     mFilterButton->setEnabled(mTool->hasWriteable());
+    connect(mTool, &FilterTool::filterChanged, this, &FilterView::onFilterChanged);
     connect(mTool, &FilterTool::hasWriteableChanged, this, &FilterView::onHasWriteableChanged);
     connect(mTool, &FilterTool::charCodecChanged, this, &FilterView::onCharCodecChanged);
     connect(mFilterButton, &QPushButton::clicked, this, &FilterView::onFilterClicked);
@@ -115,7 +116,7 @@ void FilterView::addFilters()
         mParameterSetEditStack->addWidget(parameterEdit);
     }
 
-    onOperationChange(0);
+    onFilterChanged(mTool->filterId());
 }
 
 void FilterView::getParameterSet(AbstractByteArrayFilterParameterSet* parameterSet) const
@@ -129,7 +130,7 @@ void FilterView::getParameterSet(AbstractByteArrayFilterParameterSet* parameterS
 
 void FilterView::onFilterClicked()
 {
-    const int filterId = mOperationComboBox->currentIndex();
+    const int filterId = mTool->filterId();
 
     auto* parametersetEdit =
         qobject_cast<AbstractByteArrayFilterParameterSetEdit*>(mParameterSetEditStack->currentWidget());
@@ -142,7 +143,7 @@ void FilterView::onFilterClicked()
         getParameterSet(parameterSet);
     }
 
-    mTool->filter(filterId);
+    mTool->filter();
 }
 
 void FilterView::onOperationChange(int index)
@@ -157,10 +158,22 @@ void FilterView::onOperationChange(int index)
     auto* parametersetEdit =
         qobject_cast<AbstractByteArrayFilterParameterSetEdit*>(mParameterSetEditStack->currentWidget());
     if (parametersetEdit) {
+        AbstractByteArrayFilterParameterSet* parameterSet = mTool->parameterSet(index);
+        if (parameterSet) {
+            parametersetEdit->setValues(parameterSet);
+        }
         connect(parametersetEdit, &AbstractByteArrayFilterParameterSetEdit::validityChanged,
                 this, &FilterView::onValidityChanged);
+        connect(parametersetEdit, &AbstractByteArrayFilterParameterSetEdit::valuesChanged,
+                this, &FilterView::onValuesChanged);
         onValidityChanged(parametersetEdit->isValid());
     }
+}
+
+void FilterView::onFilterChanged(int filterId)
+{
+    mOperationComboBox->setCurrentIndex(filterId);
+    onOperationChange(filterId);
 }
 
 void FilterView::onHasWriteableChanged(bool hasWriteable)
@@ -179,6 +192,17 @@ void FilterView::onCharCodecChanged(const QString& charCodecName)
     if (parametersetEdit) {
         parametersetEdit->setCharCodec(charCodecName);
     }
+}
+
+void FilterView::onValuesChanged()
+{
+    const int filterId = mOperationComboBox->currentIndex();
+    AbstractByteArrayFilterParameterSet* parameterSet = mTool->parameterSet(filterId);
+    if (!parameterSet) {
+        return;
+    }
+    getParameterSet(parameterSet);
+    mTool->saveParameterSet(filterId);
 }
 
 void FilterView::onValidityChanged(bool isValid)
