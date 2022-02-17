@@ -29,6 +29,13 @@ void ByteArrayComboBox::setByteArray(const QByteArray& byteArray)
     d->setByteArray(byteArray);
 }
 
+void ByteArrayComboBox::setFormat(ByteArrayComboBox::Coding codecId)
+{
+    Q_D(ByteArrayComboBox);
+
+    d->setFormat(codecId);
+}
+
 void ByteArrayComboBox::setCharCodec(const QString& charCodecName)
 {
     Q_D(ByteArrayComboBox);

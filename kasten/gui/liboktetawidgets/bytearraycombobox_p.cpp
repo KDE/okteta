@@ -78,6 +78,16 @@ void ByteArrayComboBoxPrivate::setByteArray(const QByteArray& byteArray)
     mValueComboBox->setEditText(mValidator->toString(byteArray));
 }
 
+void ByteArrayComboBoxPrivate::setFormat(ByteArrayComboBox::Coding codecId)
+{
+    if (codecId == mFormatComboBox->currentIndex()) {
+        return;
+    }
+
+    mFormatComboBox->setCurrentIndex(codecId);
+    onFormatChanged(codecId);
+}
+
 void ByteArrayComboBoxPrivate::setCharCodec(const QString& charCodecName)
 {
     const bool isChar8Visible = (mFormatComboBox->currentIndex() == ByteArrayValidator::CharCoding);

@@ -33,6 +33,7 @@ public:
 public:
     void init();
     void setByteArray(const QByteArray& byteArray);
+    void setFormat(ByteArrayComboBox::Coding codecId);
     void setCharCodec(const QString& charCodecName);
     void setMaxLength(int maxLength);
     void setMinLength(int minLength);

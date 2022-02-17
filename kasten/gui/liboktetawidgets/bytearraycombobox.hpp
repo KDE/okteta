@@ -44,6 +44,7 @@ public:
 
 public: // set
     void setByteArray(const QByteArray& byteArray);
+    void setFormat(Coding codecId);
     void setCharCodec(const QString& charCodecName);
     void setMaxLength(int maxLength);
     void setMinLength(int minLength);
