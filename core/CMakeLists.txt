@@ -18,6 +18,7 @@ oktetacore_add_sublibrary(codecs
         DecimalByteCodec
         USASCIICharCodec
         EBCDIC1047CharCodec
+        IBM874CharCodec
         JISX0201CharCodec
         HexadecimalByteCodec
         OctalByteCodec
