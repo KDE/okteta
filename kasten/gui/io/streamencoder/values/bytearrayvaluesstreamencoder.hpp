@@ -16,12 +16,20 @@
 // Qt
 #include <QString>
 
+class KConfigGroup;
+
 namespace Kasten {
 
 class ValuesStreamEncoderSettings
 {
 public:
     ValuesStreamEncoderSettings();
+
+    bool operator==(const ValuesStreamEncoderSettings& other) const;
+
+public:
+    void loadConfig(const KConfigGroup& configGroup);
+    void saveConfig(KConfigGroup& configGroup) const;
 
 public:
     Okteta::ValueCoding valueCoding = Okteta::HexadecimalCoding;
@@ -53,11 +61,6 @@ private:
 };
 
 inline ValuesStreamEncoderSettings ByteArrayValuesStreamEncoder::settings() const { return mSettings; }
-inline void ByteArrayValuesStreamEncoder::setSettings(const ValuesStreamEncoderSettings& settings)
-{
-    mSettings = settings;
-    emit settingsChanged();
-}
 
 }
 

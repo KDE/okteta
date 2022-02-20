@@ -13,11 +13,48 @@
 // Okteta core
 #include <Okteta/AbstractByteArrayModel>
 // KF
+#include <KConfigGroup>
+#include <KSharedConfig>
 #include <KLocalizedString>
 // Qt
 #include <QTextStream>
 
+template <>
+inline Kasten::UuencodingStreamEncoderSettings::EncodingType
+KConfigGroup::readEntry(const char *key,
+                        const Kasten::UuencodingStreamEncoderSettings::EncodingType &defaultValue) const
+{
+    const QString entry = readEntry(key, QString());
+    const Kasten::UuencodingStreamEncoderSettings::EncodingType encodingType =
+        (entry == QLatin1String("Historical")) ?
+            Kasten::UuencodingStreamEncoderSettings::EncodingType::Historical :
+        (entry == QLatin1String("Base64")) ?
+            Kasten::UuencodingStreamEncoderSettings::EncodingType::Base64 :
+        /* else */                                 defaultValue;
+    return encodingType;
+}
+
+template <>
+inline void KConfigGroup::writeEntry(const char *key,
+                                     const Kasten::UuencodingStreamEncoderSettings::EncodingType &value,
+                                     KConfigBase::WriteConfigFlags flags)
+{
+    const QString valueString =
+        (value == Kasten::UuencodingStreamEncoderSettings::EncodingType::Historical) ?
+        QLatin1String("Historical") : QLatin1String("Base64");
+    writeEntry(key, valueString, flags);
+}
+
 namespace Kasten {
+
+static const QString DefaultFileName = QStringLiteral("okteta-export");
+static constexpr Kasten::UuencodingStreamEncoderSettings::EncodingType DefaultEncodingType =
+    Kasten::UuencodingStreamEncoderSettings::EncodingType::Base64;
+
+static constexpr char ByteArrayUuencodingStreamEncoderConfigGroupId[] = "ByteArrayUuencodingStreamEncoder";
+
+static constexpr char FileNameConfigKey[] = "FileName";
+static constexpr char EncodingTypeConfigKey[] = "EncodingType";
 
 static constexpr int defaultUuInputLineLength = 45;
 static constexpr int uuInputLineLength = defaultUuInputLineLength;
@@ -59,15 +96,46 @@ static constexpr UumapEncodeData base64UumapEncodeData =
     false
 };
 
-UuencodingStreamEncoderSettings::UuencodingStreamEncoderSettings()
-    : fileName(QStringLiteral("okteta-export"))
-{}
+UuencodingStreamEncoderSettings::UuencodingStreamEncoderSettings() = default;
+
+bool UuencodingStreamEncoderSettings::operator==(const UuencodingStreamEncoderSettings& other) const
+{
+    return (fileName == other.fileName) && (encodingType == other.encodingType);
+}
+
+void UuencodingStreamEncoderSettings::loadConfig(const KConfigGroup& configGroup)
+{
+    fileName = configGroup.readEntry(FileNameConfigKey, DefaultFileName);
+    encodingType = configGroup.readEntry(EncodingTypeConfigKey, DefaultEncodingType);
+}
+
+void UuencodingStreamEncoderSettings::saveConfig(KConfigGroup& configGroup) const
+{
+    configGroup.writeEntry(FileNameConfigKey, fileName);
+    configGroup.writeEntry(EncodingTypeConfigKey, encodingType);
+}
+
 
 ByteArrayUuencodingStreamEncoder::ByteArrayUuencodingStreamEncoder()
     : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "Uuencoding"), QStringLiteral("text/x-uuencode"))
-{}
+{
+    const KConfigGroup configGroup(KSharedConfig::openConfig(), ByteArrayUuencodingStreamEncoderConfigGroupId);
+    mSettings.loadConfig(configGroup);
+}
 
 ByteArrayUuencodingStreamEncoder::~ByteArrayUuencodingStreamEncoder() = default;
+
+void ByteArrayUuencodingStreamEncoder::setSettings(const UuencodingStreamEncoderSettings& settings)
+{
+    if (mSettings == settings) {
+        return;
+    }
+
+    mSettings = settings;
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ByteArrayUuencodingStreamEncoderConfigGroupId);
+    mSettings.saveConfig(configGroup);
+    emit settingsChanged();
+}
 
 bool ByteArrayUuencodingStreamEncoder::encodeDataToStream(QIODevice* device,
                                                           const ByteArrayView* byteArrayView,
@@ -87,7 +155,7 @@ bool ByteArrayUuencodingStreamEncoder::encodeDataToStream(QIODevice* device,
     unsigned char bitsFromLastByte;
 
     const UumapEncodeData* encodeData =
-        (mSettings.algorithmId == UuencodingStreamEncoderSettings::AlgorithmId::Historical) ?
+        (mSettings.encodingType == UuencodingStreamEncoderSettings::EncodingType::Historical) ?
             &historicalUumapEncodeData :
         /* else */
             &base64UumapEncodeData;

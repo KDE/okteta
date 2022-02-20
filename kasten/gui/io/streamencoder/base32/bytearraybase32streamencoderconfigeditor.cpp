@@ -43,7 +43,7 @@ ByteArrayBase32StreamEncoderConfigEditor::ByteArrayBase32StreamEncoderConfigEdit
               "z-base-32"),
     };
     mEncodingSelect->addItems(list);
-    mEncodingSelect->setCurrentIndex(static_cast<int>(mSettings.algorithmId));
+    mEncodingSelect->setCurrentIndex(static_cast<int>(mSettings.encodingType));
     connect(mEncodingSelect, QOverload<int>::of(&KComboBox::activated),
             this, &ByteArrayBase32StreamEncoderConfigEditor::onSettingsChanged);
     pageLayout->addRow(encodingTypeLabel, mEncodingSelect);
@@ -58,7 +58,7 @@ AbstractSelectionView* ByteArrayBase32StreamEncoderConfigEditor::createPreviewVi
 
 void ByteArrayBase32StreamEncoderConfigEditor::onSettingsChanged()
 {
-    mSettings.algorithmId = static_cast<Base32StreamEncoderSettings::AlgorithmId>(mEncodingSelect->currentIndex());
+    mSettings.encodingType = static_cast<Base32StreamEncoderSettings::EncodingType>(mEncodingSelect->currentIndex());
 
     mEncoder->setSettings(mSettings);
 }

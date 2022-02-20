@@ -16,6 +16,8 @@
 // Qt
 #include <QString>
 
+class KConfigGroup;
+
 class QTextStream;
 
 namespace Kasten {
@@ -27,11 +29,18 @@ public:
     {
         FourBytes = 0,
         ThreeBytes = 1,
-        TwoBytes = 2
+        TwoBytes = 2,
+        _Count,
     };
 
 public:
     SRecStreamEncoderSettings();
+
+    bool operator==(const SRecStreamEncoderSettings& other) const;
+
+public:
+    void loadConfig(const KConfigGroup& configGroup);
+    void saveConfig(KConfigGroup& configGroup) const;
 
 public:
     AddressSizeId addressSizeId = AddressSizeId::FourBytes;
@@ -96,11 +105,6 @@ private:
 };
 
 inline SRecStreamEncoderSettings ByteArraySRecStreamEncoder::settings() const { return mSettings; }
-inline void ByteArraySRecStreamEncoder::setSettings(const SRecStreamEncoderSettings& settings)
-{
-    mSettings = settings;
-    emit settingsChanged();
-}
 
 inline char ByteArraySRecStreamEncoder::charOfRecordType(RecordType type)
 { return static_cast<char>('0' + static_cast<int>(type)); }

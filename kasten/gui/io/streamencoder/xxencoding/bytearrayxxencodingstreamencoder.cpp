@@ -11,11 +11,19 @@
 // Okteta core
 #include <Okteta/AbstractByteArrayModel>
 // KF
+#include <KConfigGroup>
+#include <KSharedConfig>
 #include <KLocalizedString>
 // Qt
 #include <QTextStream>
 
 namespace Kasten {
+
+static const QString DefaultFileName = QStringLiteral("okteta-export");
+
+static constexpr char ByteArrayXxencodingStreamEncoderConfigGroupId[] = "ByteArrayXxencodingStreamEncoder";
+
+static constexpr char FileNameConfigKey[] = "FileName";
 
 static constexpr char xxencodeMap[64] = {
     '+', '-', '0', '1', '2', '3', '4', '5',
@@ -41,15 +49,44 @@ static inline constexpr const char* xxpadding(ByteArrayXxencodingStreamEncoder::
     return paddingData[static_cast<int>(index) - 1];
 }
 
-XxencodingStreamEncoderSettings::XxencodingStreamEncoderSettings()
-    : fileName(QStringLiteral("okteta-export"))
-{}
+XxencodingStreamEncoderSettings::XxencodingStreamEncoderSettings() = default;
+
+bool XxencodingStreamEncoderSettings::operator==(const XxencodingStreamEncoderSettings& other) const
+{
+    return (fileName == other.fileName);
+}
+
+void XxencodingStreamEncoderSettings::loadConfig(const KConfigGroup& configGroup)
+{
+    fileName = configGroup.readEntry(FileNameConfigKey, DefaultFileName);
+}
+
+void XxencodingStreamEncoderSettings::saveConfig(KConfigGroup& configGroup) const
+{
+    configGroup.writeEntry(FileNameConfigKey, fileName);
+}
+
 
 ByteArrayXxencodingStreamEncoder::ByteArrayXxencodingStreamEncoder()
     : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "Xxencoding"), QStringLiteral("text/x-xxencode"))
-{}
+{
+    const KConfigGroup configGroup(KSharedConfig::openConfig(), ByteArrayXxencodingStreamEncoderConfigGroupId);
+    mSettings.loadConfig(configGroup);
+}
 
 ByteArrayXxencodingStreamEncoder::~ByteArrayXxencodingStreamEncoder() = default;
+
+void ByteArrayXxencodingStreamEncoder::setSettings(const XxencodingStreamEncoderSettings& settings)
+{
+    if (mSettings == settings) {
+        return;
+    }
+
+    mSettings = settings;
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ByteArrayXxencodingStreamEncoderConfigGroupId);
+    mSettings.saveConfig(configGroup);
+    emit settingsChanged();
+}
 
 // TODO: make this algorithm shared with ByteArrayUuencodingStreamEncoder again
 bool ByteArrayXxencodingStreamEncoder::encodeDataToStream(QIODevice* device,
