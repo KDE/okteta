@@ -15,12 +15,20 @@
 #include <QObject>
 #include <QString>
 
+class KConfigGroup;
+
 namespace Kasten {
 
 class ByteArrayPatternGeneratorSettings
 {
 public:
     ByteArrayPatternGeneratorSettings();
+
+    bool operator==(const ByteArrayPatternGeneratorSettings& other) const;
+
+public:
+    void loadConfig(const KConfigGroup& configGroup);
+    void saveConfig(KConfigGroup& configGroup) const;
 
 public:
     QByteArray pattern = QByteArray(1, 0);
@@ -48,11 +56,6 @@ private:
 };
 
 inline ByteArrayPatternGeneratorSettings ByteArrayPatternGenerator::settings() const { return mSettings; }
-inline void ByteArrayPatternGenerator::setSettings(const ByteArrayPatternGeneratorSettings& settings)
-{
-    mSettings = settings;
-//     emit settingsChanged();
-}
 
 }
 

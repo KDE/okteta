@@ -15,12 +15,20 @@
 #include <QObject>
 #include <QString>
 
+class KConfigGroup;
+
 namespace Kasten {
 
 class ByteArrayRandomDataGeneratorSettings
 {
 public:
     ByteArrayRandomDataGeneratorSettings();
+
+    bool operator==(const ByteArrayRandomDataGeneratorSettings& other) const;
+
+public:
+    void loadConfig(const KConfigGroup& configGroup);
+    void saveConfig(KConfigGroup& configGroup) const;
 
 public:
     int size = 256;
@@ -47,11 +55,6 @@ private:
 };
 
 inline ByteArrayRandomDataGeneratorSettings ByteArrayRandomDataGenerator::settings() const { return mSettings; }
-inline void ByteArrayRandomDataGenerator::setSettings(const ByteArrayRandomDataGeneratorSettings& settings)
-{
-    mSettings = settings;
-//     emit settingsChanged();
-}
 
 }
 
