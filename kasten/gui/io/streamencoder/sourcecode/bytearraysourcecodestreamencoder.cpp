@@ -11,11 +11,67 @@
 // Okteta core
 #include <Okteta/AbstractByteArrayModel>
 // KF
+#include <KConfigGroup>
+#include <KSharedConfig>
 #include <KLocalizedString>
 // Qt
 #include <QTextStream>
+// Std
+#include <array>
+#include <algorithm>
+#include <iterator>
+
+static constexpr int primitiveDataTypeCount =
+    static_cast<int>(Kasten::SourceCodeStreamEncoderSettings::PrimitiveDataType::_Count);
+static const std::array<QString, primitiveDataTypeCount> primitiveDataTypeConfigValueList = {
+    QStringLiteral("Char"),
+    QStringLiteral("UnsignedChar"),
+    QStringLiteral("Short"),
+    QStringLiteral("UnsignedShort"),
+    QStringLiteral("Integer"),
+    QStringLiteral("UnsignedInteger"),
+    QStringLiteral("Float"),
+    QStringLiteral("Double"),
+};
+
+
+template <>
+inline Kasten::SourceCodeStreamEncoderSettings::PrimitiveDataType KConfigGroup::readEntry(const char *key,
+                                                                                   const Kasten::SourceCodeStreamEncoderSettings::PrimitiveDataType &defaultValue) const
+{
+    const QString entry = readEntry(key, QString());
+
+    auto it = std::find(primitiveDataTypeConfigValueList.cbegin(), primitiveDataTypeConfigValueList.cend(), entry);
+    if (it == primitiveDataTypeConfigValueList.cend()) {
+        return defaultValue;
+    }
+
+    const int listIndex = std::distance(primitiveDataTypeConfigValueList.cbegin(), it);
+    return static_cast<Kasten::SourceCodeStreamEncoderSettings::PrimitiveDataType>(listIndex);
+}
+
+template <>
+inline void KConfigGroup::writeEntry(const char *key,
+                                     const Kasten::SourceCodeStreamEncoderSettings::PrimitiveDataType &value,
+                                     KConfigBase::WriteConfigFlags flags)
+{
+    const int listIndex = static_cast<int>(value);
+    writeEntry(key, primitiveDataTypeConfigValueList[listIndex], flags);
+}
 
 namespace Kasten {
+
+static const QString DefaultVariableName = QStringLiteral("array");
+static constexpr SourceCodeStreamEncoderSettings::PrimitiveDataType DefaultDataType =
+    SourceCodeStreamEncoderSettings::PrimitiveDataType::UnsignedChar;
+static constexpr int DefaultElementsPerLine = 4;
+static constexpr bool DefaultUnsignedAsHexadecimal = true;
+
+static constexpr char ByteArraySourceCodeStreamEncoderConfigGroupId[] = "ByteArraySourceCodeStreamEncoder";
+static constexpr char VariableNameConfigKey[] = "VariableName";
+static constexpr char DataTypeConfigKey[] = "DataType";
+static constexpr char ElementsPerLineConfigKey[] = "ElementsPerLine";
+static constexpr char UnsignedAsHexadecimalConfigKey[] = "UnsignedAsHexadecimal";
 
 static constexpr  const char* PrimitiveDataTypeName[] = {
     "char",
@@ -45,18 +101,56 @@ static constexpr int NoOfPrimitiveDataTypes = 8;
 inline QString decimalFormattedNumberPlaceHolder() { return QStringLiteral("%1"); }
 inline QString hexadecimalFormattedNumberPlaceHolder() { return QStringLiteral("0x%1"); }
 
-SourceCodeStreamEncoderSettings::SourceCodeStreamEncoderSettings()
-    : variableName(QStringLiteral("array"))
-{}
+SourceCodeStreamEncoderSettings::SourceCodeStreamEncoderSettings() = default;
+
+bool SourceCodeStreamEncoderSettings::operator==(const SourceCodeStreamEncoderSettings& other) const
+{
+    return
+        (variableName == other.variableName) &&
+        (dataType == other.dataType) &&
+        (elementsPerLine == other.elementsPerLine) &&
+        (unsignedAsHexadecimal == other.unsignedAsHexadecimal);
+}
+
+void SourceCodeStreamEncoderSettings::loadConfig(const KConfigGroup& configGroup)
+{
+    variableName = configGroup.readEntry(VariableNameConfigKey, DefaultVariableName);
+    dataType = configGroup.readEntry(DataTypeConfigKey, DefaultDataType);
+    elementsPerLine = configGroup.readEntry(ElementsPerLineConfigKey, DefaultElementsPerLine);
+    unsignedAsHexadecimal = configGroup.readEntry(UnsignedAsHexadecimalConfigKey, DefaultUnsignedAsHexadecimal);
+}
+
+void SourceCodeStreamEncoderSettings::saveConfig(KConfigGroup& configGroup) const
+{
+    configGroup.writeEntry(VariableNameConfigKey, variableName);
+    configGroup.writeEntry(DataTypeConfigKey, dataType);
+    configGroup.writeEntry(ElementsPerLineConfigKey, elementsPerLine);
+    configGroup.writeEntry(UnsignedAsHexadecimalConfigKey, unsignedAsHexadecimal);
+}
 
 ByteArraySourceCodeStreamEncoder::ByteArraySourceCodeStreamEncoder()
     : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "C Array"), QStringLiteral("text/x-csrc"))
-{}
+{
+    const KConfigGroup configGroup(KSharedConfig::openConfig(), ByteArraySourceCodeStreamEncoderConfigGroupId);
+    mSettings.loadConfig(configGroup);
+}
 
 ByteArraySourceCodeStreamEncoder::~ByteArraySourceCodeStreamEncoder() = default;
 
 const char* const* ByteArraySourceCodeStreamEncoder::dataTypeNames() const { return PrimitiveDataTypeName; }
 int ByteArraySourceCodeStreamEncoder::dataTypesCount() const { return NoOfPrimitiveDataTypes; }
+
+void ByteArraySourceCodeStreamEncoder::setSettings(const SourceCodeStreamEncoderSettings& settings)
+{
+    if (mSettings == settings) {
+        return;
+    }
+
+    mSettings = settings;
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ByteArraySourceCodeStreamEncoderConfigGroupId);
+    mSettings.saveConfig(configGroup);
+    Q_EMIT settingsChanged();
+}
 
 bool ByteArraySourceCodeStreamEncoder::encodeDataToStream(QIODevice* device,
                                                           const ByteArrayView* byteArrayView,
@@ -187,6 +281,9 @@ QString ByteArraySourceCodeStreamEncoder::printFormatted(const Okteta::AbstractB
         result = decimalFormattedNumberPlaceHolder().arg(e, fieldWidth);
         break;
     }
+    case SourceCodeStreamEncoderSettings::PrimitiveDataType::_Count:
+        // dummy entry to avoid compiler warning -Wswitch, can this be avoided?
+        break;
     }
 
     return result;

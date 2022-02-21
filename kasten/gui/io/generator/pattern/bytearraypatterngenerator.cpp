@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    SPDX-FileCopyrightText: 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    SPDX-FileCopyrightText: 2009, 2022 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
@@ -9,6 +9,8 @@
 #include "bytearraypatterngenerator.hpp"
 
 // KF
+#include <KConfigGroup>
+#include <KSharedConfig>
 #include <KLocalizedString>
 // Qt
 #include <QMimeData>
@@ -16,7 +18,31 @@
 
 namespace Kasten {
 
+static const QByteArray DefaultPattern = QByteArray(1, 0);
+static constexpr int DefaultCount = 1;
+
+static constexpr char ByteArrayPatternGeneratorConfigGroupId[] = "ByteArrayPatternGenerator";
+static constexpr char PatternConfigKey[] = "Pattern";
+static constexpr char CountConfigKey[] = "Count";
+
 ByteArrayPatternGeneratorSettings::ByteArrayPatternGeneratorSettings() = default;
+
+bool ByteArrayPatternGeneratorSettings::operator==(const ByteArrayPatternGeneratorSettings& other) const
+{
+    return (pattern == other.pattern) && (count == other.count);
+}
+
+void ByteArrayPatternGeneratorSettings::loadConfig(const KConfigGroup& configGroup)
+{
+    pattern = configGroup.readEntry(PatternConfigKey, DefaultPattern);
+    count = configGroup.readEntry(CountConfigKey, DefaultCount);
+}
+
+void ByteArrayPatternGeneratorSettings::saveConfig(KConfigGroup& configGroup) const
+{
+    configGroup.writeEntry(PatternConfigKey, pattern);
+    configGroup.writeEntry(CountConfigKey, count);
+}
 
 // TODO: support insert to selection, cmp. fill in painting program
 // there are two kinds of generated datam fixed size (e.g. sequence) and endless size?
@@ -27,9 +53,26 @@ ByteArrayPatternGenerator::ByteArrayPatternGenerator()
         i18nc("name of the generated data", "Pattern..."),
         QStringLiteral("application/octet-stream"),
         DynamicGeneration)
-{}
+{
+    const KConfigGroup configGroup(KSharedConfig::openConfig(), ByteArrayPatternGeneratorConfigGroupId);
+
+    mSettings.loadConfig(configGroup);
+}
 
 ByteArrayPatternGenerator::~ByteArrayPatternGenerator() = default;
+
+void ByteArrayPatternGenerator::setSettings(const ByteArrayPatternGeneratorSettings& settings)
+{
+    if (mSettings == settings) {
+        return;
+    }
+
+    mSettings = settings;
+
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ByteArrayPatternGeneratorConfigGroupId);
+    mSettings.saveConfig(configGroup);
+//     Q_EMIT settingsChanged();
+}
 
 // TODO: optimize and check if pattern is just one byte, so memset can be used
 // TODO: see if copying larger chunks with memcpy is faster, so

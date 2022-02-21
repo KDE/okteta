@@ -34,9 +34,6 @@ public: // AbstractModelDataGeneratorConfigEditor API
     bool isValid() const override;
     QString name() const override;
 
-public:
-    void rememberCurrentSettings();
-
 private Q_SLOTS:
     void onSettingsChanged();
     void onPatternChanged(const QByteArray& pattern);

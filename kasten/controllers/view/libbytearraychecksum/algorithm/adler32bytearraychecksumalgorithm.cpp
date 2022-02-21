@@ -17,7 +17,9 @@ static constexpr int MOD_ADLER = 65521;
 
 Adler32ByteArrayChecksumAlgorithm::Adler32ByteArrayChecksumAlgorithm()
     : AbstractByteArrayChecksumAlgorithm(
-        i18nc("name of the checksum algorithm", "Adler-32"))
+        i18nc("name of the checksum algorithm", "Adler-32"),
+        QStringLiteral("Adler32")
+      )
 {}
 
 Adler32ByteArrayChecksumAlgorithm::~Adler32ByteArrayChecksumAlgorithm() = default;

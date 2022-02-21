@@ -14,21 +14,59 @@
 #include <Okteta/AbstractByteArrayModel>
 #include <Okteta/ValueCodec>
 // KF
+#include <KConfigGroup>
+#include <KSharedConfig>
 #include <KLocalizedString>
 // Qt
 #include <QTextStream>
 
 namespace Kasten {
 
-ValuesStreamEncoderSettings::ValuesStreamEncoderSettings()
-    : separation(QStringLiteral(" "))
-{}
+static const QString DefaultSeparator = QStringLiteral(" ");
+
+static constexpr char ByteArrayValuesStreamEncoderConfigGroupId[] = "ByteArrayValuesStreamEncoder";
+
+static constexpr char SeparatorConfigKey[] = "Separator";
+
+ValuesStreamEncoderSettings::ValuesStreamEncoderSettings() = default;
+
+bool ValuesStreamEncoderSettings::operator==(const ValuesStreamEncoderSettings& other) const
+{
+    // the only user-edited value
+    return (separation == other.separation);
+}
+
+void ValuesStreamEncoderSettings::loadConfig(const KConfigGroup& configGroup)
+{
+    separation = configGroup.readEntry(SeparatorConfigKey, DefaultSeparator);
+}
+
+void ValuesStreamEncoderSettings::saveConfig(KConfigGroup& configGroup) const
+{
+    configGroup.writeEntry(SeparatorConfigKey, separation);
+}
+
 
 ByteArrayValuesStreamEncoder::ByteArrayValuesStreamEncoder()
     : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "Values"), QStringLiteral("text/plain"))
-{}
+{
+    const KConfigGroup configGroup(KSharedConfig::openConfig(), ByteArrayValuesStreamEncoderConfigGroupId);
+    mSettings.loadConfig(configGroup);
+}
 
 ByteArrayValuesStreamEncoder::~ByteArrayValuesStreamEncoder() = default;
+
+void ByteArrayValuesStreamEncoder::setSettings(const ValuesStreamEncoderSettings& settings)
+{
+    if (mSettings == settings) {
+        return;
+    }
+
+    mSettings = settings;
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ByteArrayValuesStreamEncoderConfigGroupId);
+    mSettings.saveConfig(configGroup);
+    Q_EMIT settingsChanged();
+}
 
 bool ByteArrayValuesStreamEncoder::encodeDataToStream(QIODevice* device,
                                                       const ByteArrayView* byteArrayView,

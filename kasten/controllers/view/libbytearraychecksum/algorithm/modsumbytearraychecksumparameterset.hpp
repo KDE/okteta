@@ -13,6 +13,8 @@
 #include "abstractbytearraychecksumparameterset.hpp"
 #include "endianness.hpp"
 
+class KConfigGroup;
+
 class ModSumByteArrayChecksumParameterSet : public AbstractByteArrayChecksumParameterSet
 {
 public:
@@ -27,6 +29,10 @@ public:
 
 public:
     Endianness endianness() const;
+
+public:
+    void loadConfig(const KConfigGroup& configGroup);
+    void saveConfig(KConfigGroup& configGroup) const;
 
 private:
     Endianness mEndianness = ThisMachineEndianness;

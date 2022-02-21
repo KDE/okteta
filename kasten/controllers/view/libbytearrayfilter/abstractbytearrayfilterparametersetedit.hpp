@@ -38,6 +38,7 @@ public: // API to be implemented
 
 Q_SIGNALS:
     void validityChanged(bool isValid);
+    void valuesChanged();
 
 private:
     const std::unique_ptr<class AbstractByteArrayFilterParameterSetEditPrivate> d;

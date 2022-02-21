@@ -14,6 +14,8 @@
 // Qt
 #include <QString>
 
+class KConfigGroup;
+
 namespace Kasten {
 
 class SourceCodeStreamEncoderSettings
@@ -29,10 +31,17 @@ public:
         UnsignedInteger,
         Float,
         Double,
+        _Count,
     };
 
 public:
     SourceCodeStreamEncoderSettings();
+
+    bool operator==(const SourceCodeStreamEncoderSettings& other) const;
+
+public:
+    void loadConfig(const KConfigGroup& configGroup);
+    void saveConfig(KConfigGroup& configGroup) const;
 
 public:
     QString variableName;
@@ -73,11 +82,6 @@ private:
 };
 
 inline SourceCodeStreamEncoderSettings ByteArraySourceCodeStreamEncoder::settings() const { return mSettings; }
-inline void ByteArraySourceCodeStreamEncoder::setSettings(const SourceCodeStreamEncoderSettings& settings)
-{
-    mSettings = settings;
-    Q_EMIT settingsChanged();
-}
 
 }
 

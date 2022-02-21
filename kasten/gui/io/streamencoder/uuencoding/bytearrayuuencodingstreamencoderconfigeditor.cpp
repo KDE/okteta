@@ -53,7 +53,7 @@ ByteArrayUuencodingStreamEncoderConfigEditor::ByteArrayUuencodingStreamEncoderCo
               "Base64"),
     };
     mEncodingSelect->addItems(list);
-    mEncodingSelect->setCurrentIndex(static_cast<int>(mSettings.algorithmId));
+    mEncodingSelect->setCurrentIndex(static_cast<int>(mSettings.encodingType));
     connect(mEncodingSelect, QOverload<int>::of(&KComboBox::activated),
             this, &ByteArrayUuencodingStreamEncoderConfigEditor::onSettingsChanged);
     pageLayout->addRow(encodingTypeLabel, mEncodingSelect);
@@ -68,7 +68,7 @@ AbstractSelectionView* ByteArrayUuencodingStreamEncoderConfigEditor::createPrevi
 
 void ByteArrayUuencodingStreamEncoderConfigEditor::onSettingsChanged()
 {
-    mSettings.algorithmId = static_cast<UuencodingStreamEncoderSettings::AlgorithmId>(mEncodingSelect->currentIndex());
+    mSettings.encodingType = static_cast<UuencodingStreamEncoderSettings::EncodingType>(mEncodingSelect->currentIndex());
     mSettings.fileName = mFileNameEdit->text();
 
     mEncoder->setSettings(mSettings);

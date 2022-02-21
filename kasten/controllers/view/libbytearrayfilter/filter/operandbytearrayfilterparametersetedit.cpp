@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    SPDX-FileCopyrightText: 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    SPDX-FileCopyrightText: 2008, 2022 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
@@ -32,6 +32,10 @@ OperandByteArrayFilterParameterSetEdit::OperandByteArrayFilterParameterSetEdit(Q
     mOperandEdit = new Okteta::ByteArrayComboBox(this);
     connect(mOperandEdit, &Okteta::ByteArrayComboBox::byteArrayChanged,
             this, &OperandByteArrayFilterParameterSetEdit::onInputChanged);
+    connect(mOperandEdit, &Okteta::ByteArrayComboBox::byteArrayChanged,
+            this, &OperandByteArrayFilterParameterSetEdit::valuesChanged);
+    connect(mOperandEdit, &Okteta::ByteArrayComboBox::formatChanged,
+            this, &OperandByteArrayFilterParameterSetEdit::valuesChanged);
     const QString operandToolTip =
         i18nc("@info:tooltip",
               "The operand to do the operation with.");
@@ -48,6 +52,8 @@ OperandByteArrayFilterParameterSetEdit::OperandByteArrayFilterParameterSetEdit(Q
               "Align at end:");
     mAlignAtEndCheckBox = new QCheckBox(this);
     mAlignAtEndCheckBox->setChecked(false);
+    connect(mAlignAtEndCheckBox, &QCheckBox::clicked,
+            this, &OperandByteArrayFilterParameterSetEdit::valuesChanged);
     const QString alignToolTip =
         i18nc("@info:tooltip",
               "Sets if the operation will be aligned to the end of the data instead of to the begin.");
@@ -68,7 +74,8 @@ void OperandByteArrayFilterParameterSetEdit::setValues(const AbstractByteArrayFi
 {
     const auto* operandParameterSet = static_cast<const OperandByteArrayFilterParameterSet*>(parameterSet);
 
-//     mOperandEdit->setValue( operandParameterSet->operand() ); TODO: not yet implemented
+    mOperandEdit->setByteArray( operandParameterSet->operand() );
+    mOperandEdit->setFormat(static_cast<Okteta::ByteArrayComboBox::Coding>(operandParameterSet->operandFormat()));
     mAlignAtEndCheckBox->setChecked(operandParameterSet->alignAtEnd());
 }
 
@@ -82,7 +89,7 @@ void OperandByteArrayFilterParameterSetEdit::getParameterSet(AbstractByteArrayFi
     auto* operandParameterSet = static_cast<OperandByteArrayFilterParameterSet*>(parameterSet);
 
     operandParameterSet->setOperand(mOperandEdit->byteArray());
-    operandParameterSet->setOperandFormat(mOperandEdit->format());
+    operandParameterSet->setOperandFormat(static_cast<OperandByteArrayFilterParameterSet::Coding>(mOperandEdit->format()));
     operandParameterSet->setAlignAtEnd(mAlignAtEndCheckBox->isChecked());
 }
 

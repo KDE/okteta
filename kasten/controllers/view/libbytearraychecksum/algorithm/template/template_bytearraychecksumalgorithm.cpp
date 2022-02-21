@@ -21,7 +21,9 @@ Template_ByteArrayChecksumAlgorithm::Template_ByteArrayChecksumAlgorithm()
     : AbstractByteArrayChecksumAlgorithm(
 //// ADAPT(start)
 //// change "TEMPLATE" to a short and descriptive name of the checksum algorithm
-        i18nc("name of the checksum algorithm", "Template"))
+        i18nc("name of the checksum algorithm", "Template"),
+//// change "TEMPLATE" to a unique id of the checksum algorithm
+        QStringLiteral("TEMPLATE"))
 //// ADAPT(end)
 {}
 

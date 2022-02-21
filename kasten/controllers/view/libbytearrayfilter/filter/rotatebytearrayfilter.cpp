@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    SPDX-FileCopyrightText: 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    SPDX-FileCopyrightText: 2008, 2022 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
@@ -11,23 +11,42 @@
 // Okteta core
 #include <Okteta/AbstractByteArrayModel>
 // KF
+#include <KConfigGroup>
 #include <KLocalizedString>
 // Qt
 #include <QtGlobal>
 // Std
 #include <cstdlib>
 
+static constexpr char RotateFilterConfigGroupId[] = "Rotate";
+
 static constexpr int RotateBitsPerByte = 8;
 
 RotateByteArrayFilter::RotateByteArrayFilter()
     : AbstractByteArrayFilter(
         i18nc("name of the filter; it moves the bits and pushes the ones over the end to the begin again",
-              "ROTATE data"))
+              "ROTATE data"),
+        QStringLiteral("Rotate")
+      )
 {}
 
 RotateByteArrayFilter::~RotateByteArrayFilter() = default;
 
 AbstractByteArrayFilterParameterSet* RotateByteArrayFilter::parameterSet() { return &mParameterSet; }
+
+void RotateByteArrayFilter::loadConfig(const KConfigGroup& configGroup)
+{
+    const KConfigGroup filterConfigGroup = configGroup.group(RotateFilterConfigGroupId);
+
+    mParameterSet.loadConfig(filterConfigGroup);
+}
+
+void RotateByteArrayFilter::saveConfig(KConfigGroup& configGroup) const
+{
+    KConfigGroup filterConfigGroup = configGroup.group(RotateFilterConfigGroupId);
+
+    mParameterSet.saveConfig(filterConfigGroup);
+}
 
 bool RotateByteArrayFilter::filter(Okteta::Byte* result,
                                    Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const

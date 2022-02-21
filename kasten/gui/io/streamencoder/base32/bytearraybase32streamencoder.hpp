@@ -16,23 +16,32 @@
 // Qt
 #include <QString>
 
+class KConfigGroup;
+
 namespace Kasten {
 
 class Base32StreamEncoderSettings
 {
 public:
-    enum class AlgorithmId
+    enum class EncodingType
     {
         Classic = 0,
         Hex = 1,
-        ZHex = 2
+        ZHex = 2,
+        _Count,
     };
 
 public:
     Base32StreamEncoderSettings();
 
+    bool operator==(const Base32StreamEncoderSettings& other) const;
+
 public:
-    AlgorithmId algorithmId = AlgorithmId::Classic;
+    void loadConfig(const KConfigGroup& configGroup);
+    void saveConfig(KConfigGroup& configGroup) const;
+
+public:
+    EncodingType encodingType = EncodingType::Classic;
 };
 
 class ByteArrayBase32StreamEncoder : public AbstractByteArrayStreamEncoder
@@ -74,11 +83,6 @@ private:
 };
 
 inline Base32StreamEncoderSettings ByteArrayBase32StreamEncoder::settings() const { return mSettings; }
-inline void ByteArrayBase32StreamEncoder::setSettings(const Base32StreamEncoderSettings& settings)
-{
-    mSettings = settings;
-    Q_EMIT settingsChanged();
-}
 
 }
 

@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    SPDX-FileCopyrightText: 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    SPDX-FileCopyrightText: 2008-2009, 2022 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
@@ -11,17 +11,36 @@
 // Okteta core
 #include <Okteta/AbstractByteArrayModel>
 // KF
+#include <KConfigGroup>
 #include <KLocalizedString>
+
+static constexpr char OrFilterConfigGroupId[] = "OR";
 
 OrByteArrayFilter::OrByteArrayFilter()
     : AbstractByteArrayFilter(
         i18nc("name of the filter; it does a logic OR operation",
-              "operand OR data"))
+              "operand OR data"),
+        QStringLiteral("OR")
+      )
 {}
 
 OrByteArrayFilter::~OrByteArrayFilter() = default;
 
 AbstractByteArrayFilterParameterSet* OrByteArrayFilter::parameterSet() { return &mParameterSet; }
+
+void OrByteArrayFilter::loadConfig(const KConfigGroup& configGroup)
+{
+    const KConfigGroup filterConfigGroup = configGroup.group(OrFilterConfigGroupId);
+
+    mParameterSet.loadConfig(filterConfigGroup);
+}
+
+void OrByteArrayFilter::saveConfig(KConfigGroup& configGroup) const
+{
+    KConfigGroup filterConfigGroup = configGroup.group(OrFilterConfigGroupId);
+
+    mParameterSet.saveConfig(filterConfigGroup);
+}
 
 bool OrByteArrayFilter::filter(Okteta::Byte* result,
                                Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const

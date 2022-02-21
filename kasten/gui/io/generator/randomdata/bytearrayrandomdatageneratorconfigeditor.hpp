@@ -30,9 +30,6 @@ public:
 public: // AbstractModelDataGeneratorConfigEditor API
     QString name() const override;
 
-public:
-    void rememberCurrentSettings();
-
 private Q_SLOTS:
     void onSettingsChanged();
 

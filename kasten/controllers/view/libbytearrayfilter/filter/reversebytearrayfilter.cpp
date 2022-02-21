@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    SPDX-FileCopyrightText: 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    SPDX-FileCopyrightText: 2008, 2022 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
@@ -11,17 +11,37 @@
 // Okteta core
 #include <Okteta/AbstractByteArrayModel>
 // KF
+#include <KConfigGroup>
 #include <KLocalizedString>
+
+static constexpr char ReverseFilterConfigGroupId[] = "Reverse";
 
 ReverseByteArrayFilter::ReverseByteArrayFilter()
     : AbstractByteArrayFilter(
         i18nc("name of the filter; it changes the order of the bytes/bits to backwards, so ABCD becomes DCBA",
-              "REVERSE data"))
+              "REVERSE data"),
+        QStringLiteral("Reverse")
+      )
 {}
 
 ReverseByteArrayFilter::~ReverseByteArrayFilter() = default;
 
 AbstractByteArrayFilterParameterSet* ReverseByteArrayFilter::parameterSet() { return &mParameterSet; }
+
+
+void ReverseByteArrayFilter::loadConfig(const KConfigGroup& configGroup)
+{
+    const KConfigGroup filterConfigGroup = configGroup.group(ReverseFilterConfigGroupId);
+
+    mParameterSet.loadConfig(filterConfigGroup);
+}
+
+void ReverseByteArrayFilter::saveConfig(KConfigGroup& configGroup) const
+{
+    KConfigGroup filterConfigGroup = configGroup.group(ReverseFilterConfigGroupId);
+
+    mParameterSet.saveConfig(filterConfigGroup);
+}
 
 bool ReverseByteArrayFilter::filter(Okteta::Byte* result,
                                     Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const

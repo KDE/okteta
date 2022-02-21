@@ -17,7 +17,9 @@
 
 ModSum8ByteArrayChecksumAlgorithm::ModSum8ByteArrayChecksumAlgorithm()
     : AbstractByteArrayChecksumAlgorithm(
-        i18nc("name of the checksum algorithm", "Modular sum 8-bit"))
+        i18nc("name of the checksum algorithm", "Modular sum 8-bit"),
+        QStringLiteral("ModularSum8")
+      )
 {}
 
 ModSum8ByteArrayChecksumAlgorithm::~ModSum8ByteArrayChecksumAlgorithm() = default;

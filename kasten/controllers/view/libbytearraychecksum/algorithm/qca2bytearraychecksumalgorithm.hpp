@@ -19,7 +19,7 @@ class Qca2ByteArrayChecksumAlgorithm : public AbstractByteArrayChecksumAlgorithm
     Q_OBJECT
 
 public:
-    Qca2ByteArrayChecksumAlgorithm(const QString& name, const QString& type);
+    Qca2ByteArrayChecksumAlgorithm(const QString& name, const QString& id, const QString& type);
     ~Qca2ByteArrayChecksumAlgorithm() override;
 
 public: // AbstractByteArrayChecksumAlgorithm API

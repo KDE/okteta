@@ -29,6 +29,8 @@ ReverseByteArrayFilterParameterSetEdit::ReverseByteArrayFilterParameterSetEdit(Q
               "Reverse also bits:");
     mInvertsBitsCheckBox = new QCheckBox(this);
     mInvertsBitsCheckBox->setChecked(false);
+    connect(mInvertsBitsCheckBox, &QCheckBox::clicked,
+            this, &ReverseByteArrayFilterParameterSetEdit::valuesChanged);
     const QString alignWhatsThis =
         i18nc("@info:whatsthis",
               "If set, the bits are arranged in reverse order as well.");

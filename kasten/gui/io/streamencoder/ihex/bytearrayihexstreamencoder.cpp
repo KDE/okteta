@@ -15,17 +15,77 @@
 // Okteta core
 #include <Okteta/AbstractByteArrayModel>
 // KF
+#include <KConfigGroup>
+#include <KSharedConfig>
 #include <KLocalizedString>
 // Qt
 #include <QTextStream>
+// Std
+#include <array>
+#include <algorithm>
+#include <iterator>
+
+static constexpr int addressSizeCount =
+    static_cast<int>(Kasten::IHexStreamEncoderSettings::AddressSizeId::_Count);
+static const std::array<QString, addressSizeCount> addressSizeConfigValueList = {
+    QStringLiteral("32"),
+    QStringLiteral("16"),
+    QStringLiteral("8"),
+};
+
+template <>
+inline Kasten::IHexStreamEncoderSettings::AddressSizeId KConfigGroup::readEntry(const char *key,
+                                                                                   const Kasten::IHexStreamEncoderSettings::AddressSizeId &defaultValue) const
+{
+    const QString entry = readEntry(key, QString());
+
+    auto it = std::find(addressSizeConfigValueList.cbegin(), addressSizeConfigValueList.cend(), entry);
+    if (it == addressSizeConfigValueList.cend()) {
+        return defaultValue;
+    }
+
+    const int listIndex = std::distance(addressSizeConfigValueList.cbegin(), it);
+    return static_cast<Kasten::IHexStreamEncoderSettings::AddressSizeId>(listIndex);
+}
+
+template <>
+inline void KConfigGroup::writeEntry(const char *key,
+                                     const Kasten::IHexStreamEncoderSettings::AddressSizeId &value,
+                                     KConfigBase::WriteConfigFlags flags)
+{
+    const int listIndex = static_cast<int>(value);
+    writeEntry(key, addressSizeConfigValueList[listIndex], flags);
+}
 
 namespace Kasten {
 
-IHexStreamEncoderSettings::IHexStreamEncoderSettings() = default;
+static constexpr IHexStreamEncoderSettings::AddressSizeId DefaultAddressSize =
+    IHexStreamEncoderSettings::AddressSizeId::Bits32;
+
+static constexpr char ByteArrayIHexStreamEncoderConfigGroupId[] = "ByteArrayIntelHexStreamEncoder";
+static constexpr char AddressSizeConfigKey[] = "AddressSize";
 
 const char ByteArrayIHexStreamEncoder::hexDigits[16] = {
     '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'
 };
+
+IHexStreamEncoderSettings::IHexStreamEncoderSettings() = default;
+
+bool IHexStreamEncoderSettings::operator==(const IHexStreamEncoderSettings& other) const
+{
+    return (addressSizeId == other.addressSizeId);
+}
+
+void IHexStreamEncoderSettings::loadConfig(const KConfigGroup& configGroup)
+{
+    addressSizeId = configGroup.readEntry(AddressSizeConfigKey, DefaultAddressSize);
+}
+
+void IHexStreamEncoderSettings::saveConfig(KConfigGroup& configGroup) const
+{
+    configGroup.writeEntry(AddressSizeConfigKey, addressSizeId);
+}
+
 
 void ByteArrayIHexStreamEncoder::streamLine(QTextStream& textStream,
                                             const unsigned char* line)
@@ -95,9 +155,24 @@ void ByteArrayIHexStreamEncoder::streamEndOfFile(QTextStream& textStream,
 
 ByteArrayIHexStreamEncoder::ByteArrayIHexStreamEncoder()
     : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "Intel Hex"), QStringLiteral("text/x-ihex"))
-{}
+{
+    const KConfigGroup configGroup(KSharedConfig::openConfig(), ByteArrayIHexStreamEncoderConfigGroupId);
+    mSettings.loadConfig(configGroup);
+}
 
 ByteArrayIHexStreamEncoder::~ByteArrayIHexStreamEncoder() = default;
+
+void ByteArrayIHexStreamEncoder::setSettings(const IHexStreamEncoderSettings& settings)
+{
+    if (mSettings == settings) {
+        return;
+    }
+
+    mSettings = settings;
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ByteArrayIHexStreamEncoderConfigGroupId);
+    mSettings.saveConfig(configGroup);
+    Q_EMIT settingsChanged();
+}
 
 bool ByteArrayIHexStreamEncoder::encodeDataToStream(QIODevice* device,
                                                     const ByteArrayView* byteArrayView,

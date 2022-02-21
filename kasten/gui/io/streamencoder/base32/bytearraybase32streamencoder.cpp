@@ -11,11 +11,56 @@
 // Okteta core
 #include <Okteta/AbstractByteArrayModel>
 // KF
+#include <KConfigGroup>
+#include <KSharedConfig>
 #include <KLocalizedString>
 // Qt
 #include <QTextStream>
+// Std
+#include <array>
+#include <algorithm>
+#include <iterator>
+
+static constexpr int encodingTypeCount =
+    static_cast<int>(Kasten::Base32StreamEncoderSettings::EncodingType::_Count);
+static const std::array<QString, encodingTypeCount> encodingTypeConfigValueList = {
+    QStringLiteral("Classic"),
+    QStringLiteral("base32hex"),
+    QStringLiteral("z-base-32"),
+};
+
+template <>
+inline Kasten::Base32StreamEncoderSettings::EncodingType
+KConfigGroup::readEntry(const char *key,
+                        const Kasten::Base32StreamEncoderSettings::EncodingType &defaultValue) const
+{
+    const QString entry = readEntry(key, QString());
+
+    auto it = std::find(encodingTypeConfigValueList.cbegin(), encodingTypeConfigValueList.cend(), entry);
+    if (it == encodingTypeConfigValueList.cend()) {
+        return defaultValue;
+    }
+
+    const int listIndex = std::distance(encodingTypeConfigValueList.cbegin(), it);
+    return static_cast<Kasten::Base32StreamEncoderSettings::EncodingType>(listIndex);
+}
+
+template <>
+inline void KConfigGroup::writeEntry(const char *key,
+                                     const Kasten::Base32StreamEncoderSettings::EncodingType &value,
+                                     KConfigBase::WriteConfigFlags flags)
+{
+    const int listIndex = static_cast<int>(value);
+    writeEntry(key, encodingTypeConfigValueList[listIndex], flags);
+}
 
 namespace Kasten {
+
+static constexpr Base32StreamEncoderSettings::EncodingType DefaultEncodingType =
+    Base32StreamEncoderSettings::EncodingType::Classic;
+
+static constexpr char ByteArrayBase32StreamEncoderConfigGroupId[] = "ByteArrayBase32StreamEncoder";
+static constexpr char EncodingTypeConfigKey[] = "EncodingType";
 
 static constexpr char base32ClassicEncodeMap[32] =
 {
@@ -72,11 +117,43 @@ static constexpr Base32EncodingData
 
 Base32StreamEncoderSettings::Base32StreamEncoderSettings() = default;
 
+bool Base32StreamEncoderSettings::operator==(const Base32StreamEncoderSettings& other) const
+{
+    return (encodingType == other.encodingType);
+}
+
+void Base32StreamEncoderSettings::loadConfig(const KConfigGroup& configGroup)
+{
+    encodingType = configGroup.readEntry(EncodingTypeConfigKey, DefaultEncodingType);
+}
+
+void Base32StreamEncoderSettings::saveConfig(KConfigGroup& configGroup) const
+{
+    configGroup.writeEntry(EncodingTypeConfigKey, encodingType);
+}
+
+
 ByteArrayBase32StreamEncoder::ByteArrayBase32StreamEncoder()
     : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "Base32"), QStringLiteral("text/x-base32"))
-{}
+{
+    const KConfigGroup configGroup(KSharedConfig::openConfig(), ByteArrayBase32StreamEncoderConfigGroupId);
+    mSettings.loadConfig(configGroup);
+}
 
 ByteArrayBase32StreamEncoder::~ByteArrayBase32StreamEncoder() = default;
+
+
+void ByteArrayBase32StreamEncoder::setSettings(const Base32StreamEncoderSettings& settings)
+{
+    if (mSettings == settings) {
+        return;
+    }
+
+    mSettings = settings;
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ByteArrayBase32StreamEncoderConfigGroupId);
+    mSettings.saveConfig(configGroup);
+    Q_EMIT settingsChanged();
+}
 
 bool ByteArrayBase32StreamEncoder::encodeDataToStream(QIODevice* device,
                                                       const ByteArrayView* byteArrayView,
@@ -91,9 +168,9 @@ bool ByteArrayBase32StreamEncoder::encodeDataToStream(QIODevice* device,
     QTextStream textStream(device);
 
     // prepare
-    const auto& algorithmEncodingData = base32EncodingData[static_cast<int>(mSettings.algorithmId)];
-    const char* const base32EncodeMap = algorithmEncodingData.encodeMap;
-    const char* (* base32Padding)(InputByteIndex) = algorithmEncodingData.padding;
+    const auto& encodingTypeData = base32EncodingData[static_cast<int>(mSettings.encodingType)];
+    const char* const base32EncodeMap = encodingTypeData.encodeMap;
+    const char* (* base32Padding)(InputByteIndex) = encodingTypeData.padding;
 
     InputByteIndex inputByteIndex = InputByteIndex::First;
     int outputGroupsPerLine = 0;

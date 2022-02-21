@@ -16,12 +16,14 @@
 // Qt
 #include <QString>
 
+class KConfigGroup;
+
 namespace Kasten {
 
 class UuencodingStreamEncoderSettings
 {
 public:
-    enum class AlgorithmId
+    enum class EncodingType
     {
         Historical = 0,
         Base64 = 1
@@ -30,9 +32,15 @@ public:
 public:
     UuencodingStreamEncoderSettings();
 
+    bool operator==(const UuencodingStreamEncoderSettings& other) const;
+
+public:
+    void loadConfig(const KConfigGroup& configGroup);
+    void saveConfig(KConfigGroup& configGroup) const;
+
 public:
     QString fileName;
-    AlgorithmId algorithmId = AlgorithmId::Base64;
+    EncodingType encodingType = EncodingType::Base64;
 };
 
 class ByteArrayUuencodingStreamEncoder : public AbstractByteArrayStreamEncoder
@@ -66,11 +74,6 @@ private:
 };
 
 inline UuencodingStreamEncoderSettings ByteArrayUuencodingStreamEncoder::settings() const { return mSettings; }
-inline void ByteArrayUuencodingStreamEncoder::setSettings(const UuencodingStreamEncoderSettings& settings)
-{
-    mSettings = settings;
-    Q_EMIT settingsChanged();
-}
 
 }
 

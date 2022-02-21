@@ -42,10 +42,12 @@ private: // separation
     void addFilters();
 
 private Q_SLOTS:
+    void onFilterChanged(int filterId);
     void onFilterClicked();
     void onOperationChange(int index);
     void onHasWriteableChanged(bool hasWriteable);
     void onCharCodecChanged(const QString& charCodecName);
+    void onValuesChanged();
     void onValidityChanged(bool isValid);
 
 private:

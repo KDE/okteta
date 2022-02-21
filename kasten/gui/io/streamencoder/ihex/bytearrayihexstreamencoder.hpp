@@ -16,6 +16,8 @@
 // Qt
 #include <QString>
 
+class KConfigGroup;
+
 class QTextStream;
 
 namespace Kasten {
@@ -27,11 +29,18 @@ public:
     {
         Bits32 = 0,
         Bits16 = 1,
-        Bits8 = 2
+        Bits8 = 2,
+        _Count,
     };
 
 public:
     IHexStreamEncoderSettings();
+
+    bool operator==(const IHexStreamEncoderSettings& other) const;
+
+public:
+    void loadConfig(const KConfigGroup& configGroup);
+    void saveConfig(KConfigGroup& configGroup) const;
 
 public:
     AddressSizeId addressSizeId = AddressSizeId::Bits32;
@@ -91,11 +100,6 @@ private:
 };
 
 inline IHexStreamEncoderSettings ByteArrayIHexStreamEncoder::settings() const { return mSettings; }
-inline void ByteArrayIHexStreamEncoder::setSettings(const IHexStreamEncoderSettings& settings)
-{
-    mSettings = settings;
-    Q_EMIT settingsChanged();
-}
 
 inline char ByteArrayIHexStreamEncoder::hexValueOfNibble(int nibble)
 { return hexDigits[nibble & 0xF]; }

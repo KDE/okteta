@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    SPDX-FileCopyrightText: 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    SPDX-FileCopyrightText: 2008-2009, 2022 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
@@ -26,6 +26,8 @@ RotateByteArrayFilterParameterSetEdit::RotateByteArrayFilterParameterSetEdit(QWi
 
     mGroupSizeEdit = new QSpinBox(this);
     mGroupSizeEdit->setRange(1, INT_MAX);
+    connect(mGroupSizeEdit, QOverload<int>::of(&QSpinBox::valueChanged),
+            this, &RotateByteArrayFilterParameterSetEdit::valuesChanged);
 
     const QString groupSizeLabelText =
         i18nc("@label:spinbox number of bytes the movement is done within",
@@ -45,6 +47,8 @@ RotateByteArrayFilterParameterSetEdit::RotateByteArrayFilterParameterSetEdit(QWi
     mMoveBitWidthEdit->setRange(INT_MIN, INT_MAX);
     connect(mMoveBitWidthEdit, QOverload<int>::of(&QSpinBox::valueChanged),
             this, &RotateByteArrayFilterParameterSetEdit::onValueChanged);
+    connect(mMoveBitWidthEdit, QOverload<int>::of(&QSpinBox::valueChanged),
+            this, &RotateByteArrayFilterParameterSetEdit::valuesChanged);
 
     const QString moveBitWidthLabelText =
         i18nc("@label:spinbox width (in number of bits) the bits are moved",

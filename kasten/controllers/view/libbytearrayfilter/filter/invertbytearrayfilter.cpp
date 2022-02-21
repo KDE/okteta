@@ -16,7 +16,9 @@
 InvertByteArrayFilter::InvertByteArrayFilter()
     : AbstractByteArrayFilter(
         i18nc("name of the filter; it switches all bits from 0 to 1 and 1 to 0 respectively, so 01111110 becomes 10000001",
-              "INVERT data"))
+              "INVERT data"),
+        QStringLiteral("Invert")
+      )
 {}
 
 InvertByteArrayFilter::~InvertByteArrayFilter() = default;
