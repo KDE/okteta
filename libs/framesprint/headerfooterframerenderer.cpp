@@ -17,6 +17,7 @@
 #include <QDateTime>
 #include <QPainter>
 #include <QFontMetrics>
+#include <QRegExp>
 
 HeaderFooterFrameRenderer::HeaderFooterFrameRenderer(const PrintInfo* info)
     : mInfo(info)

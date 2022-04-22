@@ -9,6 +9,7 @@
 #include "filesystem.hpp"
 
 // Qt
+#include <QRegExp>
 #include <QDir>
 #include <QFile>
 #include <QTest>

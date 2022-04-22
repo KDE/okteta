@@ -16,7 +16,6 @@
 #include <KLocalizedString>
 // Qt
 #include <QString>
-#include <QRegExp>
 #include <QJSEngine>
 #include <QJSValue>
 

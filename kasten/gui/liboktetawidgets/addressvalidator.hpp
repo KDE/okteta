@@ -14,6 +14,7 @@
 #include <Okteta/Address>
 // Qt
 #include <QValidator>
+#include <QRegExp>
 
 namespace Okteta {
 
