@@ -31,7 +31,7 @@ GotoOffsetController::GotoOffsetController(If::ToolInlineViewable* toolInlineVie
     mGotoOffsetAction = new QAction(QIcon::fromTheme(QStringLiteral("go-jump")),
                                     i18nc("@action:inmenu", "&Go to Offset..."), this);
     connect(mGotoOffsetAction, &QAction::triggered,this, &GotoOffsetController::gotoOffset);
-    actionCollection->setDefaultShortcut(mGotoOffsetAction, Qt::CTRL | Qt::Key_G);
+    actionCollection->setDefaultShortcut(mGotoOffsetAction, QKeySequence(Qt::CTRL | Qt::Key_G));
 
     actionCollection->addAction(QStringLiteral("goto_offset"), mGotoOffsetAction);
 

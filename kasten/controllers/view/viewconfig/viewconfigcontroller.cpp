@@ -99,7 +99,7 @@ ViewConfigController::ViewConfigController(KXMLGUIClient* guiClient)
 
     mShowOffsetColumnAction = new KToggleAction(i18nc("@option:check", "Show &Line Offset"), this);
     mShowOffsetColumnAction->setObjectName(QStringLiteral("view_lineoffset"));
-    actionCollection->setDefaultShortcut(mShowOffsetColumnAction, Qt::Key_F11);
+    actionCollection->setDefaultShortcut(mShowOffsetColumnAction, QKeySequence(Qt::Key_F11));
     connect(mShowOffsetColumnAction, &KToggleAction::triggered,
             this, &ViewConfigController::toggleOffsetColumn);
 

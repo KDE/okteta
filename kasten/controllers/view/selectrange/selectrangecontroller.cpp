@@ -32,7 +32,7 @@ SelectRangeController::SelectRangeController(If::ToolInlineViewable* toolInlineV
     mSelectAction = new QAction(QIcon::fromTheme(QStringLiteral("select-rectangular")),
                                 i18nc("@action:inmenu", "&Select Range..."), this);
     connect(mSelectAction, &QAction::triggered, this, &SelectRangeController::select);
-    actionCollection->setDefaultShortcut(mSelectAction, Qt::CTRL | Qt::Key_E);
+    actionCollection->setDefaultShortcut(mSelectAction, QKeySequence(Qt::CTRL | Qt::Key_E));
 
     actionCollection->addAction(QStringLiteral("edit_select"), mSelectAction);
 
