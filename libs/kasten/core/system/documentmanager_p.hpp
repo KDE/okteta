@@ -14,8 +14,6 @@
 // Qt
 #include <QVector>
 
-class QStringList;
-
 namespace Kasten {
 
 class AbstractDocument;

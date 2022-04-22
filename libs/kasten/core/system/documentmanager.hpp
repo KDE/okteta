@@ -17,8 +17,6 @@
 // Std
 #include <memory>
 
-class QStringList;
-
 namespace Kasten {
 
 class AbstractDocument;
