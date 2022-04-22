@@ -65,7 +65,7 @@ static bool is8Bit(QTextCodec* codec)
 
     const QByteArray& codecName = codec->name();
     for (const auto& encodingData : encodingDataList) {
-        if (qstrcmp(codecName, encodingData.name) == 0) {
+        if (codecName.compare(encodingData.name) == 0) {
             result = true;
             break;
         }
