@@ -31,6 +31,7 @@
 #include <KActionCollection>
 #include <KStandardAction>
 // Qt
+#include <QActionGroup>
 #include <QAction>
 
 namespace Kasten {

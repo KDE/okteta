@@ -22,6 +22,7 @@
 #include <KActionCollection>
 #include <KLocalizedString>
 // Qt
+#include <QActionGroup>
 #include <QAction>
 
 namespace Kasten {
