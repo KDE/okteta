@@ -13,13 +13,14 @@
 #include <Kasten/AbstractTool>
 // Okteta core
 #include <Okteta/Address>
+#include <Okteta/Bookmark>
+// Qt
+#include <QVector>
 
 namespace Okteta {
 class Bookmarkable;
-class Bookmark;
 class AbstractByteArrayModel;
 }
-template <class T> class QVector;
 
 namespace Kasten {
 

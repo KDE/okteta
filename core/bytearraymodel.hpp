@@ -11,6 +11,7 @@
 
 // lib
 #include "abstractbytearraymodel.hpp"
+#include "bookmark.hpp"
 #include "bookmarkable.hpp"
 #include "bookmarksconstiterator.hpp"
 

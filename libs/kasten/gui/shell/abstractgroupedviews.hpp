@@ -11,12 +11,12 @@
 
 // lib
 #include "abstractviewarea.hpp"
-
-template <class T> class QVector;
+#include "abstractview.hpp"
+// Qt
+#include <QVector>
 
 namespace Kasten {
 
-class AbstractView;
 class AbstractGroupedViewsPrivate;
 
 class KASTENGUI_EXPORT AbstractGroupedViews : public AbstractViewArea

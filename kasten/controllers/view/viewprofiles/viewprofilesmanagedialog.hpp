@@ -13,8 +13,8 @@
 #include <Kasten/Okteta/ByteArrayViewProfile>
 // Qt
 #include <QDialog>
+#include <QVector>
 
-template <class C> class QVector;
 class QTreeView;
 class QPushButton;
 

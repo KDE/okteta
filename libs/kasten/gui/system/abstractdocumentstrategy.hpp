@@ -13,10 +13,10 @@
 #include "kastengui_export.hpp"
 // Qt
 #include <QObject>
+#include <QVector>
 // Std
 #include <memory>
 
-template <typename C> class QVector;
 class QUrl;
 
 namespace Kasten {

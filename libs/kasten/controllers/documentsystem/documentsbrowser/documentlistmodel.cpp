@@ -10,9 +10,6 @@
 
 // lib
 #include "documentstool.hpp"
-// Kasten core
-#include <Kasten/AbstractModelSynchronizer>
-#include <Kasten/AbstractDocument>
 // KF
 #include <KLocalizedString>
 

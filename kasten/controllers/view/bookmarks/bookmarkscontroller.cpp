@@ -23,7 +23,6 @@
 #include <Okteta/CharCodec>
 #include <Okteta/Bookmarkable>
 #include <Okteta/BookmarksConstIterator>
-#include <Okteta/Bookmark>
 #include <Okteta/AbstractByteArrayModel>
 // KF
 #include <KXMLGUIClient>

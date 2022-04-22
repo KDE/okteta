@@ -13,6 +13,7 @@
 #include "columnsview.hpp"
 // Okteta core
 #include <Okteta/AddressRange>
+#include <Okteta/Bookmark>
 // Qt
 #include <QClipboard>
 
@@ -21,7 +22,6 @@ class QMimeData;
 class QByteArray;
 
 namespace Okteta {
-class Bookmark;
 class ValueCodec;
 class CharCodec;
 class AbstractByteArrayModel;

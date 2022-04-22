@@ -11,8 +11,10 @@
 
 // Kasten gui
 #include <Kasten/ShellWindow>
+#include <Kasten/AbstractView>
+// Qt
+#include <QVector>
 
-template <class T> class QVector;
 class QMimeData;
 
 namespace Kasten {
