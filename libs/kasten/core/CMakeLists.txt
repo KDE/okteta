@@ -4,13 +4,13 @@ set(KASTENCORE_SO_VERSION ${KASTEN_LIB_SOVERSION})
 okteta_add_library(Core NAMESPACE Kasten
     PUBLIC
         KF5::KIOCore
-        Qt5::Core
-        Qt5::Gui
+        Qt::Core
+        Qt::Gui
     PRIVATE
         KF5::I18n
         KF5::JobWidgets
         KF5::WidgetsAddons
-        Qt5::Network
+        Qt::Network
     VERSION     ${KASTENCORE_VERSION}
     SOVERSION   ${KASTENCORE_SO_VERSION}
     ABIVERSION  ${KASTEN_ABI_VERSION}

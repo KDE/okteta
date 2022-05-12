@@ -28,7 +28,7 @@ ecm_add_test(
   KastenCore
   KF5::I18n
   KF5::Parts
-  Qt5::Test
+  Qt::Test
 )
 
 kcoreaddons_desktop_to_json(oktetaparttest ${CMAKE_CURRENT_BINARY_DIR}/../oktetapart.desktop)

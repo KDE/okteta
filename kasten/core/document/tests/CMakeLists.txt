@@ -24,7 +24,7 @@ ecm_add_test(
         KastenCore
         testoktetacore
         KF5::I18n
-        Qt5::Test
+        Qt::Test
 )
 
 
@@ -41,5 +41,5 @@ ecm_add_test(
         oktetacoretestutil
         testoktetacore
         KF5::I18n
-        Qt5::Test
+        Qt::Test
 )

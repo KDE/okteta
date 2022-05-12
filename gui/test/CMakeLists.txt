@@ -17,21 +17,21 @@ ecm_add_test(
     selectiontest.cpp
     TEST_NAME selectiontest
     NAME_PREFIX libokteta-gui-
-    LINK_LIBRARIES OktetaCore Qt5::Test
+    LINK_LIBRARIES OktetaCore Qt::Test
 )
 
 ecm_add_test(
     coordtest.cpp
     TEST_NAME coordtest
     NAME_PREFIX libokteta-gui-
-    LINK_LIBRARIES OktetaCore Qt5::Test
+    LINK_LIBRARIES OktetaCore Qt::Test
 )
 
 ecm_add_test(
     coordrangetest.cpp
     TEST_NAME coordrangetest
     NAME_PREFIX libokteta-gui-
-    LINK_LIBRARIES OktetaCore Qt5::Test
+    LINK_LIBRARIES OktetaCore Qt::Test
 )
 
 ecm_add_test(
@@ -39,7 +39,7 @@ ecm_add_test(
     coordrangelisttest.cpp
     TEST_NAME coordrangelisttest
     NAME_PREFIX libokteta-gui-
-    LINK_LIBRARIES OktetaCore Qt5::Test
+    LINK_LIBRARIES OktetaCore Qt::Test
 )
 
 ecm_add_test(
@@ -47,7 +47,7 @@ ecm_add_test(
     bytearraytablelayouttest.cpp
     TEST_NAME bytearraytablelayouttest
     NAME_PREFIX libokteta-gui-
-    LINK_LIBRARIES OktetaCore Qt5::Test
+    LINK_LIBRARIES OktetaCore Qt::Test
 )
 # FIXME:
 # this is a rather stupid workaround - you should link to liboktetagui instead
@@ -62,7 +62,7 @@ ecm_add_test(
     bytearraytablecursortest.cpp
     TEST_NAME bytearraytablecursortest
     NAME_PREFIX libokteta-gui-
-    LINK_LIBRARIES OktetaCore Qt5::Test
+    LINK_LIBRARIES OktetaCore Qt::Test
 )
 # FIXME:
 # this is a rather stupid workaround - you should link to liboktetagui instead

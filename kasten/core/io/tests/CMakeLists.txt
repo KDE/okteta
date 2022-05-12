@@ -23,7 +23,7 @@ target_link_libraries(oktetakastenio
         OktetaCore
         KF5::I18n
         KF5::CoreAddons
-        Qt5::Core
+        Qt::Core
 )
 target_sources(oktetakastenio
     PRIVATE
@@ -55,7 +55,7 @@ ecm_add_test(
         testoktetacore
         KF5::I18n
         KF5::Bookmarks
-        Qt5::Test
+        Qt::Test
 )
 
 ########### bytearrayrawfilesynchronizerfactorytest ###############
@@ -76,5 +76,5 @@ ecm_add_test(
         testoktetacore
         KF5::I18n
         KF5::Bookmarks
-        Qt5::Test
+        Qt::Test
 )

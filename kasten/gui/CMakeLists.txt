@@ -7,7 +7,7 @@ okteta_add_library(Gui NAMESPACE Okteta Kasten
         KastenGui
         OktetaGui
     PRIVATE
-        Qt5::Qml
+        Qt::Qml
         KF5::I18n
         KF5::Completion
     VERSION     ${OKTETAKASTENGUI_VERSION}

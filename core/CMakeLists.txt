@@ -3,7 +3,7 @@ set(OKTETACORE_SO_VERSION ${OKTETALIBS_LIB_SOVERSION})
 
 okteta_add_library(Core NAMESPACE Okteta
     PUBLIC
-        Qt5::Core
+        Qt::Core
     PRIVATE
         KF5::I18n
         KF5::Codecs   #needed for codecs
@@ -113,7 +113,7 @@ okteta_add_pkgconfig(Core NAMESPACE Okteta
 if(BUILD_TESTING)
     #don't compile sources twice by using object libraries
     #add_library( oktetacore_objs OBJECT ${oktetacore_LIB_SRCS} )
-    #target_include_directories( oktetacore_objs PUBLIC $<TARGET_PROPERTY:Qt5::Core,INTERFACE_INCLUDE_DIRECTORIES> )
+    #target_include_directories( oktetacore_objs PUBLIC $<TARGET_PROPERTY:Qt::Core,INTERFACE_INCLUDE_DIRECTORIES> )
     #set( oktetacore_LIB_OBJS $<TARGET_OBJECTS:oktetacore_objs>)
 
     # compile flags don't get set for object libraries, since cannot link to target
@@ -123,7 +123,7 @@ if(BUILD_TESTING)
     target_sources(testoktetacore PRIVATE ${oktetacore_LIB_OBJS})
     set_target_properties(testoktetacore PROPERTIES COMPILE_FLAGS -DOKTETACORE_STATIC_DEFINE)
     target_include_directories(testoktetacore PUBLIC ${CMAKE_CURRENT_BINARY_DIR})
-    target_link_libraries(testoktetacore Qt5::Core KF5::I18n KF5::Codecs)
+    target_link_libraries(testoktetacore Qt::Core KF5::I18n KF5::Codecs)
 
     add_subdirectory(piecetable/tests)
     add_subdirectory(tests)
