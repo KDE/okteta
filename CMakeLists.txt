@@ -61,16 +61,12 @@ if( BUILD_OKTETAKASTENLIBS )
         Network
         PrintSupport
         Qml
+        Script
+        ScriptTools
         Xml
     )
-    if (QT_MAJOR_VERSION STREQUAL "5")
-        list(APPEND ADDITIONAL_REQUIRED_QT_COMPONENTS
-            ScriptTools
-            Script
-        )
-    endif()
 endif()
-find_package(Qt${QT_MAJOR_VERSION} ${REQUIRED_QT_VERSION} CONFIG REQUIRED
+find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED
     COMPONENTS
     Core
     Widgets
@@ -107,8 +103,8 @@ find_package(KF5 ${REQUIRED_KF5_VERSION} REQUIRED
     ${ADDITIONAL_REQUIRED_KF_COMPONENTS}
 )
 
-find_package(Qca-qt${QT_MAJOR_VERSION} 2.1.0)
-set_package_properties(Qca-qt${QT_MAJOR_VERSION} PROPERTIES
+find_package(Qca-qt5 2.1.0)
+set_package_properties(Qca-qt5 PROPERTIES
     DESCRIPTION "Qt Cryptographic Architecture"
     URL "https://commits.kde.org/qca"
     TYPE OPTIONAL

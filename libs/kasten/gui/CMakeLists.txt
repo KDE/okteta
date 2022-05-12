@@ -4,7 +4,7 @@ set(KASTENGUI_SO_VERSION ${KASTEN_LIB_SOVERSION})
 okteta_add_library(Gui NAMESPACE Kasten
     PUBLIC
         KastenCore
-        Qt::Widgets
+        Qt5::Widgets
         KF5::XmlGui
     PRIVATE
         KF5::I18n

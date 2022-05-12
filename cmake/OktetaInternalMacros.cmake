@@ -135,7 +135,7 @@ macro(okteta_add_sublibrary _baseName)
     endforeach()
 
     foreach(_qrc ${OKTETA_ADD_SUBLIBRARY_QRC})
-        qt_add_resources(_srcs "${_relativePath}${_qrc}")
+        qt5_add_resources(_srcs "${_relativePath}${_qrc}")
     endforeach()
 
     target_sources(${_library_target} PRIVATE ${_srcs})

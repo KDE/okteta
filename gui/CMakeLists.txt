@@ -4,7 +4,7 @@ set(OKTETAGUI_SO_VERSION ${OKTETALIBS_LIB_SOVERSION})
 okteta_add_library(Gui NAMESPACE Okteta
     PUBLIC
         OktetaCore
-        Qt::Widgets
+        Qt5::Widgets
     PRIVATE
         KF5::I18n
         KF5::ConfigWidgets
