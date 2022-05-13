@@ -21,3 +21,6 @@ Dependencies:
     'frameworks/kcodecs': '@stable'
     'frameworks/kconfigwidgets': '@stable'
     'frameworks/ki18n': '@stable'
+
+Options:
+  require-passing-tests-on: [ 'Linux', 'FreeBSD' ]
