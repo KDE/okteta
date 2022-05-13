@@ -76,7 +76,7 @@
   <summary xml:lang="sr-ijekavian">Хексадекадни уређивач</summary>
   <summary xml:lang="sr-ijekavianlatin">Heksadekadni uređivač</summary>
   <summary xml:lang="sv">Hexeditor</summary>
-  <summary xml:lang="tr">Hex düzenleyici</summary>
+  <summary xml:lang="tr">Bayt düzenleyici</summary>
   <summary xml:lang="uk">Шістнадцятковий редактор</summary>
   <summary xml:lang="x-test">xxHex editorxx</summary>
   <summary xml:lang="zh-CN">十六进制编辑器</summary>
@@ -327,7 +327,7 @@
       <li xml:lang="sr-ijekavian">Бројевна кодирања: хексадекадно, декадно, октално, бинарно.</li>
       <li xml:lang="sr-ijekavianlatin">Brojevna kodiranja: heksadekadno, dekadno, oktalno, binarno.</li>
       <li xml:lang="sv">Numeriska kodningar: Hexadecimal, decimal, oktal, binär</li>
-      <li xml:lang="tr">Sayısal kodlama: On altılık, Onluk, Sekizlik, İkilik</li>
+      <li xml:lang="tr">Sayısal kodlama: Onaltılık, Onluk, Sekizlik, İkilik</li>
       <li xml:lang="uk">Числові кодування: шістнадцяткове, десяткове, вісімкове, двійкове.</li>
       <li xml:lang="x-test">xxNumerical encodings: Hexadecimal, Decimal, Octal, Binaryxx</li>
       <li xml:lang="zh-CN">数字编码：十六进制，十进制，八进制，二进制</li>
@@ -470,7 +470,7 @@
       <li xml:lang="sr-ijekavian">Опозивање и понављање.</li>
       <li xml:lang="sr-ijekavianlatin">Opozivanje i ponavljanje.</li>
       <li xml:lang="sv">Stöd för ångra och gör om</li>
-      <li xml:lang="tr">Geri al/yeniden yap desteği</li>
+      <li xml:lang="tr">Geri al/Yinele desteği</li>
       <li xml:lang="uk">Підтримка скасовування та повторення дій.</li>
       <li xml:lang="x-test">xxUndo/redo supportxx</li>
       <li xml:lang="zh-CN">支持撤销/重做</li>
