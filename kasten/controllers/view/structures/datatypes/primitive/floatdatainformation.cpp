@@ -21,7 +21,7 @@
 QWidget* FloatDataInformationMethods::staticCreateEditWidget(QWidget* parent)
 {
     auto* ret = new QDoubleSpinBox(parent);
-    ret->setMinimum(std::numeric_limits<float>::min());
+    ret->setMinimum(std::numeric_limits<float>::lowest());
     ret->setMaximum(std::numeric_limits<float>::max());
     return ret;
 }
