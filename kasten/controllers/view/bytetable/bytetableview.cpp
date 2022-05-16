@@ -25,6 +25,8 @@
 #include <QLayout>
 #include <QHeaderView>
 #include <QTreeView>
+// Std
+#include <limits>
 
 namespace Kasten {
 
@@ -72,7 +74,7 @@ ByteTableView::ByteTableView(ByteTableTool* tool, QWidget* parent)
     insertLayout->addWidget(label);
 
     mInsertCountEdit = new QSpinBox(this);
-    mInsertCountEdit->setRange(1, INT_MAX);
+    mInsertCountEdit->setRange(1, std::numeric_limits<int>::max());
     label->setBuddy(mInsertCountEdit);
     insertLayout->addWidget(mInsertCountEdit);
     const QString insertCountToolTip =

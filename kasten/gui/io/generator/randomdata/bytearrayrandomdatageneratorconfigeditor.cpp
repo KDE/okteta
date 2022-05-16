@@ -13,6 +13,8 @@
 // Qt
 #include <QSpinBox>
 #include <QFormLayout>
+// Std
+#include <limits>
 
 namespace Kasten {
 
@@ -30,7 +32,7 @@ ByteArrayRandomDataGeneratorConfigEditor::ByteArrayRandomDataGeneratorConfigEdit
         i18nc("@label:spinbox size of the bytearray to generate",
               "&Size (bytes):");
     mSizeInput = new QSpinBox(this);
-    mSizeInput->setRange(1, INT_MAX);
+    mSizeInput->setRange(1, std::numeric_limits<int>::max());
     mSizeInput->setValue(mSettings.size);
     connect(mSizeInput, QOverload<int>::of(&QSpinBox::valueChanged),
             this, &ByteArrayRandomDataGeneratorConfigEditor::onSettingsChanged);

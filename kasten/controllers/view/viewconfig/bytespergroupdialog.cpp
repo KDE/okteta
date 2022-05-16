@@ -15,6 +15,8 @@
 #include <QVBoxLayout>
 #include <QSpinBox>
 #include <QDialogButtonBox>
+// Std
+#include <limits>
 
 namespace Kasten {
 
@@ -26,7 +28,7 @@ BytesPerGroupDialog::BytesPerGroupDialog(QWidget* parent)
     auto* pageLayout = new QFormLayout();
 
     mGroupedBytesCountEdit = new QSpinBox(this);
-    mGroupedBytesCountEdit->setRange(0, INT_MAX);
+    mGroupedBytesCountEdit->setRange(0, std::numeric_limits<int>::max());
     const QString noGroupingText = i18nc("@label",
                                          "No grouping.");
     mGroupedBytesCountEdit->setSpecialValueText(noGroupingText);
