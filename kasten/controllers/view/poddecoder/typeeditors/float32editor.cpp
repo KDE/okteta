@@ -10,6 +10,7 @@
 
 // Qt
 #include <QDoubleValidator>
+#include <QLocale>
 // C++
 #include <limits>
 
@@ -20,6 +21,7 @@ Float32Editor::Float32Editor(QWidget* parent)
     const float floatMin = std::numeric_limits<float>::min();
 
     auto* validator = new QDoubleValidator(this);
+    validator->setLocale(QLocale::c()); // for consistency with other podtable editors
     validator->setNotation(QDoubleValidator::ScientificNotation);
     validator->setRange(floatMin, floatMax);
 

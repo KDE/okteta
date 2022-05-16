@@ -10,11 +10,13 @@
 
 // Qt
 #include <QDoubleValidator>
+#include <QLocale>
 
 Float64Editor::Float64Editor(QWidget* parent)
     : QLineEdit(parent)
 {
     auto* validator = new QDoubleValidator(this);
+    validator->setLocale(QLocale::c()); // for consistency with other podtable editors
     validator->setNotation(QDoubleValidator::ScientificNotation);
 
     setValidator(validator);
