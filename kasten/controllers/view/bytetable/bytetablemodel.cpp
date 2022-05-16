@@ -137,7 +137,7 @@ QVariant ByteTableModel::data(const QModelIndex& index, int role) const
             }
         }
     } else if (role == Qt::TextAlignmentRole) {
-        result = Qt::AlignRight;
+        result = static_cast<int>(Qt::AlignVCenter | Qt::AlignRight);
     }
 
     return result;

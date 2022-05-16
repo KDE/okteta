@@ -162,7 +162,7 @@ QVariant StatisticTableModel::data(const QModelIndex& index, int role) const
             ;
         }
     } else if (role == Qt::TextAlignmentRole) {
-        result = Qt::AlignRight;
+        result = static_cast<int>(Qt::AlignVCenter | Qt::AlignRight);
     } else if (role == Qt::ForegroundRole) {
         const int column = index.column();
         bool isInactive = false;
