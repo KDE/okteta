@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-  <struct name="pngHeader">
+  <struct name="pngHeader" byteOrder="big-endian">
     <array name="signature" length="12">
       <primitive name="val" type="Char" />
     </array>
