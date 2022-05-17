@@ -1,16 +1,16 @@
 Okteta Kasten Elements
 ======================
-part of the Okteta project, made within the KDE community.
+Part of the Okteta project, made within the KDE community.
 
-Copyright: 2007-2012 Friedrich W. H. Kossebau <kossebau@kde.org>
+Copyright: 2007-2022 Friedrich W. H. Kossebau <kossebau@kde.org>
 
 Author/Maintainer: Friedrich W. H. Kossebau <kossebau@kde.org>
 
 
-description:
+Description
 -----------
 Okteta Kasten Elements are libraries with elements for the Kasten framework
-(which is currently also located inside the Okteta sources, in libs/kasten/).
+(which is currently also located inside the Okteta sources, in [libs/kasten/](../../libs/kasten/)).
 They use the basic Okteta libraries liboktetacore and liboktetagui.
 
 As the API of these classes is still in active development there is no guarantee
@@ -20,6 +20,6 @@ could be used even in the same process without symbol conflicts, if e.g. plugins
 use different versions.
 
 
-installing:
------------
-Installs the lib and the public headers.
+Installing
+----------
+Installs the libraries and the public headers.
