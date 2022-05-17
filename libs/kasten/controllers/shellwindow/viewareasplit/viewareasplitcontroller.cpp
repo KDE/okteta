@@ -46,7 +46,7 @@ ViewAreaSplitController::ViewAreaSplitController(ViewManager* viewManager, Abstr
     connect(mSplitVerticallyAction, &QAction::triggered,
             this, &ViewAreaSplitController::splitVertically);
 
-    mSplitHorizontallyAction = new QAction(QIcon::fromTheme(QStringLiteral("split")),
+    mSplitHorizontallyAction = new QAction(QIcon::fromTheme(QStringLiteral("view-split-top-bottom")),
                                 i18nc("@action:inmenu", "Split Horizontal"), this);
     mSplitHorizontallyAction->setObjectName(QStringLiteral("view_area_split_horizontally"));
     actionCollection->setDefaultShortcut(mSplitHorizontallyAction, Qt::CTRL | Qt::SHIFT | Qt::Key_T);
