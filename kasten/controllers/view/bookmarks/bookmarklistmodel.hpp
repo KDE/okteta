@@ -13,6 +13,7 @@
 #include <Okteta/OffsetFormat>
 // Qt
 #include <QAbstractTableModel>
+#include <QFont>
 
 namespace Okteta {
 class Bookmark;
@@ -65,6 +66,7 @@ private:
 
     Okteta::OffsetFormat::print mPrintFunction;
     mutable char mCodedOffset[Okteta::OffsetFormat::MaxFormatWidth + 1];
+    QFont mFixedFont;
 };
 
 }

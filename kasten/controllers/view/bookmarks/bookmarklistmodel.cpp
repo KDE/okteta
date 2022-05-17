@@ -14,12 +14,15 @@
 #include <Okteta/Bookmark>
 // KF
 #include <KLocalizedString>
+// Qt
+#include <QFontDatabase>
 
 namespace Kasten {
 
 BookmarkListModel::BookmarkListModel(BookmarksTool* tool, QObject* parent)
     : QAbstractTableModel(parent)
     , mTool(tool)
+    , mFixedFont(QFontDatabase::systemFont(QFontDatabase::FixedFont))
 {
     mPrintFunction = Okteta::OffsetFormat::printFunction((Okteta::OffsetFormat::Format)tool->offsetCoding());
 
@@ -74,6 +77,14 @@ QVariant BookmarkListModel::data(const QModelIndex& index, int role) const
             break;
         default:
             ;
+        }
+        break;
+    }
+    case Qt::FontRole:
+    {
+        const int column = index.column();
+        if (column == OffsetColumnId) {
+            result = mFixedFont;
         }
         break;
     }
