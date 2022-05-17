@@ -37,7 +37,6 @@ public Q_SLOTS:
     void onDoubleClicked(const QModelIndex& index);
 
 private Q_SLOTS:
-    void setFixedFontByGlobalSettings();
     void resizeColumnsWidth();
     void onInsertCountEditChanged();
 

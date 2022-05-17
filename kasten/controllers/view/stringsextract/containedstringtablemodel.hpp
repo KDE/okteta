@@ -16,6 +16,9 @@
 // Qt
 #include <QList>
 #include <QAbstractTableModel>
+#include <QFont>
+
+namespace Kasten {
 
 class ContainedStringTableModel : public QAbstractTableModel
 {
@@ -49,6 +52,9 @@ private:
 
     Okteta::OffsetFormat::print mPrintFunction;
     mutable char mCodedOffset[Okteta::OffsetFormat::MaxFormatWidth + 1];
+    QFont mFixedFont;
 };
+
+}
 
 #endif

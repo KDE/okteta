@@ -13,6 +13,7 @@
 #include <Okteta/OktetaCore>
 // Qt
 #include <QAbstractTableModel>
+#include <QFont>
 
 namespace Okteta {
 class CharCodec;
@@ -58,6 +59,9 @@ Q_SIGNALS:
     void headerChanged();
     void sizeChanged(int size);
 
+public:
+    const QFont &fixedFont() const;
+
 private:
     int mSize;
     int* mByteCount;
@@ -67,7 +71,13 @@ private:
     Okteta::CharCodec* mCharCodec;
     QChar mSubstituteChar;
     QChar mUndefinedChar;
+    QFont mFixedFont;
 };
+
+inline const QFont &StatisticTableModel::fixedFont() const
+{
+    return mFixedFont;
+}
 
 }
 

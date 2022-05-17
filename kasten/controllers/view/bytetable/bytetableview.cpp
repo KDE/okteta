@@ -20,7 +20,6 @@
 // Qt
 #include <QApplication>
 #include <QSpinBox>
-#include <QFontDatabase>
 #include <QLabel>
 #include <QLayout>
 #include <QHeaderView>
@@ -51,7 +50,6 @@ ByteTableView::ByteTableView(ByteTableTool* tool, QWidget* parent)
 //              this, &ByteTableView::resizeColumnsWidth );
 //     connect( KGlobalSettings::self(), &KGlobalSettings::kdisplayStyleChanged,
 //              this, &ByteTableView::resizeColumnsWidth );
-    setFixedFontByGlobalSettings(); // do this before setting model
     mByteTableView->setObjectName(QStringLiteral("ByteTable"));
     mByteTableView->setRootIsDecorated(false);
     mByteTableView->setItemsExpandable(false);
@@ -59,7 +57,6 @@ ByteTableView::ByteTableView(ByteTableTool* tool, QWidget* parent)
     mByteTableView->setAllColumnsShowFocus(true);
     mByteTableView->setSortingEnabled(false);
     QHeaderView* header = mByteTableView->header();
-    header->setFont(font());
     header->setSectionResizeMode(QHeaderView::Interactive);
     header->setStretchLastSection(false);
     mByteTableView->setModel(mTool->byteTableModel());
@@ -105,9 +102,12 @@ ByteTableView::ByteTableView(ByteTableTool* tool, QWidget* parent)
     // after ~3ms and not 800 as it was before. If the saved values can not be reused it takes ~100ms
     const QList<int> columnsWidth = ByteTableViewSettings::columnsWidth();
     const QString styleName = QApplication::style()->objectName();
-    const QString fixedFontData = QFontDatabase::systemFont(QFontDatabase::FixedFont).toString();
-    if (columnsWidth.size() < ByteTableModel::NoOfIds || styleName != ByteTableViewSettings::style()
-        || fixedFontData != ByteTableViewSettings::fixedFont()) {
+    const QString fontData = mByteTableView->font().toString();
+    const QString fixedFontData = mTool->byteTableModel()->fixedFont().toString();
+    if ((ByteTableModel::NoOfIds > columnsWidth.size()) ||
+        (styleName != ByteTableViewSettings::style()) ||
+        (fontData != ByteTableViewSettings::font()) ||
+        (fixedFontData != ByteTableViewSettings::fixedFont())) {
         resizeColumnsWidth();
     } else {
         for (int i = 0; i < ByteTableModel::NoOfIds; ++i) {
@@ -133,7 +133,8 @@ ByteTableView::~ByteTableView()
 
     ByteTableViewSettings::setColumnsWidth(columnsWidth);
     ByteTableViewSettings::setStyle(QApplication::style()->objectName());
-    ByteTableViewSettings::setFixedFont(QFontDatabase::systemFont(QFontDatabase::FixedFont).toString());
+    ByteTableViewSettings::setFont(mByteTableView->font().toString());
+    ByteTableViewSettings::setFixedFont(mTool->byteTableModel()->fixedFont().toString());
     ByteTableViewSettings::self()->save();
 }
 
@@ -152,11 +153,6 @@ void ByteTableView::resizeColumnsWidth()
         const int headerWidthHint = header->sectionSizeHint(i);
         header->resizeSection(i, qMax(indexWidthHint, headerWidthHint));
     }
-}
-
-void ByteTableView::setFixedFontByGlobalSettings()
-{
-    mByteTableView->setFont(QFontDatabase::systemFont(QFontDatabase::FixedFont));
 }
 
 void ByteTableView::onInsertCountEditChanged()

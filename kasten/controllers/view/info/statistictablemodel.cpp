@@ -17,6 +17,7 @@
 #include <KColorScheme>
 // Qt
 #include <QApplication>
+#include <QFontDatabase>
 
 namespace Kasten {
 
@@ -33,6 +34,7 @@ StatisticTableModel::StatisticTableModel(int* byteCount, QObject* parent)
     , mCharCodec(Okteta::CharCodec::createCodec(Okteta::LocalEncoding))
     , mSubstituteChar(StatisticsDefaultSubstituteChar)
     , mUndefinedChar(StatisticsDefaultUndefinedChar)
+    , mFixedFont(QFontDatabase::systemFont(QFontDatabase::FixedFont))
 {
 }
 
@@ -163,6 +165,8 @@ QVariant StatisticTableModel::data(const QModelIndex& index, int role) const
         }
     } else if (role == Qt::TextAlignmentRole) {
         result = static_cast<int>(Qt::AlignVCenter | Qt::AlignRight);
+    } else if (role == Qt::FontRole) {
+        result = mFixedFont;
     } else if (role == Qt::ForegroundRole) {
         const int column = index.column();
         bool isInactive = false;
