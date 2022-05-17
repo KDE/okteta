@@ -12,10 +12,7 @@
 // Qt
 #include <QWidget>
 
-class ContainedStringTableModel;
-
 class QPushButton;
-
 class QTreeView;
 class QSortFilterProxyModel;
 class QModelIndex;
@@ -24,6 +21,7 @@ class QSpinBox;
 namespace Kasten {
 
 class StringsExtractTool;
+class ContainedStringTableModel;
 
 class StringsExtractView : public QWidget
 {
@@ -49,9 +47,6 @@ private Q_SLOTS: // tool
     void onStringsUptodateChanged(bool stringsUptodate);
     void onApplyableChanged(bool isApplyable);
     void onCanHighlightStringChanged(bool canHighlightString);
-
-private Q_SLOTS:
-    void setFixedFontByGlobalSettings();
 
 private:
     StringsExtractTool* mTool;

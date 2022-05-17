@@ -18,13 +18,11 @@
 // Qt
 #include <QApplication>
 #include <QSortFilterProxyModel>
-#include <QFontDatabase>
 #include <QPushButton>
 #include <QLabel>
 #include <QLayout>
 #include <QHeaderView>
 #include <QTreeView>
-#include <QFontMetrics>
 
 namespace Kasten {
 
@@ -78,7 +76,6 @@ InfoView::InfoView(InfoTool* tool, QWidget* parent)
 //              this, &InfoView::resizeColumnsWidth );
 //     connect( KGlobalSettings::self(), &KGlobalSettings::kdisplayStyleChanged,
 //              this, &InfoView::resizeColumnsWidth );
-    setFixedFontByGlobalSettings(); // do this before setting model
     mStatisticTableView->setObjectName(QStringLiteral("StatisticTable"));
     mStatisticTableView->setRootIsDecorated(false);
     mStatisticTableView->setItemsExpandable(false);
@@ -86,7 +83,6 @@ InfoView::InfoView(InfoTool* tool, QWidget* parent)
     mStatisticTableView->setAllColumnsShowFocus(true);
     mStatisticTableView->setSortingEnabled(true);
     QHeaderView* header = mStatisticTableView->header();
-    header->setFont(font());
     header->setSectionResizeMode(QHeaderView::Interactive);
     header->setStretchLastSection(false);
     // TODO: write subclass to filter count and percent by num, not string
@@ -104,9 +100,12 @@ InfoView::InfoView(InfoTool* tool, QWidget* parent)
     // if nothing has changed reuse the old values. This means the info view is fully constructed much quicker.
     const QList<int> columnsWidth = InfoViewSettings::columnsWidth();
     const QString styleName = QApplication::style()->objectName();
-    const QString fixedFontData = QFontDatabase::systemFont(QFontDatabase::FixedFont).toString();
-    if (columnsWidth.size() < StatisticTableModel::NoOfIds || styleName != InfoViewSettings::style()
-        || fixedFontData != InfoViewSettings::fixedFont()) {
+    const QString fontData = mStatisticTableView->font().toString();
+    const QString fixedFontData = mTool->statisticTableModel()->fixedFont().toString();
+    if ((StatisticTableModel::NoOfIds > columnsWidth.size()) ||
+        (styleName != InfoViewSettings::style()) ||
+        (fontData != InfoViewSettings::font()) ||
+        (fixedFontData != InfoViewSettings::fixedFont())) {
         resizeColumnsWidth();
     } else {
         for (int i = 0; i < StatisticTableModel::NoOfIds; ++i) {
@@ -126,7 +125,8 @@ InfoView::~InfoView()
 
     InfoViewSettings::setColumnsWidth(columnsWidth);
     InfoViewSettings::setStyle(QApplication::style()->objectName());
-    InfoViewSettings::setFixedFont(QFontDatabase::systemFont(QFontDatabase::FixedFont).toString());
+    InfoViewSettings::setFont(mStatisticTableView->font().toString());
+    InfoViewSettings::setFixedFont(mTool->statisticTableModel()->fixedFont().toString());
     InfoViewSettings::self()->save();
 }
 
@@ -151,11 +151,6 @@ void InfoView::setByteArraySize(int size)
                              i18np("1 byte", "%1 bytes", size);
 
     mSizeLabel->setText(sizeText);
-}
-
-void InfoView::setFixedFontByGlobalSettings()
-{
-    mStatisticTableView->setFont(QFontDatabase::systemFont(QFontDatabase::FixedFont));
 }
 
 }

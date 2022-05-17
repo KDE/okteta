@@ -56,6 +56,7 @@ public:
     QString nameOfPOD(int podId) const;
     int podCount() const;
 
+    // TODO: add option to display & edit data in locale
     bool isUnsignedAsHex() const;
     QSysInfo::Endian byteOrder() const;
     Okteta::CharCodec* charCodec() const;

@@ -85,7 +85,7 @@ QVariant PODTableModel::data(const QModelIndex& index, int role) const
     case Qt::TextAlignmentRole:
     {
         const int column = index.column();
-        result = (column == NameId) ? Qt::AlignRight : Qt::AlignLeft;
+        result = static_cast<int>(Qt::AlignVCenter | ((column == NameId) ? Qt::AlignRight : Qt::AlignLeft));
         break;
     }
     case Qt::ForegroundRole:

@@ -15,6 +15,8 @@
 #include <QVBoxLayout>
 #include <QSpinBox>
 #include <QDialogButtonBox>
+// Std
+#include <limits>
 
 namespace Kasten {
 
@@ -26,7 +28,7 @@ BytesPerLineDialog::BytesPerLineDialog(QWidget* parent)
     auto* pageLayout = new QFormLayout();
 
     mBytesPerLineEdit = new QSpinBox(this);
-    mBytesPerLineEdit->setRange(1, INT_MAX);
+    mBytesPerLineEdit->setRange(1, std::numeric_limits<int>::max());
     const QString bytesPerLineLabel =
         i18nc("@label:spinbox number of bytes which are shown per line",
               "Bytes per Line:");

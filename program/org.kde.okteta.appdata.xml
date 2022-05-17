@@ -553,6 +553,8 @@
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=okteta</url>
   <url type="help">https://docs.kde.org/?application=okteta</url>
   <url type="donation">https://www.kde.org/community/donations/?app=okteta</url>
+  <url type="vcs-browser">https://commits.kde.org/okteta</url>
+  <url type="contribute">https://community.kde.org/Get_Involved</url>
   <screenshots>
     <screenshot type="default">
       <image>https://kde.org/images/screenshots/okteta.png</image>
@@ -575,4 +577,8 @@
   </releases>
   <update_contact>kossebau_at_kde.org</update_contact>
   <content_rating type="oars-1.1"/>
+  <recommends>
+    <control>pointing</control>
+    <control>keyboard</control>
+  </recommends>
 </component>

@@ -11,6 +11,7 @@
 
 // Qt
 #include <QAbstractTableModel>
+#include <QFont>
 
 namespace Okteta {
 class CharCodec;
@@ -49,6 +50,9 @@ public Q_SLOTS:
     void setSubstituteChar(QChar substituteChar);
     void setUndefinedChar(QChar undefinedChar);
 
+public:
+    const QFont &fixedFont() const;
+
 private:
     static constexpr int NofOfValueCodings = 4;
 
@@ -57,7 +61,13 @@ private:
     Okteta::CharCodec* mCharCodec;
     QChar mSubstituteChar;
     QChar mUndefinedChar;
+    QFont mFixedFont;
 };
+
+inline const QFont &ByteTableModel::fixedFont() const
+{
+    return mFixedFont;
+}
 
 }
 

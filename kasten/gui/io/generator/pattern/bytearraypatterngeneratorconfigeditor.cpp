@@ -15,6 +15,8 @@
 // Qt
 #include <QSpinBox>
 #include <QFormLayout>
+// Std
+#include <limits>
 
 namespace Kasten {
 
@@ -47,7 +49,7 @@ ByteArrayPatternGeneratorConfigEditor::ByteArrayPatternGeneratorConfigEditor(Byt
         i18nc("@label:spinbox number of times to insert the pattern",
               "&Number:");
     mNumberInput = new QSpinBox(this);
-    mNumberInput->setRange(1, INT_MAX);
+    mNumberInput->setRange(1, std::numeric_limits<int>::max());
     mNumberInput->setValue(mSettings.count);
     connect(mNumberInput, QOverload<int>::of(&QSpinBox::valueChanged),
             this, &ByteArrayPatternGeneratorConfigEditor::onSettingsChanged);

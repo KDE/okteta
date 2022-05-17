@@ -22,6 +22,8 @@
 #include <QCheckBox>
 #include <QSpinBox>
 #include <QLineEdit>
+// Std
+#include <limits>
 
 namespace Kasten {
 
@@ -108,7 +110,7 @@ ViewProfileEdit::ViewProfileEdit(QWidget* parent)
     layoutBoxFormLayout->addRow(i18n("Break lines:"), mLineBreakComboBox);
     // bytes per group
     mGroupedBytesCountEdit = new QSpinBox(this);
-    mGroupedBytesCountEdit->setRange(0, INT_MAX);
+    mGroupedBytesCountEdit->setRange(0, std::numeric_limits<int>::max());
     const QString noGroupingText = i18nc("@label",
                                          "No grouping.");
     mGroupedBytesCountEdit->setSpecialValueText(noGroupingText);
@@ -118,7 +120,7 @@ ViewProfileEdit::ViewProfileEdit(QWidget* parent)
     layoutBoxFormLayout->addRow(groupedBytesCountLabel, mGroupedBytesCountEdit);
     // bytes per group
     mBytesPerLineEdit = new QSpinBox(this);
-    mBytesPerLineEdit->setRange(1, INT_MAX);
+    mBytesPerLineEdit->setRange(1, std::numeric_limits<int>::max());
     const QString bytesPerLineLabel =
         i18nc("@label:spinbox number of bytes which are shown per line",
               "Bytes per Line:");

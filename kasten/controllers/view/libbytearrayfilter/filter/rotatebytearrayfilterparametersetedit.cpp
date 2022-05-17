@@ -15,6 +15,8 @@
 // Qt
 #include <QFormLayout>
 #include <QSpinBox>
+// Std
+#include <limits>
 
 const char RotateByteArrayFilterParameterSetEdit::Id[] = "Rotate";
 
@@ -25,7 +27,7 @@ RotateByteArrayFilterParameterSetEdit::RotateByteArrayFilterParameterSetEdit(QWi
     baseLayout->setContentsMargins(0, 0, 0, 0);
 
     mGroupSizeEdit = new QSpinBox(this);
-    mGroupSizeEdit->setRange(1, INT_MAX);
+    mGroupSizeEdit->setRange(1, std::numeric_limits<int>::max());
     connect(mGroupSizeEdit, QOverload<int>::of(&QSpinBox::valueChanged),
             this, &RotateByteArrayFilterParameterSetEdit::valuesChanged);
 
@@ -44,7 +46,7 @@ RotateByteArrayFilterParameterSetEdit::RotateByteArrayFilterParameterSetEdit(QWi
     baseLayout->addRow(groupSizeLabelText, mGroupSizeEdit);
 
     mMoveBitWidthEdit = new QSpinBox(this);
-    mMoveBitWidthEdit->setRange(INT_MIN, INT_MAX);
+    mMoveBitWidthEdit->setRange(std::numeric_limits<int>::min(), std::numeric_limits<int>::max());
     connect(mMoveBitWidthEdit, QOverload<int>::of(&QSpinBox::valueChanged),
             this, &RotateByteArrayFilterParameterSetEdit::onValueChanged);
     connect(mMoveBitWidthEdit, QOverload<int>::of(&QSpinBox::valueChanged),

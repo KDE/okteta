@@ -10,12 +10,17 @@
 
 // KF
 #include <KLocalizedString>
+// Qt
+#include <QFontDatabase>
+
+namespace Kasten {
 
 ContainedStringTableModel::ContainedStringTableModel(const QList<ContainedString>* containedStringList,
                                                      int offsetCoding,
                                                      QObject* parent)
     : QAbstractTableModel(parent)
     , mContainedStringList(containedStringList)
+    , mFixedFont(QFontDatabase::systemFont(QFontDatabase::FixedFont))
 {
     mPrintFunction = Okteta::OffsetFormat::printFunction((Okteta::OffsetFormat::Format)offsetCoding);
 }
@@ -76,6 +81,8 @@ QVariant ContainedStringTableModel::data(const QModelIndex& index, int role) con
                 ;
             }
         }
+    } else if (role == Qt::FontRole) {
+        result = mFixedFont;
     }
 
     return result;
@@ -96,4 +103,6 @@ QVariant ContainedStringTableModel::headerData(int section, Qt::Orientation orie
     }
 
     return result;
+}
+
 }

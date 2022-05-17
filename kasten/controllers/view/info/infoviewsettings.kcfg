@@ -7,5 +7,6 @@
     <entry name="ColumnsWidth" type="IntList" />
     <entry name="Style" type="String" />
     <entry name="FixedFont" type="String" />
+    <entry name="Font" type="String" />
   </group>
 </kcfg>

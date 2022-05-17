@@ -36,7 +36,6 @@ public Q_SLOTS:
     void setByteArraySize(int size);
 
 private Q_SLOTS:
-    void setFixedFontByGlobalSettings();
     void resizeColumnsWidth();
 
 private:

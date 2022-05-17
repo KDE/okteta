@@ -17,6 +17,7 @@
 #include <KColorScheme>
 // Qt
 #include <QApplication>
+#include <QFontDatabase>
 // Std
 #include <utility>
 
@@ -31,6 +32,7 @@ ByteTableModel::ByteTableModel(QObject* parent)
     , mCharCodec(Okteta::CharCodec::createCodec(Okteta::LocalEncoding))
     , mSubstituteChar(ByteTableDefaultSubstituteChar)
     , mUndefinedChar(ByteTableDefaultUndefinedChar)
+    , mFixedFont(QFontDatabase::systemFont(QFontDatabase::FixedFont))
 {
     constexpr Okteta::ValueCoding CodingIds[NofOfValueCodings] = {
         Okteta::DecimalCoding,
@@ -139,7 +141,9 @@ QVariant ByteTableModel::data(const QModelIndex& index, int role) const
             }
         }
     } else if (role == Qt::TextAlignmentRole) {
-        result = Qt::AlignRight;
+        result = static_cast<int>(Qt::AlignVCenter | Qt::AlignRight);
+    } else if (role == Qt::FontRole) {
+        result = mFixedFont;
     }
 
     return result;

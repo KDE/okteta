@@ -15,7 +15,6 @@
 #include <KGuiItem>
 #include <KLocalizedString>
 // Qt
-#include <QFontDatabase>
 #include <QLabel>
 #include <QLayout>
 #include <QLineEdit>
@@ -104,7 +103,6 @@ StringsExtractView::StringsExtractView(StringsExtractTool* tool, QWidget* parent
     // TODO: find a signal/event emitted when fixedfont changes
 //     connect( KGlobalSettings::self(), &KGlobalSettings::kdisplayFontChanged,
 //              this, &StringsExtractView::setFixedFontByGlobalSettings );
-    setFixedFontByGlobalSettings(); // do this before setting model
     mContainedStringTableView->setObjectName(QStringLiteral("ContainedStringTable"));
     mContainedStringTableView->setRootIsDecorated(false);
     mContainedStringTableView->setItemsExpandable(false);
@@ -114,7 +112,6 @@ StringsExtractView::StringsExtractView(StringsExtractTool* tool, QWidget* parent
     mContainedStringTableView->setSortingEnabled(true);
     mContainedStringTableView->installEventFilter(this);
     QHeaderView* header = mContainedStringTableView->header();
-    header->setFont(font());
     header->setSectionResizeMode(QHeaderView::Interactive);
     mContainedStringTableView->setModel(mSortFilterProxyModel);
     mContainedStringTableView->sortByColumn(ContainedStringTableModel::OffsetColumnId, Qt::AscendingOrder);
@@ -182,11 +179,6 @@ bool StringsExtractView::eventFilter(QObject* object, QEvent* event)
     }
 
     return QWidget::eventFilter(object, event);
-}
-
-void StringsExtractView::setFixedFontByGlobalSettings()
-{
-    mContainedStringTableView->setFont(QFontDatabase::systemFont(QFontDatabase::FixedFont));
 }
 
 void StringsExtractView::onStringsUptodateChanged(bool stringsUptodate)
