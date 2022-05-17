@@ -1,17 +1,17 @@
 Okteta Gui library
-===================
-part of the Okteta project, made within the KDE community.
+==================
+Part of the Okteta project, made within the KDE community.
 
-Copyright: 2003-2012 Friedrich W. H. Kossebau <kossebau@kde.org>
+Copyright: 2003-2022 Friedrich W. H. Kossebau <kossebau@kde.org>
 
 Author/Maintainer: Friedrich W. H. Kossebau <kossebau@kde.org>
 
 
-description:
+Description
 -----------
-The lib implements two general usable widgets named "ByteArrayColumnView" and
-"ByteArrayRowView". They interact with the abstract byte array interface
-called "AbstractByteArrayModel" as offered by the Okteta core library.
+The lib implements two general usable widgets named `Okteta::ByteArrayColumnView` and
+`Okteta::ByteArrayRowView`. They interact with the abstract byte array interface
+called `Okteta::AbstractByteArrayModel` as offered by the Okteta core library.
 
 As the API of these classes is still in active development there is no guarantee
 on the binary or source compatibility between 0.x releases. If there is a change
@@ -20,6 +20,6 @@ could be used even in the same process without symbol conflicts, if e.g. plugins
 use different versions.
 
 
-installing:
------------
+Installing
+----------
 Installs the lib and the public headers, incl. CamelCase variants.

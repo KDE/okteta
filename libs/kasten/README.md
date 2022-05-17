@@ -1,13 +1,13 @@
 Kasten framework
 ================
-made within the KDE community.
+Made within the KDE community.
 
-Copyright: 2007-2012 Friedrich W. H. Kossebau <kossebau@kde.org>
+Copyright: 2007-2022 Friedrich W. H. Kossebau <kossebau@kde.org>
 
 Author/Maintainer: Friedrich W. H. Kossebau <kossebau@kde.org>
 
 
-description:
+Description
 -----------
 The Kasten framework is another approach for a component-oriented system.
 It uses a recursive MVC architecture, emphasizes synchronisation of models, and
@@ -25,11 +25,11 @@ the world know. :)
 
 As the API of these classes is still in active development there is no guarantee
 on the binary or source compatibility between 0.x releases. If there is a change
-the namespace postfix will be increased by 1, so different versions of the lib
+the namespace postfix will be increased by 1, so different versions of the libraries
 could be used even in the same process without symbol conflicts, if e.g. plugins
 use different versions.
 
 
-installing:
------------
-Installs the libs and the public headers, incl. CamelCase variants.
+Installing
+----------
+Installs the libraries and the public headers, incl. CamelCase variants.
