@@ -86,7 +86,7 @@ PODTableView::PODTableView(PODDecoderTool* tool, AbstractUserMessagesHandler* us
     mByteOrderSelection->addItem(i18nc("@item:inlistbox", "Big-endian"));     // add first for index
     mByteOrderSelection->addItem(i18nc("@item:inlistbox", "Little-endian"));  // add second for index
     mByteOrderSelection->setCurrentIndex(mTool->byteOrder());
-    connect(mByteOrderSelection, qOverload<int>(&KComboBox::activated),
+    connect(mByteOrderSelection, &KComboBox::activated,
             mTool, &PODDecoderTool::setByteOrder);
     const QString byteOrderToolTip =
         i18nc("@info:tooltip",

@@ -22,10 +22,12 @@ void DocumentManagerTest::checkAdded(QSignalSpy* changedSpy, Kasten::AbstractDoc
     QCOMPARE(changedSpy->size(), 1);
     const QList<QVariant> arguments = changedSpy->takeFirst();
     QCOMPARE(arguments.size(), 1);
-    const QVector<Kasten::AbstractDocument*> documents =
-        arguments.at(0).value<QVector<Kasten::AbstractDocument*>>();
+    const QList<Kasten::AbstractDocument*> documents =
+        arguments.at(0).value<QList<Kasten::AbstractDocument*>>();
     QCOMPARE(documents.size(), 1);
-    QCOMPARE(documents.at(0), document);
+    // cast to non-QObject pointer, to avoid QTest trying to access the object instance for nicer logging
+    // in the case of failures, where in our case the objects could be deleted already.
+    QCOMPARE(static_cast<void*>(documents.at(0)), static_cast<void*>(document));
 }
 
 void DocumentManagerTest::checkRemoving(QSignalSpy* changedSpy, Kasten::AbstractDocument* document)
@@ -34,15 +36,17 @@ void DocumentManagerTest::checkRemoving(QSignalSpy* changedSpy, Kasten::Abstract
     QCOMPARE(changedSpy->size(), 1);
     const QList<QVariant> arguments = changedSpy->takeFirst();
     QCOMPARE(arguments.size(), 1);
-    const QVector<Kasten::AbstractDocument*> documents =
-        arguments.at(0).value<QVector<Kasten::AbstractDocument*>>();
+    const QList<Kasten::AbstractDocument*> documents =
+        arguments.at(0).value<QList<Kasten::AbstractDocument*>>();
     QCOMPARE(documents.size(), 1);
-    QCOMPARE(documents.at(0), document);
+    // cast to non-QObject pointer, to avoid QTest trying to access the object instance for nicer logging
+    // in the case of failures, where in our case the objects could be deleted already.
+    QCOMPARE(static_cast<void*>(documents.at(0)), static_cast<void*>(document));
 }
 
 void DocumentManagerTest::initTestCase()
 {
-    qRegisterMetaType<QVector<Kasten::AbstractDocument*>>("QVector<Kasten::AbstractDocument*>");
+    qRegisterMetaType<QList<Kasten::AbstractDocument*>>("QList<Kasten::AbstractDocument*>");
 }
 
 void DocumentManagerTest::testConstructor()
@@ -60,8 +64,8 @@ void DocumentManagerTest::testAddRemove()
     auto* rawDoc3 = doc3.get();
 
     auto documentManager = std::make_unique<Kasten::DocumentManager>();
-    auto addedSpy = std::make_unique<QSignalSpy>(documentManager.get(), SIGNAL(added(QVector<Kasten::AbstractDocument*>)));
-    auto closingSpy = std::make_unique<QSignalSpy>(documentManager.get(), SIGNAL(closing(QVector<Kasten::AbstractDocument*>)));
+    auto addedSpy = std::make_unique<QSignalSpy>(documentManager.get(), SIGNAL(added(QList<Kasten::AbstractDocument*>)));
+    auto closingSpy = std::make_unique<QSignalSpy>(documentManager.get(), SIGNAL(closing(QList<Kasten::AbstractDocument*>)));
 
     documentManager->addDocument(std::move(doc1));
     checkAdded(addedSpy.get(), rawDoc1);

@@ -20,7 +20,7 @@ target_sources(OktetaCoreTestUtil PRIVATE
 target_link_libraries(OktetaCoreTestUtil
     PUBLIC
         OktetaCore
-        Qt5::Core
+        Qt6::Core
 )
 
 # variant for static version of OktetaCore
@@ -31,7 +31,7 @@ target_sources(OktetaCoreSourcesShimTestUtil PRIVATE
 target_link_libraries(OktetaCoreSourcesShimTestUtil
     PUBLIC
       OktetaCoreSourcesTestShim
-      Qt5::Core
+      Qt6::Core
 )
 
 ecm_add_test(
@@ -41,7 +41,7 @@ ecm_add_test(
     NAME_PREFIX libokteta-core-
     LINK_LIBRARIES
         OktetaCoreSourcesTestShim
-        Qt5::Test
+        Qt6::Test
 )
 
 
@@ -51,7 +51,7 @@ ecm_add_test(
     NAME_PREFIX libokteta-core-
     LINK_LIBRARIES
         OktetaCoreTypes
-        Qt5::Test
+        Qt6::Test
 )
 
 
@@ -61,7 +61,8 @@ ecm_add_test(
     NAME_PREFIX libokteta-core-
     LINK_LIBRARIES
         OktetaCoreTypes
-        Qt5::Test
+        Qt6::Core5Compat
+        Qt6::Test
 )
 
 
@@ -71,7 +72,7 @@ ecm_add_test(
     NAME_PREFIX libokteta-core-
     LINK_LIBRARIES
         OktetaCoreByteArrayModels
-        Qt5::Test
+        Qt6::Test
 )
 
 
@@ -83,7 +84,7 @@ ecm_add_test(
     LINK_LIBRARIES
         OktetaCoreSourcesShimTestUtil
         OktetaCoreByteArrayModels
-        Qt5::Test
+        Qt6::Test
 )
 
 
@@ -93,7 +94,7 @@ ecm_add_test(
     NAME_PREFIX libokteta-core-
     LINK_LIBRARIES
         OktetaCore
-        Qt5::Test
+        Qt6::Test
 )
 
 
@@ -105,7 +106,7 @@ ecm_add_test(
     LINK_LIBRARIES
         OktetaCoreSourcesShimTestUtil
         OktetaCoreByteArrayModels
-        Qt5::Test
+        Qt6::Test
 )
 
 
@@ -117,7 +118,7 @@ ecm_add_test(
     LINK_LIBRARIES
         OktetaCoreSourcesShimTestUtil
         OktetaCoreByteArrayModels
-        Qt5::Test
+        Qt6::Test
 )
 
 
@@ -129,7 +130,7 @@ ecm_add_test(
     LINK_LIBRARIES
         OktetaCoreTestUtil
         OktetaCore
-        Qt5::Test
+        Qt6::Test
 )
 
 
@@ -139,7 +140,7 @@ ecm_add_test(
     NAME_PREFIX libokteta-core-
     LINK_LIBRARIES
         OktetaCoreValueCodecs
-        Qt5::Test
+        Qt6::Test
 )
 
 
@@ -149,7 +150,7 @@ ecm_add_test(
     NAME_PREFIX libokteta-core-
     LINK_LIBRARIES
         OktetaCoreCharCodecs
-        Qt5::Test
+        Qt6::Test
 )
 
 
@@ -159,7 +160,7 @@ ecm_add_test(
     NAME_PREFIX libokteta-core-
     LINK_LIBRARIES
         OktetaCoreCharCodecs
-        Qt5::Test
+        Qt6::Test
 )
 
 
@@ -170,7 +171,7 @@ ecm_add_test(
     NAME_PREFIX libokteta-core-
     LINK_LIBRARIES
         OktetaCoreCharCodecs
-        Qt5::Test
+        Qt6::Test
 )
 
 
@@ -181,7 +182,7 @@ ecm_add_test(
     NAME_PREFIX libokteta-core-
     LINK_LIBRARIES
         OktetaCoreCharCodecs
-        Qt5::Test
+        Qt6::Test
 )
 
 
@@ -191,7 +192,7 @@ ecm_add_test(
     NAME_PREFIX libokteta-core-
     LINK_LIBRARIES
         OktetaCoreSourcesTestShim
-        Qt5::Test
+        Qt6::Test
 )
 
 
@@ -201,5 +202,5 @@ ecm_add_test(
     NAME_PREFIX libokteta-core-
     LINK_LIBRARIES
         OktetaCoreBookmark
-        Qt5::Test
+        Qt6::Test
 )

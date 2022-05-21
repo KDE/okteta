@@ -32,6 +32,8 @@
 
 namespace Kasten {
 
+const QString FilterTool::ConfigGroupId = QStringLiteral("FilterTool");
+
 FilterTool::FilterTool(AbstractUserMessagesHandler* userMessagesHandler)
     : m_userMessagesHandler(userMessagesHandler)
 {

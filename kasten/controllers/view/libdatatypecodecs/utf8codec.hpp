@@ -9,8 +9,9 @@
 
 // lib
 #include "abstracttypecodec.hpp"
-
-class QTextCodec;
+// Qt
+#include <QStringDecoder>
+#include <QStringEncoder>
 
 namespace Okteta {
 
@@ -31,8 +32,8 @@ public: // AbstractTypeCodec API
     bool areEqual(const QVariant& value, QVariant& otherValue) const override;
 
 private:
-    // Qt owns all QTextCodec instances
-    QTextCodec* const mUtf8Codec;
+    mutable QStringDecoder mUtf8Decoder;
+    mutable QStringEncoder mUtf8Encoder;
 };
 
 }

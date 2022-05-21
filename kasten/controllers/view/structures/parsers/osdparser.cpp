@@ -54,13 +54,12 @@ QDomDocument OsdParser::openDocFromString(ScriptLogger* logger) const
 {
     Q_CHECK_PTR(logger);
     Q_ASSERT(!mXmlString.isEmpty());
-    int errorLine, errorColumn;
-    QString errorMsg;
     QDomDocument doc;
-    if (!doc.setContent(mXmlString, false, &errorMsg, &errorLine, &errorColumn)) {
+    const QDomDocument::ParseResult result =  doc.setContent(mXmlString);
+    if (!result) {
         const QString errorOutput =
             QStringLiteral("error reading XML: %1\n error line=%2\nerror column=%3")
-            .arg(errorMsg, QString::number(errorLine), QString::number(errorColumn));
+            .arg(result.errorMessage, QString::number(result.errorLine), QString::number(result.errorColumn));
         logger->error() << errorOutput;
         logger->info() << "XML was:" << mXmlString;
 
@@ -83,13 +82,12 @@ QDomDocument OsdParser::openDocFromFile(ScriptLogger* logger) const
         logger->error() << errorOutput;
         return {};
     }
-    int errorLine, errorColumn;
-    QString errorMsg;
     QDomDocument doc;
-    if (!doc.setContent(&file, false, &errorMsg, &errorLine, &errorColumn)) {
+    const QDomDocument::ParseResult result =  doc.setContent(&file);
+    if (!result) {
         const QString errorOutput =
             QStringLiteral("error reading XML: %1\n error line=%2\nerror column=%3")
-            .arg(errorMsg, QString::number(errorLine), QString::number(errorColumn));
+            .arg(result.errorMessage, QString::number(result.errorLine), QString::number(result.errorColumn));
         logger->error() << errorOutput;
         logger->info() << "File was:" << mAbsolutePath;
     }
@@ -157,7 +155,7 @@ std::vector<std::unique_ptr<TopLevelDataInformation>> OsdParser::parseStructures
         }
         std::unique_ptr<QScriptEngine> eng = ScriptEngineInitializer::newEngine(); // we need this for dynamic arrays
         auto logger = std::make_unique<ScriptLogger>();
-        QVector<EnumDefinition::Ptr> enums = parseEnums(rootElem, logger.get());
+        QList<EnumDefinition::Ptr> enums = parseEnums(rootElem, logger.get());
         OsdParserInfo info(QString(), logger.get(), nullptr, eng.get(), enums);
 
         auto data = parseElement(elem, info);
@@ -189,9 +187,9 @@ std::vector<std::unique_ptr<TopLevelDataInformation>> OsdParser::parseStructures
 }
 
 // TODO make type depend on the user not the definition
-QVector<EnumDefinition::Ptr> OsdParser::parseEnums(const QDomElement& rootElem, ScriptLogger* logger)
+QList<EnumDefinition::Ptr> OsdParser::parseEnums(const QDomElement& rootElem, ScriptLogger* logger)
 {
-    QVector<EnumDefinition::Ptr> ret;
+    QList<EnumDefinition::Ptr> ret;
     for (QDomElement elem = rootElem.firstChildElement(); !elem.isNull(); elem = elem.nextSiblingElement()) {
         if (elem.tagName() != TYPE_ENUMDEF()) {
             continue;

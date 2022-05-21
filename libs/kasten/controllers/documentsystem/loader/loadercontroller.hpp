@@ -15,6 +15,7 @@
 
 class KRecentFilesAction;
 class KXMLGUIClient;
+class KActionCollection;
 
 namespace Kasten {
 
@@ -43,6 +44,11 @@ private:
     AbstractDocumentStrategy* const mDocumentStrategy;
 
     KRecentFilesAction* mOpenRecentAction;
+
+    // work-around for KStandardAction magic to inject recent documents into
+    // the toolbar action widget as popup
+    // KF implementation (state: 6.2) expects to find the other action in some parent KActionCollection
+    KActionCollection* mActionCollection;
 };
 
 }
