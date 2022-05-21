@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 
 project(Okteta VERSION 0.26.60)
 
-set(REQUIRED_KF_VERSION "5.100.0")
+set(REQUIRED_KF_VERSION "6.0.0")
 find_package(ECM ${REQUIRED_KF_VERSION} REQUIRED NO_MODULE)
 
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake ${ECM_MODULE_PATH})
@@ -44,15 +44,13 @@ option(BUILD_DESIGNERPLUGIN "Build the Designer plugin." ON)
 add_feature_info(DESIGNERPLUGIN ${BUILD_DESIGNERPLUGIN} "Qt Designer plugin")
 option(BUILD_OKTETAKASTENLIBS "Build the Okteta Kasten libraries." ON)
 add_feature_info(OKTETAKASTENLIBS ${BUILD_OKTETAKASTENLIBS} "Okteta Kasten libraries")
-cmake_dependent_option(BUILD_TERMINALTOOL "Build the Terminal tool (needs Konsole/Qt5 KPart)." ON "BUILD_OKTETAKASTENLIBS" OFF)
-add_feature_info(TERMINALTOOL ${BUILD_TERMINALTOOL} "Terminal tool")
 
 cmake_dependent_option(BUILD_KPARTSPLUGIN "Build the KParts plugin." ON "BUILD_OKTETAKASTENLIBS" OFF)
 add_feature_info(KPARTSPLUGIN ${BUILD_KPARTSPLUGIN} "KParts plugin")
 cmake_dependent_option(BUILD_DESKTOPPROGRAM "Build the program." ON "BUILD_OKTETAKASTENLIBS" OFF)
 add_feature_info(DESKTOPPROGRAM ${BUILD_DESKTOPPROGRAM} "Program")
 
-set(REQUIRED_QT_VERSION "5.15.2")
+set(REQUIRED_QT_VERSION "6.5.0")
 set(ADDITIONAL_REQUIRED_QT_COMPONENTS)
 if(BUILD_TESTING)
     list(APPEND ADDITIONAL_REQUIRED_QT_COMPONENTS Test)
@@ -65,14 +63,19 @@ if( BUILD_OKTETAKASTENLIBS )
         Network
         PrintSupport
         Qml
-        Script
-        ScriptTools
         Xml
     )
+    if(BUILD_STRUCTURESTOOL)
+        list(APPEND ADDITIONAL_REQUIRED_QT_COMPONENTS
+            Script
+            ScriptTools
+        )
+    endif()
 endif()
-find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED
+find_package(Qt6 ${REQUIRED_QT_VERSION} CONFIG REQUIRED
     COMPONENTS
     Core
+    Core5Compat # QLinkedList
     Widgets
     ${ADDITIONAL_REQUIRED_QT_COMPONENTS}
 )
@@ -82,17 +85,14 @@ if( BUILD_OKTETAKASTENLIBS )
     list(APPEND ADDITIONAL_REQUIRED_KF_COMPONENTS
         Bookmarks
         Completion
+        ConfigWidgets
         ItemViews
         KIO
         NewStuff
+        Parts
         Service
         WidgetsAddons
         XmlGui
-    )
-endif()
-if (BUILD_TERMINALTOOL OR BUILD_KPARTSPLUGIN)
-    list(APPEND ADDITIONAL_REQUIRED_KF_COMPONENTS
-        Parts
     )
 endif()
 if( BUILD_DESKTOPPROGRAM )
@@ -102,22 +102,21 @@ if( BUILD_DESKTOPPROGRAM )
         DocTools
     )
 endif()
-find_package(KF5 ${REQUIRED_KF_VERSION} REQUIRED
+find_package(KF6 ${REQUIRED_KF_VERSION} REQUIRED
     COMPONENTS
-    ConfigWidgets
+    ColorScheme
     I18n
     ${ADDITIONAL_REQUIRED_KF_COMPONENTS}
 )
 
 ecm_set_disabled_deprecation_versions(
-    # Disable Qt deprecation warnings as there should be no new deprecations in Qt5,
-    # and QLinkedList porting will take some time, also not blocking Qt6 port
-    DISABLE_NEWER_WARNINGS
-    QT 5.14.0 # QLinkedList
+    QT 6.8
+    KF 6.10
 )
 
-ecm_set_disabled_deprecation_versions(
-    KF 5.100
+add_definitions(
+    -DQT_USE_NODISCARD_FILE_OPEN
+    -DQT_NO_CONTEXTLESS_CONNECT
 )
 
 # helper libs
@@ -127,10 +126,10 @@ if( BUILD_DESKTOPPROGRAM )
 endif()
 
 set( OKTETALIBS_MAJOR_VERSION 0 )
-set( OKTETALIBS_MINOR_VERSION 10 )
+set( OKTETALIBS_MINOR_VERSION 11 )
 set( OKTETALIBS_PATCHLEVEL_VERSION 0 )
 set( OKTETALIBS_VERSION "${OKTETALIBS_MAJOR_VERSION}.${OKTETALIBS_MINOR_VERSION}.${OKTETALIBS_PATCHLEVEL_VERSION}" )
-set( OKTETALIBS_ABI_VERSION 3 )
+set( OKTETALIBS_ABI_VERSION 4 )
 
 set( OKTETALIBS_LIB_SOVERSION 0 )
 set( OKTETALIBS_LIB_VERSION ${OKTETALIBS_VERSION} )
