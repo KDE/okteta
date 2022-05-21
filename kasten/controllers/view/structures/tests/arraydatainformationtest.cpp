@@ -65,7 +65,7 @@ void ArrayDataInformationTest::initTestCase()
     QCOMPARE(primitive->positionInFile(3), BitCount64(24));
     QCOMPARE(primitive->topLevelDataInformation(), primitiveTop);
 
-    QVector<DataInformation*> structsChildren;
+    QList<DataInformation*> structsChildren;
     structsChildren << PrimitiveFactory::newInstance(QStringLiteral("first"), PrimitiveDataType::UInt32, lwc)
                     << PrimitiveFactory::newInstance(QStringLiteral("second"), PrimitiveDataType::UInt32, lwc);
 

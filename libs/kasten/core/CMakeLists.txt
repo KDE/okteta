@@ -3,21 +3,19 @@ set(KASTENCORE_SO_VERSION ${KASTEN_LIB_SOVERSION})
 
 okteta_add_library(Core NAMESPACE Kasten
     PUBLIC
-        KF5::KIOCore
-        Qt5::Core
-        Qt5::Gui
+        KF6::KIOCore
+        Qt6::Core
+        Qt6::Gui
     PRIVATE
-        KF5::I18n
-        KF5::JobWidgets
-        KF5::WidgetsAddons
-        Qt5::Network
+        KF6::I18n
+        KF6::JobWidgets
+        KF6::WidgetsAddons
+        Qt6::Network
     VERSION     ${KASTENCORE_VERSION}
     SOVERSION   ${KASTENCORE_SO_VERSION}
     ABIVERSION  ${KASTEN_ABI_VERSION}
     NO_TARGET_NAMESPACE
-    NO_VERSIONED_EXPORTED_TARGET_NAME
     NO_VERSIONED_INCLUDEDIR
-    NO_VERSIONED_PACKAGE_NAME
 )
 
 target_compile_definitions(KastenCore PRIVATE -DTRANSLATION_DOMAIN=\"libkasten\")
@@ -125,8 +123,8 @@ okteta_library_sources(Core NAMESPACE Kasten
 
 okteta_add_cmakeconfig(Core NAMESPACE Kasten
     DEPS
-        Qt5Gui ${Qt5_VERSION}
-        KF5KIO ${KF5_VERSION}
+        Qt6Gui ${Qt6_VERSION}
+        KF6KIO ${KF6_VERSION}
 )
 
 if(BUILD_TESTING)
