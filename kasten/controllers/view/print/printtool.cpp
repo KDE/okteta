@@ -65,7 +65,7 @@ void PrintTool::print()
 //    printDialog->setOptionTabs(customDialogPages);
 
     printDialog->setWindowTitle(i18nc("@title:window", "Print Byte Array %1", mDocument->title()));
-    connect(printDialog, QOverload<QPrinter*>::of(&QPrintDialog::accepted), this, &PrintTool::triggerPrint);
+    connect(printDialog, qOverload<QPrinter*>(&QPrintDialog::accepted), this, &PrintTool::triggerPrint);
     printDialog->open();
 }
 

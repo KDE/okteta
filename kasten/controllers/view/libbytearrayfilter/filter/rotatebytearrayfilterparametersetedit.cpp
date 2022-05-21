@@ -28,7 +28,7 @@ RotateByteArrayFilterParameterSetEdit::RotateByteArrayFilterParameterSetEdit(QWi
 
     mGroupSizeEdit = new QSpinBox(this);
     mGroupSizeEdit->setRange(1, std::numeric_limits<int>::max());
-    connect(mGroupSizeEdit, QOverload<int>::of(&QSpinBox::valueChanged),
+    connect(mGroupSizeEdit, qOverload<int>(&QSpinBox::valueChanged),
             this, &RotateByteArrayFilterParameterSetEdit::valuesChanged);
 
     const QString groupSizeLabelText =
@@ -47,9 +47,9 @@ RotateByteArrayFilterParameterSetEdit::RotateByteArrayFilterParameterSetEdit(QWi
 
     mMoveBitWidthEdit = new QSpinBox(this);
     mMoveBitWidthEdit->setRange(std::numeric_limits<int>::min(), std::numeric_limits<int>::max());
-    connect(mMoveBitWidthEdit, QOverload<int>::of(&QSpinBox::valueChanged),
+    connect(mMoveBitWidthEdit, qOverload<int>(&QSpinBox::valueChanged),
             this, &RotateByteArrayFilterParameterSetEdit::onValueChanged);
-    connect(mMoveBitWidthEdit, QOverload<int>::of(&QSpinBox::valueChanged),
+    connect(mMoveBitWidthEdit, qOverload<int>(&QSpinBox::valueChanged),
             this, &RotateByteArrayFilterParameterSetEdit::valuesChanged);
 
     const QString moveBitWidthLabelText =

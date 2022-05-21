@@ -29,11 +29,11 @@ BookmarkListModel::BookmarkListModel(BookmarksTool* tool, QObject* parent)
     connect(mTool, &BookmarksTool::hasBookmarksChanged,
             this, &BookmarkListModel::onHasBookmarksChanged);
     connect(mTool, &BookmarksTool::bookmarksAdded,
-            this, QOverload<>::of(&BookmarkListModel::onBookmarksChanged));
+            this, qOverload<>(&BookmarkListModel::onBookmarksChanged));
     connect(mTool, &BookmarksTool::bookmarksRemoved,
-            this, QOverload<>::of(&BookmarkListModel::onBookmarksChanged));
+            this, qOverload<>(&BookmarkListModel::onBookmarksChanged));
     connect(mTool, &BookmarksTool::bookmarksModified,
-            this, QOverload<const QVector<int>&>::of(&BookmarkListModel::onBookmarksChanged));
+            this, qOverload<const QVector<int>&>(&BookmarkListModel::onBookmarksChanged));
     connect(mTool, &BookmarksTool::offsetCodingChanged,
             this, &BookmarkListModel::onOffsetCodingChanged);
 }

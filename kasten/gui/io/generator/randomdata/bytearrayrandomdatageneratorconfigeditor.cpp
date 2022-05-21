@@ -34,7 +34,7 @@ ByteArrayRandomDataGeneratorConfigEditor::ByteArrayRandomDataGeneratorConfigEdit
     mSizeInput = new QSpinBox(this);
     mSizeInput->setRange(1, std::numeric_limits<int>::max());
     mSizeInput->setValue(mSettings.size);
-    connect(mSizeInput, QOverload<int>::of(&QSpinBox::valueChanged),
+    connect(mSizeInput, qOverload<int>(&QSpinBox::valueChanged),
             this, &ByteArrayRandomDataGeneratorConfigEditor::onSettingsChanged);
     const QString numberWhatsThis =
         i18nc("@info:whatsthis",

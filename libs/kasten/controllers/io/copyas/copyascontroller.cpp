@@ -44,7 +44,7 @@ CopyAsController::CopyAsController(ModelCodecViewManager* modelCodecViewManager,
                                             i18nc("@title:menu", "Copy As"),
                                             this);
     mCopyAsSelectAction->setToolBarMode(KSelectAction::MenuMode);
-    connect(mCopyAsSelectAction, QOverload<QAction*>::of(&KSelectAction::triggered),
+    connect(mCopyAsSelectAction, qOverload<QAction*>(&KSelectAction::triggered),
             this, &CopyAsController::onActionTriggered);
 
     guiClient->actionCollection()->addAction(QStringLiteral("copy_as"), mCopyAsSelectAction);

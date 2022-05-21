@@ -30,7 +30,7 @@ Crc64ByteArrayChecksumParameterSetEdit::Crc64ByteArrayChecksumParameterSetEdit(Q
     mVariantComboBox = new KComboBox(this);
     mVariantComboBox->addItem(i18nc("@item:inlistbox", "ECMA-182"));
     mVariantComboBox->addItem(i18nc("@item:inlistbox", "ISO 3309"));
-    connect(mVariantComboBox, QOverload<int>::of(&KComboBox::activated),
+    connect(mVariantComboBox, qOverload<int>(&KComboBox::activated),
             this, &Crc64ByteArrayChecksumParameterSetEdit::valuesChanged);
 
     const QString byteOrderLabelText =

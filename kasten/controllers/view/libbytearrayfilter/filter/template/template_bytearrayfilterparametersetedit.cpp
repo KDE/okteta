@@ -50,7 +50,7 @@ Template_ByteArrayFilterParameterSetEdit::Template_ByteArrayFilterParameterSetEd
     mLevelEdit->setRange(-1, 256);
     // start with the invalid number
     mLevelEdit->setValue(-1);
-    connect(mLevelEdit, QOverload<int>::of(&QSpinBox::valueChanged),
+    connect(mLevelEdit, qOverload<int>(&QSpinBox::valueChanged),
             this, &Template_ByteArrayFilterParameterSetEdit::onLevelChanged);
 
     const QString levelLabelText =

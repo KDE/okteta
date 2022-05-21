@@ -40,7 +40,7 @@ InsertController::InsertController(ModelCodecViewManager* modelCodecViewManager,
     mInsertSelectAction = new KSelectAction(i18nc("@title:menu", "Insert"), this);
 //     mInsertSelectAction->setIcon( QIcon::fromTheme( QStringLiteral("insert-text") ) );
     mInsertSelectAction->setToolBarMode(KSelectAction::MenuMode);
-    connect(mInsertSelectAction, QOverload<QAction*>::of(&KSelectAction::triggered),
+    connect(mInsertSelectAction, qOverload<QAction*>(&KSelectAction::triggered),
             this, &InsertController::onActionTriggered);
 
     // TODO: find better id

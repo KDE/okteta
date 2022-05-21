@@ -51,7 +51,7 @@ ByteArrayPatternGeneratorConfigEditor::ByteArrayPatternGeneratorConfigEditor(Byt
     mNumberInput = new QSpinBox(this);
     mNumberInput->setRange(1, std::numeric_limits<int>::max());
     mNumberInput->setValue(mSettings.count);
-    connect(mNumberInput, QOverload<int>::of(&QSpinBox::valueChanged),
+    connect(mNumberInput, qOverload<int>(&QSpinBox::valueChanged),
             this, &ByteArrayPatternGeneratorConfigEditor::onSettingsChanged);
     const QString numberWhatsThis =
         i18nc("@info:whatsthis",

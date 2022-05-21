@@ -79,7 +79,7 @@ ByteTableView::ByteTableView(ByteTableTool* tool, QWidget* parent)
               "Number of repeats of the currently selected byte in the table to be inserted.");
     label->setToolTip(insertCountToolTip);
     mInsertCountEdit->setToolTip(insertCountToolTip);
-    connect(mInsertCountEdit, QOverload<int>::of(&QSpinBox::valueChanged),
+    connect(mInsertCountEdit, qOverload<int>(&QSpinBox::valueChanged),
             this, &ByteTableView::onInsertCountEditChanged);
 
     insertLayout->addStretch();
