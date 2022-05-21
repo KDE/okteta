@@ -80,7 +80,7 @@ class ByteArrayCharsStreamEncoder : public AbstractByteArrayStreamEncoder
     Q_OBJECT
 
 private:
-    static inline constexpr char ConfigGroupId[] = "ByteArrayCharsStreamEncoder";
+    static const QString ConfigGroupId;
 
 public:
     ByteArrayCharsStreamEncoder();

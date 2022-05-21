@@ -95,7 +95,7 @@ QPair<AllPrimitiveTypes, QString> EnumDefinition::convertToEnumEntry(const QStri
     }
 
     AllPrimitiveTypes intValue;
-    if (value.type() == QVariant::Double) {
+    if (value.typeId() == QMetaType::Double) {
         const double num = value.toDouble();
         // this is the largest double which maps to an integer exactly, ...993 is not representable anymore
         // ...992 would still be representable, however it may be that ...993 was rounded down to that, be safe

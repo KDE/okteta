@@ -53,7 +53,7 @@ class ByteArrayZStdStreamCompressor : public AbstractByteArrayStreamCompressor
     Q_OBJECT
 
 private:
-    static inline constexpr char ConfigGroupId[] = "ByteArrayZStdStreamCompressor";
+    static const QString ConfigGroupId;
 
 public:
     ByteArrayZStdStreamCompressor();

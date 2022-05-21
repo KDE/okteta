@@ -33,7 +33,8 @@ class StringsExtractTool : public AbstractTool
 private:
     static inline constexpr int DefaultMinLength = 3;
 
-    static inline constexpr char ConfigGroupId[] = "StringsExtractTool";
+    static const QString ConfigGroupId;
+
     static inline constexpr char MinimumLengthConfigKey[] = "MinimumLength";
 
 public:
