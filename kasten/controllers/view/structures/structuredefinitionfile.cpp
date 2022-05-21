@@ -56,7 +56,7 @@ bool StructureDefinitionFile::isValid() const
     return (mParser.get() != nullptr);
 }
 
-QVector<TopLevelDataInformation*> StructureDefinitionFile::structures() const
+QList<TopLevelDataInformation*> StructureDefinitionFile::structures() const
 {
     Q_CHECK_PTR(mParser);
     return mParser->parseStructures();
@@ -65,7 +65,7 @@ QVector<TopLevelDataInformation*> StructureDefinitionFile::structures() const
 TopLevelDataInformation* StructureDefinitionFile::structure(const QString& name) const
 {
     Q_CHECK_PTR(mParser);
-    const QVector<TopLevelDataInformation*> list = mParser->parseStructures();
+    const QList<TopLevelDataInformation*> list = mParser->parseStructures();
     TopLevelDataInformation* ret = nullptr;
     for (auto* info : list) {
         if (info->actualDataInformation()->name() == name) {
