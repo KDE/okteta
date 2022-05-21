@@ -413,20 +413,14 @@ function(okteta_add_qmakeconfig _baseName)
     endif()
 
     string(REPLACE ";" " " _deps "${OKTETA_ADD_QMAKECONFIG_DEPS}")
-    # Older ecm_generate_pri_file only knows PROJECT_VERSION_STRING
-    if(ECM_VERSION VERSION_LESS 5.83.0)
-        get_target_property(PROJECT_VERSION_STRING ${_targetName} VERSION)
-        set(_version_argument)
-    else()
-        get_target_property(_version ${_targetName} VERSION)
-        set(_version_argument VERSION ${_version})
-    endif()
+
+    get_target_property(_version ${_targetName} VERSION)
 
     ecm_generate_pri_file(
         BASE_NAME ${_configName}
         LIB_NAME ${_libraryName}
         DEPS ${_deps}
-        ${_version_argument}
+        VERSION ${_version}
         FILENAME_VAR _pri_filename
         INCLUDE_INSTALL_DIR  ${_include_install_dir}
     )
