@@ -15,7 +15,7 @@ ecm_add_tests(
     NAME_PREFIX oktetakasten-controllers-structures-
     LINK_LIBRARIES
         OktetaKastenControllersStructuresDataTypes
-        Qt5::Test
+        Qt6::Test
 )
 
 ecm_add_test(
@@ -23,14 +23,14 @@ ecm_add_test(
     NAME_PREFIX oktetakasten-controllers-structures-
     LINK_LIBRARIES
         OktetaKastenControllersStructuresDataTypes
-        KF5::I18n
-        Qt5::Test
+        KF6::I18n
+        Qt6::Test
 )
 
-# remove useless default definition of QT_TESTCASE_BUILDDIR in interface from imported target Qt5::Test
-get_target_property(qttestdefs Qt5::Test INTERFACE_COMPILE_DEFINITIONS)
+# remove useless default definition of QT_TESTCASE_BUILDDIR in interface from imported target Qt6::Test
+get_target_property(qttestdefs Qt6::Test INTERFACE_COMPILE_DEFINITIONS)
 list(FILTER qttestdefs EXCLUDE REGEX [[^QT_TESTCASE_BUILDDIR=]])
-set_property(TARGET Qt5::Test PROPERTY INTERFACE_COMPILE_DEFINITIONS ${qttestdefs})
+set_property(TARGET Qt6::Test PROPERTY INTERFACE_COMPILE_DEFINITIONS ${qttestdefs})
 # set the definition as needed for our tests
 target_compile_definitions(customtostringtest PRIVATE QT_TESTCASE_BUILDDIR="${CMAKE_CURRENT_BINARY_DIR}")
 target_compile_definitions(jsparsertest       PRIVATE QT_TESTCASE_BUILDDIR="${CMAKE_CURRENT_BINARY_DIR}")

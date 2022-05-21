@@ -10,7 +10,7 @@
 #define KASTEN_SCRIPTLOGGER_HPP
 
 #include <QAbstractTableModel>
-#include <QVector>
+#include <QList>
 #include <QDebug>
 #include <QTime>
 
@@ -89,7 +89,7 @@ public:
     static QIcon iconForLevel(LogLevel level);
 
 private:
-    QVector<Data> mData;
+    QList<Data> mData;
     bool mLogToStdOut = false;
 };
 

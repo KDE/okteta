@@ -3,16 +3,15 @@ set(OKTETACORE_SO_VERSION ${OKTETALIBS_LIB_SOVERSION})
 
 okteta_add_library(Core NAMESPACE Okteta
     PUBLIC
-        Qt5::Core
+        Qt6::Core
+        Qt6::Core5Compat # QLinkedList
     PRIVATE
-        KF5::I18n
+        KF6::I18n
     VERSION     ${OKTETACORE_VERSION}
     SOVERSION   ${OKTETACORE_SO_VERSION}
     ABIVERSION  ${OKTETALIBS_ABI_VERSION}
     NO_TARGET_NAMESPACE
-    NO_VERSIONED_EXPORTED_TARGET_NAME
     NO_VERSIONED_INCLUDEDIR
-    NO_VERSIONED_PACKAGE_NAME
     KI18N_TRANSLATION_DOMAIN "liboktetacore"
 )
 
@@ -46,15 +45,17 @@ endmacro()
 
 oktetacore_add_sublibrary(OktetaCoreTypes
     PUBLIC
-        Qt5::Core
+        Qt6::Core
     PRIVATE
-        KF5::I18n
+        KF6::I18n
+        Qt6::Core5Compat # QLinkedList
     KI18N_TRANSLATION_DOMAIN "liboktetacore"
 )
 
 oktetacore_add_sublibrary(OktetaCoreBookmark
     PUBLIC
         OktetaCoreTypes
+        Qt6::Core5Compat # QLinkedList
 )
 
 oktetacore_add_sublibrary(OktetaCoreCharCodecs
@@ -70,8 +71,9 @@ oktetacore_add_sublibrary(OktetaCoreValueCodecs
 oktetacore_add_sublibrary(OktetaCorePieceTable
     PUBLIC
         OktetaCoreTypes
+        Qt6::Core5Compat # QLinkedList
     PRIVATE
-        KF5::I18n
+        KF6::I18n
     KI18N_TRANSLATION_DOMAIN "liboktetacore"
 )
 
@@ -179,15 +181,16 @@ oktetacore_sources(
 
 okteta_add_cmakeconfig(Core NAMESPACE Okteta
     DEPS
-        Qt5Core ${Qt5_VERSION}
+        Qt6Core ${Qt6_VERSION}
+        Qt6Core5Compat ${Qt6_VERSION}
 )
 
 okteta_add_qmakeconfig(Core NAMESPACE Okteta
-    DEPS core
+    DEPS core core5compat
 )
 
 okteta_add_pkgconfig(Core NAMESPACE Okteta
-    DEPS Qt5Core
+    DEPS Qt6Core Qt6Core5Compat
     DESCRIPTION "Okteta Core"
 )
 
