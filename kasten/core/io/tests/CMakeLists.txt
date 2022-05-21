@@ -27,8 +27,8 @@ target_link_libraries(oktetakastenio
         KastenCore
         OktetaCore
     PRIVATE
-        KF5::I18n
-        KF5::CoreAddons
+        KF6::I18n
+        KF6::CoreAddons
 )
 # Configure export macros to be setup as with a static lib
 # as the source files are reused for static oktetakastenio
@@ -52,9 +52,9 @@ ecm_add_test(
         KastenCore
         kastencoretestutil
         oktetacoretestutil
-        KF5::I18n
-        KF5::Bookmarks
-        Qt5::Test
+        KF6::I18n
+        KF6::Bookmarks
+        Qt6::Test
 )
 
 ########### bytearrayrawfilesynchronizerfactorytest ###############
@@ -72,7 +72,7 @@ ecm_add_test(
         KastenCore
         kastencoretestutil
         oktetacoretestutil
-        KF5::I18n
-        KF5::Bookmarks
-        Qt5::Test
+        KF6::I18n
+        KF6::Bookmarks
+        Qt6::Test
 )

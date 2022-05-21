@@ -12,7 +12,7 @@ target_link_libraries(datatypeeditors
     PUBLIC
         OktetaGui
     PRIVATE
-        KF5::Completion
+        KF6::Completion
 )
 
 add_library(structureview-tested-srcs STATIC)
@@ -20,18 +20,19 @@ set_target_properties(structureview-tested-srcs PROPERTIES POSITION_INDEPENDENT_
 target_link_libraries(structureview-tested-srcs
     PUBLIC
         OktetaCore
-        KF5::ConfigGui
-        KF5::I18n
-        KF5::Service
-        Qt5::Script
-        Qt5::Xml
-        Qt5::Widgets
+        KF6::ConfigGui
+        KF6::I18n
+        KF6::Service
+        Qt6::Xml
+        Qt6::Widgets
     PRIVATE
         datatypeeditors
-        KF5::Completion
-        KF5::ConfigWidgets
+        KF6::ColorScheme
+        KF6::Completion
+        KF6::ConfigWidgets
 )
 
+if(BUILD_STRUCTURESTOOL)
 ecm_qt_declare_logging_category(structureview-tested-srcs
     HEADER "structureslogging.hpp"
     IDENTIFIER "LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES"
@@ -39,6 +40,12 @@ ecm_qt_declare_logging_category(structureview-tested-srcs
     DESCRIPTION "Okteta Structures tool"
     EXPORT OKTETA
 )
+
+target_link_libraries(structureview-tested-srcs
+    PUBLIC
+        Qt6::Script
+)
+endif()
 
 okteta_add_library(Controllers NAMESPACE Okteta Kasten
     PUBLIC
@@ -49,23 +56,20 @@ okteta_add_library(Controllers NAMESPACE Okteta Kasten
     PRIVATE
         structureview-tested-srcs
         datatypeeditors
-        KF5::NewStuffWidgets
-        KF5::I18n
-        KF5::ConfigWidgets
-        KF5::ItemViews
-        KF5::Completion
-        Qt5::PrintSupport
-        Qt5::Script
-#         Qt5::Test # QAbstractItemModelTester
+        KF6::NewStuffWidgets
+        KF6::I18n
+        KF6::ConfigWidgets
+        KF6::ItemViews
+        KF6::Completion
+        Qt6::PrintSupport
+#         Qt6::Test # QAbstractItemModelTester
     VERSION     ${OKTETAKASTENCONTROLLERS_VERSION}
     SOVERSION   ${OKTETAKASTENCONTROLLERS_SO_VERSION}
     ABIVERSION  ${OKTETAKASTEN_ABI_VERSION} ${KASTEN_ABI_VERSION}
     NO_VERSIONED_INCLUDEDIR
-    NO_VERSIONED_PACKAGE_NAME
     REVERSE_NAMESPACE_INCLUDEDIR
     REVERSE_NAMESPACE_LIB
     NO_TARGET_NAMESPACE
-    NO_VERSIONED_EXPORTED_TARGET_NAME
 )
 
 target_compile_definitions(OktetaKastenControllers PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")
@@ -460,6 +464,7 @@ oktetakastencontrollers_add_sublibrary(view/bookmarks
 )
 
 
+if(BUILD_STRUCTURESTOOL)
 oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/datatypes
     PRIVATE
         TopLevelDataInformation
@@ -594,6 +599,7 @@ oktetakastencontrollers_add_sublibrary(view/structures
         StructuresToolView
         StructureViewItemDelegate
 )
+endif()
 
 oktetakastencontrollers_add_sublibrary(${LIBFRAMESPRINT_REL_DIR}
     BUILD_INCLUDEDIR
@@ -685,14 +691,15 @@ if(BUILD_TESTING)
         TEST_NAME char8stringvalidatortest
         LINK_LIBRARIES
             OktetaCore
-            Qt5::Gui
-            Qt5::Test
+            Qt6::Gui
+            Qt6::Test
     )
     target_include_directories(char8stringvalidatortest
         PUBLIC
             view/libdatatypeeditors
     )
 
+    if(BUILD_STRUCTURESTOOL)
     #structures view unit tests
     ecm_add_tests(
         test/primitivearraytest.cpp
@@ -710,18 +717,19 @@ if(BUILD_TESTING)
         test/locktooffsettest.cpp
 
         NAME_PREFIX structures-
-        LINK_LIBRARIES structureview-tested-srcs Qt5::Test
+        LINK_LIBRARIES structureview-tested-srcs Qt6::Test
     )
 
-    # remove useless default definition of QT_TESTCASE_BUILDDIR in interface from imported target Qt5::Test
-    get_target_property(qttestdefs Qt5::Test INTERFACE_COMPILE_DEFINITIONS)
+    # remove useless default definition of QT_TESTCASE_BUILDDIR in interface from imported target Qt6::Test
+    get_target_property(qttestdefs Qt6::Test INTERFACE_COMPILE_DEFINITIONS)
     list(FILTER qttestdefs EXCLUDE REGEX [[^QT_TESTCASE_BUILDDIR=]])
-    set_property(TARGET Qt5::Test PROPERTY INTERFACE_COMPILE_DEFINITIONS ${qttestdefs})
+    set_property(TARGET Qt6::Test PROPERTY INTERFACE_COMPILE_DEFINITIONS ${qttestdefs})
     # set the definition as needed for our tests
     target_compile_definitions(customtostringtest PRIVATE QT_TESTCASE_BUILDDIR="${CMAKE_CURRENT_BINARY_DIR}")
     target_compile_definitions(jsparsertest       PRIVATE QT_TESTCASE_BUILDDIR="${CMAKE_CURRENT_BINARY_DIR}")
     # TODO: still fragile once __FILE__ is neither absolute or full relative path to this build dir
     # look into using custom code intead of simple QFINDTESTDATA usage
+    endif()
 
     # search tool unit tests
     ecm_add_test(
@@ -734,8 +742,8 @@ if(BUILD_TESTING)
         LINK_LIBRARIES
             OktetaKastenGui
             OktetaKastenCore
-            KF5::I18n
-            Qt5::Test
+            KF6::I18n
+            Qt6::Test
     )
     target_include_directories(searchtooltest
         PUBLIC
@@ -754,7 +762,7 @@ if(BUILD_TESTING)
         LINK_LIBRARIES
             OktetaKastenGui
             OktetaKastenCore
-            Qt5::Test
+            Qt6::Test
     )
     target_include_directories(replacejobtest
         PUBLIC
@@ -824,9 +832,9 @@ target_compile_definitions(OktetaKastenControllersTemplates
 target_link_libraries(OktetaKastenControllersTemplates
     PUBLIC
         OktetaCore
-        Qt5::Widgets
+        Qt6::Widgets
     PRIVATE
-        KF5::I18n
+        KF6::I18n
 )
 
 endif()
