@@ -12,7 +12,8 @@
 
 #include "stringdata.hpp"
 
-#include <QVector>
+// Qt
+#include <QList>
 // Std
 #include <memory>
 
@@ -36,7 +37,7 @@ public:
     QString typeName() const override;
 
 private:
-    QVector<quint8> mData;
+    QList<quint8> mData;
     const std::unique_ptr<const Okteta::CharCodec> mCodec;
 };
 

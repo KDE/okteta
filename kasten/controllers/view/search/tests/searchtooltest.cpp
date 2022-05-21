@@ -23,7 +23,6 @@
 // Std
 #include <memory>
 
-Q_DECLARE_METATYPE(Okteta::AddressRange)
 namespace Okteta {
 char* toString(const AddressRange& addressRange)
 {

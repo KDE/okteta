@@ -6,23 +6,18 @@ okteta_add_library(Controllers NAMESPACE Kasten
         KastenGui
         KastenCore
     PRIVATE
-        KF5::I18n
-        KF5::ConfigWidgets
-        KF5::XmlGui
-        KF5::KIOFileWidgets
+        KF6::I18n
+        KF6::ConfigWidgets
+        KF6::XmlGui
+        KF6::KIOFileWidgets
+        KF6::Parts
     VERSION     ${KASTENCONTROLLERS_VERSION}
     SOVERSION   ${KASTENCONTROLLERS_SO_VERSION}
     ABIVERSION  ${KASTEN_ABI_VERSION}
     NO_TARGET_NAMESPACE
-    NO_VERSIONED_EXPORTED_TARGET_NAME
     NO_VERSIONED_INCLUDEDIR
-    NO_VERSIONED_PACKAGE_NAME
     KI18N_TRANSLATION_DOMAIN "libkasten"
 )
-
-if (BUILD_TERMINALTOOL)
-    target_link_libraries(KastenControllers PRIVATE KF5::Parts)
-endif()
 
 macro(KASTENCONTROLLERS_LIBRARY_SOURCES _subdir)
     okteta_library_sources(Controllers NAMESPACE Kasten
@@ -87,7 +82,6 @@ kastencontrollers_library_sources(documentsystem/documentsbrowser
         DocumentsToolView
 )
 
-if (BUILD_TERMINALTOOL)
 kastencontrollers_library_sources(document/terminal
     PUBLIC
         TerminalToolFactory
@@ -97,7 +91,6 @@ kastencontrollers_library_sources(document/terminal
         TerminalTool
         TerminalToolView
 )
-endif()
 
 kastencontrollers_library_sources(document/modified
     PUBLIC
