@@ -23,7 +23,7 @@ Float32Editor::Float32Editor(QWidget* parent)
     auto* const validator = new QDoubleValidator(this);
     validator->setLocale(QLocale::c()); // for consistency with other podtable editors
     validator->setNotation(QDoubleValidator::ScientificNotation);
-    validator->setRange(floatLowest, floatHighest, 1000); // 1000 also being default in Qt5
+    validator->setRange(floatLowest, floatHighest, 1000); // 1000 also being default in Qt6
 
     setValidator(validator);
     setClearButtonEnabled(true);

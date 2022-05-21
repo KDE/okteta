@@ -24,7 +24,7 @@ FlagDataInformation::FlagDataInformation(const QString& name,
 
 using FlagPair = QPair<QString, quint64>;
 
-template <typename T, int len>
+template <typename T, qsizetype len>
 static void removeFromArray(QVarLengthArray<T, len>& array, int index)
 {
     Q_ASSERT(index >= 0 && index < array.size());

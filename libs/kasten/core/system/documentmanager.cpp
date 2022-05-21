@@ -39,7 +39,7 @@ ModelCodecManager* DocumentManager::codecManager() const
     return d->codecManager();
 }
 
-QVector<AbstractDocument*> DocumentManager::documents() const
+QList<AbstractDocument*> DocumentManager::documents() const
 {
     Q_D(const DocumentManager);
 
@@ -67,7 +67,7 @@ void DocumentManager::closeDocument(AbstractDocument* document)
     d->closeDocument(document);
 }
 
-void DocumentManager::closeDocuments(const QVector<AbstractDocument*>& documents)
+void DocumentManager::closeDocuments(const QList<AbstractDocument*>& documents)
 {
     Q_D(DocumentManager);
 
@@ -95,7 +95,7 @@ bool DocumentManager::canClose(AbstractDocument* document) const
     return d->canClose(document);
 }
 
-bool DocumentManager::canClose(const QVector<AbstractDocument*>& documents) const
+bool DocumentManager::canClose(const QList<AbstractDocument*>& documents) const
 {
     Q_D(const DocumentManager);
 

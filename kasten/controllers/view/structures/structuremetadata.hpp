@@ -70,7 +70,7 @@ private:
     QExplicitlySharedDataPointer<StructureMetaDataPrivate> d;
 };
 
-Q_DECLARE_TYPEINFO(StructureMetaData, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(StructureMetaData, Q_RELOCATABLE_TYPE);
 Q_DECLARE_METATYPE(StructureMetaData)
 
 #endif
