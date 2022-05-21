@@ -14,7 +14,7 @@
 #include "structureenabledlist.hpp"
 // Qt
 #include <QAbstractListModel>
-#include <QVector>
+#include <QList>
 #include <QMap>
 
 namespace Kasten {
@@ -54,7 +54,7 @@ Q_SIGNALS:
     void enabledStructuresChanged();
 
 private:
-    QVector<StructureMetaData> m_metaDataList;
+    QList<StructureMetaData> m_metaDataList;
     StructureEnabledList m_enabledList;
 };
 
