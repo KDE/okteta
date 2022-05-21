@@ -13,10 +13,8 @@
 #include <charcodec.hpp>
 // Qt
 #include <QString>
-
-class QTextCodec;
-class QTextDecoder;
-class QTextEncoder;
+#include <QStringDecoder>
+#include <QStringEncoder>
 
 namespace Okteta {
 
@@ -36,7 +34,7 @@ public:
     TextCharCodec& operator=(const TextCharCodec&) = delete;
 
 protected:
-    explicit TextCharCodec(QTextCodec* textCodec);
+    explicit TextCharCodec(const char* encodingName);
 
 public: // CharCodec API
     Character decode(Byte byte) const override;
@@ -45,11 +43,10 @@ public: // CharCodec API
     QString name() const override;
 
 private:
-    QTextCodec* mCodec;
     /** decodes the chars to unicode */
-    QTextDecoder* mDecoder;
+    mutable QStringDecoder mDecoder;
     /** encodes the chars from unicode */
-    QTextEncoder* mEncoder;
+    mutable QStringEncoder mEncoder;
     /** */
     mutable QString mName;
 };

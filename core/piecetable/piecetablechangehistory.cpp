@@ -133,7 +133,7 @@ bool PieceTableChangeHistory::revertBeforeChange(PieceTable* pieceTable, int cha
                 const AddressRangeList changedRangeList = groupChange->applyGroup(pieceTable);
                 changedRanges->addAddressRangeList(changedRangeList);
 
-                const QVector<ArrayChangeMetrics> changeMetricsList = groupChange->groupMetrics();
+                const QList<ArrayChangeMetrics> changeMetricsList = groupChange->groupMetrics();
                 *changeList += changeMetricsList;
             } else {
                 const AddressRange changedRange = change->apply(pieceTable);
@@ -154,7 +154,7 @@ bool PieceTableChangeHistory::revertBeforeChange(PieceTable* pieceTable, int cha
                 const AddressRangeList changedRangeList = groupChange->revertGroup(pieceTable);
                 changedRanges->addAddressRangeList(changedRangeList);
 
-                const QVector<ArrayChangeMetrics> changeMetricsList = groupChange->groupMetrics(true);
+                const QList<ArrayChangeMetrics> changeMetricsList = groupChange->groupMetrics(true);
                 *changeList += changeMetricsList;
             } else {
                 const AddressRange changedRange = change->revert(pieceTable);

@@ -27,7 +27,7 @@ public:
 
 public:
     AbstractDocument* focussedDocument() const;
-    QVector<AbstractDocument*> documents() const;
+    QList<AbstractDocument*> documents() const;
 
 public:
     void setFocussedDocument(AbstractDocument* document);
@@ -37,8 +37,8 @@ public: // AbstractTool API
     void setTargetModel(AbstractModel* model) override;
 
 Q_SIGNALS:
-    void documentsAdded(const QVector<Kasten::AbstractDocument*>& documents);
-    void documentsClosing(const QVector<Kasten::AbstractDocument*>& documents);
+    void documentsAdded(const QList<Kasten::AbstractDocument*>& documents);
+    void documentsClosing(const QList<Kasten::AbstractDocument*>& documents);
     void focussedDocumentChanged(Kasten::AbstractDocument* document);
 
 private: // sources

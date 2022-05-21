@@ -16,8 +16,6 @@
 // Qt
 #include <QDateTime>
 
-class QNetworkConfigurationManager;
-
 namespace Kasten {
 
 class AbstractModelFileSystemSynchronizerPrivate : public AbstractModelSynchronizerPrivate
@@ -51,8 +49,8 @@ public:
 protected:
     QDateTime mFileDateTime;
     RemoteSyncState mRemoteState = RemoteUnknown;
-    QNetworkConfigurationManager* mNetworkConfigurationManager = nullptr;
     mutable KDirWatch* mDirWatch = nullptr;
+    QMetaObject::Connection mReachabilityChangedConnection;
 
 private:
     Q_DECLARE_PUBLIC(AbstractModelFileSystemSynchronizer)

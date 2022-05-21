@@ -61,9 +61,9 @@ void TabbedViewsPrivate::init()
                      q, [&]() { onEmptySpaceMouseDoubleClicked(); });
 }
 
-QVector<AbstractView*> TabbedViewsPrivate::viewList() const
+QList<AbstractView*> TabbedViewsPrivate::viewList() const
 {
-    QVector<AbstractView*> result;
+    QList<AbstractView*> result;
 
     const int count = mTabWidget->count();
     result.reserve(count);
@@ -92,7 +92,7 @@ int TabbedViewsPrivate::indexOf(AbstractView* view) const
     return result;
 }
 
-void TabbedViewsPrivate::addViews(const QVector<AbstractView*>& views)
+void TabbedViewsPrivate::addViews(const QList<AbstractView*>& views)
 {
     Q_Q(TabbedViews);
 
@@ -121,7 +121,7 @@ void TabbedViewsPrivate::addViews(const QVector<AbstractView*>& views)
     Q_EMIT q->added(views);
 }
 
-void TabbedViewsPrivate::removeViews(const QVector<AbstractView*>& views)
+void TabbedViewsPrivate::removeViews(const QList<AbstractView*>& views)
 {
     Q_Q(TabbedViews);
 
@@ -200,7 +200,7 @@ void TabbedViewsPrivate::onTabCloseRequest(int tabIndex)
     const auto* viewBox = static_cast<const ViewBox*>(widget);
     AbstractView* view = viewBox->view();
 
-    const QVector<Kasten::AbstractView*> views { view };
+    const QList<Kasten::AbstractView*> views { view };
     Q_EMIT q->closeRequest(views);
 }
 

@@ -44,7 +44,7 @@ CopyAsController::CopyAsController(ModelCodecViewManager* modelCodecViewManager,
                                             i18nc("@title:menu", "Copy As"),
                                             this);
     mCopyAsSelectAction->setToolBarMode(KSelectAction::MenuMode);
-    connect(mCopyAsSelectAction, qOverload<QAction*>(&KSelectAction::triggered),
+    connect(mCopyAsSelectAction, &KSelectAction::actionTriggered,
             this, &CopyAsController::onActionTriggered);
 
     guiClient->actionCollection()->addAction(QStringLiteral("copy_as"), mCopyAsSelectAction);
@@ -75,7 +75,7 @@ void CopyAsController::updateActions()
 
     const AbstractModelSelection* selection = mSelectionControl ? mSelectionControl->modelSelection() : nullptr;
 
-    const QVector<AbstractModelStreamEncoder*> encoderList =
+    const QList<AbstractModelStreamEncoder*> encoderList =
         mModelCodecManager->encoderList(mModel, selection);
     const bool hasEncoders = (!encoderList.isEmpty());
 

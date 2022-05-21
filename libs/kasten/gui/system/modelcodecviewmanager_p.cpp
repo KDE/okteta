@@ -34,7 +34,7 @@ ModelCodecViewManagerPrivate::~ModelCodecViewManagerPrivate()
     qDeleteAll(mGeneratorFactoryList);
 }
 
-void ModelCodecViewManagerPrivate::setEncoderConfigEditorFactories(const QVector<AbstractModelStreamEncoderConfigEditorFactory*>& factoryList)
+void ModelCodecViewManagerPrivate::setEncoderConfigEditorFactories(const QList<AbstractModelStreamEncoderConfigEditorFactory*>& factoryList)
 {
     qDeleteAll(mEncoderFactoryList);
     mEncoderFactoryList = factoryList;
@@ -48,13 +48,13 @@ void ModelCodecViewManagerPrivate::setEncoderConfigEditorFactories(const QVector
     }
 }
 
-void ModelCodecViewManagerPrivate::setExporterConfigEditorFactories(const QVector<AbstractModelExporterConfigEditorFactory*>& factoryList)
+void ModelCodecViewManagerPrivate::setExporterConfigEditorFactories(const QList<AbstractModelExporterConfigEditorFactory*>& factoryList)
 {
     qDeleteAll(mExporterFactoryList);
     mExporterFactoryList = factoryList;
 }
 
-void ModelCodecViewManagerPrivate::setGeneratorConfigEditorFactories(const QVector<AbstractModelDataGeneratorConfigEditorFactory*>& factoryList)
+void ModelCodecViewManagerPrivate::setGeneratorConfigEditorFactories(const QList<AbstractModelDataGeneratorConfigEditorFactory*>& factoryList)
 {
     qDeleteAll(mGeneratorFactoryList);
     mGeneratorFactoryList = factoryList;

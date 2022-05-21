@@ -10,7 +10,6 @@
 #define OKTETAPARTFACTORY_HPP
 
 // KF
-#include <kparts_version.h>
 #include <KPluginFactory>
 
 namespace Kasten {
@@ -38,8 +37,7 @@ public: // KPluginFactory API
     QObject* create(const char* iface,
                     QWidget* parentWidget,
                     QObject* parent,
-                    const QVariantList& args,
-                    const QString& keyword) override;
+                    const QVariantList& args) override;
 
 private:
     Kasten::ByteArrayViewProfileManager* mByteArrayViewProfileManager;

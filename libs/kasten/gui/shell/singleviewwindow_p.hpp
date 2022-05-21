@@ -14,7 +14,7 @@
 // Kasten core
 #include <Kasten/KastenCore>
 // Qt
-#include <QVector>
+#include <QList>
 
 class QDragMoveEvent;
 class QDropEvent;
@@ -46,7 +46,7 @@ public:
     void addTool(AbstractToolView* toolView);
 
 public: // If::WidgetsDockable API
-    QVector<ToolViewDockWidget*> dockWidgets() const;
+    QList<ToolViewDockWidget*> dockWidgets() const;
 
 private:
     AbstractView* view() const;
@@ -70,12 +70,12 @@ private:
     AbstractModelSynchronizer* mSynchronizer = nullptr;
 
     SingleViewArea* const mViewArea;
-    QVector<AbstractXmlGuiController*> mControllers;
-    QVector<ToolViewDockWidget*> mDockWidgets;
-    QVector<AbstractTool*> mTools;
+    QList<AbstractXmlGuiController*> mControllers;
+    QList<ToolViewDockWidget*> mDockWidgets;
+    QList<AbstractTool*> mTools;
 };
 
-inline QVector<ToolViewDockWidget*> SingleViewWindowPrivate::dockWidgets() const { return mDockWidgets; }
+inline QList<ToolViewDockWidget*> SingleViewWindowPrivate::dockWidgets() const { return mDockWidgets; }
 inline AbstractView* SingleViewWindowPrivate::view() const { return mView; }
 inline SingleViewArea* SingleViewWindowPrivate::viewArea() const { return mViewArea; }
 

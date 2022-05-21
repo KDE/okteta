@@ -66,7 +66,7 @@ bool ByteArrayViewHtmlStreamEncoder::encodeDataToStream(QIODevice* device,
     const int noOfGroupedBytes = byteArrayView->noOfGroupedBytes();
     const int visibleByteArrayCodings = byteArrayView->visibleByteArrayCodings();
 
-    QVector<AbstractColumnHtmlRenderer*> columnHtmlRendererList;
+    QList<AbstractColumnHtmlRenderer*> columnHtmlRendererList;
 
     if (byteArrayView->offsetColumnVisible()) {
         columnHtmlRendererList.append(
@@ -105,7 +105,6 @@ bool ByteArrayViewHtmlStreamEncoder::encodeDataToStream(QIODevice* device,
 
     // encode
     QTextStream textStream(device);
-    textStream.setCodec("UTF-8");
 
     textStream << "<html><head><meta charset=\"utf-8\"><meta name=\"generator\" content=\"Okteta ByteArrayViewHtmlStreamEncoder " OKTETAKASTENGUI_VERSION_STRING "\"></head><table>" << Qt::endl;
 

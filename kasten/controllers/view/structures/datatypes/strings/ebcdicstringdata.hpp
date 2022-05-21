@@ -12,7 +12,7 @@
 
 #include "stringdata.hpp"
 
-#include <QVector>
+#include <QList>
 
 namespace Okteta {
 class CharCodec;
@@ -34,7 +34,7 @@ public:
     QString typeName() const override;
 
 private:
-    QVector<quint8> mData;
+    QList<quint8> mData;
     Okteta::CharCodec* mCodec;
 };
 

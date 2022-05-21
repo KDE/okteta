@@ -7,11 +7,11 @@ target_link_libraries(okteta
     KastenControllers
     KastenGui
     KastenCore
-    KF5::ConfigCore
-    KF5::I18n
-    KF5::XmlGui
-    KF5::DBusAddons
-    KF5::Crash
+    KF6::ConfigCore
+    KF6::I18n
+    KF6::XmlGui
+    KF6::DBusAddons
+    KF6::Crash
 )
 
 target_sources(okteta

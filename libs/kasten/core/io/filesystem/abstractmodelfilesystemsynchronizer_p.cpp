@@ -13,14 +13,11 @@
 // KF
 #include <KDirWatch>
 // Qt
-#include <QNetworkConfigurationManager>
+#include <QNetworkInformation>
 
 namespace Kasten {
 
-AbstractModelFileSystemSynchronizerPrivate::~AbstractModelFileSystemSynchronizerPrivate()
-{
-    delete mNetworkConfigurationManager;
-}
+AbstractModelFileSystemSynchronizerPrivate::~AbstractModelFileSystemSynchronizerPrivate() = default;
 
 void AbstractModelFileSystemSynchronizerPrivate::startFileWatching()
 {
@@ -72,19 +69,15 @@ void AbstractModelFileSystemSynchronizerPrivate::startNetworkWatching()
 {
     Q_Q(AbstractModelFileSystemSynchronizer);
 
-    // Silence deprecation warnings as there is no Qt 5 substitute for QNetworkConfigurationManager
-    QT_WARNING_PUSH
-    QT_WARNING_DISABLE_CLANG("-Wdeprecated-declarations")
-    QT_WARNING_DISABLE_GCC("-Wdeprecated-declarations")
-    mNetworkConfigurationManager = new QNetworkConfigurationManager();
-    QObject::connect(mNetworkConfigurationManager, &QNetworkConfigurationManager::onlineStateChanged,
-                     q, [&](bool online) { onOnlineStateChanged(online); });
-    QT_WARNING_POP
+    QNetworkInformation::loadBackendByFeatures(QNetworkInformation::Feature::Reachability);
+    mReachabilityChangedConnection =
+    QObject::connect(QNetworkInformation::instance(), &QNetworkInformation::reachabilityChanged,
+                     q, [&](QNetworkInformation::Reachability reachability) { onOnlineStateChanged(reachability == QNetworkInformation::Reachability::Online); });
 }
+
 void AbstractModelFileSystemSynchronizerPrivate::stopNetworkWatching()
 {
-    delete mNetworkConfigurationManager;
-    mNetworkConfigurationManager = nullptr;
+    QObject::disconnect(mReachabilityChangedConnection);
 }
 
 void AbstractModelFileSystemSynchronizerPrivate::onFileDirty(const QString& fileName)

@@ -18,13 +18,13 @@
 //// #include "my_bytearraydatagenerator.hpp"
 //// NEWBYTEARRAYDATAGENERATOR(end)
 // Qt
-#include <QVector>
+#include <QList>
 
 namespace Kasten {
 
-QVector<AbstractModelDataGenerator*> ByteArrayDataGeneratorFactory::createDataGenerators()
+QList<AbstractModelDataGenerator*> ByteArrayDataGeneratorFactory::createDataGenerators()
 {
-    const QVector<AbstractModelDataGenerator*> result {
+    const QList<AbstractModelDataGenerator*> result {
         new ByteArrayPatternGenerator(),
         new ByteArrayRandomDataGenerator(),
         new ByteArraySequenceGenerator(),

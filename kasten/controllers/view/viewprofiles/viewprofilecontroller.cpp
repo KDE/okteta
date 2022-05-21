@@ -15,7 +15,6 @@
 #include <Kasten/Okteta/ByteArrayViewProfileSynchronizer>
 #include <Kasten/Okteta/ByteArrayView>
 // KF
-#include <kwidgetsaddons_version.h>
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>
 #include <KActionMenu>
@@ -127,7 +126,7 @@ void ViewProfileController::onViewProfilesChanged()
 {
     qDeleteAll(mViewProfilesActionGroup->actions());
 
-    const QVector<ByteArrayViewProfile> viewProfiles = mViewProfileManager->viewProfiles();
+    const QList<ByteArrayViewProfile> viewProfiles = mViewProfileManager->viewProfiles();
     const ByteArrayViewProfile::Id currentViewProfileId = mByteArrayViewProfileSynchronizer ?
                                                           mByteArrayViewProfileSynchronizer->viewProfileId() :
                                                           ByteArrayViewProfile::Id();
@@ -203,7 +202,7 @@ void ViewProfileController::onCreateNewActionTriggered()
 
 void ViewProfileController::addNewViewProfile(const ByteArrayViewProfile& viewProfile)
 {
-    QVector<ByteArrayViewProfile> viewProfiles {
+    QList<ByteArrayViewProfile> viewProfiles {
         viewProfile
     };
     mViewProfileManager->saveViewProfiles(viewProfiles);

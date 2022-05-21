@@ -41,11 +41,11 @@ public: // AbstractViewArea API
     bool hasFocus() const;
 
 public: // AbstractGroupedViews API
-    void addViews(const QVector<AbstractView*>& views);
-    void removeViews(const QVector<AbstractView*>& views);
+    void addViews(const QList<AbstractView*>& views);
+    void removeViews(const QList<AbstractView*>& views);
     void setViewFocus(AbstractView* view);
 
-    QVector<AbstractView*> viewList() const;
+    QList<AbstractView*> viewList() const;
     int viewCount() const;
     AbstractView* viewFocus() const;
 
@@ -72,7 +72,7 @@ private:
     Q_DECLARE_PUBLIC(MultiViewAreas)
 
 private:
-    QVector<TabbedViews*> mViewAreaList;
+    QList<TabbedViews*> mViewAreaList;
     QSplitter* mMainSplitter;
 
     TabbedViews* mCurrentViewArea = nullptr;
@@ -85,9 +85,9 @@ inline AbstractView* MultiViewAreasPrivate::viewFocus()         const { return m
 inline AbstractViewArea* MultiViewAreasPrivate::viewAreaFocus() const { return mCurrentViewArea; }
 inline int MultiViewAreasPrivate::viewAreasCount()              const { return mViewAreaList.size(); }
 
-inline QVector<AbstractView*> MultiViewAreasPrivate::viewList() const
+inline QList<AbstractView*> MultiViewAreasPrivate::viewList() const
 {
-    QVector<AbstractView*> result;
+    QList<AbstractView*> result;
 
     result.reserve(mViewAreaList.size());
     for (const TabbedViews* viewArea : mViewAreaList) {
@@ -130,7 +130,7 @@ inline void MultiViewAreasPrivate::setFocus()
     mCurrentViewArea->setFocus();
 }
 
-inline void MultiViewAreasPrivate::addViews(const QVector<AbstractView*>& views)
+inline void MultiViewAreasPrivate::addViews(const QList<AbstractView*>& views)
 {
     Q_Q(MultiViewAreas);
 
@@ -139,7 +139,7 @@ inline void MultiViewAreasPrivate::addViews(const QVector<AbstractView*>& views)
     Q_EMIT q->added(views);
 }
 
-inline void MultiViewAreasPrivate::removeViews(const QVector<AbstractView*>& views)
+inline void MultiViewAreasPrivate::removeViews(const QList<AbstractView*>& views)
 {
     Q_Q(MultiViewAreas);
 
@@ -199,7 +199,7 @@ inline void MultiViewAreasPrivate::closeViewArea(AbstractViewArea* _viewArea)
 
     auto* viewArea = static_cast<TabbedViews*>(_viewArea);
 
-    const QVector<AbstractView*> views = viewArea->viewList();
+    const QList<AbstractView*> views = viewArea->viewList();
 
     Q_EMIT q->closeRequest(views);
 }

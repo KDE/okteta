@@ -22,11 +22,11 @@
 // #include "filter/my_bytearrayfilter.hpp"
 // NEWFILTER(end)
 // Qt
-#include <QVector>
+#include <QList>
 
-QVector<AbstractByteArrayFilter*> ByteArrayFilterFactory::createFilters()
+QList<AbstractByteArrayFilter*> ByteArrayFilterFactory::createFilters()
 {
-    const QVector<AbstractByteArrayFilter*> result {
+    const QList<AbstractByteArrayFilter*> result {
         new AndByteArrayFilter(),
         new OrByteArrayFilter(),
         new XOrByteArrayFilter(),

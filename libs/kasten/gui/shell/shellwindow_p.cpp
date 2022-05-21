@@ -83,7 +83,7 @@ void ShellWindowPrivate::addTool(AbstractToolView* toolView)
 void ShellWindowPrivate::showDocument(AbstractDocument* document)
 {
     auto* currentGroupedViews = static_cast<AbstractGroupedViews*>(mGroupedViews->viewAreaFocus());
-    const QVector<AbstractView*> viewList = currentGroupedViews->viewList();
+    const QList<AbstractView*> viewList = currentGroupedViews->viewList();
 
     AbstractView* viewOfDocument = nullptr;
     for (AbstractView* view : viewList) {
@@ -96,7 +96,7 @@ void ShellWindowPrivate::showDocument(AbstractDocument* document)
     if (viewOfDocument) {
         mGroupedViews->setViewFocus(viewOfDocument);
     } else {
-        const QVector<Kasten::AbstractDocument*> documents { document };
+        const QList<Kasten::AbstractDocument*> documents { document };
         mViewManager->createViewsFor(documents);
     }
 }

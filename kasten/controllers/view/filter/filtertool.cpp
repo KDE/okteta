@@ -31,6 +31,8 @@
 
 namespace Kasten {
 
+const QString FilterTool::ConfigGroupId = QStringLiteral("FilterTool");
+
 FilterTool::FilterTool()
 {
     setObjectName(QStringLiteral("BinaryFilter"));
@@ -60,7 +62,7 @@ FilterTool::~FilterTool()
 }
 
 QString FilterTool::title() const { return i18nc("@title:window", "Binary Filter"); }
-QVector<AbstractByteArrayFilter*> FilterTool::filterList() const { return mFilterList; }
+QList<AbstractByteArrayFilter*> FilterTool::filterList() const { return mFilterList; }
 QString FilterTool::charCodecName() const
 {
     return mByteArrayView ? mByteArrayView->charCodingName() : QString();

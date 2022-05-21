@@ -10,7 +10,7 @@
 #define KASTEN_BYTEARRAYFILTERFACTORY_HPP
 
 class AbstractByteArrayFilter;
-template <class T> class QVector;
+template <class T> class QList;
 
 class ByteArrayFilterFactory
 {
@@ -21,7 +21,7 @@ public:
     ByteArrayFilterFactory& operator=(const ByteArrayFilterFactory&) = delete;
 
 public:
-    static QVector<AbstractByteArrayFilter*> createFilters();
+    static QList<AbstractByteArrayFilter*> createFilters();
 
 };
 

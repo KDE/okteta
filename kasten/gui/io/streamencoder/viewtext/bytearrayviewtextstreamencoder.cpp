@@ -72,7 +72,7 @@ bool ByteArrayViewTextStreamEncoder::encodeDataToStream(QIODevice* device,
     const int noOfGroupedBytes = byteArrayView->noOfGroupedBytes();
     const int visibleByteArrayCodings = byteArrayView->visibleByteArrayCodings();
 
-    QVector<AbstractColumnTextRenderer*> columnTextRendererList;
+    QList<AbstractColumnTextRenderer*> columnTextRendererList;
 
     if (byteArrayView->offsetColumnVisible()) {
         columnTextRendererList.append(

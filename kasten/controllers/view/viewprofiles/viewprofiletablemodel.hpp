@@ -14,7 +14,7 @@
 // Qt
 #include <QAbstractTableModel>
 
-template <class C> class QVector;
+template <class C> class QList;
 
 namespace Kasten {
 class ByteArrayViewProfileManager;
@@ -48,7 +48,7 @@ public:
 private Q_SLOTS:
     void onDefaultIndexChanged();
     void onViewProfilesChanged();
-    void onViewProfileLocksChanged(const QVector<Kasten::ByteArrayViewProfile::Id>& viewProfileIds);
+    void onViewProfileLocksChanged(const QList<Kasten::ByteArrayViewProfile::Id>& viewProfileIds);
 
 private:
     const ByteArrayViewProfileManager* mViewProfileManager;

@@ -13,7 +13,7 @@
 #include "dummyview.hpp"
 #include <logging.hpp>
 // Qt
-#include <QMutableVectorIterator>
+#include <QMutableListIterator>
 // Std
 #include <utility>
 
@@ -42,7 +42,7 @@ void ViewManagerPrivate::setViewFactory(AbstractViewFactory* factory)
     mFactory = factory;
 }
 
-QVector<AbstractView*> ViewManagerPrivate::views() const
+QList<AbstractView*> ViewManagerPrivate::views() const
 {
     return mViewList;
 }
@@ -68,15 +68,15 @@ void ViewManagerPrivate::createCopyOfView(AbstractView* view, Qt::Alignment alig
 
     mViewList.append(viewCopy);
 
-    const QVector<Kasten::AbstractView*> views { viewCopy };
+    const QList<Kasten::AbstractView*> views { viewCopy };
     Q_EMIT q->opened(views);
 }
 
-void ViewManagerPrivate::createViewsFor(const QVector<Kasten::AbstractDocument*>& documents)
+void ViewManagerPrivate::createViewsFor(const QList<Kasten::AbstractDocument*>& documents)
 {
     Q_Q(ViewManager);
 
-    QVector<Kasten::AbstractView*> openedViews;
+    QList<Kasten::AbstractView*> openedViews;
 
     openedViews.reserve(documents.size());
     mViewList.reserve(mViewList.size() + documents.size());
@@ -95,13 +95,13 @@ void ViewManagerPrivate::createViewsFor(const QVector<Kasten::AbstractDocument*>
     }
 }
 
-void ViewManagerPrivate::removeViewsFor(const QVector<Kasten::AbstractDocument*>& documents)
+void ViewManagerPrivate::removeViewsFor(const QList<Kasten::AbstractDocument*>& documents)
 {
     Q_Q(ViewManager);
 
-    QVector<Kasten::AbstractView*> closedViews;
+    QList<Kasten::AbstractView*> closedViews;
 
-    QMutableVectorIterator<AbstractView*> it(mViewList);
+    QMutableListIterator<AbstractView*> it(mViewList);
     for (AbstractDocument* document : documents) {
         while (it.hasNext()) {
             AbstractView* view = it.next();
@@ -122,7 +122,7 @@ void ViewManagerPrivate::removeViewsFor(const QVector<Kasten::AbstractDocument*>
     }
 }
 
-void ViewManagerPrivate::removeViews(const QVector<AbstractView*>& views)
+void ViewManagerPrivate::removeViews(const QList<AbstractView*>& views)
 {
     Q_Q(ViewManager);
 

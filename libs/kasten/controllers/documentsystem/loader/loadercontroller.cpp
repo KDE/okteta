@@ -24,7 +24,7 @@
 
 namespace Kasten {
 
-static constexpr char CreatorConfigGroupId[] = "Recent Files";
+static const QString CreatorConfigGroupId = QStringLiteral("Recent Files");
 
 LoaderController::LoaderController(AbstractDocumentStrategy* documentStrategy,
                                    KXMLGUIClient* guiClient)

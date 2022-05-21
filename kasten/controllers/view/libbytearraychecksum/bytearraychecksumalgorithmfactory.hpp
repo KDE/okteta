@@ -10,7 +10,7 @@
 #define KASTEN_BYTEARRAYCHECKSUMALGORITHMFACTORY_HPP
 
 class AbstractByteArrayChecksumAlgorithm;
-template <class T> class QVector;
+template <class T> class QList;
 
 class ByteArrayChecksumAlgorithmFactory
 {
@@ -21,7 +21,7 @@ public:
     ByteArrayChecksumAlgorithmFactory& operator=(const ByteArrayChecksumAlgorithmFactory&) = delete;
 
 public:
-    static QVector<AbstractByteArrayChecksumAlgorithm*> createAlgorithms();
+    static QList<AbstractByteArrayChecksumAlgorithm*> createAlgorithms();
 
 };
 

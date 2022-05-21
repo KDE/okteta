@@ -40,7 +40,7 @@ InsertController::InsertController(ModelCodecViewManager* modelCodecViewManager,
     mInsertSelectAction = new KSelectAction(i18nc("@title:menu", "Insert"), this);
 //     mInsertSelectAction->setIcon( QIcon::fromTheme( QStringLiteral("insert-text") ) );
     mInsertSelectAction->setToolBarMode(KSelectAction::MenuMode);
-    connect(mInsertSelectAction, qOverload<QAction*>(&KSelectAction::triggered),
+    connect(mInsertSelectAction, &KSelectAction::actionTriggered,
             this, &InsertController::onActionTriggered);
 
     // TODO: find better id
@@ -74,7 +74,7 @@ void InsertController::updateActions()
     // TODO: pass model to find which mimetypes it can read
     // mSelectedDataWriteableControl->canReadData( QMimeData() ) needs already data
     // TODO: it this depend on the current selection/focus? So it needs to be updated on every change?
-    const QVector<AbstractModelDataGenerator*> generatorList =
+    const QList<AbstractModelDataGenerator*> generatorList =
         mModelCodecManager->generatorList();
     const bool hasGenerators = (!generatorList.isEmpty());
 

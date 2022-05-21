@@ -12,10 +12,9 @@
 // Kasten
 #include <Kasten/KastenCore>
 // KF
-#include <kparts_version.h>
 #include <KParts/ReadWritePart>
 // Qt
-#include <QVector>
+#include <QList>
 
 namespace Kasten {
 class ByteArrayViewProfileManager;
@@ -35,7 +34,7 @@ class OktetaPart : public KParts::ReadWritePart
 {
     Q_OBJECT
 
-    friend class OktetaBrowserExtension;
+    friend class OktetaNavigationExtension;
 
 public:
     enum Modus
@@ -86,7 +85,7 @@ private:
     Kasten::ByteArrayView* mByteArrayView;
 
     Kasten::SingleViewArea* mSingleViewArea;
-    QVector<Kasten::AbstractXmlGuiController*> mControllers;
+    QList<Kasten::AbstractXmlGuiController*> mControllers;
 
     Kasten::ByteArrayViewProfileManager* mViewProfileManager;
 };

@@ -16,7 +16,6 @@
 // Okteta core
 #include <Okteta/CharCodec>
 // KF
-#include <kwidgetsaddons_version.h>
 #include <KXMLGUIClient>
 #include <KLocalizedString>
 #include <KActionCollection>

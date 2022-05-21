@@ -14,8 +14,9 @@
 #include "oktetacore.hpp"
 #include "byte.hpp"
 
-class QStringList;
+template <class T> class QList;
 class QString;
+using QStringList = QList<QString>;
 class QChar;
 
 namespace Okteta {

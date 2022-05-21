@@ -11,10 +11,12 @@ set_source_files_properties(../partfactory.cpp PROPERTIES
     COMPILE_FLAGS -DOKTETA_VERSION=\\\"${Okteta_VERSION}\\\"
 )
 
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/../oktetapart.json.in oktetapart.json @ONLY)
+
 # TODO: deduplicate object file generation of
 ecm_add_test(
   ../part.cpp
-  ../browserextension.cpp
+  ../navigationextension.cpp
   ../partfactory.cpp
   oktetaparttest.cpp
   TEST_NAME oktetaparttest
@@ -26,10 +28,7 @@ ecm_add_test(
   KastenControllers
   KastenGui
   KastenCore
-  KF5::I18n
-  KF5::Parts
-  Qt5::Test
+  KF6::I18n
+  KF6::Parts
+  Qt6::Test
 )
-
-kcoreaddons_desktop_to_json(oktetaparttest ${CMAKE_CURRENT_BINARY_DIR}/../oktetapart.desktop)
-

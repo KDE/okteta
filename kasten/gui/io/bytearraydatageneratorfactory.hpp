@@ -12,7 +12,7 @@
 // lib
 #include "oktetakastengui_export.hpp"
 
-template <class T> class QVector;
+template <class T> class QList;
 
 namespace Kasten {
 class AbstractModelDataGenerator;
@@ -26,7 +26,7 @@ public:
     ByteArrayDataGeneratorFactory& operator=(const ByteArrayDataGeneratorFactory&) = delete;
 
 public:
-    static QVector<AbstractModelDataGenerator*> createDataGenerators();
+    static QList<AbstractModelDataGenerator*> createDataGenerators();
 };
 
 }

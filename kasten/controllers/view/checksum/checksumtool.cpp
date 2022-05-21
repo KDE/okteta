@@ -31,6 +31,8 @@
 
 namespace Kasten {
 
+const QString ChecksumTool::ConfigGroupId = QStringLiteral("ChecksumTool");
+
 ChecksumTool::ChecksumTool()
     : mChecksumUptodate(false)
     , mSourceByteArrayModelUptodate(false)
@@ -61,7 +63,7 @@ ChecksumTool::~ChecksumTool()
     qDeleteAll(mAlgorithmList);
 }
 
-QVector<AbstractByteArrayChecksumAlgorithm*> ChecksumTool::algorithmList() const { return mAlgorithmList; }
+QList<AbstractByteArrayChecksumAlgorithm*> ChecksumTool::algorithmList() const { return mAlgorithmList; }
 
 bool ChecksumTool::isApplyable() const
 {

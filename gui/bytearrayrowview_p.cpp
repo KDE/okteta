@@ -680,7 +680,7 @@ void ByteArrayRowViewPrivate::updateChanged()
     }
 
     // collect affected buffer columns
-    QVector<ByteArrayRowColumnRenderer*> dirtyColumns;
+    QList<ByteArrayRowColumnRenderer*> dirtyColumns;
 
     if (mByteArrayColumn->overlaps(Xs)) {
         dirtyColumns.append(mByteArrayColumn);

@@ -1,6 +1,6 @@
 add_definitions(-DTRANSLATION_DOMAIN=\"oktetapart\")
 
-configure_file(oktetapart.desktop.in ${CMAKE_CURRENT_BINARY_DIR}/oktetapart.desktop @ONLY)
+configure_file(oktetapart.json.in ${CMAKE_CURRENT_BINARY_DIR}/oktetapart.json @ONLY)
 
 add_library(oktetapart MODULE)
 
@@ -11,14 +11,14 @@ target_link_libraries(oktetapart
     KastenControllers
     KastenGui
     KastenCore
-    KF5::I18n
-    KF5::Parts
+    KF6::I18n
+    KF6::Parts
 )
 
 target_sources(oktetapart
     PRIVATE
         part.cpp
-        browserextension.cpp
+        navigationextension.cpp
         partfactory.cpp
 
         oktetapart.qrc
@@ -28,10 +28,7 @@ set_source_files_properties(partfactory.cpp PROPERTIES
     COMPILE_FLAGS -DOKTETA_VERSION=\\\"${Okteta_VERSION}\\\"
 )
 
-install( TARGETS oktetapart  DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf5/parts)
-kcoreaddons_desktop_to_json(oktetapart ${CMAKE_CURRENT_BINARY_DIR}/oktetapart.desktop)
-
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/oktetapart.desktop  DESTINATION ${KDE_INSTALL_KSERVICES5DIR})
+install( TARGETS oktetapart  DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf6/parts)
 
 if(BUILD_TESTING)
     add_subdirectory(tests)
