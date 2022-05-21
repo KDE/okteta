@@ -89,7 +89,7 @@ void LockToOffsetTest::cleanupTestCase()
 
 TopLevelDataInformation* LockToOffsetTest::newStructure(Okteta::AbstractByteArrayModel* lastModel, Okteta::Address lastReadOffset)
 {
-    QVector<DataInformation*> children;
+    QList<DataInformation*> children;
     children.append(new UInt16DataInformation(QStringLiteral("first")));
     children.append(new UInt64DataInformation(QStringLiteral("second")));
     DataInformation* data = new StructureDataInformation(QStringLiteral("container"), children);

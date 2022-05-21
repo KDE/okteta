@@ -11,7 +11,7 @@
 #include "../script/scriptlogger.hpp"
 
 #include <QString>
-#include <QVector>
+#include <QList>
 #include <QScriptValue>
 #include <QScriptEngine>
 #include <QScriptValueIterator>
@@ -26,11 +26,11 @@ DataInformation* convert(const QScriptValue& value, const QString& name, ScriptL
     return toDataInformation(value, info); // could be NULL
 }
 
-QVector<DataInformation*> convertValues(const QScriptValue& value, ScriptLogger* logger,
+QList<DataInformation*> convertValues(const QScriptValue& value, ScriptLogger* logger,
                                         DataInformation* parent)
 {
     // TODO Q_CHECK_PTR(parent);
-    QVector<DataInformation*> ret;
+    QList<DataInformation*> ret;
     QScriptValueIterator it(value);
     const bool isArray = value.isArray();
     while (it.hasNext()) {
