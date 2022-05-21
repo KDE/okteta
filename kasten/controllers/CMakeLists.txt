@@ -9,25 +9,22 @@ okteta_add_library(Controllers NAMESPACE Okteta Kasten
         KastenCore
     PRIVATE
         framesprint
-        KF5::NewStuffWidgets
-        KF5::I18n
-        KF5::ConfigWidgets
-        KF5::ItemViews
-        KF5::Completion
-        KF5::KIOCore
-        Qt5::PrintSupport
-        Qt5::Script
-        Qt5::Xml
-#         Qt5::Test # QAbstractItemModelTester
+        KF6::NewStuffWidgets
+        KF6::I18n
+        KF6::ConfigWidgets
+        KF6::ItemViews
+        KF6::Completion
+        KF6::KIOCore
+        Qt6::PrintSupport
+        Qt6::Xml
+#         Qt6::Test # QAbstractItemModelTester
     VERSION     ${OKTETAKASTENCONTROLLERS_VERSION}
     SOVERSION   ${OKTETAKASTENCONTROLLERS_SO_VERSION}
     ABIVERSION  ${OKTETAKASTEN_ABI_VERSION} ${KASTEN_ABI_VERSION}
     NO_VERSIONED_INCLUDEDIR
-    NO_VERSIONED_PACKAGE_NAME
     REVERSE_NAMESPACE_INCLUDEDIR
     REVERSE_NAMESPACE_LIB
     NO_TARGET_NAMESPACE
-    NO_VERSIONED_EXPORTED_TARGET_NAME
     KI18N_TRANSLATION_DOMAIN "liboktetakasten"
 )
 
@@ -66,7 +63,7 @@ oktetakastencontrollers_add_sublibrary(configentries
     NO_EXPORTS
     PUBLIC
         OktetaKastenGui
-        KF5::ConfigCore
+        KF6::ConfigCore
 )
 
 oktetakastencontrollers_add_sublibrary(datatypes
@@ -74,7 +71,7 @@ oktetakastencontrollers_add_sublibrary(datatypes
     PUBLIC
         OktetaGui
     PRIVATE
-        KF5::Completion
+        KF6::Completion
 )
 
 oktetakastencontrollers_add_sublibrary(datatypecodecs
@@ -82,7 +79,7 @@ oktetakastencontrollers_add_sublibrary(datatypecodecs
     PUBLIC
         datatypes
     PRIVATE
-        KF5::I18n
+        KF6::I18n
     KI18N_TRANSLATION_DOMAIN "liboktetakasten"
 )
 
@@ -97,18 +94,18 @@ oktetakastencontrollers_add_sublibrary(datatypeeditors
     PUBLIC
         datatypes
     PRIVATE
-        KF5::Completion
+        KF6::Completion
 )
 
 oktetakastencontrollers_add_sublibrary(bytearraychecksum
     NO_EXPORTS
     PUBLIC
         OktetaCore
-        Qt5::Widgets
+        Qt6::Widgets
     PRIVATE
         configentries
-        KF5::Completion
-        KF5::I18n
+        KF6::Completion
+        KF6::I18n
     KI18N_TRANSLATION_DOMAIN "liboktetakasten"
 )
 
@@ -116,10 +113,10 @@ oktetakastencontrollers_add_sublibrary(bytearrayfilter
     NO_EXPORTS
     PUBLIC
         OktetaCore
-        Qt5::Widgets
+        Qt6::Widgets
     PRIVATE
         configentries
-        KF5::I18n
+        KF6::I18n
     KI18N_TRANSLATION_DOMAIN "liboktetakasten"
 )
 
@@ -128,7 +125,7 @@ oktetakastencontrollers_add_sublibrary(finddialog
     PUBLIC
         OktetaKastenGui
     PRIVATE
-        KF5::I18n
+        KF6::I18n
     KI18N_TRANSLATION_DOMAIN "liboktetakasten"
 )
 
@@ -138,17 +135,18 @@ oktetakastencontrollers_add_sublibrary(bytearraysearch
         finddialog
 )
 
+if(BUILD_STRUCTURESTOOL)
 oktetakastencontrollers_add_sublibrary(structuresdatatypes
     NO_EXPORTS
     PUBLIC
         OktetaCore
-        KF5::ConfigGui
-        Qt5::Script
+        KF6::ConfigGui
+        Qt6::Script
     PRIVATE
         configentries
         datatypeeditors
-        KF5::Completion
-        KF5::I18n
+        KF6::Completion
+        KF6::I18n
     KI18N_TRANSLATION_DOMAIN "liboktetakasten"
 )
 
@@ -161,6 +159,7 @@ okteta_qt_declare_logging_category(Controllers NAMESPACE Okteta Kasten
     DESCRIPTION "Okteta Structures tool"
     EXPORT OKTETA
 )
+endif()
 
 oktetakastencontrollers_sublibrary_sources(libconfigentries
     SUBLIBRARY configentries
@@ -533,7 +532,7 @@ oktetakastencontrollers_library_sources(view/bookmarks
         BookmarksToolView
 )
 
-
+if(BUILD_STRUCTURESTOOL)
 oktetakastencontrollers_sublibrary_sources(view/structures/datatypes
     SUBLIBRARY structuresdatatypes
     PRIVATE
@@ -680,6 +679,7 @@ oktetakastencontrollers_library_sources(view/structures
         StructuresToolView
         StructureViewItemDelegate
 )
+endif()
 
 oktetakastencontrollers_library_sources(view/print
     PUBLIC
@@ -795,7 +795,7 @@ target_link_libraries(ByteArrayFilterTemplates
     PUBLIC
         bytearrayfilter
     PRIVATE
-        KF5::I18n
+        KF6::I18n
 )
 
 add_library(ByteArrayCheckSumTemplates STATIC)
@@ -814,7 +814,7 @@ target_link_libraries(ByteArrayCheckSumTemplates
     PUBLIC
         bytearraychecksum
     PRIVATE
-        KF5::I18n
+        KF6::I18n
 )
 
 endif()
@@ -823,5 +823,7 @@ if(BUILD_TESTING)
     add_subdirectory(view/libdatatypeeditors/tests)
     add_subdirectory(view/replace/tests)
     add_subdirectory(view/search/tests)
+    if(BUILD_STRUCTURESTOOL)
     add_subdirectory(view/structures/tests)
+    endif()
 endif()

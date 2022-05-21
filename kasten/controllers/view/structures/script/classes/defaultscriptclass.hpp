@@ -9,7 +9,7 @@
 #ifndef KASTEN_DEFAULTSCRIPTCLASS_HPP
 #define KASTEN_DEFAULTSCRIPTCLASS_HPP
 
-#include <QVector>
+#include <QList>
 #include <QScriptClass>
 #include <QScriptValue>
 #include <QScriptEngine>
@@ -25,7 +25,7 @@ class DefaultScriptClass : public QScriptClass
 
 public:
     using DataInfPtr = DataInformation*;
-    using PropertyInfoList = QVector<QPair<QScriptString, QScriptValue::PropertyFlags>>;
+    using PropertyInfoList = QList<QPair<QScriptString, QScriptValue::PropertyFlags>>;
 
     DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
     ~DefaultScriptClass() override;
