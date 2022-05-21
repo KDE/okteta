@@ -19,7 +19,7 @@ target_sources(oktetacoretestutil PRIVATE
 )
 target_link_libraries(oktetacoretestutil
     PUBLIC
-        Qt5::Core
+        Qt6::Core
 )
 
 
@@ -28,7 +28,7 @@ ecm_add_test(
     #  ${CMAKE_CURRENT_SOURCE_DIR}/../arraychangemetrics.cpp
     TEST_NAME arraychangemetricstest
     NAME_PREFIX libokteta-core-
-    LINK_LIBRARIES Qt5::Test
+    LINK_LIBRARIES Qt6::Test
 )
 
 
@@ -36,7 +36,7 @@ ecm_add_test(
     addressrangetest.cpp
     TEST_NAME addressrangetest
     NAME_PREFIX libokteta-core-
-    LINK_LIBRARIES testoktetacore Qt5::Test
+    LINK_LIBRARIES testoktetacore Qt6::Test
 )
 
 
@@ -44,7 +44,7 @@ ecm_add_test(
     addressrangelisttest.cpp
     TEST_NAME addressrangelisttest
     NAME_PREFIX libokteta-core-
-    LINK_LIBRARIES testoktetacore Qt5::Test
+    LINK_LIBRARIES testoktetacore Qt6::Test
 )
 
 
@@ -52,7 +52,7 @@ ecm_add_test(
     fixedsizebytearraymodeltest.cpp
     TEST_NAME fixedsizebytearraymodeltest
     NAME_PREFIX libokteta-core-
-    LINK_LIBRARIES testoktetacore Qt5::Test
+    LINK_LIBRARIES testoktetacore Qt6::Test
 )
 
 
@@ -61,7 +61,7 @@ ecm_add_test(
     fixedsizebytearraymodelabstractbytearraymodeliftest.cpp
     TEST_NAME fixedsizebytearraymodelabstractbytearraymodeliftest
     NAME_PREFIX libokteta-core-
-    LINK_LIBRARIES oktetacoretestutil testoktetacore Qt5::Test
+    LINK_LIBRARIES oktetacoretestutil testoktetacore Qt6::Test
 )
 
 
@@ -69,7 +69,7 @@ ecm_add_test(
     bytearraymodeltest.cpp
     TEST_NAME bytearraymodeltest
     NAME_PREFIX libokteta-core-
-    LINK_LIBRARIES OktetaCore Qt5::Test
+    LINK_LIBRARIES OktetaCore Qt6::Test
 )
 
 
@@ -78,7 +78,7 @@ ecm_add_test(
     bytearraymodelabstractbytearraymodeliftest.cpp
     TEST_NAME bytearraymodelabstractbytearraymodeliftest
     NAME_PREFIX libokteta-core-
-    LINK_LIBRARIES oktetacoretestutil testoktetacore Qt5::Test
+    LINK_LIBRARIES oktetacoretestutil testoktetacore Qt6::Test
 )
 
 
@@ -87,7 +87,7 @@ ecm_add_test(
     piecetablebytearraymodelabstractbytearraymodeliftest.cpp
     TEST_NAME piecetablebytearraymodelabstractbytearraymodeliftest
     NAME_PREFIX libokteta-core-
-    LINK_LIBRARIES oktetacoretestutil testoktetacore Qt5::Test
+    LINK_LIBRARIES oktetacoretestutil testoktetacore Qt6::Test
 )
 
 
@@ -96,7 +96,7 @@ ecm_add_test(
     piecetablebytearraymodelversionableiftest.cpp
     TEST_NAME piecetablebytearraymodelversionableiftest
     NAME_PREFIX libokteta-core-
-    LINK_LIBRARIES oktetacoretestutil OktetaCore Qt5::Test
+    LINK_LIBRARIES oktetacoretestutil OktetaCore Qt6::Test
 )
 
 
@@ -104,7 +104,7 @@ ecm_add_test(
     valuecodectest.cpp
     TEST_NAME valuecodectest
     NAME_PREFIX libokteta-core-
-    LINK_LIBRARIES OktetaCore Qt5::Test
+    LINK_LIBRARIES OktetaCore Qt6::Test
 )
 
 
@@ -112,7 +112,7 @@ ecm_add_test(
     charcodectest.cpp
     TEST_NAME charcodectest
     NAME_PREFIX libokteta-core-
-    LINK_LIBRARIES OktetaCore Qt5::Test
+    LINK_LIBRARIES OktetaCore Qt6::Test
 )
 
 
@@ -120,7 +120,7 @@ ecm_add_test(
     textcharcodectest.cpp
     TEST_NAME textcharcodectest
     NAME_PREFIX libokteta-core-
-    LINK_LIBRARIES testoktetacore Qt5::Test
+    LINK_LIBRARIES testoktetacore Qt6::Test
 )
 
 
@@ -129,7 +129,7 @@ ecm_add_test(
     textcharcodeccharcodeciftest.cpp
     TEST_NAME textcharcodeccharcodeciftest
     NAME_PREFIX libokteta-core-
-    LINK_LIBRARIES testoktetacore Qt5::Test
+    LINK_LIBRARIES testoktetacore Qt6::Test
 )
 
 
@@ -137,7 +137,7 @@ ecm_add_test(
     charcodeciftest.cpp ebcdic1047charcodeccharcodeciftest.cpp
     TEST_NAME ebcdic1047charcodeccharcodeciftest
     NAME_PREFIX libokteta-core-
-    LINK_LIBRARIES testoktetacore Qt5::Test
+    LINK_LIBRARIES testoktetacore Qt6::Test
 )
 
 
@@ -145,7 +145,7 @@ ecm_add_test(
     bookmarktest.cpp
     TEST_NAME bookmarktest
     NAME_PREFIX libokteta-core-
-    LINK_LIBRARIES Qt5::Test
+    LINK_LIBRARIES Qt6::Test
 )
 
 
@@ -153,5 +153,5 @@ ecm_add_test(
     bookmarklisttest.cpp
     TEST_NAME bookmarklisttest
     NAME_PREFIX libokteta-core-
-    LINK_LIBRARIES testoktetacore Qt5::Test
+    LINK_LIBRARIES testoktetacore Qt6::Test
 )

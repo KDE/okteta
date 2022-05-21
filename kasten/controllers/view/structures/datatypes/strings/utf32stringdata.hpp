@@ -11,7 +11,7 @@
 
 #include "stringdata.hpp"
 
-#include <QVector>
+#include <QList>
 
 class Utf32StringData : public StringData
 {
@@ -29,7 +29,7 @@ public:
     QString typeName() const override;
 
 private:
-    QVector<quint32> mCodePoints;
+    QList<quint32> mCodePoints;
     int mNonBMPCount = 0;
 };
 

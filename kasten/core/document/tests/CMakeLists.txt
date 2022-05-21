@@ -23,8 +23,8 @@ ecm_add_test(
     LINK_LIBRARIES
         KastenCore
         testoktetacore
-        KF5::I18n
-        Qt5::Test
+        KF6::I18n
+        Qt6::Test
 )
 target_compile_definitions(bytearraydocumenttest PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")
 
@@ -41,7 +41,7 @@ ecm_add_test(
         KastenCore
         oktetacoretestutil
         testoktetacore
-        KF5::I18n
-        Qt5::Test
+        KF6::I18n
+        Qt6::Test
 )
 target_compile_definitions(bytearraydocumentfactorytest PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")

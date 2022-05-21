@@ -19,7 +19,7 @@ ecm_add_test(
     NAME_PREFIX oktetakasten-oktetawidgets-
     LINK_LIBRARIES
         testoktetacore
-        Qt5::Test
+        Qt6::Test
 )
 
 ecm_add_test(
@@ -29,7 +29,7 @@ ecm_add_test(
     NAME_PREFIX oktetakasten-oktetawidgets-
     LINK_LIBRARIES
         testoktetacore
-        Qt5::Test
+        Qt6::Test
 )
 
 ecm_add_test(
@@ -40,7 +40,7 @@ ecm_add_test(
     NAME_PREFIX oktetakasten-oktetawidgets-
     LINK_LIBRARIES
         testoktetacore
-        Qt5::Test
+        Qt6::Test
 )
 
 ecm_add_test(
@@ -50,7 +50,7 @@ ecm_add_test(
     NAME_PREFIX oktetakasten-oktetawidgets-
     LINK_LIBRARIES
         testoktetacore
-        Qt5::Test
+        Qt6::Test
 )
 
 ecm_add_test(
@@ -60,7 +60,7 @@ ecm_add_test(
     NAME_PREFIX oktetakasten-oktetawidgets-
     LINK_LIBRARIES
         testoktetacore
-        Qt5::Test
+        Qt6::Test
 )
 
 ecm_add_test(
@@ -77,6 +77,6 @@ ecm_add_test(
     NAME_PREFIX oktetakasten-oktetawidgets-
     LINK_LIBRARIES
         testoktetacore
-        Qt5::Gui
-        Qt5::Test
+        Qt6::Gui
+        Qt6::Test
 )
