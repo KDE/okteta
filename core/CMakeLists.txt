@@ -3,16 +3,15 @@ set(OKTETACORE_SO_VERSION ${OKTETALIBS_LIB_SOVERSION})
 
 okteta_add_library(Core NAMESPACE Okteta
     PUBLIC
-        Qt5::Core
+        Qt6::Core
+        Qt6::Core5Compat # QLinkedList
     PRIVATE
-        KF5::I18n
+        KF6::I18n
     VERSION     ${OKTETACORE_VERSION}
     SOVERSION   ${OKTETACORE_SO_VERSION}
     ABIVERSION  ${OKTETALIBS_ABI_VERSION}
     NO_TARGET_NAMESPACE
-    NO_VERSIONED_EXPORTED_TARGET_NAME
     NO_VERSIONED_INCLUDEDIR
-    NO_VERSIONED_PACKAGE_NAME
 )
 
 target_compile_definitions(OktetaCore PRIVATE -DTRANSLATION_DOMAIN=\"liboktetacore\")
@@ -111,7 +110,7 @@ okteta_add_sublibrary(Core  NAMESPACE Okteta
 
 okteta_add_cmakeconfig(Core NAMESPACE Okteta
     DEPS
-        Qt5Core ${Qt5_VERSION}
+        Qt6Core ${Qt6_VERSION}
 )
 
 okteta_add_qmakeconfig(Core NAMESPACE Okteta
@@ -119,7 +118,7 @@ okteta_add_qmakeconfig(Core NAMESPACE Okteta
 )
 
 okteta_add_pkgconfig(Core NAMESPACE Okteta
-    DEPS Qt5Core
+    DEPS Qt6Core
     DESCRIPTION "Okteta Core"
 )
 
@@ -127,7 +126,7 @@ okteta_add_pkgconfig(Core NAMESPACE Okteta
 if(BUILD_TESTING)
     #don't compile sources twice by using object libraries
     #add_library( oktetacore_objs OBJECT ${oktetacore_LIB_SRCS} )
-    #target_include_directories( oktetacore_objs PUBLIC $<TARGET_PROPERTY:Qt5::Core,INTERFACE_INCLUDE_DIRECTORIES> )
+    #target_include_directories( oktetacore_objs PUBLIC $<TARGET_PROPERTY:Qt6::Core,INTERFACE_INCLUDE_DIRECTORIES> )
     #set( oktetacore_LIB_OBJS $<TARGET_OBJECTS:oktetacore_objs>)
 
     # compile flags don't get set for object libraries, since cannot link to target
@@ -148,9 +147,10 @@ if(BUILD_TESTING)
     )
     target_link_libraries(testoktetacore
         PUBLIC
-            Qt5::Core
+            Qt6::Core
+            Qt6::Core5Compat # QLinkedList
         PRIVATE
-            KF5::I18n
+            KF6::I18n
     )
 
     add_subdirectory(piecetable/tests)

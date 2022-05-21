@@ -57,8 +57,8 @@ public: // set/action
     void revertToVersionByIndex(int versionIndex);
 
 public:
-    void addBookmarks(const QVector<Bookmark>& bookmarks);
-    void removeBookmarks(const QVector<Bookmark>& bookmarks);
+    void addBookmarks(const QList<Bookmark>& bookmarks);
+    void removeBookmarks(const QList<Bookmark>& bookmarks);
     void removeAllBookmarks();
     void setBookmark(unsigned int index, const Bookmark& bookmark);
 
@@ -74,9 +74,9 @@ public: // ChangesDescribable API
     void closeGroupedChange(const QString& description);
 
 public: // ChangeHistory API
-    QVector<ByteArrayChange> changes(int firstVersionIndex, int lastVersionIndex) const;
+    QList<ByteArrayChange> changes(int firstVersionIndex, int lastVersionIndex) const;
     const QByteArray& initialData() const;
-    void doChanges(const QVector<Okteta::ByteArrayChange>& changes,
+    void doChanges(const QList<Okteta::ByteArrayChange>& changes,
                    int oldVersionIndex, int newVersionIndex);
 
 public:
@@ -107,7 +107,7 @@ private: // data
 
     int mBeforeChangesVersionIndex;
     ArrayChangeMetricsList mChangeMetrics;
-    QVector<ByteArrayChange> mChanges;
+    QList<ByteArrayChange> mChanges;
     bool mBeforeChangesModified : 1;
     bool mBookmarksModified : 1;
 
@@ -147,14 +147,14 @@ inline int PieceTableByteArrayModelPrivate::versionCount() const { return mPiece
 inline QString PieceTableByteArrayModelPrivate::versionDescription(int versionIndex) const
 { return mPieceTable.changeDescription(versionIndex - 1); }
 
-inline void PieceTableByteArrayModelPrivate::addBookmarks(const QVector<Bookmark>& bookmarks)
+inline void PieceTableByteArrayModelPrivate::addBookmarks(const QList<Bookmark>& bookmarks)
 {
     Q_Q(PieceTableByteArrayModel);
 
     mBookmarks.addBookmarks(bookmarks);
     Q_EMIT q->bookmarksAdded(bookmarks);
 }
-inline void PieceTableByteArrayModelPrivate::removeBookmarks(const QVector<Bookmark>& bookmarks)
+inline void PieceTableByteArrayModelPrivate::removeBookmarks(const QList<Bookmark>& bookmarks)
 {
     Q_Q(PieceTableByteArrayModel);
 
@@ -166,7 +166,7 @@ inline void PieceTableByteArrayModelPrivate::removeAllBookmarks()
 {
     Q_Q(PieceTableByteArrayModel);
 
-    const QVector<Bookmark> bookmarks = mBookmarks.list();
+    const QList<Bookmark> bookmarks = mBookmarks.list();
     mBookmarks.clear();
     Q_EMIT q->bookmarksRemoved(bookmarks);
 }
@@ -176,7 +176,7 @@ inline void PieceTableByteArrayModelPrivate::setBookmark(unsigned int index, con
 
     mBookmarks.setBookmark(index, bookmark);
 
-    const QVector<int> changedBookmarkIndizes {
+    const QList<int> changedBookmarkIndizes {
         static_cast<int>(index)
     };
     Q_EMIT q->bookmarksModified(changedBookmarkIndizes);

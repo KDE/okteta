@@ -7,11 +7,11 @@ target_link_libraries(okteta
     KastenControllers
     KastenGui
     KastenCore
-    KF5::ConfigCore
-    KF5::I18n
-    KF5::XmlGui
-    KF5::DBusAddons
-    KF5::Crash
+    KF6::ConfigCore
+    KF6::I18n
+    KF6::XmlGui
+    KF6::DBusAddons
+    KF6::Crash
 )
 
 target_sources(okteta
@@ -26,10 +26,6 @@ target_sources(okteta
 
 set_source_files_properties(about.cpp PROPERTIES
     COMPILE_FLAGS -DOKTETA_VERSION=\\\"${Okteta_VERSION}\\\"
-)
-
-set_source_files_properties(mainwindow.cpp PROPERTIES
-    COMPILE_FLAGS -DKASTEN_BUILD_TERMINALTOOL=$<BOOL:${BUILD_TERMINALTOOL}>
 )
 
 ecm_add_app_icon(okteta

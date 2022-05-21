@@ -31,6 +31,8 @@
 
 namespace Kasten {
 
+const QString FilterTool::ConfigGroupId = QStringLiteral("FilterTool");
+
 FilterTool::FilterTool()
 {
     setObjectName(QStringLiteral("BinaryFilter"));

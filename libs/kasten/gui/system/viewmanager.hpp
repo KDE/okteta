@@ -12,7 +12,7 @@
 // lib
 #include "abstractview.hpp"
 // Qt
-#include <QVector>
+#include <QList>
 #include <QObject>
 // Std
 #include <memory>
@@ -37,24 +37,24 @@ public:
     void setViewFactory(std::unique_ptr<AbstractViewFactory>&& factory);
 
     void createCopyOfView(AbstractView* view, Qt::Alignment alignment = {});
-    void removeViews(const QVector<AbstractView*>& views);
+    void removeViews(const QList<AbstractView*>& views);
 
 public:
-    QVector<AbstractView*> views() const;
+    QList<AbstractView*> views() const;
     AbstractView* viewByWidget(QWidget* widget) const;
 
 public:
     ModelCodecViewManager* codecViewManager() const;
 
 public Q_SLOTS:
-    void createViewsFor(const QVector<Kasten::AbstractDocument*>& documents);
-    void removeViewsFor(const QVector<Kasten::AbstractDocument*>& documents);
+    void createViewsFor(const QList<Kasten::AbstractDocument*>& documents);
+    void removeViewsFor(const QList<Kasten::AbstractDocument*>& documents);
 
 Q_SIGNALS:
     // view was created and already added to the list
-    void opened(const QVector<Kasten::AbstractView*>& views);
+    void opened(const QList<Kasten::AbstractView*>& views);
     // view will be closed, already removed from list
-    void closing(const QVector<Kasten::AbstractView*>& views);
+    void closing(const QList<Kasten::AbstractView*>& views);
 
 private:
     const std::unique_ptr<class ViewManagerPrivate> d_ptr;

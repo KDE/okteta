@@ -45,7 +45,7 @@ TerminalView::~TerminalView()
 
 void TerminalView::createTerminalPart()
 {
-    KPluginFactory *factory = KPluginFactory::loadFactory(KPluginMetaData(QStringLiteral("konsolepart"))).plugin;
+    KPluginFactory *factory = KPluginFactory::loadFactory(KPluginMetaData(QStringLiteral("kf6/parts/konsolepart"))).plugin;
     mTerminalPart = factory ? (factory->create<KParts::ReadOnlyPart>(this)) : nullptr;
 
     if (mTerminalPart) {

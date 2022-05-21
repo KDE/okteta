@@ -4,17 +4,15 @@ set(KASTENGUI_SO_VERSION ${KASTEN_LIB_SOVERSION})
 okteta_add_library(Gui NAMESPACE Kasten
     PUBLIC
         KastenCore
-        Qt5::Widgets
-        KF5::XmlGui
+        Qt6::Widgets
+        KF6::XmlGui
     PRIVATE
-        KF5::I18n
+        KF6::I18n
     VERSION     ${KASTENGUI_VERSION}
     SOVERSION   ${KASTENGUI_SO_VERSION}
     ABIVERSION  ${KASTEN_ABI_VERSION}
     NO_TARGET_NAMESPACE
-    NO_VERSIONED_EXPORTED_TARGET_NAME
     NO_VERSIONED_INCLUDEDIR
-    NO_VERSIONED_PACKAGE_NAME
 )
 
 ecm_qt_declare_logging_category(KastenGui
@@ -136,6 +134,6 @@ okteta_add_sublibrary(Gui  NAMESPACE Kasten
 
 okteta_add_cmakeconfig(Gui NAMESPACE Kasten
     DEPS
-        Qt5Widgets ${Qt5_VERSION}
+        Qt6Widgets ${Qt6_VERSION}
         KastenCore
 )
