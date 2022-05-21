@@ -14,7 +14,7 @@
 // Qt
 #include <QLinkedList>
 
-template <class T> class QVector;
+template <class T> class QList;
 
 namespace Okteta {
 
@@ -35,9 +35,9 @@ public:
 
 public:
     void addBookmark(const Bookmark& bookmark);
-    void addBookmarks(const QVector<Okteta::Bookmark>& bookmarks);
+    void addBookmarks(const QList<Okteta::Bookmark>& bookmarks);
     void removeBookmark(const Bookmark& bookmark);
-    void removeBookmarks(const QVector<Okteta::Bookmark>& bookmarks);
+    void removeBookmarks(const QList<Okteta::Bookmark>& bookmarks);
     void setBookmark(unsigned int index, const Bookmark& bookmark);
 
     bool adjustToReplaced(Address offset, Size removedLength, Size insertedLength);
@@ -54,7 +54,7 @@ public:
     [[nodiscard]]
     const Bookmark& at(unsigned int index) const;
     [[nodiscard]]
-    QVector<Okteta::Bookmark> list() const;
+    QList<Okteta::Bookmark> list() const;
 };
 
 }

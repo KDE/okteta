@@ -220,7 +220,7 @@ ViewProfilesManageDialog::onEditButtonClicked()
 
 void ViewProfilesManageDialog::saveViewProfile(const ByteArrayViewProfile& viewProfile)
 {
-    QVector<ByteArrayViewProfile> viewProfiles {
+    QList<ByteArrayViewProfile> viewProfiles {
         viewProfile
     };
     mViewProfileManager->saveViewProfiles(viewProfiles);
@@ -246,7 +246,7 @@ ViewProfilesManageDialog::onDeleteButtonClicked()
     }
 
     // TODO: ask user if she really wants to delete
-    const QVector<ByteArrayViewProfile::Id> viewProfileIds {
+    const QList<ByteArrayViewProfile::Id> viewProfileIds {
         mCurrentViewProfileId
     };
     mViewProfileManager->removeViewProfiles(viewProfileIds);
@@ -282,7 +282,7 @@ ViewProfilesManageDialog::onModelReset()
 }
 
 void
-ViewProfilesManageDialog::onViewProfilesLocked(const QVector<ByteArrayViewProfile::Id>& viewProfileIds)
+ViewProfilesManageDialog::onViewProfilesLocked(const QList<ByteArrayViewProfile::Id>& viewProfileIds)
 {
     // find if any locked profile is the currently selected, then disable all buttons
     if (viewProfileIds.contains(mCurrentViewProfileId)) {
@@ -293,7 +293,7 @@ ViewProfilesManageDialog::onViewProfilesLocked(const QVector<ByteArrayViewProfil
 }
 
 void
-ViewProfilesManageDialog::onViewProfilesUnlocked(const QVector<ByteArrayViewProfile::Id>& viewProfileIds)
+ViewProfilesManageDialog::onViewProfilesUnlocked(const QList<ByteArrayViewProfile::Id>& viewProfileIds)
 {
     // find if any locked profile is the currently selected, then enable all buttons
     if (viewProfileIds.contains(mCurrentViewProfileId)) {

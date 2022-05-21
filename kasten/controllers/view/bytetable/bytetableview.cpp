@@ -33,6 +33,8 @@
 
 namespace Kasten {
 
+const QString ByteTableView::ConfigGroupId = QStringLiteral("ByteTableTool");
+
 ByteTableView::ByteTableView(ByteTableTool* tool, QWidget* parent)
     : AbstractToolWidget(parent)
     , mTool(tool)
@@ -82,7 +84,7 @@ ByteTableView::ByteTableView(ByteTableTool* tool, QWidget* parent)
               "Number of repeats of the currently selected byte in the table to be inserted.");
     label->setToolTip(insertCountToolTip);
     mInsertCountEdit->setToolTip(insertCountToolTip);
-    connect(mInsertCountEdit, qOverload<int>(&QSpinBox::valueChanged),
+    connect(mInsertCountEdit, &QSpinBox::valueChanged,
             this, &ByteTableView::onInsertCountEditChanged);
 
     const KGuiItem insertGuiItem = KStandardGuiItem::insert();

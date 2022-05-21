@@ -48,7 +48,7 @@ public:
     ~TopLevelDataInformation() override;
 
     using Ptr = QSharedPointer<TopLevelDataInformation>;
-    using List = QVector<Ptr>;
+    using List = QList<Ptr>;
     static const Okteta::Address INVALID_OFFSET;
 
 public:

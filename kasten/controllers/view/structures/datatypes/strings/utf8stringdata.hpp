@@ -11,7 +11,7 @@
 
 #include "stringdata.hpp"
 
-#include <QVector>
+#include <QList>
 #include <QHash>
 
 class Utf8StringData : public StringData
@@ -31,7 +31,7 @@ public:
 
 private:
     QHash<int, quint8> mErrorIndices;
-    QVector<quint32> mCodePoints;
+    QList<quint32> mCodePoints;
     uint mOneByteCount = 0;
     uint mTwoByteCount = 0;
     uint mThreeByteCount = 0;
