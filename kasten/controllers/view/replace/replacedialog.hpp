@@ -23,7 +23,7 @@ class ReplaceDialog : public AbstractFindDialog
     Q_OBJECT
 
 private:
-    static inline constexpr char ConfigGroupId[] = "ReplaceTool";
+    static const QString ConfigGroupId;
 
     static inline constexpr char FromCursorConfigKey[] = "FromCursor";
     static inline constexpr char DirectionConfigKey[] = "Direction";

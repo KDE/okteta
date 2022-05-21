@@ -30,10 +30,10 @@ Q_SIGNALS:
 
 protected:
     void mouseReleaseEvent(QMouseEvent* event) override;
+    void mouseDoubleClickEvent(QMouseEvent* event) override;
     void dragEnterEvent(QDragEnterEvent* event) override;
     void dragMoveEvent(QDragMoveEvent* event) override;
     void dropEvent(QDropEvent* event) override;
-    bool eventFilter(QObject* object, QEvent* event) override;
 
 private:
     void onTabBarDoubleClicked(int index);

@@ -96,7 +96,8 @@ void ReplaceController::queryContinue(FindDirection direction, int noOfReplaceme
     const QString message = replacementReport + QLatin1String("<br /><br />") + question;
     const int answer = KMessageBox::questionTwoActions(mParentWidget,
                                                        message, messageBoxTitle,
-                                                       KStandardGuiItem::cont(), KStandardGuiItem::cancel());
+                                                       KStandardGuiItem::cont(),
+                                                       KStandardGuiItem::cancel());
 
     const bool result = (answer != KMessageBox::SecondaryAction);
 
