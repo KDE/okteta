@@ -10,7 +10,7 @@
 #define OKTETA_LINEPOSITION_HPP
 
 // Qt
-#include <QtGlobal>
+#include <QtTypes>
 
 namespace Okteta {
 
