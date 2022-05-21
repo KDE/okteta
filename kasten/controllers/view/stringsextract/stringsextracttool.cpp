@@ -25,6 +25,8 @@
 
 namespace Kasten {
 
+const QString StringsExtractTool::ConfigGroupId = QStringLiteral("StringsExtractTool");
+
 StringsExtractTool::StringsExtractTool()
     : mExtractedStringsUptodate(false)
     , mSourceByteArrayModelUptodate(false)

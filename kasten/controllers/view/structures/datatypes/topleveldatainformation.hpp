@@ -16,7 +16,7 @@
 // Qt
 #include <QFileInfo>
 #include <QQueue>
-#include <QVector>
+#include <QList>
 #include <QScriptEngine>
 // Std
 #include <limits>
@@ -40,7 +40,7 @@ class TopLevelDataInformation : public QObject
 
 public:
     using Ptr = std::shared_ptr<TopLevelDataInformation>;
-    using List = QVector<Ptr>;
+    using List = QList<Ptr>;
 
     static constexpr Okteta::Address INVALID_OFFSET = std::numeric_limits<Okteta::Address>::max();
 

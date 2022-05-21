@@ -28,7 +28,7 @@ struct FlagData
     quint64 value;
 };
 
-template <typename T, int len>
+template <typename T, qsizetype len>
 static void removeFromArray(QVarLengthArray<T, len>& array, int index)
 {
     Q_ASSERT(index >= 0 && index < array.size());

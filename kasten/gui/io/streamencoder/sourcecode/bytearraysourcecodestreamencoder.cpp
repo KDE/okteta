@@ -120,6 +120,8 @@ void SourceCodeStreamEncoderSettings::saveConfig(KConfigGroup& configGroup) cons
     configGroup.writeEntry(UnsignedAsHexadecimalConfigKey, unsignedAsHexadecimal);
 }
 
+const QString ByteArraySourceCodeStreamEncoder::ConfigGroupId = QStringLiteral("ByteArraySourceCodeStreamEncoder");
+
 ByteArraySourceCodeStreamEncoder::ByteArraySourceCodeStreamEncoder()
     : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "C Array"), QStringLiteral("text/x-csrc"))
 {
