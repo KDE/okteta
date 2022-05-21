@@ -20,7 +20,7 @@ ecm_add_test(
     LINK_LIBRARIES
         OktetaWidgetsSourcesTestShim
         TestOktetaCore
-        Qt5::Test
+        Qt6::Test
 )
 
 ecm_add_test(
@@ -31,7 +31,7 @@ ecm_add_test(
     LINK_LIBRARIES
         OktetaWidgetsSourcesTestShim
         TestOktetaCore
-        Qt5::Test
+        Qt6::Test
 )
 
 ecm_add_test(
@@ -43,7 +43,7 @@ ecm_add_test(
     LINK_LIBRARIES
         OktetaWidgetsSourcesTestShim
         TestOktetaCore
-        Qt5::Test
+        Qt6::Test
 )
 
 ecm_add_test(
@@ -54,7 +54,7 @@ ecm_add_test(
     LINK_LIBRARIES
         OktetaWidgetsSourcesTestShim
         TestOktetaCore
-        Qt5::Test
+        Qt6::Test
 )
 
 ecm_add_test(
@@ -65,7 +65,7 @@ ecm_add_test(
     LINK_LIBRARIES
         OktetaWidgetsSourcesTestShim
         TestOktetaCore
-        Qt5::Test
+        Qt6::Test
 )
 
 ecm_add_test(
@@ -83,6 +83,6 @@ ecm_add_test(
     LINK_LIBRARIES
         OktetaWidgetsSourcesTestShim
         TestOktetaCore
-        Qt5::Gui
-        Qt5::Test
+        Qt6::Gui
+        Qt6::Test
 )

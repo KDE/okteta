@@ -62,9 +62,9 @@ private:
 
 private:
     QScriptEngine engine;
-    QVector<JsTestData> primitiveData;
-    QVector<JsTestData> bitfieldData;
-    QVector<JsTestData> allData;
+    QList<JsTestData> primitiveData;
+    QList<JsTestData> bitfieldData;
+    QList<JsTestData> allData;
 };
 
 static JsTestData::CheckCallback primitiveTypeCheck(PrimitiveDataType type)

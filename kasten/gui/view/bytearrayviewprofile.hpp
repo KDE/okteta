@@ -94,6 +94,6 @@ private:
 
 }
 
-Q_DECLARE_TYPEINFO(Kasten::ByteArrayViewProfile, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(Kasten::ByteArrayViewProfile, Q_RELOCATABLE_TYPE);
 
 #endif
