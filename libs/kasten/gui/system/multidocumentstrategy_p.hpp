@@ -46,7 +46,7 @@ public: // AbstractDocumentStrategy API
 
 public: // const AbstractDocumentStrategy API
     [[nodiscard]]
-    QVector<AbstractDocument*> documents() const;
+    QList<AbstractDocument*> documents() const;
     [[nodiscard]]
     QStringList supportedRemoteTypes() const;
 
@@ -80,7 +80,7 @@ MultiDocumentStrategyPrivate::MultiDocumentStrategyPrivate(MultiDocumentStrategy
 
 inline MultiDocumentStrategyPrivate::~MultiDocumentStrategyPrivate() = default;
 
-inline QVector<AbstractDocument*> MultiDocumentStrategyPrivate::documents() const
+inline QList<AbstractDocument*> MultiDocumentStrategyPrivate::documents() const
 {
     return mDocumentManager->documents();
 }

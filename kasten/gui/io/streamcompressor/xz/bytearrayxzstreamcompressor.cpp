@@ -114,6 +114,8 @@ void XzStreamCompressorSettings::saveConfig(KConfigGroup& configGroup) const
     configGroup.writeEntry(IntegrityCheckConfigKey, integrityCheckId);
 }
 
+const QString ByteArrayXzStreamCompressor::ConfigGroupId = QStringLiteral("ByteArrayXzStreamCompressor");
+
 ByteArrayXzStreamCompressor::ByteArrayXzStreamCompressor()
     : AbstractByteArrayStreamCompressor(i18nc("name of the encoding target", "xz"), QStringLiteral("application/x-xz"))
 {
