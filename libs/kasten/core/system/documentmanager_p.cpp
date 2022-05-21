@@ -12,7 +12,7 @@
 #include <abstractdocument.hpp>
 // Qt
 #include <QUrl>
-#include <QMutableVectorIterator>
+#include <QMutableListIterator>
 #include <QStringList>
 // Std
 #include <utility>
@@ -48,7 +48,7 @@ void DocumentManagerPrivate::addDocument(AbstractDocument* document)
     document->setId(QString::number(++lastDocumentId));
     mList.append(document);
     // TODO: only emit if document was not included before
-    const QVector<AbstractDocument*> addedDocuments { document };
+    const QList<AbstractDocument*> addedDocuments { document };
     Q_EMIT q->added(addedDocuments);
 }
 
@@ -56,21 +56,21 @@ void DocumentManagerPrivate::closeDocument(AbstractDocument* document)
 {
     Q_Q(DocumentManager);
 
-    QMutableVectorIterator<AbstractDocument*> iterator(mList);
+    QMutableListIterator<AbstractDocument*> iterator(mList);
 
     if (iterator.findNext(document)) {
         // TODO: first check if unsaved and ask, only then close
 
         iterator.remove();
 
-        const QVector<AbstractDocument*> closedDocuments { document };
+        const QList<AbstractDocument*> closedDocuments { document };
         Q_EMIT q->closing(closedDocuments);
 
         delete document;
     }
 }
 
-void DocumentManagerPrivate::closeDocuments(const QVector<AbstractDocument*>& documents)
+void DocumentManagerPrivate::closeDocuments(const QList<AbstractDocument*>& documents)
 {
     Q_Q(DocumentManager);
 
@@ -92,7 +92,7 @@ void DocumentManagerPrivate::closeAll()
 
     // TODO: is it better for remove the document from the list before emitting closing(document)?
     // TODO: or better emit close(documentList)? who would use this?
-    const QVector<AbstractDocument*> closedDocuments = mList;
+    const QList<AbstractDocument*> closedDocuments = mList;
     mList.clear();
 
     Q_EMIT q->closing(closedDocuments);
@@ -108,7 +108,7 @@ void DocumentManagerPrivate::closeAllOther(AbstractDocument* keptDocument)
 
     // TODO: is it better for remove the document from the list before emitting closing(document)?
     // TODO: or better emit close(documentList)? who would use this?
-    QVector<AbstractDocument*> closedDocuments = mList;
+    QList<AbstractDocument*> closedDocuments = mList;
     closedDocuments.removeOne(keptDocument);
 
     mList.clear();
@@ -126,7 +126,7 @@ bool DocumentManagerPrivate::canClose(AbstractDocument* document) const
     return mSyncManager->canClose(document);
 }
 
-bool DocumentManagerPrivate::canClose(const QVector<AbstractDocument*>& documents) const
+bool DocumentManagerPrivate::canClose(const QList<AbstractDocument*>& documents) const
 {
     bool canClose = true;
 

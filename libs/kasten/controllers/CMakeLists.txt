@@ -6,18 +6,16 @@ okteta_add_library(Controllers NAMESPACE Kasten
         KastenGui
         KastenCore
     PRIVATE
-        KF5::I18n
-        KF5::ConfigWidgets
-        KF5::XmlGui
-        KF5::KIOFileWidgets
-        KF5::Parts
+        KF6::I18n
+        KF6::ConfigWidgets
+        KF6::XmlGui
+        KF6::KIOFileWidgets
+        KF6::Parts
     VERSION     ${KASTENCONTROLLERS_VERSION}
     SOVERSION   ${KASTENCONTROLLERS_SO_VERSION}
     ABIVERSION  ${KASTEN_ABI_VERSION}
     NO_TARGET_NAMESPACE
-    NO_VERSIONED_EXPORTED_TARGET_NAME
     NO_VERSIONED_INCLUDEDIR
-    NO_VERSIONED_PACKAGE_NAME
 )
 
 target_compile_definitions(KastenControllers PRIVATE -DTRANSLATION_DOMAIN=\"libkasten\")

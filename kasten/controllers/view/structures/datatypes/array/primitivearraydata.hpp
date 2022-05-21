@@ -69,7 +69,7 @@ protected:
     void readDataNonNativeOrder(uint numItems, const Okteta::AbstractByteArrayModel* input, Okteta::Address addr);
     void setNewParentForChildren() override;
 
-    QVector<T> mData;
+    QList<T> mData;
     uint mNumReadValues = 0; // the number of values read before EOF
     DummyDataInformation mDummy;
 };

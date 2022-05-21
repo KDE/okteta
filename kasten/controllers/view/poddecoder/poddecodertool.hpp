@@ -17,7 +17,7 @@
 #include <Okteta/OktetaCore>
 #include <Okteta/Address>
 // Qt
-#include <QVector>
+#include <QList>
 // Std
 #include <memory>
 
@@ -43,7 +43,8 @@ public:
     using Aligned64Bit = union { unsigned char Data[MaxPODSize]; double Dummy; };
 
 private:
-    static inline constexpr char ConfigGroupId[] = "PODDecoderTool";
+    static const QString ConfigGroupId;
+
     static inline constexpr char ByteOrderConfigKey[] = "ByteOrder";
     static inline constexpr char UnsignedAsHexConfigKey[] = "UnsignedAsHexadecimal";
 
@@ -111,7 +112,7 @@ private: // source
     bool mReadOnly : 1;
     bool mIsPodMarked : 1;
 
-    QVector<Okteta::AbstractTypeCodec*> mTypeCodecs;
+    QList<Okteta::AbstractTypeCodec*> mTypeCodecs;
     std::unique_ptr<const Okteta::CharCodec> mCharCodec;
     AbstractDifferentSizeDialog* mDifferentSizeDialog = nullptr;
 
@@ -120,8 +121,8 @@ private: // settings
 
 private: // decoded data
     Okteta::PODData mPODData;
-    QVector<QVariant> mDecodedValueList;
-    QVector<int> mDecodedValueByteCountList;
+    QList<QVariant> mDecodedValueList;
+    QList<int> mDecodedValueByteCountList;
 };
 
 inline bool PODDecoderTool::isUnsignedAsHex() const { return mUnsignedAsHex; }

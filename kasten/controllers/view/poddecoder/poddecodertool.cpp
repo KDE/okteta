@@ -67,6 +67,8 @@ enum PODTypes
     PODTypeCount
 };
 
+const QString PODDecoderTool::ConfigGroupId = QStringLiteral("PODDecoderTool");
+
 PODDecoderTool::PODDecoderTool()
     : mReadOnly(true)
     , mIsPodMarked(false)

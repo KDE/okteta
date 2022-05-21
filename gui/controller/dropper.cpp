@@ -69,7 +69,7 @@ bool Dropper::handleDragMoveEvent(QDragMoveEvent* dragMoveEvent)
         mByteArrayView->pauseCursor();
         // TODO: just for following skip the value edit, remember we are and get back
         mByteArrayView->finishByteEdit();
-        mByteArrayView->placeCursor(dragMoveEvent->pos());
+        mByteArrayView->placeCursor(dragMoveEvent->position().toPoint());
         mByteArrayView->unpauseCursor();
 
         eventUsed = true;

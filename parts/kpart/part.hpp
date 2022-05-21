@@ -12,10 +12,9 @@
 // Kasten
 #include <Kasten/KastenCore>
 // KF
-#include <kparts_version.h>
 #include <KParts/ReadWritePart>
 // Qt
-#include <QVector>
+#include <QList>
 // Std
 #include <memory>
 
@@ -36,7 +35,7 @@ class OktetaPart : public KParts::ReadWritePart
 {
     Q_OBJECT
 
-    friend class OktetaBrowserExtension;
+    friend class OktetaNavigationExtension;
 
 public:
     enum Modus
@@ -88,7 +87,7 @@ private:
     std::unique_ptr<Kasten::ByteArrayView> mByteArrayView;
 
     std::unique_ptr<Kasten::SingleViewArea> mSingleViewArea;
-    QVector<Kasten::AbstractXmlGuiController*> mControllers;
+    QList<Kasten::AbstractXmlGuiController*> mControllers;
 };
 
 inline Kasten::ByteArrayView* OktetaPart::byteArrayView() const { return mByteArrayView.get(); }

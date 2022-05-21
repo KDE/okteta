@@ -13,14 +13,14 @@
 #include "abstractbytearraymodel_p.hpp"
 #include "filebytearraymodel.hpp"
 // Qt
-#include <QVector>
+#include <QList>
 #include <QFile>
 
 namespace Okteta {
 
 class FileByteArrayModelPrivate : public AbstractByteArrayModelPrivate
 {
-    using KPageOfChar = QVector<char*>;
+    using KPageOfChar = QList<char*>;
 
 public:
     FileByteArrayModelPrivate(FileByteArrayModel* parent, int pageNumber, int pageSize);

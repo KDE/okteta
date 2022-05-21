@@ -15,7 +15,6 @@
 #include <Kasten/ModelCodecManager>
 #include <Kasten/AbstractModelDataGenerator>
 // KF
-#include <kwidgetsaddons_version.h>
 #include <KLocalizedString>
 #include <KActionCollection>
 #include <KActionMenu>
@@ -66,7 +65,7 @@ CreatorController::CreatorController(ModelCodecManager* modelCodecManager,
     newMenuAction->addAction(newFromClipboardDocumentAction);
 
     // generators
-    const QVector<AbstractModelDataGenerator*> generatorList =
+    const QList<AbstractModelDataGenerator*> generatorList =
         mModelCodecManager->generatorList();
 
     const bool hasGenerators = (!generatorList.isEmpty());

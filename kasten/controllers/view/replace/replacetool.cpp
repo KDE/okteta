@@ -28,6 +28,8 @@
 
 namespace Kasten {
 
+const QString ReplaceTool::ConfigGroupId = QStringLiteral("ReplaceTool");
+
 ReplaceTool::ReplaceTool()
 {
     setObjectName(QStringLiteral("Replace"));

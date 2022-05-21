@@ -13,7 +13,7 @@
 #include "kastengui_export.hpp"
 // Qt
 #include <QObject>
-#include <QVector>
+#include <QList>
 // Std
 #include <memory>
 
@@ -45,9 +45,9 @@ public:
     AbstractModelDataGeneratorConfigEditor* createConfigEditor(AbstractModelDataGenerator* generator) const;
 
 public:
-    void setEncoderConfigEditorFactories(const QVector<AbstractModelStreamEncoderConfigEditorFactory*>& factoryList);
-    void setExporterConfigEditorFactories(const QVector<AbstractModelExporterConfigEditorFactory*>& factoryList);
-    void setGeneratorConfigEditorFactories(const QVector<AbstractModelDataGeneratorConfigEditorFactory*>& factoryList);
+    void setEncoderConfigEditorFactories(const QList<AbstractModelStreamEncoderConfigEditorFactory*>& factoryList);
+    void setExporterConfigEditorFactories(const QList<AbstractModelExporterConfigEditorFactory*>& factoryList);
+    void setGeneratorConfigEditorFactories(const QList<AbstractModelDataGeneratorConfigEditorFactory*>& factoryList);
 
 private:
     const std::unique_ptr<class ModelCodecViewManagerPrivate> d_ptr;

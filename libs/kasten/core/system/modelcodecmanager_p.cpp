@@ -36,24 +36,24 @@ ModelCodecManagerPrivate::~ModelCodecManagerPrivate()
     qDeleteAll(mGeneratorList);
 }
 
-QVector<AbstractModelStreamEncoder*>
+QList<AbstractModelStreamEncoder*>
 ModelCodecManagerPrivate::encoderList(AbstractModel* model, const AbstractModelSelection* selection) const
 {
     Q_UNUSED(selection)
-    return model ? mEncoderList : QVector<AbstractModelStreamEncoder*>();
+    return model ? mEncoderList : QList<AbstractModelStreamEncoder*>();
 }
 
-QVector<AbstractModelStreamDecoder*>
+QList<AbstractModelStreamDecoder*>
 ModelCodecManagerPrivate::decoderList() const { return mDecoderList; }
 
-QVector<AbstractModelDataGenerator*>
+QList<AbstractModelDataGenerator*>
 ModelCodecManagerPrivate::generatorList() const { return mGeneratorList; }
 
-QVector<AbstractModelExporter*>
+QList<AbstractModelExporter*>
 ModelCodecManagerPrivate::exporterList(AbstractModel* model, const AbstractModelSelection* selection) const
 {
     Q_UNUSED(selection)
-    return model ? mExporterList : QVector<AbstractModelExporter*>();
+    return model ? mExporterList : QList<AbstractModelExporter*>();
 }
 
 void ModelCodecManagerPrivate::setOverwriteDialog(AbstractOverwriteDialog* overwriteDialog)
@@ -61,7 +61,7 @@ void ModelCodecManagerPrivate::setOverwriteDialog(AbstractOverwriteDialog* overw
     mOverwriteDialog = overwriteDialog;
 }
 
-void ModelCodecManagerPrivate::setEncoders(const QVector<AbstractModelStreamEncoder*>& encoderList)
+void ModelCodecManagerPrivate::setEncoders(const QList<AbstractModelStreamEncoder*>& encoderList)
 {
     mEncoderList = encoderList;
 
@@ -74,12 +74,12 @@ void ModelCodecManagerPrivate::setEncoders(const QVector<AbstractModelStreamEnco
     }
 }
 
-void ModelCodecManagerPrivate::setDecoders(const QVector<AbstractModelStreamDecoder*>& decoderList)
+void ModelCodecManagerPrivate::setDecoders(const QList<AbstractModelStreamDecoder*>& decoderList)
 {
     mDecoderList = decoderList;
 }
 
-void ModelCodecManagerPrivate::setGenerators(const QVector<AbstractModelDataGenerator*>& generatorList)
+void ModelCodecManagerPrivate::setGenerators(const QList<AbstractModelDataGenerator*>& generatorList)
 {
     mGeneratorList = generatorList;
 }

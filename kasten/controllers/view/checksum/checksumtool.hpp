@@ -14,7 +14,7 @@
 // Okteta core
 #include <Okteta/AddressRange>
 // Qt
-#include <QVector>
+#include <QList>
 
 class AbstractByteArrayChecksumParameterSet;
 class AbstractByteArrayChecksumAlgorithm;
@@ -32,7 +32,7 @@ class ChecksumTool : public AbstractTool
     Q_OBJECT
 
 private:
-    static inline constexpr char ConfigGroupId[] = "ChecksumTool";
+    static const QString ConfigGroupId;
     static inline constexpr char AlgorithmConfigKey[] = "Algorithm";
 
 public:
@@ -51,7 +51,7 @@ public: // status
     bool isApplyable() const; // candidate for AbstractTool API
     bool isUptodate() const;
 
-    QVector<AbstractByteArrayChecksumAlgorithm*> algorithmList() const;
+    QList<AbstractByteArrayChecksumAlgorithm*> algorithmList() const;
 
 public:
     AbstractByteArrayChecksumParameterSet* parameterSet();
@@ -83,7 +83,7 @@ private: // created data
     bool mSourceByteArrayModelUptodate : 1;
 
 private: // settings
-    QVector<AbstractByteArrayChecksumAlgorithm*> mAlgorithmList;
+    QList<AbstractByteArrayChecksumAlgorithm*> mAlgorithmList;
     int mAlgorithmId = 0;
 
 private: // sources

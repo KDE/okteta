@@ -13,7 +13,7 @@
 #include <Okteta/AbstractColumnRenderer>
 // Qt
 #include <QPainter>
-#include <QVector>
+#include <QList>
 // Std
 #include <utility>
 
@@ -28,7 +28,7 @@ public:
 
 public: // calculated
     /** collection of all the columns. All columns will be autodeleted. */
-    QVector<Okteta::AbstractColumnRenderer*> mColumns;
+    QList<Okteta::AbstractColumnRenderer*> mColumns;
     /** the number of lines which the columnRenderer view has */
     Okteta::LineSize mNoOfLines = 0;
     /** the height of each line in pixels */
@@ -139,7 +139,7 @@ void AbstractColumnFrameRenderer::renderFrame(QPainter* painter, int frameIndex)
     // content to be shown?
     if (renderedXs.startsBefore(d->mColumnsWidth)) {
         // collect affected columns
-        QVector<Okteta::AbstractColumnRenderer*> columnRenderers;
+        QList<Okteta::AbstractColumnRenderer*> columnRenderers;
         columnRenderers.reserve(d->mColumns.size());
         for (auto* columnRenderer : std::as_const(d->mColumns)) {
             if (columnRenderer->isVisible() && columnRenderer->overlaps(renderedXs)) {

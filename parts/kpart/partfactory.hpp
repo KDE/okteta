@@ -10,7 +10,6 @@
 #define OKTETAPARTFACTORY_HPP
 
 // KF
-#include <kparts_version.h>
 #include <KPluginFactory>
 // Std
 #include <memory>
@@ -40,8 +39,7 @@ public: // KPluginFactory API
     QObject* create(const char* iface,
                     QWidget* parentWidget,
                     QObject* parent,
-                    const QVariantList& args,
-                    const QString& keyword) override;
+                    const QVariantList& args) override;
 
 private:
     const std::unique_ptr<Kasten::ByteArrayViewProfileManager> mByteArrayViewProfileManager;

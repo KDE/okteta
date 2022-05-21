@@ -32,7 +32,7 @@ void ViewManager::setViewFactory(AbstractViewFactory* factory)
     d->setViewFactory(factory);
 }
 
-QVector<AbstractView*> ViewManager::views() const
+QList<AbstractView*> ViewManager::views() const
 {
     Q_D(const ViewManager);
 
@@ -53,21 +53,21 @@ void ViewManager::createCopyOfView(AbstractView* view, Qt::Alignment alignment)
     d->createCopyOfView(view, alignment);
 }
 
-void ViewManager::createViewsFor(const QVector<Kasten::AbstractDocument*>& documents)
+void ViewManager::createViewsFor(const QList<Kasten::AbstractDocument*>& documents)
 {
     Q_D(ViewManager);
 
     d->createViewsFor(documents);
 }
 
-void ViewManager::removeViewsFor(const QVector<Kasten::AbstractDocument*>& documents)
+void ViewManager::removeViewsFor(const QList<Kasten::AbstractDocument*>& documents)
 {
     Q_D(ViewManager);
 
     d->removeViewsFor(documents);
 }
 
-void ViewManager::removeViews(const QVector<AbstractView*>& views)
+void ViewManager::removeViews(const QList<AbstractView*>& views)
 {
     Q_D(ViewManager);
 

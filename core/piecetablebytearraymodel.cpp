@@ -151,14 +151,14 @@ void PieceTableByteArrayModel::revertToVersionByIndex(int versionIndex)
     d->revertToVersionByIndex(versionIndex);
 }
 
-void PieceTableByteArrayModel::addBookmarks(const QVector<Okteta::Bookmark>& bookmarks)
+void PieceTableByteArrayModel::addBookmarks(const QList<Okteta::Bookmark>& bookmarks)
 {
     Q_D(PieceTableByteArrayModel);
 
     d->addBookmarks(bookmarks);
 }
 
-void PieceTableByteArrayModel::removeBookmarks(const QVector<Okteta::Bookmark>& bookmarks)
+void PieceTableByteArrayModel::removeBookmarks(const QList<Okteta::Bookmark>& bookmarks)
 {
     Q_D(PieceTableByteArrayModel);
 
@@ -235,7 +235,7 @@ void PieceTableByteArrayModel::closeGroupedChange(const QString& description)
     d->closeGroupedChange(description);
 }
 
-QVector<ByteArrayChange> PieceTableByteArrayModel::changes(int firstVersionIndex, int lastVersionIndex) const
+QList<ByteArrayChange> PieceTableByteArrayModel::changes(int firstVersionIndex, int lastVersionIndex) const
 {
     Q_D(const PieceTableByteArrayModel);
 
@@ -249,7 +249,7 @@ QByteArray PieceTableByteArrayModel::initialData() const
     return d->initialData();
 }
 
-void PieceTableByteArrayModel::doChanges(const QVector<Okteta::ByteArrayChange>& changes,
+void PieceTableByteArrayModel::doChanges(const QList<Okteta::ByteArrayChange>& changes,
                                          int oldVersionIndex, int newVersionIndex)
 {
     Q_D(PieceTableByteArrayModel);

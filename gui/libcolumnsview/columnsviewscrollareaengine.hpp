@@ -17,7 +17,7 @@
 #include <QEvent>
 #include <QScrollBar>
 #include <QStyle>
-#include <QVector>
+#include <QList>
 // Std
 #include <utility>
 
@@ -130,7 +130,7 @@ public: // recalculations
 
 public: // calculated
     /** collection of all the columns. All columns will be autodeleted. */
-    QVector<AbstractColumnRenderer*> columns;
+    QList<AbstractColumnRenderer*> columns;
     /** the number of lines which the column view has */
     LineSize NoOfLines = 0;
     /** the height of each line in pixels */

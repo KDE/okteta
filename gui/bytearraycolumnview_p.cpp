@@ -708,7 +708,7 @@ void ByteArrayColumnViewPrivate::updateChanged()
     }
 
     // collect affected buffer columns
-    QVector<AbstractByteArrayColumnRenderer*> dirtyColumns;
+    QList<AbstractByteArrayColumnRenderer*> dirtyColumns;
     dirtyColumns.reserve(2);
 
     AbstractByteArrayColumnRenderer* column = mValueColumn;

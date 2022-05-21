@@ -29,7 +29,7 @@ TabbedViews::TabbedViews()
 
 TabbedViews::~TabbedViews() = default;
 
-QVector<AbstractView*> TabbedViews::viewList() const
+QList<AbstractView*> TabbedViews::viewList() const
 {
     Q_D(const TabbedViews);
 
@@ -71,14 +71,14 @@ bool TabbedViews::hasFocus() const
     return d->hasFocus();
 }
 
-void TabbedViews::addViews(const QVector<AbstractView*>& views)
+void TabbedViews::addViews(const QList<AbstractView*>& views)
 {
     Q_D(TabbedViews);
 
     d->addViews(views);
 }
 
-void TabbedViews::removeViews(const QVector<AbstractView*>& views)
+void TabbedViews::removeViews(const QList<AbstractView*>& views)
 {
     Q_D(TabbedViews);
 

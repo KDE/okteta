@@ -77,7 +77,7 @@ Char8StringParser::SyntaxState Char8StringParser::evaluate(QChar* result,
                 }
                 const QStringView hexValueString = QStringView(string).mid(2, 2); // 2 chars
                 // toInt just ignores unparseable data at the end, so test outselves
-                QRegularExpressionMatch match = m_hexNumberMatcher.match(hexValueString);
+                QRegularExpressionMatch match = m_hexNumberMatcher.matchView(hexValueString);
                 if (match.hasMatch()) {
                     value = hexValueString.toInt(&couldConvert, 16);
                 }
@@ -86,7 +86,7 @@ Char8StringParser::SyntaxState Char8StringParser::evaluate(QChar* result,
             else {
                 const QStringView octalValueString = QStringView(string).mid(1, 3); // 3 chars
                 // toInt just ignores unparseable data at the end, so test outselves
-                QRegularExpressionMatch match = m_octalNumberMatcher.match(octalValueString);
+                QRegularExpressionMatch match = m_octalNumberMatcher.matchView(octalValueString);
                 if (match.hasMatch()) {
                     value = octalValueString.toInt(&couldConvert, 8);
                 }
