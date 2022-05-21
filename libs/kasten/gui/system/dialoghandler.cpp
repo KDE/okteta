@@ -63,7 +63,8 @@ Answer DialogHandler::querySaveDiscard(const AbstractDocument* document, const Q
 
     const int answer = KMessageBox::warningTwoActionsCancel(mWidget,
                                                             message, title,
-                                                            KStandardGuiItem::save(), KStandardGuiItem::discard());
+                                                            KStandardGuiItem::save(),
+                                                            KStandardGuiItem::discard());
 
     return (answer == KMessageBox::PrimaryAction) ?   Save :
            (answer == KMessageBox::SecondaryAction) ? Discard :

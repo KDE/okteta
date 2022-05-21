@@ -38,7 +38,7 @@ public: // AbstractDocumentStrategy API
     void closeAllOther(AbstractDocument* document) override;
 
 public: // const AbstractDocumentStrategy API
-    QVector<AbstractDocument*> documents() const override;
+    QList<AbstractDocument*> documents() const override;
     QStringList supportedRemoteTypes() const override;
 
     bool canClose(AbstractDocument* document) const override;

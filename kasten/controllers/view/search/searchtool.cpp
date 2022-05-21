@@ -32,6 +32,8 @@
 
 namespace Kasten {
 
+const QString SearchTool::ConfigGroupId = QStringLiteral("SearchTool");
+
 SearchTool::SearchTool()
 {
     setObjectName(QStringLiteral("Search"));

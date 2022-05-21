@@ -14,7 +14,7 @@
 #include "structuremetadata.hpp"
 // Qt
 #include <QString>
-#include <QVector>
+#include <QList>
 #include <QDir>
 #include <QStringList>
 #include <QDomNodeList>
@@ -46,7 +46,7 @@ public:
     StructureDefinitionFile& operator=(const StructureDefinitionFile&) = delete;
 
 public:
-    QVector<TopLevelDataInformation*> structures() const;
+    QList<TopLevelDataInformation*> structures() const;
     QStringList structureNames() const;
     TopLevelDataInformation* structure(const QString& name) const;
     /** @return the absolute path to the directory containing the .desktop file */

@@ -31,9 +31,10 @@
 #include <Kasten/Okteta/ByteTableToolFactory>
 #include <Kasten/Okteta/BookmarksToolViewFactory>
 #include <Kasten/Okteta/BookmarksToolFactory>
+#ifdef BUILD_STRUCTURESTOOL
 #include <Kasten/Okteta/StructuresToolViewFactory>
 #include <Kasten/Okteta/StructuresToolFactory>
-
+#endif
 // Kasten tools
 #include <Kasten/VersionViewToolViewFactory>
 #include <Kasten/VersionViewToolFactory>
@@ -41,10 +42,8 @@
 #include <Kasten/FileSystemBrowserToolFactory>
 #include <Kasten/DocumentsToolViewFactory>
 #include <Kasten/DocumentsToolFactory>
-#if KASTEN_BUILD_TERMINALTOOL
 #include <Kasten/TerminalToolViewFactory>
 #include <Kasten/TerminalToolFactory>
-#endif
 // controllers
 // #include <Kasten/Okteta/OverwriteOnlyControllerFactory>
 #include <Kasten/Okteta/CropControllerFactory>
@@ -133,17 +132,17 @@ OktetaMainWindow::OktetaMainWindow(OktetaProgram* program)
     connect(viewArea(), &AbstractGroupedViews::closeRequest,
             this, &OktetaMainWindow::onCloseRequest);
 
-// Using State value as generated with Qt 5.15.11-KDE
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 11)
+// Using State value as generated with Qt 6.6.0
+#if QT_VERSION >= QT_VERSION_CHECK(6, 6, 0)
     // XXX: Workaround for Qt 4.4's lacking of proper handling of the initial layout of dock widgets
     //      This state is taken from an oktetarc where the docker constellation was configured by hand.
     //      Setting this state if none is present seems to work, but there's
     //      still the versioning problem to be accounted for.
     //      Hack borrowed from trunk/koffice/krita/ui/kis_view2.cpp:
     const QString mainWindowState = QStringLiteral(
-        "AAAA/wAAAAD9AAAAAwAAAAAAAAEVAAACLvwCAAAAAfwAAABLAAACLgAAAI8BAAAd+gAAAAABAAAAAvsAAAAiAEYAaQBsAGUAUwB5AHMAdABlAG0AQgByAG8AdwBzAGUAcgEAAAAA/////wAAAGQA////+wAAABIARABvAGMAdQBtAGUAbgB0AHMBAAAAAP////8AAABcAP///wAAAAEAAAHhAAACLvwCAAAABfsAAAAUAFMAdAByAHUAYwB0AFQAbwBvAGwDAAACjQAAAPwAAAIyAAABT/sAAAAQAFYAZQByAHMAaQBvAG4AcwAAAAA2AAAAiQAAAAAAAAAA/AAAAEsAAAEqAAABKgEAAB36AAAAAQEAAAAH+wAAABgARABvAGMAdQBtAGUAbgB0AEkAbgBmAG8BAAAAAP////8AAACMAP////sAAAASAEIAeQB0AGUAVABhAGIAbABlAQAAAAD/////AAAAXAD////7AAAADgBTAHQAcgBpAG4AZwBzAQAAAAD/////AAAAiQD////7AAAAEABDAGgAZQBjAGsAcwB1AG0BAAAAAP////8AAAEFAP////sAAAAcAFMAdAByAHUAYwB0AHUAcgBlAHMAVABvAG8AbAEAAAAA/////wAAAJkA////+wAAABQAUwB0AHIAdQBjAHQAVABvAG8AbAMAAAKNAAAA/AAAAjIAAAFP+wAAABQAUABPAEQARABlAGMAbwBkAGUAcgEAAAAA/////wAAAJQA/////AAAAQsAAADsAAAAAAD////6AAAAAAEAAAAB+wAAABAAQwBoAGUAYwBrAFMAdQBtAQAAAAD/////AAAAAAAAAAD8AAABdgAAAQMAAAEDAQAAHfoAAAAAAQAAAAT7AAAAGABCAGkAbgBhAHIAeQBGAGkAbAB0AGUAcgEAAAAA/////wAAAVMA////+wAAACIAQwBoAGEAcgBzAGUAdABDAG8AbgB2AGUAcgBzAGkAbwBuAQAAAAD/////AAABRAD////7AAAACABJAG4AZgBvAQAAAAD/////AAAAiQD////7AAAAEgBCAG8AbwBrAG0AYQByAGsAcwEAAAAA/////wAAAFwA////AAAAAwAABVYAAABC/AEAAAAB+wAAABAAVABlAHIAbQBpAG4AYQBsAAAAAAAAAAVWAAAAXAD///8AAADlAAACLgAAAAQAAAAEAAAACAAAAAj8AAAAAQAAAAIAAAABAAAAFgBtAGEAaQBuAFQAbwBvAGwAQgBhAHIBAAAAAAAABAYAAAAAAAAAAA==");
+        "AAAA/wAAAAD9AAAAAwAAAAAAAAEVAAACY/wCAAAAAfwAAABKAAACYwAAAI8BAAAd+gAAAAABAAAAAvsAAAAiAEYAaQBsAGUAUwB5AHMAdABlAG0AQgByAG8AdwBzAGUAcgEAAAAA/////wAAAGQA////+wAAABIARABvAGMAdQBtAGUAbgB0AHMBAAAAAP////8AAABcAP///wAAAAEAAAHhAAACY/wCAAAABfsAAAAUAFMAdAByAHUAYwB0AFQAbwBvAGwDAAACjQAAAPwAAAIyAAABT/sAAAAQAFYAZQByAHMAaQBvAG4AcwAAAAA2AAAAiQAAAAAAAAAA/AAAAEoAAAFGAAABJwEAAB36AAAAAQEAAAAH+wAAABgARABvAGMAdQBtAGUAbgB0AEkAbgBmAG8BAAAAAP////8AAACMAP////sAAAASAEIAeQB0AGUAVABhAGIAbABlAQAAAAD/////AAAAXAD////7AAAADgBTAHQAcgBpAG4AZwBzAQAAAAD/////AAAAiQD////7AAAAEABDAGgAZQBjAGsAcwB1AG0BAAAAAP////8AAAEFAP////sAAAAcAFMAdAByAHUAYwB0AHUAcgBlAHMAVABvAG8AbAEAAAAA/////wAAAAAAAAAA+wAAABQAUwB0AHIAdQBjAHQAVABvAG8AbAMAAAKNAAAA/AAAAjIAAAFP+wAAABQAUABPAEQARABlAGMAbwBkAGUAcgEAAAAA/////wAAAJYA/////AAAAQsAAADsAAAAAAD////6AAAAAAEAAAAB+wAAABAAQwBoAGUAYwBrAFMAdQBtAQAAAAD/////AAAAAAAAAAD8AAABkQAAARwAAAD9AQAAHfoAAAAAAQAAAAT7AAAAGABCAGkAbgBhAHIAeQBGAGkAbAB0AGUAcgEAAAAA/////wAAAVMA////+wAAACIAQwBoAGEAcgBzAGUAdABDAG8AbgB2AGUAcgBzAGkAbwBuAQAAAAD/////AAABRAD////7AAAACABJAG4AZgBvAQAAAAD/////AAAAiQD////7AAAAEgBCAG8AbwBrAG0AYQByAGsAcwEAAAAA/////wAAAFwA////AAAAAwAABVYAAABC/AEAAAAB+wAAABAAVABlAHIAbQBpAG4AYQBsAAAAAAAAAAVWAAAAXAD///8AAACWAAACYwAAAAQAAAAEAAAACAAAAAj8AAAAAQAAAAIAAAABAAAAFgBtAGEAaQBuAFQAbwBvAGwAQgBhAHIBAAAAAAAABAYAAAAAAAAAAA==");
     const char mainWindowStateKey[] = "State";
-    KConfigGroup group(KSharedConfig::openConfig(), QStringLiteral("MainWindow"));
+    KConfigGroup group(KSharedConfig::openStateConfig(), QStringLiteral("MainWindow"));
     if (!group.hasKey(mainWindowStateKey)) {
         group.writeEntry(mainWindowStateKey, mainWindowState);
     }
@@ -199,9 +198,7 @@ void OktetaMainWindow::setupControllers()
 
     addToolFromFactory(FileSystemBrowserToolViewFactory(), FileSystemBrowserToolFactory(syncManager));
     addToolFromFactory(DocumentsToolViewFactory(), DocumentsToolFactory(documentManager));
-#if KASTEN_BUILD_TERMINALTOOL
     addToolFromFactory(TerminalToolViewFactory(), TerminalToolFactory(syncManager));
-#endif
 #ifndef NDEBUG
     addToolFromFactory(VersionViewToolViewFactory(), VersionViewToolFactory());
 #endif
@@ -236,7 +233,9 @@ void OktetaMainWindow::setupControllers()
     addToolFromFactory(ByteTableToolViewFactory(), ByteTableToolFactory());
     addToolFromFactory(InfoToolViewFactory(), InfoToolFactory());
     addToolFromFactory(PodDecoderToolViewFactory(), PodDecoderToolFactory());
+#ifdef BUILD_STRUCTURESTOOL
     addToolFromFactory(StructuresToolViewFactory(), StructuresToolFactory());
+#endif
     addToolFromFactory(BookmarksToolViewFactory(), BookmarksToolFactory());
 }
 
@@ -266,7 +265,7 @@ void OktetaMainWindow::saveProperties(KConfigGroup& configGroup)
 {
     DocumentManager* const documentManager = mProgram->documentManager();
     DocumentSyncManager* const syncManager = documentManager->syncManager();
-    const QVector<AbstractDocument*> documents = documentManager->documents();
+    const QList<AbstractDocument*> documents = documentManager->documents();
 
     QStringList urls;
     urls.reserve(documents.size());
@@ -322,7 +321,7 @@ void OktetaMainWindow::onNewDocumentRequested()
     mProgram->documentManager()->createManager()->createNew();
 }
 
-void OktetaMainWindow::onCloseRequest(const QVector<Kasten::AbstractView*>& views)
+void OktetaMainWindow::onCloseRequest(const QList<Kasten::AbstractView*>& views)
 {
     // group views per document
     std::unordered_map<AbstractDocument*, std::vector<AbstractView*>> viewsToClosePerDocument;
@@ -332,7 +331,7 @@ void OktetaMainWindow::onCloseRequest(const QVector<Kasten::AbstractView*>& view
     }
 
     // find documents which lose all views
-    const QVector<AbstractView*> allViews = viewManager()->views();
+    const QList<AbstractView*> allViews = viewManager()->views();
     for (AbstractView* view : allViews) {
         auto* document = view->findBaseModel<AbstractDocument*>();
         auto it = viewsToClosePerDocument.find(document);
@@ -346,7 +345,7 @@ void OktetaMainWindow::onCloseRequest(const QVector<Kasten::AbstractView*>& view
         }
     }
 
-    QVector<AbstractDocument*> documentsWithoutViews;
+    QList<AbstractDocument*> documentsWithoutViews;
     documentsWithoutViews.reserve(viewsToClosePerDocument.size());
     std::transform(viewsToClosePerDocument.cbegin(), viewsToClosePerDocument.cend(),
                    std::back_inserter(documentsWithoutViews),
