@@ -32,7 +32,7 @@ public:
 public: // QLayout API
     int count() const override;
     QLayoutItem* itemAt(int index) const override;
-    int indexOf(QWidget* widget) const override;
+    int indexOf(const QWidget* widget) const override;
 
     void addItem(QLayoutItem* item) override;
     QLayoutItem* takeAt(int index) override;

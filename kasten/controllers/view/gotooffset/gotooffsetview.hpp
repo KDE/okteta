@@ -34,7 +34,7 @@ public:
     };
 
 private:
-    static inline constexpr char ConfigGroupId[] = "GotoOffsetTool";
+    static const QString ConfigGroupId;
 
     static inline constexpr char OffsetCodingConfigKey[] = "OffsetCoding";
     static inline constexpr char FromCursorConfigKey[] = "FromCursor";

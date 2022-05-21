@@ -47,7 +47,7 @@ ChecksumView::ChecksumView(ChecksumTool* tool, QWidget* parent)
     auto* algorithmToolBar = new QToolBar(this);
     auto* label = new QLabel(i18nc("@label:listbox algorithm to use for the checksum", "Algorithm:"), this);
     mAlgorithmComboBox = new KComboBox(this);
-    connect(mAlgorithmComboBox, qOverload<int>(&KComboBox::activated),
+    connect(mAlgorithmComboBox, &KComboBox::activated,
             mTool, &ChecksumTool::setAlgorithm);
 
     auto* labelledAlgorithmComboBox = new LabelledToolBarWidget(label, mAlgorithmComboBox, this);
