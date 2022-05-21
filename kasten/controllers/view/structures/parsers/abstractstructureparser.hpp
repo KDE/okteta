@@ -9,7 +9,7 @@
 #ifndef KASTEN_ABSTRACTSTRUCTUREPARSER_HPP
 #define KASTEN_ABSTRACTSTRUCTUREPARSER_HPP
 
-#include <QVector>
+#include <QList>
 #include <QStringList>
 
 class TopLevelDataInformation;
@@ -30,7 +30,7 @@ public:
 
 public:
     virtual QStringList parseStructureNames() const = 0;
-    virtual QVector<TopLevelDataInformation*> parseStructures() const = 0;
+    virtual QList<TopLevelDataInformation*> parseStructures() const = 0;
 
 protected:
     const QString mPluginName;

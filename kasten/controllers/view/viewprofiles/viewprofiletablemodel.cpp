@@ -14,7 +14,7 @@
 #include <KColorScheme>
 // Qt
 #include <QApplication>
-#include <QVector>
+#include <QList>
 #include <QIcon>
 
 namespace Kasten {
@@ -117,7 +117,7 @@ ViewProfileTableModel::row(const ByteArrayViewProfile::Id& viewProfileId) const
 {
     int result = -1;
 
-    const QVector<ByteArrayViewProfile> viewProfiles = mViewProfileManager->viewProfiles();
+    const QList<ByteArrayViewProfile> viewProfiles = mViewProfileManager->viewProfiles();
     const int viewProfilesCount = viewProfiles.size();
     for (int i = 0; i < viewProfilesCount; ++i) {
         if (viewProfileId == viewProfiles.at(i).id()) {
@@ -142,9 +142,9 @@ void ViewProfileTableModel::onViewProfilesChanged()
     endResetModel();
 }
 
-void ViewProfileTableModel::onViewProfileLocksChanged(const QVector<ByteArrayViewProfile::Id>& viewProfileIds)
+void ViewProfileTableModel::onViewProfileLocksChanged(const QList<ByteArrayViewProfile::Id>& viewProfileIds)
 {
-    const QVector<ByteArrayViewProfile> viewProfiles = mViewProfileManager->viewProfiles();
+    const QList<ByteArrayViewProfile> viewProfiles = mViewProfileManager->viewProfiles();
     const int viewProfilesCount = viewProfiles.size();
     for (int i = 0; i < viewProfilesCount; ++i) {
         const ByteArrayViewProfile::Id viewProfileId = viewProfiles.at(i).id();
