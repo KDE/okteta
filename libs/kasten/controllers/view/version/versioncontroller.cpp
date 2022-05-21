@@ -36,9 +36,9 @@ VersionController::VersionController(KXMLGUIClient* guiClient)
 
     connect(mSetToOlderVersionAction, &QAction::triggered,
             this, &VersionController::onSetToOlderVersionTriggered);
-    connect(mSetToOlderVersionAction->menu(), &QMenu::aboutToShow,
+    connect(mSetToOlderVersionAction->popupMenu(), &QMenu::aboutToShow,
             this, &VersionController::onOlderVersionMenuAboutToShow);
-    connect(mSetToOlderVersionAction->menu(), &QMenu::triggered,
+    connect(mSetToOlderVersionAction->popupMenu(), &QMenu::triggered,
             this, &VersionController::onOlderVersionMenuTriggered);
 
     mSetToNewerVersionAction = new KToolBarPopupAction(QIcon::fromTheme(QStringLiteral("edit-redo")), i18nc("@action:inmenu", "Redo"), this);
@@ -48,9 +48,9 @@ VersionController::VersionController(KXMLGUIClient* guiClient)
 
     connect(mSetToNewerVersionAction, &QAction::triggered,
             this, &VersionController::onSetToNewerVersionTriggered);
-    connect(mSetToNewerVersionAction->menu(), &QMenu::aboutToShow,
+    connect(mSetToNewerVersionAction->popupMenu(), &QMenu::aboutToShow,
             this, &VersionController::onNewerVersionMenuAboutToShow);
-    connect(mSetToNewerVersionAction->menu(), &QMenu::triggered,
+    connect(mSetToNewerVersionAction->popupMenu(), &QMenu::triggered,
             this, &VersionController::onNewerVersionMenuTriggered);
 }
 
@@ -120,7 +120,7 @@ void VersionController::onSetToNewerVersionTriggered()
 
 void VersionController::onOlderVersionMenuAboutToShow()
 {
-    QMenu* menu = mSetToOlderVersionAction->menu();
+    QMenu* menu = mSetToOlderVersionAction->popupMenu();
     menu->clear();
 
     int menuEntries = 0;
@@ -140,7 +140,7 @@ void VersionController::onOlderVersionMenuAboutToShow()
 
 void VersionController::onNewerVersionMenuAboutToShow()
 {
-    QMenu* menu = mSetToNewerVersionAction->menu();
+    QMenu* menu = mSetToNewerVersionAction->popupMenu();
     menu->clear();
 
     int menuEntries = 0;
