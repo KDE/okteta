@@ -11,7 +11,7 @@
 
 #include "stringdata.hpp"
 
-#include <QVector>
+#include <QList>
 
 class Latin1StringData : public StringData
 {
@@ -29,7 +29,7 @@ public:
     QString typeName() const override;
 
 private:
-    QVector<quint8> mData;
+    QList<quint8> mData;
 };
 
 #endif // KASTEN_LATIN1STRINGDATA_HPP
