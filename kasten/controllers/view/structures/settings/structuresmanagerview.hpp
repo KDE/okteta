@@ -9,7 +9,7 @@
 #define KASTEN_STRUCTURESMANAGERVIEW_HPP
 
 // KF
-#include <KNSCore/EntryInternal>
+#include <KNSCore/Entry>
 // Qt
 #include <QWidget>
 
@@ -45,7 +45,7 @@ Q_SIGNALS:
     void changed();
 
 private Q_SLOTS:
-    void onGetNewStructuresClicked(const QList<KNSCore::EntryInternal>& changedEntries);
+    void onGetNewStructuresClicked(const QList<KNSCore::Entry>& changedEntries);
     void advancedSelection();
     void setEnabledStructures(const QStringList& enabledStructures);
 
