@@ -19,15 +19,15 @@
 #include <KLocalizedString>
 // Qt
 #include <QTest>
-#include <QtGlobal>
+#include <QMetaType>
 #include <QLocale>
 // Std
 #include <memory>
 #include <limits>
 
-inline uint qHash(PrimitiveDataType type)
+inline size_t qHash(PrimitiveDataType type, size_t seed = 0) noexcept
 {
-    return ::qHash(static_cast<int>(type));
+    return ::qHash(static_cast<int>(type), seed);
 }
 
 class PrimitiveDataInformationTest : public QObject

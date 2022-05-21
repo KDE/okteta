@@ -16,7 +16,7 @@
 // Std
 #include <cstdlib>
 
-static constexpr char RotateFilterConfigGroupId[] = "Rotate";
+static const QString RotateFilterConfigGroupId = QStringLiteral("Rotate");
 
 static constexpr int RotateBitsPerByte = 8;
 
