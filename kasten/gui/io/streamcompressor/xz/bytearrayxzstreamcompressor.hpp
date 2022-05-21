@@ -78,7 +78,7 @@ class ByteArrayXzStreamCompressor : public AbstractByteArrayStreamCompressor
     Q_OBJECT
 
 private:
-    static inline constexpr char ConfigGroupId[] = "ByteArrayXzStreamCompressor";
+    static const QString ConfigGroupId;
 
 public:
     ByteArrayXzStreamCompressor();

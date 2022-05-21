@@ -14,7 +14,7 @@
 // Okteta core
 #include <kastencore.hpp>
 // Qt
-#include <QVector>
+#include <QList>
 // Std
 #include <memory>
 #include <vector>
@@ -51,7 +51,7 @@ public:
 
 public: // If::WidgetsDockable API
     [[nodiscard]]
-    QVector<ToolViewDockWidget*> dockWidgets() const;
+    QList<ToolViewDockWidget*> dockWidgets() const;
 
 private: // Q_SLOTS
     void onTitleChanged(const QString& newTitle);
@@ -79,13 +79,13 @@ private:
 
     std::vector<std::unique_ptr<AbstractXmlGuiController>> mControllers;
 
-    QVector<ToolViewDockWidget*> mDockWidgets;
+    QList<ToolViewDockWidget*> mDockWidgets;
     std::vector<std::unique_ptr<AbstractTool>> mTools;
 };
 
 inline MultiViewAreas* ShellWindowPrivate::viewArea() const { return mGroupedViews.get(); }
 inline ViewManager* ShellWindowPrivate::viewManager() const { return mViewManager; }
-inline QVector<ToolViewDockWidget*> ShellWindowPrivate::dockWidgets() const { return mDockWidgets; }
+inline QList<ToolViewDockWidget*> ShellWindowPrivate::dockWidgets() const { return mDockWidgets; }
 
 }
 
