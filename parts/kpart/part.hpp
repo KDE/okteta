@@ -36,7 +36,7 @@ class OktetaPart : public KParts::ReadWritePart
 {
     Q_OBJECT
 
-    friend class OktetaBrowserExtension;
+    friend class OktetaNavigationExtension;
 
 public:
     enum Modus

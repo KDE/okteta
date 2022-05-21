@@ -9,6 +9,9 @@
 #ifndef KASTEN_DATAINFORMATIONBASE_HPP
 #define KASTEN_DATAINFORMATIONBASE_HPP
 
+// Qt
+#include <QtTypes>
+
 class EnumDataInformation;
 class StringDataInformation;
 class DataInformationBase;
@@ -24,8 +27,6 @@ class TopLevelDataInformation;
 class PointerDataInformation;
 class DataInformationWithChildren;
 class DataInformationWithDummyChildren;
-
-#include <QtGlobal>
 
 using BitCount32 = quint32;
 using BitCount64 = quint64;

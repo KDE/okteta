@@ -11,6 +11,8 @@
 
 // lib
 #include <addressrange.hpp>
+// Qt
+#include <QTypeInfo>
 
 namespace KPieceTable {
 
@@ -126,6 +128,6 @@ inline bool Piece::append(const Piece& other)
 
 }
 
-Q_DECLARE_TYPEINFO(KPieceTable::Piece, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(KPieceTable::Piece, Q_RELOCATABLE_TYPE);
 
 #endif

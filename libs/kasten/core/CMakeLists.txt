@@ -3,15 +3,13 @@ set(KASTENCORE_SO_VERSION ${KASTEN_LIB_SOVERSION})
 
 okteta_add_library(Core NAMESPACE Kasten
     PUBLIC
-        KF5::CoreAddons
-        Qt5::Core
+        KF6::CoreAddons
+        Qt6::Core
     VERSION     ${KASTENCORE_VERSION}
     SOVERSION   ${KASTENCORE_SO_VERSION}
     ABIVERSION  ${KASTEN_ABI_VERSION}
     NO_TARGET_NAMESPACE
-    NO_VERSIONED_EXPORTED_TARGET_NAME
     NO_VERSIONED_INCLUDEDIR
-    NO_VERSIONED_PACKAGE_NAME
     KI18N_TRANSLATION_DOMAIN "libkasten"
 )
 
@@ -48,9 +46,9 @@ endmacro()
 kastencore_add_sublibrary(kastenusermessages
     UNTESTED
     PUBLIC
-        Qt5::Core
+        Qt6::Core
     PRIVATE
-        KF5::WidgetsAddons
+        KF6::WidgetsAddons
 )
 
 kastencore_sublibrary_sources(usermessages
@@ -66,8 +64,8 @@ kastencore_sublibrary_sources(usermessages
 kastencore_add_sublibrary(kastendocument
     UNTESTED
     PUBLIC
-        KF5::CoreAddons
-        Qt5::Core
+        KF6::CoreAddons
+        Qt6::Core
 )
 
 okteta_sublibrary_sources(Core NAMESPACE Kasten
@@ -118,9 +116,9 @@ kastencore_add_sublibrary(kastenfilesystemio
     PUBLIC
         kastendocument
     PRIVATE
-        KF5::JobWidgets
-        KF5::KIOCore
-        Qt5::Network
+        KF6::WidgetsAddons
+        KF6::KIOCore
+        Qt6::Network
 )
 
 kastencore_sublibrary_sources(io/filesystem
@@ -144,10 +142,9 @@ kastencore_add_sublibrary(kastencoresystem
         kastendocument
     PRIVATE
         kastenfilesystemio
-        KF5::I18n
-        KF5::JobWidgets
-        KF5::KIOCore
-        KF5::WidgetsAddons
+        KF6::I18n
+        KF6::KIOCore
+        KF6::WidgetsAddons
     KI18N_TRANSLATION_DOMAIN "libkasten"
 )
 
@@ -169,8 +166,8 @@ kastencore_sublibrary_sources(system
 
 okteta_add_cmakeconfig(Core NAMESPACE Kasten
     DEPS
-        KF5CoreAddons ${KF5_VERSION}
-        Qt5Core ${Qt5_VERSION}
+        KF6CoreAddons ${KF6_VERSION}
+        Qt6Core ${Qt6_VERSION}
 )
 
 if(BUILD_TESTING)
