@@ -12,7 +12,7 @@
 // Qt
 #include <QtPlugin>
 
-template <typename C> class QVector;
+template <typename C> class QList;
 
 namespace Kasten {
 
@@ -29,7 +29,7 @@ public: // set/action
 //     virtual void setViewFocus( AbstractView *view ) = 0;
 
 public: // get
-    virtual QVector<ToolViewDockWidget*> dockWidgets() const = 0;
+    virtual QList<ToolViewDockWidget*> dockWidgets() const = 0;
 
 public: // signal
 //     virtual void viewFocusChanged( AbstractView *view ) = 0;

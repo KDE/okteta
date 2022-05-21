@@ -13,7 +13,8 @@
 #include "kastencore_export.hpp"
 #include "userresponseoption.hpp"
 // Qt
-#include <QtGlobal>
+#include <QtClassHelperMacros> // Q_DECLARE_PRIVATE
+#include <QtCompilerDetection> // Q_CAST_IGNORE_ALIGN, used by Q_DECLARE_PRIVATE but without needed include
 #include <QString>
 // Std
 #include <memory>

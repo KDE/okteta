@@ -26,7 +26,7 @@ public:
      *  If name is not empty it is used instead of the name of this tagged union */
     struct FieldInfo
     {
-        inline explicit FieldInfo(const QString& n, const QScriptValue& s, const QVector<DataInformation*>& f)
+        inline explicit FieldInfo(const QString& n, const QScriptValue& s, const QList<DataInformation*>& f)
             : name(n)
             , selectIf(s)
             , fields(f)
@@ -35,7 +35,7 @@ public:
         /** The name this tagged union gets when this is selected */
         QString name;
         QScriptValue selectIf;
-        QVector<DataInformation*> fields;
+        QList<DataInformation*> fields;
     };
 
     explicit TaggedUnionDataInformation(const QString& name, DataInformation* parent = nullptr);
@@ -55,18 +55,18 @@ public:
     DataInformation* childAt(unsigned int index) const override;
     unsigned int childCount() const override;
     void appendDefaultField(DataInformation* field, bool emitSignal);
-    void setAlternatives(const QVector<FieldInfo>& alternatives, bool emitSignal);
+    void setAlternatives(const QList<FieldInfo>& alternatives, bool emitSignal);
 
 private:
     QString typeNameImpl() const override;
 
 private:
-    const QVector<DataInformation*>& currentChildren() const;
+    const QList<DataInformation*>& currentChildren() const;
     int determineSelection(TopLevelDataInformation* top);
 
 private:
-    QVector<FieldInfo> mAlternatives;
-    QVector<DataInformation*> mDefaultFields; // always sorted
+    QList<FieldInfo> mAlternatives;
+    QList<DataInformation*> mDefaultFields; // always sorted
     // TODO
 //    /** If mUnion is non-null the children are displayed inside a union and the correct
 //     * child is highlighted. Otherwise only the correct fields will be appended after mChildren
@@ -75,7 +75,7 @@ private:
     int mLastIndex = -1;
 };
 
-inline const QVector<DataInformation*>& TaggedUnionDataInformation::currentChildren() const
+inline const QList<DataInformation*>& TaggedUnionDataInformation::currentChildren() const
 {
     Q_ASSERT(mLastIndex < mAlternatives.size());
     return mLastIndex >= 0 ? mAlternatives.at(mLastIndex).fields : mDefaultFields;

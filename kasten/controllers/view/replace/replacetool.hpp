@@ -33,7 +33,7 @@ class ReplaceTool : public AbstractTool
     Q_OBJECT
 
 private:
-    static inline constexpr char ConfigGroupId[] = "ReplaceTool";
+    static const QString ConfigGroupId;
 
     static inline constexpr char CaseSensitivityConfigKey[] = "CaseSensitivity";
     static inline constexpr char PromptConfigKey[] = "Prompt";

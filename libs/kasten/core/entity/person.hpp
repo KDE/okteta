@@ -47,6 +47,6 @@ private:
 
 }
 
-Q_DECLARE_TYPEINFO(Kasten::Person, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(Kasten::Person, Q_RELOCATABLE_TYPE);
 
 #endif

@@ -10,10 +10,9 @@
 #define STRUCTUREENABLEDLIST_HPP
 
 // Qt
-#include <QVector>
+#include <QList>
 #include <QHash>
-
-class QStringList;
+#include <QStringList>
 
 class StructureEnabledData
 {
@@ -34,7 +33,7 @@ inline StructureEnabledData::StructureEnabledData(const QString& id, const QStri
 {
 }
 
-Q_DECLARE_TYPEINFO(StructureEnabledData, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(StructureEnabledData, Q_RELOCATABLE_TYPE);
 
 
 // Any actively disabled entries are keot in place,
@@ -55,19 +54,19 @@ public:
     bool isEnabled(const QString& id) const;
     QStringList toQStringList() const;
 
-    QVector<StructureEnabledData>::ConstIterator begin() const;
-    QVector<StructureEnabledData>::ConstIterator end() const;
+    QList<StructureEnabledData>::ConstIterator begin() const;
+    QList<StructureEnabledData>::ConstIterator end() const;
 
 private:
-    QVector<StructureEnabledData> m_enabledList;
+    QList<StructureEnabledData> m_enabledList;
 };
 
-inline QVector<StructureEnabledData>::ConstIterator StructureEnabledList::begin() const
+inline QList<StructureEnabledData>::ConstIterator StructureEnabledList::begin() const
 {
     return m_enabledList.begin();
 }
 
-inline QVector<StructureEnabledData>::ConstIterator StructureEnabledList::end() const
+inline QList<StructureEnabledData>::ConstIterator StructureEnabledList::end() const
 {
     return m_enabledList.end();
 }

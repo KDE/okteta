@@ -14,6 +14,8 @@
 // Okteta core
 #include <Okteta/Byte>
 
+class QString;
+
 namespace Okteta {
 
 class ByteArrayTableRanges;
