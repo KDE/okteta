@@ -280,7 +280,7 @@ void StructuresTool::setEnabledStructuresInView()
             // should be valid now
             if (name == QLatin1String("*")) {
                 // add all of them
-                const QVector<TopLevelDataInformation*> structs = def->structures();
+                const QList<TopLevelDataInformation*> structs = def->structures();
                 for (auto* structure : structs) {
                     addChildItem(structure);
                 }
