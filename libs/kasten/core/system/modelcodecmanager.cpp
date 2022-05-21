@@ -18,7 +18,7 @@ ModelCodecManager::ModelCodecManager()
 
 ModelCodecManager::~ModelCodecManager() = default;
 
-QVector<AbstractModelStreamEncoder*>
+QList<AbstractModelStreamEncoder*>
 ModelCodecManager::encoderList(AbstractModel* model, const AbstractModelSelection* selection) const
 {
     Q_D(const ModelCodecManager);
@@ -26,7 +26,7 @@ ModelCodecManager::encoderList(AbstractModel* model, const AbstractModelSelectio
     return d->encoderList(model, selection);
 }
 
-QVector<AbstractModelStreamDecoder*>
+QList<AbstractModelStreamDecoder*>
 ModelCodecManager::decoderList() const
 {
     Q_D(const ModelCodecManager);
@@ -34,7 +34,7 @@ ModelCodecManager::decoderList() const
     return d->decoderList();
 }
 
-QVector<AbstractModelDataGenerator*>
+QList<AbstractModelDataGenerator*>
 ModelCodecManager::generatorList() const
 {
     Q_D(const ModelCodecManager);
@@ -42,7 +42,7 @@ ModelCodecManager::generatorList() const
     return d->generatorList();
 }
 
-QVector<AbstractModelExporter*>
+QList<AbstractModelExporter*>
 ModelCodecManager::exporterList(AbstractModel* model, const AbstractModelSelection* selection) const
 {
     Q_D(const ModelCodecManager);
@@ -57,21 +57,21 @@ void ModelCodecManager::setOverwriteDialog(AbstractOverwriteDialog* overwriteDia
     d->setOverwriteDialog(overwriteDialog);
 }
 
-void ModelCodecManager::setEncoders(const QVector<AbstractModelStreamEncoder*>& encoderList)
+void ModelCodecManager::setEncoders(const QList<AbstractModelStreamEncoder*>& encoderList)
 {
     Q_D(ModelCodecManager);
 
     d->setEncoders(encoderList);
 }
 
-void ModelCodecManager::setDecoders(const QVector<AbstractModelStreamDecoder*>& decoderList)
+void ModelCodecManager::setDecoders(const QList<AbstractModelStreamDecoder*>& decoderList)
 {
     Q_D(ModelCodecManager);
 
     d->setDecoders(decoderList);
 }
 
-void ModelCodecManager::setGenerators(const QVector<AbstractModelDataGenerator*>& generatorList)
+void ModelCodecManager::setGenerators(const QList<AbstractModelDataGenerator*>& generatorList)
 {
     Q_D(ModelCodecManager);
 

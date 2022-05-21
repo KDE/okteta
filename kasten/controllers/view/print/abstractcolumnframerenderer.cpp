@@ -139,7 +139,7 @@ void AbstractColumnFrameRenderer::renderFrame(QPainter* painter, int frameIndex)
     // content to be shown?
     if (renderedXs.startsBefore(d->mColumnsWidth)) {
         // collect affected columns
-        QVector<Okteta::AbstractColumnRenderer*> columnRenderers;
+        QList<Okteta::AbstractColumnRenderer*> columnRenderers;
         columnRenderers.reserve(d->mColumns.size());
         for (auto& columnRenderer : std::as_const(d->mColumns)) {
             if (columnRenderer->isVisible() && columnRenderer->overlaps(renderedXs)) {

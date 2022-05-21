@@ -41,14 +41,14 @@ public:
     AbstractModelDataGeneratorConfigEditor* createConfigEditor(AbstractModelDataGenerator* generator) const;
 
 public:
-    void setEncoderConfigEditorFactories(const QVector<AbstractModelStreamEncoderConfigEditorFactory*>& factoryList);
-    void setExporterConfigEditorFactories(const QVector<AbstractModelExporterConfigEditorFactory*>& factoryList);
-    void setGeneratorConfigEditorFactories(const QVector<AbstractModelDataGeneratorConfigEditorFactory*>& factoryList);
+    void setEncoderConfigEditorFactories(const QList<AbstractModelStreamEncoderConfigEditorFactory*>& factoryList);
+    void setExporterConfigEditorFactories(const QList<AbstractModelExporterConfigEditorFactory*>& factoryList);
+    void setGeneratorConfigEditorFactories(const QList<AbstractModelDataGeneratorConfigEditorFactory*>& factoryList);
 
 private:
-    QVector<AbstractModelStreamEncoderConfigEditorFactory*> mEncoderFactoryList;
-    QVector<AbstractModelExporterConfigEditorFactory*> mExporterFactoryList;
-    QVector<AbstractModelDataGeneratorConfigEditorFactory*> mGeneratorFactoryList;
+    QList<AbstractModelStreamEncoderConfigEditorFactory*> mEncoderFactoryList;
+    QList<AbstractModelExporterConfigEditorFactory*> mExporterFactoryList;
+    QList<AbstractModelDataGeneratorConfigEditorFactory*> mGeneratorFactoryList;
 };
 
 }

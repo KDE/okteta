@@ -40,7 +40,7 @@ ExportController::ExportController(ModelCodecViewManager* modelCodecViewManager,
                                             i18nc("@title:menu", "Export"),
                                             this);
     mExportSelectAction->setToolBarMode(KSelectAction::MenuMode);
-    connect(mExportSelectAction, qOverload<QAction*>(&KSelectAction::triggered),
+    connect(mExportSelectAction, &KSelectAction::actionTriggered,
             this, &ExportController::onActionTriggered);
 
     guiClient->actionCollection()->addAction(QStringLiteral("export"), mExportSelectAction);
@@ -71,7 +71,7 @@ void ExportController::updateActions()
 
     const AbstractModelSelection* selection = mSelectionControl ? mSelectionControl->modelSelection() : nullptr;
 
-    const QVector<AbstractModelExporter*> exporterList =
+    const QList<AbstractModelExporter*> exporterList =
         mModelCodecManager->exporterList(mModel, selection);
     const bool hasExporters = (!exporterList.isEmpty());
 

@@ -11,7 +11,7 @@
 
 // Qt
 #include <QLayout>
-#include <QVector>
+#include <QList>
 
 class QWidgetItem;
 
@@ -31,7 +31,7 @@ public:
 public: // QLayout API
     int count() const override;
     QLayoutItem* itemAt(int index) const override;
-    int indexOf(QWidget* widget) const override;
+    int indexOf(const QWidget* widget) const override;
 
     void addItem(QLayoutItem* item) override;
     QLayoutItem* takeAt(int index) override;
@@ -50,7 +50,7 @@ private:
     void updateLayoutStructs() const;
 
 private:
-    QVector<QWidgetItem*> mWidgetList;
+    QList<QWidgetItem*> mWidgetList;
 
     bool mIsDirty : 1;
     bool mIsEmpty : 1;

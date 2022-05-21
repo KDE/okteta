@@ -11,17 +11,17 @@
 
 #include "datainformation.hpp"
 
-#include <QVector>
+#include <QList>
 
 class DataInformationWithChildren : public DataInformation
 {
 protected:
-    QVector<DataInformation*> mChildren;
+    QList<DataInformation*> mChildren;
     explicit DataInformationWithChildren(const DataInformationWithChildren& d);
 
 public:
-    explicit DataInformationWithChildren(const QString& name, const QVector<DataInformation*>& children
-                                             = QVector<DataInformation*>(), DataInformation* parent = nullptr);
+    explicit DataInformationWithChildren(const QString& name, const QList<DataInformation*>& children
+                                             = QList<DataInformation*>(), DataInformation* parent = nullptr);
     ~DataInformationWithChildren() override;
 
     virtual QVariant childData(int row, int column, int role) const;
@@ -54,11 +54,11 @@ public:
     /** Takes ownership! */
     void appendChild(DataInformation* child, bool emitSignal = true);
     /** Takes ownership of all elements */
-    void appendChildren(const QVector<DataInformation*>& newChildren, bool emitSignal = true);
-    void setChildren(const QVector<DataInformation*>& newChildren);
+    void appendChildren(const QList<DataInformation*>& newChildren, bool emitSignal = true);
+    void setChildren(const QList<DataInformation*>& newChildren);
     void setChildren(const QScriptValue& newChildren);
 
-    static QVector<DataInformation*> cloneList(const QVector<DataInformation*>& other, DataInformation* parent);
+    static QList<DataInformation*> cloneList(const QList<DataInformation*>& other, DataInformation* parent);
 
 protected:
     QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const override;

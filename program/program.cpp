@@ -37,7 +37,7 @@
 #include <KCrash>
 // Qt
 #include <QCommandLineParser>
-#include <QVector>
+#include <QList>
 #include <QUrl>
 #include <QDir>
 
@@ -46,19 +46,10 @@ namespace Kasten {
 // static constexpr char OffsetOptionId[] = "offset";
 // static constexpr char OffsetOptionShortId[] = "o";
 
-static
-int& preConstructionHookHack(int& argc)
-{
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    return argc;
-}
-
-
 OktetaProgram::OktetaProgram(int& argc, char* argv[])
-    : mApp(preConstructionHookHack(argc), argv)
+    : mApp(argc, argv)
 {
-    QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
-    KLocalizedString::setApplicationDomain("okteta");
+    KLocalizedString::setApplicationDomain(QByteArrayLiteral("okteta"));
     KCrash::initialize();
 }
 
@@ -95,16 +86,16 @@ int OktetaProgram::execute()
     mByteArrayViewProfileManager = std::make_unique<ByteArrayViewProfileManager>();
     // mModelManagerManager->addModelManager( byteArrayViewProfileManager );
 
-    const QVector<AbstractModelStreamEncoder*> encoderList =
+    const QList<AbstractModelStreamEncoder*> encoderList =
         ByteArrayStreamEncoderFactory::createStreamEncoders();
 
-    const QVector<AbstractModelDataGenerator*> generatorList =
+    const QList<AbstractModelDataGenerator*> generatorList =
         ByteArrayDataGeneratorFactory::createDataGenerators();
 
-    const QVector<AbstractModelStreamEncoderConfigEditorFactory*> encoderConfigEditorFactoryList =
+    const QList<AbstractModelStreamEncoderConfigEditorFactory*> encoderConfigEditorFactoryList =
         ByteArrayStreamEncoderConfigEditorFactoryFactory::createFactorys();
 
-    const QVector<AbstractModelDataGeneratorConfigEditorFactory*> generatorConfigEditorFactoryList =
+    const QList<AbstractModelDataGeneratorConfigEditorFactory*> generatorConfigEditorFactoryList =
         ByteArrayDataGeneratorConfigEditorFactoryFactory::createFactorys();
 
     mDocumentManager->codecManager()->setEncoders(encoderList);

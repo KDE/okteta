@@ -10,7 +10,7 @@
 #define KASTEN_MODELCODECMANAGER_P_HPP
 
 // Qt
-#include <QVector>
+#include <QList>
 
 namespace Kasten {
 
@@ -40,16 +40,16 @@ public:
                         AbstractModel* model, const AbstractModelSelection* selection);
 
 public:
-    QVector<AbstractModelStreamEncoder*> encoderList(AbstractModel* model, const AbstractModelSelection* selection) const;
-    QVector<AbstractModelStreamDecoder*> decoderList() const;
-    QVector<AbstractModelDataGenerator*> generatorList() const;
+    QList<AbstractModelStreamEncoder*> encoderList(AbstractModel* model, const AbstractModelSelection* selection) const;
+    QList<AbstractModelStreamDecoder*> decoderList() const;
+    QList<AbstractModelDataGenerator*> generatorList() const;
 
-    QVector<AbstractModelExporter*> exporterList(AbstractModel* model, const AbstractModelSelection* selection) const;
+    QList<AbstractModelExporter*> exporterList(AbstractModel* model, const AbstractModelSelection* selection) const;
 
 public:
-    void setEncoders(const QVector<AbstractModelStreamEncoder*>& encoderList);
-    void setDecoders(const QVector<AbstractModelStreamDecoder*>& decoderList);
-    void setGenerators(const QVector<AbstractModelDataGenerator*>& generatorList);
+    void setEncoders(const QList<AbstractModelStreamEncoder*>& encoderList);
+    void setDecoders(const QList<AbstractModelStreamDecoder*>& decoderList);
+    void setGenerators(const QList<AbstractModelDataGenerator*>& generatorList);
     void setOverwriteDialog(AbstractOverwriteDialog* overwriteDialog);
 
 private:
@@ -57,10 +57,10 @@ private:
     AbstractOverwriteDialog* mOverwriteDialog = nullptr;
 
     // temporary hack: hard coded codecs for byte arrays
-    QVector<AbstractModelStreamEncoder*> mEncoderList;
-    QVector<AbstractModelStreamDecoder*> mDecoderList;
-    QVector<AbstractModelDataGenerator*> mGeneratorList;
-    QVector<AbstractModelExporter*> mExporterList;
+    QList<AbstractModelStreamEncoder*> mEncoderList;
+    QList<AbstractModelStreamDecoder*> mDecoderList;
+    QList<AbstractModelDataGenerator*> mGeneratorList;
+    QList<AbstractModelExporter*> mExporterList;
 };
 
 

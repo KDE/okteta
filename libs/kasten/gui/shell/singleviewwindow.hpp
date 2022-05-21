@@ -47,7 +47,7 @@ public:
     void setView(AbstractView* view);
 
 public: // If::WidgetsDockable API
-    QVector<ToolViewDockWidget*> dockWidgets() const override;
+    QList<ToolViewDockWidget*> dockWidgets() const override;
 
 protected:
     AbstractView* view() const;

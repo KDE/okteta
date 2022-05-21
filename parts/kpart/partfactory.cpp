@@ -29,16 +29,16 @@ OktetaPartFactory::OktetaPartFactory()
     , mModelCodecManager(new Kasten::ModelCodecManager())
 {
 
-    const QVector<Kasten::AbstractModelStreamEncoder*> encoderList =
+    const QList<Kasten::AbstractModelStreamEncoder*> encoderList =
         Kasten::ByteArrayStreamEncoderFactory::createStreamEncoders();
 
-    const QVector<Kasten::AbstractModelDataGenerator*> generatorList =
+    const QList<Kasten::AbstractModelDataGenerator*> generatorList =
         Kasten::ByteArrayDataGeneratorFactory::createDataGenerators();
 
-    const QVector<Kasten::AbstractModelStreamEncoderConfigEditorFactory*> encoderConfigEditorFactoryList =
+    const QList<Kasten::AbstractModelStreamEncoderConfigEditorFactory*> encoderConfigEditorFactoryList =
         Kasten::ByteArrayStreamEncoderConfigEditorFactoryFactory::createFactorys();
 
-    const QVector<Kasten::AbstractModelDataGeneratorConfigEditorFactory*> generatorConfigEditorFactoryList =
+    const QList<Kasten::AbstractModelDataGeneratorConfigEditorFactory*> generatorConfigEditorFactoryList =
         Kasten::ByteArrayDataGeneratorConfigEditorFactoryFactory::createFactorys();
 
     mModelCodecManager->setEncoders( encoderList );
@@ -53,11 +53,9 @@ OktetaPartFactory::~OktetaPartFactory() = default;
 QObject* OktetaPartFactory::create(const char* iface,
                                    QWidget* parentWidget,
                                    QObject* parent,
-                                   const QVariantList& args,
-                                   const QString& keyword)
+                                   const QVariantList& args)
 {
     Q_UNUSED(parentWidget)
-    Q_UNUSED(keyword);
 
     const OktetaPart::Modus modus =
         (args.contains(QStringLiteral("Browser/View")) ||

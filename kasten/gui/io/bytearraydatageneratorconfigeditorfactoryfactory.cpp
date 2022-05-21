@@ -17,13 +17,13 @@
 //// #include "my_bytearraydatageneratorconfigeditorfactory.hpp"
 //// NEWBYTEARRAYDATAGENERATORCONFIGEDITORFACTORY(end)
 // Qt
-#include <QVector>
+#include <QList>
 
 namespace Kasten {
 
-QVector<AbstractModelDataGeneratorConfigEditorFactory*> ByteArrayDataGeneratorConfigEditorFactoryFactory::createFactorys()
+QList<AbstractModelDataGeneratorConfigEditorFactory*> ByteArrayDataGeneratorConfigEditorFactoryFactory::createFactorys()
 {
-    const QVector<AbstractModelDataGeneratorConfigEditorFactory*> result {
+    const QList<AbstractModelDataGeneratorConfigEditorFactory*> result {
         new ByteArrayPatternGeneratorConfigEditorFactory(),
         new ByteArrayRandomDataGeneratorConfigEditorFactory(),
 //// NEWBYTEARRAYDATAGENERATORCONFIGEDITORFACTORY(start)

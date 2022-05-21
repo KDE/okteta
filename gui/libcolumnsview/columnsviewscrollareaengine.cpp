@@ -41,7 +41,7 @@ void ColumnsViewScrollAreaEngine::renderColumns(QPainter* painter, int cx, int c
         PixelYRange dirtyYs = PixelYRange::fromWidth(cy, ch);
 
         // collect affected columns
-        QVector<AbstractColumnRenderer*> dirtyColumns;
+        QList<AbstractColumnRenderer*> dirtyColumns;
         dirtyColumns.reserve(columns.size());
         for (const auto& column : std::as_const(columns)) {
             if (column->isVisible() && column->overlaps(dirtyXs)) {

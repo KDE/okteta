@@ -12,7 +12,7 @@
 // lib
 #include "oktetakastengui_export.hpp"
 
-template <class T> class QVector;
+template <class T> class QList;
 
 namespace Kasten {
 class AbstractModelStreamEncoderConfigEditorFactory;
@@ -26,7 +26,7 @@ public:
     ByteArrayStreamEncoderConfigEditorFactoryFactory& operator=(const ByteArrayStreamEncoderConfigEditorFactoryFactory&) = delete;
 
 public:
-    static QVector<AbstractModelStreamEncoderConfigEditorFactory*> createFactorys();
+    static QList<AbstractModelStreamEncoderConfigEditorFactory*> createFactorys();
 
 };
 

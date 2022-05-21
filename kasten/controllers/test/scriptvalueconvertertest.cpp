@@ -72,7 +72,7 @@ void ScriptValueConverterTest::basicConverterTest()
     QScriptValue sVal = evaluate("var foo = { value : uint8(),\n"
                                  " str : struct({first : uint8(), second : uint16()}),\n"
                                  " obj : array(uint32(), 10) \n}\n foo");
-    QVector<DataInformation*> converted = ScriptValueConverter::convertValues(sVal, logger.get());
+    QList<DataInformation*> converted = ScriptValueConverter::convertValues(sVal, logger.get());
     QCOMPARE(converted.size(), 3);
     QVERIFY(converted[0]->isPrimitive());
     QCOMPARE(converted[0]->name(), QStringLiteral("value"));

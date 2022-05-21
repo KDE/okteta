@@ -42,7 +42,7 @@ void ByteArrayComboBoxPrivate::init()
 
     mFormatComboBox = new KComboBox(q);
     mFormatComboBox->addItems(formatNames());
-    QObject::connect(mFormatComboBox, qOverload<int>(&QComboBox::activated),
+    QObject::connect(mFormatComboBox, &QComboBox::activated,
                      q, [&](int index) { onFormatChanged(index); });
 
     mValueComboBox = new KComboBox(q);
@@ -64,7 +64,7 @@ void ByteArrayComboBoxPrivate::init()
     mValidator->setCodec(coding);
 
     mValueComboBox->setValidator(mValidator);
-    QObject::connect(mValueComboBox, qOverload<int>(&QComboBox::activated),
+    QObject::connect(mValueComboBox, &QComboBox::activated,
                      q, [&](int index) { onValueActivated(index); });
 
     baseLayout->addWidget(mFormatComboBox);
