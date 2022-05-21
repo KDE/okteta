@@ -4,15 +4,13 @@ set(KASTENGUI_SO_VERSION ${KASTEN_LIB_SOVERSION})
 okteta_add_library(Gui NAMESPACE Kasten
     PUBLIC
         KastenCore
-        KF5::XmlGui
-        Qt5::Widgets
+        KF6::XmlGui
+        Qt6::Widgets
     VERSION     ${KASTENGUI_VERSION}
     SOVERSION   ${KASTENGUI_SO_VERSION}
     ABIVERSION  ${KASTEN_ABI_VERSION}
     NO_TARGET_NAMESPACE
-    NO_VERSIONED_EXPORTED_TARGET_NAME
     NO_VERSIONED_INCLUDEDIR
-    NO_VERSIONED_PACKAGE_NAME
 )
 
 target_compile_definitions(KastenGui PRIVATE -DTRANSLATION_DOMAIN=\"libkasten\")
@@ -35,7 +33,7 @@ kastengui_add_sublibrary(kastenview
     UNTESTED
     PUBLIC
         KastenCore
-        Qt5::Widgets
+        Qt6::Widgets
 )
 okteta_qt_declare_logging_category(KastenGui
     HEADER "logging.hpp"
@@ -75,7 +73,7 @@ kastengui_add_sublibrary(kastenguiio
     UNTESTED
     PUBLIC
         KastenCore
-        Qt5::Widgets
+        Qt6::Widgets
 )
 
 kastengui_sublibrary_sources(io
@@ -111,8 +109,8 @@ kastengui_add_sublibrary(kastenguisystem
         kastenview
         kastenguiio
     PRIVATE
-        KF5::WidgetsAddons
-        KF5::I18n
+        KF6::WidgetsAddons
+        KF6::I18n
 )
 okteta_sublibrary_compile_definitions(Gui NAMESPACE Kasten
     SUBLIBRARY kastenguisystem
@@ -143,7 +141,7 @@ kastengui_add_sublibrary(kastenguicontroller
     UNTESTED
     PUBLIC
         KastenCore
-        Qt5::Widgets
+        Qt6::Widgets
 )
 
 kastengui_sublibrary_sources(controller
@@ -164,7 +162,7 @@ kastengui_add_sublibrary(kastenguishell
         kastenview
         kastenguicontroller
         kastenguisystem
-        KF5::XmlGui
+        KF6::XmlGui
 )
 
 kastengui_sublibrary_sources(shell
@@ -200,6 +198,6 @@ kastengui_sublibrary_sources(shell
 
 okteta_add_cmakeconfig(Gui NAMESPACE Kasten
     DEPS
-        Qt5Widgets ${Qt5_VERSION}
+        Qt6Widgets ${Qt6_VERSION}
         KastenCore
 )

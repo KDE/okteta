@@ -11,7 +11,7 @@
 
 #include <KLocalizedString>
 
-UnionDataInformation::UnionDataInformation(const QString& name, const QVector<DataInformation*>& children,
+UnionDataInformation::UnionDataInformation(const QString& name, const QList<DataInformation*>& children,
                                            DataInformation* parent)
     : DataInformationWithChildren(name, children, parent)
 {

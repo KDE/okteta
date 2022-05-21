@@ -7,17 +7,15 @@ okteta_add_library(Gui NAMESPACE Okteta Kasten
         KastenGui
         OktetaGui
     PRIVATE
-        KF5::Completion
-        KF5::I18n
+        KF6::Completion
+        KF6::I18n
     VERSION     ${OKTETAKASTENGUI_VERSION}
     SOVERSION   ${OKTETAKASTENGUI_SO_VERSION}
     ABIVERSION  ${OKTETAKASTEN_ABI_VERSION} ${KASTEN_ABI_VERSION}
     NO_VERSIONED_INCLUDEDIR
-    NO_VERSIONED_PACKAGE_NAME
     REVERSE_NAMESPACE_INCLUDEDIR
     REVERSE_NAMESPACE_LIB
     NO_TARGET_NAMESPACE
-    NO_VERSIONED_EXPORTED_TARGET_NAME
 )
 
 target_compile_definitions(OktetaKastenGui PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")
@@ -51,11 +49,11 @@ okteta_add_sublibrary(Gui NAMESPACE Okteta Kasten
     UNTESTED
     PUBLIC
         OktetaCore
-        Qt5::Widgets
+        Qt6::Widgets
     PRIVATE
-        KF5::Completion
-        KF5::I18n
-        Qt5::Qml
+        KF6::Completion
+        KF6::I18n
+        Qt6::Qml
 )
 okteta_sublibrary_compile_definitions(Gui NAMESPACE Okteta Kasten
     SUBLIBRARY oktetawidgets
@@ -90,7 +88,7 @@ okteta_add_sublibrary(Gui NAMESPACE Okteta Kasten
         KastenGui
         OktetaGui
     PRIVATE
-        KF5::I18n
+        KF6::I18n
 )
 okteta_sublibrary_compile_definitions(Gui NAMESPACE Okteta Kasten
     SUBLIBRARY bytearrayview
@@ -137,8 +135,8 @@ okteta_add_sublibrary(Gui NAMESPACE Okteta Kasten
     PRIVATE
         oktetawidgets
         bytearrayview
-        KF5::Completion
-        KF5::I18n
+        KF6::Completion
+        KF6::I18n
 )
 okteta_sublibrary_compile_definitions(Gui NAMESPACE Okteta Kasten
     SUBLIBRARY bytearraystreamencoder
@@ -264,8 +262,8 @@ okteta_add_sublibrary(Gui NAMESPACE Okteta Kasten
     PRIVATE
         oktetawidgets
         bytearrayview
-        KF5::Completion
-        KF5::I18n
+        KF6::Completion
+        KF6::I18n
 )
 okteta_sublibrary_compile_definitions(Gui NAMESPACE Okteta Kasten
     SUBLIBRARY bytearraygenerator
