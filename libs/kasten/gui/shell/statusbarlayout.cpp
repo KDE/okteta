@@ -52,7 +52,7 @@ QLayoutItem* StatusBarLayout::itemAt(int index) const
     return mWidgetList[index];
 }
 
-int StatusBarLayout::indexOf(QWidget* widget) const
+int StatusBarLayout::indexOf(const QWidget* widget) const
 {
     int result = -1;
 

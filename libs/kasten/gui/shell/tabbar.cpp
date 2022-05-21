@@ -19,9 +19,6 @@ TabBar::TabBar(QWidget* parent)
     setAcceptDrops(true);
     setChangeCurrentOnDrag(true);
 
-    // catch non-LMB double-clicks
-    installEventFilter(this);
-
     connect(this, &QTabBar::tabBarDoubleClicked,
             this, &TabBar::onTabBarDoubleClicked);
 }
@@ -46,6 +43,17 @@ void TabBar::mouseReleaseEvent(QMouseEvent* event)
     QTabBar::mouseReleaseEvent(event);
 }
 
+void TabBar::mouseDoubleClickEvent(QMouseEvent* event)
+{
+   // block tabBarDoubleClicked signals with RMB, see https://bugs.kde.org/show_bug.cgi?id=356016
+    if (event->button() != Qt::LeftButton) {
+        mousePressEvent(event);
+        return;
+    }
+
+    QTabBar::mouseDoubleClickEvent(event);
+}
+
 void TabBar::dragEnterEvent(QDragEnterEvent* event)
 {
     // accept the entering in general, independent of being over a tab or not
@@ -65,7 +73,7 @@ void TabBar::dragEnterEvent(QDragEnterEvent* event)
 
 void TabBar::dragMoveEvent(QDragMoveEvent* event)
 {
-    if (tabAt(event->pos()) == -1) {
+    if (tabAt(event->position().toPoint()) == -1) {
         bool accept = false;
         // The receivers of the testCanDecode() signal has to adjust
         // 'accept' accordingly.
@@ -82,29 +90,12 @@ void TabBar::dragMoveEvent(QDragMoveEvent* event)
 
 void TabBar::dropEvent(QDropEvent* event)
 {
-    if (tabAt(event->pos()) == -1) {
+    if (tabAt(event->position().toPoint()) == -1) {
         Q_EMIT receivedDropEvent(event);
         return;
     }
 
     QTabBar::dropEvent(event);
-}
-
-
-bool TabBar::eventFilter(QObject* object, QEvent* event)
-{
-    if (object == this) {
-        // TODO Qt6: Move to mouseDoubleClickEvent when fixme in qttabbar.cpp is resolved
-        // see "fixme Qt 6: move to mouseDoubleClickEvent(), here for BC reasons." in qtabbar.cpp
-        if (event->type() == QEvent::MouseButtonDblClick) {
-            // block tabBarDoubleClicked signals with RMB, see https://bugs.kde.org/show_bug.cgi?id=356016
-            const auto* const mouseEvent = static_cast<const QMouseEvent*>(event);
-            if (mouseEvent->button() != Qt::LeftButton) {
-                return true;
-            }
-        }
-    }
-    return QObject::eventFilter(object, event);
 }
 
 void TabBar::onTabBarDoubleClicked(int index)

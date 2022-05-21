@@ -9,7 +9,7 @@
 // test object
 #include <bookmarklist.hpp>
 // Qt
-#include <QVector>
+#include <QList>
 #include <QTest>
 // Std
 #include <utility>
@@ -215,14 +215,14 @@ void BookmarkListTest::testAdjustToSwapped()
     bookmarkList.addBookmark(bookmark4);
     bool adjusted = bookmarkList.adjustToSwapped(behindOffset1, Offset3, secondLength);
 
-    QVector<Address> newOffsets;
+    QList<Address> newOffsets;
     newOffsets << bookmark1.offset() << bookmark3.offset() - firstLength << bookmark2.offset() + secondLength
                << bookmark3_1.offset() + secondLength << bookmark4.offset();
 
     QVERIFY(adjusted);
     QVERIFY(!bookmarkList.isEmpty());
     QCOMPARE(bookmarkList.size(), 5);
-    QVector<Address>::ConstIterator oit = newOffsets.constBegin();
+    QList<Address>::ConstIterator oit = newOffsets.constBegin();
     for (const Bookmark& bookmark : std::as_const(bookmarkList)) {
         QCOMPARE(bookmark.offset(), *oit++);
     }

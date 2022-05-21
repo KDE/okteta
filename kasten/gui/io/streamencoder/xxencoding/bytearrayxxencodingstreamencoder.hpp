@@ -61,7 +61,7 @@ private:
     static inline constexpr int inputGroupLength = 3;
     static inline constexpr int maxInputGroupsPerLine = inputLineLength / inputGroupLength;
 
-    static inline constexpr char ConfigGroupId[] = "ByteArrayXxencodingStreamEncoder";
+    static const QString ConfigGroupId;
 
 public:
     ByteArrayXxencodingStreamEncoder();
