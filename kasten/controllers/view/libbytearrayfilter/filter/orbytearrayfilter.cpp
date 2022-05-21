@@ -14,7 +14,7 @@
 #include <KConfigGroup>
 #include <KLocalizedString>
 
-static constexpr char OrFilterConfigGroupId[] = "OR";
+static const QString OrFilterConfigGroupId = QStringLiteral("OR");
 
 OrByteArrayFilter::OrByteArrayFilter()
     : AbstractByteArrayFilter(

@@ -18,7 +18,7 @@
 namespace Okteta {
 class Bookmark;
 }
-template <class T> class QVector;
+template <class T> class QList;
 
 namespace Kasten {
 
@@ -65,7 +65,7 @@ public:
 private Q_SLOTS:
     void onHasBookmarksChanged(bool hasBookmarks);
     void onBookmarksChanged();
-    void onBookmarksChanged(const QVector<int>& bookmarkIndizes);
+    void onBookmarksChanged(const QList<int>& bookmarkIndizes);
 //     void onHeadVersionChanged( int newHeadVersionIndex );
 //     void onHeadVersionDataChanged( const DocumentVersionData &newVersionData );
     void onOffsetCodingChanged(int offsetCoding);

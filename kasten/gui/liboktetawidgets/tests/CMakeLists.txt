@@ -20,7 +20,8 @@ ecm_add_test(
     LINK_LIBRARIES
         OktetaWidgetsSourcesTestShim
         charcodecs
-        Qt5::Test
+        Qt6::Core5Compat
+        Qt6::Test
 )
 
 ecm_add_test(
@@ -31,7 +32,8 @@ ecm_add_test(
     LINK_LIBRARIES
         OktetaWidgetsSourcesTestShim
         charcodecs
-        Qt5::Test
+        Qt6::Core5Compat
+        Qt6::Test
 )
 
 ecm_add_test(
@@ -43,7 +45,8 @@ ecm_add_test(
     LINK_LIBRARIES
         OktetaWidgetsSourcesTestShim
         charcodecs
-        Qt5::Test
+        Qt6::Core5Compat
+        Qt6::Test
 )
 
 ecm_add_test(
@@ -54,7 +57,8 @@ ecm_add_test(
     LINK_LIBRARIES
         OktetaWidgetsSourcesTestShim
         charcodecs
-        Qt5::Test
+        Qt6::Core5Compat
+        Qt6::Test
 )
 
 ecm_add_test(
@@ -65,7 +69,8 @@ ecm_add_test(
     LINK_LIBRARIES
         OktetaWidgetsSourcesTestShim
         charcodecs
-        Qt5::Test
+        Qt6::Core5Compat
+        Qt6::Test
 )
 
 ecm_add_test(
@@ -84,6 +89,7 @@ ecm_add_test(
         OktetaWidgetsSourcesTestShim
         charcodecs
         valuecodecs
-        Qt5::Gui
-        Qt5::Test
+        Qt6::Gui
+        Qt6::Core5Compat
+        Qt6::Test
 )
