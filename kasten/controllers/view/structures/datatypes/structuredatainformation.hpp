@@ -17,7 +17,7 @@ class StructureDataInformation : public DataInformationWithChildren
 
 public:
     explicit StructureDataInformation(const QString& name,
-                                      const QVector<DataInformation*>& children = QVector<DataInformation*>(),
+                                      const QList<DataInformation*>& children = QList<DataInformation*>(),
                                       DataInformation* parent = nullptr);
     ~StructureDataInformation() override;
 
@@ -27,7 +27,7 @@ public:
 
     BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const override;
 
-    static bool readChildren(const QVector<DataInformation*>& children,
+    static bool readChildren(const QList<DataInformation*>& children,
                              const Okteta::AbstractByteArrayModel* input,
                              Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset, qint64* readBitsPtr,
                              TopLevelDataInformation* top);

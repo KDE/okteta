@@ -54,7 +54,7 @@ void UnionDataInformationTest::testSize()
 
     UnionDataInformation empty(QStringLiteral("empty"));
     QCOMPARE(empty.size(), BitCount32(0));
-    QVector<DataInformation*> size54;
+    QList<DataInformation*> size54;
     size54 << PrimitiveFactory::newInstance(QStringLiteral("8"), PrimitiveDataType::Bool8, lwc);
     size54 << PrimitiveFactory::newInstance(QStringLiteral("16"), PrimitiveDataType::Int16, lwc);
     size54 << PrimitiveFactory::newInstance(QStringLiteral("32"), PrimitiveDataType::Float, lwc);
@@ -71,7 +71,7 @@ void UnionDataInformationTest::testReadData1()
     PrimitiveDataInformation* u32 = PrimitiveFactory::newInstance(QStringLiteral("32"), PrimitiveDataType::UInt32, lwc);
     PrimitiveDataInformation* i16 = PrimitiveFactory::newInstance(QStringLiteral("16"), PrimitiveDataType::Int16, lwc);
     auto* u54 = new UnsignedBitfieldDataInformation(QStringLiteral("54"), 54);
-    QVector<DataInformation*> children;
+    QList<DataInformation*> children;
     children << b8 << u32 << i16 << u54;
     auto* un = new UnionDataInformation(QStringLiteral("un"), children);
     un->setByteOrder(DataInformation::DataInformationEndianness::EndiannessLittle);

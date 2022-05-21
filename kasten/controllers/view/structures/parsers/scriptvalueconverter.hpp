@@ -10,7 +10,7 @@
 class QString;
 class QScriptValue;
 class ScriptLogger;
-template <typename T> class QVector;
+template <typename T> class QList;
 class DataInformation;
 
 namespace ScriptValueConverter {
@@ -20,7 +20,7 @@ namespace ScriptValueConverter {
 DataInformation* convert(const QScriptValue& value, const QString& name, ScriptLogger* logger,
                          DataInformation* parent = nullptr);
 /** If the value is a list of elements or an object with many elements */
-QVector<DataInformation*> convertValues(const QScriptValue& value, ScriptLogger* logger,
+QList<DataInformation*> convertValues(const QScriptValue& value, ScriptLogger* logger,
                                         DataInformation* parent = nullptr);
 
 }

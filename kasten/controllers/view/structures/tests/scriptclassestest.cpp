@@ -50,7 +50,7 @@ class ScriptClassesTest : public QObject
     using PropertyPair = QPair<QString, QScriptValue::PropertyFlags>;
 
 private:
-    static void checkProperties(const QVector<PropertyPair>& expected, DataInformation* data,
+    static void checkProperties(const QList<PropertyPair>& expected, DataInformation* data,
                                 const char* tag);
     static PropertyPair pair(const char* name,
                              QScriptValue::PropertyFlags flags = QScriptValue::Undeletable | QScriptValue::ReadOnly)
@@ -70,17 +70,17 @@ private Q_SLOTS:
     void testScriptValueContents();
 
 private:
-    QVector<PropertyPair> commonProperties;
-    QVector<PropertyPair> primitiveProperties;
-    QVector<TopLevelDataInformation*> primitives;
+    QList<PropertyPair> commonProperties;
+    QList<PropertyPair> primitiveProperties;
+    QList<TopLevelDataInformation*> primitives;
 
-    QVector<PropertyPair> enumProperties;
+    QList<PropertyPair> enumProperties;
     EnumDataInformation* enumData;
     std::unique_ptr<TopLevelDataInformation> enumDataTop;
     FlagDataInformation* flagData;
     std::unique_ptr<TopLevelDataInformation> flagDataTop;
 
-    QVector<PropertyPair> bitfieldProperties;
+    QList<PropertyPair> bitfieldProperties;
     SignedBitfieldDataInformation* signedBitfield;
     std::unique_ptr<TopLevelDataInformation> signedBitfieldTop;
     UnsignedBitfieldDataInformation* unsignedBitfield;
@@ -88,17 +88,17 @@ private:
     BoolBitfieldDataInformation* boolBitfield;
     std::unique_ptr<TopLevelDataInformation> boolBitfieldTop;
 
-    QVector<PropertyPair> structUnionProperties; // without children
+    QList<PropertyPair> structUnionProperties; // without children
     StructureDataInformation* structData;
     std::unique_ptr<TopLevelDataInformation> structDataTop;
     UnionDataInformation* unionData;
     std::unique_ptr<TopLevelDataInformation> unionDataTop;
 
-    QVector<PropertyPair> arrayProperties; // without children
+    QList<PropertyPair> arrayProperties; // without children
     ArrayDataInformation* arrayData;
     std::unique_ptr<TopLevelDataInformation> arrayDataTop;
 
-    QVector<PropertyPair> stringProperties; // without children
+    QList<PropertyPair> stringProperties; // without children
     StringDataInformation* stringData;
     std::unique_ptr<TopLevelDataInformation> stringDataTop;
 
@@ -234,7 +234,7 @@ void ScriptClassesTest::testScriptValueContents()
     QCOMPARE(DefaultScriptClass::toDataInformation(val), data);
 }
 
-void ScriptClassesTest::checkProperties(const QVector<PropertyPair>& expected,
+void ScriptClassesTest::checkProperties(const QList<PropertyPair>& expected,
                                         DataInformation* data, const char* tag)
 {
     // check in updating mode

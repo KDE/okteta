@@ -10,6 +10,7 @@
 
 // Qt
 #include <QDialog>
+#include <QStringList>
 #include <QMap>
 
 namespace Kasten {
@@ -17,7 +18,6 @@ class StructureDefinitionFile;
 }
 class StructureAddRemoveWidget;
 class StructureEnabledList;
-class QStringList;
 
 class StructuresSelectionDialog : public QDialog
 {

@@ -17,7 +17,7 @@
 #include <utility>
 
 TaggedUnionDataInformation::TaggedUnionDataInformation(const QString& name, DataInformation* parent)
-    : DataInformationWithChildren(name, QVector<DataInformation*>(), parent)
+    : DataInformationWithChildren(name, QList<DataInformation*>(), parent)
 {
 }
 
@@ -61,7 +61,7 @@ void TaggedUnionDataInformation::appendDefaultField(DataInformation* field, bool
     }
 }
 
-void TaggedUnionDataInformation::setAlternatives(const QVector<FieldInfo>& alternatives, bool emitSignal)
+void TaggedUnionDataInformation::setAlternatives(const QList<FieldInfo>& alternatives, bool emitSignal)
 {
     const uint oldChildCount = childCount();
     mLastIndex = -1;
@@ -138,13 +138,13 @@ qint64 TaggedUnionDataInformation::readData(const Okteta::AbstractByteArrayModel
     TopLevelDataInformation* top = topLevelDataInformation();
     Q_CHECK_PTR(top);
 
-    const QVector<DataInformation*>& oldChildren = currentChildren();
+    const QList<DataInformation*>& oldChildren = currentChildren();
 
     qint64 readBits = 0;
     mWasAbleToRead = StructureDataInformation::readChildren(mChildren,
                                                             input, address, bitsRemaining, bitOffset, &readBits, top);
     mLastIndex = determineSelection(top);
-    const QVector<DataInformation*>& others = currentChildren();
+    const QList<DataInformation*>& others = currentChildren();
     // check whether we have different children now, if yes we have to emit child count changed
     if (oldChildren != others) {
         const int fixedSize = mChildren.size();
@@ -186,7 +186,7 @@ BitCount64 TaggedUnionDataInformation::childPosition(const DataInformation* chil
     }
 
     if (!found) {
-        const QVector<DataInformation*> others = currentChildren();
+        const QList<DataInformation*> others = currentChildren();
         for (auto* current : others) {
             if (current == child) {
                 found = true;
@@ -210,7 +210,7 @@ BitCount32 TaggedUnionDataInformation::size() const
         total += child->size();
     }
 
-    const QVector<DataInformation*> others = currentChildren();
+    const QList<DataInformation*> others = currentChildren();
     for (auto* other : others) {
         total += other->size();
     }
@@ -236,7 +236,7 @@ int TaggedUnionDataInformation::indexOf(const DataInformation* const data) const
         index++;
     }
 
-    const QVector<DataInformation*> others = currentChildren();
+    const QList<DataInformation*> others = currentChildren();
     for (auto* other : others) {
         if (other == data) {
             return index;
@@ -254,7 +254,7 @@ DataInformation* TaggedUnionDataInformation::childAt(unsigned int index) const
     if (index < permanentChildCount) {
         return mChildren.at(index);
     }
-    const QVector<DataInformation*> others = currentChildren();
+    const QList<DataInformation*> others = currentChildren();
     if (index < permanentChildCount + others.size()) {
         return others.at(index - permanentChildCount);
     }

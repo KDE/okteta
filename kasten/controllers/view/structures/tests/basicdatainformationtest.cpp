@@ -82,8 +82,8 @@ private Q_SLOTS:
     void cleanupTestCase();
 
 private:
-    QVector<PrimitiveDataInformation*> primitives;
-    QVector<AbstractBitfieldDataInformation*> bitfields;
+    QList<PrimitiveDataInformation*> primitives;
+    QList<AbstractBitfieldDataInformation*> bitfields;
     TopLevelDataInformation* topLevel;
     StructureDataInformation* emptyStruct;
     StructureDataInformation* structWithChildren;
@@ -265,13 +265,13 @@ void BasicDataInformationTest::initTestCase()
     bitfields.append(new SignedBitfieldDataInformation(QStringLiteral("bitfield"), 24));
 
     emptyStruct = new StructureDataInformation(QStringLiteral("emptyStruct"));
-    QVector<DataInformation*> structChildren;
+    QList<DataInformation*> structChildren;
     structChildren << PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc)
                    << PrimitiveFactory::newInstance(QStringLiteral("prim2"), PrimitiveDataType::UInt64, lwc);
     structWithChildren = new StructureDataInformation(QStringLiteral("structWithChildren"), structChildren);
 
     emptyUnion = new UnionDataInformation(QStringLiteral("emptyUnion"));
-    QVector<DataInformation*> unionChildren;
+    QList<DataInformation*> unionChildren;
     unionChildren << PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc)
                   << PrimitiveFactory::newInstance(QStringLiteral("prim2"), PrimitiveDataType::UInt64, lwc);
     unionWithChildren = new UnionDataInformation(QStringLiteral("unionWithChildren"), unionChildren);

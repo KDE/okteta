@@ -20,7 +20,7 @@
 #include <utility>
 
 DataInformationWithChildren::DataInformationWithChildren(const QString& name,
-                                                         const QVector<DataInformation*>& children, DataInformation* parent)
+                                                         const QList<DataInformation*>& children, DataInformation* parent)
     : DataInformation(name, parent)
     , mChildren(children)
 {
@@ -121,7 +121,7 @@ void DataInformationWithChildren::calculateValidationState()
     }
 }
 
-void DataInformationWithChildren::setChildren(const QVector<DataInformation*>& newChildren)
+void DataInformationWithChildren::setChildren(const QList<DataInformation*>& newChildren)
 {
     // since we are replacing the children and the first few may be different emit
     // change to length zero and then to new length so that model gets updated correctly
@@ -147,7 +147,7 @@ void DataInformationWithChildren::setChildren(const QScriptValue& children)
         logError() << "attempting to set children to null/undefined.";
         return;
     }
-    QVector<DataInformation*> convertedVals =
+    QList<DataInformation*> convertedVals =
         ScriptValueConverter::convertValues(children, topLevelDataInformation()->logger());
     setChildren(convertedVals);
 }
@@ -184,7 +184,7 @@ void DataInformationWithChildren::appendChild(DataInformation* newChild, bool em
     }
 }
 
-void DataInformationWithChildren::appendChildren(const QVector<DataInformation*>& newChildren, bool emitSignal)
+void DataInformationWithChildren::appendChildren(const QList<DataInformation*>& newChildren, bool emitSignal)
 {
     if (newChildren.isEmpty()) {
         return;
@@ -240,11 +240,11 @@ QString DataInformationWithChildren::tooltipString() const
                                           validationMsg);
 }
 
-QVector<DataInformation*> DataInformationWithChildren::cloneList(const QVector<DataInformation*>& other,
+QList<DataInformation*> DataInformationWithChildren::cloneList(const QList<DataInformation*>& other,
                                                                  DataInformation* parent)
 {
     int count = other.size();
-    QVector<DataInformation*> ret;
+    QList<DataInformation*> ret;
     ret.reserve(count);
     for (int i = 0; i < count; ++i) {
         DataInformation* dat = other.at(i);

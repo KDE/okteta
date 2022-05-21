@@ -28,9 +28,9 @@ QStringList ScriptFileParser::parseStructureNames() const
     return {mPluginName};
 }
 
-QVector<TopLevelDataInformation*> ScriptFileParser::parseStructures() const
+QList<TopLevelDataInformation*> ScriptFileParser::parseStructures() const
 {
-    QVector<TopLevelDataInformation*> ret;
+    QList<TopLevelDataInformation*> ret;
 
     std::unique_ptr<QScriptEngine> engine = ScriptEngineInitializer::newEngine();
     auto* logger = new ScriptLogger();

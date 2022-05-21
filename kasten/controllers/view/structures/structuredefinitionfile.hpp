@@ -12,7 +12,7 @@
 #include <enumdefinition.hpp>
 // Qt
 #include <QString>
-#include <QVector>
+#include <QList>
 #include <QDir>
 #include <QStringList>
 #include <QDomNodeList>
@@ -47,7 +47,7 @@ public:
 
 public:
     [[nodiscard]]
-    QVector<TopLevelDataInformation*> structures() const;
+    QList<TopLevelDataInformation*> structures() const;
     [[nodiscard]]
     QStringList structureNames() const;
     [[nodiscard]]

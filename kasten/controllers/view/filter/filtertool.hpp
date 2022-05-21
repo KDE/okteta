@@ -31,7 +31,8 @@ class FilterTool : public AbstractTool
     Q_OBJECT
 
 private:
-    static inline constexpr char ConfigGroupId[] = "FilterTool";
+    static const QString ConfigGroupId;
+
     static inline constexpr char OperationConfigKey[] = "Operation";
 
 public:

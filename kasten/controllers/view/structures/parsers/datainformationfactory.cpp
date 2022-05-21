@@ -105,7 +105,7 @@ T* newEnumOrFlags(const EnumParsedData& pd)
 template <class T>
 T* newStructOrUnion(const StructOrUnionParsedData& supd)
 {
-    auto* structOrUnion = new T(supd.name, QVector<DataInformation*>(), supd.parent);
+    auto* structOrUnion = new T(supd.name, QList<DataInformation*>(), supd.parent);
     supd.children->setParent(structOrUnion);
     while (supd.children->hasNext()) {
         DataInformation* data = supd.children->next();
@@ -346,7 +346,7 @@ TaggedUnionDataInformation* DataInformationFactory::newTaggedUnion(const TaggedU
     }
     // verify alternatives
     bool alternativesValid = true;
-    QVector<TaggedUnionDataInformation::FieldInfo> altInfo;
+    QList<TaggedUnionDataInformation::FieldInfo> altInfo;
     altInfo.reserve(pd.alternatives.size());
     for (int i = 0; i < pd.alternatives.size(); ++i) {
         const TaggedUnionParsedData::Alternatives& fi = pd.alternatives.at(i);
@@ -363,7 +363,7 @@ TaggedUnionDataInformation* DataInformationFactory::newTaggedUnion(const TaggedU
                 alternativesValid = false;
             }
         }
-        QVector<DataInformation*> children;
+        QList<DataInformation*> children;
         while (fi.fields->hasNext()) {
             DataInformation* next = fi.fields->next();
             if (next) {

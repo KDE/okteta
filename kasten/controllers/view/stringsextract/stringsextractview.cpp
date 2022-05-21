@@ -62,7 +62,7 @@ StringsExtractView::StringsExtractView(StringsExtractTool* tool,
     mMinLengthSpinBox = new QSpinBox(this);
     mMinLengthSpinBox->setValue(mTool->minLength());
     mMinLengthSpinBox->setMinimum(MinimumStringLength);
-    connect(mMinLengthSpinBox, qOverload<int>(&QSpinBox::valueChanged),
+    connect(mMinLengthSpinBox, &QSpinBox::valueChanged,
             mTool, &StringsExtractTool::setMinLength);
     auto* labelledMinLengthSpinBox = new LabelledToolBarWidget(label, mMinLengthSpinBox, this);
     updateToolBar->addWidget(labelledMinLengthSpinBox);

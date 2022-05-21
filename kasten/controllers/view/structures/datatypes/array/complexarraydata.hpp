@@ -10,7 +10,7 @@
 // lib
 #include "abstractarraydata.hpp"
 // Qt
-#include <QVector>
+#include <QList>
 
 class DataInformation;
 class ScriptHandlerInfo;
@@ -58,7 +58,7 @@ private:
     void appendChildren(uint from, uint to);
 
 private:
-    QVector<DataInformation*> mChildren;
+    QList<DataInformation*> mChildren;
 };
 
 #endif // KASTEN_COMPLEXARRAYDATA_HPP

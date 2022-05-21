@@ -128,11 +128,11 @@ QStringList OsdParser::parseStructureNames() const
     return ret;
 }
 
-QVector<TopLevelDataInformation*> OsdParser::parseStructures() const
+QList<TopLevelDataInformation*> OsdParser::parseStructures() const
 {
     QFileInfo fileInfo(mAbsolutePath);
 
-    QVector<TopLevelDataInformation*> structures;
+    QList<TopLevelDataInformation*> structures;
     auto rootLogger = std::make_unique<ScriptLogger>(); // only needed in we get an error right now
     QDomDocument document = openDoc(rootLogger.get());
     if (document.isNull()) {
@@ -156,7 +156,7 @@ QVector<TopLevelDataInformation*> OsdParser::parseStructures() const
         }
         std::unique_ptr<QScriptEngine> eng = ScriptEngineInitializer::newEngine(); // we need this for dynamic arrays
         auto* logger = new ScriptLogger();
-        QVector<EnumDefinition::Ptr> enums = parseEnums(rootElem, logger);
+        QList<EnumDefinition::Ptr> enums = parseEnums(rootElem, logger);
         OsdParserInfo info(QString(), logger, nullptr, eng.get(), enums);
 
         DataInformation* data = parseElement(elem, info);
@@ -189,9 +189,9 @@ QVector<TopLevelDataInformation*> OsdParser::parseStructures() const
 }
 
 // TODO make type depend on the user not the definition
-QVector<EnumDefinition::Ptr> OsdParser::parseEnums(const QDomElement& rootElem, ScriptLogger* logger)
+QList<EnumDefinition::Ptr> OsdParser::parseEnums(const QDomElement& rootElem, ScriptLogger* logger)
 {
-    QVector<EnumDefinition::Ptr> ret;
+    QList<EnumDefinition::Ptr> ret;
     for (QDomElement elem = rootElem.firstChildElement(); !elem.isNull(); elem = elem.nextSiblingElement()) {
         if (elem.tagName() != TYPE_ENUMDEF()) {
             continue;

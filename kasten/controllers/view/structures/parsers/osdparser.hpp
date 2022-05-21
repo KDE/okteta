@@ -29,7 +29,7 @@ class ScriptLogger;
 struct OsdParserInfo : public ParserInfo
 {
     inline OsdParserInfo(const QString& name, ScriptLogger* logger, DataInformation* parent,
-                         QScriptEngine* engine, const QVector<EnumDefinition::Ptr>& enums)
+                         QScriptEngine* engine, const QList<EnumDefinition::Ptr>& enums)
         : ParserInfo(name, logger, parent, engine)
         , enums(enums)
     {}
@@ -38,7 +38,7 @@ struct OsdParserInfo : public ParserInfo
 
     OsdParserInfo& operator=(const OsdParserInfo&) = delete;
 
-    QVector<EnumDefinition::Ptr> enums;
+    QList<EnumDefinition::Ptr> enums;
 };
 
 class OsdParser : public AbstractStructureParser
@@ -51,7 +51,7 @@ public:
     ~OsdParser() override;
 
     QStringList parseStructureNames() const override;
-    QVector<TopLevelDataInformation*> parseStructures() const override;
+    QList<TopLevelDataInformation*> parseStructures() const override;
 
     static DataInformation* parseElement(const QDomElement& elem, const OsdParserInfo& oldInfo);
 
@@ -75,7 +75,7 @@ private:
 
     static EnumDefinition::Ptr findEnum(const QString& defName, const OsdParserInfo& info);
 
-    static QVector<EnumDefinition::Ptr> parseEnums(const QDomElement& rootElem, ScriptLogger* logger);
+    static QList<EnumDefinition::Ptr> parseEnums(const QDomElement& rootElem, ScriptLogger* logger);
 
     QDomDocument openDoc(ScriptLogger* logger) const;
     QDomDocument openDocFromFile(ScriptLogger* logger) const;
