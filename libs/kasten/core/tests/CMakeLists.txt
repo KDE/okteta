@@ -18,9 +18,10 @@ target_sources(kastencoretestutil
 )
 target_link_libraries(kastencoretestutil
     PUBLIC
-        Qt5::Core
+        Qt6::Core
     PRIVATE
-        Qt5::Test
+        Qt6::Core5Compat
+        Qt6::Test
 )
 
 ########### io ###############
@@ -28,10 +29,10 @@ target_link_libraries(kastencoretestutil
 add_library(kastencoretestio STATIC)
 target_link_libraries(kastencoretestio
     PUBLIC
-        Qt5::Core
+        Qt6::Core
     PRIVATE
-        KF5::I18n
-        KF5::CoreAddons
+        KF6::I18n
+        KF6::CoreAddons
 )
 target_sources(kastencoretestio
     PRIVATE
@@ -54,7 +55,7 @@ ecm_add_test(
     NAME_PREFIX libkasten-core-
     LINK_LIBRARIES
         KastenCore
-        Qt5::Test
+        Qt6::Test
 )
 
 ########### testdocumentfilesynchronizertest ###############
@@ -69,7 +70,7 @@ ecm_add_test(
         kastencoretestio
         KastenCore
         kastencoretestutil
-        Qt5::Test
+        Qt6::Test
 )
 
 ############ testdocumentfilesynchronizerfactorytest ###############
@@ -85,7 +86,7 @@ ecm_add_test(
         kastencoretestio
         KastenCore
         kastencoretestutil
-        Qt5::Test
+        Qt6::Test
 )
 
 ########### documentmanagertest ###############
@@ -97,5 +98,5 @@ ecm_add_test(
     NAME_PREFIX libkasten-core-
     LINK_LIBRARIES
         KastenCore
-        Qt5::Test
+        Qt6::Test
 )

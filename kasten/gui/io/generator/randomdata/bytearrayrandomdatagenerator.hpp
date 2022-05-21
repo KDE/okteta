@@ -46,7 +46,7 @@ class ByteArrayRandomDataGenerator : public AbstractModelDataGenerator
     Q_OBJECT
 
 private:
-    static inline constexpr char ConfigGroupId[] = "ByteArrayRandomDataGenerator";
+    static const QString ConfigGroupId;
 
 public:
     ByteArrayRandomDataGenerator();

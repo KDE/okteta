@@ -15,8 +15,9 @@
 // Std
 #include <memory>
 
-class QStringList;
+template <class T> class QList;
 class QString;
+using QStringList = QList<QString>;
 class QChar;
 
 namespace Okteta {

@@ -12,6 +12,8 @@
 // lib
 #include "controller/abstractwheelcontroller.hpp"
 #include "bytearraytablelayout.hpp"
+// Okteta core
+#include <Okteta/Bookmark>
 // Qt
 #include <QMimeData>
 

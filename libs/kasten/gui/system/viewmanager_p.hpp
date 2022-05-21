@@ -30,18 +30,18 @@ public:
     void setViewFactory(std::unique_ptr<AbstractViewFactory>&& factory);
 
     void createCopyOfView(AbstractView* view, Qt::Alignment alignment = {});
-    void removeViews(const QVector<AbstractView*>& views);
+    void removeViews(const QList<AbstractView*>& views);
 
 public:
-    QVector<AbstractView*> views() const;
+    QList<AbstractView*> views() const;
     AbstractView* viewByWidget(QWidget* widget) const;
 
 public:
     ModelCodecViewManager* codecViewManager() const;
 
 public:
-    void createViewsFor(const QVector<Kasten::AbstractDocument*>& documents);
-    void removeViewsFor(const QVector<Kasten::AbstractDocument*>& documents);
+    void createViewsFor(const QList<Kasten::AbstractDocument*>& documents);
+    void removeViewsFor(const QList<Kasten::AbstractDocument*>& documents);
 
 private:
     ViewManager* const q_ptr;
@@ -49,7 +49,7 @@ private:
     // TODO: remove into own singleton
     const std::unique_ptr<ModelCodecViewManager> mCodecViewManager;
 
-    QVector<AbstractView*> mViewList;
+    QList<AbstractView*> mViewList;
     std::unique_ptr<AbstractViewFactory> mFactory;
 
     Q_DECLARE_PUBLIC(ViewManager)

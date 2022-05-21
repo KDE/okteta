@@ -241,10 +241,10 @@ void AbstractByteArrayViewPrivate::setByteArrayModel(AbstractByteArrayModel* byt
 
     auto* bookmarks = qobject_cast<Bookmarkable*>(mByteArrayModel);
     if (bookmarks) {
-        QObject::connect(mByteArrayModel, SIGNAL(bookmarksAdded(QVector<Okteta::Bookmark>)),
-                         q, SLOT(onBookmarksChange(QVector<Okteta::Bookmark>)));
-        QObject::connect(mByteArrayModel, SIGNAL(bookmarksRemoved(QVector<Okteta::Bookmark>)),
-                         q, SLOT(onBookmarksChange(QVector<Okteta::Bookmark>)));
+        QObject::connect(mByteArrayModel, SIGNAL(bookmarksAdded(QList<Okteta::Bookmark>)),
+                         q, SLOT(onBookmarksChange(QList<Okteta::Bookmark>)));
+        QObject::connect(mByteArrayModel, SIGNAL(bookmarksRemoved(QList<Okteta::Bookmark>)),
+                         q, SLOT(onBookmarksChange(QList<Okteta::Bookmark>)));
     }
     auto* versionControl = qobject_cast<Versionable*>(mByteArrayModel);
     if (versionControl) {
@@ -1105,7 +1105,7 @@ bool AbstractByteArrayViewPrivate::event(QEvent* event)
                (event->type() == QEvent::MouseButtonRelease)) {
         // discard any events synthesized from touch input
         auto* mouseEvent = static_cast<QMouseEvent*>(event);
-        if (mouseEvent->source() == Qt::MouseEventSynthesizedByQt) {
+        if (mouseEvent->device()->type() != QInputDevice::DeviceType::Mouse) {
             event->accept();
             return true;
         }
@@ -1193,7 +1193,7 @@ bool AbstractByteArrayViewPrivate::viewportEvent(QEvent* event)
                (event->type() == QEvent::MouseButtonRelease)) {
         // discard any events synthesized from touch input
         auto* mouseEvent = static_cast<QMouseEvent*>(event);
-        if (mouseEvent->source() == Qt::MouseEventSynthesizedByQt) {
+        if (mouseEvent->device()->type() != QInputDevice::DeviceType::Mouse) {
             event->accept();
             return true;
         }
@@ -1304,7 +1304,7 @@ void AbstractByteArrayViewPrivate::timerEvent(QTimerEvent* timerEvent)
     q->QAbstractScrollArea::timerEvent(timerEvent);
 }
 
-void AbstractByteArrayViewPrivate::onBookmarksChange(const QVector<Bookmark>& bookmarks)
+void AbstractByteArrayViewPrivate::onBookmarksChange(const QList<Bookmark>& bookmarks)
 {
     for (const Bookmark& bookmark : bookmarks) {
         const Address position = bookmark.offset();
