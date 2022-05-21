@@ -45,7 +45,7 @@ public:
 
 public: // If::WidgetsDockable API
     [[nodiscard]]
-    QVector<ToolViewDockWidget*> dockWidgets() const override;
+    QList<ToolViewDockWidget*> dockWidgets() const override;
 
 protected:
     [[nodiscard]]
