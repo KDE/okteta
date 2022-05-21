@@ -29,7 +29,7 @@ private:
     // TODO: move config store/restore to tool
     static inline constexpr int DefaultInsertCount = 1;
 
-    static inline constexpr char ConfigGroupId[] = "ByteTableTool";
+    static const QString ConfigGroupId;
     static inline constexpr char InsertCountConfigKey[] = "InsertCount";
 
 public:

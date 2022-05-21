@@ -87,7 +87,7 @@ private:
 
     static const char hexDigits[16];
 
-    static inline constexpr char ConfigGroupId[] = "ByteArraySRecordStreamEncoder";
+    static const QString ConfigGroupId;
 
 private:
     [[nodiscard]]
