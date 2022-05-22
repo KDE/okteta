@@ -115,6 +115,8 @@ QStringList OsdParser::parseStructureNames() const
             || tag == TYPE_UNION() || tag == TYPE_ENUM() || tag == TYPE_FLAGS() || tag == TYPE_STRING()) {
             // TODO allow e.g. <uint8 name="asfd">
             ret.append(readProperty(childElement, PROPERTY_NAME(), i18n("<invalid name>")));
+        } else if (tag == TYPE_ENUMDEF()) {
+            // skip enum defs
         } else {
             rootLogger->error(QString()).nospace() << "Unknown tag name in plugin " << mPluginName << " :"
                                                    << tag;
