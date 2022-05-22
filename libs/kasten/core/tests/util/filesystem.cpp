@@ -9,7 +9,7 @@
 #include "filesystem.hpp"
 
 // Qt
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QDir>
 #include <QFile>
 #include <QTest>
@@ -64,7 +64,7 @@ void TestFileSystem::_removeDir(const QString& path)
 
     QCOMPARE((int)localDir.entryList(QDir::Files).count(), 0);
     QString subDirectory = path;
-    subDirectory.remove(QRegExp(QStringLiteral("^.*/")));
+    subDirectory.remove(QRegularExpression(QStringLiteral("^.*/")));
     localDir.cdUp();
     localDir.rmpath(subDirectory);
 }

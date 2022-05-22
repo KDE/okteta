@@ -5,21 +5,23 @@
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
+
 #include "structureaddremovewidget.hpp"
+
 #include "../structurestool.hpp"
 #include "../structuresmanager.hpp"
 #include "../structuredefinitionfile.hpp"
 #include "../structlogging.hpp"
-
+// KF
+#include <KLocalizedString>
+#include <KConfigDialogManager>
+// Qt
 #include <QPushButton>
 #include <QLabel>
 #include <QLayout>
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
-
-#include <QRegExp>
-#include <KLocalizedString>
-#include <KConfigDialogManager>
+#include <QRegularExpression>
 // Std
 #include <utility>
 
@@ -88,12 +90,13 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(const QStringList& selected, 
     buildAvailableList();
 
     // already loaded defs:
-    QRegExp regex(QStringLiteral("'(.+)':'(.+)'"));
+    QRegularExpression regex(QStringLiteral("'(.+)':'(.+)'"));
     for (const QString& s : selected) {
-        int pos = regex.indexIn(s);
-        if (pos > -1) {
-            QString pluginName = regex.cap(1);
-            QString structName = regex.cap(2);
+        QRegularExpressionMatch match = regex.match(s);
+        if (match.hasMatch()) {
+            const QString pluginName = match.captured(1);
+            const QString structName = match.captured(2);
+            qDebug() << "HHHHEEEEHE" <<s << pluginName << structName;
             if (structName == QLatin1String("*")) {
                 // add all of them
                 for (int i = 0; i < mTreeAvailable->topLevelItemCount(); i++) {

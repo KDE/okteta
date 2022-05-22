@@ -46,9 +46,9 @@ void AddressValidator::setCodec(Coding codecId)
     mValueCodec = ValueCodec::createCodec((Okteta::ValueCoding)mCodecId);
 }
 
-const QRegExp AddressValidator::expressionRegex =
-    QRegExp(QStringLiteral("[0-9a-fx\\+/\\s\\-\\*]+"),
-            Qt::CaseInsensitive, QRegExp::RegExp2); // FIXME this is way too simple, only there to test
+const QRegularExpression AddressValidator::expressionRegex =
+    QRegularExpression(QStringLiteral("\\A[0-9a-fx\\+/\\s\\-\\*]+\\Z"),
+            QRegularExpression::CaseInsensitiveOption); // FIXME this is way too simple, only there to test
 
 QValidator::State AddressValidator::validate(QString& string, int& pos) const
 {
@@ -57,7 +57,7 @@ QValidator::State AddressValidator::validate(QString& string, int& pos) const
     State result = QValidator::Acceptable;
     if (mCodecId == ExpressionCoding) {
         string = string.trimmed();
-        if (!expressionRegex.exactMatch(string)) {
+        if (!expressionRegex.match(string).hasMatch()) {
             result = QValidator::Invalid;
         }
         // only prefix has been typed:

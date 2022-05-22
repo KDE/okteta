@@ -14,7 +14,7 @@
 #include <Okteta/Address>
 // Qt
 #include <QValidator>
-#include <QRegExp>
+#include <QRegularExpression>
 
 namespace Okteta {
 
@@ -62,7 +62,7 @@ private:
     Coding mCodecId;
     ValueCodec* mValueCodec;
 
-    static const QRegExp expressionRegex;
+    static const QRegularExpression expressionRegex;
 };
 
 }

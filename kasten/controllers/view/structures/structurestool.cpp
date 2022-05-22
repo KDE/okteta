@@ -21,6 +21,7 @@
 #include <KLocalizedString>
 // Qt
 #include <QModelIndex>
+#include <QRegularExpression>
 
 #include "script/scripthandler.hpp"
 #include "datatypes/datainformation.hpp"
@@ -239,15 +240,15 @@ void StructuresTool::setSelectedStructuresInView()
     mInvalidData.clear();
     Q_EMIT dataCleared();
 
-    QRegExp regex(QStringLiteral("'(.+)':'(.+)'"));
+    QRegularExpression regex(QStringLiteral("'(.+)':'(.+)'"));
     QStringList loadedStructs = StructureViewPreferences::loadedStructures();
     qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "loadedStructs " << loadedStructs;
     for (int i = 0; i < loadedStructs.size(); ++i) {
         const QString& s = loadedStructs.at(i);
-        int pos = regex.indexIn(s);
-        if (pos > -1) {
-            QString pluginName = regex.cap(1);
-            QString name = regex.cap(2);
+        QRegularExpressionMatch match = regex.match(s);
+        if (match.hasMatch()) {
+            const QString pluginName = match.captured(1);
+            const QString name = match.captured(2);
             // qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "pluginName=" << path << " structureName=" << name;
             StructureDefinitionFile* def = mManager->definition(pluginName);
             if (!def) {

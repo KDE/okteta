@@ -17,7 +17,7 @@
 #include <QDateTime>
 #include <QPainter>
 #include <QFontMetrics>
-#include <QRegExp>
+#include <QRegularExpression>
 
 HeaderFooterFrameRenderer::HeaderFooterFrameRenderer(const PrintInfo* info)
     : mInfo(info)
@@ -91,7 +91,7 @@ void HeaderFooterFrameRenderer::prepare()
 
     // create text with globally replaced tags
     const int sizeOfTag = 2;
-    QRegExp tagsPattern(QStringLiteral("%([dDhyYuUfFP])"));
+    QRegularExpression tagsPattern(QStringLiteral("%([dDhyYuUfFP])"));
 
     mGloballyReplacedTextList.clear();
 
@@ -99,7 +99,7 @@ void HeaderFooterFrameRenderer::prepare()
         QString text = mOriginalTextList.at(i);
         int pos = 0;
         while (true) {
-            pos = tagsPattern.indexIn(text, pos);
+            pos = text.indexOf(tagsPattern, pos);
             if (pos < 0) {
                 break;
             }
