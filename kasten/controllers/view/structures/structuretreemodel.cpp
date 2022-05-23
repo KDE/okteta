@@ -134,9 +134,7 @@ bool StructureTreeModel::setData(const QModelIndex& index, const QVariant& value
 
     auto* item = static_cast<DataInformation*> (index.internalPointer());
     bool change = mTool->setData(value, role, item, index.row());
-    if (change) {
-        emit dataChanged(index, index);
-    }
+
     return change;
 }
 
