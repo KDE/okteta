@@ -112,6 +112,7 @@ qint64 Utf32StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addr
     mEofReached = false;
     if (((mMode & CharCount) && mLength.maxChars == 0)
         || ((mMode & ByteCount) && mLength.maxBytes < 2)) {
+        mCodePoints.clear();
         return 0;
     }
 
