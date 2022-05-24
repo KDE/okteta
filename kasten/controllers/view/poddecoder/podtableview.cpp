@@ -16,12 +16,17 @@
 #include <KComboBox>
 #include <KLocalizedString>
 #include <KMessageBox>
+#include <KStandardAction>
 // Qt
 #include <QLabel>
 #include <QLayout>
 #include <QCheckBox>
 #include <QTreeView>
 #include <QHeaderView>
+#include <QMenu>
+#include <QMimeData>
+#include <QClipboard>
+#include <QApplication>
 #include <QFocusEvent>
 #include <QFontMetrics>
 
@@ -43,18 +48,22 @@ PODTableView::PODTableView(PODDecoderTool* tool, QWidget* parent)
     mPODTableView->setItemsExpandable(false);
     mPODTableView->setUniformRowHeights(true);
     mPODTableView->setAllColumnsShowFocus(true);
-    mPODTableView->setItemDelegate(new PODDelegate(mTool, this));
     mPODTableView->setEditTriggers(QAbstractItemView::EditKeyPressed | QAbstractItemView::DoubleClicked);
     mPODTableView->setDragEnabled(true);
     mPODTableView->setSortingEnabled(false);
     mPODTableView->setModel(mPODTableModel);
     mPODTableView->installEventFilter(this);
+    mPODTableView->setContextMenuPolicy(Qt::CustomContextMenu);
+    mPODDelegate = new PODDelegate(mTool, this);
+    mPODTableView->setItemDelegate(mPODDelegate);
     QHeaderView* header = mPODTableView->header();
     header->setSectionResizeMode(QHeaderView::Interactive);
     header->setStretchLastSection(false);
     connect(mPODTableView->selectionModel(),
             &QItemSelectionModel::currentRowChanged,
             this, &PODTableView::onCurrentRowChanged);
+    connect(mPODTableView, &QWidget::customContextMenuRequested,
+            this, &PODTableView::onCustomContextMenuRequested);
 
     baseLayout->addWidget(mPODTableView, 10);
 
@@ -151,6 +160,20 @@ Answer PODTableView::query(int newValueSize, int oldValueSize, int sizeLeft)
     return answer;
 }
 
+void PODTableView::copyToClipboard()
+{
+    auto* action = static_cast<QAction*>(sender());
+    const int podId = action->data().toInt();
+
+    auto* mimeData = new QMimeData;
+
+    const QString displayText = mPODDelegate->displayText(mTool->value(podId), mPODTableView->locale());
+    mimeData->setText(displayText);
+    mimeData->setData(QStringLiteral("application/octet-stream"), mTool->bytes(podId));
+
+    QApplication::clipboard()->setMimeData(mimeData);
+}
+
 bool PODTableView::eventFilter(QObject* object, QEvent* event)
 {
     if (object == mPODTableView) {
@@ -182,6 +205,28 @@ bool PODTableView::eventFilter(QObject* object, QEvent* event)
     }
 
     return QWidget::eventFilter(object, event);
+}
+
+void PODTableView::onCustomContextMenuRequested(QPoint pos)
+{
+    const QModelIndex index = mPODTableView->indexAt(pos);
+    if (!index.isValid()) {
+        return;
+    }
+    const int podId = index.row();
+    if (mTool->value(podId).isNull()) {
+        return;
+    }
+
+    auto* menu = new QMenu(this);
+
+    // TODO: split into explicit "Copy As Data" and "Copy As Text"
+    auto* copyAction =  KStandardAction::copy(this, &PODTableView::copyToClipboard,  this);
+    copyAction->setShortcut(QKeySequence());
+    copyAction->setData(podId);
+    menu->addAction(copyAction);
+
+    menu->popup(mPODTableView->viewport()->mapToGlobal(pos));
 }
 
 void PODTableView::onCurrentRowChanged(const QModelIndex& current, const QModelIndex& previous)

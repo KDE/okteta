@@ -21,6 +21,7 @@ class QModelIndex;
 
 namespace Kasten {
 
+class PODDelegate;
 class PODTableModel;
 class PODDecoderTool;
 
@@ -44,6 +45,8 @@ public: // AbstractDifferentSizeDialog API
 
 private Q_SLOTS:
     void onCurrentRowChanged(const QModelIndex& current, const QModelIndex& previous);
+    void onCustomContextMenuRequested(QPoint pos);
+    void copyToClipboard();
 
 private:
     PODDecoderTool* mTool;
@@ -51,6 +54,7 @@ private:
     PODTableModel* mPODTableModel;
 
     QTreeView* mPODTableView;
+    PODDelegate* mPODDelegate;
     KComboBox* mByteOrderSelection;
     QCheckBox* mUnsignedAsHexCheck;
 

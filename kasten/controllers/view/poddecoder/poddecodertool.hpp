@@ -25,6 +25,8 @@ class CharCodec;
 class AbstractByteArrayModel;
 }
 
+class QByteArray;
+
 namespace Kasten {
 class AbstractDifferentSizeDialog;
 class ByteArrayView;
@@ -53,6 +55,7 @@ public:
     bool isApplyable() const; // candidate for AbstractTool API
     bool isReadOnly() const;
     QVariant value(int podId) const;
+    QByteArray bytes(int podId) const;
     QString nameOfPOD(int podId) const;
     int podCount() const;
 
