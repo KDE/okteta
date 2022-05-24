@@ -103,6 +103,7 @@ private:
     ByteArrayView* mByteArrayView = nullptr;
     Okteta::AbstractByteArrayModel* mByteArrayModel = nullptr;
     Okteta::Address mCursorIndex = 0;
+    Okteta::ArrayChangeMetricsList mArrayChangesWhileWriting;
 
     // settings
     QSysInfo::Endian mByteOrder;

@@ -274,7 +274,6 @@ QScriptValue StringDataInformation::childToScriptValue(uint index, QScriptEngine
 
 BitCount64 StringDataInformation::childPosition(const DataInformation* child, Okteta::Address start) const
 {
-    Q_UNUSED(start)
     Q_ASSERT(child->isDummy());
     Q_ASSERT(child->parent() == this);
     Q_ASSERT(child == mDummy.get());
@@ -286,7 +285,11 @@ BitCount64 StringDataInformation::childPosition(const DataInformation* child, Ok
         offs += mData->sizeAt(i);
     }
 
-    return offs;
+    if (mParent->isTopLevel()) {
+        return start * 8 + offs;
+    }
+
+    return mParent->asDataInformation()->childPosition(this, start) + offs;
 }
 
 QVariant StringDataInformation::data(int column, int role) const

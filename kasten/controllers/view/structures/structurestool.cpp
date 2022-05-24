@@ -135,22 +135,27 @@ bool StructuresTool::setData(const QVariant& value, int role, DataInformation* i
 
     TopLevelDataInformation* topLevel = item->topLevelDataInformation();
     const Okteta::Address structureStart = startAddress(topLevel);
+    // block immediate data updating
     mWritingData = true;
+
     bool ret = false;
     BitCount64 position = item->positionInFile(structureStart);
     const quint64 remainingBits = qMax(mByteArrayModel->size() * 8 - qint64(position), qint64(0));
     quint8 bitOffs = position % 8;
     ret = item->setData(value, mByteArrayModel, Okteta::Address(position / 8), remainingBits, bitOffs);
-    mWritingData = false; // finished
-    // XXX: this is inefficient, best would be to only update the changed value
-    updateData(Okteta::ArrayChangeMetricsList()); // update once after writing
+
+    // unblock updating and catch up
+    mWritingData = false;
+    updateData(mArrayChangesWhileWriting);
+    mArrayChangesWhileWriting.clear();
+
     return ret;
 }
 
 void StructuresTool::updateData(const Okteta::ArrayChangeMetricsList& list)
 {
     if (mWritingData) {
-        qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "currently writing data, won't update";
+        mArrayChangesWhileWriting.append(list);
         return;
     }
     if (!mByteArrayModel) {

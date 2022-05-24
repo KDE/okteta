@@ -111,7 +111,8 @@ qint64 Utf32StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addr
     uint count = 0;
     mEofReached = false;
     if (((mMode & CharCount) && mLength.maxChars == 0)
-        || ((mMode & ByteCount) && mLength.maxBytes < 2)) {
+        || ((mMode & ByteCount) && mLength.maxBytes < 4)) {
+        mCodePoints.clear();
         return 0;
     }
 
@@ -153,7 +154,7 @@ qint64 Utf32StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addr
             }
         }
         if (mMode & ByteCount) {
-            // divide by two in case someone set length to an odd number of bytes
+            // divide by four in case someone set length to an odd number of bytes
             if ((addr - address) / 4 >= Okteta::Address(mLength.maxBytes / 4)) {
                 terminate = true;
             }
