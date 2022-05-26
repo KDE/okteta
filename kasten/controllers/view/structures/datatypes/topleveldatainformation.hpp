@@ -50,14 +50,14 @@ public:
 
     using Ptr = QSharedPointer<TopLevelDataInformation>;
     using List = QVector<Ptr>;
-    static const quint64 INVALID_OFFSET;
+    static const Okteta::Address INVALID_OFFSET;
 
 public:
     void validate();
     /** Reads the necessary data from @p input
      *
      * @param input the byte array to read from
-     * @param address the starting offset to read from, or if an offset is locked, the locked offset
+     * @param address the starting offset to read from (will be ignored if the offset is locked)
      * @param changesList the list with changes to @p input, so that it is possible to check whether reading is necessary
      *      This parameter is only useful if the structure was locked to a specific position.
      * @param forceRead whether to always read data, ignoring the change list
@@ -72,7 +72,7 @@ public:
     void lockPositionToOffset(Okteta::Address offset, const Okteta::AbstractByteArrayModel* model);
     void unlockPosition(const Okteta::AbstractByteArrayModel* model);
     bool isLockedFor(const Okteta::AbstractByteArrayModel* model) const;
-    quint64 lockPositionFor(const Okteta::AbstractByteArrayModel* model) const;
+    Okteta::Address lockPositionFor(const Okteta::AbstractByteArrayModel* model) const;
     bool isLockedByDefault() const;
     void setDefaultLockOffset(Okteta::Address offset);
     int indexOf(const DataInformation* const data) const;
@@ -119,12 +119,12 @@ private:
      * QObject::destroyed() has to be connected to slot removeByteArrayModel()
      * so that no dangling pointers remain
      */
-    QHash<const Okteta::AbstractByteArrayModel*, quint64> mLockedPositions;
+    QHash<const Okteta::AbstractByteArrayModel*, Okteta::Address> mLockedPositions;
     int mIndex = -1;
     bool mValid : 1;
     bool mChildDataChanged : 1;
-    quint64 mDefaultLockOffset = INVALID_OFFSET;
-    quint64 mLastReadOffset = INVALID_OFFSET;
+    Okteta::Address mDefaultLockOffset = INVALID_OFFSET;
+    Okteta::Address mLastReadOffset = INVALID_OFFSET;
     Okteta::AbstractByteArrayModel* mLastModel = nullptr;
     QQueue<PointerDataInformation*> mDelayedRead;
 

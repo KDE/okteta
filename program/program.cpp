@@ -40,7 +40,6 @@
 #include <QVector>
 #include <QUrl>
 #include <QDir>
-#include <QLoggingCategory>
 
 namespace Kasten {
 

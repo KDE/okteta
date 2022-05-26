@@ -285,7 +285,7 @@ void StructuresTool::setSelectedStructuresInView()
 Okteta::Address StructuresTool::startAddress(const TopLevelDataInformation* data) const
 {
     if (data->isLockedFor(mByteArrayModel)) {
-        return Okteta::Address(data->lockPositionFor(mByteArrayModel));
+        return data->lockPositionFor(mByteArrayModel);
     }
 
     return mCursorIndex;

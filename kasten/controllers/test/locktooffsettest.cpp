@@ -26,7 +26,7 @@ private Q_SLOTS:
     void cleanupTestCase();
 
 private:
-    TopLevelDataInformation* newStructure(Okteta::AbstractByteArrayModel* lastModel, quint64 lastReadOffset);
+    TopLevelDataInformation* newStructure(Okteta::AbstractByteArrayModel* lastModel, Okteta::Address lastReadOffset);
 
 private:
     Okteta::ByteArrayModel* model;
@@ -87,7 +87,7 @@ void LockToOffsetTest::cleanupTestCase()
     delete model2;
 }
 
-TopLevelDataInformation* LockToOffsetTest::newStructure(Okteta::AbstractByteArrayModel* lastModel, quint64 lastReadOffset)
+TopLevelDataInformation* LockToOffsetTest::newStructure(Okteta::AbstractByteArrayModel* lastModel, Okteta::Address lastReadOffset)
 {
     QVector<DataInformation*> children;
     children.append(new UInt16DataInformation(QStringLiteral("first")));
@@ -178,8 +178,8 @@ void LockToOffsetTest::testReadingNecessary()
     QFETCH(Okteta::ArrayChangeMetricsList, changes);
     QFETCH(Okteta::Address, address);
     QFETCH(bool, expected);
-    if (!structure->mLockedPositions.contains(model)) {
-        structure->newModelActivated(model); // add the model, otherwise we crash
+    if (structure->isLockedFor(model)) {
+        address = structure->lockPositionFor(model);
     }
     QCOMPARE(structure->isReadingNecessary(model, address, changes), expected);
     structure->read(model, address, changes, false);
