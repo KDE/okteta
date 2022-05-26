@@ -79,6 +79,11 @@ void TopLevelDataInformation::read(Okteta::AbstractByteArrayModel* input, Okteta
                                    const Okteta::ArrayChangeMetricsList& changesList, bool forceRead)
 {
     mChildDataChanged = false;
+
+    if (isLockedFor(input)) {
+        address = lockPositionFor(input);
+    }
+
     const bool updateNeccessary = forceRead || isReadingNecessary(input, address, changesList);
     if (!updateNeccessary) {
         return;
@@ -122,9 +127,6 @@ bool TopLevelDataInformation::isReadingNecessary(Okteta::AbstractByteArrayModel*
     if (model != mLastModel) {
         return true; // whenever we have a new model we have to read
 
-    }
-    if (isLockedFor(model)) {
-        address = lockPositionFor(model);
     }
 
     if (address != mLastReadOffset) {

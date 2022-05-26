@@ -55,7 +55,7 @@ public:
     /** Reads the necessary data from @p input
      *
      * @param input the byte array to read from
-     * @param address the starting offset to read from, or if an offset is locked, the locked offset
+     * @param address the starting offset to read from (will be ignored if the offset is locked)
      * @param changesList the list with changes to @p input, so that it is possible to check whether reading is necessary
      *      This parameter is only useful if the structure was locked to a specific position.
      * @param forceRead whether to always read data, ignoring the change list

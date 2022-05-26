@@ -178,6 +178,9 @@ void LockToOffsetTest::testReadingNecessary()
     QFETCH(Okteta::ArrayChangeMetricsList, changes);
     QFETCH(Okteta::Address, address);
     QFETCH(bool, expected);
+    if (structure->isLockedFor(model)) {
+        address = structure->lockPositionFor(model);
+    }
     QCOMPARE(structure->isReadingNecessary(model, address, changes), expected);
     structure->read(model, address, changes, false);
     // no changes after read -> no reading necessary
