@@ -229,7 +229,7 @@
       <li xml:lang="zh-TW">編輯與導覽類似一般文字編輯器</li>
       <li>Customizable data views, with loadable and storable profiles</li>
       <li xml:lang="ca">Vistes de dades que es poden personalitzar, amb perfils que es poden carregar i emmagatzemar</li>
-      <li xml:lang="ca-valencia">Vistes de dades que es poden personalitzar, amb perfils que es poden carregar i emmagatzemar</li>
+      <li xml:lang="ca-valencia">Vistes de dades que es poden personalitzar, amb perfils que es poden carregar i almagasenar</li>
       <li xml:lang="de">Benutzerdefinierte Datenansichten mit Profilen, die gespeichert und geladen werden können.</li>
       <li xml:lang="el">Προσαρμόσιμες προβολές δεδομένων με φορτώσιμα και αποθηκεύσιμα προφίλ</li>
       <li xml:lang="en-GB">Customisable data views, with loadable and storable profiles</li>
@@ -477,7 +477,7 @@
       <li xml:lang="zh-TW">復原/重做支援</li>
       <li>Structures tool for analyzing and editing based on user-creatable structure definitions</li>
       <li xml:lang="ca">Eina d'estructures per a analitzar i editar, basada en definicions de l'estructura que pot crear l'usuari</li>
-      <li xml:lang="ca-valencia">Eina d'estructures per a analitzar i editar, basada en definicions de l'estructura que pot crear l'usuari</li>
+      <li xml:lang="ca-valencia">Eina d'estructures per a analisar i editar, basada en definicions de l'estructura que pot crear l'usuari</li>
       <li xml:lang="de">Strukturen-Werkzeug für die Untersuchung und Bearbeitung auf der Basis von benutzerdefinierten Strukturdefinitionen</li>
       <li xml:lang="el">Εργαλείο δομών για ανάλυση και επεξεργασία με βάση ορισμούς δομών που δημιουργεί ο χρήστης</li>
       <li xml:lang="en-GB">Structures tool for analysing and editing based on user-creatable structure definitions</li>
