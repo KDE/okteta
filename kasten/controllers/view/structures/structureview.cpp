@@ -93,9 +93,11 @@ StructureView::StructureView(StructuresTool* tool, QWidget* parent)
 
     mLockStructureButton = new QPushButton(this);
     mLockStructureButton->setCheckable(true);
-    setLockButtonState(false);
+    mLockStructureButton->setChecked(false);
     mLockStructureButton->setEnabled(false); // won't work at beginning
-    connect(mLockStructureButton, &QPushButton::toggled, this, &StructureView::lockButtonToggled);
+    onLockButtonToggled(false);
+    connect(mLockStructureButton, &QPushButton::clicked, this, &StructureView::onLockButtonClicked);
+    connect(mLockStructureButton, &QPushButton::toggled, this, &StructureView::onLockButtonToggled);
 
     settingsLayout->addWidget(mLockStructureButton);
 
@@ -174,8 +176,6 @@ bool StructureView::eventFilter(QObject* object, QEvent* event)
             } else {
                 mTool->unmark();
             }
-
-            setLockButtonState(current);
         } else if (event->type() == QEvent::FocusOut) {
             QWidget* treeViewFocusWidget = mStructTreeView->focusWidget();
             const bool subChildHasFocus = (treeViewFocusWidget != mStructTreeView);
@@ -204,10 +204,8 @@ void StructureView::setLockButtonState(const QModelIndex& current)
 {
     // qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "setLockButtonState() for" << current;
 
-    // we don't want the toggled signal here, only when the user clicks the button!
-    QSignalBlocker block(mLockStructureButton);
-    setLockButtonState(mTool->isStructureLocked(current));
     mLockStructureButton->setEnabled(mTool->canStructureBeLocked(current));
+    mLockStructureButton->setChecked(mTool->isStructureLocked(current));
 }
 
 void StructureView::onCurrentRowChanged(const QModelIndex& current, const QModelIndex& previous)
@@ -215,31 +213,30 @@ void StructureView::onCurrentRowChanged(const QModelIndex& current, const QModel
     Q_UNUSED(previous)
     if (current.isValid() && mTool->byteArrayModel()) {
         mTool->mark(current);
-        setLockButtonState(current);
     } else {
         mTool->unmark();
     }
+    setLockButtonState(current);
 }
 
-void StructureView::lockButtonToggled()
+void StructureView::onLockButtonClicked(bool checked)
 {
     // qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "Lock button toggled";
 
-    setLockButtonState(mLockStructureButton->isChecked());
     const QModelIndex current = mStructTreeView->selectionModel()->currentIndex();
     if (!current.isValid()) {
         qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "it should not be possible to toggle this button when current index is invalid!";
         return;
     }
 
-    if (mLockStructureButton->isChecked()) {
+    if (checked) {
         mTool->lockStructure(current);
     } else {
         mTool->unlockStructure(current);
     }
 }
 
-void StructureView::setLockButtonState(bool structureLocked)
+void StructureView::onLockButtonToggled(bool structureLocked)
 {
     if (structureLocked) {
         mLockStructureButton->setIcon(QIcon::fromTheme(QStringLiteral("object-locked")));
@@ -255,7 +252,6 @@ void StructureView::setLockButtonState(bool structureLocked)
         mLockStructureButton->setToolTip(i18nc("@info:tooltip",
                                                "Lock selected structure to current offset."));
     }
-    mLockStructureButton->setChecked(structureLocked);
 }
 
 void StructureView::openScriptConsole()
@@ -275,9 +271,8 @@ void StructureView::openScriptConsole()
 void StructureView::onByteArrayModelChanged(Okteta::AbstractByteArrayModel* model)
 {
     const bool validModel = (model != nullptr);
-    QModelIndex current = mStructTreeView->currentIndex();
-    mLockStructureButton->setEnabled(mTool->canStructureBeLocked(current));
-    setLockButtonState(mTool->isStructureLocked(current));
+    const QModelIndex current = mStructTreeView->currentIndex();
+    setLockButtonState(current);
     mValidateButton->setEnabled(validModel);
 }
 
