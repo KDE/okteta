@@ -9,6 +9,7 @@
 #include "enumdatainformation.hpp"
 #include "../topleveldatainformation.hpp"
 
+#include <KComboBox>
 #include <KLocalizedString>
 #include <QScriptValue>
 
@@ -29,6 +30,45 @@ EnumDataInformation::EnumDataInformation(const QString& name, PrimitiveDataInfor
 }
 
 EnumDataInformation::~EnumDataInformation() = default;
+
+QWidget* EnumDataInformation::createEditWidget(QWidget* parent) const
+{
+    auto* box = new KComboBox(false, parent);
+
+    const QMap<AllPrimitiveTypes, QString>& enumValues = mEnum->values();
+
+    // TODO: have an option to edit custom values not defined in the enum
+    if (!enumValues.contains(mValue->value())) {
+        const QString text = i18n("%1 (value not in enum)", mValue->valueString());
+        box->addItem(text, mValue->valueToQVariant());
+        box->insertSeparator(1);
+    }
+
+    for (auto it = enumValues.begin(), end = enumValues.end(); it != end; ++it) {
+        const AllPrimitiveTypes data = it.key();
+        const QString& enumVal = it.value();
+        const QString text = i18n("%1 (%2)", enumVal, mValue->valueToQString(data));
+        box->addItem(text, mValue->valueToQVariant(data));
+    }
+    return box;
+}
+
+QVariant EnumDataInformation::dataFromWidget(const QWidget* w) const
+{
+    const auto* box = qobject_cast<const KComboBox*>(w);
+    Q_CHECK_PTR(box);
+    return box->currentData();
+}
+
+void EnumDataInformation::setWidgetData(QWidget* w) const
+{
+    auto* box = qobject_cast<KComboBox*>(w);
+    Q_CHECK_PTR(box);
+    const int dataIndex = box->findData(mValue->valueToQVariant());
+    if (dataIndex != -1) {
+        box->setCurrentIndex(dataIndex);
+    }
+}
 
 QString EnumDataInformation::valueStringImpl() const
 {

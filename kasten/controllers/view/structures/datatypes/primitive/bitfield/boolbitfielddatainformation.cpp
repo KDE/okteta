@@ -22,6 +22,22 @@ QString BoolBitfieldDataInformation::valueStringImpl() const
     return BoolDataInformationMethods<quint64>::staticValueString(mValue.value<quint64>());
 }
 
+QVariant BoolBitfieldDataInformation::valueToQVariant() const
+{
+    Q_ASSERT(mWasAbleToRead);
+    return BoolDataInformationMethods<quint64>::staticToQVariant(mValue.value<quint64>());
+}
+
+QString BoolBitfieldDataInformation::valueToQString(AllPrimitiveTypes value) const
+{
+    return BoolDataInformationMethods<quint64>::staticValueString(value.value<quint64>());
+}
+
+QVariant BoolBitfieldDataInformation::valueToQVariant(AllPrimitiveTypes value) const
+{
+    return BoolDataInformationMethods<quint64>::staticToQVariant(value.value<quint64>());
+}
+
 QWidget* BoolBitfieldDataInformation::createEditWidget(QWidget* parent) const
 {
     if (width() == 1) {

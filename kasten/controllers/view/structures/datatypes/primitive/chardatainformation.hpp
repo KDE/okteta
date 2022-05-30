@@ -18,6 +18,7 @@ public:
     static quint8 fromVariant(const QVariant& value, bool* ok);
     static PrimitiveDataType staticType();
     static QScriptValue asScriptValue(quint8 value, QScriptEngine* engine, ScriptHandlerInfo* handler);
+    static QVariant staticToQVariant(quint8 value);
 
     static QWidget* staticCreateEditWidget(QWidget* parent);
     static QVariant staticDataFromWidget(const QWidget* w);
@@ -27,6 +28,11 @@ public:
 inline PrimitiveDataType CharDataInformationMethods::staticType()
 {
     return PrimitiveDataType::Char;
+}
+
+inline QVariant CharDataInformationMethods::staticToQVariant(quint8 value)
+{
+    return QVariant(value);
 }
 
 inline quint8 CharDataInformationMethods::fromVariant(const QVariant& value, bool* ok)

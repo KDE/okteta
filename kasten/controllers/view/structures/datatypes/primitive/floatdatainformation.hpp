@@ -18,6 +18,7 @@ public:
     static QString staticValueString(float value);
     static QScriptValue asScriptValue(float value, QScriptEngine* engine, ScriptHandlerInfo* handler);
     static float fromVariant(const QVariant& value, bool* ok);
+    static QVariant staticToQVariant(float value);
 
     static QWidget* staticCreateEditWidget(QWidget* parent);
     static QVariant staticDataFromWidget(const QWidget* w);
@@ -27,6 +28,11 @@ public:
 inline PrimitiveDataType FloatDataInformationMethods::staticType()
 {
     return PrimitiveDataType::Float;
+}
+
+inline QVariant FloatDataInformationMethods::staticToQVariant(float value)
+{
+    return QVariant(value);
 }
 
 inline float FloatDataInformationMethods::fromVariant(const QVariant& value, bool* ok)
