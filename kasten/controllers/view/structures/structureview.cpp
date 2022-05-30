@@ -117,8 +117,6 @@ StructureView::StructureView(StructuresTool* tool, QWidget* parent)
     connect(mStructTreeView->selectionModel(),
             &QItemSelectionModel::currentRowChanged,
             this, &StructureView::onCurrentRowChanged);
-
-    connect(mTool, &StructuresTool::cursorIndexChanged, this, &StructureView::onCursorIndexChange);
 }
 
 StructureView::~StructureView() = default;
@@ -126,14 +124,6 @@ StructureView::~StructureView() = default;
 StructuresTool* StructureView::tool() const
 {
     return mTool;
-}
-
-void StructureView::onCursorIndexChange()
-{
-    QModelIndex idx = mStructTreeView->currentIndex();
-    if (idx.isValid()) {
-        mTool->mark(idx);
-    }
 }
 
 void StructureView::openSettingsDlg()

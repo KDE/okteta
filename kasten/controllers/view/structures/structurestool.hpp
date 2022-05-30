@@ -67,7 +67,6 @@ Q_SIGNALS:
     void dataChanged(int row, void* data); // actually a DataInformation*
     void dataCleared();
     void byteOrderChanged();
-    void cursorIndexChanged();
     void byteArrayModelChanged(Okteta::AbstractByteArrayModel* model);
     /** items are inserted before @p startIndex */
     void childrenAboutToBeInserted(DataInformation* sender, uint startIndex, uint endIndex);
@@ -110,6 +109,7 @@ private:
     TopLevelDataInformation::List mInvalidData;
     bool mWritingData : 1;
     bool mCurrentItemDataChanged : 1;
+    bool mIsStructureMarked : 1;
 };
 
 }

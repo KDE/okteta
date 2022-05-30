@@ -33,6 +33,7 @@ StructuresTool::StructuresTool()
     , mManager(new StructuresManager(this))
     , mWritingData(false)
     , mCurrentItemDataChanged(false)
+    , mIsStructureMarked(false)
 {
     // leave mLoadedFiles empty for now, since otherwise loading slot will not work
     setObjectName(QStringLiteral("StructuresTool"));
@@ -70,6 +71,9 @@ void StructuresTool::setTargetModel(AbstractModel* model)
     // just a copy of the code in poddecodertool.h
     if (mByteArrayView) {
         mByteArrayView->disconnect(this);
+        if (mIsStructureMarked) {
+            unmark();
+        }
     }
     if (mByteArrayModel) {
         mByteArrayModel->disconnect(this);
@@ -96,7 +100,6 @@ void StructuresTool::onCursorPositionChange(Okteta::Address pos)
     if (mCursorIndex != pos) {
         mCursorIndex = pos;
         updateData(Okteta::ArrayChangeMetricsList());
-        emit cursorIndexChanged();
     }
 }
 
@@ -309,12 +312,14 @@ void StructuresTool::mark(const QModelIndex& idx)
     const Okteta::Address startOffset = Okteta::Address(data->positionInFile(baseAddress) / 8);
     const Okteta::AddressRange markingRange = Okteta::AddressRange::fromWidth(startOffset, length);
     mByteArrayView->setMarking(markingRange, true);
+    mIsStructureMarked = true;
 }
 
 void StructuresTool::unmark(/*const QModelIndex& idx*/)
 {
     if (mByteArrayView) {
         mByteArrayView->setMarking(Okteta::AddressRange());
+        mIsStructureMarked = false;
     }
 }
 
@@ -362,11 +367,16 @@ void StructuresTool::unlockStructure(const QModelIndex& idx)
     TopLevelDataInformation* top = data->topLevelDataInformation();
     Q_CHECK_PTR(top);
 
-    unmark();
+    const bool wasMarked = mIsStructureMarked;
+    if (wasMarked) {
+        unmark();
+    }
     top->unlockPosition(mByteArrayModel);
     // now read from the current position:
     top->read(mByteArrayModel, mCursorIndex, Okteta::ArrayChangeMetricsList(), true);
-    mark(idx); // we have to change the marked range, otherwise it stays at the previous locked offset
+    if (wasMarked) {
+        mark(idx); // we have to change the marked range, otherwise it stays at the previous locked offset
+    }
 }
 
 bool StructuresTool::isStructureLocked(const QModelIndex& idx) const

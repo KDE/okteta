@@ -40,7 +40,6 @@ private Q_SLOTS:
     void openSettingsDlg();
     void openScriptConsole();
     void onCurrentRowChanged(const QModelIndex& current, const QModelIndex& previous);
-    void onCursorIndexChange();
     void lockButtonToggled();
     void setLockButtonState(bool structureLocked);
     void onByteArrayModelChanged(Okteta::AbstractByteArrayModel* model);
