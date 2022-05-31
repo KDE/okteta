@@ -160,6 +160,14 @@ Answer PODTableView::query(int newValueSize, int oldValueSize, int sizeLeft)
     return answer;
 }
 
+void PODTableView::selectBytesInView()
+{
+    auto* action = static_cast<QAction*>(sender());
+    const int podId = action->data().toInt();
+
+    mTool->selectBytesInView(podId);
+}
+
 void PODTableView::copyToClipboard()
 {
     auto* action = static_cast<QAction*>(sender());
@@ -225,6 +233,13 @@ void PODTableView::onCustomContextMenuRequested(QPoint pos)
     copyAction->setShortcut(QKeySequence());
     copyAction->setData(podId);
     menu->addAction(copyAction);
+
+    // TODO: reusing string due to string freeze
+    auto* selectAction = new QAction(i18nc("@action:button", "&Select"), this);
+    connect(selectAction, &QAction::triggered,
+            this, &PODTableView::selectBytesInView);
+    selectAction->setData(podId);
+    menu->addAction(selectAction);
 
     menu->popup(mPODTableView->viewport()->mapToGlobal(pos));
 }

@@ -66,6 +66,7 @@ public:
 
 public:
     void setData(const QVariant& data, int podId);
+    void selectBytesInView(int podId);
     void markPOD(int podId);
     void unmarkPOD();
 

@@ -47,6 +47,7 @@ private Q_SLOTS:
     void onCurrentRowChanged(const QModelIndex& current, const QModelIndex& previous);
     void onCustomContextMenuRequested(QPoint pos);
     void copyToClipboard();
+    void selectBytesInView();
 
 private:
     PODDecoderTool* mTool;

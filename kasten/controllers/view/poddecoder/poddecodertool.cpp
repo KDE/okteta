@@ -370,6 +370,14 @@ void PODDecoderTool::updateData()
     emit dataChanged();
 }
 
+void PODDecoderTool::selectBytesInView(int podId)
+{
+    const int length = mDecodedValueByteCountList[podId];
+    const Okteta::AddressRange selection = Okteta::AddressRange::fromWidth(mCursorIndex, length);
+    mByteArrayView->setSelection(selection.start(), selection.end());
+    mByteArrayView->setFocus();
+}
+
 void PODDecoderTool::markPOD(int podId)
 {
     const int length = mDecodedValueByteCountList[podId];
