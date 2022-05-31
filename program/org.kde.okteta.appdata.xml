@@ -228,7 +228,7 @@
       <li xml:lang="zh-TW">編輯與導覽類似一般文字編輯器</li>
       <li>Customizable data views, with loadable and storable profiles</li>
       <li xml:lang="ca">Vistes de dades que es poden personalitzar, amb perfils que es poden carregar i emmagatzemar</li>
-      <li xml:lang="ca-valencia">Vistes de dades que es poden personalitzar, amb perfils que es poden carregar i almagasenar</li>
+      <li xml:lang="ca-valencia">Vistes de dades que es poden personalisar, amb perfils que es poden carregar i almagasenar</li>
       <li xml:lang="de">Benutzerdefinierte Datenansichten mit Profilen, die gespeichert und geladen werden können.</li>
       <li xml:lang="el">Προσαρμόσιμες προβολές δεδομένων με φορτώσιμα και αποθηκεύσιμα προφίλ</li>
       <li xml:lang="en-GB">Customisable data views, with loadable and storable profiles</li>
@@ -368,7 +368,7 @@
       <li xml:lang="zh-TW">字元編碼：所有 Qt 與 EBCDIC 5 支援的八位元編碼方式</li>
       <li>Fast data rendering on screen</li>
       <li xml:lang="ca">Renderització ràpida de les dades a la pantalla</li>
-      <li xml:lang="ca-valencia">Renderització ràpida de les dades a la pantalla</li>
+      <li xml:lang="ca-valencia">Renderisació ràpida de les dades a la pantalla</li>
       <li xml:lang="de">Schnelles Rendern der Daten auf dem Bildschirm</li>
       <li xml:lang="el">Γρήγορη αποτύπωση χαρακτήρων στην οθόνη</li>
       <li xml:lang="en-GB">Fast data rendering on screen</li>
