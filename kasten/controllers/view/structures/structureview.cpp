@@ -263,6 +263,14 @@ void StructureView::onLockButtonToggled(bool structureLocked)
     }
 }
 
+void StructureView::selectBytesInView()
+{
+    auto* action = static_cast<QAction*>(sender());
+    const QModelIndex index = action->data().value<QModelIndex>();
+
+    mTool->selectBytesInView(index);
+}
+
 void StructureView::copyToClipboard()
 {
     auto* action = static_cast<QAction*>(sender());
@@ -320,6 +328,13 @@ void StructureView::onCustomContextMenuRequested(QPoint pos)
     copyAction->setShortcut(QKeySequence());
     copyAction->setData(index);
     menu->addAction(copyAction);
+
+    // TODO: reusing string due to string freeze
+    auto* selectAction = new QAction(i18nc("@action:button", "&Select"), this);
+    connect(selectAction, &QAction::triggered,
+            this, &StructureView::selectBytesInView);
+    selectAction->setData(index);
+    menu->addAction(selectAction);
 
     menu->popup(mStructTreeView->viewport()->mapToGlobal(pos));
 }

@@ -307,6 +307,20 @@ Okteta::AddressRange StructuresTool::dataRange(const DataInformation* data) cons
     return Okteta::AddressRange::fromWidth(startOffset, length);
 }
 
+void StructuresTool::selectBytesInView(const QModelIndex& idx)
+{
+    if (!mByteArrayModel || !mByteArrayView || !idx.isValid()) {
+        return;
+    }
+    const auto* data = static_cast<const DataInformation*>(idx.internalPointer());
+    if (!data) {
+        return;
+    }
+    const Okteta::AddressRange selection = dataRange(data);
+    mByteArrayView->setSelection(selection.start(), selection.end());
+    mByteArrayView->setFocus();
+}
+
 void StructuresTool::mark(const QModelIndex& idx)
 {
     if (!mByteArrayModel || !mByteArrayView || !idx.isValid()) {

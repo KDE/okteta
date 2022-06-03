@@ -59,6 +59,8 @@ public:
     bool isFileLoaded() const;
     QByteArray bytes(const DataInformation* data) const;
 
+    void selectBytesInView(const QModelIndex& idx);
+
     // interface for model
     QVariant headerData(int column, int role) const;
     int childCount() const;
