@@ -18,6 +18,7 @@ public:
     static PrimitiveDataType staticType();
     static QScriptValue asScriptValue(double value, QScriptEngine* engine, ScriptHandlerInfo* handler);
     static double fromVariant(const QVariant& value, bool* ok);
+    static QVariant staticToQVariant(double value);
 
     static QWidget* staticCreateEditWidget(QWidget* parent);
     static QVariant staticDataFromWidget(const QWidget* w);
@@ -27,6 +28,11 @@ public:
 inline PrimitiveDataType DoubleDataInformationMethods::staticType()
 {
     return PrimitiveDataType::Double;
+}
+
+inline QVariant DoubleDataInformationMethods::staticToQVariant(double value)
+{
+    return QVariant(value);
 }
 
 inline double DoubleDataInformationMethods::fromVariant(const QVariant& value, bool* ok)

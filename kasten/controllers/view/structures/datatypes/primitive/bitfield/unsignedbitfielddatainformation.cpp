@@ -21,6 +21,22 @@ QString UnsignedBitfieldDataInformation::valueStringImpl() const
     return UIntDataInformationMethods<quint64>::staticValueString(mValue.value<quint64>());
 }
 
+QVariant UnsignedBitfieldDataInformation::valueToQVariant() const
+{
+    Q_ASSERT(mWasAbleToRead);
+    return UIntDataInformationMethods<quint64>::staticToQVariant(mValue.value<quint64>());
+}
+
+QString UnsignedBitfieldDataInformation::valueToQString(AllPrimitiveTypes value) const
+{
+    return UIntDataInformationMethods<quint64>::staticValueString(value.value<quint64>());
+}
+
+QVariant UnsignedBitfieldDataInformation::valueToQVariant(AllPrimitiveTypes value) const
+{
+    return UIntDataInformationMethods<quint64>::staticToQVariant(value.value<quint64>());
+}
+
 QWidget* UnsignedBitfieldDataInformation::createEditWidget(QWidget* parent) const
 {
     auto* ret = new UIntSpinBox(parent);

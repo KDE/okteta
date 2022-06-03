@@ -22,6 +22,10 @@ public:
                         const EnumDefinition::Ptr& enumDef, DataInformation* parent = nullptr);
     ~EnumDataInformation() override;
 
+    QWidget* createEditWidget(QWidget* parent) const override;
+    QVariant dataFromWidget(const QWidget* w) const override;
+    void setWidgetData(QWidget* w) const override;
+
     bool isEnum() const override;
 
     EnumDefinition::Ptr enumValues() const;

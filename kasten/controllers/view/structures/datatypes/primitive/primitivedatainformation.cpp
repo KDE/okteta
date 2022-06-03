@@ -73,9 +73,24 @@ int PrimitiveDataInformation::indexOf(const DataInformation* const) const
     return -1;
 }
 
+QVariant PrimitiveDataInformationWrapper::valueToQVariant() const
+{
+    return mValue->valueToQVariant();
+}
+
 QScriptValue PrimitiveDataInformationWrapper::valueAsQScriptValue() const
 {
     return mValue->valueAsQScriptValue();
+}
+
+QString PrimitiveDataInformationWrapper::valueToQString(AllPrimitiveTypes value) const
+{
+    return mValue->valueToQString(value);
+}
+
+QVariant PrimitiveDataInformationWrapper::valueToQVariant(AllPrimitiveTypes value) const
+{
+    return mValue->valueToQVariant(value);
 }
 
 qint64 PrimitiveDataInformationWrapper::readData(Okteta::AbstractByteArrayModel* input,

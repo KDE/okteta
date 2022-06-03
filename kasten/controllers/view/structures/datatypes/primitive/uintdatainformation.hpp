@@ -11,6 +11,7 @@
 
 #include "primitivedatainformation.hpp"
 #include "structureviewpreferences.hpp"
+#include "../../allprimitivetypes.hpp"
 
 template <typename T>
 class UIntDataInformationMethods
@@ -20,6 +21,7 @@ public:
     static QString staticValueString(T val, int base = Kasten::StructureViewPreferences::unsignedDisplayBase());
     static PrimitiveDataType staticType();
     static T fromVariant(const QVariant& value, bool* ok);
+    static QVariant staticToQVariant(T value);
 
     static QWidget* staticCreateEditWidget(QWidget* parent);
     static QVariant staticDataFromWidget(const QWidget* w);
@@ -34,6 +36,12 @@ template <>
 inline PrimitiveDataType UIntDataInformationMethods<quint32>::staticType() { return PrimitiveDataType::UInt32; }
 template <>
 inline PrimitiveDataType UIntDataInformationMethods<quint64>::staticType() { return PrimitiveDataType::UInt64; }
+
+template <typename T>
+inline QVariant UIntDataInformationMethods<T>::staticToQVariant(T value)
+{
+    return QVariant(value);
+}
 
 template <typename T>
 inline T UIntDataInformationMethods<T>::fromVariant(const QVariant& value, bool* ok)

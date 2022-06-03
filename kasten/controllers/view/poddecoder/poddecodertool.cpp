@@ -255,6 +255,28 @@ QVariant PODDecoderTool::value(int podId) const
     return mDecodedValueList[podId];
 }
 
+QByteArray PODDecoderTool::bytes(int podId) const
+{
+    Okteta::AbstractTypeCodec* typeCodec = mTypeCodecs[podId];
+
+    // TODO: consider adding size property to AbstractTypeCodec and just get the data from mPODData
+    QByteArray bytes = typeCodec->valueToBytes(mDecodedValueList[podId]);
+
+    const int bytesSize = bytes.size();
+    // need to swap the bytes?
+    if ((bytesSize > 0) && (mPODData.byteOrder() != QSysInfo::ByteOrder)) {
+        const int firstHalfBytesCount = bytesSize / 2;
+        int j = bytesSize - 1;
+        for (int i = 0; i < firstHalfBytesCount; ++i, --j) {
+            const char helper = bytes[i];
+            bytes[i] = bytes[j];
+            bytes[j] = helper;
+        }
+    }
+
+    return bytes;
+}
+
 void PODDecoderTool::setData(const QVariant& data, int podId)
 {
     Okteta::AbstractTypeCodec* typeCodec = mTypeCodecs[podId];
@@ -346,6 +368,14 @@ void PODDecoderTool::updateData()
 
     // TODO: only Q_EMIT for those strings that changed
     Q_EMIT dataChanged();
+}
+
+void PODDecoderTool::selectBytesInView(int podId)
+{
+    const int length = mDecodedValueByteCountList[podId];
+    const Okteta::AddressRange selection = Okteta::AddressRange::fromWidth(mCursorIndex, length);
+    mByteArrayView->setSelection(selection.start(), selection.end());
+    mByteArrayView->setFocus();
 }
 
 void PODDecoderTool::markPOD(int podId)

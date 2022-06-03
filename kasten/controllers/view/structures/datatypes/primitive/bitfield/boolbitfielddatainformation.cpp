@@ -22,6 +22,22 @@ QString BoolBitfieldDataInformation::valueStringImpl() const
     return BoolDataInformationMethods<quint64>::staticValueString(mValue.value<quint64>());
 }
 
+QVariant BoolBitfieldDataInformation::valueToQVariant() const
+{
+    Q_ASSERT(mWasAbleToRead);
+    return BoolDataInformationMethods<quint64>::staticToQVariant(mValue.value<quint64>());
+}
+
+QString BoolBitfieldDataInformation::valueToQString(AllPrimitiveTypes value) const
+{
+    return BoolDataInformationMethods<quint64>::staticValueString(value.value<quint64>());
+}
+
+QVariant BoolBitfieldDataInformation::valueToQVariant(AllPrimitiveTypes value) const
+{
+    return BoolDataInformationMethods<quint64>::staticToQVariant(value.value<quint64>());
+}
+
 QWidget* BoolBitfieldDataInformation::createEditWidget(QWidget* parent) const
 {
     if (width() == 1) {
@@ -29,7 +45,6 @@ QWidget* BoolBitfieldDataInformation::createEditWidget(QWidget* parent) const
         auto* box = new KComboBox(false, parent);
         box->addItem(i18nc("boolean value", "false"));
         box->addItem(i18nc("boolean value", "true"));
-        box->setCurrentIndex((mValue.value<quint64>() != 0) ? 1 : 0);
         return box;
     }
     auto* ret = new UIntSpinBox(parent);
@@ -55,6 +70,12 @@ QVariant BoolBitfieldDataInformation::dataFromWidget(const QWidget* w) const
 
 void BoolBitfieldDataInformation::setWidgetData(QWidget* w) const
 {
+    if (width() == 1) {
+        auto* box = qobject_cast<KComboBox*>(w);
+        Q_CHECK_PTR(box);
+        box->setCurrentIndex((mValue.value<quint64>() == 0) ? 0 : 1);
+        return;
+    }
     auto* spin = qobject_cast<UIntSpinBox*> (w);
     if (spin) {
         spin->setValue(mValue.value<quint64>());

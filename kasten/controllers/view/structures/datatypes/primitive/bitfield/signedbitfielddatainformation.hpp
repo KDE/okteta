@@ -22,7 +22,11 @@ public:
     ~SignedBitfieldDataInformation() override = default;
     AllPrimitiveTypes fromVariant(const QVariant& variant, bool* ok) const override;
 
+    QVariant valueToQVariant() const override;
     QScriptValue valueAsQScriptValue() const override;
+    QString valueToQString(AllPrimitiveTypes value) const override;
+    QVariant valueToQVariant(AllPrimitiveTypes value) const override;
+
     QWidget* createEditWidget(QWidget* parent) const override;
     QVariant dataFromWidget(const QWidget* w) const override;
     void setWidgetData(QWidget* w) const override;

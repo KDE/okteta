@@ -22,6 +22,7 @@
 // Qt
 #include <QModelIndex>
 #include <QRegularExpression>
+#include <QByteArray>
 
 #include "script/scripthandler.hpp"
 #include "datatypes/datainformation.hpp"
@@ -34,6 +35,7 @@ StructuresTool::StructuresTool()
     , mManager(new StructuresManager(this))
     , mWritingData(false)
     , mCurrentItemDataChanged(false)
+    , mIsStructureMarked(false)
 {
     // leave mLoadedFiles empty for now, since otherwise loading slot will not work
     setObjectName(QStringLiteral("StructuresTool"));
@@ -71,6 +73,9 @@ void StructuresTool::setTargetModel(AbstractModel* model)
     // just a copy of the code in poddecodertool.h
     if (mByteArrayView) {
         mByteArrayView->disconnect(this);
+        if (mIsStructureMarked) {
+            unmark();
+        }
     }
     if (mByteArrayModel) {
         mByteArrayModel->disconnect(this);
@@ -97,7 +102,6 @@ void StructuresTool::onCursorPositionChange(Okteta::Address pos)
     if (mCursorIndex != pos) {
         mCursorIndex = pos;
         updateData(Okteta::ArrayChangeMetricsList());
-        Q_EMIT cursorIndexChanged();
     }
 }
 
@@ -292,6 +296,32 @@ Okteta::Address StructuresTool::startAddress(const TopLevelDataInformation* data
     return mCursorIndex;
 }
 
+Okteta::AddressRange StructuresTool::dataRange(const DataInformation* data) const
+{
+    Q_CHECK_PTR(data->topLevelDataInformation());
+    const Okteta::Address baseAddress = startAddress(data->topLevelDataInformation());
+    // FIXME support range of partial bytes
+    int length = data->size() / 8;
+    const int maxLen = mByteArrayModel->size() - baseAddress;
+    length = qMin(length, maxLen);
+    const Okteta::Address startOffset = Okteta::Address(data->positionInFile(baseAddress) / 8);
+    return Okteta::AddressRange::fromWidth(startOffset, length);
+}
+
+void StructuresTool::selectBytesInView(const QModelIndex& idx)
+{
+    if (!mByteArrayModel || !mByteArrayView || !idx.isValid()) {
+        return;
+    }
+    const auto* data = static_cast<const DataInformation*>(idx.internalPointer());
+    if (!data) {
+        return;
+    }
+    const Okteta::AddressRange selection = dataRange(data);
+    mByteArrayView->setSelection(selection.start(), selection.end());
+    mByteArrayView->setFocus();
+}
+
 void StructuresTool::mark(const QModelIndex& idx)
 {
     if (!mByteArrayModel || !mByteArrayView || !idx.isValid()) {
@@ -301,22 +331,26 @@ void StructuresTool::mark(const QModelIndex& idx)
     if (!data) {
         return;
     }
-    Q_CHECK_PTR(data->topLevelDataInformation());
-    const Okteta::Address baseAddress = startAddress(data->topLevelDataInformation());
-    // FIXME support marking of partial bytes
-    int length = data->size() / 8;
-    const int maxLen = mByteArrayModel->size() - baseAddress;
-    length = qMin(length, maxLen);
-    const Okteta::Address startOffset = Okteta::Address(data->positionInFile(baseAddress) / 8);
-    const Okteta::AddressRange markingRange = Okteta::AddressRange::fromWidth(startOffset, length);
+    const Okteta::AddressRange markingRange = dataRange(data);
     mByteArrayView->setMarking(markingRange, true);
+    mIsStructureMarked = true;
 }
 
 void StructuresTool::unmark(/*const QModelIndex& idx*/)
 {
     if (mByteArrayView) {
         mByteArrayView->setMarking(Okteta::AddressRange());
+        mIsStructureMarked = false;
     }
+}
+
+QByteArray StructuresTool::bytes(const DataInformation* data) const
+{
+    const Okteta::AddressRange range = dataRange(data);
+    QByteArray bytes;
+    bytes.resize(range.width());
+    mByteArrayModel->copyTo(reinterpret_cast<Okteta::Byte*>(bytes.data()), range.start(), range.width());
+    return bytes;
 }
 
 void StructuresTool::validateAllStructures()
@@ -363,11 +397,16 @@ void StructuresTool::unlockStructure(const QModelIndex& idx)
     TopLevelDataInformation* top = data->topLevelDataInformation();
     Q_CHECK_PTR(top);
 
-    unmark();
+    const bool wasMarked = mIsStructureMarked;
+    if (wasMarked) {
+        unmark();
+    }
     top->unlockPosition(mByteArrayModel);
     // now read from the current position:
     top->read(mByteArrayModel, mCursorIndex, Okteta::ArrayChangeMetricsList(), true);
-    mark(idx); // we have to change the marked range, otherwise it stays at the previous locked offset
+    if (wasMarked) {
+        mark(idx); // we have to change the marked range, otherwise it stays at the previous locked offset
+    }
 }
 
 bool StructuresTool::isStructureLocked(const QModelIndex& idx) const

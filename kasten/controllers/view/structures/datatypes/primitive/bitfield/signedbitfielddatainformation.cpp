@@ -21,6 +21,22 @@ QString SignedBitfieldDataInformation::valueStringImpl() const
     return SIntDataInformationMethods<qint64>::staticValueString(mValue.value<qint64>());
 }
 
+QVariant SignedBitfieldDataInformation::valueToQVariant() const
+{
+    Q_ASSERT(mWasAbleToRead);
+    return SIntDataInformationMethods<qint64>::staticToQVariant(mValue.value<qint64>());
+}
+
+QString SignedBitfieldDataInformation::valueToQString(AllPrimitiveTypes value) const
+{
+    return SIntDataInformationMethods<qint64>::staticValueString(value.value<qint64>());
+}
+
+QVariant SignedBitfieldDataInformation::valueToQVariant(AllPrimitiveTypes value) const
+{
+    return SIntDataInformationMethods<qint64>::staticToQVariant(value.value<qint64>());
+}
+
 QWidget* SignedBitfieldDataInformation::createEditWidget(QWidget* parent) const
 {
     auto* ret = new SIntSpinBox(parent);

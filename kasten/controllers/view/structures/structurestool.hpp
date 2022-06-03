@@ -17,11 +17,12 @@
 // Kasten core
 #include <Kasten/AbstractTool>
 // Okteta core
-#include <Okteta/Address>
+#include <Okteta/AddressRange>
 // Std
 #include <memory>
 
 class QModelIndex;
+class QByteArray;
 
 class DataInformation;
 
@@ -58,6 +59,9 @@ public:
     /** check if there is any ByteArrayModel available to lock the structure */
     bool canStructureBeLocked(const QModelIndex& idx) const;
     bool isFileLoaded() const;
+    QByteArray bytes(const DataInformation* data) const;
+
+    void selectBytesInView(const QModelIndex& idx);
 
     // interface for model
     QVariant headerData(int column, int role) const;
@@ -69,7 +73,6 @@ Q_SIGNALS:
     void dataChanged(int row, void* data); // actually a DataInformation*
     void dataCleared();
     void byteOrderChanged();
-    void cursorIndexChanged();
     void byteArrayModelChanged(Okteta::AbstractByteArrayModel* model);
     /** items are inserted before @p startIndex */
     void childrenAboutToBeInserted(DataInformation* sender, uint startIndex, uint endIndex);
@@ -97,6 +100,7 @@ private Q_SLOTS:
 
 private:
     Okteta::Address startAddress(const TopLevelDataInformation* data) const;
+    Okteta::AddressRange dataRange(const DataInformation* data) const;
 
 private:
     // source
@@ -112,6 +116,7 @@ private:
     TopLevelDataInformation::List mInvalidData;
     bool mWritingData : 1;
     bool mCurrentItemDataChanged : 1;
+    bool mIsStructureMarked : 1;
 };
 
 }
