@@ -11,7 +11,7 @@
 #define KASTEN_STRUCTURESMANAGERVIEW_HPP
 
 // KF
-#include <KNS3/Entry>
+#include <KNSCore/EntryInternal>
 // Qt
 #include <QWidget>
 
@@ -19,7 +19,7 @@ class StructureAddRemoveWidget;
 class QPushButton;
 class KPluginSelector;
 
-namespace KNS3 {
+namespace KNSWidgets {
 class Button;
 }
 namespace Kasten {
@@ -45,7 +45,7 @@ Q_SIGNALS:
     void changed(const QStringList& newValues);
 
 private Q_SLOTS:
-    void onGetNewStructuresClicked(const KNS3::Entry::List& changedEntries);
+    void onGetNewStructuresClicked(const QList<KNSCore::EntryInternal>& changedEntries);
     void onPluginSelectorChange(bool change);
     void advancedSelection();
     void setSelectedStructures(const QStringList& selectedStructures);
@@ -57,7 +57,7 @@ private:
 private:
     Kasten::StructuresTool* mTool;
     QStringList mSelectedStructures;
-    KNS3::Button* mGetNewStructuresButton;
+    KNSWidgets::Button* mGetNewStructuresButton;
     QPushButton* mAdvancedSelectionButton;
     KPluginSelector* mStructuresSelector = nullptr;
     bool mRebuildingPluginsList : 1;

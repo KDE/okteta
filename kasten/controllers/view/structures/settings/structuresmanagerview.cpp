@@ -20,7 +20,7 @@
 #include <KConfigDialogManager>
 #include <KPluginInfo>
 #include <KLocalizedString>
-#include <KNS3/Button>
+#include <KNSWidgets/Button>
 // Qt
 #include <QPushButton>
 #include <QListWidgetItem>
@@ -43,9 +43,9 @@ StructuresManagerView::StructuresManagerView(Kasten::StructuresTool* tool, QWidg
     auto* buttonsLayout = new QHBoxLayout();
     pageLayout->addLayout(buttonsLayout);
 
-    mGetNewStructuresButton = new KNS3::Button(i18n("Get New Structures..."),
-                                               QStringLiteral("okteta-structures.knsrc"), this);
-    connect(mGetNewStructuresButton, &KNS3::Button::dialogFinished,
+    mGetNewStructuresButton = new KNSWidgets::Button(i18n("Get New Structures..."),
+                                                     QStringLiteral("okteta-structures.knsrc"), this);
+    connect(mGetNewStructuresButton, &KNSWidgets::Button::dialogFinished,
             this, &StructuresManagerView::onGetNewStructuresClicked);
     buttonsLayout->addWidget(mGetNewStructuresButton);
 
@@ -56,9 +56,9 @@ StructuresManagerView::StructuresManagerView(Kasten::StructuresTool* tool, QWidg
 
 StructuresManagerView::~StructuresManagerView() = default;
 
-void StructuresManagerView::onGetNewStructuresClicked(const KNS3::Entry::List& changedEntries)
+void StructuresManagerView::onGetNewStructuresClicked(const QList<KNSCore::EntryInternal>& changedEntries)
 {
-    for (const KNS3::Entry& e : changedEntries) {
+    for (const KNSCore::EntryInternal& e : changedEntries) {
         qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "Changed Entry: " << e.name();
         if (e.status() == KNS3::Entry::Installed) {
             // new element installed

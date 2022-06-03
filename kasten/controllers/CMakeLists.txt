@@ -48,7 +48,7 @@ okteta_add_library(Controllers NAMESPACE Okteta Kasten
     PRIVATE
         structureview-tested-srcs
         poddecoder-typeeditors
-        KF5::NewStuff
+        KF5::NewStuffWidgets
         KF5::I18n
         KF5::ConfigWidgets
         KF5::KCMUtils
