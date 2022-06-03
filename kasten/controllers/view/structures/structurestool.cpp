@@ -21,6 +21,7 @@
 #include <KLocalizedString>
 // Qt
 #include <QModelIndex>
+#include <QByteArray>
 
 #include "script/scripthandler.hpp"
 #include "datatypes/datainformation.hpp"
@@ -294,6 +295,18 @@ Okteta::Address StructuresTool::startAddress(const TopLevelDataInformation* data
     return mCursorIndex;
 }
 
+Okteta::AddressRange StructuresTool::dataRange(const DataInformation* data) const
+{
+    Q_CHECK_PTR(data->topLevelDataInformation());
+    const Okteta::Address baseAddress = startAddress(data->topLevelDataInformation());
+    // FIXME support range of partial bytes
+    int length = data->size() / 8;
+    const int maxLen = mByteArrayModel->size() - baseAddress;
+    length = qMin(length, maxLen);
+    const Okteta::Address startOffset = Okteta::Address(data->positionInFile(baseAddress) / 8);
+    return Okteta::AddressRange::fromWidth(startOffset, length);
+}
+
 void StructuresTool::mark(const QModelIndex& idx)
 {
     if (!mByteArrayModel || !mByteArrayView || !idx.isValid()) {
@@ -303,14 +316,7 @@ void StructuresTool::mark(const QModelIndex& idx)
     if (!data) {
         return;
     }
-    Q_CHECK_PTR(data->topLevelDataInformation());
-    const Okteta::Address baseAddress = startAddress(data->topLevelDataInformation());
-    // FIXME support marking of partial bytes
-    int length = data->size() / 8;
-    const int maxLen = mByteArrayModel->size() - baseAddress;
-    length = qMin(length, maxLen);
-    const Okteta::Address startOffset = Okteta::Address(data->positionInFile(baseAddress) / 8);
-    const Okteta::AddressRange markingRange = Okteta::AddressRange::fromWidth(startOffset, length);
+    const Okteta::AddressRange markingRange = dataRange(data);
     mByteArrayView->setMarking(markingRange, true);
     mIsStructureMarked = true;
 }
@@ -321,6 +327,15 @@ void StructuresTool::unmark(/*const QModelIndex& idx*/)
         mByteArrayView->setMarking(Okteta::AddressRange());
         mIsStructureMarked = false;
     }
+}
+
+QByteArray StructuresTool::bytes(const DataInformation* data) const
+{
+    const Okteta::AddressRange range = dataRange(data);
+    QByteArray bytes;
+    bytes.resize(range.width());
+    mByteArrayModel->copyTo(reinterpret_cast<Okteta::Byte*>(bytes.data()), range.start(), range.width());
+    return bytes;
 }
 
 void StructuresTool::validateAllStructures()

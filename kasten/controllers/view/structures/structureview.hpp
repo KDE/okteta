@@ -43,9 +43,11 @@ private Q_SLOTS:
     void onLockButtonClicked(bool checked);
     void onLockButtonToggled(bool checked);
     void onByteArrayModelChanged(Okteta::AbstractByteArrayModel* model);
+    void onCustomContextMenuRequested(QPoint pos);
 
 private:
     void setLockButtonState(const QModelIndex& current);
+    void copyToClipboard();
 
 private:
     StructuresTool* mTool;

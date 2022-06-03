@@ -21,6 +21,7 @@
 #include "settings/structuresmanagerview.hpp"
 #include "settings/structureaddremovewidget.hpp"
 
+#include "datatypes/datainformation.hpp"
 #include "script/scriptutils.hpp"
 #include "script/scriptloggerview.hpp"
 
@@ -28,6 +29,7 @@
 
 // KF
 #include <KComboBox>
+#include <KStandardAction>
 #include <KLocalizedString>
 #include <KConfigDialog>
 // Qt
@@ -39,6 +41,10 @@
 #include <QPushButton>
 #include <QHeaderView>
 #include <QFocusEvent>
+#include <QMenu>
+#include <QMimeData>
+#include <QApplication>
+#include <QClipboard>
 
 namespace Kasten {
 
@@ -68,9 +74,12 @@ StructureView::StructureView(StructuresTool* tool, QWidget* parent)
     mStructTreeView->setModel(mStructureTreeModel);
     mStructTreeView->setHeaderHidden(false);
     mStructTreeView->setSortingEnabled(false);
+    mStructTreeView->setContextMenuPolicy(Qt::CustomContextMenu);
     mStructTreeView->installEventFilter(this);
     QHeaderView* header = mStructTreeView->header();
     header->setSectionResizeMode(QHeaderView::Interactive);
+    connect(mStructTreeView, &QWidget::customContextMenuRequested,
+            this, &StructureView::onCustomContextMenuRequested);
 
     baseLayout->addWidget(mStructTreeView, 10);
 
@@ -254,6 +263,20 @@ void StructureView::onLockButtonToggled(bool structureLocked)
     }
 }
 
+void StructureView::copyToClipboard()
+{
+    auto* action = static_cast<QAction*>(sender());
+    const QModelIndex index = action->data().value<QModelIndex>();
+    auto* item = static_cast<DataInformation*> (index.internalPointer());
+
+    auto* mimeData = new QMimeData;
+
+    mimeData->setText(item->valueString());
+    mimeData->setData(QStringLiteral("application/octet-stream"), mTool->bytes(item));
+
+    QApplication::clipboard()->setMimeData(mimeData);
+}
+
 void StructureView::openScriptConsole()
 {
     QDialog* dialog = new QDialog(this);
@@ -274,6 +297,31 @@ void StructureView::onByteArrayModelChanged(Okteta::AbstractByteArrayModel* mode
     const QModelIndex current = mStructTreeView->currentIndex();
     setLockButtonState(current);
     mValidateButton->setEnabled(validModel);
+}
+
+void StructureView::onCustomContextMenuRequested(QPoint pos)
+{
+    const QModelIndex index = mStructTreeView->indexAt(pos);
+    if (!index.isValid()) {
+        return;
+    }
+    const auto* data = static_cast<const DataInformation*>(index.internalPointer());
+    if (!data) {
+        return;
+    }
+    if (!data->wasAbleToRead()) {
+        return;
+    }
+
+    auto* menu = new QMenu(this);
+
+    // TODO: split into explicit "Copy As Data" and "Copy As Text"
+    auto* copyAction =  KStandardAction::copy(this, &StructureView::copyToClipboard,  this);
+    copyAction->setShortcut(QKeySequence());
+    copyAction->setData(index);
+    menu->addAction(copyAction);
+
+    menu->popup(mStructTreeView->viewport()->mapToGlobal(pos));
 }
 
 }

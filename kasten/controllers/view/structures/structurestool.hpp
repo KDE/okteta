@@ -17,9 +17,10 @@
 // Kasten core
 #include <Kasten/AbstractTool>
 // Okteta core
-#include <Okteta/Address>
+#include <Okteta/AddressRange>
 
 class QModelIndex;
+class QByteArray;
 
 class DataInformation;
 
@@ -56,6 +57,7 @@ public:
     /** check if there is any ByteArrayModel available to lock the structure */
     bool canStructureBeLocked(const QModelIndex& idx) const;
     bool isFileLoaded() const;
+    QByteArray bytes(const DataInformation* data) const;
 
     // interface for model
     QVariant headerData(int column, int role) const;
@@ -94,6 +96,7 @@ private Q_SLOTS:
 
 private:
     Okteta::Address startAddress(const TopLevelDataInformation* data) const;
+    Okteta::AddressRange dataRange(const DataInformation* data) const;
 
 private:
     // source
