@@ -7,7 +7,7 @@
 */
 
 #include "safereference.hpp"
-#include "../structlogging.hpp"
+#include <structureslogging.hpp>
 // #include "../datatypes/datainformation.hpp"
 // Std
 #include <cstdio>

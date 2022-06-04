@@ -10,6 +10,7 @@
 
 // lib
 #include "bytearraytablelayout.hpp"
+#include <logging.hpp>
 // Okteta core
 #include <Okteta/ArrayChangeMetricsList>
 

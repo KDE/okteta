@@ -10,7 +10,7 @@
 #include "structurestool.hpp"
 #include "structuredefinitionfile.hpp"
 #include "structuresmanager.hpp"
-#include "structlogging.hpp"
+#include <structureslogging.hpp>
 // Okteta Kasten core
 #include <Kasten/Okteta/ByteArrayDocument>
 // Okteta core

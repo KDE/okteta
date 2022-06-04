@@ -11,6 +11,7 @@
 
 // lib
 #include <addressrangelist.hpp>
+#include <logging.hpp>
 
 namespace Okteta {
 

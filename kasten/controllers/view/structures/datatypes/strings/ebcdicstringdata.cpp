@@ -10,7 +10,7 @@
 #include "ebcdicstringdata.hpp"
 #include "stringdatainformation.hpp"
 #include "../topleveldatainformation.hpp"
-#include "../../structlogging.hpp"
+#include <structureslogging.hpp>
 
 #include <Okteta/Character>
 #include <codecs/ebcdic1047charcodec.hpp>

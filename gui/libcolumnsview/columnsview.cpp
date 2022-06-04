@@ -9,6 +9,7 @@
 #include "columnsview.hpp"
 #include "columnsview_p.hpp"
 
+#include <logging.hpp>
 // Qt
 #include <QPaintEvent>
 #include <QPainter>

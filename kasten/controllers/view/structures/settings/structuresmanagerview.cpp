@@ -14,7 +14,7 @@
 #include "structureviewpreferences.hpp"
 #include "../structuresmanager.hpp"
 #include "../structurestool.hpp"
-#include "../structlogging.hpp"
+#include <structureslogging.hpp>
 // KF
 #include <KPluginSelector>
 #include <KConfigDialogManager>

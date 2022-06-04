@@ -12,6 +12,7 @@ include(KDEInstallDirs)
 include(KDECMakeSettings NO_POLICY_SCOPE)
 include(KDECompilerSettings NO_POLICY_SCOPE)
 # ECM macros
+include(ECMQtDeclareLoggingCategory)
 include(ECMInstallIcons)
 include(ECMAddAppIcon)
 # CMake macros
@@ -161,5 +162,11 @@ ki18n_install(po)
 if( BUILD_DESKTOPPROGRAM )
     kdoctools_install(po)
 endif()
+
+ecm_qt_install_logging_categories(
+    EXPORT OKTETA
+    FILE okteta.categories
+    DESTINATION "${KDE_INSTALL_LOGGINGCATEGORIESDIR}"
+)
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)

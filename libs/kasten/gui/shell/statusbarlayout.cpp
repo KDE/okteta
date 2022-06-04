@@ -9,7 +9,7 @@
 #include "statusbarlayout.hpp"
 
 // lib
-#include <kastengui.hpp>
+#include <logging.hpp>
 // Qt
 #include <QWidgetItem>
 #include <QWidget>

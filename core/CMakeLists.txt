@@ -17,6 +17,14 @@ okteta_add_library(Core NAMESPACE Okteta
 
 target_compile_definitions(OktetaCore PRIVATE -DTRANSLATION_DOMAIN=\"liboktetacore\")
 
+ecm_qt_declare_logging_category(OktetaCore
+    HEADER "logging.hpp"
+    IDENTIFIER "LOG_OKTETA_CORE"
+    CATEGORY_NAME "okteta.core"
+    DESCRIPTION "Okteta Core library"
+    EXPORT OKTETA
+)
+
 macro(OKTETACORE_ADD_SUBLIBRARY _subdir)
     okteta_add_sublibrary(Core NAMESPACE Okteta
         SUBDIR ${_subdir}

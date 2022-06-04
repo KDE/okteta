@@ -11,7 +11,7 @@
 #include "../../datatypes/topleveldatainformation.hpp"
 #include "../../parsers/parserutils.hpp"
 #include "../scriptlogger.hpp"
-#include "../../structlogging.hpp"
+#include <structureslogging.hpp>
 
 StructUnionScriptClass::StructUnionScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : DefaultScriptClass(engine, handlerInfo)

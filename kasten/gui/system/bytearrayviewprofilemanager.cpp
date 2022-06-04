@@ -10,7 +10,7 @@
 
 // library
 #include "bytearrayviewprofilelock.hpp"
-#include <oktetakastengui.hpp>
+#include <logging.hpp>
 // KF
 #include <KConfigGroup>
 #include <KConfig>

@@ -7,5 +7,3 @@
 */
 
 #include "oktetagui.hpp"
-
-Q_LOGGING_CATEGORY(LOG_OKTETA_GUI, "okteta.gui", QtInfoMsg)

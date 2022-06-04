@@ -11,7 +11,7 @@
 #include "../../parsers/parserutils.hpp"
 #include "../../parsers/scriptvalueconverter.hpp"
 #include "../scriptlogger.hpp"
-#include "../../structlogging.hpp"
+#include <structureslogging.hpp>
 
 ArrayScriptClass::ArrayScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : DefaultScriptClass(engine, handlerInfo)

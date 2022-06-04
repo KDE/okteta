@@ -8,6 +8,8 @@
 
 #include "abstractmodelfilesystemsynchronizer_p.hpp"
 
+// lib
+#include <logging.hpp>
 // KF
 #include <KDirWatch>
 // Qt

@@ -8,6 +8,8 @@
 
 #include "piecetable.hpp"
 
+// lib
+#include <logging.hpp>
 // Qt
 #include <QMutableLinkedListIterator>
 

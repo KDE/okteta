@@ -9,7 +9,7 @@
 #include "addressvalidator.hpp"
 
 // lib
-#include <oktetakastengui.hpp>
+#include <logging.hpp>
 // Okteta core
 #include <Okteta/ValueCodec>
 // KF

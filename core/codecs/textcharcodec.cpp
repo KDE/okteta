@@ -10,6 +10,7 @@
 
 // lib
 #include <character.hpp>
+#include <logging.hpp>
 // KF
 #include <KCharsets>
 // Qt

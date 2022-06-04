@@ -14,6 +14,7 @@
 #include "bytearraytablecursor.hpp"
 #include "bytearraytablelayout.hpp"
 #include "helper.hpp"
+#include <logging.hpp>
 // lib
 #include <abstractcolumnstylist.hpp>
 // Okteta core

@@ -9,7 +9,7 @@
 #include "stringscriptclass.hpp"
 #include "../../datatypes/strings/stringdatainformation.hpp"
 #include "../../parsers/parserutils.hpp"
-#include "../../structlogging.hpp"
+#include <structureslogging.hpp>
 
 StringScriptClass::StringScriptClass(QScriptEngine* eng, ScriptHandlerInfo* handlerInfo)
     : DefaultScriptClass(eng, handlerInfo)

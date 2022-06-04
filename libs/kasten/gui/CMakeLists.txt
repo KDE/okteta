@@ -16,6 +16,14 @@ okteta_add_library(Gui NAMESPACE Kasten
     NO_VERSIONED_PACKAGE_NAME
 )
 
+ecm_qt_declare_logging_category(KastenGui
+    HEADER "logging.hpp"
+    IDENTIFIER "LOG_KASTEN_GUI"
+    CATEGORY_NAME "kasten.gui"
+    DESCRIPTION "Kasten Gui library"
+    EXPORT OKTETA
+)
+
 target_compile_definitions(KastenGui PRIVATE -DTRANSLATION_DOMAIN=\"libkasten\")
 
 macro(KASTENGUI_ADD_SUBLIBRARY _subdir)

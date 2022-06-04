@@ -18,9 +18,6 @@
 #include <Okteta/OktetaCore>
 // Qt
 #include <QChar>
-#include <QLoggingCategory>
-
-Q_DECLARE_LOGGING_CATEGORY(LOG_OKTETA_GUI)
 
 namespace Okteta {
 

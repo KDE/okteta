@@ -8,7 +8,7 @@
 
 #include "structuretreemodel.hpp"
 #include "structurestool.hpp"
-#include "structlogging.hpp"
+#include <structureslogging.hpp>
 #include "datatypes/datainformationwithchildren.hpp"
 #include "datatypes/topleveldatainformation.hpp"
 #include "datatypes/array/arraydatainformation.hpp"

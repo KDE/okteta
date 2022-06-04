@@ -21,6 +21,14 @@ okteta_add_library(Core NAMESPACE Kasten
 
 target_compile_definitions(KastenCore PRIVATE -DTRANSLATION_DOMAIN=\"libkasten\")
 
+ecm_qt_declare_logging_category(KastenCore
+    HEADER "logging.hpp"
+    IDENTIFIER "LOG_KASTEN_CORE"
+    CATEGORY_NAME "kasten.core"
+    DESCRIPTION "Kasten Core library"
+    EXPORT OKTETA
+)
+
 macro(KASTENCORE_ADD_SUBLIBRARY _subdir)
     okteta_add_sublibrary(Core  NAMESPACE Kasten
         SUBDIR ${_subdir}

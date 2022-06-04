@@ -8,7 +8,7 @@
 
 #include "uintdatainformation.hpp"
 
-#include "../../structlogging.hpp"
+#include <structureslogging.hpp>
 
 // KF
 #include <KLocalizedString>

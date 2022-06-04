@@ -10,7 +10,7 @@
 
 #include "../topleveldatainformation.hpp"
 #include "stringdatainformation.hpp"
-#include "../../structlogging.hpp"
+#include <structureslogging.hpp>
 
 #include <Okteta/AbstractByteArrayModel>
 

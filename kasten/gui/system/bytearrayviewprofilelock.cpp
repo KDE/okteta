@@ -9,7 +9,7 @@
 #include "bytearrayviewprofilelock.hpp"
 
 // library
-#include <oktetakastengui.hpp>
+#include <logging.hpp>
 // Qt
 #include <QLockFile>
 #include <QSharedPointer>

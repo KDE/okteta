@@ -20,7 +20,7 @@
 #include "../structuredefinitionfile.hpp"
 #include "../script/scriptlogger.hpp"
 #include "../script/scriptengineinitializer.hpp"
-#include "../structlogging.hpp"
+#include <structureslogging.hpp>
 // Qt
 #include <QFile>
 #include <QFileInfo>

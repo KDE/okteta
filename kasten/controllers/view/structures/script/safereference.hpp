@@ -9,7 +9,7 @@
 #ifndef KASTEN_SAFEREFERENCE_HPP
 #define KASTEN_SAFEREFERENCE_HPP
 
-#include "../structlogging.hpp"
+#include <structureslogging.hpp>
 
 #include <QMultiHash>
 #include <QMetaType>

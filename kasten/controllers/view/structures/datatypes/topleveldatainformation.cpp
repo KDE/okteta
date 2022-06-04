@@ -14,8 +14,8 @@
 #include "../script/scripthandler.hpp"
 #include "../script/scriptlogger.hpp"
 #include "../script/scriptengineinitializer.hpp"
-#include "../structlogging.hpp"
 #include "primitivefactory.hpp"
+#include <structureslogging.hpp>
 
 #include <Okteta/AbstractByteArrayModel>
 

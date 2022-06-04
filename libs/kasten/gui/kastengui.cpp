@@ -7,5 +7,3 @@
 */
 
 #include "kastengui.hpp"
-
-Q_LOGGING_CATEGORY(LOG_KASTEN_GUI, "kasten.gui", QtInfoMsg)

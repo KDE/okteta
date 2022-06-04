@@ -18,7 +18,7 @@
 #include "../scriptlogger.hpp"
 #include "../scripthandlerinfo.hpp"
 #include "../safereference.hpp"
-#include "../../structlogging.hpp"
+#include <structureslogging.hpp>
 // Std
 #include <utility>
 

@@ -15,6 +15,7 @@
 #include "byte.hpp"
 
 class QStringList;
+class QString;
 class QChar;
 
 namespace Okteta {

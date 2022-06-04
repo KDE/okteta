@@ -39,6 +39,14 @@ target_link_libraries(structureview-tested-srcs
         KF5::ConfigWidgets
 )
 
+ecm_qt_declare_logging_category(structureview-tested-srcs
+    HEADER "structureslogging.hpp"
+    IDENTIFIER "LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES"
+    CATEGORY_NAME "kasten.okteta.controllers.structures"
+    DESCRIPTION "Okteta Structures tool"
+    EXPORT OKTETA
+)
+
 okteta_add_library(Controllers NAMESPACE Okteta Kasten
     PUBLIC
         OktetaKastenGui
@@ -69,6 +77,14 @@ okteta_add_library(Controllers NAMESPACE Okteta Kasten
 )
 
 target_compile_definitions(OktetaKastenControllers PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")
+
+ecm_qt_declare_logging_category(OktetaKastenControllers
+    HEADER "checksumlogging.hpp"
+    IDENTIFIER "LOG_OKTETA_KASTEN_CONTROLLER_CHECKSUM"
+    CATEGORY_NAME "kasten.okteta.controllers.checksum"
+    DESCRIPTION "Okteta Checksum tool"
+    EXPORT OKTETA
+)
 
 macro(OKTETAKASTENCONTROLLERS_ADD_SUBLIBRARY _subdir)
     okteta_add_sublibrary(Controllers NAMESPACE Okteta Kasten
@@ -192,7 +208,6 @@ oktetakastencontrollers_add_sublibrary(view/checksum
         ChecksumToolViewFactory
     PRIVATE
         ChecksumCalculateJob
-        ChecksumLogging
         ChecksumView
         ChecksumTool
         ChecksumToolView
@@ -501,7 +516,6 @@ oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/setting
 oktetakastencontrollers_add_sublibrary_structures_tested(view/structures
     PRIVATE
         AllPrimitiveTypes
-        StructLogging
 )
 
 #these source files are not needed by the static library for unit tests, therefore keep them separate

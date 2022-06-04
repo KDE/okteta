@@ -26,6 +26,7 @@
 #include "cursor.hpp"
 #include "bordercolumnrenderer.hpp"
 #include "oktetagui.hpp"
+#include <logging.hpp>
 // Okteta core
 #include <Okteta/ValueCodec>
 #include <Okteta/Bookmarkable>

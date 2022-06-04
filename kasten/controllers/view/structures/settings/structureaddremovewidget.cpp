@@ -11,7 +11,7 @@
 #include "../structurestool.hpp"
 #include "../structuresmanager.hpp"
 #include "../structuredefinitionfile.hpp"
-#include "../structlogging.hpp"
+#include <structureslogging.hpp>
 // KF
 #include <KLocalizedString>
 #include <KConfigDialogManager>

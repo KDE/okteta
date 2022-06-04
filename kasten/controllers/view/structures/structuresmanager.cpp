@@ -11,7 +11,7 @@
 // tool
 #include "structureviewpreferences.hpp"
 #include "structuredefinitionfile.hpp"
-#include "structlogging.hpp"
+#include <structureslogging.hpp>
 // Qt
 #include <QStandardPaths>
 #include <QDir>

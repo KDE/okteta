@@ -7,5 +7,3 @@
 */
 
 #include "kastencore.hpp"
-
-Q_LOGGING_CATEGORY(LOG_KASTEN_CORE, "kasten.core", QtInfoMsg)

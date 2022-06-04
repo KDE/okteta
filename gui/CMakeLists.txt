@@ -18,6 +18,14 @@ okteta_add_library(Gui NAMESPACE Okteta
 
 target_compile_definitions(OktetaGui PRIVATE -DTRANSLATION_DOMAIN=\"liboktetagui\")
 
+ecm_qt_declare_logging_category(OktetaGui
+    HEADER "logging.hpp"
+    IDENTIFIER "LOG_OKTETA_GUI"
+    CATEGORY_NAME "okteta.gui"
+    DESCRIPTION "Okteta Gui library"
+    EXPORT OKTETA
+)
+
 macro(OKTETAGUI_ADD_SUBLIBRARY _subdir)
     okteta_add_sublibrary(Gui NAMESPACE Okteta
         SUBDIR ${_subdir}

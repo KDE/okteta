@@ -10,7 +10,7 @@
 #include "../../datatypes/primitive/primitivedatainformation.hpp"
 #include "../../parsers/parserutils.hpp"
 #include "../../allprimitivetypes.hpp"
-#include "../../structlogging.hpp"
+#include <structureslogging.hpp>
 
 PrimitiveScriptClass::PrimitiveScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : DefaultScriptClass(engine, handlerInfo)

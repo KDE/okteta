@@ -9,11 +9,6 @@
 #ifndef OKTETACORE_HPP
 #define OKTETACORE_HPP
 
-// Qt
-#include <QLoggingCategory>
-
-Q_DECLARE_LOGGING_CATEGORY(LOG_OKTETA_CORE)
-
 // here we collect all general data
 // let's see how much it gets ;)
 

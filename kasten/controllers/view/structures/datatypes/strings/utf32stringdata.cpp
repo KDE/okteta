@@ -8,7 +8,7 @@
 
 #include "utf32stringdata.hpp"
 
-#include "../../structlogging.hpp"
+#include <structureslogging.hpp>
 
 #include <QVarLengthArray>
 

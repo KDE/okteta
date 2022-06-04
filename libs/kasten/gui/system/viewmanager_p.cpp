@@ -11,6 +11,7 @@
 // lib
 #include "abstractviewfactory.hpp"
 #include "dummyview.hpp"
+#include <logging.hpp>
 // Qt
 #include <QMutableVectorIterator>
 // Std

@@ -10,6 +10,7 @@
 
 // lib
 #include "arraychangemetricslist.hpp"
+#include <logging.hpp>
 // Std
 #include <cstring>
 

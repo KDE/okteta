@@ -7,7 +7,7 @@
 */
 
 #include "sintdatainformation.hpp"
-#include "../../structlogging.hpp"
+#include <structureslogging.hpp>
 #include <view/poddecoder/typeeditors/sintspinbox.hpp>
 
 // KF

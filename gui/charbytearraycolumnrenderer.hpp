@@ -12,6 +12,8 @@
 // lib
 #include "abstractbytearraycolumnrenderer.hpp"
 
+class QChar;
+
 namespace Okteta {
 
 class CharByteArrayColumnRendererPrivate;

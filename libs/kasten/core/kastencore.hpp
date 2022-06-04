@@ -11,9 +11,6 @@
 
 // Qt core
 #include <QFlags>
-#include <QLoggingCategory>
-
-Q_DECLARE_LOGGING_CATEGORY(LOG_KASTEN_CORE)
 
 namespace Kasten {
 

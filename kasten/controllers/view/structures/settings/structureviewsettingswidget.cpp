@@ -9,7 +9,7 @@
 #include "structureviewsettingswidget.hpp"
 
 #include "structureviewpreferences.hpp"
-#include "../structlogging.hpp"
+#include <structureslogging.hpp>
 
 #include <KLocalizedString>
 

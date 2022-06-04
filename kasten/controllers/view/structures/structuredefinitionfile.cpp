@@ -8,7 +8,7 @@
 
 #include "structuredefinitionfile.hpp"
 
-#include "structlogging.hpp"
+#include <structureslogging.hpp>
 
 #include <QFile>
 #include <QDir>

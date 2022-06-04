@@ -10,7 +10,7 @@
 
 #include "../structuredefinitionfile.hpp"
 #include "../script/scriptlogger.hpp"
-#include "../structlogging.hpp"
+#include <structureslogging.hpp>
 
 #include <QFile>
 

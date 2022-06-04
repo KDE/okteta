@@ -14,6 +14,7 @@
 #include "widgetcolumnstylist.hpp"
 #include "controller/dropper.hpp"
 #include "cursor.hpp"
+#include <logging.hpp>
 // Okteta core
 #include <Okteta/ValueCodec>
 // Qt

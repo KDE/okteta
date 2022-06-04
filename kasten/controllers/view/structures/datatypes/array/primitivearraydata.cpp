@@ -12,7 +12,7 @@
 #include "../primitive/primitivedatainformation.hpp"
 #include "../../script/scriptlogger.hpp"
 #include "../../script/safereference.hpp"
-#include "../../structlogging.hpp"
+#include <structureslogging.hpp>
 
 #include <Okteta/AbstractByteArrayModel>
 

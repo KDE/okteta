@@ -14,7 +14,7 @@
 #include "structurestool.hpp"
 #include "structuresmanager.hpp"
 #include "structureviewitemdelegate.hpp"
-#include "structlogging.hpp"
+#include <structureslogging.hpp>
 // settings
 #include "structureviewpreferences.hpp"
 #include "settings/structureviewsettingswidget.hpp"

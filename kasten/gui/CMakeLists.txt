@@ -22,6 +22,14 @@ okteta_add_library(Gui NAMESPACE Okteta Kasten
 
 target_compile_definitions(OktetaKastenGui PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")
 
+ecm_qt_declare_logging_category(OktetaKastenGui
+    HEADER "logging.hpp"
+    IDENTIFIER "LOG_KASTEN_OKTETA_GUI"
+    CATEGORY_NAME "kasten.okteta.gui"
+    DESCRIPTION "Kasten Okteta Gui module"
+    EXPORT OKTETA
+)
+
 macro(OKTETAKASTENGUI_ADD_SUBLIBRARY _subdir)
     okteta_add_sublibrary(Gui NAMESPACE Okteta Kasten
         REVERSE_NAMESPACE_INCLUDEDIR
