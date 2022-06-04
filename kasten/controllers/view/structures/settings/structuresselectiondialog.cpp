@@ -11,13 +11,15 @@
 
 // controller
 #include "structureaddremovewidget.hpp"
+#include <structureslogging.hpp>
 // KF
 #include <KLocalizedString>
 // Qt
 #include <QDialogButtonBox>
 #include <QVBoxLayout>
 
-StructuresSelectionDialog::StructuresSelectionDialog(const QStringList& selected, Kasten::StructuresTool* tool,
+StructuresSelectionDialog::StructuresSelectionDialog(const QMap<QString, Kasten::StructureDefinitionFile*>& structureDefs,
+                                                     const StructureEnabledList& enabledList,
                                                      QWidget* parent)
     : QDialog(parent)
 {
@@ -27,7 +29,7 @@ StructuresSelectionDialog::StructuresSelectionDialog(const QStringList& selected
 
     auto* layout = new QVBoxLayout;
 
-    m_structureAddRemoveWidget = new StructureAddRemoveWidget(selected, tool, this);
+    m_structureAddRemoveWidget = new StructureAddRemoveWidget(structureDefs, enabledList, this);
 
     auto* dialogButtonBox = new QDialogButtonBox;
     dialogButtonBox->addButton(QDialogButtonBox::Ok);
@@ -49,5 +51,8 @@ void StructuresSelectionDialog::onFinished(int result)
         return;
     }
 
-    Q_EMIT structuresAccepted(m_structureAddRemoveWidget->values());
+    const QStringList enabledStructures = m_structureAddRemoveWidget->values();
+    qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "selected " << enabledStructures;
+
+    Q_EMIT structuresAccepted(enabledStructures);
 }

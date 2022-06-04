@@ -89,7 +89,7 @@ public Q_SLOTS:
     void unmark(/*const QModelIndex& idx*/);
     void updateData(const Okteta::ArrayChangeMetricsList& list);
     void addChildItem(TopLevelDataInformation* child);
-    void setSelectedStructuresInView();
+    void setEnabledStructuresInView();
     void validateAllStructures();
 
 private Q_SLOTS:

@@ -15,9 +15,8 @@
 // Qt
 #include <QWidget>
 
-class StructureAddRemoveWidget;
+class StructuresSelector;
 class QPushButton;
-class KPluginSelector;
 
 namespace KNSWidgets {
 class Button;
@@ -30,9 +29,9 @@ class StructuresTool;
 class StructuresManagerView : public QWidget
 {
     Q_OBJECT
+    Q_PROPERTY(QStringList values READ values WRITE setValues NOTIFY changed USER true)
 
 public:
-    Q_PROPERTY(QStringList values READ values NOTIFY changed USER true)
     explicit StructuresManagerView(Kasten::StructuresTool* tool, QWidget* parent = nullptr);
 
     ~StructuresManagerView() override;
@@ -40,28 +39,23 @@ public:
 public:
     QStringList values() const;
 
+public Q_SLOTS:
+    void setValues(const QStringList& values);
+
 Q_SIGNALS:
-    void selectedPluginsChanged();
-    void changed(const QStringList& newValues);
+    void changed();
 
 private Q_SLOTS:
     void onGetNewStructuresClicked(const QList<KNSCore::EntryInternal>& changedEntries);
-    void onPluginSelectorChange(bool change);
     void advancedSelection();
-    void setSelectedStructures(const QStringList& selectedStructures);
-
-private:
-    void rebuildPluginSelectorEntries();
-    void reloadSelectedItems();
+    void setEnabledStructures(const QStringList& enabledStructures);
 
 private:
     Kasten::StructuresTool* mTool;
-    QStringList mSelectedStructures;
+
     KNSWidgets::Button* mGetNewStructuresButton;
     QPushButton* mAdvancedSelectionButton;
-    KPluginSelector* mStructuresSelector = nullptr;
-    bool mRebuildingPluginsList : 1;
-
+    StructuresSelector* mStructuresSelector = nullptr;
 };
 
 #endif

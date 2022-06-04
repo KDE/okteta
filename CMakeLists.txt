@@ -80,7 +80,7 @@ if( BUILD_OKTETAKASTENLIBS )
         Bookmarks
         Completion
         IconThemes
-        KCMUtils
+        ItemViews
         KIO
         NewStuff
         Parts

@@ -15,6 +15,8 @@
 // Qt
 #include <QStandardPaths>
 #include <QDir>
+// Std
+#include <algorithm>
 
 namespace Kasten {
 
@@ -52,22 +54,23 @@ void StructuresManager::reloadPaths()
     }
 
     qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "found structures: " << paths;
-    const KPluginInfo::List plugins = KPluginInfo::fromFiles(paths, mConfig->group("Plugins"));
-    for (const KPluginInfo& info : plugins) {
-        addStructDef(info);
+
+    for (const QString& path : std::as_const(paths)) {
+        StructureMetaData structure(path);
+        addStructDef(structure);
     }
 }
 
-void StructuresManager::addStructDef(const KPluginInfo& info)
+void StructuresManager::addStructDef(const StructureMetaData& metaData)
 {
-    const QString pluginName = info.pluginName();
-    if (mDefs.contains(pluginName)) {
-        qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "Skipping structure already loaded: " << pluginName;
+    const QString id = metaData.id();
+    if (mDefs.contains(id)) {
+        qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "Skipping structure already loaded: " << id;
         return;
     }
 
-    auto* def = new StructureDefinitionFile(info);
-    mDefs.insert(pluginName, def);
+    auto* def = new StructureDefinitionFile(metaData);
+    mDefs.insert(id, def);
 }
 
 StructureDefinitionFile* StructuresManager::definition(const QString& pluginName) const

@@ -8,13 +8,12 @@
 
 #include "structureaddremovewidget.hpp"
 
-#include "../structurestool.hpp"
 #include "../structuresmanager.hpp"
 #include "../structuredefinitionfile.hpp"
+#include "structureenabledlist.hpp"
 #include <structureslogging.hpp>
 // KF
 #include <KLocalizedString>
-#include <KConfigDialogManager>
 // Qt
 #include <QPushButton>
 #include <QLabel>
@@ -27,9 +26,19 @@
 
 using namespace Kasten;
 
-StructureAddRemoveWidget::StructureAddRemoveWidget(const QStringList& selected, Kasten::StructuresTool* tool, QWidget* parent)
+namespace {
+
+enum EntryRoles {
+    OnlyOneRole = Qt::UserRole,
+};
+constexpr int OnlyOneRowColumn = 0;
+
+}
+
+StructureAddRemoveWidget::StructureAddRemoveWidget(const QMap<QString, Kasten::StructureDefinitionFile*>& structureDefs,
+                                                   const StructureEnabledList& enabledList,
+                                                   QWidget* parent)
     : QWidget(parent)
-    , mTool(tool)
 {
     QHBoxLayout* baseLayout;
     QVBoxLayout* tree1Layout;
@@ -87,64 +96,63 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(const QStringList& selected, 
     connect(mUpButton, &QPushButton::pressed, this, &StructureAddRemoveWidget::moveUp);
     connect(mDownButton, &QPushButton::pressed, this, &StructureAddRemoveWidget::moveDown);
 
-    buildAvailableList();
+    buildAvailableList(structureDefs, enabledList);
 
     // already loaded defs:
-    QRegularExpression regex(QStringLiteral("'(.+)':'(.+)'"));
-    for (const QString& s : selected) {
-        QRegularExpressionMatch match = regex.match(s);
-        if (match.hasMatch()) {
-            const QString pluginName = match.captured(1);
-            const QString structName = match.captured(2);
-            qDebug() << "HHHHEEEEHE" <<s << pluginName << structName;
-            if (structName == QLatin1String("*")) {
-                // add all of them
-                for (int i = 0; i < mTreeAvailable->topLevelItemCount(); i++) {
-                    QTreeWidgetItem* avail = mTreeAvailable->topLevelItem(i);
-                    if (avail->text(0) != pluginName) {
-                        continue;
-                    }
-                    for (int i = 0; i < avail->childCount(); i++) {
-                        QTreeWidgetItem* selStruct = avail->child(i);
-                        auto* item = new QTreeWidgetItem(mTreeSelected, QStringList { selStruct->text(0), pluginName });
-                        mTreeSelected->addTopLevelItem(item);
-                    }
-
-                    break;
-                }
-            } else {
-                auto* item = new QTreeWidgetItem(mTreeSelected, QStringList { structName, pluginName });
-                mTreeSelected->addTopLevelItem(item);
+    for (const StructureEnabledData& enabledData : enabledList) {
+        if (enabledData.structure == QLatin1String("*")) {
+            // add all of them
+            StructureDefinitionFile* def = structureDefs.value(enabledData.id);
+            if (!def) {
+                continue;
             }
+            const auto structureNames = def->structureNames();
+            const bool isOnlyOne = (structureNames.size() == 1);
+            for (const QString& structure : structureNames) {
+                appendEnabledStructureItem(enabledData.id, structure, isOnlyOne);
+            }
+        } else {
+            appendEnabledStructureItem(enabledData.id, enabledData.structure, false);
         }
     }
-
-    syncData();
 }
 
 StructureAddRemoveWidget::~StructureAddRemoveWidget() = default;
 
 QStringList StructureAddRemoveWidget::values() const
 {
-    return mValues;
+    const QString expressionTemplate = QStringLiteral("\'%1\':\'%2\'");
+
+    QStringList enabledStructures;
+    const int topLevelItemCount = mTreeSelected->topLevelItemCount();
+    enabledStructures.reserve(topLevelItemCount);
+    for (int i = 0; i < topLevelItemCount; ++i) {
+        QTreeWidgetItem* item = mTreeSelected->topLevelItem(i);
+        const bool isOnlyOne = item->data(OnlyOneRowColumn, ::OnlyOneRole).toBool();
+        const QString id = item->text(1);
+        const QString structure = isOnlyOne ? QStringLiteral("*") : item->text(0);
+        enabledStructures.append(expressionTemplate.arg(id, structure));
+    }
+
+    return enabledStructures;
 }
 
-void StructureAddRemoveWidget::buildAvailableList()
+void StructureAddRemoveWidget::buildAvailableList(const QMap<QString, Kasten::StructureDefinitionFile*>& structureDefs,
+                                                  const StructureEnabledList& enabledList)
 {
-    const auto loadedDefs = mTool->manager()->structureDefs();
     QList<QTreeWidgetItem*> availableItems;
-    for (StructureDefinitionFile* def : loadedDefs) {
+    for (StructureDefinitionFile* def : structureDefs) {
         if (!def->isValid()) {
             continue;
         }
-        QString pluginName = def->pluginInfo().pluginName();
-        if (!def->pluginInfo().isPluginEnabled()) {
-            continue;
+        const QString id = def->metaData().id();
+        if (!enabledList.isEnabled(id)) {
+           continue;
         }
-        auto* item = new QTreeWidgetItem(mTreeAvailable, QStringList { def->pluginInfo().pluginName(), pluginName });
+        auto* item = new QTreeWidgetItem(mTreeAvailable, QStringList { def->metaData().id(), id });
         const auto structureNames = def->structureNames();
         for (const QString& name : structureNames) {
-            auto* subItem = new QTreeWidgetItem(item, QStringList { name, pluginName });
+            auto* subItem = new QTreeWidgetItem(item, QStringList { name, id });
             item->addChild(subItem);
         }
 
@@ -155,45 +163,40 @@ void StructureAddRemoveWidget::buildAvailableList()
 
 }
 
+void StructureAddRemoveWidget::appendEnabledStructureItem(const QString& id, const QString& structure,
+                                                          bool isOnlyOne)
+{
+    auto* item = new QTreeWidgetItem(mTreeSelected, QStringList { structure, id });
+    item->setData(OnlyOneRowColumn, ::OnlyOneRole, isOnlyOne);
+    mTreeSelected->addTopLevelItem(item);
+}
+
 void StructureAddRemoveWidget::moveLeft()
 {
     const QList<QTreeWidgetItem*> selected = mTreeSelected->selectedItems();
-    bool changed = false;
     for (QTreeWidgetItem* item : selected) {
         delete mTreeSelected->takeTopLevelItem(
             mTreeSelected->indexOfTopLevelItem(item));
-        changed = true;
-    }
-
-    if (changed) {
-        syncData();
     }
 }
 
 void StructureAddRemoveWidget::moveRight()
 {
     const QList<QTreeWidgetItem*> selected = mTreeAvailable->selectedItems();
-    bool changed = false;
     for (const QTreeWidgetItem* item : selected) {
         if (!item->parent()) {
             continue;     // maybe sometime add all subitems
         }
-        auto* moveOver = new QTreeWidgetItem(mTreeSelected, QStringList { item->text(0), item->text(1) });
-        // item name then parent name then path
-        mTreeSelected->addTopLevelItem(moveOver);
-        changed = true;
+        const bool isOnlyOne = item->data(OnlyOneRowColumn, ::OnlyOneRole).toBool();
+        const QString id = item->text(1);
+        const QString structure = item->text(0);
+        appendEnabledStructureItem(id, structure, isOnlyOne);
     }
-
-    if (changed) {
-        syncData();
-    }
-
 }
 
 void StructureAddRemoveWidget::moveUp()
 {
     const QList<QTreeWidgetItem*> selected = mTreeSelected->selectedItems();
-    bool changed = false;
     int firstIndex = -1;
     for (QTreeWidgetItem* item : selected) {
         int idx = mTreeSelected->indexOfTopLevelItem(item);
@@ -204,9 +207,6 @@ void StructureAddRemoveWidget::moveUp()
         firstIndex = firstIndex == -1 ? newIdx : firstIndex;
     }
 
-    if (changed) {
-        syncData();
-    }
     if (firstIndex != -1) {
         mTreeSelected->setCurrentItem(mTreeSelected->topLevelItem(firstIndex));
     }
@@ -215,7 +215,6 @@ void StructureAddRemoveWidget::moveUp()
 void StructureAddRemoveWidget::moveDown()
 {
     const QList<QTreeWidgetItem*> selected = mTreeSelected->selectedItems();
-    bool changed = false;
     int firstIndex = -1;
     int maxItmCount = mTreeSelected->topLevelItemCount();
     for (QTreeWidgetItem* item : selected) {
@@ -227,73 +226,7 @@ void StructureAddRemoveWidget::moveDown()
         firstIndex = firstIndex == -1 ? newIdx : firstIndex;
     }
 
-    if (changed) {
-        syncData();
-    }
     if (firstIndex != -1) {
         mTreeSelected->setCurrentItem(mTreeSelected->topLevelItem(firstIndex));
-    }
-}
-void StructureAddRemoveWidget::syncData()
-{
-    const auto topLevelItemCount = mTreeSelected->topLevelItemCount();
-    QStringList strings;
-    strings.reserve(topLevelItemCount);
-    for (int i = 0; i < topLevelItemCount; ++i) {
-        QTreeWidgetItem* item = mTreeSelected->topLevelItem(i);
-        QString dataStr = QStringLiteral("\'%1\':\'%2\'").arg(item->text(1), item->text(0));
-        strings.append(dataStr);
-    }
-
-    qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "selection changed to: " << strings;
-    mValues = strings;
-}
-
-void StructureAddRemoveWidget::updateAvailable()
-{
-    // rebuild available tree
-    mTreeAvailable->clear();
-    buildAvailableList();
-
-    // remove any structs that references not loaded files
-    QStringList plugins;
-    const auto loadedDefs = mTool->manager()->structureDefs();
-    for (const StructureDefinitionFile* def : loadedDefs) {
-        QString pluginName = def->pluginInfo().pluginName();
-        if (def->pluginInfo().isValid() && !def->pluginInfo().isPluginEnabled()) {
-            continue;
-        }
-        plugins << pluginName;
-    }
-
-    bool changed = false;
-    QList<QTreeWidgetItem*> toRemove;
-    qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "paths = " << plugins;
-    for (int i = 0; i < mTreeSelected->topLevelItemCount(); ++i) {
-        QTreeWidgetItem* item = mTreeSelected->topLevelItem(i);
-        // text(1) is plugin name
-        if (!plugins.contains(item->text(1))) {
-            qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES)
-                << "removed item: " << QStringLiteral("\'%1\':\'%2\'").arg(item->text(1),
-                                                                           item->text(0));
-
-            changed = true;
-            toRemove.append(item);
-        } else {
-            qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES)
-                << "item " << QStringLiteral("\'%1\':\'%2\'").arg(item->text(1),
-                                                                  item->text(0)) << "still loaded -> keep";
-        }
-    }
-
-    for (QTreeWidgetItem* itm : std::as_const(toRemove)) {
-        qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES)
-            << "item " << QStringLiteral("\'%1\':\'%2\'").arg(itm->text(1),
-                                                              itm->text(0)) << "removed";
-        delete mTreeSelected->takeTopLevelItem(mTreeSelected->indexOfTopLevelItem(itm));
-    }
-
-    if (changed) {
-        syncData();
     }
 }

@@ -166,7 +166,7 @@ void StructureView::openSettingsDlg()
                     QStringLiteral("preferences-plugin"));
 
     // User edited the configuration - update your local copies of the configuration data
-    connect(dialog, &KConfigDialog::settingsChanged, mTool, &StructuresTool::setSelectedStructuresInView);
+    connect(dialog, &KConfigDialog::settingsChanged, mTool, &StructuresTool::setEnabledStructuresInView);
 
     // TODO: kconfig_compiler signals work now, use those signals and not the generic KConfigDialog::settingsChanged
     dialog->setCurrentPage(displ);

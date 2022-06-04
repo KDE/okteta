@@ -12,11 +12,13 @@
 
 // Qt
 #include <QDialog>
+#include <QMap>
 
 namespace Kasten {
-class StructuresTool;
+class StructureDefinitionFile;
 }
 class StructureAddRemoveWidget;
+class StructureEnabledList;
 class QStringList;
 
 class StructuresSelectionDialog : public QDialog
@@ -24,7 +26,8 @@ class StructuresSelectionDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit StructuresSelectionDialog(const QStringList& selected, Kasten::StructuresTool* tool,
+    explicit StructuresSelectionDialog(const QMap<QString, Kasten::StructureDefinitionFile*>& structureDefs,
+                                       const StructureEnabledList& enabledList,
                                        QWidget* parent = nullptr);
 
 Q_SIGNALS:

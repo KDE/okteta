@@ -22,33 +22,33 @@
 
 namespace Kasten {
 
-StructureDefinitionFile::StructureDefinitionFile(const KPluginInfo& info)
-    : mPluginInfo(info)
+StructureDefinitionFile::StructureDefinitionFile(const StructureMetaData& metaData)
+    : mMetaData(metaData)
 {
-    const QFileInfo tmp(info.entryPath());
+    const QFileInfo tmp(mMetaData.entryPath());
     const QString absoluteDir = tmp.absolutePath();
 
-    QString category = info.category();
-    if (category == QLatin1String("structure/js")) {
+    const QString categoryId = mMetaData.categoryId();
+    if (categoryId == QLatin1String("structure/js")) {
         const QString filename = absoluteDir + QLatin1String("/main.js");
-        mParser.reset(new ScriptFileParser(mPluginInfo.pluginName(), filename));
-    } else if (category == QLatin1String("structure")) {
+        mParser.reset(new ScriptFileParser(mMetaData.id(), filename));
+    } else if (categoryId == QLatin1String("structure")) {
         // by default use main.osd, only if it doesn't exist fall back to old behaviour
         QString filename = absoluteDir + QLatin1String("/main.osd");
         if (!QFile::exists(filename)) {
-            filename = absoluteDir + QLatin1Char('/') + mPluginInfo.pluginName() + QLatin1String(".osd");
+            filename = absoluteDir + QLatin1Char('/') + mMetaData.id() + QLatin1String(".osd");
         }
-        mParser.reset(new OsdParser(mPluginInfo.pluginName(), filename));
+        mParser.reset(new OsdParser(mMetaData.id(), filename));
     } else {
-        qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "no valid parser found for plugin category '" << category << "'";
+        qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "no valid parser found for plugin category '" << categoryId << "'";
     }
 }
 
 StructureDefinitionFile::~StructureDefinitionFile() = default;
 
-KPluginInfo StructureDefinitionFile::pluginInfo() const
+StructureMetaData StructureDefinitionFile::metaData() const
 {
-    return mPluginInfo;
+    return mMetaData;
 }
 
 bool StructureDefinitionFile::isValid() const

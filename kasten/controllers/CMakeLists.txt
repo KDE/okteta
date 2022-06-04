@@ -59,7 +59,7 @@ okteta_add_library(Controllers NAMESPACE Okteta Kasten
         KF5::NewStuffWidgets
         KF5::I18n
         KF5::ConfigWidgets
-        KF5::KCMUtils
+        KF5::ItemViews
         KF5::IconThemes
         KF5::Completion
         Qt5::PrintSupport
@@ -522,9 +522,16 @@ oktetakastencontrollers_add_sublibrary_structures_tested(view/structures
 oktetakastencontrollers_add_sublibrary(view/structures/settings
     PRIVATE
         StructureAddRemoveWidget
+        StructureItemDelegate
+        StructureEnabledList
+        StructuresSelectionModel
+        StructuresSelectionSortFilterProxyModel
         StructuresSelectionDialog
         StructureViewSettingsWidget
         StructuresManagerView
+        StructuresSelector
+        AboutStructureDialog
+        LicenseDialog
     UI structureviewsettingswidget.ui
 )
 oktetakastencontrollers_add_sublibrary(view/structures
@@ -535,6 +542,7 @@ oktetakastencontrollers_add_sublibrary(view/structures
         StructuresManager
         StructuresTool
         StructureTreeModel
+        StructureMetaData
         StructureDefinitionFile
         StructureView
         StructuresToolView

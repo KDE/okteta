@@ -9,13 +9,15 @@
 #ifndef KASTEN_STRUCTURESMANAGER_HPP
 #define KASTEN_STRUCTURESMANAGER_HPP
 
+// tool
 #include "structuredefinitionfile.hpp"
+// KF
+#include <KSharedConfig>
 // Qt
 #include <QStringList>
 #include <QDir>
-// KF
-#include <KSharedConfig>
-#include <KPluginInfo>
+
+class StructureMetaData;
 
 namespace Kasten {
 
@@ -38,7 +40,7 @@ public:
     StructureDefinitionFile* definition(const QString& pluginName) const;
 
 private:
-    void addStructDef(const KPluginInfo& info);
+    void addStructDef(const StructureMetaData& metaData);
 
 private:
     QMap<QString, StructureDefinitionFile*> mDefs;

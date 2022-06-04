@@ -40,7 +40,7 @@ StructuresTool::StructuresTool()
     // leave mLoadedFiles empty for now, since otherwise loading slot will not work
     setObjectName(QStringLiteral("StructuresTool"));
     mManager->reloadPaths();
-    setSelectedStructuresInView();
+    setEnabledStructuresInView();
     //	mUtf8Codec = QTextCodec::codecForName("UTF-8");
 
     connect(this, &StructuresTool::byteOrderChanged, this, &StructuresTool::onByteOrderChanged);
@@ -238,7 +238,7 @@ void StructuresTool::addChildItem(TopLevelDataInformation* child)
     }
 }
 
-void StructuresTool::setSelectedStructuresInView()
+void StructuresTool::setEnabledStructuresInView()
 {
     mData.clear();
     mInvalidData.clear();
@@ -251,10 +251,10 @@ void StructuresTool::setSelectedStructuresInView()
         const QString& s = loadedStructs.at(i);
         QRegularExpressionMatch match = regex.match(s);
         if (match.hasMatch()) {
-            const QString pluginName = match.captured(1);
+            const QString structureId = match.captured(1);
             const QString name = match.captured(2);
-            // qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "pluginName=" << path << " structureName=" << name;
-            StructureDefinitionFile* def = mManager->definition(pluginName);
+            // qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "structureId=" << path << " structureName=" << name;
+            StructureDefinitionFile* def = mManager->definition(structureId);
             if (!def) {
                 continue;
             }
@@ -273,7 +273,7 @@ void StructuresTool::setSelectedStructuresInView()
                 if (data) {
                     addChildItem(data);
                 } else {
-                    qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "Could not find structure with name" << name << "in" << pluginName;
+                    qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "Could not find structure with name" << name << "in" << structureId;
                 }
             }
         }

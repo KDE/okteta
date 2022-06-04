@@ -11,8 +11,7 @@
 
 // tool
 #include "datatypes/primitive/enumdefinition.hpp"
-// KF
-#include <KPluginInfo>
+#include "structuremetadata.hpp"
 // Qt
 #include <QString>
 #include <QVector>
@@ -41,7 +40,7 @@ public:
      * @param info the information about this structure definition
      *      (passed by value so nothing bad can happen)
      */
-    explicit StructureDefinitionFile(const KPluginInfo& info);
+    explicit StructureDefinitionFile(const StructureMetaData& metaData);
     virtual ~StructureDefinitionFile();
 
 public:
@@ -50,11 +49,11 @@ public:
     TopLevelDataInformation* structure(const QString& name) const;
     /** @return the absolute path to the directory containing the .desktop file */
     QString absolutePath() const;
-    KPluginInfo pluginInfo() const;
+    StructureMetaData metaData() const;
     bool isValid() const;
 
 private:
-    KPluginInfo mPluginInfo;
+    StructureMetaData mMetaData;
     std::unique_ptr<AbstractStructureParser> mParser;
 };
 
