@@ -61,7 +61,7 @@ Notes:
 <!--     <generic-icon name="application-octet-stream"/> -->
     <comment>Intel hexadecimal object file</comment>
     <comment xml:lang="ca">Fitxer objecte hexadecimal d'Intel</comment>
-    <comment xml:lang="ca@valencia">Fitxer objecte hexadecimal d'Intel</comment>
+    <comment xml:lang="ca@valencia">Ficher objecte hexadecimal d'Intel</comment>
     <comment xml:lang="cs">Hexadecimální objektový soubor Intel®</comment>
     <comment xml:lang="de">Intel-Hexadezimal-Objektdatei</comment>
     <comment xml:lang="el">Δεκαεξαδικό μεταφρασμένο αρχείο Intel</comment>
@@ -165,7 +165,7 @@ Notes:
     <generic-icon name="text-x-hex"/>
     <comment>Btoa Encoded File</comment>
     <comment xml:lang="ca">Fitxer BTOA codificat</comment>
-    <comment xml:lang="ca@valencia">Fitxer BTOA codificat</comment>
+    <comment xml:lang="ca@valencia">Ficher BTOA codificat</comment>
     <comment xml:lang="cs">Data kódovaná Btoa</comment>
     <comment xml:lang="de">Btoa-kodierte Datei</comment>
     <comment xml:lang="el">Κρυπτογραφημένο αρχείο με Btoa</comment>
@@ -236,7 +236,7 @@ Notes:
     <generic-icon name="text-x-hex"/>
     <comment>Uuencoded file</comment>
     <comment xml:lang="ca">Fitxer «uuencoded»</comment>
-    <comment xml:lang="ca@valencia">Fitxer «uuencoded»</comment>
+    <comment xml:lang="ca@valencia">Ficher «uuencoded»</comment>
     <comment xml:lang="de">UUencode-Datei</comment>
     <comment xml:lang="el">Uu κρυπτογραφημένο αρχείο</comment>
     <comment xml:lang="en_GB">Uuencoded file</comment>
@@ -273,7 +273,7 @@ Notes:
     <generic-icon name="text-x-hex"/>
     <comment>Xxencoded file</comment>
     <comment xml:lang="ca">Fitxer «xxencoded»</comment>
-    <comment xml:lang="ca@valencia">Fitxer «xxencoded»</comment>
+    <comment xml:lang="ca@valencia">Ficher «xxencoded»</comment>
     <comment xml:lang="de">Xxencode-Datei</comment>
     <comment xml:lang="el">Xx κρυπτογραφημένο αρχείο</comment>
     <comment xml:lang="en_GB">Xxencoded file</comment>
