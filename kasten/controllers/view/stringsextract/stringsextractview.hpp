@@ -12,11 +12,11 @@
 // Qt
 #include <QWidget>
 
-class QPushButton;
 class QTreeView;
 class QSortFilterProxyModel;
 class QModelIndex;
 class QSpinBox;
+class QAction;
 
 namespace Kasten {
 
@@ -56,9 +56,9 @@ private:
 
     QTreeView* mContainedStringTableView;
     QSpinBox* mMinLengthSpinBox;
-    QPushButton* mUpdateButton;
-    QPushButton* mCopyButton;
-    QPushButton* mGotoButton;
+    QAction* mUpdateAction;
+    QAction* mCopyAction;
+    QAction* mGotoAction;
 };
 
 inline StringsExtractTool* StringsExtractView::tool() const { return mTool; }

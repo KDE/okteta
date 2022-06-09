@@ -12,14 +12,17 @@
 #include "podtablemodel.hpp"
 #include "poddelegate.hpp"
 #include "poddecodertool.hpp"
+// utils
+#include <labelledtoolbarwidget.hpp>
 // KF
 #include <KComboBox>
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <KStandardAction>
 // Qt
+#include <QToolBar>
 #include <QLabel>
-#include <QLayout>
+#include <QVBoxLayout>
 #include <QCheckBox>
 #include <QTreeView>
 #include <QHeaderView>
@@ -36,8 +39,9 @@ PODTableView::PODTableView(PODDecoderTool* tool, QWidget* parent)
     : QWidget(parent)
     , mTool(tool)
 {
-    QBoxLayout* baseLayout = new QVBoxLayout(this);
+    auto* baseLayout = new QVBoxLayout(this);
     baseLayout->setContentsMargins(0, 0, 0, 0);
+    baseLayout->setSpacing(0);
 
     // table
     mPODTableModel = new PODTableModel(mTool, this);
@@ -68,8 +72,7 @@ PODTableView::PODTableView(PODDecoderTool* tool, QWidget* parent)
     baseLayout->addWidget(mPODTableView, 10);
 
     // settings
-    QBoxLayout* settingsLayout = new QHBoxLayout();
-    settingsLayout->setContentsMargins(0, 0, 0, 0);
+    auto* settingsToolBar = new QToolBar(this);
 
     mByteOrderSelection = new KComboBox(this);
     mByteOrderSelection->addItem(i18nc("@item:inlistbox", "Big-endian"));     // add first for index
@@ -81,25 +84,23 @@ PODTableView::PODTableView(PODDecoderTool* tool, QWidget* parent)
         i18nc("@info:tooltip",
               "The byte order to use for decoding the bytes.");
     mByteOrderSelection->setToolTip(byteOrderToolTip);
-    settingsLayout->addWidget(mByteOrderSelection);
+    settingsToolBar->addWidget(mByteOrderSelection);
 
     auto* unsignedAsHexLabel = new QLabel(i18nc("@option:check", "Unsigned as hexadecimal:"), this);
-    settingsLayout->addWidget(unsignedAsHexLabel);
 
     mUnsignedAsHexCheck = new QCheckBox(this);
     mUnsignedAsHexCheck->setChecked(mTool->isUnsignedAsHex());
     connect(mUnsignedAsHexCheck, &QCheckBox::toggled,
             mTool, &PODDecoderTool::setUnsignedAsHex);
-    unsignedAsHexLabel->setBuddy(mUnsignedAsHexCheck);
+    auto* labelledUnsignedAsHexCheck = new LabelledToolBarWidget(unsignedAsHexLabel, mUnsignedAsHexCheck, this);
     const QString unsignedAsHexToolTip =
         i18nc("@info:tooltip",
               "Sets whether the values of the unsigned integer types are shown as hexadecimal instead of as decimal.");
     unsignedAsHexLabel->setToolTip(unsignedAsHexToolTip);
     mUnsignedAsHexCheck->setToolTip(unsignedAsHexToolTip);
-    settingsLayout->addWidget(mUnsignedAsHexCheck);
-    settingsLayout->addStretch();
+    settingsToolBar->addWidget(labelledUnsignedAsHexCheck);
 
-    baseLayout->addLayout(settingsLayout);
+    baseLayout->addWidget(settingsToolBar);
 
     mTool->setDifferentSizeDialog(this);
 

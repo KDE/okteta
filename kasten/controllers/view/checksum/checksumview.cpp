@@ -15,20 +15,24 @@
 #include <abstractbytearraychecksumparametersetedit.hpp>
 #include <abstractbytearraychecksumparameterset.hpp>
 #include <abstractbytearraychecksumalgorithm.hpp>
+// utils
+#include <labelledtoolbarwidget.hpp>
 // KF
 #include <KComboBox>
-#include <KGuiItem>
 #include <KLocalizedString>
 // Qt
+#include <QToolBar>
 #include <QLabel>
 #include <QGroupBox>
 #include <QStackedWidget>
 #include <QLineEdit>
-#include <QPushButton>
-#include <QLayout>
+#include <QAction>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
 #include <QClipboard>
 #include <QApplication>
 #include <QAbstractItemView>
+#include <QIcon>
 
 namespace Kasten {
 
@@ -38,23 +42,24 @@ ChecksumView::ChecksumView(ChecksumTool* tool, QWidget* parent)
 {
     auto* baseLayout = new QVBoxLayout(this);
     baseLayout->setContentsMargins(0, 0, 0, 0);
+    baseLayout->setSpacing(0);
 
     // algorithm
-    auto* algorithmLayout = new QHBoxLayout();
+    auto* algorithmToolBar = new QToolBar(this);
     auto* label = new QLabel(i18nc("@label:listbox algorithm to use for the checksum", "Algorithm:"), this);
     mAlgorithmComboBox = new KComboBox(this);
     connect(mAlgorithmComboBox, qOverload<int>(&KComboBox::activated),
             mTool, &ChecksumTool::setAlgorithm);
 
-    label->setBuddy(mAlgorithmComboBox);
+    auto* labelledAlgorithmComboBox = new LabelledToolBarWidget(label, mAlgorithmComboBox, this);
     const QString algorithmWhatsThis =
         i18nc("@info:whatsthis", "Select the algorithm to use for the checksum.");
     label->setWhatsThis(algorithmWhatsThis);
     mAlgorithmComboBox->setWhatsThis(algorithmWhatsThis);
+    mAlgorithmComboBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 
-    algorithmLayout->addWidget(label);
-    algorithmLayout->addWidget(mAlgorithmComboBox, 10);
-    baseLayout->addLayout(algorithmLayout);
+    algorithmToolBar->addWidget(labelledAlgorithmComboBox);
+    baseLayout->addWidget(algorithmToolBar);
 
     // parameter
     auto* parameterSetBox = new QGroupBox(i18nc("@title:group", "Parameters"), this);
@@ -66,26 +71,25 @@ ChecksumView::ChecksumView(ChecksumTool* tool, QWidget* parent)
     parameterSetLayout->addWidget(mParameterSetEditStack);
 
     // calculate
-    auto* calculateLayout = new QHBoxLayout();
+    auto* actionToolBar = new QToolBar(this);
+    actionToolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
 
-    calculateLayout->addStretch();
-    const KGuiItem updateGuiItem =
-        KGuiItem(i18nc("@action:button calculate the checksum", "&Calculate"),
-                 QStringLiteral("run-build"),
-                 i18nc("@info:tooltip",
-                       "Calculate the checksum for the bytes in the selected range."),
-                 xi18nc("@info:whatsthis",
-                        "If you press the <interface>Calculate</interface> button, the list will be updated "
-                        "to all strings which are contained in the selected range and have the set minimum length."));
-    mCalculateButton = new QPushButton(this);
-    KGuiItem::assign(mCalculateButton, updateGuiItem);
-    mCalculateButton->setEnabled(mTool->isApplyable());
-    connect(mCalculateButton, &QPushButton::clicked,
-            mTool, &ChecksumTool::calculateChecksum);
+    auto* stretcher = new QWidget(this);
+    stretcher->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+    actionToolBar->addWidget(stretcher);
 
-    addButton(mCalculateButton, AbstractToolWidget::Default);
-    calculateLayout->addWidget(mCalculateButton);
-    baseLayout->addLayout(calculateLayout);
+    mCalculateAction =
+        actionToolBar->addAction(QIcon::fromTheme(QStringLiteral("run-build")),
+                                 i18nc("@action:button calculate the checksum", "&Calculate"),
+                                 mTool, &ChecksumTool::calculateChecksum);
+    mCalculateAction->setToolTip(i18nc("@info:tooltip",
+                                       "Calculate the checksum for the bytes in the selected range."));
+    mCalculateAction->setWhatsThis(xi18nc("@info:whatsthis",
+                                          "If you press the <interface>Calculate</interface> button, the list will be updated "
+                                          "to all strings which are contained in the selected range and have the set minimum length."));
+    mCalculateAction->setEnabled(mTool->isApplyable());
+
+    baseLayout->addWidget(actionToolBar);
 
     mChecksumLabel = new QLineEdit(this);
     mChecksumLabel->setReadOnly(true);
@@ -174,12 +178,12 @@ void ChecksumView::onAlgorithmChanged(int algorithmId)
 void ChecksumView::onChecksumUptodateChanged(bool checksumUptodate)
 {
     const bool isApplyable = mTool->isApplyable();
-    mCalculateButton->setEnabled(!checksumUptodate && isApplyable);
+    mCalculateAction->setEnabled(!checksumUptodate && isApplyable);
 }
 
 void ChecksumView::onApplyableChanged(bool isApplyable)
 {
-    mCalculateButton->setEnabled(!mTool->isUptodate() && isApplyable);
+    mCalculateAction->setEnabled(!mTool->isUptodate() && isApplyable);
 }
 
 void ChecksumView::onValuesChanged()
@@ -194,7 +198,7 @@ void ChecksumView::onValuesChanged()
 
 void ChecksumView::onValidityChanged(bool isValid)
 {
-    mCalculateButton->setEnabled(mTool->isApplyable() && isValid);
+    mCalculateAction->setEnabled(mTool->isApplyable() && isValid);
 }
 
 }

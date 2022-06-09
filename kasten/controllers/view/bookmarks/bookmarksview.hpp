@@ -12,8 +12,8 @@
 // Qt
 #include <QWidget>
 
-class QPushButton;
 class QTreeView;
+class QAction;
 class QModelIndex;
 
 namespace Kasten {
@@ -46,10 +46,10 @@ private:
     BookmarkListModel* mBookmarkListModel;
 
     QTreeView* mBookmarkListView;
-    QPushButton* mCreateBookmarkButton;
-    QPushButton* mDeleteBookmarksButton;
-    QPushButton* mGotoBookmarkButton;
-    QPushButton* mRenameBookmarkButton;
+    QAction* mCreateBookmarkAction;
+    QAction* mDeleteBookmarksAction;
+    QAction* mGotoBookmarkAction;
+    QAction* mRenameBookmarkAction;
 };
 
 inline BookmarksTool* BookmarksView::tool() const { return mTool; }

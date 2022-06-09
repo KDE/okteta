@@ -15,8 +15,8 @@
 class AbstractByteArrayChecksumParameterSet;
 
 class KComboBox;
-class QPushButton;
 class QLineEdit;
+class QAction;
 
 class QStackedWidget;
 
@@ -58,7 +58,7 @@ private:
     KComboBox* mAlgorithmComboBox;
     QStackedWidget* mParameterSetEditStack;
     QLineEdit* mChecksumLabel;
-    QPushButton* mCalculateButton;
+    QAction* mCalculateAction;
 };
 
 inline ChecksumTool* ChecksumView::tool() const { return mTool; }

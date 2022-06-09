@@ -15,17 +15,20 @@
 #include <abstractbytearrayfilterparametersetedit.hpp>
 #include <abstractbytearrayfilterparameterset.hpp>
 #include <abstractbytearrayfilter.hpp>
+// utils
+#include <labelledtoolbarwidget.hpp>
 // KF
 #include <KLocalizedString>
 #include <KComboBox>
-#include <KGuiItem>
 // Qt
+#include <QToolBar>
 #include <QLabel>
-#include <QLayout>
+#include <QVBoxLayout>
 #include <QStackedWidget>
-#include <QPushButton>
+#include <QAction>
 #include <QGroupBox>
 #include <QAbstractItemView>
+#include <QIcon>
 
 namespace Kasten {
 
@@ -35,15 +38,16 @@ FilterView::FilterView(FilterTool* tool, QWidget* parent)
 {
     auto* baseLayout = new QVBoxLayout(this);
     baseLayout->setContentsMargins(0, 0, 0, 0);
+    baseLayout->setSpacing(0);
 
-    // filter
-    auto* operationLayout = new QHBoxLayout();
+    // filter selection
+    auto* filterSelectionToolBar = new QToolBar(this);
     auto* label = new QLabel(i18nc("@label:listbox operation to use by the filter", "Operation:"), this);
     mOperationComboBox = new KComboBox(this);
     connect(mOperationComboBox, qOverload<int>(&KComboBox::activated),
             mTool, &FilterTool::setFilter);
 
-    label->setBuddy(mOperationComboBox);
+    auto* labelledAlgorithmComboBox = new LabelledToolBarWidget(label, mOperationComboBox, this);
     const QString operationToolTip =
         i18nc("@info:tooltip", "The operation to use for the filter.");
     label->setToolTip(operationToolTip);
@@ -52,10 +56,10 @@ FilterView::FilterView(FilterTool* tool, QWidget* parent)
         i18nc("@info:whatsthis", "Select the operation to use for the filter.");
     label->setWhatsThis(operationWhatsThis);
     mOperationComboBox->setWhatsThis(operationWhatsThis);
+    mOperationComboBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 
-    operationLayout->addWidget(label);
-    operationLayout->addWidget(mOperationComboBox, 10);
-    baseLayout->addLayout(operationLayout);
+    filterSelectionToolBar->addWidget(labelledAlgorithmComboBox);
+    baseLayout->addWidget(filterSelectionToolBar);
 
     auto* parameterSetBox = new QGroupBox(i18nc("@title:group", "Parameters"), this);
     baseLayout->addWidget(parameterSetBox);
@@ -69,23 +73,27 @@ FilterView::FilterView(FilterTool* tool, QWidget* parent)
     parameterSetLayout->addWidget(mParameterSetEditStack);
 
     // filter button
-    auto* buttonLayout = new QHBoxLayout();
-    buttonLayout->addStretch(10);
-    mFilterButton = new QPushButton(this);
-    KGuiItem::assign(mFilterButton, KGuiItem(i18nc("@action:button", "&Filter"),
-                                             QStringLiteral("run-build"),
-                                             i18nc("@info:tooltip", "Executes the filter for the bytes in the selected range."),
-                                             xi18nc("@info:whatsthis",
-                                                    "If you press the <interface>Filter</interface> button, the operation you selected "
-                                                    "above is executed for the bytes in the selected range with the given options.")));
-    mFilterButton->setEnabled(mTool->hasWriteable());
+    auto* actionToolBar = new QToolBar(this);
+    actionToolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
+
+    auto* stretcher = new QWidget(this);
+    stretcher->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+    actionToolBar->addWidget(stretcher);
+
+    mFilterAction =
+        actionToolBar->addAction(QIcon::fromTheme(QStringLiteral("run-build")),
+                                 i18nc("@action:button", "&Filter"),
+                                 this, &FilterView::onFilterClicked);
+    mFilterAction->setToolTip(i18nc("@info:tooltip",
+                                    "Executes the filter for the bytes in the selected range."));
+    mFilterAction->setWhatsThis(xi18nc("@info:whatsthis",
+                                       "If you press the <interface>Filter</interface> button, the operation you selected "
+                                       "above is executed for the bytes in the selected range with the given options."));
+    mFilterAction->setEnabled(mTool->hasWriteable());
     connect(mTool, &FilterTool::filterChanged, this, &FilterView::onFilterChanged);
     connect(mTool, &FilterTool::hasWriteableChanged, this, &FilterView::onHasWriteableChanged);
     connect(mTool, &FilterTool::charCodecChanged, this, &FilterView::onCharCodecChanged);
-    connect(mFilterButton, &QPushButton::clicked, this, &FilterView::onFilterClicked);
-    addButton(mFilterButton, AbstractToolWidget::Default);
-    buttonLayout->addWidget(mFilterButton);
-    baseLayout->addLayout(buttonLayout);
+    baseLayout->addWidget(actionToolBar);
     baseLayout->addStretch(10);
 
     // automatically set focus to the parameters if a operation has been selected
@@ -182,7 +190,7 @@ void FilterView::onHasWriteableChanged(bool hasWriteable)
         qobject_cast<AbstractByteArrayFilterParameterSetEdit*>(mParameterSetEditStack->currentWidget());
     const bool isValid = (parametersetEdit ? parametersetEdit->isValid() : false);
 
-    mFilterButton->setEnabled(hasWriteable && isValid);
+    mFilterAction->setEnabled(hasWriteable && isValid);
 }
 
 void FilterView::onCharCodecChanged(const QString& charCodecName)
@@ -207,7 +215,7 @@ void FilterView::onValuesChanged()
 
 void FilterView::onValidityChanged(bool isValid)
 {
-    mFilterButton->setEnabled(mTool->hasWriteable() && isValid);
+    mFilterAction->setEnabled(mTool->hasWriteable() && isValid);
 }
 
 }

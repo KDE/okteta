@@ -627,6 +627,12 @@ oktetakastencontrollers_add_sublibrary(view/viewcontextmenu
         ViewContextMenuController
 )
 
+oktetakastencontrollers_add_sublibrary(utils
+    BUILD_INCLUDEDIR
+    PRIVATE
+        LabelledToolBarWidget
+)
+
 if(BUILD_TESTING)
     #structures view unit tests
     ecm_add_tests(

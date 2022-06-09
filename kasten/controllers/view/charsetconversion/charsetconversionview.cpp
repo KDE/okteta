@@ -17,15 +17,17 @@
 // KF
 #include <KMessageBox>
 #include <KComboBox>
-#include <KGuiItem>
 #include <KLocalizedString>
 // Qt
+#include <QToolBar>
 #include <QPushButton>
 #include <QFormLayout>
-#include <QLayout>
+#include <QVBoxLayout>
 #include <QCheckBox>
 #include <QLabel>
 #include <QGroupBox>
+#include <QAction>
+#include <QIcon>
 
 namespace Kasten {
 
@@ -35,9 +37,10 @@ CharsetConversionView::CharsetConversionView(CharsetConversionTool* tool, QWidge
 {
     auto* baseLayout = new QVBoxLayout(this);
     baseLayout->setContentsMargins(0, 0, 0, 0);
+    baseLayout->setSpacing(0);
 
     // source/target charset
-    auto* directionCharsetLayout = new QHBoxLayout();
+    auto* directionCharsetToolBar = new QToolBar(this);
 
     mDirectionComboBox = new KComboBox(this);
     const QStringList directionList {
@@ -60,13 +63,14 @@ CharsetConversionView::CharsetConversionView(CharsetConversionTool* tool, QWidge
     connect(mDirectionComboBox, qOverload<int>(&KComboBox::activated),
             mTool, &CharsetConversionTool::setConversionDirection);
 
-    directionCharsetLayout->addWidget(mDirectionComboBox);
+    directionCharsetToolBar->addWidget(mDirectionComboBox);
 
     mOtherCharSetComboBox = new KComboBox(this);
     const QStringList charCodecNames = Okteta::CharCodec::codecNames();
     const int indexOfCurrentCharCodec = charCodecNames.indexOf(mTool->otherCharCodecName());
     mOtherCharSetComboBox->addItems(charCodecNames);
     mOtherCharSetComboBox->setCurrentIndex(indexOfCurrentCharCodec);
+    mOtherCharSetComboBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 
     const QString targetCharsetToolTip =
         i18nc("@info:tooltip",
@@ -80,8 +84,8 @@ CharsetConversionView::CharsetConversionView(CharsetConversionTool* tool, QWidge
     connect(mOtherCharSetComboBox, &KComboBox::textActivated,
             mTool, &CharsetConversionTool::setOtherCharCodecName);
 
-    directionCharsetLayout->addWidget(mOtherCharSetComboBox, 10);
-    baseLayout->addLayout(directionCharsetLayout);
+    directionCharsetToolBar->addWidget(mOtherCharSetComboBox);
+    baseLayout->addWidget(directionCharsetToolBar);
 
     // settings
     auto* settingsBox = new QGroupBox(i18nc("@title:group", "Parameters"), this);
@@ -141,26 +145,25 @@ CharsetConversionView::CharsetConversionView(CharsetConversionTool* tool, QWidge
     baseLayout->addWidget(settingsBox);
 
     // action
-    auto* actionsLayout = new QHBoxLayout();
+    auto* actionToolBar = new QToolBar(this);
+    actionToolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
 
-    actionsLayout->addStretch();
+    auto* stretcher = new QWidget(this);
+    stretcher->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+    actionToolBar->addWidget(stretcher);
 
-    const KGuiItem convertGuiItem =
-        KGuiItem(i18n("Con&vert"),
-                 QStringLiteral("run-build"),
-                 i18nc("@info:tooltip",
-                       "Converts the bytes in the selected range."),
-                 xi18nc("@info:whatsthis",
+    mConvertAction =
+        actionToolBar->addAction(QIcon::fromTheme(QStringLiteral("run-build")),
+                                 i18n("Con&vert"),
+                                 this, &CharsetConversionView::onConvertButtonClicked);
+    mConvertAction->setToolTip(i18nc("@info:tooltip",
+                       "Converts the bytes in the selected range."));
+    mConvertAction->setWhatsThis(xi18nc("@info:whatsthis",
                         "If you press the <interface>Convert</interface> button, "
                         "all bytes in the selected range "
                         "will be replaced by bytes which represent the same character "
                         "in the selected target charset."));
-    mConvertButton = new QPushButton(this);
-    KGuiItem::assign(mConvertButton, convertGuiItem);
-    connect(mConvertButton, &QPushButton::clicked, this, &CharsetConversionView::onConvertButtonClicked);
-    actionsLayout->addWidget(mConvertButton);
-
-    baseLayout->addLayout(actionsLayout);
+    baseLayout->addWidget(actionToolBar);
     baseLayout->addStretch();
 
     connect(mTool, &CharsetConversionTool::isApplyableChanged,
@@ -173,7 +176,7 @@ CharsetConversionView::~CharsetConversionView() = default;
 
 void CharsetConversionView::onApplyableChanged(bool isApplyable)
 {
-    mConvertButton->setEnabled(isApplyable);
+    mConvertAction->setEnabled(isApplyable);
 }
 
 void CharsetConversionView::onDefaultByteEditChanged(const QByteArray& byteArray)

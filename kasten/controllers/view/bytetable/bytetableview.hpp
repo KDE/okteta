@@ -12,9 +12,9 @@
 // Kasten gui
 #include <Kasten/AbstractToolWidget>
 
-class QPushButton;
 class QSpinBox;
 class QTreeView;
+class QAction;
 class QModelIndex;
 
 namespace Kasten {
@@ -45,7 +45,7 @@ private:
 
     QSpinBox* mInsertCountEdit;
     QTreeView* mByteTableView;
-    QPushButton* mInsertButton;
+    QAction* mInsertAction;
 };
 
 inline ByteTableTool* ByteTableView::tool() const { return mTool; }

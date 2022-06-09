@@ -12,9 +12,9 @@
 // Qt
 #include <QWidget>
 
-class QPushButton;
 class QLabel;
 class QTreeView;
+class QAction;
 
 namespace Kasten {
 
@@ -43,7 +43,7 @@ private:
 
     QLabel* mSizeLabel;
     QTreeView* mStatisticTableView;
-    QPushButton* mUpdateButton;
+    QAction* mUpdateAction;
 };
 
 inline InfoTool* InfoView::tool() const { return mTool; }

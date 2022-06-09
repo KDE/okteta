@@ -13,17 +13,21 @@
 #include "bytetabletool.hpp"
 #include "bytetablemodel.hpp"
 #include <bytetableviewsettings.hpp>
+// utils
+#include <labelledtoolbarwidget.hpp>
 // KF
-#include <QPushButton>
 #include <KLocalizedString>
 #include <KStandardGuiItem>
 // Qt
 #include <QApplication>
+#include <QToolBar>
 #include <QSpinBox>
 #include <QLabel>
-#include <QLayout>
+#include <QVBoxLayout>
 #include <QHeaderView>
 #include <QTreeView>
+#include <QAction>
+#include <QIcon>
 // Std
 #include <limits>
 
@@ -41,6 +45,7 @@ ByteTableView::ByteTableView(ByteTableTool* tool, QWidget* parent)
 {
     auto* baseLayout = new QVBoxLayout(this);
     baseLayout->setContentsMargins(0, 0, 0, 0);
+    baseLayout->setSpacing(0);
 
     mByteTableView = new QTreeView(this);
     // TODO: find a signal/event emitted when fixedfont changes
@@ -65,15 +70,19 @@ ByteTableView::ByteTableView(ByteTableTool* tool, QWidget* parent)
 
     baseLayout->addWidget(mByteTableView, 10);
 
-    auto* insertLayout = new QHBoxLayout();
+    auto* insertToolBar = new QToolBar(this);
+    insertToolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
+
+    auto* stretcher = new QWidget(this);
+    stretcher->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+    insertToolBar->addWidget(stretcher);
 
     auto* label = new QLabel(i18nc("@label:spinbox number of bytes to insert", "Number (bytes):"), this);
-    insertLayout->addWidget(label);
 
     mInsertCountEdit = new QSpinBox(this);
     mInsertCountEdit->setRange(1, std::numeric_limits<int>::max());
-    label->setBuddy(mInsertCountEdit);
-    insertLayout->addWidget(mInsertCountEdit);
+    auto* labelledInsertCountEdit = new LabelledToolBarWidget(label, mInsertCountEdit, this);
+    insertToolBar->addWidget(labelledInsertCountEdit);
     const QString insertCountToolTip =
         i18nc("@info:tooltip",
               "Number of repeats of the currently selected byte in the table to be inserted.");
@@ -82,21 +91,22 @@ ByteTableView::ByteTableView(ByteTableTool* tool, QWidget* parent)
     connect(mInsertCountEdit, qOverload<int>(&QSpinBox::valueChanged),
             this, &ByteTableView::onInsertCountEditChanged);
 
-    insertLayout->addStretch();
-
-    mInsertButton = new QPushButton(this);
-    KGuiItem::assign(mInsertButton, KStandardGuiItem::insert());
-    mInsertButton->setEnabled(mTool->hasWriteable());
-    connect(mTool, &ByteTableTool::hasWriteableChanged, mInsertButton, &QPushButton::setEnabled);
-    connect(mInsertButton, &QPushButton::clicked, this, &ByteTableView::onInsertClicked);
+    const KGuiItem insertGuiItem = KStandardGuiItem::insert();
+    QIcon insertIcon = insertGuiItem.icon();
+    if (insertIcon.isNull()) {
+        insertIcon = QIcon::fromTheme(QStringLiteral("list-add"));
+    }
+    mInsertAction =
+        insertToolBar->addAction(insertIcon, insertGuiItem.text(),
+                                 this, &ByteTableView::onInsertClicked);
     const QString insertButtonToolTip =
         i18nc("@info:tooltip",
               "Insert the currently selected byte in the table repeated the given number of times.");
-    mInsertButton->setToolTip(insertButtonToolTip);
-    addButton(mInsertButton, AbstractToolWidget::Default);
-    insertLayout->addWidget(mInsertButton);
+    mInsertAction->setToolTip(insertButtonToolTip);
+    mInsertAction->setEnabled(mTool->hasWriteable());
+    connect(mTool, &ByteTableTool::hasWriteableChanged, mInsertAction, &QAction::setEnabled);
 
-    baseLayout->addLayout(insertLayout);
+    baseLayout->addWidget(insertToolBar);
 
     // if nothing has changed reuse the old values. This means the bytetable is fully constructed
     // after ~3ms and not 800 as it was before. If the saved values can not be reused it takes ~100ms
