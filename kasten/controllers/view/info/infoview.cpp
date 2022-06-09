@@ -12,17 +12,20 @@
 #include "infotool.hpp"
 #include "statistictablemodel.hpp"
 #include <infoviewsettings.h>
+// utils
+#include <labelledtoolbarwidget.hpp>
 // KF
-#include <KGuiItem>
 #include <KLocalizedString>
 // Qt
 #include <QApplication>
 #include <QSortFilterProxyModel>
-#include <QPushButton>
+#include <QToolBar>
 #include <QLabel>
-#include <QLayout>
+#include <QVBoxLayout>
 #include <QHeaderView>
 #include <QTreeView>
+#include <QAction>
+#include <QIcon>
 
 namespace Kasten {
 
@@ -32,11 +35,12 @@ InfoView::InfoView(InfoTool* tool, QWidget* parent)
 {
     auto* baseLayout = new QVBoxLayout(this);
     baseLayout->setContentsMargins(0, 0, 0, 0);
+    baseLayout->setSpacing(0);
 
-    auto* topLineLayout = new QHBoxLayout();
+    auto* actionToolBar = new QToolBar(this);
+    actionToolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
 
     QLabel* label = new QLabel(i18nc("@label size of selected bytes", "Size:"), this);
-    topLineLayout->addWidget(label);
 
     mSizeLabel = new QLabel(this);
     const QString sizeToolTip =
@@ -44,29 +48,29 @@ InfoView::InfoView(InfoTool* tool, QWidget* parent)
               "The number of the bytes the statistic was built for.");
     label->setToolTip(sizeToolTip);
     mSizeLabel->setToolTip(sizeToolTip);
-    topLineLayout->addWidget(mSizeLabel, 10);
+    auto* labelledSizeLabel = new LabelledToolBarWidget(label, mSizeLabel, this);
+    actionToolBar->addWidget(labelledSizeLabel);
     connect(mTool->statisticTableModel(), &StatisticTableModel::sizeChanged,
             this, &InfoView::setByteArraySize);
 
-    topLineLayout->addStretch();
+    auto* stretcher = new QWidget(this);
+    stretcher->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+    actionToolBar->addWidget(stretcher);
 
-    const KGuiItem updateGuiItem =
-        KGuiItem(i18nc("@action:button build the statistic of the byte frequency",
-                       "&Build"),
-                 QStringLiteral("run-build"),
-                 i18nc("@info:tooltip",
-                       "Builds the byte frequency statistic for the bytes in the selected range."),
-                 xi18nc("@info:whatsthis",
-                        "If you press the <interface>Build</interface> button,"
-                        " the byte frequency statistic is built for the bytes in the selected range."));
-    mUpdateButton = new QPushButton(this);
-    KGuiItem::assign(mUpdateButton, updateGuiItem);
-    mUpdateButton->setEnabled(mTool->isApplyable());
-    connect(mTool, &InfoTool::isApplyableChanged, mUpdateButton, &QPushButton::setEnabled);
-    connect(mUpdateButton, &QPushButton::clicked, mTool, &InfoTool::updateStatistic);
-    topLineLayout->addWidget(mUpdateButton);
+    mUpdateAction =
+        actionToolBar->addAction(QIcon::fromTheme(QStringLiteral("run-build")),
+                                 i18nc("@action:button build the statistic of the byte frequency",
+                                       "&Build"),
+                                 mTool, &InfoTool::updateStatistic);
+    mUpdateAction->setToolTip(i18nc("@info:tooltip",
+                                    "Builds the byte frequency statistic for the bytes in the selected range."));
+    mUpdateAction->setWhatsThis(xi18nc("@info:whatsthis",
+                                       "If you press the <interface>Build</interface> button,"
+                                       " the byte frequency statistic is built for the bytes in the selected range."));
+    mUpdateAction->setEnabled(mTool->isApplyable());
+    connect(mTool, &InfoTool::isApplyableChanged, mUpdateAction, &QAction::setEnabled);
 
-    baseLayout->addLayout(topLineLayout);
+    baseLayout->addWidget(actionToolBar);
 
     mStatisticTableView = new QTreeView(this);
     // TODO: find a signal/event emitted when fixedfont changes

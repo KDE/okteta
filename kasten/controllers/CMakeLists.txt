@@ -536,6 +536,11 @@ oktetakastencontrollers_add_sublibrary(view/viewcontextmenu
         ViewContextMenuController
 )
 
+oktetakastencontrollers_add_sublibrary(utils
+    PRIVATE
+        LabelledToolBarWidget
+)
+
 # create a static library for the unit tests. This means we don't have to compile the sources twice
 
 add_library(poddecoder-typeeditors STATIC ${oktetakastencontrollers_typeeditor_LIB_SRCS})
@@ -658,6 +663,7 @@ target_include_directories(OktetaKastenControllers
         view/libbytearraychecksum
         view/libbytearrayfilter
         view/libfinddialog
+        utils
         ${LIBFRAMESPRINT_REL_DIR}
 )
 

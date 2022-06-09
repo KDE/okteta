@@ -18,8 +18,8 @@ namespace Okteta {
 class ByteArrayComboBox;
 }
 class KComboBox;
-class QPushButton;
 class QCheckBox;
+class QAction;
 template <class Key, class T> class QMap;
 
 namespace Kasten {
@@ -53,7 +53,7 @@ private:
     KComboBox* mOtherCharSetComboBox;
     QCheckBox* mSubstituteMissingCharCheckBox;
     Okteta::ByteArrayComboBox* mSubstituteByteEdit;
-    QPushButton* mConvertButton;
+    QAction* mConvertAction;
 };
 
 inline CharsetConversionTool* CharsetConversionView::tool() const { return mTool; }

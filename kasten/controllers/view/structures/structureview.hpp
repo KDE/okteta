@@ -10,15 +10,16 @@
 #ifndef KASTEN_STRUCTUREVIEW_HPP
 #define KASTEN_STRUCTUREVIEW_HPP
 
-#include <QWidget>
 #include "structureviewitemdelegate.hpp"
+// Qt
+#include <QWidget>
 
 namespace Okteta {
 class AbstractByteArrayModel;
 }
 
 class QTreeView;
-class QPushButton;
+class QAction;
 
 namespace Kasten {
 class StructuresTool;
@@ -59,10 +60,10 @@ private:
 
     QTreeView* mStructTreeView;
 
-    QPushButton* mValidateButton;
-    QPushButton* mSettingsButton;
-    QPushButton* mScriptConsoleButton;
-    QPushButton* mLockStructureButton;
+    QAction* mValidateAction;
+    QAction* mSettingsAction;
+    QAction* mScriptConsoleAction;
+    QAction* mLockStructureAction;
 
     QWidget* mStructTreeViewFocusChild;
 };

@@ -15,12 +15,13 @@
 #include <Okteta/Bookmark>
 // KF
 #include <KLocalizedString>
-#include <KGuiItem>
 // Qt
-#include <QPushButton>
+#include <QToolBar>
+#include <QAction>
 #include <QLayout>
 #include <QTreeView>
 #include <QHeaderView>
+#include <QIcon>
 
 namespace Kasten {
 
@@ -34,6 +35,7 @@ BookmarksView::BookmarksView(BookmarksTool* tool, QWidget* parent)
 
     auto* baseLayout = new QVBoxLayout(this);
     baseLayout->setContentsMargins(0, 0, 0, 0);
+    baseLayout->setSpacing(0);
 
     // bookmarks list
     mBookmarkListView = new QTreeView(this);
@@ -54,67 +56,56 @@ BookmarksView::BookmarksView(BookmarksTool* tool, QWidget* parent)
     baseLayout->addWidget(mBookmarkListView, 10);
 
     // actions TODO: make this view work like the filebrowser, with actions on top?
-    auto* actionsLayout = new QHBoxLayout();
+    auto* actionsToolBar = new QToolBar(this);
 
-    const KGuiItem createBookmarkGuiItem =
-        KGuiItem(QString() /*i18n("C&opy")*/,
-                 QStringLiteral("bookmark-new"),
-                 i18nc("@info:tooltip",
-                       "Creates a new bookmark for the current cursor position."),
-                 i18nc("@info:whatsthis",
-                       "If you press this button, a new bookmark will be created "
-                       "for the current cursor position."));
-    mCreateBookmarkButton = new QPushButton(this);
-    KGuiItem::assign(mCreateBookmarkButton, createBookmarkGuiItem);
-    mCreateBookmarkButton->setEnabled(mTool->canCreateBookmark());
-    connect(mCreateBookmarkButton, &QPushButton::clicked,
-            this, &BookmarksView::onCreateBookmarkButtonClicked);
+    mCreateBookmarkAction =
+        actionsToolBar->addAction(QIcon::fromTheme(QStringLiteral("bookmark-new")),
+                                  QString() /*i18n("C&opy")*/,
+                                  this, &BookmarksView::onCreateBookmarkButtonClicked);
+    mCreateBookmarkAction->setToolTip(i18nc("@info:tooltip",
+                                            "Creates a new bookmark for the current cursor position."));
+    mCreateBookmarkAction->setWhatsThis(i18nc("@info:whatsthis",
+                                              "If you press this button, a new bookmark will be created "
+                                              "for the current cursor position."));
+    mCreateBookmarkAction->setEnabled(mTool->canCreateBookmark());
     connect(mTool, &BookmarksTool::canCreateBookmarkChanged,
-            mCreateBookmarkButton, &QPushButton::setEnabled);
-    actionsLayout->addWidget(mCreateBookmarkButton);
+            mCreateBookmarkAction, &QAction::setEnabled);
 
-    const KGuiItem deleteBookmarkGuiItem =
-        KGuiItem(QString() /*i18n("&Go to")*/,
-                 QStringLiteral("edit-delete"),
-                 i18nc("@info:tooltip",
-                       "Deletes all the selected bookmarks."),
-                 i18nc("@info:whatsthis",
-                       "If you press this button, all bookmarks which are "
-                       "selected will be deleted."));
-    mDeleteBookmarksButton = new QPushButton(this);
-    KGuiItem::assign(mDeleteBookmarksButton, deleteBookmarkGuiItem);
-    connect(mDeleteBookmarksButton, &QPushButton::clicked, this, &BookmarksView::onDeleteBookmarkButtonClicked);
-    actionsLayout->addWidget(mDeleteBookmarksButton);
+    mDeleteBookmarksAction =
+        actionsToolBar->addAction(QIcon::fromTheme(QStringLiteral("edit-delete")),
+                                  QString(),
+                                  this, &BookmarksView::onDeleteBookmarkButtonClicked);
+    mDeleteBookmarksAction->setToolTip(i18nc("@info:tooltip",
+                                             "Deletes all the selected bookmarks."));
+    mDeleteBookmarksAction->setWhatsThis(i18nc("@info:whatsthis",
+                                               "If you press this button, all bookmarks which are "
+                                               "selected will be deleted."));
 
-    actionsLayout->addStretch();
+    auto* stretcher = new QWidget(this);
+    stretcher->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+    actionsToolBar->addWidget(stretcher);
 
-    const KGuiItem gotoGuiItem =
-        KGuiItem(QString() /*i18n("&Go to")*/,
-                 QStringLiteral("go-jump"),
-                 i18nc("@info:tooltip",
-                       "Moves the cursor to the selected bookmark."),
-                 i18nc("@info:whatsthis",
-                       "If you press this button, the cursor is moved to the position "
-                       "of the bookmark which has been last selected."));
-    mGotoBookmarkButton = new QPushButton(this);
-    KGuiItem::assign(mGotoBookmarkButton, gotoGuiItem);
-    connect(mGotoBookmarkButton, &QPushButton::clicked, this, &BookmarksView::onGotoBookmarkButtonClicked);
-    actionsLayout->addWidget(mGotoBookmarkButton);
+    mGotoBookmarkAction =
+        actionsToolBar->addAction(QIcon::fromTheme(QStringLiteral("go-jump")),
+                                  QString() /*i18n("&Go to")*/,
+                                  this, &BookmarksView::onGotoBookmarkButtonClicked);
+    mGotoBookmarkAction->setToolTip(i18nc("@info:tooltip",
+                                          "Moves the cursor to the selected bookmark."));
+    mGotoBookmarkAction->setWhatsThis(i18nc("@info:whatsthis",
+                                            "If you press this button, the cursor is moved to the position "
+                                            "of the bookmark which has been last selected."));
 
-    const KGuiItem renameGuiItem =
-        KGuiItem(QString() /*i18n("&Go to")*/,
-                 QStringLiteral("edit-rename"),
-                 i18nc("@info:tooltip",
-                       "Enables renaming of the selected bookmark."),
-                 i18nc("@info:whatsthis",
-                       "If you press this button, the name of the bookmark "
-                       "which was last selected can be edited."));
-    mRenameBookmarkButton = new QPushButton(this);
-    KGuiItem::assign(mRenameBookmarkButton, renameGuiItem);
-    connect(mRenameBookmarkButton, &QPushButton::clicked, this, &BookmarksView::onRenameBookmarkButtonClicked);
-    actionsLayout->addWidget(mRenameBookmarkButton);
+    mRenameBookmarkAction =
+        actionsToolBar->addAction(QIcon::fromTheme(QStringLiteral("edit-rename")),
+                                  QString(),
+                                  this, &BookmarksView::onRenameBookmarkButtonClicked);
+    mRenameBookmarkAction->setToolTip(i18nc("@info:tooltip",
+                                            "Enables renaming of the selected bookmark."));
+    mRenameBookmarkAction->setWhatsThis(i18nc("@info:whatsthis",
+                                              "If you press this button, the name of the bookmark "
+                                              "which was last selected can be edited."));
 
-    baseLayout->addLayout(actionsLayout);
+    baseLayout->addWidget(actionsToolBar);
 
     onBookmarkSelectionChanged();
 }
@@ -137,11 +128,11 @@ void BookmarksView::onBookmarkSelectionChanged()
     // TODO: selectionModel->selectedIndexes() is a expensive operation,
     // but with Qt 4.4.3 hasSelection() has the flaw to return true with a current index
     const bool hasSelection = !selectionModel->selectedIndexes().isEmpty();
-    mDeleteBookmarksButton->setEnabled(hasSelection);
+    mDeleteBookmarksAction->setEnabled(hasSelection);
 
     const bool bookmarkSelected = selectionModel->isSelected(selectionModel->currentIndex());
-    mRenameBookmarkButton->setEnabled(bookmarkSelected);
-    mGotoBookmarkButton->setEnabled(bookmarkSelected);
+    mRenameBookmarkAction->setEnabled(bookmarkSelected);
+    mGotoBookmarkAction->setEnabled(bookmarkSelected);
 }
 
 void BookmarksView::onCreateBookmarkButtonClicked()

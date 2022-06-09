@@ -42,9 +42,12 @@
 #include <QHeaderView>
 #include <QFocusEvent>
 #include <QMenu>
+#include <QToolBar>
 #include <QMimeData>
 #include <QApplication>
 #include <QClipboard>
+#include <QAction>
+#include <QIcon>
 
 namespace Kasten {
 
@@ -57,6 +60,8 @@ StructureView::StructureView(StructuresTool* tool, QWidget* parent)
     QBoxLayout* baseLayout = new QVBoxLayout(this);
     setLayout(baseLayout);
     baseLayout->setContentsMargins(0, 0, 0, 0);
+    baseLayout->setSpacing(0);
+
     // table
     mStructureTreeModel = new StructureTreeModel(mTool, this);
     //  mModeltest = new ModelTest(mStructureTreeModel, this);
@@ -84,46 +89,47 @@ StructureView::StructureView(StructuresTool* tool, QWidget* parent)
     baseLayout->addWidget(mStructTreeView, 10);
 
     // settings
-    QBoxLayout* settingsLayout = new QHBoxLayout();
-    settingsLayout->setContentsMargins(0, 0, 0, 0);
-
-    baseLayout->addLayout(settingsLayout);
+    auto* actionsToolBar = new QToolBar(this);
+    actionsToolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
 
     QIcon validateIcon = QIcon::fromTheme(QStringLiteral("document-sign"));
-    mValidateButton = new QPushButton(validateIcon, i18nc("@action:button", "Validate"), this);
+    mValidateAction =
+        actionsToolBar->addAction(validateIcon, i18nc("@action:button", "Validate"),
+                                  mTool, &StructuresTool::validateAllStructures);
     const QString validationToolTip = i18nc("@info:tooltip", "Validate all structures.");
-    mValidateButton->setToolTip(validationToolTip);
-    mValidateButton->setEnabled(false); // no point validating without file open
-    connect(mValidateButton, &QPushButton::clicked, mTool, &StructuresTool::validateAllStructures);
+    mValidateAction->setToolTip(validationToolTip);
+    mValidateAction->setEnabled(false); // no point validating without file open
     connect(mTool, &StructuresTool::byteArrayModelChanged,
             this, &StructureView::onByteArrayModelChanged);
     // TODO also disable the button if the structure has no validatable members
-    settingsLayout->addWidget(mValidateButton);
 
-    mLockStructureButton = new QPushButton(this);
-    mLockStructureButton->setCheckable(true);
-    mLockStructureButton->setChecked(false);
-    mLockStructureButton->setEnabled(false); // won't work at beginning
+    mLockStructureAction =
+        actionsToolBar->addAction(QString(),
+                                  this, &StructureView::onLockButtonClicked);
+    mLockStructureAction->setCheckable(true);
+    mLockStructureAction->setChecked(false);
+    mLockStructureAction->setEnabled(false); // won't work at beginning
     onLockButtonToggled(false);
-    connect(mLockStructureButton, &QPushButton::clicked, this, &StructureView::onLockButtonClicked);
-    connect(mLockStructureButton, &QPushButton::toggled, this, &StructureView::onLockButtonToggled);
+    connect(mLockStructureAction, &QAction::toggled, this, &StructureView::onLockButtonToggled);
 
-    settingsLayout->addWidget(mLockStructureButton);
-
-    settingsLayout->addStretch(); // stretch before the settings button
+    auto* stretcher = new QWidget(this);
+    stretcher->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+    actionsToolBar->addWidget(stretcher);
 
     QIcon console = QIcon::fromTheme(QStringLiteral("utilities-terminal"));
-    mScriptConsoleButton = new QPushButton(console, i18nc("@action:button", "Script console"), this);
-    mScriptConsoleButton->setToolTip(i18nc("@info:tooltip", "Open script console."));
-    connect(mScriptConsoleButton, &QPushButton::pressed, this, &StructureView::openScriptConsole);
-    settingsLayout->addWidget(mScriptConsoleButton);
+    mScriptConsoleAction =
+        actionsToolBar->addAction(console, i18nc("@action:button", "Script console"),
+                                  this, &StructureView::openScriptConsole);
+    mScriptConsoleAction->setToolTip(i18nc("@info:tooltip", "Open script console."));
 
     QIcon settings = QIcon::fromTheme(QStringLiteral("configure"));
-    mSettingsButton = new QPushButton(settings, i18nc("@action:button", "Settings"), this);
+    mSettingsAction =
+        actionsToolBar->addAction(settings, i18nc("@action:button", "Settings"),
+                                  this, &StructureView::openSettingsDlg);
     const QString settingsTooltip = i18nc("@info:tooltip", "Open settings.");
-    mSettingsButton->setToolTip(settingsTooltip);
-    connect(mSettingsButton, &QPushButton::pressed, this, &StructureView::openSettingsDlg);
-    settingsLayout->addWidget(mSettingsButton);
+    mSettingsAction->setToolTip(settingsTooltip);
+
+    baseLayout->addWidget(actionsToolBar);
 
     connect(mStructTreeView->selectionModel(),
             &QItemSelectionModel::currentRowChanged,
@@ -213,8 +219,8 @@ void StructureView::setLockButtonState(const QModelIndex& current)
 {
     // qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "setLockButtonState() for" << current;
 
-    mLockStructureButton->setEnabled(mTool->canStructureBeLocked(current));
-    mLockStructureButton->setChecked(mTool->isStructureLocked(current));
+    mLockStructureAction->setEnabled(mTool->canStructureBeLocked(current));
+    mLockStructureAction->setChecked(mTool->isStructureLocked(current));
 }
 
 void StructureView::onCurrentRowChanged(const QModelIndex& current, const QModelIndex& previous)
@@ -248,17 +254,17 @@ void StructureView::onLockButtonClicked(bool checked)
 void StructureView::onLockButtonToggled(bool structureLocked)
 {
     if (structureLocked) {
-        mLockStructureButton->setIcon(QIcon::fromTheme(QStringLiteral("object-locked")));
-        mLockStructureButton->setText(i18nc("@action:button"
+        mLockStructureAction->setIcon(QIcon::fromTheme(QStringLiteral("object-locked")));
+        mLockStructureAction->setText(i18nc("@action:button"
                                             " unlock the starting offset of the current structure", "Unlock"));
-        mLockStructureButton->setToolTip(i18nc("@info:tooltip",
+        mLockStructureAction->setToolTip(i18nc("@info:tooltip",
                                                "Unlock selected structure, i.e. the starting offset is"
                                                " always set to the current cursor position."));
     } else {
-        mLockStructureButton->setIcon(QIcon::fromTheme(QStringLiteral("object-unlocked")));
-        mLockStructureButton->setText(i18nc("@action:button"
+        mLockStructureAction->setIcon(QIcon::fromTheme(QStringLiteral("object-unlocked")));
+        mLockStructureAction->setText(i18nc("@action:button"
                                             " unlock the starting offset of the current structure", "Lock"));
-        mLockStructureButton->setToolTip(i18nc("@info:tooltip",
+        mLockStructureAction->setToolTip(i18nc("@info:tooltip",
                                                "Lock selected structure to current offset."));
     }
 }
@@ -304,7 +310,7 @@ void StructureView::onByteArrayModelChanged(Okteta::AbstractByteArrayModel* mode
     const bool validModel = (model != nullptr);
     const QModelIndex current = mStructTreeView->currentIndex();
     setLockButtonState(current);
-    mValidateButton->setEnabled(validModel);
+    mValidateAction->setEnabled(validModel);
 }
 
 void StructureView::onCustomContextMenuRequested(QPoint pos)

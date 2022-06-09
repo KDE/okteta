@@ -14,11 +14,11 @@
 
 class AbstractByteArrayFilterParameterSet;
 
-class QPushButton;
 class KComboBox;
 
 class QStackedWidget;
 class QString;
+class QAction;
 
 namespace Kasten {
 
@@ -54,7 +54,7 @@ private:
     FilterTool* mTool;
     KComboBox* mOperationComboBox;
     QStackedWidget* mParameterSetEditStack;
-    QPushButton* mFilterButton;
+    QAction* mFilterAction;
 };
 
 inline FilterTool* FilterView::tool() const { return mTool; }
