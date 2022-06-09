@@ -84,7 +84,7 @@
   <description>
     <p>Okteta is a simple editor for the raw data of files.</p>
     <p xml:lang="ca">L'Okteta és un editor senzill per a les dades sense processar dels fitxers.</p>
-    <p xml:lang="ca-valencia">L'Okteta és un editor senzill per a les dades sense processar dels fichers.</p>
+    <p xml:lang="ca-valencia">L'Okteta és un editor senzill per a les dades sense processar dels fitxers.</p>
     <p xml:lang="de">Okteta ist ein einfacher Editor für die Rohdaten von Dateien.</p>
     <p xml:lang="el">Το Okteta είναι ένας απλός επεξεργαστής για τα ακατέργαστα δεδομένα αρχείων.</p>
     <p xml:lang="en-GB">Okteta is a simple editor for the raw data of files.</p>
@@ -404,7 +404,7 @@
       <li xml:lang="zh-TW">快速螢幕資料繪制</li>
       <li>Multiple open files</li>
       <li xml:lang="ca">Múltiples fitxers oberts</li>
-      <li xml:lang="ca-valencia">Múltiples fichers oberts</li>
+      <li xml:lang="ca-valencia">Múltiples fitxers oberts</li>
       <li xml:lang="cs">Otevření více souborů</li>
       <li xml:lang="de">Mehrere geöffnete Dateien</li>
       <li xml:lang="el">Άνοιγμα πολλαπλών αρχείων</li>
