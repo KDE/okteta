@@ -190,7 +190,7 @@
       <li xml:lang="uk">Значення та символи може бути показано або у два стовпчики (типовий формат перегляду у шістнадцяткових редакторах) або у форматі рядків, де значення буде показано над символом.</li>
       <li xml:lang="x-test">xxValues and characters shown either in two columns (the traditional display in hex editors) or in rows with the value on top of the characterxx</li>
       <li xml:lang="zh-CN">双列展示数据值和字符(传统十六进制编辑器视图)或单行字符上方显示数据</li>
-      <li xml:lang="zh-TW">數值與字元可以用兩個欄位（傳統十六進制資料編輯的方式）顯示，或是在一列中將數值顯示在字元上方。</li>
+      <li xml:lang="zh-TW">數值與字元可以用兩個欄位（傳統十六進位資料編輯的方式）顯示，或是在一列中將數值顯示在字元上方。</li>
       <li>Editing and navigating similar to a text editor</li>
       <li xml:lang="ca">Edició i navegació semblant a un editor de text</li>
       <li xml:lang="ca-valencia">Edició i navegació semblant a un editor de text</li>
@@ -330,7 +330,7 @@
       <li xml:lang="uk">Числові кодування: шістнадцяткове, десяткове, вісімкове, двійкове.</li>
       <li xml:lang="x-test">xxNumerical encodings: Hexadecimal, Decimal, Octal, Binaryxx</li>
       <li xml:lang="zh-CN">数字编码：十六进制，十进制，八进制，二进制</li>
-      <li xml:lang="zh-TW">數值編碼：十六進制，十進制，八進制或二進制</li>
+      <li xml:lang="zh-TW">數值編碼：十六進位，十進位，八進位或二進位</li>
       <li>Character encodings: All 8-bit encodings as supplied by Qt, EBCDIC</li>
       <li xml:lang="ca">Codificacions de caràcters: Totes les codificacions de 8 bits proporcionades per les Qt, EBCDIC</li>
       <li xml:lang="ca-valencia">Codificacions de caràcters: Totes les codificacions de 8 bits proporcionades per les Qt, EBCDIC</li>
