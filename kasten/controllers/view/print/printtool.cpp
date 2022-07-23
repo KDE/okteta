@@ -167,7 +167,7 @@ void PrintTool::triggerPrint(QPrinter* printer)
     if (!success) {
         const QString message = i18nc("@info", "Could not print.");
 
-        KMessageBox::sorry(QApplication::activeWindow(), message, i18nc("@title:window", "Print Byte Array %1", mDocument->title()));
+        KMessageBox::error(QApplication::activeWindow(), message, i18nc("@title:window", "Print Byte Array %1", mDocument->title()));
     }
 }
 
