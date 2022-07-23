@@ -9,7 +9,7 @@
 // QCA
 // need to have this first, as QCA needs QT_NO_CAST_FROM_ASCII disabled when included
 #include <config-qca2.hpp> // krazy:excludeall=includes
-#ifdef HAVE_QCA2
+#if HAVE_QCA2
 // disable QT_NO_CAST_FROM_ASCII
 #ifdef QT_NO_CAST_FROM_ASCII
 #undef QT_NO_CAST_FROM_ASCII
@@ -51,7 +51,7 @@ ChecksumTool::ChecksumTool()
     setObjectName(QStringLiteral("Checksum"));
 
 // TODO: find a better place to do and store the initialization
-#ifdef HAVE_QCA2
+#if HAVE_QCA2
     mQcaInitializer = new QCA::Initializer(QCA::Practical, 64);
     qCDebug(LOG_OKTETA_KASTEN_CONTROLLER_CHECKSUM) << QCA::supportedFeatures();// Hash::supportedTypes();
 #endif
@@ -78,7 +78,7 @@ ChecksumTool::ChecksumTool()
 ChecksumTool::~ChecksumTool()
 {
     qDeleteAll(mAlgorithmList);
-#ifdef HAVE_QCA2
+#if HAVE_QCA2
     delete mQcaInitializer;
 #endif
 }

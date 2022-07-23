@@ -85,7 +85,7 @@ private: // created data
 
 private: // settings
     QVector<AbstractByteArrayChecksumAlgorithm*> mAlgorithmList;
-#ifdef HAVE_QCA2
+#if HAVE_QCA2
     QCA::Initializer* mQcaInitializer;
 #endif
     int mAlgorithmId = 0;

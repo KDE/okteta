@@ -76,7 +76,7 @@ void ReplaceController::onFinished(bool previousFound, int noOfReplacements)
                                       i18ncp("@info", "1 replacement made.", "%1 replacements made.", noOfReplacements);
 
     if (!previousFound) {
-        KMessageBox::sorry(mParentWidget, i18nc("@info", "Replace pattern not found in byte array."), messageBoxTitle);
+        KMessageBox::information(mParentWidget, i18nc("@info", "Replace pattern not found in byte array."), messageBoxTitle);
     } else {
         KMessageBox::information(mParentWidget, replacementReport, messageBoxTitle);
     }

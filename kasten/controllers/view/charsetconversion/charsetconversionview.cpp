@@ -216,7 +216,7 @@ void CharsetConversionView::onConversionDone(bool success, int convertedBytesCou
                                  messageBoxTitle);
     } else {
         // TODO: show/goto byte which on which conversion fails
-        KMessageBox::sorry(/*mParentWidget*/ nullptr,
+        KMessageBox::error(/*mParentWidget*/ nullptr,
                            i18nc("@info",
                                  "Conversion cancelled because of chars which are not "
                                  "in the target charset."),
