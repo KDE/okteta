@@ -9,7 +9,7 @@
 // QCA
 // need to have this first, as QCA needs QT_NO_CAST_FROM_ASCII disabled when included
 #include <config-qca2.hpp> // krazy:excludeall=includes
-#ifdef HAVE_QCA2
+#if HAVE_QCA2
 // disable QT_NO_CAST_FROM_ASCII
 #ifdef QT_NO_CAST_FROM_ASCII
 #undef QT_NO_CAST_FROM_ASCII
@@ -27,7 +27,7 @@
 #include "algorithm/modsum16bytearraychecksumalgorithm.hpp"
 #include "algorithm/modsum32bytearraychecksumalgorithm.hpp"
 #include "algorithm/modsum64bytearraychecksumalgorithm.hpp"
-#ifdef HAVE_QCA2
+#if HAVE_QCA2
 #include "algorithm/qca2bytearraychecksumalgorithm.hpp"
 #endif
 // NEWCHECKSUM(start)
@@ -40,7 +40,7 @@
 // Qt
 #include <QVector>
 
-#ifdef HAVE_QCA2
+#if HAVE_QCA2
 static inline void addQca2Algorithm(QVector<AbstractByteArrayChecksumAlgorithm*>& algorithmList, const QString& name, const QString& id, const char* type)
 {
     if (QCA::isSupported(type)) {
@@ -66,7 +66,7 @@ QVector<AbstractByteArrayChecksumAlgorithm*> ByteArrayChecksumAlgorithmFactory::
 // NEWCHECKSUM(end)
     };
 
-#ifdef HAVE_QCA2
+#if HAVE_QCA2
     addQca2Algorithm(result, i18nc("name of the hash algorithm", "SHA-0"),
                      QStringLiteral("SHA0"),  "sha0");
     addQca2Algorithm(result, i18nc("name of the hash algorithm", "SHA-1"),
