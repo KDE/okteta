@@ -422,10 +422,6 @@ oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/datatyp
         PrimitiveFactory
         PrimitiveDataType
 )
-# I18N_NOOP2 is deprecated, but the substitute would blow up code size, needs revivial of I18N_NOOP2
-set_source_files_properties(view/structures/datatypes/primitivedatatype.cpp PROPERTIES
-    COMPILE_FLAGS -DKI18N_DISABLE_DEPRECATED_BEFORE_AND_AT=0x04F00
-)
 
 oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/datatypes/array
     PRIVATE

@@ -9,39 +9,27 @@
 #include "primitivedatatype.hpp"
 #include "structureviewpreferences.hpp"
 
-#include <ki18n_version.h>
-#if KI18N_VERSION >= QT_VERSION_CHECK(5, 89, 0)
 #include <KLazyLocalizedString>
-#endif
 #include <KLocalizedString>
 #include <QDebug>
 
-#if KI18N_VERSION >= QT_VERSION_CHECK(5, 89, 0)
-#undef I18N_NOOP2
-#define I18N_NOOP2 kli18nc
-#endif
-
-#if KI18N_VERSION >= QT_VERSION_CHECK(5, 89, 0)
 static constexpr const KLazyLocalizedString longTypeNames[static_cast<int>(PrimitiveDataType::END) + 1] = {
-#else
-static constexpr const char* longTypeNames[static_cast<int>(PrimitiveDataType::END) + 1] = {
-#endif
-    I18N_NOOP2("data type", "bool (1 byte)"),
-    I18N_NOOP2("data type", "signed byte"),
-    I18N_NOOP2("data type", "unsigned byte"),
-    I18N_NOOP2("data type", "char"),
-    I18N_NOOP2("data type", "bool (2 bytes)"),
-    I18N_NOOP2("data type", "signed short"),
-    I18N_NOOP2("data type", "unsigned short"),
-    I18N_NOOP2("data type", "bool (4 bytes)"),
-    I18N_NOOP2("data type", "signed int"),
-    I18N_NOOP2("data type", "unsigned int"),
-    I18N_NOOP2("data type", "bool (8 bytes)"),
-    I18N_NOOP2("data type", "signed long"),
-    I18N_NOOP2("data type", "unsigned long"),
-    I18N_NOOP2("data type", "float"),
-    I18N_NOOP2("data type", "double"),
-    I18N_NOOP2("data type", "bitfield"),
+    kli18nc("data type", "bool (1 byte)"),
+    kli18nc("data type", "signed byte"),
+    kli18nc("data type", "unsigned byte"),
+    kli18nc("data type", "char"),
+    kli18nc("data type", "bool (2 bytes)"),
+    kli18nc("data type", "signed short"),
+    kli18nc("data type", "unsigned short"),
+    kli18nc("data type", "bool (4 bytes)"),
+    kli18nc("data type", "signed int"),
+    kli18nc("data type", "unsigned int"),
+    kli18nc("data type", "bool (8 bytes)"),
+    kli18nc("data type", "signed long"),
+    kli18nc("data type", "unsigned long"),
+    kli18nc("data type", "float"),
+    kli18nc("data type", "double"),
+    kli18nc("data type", "bitfield"),
 };
 
 static constexpr const char* typeNames[static_cast<int>(PrimitiveDataType::END) + 1] = {
@@ -84,11 +72,7 @@ QString PrimitiveType::standardTypeName(PrimitiveDataType type)
 QString PrimitiveType::longTypeName(PrimitiveDataType type)
 {
     if (type >= PrimitiveDataType::START && type <= PrimitiveDataType::END) {
-#if KI18N_VERSION >= QT_VERSION_CHECK(5, 89, 0)
         return longTypeNames[static_cast<int>(type)].toString();
-#else
-        return i18nc("data type", longTypeNames[static_cast<int>(type)]);
-#endif
     }
 
     return i18n("invalid type");
