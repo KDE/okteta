@@ -40,7 +40,7 @@ FilterTool::FilterTool()
     mFilterList = ByteArrayFilterFactory::createFilters();
 
     const KConfigGroup configGroup(KSharedConfig::openConfig(), FilterConfigGroupId);
-    for (auto* filter : qAsConst(mFilterList)) {
+    for (auto* filter : std::as_const(mFilterList)) {
         filter->loadConfig(configGroup);
     }
 
