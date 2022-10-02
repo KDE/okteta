@@ -1,0 +1,2261 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY Friedrich.Kossebau
+"<personname
+><firstname
+>Friedrich</firstname
+><othername
+>W. H.</othername
+><surname
+>Kossebau</surname
+></personname
+>">
+  <!ENTITY Friedrich.Kossebau.email "<email
+>kossebau@kde.org</email
+>">
+  <!ENTITY Alex.Richardson
+"<personname
+><firstname
+>Alex</firstname
+><surname
+>Richardson</surname
+></personname
+>">
+  <!ENTITY Alex.Richardson.email "<email
+>arichardson.kde@gmail.com</email
+>">
+  <!ENTITY % Serbian "INCLUDE">
+  <!ENTITY % addindex "IGNORE">
+]>
+
+<book id="okteta" lang="&language;">
+
+<bookinfo>
+<title
+>Приручник за <application
+>Октету</application
+></title>
+
+<authorgroup>
+    <author
+><firstname
+>Фридрих</firstname
+> <othername
+>В.Х.</othername
+> <surname
+>Косебау</surname
+> <affiliation
+> <address
+>&Friedrich.Kossebau.email;</address>
+      </affiliation>
+    </author>
+    <author
+><firstname
+>Александер</firstname
+> <surname
+>Ричардсон</surname
+> <affiliation
+> <address
+>&Alex.Richardson.email;</address>
+      </affiliation>
+    </author>
+<othercredit role="translator"
+><firstname
+>Драган</firstname
+><surname
+>Пантелић</surname
+><affiliation
+><address
+><email
+>falcon-10@gmx.de</email
+></address
+></affiliation
+><contrib
+>превод</contrib
+></othercredit
+> 
+</authorgroup>
+
+<copyright>
+<year
+>2008, 2010, 2011</year>
+<holder
+>Фридрих В.Х. Косебау и Александер Ричардсон</holder>
+</copyright>
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>29. 7. 2016.</date>
+<releaseinfo
+>0.20 (Програми КДЕ‑а 16.08)</releaseinfo>
+
+<abstract>
+  <para
+><application
+>Октета</application
+> је једноставан уређивач за сирове податке у фајловима. Овај тип програм такође се назива хексадекадним или бинарним уређивачем.</para>
+</abstract>
+
+<keywordset>
+<keyword
+>КДЕ</keyword>
+<keyword
+>КДЕ‑ов СДК</keyword>
+<keyword
+>Октета</keyword>
+<keyword
+>приказ</keyword>
+<keyword
+>уређивач</keyword>
+<keyword
+>битови</keyword>
+<keyword
+>бајтова</keyword>
+<keyword
+>бинарни</keyword>
+<keyword
+>октални</keyword>
+<keyword
+>хексадекадни</keyword>
+<keyword
+>хексадекадни уређивач</keyword>
+<keyword
+>сирови подаци</keyword>
+</keywordset>
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Увод</title>
+
+<para
+><application
+>Октета</application
+> је једноставан уређивач за сирове податке у фајловима.</para>
+
+<para
+>Подаци су приказани у две варијанте: као бројевне вредности бајтова, и као знакови придружени тим вредностима. Вредности и знакови могу бити приказани или у две колоне (традиционални приказ у хексадекадним уређивачима) или по врстама са вредношћу изнад знака. Уређивати се може и по вредностима и по знаковима.</para>
+
+<para
+>Поред уобичајених уређивачких способности, <application
+>Октета</application
+> пружа и мали скуп специјалних алатки, као што су табеларно набрајање декодирања према уобичајеним типовима података, табеларно набрајање свих могућих бајтова са знаковним и вредносним еквивалентима, информативни приказ статистике, калкулатор контролних сума, алатка за филтрирање и алатка за издвајање ниски.</para>
+
+<para
+>Све измене над подацима могу бити опозиване и понављане без ограничења.</para>
+
+</chapter>
+
+<chapter id="basics">
+<title
+>Основе</title>
+
+<sect1 id="starting-basics">
+<title
+>Покретање <application
+>Октете</application
+></title>
+
+    <para
+>Упишите <userinput
+><command
+>okteta</command
+></userinput
+> у командни одзивник или изаберите <guimenuitem
+>Хексадекадни уређивач</guimenuitem
+> из групе <menuchoice
+><guisubmenu
+>Програми</guisubmenu
+><guisubmenu
+>Алатке</guisubmenu
+></menuchoice
+> у покретачу програма.</para>
+
+    <para
+>Доступне су стандардне КуТ и КФ5 опције командне линије, а набројати се могу извршавањем <userinput
+><command
+>okteta</command
+> <option
+>--help</option
+></userinput
+>.</para>
+
+    <para
+>Опције командне линије посебне за <application
+>Октету</application
+> су:</para>
+
+    <para
+><option
+><replaceable
+>&lt;УРЛ‑ови&gt;</replaceable
+></option
+> — отвара фајлове са задатих УРЛ‑ова.</para>
+
+</sect1>
+
+<sect1 id="usage-basics">
+<title
+>Коришћење</title>
+
+    <para
+>Главни прозор <application
+>Октете</application
+> има следеће компоненте: траку менија, траку алатки, траку стања, једну или више бочних трака са алаткама, и главни приказ података са језичцима.</para>
+
+    <para
+>Када се отвори фајл или направи нови низ бајтова, садржај бајтова се ниже у редове са задатим бројем бајтова по реду. Приказују се у два облика: као бројевне вредности и као знакови придружени тим вредностима. Вредности и знакови могу бити приказани или раздвојено у две колоне, или једни до других са вредношћу изнад знака. На левој страни дати су помаци првог бајта у сваком реду.</para>
+
+    <para
+>Ради се слично као у већини уређивача текста: подаци се могу уређивати, исецати, копирати, налепљивати и превлачити, као и обичан текст. Курсор означава тренутни положај. Притиском на тастер <keycap
+>Insert</keycap
+> мењате између режима пребрисавања и уметања. Режим пребрисавања је строжији него у уређивачима текста, у томе што не дозвољава поступке који би променили величину низа бајтова.</para>
+
+    <para
+>За разлику од уређивача текста, садржај се приказује у два облика; само један од њих може бити активан за прихватање улаза. Дата су два повезана курсора, један у приказу вредности а други у приказу знакова, и курсор активног приказа трепће. Када су активни знакови, притиском на прву цифру отвара се минимални уређивач ради уношења остатка вредности.</para>
+
+    <para
+>Дијалог за претрагу омогућава тражење одређене ниске бајтова, дефинисане као хексадекадна, декадна, октална или бинарна вредност, или као текст (по текућем кодирању или УТФ‑8).</para>
+
+    <para
+>Истовремено може бити отворено више низова бајтова, али само један може бити активан. Активни низ бирате кроз мени <guimenu
+>Прозори</guimenu
+>.</para>
+</sect1>
+
+
+</chapter>
+
+<chapter id="tools">
+  <title
+>Алатке</title>
+
+<!-- The tool Versions is not part of released versions,
+just used for development, so no need to document it. -->
+<!--
+4.7
+Other stuff:
+New encodings: ISO-8859-14, ISO-8859-16, Codepage 874
+File info tool now estimates the mimetype also for the unstored/edited data in the working memory
+FIXME  
+-->
+<sect1 id="tools-overview">
+
+  <title
+>Преглед</title>
+  <para
+><application
+>Октета</application
+> садржи разне алатке, неке за анализирање и манипулисање низовима бајтова, а неке са општијом наменом. Ове алатке се могу активирати и деактивирати преко ставке <guimenu
+>Алатке</guimenu
+> на траци менија. Свака алатка има свој мали приказ, који или пристаје у једну од бочних трака или слободно плута као прозор. Приказе алатки можете сидрити, откачињати, прераспоређивати, а такође и слагати тако што притиснете лево дугме миша над насловном траком приказа, померите га колико желите, па пустити дугме да довршите радњу (или тастер <keycap
+>Esc</keycap
+> да одустанете).</para>
+
+<sect2>
+  <title
+>Анализатори и манипулатори</title>
+<variablelist>
+  <varlistentry>
+    <term
+>Табела вредност—знак</term>
+    <listitem
+><para
+>Табела набраја све могуће вредности бајта, и нумеричке и знаковне у различитим кодирањима.</para>
+    <para
+>Изабрана вредност може се уметнути на положају курсора за дефинисани број бајтова. Умеће се дугметом <guibutton
+>Уметни</guibutton
+> или двокликом на ред у табели.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Бинарни филтер</term>
+    <listitem
+><para
+>Филтер изводи бинарне операције над изабраним бајтовима. Након избора операције (И, ИЛИ, РОТИРАЈ...), параметри се, ако их има, могу поставити у пољу испод. Филтер се примењује дугметом <guibutton
+>Филтрирај</guibutton
+>.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Ниске</term>
+    <listitem
+><para
+>Ова алатка проналази ниске у изабраним бајтовима. Након избора минималне дужине, тражење се покреће дугметом <guibutton
+>Извуци</guibutton
+>. Списак приказаних ниски може се сузити уношењем филтерског израза.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Статистика</term>
+    <listitem
+><para
+>Ова алатка гради статистику за изабране бајтове, коју чине учесталости понављања за сваку вредност бајта у избору. Може се прорачунати дугметом <guibutton
+>Изгради</guibutton
+>.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Контролна сума</term>
+    <listitem
+><para
+>Ова алатка рачуна разне контролне и дисперзионе суме изабраних бајтова. Пошто изаберете алгоритам и поставите параметар, ако га има, сума се израчунава притиском на дугме <guibutton
+>Израчунај</guibutton
+>.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Табела декодирања</term>
+    <listitem
+><para
+>Табела приказује вредности бајтова на положају курсора, за неке уобичајене једноставне типове података као што су целобројни или у покретном зарезу, али и УТФ‑8. Двоклик на врсту у табели отвара уређивач у којем се вредност може изменити.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Структуре</term>
+    <listitem
+><para
+>Ова алатка омогућава испитивање и уређивање низова бајтова на основу кориснички задатих дефиниција структура. Детаљне инструкције дате су у <link linkend="tools-structures"
+>посебном одељку</link
+>.</para
+></listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+  <title
+>Опште алатке</title>
+<variablelist>
+  <varlistentry>
+    <term
+>Фајл систем</term>
+    <listitem
+><para
+>Ова алатка је угнежђени прегледач фајлова којим се могу бирати фајлови за отварање.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Документи</term>
+    <listitem
+><para
+>Ова алатка показује све тренутно учитане и направљене фајлове. Симболима су означени фајл са тренутно активни приказом, фајлови који имају несачуваних измена и фајлови чију ускладиштену копију је изменио неки други програм.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Обележивачи</term>
+    <listitem
+><para
+>Ова алатка служи за управљање обележивачима, као алтернатива менију <link linkend="bookmarks-menu"
+><guimenu
+>Обележивачи</guimenu
+></link
+>. <note
+><para
+>Обележивачи су за сада пролазни, тј. не уписују се када затворите низ бајтова или цео програм.</para
+></note
+></para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Подаци о фајлу</term>
+    <listitem
+><para
+>Ова алатка наводи неке податке о текућем фајлу, као што су тип, локација складиштења и величина.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Терминал</term>
+    <listitem
+><para
+>Угнежђени терминал, радна фасцикла није повезана са активним фајлом.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Претварање кодирања</term>
+    <listitem
+><para
+>Претварање бајтова тако да записани знакови буду исти у другом кодирању. Подржана су само осмобитна кодирања, а непоклопљени знакови тренутно се замењују укодираном нулом. </para
+></listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+</sect1>
+
+
+<sect1 id="tools-structures">
+<!--
+Many improvements in the Structures tool by Alex:
+Begin of a structure can be pinned to a specific offset
+Support for strings (various Unicode encodings) in definitions
+  -->
+    <title
+>Алатка структура</title>
+
+    <sect2>
+      <title
+>Опште</title>
+
+      <para
+>Алатка структура омогућава анализирање и уређивање низова бајтова на основу кориснички задатих дефиниција структура, које се могу састојати од низова, унија, примитивних типова и набројивих вредности.</para>
+     <!-- explain/link what these types are? probably not, since most user will be programmers? -->
+      <para
+>Поседује сопствени дијалог поставки, који се позива дугметом <guibutton
+>Поставке</guibutton
+>. Могу се подесити разне опције, попут стила приказа вредности (декадно, хексадекадно, бинарно). Могуће је изабрати које се дефиниције структура учитавају и које структуре се виде у приказу.</para>
+      <para
+>Структура се дефинише у фајлу <application
+>Октетине</application
+> дефиниције структуре (ИксМЛ формат са наставком <literal role="extension"
+>.osd</literal
+>). На ово се додаје и <literal role="extension"
+>.desktop</literal
+> фајл са метаподацима о фајлу описа структуре, попут аутора, домаће странице и лиценце.</para>
+      <para
+>Тренутно нема уграђене подршке за стварање и уређивање дефиниција структура, већ се то мора ручно радити како је описано у наредним одељцима.</para>
+    </sect2>
+
+    <sect2>
+      <title
+>Инсталирање дефиниција структура</title>
+
+      <sect3>
+        <title
+>Инсталирање преко врућих новотарија</title>
+        <para
+>Нове дефиниције структура најлакше се инсталирају путем подршке за вруће новотарије уграђене у <application
+>Октети</application
+>. Да бисте инсталирали постојећу структуру, отворите дијалог поставки алатке за структуре. У њему идите под језичак <guilabel
+>Управљање структурама</guilabel
+> и кликните на дугме <guibutton
+>Добави нове структуре...</guibutton
+>. Дијалог који се на то појави омогућава вам инсталирање и деинсталирање структура.</para>
+      </sect3>
+      <sect3>
+        <title
+>Ручно инсталирање дефиниција структура</title>
+        <para
+>Алатка структура тражи описе структура у потфасцикли <filename class="directory"
+>okteta/structures/</filename
+> корисничке фасцикле за податке програма̂ (коју налазите извршавањем <userinput
+><command
+>qtpaths</command
+> <option
+>--paths GenericDataLocation</option
+></userinput
+>). Можда ћете морати да направите ову фасциклу, ако још увек нема ниједне инсталиране дефиниције структуре.</para>
+          <para
+>За сваку дефиницију структуре постоје два фајла: један за саму дефиницију, и један <literal role="extension"
+>.desktop</literal
+> фајл за метаподатке (аутор, верзија, итд.).</para>
+          <para
+>У наведеној фасцикли, свака дефиниција структуре има своју потфасциклу која садржи и <literal role="extension"
+>.desktop</literal
+> и <literal role="extension"
+>.osd</literal
+> или <filename
+>main.js</filename
+> фајл дефиниције.</para>
+          <para
+>На пример, ако је фасцикла података програма̂ <filename class="directory"
+><userinput
+><command
+>qtpaths</command
+> <option
+>--paths GenericDataLocation</option
+></userinput
+></filename
+> а име дефиниције структуре <literal
+>PrimerStrukture</literal
+>, онда постоји фасцикла <filename class="directory"
+>okteta/structures/ExampleStructure</filename
+> која садржи фајлове <filename
+>PrimerStrukture.desktop</filename
+> и <filename
+>PrimerStrukture.osd</filename
+>.</para>
+      </sect3>
+      <sect3>
+        <title
+>Коришћење инсталираних структура</title>
+        <para
+>Пошто инсталирате нову дефиницију структуре, да бисте је користили морате поново покренути <application
+>Октету</application
+>. Пошто то учините, отворите дијалог поставки алатке за структуре. Идите на језичак <guilabel
+>Управљање структурама</guilabel
+> и обезбедите да је одговарајућа дефиниција структуре активирана. Затим пређите на језичак <guilabel
+>Структуре</guilabel
+> и проверите да ли је жељени елемент приказан на десној страни.</para>
+      </sect3>
+    </sect2>
+
+    <sect2>
+      <title
+>Дељење дефиниција структура</title>
+      <para
+>За уобичајене структуре можда не морате сами стварати дефиниције, већ се можете послужити постојећим дефиницијама са места̂ попут <ulink url="https://store.kde.org/browse/cat/214"
+>store.kde.org</ulink
+>.</para>
+      <para
+>Такође можете пожелети да поделите своје дефиниције. То чините тако што направите архиву (нпр. типа <literal role="extension"
+>.tar.gz</literal
+>) која садржи само потфасциклу са <literal role="extension"
+>.desktop</literal
+> фајлом и фајлом дефиниције структуре. Настављајући пример из претходног одељка, ово би била фасцикла <filename class="directory"
+>PrimerStrukture</filename
+> са својим потпуним садржајем. Употреба овог формата за дељење дефиниција структура омогућава њихово инсталирање у <application
+>Октети</application
+> без ручних захвата.</para>
+    </sect2>
+
+
+    <sect2>
+      <title
+>Стварање дефиниција структура</title>
+
+      <note
+><para
+>Новији, али још недовршени, водич за писање дефиниција структура може се наћи на <ulink url="https://userbase.kde.org/Okteta/Writing_structure_definitions"
+>викију Корисничке базе КДЕ‑а</ulink
+>. </para
+></note>
+
+      <para
+>Дефиниције структура могу се стварати на два начина. Први је писање дефиниције у ИксМЛ‑у, а други употребом <application
+>јаваскрипта</application
+>. Приступ <application
+>јаваскриптом</application
+> омогућава вам да израдите сложеније структуре, са могућностима попут, рецимо, оверавања структуре. ИксМЛ пружа мање могућности, али може бити најлакши приступ ако је статичка структура све што вам треба. Ако желите динамичку структуру, нпр. где дужине низова зависе од других вредности из структуре, или се распоред структуре мења са променом вредности неких чланова, мораћете да напишете дефиницију структуре на <application
+>јаваскрипту</application
+>. Овоме има један изузетак: ако дужина низа треба да буде <emphasis role="bold"
+>тачно</emphasis
+> једнака некој другој вредности из структуре, то се може задати и ИксМЛ‑ом; али ако је нешто попут <emphasis
+>дужина - 1</emphasis
+>, тада мора <application
+>јаваскрипт</application
+>.</para>
+    </sect2>
+
+
+    <sect2>
+      <title
+>ИксМЛ формат фајла за дефинисање структура</title>
+      <note
+><para
+>Новији, али још недовршени, водич за писање дефиниција структура може се наћи на <ulink url="https://userbase.kde.org/Okteta/Writing_structure_definitions"
+>викију Корисничке базе КДЕ‑а</ulink
+>. </para
+></note>
+      <para
+><literal role="extension"
+>.osd</literal
+> ИксМЛ фајл има један корени елемент: <emphasis
+>&lt;data&gt;</emphasis
+>, без атрибута. Унутар овог елемента мора стојати један од следећих:</para>
+      <!-- TODO markup, though better than nothing this way-->
+      <variablelist>
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;primitive&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>За стварање примитивних типова података, попут <emphasis
+>int</emphasis
+> или <emphasis
+>float</emphasis
+>. Овај елемент нема поделемената, а може имати следеће атрибуте:</para>
+              <variablelist>
+                <varlistentry>
+                <term
+><emphasis role="bold"
+>type</emphasis
+></term>
+                <listitem>
+                  <para
+>Тип овог примитивног типа. Мора бити један од следећих:</para>
+                  <itemizedlist>
+                    <listitem
+><para
+><emphasis
+>char</emphasis
+> за 8‑битни аски знак</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>int8, int16, int32, int64</emphasis
+> за означени целобројни те величине</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>uint8, uint16, uint32, uint64</emphasis
+> за неозначени целобројни те величине</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>bool8, bool16, bool32, bool64</emphasis
+> за неозначени логички (0 = нетачно, било шта друго = тачно) те величине</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>float</emphasis
+> за 32‑битни број у покретном зарезу (ИЕЕЕ 754)</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>double</emphasis
+> за 64‑битни број у покретном зарезу (ИЕЕЕ 754)</para
+></listitem>
+                  </itemizedlist>
+                </listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;bitfield&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>За стварање битског поља. Овај елемент нема поделемената, а може имати следеће атрибуте:</para>
+              <variablelist>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>width</emphasis
+></term>
+                  <listitem
+><para
+>Број битова у овом битском пољу. Мора бити између 1 и 64.</para
+></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>type</emphasis
+></term>
+                  <listitem>
+                    <para
+>Тип овог битског поља. Мора бити један од следећих:</para>
+                    <itemizedlist>
+                      <listitem
+><para
+><emphasis
+>unsigned</emphasis
+> за битско поље где вредност треба тумачити као неозначену (опсег 0 до 2<superscript
+>width</superscript
+> - 1)</para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>signed</emphasis
+> за битско поље где вредност треба тумачити као означену (опсег -2<superscript
+>width - 1</superscript
+> до 2<superscript
+>width - 1</superscript
+> - 1)</para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>bool</emphasis
+> за битско поље где вредност треба тумачити као логичку</para
+></listitem>
+                  </itemizedlist>
+                  <note
+><para
+>Не заборавите да додате испуну после <emphasis
+>&lt;bitfield&gt;</emphasis
+>, пошто ће у супротном наредни елемент почети усред бајта (осим код ниски и низова, који аутоматски додају испуну). Наравно, испуна није потребна ако желите ово понашање.</para
+></note>
+                  </listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;enum&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>За стварање примитивног типа, али где су вредности приказане као чланови набрајања, ако је могуће. Овај елемент нема поделемената (али ће вам требати ознака <emphasis
+>&lt;enumDef&gt;</emphasis
+> у фајлу раду упућивања). Има следеће атрибуте:</para>
+              <variablelist>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>enum</emphasis
+></term>
+                  <listitem
+><para
+>Подложно набрајање за ову вредност. Мора одговарати атрибуту <emphasis
+>name</emphasis
+> једне од ознака <emphasis
+>&lt;enumDef&gt;</emphasis
+> у овом фајлу.</para
+></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>type</emphasis
+></term>
+                  <listitem>
+                    <para
+>Тип овог набрајања. Погледајте истоимени атрибут уз <emphasis
+>&lt;primitive&gt;</emphasis
+>. Једина разлика је то што овде <emphasis
+>double</emphasis
+> и <emphasis
+>float</emphasis
+> немају смисла.</para>
+                  </listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
+          </varlistentry>
+
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;flags&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Исто као и <emphasis
+>&lt;enum&gt;</emphasis
+>, само што се вредности представљају као резултат <emphasis
+>битског или</emphasis
+> над свим вредностима набрајања.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;struct&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>За стварање структуре. Сви други елементи(укључујући и <emphasis
+>&lt;struct&gt;</emphasis
+>) могу бити деца овога, и тада ће бити део резултујуће структуре.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;union&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>За стварање уније. У суштини исто што и <emphasis
+>&lt;struct&gt;</emphasis
+>, осим што ће сви дечји елементи почињати од истог помака. Корисно за тумачење истог низа бајтова на различите начине.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;array&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>За стварање низа. Овај елемент прихвата тачно једно дете (подложни тип низа), које може бити било који од елемената, чак и сам <emphasis
+>&lt;array&gt;</emphasis
+>. Има следеће атрибуте:</para>
+              <variablelist>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>length</emphasis
+></term>
+                  <listitem
+><para
+>Број елемената у овом низу, као декадни број. Алтернативно може бити ниска једнака атрибуту <emphasis
+>name</emphasis
+> неког од претходно дефинисаних елемената <emphasis
+>&lt;primitive&gt;</emphasis
+>, <emphasis
+>&lt;enum&gt;</emphasis
+> или <emphasis
+>&lt;flags&gt;</emphasis
+>; тада ће дужина бити вредност тог елемента. Дужина је тренутно ограничена на 10000, јер би већи низови трошили превише меморије и превише успоравали програм. </para
+></listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;string&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>За стварање ниске са одређеним кодирањем. Подразумевано се добија ниска окончана нулом, у стилу Ц‑а. За стварање различитих типова ниски могу се употребити следећи атрибути:</para>
+              <variablelist>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>terminatedBy</emphasis
+></term>
+                  <listitem
+><para
+>Овај атрибут одређује којом ће се уникодском кодном тачком ниска окончавати. Мора бити хексадекадни број (опционо са водећим <emphasis
+>0x</emphasis
+>); ако је кодирање аски, смислене су само вредности до 0x7f. Ако није задато ни ово ни <emphasis
+>maxCharCount</emphasis
+> ни <emphasis
+>maxByteCount</emphasis
+>, претпоставља се 0 (ниска Ц стила). </para
+></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>maxCharCount</emphasis
+></term>
+                  <listitem
+><para
+>Највећи број знакова који ниска може да има. Ако је задато и <emphasis
+>terminatedBy</emphasis
+>, прво што наиђе окончава ниску. Међусобно искључиво са <emphasis
+>maxByteCount</emphasis
+>.</para
+></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>maxByteCount</emphasis
+></term>
+                  <listitem
+><para
+>Колико највише бајтова ниска може бити дугачка. Ако је задато и <emphasis
+>terminatedBy</emphasis
+>, прво што наиђе окончава ниску. Међусобно искључиво са <emphasis
+>maxCharCount</emphasis
+>. За кодирања попут аскија, ово је исто као <emphasis
+>maxCharCount</emphasis
+>.</para
+></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>type</emphasis
+></term>
+                  <listitem
+><para
+>Кодирање ове ниске. Може бити једно од следећих:</para>
+                    <itemizedlist>
+                      <listitem
+><para
+><emphasis
+>ASCII</emphasis
+></para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>LATIN-1</emphasis
+></para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>UTF-8</emphasis
+></para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>UTF-16-LE</emphasis
+> или <emphasis
+>UTF-16-BE</emphasis
+>. Ако се не зада ни суфикс <emphasis
+>-LE</emphasis
+> ни <emphasis
+>-BE</emphasis
+>, претпоставља се мала крајност. </para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>UTF-32-LE</emphasis
+> или <emphasis
+>UTF-32-BE</emphasis
+>. Ако се не зада ни суфикс <emphasis
+>-LE</emphasis
+> ни <emphasis
+>-BE</emphasis
+>, претпоставља се мала крајност. </para
+></listitem>
+                    </itemizedlist>
+                  </listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
+          </varlistentry>
+      </variablelist>
+      <para
+>Сваки елемент такође прихвата атрибут <emphasis
+>name</emphasis
+>, који се после види у приказу структура. </para>
+    </sect2>
+
+    <sect2>
+      <title
+>Пример исте структуре у ИксМЛ‑у и <application
+>јаваскрипту</application
+></title>
+      <note
+><para
+>Новији, али још недовршени, водич за писање дефиниција структура може се наћи на <ulink url="https://userbase.kde.org/Okteta/Writing_structure_definitions"
+>викију Корисничке базе КДЕ‑а</ulink
+>. </para
+></note>
+
+      <sect3>
+        <title
+>Заједнички кораци за оба приступа</title>
+        <para
+>Наш фајл са метаподацима изгледа овако: <screen>
+        [Desktop Entry]
+        Encoding=UTF-8
+        Icon=arrow-up<co id="icon" />
+        Type=Service
+        ServiceTypes=KPluginInfo
+
+        Name=Simple test structure
+        Comment=A very simple test structure containing only two items
+
+        X-KDE-PluginInfo-Author=Pera Peric
+        X-KDE-PluginInfo-Email=pera.peric@nikadodjija.org
+        X-KDE-PluginInfo-Name=simplestruct
+        X-KDE-PluginInfo-Version=1.0
+        X-KDE-PluginInfo-Website=http://www.nikadodjija.org/plugins/
+        X-KDE-PluginInfo-Category=structure
+        X-KDE-PluginInfo-License=LGPL
+        X-KDE-PluginInfo-EnabledByDefault=false
+        </screen
+> <calloutlist
+> <callout arearefs="icon"
+> <para
+>Иконица коју <application
+>Октета</application
+> приказује за ову структуру може бити нека коју проналази <userinput
+><command
+>kdialog</command
+> <option
+>--geticon</option
+></userinput
+>, или путања до иконице.</para
+> </callout
+> </calloutlist
+> Сва поља би требало да су прилично очигледна, осим <literal
+>X-KDE-PluginInfo-Name</literal
+>. Вредност овог поља мора бити једнака имену фасцикле која садржи фајл, као и имену <literal role="extension"
+>.desktop</literal
+> фајла. Ако се прави ИксМЛ дефиниција структуре, и име <literal role="extension"
+>.osd</literal
+> фајла мора бити једнако овоме. </para>
+
+        <para
+>У овом примеру имали бисмо фасциклу по имену <filename
+>simplestruct</filename
+>, која садржи фајл <filename
+>simplestruct.desktop</filename
+>. Ако се структура дефинише ИксМЛ‑ом, фасцикла би такође садржала фајл <filename
+>simplestruct.osd</filename
+>. Ако бисмо користили <application
+>јаваскрипт</application
+>, фајл дефиниције би се уместо тога звао <filename
+>main.js</filename
+>.</para>
+      </sect3>
+      <sect3>
+        <title
+>Једноставна ИксМЛ дефиниција структуре</title>
+        <para
+>За почетак дефинишимо врло једноставну пробну структуру која садржи само интегралне типове података (један знак, један 32‑битни означени цео број и једно битско поље). У Ц‑у или Ц++у ово би се изразило као: <screen>
+          struct simple {
+            char aChar;
+            int anInt;
+            bool bitFlag :1;
+            unsigned padding :7;
+          };
+          </screen
+> Први корак је писање <literal role="extension"
+>.osd</literal
+> фајла, формата дефинисаног у претходном одељку. Назваћемо га <filename
+>simplestruct.osd</filename
+>: <screen
+><markup>
+          &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+          &lt;data&gt;
+            &lt;struct name="simple"&gt;
+              &lt;primitive name="aChar" type="Char"/&gt;
+              &lt;primitive name="anInt" type="Int32"/&gt;
+              &lt;bitfield name="bitFlag" type="bool" width="1"/&gt;
+              &lt;bitfield name="padding" type="unsigned" width="7"/&gt;
+            &lt;/struct&gt;
+          &lt;/data&gt;
+          </markup
+></screen
+> Ово је сасвим слично дефиницији у Ц‑у и Ц++у </para>
+          <para
+>Направите фасциклу <filename class="directory"
+>simplestruct</filename
+> унутар инсталационе фасцикле структура (погледајте одељак о ручном инсталирању дефиниција) и копирајте у њу ова два фајла. Сада можете поново покренути <application
+>Октету</application
+> и користити нову структуру.</para>
+      </sect3>
+      <sect3>
+        <title
+>Једноставна структура у <application
+>јаваскрипту</application
+></title>
+        <para
+>Да бисмо извели исту структуру помоћу <application
+>јаваскрипта</application
+>, направимо фајл по имену <filename
+>main.js</filename
+> (уместо претходног <filename
+>simplestruct.osd</filename
+>) и променимо <literal
+>X-KDE-PluginInfo-Category=structure</literal
+> у <literal
+>X-KDE-PluginInfo-Category=structure/js</literal
+>. Фајл треба да има следећи садржај: <screen>
+        function init() {
+          var structure = struct({
+            aChar : char(),
+            anInt : int32(),
+            bitFlag : bitfield("bool", 1),
+            padding : bitfield("unsigned", 7),
+          })
+          return structure;
+        }
+        </screen
+> Структура коју приказује <application
+>Октета</application
+> увек је повратна вредност функције <literal
+>init</literal
+>.</para>
+        <para
+>Следеће функције се могу позивати ради стварања примитивних типова: <itemizedlist
+> <listitem
+><para
+><literal
+>char()</literal
+></para
+></listitem
+> <listitem
+><para
+><literal
+>int8()</literal
+>, <literal
+>int16()</literal
+>, <literal
+>int32()</literal
+>, <literal
+>int64()</literal
+></para
+></listitem
+> <listitem
+><para
+><literal
+>uint8()</literal
+>, <literal
+>uint16()</literal
+>, <literal
+>uint32()</literal
+>, <literal
+>uint64()</literal
+></para
+></listitem
+> <listitem
+><para
+><literal
+>bool8()</literal
+>, <literal
+>bool16()</literal
+>, <literal
+>bool32()</literal
+>, <literal
+>bool64()</literal
+></para
+></listitem
+> <listitem
+><para
+><literal
+>float()</literal
+></para
+></listitem
+> <listitem
+><para
+><literal
+>double()</literal
+></para
+></listitem
+> </itemizedlist
+> Функција <literal
+>bitfield</literal
+> узима два аргумента. Први је ниска <literal
+>"bool"</literal
+>, <literal
+>"signed"</literal
+> или <literal
+>"unsigned"</literal
+>. Други аргумент је цео број којим се задаје ширина у битовима. </para>
+      </sect3>
+      <sect3>
+        <title
+>Сложеније структуре</title>
+        <para
+>Прелазимо на дефинисање сложеније структуре, коју ћемо назвати <literal
+>complex</literal
+> и сачувати у фајл по имену <filename
+>complex.osd</filename
+>. Ова структура ће садржати два низа (један фиксне дужине а други коме се дужина одређује при извршавању), као и угнежђену структуру и унију. <screen
+><markup>
+          &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+          &lt;data&gt;
+            &lt;struct name="complex"&gt;
+              &lt;primitive name="size" type="UInt8" /&gt;
+              &lt;union name="aUnion"&gt;
+                &lt;array name="fourBytes" length="4"&gt;
+                  &lt;primitive type="Int8" /&gt;
+                &lt;/array&gt;
+              &lt;/union&gt;
+              &lt;struct name="nested"&gt;
+                &lt;array name="string" length="size"&gt; &lt;!-- references the field size above --&gt;
+                  &lt;primitive type="Char" /&gt;
+                &lt;/array&gt;
+              &lt;/struct&gt;
+            &lt;/struct&gt;
+          &lt;/data&gt;
+          </markup
+></screen
+> Ово би одговарало следећем у псеудо‑Ц‑у/Ц++у: <screen
+>struct complex {
+            uint8_t size;
+            union aUnion {
+              int8_t fourBytes[4];
+            };
+            struct nested {
+              char string[size]; // није правилан Ц++, упућује на вредност uint8 size
+            };
+          };
+          </screen>
+          </para>
+          <note
+><para
+>Очигледно само низови динамичке дужине могу упућивати на поља пре низа.</para
+></note>
+          <para
+>Затим правимо фајл <filename
+>complex.desktop</filename
+> као у претходном примеру (не заборавите да исправно задате <literal
+>X-KDE-PluginInfo-Name</literal
+>) и на исти начин инсталирамо оба фајла.</para>
+      </sect3>
+      <sect3>
+        <title
+>Још информација</title>
+        <para
+>Неколико примера дефиниција структура може се наћи <ulink url="https://commits.kde.org/okteta?path=kasten/controllers/view/structures/examples/okteta/structures/"
+><application
+>гит</application
+> ризници</ulink
+>. Међу њима су, на пример, дефиниције заглавље ПНГ и ЕЛФ фајлова. ИксМЛ шема која описује структуру <literal role="extension"
+>.osd</literal
+> фајла такође се налази <ulink url="https://commits.kde.org/okteta?path=kasten/controllers/view/structures/schema/"
+>у ризници</ulink
+>. За још информација можете писати на &Alex.Richardson.email;. </para>
+      </sect3>
+    </sect2>
+<!--FIXME missing
+Extended structures definitions
+Structures Script Console-->
+</sect1>
+</chapter>
+
+<chapter id="interface-overview">
+<title
+>Преглед сучеља</title>
+
+<sect1 id="menu-commands">
+<title
+>Ставке менија</title>
+
+<para
+>Поред уобичајених КДЕ менија описаних у <ulink url="help:/fundamentals/ui.html#menus"
+>поглављу о менијима</ulink
+> Основа КДЕ‑а, <application
+>Октета</application
+> садржи и следеће програмски посебне ставке: </para>
+
+<sect2 id="file-menu">
+<title
+>Мени <guilabel
+>Фајл</guilabel
+></title>
+
+<variablelist>
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>N</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Фајл</guimenu
+> <guimenuitem
+>Нови</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Ствара нови низ бајтова...</action
+></para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>празан</guimenuitem
+>: ...без података.</para>
+    </listitem>
+    <listitem
+><para
+><guimenuitem
+>из клипборда</guimenuitem
+>: ...према текућем садржају клипборда.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>образац...</guimenuitem
+>: ...по датом обрасцу.</para>
+    </listitem>
+    <listitem
+><para
+><guimenuitem
+>насумични подаци...</guimenuitem
+>: ...са насумичним подацима.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>низ</guimenuitem
+>: ...са свим бајтовима од 0 до 255.</para
+></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Фајл</guimenu
+> <guisubmenu
+>Извоз</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+>Извози изабране бајтове у фајл...</para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>вредности</guimenuitem
+>: ...кодиране као вредности бајтова. Подразумевано су вредности раздвојене једним размаком. Знак за раздвајање може да се промени кроз дијалог <guilabel
+>Извези</guilabel
+>. </para>
+    </listitem>
+    <listitem
+><para
+><guimenuitem
+>знакови</guimenuitem
+>: ...кодиране као обични текст. </para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>база64</guimenuitem
+>: ...кодиране у формату <ulink url="https://en.wikipedia.org/wiki/Base64"
+>база64</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>база32</guimenuitem
+>: ...кодиране у формату <ulink url="https://en.wikipedia.org/wiki/Base64"
+>база32</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>аски‑85</guimenuitem
+>: ... кодиране у формату <ulink url="https://en.wikipedia.org/wiki/Ascii85"
+>аски‑85</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>уу‑кодирање</guimenuitem
+>: ...кодиране у формату <ulink url="https://en.wikipedia.org/wiki/Uuencoding"
+>уу‑кодирање</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>иксикс-кодирање</guimenuitem
+>: ...кодиране у формату <ulink url="https://en.wikipedia.org/wiki/Xxencoding"
+>иксикс-кодирање</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Интелов ХЕКС</guimenuitem
+>: ...кодиране у формату <ulink url="https://en.wikipedia.org/wiki/Intel_Hex"
+>Интеловог ХЕКС‑а</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>с‑рекорд</guimenuitem
+>: ...кодиране у формату <ulink url="https://en.wikipedia.org/wiki/S-record"
+>с‑рекорд</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Ц низ</guimenuitem
+>: ...дефинисане као низ у програмском језику Ц.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>обични текст (приказ)</guimenuitem
+>: ...као у приказу података, са помаком, вредностима бајтова и знаковима. </para
+></listitem>
+    </itemizedlist>
+    </listitem>
+
+</varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Фајл</guimenu
+> <guisubmenu
+>Дозволе</guisubmenu
+><guimenuitem
+>Само‑за‑читање</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+>Кад је постављено, учитани низ бајтова не може да се мења.</para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Фајл</guimenu
+> <guimenuitem
+>Затвори све друге</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Затвара све осим текућег низа бајтова.</action
+></para
+></listitem>
+    </varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="edit-menu">
+<title
+>Мени <guilabel
+>Уређивање</guilabel
+></title>
+<variablelist>
+<para
+>Једноставно копирање и исецање шаљу податке у клипборд са МИМЕ типом <literal
+>application/octetstream</literal
+>. <application
+>Клипер</application
+> не може да прикаже овакве податке, а ни већина других програма не уме да рукује њима, пошто су једноставно сирови подаци. Погледајте и подмени <guisubmenu
+>Копирање као</guisubmenu
+>.</para>
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Уређивање</guimenu
+> <guisubmenu
+>Копирање као</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+>Копира изабране бајтове у клипборд, у задатом формату. Списак доступних формата даје ставка менија <menuchoice
+><guimenu
+>Фајл</guimenu
+> <guisubmenu
+>Извези</guisubmenu
+></menuchoice
+>. </para>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Уређивање</guimenu
+> <guisubmenu
+>Уметни</guisubmenu
+>  </menuchoice
+></term>
+    <listitem>
+    <variablelist>
+    <varlistentry>
+    <term
+><menuchoice>
+    <guimenuitem
+>Уметни образац...</guimenuitem>
+    </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Умеће задати низ бајтова код курсора.</action
+></para>
+    <para
+>Дијалог садржи опције за задавање броја уметања и формата обрасца (хексадекадно, декадно, октално, бинарно, знакови, УТФ‑8).</para>
+    <!--FIXME Random Data + Sequence - use cases?-->
+    </listitem>
+    </varlistentry>
+    </variablelist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>Shift</keycap
+><keycap
+>A</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Уређивање</guimenu
+> <guimenuitem
+>Поништи избор</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Поништава тренутни избор.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Уређивање</guimenu
+> <guimenuitem
+>Изабери опсег...</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Отвара угнежђени дијалог за уношење опсега за избор.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+><keycap
+>Insert</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Уређивање</guimenu
+> <guimenuitem
+>Режим пребрисавања</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Пребацује између режима уметања и пребрисавања.</action
+> </para>
+    <note
+><para
+>Режим пребрисавања изведен је врло строго. Није могућа измена величине података (бајтови се немогу надовезивати нити уклањати).</para
+></note>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>F</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Уређивање</guimenu
+> <guimenuitem
+>Нађи...</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Тражи задати образац кроз документ.</action
+>. Могу се тражити хексадекадни, октални, бинарни и текстуални обрасци. </para>
+    <para
+>Кроз опције у дијалогу можете задати почетну тачку, смер и опсег претраге.</para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>G</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Уређивање</guimenu
+> <guimenuitem
+>На помак...</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Помера курсор на задати помак.</action
+></para
+></listitem>
+    </varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="view-menu">
+<title
+>Мени <guilabel
+>Приказ</guilabel
+></title>
+
+<variablelist>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycap
+>F11</keycap
+> </shortcut
+> <guimenu
+>Приказ</guimenu
+> <guimenuitem
+>Приказ помака редова</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Укључује и искључује приказ помака редова лево од окна.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Приказ</guimenu
+> <guisubmenu
+>Приказ вредности или знакова</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Одређује које је од могућих тумачења бајтова приказано</action
+>, једно од:</para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>Вредности</guimenuitem
+></para>
+    </listitem>
+    <listitem
+><para
+><guimenuitem
+>Знакови</guimenuitem
+></para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Вредности и знакови</guimenuitem
+></para
+></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Приказ</guimenu
+> <guisubmenu
+>Кодирање вредности</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Одређује кодирање вредности</action
+>, једно од:</para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>хексадекадно</guimenuitem
+></para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>декадно</guimenuitem
+></para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>октално</guimenuitem
+></para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>бинарно</guimenuitem
+></para
+></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Приказ</guimenu
+> <guisubmenu
+>Кодирање знакова</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Одређује кодирање знакова</action
+>, једно од датих у подменију. </para>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Приказ</guimenu
+> <guimenuitem
+>Без неисписивих знакова</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Укључује и искључује приказ невидљивих знакова.</action
+>. Ако су укључени, на одговарајућим местима у колони знакова приказан је заменски знак.</para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Приказ</guimenu
+> <guisubmenu
+>Постави бајтове по реду...</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Изаберите колико се бајтова приказује по реду</action
+>, подразумевано је то 16. </para>
+    </listitem>
+    </varlistentry>
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Приказ</guimenu
+> <guisubmenu
+>Постави бајтове по групи...</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Подразумевано се хексадекадне вредности приказују у групама од по 4 бајта.</action
+> Овом ставком менија можете то променити. </para>
+    </listitem>
+    </varlistentry>
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Приказ</guimenu
+> <guisubmenu
+>Динамички распоред</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Задаје правила за распоред приказа података.</action
+> Овим се дефинише број бајтова по једном реду у зависности од ширине приказа. Могућа правила су:</para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>Искључен</guimenuitem
+>: распоред је фиксиран на текући број бајтова по реду и не прилагођава се изменама величине приказа.</para>
+    </listitem>
+    <listitem
+><para
+><guimenuitem
+>Преламај само целе групе бајтова</guimenuitem
+>: ставља највећи могући број бајтова у један ред, али тако да одржи групе бајтова потпуним. </para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Укључен</guimenuitem
+>: исто као претходно, али допушта непотпуне групе бајтова.</para
+></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Приказ</guimenu
+> <guisubmenu
+>Режим приказа</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Одређује распоред приказа</action
+>, један од:</para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>Колоне</guimenuitem
+>: вредности и тумачења знакова приказани су у класичном распореду, свако у својој засебној колони.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Врсте</guimenuitem
+>: знаковно тумачење бајта приказано је непосредно испод вредносног тумачења.</para
+></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>Shift</keycap
+><keycap
+>T</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Приказ</guimenu
+> <guimenuitem
+>Подели водоравно</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Дели област тренутно фокусираног приказа на два дела и додаје копију текућег приказа у нову, нижу област.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>Shift</keycap
+><keycap
+>L</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Приказ</guimenu
+> <guimenuitem
+>Подели усправно</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Дели област тренутно фокусираног приказа на два дела и додаје копију текућег приказа у нову, десну област.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>Shift</keycap
+><keycap
+>R</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Приказ</guimenu
+> <guimenuitem
+>Затвори област приказа</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Затвара област тренутно фокусираног приказа.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Приказ</guimenu
+> <guimenuitem
+>Режим приказа</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+>Поставке приказа могу да се засебно ускладиште као профил приказа. Тренутно изабрани профил може да се ажурира непосредно у поставкама текућег приказа, или се на основу њих може направити нови профил. Профилима приказа управља се у дијалогу на <menuchoice
+><guimenu
+>Поставке</guimenu
+><guimenuitem
+>Управљај профилима приказа...</guimenuitem
+></menuchoice
+>.</para
+></listitem>
+    </varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<sect2 id="windows-menu">
+<title
+>Мени <guilabel
+>Прозори</guilabel
+></title>
+
+    <para
+>Пружа списак тренутних приказа. Одавде бирате активан прозор.</para>
+
+</sect2>
+
+<sect2 id="bookmarks-menu">
+<title
+>Мени <guilabel
+>Обележивачи</guilabel
+></title>
+
+    <para
+>На исти низ бајтова може се поставити више обележивача. Сваки низ бајтова има свој скуп обележивача, који је приказан на дну менија <guimenu
+>Обележивачи</guimenu
+>. Избором обележивача из овог менија померате курсор и приказ за њега. <note
+><para
+>Обележивачи су за сада пролазни, тј. не уписују се када затворите низ бајтова или цео програм.</para
+></note
+></para>
+
+<variablelist>
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>B</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Обележивачи</guimenu
+> <guimenuitem
+>Додај обележивач</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+>Обележи локацију унутар низа бајтова.</para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>Shift</keycap
+><keycap
+>B</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Обележивачи</guimenu
+> <guimenuitem
+>Уклони обележивач</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Уклања текући обележивач.</action
+> Ова наредба је расположива само ако је курсор на обележеној локацији.</para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Обележивачи</guimenu
+> <guimenuitem
+>Уклони све обележиваче</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Чисти списак обележивача.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+><keycap
+>Alt</keycap
+><keycap
+>Up</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Обележивачи</guimenu
+> <guimenuitem
+>На претходни обележивач</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Помера курсор на претходни обележивач.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+><keycap
+>Alt</keycap
+><keycap
+>Down</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Обележивачи</guimenu
+> <guimenuitem
+>На следећи обележивач</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Помера курсор на следећи обележивач.</action
+></para
+></listitem>
+    </varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<sect2 id="tools-menu">
+<title
+>Мени <guilabel
+>Алатке</guilabel
+></title>
+
+<para
+>Списак инсталираних алатки, кроз који се може укључити и искључити приказ сваке од њих. Детаљан опис сваке алатке налази се у секцији <link linkend="tools"
+>о алаткама</link
+>.</para>
+
+</sect2>
+
+<sect2 id="settings-menu">
+<title
+>Мени <guilabel
+>Поставке</guilabel
+></title>
+<variablelist>
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Поставке</guimenu
+> <guimenuitem
+>Управљај профилима приказа...</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+>Отвара дијалог за стварање, уређивање и брисање профила приказа, као и постављање подразумеваног.</para
+></listitem>
+    </varlistentry>
+</variablelist>
+
+</sect2>
+
+</sect1>
+
+</chapter>
+
+<chapter id="credits">
+    <title
+>Заслуге и лиценца</title>
+
+    <para
+><application
+>Октета</application
+> </para>
+
+    <!--List all the copyright holders here-->
+    <para
+>(програм) © 2006–2012, <personname
+><firstname
+>Фридрих</firstname
+> <othername
+>В.Х.</othername
+> <surname
+>Косебау</surname
+></personname
+> &Friedrich.Kossebau.email;.</para>
+
+    <para
+>(документација) © 2008, 2010, <personname
+><firstname
+>Фридрих</firstname
+> <othername
+>В.Х.</othername
+> <surname
+>Косебау</surname
+></personname
+> &Friedrich.Kossebau.email;, <personname
+><firstname
+>Александер</firstname
+> <surname
+>Ричардсон</surname
+></personname
+> &Alex.Richardson.email;.</para>
+
+    <para
+>Превео Драган Пантелић <email
+>falcon-10@gmx.de</email
+>.</para
+> 
+&underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-omittag:t
+sgml-shorttag:t
+sgml-namecase-general:t
+sgml-always-quote-attributes:t
+sgml-indent-step:0
+sgml-indent-data:nil
+sgml-parent-document:nil
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+-->

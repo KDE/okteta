@@ -1,0 +1,467 @@
+# translation of libkasten.po to Slovak
+# Richard Fric <Richard.Fric@kdemail.net>, 2008, 2009, 2010.
+#  <minkob@mail.t-com.sk>, 2010.
+# Milan Basa <minkob@mail.t-com.sk>, 2010.
+# Mthw <jari_45@hotmail.com>, 2019.
+msgid ""
+msgstr ""
+"Project-Id-Version: libkasten\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-04-24 00:47+0000\n"
+"PO-Revision-Date: 2019-01-27 19:50+0100\n"
+"Last-Translator: Mthw <jari_45@hotmail.com>\n"
+"Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
+"Language: sk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 18.12.1\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#: controllers/document/modified/modifiedbarcontroller.cpp:74
+#, kde-format
+msgctxt "@tooltip the document is modified"
+msgid "Modified."
+msgstr "Modifikované"
+
+#: controllers/document/modified/modifiedbarcontroller.cpp:75
+#, kde-format
+msgctxt "@tooltip the document is not modified"
+msgid "Not modified."
+msgstr "Nemodifikované"
+
+#: controllers/document/readonly/readonlybarcontroller.cpp:23
+#, kde-format
+msgctxt "@option:check the document is read-write"
+msgid "Read-write"
+msgstr "Čítanie aj zápis"
+
+#: controllers/document/readonly/readonlybarcontroller.cpp:24
+#, kde-format
+msgctxt "@option:check the document is read-only"
+msgid "Read-only"
+msgstr "Iba na čítanie"
+
+#: controllers/document/readonly/readonlycontroller.cpp:25
+#, kde-format
+msgctxt "@option:check set the document to read-only"
+msgid "Set Read-only"
+msgstr "Nastaviť iba na čítanie"
+
+#: controllers/document/readonly/readonlycontroller.cpp:27
+#, kde-format
+msgctxt "@option:check set the document to read-write"
+msgid "Set Read-write"
+msgstr "Nastaviť na čítanie aj zápis"
+
+#: controllers/document/terminal/terminaltool.cpp:32
+#: controllers/document/terminal/terminaltoolviewfactory.cpp:24
+#, kde-format
+msgctxt "@title:window"
+msgid "Terminal"
+msgstr "Terminál"
+
+#: controllers/document/versionview/versiontablemodel.cpp:108
+#, kde-format
+msgctxt "@title:column Id of the version"
+msgid "Id"
+msgstr "Id"
+
+#: controllers/document/versionview/versiontablemodel.cpp:109
+#, kde-format
+msgctxt "@title:column description of the change"
+msgid "Changes"
+msgstr "Zmeny"
+
+#: controllers/document/versionview/versiontablemodel.cpp:114
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Id of the version"
+msgstr "Id verzie"
+
+#: controllers/document/versionview/versiontablemodel.cpp:115
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Description of what changed"
+msgstr "Popis zmeny"
+
+#: controllers/document/versionview/versionviewtool.cpp:26
+#: controllers/document/versionview/versionviewtoolviewfactory.cpp:24
+#, kde-format
+msgctxt "@title:window"
+msgid "Versions"
+msgstr "Verzie"
+
+#: controllers/documentsystem/close/closecontroller.cpp:40
+#: controllers/shellwindow/viewareacontextmenu/viewareacontextmenucontroller.cpp:56
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Close All"
+msgstr "Zavrieť všetko"
+
+#: controllers/documentsystem/close/closecontroller.cpp:47
+#: controllers/shellwindow/viewareacontextmenu/viewareacontextmenucontroller.cpp:63
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Close All Other"
+msgstr "Zavrieť všetko ostatné"
+
+#: controllers/documentsystem/creator/creatorcontroller.cpp:41
+#, kde-format
+msgctxt "@title:menu create new byte arrays from different sources"
+msgid "New"
+msgstr "Nový"
+
+#: controllers/documentsystem/creator/creatorcontroller.cpp:49
+#, kde-format
+msgctxt "@item:inmenu create a new empty document"
+msgid "Empty"
+msgstr "Prázdny"
+
+#: controllers/documentsystem/creator/creatorcontroller.cpp:60
+#, kde-format
+msgctxt "@item:inmenu create a new document from data in the clipboard"
+msgid "From Clipboard"
+msgstr "Zo schránky"
+
+#. i18nc("@title:column Id of the version",         "Id") :
+#: controllers/documentsystem/documentsbrowser/documentlistmodel.cpp:111
+#, kde-format
+msgctxt "@title:column description of the change"
+msgid "Title"
+msgstr "Titulok"
+
+#. i18nc("@info:tooltip","Id of the version") :
+#: controllers/documentsystem/documentsbrowser/documentlistmodel.cpp:117
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Title of the document"
+msgstr "Titulok dokumentu"
+
+#: controllers/documentsystem/documentsbrowser/documentstool.cpp:34
+#: controllers/documentsystem/documentsbrowser/documentstoolviewfactory.cpp:24
+#, kde-format
+msgctxt "@title:window"
+msgid "Documents"
+msgstr "Dokumenty"
+
+#: controllers/documentsystem/filesystembrowser/filesystembrowsertool.cpp:33
+#: controllers/documentsystem/filesystembrowser/filesystembrowsertoolviewfactory.cpp:24
+#, kde-format
+msgctxt "@title:window"
+msgid "Filesystem"
+msgstr "Súborový systém"
+
+#: controllers/documentsystem/filesystembrowser/filesystembrowserview.cpp:79
+#, kde-format
+msgctxt "@action:intoolbar"
+msgid "Folder of Current Document"
+msgstr "Zložka aktuálneho dokumentu"
+
+#: controllers/io/copyas/copyascontroller.cpp:44
+#, kde-format
+msgctxt "@title:menu"
+msgid "Copy As"
+msgstr "Kopírovať ako"
+
+#: controllers/io/copyas/copyascontroller.cpp:91
+#, kde-format
+msgctxt "@item There are no encoders."
+msgid "Not available."
+msgstr "Nie je možné."
+
+#: controllers/io/copyas/copyasdialog.cpp:39
+#, kde-format
+msgctxt "@title:window"
+msgid "Copy As"
+msgstr "Kopírovať ako"
+
+#: controllers/io/copyas/copyasdialog.cpp:61
+#: controllers/io/export/exportdialog.cpp:61
+#, kde-format
+msgctxt "@title:group"
+msgid "Preview"
+msgstr "Náhľad"
+
+#: controllers/io/copyas/copyasdialog.cpp:72
+#, kde-format
+msgctxt "@action:button"
+msgid "&Copy to clipboard"
+msgstr "Kopírovať do schránky(&C)"
+
+#: controllers/io/copyas/copyasdialog.cpp:74
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Copy the selected data to the clipboard."
+msgstr "Kopírovať vybrané dáta do schránky."
+
+#: controllers/io/copyas/copyasdialog.cpp:76
+#, kde-kuit-format
+msgctxt "@info:whatsthis"
+msgid ""
+"If you press the <interface>Copy to clipboard</interface> button, the "
+"selected data will be copied to the clipboard with the settings you entered "
+"above."
+msgstr ""
+"Ak stlačíte tlačidlo <interface>Kopírovať do schránky</interface> , vybrané "
+"dáta budú skopírované do schránky podľa vašich predošlých nastavení."
+
+#: controllers/io/export/exportcontroller.cpp:40
+#, kde-format
+msgctxt "@title:menu"
+msgid "Export"
+msgstr "Exportovať"
+
+#: controllers/io/export/exportcontroller.cpp:87
+#, kde-format
+msgctxt "@item There are no exporters."
+msgid "Not available."
+msgstr "Nie je možné."
+
+#: controllers/io/export/exportdialog.cpp:39
+#: core/system/modelcodecmanager_p.cpp:103
+#, kde-format
+msgctxt "@title:window"
+msgid "Export"
+msgstr "Exportovať"
+
+#: controllers/io/export/exportdialog.cpp:72
+#, kde-format
+msgctxt "@action:button"
+msgid "&Export to File..."
+msgstr "&Exportovať do súboru..."
+
+#: controllers/io/export/exportdialog.cpp:74
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Export the selected data to a file."
+msgstr "&Exportovať vybrané dáta do súboru."
+
+#: controllers/io/export/exportdialog.cpp:76
+#, kde-kuit-format
+msgctxt "@info:whatsthis"
+msgid ""
+"If you press the <interface>Export to file</interface> button, the selected "
+"data will be copied to a file with the settings you entered above."
+msgstr ""
+"Ak stlačíte tlačidlo <interface>Exportovať do súboru</interface> , vybrané "
+"dáta budú skopírované do súboru podľa vašich predošlých nastavení."
+
+#: controllers/io/insert/insertcontroller.cpp:40
+#, kde-format
+msgctxt "@title:menu"
+msgid "Insert"
+msgstr "Vložiť"
+
+#: controllers/io/insert/insertcontroller.cpp:90
+#, kde-format
+msgctxt "@item There are no generators."
+msgid "Not available."
+msgstr "Nie je možné."
+
+#: controllers/io/insert/insertdialog.cpp:34
+#, kde-format
+msgctxt "@title:window"
+msgid "Insert"
+msgstr "Vložiť"
+
+#: controllers/io/insert/insertdialog.cpp:44
+#, kde-format
+msgctxt "@action:button"
+msgid "&Insert"
+msgstr "Vložiť(&I)"
+
+#: controllers/io/insert/insertdialog.cpp:46
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Insert the generated data into the document."
+msgstr "Vložiť generované dáta do dokumentu."
+
+#: controllers/io/insert/insertdialog.cpp:48
+#, kde-kuit-format
+msgctxt "@info:whatsthis"
+msgid ""
+"If you press the <interface>Insert</interface> button, the data will be "
+"generated with the settings you entered above and inserted into the document "
+"at the cursor position."
+msgstr ""
+"Ak stlačíte tlačidlo <interface>Vložiť</interface> , vybrané dáta budú "
+"generované podľa vašich predošlých nastavení a vložené do dokumentu na "
+"pozíciu kurzora."
+
+#: controllers/io/synchronize/synchronizecontroller.cpp:34
+#: controllers/shellwindow/viewareacontextmenu/viewareacontextmenucontroller.cpp:38
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Reloa&d"
+msgstr "Znovu načítať"
+
+#: controllers/shellwindow/viewareasplit/viewareasplitcontroller.cpp:42
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Split Vertically"
+msgstr "Rozdeliť vertikálne"
+
+#: controllers/shellwindow/viewareasplit/viewareasplitcontroller.cpp:50
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Split Horizontal"
+msgstr "Rozdeliť horizontálne"
+
+#: controllers/shellwindow/viewareasplit/viewareasplitcontroller.cpp:58
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Close View Area"
+msgstr "Zavrieť zobrazovanú oblasť"
+
+#: controllers/shellwindow/viewlistmenu/viewlistmenucontroller.cpp:77
+#, kde-format
+msgctxt "@item There are no windows."
+msgid "None."
+msgstr "Žiaden."
+
+#: controllers/view/version/versioncontroller.cpp:32
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Undo"
+msgstr "Späť"
+
+#: controllers/view/version/versioncontroller.cpp:43
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Redo"
+msgstr "Vpred"
+
+#: controllers/view/version/versioncontroller.cpp:130
+#, kde-format
+msgctxt "@action Undo: [change]"
+msgid "Undo: %1"
+msgstr "Späť: %1"
+
+#: controllers/view/version/versioncontroller.cpp:150
+#, kde-format
+msgctxt "@action Redo: [change]"
+msgid "Redo: %1"
+msgstr "Vpred: %1"
+
+#: controllers/view/zoom/zoomcontroller.cpp:36
+#, kde-format
+msgid "Zoom"
+msgstr "Zoom"
+
+#: controllers/view/zoom/zoomcontroller.cpp:45
+#, kde-format
+msgctxt "zoom-factor (percentage)"
+msgid "%1%"
+msgstr "%1%"
+
+#: controllers/view/zoom/zoomcontroller.cpp:58
+#, kde-format
+msgid "&Fit to Width"
+msgstr "Prispôsobiť podľa šírky(&F)"
+
+#: controllers/view/zoom/zoomcontroller.cpp:60
+#, kde-format
+msgid "&Fit to Height"
+msgstr "Prispôsobiť podľa výšky(&F)"
+
+#: controllers/view/zoom/zoomcontroller.cpp:62
+#, kde-format
+msgid "&Fit to Size"
+msgstr "Prispôsobiť podľa veľkosti(&F)"
+
+#: controllers/view/zoom/zoomslider.cpp:107
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Zoom: %1%"
+msgstr "Zoom: %1%"
+
+#: core/system/documentsyncmanager_p.cpp:114
+#, kde-format
+msgctxt "@title:window"
+msgid "Save As"
+msgstr "Uložiť ako"
+
+#: core/system/documentsyncmanager_p.cpp:202
+#, kde-format
+msgctxt "@title:window"
+msgid "Close"
+msgstr "Zavrieť"
+
+#: core/system/documentsyncmanager_p.cpp:237
+#, kde-format
+msgctxt "@title:window"
+msgid "Reload"
+msgstr "Znovu načítať"
+
+#: core/system/modelcodecmanager_p.cpp:112
+#, kde-format
+msgctxt "@action:button"
+msgid "&Export"
+msgstr "&Exportovať"
+
+#: gui/system/createdialog.cpp:35
+#, kde-format
+msgctxt "@title:window"
+msgid "Create"
+msgstr "Vytvoriť"
+
+#: gui/system/createdialog.cpp:46
+#, kde-format
+msgctxt "@action:button create the new document"
+msgid "&Create"
+msgstr "Vytvoriť(&C)"
+
+#: gui/system/createdialog.cpp:48
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Create a new document with the generated data."
+msgstr "Vytvoriť nový dokument s generovanými dátami."
+
+#: gui/system/createdialog.cpp:50
+#, kde-kuit-format
+msgctxt "@info:whatsthis"
+msgid ""
+"If you press the <interface>Create</interface> button, the data will be "
+"generated with the settings you entered above and inserted in a new document."
+msgstr ""
+"Ak stlačíte tlačidlo <interface>Vytvoriť</interface> , vybrané dáta budú "
+"generované podľa vašich predošlých nastavení a vložené do nového dokumentu."
+
+#: gui/system/dialoghandler.cpp:33
+#, kde-kuit-format
+msgctxt "@info"
+msgid "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
+msgstr "Už existuje súbor <nl/><filename>%1</filename>.<nl/>Prepísať?"
+
+#: gui/system/dialoghandler.cpp:47
+#, kde-kuit-format
+msgctxt "@info \"%title\" has been modified."
+msgid ""
+"There are unsaved modifications to <filename>%1</filename>. They will be "
+"lost if you reload the document.<nl/>Do you want to discard them?"
+msgstr ""
+"Máte neuložené modifikácie <filename>%1</filename>. Stratia sa ak znovu "
+"načítate dokument.<nl/>Chcete ich zahodiť?"
+
+#: gui/system/dialoghandler.cpp:60
+#, kde-kuit-format
+msgctxt "@info \"%title\" has been modified."
+msgid ""
+"<filename>%1</filename> has been modified.<nl/>Do you want to save your "
+"changes or discard them?"
+msgstr ""
+"<filename>%1</filename> bol modifikovaný.<nl/>Chcete uložiť alebo zahodiť "
+"zmeny?"
+
+#: gui/system/dialoghandler.cpp:74
+#, kde-kuit-format
+msgctxt "@info \"%title\" has been modified."
+msgid ""
+"<filename>%1</filename> has been modified.<nl/>Do you want to discard your "
+"changes?"
+msgstr "<filename>%1</filename> bol modifikovaný.<nl/>Chcete zahodiť zmeny?"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Export the data into the file with the entered name."
+#~ msgstr "Exportovať dáta do súboru so zadaným názvom."

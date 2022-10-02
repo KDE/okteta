@@ -1,0 +1,54 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Vít Pelčák <vit@pelcak.org>, 2014, 2017, 2019, 2020.
+# Vit Pelcak <vpelcak@suse.cz>, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: oktetapart\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-05-16 00:24+0000\n"
+"PO-Revision-Date: 2021-03-25 10:40+0100\n"
+"Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
+"Language-Team: Czech <kde-i18n-doc@kde.org>\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Lokalize 20.12.3\n"
+
+#. i18n: ectx: Menu (file)
+#: oktetapartbrowserui.rc:5 oktetapartreadonlyui.rc:5
+#: oktetapartreadwriteui.rc:5
+#, kde-format
+msgid "&File"
+msgstr "&Soubor"
+
+#. i18n: ectx: Menu (edit)
+#: oktetapartbrowserui.rc:8 oktetapartreadonlyui.rc:10
+#: oktetapartreadwriteui.rc:16
+#, kde-format
+msgid "&Edit"
+msgstr "&Upravit"
+
+#. i18n: ectx: Menu (view)
+#: oktetapartbrowserui.rc:21 oktetapartreadonlyui.rc:26
+#: oktetapartreadwriteui.rc:39
+#, kde-format
+msgid "&View"
+msgstr "Po&hled"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: oktetapartbrowserui.rc:43 oktetapartreadonlyui.rc:47
+#: oktetapartreadwriteui.rc:60
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Hlavní panel nástrojů"
+
+#. i18n: ectx: Menu (permission)
+#: oktetapartreadwriteui.rc:11
+#, kde-format
+msgctxt "@title:menu"
+msgid "Permissions"
+msgstr "Oprávnění"

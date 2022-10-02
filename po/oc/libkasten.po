@@ -1,0 +1,931 @@
+# translation of okteta.po to Occitan (lengadocian)
+# Copyright (C) 2008 This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>, 2007, 2008.
+msgid ""
+msgstr ""
+"Project-Id-Version: okteta\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-04-24 00:47+0000\n"
+"PO-Revision-Date: 2008-08-05 22:28+0200\n"
+"Last-Translator: Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>\n"
+"Language-Team: Occitan (lengadocian) <ubuntu-l10n-oci@lists.ubuntu.com>\n"
+"Language: oc\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: controllers/document/modified/modifiedbarcontroller.cpp:74
+#, kde-format
+msgctxt "@tooltip the document is modified"
+msgid "Modified."
+msgstr ""
+
+#: controllers/document/modified/modifiedbarcontroller.cpp:75
+#, kde-format
+msgctxt "@tooltip the document is not modified"
+msgid "Not modified."
+msgstr ""
+
+#: controllers/document/readonly/readonlybarcontroller.cpp:23
+#, kde-format
+msgctxt "@option:check the document is read-write"
+msgid "Read-write"
+msgstr ""
+
+#: controllers/document/readonly/readonlybarcontroller.cpp:24
+#, fuzzy, kde-format
+#| msgctxt "@option:check the document is read-only"
+#| msgid "Read only"
+msgctxt "@option:check the document is read-only"
+msgid "Read-only"
+msgstr "Lectura sola"
+
+#: controllers/document/readonly/readonlycontroller.cpp:25
+#, fuzzy, kde-format
+#| msgctxt "@option:check the document is read-only"
+#| msgid "Read only"
+msgctxt "@option:check set the document to read-only"
+msgid "Set Read-only"
+msgstr "Lectura sola"
+
+#: controllers/document/readonly/readonlycontroller.cpp:27
+#, fuzzy, kde-format
+#| msgctxt "@option:check the document is read-only"
+#| msgid "Read only"
+msgctxt "@option:check set the document to read-write"
+msgid "Set Read-write"
+msgstr "Lectura sola"
+
+#: controllers/document/terminal/terminaltool.cpp:32
+#: controllers/document/terminal/terminaltoolviewfactory.cpp:24
+#, kde-format
+msgctxt "@title:window"
+msgid "Terminal"
+msgstr ""
+
+#: controllers/document/versionview/versiontablemodel.cpp:108
+#, kde-format
+msgctxt "@title:column Id of the version"
+msgid "Id"
+msgstr ""
+
+#: controllers/document/versionview/versiontablemodel.cpp:109
+#, kde-format
+msgctxt "@title:column description of the change"
+msgid "Changes"
+msgstr "Modificacions"
+
+#: controllers/document/versionview/versiontablemodel.cpp:114
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Id of the version"
+msgstr ""
+
+#: controllers/document/versionview/versiontablemodel.cpp:115
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Description of what changed"
+msgstr ""
+
+#: controllers/document/versionview/versionviewtool.cpp:26
+#: controllers/document/versionview/versionviewtoolviewfactory.cpp:24
+#, fuzzy, kde-format
+#| msgid "Permissions"
+msgctxt "@title:window"
+msgid "Versions"
+msgstr "Versions"
+
+#: controllers/documentsystem/close/closecontroller.cpp:40
+#: controllers/shellwindow/viewareacontextmenu/viewareacontextmenucontroller.cpp:56
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Close All"
+msgstr ""
+
+#: controllers/documentsystem/close/closecontroller.cpp:47
+#: controllers/shellwindow/viewareacontextmenu/viewareacontextmenucontroller.cpp:63
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Close All Other"
+msgstr ""
+
+#: controllers/documentsystem/creator/creatorcontroller.cpp:41
+#, kde-format
+msgctxt "@title:menu create new byte arrays from different sources"
+msgid "New"
+msgstr ""
+
+#: controllers/documentsystem/creator/creatorcontroller.cpp:49
+#, kde-format
+msgctxt "@item:inmenu create a new empty document"
+msgid "Empty"
+msgstr ""
+
+#: controllers/documentsystem/creator/creatorcontroller.cpp:60
+#, kde-format
+msgctxt "@item:inmenu create a new document from data in the clipboard"
+msgid "From Clipboard"
+msgstr ""
+
+#. i18nc("@title:column Id of the version",         "Id") :
+#: controllers/documentsystem/documentsbrowser/documentlistmodel.cpp:111
+#, kde-format
+msgctxt "@title:column description of the change"
+msgid "Title"
+msgstr ""
+
+#. i18nc("@info:tooltip","Id of the version") :
+#: controllers/documentsystem/documentsbrowser/documentlistmodel.cpp:117
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Title of the document"
+msgstr ""
+
+#: controllers/documentsystem/documentsbrowser/documentstool.cpp:34
+#: controllers/documentsystem/documentsbrowser/documentstoolviewfactory.cpp:24
+#, kde-format
+msgctxt "@title:window"
+msgid "Documents"
+msgstr ""
+
+#: controllers/documentsystem/filesystembrowser/filesystembrowsertool.cpp:33
+#: controllers/documentsystem/filesystembrowser/filesystembrowsertoolviewfactory.cpp:24
+#, kde-format
+msgctxt "@title:window"
+msgid "Filesystem"
+msgstr ""
+
+#: controllers/documentsystem/filesystembrowser/filesystembrowserview.cpp:79
+#, kde-format
+msgctxt "@action:intoolbar"
+msgid "Folder of Current Document"
+msgstr ""
+
+#: controllers/io/copyas/copyascontroller.cpp:44
+#, fuzzy, kde-format
+#| msgid "C&opy"
+msgctxt "@title:menu"
+msgid "Copy As"
+msgstr "C&opiar"
+
+#: controllers/io/copyas/copyascontroller.cpp:91
+#, kde-format
+msgctxt "@item There are no encoders."
+msgid "Not available."
+msgstr ""
+
+#: controllers/io/copyas/copyasdialog.cpp:39
+#, fuzzy, kde-format
+#| msgid "C&opy"
+msgctxt "@title:window"
+msgid "Copy As"
+msgstr "C&opiar"
+
+#: controllers/io/copyas/copyasdialog.cpp:61
+#: controllers/io/export/exportdialog.cpp:61
+#, kde-format
+msgctxt "@title:group"
+msgid "Preview"
+msgstr ""
+
+#: controllers/io/copyas/copyasdialog.cpp:72
+#, kde-format
+msgctxt "@action:button"
+msgid "&Copy to clipboard"
+msgstr ""
+
+#: controllers/io/copyas/copyasdialog.cpp:74
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Copy the selected data to the clipboard."
+msgstr ""
+
+#: controllers/io/copyas/copyasdialog.cpp:76
+#, kde-kuit-format
+msgctxt "@info:whatsthis"
+msgid ""
+"If you press the <interface>Copy to clipboard</interface> button, the "
+"selected data will be copied to the clipboard with the settings you entered "
+"above."
+msgstr ""
+
+#: controllers/io/export/exportcontroller.cpp:40
+#, kde-format
+msgctxt "@title:menu"
+msgid "Export"
+msgstr "Exportar"
+
+#: controllers/io/export/exportcontroller.cpp:87
+#, kde-format
+msgctxt "@item There are no exporters."
+msgid "Not available."
+msgstr ""
+
+#: controllers/io/export/exportdialog.cpp:39
+#: core/system/modelcodecmanager_p.cpp:103
+#, fuzzy, kde-format
+#| msgctxt "@title:menu"
+#| msgid "Export"
+msgctxt "@title:window"
+msgid "Export"
+msgstr "Exportar"
+
+#: controllers/io/export/exportdialog.cpp:72
+#, kde-format
+msgctxt "@action:button"
+msgid "&Export to File..."
+msgstr ""
+
+#: controllers/io/export/exportdialog.cpp:74
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Export the selected data to a file."
+msgstr ""
+
+#: controllers/io/export/exportdialog.cpp:76
+#, kde-kuit-format
+msgctxt "@info:whatsthis"
+msgid ""
+"If you press the <interface>Export to file</interface> button, the selected "
+"data will be copied to a file with the settings you entered above."
+msgstr ""
+
+#: controllers/io/insert/insertcontroller.cpp:40
+#, kde-format
+msgctxt "@title:menu"
+msgid "Insert"
+msgstr "Inserir"
+
+#: controllers/io/insert/insertcontroller.cpp:90
+#, kde-format
+msgctxt "@item There are no generators."
+msgid "Not available."
+msgstr ""
+
+#: controllers/io/insert/insertdialog.cpp:34
+#, fuzzy, kde-format
+#| msgctxt "@title:menu"
+#| msgid "Insert"
+msgctxt "@title:window"
+msgid "Insert"
+msgstr "Inserir"
+
+#: controllers/io/insert/insertdialog.cpp:44
+#, fuzzy, kde-format
+#| msgctxt "@title:menu"
+#| msgid "Insert"
+msgctxt "@action:button"
+msgid "&Insert"
+msgstr "&Inserir"
+
+#: controllers/io/insert/insertdialog.cpp:46
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Insert the generated data into the document."
+msgstr ""
+
+#: controllers/io/insert/insertdialog.cpp:48
+#, kde-kuit-format
+msgctxt "@info:whatsthis"
+msgid ""
+"If you press the <interface>Insert</interface> button, the data will be "
+"generated with the settings you entered above and inserted into the document "
+"at the cursor position."
+msgstr ""
+
+#: controllers/io/synchronize/synchronizecontroller.cpp:34
+#: controllers/shellwindow/viewareacontextmenu/viewareacontextmenucontroller.cpp:38
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Replace"
+msgctxt "@action:inmenu"
+msgid "Reloa&d"
+msgstr "Remplaçar"
+
+#: controllers/shellwindow/viewareasplit/viewareasplitcontroller.cpp:42
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Split Vertically"
+msgstr ""
+
+#: controllers/shellwindow/viewareasplit/viewareasplitcontroller.cpp:50
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Split Horizontal"
+msgstr ""
+
+#: controllers/shellwindow/viewareasplit/viewareasplitcontroller.cpp:58
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Close View Area"
+msgstr ""
+
+#: controllers/shellwindow/viewlistmenu/viewlistmenucontroller.cpp:77
+#, kde-format
+msgctxt "@item There are no windows."
+msgid "None."
+msgstr ""
+
+#: controllers/view/version/versioncontroller.cpp:32
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Undo"
+msgstr "Anullar"
+
+#: controllers/view/version/versioncontroller.cpp:43
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Redo"
+msgstr "Tornar far"
+
+#: controllers/view/version/versioncontroller.cpp:130
+#, kde-format
+msgctxt "@action Undo: [change]"
+msgid "Undo: %1"
+msgstr "Anullar : %1"
+
+#: controllers/view/version/versioncontroller.cpp:150
+#, kde-format
+msgctxt "@action Redo: [change]"
+msgid "Redo: %1"
+msgstr "Tornar far : %1"
+
+#: controllers/view/zoom/zoomcontroller.cpp:36
+#, kde-format
+msgid "Zoom"
+msgstr "Zoom"
+
+#: controllers/view/zoom/zoomcontroller.cpp:45
+#, kde-format
+msgctxt "zoom-factor (percentage)"
+msgid "%1%"
+msgstr "%1%"
+
+#: controllers/view/zoom/zoomcontroller.cpp:58
+#, kde-format
+msgid "&Fit to Width"
+msgstr ""
+
+#: controllers/view/zoom/zoomcontroller.cpp:60
+#, kde-format
+msgid "&Fit to Height"
+msgstr ""
+
+#: controllers/view/zoom/zoomcontroller.cpp:62
+#, kde-format
+msgid "&Fit to Size"
+msgstr ""
+
+#: controllers/view/zoom/zoomslider.cpp:107
+#, fuzzy, kde-format
+#| msgid "Zoom"
+msgctxt "@info:tooltip"
+msgid "Zoom: %1%"
+msgstr "Zoom"
+
+#: core/system/documentsyncmanager_p.cpp:114
+#, kde-format
+msgctxt "@title:window"
+msgid "Save As"
+msgstr ""
+
+#: core/system/documentsyncmanager_p.cpp:202
+#, kde-format
+msgctxt "@title:window"
+msgid "Close"
+msgstr ""
+
+#: core/system/documentsyncmanager_p.cpp:237
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Replace"
+msgctxt "@title:window"
+msgid "Reload"
+msgstr "Remplaçar"
+
+#: core/system/modelcodecmanager_p.cpp:112
+#, fuzzy, kde-format
+#| msgctxt "@title:menu"
+#| msgid "Export"
+msgctxt "@action:button"
+msgid "&Export"
+msgstr "Exportar"
+
+#: gui/system/createdialog.cpp:35
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip column contains the character with the value"
+#| msgid "Character"
+msgctxt "@title:window"
+msgid "Create"
+msgstr "Caractèr"
+
+#: gui/system/createdialog.cpp:46
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip column contains the character with the value"
+#| msgid "Character"
+msgctxt "@action:button create the new document"
+msgid "&Create"
+msgstr "Caractèr"
+
+#: gui/system/createdialog.cpp:48
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Create a new document with the generated data."
+msgstr ""
+
+#: gui/system/createdialog.cpp:50
+#, kde-kuit-format
+msgctxt "@info:whatsthis"
+msgid ""
+"If you press the <interface>Create</interface> button, the data will be "
+"generated with the settings you entered above and inserted in a new document."
+msgstr ""
+
+#: gui/system/dialoghandler.cpp:33
+#, kde-kuit-format
+msgctxt "@info"
+msgid "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
+msgstr ""
+
+#: gui/system/dialoghandler.cpp:47
+#, kde-kuit-format
+msgctxt "@info \"%title\" has been modified."
+msgid ""
+"There are unsaved modifications to <filename>%1</filename>. They will be "
+"lost if you reload the document.<nl/>Do you want to discard them?"
+msgstr ""
+
+#: gui/system/dialoghandler.cpp:60
+#, kde-kuit-format
+msgctxt "@info \"%title\" has been modified."
+msgid ""
+"<filename>%1</filename> has been modified.<nl/>Do you want to save your "
+"changes or discard them?"
+msgstr ""
+
+#: gui/system/dialoghandler.cpp:74
+#, kde-kuit-format
+msgctxt "@info \"%title\" has been modified."
+msgid ""
+"<filename>%1</filename> has been modified.<nl/>Do you want to discard your "
+"changes?"
+msgstr ""
+
+#, fuzzy
+#~| msgid "Permissions"
+#~ msgctxt "@title:menu"
+#~ msgid "Permissions"
+#~ msgstr "Permissions"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "Barra d'espleches principala"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Yannig Marchegay (Kokoyaya)"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "yannig@marchegay.org"
+
+#~ msgid "Author"
+#~ msgstr "Autor"
+
+#, fuzzy
+#~| msgctxt "name of the encoding target"
+#~| msgid "Values"
+#~ msgctxt "name of the encoding target"
+#~ msgid "Values..."
+#~ msgstr "Valors"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the value in hexadecimal format"
+#~| msgid "Hexadecimal"
+#~ msgctxt ""
+#~ "@item:inmenu encoding of the bytes as values in the hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "Exadecimal"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the value in decimal format"
+#~| msgid "Decimal"
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
+#~ msgid "Decimal"
+#~ msgstr "Decimal"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the value in binary format"
+#~| msgid "Binary"
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
+#~ msgid "Binary"
+#~ msgstr "Binari"
+
+#, fuzzy
+#~| msgctxt "name of the encoding target"
+#~| msgid "Values"
+#~ msgctxt "@item name of the encoding result"
+#~ msgid "Values"
+#~ msgstr "Valors"
+
+#~ msgctxt "name of the encoding target"
+#~ msgid "Plain Text"
+#~ msgstr "Tèxt brut"
+
+#~ msgctxt "@action:button update the statistic of the byte frequency"
+#~ msgid "&Update"
+#~ msgstr "&Metre a jorn"
+
+#~ msgctxt "@title:column short for Hexadecimal"
+#~ msgid "Hex"
+#~ msgstr "Exa"
+
+#~ msgctxt "@title:column short for Decimal"
+#~ msgid "Dec"
+#~ msgstr "Dec"
+
+#~ msgctxt "@title:column short for Binary"
+#~ msgid "Bin"
+#~ msgstr "Bin"
+
+#~ msgctxt "@title:column count of characters"
+#~ msgid "Count"
+#~ msgstr "Comptar"
+
+#~ msgctxt "@title:column Percent of byte in total"
+#~ msgid "Percent"
+#~ msgstr "per cent"
+
+#~ msgctxt "@info:tooltip column contains the value in hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "Exadecimal"
+
+#~ msgctxt "@info:tooltip column contains the value in decimal format"
+#~ msgid "Decimal"
+#~ msgstr "Decimal"
+
+#~ msgctxt "@info:tooltip column contains the value in binary format"
+#~ msgid "Binary"
+#~ msgstr "Binari"
+
+#, fuzzy
+#~| msgctxt "@title:menu"
+#~| msgid "Insert"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Insert mode"
+#~ msgstr "Inserir"
+
+#~ msgctxt "@title:window prompt for iterative replacement"
+#~ msgid "Replace"
+#~ msgstr "Remplaçar"
+
+#~ msgctxt "@action:button"
+#~ msgid "Replace &All"
+#~ msgstr "&Remplaçar tot"
+
+#~ msgctxt "@action:button"
+#~ msgid "&Skip"
+#~ msgstr "&Ignorar"
+
+#~ msgctxt "@action:button"
+#~ msgid "Replace"
+#~ msgstr "Remplaçar"
+
+#~ msgctxt "@action;button"
+#~ msgid "&Replace"
+#~ msgstr "&Remplaçar"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Start replace"
+#~ msgstr "Aviar lo remplaçament"
+
+#, fuzzy
+#~| msgctxt "@title:window prompt for iterative replacement"
+#~| msgid "Replace"
+#~ msgctxt "@title:group"
+#~ msgid "Replace By"
+#~ msgstr "Remplaçar"
+
+#~ msgctxt "@option:check"
+#~ msgid "&Prompt on replace"
+#~ msgstr "&Convit al moment d'un remplaçament"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Ask before replacing each match found."
+#~ msgstr "Demandar abans de remplaçar cada correspondéncia trobada."
+
+#, fuzzy
+#~| msgctxt "@title:window prompt for iterative replacement"
+#~| msgid "Replace"
+#~ msgctxt "@title"
+#~ msgid "Replace"
+#~ msgstr "Remplaçar"
+
+#, fuzzy
+#~| msgctxt "@title:menu"
+#~| msgid "Insert"
+#~ msgctxt "@option:check set the view into overwrite mode"
+#~ msgid "Set Overwrite Mode"
+#~ msgstr "Inserir"
+
+#, fuzzy
+#~| msgctxt "@title:menu"
+#~| msgid "Insert"
+#~ msgctxt "@option:check set the view into insert mode"
+#~ msgid "Set Insert Mode"
+#~ msgstr "Inserir"
+
+#, fuzzy
+#~| msgctxt "@title:menu"
+#~| msgid "Insert"
+#~ msgctxt "@title:group"
+#~ msgid "Insert"
+#~ msgstr "Inserir"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "Enter a pattern to search for, or select a previous pattern from the list."
+#~ msgstr ""
+#~ "Picatz un motiu de recercar, o seleccionatz un motiu precedent de la "
+#~ "tièra."
+
+#~ msgctxt "@title:group"
+#~ msgid "Parameters"
+#~ msgstr "Paramètres"
+
+#~ msgctxt "@item:inlistbox coding of offset in the hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "Exadecimal"
+
+#~ msgctxt "@item:inlistbox coding of offset in the decimal format"
+#~ msgid "Decimal"
+#~ msgstr "Decimal"
+
+#, fuzzy
+#~| msgctxt ""
+#~| "@label:textbox encoding of the bytes as value in the binary format"
+#~| msgid "Binary:"
+#~ msgctxt "@label:textbox encoding of one byte as value in the binary format"
+#~ msgid "Binary 8-bit:"
+#~ msgstr "Binari :"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the value in hexadecimal format"
+#~| msgid "Hexadecimal"
+#~ msgctxt ""
+#~ "@label:textbox encoding of one byte as value in the hexadecimal format"
+#~ msgid "Hexadecimal 8-bit:"
+#~ msgstr "Exadecimal"
+
+#, fuzzy
+#~| msgctxt ""
+#~| "@label:textbox encoding of the bytes as value in the binary format"
+#~| msgid "Binary:"
+#~ msgctxt "@label:textbox"
+#~ msgid "Signed 8-bit:"
+#~ msgstr "Binari :"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the character with the value"
+#~| msgid "Character"
+#~ msgctxt "@label:textbox encoding of one byte as character"
+#~ msgid "Character 8-bit:"
+#~ msgstr "Caractèr"
+
+#, fuzzy
+#~| msgctxt "name of the encoding target"
+#~| msgid "Values"
+#~ msgctxt "@title:column value of the bytes for the datatype"
+#~ msgid "Value"
+#~ msgstr "Valors"
+
+#~ msgctxt "@title:column string extracted from the byte array"
+#~ msgid "String"
+#~ msgstr "Cadena"
+
+#~ msgctxt "@action:button update the list of strings extracted"
+#~ msgid "&Update"
+#~ msgstr "&Metre a jorn"
+
+#~ msgctxt "@label:lineedit filter term for displayed strings"
+#~ msgid "Filter:"
+#~ msgstr "Filtre :"
+
+#~ msgid "C&opy"
+#~ msgstr "C&opiar"
+
+#, fuzzy
+#~| msgctxt "@title:group"
+#~| msgid "Go to"
+#~ msgctxt "@title:window of the tool to set a new offset for the cursor"
+#~ msgid "Goto"
+#~ msgstr "Anar a"
+
+#~ msgctxt "@option:check"
+#~ msgid "From c&ursor"
+#~ msgstr "Demp&uèi lo cursor"
+
+#~ msgctxt "@action:button"
+#~ msgid "&Go"
+#~ msgstr "&Anar"
+
+#~ msgctxt "@action:button"
+#~ msgid "&Find"
+#~ msgstr "&Recercar"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Start searching"
+#~ msgstr "Començar la recèrca"
+
+#~ msgctxt "@title:window"
+#~ msgid "Find"
+#~ msgstr "Recercar"
+
+#~ msgctxt "@title:group"
+#~ msgid "Options"
+#~ msgstr "Opcions"
+
+#~ msgctxt "@option:check"
+#~ msgid "C&ase sensitive"
+#~ msgstr "Téne&r compte de la cassa"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "Perform a case sensitive search: entering the pattern 'Joe' will not "
+#~ "match 'joe' or 'JOE', only 'Joe'."
+#~ msgstr ""
+#~ "Effectuar una recèrca tenent compte de la cassa : la picada del motiu "
+#~ "« Joe » trobarà pas ni « joe » ni « JOE », mas unicament « Joe »."
+
+#~ msgctxt "@option:check"
+#~ msgid "&Whole words only"
+#~ msgstr "Sonque los mots &entièrs"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Require word boundaries in both ends of a match to succeed."
+#~ msgstr ""
+#~ "Necessita de limits de mots dins los dos senses d'una occurréncia per "
+#~ "capitar."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "Start searching at the current cursor location rather than at the top."
+#~ msgstr ""
+#~ "Aviar la recèrca a la posicion correnta del cursor puslèu qu'al "
+#~ "començament."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Only search within the current selection."
+#~ msgstr "Recercar sonque dins la seleccion correnta."
+
+#, fuzzy
+#~| msgctxt "name of the encoding target"
+#~| msgid "Values"
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Values"
+#~ msgstr "Valors"
+
+#, fuzzy
+#~| msgctxt "@title:column description of the change"
+#~| msgid "Changes"
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Chars"
+#~ msgstr "Modificacions"
+
+#, fuzzy
+#~| msgctxt "@action:inmenu"
+#~| msgid "Remove Bookmark"
+#~ msgctxt "@title:window"
+#~ msgid "Bookmarks"
+#~ msgstr "Suprimir lo favorit"
+
+#, fuzzy
+#~| msgctxt "@action:inmenu"
+#~| msgid "Remove Bookmark"
+#~ msgctxt "default name of a bookmark"
+#~ msgid "Bookmark"
+#~ msgstr "Suprimir lo favorit"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Remove Bookmark"
+#~ msgstr "Suprimir lo favorit"
+
+#, fuzzy
+#~| msgctxt "@action:inmenu"
+#~| msgid "Remove Bookmark"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Go to Next Bookmark"
+#~ msgstr "Suprimir lo favorit"
+
+#, fuzzy
+#~| msgctxt "zoom-factor (percentage)"
+#~| msgid "%1%"
+#~ msgctxt "@item description of bookmark"
+#~ msgid "%1: %2"
+#~ msgstr "%1%"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the value in hexadecimal format"
+#~| msgid "Hexadecimal"
+#~ msgctxt ""
+#~ "@item:inlistbox coding of the bytes as values in the hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "Exadecimal"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the value in decimal format"
+#~| msgid "Decimal"
+#~ msgctxt ""
+#~ "@item:inlistbox coding of the bytes as values in the decimal format"
+#~ msgid "Decimal"
+#~ msgstr "Decimal"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the value in binary format"
+#~| msgid "Binary"
+#~ msgctxt "@item:inlistbox coding of the bytes as values in the binary format"
+#~ msgid "Binary"
+#~ msgstr "Binari"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the character with the value"
+#~| msgid "Character"
+#~ msgctxt "@item:inlistbox coding of the bytes as characters with the values"
+#~ msgid "Character(s)"
+#~ msgstr "Caractèr"
+
+#, fuzzy
+#~| msgctxt "@title:column count of characters"
+#~| msgid "Count"
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Columns"
+#~ msgstr "Comptar"
+
+#, fuzzy
+#~| msgctxt "@title:window"
+#~| msgid "Info"
+#~ msgctxt "@title:window"
+#~ msgid "File Info"
+#~ msgstr "Info"
+
+#~ msgctxt "@title:window"
+#~ msgid "Info"
+#~ msgstr "Info"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Import"
+#~ msgstr "Importar"
+
+#, fuzzy
+#~| msgctxt "@title:group"
+#~| msgid "Go to"
+#~ msgctxt "@title:group"
+#~ msgid "Go To"
+#~ msgstr "Anar a"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the value in hexadecimal format"
+#~| msgid "Hexadecimal"
+#~ msgctxt ""
+#~ "@info:status encoding of the bytes as values in the hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "Exadecimal"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the value in decimal format"
+#~| msgid "Decimal"
+#~ msgctxt "@info:status encoding of the bytes as values in the decimal format"
+#~ msgid "Decimal"
+#~ msgstr "Decimal"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the value in binary format"
+#~| msgid "Binary"
+#~ msgctxt "@info:status encoding of the bytes as values in the binary format"
+#~ msgid "Binary"
+#~ msgstr "Binari"
+
+#, fuzzy
+#~| msgctxt "@option:check the document is read-only"
+#~| msgid "Read only"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Readonly mode"
+#~ msgstr "Lectura sola"
+
+#~ msgctxt ""
+#~ "@item:inlistbox encoding of the bytes as values in the hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "Exadecimal"
+
+#~ msgctxt ""
+#~ "@item:inlistbox encoding of the bytes as values in the decimal format"
+#~ msgid "Decimal"
+#~ msgstr "Decimal"
+
+#~ msgctxt ""
+#~ "@item:inlistbox encoding of the bytes as values in the binary format"
+#~ msgid "Binary"
+#~ msgstr "Binari"

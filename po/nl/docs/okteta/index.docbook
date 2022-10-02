@@ -1,0 +1,2053 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % Dutch "INCLUDE">
+  <!ENTITY % addindex "IGNORE">
+]>
+
+<book id="okteta" lang="&language;">
+
+<bookinfo>
+<title
+>Het handboek van &okteta;</title>
+
+<authorgroup>
+    <author
+><firstname
+>Friedrich</firstname
+><othername
+>W. H.</othername
+><surname
+>Kossebau</surname
+> <affiliation
+> <address
+>&Friedrich.Kossebau.email;</address>
+      </affiliation>
+    </author>
+    <author
+><firstname
+>Alex</firstname
+><surname
+>Richardson</surname
+> <affiliation
+> <address
+>&Alex.Richardson.email;</address>
+      </affiliation>
+    </author>
+&Freek.de.Kruijf;&Ronald.Stroethoff; 
+</authorgroup>
+
+<copyright>
+<year
+>2008, 2010, 2011</year>
+<holder
+>&Friedrich.Kossebau; and &Alex.Richardson;</holder>
+</copyright>
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>2018-03-23</date>
+<releaseinfo
+>&okteta; 0.24.60</releaseinfo>
+
+<abstract>
+  <para
+>&okteta; is een eenvoudige bewerker voor de ruwe data van bestanden. Dit type programma wordt ook wel hex-editor of binaire editor genoemd.</para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>Okteta</keyword>
+<keyword
+>beeld</keyword>
+<keyword
+>bewerken</keyword>
+<keyword
+>bits</keyword>
+<keyword
+>bytes</keyword>
+<keyword
+>binair</keyword>
+<keyword
+>octaal</keyword>
+<keyword
+>hexadecimaal</keyword>
+<keyword
+>hex-bewerker</keyword>
+<keyword
+>ruwe gegevens</keyword>
+</keywordset>
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Introductie</title>
+
+<para
+>&okteta; is een eenvoudige bewerker voor de ruwe gegevens van bestanden.</para>
+
+<para
+>De gegevens worden weergegeven in twee varianten: als de numerieke waarde van de bytes en als het teken dat behoort bij de waarden. Waarden en tekens kunnen getoond worden in twee kolommen (de traditionele weergave in hex-editors) of in rijen met de waarde boven het teken. Bewerken kan gedaan worden zowel in de waarden als in de tekens.</para>
+
+<para
+>Naast de gebruikelijke bewerkingsmogelijkheden, biedt &okteta; ook een kleine set hulpmiddelen, zoals een tabel die decoderingen laat zien in algemene eenvoudige typen gegevens, een tabel die alle mogelijke bytes laat zien met hun teken en overeenkomende waarden, statistische informatie, een rekenmachine voor een controlesom, een filter en een hulpmiddel voor extractie van tekenreeksen.</para>
+
+<para
+>Alle wijzigingen aan de geladen gegevens kunnen eindeloos teruggezet of opnieuw gedaan worden.</para>
+
+</chapter>
+
+<chapter id="basics">
+<title
+>Grondbeginselen</title>
+
+<sect1 id="starting-basics">
+<title
+>&okteta; opstarten</title>
+
+    <para
+>Type <userinput
+><command
+>okteta</command
+></userinput
+> op een commandoprompt of selecteer <guimenuitem
+>Hexbewerker</guimenuitem
+> uit de groep <menuchoice
+><guisubmenu
+>Toepassingen</guisubmenu
+><guisubmenu
+>Hulpmiddelen</guisubmenu
+> </menuchoice
+> in het toepassingenstartpaneel.</para>
+
+    <para
+>De standaard &Qt; en &kf5-full; commandoregelopties zijn beschikbaar en kunnen worden getoond door <userinput
+><command
+>okteta</command
+> <option
+>--help</option
+></userinput
+> in te voeren.</para>
+
+    <para
+>Commandoregelopties specifiek voor &okteta; zijn:</para>
+
+    <para
+><option
+><replaceable
+>&lt;&URL;('s)&gt;</replaceable
+></option
+> - open bestand(en) uit de gespecificeerde &URL;('s)</para>
+
+</sect1>
+
+<sect1 id="usage-basics">
+<title
+>Gebruik</title>
+
+    <para
+>Het hoofdvenster van &okteta; heeft de volgende componenten: een menubalk, een werkbalk, een statusbalk, één of meer zijbalken met hulpmiddelen en het hoofddeelvenster met de tabbladen met gegevensweergaven.</para>
+
+    <para
+>Wanneer een bestand is geopend of een nieuwe reeks bytes wordt aangemaakt, dan worden de bytes, die er in zitten, achtereenvolgend getoond in regels met een gegeven aantal bytes per regel. Ze worden getoond in twee varianten: als de numerieke waarde van de bytes en als het teken toegekend aan de waarde. Waarden en tekens kunnen gescheiden van elkaar worden getoond in twee kolommen of bij elkaar met de waarde boven het teken. Aan de linkerzijde staan de offsets van het eerste byte in elke regel.</para>
+
+    <para
+>De behandeling is vergelijkbaar met die in de meeste tekstbewerkers: de gegevens kunnen bewerkt worden, geknipt, gekopieerd, geplakt, versleept en losgelaten zoals dat met tekst kan. Een cursor markeert de huidige positie. Op de <keycap
+>Insert</keycap
+>-toets drukken schakelt tussen de modi overschrijven en invoegen. De modus overschrijven is strikter dan in tekstbewerkers, omdat het geen bewerking toestaat die de lengte van de reeks bytes wijzigt.</para>
+
+    <para
+>Anders dan in tekstbewerkers wordt de inhoud in twee varianten getoond. Alleen een hiervan is actief met betrekking tot nieuwe invoer. Er worden twee gekoppelde cursors getoond voor de waarde en het tonen van het teken, de cursor van de actieve knippert. Met de tekens actief, kunnen tekens ingevoerd worden zoals bekend uit tekstbewerkers. Met de waarden actief opent het typen van een cijfer een minimale editor om de rest van de waarde in te voeren.</para>
+
+    <para
+>De zoekdialoog stelt de gebruiker in staat om naar een specifieke reeks byteste zoeken, te definiëren als waarden (hexadecimaal, decimaal, octaal, binair) of tekst (huidige 8-bit codering of UTF-8).</para>
+
+    <para
+>Meerdere byte-arrays kunnen tegelijk open zijn, maar slechts één kan er actief zijn. Gebruik het menu <guimenu
+>Venster</guimenu
+> om te selecteren welk byte-array actief zal zijn.</para>
+</sect1>
+
+
+</chapter>
+
+<chapter id="tools">
+  <title
+>Hulpmiddelen</title>
+
+<!-- The tool Versions is not part of released versions,
+just used for development, so no need to document it. -->
+<!--
+4.7
+Other stuff:
+New encodings: ISO-8859-14, ISO-8859-16, Codepage 874
+File info tool now estimates the mimetype also for the unstored/edited data in the working memory
+FIXME  
+-->
+<sect1 id="tools-overview">
+
+  <title
+>Overzicht</title>
+  <para
+>&okteta; biedt enige hulpmiddelen voor analyse en manipulatie van de byte-arrays en enige voor meer algemene doelen. Deze hulpmiddelen kunnen geactiveerd of gedeactiveerd worden vanuit het item <guimenu
+>Hulpmiddelen</guimenu
+> in de menubalk. Elk hulpmiddel heeft een klein venster, dat zich vastzet ofwel in een van de zijbalken of vrij zweeft als een venster. U kunt vastzetten, losmaken, opnieuw arrangeren en de hulpmiddelvensters ook met de muis stapelen, door met de &LMB; op de titel balk van een hulpmiddelvenster te drukken, het naar wens te verplaatsen en de &LMB; los te laten om de actie te voltooien, annuleer het door op de &Esc;-toets te drukken.</para>
+
+<sect2>
+  <title
+>Analyzers en manipulatoren</title>
+<variablelist>
+  <varlistentry>
+    <term
+>Tabel met waarde/teken</term>
+    <listitem
+><para
+>De tabel laat alle mogelijke byte-waarden zien, zowel als teken als in de verschillende numerieke coderingen.</para>
+    <para
+>De geselecteerde waarde kan op de cursorpositie ingevoegd worden voor een gedefinieerd aantal bytes. Dit kan bereikt worden door de knop <guibutton
+>Invoegen</guibutton
+> te gebruiken of dubbel te klikken op de regel in de tabel.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Binaire filter</term>
+    <listitem
+><para
+>Het filter voert binaire bewerkingen uit op de geselecteerde bytes. Na het kiezen van de bewerking (EN, OF, ROTATIE..) kunnen de parameters, indien aanwezig, ingesteld worden in het onderstaande vak. Het filter wordt uitgevoerd door de knop <guibutton
+>Filter</guibutton
+> te gebruiken.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Tekenreeksen</term>
+    <listitem
+><para
+>Dit hulpmiddel lokaliseert de tekenreeksen in de geselecteerde bytes. Na het kiezen van de minimale lengte van de tekenreeks, worden de tekenreeksen opgezocht door de knop <guibutton
+>Extraheren</guibutton
+> te gebruiken. De lijst met de getoonde tekenreeksen kan kleiner gemaakt worden door een filter in te voeren.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Statistieken</term>
+    <listitem
+><para
+>Dit hulpmiddel bouwt een statistiek voor de geselecteerde bytes. De statistiek geeft de frequentie van voorkomen van elke bytewaarde in de selectie. Het kan berekend worden door de knop <guibutton
+>Bouwen</guibutton
+> te gebruiken.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Controlesom</term>
+    <listitem
+><para
+>Dit hulpmiddel berekent verschillende ccontrolesommen of hashsommen voor de geselecteerde bytes. Na het kiezen van het algoritme en het instellen van de parameter, iniden nodig, zal de som berekend worden bij gebruik van de knop <guibutton
+>Berekenen</guibutton
+>.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Decoderingtabel</term>
+    <listitem
+><para
+>De tabel toont de waarden van het byte of de bytes beginnend bij de cursor voor enkele algemene eenvoudige gegevenstypen zoals geheel getal of drijvende komma, maar ook UTF-8. Dubbelklikken op een regel in de tabel opent een editor, zodat de waarde bewerkt en gewijzigd kan worden.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Structuren</term>
+    <listitem
+><para
+>Dit hulpmiddel schakelt onderzoeken en bewerken van byte-arrays in gebaseerd op door de gebruiker gemaakte structuurdefinities. Gedetailleerde instructies staan in een eigen <link linkend="tools-structures"
+>sectie</link
+>.</para
+></listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+  <title
+>Algemene hulpmiddelen</title>
+<variablelist>
+  <varlistentry>
+    <term
+>Bestandssysteem</term>
+    <listitem
+><para
+>Dit hulpmiddel biedt een ingebedde bestandsbrowser die gebruikt kan worden om te openen bestanden te selecteren.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Documenten</term>
+    <listitem
+><para
+>Dit hulpmiddel toont alle nu aangemaakte of geladen bestanden. Symbolen markeren het bestand met de nu actieve weergave en tonen ook welke bestanden niet opgeslagen wijzigingen of welke opgeslagen kopie gewijzigd is door een ander programma.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Bladwijzers</term>
+    <listitem
+><para
+>Dit hulpmiddel Kan worden gebruikt om de bladwijzers te beheren, als alternatief voor het menu <link linkend="bookmarks-menu"
+><guimenu
+>Bladwijzers</guimenu
+></link
+>. <note
+><para
+>Bladwijzers zijn nu slecht voorbijgaand en worden niet opgeslagen als u een byte-array of het gehele programma sluit.</para
+></note
+></para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Bestandsinformatie</term>
+    <listitem
+><para
+>Dit hulpmiddel toont enige informatie over het huidige bestand, inclusief het type, de locatie van opslaan en de grootte.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Terminal</term>
+    <listitem
+><para
+>Een ingebedde terminal, de werkmap is niet gekoppeld aan het actieve bestand.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Conversie van tekenset</term>
+    <listitem
+><para
+>Het hulpmiddel herschrijft de bytes zodat de respectievelijke tekens hetzelfde zijn als in de andere tekenset. Alleen 8-bits tekensets worden ondersteund en tekens zonder overeenkomst worden op dit moment vervangen door een waarde hard gecodeerd op 0. </para
+></listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+</sect1>
+
+
+<sect1 id="tools-structures">
+<!--
+Many improvements in the Structures tool by Alex:
+Begin of a structure can be pinned to a specific offset
+Support for strings (various Unicode encodings) in definitions
+  -->
+    <title
+>Hulpmiddel voor structuren</title>
+
+    <sect2>
+      <title
+>Algemeen</title>
+
+      <para
+>Het hulpmiddel Structuren schakelt analyseren en bewerking van byte-arrays in gebaseerd op door de gebruiker gemaakte structuurdefinities, die kunnen worden gebouwd uit arrays, unions, primitieve typen en een lijst met waarden.</para>
+     <!-- explain/link what these types are? probably not, since most user will be programmers? -->
+      <para
+>Het heeft een eigen instellingendialoog, die bereikt wordt de knop <guibutton
+>Instellingen</guibutton
+>. Er zijn verschillende opties die ingesteld kunnen worden, zoals de stijl waarin (decimaal, hexadecimaal of binair) de waarden getoond worden. Verder is het mogelijk te kiezen welke structuurdefinities geladen moeten worden en welke structuren getoond worden in het voorbeeld.</para>
+      <para
+>Structuren worden gedefinieerd in &okteta;-structuurdefinitiebestanden (gebaseerd op &XML;, met de bestandsextensie <literal role="extension"
+>.osd</literal
+>). Verder kan een <literal role="extension"
+>.desktop</literal
+> bestand metagegevens bevatten over dat structuurbeschrijvingsbestand, zoals auteur, homepagina en licentie.</para>
+      <para
+>Op dit moment is er geen ingebouwde ondersteuning voor maken of bewerken van structuurdefinities, dit moet daarom handmatig gedaan worden zoals beschreven in de volgende secties.</para>
+    </sect2>
+
+    <sect2>
+      <title
+>Structuurdefinities installeren</title>
+
+      <sect3>
+        <title
+>Met KNewStuff installeren</title>
+        <para
+>De gemakkelijkste manier om nieuwe structuurdefinities te installeren is door de ingebouwde KNewStuff-ondersteuning in &okteta; te gebruiken. Om een bestaande structuur te installeren opent u de instellingendialoog van het hulpmiddel Structures. U selecteert daar het tabblad <guilabel
+>Beheer van structuren</guilabel
+> en drukt op de knop <guibutton
+>Nieuwe structuren ophalen...</guibutton
+>. De dialoog die verschijnt stelt u nu in staat om structuren te installeren en te deïnstalleren.</para>
+      </sect3>
+      <sect3>
+        <title
+>Structuurdefinities handmatig installeren</title>
+        <para
+>Het hulpmiddel voor structuren zoekt naar structuurdefinities in de map <filename class="directory"
+>okteta/structures/</filename
+> van de map voor programmagegevens van de gebruiker (u kunt deze vinden via de opdracht <userinput
+><command
+>qtpaths</command
+> <option
+>--paths GenericDataLocation</option
+></userinput
+>). U moet deze map misschien nog aanmaken als er nog geen structuurdefinities zijn geïnstalleerd.</para>
+          <para
+>Er bestaan twee bestanden voor elke structuurdefinitie: een bestand voor de actuele definitie en een <literal role="extension"
+>.desktop</literal
+>-bestand voor de metagegevens (auteur, versie, etc.).</para>
+          <para
+>In deze map is een submap voor elke structuurdefinitie, waarin zowel het <literal role="extension"
+>.desktop</literal
+>-bestand en het <literal role="extension"
+>.osd</literal
+> of <filename
+>main.js</filename
+> bestand van deze definitie aanwezig zijn.</para>
+          <para
+>Bijvoorbeeld met de programmagegevensmap <filename class="directory"
+><userinput
+><command
+>qtpaths</command
+> <option
+>--paths GenericDataLocation</option
+></userinput
+></filename
+> en een structuurdefinitie genaamd VoorbeeldStructuur is de map <filename class="directory"
+>okteta/structures/VoorbeeldStructuur</filename
+>, die bestanden <filename
+>VoorbeelStructuur.desktop</filename
+> en <filename
+>VoorbeeldStructuur.osd</filename
+> bevat.</para>
+      </sect3>
+      <sect3>
+        <title
+>De nieuwe geïnstalleerde structuren gebruiken</title>
+        <para
+>Nadat u nieuwe structuurdefinities heeft geïnstalleerd, moet u &okteta; opnieuw starten voordat u deze kunt gebruiken. Nadat &okteta; opnieuw is gestart, opent u de instellingendialoog van het hulpmiddel voor structuren en selecteert u vervolgens het tabblad <guilabel
+>Beheer van structuren</guilabel
+> en controleert of de relevante structuurdefinitie is ingeschakeld. Ga vervolgens naar het tabblad <guilabel
+>Structuren</guilabel
+> en controleer dat het verlangde element aan de rechterkant is te zien. </para>
+      </sect3>
+    </sect2>
+
+    <sect2>
+      <title
+>Structuurdefinities delen</title>
+      <para
+>Het is waarschijnlijk niet nodig voor standaard structuren dat u de definitie zelf aanmaakt, in plaats daarvan kunt u een al bestaande definitie gebruiken van een plaats zoals <ulink url="https://store.kde.org/browse/cat/214"
+>store.kde.org</ulink
+>.</para>
+      <para
+>U kunt ook een eigengemaakte definitie met anderen delen. Om dit te doen maakt u een archiefbestand aan (&eg; een gezipt tar-archief, <literal role="extension"
+>.tar.gz</literal
+>) met daarin de map met het <literal role="extension"
+>.desktop</literal
+>-bestand en het structuurdefinitiebestand. In het voorbeeld in het laatste sectie van dit hoofdstuk zal dit zijn de map <filename class="directory"
+>ExampleStructure</filename
+> met al zijn inhoud. Door gebruik van dit formaat voor het delen van de structuurdefinities is het mogelijk ze automatisch in &okteta; te installeren en is handmatige installatie niet nodig.</para>
+    </sect2>
+
+
+    <sect2>
+      <title
+>Structuurdefinities maken</title>
+
+      <note
+><para
+>een meer bijgewerkte, maar niet geheel gerede handleiding om structuurdefinities te schrijven is te vinden in <ulink url="https://userbase.kde.org/Okteta/Writing_structure_definitions"
+>op de KDE UserBase Wiki</ulink
+>. </para
+></note>
+
+      <para
+>Er zijn twee verschillende manieren om structuurdefinities aan te maken. De eerste is het schrijven van de definitie in &XML; de andere is het gebruik van JavaScript. Het gebruik van JavaScript geeft u de vrijheid om meer complexere structuren met mogelijkheden zoals structuurcontrole te creëren. Het gebruik van &XML; geeft u minder mogelijkheden maar als statistische structuren alles is wat u nodig heeft dan kan dit de makkelijkste manier zijn. Als u een dynamische structuur nodig heeft bijv. waar array lengtes van andere waarden in de structuur afhangen of de structuurindeling verandert wanneer sommige waarden wijzigingen, dan zult u de structuurdefinitie in JavaScript moeten schrijven. Er is een uitzondering op die regel: als u een array heeft waarvan de lengte <emphasis role="bold"
+>exact</emphasis
+> gelijk is aan een andere waarde in de structuur, dan kan u ook &XML; gebruiken. Maar als het iets is zoals <emphasis
+>lengte - 1</emphasis
+> dan moet het JavaScript zijn.</para>
+    </sect2>
+
+
+    <sect2>
+      <title
+>Structuurdefinitie &XML;-bestandsformaat</title>
+      <note
+><para
+>een meer bijgewerkte, maar niet geheel gerede handleiding om structuurdefinities te schrijven is te vinden in <ulink url="https://userbase.kde.org/Okteta/Writing_structure_definitions"
+>op de KDE UserBase Wiki</ulink
+>. </para
+></note>
+      <para
+>Het <literal role="extension"
+>.osd</literal
+> &XML;-bestand heeft één basiselement: <emphasis
+>&lt;data&gt;</emphasis
+> zonder attributen. Binnen dit element moet er één van de volgende elementen zijn:</para>
+      <!-- TODO markup, though better than nothing this way-->
+      <variablelist>
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;primitive&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Om een 'primitive' gegevenstype zoals &eg; <emphasis
+>int</emphasis
+> en <emphasis
+>float</emphasis
+> aan te maken. Dit element accepteert geen subelementen en kan de volgende attributen hebben:</para>
+              <variablelist>
+                <varlistentry>
+                <term
+><emphasis role="bold"
+>type</emphasis
+></term>
+                <listitem>
+                  <para
+>Het type van deze primitieve type. Het moet een van de volgende zijn:</para>
+                  <itemizedlist>
+                    <listitem
+><para
+><emphasis
+>char</emphasis
+> voor een 8-bits ASCII-teken</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>int8, int16, int32, int64</emphasis
+> voor een geheel getal met teken met die grootte</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>uint8, uint16, uint32, uint64</emphasis
+> voor een geheel getal zonder teken van die grootte</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>bool8, bool16, bool32, bool64</emphasis
+> voor een logische waarde (boolean) (0 = false, elke andere waarde = true) van die grootte</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>float</emphasis
+> voor een 32-bits IEEE754 drijvende-komma getal</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>double</emphasis
+> voor een 64-bits IEEE754 drijvende-komma getal</para
+></listitem>
+                  </itemizedlist>
+                </listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;bitfield&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Om een 'bitfield' aan te maken Dit element accepteert geen subelementen en kan de volgende attributen hebben:</para>
+              <variablelist>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>breedte</emphasis
+></term>
+                  <listitem
+><para
+>Het aantal bits gebruikt door dit 'bitfield'. Moet liggen tussen 1 en 64.</para
+></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>type</emphasis
+></term>
+                  <listitem>
+                    <para
+>Het type van dit 'bitfield'. Het moet één van de volgende zijn:</para>
+                    <itemizedlist>
+                      <listitem
+><para
+><emphasis
+>unsigned</emphasis
+> voor een bitfield waar de waarde geïnterpreteerd zal worden als een waarde zonder teken (waardereeks van 0 tot 2<superscript
+>breedte</superscript
+> - 1)</para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>signed</emphasis
+> voor een bitfield waar de waarde geïnterpreteerd zal worden als een waarde met teken (waardereeks van -2<superscript
+>breedte - 1</superscript
+> tot 2<superscript
+>breedte - 1</superscript
+> - 1)</para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>bool</emphasis
+> voor een 'bitfield' waar de waarde als een booleaanse waarde zal worden geïnterpreteerd </para
+></listitem>
+                  </itemizedlist>
+                  <note
+><para
+>Denk er aan om padding toe te voegen na een <emphasis
+>&lt;bitfield&gt;</emphasis
+>, omdat het volgende element anders in het midden van een byte zou beginnen (behalve voor tekenreeksen en arrays, omdat zij automatisch padding toevoegen). Als u dit gedrag wenst dan is padding natuurlijk niet nodig.</para
+></note>
+                  </listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;enum&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Om een type primitive te maken, maar waar de waarden getoond worden, indien mogelijk, als leden van een enumeratie. Dit element accepteert geen subelementen (maar u hebt mogelijk een tag <emphasis
+>&lt;enumDef&gt;</emphasis
+> in het bestand nodig om er naar te refereren). Het heeft de volgende attributen:</para>
+              <variablelist>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>enum</emphasis
+></term>
+                  <listitem
+><para
+>De onderliggende 'enum' voor deze waarde. Moet overeenkomen met het attribuut <emphasis
+>name</emphasis
+> van één van de tags <emphasis
+>&lt;enumDef&gt;</emphasis
+> in dit bestand.</para
+></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>type</emphasis
+></term>
+                  <listitem>
+                    <para
+>Het type hiervan is enum. Zie type attribuut van <emphasis
+>&lt;primitive&gt;</emphasis
+>. Het enige verschil is dat <emphasis
+>Double</emphasis
+> en <emphasis
+>Float</emphasis
+> geen betekenis hebben.</para>
+                  </listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
+          </varlistentry>
+
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;flags&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Dit is hetzelfde als <emphasis
+>&lt;enum&gt;</emphasis
+> met het enige verschil dat waarden gerepresenteerd worden als een <emphasis
+>bitwise-or</emphasis
+> van alle waarden van de enumeratie (opsomming).</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;struct&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Hiermee creëert u een structuur. Alle andere elementen (inclusief een <emphasis
+>&lt;struct&gt;</emphasis
+>) kunnen hiervan onderdeel uitmaken (child)</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;union&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Hiermee creëert u een union. In wezen hetzelfde als een <emphasis
+>&lt;struct&gt;</emphasis
+>, behalve het feit dat alle child-elementen vanaf dezelfde offset starten. Dit is handig voor het op verschillende manieren onderzoeken van dezelfde volgorde van bytes.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;array&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Hiermee creëert u een array. Dit element accepteert precies een child (het onderliggende type array), waarin u elk soort element kan plaatsten, zelfs een <emphasis
+>&lt;array&gt;</emphasis
+>. Het heeft de volgende attributen:</para>
+              <variablelist>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>lengte</emphasis
+></term>
+                  <listitem
+><para
+>Het aantal elementen in dit array als decimaal getal. Als alternatief kan het ook een tekenreeks zijn waarvan de naam overeenkomt met een eerder gedefinieerde <emphasis
+>&lt;primitive&gt;</emphasis
+>, <emphasis
+>&lt;enum&gt;</emphasis
+> of <emphasis
+>&lt;flags&gt;</emphasis
+> element. De lengte zal dan overeenkomen met de waarde van dat element. De lengte is op dit moment beperkt tot 10000, omdat grotere arrays teveel geheugen gebruiken en teveel vertragen. </para
+></listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;string&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Hiermee kun u een tekenreeks in een codering naar keuze creëren. Standaard is dit een tekenreeks in de C-style beëindigt door een <emphasis
+>NULL</emphasis
+>. Maar met de volgende attributen kunt u andere soorten tekenreeksen creëren:</para>
+              <variablelist>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>terminatedBy</emphasis
+></term>
+                  <listitem
+><para
+>Dit attribute bepaalt door welk unicode karakter de tekenreeks wordt beëindigd. Dit moet een hexadecimaal nummer zijn (optioneel met een leidende <emphasis
+>0x</emphasis
+>). Wanneer de codering in ASCII is dan hebben alleen waarden tot 0x7f een betekenis. Als u zowel dit of <emphasis
+>maxCharCount</emphasis
+> of <emphasis
+>maxByteCount</emphasis
+> niet heeft ingesteld dan is dit standaard ingesteld op 0 (C-style string) </para
+></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>maxCharCount</emphasis
+></term>
+                  <listitem
+><para
+>Het maximum aantal tekens dat deze tekenreeks kan hebben. Als <emphasis
+>terminatedBy</emphasis
+> ook is ingesteld dan eindigt de tekenreeks door datgene wat als eerste is bereikt. Dit gaat niet samen met <emphasis
+>maxByteCount</emphasis
+></para
+></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>maxByteCount</emphasis
+></term>
+                  <listitem
+><para
+>Het maximum aantal bytes dat in deze tekenreeks past. Als <emphasis
+>terminatedBy</emphasis
+> ook is ingesteld, dan wordt de tekenreeks afgesloten door datgene wat het eerst bereikt wordt. Dit gaat niet samen met <emphasis
+>maxCharCount</emphasis
+>. Alleen bij decoderingen zoals <emphasis
+>ASCII</emphasis
+> komt dit overeen met <emphasis
+>maxCharCount</emphasis
+>.</para
+></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>type</emphasis
+></term>
+                  <listitem
+><para
+>De codering van deze tekenreeks. Kan een van de volgende zijn:</para>
+                    <itemizedlist>
+                      <listitem
+><para
+><emphasis
+>ASCII</emphasis
+></para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>LATIN-1</emphasis
+></para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>UTF-8</emphasis
+></para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>UTF-16-LE</emphasis
+> of <emphasis
+>UTF-16-BE</emphasis
+>. Als geen <emphasis
+>-LE</emphasis
+> of <emphasis
+>-BE</emphasis
+> achtervoegsel is gegeven, wordt 'little endian' aangenomen. </para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>UTF-32-LE</emphasis
+> of <emphasis
+>UTF-32-BE</emphasis
+>. Als geen <emphasis
+>-LE</emphasis
+> of <emphasis
+>-BE</emphasis
+> achtervoegsel is gegeven, wordt 'little endian' aangenomen. </para
+></listitem>
+                    </itemizedlist>
+                  </listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
+          </varlistentry>
+      </variablelist>
+      <para
+>Elk element accepteert ook een attribuut <emphasis
+>name</emphasis
+> dat dan zichtbaar is in de structurenweergave. </para>
+    </sect2>
+
+    <sect2>
+      <title
+>Een voorbeeld van een structuurdefinitie in zowel &XML; als JavaScript</title>
+      <note
+><para
+>een meer bijgewerkte, maar niet geheel gerede handleiding om structuurdefinities te schrijven is te vinden in <ulink url="https://userbase.kde.org/Okteta/Writing_structure_definitions"
+>op de KDE UserBase Wiki</ulink
+>. </para
+></note>
+
+      <sect3>
+        <title
+>De gezamelijke stap gedeeld door beide benaderingen</title>
+        <para
+>Ons bestand met metagegevens ziet er zo uit: <screen>
+        [Desktop Entry]
+        Icon=arrow-up<co id="icon" />
+        Type=Service
+        ServiceTypes=KPluginInfo
+
+        Name=Simpele teststructuur
+        Comment=Een erg simpele teststructuur met slechts twee items
+
+        X-KDE-PluginInfo-Author=Alex Richardson
+        X-KDE-PluginInfo-Email=foo.bar@email.org
+        X-KDE-PluginInfo-Name=simplestruct
+        X-KDE-PluginInfo-Version=1.0
+        X-KDE-PluginInfo-Website=https://www.plugin.org/
+        X-KDE-PluginInfo-Category=structure
+        X-KDE-PluginInfo-License=LGPL
+        X-KDE-PluginInfo-EnabledByDefault=false
+        </screen
+> <calloutlist
+> <callout arearefs="icon"
+> <para
+>Het pictogram getoond in &okteta; voor deze structuur kan alles zijn wat gevonden wordt door <userinput
+><command
+>kdialog</command
+> <option
+>--geticon</option
+></userinput
+> uit te voeren of een pad naar een pictogram</para
+> </callout
+> </calloutlist
+> Deze velden zouden allemaal zichzelf moeten verklaren, behalve voor <literal
+>X-KDE-PluginInfo-Name</literal
+>. De waarde van dit veld moet overeenkomen met de naam van de map met het bestand evenals de naam van het <literal role="extension"
+>.desktop</literal
+>-bestand. Bij het maken van &XML;-structuurdefinities zal de naam van het <literal role="extension"
+>.osd</literal
+> bestand ook met de naam overeen moeten komen. </para>
+
+        <para
+>In dit voorbeeld willen we een map met de naam <filename
+>simplestruct</filename
+> met daarin het bestand <filename
+>simplestruct.desktop</filename
+> hebben. Als we de structuren definiëren in &XML; dan is in de map ook een bestand genaamd <filename
+>simplestruct.osd</filename
+> aanwezig. Bij gebruik van JavaScript hebben we in plaats daarvan een bestand met de naam <filename
+>main.js</filename
+>.</para>
+      </sect3>
+      <sect3>
+        <title
+>Een eenvoudige &XML;-structuurdefinitie</title>
+        <para
+>Om te beginnen creëren we een definitie voor een eenvoudige teststructuur met alleen integrale gegevenstypes (een char, een 32-bit signed integer en een bitfield). Dit is in C/C++ uitgeschreven als: <screen>
+          struct simple {
+            char aChar;
+            int anInt;
+            bool bitFlag :1;
+            unsigned padding :7;
+          };
+          </screen
+> De eerste stap is het schrijven van het <literal role="extension"
+>.osd</literal
+>-bestand overeenkomstig het bestandsformaat  zoals in de vorige sectie beschreven. We geven het de naam <filename
+>simplestruct.osd</filename
+>: <screen
+><markup>
+          &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+          &lt;data&gt;
+            &lt;struct name="simple"&gt;
+              &lt;primitive name="aChar" type="Char"/&gt;
+              &lt;primitive name="anInt" type="Int32"/&gt;
+              &lt;bitfield name="bitFlag" type="bool" width="1"/&gt;
+              &lt;bitfield name="padding" type="unsigned" width="7"/&gt;
+            &lt;/struct&gt;
+          &lt;/data&gt;
+          </markup
+></screen
+> wat overeenkomt met de C/C++ definitie. </para>
+          <para
+>Maak nu een map aan met de naam <filename class="directory"
+>simplestruct</filename
+> in de structuur installatiemap (lees handmatig structuurdefinities installeren) en kopieer de twee bestanden naar deze map. Na het opnieuw opstarten van &okteta; kunt u de nieuwe structuur gebruiken.</para>
+      </sect3>
+      <sect3>
+        <title
+>De eenvoudige structuur in JavaScript</title>
+        <para
+>Om bovengenoemde structuren in JavaScript te implementeren, creëert u een bestand met de naam <filename
+>main.js</filename
+> in plaats van <filename
+>simplestruct.osd</filename
+> en wijzigt u X-KDE-PluginInfo-Category=structure in X-KDE-PluginInfo-Category=structure/js. De inhoud van dat bestand zou het volgende moeten zijn: <screen>
+        function init() {
+          var structure = struct({
+            aChar : char(),
+            anInt : int32(),
+            bitFlag : bitfield("bool", 1),
+            padding : bitfield("unsigned", 7),
+          })
+          return structure;
+        }
+        </screen
+> De structuur die &okteta; toont is altijd de "return value" van de <literal
+>init</literal
+>-functie.</para>
+        <para
+>U kunt de volgende functies aanroepen om een primitief type te creeëren: <itemizedlist
+> <listitem
+><para
+>char()</para
+></listitem
+> <listitem
+><para
+>int8(), int16(), int32() or int64()</para
+></listitem
+> <listitem
+><para
+>uint8(), uint16(), uint32() or uint64()</para
+></listitem
+> <listitem
+><para
+>bool8(), bool16(), bool32() or bool64()</para
+></listitem
+> <listitem
+><para
+>float()</para
+></listitem
+> <listitem
+><para
+>double()</para
+></listitem
+> </itemizedlist
+> De bitfield-functie heeft twee parameters nodig, de eerste is een tekenreeks bestaande uit <literal
+>bool</literal
+>, <literal
+>signed</literal
+> of <literal
+>unsigned</literal
+>. De tweede parameter is een integer die de breedte in bits instelt. </para>
+      </sect3>
+      <sect3>
+        <title
+>Complexere structuren</title>
+        <para
+>Vervolgens creëren we een definitie voor een complexere structuur waaraan we de naam "complex" geven en we slaan dit op in een bestand genaamd <filename
+>complex.osd</filename
+>. Deze structuur bestaat uit twee arrays (een met een vaste lengte en een waarvan de lengte tijdens de uitvoering wordt bepaald), een geneste structuur en een verzameling. <screen
+><markup>
+          &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+          &lt;data&gt;
+            &lt;struct name="complex"&gt;
+              &lt;primitive name="size" type="UInt8" /&gt;
+              &lt;union name="aUnion"&gt;
+                &lt;array name="fourBytes" length="4"&gt;
+                  &lt;primitive type="Int8" /&gt;
+                &lt;/array&gt;
+              &lt;/union&gt;
+              &lt;struct name="nested"&gt;
+                &lt;array name="string" length="size"&gt; &lt;!-- verwijzing naar de field-size boven --&gt;
+                  &lt;primitive type="Char" /&gt;
+                &lt;/array&gt;
+              &lt;/struct&gt;
+            &lt;/struct&gt;
+          &lt;/data&gt;
+          </markup
+></screen
+> Dit zou overeen moeten komen met het volgende in pseudo-C/C++ <screen
+>struct complex {
+            uint8_t size;
+            union aUnion {
+              int8_t fourBytes[4];
+            };
+            struct nested {
+              char string[size] //geen geldige C++, refereert waarde van de grootte uint8
+            };
+          };
+          </screen>
+          </para>
+          <note
+><para
+>U kunt uiteraard de referentie-velden voor arrays met dynamische lengte alleen vóór het array hebben,</para
+></note>
+          <para
+>Vervolgens maken we het bestand <filename
+>complex.desktop</filename
+> net als in het vorige voorbeeld (ga na dat u <literal
+>X-KDE-PluginInfo-Name</literal
+> juist instelt) en ook hetzelfde doet om beide bestanden te installeren.</para>
+      </sect3>
+      <sect3>
+        <title
+>Meer informatie</title>
+        <para
+>Enkele voorbeelden voor structuurdefinities kunt u vinden in deze <ulink url="https://commits.kde.org/okteta?path=kasten/controllers/view/structures/examples/okteta/structures"
+>Git repository.</ulink
+> Inclusief voorbeelden voor de bestand-header van PNG-bestanden en de ELF bestand-header. Een &XML; schema voor de structuur van een <literal role="extension"
+>.osd</literal
+>-bestand kunt u <ulink url="https://commits.kde.org/okteta?path=kasten/controllers/view/structures/schema"
+>hier</ulink
+> vinden. Als u meer informatie wilt dan kunt u met mij contact opnemen via &Alex.Richardson.email; </para>
+      </sect3>
+    </sect2>
+<!--FIXME missing
+Extended structures definitions
+Structures Script Console-->
+</sect1>
+</chapter>
+
+<chapter id="interface-overview">
+<title
+>Overzicht van het interface</title>
+
+<sect1 id="menu-commands">
+<title
+>Menu-items</title>
+
+<para
+>Naast de standaard &kde;-menu's zoals beschreven in het hoofdstuk <ulink url="help:/fundamentals/menus.html"
+>Menu</ulink
+> van de documentatie in &kde; Fundamentals heeft &okteta; specifieke menu-onderdelen van het programma: </para>
+
+<sect2 id="file-menu">
+<title
+>Menu Bestand</title>
+
+<variablelist>
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Nieuw</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Een nieuw byte-array aanmaken...</action
+></para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>Leeg</guimenuitem
+>: ... zoals een lege.</para>
+    </listitem>
+    <listitem
+><para
+><guimenuitem
+>Van klembord</guimenuitem
+>: ... door de huidige inhoud van het klembord.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Patroon...</guimenuitem
+>: ... met een gegeven patroon.</para>
+    </listitem>
+    <listitem
+><para
+><guimenuitem
+>Willekeurige gegevens...</guimenuitem
+>: ...met willekeurige gegevens.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Reeks</guimenuitem
+>: ... met alle bytes van 0 tot 255.</para
+></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Bestand</guimenu
+><guimenuitem
+>Exporteren</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+>De geselecteerde bytes naar een bestand exporteren...</para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>Waarden</guimenuitem
+>: ... gecodeerd als byte-waarden. Standaard zijn de waarden gescheiden door één witruimte. Het <guilabel
+>Scheiding</guilabel
+>s-teken kunt u wijzigen in het dialoogvenster <guilabel
+>Exporteren</guilabel
+>. </para>
+    </listitem>
+    <listitem
+><para
+><guimenuitem
+>Tekens</guimenuitem
+>: ... gecodeerd als platte tekst. </para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Base64</guimenuitem
+>: ... gecodeerd in het <ulink url="https://en.wikipedia.org/wiki/Base64"
+>Base64</ulink
+>-formaat.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Base32</guimenuitem
+>: ... gecodeerd in het <ulink url="https://en.wikipedia.org/wiki/Base32"
+>Base32</ulink
+>-formaat.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Ascii85</guimenuitem
+>: ... gecodeerd in het formaat <ulink url="https://en.wikipedia.org/wiki/Ascii85"
+>Ascii85</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Uuencoding</guimenuitem
+>: ... gecodeerd in het formaat <ulink url="https://en.wikipedia.org/wiki/Uuencoding"
+>Uuencoding</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Xxencoding</guimenuitem
+>: ... gecodeerd in het formaat <ulink url="https://en.wikipedia.org/wiki/Xxencoding"
+>Xxencoding</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Intel Hex</guimenuitem
+>: ... gecodeerd in het formaat <ulink url="https://en.wikipedia.org/wiki/Intel_Hex"
+>Intel Hex</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>S-Record</guimenuitem
+>: ... gecodeerd in het <ulink url="https://en.wikipedia.org/wiki/S-record"
+>S-Record</ulink
+>-formaat.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>C array</guimenuitem
+>: ... gedefinieerd als een array in de programmeertaal C.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>In platte tekst bekijken</guimenuitem
+>: ... zoals in de gegevensweergave met offset, waarden van bytes en tekens. </para
+></listitem>
+    </itemizedlist>
+    </listitem>
+
+</varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Bestand</guimenu
+> <guisubmenu
+>Toegangsrechten</guisubmenu
+><guimenuitem
+>Instellen op alleen-lezen</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+>Er kunnen mogelijk geen wijzigingen worden gemaakt in het geladen byte-array, indien geactiveerd.</para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Alle anderen sluiten</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Sluit alles behalve het huidige byte-array.</action
+></para
+></listitem>
+    </varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="edit-menu">
+<title
+>Menu Bewerken</title>
+<variablelist>
+<para
+>Kopieer en knip eenvoudig gegevens naar het klembord met het mime-type <quote
+>application/octetstream</quote
+>, &klipper; in niet staat om deze gegevens te tonen. En bijna alle andere toepassingen kunnen het ook niet behandelen, omdat het eenvoudige ruwe gegevens zijn. Zie dus ook het submenu <guisubmenu
+>Kopiëren als</guisubmenu
+>.</para>
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Bewerken</guimenu
+> <guisubmenu
+>Kopiëren als</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+>De geselecteerde bytes in één van de andere data-formaten naar het klembord kopiëren. Ga voor de lijst met beschikbare data-formaten naar het menu-item <menuchoice
+><guimenu
+>Bestand</guimenu
+> <guisubmenu
+>Exporteren</guisubmenu
+></menuchoice
+> </para>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Bewerken</guimenu
+> <guisubmenu
+>Invoegen</guisubmenu
+> </menuchoice
+></term>
+    <listitem>
+    <variablelist>
+    <varlistentry>
+    <term
+><menuchoice>
+    <guimenuitem
+>Patroon invoegen...</guimenuitem>
+    </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Voeg een gespecificeerde tekenreeks met bytes in bij de cursor.</action
+></para>
+    <para
+>Opties in het dialoogvak stellen u in staat het aantal keren invoegen van het patroon te specificeren en het formaat (hexadecimaal, decimaal, octaal, binair, teken(s) of UTF-8).</para>
+    <!--FIXME Random Data + Sequence - use cases?-->
+    </listitem>
+    </varlistentry>
+    </variablelist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>A</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Bewerken</guimenu
+><guimenuitem
+>Deselecteren</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Maak de huidige selectie ongedaan.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bewerken</guimenu
+> <guimenuitem
+>Bereik selecteren...</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Opent een ingebedde dialoog om het te selecteren bereik in te voeren.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+><keycap
+>Ins</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bewerken</guimenu
+> <guimenuitem
+>Overschrijfmodus</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Schakelen tussen de modi Invoegen en Overschrijven</action
+>. </para>
+    <note
+><para
+>De modus overschrijven is erg strikt geïmplementeerd, het is niet mogelijk om de grootte van de gegevens te wijzigen (geen toevoegen of verwijderen van bytes).</para
+></note>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>F</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bewerken</guimenu
+> <guimenuitem
+>Zoeken...</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Zoek naar een gespecificeerd patroon in het document.</action
+> Er kan naar hexadecimale, decimale, octale, binaire of tekstpatronen worden gezocht.</para>
+    <para
+>Opties in het dialoogvak stellen u in staat om het beginpunt, richting en zoekgebied te specificeren.</para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>G</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bewerken</guimenu
+> <guimenuitem
+>Ga naar offset...</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>De cursor naar een gespecificeerde offset verplaatsen.</action
+></para
+></listitem>
+    </varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="view-menu">
+<title
+>Menu Beeld</title>
+
+<variablelist>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycap
+>F11</keycap
+> </shortcut
+> <guimenu
+>Beeld</guimenu
+> <guimenuitem
+>Regeloffset tonen</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Aan/uitzetten van het tonen van de regeloffset in een paneel links.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Beeld</guimenu
+> <guisubmenu
+>Waarden of tekens tonen</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Selecteer welke van de interpretaties van een byte getoond wordt.</action
+> Mogelijk zijn:</para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>Waarden</guimenuitem
+></para>
+    </listitem>
+    <listitem
+><para
+><guimenuitem
+>Tekens</guimenuitem
+></para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Waarden en tekens</guimenuitem
+></para
+></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Beeld</guimenu
+> <guisubmenu
+>Waardecodering</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Selecteer de codering van de waarden</action
+> uit:</para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>Hexadecimaal</guimenuitem
+></para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Decimaal</guimenuitem
+></para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Octaal</guimenuitem
+></para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Binair</guimenuitem
+></para
+></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Beeld</guimenu
+> <guisubmenu
+>Tekencodering</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Selecteer de codering van de tekens</action
+> uit het submenu. </para>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Beeld</guimenu
+> <guimenuitem
+>Niet-afdrukbare karakters tonen</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Aan/uitzetten van het tonen van niet-afdrukbare tekens.</action
+> Als de weergave is uitgezet, wordt in plaats daarvan, op de overeenkomstige plaatsen in de kolom voor het teken, een vervangend teken getoond.</para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Beeld</guimenu
+> <guisubmenu
+>Stel bytes per regel in</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Selecteer het te tonen aantal bytes per regel</action
+> uit de dialoog, de standaard waarde is 16 bytes. </para>
+    </listitem>
+    </varlistentry>
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Beeld</guimenu
+> <guisubmenu
+>Stel bytes per groep in</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Standaard worden de hexadecimale waarden getoond in groepen van 4 bytes.</action
+> Door gebruik van dit menu-item kunt dit aan uw voorkeuren aanpassen in een dialoogvenster. </para>
+    </listitem>
+    </varlistentry>
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Beeld</guimenu
+> <guisubmenu
+>Dynamische opmaak</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Stel de regels in voor de opmaak van de gegevensweergave.</action
+> Dit definieert hoeveel bytes per regel er worden getoond, afhankelijk van de breedte van het beeld. Mogelijke regels zijn:</para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>Uit</guimenuitem
+>: De opmaak is vast en gelijk aan het huidige aantal bytes per regel en niet aangepast aan de wijziging van de grootte van het beeld.</para>
+    </listitem>
+    <listitem
+><para
+><guimenuitem
+>Breek alleen af op volledige bytegroepen</guimenuitem
+>: Zet zoveel mogelijk bytes op een regel, zolang groepen bytes kompleet zijn. </para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Aan</guimenuitem
+>: Hetzelfde als de vorige, maar staat ook onvolledige groepen bytes toe.</para
+></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Beeld</guimenu
+> <guisubmenu
+>Weergavemodus</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Selecteer de opmaak van het beeld</action
+> uit:</para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>Kolommen</guimenuitem
+>: De waarden en tekens worden op de klassieke manier getoond met elk in een aparte kolom.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Rijen</guimenuitem
+>: Het bijbehorende teken van een byte wordt direct onder de waarde getoond.</para
+></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>T</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Beeld</guimenu
+> <guimenuitem
+>Horizontaal splitsen</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Splits het weergavegebied met het huidige beeld met focus in twee delen en voeg een kopie van het huidige beeld in het nieuwe onderste gedeelte.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>L</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Beeld</guimenu
+> <guimenuitem
+>Verticaal splitsen</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Splits het weergavegebied met het huidige beeld met focus in twee delen en voeg een kopie van het huidige beeld in het nieuwe rechter gedeelte.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>R</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Beeld</guimenu
+> <guimenuitem
+>Weergavegebied sluiten</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Sluit het weergavegebied met het huidige beeld met focus.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Beeld</guimenu
+> <guimenuitem
+>Profiel weergeven</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+>Beeld-instellingen kunt u apart als weergaveprofielen opslaan. Het huidige geselecteerde profiel kunt u bijwerken met de huidige instellingen maar u kunt hier ook een nieuw profiel van aanmaken. Alle weergaveprofielen kunt u via een dialoogvenster beheren dat beschikbaar is via <menuchoice
+><guimenu
+>Instellingen</guimenu
+><guimenuitem
+>Weergaveprofielen beheren...</guimenuitem
+></menuchoice
+>.</para
+></listitem>
+    </varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<sect2 id="windows-menu">
+<title
+>Menu Vensters</title>
+
+    <para
+>Levert een lijst met de huidige beelden. Selecteer het actieve venster.</para>
+
+</sect2>
+
+<sect2 id="bookmarks-menu">
+<title
+>Het menu Bladwijzers</title>
+
+    <para
+>Meerdere bladwijzers kunnen worden ingesteld voor een enkele reeks bytes. Elke reeks bytes heeft zijn eigen set bladwijzers en de bijbehorende set is onderaan het menu <guimenu
+>Bladwijzers</guimenu
+> weergegeven. Kies een bladwijzer uit het menu om de cursor te verplaatsen en het te bekijken. <note
+><para
+>Bladwijzers zijn nu slecht voorbijgaand en worden niet opgeslagen als u een byte-array of het gehele programma sluit.</para
+></note
+></para>
+
+<variablelist>
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>B</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bladwijzers</guimenu
+> <guimenuitem
+>Bladwijzer toevoegen</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+>Locatie in een aantal bytes als bladwijzer instellen.</para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>B</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bladwijzers</guimenu
+> <guimenuitem
+>Bladwijzer verwijderen</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>De huidige bladwijzer verwijderen.</action
+> Dit commando is alleen beschikbaar als de cursor op een locatie in een bladwijzer staat.</para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Bladwijzers</guimenu
+> <guimenuitem
+>Alle bladwijzers wissen</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>De lijst met bladwijzers wissen.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Alt;<keycap
+>Omhoog</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bladwijzer</guimenu
+> <guimenuitem
+>Ga naar de vorige bladwijzer</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Beweeg de cursor naar de vorige bladwijzer.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Alt;<keycap
+>Omlaag</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bladwijzer</guimenu
+> <guimenuitem
+>Ga naar de volgende bladwijzer</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Beweeg de cursor naar de volgende bladwijzer.</action
+></para
+></listitem>
+    </varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<sect2 id="tools-menu">
+<title
+>Menu hulpmiddelen</title>
+
+<para
+>Levert een lijst met geïnstalleerde hulpmiddelen. Schakel de weergave van elk hulpmiddel aan of uit. Een gedetailleerde beschrijving van elk hulpmiddel is te vinden in de sectie <link linkend="tools"
+>Hulpmiddelen</link
+>.</para>
+
+</sect2>
+
+<sect2 id="settings-menu">
+<title
+>Menu Instellingen</title>
+<variablelist>
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Instellingen</guimenu
+> <guimenuitem
+>Weergaveprofielen beheren...</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+>Open een dialoog om een standaard profiel aan te maken, te bewerken, te verwijderen of in te stellen.</para
+></listitem>
+    </varlistentry>
+</variablelist>
+
+</sect2>
+
+</sect1>
+
+</chapter>
+
+<chapter id="credits">
+    <title
+>Verdiensten en licentie</title>
+
+    <para
+>&okteta; </para>
+
+    <!--List all the copyright holders here-->
+    <para
+>Programma Copyright 2006-2012 &Friedrich.Kossebau; &Friedrich.Kossebau.email;</para>
+
+    <para
+>Documentatie Copyright 2008,2010 &Friedrich.Kossebau; &Friedrich.Kossebau.email;, &Alex.Richardson; &Alex.Richardson.email;</para>
+
+    &meld.fouten;&vertaling.freek;&vertaling.ronald;&nagelezen.freek; &underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-omittag:t
+sgml-shorttag:t
+sgml-namecase-general:t
+sgml-always-quote-attributes:t
+sgml-indent-step:0
+sgml-indent-data:nil
+sgml-parent-document:nil
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+-->

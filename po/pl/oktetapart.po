@@ -1,0 +1,153 @@
+# translation of oktetapart.po to
+# Version: $Revision: 1600448 $
+# Major part translated by Piotr Roszatycki <dexter@fnet.pl>
+# Minor latest updates by Jacek Stolarczyk <jacek@mer.chemia.polsl.gliwice.pl>
+# Michal Rudolf <mrudolf@kdewebdev.org>, 2003.
+# Piotr Rybaltowski <dekoder@z.pl>, 2004.
+# Krzysztof Lichota <lichota@mimuw.edu.pl>, 2005.
+# Marta Rybczyńska <kde-i18n@rybczynska.net>, 2007, 2008.
+# Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2011, 2014, 2019, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: oktetapart\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-05-16 00:24+0000\n"
+"PO-Revision-Date: 2021-02-28 09:02+0100\n"
+"Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
+"Language-Team: Polish <kde-i18n-doc@kde.org>\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 20.12.1\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+
+#. i18n: ectx: Menu (file)
+#: oktetapartbrowserui.rc:5 oktetapartreadonlyui.rc:5
+#: oktetapartreadwriteui.rc:5
+#, kde-format
+msgid "&File"
+msgstr "&Plik"
+
+#. i18n: ectx: Menu (edit)
+#: oktetapartbrowserui.rc:8 oktetapartreadonlyui.rc:10
+#: oktetapartreadwriteui.rc:16
+#, kde-format
+msgid "&Edit"
+msgstr "&Edycja"
+
+#. i18n: ectx: Menu (view)
+#: oktetapartbrowserui.rc:21 oktetapartreadonlyui.rc:26
+#: oktetapartreadwriteui.rc:39
+#, kde-format
+msgid "&View"
+msgstr "&Widok"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: oktetapartbrowserui.rc:43 oktetapartreadonlyui.rc:47
+#: oktetapartreadwriteui.rc:60
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Główny pasek narzędzi"
+
+#. i18n: ectx: Menu (permission)
+#: oktetapartreadwriteui.rc:11
+#, kde-format
+msgctxt "@title:menu"
+msgid "Permissions"
+msgstr "Uprawnienia"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Mikołaj Zalewski"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "M.Zalewski@pegaz.if.uj.edu.pl"
+
+#~ msgid "OktetaPart"
+#~ msgstr "Moduł Okteta"
+
+#~ msgid "Embedded hex editor"
+#~ msgstr "Osadzalny edytor szesnastkowy"
+
+#~ msgid "Copyright 2003-%1 Friedrich W. H. Kossebau"
+#~ msgstr "Copyright 2003-%1 Friedrich W. H. Kossebau"
+
+#~ msgid "Friedrich W. H. Kossebau"
+#~ msgstr "Friedrich W. H. Kossebau"
+
+#~ msgid "Author"
+#~ msgstr "Autor"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Value Coding"
+#~ msgstr "Kodowanie &wartości"
+
+#~ msgctxt ""
+#~ "@item:inmenu encoding of the bytes as values in the hexadecimal format"
+#~ msgid "&Hexadecimal"
+#~ msgstr "&Szesnastkowo"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
+#~ msgid "&Decimal"
+#~ msgstr "&Dziesiątkowo"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
+#~ msgid "&Octal"
+#~ msgstr "Ós&emkowo"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
+#~ msgid "&Binary"
+#~ msgstr "D&wójkowo"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Char Encoding"
+#~ msgstr "Kodowanie &znaku"
+
+#~ msgctxt "@option:check"
+#~ msgid "Show &Non-printing Chars"
+#~ msgstr "Pokazuj znaki &niedrukowalne"
+
+#~ msgctxt "@option:check"
+#~ msgid "&Line Offset"
+#~ msgstr "&Przesunięcie wiersza"
+
+#, fuzzy
+#~| msgctxt "@item:inmenu"
+#~| msgid "&Values Column"
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Values"
+#~ msgstr "Kolumna &wartości"
+
+#, fuzzy
+#~| msgctxt "@item:inmenu"
+#~| msgid "&Chars Column"
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Chars"
+#~ msgstr "Kolumna &znaków"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Resize Style"
+#~ msgstr "Sposób zmiany &rozmiaru"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&No Resize"
+#~ msgstr "&Bez zmiany rozmiaru"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Lock Groups"
+#~ msgstr "Zablokuj &grupy"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Full Size Usage"
+#~ msgstr "Użyj &całego rozmiaru"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Columns"
+#~ msgstr "&Kolumny"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Both Columns"
+#~ msgstr "&Obie kolumny"

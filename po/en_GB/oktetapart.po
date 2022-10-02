@@ -1,0 +1,177 @@
+# translation of khexedit2part.po to British English
+#
+# Malcolm Hunter <malcolm.hunter@gmx.co.uk>, 2004.
+# Andrew Coles <andrew_coles@yahoo.co.uk>, 2009.
+# Steve Allewell <steve.allewell@gmail.com>, 2014, 2019, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: khexedit2part\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-05-16 00:24+0000\n"
+"PO-Revision-Date: 2021-02-14 15:37+0000\n"
+"Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
+"Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 20.12.2\n"
+
+#. i18n: ectx: Menu (file)
+#: oktetapartbrowserui.rc:5 oktetapartreadonlyui.rc:5
+#: oktetapartreadwriteui.rc:5
+#, kde-format
+msgid "&File"
+msgstr "&File"
+
+#. i18n: ectx: Menu (edit)
+#: oktetapartbrowserui.rc:8 oktetapartreadonlyui.rc:10
+#: oktetapartreadwriteui.rc:16
+#, kde-format
+msgid "&Edit"
+msgstr "&Edit"
+
+#. i18n: ectx: Menu (view)
+#: oktetapartbrowserui.rc:21 oktetapartreadonlyui.rc:26
+#: oktetapartreadwriteui.rc:39
+#, kde-format
+msgid "&View"
+msgstr "&View"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: oktetapartbrowserui.rc:43 oktetapartreadonlyui.rc:47
+#: oktetapartreadwriteui.rc:60
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Main Toolbar"
+
+#. i18n: ectx: Menu (permission)
+#: oktetapartreadwriteui.rc:11
+#, kde-format
+msgctxt "@title:menu"
+msgid "Permissions"
+msgstr "Permissions"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Malcolm Hunter, Andrew Coles"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "malcolm.hunter@gmx.co.uk, andrew_coles@yahoo.co.uk"
+
+#~ msgid "OktetaPart"
+#~ msgstr "OktetaPart"
+
+#~ msgid "Embedded hex editor"
+#~ msgstr "Embedded hex editor"
+
+#~ msgid "Copyright 2003-%1 Friedrich W. H. Kossebau"
+#~ msgstr "Copyright 2003-%1 Friedrich W. H. Kossebau"
+
+#~ msgid "Friedrich W. H. Kossebau"
+#~ msgstr "Friedrich W. H. Kossebau"
+
+#~ msgid "Author"
+#~ msgstr "Author"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Insert"
+#~ msgstr "Insert"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Value Coding"
+#~ msgstr "&Value Coding"
+
+#~ msgctxt ""
+#~ "@item:inmenu encoding of the bytes as values in the hexadecimal format"
+#~ msgid "&Hexadecimal"
+#~ msgstr "&Hexadecimal"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
+#~ msgid "&Decimal"
+#~ msgstr "&Decimal"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
+#~ msgid "&Octal"
+#~ msgstr "&Octal"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
+#~ msgid "&Binary"
+#~ msgstr "&Binary"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Char Encoding"
+#~ msgstr "&Char Encoding"
+
+#~ msgctxt "@option:check"
+#~ msgid "Show &Non-printing Chars"
+#~ msgstr "Show &Non-printing Chars"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Dynamic Layout"
+#~ msgstr "&Dynamic Layout"
+
+#~ msgctxt "@item:inmenu  The layout will not change on size changes."
+#~ msgid "&Off"
+#~ msgstr "&Off"
+
+#~ msgctxt ""
+#~ "@item:inmenu  The layout will adapt to the size, but only with complete "
+#~ "groups of bytes."
+#~ msgid "&Wrap Only Complete Byte Groups"
+#~ msgstr "&Wrap Only Complete Byte Groups"
+
+#~ msgctxt ""
+#~ "@item:inmenu  The layout will adapt to the size and fit in as much bytes "
+#~ "per line as possible."
+#~ msgid "&On"
+#~ msgstr "&On"
+
+#~ msgctxt "@option:check"
+#~ msgid "&Line Offset"
+#~ msgstr "&Line Offset"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Show Values or Chars"
+#~ msgstr "&Show Values or Chars"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Values"
+#~ msgstr "&Values"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Chars"
+#~ msgstr "&Chars"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "Values && Chars"
+#~ msgstr "Values && Chars"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Resize Style"
+#~ msgstr "&Resize Style"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&No Resize"
+#~ msgstr "&No Resize"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Lock Groups"
+#~ msgstr "&Lock Groups"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Full Size Usage"
+#~ msgstr "&Full Size Usage"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Columns"
+#~ msgstr "&Columns"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Both Columns"
+#~ msgstr "&Both Columns"
+
+#~ msgid "KHexEdit2Part"
+#~ msgstr "KHexEdit2Part"

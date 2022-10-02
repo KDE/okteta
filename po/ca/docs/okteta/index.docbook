@@ -1,0 +1,2055 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % Catalan  "INCLUDE">
+  <!ENTITY % addindex "IGNORE">
+]>
+
+<book id="okteta" lang="&language;">
+
+<bookinfo>
+<title
+>El manual de l'&okteta;</title>
+
+<authorgroup>
+    <author
+><firstname
+>Friedrich</firstname
+><othername
+>W. H.</othername
+><surname
+>Kossebau</surname
+> <affiliation
+> <address
+>&Friedrich.Kossebau.email;</address>
+      </affiliation>
+    </author>
+    <author
+><firstname
+>Alex</firstname
+><surname
+>Richardson</surname
+> <affiliation
+> <address
+>&Alex.Richardson.email;</address>
+      </affiliation>
+    </author>
+&traductor.JosepMa.Ferrer; 
+</authorgroup>
+
+<copyright>
+<year
+>2008, 2010, 2011</year>
+<holder
+>&Friedrich.Kossebau; i &Alex.Richardson;</holder>
+</copyright>
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>23 de març de 2018</date>
+<releaseinfo
+>&okteta; 0.24.60</releaseinfo>
+
+<abstract>
+  <para
+>L'&okteta; és un editor senzill per a les dades sense processar dels fitxers. Aquest tipus de programa també s'anomena editor hexadecimal o editor binari.</para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>Okteta</keyword>
+<keyword
+>visualitza</keyword>
+<keyword
+>edita</keyword>
+<keyword
+>bits</keyword>
+<keyword
+>bytes</keyword>
+<keyword
+>binari</keyword>
+<keyword
+>octal</keyword>
+<keyword
+>hexadecimal</keyword>
+<keyword
+>editor hexadecimal</keyword>
+<keyword
+>dades sense processar</keyword>
+</keywordset>
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Introducció</title>
+
+<para
+>L'&okteta; és un editor senzill per a les dades sense processar dels fitxers.</para>
+
+<para
+>Les dades es mostren en dues variants: com a valors numèrics dels bytes i com a caràcters assignats als valors. Els valors i els caràcters es poden mostrar en dues columnes (la visualització tradicional en editors hexadecimals) o en files amb el valor a la part superior del caràcter. L'edició es pot fer tant pels valors com pels caràcters.</para>
+
+<para
+>A més de les capacitats d'edició habituals, l'&okteta; també porta un petit conjunt d'eines, com una taula que llista les descodificacions en tipus de dades simples habituals, una taula que llista tots els bytes possibles amb els seus equivalents en caràcter i valor, una vista d'informació amb una estadística, una calculadora de suma de verificació, una eina de filtre i una eina d'extracció de cadenes.</para>
+
+<para
+>Totes les modificacions a les dades carregades es poden desfer o refer sense limitació.</para>
+
+</chapter>
+
+<chapter id="basics">
+<title
+>Conceptes bàsics</title>
+
+<sect1 id="starting-basics">
+<title
+>Començant amb l'&okteta;</title>
+
+    <para
+>Teclegeu <userinput
+><command
+>okteta</command
+></userinput
+> en un indicador d'ordres o seleccioneu <guimenuitem
+>Editor hexadecimal</guimenuitem
+> del grup <menuchoice
+><guisubmenu
+>Aplicacions</guisubmenu
+><guisubmenu
+>Utilitats</guisubmenu
+></menuchoice
+> en el llançador d'aplicacions.</para>
+
+    <para
+>Són disponibles les opcions estàndard de la línia d'ordres de les &Qt; i dels &kf5-full;, i es poden llistar introduint <userinput
+><command
+>okteta</command
+> <option
+>--help</option
+></userinput
+>.</para>
+
+    <para
+>Les opcions de la línia d'ordres específiques de l'&okteta; són:</para>
+
+    <para
+><option
+><replaceable
+>&lt;&URL;/s&gt;</replaceable
+></option
+> - obre fitxer/s des de l'&URL;/s especificat/s</para>
+
+</sect1>
+
+<sect1 id="usage-basics">
+<title
+>Ús</title>
+
+    <para
+>La finestra principal de l'&okteta; té els components següents: una barra de menús, una barra d'eines, una barra d'estat, una o diverses barres laterals amb eines, i la vista principal amb les vistes de dades amb pestanyes.</para>
+
+    <para
+>Quan s'obre un fitxer o es crea una matriu nova de bytes, els bytes continguts es llisten consecutivament en línies amb un nombre donat de bytes per línia. Es mostren en dues variants: com a valors numèrics dels bytes i com a caràcters assignats als valors. Els valors i els caràcters es poden mostrar separats en dues columnes o una al costat de l'altra amb el valor a la part superior del caràcter. Al costat esquerre es mostren els desplaçaments del primer byte de cada línia.</para>
+
+    <para
+>La gestió és similar a la de la majoria d'editors de text: les dades es poden editar, retallar, copiar, enganxar, arrossegar i deixar anar tant text com calgui. Un cursor marca la posició actual. Prement la tecla <keycap
+>Inser</keycap
+> es commuta entre els modes de sobreescriptura i inserció. El mode de sobreescriptura és més estricte que en els editors de text, ja que no permet cap operació que canviï la mida de la matriu de bytes.</para>
+
+    <para
+>Contràriament als editors de text, el contingut es mostra en dues variants. Només un d'ells està actiu respecte a l'entrada nova. Hi ha dos cursors enllaçats per la visualització dels valors i dels caràcters, el cursor actiu estarà parpellejant. Amb els caràcters actius, aquests es poden introduir com es fa als editors de text. Amb els valors actius, escriure un dígit obrirà un editor mínim per introduir la resta del valor.</para>
+
+    <para
+>El diàleg de cerca permet a l'usuari cercar una cadena específica de bytes, definible com a valors (hexadecimal, decimal, octal, binari) o com a text (codificació actual de 8 bits o UTF-8).</para>
+
+    <para
+>Es poden obrir múltiples matrius de bytes al mateix temps, però només una pot estar activa. Utilitzeu el menú <guimenu
+>Finestres</guimenu
+> per seleccionar quina matriu de bytes estarà activa.</para>
+</sect1>
+
+
+</chapter>
+
+<chapter id="tools">
+  <title
+>Eines</title>
+
+<!-- The tool Versions is not part of released versions,
+just used for development, so no need to document it. -->
+<!--
+4.7
+Other stuff:
+New encodings: ISO-8859-14, ISO-8859-16, Codepage 874
+File info tool now estimates the mimetype also for the unstored/edited data in the working memory
+FIXME  
+-->
+<sect1 id="tools-overview">
+
+  <title
+>Vista general</title>
+  <para
+>L'&okteta; porta algunes eines, algunes per analitzar i manipular matrius de bytes i altres amb un propòsit més general. Aquestes eines es poden activar o desactivar des de l'entrada <guimenu
+>Eines</guimenu
+> a la barra de menús. Cada eina té una vista petita, que s'acobla en una de les barres laterals o flota lliurement com a finestra. Podeu acoblar, desacoblar, reorganitzar i també apilar les vistes d'eina amb el ratolí, prement el &BER; sobre la barra de títol d'una vista d'eina, movent-la com vulgueu i alliberant el &BER; per completar l'acció, en cas contrari cancel·leu-la prement la tecla &Esc;.</para>
+
+<sect2>
+  <title
+>Analitzadors i manipuladors</title>
+<variablelist>
+  <varlistentry>
+    <term
+>Taula de valors/caràcters</term>
+    <listitem
+><para
+>La taula llista tots els valors possibles dels bytes, com a caràcter i en les diferents codificacions numèriques.</para>
+    <para
+>El valor seleccionat es pot inserir a la posició del cursor per a un nombre definit de bytes. Això es pot aconseguir utilitzant el botó <guibutton
+>Insereix</guibutton
+> o fent doble clic a la línia de la taula.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Filtre binari</term>
+    <listitem
+><para
+>El filtre realitza operacions binàries en els bytes seleccionats. Després d'escollir l'operació (AND, OR, CIRCULA...) els paràmetres, si n'hi ha, es poden establir en el quadre de sota. El filtre s'executa en usar el botó <guibutton
+>Filtre</guibutton
+>.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Cadenes</term>
+    <listitem
+><para
+>Aquesta eina localitza les cadenes en els bytes seleccionats. Després d'escollir la longitud mínima de la cadena, les cadenes se cerquen en usar el botó <guibutton
+>Extracte</guibutton
+>. La llista de les cadenes mostrades es pot reduir introduint un terme de filtre.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Estadístiques</term>
+    <listitem
+><para
+>Aquesta eina construeix una estadística per als bytes seleccionats. L'estadística dona la freqüència de l'ocurrència de cada valor del byte en la selecció. Es pot calcular utilitzant el botó <guibutton
+>Construeix</guibutton
+>.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Suma de verificació</term>
+    <listitem
+><para
+>Aquesta eina calcula diverses sumes de verificació o sumes de resum per als bytes seleccionats. Després de triar l'algorisme i establir el paràmetre, si n'hi ha, la suma es calcula en usar el botó <guibutton
+>Calcula</guibutton
+>.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Taula de descodificació</term>
+    <listitem
+><para
+>La taula mostra els valors del byte o dels bytes que comencen al cursor per a alguns tipus de dades simples habituals com enter o coma flotant, però també UTF-8. Fer doble clic sobre una línia de la taula obre un editor, de manera que el valor es pot editar i canviar.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Estructures</term>
+    <listitem
+><para
+>Aquesta eina permet investigar i editar les matrius de bytes basades en les definicions d'estructura que pot crear l'usuari. Les instruccions detallades es troben en una <link linkend="tools-structures"
+>secció</link
+> pròpia.</para
+></listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+  <title
+>Eines generals</title>
+<variablelist>
+  <varlistentry>
+    <term
+>Sistema de fitxers</term>
+    <listitem
+><para
+>Aquesta eina ofereix un navegador de fitxers incrustat que es pot utilitzar per seleccionar fitxers a obrir.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Documents</term>
+    <listitem
+><para
+>Aquesta eina mostra tots els fitxers actualment creats o carregats. Els símbols marquen el fitxer amb la vista activa actual i també mostren quins fitxers tenen canvis sense desar o quina còpia d'emmagatzematge ha estat modificada per un altre programa.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Adreces d'interès</term>
+    <listitem
+><para
+>Aquesta eina es pot utilitzar per gestionar les adreces d'interès, alternativament al menú <link linkend="bookmarks-menu"
+><guimenu
+>adreces d'interès</guimenu
+></link
+>. <note
+><para
+>Les adreces d'interès només són transitòries i no es desen si tanqueu una matriu de bytes o tot el programa.</para
+></note
+></para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Informació del fitxer</term>
+    <listitem
+><para
+>Aquesta eina mostra informació sobre el fitxer actual, incloent-hi el seu tipus, la ubicació de l'emmagatzematge i la mida.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Terminal</term>
+    <listitem
+><para
+>Un terminal incrustat, el directori de treball no està associat amb el fitxer actiu.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Conversió del joc de caràcters</term>
+    <listitem
+><para
+>L'eina reescriu els bytes de manera que els caràcters respectius són els mateixos que amb l'altre joc de caràcters. Només s'admeten jocs de caràcters de 8 bits, i els caràcters no coincidents actualment se substitueixen per un valor codificat a 0. </para
+></listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+</sect1>
+
+
+<sect1 id="tools-structures">
+<!--
+Many improvements in the Structures tool by Alex:
+Begin of a structure can be pinned to a specific offset
+Support for strings (various Unicode encodings) in definitions
+  -->
+    <title
+>Eina d'estructures</title>
+
+    <sect2>
+      <title
+>General</title>
+
+      <para
+>L'eina Estructures permet analitzar i editar matrius de bytes basades en definicions d'estructura que pot crear l'usuari, i que es poden construir a partir de matrius, unions, tipus primitius i valors enumerats.</para>
+     <!-- explain/link what these types are? probably not, since most user will be programmers? -->
+      <para
+>Té un diàleg de configuració propi, al qual es pot arribar utilitzant el botó <guibutton
+>Arranjament</guibutton
+>. Hi ha diverses opcions que es poden configurar, com l'estil (decimal, hexadecimal o binari) en el qual es mostren els valors. A més, és possible triar quines definicions d'estructura es carreguen i quines estructures es mostren en la vista.</para>
+      <para
+>Les estructures es defineixen en fitxers de definició d'estructura de l'&okteta; (basats en &XML;, amb l'extensió de fitxer <literal role="extension"
+>.osd</literal
+>). A més, un fitxer <literal role="extension"
+>.desktop</literal
+> conté metadades sobre aquest fitxer de descripció d'estructura, com ara autor, pàgina d'inici i llicència.</para>
+      <para
+>Actualment no hi ha suport integrat per a la creació o edició de definicions d'estructura, per tant, això ha de fer-se manualment com es descriu en les seccions següents.</para>
+    </sect2>
+
+    <sect2>
+      <title
+>Instal·lació de les definicions d'estructura</title>
+
+      <sect3>
+        <title
+>Instal·lació utilitzant el KNewStuff</title>
+        <para
+>La manera més fàcil d'instal·lar definicions noves d'estructura és utilitzant el suport integrat del KNewStuff a l'&okteta;. Per instal·lar una estructura existent obriu el diàleg de configuració de l'eina Estructura. Allà seleccioneu la pestanya <guilabel
+>Gestió d'estructures</guilabel
+> i premeu el botó <guibutton
+>Obtén estructures noves...</guibutton
+>. El diàleg que es mostra ara us permet instal·lar i desinstal·lar estructures.</para>
+      </sect3>
+      <sect3>
+        <title
+>Instal·lació manual de les definicions d'estructura</title>
+        <para
+>L'eina Estructura cerca descripcions d'estructura en el subdirectori <filename class="directory"
+>okteta/structures/</filename
+> del directori de l'usuari per a les dades del programa (que es troba executant <userinput
+><command
+>qtpaths</command
+> <option
+>--paths GenericDataLocation</option
+></userinput
+>). És possible que hàgiu de crear aquest directori si encara no hi ha cap definició d'estructura instal·lada.</para>
+          <para
+>Hi ha dos fitxers per a cada definició d'estructura: un fitxer per a la definició real i un fitxer <literal role="extension"
+>.desktop</literal
+> per a les metadades (autor, versió, etc.).</para>
+          <para
+>En aquest directori hi ha un subdirectori per a cada definició d'estructura, que conté tant el fitxer <literal role="extension"
+>.desktop</literal
+> com el fitxer <literal role="extension"
+>.osd</literal
+> o <filename
+>main.js</filename
+> d'aquesta definició.</para>
+          <para
+>Per exemple, amb el directori de dades del programa <filename class="directory"
+><userinput
+><command
+>qtpaths</command
+> <option
+>--paths GenericDataLocation</option
+></userinput
+></filename
+> i una definició d'estructura anomenada ExampleStructure, hi ha el directori <filename class="directory"
+>okteta/structures/ExampleStructure</filename
+> que conté un fitxer <filename
+>ExampleStructure.desktop</filename
+> i un fitxer <filename
+>ExampleStructure.osd</filename
+>.</para>
+      </sect3>
+      <sect3>
+        <title
+>Ús de les estructures instal·lades recentment</title>
+        <para
+>Després d'instal·lar una definició nova d'estructura haureu de reiniciar l'&okteta; abans de poder-la utilitzar. Un cop s'ha iniciat l'&okteta;, obriu el diàleg de configuració de l'eina Estructura. Allà seleccioneu la pestanya <guilabel
+>Gestió d'estructures</guilabel
+> i assegureu-vos que la definició de l'estructura corresponent està marcada. Després canvieu a la pestanya <guilabel
+>Estructures</guilabel
+> i assegureu-vos que l'element desitjat està llistat a la dreta.</para>
+      </sect3>
+    </sect2>
+
+    <sect2>
+      <title
+>Compartint les definicions d'estructura</title>
+      <para
+>Per a les estructures normals és possible que no necessiteu crear una definició vosaltres mateixos, però en el seu lloc podeu reutilitzar una definició ja existent des de llocs com <ulink url="https://store.kde.org/browse/cat/214"
+>store.kde.org</ulink
+>.</para>
+      <para
+>També és possible que vulgueu compartir una definició vós mateix. Per fer-ho, creeu un arxiu de fitxer (&pex; un arxiu tar comprimit amb zip, <literal role="extension"
+>.tar.gz</literal
+>) que contingui només el subdirectori amb el fitxer <literal role="extension"
+>.desktop</literal
+> i el fitxer de definició d'estructura. Mirant l'exemple de l'última secció aquest seria el directori <filename class="directory"
+>ExampleStructure</filename
+> amb tot el seu contingut. Utilitzar aquest format per compartir les definicions d'estructures permet instal·lar-les dins de l'&okteta; i no requereix cap instal·lació manual.</para>
+    </sect2>
+
+
+    <sect2>
+      <title
+>Creació de definicions d'estructura</title>
+
+      <note
+><para
+>Una guia més actualitzada, però no completada per a l'escriptura de les definicions d'estructura es pot trobar <ulink url="https://userbase.kde.org/Okteta/Writingstructuredefinitions"
+>en el Wiki UserBase de KDE</ulink
+>. </para
+></note>
+
+      <para
+>Hi ha dues maneres diferents de crear definicions d'estructures. El primer és escriure la definició en &XML;, l'altre és utilitzant JavaScript. L'enfocament JavaScript permet crear estructures més complexes amb característiques com ara validar l'estructura. L'ús de l'&XML; dona menys característiques, però si tot el que necessiteu és una estructura estàtica, aquest pot ser l'enfocament més fàcil. Si es necessita una estructura dinàmica, és a dir, on les longituds de la matriu depenen d'altres valors de l'estructura o la disposició de l'estructura és diferent quan algun valor membre canvia, llavors haureu d'escriure la definició de l'estructura en JavaScript. Hi ha una excepció a aquesta regla: si teniu una matriu on se suposa que la longitud és <emphasis role="bold"
+>exactament</emphasis
+> el mateix que un altre valor en l'estructura, llavors podeu utilitzar &XML;. Però si és una mica com <emphasis
+>length -1</emphasis
+> ha de ser JavaScript.</para>
+    </sect2>
+
+
+    <sect2>
+      <title
+>Format del fitxer &XML; de definició d'estructura</title>
+      <note
+><para
+>Una guia més actualitzada, però no completada per a l'escriptura de les definicions d'estructura es pot trobar <ulink url="https://userbase.kde.org/Okteta/Writingstructuredefinitions"
+>en el Wiki UserBase de KDE</ulink
+>. </para
+></note>
+      <para
+>El fitxer &XML; <literal role="extension"
+>.osd</literal
+> té un element arrel: <emphasis
+>&lt;data&gt;</emphasis
+> sense atributs. Dins d'aquest element ha d'haver-hi un dels elements següents:</para>
+      <!-- TODO markup, though better than nothing this way-->
+      <variablelist>
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;primitive&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Es pot crear un tipus de dades «primitive» com, &pex;, <emphasis
+>int</emphasis
+> o <emphasis
+>float</emphasis
+>. Aquest element no accepta subelements i pot tenir els atributs següents:</para>
+              <variablelist>
+                <varlistentry>
+                <term
+><emphasis role="bold"
+>type</emphasis
+></term>
+                <listitem>
+                  <para
+>El tipus d'aquest tipus primitiu. Ha de ser un dels següents:</para>
+                  <itemizedlist>
+                    <listitem
+><para
+><emphasis
+>char</emphasis
+> per a un caràcter ASCII de 8 bits</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>int8, int16, int32, int64</emphasis
+> per a un enter amb signe d'aquesta mida</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>uint8, uint16, uint32, uint64</emphasis
+> per a un enter sense signe d'aquesta mida</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>bool8, bool16, bool32, bool64</emphasis
+> per a un booleà sense signe (0 = fals, qualsevol altre valor = cert) d'aquesta mida</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>float</emphasis
+> per un nombre de coma flotant IEEE754 de 32 bits</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>double</emphasis
+> per un nombre de coma flotant IEEE754 de 64 bits</para
+></listitem>
+                  </itemizedlist>
+                </listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;bitfield&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Per crear un camp de bits. Aquest element no accepta subelements i pot tenir els atributs següents:</para>
+              <variablelist>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>width</emphasis
+></term>
+                  <listitem
+><para
+>El nombre de bits que utilitza aquest camp de bits. Cal que sigui entre 1 i 64.</para
+></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>type</emphasis
+></term>
+                  <listitem>
+                    <para
+>El tipus d'aquest camp de bits. Ha de ser un dels següents:</para>
+                    <itemizedlist>
+                      <listitem
+><para
+><emphasis
+>unsigned</emphasis
+> per a un camp de bits on el valor s'interpretarà com un valor sense signe (interval de valors de 0 a 2<superscript
+>width</superscript
+> - 1)</para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>signed</emphasis
+> per a un camp de bits on el valor s'interpretarà com un valor amb signe (interval de valors des de -2<superscript
+>width - 1</superscript
+> a 2<superscript
+>width - 1</superscript
+> - 1)</para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>bool</emphasis
+> per a un camp de bits on el valor s'interpretarà com un valor booleà</para
+></listitem>
+                  </itemizedlist>
+                  <note
+><para
+>Recordeu sempre afegir un farciment després d'un <emphasis
+>&lt;bitfield&gt;</emphasis
+>, ja que en cas contrari el següent element (excepte les cadenes i matrius, que afegeixen automàticament el farciment) començarà enmig d'un byte. Òbviament, no és necessari fer farciments si voleu aquest comportament.</para
+></note>
+                  </listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;enum&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Per crear un tipus primitiu, però on els valors es mostren com a membres d'una enumeració si és possible. Aquest element no accepta subelements (tot i que necessitareu una etiqueta <emphasis
+>&lt;enumDef&gt;</emphasis
+> al fitxer per fer-hi referència). Té els atributs següents:</para>
+              <variablelist>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>enum</emphasis
+></term>
+                  <listitem
+><para
+>L'enumeració subjacent per a aquest valor. Ha de coincidir amb l'atribut <emphasis
+>name</emphasis
+> d'una de les etiquetes <emphasis
+>&lt;enumDef&gt;</emphasis
+> en aquest fitxer.</para
+></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>type</emphasis
+></term>
+                  <listitem>
+                    <para
+>El tipus d'aquesta enumeració. Vegeu l'atribut tipus de <emphasis
+>&lt;primitive&gt;</emphasis
+>. La diferència només és que <emphasis
+>Double</emphasis
+> i <emphasis
+>Float</emphasis
+> no tenen sentit.</para>
+                  </listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
+          </varlistentry>
+
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;flags&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Això és el mateix que <emphasis
+>&lt;enum&gt;</emphasis
+> amb l'única diferència que els valors es representen com a <emphasis
+>bitwise-or</emphasis
+> de tots els valors de l'enumeració.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;struct&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Per crear una estructura. Tots els altres elements (incloent-hi <emphasis
+>&lt;struct&gt;</emphasis
+>) poden ser un fill d'això i després formar part de l'estructura resultant</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;union&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Per crear una unió. Bàsicament el mateix que <emphasis
+>&lt;struct&gt;</emphasis
+> excepte el fet que tots els elements fills començaran des del mateix desplaçament. Útil per interpretar la mateixa seqüència de bytes de diverses maneres.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;array&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Per crear una matriu. Aquest element accepta exactament un fill (el tipus subjacent de la matriu), que pot ser qualsevol dels elements, fins i tot la mateixa <emphasis
+>&lt;array&gt;</emphasis
+>. També té els atributs següents:</para>
+              <variablelist>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>length</emphasis
+></term>
+                  <listitem
+><para
+>El nombre d'elements d'aquesta matriu com a nombre decimal. També pot ser una cadena que coincideixi amb l'atribut «name» d'un element <emphasis
+>&lt;primitive&gt;</emphasis
+>, <emphasis
+>&lt;enum&gt;</emphasis
+> o <emphasis
+>&lt;flags&gt;</emphasis
+> definits prèviament. Llavors la longitud serà el valor d'aquest element. Actualment es limita a 10000, ja que les matrius més grans utilitzarien massa memòria i alentirien massa l'eina. </para
+></listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;string&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Per crear una cadena en diverses codificacions. Per defecte obtindreu una cadena a l'estil C finalitzada amb <emphasis
+>NULL</emphasis
+>. No obstant això, es poden crear tipus de cadena diferents amb els atributs següents:</para>
+              <variablelist>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>terminatedBy</emphasis
+></term>
+                  <listitem
+><para
+>Aquest atribut determina amb quin punt de codi Unicode finalitza la cadena. Ha de ser un nombre hexadecimal (opcionalment començant per <emphasis
+>0x</emphasis
+>). Quan la codificació és ASCII, només són significatius els valors fins a 0x7f. Si no s'ha establert ni aquest ni <emphasis
+>maxCharCount</emphasis
+> ni <emphasis
+>maxByteCount</emphasis
+>, s'assumeix que s'estableix a 0 (cadena a l'estil C) </para
+></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>maxCharCount</emphasis
+></term>
+                  <listitem
+><para
+>El nombre màxim de caràcters que pot tenir aquesta cadena. Si també s'ha establert <emphasis
+>terminatedBy</emphasis
+>, llavors qualsevol cosa que arribi primer finalitza la cadena. Això és mútuament excloent amb <emphasis
+>maxByteCount</emphasis
+></para
+></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>maxByteCount</emphasis
+></term>
+                  <listitem
+><para
+>El nombre màxim de bytes que aquesta cadena pot tenir de longitud. Si també s'ha establert <emphasis
+>terminatedBy</emphasis
+>, llavors qualsevol cosa que arribi primer finalitza la cadena. Això és mútuament excloent amb <emphasis
+>maxCharCount</emphasis
+>. Amb codificacions com <emphasis
+>ASCII</emphasis
+> això és el mateix que <emphasis
+>maxCharCount</emphasis
+>.</para
+></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>type</emphasis
+></term>
+                  <listitem
+><para
+>La codificació d'aquesta cadena. Pot ser una de les següents:</para>
+                    <itemizedlist>
+                      <listitem
+><para
+><emphasis
+>ASCII</emphasis
+></para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>LATIN-1</emphasis
+></para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>UTF-8</emphasis
+></para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>UTF-16-LE</emphasis
+> o <emphasis
+>UTF-16-BE</emphasis
+>. Si no es donen els sufixes <emphasis
+>-LE</emphasis
+> ni <emphasis
+>-BE</emphasis
+>, s'assumeix «little endian». </para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>UTF-32-LE</emphasis
+> o <emphasis
+>UTF-32-BE</emphasis
+>. Si no es donen els sufixes <emphasis
+>-LE</emphasis
+> ni <emphasis
+>-BE</emphasis
+>, s'assumeix «little endian». </para
+></listitem>
+                    </itemizedlist>
+                  </listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
+          </varlistentry>
+      </variablelist>
+      <para
+>Tots els elements també accepten un atribut <emphasis
+>name</emphasis
+> que és visible a la vista d'estructures. </para>
+    </sect2>
+
+    <sect2>
+      <title
+>Un exemple de definició d'estructura tant en &XML; com en JavaScript</title>
+      <note
+><para
+>Una guia més actualitzada, però no completada per a l'escriptura de les definicions d'estructura es pot trobar <ulink url="https://userbase.kde.org/Okteta/Writingstructuredefinitions"
+>en el Wiki UserBase de KDE</ulink
+>. </para
+></note>
+
+      <sect3>
+        <title
+>El pas comú compartit per ambdós enfocaments</title>
+        <para
+>El nostre fitxer de metadades hauria de ser així: <screen>
+        [Desktop Entry]
+        Icon=arrow-up<co id="icon" />
+        Type=Service
+        ServiceTypes=KPluginInfo
+
+        Name=Estructura simple de prova
+        Comment=Una estructura de prova senzilla que conté dos elements
+
+        X-KDE-PluginInfo-Author=Alex Richardson
+        X-KDE-PluginInfo-Email=foo.bar@email.org
+        X-KDE-PluginInfo-Name=simplestruct
+        X-KDE-PluginInfo-Version=1.0
+        X-KDE-PluginInfo-Website=https://www.plugin.org/
+        X-KDE-PluginInfo-Category=structure
+        X-KDE-PluginInfo-License=LGPL
+        X-KDE-PluginInfo-EnabledByDefault=false
+        </screen
+> <calloutlist
+> <callout arearefs="icon"
+> <para
+>La icona mostrada a l'&okteta; per a aquesta estructura pot ser qualsevol cosa trobada mitjançant l'execució de <userinput
+><command
+>kdialog</command
+> <option
+>--geticon</option
+></userinput
+> o un camí a una icona </para
+> </callout
+> </calloutlist
+> Aquests camps haurien de ser força autoexplicatius, excepte <literal
+>X-KDE-PluginInfo-Name</literal
+>. El valor d'aquest camp ha de coincidir amb el nom del directori que conté el fitxer així com el nom del fitxer <literal role="extension"
+>.desktop</literal
+>. En crear les definicions d'estructura &XML; el nom del fitxer <literal role="extension"
+>.osd</literal
+> també ha de coincidir amb el nom. </para>
+
+        <para
+>En aquest exemple tindríem un directori anomenat <filename
+>simpletruct</filename
+> que conté el fitxer <filename
+>simpletruct.desktop</filename
+>. En definir estructures en &XML; el directori també conté un fitxer anomenat <filename
+>simpletruct.osd</filename
+>. Utilitzant JavaScript en el seu lloc tindríem un fitxer anomenat <filename
+>main.js</filename
+>.</para>
+      </sect3>
+      <sect3>
+        <title
+>Una definició d'estructura &XML; senzilla</title>
+        <para
+>Per començar creem una definició per a una estructura de prova molt senzilla que conté només tipus de dades integrals (un caràcter, un enter amb signe de 32 bits i un camp de bits). Això s'expressa en C/C++ com: <screen>
+          struct simple {
+            char aChar;
+            int anInt;
+            bool bitFlag :1;
+            unsigned padding :7;
+          };
+          </screen
+> El primer pas és escriure el fitxer <literal role="extension"
+>.osd</literal
+> d'acord amb el format de fitxer definit a la secció anterior. Invocarem <filename
+>simpletruct.osd</filename
+>: <screen
+><markup>
+          &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+          &lt;data&gt;
+            &lt;struct name="simple"&gt;
+              &lt;primitive name="aChar" type="Char"/&gt;
+              &lt;primitive name="anInt" type="Int32"/&gt;
+              &lt;bitfield name="bitFlag" type="bool" width="1"/&gt;
+              &lt;bitfield name="padding" type="unsigned" width="7"/&gt;
+            &lt;/struct&gt;
+          &lt;/data&gt;
+          </markup
+></screen
+> que és força similar a la definició en C/C++. </para>
+          <para
+>Ara creeu un directori <filename class="directory"
+>simpletruct</filename
+> dins del directori d'instal·lació de l'estructura (vegeu manualment les definicions d'estructura) i copieu els dos fitxers a aquest directori. Ara podeu reiniciar l'&okteta; i utilitzar l'estructura nova.</para>
+      </sect3>
+      <sect3>
+        <title
+>L'estructura senzilla en JavaScript</title>
+        <para
+>Per implementar l'estructura anterior en JavaScript, creeu un fitxer anomenat <filename
+>main.js</filename
+> en lloc de <filename
+>simpletruct.osd</filename
+> i canvieu X-KDE-PluginInfo-Category=structure a X-KDE-PluginInfo-Category=structure/js. El contingut d'aquest fitxer hauria de ser: <screen>
+        function init() {
+          var structure = struct({
+            aChar : char(),
+            anInt : int32(),
+            bitFlag : bitfield("bool", 1),
+            padding : bitfield("unsigned", 7),
+          })
+          return structure;
+        }
+        </screen
+> L'estructura mostrada per l'&okteta; és sempre el valor de retorn de la funció <literal
+>init</literal
+>.</para>
+        <para
+>Les funcions següents es poden anomenar per crear un tipus primitiu: <itemizedlist
+> <listitem
+><para
+>char()</para
+></listitem
+> <listitem
+><para
+>int8(), int16(), int32() or int64()</para
+></listitem
+> <listitem
+><para
+>uint8(), uint16(), uint32() or uint64()</para
+></listitem
+> <listitem
+><para
+>bool8(), bool16(), bool32() or bool64()</para
+></listitem
+> <listitem
+><para
+>float()</para
+></listitem
+> <listitem
+><para
+>double()</para
+></listitem
+> </itemizedlist
+> La funció camp de bits té dos paràmetres, el primer és una cadena que consta d'un <literal
+>bool</literal
+>, <literal
+>signed</literal
+> o <literal
+>unsigned</literal
+>. El segon paràmetre és un enter que estableix l'amplada en bits. </para>
+      </sect3>
+      <sect3>
+        <title
+>Estructures més complexes</title>
+        <para
+>A continuació creem una definició d'una estructura més complexa que anomenarem «complex» i desarem en un fitxer anomenat <filename
+>complex.osd</filename
+>. Aquesta estructura contindrà dues matrius (una amb longitud fixa i una altra on la longitud es determina en temps d'execució) així com una estructura imbricada i una unió. <screen
+><markup>
+          &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+          &lt;data&gt;
+            &lt;struct name="complex"&gt;
+              &lt;primitive name="size" type="UInt8" /&gt;
+              &lt;union name="aUnion"&gt;
+                &lt;array name="fourBytes" length="4"&gt;
+                  &lt;primitive type="Int8" /&gt;
+                &lt;/array&gt;
+              &lt;/union&gt;
+              &lt;struct name="nested"&gt;
+                &lt;array name="string" length="size"&gt; &lt;!-- fa referència a la mida del camp anterior --&gt;
+                  &lt;primitive type="Char" /&gt;
+                &lt;/array&gt;
+              &lt;/struct&gt;
+            &lt;/struct&gt;
+          &lt;/data&gt;
+          </markup
+></screen
+> Això correspondria al següent en pseudocodi C/C++ <screen
+>struct complex {
+            uint8_t size;
+            union aUnion {
+              int8_t fourBytes[4];
+            };
+            struct nested {
+              char string[size] //no és C++ vàlid, fa referència al valor de la mida d'«uint8»
+            };
+          };
+          </screen>
+          </para>
+          <note
+><para
+>Òbviament només podeu tenir camps de referència de matrius de longitud dinàmica abans de la matriu.</para
+></note>
+          <para
+>A continuació creem el fitxer <filename
+>complex.desktop</filename
+> com en l'exemple anterior (assegureu-vos que heu establert <literal
+>X-KDE-PluginInfo-Name</literal
+> correctament) i també feu el mateix per instal·lar els dos fitxers.</para>
+      </sect3>
+      <sect3>
+        <title
+>Informació addicional</title>
+        <para
+>Es poden trobar algunes definicions d'estructura d'exemple al <ulink url="https://commits.kde.org/okteta?path=kasten/controllers/view/structures/examples/okteta/structures/"
+>repositori Git</ulink
+>. Això inclou per exemple la capçalera de fitxer per a fitxers PNG i la capçalera de fitxer ELF. Es pot trobar un esquema &XML; que descriu l'estructura del fitxer <literal role="extension"
+>.osd</literal
+> <ulink url="https://commits.kde.org/okteta?path=kasten/controllers/view/structures/schema/"
+>aquí</ulink
+>. Si es necessita més informació us podeu posar en contacte amb mi a &Alex.Richardson.email; </para>
+      </sect3>
+    </sect2>
+<!--FIXME missing
+Extended structures definitions
+Structures Script Console-->
+</sect1>
+</chapter>
+
+<chapter id="interface-overview">
+<title
+>Vista general de la interfície</title>
+
+<sect1 id="menu-commands">
+<title
+>Elements del menú</title>
+
+<para
+>A més dels menús comuns del &kde; descrits al capítol <ulink url="help:/fundamentals/menus.html"
+>Menú</ulink
+> en els Fonaments del &kde;, l'aplicació &okteta; disposa d'aquestes entrades de menú específiques: </para>
+
+<sect2 id="file-menu">
+<title
+>El menú Fitxer</title>
+
+<variablelist>
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Nou</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Crear una matriu nova de bytes...</action
+></para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>Buida</guimenuitem
+>: ...com una de buida.</para>
+    </listitem>
+    <listitem
+><para
+><guimenuitem
+>Des del porta-retalls</guimenuitem
+>: ...pel contingut actual del porta-retalls.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Patró...</guimenuitem
+>: ...amb un patró donat.</para>
+    </listitem>
+    <listitem
+><para
+><guimenuitem
+>Dades aleatòries...</guimenuitem
+>: ...amb dades aleatòries.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Seqüència</guimenuitem
+>: ...amb tots els bytes de 0 a 255.</para
+></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Exporta</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+>Exporta els bytes seleccionats a un fitxer...</para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>Valors</guimenuitem
+>: ...codificats com a valors de bytes. De manera predeterminada els valors estan separats per un espai en blanc. Els caràcters de <guilabel
+>separació</guilabel
+> es poden canviar en el diàleg d'<guilabel
+>Exportació</guilabel
+>. </para>
+    </listitem>
+    <listitem
+><para
+><guimenuitem
+>Caràcters</guimenuitem
+>: ...codificat com a text net. </para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Base64</guimenuitem
+>: ...codificat en el format <ulink url="https://en.wikipedia.org/wiki/Base64"
+>Base64</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Base32</guimenuitem
+>: ...codificat en el format <ulink url="https://en.wikipedia.org/wiki/Base32"
+>Base32</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Ascii85</guimenuitem
+>: ...codificat en el format <ulink url="https://en.wikipedia.org/wiki/Ascii85"
+>Ascii85</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Uuencoding</guimenuitem
+>: ...codificat en el format <ulink url="https://en.wikipedia.org/wiki/Uuencoding"
+>Uuencoding</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Xxencoding</guimenuitem
+>: ...codificat en el format <ulink url="https://en.wikipedia.org/wiki/Xxencoding"
+>Xxencoding</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Intel Hex</guimenuitem
+>: ...codificat en el format <ulink url="https://en.wikipedia.org/wiki/IntelHex"
+>Intel Hex</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>S-Record</guimenuitem
+>: ...codificat en el format <ulink url="https://en.wikipedia.org/wiki/S-record"
+>S-Record</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Matriu C</guimenuitem
+>: ...definida com una matriu en el llenguatge de programació C.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Visualitza en text net</guimenuitem
+>: ...com en la vista de dades amb desplaçament, valors de bytes i caràcters. </para
+></listitem>
+    </itemizedlist>
+    </listitem>
+
+</varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Fitxer</guimenu
+> <guisubmenu
+>Permisos</guisubmenu
+><guimenuitem
+>Estableix només de lectura</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+>Quan s'estableix, els canvis no es poden fer a la matriu de bytes carregada.</para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Tanca totes les altres</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Tanca totes matrius de bytes excepte l'actual.</action
+></para
+></listitem>
+    </varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="edit-menu">
+<title
+>El menú Edita</title>
+<variablelist>
+<para
+>Un senzill copiat i retallat envia les dades al porta-retalls amb el tipus MIME <quote
+>application/octetstream</quote
+>, el &klipper; no pot mostrar aquestes dades. I gairebé totes les altres aplicacions tampoc poden gestionar-ho, ja que es tracta senzillament de dades sense processar. Així que vegeu també el submenú <guisubmenu
+>Copia com a</guisubmenu
+>.</para>
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Edita</guimenu
+> <guisubmenu
+>Copia com a</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+>Còpia els bytes seleccionats en un dels diferents formats al porta-retalls. Per a una llista dels formats disponibles vegeu l'element de menú <menuchoice
+><guimenu
+>Fitxer</guimenu
+> <guisubmenu
+>Exporta</guisubmenu
+></menuchoice
+> </para>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Edita</guimenu
+> <guisubmenu
+>Insereix</guisubmenu
+> </menuchoice
+></term>
+    <listitem>
+    <variablelist>
+    <varlistentry>
+    <term
+><menuchoice>
+    <guimenuitem
+>Insereix un patró...</guimenuitem>
+    </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Insereix una cadena de bytes especificada al cursor.</action
+></para>
+    <para
+>Les opcions en el quadre de diàleg permeten especificar el nombre d'insercions del patró i el format d'aquest (Hexadecimal, Decimal, Octal, Binari, Caràcter/s o UTF-8).</para>
+    <!--FIXME Random Data + Sequence - use cases?-->
+    </listitem>
+    </varlistentry>
+    </variablelist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;&Maj;<keycap
+>A</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Edita</guimenu
+> <guimenuitem
+>Desselecciona</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Desselecciona la selecció actual.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Edita</guimenu
+> <guimenuitem
+>Selecciona un interval...</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Obre un diàleg incrustat per introduir l'interval a seleccionar.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+><keycap
+>Inser</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Edita</guimenu
+> <guimenuitem
+>Mode sobreescriure</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Commuta entre el mode d'inserció i el mode de sobreescriptura</action
+>. </para>
+    <note
+><para
+>El mode de sobreescriptura s'implementa per ser molt estricte, no és possible canviar la mida de les dades (no afegeix ni elimina bytes).</para
+></note>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>F</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Edita</guimenu
+> <guimenuitem
+>Cerca...</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Troba un patró especificat en el document.</action
+> Es poden cercar patrons hexadecimals, decimals, octals, binaris o de text.</para>
+    <para
+>Les opcions del quadre de diàleg us permeten especificar el punt d'inici, la direcció i l'interval de la cerca.</para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>G</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Edita</guimenu
+> <guimenuitem
+>Ves al desplaçament...</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Mou el cursor a un desplaçament especificat.</action
+></para
+></listitem>
+    </varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="view-menu">
+<title
+>El menú Visualitza</title>
+
+<variablelist>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycap
+>F11</keycap
+> </shortcut
+> <guimenu
+>Visualitza</guimenu
+> <guimenuitem
+>Mostra el desplaçament de la línia</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Commuta mostrar el desplaçament de la línia en una subfinestra a l'esquerra activada i desactivada.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Visualitza</guimenu
+> <guisubmenu
+>Mostra els valors o els caràcters</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Selecciona quina de les interpretacions dels bytes es mostren.</action
+> Són possibles:</para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>Valors</guimenuitem
+></para>
+    </listitem>
+    <listitem
+><para
+><guimenuitem
+>Caràcters</guimenuitem
+></para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Valors i caràcters</guimenuitem
+></para
+></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Visualitza</guimenu
+> <guisubmenu
+>Codificació dels valors</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Selecciona la codificació dels valors</action
+> de:</para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>Hexadecimal</guimenuitem
+></para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Decimal</guimenuitem
+></para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Octal</guimenuitem
+></para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Binari</guimenuitem
+></para
+></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Visualitza</guimenu
+> <guisubmenu
+>Codificació dels caràcters</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Selecciona la codificació dels caràcters</action
+> des del submenú. </para>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Visualitza</guimenu
+> <guimenuitem
+>Mostra els caràcters no imprimibles</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Alterna la visualització de caràcters no imprimibles activats i desactivats.</action
+> Si la visualització està desactivada, als llocs corresponents de la columna del caràcter es mostra un caràcter substitutiu.</para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Visualitza</guimenu
+> <guisubmenu
+>Defineix els bytes per línia</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Selecciona els bytes mostrats per línia</action
+> del diàleg, el valor per defecte és de 16 bytes. </para>
+    </listitem>
+    </varlistentry>
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Visualitza</guimenu
+> <guisubmenu
+>Defineix els bytes per grup</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Per defecte els valors hexadecimals es mostren en grups de 4 bytes.</action
+> Usant aquest element de menú el podeu adaptar a les vostres preferències en un diàleg. </para>
+    </listitem>
+    </varlistentry>
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Visualitza</guimenu
+> <guisubmenu
+>Disposició dinàmica</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Estableix les regles per a la disposició de la visualització de dades.</action
+> Això defineix quants bytes es mostren per línia, depenent de l'amplada de la vista. Les regles possibles són:</para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>Inactiva</guimenuitem
+>: La disposició és fixa al nombre actual de bytes per línia i no s'adapta al canvi de la mida de la vista.</para>
+    </listitem>
+    <listitem
+><para
+><guimenuitem
+>Ajusta només els grups de bytes complets</guimenuitem
+>: Posa tants bytes per línia com sigui possible, sempre que els grups de bytes estiguin complets. </para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Activa</guimenuitem
+>: Igual que l'anterior, però també permet grups incomplets de bytes.</para
+></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Visualitza</guimenu
+> <guisubmenu
+>Mode de vista</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Selecciona la disposició de la vista</action
+> de:</para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>Columnes</guimenuitem
+>: Els valors i les interpretacions dels caràcters es mostren en la disposició clàssica amb cada un llistat en una columna separada.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Files</guimenuitem
+>: La interpretació dels caràcters d'un byte es mostra directament sota la interpretació del valor.</para
+></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;&Maj;<keycap
+>T</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Visualitza</guimenu
+> <guimenuitem
+>Divideix horitzontalment</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Divideix l'àrea de visualització amb la vista actualment enfocada en dues parts i afegeix una còpia de la vista actual a l'àrea inferior nova.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;&Maj;<keycap
+>L</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Visualitza</guimenu
+> <guimenuitem
+>Divideix verticalment</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Divideix l'àrea de visualització amb la vista actualment enfocada en dues parts i afegeix una còpia de la vista actual a l'àrea dreta nova.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;&Maj;<keycap
+>R</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Visualitza</guimenu
+> <guimenuitem
+>Tanca l'àrea de visualització</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Tanca l'àrea de visualització amb la vista actualment enfocada.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Visualitza</guimenu
+> <guimenuitem
+>Perfil de vista</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+>La configuració de la vista es pot desar per separat com a perfils de vista. El perfil actualment seleccionat es pot actualitzar directament des de la configuració actual de la vista, o es pot crear un de nou a partir d'ells. Tots els perfils de visualització es poden gestionar en un diàleg disponible des d'<menuchoice
+><guimenu
+>Arranjament</guimenu
+><guimenuitem
+>Gestiona els perfils de visualització...</guimenuitem
+></menuchoice
+>.</para
+></listitem>
+    </varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<sect2 id="windows-menu">
+<title
+>Menú de les finestres</title>
+
+    <para
+>Proporciona una llista de les vistes actuals. Seleccioneu la finestra activa.</para>
+
+</sect2>
+
+<sect2 id="bookmarks-menu">
+<title
+>Menú de les adreces d'interès</title>
+
+    <para
+>Es poden establir múltiples adreces d'interès per a una matriu d'un sol byte. Cada matriu de bytes té el seu propi conjunt d'adreces d'interès, i el conjunt apropiat es mostra a la part inferior del menú <guimenu
+>Adreces d'interès</guimenu
+>. Trieu una adreça d'interès del menú per a moure-hi el cursor i la vista. <note
+><para
+>Les adreces d'interès només són transitòries i no es desen si tanqueu una matriu de bytes o tot el programa.</para
+></note
+></para>
+
+<variablelist>
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>B</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Adreces d'interès</guimenu
+> <guimenuitem
+>Afegeix una adreça d'interès</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+>Afegeix una ubicació en la matriu de bytes.</para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;&Maj;<keycap
+>B</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Adreces d'interès</guimenu
+> <guimenuitem
+>Elimina l'adreça d'interès</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Elimina l'adreça d'interès actual.</action
+> Aquesta ordre només està disponible si el cursor es troba en una ubicació apuntada.</para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Adreces d'interès</guimenu
+> <guimenuitem
+>Elimina totes les adreces d'interès</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Neteja la llista d'adreces d'interès.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Alt;<keycap
+>Fletxa amunt</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Adreces d'interès</guimenu
+> <guimenuitem
+>Ves a l'adreça d'interès anterior</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Mou el cursor a l'adreça d'interès anterior.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Alt;<keycap
+>Fletxa avall</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Adreces d'interès</guimenu
+> <guimenuitem
+>Ves a l'adreça d'interès següent</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Mou el cursor a l'adreça d'interès següent.</action
+></para
+></listitem>
+    </varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<sect2 id="tools-menu">
+<title
+>El menú Eines</title>
+
+<para
+>Proporciona una llista de les eines instal·lades. Activa o desactiva la visualització de cada eina. Una descripció detallada de cada eina que trobeu a la secció <link linkend="tools"
+>Eines</link
+>.</para>
+
+</sect2>
+
+<sect2 id="settings-menu">
+<title
+>El menú Arranjament</title>
+<variablelist>
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Arranjament</guimenu
+> <guimenuitem
+>Gestiona els perfils de visualització...</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+>Obre un diàleg per crear, editar, suprimir i establir un perfil de vista predeterminat.</para
+></listitem>
+    </varlistentry>
+</variablelist>
+
+</sect2>
+
+</sect1>
+
+</chapter>
+
+<chapter id="credits">
+    <title
+>Crèdits i llicència</title>
+
+    <para
+>&okteta; </para>
+
+    <!--List all the copyright holders here-->
+    <para
+>Copyright del programa 2006-2012 &Friedrich.Kossebau; &Friedrich.Kossebau.email;</para>
+
+    <para
+>Copyright de la documentació 2008, 2010 &Friedrich.Kossebau; &Friedrich.Kossebau.email;, &Alex.Richardson; &Alex.Richardson.email;</para>
+
+    <para
+>Traductor de la documentació: &credits.JosepMa.Ferrer;</para
+> &underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-omittag:t
+sgml-shorttag:t
+sgml-namecase-general:t
+sgml-always-quote-attributes:t
+sgml-indent-step:0
+sgml-indent-data:nil
+sgml-parent-document:nil
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+-->

@@ -1,0 +1,173 @@
+# translation of oktetapart.po to dansk
+# Danish translation of khexedit2part
+#
+# Erik Kjær Pedersen <erik@binghamton.edu>, 2004, 2005.
+# Keld Simonsen <keld@dkuug.dk>, 2008.
+# Martin Schlander <mschlander@opensuse.org>, 2008, 2009, 2015.
+msgid ""
+msgstr ""
+"Project-Id-Version: oktetapart\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-05-16 00:24+0000\n"
+"PO-Revision-Date: 2015-02-19 20:18+0100\n"
+"Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
+"Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.5\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. i18n: ectx: Menu (file)
+#: oktetapartbrowserui.rc:5 oktetapartreadonlyui.rc:5
+#: oktetapartreadwriteui.rc:5
+#, kde-format
+msgid "&File"
+msgstr ""
+
+#. i18n: ectx: Menu (edit)
+#: oktetapartbrowserui.rc:8 oktetapartreadonlyui.rc:10
+#: oktetapartreadwriteui.rc:16
+#, kde-format
+msgid "&Edit"
+msgstr ""
+
+#. i18n: ectx: Menu (view)
+#: oktetapartbrowserui.rc:21 oktetapartreadonlyui.rc:26
+#: oktetapartreadwriteui.rc:39
+#, kde-format
+msgid "&View"
+msgstr ""
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: oktetapartbrowserui.rc:43 oktetapartreadonlyui.rc:47
+#: oktetapartreadwriteui.rc:60
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Hovedværktøjslinje"
+
+#. i18n: ectx: Menu (permission)
+#: oktetapartreadwriteui.rc:11
+#, kde-format
+msgctxt "@title:menu"
+msgid "Permissions"
+msgstr "Rettigheder"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Erik Kjær Pedersen,Keld Simonsen"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "erik@binghamton.edu,keld@dkuug.dk"
+
+#~ msgid "OktetaPart"
+#~ msgstr "OktetaPart"
+
+#~ msgid "Embedded hex editor"
+#~ msgstr "Indlejret hex-editor"
+
+#, fuzzy
+#~| msgid "2003-2014 Friedrich W. H. Kossebau"
+#~ msgid "Copyright 2003-%1 Friedrich W. H. Kossebau"
+#~ msgstr "2003-2014 Friedrich W. H. Kossebau"
+
+#~ msgid "Friedrich W. H. Kossebau"
+#~ msgstr "Friedrich W. H. Kossebau"
+
+#~ msgid "Author"
+#~ msgstr "Forfatter"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Value Coding"
+#~ msgstr "&Værdikodning"
+
+#~ msgctxt ""
+#~ "@item:inmenu encoding of the bytes as values in the hexadecimal format"
+#~ msgid "&Hexadecimal"
+#~ msgstr "&Hexadecimal"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
+#~ msgid "&Decimal"
+#~ msgstr "&Decimal"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
+#~ msgid "&Octal"
+#~ msgstr "&Oktal"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
+#~ msgid "&Binary"
+#~ msgstr "&Binær"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Char Encoding"
+#~ msgstr "&Tegnindkodning"
+
+#~ msgctxt "@option:check"
+#~ msgid "Show &Non-printing Chars"
+#~ msgstr "Vis tegn der ikke &udskrives"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Dynamic Layout"
+#~ msgstr "&Dynamisk layout"
+
+#~ msgctxt "@item:inmenu  The layout will not change on size changes."
+#~ msgid "&Off"
+#~ msgstr "&Fra"
+
+#~ msgctxt ""
+#~ "@item:inmenu  The layout will adapt to the size, but only with complete "
+#~ "groups of bytes."
+#~ msgid "&Wrap Only Complete Byte Groups"
+#~ msgstr "&Ombryd kun komplette byte-grupper"
+
+#~ msgctxt ""
+#~ "@item:inmenu  The layout will adapt to the size and fit in as much bytes "
+#~ "per line as possible."
+#~ msgid "&On"
+#~ msgstr "&Til"
+
+#~ msgctxt "@option:check"
+#~ msgid "&Line Offset"
+#~ msgstr "&Linjeforskydning"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Show Values or Chars"
+#~ msgstr "&Vis værdier eller tegn"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Values"
+#~ msgstr "&Værdier"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Chars"
+#~ msgstr "&Tegn"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "Values && Chars"
+#~ msgstr "Værdier og tegn"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Resize Style"
+#~ msgstr "Stil af ædn&r størrelse"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&No Resize"
+#~ msgstr "&Ingen størrelsesændring"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Lock Groups"
+#~ msgstr "&Lås grupper"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Full Size Usage"
+#~ msgstr "Brug i &fuld størrelse"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Columns"
+#~ msgstr "&Kolonner"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Both Columns"
+#~ msgstr "Kolonne med &begge"

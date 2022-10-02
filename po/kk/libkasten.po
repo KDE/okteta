@@ -1,0 +1,487 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Sairan Kikkarin <sairan@computer.org>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-04-24 00:47+0000\n"
+"PO-Revision-Date: 2010-09-16 06:02+0600\n"
+"Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
+"Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
+"Language: kk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: controllers/document/modified/modifiedbarcontroller.cpp:74
+#, kde-format
+msgctxt "@tooltip the document is modified"
+msgid "Modified."
+msgstr "Өзгертілген."
+
+#: controllers/document/modified/modifiedbarcontroller.cpp:75
+#, kde-format
+msgctxt "@tooltip the document is not modified"
+msgid "Not modified."
+msgstr "Өзгертілмеген."
+
+#: controllers/document/readonly/readonlybarcontroller.cpp:23
+#, kde-format
+msgctxt "@option:check the document is read-write"
+msgid "Read-write"
+msgstr "Оқу-жазу"
+
+#: controllers/document/readonly/readonlybarcontroller.cpp:24
+#, kde-format
+msgctxt "@option:check the document is read-only"
+msgid "Read-only"
+msgstr "Тек оқу үшін"
+
+#: controllers/document/readonly/readonlycontroller.cpp:25
+#, kde-format
+msgctxt "@option:check set the document to read-only"
+msgid "Set Read-only"
+msgstr "Так оқу үшін қылу"
+
+#: controllers/document/readonly/readonlycontroller.cpp:27
+#, kde-format
+msgctxt "@option:check set the document to read-write"
+msgid "Set Read-write"
+msgstr "Оқу-жазу үшін қылу"
+
+#: controllers/document/terminal/terminaltool.cpp:32
+#: controllers/document/terminal/terminaltoolviewfactory.cpp:24
+#, kde-format
+msgctxt "@title:window"
+msgid "Terminal"
+msgstr "Терминал"
+
+#: controllers/document/versionview/versiontablemodel.cpp:108
+#, kde-format
+msgctxt "@title:column Id of the version"
+msgid "Id"
+msgstr "ID"
+
+#: controllers/document/versionview/versiontablemodel.cpp:109
+#, kde-format
+msgctxt "@title:column description of the change"
+msgid "Changes"
+msgstr "Өзгерістері"
+
+#: controllers/document/versionview/versiontablemodel.cpp:114
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Id of the version"
+msgstr "Нұсқасының ID-і"
+
+#: controllers/document/versionview/versiontablemodel.cpp:115
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Description of what changed"
+msgstr "Өзгерістің сипаттамасы"
+
+#: controllers/document/versionview/versionviewtool.cpp:26
+#: controllers/document/versionview/versionviewtoolviewfactory.cpp:24
+#, kde-format
+msgctxt "@title:window"
+msgid "Versions"
+msgstr "Нұсқалары"
+
+#: controllers/documentsystem/close/closecontroller.cpp:40
+#: controllers/shellwindow/viewareacontextmenu/viewareacontextmenucontroller.cpp:56
+#, fuzzy, kde-format
+#| msgctxt "@title:menu"
+#| msgid "Close All"
+msgctxt "@action:inmenu"
+msgid "Close All"
+msgstr "Бүкілін жабу"
+
+#: controllers/documentsystem/close/closecontroller.cpp:47
+#: controllers/shellwindow/viewareacontextmenu/viewareacontextmenucontroller.cpp:63
+#, fuzzy, kde-format
+#| msgctxt "@title:menu"
+#| msgid "Close All Other"
+msgctxt "@action:inmenu"
+msgid "Close All Other"
+msgstr "Бүкіл басқаларын жабу"
+
+#: controllers/documentsystem/creator/creatorcontroller.cpp:41
+#, kde-format
+msgctxt "@title:menu create new byte arrays from different sources"
+msgid "New"
+msgstr "Жаңа"
+
+#: controllers/documentsystem/creator/creatorcontroller.cpp:49
+#, fuzzy, kde-format
+#| msgctxt "@title:menu create a new empty document"
+#| msgid "Empty"
+msgctxt "@item:inmenu create a new empty document"
+msgid "Empty"
+msgstr "Бос"
+
+#: controllers/documentsystem/creator/creatorcontroller.cpp:60
+#, fuzzy, kde-format
+#| msgctxt "@title:menu create a new document from data in the clipboard"
+#| msgid "From Clipboard"
+msgctxt "@item:inmenu create a new document from data in the clipboard"
+msgid "From Clipboard"
+msgstr "Алмасу буферінен"
+
+#. i18nc("@title:column Id of the version",         "Id") :
+#: controllers/documentsystem/documentsbrowser/documentlistmodel.cpp:111
+#, kde-format
+msgctxt "@title:column description of the change"
+msgid "Title"
+msgstr "Атауы"
+
+#. i18nc("@info:tooltip","Id of the version") :
+#: controllers/documentsystem/documentsbrowser/documentlistmodel.cpp:117
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Title of the document"
+msgstr "Құжаттың атауы"
+
+#: controllers/documentsystem/documentsbrowser/documentstool.cpp:34
+#: controllers/documentsystem/documentsbrowser/documentstoolviewfactory.cpp:24
+#, kde-format
+msgctxt "@title:window"
+msgid "Documents"
+msgstr "Құжаттар"
+
+#: controllers/documentsystem/filesystembrowser/filesystembrowsertool.cpp:33
+#: controllers/documentsystem/filesystembrowser/filesystembrowsertoolviewfactory.cpp:24
+#, kde-format
+msgctxt "@title:window"
+msgid "Filesystem"
+msgstr "Файлдық жүйесі"
+
+#: controllers/documentsystem/filesystembrowser/filesystembrowserview.cpp:79
+#, kde-format
+msgctxt "@action:intoolbar"
+msgid "Folder of Current Document"
+msgstr "Назрдағы құжаттың қапшығы"
+
+#: controllers/io/copyas/copyascontroller.cpp:44
+#, kde-format
+msgctxt "@title:menu"
+msgid "Copy As"
+msgstr "Былай көшіріп алу"
+
+#: controllers/io/copyas/copyascontroller.cpp:91
+#, kde-format
+msgctxt "@item There are no encoders."
+msgid "Not available."
+msgstr "Жоқ."
+
+#: controllers/io/copyas/copyasdialog.cpp:39
+#, kde-format
+msgctxt "@title:window"
+msgid "Copy As"
+msgstr "Былай көшіріп алу"
+
+#: controllers/io/copyas/copyasdialog.cpp:61
+#: controllers/io/export/exportdialog.cpp:61
+#, kde-format
+msgctxt "@title:group"
+msgid "Preview"
+msgstr "Қарап-шығу"
+
+#: controllers/io/copyas/copyasdialog.cpp:72
+#, kde-format
+msgctxt "@action:button"
+msgid "&Copy to clipboard"
+msgstr "Алмасу буферіне &көшіріп алу"
+
+#: controllers/io/copyas/copyasdialog.cpp:74
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Copy the selected data to the clipboard."
+msgstr "Таңдалған деректі алмасу буферіне көшіріп алу."
+
+#: controllers/io/copyas/copyasdialog.cpp:76
+#, kde-kuit-format
+msgctxt "@info:whatsthis"
+msgid ""
+"If you press the <interface>Copy to clipboard</interface> button, the "
+"selected data will be copied to the clipboard with the settings you entered "
+"above."
+msgstr ""
+"<interface>Алмасу буферіне көшіріп алу</interface> батырмасын басқанда, "
+"таңдалған деректер жоғарда келтірілген параметрлерімен алмасу буферіне "
+"көшіріп алынады."
+
+#: controllers/io/export/exportcontroller.cpp:40
+#, kde-format
+msgctxt "@title:menu"
+msgid "Export"
+msgstr "Экспорт"
+
+#: controllers/io/export/exportcontroller.cpp:87
+#, kde-format
+msgctxt "@item There are no exporters."
+msgid "Not available."
+msgstr "Жоқ"
+
+#: controllers/io/export/exportdialog.cpp:39
+#: core/system/modelcodecmanager_p.cpp:103
+#, kde-format
+msgctxt "@title:window"
+msgid "Export"
+msgstr "Экспорттау"
+
+#: controllers/io/export/exportdialog.cpp:72
+#, kde-format
+msgctxt "@action:button"
+msgid "&Export to File..."
+msgstr "Файлға экспорттау"
+
+#: controllers/io/export/exportdialog.cpp:74
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Export the selected data to a file."
+msgstr "Таңдалған деректі файлға экспорттау."
+
+#: controllers/io/export/exportdialog.cpp:76
+#, kde-kuit-format
+msgctxt "@info:whatsthis"
+msgid ""
+"If you press the <interface>Export to file</interface> button, the selected "
+"data will be copied to a file with the settings you entered above."
+msgstr ""
+"<interface>Файлға экспорттау</interface> батырмасын басқанда, таңдалған "
+"деректер жоғарда келтірілген параметрлерімен файлға көшірліп беріледі."
+
+#: controllers/io/insert/insertcontroller.cpp:40
+#, kde-format
+msgctxt "@title:menu"
+msgid "Insert"
+msgstr "Енгізу"
+
+#: controllers/io/insert/insertcontroller.cpp:90
+#, kde-format
+msgctxt "@item There are no generators."
+msgid "Not available."
+msgstr "Жоқ"
+
+#: controllers/io/insert/insertdialog.cpp:34
+#, kde-format
+msgctxt "@title:window"
+msgid "Insert"
+msgstr "Енгізу"
+
+#: controllers/io/insert/insertdialog.cpp:44
+#, kde-format
+msgctxt "@action:button"
+msgid "&Insert"
+msgstr "&Енгізу"
+
+#: controllers/io/insert/insertdialog.cpp:46
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Insert the generated data into the document."
+msgstr "Шығарған деректі құжатқа енгізу."
+
+#: controllers/io/insert/insertdialog.cpp:48
+#, kde-kuit-format
+msgctxt "@info:whatsthis"
+msgid ""
+"If you press the <interface>Insert</interface> button, the data will be "
+"generated with the settings you entered above and inserted into the document "
+"at the cursor position."
+msgstr ""
+"<interface>Енгізу</interface> батырмасын басқанда, деректер, жоғарда "
+"келтірілген параметрлерімен құрылады да, меңзер тұрған орнынан бастап "
+"құжатқа енгізіледі."
+
+#: controllers/io/synchronize/synchronizecontroller.cpp:34
+#: controllers/shellwindow/viewareacontextmenu/viewareacontextmenucontroller.cpp:38
+#, fuzzy, kde-format
+#| msgctxt "@title:menu"
+#| msgid "Reloa&d"
+msgctxt "@action:inmenu"
+msgid "Reloa&d"
+msgstr "Қа&йта жүктеу"
+
+#: controllers/shellwindow/viewareasplit/viewareasplitcontroller.cpp:42
+#, fuzzy, kde-format
+#| msgctxt "@title:menu"
+#| msgid "Split Vertically"
+msgctxt "@action:inmenu"
+msgid "Split Vertically"
+msgstr "Тігінен бөлу"
+
+#: controllers/shellwindow/viewareasplit/viewareasplitcontroller.cpp:50
+#, fuzzy, kde-format
+#| msgctxt "@title:menu"
+#| msgid "Split Horizontal"
+msgctxt "@action:inmenu"
+msgid "Split Horizontal"
+msgstr "Жатығынан бөлу"
+
+#: controllers/shellwindow/viewareasplit/viewareasplitcontroller.cpp:58
+#, fuzzy, kde-format
+#| msgctxt "@title:menu"
+#| msgid "Close View Area"
+msgctxt "@action:inmenu"
+msgid "Close View Area"
+msgstr "Көрініс өрісін жабу"
+
+#: controllers/shellwindow/viewlistmenu/viewlistmenucontroller.cpp:77
+#, kde-format
+msgctxt "@item There are no windows."
+msgid "None."
+msgstr "Жоқ"
+
+#: controllers/view/version/versioncontroller.cpp:32
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Undo"
+msgstr "Қайту"
+
+#: controllers/view/version/versioncontroller.cpp:43
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Redo"
+msgstr "Қайтқанынан айну"
+
+#: controllers/view/version/versioncontroller.cpp:130
+#, kde-format
+msgctxt "@action Undo: [change]"
+msgid "Undo: %1"
+msgstr "Амалдан қайту: %1"
+
+#: controllers/view/version/versioncontroller.cpp:150
+#, kde-format
+msgctxt "@action Redo: [change]"
+msgid "Redo: %1"
+msgstr "Қайтқанынан айну: %1"
+
+#: controllers/view/zoom/zoomcontroller.cpp:36
+#, kde-format
+msgid "Zoom"
+msgstr "Масштабы"
+
+#: controllers/view/zoom/zoomcontroller.cpp:45
+#, kde-format
+msgctxt "zoom-factor (percentage)"
+msgid "%1%"
+msgstr "%1%"
+
+#: controllers/view/zoom/zoomcontroller.cpp:58
+#, kde-format
+msgid "&Fit to Width"
+msgstr "Еніне &шақтау"
+
+#: controllers/view/zoom/zoomcontroller.cpp:60
+#, kde-format
+msgid "&Fit to Height"
+msgstr "Биіктігіне &шақтау"
+
+#: controllers/view/zoom/zoomcontroller.cpp:62
+#, kde-format
+msgid "&Fit to Size"
+msgstr "Өлшеміне &шақтау"
+
+#: controllers/view/zoom/zoomslider.cpp:107
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Zoom: %1%"
+msgstr "Масштабы: %1%"
+
+#: core/system/documentsyncmanager_p.cpp:114
+#, kde-format
+msgctxt "@title:window"
+msgid "Save As"
+msgstr "Былай сақтау"
+
+#: core/system/documentsyncmanager_p.cpp:202
+#, kde-format
+msgctxt "@title:window"
+msgid "Close"
+msgstr "Жабу"
+
+#: core/system/documentsyncmanager_p.cpp:237
+#, kde-format
+msgctxt "@title:window"
+msgid "Reload"
+msgstr "Қайта жүктеу"
+
+#: core/system/modelcodecmanager_p.cpp:112
+#, kde-format
+msgctxt "@action:button"
+msgid "&Export"
+msgstr "&Экспорттау"
+
+#: gui/system/createdialog.cpp:35
+#, kde-format
+msgctxt "@title:window"
+msgid "Create"
+msgstr "Құру"
+
+#: gui/system/createdialog.cpp:46
+#, kde-format
+msgctxt "@action:button create the new document"
+msgid "&Create"
+msgstr "Қ&ұру"
+
+#: gui/system/createdialog.cpp:48
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Create a new document with the generated data."
+msgstr "Шығарған деректер жазылған жаңа құжатты құру."
+
+#: gui/system/createdialog.cpp:50
+#, kde-kuit-format
+msgctxt "@info:whatsthis"
+msgid ""
+"If you press the <interface>Create</interface> button, the data will be "
+"generated with the settings you entered above and inserted in a new document."
+msgstr ""
+"<interface>Құру</interface> батырмасын басқанда, жоғарда келтірілген "
+"параметрлерімен керек деректер құрылып, олар жаңа құжатқа енгізіледі."
+
+#: gui/system/dialoghandler.cpp:33
+#, kde-kuit-format
+msgctxt "@info"
+msgid "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
+msgstr ""
+"<filename>%1</filename><nl/>деп аталған файл бар екен.<nl/>Үстінен жазыла "
+"берсін бе?"
+
+#: gui/system/dialoghandler.cpp:47
+#, kde-kuit-format
+msgctxt "@info \"%title\" has been modified."
+msgid ""
+"There are unsaved modifications to <filename>%1</filename>. They will be "
+"lost if you reload the document.<nl/>Do you want to discard them?"
+msgstr ""
+"<filename>%1</filename> деген файлда сақталмаған өзгерістері бар. Құжатты "
+"қайта жүктеп алсыңыз олар жоғалады.<nl/>Жоғала берсін бе?"
+
+#: gui/system/dialoghandler.cpp:60
+#, kde-kuit-format
+msgctxt "@info \"%title\" has been modified."
+msgid ""
+"<filename>%1</filename> has been modified.<nl/>Do you want to save your "
+"changes or discard them?"
+msgstr ""
+"<filename>%1</filename> деген файл өзгертілген.<nl/>Өзгерістеріңізді сақтап "
+"аласыз ба, әлде ысырып тастайсыз ба?"
+
+#: gui/system/dialoghandler.cpp:74
+#, kde-kuit-format
+msgctxt "@info \"%title\" has been modified."
+msgid ""
+"<filename>%1</filename> has been modified.<nl/>Do you want to discard your "
+"changes?"
+msgstr ""
+"<filename>%1</filename> деген файл өзгертілген.<nl/>Өзгерістеріңізді ысырып "
+"тастайсыз ба?"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Export the data into the file with the entered name."
+#~ msgstr "деректі төменде аталған файлға `әкспорттау."

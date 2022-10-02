@@ -1,0 +1,172 @@
+# translation of okteta.po to Belarusian (Official spelling)
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Darafei Praliaskouski <komzpa@gmail.com>, 2008.
+msgid ""
+msgstr ""
+"Project-Id-Version: okteta\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-05-27 00:48+0000\n"
+"PO-Revision-Date: 2008-01-06 21:51+0200\n"
+"Last-Translator: Darafei Praliaskouski <komzpa@gmail.com>\n"
+"Language-Team: Belarusian (Official spelling) <i18n@mova.org>\n"
+"Language: be\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || n%10>=5 && n%10<=9 || n"
+"%100>=11 && n%100<=14 ? 2 : 3);\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Дарафей Праляскоўскі"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "komzpa@licei2.com"
+
+#: about.cpp:16
+#, kde-format
+msgid "Okteta"
+msgstr "Okteta"
+
+#: about.cpp:18
+#, kde-format
+msgid "Hex editor"
+msgstr ""
+
+#: about.cpp:20
+#, kde-format
+msgid "2006-%1 Friedrich W. H. Kossebau"
+msgstr ""
+
+#: about.cpp:21
+#, kde-format
+msgid "Edit the raw data of files"
+msgstr ""
+
+#: about.cpp:26
+#, kde-format
+msgid "Friedrich W. H. Kossebau"
+msgstr ""
+
+#: about.cpp:27
+#, kde-format
+msgid "Author"
+msgstr "Аўтар"
+
+#: about.cpp:29
+#, kde-format
+msgctxt "Author"
+msgid "Alexander Richardson"
+msgstr ""
+
+#: about.cpp:30
+#, kde-format
+msgctxt "Task description"
+msgid "Structures tool"
+msgstr ""
+
+#. i18n: ectx: Menu (permission)
+#: oktetaui.rc:15
+#, fuzzy, kde-format
+#| msgid "Permissions"
+msgctxt "@title:menu"
+msgid "Permissions"
+msgstr "Правы доступу"
+
+#. i18n: ectx: Menu (windows)
+#: oktetaui.rc:69
+#, kde-format
+msgid "&Windows"
+msgstr ""
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: oktetaui.rc:82
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Галоўная панель начыння"
+
+#: program.cpp:89
+#, kde-format
+msgid "File(s) to load."
+msgstr ""
+
+#~ msgctxt "@title:menu"
+#~ msgid "Insert"
+#~ msgstr "Уставіць"
+
+#, fuzzy
+#~| msgctxt "@title:menu"
+#~| msgid "Insert"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Insert mode"
+#~ msgstr "Уставіць"
+
+#, fuzzy
+#~| msgctxt "@title:menu"
+#~| msgid "Insert"
+#~ msgctxt "@option:check set the view into overwrite mode"
+#~ msgid "Set Overwrite Mode"
+#~ msgstr "Уставіць"
+
+#, fuzzy
+#~| msgctxt "@title:menu"
+#~| msgid "Insert"
+#~ msgctxt "@option:check set the view into insert mode"
+#~ msgid "Set Insert Mode"
+#~ msgstr "Уставіць"
+
+#, fuzzy
+#~| msgctxt "@title:menu"
+#~| msgid "Insert"
+#~ msgctxt "@action:button"
+#~ msgid "&Insert"
+#~ msgstr "Уставіць"
+
+#, fuzzy
+#~| msgctxt "@title:menu"
+#~| msgid "Insert"
+#~ msgctxt "@title:group"
+#~ msgid "Insert"
+#~ msgstr "Уставіць"
+
+#, fuzzy
+#~| msgctxt "@title:menu"
+#~| msgid "Panels"
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Chars"
+#~ msgstr "Панелі"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Import"
+#~ msgstr "Імпарт"
+
+#, fuzzy
+#~| msgctxt "@title:menu"
+#~| msgid "Export"
+#~ msgctxt "@title:window"
+#~ msgid "Export"
+#~ msgstr "Экспарт"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Export"
+#~ msgstr "Экспарт"
+
+#, fuzzy
+#~| msgid "Permissions"
+#~ msgctxt "@title:window"
+#~ msgid "Versions"
+#~ msgstr "Правы доступу"
+
+#, fuzzy
+#~| msgctxt "@title:menu"
+#~| msgid "Panels"
+#~ msgctxt "@title:column description of the change"
+#~ msgid "Changes"
+#~ msgstr "Панелі"

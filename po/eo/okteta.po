@@ -1,0 +1,94 @@
+# Translation of okteta into esperanto.
+# Axel Rousseau <axel@esperanto-jeunes.org>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: okteta\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-05-27 00:48+0000\n"
+"PO-Revision-Date: 2009-11-15 12:06+0100\n"
+"Last-Translator: Axel Rousseau <axel@esperanto-jeunes.org>\n"
+"Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
+"Language: eo\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: pology\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Axel Rousseau"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "axel@esperanto-jeunes.org"
+
+#: about.cpp:16
+#, kde-format
+msgid "Okteta"
+msgstr "Okteta"
+
+#: about.cpp:18
+#, kde-format
+msgid "Hex editor"
+msgstr ""
+
+#: about.cpp:20
+#, fuzzy, kde-format
+#| msgid "Friedrich W. H. Kossebau"
+msgid "2006-%1 Friedrich W. H. Kossebau"
+msgstr "Friedrich W. H. Kossebau"
+
+#: about.cpp:21
+#, kde-format
+msgid "Edit the raw data of files"
+msgstr ""
+
+#: about.cpp:26
+#, kde-format
+msgid "Friedrich W. H. Kossebau"
+msgstr "Friedrich W. H. Kossebau"
+
+#: about.cpp:27
+#, kde-format
+msgid "Author"
+msgstr "Aŭtoro"
+
+#: about.cpp:29
+#, kde-format
+msgctxt "Author"
+msgid "Alexander Richardson"
+msgstr "Alexander Richardson"
+
+#: about.cpp:30
+#, kde-format
+msgctxt "Task description"
+msgid "Structures tool"
+msgstr ""
+
+#. i18n: ectx: Menu (permission)
+#: oktetaui.rc:15
+#, kde-format
+msgctxt "@title:menu"
+msgid "Permissions"
+msgstr ""
+
+#. i18n: ectx: Menu (windows)
+#: oktetaui.rc:69
+#, kde-format
+msgid "&Windows"
+msgstr ""
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: oktetaui.rc:82
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Ĉefa ilobreto"
+
+#: program.cpp:89
+#, kde-format
+msgid "File(s) to load."
+msgstr ""

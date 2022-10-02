@@ -1,0 +1,102 @@
+# Translation of okteta.po to Brazilian Portuguese
+# Copyright (C) 2007-2020 This file is copyright:
+# This file is distributed under the same license as the okteta package.
+#
+# Diniz Bortolotto <diniz.bortolotto@gmail.com>, 2007, 2008.
+# André Marcelo Alvarenga <alvarenga@kde.org>, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2020.
+# Andre Paulo Machado <andre.panm@gmail.com>, 2008.
+# Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2009, 2010, 2018, 2019, 2020, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: okteta\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-05-27 00:48+0000\n"
+"PO-Revision-Date: 2021-02-01 16:23-0300\n"
+"Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
+"Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 20.04.3\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr ""
+"Diniz Bortolotto, Andre Paulo Machado, André Marcelo Alvarenga, Luiz "
+"Fernando Ranghetti"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr ""
+"diniz.bortolotto@gmail.com, andre.panm@gmail.com, alvarenga@kde.org, "
+"elchevive@opensuse.org"
+
+#: about.cpp:16
+#, kde-format
+msgid "Okteta"
+msgstr "Okteta"
+
+#: about.cpp:18
+#, kde-format
+msgid "Hex editor"
+msgstr "Editor hexadecimal"
+
+#: about.cpp:20
+#, kde-format
+msgid "2006-%1 Friedrich W. H. Kossebau"
+msgstr "2006-%1 Friedrich W. H. Kossebau"
+
+#: about.cpp:21
+#, kde-format
+msgid "Edit the raw data of files"
+msgstr "Editar os dados brutos dos arquivos"
+
+#: about.cpp:26
+#, kde-format
+msgid "Friedrich W. H. Kossebau"
+msgstr "Friedrich W. H. Kossebau"
+
+#: about.cpp:27
+#, kde-format
+msgid "Author"
+msgstr "Autor"
+
+#: about.cpp:29
+#, kde-format
+msgctxt "Author"
+msgid "Alexander Richardson"
+msgstr "Alexander Richardson"
+
+#: about.cpp:30
+#, kde-format
+msgctxt "Task description"
+msgid "Structures tool"
+msgstr "Ferramenta de estruturas"
+
+#. i18n: ectx: Menu (permission)
+#: oktetaui.rc:15
+#, kde-format
+msgctxt "@title:menu"
+msgid "Permissions"
+msgstr "Permissões"
+
+#. i18n: ectx: Menu (windows)
+#: oktetaui.rc:69
+#, kde-format
+msgid "&Windows"
+msgstr "&Janelas"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: oktetaui.rc:82
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Barra de ferramentas principal"
+
+#: program.cpp:89
+#, kde-format
+msgid "File(s) to load."
+msgstr "Arquivo(s) a carregar."

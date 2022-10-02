@@ -1,0 +1,1727 @@
+# translation of okteta.po to Greek
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Spiros Georgaras <sng@hellug.gr>, 2007, 2008.
+# Toussis Manolis <manolis@koppermind.homelinux.org>, 2007, 2008.
+# Stelios <sstavra@gmail.com>, 2012, 2019, 2020, 2021.
+# Petros Vidalis <pvidalis@gmail.com>, 2016, 2017.
+msgid ""
+msgstr ""
+"Project-Id-Version: okteta\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-05-27 00:48+0000\n"
+"PO-Revision-Date: 2021-06-30 10:00+0300\n"
+"Last-Translator: Stelios <sstavra@gmail.com>\n"
+"Language-Team: Greek <kde-i18n-el@kde.org>\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 20.04.2\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Σπύρος Γεωργαράς, Τούσης Μανώλης, Πέτρος Βιδάλης"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "sng@hellug.gr, manolis@koppermind.homelinux.org, pvidalis@gmail.com"
+
+#: about.cpp:16
+#, kde-format
+msgid "Okteta"
+msgstr "Okteta"
+
+#: about.cpp:18
+#, kde-format
+msgid "Hex editor"
+msgstr "Επεξεργαστής δεκαεξαδικών"
+
+#: about.cpp:20
+#, kde-format
+msgid "2006-%1 Friedrich W. H. Kossebau"
+msgstr "2006-%1 Friedrich W. H. Kossebau"
+
+#: about.cpp:21
+#, kde-format
+msgid "Edit the raw data of files"
+msgstr "Εξαγωγή των ακατέργαστων δεδομένων αρχείων."
+
+#: about.cpp:26
+#, kde-format
+msgid "Friedrich W. H. Kossebau"
+msgstr "Friedrich W. H. Kossebau"
+
+#: about.cpp:27
+#, kde-format
+msgid "Author"
+msgstr "Συγγραφέας"
+
+#: about.cpp:29
+#, kde-format
+msgctxt "Author"
+msgid "Alexander Richardson"
+msgstr "Alexander Richardson"
+
+#: about.cpp:30
+#, kde-format
+msgctxt "Task description"
+msgid "Structures tool"
+msgstr "Δομικό εργαλείο"
+
+#. i18n: ectx: Menu (permission)
+#: oktetaui.rc:15
+#, kde-format
+msgctxt "@title:menu"
+msgid "Permissions"
+msgstr "Δικαιώματα"
+
+#. i18n: ectx: Menu (windows)
+#: oktetaui.rc:69
+#, kde-format
+msgid "&Windows"
+msgstr "&Παράθυρα"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: oktetaui.rc:82
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Κύρια γραμμή εργαλείων"
+
+#: program.cpp:89
+#, kde-format
+msgid "File(s) to load."
+msgstr "Αρχείο(α) για φόρτωση."
+
+#, fuzzy
+#~| msgctxt "@title:menu"
+#~| msgid "&View Mode"
+#~ msgctxt "@title:menu submenu to select the view profile or change it"
+#~ msgid "View Profile"
+#~ msgstr "Λειτουργία &προβολής"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Insert"
+#~ msgstr "Εισαγωγή"
+
+#~ msgctxt "name of the encoding target"
+#~ msgid "Values..."
+#~ msgstr "Τιμές..."
+
+#~ msgid "Value coding:"
+#~ msgstr "Κωδικοποίηση τιμής:"
+
+#~ msgctxt ""
+#~ "@item:inmenu encoding of the bytes as values in the hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "Δεκαεξαδικό"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
+#~ msgid "Decimal"
+#~ msgstr "Δεκαδικό"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
+#~ msgid "Octal"
+#~ msgstr "Οκταδικό"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
+#~ msgid "Binary"
+#~ msgstr "Δυαδικό"
+
+#~ msgctxt "@label:textbox substring which separates the values"
+#~ msgid "Separation:"
+#~ msgstr "Διαχωρισμός:"
+
+#~ msgctxt "@item name of the encoding result"
+#~ msgid "Values"
+#~ msgstr "Τιμές"
+
+#~ msgctxt "@label:textbox name of the created variable"
+#~ msgid "Name of variable:"
+#~ msgstr "Όνομα μεταβλητής:"
+
+#~ msgctxt "@label:textbox to define after how many items the list is wrapped"
+#~ msgid "Items per line:"
+#~ msgstr "Αντικείμενα ανά γραμμή:"
+
+#~ msgctxt "@label:listbox the type of the data: char, integer, etc."
+#~ msgid "Data type:"
+#~ msgstr "Τύπος δεδομένων:"
+
+#~ msgctxt ""
+#~ "@option:check Encode the values in hexadecimal instead of decimal, if the "
+#~ "datatype has the property Unsigned"
+#~ msgid "Unsigned as hexadecimal:"
+#~ msgstr "Χωρίς πρόσημο ως δεκαεξαδικός:"
+
+#~ msgctxt "@item name of the encoding result"
+#~ msgid "C Array"
+#~ msgstr "Μητρώο C"
+
+#, fuzzy
+#~| msgctxt "name of the encoding target"
+#~| msgid "C array..."
+#~ msgctxt "name of the encoding target"
+#~ msgid "C Array..."
+#~ msgstr "Μητρώο C..."
+
+#~ msgctxt "destination of the byte array"
+#~ msgid "Loaded from file."
+#~ msgstr "Φορτώθηκε από αρχείο."
+
+#~ msgctxt "name of the encoding target"
+#~ msgid "Plain Text"
+#~ msgstr "Απλό κείμενο"
+
+#~ msgctxt "name of the encoding target"
+#~ msgid "View in Plain Text"
+#~ msgstr "Προβολή απλού κειμένου"
+
+#, fuzzy
+#~| msgctxt "@title:window"
+#~| msgid "Statistic"
+#~ msgctxt "@title:window"
+#~ msgid "Statistics"
+#~ msgstr "Στατιστικά"
+
+#~ msgctxt "@action:button update the statistic of the byte frequency"
+#~ msgid "&Update"
+#~ msgstr "Ε&νημέρωση"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip"
+#~| msgid "Updates the statistic of the byte frequency."
+#~ msgctxt "@info:tooltip"
+#~ msgid "Updates the byte frequency statistics."
+#~ msgstr "Ενημέρωση των στατιστικών συχνότητας byte."
+
+#, fuzzy
+#~| msgctxt "@info:whatsthis"
+#~| msgid ""
+#~| "If you press the <interface>Update</interface> button, the statistic of "
+#~| "the byte frequency is updated."
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Update</interface> button, the byte frequency "
+#~ "statistics are updated."
+#~ msgstr ""
+#~ "Αν πιέσετε το κουμπί <interface>Ενημέρωση</interface>, θα γίνει ενημέρωση "
+#~ "των στατιστικών συχνότητας byte."
+
+#, fuzzy
+#~| msgid "Size:"
+#~ msgctxt "@label size of selected bytes"
+#~ msgid "Size:"
+#~ msgstr "Μέγεθος:"
+
+#~ msgctxt "@item:intable character is not defined"
+#~ msgid "undef."
+#~ msgstr "μη ορισμένο"
+
+#~ msgctxt "@title:column short for Hexadecimal"
+#~ msgid "Hex"
+#~ msgstr "Hex"
+
+#~ msgctxt "@title:column short for Decimal"
+#~ msgid "Dec"
+#~ msgstr "Dec"
+
+#~ msgctxt "@title:column short for Octal"
+#~ msgid "Oct"
+#~ msgstr "Oct"
+
+#~ msgctxt "@title:column short for Binary"
+#~ msgid "Bin"
+#~ msgstr "Bin"
+
+#~ msgctxt "@title:column short for Character"
+#~ msgid "Char"
+#~ msgstr "Char"
+
+#~ msgctxt "@title:column count of characters"
+#~ msgid "Count"
+#~ msgstr "Πλήθος"
+
+#~ msgctxt "@title:column Percent of byte in total"
+#~ msgid "Percent"
+#~ msgstr "Ποσοστό"
+
+#~ msgctxt "@info:tooltip column contains the value in hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "Δεκαεξαδικό"
+
+#~ msgctxt "@info:tooltip column contains the value in decimal format"
+#~ msgid "Decimal"
+#~ msgstr "Δεκαδικό"
+
+#~ msgctxt "@info:tooltip column contains the value in octal format"
+#~ msgid "Octal"
+#~ msgstr "Οκταδικό"
+
+#~ msgctxt "@info:tooltip column contains the value in binary format"
+#~ msgid "Binary"
+#~ msgstr "Δυαδικό"
+
+#~ msgctxt "@info:tooltip column contains the character with the value"
+#~ msgid "Character"
+#~ msgstr "Χαρακτήρας"
+
+#~ msgctxt "@info:status short for: Insert mode"
+#~ msgid "INS"
+#~ msgstr "ΕΙΣ"
+
+#~ msgctxt "@info:status short for: Overwrite mode"
+#~ msgid "OVR"
+#~ msgstr "ΕΠΚ"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Insert mode"
+#~ msgstr "Λειτουργία εισαγωγής"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Overwrite mode"
+#~ msgstr "Λειτουργία αντικατάστασης"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip"
+#~| msgid "Coding in the value column of the current view."
+#~ msgctxt "@info:tooltip"
+#~ msgid "Coding of the value interpretation in the current view."
+#~ msgstr "Κωδικοποίηση της στήλης τιμής της τρέχουσας προβολής."
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Encoding in the character column of the current view."
+#~ msgstr "Κωδικοποίηση της στήλης χαρακτήρας της τρέχουσας προβολής."
+
+#~ msgid "Offset: %1"
+#~ msgstr "Μετατόπιση: %1"
+
+#~ msgctxt "@info:status offset value not available"
+#~ msgid "Offset: -"
+#~ msgstr "Μετατόπιση: -"
+
+#, fuzzy
+#~| msgctxt "@label:textbox substring which separates the values"
+#~| msgid "Separation:"
+#~ msgctxt "@info:status offset value not available"
+#~ msgid "Selection: -"
+#~ msgstr "Διαχωρισμός:"
+
+#~ msgctxt "@title:window prompt for iterative replacement"
+#~ msgid "Replace"
+#~ msgstr "Αντικατάσταση"
+
+#~ msgctxt "@action:button"
+#~ msgid "Replace &All"
+#~ msgstr "Αντικατάσταση ό&λων"
+
+#~ msgctxt "@action:button"
+#~ msgid "&Skip"
+#~ msgstr "&Παράλειψη"
+
+#~ msgctxt "@action:button"
+#~ msgid "Replace"
+#~ msgstr "Αντικατάσταση"
+
+#~ msgctxt "@title:window"
+#~ msgid "Replace Bytes"
+#~ msgstr "Αντικατάσταση Byte"
+
+#~ msgctxt "@action;button"
+#~ msgid "&Replace"
+#~ msgstr "&Αντικατάσταση"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Start replace"
+#~ msgstr "Έναρξη αντικατάστασης"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Replace</interface> button, the bytes you "
+#~ "entered above are searched for within the byte array and any occurrence "
+#~ "is replaced with the replacement bytes."
+#~ msgstr ""
+#~ "Αν πιέσετε το κουμπί <interface>Αντικατάσταση</interface>, τα παραπάνω "
+#~ "byte που έχετε εισάγει θα αναζητηθούν στο μητρώο byte και κάθε εμφάνισή "
+#~ "τους θα αντικατασταθεί με τα byte αντικατάστασης."
+
+#, fuzzy
+#~| msgctxt "@title:group"
+#~| msgid "Replace by"
+#~ msgctxt "@title:group"
+#~ msgid "Replace By"
+#~ msgstr "Αντικατάσταση με"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Replacing bytes:"
+#~ msgstr "Byte αντικατάστασης:"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "Enter a pattern to replace with, or select a previous pattern from the "
+#~ "list."
+#~ msgstr ""
+#~ "Εισάγετε ένα μοτίβο αντικατάστασης, ή επιλέξτε ένα προηγούμενο μοτίβο από "
+#~ "τη λίστα."
+
+#~ msgctxt "@option:check"
+#~ msgid "&Prompt on replace"
+#~ msgstr "&Προτροπή αντικατάστασης"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Ask before replacing each match found."
+#~ msgstr "Ερώτηση πριν την αντικατάσταση κάθε εμφάνισης."
+
+#~ msgctxt "@title:window"
+#~ msgid "Replace"
+#~ msgstr "Αντικατάσταση"
+
+#, fuzzy
+#~| msgctxt "@info"
+#~| msgid "No replacements done."
+#~ msgctxt "@info"
+#~ msgid "No replacements made."
+#~ msgstr "Δεν έγιναν αντικαταστάσεις."
+
+#, fuzzy
+#~| msgctxt "@info"
+#~| msgid "1 replacement done."
+#~| msgid_plural "%1 replacements done."
+#~ msgctxt "@info"
+#~ msgid "1 replacement made."
+#~ msgid_plural "%1 replacements made."
+#~ msgstr[0] "Έγινε 1 αντικατάσταση."
+#~ msgstr[1] "Έγιναν %1 αντικαταστάσεις."
+
+#~ msgctxt "@info"
+#~ msgid "Replace pattern not found in byte array."
+#~ msgstr "Το μοτίβο αντικατάστασης δε βρέθηκε στο μητρώο byte."
+
+#~ msgctxt "@info"
+#~ msgid "End of byte array reached.<nl/>Continue from the beginning?"
+#~ msgstr "Τέλος του μητρώου των byte.<nl/>Συνέχεια από την αρχή;"
+
+#~ msgctxt "@info"
+#~ msgid "Beginning of byte array reached.<nl/>Continue from the end?"
+#~ msgstr "Αρχή του μητρώου των byte.<nl/>Συνέχεια από το τέλος;"
+
+#, fuzzy
+#~| msgctxt "@title:window prompt for iterative replacement"
+#~| msgid "Replace"
+#~ msgctxt "@title"
+#~ msgid "Replace"
+#~ msgstr "Αντικατάσταση"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip"
+#~| msgid "Overwrite mode"
+#~ msgctxt "@option:check set the view into overwrite mode"
+#~ msgid "Set Overwrite Mode"
+#~ msgstr "Λειτουργία αντικατάστασης"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip"
+#~| msgid "Insert mode"
+#~ msgctxt "@option:check set the view into insert mode"
+#~ msgid "Set Insert Mode"
+#~ msgstr "Λειτουργία εισαγωγής"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "Choose whether you want the input to be inserted or to overwrite existing "
+#~ "data."
+#~ msgstr ""
+#~ "Επιλέξτε αν η είσοδος θα εκτελεί εισαγωγή ή αντικατάσταση των υπάρχοντων "
+#~ "δεδομένων."
+
+#~ msgctxt "@title:window"
+#~ msgid "Print Byte Array %1"
+#~ msgstr "Εκτύπωση μητρώου byte %1"
+
+#~ msgctxt "in the header of the printed page, e.g. Page 2 of 20"
+#~ msgid "Page %p of %P"
+#~ msgstr "Σελίδα %p από %P"
+
+#~ msgctxt "in the footer of the printed page, e.g. Printed by: Joe User"
+#~ msgid "Printed by: %U"
+#~ msgstr "Εκτύπωση από: %U"
+
+#~ msgctxt "advertizer in the footer of the printed page"
+#~ msgid "Okteta, built on KDE4"
+#~ msgstr "Okteta, κατασκευή για το KDE4"
+
+#~ msgctxt "@info"
+#~ msgid "Could not print."
+#~ msgstr "Αδυναμία εκτύπωσης."
+
+#, fuzzy
+#~| msgctxt "@item:inlistbox"
+#~| msgid "Little endian"
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Little-endian"
+#~ msgstr "Little endian"
+
+#, fuzzy
+#~| msgctxt "@item:inlistbox"
+#~| msgid "Big endian"
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Big-endian"
+#~ msgstr "Big endian"
+
+#~ msgctxt "@title:window"
+#~ msgid "Insert Pattern"
+#~ msgstr "Εισαγωγή μοτίβου"
+
+#~ msgctxt "@action:button"
+#~ msgid "&Insert"
+#~ msgstr "&Εισαγωγή"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Insert the pattern"
+#~ msgstr "Εισαγωγή του μοτίβου"
+
+#, fuzzy
+#~| msgctxt "@info:whatsthis"
+#~| msgid ""
+#~| "If you press the <interface>Insert</interface> button, the pattern you "
+#~| "entered above are inserted in the byte array at the cursor position."
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Insert</interface> button, the pattern you "
+#~ "entered above is inserted in the byte array at the cursor position."
+#~ msgstr ""
+#~ "Αν πιέσετε το κουμπί <interface>Εισαγωγή</interface>, το μοτίβο που έχετε "
+#~ "εισάγει παραπάνω θα εισαχθεί στο μητρώο byte στη θέση του δρομέα."
+
+#~ msgctxt "@title:group"
+#~ msgid "Insert"
+#~ msgstr "Εισαγωγή"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Pattern:"
+#~ msgstr "Μοτίβο:"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "Enter a pattern to search for, or select a previous pattern from the list."
+#~ msgstr ""
+#~ "Εισάγετε ένα μοτίβο αναζήτησης, ή επιλέξτε ένα προηγούμενο μοτίβο από τη "
+#~ "λίστα."
+
+#~ msgctxt "@label:spinbox number of times to insert the pattern"
+#~ msgid "&Number:"
+#~ msgstr "&Αριθμός:"
+
+#, fuzzy
+#~| msgctxt "@info:whatsthis"
+#~| msgid "Enter the number for how often the pattern should be inserted."
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Enter the number of times the pattern should be inserted."
+#~ msgstr "Εισάγετε τον αριθμό εισαγωγής του μοτίβου."
+
+#, fuzzy
+#~| msgctxt "@action:inmenu"
+#~| msgid "&Insert pattern..."
+#~ msgctxt "@action:inmenu"
+#~ msgid "&Insert Pattern..."
+#~ msgstr "&Εισαγωγή μοτίβου..."
+
+#~ msgid "Pattern inserted."
+#~ msgstr "Έγινε εισαγωγή μοτίβου."
+
+#, fuzzy
+#~| msgctxt "@info:whatsthis"
+#~| msgid "Select the operation to use for the filter."
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Select the algorithm to use for the checksum."
+#~ msgstr "Επιλέξτε τη λειτουργία που θα χρησιμοποιηθεί με το φίλτρο."
+
+#~ msgctxt "@title:group"
+#~ msgid "Parameters"
+#~ msgstr "Παράμετροι"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip"
+#~| msgid "Update the list of strings contained in the selected range."
+#~ msgctxt "@info:tooltip"
+#~ msgid "Calculate the checksum for the bytes in the selected range."
+#~ msgstr ""
+#~ "Ενημέρωση της λίστας συμβολοσειρών που περιέχονται στο επιλεγμένο εύρος."
+
+#, fuzzy
+#~| msgctxt "@info:whatsthis"
+#~| msgid ""
+#~| "If you press the <interface>Update</interface> button, the list will be "
+#~| "updated to all strings which are contained in the selected range and "
+#~| "have the set minimum length."
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Calculate</interface> button, the list will "
+#~ "be updated to all strings which are contained in the selected range and "
+#~ "have the set minimum length."
+#~ msgstr ""
+#~ "Αν πιέσετε το κουμπί <interface>Ενημέρωση</interface>, θα γίνει ενημέρωση "
+#~ "της λίστας με όλες τις συμβολοσειρές που περιέχονται στο επιλεγμένο εύρος "
+#~ "και έχουν το καθορισμένο ελάχιστο μήκος."
+
+#, fuzzy
+#~| msgctxt "@label:textbox substring which separates the values"
+#~| msgid "Separation:"
+#~ msgctxt "@title:window of the tool to select a range"
+#~ msgid "Select"
+#~ msgstr "Διαχωρισμός:"
+
+#~ msgctxt "@item:inlistbox coding of offset in the hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "Δεκαεξαδικό"
+
+#~ msgctxt "@item:inlistbox coding of offset in the decimal format"
+#~ msgid "Decimal"
+#~ msgstr "Δεκαδικό"
+
+#, fuzzy
+#~| msgctxt "@label:listbox"
+#~| msgid "Fo&rmat:"
+#~ msgctxt "@label:listbox"
+#~ msgid "Format:"
+#~ msgstr "Μορ&φή:"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Enter an offset to go to, or select a previous offset from the list."
+#~ msgstr ""
+#~ "Εισάγετε την μετατόπιση για μετάβαση σε αυτήν, ή επιλέξτε μία προηγούμενη "
+#~ "από τη λίστα."
+
+#, fuzzy
+#~| msgctxt "@label:listbox"
+#~| msgid "O&ffset:"
+#~ msgctxt "@label:listbox"
+#~ msgid "End offset:"
+#~ msgstr "Με&τατόπιση:"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Extend the selection by the cursor move."
+#~ msgstr "Επέκταση της επιλογής με κίνηση του δρομέα."
+
+#~ msgctxt "@option:check"
+#~ msgid "&Backwards"
+#~ msgstr "&Πίσω"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Go backwards from the end or the current cursor location."
+#~ msgstr ""
+#~ "Μετάβαση προς τα πίσω από το τέλος του εγγράφου ή την τρέχουσα τοποθεσία "
+#~ "του δρομέα."
+
+#, fuzzy
+#~| msgctxt "@option:check"
+#~| msgid "&Selected bytes"
+#~ msgctxt "@action:button"
+#~ msgid "&Select"
+#~ msgstr "&Επιλεγμένα byte"
+
+#, fuzzy
+#~| msgctxt "@info:whatsthis"
+#~| msgid ""
+#~| "If you press the <interface>Go</interface> button, the cursor will be "
+#~| "moved in the document to or, on your option, by the offset you entered "
+#~| "above."
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Select</interface> button, the cursor will be "
+#~ "moved in the document to or, on your option, by the offset you entered "
+#~ "above."
+#~ msgstr ""
+#~ "Αν πιέσετε το κουμπί <interface>Μετάβαση</interface>, ο δρομέας θα "
+#~ "μετακινηθεί στο έγγραφο στο ή, κατ' επιλογή σας, κατά την μετατόπιση που "
+#~ "έχετε εισαγάγει."
+
+#~ msgctxt "@title:window"
+#~ msgid "Decoding Table"
+#~ msgstr "Πίνακας αποκωδικοποίησης"
+
+#, fuzzy
+#~| msgctxt "@label:textbox encoding of one byte as value in the binary format"
+#~| msgid "Binary 8 bit:"
+#~ msgctxt "@label:textbox encoding of one byte as value in the binary format"
+#~ msgid "Binary 8-bit:"
+#~ msgstr "Δυαδικό 8 bit:"
+
+#, fuzzy
+#~| msgctxt "@label:textbox encoding of one byte as value in the octal format"
+#~| msgid "Octal 8 bit:"
+#~ msgctxt "@label:textbox encoding of one byte as value in the octal format"
+#~ msgid "Octal 8-bit:"
+#~ msgstr "Οκταδικό 8 bit:"
+
+#, fuzzy
+#~| msgctxt ""
+#~| "@label:textbox encoding of one byte as value in the hexadecimal format"
+#~| msgid "Hexadecimal 8 bit:"
+#~ msgctxt ""
+#~ "@label:textbox encoding of one byte as value in the hexadecimal format"
+#~ msgid "Hexadecimal 8-bit:"
+#~ msgstr "Δεκαεξαδικό 8 bit:"
+
+#, fuzzy
+#~| msgctxt "@label:textbox"
+#~| msgid "Signed 8 bit:"
+#~ msgctxt "@label:textbox"
+#~ msgid "Signed 8-bit:"
+#~ msgstr "Προσημασμένος 8 bit:"
+
+#, fuzzy
+#~| msgctxt "@label:textbox"
+#~| msgid "Unsigned 8 bit:"
+#~ msgctxt "@label:textbox"
+#~ msgid "Unsigned 8-bit:"
+#~ msgstr "Χωρίς πρόσημο 8 bit:"
+
+#, fuzzy
+#~| msgctxt "@label:textbox"
+#~| msgid "Signed 16 bit:"
+#~ msgctxt "@label:textbox"
+#~ msgid "Signed 16-bit:"
+#~ msgstr "Προσημασμένος 16 bit:"
+
+#, fuzzy
+#~| msgctxt "@label:textbox"
+#~| msgid "Unsigned 16 bit:"
+#~ msgctxt "@label:textbox"
+#~ msgid "Unsigned 16-bit:"
+#~ msgstr "Χωρίς πρόσημο 16 bit:"
+
+#, fuzzy
+#~| msgctxt "@label:textbox"
+#~| msgid "Signed 32 bit:"
+#~ msgctxt "@label:textbox"
+#~ msgid "Signed 32-bit:"
+#~ msgstr "Προσημασμένος 32 bit:"
+
+#, fuzzy
+#~| msgctxt "@label:textbox"
+#~| msgid "Unsigned 32 bit:"
+#~ msgctxt "@label:textbox"
+#~ msgid "Unsigned 32-bit:"
+#~ msgstr "Χωρίς πρόσημο 32 bit:"
+
+#, fuzzy
+#~| msgctxt "@label:textbox"
+#~| msgid "Signed 64 bit:"
+#~ msgctxt "@label:textbox"
+#~ msgid "Signed 64-bit:"
+#~ msgstr "Προσημασμένο 64 bit:"
+
+#, fuzzy
+#~| msgctxt "@label:textbox"
+#~| msgid "Unsigned 64 bit:"
+#~ msgctxt "@label:textbox"
+#~ msgid "Unsigned 64-bit:"
+#~ msgstr "Χωρίς πρόσημο 64 bit:"
+
+#, fuzzy
+#~| msgctxt "@label:textbox"
+#~| msgid "Float 32 bit:"
+#~ msgctxt "@label:textbox"
+#~ msgid "Float 32-bit:"
+#~ msgstr "Δεκαδικός 32 bit:"
+
+#, fuzzy
+#~| msgctxt "@label:textbox"
+#~| msgid "Float 64 bit:"
+#~ msgctxt "@label:textbox"
+#~ msgid "Float 64-bit:"
+#~ msgstr "Δεκαδικός 64 bit:"
+
+#, fuzzy
+#~| msgctxt "@label:textbox encoding of one byte as character"
+#~| msgid "Character 8 bit:"
+#~ msgctxt "@label:textbox encoding of one byte as character"
+#~ msgid "Character 8-bit:"
+#~ msgstr "Χαρακτήρας 8 bit:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "UTF-8:"
+#~ msgstr "UTF-8:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "UTF-16:"
+#~ msgstr "UTF-16: "
+
+#~ msgctxt "@title:column name of the datatype"
+#~ msgid "Type"
+#~ msgstr "Τύπος"
+
+#~ msgctxt "@title:column value of the bytes for the datatype"
+#~ msgid "Value"
+#~ msgstr "Τιμή"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip for column Type"
+#~| msgid "type of the data "
+#~ msgctxt "@info:tooltip for column Type"
+#~ msgid "The type of data"
+#~ msgstr "τύπος δεδομένων"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip for column Value"
+#~| msgid "value of the bytes for the datatype"
+#~ msgctxt "@info:tooltip for column Value"
+#~ msgid "The value of the bytes for the datatype"
+#~ msgstr "τιμή των byte αυτού του τύπο δεδομένων"
+
+#~ msgctxt "@option:check"
+#~ msgid "Unsigned as hexadecimal"
+#~ msgstr "Χωρίς πρόσημο ως δεκαεξαδικός"
+
+#~ msgctxt "@title:column offset of the extracted string"
+#~ msgid "Offset"
+#~ msgstr "Μετατόπιση"
+
+#~ msgctxt "@title:column string extracted from the byte array"
+#~ msgid "String"
+#~ msgstr "Συμβολοσειρά"
+
+#~ msgctxt "@title:window of the tool to extract strings"
+#~ msgid "Strings"
+#~ msgstr "Συμβολοσειρές"
+
+#~ msgctxt ""
+#~ "@label:spinbox minimum length for consecutive chars to be seen as a string"
+#~ msgid "Minimum length:"
+#~ msgstr "Ελάχιστο μήκος:"
+
+#~ msgctxt "@action:button update the list of strings extracted"
+#~ msgid "&Update"
+#~ msgstr "Ε&νημέρωση"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Update the list of strings contained in the selected range."
+#~ msgstr ""
+#~ "Ενημέρωση της λίστας συμβολοσειρών που περιέχονται στο επιλεγμένο εύρος."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Update</interface> button, the list will be "
+#~ "updated to all strings which are contained in the selected range and have "
+#~ "the set minimum length."
+#~ msgstr ""
+#~ "Αν πιέσετε το κουμπί <interface>Ενημέρωση</interface>, θα γίνει ενημέρωση "
+#~ "της λίστας με όλες τις συμβολοσειρές που περιέχονται στο επιλεγμένο εύρος "
+#~ "και έχουν το καθορισμένο ελάχιστο μήκος."
+
+#~ msgctxt "@label:lineedit filter term for displayed strings"
+#~ msgid "Filter:"
+#~ msgstr "Φίλτρο:"
+
+#~ msgid "Enter a filter term here."
+#~ msgstr "Εισάγετε εδώ έναν όρο φίλτρου."
+
+#~ msgid "C&opy"
+#~ msgstr "&Αντιγραφή"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Copies the selected strings to the clipboard."
+#~ msgstr "Αντιγραφή επιλεγμένων συμβολοσειρών στο πρόχειρο."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Copy</interface> button, all strings you "
+#~ "selected in the list are copied to the clipboard."
+#~ msgstr ""
+#~ "Αν πιέσετε το κουμπί <interface>Αντιγραφή</interface>, όλες οι "
+#~ "συμβολοσειρές που έχετε επιλέξει στη λίστα, θα αντιγραφούν στο πρόχειρο."
+
+#~ msgid "&Go to"
+#~ msgstr "&Μετάβαση"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Shows the selected string in the view."
+#~ msgstr "Εμφάνιση επιλεγμένης συμβολοσειράς στην προβολή."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Go to</interface> button, the string which "
+#~ "was last selected is marked and shown in the view."
+#~ msgstr ""
+#~ "Αν πιέσετε το κουμπί <interface>Μετάβαση</interface>, η συμβολοσειρά που "
+#~ "επιλέχθηκε τελευταία θα σημειωθεί και θα εμφανιστεί στην προβολή."
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Warning: Byte Array has been modified since last update."
+#~ msgstr ""
+#~ "Προειδοποίηση: το μητρώο Byte τροποποιήθηκε από την τελευταία ενημέρωση."
+
+#, fuzzy
+#~| msgctxt "@action:inmenu"
+#~| msgid "&Goto Offset..."
+#~ msgctxt "@action:inmenu"
+#~ msgid "&Go to Offset..."
+#~ msgstr "&Μετάβαση κατά μετατόπιση..."
+
+#, fuzzy
+#~| msgctxt "@title:group"
+#~| msgid "Go to"
+#~ msgctxt "@title:window of the tool to set a new offset for the cursor"
+#~ msgid "Goto"
+#~ msgstr "Μετάβαση σε"
+
+#~ msgctxt "@label:listbox"
+#~ msgid "Fo&rmat:"
+#~ msgstr "Μορ&φή:"
+
+#~ msgctxt "@label:listbox"
+#~ msgid "O&ffset:"
+#~ msgstr "Με&τατόπιση:"
+
+#~ msgctxt "@option:check"
+#~ msgid "From c&ursor"
+#~ msgstr "Από &δρομέα"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Go relative from the current cursor location and not absolute."
+#~ msgstr "Μετάβαση σχετικά με την τρέχουσα τοποθεσία δρομέα και όχι απόλυτα."
+
+#~ msgctxt "@option:check"
+#~ msgid "&Extend selection"
+#~ msgstr "&Επέκταση επιλογής"
+
+#~ msgctxt "@action:button"
+#~ msgid "&Go"
+#~ msgstr "&Μετάβαση"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Go to the Offset"
+#~ msgstr "Μετάβαση στη μετατόπιση"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Go</interface> button, the cursor will be "
+#~ "moved in the document to or, on your option, by the offset you entered "
+#~ "above."
+#~ msgstr ""
+#~ "Αν πιέσετε το κουμπί <interface>Μετάβαση</interface>, ο δρομέας θα "
+#~ "μετακινηθεί στο έγγραφο στο ή, κατ' επιλογή σας, κατά την μετατόπιση που "
+#~ "έχετε εισαγάγει."
+
+#~ msgctxt "@title:window"
+#~ msgid "Binary Filter"
+#~ msgstr "Δυαδικό φίλτρο"
+
+#~ msgctxt "@label:listbox operation to use by the filter"
+#~ msgid "Operation:"
+#~ msgstr "Λειτουργία:"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Select the operation to use for the filter."
+#~ msgstr "Επιλέξτε τη λειτουργία που θα χρησιμοποιηθεί με το φίλτρο."
+
+#~ msgctxt "@action:button"
+#~ msgid "&Filter"
+#~ msgstr "&Φίλτρο"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Executes the filter."
+#~ msgstr "Εκτέλεση του φίλτρου."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Filter</interface> button, the operation you "
+#~ "selected above is executed on the document with the given options."
+#~ msgstr ""
+#~ "Αν πιέσετε το κουμπί <interface>Φίλτρο</interface>, η λειτουργία που "
+#~ "επιλέξατε παραπάνω θα εκτελεστεί στο έγγραφο με τις δοσμένες επιλογές."
+
+#~ msgctxt "@label:spinbox"
+#~ msgid "Number of bytes:"
+#~ msgstr "Αριθμός byte:"
+
+#~ msgctxt "@title:window"
+#~ msgid "Byte Table"
+#~ msgstr "Πίνακας byte"
+
+#~ msgid "Byte inserted."
+#~ msgstr "Έγινε εισαγωγή byte."
+
+#~ msgctxt "@title:window"
+#~ msgid "Find Bytes"
+#~ msgstr "Αναζήτηση byte"
+
+#~ msgctxt "@action:button"
+#~ msgid "&Find"
+#~ msgstr "&Αναζήτηση"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Start searching"
+#~ msgstr "Έναρξη αναζήτησης"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Find</interface> button, the bytes you "
+#~ "entered above are searched for within the byte array."
+#~ msgstr ""
+#~ "Αν πιέσετε το κουμπί <interface>Αναζήτηση</interface>, τα byte που έχετε "
+#~ "εισάγει παραπάνω θα αναζητηθούν μέσα στο μητρώο byte."
+
+#, fuzzy
+#~| msgid "Searc&hbar"
+#~ msgctxt "@title"
+#~ msgid "Search"
+#~ msgstr "Γραμμή &αναζήτησης"
+
+#~ msgctxt "@title:window"
+#~ msgid "Find"
+#~ msgstr "Αναζήτηση"
+
+#~ msgctxt "@info"
+#~ msgid "Search key not found in byte array."
+#~ msgstr "Το κλειδί αναζήτησης δε βρέθηκε στο μητρώο byte."
+
+#, fuzzy
+#~| msgctxt "@label:textbox"
+#~| msgid "Byte String to F&ind:"
+#~ msgctxt "@label:textbox"
+#~ msgid "Byte string to f&ind:"
+#~ msgstr "Συμβολοσειρά byte για α&ναζήτηση:"
+
+#~ msgctxt "@title:group"
+#~ msgid "Options"
+#~ msgstr "Επιλογές"
+
+#~ msgctxt "@option:check"
+#~ msgid "C&ase sensitive"
+#~ msgstr "&Διάκριση πεζών/κεφαλαίων"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "Perform a case sensitive search: entering the pattern 'Joe' will not "
+#~ "match 'joe' or 'JOE', only 'Joe'."
+#~ msgstr ""
+#~ "Εκτέλεση μιας αναζήτησης με διάκριση πεζών/κεφαλαίων: η εισαγωγή του "
+#~ "μοτίβου 'Joe' δε θα ταιριάξει με τα 'joe' ή 'JOE', παρά μόνο με το 'Joe'."
+
+#~ msgctxt "@option:check"
+#~ msgid "&Whole words only"
+#~ msgstr "&Μόνο ολόκληρες λέξεις"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Require word boundaries in both ends of a match to succeed."
+#~ msgstr ""
+#~ "Απαίτηση των ορίων λέξεων και στα δύο άκρα της συμβολοσειράς αναζήτησης."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "Start searching at the current cursor location rather than at the top."
+#~ msgstr "Έναρξη αναζήτησης στη θέση του δρομέα αντί της αρχής του μητρώου."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Replace backwards."
+#~ msgstr "Αντικατάσταση προς τα πίσω."
+
+#~ msgctxt "@option:check"
+#~ msgid "&Selected bytes"
+#~ msgstr "&Επιλεγμένα byte"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Only search within the current selection."
+#~ msgstr "Αναζήτηση μόνο στην τρέχουσα επιλογή."
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Value Coding"
+#~ msgstr "Κωδικοποίηση &τιμής"
+
+#~ msgctxt ""
+#~ "@item:inmenu encoding of the bytes as values in the hexadecimal format"
+#~ msgid "&Hexadecimal"
+#~ msgstr "Δεκαε&ξαδικό"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
+#~ msgid "&Decimal"
+#~ msgstr "&Δεκαδικό"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
+#~ msgid "&Octal"
+#~ msgstr "&Οκταδικό"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
+#~ msgid "&Binary"
+#~ msgstr "Δ&υαδικό"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Char Coding"
+#~ msgstr "Κωδι&κοποίηση Char"
+
+#~ msgctxt "@option:check"
+#~ msgid "Show &Non-printing Chars"
+#~ msgstr "Εμφάνιση &μη εκτυπώσιμων χαρακτήρων"
+
+#~ msgctxt "@option:check"
+#~ msgid "Show &Line Offset"
+#~ msgstr "Εμφάνιση &μετατόπισης γραμμής"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Show Values or Chars"
+#~ msgstr "&Εμφάνιση τιμών ή Char"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Values"
+#~ msgstr "&Τιμές"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Chars"
+#~ msgstr "&Char"
+
+#, fuzzy
+#~| msgctxt "@item:inmenu"
+#~| msgid "Values &and Chars"
+#~ msgctxt "@item:inmenu"
+#~ msgid "Values && Chars"
+#~ msgstr "Τιμές &και Char"
+
+#, fuzzy
+#~| msgctxt "@title:column offset of the extracted string"
+#~| msgid "Offset"
+#~ msgctxt "@title:column offset of the bookmark"
+#~ msgid "Offset"
+#~ msgstr "Μετατόπιση"
+
+#, fuzzy
+#~| msgctxt "@action:inmenu"
+#~| msgid "Remove Bookmark"
+#~ msgctxt "@title:window"
+#~ msgid "Bookmarks"
+#~ msgstr "Αφαίρεση σελιδοδείκτη"
+
+#, fuzzy
+#~| msgctxt "@action:inmenu"
+#~| msgid "Remove Bookmark"
+#~ msgctxt "default name of a bookmark"
+#~ msgid "Bookmark"
+#~ msgstr "Αφαίρεση σελιδοδείκτη"
+
+#, fuzzy
+#~| msgctxt "@info:whatsthis"
+#~| msgid "Go backwards from the end or the current cursor location."
+#~ msgctxt "@info:tooltip"
+#~ msgid "Creates a new bookmark for the current cursor position."
+#~ msgstr ""
+#~ "Μετάβαση προς τα πίσω από το τέλος του εγγράφου ή την τρέχουσα τοποθεσία "
+#~ "του δρομέα."
+
+#, fuzzy
+#~| msgctxt "@info:whatsthis"
+#~| msgid ""
+#~| "If you press the <interface>Go to</interface> button, the string which "
+#~| "was last selected is marked and shown in the view."
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press this button, the name of the bookmark which was last "
+#~ "selected can be edited."
+#~ msgstr ""
+#~ "Αν πιέσετε το κουμπί <interface>Μετάβαση</interface>, η συμβολοσειρά που "
+#~ "επιλέχθηκε τελευταία θα σημειωθεί και θα εμφανιστεί στην προβολή."
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Remove Bookmark"
+#~ msgstr "Αφαίρεση σελιδοδείκτη"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Remove All Bookmarks"
+#~ msgstr "Αφαίρεση όλων των σελιδοδεικτών"
+
+#, fuzzy
+#~| msgctxt "@action:inmenu"
+#~| msgid "Goto Next Bookmark"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Go to Next Bookmark"
+#~ msgstr "Μετάβαση στον επόμενο σελιδοδείκτη"
+
+#, fuzzy
+#~| msgctxt "@action:inmenu"
+#~| msgid "Goto Previous Bookmark"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Go to Previous Bookmark"
+#~ msgstr "Μετάβαση στον προηγούμενο σελιδοδείκτη"
+
+#, fuzzy
+#~| msgctxt "zoom-factor (percentage)"
+#~| msgid "%1%"
+#~ msgctxt "@item description of bookmark"
+#~ msgid "%1: %2"
+#~ msgstr "%1%"
+
+#~ msgctxt ""
+#~ "@item:inlistbox coding of the bytes as values in the hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "Δεκαεξαδικό"
+
+#~ msgctxt ""
+#~ "@item:inlistbox coding of the bytes as values in the decimal format"
+#~ msgid "Decimal"
+#~ msgstr "Δεκαδικό"
+
+#, fuzzy
+#~| msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
+#~| msgid "Octal"
+#~ msgctxt "@item:inlistbox coding of the bytes as values in the octal format"
+#~ msgid "Octal"
+#~ msgstr "Οκταδικό"
+
+#~ msgctxt "@item:inlistbox coding of the bytes as values in the binary format"
+#~ msgid "Binary"
+#~ msgstr "Δυαδικό"
+
+#~ msgctxt "@item:inlistbox coding of the bytes as characters with the values"
+#~ msgid "Character(s)"
+#~ msgstr "Χαρακτήρας(ες)"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Columns"
+#~ msgstr "&Στήλες"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Rows"
+#~ msgstr "&Γραμμές"
+
+#~ msgctxt "@label:spinbox number of bytes the rotation is done within"
+#~ msgid "&Group size [bytes]"
+#~ msgstr "Μέγεθος &ομάδας [byte]"
+
+#, fuzzy
+#~| msgctxt "@info:whatsthis"
+#~| msgid "Control the number of the bytes each rotation is done within."
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Control the number of bytes within which each rotation is made."
+#~ msgstr "Έλεγχος του αριθμού των byte εκτέλεσης της περιστροφής."
+
+#~ msgctxt "@label:spinbox"
+#~ msgid "S&hift width [bits]"
+#~ msgstr "Πλάτος ύ&ψωσης [bit]"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "Control the width of the shift. Positive numbers move the bits to the "
+#~ "right, negative to the left."
+#~ msgstr ""
+#~ "Έλεγχος του πλάτους ύψωσης. Οι θετικοί αριθμοί μετακινούν τα bit στα "
+#~ "δεξιά, ενώ οι αρνητικοί στα αριστερά."
+
+#~ msgctxt ""
+#~ "name of the filter; it moves the bits and pushes the ones over the end to "
+#~ "the begin again"
+#~ msgid "ROTATE data"
+#~ msgstr "ΠΕΡΙΣΤΡΟΦΗ δεδομένα"
+
+#~ msgctxt "name of the filter; it does a logic XOR operation"
+#~ msgid "operand XOR data"
+#~ msgstr "τελεστής XOR δεδομένα"
+
+#, fuzzy
+#~| msgctxt "@info:whatsthis"
+#~| msgid "If set, also the bits are ordered reverse."
+#~ msgctxt "@info:whatsthis"
+#~ msgid "If set, the bits are arranged in reverse order as well."
+#~ msgstr "Αν επιλεγεί, τα bit τοποθετούνται ανάστροφα."
+
+#~ msgctxt ""
+#~ "name of the filter; it switches all bits from 0 to 1 and 1 to 0 "
+#~ "respectivly"
+#~ msgid "INVERT data"
+#~ msgstr "ΑΝΤΙΣΤΡΟΦΗ δεδομένα"
+
+#~ msgctxt "name of the filter; it moves the bits, setting freed ones to zero"
+#~ msgid "SHIFT data"
+#~ msgstr "ΥΨΩΣΗ δεδομένα"
+
+#~ msgctxt "name of the filter; it does a logic AND operation"
+#~ msgid "operand AND data"
+#~ msgstr "τελεστής AND δεδομένα"
+
+#~ msgctxt "@label:textbox operand to the arithmetic filter function"
+#~ msgid "Operand:"
+#~ msgstr "Τελεστής:"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Enter an operand, or select a previous operand from the list."
+#~ msgstr ""
+#~ "Εισάγετε έναν τελεστή, ή επιλέξτε έναν προηγούμενο τελεστή από τη λίστα."
+
+#~ msgctxt "@option:check"
+#~ msgid "Align at end"
+#~ msgstr "Στοίχιση στο τέλος"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "If set, the last operand will be aligned to the end of the data."
+#~ msgstr ""
+#~ "Αν επιλεγεί, ο τελευταίος τελεστής θα στοιχιθεί στο τέλος των δεδομένων."
+
+#~ msgctxt ""
+#~ "name of the filter; it changes the order of the bytes/bits to backwards"
+#~ msgid "REVERSE data"
+#~ msgstr "ΑΝΑΣΤΡΟΦΗ δεδομένα"
+
+#~ msgctxt "name of the filter; it does a logic OR operation"
+#~ msgid "operand OR data"
+#~ msgstr "τελεστής OR δεδομένα"
+
+#~ msgctxt "@title:window"
+#~ msgid "File Info"
+#~ msgstr "Πληροφορίες αρχείου"
+
+#~ msgid "Type:"
+#~ msgstr "Τύπος:"
+
+#~ msgid "Location:"
+#~ msgstr "Τοποθεσία:"
+
+#~ msgid "Size:"
+#~ msgstr "Μέγεθος:"
+
+#~ msgid "Created/Loaded:"
+#~ msgstr "Δημιουργία/φόρτωση:"
+
+#~ msgid "Last modified:"
+#~ msgstr "Τελευταία τροποποίηση:"
+
+#~ msgid "Last synchronized:"
+#~ msgstr "Τελευταίος συγχρονισμός:"
+
+#~ msgid "Created:"
+#~ msgstr "Δημιουργήθηκε:"
+
+#~ msgctxt "There is no storage location assigned to yet."
+#~ msgid "[None]"
+#~ msgstr "[Κανένα]"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Overwrite only"
+#~ msgstr "Μόνο αντικατάσταση"
+
+#~ msgctxt "The byte array was new created."
+#~ msgid "New created."
+#~ msgstr "Νέα δημιουργία."
+
+#~ msgctxt "numbered title for a created document without a filename"
+#~ msgid "[New Byte Array]"
+#~ msgid_plural "[New Byte Array %1]"
+#~ msgstr[0] "[Νέο μητρώο byte]"
+#~ msgstr[1] "[Νέο μητρώο byte %1]"
+
+#~ msgctxt "name of the data type"
+#~ msgid "Byte Array"
+#~ msgstr "Μητρώο byte"
+
+#~ msgctxt "@title:window"
+#~ msgid "Info"
+#~ msgstr "Πληροφορίες"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Import"
+#~ msgstr "Εισαγωγή"
+
+#, fuzzy
+#~| msgid "Paste as"
+#~ msgid "Paste As"
+#~ msgstr "Επικόλληση ως"
+
+#~ msgid "Conversion &Field"
+#~ msgstr "&Πεδίο μετατροπής"
+
+#, fuzzy
+#~| msgid "Searc&hbar"
+#~ msgid "Searc&h Bar"
+#~ msgstr "Γραμμή &αναζήτησης"
+
+#, fuzzy
+#~| msgctxt "@info"
+#~| msgid "Problem when saving to local filesystem."
+#~ msgctxt "@info"
+#~ msgid "Problem while saving to local filesystem."
+#~ msgstr "Πρόβλημα κατά την αποθήκευση στο τοπικό σύστημα αρχείων"
+
+#, fuzzy
+#~| msgctxt "@info"
+#~| msgid "Problem when synching with local filesystem."
+#~ msgctxt "@info"
+#~ msgid "Problem while synching with local filesystem."
+#~ msgstr "Πρόβλημα συγχρονισμού με το τοπικό σύστημα αρχείων."
+
+#, fuzzy
+#~| msgctxt "@info"
+#~| msgid "Problem when loading from local filesystem."
+#~ msgctxt "@info"
+#~ msgid "Problem while loading from local filesystem."
+#~ msgstr "Πρόβλημα κατά τη φόρτωση από το τοπικό σύστημα αρχείων"
+
+#~ msgctxt "@title:window"
+#~ msgid "Export"
+#~ msgstr "Εξαγωγή"
+
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
+#~ msgstr ""
+#~ "Υπάρχει ήδη ένα αρχείο στο<nl/><filename>%1</filename>.<nl/>Αντικατάσταση;"
+
+#~ msgctxt "@title:window"
+#~ msgid "Save As"
+#~ msgstr "Αποθήκευση ως"
+
+#~ msgctxt "@title:window"
+#~ msgid "Close"
+#~ msgstr "Κλείσιμο"
+
+#~ msgctxt "@info \"%title\" has been modified."
+#~ msgid ""
+#~ "<filename>%1</filename> has been modified.<nl/>Do you want to save your "
+#~ "changes or discard them?"
+#~ msgstr ""
+#~ "Το <filename>%1</filename> τροποποιήθηκε.<nl/>Επιθυμείτε την αποθήκευση "
+#~ "των τροποποιήσεων ή την απόρριψή τους;"
+
+#~ msgctxt "@info \"%title\" has been modified."
+#~ msgid ""
+#~ "<filename>%1</filename> has been modified.<nl/>Do you want to discard "
+#~ "your changes?"
+#~ msgstr ""
+#~ "Το <filename>%1</filename> τροποποιήθηκε.<nl/>Επιθυμείτε την απόρριψη των "
+#~ "τροποποιήσεων;"
+
+#~ msgctxt "@title:window"
+#~ msgid "Copy As"
+#~ msgstr "Αντιγραφή ως"
+
+#~ msgctxt "@action:button"
+#~ msgid "&Copy to clipboard"
+#~ msgstr "&Αντιγραφή στο πρόχειρο"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Copy the selected data to the clipboard."
+#~ msgstr "Αντιγραφή επιλεγμένων δεδομένων στο πρόχειρο."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Copy to clipboard</interface> button, the "
+#~ "selected data will be copied to the clipboard with the settings you "
+#~ "entered above."
+#~ msgstr ""
+#~ "Αν πιέσετε το κουμπί <interface>Αντιγραφή στο πρόχειρο</interface>, τα "
+#~ "επιλεγμένα δεδομένα θα αντιγραφούν στο πρόχειρο με τις ρυθμίσεις που "
+#~ "έχετε εισάγει παραπάνω."
+
+#~ msgctxt "@title:group"
+#~ msgid "Preview (max. first 100 bytes)"
+#~ msgstr "Προεπισκόπηση (μεγ. πρώτα 100 byte)"
+
+#, fuzzy
+#~| msgctxt "@title:window"
+#~| msgid "Copy As"
+#~ msgctxt "@title:menu"
+#~ msgid "Copy As"
+#~ msgstr "Αντιγραφή ως"
+
+#~ msgctxt "@item There are no encoders."
+#~ msgid "Not available."
+#~ msgstr "Μη διαθέσιμοι."
+
+#~ msgctxt "@title:menu"
+#~ msgid "Export"
+#~ msgstr "Εξαγωγή"
+
+#~ msgctxt "@item There are no exporters."
+#~ msgid "Not available."
+#~ msgstr "Μη διαθέσιμοι."
+
+#, fuzzy
+#~| msgctxt "@action:button"
+#~| msgid "&Export to file"
+#~ msgctxt "@action:button"
+#~ msgid "&Export to File..."
+#~ msgstr "&Εξαγωγή σε αρχείο"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Export the selected data to a file."
+#~ msgstr "Εξαγωγή των επιλεγμένων δεδομένων σε ένα αρχείο."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Export to file</interface> button, the "
+#~ "selected data will be copied to a file with the settings you entered "
+#~ "above."
+#~ msgstr ""
+#~ "Αν πιέσετε το κουμπί <interface>Εξαγωγή σε αρχείο</interface>, τα "
+#~ "επιλεγμένα δεδομένα θα αντιγραφούν σε ένα αρχείο με τις ρυθμίσεις που "
+#~ "έχετε εισάγει παραπάνω."
+
+#~ msgid "Zoom"
+#~ msgstr "Εστίαση"
+
+#~ msgctxt "zoom-factor (percentage)"
+#~ msgid "%1%"
+#~ msgstr "%1%"
+
+#~ msgid "&Fit to Width"
+#~ msgstr "&Προσαρμογή στο πλάτος"
+
+#~ msgid "&Fit to Height"
+#~ msgstr "&Προσαρμογή στο ύψος"
+
+#~ msgid "&Fit to Size"
+#~ msgstr "&Προσαρμογή στο μέγεθος"
+
+#, fuzzy
+#~| msgid "Zoom"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Zoom: %1%"
+#~ msgstr "Εστίαση"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Undo"
+#~ msgstr "Αναίρεση"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Redo"
+#~ msgstr "Επανάληψη"
+
+#~ msgctxt "@action Undo: [change]"
+#~ msgid "Undo: %1"
+#~ msgstr "Αναίρεση: %1"
+
+#~ msgctxt "@action Redo: [change]"
+#~ msgid "Redo: %1"
+#~ msgstr "Επανάληψη: %1"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip for column Type"
+#~| msgid "type of the data "
+#~ msgctxt "@info:tooltip"
+#~ msgid "Title of the document"
+#~ msgstr "τύπος δεδομένων"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip for column Type"
+#~| msgid "type of the data "
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Folder of Current Document"
+#~ msgstr "τύπος δεδομένων"
+
+#~ msgctxt "@item There are no windows."
+#~ msgid "None."
+#~ msgstr "Κανένα."
+
+#~ msgctxt "@title:window"
+#~ msgid "Versions"
+#~ msgstr "Εκδόσεις"
+
+#~ msgctxt "@title:column Id of the version"
+#~ msgid "Id"
+#~ msgstr "Id"
+
+#~ msgctxt "@title:column description of the change"
+#~ msgid "Changes"
+#~ msgstr "Τροποποιήσεις"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Id of the version"
+#~ msgstr "Id της έκδοσης"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Description of what changed"
+#~ msgstr "Περιγραφή των τροποποιήσεων"
+
+#, fuzzy
+#~| msgctxt "@option:check the document is read-only"
+#~| msgid "Read only"
+#~ msgctxt "@option:check set the document to read-only"
+#~ msgid "Set Read-only"
+#~ msgstr "Μόνο ανάγνωση"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip"
+#~| msgid "Readwrite mode"
+#~ msgctxt "@option:check set the document to read-write"
+#~ msgid "Set Read-write"
+#~ msgstr "Λειτουργία ανάγνωσης εγγραφής"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip"
+#~| msgid "Readwrite mode"
+#~ msgctxt "@option:check the document is read-write"
+#~ msgid "Read-write"
+#~ msgstr "Λειτουργία ανάγνωσης εγγραφής"
+
+#, fuzzy
+#~| msgctxt "@option:check the document is read-only"
+#~| msgid "Read only"
+#~ msgctxt "@option:check the document is read-only"
+#~ msgid "Read-only"
+#~ msgstr "Μόνο ανάγνωση"
+
+#~ msgctxt "@title:window"
+#~ msgid "Go to Offset"
+#~ msgstr "Μετάβαση στη μετατόπιση"
+
+#, fuzzy
+#~| msgctxt "@title:group"
+#~| msgid "Go to"
+#~ msgctxt "@title:group"
+#~ msgid "Go To"
+#~ msgstr "Μετάβαση σε"
+
+#~ msgid "Edit files as an array of bytes"
+#~ msgstr "Επεξεργασία αρχείων ως σειρά byte"
+
+#~ msgctxt "@item:inlistbox cding of the bytes as values in the octal format"
+#~ msgid "Octal"
+#~ msgstr "Οκταδικό"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Resize Style"
+#~ msgstr "Στυλ &αλλαγής μεγέθους"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&No Resize"
+#~ msgstr "&Χωρίς αλλαγή μεγέθους"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Lock Groups"
+#~ msgstr "&Κλείδωμα ομάδων"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Full Size Usage"
+#~ msgstr "&Χρήση πλήρους μεγέθους"
+
+#~ msgctxt "@label"
+#~ msgid "Size [bytes]: "
+#~ msgstr "Μέγεθος [byte]: "
+
+#, fuzzy
+#~| msgctxt "@info:status the statistic is not uptodate"
+#~| msgid "Warning: not uptodate"
+#~ msgctxt "@info:status the statistic is not uptodate"
+#~ msgid "Warning: not up-to-date"
+#~ msgstr "Προειδοποίηση: μη ενημερωμένο"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip"
+#~| msgid "Warning: Byte Array has been modified since last update."
+#~ msgctxt "@info:tooltip"
+#~ msgid "Warning: byte array has been modified since last update."
+#~ msgstr ""
+#~ "Προειδοποίηση: το μητρώο Byte τροποποιήθηκε από την τελευταία ενημέρωση."
+
+#~ msgctxt "@info"
+#~ msgid "<nl/>End of byte array reached.<nl/>Continue from the beginning?"
+#~ msgstr "<nl/>Τέλος του μητρώου byte.<nl/>Συνέχεια από την αρχή;"
+
+#~ msgctxt "@info"
+#~ msgid "<nl/>Beginning of byte array reached.<nl/>Continue from the end?"
+#~ msgstr "<nl/>Αρχή του μητρώου byte.<nl/>Συνέχεια από το τέλος;"
+
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "There is already a file at <nl/><filename>%1</filename>.<nl/>Overwrite?"
+#~ msgstr ""
+#~ "Υπάρχει ήδη ένα αρχείο στο <nl/><filename>%1</filename>.<nl/"
+#~ ">Αντικατάσταση;"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Copy as"
+#~ msgstr "Αντιγραφή ως"
+
+#~ msgctxt "@option:check"
+#~ msgid "Reverse also Bits"
+#~ msgstr "Αντιστροφή επίσης bit"
+
+#~ msgctxt ""
+#~ "@info:status encoding of the bytes as values in the hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "Δεκαεξαδικό"
+
+#~ msgctxt "@info:status encoding of the bytes as values in the decimal format"
+#~ msgid "Decimal"
+#~ msgstr "Δεκαδικό"
+
+#~ msgctxt "@info:status encoding of the bytes as values in the octal format"
+#~ msgid "Octal"
+#~ msgstr "Οκταδικό"
+
+#~ msgctxt "@info:status encoding of the bytes as values in the binary format"
+#~ msgid "Binary"
+#~ msgstr "Δυαδικό"
+
+#~ msgctxt "@info:status short for: Readonly mode"
+#~ msgid "RO"
+#~ msgstr "ΑΜ"
+
+#~ msgctxt "@info:status short for: Readwrite mode"
+#~ msgid "RW"
+#~ msgstr "ΑΕ"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Readonly mode"
+#~ msgstr "Λειτουργία μόνο ανάγνωσης"
+
+#~ msgctxt "@option:check"
+#~ msgid "Overwrite Mode"
+#~ msgstr "Λειτουργία αντικατάστασης"
+
+#~ msgctxt "@item description of bookmark"
+#~ msgid "Offset: %1"
+#~ msgstr "Μετατόπιση: %1"
+
+#~ msgctxt "@title:window Export %typename As %exportedtypename..."
+#~ msgid "Export %1 As %2..."
+#~ msgstr "Εξαγωγή %1 ως %2..."
+
+#~ msgctxt "@title:window"
+#~ msgid "Copy as..."
+#~ msgstr "Αντιγραφή ως..."
+
+#~ msgctxt "@title:group"
+#~ msgid "Preview"
+#~ msgstr "Προεπισκόπηση"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "32 bit float:"
+#~ msgstr "Κινητής υποδιαστολής 32 bit:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "64 bit float:"
+#~ msgstr "Κινητής υποδιαστολής 64 bit:"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Values Column"
+#~ msgstr "Στήλη &τιμών"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Chars Column"
+#~ msgstr "Στήλη &χαρακτήρων"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Both Columns"
+#~ msgstr "&Και οι δύο στήλες"
+
+#~ msgctxt ""
+#~ "@item:inlistbox encoding of the bytes as values in the hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "Δεκαεξαδικό"
+
+#~ msgctxt ""
+#~ "@item:inlistbox encoding of the bytes as values in the decimal format"
+#~ msgid "Decimal"
+#~ msgstr "Δεκαδικό"
+
+#~ msgctxt ""
+#~ "@item:inlistbox encoding of the bytes as values in the octal format"
+#~ msgid "Octal"
+#~ msgstr "Οκταδικό"
+
+#~ msgctxt ""
+#~ "@item:inlistbox encoding of the bytes as values in the binary format"
+#~ msgid "Binary"
+#~ msgstr "Δυαδικό"

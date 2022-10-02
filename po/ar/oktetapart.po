@@ -1,0 +1,145 @@
+# translation of oktetapart.po to
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Fahad Al-Saidi <fahad.alsaidi@gmail.com>, 2007.
+# Youssef Chahibi <chahibi@gmail.com>, 2007.
+# Youness BOUTYOUR <niceboy120@gmail.com>, 2008.
+# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: oktetapart\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-05-16 00:24+0000\n"
+"PO-Revision-Date: 2010-07-23 23:06+0400\n"
+"Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
+"Language-Team: Arabic <linuxac-kde-arabic-team@googlegroups.com>\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Lokalize 1.0\n"
+
+#. i18n: ectx: Menu (file)
+#: oktetapartbrowserui.rc:5 oktetapartreadonlyui.rc:5
+#: oktetapartreadwriteui.rc:5
+#, kde-format
+msgid "&File"
+msgstr ""
+
+#. i18n: ectx: Menu (edit)
+#: oktetapartbrowserui.rc:8 oktetapartreadonlyui.rc:10
+#: oktetapartreadwriteui.rc:16
+#, kde-format
+msgid "&Edit"
+msgstr ""
+
+#. i18n: ectx: Menu (view)
+#: oktetapartbrowserui.rc:21 oktetapartreadonlyui.rc:26
+#: oktetapartreadwriteui.rc:39
+#, kde-format
+msgid "&View"
+msgstr ""
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: oktetapartbrowserui.rc:43 oktetapartreadonlyui.rc:47
+#: oktetapartreadwriteui.rc:60
+#, kde-format
+msgid "Main Toolbar"
+msgstr "شريط الأدوات الرئيسي"
+
+#. i18n: ectx: Menu (permission)
+#: oktetapartreadwriteui.rc:11
+#, kde-format
+msgctxt "@title:menu"
+msgid "Permissions"
+msgstr "الصلاحيات"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "فهد السعيدي, يونس بوطيور"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "Fahad.alsaidi@gmail.com, niceboy120@gmail.com"
+
+#~ msgid "OktetaPart"
+#~ msgstr "OktetaPart"
+
+#~ msgid "Embedded hex editor"
+#~ msgstr "محرر ست عشري مضمن"
+
+#~ msgid "Author"
+#~ msgstr "المؤلف"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Value Coding"
+#~ msgstr "&شفرة القيمة"
+
+#~ msgctxt ""
+#~ "@item:inmenu encoding of the bytes as values in the hexadecimal format"
+#~ msgid "&Hexadecimal"
+#~ msgstr "&الست عشري"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
+#~ msgid "&Decimal"
+#~ msgstr "&عشري"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
+#~ msgid "&Octal"
+#~ msgstr "&ثماني"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
+#~ msgid "&Binary"
+#~ msgstr "&ثنائي"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Char Encoding"
+#~ msgstr "&شفرة الرمز"
+
+#~ msgctxt "@option:check"
+#~ msgid "Show &Non-printing Chars"
+#~ msgstr "أظهر الرموز &غير القابلة للطباعة"
+
+#~ msgctxt "@option:check"
+#~ msgid "&Line Offset"
+#~ msgstr "&إنزياح الخط"
+
+#, fuzzy
+#~| msgctxt "@item:inmenu"
+#~| msgid "&Values Column"
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Values"
+#~ msgstr "&عمود القيم"
+
+#, fuzzy
+#~| msgctxt "@item:inmenu"
+#~| msgid "&Chars Column"
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Chars"
+#~ msgstr "& عمود الحروف"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Resize Style"
+#~ msgstr "&أعد تحجيم الأسلوب"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&No Resize"
+#~ msgstr "&بدون تحجيم"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Lock Groups"
+#~ msgstr "&اقفل المجموعات"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Full Size Usage"
+#~ msgstr "&إستخدام كل الحجم"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Columns"
+#~ msgstr "&الأعمدة"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Both Columns"
+#~ msgstr "&كلا العمودين"

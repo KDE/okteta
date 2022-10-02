@@ -1,0 +1,168 @@
+# translation of oktetapart.po to Latvian
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Rihards Prieditis <RPrieditis@inbox.lv>, 2007.
+# Maris Nartiss <maris.kde@gmail.com>, 2007, 2008.
+# Viesturs Zarins <viesturs.zarins@mii.lu.lv>, 2008, 2010.
+# Viesturs Zariņš <viesturs.zarins@mii.lu.lv>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: oktetapart\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-05-16 00:24+0000\n"
+"PO-Revision-Date: 2010-01-09 16:09+0200\n"
+"Last-Translator: Viesturs Zarins <viesturs.zarins@mii.lu.lv>\n"
+"Language-Team: Latvian <locale@laka.lv>\n"
+"Language: lv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
+"2);\n"
+
+#. i18n: ectx: Menu (file)
+#: oktetapartbrowserui.rc:5 oktetapartreadonlyui.rc:5
+#: oktetapartreadwriteui.rc:5
+#, kde-format
+msgid "&File"
+msgstr ""
+
+#. i18n: ectx: Menu (edit)
+#: oktetapartbrowserui.rc:8 oktetapartreadonlyui.rc:10
+#: oktetapartreadwriteui.rc:16
+#, kde-format
+msgid "&Edit"
+msgstr ""
+
+#. i18n: ectx: Menu (view)
+#: oktetapartbrowserui.rc:21 oktetapartreadonlyui.rc:26
+#: oktetapartreadwriteui.rc:39
+#, kde-format
+msgid "&View"
+msgstr ""
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: oktetapartbrowserui.rc:43 oktetapartreadonlyui.rc:47
+#: oktetapartreadwriteui.rc:60
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Galvenā rīkjosla"
+
+#. i18n: ectx: Menu (permission)
+#: oktetapartreadwriteui.rc:11
+#, kde-format
+msgctxt "@title:menu"
+msgid "Permissions"
+msgstr "Atļaujas"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Rihards Priedītis"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "RPrieditis@inbox.lv"
+
+#~ msgid "OktetaPart"
+#~ msgstr "OktetaPart"
+
+#~ msgid "Embedded hex editor"
+#~ msgstr "Iegults heksadecimālais redaktors"
+
+#~ msgid "Author"
+#~ msgstr "Autors"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Value Coding"
+#~ msgstr "&Vērtības kodēšana"
+
+#~ msgctxt ""
+#~ "@item:inmenu encoding of the bytes as values in the hexadecimal format"
+#~ msgid "&Hexadecimal"
+#~ msgstr "&Heksadecimāla"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
+#~ msgid "&Decimal"
+#~ msgstr "&Decimāla"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
+#~ msgid "&Octal"
+#~ msgstr "&Astotnieku"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
+#~ msgid "&Binary"
+#~ msgstr "&Bināra"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Char Encoding"
+#~ msgstr "&Rakstzīmju kodēšana"
+
+#~ msgctxt "@option:check"
+#~ msgid "Show &Non-printing Chars"
+#~ msgstr "Rādīt &nedrukājamās rakstzīmes"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Dynamic Layout"
+#~ msgstr "&Dinamisks izkārtojums"
+
+#~ msgctxt "@item:inmenu  The layout will not change on size changes."
+#~ msgid "&Off"
+#~ msgstr "&Izslēgts"
+
+#~ msgctxt ""
+#~ "@item:inmenu  The layout will adapt to the size, but only with complete "
+#~ "groups of bytes."
+#~ msgid "&Wrap Only Complete Byte Groups"
+#~ msgstr "&Aplauzt tikai pilnas baitu grupas"
+
+#~ msgctxt ""
+#~ "@item:inmenu  The layout will adapt to the size and fit in as much bytes "
+#~ "per line as possible."
+#~ msgid "&On"
+#~ msgstr "&Ieslēgts"
+
+#~ msgctxt "@option:check"
+#~ msgid "&Line Offset"
+#~ msgstr "&Rindas nobīde"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Show Values or Chars"
+#~ msgstr "&Rādīt vērtības vai rakstzīmes"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Values"
+#~ msgstr "&Vērtības"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Chars"
+#~ msgstr "&Rakstzīmes"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "Values && Chars"
+#~ msgstr "Vērības un rakstzīmes"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Resize Style"
+#~ msgstr "I&zmēra mainīšanas stils"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&No Resize"
+#~ msgstr "&Nemainīt izmēru"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Lock Groups"
+#~ msgstr "&Slēgt grupas"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Full Size Usage"
+#~ msgstr "Izmantot &pilnu izmēru"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Columns"
+#~ msgstr "&Kolonas"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Both Columns"
+#~ msgstr "&Abas kolonas"

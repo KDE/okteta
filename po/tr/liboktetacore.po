@@ -1,0 +1,45 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Translators:
+# obsoleteman <tulliana@gmail.com>, 2008.
+# Kaan Ozdincer <kaanozdincer@gmail.com>, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdesdk-kde4\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2020-07-01 02:25+0200\n"
+"PO-Revision-Date: 2014-11-12 01:13+0200\n"
+"Last-Translator: Kaan Ozdincer <kaanozdincer@gmail.com>\n"
+"Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 1.4\n"
+"(http: //www.transifex.com/projects/p/kdesdk-k-tr/language/tr/)\n"
+
+#: piecetable/insertpiecetablechange.cpp:26
+#, kde-format
+msgctxt "name of the change"
+msgid "Insert"
+msgstr "Ekle"
+
+#: piecetable/removepiecetablechange.cpp:26
+#, kde-format
+msgctxt "name of the change"
+msgid "Remove"
+msgstr "Kaldır"
+
+#: piecetable/replacepiecetablechange.cpp:26
+#, kde-format
+msgctxt "name of the change"
+msgid "Replace"
+msgstr "Değiştir"
+
+#: piecetable/swaprangespiecetablechange.cpp:26
+#, kde-format
+msgctxt "name of the change"
+msgid "Swap Ranges"
+msgstr "Takas Aralığı"

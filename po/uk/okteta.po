@@ -1,0 +1,1582 @@
+# Translation of okteta.po to Ukrainian
+# Copyright (C) 2008-2021 This_file_is_part_of_KDE
+# This file is distributed under the license LGPL version 2.1 or
+# version 3 or later versions approved by the membership of KDE e.V.
+#
+# Yuri Chornoivan <yurchor@ukr.net>, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: okteta\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-05-27 00:48+0000\n"
+"PO-Revision-Date: 2021-01-28 08:47+0200\n"
+"Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
+"Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 20.11.70\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Юрій Чорноіван"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "yurchor@ukr.net"
+
+#: about.cpp:16
+#, kde-format
+msgid "Okteta"
+msgstr "Okteta"
+
+#: about.cpp:18
+#, kde-format
+msgid "Hex editor"
+msgstr "Шістнадцятковий редактор"
+
+#: about.cpp:20
+#, kde-format
+msgid "2006-%1 Friedrich W. H. Kossebau"
+msgstr "© Friedrich W. H. Kossebau, 2006–%1"
+
+#: about.cpp:21
+#, kde-format
+msgid "Edit the raw data of files"
+msgstr "Редагування необроблених даних з файлів"
+
+#: about.cpp:26
+#, kde-format
+msgid "Friedrich W. H. Kossebau"
+msgstr "Friedrich W. H. Kossebau"
+
+#: about.cpp:27
+#, kde-format
+msgid "Author"
+msgstr "Автор"
+
+#: about.cpp:29
+#, kde-format
+msgctxt "Author"
+msgid "Alexander Richardson"
+msgstr "Alexander Richardson"
+
+#: about.cpp:30
+#, kde-format
+msgctxt "Task description"
+msgid "Structures tool"
+msgstr "Інструмент структур"
+
+#. i18n: ectx: Menu (permission)
+#: oktetaui.rc:15
+#, kde-format
+msgctxt "@title:menu"
+msgid "Permissions"
+msgstr "Дозволи"
+
+#. i18n: ectx: Menu (windows)
+#: oktetaui.rc:69
+#, kde-format
+msgid "&Windows"
+msgstr "&Вікна"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: oktetaui.rc:82
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Головна панель"
+
+#: program.cpp:89
+#, kde-format
+msgid "File(s) to load."
+msgstr "Файли, які слід завантажити."
+
+#~ msgctxt "@title:menu submenu to select the view profile or change it"
+#~ msgid "View Profile"
+#~ msgstr "Профіль перегляду"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Insert"
+#~ msgstr "Вставити"
+
+#~ msgctxt "name of the encoding target"
+#~ msgid "Values..."
+#~ msgstr "Значення..."
+
+#~ msgid "Value coding:"
+#~ msgstr "Кодування значення:"
+
+#~ msgctxt ""
+#~ "@item:inmenu encoding of the bytes as values in the hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "Шістнадцяткове"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
+#~ msgid "Decimal"
+#~ msgstr "Десяткове"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
+#~ msgid "Octal"
+#~ msgstr "Вісімкове"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
+#~ msgid "Binary"
+#~ msgstr "Двійкове"
+
+#~ msgctxt "@label:textbox substring which separates the values"
+#~ msgid "Separation:"
+#~ msgstr "Розділення:"
+
+#~ msgctxt "@item name of the encoding result"
+#~ msgid "Values"
+#~ msgstr "Значення"
+
+#~ msgctxt "@label:textbox name of the created variable"
+#~ msgid "Name of variable:"
+#~ msgstr "Назва змінної:"
+
+#~ msgctxt "@label:textbox to define after how many items the list is wrapped"
+#~ msgid "Items per line:"
+#~ msgstr "Елементів на рядок:"
+
+#~ msgctxt "@label:listbox the type of the data: char, integer, etc."
+#~ msgid "Data type:"
+#~ msgstr "Тип даних:"
+
+#~ msgctxt ""
+#~ "@option:check Encode the values in hexadecimal instead of decimal, if the "
+#~ "datatype has the property Unsigned"
+#~ msgid "Unsigned as hexadecimal:"
+#~ msgstr "Числа без знаку як шістнадцяткові:"
+
+#~ msgctxt "@item name of the encoding result"
+#~ msgid "C Array"
+#~ msgstr "Масив C"
+
+#~ msgctxt "name of the encoding target"
+#~ msgid "C Array..."
+#~ msgstr "Масив C..."
+
+#~ msgctxt "destination of the byte array"
+#~ msgid "Loaded from file."
+#~ msgstr "Завантажено з файла."
+
+#~ msgctxt "name of the encoding target"
+#~ msgid "Plain Text"
+#~ msgstr "Простий текст"
+
+#~ msgctxt "name of the encoding target"
+#~ msgid "View in Plain Text"
+#~ msgstr "Перегляд як простого тексту"
+
+#~ msgctxt "@title:window"
+#~ msgid "Statistics"
+#~ msgstr "Статистичні дані"
+
+#~ msgctxt "@action:button update the statistic of the byte frequency"
+#~ msgid "&Update"
+#~ msgstr "&Оновити"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Updates the byte frequency statistics."
+#~ msgstr "Оновлює статистику частоти байтів."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Update</interface> button, the byte frequency "
+#~ "statistics are updated."
+#~ msgstr ""
+#~ "Якщо ви натиснете кнопку <interface>Оновити</interface>, буде оновлено "
+#~ "статистику частоти байтів."
+
+#~ msgctxt "@label size of selected bytes"
+#~ msgid "Size:"
+#~ msgstr "Розмір:"
+
+#~ msgid "1 byte"
+#~ msgid_plural "%1 bytes"
+#~ msgstr[0] "%1 байт"
+#~ msgstr[1] "%1 байти"
+#~ msgstr[2] "%1 байтів"
+#~ msgstr[3] "%1 байт"
+
+#~ msgctxt "@item:intable character is not defined"
+#~ msgid "undef."
+#~ msgstr "невизн."
+
+#~ msgctxt "@title:column short for Hexadecimal"
+#~ msgid "Hex"
+#~ msgstr "Шіст."
+
+#~ msgctxt "@title:column short for Decimal"
+#~ msgid "Dec"
+#~ msgstr "Дес."
+
+#~ msgctxt "@title:column short for Octal"
+#~ msgid "Oct"
+#~ msgstr "Віс."
+
+#~ msgctxt "@title:column short for Binary"
+#~ msgid "Bin"
+#~ msgstr "Двійк."
+
+#~ msgctxt "@title:column short for Character"
+#~ msgid "Char"
+#~ msgstr "Симв."
+
+#~ msgctxt "@title:column count of characters"
+#~ msgid "Count"
+#~ msgstr "Кільк."
+
+#~ msgctxt "@title:column Percent of byte in total"
+#~ msgid "Percent"
+#~ msgstr "Відсоток"
+
+#~ msgctxt "@info:tooltip column contains the value in hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "Шістнадцятковий"
+
+#~ msgctxt "@info:tooltip column contains the value in decimal format"
+#~ msgid "Decimal"
+#~ msgstr "Десятковий"
+
+#~ msgctxt "@info:tooltip column contains the value in octal format"
+#~ msgid "Octal"
+#~ msgstr "Вісімковий"
+
+#~ msgctxt "@info:tooltip column contains the value in binary format"
+#~ msgid "Binary"
+#~ msgstr "Двійковий"
+
+#~ msgctxt "@info:tooltip column contains the character with the value"
+#~ msgid "Character"
+#~ msgstr "Символ"
+
+#~ msgctxt "@info:status short for: Insert mode"
+#~ msgid "INS"
+#~ msgstr "ВСТ"
+
+#~ msgctxt "@info:status short for: Overwrite mode"
+#~ msgid "OVR"
+#~ msgstr "ЗАМ"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Insert mode"
+#~ msgstr "Режим вставки"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Overwrite mode"
+#~ msgstr "Режим перезапису"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Coding of the value interpretation in the current view."
+#~ msgstr "Кодування значень у поточній області перегляду."
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Encoding in the character column of the current view."
+#~ msgstr "Кодування у стовпчик символів поточного перегляду."
+
+#~ msgid "Offset: %1"
+#~ msgstr "Зсув: %1"
+
+#~ msgctxt "@info:status selection: start offset - end offset ()"
+#~ msgid "Selection: %1 - %2 (%3)"
+#~ msgstr "Вибір: %1 - %2 (%3)"
+
+#~ msgctxt "@info:status offset value not available"
+#~ msgid "Offset: -"
+#~ msgstr "Зсув: -"
+
+#~ msgctxt "@info:status offset value not available"
+#~ msgid "Selection: -"
+#~ msgstr "Вибір: -"
+
+#~ msgctxt ""
+#~ "@info:status selection: start offset - end offset (number of bytes)"
+#~ msgid "Selection: %1 - %2 (%3)"
+#~ msgstr "Вибір: %1 - %2 (%3)"
+
+#~ msgctxt "@title:window prompt for iterative replacement"
+#~ msgid "Replace"
+#~ msgstr "Замінити"
+
+#~ msgctxt "@action:button"
+#~ msgid "Replace &All"
+#~ msgstr "Замінити &всі"
+
+#~ msgctxt "@action:button"
+#~ msgid "&Skip"
+#~ msgstr "Проп&устити"
+
+#~ msgctxt "@action:button"
+#~ msgid "Replace"
+#~ msgstr "Замінити"
+
+#~ msgctxt "@title:window"
+#~ msgid "Replace Bytes"
+#~ msgstr "Замінити байти"
+
+#~ msgctxt "@action;button"
+#~ msgid "&Replace"
+#~ msgstr "&Замінити"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Start replace"
+#~ msgstr "Почати заміну"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Replace</interface> button, the bytes you "
+#~ "entered above are searched for within the byte array and any occurrence "
+#~ "is replaced with the replacement bytes."
+#~ msgstr ""
+#~ "Якщо ви натиснете кнопку <interface>Замінити</interface>, буде проведено "
+#~ "пошук введених вище байтів у масиві байтів і заміну їх на вказані байти "
+#~ "для заміни."
+
+#~ msgctxt "@title:group"
+#~ msgid "Replace By"
+#~ msgstr "Замінити на"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Replacing bytes:"
+#~ msgstr "Байти для заміни:"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "Enter a pattern to replace with, or select a previous pattern from the "
+#~ "list."
+#~ msgstr "Введіть шаблон для заміни або виберіть попередній шаблон зі списку."
+
+#~ msgctxt "@option:check"
+#~ msgid "&Prompt on replace"
+#~ msgstr "За&питувати перед заміною"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Ask before replacing each match found."
+#~ msgstr "Питати перед заміною кожного знайденого елемента."
+
+#~ msgctxt "@title:window"
+#~ msgid "Replace"
+#~ msgstr "Замінити"
+
+#~ msgctxt "@info"
+#~ msgid "No replacements made."
+#~ msgstr "Замін не виконано."
+
+#~ msgctxt "@info"
+#~ msgid "1 replacement made."
+#~ msgid_plural "%1 replacements made."
+#~ msgstr[0] "Зроблено %1 заміну."
+#~ msgstr[1] "Зроблено %1 заміни."
+#~ msgstr[2] "Зроблено %1 замін."
+#~ msgstr[3] "Зроблено %1 заміну."
+
+#~ msgctxt "@info"
+#~ msgid "Replace pattern not found in byte array."
+#~ msgstr "У масиві байтів не знайдено шаблона заміни."
+
+#~ msgctxt "@info"
+#~ msgid "End of byte array reached.<nl/>Continue from the beginning?"
+#~ msgstr "Досягнуто кінця масиву байтів.<nl/>Продовжити з початку?"
+
+#~ msgctxt "@info"
+#~ msgid "Beginning of byte array reached.<nl/>Continue from the end?"
+#~ msgstr "Досягнуто початку масиву байтів.<nl/>Продовжити з кінця?"
+
+#~ msgctxt "@title"
+#~ msgid "Replace"
+#~ msgstr "Замінити"
+
+#~ msgctxt "@option:check set the view into overwrite mode"
+#~ msgid "Set Overwrite Mode"
+#~ msgstr "Режим перезапису"
+
+#~ msgctxt "@option:check set the view into insert mode"
+#~ msgid "Set Insert Mode"
+#~ msgstr "Режим вставки"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "Choose whether you want the input to be inserted or to overwrite existing "
+#~ "data."
+#~ msgstr ""
+#~ "Виберіть, чи бажаєте ви щоб введену вами інформацію було вставлено між "
+#~ "вже існуючою, чи існуючу інформацію заміщено введеною."
+
+#~ msgctxt "@title:window"
+#~ msgid "Print Byte Array %1"
+#~ msgstr "Надрукувати масив байтів %1"
+
+#~ msgctxt "in the header of the printed page, e.g. Page 2 of 20"
+#~ msgid "Page %p of %P"
+#~ msgstr "Сторінка %p з %P"
+
+#~ msgctxt "in the footer of the printed page, e.g. Printed by: Joe User"
+#~ msgid "Printed by: %U"
+#~ msgstr "Надруковано: %U"
+
+#~ msgctxt "advertizer in the footer of the printed page"
+#~ msgid "Okteta, built on KDE4"
+#~ msgstr "Okteta, зібрано на KDE4"
+
+#~ msgctxt "@info"
+#~ msgid "Could not print."
+#~ msgstr "Не вдалося надрукувати."
+
+#~ msgctxt "name of the checksum algorithm"
+#~ msgid "Modular sum 64-bit"
+#~ msgstr "64-бітова модулярна сума"
+
+#~ msgctxt "name of the checksum algorithm"
+#~ msgid "Modular sum 16-bit"
+#~ msgstr "16-бітова модулярна сума"
+
+#~ msgctxt "name of the checksum algorithm, Cyclic Redundancy Check 32"
+#~ msgid "CRC-32"
+#~ msgstr "CRC-32"
+
+#~ msgctxt "name of the checksum algorithm"
+#~ msgid "Modular sum 8-bit"
+#~ msgstr "8-бітова модулярна сума"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Little-endian"
+#~ msgstr "Прямий порядок байтів"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Big-endian"
+#~ msgstr "Зворотний порядок байтів"
+
+#~ msgctxt "name of the checksum algorithm"
+#~ msgid "Adler-32"
+#~ msgstr "Adler-32"
+
+#~ msgctxt "name of the checksum algorithm"
+#~ msgid "Modular sum 32-bit"
+#~ msgstr "32-бітова модулярна сума"
+
+#~ msgctxt "@title:window"
+#~ msgid "Insert Pattern"
+#~ msgstr "Вставити шаблон"
+
+#~ msgctxt "@action:button"
+#~ msgid "&Insert"
+#~ msgstr "&Вставити"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Insert the pattern"
+#~ msgstr "Вставити шаблон"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Insert</interface> button, the pattern you "
+#~ "entered above is inserted in the byte array at the cursor position."
+#~ msgstr ""
+#~ "Якщо ви натиснете кнопку <interface>Вставити</interface>, введений вами "
+#~ "вище шаблон буде вставлено у масив байтів, починаючи з позиції курсора."
+
+#~ msgctxt "@title:group"
+#~ msgid "Insert"
+#~ msgstr "Вставити"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Pattern:"
+#~ msgstr "Шаблон:"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "Enter a pattern to search for, or select a previous pattern from the list."
+#~ msgstr ""
+#~ "Введіть шаблон для пошуку, або виберіть шаблон зі списку попередніх."
+
+#~ msgctxt "@label:spinbox number of times to insert the pattern"
+#~ msgid "&Number:"
+#~ msgstr "&Кількість:"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Enter the number of times the pattern should be inserted."
+#~ msgstr "Введіть кількість вставок шаблона."
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "&Insert Pattern..."
+#~ msgstr "&Вставити шаблон..."
+
+#~ msgid "Pattern inserted."
+#~ msgstr "Шаблон вставлено."
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "SHA-0"
+#~ msgstr "SHA-0"
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "SHA-1"
+#~ msgstr "SHA-1"
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "MD2"
+#~ msgstr "MD2"
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "MD4"
+#~ msgstr "MD4"
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "MD5"
+#~ msgstr "MD5"
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "RIPEMD160"
+#~ msgstr "RIPEMD160"
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "SHA-224"
+#~ msgstr "SHA-224"
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "SHA-256"
+#~ msgstr "SHA-256"
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "SHA-384"
+#~ msgstr "SHA-384"
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "SHA-512"
+#~ msgstr "SHA-512"
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "Whirlpool"
+#~ msgstr "Whirlpool"
+
+#~ msgctxt "@title:window of the tool to calculate checksums"
+#~ msgid "Checksum"
+#~ msgstr "Контрольна сума"
+
+#~ msgctxt "@label:listbox algorithm to use for the checksum"
+#~ msgid "Algorithm:"
+#~ msgstr "Алгоритм:"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Select the algorithm to use for the checksum."
+#~ msgstr ""
+#~ "Виберіть алгоритм, який буде використано для обчислення контрольної суми."
+
+#~ msgctxt "@title:group"
+#~ msgid "Parameters"
+#~ msgstr "Параметри"
+
+#~ msgctxt "@action:button calculate the checksum"
+#~ msgid "&Calculate"
+#~ msgstr "&Обчислити"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Calculate the checksum for the bytes in the selected range."
+#~ msgstr "Обчислити контрольну суму для байтів обраного діапазону."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Calculate</interface> button, the list will "
+#~ "be updated to all strings which are contained in the selected range and "
+#~ "have the set minimum length."
+#~ msgstr ""
+#~ "Якщо ви натиснете кнопку <interface>Обчислити</interface>, список буде "
+#~ "оновлено: у ньому залишаться лише рядки, що містяться у вибраному "
+#~ "діапазоні і мають встановлену мінімальну довжину."
+
+#~ msgctxt "@title:window of the tool to select a range"
+#~ msgid "Select"
+#~ msgstr "Вибрати"
+
+#~ msgctxt "@item:inlistbox coding of offset in the hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "Шістнадцяткове"
+
+#~ msgctxt "@item:inlistbox coding of offset in the decimal format"
+#~ msgid "Decimal"
+#~ msgstr "Десяткове"
+
+#~ msgctxt "@label:listbox"
+#~ msgid "Format:"
+#~ msgstr "Формат:"
+
+#~ msgctxt "@label:listbox"
+#~ msgid "Start offset:"
+#~ msgstr "Відступ від початку:"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Enter an offset to go to, or select a previous offset from the list."
+#~ msgstr ""
+#~ "Введіть зсув, до якого слід перейти або виберіть попередній зсув зі "
+#~ "списку."
+
+#~ msgctxt "@label:listbox"
+#~ msgid "End offset:"
+#~ msgstr "Відступ від кінця:"
+
+#~ msgctxt "@option:check"
+#~ msgid "End relative"
+#~ msgstr "Відносно кінця"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Extend the selection by the cursor move."
+#~ msgstr "Розширювати вибір рухом курсора."
+
+#~ msgctxt "@option:check"
+#~ msgid "&Backwards"
+#~ msgstr "&Назад"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Go backwards from the end or the current cursor location."
+#~ msgstr ""
+#~ "Перейти у напрямку початку від кінця або поточного розташування курсора."
+
+#~ msgctxt "@action:button"
+#~ msgid "&Select"
+#~ msgstr "По&значити"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Select the range."
+#~ msgstr "Визначити діапазон."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Select</interface> button, the cursor will be "
+#~ "moved in the document to or, on your option, by the offset you entered "
+#~ "above."
+#~ msgstr ""
+#~ "Якщо ви натиснете кнопку <interface>Позначити</interface>, курсор на "
+#~ "введену вище позицію або, за вашою вказівкою, на введену вище позицію "
+#~ "посунуту на задану величину відносно поточної."
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "&Select range..."
+#~ msgstr "По&значити діапазон..."
+
+#~ msgctxt "@title:window"
+#~ msgid "Decoding Table"
+#~ msgstr "Таблиця розкодування"
+
+#~ msgctxt "@label:textbox encoding of one byte as value in the binary format"
+#~ msgid "Binary 8-bit:"
+#~ msgstr "Двійкове 8-бітове:"
+
+#~ msgctxt "@label:textbox encoding of one byte as value in the octal format"
+#~ msgid "Octal 8-bit:"
+#~ msgstr "Вісімкове 8-бітове:"
+
+#~ msgctxt ""
+#~ "@label:textbox encoding of one byte as value in the hexadecimal format"
+#~ msgid "Hexadecimal 8-bit:"
+#~ msgstr "Шістнадцяткове 8-бітове:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Signed 8-bit:"
+#~ msgstr "8-бітове зі знаком:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Unsigned 8-bit:"
+#~ msgstr "8-бітове без знака:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Signed 16-bit:"
+#~ msgstr "16-бітове зі знаком:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Unsigned 16-bit:"
+#~ msgstr "16-бітове без знака:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Signed 32-bit:"
+#~ msgstr "32-бітове зі знаком:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Unsigned 32-bit:"
+#~ msgstr "32-бітове без знака:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Signed 64-bit:"
+#~ msgstr "64-бітове зі знаком:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Unsigned 64-bit:"
+#~ msgstr "64-бітове без знака:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Float 32-bit:"
+#~ msgstr "Дійсне 32-бітове:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Float 64-bit:"
+#~ msgstr "Дійсне 64-бітове:"
+
+#~ msgctxt "@label:textbox encoding of one byte as character"
+#~ msgid "Character 8-bit:"
+#~ msgstr "Символьне 8-бітове:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "UTF-8:"
+#~ msgstr "UTF-8:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "UTF-16:"
+#~ msgstr "UTF-16:"
+
+#~ msgctxt "@title:column name of the datatype"
+#~ msgid "Type"
+#~ msgstr "Тип"
+
+#~ msgctxt "@title:column value of the bytes for the datatype"
+#~ msgid "Value"
+#~ msgstr "Значення"
+
+#~ msgctxt "@info:tooltip for column Type"
+#~ msgid "The type of data"
+#~ msgstr "Тип даних"
+
+#~ msgctxt "@info:tooltip for column Value"
+#~ msgid "The value of the bytes for the datatype"
+#~ msgstr "Кількість байтів для типу даних"
+
+#~ msgctxt "@option:check"
+#~ msgid "Unsigned as hexadecimal"
+#~ msgstr "Числа без знаку як шістнадцяткові"
+
+#~ msgctxt "@title:column offset of the extracted string"
+#~ msgid "Offset"
+#~ msgstr "Зсув:"
+
+#~ msgctxt "@title:column string extracted from the byte array"
+#~ msgid "String"
+#~ msgstr "Рядок"
+
+#~ msgctxt "@title:window of the tool to extract strings"
+#~ msgid "Strings"
+#~ msgstr "Рядки"
+
+#~ msgctxt ""
+#~ "@label:spinbox minimum length for consecutive chars to be seen as a string"
+#~ msgid "Minimum length:"
+#~ msgstr "Мінімальна довжина:"
+
+#~ msgctxt "@action:button update the list of strings extracted"
+#~ msgid "&Update"
+#~ msgstr "&Оновити"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Update the list of strings contained in the selected range."
+#~ msgstr "Оновити список рядків, що містяться у вибраному діапазоні."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Update</interface> button, the list will be "
+#~ "updated to all strings which are contained in the selected range and have "
+#~ "the set minimum length."
+#~ msgstr ""
+#~ "Якщо ви натиснете кнопку <interface>Оновити</interface>, список буде "
+#~ "оновлено: у ньому залишаться лише рядки, що містяться у вибраному "
+#~ "діапазоні і мають встановлену мінімальну довжину."
+
+#~ msgctxt "@label:lineedit filter term for displayed strings"
+#~ msgid "Filter:"
+#~ msgstr "Фільтр:"
+
+#~ msgid "Enter a filter term here."
+#~ msgstr "Введіть сюди вираз фільтрування."
+
+#~ msgid "C&opy"
+#~ msgstr "К&опіювати"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Copies the selected strings to the clipboard."
+#~ msgstr "Копіює вибрані рядки до буфера клавіатури."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Copy</interface> button, all strings you "
+#~ "selected in the list are copied to the clipboard."
+#~ msgstr ""
+#~ "Якщо ви натиснете кнопку <interface>Копіювати</interface>, всі вибрані "
+#~ "вами рядки у списку буде скопійовано до буфера."
+
+#~ msgid "&Go to"
+#~ msgstr "Пере&йти до"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Shows the selected string in the view."
+#~ msgstr "Показує вибраний рядок у області перегляду."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Go to</interface> button, the string which "
+#~ "was last selected is marked and shown in the view."
+#~ msgstr ""
+#~ "Якщо ви натиснете кнопку <interface>Перейти до</interface>, буде "
+#~ "позначено і показано у області перегляду останній вибраний рядок."
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Warning: Byte Array has been modified since last update."
+#~ msgstr ""
+#~ "Попередження: масив байтів було змінено з часу останнього оновлення."
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "&Go to Offset..."
+#~ msgstr "З&сув переходу..."
+
+#~ msgctxt "@title:window of the tool to set a new offset for the cursor"
+#~ msgid "Goto"
+#~ msgstr "Перейти до"
+
+#~ msgctxt "@label:listbox"
+#~ msgid "Fo&rmat:"
+#~ msgstr "Фо&рмат:"
+
+#~ msgctxt "@label:listbox"
+#~ msgid "O&ffset:"
+#~ msgstr "&Зсув:"
+
+#~ msgctxt "@option:check"
+#~ msgid "From c&ursor"
+#~ msgstr "&Від курсора"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Go relative from the current cursor location and not absolute."
+#~ msgstr ""
+#~ "Перейти до певної позиції відносно поточної, а не абсолютної позиції."
+
+#~ msgctxt "@option:check"
+#~ msgid "&Extend selection"
+#~ msgstr "&Розширювати вибір"
+
+#~ msgctxt "@action:button"
+#~ msgid "&Go"
+#~ msgstr "&Перейти"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Go to the Offset"
+#~ msgstr "Перейти на позицію зі зсувом"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Go</interface> button, the cursor will be "
+#~ "moved in the document to or, on your option, by the offset you entered "
+#~ "above."
+#~ msgstr ""
+#~ "Якщо ви натиснете кнопку <interface>Перейти</interface>, курсор на "
+#~ "введену вище позицію або, за вашою вказівкою, на введену вище позицію "
+#~ "посунуту на задану величину відносно поточної."
+
+#~ msgctxt "@title:window"
+#~ msgid "Binary Filter"
+#~ msgstr "Двійковий фільтр"
+
+#~ msgctxt "@label:listbox operation to use by the filter"
+#~ msgid "Operation:"
+#~ msgstr "Операція:"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Select the operation to use for the filter."
+#~ msgstr "Виберіть операцію, яку слід використовувати для фільтра."
+
+#~ msgctxt "@action:button"
+#~ msgid "&Filter"
+#~ msgstr "&Фільтрувати"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Executes the filter."
+#~ msgstr "Виконує фільтрування."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Filter</interface> button, the operation you "
+#~ "selected above is executed on the document with the given options."
+#~ msgstr ""
+#~ "Якщо ви натиснете кнопку <interface>Фільтрувати</interface>, до документа "
+#~ "буде застосовано вибрану вище операцію з вказаними параметрами."
+
+#~ msgctxt "@label:spinbox"
+#~ msgid "Number of bytes:"
+#~ msgstr "Кількість байтів:"
+
+#~ msgctxt "@title:window"
+#~ msgid "Byte Table"
+#~ msgstr "Таблиця байтів"
+
+#~ msgid "Byte inserted."
+#~ msgstr "Байт вставлено."
+
+#~ msgctxt "@title:window"
+#~ msgid "Find Bytes"
+#~ msgstr "Знайти байти"
+
+#~ msgctxt "@action:button"
+#~ msgid "&Find"
+#~ msgstr "&Знайти"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Start searching"
+#~ msgstr "Почати пошук"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Find</interface> button, the bytes you "
+#~ "entered above are searched for within the byte array."
+#~ msgstr ""
+#~ "Якщо ви натиснете кнопку <interface>Знайти</interface>, у масиві байтів "
+#~ "буде проведено пошук введених вами вище байтів."
+
+#~ msgctxt "@title"
+#~ msgid "Search"
+#~ msgstr "Пошук"
+
+#~ msgctxt "@title:window"
+#~ msgid "Find"
+#~ msgstr "Знайти"
+
+#~ msgctxt "@info"
+#~ msgid "Search key not found in byte array."
+#~ msgstr "Бажаний ключ у масиві байтів не знайдено."
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Byte string to f&ind:"
+#~ msgstr "Рядок байтів для по&шуку:"
+
+#~ msgctxt "@title:group"
+#~ msgid "Options"
+#~ msgstr "Параметри"
+
+#~ msgctxt "@option:check"
+#~ msgid "C&ase sensitive"
+#~ msgstr "З врахуванням &регістру"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "Perform a case sensitive search: entering the pattern 'Joe' will not "
+#~ "match 'joe' or 'JOE', only 'Joe'."
+#~ msgstr ""
+#~ "Відрізняти великі та малі літери при пошуку: взірець «Іван» не буде "
+#~ "відповідати тексту «іван» або «ІВАН», а відповідатиме тільки тексту "
+#~ "«Іван»."
+
+#~ msgctxt "@option:check"
+#~ msgid "&Whole words only"
+#~ msgstr "Лише &цілі слова"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Require word boundaries in both ends of a match to succeed."
+#~ msgstr "Вимагати границі слова на обох кінцях для збігу з шаблоном."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "Start searching at the current cursor location rather than at the top."
+#~ msgstr ""
+#~ "Почати пошук від поточної позиції курсора, а не з початку документа."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Replace backwards."
+#~ msgstr "Замінювати вгору за текстом"
+
+#~ msgctxt "@option:check"
+#~ msgid "&Selected bytes"
+#~ msgstr "&Вибрані байти"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Only search within the current selection."
+#~ msgstr "Шукати лише у вибраному тексті."
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Value Coding"
+#~ msgstr "Кодування &значення"
+
+#~ msgctxt ""
+#~ "@item:inmenu encoding of the bytes as values in the hexadecimal format"
+#~ msgid "&Hexadecimal"
+#~ msgstr "&Шістнадцяткове"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
+#~ msgid "&Decimal"
+#~ msgstr "&Десяткове"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
+#~ msgid "&Octal"
+#~ msgstr "&Вісімкове"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
+#~ msgid "&Binary"
+#~ msgstr "&Двійкове"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Char Coding"
+#~ msgstr "Кодування &символів"
+
+#~ msgctxt "@option:check"
+#~ msgid "Show &Non-printing Chars"
+#~ msgstr "Показувати &недруковані символи"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Dynamic Layout"
+#~ msgstr "&Динамічне компонування"
+
+#~ msgctxt "@item:inmenu  The layout will not change on size changes."
+#~ msgid "&Off"
+#~ msgstr "&Вимкнути"
+
+#~ msgctxt ""
+#~ "@item:inmenu  The layout will adapt to the size, but only with complete "
+#~ "groups of bytes."
+#~ msgid "&Wrap Only Complete Byte Groups"
+#~ msgstr "П&ереносити лише повні групи байтів"
+
+#~ msgctxt ""
+#~ "@item:inmenu  The layout will adapt to the size and fit in as much bytes "
+#~ "per line as possible."
+#~ msgid "&On"
+#~ msgstr "&Увімкнути"
+
+#~ msgctxt "@option:check"
+#~ msgid "Show &Line Offset"
+#~ msgstr "Показувати зсув &рядка"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Show Values or Chars"
+#~ msgstr "&Показувати значення або символи"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Values"
+#~ msgstr "&Значення"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Chars"
+#~ msgstr "&Символи"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "Values && Chars"
+#~ msgstr "Значення і символи"
+
+#~ msgctxt "@title:column offset of the bookmark"
+#~ msgid "Offset"
+#~ msgstr "Зміщення"
+
+#~ msgctxt "@title:column title of the bookmark"
+#~ msgid "Title"
+#~ msgstr "Назва"
+
+#~ msgctxt "@title:window"
+#~ msgid "Bookmarks"
+#~ msgstr "Закладки"
+
+#~ msgctxt "default name of a bookmark"
+#~ msgid "Bookmark"
+#~ msgstr "Закладка"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Creates a new bookmark for the current cursor position."
+#~ msgstr "Створює нову закладку у поточній позиції курсора."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press this button, a new bookmark will be created for the current "
+#~ "cursor position."
+#~ msgstr ""
+#~ "Якщо ви натиснете цю кнопку, програма створити закладку для поточної "
+#~ "позиції курсора."
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Deletes all the selected bookmarks."
+#~ msgstr "Вилучає всі вибрані закладки."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press this button, all bookmarks which are selected will be "
+#~ "deleted."
+#~ msgstr ""
+#~ "Якщо ви натиснете цю кнопку, програма вилучить всі закладки, які було "
+#~ "вибрано."
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Moves the cursor to the selected bookmark."
+#~ msgstr "Пересуває курсор на вибрану закладку."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press this button, the cursor is moved to the position of the "
+#~ "bookmark which has been last selected."
+#~ msgstr ""
+#~ "Якщо ви натиснете цю кнопку, курсор буде пересунуто у позицію закладки, "
+#~ "яку було вибрано раніше."
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Enables renaming of the selected bookmark."
+#~ msgstr "Уможливлює перейменування вибраної закладки."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press this button, the name of the bookmark which was last "
+#~ "selected can be edited."
+#~ msgstr ""
+#~ "Якщо ви натиснете цю кнопку, ви зможете змінити назву обраної раніше "
+#~ "закладки."
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Remove Bookmark"
+#~ msgstr "Вилучити закладку"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Remove All Bookmarks"
+#~ msgstr "Вилучити всі закладки"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Go to Next Bookmark"
+#~ msgstr "Перейти до наступної закладки"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Go to Previous Bookmark"
+#~ msgstr "Перейти до попередньої закладки"
+
+#~ msgctxt "@item description of bookmark"
+#~ msgid "%1: %2"
+#~ msgstr "%1: %2"
+
+#~ msgctxt ""
+#~ "@item:inlistbox coding of the bytes as values in the hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "Шістнадцяткове"
+
+#~ msgctxt ""
+#~ "@item:inlistbox coding of the bytes as values in the decimal format"
+#~ msgid "Decimal"
+#~ msgstr "Десяткове"
+
+#~ msgctxt "@item:inlistbox coding of the bytes as values in the octal format"
+#~ msgid "Octal"
+#~ msgstr "Вісімкове"
+
+#~ msgctxt "@item:inlistbox coding of the bytes as values in the binary format"
+#~ msgid "Binary"
+#~ msgstr "Двійкове"
+
+#~ msgctxt "@item:inlistbox coding of the bytes as characters with the values"
+#~ msgid "Character(s)"
+#~ msgstr "Символ(и)"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Columns"
+#~ msgstr "&Стовпчики"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Rows"
+#~ msgstr "&Рядки"
+
+#~ msgctxt "@label:spinbox number of bytes the rotation is done within"
+#~ msgid "&Group size [bytes]"
+#~ msgstr "Розмір &групи [у байтах]"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Control the number of bytes within which each rotation is made."
+#~ msgstr "Керує кількістю байтів, на яку здійснюється кожне обертання."
+
+#~ msgctxt "@label:spinbox"
+#~ msgid "S&hift width [bits]"
+#~ msgstr "Величина з&суву [у бітах]"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "Control the width of the shift. Positive numbers move the bits to the "
+#~ "right, negative to the left."
+#~ msgstr ""
+#~ "Керує величиною зсуву. Додатні значення відповідають зсуву праворуч, "
+#~ "від’ємні — ліворуч."
+
+#~ msgctxt ""
+#~ "name of the filter; it moves the bits and pushes the ones over the end to "
+#~ "the begin again"
+#~ msgid "ROTATE data"
+#~ msgstr "застосувати до даних ROTATE"
+
+#~ msgctxt "name of the filter; it does a logic XOR operation"
+#~ msgid "operand XOR data"
+#~ msgstr "операнд XOR дані"
+
+#~ msgctxt "@option:check"
+#~ msgid "Also reverse bits"
+#~ msgstr "Зворотний порядок бітів"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "If set, the bits are arranged in reverse order as well."
+#~ msgstr "Якщо буде позначено, програма змінить змінено порядок бітів."
+
+#~ msgctxt ""
+#~ "name of the filter; it switches all bits from 0 to 1 and 1 to 0 "
+#~ "respectivly"
+#~ msgid "INVERT data"
+#~ msgstr "застосувати ІНВЕРСІЮ даних"
+
+#~ msgctxt "name of the filter; it moves the bits, setting freed ones to zero"
+#~ msgid "SHIFT data"
+#~ msgstr "ЗСУВ даних"
+
+#~ msgctxt "name of the filter; it does a logic AND operation"
+#~ msgid "operand AND data"
+#~ msgstr "операнд І дані"
+
+#~ msgctxt "@label:textbox operand to the arithmetic filter function"
+#~ msgid "Operand:"
+#~ msgstr "Операнд:"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Enter an operand, or select a previous operand from the list."
+#~ msgstr "Введіть операнд або виберіть попередній операнд зі списку"
+
+#~ msgctxt "@option:check"
+#~ msgid "Align at end"
+#~ msgstr "Вирівняти за кінцем"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "If set, the last operand will be aligned to the end of the data."
+#~ msgstr "Якщо встановлено, останній операнд буде вирівняно за кінцем даних."
+
+#~ msgctxt ""
+#~ "name of the filter; it changes the order of the bytes/bits to backwards"
+#~ msgid "REVERSE data"
+#~ msgstr "РЕВЕРСІЯ даних"
+
+#~ msgctxt "name of the filter; it does a logic OR operation"
+#~ msgid "operand OR data"
+#~ msgstr "операнд АБО дані"
+
+#~ msgctxt "@title:window"
+#~ msgid "File Info"
+#~ msgstr "Відомості про файл"
+
+#~ msgid "Type:"
+#~ msgstr "Тип:"
+
+#~ msgid "Location:"
+#~ msgstr "Адреса:"
+
+#~ msgid "Size:"
+#~ msgstr "Розмір:"
+
+#~ msgid "Created/Loaded:"
+#~ msgstr "Створено/Завантажено:"
+
+#~ msgid "Last modified:"
+#~ msgstr "Востаннє змінено:"
+
+#~ msgid "Last synchronized:"
+#~ msgstr "Востаннє синхронізовано:"
+
+#~ msgid "Created:"
+#~ msgstr "Створено:"
+
+#~ msgctxt "There is no storage location assigned to yet."
+#~ msgid "[None]"
+#~ msgstr "[Немає]"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Overwrite only"
+#~ msgstr "Лише перезапис"
+
+#~ msgctxt "The byte array was new created."
+#~ msgid "New created."
+#~ msgstr "Створено новий."
+
+#~ msgctxt "numbered title for a created document without a filename"
+#~ msgid "[New Byte Array]"
+#~ msgid_plural "[New Byte Array %1]"
+#~ msgstr[0] "[Новий масив байтів %1]"
+#~ msgstr[1] "[Новий масив байтів %1]"
+#~ msgstr[2] "[Новий масив байтів %1]"
+#~ msgstr[3] "[Новий масив байтів %1]"
+
+#~ msgctxt "name of the data type"
+#~ msgid "Byte Array"
+#~ msgstr "Масив байтів"
+
+#~ msgctxt "@title:window"
+#~ msgid "Info"
+#~ msgstr "Інформація"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Import"
+#~ msgstr "Імпортувати"
+
+#~ msgid "Paste As"
+#~ msgstr "Вставити як"
+
+#~ msgid "Conversion &Field"
+#~ msgstr "&Поле перетворення"
+
+#~ msgid "Searc&h Bar"
+#~ msgstr "Панель по&шуку"
+
+#~ msgctxt "@info"
+#~ msgid "Problem while saving to local filesystem."
+#~ msgstr "Проблема зі збереженням у локальну файлову систему."
+
+#~ msgctxt "@info"
+#~ msgid "Problem while synching with local filesystem."
+#~ msgstr "Проблема з синхронізацією з локальною файловою системою."
+
+#~ msgctxt "@info"
+#~ msgid "Problem while loading from local filesystem."
+#~ msgstr "Проблема з завантаженням з локальної файлової системи."
+
+#~ msgctxt "@title:window"
+#~ msgid "Export"
+#~ msgstr "Експортувати"
+
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
+#~ msgstr "Уже існує файл <nl/><filename>%1</filename>.<nl/>Перезаписати?"
+
+#~ msgctxt "@title:window"
+#~ msgid "Save As"
+#~ msgstr "Зберегти як"
+
+#~ msgctxt "@title:window"
+#~ msgid "Close"
+#~ msgstr "Закрити"
+
+#~ msgctxt "@info \"%title\" has been modified."
+#~ msgid ""
+#~ "<filename>%1</filename> has been modified.<nl/>Do you want to save your "
+#~ "changes or discard them?"
+#~ msgstr ""
+#~ "<filename>%1</filename> було змінено.<nl/>Бажаєте зберегти внесені вами "
+#~ "зміни чи відкинути їх?"
+
+#~ msgctxt "@info \"%title\" has been modified."
+#~ msgid ""
+#~ "<filename>%1</filename> has been modified.<nl/>Do you want to discard "
+#~ "your changes?"
+#~ msgstr ""
+#~ "<filename>%1</filename> було змінено.<nl/>Ви бажаєте відкинути всі "
+#~ "внесені зміни?"
+
+#~ msgctxt "@title:window"
+#~ msgid "Copy As"
+#~ msgstr "Копіювати як"
+
+#~ msgctxt "@action:button"
+#~ msgid "&Copy to clipboard"
+#~ msgstr "&Копіювати до буфера"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Copy the selected data to the clipboard."
+#~ msgstr "Копіює вибрані рядки до буфера обміну інформацією."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Copy to clipboard</interface> button, the "
+#~ "selected data will be copied to the clipboard with the settings you "
+#~ "entered above."
+#~ msgstr ""
+#~ "Якщо ви натиснете кнопку <interface>Копіювати до буфера</interface>, "
+#~ "виділені дані буде скопійовано до буфера з параметрами, які ви вказали "
+#~ "вище."
+
+#~ msgctxt "@title:group"
+#~ msgid "Preview (max. first 100 bytes)"
+#~ msgstr "Перегляд (макс. перші 100 байтів)"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Copy As"
+#~ msgstr "Копіювати як"
+
+#~ msgctxt "@item There are no encoders."
+#~ msgid "Not available."
+#~ msgstr "Немає."
+
+#~ msgctxt "@title:menu"
+#~ msgid "Export"
+#~ msgstr "Експортувати"
+
+#~ msgctxt "@item There are no exporters."
+#~ msgid "Not available."
+#~ msgstr "Немає."
+
+#~ msgctxt "@action:button"
+#~ msgid "&Export to File..."
+#~ msgstr "&Експортувати до файла..."
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Export the selected data to a file."
+#~ msgstr "Експортувати вибрані дані до файла."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Export to file</interface> button, the "
+#~ "selected data will be copied to a file with the settings you entered "
+#~ "above."
+#~ msgstr ""
+#~ "Якщо ви натиснете кнопку <interface>Експортувати до файла</interface>, "
+#~ "виділені дані буде скопійовано до файла з параметрами, які ви вказали "
+#~ "вище."
+
+#~ msgid "Zoom"
+#~ msgstr "Зміна масштабу"
+
+#~ msgctxt "zoom-factor (percentage)"
+#~ msgid "%1%"
+#~ msgstr "%1%"
+
+#~ msgid "&Fit to Width"
+#~ msgstr "Підібрати за &шириною"
+
+#~ msgid "&Fit to Height"
+#~ msgstr "Підібрати за &висотою"
+
+#~ msgid "&Fit to Size"
+#~ msgstr "Підібрати за &розміром"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Zoom: %1%"
+#~ msgstr "Масштаб: %1%"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Undo"
+#~ msgstr "Вернути"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Redo"
+#~ msgstr "Повторити"
+
+#~ msgctxt "@action Undo: [change]"
+#~ msgid "Undo: %1"
+#~ msgstr "Вернути: %1"
+
+#~ msgctxt "@action Redo: [change]"
+#~ msgid "Redo: %1"
+#~ msgstr "Повторити: %1"
+
+#~ msgctxt "@title:column description of the change"
+#~ msgid "Title"
+#~ msgstr "Опис"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Title of the document"
+#~ msgstr "Назва документа"
+
+#~ msgctxt "@title:window"
+#~ msgid "Documents"
+#~ msgstr "Документи"
+
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Folder of Current Document"
+#~ msgstr "Тека поточного документа"
+
+#~ msgctxt "@title:window"
+#~ msgid "Filesystem"
+#~ msgstr "Файлова система"
+
+#~ msgctxt "@item There are no windows."
+#~ msgid "None."
+#~ msgstr "Немає."
+
+#~ msgctxt "@title:window"
+#~ msgid "Versions"
+#~ msgstr "Версії"
+
+#~ msgctxt "@title:column Id of the version"
+#~ msgid "Id"
+#~ msgstr "ІД"
+
+#~ msgctxt "@title:column description of the change"
+#~ msgid "Changes"
+#~ msgstr "Зміни"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Id of the version"
+#~ msgstr "Ідентифікатор версії"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Description of what changed"
+#~ msgstr "Опис змін"
+
+#~ msgctxt "@option:check set the document to read-only"
+#~ msgid "Set Read-only"
+#~ msgstr "Тільки для читання"
+
+#~ msgctxt "@option:check set the document to read-write"
+#~ msgid "Set Read-write"
+#~ msgstr "Режим читання-запису"
+
+#~ msgctxt "@option:check the document is read-write"
+#~ msgid "Read-write"
+#~ msgstr "Читання-запис"
+
+#~ msgctxt "@option:check the document is read-only"
+#~ msgid "Read-only"
+#~ msgstr "Лише читання"
+
+#~ msgctxt "@title:window"
+#~ msgid "Go to Offset"
+#~ msgstr "Перейти на позицію зі зсувом"
+
+#~ msgctxt "@title:group"
+#~ msgid "Go To"
+#~ msgstr "Перейти до"
+
+#~ msgid "Edit files as an array of bytes"
+#~ msgstr "Редагує файли, як масиви байтів"
+
+#~ msgctxt "@item:inlistbox cding of the bytes as values in the octal format"
+#~ msgid "Octal"
+#~ msgstr "Вісімкове"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Resize Style"
+#~ msgstr "Метод &зміни розміру"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&No Resize"
+#~ msgstr "&Без зміни розміру"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Lock Groups"
+#~ msgstr "За&фіксувати групи"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Full Size Usage"
+#~ msgstr "По&вне використання розмірів"
+
+#~ msgctxt "@label"
+#~ msgid "Size [bytes]: "
+#~ msgstr "Розмір [у байтах]: "
+
+#~ msgctxt "@info:status the statistic is not uptodate"
+#~ msgid "Warning: not up-to-date"
+#~ msgstr "Попередження: не відповідає поточному варіанту"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Warning: byte array has been modified since last update."
+#~ msgstr ""
+#~ "Попередження: масив байтів було змінено з часу останнього оновлення."
+
+#~ msgctxt "@info"
+#~ msgid "<nl/>End of byte array reached.<nl/>Continue from the beginning?"
+#~ msgstr "<nl/>Досягнуто кінця масиву байтів.<nl/>Продовжити з початку?"
+
+#~ msgctxt "@info"
+#~ msgid "<nl/>Beginning of byte array reached.<nl/>Continue from the end?"
+#~ msgstr "<nl/>Досягнуто кінця масиву байтів.<nl/>Продовжити з кінця?"
+
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "There is already a file at <nl/><filename>%1</filename>.<nl/>Overwrite?"
+#~ msgstr "Уже існує файл <nl/><filename>%1</filename>.<nl/>Перезаписати?"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Copy as"
+#~ msgstr "Копіювати як"
+
+#~ msgctxt "@option:check"
+#~ msgid "Reverse also Bits"
+#~ msgstr "Також поміняти порядок бітів"

@@ -1,0 +1,1348 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Youness BOUTYOUR <niceboy@linuxac.org>, 2008.
+# Youness BOUTYOUR <niceboy120@gmail.com>, 2008.
+# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: okteta\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-04-24 00:47+0000\n"
+"PO-Revision-Date: 2010-07-23 22:50+0400\n"
+"Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
+"Language-Team: Arabic <linuxac-kde-arabic-team@googlegroups.com>\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Lokalize 1.0\n"
+
+#: controllers/document/modified/modifiedbarcontroller.cpp:74
+#, kde-format
+msgctxt "@tooltip the document is modified"
+msgid "Modified."
+msgstr "معدل."
+
+#: controllers/document/modified/modifiedbarcontroller.cpp:75
+#, kde-format
+msgctxt "@tooltip the document is not modified"
+msgid "Not modified."
+msgstr "غير معدّل."
+
+#: controllers/document/readonly/readonlybarcontroller.cpp:23
+#, kde-format
+msgctxt "@option:check the document is read-write"
+msgid "Read-write"
+msgstr "للقراءة و الكتابة"
+
+#: controllers/document/readonly/readonlybarcontroller.cpp:24
+#, kde-format
+msgctxt "@option:check the document is read-only"
+msgid "Read-only"
+msgstr "القراءة فقط"
+
+#: controllers/document/readonly/readonlycontroller.cpp:25
+#, kde-format
+msgctxt "@option:check set the document to read-only"
+msgid "Set Read-only"
+msgstr "ضع  في وضع القراءة فقط"
+
+#: controllers/document/readonly/readonlycontroller.cpp:27
+#, kde-format
+msgctxt "@option:check set the document to read-write"
+msgid "Set Read-write"
+msgstr "ضع  في وضع القراءة - الكتابة"
+
+#: controllers/document/terminal/terminaltool.cpp:32
+#: controllers/document/terminal/terminaltoolviewfactory.cpp:24
+#, kde-format
+msgctxt "@title:window"
+msgid "Terminal"
+msgstr "الطرفية"
+
+#: controllers/document/versionview/versiontablemodel.cpp:108
+#, kde-format
+msgctxt "@title:column Id of the version"
+msgid "Id"
+msgstr "الهوية"
+
+#: controllers/document/versionview/versiontablemodel.cpp:109
+#, kde-format
+msgctxt "@title:column description of the change"
+msgid "Changes"
+msgstr "تغييرات"
+
+#: controllers/document/versionview/versiontablemodel.cpp:114
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Id of the version"
+msgstr "هوية الإصدار"
+
+#: controllers/document/versionview/versiontablemodel.cpp:115
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Description of what changed"
+msgstr "وصف لما تغير"
+
+#: controllers/document/versionview/versionviewtool.cpp:26
+#: controllers/document/versionview/versionviewtoolviewfactory.cpp:24
+#, kde-format
+msgctxt "@title:window"
+msgid "Versions"
+msgstr "الإصدارات"
+
+#: controllers/documentsystem/close/closecontroller.cpp:40
+#: controllers/shellwindow/viewareacontextmenu/viewareacontextmenucontroller.cpp:56
+#, fuzzy, kde-format
+#| msgctxt "@title:menu"
+#| msgid "Close All"
+msgctxt "@action:inmenu"
+msgid "Close All"
+msgstr "أغلق الكل"
+
+#: controllers/documentsystem/close/closecontroller.cpp:47
+#: controllers/shellwindow/viewareacontextmenu/viewareacontextmenucontroller.cpp:63
+#, fuzzy, kde-format
+#| msgctxt "@title:menu"
+#| msgid "Close All Other"
+msgctxt "@action:inmenu"
+msgid "Close All Other"
+msgstr "أغلق الكل الأخرى"
+
+#: controllers/documentsystem/creator/creatorcontroller.cpp:41
+#, kde-format
+msgctxt "@title:menu create new byte arrays from different sources"
+msgid "New"
+msgstr "جديد"
+
+#: controllers/documentsystem/creator/creatorcontroller.cpp:49
+#, fuzzy, kde-format
+#| msgctxt "@title:menu create a new empty document"
+#| msgid "Empty"
+msgctxt "@item:inmenu create a new empty document"
+msgid "Empty"
+msgstr "فارغ"
+
+#: controllers/documentsystem/creator/creatorcontroller.cpp:60
+#, fuzzy, kde-format
+#| msgctxt "@title:menu create a new document from data in the clipboard"
+#| msgid "From Clipboard"
+msgctxt "@item:inmenu create a new document from data in the clipboard"
+msgid "From Clipboard"
+msgstr "من الحافظة"
+
+#. i18nc("@title:column Id of the version",         "Id") :
+#: controllers/documentsystem/documentsbrowser/documentlistmodel.cpp:111
+#, kde-format
+msgctxt "@title:column description of the change"
+msgid "Title"
+msgstr "العنوان"
+
+#. i18nc("@info:tooltip","Id of the version") :
+#: controllers/documentsystem/documentsbrowser/documentlistmodel.cpp:117
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Title of the document"
+msgstr "عنوان المستند"
+
+#: controllers/documentsystem/documentsbrowser/documentstool.cpp:34
+#: controllers/documentsystem/documentsbrowser/documentstoolviewfactory.cpp:24
+#, kde-format
+msgctxt "@title:window"
+msgid "Documents"
+msgstr "المستندات"
+
+#: controllers/documentsystem/filesystembrowser/filesystembrowsertool.cpp:33
+#: controllers/documentsystem/filesystembrowser/filesystembrowsertoolviewfactory.cpp:24
+#, kde-format
+msgctxt "@title:window"
+msgid "Filesystem"
+msgstr "نظام الملفات"
+
+#: controllers/documentsystem/filesystembrowser/filesystembrowserview.cpp:79
+#, kde-format
+msgctxt "@action:intoolbar"
+msgid "Folder of Current Document"
+msgstr "مجلد المستند الحالي"
+
+#: controllers/io/copyas/copyascontroller.cpp:44
+#, kde-format
+msgctxt "@title:menu"
+msgid "Copy As"
+msgstr "انسخ كـ"
+
+#: controllers/io/copyas/copyascontroller.cpp:91
+#, kde-format
+msgctxt "@item There are no encoders."
+msgid "Not available."
+msgstr "غير متوفر."
+
+#: controllers/io/copyas/copyasdialog.cpp:39
+#, kde-format
+msgctxt "@title:window"
+msgid "Copy As"
+msgstr "انسخ كـ"
+
+#: controllers/io/copyas/copyasdialog.cpp:61
+#: controllers/io/export/exportdialog.cpp:61
+#, kde-format
+msgctxt "@title:group"
+msgid "Preview"
+msgstr "معاينة"
+
+#: controllers/io/copyas/copyasdialog.cpp:72
+#, kde-format
+msgctxt "@action:button"
+msgid "&Copy to clipboard"
+msgstr "ا&نسخ إلى الحافظة"
+
+#: controllers/io/copyas/copyasdialog.cpp:74
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Copy the selected data to the clipboard."
+msgstr "انسخ البيانات المختارة إلى الحافظة"
+
+#: controllers/io/copyas/copyasdialog.cpp:76
+#, kde-kuit-format
+msgctxt "@info:whatsthis"
+msgid ""
+"If you press the <interface>Copy to clipboard</interface> button, the "
+"selected data will be copied to the clipboard with the settings you entered "
+"above."
+msgstr ""
+"إذا ضغطت على زر <interface>انسخ إلى الحافظة</interface> ؛ فإن البيانات "
+"المختارة ستنسخ إلى الحافظة بالإعدادات التي أدخلتها في الأعلى."
+
+#: controllers/io/export/exportcontroller.cpp:40
+#, kde-format
+msgctxt "@title:menu"
+msgid "Export"
+msgstr "صدِّر"
+
+#: controllers/io/export/exportcontroller.cpp:87
+#, kde-format
+msgctxt "@item There are no exporters."
+msgid "Not available."
+msgstr "غير متوفر."
+
+#: controllers/io/export/exportdialog.cpp:39
+#: core/system/modelcodecmanager_p.cpp:103
+#, kde-format
+msgctxt "@title:window"
+msgid "Export"
+msgstr "التصدير"
+
+#: controllers/io/export/exportdialog.cpp:72
+#, kde-format
+msgctxt "@action:button"
+msgid "&Export to File..."
+msgstr "&صدر إلى الملف..."
+
+#: controllers/io/export/exportdialog.cpp:74
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Export the selected data to a file."
+msgstr "تصدر البيانات المختارة إلى ملف."
+
+#: controllers/io/export/exportdialog.cpp:76
+#, kde-kuit-format
+msgctxt "@info:whatsthis"
+msgid ""
+"If you press the <interface>Export to file</interface> button, the selected "
+"data will be copied to a file with the settings you entered above."
+msgstr ""
+"إذا ضغطت على زر <interface>صدر إلى ملف</interface> ؛ فإن البيانات المختارة "
+"ستنسخ إلى ملف بالإعدادات التي أدخلتها في الأعلى."
+
+#: controllers/io/insert/insertcontroller.cpp:40
+#, kde-format
+msgctxt "@title:menu"
+msgid "Insert"
+msgstr "أدرج"
+
+#: controllers/io/insert/insertcontroller.cpp:90
+#, kde-format
+msgctxt "@item There are no generators."
+msgid "Not available."
+msgstr "غير متوفر."
+
+#: controllers/io/insert/insertdialog.cpp:34
+#, kde-format
+msgctxt "@title:window"
+msgid "Insert"
+msgstr "أدرج"
+
+#: controllers/io/insert/insertdialog.cpp:44
+#, kde-format
+msgctxt "@action:button"
+msgid "&Insert"
+msgstr "أ&درج"
+
+#: controllers/io/insert/insertdialog.cpp:46
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Insert the generated data into the document."
+msgstr "تدرج البيانات المولدة إلى المستند."
+
+#: controllers/io/insert/insertdialog.cpp:48
+#, kde-kuit-format
+msgctxt "@info:whatsthis"
+msgid ""
+"If you press the <interface>Insert</interface> button, the data will be "
+"generated with the settings you entered above and inserted into the document "
+"at the cursor position."
+msgstr ""
+"إذا ضغطت على زر <interface>أدرج</interface> ؛ فإن البيانات المولدة "
+"بالإعدادات التي أدخلتها في الأعلى في المستند عند موضع المؤشر."
+
+#: controllers/io/synchronize/synchronizecontroller.cpp:34
+#: controllers/shellwindow/viewareacontextmenu/viewareacontextmenucontroller.cpp:38
+#, fuzzy, kde-format
+#| msgctxt "@title:menu"
+#| msgid "Reloa&d"
+msgctxt "@action:inmenu"
+msgid "Reloa&d"
+msgstr "أعد ال&تحميل"
+
+#: controllers/shellwindow/viewareasplit/viewareasplitcontroller.cpp:42
+#, fuzzy, kde-format
+#| msgctxt "@title:menu"
+#| msgid "Split Vertically"
+msgctxt "@action:inmenu"
+msgid "Split Vertically"
+msgstr "اقسم رأسيا"
+
+#: controllers/shellwindow/viewareasplit/viewareasplitcontroller.cpp:50
+#, fuzzy, kde-format
+#| msgctxt "@title:menu"
+#| msgid "Split Horizontal"
+msgctxt "@action:inmenu"
+msgid "Split Horizontal"
+msgstr "اقسّم أفقيا"
+
+#: controllers/shellwindow/viewareasplit/viewareasplitcontroller.cpp:58
+#, fuzzy, kde-format
+#| msgctxt "@title:menu"
+#| msgid "Close View Area"
+msgctxt "@action:inmenu"
+msgid "Close View Area"
+msgstr "أغلق منطقة المشاهدة"
+
+#: controllers/shellwindow/viewlistmenu/viewlistmenucontroller.cpp:77
+#, kde-format
+msgctxt "@item There are no windows."
+msgid "None."
+msgstr "بدون."
+
+#: controllers/view/version/versioncontroller.cpp:32
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Undo"
+msgstr "تراجع"
+
+#: controllers/view/version/versioncontroller.cpp:43
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Redo"
+msgstr "كرّر"
+
+#: controllers/view/version/versioncontroller.cpp:130
+#, kde-format
+msgctxt "@action Undo: [change]"
+msgid "Undo: %1"
+msgstr "تراجع: %1"
+
+#: controllers/view/version/versioncontroller.cpp:150
+#, kde-format
+msgctxt "@action Redo: [change]"
+msgid "Redo: %1"
+msgstr "كرّر: %1"
+
+#: controllers/view/zoom/zoomcontroller.cpp:36
+#, kde-format
+msgid "Zoom"
+msgstr "تحجيم"
+
+#: controllers/view/zoom/zoomcontroller.cpp:45
+#, kde-format
+msgctxt "zoom-factor (percentage)"
+msgid "%1%"
+msgstr "%1%"
+
+#: controllers/view/zoom/zoomcontroller.cpp:58
+#, kde-format
+msgid "&Fit to Width"
+msgstr "ملائمة لل&عرض"
+
+#: controllers/view/zoom/zoomcontroller.cpp:60
+#, kde-format
+msgid "&Fit to Height"
+msgstr "ملائمة للإ&رتفاع"
+
+#: controllers/view/zoom/zoomcontroller.cpp:62
+#, kde-format
+msgid "&Fit to Size"
+msgstr "ملائمة لل&حجم"
+
+#: controllers/view/zoom/zoomslider.cpp:107
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Zoom: %1%"
+msgstr "تحجيم: %1%"
+
+#: core/system/documentsyncmanager_p.cpp:114
+#, kde-format
+msgctxt "@title:window"
+msgid "Save As"
+msgstr "احفظ باسم"
+
+#: core/system/documentsyncmanager_p.cpp:202
+#, kde-format
+msgctxt "@title:window"
+msgid "Close"
+msgstr "أغلق"
+
+#: core/system/documentsyncmanager_p.cpp:237
+#, kde-format
+msgctxt "@title:window"
+msgid "Reload"
+msgstr "أعد تحميل"
+
+#: core/system/modelcodecmanager_p.cpp:112
+#, kde-format
+msgctxt "@action:button"
+msgid "&Export"
+msgstr "&صدّر"
+
+#: gui/system/createdialog.cpp:35
+#, kde-format
+msgctxt "@title:window"
+msgid "Create"
+msgstr "أنشئ"
+
+#: gui/system/createdialog.cpp:46
+#, kde-format
+msgctxt "@action:button create the new document"
+msgid "&Create"
+msgstr "أ&نشئ"
+
+#: gui/system/createdialog.cpp:48
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Create a new document with the generated data."
+msgstr "أنشئ مستند جديد بالبيانات المولدة"
+
+#: gui/system/createdialog.cpp:50
+#, kde-kuit-format
+msgctxt "@info:whatsthis"
+msgid ""
+"If you press the <interface>Create</interface> button, the data will be "
+"generated with the settings you entered above and inserted in a new document."
+msgstr ""
+"إذا ضغطت على زر <interface>أنشئ</interface> ؛ سيتم توليد بيانات بالإعدادات "
+"المدخلة في الأعلى ، و ستوضع في مستند جديد."
+
+#: gui/system/dialoghandler.cpp:33
+#, kde-kuit-format
+msgctxt "@info"
+msgid "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
+msgstr ""
+"يوجد مسبقا ملفا يحمل هذا الاسم <nl/><filename>%1</filename>.<nl/> هل نكتب "
+"فوقه؟"
+
+#: gui/system/dialoghandler.cpp:47
+#, kde-kuit-format
+msgctxt "@info \"%title\" has been modified."
+msgid ""
+"There are unsaved modifications to <filename>%1</filename>. They will be "
+"lost if you reload the document.<nl/>Do you want to discard them?"
+msgstr ""
+"توجد تعديلات غير محفوظة في <filename>%1</filename>. ستفقد هذه التعديلات إذا "
+"أعدت تحميل المستند.<nl/>هل تريد اهمالها؟"
+
+#: gui/system/dialoghandler.cpp:60
+#, kde-kuit-format
+msgctxt "@info \"%title\" has been modified."
+msgid ""
+"<filename>%1</filename> has been modified.<nl/>Do you want to save your "
+"changes or discard them?"
+msgstr ""
+"المستند <filename>%1</filename> تم تعديله.<nl/>هل تريد حفظ تغيراتك أو رفضهن ؟"
+
+#: gui/system/dialoghandler.cpp:74
+#, kde-kuit-format
+msgctxt "@info \"%title\" has been modified."
+msgid ""
+"<filename>%1</filename> has been modified.<nl/>Do you want to discard your "
+"changes?"
+msgstr "المستند <filename>%1</filename> تم تعديله.<nl/>هل تريد اهمال تغيراتك ؟"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Export the data into the file with the entered name."
+#~ msgstr "تصدر البيانات في الملف بالاسم المدخل."
+
+#, fuzzy
+#~| msgctxt "@info"
+#~| msgid "Problem when synching with local filesystem."
+#~ msgctxt "@info"
+#~ msgid "Problem while synching with local filesystem."
+#~ msgstr "مشكل عند التزامن مع نظام الملفات المحلي"
+
+#, fuzzy
+#~| msgctxt "@info"
+#~| msgid "Problem when loading from local filesystem."
+#~ msgctxt "@info"
+#~ msgid "Problem while loading from local filesystem."
+#~ msgstr "مشكل عند التحميل من نظام الملفات المحلي"
+
+#, fuzzy
+#~| msgctxt "@info"
+#~| msgid "Problem when saving to local filesystem."
+#~ msgctxt "@info"
+#~ msgid "Problem while saving to local filesystem."
+#~ msgstr "مشكل عند التخزين في نظام الملفات المحلي"
+
+#~ msgid "File(s) to load"
+#~ msgstr "ملف(ات) للتحميل"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Permissions"
+#~ msgstr "صلاحيات"
+
+#~ msgid "&Windows"
+#~ msgstr "نو&افذ"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "شريط الأدوات الرئيسي"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "يونس بوطيور"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "niceboy120@gmail.com"
+
+#~ msgid "Okteta"
+#~ msgstr "أكتيتا"
+
+#, fuzzy
+#~| msgid "KDE bytes editor"
+#~ msgid "KDE byte editor"
+#~ msgstr "محرر كي دي للبايت"
+
+#, fuzzy
+#~| msgid "Copyright 2006-2008 Friedrich W. H. Kossebau"
+#~ msgid "Copyright 2006-2009 Friedrich W. H. Kossebau"
+#~ msgstr "Copyright 2006-2008 Friedrich W. H. Kossebau"
+
+#~ msgid "Friedrich W. H. Kossebau"
+#~ msgstr "Friedrich W. H. Kossebau"
+
+#~ msgid "Author"
+#~ msgstr "مؤلف"
+
+#, fuzzy
+#~| msgctxt "name of the encoding target"
+#~| msgid "Values"
+#~ msgctxt "name of the encoding target"
+#~ msgid "Values..."
+#~ msgstr "قيم"
+
+#, fuzzy
+#~| msgctxt "@title:menu"
+#~| msgid "&Value Coding"
+#~ msgid "Value coding:"
+#~ msgstr "ترميز الق&يمة"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the value in hexadecimal format"
+#~| msgid "Hexadecimal"
+#~ msgctxt ""
+#~ "@item:inmenu encoding of the bytes as values in the hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "ست عشري"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the value in decimal format"
+#~| msgid "Decimal"
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
+#~ msgid "Decimal"
+#~ msgstr "العد العشري"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the value in octal format"
+#~| msgid "Octal"
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
+#~ msgid "Octal"
+#~ msgstr "العد الثماني"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the value in binary format"
+#~| msgid "Binary"
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
+#~ msgid "Binary"
+#~ msgstr "العد الثنائي"
+
+#, fuzzy
+#~| msgctxt "name of the encoding target"
+#~| msgid "Values"
+#~ msgctxt "@item name of the encoding result"
+#~ msgid "Values"
+#~ msgstr "قيم"
+
+#, fuzzy
+#~| msgctxt "@item There are no encoders."
+#~| msgid "Not available."
+#~ msgctxt "@label:textbox name of the created variable"
+#~ msgid "Name of variable:"
+#~ msgstr "غير متوفر."
+
+#, fuzzy
+#~| msgctxt "name of the encoding target"
+#~| msgid "C array"
+#~ msgctxt "@item name of the encoding result"
+#~ msgid "C Array"
+#~ msgstr "جدول  C"
+
+#, fuzzy
+#~| msgctxt "name of the encoding target"
+#~| msgid "C array"
+#~ msgctxt "name of the encoding target"
+#~ msgid "C Array..."
+#~ msgstr "جدول  C"
+
+#~ msgctxt "destination of the byte array"
+#~ msgid "Loaded from file."
+#~ msgstr "تحميل من الملف"
+
+#~ msgctxt "name of the encoding target"
+#~ msgid "Plain Text"
+#~ msgstr "كتابة واضحة"
+
+#~ msgctxt "name of the encoding target"
+#~ msgid "View in Plain Text"
+#~ msgstr "عرض بالكتابة الواضحة "
+
+#~ msgctxt "@action:button update the statistic of the byte frequency"
+#~ msgid "&Update"
+#~ msgstr "تحديث&"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip"
+#~| msgid "Updates the statistic of the byte frequency."
+#~ msgctxt "@info:tooltip"
+#~ msgid "Updates the byte frequency statistics."
+#~ msgstr "تحديث إحصائيات تردد الخاصة بكل أثمون(byte)."
+
+#, fuzzy
+#~| msgctxt "@info:whatsthis"
+#~| msgid ""
+#~| "If you press the <interface>Update</interface> button, the statistic of "
+#~| "the byte frequency is updated."
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Update</interface> button, the byte frequency "
+#~ "statistics are updated."
+#~ msgstr ""
+#~ "إذا ضغطت على زر <interface>تحديث</interface>, فإحصائيات تردد كل أثمون "
+#~ "(بايت) قد حدثت."
+
+#~ msgctxt "@item:intable character is not defined"
+#~ msgid "undef."
+#~ msgstr "غير معرف"
+
+#~ msgctxt "@title:column short for Hexadecimal"
+#~ msgid "Hex"
+#~ msgstr "Hex"
+
+#~ msgctxt "@title:column short for Decimal"
+#~ msgid "Dec"
+#~ msgstr "Dec"
+
+#~ msgctxt "@title:column short for Octal"
+#~ msgid "Oct"
+#~ msgstr "Oct"
+
+#~ msgctxt "@title:column short for Binary"
+#~ msgid "Bin"
+#~ msgstr "Bin"
+
+#~ msgctxt "@title:column short for Character"
+#~ msgid "Char"
+#~ msgstr "Char"
+
+#~ msgctxt "@title:column count of characters"
+#~ msgid "Count"
+#~ msgstr "العدد الإجمالي للحرف"
+
+#~ msgctxt "@title:column Percent of byte in total"
+#~ msgid "Percent"
+#~ msgstr "النسبة المئوية"
+
+#~ msgctxt "@info:tooltip column contains the value in hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "ست عشري"
+
+#~ msgctxt "@info:tooltip column contains the value in decimal format"
+#~ msgid "Decimal"
+#~ msgstr "العد العشري"
+
+#~ msgctxt "@info:tooltip column contains the value in octal format"
+#~ msgid "Octal"
+#~ msgstr "العد الثماني"
+
+#~ msgctxt "@info:tooltip column contains the value in binary format"
+#~ msgid "Binary"
+#~ msgstr "العد الثنائي"
+
+#, fuzzy
+#~| msgctxt "@title:menu"
+#~| msgid "Insert"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Insert mode"
+#~ msgstr "إدراج"
+
+#, fuzzy
+#~| msgctxt "@action:inmenu"
+#~| msgid "Overwrite only"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Overwrite mode"
+#~ msgstr "فقط إطمس"
+
+#, fuzzy
+#~| msgctxt "@item description of bookmark"
+#~| msgid "Offset: %1"
+#~ msgid "Offset: %1"
+#~ msgstr "زيحان: %1"
+
+#, fuzzy
+#~| msgctxt "@item description of bookmark"
+#~| msgid "Offset: %1"
+#~ msgctxt "@info:status offset value not available"
+#~ msgid "Offset: -"
+#~ msgstr "زيحان: %1"
+
+#~ msgctxt "@title:window prompt for iterative replacement"
+#~ msgid "Replace"
+#~ msgstr "تعويض"
+
+#~ msgctxt "@action:button"
+#~ msgid "Replace &All"
+#~ msgstr "تعويض الك&ل"
+
+#~ msgctxt "@action:button"
+#~ msgid "&Skip"
+#~ msgstr "تجاهل&"
+
+#~ msgctxt "@action:button"
+#~ msgid "Replace"
+#~ msgstr "تعويض"
+
+#~ msgctxt "@title:window"
+#~ msgid "Replace Bytes"
+#~ msgstr "تعويض البايت"
+
+#~ msgctxt "@action;button"
+#~ msgid "&Replace"
+#~ msgstr "تعويض&"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Start replace"
+#~ msgstr "إبدأ التعويض"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Replace</interface> button, the bytes you "
+#~ "entered above are searched for within the byte array and any occurrence "
+#~ "is replaced with the replacement bytes."
+#~ msgstr ""
+#~ "إذا ضغطتم على زر <interface>تعويض</interface>, سيتم البحث على  الأثمونات "
+#~ "(bytes )التي كتبتم فوق و سيتم تعويضها بأثمونات التعويض."
+
+#, fuzzy
+#~| msgctxt "@title:group"
+#~| msgid "Replace by"
+#~ msgctxt "@title:group"
+#~ msgid "Replace By"
+#~ msgstr "يعوض ب"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Replacing bytes:"
+#~ msgstr "أثمونات (bytes) التعويض:"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "Enter a pattern to replace with, or select a previous pattern from the "
+#~ "list."
+#~ msgstr "أدخل نسقا للتعويض به أو اختر واحدا من اللائحة"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Ask before replacing each match found."
+#~ msgstr "إسأل قبل تعويض كل تطابق موجود"
+
+#, fuzzy
+#~| msgctxt "@info"
+#~| msgid "No replacements done."
+#~ msgctxt "@info"
+#~ msgid "No replacements made."
+#~ msgstr "لم يو جد أي تعويض"
+
+#, fuzzy
+#~| msgctxt "@info"
+#~| msgid "1 replacement done."
+#~| msgid_plural "%1 replacements done."
+#~ msgctxt "@info"
+#~ msgid "1 replacement made."
+#~ msgid_plural "%1 replacements made."
+#~ msgstr[0] "لم يتم أي تعويض"
+#~ msgstr[1] "تم تعويض واحد"
+#~ msgstr[2] "تم تعويضان"
+#~ msgstr[3] "تمت %1 تعويضات"
+#~ msgstr[4] "تم %1 تعويضا"
+#~ msgstr[5] "تم %1 تعويض"
+
+#~ msgctxt "@info"
+#~ msgid "Replace pattern not found in byte array."
+#~ msgstr "نسق التغيير غير موجود في جدول الأثمونات"
+
+#, fuzzy
+#~| msgctxt "@title:window prompt for iterative replacement"
+#~| msgid "Replace"
+#~ msgctxt "@title"
+#~ msgid "Replace"
+#~ msgstr "تعويض"
+
+#, fuzzy
+#~| msgctxt "@action:inmenu"
+#~| msgid "Overwrite only"
+#~ msgctxt "@option:check set the view into overwrite mode"
+#~ msgid "Set Overwrite Mode"
+#~ msgstr "فقط إطمس"
+
+#, fuzzy
+#~| msgctxt "@title:menu"
+#~| msgid "Insert"
+#~ msgctxt "@option:check set the view into insert mode"
+#~ msgid "Set Insert Mode"
+#~ msgstr "إدراج"
+
+#, fuzzy
+#~| msgctxt "@info:whatsthis"
+#~| msgid "Control the number of the bytes each rotation is done within."
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Enter the number of times the pattern should be inserted."
+#~ msgstr "التحكم في عدد الأثمونات التي تقام عليها كل تدويرة"
+
+#, fuzzy
+#~| msgctxt "@info:whatsthis"
+#~| msgid ""
+#~| "If you press the <interface>Update</interface> button, the statistic of "
+#~| "the byte frequency is updated."
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Calculate</interface> button, the list will "
+#~ "be updated to all strings which are contained in the selected range and "
+#~ "have the set minimum length."
+#~ msgstr ""
+#~ "إذا ضغطت على زر <interface>تحديث</interface>, فإحصائيات تردد كل أثمون "
+#~ "(بايت) قد حدثت."
+
+#, fuzzy
+#~| msgctxt "@option:check"
+#~| msgid "&Selected bytes"
+#~ msgctxt "@action:button"
+#~ msgid "&Select"
+#~ msgstr "الأثم&ونات المنتقاة"
+
+#, fuzzy
+#~| msgctxt "@info:whatsthis"
+#~| msgid ""
+#~| "If you press the <interface>Update</interface> button, the statistic of "
+#~| "the byte frequency is updated."
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Select</interface> button, the cursor will be "
+#~ "moved in the document to or, on your option, by the offset you entered "
+#~ "above."
+#~ msgstr ""
+#~ "إذا ضغطت على زر <interface>تحديث</interface>, فإحصائيات تردد كل أثمون "
+#~ "(بايت) قد حدثت."
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the value in binary format"
+#~| msgid "Binary"
+#~ msgctxt "@label:textbox encoding of one byte as value in the binary format"
+#~ msgid "Binary 8-bit:"
+#~ msgstr "العد الثنائي"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the value in hexadecimal format"
+#~| msgid "Hexadecimal"
+#~ msgctxt ""
+#~ "@label:textbox encoding of one byte as value in the hexadecimal format"
+#~ msgid "Hexadecimal 8-bit:"
+#~ msgstr "ست عشري"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the value in binary format"
+#~| msgid "Binary"
+#~ msgctxt "@label:textbox"
+#~ msgid "Signed 8-bit:"
+#~ msgstr "العد الثنائي"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the character with the value"
+#~| msgid "Character"
+#~ msgctxt "@label:textbox encoding of one byte as character"
+#~ msgid "Character 8-bit:"
+#~ msgstr "حرف"
+
+#, fuzzy
+#~| msgctxt "name of the encoding target"
+#~| msgid "Values"
+#~ msgctxt "@title:column value of the bytes for the datatype"
+#~ msgid "Value"
+#~ msgstr "قيم"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Warning: Byte Array has been modified since last update."
+#~ msgstr "تحذير : تغير جدول الأثمون (بايت) عند اخر تحديث"
+
+#, fuzzy
+#~| msgid "Searc&hbar"
+#~ msgctxt "@title"
+#~ msgid "Search"
+#~ msgstr "شريط البح&ث"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "Start searching at the current cursor location rather than at the top."
+#~ msgstr "إبدأ البحث من الموضع الحالي للمؤشر عوض البدء من البداية"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Replace backwards."
+#~ msgstr "تعويض إلى الخلف"
+
+#~ msgctxt "@option:check"
+#~ msgid "&Selected bytes"
+#~ msgstr "الأثم&ونات المنتقاة"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Only search within the current selection."
+#~ msgstr "إبحث فقط في المنتقى الحالي"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Value Coding"
+#~ msgstr "ترميز الق&يمة"
+
+#~ msgctxt ""
+#~ "@item:inmenu encoding of the bytes as values in the hexadecimal format"
+#~ msgid "&Hexadecimal"
+#~ msgstr "ست& عشري"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
+#~ msgid "&Decimal"
+#~ msgstr "عش&ري"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
+#~ msgid "&Octal"
+#~ msgstr "ثم&اتي"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
+#~ msgid "&Binary"
+#~ msgstr "ثنا&ئي"
+
+#, fuzzy
+#~| msgctxt "@title:menu"
+#~| msgid "&Char Encoding"
+#~ msgctxt "@title:menu"
+#~ msgid "&Char Coding"
+#~ msgstr "ترميز& الأحرف"
+
+#~ msgctxt "@option:check"
+#~ msgid "Show &Non-printing Chars"
+#~ msgstr "أظهر الرموز &غير القابلة للطباعة"
+
+#~ msgctxt "@option:check"
+#~ msgid "Show &Line Offset"
+#~ msgstr "إ&إظهار إنزياح الخط"
+
+#, fuzzy
+#~| msgctxt "name of the encoding target"
+#~| msgid "Values"
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Values"
+#~ msgstr "قيم"
+
+#, fuzzy
+#~| msgctxt "@title:column short for Character"
+#~| msgid "Char"
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Chars"
+#~ msgstr "Char"
+
+#, fuzzy
+#~| msgctxt "@item description of bookmark"
+#~| msgid "Offset: %1"
+#~ msgctxt "@title:column offset of the bookmark"
+#~ msgid "Offset"
+#~ msgstr "زيحان: %1"
+
+#, fuzzy
+#~| msgctxt "@action:inmenu"
+#~| msgid "Remove Bookmark"
+#~ msgctxt "@title:window"
+#~ msgid "Bookmarks"
+#~ msgstr "إحذف العلامة"
+
+#, fuzzy
+#~| msgctxt "@action:inmenu"
+#~| msgid "Remove Bookmark"
+#~ msgctxt "default name of a bookmark"
+#~ msgid "Bookmark"
+#~ msgstr "إحذف العلامة"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Remove Bookmark"
+#~ msgstr "إحذف العلامة"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Remove All Bookmarks"
+#~ msgstr "إحذف جميع العلامات"
+
+#, fuzzy
+#~| msgctxt "@action:inmenu"
+#~| msgid "Goto Next Bookmark"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Go to Next Bookmark"
+#~ msgstr "إذهب إلى العلامات التالية"
+
+#, fuzzy
+#~| msgctxt "@action:inmenu"
+#~| msgid "Goto Previous Bookmark"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Go to Previous Bookmark"
+#~ msgstr "إذهب إلى العلامات السابقة"
+
+#, fuzzy
+#~| msgctxt "zoom-factor (percentage)"
+#~| msgid "%1%"
+#~ msgctxt "@item description of bookmark"
+#~ msgid "%1: %2"
+#~ msgstr "%1%"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the value in hexadecimal format"
+#~| msgid "Hexadecimal"
+#~ msgctxt ""
+#~ "@item:inlistbox coding of the bytes as values in the hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "ست عشري"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the value in decimal format"
+#~| msgid "Decimal"
+#~ msgctxt ""
+#~ "@item:inlistbox coding of the bytes as values in the decimal format"
+#~ msgid "Decimal"
+#~ msgstr "العد العشري"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the value in octal format"
+#~| msgid "Octal"
+#~ msgctxt "@item:inlistbox coding of the bytes as values in the octal format"
+#~ msgid "Octal"
+#~ msgstr "العد الثماني"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the value in binary format"
+#~| msgid "Binary"
+#~ msgctxt "@item:inlistbox coding of the bytes as values in the binary format"
+#~ msgid "Binary"
+#~ msgstr "العد الثنائي"
+
+#, fuzzy
+#~| msgctxt ""
+#~| "@item:inlistbox encoding of the bytes as characters with the values"
+#~| msgid "Character(s)"
+#~ msgctxt "@item:inlistbox coding of the bytes as characters with the values"
+#~ msgid "Character(s)"
+#~ msgstr "حرف (أحرف) "
+
+#, fuzzy
+#~| msgctxt "@title:menu"
+#~| msgid "&Columns"
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Columns"
+#~ msgstr "الأع&مدة"
+
+#, fuzzy
+#~| msgid "&Windows"
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Rows"
+#~ msgstr "نو&افذ"
+
+#~ msgctxt "@label:spinbox number of bytes the rotation is done within"
+#~ msgid "&Group size [bytes]"
+#~ msgstr "حجم المجمو&عة [بايت]"
+
+#, fuzzy
+#~| msgctxt "@info:whatsthis"
+#~| msgid "Control the number of the bytes each rotation is done within."
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Control the number of bytes within which each rotation is made."
+#~ msgstr "التحكم في عدد الأثمونات التي تقام عليها كل تدويرة"
+
+#~ msgctxt "@label:spinbox"
+#~ msgid "S&hift width [bits]"
+#~ msgstr "تأخير [البيتات]"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "Control the width of the shift. Positive numbers move the bits to the "
+#~ "right, negative to the left."
+#~ msgstr ""
+#~ "التحكم في التأخير, الأعداد الموجبة تحرك البيتات إلى اليمين و الأعداد "
+#~ "السالبة تحركها إلى اليسار"
+
+#~ msgctxt ""
+#~ "name of the filter; it moves the bits and pushes the ones over the end to "
+#~ "the begin again"
+#~ msgid "ROTATE data"
+#~ msgstr "تدوير المعطيات"
+
+#~ msgctxt "name of the filter; it does a logic XOR operation"
+#~ msgid "operand XOR data"
+#~ msgstr "عملية XOR للمعطيات"
+
+#, fuzzy
+#~| msgctxt "@info:whatsthis"
+#~| msgid "If set, also the bits are ordered reverse."
+#~ msgctxt "@info:whatsthis"
+#~ msgid "If set, the bits are arranged in reverse order as well."
+#~ msgstr "في حالة الإختيار, سيتم قلب ترتيب البيتات "
+
+#~ msgctxt ""
+#~ "name of the filter; it switches all bits from 0 to 1 and 1 to 0 "
+#~ "respectivly"
+#~ msgid "INVERT data"
+#~ msgstr "عكس المعطيات"
+
+#~ msgctxt "name of the filter; it moves the bits, setting freed ones to zero"
+#~ msgid "SHIFT data"
+#~ msgstr "SHIFT للمعطيات"
+
+#~ msgctxt "name of the filter; it does a logic AND operation"
+#~ msgid "operand AND data"
+#~ msgstr "عملية AND للمعطيات"
+
+#~ msgctxt "@label:textbox operand to the arithmetic filter function"
+#~ msgid "Operand:"
+#~ msgstr "معامل:"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Enter an operand, or select a previous operand from the list."
+#~ msgstr "أدخل العملية أو إختر عملية سابقة من اللائحة"
+
+#~ msgctxt "@option:check"
+#~ msgid "Align at end"
+#~ msgstr "حاذي عند النهاية"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "If set, the last operand will be aligned to the end of the data."
+#~ msgstr "في حالة الإختيار, اخر معامل سيصف عند نهاية المعطيات"
+
+#~ msgctxt ""
+#~ "name of the filter; it changes the order of the bytes/bits to backwards"
+#~ msgid "REVERSE data"
+#~ msgstr "قلب تسلسل المعلومات "
+
+#~ msgctxt "name of the filter; it does a logic OR operation"
+#~ msgid "operand OR data"
+#~ msgstr "عملية OR على المعلومات"
+
+#, fuzzy
+#~| msgctxt "@title:window"
+#~| msgid "Info"
+#~ msgctxt "@title:window"
+#~ msgid "File Info"
+#~ msgstr "معلومات"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Overwrite only"
+#~ msgstr "فقط إطمس"
+
+#~ msgctxt "The byte array was new created."
+#~ msgid "New created."
+#~ msgstr "إنشاء جديد"
+
+#~ msgctxt "numbered title for a created document without a filename"
+#~ msgid "[New Byte Array]"
+#~ msgid_plural "[New Byte Array %1]"
+#~ msgstr[0] "[جدول أثمون جديد %1]"
+#~ msgstr[1] "[جدول أثمون جديد %1]"
+#~ msgstr[2] "[جدول أثمون جديد %1]"
+#~ msgstr[3] "[جدول أثمون جديد %1]"
+#~ msgstr[4] "[جدول أثمون جديد %1]"
+#~ msgstr[5] "[جدول أثمون جديد %1]"
+
+#~ msgctxt "name of the data type"
+#~ msgid "Byte Array"
+#~ msgstr "جدول الأثمونات"
+
+#~ msgctxt "@title:window"
+#~ msgid "Info"
+#~ msgstr "معلومات"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Import"
+#~ msgstr "إسترد"
+
+#, fuzzy
+#~| msgid "Paste as"
+#~ msgid "Paste As"
+#~ msgstr "ألصق ك"
+
+#~ msgid "Conversion &Field"
+#~ msgstr "حق&ل التحويل "
+
+#, fuzzy
+#~| msgid "Searc&hbar"
+#~ msgid "Searc&h Bar"
+#~ msgstr "شريط البح&ث"
+
+#~ msgid "Edit files as an array of bytes"
+#~ msgstr "تعديل الملفات على أساس أنها مجموعة من البايت"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the value in octal format"
+#~| msgid "Octal"
+#~ msgctxt "@item:inlistbox cding of the bytes as values in the octal format"
+#~ msgid "Octal"
+#~ msgstr "العد الثماني"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&No Resize"
+#~ msgstr "&بدون تحجيم"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Lock Groups"
+#~ msgstr "إقف&ال المجموعات"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Full Size Usage"
+#~ msgstr "&إستخدام كل الحجم"
+
+#~ msgctxt "@label"
+#~ msgid "Size [bytes]: "
+#~ msgstr "الحجم[بايت]:"
+
+#, fuzzy
+#~ msgctxt "@info:status the statistic is not uptodate"
+#~ msgid "Warning: not up-to-date"
+#~ msgstr "تحذير :غير حديث"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip"
+#~| msgid "Warning: Byte Array has been modified since last update."
+#~ msgctxt "@info:tooltip"
+#~ msgid "Warning: byte array has been modified since last update."
+#~ msgstr "تحذير : تغير جدول الأثمون (بايت) عند اخر تحديث"
+
+#~ msgctxt "@info"
+#~ msgid "<nl/>End of byte array reached.<nl/>Continue from the beginning?"
+#~ msgstr "<nl/>لقد وصل إلى نهاية جدول الأثمونات<nl/>هل نكمل من البداية؟"
+
+#~ msgctxt "@info"
+#~ msgid "<nl/>Beginning of byte array reached.<nl/>Continue from the end?"
+#~ msgstr "<nl/>لقد وصل إلى بداية جدول الأثمونات<nl/>هل نكمل من النهاية؟"
+
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "There is already a file at <nl/><filename>%1</filename>.<nl/>Overwrite?"
+#~ msgstr ""
+#~ "يوجد مسبقا ملفا يحمل هذا الاسم <nl/><filename>%1</filename>.<nl/> هل نكتب "
+#~ "فوقه؟"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Copy as"
+#~ msgstr "أنسخ ك"
+
+#~ msgctxt "@option:check"
+#~ msgid "Reverse also Bits"
+#~ msgstr "إقلب أيضا البيتات"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the value in hexadecimal format"
+#~| msgid "Hexadecimal"
+#~ msgctxt ""
+#~ "@info:status encoding of the bytes as values in the hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "ست عشري"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the value in decimal format"
+#~| msgid "Decimal"
+#~ msgctxt "@info:status encoding of the bytes as values in the decimal format"
+#~ msgid "Decimal"
+#~ msgstr "العد العشري"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the value in octal format"
+#~| msgid "Octal"
+#~ msgctxt "@info:status encoding of the bytes as values in the octal format"
+#~ msgid "Octal"
+#~ msgstr "العد الثماني"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the value in binary format"
+#~| msgid "Binary"
+#~ msgctxt "@info:status encoding of the bytes as values in the binary format"
+#~ msgid "Binary"
+#~ msgstr "العد الثنائي"
+
+#, fuzzy
+#~| msgctxt "@option:check the document is read-only"
+#~| msgid "Read only"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Readonly mode"
+#~ msgstr "القراءة فقط"
+
+#~ msgctxt "@item description of bookmark"
+#~ msgid "Offset: %1"
+#~ msgstr "زيحان: %1"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Values Column"
+#~ msgstr "عمود الق&يم"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Chars Column"
+#~ msgstr "عمود الأح&رف"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Both Columns"
+#~ msgstr "كلا العمودي&ن"
+
+#~ msgctxt ""
+#~ "@item:inlistbox encoding of the bytes as values in the hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "ست عشري"
+
+#~ msgctxt ""
+#~ "@item:inlistbox encoding of the bytes as values in the decimal format"
+#~ msgid "Decimal"
+#~ msgstr "عشري"
+
+#~ msgctxt ""
+#~ "@item:inlistbox encoding of the bytes as values in the octal format"
+#~ msgid "Octal"
+#~ msgstr "ثماني"
+
+#~ msgctxt ""
+#~ "@item:inlistbox encoding of the bytes as values in the binary format"
+#~ msgid "Binary"
+#~ msgstr "ثنائي"

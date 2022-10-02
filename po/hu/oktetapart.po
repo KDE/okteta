@@ -1,0 +1,79 @@
+#
+#
+# Tamas Szanto <taszanto@gmail.com>, 2004.
+# Kristóf Kiszel <ulysses@kubuntu.org>, 2014.
+# Kristof Kiszel <kiszel.kristof@gmail.com>, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: KDE 4.4\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-05-16 00:24+0000\n"
+"PO-Revision-Date: 2021-10-30 12:58+0200\n"
+"Last-Translator: Kristof Kiszel <kiszel.kristof@gmail.com>\n"
+"Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 21.08.2\n"
+
+#. i18n: ectx: Menu (file)
+#: oktetapartbrowserui.rc:5 oktetapartreadonlyui.rc:5
+#: oktetapartreadwriteui.rc:5
+#, kde-format
+msgid "&File"
+msgstr "&Fájl"
+
+#. i18n: ectx: Menu (edit)
+#: oktetapartbrowserui.rc:8 oktetapartreadonlyui.rc:10
+#: oktetapartreadwriteui.rc:16
+#, kde-format
+msgid "&Edit"
+msgstr "S&zerkesztés"
+
+#. i18n: ectx: Menu (view)
+#: oktetapartbrowserui.rc:21 oktetapartreadonlyui.rc:26
+#: oktetapartreadwriteui.rc:39
+#, kde-format
+msgid "&View"
+msgstr "Né&zet"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: oktetapartbrowserui.rc:43 oktetapartreadonlyui.rc:47
+#: oktetapartreadwriteui.rc:60
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Alap eszköztár"
+
+#. i18n: ectx: Menu (permission)
+#: oktetapartreadwriteui.rc:11
+#, kde-format
+msgctxt "@title:menu"
+msgid "Permissions"
+msgstr "Jogosultságok"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Kiszel Kristóf,Szántó Tamás"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "ulysses@kubuntu.org,taszanto@gmail.com"
+
+#~ msgid "OktetaPart"
+#~ msgstr "OktetaPart"
+
+#~ msgid "Embedded hex editor"
+#~ msgstr "Beágyazott hexaszerkesztő"
+
+#, fuzzy
+#~| msgid "2003-2014 Friedrich W. H. Kossebau"
+#~ msgid "Copyright 2003-%1 Friedrich W. H. Kossebau"
+#~ msgstr "© Friedrich W. H. Kossebau, 2003-2014."
+
+#~ msgid "Friedrich W. H. Kossebau"
+#~ msgstr "Friedrich W. H. Kossebau"
+
+#~ msgid "Author"
+#~ msgstr "Szerző"

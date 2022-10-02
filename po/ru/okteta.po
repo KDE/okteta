@@ -1,0 +1,1615 @@
+# translation of khexedit.po to Russian
+# KDE3 - kdeutils/khexedit.po Russian translation
+# Copyright (C) 2004, KDE Russian translation team.
+#
+# Denis Perchine <dyp@perchine.com>, 1997, 1998.
+# Andrey Cherepanov <sibskull@mail.ru>, 2001-2004, 2005.
+# Nickolai Shaforostoff <shafff@ukr.net>, 2004.
+# Andrey Cherepanov <skull@kde.ru>, 2009.
+# Nick Shaforostoff <shaforostoff@kde.ru>, 2009.
+# Alexander Potashev <aspotashev@gmail.com>, 2009, 2011, 2015, 2018.
+# Artem Sereda <overmind88@gmail.com>, 2010.
+# Yuri Efremov <yur.arh@gmail.com>, 2013.
+# Alexander Lakhin <exclusion@gmail.com>, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: khexedit\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-05-27 00:48+0000\n"
+"PO-Revision-Date: 2018-10-08 02:45+0300\n"
+"Last-Translator: Alexander Potashev <aspotashev@gmail.com>\n"
+"Language-Team: Russian <kde-russian@lists.kde.ru>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 2.0\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Environment: kde\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Андрей Черепанов,Алексей Андросов"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "skull@kde.ru,alexey@androsov.net"
+
+#: about.cpp:16
+#, kde-format
+msgid "Okteta"
+msgstr "Okteta"
+
+#: about.cpp:18
+#, kde-format
+msgid "Hex editor"
+msgstr "Шестнадцатеричный редактор"
+
+#: about.cpp:20
+#, fuzzy, kde-format
+#| msgid "Copyright 2006-2018 Friedrich W. H. Kossebau"
+msgid "2006-%1 Friedrich W. H. Kossebau"
+msgstr "© Friedrich W. H. Kossebau, 2006-2018"
+
+#: about.cpp:21
+#, kde-format
+msgid "Edit the raw data of files"
+msgstr "Редактор содержимого файлов в виде байтов"
+
+#: about.cpp:26
+#, kde-format
+msgid "Friedrich W. H. Kossebau"
+msgstr "Friedrich W. H. Kossebau"
+
+#: about.cpp:27
+#, kde-format
+msgid "Author"
+msgstr "Автор"
+
+#: about.cpp:29
+#, kde-format
+msgctxt "Author"
+msgid "Alexander Richardson"
+msgstr "Alexander Richardson"
+
+#: about.cpp:30
+#, kde-format
+msgctxt "Task description"
+msgid "Structures tool"
+msgstr "Инструмент структуры"
+
+#. i18n: ectx: Menu (permission)
+#: oktetaui.rc:15
+#, kde-format
+msgctxt "@title:menu"
+msgid "Permissions"
+msgstr "Права доступа"
+
+#. i18n: ectx: Menu (windows)
+#: oktetaui.rc:69
+#, kde-format
+msgid "&Windows"
+msgstr "&Окна"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: oktetaui.rc:82
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Основная панель инструментов"
+
+#: program.cpp:89
+#, kde-format
+msgid "File(s) to load."
+msgstr "Открываемые файлы."
+
+#, fuzzy
+#~| msgctxt "@title:menu"
+#~| msgid "&View Mode"
+#~ msgctxt "@title:menu submenu to select the view profile or change it"
+#~ msgid "View Profile"
+#~ msgstr "Ре&жим просмотра"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Insert"
+#~ msgstr "Вставка"
+
+#~ msgctxt "name of the encoding target"
+#~ msgid "Values..."
+#~ msgstr "Значения..."
+
+#~ msgid "Value coding:"
+#~ msgstr "Система счисления значения:"
+
+#~ msgctxt ""
+#~ "@item:inmenu encoding of the bytes as values in the hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "Шестнадцатеричная"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
+#~ msgid "Decimal"
+#~ msgstr "Десятичная"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
+#~ msgid "Octal"
+#~ msgstr "Восьмеричная"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
+#~ msgid "Binary"
+#~ msgstr "Двоичная"
+
+#~ msgctxt "@label:textbox substring which separates the values"
+#~ msgid "Separation:"
+#~ msgstr "Разделитель:"
+
+#~ msgctxt "@item name of the encoding result"
+#~ msgid "Values"
+#~ msgstr "Значения"
+
+#~ msgctxt "@label:textbox name of the created variable"
+#~ msgid "Name of variable:"
+#~ msgstr "Название переменной:"
+
+#~ msgctxt "@label:textbox to define after how many items the list is wrapped"
+#~ msgid "Items per line:"
+#~ msgstr "Элементов на строке:"
+
+#~ msgctxt "@label:listbox the type of the data: char, integer, etc."
+#~ msgid "Data type:"
+#~ msgstr "Тип данных:"
+
+#~ msgctxt ""
+#~ "@option:check Encode the values in hexadecimal instead of decimal, if the "
+#~ "datatype has the property Unsigned"
+#~ msgid "Unsigned as hexadecimal:"
+#~ msgstr "Беззнаковые как шестнадцатеричные:"
+
+#~ msgctxt "@item name of the encoding result"
+#~ msgid "C Array"
+#~ msgstr "Массив C"
+
+#~ msgctxt "name of the encoding target"
+#~ msgid "C Array..."
+#~ msgstr "Массив С..."
+
+#~ msgctxt "destination of the byte array"
+#~ msgid "Loaded from file."
+#~ msgstr "Загружено из файла."
+
+#~ msgctxt "name of the encoding target"
+#~ msgid "Plain Text"
+#~ msgstr "Обычный текст"
+
+#~ msgctxt "name of the encoding target"
+#~ msgid "View in Plain Text"
+#~ msgstr "Просмотреть как обычный текст"
+
+#~ msgctxt "@title:window"
+#~ msgid "Statistics"
+#~ msgstr "Статистика"
+
+#~ msgctxt "@action:button update the statistic of the byte frequency"
+#~ msgid "&Update"
+#~ msgstr "&Обновить"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Updates the byte frequency statistics."
+#~ msgstr "Обновить статистику частот байтов."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Update</interface> button, the byte frequency "
+#~ "statistics are updated."
+#~ msgstr ""
+#~ "При нажатии кнопки <interface>Обновить</interface> будет обновлена "
+#~ "статистика частоты байтов."
+
+#~ msgctxt "@label size of selected bytes"
+#~ msgid "Size:"
+#~ msgstr "Длина:"
+
+#~ msgid "1 byte"
+#~ msgid_plural "%1 bytes"
+#~ msgstr[0] "%1 байт"
+#~ msgstr[1] "%1 байта"
+#~ msgstr[2] "%1 байт"
+#~ msgstr[3] "%1 байт"
+
+#~ msgctxt "@item:intable character is not defined"
+#~ msgid "undef."
+#~ msgstr "неопред."
+
+#~ msgctxt "@title:column short for Hexadecimal"
+#~ msgid "Hex"
+#~ msgstr "Hex"
+
+#~ msgctxt "@title:column short for Decimal"
+#~ msgid "Dec"
+#~ msgstr "Dec"
+
+#~ msgctxt "@title:column short for Octal"
+#~ msgid "Oct"
+#~ msgstr "Oct"
+
+#~ msgctxt "@title:column short for Binary"
+#~ msgid "Bin"
+#~ msgstr "Bin"
+
+#~ msgctxt "@title:column short for Character"
+#~ msgid "Char"
+#~ msgstr "Символ"
+
+#~ msgctxt "@title:column count of characters"
+#~ msgid "Count"
+#~ msgstr "Количество"
+
+#~ msgctxt "@title:column Percent of byte in total"
+#~ msgid "Percent"
+#~ msgstr "Процент"
+
+#~ msgctxt "@info:tooltip column contains the value in hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "Шестнадцатеричный"
+
+#~ msgctxt "@info:tooltip column contains the value in decimal format"
+#~ msgid "Decimal"
+#~ msgstr "Десятичный"
+
+#~ msgctxt "@info:tooltip column contains the value in octal format"
+#~ msgid "Octal"
+#~ msgstr "Восьмеричный"
+
+#~ msgctxt "@info:tooltip column contains the value in binary format"
+#~ msgid "Binary"
+#~ msgstr "Двоичный"
+
+#~ msgctxt "@info:tooltip column contains the character with the value"
+#~ msgid "Character"
+#~ msgstr "Символ"
+
+#~ msgctxt "@info:status short for: Insert mode"
+#~ msgid "INS"
+#~ msgstr "ВСТ"
+
+#~ msgctxt "@info:status short for: Overwrite mode"
+#~ msgid "OVR"
+#~ msgstr "ЗАМ"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Insert mode"
+#~ msgstr "Режим вставки"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Overwrite mode"
+#~ msgstr "Режим перезаписи"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Coding of the value interpretation in the current view."
+#~ msgstr "Кодирование числа в текущем представлении."
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Encoding in the character column of the current view."
+#~ msgstr "Кодировка символов в текущем представлении."
+
+#~ msgid "Offset: %1"
+#~ msgstr "Позиция: %1"
+
+#~ msgctxt "@info:status selection: start offset - end offset ()"
+#~ msgid "Selection: %1 - %2 (%3)"
+#~ msgstr "Выделение: %1 - %2 (%3)"
+
+#~ msgctxt "@info:status offset value not available"
+#~ msgid "Offset: -"
+#~ msgstr "Позиция: -"
+
+#~ msgctxt "@info:status offset value not available"
+#~ msgid "Selection: -"
+#~ msgstr "Выделение: -"
+
+#~ msgctxt ""
+#~ "@info:status selection: start offset - end offset (number of bytes)"
+#~ msgid "Selection: %1 - %2 (%3)"
+#~ msgstr "Выделение: %1 - %2 (%3)"
+
+#~ msgctxt "@title:window prompt for iterative replacement"
+#~ msgid "Replace"
+#~ msgstr "Замена"
+
+#~ msgctxt "@action:button"
+#~ msgid "Replace &All"
+#~ msgstr "Заменить &все"
+
+#~ msgctxt "@action:button"
+#~ msgid "&Skip"
+#~ msgstr "&Пропустить"
+
+#~ msgctxt "@action:button"
+#~ msgid "Replace"
+#~ msgstr "Заменить"
+
+#~ msgctxt "@title:window"
+#~ msgid "Replace Bytes"
+#~ msgstr "Замена байтов"
+
+#~ msgctxt "@action;button"
+#~ msgid "&Replace"
+#~ msgstr "&Заменить"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Start replace"
+#~ msgstr "Начать замену"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Replace</interface> button, the bytes you "
+#~ "entered above are searched for within the byte array and any occurrence "
+#~ "is replaced with the replacement bytes."
+#~ msgstr ""
+#~ "При нажатии кнопки <interface>Заменить</interface> введённые выше байты "
+#~ "будут искаться в массиве байтов и все найденные их вхождения будут "
+#~ "заменены на указанные."
+
+#~ msgctxt "@title:group"
+#~ msgid "Replace By"
+#~ msgstr "Замена"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Replacing bytes:"
+#~ msgstr "Байты для замены:"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "Enter a pattern to replace with, or select a previous pattern from the "
+#~ "list."
+#~ msgstr "Введите шаблон для замены или выберите предыдущий из списка."
+
+#~ msgctxt "@option:check"
+#~ msgid "&Prompt on replace"
+#~ msgstr "&Спрашивать при замене"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Ask before replacing each match found."
+#~ msgstr "Спрашивать перед заменой каждого вхождения."
+
+#~ msgctxt "@title:window"
+#~ msgid "Replace"
+#~ msgstr "Замена"
+
+#~ msgctxt "@info"
+#~ msgid "No replacements made."
+#~ msgstr "Не сделано ни одной замены."
+
+#~ msgctxt "@info"
+#~ msgid "1 replacement made."
+#~ msgid_plural "%1 replacements made."
+#~ msgstr[0] "Сделана %1 замена."
+#~ msgstr[1] "Сделано %1 замены."
+#~ msgstr[2] "Сделано %1 замен."
+#~ msgstr[3] "Сделана %1 замена."
+
+#~ msgctxt "@info"
+#~ msgid "Replace pattern not found in byte array."
+#~ msgstr "Не найдено ни одного совпадения."
+
+#~ msgctxt "@info"
+#~ msgid "End of byte array reached.<nl/>Continue from the beginning?"
+#~ msgstr "Достигнут конец массива.<nl/>Продолжить с начала?"
+
+#~ msgctxt "@info"
+#~ msgid "Beginning of byte array reached.<nl/>Continue from the end?"
+#~ msgstr "Достигнуто начало массива.<nl/>Продолжить с конца?"
+
+#~ msgctxt "@title"
+#~ msgid "Replace"
+#~ msgstr "Замена"
+
+#~ msgctxt "@option:check set the view into overwrite mode"
+#~ msgid "Set Overwrite Mode"
+#~ msgstr "Перейти в режим замены"
+
+#~ msgctxt "@option:check set the view into insert mode"
+#~ msgid "Set Insert Mode"
+#~ msgstr "Перейти в режим вставки"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "Choose whether you want the input to be inserted or to overwrite existing "
+#~ "data."
+#~ msgstr ""
+#~ "Выбор режима перезаписи вводимых данных поверх существующих или вставке в "
+#~ "позицию курсора."
+
+#~ msgctxt "@title:window"
+#~ msgid "Print Byte Array %1"
+#~ msgstr "Печать массива байтов %1"
+
+#~ msgctxt "in the header of the printed page, e.g. Page 2 of 20"
+#~ msgid "Page %p of %P"
+#~ msgstr "Страница %p из %P"
+
+#~ msgctxt "in the footer of the printed page, e.g. Printed by: Joe User"
+#~ msgid "Printed by: %U"
+#~ msgstr "Напечатано: %U"
+
+#~ msgctxt "advertizer in the footer of the printed page"
+#~ msgid "Okteta, built on KDE4"
+#~ msgstr "Okteta, сделано для KDE4"
+
+#~ msgctxt "@info"
+#~ msgid "Could not print."
+#~ msgstr "Невозможно распечатать."
+
+#~ msgctxt "name of the checksum algorithm, Cyclic Redundancy Check 32"
+#~ msgid "CRC-32"
+#~ msgstr "CRC-32"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Little-endian"
+#~ msgstr "Порядок от младшего к старшему"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Big-endian"
+#~ msgstr "Порядок от старшего к младшему"
+
+#~ msgctxt "name of the checksum algorithm"
+#~ msgid "Adler-32"
+#~ msgstr "Adler-32"
+
+#~ msgctxt "@title:window"
+#~ msgid "Insert Pattern"
+#~ msgstr "Вставить шаблон"
+
+#~ msgctxt "@action:button"
+#~ msgid "&Insert"
+#~ msgstr "&Вставить"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Insert the pattern"
+#~ msgstr "Вставить шаблон"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Insert</interface> button, the pattern you "
+#~ "entered above is inserted in the byte array at the cursor position."
+#~ msgstr ""
+#~ "При нажатии кнопки <interface>Вставить</interface> шаблон, введённый "
+#~ "выше, будет вставлен в массив байт, начиная с позиции курсора."
+
+#~ msgctxt "@title:group"
+#~ msgid "Insert"
+#~ msgstr "Вставка"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Pattern:"
+#~ msgstr "Шаблон:"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "Enter a pattern to search for, or select a previous pattern from the list."
+#~ msgstr "Введите шаблон для поиска, или выберите предыдущий из списка."
+
+#~ msgctxt "@label:spinbox number of times to insert the pattern"
+#~ msgid "&Number:"
+#~ msgstr "&Количество:"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Enter the number of times the pattern should be inserted."
+#~ msgstr "Введите количество вставок шаблона."
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "&Insert Pattern..."
+#~ msgstr "&Вставить шаблон..."
+
+#~ msgid "Pattern inserted."
+#~ msgstr "Шаблон вставлен."
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "SHA-0"
+#~ msgstr "SHA-0"
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "SHA-1"
+#~ msgstr "SHA-1"
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "MD2"
+#~ msgstr "MD2"
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "MD4"
+#~ msgstr "MD4"
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "MD5"
+#~ msgstr "MD5"
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "RIPEMD160"
+#~ msgstr "RIPEMD-160"
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "SHA-224"
+#~ msgstr "SHA-224"
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "SHA-256"
+#~ msgstr "SHA-256"
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "SHA-384"
+#~ msgstr "SHA-384"
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "SHA-512"
+#~ msgstr "SHA-512"
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "Whirlpool"
+#~ msgstr "Whirlpool"
+
+#~ msgctxt "@title:window of the tool to calculate checksums"
+#~ msgid "Checksum"
+#~ msgstr "Контрольная сумма"
+
+#~ msgctxt "@label:listbox algorithm to use for the checksum"
+#~ msgid "Algorithm:"
+#~ msgstr "Алгоритм:"
+
+#, fuzzy
+#~| msgctxt "@info:whatsthis"
+#~| msgid "Select the operation to use for the filter."
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Select the algorithm to use for the checksum."
+#~ msgstr "Выберите операцию для использования в фильтре."
+
+#~ msgctxt "@title:group"
+#~ msgid "Parameters"
+#~ msgstr "Параметры"
+
+#~ msgctxt "@action:button calculate the checksum"
+#~ msgid "&Calculate"
+#~ msgstr "&Вычислить"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip"
+#~| msgid "Update the list of strings contained in the selected range."
+#~ msgctxt "@info:tooltip"
+#~ msgid "Calculate the checksum for the bytes in the selected range."
+#~ msgstr "Обновить список строк, содержащихся в выбранном диапазоне."
+
+#, fuzzy
+#~| msgctxt "@info:whatsthis"
+#~| msgid ""
+#~| "If you press the <interface>Update</interface> button, the list will be "
+#~| "updated to all strings which are contained in the selected range and "
+#~| "have the set minimum length."
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Calculate</interface> button, the list will "
+#~ "be updated to all strings which are contained in the selected range and "
+#~ "have the set minimum length."
+#~ msgstr ""
+#~ "После нажатия на кнопку <interface>Обновить</interface> список будет "
+#~ "состоять из строк, содержащихся в выбранном диапазоне и имеющих "
+#~ "установленную минимальную длину."
+
+#, fuzzy
+#~| msgctxt "@info:status offset value not available"
+#~| msgid "Selection: -"
+#~ msgctxt "@title:window of the tool to select a range"
+#~ msgid "Select"
+#~ msgstr "Выделение: -"
+
+#~ msgctxt "@item:inlistbox coding of offset in the hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "Шестнадцатеричный"
+
+#~ msgctxt "@item:inlistbox coding of offset in the decimal format"
+#~ msgid "Decimal"
+#~ msgstr "Десятичный"
+
+#, fuzzy
+#~| msgctxt "@label:listbox"
+#~| msgid "Fo&rmat:"
+#~ msgctxt "@label:listbox"
+#~ msgid "Format:"
+#~ msgstr "&Формат:"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Enter an offset to go to, or select a previous offset from the list."
+#~ msgstr "Введите значение смещения или выберите из списка."
+
+#, fuzzy
+#~| msgctxt "@label:listbox"
+#~| msgid "O&ffset:"
+#~ msgctxt "@label:listbox"
+#~ msgid "End offset:"
+#~ msgstr "&Смещение:"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Extend the selection by the cursor move."
+#~ msgstr "Выделить байты от курсора до указанной позиции"
+
+#~ msgctxt "@option:check"
+#~ msgid "&Backwards"
+#~ msgstr "&Назад"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Go backwards from the end or the current cursor location."
+#~ msgstr ""
+#~ "Определять адрес в обратном направлении от конца данных или от текущей "
+#~ "позиции курсора."
+
+#, fuzzy
+#~| msgctxt "@option:check"
+#~| msgid "&Selected bytes"
+#~ msgctxt "@action:button"
+#~ msgid "&Select"
+#~ msgstr "&Выделенные байты"
+
+#, fuzzy
+#~| msgctxt "@info:whatsthis"
+#~| msgid ""
+#~| "If you press the <interface>Go</interface> button, the cursor will be "
+#~| "moved in the document to or, on your option, by the offset you entered "
+#~| "above."
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Select</interface> button, the cursor will be "
+#~ "moved in the document to or, on your option, by the offset you entered "
+#~ "above."
+#~ msgstr ""
+#~ "При нажатии на кнопку <interface>Перейти</interface> курсор будет "
+#~ "перемещён в документе на указанный адрес или смещение относительно "
+#~ "текущей позиции."
+
+#~ msgctxt "@title:window"
+#~ msgid "Decoding Table"
+#~ msgstr "Значение"
+
+#~ msgctxt "@label:textbox encoding of one byte as value in the binary format"
+#~ msgid "Binary 8-bit:"
+#~ msgstr "Двоичное 8 битов:"
+
+#~ msgctxt "@label:textbox encoding of one byte as value in the octal format"
+#~ msgid "Octal 8-bit:"
+#~ msgstr "Восьмеричное 8 битов:"
+
+#~ msgctxt ""
+#~ "@label:textbox encoding of one byte as value in the hexadecimal format"
+#~ msgid "Hexadecimal 8-bit:"
+#~ msgstr "Шестнадцатеричное 8 битов:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Signed 8-bit:"
+#~ msgstr "Знаковое 8 битов:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Unsigned 8-bit:"
+#~ msgstr "Беззнаковое 8 битов:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Signed 16-bit:"
+#~ msgstr "Знаковое 16 битов:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Unsigned 16-bit:"
+#~ msgstr "Беззнаковое 16 битов:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Signed 32-bit:"
+#~ msgstr "Знаковое 32 бита:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Unsigned 32-bit:"
+#~ msgstr "Беззнаковое 32 бита:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Signed 64-bit:"
+#~ msgstr "Знаковое 64 бита:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Unsigned 64-bit:"
+#~ msgstr "Беззнаковое 64 бита:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Float 32-bit:"
+#~ msgstr "Число с плавающей точкой 32 бита:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Float 64-bit:"
+#~ msgstr "Число с плавающей точкой 64 бита:"
+
+#~ msgctxt "@label:textbox encoding of one byte as character"
+#~ msgid "Character 8-bit:"
+#~ msgstr "Символ 8 битов:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "UTF-8:"
+#~ msgstr "UTF-8:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "UTF-16:"
+#~ msgstr "UTF-16:"
+
+#~ msgctxt "@title:column name of the datatype"
+#~ msgid "Type"
+#~ msgstr "Тип"
+
+#~ msgctxt "@title:column value of the bytes for the datatype"
+#~ msgid "Value"
+#~ msgstr "Значение"
+
+#~ msgctxt "@info:tooltip for column Type"
+#~ msgid "The type of data"
+#~ msgstr "Тип данных"
+
+#~ msgctxt "@info:tooltip for column Value"
+#~ msgid "The value of the bytes for the datatype"
+#~ msgstr "Значение байтов для соответствующего типа"
+
+#~ msgctxt "@option:check"
+#~ msgid "Unsigned as hexadecimal"
+#~ msgstr "Беззнаковые как шестнадцатеричные"
+
+#~ msgctxt "@title:column offset of the extracted string"
+#~ msgid "Offset"
+#~ msgstr "Адрес"
+
+#~ msgctxt "@title:column string extracted from the byte array"
+#~ msgid "String"
+#~ msgstr "Строка"
+
+#~ msgctxt "@title:window of the tool to extract strings"
+#~ msgid "Strings"
+#~ msgstr "Строки"
+
+#~ msgctxt ""
+#~ "@label:spinbox minimum length for consecutive chars to be seen as a string"
+#~ msgid "Minimum length:"
+#~ msgstr "Минимальная длина:"
+
+#~ msgctxt "@action:button update the list of strings extracted"
+#~ msgid "&Update"
+#~ msgstr "&Обновить"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Update the list of strings contained in the selected range."
+#~ msgstr "Обновить список строк, содержащихся в выбранном диапазоне."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Update</interface> button, the list will be "
+#~ "updated to all strings which are contained in the selected range and have "
+#~ "the set minimum length."
+#~ msgstr ""
+#~ "После нажатия на кнопку <interface>Обновить</interface> список будет "
+#~ "состоять из строк, содержащихся в выбранном диапазоне и имеющих "
+#~ "установленную минимальную длину."
+
+#~ msgctxt "@label:lineedit filter term for displayed strings"
+#~ msgid "Filter:"
+#~ msgstr "Фильтр:"
+
+#~ msgid "Enter a filter term here."
+#~ msgstr "Введите выражение фильтра."
+
+#~ msgid "C&opy"
+#~ msgstr "&Копировать"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Copies the selected strings to the clipboard."
+#~ msgstr "Копировать выделенные строки в буфер обмена."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Copy</interface> button, all strings you "
+#~ "selected in the list are copied to the clipboard."
+#~ msgstr ""
+#~ "При нажатии на кнопку <interface>Копировать</interface> выделенные строки "
+#~ "будут скопированы в буфер обмена."
+
+#~ msgid "&Go to"
+#~ msgstr "&Выделить строки"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Shows the selected string in the view."
+#~ msgstr "Показывает выделенные строки в основном окне."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Go to</interface> button, the string which "
+#~ "was last selected is marked and shown in the view."
+#~ msgstr ""
+#~ "При нажатии на кнопку <interface>Выделить строки</interface>, выделенные "
+#~ "вхождения будут помечены в просмотре."
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Warning: Byte Array has been modified since last update."
+#~ msgstr ""
+#~ "Предупреждение: массив байтов был изменён с момента последнего обновления."
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "&Go to Offset..."
+#~ msgstr "&Перейти на адрес..."
+
+#~ msgctxt "@title:window of the tool to set a new offset for the cursor"
+#~ msgid "Goto"
+#~ msgstr "Переход"
+
+#~ msgctxt "@label:listbox"
+#~ msgid "Fo&rmat:"
+#~ msgstr "&Формат:"
+
+#~ msgctxt "@label:listbox"
+#~ msgid "O&ffset:"
+#~ msgstr "&Смещение:"
+
+#~ msgctxt "@option:check"
+#~ msgid "From c&ursor"
+#~ msgstr "От к&урсора"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Go relative from the current cursor location and not absolute."
+#~ msgstr "Перейти относительно текущей позиции курсора, а не с начала данных."
+
+#~ msgctxt "@option:check"
+#~ msgid "&Extend selection"
+#~ msgstr "В&ыделить до указанной позиции"
+
+#~ msgctxt "@action:button"
+#~ msgid "&Go"
+#~ msgstr "&Перейти"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Go to the Offset"
+#~ msgstr "Перейти на адрес"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Go</interface> button, the cursor will be "
+#~ "moved in the document to or, on your option, by the offset you entered "
+#~ "above."
+#~ msgstr ""
+#~ "При нажатии на кнопку <interface>Перейти</interface> курсор будет "
+#~ "перемещён в документе на указанный адрес или смещение относительно "
+#~ "текущей позиции."
+
+#~ msgctxt "@title:window"
+#~ msgid "Binary Filter"
+#~ msgstr "Преобразование"
+
+#~ msgctxt "@label:listbox operation to use by the filter"
+#~ msgid "Operation:"
+#~ msgstr "Операция:"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Select the operation to use for the filter."
+#~ msgstr "Выберите операцию для использования в фильтре."
+
+#~ msgctxt "@action:button"
+#~ msgid "&Filter"
+#~ msgstr "&Выполнить"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Executes the filter."
+#~ msgstr "Выполнить операцию."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Filter</interface> button, the operation you "
+#~ "selected above is executed on the document with the given options."
+#~ msgstr ""
+#~ "При нажатии на кнопку <interface>Выполнить</interface> указанная операция "
+#~ "будет применена к выделенным данным."
+
+#~ msgctxt "@label:spinbox"
+#~ msgid "Number of bytes:"
+#~ msgstr "Количество байтов:"
+
+#~ msgctxt "@title:window"
+#~ msgid "Byte Table"
+#~ msgstr "Кодовая таблица"
+
+#~ msgid "Byte inserted."
+#~ msgstr "Байт вставлен"
+
+#~ msgctxt "@title:window"
+#~ msgid "Find Bytes"
+#~ msgstr "Найти байты"
+
+#~ msgctxt "@action:button"
+#~ msgid "&Find"
+#~ msgstr "&Найти"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Start searching"
+#~ msgstr "Начать поиск"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Find</interface> button, the bytes you "
+#~ "entered above are searched for within the byte array."
+#~ msgstr ""
+#~ "При нажатии на кнопку <interface>Поиск</interface> будет произведён поиск "
+#~ "указанных байтов в основном окне."
+
+#~ msgctxt "@title"
+#~ msgid "Search"
+#~ msgstr "Поиск"
+
+#~ msgctxt "@title:window"
+#~ msgid "Find"
+#~ msgstr "Поиск"
+
+#~ msgctxt "@info"
+#~ msgid "Search key not found in byte array."
+#~ msgstr "Ничего не найдено."
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Byte string to f&ind:"
+#~ msgstr "Строка байтов для п&оиска:"
+
+#~ msgctxt "@title:group"
+#~ msgid "Options"
+#~ msgstr "Параметры"
+
+#~ msgctxt "@option:check"
+#~ msgid "C&ase sensitive"
+#~ msgstr "С &учётом регистра"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "Perform a case sensitive search: entering the pattern 'Joe' will not "
+#~ "match 'joe' or 'JOE', only 'Joe'."
+#~ msgstr ""
+#~ "Искать с учётом регистра. В этом случае при поиске строки «Joe» не будут "
+#~ "найдены слова «joe» или «JOE», только «Joe»."
+
+#~ msgctxt "@option:check"
+#~ msgid "&Whole words only"
+#~ msgstr "&Только полные слова"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Require word boundaries in both ends of a match to succeed."
+#~ msgstr ""
+#~ "Соответствие должно с обоих концов заканчиваться пробельными символами."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "Start searching at the current cursor location rather than at the top."
+#~ msgstr "Начать поиск с текущей позиции курсора, а не с начала документа."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Replace backwards."
+#~ msgstr "Заменять назад."
+
+#~ msgctxt "@option:check"
+#~ msgid "&Selected bytes"
+#~ msgstr "&Выделенные байты"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Only search within the current selection."
+#~ msgstr "Искать только в выделенном фрагменте."
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Value Coding"
+#~ msgstr "&Система счисления"
+
+#~ msgctxt ""
+#~ "@item:inmenu encoding of the bytes as values in the hexadecimal format"
+#~ msgid "&Hexadecimal"
+#~ msgstr "&Шестнадцатеричная"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
+#~ msgid "&Decimal"
+#~ msgstr "&Десятичная"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
+#~ msgid "&Octal"
+#~ msgstr "&Восьмеричная"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
+#~ msgid "&Binary"
+#~ msgstr "&Двоичная"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Char Coding"
+#~ msgstr "&Кодировка символов"
+
+#~ msgctxt "@option:check"
+#~ msgid "Show &Non-printing Chars"
+#~ msgstr "Показывать &непечатаемые символы"
+
+#~ msgctxt "@option:check"
+#~ msgid "Show &Line Offset"
+#~ msgstr "Показывать &адреса строк"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Show Values or Chars"
+#~ msgstr "Показывать &байты или символы"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Values"
+#~ msgstr "&Массив байтов"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Chars"
+#~ msgstr "&Символы"
+
+#, fuzzy
+#~| msgctxt "@item:inmenu"
+#~| msgid "Values &and Chars"
+#~ msgctxt "@item:inmenu"
+#~ msgid "Values && Chars"
+#~ msgstr "Массив байтов &и символы"
+
+#~ msgctxt "@title:column offset of the bookmark"
+#~ msgid "Offset"
+#~ msgstr "Позиция"
+
+#~ msgctxt "@title:column title of the bookmark"
+#~ msgid "Title"
+#~ msgstr "Заголовок"
+
+#~ msgctxt "@title:window"
+#~ msgid "Bookmarks"
+#~ msgstr "Закладки"
+
+#~ msgctxt "default name of a bookmark"
+#~ msgid "Bookmark"
+#~ msgstr "Закладка"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Creates a new bookmark for the current cursor position."
+#~ msgstr "Создать новую закладку для текущий позиции курсора."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press this button, a new bookmark will be created for the current "
+#~ "cursor position."
+#~ msgstr ""
+#~ "Если нажать эту кнопку, то для текущей позиции курсора будет создана "
+#~ "новая закладка."
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Deletes all the selected bookmarks."
+#~ msgstr "Удаляет все выбранные закладки."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press this button, all bookmarks which are selected will be "
+#~ "deleted."
+#~ msgstr "Если нажать на эту кнопку. то все выбранные закладки будут удалены."
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Moves the cursor to the selected bookmark."
+#~ msgstr "Перемещает курсор к выбранной закладке."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press this button, the cursor is moved to the position of the "
+#~ "bookmark which has been last selected."
+#~ msgstr ""
+#~ "Если нажать эту кнопку, то курсор будет перемещён к позиции последней "
+#~ "выбранной закладки."
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Enables renaming of the selected bookmark."
+#~ msgstr "Включает переименование выбранной закладки."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press this button, the name of the bookmark which was last "
+#~ "selected can be edited."
+#~ msgstr ""
+#~ "Если нажать эту кнопку, то можно будет отредактировать название последней "
+#~ "выбранной закладки."
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Remove Bookmark"
+#~ msgstr "Удалить закладку"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Remove All Bookmarks"
+#~ msgstr "Удалить все закладки"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Go to Next Bookmark"
+#~ msgstr "Перейти к следующей закладке"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Go to Previous Bookmark"
+#~ msgstr "Перейти к предыдущей закладке"
+
+#~ msgctxt "@item description of bookmark"
+#~ msgid "%1: %2"
+#~ msgstr "%1%: %2%"
+
+#~ msgctxt ""
+#~ "@item:inlistbox coding of the bytes as values in the hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "Шестнадцатеричный"
+
+#~ msgctxt ""
+#~ "@item:inlistbox coding of the bytes as values in the decimal format"
+#~ msgid "Decimal"
+#~ msgstr "Десятичный"
+
+#, fuzzy
+#~| msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
+#~| msgid "Octal"
+#~ msgctxt "@item:inlistbox coding of the bytes as values in the octal format"
+#~ msgid "Octal"
+#~ msgstr "Восьмеричная"
+
+#~ msgctxt "@item:inlistbox coding of the bytes as values in the binary format"
+#~ msgid "Binary"
+#~ msgstr "Двоичный"
+
+#~ msgctxt "@item:inlistbox coding of the bytes as characters with the values"
+#~ msgid "Character(s)"
+#~ msgstr "Символы"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Columns"
+#~ msgstr "&Столбцы"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Rows"
+#~ msgstr "С&троки"
+
+#~ msgctxt "@label:spinbox number of bytes the rotation is done within"
+#~ msgid "&Group size [bytes]"
+#~ msgstr "Размер &группы в байтах"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Control the number of bytes within which each rotation is made."
+#~ msgstr "Размер области циклического сдвига."
+
+#~ msgctxt "@label:spinbox"
+#~ msgid "S&hift width [bits]"
+#~ msgstr "&Смещение в битах"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "Control the width of the shift. Positive numbers move the bits to the "
+#~ "right, negative to the left."
+#~ msgstr ""
+#~ "Величина смещения. Положительные числа означают сдвиг вправо, "
+#~ "отрицательные - влево."
+
+#~ msgctxt ""
+#~ "name of the filter; it moves the bits and pushes the ones over the end to "
+#~ "the begin again"
+#~ msgid "ROTATE data"
+#~ msgstr "Сдвиг битов"
+
+#~ msgctxt "name of the filter; it does a logic XOR operation"
+#~ msgid "operand XOR data"
+#~ msgstr "операнд XOR данные"
+
+#~ msgctxt "@option:check"
+#~ msgid "Also reverse bits"
+#~ msgstr "Также инвертировать порядок следования битов "
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "If set, the bits are arranged in reverse order as well."
+#~ msgstr ""
+#~ "При включении этого параметра также поменять порядок следования битов."
+
+#~ msgctxt ""
+#~ "name of the filter; it switches all bits from 0 to 1 and 1 to 0 "
+#~ "respectivly"
+#~ msgid "INVERT data"
+#~ msgstr "Инвертировать биты"
+
+#~ msgctxt "name of the filter; it moves the bits, setting freed ones to zero"
+#~ msgid "SHIFT data"
+#~ msgstr "Сдвиг"
+
+#~ msgctxt "name of the filter; it does a logic AND operation"
+#~ msgid "operand AND data"
+#~ msgstr "операнд AND данные"
+
+#~ msgctxt "@label:textbox operand to the arithmetic filter function"
+#~ msgid "Operand:"
+#~ msgstr "Операнд:"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Enter an operand, or select a previous operand from the list."
+#~ msgstr "Укажите операнд или выберите его из списка"
+
+#~ msgctxt "@option:check"
+#~ msgid "Align at end"
+#~ msgstr "Выровнять операнд"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "If set, the last operand will be aligned to the end of the data."
+#~ msgstr "Если включено, последний операнд будет выровнен с концом данных."
+
+#~ msgctxt ""
+#~ "name of the filter; it changes the order of the bytes/bits to backwards"
+#~ msgid "REVERSE data"
+#~ msgstr "Инвертировать порядок следования"
+
+#~ msgctxt "name of the filter; it does a logic OR operation"
+#~ msgid "operand OR data"
+#~ msgstr "операнд OR данные"
+
+#~ msgctxt "@title:window"
+#~ msgid "File Info"
+#~ msgstr "Сведения о файле"
+
+#~ msgid "Type:"
+#~ msgstr "Тип:"
+
+#~ msgid "Location:"
+#~ msgstr "Адрес:"
+
+#~ msgid "Size:"
+#~ msgstr "Размер:"
+
+#~ msgid "Created/Loaded:"
+#~ msgstr "Создано/загружено:"
+
+#~ msgid "Last modified:"
+#~ msgstr "Последнее изменение:"
+
+#~ msgid "Last synchronized:"
+#~ msgstr "Последняя синхронизация:"
+
+#~ msgid "Created:"
+#~ msgstr "Создано:"
+
+#~ msgctxt "There is no storage location assigned to yet."
+#~ msgid "[None]"
+#~ msgstr "[нет]"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Overwrite only"
+#~ msgstr "Только замена"
+
+#~ msgctxt "The byte array was new created."
+#~ msgid "New created."
+#~ msgstr "Создан новый массив."
+
+#~ msgctxt "numbered title for a created document without a filename"
+#~ msgid "[New Byte Array]"
+#~ msgid_plural "[New Byte Array %1]"
+#~ msgstr[0] "[Новый массив байтов %1]"
+#~ msgstr[1] "[Новый массив байтов %1]"
+#~ msgstr[2] "[Новый массив байтов %1]"
+#~ msgstr[3] "[Новый массив байтов %1]"
+
+#~ msgctxt "name of the data type"
+#~ msgid "Byte Array"
+#~ msgstr "Массив байтов"
+
+#~ msgctxt "@title:window"
+#~ msgid "Info"
+#~ msgstr "Сведения"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Import"
+#~ msgstr "Импорт"
+
+#~ msgid "Paste As"
+#~ msgstr "Вставить как"
+
+#~ msgid "Conversion &Field"
+#~ msgstr "Поле &замены"
+
+#~ msgid "Searc&h Bar"
+#~ msgstr "Строка &поиска"
+
+#~ msgctxt "@info"
+#~ msgid "Problem while saving to local filesystem."
+#~ msgstr "Проблема при сохранении на локальную файловую систему."
+
+#~ msgctxt "@info"
+#~ msgid "Problem while synching with local filesystem."
+#~ msgstr "Проблема при синхронизации с локальной файловой системой."
+
+#~ msgctxt "@info"
+#~ msgid "Problem while loading from local filesystem."
+#~ msgstr "Проблема при загрузке с локальной файловой системы."
+
+#~ msgctxt "@title:window"
+#~ msgid "Export"
+#~ msgstr "Экспорт"
+
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
+#~ msgstr ""
+#~ "Файл с именем <nl/><filename>%1</filename><nl/> уже существует. Заменить?"
+
+#~ msgctxt "@title:window"
+#~ msgid "Save As"
+#~ msgstr "Сохранить как"
+
+#~ msgctxt "@title:window"
+#~ msgid "Close"
+#~ msgstr "Закрыть"
+
+#~ msgctxt "@info \"%title\" has been modified."
+#~ msgid ""
+#~ "<filename>%1</filename> has been modified.<nl/>Do you want to save your "
+#~ "changes or discard them?"
+#~ msgstr ""
+#~ "Файл <filename>%1</filename> был изменён.<nl/>Сохранить изменения или "
+#~ "отменить их?"
+
+#~ msgctxt "@info \"%title\" has been modified."
+#~ msgid ""
+#~ "<filename>%1</filename> has been modified.<nl/>Do you want to discard "
+#~ "your changes?"
+#~ msgstr "Файл <filename>%1</filename> был изменён.<nl/>Отменить их?"
+
+#~ msgctxt "@title:window"
+#~ msgid "Copy As"
+#~ msgstr "Копировать как"
+
+#~ msgctxt "@action:button"
+#~ msgid "&Copy to clipboard"
+#~ msgstr "&Скопировать в буфер обмена"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Copy the selected data to the clipboard."
+#~ msgstr "Скопировать выделенные данные в буфер обмена."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Copy to clipboard</interface> button, the "
+#~ "selected data will be copied to the clipboard with the settings you "
+#~ "entered above."
+#~ msgstr ""
+#~ "При нажатии на кнопку <interface>Скопировать в буфер обмена</interface> "
+#~ "выделенные данные будут скопированы в буфер обмена."
+
+#~ msgctxt "@title:group"
+#~ msgid "Preview (max. first 100 bytes)"
+#~ msgstr "Предварительный просмотр (первые 100 байтов)"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Copy As"
+#~ msgstr "Копировать как"
+
+#~ msgctxt "@item There are no encoders."
+#~ msgid "Not available."
+#~ msgstr "Не доступно."
+
+#~ msgctxt "@title:menu"
+#~ msgid "Export"
+#~ msgstr "Экспорт"
+
+#~ msgctxt "@item There are no exporters."
+#~ msgid "Not available."
+#~ msgstr "Не доступно."
+
+#~ msgctxt "@action:button"
+#~ msgid "&Export to File..."
+#~ msgstr "&Экспорт в файл..."
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Export the selected data to a file."
+#~ msgstr "Экспортировать выделенные данные в файл."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Export to file</interface> button, the "
+#~ "selected data will be copied to a file with the settings you entered "
+#~ "above."
+#~ msgstr ""
+#~ "При нажатии на кнопку <interface>Экспорт в файл</interface> выделенные "
+#~ "данные будут скопированы в отдельный файл."
+
+#~ msgid "Zoom"
+#~ msgstr "Масштаб"
+
+#~ msgctxt "zoom-factor (percentage)"
+#~ msgid "%1%"
+#~ msgstr "%1%"
+
+#~ msgid "&Fit to Width"
+#~ msgstr "&По ширине окна"
+
+#~ msgid "&Fit to Height"
+#~ msgstr "По &высоте окна"
+
+#~ msgid "&Fit to Size"
+#~ msgstr "По &размеру окна"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Zoom: %1%"
+#~ msgstr "Масштаб: %1%"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Undo"
+#~ msgstr "Отменить"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Redo"
+#~ msgstr "Повторить"
+
+#~ msgctxt "@action Undo: [change]"
+#~ msgid "Undo: %1"
+#~ msgstr "Отменить: %1"
+
+#~ msgctxt "@action Redo: [change]"
+#~ msgid "Redo: %1"
+#~ msgstr "Повторить: %1"
+
+#~ msgctxt "@title:column description of the change"
+#~ msgid "Title"
+#~ msgstr "Заголовок"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Title of the document"
+#~ msgstr "Заголовок документа"
+
+#~ msgctxt "@title:window"
+#~ msgid "Documents"
+#~ msgstr "Документы"
+
+#~| msgctxt "@info:tooltip"
+#~| msgid "Title of the document"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Folder of Current Document"
+#~ msgstr "Папка текущего документа"
+
+#~ msgctxt "@title:window"
+#~ msgid "Filesystem"
+#~ msgstr "Файловые системы"
+
+#~ msgctxt "@item There are no windows."
+#~ msgid "None."
+#~ msgstr "Нет."
+
+#~ msgctxt "@title:window"
+#~ msgid "Versions"
+#~ msgstr "Версии"
+
+#~ msgctxt "@title:column Id of the version"
+#~ msgid "Id"
+#~ msgstr "Идентификатор"
+
+#~ msgctxt "@title:column description of the change"
+#~ msgid "Changes"
+#~ msgstr "Изменения"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Id of the version"
+#~ msgstr "Идентификатор версии"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Description of what changed"
+#~ msgstr "Описание изменений"
+
+#~ msgctxt "@option:check set the document to read-only"
+#~ msgid "Set Read-only"
+#~ msgstr "Установить в режим только для чтения"
+
+#~ msgctxt "@option:check set the document to read-write"
+#~ msgid "Set Read-write"
+#~ msgstr "Установить в режим записи"
+
+#~ msgctxt "@option:check the document is read-write"
+#~ msgid "Read-write"
+#~ msgstr "Режим записи"
+
+#~ msgctxt "@option:check the document is read-only"
+#~ msgid "Read-only"
+#~ msgstr "Режим только для чтения"
+
+#~ msgctxt "@title:window"
+#~ msgid "Go to Offset"
+#~ msgstr "Перейти на адрес"
+
+#, fuzzy
+#~| msgctxt "@title:group"
+#~| msgid "Go to"
+#~ msgctxt "@title:group"
+#~ msgid "Go To"
+#~ msgstr "Перейти"
+
+#~ msgid "Edit files as an array of bytes"
+#~ msgstr "Редактировать файл как массив байтов"
+
+#~ msgctxt "@item:inlistbox cding of the bytes as values in the octal format"
+#~ msgid "Octal"
+#~ msgstr "Восьмеричный"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Resize Style"
+#~ msgstr "&Изменение размера"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&No Resize"
+#~ msgstr "&Не изменять размер"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Lock Groups"
+#~ msgstr "&Фиксировать размер групп"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Full Size Usage"
+#~ msgstr "&На всю ширину"
+
+#~ msgctxt "@label"
+#~ msgid "Size [bytes]: "
+#~ msgstr "Размер в байтах:"
+
+#~ msgctxt "@info:status the statistic is not uptodate"
+#~ msgid "Warning: not up-to-date"
+#~ msgstr "Предупреждение: не обновлено"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Warning: byte array has been modified since last update."
+#~ msgstr ""
+#~ "Предупреждение: массив байтов был изменён с момента последнего обновления."
+
+#~ msgctxt "@info"
+#~ msgid "<nl/>End of byte array reached.<nl/>Continue from the beginning?"
+#~ msgstr "<nl/>Достигнут конец массива байтов.<nl/>Продолжить с начала?"
+
+#~ msgctxt "@info"
+#~ msgid "<nl/>Beginning of byte array reached.<nl/>Continue from the end?"
+#~ msgstr "<nl/>Достигнуто начало массива байтов.<nl/>Продолжить с конца?"
+
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "There is already a file at <nl/><filename>%1</filename>.<nl/>Overwrite?"
+#~ msgstr ""
+#~ "Файл с именем <nl/><filename>%1</filename><nl/> уже существует. Заменить?"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Copy as"
+#~ msgstr "Копировать как"
+
+#~ msgctxt ""
+#~ "@info:status encoding of the bytes as values in the hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "Шестнадцатеричный"
+
+#~ msgctxt "@info:status encoding of the bytes as values in the decimal format"
+#~ msgid "Decimal"
+#~ msgstr "Десятичный"
+
+#~ msgctxt "@info:status encoding of the bytes as values in the octal format"
+#~ msgid "Octal"
+#~ msgstr "Восьмеричный"
+
+#~ msgctxt "@info:status encoding of the bytes as values in the binary format"
+#~ msgid "Binary"
+#~ msgstr "Двоичный"
+
+#~ msgctxt "@info:status short for: Readonly mode"
+#~ msgid "RO"
+#~ msgstr "Только чтение"
+
+#~ msgctxt "@info:status short for: Readwrite mode"
+#~ msgid "RW"
+#~ msgstr "Чтение и запись"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Readonly mode"
+#~ msgstr "Только для чтения"
+
+#~ msgctxt "@option:check"
+#~ msgid "Overwrite Mode"
+#~ msgstr "Режим замены"
+
+#~ msgctxt "@item description of bookmark"
+#~ msgid "Offset: %1"
+#~ msgstr "Адрес: %1"
+
+#~ msgctxt "@option:check"
+#~ msgid "Reverse also Bits"
+#~ msgstr "Инвертировать биты"
