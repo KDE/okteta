@@ -37,7 +37,7 @@ msgstr "Re&talla"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Paste"
-msgstr "&Apega"
+msgstr "A&pega"
 
 #: controller/keynavigator.cpp:143
 #, kde-format
