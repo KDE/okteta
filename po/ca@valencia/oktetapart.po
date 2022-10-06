@@ -26,7 +26,7 @@ msgstr ""
 #: oktetapartreadwriteui.rc:5
 #, kde-format
 msgid "&File"
-msgstr "&Fitxer"
+msgstr "Fi&txer"
 
 #. i18n: ectx: Menu (edit)
 #: oktetapartbrowserui.rc:8 oktetapartreadonlyui.rc:10
@@ -40,7 +40,7 @@ msgstr "&Edita"
 #: oktetapartreadwriteui.rc:39
 #, kde-format
 msgid "&View"
-msgstr "&Visualitza"
+msgstr "Vi&sualitza"
 
 #. i18n: ectx: ToolBar (mainToolBar)
 #: oktetapartbrowserui.rc:43 oktetapartreadonlyui.rc:47

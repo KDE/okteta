@@ -713,7 +713,7 @@ msgstr "El nombre dels bytes a partir dels quals s'ha construït l'estadística.
 #, kde-format
 msgctxt "@action:button build the statistic of the byte frequency"
 msgid "&Build"
-msgstr "&Construïx"
+msgstr "Cons&truix"
 
 #: controllers/view/info/infoview.cpp:66
 #, kde-format
@@ -1233,7 +1233,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button keep the unused bytes"
 msgid "&Keep"
-msgstr "&Mantín"
+msgstr "Man&tín"
 
 #: controllers/view/poddecoder/podtableview.cpp:137
 #, kde-format
@@ -1433,7 +1433,7 @@ msgstr "Substitució de bytes"
 #, kde-format
 msgctxt "@action;button"
 msgid "&Replace"
-msgstr "&Substituïx"
+msgstr "Su&bstituïx"
 
 #: controllers/view/replace/replacedialog.cpp:33
 #, kde-format
@@ -1633,7 +1633,7 @@ msgstr "Llargària mínima:"
 #, kde-format
 msgctxt "@action:button extract the strings from the byte array"
 msgid "&Extract"
-msgstr "&Extrau"
+msgstr "E&xtrau"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:69
 #, kde-format
