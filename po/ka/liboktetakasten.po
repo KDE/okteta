@@ -1,131 +1,122 @@
-# Translation of okteta into Japanese.
-# This file is distributed under the same license as the kdeutils package.
-# Noboru Sinohara <shinobo@leo.bekkoame.ne.jp>, 2002.
-# SATOH Satoru <ss@kde.gr.jp>, 2004.
-# Kenshi Muto <kmuto@debian.org>, 2005.
-# Yukiko Bando <ybando@k6.dion.ne.jp>, 2007, 2008, 2009.
-# Fumiaki Okushi <okushi@kde.gr.jp>, 2004, 2005, 2007, 2011.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the okteta package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-09-09 00:50+0000\n"
-"PO-Revision-Date: 2011-04-08 21:21-0700\n"
-"Last-Translator: Fumiaki Okushi <okushi@kde.gr.jp>\n"
-"Language-Team: Japanese <kde-jp@kde.org>\n"
-"Language: ja\n"
+"PO-Revision-Date: 2022-10-06 11:30+0200\n"
+"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
+"Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
+"Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Accelerator-Marker: &\n"
-"X-Text-Markup: kde4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Yukiko Bando"
+msgstr "Temuri Doghonadze"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "ybando@k6.dion.ne.jp"
+msgstr "Temuri.doghonadze@gmail.com"
 
 #: controllers/document/info/documentinfotool.cpp:48
 #: controllers/document/info/documentinfotoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
 msgid "File Info"
-msgstr "ファイル情報"
+msgstr "ფაილის ინფორმაცია"
 
 #: controllers/document/info/documentinfoview.cpp:67
 #, kde-format
 msgid "Type:"
-msgstr "タイプ:"
+msgstr "ტიპი:"
 
 #: controllers/document/info/documentinfoview.cpp:74
 #, kde-format
 msgid "Location:"
-msgstr "場所:"
+msgstr "მდებარეობა:"
 
 #: controllers/document/info/documentinfoview.cpp:91
 #, kde-format
 msgid "Size:"
-msgstr "サイズ:"
+msgstr "ზომა:"
 
 #: controllers/document/info/documentinfoview.cpp:98
 #, kde-format
 msgid "Created/Loaded:"
-msgstr "作成/読み込み:"
+msgstr "შეიქმნა/ჩაიტვირთა:"
 
 #: controllers/document/info/documentinfoview.cpp:102
 #, kde-format
 msgid "Last modified:"
-msgstr "最終更新:"
+msgstr "ბოლო ცვლილება:"
 
 #: controllers/document/info/documentinfoview.cpp:106
 #, kde-format
 msgid "Last synchronized:"
-msgstr "最終同期:"
+msgstr "ბოლო სინქრონიზაცია:"
 
 #: controllers/document/info/documentinfoview.cpp:113
 #, kde-format
 msgid "Created:"
-msgstr "作成:"
+msgstr "შექმნილია:"
 
 #: controllers/document/info/documentinfoview.cpp:165
 #, kde-format
 msgctxt "There is no storage location assigned to yet."
 msgid "[None]"
-msgstr "[なし]"
+msgstr "[არცერთი]"
 
 #: controllers/document/overwriteonly/overwriteonlycontroller.cpp:23
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Overwrite only"
+#, kde-format
 msgctxt "@option:check"
 msgid "Overwrite only"
-msgstr "上書きのみ"
+msgstr "მხოლოდ გადაწერა"
 
 #: controllers/view/bookmarks/bookmarklistmodel.cpp:126
 #, kde-format
 msgctxt "@title:column offset of the bookmark"
 msgid "Offset"
-msgstr "オフセット"
+msgstr "გადაწევა"
 
 #: controllers/view/bookmarks/bookmarklistmodel.cpp:127
 #, kde-format
 msgctxt "@title:column title of the bookmark"
 msgid "Title"
-msgstr "タイトル"
+msgstr "სათაური"
 
-# ACCELERATOR added by translator
 #: controllers/view/bookmarks/bookmarkscontroller.cpp:50
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Bookmark"
-msgstr "ブックマークを削除(&R)"
+msgstr "სანიშნეების ამოღება"
 
-# ACCELERATOR added by translator
 #: controllers/view/bookmarks/bookmarkscontroller.cpp:56
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove All Bookmarks"
-msgstr "すべてのブックマークを削除(&B)"
+msgstr "ყველა სანიშნის წაშლა"
 
-# ACCELERATOR added by translator
 #: controllers/view/bookmarks/bookmarkscontroller.cpp:62
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Go to Next Bookmark"
-msgstr "次のブックマークに移動(&N)"
+msgstr "შემდეგ სანიშნზე გადასვლა"
 
-# ACCELERATOR added by translator
 #: controllers/view/bookmarks/bookmarkscontroller.cpp:68
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Go to Previous Bookmark"
-msgstr "前のブックマークに移動(&P)"
+msgstr "წინა სანიშნზე გადასვლა"
 
 #: controllers/view/bookmarks/bookmarkscontroller.cpp:161
 #, kde-format
@@ -133,26 +124,25 @@ msgctxt "@item description of bookmark"
 msgid "%1: %2"
 msgstr "%1: %2"
 
-# ACCELERATOR added by translator
 #: controllers/view/bookmarks/bookmarkscontroller.cpp:240
 #: controllers/view/bookmarks/bookmarkstool.cpp:125
 #, kde-format
 msgctxt "default name of a bookmark"
 msgid "Bookmark"
-msgstr "ブックマーク"
+msgstr "სანიშნი"
 
 #: controllers/view/bookmarks/bookmarkstool.cpp:39
 #: controllers/view/bookmarks/bookmarkstoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
 msgid "Bookmarks"
-msgstr "ブックマーク"
+msgstr "სანიშნები"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:66
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Creates a new bookmark for the current cursor position."
-msgstr "現在のカーソル位置に新しいブックマークを作成します"
+msgstr ""
 
 #: controllers/view/bookmarks/bookmarksview.cpp:68
 #, kde-format
@@ -161,26 +151,25 @@ msgid ""
 "If you press this button, a new bookmark will be created for the current "
 "cursor position."
 msgstr ""
-"このボタンを押すと現在のカーソル位置に新しいブックマークが作成されます。"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:79
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Deletes all the selected bookmarks."
-msgstr "選択したすべてのブックマークを削除します"
+msgstr ""
 
 #: controllers/view/bookmarks/bookmarksview.cpp:81
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
 "If you press this button, all bookmarks which are selected will be deleted."
-msgstr "このボタンを押すと選択されているすべてのブックマークが削除されます。"
+msgstr ""
 
 #: controllers/view/bookmarks/bookmarksview.cpp:93
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Moves the cursor to the selected bookmark."
-msgstr "選択したブックマークにカーソルを移動します"
+msgstr ""
 
 #: controllers/view/bookmarks/bookmarksview.cpp:95
 #, kde-format
@@ -189,13 +178,12 @@ msgid ""
 "If you press this button, the cursor is moved to the position of the "
 "bookmark which has been last selected."
 msgstr ""
-"このボタンを押すと最後に選択されたブックマークの位置にカーソルが移動します。"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:103
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enables renaming of the selected bookmark."
-msgstr "選択したブックマークの名前を変更します"
+msgstr ""
 
 #: controllers/view/bookmarks/bookmarksview.cpp:105
 #, kde-format
@@ -204,85 +192,83 @@ msgid ""
 "If you press this button, the name of the bookmark which was last selected "
 "can be edited."
 msgstr ""
-"このボタンを押すと最後に選択したブックマークの名前を変更することができます。"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:121
 #: controllers/view/info/statistictablemodel.cpp:136
 #, kde-format
 msgctxt "@item:intable character is not defined"
 msgid "undef."
-msgstr "未定義"
+msgstr "განსაზღვ. წაშ."
 
 #: controllers/view/bytetable/bytetablemodel.cpp:158
 #: controllers/view/info/statistictablemodel.cpp:209
 #, kde-format
 msgctxt "@title:column short for Decimal"
 msgid "Dec"
-msgstr "十進"
+msgstr "დეკ"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:159
 #: controllers/view/info/statistictablemodel.cpp:208
 #, kde-format
 msgctxt "@title:column short for Hexadecimal"
 msgid "Hex"
-msgstr "十六進"
+msgstr "თექვსმეტობითი"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:160
 #: controllers/view/info/statistictablemodel.cpp:210
 #, kde-format
 msgctxt "@title:column short for Octal"
 msgid "Oct"
-msgstr "八進"
+msgstr "ოქტ"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:161
 #: controllers/view/info/statistictablemodel.cpp:211
 #, kde-format
 msgctxt "@title:column short for Binary"
 msgid "Bin"
-msgstr "二進"
+msgstr "ბინ"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:162
 #: controllers/view/info/statistictablemodel.cpp:213
 #, kde-format
 msgctxt "@title:column short for Character"
 msgid "Char"
-msgstr "文字"
+msgstr "სიმბ"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:168
 #: controllers/view/info/statistictablemodel.cpp:224
 #, kde-format
 msgctxt "@info:tooltip column contains the value in decimal format"
 msgid "Decimal"
-msgstr "十進"
+msgstr "ათობითი"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:170
 #: controllers/view/info/statistictablemodel.cpp:222
 #, kde-format
 msgctxt "@info:tooltip column contains the value in hexadecimal format"
 msgid "Hexadecimal"
-msgstr "十六進"
+msgstr "თექვსმეტობითი"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:172
 #: controllers/view/info/statistictablemodel.cpp:226
 #, kde-format
 msgctxt "@info:tooltip column contains the value in octal format"
 msgid "Octal"
-msgstr "八進"
+msgstr "რვაობითი"
 
-# skip-rule: binary3
 #: controllers/view/bytetable/bytetablemodel.cpp:174
 #: controllers/view/info/statistictablemodel.cpp:228
 #, kde-format
 msgctxt "@info:tooltip column contains the value in binary format"
 msgid "Binary"
-msgstr "二進"
+msgstr "ბინარული"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:176
 #: controllers/view/info/statistictablemodel.cpp:232
 #, kde-format
 msgctxt "@info:tooltip column contains the character with the value"
 msgid "Character"
-msgstr "文字"
+msgstr "სიმბოლო"
 
 #: controllers/view/bytetable/bytetabletool.cpp:35
 #: controllers/view/bytetable/bytetabletoolviewfactory.cpp:24
@@ -295,16 +281,14 @@ msgstr ""
 #, kde-format
 msgid "Inserted 1 Byte"
 msgid_plural "Inserted %1 Bytes"
-msgstr[0] "1 バイトを挿入"
-msgstr[1] "%1 バイトを挿入"
+msgstr[0] ""
+msgstr[1] ""
 
 #: controllers/view/bytetable/bytetableview.cpp:80
-#, fuzzy, kde-format
-#| msgctxt "@label:spinbox number of bytes to insert"
-#| msgid "Number:"
+#, kde-format
 msgctxt "@label:spinbox number of bytes to insert"
 msgid "Number (bytes):"
-msgstr "数:"
+msgstr ""
 
 #: controllers/view/bytetable/bytetableview.cpp:88
 #, kde-format
@@ -331,7 +315,7 @@ msgstr ""
 #, kde-format
 msgctxt "Converted from charset 1 to charset 2"
 msgid "%1 to %2"
-msgstr "%1 から %2 へ"
+msgstr ""
 
 #: controllers/view/charsetconversion/charsetconversiontoolviewfactory.cpp:24
 #, kde-format
@@ -344,7 +328,7 @@ msgstr ""
 msgctxt ""
 "@item:inmenu Is converted _from_ charset (selected in combobox next to this)"
 msgid "From"
-msgstr ""
+msgstr "დასაწყისი"
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:50
 #, kde-format
@@ -385,7 +369,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:group"
 msgid "Parameters"
-msgstr "パラメータ"
+msgstr "პარამეტრები"
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:97
 #, kde-format
@@ -415,7 +399,7 @@ msgstr ""
 msgctxt ""
 "@label:textbox byte to use for chars which are not part of the target charset"
 msgid "Substitute byte:"
-msgstr "差し替えバイト:"
+msgstr ""
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:128
 #, kde-format
@@ -431,17 +415,15 @@ msgid ""
 msgstr ""
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:157
-#, fuzzy, kde-format
-#| msgctxt "@title:column count of characters"
-#| msgid "Count"
+#, kde-format
 msgid "Con&vert"
-msgstr "文字数"
+msgstr ""
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:160
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Converts the bytes in the selected range."
-msgstr "選択範囲に含まれるバイトを変換。"
+msgstr ""
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:162
 #, kde-kuit-format
@@ -492,31 +474,31 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window of the tool to calculate checksums"
 msgid "Checksum"
-msgstr ""
+msgstr "საკონტროლო რიცხვი"
 
 #: controllers/view/checksum/checksumview.cpp:49
 #, kde-format
 msgctxt "@label:listbox algorithm to use for the checksum"
 msgid "Algorithm:"
-msgstr ""
+msgstr "ალგორითმი:"
 
 #: controllers/view/checksum/checksumview.cpp:56
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Select the algorithm to use for the checksum."
-msgstr "チェックサムを計算するのに使うアルゴリズムを選択します。"
+msgstr ""
 
 #: controllers/view/checksum/checksumview.cpp:83
 #, kde-format
 msgctxt "@action:button calculate the checksum"
 msgid "&Calculate"
-msgstr "計算(&C)"
+msgstr "&გამოთვლა"
 
 #: controllers/view/checksum/checksumview.cpp:86
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Calculate the checksum for the bytes in the selected range."
-msgstr "選択範囲に含まれるバイトのチェックサムを計算する。"
+msgstr ""
 
 #: controllers/view/checksum/checksumview.cpp:88
 #, kde-kuit-format
@@ -532,37 +514,37 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Binary Filter"
-msgstr "バイナリフィルタ"
+msgstr ""
 
 #: controllers/view/filter/filterview.cpp:45
 #, kde-format
 msgctxt "@label:listbox operation to use by the filter"
 msgid "Operation:"
-msgstr "演算:"
+msgstr ""
 
 #: controllers/view/filter/filterview.cpp:52
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The operation to use for the filter."
-msgstr "フィルタに使用する演算。"
+msgstr ""
 
 #: controllers/view/filter/filterview.cpp:56
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Select the operation to use for the filter."
-msgstr "フィルタに使用する演算を選択します。"
+msgstr ""
 
 #: controllers/view/filter/filterview.cpp:85
 #, kde-format
 msgctxt "@action:button"
 msgid "&Filter"
-msgstr "フィルタ(&F)"
+msgstr "&ფილტრი"
 
 #: controllers/view/filter/filterview.cpp:88
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Executes the filter for the bytes in the selected range."
-msgstr "選択範囲に含まれるバイトに対してフィルタを実行します。"
+msgstr ""
 
 #: controllers/view/filter/filterview.cpp:90
 #, kde-kuit-format
@@ -577,19 +559,19 @@ msgstr ""
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Go to Offset..."
-msgstr "オフセットへ移動(&G)..."
+msgstr ""
 
 #: controllers/view/gotooffset/gotooffsettool.cpp:50
 #, kde-format
 msgctxt "@title:window of the tool to set a new offset for the cursor"
 msgid "Goto"
-msgstr "移動"
+msgstr "გადასვლა"
 
 #: controllers/view/gotooffset/gotooffsetview.cpp:38
 #, kde-format
 msgctxt "@label:listbox"
 msgid "O&ffset:"
-msgstr "オフセット(&F):"
+msgstr "&წანაცვლება:"
 
 #: controllers/view/gotooffset/gotooffsetview.cpp:48
 #: controllers/view/selectrange/selectrangeview.cpp:47
@@ -598,33 +580,32 @@ msgstr "オフセット(&F):"
 msgctxt "@info:whatsthis"
 msgid "Enter an offset to go to, or select a previous offset from the list."
 msgstr ""
-"移動先のオフセットを入力するか、以前に使ったものをリストから選択します。"
 
 #: controllers/view/gotooffset/gotooffsetview.cpp:64
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:114
 #, kde-format
 msgctxt "@option:check"
 msgid "From c&ursor"
-msgstr "カーソル位置から(&U)"
+msgstr "&კურსორიდან"
 
 #: controllers/view/gotooffset/gotooffsetview.cpp:66
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Go relative from the current cursor location and not absolute."
-msgstr "絶対位置ではなく、現在のカーソル位置からの相対位置に移動します。"
+msgstr ""
 
 #: controllers/view/gotooffset/gotooffsetview.cpp:69
 #, kde-format
 msgctxt "@option:check"
 msgid "&Extend selection"
-msgstr "選択範囲を拡張する(&E)"
+msgstr ""
 
 #: controllers/view/gotooffset/gotooffsetview.cpp:71
 #: controllers/view/selectrange/selectrangeview.cpp:83
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Extend the selection by the cursor move."
-msgstr "カーソルの移動で選択範囲を拡張します。"
+msgstr ""
 
 #: controllers/view/gotooffset/gotooffsetview.cpp:74
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:117
@@ -632,26 +613,26 @@ msgstr "カーソルの移動で選択範囲を拡張します。"
 #, kde-format
 msgctxt "@option:check"
 msgid "&Backwards"
-msgstr "後ろ向き(&B)"
+msgstr "&უკან"
 
 #: controllers/view/gotooffset/gotooffsetview.cpp:76
 #: controllers/view/selectrange/selectrangeview.cpp:89
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Go backwards from the end or the current cursor location."
-msgstr "末尾または現在のカーソル位置から後ろ向きに移動します。"
+msgstr ""
 
 #: controllers/view/gotooffset/gotooffsetview.cpp:91
 #, kde-format
 msgctxt "@action:button"
 msgid "&Go"
-msgstr "移動(&G)"
+msgstr ""
 
 #: controllers/view/gotooffset/gotooffsetview.cpp:94
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Go to the Offset"
-msgstr "オフセットへ移動します"
+msgstr ""
 
 #: controllers/view/gotooffset/gotooffsetview.cpp:96
 #, kde-kuit-format
@@ -660,55 +641,46 @@ msgid ""
 "If you press the <interface>Go</interface> button, the cursor will be moved "
 "in the document to or, on your option, by the offset you entered above."
 msgstr ""
-"<interface>移動</interface>ボタンを押すと、上で入力したオフセットへカーソルが"
-"移動します。オプションの<interface>カーソル位置から</interface>を選択した場合"
-"は、指定したオフセットだけ移動します。"
 
 #: controllers/view/info/infotool.cpp:37
 #: controllers/view/info/infotoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
 msgid "Statistics"
-msgstr "統計"
+msgstr "სტატისტიკა"
 
 #: controllers/view/info/infoview.cpp:43
 #, kde-format
 msgctxt "@label size of selected bytes"
 msgid "Size:"
-msgstr "サイズ:"
+msgstr ""
 
 #: controllers/view/info/infoview.cpp:48
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip for column Value"
-#| msgid "The value of the bytes for the datatype"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "The number of the bytes the statistic was built for."
-msgstr "それぞれのデータタイプでのバイトの値"
+msgstr ""
 
 #: controllers/view/info/infoview.cpp:63
 #, kde-format
 msgctxt "@action:button build the statistic of the byte frequency"
 msgid "&Build"
-msgstr ""
+msgstr "&აგება"
 
 #: controllers/view/info/infoview.cpp:66
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Update the list of strings contained in the selected range."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "Builds the byte frequency statistic for the bytes in the selected range."
-msgstr "選択範囲に含まれる文字列のリストを更新します"
+msgstr ""
 
 #: controllers/view/info/infoview.cpp:68
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info:tooltip"
-#| msgid "Update the list of strings contained in the selected range."
+#, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
 "If you press the <interface>Build</interface> button, the byte frequency "
 "statistic is built for the bytes in the selected range."
-msgstr "選択範囲に含まれる文字列のリストを更新します"
+msgstr ""
 
 #: controllers/view/info/infoview.cpp:155
 #: controllers/view/structures/datatypes/datainformation.cpp:57
@@ -717,20 +689,20 @@ msgstr "選択範囲に含まれる文字列のリストを更新します"
 #, kde-format
 msgid "1 byte"
 msgid_plural "%1 bytes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "1 ბაიტი"
+msgstr[1] "%1 ბაიტი"
 
 #: controllers/view/info/statistictablemodel.cpp:214
 #, kde-format
 msgctxt "@title:column count of characters"
 msgid "Count"
-msgstr "文字数"
+msgstr "რაოდენობა"
 
 #: controllers/view/info/statistictablemodel.cpp:215
 #, kde-format
 msgctxt "@title:column Percent of byte in total"
 msgid "Percent"
-msgstr "パーセント"
+msgstr "პროცენტი"
 
 #: controllers/view/libbytearraychecksum/algorithm/adler32bytearraychecksumalgorithm.cpp:20
 #, kde-format
@@ -742,25 +714,25 @@ msgstr ""
 #, kde-format
 msgctxt "name of the checksum algorithm, Cyclic Redundancy Check 32"
 msgid "CRC-32"
-msgstr ""
+msgstr "CRC-32"
 
 #: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumalgorithm.cpp:82
 #, kde-format
 msgctxt "name of the checksum algorithm, Cyclic Redundancy Check 64"
 msgid "CRC-64"
-msgstr ""
+msgstr "CRC-64"
 
 #: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:31
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "ECMA-182"
-msgstr ""
+msgstr "ECMA-182"
 
 #: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:32
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "ISO 3309"
-msgstr ""
+msgstr "ISO 3309"
 
 #: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:38
 #, kde-format
@@ -803,21 +775,21 @@ msgstr ""
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Little-endian"
-msgstr "リトルエンディアン"
+msgstr "Little-endian"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:29
 #: controllers/view/poddecoder/podtableview.cpp:78
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Big-endian"
-msgstr "ビッグエンディアン"
+msgstr "Big-endian"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:35
 #, kde-format
 msgctxt ""
 "@label:listbox byte order to use for decoding the bytes into integer values"
 msgid "Byte Order:"
-msgstr "バイトオーダー:"
+msgstr ""
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:38
 #, kde-format
@@ -909,7 +881,7 @@ msgstr ""
 #, kde-format
 msgctxt "@label:textbox operand to the arithmetic filter function"
 msgid "Operand:"
-msgstr "オペランド:"
+msgstr ""
 
 #: controllers/view/libbytearrayfilter/filter/operandbytearrayfilterparametersetedit.cpp:41
 #, kde-format
@@ -921,7 +893,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Enter an operand, or select a previous operand from the list."
-msgstr "オペランドを入力するか、以前に使ったものをリストから選択します。"
+msgstr ""
 
 #: controllers/view/libbytearrayfilter/filter/operandbytearrayfilterparametersetedit.cpp:52
 #, kde-format
@@ -978,12 +950,10 @@ msgid "ROTATE data"
 msgstr ""
 
 #: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilterparametersetedit.cpp:36
-#, fuzzy, kde-format
-#| msgctxt "@label:spinbox number of bytes the movement is done within"
-#| msgid "&Group size:"
+#, kde-format
 msgctxt "@label:spinbox number of bytes the movement is done within"
 msgid "&Group size (bytes):"
-msgstr "グループサイズ(&G):"
+msgstr ""
 
 #: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilterparametersetedit.cpp:39
 #, kde-format
@@ -998,24 +968,18 @@ msgid "Control the number of bytes within which each movement is made."
 msgstr ""
 
 #: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilterparametersetedit.cpp:57
-#, fuzzy, kde-format
-#| msgctxt "@label:spinbox width (in number of bits) the bits are moved"
-#| msgid "S&hift width:"
+#, kde-format
 msgctxt "@label:spinbox width (in number of bits) the bits are moved"
 msgid "S&hift width (bits):"
-msgstr "シフト幅(&H):"
+msgstr ""
 
 #: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilterparametersetedit.cpp:60
-#, fuzzy, kde-format
-#| msgctxt "@info:whatsthis"
-#| msgid ""
-#| "Control the width of the shift. Positive numbers move the bits to the "
-#| "right, negative to the left."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "The width of the shift. Positive numbers move the bits to the right, "
 "negative to the left."
-msgstr "シフト幅を指定します。正の値はビットを右へ、負の値は左へシフトします。"
+msgstr ""
 
 #: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilterparametersetedit.cpp:64
 #, kde-format
@@ -1023,7 +987,7 @@ msgctxt "@info:whatsthis"
 msgid ""
 "Control the width of the shift. Positive numbers move the bits to the right, "
 "negative to the left."
-msgstr "シフト幅を指定します。正の値はビットを右へ、負の値は左へシフトします。"
+msgstr ""
 
 #: controllers/view/libbytearrayfilter/filter/shiftbytearrayfilter.cpp:29
 #, kde-format
@@ -1043,7 +1007,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Find"
-msgstr "検索"
+msgstr "მოძებნა"
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:86
 #, kde-format
@@ -1052,19 +1016,18 @@ msgid ""
 "Enter the bytes to search for, or select bytes previously searched for from "
 "the list."
 msgstr ""
-"検索するバイトパターンを入力するか、以前に使ったものをリストから選択します。"
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:104
 #, kde-format
 msgctxt "@title:group"
 msgid "Options"
-msgstr "オプション"
+msgstr "მორგება"
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:109
 #, kde-format
 msgctxt "@option:check"
 msgid "C&ase sensitive"
-msgstr "大文字と小文字を区別する(&A)"
+msgstr "&მთავრულის გათვალისწინებით"
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:110
 #, kde-format
@@ -1073,52 +1036,48 @@ msgid ""
 "Perform a case sensitive search: entering the pattern 'Joe' will not match "
 "'joe' or 'JOE', only 'Joe'."
 msgstr ""
-"大文字と小文字を区別して検索します。これを有効にすると、“Joe” は “joe” や "
-"“JOE” にはマッチしません。"
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:112
 #, kde-format
 msgctxt "@option:check"
 msgid "&Whole words only"
-msgstr "単語単位(&W)"
+msgstr "მხოლოდ &სრული სიტყვები"
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:113
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Require word boundaries in both ends of a match to succeed."
-msgstr "文字列の両端に単語境界がある場合にのみマッチします。"
+msgstr ""
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:115
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Start searching at the current cursor location rather than at the top."
-msgstr "先頭からではなく現在のカーソル位置から検索を開始します。"
+msgstr ""
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:118
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Replace backwards."
-msgstr "後ろ向きに置換します。"
+msgstr ""
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:119
 #, kde-format
 msgctxt "@option:check"
 msgid "&Selected bytes"
-msgstr "選択したバイトのみ(&S)"
+msgstr ""
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:120
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Only search within the current selection."
-msgstr "現在の選択範囲のみを検索します。"
+msgstr ""
 
 #: controllers/view/overwritemode/overwritemodecontroller.cpp:26
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Overwrite mode"
+#, kde-format
 msgctxt "@option:check set the view into overwrite mode"
 msgid "Overwr&ite Mode"
-msgstr "上書きモード"
+msgstr ""
 
 #: controllers/view/overwritemode/overwritemodecontroller.cpp:29
 #, kde-format
@@ -1126,14 +1085,14 @@ msgctxt "@info:whatsthis"
 msgid ""
 "Choose whether you want the input to be inserted or to overwrite existing "
 "data."
-msgstr "入力を挿入するか、既存のデータを上書きするかを選択します。"
+msgstr ""
 
 #: controllers/view/poddecoder/poddecodertool.cpp:118
 #: controllers/view/poddecoder/poddecodertoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
 msgid "Decoding Table"
-msgstr "デコードテーブル"
+msgstr ""
 
 #: controllers/view/poddecoder/poddecodertool.cpp:183
 #, kde-format
@@ -1151,39 +1110,37 @@ msgstr ""
 #, kde-format
 msgctxt "@title:column name of the datatype"
 msgid "Type"
-msgstr "タイプ"
+msgstr "ტიპი"
 
 #: controllers/view/poddecoder/podtablemodel.cpp:151
 #, kde-format
 msgctxt "@title:column value of the bytes for the datatype"
 msgid "Value"
-msgstr "値"
+msgstr "მნიშვნელობა"
 
 #: controllers/view/poddecoder/podtablemodel.cpp:157
 #, kde-format
 msgctxt "@info:tooltip for column Type"
 msgid "The type of data"
-msgstr "データのタイプ"
+msgstr ""
 
 #: controllers/view/poddecoder/podtablemodel.cpp:159
 #, kde-format
 msgctxt "@info:tooltip for column Value"
 msgid "The value of the bytes for the datatype"
-msgstr "それぞれのデータタイプでのバイトの値"
+msgstr ""
 
 #: controllers/view/poddecoder/podtableview.cpp:85
-#, fuzzy, kde-format
-#| msgctxt "@info:whatsthis"
-#| msgid "Select the operation to use for the filter."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte order to use for decoding the bytes."
-msgstr "フィルタに使用する演算を選択します。"
+msgstr ""
 
 #: controllers/view/poddecoder/podtableview.cpp:89
 #, kde-format
 msgctxt "@option:check"
 msgid "Unsigned as hexadecimal:"
-msgstr "符号なしの値は十六進で表す:"
+msgstr ""
 
 #: controllers/view/poddecoder/podtableview.cpp:98
 #, kde-format
@@ -1205,7 +1162,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button keep the unused bytes"
 msgid "&Keep"
-msgstr ""
+msgstr "&შენარჩუნება"
 
 #: controllers/view/poddecoder/podtableview.cpp:137
 #, kde-format
@@ -1227,92 +1184,92 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button"
 msgid "&Select"
-msgstr "選択(&S)"
+msgstr "&არჩევა"
 
 #: controllers/view/poddecoder/typecodecs/binary8codec.cpp:20
 #, kde-format
 msgctxt "@label:textbox encoding of one byte as value in the binary format"
 msgid "Binary 8-bit"
-msgstr "8 ビットの二進数"
+msgstr ""
 
 #: controllers/view/poddecoder/typecodecs/char8codec.cpp:23
 #, kde-format
 msgctxt "@label:textbox encoding of one byte as character"
 msgid "Character 8-bit"
-msgstr "8 ビットの文字"
+msgstr ""
 
 #: controllers/view/poddecoder/typecodecs/float32codec.cpp:20
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Float 32-bit"
-msgstr "32 ビットの浮動小数点数"
+msgstr ""
 
 #: controllers/view/poddecoder/typecodecs/float64codec.cpp:20
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Float 64-bit"
-msgstr "64 ビットの浮動小数点数"
+msgstr ""
 
 #: controllers/view/poddecoder/typecodecs/hexadecimal8codec.cpp:20
 #, kde-format
 msgctxt ""
 "@label:textbox encoding of one byte as value in the hexadecimal format"
 msgid "Hexadecimal 8-bit"
-msgstr "8 ビットの十六進数"
+msgstr ""
 
 #: controllers/view/poddecoder/typecodecs/octal8codec.cpp:20
 #, kde-format
 msgctxt "@label:textbox encoding of one byte as value in the octal format"
 msgid "Octal 8-bit"
-msgstr "8 ビットの八進数"
+msgstr ""
 
 #: controllers/view/poddecoder/typecodecs/sint16codec.cpp:20
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Signed 16-bit"
-msgstr "符号付き 16 ビット値"
+msgstr ""
 
 #: controllers/view/poddecoder/typecodecs/sint32codec.cpp:20
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Signed 32-bit"
-msgstr "符号付き 32 ビット値"
+msgstr ""
 
 #: controllers/view/poddecoder/typecodecs/sint64codec.cpp:20
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Signed 64-bit"
-msgstr "符号付き 64 ビット値"
+msgstr ""
 
 #: controllers/view/poddecoder/typecodecs/sint8codec.cpp:20
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Signed 8-bit"
-msgstr "符号付き 8 ビット値"
+msgstr ""
 
 #: controllers/view/poddecoder/typecodecs/uint16codec.cpp:20
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Unsigned 16-bit"
-msgstr "符号なし 16 ビット値"
+msgstr ""
 
 #: controllers/view/poddecoder/typecodecs/uint32codec.cpp:20
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Unsigned 32-bit"
-msgstr "符号なし 32 ビット値"
+msgstr ""
 
 #: controllers/view/poddecoder/typecodecs/uint64codec.cpp:20
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Unsigned 64-bit"
-msgstr "符号なし 64 ビット値"
+msgstr ""
 
 #: controllers/view/poddecoder/typecodecs/uint8codec.cpp:20
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Unsigned 8-bit"
-msgstr "符号なし 8 ビット値"
+msgstr ""
 
 #: controllers/view/poddecoder/typecodecs/utf8codec.cpp:22
 #, kde-format
@@ -1325,39 +1282,39 @@ msgstr "UTF-8"
 #, kde-format
 msgctxt "@title:window"
 msgid "Print Byte Array %1"
-msgstr "バイト配列 %1 を印刷"
+msgstr ""
 
 #: controllers/view/print/printtool.cpp:92
 #, kde-format
 msgctxt "in the header of the printed page, e.g. Page 2 of 20"
 msgid "Page %p of %P"
-msgstr "ページ %p / %P"
+msgstr ""
 
 #: controllers/view/print/printtool.cpp:98
 #, kde-format
 msgctxt "in the footer of the printed page, e.g. Printed by: Joe User"
 msgid "Printed by: %U"
-msgstr "印刷者: %U"
+msgstr ""
 
 #: controllers/view/print/printtool.cpp:163
 #, kde-format
 msgctxt "@info"
 msgid "Could not print."
-msgstr "印刷できませんでした。"
+msgstr ""
 
 #: controllers/view/replace/replacecontroller.cpp:73
 #: controllers/view/replace/replacecontroller.cpp:87
 #, kde-format
 msgctxt "@title:window"
 msgid "Replace"
-msgstr "置換"
+msgstr ""
 
 #: controllers/view/replace/replacecontroller.cpp:75
 #: controllers/view/replace/replacecontroller.cpp:89
 #, kde-format
 msgctxt "@info"
 msgid "No replacements made."
-msgstr "置換したバイトはありません。"
+msgstr ""
 
 #: controllers/view/replace/replacecontroller.cpp:76
 #: controllers/view/replace/replacecontroller.cpp:90
@@ -1365,46 +1322,46 @@ msgstr "置換したバイトはありません。"
 msgctxt "@info"
 msgid "1 replacement made."
 msgid_plural "%1 replacements made."
-msgstr[0] "1 件置換しました。"
-msgstr[1] "%1 件置換しました。"
+msgstr[0] ""
+msgstr[1] ""
 
 #: controllers/view/replace/replacecontroller.cpp:79
 #, kde-format
 msgctxt "@info"
 msgid "Replace pattern not found in byte array."
-msgstr "置換パターンがバイト配列に見つかりませんでした。"
+msgstr ""
 
 #: controllers/view/replace/replacecontroller.cpp:92
 #: controllers/view/search/searchcontroller.cpp:114
 #, kde-kuit-format
 msgctxt "@info"
 msgid "End of byte array reached.<nl/>Continue from the beginning?"
-msgstr "バイト配列の末尾です。<nl/>先頭から続けますか？"
+msgstr ""
 
 #: controllers/view/replace/replacecontroller.cpp:93
 #: controllers/view/search/searchcontroller.cpp:115
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Beginning of byte array reached.<nl/>Continue from the end?"
-msgstr "バイト配列の先頭です。<nl/>末尾から続けますか？"
+msgstr ""
 
 #: controllers/view/replace/replacedialog.cpp:29
 #, kde-format
 msgctxt "@title:window"
 msgid "Replace Bytes"
-msgstr "バイトを置換"
+msgstr ""
 
 #: controllers/view/replace/replacedialog.cpp:31
 #, kde-format
 msgctxt "@action;button"
 msgid "&Replace"
-msgstr "置換(&R)"
+msgstr ""
 
 #: controllers/view/replace/replacedialog.cpp:33
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Start replace"
-msgstr "置換を開始します"
+msgstr "ჩანაცვლების დაწყება"
 
 #: controllers/view/replace/replacedialog.cpp:35
 #, kde-kuit-format
@@ -1414,92 +1371,86 @@ msgid ""
 "entered above are searched for within the byte array and any occurrence is "
 "replaced with the replacement bytes."
 msgstr ""
-"<interface>置換</interface>ボタンを押すと、上で入力したバイトをバイト配列の中"
-"で検索し、マッチしたバイトを置換バイトで置き換えます。"
 
 #: controllers/view/replace/replacedialog.cpp:43
 #, kde-format
 msgctxt "@title:group"
 msgid "Replace With"
-msgstr "置換語"
+msgstr ""
 
 #: controllers/view/replace/replacedialog.cpp:50
-#, fuzzy, kde-format
-#| msgctxt "@info:whatsthis"
-#| msgid ""
-#| "Enter a pattern to replace with, or select a previous pattern from the "
-#| "list."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "Enter the bytes to replace with, or select bytes previously replaced with "
 "from the list."
-msgstr "置換するパターンを入力するか、以前に使ったものをリストから選択します。"
+msgstr ""
 
 #: controllers/view/replace/replacedialog.cpp:59
 #, kde-format
 msgctxt "@option:check"
 msgid "&Prompt on replace"
-msgstr "置換時に確認する(&P)"
+msgstr ""
 
 #: controllers/view/replace/replacedialog.cpp:60
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Ask before replacing each match found."
-msgstr "置換する前に毎回確認を求めます。"
+msgstr ""
 
 #: controllers/view/replace/replaceprompt.cpp:24
 #, kde-format
 msgctxt "@title:window prompt for iterative replacement"
 msgid "Replace"
-msgstr "置換"
+msgstr "ჩანაცვლება"
 
 #: controllers/view/replace/replaceprompt.cpp:28
 #, kde-format
 msgctxt "@action:button"
 msgid "Replace &All"
-msgstr "すべて置換(&A)"
+msgstr "ყველას &ჩანაცვლება"
 
 #: controllers/view/replace/replaceprompt.cpp:31
 #, kde-format
 msgctxt "@action:button"
 msgid "&Skip"
-msgstr "スキップ(&S)"
+msgstr "გამო&ტოვება"
 
 #: controllers/view/replace/replaceprompt.cpp:34
 #, kde-format
 msgctxt "@action:button"
 msgid "Replace"
-msgstr "置換"
+msgstr ""
 
 #: controllers/view/replace/replacetool.cpp:40
 #, kde-format
 msgctxt "@title"
 msgid "Replace"
-msgstr "置換"
+msgstr "ჩანაცვლება"
 
 #: controllers/view/search/searchcontroller.cpp:107
 #, kde-format
 msgctxt "@info"
 msgid "Search key not found in byte array."
-msgstr "検索キーがバイト配列の中に見つかりませんでした。"
+msgstr ""
 
 #: controllers/view/search/searchdialog.cpp:22
 #, kde-format
 msgctxt "@title:window"
 msgid "Find Bytes"
-msgstr "バイトを検索"
+msgstr ""
 
 #: controllers/view/search/searchdialog.cpp:24
 #, kde-format
 msgctxt "@action:button"
 msgid "&Find"
-msgstr "検索(&F)"
+msgstr "&ძებნა"
 
 #: controllers/view/search/searchdialog.cpp:26
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Start searching"
-msgstr "検索を開始します"
+msgstr "ძებნის დაწყება"
 
 #: controllers/view/search/searchdialog.cpp:28
 #, kde-kuit-format
@@ -1508,40 +1459,36 @@ msgid ""
 "If you press the <interface>Find</interface> button, the bytes you entered "
 "above are searched for within the byte array."
 msgstr ""
-"<interface>検索</interface>ボタンを押すと、上で入力したバイトをバイト配列の中"
-"で検索します。"
 
 #: controllers/view/search/searchtool.cpp:44
 #, kde-format
 msgctxt "@title"
 msgid "Search"
-msgstr "検索"
+msgstr "ძებნა"
 
 #: controllers/view/selectrange/selectrangecontroller.cpp:33
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Select range..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Select Range..."
-msgstr "検索範囲(&S)..."
+msgstr ""
 
 #: controllers/view/selectrange/selectrangetool.cpp:61
 #, kde-format
 msgctxt "@title:window of the tool to select a range"
 msgid "Select"
-msgstr "選択"
+msgstr "არჩევა"
 
 #: controllers/view/selectrange/selectrangeview.cpp:41
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Start offset:"
-msgstr "開始オフセット:"
+msgstr "წანაცვლების საწყისი:"
 
 #: controllers/view/selectrange/selectrangeview.cpp:61
 #, kde-format
 msgctxt "@label:listbox"
 msgid "End offset:"
-msgstr "終了オフセット:"
+msgstr ""
 
 #: controllers/view/selectrange/selectrangeview.cpp:81
 #, kde-format
@@ -1553,7 +1500,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the range."
-msgstr "範囲を選択。"
+msgstr ""
 
 #: controllers/view/selectrange/selectrangeview.cpp:110
 #, kde-kuit-format
@@ -1567,48 +1514,46 @@ msgstr ""
 #, kde-format
 msgctxt "@title:column offset of the extracted string"
 msgid "Offset"
-msgstr "オフセット"
+msgstr "გადაწევა"
 
 #: controllers/view/stringsextract/containedstringtablemodel.cpp:98
 #, kde-format
 msgctxt "@title:column string extracted from the byte array"
 msgid "String"
-msgstr "文字列"
+msgstr "სტრიქონი"
 
 #: controllers/view/stringsextract/stringsextracttool.cpp:59
 #, kde-format
 msgctxt "@title:window of the tool to extract strings"
 msgid "Strings"
-msgstr "文字列"
+msgstr "სტრიქონები"
 
 #: controllers/view/stringsextract/stringsextracttoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
 msgid "Strings"
-msgstr "文字列"
+msgstr "სტრიქონები"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:54
 #, kde-format
 msgctxt ""
 "@label:spinbox minimum length for consecutive chars to be seen as a string"
 msgid "Minimum length:"
-msgstr "最低文字数:"
+msgstr ""
 
 #: controllers/view/stringsextract/stringsextractview.cpp:66
 #, kde-format
 msgctxt "@action:button extract the strings from the byte array"
 msgid "&Extract"
-msgstr ""
+msgstr "&გაშლა"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:69
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Update the list of strings contained in the selected range."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "Finds the strings contained in the selected range and lists them in the view "
 "below."
-msgstr "選択範囲に含まれる文字列のリストを更新します"
+msgstr ""
 
 #: controllers/view/stringsextract/stringsextractview.cpp:71
 #, kde-kuit-format
@@ -1623,24 +1568,23 @@ msgstr ""
 #, kde-format
 msgctxt "@label:lineedit filter term for displayed strings"
 msgid "Filter:"
-msgstr "フィルタ:"
+msgstr ""
 
 #: controllers/view/stringsextract/stringsextractview.cpp:85
-#, fuzzy, kde-format
-#| msgid "Enter a filter term here."
+#, kde-format
 msgid "Enter a term to limit the list."
-msgstr "ここに検索語を入力します。"
+msgstr ""
 
 #: controllers/view/stringsextract/stringsextractview.cpp:136
 #, kde-format
 msgid "C&opy"
-msgstr "コピー(&O)"
+msgstr "&კოპირება"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:139
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected strings to the clipboard."
-msgstr "選択した文字列をクリップボードにコピーします"
+msgstr ""
 
 #: controllers/view/stringsextract/stringsextractview.cpp:141
 #, kde-kuit-format
@@ -1649,19 +1593,17 @@ msgid ""
 "If you press the <interface>Copy</interface> button, all strings you "
 "selected in the list are copied to the clipboard."
 msgstr ""
-"<interface>コピー</interface>ボタンを押すと、リストで選択したすべての文字列が"
-"クリップボードにコピーされます。"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:150
 #, kde-format
 msgid "&Show"
-msgstr ""
+msgstr "&ჩვენება"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:153
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Shows the selected string in the view."
-msgstr "選択した文字列をビューに表示します"
+msgstr ""
 
 #: controllers/view/stringsextract/stringsextractview.cpp:155
 #, kde-kuit-format
@@ -1670,13 +1612,9 @@ msgid ""
 "If you press the <interface>Go to</interface> button, the string which was "
 "last selected is marked and shown in the view."
 msgstr ""
-"<interface>移動</interface>ボタンを押すと、最後に選択した文字列がビューに表示"
-"されます。"
 
 #: controllers/view/structures/datatypes/array/complexarraydata.cpp:98
-#, fuzzy, kde-format
-#| msgctxt "array type then length"
-#| msgid "%1[%2]"
+#, kde-format
 msgctxt "type name, then array length"
 msgid "%1[%2]"
 msgstr "%1[%2]"
@@ -1685,8 +1623,8 @@ msgstr "%1[%2]"
 #, kde-format
 msgid "1 bit"
 msgid_plural "%1 bits"
-msgstr[0] "1 ビット"
-msgstr[1] "%1 ビット"
+msgstr[0] "1 ბიტი"
+msgstr[1] "%1 ბიტი"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:62
 #, kde-format
@@ -1778,22 +1716,22 @@ msgstr[1] ""
 #, kde-format
 msgid "%1 bit"
 msgid_plural "%1 bits"
-msgstr[0] "%1 ビット"
-msgstr[1] "%1 ビット"
+msgstr[0] "%1 ბიტი"
+msgstr[1] "%1 ბიტი"
 
 #: controllers/view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.cpp:46
 #: controllers/view/structures/datatypes/primitive/booldatainformation.cpp:17
 #, kde-format
 msgctxt "boolean value"
 msgid "false"
-msgstr ""
+msgstr "მცდარი"
 
 #: controllers/view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.cpp:47
 #: controllers/view/structures/datatypes/primitive/booldatainformation.cpp:20
 #, kde-format
 msgctxt "boolean value"
 msgid "true"
-msgstr ""
+msgstr "სიმართლე"
 
 #: controllers/view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.cpp:92
 #, kde-format
@@ -1804,24 +1742,20 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: controllers/view/structures/datatypes/primitive/bitfield/signedbitfielddatainformation.cpp:94
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox"
-#| msgid "Unsigned 8-bit:"
+#, kde-format
 msgctxt "Data type"
 msgid "signed bitfield (%1 bit wide)"
 msgid_plural "signed bitfield (%1 bits wide)"
-msgstr[0] "符号なし 8 ビット値:"
-msgstr[1] "符号なし 8 ビット値:"
+msgstr[0] ""
+msgstr[1] ""
 
 #: controllers/view/structures/datatypes/primitive/bitfield/unsignedbitfielddatainformation.cpp:76
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox"
-#| msgid "Unsigned 8-bit:"
+#, kde-format
 msgctxt "Data type"
 msgid "unsigned bitfield (%1 bit wide)"
 msgid_plural "unsigned bitfield (%1 bits wide)"
-msgstr[0] "符号なし 8 ビット値:"
-msgstr[1] "符号なし 8 ビット値:"
+msgstr[0] ""
+msgstr[1] ""
 
 #: controllers/view/structures/datatypes/primitive/booldatainformation.cpp:24
 #, kde-format
@@ -1837,21 +1771,17 @@ msgstr ""
 
 #: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:50
 #: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:78
-#, fuzzy, kde-format
-#| msgctxt "@item description of bookmark"
-#| msgid "%1: %2"
+#, kde-format
 msgid "%1 (%2)"
-msgstr "%1: %2"
+msgstr "%1 (%2)"
 
 #: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:88
-#, fuzzy, kde-format
-#| msgctxt "@item description of bookmark"
-#| msgid "%1: %2"
+#, kde-format
 msgctxt ""
 "Displayed in the type column. first comes the name of the enum, then the "
 "underlying type (e.g. uint32)"
 msgid "enum %1 (%2)"
-msgstr "%1: %2"
+msgstr ""
 
 #: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:75
 #, kde-format
@@ -1859,14 +1789,12 @@ msgid "0x%1 (no matching flags)"
 msgstr ""
 
 #: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:105
-#, fuzzy, kde-format
-#| msgctxt "@item description of bookmark"
-#| msgid "%1: %2"
+#, kde-format
 msgctxt ""
 "Displayed in the type column. first comes the name of the enum, then the "
 "underlying type (e.g. uint32)"
 msgid "flag %1 (%2)"
-msgstr "%1: %2"
+msgstr ""
 
 #: controllers/view/structures/datatypes/primitive/pointerdatainformation.cpp:116
 #, kde-format
@@ -1880,28 +1808,19 @@ msgid "bool (1 byte)"
 msgstr ""
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:18
-#, fuzzy
-#| msgctxt "Data type"
-#| msgid "unsigned byte"
 msgctxt "data type"
 msgid "signed byte"
-msgstr "符号なし byte"
+msgstr ""
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:19
-#, fuzzy
-#| msgctxt "Data type"
-#| msgid "unsigned byte"
 msgctxt "data type"
 msgid "unsigned byte"
-msgstr "符号なし byte"
+msgstr ""
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:20
-#, fuzzy
-#| msgctxt "Data type"
-#| msgid "char"
 msgctxt "data type"
 msgid "char"
-msgstr "char"
+msgstr ""
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:21
 msgctxt "data type"
@@ -1909,20 +1828,14 @@ msgid "bool (2 bytes)"
 msgstr ""
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:22
-#, fuzzy
-#| msgctxt "Data type"
-#| msgid "unsigned short"
 msgctxt "data type"
 msgid "signed short"
-msgstr "符号なし short"
+msgstr ""
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:23
-#, fuzzy
-#| msgctxt "Data type"
-#| msgid "unsigned short"
 msgctxt "data type"
 msgid "unsigned short"
-msgstr "符号なし short"
+msgstr ""
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:24
 msgctxt "data type"
@@ -1930,20 +1843,14 @@ msgid "bool (4 bytes)"
 msgstr ""
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:25
-#, fuzzy
-#| msgctxt "Data type"
-#| msgid "unsigned int"
 msgctxt "data type"
 msgid "signed int"
-msgstr "符号なし int"
+msgstr ""
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:26
-#, fuzzy
-#| msgctxt "Data type"
-#| msgid "unsigned int"
 msgctxt "data type"
 msgid "unsigned int"
-msgstr "符号なし int"
+msgstr ""
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:27
 msgctxt "data type"
@@ -1951,50 +1858,34 @@ msgid "bool (8 bytes)"
 msgstr ""
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:28
-#, fuzzy
-#| msgctxt "Data type"
-#| msgid "unsigned long"
 msgctxt "data type"
 msgid "signed long"
-msgstr "符号なし long"
+msgstr ""
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:29
-#, fuzzy
-#| msgctxt "Data type"
-#| msgid "unsigned long"
 msgctxt "data type"
 msgid "unsigned long"
-msgstr "符号なし long"
+msgstr ""
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:30
-#, fuzzy
-#| msgctxt "Data type"
-#| msgid "float"
 msgctxt "data type"
 msgid "float"
-msgstr "float"
+msgstr ""
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:31
-#, fuzzy
-#| msgctxt "Data type"
-#| msgid "double"
 msgctxt "data type"
 msgid "double"
-msgstr "double"
+msgstr "ორმაგი"
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:32
-#, fuzzy
-#| msgctxt "@label:textbox"
-#| msgid "Unsigned 8-bit:"
 msgctxt "data type"
 msgid "bitfield"
-msgstr "符号なし 8 ビット値:"
+msgstr ""
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:78
-#, fuzzy, kde-format
-#| msgid "<invalid name>"
+#, kde-format
 msgid "invalid type"
-msgstr "<不正な名前>"
+msgstr ""
 
 #: controllers/view/structures/datatypes/strings/asciistringdata.cpp:135
 #, kde-format
@@ -2007,11 +1898,9 @@ msgid "ASCII char"
 msgstr ""
 
 #: controllers/view/structures/datatypes/strings/asciistringdata.cpp:153
-#, fuzzy, kde-format
-#| msgctxt "@title:column string extracted from the byte array"
-#| msgid "String"
+#, kde-format
 msgid "ASCII string"
-msgstr "文字列"
+msgstr ""
 
 #: controllers/view/structures/datatypes/strings/ebcdicstringdata.cpp:137
 #, kde-format
@@ -2019,11 +1908,9 @@ msgid "EBCDIC char"
 msgstr ""
 
 #: controllers/view/structures/datatypes/strings/ebcdicstringdata.cpp:147
-#, fuzzy, kde-format
-#| msgctxt "@title:column string extracted from the byte array"
-#| msgid "String"
+#, kde-format
 msgid "EBCDIC string"
-msgstr "文字列"
+msgstr ""
 
 #: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:131
 #, kde-format
@@ -2063,10 +1950,9 @@ msgstr ""
 #: controllers/view/structures/datatypes/strings/utf16stringdata.cpp:56
 #: controllers/view/structures/datatypes/strings/utf32stringdata.cpp:56
 #: controllers/view/structures/datatypes/strings/utf8stringdata.cpp:55
-#, fuzzy, kde-format
-#| msgid "Value coding:"
+#, kde-format
 msgid "Value too big: 0x%1"
-msgstr "基数:"
+msgstr ""
 
 #: controllers/view/structures/datatypes/strings/utf16stringdata.cpp:62
 #: controllers/view/structures/datatypes/strings/utf16stringdata.cpp:65
@@ -2074,11 +1960,9 @@ msgstr "基数:"
 #: controllers/view/structures/datatypes/strings/utf32stringdata.cpp:65
 #: controllers/view/structures/datatypes/strings/utf8stringdata.cpp:61
 #: controllers/view/structures/datatypes/strings/utf8stringdata.cpp:64
-#, fuzzy, kde-format
-#| msgctxt "@item description of bookmark"
-#| msgid "%1: %2"
+#, kde-format
 msgid "%1 (U+%2)"
-msgstr "%1: %2"
+msgstr ""
 
 #: controllers/view/structures/datatypes/strings/utf32stringdata.cpp:32
 #, kde-format
@@ -2101,61 +1985,51 @@ msgid "UTF32-BE string"
 msgstr ""
 
 #: controllers/view/structures/datatypes/strings/utf8stringdata.cpp:32
-#, fuzzy, kde-format
-#| msgctxt "Data type"
-#| msgid "char"
+#, kde-format
 msgid "UTF8 char"
-msgstr "char"
+msgstr ""
 
 #: controllers/view/structures/datatypes/strings/utf8stringdata.cpp:37
-#, fuzzy, kde-format
-#| msgctxt "@title:column string extracted from the byte array"
-#| msgid "String"
+#, kde-format
 msgid "UTF8 string"
-msgstr "文字列"
+msgstr ""
 
 #: controllers/view/structures/datatypes/structuredatainformation.cpp:26
 #: controllers/view/structures/datatypes/taggeduniondatainformation.cpp:47
-#, fuzzy, kde-format
-#| msgctxt "data type in C/C++"
-#| msgid "struct"
+#, kde-format
 msgctxt "data type in C/C++, then name"
 msgid "struct %1"
-msgstr "struct"
+msgstr ""
 
 #: controllers/view/structures/datatypes/taggeduniondatainformation.cpp:50
-#, fuzzy, kde-format
-#| msgctxt "data type in C/C++"
-#| msgid "union"
+#, kde-format
 msgctxt "data type, then name"
 msgid "tagged union %1"
-msgstr "union"
+msgstr ""
 
 #: controllers/view/structures/datatypes/uniondatainformation.cpp:24
-#, fuzzy, kde-format
-#| msgctxt "data type in C/C++"
-#| msgid "union"
+#, kde-format
 msgctxt "data type in C/C++, then name"
 msgid "union %1"
-msgstr "union"
+msgstr ""
 
 #: controllers/view/structures/parsers/osdparser.cpp:118
 #: controllers/view/structures/parsers/osdparser.cpp:200
 #, kde-format
 msgid "<invalid name>"
-msgstr "<不正な名前>"
+msgstr ""
 
 #: controllers/view/structures/script/scriptlogger.cpp:83
 #, kde-format
 msgctxt "@title:column"
 msgid "Time"
-msgstr ""
+msgstr "დრო"
 
 #: controllers/view/structures/script/scriptlogger.cpp:85
 #, kde-format
 msgctxt "@title:column"
 msgid "Origin"
-msgstr ""
+msgstr "საწყისი"
 
 #: controllers/view/structures/script/scriptlogger.cpp:87
 #, kde-format
@@ -2167,27 +2041,25 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "About %1"
-msgstr ""
+msgstr "%1-ის შესახებ"
 
 #: controllers/view/structures/settings/aboutstructuredialog.cpp:44
-#, fuzzy, kde-format
-#| msgctxt "data type in C/C++"
-#| msgid "union"
+#, kde-format
 msgctxt "Version version-number"
 msgid "Version %1"
-msgstr "union"
+msgstr "ვერსია %1"
 
 #: controllers/view/structures/settings/aboutstructuredialog.cpp:81
 #: controllers/view/structures/settings/aboutstructuredialog.cpp:86
 #, kde-format
 msgid "License: %1"
-msgstr ""
+msgstr "ლიცენზია: %1"
 
 #: controllers/view/structures/settings/aboutstructuredialog.cpp:92
 #, kde-format
 msgctxt "@title:tab"
 msgid "About"
-msgstr ""
+msgstr "შესახებ"
 
 #: controllers/view/structures/settings/aboutstructuredialog.cpp:107
 #, kde-format
@@ -2201,38 +2073,36 @@ msgstr ""
 #, kde-format
 msgctxt "@title:tab"
 msgid "Author"
-msgstr ""
+msgstr "ავტორი"
 
 #: controllers/view/structures/settings/licensedialog.cpp:29
 #, kde-format
 msgctxt "@title:window"
 msgid "License Agreement"
-msgstr ""
+msgstr "სა&ლიცენზიო შეთანხმება"
 
 #: controllers/view/structures/settings/structureaddremovewidget.cpp:53
 #, kde-format
 msgctxt "@info:label"
 msgid "Installed structures:"
-msgstr "インストールした構造体:"
+msgstr ""
 
 #: controllers/view/structures/settings/structureaddremovewidget.cpp:63
 #, kde-format
 msgctxt "@info:label"
 msgid "Used structures:"
-msgstr "使用した構造体:"
+msgstr ""
 
 #: controllers/view/structures/settings/structureitemdelegate.cpp:114
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "About"
-msgstr ""
+msgstr "შესახებ"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:45
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "&Selected bytes"
+#, kde-format
 msgid "Get New Structures..."
-msgstr "選択したバイトのみ(&S)"
+msgstr ""
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:51
 #, kde-format
@@ -2256,12 +2126,10 @@ msgid "Structure Definitions"
 msgstr ""
 
 #: controllers/view/structures/settings/structuresselector.cpp:40
-#, fuzzy, kde-format
-#| msgctxt "@title"
-#| msgid "Search"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Search..."
-msgstr "検索"
+msgstr "საძიებო სიტყვა..."
 
 #. i18n: ectx: tooltip, entry (UnsignedDisplayBase), group (ValueDisplay)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:9
@@ -2286,12 +2154,10 @@ msgstr ""
 
 #. i18n: ectx: tooltip, entry (ShowCharNumericalValue), group (ValueDisplay)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:21
-#, fuzzy, kde-format
-#| msgctxt "@title:menu"
-#| msgid "&Show Values or Chars"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Whether to show the numerical value of chars"
-msgstr "値と文字の表示(&S)"
+msgstr ""
 
 #. i18n: ectx: tooltip, entry (LocaleAwareFloatFormatting), group (ValueDisplay)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:25
@@ -2333,88 +2199,66 @@ msgstr ""
 
 #. i18n: ectx: label, entry (ByteOrder), group (StructureSettings)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:47
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@label:listbox byte order to use for decoding the bytes into integer "
-#| "values"
-#| msgid "Byte Order:"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Byte order"
-msgstr "バイトオーダー:"
+msgstr ""
 
 #. i18n: ectx: label, entry (ByteOrder), group (StructureSettings)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:49
-#, fuzzy, kde-format
-#| msgctxt "@item:inlistbox"
-#| msgid "Big-endian"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Big endian"
-msgstr "ビッグエンディアン"
+msgstr ""
 
 #. i18n: ectx: label, entry (ByteOrder), group (StructureSettings)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:50
-#, fuzzy, kde-format
-#| msgctxt "@item:inlistbox"
-#| msgid "Little-endian"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Little endian"
-msgstr "リトルエンディアン"
+msgstr ""
 
-# skip-rule: binary3
 #: controllers/view/structures/settings/structureviewsettingswidget.cpp:49
-#, fuzzy, kde-format
-#| msgid "Binary"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Binary"
-msgstr "二進"
+msgstr "ბინარული"
 
 #: controllers/view/structures/settings/structureviewsettingswidget.cpp:50
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip column contains the value in octal format"
-#| msgid "Octal"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Octal"
-msgstr "八進"
+msgstr "რვაობითი"
 
 #: controllers/view/structures/settings/structureviewsettingswidget.cpp:51
-#, fuzzy, kde-format
-#| msgid "Decimal"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Decimal"
-msgstr "十進"
+msgstr "ათობითი"
 
 #: controllers/view/structures/settings/structureviewsettingswidget.cpp:52
-#, fuzzy, kde-format
-#| msgid "Hexadecimal"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Hexadecimal"
-msgstr "十六進"
+msgstr "თექვსმეტობითი"
 
 #. i18n: ectx: property (text), widget (QLabel, byteOrderLabel)
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:32
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@label:listbox byte order to use for decoding the bytes into integer "
-#| "values"
-#| msgid "Byte Order:"
+#, kde-format
 msgid "Byte order:"
-msgstr "バイトオーダー:"
+msgstr "ბაიტების რიგი:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ByteOrder)
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:46
-#, fuzzy, kde-format
-#| msgctxt "@item:inlistbox"
-#| msgid "Big-endian"
+#, kde-format
 msgid "Big endian"
-msgstr "ビッグエンディアン"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ByteOrder)
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:51
-#, fuzzy, kde-format
-#| msgctxt "@item:inlistbox"
-#| msgid "Little-endian"
+#, kde-format
 msgid "Little endian"
-msgstr "リトルエンディアン"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShortTypeNames)
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:59
@@ -2430,19 +2274,15 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, unsigned_label)
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:73
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Unsigned as hexadecimal"
+#, kde-format
 msgid "Unsigned values:"
-msgstr "符号なしの値は十六進で表す"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, signed_label)
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:86
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Unsigned as hexadecimal"
+#, kde-format
 msgid "Signed values:"
-msgstr "符号なしの値は十六進で表す"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_LocaleAwareFloatFormatting)
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:99
@@ -2458,57 +2298,52 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowCharNumericalValue)
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:119
-#, fuzzy, kde-format
-#| msgctxt "@title:menu"
-#| msgid "&Show Values or Chars"
+#, kde-format
 msgid "Show numerical value of chars"
-msgstr "値と文字の表示(&S)"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, char_label)
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:126
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip column contains the character with the value"
-#| msgid "Character"
+#, kde-format
 msgid "Character value:"
-msgstr "文字"
+msgstr ""
 
 #: controllers/view/structures/structurestool.cpp:68
 #: controllers/view/structures/structurestoolviewfactory.cpp:29
 #, kde-format
 msgctxt "@title:window"
 msgid "Structures"
-msgstr ""
+msgstr "სტრუქტურები"
 
 #: controllers/view/structures/structurestool.cpp:187
 #, kde-format
 msgctxt "name of a data structure"
 msgid "Name"
-msgstr "名前"
+msgstr ""
 
 #: controllers/view/structures/structurestool.cpp:189
 #, kde-format
 msgctxt "type of a data structure"
 msgid "Type"
-msgstr "型"
+msgstr ""
 
 #: controllers/view/structures/structurestool.cpp:191
 #, kde-format
 msgctxt "value of a data structure (primitive type)"
 msgid "Value"
-msgstr "値"
+msgstr ""
 
 #: controllers/view/structures/structureview.cpp:96
-#, fuzzy, kde-format
-#| msgid "Validate"
+#, kde-format
 msgctxt "@action:button"
 msgid "Validate"
-msgstr "検証"
+msgstr "დადასტურება"
 
 #: controllers/view/structures/structureview.cpp:98
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Validate all structures."
-msgstr "すべての構造体を検証"
+msgstr ""
 
 #: controllers/view/structures/structureview.cpp:120
 #, kde-format
@@ -2523,11 +2358,10 @@ msgid "Open script console."
 msgstr ""
 
 #: controllers/view/structures/structureview.cpp:126
-#, fuzzy, kde-format
-#| msgid "Settings"
+#, kde-format
 msgctxt "@action:button"
 msgid "Settings"
-msgstr "設定"
+msgstr "&მორგება"
 
 #: controllers/view/structures/structureview.cpp:128
 #, kde-format
@@ -2536,11 +2370,9 @@ msgid "Open settings."
 msgstr ""
 
 #: controllers/view/structures/structureview.cpp:159
-#, fuzzy, kde-format
-#| msgctxt "@item name of the encoding result"
-#| msgid "Values"
+#, kde-format
 msgid "Value Display"
-msgstr "値"
+msgstr ""
 
 #: controllers/view/structures/structureview.cpp:171
 #, kde-format
@@ -2551,7 +2383,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Unlock"
-msgstr ""
+msgstr "განბლოკვა"
 
 #: controllers/view/structures/structureview.cpp:260
 #, kde-format
@@ -2565,7 +2397,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Lock"
-msgstr ""
+msgstr "ჩაკეტვა"
 
 #: controllers/view/structures/structureview.cpp:267
 #, kde-format
@@ -2588,116 +2420,102 @@ msgstr ""
 
 #: controllers/view/viewconfig/bytespergroupdialog.cpp:37
 #: controllers/view/viewprofiles/viewprofileedit.cpp:119
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox to define after how many items the list is wrapped"
-#| msgid "Items per line:"
+#, kde-format
 msgctxt "@label:spinbox number of bytes which are grouped"
 msgid "Bytes per Group:"
-msgstr "1 行あたりのアイテム数:"
+msgstr ""
 
 #: controllers/view/viewconfig/bytespergroupdialog.cpp:52
 #, kde-format
 msgctxt "@title:window"
 msgid "Bytes per Group"
-msgstr "グループあたりのバイト数"
+msgstr ""
 
 #: controllers/view/viewconfig/bytesperlinedialog.cpp:34
 #: controllers/view/viewprofiles/viewprofileedit.cpp:126
 #, kde-format
 msgctxt "@label:spinbox number of bytes which are shown per line"
 msgid "Bytes per Line:"
-msgstr "1 行あたりのバイト数:"
+msgstr ""
 
 #: controllers/view/viewconfig/bytesperlinedialog.cpp:49
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox to define after how many items the list is wrapped"
-#| msgid "Items per line:"
+#, kde-format
 msgctxt "@title:window"
 msgid "Bytes per Line"
-msgstr "1 行あたりのアイテム数:"
+msgstr ""
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:35
-#, fuzzy, kde-format
-#| msgctxt "@title:menu"
-#| msgid "&Value Coding"
+#, kde-format
 msgctxt "@title:menu"
 msgid "&Offset Coding"
-msgstr "基数(&V)"
+msgstr ""
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:39
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@item:inmenu encoding of the bytes as values in the hexadecimal format"
-#| msgid "&Hexadecimal"
+#, kde-format
 msgctxt "@item:inmenu offset in the hexadecimal format"
 msgid "&Hexadecimal"
-msgstr "十六進(&H)"
+msgstr "&თექვსმეტობითი"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:41
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
-#| msgid "&Decimal"
+#, kde-format
 msgctxt "@item:inmenu offset in the decimal format"
 msgid "&Decimal"
-msgstr "十進(&D)"
+msgstr "&ათობითი"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:47
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Value Coding"
-msgstr "基数(&V)"
+msgstr ""
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:51
 #, kde-format
 msgctxt ""
 "@item:inmenu encoding of the bytes as values in the hexadecimal format"
 msgid "&Hexadecimal"
-msgstr "十六進(&H)"
+msgstr "&თექვსმეტობითი"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:53
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
 msgid "&Decimal"
-msgstr "十進(&D)"
+msgstr "&ათობითი"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:55
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
 msgid "&Octal"
-msgstr "八進(&O)"
+msgstr "&რვაობითი"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:57
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
 msgid "&Binary"
-msgstr "二進(&B)"
+msgstr "&ბინარული"
 
-# ACCELERATOR changed by translator
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:63
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Char Coding"
-msgstr "文字コード(&E)"
+msgstr ""
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:69
 #, kde-format
 msgctxt "@option:check"
 msgid "Show &Non-printing Chars"
-msgstr "印字不可能な文字を表示する(&N)"
+msgstr ""
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:75
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Set Bytes per Line..."
-msgstr "1 行あたりのバイト数を設定..."
+msgstr ""
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:81
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox to define after how many items the list is wrapped"
-#| msgid "Items per line:"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Set Bytes per Group..."
-msgstr "1 行あたりのアイテム数:"
+msgstr ""
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:87
 #, kde-format
@@ -2709,7 +2527,7 @@ msgstr ""
 #, kde-format
 msgctxt "@item:inmenu  The layout will not change on size changes."
 msgid "&Off"
-msgstr ""
+msgstr "&გამორთ"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:93
 #, kde-format
@@ -2731,152 +2549,135 @@ msgstr ""
 #, kde-format
 msgctxt "@option:check"
 msgid "Show &Line Offset"
-msgstr "行オフセットを表示(&L)"
+msgstr ""
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:107
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Show Values or Chars"
-msgstr "値と文字の表示(&S)"
+msgstr ""
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:110
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "&Values"
-msgstr "値(&V)"
+msgstr "&მნიშვნელობები"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:111
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "&Chars"
-msgstr "文字(&C)"
+msgstr ""
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:112
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu"
-#| msgid "Values &and Chars"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Values && Chars"
-msgstr "値と文字(&A)"
+msgstr ""
 
 #: controllers/view/viewmode/viewmodecontroller.cpp:25
 #, kde-format
 msgctxt "@title:menu"
 msgid "&View Mode"
-msgstr "表示モード(&V)"
+msgstr "&ხედის რეჟიმი"
 
 #: controllers/view/viewmode/viewmodecontroller.cpp:27
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "&Columns"
-msgstr "値と文字を別のカラムに表示(&C)"
+msgstr "&სვეტები"
 
 #: controllers/view/viewmode/viewmodecontroller.cpp:28
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "&Rows"
-msgstr "値と文字を別の行に表示(&R)"
+msgstr "&მწკრივები"
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:39
-#, fuzzy, kde-format
-#| msgctxt "@title:menu"
-#| msgid "&View Mode"
+#, kde-format
 msgctxt "@title:menu submenu to select the view profile or change it"
 msgid "View Profile"
-msgstr "表示モード(&V)"
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:46
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox"
-#| msgid "Pattern:"
+#, kde-format
 msgctxt "@action:inmenu create a new view profile"
 msgid "Create New..."
-msgstr "パターン:"
+msgstr "ახლის შექმნა..."
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:53
-#, fuzzy, kde-format
-#| msgctxt "@title:menu "
-#| msgid "Save changes"
+#, kde-format
 msgctxt "@action:inmenu save changed to the view profile to the base profile"
 msgid "Save Changes"
-msgstr "変更を保存"
+msgstr "ცვლილებების შენახვა"
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:60
-#, fuzzy, kde-format
-#| msgctxt "@title:menu "
-#| msgid "Save changes"
+#, kde-format
 msgctxt "@action:inmenu reset settings back to those of the saved base profile"
 msgid "Reset Changes"
-msgstr "変更を保存"
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:180
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:180
-#, fuzzy, kde-format
-#| msgctxt "@title:menu"
-#| msgid "&View Mode"
+#, kde-format
 msgctxt "@window:title"
 msgid "New View Profile"
-msgstr "表示モード(&V)"
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:55
 #, kde-format
 msgid "Title:"
-msgstr "タイトル:"
+msgstr "სათაური:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:59
 #, kde-format
 msgid "Display"
-msgstr "表示"
+msgstr "ეკრანი"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:63
 #, kde-format
 msgid "Show Line Offset:"
-msgstr "行オフセットを表示:"
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:67
-#, fuzzy, kde-format
-#| msgid "Hexadecimal"
+#, kde-format
 msgctxt "@item:inmenu offset in the hexadecimal format"
 msgid "Hexadecimal"
-msgstr "十六進"
+msgstr "თექვსმეტობითი"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:68
-#, fuzzy, kde-format
-#| msgid "Decimal"
+#, kde-format
 msgctxt "@item:inmenu offset in the decimal format"
 msgid "Decimal"
-msgstr "十進"
+msgstr "ათობითი"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:71
-#, fuzzy, kde-format
-#| msgid "Value coding:"
+#, kde-format
 msgid "Offset Coding:"
-msgstr "基数:"
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:75
 #, kde-format
 msgctxt "@item:"
 msgid "Values"
-msgstr "値"
+msgstr "მნიშვნელობები"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:76
 #, kde-format
 msgctxt "@item:"
 msgid "Chars"
-msgstr "文字"
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:77
 #, kde-format
 msgctxt "@item:"
 msgid "Values & Chars"
-msgstr "値と文字"
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:80
-#, fuzzy, kde-format
-#| msgctxt "@title:menu"
-#| msgid "&Show Values or Chars"
+#, kde-format
 msgid "Show Values or Chars:"
-msgstr "値と文字の表示(&S)"
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:84
 #, kde-format
@@ -2888,24 +2689,24 @@ msgstr ""
 #, kde-format
 msgctxt "@item:"
 msgid "Columns"
-msgstr "列"
+msgstr "სვეტები"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:88
 #, kde-format
 msgctxt "@item:"
 msgid "Rows"
-msgstr "行"
+msgstr "სტრიქონები"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:95
 #, kde-format
 msgid "Layout"
-msgstr "配置"
+msgstr "განლაგება"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:101
 #, kde-format
 msgctxt "@item:inmenu  The layout will not change on size changes."
 msgid "Off"
-msgstr "いいえ"
+msgstr "გამორთული"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:103
 #, kde-format
@@ -2921,7 +2722,7 @@ msgctxt ""
 "@item:inmenu  The layout will adapt to the size and fit in as much bytes per "
 "line as possible."
 msgid "On"
-msgstr "はい"
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:110
 #, kde-format
@@ -2931,7 +2732,7 @@ msgstr ""
 #: controllers/view/viewprofiles/viewprofileedit.cpp:131
 #, kde-format
 msgid "Values"
-msgstr "値"
+msgstr "მნიშვნელობები"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:137
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:54
@@ -2940,7 +2741,7 @@ msgstr "値"
 msgctxt ""
 "@item:inmenu encoding of the bytes as values in the hexadecimal format"
 msgid "Hexadecimal"
-msgstr "十六進"
+msgstr "თექვსმეტობითი"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:139
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:55
@@ -2948,7 +2749,7 @@ msgstr "十六進"
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
 msgid "Decimal"
-msgstr "十進"
+msgstr "ათობითი"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:141
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:56
@@ -2956,28 +2757,26 @@ msgstr "十進"
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
 msgid "Octal"
-msgstr "八進"
+msgstr "რვაობითი"
 
-# skip-rule: binary3
 #: controllers/view/viewprofiles/viewprofileedit.cpp:143
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:57
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:44
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
 msgid "Binary"
-msgstr "二進"
+msgstr "ბინარული"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:146
 #: controllers/view/viewprofiles/viewprofileedit.cpp:155
-#, fuzzy, kde-format
-#| msgid "Value coding:"
+#, kde-format
 msgid "Coding:"
-msgstr "基数:"
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:150
 #, kde-format
 msgid "Chars"
-msgstr "文字(&C)"
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:165
 #, kde-format
@@ -2996,12 +2795,10 @@ msgid "Manage View Profiles..."
 msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:36
-#, fuzzy, kde-format
-#| msgctxt "@title:menu"
-#| msgid "&View Mode"
+#, kde-format
 msgctxt "@title:window"
 msgid "View Profiles"
-msgstr "表示モード(&V)"
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:63
 #, kde-format
@@ -3048,7 +2845,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button"
 msgid "&Set as Default"
-msgstr ""
+msgstr "ნაგულისხმებად &დაყენება"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:93
 #, kde-format
@@ -3068,15 +2865,13 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button"
 msgid "&Delete"
-msgstr "削除(&D)"
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:105
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Deletes all the selected bookmarks."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Deletes the selected view profile."
-msgstr "選択したすべてのブックマークを削除します"
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:107
 #, kde-kuit-format
@@ -3092,100 +2887,94 @@ msgid "Modification of %1"
 msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:211
-#, fuzzy, kde-format
-#| msgctxt "@title:menu"
-#| msgid "&View Mode"
+#, kde-format
 msgctxt "@window:title"
 msgid "\"%1\" View Profile"
-msgstr "表示モード(&V)"
+msgstr ""
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:43
 #, kde-format
 msgctxt "@info:status short for: Insert mode"
 msgid "INS"
-msgstr "挿入"
+msgstr "INS"
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:44
 #, kde-format
 msgctxt "@info:status short for: Overwrite mode"
 msgid "OVR"
-msgstr "上書き"
+msgstr "OVR"
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:45
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Insert mode"
-msgstr "挿入モード"
+msgstr ""
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:46
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Overwrite mode"
-msgstr "上書きモード"
+msgstr ""
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:61
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Coding of the value interpretation in the current view."
-msgstr "現在のビューの値の基数"
+msgstr ""
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:69
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Encoding in the character column of the current view."
-msgstr "現在のビューの文字カラムのエンコーディング"
+msgstr ""
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:107
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:200
 #, kde-format
 msgid "Offset: %1"
-msgstr "オフセット: %1"
+msgstr "წანაცვლება: %1"
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:115
-#, fuzzy, kde-format
-#| msgid " byte"
-#| msgid_plural " bytes"
+#, kde-format
 msgid "%1 bytes"
-msgstr " バイト"
+msgstr "%1 ბაიტი"
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:117
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox substring which separates the values"
-#| msgid "Separation:"
+#, kde-format
 msgctxt "@info:status selection: start offset - end offset ()"
 msgid "Selection: %1 - %2 (%3)"
-msgstr "区切り:"
+msgstr ""
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:163
 #, kde-format
 msgctxt "@info:status offset value not available"
 msgid "Offset: -"
-msgstr "オフセット: -"
+msgstr ""
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:164
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:221
 #, kde-format
 msgctxt "@info:status offset value not available"
 msgid "Selection: -"
-msgstr "選択: -"
+msgstr ""
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:219
 #, kde-format
 msgctxt "@info:status selection: start offset - end offset (number of bytes)"
 msgid "Selection: %1 - %2 (%3)"
-msgstr "選択: %1 - %2 (%3)"
+msgstr ""
 
 #: core/document/bytearraydocument.cpp:53
 #, kde-format
 msgctxt "name of the data type"
 msgid "Byte Array"
-msgstr "バイト配列"
+msgstr ""
 
 #: core/document/bytearraydocumentfactory.cpp:36
 #, kde-format
 msgctxt "The byte array was new created."
 msgid "New created."
-msgstr "新しく作成されました。"
+msgstr ""
 
 #: core/document/bytearraydocumentfactory.cpp:43
 #: core/document/bytearraydocumentfactory.cpp:80
@@ -3193,8 +2982,8 @@ msgstr "新しく作成されました。"
 msgctxt "numbered title for a created document without a filename"
 msgid "[New Byte Array]"
 msgid_plural "[New Byte Array %1]"
-msgstr[0] "[新しいバイト配列]"
-msgstr[1] "[新しいバイト配列 %1]"
+msgstr[0] ""
+msgstr[1] ""
 
 #: core/document/bytearraydocumentfactory.cpp:73
 #, kde-format
@@ -3206,7 +2995,7 @@ msgstr ""
 #, kde-format
 msgctxt "destination of the byte array"
 msgid "Loaded from file."
-msgstr "ファイルから読み込みました。"
+msgstr ""
 
 #: core/io/filesystem/bytearrayrawfileloadthread.cpp:64
 #: core/io/filesystem/bytearrayrawfilereloadthread.cpp:55
@@ -3224,43 +3013,43 @@ msgstr ""
 #, kde-format
 msgctxt "name of the generated data"
 msgid "Pattern..."
-msgstr "パターン..."
+msgstr ""
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:103
 #, kde-format
 msgid "Pattern inserted."
-msgstr "パターンが挿入されました。"
+msgstr ""
 
 #: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:35
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Pattern:"
-msgstr "パターン:"
+msgstr "შაბლონი:"
 
 #: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:42
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
 "Enter a pattern to search for, or select a previous pattern from the list."
-msgstr "検索するパターンを入力するか、以前に使ったものをリストから選択します。"
+msgstr ""
 
 #: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:50
 #, kde-format
 msgctxt "@label:spinbox number of times to insert the pattern"
 msgid "&Number:"
-msgstr "回数(&N):"
+msgstr "&რიცხვი:"
 
 #: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:58
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Enter the number of times the pattern should be inserted."
-msgstr "パターンを挿入する回数を指定します。"
+msgstr ""
 
 #: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:70
 #, kde-format
 msgctxt "@item name of the generated data"
 msgid "Pattern"
-msgstr "パターン"
+msgstr "შაბლონი"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:52
 #, kde-format
@@ -3271,42 +3060,36 @@ msgstr ""
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:96
 #, kde-format
 msgid "RandomData inserted."
-msgstr "ランダムなパターンが挿入されました。"
+msgstr ""
 
 #: gui/io/generator/randomdata/bytearrayrandomdatageneratorconfigeditor.cpp:33
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "&Selected bytes"
+#, kde-format
 msgctxt "@label:spinbox size of the bytearray to generate"
 msgid "&Size (bytes):"
-msgstr "選択したバイトのみ(&S)"
+msgstr ""
 
 #: gui/io/generator/randomdata/bytearrayrandomdatageneratorconfigeditor.cpp:41
-#, fuzzy, kde-format
-#| msgctxt "@info:whatsthis"
-#| msgid "Enter the size of the byte to generate."
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid "Enter the size of the bytearray to generate."
-msgstr "生成するバイト数を指定します。"
+msgstr ""
 
 #: gui/io/generator/randomdata/bytearrayrandomdatageneratorconfigeditor.cpp:51
 #, kde-format
 msgctxt "@item name of the generated data"
 msgid "Random Data"
-msgstr "ランダムデータ"
+msgstr ""
 
 #: gui/io/generator/sequence/bytearraysequencegenerator.cpp:29
-#, fuzzy, kde-format
-#| msgid "Byte inserted."
+#, kde-format
 msgctxt "name of the generated data"
 msgid "Sequence"
-msgstr "バイトが挿入されました。"
+msgstr "მიმდევრობა"
 
 #: gui/io/generator/sequence/bytearraysequencegenerator.cpp:60
-#, fuzzy, kde-format
-#| msgid "Byte inserted."
+#, kde-format
 msgid "Sequence inserted."
-msgstr "バイトが挿入されました。"
+msgstr ""
 
 #: gui/io/streamencoder/base32/bytearraybase32streamencoder.cpp:137
 #, kde-format
@@ -3315,19 +3098,18 @@ msgid "Base32"
 msgstr "Base32"
 
 #: gui/io/streamencoder/base32/bytearraybase32streamencoderconfigeditor.cpp:34
-#, fuzzy, kde-format
-#| msgid "Value coding:"
+#, kde-format
 msgctxt ""
 "@label:listbox the type of the used encoding: Classic, Base32hex or z-"
 "base-32."
 msgid "Encoding:"
-msgstr "基数:"
+msgstr "კოდირება:"
 
 #: gui/io/streamencoder/base32/bytearraybase32streamencoderconfigeditor.cpp:39
 #, kde-format
 msgctxt "@item:inmenu Doing the base32 using the classical encoding"
 msgid "Classic"
-msgstr ""
+msgstr "კლასიკური"
 
 #: gui/io/streamencoder/base32/bytearraybase32streamencoderconfigeditor.cpp:41
 #, kde-format
@@ -3359,18 +3141,16 @@ msgid "The preview uses maximal the first 100 bytes."
 msgstr ""
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoder.cpp:27
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip column contains the character with the value"
-#| msgid "Character"
+#, kde-format
 msgctxt "name of the encoding target"
 msgid "Characters"
-msgstr "文字"
+msgstr "სიმბოლოები"
 
 #: gui/io/streamencoder/ihex/bytearrayihexstreamencoder.cpp:157
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "Intel Hex"
-msgstr ""
+msgstr "Intel Hex"
 
 #: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:34
 #: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:34
@@ -3384,44 +3164,44 @@ msgstr ""
 #, kde-format
 msgctxt "@item:inmenu address size"
 msgid "32-bit"
-msgstr "32 ビット"
+msgstr "32-ბიტიანი"
 
 #: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:42
 #: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:43
 #, kde-format
 msgctxt "@item:inmenu address size"
 msgid "16-bit"
-msgstr "16 ビット"
+msgstr "16-ბიტი"
 
 #: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:44
 #, kde-format
 msgctxt "@item:inmenu address size"
 msgid "8-bit"
-msgstr "8 ビット"
+msgstr ""
 
 #: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoder.cpp:132
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "C Array"
-msgstr "C 配列"
+msgstr ""
 
 #: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoderconfigeditor.cpp:36
 #, kde-format
 msgctxt "@label:textbox name of the created variable"
 msgid "Name of variable:"
-msgstr "変数の名前:"
+msgstr ""
 
 #: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoderconfigeditor.cpp:47
 #, kde-format
 msgctxt "@label:textbox to define after how many items the list is wrapped"
 msgid "Items per line:"
-msgstr "1 行あたりのアイテム数:"
+msgstr ""
 
 #: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoderconfigeditor.cpp:59
 #, kde-format
 msgctxt "@label:listbox the type of the data: char, integer, etc."
 msgid "Data type:"
-msgstr "データのタイプ:"
+msgstr ""
 
 #: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoderconfigeditor.cpp:80
 #, kde-format
@@ -3429,7 +3209,7 @@ msgctxt ""
 "@option:check Encode the values in hexadecimal instead of decimal, if the "
 "datatype has the property Unsigned"
 msgid "Unsigned as hexadecimal:"
-msgstr "符号なしの値は十六進で表す:"
+msgstr ""
 
 #: gui/io/streamencoder/srec/bytearraysrecstreamencoder.cpp:177
 #, kde-format
@@ -3441,13 +3221,13 @@ msgstr ""
 #, kde-format
 msgctxt "@item:inmenu address size"
 msgid "24-bit"
-msgstr ""
+msgstr "24-ბიტი"
 
 #: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoder.cpp:120
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "Uuencoding"
-msgstr "uuencode"
+msgstr ""
 
 #: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:35
 #: gui/io/streamencoder/xxencoding/bytearrayxxencodingstreamencoderconfigeditor.cpp:34
@@ -3457,17 +3237,16 @@ msgid "Internal name of file:"
 msgstr ""
 
 #: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:46
-#, fuzzy, kde-format
-#| msgid "Value coding:"
+#, kde-format
 msgctxt "@label:listbox the type of the used encoding: historical or Base64."
 msgid "Encoding:"
-msgstr "基数:"
+msgstr "კოდირება:"
 
 #: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:51
 #, kde-format
 msgctxt "@item:inmenu Doing the uuencoding using the historical encoding"
 msgid "Historical"
-msgstr ""
+msgstr "ისტორიული"
 
 #: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:53
 #, kde-format
@@ -3479,44 +3258,43 @@ msgstr ""
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "Values"
-msgstr "値"
+msgstr "მნიშვნელობები"
 
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:36
 #, kde-format
 msgid "Value coding:"
-msgstr "基数:"
+msgstr ""
 
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:51
 #, kde-format
 msgctxt "@label:textbox substring which separates the values"
 msgid "Separation:"
-msgstr "区切り:"
+msgstr ""
 
 #: gui/io/streamencoder/viewtext/bytearrayviewtextstreamencoder.cpp:41
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "View in Plain Text"
-msgstr "表示どおりのプレーンテキスト"
+msgstr ""
 
 #: gui/io/streamencoder/xxencoding/bytearrayxxencodingstreamencoder.cpp:71
-#, fuzzy, kde-format
-#| msgid "Value coding:"
+#, kde-format
 msgctxt "name of the encoding target"
 msgid "Xxencoding"
-msgstr "基数:"
+msgstr "Xxencoding"
 
 #. i18nc("@item:inlistbox guessing the format of the address by the input",      "Auto"),
 #: gui/liboktetawidgets/addresscombobox_p.cpp:30
 #, kde-format
 msgctxt "@item:inlistbox coding of offset in the hexadecimal format"
 msgid "Hex"
-msgstr "十六進"
+msgstr "თექვსმეტობითი"
 
 #: gui/liboktetawidgets/addresscombobox_p.cpp:31
 #, kde-format
 msgctxt "@item:inlistbox coding of offset in the decimal format"
 msgid "Dec"
-msgstr "十進"
+msgstr "დეკ"
 
 #: gui/liboktetawidgets/addresscombobox_p.cpp:32
 #, kde-format
@@ -3530,33 +3308,31 @@ msgstr ""
 msgctxt ""
 "@item:inlistbox coding of the bytes as values in the hexadecimal format"
 msgid "Hex"
-msgstr "十六進"
+msgstr "თექვსმეტობითი"
 
 #: gui/liboktetawidgets/bytearraycombobox_p.cpp:26
 #, kde-format
 msgctxt "@item:inlistbox coding of the bytes as values in the decimal format"
 msgid "Dec"
-msgstr "十進"
+msgstr "დეკ"
 
 #: gui/liboktetawidgets/bytearraycombobox_p.cpp:27
 #, kde-format
 msgctxt "@item:inlistbox coding of the bytes as values in the octal format"
 msgid "Oct"
-msgstr "八進"
+msgstr "ოქტ"
 
 #: gui/liboktetawidgets/bytearraycombobox_p.cpp:28
 #, kde-format
 msgctxt "@item:inlistbox coding of the bytes as values in the binary format"
 msgid "Bin"
-msgstr "二進"
+msgstr "ბინ"
 
 #: gui/liboktetawidgets/bytearraycombobox_p.cpp:29
-#, fuzzy, kde-format
-#| msgctxt "@title:column short for Character"
-#| msgid "Char"
+#, kde-format
 msgctxt "@item:inlistbox coding of the bytes as characters with the values"
 msgid "Char"
-msgstr "文字"
+msgstr "სიმბ"
 
 #: gui/liboktetawidgets/bytearraycombobox_p.cpp:30
 #, kde-format

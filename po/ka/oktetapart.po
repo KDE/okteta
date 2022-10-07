@@ -1,62 +1,54 @@
-# Translation of oktetapart into Japanese.
-# This file is distributed under the same license as the kdeutils package.
-# Noboru Sinohara <shinobo@leo.bekkoame.ne.jp>, 2002.
-# SATOH Satoru <ss@kde.gr.jp>, 2004.
-# Fumiaki Okushi <fokushi@yahoo.co.jp>, 2004.
-# Fumiaki Okushi <fumiaki@okushi.com>, 2005.
-# Kenshi Muto <kmuto@debian.org>, 2005.
-# Yukiko Bando <ybando@k6.dion.ne.jp>, 2007.
-# Fumiaki Okushi <okushi@kde.gr.jp>, 2007.
-# Daniel E. Moctezuma <democtezuma@gmail.com>, 2010.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the okteta package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: oktetapart\n"
+"Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2021-05-16 00:24+0000\n"
-"PO-Revision-Date: 2010-07-07 02:03-0700\n"
-"Last-Translator: Fumiaki Okushi <okushi@kde.gr.jp>\n"
-"Language-Team: Japanese <kde-jp@kde.org>\n"
-"Language: ja\n"
+"PO-Revision-Date: 2022-10-06 11:34+0200\n"
+"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
+"Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
+"Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 1.0\n"
-"X-Accelerator-Marker: &\n"
-"X-Text-Markup: kde4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #. i18n: ectx: Menu (file)
 #: oktetapartbrowserui.rc:5 oktetapartreadonlyui.rc:5
 #: oktetapartreadwriteui.rc:5
 #, kde-format
 msgid "&File"
-msgstr ""
+msgstr "&ფაილი"
 
 #. i18n: ectx: Menu (edit)
 #: oktetapartbrowserui.rc:8 oktetapartreadonlyui.rc:10
 #: oktetapartreadwriteui.rc:16
 #, kde-format
 msgid "&Edit"
-msgstr ""
+msgstr "&ჩასწორება"
 
 #. i18n: ectx: Menu (view)
 #: oktetapartbrowserui.rc:21 oktetapartreadonlyui.rc:26
 #: oktetapartreadwriteui.rc:39
 #, kde-format
 msgid "&View"
-msgstr ""
+msgstr "&ხედი"
 
 #. i18n: ectx: ToolBar (mainToolBar)
 #: oktetapartbrowserui.rc:43 oktetapartreadonlyui.rc:47
 #: oktetapartreadwriteui.rc:60
 #, kde-format
 msgid "Main Toolbar"
-msgstr "メインツールバー"
+msgstr "ხელსაწყოთა მთავარი ზოლი"
 
 #. i18n: ectx: Menu (permission)
 #: oktetapartreadwriteui.rc:11
 #, kde-format
 msgctxt "@title:menu"
 msgid "Permissions"
-msgstr "パーミッション"
+msgstr "წვდომები"
