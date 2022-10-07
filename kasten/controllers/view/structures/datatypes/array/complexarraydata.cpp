@@ -44,7 +44,7 @@ void ComplexArrayData::appendChildren(uint from, uint to)
 
 void ComplexArrayData::setLength(uint newLength)
 {
-    uint oldLength = mChildren.count();
+    uint oldLength = mChildren.size();
     if (newLength > oldLength) {
         mChildren.reserve(newLength);
         appendChildren(oldLength, newLength);

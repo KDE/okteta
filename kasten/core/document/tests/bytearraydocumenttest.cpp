@@ -45,7 +45,7 @@ void ByteArrayDocumentTest::testSetTitle()
     document->setTitle(title);
     QCOMPARE(document->title(), title);
     QVERIFY(titleChangeSpy->isValid());
-    QCOMPARE(titleChangeSpy->count(), 1);
+    QCOMPARE(titleChangeSpy->size(), 1);
     const QList<QVariant> arguments = titleChangeSpy->takeFirst();
     QCOMPARE(arguments.at(0).toString(), title);
 

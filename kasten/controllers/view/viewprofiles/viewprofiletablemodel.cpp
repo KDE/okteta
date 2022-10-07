@@ -118,7 +118,7 @@ ViewProfileTableModel::row(const ByteArrayViewProfile::Id& viewProfileId) const
     int result = -1;
 
     const QVector<ByteArrayViewProfile> viewProfiles = mViewProfileManager->viewProfiles();
-    const int viewProfilesCount = viewProfiles.count();
+    const int viewProfilesCount = viewProfiles.size();
     for (int i = 0; i < viewProfilesCount; ++i) {
         if (viewProfileId == viewProfiles.at(i).id()) {
             result = i;
@@ -133,7 +133,7 @@ void ViewProfileTableModel::onDefaultIndexChanged()
 {
     // simply reset the whole column, does not happen often and not worth to cache the old default
     Q_EMIT dataChanged(index(CurrentColumnId, 0),
-        index(CurrentColumnId, mViewProfileManager->viewProfiles().count() - 1));
+        index(CurrentColumnId, mViewProfileManager->viewProfiles().size() - 1));
 }
 
 void ViewProfileTableModel::onViewProfilesChanged()
@@ -145,7 +145,7 @@ void ViewProfileTableModel::onViewProfilesChanged()
 void ViewProfileTableModel::onViewProfileLocksChanged(const QVector<ByteArrayViewProfile::Id>& viewProfileIds)
 {
     const QVector<ByteArrayViewProfile> viewProfiles = mViewProfileManager->viewProfiles();
-    const int viewProfilesCount = viewProfiles.count();
+    const int viewProfilesCount = viewProfiles.size();
     for (int i = 0; i < viewProfilesCount; ++i) {
         const ByteArrayViewProfile::Id viewProfileId = viewProfiles.at(i).id();
 

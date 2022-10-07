@@ -234,11 +234,11 @@ void ValueCodecTest::testIsValidDigit_data()
         const QByteArray validDigits =
             QByteArray(valueCodecDescription.validDigits);
 
-        for (int j = 0; j < validDigits.count(); ++j) {
+        for (int j = 0; j < validDigits.size(); ++j) {
             validnessPerDigitField.setBit(validDigits[j], true);
         }
 
-        for (int j = 0; j < validnessPerDigitField.count(); ++j) {
+        for (int j = 0; j < validnessPerDigitField.size(); ++j) {
             const auto digit = static_cast<uchar>(j);
             const bool isValid = validnessPerDigitField.testBit(j);
             const QString rowTitle =

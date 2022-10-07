@@ -83,7 +83,7 @@ inline QWidget* MultiViewAreasPrivate::widget()                 const { return m
 inline bool MultiViewAreasPrivate::hasFocus()                   const { return mCurrentViewArea->hasFocus(); }
 inline AbstractView* MultiViewAreasPrivate::viewFocus()         const { return mCurrentViewArea->viewFocus(); }
 inline AbstractViewArea* MultiViewAreasPrivate::viewAreaFocus() const { return mCurrentViewArea; }
-inline int MultiViewAreasPrivate::viewAreasCount()              const { return mViewAreaList.count(); }
+inline int MultiViewAreasPrivate::viewAreasCount()              const { return mViewAreaList.size(); }
 
 inline QVector<AbstractView*> MultiViewAreasPrivate::viewList() const
 {

@@ -127,7 +127,7 @@ void MultiViewAreasPrivate::onViewsRemoved()
     Q_Q(MultiViewAreas);
 
     // keep a minimum of one area
-    if (mViewAreaList.count() < 2) {
+    if (mViewAreaList.size() < 2) {
         return;
     }
 

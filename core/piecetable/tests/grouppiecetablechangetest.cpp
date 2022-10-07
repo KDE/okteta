@@ -137,9 +137,9 @@ void GroupPieceTableChangeTest::testRevertBeforeChange()
     QCOMPARE(groupPieceTableChange.count(), 4);
     QCOMPARE(groupPieceTableChange.appliedChangesCount(), 0);
     QCOMPARE(groupPieceTableChange.headChangeDescription(), description4);
-    QCOMPARE(changedSectionList.count(), 1);
+    QCOMPARE(changedSectionList.size(), 1);
     QCOMPARE(changedSectionList.first(), Section(1, 4));
-    QCOMPARE(changeList.count(), 4);
+    QCOMPARE(changeList.size(), 4);
     QCOMPARE(changeList[0], revertedChangeMetrics4);
     QCOMPARE(changeList[1], revertedChangeMetrics3);
     QCOMPARE(changeList[2], revertedChangeMetrics2);
@@ -155,9 +155,9 @@ void GroupPieceTableChangeTest::testRevertBeforeChange()
     QCOMPARE(groupPieceTableChange.count(), 4);
     QCOMPARE(groupPieceTableChange.appliedChangesCount(), 3);
     QCOMPARE(groupPieceTableChange.headChangeDescription(), description4);
-    QCOMPARE(changedSectionList.count(), 1);
+    QCOMPARE(changedSectionList.size(), 1);
     QCOMPARE(changedSectionList.first(), Section(1, 3));
-    QCOMPARE(changeList.count(), 3);
+    QCOMPARE(changeList.size(), 3);
     QCOMPARE(changeList[0], changeMetrics1);
     QCOMPARE(changeList[1], changeMetrics2);
     QCOMPARE(changeList[2], changeMetrics3);
@@ -172,9 +172,9 @@ void GroupPieceTableChangeTest::testRevertBeforeChange()
     QCOMPARE(groupPieceTableChange.count(), 4);
     QCOMPARE(groupPieceTableChange.appliedChangesCount(), 1);
     QCOMPARE(groupPieceTableChange.headChangeDescription(), description4);
-    QCOMPARE(changedSectionList.count(), 1);
+    QCOMPARE(changedSectionList.size(), 1);
     QCOMPARE(changedSectionList.first(), Section(2, 3));
-    QCOMPARE(changeList.count(), 2);
+    QCOMPARE(changeList.size(), 2);
     QCOMPARE(changeList[0], revertedChangeMetrics3);
     QCOMPARE(changeList[1], revertedChangeMetrics2);
 
@@ -188,9 +188,9 @@ void GroupPieceTableChangeTest::testRevertBeforeChange()
     QCOMPARE(groupPieceTableChange.count(), 4);
     QCOMPARE(groupPieceTableChange.appliedChangesCount(), 4);
     QCOMPARE(groupPieceTableChange.headChangeDescription(), description4);
-    QCOMPARE(changedSectionList.count(), 1);
+    QCOMPARE(changedSectionList.size(), 1);
     QCOMPARE(changedSectionList.first(), Section(2, 4));
-    QCOMPARE(changeList.count(), 3);
+    QCOMPARE(changeList.size(), 3);
     QCOMPARE(changeList[0], changeMetrics2);
     QCOMPARE(changeList[1], changeMetrics3);
     QCOMPARE(changeList[2], changeMetrics4);

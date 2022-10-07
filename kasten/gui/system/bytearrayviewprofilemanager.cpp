@@ -146,7 +146,7 @@ ByteArrayViewProfileManager::~ByteArrayViewProfileManager() = default;
 int
 ByteArrayViewProfileManager::viewProfilesCount() const
 {
-    return mViewProfiles.count();
+    return mViewProfiles.size();
 }
 
 QVector<ByteArrayViewProfile>

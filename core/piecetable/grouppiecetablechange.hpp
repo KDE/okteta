@@ -96,7 +96,7 @@ inline GroupPieceTableChange::GroupPieceTableChange(GroupPieceTableChange* paren
 inline void GroupPieceTableChange::setDescription(const QString& description) { mDescription = description; }
 inline GroupPieceTableChange* GroupPieceTableChange::parent() const { return mParent; }
 inline void GroupPieceTableChange::finishChange() { mTryToMergeAppendedChange = false; }
-inline int GroupPieceTableChange::count()                     const { return mChangeStack.count(); }
+inline int GroupPieceTableChange::count()                     const { return mChangeStack.size(); }
 inline int GroupPieceTableChange::appliedChangesCount()       const { return mAppliedChangesCount; }
 inline QString GroupPieceTableChange::headChangeDescription() const { return changeDescription(count() - 1); }
 inline QString GroupPieceTableChange::changeDescription(int changeId) const

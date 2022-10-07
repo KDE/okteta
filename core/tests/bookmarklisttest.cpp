@@ -50,7 +50,7 @@ void BookmarkListTest::testAddRemoveBookmark()
 
     QVERIFY(bookmarkList.first() == bookmark1);
     QVERIFY(!bookmarkList.isEmpty());
-    QCOMPARE(bookmarkList.count(), 2);
+    QCOMPARE(bookmarkList.size(), 2);
 
     bookmarkList.removeBookmark(bookmark1);
 
@@ -139,7 +139,7 @@ void BookmarkListTest::testAdjustToReplaced()
     bookmarkList.addBookmark(bookmark3);
     bool adjusted = bookmarkList.adjustToReplaced(behindOffset3, 20, 19);
 
-    QCOMPARE(bookmarkList.count(), 3);
+    QCOMPARE(bookmarkList.size(), 3);
     QVERIFY(!bookmarkList.isEmpty());
     QVERIFY(!adjusted);
 
@@ -151,7 +151,7 @@ void BookmarkListTest::testAdjustToReplaced()
 
     adjusted = bookmarkList.adjustToReplaced(0, 5, 5);
 
-    QCOMPARE(bookmarkList.count(), 3);
+    QCOMPARE(bookmarkList.size(), 3);
     QVERIFY(!bookmarkList.isEmpty());
     QVERIFY(!adjusted);
 
@@ -166,7 +166,7 @@ void BookmarkListTest::testAdjustToReplaced()
 
     QVERIFY(bookmarkList.first() == bookmark1);
     QVERIFY(bookmarkList.last() == bookmark3);
-    QCOMPARE(bookmarkList.count(), 2);
+    QCOMPARE(bookmarkList.size(), 2);
     QVERIFY(!bookmarkList.isEmpty());
 
     // replace after 1 and before 3 with longer length
@@ -179,7 +179,7 @@ void BookmarkListTest::testAdjustToReplaced()
 
     QVERIFY(bookmarkList.first() == bookmark1);
     QCOMPARE(bookmarkList.last().offset(), bookmark3.offset() + longer);
-    QCOMPARE(bookmarkList.count(), 2);
+    QCOMPARE(bookmarkList.size(), 2);
     QVERIFY(!bookmarkList.isEmpty());
 
     // replace after 1 and before 3 with shorter length
@@ -192,7 +192,7 @@ void BookmarkListTest::testAdjustToReplaced()
 
     QVERIFY(bookmarkList.first() == bookmark1);
     QCOMPARE(bookmarkList.last().offset(), bookmark3.offset() - shorter);
-    QCOMPARE(bookmarkList.count(), 2);
+    QCOMPARE(bookmarkList.size(), 2);
     QVERIFY(!bookmarkList.isEmpty());
 }
 
@@ -223,7 +223,7 @@ void BookmarkListTest::testAdjustToSwapped()
 
     QVERIFY(adjusted);
     QVERIFY(!bookmarkList.isEmpty());
-    QCOMPARE(bookmarkList.count(), 5);
+    QCOMPARE(bookmarkList.size(), 5);
     QVector<int>::ConstIterator oit = newOffsets.constBegin();
     for (const Bookmark& bookmark : std::as_const(bookmarkList)) {
         QCOMPARE(bookmark.offset(), *oit++);

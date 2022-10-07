@@ -74,7 +74,7 @@ void PieceTableChangeHistory::finishChange()
 bool PieceTableChangeHistory::appendChange(AbstractPieceTableChange* change)
 {
     // chop unapplied changes
-    if (mAppliedChangesCount < mChangeStack.count()) {
+    if (mAppliedChangesCount < mChangeStack.size()) {
         // hide baseindex if needed
         if (mBaseBeforeChangeIndex > mAppliedChangesCount) {
             mBaseBeforeChangeIndex = -1;
@@ -82,7 +82,7 @@ bool PieceTableChangeHistory::appendChange(AbstractPieceTableChange* change)
         do {
             AbstractPieceTableChange* droppedChange = mChangeStack.pop();
             delete droppedChange;
-        } while (mAppliedChangesCount < mChangeStack.count());
+        } while (mAppliedChangesCount < mChangeStack.size());
     }
 
     mAppliedChangesDataSize += change->dataSize();

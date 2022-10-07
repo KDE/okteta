@@ -58,7 +58,7 @@ void SwitchViewController::updateActions()
         AbstractView* focussedView = mGroupedViews->viewFocus();
         const int indexOfFocussedView = viewList.indexOf(focussedView);
 
-        hasNext = (indexOfFocussedView + 1 < viewList.count());
+        hasNext = (indexOfFocussedView + 1 < viewList.size());
         hasPrevious = (indexOfFocussedView > 0);
     }
 

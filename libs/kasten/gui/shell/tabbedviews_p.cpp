@@ -96,7 +96,7 @@ void TabbedViewsPrivate::addViews(const QVector<AbstractView*>& views)
 {
     Q_Q(TabbedViews);
 
-    if (views.count() == 0) {
+    if (views.size() == 0) {
         return;
     }
 

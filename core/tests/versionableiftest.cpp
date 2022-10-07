@@ -51,7 +51,7 @@ void VersionableIfTest::clearSignalSpys()
 void VersionableIfTest::checkRevertedToVersionIndex(int versionIndex)
 {
     QVERIFY(mRevertedToVersionIndexSpy->isValid());
-    QCOMPARE(mRevertedToVersionIndexSpy->count(), 1);
+    QCOMPARE(mRevertedToVersionIndexSpy->size(), 1);
     const QList<QVariant> arguments = mRevertedToVersionIndexSpy->takeFirst();
     QCOMPARE(arguments.at(0).toInt(), versionIndex);
 }
@@ -59,7 +59,7 @@ void VersionableIfTest::checkRevertedToVersionIndex(int versionIndex)
 void VersionableIfTest::checkHeadVersionDescriptionChanged(const QString& versionDescription)
 {
     QVERIFY(mHeadVersionDescriptionChangedSpy->isValid());
-    QCOMPARE(mHeadVersionDescriptionChangedSpy->count(), 1);
+    QCOMPARE(mHeadVersionDescriptionChangedSpy->size(), 1);
     const QList<QVariant> arguments = mHeadVersionDescriptionChangedSpy->takeFirst();
     QCOMPARE(arguments.at(0).toString(), versionDescription);
 }
@@ -67,7 +67,7 @@ void VersionableIfTest::checkHeadVersionDescriptionChanged(const QString& versio
 void VersionableIfTest::checkHeadVersionChanged(int newHeadVersionIndex)
 {
     QVERIFY(mHeadVersionChangedSpy->isValid());
-    QCOMPARE(mHeadVersionChangedSpy->count(), 1);
+    QCOMPARE(mHeadVersionChangedSpy->size(), 1);
     QList<QVariant> arguments = mHeadVersionChangedSpy->takeFirst();
     QCOMPARE(arguments.at(0).toInt(), newHeadVersionIndex);
 }

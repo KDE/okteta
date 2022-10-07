@@ -62,7 +62,7 @@ void TestFileSystem::_removeDir(const QString& path)
         }
     }
 
-    QCOMPARE((int)localDir.entryList(QDir::Files).count(), 0);
+    QCOMPARE((int)localDir.entryList(QDir::Files).size(), 0);
     QString subDirectory = path;
     subDirectory.remove(QRegularExpression(QStringLiteral("^.*/")));
     localDir.cdUp();

@@ -130,9 +130,9 @@ void PieceTableChangeHistoryTest::testRevertBeforeChange()
     QCOMPARE(pieceTableChangeHistory.count(), 4);
     QCOMPARE(pieceTableChangeHistory.appliedChangesCount(), 0);
     QCOMPARE(pieceTableChangeHistory.headChangeDescription(), description4);
-    QCOMPARE(changedSectionList.count(), 1);
+    QCOMPARE(changedSectionList.size(), 1);
     QCOMPARE(changedSectionList.first(), AddressRange(1, 4));
-    QCOMPARE(changeList.count(), 4);
+    QCOMPARE(changeList.size(), 4);
     QCOMPARE(changeList[0], revertedChangeMetrics4);
     QCOMPARE(changeList[1], revertedChangeMetrics3);
     QCOMPARE(changeList[2], revertedChangeMetrics2);
@@ -148,9 +148,9 @@ void PieceTableChangeHistoryTest::testRevertBeforeChange()
     QCOMPARE(pieceTableChangeHistory.count(), 4);
     QCOMPARE(pieceTableChangeHistory.appliedChangesCount(), 3);
     QCOMPARE(pieceTableChangeHistory.headChangeDescription(), description4);
-    QCOMPARE(changedSectionList.count(), 1);
+    QCOMPARE(changedSectionList.size(), 1);
     QCOMPARE(changedSectionList.first(), AddressRange(1, 3));
-    QCOMPARE(changeList.count(), 3);
+    QCOMPARE(changeList.size(), 3);
     QCOMPARE(changeList[0], changeMetrics1);
     QCOMPARE(changeList[1], changeMetrics2);
     QCOMPARE(changeList[2], changeMetrics3);
@@ -165,9 +165,9 @@ void PieceTableChangeHistoryTest::testRevertBeforeChange()
     QCOMPARE(pieceTableChangeHistory.count(), 4);
     QCOMPARE(pieceTableChangeHistory.appliedChangesCount(), 1);
     QCOMPARE(pieceTableChangeHistory.headChangeDescription(), description4);
-    QCOMPARE(changedSectionList.count(), 1);
+    QCOMPARE(changedSectionList.size(), 1);
     QCOMPARE(changedSectionList.first(), AddressRange(2, 3));
-    QCOMPARE(changeList.count(), 2);
+    QCOMPARE(changeList.size(), 2);
     QCOMPARE(changeList[0], revertedChangeMetrics3);
     QCOMPARE(changeList[1], revertedChangeMetrics2);
 
@@ -181,9 +181,9 @@ void PieceTableChangeHistoryTest::testRevertBeforeChange()
     QCOMPARE(pieceTableChangeHistory.count(), 4);
     QCOMPARE(pieceTableChangeHistory.appliedChangesCount(), 4);
     QCOMPARE(pieceTableChangeHistory.headChangeDescription(), description4);
-    QCOMPARE(changedSectionList.count(), 1);
+    QCOMPARE(changedSectionList.size(), 1);
     QCOMPARE(changedSectionList.first(), AddressRange(2, 4));
-    QCOMPARE(changeList.count(), 3);
+    QCOMPARE(changeList.size(), 3);
     QCOMPARE(changeList[0], changeMetrics2);
     QCOMPARE(changeList[1], changeMetrics3);
     QCOMPARE(changeList[2], changeMetrics4);

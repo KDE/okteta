@@ -279,7 +279,7 @@ void StructuresTool::setEnabledStructuresInView()
         }
     }
 
-    for (int i = 0; i < mData.count(); ++i) {
+    for (int i = 0; i < mData.size(); ++i) {
         Q_EMIT dataChanged(i, mData.at(i)->actualDataInformation());
     }
 

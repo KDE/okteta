@@ -266,11 +266,11 @@ void ReplaceJobTest::testReplace()
     QSignalSpy finishedSpy(job, &Kasten::ReplaceJob::finished);
 
     job->start();
-    if (finishedSpy.count() == 0) {
+    if (finishedSpy.size() == 0) {
         QVERIFY(finishedSpy.wait());
     }
 
-    QCOMPARE(finishedSpy.count(), 1);
+    QCOMPARE(finishedSpy.size(), 1);
 
     compare(byteArray, expectedData);
 

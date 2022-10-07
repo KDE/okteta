@@ -68,7 +68,7 @@ bool GroupPieceTableChange::appendChange(AbstractPieceTableChange* change)
 {
 #if 0
     // chop unapplied changes
-    if (mAppliedChangesCount < mChangeStack.count()) {
+    if (mAppliedChangesCount < mChangeStack.size()) {
         // hide baseindex if needed
         if (mBaseBeforeChangeIndex > mAppliedChangesCount) {
             mBaseBeforeChangeIndex = -1;
@@ -78,7 +78,7 @@ bool GroupPieceTableChange::appendChange(AbstractPieceTableChange* change)
             AbstractPieceTableChange* droppedChange = mChangeStack.pop();
             delete droppedChange;
         }
-        while (mAppliedChangesCount < mChangeStack.count());
+        while (mAppliedChangesCount < mChangeStack.size());
     }
 #endif
     mAppliedChangesDataSize += change->dataSize();

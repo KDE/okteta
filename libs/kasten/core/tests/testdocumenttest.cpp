@@ -19,7 +19,7 @@ static constexpr char TestData[] = "TestData";
 void TestDocumentTest::checkTitleChanged(QSignalSpy* titleChangedSpy, const QString& title)
 {
     QVERIFY(titleChangedSpy->isValid());
-    QCOMPARE(titleChangedSpy->count(), 1);
+    QCOMPARE(titleChangedSpy->size(), 1);
     QList<QVariant> arguments = titleChangedSpy->takeFirst();
     QCOMPARE(arguments.at(0).toString(), title);
 }
@@ -29,7 +29,7 @@ Q_DECLARE_METATYPE(Kasten::ContentFlags)
 void TestDocumentTest::checkContentFlagsChanged(QSignalSpy* changedSpy, Kasten::ContentFlags contentFlags)
 {
     QVERIFY(changedSpy->isValid());
-    QCOMPARE(changedSpy->count(), 1);
+    QCOMPARE(changedSpy->size(), 1);
     QList<QVariant> arguments = changedSpy->takeFirst();
     QCOMPARE(arguments.at(0).value<Kasten::ContentFlags>(), contentFlags);
 }

@@ -247,7 +247,7 @@ QString DataInformationWithChildren::tooltipString() const
 QVector<DataInformation*> DataInformationWithChildren::cloneList(const QVector<DataInformation*>& other,
                                                                  DataInformation* parent)
 {
-    int count = other.count();
+    int count = other.size();
     QVector<DataInformation*> ret;
     ret.reserve(count);
     for (int i = 0; i < count; ++i) {

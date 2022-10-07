@@ -95,7 +95,7 @@ inline PieceTableChangeHistory::PieceTableChangeHistory() = default;
 
 inline PieceTableChangeHistory::~PieceTableChangeHistory() { clear(); }
 
-inline int PieceTableChangeHistory::count()                     const { return mChangeStack.count(); }
+inline int PieceTableChangeHistory::count()                     const { return mChangeStack.size(); }
 inline int PieceTableChangeHistory::appliedChangesCount()       const { return mAppliedChangesCount; }
 inline QString PieceTableChangeHistory::headChangeDescription() const { return changeDescription(count() - 1); }
 inline bool PieceTableChangeHistory::isAtBase()                 const

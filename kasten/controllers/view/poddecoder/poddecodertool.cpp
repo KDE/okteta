@@ -242,7 +242,7 @@ void PODDecoderTool::onContentsChange()
     updateData();
 }
 
-int PODDecoderTool::podCount() const { return mTypeCodecs.count(); }
+int PODDecoderTool::podCount() const { return mTypeCodecs.size(); }
 
 QString PODDecoderTool::nameOfPOD(int podId) const
 {

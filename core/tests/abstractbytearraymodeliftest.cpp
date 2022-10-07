@@ -52,7 +52,7 @@ void AbstractByteArrayModelIfTest::clearSignalSpys()
 void AbstractByteArrayModelIfTest::checkContentsReplaced(Address offset, Size removeLength, int insertLength)
 {
     QVERIFY(ContentsChangeListSpy->isValid());
-    QCOMPARE(ContentsChangeListSpy->count(), 1);
+    QCOMPARE(ContentsChangeListSpy->size(), 1);
     const QList<QVariant> arguments = ContentsChangeListSpy->takeFirst();
     const ArrayChangeMetrics changeMetrics = (qvariant_cast<ArrayChangeMetricsList>(arguments.at(0))).at(0);
     QCOMPARE(changeMetrics.offset(), offset);
@@ -65,7 +65,7 @@ void AbstractByteArrayModelIfTest::checkContentsReplaced(const AddressRange& rem
 void AbstractByteArrayModelIfTest::checkContentsSwapped(Address firstStart, Address secondStart, Size secondLength)
 {
     QVERIFY(ContentsChangeListSpy->isValid());
-    QCOMPARE(ContentsChangeListSpy->count(), 1);
+    QCOMPARE(ContentsChangeListSpy->size(), 1);
     const QList<QVariant> arguments = ContentsChangeListSpy->takeFirst();
     const ArrayChangeMetrics changeMetrics = (qvariant_cast<ArrayChangeMetricsList>(arguments.at(0))).at(0);
     QCOMPARE(changeMetrics.offset(), firstStart);

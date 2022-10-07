@@ -34,7 +34,7 @@ StatusBarLayout::~StatusBarLayout()
 //     }
 }
 
-int StatusBarLayout::count() const { return mWidgetList.count(); }
+int StatusBarLayout::count() const { return mWidgetList.size(); }
 
 bool StatusBarLayout::isEmpty() const
 {
@@ -47,7 +47,7 @@ bool StatusBarLayout::isEmpty() const
 
 QLayoutItem* StatusBarLayout::itemAt(int index) const
 {
-    if (index < 0 || mWidgetList.count() <= index) {
+    if (index < 0 || mWidgetList.size() <= index) {
         return nullptr;
     }
 
@@ -58,7 +58,7 @@ int StatusBarLayout::indexOf(QWidget* widget) const
 {
     int result = -1;
 
-    for (int i = 0; i < mWidgetList.count(); ++i) {
+    for (int i = 0; i < mWidgetList.size(); ++i) {
         if (mWidgetList.at(i)->widget() == widget) {
             result = i;
             break;
@@ -90,7 +90,7 @@ void StatusBarLayout::addItem(QLayoutItem* item)
 
 QLayoutItem* StatusBarLayout::takeAt(int index)
 {
-    if (index < 0 || mWidgetList.count() <= index) {
+    if (index < 0 || mWidgetList.size() <= index) {
         return nullptr;
     }
 
@@ -156,7 +156,7 @@ void StatusBarLayout::setGeometry(const QRect& _rect)
     int usedWidth = 0;
     int visibleCount = 0;
     int i;
-    for (i = 0; i < mWidgetList.count(); ++i) {
+    for (i = 0; i < mWidgetList.size(); ++i) {
         QWidgetItem* item = mWidgetList.at(i);
         QWidget* widget = item->widget();
 
@@ -190,7 +190,7 @@ void StatusBarLayout::setGeometry(const QRect& _rect)
     }
 
     // hide the rest if needed
-    for (; i < mWidgetList.count(); ++i) {
+    for (; i < mWidgetList.size(); ++i) {
         QWidgetItem* item = mWidgetList.at(i);
         QWidget* widget = item->widget();
 
@@ -210,7 +210,7 @@ void StatusBarLayout::updateLayoutStructs() const
     QSize sizeHint(0, 0);
 
     int visibleCount = 0;
-    for (int i = 0; i < mWidgetList.count(); ++i) {
+    for (int i = 0; i < mWidgetList.size(); ++i) {
         QWidgetItem* item = mWidgetList.at(i);
 
         if (!item->isEmpty()) {
