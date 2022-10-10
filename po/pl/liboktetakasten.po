@@ -15,14 +15,14 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-09-09 00:50+0000\n"
-"PO-Revision-Date: 2022-06-26 20:38+0200\n"
+"PO-Revision-Date: 2022-10-09 11:34+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.03.70\n"
+"X-Generator: Lokalize 22.04.1\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 
@@ -598,13 +598,13 @@ msgstr ""
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Go to Offset..."
-msgstr "&Idź do przesunięcia..."
+msgstr "&Przejdź do przesunięcia..."
 
 #: controllers/view/gotooffset/gotooffsettool.cpp:50
 #, kde-format
 msgctxt "@title:window of the tool to set a new offset for the cursor"
 msgid "Goto"
-msgstr "Idź do"
+msgstr "Przejdź do"
 
 #: controllers/view/gotooffset/gotooffsetview.cpp:38
 #, kde-format
@@ -661,19 +661,19 @@ msgstr "&Wstecz"
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Go backwards from the end or the current cursor location."
-msgstr "Idź wstecz od końca lub obecnej pozycji kursora."
+msgstr "Idź wstecz od końca lub obecnego położenia kursora."
 
 #: controllers/view/gotooffset/gotooffsetview.cpp:91
 #, kde-format
 msgctxt "@action:button"
 msgid "&Go"
-msgstr "&Idź"
+msgstr "&Przejdź"
 
 #: controllers/view/gotooffset/gotooffsetview.cpp:94
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Go to the Offset"
-msgstr "Idź do przesunięcia"
+msgstr "Przejdź do przesunięcia"
 
 #: controllers/view/gotooffset/gotooffsetview.cpp:96
 #, kde-kuit-format
@@ -682,7 +682,7 @@ msgid ""
 "If you press the <interface>Go</interface> button, the cursor will be moved "
 "in the document to or, on your option, by the offset you entered above."
 msgstr ""
-"Jeśli naciśniesz przycisk <interface>Idź</interface>, kursor zostanie "
+"Jeśli naciśniesz przycisk <interface>Przejdź</interface>, kursor zostanie "
 "przeniesiony do dokumentu lub o wartość przesunięcia określoną powyżej."
 
 #: controllers/view/info/infotool.cpp:37
@@ -1197,7 +1197,7 @@ msgstr "Porządek bajtów używany do dekodowania bajtów."
 #, kde-format
 msgctxt "@option:check"
 msgid "Unsigned as hexadecimal:"
-msgstr "Bez znaku jako szesnastkowe:"
+msgstr "Liczba bez znaku jako szesnastkowa:"
 
 #: controllers/view/poddecoder/podtableview.cpp:98
 #, kde-format
@@ -1253,86 +1253,86 @@ msgstr "Z&aznacz"
 #, kde-format
 msgctxt "@label:textbox encoding of one byte as value in the binary format"
 msgid "Binary 8-bit"
-msgstr "Dwójkowe 8-bitowe"
+msgstr "8-bitowa l. dwójkowa"
 
 #: controllers/view/poddecoder/typecodecs/char8codec.cpp:23
 #, kde-format
 msgctxt "@label:textbox encoding of one byte as character"
 msgid "Character 8-bit"
-msgstr "Znak 8-bitowy"
+msgstr "8-bitowy znak"
 
 #: controllers/view/poddecoder/typecodecs/float32codec.cpp:20
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Float 32-bit"
-msgstr "Rzeczywista 32-bitowa"
+msgstr "32-bitów l. rzeczywista"
 
 #: controllers/view/poddecoder/typecodecs/float64codec.cpp:20
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Float 64-bit"
-msgstr "Rzeczywista 64-bitowa"
+msgstr "64-bitów l. rzeczywista"
 
 #: controllers/view/poddecoder/typecodecs/hexadecimal8codec.cpp:20
 #, kde-format
 msgctxt ""
 "@label:textbox encoding of one byte as value in the hexadecimal format"
 msgid "Hexadecimal 8-bit"
-msgstr "Szesnastkowe 8-bitowe"
+msgstr "8-bitowa l. szesnastkowa"
 
 #: controllers/view/poddecoder/typecodecs/octal8codec.cpp:20
 #, kde-format
 msgctxt "@label:textbox encoding of one byte as value in the octal format"
 msgid "Octal 8-bit"
-msgstr "Ósemkowe 8-bitowe"
+msgstr "8-bitowa l. ósemkowa"
 
 #: controllers/view/poddecoder/typecodecs/sint16codec.cpp:20
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Signed 16-bit"
-msgstr "16 bitów ze znakiem"
+msgstr "16-bitowa l. ze znakiem"
 
 #: controllers/view/poddecoder/typecodecs/sint32codec.cpp:20
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Signed 32-bit"
-msgstr "32 bity ze znakiem"
+msgstr "32-bitowa l. ze znakiem"
 
 #: controllers/view/poddecoder/typecodecs/sint64codec.cpp:20
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Signed 64-bit"
-msgstr "64-bitowe ze znakiem"
+msgstr "64-bitowa l. ze znakiem"
 
 #: controllers/view/poddecoder/typecodecs/sint8codec.cpp:20
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Signed 8-bit"
-msgstr "8 bitów ze znakiem"
+msgstr "8-bitowa l. ze znakiem"
 
 #: controllers/view/poddecoder/typecodecs/uint16codec.cpp:20
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Unsigned 16-bit"
-msgstr "16 bitów bez znaku"
+msgstr "16-bitowa l. bez znaku"
 
 #: controllers/view/poddecoder/typecodecs/uint32codec.cpp:20
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Unsigned 32-bit"
-msgstr "32 bity bez znaku"
+msgstr "32-bitowa l. bez znaku"
 
 #: controllers/view/poddecoder/typecodecs/uint64codec.cpp:20
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Unsigned 64-bit"
-msgstr "64 bity bez znaku"
+msgstr "64-bitowa l. bez znaku"
 
 #: controllers/view/poddecoder/typecodecs/uint8codec.cpp:20
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Unsigned 8-bit"
-msgstr "8 bitów bez znaku"
+msgstr "8-bitowa l. bez znaku"
 
 #: controllers/view/poddecoder/typecodecs/utf8codec.cpp:22
 #, kde-format
@@ -1345,7 +1345,7 @@ msgstr "UTF-8"
 #, kde-format
 msgctxt "@title:window"
 msgid "Print Byte Array %1"
-msgstr "Drukuj ciąg bajtów: %1"
+msgstr "Drukowanie macierzy bajtów %1"
 
 #: controllers/view/print/printtool.cpp:92
 #, kde-format
@@ -1690,7 +1690,7 @@ msgid ""
 "If you press the <interface>Go to</interface> button, the string which was "
 "last selected is marked and shown in the view."
 msgstr ""
-"Naciśnięcie przycisku <interface>Idź do</interface> powoduje oznaczenie "
+"Naciśnięcie przycisku <interface>Przejdź do</interface> powoduje oznaczenie "
 "ostatnio wybranego ciągu i pokazanie go w widoku."
 
 #: controllers/view/structures/datatypes/array/complexarraydata.cpp:98
@@ -2866,7 +2866,7 @@ msgctxt ""
 "@item:inmenu  The layout will adapt to the size and fit in as much bytes per "
 "line as possible."
 msgid "On"
-msgstr "Włącz"
+msgstr "Włączone"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:110
 #, kde-format
@@ -3244,12 +3244,12 @@ msgstr "Losowe dane"
 #, kde-format
 msgctxt "name of the generated data"
 msgid "Sequence"
-msgstr "Sekwencja"
+msgstr "Ciąg"
 
 #: gui/io/generator/sequence/bytearraysequencegenerator.cpp:60
 #, kde-format
 msgid "Sequence inserted."
-msgstr "Wstawiono sekwencję."
+msgstr "Wstawiono ciąg."
 
 #: gui/io/streamencoder/base32/bytearraybase32streamencoder.cpp:137
 #, kde-format
@@ -3369,7 +3369,7 @@ msgctxt ""
 "@option:check Encode the values in hexadecimal instead of decimal, if the "
 "datatype has the property Unsigned"
 msgid "Unsigned as hexadecimal:"
-msgstr "Bez znaku jako szesnastkowe:"
+msgstr "Liczba bez znaku jako szesnastkowa:"
 
 #: gui/io/streamencoder/srec/bytearraysrecstreamencoder.cpp:177
 #, kde-format

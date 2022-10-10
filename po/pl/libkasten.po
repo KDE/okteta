@@ -13,14 +13,14 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-04-24 00:47+0000\n"
-"PO-Revision-Date: 2022-04-10 10:52+0200\n"
+"PO-Revision-Date: 2022-10-09 11:39+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.03.70\n"
+"X-Generator: Lokalize 22.04.1\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 
@@ -34,7 +34,7 @@ msgstr "Zmieniony."
 #, kde-format
 msgctxt "@tooltip the document is not modified"
 msgid "Not modified."
-msgstr "Nie zmieniony."
+msgstr "Niezmieniony."
 
 #: controllers/document/readonly/readonlybarcontroller.cpp:23
 #, kde-format
@@ -52,13 +52,13 @@ msgstr "Tylko do odczytu"
 #, kde-format
 msgctxt "@option:check set the document to read-only"
 msgid "Set Read-only"
-msgstr "Ustaw tylko do odczytu"
+msgstr "Przestaw na tylko do odczytu"
 
 #: controllers/document/readonly/readonlycontroller.cpp:27
 #, kde-format
 msgctxt "@option:check set the document to read-write"
 msgid "Set Read-write"
-msgstr "Ustaw odczyt i zapis"
+msgstr "Przestaw do odczytu i zapisu"
 
 #: controllers/document/terminal/terminaltool.cpp:32
 #: controllers/document/terminal/terminaltoolviewfactory.cpp:24
