@@ -39,6 +39,7 @@ Notes:
     <comment xml:lang="pl">Motorola S-Records</comment>
     <comment xml:lang="pt">Registos-S da Motorola</comment>
     <comment xml:lang="pt_BR">Motorola S-Records</comment>
+    <comment xml:lang="ru">Файл SREC</comment>
     <comment xml:lang="sl">Motorola S-Records</comment>
     <comment xml:lang="sv">Motorola S-Records</comment>
     <comment xml:lang="tr">Motorola S-Kayıtları</comment>
@@ -82,6 +83,7 @@ Notes:
     <comment xml:lang="pl">Plik obiektu szesnastkowego Intel</comment>
     <comment xml:lang="pt">Ficheiro de objectos em hexadecimal da Intel</comment>
     <comment xml:lang="pt_BR">Arquivo de objeto hexadecimal Intel</comment>
+    <comment xml:lang="ru">Файл Intel HEX</comment>
     <comment xml:lang="sl">Intelova šestnajstiška predmetna datoteka</comment>
     <comment xml:lang="sv">Intel hexadecimal objektfil</comment>
     <comment xml:lang="tr">Intel onaltılık nesne dosyası</comment>
@@ -122,6 +124,7 @@ Notes:
     <comment xml:lang="pl">Dane zakodowane Base64</comment>
     <comment xml:lang="pt">Dados codificados em Base64</comment>
     <comment xml:lang="pt_BR">Dados codificados Base64</comment>
+    <comment xml:lang="ru">Данные в формате Base64</comment>
     <comment xml:lang="sl">Podatki kodirani z Base64</comment>
     <comment xml:lang="sv">Base64-kodad data</comment>
     <comment xml:lang="tr">Base64 kodlanmış veri</comment>
@@ -156,6 +159,7 @@ Notes:
     <comment xml:lang="pl">Dane zakodowane Base32</comment>
     <comment xml:lang="pt">Dados codificados em Base32</comment>
     <comment xml:lang="pt_BR">Dados codificados Base32</comment>
+    <comment xml:lang="ru">Данные в формате Base32</comment>
     <comment xml:lang="sl">Podatki kodirani z Base32</comment>
     <comment xml:lang="sv">Base32-kodad data</comment>
     <comment xml:lang="tr">Base32 kodlanmış veri</comment>
@@ -189,6 +193,7 @@ Notes:
     <comment xml:lang="pl">Dane zakodowane Btoa</comment>
     <comment xml:lang="pt">Dados codificados em Btoa</comment>
     <comment xml:lang="pt_BR">Arquivo codificado Btoa</comment>
+    <comment xml:lang="ru">Данные в формате Btoa</comment>
     <comment xml:lang="sl">Datoteka kodirana z Btoa</comment>
     <comment xml:lang="sv">BTOA-kodad data</comment>
     <comment xml:lang="tr">Btoa Kodlanmış Dosya</comment>
@@ -226,6 +231,7 @@ Notes:
     <comment xml:lang="pl">Dane zakodowane Ascii85</comment>
     <comment xml:lang="pt">Dados codificados em Ascii85</comment>
     <comment xml:lang="pt_BR">Dados codificados Ascii85</comment>
+    <comment xml:lang="ru">Данные в формате Ascii85</comment>
     <comment xml:lang="sl">Podatki kodirani z Ascii85</comment>
     <comment xml:lang="sv">ASCII85-kodad data</comment>
     <comment xml:lang="tr">Ascii85 kodlanmış veri</comment>
@@ -261,6 +267,7 @@ Notes:
     <comment xml:lang="pl">Plik Uuencoded</comment>
     <comment xml:lang="pt">Ficheiro codificado com UUencode</comment>
     <comment xml:lang="pt_BR">Arquivo Uuencoded</comment>
+    <comment xml:lang="ru">Файл UUE</comment>
     <comment xml:lang="sl">Datoteka uuencoded</comment>
     <comment xml:lang="sv">Uuencoded fil</comment>
     <comment xml:lang="tr">Uuencoded dosya</comment>
@@ -299,6 +306,7 @@ Notes:
     <comment xml:lang="pl">Plik Xxencoded</comment>
     <comment xml:lang="pt">Ficheiro codificado com Xxencode</comment>
     <comment xml:lang="pt_BR">Arquivo Xxencoded</comment>
+    <comment xml:lang="ru">Файл XXE</comment>
     <comment xml:lang="sl">Datoteka xxencoded</comment>
     <comment xml:lang="sv">Xxencoded fil</comment>
     <comment xml:lang="tr">Xxencoded dosya</comment>
@@ -334,6 +342,7 @@ Notes:
     <comment xml:lang="pl">Definicja struktury Okteta</comment>
     <comment xml:lang="pt">Definição de estrutura do Okteta</comment>
     <comment xml:lang="pt_BR">Definição de estrutura Okteta</comment>
+    <comment xml:lang="ru">Определение структуры Okteta</comment>
     <comment xml:lang="sl">Določilo zgradbe za Okteto</comment>
     <comment xml:lang="sv">Okteta strukturdefinition</comment>
     <comment xml:lang="tr">Okteta Yapı Tanımı</comment>
