@@ -34,6 +34,7 @@ Notes:
     <comment xml:lang="nn">Motorola S-Records</comment>
     <comment xml:lang="pl">Motorola S-Records</comment>
     <comment xml:lang="pt_BR">Motorola S-Records</comment>
+    <comment xml:lang="ru">Файл SREC</comment>
     <comment xml:lang="sk">Motorola S-Records</comment>
     <comment xml:lang="sl">Motorola S-Records</comment>
     <comment xml:lang="sv">Motorola S-Records</comment>
@@ -73,6 +74,7 @@ Notes:
     <comment xml:lang="nn">Intel-heksobjektfil</comment>
     <comment xml:lang="pl">Plik obiektu szesnastkowego Intel</comment>
     <comment xml:lang="pt_BR">Arquivo de objeto hexadecimal Intel</comment>
+    <comment xml:lang="ru">Файл Intel HEX</comment>
     <comment xml:lang="sk">Intel hexadecimálny objektový súbor</comment>
     <comment xml:lang="sl">Intelova šestnajstiška predmetna datoteka</comment>
     <comment xml:lang="sv">Intel hexadecimal objektfil</comment>
@@ -109,6 +111,7 @@ Notes:
     <comment xml:lang="nn">Base64-koda data</comment>
     <comment xml:lang="pl">Dane zakodowane Base64</comment>
     <comment xml:lang="pt_BR">Dados codificados Base64</comment>
+    <comment xml:lang="ru">Данные в формате Base64</comment>
     <comment xml:lang="sk">Dáta zakódované Base64</comment>
     <comment xml:lang="sl">Podatki kodirani z Base64</comment>
     <comment xml:lang="sv">Base64-kodad data</comment>
@@ -139,6 +142,7 @@ Notes:
     <comment xml:lang="nn">Base32-koda data</comment>
     <comment xml:lang="pl">Dane zakodowane Base32</comment>
     <comment xml:lang="pt_BR">Dados codificados Base32</comment>
+    <comment xml:lang="ru">Данные в формате Base32</comment>
     <comment xml:lang="sk">Dáta zakódované Base32</comment>
     <comment xml:lang="sl">Podatki kodirani z Base32</comment>
     <comment xml:lang="sv">Base32-kodad data</comment>
@@ -168,6 +172,7 @@ Notes:
     <comment xml:lang="nn">Btoa-koda fil</comment>
     <comment xml:lang="pl">Dane zakodowane Btoa</comment>
     <comment xml:lang="pt_BR">Arquivo codificado Btoa</comment>
+    <comment xml:lang="ru">Данные в формате Btoa</comment>
     <comment xml:lang="sk">Súbor zakódovaný Btoa</comment>
     <comment xml:lang="sl">Datoteka kodirana z Btoa</comment>
     <comment xml:lang="sv">BTOA-kodad data</comment>
@@ -201,6 +206,7 @@ Notes:
     <comment xml:lang="nn">Ascii85-koda data</comment>
     <comment xml:lang="pl">Dane zakodowane Ascii85</comment>
     <comment xml:lang="pt_BR">Dados codificados Ascii85</comment>
+    <comment xml:lang="ru">Данные в формате Ascii85</comment>
     <comment xml:lang="sk">Dáta zakódované Ascii85</comment>
     <comment xml:lang="sl">Podatki kodirani z Ascii85</comment>
     <comment xml:lang="sv">ASCII85-kodad data</comment>
@@ -232,6 +238,7 @@ Notes:
     <comment xml:lang="nn">Uuencoding-koda fil</comment>
     <comment xml:lang="pl">Plik Uuencoded</comment>
     <comment xml:lang="pt_BR">Arquivo Uuencoded</comment>
+    <comment xml:lang="ru">Файл UUE</comment>
     <comment xml:lang="sk">Uuencoded súbor</comment>
     <comment xml:lang="sl">Datoteka uuencoded</comment>
     <comment xml:lang="sv">Uuencoded fil</comment>
@@ -266,6 +273,7 @@ Notes:
     <comment xml:lang="nn">Xxencoding-koda fil</comment>
     <comment xml:lang="pl">Plik Xxencoded</comment>
     <comment xml:lang="pt_BR">Arquivo Xxencoded</comment>
+    <comment xml:lang="ru">Файл XXE</comment>
     <comment xml:lang="sk">Xxencoded súbor</comment>
     <comment xml:lang="sl">Datoteka xxencoded</comment>
     <comment xml:lang="sv">Xxencoded fil</comment>
@@ -297,6 +305,7 @@ Notes:
     <comment xml:lang="nn">Okteta strukturdefinisjon</comment>
     <comment xml:lang="pl">Definicja struktury Okteta</comment>
     <comment xml:lang="pt_BR">Definição de estrutura Okteta</comment>
+    <comment xml:lang="ru">Определение структуры Okteta</comment>
     <comment xml:lang="sk">Definícia štruktúry Okteta</comment>
     <comment xml:lang="sl">Določilo zgradbe za Okteto</comment>
     <comment xml:lang="sv">Okteta strukturdefinition</comment>
