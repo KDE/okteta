@@ -165,7 +165,13 @@ void StructuresManagerView::rebuildPluginSelectorEntries()
         layoutObj->removeWidget(mStructuresSelector);
         delete mStructuresSelector;
     }
+    // silence deprecation warning
+    // porting away would need a too big rework for a bugfix branch
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_CLANG("-Wdeprecated-declarations")
+    QT_WARNING_DISABLE_GCC("-Wdeprecated-declarations")
     mStructuresSelector = new KPluginSelector(this);
+    QT_WARNING_POP
     connect(mStructuresSelector, &KPluginSelector::changed,
             this, &StructuresManagerView::onPluginSelectorChange);
     layoutObj->insertWidget(0, mStructuresSelector);
