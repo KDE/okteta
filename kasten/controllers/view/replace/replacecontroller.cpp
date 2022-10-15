@@ -13,6 +13,7 @@
 #include "replaceprompt.hpp"
 #include "replacetool.hpp"
 // KF
+#include <kwidgetsaddons_version.h>
 #include <KXmlGuiWindow>
 #include <KLocalizedString>
 #include <KActionCollection>
@@ -93,10 +94,19 @@ void ReplaceController::queryContinue(FindDirection direction, int noOfReplaceme
                              xi18nc("@info", "Beginning of byte array reached.<nl/>Continue from the end?");
 
     const QString message = replacementReport + QLatin1String("<br /><br />") + question;
-    const int answer = KMessageBox::questionYesNo(mParentWidget, message, messageBoxTitle,
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
+    const int answer = KMessageBox::questionTwoActions(mParentWidget,
+#else
+    const int answer = KMessageBox::questionYesNo(mParentWidget,
+#endif
+                                                  message, messageBoxTitle,
                                                   KStandardGuiItem::cont(), KStandardGuiItem::cancel());
 
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
+    const bool result = (answer != KMessageBox::SecondaryAction);
+#else
     const bool result = (answer != KMessageBox::No);
+#endif
 
     Q_EMIT queryContinueFinished(result);
 }

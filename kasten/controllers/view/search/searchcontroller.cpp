@@ -12,6 +12,7 @@
 #include "searchdialog.hpp"
 #include "searchtool.hpp"
 // KF
+#include <kwidgetsaddons_version.h>
 #include <KXMLGUIClient>
 #include <KLocalizedString>
 #include <KActionCollection>
@@ -114,10 +115,20 @@ bool SearchController::queryContinue(FindDirection direction) const
                              xi18nc("@info", "End of byte array reached.<nl/>Continue from the beginning?") :
                              xi18nc("@info", "Beginning of byte array reached.<nl/>Continue from the end?");
 
-    const int answer = KMessageBox::questionYesNo(mParentWidget, question, messageBoxTitle,
-                                                  KStandardGuiItem::cont(), KStandardGuiItem::cancel());
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
+    const int answer = KMessageBox::questionTwoActions(mParentWidget,
+#else
+    const int answer = KMessageBox::questionYesNo(mParentWidget,
+#endif
+                                                  question, messageBoxTitle,
+                                                  KStandardGuiItem::cont(),
+                                                  KStandardGuiItem::cancel());
 
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
+    const bool result = (answer != KMessageBox::SecondaryAction);
+#else
     const bool result = (answer != KMessageBox::No);
+#endif
 
     return result;
 }

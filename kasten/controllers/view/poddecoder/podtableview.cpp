@@ -15,6 +15,7 @@
 // utils
 #include <labelledtoolbarwidget.hpp>
 // KF
+#include <kwidgetsaddons_version.h>
 #include <KComboBox>
 #include <KLocalizedString>
 #include <KMessageBox>
@@ -136,7 +137,12 @@ Answer PODTableView::query(int newValueSize, int oldValueSize, int sizeLeft)
                      i18nc("@info:tooltip",
                            "Keep the unused bytes with their old values."));
 
-        messageBoxAnswer = KMessageBox::warningYesNoCancel(this, message, mTool->title(),
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
+        messageBoxAnswer = KMessageBox::warningTwoActionsCancel(this,
+#else
+        messageBoxAnswer = KMessageBox::warningYesNoCancel(this,
+#endif
+                                                           message, mTool->title(),
                                                            keepGuiItem,
                                                            KStandardGuiItem::remove());
     } else {
@@ -145,13 +151,23 @@ Answer PODTableView::query(int newValueSize, int oldValueSize, int sizeLeft)
                    "The new value needs <emphasis>more</emphasis> bytes (%1 instead of %2).<nl/>"
                    "Overwrite the following bytes or insert new ones as needed?", newValueSize, oldValueSize);
 
-        messageBoxAnswer = KMessageBox::warningYesNoCancel(this, message, mTool->title(),
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
+        messageBoxAnswer = KMessageBox::warningTwoActionsCancel(this,
+#else
+        messageBoxAnswer = KMessageBox::warningYesNoCancel(this,
+#endif
+                                                           message, mTool->title(),
                                                            KStandardGuiItem::overwrite(),
                                                            KStandardGuiItem::insert());
     }
 
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
+    answer = (messageBoxAnswer == KMessageBox::PrimaryAction) ?   Overwrite :
+             (messageBoxAnswer == KMessageBox::SecondaryAction) ? AdaptSize :
+#else
     answer = (messageBoxAnswer == KMessageBox::Yes) ? Overwrite :
              (messageBoxAnswer == KMessageBox::No) ?  AdaptSize :
+#endif
                                                       Cancel;
     return answer;
 }
