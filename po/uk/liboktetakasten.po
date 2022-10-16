@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-09 00:50+0000\n"
+"POT-Creation-Date: 2022-10-16 00:51+0000\n"
 "PO-Revision-Date: 2022-06-09 08:49+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -820,14 +820,14 @@ msgid "Modular sum 8-bit"
 msgstr "8-бітова модулярна сума"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:28
-#: controllers/view/poddecoder/podtableview.cpp:79
+#: controllers/view/poddecoder/podtableview.cpp:80
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Little-endian"
 msgstr "Прямий порядок байтів"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:29
-#: controllers/view/poddecoder/podtableview.cpp:78
+#: controllers/view/poddecoder/podtableview.cpp:79
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Big-endian"
@@ -1058,8 +1058,8 @@ msgid "operand XOR data"
 msgstr "операнд XOR дані"
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:74
-#: controllers/view/search/searchcontroller.cpp:106
-#: controllers/view/search/searchcontroller.cpp:112
+#: controllers/view/search/searchcontroller.cpp:107
+#: controllers/view/search/searchcontroller.cpp:113
 #, kde-format
 msgctxt "@title:window"
 msgid "Find"
@@ -1192,19 +1192,19 @@ msgctxt "@info:tooltip for column Value"
 msgid "The value of the bytes for the datatype"
 msgstr "Кількість байтів для типу даних"
 
-#: controllers/view/poddecoder/podtableview.cpp:85
+#: controllers/view/poddecoder/podtableview.cpp:86
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte order to use for decoding the bytes."
 msgstr "Порядок байтів, який буде використано для декодування."
 
-#: controllers/view/poddecoder/podtableview.cpp:89
+#: controllers/view/poddecoder/podtableview.cpp:90
 #, kde-format
 msgctxt "@option:check"
 msgid "Unsigned as hexadecimal:"
 msgstr "Числа без знаку як шістнадцяткові:"
 
-#: controllers/view/poddecoder/podtableview.cpp:98
+#: controllers/view/poddecoder/podtableview.cpp:99
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1214,7 +1214,7 @@ msgstr ""
 "Визначає, у якому форматі буде показано типи цілих додатних чисел: "
 "шістнадцятковому чи десятковому."
 
-#: controllers/view/poddecoder/podtableview.cpp:129
+#: controllers/view/poddecoder/podtableview.cpp:130
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1224,19 +1224,19 @@ msgstr ""
 "Для нового значення потрібно <emphasis>менше</emphasis> байтів (%1 замість "
 "%2).<nl/>Зберегти «зайві» байти чи вилучити їх?"
 
-#: controllers/view/poddecoder/podtableview.cpp:134
+#: controllers/view/poddecoder/podtableview.cpp:135
 #, kde-format
 msgctxt "@action:button keep the unused bytes"
 msgid "&Keep"
 msgstr "&Зберегти"
 
-#: controllers/view/poddecoder/podtableview.cpp:137
+#: controllers/view/poddecoder/podtableview.cpp:138
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Keep the unused bytes with their old values."
 msgstr "Зберегти значення невикористаних байтів."
 
-#: controllers/view/poddecoder/podtableview.cpp:145
+#: controllers/view/poddecoder/podtableview.cpp:151
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1246,7 +1246,7 @@ msgstr ""
 "Для нового значення потрібно <emphasis>більше</emphasis> байтів (%1 замість "
 "%2).<nl/>Перезаписати надлишкові байти чи просто посунути наступні байти?"
 
-#: controllers/view/poddecoder/podtableview.cpp:234
+#: controllers/view/poddecoder/podtableview.cpp:250
 #: controllers/view/selectrange/selectrangeview.cpp:105
 #: controllers/view/structures/structureview.cpp:338
 #, kde-format
@@ -1370,22 +1370,22 @@ msgctxt "@info"
 msgid "Could not print."
 msgstr "Не вдалося надрукувати."
 
-#: controllers/view/replace/replacecontroller.cpp:73
-#: controllers/view/replace/replacecontroller.cpp:87
+#: controllers/view/replace/replacecontroller.cpp:74
+#: controllers/view/replace/replacecontroller.cpp:88
 #, kde-format
 msgctxt "@title:window"
 msgid "Replace"
 msgstr "Замінити"
 
-#: controllers/view/replace/replacecontroller.cpp:75
-#: controllers/view/replace/replacecontroller.cpp:89
+#: controllers/view/replace/replacecontroller.cpp:76
+#: controllers/view/replace/replacecontroller.cpp:90
 #, kde-format
 msgctxt "@info"
 msgid "No replacements made."
 msgstr "Замін не виконано."
 
-#: controllers/view/replace/replacecontroller.cpp:76
-#: controllers/view/replace/replacecontroller.cpp:90
+#: controllers/view/replace/replacecontroller.cpp:77
+#: controllers/view/replace/replacecontroller.cpp:91
 #, kde-format
 msgctxt "@info"
 msgid "1 replacement made."
@@ -1395,21 +1395,21 @@ msgstr[1] "Зроблено %1 заміни."
 msgstr[2] "Зроблено %1 замін."
 msgstr[3] "Зроблено одну заміну."
 
-#: controllers/view/replace/replacecontroller.cpp:79
+#: controllers/view/replace/replacecontroller.cpp:80
 #, kde-format
 msgctxt "@info"
 msgid "Replace pattern not found in byte array."
 msgstr "У масиві байтів не знайдено шаблону заміни."
 
-#: controllers/view/replace/replacecontroller.cpp:92
-#: controllers/view/search/searchcontroller.cpp:114
+#: controllers/view/replace/replacecontroller.cpp:93
+#: controllers/view/search/searchcontroller.cpp:115
 #, kde-kuit-format
 msgctxt "@info"
 msgid "End of byte array reached.<nl/>Continue from the beginning?"
 msgstr "Досягнуто кінця масиву байтів.<nl/>Продовжити з початку?"
 
-#: controllers/view/replace/replacecontroller.cpp:93
-#: controllers/view/search/searchcontroller.cpp:115
+#: controllers/view/replace/replacecontroller.cpp:94
+#: controllers/view/search/searchcontroller.cpp:116
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Beginning of byte array reached.<nl/>Continue from the end?"
@@ -1502,7 +1502,7 @@ msgctxt "@title"
 msgid "Replace"
 msgstr "Замінити"
 
-#: controllers/view/search/searchcontroller.cpp:107
+#: controllers/view/search/searchcontroller.cpp:108
 #, kde-format
 msgctxt "@info"
 msgid "Search key not found in byte array."

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-04-24 00:47+0000\n"
+"POT-Creation-Date: 2022-10-16 00:51+0000\n"
 "PO-Revision-Date: 2010-09-16 06:02+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -444,7 +444,7 @@ msgstr ""
 "<interface>Құру</interface> батырмасын басқанда, жоғарда келтірілген "
 "параметрлерімен керек деректер құрылып, олар жаңа құжатқа енгізіледі."
 
-#: gui/system/dialoghandler.cpp:33
+#: gui/system/dialoghandler.cpp:34
 #, kde-kuit-format
 msgctxt "@info"
 msgid "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
@@ -452,7 +452,7 @@ msgstr ""
 "<filename>%1</filename><nl/>деп аталған файл бар екен.<nl/>Үстінен жазыла "
 "берсін бе?"
 
-#: gui/system/dialoghandler.cpp:47
+#: gui/system/dialoghandler.cpp:58
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -462,7 +462,7 @@ msgstr ""
 "<filename>%1</filename> деген файлда сақталмаған өзгерістері бар. Құжатты "
 "қайта жүктеп алсыңыз олар жоғалады.<nl/>Жоғала берсін бе?"
 
-#: gui/system/dialoghandler.cpp:60
+#: gui/system/dialoghandler.cpp:71
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -472,7 +472,7 @@ msgstr ""
 "<filename>%1</filename> деген файл өзгертілген.<nl/>Өзгерістеріңізді сақтап "
 "аласыз ба, әлде ысырып тастайсыз ба?"
 
-#: gui/system/dialoghandler.cpp:74
+#: gui/system/dialoghandler.cpp:95
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""

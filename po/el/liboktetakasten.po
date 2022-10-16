@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-09 00:50+0000\n"
+"POT-Creation-Date: 2022-10-16 00:51+0000\n"
 "PO-Revision-Date: 2020-09-13 13:12+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -819,14 +819,14 @@ msgid "Modular sum 8-bit"
 msgstr "Modular sum 8-bit"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:28
-#: controllers/view/poddecoder/podtableview.cpp:79
+#: controllers/view/poddecoder/podtableview.cpp:80
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Little-endian"
 msgstr "Little-endian"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:29
-#: controllers/view/poddecoder/podtableview.cpp:78
+#: controllers/view/poddecoder/podtableview.cpp:79
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Big-endian"
@@ -1056,8 +1056,8 @@ msgid "operand XOR data"
 msgstr "τελεστής XOR δεδομένα"
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:74
-#: controllers/view/search/searchcontroller.cpp:106
-#: controllers/view/search/searchcontroller.cpp:112
+#: controllers/view/search/searchcontroller.cpp:107
+#: controllers/view/search/searchcontroller.cpp:113
 #, kde-format
 msgctxt "@title:window"
 msgid "Find"
@@ -1191,19 +1191,19 @@ msgctxt "@info:tooltip for column Value"
 msgid "The value of the bytes for the datatype"
 msgstr "Η τιμή των χαρακτήρων για τον τύπο δεδομένων"
 
-#: controllers/view/poddecoder/podtableview.cpp:85
+#: controllers/view/poddecoder/podtableview.cpp:86
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte order to use for decoding the bytes."
 msgstr "Η σειρά των χαρακτήρων για την αποκωδικοποίησή τους."
 
-#: controllers/view/poddecoder/podtableview.cpp:89
+#: controllers/view/poddecoder/podtableview.cpp:90
 #, kde-format
 msgctxt "@option:check"
 msgid "Unsigned as hexadecimal:"
 msgstr "Χωρίς πρόσημο ως δεκαεξαδικός:"
 
-#: controllers/view/poddecoder/podtableview.cpp:98
+#: controllers/view/poddecoder/podtableview.cpp:99
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1213,7 +1213,7 @@ msgstr ""
 "Ρυθμίζει αν οι τιμές των χωρίς πρόσημο τύπων ακεραίου φαίνονται ως "
 "δεκαεξαδικοί αντί ως δεκαδικοί."
 
-#: controllers/view/poddecoder/podtableview.cpp:129
+#: controllers/view/poddecoder/podtableview.cpp:130
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1223,19 +1223,19 @@ msgstr ""
 "Η νέα τιμή χρειάζεται <emphasis>λιγότερους</emphasis> χαρακτήρες (%1 αντί "
 "για %2).<nl/>Να διατηρηθούν οι αχρησιμοποίητοι χαρακτήρες ή να αφαιρεθούν;"
 
-#: controllers/view/poddecoder/podtableview.cpp:134
+#: controllers/view/poddecoder/podtableview.cpp:135
 #, kde-format
 msgctxt "@action:button keep the unused bytes"
 msgid "&Keep"
 msgstr "Να &διατηρηθούν"
 
-#: controllers/view/poddecoder/podtableview.cpp:137
+#: controllers/view/poddecoder/podtableview.cpp:138
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Keep the unused bytes with their old values."
 msgstr "Να διατηρηθούν οι αχρησιμοποίητοι χαρακτήρες με τις παλιές τιμές."
 
-#: controllers/view/poddecoder/podtableview.cpp:145
+#: controllers/view/poddecoder/podtableview.cpp:151
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1246,7 +1246,7 @@ msgstr ""
 "για %2).<nl/>Να αντικατασταθούν οι ακόλουθοι χαρακτήρες ή να εισαχθούν νέοι "
 "όπως απαιτείται;"
 
-#: controllers/view/poddecoder/podtableview.cpp:234
+#: controllers/view/poddecoder/podtableview.cpp:250
 #: controllers/view/selectrange/selectrangeview.cpp:105
 #: controllers/view/structures/structureview.cpp:338
 #, kde-format
@@ -1370,22 +1370,22 @@ msgctxt "@info"
 msgid "Could not print."
 msgstr "Αδυναμία εκτύπωσης."
 
-#: controllers/view/replace/replacecontroller.cpp:73
-#: controllers/view/replace/replacecontroller.cpp:87
+#: controllers/view/replace/replacecontroller.cpp:74
+#: controllers/view/replace/replacecontroller.cpp:88
 #, kde-format
 msgctxt "@title:window"
 msgid "Replace"
 msgstr "Αντικατάσταση"
 
-#: controllers/view/replace/replacecontroller.cpp:75
-#: controllers/view/replace/replacecontroller.cpp:89
+#: controllers/view/replace/replacecontroller.cpp:76
+#: controllers/view/replace/replacecontroller.cpp:90
 #, kde-format
 msgctxt "@info"
 msgid "No replacements made."
 msgstr "Δεν έγιναν αντικαταστάσεις."
 
-#: controllers/view/replace/replacecontroller.cpp:76
-#: controllers/view/replace/replacecontroller.cpp:90
+#: controllers/view/replace/replacecontroller.cpp:77
+#: controllers/view/replace/replacecontroller.cpp:91
 #, kde-format
 msgctxt "@info"
 msgid "1 replacement made."
@@ -1393,21 +1393,21 @@ msgid_plural "%1 replacements made."
 msgstr[0] "Έγινε 1 αντικατάσταση."
 msgstr[1] "Έγιναν %1 αντικαταστάσεις."
 
-#: controllers/view/replace/replacecontroller.cpp:79
+#: controllers/view/replace/replacecontroller.cpp:80
 #, kde-format
 msgctxt "@info"
 msgid "Replace pattern not found in byte array."
 msgstr "Το μοτίβο αντικατάστασης δε βρέθηκε στο μητρώο χαρακτήρων."
 
-#: controllers/view/replace/replacecontroller.cpp:92
-#: controllers/view/search/searchcontroller.cpp:114
+#: controllers/view/replace/replacecontroller.cpp:93
+#: controllers/view/search/searchcontroller.cpp:115
 #, kde-kuit-format
 msgctxt "@info"
 msgid "End of byte array reached.<nl/>Continue from the beginning?"
 msgstr "Τέλος του μητρώου χαρακτήρων.<nl/>Συνέχεια από την αρχή;"
 
-#: controllers/view/replace/replacecontroller.cpp:93
-#: controllers/view/search/searchcontroller.cpp:115
+#: controllers/view/replace/replacecontroller.cpp:94
+#: controllers/view/search/searchcontroller.cpp:116
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Beginning of byte array reached.<nl/>Continue from the end?"
@@ -1501,7 +1501,7 @@ msgctxt "@title"
 msgid "Replace"
 msgstr "Αντικατάσταση"
 
-#: controllers/view/search/searchcontroller.cpp:107
+#: controllers/view/search/searchcontroller.cpp:108
 #, kde-format
 msgctxt "@info"
 msgid "Search key not found in byte array."

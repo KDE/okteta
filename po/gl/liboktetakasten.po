@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-09 00:50+0000\n"
+"POT-Creation-Date: 2022-10-16 00:51+0000\n"
 "PO-Revision-Date: 2019-03-03 20:30+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <kde-i18n-doc@kde.org>\n"
@@ -809,14 +809,14 @@ msgid "Modular sum 8-bit"
 msgstr "Suma modular de 8-bits"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:28
-#: controllers/view/poddecoder/podtableview.cpp:79
+#: controllers/view/poddecoder/podtableview.cpp:80
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Little-endian"
 msgstr "Little endian"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:29
-#: controllers/view/poddecoder/podtableview.cpp:78
+#: controllers/view/poddecoder/podtableview.cpp:79
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Big-endian"
@@ -1047,8 +1047,8 @@ msgid "operand XOR data"
 msgstr "operando XOR datos"
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:74
-#: controllers/view/search/searchcontroller.cpp:106
-#: controllers/view/search/searchcontroller.cpp:112
+#: controllers/view/search/searchcontroller.cpp:107
+#: controllers/view/search/searchcontroller.cpp:113
 #, kde-format
 msgctxt "@title:window"
 msgid "Find"
@@ -1184,19 +1184,19 @@ msgctxt "@info:tooltip for column Value"
 msgid "The value of the bytes for the datatype"
 msgstr "O valor dos bytes para o tipo de dato"
 
-#: controllers/view/poddecoder/podtableview.cpp:85
+#: controllers/view/poddecoder/podtableview.cpp:86
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte order to use for decoding the bytes."
 msgstr "A orde dos bytes que se empregará para descodificalos."
 
-#: controllers/view/poddecoder/podtableview.cpp:89
+#: controllers/view/poddecoder/podtableview.cpp:90
 #, kde-format
 msgctxt "@option:check"
 msgid "Unsigned as hexadecimal:"
 msgstr "Sen signo como hexadecimal:"
 
-#: controllers/view/poddecoder/podtableview.cpp:98
+#: controllers/view/poddecoder/podtableview.cpp:99
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1206,7 +1206,7 @@ msgstr ""
 "Indica se os valores dos tipos sen signo se han mostrar como hexadecimais no "
 "canto de como decimais."
 
-#: controllers/view/poddecoder/podtableview.cpp:129
+#: controllers/view/poddecoder/podtableview.cpp:130
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1216,19 +1216,19 @@ msgstr ""
 "O novo valor precisa de <emphasis>menos</emphasis> bytes (%1 no canto de %2)."
 "<nl/>Desexa manter ou retirar os bytes non utilizados?"
 
-#: controllers/view/poddecoder/podtableview.cpp:134
+#: controllers/view/poddecoder/podtableview.cpp:135
 #, kde-format
 msgctxt "@action:button keep the unused bytes"
 msgid "&Keep"
 msgstr "&Manter"
 
-#: controllers/view/poddecoder/podtableview.cpp:137
+#: controllers/view/poddecoder/podtableview.cpp:138
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Keep the unused bytes with their old values."
 msgstr "Mantén os bytes non utilizados cos valores vellos."
 
-#: controllers/view/poddecoder/podtableview.cpp:145
+#: controllers/view/poddecoder/podtableview.cpp:151
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1239,7 +1239,7 @@ msgstr ""
 "<nl/>Desexa sobrescribir os seguintes bytes ou inserir novos segundo se "
 "precise?"
 
-#: controllers/view/poddecoder/podtableview.cpp:234
+#: controllers/view/poddecoder/podtableview.cpp:250
 #: controllers/view/selectrange/selectrangeview.cpp:105
 #: controllers/view/structures/structureview.cpp:338
 #, kde-format
@@ -1363,22 +1363,22 @@ msgctxt "@info"
 msgid "Could not print."
 msgstr "Non se puido imprimir."
 
-#: controllers/view/replace/replacecontroller.cpp:73
-#: controllers/view/replace/replacecontroller.cpp:87
+#: controllers/view/replace/replacecontroller.cpp:74
+#: controllers/view/replace/replacecontroller.cpp:88
 #, kde-format
 msgctxt "@title:window"
 msgid "Replace"
 msgstr "Substituír"
 
-#: controllers/view/replace/replacecontroller.cpp:75
-#: controllers/view/replace/replacecontroller.cpp:89
+#: controllers/view/replace/replacecontroller.cpp:76
+#: controllers/view/replace/replacecontroller.cpp:90
 #, kde-format
 msgctxt "@info"
 msgid "No replacements made."
 msgstr "Non se fixo ningunha substitución."
 
-#: controllers/view/replace/replacecontroller.cpp:76
-#: controllers/view/replace/replacecontroller.cpp:90
+#: controllers/view/replace/replacecontroller.cpp:77
+#: controllers/view/replace/replacecontroller.cpp:91
 #, kde-format
 msgctxt "@info"
 msgid "1 replacement made."
@@ -1386,21 +1386,21 @@ msgid_plural "%1 replacements made."
 msgstr[0] "Fíxose 1 substitución."
 msgstr[1] "Fixéronse %1 substitucións."
 
-#: controllers/view/replace/replacecontroller.cpp:79
+#: controllers/view/replace/replacecontroller.cpp:80
 #, kde-format
 msgctxt "@info"
 msgid "Replace pattern not found in byte array."
 msgstr "Non se atopou o padrón que se debía substituír no array de bytes."
 
-#: controllers/view/replace/replacecontroller.cpp:92
-#: controllers/view/search/searchcontroller.cpp:114
+#: controllers/view/replace/replacecontroller.cpp:93
+#: controllers/view/search/searchcontroller.cpp:115
 #, kde-kuit-format
 msgctxt "@info"
 msgid "End of byte array reached.<nl/>Continue from the beginning?"
 msgstr "Acadouse a fin do array de bytes.<nl/>Desexa continuar desde o comezo?"
 
-#: controllers/view/replace/replacecontroller.cpp:93
-#: controllers/view/search/searchcontroller.cpp:115
+#: controllers/view/replace/replacecontroller.cpp:94
+#: controllers/view/search/searchcontroller.cpp:116
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Beginning of byte array reached.<nl/>Continue from the end?"
@@ -1494,7 +1494,7 @@ msgctxt "@title"
 msgid "Replace"
 msgstr "Substituír"
 
-#: controllers/view/search/searchcontroller.cpp:107
+#: controllers/view/search/searchcontroller.cpp:108
 #, kde-format
 msgctxt "@info"
 msgid "Search key not found in byte array."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-04-24 00:47+0000\n"
+"POT-Creation-Date: 2022-10-16 00:51+0000\n"
 "PO-Revision-Date: 2018-08-14 23:46+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -427,14 +427,14 @@ msgstr ""
 "<interface>생성</interface> 단추를 누르면 위에 입력한 설정대로 데이터가 생성"
 "되며 새 문서에 삽입됩니다."
 
-#: gui/system/dialoghandler.cpp:33
+#: gui/system/dialoghandler.cpp:34
 #, kde-kuit-format
 msgctxt "@info"
 msgid "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
 msgstr ""
 "파일 <nl/><filename>%1</filename><nl/>이(가) 존재합니다. 덮어쓰시겠습니까?"
 
-#: gui/system/dialoghandler.cpp:47
+#: gui/system/dialoghandler.cpp:58
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -444,7 +444,7 @@ msgstr ""
 "파일 <filename>%1</filename>에 저장하지 않은 변경 사항이 있습니다. 문서를 새"
 "로 고치면 변경 사항이 삭제됩니다.<nl/>삭제하시겠습니까?"
 
-#: gui/system/dialoghandler.cpp:60
+#: gui/system/dialoghandler.cpp:71
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -454,7 +454,7 @@ msgstr ""
 "<emphasis>%1</emphasis>이(가) 수정되었습니다.<nl/>변경 사항을 저장하거나 무시"
 "하시겠습니까?"
 
-#: gui/system/dialoghandler.cpp:74
+#: gui/system/dialoghandler.cpp:95
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""

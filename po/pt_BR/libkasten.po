@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-04-24 00:47+0000\n"
+"POT-Creation-Date: 2022-10-16 00:51+0000\n"
 "PO-Revision-Date: 2018-07-13 09:36-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -434,7 +434,7 @@ msgstr ""
 "com as configurações indicadas acima e inseridas no documento na posição do "
 "cursos."
 
-#: gui/system/dialoghandler.cpp:33
+#: gui/system/dialoghandler.cpp:34
 #, kde-kuit-format
 msgctxt "@info"
 msgid "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
@@ -442,7 +442,7 @@ msgstr ""
 "Já existe um arquivo chamado <nl/><filename>%1</filename>.<nl/>Deseja "
 "sobrescrevê-lo?"
 
-#: gui/system/dialoghandler.cpp:47
+#: gui/system/dialoghandler.cpp:58
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -452,7 +452,7 @@ msgstr ""
 "Existem modificações a serem salvas em <filename>%1</filename>. Elas serão "
 "perdidas se você recarregar o documento.<nl/>Deseja descartá-las?"
 
-#: gui/system/dialoghandler.cpp:60
+#: gui/system/dialoghandler.cpp:71
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -462,7 +462,7 @@ msgstr ""
 "O <filename>%1</filename> foi modificado.<nl/>Deseja salvar suas alterações "
 "ou descartá-las?"
 
-#: gui/system/dialoghandler.cpp:74
+#: gui/system/dialoghandler.cpp:95
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
