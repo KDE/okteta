@@ -432,7 +432,7 @@ msgstr "Byte de substitució:"
 msgctxt "@info:tooltip"
 msgid "The byte to use for chars which are not part of the target charset."
 msgstr ""
-"El byte a utilitzar per als caràcters que no formen part del joc de "
+"El byte que s'utilitzarà per als caràcters que no formen part del joc de "
 "caràcters de destinació."
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:131
@@ -441,8 +441,8 @@ msgctxt "@info:whatsthis"
 msgid ""
 "Define the byte to use for chars which are not part of the target charset."
 msgstr ""
-"Definix el byte a utilitzar per als caràcters que no formen part del joc de "
-"caràcters de destinació."
+"Definix el byte que s'utilitzarà per als caràcters que no formen part del "
+"joc de caràcters de destinació."
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:157
 #, kde-format
@@ -521,7 +521,7 @@ msgstr "Algorisme:"
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Select the algorithm to use for the checksum."
-msgstr "Seleccioneu l'algorisme a utilitzar per a la suma de verificació."
+msgstr "Seleccioneu l'algorisme que s'utilitzarà per a la suma de verificació."
 
 #: controllers/view/checksum/checksumview.cpp:83
 #, kde-format
@@ -565,13 +565,13 @@ msgstr "Operació:"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The operation to use for the filter."
-msgstr "Seleccioneu l'operació a utilitzar amb el filtre."
+msgstr "Seleccioneu l'operació que s'utilitzarà amb el filtre."
 
 #: controllers/view/filter/filterview.cpp:56
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Select the operation to use for the filter."
-msgstr "Seleccioneu l'operació a utilitzar amb el filtre."
+msgstr "Seleccioneu l'operació que s'utilitzarà amb el filtre."
 
 #: controllers/view/filter/filterview.cpp:85
 #, kde-format
@@ -1076,8 +1076,8 @@ msgid ""
 "Enter the bytes to search for, or select bytes previously searched for from "
 "the list."
 msgstr ""
-"Introduïu els bytes a buscar, o seleccioneu els bytes buscats anteriorment "
-"de la llista."
+"Introduïu els bytes que es buscaran, o seleccioneu els bytes buscats "
+"anteriorment de la llista."
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:104
 #, kde-format
@@ -1515,7 +1515,7 @@ msgstr "Substitució"
 #, kde-format
 msgctxt "@info"
 msgid "Search key not found in byte array."
-msgstr "No s'ha trobat el text que cal buscar en la matriu de bytes."
+msgstr "No s'ha trobat el text es buscava en la matriu de bytes."
 
 #: controllers/view/search/searchdialog.cpp:22
 #, kde-format
@@ -2271,14 +2271,15 @@ msgstr "Busca..."
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The base to use when converting unsigned numbers to a string."
-msgstr "La base a utilitzar en convertir nombres sense signe a una cadena."
+msgstr ""
+"La base que s'utilitzarà en convertir nombres sense signe a una cadena."
 
 #. i18n: ectx: tooltip, entry (SignedDisplayBase), group (ValueDisplay)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:13
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The base to use when converting signed numbers to a string."
-msgstr "La base a utilitzar en convertir nombres amb signe a una cadena."
+msgstr "La base que s'utilitzarà en convertir nombres amb signe a una cadena."
 
 #. i18n: ectx: tooltip, entry (CharDisplayBase), group (ValueDisplay)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:17
@@ -2286,7 +2287,8 @@ msgstr "La base a utilitzar en convertir nombres amb signe a una cadena."
 msgctxt "@info:tooltip"
 msgid "The base to use when converting characters to a value string."
 msgstr ""
-"La base a utilitzar en convertir nombres caràcters a una cadena de valor."
+"La base que s'utilitzarà en convertir nombres caràcters a una cadena de "
+"valor."
 
 #. i18n: ectx: tooltip, entry (ShowCharNumericalValue), group (ValueDisplay)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:21
@@ -3194,7 +3196,7 @@ msgctxt "@info:whatsthis"
 msgid ""
 "Enter a pattern to search for, or select a previous pattern from the list."
 msgstr ""
-"Introduïu un patró per a buscar, o seleccioneu un patró anterior de la "
+"Introduïu un patró que es buscarà, o seleccioneu un patró anterior de la "
 "llista."
 
 #: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:50
@@ -3236,7 +3238,7 @@ msgstr "&Mida (bytes):"
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Enter the size of the bytearray to generate."
-msgstr "Indiqueu la mida de la matriu en bytes a generar."
+msgstr "Indiqueu la mida en bytes de la matriu que es generarà."
 
 #: gui/io/generator/randomdata/bytearrayrandomdatageneratorconfigeditor.cpp:51
 #, kde-format
