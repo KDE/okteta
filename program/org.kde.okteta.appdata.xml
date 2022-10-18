@@ -23,6 +23,7 @@
   <name xml:lang="ia">Okteta</name>
   <name xml:lang="id">Okteta</name>
   <name xml:lang="it">Okteta</name>
+  <name xml:lang="ka">Okteta</name>
   <name xml:lang="ko">Okteta</name>
   <name xml:lang="nl">Okteta</name>
   <name xml:lang="nn">Okteta</name>
@@ -61,6 +62,7 @@
   <summary xml:lang="ia">Editor (Redactor) Hexadecimal</summary>
   <summary xml:lang="id">Editor Hex</summary>
   <summary xml:lang="it">Editor esadecimale</summary>
+  <summary xml:lang="ka">რედაქტორი თექვსმეტობითში</summary>
   <summary xml:lang="ko">16진수 편집기</summary>
   <summary xml:lang="nl">Hexbewerker</summary>
   <summary xml:lang="nn">Heksadesimal-redigering</summary>
@@ -136,6 +138,7 @@
     <p xml:lang="ia">Characteristicas:</p>
     <p xml:lang="id">Fitur:</p>
     <p xml:lang="it">Funzionalità:</p>
+    <p xml:lang="ka">თვისებები:</p>
     <p xml:lang="ko">기능:</p>
     <p xml:lang="nl">Mogelijkheden:</p>
     <p xml:lang="nn">Funksjonar:</p>
@@ -383,6 +386,7 @@
       <li xml:lang="ia">Rendition rapide de datos sur schermo</li>
       <li xml:lang="id">Perenderan data yang cepat pada layar</li>
       <li xml:lang="it">Resa veloce dei dati sullo schermo</li>
+      <li xml:lang="ka">მონაცემების სწრაფი რენდერი ეკრანზე</li>
       <li xml:lang="ko">화면에서의 빠른 데이터 렌더링</li>
       <li xml:lang="nl">Snelle weergave van gegevens op het scherm</li>
       <li xml:lang="nn">Rask datavising på skjermen</li>
@@ -419,6 +423,7 @@
       <li xml:lang="ia">Files multiple aperite</li>
       <li xml:lang="id">Multi pembukaan file</li>
       <li xml:lang="it">Più file aperti</li>
+      <li xml:lang="ka">მრავალი ფაილის გახსნა</li>
       <li xml:lang="ko">열린 파일 여러 개</li>
       <li xml:lang="nl">Meerdere geopende bestanden</li>
       <li xml:lang="nn">Fleire opne filer samtidig</li>
@@ -456,6 +461,7 @@
       <li xml:lang="ia">Supporto de annulla/reface</li>
       <li xml:lang="id">Dukungan urung/ulang</li>
       <li xml:lang="it">Supporto per annulla/rifai</li>
+      <li xml:lang="ka">გაუქმება/გამეორების მხარდაჭერა</li>
       <li xml:lang="ko">실행 취소 / 다시 실행 지원</li>
       <li xml:lang="nl">Ondersteuning ongedaan maken/opnieuw</li>
       <li xml:lang="nn">Støtte for angring/omgjering</li>
