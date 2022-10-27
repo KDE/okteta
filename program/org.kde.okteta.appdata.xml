@@ -21,6 +21,7 @@
   <name xml:lang="hu">Okteta</name>
   <name xml:lang="ia">Okteta</name>
   <name xml:lang="id">Okteta</name>
+  <name xml:lang="ie">Okteta</name>
   <name xml:lang="it">Okteta</name>
   <name xml:lang="ka">Okteta</name>
   <name xml:lang="ko">Okteta</name>
@@ -60,6 +61,7 @@
   <summary xml:lang="hu">Hexaszerkesztő</summary>
   <summary xml:lang="ia">Editor (Redactor) Hexadecimal</summary>
   <summary xml:lang="id">Editor Hex</summary>
+  <summary xml:lang="ie">Hexadecimal redactor</summary>
   <summary xml:lang="it">Editor esadecimale</summary>
   <summary xml:lang="ka">რედაქტორი თექვსმეტობითში</summary>
   <summary xml:lang="ko">16진수 편집기</summary>
@@ -98,6 +100,7 @@
     <p xml:lang="hu">Az Oktate egy egyszerű program fájlok nyers adatainak szerkesztéséhez.</p>
     <p xml:lang="ia">Okteta es un simple editor per le datos drude de files.</p>
     <p xml:lang="id">Okteta adalah editor sederhana untuk file-file data mentah (raw)</p>
+    <p xml:lang="ie">Okteta es un simplic editor de fundamental data de files.</p>
     <p xml:lang="it">Okteta è un semplice editor dei dati grezzi di un file.</p>
     <p xml:lang="ko">Okteta는 파일의 원시 데이터에 대한 간단한 편집기입니다.</p>
     <p xml:lang="nl">Okteta is een eenvoudige bewerker voor de ruwe gegevens van bestanden.</p>
@@ -136,6 +139,7 @@
     <p xml:lang="hu">Szolgáltatások:</p>
     <p xml:lang="ia">Characteristicas:</p>
     <p xml:lang="id">Fitur:</p>
+    <p xml:lang="ie">Caracteristicas:</p>
     <p xml:lang="it">Funzionalità:</p>
     <p xml:lang="ka">თვისებები:</p>
     <p xml:lang="ko">기능:</p>
@@ -314,6 +318,7 @@
       <li xml:lang="hu">Numerikus kódolások: hexadecimális, decimális, oktális, bináris</li>
       <li xml:lang="ia">Codificationes Numeric: Hexadecimal, Decimal, Octal, Binari</li>
       <li xml:lang="id">Pengenkodean nomerik: Heksadesimal, Desimal, Oktal, Biner</li>
+      <li xml:lang="ie">Codification de númeres: (Hexa)decimal, octal, binari</li>
       <li xml:lang="it">Codifiche numeriche: esadecimale, decimale, ottale e binaria</li>
       <li xml:lang="ko">숫자 인코딩: 16진수, 10진수, 8진수, 2진수</li>
       <li xml:lang="nl">Numerieke coderingen: hexadecimaal, decimaal, octaal, binair</li>
@@ -349,6 +354,7 @@
       <li xml:lang="hu">Karakterkódolások: minden, a Qt és EBCDIC által biztosított 8 bites kódolás</li>
       <li xml:lang="ia">Codificationes de character: Omne codificationes de 8bits como fornite per Qt, EBCDIC</li>
       <li xml:lang="id">Pengenkodean karakter: Semua pengenkodean 8-bit sebagai asupan oleh Qt, EBCDIC</li>
+      <li xml:lang="ie">Codificationes de caracteres: Omni 8-bit codificationes de Qt, EBCDIC</li>
       <li xml:lang="it">Codifiche dei caratteri: tutte le codifiche a 8 bit fornite da Qt, EBCDIC</li>
       <li xml:lang="ko">문자 인코딩: Qt, EBCDIC에서 제공하는 모든 8비트 인코딩</li>
       <li xml:lang="nl">Tekencoderingen: alle 8-bits coderingen zoals geleverd door Qt, EBCDIC</li>
@@ -421,6 +427,7 @@
       <li xml:lang="hu">Több fájl megnyitása egyszerre</li>
       <li xml:lang="ia">Files multiple aperite</li>
       <li xml:lang="id">Multi pembukaan file</li>
+      <li xml:lang="ie">Aperter multiplic files</li>
       <li xml:lang="it">Più file aperti</li>
       <li xml:lang="ka">მრავალი ფაილის გახსნა</li>
       <li xml:lang="ko">열린 파일 여러 개</li>
@@ -459,6 +466,7 @@
       <li xml:lang="hu">Visszavonás/újra műveletek támogatása</li>
       <li xml:lang="ia">Supporto de annulla/reface</li>
       <li xml:lang="id">Dukungan urung/ulang</li>
+      <li xml:lang="ie">Defar e refar</li>
       <li xml:lang="it">Supporto per annulla/rifai</li>
       <li xml:lang="ka">გაუქმება/გამეორების მხარდაჭერა</li>
       <li xml:lang="ko">실행 취소 / 다시 실행 지원</li>
@@ -495,6 +503,7 @@
       <li xml:lang="hu">Struktúra eszközök a felhasználó által létrehozott struktúradefiníciók elemzésére és szerkesztésére</li>
       <li xml:lang="ia">Instrumento de structuras per analysar e modificar basate sur definitiones de structure creabile de usator (user-creatable structure)</li>
       <li xml:lang="id">Alat struktur untuk menganalisis dan mengedit berdasarkan pada struktur pengguna yang dapat diciptakan</li>
+      <li xml:lang="ie">Analise e modification de structuras creat per li usator</li>
       <li xml:lang="it">Strumento per le strutture per analizzare e modificare in base a definizioni di strutture dell'utente</li>
       <li xml:lang="ko">사용자가 만들 수 있는 구조 정의를 기반으로 분석 및 편집하는 구조 도구</li>
       <li xml:lang="nl">Het hulpmiddel Structuren voor analyseren en bewerking op door de gebruiker gemaakte structuurdefinities</li>
@@ -532,6 +541,7 @@
       <li xml:lang="hu">És még sok minden más…</li>
       <li xml:lang="ia">E altere ...</li>
       <li xml:lang="id">Dan selebihnya...</li>
+      <li xml:lang="ie">E plu...</li>
       <li xml:lang="it">E altro ancora...</li>
       <li xml:lang="ko">그리고 더...</li>
       <li xml:lang="nl">En meer...</li>
