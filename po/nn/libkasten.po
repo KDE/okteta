@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-04-24 00:47+0000\n"
+"POT-Creation-Date: 2022-10-16 00:51+0000\n"
 "PO-Revision-Date: 2018-08-25 16:52+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -428,7 +428,7 @@ msgstr ""
 "Trykk <interface>Opprett</interface> for å generera data med innstillingane "
 "ovanfor og setja inn dataa i eit nytt dokument."
 
-#: gui/system/dialoghandler.cpp:33
+#: gui/system/dialoghandler.cpp:34
 #, kde-kuit-format
 msgctxt "@info"
 msgid "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
@@ -436,7 +436,7 @@ msgstr ""
 "Det finst alt ei fil med namnet<nl/><filename>%1</filename>.<nl/>Vil du "
 "overskriva ho?"
 
-#: gui/system/dialoghandler.cpp:47
+#: gui/system/dialoghandler.cpp:58
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -446,7 +446,7 @@ msgstr ""
 "Det finst ulagra endringar i <filename>%1</filename>. Dei vil gå tapt dersom "
 "du lastar om att dokumentet.<nl/>Vil du forkasta endringane?"
 
-#: gui/system/dialoghandler.cpp:60
+#: gui/system/dialoghandler.cpp:71
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -455,7 +455,7 @@ msgid ""
 msgstr ""
 "<filename>%1</filename> er endra.<nl/>Vil du lagra eller forkasta endringane?"
 
-#: gui/system/dialoghandler.cpp:74
+#: gui/system/dialoghandler.cpp:95
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
