@@ -3018,7 +3018,7 @@ msgid ""
 "profile you selected in the list is set as default for all views."
 msgstr ""
 "Si premeu el botó <interface>Establix com a predeterminat</interface>, el "
-"perfil de vista que seleccioneu a la llista s'establirà com a predeterminat "
+"perfil de vista que seleccioneu en la llista s'establirà com a predeterminat "
 "per a totes les vistes."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:102
