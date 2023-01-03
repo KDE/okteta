@@ -7,20 +7,20 @@
 # Marta Rybczyńska <kde-i18n@rybczynska.net>, 2007, 2008, 2009.
 # Maciej Wikło <maciej.wiklo@wp.pl>, 2008, 2009.
 # M. Jakóbik <jakobik.marcin@gmail.com>, 2009.
-# Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2021.
+# Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2021, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-05-27 00:48+0000\n"
-"PO-Revision-Date: 2021-02-28 09:01+0100\n"
+"PO-Revision-Date: 2023-01-02 20:53+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 20.12.1\n"
+"X-Generator: Lokalize 22.12.0\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 
@@ -53,7 +53,7 @@ msgstr "2006-%1 Friedrich W. H. Kossebau"
 #: about.cpp:21
 #, kde-format
 msgid "Edit the raw data of files"
-msgstr "Edytuj nieprzetworzone dane plików"
+msgstr "Edytuj surowe dane plików"
 
 #: about.cpp:26
 #, kde-format
