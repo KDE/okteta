@@ -76,7 +76,13 @@ static bool is8Bit(QTextCodec* codec)
 
 static QTextCodec* createLatin1()
 {
+    // silence deprecation warning
+    // porting away would need a too big rework for a bugfix branch
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_CLANG("-Wdeprecated-declarations")
+    QT_WARNING_DISABLE_GCC("-Wdeprecated-declarations")
     return KCharsets::charsets()->codecForName(QLatin1String(encodingDataList[0].name));
+    QT_WARNING_POP
 }
 
 /* heuristic seems to be doomed :(
@@ -160,7 +166,13 @@ TextCharCodec* TextCharCodec::createLocalCodec()
 TextCharCodec* TextCharCodec::createCodec(const QString& codecName)
 {
     bool isOk = false;
+    // silence deprecation warning
+    // porting away would need a too big rework for a bugfix branch
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_CLANG("-Wdeprecated-declarations")
+    QT_WARNING_DISABLE_GCC("-Wdeprecated-declarations")
     QTextCodec* codec = KCharsets::charsets()->codecForName(codecName, isOk);
+    QT_WARNING_POP
     if (isOk) {
         isOk = is8Bit(codec);
     }
@@ -177,7 +189,13 @@ const QStringList& TextCharCodec::codecNames()
         for (auto& encodingData : encodingDataList) {
             bool isCodecFound = false;
             const QString codecName = QString::fromLatin1(encodingData.name);
+            // silence deprecation warning
+            // porting away would need a too big rework for a bugfix branch
+            QT_WARNING_PUSH
+            QT_WARNING_DISABLE_CLANG("-Wdeprecated-declarations")
+            QT_WARNING_DISABLE_GCC("-Wdeprecated-declarations")
             QTextCodec* codec = charsets->codecForName(codecName, isCodecFound);
+            QT_WARNING_POP
             if (isCodecFound) {
                 textCodecNames.append(QString::fromLatin1(codec->name()));
             }
