@@ -1,6 +1,6 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Vít Pelčák <vit@pelcak.org>, 2011, 2014, 2018.
+# Vít Pelčák <vit@pelcak.org>, 2011, 2014, 2018, 2023.
 # Tomáš Chvátal <tomas.chvatal@gmail.com>, 2013.
 #
 msgid ""
@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-16 00:51+0000\n"
-"PO-Revision-Date: 2018-05-31 16:22+0100\n"
+"PO-Revision-Date: 2023-01-04 10:16+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Lokalize 22.12.0\n"
 
 #: controllers/document/modified/modifiedbarcontroller.cpp:74
 #, kde-format
@@ -187,7 +187,7 @@ msgstr "Náhled"
 #, kde-format
 msgctxt "@action:button"
 msgid "&Copy to clipboard"
-msgstr "&Kopírovat do schránky"
+msgstr "Z&kopírovat do schránky"
 
 #: controllers/io/copyas/copyasdialog.cpp:74
 #, kde-format
