@@ -12,7 +12,8 @@
 #include "terminaltool.hpp"
 // KF
 #include <KLocalizedString>
-#include <KServiceTypeTrader>
+#include <KPluginFactory>
+#include <KPluginMetaData>
 #include <KParts/ReadOnlyPart>
 #include <kde_terminal_interface.h>
 // Qt
@@ -44,9 +45,8 @@ TerminalView::~TerminalView()
 
 void TerminalView::createTerminalPart()
 {
-    mTerminalPart =
-        KServiceTypeTrader::createInstanceFromQuery<KParts::ReadOnlyPart>(
-            QStringLiteral("TerminalEmulator"), this, this);
+    KPluginFactory *factory = KPluginFactory::loadFactory(KPluginMetaData(QStringLiteral("konsolepart"))).plugin;
+    mTerminalPart = factory ? (factory->create<KParts::ReadOnlyPart>(this)) : nullptr;
 
     if (mTerminalPart) {
         connect(mTerminalPart, &QObject::destroyed,
