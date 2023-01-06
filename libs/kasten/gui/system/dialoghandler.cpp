@@ -11,7 +11,6 @@
 // Kasten core
 #include <Kasten/AbstractDocument>
 // KF
-#include <kwidgetsaddons_version.h>
 #include <KMessageBox>
 #include <KLocalizedString>
 // Qt
@@ -33,23 +32,14 @@ Answer DialogHandler::queryOverwrite(const QUrl& url, const QString& title) cons
         xi18nc("@info",
                "There is already a file at<nl/><filename>%1</filename>.<nl/>"
                "Overwrite?", url.url());
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
     const int answer = KMessageBox::warningTwoActionsCancel(mWidget,
-#else
-    const int answer = KMessageBox::warningYesNoCancel(mWidget,
-#endif
-                                                       message, title,
-                                                       KStandardGuiItem::overwrite(),
-                                                       KStandardGuiItem::back());
+                                                            message, title,
+                                                            KStandardGuiItem::overwrite(),
+                                                            KStandardGuiItem::back());
 
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
     return (answer == KMessageBox::PrimaryAction) ?   Overwrite :
            (answer == KMessageBox::SecondaryAction) ? PreviousQuestion :
-#else
-    return (answer == KMessageBox::Yes) ? Overwrite :
-           (answer == KMessageBox::No) ?  PreviousQuestion :
-#endif
-                                          Cancel;
+                                                      Cancel;
 }
 
 Answer DialogHandler::queryDiscardOnReload(const AbstractDocument* document, const QString& title) const
@@ -71,22 +61,13 @@ Answer DialogHandler::querySaveDiscard(const AbstractDocument* document, const Q
                                    "<filename>%1</filename> has been modified.<nl/>"
                                    "Do you want to save your changes or discard them?", document->title());
 
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
     const int answer = KMessageBox::warningTwoActionsCancel(mWidget,
-#else
-    const int answer = KMessageBox::warningYesNoCancel(mWidget,
-#endif
-                                                       message, title,
-                                                       KStandardGuiItem::save(), KStandardGuiItem::discard());
+                                                            message, title,
+                                                            KStandardGuiItem::save(), KStandardGuiItem::discard());
 
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
     return (answer == KMessageBox::PrimaryAction) ?   Save :
            (answer == KMessageBox::SecondaryAction) ? Discard :
-#else
-    return (answer == KMessageBox::Yes) ? Save :
-           (answer == KMessageBox::No) ?  Discard :
-#endif
-                                          Cancel;
+                                                      Cancel;
 }
 
 Answer DialogHandler::queryDiscard(const AbstractDocument* document, const QString& title) const
