@@ -51,7 +51,6 @@
     <Action name="view_profile" />
   </Menu>
   <Menu name="bookmarks">
-    <Action name="bookmark_replace" />
     <Action name="bookmark_remove" />
     <Action name="bookmark_remove_all" />
     <Separator/>
