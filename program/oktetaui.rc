@@ -1,5 +1,5 @@
 <!DOCTYPE gui SYSTEM "kpartgui.dtd">
-<gui name="Okteta" version="7">
+<gui name="Okteta" version="8">
 <MenuBar>
   <Menu name="file">
     <Action name="connect_to" append="open_merge" />
@@ -51,10 +51,6 @@
     <Action name="view_profile" />
   </Menu>
   <Menu name="bookmarks">
-    <Action name="bookmark_add" />
-    <Action name="bookmark_edit" />
-    <Separator/>
-    <Action name="bookmark_replace" />
     <Action name="bookmark_remove" />
     <Action name="bookmark_remove_all" />
     <Separator/>

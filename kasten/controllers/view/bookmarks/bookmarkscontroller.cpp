@@ -128,10 +128,10 @@ void BookmarksController::setTargetModel(AbstractModel* model)
     } else {
         mCreateAction->setEnabled(false);
         mDeleteAction->setEnabled(false);
+        mGotoNextBookmarkAction->setEnabled(false);
+        mGotoPreviousBookmarkAction->setEnabled(false);
     }
     mDeleteAllAction->setEnabled(hasBookmarks);
-    mGotoNextBookmarkAction->setEnabled(hasBookmarks);
-    mGotoPreviousBookmarkAction->setEnabled(hasBookmarks);
 }
 
 void BookmarksController::updateBookmarks()
@@ -212,8 +212,8 @@ void BookmarksController::onCursorPositionChanged(Okteta::Address newPosition)
     if (hasBookmarks) {
         isAtBookmark = mBookmarks->containsBookmarkFor(newPosition);
         Okteta::BookmarksConstIterator bookmarksIterator = mBookmarks->createBookmarksConstIterator();
-        hasPrevious = bookmarksIterator.findPreviousFrom(newPosition);
-        hasNext = bookmarksIterator.findNextFrom(newPosition);
+        hasPrevious = bookmarksIterator.findPreviousFrom(newPosition - 1);
+        hasNext = bookmarksIterator.findNextFrom(newPosition + 1);
     } else {
         isAtBookmark = false;
         hasPrevious = false;
@@ -276,10 +276,10 @@ void BookmarksController::deleteAllBookmarks()
 
 void BookmarksController::gotoNextBookmark()
 {
-    const int currentPosition = mByteArrayView->cursorPosition();
+    const int positionAfter = mByteArrayView->cursorPosition() + 1;
 
     Okteta::BookmarksConstIterator bookmarksIterator = mBookmarks->createBookmarksConstIterator();
-    const bool hasNext = bookmarksIterator.findNextFrom(currentPosition);
+    const bool hasNext = bookmarksIterator.findNextFrom(positionAfter);
     if (hasNext) {
         const int newPosition = bookmarksIterator.next().offset();
         mByteArrayView->setCursorPosition(newPosition);
@@ -288,10 +288,10 @@ void BookmarksController::gotoNextBookmark()
 
 void BookmarksController::gotoPreviousBookmark()
 {
-    const int currentPosition = mByteArrayView->cursorPosition();
+    const int positionBefore = mByteArrayView->cursorPosition() - 1;
 
     Okteta::BookmarksConstIterator bookmarksIterator = mBookmarks->createBookmarksConstIterator();
-    const bool hasPrevious = bookmarksIterator.findPreviousFrom(currentPosition);
+    const bool hasPrevious = bookmarksIterator.findPreviousFrom(positionBefore);
     if (hasPrevious) {
         const int newPosition = bookmarksIterator.previous().offset();
         mByteArrayView->setCursorPosition(newPosition);

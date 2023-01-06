@@ -26,7 +26,7 @@ enum RemoteSyncState
     RemoteInSync = 0, // TODO: find better name
     RemoteHasChanges,
     RemoteDeleted,
-    // TODO: which KIO slaves are not supported by kdirwatch?
+    // TODO: which KIO workers are not supported by kdirwatch?
     RemoteUnknown,
     /// unknown, e.g. because connection not available/lost
     RemoteUnreachable
