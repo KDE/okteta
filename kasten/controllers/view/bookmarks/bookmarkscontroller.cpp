@@ -128,10 +128,10 @@ void BookmarksController::setTargetModel(AbstractModel* model)
     } else {
         mCreateAction->setEnabled(false);
         mDeleteAction->setEnabled(false);
+        mGotoNextBookmarkAction->setEnabled(false);
+        mGotoPreviousBookmarkAction->setEnabled(false);
     }
     mDeleteAllAction->setEnabled(hasBookmarks);
-    mGotoNextBookmarkAction->setEnabled(hasBookmarks);
-    mGotoPreviousBookmarkAction->setEnabled(hasBookmarks);
 }
 
 void BookmarksController::updateBookmarks()
