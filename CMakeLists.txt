@@ -15,6 +15,7 @@ include(KDECompilerSettings NO_POLICY_SCOPE)
 include(ECMQtDeclareLoggingCategory)
 include(ECMInstallIcons)
 include(ECMAddAppIcon)
+include(ECMDeprecationSettings)
 # CMake macros
 include(FeatureSummary)
 include(CMakeDependentOption)
@@ -112,11 +113,9 @@ set_package_properties(Qca-qt5 PROPERTIES
     PURPOSE "Needed for most of the algorithms of the checksum tool"
 )
 
-add_definitions(
-    -DQT_DISABLE_DEPRECATED_BEFORE=0x050E00
-    -DQT_DEPRECATED_WARNINGS_SINCE=0x060000
-    -DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x056400
-    -DKF_DEPRECATED_WARNINGS_SINCE=0x060000
+ecm_set_disabled_deprecation_versions(
+    QT 5.14.0 # QLinkedList
+    KF 5.100
 )
 
 # helper libs
