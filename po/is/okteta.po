@@ -1,0 +1,733 @@
+# translation of okteta.po to Icelandic
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Sveinn í Felli <sveinki@nett.is>, 2009, 2016.
+msgid ""
+msgstr ""
+"Project-Id-Version: okteta\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-05-27 02:10+0000\n"
+"PO-Revision-Date: 2016-04-08 22:57+0000\n"
+"Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
+"Language-Team: Icelandic <translation-team-is@lists.sourceforge.net>\n"
+"Language: is\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
+"\n"
+"\n"
+"X-Generator: Lokalize 1.5\n"
+
+#, fuzzy, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Sveinn í Felli"
+
+#, fuzzy, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "sv1@fellsnet.is"
+
+#: about.cpp:16
+#, fuzzy, kde-format
+msgid "Okteta"
+msgstr "Okteta"
+
+#: about.cpp:18
+#, kde-format
+msgid "Hex editor"
+msgstr ""
+
+#: about.cpp:20
+#, fuzzy, kde-format
+msgid "2006-%1 Friedrich W. H. Kossebau"
+msgstr "Friedrich W. H. Kossebau"
+
+#: about.cpp:21
+#, kde-format
+msgid "Edit the raw data of files"
+msgstr ""
+
+#: about.cpp:26
+#, fuzzy, kde-format
+msgid "Friedrich W. H. Kossebau"
+msgstr "Friedrich W. H. Kossebau"
+
+#: about.cpp:27
+#, fuzzy, kde-format
+msgid "Author"
+msgstr "Höfundur"
+
+#: about.cpp:29
+#, kde-format
+msgctxt "Author"
+msgid "Alexander Richardson"
+msgstr ""
+
+#: about.cpp:30
+#, kde-format
+msgctxt "Task description"
+msgid "Structures tool"
+msgstr ""
+
+#. i18n: ectx: Menu (permission)
+#: oktetaui.rc:15
+#, fuzzy, kde-format
+msgctxt "@title:menu"
+msgid "Permissions"
+msgstr "Heimildir"
+
+#. i18n: ectx: Menu (windows)
+#: oktetaui.rc:69
+#, fuzzy, kde-format
+msgid "&Windows"
+msgstr "&Windows"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: oktetaui.rc:82
+#, fuzzy, kde-format
+msgid "Main Toolbar"
+msgstr "Aðaltækjaslá"
+
+#: program.cpp:89
+#, kde-format
+msgid "File(s) to load."
+msgstr ""
+
+#, fuzzy
+#~ msgid "SPDX-FileCopyrightText: 2006-2020 Friedrich W. H. Kossebau "
+#~ msgstr "Friedrich W. H. Kossebau"
+
+#, fuzzy
+#~ msgctxt "@title:menu submenu to select the view profile or change it"
+#~ msgid "View Profile"
+#~ msgstr "&Skoðunarhamur"
+
+#, fuzzy
+#~ msgctxt "@title:menu"
+#~ msgid "Insert"
+#~ msgstr "Setja inn"
+
+#, fuzzy
+#~ msgctxt ""
+#~ "@item:inmenu encoding of the bytes as values in the hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "Sextándakerfi"
+
+#, fuzzy
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
+#~ msgid "Decimal"
+#~ msgstr "Tugakerfi"
+
+#, fuzzy
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
+#~ msgid "Octal"
+#~ msgstr "Áttundakerfi"
+
+#, fuzzy
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
+#~ msgid "Binary"
+#~ msgstr "Tvíundakerfi"
+
+#, fuzzy
+#~ msgctxt "@item name of the encoding result"
+#~ msgid "Values"
+#~ msgstr "Gildi"
+
+#, fuzzy
+#~ msgctxt "@item name of the encoding result"
+#~ msgid "C Array"
+#~ msgstr "C fylki"
+
+#, fuzzy
+#~ msgctxt "name of the encoding target"
+#~ msgid "Plain Text"
+#~ msgstr "Hreinn texti"
+
+#, fuzzy
+#~ msgctxt "@title:window"
+#~ msgid "Statistics"
+#~ msgstr "Tölfræði"
+
+#, fuzzy
+#~ msgctxt "@action:button update the statistic of the byte frequency"
+#~ msgid "&Update"
+#~ msgstr "&Uppfæra"
+
+#, fuzzy
+#~ msgctxt "@label size of selected bytes"
+#~ msgid "Size:"
+#~ msgstr "Stærð:"
+
+#, fuzzy
+#~ msgctxt "@title:column short for Hexadecimal"
+#~ msgid "Hex"
+#~ msgstr "Hex"
+
+#, fuzzy
+#~ msgctxt "@title:column short for Decimal"
+#~ msgid "Dec"
+#~ msgstr "des"
+
+#, fuzzy
+#~ msgctxt "@title:column short for Octal"
+#~ msgid "Oct"
+#~ msgstr "okt"
+
+#, fuzzy
+#~ msgctxt "@title:column short for Binary"
+#~ msgid "Bin"
+#~ msgstr "Tví"
+
+#, fuzzy
+#~ msgctxt "@title:column count of characters"
+#~ msgid "Count"
+#~ msgstr "Fjöldi"
+
+#, fuzzy
+#~ msgctxt "@title:column Percent of byte in total"
+#~ msgid "Percent"
+#~ msgstr "Prósenta"
+
+#, fuzzy
+#~ msgctxt "@info:tooltip column contains the value in hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "Sextándakerfi"
+
+#, fuzzy
+#~ msgctxt "@info:tooltip column contains the value in decimal format"
+#~ msgid "Decimal"
+#~ msgstr "Tugakerfi"
+
+#, fuzzy
+#~ msgctxt "@info:tooltip column contains the value in octal format"
+#~ msgid "Octal"
+#~ msgstr "Áttundakerfi"
+
+#, fuzzy
+#~ msgctxt "@info:tooltip column contains the value in binary format"
+#~ msgid "Binary"
+#~ msgstr "Tvíundakerfi"
+
+#, fuzzy
+#~ msgctxt "@info:tooltip column contains the character with the value"
+#~ msgid "Character"
+#~ msgstr "Stafur"
+
+#, fuzzy
+#~ msgctxt "@info:status short for: Insert mode"
+#~ msgid "INS"
+#~ msgstr "INS"
+
+#, fuzzy
+#~ msgctxt "@info:status short for: Overwrite mode"
+#~ msgid "OVR"
+#~ msgstr "YFR"
+
+#, fuzzy
+#~ msgid "Offset: %1"
+#~ msgstr "Staða: %1"
+
+#, fuzzy
+#~ msgctxt "@title:window prompt for iterative replacement"
+#~ msgid "Replace"
+#~ msgstr "Skipta út"
+
+#, fuzzy
+#~ msgctxt "@action:button"
+#~ msgid "Replace &All"
+#~ msgstr "Skipta út ö&llu"
+
+#, fuzzy
+#~ msgctxt "@action:button"
+#~ msgid "&Skip"
+#~ msgstr "&Sleppa"
+
+#, fuzzy
+#~ msgctxt "@action:button"
+#~ msgid "Replace"
+#~ msgstr "Skipta út"
+
+#, fuzzy
+#~ msgctxt "@action;button"
+#~ msgid "&Replace"
+#~ msgstr "&Skipta út"
+
+#, fuzzy
+#~ msgctxt "@info:tooltip"
+#~ msgid "Start replace"
+#~ msgstr "Hefja útskiptingu"
+
+#, fuzzy
+#~ msgctxt "@option:check"
+#~ msgid "&Prompt on replace"
+#~ msgstr "Stað&festa útskiptingu"
+
+#, fuzzy
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Ask before replacing each match found."
+#~ msgstr "Spyrja áður en orðum er skipt út."
+
+#, fuzzy
+#~ msgctxt "@title:window"
+#~ msgid "Replace"
+#~ msgstr "Skipta út"
+
+#, fuzzy
+#~ msgctxt "@title"
+#~ msgid "Replace"
+#~ msgstr "Skipta út"
+
+#, fuzzy
+#~ msgctxt "@action:button"
+#~ msgid "&Insert"
+#~ msgstr "Setja &inn"
+
+#, fuzzy
+#~ msgctxt "@title:group"
+#~ msgid "Insert"
+#~ msgstr "Setja inn"
+
+#, fuzzy
+#~ msgctxt "@label:textbox"
+#~ msgid "Pattern:"
+#~ msgstr "Mynstur:"
+
+#, fuzzy
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "Enter a pattern to search for, or select a previous pattern from the list."
+#~ msgstr "Sláðu inn mynstur til að leita eftir, eða veldu eitt út listanum."
+
+#, fuzzy
+#~ msgctxt "@label:spinbox number of times to insert the pattern"
+#~ msgid "&Number:"
+#~ msgstr "Nú&mer:"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu"
+#~ msgid "&Insert Pattern..."
+#~ msgstr "Setja &inn mynstur..."
+
+#, fuzzy
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "MD5"
+#~ msgstr "MD5"
+
+#, fuzzy
+#~ msgctxt "@label:listbox algorithm to use for the checksum"
+#~ msgid "Algorithm:"
+#~ msgstr "Reiknirit:"
+
+#, fuzzy
+#~ msgctxt "@title:group"
+#~ msgid "Parameters"
+#~ msgstr "Viðföng"
+
+#, fuzzy
+#~ msgctxt "@item:inlistbox coding of offset in the hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "Sextándakerfi"
+
+#, fuzzy
+#~ msgctxt "@item:inlistbox coding of offset in the decimal format"
+#~ msgid "Decimal"
+#~ msgstr "Tugakerfi"
+
+#, fuzzy
+#~ msgctxt "@label:listbox"
+#~ msgid "Format:"
+#~ msgstr "&Snið:"
+
+#, fuzzy
+#~ msgctxt "@label:listbox"
+#~ msgid "End offset:"
+#~ msgstr "S&taða:"
+
+#, fuzzy
+#~ msgctxt "@option:check"
+#~ msgid "&Backwards"
+#~ msgstr "&Afturábak"
+
+#, fuzzy
+#~ msgctxt "@label:textbox"
+#~ msgid "UTF-8:"
+#~ msgstr "UTF-8:"
+
+#, fuzzy
+#~ msgctxt "@title:column name of the datatype"
+#~ msgid "Type"
+#~ msgstr "Tegund"
+
+#, fuzzy
+#~ msgctxt "@title:column value of the bytes for the datatype"
+#~ msgid "Value"
+#~ msgstr "Gildi"
+
+#, fuzzy
+#~ msgctxt "@title:column offset of the extracted string"
+#~ msgid "Offset"
+#~ msgstr "Hliðrun"
+
+#, fuzzy
+#~ msgctxt "@title:column string extracted from the byte array"
+#~ msgid "String"
+#~ msgstr "Strengur"
+
+#, fuzzy
+#~ msgctxt "@title:window of the tool to extract strings"
+#~ msgid "Strings"
+#~ msgstr "Strengir"
+
+#, fuzzy
+#~ msgctxt "@action:button update the list of strings extracted"
+#~ msgid "&Update"
+#~ msgstr "&Uppfæra"
+
+#, fuzzy
+#~ msgctxt "@label:lineedit filter term for displayed strings"
+#~ msgid "Filter:"
+#~ msgstr "Sía:"
+
+#, fuzzy
+#~ msgid "C&opy"
+#~ msgstr "&Afrita"
+
+#, fuzzy
+#~ msgctxt "@title:window of the tool to set a new offset for the cursor"
+#~ msgid "Goto"
+#~ msgstr "Fara"
+
+#, fuzzy
+#~ msgctxt "@label:listbox"
+#~ msgid "Fo&rmat:"
+#~ msgstr "&Snið:"
+
+#, fuzzy
+#~ msgctxt "@label:listbox"
+#~ msgid "O&ffset:"
+#~ msgstr "S&taða:"
+
+#, fuzzy
+#~ msgctxt "@option:check"
+#~ msgid "From c&ursor"
+#~ msgstr "&Frá bendli"
+
+#, fuzzy
+#~ msgctxt "@action:button"
+#~ msgid "&Go"
+#~ msgstr "&Fara"
+
+#, fuzzy
+#~ msgctxt "@action:button"
+#~ msgid "&Filter"
+#~ msgstr "Sí&a"
+
+#, fuzzy
+#~ msgctxt "@action:button"
+#~ msgid "&Find"
+#~ msgstr "&Finna"
+
+#, fuzzy
+#~ msgctxt "@info:tooltip"
+#~ msgid "Start searching"
+#~ msgstr "Hefja leit"
+
+#, fuzzy
+#~ msgctxt "@title"
+#~ msgid "Search"
+#~ msgstr "Leita"
+
+#, fuzzy
+#~ msgctxt "@title:window"
+#~ msgid "Find"
+#~ msgstr "Finna"
+
+#, fuzzy
+#~ msgctxt "@title:group"
+#~ msgid "Options"
+#~ msgstr "Valmöguleikar"
+
+#, fuzzy
+#~ msgctxt "@option:check"
+#~ msgid "C&ase sensitive"
+#~ msgstr "&Háð há-/lágstöfum"
+
+#, fuzzy
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "Perform a case sensitive search: entering the pattern 'Joe' will not "
+#~ "match 'joe' or 'JOE', only 'Joe'."
+#~ msgstr ""
+#~ "Hefja leit sem er háð há-/lágstöfum: leitarstrengurinn 'Jói' passar þá "
+#~ "ekki við 'jói' eða 'JÓI', hann passar þá einungis við 'Jói'."
+
+#, fuzzy
+#~ msgctxt "@option:check"
+#~ msgid "&Whole words only"
+#~ msgstr "Aðeins stök &orð"
+
+#, fuzzy
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Require word boundaries in both ends of a match to succeed."
+#~ msgstr "Krefjast orðamarka í báðum endum samsvörunar til að heppnast."
+
+#, fuzzy
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "Start searching at the current cursor location rather than at the top."
+#~ msgstr "Hefja leit frá staðsetningu bendils."
+
+#, fuzzy
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Only search within the current selection."
+#~ msgstr "Einungis leita í núverandi vali."
+
+#, fuzzy
+#~ msgctxt "@title:menu"
+#~ msgid "&Value Coding"
+#~ msgstr "&Kóðun gildis"
+
+#, fuzzy
+#~ msgctxt ""
+#~ "@item:inmenu encoding of the bytes as values in the hexadecimal format"
+#~ msgid "&Hexadecimal"
+#~ msgstr "Se&xtándakerfi"
+
+#, fuzzy
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
+#~ msgid "&Decimal"
+#~ msgstr "&Tugakerfi"
+
+#, fuzzy
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
+#~ msgid "&Octal"
+#~ msgstr "Á&ttundakerfi"
+
+#, fuzzy
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
+#~ msgid "&Binary"
+#~ msgstr "T&víundakerfi"
+
+#, fuzzy
+#~ msgctxt "@option:check"
+#~ msgid "Show &Non-printing Chars"
+#~ msgstr "&Sýna óprentanlega stafi"
+
+#, fuzzy
+#~ msgctxt "@item:inmenu  The layout will not change on size changes."
+#~ msgid "&Off"
+#~ msgstr "A&f"
+
+#, fuzzy
+#~ msgctxt "@title:column offset of the bookmark"
+#~ msgid "Offset"
+#~ msgstr "Hliðrun"
+
+#, fuzzy
+#~ msgctxt "@title:column title of the bookmark"
+#~ msgid "Title"
+#~ msgstr "Titill"
+
+#, fuzzy
+#~ msgctxt "@title:window"
+#~ msgid "Bookmarks"
+#~ msgstr "Bókamerki"
+
+#, fuzzy
+#~ msgctxt "default name of a bookmark"
+#~ msgid "Bookmark"
+#~ msgstr "Bókamerki"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu"
+#~ msgid "Remove Bookmark"
+#~ msgstr "Fjarlægja bókamerki"
+
+#, fuzzy
+#~ msgctxt "@item description of bookmark"
+#~ msgid "%1: %2"
+#~ msgstr "%1: %2"
+
+#, fuzzy
+#~ msgctxt ""
+#~ "@item:inlistbox coding of the bytes as values in the hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "Sextándakerfi"
+
+#, fuzzy
+#~ msgctxt ""
+#~ "@item:inlistbox coding of the bytes as values in the decimal format"
+#~ msgid "Decimal"
+#~ msgstr "Tugakerfi"
+
+#, fuzzy
+#~ msgctxt "@item:inlistbox coding of the bytes as values in the octal format"
+#~ msgid "Octal"
+#~ msgstr "Áttundakerfi"
+
+#, fuzzy
+#~ msgctxt "@item:inlistbox coding of the bytes as values in the binary format"
+#~ msgid "Binary"
+#~ msgstr "Tvíundakerfi"
+
+#, fuzzy
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Columns"
+#~ msgstr "&Dálkar"
+
+#, fuzzy
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Rows"
+#~ msgstr "&Raðir"
+
+#, fuzzy
+#~ msgctxt ""
+#~ "name of the filter; it moves the bits and pushes the ones over the end to "
+#~ "the begin again"
+#~ msgid "ROTATE data"
+#~ msgstr "SNÚA gögnum"
+
+#, fuzzy
+#~ msgctxt "name of the filter; it moves the bits, setting freed ones to zero"
+#~ msgid "SHIFT data"
+#~ msgstr "HLIÐRA gögnum"
+
+#, fuzzy
+#~ msgid "Type:"
+#~ msgstr "Tegund:"
+
+#, fuzzy
+#~ msgid "Location:"
+#~ msgstr "Staðsetning:"
+
+#, fuzzy
+#~ msgid "Size:"
+#~ msgstr "Stærð:"
+
+#, fuzzy
+#~ msgid "Last modified:"
+#~ msgstr "Síðast breytt:"
+
+#, fuzzy
+#~ msgid "Created:"
+#~ msgstr "Búið til:"
+
+#, fuzzy
+#~ msgctxt "@title:window"
+#~ msgid "Info"
+#~ msgstr "Upplýsingar"
+
+#, fuzzy
+#~ msgctxt "@title:menu"
+#~ msgid "Import"
+#~ msgstr "Flytja inn"
+
+#, fuzzy
+#~ msgid "Conversion &Field"
+#~ msgstr "&Breyti-svæði"
+
+#, fuzzy
+#~ msgctxt "@title:window"
+#~ msgid "Export"
+#~ msgstr "Flytja út"
+
+#, fuzzy
+#~ msgctxt "@title:window"
+#~ msgid "Save As"
+#~ msgstr "Vista sem"
+
+#, fuzzy
+#~ msgctxt "@title:window"
+#~ msgid "Close"
+#~ msgstr "Loka"
+
+#, fuzzy
+#~ msgctxt "@item There are no encoders."
+#~ msgid "Not available."
+#~ msgstr "Ekki tiltækt."
+
+#, fuzzy
+#~ msgctxt "@title:menu"
+#~ msgid "Export"
+#~ msgstr "Flytja út"
+
+#, fuzzy
+#~ msgctxt "@item There are no exporters."
+#~ msgid "Not available."
+#~ msgstr "Ekki tiltækt."
+
+#, fuzzy
+#~ msgid "Zoom"
+#~ msgstr "Aðdráttur"
+
+#, fuzzy
+#~ msgctxt "zoom-factor (percentage)"
+#~ msgid "%1%"
+#~ msgstr "%1%"
+
+#, fuzzy
+#~ msgid "&Fit to Width"
+#~ msgstr "&Passa á breidd"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu"
+#~ msgid "Undo"
+#~ msgstr "Afturkalla"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu"
+#~ msgid "Redo"
+#~ msgstr "Endurtaka"
+
+#, fuzzy
+#~ msgctxt "@action Undo: [change]"
+#~ msgid "Undo: %1"
+#~ msgstr "Hætta við: %1"
+
+#, fuzzy
+#~ msgctxt "@action Redo: [change]"
+#~ msgid "Redo: %1"
+#~ msgstr "Endurtaka: %1"
+
+#, fuzzy
+#~ msgctxt "@title:column description of the change"
+#~ msgid "Title"
+#~ msgstr "Titill"
+
+#, fuzzy
+#~ msgctxt "@title:window"
+#~ msgid "Documents"
+#~ msgstr "Skjöl"
+
+#, fuzzy
+#~ msgctxt "@title:window"
+#~ msgid "Filesystem"
+#~ msgstr "Skráarkerfi"
+
+#, fuzzy
+#~ msgctxt "@title:column Id of the version"
+#~ msgid "Id"
+#~ msgstr "Auðkenni"
+
+#, fuzzy
+#~ msgctxt "@title:column description of the change"
+#~ msgid "Changes"
+#~ msgstr "Breytingar"
+
+#, fuzzy
+#~ msgctxt "@option:check the document is read-write"
+#~ msgid "Read-write"
+#~ msgstr "Les-skrif"
+
+#, fuzzy
+#~ msgctxt "@option:check the document is read-only"
+#~ msgid "Read-only"
+#~ msgstr "Ritvarið"
+
+#, fuzzy
+#~ msgctxt "@title:group"
+#~ msgid "Go To"
+#~ msgstr "Fara til"

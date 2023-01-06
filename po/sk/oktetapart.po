@@ -1,0 +1,88 @@
+# translation of oktetapart.po to Slovak
+# Richard Fric <Richard.Fric@kdemail.net>, 2006, 2009.
+# Milan Basa <minkob@mail.t-com.sk>, 2010.
+# Roman Paholík <wizzardsk@gmail.com>, 2014, 2019, 2020, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: oktetapart\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-01-02 09:07+0100\n"
+"PO-Revision-Date: 2021-01-16 15:56+0100\n"
+"Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
+"Language-Team: Slovak <kde-sk@linux.sk>\n"
+"Language: sk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 20.08.2\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Milan Baša"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "minkob@mail.t-com.sk"
+
+#. i18n: ectx: Menu (file)
+#: oktetapartbrowserui.rc:5 oktetapartreadonlyui.rc:5
+#: oktetapartreadwriteui.rc:5
+#, kde-format
+msgid "&File"
+msgstr "&Súbor"
+
+#. i18n: ectx: Menu (edit)
+#: oktetapartbrowserui.rc:8 oktetapartreadonlyui.rc:10
+#: oktetapartreadwriteui.rc:16
+#, kde-format
+msgid "&Edit"
+msgstr "&Upraviť"
+
+#. i18n: ectx: Menu (view)
+#: oktetapartbrowserui.rc:21 oktetapartreadonlyui.rc:26
+#: oktetapartreadwriteui.rc:39
+#, kde-format
+msgid "&View"
+msgstr "&Zobraziť"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: oktetapartbrowserui.rc:43 oktetapartreadonlyui.rc:47
+#: oktetapartreadwriteui.rc:60
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Hlavná lišta nástrojov"
+
+#. i18n: ectx: Menu (permission)
+#: oktetapartreadwriteui.rc:11
+#, kde-format
+msgctxt "@title:menu"
+msgid "Permissions"
+msgstr "Práva"
+
+#: partfactory.cpp:33
+#, kde-format
+msgid "OktetaPart"
+msgstr "OktetaPart"
+
+#: partfactory.cpp:35
+#, kde-format
+msgid "Embedded hex editor"
+msgstr "Rozšírený hex editor"
+
+#: partfactory.cpp:37
+#, kde-format
+msgid "Copyright 2003-%1 Friedrich W. H. Kossebau"
+msgstr "Copyright 2003-%1 Friedrich W. H. Kossebau"
+
+#: partfactory.cpp:39
+#, kde-format
+msgid "Friedrich W. H. Kossebau"
+msgstr "Friedrich W. H. Kossebau"
+
+#: partfactory.cpp:39
+#, kde-format
+msgid "Author"
+msgstr "Autor"

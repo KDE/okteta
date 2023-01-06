@@ -1,0 +1,1613 @@
+# translation of okteta2.po to
+# translation of okteta.po to
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Łukasz  Sliwa <everth@interia.pl>, 2007.
+# Marta Rybczyńska <kde-i18n@rybczynska.net>, 2007, 2008, 2009.
+# Maciej Wikło <maciej.wiklo@wp.pl>, 2008, 2009.
+# M. Jakóbik <jakobik.marcin@gmail.com>, 2009.
+# Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2021, 2023.
+msgid ""
+msgstr ""
+"Project-Id-Version: okteta\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-05-27 02:10+0000\n"
+"PO-Revision-Date: 2023-01-02 20:53+0100\n"
+"Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
+"Language-Team: Polish <kde-i18n-doc@kde.org>\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 22.12.0\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Marcin Jakóbik, Maciej Wikło, Łukasz Wojniłowicz"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr ""
+"jakobik.marcin@gmail.com,maciej.wiklo@wp.pl,lukasz.wojnilowicz@gmail.com"
+
+#: about.cpp:16
+#, kde-format
+msgid "Okteta"
+msgstr "Okteta"
+
+#: about.cpp:18
+#, kde-format
+msgid "Hex editor"
+msgstr "Edytor szesnastkowy"
+
+#: about.cpp:20
+#, kde-format
+msgid "2006-%1 Friedrich W. H. Kossebau"
+msgstr "2006-%1 Friedrich W. H. Kossebau"
+
+#: about.cpp:21
+#, kde-format
+msgid "Edit the raw data of files"
+msgstr "Edytuj surowe dane plików"
+
+#: about.cpp:26
+#, kde-format
+msgid "Friedrich W. H. Kossebau"
+msgstr "Friedrich W. H. Kossebau"
+
+#: about.cpp:27
+#, kde-format
+msgid "Author"
+msgstr "Autor"
+
+#: about.cpp:29
+#, kde-format
+msgctxt "Author"
+msgid "Alexander Richardson"
+msgstr "Alexander Richardson"
+
+#: about.cpp:30
+#, kde-format
+msgctxt "Task description"
+msgid "Structures tool"
+msgstr "Narzędzie struktur"
+
+#. i18n: ectx: Menu (permission)
+#: oktetaui.rc:15
+#, kde-format
+msgctxt "@title:menu"
+msgid "Permissions"
+msgstr "Uprawnienia"
+
+#. i18n: ectx: Menu (windows)
+#: oktetaui.rc:69
+#, kde-format
+msgid "&Windows"
+msgstr "&Okna"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: oktetaui.rc:82
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Pasek główny"
+
+#: program.cpp:89
+#, kde-format
+msgid "File(s) to load."
+msgstr "Plik(i) do wczytania."
+
+#, fuzzy
+#~| msgid "Copyright 2006-2019 Friedrich W. H. Kossebau"
+#~ msgid "SPDX-FileCopyrightText: 2006-2020 Friedrich W. H. Kossebau "
+#~ msgstr "Prawa autorskie 2006-2019 Friedrich W. H. Kossebau"
+
+#~ msgctxt "@title:menu submenu to select the view profile or change it"
+#~ msgid "View Profile"
+#~ msgstr "Profil widoku"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Import"
+#~ msgstr "Importuj"
+
+#~ msgid "Paste As"
+#~ msgstr "Wklej jako"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Insert"
+#~ msgstr "Wstaw"
+
+#~ msgid "Conversion &Field"
+#~ msgstr "&Pole konwersji"
+
+#~ msgid "Searc&h Bar"
+#~ msgstr "Pasek &wyszukiwania"
+
+#~ msgctxt "@info"
+#~ msgid "Problem while saving to local filesystem."
+#~ msgstr "Problem podczas zapisu do lokalnego systemu plików."
+
+#~ msgctxt "@info"
+#~ msgid "Problem while synching with local filesystem."
+#~ msgstr "Problem podczas synchronizacji z lokalnym systemem plików."
+
+#~ msgctxt "@info"
+#~ msgid "Problem while loading from local filesystem."
+#~ msgstr "Problem podczas wczytywania z lokalnego systemu plików."
+
+#~ msgctxt "@title:window"
+#~ msgid "Export"
+#~ msgstr "Eksportuj"
+
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
+#~ msgstr "Już istnieje plik w <nl/><filename>%1</filename>.<nl/>Nadpisać?"
+
+#~ msgctxt "@title:window"
+#~ msgid "Save As"
+#~ msgstr "Zapisz jako"
+
+#~ msgctxt "@title:window"
+#~ msgid "Close"
+#~ msgstr "Zamknij"
+
+#~ msgctxt "@info \"%title\" has been modified."
+#~ msgid ""
+#~ "<filename>%1</filename> has been modified.<nl/>Do you want to save your "
+#~ "changes or discard them?"
+#~ msgstr ""
+#~ "<filename>%1</filename> został zmieniony.<nl/>Czy chcesz zapisać zmiany "
+#~ "czy je porzucić?"
+
+#~ msgctxt "@info \"%title\" has been modified."
+#~ msgid ""
+#~ "<filename>%1</filename> has been modified.<nl/>Do you want to discard "
+#~ "your changes?"
+#~ msgstr ""
+#~ "<filename>%1</filename> został zmieniony.<nl/>Czy chcesz porzucić zmiany?"
+
+#~ msgctxt "@title:window"
+#~ msgid "Copy As"
+#~ msgstr "Kopiuj jako"
+
+#~ msgctxt "@action:button"
+#~ msgid "&Copy to clipboard"
+#~ msgstr "&Kopiuj do schowka"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Copy the selected data to the clipboard."
+#~ msgstr "Kopiuje wybrane dane do schowka."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Copy to clipboard</interface> button, the "
+#~ "selected data will be copied to the clipboard with the settings you "
+#~ "entered above."
+#~ msgstr ""
+#~ "Jeśli naciśniesz przycisk <interface>Kopiuj do schowka</interface>, "
+#~ "wybrane dane zostaną skopiowane do schowka wraz z podanymi powyżej "
+#~ "ustawieniami."
+
+#~ msgctxt "@title:group"
+#~ msgid "Preview (max. first 100 bytes)"
+#~ msgstr "Podgląd (maks. pierwsze 100 bajtów)"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Copy As"
+#~ msgstr "Kopiuj jako"
+
+#~ msgctxt "@item There are no encoders."
+#~ msgid "Not available."
+#~ msgstr "Niedostępne."
+
+#~ msgctxt "@title:menu"
+#~ msgid "Export"
+#~ msgstr "Eksportuj"
+
+#~ msgctxt "@item There are no exporters."
+#~ msgid "Not available."
+#~ msgstr "Niedostępne."
+
+#~ msgctxt "@action:button"
+#~ msgid "&Export to File..."
+#~ msgstr "&Eksportuj do pliku..."
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Export the selected data to a file."
+#~ msgstr "Eksportuj wybrane dane do pliku."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Export to file</interface> button, the "
+#~ "selected data will be copied to a file with the settings you entered "
+#~ "above."
+#~ msgstr ""
+#~ "Jeśli naciśniesz przycisk <interface>Eksportuj do pliku</interface>, "
+#~ "wybrane dane zostaną skopiowane do pliku wraz z podanymi powyżej "
+#~ "ustawieniami."
+
+#~ msgid "Zoom"
+#~ msgstr "Przybliżenie"
+
+#~ msgctxt "zoom-factor (percentage)"
+#~ msgid "%1%"
+#~ msgstr "%1%"
+
+#~ msgid "&Fit to Width"
+#~ msgstr "&Dopasuj do szerokości"
+
+#~ msgid "&Fit to Height"
+#~ msgstr "&Dopasuj do wysokości"
+
+#~ msgid "&Fit to Size"
+#~ msgstr "&Dopasuj do rozmiaru"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Zoom: %1%"
+#~ msgstr "Przybliżenie: %1%"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Undo"
+#~ msgstr "Cofnij"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Redo"
+#~ msgstr "Przywróć"
+
+#~ msgctxt "@action Undo: [change]"
+#~ msgid "Undo: %1"
+#~ msgstr "Cofnij: %1"
+
+#~ msgctxt "@action Redo: [change]"
+#~ msgid "Redo: %1"
+#~ msgstr "Przywróć: %1"
+
+#~ msgctxt "@title:column description of the change"
+#~ msgid "Title"
+#~ msgstr "Tytuł"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Title of the document"
+#~ msgstr "Tytuł dokumentu"
+
+#~ msgctxt "@title:window"
+#~ msgid "Documents"
+#~ msgstr "Dokumenty"
+
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Folder of Current Document"
+#~ msgstr "Folder aktualnego dokumentu"
+
+#~ msgctxt "@title:window"
+#~ msgid "Filesystem"
+#~ msgstr "System plików"
+
+#~ msgctxt "@item There are no windows."
+#~ msgid "None."
+#~ msgstr "Brak."
+
+#~ msgctxt "@title:window"
+#~ msgid "Versions"
+#~ msgstr "Wersje"
+
+#~ msgctxt "@title:column Id of the version"
+#~ msgid "Id"
+#~ msgstr "Identyfikator"
+
+#~ msgctxt "@title:column description of the change"
+#~ msgid "Changes"
+#~ msgstr "Zmiany"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Id of the version"
+#~ msgstr "Identyfikator wersji"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Description of what changed"
+#~ msgstr "Opis zmian"
+
+#~ msgctxt "@option:check set the document to read-only"
+#~ msgid "Set Read-only"
+#~ msgstr "Ustaw tylko do odczytu"
+
+#~ msgctxt "@option:check set the document to read-write"
+#~ msgid "Set Read-write"
+#~ msgstr "Ustaw odczyt i zapis"
+
+#~ msgctxt "@option:check the document is read-write"
+#~ msgid "Read-write"
+#~ msgstr "Odczyt i zapis"
+
+#~ msgctxt "@option:check the document is read-only"
+#~ msgid "Read-only"
+#~ msgstr "Tylko do odczytu"
+
+#~ msgctxt "name of the encoding target"
+#~ msgid "Values..."
+#~ msgstr "Wartości..."
+
+#~ msgid "Value coding:"
+#~ msgstr "Kodowanie wartości:"
+
+#~ msgctxt ""
+#~ "@item:inmenu encoding of the bytes as values in the hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "Szesnastkowe"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
+#~ msgid "Decimal"
+#~ msgstr "Dziesiętne"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
+#~ msgid "Octal"
+#~ msgstr "Ósemkowe"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
+#~ msgid "Binary"
+#~ msgstr "Dwójkowe"
+
+#~ msgctxt "@label:textbox substring which separates the values"
+#~ msgid "Separation:"
+#~ msgstr "Odstęp:"
+
+#~ msgctxt "@item name of the encoding result"
+#~ msgid "Values"
+#~ msgstr "Wartości"
+
+#~ msgctxt "@label:textbox name of the created variable"
+#~ msgid "Name of variable:"
+#~ msgstr "Nazwa zmiennej:"
+
+#~ msgctxt "@label:textbox to define after how many items the list is wrapped"
+#~ msgid "Items per line:"
+#~ msgstr "Elementy na wiersz:"
+
+#~ msgctxt "@label:listbox the type of the data: char, integer, etc."
+#~ msgid "Data type:"
+#~ msgstr "Typ danych:"
+
+#~ msgctxt ""
+#~ "@option:check Encode the values in hexadecimal instead of decimal, if the "
+#~ "datatype has the property Unsigned"
+#~ msgid "Unsigned as hexadecimal:"
+#~ msgstr "Bez znaku jako szesnastkowe:"
+
+#~ msgctxt "@item name of the encoding result"
+#~ msgid "C Array"
+#~ msgstr "Tablica C"
+
+#~ msgctxt "name of the encoding target"
+#~ msgid "C Array..."
+#~ msgstr "Tablica C..."
+
+#~ msgctxt "destination of the byte array"
+#~ msgid "Loaded from file."
+#~ msgstr "Wczytano z pliku."
+
+#~ msgctxt "name of the encoding target"
+#~ msgid "Plain Text"
+#~ msgstr "Zwykły tekst"
+
+#~ msgctxt "name of the encoding target"
+#~ msgid "View in Plain Text"
+#~ msgstr "Widok zwykłego tekstu"
+
+#~ msgctxt "@title:window"
+#~ msgid "Statistics"
+#~ msgstr "Statystyki"
+
+#~ msgctxt "@action:button update the statistic of the byte frequency"
+#~ msgid "&Update"
+#~ msgstr "&Aktualizuj"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Updates the byte frequency statistics."
+#~ msgstr "Aktualizuje statystyki częstotliwości bajtów."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Update</interface> button, the byte frequency "
+#~ "statistics are updated."
+#~ msgstr ""
+#~ "Przycisk <interface>Aktualizuj</interface> aktualizuje statystyki "
+#~ "częstotliwości bajtów."
+
+#~ msgctxt "@label size of selected bytes"
+#~ msgid "Size:"
+#~ msgstr "Rozmiar:"
+
+#~ msgid "1 byte"
+#~ msgid_plural "%1 bytes"
+#~ msgstr[0] "1 bajt"
+#~ msgstr[1] "%1 bajty"
+#~ msgstr[2] "%1 bajtów"
+
+#~ msgctxt "@title:window"
+#~ msgid "Info"
+#~ msgstr "Informacja"
+
+#~ msgctxt "@item:intable character is not defined"
+#~ msgid "undef."
+#~ msgstr "nieokr."
+
+#~ msgctxt "@title:column short for Hexadecimal"
+#~ msgid "Hex"
+#~ msgstr "Hex"
+
+#~ msgctxt "@title:column short for Decimal"
+#~ msgid "Dec"
+#~ msgstr "Dec"
+
+#~ msgctxt "@title:column short for Octal"
+#~ msgid "Oct"
+#~ msgstr "Oct"
+
+#~ msgctxt "@title:column short for Binary"
+#~ msgid "Bin"
+#~ msgstr "Bin"
+
+#~ msgctxt "@title:column short for Character"
+#~ msgid "Char"
+#~ msgstr "Char"
+
+#~ msgctxt "@title:column count of characters"
+#~ msgid "Count"
+#~ msgstr "Liczba"
+
+#~ msgctxt "@title:column Percent of byte in total"
+#~ msgid "Percent"
+#~ msgstr "Procent"
+
+#~ msgctxt "@info:tooltip column contains the value in hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "Szesnastkowe"
+
+#~ msgctxt "@info:tooltip column contains the value in decimal format"
+#~ msgid "Decimal"
+#~ msgstr "Dziesiętne"
+
+#~ msgctxt "@info:tooltip column contains the value in octal format"
+#~ msgid "Octal"
+#~ msgstr "Ósemkowe"
+
+#~ msgctxt "@info:tooltip column contains the value in binary format"
+#~ msgid "Binary"
+#~ msgstr "Dwójkowe"
+
+#~ msgctxt "@info:tooltip column contains the character with the value"
+#~ msgid "Character"
+#~ msgstr "Znak"
+
+#~ msgctxt "@info:status short for: Insert mode"
+#~ msgid "INS"
+#~ msgstr "INS"
+
+#~ msgctxt "@info:status short for: Overwrite mode"
+#~ msgid "OVR"
+#~ msgstr "OVR"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Insert mode"
+#~ msgstr "Wstaw tryb"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Overwrite mode"
+#~ msgstr "Tryb nadpisywania"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Coding of the value interpretation in the current view."
+#~ msgstr "Kodowanie w kolumnie wartość bieżącego widoku."
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Encoding in the character column of the current view."
+#~ msgstr "Kodowanie w kolumnie znak bieżącego widoku."
+
+#~ msgid "Offset: %1"
+#~ msgstr "Przesuniecie: %1"
+
+#~ msgctxt "@info:status selection: start offset - end offset ()"
+#~ msgid "Selection: %1 - %2 (%3)"
+#~ msgstr "Zaznaczenie: %1 - %2 (%3)"
+
+#~ msgctxt "@info:status offset value not available"
+#~ msgid "Offset: -"
+#~ msgstr "Przesuniecie: -"
+
+#~ msgctxt "@info:status offset value not available"
+#~ msgid "Selection: -"
+#~ msgstr "Zaznaczenie: - "
+
+#~ msgctxt ""
+#~ "@info:status selection: start offset - end offset (number of bytes)"
+#~ msgid "Selection: %1 - %2 (%3)"
+#~ msgstr "Zaznaczenie: %1 - %2 (%3)"
+
+#~ msgctxt "@title:window prompt for iterative replacement"
+#~ msgid "Replace"
+#~ msgstr "Zastąp"
+
+#~ msgctxt "@action:button"
+#~ msgid "Replace &All"
+#~ msgstr "Zastąp &wszystkie"
+
+#~ msgctxt "@action:button"
+#~ msgid "&Skip"
+#~ msgstr "&Pomiń"
+
+#~ msgctxt "@action:button"
+#~ msgid "Replace"
+#~ msgstr "Zastąp"
+
+#~ msgctxt "@title:window"
+#~ msgid "Replace Bytes"
+#~ msgstr "Zastąp bajty"
+
+#~ msgctxt "@action;button"
+#~ msgid "&Replace"
+#~ msgstr "&Zastąp"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Start replace"
+#~ msgstr "Rozpocznij zamianę"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Replace</interface> button, the bytes you "
+#~ "entered above are searched for within the byte array and any occurrence "
+#~ "is replaced with the replacement bytes."
+#~ msgstr ""
+#~ "Naciśnięcie przycisku <interface>Zastąp</interface> powoduje wyszukanie "
+#~ "wpisanych powyżej bajtów w tablicy znaków i ich zamianę na bajty "
+#~ "zastępujące."
+
+#~ msgctxt "@title:group"
+#~ msgid "Replace By"
+#~ msgstr "Zastąp przez"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Replacing bytes:"
+#~ msgstr "Bajty zastępcze:"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "Enter a pattern to replace with, or select a previous pattern from the "
+#~ "list."
+#~ msgstr "Wprowadź wzorzec zastępczy lub wybierz poprzedni wzorzec z listy."
+
+#~ msgctxt "@option:check"
+#~ msgid "&Prompt on replace"
+#~ msgstr "P&ytaj przy zastępowaniu"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Ask before replacing each match found."
+#~ msgstr ""
+#~ "Wyświetlaj pytanie przed zastąpieniem każdego znalezionego dopasowania."
+
+#~ msgctxt "@title:window"
+#~ msgid "Replace"
+#~ msgstr "Zastąp"
+
+#~ msgctxt "@info"
+#~ msgid "No replacements made."
+#~ msgstr "Nic nie zamieniono."
+
+#~ msgctxt "@info"
+#~ msgid "1 replacement made."
+#~ msgid_plural "%1 replacements made."
+#~ msgstr[0] "Wykonano jedno zastąpienie."
+#~ msgstr[1] "Wykonano %1 zastąpienia."
+#~ msgstr[2] "Wykonano %1 zastąpień."
+
+#~ msgctxt "@info"
+#~ msgid "Replace pattern not found in byte array."
+#~ msgstr "Zastąp wzorzec nieodnaleziony w strumieniu bajtów."
+
+#~ msgctxt "@info"
+#~ msgid "End of byte array reached.<nl/>Continue from the beginning?"
+#~ msgstr "Osiągnięto koniec strumienia bajtów<nl/>Kontynuować od początku?"
+
+#~ msgctxt "@info"
+#~ msgid "Beginning of byte array reached.<nl/>Continue from the end?"
+#~ msgstr "Osiągnięto początek strumienia bajtów.<nl/>Kontynuować od końca?"
+
+#~ msgctxt "@title"
+#~ msgid "Replace"
+#~ msgstr "Zastąp"
+
+#~ msgctxt "@option:check set the view into overwrite mode"
+#~ msgid "Set Overwrite Mode"
+#~ msgstr "Tryb nadpisywania"
+
+#~ msgctxt "@option:check set the view into insert mode"
+#~ msgid "Set Insert Mode"
+#~ msgstr "Tryb wstawiania"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "Choose whether you want the input to be inserted or to overwrite existing "
+#~ "data."
+#~ msgstr ""
+#~ "Wybierz, czy wstawiać wpisywany ciąg, czy nadpisywać istniejące dane."
+
+#~ msgctxt "@title:window"
+#~ msgid "Print Byte Array %1"
+#~ msgstr "Drukuj ciąg bajtów: %1"
+
+#~ msgctxt "in the header of the printed page, e.g. Page 2 of 20"
+#~ msgid "Page %p of %P"
+#~ msgstr "Strona %p z %P"
+
+#~ msgctxt "in the footer of the printed page, e.g. Printed by: Joe User"
+#~ msgid "Printed by: %U"
+#~ msgstr "Wydrukowane przez: %U"
+
+#~ msgctxt "advertizer in the footer of the printed page"
+#~ msgid "Okteta, built on KDE4"
+#~ msgstr "Okteta, zbudowana na KDE4"
+
+#~ msgctxt "@info"
+#~ msgid "Could not print."
+#~ msgstr "Nie można wydrukować."
+
+#~ msgctxt "name of the checksum algorithm"
+#~ msgid "Modular sum 64-bit"
+#~ msgstr "Suma modularna 64-bitowa"
+
+#~ msgctxt "name of the checksum algorithm"
+#~ msgid "Modular sum 16-bit"
+#~ msgstr "Suma modularna 16-bitowa"
+
+#~ msgctxt "name of the checksum algorithm, Cyclic Redundancy Check 32"
+#~ msgid "CRC-32"
+#~ msgstr "CRC-32"
+
+#~ msgctxt "name of the checksum algorithm"
+#~ msgid "Modular sum 8-bit"
+#~ msgstr "Suma modularna 8-bitowa"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Little-endian"
+#~ msgstr "Little endian"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Big-endian"
+#~ msgstr "Big endian"
+
+#~ msgctxt "name of the checksum algorithm"
+#~ msgid "Adler-32"
+#~ msgstr "Adler-32"
+
+#~ msgctxt "name of the checksum algorithm"
+#~ msgid "Modular sum 32-bit"
+#~ msgstr "Suma modularna 32-bitowa"
+
+#~ msgctxt "@title:window"
+#~ msgid "Insert Pattern"
+#~ msgstr "Wstaw wzorzec"
+
+#~ msgctxt "@action:button"
+#~ msgid "&Insert"
+#~ msgstr "&Wstaw"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Insert the pattern"
+#~ msgstr "Wstaw wzorzec"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Insert</interface> button, the pattern you "
+#~ "entered above is inserted in the byte array at the cursor position."
+#~ msgstr ""
+#~ "Jeśli naciśniesz przycisk <interface>Wstaw</interface>, wprowadzony "
+#~ "powyżej wzorzec zostanie umieszczony w strumieniu bajtów w pozycji "
+#~ "kursora."
+
+#~ msgctxt "@title:group"
+#~ msgid "Insert"
+#~ msgstr "Wstaw"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Pattern:"
+#~ msgstr "Wzorzec:"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "Enter a pattern to search for, or select a previous pattern from the list."
+#~ msgstr ""
+#~ "Wprowadź wzorzec, który chcesz wyszukać lub wybierz poprzedni wzorzec z "
+#~ "listy."
+
+#~ msgctxt "@label:spinbox number of times to insert the pattern"
+#~ msgid "&Number:"
+#~ msgstr "&Liczba:"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Enter the number of times the pattern should be inserted."
+#~ msgstr "Wpisz, jak często powinien być wstawiany wzorzec."
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "&Insert Pattern..."
+#~ msgstr "&Wstaw wzorzec..."
+
+#~ msgid "Pattern inserted."
+#~ msgstr "Wstawiono wzorzec."
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "SHA-0"
+#~ msgstr "SHA-0"
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "SHA-1"
+#~ msgstr "SHA-1"
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "MD2"
+#~ msgstr "MD2"
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "MD4"
+#~ msgstr "MD4"
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "MD5"
+#~ msgstr "MD5"
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "RIPEMD160"
+#~ msgstr "RIPEMD160"
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "SHA-224"
+#~ msgstr "SHA-224"
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "SHA-256"
+#~ msgstr "SHA-256"
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "SHA-384"
+#~ msgstr "SHA-384"
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "SHA-512"
+#~ msgstr "SHA-512"
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "Whirlpool"
+#~ msgstr "Whirlpool"
+
+#~ msgctxt "@title:window of the tool to calculate checksums"
+#~ msgid "Checksum"
+#~ msgstr "Suma kontrolna"
+
+#~ msgctxt "@label:listbox algorithm to use for the checksum"
+#~ msgid "Algorithm:"
+#~ msgstr "Algorytm:"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Select the algorithm to use for the checksum."
+#~ msgstr "Wybierz algorytm do użycia dla sumy kontrolnej:"
+
+#~ msgctxt "@title:group"
+#~ msgid "Parameters"
+#~ msgstr "Parametry"
+
+#~ msgctxt "@action:button calculate the checksum"
+#~ msgid "&Calculate"
+#~ msgstr "&Oblicz"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Calculate the checksum for the bytes in the selected range."
+#~ msgstr "Oblicz sumę kontrolną dla bajtów o wyznaczonym zakresie."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Calculate</interface> button, the list will "
+#~ "be updated to all strings which are contained in the selected range and "
+#~ "have the set minimum length."
+#~ msgstr ""
+#~ "Jeśli naciśniesz przycisk <interface>Aktualizuj</interface>, lista "
+#~ "zostanie zaktualizowana dla wszystkich ciągów w wybranym zakresie i "
+#~ "mających ustawioną minimalną długość."
+
+#~ msgctxt "@title:window"
+#~ msgid "Decoding Table"
+#~ msgstr "Tabela dekodowania"
+
+#~ msgctxt "@label:textbox encoding of one byte as value in the binary format"
+#~ msgid "Binary 8-bit:"
+#~ msgstr "Dwójkowe 8-bitowe:"
+
+#~ msgctxt "@label:textbox encoding of one byte as value in the octal format"
+#~ msgid "Octal 8-bit:"
+#~ msgstr "Ósemkowe 8-bitowe:"
+
+#~ msgctxt ""
+#~ "@label:textbox encoding of one byte as value in the hexadecimal format"
+#~ msgid "Hexadecimal 8-bit:"
+#~ msgstr "Szesnastkowe 8-bitowe:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Signed 8-bit:"
+#~ msgstr "8 bitów ze znakiem:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Unsigned 8-bit:"
+#~ msgstr "8 bitów bez znaku:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Signed 16-bit:"
+#~ msgstr "16 bitów ze znakiem:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Unsigned 16-bit:"
+#~ msgstr "16 bitów bez znaku:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Signed 32-bit:"
+#~ msgstr "32 bity ze znakiem:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Unsigned 32-bit:"
+#~ msgstr "32 bity bez znaku:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Signed 64-bit:"
+#~ msgstr "64-bitowe ze znakiem:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Unsigned 64-bit:"
+#~ msgstr "64-bitowe bez znaku:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Float 32-bit:"
+#~ msgstr "Zmiennoprzecinkowe 32-bitowe:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Float 64-bit:"
+#~ msgstr "Zmiennoprzecinkowe 64-bitowe:"
+
+#~ msgctxt "@label:textbox encoding of one byte as character"
+#~ msgid "Character 8-bit:"
+#~ msgstr "Znak 8-bitowy:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "UTF-8:"
+#~ msgstr "UTF-8:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "UTF-16:"
+#~ msgstr "UTF-16:"
+
+#~ msgctxt "@title:column name of the datatype"
+#~ msgid "Type"
+#~ msgstr "Typ"
+
+#~ msgctxt "@title:column value of the bytes for the datatype"
+#~ msgid "Value"
+#~ msgstr "Wartość"
+
+#~ msgctxt "@info:tooltip for column Type"
+#~ msgid "The type of data"
+#~ msgstr "Typ danych"
+
+#~ msgctxt "@info:tooltip for column Value"
+#~ msgid "The value of the bytes for the datatype"
+#~ msgstr "Wartość bajtów dla typu danych"
+
+#~ msgctxt "@option:check"
+#~ msgid "Unsigned as hexadecimal"
+#~ msgstr "Bez znaku jako szesnastkowe"
+
+#~ msgctxt "@title:column offset of the extracted string"
+#~ msgid "Offset"
+#~ msgstr "Przesunięcie"
+
+#~ msgctxt "@title:column string extracted from the byte array"
+#~ msgid "String"
+#~ msgstr "Ciąg"
+
+#~ msgctxt "@title:window of the tool to extract strings"
+#~ msgid "Strings"
+#~ msgstr "Ciągi"
+
+#~ msgctxt ""
+#~ "@label:spinbox minimum length for consecutive chars to be seen as a string"
+#~ msgid "Minimum length:"
+#~ msgstr "Minimalna długość:"
+
+#~ msgctxt "@action:button update the list of strings extracted"
+#~ msgid "&Update"
+#~ msgstr "&Aktualizuj"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Update the list of strings contained in the selected range."
+#~ msgstr "Aktualizuj listę ciągów w wybranym zakresie."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Update</interface> button, the list will be "
+#~ "updated to all strings which are contained in the selected range and have "
+#~ "the set minimum length."
+#~ msgstr ""
+#~ "Jeśli naciśniesz przycisk <interface>Aktualizuj</interface>, lista "
+#~ "zostanie zaktualizowana dla wszystkich ciągów w wybranym zakresie i "
+#~ "mających ustawioną minimalną długość."
+
+#~ msgctxt "@label:lineedit filter term for displayed strings"
+#~ msgid "Filter:"
+#~ msgstr "Filtr:"
+
+#~ msgid "Enter a filter term here."
+#~ msgstr "Wprowadź tu filtr."
+
+#~ msgid "C&opy"
+#~ msgstr "&Kopiuj"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Copies the selected strings to the clipboard."
+#~ msgstr "Kopiuje wybrane ciągi do schowka."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Copy</interface> button, all strings you "
+#~ "selected in the list are copied to the clipboard."
+#~ msgstr ""
+#~ "Jeśli naciśniesz przycisk <interface>Kopiuj</interface>, wszystkie "
+#~ "wybrane ciągi z listy zostaną skopiowane do schowka."
+
+#~ msgid "&Go to"
+#~ msgstr "&Idź do"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Shows the selected string in the view."
+#~ msgstr "Wyświetla wybrany ciąg w widoku."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Go to</interface> button, the string which "
+#~ "was last selected is marked and shown in the view."
+#~ msgstr ""
+#~ "Naciśnięcie przycisku <interface>Idź do</interface> powoduje oznaczenie "
+#~ "ostatnio wybranego ciągu i pokazanie go w widoku."
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Warning: Byte Array has been modified since last update."
+#~ msgstr "Uwaga: strumień bajtów został zmieniony od ostatniej aktualizacji."
+
+#~ msgctxt "@item:inlistbox coding of offset in the hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "Szesnastkowe"
+
+#~ msgctxt "@item:inlistbox coding of offset in the decimal format"
+#~ msgid "Decimal"
+#~ msgstr "Dziesiętne"
+
+#~ msgctxt "@title:window"
+#~ msgid "Go to Offset"
+#~ msgstr "Idź do przesunięcia"
+
+#~ msgctxt "@action:button"
+#~ msgid "&Go"
+#~ msgstr "&Idź"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Go to the Offset"
+#~ msgstr "Idź do przesunięcia"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Go</interface> button, the cursor will be "
+#~ "moved in the document to or, on your option, by the offset you entered "
+#~ "above."
+#~ msgstr ""
+#~ "Jeśli naciśniesz przycisk <interface>Idź</interface>, kursor zostanie "
+#~ "przeniesiony do dokumentu lub o wartość przesunięcia określoną powyżej."
+
+#~ msgctxt "@title:group"
+#~ msgid "Go To"
+#~ msgstr "Idź do"
+
+#~ msgctxt "@label:listbox"
+#~ msgid "Fo&rmat:"
+#~ msgstr "Fo&rmat:"
+
+#~ msgctxt "@label:listbox"
+#~ msgid "O&ffset:"
+#~ msgstr "Prz&esunięcie:"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Enter an offset to go to, or select a previous offset from the list."
+#~ msgstr ""
+#~ "Wpisz przesunięcie, do którego chcesz przejść lub wybierz poprzednie "
+#~ "przesunięcie z listy."
+
+#~ msgctxt "@title:group"
+#~ msgid "Options"
+#~ msgstr "Opcje"
+
+#~ msgctxt "@option:check"
+#~ msgid "From c&ursor"
+#~ msgstr "Od k&ursora"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Go relative from the current cursor location and not absolute."
+#~ msgstr "Przesunięcie względne od kursora."
+
+#~ msgctxt "@option:check"
+#~ msgid "&Extend selection"
+#~ msgstr "&Rozszerz zaznaczenie"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Extend the selection by the cursor move."
+#~ msgstr "Rozszerz zaznaczenie za pomocą ruchu kursora."
+
+#~ msgctxt "@option:check"
+#~ msgid "&Backwards"
+#~ msgstr "&Wstecz"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Go backwards from the end or the current cursor location."
+#~ msgstr "Idź wstecz od końca lub obecnej pozycji kursora."
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "&Go to Offset..."
+#~ msgstr "&Idź do przesunięcia..."
+
+#~ msgctxt "@title:window of the tool to set a new offset for the cursor"
+#~ msgid "Goto"
+#~ msgstr "Idź do"
+
+#~ msgctxt "@title:window"
+#~ msgid "Binary Filter"
+#~ msgstr "Filtr dwójkowy"
+
+#~ msgctxt "@label:listbox operation to use by the filter"
+#~ msgid "Operation:"
+#~ msgstr "Operacja:"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Select the operation to use for the filter."
+#~ msgstr "Wybierz operację, której chcesz użyć dla filtra."
+
+#~ msgctxt "@action:button"
+#~ msgid "&Filter"
+#~ msgstr "&Filtruj"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Executes the filter."
+#~ msgstr "Wykonuje filtrowanie."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Filter</interface> button, the operation you "
+#~ "selected above is executed on the document with the given options."
+#~ msgstr ""
+#~ "Jeśli naciśniesz przycisk <interface>Filtruj</interface>, wybrana "
+#~ "operacja zostanie wykonana na dokumencie z podanymi opcjami."
+
+#~ msgctxt "@label:spinbox"
+#~ msgid "Number of bytes:"
+#~ msgstr "Liczba bajtów:"
+
+#~ msgctxt "@title:window"
+#~ msgid "Byte Table"
+#~ msgstr "Tabela bajtów"
+
+#~ msgid "Byte inserted."
+#~ msgstr "Wstawiono bajt."
+
+#~ msgctxt "@title:window"
+#~ msgid "Find Bytes"
+#~ msgstr "Znajdź bajty"
+
+#~ msgctxt "@action:button"
+#~ msgid "&Find"
+#~ msgstr "&Znajdź"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Start searching"
+#~ msgstr "Rozpocznij wyszukiwanie"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press the <interface>Find</interface> button, the bytes you "
+#~ "entered above are searched for within the byte array."
+#~ msgstr ""
+#~ "Jeśli naciśniesz przycisk <interface>Znajdź</interface>, wprowadzone "
+#~ "powyżej bajty zostaną wyszukane w strumieniu bajtów."
+
+#~ msgctxt "@title"
+#~ msgid "Search"
+#~ msgstr "Znajdź"
+
+#~ msgctxt "@title:window"
+#~ msgid "Find"
+#~ msgstr "Znajdź"
+
+#~ msgctxt "@info"
+#~ msgid "Search key not found in byte array."
+#~ msgstr "Nie odnaleziono w strumieniu bajtów."
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Byte string to f&ind:"
+#~ msgstr "&Szukany ciąg bajtów:"
+
+#~ msgctxt "@option:check"
+#~ msgid "C&ase sensitive"
+#~ msgstr "Uwzględnij &wielkość liter"
+
+#, fuzzy
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "Perform a case sensitive search: entering the pattern 'Joe' will not "
+#~ "match 'joe' or 'JOE', only 'Joe'."
+#~ msgstr ""
+#~ "Przygotuj wyszukiwanie z uwzględnieniem wielkości liter: wpisując wzorzec "
+#~ "\"Joe\", nie odnajdziesz \"joe\" ani \"JOE\", tylko \"Joe\"."
+
+#~ msgctxt "@option:check"
+#~ msgid "&Whole words only"
+#~ msgstr "Tylko całe &wyrazy"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Require word boundaries in both ends of a match to succeed."
+#~ msgstr "Wymagaj granic słów w obu końcach dopasowania."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "Start searching at the current cursor location rather than at the top."
+#~ msgstr ""
+#~ "Rozpocznij wyszukiwanie od aktualnej pozycji kursora, nie zaś od góry."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Replace backwards."
+#~ msgstr "Zastąp wstecz."
+
+#~ msgctxt "@option:check"
+#~ msgid "&Selected bytes"
+#~ msgstr "&Zaznaczone bajty"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Only search within the current selection."
+#~ msgstr "Szukaj tylko w zaznaczeniu."
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Value Coding"
+#~ msgstr "&Kodowanie wartości"
+
+#~ msgctxt ""
+#~ "@item:inmenu encoding of the bytes as values in the hexadecimal format"
+#~ msgid "&Hexadecimal"
+#~ msgstr "&Szesnastkowo"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
+#~ msgid "&Decimal"
+#~ msgstr "&Dziesiętnie"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
+#~ msgid "&Octal"
+#~ msgstr "Ó&semkowo"
+
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
+#~ msgid "&Binary"
+#~ msgstr "&Dwójkowo"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Char Coding"
+#~ msgstr "&Kodowanie znaków"
+
+#~ msgctxt "@option:check"
+#~ msgid "Show &Non-printing Chars"
+#~ msgstr "Wyświetl znaki &niedrukowalne"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Dynamic Layout"
+#~ msgstr "Układ &dynamiczny"
+
+#~ msgctxt "@item:inmenu  The layout will not change on size changes."
+#~ msgid "&Off"
+#~ msgstr "&Wyłącz"
+
+#~ msgctxt ""
+#~ "@item:inmenu  The layout will adapt to the size, but only with complete "
+#~ "groups of bytes."
+#~ msgid "&Wrap Only Complete Byte Groups"
+#~ msgstr "&Zawijaj tylko kompletne grupy bajtów"
+
+#~ msgctxt ""
+#~ "@item:inmenu  The layout will adapt to the size and fit in as much bytes "
+#~ "per line as possible."
+#~ msgid "&On"
+#~ msgstr "&Włącz"
+
+#~ msgctxt "@option:check"
+#~ msgid "Show &Line Offset"
+#~ msgstr "Wyświetl przesunięcie &wierszy"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Show Values or Chars"
+#~ msgstr "&Pokaż wartości lub znaki"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Values"
+#~ msgstr "&Wartości"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Chars"
+#~ msgstr "&Znaki"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "Values && Chars"
+#~ msgstr "Wartości i znaki"
+
+#~ msgctxt "@title:column offset of the bookmark"
+#~ msgid "Offset"
+#~ msgstr "Przesunięcie"
+
+#~ msgctxt "@title:column title of the bookmark"
+#~ msgid "Title"
+#~ msgstr "Tytuł"
+
+#~ msgctxt "@title:window"
+#~ msgid "Bookmarks"
+#~ msgstr "Zakładki"
+
+#~ msgctxt "default name of a bookmark"
+#~ msgid "Bookmark"
+#~ msgstr "Zakładka"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Creates a new bookmark for the current cursor position."
+#~ msgstr "Tworzy nową zakładkę dla aktualnej pozycji kursora."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press this button, a new bookmark will be created for the current "
+#~ "cursor position."
+#~ msgstr ""
+#~ "Wciśnięcie tego przycisku spowoduje utworzenie nowej zakładki dla "
+#~ "aktualnej pozycji kursora."
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Deletes all the selected bookmarks."
+#~ msgstr "Usuwa wszystkie zaznaczone zakładki."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press this button, all bookmarks which are selected will be "
+#~ "deleted."
+#~ msgstr ""
+#~ "Wciśnięcie tego przycisku spowoduje usunięcie wszystkich zaznaczonych "
+#~ "zakładek."
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Moves the cursor to the selected bookmark."
+#~ msgstr "Przesuwa kursor do wybranej zakładki."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press this button, the cursor is moved to the position of the "
+#~ "bookmark which has been last selected."
+#~ msgstr ""
+#~ "Wciśnięcie tego przycisku spowoduje przesunięcie kursora do ostatni o "
+#~ "zaznaczonej zakładki."
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Enables renaming of the selected bookmark."
+#~ msgstr "Umożliwia zmianę nazwy wybranej zakładki."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "If you press this button, the name of the bookmark which was last "
+#~ "selected can be edited."
+#~ msgstr ""
+#~ "Wciśnięcie tego przycisku spowoduje możliwość edycji ostatnio zaznaczonej "
+#~ "zakładki."
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Remove Bookmark"
+#~ msgstr "Usuń zakładkę"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Remove All Bookmarks"
+#~ msgstr "Usuń wszystkie zakładki"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Go to Next Bookmark"
+#~ msgstr "Idź do następnej zakładki"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Go to Previous Bookmark"
+#~ msgstr "Idź do poprzedniej zakładki"
+
+#~ msgctxt "@item description of bookmark"
+#~ msgid "%1: %2"
+#~ msgstr "%1: %2"
+
+#~ msgctxt ""
+#~ "@item:inlistbox coding of the bytes as values in the hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "Szesnastkowe"
+
+#~ msgctxt ""
+#~ "@item:inlistbox coding of the bytes as values in the decimal format"
+#~ msgid "Decimal"
+#~ msgstr "Dziesiętne"
+
+#~ msgctxt "@item:inlistbox coding of the bytes as values in the octal format"
+#~ msgid "Octal"
+#~ msgstr "Ósemkowe"
+
+#~ msgctxt "@item:inlistbox coding of the bytes as values in the binary format"
+#~ msgid "Binary"
+#~ msgstr "Dwójkowe"
+
+#~ msgctxt "@item:inlistbox coding of the bytes as characters with the values"
+#~ msgid "Character(s)"
+#~ msgstr "Znak(i)"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Columns"
+#~ msgstr "&Kolumny"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Rows"
+#~ msgstr "&Wiersze"
+
+#~ msgctxt "@label:spinbox number of bytes the rotation is done within"
+#~ msgid "&Group size [bytes]"
+#~ msgstr "Rozmiar &grupy [w bajtach]"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Control the number of bytes within which each rotation is made."
+#~ msgstr "Kontroluje liczbę bajtów przy wykonywaniu obrotów."
+
+#~ msgctxt "@label:spinbox"
+#~ msgid "S&hift width [bits]"
+#~ msgstr "Szerokość przes&unięcia [w bitach]"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "Control the width of the shift. Positive numbers move the bits to the "
+#~ "right, negative to the left."
+#~ msgstr ""
+#~ "Kontroluje szerokość przesunięcia. Liczby dodatnie przesuwają bity na "
+#~ "prawo, liczby ujemne na lewo."
+
+#~ msgctxt ""
+#~ "name of the filter; it moves the bits and pushes the ones over the end to "
+#~ "the begin again"
+#~ msgid "ROTATE data"
+#~ msgstr "Dane ROTATE"
+
+#~ msgctxt "name of the filter; it does a logic XOR operation"
+#~ msgid "operand XOR data"
+#~ msgstr "Dane operandu XOR"
+
+#~ msgctxt "@option:check"
+#~ msgid "Also reverse bits"
+#~ msgstr "Odwróć także bity"
+
+#, fuzzy
+#~| msgctxt "@info:whatsthis"
+#~| msgid "If set, also the bits are ordered reverse."
+#~ msgctxt "@info:whatsthis"
+#~ msgid "If set, the bits are arranged in reverse order as well."
+#~ msgstr "Jeśli ustawiono, również bity są porządkowane odwrotnie."
+
+#~ msgctxt ""
+#~ "name of the filter; it switches all bits from 0 to 1 and 1 to 0 "
+#~ "respectivly"
+#~ msgid "INVERT data"
+#~ msgstr "INVERT dane"
+
+#~ msgctxt "name of the filter; it moves the bits, setting freed ones to zero"
+#~ msgid "SHIFT data"
+#~ msgstr "SHIFT dane"
+
+#~ msgctxt "name of the filter; it does a logic AND operation"
+#~ msgid "operand AND data"
+#~ msgstr "operand AND dane"
+
+#~ msgctxt "@label:textbox operand to the arithmetic filter function"
+#~ msgid "Operand:"
+#~ msgstr "Operand:"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Enter an operand, or select a previous operand from the list."
+#~ msgstr "Wprowadź operand lub wybierz poprzedni operand z listy."
+
+#~ msgctxt "@option:check"
+#~ msgid "Align at end"
+#~ msgstr "Wyrównaj na końcu"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "If set, the last operand will be aligned to the end of the data."
+#~ msgstr "Jeśli ustawiono, ostatni operand będzie wyrównany do końca danych."
+
+#~ msgctxt ""
+#~ "name of the filter; it changes the order of the bytes/bits to backwards"
+#~ msgid "REVERSE data"
+#~ msgstr "REVERSE dane"
+
+#~ msgctxt "name of the filter; it does a logic OR operation"
+#~ msgid "operand OR data"
+#~ msgstr "operand OR dane"
+
+#~ msgctxt "@title:window"
+#~ msgid "File Info"
+#~ msgstr "Informacja"
+
+#~ msgid "Type:"
+#~ msgstr "Typ:"
+
+#~ msgid "Location:"
+#~ msgstr "Położenie:"
+
+#~ msgid "Size:"
+#~ msgstr "Rozmiar:"
+
+#~ msgid "Created/Loaded:"
+#~ msgstr "Utworzony/wczytany:"
+
+#~ msgid "Last modified:"
+#~ msgstr "Ostatnio zmodyfikowany:"
+
+#~ msgid "Last synchronized:"
+#~ msgstr "Ostatnio zsynchronizowany:"
+
+#~ msgid "Created:"
+#~ msgstr "Utworzony:"
+
+#~ msgctxt "There is no storage location assigned to yet."
+#~ msgid "[None]"
+#~ msgstr "[Brak]"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Overwrite only"
+#~ msgstr "Tylko nadpisuj"
+
+#~ msgctxt "The byte array was new created."
+#~ msgid "New created."
+#~ msgstr "Utworzono nowy."
+
+#~ msgctxt "numbered title for a created document without a filename"
+#~ msgid "[New Byte Array]"
+#~ msgid_plural "[New Byte Array %1]"
+#~ msgstr[0] "[Nowy strumień bajtów]"
+#~ msgstr[1] "[%1 nowe strumienie bajtów]"
+#~ msgstr[2] "[%1 nowych strumieni bajtów]"
+
+#~ msgctxt "name of the data type"
+#~ msgid "Byte Array"
+#~ msgstr "Strumień bajtów"
+
+#~ msgid "Edit files as an array of bytes"
+#~ msgstr "Edytuje pliki jako strumienie bajtów"
+
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "There is already a file at <nl/><filename>%1</filename>.<nl/>Overwrite?"
+#~ msgstr "Już istnieje plik w <nl/><filename>%1</filename>.<nl/>Nadpisać?"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Copy as"
+#~ msgstr "Kopiuj jako"
+
+#~ msgctxt "@label"
+#~ msgid "Size [bytes]: "
+#~ msgstr "Rozmiar [w bajtach]: "
+
+#~ msgctxt "@info:status the statistic is not uptodate"
+#~ msgid "Warning: not uptodate"
+#~ msgstr "Uwaga: nieaktualne"
+
+#~ msgctxt ""
+#~ "@info:status encoding of the bytes as values in the hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "Szesnastkowe"
+
+#~ msgctxt "@info:status encoding of the bytes as values in the decimal format"
+#~ msgid "Decimal"
+#~ msgstr "Dziesiętne"
+
+#~ msgctxt "@info:status encoding of the bytes as values in the octal format"
+#~ msgid "Octal"
+#~ msgstr "Ósemkowe"
+
+#~ msgctxt "@info:status encoding of the bytes as values in the binary format"
+#~ msgid "Binary"
+#~ msgstr "Dwójkowe"
+
+#~ msgctxt "@info:status short for: Readonly mode"
+#~ msgid "RO"
+#~ msgstr "RO"
+
+#~ msgctxt "@info:status short for: Readwrite mode"
+#~ msgid "RW"
+#~ msgstr "RW"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Readonly mode"
+#~ msgstr "Tylko do odczytu"
+
+#~ msgctxt "@info"
+#~ msgid "<nl/>End of byte array reached.<nl/>Continue from the beginning?"
+#~ msgstr ""
+#~ "<nl/>Osiągnięto koniec strumienia bajtów.<nl/>Kontynuować od początku?"
+
+#~ msgctxt "@info"
+#~ msgid "<nl/>Beginning of byte array reached.<nl/>Continue from the end?"
+#~ msgstr ""
+#~ "<nl/>Osiągnięto początek strumienia bajtów.<nl/>Kontynuować od końca?"
+
+#~ msgctxt "@title:menu"
+#~ msgid "&Resize Style"
+#~ msgstr "Styl zmian&y rozmiaru"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&No Resize"
+#~ msgstr "&Nie zmieniaj rozmiaru"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Lock Groups"
+#~ msgstr "&Zablokuj grupy"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Full Size Usage"
+#~ msgstr "&Pełen rozmiar"
+
+#~ msgctxt "@item description of bookmark"
+#~ msgid "Offset: %1"
+#~ msgstr "Przesuniecie: %1"
+
+#~ msgctxt "@item:inlistbox cding of the bytes as values in the octal format"
+#~ msgid "Octal"
+#~ msgstr "Ósemkowe"
+
+#~ msgctxt "@option:check"
+#~ msgid "Reverse also Bits"
+#~ msgstr "Odwróć również bity"
+
+#, fuzzy
+#~| msgctxt ""
+#~| "@item:inmenu encoding of the bytes as values in the hexadecimal format"
+#~| msgid "Hexadecimal"
+#~ msgctxt ""
+#~ "@label:textbox encoding of the bytes as value in the hexadecimal format"
+#~ msgid "Hexadecimal:"
+#~ msgstr "Szesnastkowe"
+
+#, fuzzy
+#~| msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
+#~| msgid "Octal"
+#~ msgctxt "@label:textbox encoding of the bytes as value in the octal format"
+#~ msgid "Octal:"
+#~ msgstr "Ósemkowe"
+
+#, fuzzy
+#~| msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
+#~| msgid "Binary"
+#~ msgctxt "@label:textbox encoding of the bytes as value in the binary format"
+#~ msgid "Binary:"
+#~ msgstr "Dwójkowe"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the character with the value"
+#~| msgid "Character"
+#~ msgctxt "@label:textbox encoding of the bytes as character"
+#~ msgid "Character:"
+#~ msgstr "Znak"
+
+#, fuzzy
+#~| msgctxt "@title:menu"
+#~| msgid "&Value Coding"
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Values Column"
+#~ msgstr "&Kodowanie wartości"

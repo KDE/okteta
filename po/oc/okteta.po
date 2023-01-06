@@ -1,0 +1,626 @@
+# translation of okteta.po to Occitan (lengadocian)
+# Copyright (C) 2008 This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>, 2007, 2008.
+msgid ""
+msgstr ""
+"Project-Id-Version: okteta\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-05-27 02:10+0000\n"
+"PO-Revision-Date: 2008-08-05 22:28+0200\n"
+"Last-Translator: Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>\n"
+"Language-Team: Occitan (lengadocian) <ubuntu-l10n-oci@lists.ubuntu.com>\n"
+"Language: oc\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Yannig Marchegay (Kokoyaya)"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "yannig@marchegay.org"
+
+#: about.cpp:16
+#, kde-format
+msgid "Okteta"
+msgstr ""
+
+#: about.cpp:18
+#, kde-format
+msgid "Hex editor"
+msgstr ""
+
+#: about.cpp:20
+#, kde-format
+msgid "2006-%1 Friedrich W. H. Kossebau"
+msgstr ""
+
+#: about.cpp:21
+#, kde-format
+msgid "Edit the raw data of files"
+msgstr ""
+
+#: about.cpp:26
+#, kde-format
+msgid "Friedrich W. H. Kossebau"
+msgstr ""
+
+#: about.cpp:27
+#, kde-format
+msgid "Author"
+msgstr "Autor"
+
+#: about.cpp:29
+#, kde-format
+msgctxt "Author"
+msgid "Alexander Richardson"
+msgstr ""
+
+#: about.cpp:30
+#, kde-format
+msgctxt "Task description"
+msgid "Structures tool"
+msgstr ""
+
+#. i18n: ectx: Menu (permission)
+#: oktetaui.rc:15
+#, fuzzy, kde-format
+#| msgid "Permissions"
+msgctxt "@title:menu"
+msgid "Permissions"
+msgstr "Permissions"
+
+#. i18n: ectx: Menu (windows)
+#: oktetaui.rc:69
+#, kde-format
+msgid "&Windows"
+msgstr ""
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: oktetaui.rc:82
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Barra d'espleches principala"
+
+#: program.cpp:89
+#, kde-format
+msgid "File(s) to load."
+msgstr ""
+
+#~ msgctxt "@title:menu"
+#~ msgid "Insert"
+#~ msgstr "Inserir"
+
+#, fuzzy
+#~| msgctxt "name of the encoding target"
+#~| msgid "Values"
+#~ msgctxt "name of the encoding target"
+#~ msgid "Values..."
+#~ msgstr "Valors"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the value in hexadecimal format"
+#~| msgid "Hexadecimal"
+#~ msgctxt ""
+#~ "@item:inmenu encoding of the bytes as values in the hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "Exadecimal"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the value in decimal format"
+#~| msgid "Decimal"
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
+#~ msgid "Decimal"
+#~ msgstr "Decimal"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the value in binary format"
+#~| msgid "Binary"
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
+#~ msgid "Binary"
+#~ msgstr "Binari"
+
+#, fuzzy
+#~| msgctxt "name of the encoding target"
+#~| msgid "Values"
+#~ msgctxt "@item name of the encoding result"
+#~ msgid "Values"
+#~ msgstr "Valors"
+
+#~ msgctxt "name of the encoding target"
+#~ msgid "Plain Text"
+#~ msgstr "Tèxt brut"
+
+#~ msgctxt "@action:button update the statistic of the byte frequency"
+#~ msgid "&Update"
+#~ msgstr "&Metre a jorn"
+
+#~ msgctxt "@title:column short for Hexadecimal"
+#~ msgid "Hex"
+#~ msgstr "Exa"
+
+#~ msgctxt "@title:column short for Decimal"
+#~ msgid "Dec"
+#~ msgstr "Dec"
+
+#~ msgctxt "@title:column short for Binary"
+#~ msgid "Bin"
+#~ msgstr "Bin"
+
+#~ msgctxt "@title:column count of characters"
+#~ msgid "Count"
+#~ msgstr "Comptar"
+
+#~ msgctxt "@title:column Percent of byte in total"
+#~ msgid "Percent"
+#~ msgstr "per cent"
+
+#~ msgctxt "@info:tooltip column contains the value in hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "Exadecimal"
+
+#~ msgctxt "@info:tooltip column contains the value in decimal format"
+#~ msgid "Decimal"
+#~ msgstr "Decimal"
+
+#~ msgctxt "@info:tooltip column contains the value in binary format"
+#~ msgid "Binary"
+#~ msgstr "Binari"
+
+#~ msgctxt "@info:tooltip column contains the character with the value"
+#~ msgid "Character"
+#~ msgstr "Caractèr"
+
+#, fuzzy
+#~| msgctxt "@title:menu"
+#~| msgid "Insert"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Insert mode"
+#~ msgstr "Inserir"
+
+#~ msgctxt "@title:window prompt for iterative replacement"
+#~ msgid "Replace"
+#~ msgstr "Remplaçar"
+
+#~ msgctxt "@action:button"
+#~ msgid "Replace &All"
+#~ msgstr "&Remplaçar tot"
+
+#~ msgctxt "@action:button"
+#~ msgid "&Skip"
+#~ msgstr "&Ignorar"
+
+#~ msgctxt "@action:button"
+#~ msgid "Replace"
+#~ msgstr "Remplaçar"
+
+#~ msgctxt "@action;button"
+#~ msgid "&Replace"
+#~ msgstr "&Remplaçar"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Start replace"
+#~ msgstr "Aviar lo remplaçament"
+
+#, fuzzy
+#~| msgctxt "@title:window prompt for iterative replacement"
+#~| msgid "Replace"
+#~ msgctxt "@title:group"
+#~ msgid "Replace By"
+#~ msgstr "Remplaçar"
+
+#~ msgctxt "@option:check"
+#~ msgid "&Prompt on replace"
+#~ msgstr "&Convit al moment d'un remplaçament"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Ask before replacing each match found."
+#~ msgstr "Demandar abans de remplaçar cada correspondéncia trobada."
+
+#~ msgctxt "@title:window"
+#~ msgid "Replace"
+#~ msgstr "Remplaçar"
+
+#, fuzzy
+#~| msgctxt "@title:window prompt for iterative replacement"
+#~| msgid "Replace"
+#~ msgctxt "@title"
+#~ msgid "Replace"
+#~ msgstr "Remplaçar"
+
+#, fuzzy
+#~| msgctxt "@title:menu"
+#~| msgid "Insert"
+#~ msgctxt "@option:check set the view into overwrite mode"
+#~ msgid "Set Overwrite Mode"
+#~ msgstr "Inserir"
+
+#, fuzzy
+#~| msgctxt "@title:menu"
+#~| msgid "Insert"
+#~ msgctxt "@option:check set the view into insert mode"
+#~ msgid "Set Insert Mode"
+#~ msgstr "Inserir"
+
+#, fuzzy
+#~| msgctxt "@title:menu"
+#~| msgid "Insert"
+#~ msgctxt "@action:button"
+#~ msgid "&Insert"
+#~ msgstr "&Inserir"
+
+#, fuzzy
+#~| msgctxt "@title:menu"
+#~| msgid "Insert"
+#~ msgctxt "@title:group"
+#~ msgid "Insert"
+#~ msgstr "Inserir"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "Enter a pattern to search for, or select a previous pattern from the list."
+#~ msgstr ""
+#~ "Picatz un motiu de recercar, o seleccionatz un motiu precedent de la "
+#~ "tièra."
+
+#~ msgctxt "@title:group"
+#~ msgid "Parameters"
+#~ msgstr "Paramètres"
+
+#~ msgctxt "@item:inlistbox coding of offset in the hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "Exadecimal"
+
+#~ msgctxt "@item:inlistbox coding of offset in the decimal format"
+#~ msgid "Decimal"
+#~ msgstr "Decimal"
+
+#, fuzzy
+#~| msgctxt ""
+#~| "@label:textbox encoding of the bytes as value in the binary format"
+#~| msgid "Binary:"
+#~ msgctxt "@label:textbox encoding of one byte as value in the binary format"
+#~ msgid "Binary 8-bit:"
+#~ msgstr "Binari :"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the value in hexadecimal format"
+#~| msgid "Hexadecimal"
+#~ msgctxt ""
+#~ "@label:textbox encoding of one byte as value in the hexadecimal format"
+#~ msgid "Hexadecimal 8-bit:"
+#~ msgstr "Exadecimal"
+
+#, fuzzy
+#~| msgctxt ""
+#~| "@label:textbox encoding of the bytes as value in the binary format"
+#~| msgid "Binary:"
+#~ msgctxt "@label:textbox"
+#~ msgid "Signed 8-bit:"
+#~ msgstr "Binari :"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the character with the value"
+#~| msgid "Character"
+#~ msgctxt "@label:textbox encoding of one byte as character"
+#~ msgid "Character 8-bit:"
+#~ msgstr "Caractèr"
+
+#, fuzzy
+#~| msgctxt "name of the encoding target"
+#~| msgid "Values"
+#~ msgctxt "@title:column value of the bytes for the datatype"
+#~ msgid "Value"
+#~ msgstr "Valors"
+
+#~ msgctxt "@title:column string extracted from the byte array"
+#~ msgid "String"
+#~ msgstr "Cadena"
+
+#~ msgctxt "@action:button update the list of strings extracted"
+#~ msgid "&Update"
+#~ msgstr "&Metre a jorn"
+
+#~ msgctxt "@label:lineedit filter term for displayed strings"
+#~ msgid "Filter:"
+#~ msgstr "Filtre :"
+
+#~ msgid "C&opy"
+#~ msgstr "C&opiar"
+
+#, fuzzy
+#~| msgctxt "@title:group"
+#~| msgid "Go to"
+#~ msgctxt "@title:window of the tool to set a new offset for the cursor"
+#~ msgid "Goto"
+#~ msgstr "Anar a"
+
+#~ msgctxt "@option:check"
+#~ msgid "From c&ursor"
+#~ msgstr "Demp&uèi lo cursor"
+
+#~ msgctxt "@action:button"
+#~ msgid "&Go"
+#~ msgstr "&Anar"
+
+#~ msgctxt "@action:button"
+#~ msgid "&Find"
+#~ msgstr "&Recercar"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Start searching"
+#~ msgstr "Començar la recèrca"
+
+#~ msgctxt "@title:window"
+#~ msgid "Find"
+#~ msgstr "Recercar"
+
+#~ msgctxt "@title:group"
+#~ msgid "Options"
+#~ msgstr "Opcions"
+
+#~ msgctxt "@option:check"
+#~ msgid "C&ase sensitive"
+#~ msgstr "Téne&r compte de la cassa"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "Perform a case sensitive search: entering the pattern 'Joe' will not "
+#~ "match 'joe' or 'JOE', only 'Joe'."
+#~ msgstr ""
+#~ "Effectuar una recèrca tenent compte de la cassa : la picada del motiu "
+#~ "« Joe » trobarà pas ni « joe » ni « JOE », mas unicament « Joe »."
+
+#~ msgctxt "@option:check"
+#~ msgid "&Whole words only"
+#~ msgstr "Sonque los mots &entièrs"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Require word boundaries in both ends of a match to succeed."
+#~ msgstr ""
+#~ "Necessita de limits de mots dins los dos senses d'una occurréncia per "
+#~ "capitar."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "Start searching at the current cursor location rather than at the top."
+#~ msgstr ""
+#~ "Aviar la recèrca a la posicion correnta del cursor puslèu qu'al "
+#~ "començament."
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Only search within the current selection."
+#~ msgstr "Recercar sonque dins la seleccion correnta."
+
+#, fuzzy
+#~| msgctxt "name of the encoding target"
+#~| msgid "Values"
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Values"
+#~ msgstr "Valors"
+
+#, fuzzy
+#~| msgctxt "@title:column description of the change"
+#~| msgid "Changes"
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Chars"
+#~ msgstr "Modificacions"
+
+#, fuzzy
+#~| msgctxt "@action:inmenu"
+#~| msgid "Remove Bookmark"
+#~ msgctxt "@title:window"
+#~ msgid "Bookmarks"
+#~ msgstr "Suprimir lo favorit"
+
+#, fuzzy
+#~| msgctxt "@action:inmenu"
+#~| msgid "Remove Bookmark"
+#~ msgctxt "default name of a bookmark"
+#~ msgid "Bookmark"
+#~ msgstr "Suprimir lo favorit"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Remove Bookmark"
+#~ msgstr "Suprimir lo favorit"
+
+#, fuzzy
+#~| msgctxt "@action:inmenu"
+#~| msgid "Remove Bookmark"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Go to Next Bookmark"
+#~ msgstr "Suprimir lo favorit"
+
+#, fuzzy
+#~| msgctxt "zoom-factor (percentage)"
+#~| msgid "%1%"
+#~ msgctxt "@item description of bookmark"
+#~ msgid "%1: %2"
+#~ msgstr "%1%"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the value in hexadecimal format"
+#~| msgid "Hexadecimal"
+#~ msgctxt ""
+#~ "@item:inlistbox coding of the bytes as values in the hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "Exadecimal"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the value in decimal format"
+#~| msgid "Decimal"
+#~ msgctxt ""
+#~ "@item:inlistbox coding of the bytes as values in the decimal format"
+#~ msgid "Decimal"
+#~ msgstr "Decimal"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the value in binary format"
+#~| msgid "Binary"
+#~ msgctxt "@item:inlistbox coding of the bytes as values in the binary format"
+#~ msgid "Binary"
+#~ msgstr "Binari"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the character with the value"
+#~| msgid "Character"
+#~ msgctxt "@item:inlistbox coding of the bytes as characters with the values"
+#~ msgid "Character(s)"
+#~ msgstr "Caractèr"
+
+#, fuzzy
+#~| msgctxt "@title:column count of characters"
+#~| msgid "Count"
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Columns"
+#~ msgstr "Comptar"
+
+#, fuzzy
+#~| msgctxt "@title:window"
+#~| msgid "Info"
+#~ msgctxt "@title:window"
+#~ msgid "File Info"
+#~ msgstr "Info"
+
+#~ msgctxt "@title:window"
+#~ msgid "Info"
+#~ msgstr "Info"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Import"
+#~ msgstr "Importar"
+
+#, fuzzy
+#~| msgctxt "@title:menu"
+#~| msgid "Export"
+#~ msgctxt "@title:window"
+#~ msgid "Export"
+#~ msgstr "Exportar"
+
+#, fuzzy
+#~| msgid "C&opy"
+#~ msgctxt "@title:window"
+#~ msgid "Copy As"
+#~ msgstr "C&opiar"
+
+#, fuzzy
+#~| msgid "C&opy"
+#~ msgctxt "@title:menu"
+#~ msgid "Copy As"
+#~ msgstr "C&opiar"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Export"
+#~ msgstr "Exportar"
+
+#~ msgid "Zoom"
+#~ msgstr "Zoom"
+
+#~ msgctxt "zoom-factor (percentage)"
+#~ msgid "%1%"
+#~ msgstr "%1%"
+
+#, fuzzy
+#~| msgid "Zoom"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Zoom: %1%"
+#~ msgstr "Zoom"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Undo"
+#~ msgstr "Anullar"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Redo"
+#~ msgstr "Tornar far"
+
+#~ msgctxt "@action Undo: [change]"
+#~ msgid "Undo: %1"
+#~ msgstr "Anullar : %1"
+
+#~ msgctxt "@action Redo: [change]"
+#~ msgid "Redo: %1"
+#~ msgstr "Tornar far : %1"
+
+#, fuzzy
+#~| msgid "Permissions"
+#~ msgctxt "@title:window"
+#~ msgid "Versions"
+#~ msgstr "Versions"
+
+#~ msgctxt "@title:column description of the change"
+#~ msgid "Changes"
+#~ msgstr "Modificacions"
+
+#, fuzzy
+#~| msgctxt "@option:check the document is read-only"
+#~| msgid "Read only"
+#~ msgctxt "@option:check set the document to read-only"
+#~ msgid "Set Read-only"
+#~ msgstr "Lectura sola"
+
+#, fuzzy
+#~| msgctxt "@option:check the document is read-only"
+#~| msgid "Read only"
+#~ msgctxt "@option:check the document is read-only"
+#~ msgid "Read-only"
+#~ msgstr "Lectura sola"
+
+#, fuzzy
+#~| msgctxt "@title:group"
+#~| msgid "Go to"
+#~ msgctxt "@title:group"
+#~ msgid "Go To"
+#~ msgstr "Anar a"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the value in hexadecimal format"
+#~| msgid "Hexadecimal"
+#~ msgctxt ""
+#~ "@info:status encoding of the bytes as values in the hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "Exadecimal"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the value in decimal format"
+#~| msgid "Decimal"
+#~ msgctxt "@info:status encoding of the bytes as values in the decimal format"
+#~ msgid "Decimal"
+#~ msgstr "Decimal"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip column contains the value in binary format"
+#~| msgid "Binary"
+#~ msgctxt "@info:status encoding of the bytes as values in the binary format"
+#~ msgid "Binary"
+#~ msgstr "Binari"
+
+#, fuzzy
+#~| msgctxt "@option:check the document is read-only"
+#~| msgid "Read only"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Readonly mode"
+#~ msgstr "Lectura sola"
+
+#~ msgctxt ""
+#~ "@item:inlistbox encoding of the bytes as values in the hexadecimal format"
+#~ msgid "Hexadecimal"
+#~ msgstr "Exadecimal"
+
+#~ msgctxt ""
+#~ "@item:inlistbox encoding of the bytes as values in the decimal format"
+#~ msgid "Decimal"
+#~ msgstr "Decimal"
+
+#~ msgctxt ""
+#~ "@item:inlistbox encoding of the bytes as values in the binary format"
+#~ msgid "Binary"
+#~ msgstr "Binari"

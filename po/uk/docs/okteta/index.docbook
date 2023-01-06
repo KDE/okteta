@@ -1,0 +1,2078 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % Ukrainian "INCLUDE">
+  <!ENTITY % addindex "IGNORE">
+]>
+
+<book id="okteta" lang="&language;">
+
+<bookinfo>
+<title
+>Підручник з &okteta;</title>
+
+<authorgroup>
+    <author
+><firstname
+>Friedrich</firstname
+><othername
+>W. H.</othername
+><surname
+>Kossebau</surname
+> <affiliation
+> <address
+>&Friedrich.Kossebau.email;</address>
+      </affiliation>
+    </author>
+    <author
+><firstname
+>Alex</firstname
+><surname
+>Richardson</surname
+> <affiliation
+> <address
+>&Alex.Richardson.email;</address>
+      </affiliation>
+    </author>
+<othercredit role="translator"
+><firstname
+>Юрій</firstname
+><surname
+>Чорноіван</surname
+><affiliation
+><address
+><email
+>yurchor@ukr.net</email
+></address
+></affiliation
+><contrib
+>Переклад українською</contrib
+></othercredit
+> 
+</authorgroup>
+
+<copyright>
+<year
+>2008, 2010, 2011</year>
+<holder
+>&Friedrich.Kossebau; і &Alex.Richardson;</holder>
+</copyright>
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>23 березня 2018 року</date>
+<releaseinfo
+>&okteta; 0.24.60</releaseinfo>
+
+<abstract>
+  <para
+>&okteta; — це простий редактор для безпосереднього редагування даних файлів. Програми такого типу також називають шістнадцятковими або двійковими редакторами.</para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>Okteta</keyword>
+<keyword
+>перегляд</keyword>
+<keyword
+>редагування</keyword>
+<keyword
+>біти</keyword>
+<keyword
+>байти</keyword>
+<keyword
+>двійкові</keyword>
+<keyword
+>вісімкові</keyword>
+<keyword
+>шістнадцяткові</keyword>
+<keyword
+>шістнадцятковий редактор</keyword>
+<keyword
+>необроблені дані</keyword>
+</keywordset>
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Вступ</title>
+
+<para
+>&okteta; — це простий редактор для безпосереднього редагування даних файлів.</para>
+
+<para
+>Дані буде показано у двох формах: як числові значення байтів та як символи, що відповідають цим числовим значенням. Значення та символи може бути показано або у два стовпчики (типовий формат перегляду у шістнадцяткових редакторах) або у форматі рядків, де значення буде показано над символом. Ви зможете змінювати як значення, так і символи.</para>
+
+<para
+>Окрім звичайних засобів редагування, до складу &okteta; входить також невеликий набір інструментів, зокрема інструмент декодування у прості типи даних, таблиця всіх байтів з символами і значеннями, інформаційне вікна зі статистичними даними, інструмент фільтрування та інструмент видобування рядків.</para>
+
+<para
+>Всі зміни у завантажених даних можна без обмежень скасовувати та повторювати.</para>
+
+</chapter>
+
+<chapter id="basics">
+<title
+>Основи</title>
+
+<sect1 id="starting-basics">
+<title
+>Як запустити &okteta;</title>
+
+    <para
+>Виконайте команду <userinput
+><command
+>okteta</command
+></userinput
+> з командного рядка або оберіть пункт <guimenuitem
+>Двійковий редактор</guimenuitem
+> з підменю <menuchoice
+><guisubmenu
+>Програми</guisubmenu
+><guisubmenu
+>Інструменти</guisubmenu
+></menuchoice
+> у інструменті запуску програм.</para>
+
+    <para
+>Можна скористатися стандартними параметрами командного рядка &Qt; і &kf5-full;. Список цих параметрів можна переглянути у даних, виведених командою <userinput
+><command
+>okteta</command
+> <option
+>--help</option
+></userinput
+>.</para>
+
+    <para
+>Параметрами командного рядка, специфічними для &okteta; є</para>
+
+    <para
+><option
+><replaceable
+>&lt;URL&gt;</replaceable
+></option
+> — відкрити файли за вказаними адресами або адресою URL.</para>
+
+</sect1>
+
+<sect1 id="usage-basics">
+<title
+>Використання</title>
+
+    <para
+>Головне вікно &okteta; складається з таких частин: смужки меню, панелі інструментів, смужки стану, одної або декількох бічних панелей з інструментами та основної області перегляду з вкладками показу даних.</para>
+
+    <para
+>Після відкриття файла або створення нового масиву байтів з байтів, що у них містяться, буде побудовано послідовний список, кожен з рядків якого міститиме задану кількість байтів. Рядки буде показано у двох варіантах: як числові значення і як символи, що відповідають цим значенням. Значення і символи може бути показано або розділеними на дві колонки, або поряд одне з одним (значення буде показано над символом). Ліворуч від списку буде показано відступи першого байта кожного з рядків.</para>
+
+    <para
+>Робота з даними подібна до роботи у більшості текстових редакторів: дані можна змінювати, вирізати, копіювати, вставляти, перетягувати і скидати, точно так само, як ви це робите у текстовому редакторі. Курсор позначає поточну позицію. Натискання клавіші <keycap
+>Insert</keycap
+> перемикає режим редагування між перезаписом і вставкою. Режим перезапису працює трохи інакше, ніж у текстових редакторах, оскільки програма забороняє будь-які дії, які змінюють розмірність масиву байтів.</para>
+
+    <para
+>На відміну від текстових редакторів дані буде показано у двох варіантах. Одночасно для введення даних буде придатним лише один з цих варіантів. Програма показуватиме два пов’язані між собою курсори для значень і для символів, активний курсор блиматиме. Якщо буде активним поле символів, ви зможете вводити символи у спосіб, звичний для текстових редакторів. Якщо активним буде поле значень, введення цифри відкриватиму маленьке віконечко редактора, у якому ви зможете ввести решту значення.</para>
+
+    <para
+>Діалогове вікно пошуку надає користувачеві можливість пошуку вказаного рядка, байтів, які можна визначати у шістнадцятковому, десятковому, вісімковому, двійковому вигляді або у вигляді тексту (у поточному 8-бітовому кодуванні або UTF-8).</para>
+
+    <para
+>Одночасно можна відкривати декілька масивів даних, але лише один з них може бути активним. Щоб обрати активний масив байтів, скористайтеся меню <guimenu
+>Вікна</guimenu
+>.</para>
+</sect1>
+
+
+</chapter>
+
+<chapter id="tools">
+  <title
+>Інструменти</title>
+
+<!-- The tool Versions is not part of released versions,
+just used for development, so no need to document it. -->
+<!--
+4.7
+Other stuff:
+New encodings: ISO-8859-14, ISO-8859-16, Codepage 874
+File info tool now estimates the mimetype also for the unstored/edited data in the working memory
+FIXME  
+-->
+<sect1 id="tools-overview">
+
+  <title
+>Огляд</title>
+  <para
+>У &okteta; передбачено декілька інструментів. Деякі з них відповідають за аналіз та обробку масивів даних, деякі мають загальне призначення. Задіяти або вимкнути ці інструменти можна за допомогою меню <guimenu
+>Інструменти</guimenu
+>. Кожен з інструментів має власну невеличку панель, яку буде розташовано на одній з бічних панелей або у окремому віконці. Ви можете швартувати, від’єднувати, перевпорядковувати та розташовувати стосами панельки інструментів за допомогою миші: наведіть вказівник миші на смужку заголовка панелі інструменту, натисніть ліву кнопку миші, пересуньте панель у бажане місце і відпустіть кнопку, щоб завершити компонування, або клавішу &Esc;, щоб скасувати пересування панелі.</para>
+
+<sect2>
+  <title
+>Інструменти аналізу та обробки</title>
+<variablelist>
+  <varlistentry>
+    <term
+>Таблиця значень/символів</term>
+    <listitem
+><para
+>У цій таблиці показано список можливих значень байтів у вигляді символів і знаків у різних числових кодуваннях.</para>
+    <para
+>Обране значення можна вставляти за поточним розташуванням курсора визначену кількість разів. Дію з вставлення можна виконати за допомогою кнопки <action
+>Вставити</action
+> або наведення вказівника на відповідний рядок таблиці з наступним подвійним клацанням.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Двійковий фільтр</term>
+    <listitem
+><para
+>Фільтри виконує двійкові дії над вибраними байтами. Після вибору дії (AND, OR, ROTATE..) параметри, якщо такі є, можна встановити у полі, розташованому нижче. Виконати фільтрування можна за допомогою кнопки <action
+>Фільтрувати</action
+>.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Рядки</term>
+    <listitem
+><para
+>За допомогою цього інструмента можна шукати рядки у вибраних байтах. Після того, як ви оберете мінімальну довжину рядка, рядки можна знайти за допомогою кнопки <guibutton
+>Видобути</guibutton
+>. Список рядків можна звузити введенням шаблону фільтрування.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Статистика</term>
+    <listitem
+><para
+>За допомогою цього інструменту можна зібрати деяку статистичну інформацію щодо вибраних байтів. Серед цих даних будуть дані щодо частоти входження кожного з байтових значень до виділеного фрагмента. Наказати програмі виконати збирання інформації можна натисканням кнопки <action
+>Зібрати</action
+>.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Контрольна сума</term>
+    <listitem
+><para
+>За допомогою цього інструменту можна обчислювати різноманітні контрольні суми та хеш-суми для позначених байтів. Після вибору алгоритму та встановлення значення параметра, якщо такий потрібен, відповідну суму можна обчислити натисканням кнопки <guibutton
+>Обчислити</guibutton
+>.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Таблиця розкодування</term>
+    <listitem
+><para
+>У цій таблиці показано значення байта або байтів, починаючи від поточного розташування курсора, як їх відповідники серед простих типів даних, зокрема цілих чисел (Integer) або чисел з плаваючою комою (Float), але також у форматі UTF-8. Якщо ви наведете вказівник миші на рядок у таблиці і двічі клацнете лівою кнопкою миші, програма відкриє вікно редактора, у якому ви зможете переглянути і змінити значення.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Структури</term>
+    <listitem
+><para
+>За допомогою цього інструменту можна вивчати та редагувати масиви байтів на основі визначених користувачем структур. Докладніший опис наведено у <link linkend="tools-structures"
+>окремому розділі</link
+>.</para
+></listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+  <title
+>Загальні інструменти</title>
+<variablelist>
+  <varlistentry>
+    <term
+>Файлова система</term>
+    <listitem
+><para
+>Панель цього інструменту є вбудованим навігатором файловою системою, яким можна скористатися для позначення файлів, які слід відкрити.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Документи</term>
+    <listitem
+><para
+>На панелі цього інструменту буде показано пункти всіх поточних створених або завантажених файлів. Програма позначить відповідним чином пункти файлів, перегляд яких є активним, файли з незбереженими змінами та файли, які було змінено на носії даних іншою програмою.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Закладки</term>
+    <listitem
+><para
+>Панеллю цього інструменту можна скористатися для керування закладками, якщо ви не бажаєте користуватися <link linkend="bookmarks-menu"
+>меню <guimenu
+>Закладки</guimenu
+></link
+>. <note
+><para
+>У поточній версії програми закладки є лише тимчасовими, програма не зберігає їх розташування під час закриття масиву байтів або завершення роботи самої програми.</para
+></note
+></para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Інформація про файл</term>
+    <listitem
+><para
+>За допомогою цього інструменту можна переглянути відомості щодо поточного файла, зокрема його тип, місце зберігання і розмір.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Термінал</term>
+    <listitem
+><para
+>Вбудований термінал. Робочий каталог не синхронізовано з каталогом активного файла.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Перетворення наборів символів</term>
+    <listitem
+><para
+>За допомогою цього інструмента можна перезаписати відповідні символи у іншому кодуванні. Передбачено підтримку лише 8-бітового набору символів. У поточній версії усі символи без відповідників буде замінено на 0. </para
+></listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+</sect1>
+
+
+<sect1 id="tools-structures">
+<!--
+Many improvements in the Structures tool by Alex:
+Begin of a structure can be pinned to a specific offset
+Support for strings (various Unicode encodings) in definitions
+  -->
+    <title
+>Інструмент структур</title>
+
+    <sect2>
+      <title
+>Загальне</title>
+
+      <para
+>За допомогою інструменту «Структури» можна аналізувати та редагувати масиви байтів на основі створених користувачем визначень структур, які можна побудувати з масивів, об’єднань, елементарних типів та переліків.</para>
+     <!-- explain/link what these types are? probably not, since most user will be programmers? -->
+      <para
+>Інструмент має власне діалогове вікно параметрів, відкрити яке можна за допомогою натискання кнопки <guibutton
+>Параметри</guibutton
+>. Передбачено досить багато параметрів налаштування, зокрема стиль (десяткові, шістнадцяткові або двійкові), у якому буде показано значення. Крім того, можна визначити, які визначення структур буде завантажено і які структури буде показано.</para>
+      <para
+>Структури визначаються за допомогою файлів визначення структур &okteta; (&XML;-файлах, з суфіксом назви <literal role="extension"
+>.osd</literal
+>). Крім того, потрібен файл <literal role="extension"
+>.desktop</literal
+>, що містить метадані щодо файла опису структури, зокрема відомості щодо автора, домашньої сторінки та умов ліцензування.</para>
+      <para
+>У поточній версії програми ще немає вбудованої підтримки створення або редагування визначень структур, отже все це слід робити вручну у спосіб, описаний у наступних розділах.</para>
+    </sect2>
+
+    <sect2>
+      <title
+>Встановлення визначень структур</title>
+
+      <sect3>
+        <title
+>Встановлення за допомогою KNewStuff</title>
+        <para
+>Найпростішим способом встановлення нових визначень структур є використання вбудованої підтримки KNewStuff у &okteta;. Щоб встановити існуючу структуру, відкрийте діалогове вікно інструменту «Структури». Перейдіть на вкладку <guilabel
+>Керування структурами</guilabel
+> і натисніть кнопку <guibutton
+>Отримати нові структури...</guibutton
+>. За допомогою діалогового вікна, яке буде відкрито, ви зможете встановити або вилучити встановлені визначення структур.</para>
+      </sect3>
+      <sect3>
+        <title
+>Встановлення визначень структур вручну</title>
+        <para
+>Інструмент «Структури» шукає описи структур у підкаталозі <filename class="directory"
+>okteta/structures/</filename
+> каталогу даних програм користувача (визначити адресу цього каталогу можна за допомогою команди <userinput
+><command
+>qtpaths</command
+> <option
+>--paths GenericDataLocation</option
+></userinput
+>). Якщо ще не встановлено жодного визначення структури, можливо, вам доведеться створити відповідний підкаталог.</para>
+          <para
+>Дані кожного визначення структури має бути розподілено між двома файлами: один з файлів міститиме дані самого визначення, а інший файл, <literal role="extension"
+>.desktop</literal
+>, зберігатиме метадані (дані щодо автора, версії тощо).</para>
+          <para
+>У цьому каталозі має бути підкаталог для кожного з визначень структури, у якому мають зберігатися обидва файла визначення: файл <literal role="extension"
+>.desktop</literal
+> і файл <literal role="extension"
+>.osd</literal
+> або <filename
+>main.js</filename
+>.</para>
+          <para
+>Наприклад, якщо каталогом даних програм є <filename class="directory"
+><userinput
+><command
+>qtpaths</command
+> <option
+>--paths GenericDataLocation</option
+></userinput
+></filename
+>, а визначення структури має назву ExampleStructure, має бути каталог <filename class="directory"
+>okteta/structures/ExampleStructure</filename
+>, що міститиме файли <filename
+>ExampleStructure.desktop</filename
+> і <filename
+>ExampleStructure.osd</filename
+>.</para>
+      </sect3>
+      <sect3>
+        <title
+>Користування встановленими структурами</title>
+        <para
+>Якщо ви встановили нове визначення структури створенням такого каталогу або редагуванням файлів у ньому, вам слід перезапустити &okteta;, а потім відкрити діалогове вікно параметрів інструменту «Структури». Там слід перейти на вкладку <guilabel
+>Керування записами структур</guilabel
+> і переконатися, що відповідний пункт визначення структури позначено. Після цього перейдіть на вкладку <guilabel
+>Структури</guilabel
+> і переконайтеся, що бажаний пункт є у списку, розташованому у правій частині вікна.</para>
+      </sect3>
+    </sect2>
+
+    <sect2>
+      <title
+>Поширення визначень структур</title>
+      <para
+>Якщо потрібна вам структура є досить типовою, ви можете не створювати визначення власноруч, а скористатися готовим визначенням з якогось зі сховищ визначень, зокрема <ulink url="https://store.kde.org/browse/cat/214"
+>store.kde.org</ulink
+>.</para>
+      <para
+>Крім того, ви і самі можете поділитися з іншими користувачами вашими визначеннями. Щоб зробити це, створіть файл архіву (наприклад, стиснутий zip архів tar, <literal role="extension"
+>.tar.gz</literal
+>), який міститиме лише підкаталог з файлом <literal role="extension"
+>.desktop</literal
+> і файлом визначення структури. Якщо скористатися нашим прикладом з попереднього розділу, ваш підкаталог має називатися <filename class="directory"
+>ExampleStructure</filename
+>. Якщо ви користуватиметеся саме цим форматом інші користувачі зможуть автоматично отримувати і встановлювати створені вами визначення.</para>
+    </sect2>
+
+
+    <sect2>
+      <title
+>Створення визначень структур</title>
+
+      <note
+><para
+>Новіші, але трохи неповні настанови щодо створення визначень структур можна знайти у <ulink url="https://userbase.kde.org/Okteta/Writing_structure_definitions"
+>вікі користувачів KDE</ulink
+>. </para
+></note>
+
+      <para
+>Передбачено два різних способи створення визначень структури. Перший полягає у написанні визначення мовою &XML;, інший — мовою JavaScript. За допомогою JavaScript можна створювати складніші описи структур, зокрема з перевірками коректності структури. Використання &XML; звузить набір можливостей, але якщо вам потрібна лише статична структура, цей спосіб буде простішим. Якщо вам слід описати динамічну структуру, наприклад структуру, у якій довжини масивів залежатимуть від інших даних у структурі, або структуру, компонування якої змінюватиметься залежно від значень її компонентів, вам доведеться описувати структуру мовою JavaScript. Єдиним виключенням з цього правила є випадок, коли довжина масиву <emphasis role="bold"
+>точно</emphasis
+> дорівнює іншому значенню структури. У цьому випадку ви можете скористатися &XML;, але якщо ви маєте для довжини щось подібне до <emphasis
+>значення - 1</emphasis
+>, доведеться користуватися JavaScript.</para>
+    </sect2>
+
+
+    <sect2>
+      <title
+>Формат файлів визначення структури &XML;</title>
+      <note
+><para
+>Новіші, але трохи неповні настанови щодо створення визначень структур можна знайти у <ulink url="https://userbase.kde.org/Okteta/Writing_structure_definitions"
+>вікі користувачів KDE</ulink
+>. </para
+></note>
+      <para
+>У файла &XML;e <literal role="extension"
+>.osd</literal
+> є один кореневий теґ: <emphasis
+>&lt;data&gt;</emphasis
+> без жодних атрибутів. Всередині цього теґу має бути один з таких теґів:</para>
+      <!-- TODO markup, though better than nothing this way-->
+      <variablelist>
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;primitive&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Для створення елементарних типів даних, наприклад <emphasis
+>int</emphasis
+> або <emphasis
+>float</emphasis
+>. Цей теґ не містить підтеґів і може мати такі атрибути:</para>
+              <variablelist>
+                <varlistentry>
+                <term
+><emphasis role="bold"
+>type</emphasis
+></term>
+                <listitem>
+                  <para
+>Тип цього елементарного типу. Має бути одним з таких значень:</para>
+                  <itemizedlist>
+                    <listitem
+><para
+><emphasis
+>char</emphasis
+> для 8-бітових символів ASCII</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>int8, int16, int32, int64</emphasis
+> для цілих значень відповідного розміру зі знаком</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>uint8, uint16, uint32, uint64</emphasis
+> для додатних цілих чисел відповідного розміру</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>bool8, bool16, bool32, bool64</emphasis
+> для додатних булевих значень (0 = false, всі інші значення = true) відповідного розміру</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>float</emphasis
+> для 32-бітових дійсних значень стандарту IEEE754</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>double</emphasis
+> для 64-бітових дійсних значень стандарту IEEE754</para
+></listitem>
+                  </itemizedlist>
+                </listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;bitfield&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Для створення бітового поля. Цей елемент не містить піделементів і може мати такі атрибути:</para>
+              <variablelist>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>width</emphasis
+></term>
+                  <listitem
+><para
+>Кількість бітів, використаних відповідним бітовим полем. Повинен мати значення від 1 до 64.</para
+></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>type</emphasis
+></term>
+                  <listitem>
+                    <para
+>Тип бітового поля. Має бути одним з таких записів:</para>
+                    <itemizedlist>
+                      <listitem
+><para
+><emphasis
+>unsigned</emphasis
+> для бітових полів, значення яких слід вважати додатним (зі значенням у діапазоні від 0 до 2<superscript
+>width</superscript
+> - 1)</para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>signed</emphasis
+> для бітових полів, значення яких слід вважати значенням зі знаком (зі значенням від -2<superscript
+>width - 1</superscript
+> до 2<superscript
+>width - 1</superscript
+> - 1)</para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>bool</emphasis
+> для бітових полів з булевим значенням</para
+></listitem>
+                  </itemizedlist>
+                  <note
+><para
+>Не забувайте додавати символи розриву рядка після <emphasis
+>&lt;bitfield&gt;</emphasis
+>, інакше наступний елемент (окрім рядків та масивів, там розрив буде додано автоматично) розпочнеться посередині байта. Звичайно ж, додавання розривів непотрібне, якщо саме така поведінка і є бажаною.</para
+></note>
+                  </listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;enum&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Для створення елементарного типу, значення якого буде, якщо це можливо, показано як нумерований список. Для цього теґу не передбачено підтеґів (але вам потрібен буде теґ <emphasis
+>&lt;enumDef&gt;</emphasis
+> у файлі для посилання). Має такі атрибути:</para>
+              <variablelist>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>enum</emphasis
+></term>
+                  <listitem
+><para
+>Нумерований список — основа цього значення. Маж збігатися зі значенням <emphasis
+>name</emphasis
+> одного з теґів <emphasis
+>&lt;enumDef&gt;</emphasis
+> у цьому файлі.</para
+></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>type</emphasis
+></term>
+                  <listitem>
+                    <para
+>Тип цього нумерованого списку. Див. атрибут type <emphasis
+>&lt;primitive&gt;</emphasis
+>. Єдиною відмінністю є те, що значення <emphasis
+>Double</emphasis
+> і <emphasis
+>Float</emphasis
+> у цьому випадку позбавлені сенсу.</para>
+                  </listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
+          </varlistentry>
+
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;flags&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Те саме, що і <emphasis
+>&lt;enum&gt;</emphasis
+>, єдиною відмінністю є те, що значення представлено як <emphasis
+>побітове «або»</emphasis
+> для всіх значень нумерованого списку.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;struct&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Для створення структури. Всі інші теґи (зокрема <emphasis
+>&lt;struct&gt;</emphasis
+>) можуть бути дочірніми теґами такої структури, отже будуть частиною отриманої структури.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;union&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Для створення об’єднання. В основному, те саме, що і <emphasis
+>&lt;struct&gt;</emphasis
+>, окрім того, що всі дочірні елементи будуть починатися з однаковим відступом. Корисно для представлення однієї послідовності байтів у різний спосіб.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;array&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Для створення масиву. У цього теґу має бути один і лише один дочірній теґ (тип елемента масиву), який може визначати будь-який теґ, навіть теґ <emphasis
+>&lt;array&gt;</emphasis
+>. Також має такі атрибути:</para>
+              <variablelist>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>length</emphasis
+></term>
+                  <listitem
+><para
+>Кількість елементів у цьому масиві у форматі десяткового числа. Крім того, може мати значення, яке збігається з назвою атрибута попередньо визначеного теґу <emphasis
+>&lt;primitive&gt;</emphasis
+>, <emphasis
+>&lt;enum&gt;</emphasis
+> або <emphasis
+>&lt;flags&gt;</emphasis
+>. У такому разі значенням length вважатиметься значення відповідного теґу. У поточній версії значення обмежено числом 10000, оскільки більші значення призводять до надмірного споживання пам’яті і значно уповільнюють роботу програми. </para
+></listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;string&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Для створення рядка у певному кодуванні. З атипових значень буде визначено рядок у стилі C, що завершується символом <emphasis
+>NULL</emphasis
+>. Інші типи рядків може бути створено за допомогою таких атрибутів:</para>
+              <variablelist>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>terminatedBy</emphasis
+></term>
+                  <listitem
+><para
+>Це атрибут визначає символ unicode, яким має завершуватися рядок. Символ слід вказувати у форматі шістнадцяткового номер у таблиці (з можливим додаванням префікса <emphasis
+>0x</emphasis
+>). Якщо встановлено кодування ASCII, можна використовувати лише значення до 0x7f. Якщо не встановлено ні цього атрибута, ні атрибутів <emphasis
+>maxCharCount</emphasis
+> і <emphasis
+>maxByteCount</emphasis
+>, вважатиметься, що значенням є 0 (рядок у стилі C). </para
+></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>maxCharCount</emphasis
+></term>
+                  <listitem
+><para
+>Максимальна кількість символів у рядку. Якщо встановлено також атрибут <emphasis
+>terminatedBy</emphasis
+>, рядок буде обірвано за виконання будь-якої з умов. Не можна визначати разом з атрибутом <emphasis
+>maxByteCount</emphasis
+>.</para
+></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>maxByteCount</emphasis
+></term>
+                  <listitem
+><para
+>Максимальна кількість байтів у рядку. Якщо встановлено також атрибут <emphasis
+>terminatedBy</emphasis
+>, рядок буде обірвано за виконання будь-якої з умов. Не можна визначати разом з атрибутом <emphasis
+>maxCharCount</emphasis
+>. Для кодувань, подібних до <emphasis
+>ASCII</emphasis
+>, збігається з <emphasis
+>maxCharCount</emphasis
+>.</para
+></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>type</emphasis
+></term>
+                  <listitem
+><para
+>Кодування цього рядка. Може приймати такі значення:</para>
+                    <itemizedlist>
+                      <listitem
+><para
+><emphasis
+>ASCII</emphasis
+></para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>LATIN-1</emphasis
+></para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>UTF-8</emphasis
+></para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>UTF-16-LE</emphasis
+> або <emphasis
+>UTF-16-BE</emphasis
+>. Якщо не вказано суфікса <emphasis
+>-LE</emphasis
+> або <emphasis
+>-BE</emphasis
+>, вважатиметься, що кодуванням є <emphasis
+>-LE</emphasis
+> (little endian). </para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>UTF-32-LE</emphasis
+> або <emphasis
+>UTF-32-BE</emphasis
+>. Якщо не вказано суфікса <emphasis
+>-LE</emphasis
+> або <emphasis
+>-BE</emphasis
+>, вважатиметься, що кодуванням є <emphasis
+>-LE</emphasis
+> (little endian). </para
+></listitem>
+                    </itemizedlist>
+                  </listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
+          </varlistentry>
+      </variablelist>
+      <para
+>Кожен з елементів містить атрибут <emphasis
+>name</emphasis
+>, значення якого буде показано на панелі перегляду структури. </para>
+    </sect2>
+
+    <sect2>
+      <title
+>Зразок визначення структури мовами &XML; і JavaScript</title>
+      <note
+><para
+>Новіші, але трохи неповні настанови щодо створення визначень структур можна знайти у <ulink url="https://userbase.kde.org/Okteta/Writing_structure_definitions"
+>вікі користувачів KDE</ulink
+>. </para
+></note>
+
+      <sect3>
+        <title
+>Типовий крок, який буде спільним для обох підходів:</title>
+        <para
+>Наш файл метаданих буде таким: <screen>
+        [Desktop Entry]
+        Icon=arrow-up<co id="icon" />
+        Type=Service
+        ServiceTypes=KPluginInfo
+
+        Name=Simple test structure
+        Comment=A very simple test structure containing only two items
+
+        X-KDE-PluginInfo-Author=Alex Richardson
+        X-KDE-PluginInfo-Email=foo.bar@email.org
+        X-KDE-PluginInfo-Name=simplestruct
+        X-KDE-PluginInfo-Version=1.0
+        X-KDE-PluginInfo-Website=https://www.plugin.org/
+        X-KDE-PluginInfo-Category=structure
+        X-KDE-PluginInfo-License=LGPL
+        X-KDE-PluginInfo-EnabledByDefault=false
+        </screen
+> <calloutlist
+> <callout arearefs="icon"
+> <para
+>Піктограма, яку буде показано &okteta; для відповідного пункту структури. Можна вказати будь-яку піктограму, яку можна знайти у вікні, яке відкриває команда <userinput
+><command
+>kdialog</command
+> <option
+>--geticon</option
+></userinput
+>, або адресу файла піктограми</para
+> </callout
+> </calloutlist
+> Призначення полів має бути очевидним, окрім поля <literal
+>X-KDE-PluginInfo-Name</literal
+>. Значення у цьому полі має збігатися з назвою каталогу, у якому зберігається файл, а також назвою файла <literal role="extension"
+>.desktop</literal
+>. Під час створення структури &XML; назва файла <literal role="extension"
+>.osd</literal
+> також має збігатися з вказаною назвою. </para>
+
+        <para
+>У нашому прикладі ми маємо каталог з назвою <filename
+>simplestruct</filename
+>, у якому зберігаються файл <filename
+>simplestruct.desktop</filename
+>. Якщо структура визначається у форматі &XML;, у каталозі також має зберігатися файл з назвою <filename
+>simplestruct.osd</filename
+>. Якщо використано підхід з визначенням JavaScript, матимемо файл з назвою <filename
+>main.js</filename
+>.</para>
+      </sect3>
+      <sect3>
+        <title
+>Просте визначення структури у форматі &XML;</title>
+        <para
+>Для початку ми створимо визначення дуже простої структури, що міститиме лише прості типи даних (один символ і одне 32-бітове ціле число (int)). Цю структуру можна записати мовою C/C++ так: <screen>
+          struct simple {
+            char aChar;
+            int anInt;
+            bool bitFlag :1;
+            unsigned padding :7;
+          };
+          </screen
+> Першим кроком буде створення файла <literal role="extension"
+>.osd</literal
+>, який ми назвемо <filename
+>simplestruct.osd</filename
+>: <screen
+><markup>
+          &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+          &lt;data&gt;
+            &lt;struct name="simple"&gt;
+              &lt;primitive name="aChar" type="Char"/&gt;
+              &lt;primitive name="anInt" type="Int32"/&gt;
+              &lt;bitfield name="bitFlag" type="bool" width="1"/&gt;
+              &lt;bitfield name="padding" type="unsigned" width="7"/&gt;
+            &lt;/struct&gt;
+          &lt;/data&gt;
+          </markup
+></screen
+> Цей файл дуже подібний до визначення структури у C/C++. </para>
+          <para
+>Тепер створимо підкаталог <filename class="directory"
+>simplestruct</filename
+> у каталозі встановлення структури (див. встановлення визначення структури вручну) і скопіюємо два файли до цього каталогу. Тепер можна перезапустити &okteta; і спробувати скористатися новою структурою.</para>
+      </sect3>
+      <sect3>
+        <title
+>Проста структура мовою JavaScript</title>
+        <para
+>Щоб реалізувати наведену вище структуру мовою JavaScript, створіть файл з назвою <filename
+>main.js</filename
+> замість <filename
+>simplestruct.osd</filename
+>, і замініть X-KDE-PluginInfo-Category=structure на X-KDE-PluginInfo-Category=structure/js. У файлі мають міститися такі рядки: <screen>
+        function init() {
+          var structure = struct({
+            aChar : char(),
+            anInt : int32(),
+            bitFlag : bitfield("bool", 1),
+            padding : bitfield("unsigned", 7),
+          })
+          return structure;
+        }
+        </screen
+> Структура, показана у вікні &okteta;, це завжди значення, яке повертає функція <literal
+>init</literal
+>.</para>
+        <para
+>Для створення типу елемента може бути викликано такі функції: <itemizedlist
+> <listitem
+><para
+>char()</para
+></listitem
+> <listitem
+><para
+>int8(), int16(), int32() or int64()</para
+></listitem
+> <listitem
+><para
+>uint8(), uint16(), uint32() or uint64()</para
+></listitem
+> <listitem
+><para
+>bool8(), bool16(), bool32() or bool64()</para
+></listitem
+> <listitem
+><para
+>float()</para
+></listitem
+> <listitem
+><para
+>double()</para
+></listitem
+> </itemizedlist
+> Функція bitfield отримує два параметри. Першим є рядок <literal
+>bool</literal
+>, <literal
+>signed</literal
+> або <literal
+>unsigned</literal
+>. Другим параметром є ціле число, яке встановлює розмір типу у бітах. </para>
+      </sect3>
+      <sect3>
+        <title
+>Складніші структури</title>
+        <para
+>Тепер ми створимо визначення складнішої структури, яке назвемо «complex» і збережемо у файлі з назвою <filename
+>complex.osd</filename
+>. Ця структура міститиме два масиви (один фіксованої довжини і один, у якому довжина визначатиметься під час роботи програми), а також вкладену структуру і об’єднання (union). <screen
+><markup>
+          &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+          &lt;data&gt;
+            &lt;struct name="complex"&gt;
+              &lt;primitive name="size" type="UInt8" /&gt;
+              &lt;union name="aUnion"&gt;
+                &lt;array name="fourBytes" length="4"&gt;
+                  &lt;primitive type="Int8" /&gt;
+                &lt;/array&gt;
+              &lt;/union&gt;
+              &lt;struct name="nested"&gt;
+                &lt;array name="string" length="size"&gt; &lt;!-- references the field size above --&gt;
+                  &lt;primitive type="Char" /&gt;
+                &lt;/array&gt;
+              &lt;/struct&gt;
+            &lt;/struct&gt;
+          &lt;/data&gt;
+          </markup
+></screen
+> Така структура формально визначається у C/C++ так: <screen
+>struct complex {
+            uint8_t size;
+            union aUnion {
+              int8_t fourBytes[4];
+            };
+            struct nested {
+              char string[size] //не відповідає стандартам C++, посилається на значення розмірності uint8
+            };
+          };
+          </screen>
+          </para>
+          <note
+><para
+>Очевидно, поля посилань на масиви змінної (динамічної) довжини слід вказувати до самого масиву.</para
+></note>
+          <para
+>Далі, ми створимо файл <filename
+>complex.desktop</filename
+>, як і у попередньому прикладі (переконайтеся, що значення <literal
+>X-KDE-PluginInfo-Name</literal
+> змінено відповідним чином), та повторимо дії зі встановлення визначення структури.</para>
+      </sect3>
+      <sect3>
+        <title
+>Докладніші відомості</title>
+        <para
+>Декілька прикладів визначень структур можна знайти <ulink url="https://commits.kde.org/okteta?path=kasten/controllers/view/structures/examples/okteta/structures/"
+>тут</ulink
+>. Серед цих прикладів є файл заголовка для файлів PNG і заголовка файла ELF. Схема &XML;, яка описує структуру файла <literal role="extension"
+>.osd</literal
+>, зберігається <ulink url="https://commits.kde.org/okteta?path=kasten/controllers/view/structures/schema/"
+>тут</ulink
+>. Якщо вам потрібні якісь додаткові відомості, зверніться до автора за адресою &Alex.Richardson.email; </para>
+      </sect3>
+    </sect2>
+<!--FIXME missing
+Extended structures definitions
+Structures Script Console-->
+</sect1>
+</chapter>
+
+<chapter id="interface-overview">
+<title
+>Огляд інтерфейсу</title>
+
+<sect1 id="menu-commands">
+<title
+>Пункти меню</title>
+
+<para
+>Окрім типових для &kde; пунктів меню, описаних у <ulink url="help:/fundamentals/ui.html#menus"
+>розділі щодо меню</ulink
+> підручника з основ роботи у &kde;, у &okteta; передбачено такі додаткові пункти: </para>
+
+<sect2 id="file-menu">
+<title
+>Меню «Файл»</title>
+
+<variablelist>
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Файл</guimenu
+> <guimenuitem
+>Створити</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Створити масив байтів...</action
+></para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>Порожній</guimenuitem
+>: ...як порожній.</para>
+    </listitem>
+    <listitem
+><para
+><guimenuitem
+>З буфера обміну даними</guimenuitem
+>: ...як поточний вміст буфера обміну даними.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Шаблон...</guimenuitem
+>: ...за вказаним шаблоном.</para>
+    </listitem>
+    <listitem
+><para
+><guimenuitem
+>Випадкові дані</guimenuitem
+>: ...заповненим випадковими даними.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Послідовність</guimenuitem
+>: ...з усіма байтами від 0 до 255.</para
+></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Файл</guimenu
+> <guisubmenu
+>Експортувати</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+>Експортувати позначені байти до файла так, щоб їх було...</para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>Значення</guimenuitem
+>: ...закодовано як байтові значення. Типово значення буде відокремлено одним символом пробілу. Символи <guilabel
+>Відокремлення</guilabel
+> можна змінити за допомогою діалогового вікна <guilabel
+>Експортувати</guilabel
+>. </para>
+    </listitem>
+    <listitem
+><para
+><guimenuitem
+>Символи</guimenuitem
+>: ...закодовано як звичайний текст. </para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Base64</guimenuitem
+>: ...закодовано у форматі <ulink url="https://en.wikipedia.org/wiki/Base64"
+>Base64</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Base32</guimenuitem
+>: ...закодовано у форматі <ulink url="https://en.wikipedia.org/wiki/Base32"
+>Base32</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Ascii85</guimenuitem
+>: ...закодовано у форматі <ulink url="https://en.wikipedia.org/wiki/Ascii85"
+>Ascii85</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Uuencoding</guimenuitem
+>: ...закодовано у форматі <ulink url="https://en.wikipedia.org/wiki/Uuencoding"
+>Uuencoding</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Xxencoding</guimenuitem
+>: ...закодовано у форматі <ulink url="https://en.wikipedia.org/wiki/Xxencoding"
+>Xxencoding</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Intel Hex</guimenuitem
+>: ...закодовано у форматі <ulink url="https://en.wikipedia.org/wiki/Intel_Hex"
+>Intel Hex</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>S-Record</guimenuitem
+>: ...закодовано у форматі <ulink url="https://en.wikipedia.org/wiki/S-record"
+>S-Record</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Масив C</guimenuitem
+>: ...у вигляді масиву, що використовується у мові програмування C.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Переглянути як звичайний текст</guimenuitem
+>: ...як у перегляді даних з відступом, значення байтів і символи. </para
+></listitem>
+    </itemizedlist>
+    </listitem>
+
+</varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Файл</guimenu
+> <guisubmenu
+>Дозволи</guisubmenu
+><guimenuitem
+>Лише для читання</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+>Встановлення такого дозволу забороняє вносити зміни до завантаженого масиву байтів.</para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Файл</guimenu
+> <guimenuitem
+>Закрити всі інші</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Закрити всі масиви байтів, окрім поточного.</action
+></para
+></listitem>
+    </varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="edit-menu">
+<title
+>Меню «Зміни»</title>
+<variablelist>
+<para
+>Просте копіювання і вирізання надсилає дані до буфера з типом MIME "application/octetstream". &klipper; не зможе показати ці дані. Майже всі інші програми також не зможуть цього зробити, оскільки це прості необроблені дані. Отже, вам слід скористатися підменю <guisubmenu
+>Копіювати як</guisubmenu
+>.</para>
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Зміни</guimenu
+> <guisubmenu
+>Копіювати як</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+>Скопіювати позначені байти у одному з форматів до буфера обміну даними. Перелік доступних форматів наведено у описі пункту меню <menuchoice
+><guimenu
+>Файл</guimenu
+> <guisubmenu
+>Експортувати</guisubmenu
+></menuchoice
+> </para>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Зміни</guimenu
+> <guisubmenu
+>Вставити</guisubmenu
+> </menuchoice
+></term>
+    <listitem>
+    <variablelist>
+    <varlistentry>
+    <term
+><menuchoice>
+    <guimenuitem
+>Вставити шаблон...</guimenuitem>
+    </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Вставляє вказаний рядок байтів за розташування курсора.</action
+></para>
+    <para
+>Параметри діалогового вікна нададуть вам змогу вказати кількість вставлень шаблону і його формат (шістнадцятковий, десятковий, вісімковий, двійковий, символи або UTF-8).</para>
+    <!--FIXME Random Data + Sequence - use cases?-->
+    </listitem>
+    </varlistentry>
+    </variablelist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>A</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Зміни</guimenu
+> <guimenuitem
+>Скасувати вибір</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Скасувати поточний вибір.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Зміни</guimenu
+> <guimenuitem
+>Вибрати діапазон…</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Відкрити вбудоване діалогове вікно для введення діапазону позначення.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+><keycap
+>Ins</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Зміни</guimenu
+> <guimenuitem
+>Режим перезапису</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Перемикає режим редагування з режиму вставки на режим перезапису</action
+>. </para>
+    <note
+><para
+>Режим перезапису реалізовано у дуже строгому варіанті: не можна змінювати розмір даних (додавати або вилучати байти).</para
+></note>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>F</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Зміни</guimenu
+> <guimenuitem
+>Пошук...</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Шукає вказаний шаблон у документі.</action
+> Можна шукати шістнадцяткові, десяткові, вісімкові, двійкові, двійкові або текстові шаблони.</para>
+    <para
+>Параметри відповідного діалогового вікна нададуть вам змогу вказати початкову точку, напрям і діапазон пошуку.</para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>G</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Зміни</guimenu
+> <guimenuitem
+>Зсув переходу...</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Пересуває курсор до вказаного зсуву у байтах.</action
+></para
+></listitem>
+    </varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="view-menu">
+<title
+>Меню «Перегляд»</title>
+
+<variablelist>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycap
+>F11</keycap
+> </shortcut
+> <guimenu
+>Перегляд</guimenu
+> <guimenuitem
+>Показати відступ рядка</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Вмикає або вимикає показ зсуву рядка на панелі, розташованій ліворуч.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Перегляд</guimenu
+> <guisubmenu
+>Показувати значення або символи</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+>Цей пункт надає вам змогу <action
+>обрати, які інтерпретації байтів буде показано.</action
+> Можливі варіанти:</para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>Значення</guimenuitem
+></para>
+    </listitem>
+    <listitem
+><para
+><guimenuitem
+>Символи</guimenuitem
+></para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Значення і символи</guimenuitem
+></para
+></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Перегляд</guimenu
+> <guisubmenu
+>Кодування значення</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Надає змогу обрати кодування значень</action
+> з таких варіантів:</para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>шістнадцяткове</guimenuitem
+></para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>десяткове</guimenuitem
+></para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>вісімкове</guimenuitem
+></para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>двійкове</guimenuitem
+></para
+></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Перегляд</guimenu
+> <guisubmenu
+>Кодування символів</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+>За допомогою цього підменю ви можете <action
+>обрати кодування символів</action
+>. </para>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Перегляд</guimenu
+> <guimenuitem
+>Показувати недруковані символи</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Вмикає або вимикає показ недрукованих символів.</action
+> Якщо показ вимкнено, на відповідних місцях у стовпчику символів замість недрукованих символів буде показано символ-замінник.</para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Перегляд</guimenu
+> <guisubmenu
+>Встановити кількість байтів на рядок</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Вибрати кількість показаних у рядку байтів</action
+>. Типово буде показано 16 байтів. </para>
+    </listitem>
+    </varlistentry>
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Перегляд</guimenu
+> <guisubmenu
+>Встановити кількість байтів на групу</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Типово шістнадцяткові значення буде показано групами по 4 байти.</action
+> За допомогою цього пункту меню ви можете скоригувати параметри показу. </para>
+    </listitem>
+    </varlistentry>
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Перегляд</guimenu
+> <guisubmenu
+>Динамічне компонування</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Встановлює правила компонування показу даних.</action
+> Тут можна визначити скільки байтів буде показано у рядку, залежно від ширини області перегляду. Можливі такі правила:</para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>Вимкнути</guimenuitem
+>: буде зафіксовано поточну кількість байтів на рядок, яке не змінюватиметься після зміни розмірів області перегляду.</para>
+    </listitem>
+    <listitem
+><para
+><guimenuitem
+>Переносити лише повні групи байтів</guimenuitem
+>: вивести найбільшу можливу кількість байтів у рядку, але число байтів у групі має бути цілим. </para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Увімкнути</guimenuitem
+>: те саме, що і попередній пункт, але дозволяє використання груп байтів з нецілого числа байтів.</para
+></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Перегляд</guimenu
+> <guisubmenu
+>Режим перегляду</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Надає змогу обрати компонування перегляду</action
+> з таких варіантів:</para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>Стовпчики</guimenuitem
+>: інтерпретацію значень і символів буде показано у класичному компонуванні: кожен список у окремому стовпчику.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Рядки</guimenuitem
+>: символьне тлумачення байта буде показано безпосередньо під інтерпретацією у вигляді значення.</para
+></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>T</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Зміни</guimenu
+> <guimenuitem
+>Розділити горизонтально</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Розділити область поточного фокусованого перегляду на дві частини і додати копію поточної області до нової, розташованої нижче, області.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>L</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Зміни</guimenu
+> <guimenuitem
+>Розділити вертикально</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Розділити область поточного фокусованого перегляду на дві частини і додати копію поточної області до нової, розташованої праворуч, області.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>R</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Перегляд</guimenu
+> <guimenuitem
+>Закрити область перегляду</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Закрити поточну фокусовану область перегляду.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Перегляд</guimenu
+> <guimenuitem
+>Профіль перегляду</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+>Параметри перегляду можна зберігати у профілях перегляду. Оновити поточний вибраний профіль можна безпосередньо за допомогою параметрів поточного перегляду або за допомогою створення нового профілю на основі поточного. Керувати профілями перегляду можна за допомогою діалогового вікна, яке відкривається пунктом меню <menuchoice
+><guimenu
+>Параметри</guimenu
+><guimenuitem
+>Керування профілями перегляду...</guimenuitem
+></menuchoice
+>.</para
+></listitem>
+    </varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<sect2 id="windows-menu">
+<title
+>Меню <guimenu
+>Вікна</guimenu
+></title>
+
+    <para
+>У цьому меню буде показано список поточних областей перегляду. Тут можна обрати активне вікно.</para>
+
+</sect2>
+
+<sect2 id="bookmarks-menu">
+<title
+>Меню <guimenu
+>Закладки</guimenu
+></title>
+
+    <para
+>У одному масиві байтів можна встановити декілька закладок. Кожен масив байтів має свій набір закладок, список відповідних закладок буде показано внизу меню <guimenu
+>Закладки</guimenu
+>. Щоб пересунути курсор до закладки і переглянути байти за нею, оберіть відповідну закладку у цьому меню. <note
+><para
+>У поточній версії програми закладки є лише тимчасовими, програма не зберігає їх розташування під час закриття масиву байтів або завершення роботи самої програми.</para
+></note
+></para>
+
+<variablelist>
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>B</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Закладки</guimenu
+> <guimenuitem
+>Додати закладку</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+>Позначити місце у масиві байтів закладкою.</para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>B</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Закладки</guimenu
+> <guimenuitem
+>Вилучити закладку</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Вилучає поточну закладку.</action
+> Доступ до цієї команди можна отримати, лише якщо курсор знаходиться у місці, на яке встановлено закладку.</para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Закладки</guimenu
+> <guimenuitem
+>Вилучити всі закладки</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Спорожнює список закладок.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Alt;<keycap
+>Up</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Закладки</guimenu
+> <guimenuitem
+>Перейти до попередньої закладки</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Пересуває курсор до попередньої закладки.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Alt;<keycap
+>Down</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Закладки</guimenu
+> <guimenuitem
+>Перейти до наступної закладки</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Пересуває курсор до наступної закладки.</action
+></para
+></listitem>
+    </varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<sect2 id="tools-menu">
+<title
+>Меню «Інструменти»</title>
+
+<para
+>Показує список встановлених інструментів. У цьому списку можна увімкнути або вимкнути показ будь-якого з цих інструментів. Докладний опис всіх інструментів наведено у розділі <link linkend="tools"
+>Інструменти</link
+>.</para>
+
+</sect2>
+
+<sect2 id="settings-menu">
+<title
+>Меню «Параметри»</title>
+<variablelist>
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Параметри</guimenu
+> <guimenuitem
+>Керування профілями перегляду...</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+>Відкрити діалогове вікно для створення, редагування, вилучення та встановлення типового профілю перегляду.</para
+></listitem>
+    </varlistentry>
+</variablelist>
+
+</sect2>
+
+</sect1>
+
+</chapter>
+
+<chapter id="credits">
+    <title
+>Подяки і ліцензія</title>
+
+    <para
+>&okteta; </para>
+
+    <!--List all the copyright holders here-->
+    <para
+>Авторські права на програму належать &Friedrich.Kossebau; &Friedrich.Kossebau.email;, 2006–2012</para>
+
+    <para
+>Авторські права на документацію належать &Friedrich.Kossebau; &Friedrich.Kossebau.email;, &Alex.Richardson; &Alex.Richardson.email;, 2008, 2010</para>
+
+    <para
+>Переклад українською: Юрій Чорноіван <email
+>yurchor@ukr.net</email
+></para
+> 
+&underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-omittag:t
+sgml-shorttag:t
+sgml-namecase-general:t
+sgml-always-quote-attributes:t
+sgml-indent-step:0
+sgml-indent-data:nil
+sgml-parent-document:nil
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+-->

@@ -1,0 +1,186 @@
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: khexedit2part\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-01-02 09:07+0100\n"
+"PO-Revision-Date: 2005-03-24 01:03-0800\n"
+"Last-Translator: Tamil PC <tamilpc@ambalam.com>\n"
+"Language-Team: KDE <kde-i18n-doc@kde.org>\n"
+"Language: ta\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "tamilpcteam"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "jayalakshmibalaji@hotmail.com"
+
+#. i18n: ectx: Menu (file)
+#: oktetapartbrowserui.rc:5 oktetapartreadonlyui.rc:5
+#: oktetapartreadwriteui.rc:5
+#, kde-format
+msgid "&File"
+msgstr ""
+
+#. i18n: ectx: Menu (edit)
+#: oktetapartbrowserui.rc:8 oktetapartreadonlyui.rc:10
+#: oktetapartreadwriteui.rc:16
+#, kde-format
+msgid "&Edit"
+msgstr ""
+
+#. i18n: ectx: Menu (view)
+#: oktetapartbrowserui.rc:21 oktetapartreadonlyui.rc:26
+#: oktetapartreadwriteui.rc:39
+#, kde-format
+msgid "&View"
+msgstr ""
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: oktetapartbrowserui.rc:43 oktetapartreadonlyui.rc:47
+#: oktetapartreadwriteui.rc:60
+#, kde-format
+msgid "Main Toolbar"
+msgstr ""
+
+#. i18n: ectx: Menu (permission)
+#: oktetapartreadwriteui.rc:11
+#, kde-format
+msgctxt "@title:menu"
+msgid "Permissions"
+msgstr ""
+
+#: partfactory.cpp:33
+#, kde-format
+msgid "OktetaPart"
+msgstr ""
+
+#: partfactory.cpp:35
+#, kde-format
+msgid "Embedded hex editor"
+msgstr "உட்பொதிந்த ஹெக்ஸ் தொகுப்பி"
+
+#: partfactory.cpp:37
+#, kde-format
+msgid "Copyright 2003-%1 Friedrich W. H. Kossebau"
+msgstr ""
+
+#: partfactory.cpp:39
+#, kde-format
+msgid "Friedrich W. H. Kossebau"
+msgstr ""
+
+#: partfactory.cpp:39
+#, kde-format
+msgid "Author"
+msgstr "ஆக்கியவர்"
+
+#, fuzzy
+#~| msgid "&Value Coding"
+#~ msgctxt "@title:menu"
+#~ msgid "&Value Coding"
+#~ msgstr "&மதிப்பு குறியிடல்"
+
+#, fuzzy
+#~| msgid "&Hexadecimal"
+#~ msgctxt ""
+#~ "@item:inmenu encoding of the bytes as values in the hexadecimal format"
+#~ msgid "&Hexadecimal"
+#~ msgstr "&அறுபக்க வடிவம்"
+
+#, fuzzy
+#~| msgid "&Decimal"
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
+#~ msgid "&Decimal"
+#~ msgstr "&பத்தின் பின்னம்"
+
+#, fuzzy
+#~| msgid "&Octal"
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
+#~ msgid "&Octal"
+#~ msgstr "&எண்மம்"
+
+#, fuzzy
+#~| msgid "&Binary"
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
+#~ msgid "&Binary"
+#~ msgstr "&இருநிலை"
+
+#, fuzzy
+#~| msgid "&Char Encoding"
+#~ msgctxt "@title:menu"
+#~ msgid "&Char Encoding"
+#~ msgstr "&எழுத்து குறியிடல்"
+
+#, fuzzy
+#~| msgid "Show &Unprintable Chars (<32)"
+#~ msgctxt "@option:check"
+#~ msgid "Show &Non-printing Chars"
+#~ msgstr "&அச்சிடமுடியாத எழுத்துகளை காட்டு (<32)"
+
+#, fuzzy
+#~| msgid "&Line Offset"
+#~ msgctxt "@option:check"
+#~ msgid "&Line Offset"
+#~ msgstr "&வரி ஆஃப்செட்"
+
+#, fuzzy
+#~| msgid "&Values Column"
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Values"
+#~ msgstr "&மதிப்புகள் நெடுவரிசை"
+
+#, fuzzy
+#~| msgid "&Chars Column"
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Chars"
+#~ msgstr "&எழுத்துகள் நெடுவரிசை"
+
+#, fuzzy
+#~| msgid "&Resize Style"
+#~ msgctxt "@title:menu"
+#~ msgid "&Resize Style"
+#~ msgstr "&பாணியை மறுஅளவாக்கு"
+
+#, fuzzy
+#~| msgid "&No Resize"
+#~ msgctxt "@item:inmenu"
+#~ msgid "&No Resize"
+#~ msgstr "&மறுஅளவாக்கம் இல்லை"
+
+#, fuzzy
+#~| msgid "&Lock Groups"
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Lock Groups"
+#~ msgstr "&குழுக்களை பூட்டு"
+
+#, fuzzy
+#~| msgid "&Full Size Usage"
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Full Size Usage"
+#~ msgstr "&முழு அளவு பயன்பாடு"
+
+#, fuzzy
+#~| msgid "&Columns"
+#~ msgctxt "@title:menu"
+#~ msgid "&Columns"
+#~ msgstr "நெடுவரிசைகள்"
+
+#, fuzzy
+#~| msgid "&Both Columns"
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Both Columns"
+#~ msgstr "&இரண்டு நெடுவரிசைகள்"
+
+#~ msgid "KHexEdit2Part"
+#~ msgstr "KHexEdit2Part"

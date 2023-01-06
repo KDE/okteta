@@ -1,0 +1,187 @@
+# Malay translation
+# MIMOS Open Source <opensource@mimos.my>, 2005.
+#
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Mimos\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-01-02 09:07+0100\n"
+"PO-Revision-Date: 2005-11-17 09:34+0800\n"
+"Last-Translator: junetazawawi <junetazawawi@yahoo.com>\n"
+"Language-Team: Malay <kedidiemas@yahoogroups.com>\n"
+"Language: ms\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=1;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "MIMOS"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "opensource@mimos.my"
+
+#. i18n: ectx: Menu (file)
+#: oktetapartbrowserui.rc:5 oktetapartreadonlyui.rc:5
+#: oktetapartreadwriteui.rc:5
+#, kde-format
+msgid "&File"
+msgstr ""
+
+#. i18n: ectx: Menu (edit)
+#: oktetapartbrowserui.rc:8 oktetapartreadonlyui.rc:10
+#: oktetapartreadwriteui.rc:16
+#, kde-format
+msgid "&Edit"
+msgstr ""
+
+#. i18n: ectx: Menu (view)
+#: oktetapartbrowserui.rc:21 oktetapartreadonlyui.rc:26
+#: oktetapartreadwriteui.rc:39
+#, kde-format
+msgid "&View"
+msgstr ""
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: oktetapartbrowserui.rc:43 oktetapartreadonlyui.rc:47
+#: oktetapartreadwriteui.rc:60
+#, kde-format
+msgid "Main Toolbar"
+msgstr ""
+
+#. i18n: ectx: Menu (permission)
+#: oktetapartreadwriteui.rc:11
+#, kde-format
+msgctxt "@title:menu"
+msgid "Permissions"
+msgstr ""
+
+#: partfactory.cpp:33
+#, kde-format
+msgid "OktetaPart"
+msgstr ""
+
+#: partfactory.cpp:35
+#, kde-format
+msgid "Embedded hex editor"
+msgstr "Pengarang heks terbenam"
+
+#: partfactory.cpp:37
+#, kde-format
+msgid "Copyright 2003-%1 Friedrich W. H. Kossebau"
+msgstr ""
+
+#: partfactory.cpp:39
+#, kde-format
+msgid "Friedrich W. H. Kossebau"
+msgstr ""
+
+#: partfactory.cpp:39
+#, kde-format
+msgid "Author"
+msgstr "Pengarang"
+
+#, fuzzy
+#~| msgid "&Value Coding"
+#~ msgctxt "@title:menu"
+#~ msgid "&Value Coding"
+#~ msgstr "Pengekodan &Nilai"
+
+#, fuzzy
+#~| msgid "&Hexadecimal"
+#~ msgctxt ""
+#~ "@item:inmenu encoding of the bytes as values in the hexadecimal format"
+#~ msgid "&Hexadecimal"
+#~ msgstr "&Perenambelasan"
+
+#, fuzzy
+#~| msgid "&Decimal"
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
+#~ msgid "&Decimal"
+#~ msgstr "&Perpuluhan"
+
+#, fuzzy
+#~| msgid "&Octal"
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
+#~ msgid "&Octal"
+#~ msgstr "&Perlapanan"
+
+#, fuzzy
+#~| msgid "&Binary"
+#~ msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
+#~ msgid "&Binary"
+#~ msgstr "&Perduaan"
+
+#, fuzzy
+#~| msgid "&Char Encoding"
+#~ msgctxt "@title:menu"
+#~ msgid "&Char Encoding"
+#~ msgstr "Pengekodan &Aksara"
+
+#, fuzzy
+#~| msgid "Show &Unprintable Chars (<32)"
+#~ msgctxt "@option:check"
+#~ msgid "Show &Non-printing Chars"
+#~ msgstr "Papar Aksara &Tak Boleh Cetak (<32)"
+
+#, fuzzy
+#~| msgid "&Line Offset"
+#~ msgctxt "@option:check"
+#~ msgid "&Line Offset"
+#~ msgstr "Ofset &Baris"
+
+#, fuzzy
+#~| msgid "&Values Column"
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Values"
+#~ msgstr "Lajur &Nilai"
+
+#, fuzzy
+#~| msgid "&Chars Column"
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Chars"
+#~ msgstr "Lajur &Aksara"
+
+#, fuzzy
+#~| msgid "&Resize Style"
+#~ msgctxt "@title:menu"
+#~ msgid "&Resize Style"
+#~ msgstr "&Saizkan Semula Gaya"
+
+#, fuzzy
+#~| msgid "&No Resize"
+#~ msgctxt "@item:inmenu"
+#~ msgid "&No Resize"
+#~ msgstr "&Tiada Saiz Semula"
+
+#, fuzzy
+#~| msgid "&Lock Groups"
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Lock Groups"
+#~ msgstr "&Pasak Kumpulan"
+
+#, fuzzy
+#~| msgid "&Full Size Usage"
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Full Size Usage"
+#~ msgstr "Kegunaan Saiz &Penuh"
+
+#, fuzzy
+#~| msgid "&Columns"
+#~ msgctxt "@title:menu"
+#~ msgid "&Columns"
+#~ msgstr "&Lajur"
+
+#, fuzzy
+#~| msgid "&Both Columns"
+#~ msgctxt "@item:inmenu"
+#~ msgid "&Both Columns"
+#~ msgstr "&Kedua-dua Lajur"
+
+#~ msgid "KHexEdit2Part"
+#~ msgstr "KHexEdit2Part"

@@ -1,0 +1,2093 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY okteta "<application
+>Okteta</application
+>">
+  <!ENTITY kappname "&okteta;">
+  <!ENTITY package "kdesdk">
+  <!ENTITY Friedrich.Kossebau
+"<personname
+><firstname
+>Friedrich</firstname
+><othername
+>W. H.</othername
+><surname
+>Kossebau</surname
+></personname
+>">
+  <!ENTITY Friedrich.Kossebau.email "<email
+>kossebau@kde.org</email
+>">
+  <!ENTITY Alex.Richardson
+"<personname
+><firstname
+>Alex</firstname
+><surname
+>Richardson</surname
+></personname
+>">
+  <!ENTITY Alex.Richardson.email "<email
+>alex.richardson@gmx.de</email
+>">
+  <!ENTITY % Brazilian-Portuguese "INCLUDE">
+  <!ENTITY % addindex "IGNORE">
+]>
+
+<book id="okteta" lang="&language;">
+
+<bookinfo>
+<title
+>Manual do &okteta;</title>
+
+<authorgroup>
+    <author
+><firstname
+>Friedrich</firstname
+><othername
+>W. H.</othername
+><surname
+>Kossebau</surname
+> <affiliation
+> <address
+>&Friedrich.Kossebau.email;</address>
+      </affiliation>
+    </author>
+    <author
+><firstname
+>Alex</firstname
+><surname
+>Richardson</surname
+> <affiliation
+> <address
+>&Alex.Richardson.email;</address>
+      </affiliation>
+    </author>
+<othercredit role="translator"
+><firstname
+>Marcus</firstname
+><surname
+>Gama</surname
+><affiliation
+><address
+><email
+>marcus.gama@gmail.com</email
+></address
+></affiliation
+><contrib
+>Tradução</contrib
+></othercredit
+> 
+</authorgroup>
+
+<copyright>
+<year
+>2008, 2010, 2011</year>
+<holder
+>&Friedrich.Kossebau; e &Alex.Richardson;</holder>
+</copyright>
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>28/11/2013</date>
+<releaseinfo
+>0.12 (&kde; 4.12)</releaseinfo>
+
+<abstract>
+  <para
+>O &okteta; é um editor simples para os dados brutos dos arquivos. Este tipo de programa também é chamado de editor hexadecimal ou editor binário.</para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>&package;</keyword>
+<keyword
+>Okteta</keyword>
+<keyword
+>ver</keyword>
+<keyword
+>editar</keyword>
+<keyword
+>bits</keyword>
+<keyword
+>bytes</keyword>
+<keyword
+>executável</keyword>
+<keyword
+>octal</keyword>
+<keyword
+>hexadecimal</keyword>
+<keyword
+>editor hexadecimal</keyword>
+<keyword
+>dados brutos</keyword>
+</keywordset>
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Introdução</title>
+
+<para
+>O &okteta; é um editor simples para os dados brutos dos arquivos.</para>
+
+<para
+>Os dados são apresentados em duas variantes: como valores numéricos dos 'bytes' ou como os caracteres associados aos valores. Os valores e os caracteres poderão ser apresentados tanto em duas colunas (o modo tradicional de exibição em editores hexadecimais) quanto em colunas tendo o valor acima do caractere. A edição pode ser feita para ambos, os valores e os caracteres.</para>
+
+<para
+>Além das funcionalidades normais de edição, o &okteta; também oferece um pequeno conjunto de ferramentas, como uma decodificação da listagem em tabela para tipos de dados comuns, uma tabela que apresenta todos os 'bytes' possíveis juntamente com os seus equivalentes em valor e em caracteres, uma área de informação com estatísticas, uma calculadora de soma de verificação (checksum), uma ferramenta de filtragem e uma ferramenta de extração de texto.</para>
+
+<para
+>Todas as modificações feitas aos dados carregados poderão ser desfeitas ou refeitas sem limites.</para>
+
+</chapter>
+
+<chapter id="basics">
+<title
+>Fundamentos</title>
+
+<sect1 id="starting-basics">
+<title
+>Iniciando o &okteta;</title>
+
+    <para
+>Digite <userinput
+><command
+>okteta</command
+></userinput
+> numa linha de comando ou selecione o <guimenuitem
+>Editor Hexadecimal</guimenuitem
+> do grupo <menuchoice
+><guisubmenu
+>Aplicativos</guisubmenu
+><guisubmenu
+>Utilitários</guisubmenu
+></menuchoice
+> no lançador de aplicativos.</para>
+
+    <para
+>Estão disponíveis as opções normais do &Qt; e do &kde;, que podem ser listadas digitando <userinput
+><command
+>okteta</command
+> <option
+>--help</option
+></userinput
+>.</para>
+
+    <para
+>As opções de linha de comando para o &okteta; são:</para>
+
+    <para
+><option
+><replaceable
+>&lt;&URL;(s)&gt;</replaceable
+></option
+> - abre os arquivos com as &URL;s indicadas</para>
+
+</sect1>
+
+<sect1 id="usage-basics">
+<title
+>Uso</title>
+
+    <para
+>A janela principal do &okteta; possui os seguintes componentes: a barra do menu, a barra de ferramentas, a barra de estado, as áreas de dados separadas por páginas e uma ou mais barras laterais com as ferramentas.</para>
+
+    <para
+>Quando é aberto um arquivo ou é criada uma sequência de 'bytes', os 'bytes' nela contidos são apresentados consecutivamente em linhas, tendo cada uma um determinado número de 'bytes'. Elas são apresentadas em duas variantes: como valores numéricos dos 'bytes' ou como os caracteres associados aos valores. Os valores e os caracteres poderão tanto ser apresentados separados em duas colunas como um após o outro, tendo o valor acima do caractere. Do lado esquerdo, aparece a posição do primeiro 'byte' de cada linha.</para>
+
+    <para
+>O tratamento é semelhante ao dos editores de texto: os dados poderão ser editados, cortados, copiados, colados, arrastados e soltos, como acontece num editor de texto. Existe um cursor que marca a posição atual. Ao pressionar a tecla <keycap
+>Insert</keycap
+>, poderá alternar entre os modos de sobreposição e inserção. O modo de sobreposição é mais restrito que nos editores de texto, uma vez que não permite nenhuma operação que altere o tamanho da sequência de 'bytes'.</para>
+
+    <para
+>Ao contrário dos editores de texto, o conteúdo aparece em duas variantes. Só uma destas está ativa no que diz respeito à inserção de dados. Existem dois cursores associados, presentes para o valor e para o caractere, sendo o cursor ativo o que está intermitente. Com os caracteres ativos, caracteres poderão ser inseridos como se faz num editor de texto normal. Com os valores ativos, ao digitar um número irá aparecer um editor mínimo para inserir o resto do valor.</para>
+
+    <para
+>A janela de pesquisa permite ao usuário procurar uma sequência específica de 'bytes', definida como valores (hexadecimal, decimal, octal, binário) ou texto (no momento, na codificação de 8 'bits', ou UTF-8).</para>
+
+    <para
+>Múltiplas sequências de 'bytes' podem ser abertas ao mesmo tempo, mas somente uma poderá estar ativa. Use o menu <guimenu
+>Janelas</guimenu
+> para selecionar a sequência de 'bytes' que está ativa.</para>
+</sect1>
+
+
+</chapter>
+
+<chapter id="tools">
+  <title
+>Ferramentas</title>
+
+<!-- The tool Versions is not part of released versions,
+just used for development, so no need to document it. -->
+<!--
+4.7
+Other stuff:
+New encodings: ISO-8859-14, ISO-8859-16, Codepage 874
+File info tool now estimates the mimetype also for the unstored/edited data in the working memory
+FIXME  
+-->
+<sect1 id="tools-overview">
+
+  <title
+>Resumo</title>
+  <para
+>O &okteta; traz algumas ferramentas, algumas delas para analisar e manipular as sequências de 'bytes' e outras com fins mais gerais. Estas ferramentas poderão ser ativadas ou desativadas com o item <guimenu
+>Ferramentas</guimenu
+> do menu. Cada ferramenta tem uma área pequena que se associa a uma das barras laterais ou que flui livremente como uma janela. Você poderá acoplar, desacoplar, reorganizar e também empilhar as áreas de ferramentas com o mouse, clicando com o &LMB; na barra de título de uma área de ferramentas, movendo-o como desejar e soltando o &LMB; para completar a ação, ou, caso contrário, cancelando o movimento com a tecla &Esc;.</para>
+
+<sect2>
+  <title
+>Analisadores e Manipuladores</title>
+<variablelist>
+  <varlistentry>
+    <term
+>Tabela de valores/caracteres</term>
+    <listitem
+><para
+>A tabela apresenta todos os valores possíveis de um byte, quer na forma de caracteres ou em diferentes representações numéricas.</para>
+    <para
+>O valor selecionado poderá ser inserido na posição do cursor, repetida numa determinada quantidade de vezes. Isto poderá ser obtido usando-se o botão <guibutton
+>Inserir</guibutton
+> ou fazendo um duplo-clique na linha da tabela.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Filtro Binário</term>
+    <listitem
+><para
+>O filtro efetua operações binárias sobre os 'bytes' selecionados. Depois de selecionar a operação (E, OU, RODAR...), você poderá definir os parâmetros, se necessário, na área abaixo. O filtro é executado quando usar o botão <guibutton
+>Filtro</guibutton
+>.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Cadeias de caracteres</term>
+    <listitem
+><para
+>Esta ferramenta localiza os pedaços de texto nos 'bytes' selecionados. Depois de escolher o tamanho mínimo do texto, estes pedaços são pesquisados, bastando para isso usar o botão <guibutton
+>Extrair</guibutton
+>. A lista de textos apresentados poderá ser refinada se inserir um termo de filtragem.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Estatísticas</term>
+    <listitem
+><para
+>Esta ferramenta gera algumas estatísticas sobre a sequência de 'bytes'. As estatísticas fornecem a frequência de ocorrência de cada 'byte' na seleção. Ela pode ser calculada usando o botão <guibutton
+>Construir</guibutton
+>.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Soma de verificação</term>
+    <listitem
+><para
+>Esta ferramenta calcula diversos códigos de verificação (checksums ou hashsums) para os 'bytes' selecionados. Depois de escolher a operação e definir os parâmetros, se necessários, o somatório é calculado ao usar o botão <guibutton
+>Calcular</guibutton
+>.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Tabela de Decodificação</term>
+    <listitem
+><para
+>A tabela apresenta o valor do 'byte' ou 'bytes' que começam no cursor, interpretado como um tipo de dados simples, como o Inteiro ou Real, mas também como UTF-8. Ao fazer duplo-clique sobre uma linha da tabela, será aberto um editor, de modo que o valor possa ser editado e alterado.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Estruturas</term>
+    <listitem
+><para
+>Esta ferramenta ativa a investigação e edição das sequências de 'bytes', baseando-se nas definições de estruturas criadas pelo usuário. As instruções detalhadas sobre isto estão na sua própria <link linkend="tools-structures"
+>seção</link
+>.</para
+></listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+  <title
+>Ferramentas gerais</title>
+<variablelist>
+  <varlistentry>
+    <term
+>Sistema de arquivos</term>
+    <listitem
+><para
+>Esta ferramenta oferece um navegador de arquivos incorporado que poderá usar para selecionar os arquivos a abrir.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Documentos</term>
+    <listitem
+><para
+>Esta ferramenta mostra todos os arquivos carregados ou criados atualmente. Os símbolos marcam o arquivo com a área ativa e também mostram os arquivos que possuem alterações por salvar ou qual a cópia armazenada que foi modificada por outro programa.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Favoritos</term>
+    <listitem
+><para
+>Esta ferramenta poderá ser usada para gerenciar os favoritos, como alternativa ao <link linkend="bookmarks-menu"
+>menu <guimenu
+>Favoritos</guimenu
+></link
+>. <note
+><para
+>Os favoritos são atualmente transitórios e não são salvos ao fechar uma lista de 'bytes' ou o programa em si.</para
+></note
+></para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Informações do Arquivo</term>
+    <listitem
+><para
+>Esta ferramenta mostra algumas informações sobre o arquivo atual, incluindo o seu tipo, a localização do armazenamento e o tamanho.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Terminal</term>
+    <listitem
+><para
+>Um Terminal integrado, onde a pasta de trabalho não está associada ao arquivo ativo.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Conversão de codificações</term>
+    <listitem
+><para
+>A ferramenta reescreve os bytes de forma que os caracteres respectivos sejam os mesmos na outra codificação. Só há suporte para as codificações de 8 bits, sendo que os caracteres sem correspondência são, por enquanto, substituídos pelo valor fixo 0. </para
+></listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+</sect1>
+
+
+<sect1 id="tools-structures">
+<!--
+Many improvements in the Structures tool by Alex:
+Begin of a structure can be pinned to a specific offset
+Support for strings (various Unicode encodings) in definitions
+  -->
+    <title
+>Ferramenta de Estruturas</title>
+
+    <sect2>
+      <title
+>Geral</title>
+
+      <para
+>A ferramenta de Estruturas permite a análise e edição de sequências de 'bytes' com base na definição de estruturas criadas pelo usuário, as quais poderão ser compostas por listas, uniões, tipos primitivos e enumerados.</para>
+     <!-- explain/link what these types are? probably not, since most user will be programmers? -->
+      <para
+>Ela tem uma janela de configuração própria, que poderá ser acessada com o botão <guibutton
+>Configurações</guibutton
+>. Existem várias opções que poderão ser configuradas, como o estilo (decimal, hexadecimal ou binário) no qual são apresentados os valores. Além disso, é possível escolher as definições de estruturas que são carregadas e quais são apresentadas na janela.</para>
+      <para
+>As estruturas são definidas nos arquivos de Definição de Estruturas do &okteta; (baseados em &XML;, com a extensão <literal role="extension"
+>.osd</literal
+>). Além disso, um arquivo <literal role="extension"
+>.desktop</literal
+> contém os metadados sobre esse arquivo de descrição de estruturas, como o autor, a página Web e a licença.</para>
+      <para
+>Atualmente, não existe nenhum suporte incorporado para criar ou editar as definições das estruturas, assim elas deverão ser criadas manualmente, como se encontra descrito nas seções a seguir.</para>
+    </sect2>
+
+    <sect2>
+      <title
+>Instalar as definições das estruturas</title>
+
+      <sect3>
+        <title
+>Instalar através do KNewStuff</title>
+        <para
+>A forma mais simples de instalar novas definições de estruturas é usar o suporte incorporado do KNewStuff no &okteta;. Para instalar uma estrutura existente, abra a janela de configuração da ferramenta de Estruturas. Aí, selecione a página de <guilabel
+>Gerenciamento de estruturas</guilabel
+> e pressione no botão <guibutton
+>Obter estruturas novas...</guibutton
+>. A janela que aparecerá permite-lhe então instalar ou desinstalar estruturas.</para>
+      </sect3>
+      <sect3>
+        <title
+>Instalar as definições das estruturas manualmente</title>
+        <para
+>A ferramenta de Estruturas procura pelas descrições de estruturas na subpasta <filename class="directory"
+>share/okteta/structures/</filename
+> da pasta pessoal do usuário para os dados dos aplicativos (descubra-a com o comando <userinput
+><command
+>kf5-config</command
+> <option
+>--path data</option
+></userinput
+>). Talvez você precise criar essa pasta, caso ainda não tenha nenhuma definição de estrutura instalada.</para>
+          <para
+>Existem dois arquivos para cada definição de estrutura. Um arquivo para a definição em si e um arquivo <literal role="extension"
+>.desktop</literal
+> para os metadados (autor, versão, etc).</para>
+          <para
+>Nessa pasta, existe uma subpasta para cada definição de estruturas, a qual contém tanto o arquivo <literal role="extension"
+>.desktop</literal
+> como o <literal role="extension"
+>.osd</literal
+> ou o <filename
+>main.js</filename
+>para essa definição.</para>
+          <para
+>Por exemplo, com a pasta de dados dos aplicativos <filename class="directory"
+>.kde</filename
+> e com uma definição de estrutura chamada EstruturaExemplo, existe a pasta <filename class="directory"
+>.kde/share/apps/okteta/structures/EstruturaExemplo</filename
+>, que contém um arquivo <filename
+>EstruturaExemplo.desktop</filename
+> e um arquivo <filename
+>EstruturaExemplo.osd</filename
+>.</para>
+      </sect3>
+      <sect3>
+        <title
+>Usar as estruturas recém instaladas</title>
+        <para
+>Após ter instalado uma nova definição de estruturas, você poderá ter que reiniciar o &okteta; antes de poder usá-lo. Após ter reiniciado o &okteta;, abra a janela de configurações da ferramenta de Estruturas. Nela, selecione a página de <guilabel
+>Gerenciamento das estruturas</guilabel
+> e certifique-se que a definição da estrutura relevante é assinalada. Depois, mude para a página <guilabel
+>Estruturas</guilabel
+> e certifique-se de que o elemento desejado está listado no lado direito.</para>
+      </sect3>
+    </sect2>
+
+    <sect2>
+      <title
+>Compartilhar definições de estruturas</title>
+      <para
+>Para as estruturas comuns, você poderá não ter que criar você mesmo uma definição, mas sim reutilizar uma definição já existente de locais como o <ulink url="http://kde-files.org/index.php?xcontentmode=691"
+>kde-files.org</ulink
+>.</para>
+      <para
+>Você poderá também querer compartilhar você mesmo uma definição. Para fazer isso, crie um pacote de arquivos (&eg;, um pacote compactado do tar, <literal role="extension"
+>.tar.gz</literal
+>) contendo apenas a subpasta com o arquivo <literal role="extension"
+>.desktop</literal
+> e o arquivo de definição da estrutura. No exemplo da última seção, seria a subpasta <filename class="directory"
+>EstruturaExemplo</filename
+> com todo o seu conteúdo. Usando este formato para compartilhar definições de estruturas será possível instalá-las no &okteta; e não irá exigir uma instalação manual.</para>
+    </sect2>
+
+
+    <sect2>
+      <title
+>Criar definições de estruturas</title>
+      <para
+>Existem duas maneiras diferentes de criar definições de estrutura. A primeira é escrever a definição em &XML; e a outra é usar JavaScript. A abordagem com JavaScript permite-lhe criar estruturas mais complexas com funcionalidades como, &eg;, validação da estrutura. Usar &XML; oferece menos recursos, mas se uma estrutura estática é tudo que você precisa, pode ser a abordagem mais fácil. Se você precisar de uma estrutura dinâmica, ou seja, onde as dimensões de uma matriz dependem de outros valores na estrutura ou a disposição da estrutura é diferente quando o valor de algum membro se altera, então você terá que escrever a definição da estrutura em JavaScript. Não há exceções a esta regra. Se você tiver uma matriz cujo comprimento deve ser <emphasis role="bold"
+>exatamente</emphasis
+> o mesmo de acordo com outro valor na estrutura, então você pode usar &XML;. Mas se for algo como <emphasis
+>comprimento - 1</emphasis
+> deve-se usar JavaScript.</para>
+    </sect2>
+
+
+    <sect2>
+      <title
+>Formato do arquivo &XML; da definição da estrutura</title>
+      <para
+>O arquivo &XML; <literal role="extension"
+>.osd</literal
+> possui um elemento raiz: <emphasis
+>&lt;data&gt;</emphasis
+> sem atributos. Dentro deste elemento deve existir um dos seguintes elementos:</para>
+      <!-- TODO markup, though better than nothing this way-->
+      <variablelist>
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;primitive&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Para criar tipos de dados primitivos, como &eg;, <emphasis
+>int</emphasis
+> e <emphasis
+>float</emphasis
+>. Este elemento não aceita subelementos e pode ter os seguintes atributos:</para>
+              <variablelist>
+                <varlistentry>
+                <term
+><emphasis role="bold"
+>type</emphasis
+></term>
+                <listitem>
+                  <para
+>O tipo deste tipo primitivo. Deve ser um dos seguintes:</para>
+                  <itemizedlist>
+                    <listitem
+><para
+><emphasis
+>char</emphasis
+> para caracteres ASCII de 8 bits</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>int8, int16, int32, int64</emphasis
+> para inteiros com sinal com os tamanhos respectivos</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>uint8, uint16, uint32, uint64</emphasis
+> para inteiros sem sinal com os tamanhos respectivos</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>bool8, bool16, bool32, bool64</emphasis
+> para booleanos sem sinal (0 = falso, qualquer outro valor = verdadeiro) com o tamanho respectivo</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>float</emphasis
+> para números de vírgula flutuante IEEE754 de 32 bits</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>double</emphasis
+> para números de vírgula flutuante IEEE754 de 64 bits</para
+></listitem>
+                  </itemizedlist>
+                </listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;bitfield&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Para criar um campo de bits. Este elemento não aceita subelementos e pode ter os seguintes atributos:</para>
+              <variablelist>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>width</emphasis
+></term>
+                  <listitem
+><para
+>O número de bits usado por este campo de bits. Deve ser entre 1 e 64.</para
+></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>type</emphasis
+></term>
+                  <listitem>
+                    <para
+>O tipo deste campo de bits. Deve ser um dos seguintes:</para>
+                    <itemizedlist>
+                      <listitem
+><para
+><emphasis
+>unsigned</emphasis
+> para um campo de bits onde o valor será interpretada como um valor sem sinal (intervalo de 0 à 2<superscript
+>width</superscript
+> - 1)</para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>signed</emphasis
+> para o campo de bits onde o valor será interpretado como um valor com sinal (intervalo de -2<superscript
+>width - 1</superscript
+> à 2<superscript
+>width - 1</superscript
+> - 1)</para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>bool</emphasis
+> para um campo de bits onde o valor será interpretado como um valor booleano</para
+></listitem>
+                  </itemizedlist>
+                  <note
+><para
+>Lembre-se sempre de adicionar um separador após um <emphasis
+>&lt;bitfield&gt;</emphasis
+>, uma vez que caso contrário o próximo elemento (exceto para textos e matrizes, que adicionam separadores automaticamente) iniciará no meio de um byte. Obviamente o separador não é necessário se você deseja este comportamento.</para
+></note>
+                  </listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;enum&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Para criar um tipo primitivo, mas onde os valores são exibidos como membros de uma enumeração se possível. Este elemento não aceita subelementos (no entanto, você precisará de uma marca <emphasis
+>&lt;enumDef&gt;</emphasis
+> no arquivo para referenciá-lo). Ele tem os seguintes atributos:</para>
+              <variablelist>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>enum</emphasis
+></term>
+                  <listitem
+><para
+>A enumeração subjacente para este valor. Deve corresponder ao atributo <emphasis
+>name</emphasis
+> de uma das marcas <emphasis
+>&lt;enumDef&gt;</emphasis
+> neste arquivo.</para
+></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>type</emphasis
+></term>
+                  <listitem>
+                    <para
+>O tipo desta enumeração. Veja o atributo de tipo de <emphasis
+>&lt;primitive&gt;</emphasis
+>. A única diferença é que o <emphasis
+>Double</emphasis
+> e o <emphasis
+>Float</emphasis
+> não fazem sentido.</para>
+                  </listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
+          </varlistentry>
+
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;flags&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Isto é o mesmo que <emphasis
+>&lt;enum&gt;</emphasis
+> com a única diferença sendo que os valores são representados como um <emphasis
+>bitwise-or</emphasis
+> de todos os valores da enumeração.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;struct&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Para criar uma estrutura. Todos os outros elementos (incluindo o <emphasis
+>&lt;struct&gt;</emphasis
+>) podem ser filhos deste e então serão parte da estrutura resultante</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;union&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Para criar uma união. Basicamente, o mesmo que <emphasis
+>&lt;struct&gt;</emphasis
+> exceto pelo fato que todos os elementos filho iniciarão a partir do mesmo deslocamento. Útil para interpretar a mesma sequência de bytes de várias maneiras.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;array&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Para criar uma matriz. Este elemento aceita exatamente um filho (o tipo subjacente da matriz), que pode ser qualquer dos elementos, até mesmo a <emphasis
+>&lt;array&gt;</emphasis
+> em si. Ele possui os seguintes atributos:</para>
+              <variablelist>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>length</emphasis
+></term>
+                  <listitem
+><para
+>O número de elementos nesta matriz como um número decimal. Alternativamente, ele pode também ser um texto que corresponde ao atributo nome de um elemento <emphasis
+>&lt;primitive&gt;</emphasis
+>, <emphasis
+>&lt;enum&gt;</emphasis
+> ou <emphasis
+>&lt;flags&gt;</emphasis
+> previamente definido. Então o comprimento será o valor deste elemento. Atualmente está limitado à 10000, porque matrizes maiores usariam muita memória e tornariam esta ferramenta muito lenta. </para
+></listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;string&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Para criar um texto em várias codificações. Por padrão, você obtém um texto terminado em <emphasis
+>NULL</emphasis
+> no estilo C. No entanto, diferentes tipos de texto podem ser criados com os seguintes atributos:</para>
+              <variablelist>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>terminatedBy</emphasis
+></term>
+                  <listitem
+><para
+>Este atributo determina com que ponto de código unicode o texto é terminado. Deve ser um número hexadecimal (opcionalmente com um prefixo <emphasis
+>0x</emphasis
+>). Quando a codificação for ASCII, somente valores até o 0x7f são significativos. Se isto, <emphasis
+>maxCharCount</emphasis
+> ou <emphasis
+>maxByteCount</emphasis
+> estão definidos, isto é considerado como 0 (texto no estilo C) </para
+></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>maxCharCount</emphasis
+></term>
+                  <listitem
+><para
+>O número máximo de caracteres que este texto pode ter. Se <emphasis
+>terminatedBy</emphasis
+> estiver definido então o que for atingido primeiro termina o texto. Isto é mutualmente exclusivo com o <emphasis
+>maxByteCount</emphasis
+></para
+></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>maxByteCount</emphasis
+></term>
+                  <listitem
+><para
+>O número máximo de bytes que o texto pode ter. Se <emphasis
+>terminatedBy</emphasis
+> estiver definido também, então o que for atingido primeiro termina o texto. Isto é mutualmente exclusivo com <emphasis
+>maxCharCount</emphasis
+>. Com codificações como <emphasis
+>ASCII</emphasis
+> isto é o mesmo que <emphasis
+>maxCharCount</emphasis
+>.</para
+></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>type</emphasis
+></term>
+                  <listitem
+><para
+>A codificação do texto. Pode ser uma das seguintes:</para>
+                    <itemizedlist>
+                      <listitem
+><para
+><emphasis
+>ASCII</emphasis
+></para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>LATIN-1</emphasis
+></para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>UTF-8</emphasis
+></para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>UTF-16-LE</emphasis
+> ou <emphasis
+>UTF-16-BE</emphasis
+>. Se os sufixos <emphasis
+>-LE</emphasis
+> ou <emphasis
+>-BE</emphasis
+> não forem fornecidos, o little endian é considerado. </para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>UTF-32-LE</emphasis
+> ou <emphasis
+>UTF-32-BE</emphasis
+>. Se os sufixos <emphasis
+>-LE</emphasis
+> ou <emphasis
+>-BE</emphasis
+> não forem fornecidos, o little endian é considerado. </para
+></listitem>
+                    </itemizedlist>
+                  </listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
+          </varlistentry>
+      </variablelist>
+      <para
+>Cada elemento também aceita um atributo <emphasis
+>name</emphasis
+> que é então visível na visão de estruturas. </para>
+    </sect2>
+
+    <sect2>
+      <title
+>Um exemplo de definição de estrutura em &XML; e JavaScript</title>
+      <sect3>
+        <title
+>O passos comum, compartilhado por ambas as abordagens</title>
+        <para
+>Nosso arquivo de metadados seria como o seguinte: <screen>
+        [Desktop Entry]
+        Encoding=UTF-8
+        Icon=arrow-up<co id="icon" />
+        Type=Service
+        ServiceTypes=KPluginInfo
+
+        Name=Estrutura simples de teste
+        Comment=Uma estrutura de teste simples contendo apenas dois itens
+
+        X-KDE-PluginInfo-Author=Alex Richardson
+        X-KDE-PluginInfo-Email=foo.bar@email.org
+        X-KDE-PluginInfo-Name=estruturasimples
+        X-KDE-PluginInfo-Version=1.0
+        X-KDE-PluginInfo-Website=http://www.plugin.org/
+        X-KDE-PluginInfo-Category=structure
+        X-KDE-PluginInfo-License=LGPL
+        X-KDE-PluginInfo-EnabledByDefault=false
+        </screen
+> <calloutlist
+> <callout arearefs="icon"
+> <para
+>O ícone exibido no &okteta; para esta estrutura. Pode ser qualquer coisa encontrada na execução do <userinput
+><command
+>kdialog</command
+> <option
+>--geticon</option
+></userinput
+> ou o caminho para um ícone</para
+> </callout
+> </calloutlist
+> Estes campos devem parecer bem auto-explicativos, exceto pelo <literal
+>X-KDE-PluginInfo-Name</literal
+>. O valor deste campo deve corresponder ao nome da pasta que contém o arquivo bem como o nome do arquivo <literal role="extension"
+>.desktop</literal
+>. Ao cria as definições de estrutura em &XML; o nome do arquivo <literal role="extension"
+>.osd</literal
+> deve também corresponder ao nome. </para>
+
+        <para
+>Neste exemplo, teríamos uma pasta chamada <filename
+>estruturasimples</filename
+> que contém os arquivos <filename
+>estruturasimples.desktop</filename
+>. Ao definir as estruturas em &XML;, a pasta iria conter também um arquivo chamado <filename
+>estruturasimples.osd</filename
+>. Se usarmos o JavaScript, iríamos ter um arquivo chamado <filename
+>main.js</filename
+> em alternativa.</para>
+      </sect3>
+      <sect3>
+        <title
+>Uma definição de estrutura &XML; simples</title>
+        <para
+>Para começar, vamos criar uma definição para uma estrutura de testes muito simples, contendo apenas tipos de dados primitivos (um caractere, um inteiro de 32 bits com sinal e um campo de bits). Isto poderia ser uma expresso em C/C++ como: <screen>
+          struct simple {
+            char aChar;
+            int anInt;
+            bool bitFlag :1;
+            unsigned padding :7;
+          };
+          </screen
+> O primeiro passo é escrever o arquivo <literal role="extension"
+>.osd</literal
+> de acordo com o formato de arquivo definido na seção anterior. Nós o chamaremos de <filename
+>estruturasimples.osd</filename
+>: <screen
+><markup>
+          &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+          &lt;data&gt;
+            &lt;struct name="simple"&gt;
+              &lt;primitive name="aChar" type="Char"/&gt;
+              &lt;primitive name="anInt" type="Int32"/&gt;
+              &lt;bitfield name="bitFlag" type="bool" width="1"/&gt;
+              &lt;bitfield name="padding" type="unsigned" width="7"/&gt;
+            &lt;/struct&gt;
+          &lt;/data&gt;
+          </markup
+></screen
+> que é bastante similar a uma definição em C/C++. </para>
+          <para
+>Agora crie uma pasta <filename class="directory"
+>estruturasimples</filename
+> dentro da pasta de instalação da estrutura (veja como instalar manualmente definições de estruturas) e copie os dois arquivos para esta pasta. Agora você pode reiniciar o &okteta;, para poder usar a nova estrutura.</para>
+      </sect3>
+      <sect3>
+        <title
+>Uma estrutura simples em JavaScript</title>
+        <para
+>Para implementar a estrutura acima em JavaScript, crie um arquivo chamado <filename
+>main.js</filename
+> em vez de <filename
+>estruturasimples.osd</filename
+>. O conteúdo desse arquivo seria: <screen>
+        function init() {
+          var estrutura = struct({
+            caracter : char(),
+            inteiro : int32(),
+            opcaoBit : bitfield("bool", 1),
+            preenchimento : bitfield("unsigned", 7),
+          })
+          return estrutura;
+        }
+        </screen
+> A estrutura apresentada pelo &okteta; é sempre o valor devolvido pela função <literal
+>init</literal
+>.</para>
+        <para
+>As seguintes funções poderão ser invocadas para criar um tipo primitivo: <itemizedlist
+> <listitem
+><para
+>char()</para
+></listitem
+> <listitem
+><para
+>int8(), int16(), int32() ou int64()</para
+></listitem
+> <listitem
+><para
+>uint8(), uint16(), uint32() ou uint64()</para
+></listitem
+> <listitem
+><para
+>bool8(), bool16(), bool32() ou bool64()</para
+></listitem
+> <listitem
+><para
+>float()</para
+></listitem
+> <listitem
+><para
+>double()</para
+></listitem
+> </itemizedlist
+> A função 'bitfield' recebe dois parâmetros, sendo o primeiro um texto que consiste em <literal
+>bool</literal
+>, <literal
+>signed</literal
+> ou <literal
+>unsigned</literal
+>. O segundo parâmetro é um inteiro que define o tamanho em 'bits'. </para>
+      </sect3>
+      <sect3>
+        <title
+>Estruturas mais complexas</title>
+        <para
+>A seguir, iremos criar uma estrutura mais complexa, que irá se chamar "complexa" e salvá-la num arquivo <filename
+>complexa.osd</filename
+>. Esta estrutura irá conter duas listas (uma de tamanho fixo e outra com o tamanho determinado durante a execução), assim como uma estrutura encadeada e uma união.<screen
+><markup>
+          &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+          &lt;data&gt;
+            &lt;struct name="complexa"&gt;
+              &lt;primitive name="tamanho" type="UInt8" /&gt;
+              &lt;union name="umaUniao"&gt;
+                &lt;array name="quatroBytes" length="4"&gt;
+                  &lt;primitive type="Int8" /&gt;
+                &lt;/array&gt;
+              &lt;/union&gt;
+              &lt;struct name="encadeado"&gt;
+                &lt;array name="texto" length="tamanho"&gt; &lt;!-- referencia o campo 'tamanho' acima --&gt;
+                  &lt;primitive type="Char" /&gt;
+                &lt;/array&gt;
+              &lt;/struct&gt;
+            &lt;/struct&gt;
+          &lt;/data&gt;
+          </markup
+></screen
+> Isto irá corresponder ao seguinte, em pseudo-C/C++ <screen
+>struct complexa {
+            uint8_t tamanho;
+            union umaUniao {
+              int8_t quatroBytes[4];
+            };
+            struct encadeado {
+              char texto[tamanho] //C++ não válido por referenciar o valor de 'tamanho'
+            };
+          };
+          </screen>
+          </para>
+          <note
+><para
+>Obviamente, você só poderá ter campos de referência de listas de tamanho dinâmico antes da lista.</para
+></note>
+          <para
+>A seguir, será criado o arquivo <filename
+>complexo.desktop</filename
+>, como foi feito no exemplo anterior (certifique-se de que define o <literal
+>X-KDE-PluginInfo-Name</literal
+> corretamente) e faça o mesmo para instalar ambos os arquivos.</para>
+      </sect3>
+      <sect3>
+        <title
+>Mais informações</title>
+        <para
+>Alguns exemplos de definições de estruturas poderão ser encontrados no <ulink url="https://quickgit.kde.org/?p=okteta.git&amp;a=tree&amp;f=kasten%2Fcontrollers%2Fview%2Fstructures%2Fexamples%2Fokteta%2Fstructures"
+>repositório Git.</ulink
+> Isto inclui, por exemplo, o cabeçalho dos arquivos PNG e ELF. Um esquema em &XML; que descreve a estrutura do arquivo <literal role="extension"
+>.osd</literal
+> pode ser encontrado <ulink url="https://quickgit.kde.org/?p=okteta.git&amp;a=tree&amp;f=kasten%2Fcontrollers%2Fview%2Fstructures%2Fschema"
+>aqui.</ulink
+> Se precisar de mais informações, sinta-se à vontade em contactar-me através do e-mail &Alex.Richardson.email; </para>
+      </sect3>
+    </sect2>
+<!--FIXME missing
+Extended structures definitions
+Structures Script Console-->
+</sect1>
+</chapter>
+
+<chapter id="interface-overview">
+<title
+>Resumo da interface</title>
+
+<sect1 id="menu-commands">
+<title
+>Itens dos menus</title>
+
+<para
+>Além dos menus normais do &kde;, descritos no capítulo <ulink url="help:/fundamentals/ui.html#menus"
+>Menu</ulink
+> dos Fundamentos do &kde;, o &okteta; tem estes itens de menu específicos do aplicativo: </para>
+
+<sect2 id="file-menu">
+<title
+>Menu Arquivo</title>
+
+<variablelist>
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Arquivo</guimenu
+> <guimenuitem
+>Novo</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Cria uma nova sequência de 'bytes'...</action
+></para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>Vazio</guimenuitem
+>: ... uma sequência vazia.</para>
+    </listitem>
+    <listitem
+><para
+><guimenuitem
+>Da área de transferência</guimenuitem
+>: ... com o conteúdo atual da área de transferência.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Padrão...</guimenuitem
+>: ... com um determinado padrão.</para>
+    </listitem>
+    <listitem
+><para
+><guimenuitem
+>Dados aleatórios...</guimenuitem
+>: ... com dados aleatórios.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Sequência</guimenuitem
+>: ... com todos os 'bytes' de 0 a 255.</para
+></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Arquivo</guimenu
+> <guisubmenu
+>Exportar</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+>Exportar os bytes selecionados para um arquivo...</para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>Valores</guimenuitem
+>: ... codificados como valores de bytes. Por padrão, os valores são separados por um espaço em branco. Os caracteres de <guilabel
+>Separação</guilabel
+> podem ser alterados na caixa de diálogo <guilabel
+>Exportar</guilabel
+>. </para>
+    </listitem>
+    <listitem
+><para
+><guimenuitem
+>Caracteres</guimenuitem
+>: ... codificados como texto simples. </para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Base64</guimenuitem
+>: ... codificado no formato <ulink url="https://en.wikipedia.org/wiki/Base64"
+>Base64</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Base32</guimenuitem
+>: ... codificado no formato <ulink url="https://en.wikipedia.org/wiki/Base32"
+>Base32</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Ascii85</guimenuitem
+>: ... codificado no formato <ulink url="https://en.wikipedia.org/wiki/Ascii85"
+>Ascii85</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Uuencoding</guimenuitem
+>: ... codificado no formato <ulink url="https://en.wikipedia.org/wiki/Uuencoding"
+>Uuencoding</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Xxencoding</guimenuitem
+>: ... codificado no formato <ulink url="https://en.wikipedia.org/wiki/Xxencoding"
+>Xxencoding</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Intel hexadecimal</guimenuitem
+>: ... codificado no formato <ulink url="https://en.wikipedia.org/wiki/Intel_Hex"
+>Intel hexadecimal</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Registro-S</guimenuitem
+>: ... codificado no formato <ulink url="https://en.wikipedia.org/wiki/S-record"
+>Registro-S</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Vetor em C</guimenuitem
+>: ... definido como uma matriz na linguagem de programação C.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Ver em Texto Simples</guimenuitem
+>: ... como na área de dados, com o deslocamento, os valores dos 'bytes' e os seus caracteres. </para
+></listitem>
+    </itemizedlist>
+    </listitem>
+
+</varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Arquivo</guimenu
+> <guisubmenu
+>Permissões</guisubmenu
+><guimenuitem
+> Definir apenas como leitura</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+>Quando estiver definido, as alterações não poderão ser feitas na sequência de dados carregada.</para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Arquivo</guimenu
+> <guimenuitem
+>Fechar todos os outros</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Fecha todas as sequências de 'bytes', exceto a atual.</action
+></para
+></listitem>
+    </varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="edit-menu">
+<title
+>O Menu Editar</title>
+<variablelist>
+<para
+>A ação de copiar e colar envia os dados para a área de transferência com o tipo MIME <quote
+>application/octetstream</quote
+>; o &klipper; não é capaz de mostrar esses dados, assim como a maioria dos outros aplicativos, por serem dados brutos. Veja também o submenu <guisubmenu
+>Copiar como</guisubmenu
+>.</para>
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Editar</guimenu
+> <guisubmenu
+>Copiar como</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+>Copia os bytes selecionados em um dos diferentes formatos para a área de transferência. Para obter uma lista dos formatos disponíveis, veja o item de menu <menuchoice
+><guimenu
+>Arquivo</guimenu
+> <guisubmenu
+>Exportar</guisubmenu
+></menuchoice
+> </para>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Editar</guimenu
+> <guisubmenu
+>Inserir</guisubmenu
+> </menuchoice
+></term>
+    <listitem>
+    <variablelist>
+    <varlistentry>
+    <term
+><menuchoice>
+    <guimenuitem
+>Inserir um padrão...</guimenuitem>
+    </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Insere uma sequência definida de 'bytes' na posição do cursor.</action
+></para>
+    <para
+>As opções na janela permitem-lhe definir o tamanho do padrão e o seu formato (Hexadecimal, Decimal, Octal, Binário ou Caracter(es) ou UTF-8).</para>
+    <!--FIXME Random Data + Sequence - use cases?-->
+    </listitem>
+    </varlistentry>
+    </variablelist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>A</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Editar</guimenu
+> <guimenuitem
+>Desmarcar</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Desmarca a seleção atual.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Editar</guimenu
+> <guimenuitem
+>Selecionar o intervalo...</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Abre uma janela incorporada para definir o intervalo de seleção.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+><keycap
+>Ins</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Editar</guimenu
+> <guimenuitem
+>Modo de Sobreposição</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Comuta entre o modo de Inserção e o de Sobreposição</action
+>. </para>
+    <note
+><para
+>O modo de sobreposição está implementado de forma a ser bastante restrito; não é possível alterar o tamanho dos dados (não permite adicionar nem remover 'bytes').</para
+></note>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>F</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Editar</guimenu
+> <guimenuitem
+>Localizar...</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Procura um padrão definido no documento.</action
+> Poderão ser procurados padrões em hexadecimal, decimal, octal, binário ou texto.</para>
+    <para
+>As opções da janela permitem-lhe definir o ponto inicial, a direção e a abrangência da pesquisa.</para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>G</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Editar</guimenu
+> <guimenuitem
+>Ir para a Posição...</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Move o cursor para uma determinada posição.</action
+></para
+></listitem>
+    </varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="view-menu">
+<title
+>Menu Exibir</title>
+
+<variablelist>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Ver</guimenu
+> <guimenuitem
+>Mostrar os Caracteres Invisíveis</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Ativa ou desativa a apresentação dos caracteres invisíveis.</action
+> Se a visualização estiver desativada, no local correspondente da coluna de caracteres, é colocado um outro caractere de substituição.</para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycap
+>F11</keycap
+> </shortcut
+> <guimenu
+>Ver</guimenu
+> <guimenuitem
+>Mostrar a Posição da Linha</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Ativa ou desativa a apresentação da posição da linha numa área à esquerda.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Ver</guimenu
+> <guisubmenu
+>Mostrar os Valores ou Caracteres</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Selecione qual das interpretações de 'bytes' são apresentadas.</action
+> Os valores possíveis são:</para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>Valores</guimenuitem
+></para>
+    </listitem>
+    <listitem
+><para
+><guimenuitem
+>Caracteres</guimenuitem
+></para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Valores e Caracteres</guimenuitem
+></para
+></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Ver</guimenu
+> <guisubmenu
+>Codificação do Valor</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Seleciona a codificação dos valores</action
+> como sendo:</para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>Hexadecimal</guimenuitem
+></para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Decimal</guimenuitem
+></para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Octal</guimenuitem
+></para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Executável</guimenuitem
+></para
+></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Exibir</guimenu
+> <guisubmenu
+>Codificação de caracteres</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Seleciona a codificação dos caracteres</action
+> no submenu. </para>
+    </listitem>
+    </varlistentry>
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Exibir</guimenu
+> <guisubmenu
+>Definir os bytes por linha</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Selecione os bytes mostrados por linha</action
+> na caixa de diálogo; o valor padrão é 16 bytes. </para>
+    </listitem>
+    </varlistentry>
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Exibir</guimenu
+> <guisubmenu
+>Definir os bytes por grupo</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Por padrão, os valores hexadecimais são apresentados em grupos de 4 bytes.</action
+> Usando este item do menu, você poderá adaptar isso de acordo com as suas preferências em uma caixa de diálogo. </para>
+    </listitem>
+    </varlistentry>
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Ver</guimenu
+> <guisubmenu
+>Disposição dinâmica</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Define as regras de disposição da área de dados.</action
+> Isto define quantos 'bytes' são apresentados por linha, dependendo da largura da janela. As regras possíveis são:</para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>Desligado</guimenuitem
+>: A disposição é fixa para o número atual de 'bytes' por linha e não se adapta à alteração do tamanho da janela.</para>
+    </listitem>
+    <listitem
+><para
+><guimenuitem
+>Repartir apenas os grupos de 'bytes' completos</guimenuitem
+>: Coloca o máximo de 'bytes' por linha possíveis, desde que fiquem grupos de 'bytes' completos. </para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Ligado</guimenuitem
+>: O mesmo que o anterior, só que permitindo também grupos incompletos de 'bytes'.</para
+></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Ver</guimenu
+> <guisubmenu
+>Modo de Visualização</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Seleciona a disposição da janela</action
+> como sendo:</para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>Colunas</guimenuitem
+>: A interpretação dos valores e caracteres é apresentada na disposição clássica, com cada um deles apresentado numa coluna em separado.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Linhas</guimenuitem
+>: A interpretação em caracteres dos 'bytes' é apresentada diretamente abaixo da interpretação do valor.</para
+></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>T</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Ver</guimenu
+> <guimenuitem
+>Dividir na horizontal</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Divide a área de visualização atualmente em primeiro plano em duas partes, adicionando uma cópia da área atual à outra área abaixo.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>L</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Ver</guimenu
+> <guimenuitem
+>Dividir na vertical</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Divide a área de visualização atualmente em primeiro plano em duas partes, adicionando uma cópia da área atual à outra área à direita.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>R</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Ver</guimenu
+> <guimenuitem
+>Fechar a área de visualização</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Fecha a área de visualização atualmente em primeiro plano.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Ver</guimenu
+> <guimenuitem
+>Ver perfil</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+>As configurações de visualização podem ser separadamente armazenadas em perfis de visão. O perfil atualmente selecionado pode ser atualizado diretamente a partir das configurações de visualização, ou um novo pode ser criado a partir destas configurações. Todos os perfis podem ser gerenciados em uma janela disponível em <menuchoice
+><guimenu
+>Configurações</guimenu
+><guimenuitem
+>Gerenciar perfis de visão...</guimenuitem
+></menuchoice
+>.</para
+></listitem>
+    </varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<sect2 id="windows-menu">
+<title
+>O Menu Janelas</title>
+
+    <para
+>Oferece uma lista com as janelas atuais. Selecione a janela ativa.</para>
+
+</sect2>
+
+<sect2 id="bookmarks-menu">
+<title
+>O menu Favoritos</title>
+
+    <para
+>Vários favoritos podem ser definidos para uma única sequência de 'bytes'. Cada sequência tem o seu próprio conjunto de favoritos, sendo o conjunto apropriado apresentado no fundo do <guimenu
+>Favoritos</guimenu
+>. Escolha um favorito do menu para mover o cursor e a janela para o mesmo. <note
+><para
+>Os favoritos são atualmente transitórios e não são salvos ao fechar uma lista de 'bytes' ou o programa em si.</para
+></note
+></para>
+
+<variablelist>
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>B</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Favoritos</guimenu
+> <guimenuitem
+>Adicionar aos Favoritos</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+>Marca um determinado local na sequência de 'bytes'.</para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>B</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Favoritos</guimenu
+> <guimenuitem
+>Remover o Favorito</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Remove o favorito atual.</action
+> Este comando só está disponível se o cursor estiver num local marcado como favorito.</para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Favoritos</guimenu
+> <guimenuitem
+>Remover Todos os Favoritos</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Limpa a lista de favoritos.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Alt;<keycap
+>Cima</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Favoritos</guimenu
+> <guimenuitem
+>Ir para o Favorito Anterior</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Move o cursor para o favorito anterior.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Alt;<keycap
+>Baixo</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Favoritos</guimenu
+> <guimenuitem
+>Ir para o favorito seguinte</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Move o cursor para o favorito seguinte.</action
+></para
+></listitem>
+    </varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<sect2 id="tools-menu">
+<title
+>Menu Ferramentas</title>
+
+<para
+>Oferece uma lista com as ferramentas instaladas. Ativa ou desativa a apresentação de cada uma das ferramentas. Você poderá ver uma descrição mais detalhada de cada ferramenta na seção <link linkend="tools"
+>Ferramentas</link
+>.</para>
+
+</sect2>
+
+<sect2 id="settings-menu">
+<title
+>Menu Configurações</title>
+<variablelist>
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Configurações</guimenu
+> <guimenuitem
+>Gerenciar perfis de visão...</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+>Abre a janela para criar, editar, remover e configurar um perfil de visão padrão.</para
+></listitem>
+    </varlistentry>
+</variablelist>
+
+</sect2>
+
+</sect1>
+
+</chapter>
+
+<chapter id="credits">
+    <title
+>Créditos e licença</title>
+
+    <para
+>&okteta; </para>
+
+    <!--List all the copyright holders here-->
+    <para
+>Direitos autorais do programa 2006-2012 de &Friedrich.Kossebau; &Friedrich.Kossebau.email;</para>
+
+    <para
+>Direitos autorais da documentação 2008, 2010 &Friedrich.Kossebau; &Friedrich.Kossebau.email;, &Alex.Richardson; &Alex.Richardson.email;</para>
+
+    <para
+>Tradução de Marcus Gama <email
+>marcus.gama@gmail.com</email
+></para
+> 
+&underFDL; &underGPL; </chapter>
+
+<!-- !!!do not change ANYTHING after this line!!!! -->
+
+<appendix id="installation">
+    <title
+>Instalação</title>
+
+    <sect1 id="getting-kapp">
+        <title
+>Como obter o &okteta;</title>
+&install.intro.documentation; </sect1>
+
+    <sect1 id="Compilation">
+        <title
+>Compilação e instalação</title>
+&install.compile.documentation; </sect1>
+</appendix>
+
+&documentation.index;
+</book>
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-omittag:t
+sgml-shorttag:t
+sgml-namecase-general:t
+sgml-always-quote-attributes:t
+sgml-indent-step:0
+sgml-indent-data:nil
+sgml-parent-document:nil
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+-->

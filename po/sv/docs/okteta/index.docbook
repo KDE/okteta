@@ -1,0 +1,2077 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % Swedish "INCLUDE">
+  <!ENTITY % addindex "IGNORE">
+]>
+
+<book id="okteta" lang="&language;">
+
+<bookinfo>
+<title
+>Handbok &okteta;</title>
+
+<authorgroup>
+    <author
+><firstname
+>Friedrich</firstname
+><othername
+>W. H.</othername
+><surname
+>Kossebau</surname
+> <affiliation
+> <address
+>&Friedrich.Kossebau.email;</address>
+      </affiliation>
+    </author>
+    <author
+><firstname
+>Alex</firstname
+><surname
+>Richardson</surname
+> <affiliation
+> <address
+>&Alex.Richardson.email;</address>
+      </affiliation>
+    </author>
+<othercredit role="translator"
+><firstname
+>Stefan</firstname
+><surname
+>Asserhäll</surname
+><affiliation
+><address
+><email
+>stefan.asserhall@bredband.net</email
+></address
+></affiliation
+><contrib
+>Översättare</contrib
+></othercredit
+> 
+</authorgroup>
+
+<copyright>
+<year
+>2008, 2010, 2011</year>
+<holder
+>&Friedrich.Kossebau; och &Alex.Richardson;</holder>
+</copyright>
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>2018-03-23</date>
+<releaseinfo
+>&okteta; 0.24.60</releaseinfo>
+
+<abstract>
+  <para
+>&okteta; är en enkel editor för rådata i filer. Den här sortens program kallas också hexadecimal editor eller binäreditor.</para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>Okteta</keyword>
+<keyword
+>visa</keyword>
+<keyword
+>redigera</keyword>
+<keyword
+>bitar</keyword>
+<keyword
+>byte</keyword>
+<keyword
+>binär</keyword>
+<keyword
+>oktal</keyword>
+<keyword
+>hexadecimal</keyword>
+<keyword
+>hexeditor</keyword>
+<keyword
+>rådata</keyword>
+</keywordset>
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Inledning</title>
+
+<para
+>&okteta; är en enkel editor för rådata i filer.</para>
+
+<para
+>Data visas med två varianter: som det numeriska värdet av varje byte och som tecknen tilldelade till värdena. Värden och tecken kan antingen visas i två kolumner (det traditionella sättet i hexadecimala editorer) eller i rader med värdet ovanför tecknet. Redigering kan göras både för värdet och för tecknen. </para>
+
+<para
+>Förutom de vanliga redigeringsmöjligheterna ger &okteta; också en liten verktygsuppsättning, liksom en tabell som listar avkodning till vanliga enkla datatyper, en tabell som listar alla möjliga byte med ekvivalenta tecken och värden, en informationsvy med statistik, en checksummeräknare, ett filterverktyg och ett verktyg för att extrahera av strängar.</para>
+
+<para
+>Alla ändringar av inläst data kan ångras eller göras om utan begränsning.</para>
+
+</chapter>
+
+<chapter id="basics">
+<title
+>Grunderna</title>
+
+<sect1 id="starting-basics">
+<title
+>Starta &okteta;</title>
+
+    <para
+>Skriv <userinput
+><command
+>okteta</command
+></userinput
+> på kommandoraden eller välj <guimenuitem
+>Binäreditor</guimenuitem
+> i gruppen <menuchoice
+><guisubmenu
+>Program</guisubmenu
+><guisubmenu
+>Verktyg</guisubmenu
+></menuchoice
+> i programstarten.</para>
+
+    <para
+>De vanliga kommandoradsväljarna i &Qt; och &kde; Ramverk 5 är tillgängliga, och kan visas genom att skriva in <userinput
+><command
+>okteta</command
+> <option
+>--help</option
+></userinput
+>.</para>
+
+    <para
+>Kommandoradsväljare specifika för &okteta; är:</para>
+
+    <para
+><option
+><replaceable
+>&lt;webbadresser&gt;</replaceable
+></option
+> - öppna filer angivna av webbadresserna</para>
+
+</sect1>
+
+<sect1 id="usage-basics">
+<title
+>Användning</title>
+
+    <para
+>Huvudfönstret i &okteta; har följande komponenter: en menyrad, en verktygsrad, en statusrad, en eller flera sidorader med verktyg, och huvudvyn med datavyerna i flikar.</para>
+
+    <para
+>När en fil öppnas eller ett nytt byte-fält skapas, listas alla byte som ingår i följd på rader med ett givet antal byte per rad. De visas med två varianter: som det numeriska värdet av varje byte och som tecknen tilldelade till värdena. Värden och tecken kan antingen visas i två kolumner eller i rader med värdet ovanför tecknet. På vänster sida visas positionerna för första byten på varje rad.</para>
+
+    <para
+>Hantering av data liknar den i de flesta texteditorer: data kan redigeras, klippas ut, kopieras, klistras in, dras och släppas, på i stort sett samma sätt som text kan i editorerna. En markör anger aktuell position. Genom att trycka på tangenten <keycap
+>Insert</keycap
+> byter man mellan ersätta och infoga. Ersättning är striktare än i texteditorer, eftersom det inte tillåter någon åtgärd som ändrar byte-fältets storlek.</para>
+
+    <para
+>I motsats till texteditorer visas innehållet med två varianter. Bara en av dem är aktivt när det gäller ny inmatning. Det finns två länkade markörer som visas värden och tecken, där den aktiva markören blinkar. När tecknen är aktiva, kan tecken skrivas in på känt sätt från texteditorer. Med värden aktiva, visas en minimal editor när en siffra skrivs in för att skriva in resten av värdet.</para>
+
+    <para
+>Sökdialogrutan låter användaren söka efter en specifik byte-sträng, som kan definieras som värden (hexadecimal, decimal, oktal, binär) eller text (aktuell 8-bitars kodning eller UTF-8).</para>
+
+    <para
+>Flera byte-fält kan vara öppna samtidigt, men bara ett kan vara aktivt. Använd menyn <guimenu
+>Fönster</guimenu
+> för att välja vilket byte-fält som ska vara aktivt.</para>
+</sect1>
+
+
+</chapter>
+
+<chapter id="tools">
+  <title
+>Verktyg</title>
+
+<!-- The tool Versions is not part of released versions,
+just used for development, so no need to document it. -->
+<!--
+4.7
+Other stuff:
+New encodings: ISO-8859-14, ISO-8859-16, Codepage 874
+File info tool now estimates the mimetype also for the unstored/edited data in the working memory
+FIXME  
+-->
+<sect1 id="tools-overview">
+
+  <title
+>Översikt</title>
+  <para
+>&okteta; tillhandahåller några verktyg, vissa för att analysera och hantera byte-fälten och vissa med allmännare syfte. Verktygen kan aktiveras eller inaktiveras från menyn <guimenu
+>Verktyg</guimenu
+> i menyraden. Varje verktyg har en liten vy, som antingen finns i en av sidoraderna eller flyttas fritt som ett fönster. Man kan docka, frigöra, arrangera om och dessutom lägga verktygen ovanpå varandra med musen. Gör det genom att hålla nere vänster musknapp på verktygsvyns namnlist, flytta omkring den som du vill, och släppa vänster musknapp för att göra färdigt åtgärden, eller annars avbryta den med tangenten Esc.</para>
+
+<sect2>
+  <title
+>Analysatorer och hanterare</title>
+<variablelist>
+  <varlistentry>
+    <term
+>Värde- eller teckentabell</term>
+    <listitem
+><para
+>Tabellen anger alla möjliga byte-värden, både som tecken och med olika numeriska kodningar.</para>
+    <para
+>Det valda värdet kan infogas på markörens position ett definierat antal gånger. Det kan åstadkommas genom att använda knappen <guibutton
+>Infoga</guibutton
+> eller genom att dubbelklicka på en rad i tabellen.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Binärfilter</term>
+    <listitem
+><para
+>Filtret utför binära operationer på markerade byte-värden. Efter att ha valt operation (OCH, ELLER, ROTERA, ...) kan parametrarna, om några finns, anges i rutan nedanför. Filtret tillämpas när knappen <action
+>Filtrera</action
+> klickas.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Strängar</term>
+    <listitem
+><para
+>Verktyget lokaliserar strängar i markerade markerade byte-värden. Efter att ha valt minimal stränglängd, letas efter strängarna vid användning av knappen <guibutton
+>Extrahera</guibutton
+>. Listan med visade strängar kan begränsas genom att skriva in en filtreringsterm.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Statistik</term>
+    <listitem
+><para
+>Verktyget skapar statistik om markerade byte-värden. Statistiken anger förekomstfrekvensen för varje byte-värde i markeringen. Den kan beräknas genom att använda knappen <guibutton
+>Bygg</guibutton
+>.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Checksumma</term>
+    <listitem
+><para
+>Verktyget beräknar diverse checksummor eller kondensat för markerade byte-värden. Efter att ha valt algoritm och ställt in parametrarna, om några finns, beräknas summan när knappen <action
+>Beräkna</action
+> används.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Avkodningstabell</term>
+    <listitem
+><para
+>Tabellen visar värdet för en eller flera byte med början vid markören för vissa vanliga enkla datatyper som heltal eller flyttal, men också UTF-8. Att dubbelklicka på en rad i tabellen visar en editor, så at värdet kan redigeras och ändras.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Strukturer</term>
+    <listitem
+><para
+>Verktyget gör det möjligt att undersöka och redigera byte-fält baserade på användarskapade strukturdefinitioner. Detaljerade instruktioner finns i ett eget <link linkend="tools-structures"
+>avsnitt</link
+>.</para
+></listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+  <title
+>Allmänna verktyg</title>
+<variablelist>
+  <varlistentry>
+    <term
+>Filsystem</term>
+    <listitem
+><para
+>Verktyget erbjuder en inbyggd filbläddrare som kan användas för att välja filer att öppna.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Dokument</term>
+    <listitem
+><para
+>Verktyget visar alla filers om för närvarande har skapats eller lästs in. Symboler markerar filen med den för närvarande aktiva vyn, och visar också vilka filer som har osparade ändringar, eller vilka inlästa kopior som har ändrats av andra program.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Bokmärken</term>
+    <listitem
+><para
+>Verktyget kan användas för att hantera bokmärken, som alternativ till menyn <link linkend="bookmarks-menu"
+><guimenu
+>Bokmärken</guimenu
+></link
+>. <note
+><para
+>Bokmärken är för närvarande bara tillfälliga och sparas inte om ett byte-fält eller hela programmet stängs.</para
+></note
+></para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Filinformation</term>
+    <listitem
+><para
+>Verktyget visar viss information om den nuvarande filen, inklusive dess typ, platsen den är lagrad och dess storlek.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Terminal</term>
+    <listitem
+><para
+>En inbäddad terminal, arbetskatalogen kopplas inte med den aktiva filen.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Konvertering av teckenuppsättning</term>
+    <listitem
+><para
+>Verktyget skriver om byte så att respektive tecken är samma som med den andra teckenuppsättningen. Bara 8-bitars teckenuppsättningar stöds, och tecken som inte har någon motsvarighet ersätts för närvarande av ett värde fast kodat till 0. </para
+></listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+</sect1>
+
+
+<sect1 id="tools-structures">
+<!--
+Many improvements in the Structures tool by Alex:
+Begin of a structure can be pinned to a specific offset
+Support for strings (various Unicode encodings) in definitions
+  -->
+    <title
+>Strukturverktyg</title>
+
+    <sect2>
+      <title
+>Allmänt</title>
+
+      <para
+>Strukturverktyget gör det möjligt att undersöka och redigera byte-fält baserade på användarskapade strukturdefinitioner, som kan skapas av fält, unioner, enkla typer och uppräkningsvärden.</para>
+     <!-- explain/link what these types are? probably not, since most user will be programmers? -->
+      <para
+>Det har sin egen inställningsdialogruta, som kan nås genom att använda knappen <guibutton
+>Inställningar</guibutton
+>. Det finns diverse alternativ som kan ställas in, som stilen (decimal, hexadecimal eller binär) som värden visas med. Dessutom är det möjligt att välja vilka strukturdefinitioner som laddas och vilka strukturer som visas i vyn.</para>
+      <para
+>Strukturer definieras i &okteta;s strukturdefinitionsfiler (baserade på &XML;, med filändelsen <literal role="extension"
+>.osd</literal
+>). Dessutom innehåller en <literal role="extension"
+>.desktop</literal
+>-fil metadata om strukturbeskrivningsfilen, som upphovsman, hemsida och licens.</para>
+      <para
+>För närvarande finns det inget stöd för att skapa eller redigera strukturdefinitioner. Därför måste det göras manuellt, som beskrivs i nästa avsnitt.</para>
+    </sect2>
+
+    <sect2>
+      <title
+>Installera strukturdefinitioner</title>
+
+      <sect3>
+        <title
+>Installera med användning av Heta Nyheter</title>
+        <para
+>Det enklaste sättet att installera nya strukturdefinitioner är genom att använda det inbyggda stödet för Heta Nyheter i &okteta;. Öppna inställningsdialogrutan i strukturverktyget för att installera en befintlig struktur. Välj därefter fliken <guilabel
+>Strukturhantering</guilabel
+> och klicka på knappen <guibutton
+>Hämta nya strukturer...</guibutton
+>. Dialogrutan som nu visas låter dig installera och avinstallera strukturer.</para>
+      </sect3>
+      <sect3>
+        <title
+>Installerar strukturdefinitioner manuellt</title>
+        <para
+>Strukturverktyget letar efter strukturbeskrivningar i underkatalogen <filename class="directory"
+>okteta/structures/</filename
+> i användarens katalog för programdata (den kan hittas genom att köra <userinput
+><command
+>qtpaths</command
+> <option
+>--paths GenericDataLocation</option
+></userinput
+>). Katalogen kanske måste skapas om inga strukturdefinitioner har installerats ännu.</para>
+          <para
+>Det finns två filer i varje strukturdefinition: En fil för själva definitionen och en <literal role="extension"
+>.desktop</literal
+>-fil för metadata (upphovsman, version, etc.).</para>
+          <para
+>I den katalogen finns en underkatalog för varje strukturdefinition, som både innehåller <literal role="extension"
+>.desktop</literal
+>-filen och <literal role="extension"
+>.osd</literal
+>-filen eller filen <filename
+>main.js</filename
+> för den definitionen.</para>
+          <para
+>Exempelvis med programdatakatalogen <filename class="directory"
+><userinput
+><command
+>qtpaths</command
+> <option
+>--paths GenericDataLocation</option
+></userinput
+></filename
+> och en strukturdefinition vid namn Exempelstruktur, finns katalogen <filename class="directory"
+>okteta/structures/Exempelstruktur</filename
+> som innehåller filen <filename
+>Exempelstruktur.desktop</filename
+> och filen <filename
+>Exempelstruktur.osd</filename
+>.</para>
+      </sect3>
+      <sect3>
+        <title
+>Använda de nyinstallerade strukturerna</title>
+        <para
+>Efter att ha installerat en ny strukturdefinition, måste du starta om &okteta; innan den kan användas. När &okteta; väl har startat, öppna strukturverktygets inställningsdialogruta. Välj där fliken <guilabel
+>Strukturhantering</guilabel
+> och försäkra dig om att relevant strukturdefinition är markerad. Byt därefter till fliken <guilabel
+>Strukturer</guilabel
+> och försäkra dig om att önskat element listas på höger sida.</para>
+      </sect3>
+    </sect2>
+
+    <sect2>
+      <title
+>Dela strukturdefinitioner</title>
+      <para
+>För vanliga strukturer kanske du inte behöver skapa en egen definition, utan istället kan återanvända en redan befintlig definition från ställen som <ulink url="https://store.kde.org/browse/cat/214"
+>store.kde.org</ulink
+>.</para>
+      <para
+>Du kanske också vill dela med dig av en egen definition. För att göra det, skapa ett filarkiv (t.ex. ett komprimerat tar-arkiv, <literal role="extension"
+>.tar.gz</literal
+>) som bara innehåller underkatalogen med <literal role="extension"
+>.desktop</literal
+>-filen och strukturdefinitionsfilen. Med exemplet i föregående sektion skulle det vara underkatalogen <filename class="directory"
+>Exempelstruktur</filename
+> med hela sitt innehåll. Att använda det här formatet för att dela strukturdefinitioner gör det möjligt att installera dem inne i &okteta;, och kräver ingen manuell inställning.</para>
+    </sect2>
+
+
+    <sect2>
+      <title
+>Skapa strukturdefinitioner</title>
+
+      <note
+><para
+>En mer aktuell, men dock icke fullständig handledning om hur man skriver strukturdefinitioner finns <ulink url="https://userbase.kde.org/Okteta/Writing_structure_definitions"
+>på KDE:s användarbas Wiki</ulink
+>. </para
+></note>
+
+      <para
+>Det finns två olika sätt att skapa strukturdefinitioner. Det första är att skriva definitionen i &XML;, det andra är att använda Javascript. Metoden med Javascript låter dig skapa mer komplexa strukturer med funktioner som exempelvis validering av strukturen. Med &XML; får du mindre funktioner, men om en statisk struktur är allt som behövs kan det vara det enklaste sättet. Om du behöver en dynamisk struktur, dvs. där fältlängder beror på andra värden i strukturen eller strukturens layout är annorlunda när vissa ingående värden ändras, måste strukturdefinitionen skrivas i Javascript. Det finns ett undantag till regeln: Om du har ett fält där längden förväntas vara <emphasis role="bold"
+>exakt</emphasis
+> likadan som ett annat värde i strukturen kan du använda &XML;. Men om den är något i stil med <emphasis
+>längd - 1</emphasis
+> måste Javascript användas.</para>
+    </sect2>
+
+
+    <sect2>
+      <title
+>Strukturdefinitionen med &XML;-filformat</title>
+      <note
+><para
+>En mer aktuell, men dock icke fullständig handledning om hur man skriver strukturdefinitioner finns <ulink url="https://userbase.kde.org/Okteta/Writing_structure_definitions"
+>på KDE:s användarbas Wiki</ulink
+>. </para
+></note>
+      <para
+>&XML;-filen <literal role="extension"
+>.osd</literal
+> har ett rotelement: <emphasis
+>&lt;data&gt;</emphasis
+> utan egenskaper. Inne i detta element måste ett av följande element finnas:</para>
+      <!-- TODO markup, though better than nothing this way-->
+      <variablelist>
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;primitive&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>För att skapa en primitiv datatyp, som t.ex. <emphasis
+>int</emphasis
+> och <emphasis
+>float</emphasis
+>. Elementet accepterar inte några delelement och kan ha följande egenskaper:</para>
+              <variablelist>
+                <varlistentry>
+                <term
+><emphasis role="bold"
+>type</emphasis
+></term>
+                <listitem>
+                  <para
+>Den primitiva typens typ. Den måste vara en av följande:</para>
+                  <itemizedlist>
+                    <listitem
+><para
+><emphasis
+>char</emphasis
+> för ett 8-bitars ASCII-tecken</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>int8, int16, int32, int64</emphasis
+> för ett heltal med tecken av den storleken</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>uint8, uint16, uint32, uint64</emphasis
+> för ett heltal utan tecken av den storleken</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>bool8, bool16, bool32, bool64</emphasis
+> för ett Booleskt värde utan tecken (0 = falskt, alla andra värden = sant) av den storleken</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>float</emphasis
+> för ett 32-bitars IEEE754 flyttal</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>double</emphasis
+> för ett 64-bitars IEEE754 flyttal</para
+></listitem>
+                  </itemizedlist>
+                </listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;bitfield&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>För att skapa ett bitfält. Elementet accepterar inte några delelement och kan ha följande egenskaper:</para>
+              <variablelist>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>width</emphasis
+></term>
+                  <listitem
+><para
+>Antal bitar som används av bitfältet. Måste vara mellan 1 och 64.</para
+></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>type</emphasis
+></term>
+                  <listitem>
+                    <para
+>Det här bitfältets typ Den måste vara en av följande:</para>
+                    <itemizedlist>
+                      <listitem
+><para
+><emphasis
+>unsigned</emphasis
+> för ett bitfält där värdet tolkas som ett värde utan tecken (värdet går från 0 till 2<superscript
+>bredd</superscript
+> - 1)</para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>signed</emphasis
+> för ett bitfält där värdet tolkas som ett värde med tecken (värdet går från -2<superscript
+>bredd - 1</superscript
+> till 2<superscript
+>bredd - 1</superscript
+> - 1)</para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>bool</emphasis
+> för ett bitfält där värdet tolkas som ett Booleskt värde</para
+></listitem>
+                  </itemizedlist>
+                  <note
+><para
+>Kom alltid ihåg att lägga till utfyllnad efter <emphasis
+>&lt;bitfield&gt;</emphasis
+>, eftersom annars börjar nästa element i mitten av en byte (utom för strängar och fält, eftersom de lägger till utfyllnad automatiskt). Utfyllnad är förstås inte nödvändig om beteendet är det önskade.</para
+></note>
+                  </listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;enum&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>För att skapa en primitiv typ, men där värdena visas som medlemmar i en uppräkningstyp om möjligt. Elementet accepterar inga delelement (dock behövs taggen <emphasis
+>&lt;enumDef&gt;</emphasis
+> i filen för att referera till den). Den har följande egenskaper:</para>
+              <variablelist>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>enum</emphasis
+></term>
+                  <listitem
+><para
+>Värdets underliggande uppräkningstyp. Måste matcha egenskapen <emphasis
+>name</emphasis
+> för en av taggarna <emphasis
+>&lt;enumDef&gt;</emphasis
+> i filen.</para
+></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>type</emphasis
+></term>
+                  <listitem>
+                    <para
+>Uppräkningstypens typ. Se typegenskaperna för <emphasis
+>&lt;primitive&gt;</emphasis
+>. Enda skillnaden är att <emphasis
+>Double</emphasis
+> och <emphasis
+>Float</emphasis
+> inte är vettiga.</para>
+                  </listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
+          </varlistentry>
+
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;flags&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Det här är samma sak som <emphasis
+>&lt;enum&gt;</emphasis
+> med den enda skillnaden att värdena representeras som <emphasis
+>logiskt eller på bitnivå</emphasis
+> av alla värden i uppräkningstypen.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;struct&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>För att skapa en struktur. Alla andra element (inklusive <emphasis
+>&lt;struct&gt;</emphasis
+>) kan ingå under det och blir då en del av strukturen som skapas.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;union&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>För att skapa en union. I stort sett samma sak som <emphasis
+>&lt;struct&gt;</emphasis
+> utom att alla ingående element börjar från samma position. Användbart för att tolka samma byte-sekvens på olika sätt.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;array&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>För att skapa ett fält. Elementet accepterar exakt ett underliggande objekt (fältets typ), som kan vara vilket som helst av elementen, till och med <emphasis
+>&lt;array&gt;</emphasis
+> själv. Det har också följande egenskaper:</para>
+              <variablelist>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>length</emphasis
+></term>
+                  <listitem
+><para
+>Antal element i fältet som ett decimaltal. Som ett alternativ kan det också vara en sträng som motsvarar namnegenskapen hos ett tidigare definierat element <emphasis
+>&lt;primitive&gt;</emphasis
+>, <emphasis
+>&lt;enum&gt;</emphasis
+> eller <emphasis
+>&lt;flags&gt;</emphasis
+>. Då blir längden det elementets värde. För närvarande är det begränsat till 10000, eftersom större fält skulle använda för mycket minne och slöa ner verktyget för mycket. </para
+></listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;string&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>För att skapa en sträng med diverse olika kodningar. Normalt skapas en C-liknande sträng terminerad med <emphasis
+>NULL</emphasis
+>. Dock kan annorlunda typer av strängar skapas med följande egenskaper:</para>
+              <variablelist>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>terminatedBy</emphasis
+></term>
+                  <listitem
+><para
+>Egenskapen avgör vilket kodvärde i Unicode som avslutar strängen. Det måste vara ett hexadecimalt tal (med valfritt inledande <emphasis
+>0x</emphasis
+>). När kodningen är ASCII, är bara värden upp till 0x7f meningsfulla. Om varken denna, <emphasis
+>maxCharCount</emphasis
+> eller <emphasis
+>maxByteCount</emphasis
+> har angivits, antas den vara inställt till 0 (strängformat enligt C). </para
+></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>maxCharCount</emphasis
+></term>
+                  <listitem
+><para
+>Det maximala antalet tecken som strängen kan ha. Om <emphasis
+>terminatedBy</emphasis
+> också har angivits slutar strängen beroende på vilket som inträffar först. Det är ömsesidigt uteslutande för <emphasis
+>maxByteCount</emphasis
+>.</para
+></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>maxByteCount</emphasis
+></term>
+                  <listitem
+><para
+>Det maximala antalet byte som strängens längd kan vara. Om <emphasis
+>terminatedBy</emphasis
+> också har angivits slutar strängen beroende på vilket som inträffar först. Detta är ömsesidigt uteslutande med <emphasis
+>maxCharCount</emphasis
+>. Med kodningar som <emphasis
+>ASCII</emphasis
+> är det samma sak som <emphasis
+>maxCharCount</emphasis
+>.</para
+></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>type</emphasis
+></term>
+                  <listitem
+><para
+>Strängens kodning. Kan vara ett av följande:</para>
+                    <itemizedlist>
+                      <listitem
+><para
+><emphasis
+>ASCII</emphasis
+></para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>LATIN-1</emphasis
+></para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>UTF-8</emphasis
+></para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>UTF-16-LE</emphasis
+> eller <emphasis
+>UTF-16-BE</emphasis
+>. Om varken suffixet <emphasis
+>-LE</emphasis
+> eller <emphasis
+>-BE</emphasis
+> anges, antas LE (little endian). </para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>UTF-32-LE</emphasis
+> eller <emphasis
+>UTF-32-BE</emphasis
+>. Om varken suffixet <emphasis
+>-LE</emphasis
+> eller <emphasis
+>-BE</emphasis
+> anges, antas LE (little endian). </para
+></listitem>
+                    </itemizedlist>
+                  </listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
+          </varlistentry>
+      </variablelist>
+      <para
+>Varje element accepterar också egenskapen <emphasis
+>name</emphasis
+> som därefter är synligt i strukturvyn. </para>
+    </sect2>
+
+    <sect2>
+      <title
+>Ett exempel på en strukturdefinition både i &XML; och Javascript</title>
+      <note
+><para
+>En mer aktuell, men dock icke fullständig handledning om hur man skriver strukturdefinitioner finns <ulink url="https://userbase.kde.org/Okteta/Writing_structure_definitions"
+>på KDE:s användarbas Wiki</ulink
+>. </para
+></note>
+
+      <sect3>
+        <title
+>Det gemensamma steget som delas av båda tillvägagångssätten</title>
+        <para
+>Vår metadatafil ser ut på följande vis: <screen>
+        [Desktop Entry]
+        Icon=arrow-up<co id="icon" />
+        Type=Service
+        ServiceTypes=KPluginInfo
+
+        Name=Enkel teststruktur
+        Comment=En mycket enkelt teststruktur som bara innehåller två objekt
+
+        X-KDE-PluginInfo-Author=Alex Richardson
+        X-KDE-PluginInfo-Email=foo.bar@email.org
+        X-KDE-PluginInfo-Name=enkelstrukt
+        X-KDE-PluginInfo-Version=1.0
+        X-KDE-PluginInfo-Website=https://www.plugin.org/
+        X-KDE-PluginInfo-Category=structure
+        X-KDE-PluginInfo-License=LGPL
+        X-KDE-PluginInfo-EnabledByDefault=false
+        </screen
+> <calloutlist
+> <callout arearefs="icon"
+> <para
+>Ikonen visas i &okteta; för strukturen. Kan vara vad som helst som hittas genom att köra <userinput
+><command
+>kdialog</command
+> <option
+>--geticon</option
+></userinput
+> eller en sökväg till en ikon.</para
+> </callout
+> </calloutlist
+> Fälten bör vara ganska självklara, utom <literal
+>X-KDE-PluginInfo-Name</literal
+>. Värdet på detta fält måste motsvara katalogen som innehåller filen, samt namnet på <literal role="extension"
+>.desktop</literal
+>-filen. När &XML;-strukturdefinitionerna skapas måste också namnet på <literal role="extension"
+>.osd</literal
+>-filen motsvara namnet. </para>
+
+        <para
+>I det här exemplet skulle vi ha en katalog kallad <filename
+>enkelstrukt</filename
+> som innehåller filen <filename
+>enkelstrukt.desktop</filename
+>. När strukturer definieras med &XML; skulle katalogen också innehålla en fil kallad <filename
+>enkelstrukt.osd</filename
+>. Med Javascript skulle vi istället ha en fil kallad <filename
+>main.js</filename
+>.</para>
+      </sect3>
+      <sect3>
+        <title
+>En enkel &XML;-strukturdefinition</title>
+        <para
+>Till att börja med skapar vi en definition för en mycket enkel teststruktur som bara innehåller enkla datatyper (ett tecken, ett 32-bitars heltal och ett bitfält). De skulle uttryckas i C/C++ som: <screen>
+          struct simple {
+            char aChar;
+            int anInt;
+            bool bitFlag :1;
+            unsigned padding :7;
+          };
+          </screen
+> Det första steget är att skriva <literal role="extension"
+>.osd</literal
+>-filen, som vi kallar <filename
+>enkelstrukt.osd</filename
+>: <screen
+><markup>
+          &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+          &lt;data&gt;
+            &lt;struct name="simple"&gt;
+              &lt;primitive name="aChar" type="Char"/&gt;
+              &lt;primitive name="anInt" type="Int32"/&gt;
+              &lt;bitfield name="bitFlag" type="bool" width="1"/&gt;
+              &lt;bitfield name="padding" type="unsigned" width="7"/&gt;
+            &lt;/struct&gt;
+          &lt;/data&gt;
+          </markup
+></screen
+> som är ganska lik definitionen i C/C++. </para>
+          <para
+>Skapa nu katalogen <filename class="directory"
+>enkelstrukt</filename
+> inne i strukturens installationskatalog (se manuell installation av strukturdefinitioner), och kopiera de två filerna till katalogen. Nu kan du starta om &okteta; och använda den nya strukturen.</para>
+      </sect3>
+      <sect3>
+        <title
+>Den enkla strukturen i Javascript</title>
+        <para
+>För att implementera ovanstående struktur med Javascript, skapa en fil kallad <filename
+>main.js</filename
+> istället för <filename
+>enkelstrukt.osd</filename
+> och ändra X-KDE-PluginInfo-Category=structure till X-KDE-PluginInfo-Category=structure/js. Filens innehåll ska vara: <screen>
+        function init() {
+          var structure = struct({
+            aChar : char(),
+            anInt : int32(),
+            bitFlag : bitfield("bool", 1),
+            padding : bitfield("unsigned", 7),
+          })
+          return structure;
+        }
+        </screen
+> Strukturen som visas av &okteta; är alltid returvärdet från funktionen <literal
+>init</literal
+>.</para>
+        <para
+>Följande funktioner kan anropas för att skapa en enkel typ: <itemizedlist
+> <listitem
+><para
+>char()</para
+></listitem
+> <listitem
+><para
+>int8(), int16(), int32() eller int64()</para
+></listitem
+> <listitem
+><para
+>uint8(), uint16(), uint32() eller uint64()</para
+></listitem
+> <listitem
+><para
+>bool8(), bool16(), bool32() eller bool64()</para
+></listitem
+> <listitem
+><para
+>float()</para
+></listitem
+> <listitem
+><para
+>double()</para
+></listitem
+> </itemizedlist
+> Funktionen bitfield har två parametrar, där den första är en sträng som består av <literal
+>bool</literal
+>, <literal
+>signed</literal
+> eller <literal
+>unsigned</literal
+>. Den andra parametern är ett heltal som anger bredden i bitar. </para>
+      </sect3>
+      <sect3>
+        <title
+>Mer komplexa strukturer</title>
+        <para
+>Härnäst skapar vi en definition av en mer komplex struktur, som vi kallar "komplex" och sparar i en fil som heter <filename
+>komplex.osd</filename
+>. Strukturen innehåller två fält (ett med fast längd och ett där längden bestäms vid körningstillfället) samt en nästlad struktur och en union. <screen
+><markup>
+          &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+          &lt;data&gt;
+            &lt;struct name="complex"&gt;
+              &lt;primitive name="size" type="UInt8" /&gt;
+              &lt;union name="aUnion"&gt;
+                &lt;array name="fourBytes" length="4"&gt;
+                  &lt;primitive type="Int8" /&gt;
+                &lt;/array&gt;
+              &lt;/union&gt;
+              &lt;struct name="nested"&gt;
+                &lt;array name="string" length="size"&gt; &lt;!-- references the field size above --&gt;
+                  &lt;primitive type="Char" /&gt;
+                &lt;/array&gt;
+              &lt;/struct&gt;
+            &lt;/struct&gt;
+          &lt;/data&gt;
+          </markup
+></screen
+> Det skulle motsvara följande i pseudo-C/C++ <screen
+>struct complex {
+    uint8_t size;
+    union aUnion {
+      int8_t fourBytes[4];
+    };
+    struct nested {
+      char string[size] // inte giltig C++, referensvärde för storleken uint8
+    };
+};
+          </screen>
+          </para>
+          <note
+><para
+>Uppenbarligen kan du bara låta fält med dynamisk längd referera till fält innan fältet.</para
+></note>
+          <para
+>Därefter skapar vi filen <filename
+>komplex.desktop</filename
+>precis som i det tidigare exemplet (försäkra dig om att du anger <literal
+>X-KDE-PluginInfo-Name</literal
+> riktigt) och gör också samma sak för att installera båda filerna.</para>
+      </sect3>
+      <sect3>
+        <title
+>Ytterligare information</title>
+        <para
+>Några exempel på strukturdefinitioner finns i <ulink url="https://commits.kde.org/okteta?path=kasten/controllers/view/structures/examples/okteta/structures/"
+>Git-arkivet.</ulink
+> Det omfattar till exempel filhuvud för PNG-filer, filhuvud för ELF-filen. Ett &XML;-schema som beskriver strukturen hos <literal role="extension"
+>.osd</literal
+>-filen finns <ulink url="https://commits.kde.org/okteta?path=kasten/controllers/view/structures/schema/"
+>här</ulink
+>. Om mer information behövs kontakta mig gärna via &Alex.Richardson.email;. </para>
+      </sect3>
+    </sect2>
+<!--FIXME missing
+Extended structures definitions
+Structures Script Console-->
+</sect1>
+</chapter>
+
+<chapter id="interface-overview">
+<title
+>Översikt av gränssnittet</title>
+
+<sect1 id="menu-commands">
+<title
+>Menyalternativ</title>
+
+<para
+>Apart from the common &kde; menus described in the <ulink url="help:/fundamentals/menus.html"
+>Menu</ulink
+> chapter of the &kde; Fundamentals documentation &okteta; has these application specific menu entries: </para>
+
+<sect2 id="file-menu">
+<title
+>Menyn Arkiv</title>
+
+<variablelist>
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Ny</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Skapa ett nytt byte-fält...</action
+></para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>Tomt</guimenuitem
+>: ... som tomma.</para>
+    </listitem>
+    <listitem
+><para
+><guimenuitem
+>Från klippbordet</guimenuitem
+>: ... enligt klippbordets nuvarande innehåll.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Mönster</guimenuitem
+>: ... med ett givet mönster.</para>
+    </listitem>
+    <listitem
+><para
+><guimenuitem
+>Slumpmässig data</guimenuitem
+>: ... med slumpmässig data.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Följd</guimenuitem
+>: ... med alla byte-värden från 0 till 255.</para
+></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guisubmenu
+>Exportera</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+>Exportera markerade byte-värden till en fil...</para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>Värden</guimenuitem
+>: ... kodade som byte-värden. Normalt åtskiljs värdena av ett blanktecken. Tecknen som används som <guilabel
+>Avdelare</guilabel
+> kan ändras i dialogrutan <guilabel
+>Exportera</guilabel
+>. </para>
+    </listitem>
+    <listitem
+><para
+><guimenuitem
+>Tecken</guimenuitem
+>: ... kodade som vanlig text. </para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Base64</guimenuitem
+>: ... kodad med <ulink url="https://sv.wikipedia.org/wiki/Base64"
+>Base64</ulink
+>-format.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Base32</guimenuitem
+>: ... kodad med <ulink url="https://en.wikipedia.org/wiki/Base32"
+>Base32</ulink
+> format.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Ascii85</guimenuitem
+>: ... kodat med formatet <ulink url="https://en.wikipedia.org/wiki/Ascii85"
+>Ascii85</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Uuencoding</guimenuitem
+>: ... kodat med formatet <ulink url="https://en.wikipedia.org/wiki/Uuencoding"
+>Uuencoding</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Xxencoding</guimenuitem
+>: ... kodat med formatet <ulink url="https://en.wikipedia.org/wiki/Xxencoding"
+>Xxencoding</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Intel Hex</guimenuitem
+>: ... kodat med formatet <ulink url="https://en.wikipedia.org/wiki/Intel_Hex"
+>Intel Hex</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>S-Record</guimenuitem
+>: ... kodat med formatet <ulink url="https://en.wikipedia.org/wiki/S-record"
+>S-Record</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>C-fält</guimenuitem
+>: ... definerade som ett fält i programspråket C.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Visa som vanlig text</guimenuitem
+>: ... som i datavyn med position, byte-värden och tecken. </para
+></listitem>
+    </itemizedlist>
+    </listitem>
+
+</varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guisubmenu
+>Rättigheter</guisubmenu
+> <guimenuitem
+>Aktivera skrivskydd</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+>Om vald, kan inte några ändringar göras av det inlästa byte-fältet.</para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Stäng alla andra</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Stäng alla utom det aktuella byte-fältet.</action
+></para
+></listitem>
+    </varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="edit-menu">
+<title
+>Menyn Redigera</title>
+<variablelist>
+<para
+>Enkel kopiering och urklipp skickar data till klippbordet med Mime-typen <quote
+>application/octetstream</quote
+>, &klipper; klarar inte av att visa sådan data, och nästan inga andra program kan hantera det heller, eftersom det helt enkelt är rådata. Se alltså också undermenyn <guisubmenu
+>Kopiera som</guisubmenu
+>.</para>
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Redigera</guimenu
+> <guisubmenu
+>Kopiera som</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+>Kopiera de markerade värdena med ett av olika format till klippbordet. Se menyalternativet <menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guisubmenu
+>Exportera</guisubmenu
+></menuchoice
+> för en lista med tillgängliga format. </para>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Redigera</guimenu
+> <guisubmenu
+>Infoga</guisubmenu
+> </menuchoice
+></term>
+    <listitem>
+    <variablelist>
+    <varlistentry>
+    <term
+><menuchoice>
+    <guimenuitem
+>Infoga mönster...</guimenuitem>
+    </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Infoga en angiven bytesträng vid markören.</action
+></para>
+    <para
+>Alternativ i dialogrutan låter dig ange antal gånger som mönstret infogas och dess format (Hexadecimal, Decimal, Oktal, Binär, Tecken eller UTF-8).</para>
+    <!--FIXME Random Data + Sequence - use cases?-->
+    </listitem>
+    </varlistentry>
+    </variablelist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>A</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Redigera</guimenu
+> <guimenuitem
+>Avmarkera</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Avmarkerar den aktuella markeringen.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Redigera</guimenu
+> <guimenuitem
+>Markera intervall...</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Öppnar en inbäddad dialogruta för att ange intervallet att markera.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+><keycap
+>Ins</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Redigera</guimenu
+> <guimenuitem
+>Ersättningsläge</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Byt mellan infoga och ersätt</action
+>. </para>
+    <note
+><para
+>Överskrivningsläge är implementerat att vara mycket strikt. Det är inte möjligt att ändra datastorleken (inget tillägg eller borttagning av data).</para
+></note>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>F</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Redigera</guimenu
+> <guimenuitem
+>Sök...</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Sök efter ett angivet mönster i dokumentet</action
+>. Hexadecimal, decimal, oktal, binär eller textmönster kan sökas efter.</para>
+    <para
+>Alternativ i dialogrutan låter dig ange startpunkten, riktningen och området för sökningen.</para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>G</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Redigera</guimenu
+> <guimenuitem
+>Gå till position...</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Flytta markören till en angiven position.</action
+></para
+></listitem>
+    </varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="view-menu">
+<title
+>Menyn Visa</title>
+
+<variablelist>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycap
+>F11</keycap
+> </shortcut
+> <guimenu
+>Visa</guimenu
+> <guimenuitem
+>Visa radposition</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Växla visning av radposition i en ruta till vänster på eller av.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Visa</guimenu
+> <guisubmenu
+>Visa värden eller tecken</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Välj vilka tolkningar av byte-värdena som visas</action
+>. Möjligheterna är:</para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>Värden</guimenuitem
+></para>
+    </listitem>
+    <listitem
+><para
+><guimenuitem
+>Tecken</guimenuitem
+></para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Värden och tecken</guimenuitem
+></para
+></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Visa</guimenu
+> <guisubmenu
+>Värdekodning</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Välj kodningen av värdena</action
+> från:</para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>Hexadecimal</guimenuitem
+></para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Decimal</guimenuitem
+></para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Oktal</guimenuitem
+></para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Binär</guimenuitem
+></para
+></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Visa</guimenu
+> <guisubmenu
+>Teckenkodning</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Välj kodningen av tecknen</action
+> från undermenyn. </para>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Visa</guimenu
+> <guimenuitem
+>Visa tecken som inte kan skrivas ut</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Växla visning av tecken som inte kan skrivas ut på eller av</action
+>. Om visningen är avstängd, visas ett ersättningstecken istället på motsvarande platser i teckenkolumnen.</para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Visa</guimenu
+> <guisubmenu
+>Ställ in byte per rad</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Markera visade byte per rad</action
+> i dialogrutan, standardvärdet är 16 byte. </para>
+    </listitem>
+    </varlistentry>
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Visa</guimenu
+> <guisubmenu
+>Ställ in byte per grupp</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Normalt visas hexadecimala värden i grupper om 4 byte.</action
+> Genom att använda det här menyalternativet kan du anpassa det till dina önskemål i en dialogruta. </para>
+    </listitem>
+    </varlistentry>
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Visa</guimenu
+> <guisubmenu
+>Dynamisk layout</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Ställ in reglerna för layout av datavisningen</action
+>. Det definierar hur många byte som visas per rad, beroende på vyns bredd. Möjliga regler är:</para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>Av</guimenuitem
+>: Layouten är låst till aktuellt antal byte-värden per rad och ändras inte när vyns storlek ändras.</para>
+    </listitem>
+    <listitem
+><para
+><guimenuitem
+>Radbryt bara fullständiga byte-grupper</guimenuitem
+>: Placerar så många byte-värden per rad som möjligt, under förutsättning att grupper av värden är fullständiga. </para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>På</guimenuitem
+>: Samma som föregående, men tillåter också ofullständiga grupper av byte-värden.</para
+></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Visa</guimenu
+> <guisubmenu
+>Vyläge</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Välj utläggning av vyn</action
+> från:</para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>Kolumner</guimenuitem
+>: Värden och tolkningen som tecken visas i den klassiska utläggningen där var och en anges i en separat kolumn.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Rader</guimenuitem
+>: Tolkningen av en byte som tecken visas direkt under värdetolkningen.</para
+></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>T</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visa</guimenu
+> <guimenuitem
+>Dela horisontellt</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Dela vyområdet med vyn som för närvarande har fokus i två delar och lägg till en kopia av den nuvarande vyn i det nya nedre området.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>L</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visa</guimenu
+> <guimenuitem
+>Dela vertikalt</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Dela vyområdet med vyn som för närvarande har fokus i två delar och lägg till en kopia av den nuvarande vyn i det nya högra området.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>R</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visa</guimenu
+> <guimenuitem
+>Stäng vyområde</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Stänger vyområdet med vyn som för närvarande har fokus.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Visa</guimenu
+> <guimenuitem
+>Vyprofil</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+>Vyinställningar kan sparas separat som vyprofiler. Profilen som för närvarande är vald kan direkt uppdateras från de nuvarande vyinställningarna, eller så kan en ny skapas från dem. Alla vyprofiler kan hanteras i en dialogruta tillgänglig med <menuchoice
+><guimenu
+>Inställningar</guimenu
+> <guimenuitem
+>Hantera vyprofiler...</guimenuitem
+></menuchoice
+>.</para
+></listitem>
+    </varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<sect2 id="windows-menu">
+<title
+>Menyn Fönster</title>
+
+    <para
+>Tillhandahåller en lista med aktuella vyer. Välj aktivt fönster.</para>
+
+</sect2>
+
+<sect2 id="bookmarks-menu">
+<title
+>Menyn Bokmärken</title>
+
+    <para
+>Flera bokmärken kan anges för ett enskilt byte-fält. Varje byte-fält har sin egen uppsättning bokmärken, och lämplig uppsättning visas längst ner i menyn <guimenu
+>Bokmärken</guimenu
+>. Välj ett bokmärke i menyn för att flytta markören i vyn till det. <note
+><para
+>Bokmärken är för närvarande bara tillfälliga och sparas inte om ett byte-fält eller hela programmet stängs.</para
+></note
+></para>
+
+<variablelist>
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>B</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bokmärken</guimenu
+> <guimenuitem
+>Lägg till bokmärke</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+>Lägg till ett bokmärke för en plats i byte-fältet.</para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>B</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bokmärken</guimenu
+> <guimenuitem
+>Ta bort bokmärke</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Ta bort aktuellt bokmärke</action
+>. Kommandot är bara tillgängligt om markören är på en plats med ett bokmärke.</para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Bokmärken</guimenu
+> <guimenuitem
+>Ta bort alla bokmärken</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Rensa bokmärkeslistan.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+><keycap
+>Alt</keycap
+><keycap
+>Up</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bokmärken</guimenu
+> <guimenuitem
+>Gå till föregående bokmärke</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Flytta markören till föregående bokmärke.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+><keycap
+>Alt</keycap
+><keycap
+>Neråtpil</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bokmärken</guimenu
+> <guimenuitem
+>Gå till nästa bokmärke</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Flytta markören till nästa bokmärke.</action
+></para
+></listitem>
+    </varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<sect2 id="tools-menu">
+<title
+>Menyn Verktyg</title>
+
+<para
+>Tillhandahåller en lista med installerade verktyg. Visa eller dölj varje verktyg. En detaljerad beskrivning av varje verktyg hittar du i avsnittet <link linkend="tools"
+>Verktyg</link
+>.</para>
+
+</sect2>
+
+<sect2 id="settings-menu">
+<title
+>Menyn Inställningar</title>
+<variablelist>
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Inställningar</guimenu
+> <guimenuitem
+>Hantera vyprofiler...</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+>Visar en dialogruta för att skapa, redigera, ta bort och ställa in en förvald vyprofil.</para
+></listitem>
+    </varlistentry>
+</variablelist>
+
+</sect2>
+
+</sect1>
+
+</chapter>
+
+<chapter id="credits">
+    <title
+>Tack till och licens</title>
+
+    <para
+>&okteta; </para>
+
+    <!--List all the copyright holders here-->
+    <para
+>Program Copyright 2006-2012 &Friedrich.Kossebau; &Friedrich.Kossebau.email;</para>
+
+    <para
+>Dokumentation Copyright 2008, 2010 &Friedrich.Kossebau; &Friedrich.Kossebau.email;, &Alex.Richardson; &Alex.Richardson.email;</para>
+
+    <para
+>Översättning Stefan Asserhäll <email
+>stefan.asserhall@bredband.net</email
+></para
+> &underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-omittag:t
+sgml-shorttag:t
+sgml-namecase-general:t
+sgml-always-quote-attributes:t
+sgml-indent-step:0
+sgml-indent-data:nil
+sgml-parent-document:nil
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+-->

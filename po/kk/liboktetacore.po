@@ -1,0 +1,42 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Sairan Kikkarin <sairan@computer.org>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2020-06-30 07:56+0200\n"
+"PO-Revision-Date: 2010-07-11 08:57+0600\n"
+"Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
+"Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
+"Language: kk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: piecetable/insertpiecetablechange.cpp:26
+#, kde-format
+msgctxt "name of the change"
+msgid "Insert"
+msgstr "Енгізу"
+
+#: piecetable/removepiecetablechange.cpp:26
+#, kde-format
+msgctxt "name of the change"
+msgid "Remove"
+msgstr "Өшіру"
+
+#: piecetable/replacepiecetablechange.cpp:26
+#, kde-format
+msgctxt "name of the change"
+msgid "Replace"
+msgstr "Алмастыру"
+
+#: piecetable/swaprangespiecetablechange.cpp:26
+#, kde-format
+msgctxt "name of the change"
+msgid "Swap Ranges"
+msgstr "Ауқымдарын айырбастау"

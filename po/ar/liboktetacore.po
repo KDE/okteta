@@ -1,0 +1,44 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Youness BOUTYOUR <niceboy@linuxac.org>, 2008.
+# Youness BOUTYOUR <niceboy120@gmail.com>, 2008.
+# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: liboktetacore\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2020-06-30 07:56+0200\n"
+"PO-Revision-Date: 2010-07-23 22:51+0400\n"
+"Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
+"Language-Team: Arabic <linuxac-kde-arabic-team@googlegroups.com>\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Lokalize 1.0\n"
+
+#: piecetable/insertpiecetablechange.cpp:26
+#, kde-format
+msgctxt "name of the change"
+msgid "Insert"
+msgstr "أدخل"
+
+#: piecetable/removepiecetablechange.cpp:26
+#, kde-format
+msgctxt "name of the change"
+msgid "Remove"
+msgstr "احذف"
+
+#: piecetable/replacepiecetablechange.cpp:26
+#, kde-format
+msgctxt "name of the change"
+msgid "Replace"
+msgstr "استبدل"
+
+#: piecetable/swaprangespiecetablechange.cpp:26
+#, kde-format
+msgctxt "name of the change"
+msgid "Swap Ranges"
+msgstr "اعكس النطاقات"

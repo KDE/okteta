@@ -1,0 +1,66 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Franklin Weng <franklin@mail.everfocus.com.tw>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-03-21 08:06+0100\n"
+"PO-Revision-Date: 2010-11-09 09:40+0800\n"
+"Last-Translator: Franklin Weng <franklin@mail.everfocus.com.tw>\n"
+"Language-Team: Chinese Traditional <zh-l10n@lists.linux.org.tw>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.1\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: controller/clipboardcontroller.cpp:57
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Copy"
+msgstr ""
+
+#: controller/clipboardcontroller.cpp:67
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Cu&t"
+msgstr ""
+
+#: controller/clipboardcontroller.cpp:74
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Paste"
+msgstr ""
+
+#: controller/keynavigator.cpp:143
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Select &All"
+msgstr ""
+
+#: controller/undoredocontroller.cpp:64
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Undo"
+msgstr ""
+
+#: controller/undoredocontroller.cpp:70
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Re&do"
+msgstr ""
+
+#: controller/valueeditor.cpp:159
+#, kde-format
+msgctxt "name of the change"
+msgid "Insert"
+msgstr "插入"
+
+#: controller/valueeditor.cpp:200
+#, kde-format
+msgctxt "name of the change"
+msgid "Replace"
+msgstr "取代"

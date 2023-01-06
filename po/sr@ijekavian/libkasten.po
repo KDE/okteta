@@ -1,0 +1,487 @@
+# Translation of libkasten.po into Serbian.
+# Slobodan Simic <slsimic@gmail.com>, 2009, 2010.
+# Chusslove Illich <caslav.ilic@gmx.net>, 2009, 2010.
+# Dalibor Djuric <dalibor.djuric@mozilla-srbija.org>, 2010.
+# Dalibor Djuric <daliborddjuric@gmail.com>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: libkasten\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2019-08-30 07:40+0200\n"
+"PO-Revision-Date: 2010-07-01 20:54+0200\n"
+"Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
+"Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
+"Language: sr@ijekavian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+"X-Environment: kde\n"
+"X-Generator: Lokalize 1.0\n"
+
+#: controllers/document/modified/modifiedbarcontroller.cpp:99
+#, kde-format
+msgctxt "@tooltip the document is modified"
+msgid "Modified."
+msgstr "Измијењено."
+
+#: controllers/document/modified/modifiedbarcontroller.cpp:100
+#, kde-format
+msgctxt "@tooltip the document is not modified"
+msgid "Not modified."
+msgstr "Није мијењано."
+
+#: controllers/document/readonly/readonlybarcontroller.cpp:37
+#, kde-format
+msgctxt "@option:check the document is read-write"
+msgid "Read-write"
+msgstr "Читање-писање"
+
+#: controllers/document/readonly/readonlybarcontroller.cpp:38
+#, kde-format
+msgctxt "@option:check the document is read-only"
+msgid "Read-only"
+msgstr "Само‑за‑читање"
+
+#: controllers/document/readonly/readonlycontroller.cpp:39
+#, kde-format
+msgctxt "@option:check set the document to read-only"
+msgid "Set Read-only"
+msgstr "Само‑за‑читање"
+
+#: controllers/document/readonly/readonlycontroller.cpp:41
+#, kde-format
+msgctxt "@option:check set the document to read-write"
+msgid "Set Read-write"
+msgstr "Читање-писање"
+
+#: controllers/document/terminal/terminaltool.cpp:46
+#: controllers/document/terminal/terminaltoolviewfactory.cpp:38
+#, kde-format
+msgctxt "@title:window"
+msgid "Terminal"
+msgstr "Терминал"
+
+#: controllers/document/versionview/versiontablemodel.cpp:122
+#, kde-format
+msgctxt "@title:column Id of the version"
+msgid "Id"
+msgstr "ИД"
+
+#: controllers/document/versionview/versiontablemodel.cpp:123
+#, kde-format
+msgctxt "@title:column description of the change"
+msgid "Changes"
+msgstr "измјене"
+
+#: controllers/document/versionview/versiontablemodel.cpp:128
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Id of the version"
+msgstr "ИД верзије"
+
+#: controllers/document/versionview/versiontablemodel.cpp:129
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Description of what changed"
+msgstr "Опис измијењеног"
+
+#: controllers/document/versionview/versionviewtool.cpp:40
+#: controllers/document/versionview/versionviewtoolviewfactory.cpp:38
+#, kde-format
+msgctxt "@title:window"
+msgid "Versions"
+msgstr "Верзије"
+
+#: controllers/documentsystem/close/closecontroller.cpp:54
+#, fuzzy, kde-format
+#| msgctxt "@title:menu"
+#| msgid "Close All"
+msgctxt "@action:inmenu"
+msgid "Close All"
+msgstr "Затвори све"
+
+#: controllers/documentsystem/close/closecontroller.cpp:61
+#, fuzzy, kde-format
+#| msgctxt "@title:menu"
+#| msgid "Close All Other"
+msgctxt "@action:inmenu"
+msgid "Close All Other"
+msgstr "Затвори све друге"
+
+#: controllers/documentsystem/creator/creatorcontroller.cpp:59
+#, kde-format
+msgctxt "@title:menu create new byte arrays from different sources"
+msgid "New"
+msgstr "Нови"
+
+# >! Wrong context marker.
+# >> @item:inmenu +
+#: controllers/documentsystem/creator/creatorcontroller.cpp:68
+#, fuzzy, kde-format
+#| msgctxt "@title:menu create a new empty document"
+#| msgid "Empty"
+msgctxt "@item:inmenu create a new empty document"
+msgid "Empty"
+msgstr "празан"
+
+# >! Wrong context marker.
+# >> @item:inmenu +
+#: controllers/documentsystem/creator/creatorcontroller.cpp:79
+#, fuzzy, kde-format
+#| msgctxt "@title:menu create a new document from data in the clipboard"
+#| msgid "From Clipboard"
+msgctxt "@item:inmenu create a new document from data in the clipboard"
+msgid "From Clipboard"
+msgstr "из клипборда"
+
+#. i18nc("@title:column Id of the version",         "Id") :
+#: controllers/documentsystem/documentsbrowser/documentlistmodel.cpp:128
+#, kde-format
+msgctxt "@title:column description of the change"
+msgid "Title"
+msgstr "наслов"
+
+#. i18nc("@info:tooltip","Id of the version") :
+#: controllers/documentsystem/documentsbrowser/documentlistmodel.cpp:134
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Title of the document"
+msgstr "Наслов документа"
+
+#: controllers/documentsystem/documentsbrowser/documentstool.cpp:48
+#: controllers/documentsystem/documentsbrowser/documentstoolviewfactory.cpp:38
+#, kde-format
+msgctxt "@title:window"
+msgid "Documents"
+msgstr "Документи"
+
+#: controllers/documentsystem/filesystembrowser/filesystembrowsertool.cpp:47
+#: controllers/documentsystem/filesystembrowser/filesystembrowsertoolviewfactory.cpp:38
+#, kde-format
+msgctxt "@title:window"
+msgid "Filesystem"
+msgstr "Фајл систем"
+
+#: controllers/documentsystem/filesystembrowser/filesystembrowserview.cpp:93
+#, kde-format
+msgctxt "@action:intoolbar"
+msgid "Folder of Current Document"
+msgstr "Фасцикла текућег документа"
+
+#: controllers/io/copyas/copyascontroller.cpp:60
+#, kde-format
+msgctxt "@title:menu"
+msgid "Copy As"
+msgstr "Копирање као"
+
+#: controllers/io/copyas/copyascontroller.cpp:107
+#, kde-format
+msgctxt "@item There are no encoders."
+msgid "Not available."
+msgstr "Нема ниједног."
+
+#: controllers/io/copyas/copyasdialog.cpp:53
+#, kde-format
+msgctxt "@title:window"
+msgid "Copy As"
+msgstr "Копирај као"
+
+#: controllers/io/copyas/copyasdialog.cpp:75
+#: controllers/io/export/exportdialog.cpp:75
+#, kde-format
+msgctxt "@title:group"
+msgid "Preview"
+msgstr "Преглед"
+
+#: controllers/io/copyas/copyasdialog.cpp:86
+#, kde-format
+msgctxt "@action:button"
+msgid "&Copy to clipboard"
+msgstr "&Копирај у клипборд"
+
+#: controllers/io/copyas/copyasdialog.cpp:88
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Copy the selected data to the clipboard."
+msgstr "Копирај изабране податке у клипборд"
+
+#: controllers/io/copyas/copyasdialog.cpp:90
+#, kde-kuit-format
+msgctxt "@info:whatsthis"
+msgid ""
+"If you press the <interface>Copy to clipboard</interface> button, the "
+"selected data will be copied to the clipboard with the settings you entered "
+"above."
+msgstr ""
+"Притиском на дугме <interface>Копирај у клипборд</interface>, изабрани "
+"подаци биће копирани у клипборд с поставкама које сте унијели изнад."
+
+#: controllers/io/export/exportcontroller.cpp:56
+#, kde-format
+msgctxt "@title:menu"
+msgid "Export"
+msgstr "Извоз"
+
+#: controllers/io/export/exportcontroller.cpp:103
+#, kde-format
+msgctxt "@item There are no exporters."
+msgid "Not available."
+msgstr "Нема ниједног."
+
+#: controllers/io/export/exportdialog.cpp:53
+#: core/system/modelcodecmanager_p.cpp:115
+#, kde-format
+msgctxt "@title:window"
+msgid "Export"
+msgstr "Извоз"
+
+#: controllers/io/export/exportdialog.cpp:86
+#, kde-format
+msgctxt "@action:button"
+msgid "&Export to File..."
+msgstr "&Извези у фајл..."
+
+#: controllers/io/export/exportdialog.cpp:88
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Export the selected data to a file."
+msgstr "Извези изабране податке у фајл"
+
+#: controllers/io/export/exportdialog.cpp:90
+#, kde-kuit-format
+msgctxt "@info:whatsthis"
+msgid ""
+"If you press the <interface>Export to file</interface> button, the selected "
+"data will be copied to a file with the settings you entered above."
+msgstr ""
+"Притиском на дугме <interface>Извези у фајл...</interface>, изабрани подаци "
+"биће копирани у фајл с поставкама које сте унијели изнад."
+
+#: controllers/io/insert/insertcontroller.cpp:59
+#, kde-format
+msgctxt "@title:menu"
+msgid "Insert"
+msgstr "Уметање"
+
+#: controllers/io/insert/insertcontroller.cpp:109
+#, kde-format
+msgctxt "@item There are no generators."
+msgid "Not available."
+msgstr "Нема ниједног."
+
+#: controllers/io/insert/insertdialog.cpp:48
+#, kde-format
+msgctxt "@title:window"
+msgid "Insert"
+msgstr "Уметање"
+
+#: controllers/io/insert/insertdialog.cpp:58
+#, kde-format
+msgctxt "@action:button"
+msgid "&Insert"
+msgstr "&Уметни"
+
+#: controllers/io/insert/insertdialog.cpp:60
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Insert the generated data into the document."
+msgstr "Уметните генерисане податке у документ."
+
+#: controllers/io/insert/insertdialog.cpp:62
+#, kde-kuit-format
+msgctxt "@info:whatsthis"
+msgid ""
+"If you press the <interface>Insert</interface> button, the data will be "
+"generated with the settings you entered above and inserted into the document "
+"at the cursor position."
+msgstr ""
+"Притиском на дугме <interface>Уметни</interface> биће генерисани подаци "
+"према поставкама које сте унијели изнад и уметнути у документ на положају "
+"курсора."
+
+# >! Wrong context marker.
+#: controllers/io/synchronize/synchronizecontroller.cpp:48
+#, fuzzy, kde-format
+#| msgctxt "@title:menu"
+#| msgid "Reloa&d"
+msgctxt "@action:inmenu"
+msgid "Reloa&d"
+msgstr "&Учитај поново"
+
+#: controllers/shellwindow/viewareasplit/viewareasplitcontroller.cpp:56
+#, fuzzy, kde-format
+#| msgctxt "@title:menu"
+#| msgid "Split Vertically"
+msgctxt "@action:inmenu"
+msgid "Split Vertically"
+msgstr "Подијели усправно"
+
+#: controllers/shellwindow/viewareasplit/viewareasplitcontroller.cpp:64
+#, fuzzy, kde-format
+#| msgctxt "@title:menu"
+#| msgid "Split Horizontal"
+msgctxt "@action:inmenu"
+msgid "Split Horizontal"
+msgstr "Подијели водоравно"
+
+#: controllers/shellwindow/viewareasplit/viewareasplitcontroller.cpp:72
+#, fuzzy, kde-format
+#| msgctxt "@title:menu"
+#| msgid "Close View Area"
+msgctxt "@action:inmenu"
+msgid "Close View Area"
+msgstr "Затвори област приказа"
+
+#: controllers/shellwindow/viewlistmenu/viewlistmenucontroller.cpp:93
+#, kde-format
+msgctxt "@item There are no windows."
+msgid "None."
+msgstr "Ниједан."
+
+#: controllers/view/version/versioncontroller.cpp:46
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Undo"
+msgstr "Опозови"
+
+#: controllers/view/version/versioncontroller.cpp:57
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Redo"
+msgstr "Понови"
+
+#: controllers/view/version/versioncontroller.cpp:144
+#, kde-format
+msgctxt "@action Undo: [change]"
+msgid "Undo: %1"
+msgstr "Опозови: %1|/|Опозови: $[ном %1]"
+
+#: controllers/view/version/versioncontroller.cpp:164
+#, kde-format
+msgctxt "@action Redo: [change]"
+msgid "Redo: %1"
+msgstr "Понови: %1|/|Понови: $[ном %1]"
+
+#: controllers/view/zoom/zoomcontroller.cpp:50
+#, kde-format
+msgid "Zoom"
+msgstr "Увеличај"
+
+#: controllers/view/zoom/zoomcontroller.cpp:59
+#, kde-format
+msgctxt "zoom-factor (percentage)"
+msgid "%1%"
+msgstr "%1%"
+
+#: controllers/view/zoom/zoomcontroller.cpp:72
+#, kde-format
+msgid "&Fit to Width"
+msgstr "Уклопи у &ширину"
+
+#: controllers/view/zoom/zoomcontroller.cpp:74
+#, kde-format
+msgid "&Fit to Height"
+msgstr "Уклопи у &висину"
+
+#: controllers/view/zoom/zoomcontroller.cpp:76
+#, kde-format
+msgid "&Fit to Size"
+msgstr "&Уклопи у величину"
+
+#: controllers/view/zoom/zoomslider.cpp:121
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Zoom: %1%"
+msgstr "Увеличај: %1%"
+
+#: core/system/documentsyncmanager_p.cpp:128
+#, kde-format
+msgctxt "@title:window"
+msgid "Save As"
+msgstr "Уписивање као"
+
+#: core/system/documentsyncmanager_p.cpp:216
+#, kde-format
+msgctxt "@title:window"
+msgid "Close"
+msgstr "Затварање"
+
+#: core/system/documentsyncmanager_p.cpp:251
+#, kde-format
+msgctxt "@title:window"
+msgid "Reload"
+msgstr "Поновно учитавање"
+
+#: core/system/modelcodecmanager_p.cpp:124
+#, kde-format
+msgctxt "@action:button"
+msgid "&Export"
+msgstr "&Извези"
+
+#: gui/system/createdialog.cpp:49
+#, kde-format
+msgctxt "@title:window"
+msgid "Create"
+msgstr "Стварање"
+
+#: gui/system/createdialog.cpp:60
+#, kde-format
+msgctxt "@action:button create the new document"
+msgid "&Create"
+msgstr "&Направи"
+
+#: gui/system/createdialog.cpp:62
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Create a new document with the generated data."
+msgstr "Направите нови документ са генерисаним подацима."
+
+#: gui/system/createdialog.cpp:64
+#, kde-kuit-format
+msgctxt "@info:whatsthis"
+msgid ""
+"If you press the <interface>Create</interface> button, the data will be "
+"generated with the settings you entered above and inserted in a new document."
+msgstr ""
+"Притиском на дугме <interface>Направи</interface> биће генерисани подаци "
+"према поставкама које сте унијели изнад и уметнути у нови документ."
+
+#: gui/system/dialoghandler.cpp:47
+#, kde-kuit-format
+msgctxt "@info"
+msgid "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
+msgstr "Већ постоји фајл по имену<nl/><filename>%1</filename>.<nl/>Пребрисати?"
+
+#: gui/system/dialoghandler.cpp:61
+#, kde-kuit-format
+msgctxt "@info \"%title\" has been modified."
+msgid ""
+"There are unsaved modifications to <filename>%1</filename>. They will be "
+"lost if you reload the document.<nl/>Do you want to discard them?"
+msgstr ""
+"<para><filename>%1</filename> садржи несачуване измјене, које ће бити "
+"изгубљене ако поново учитате документ.</para><para>Желите ли да одбаците "
+"измене?</para>"
+
+#: gui/system/dialoghandler.cpp:74
+#, kde-kuit-format
+msgctxt "@info \"%title\" has been modified."
+msgid ""
+"<filename>%1</filename> has been modified.<nl/>Do you want to save your "
+"changes or discard them?"
+msgstr ""
+"<filename>%1</filename> је измијењен.<nl/>Желите ли да сачувате или одбаците "
+"измјене?"
+
+#: gui/system/dialoghandler.cpp:88
+#, kde-kuit-format
+msgctxt "@info \"%title\" has been modified."
+msgid ""
+"<filename>%1</filename> has been modified.<nl/>Do you want to discard your "
+"changes?"
+msgstr ""
+"<filename>%1</filename> је измијењен.<nl/>Желите ли да одбаците измјене?"
