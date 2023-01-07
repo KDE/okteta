@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-16 00:51+0000\n"
+"POT-Creation-Date: 2023-01-07 00:55+0000\n"
 "PO-Revision-Date: 2010-04-11 06:23+0200\n"
 "Last-Translator: Manfred Wiese <m.j.wiese@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -162,7 +162,7 @@ msgctxt "@title:window"
 msgid "Filesystem"
 msgstr "Dateisysteem"
 
-#: controllers/documentsystem/filesystembrowser/filesystembrowserview.cpp:79
+#: controllers/documentsystem/filesystembrowser/filesystembrowserview.cpp:85
 #, kde-format
 msgctxt "@action:intoolbar"
 msgid "Folder of Current Document"
@@ -446,14 +446,14 @@ msgstr ""
 "Klickst Du op den Knoop <interface>Opstellen</interface>, warrt de Daten mit "
 "de baven ingeven Instellen opstellt un na en nieg Dokment inföögt."
 
-#: gui/system/dialoghandler.cpp:34
+#: gui/system/dialoghandler.cpp:33
 #, kde-kuit-format
 msgctxt "@info"
 msgid "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
 msgstr ""
 "Dat gifft al en Datei bi<nl/><filename>%1</filename>.<nl/>Överschrieven?"
 
-#: gui/system/dialoghandler.cpp:58
+#: gui/system/dialoghandler.cpp:48
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -463,7 +463,7 @@ msgstr ""
 "<filename>%1</filename> barg nich sekerte Ännern. De warrt Di wegkamen, wenn "
 "Du dat Dokment nieg laden deist.<nl/>Wullt Du Dien Ännern wegsmieten?"
 
-#: gui/system/dialoghandler.cpp:71
+#: gui/system/dialoghandler.cpp:61
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -473,7 +473,7 @@ msgstr ""
 "Du hest <filename>%1</filename> ännert.<nl/>Wullt Du Dien Ännern sekern oder "
 "wegsmieten?"
 
-#: gui/system/dialoghandler.cpp:95
+#: gui/system/dialoghandler.cpp:76
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""

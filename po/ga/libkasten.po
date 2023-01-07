@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: playground-utils/okteta.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-16 00:51+0000\n"
+"POT-Creation-Date: 2023-01-07 00:55+0000\n"
 "PO-Revision-Date: 2007-11-05 08:28-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -159,7 +159,7 @@ msgctxt "@title:window"
 msgid "Filesystem"
 msgstr "Córas comhad"
 
-#: controllers/documentsystem/filesystembrowser/filesystembrowserview.cpp:79
+#: controllers/documentsystem/filesystembrowser/filesystembrowserview.cpp:85
 #, kde-format
 msgctxt "@action:intoolbar"
 msgid "Folder of Current Document"
@@ -445,13 +445,13 @@ msgstr ""
 "Má bhrúnn tú an cnaipe <interface>Cruthaigh</interface>, cruthófar na sonraí "
 "de réir na socruithe a d'iontráil tú thuas agus ionsáfar i gcáipéis nua iad."
 
-#: gui/system/dialoghandler.cpp:34
+#: gui/system/dialoghandler.cpp:33
 #, kde-kuit-format
 msgctxt "@info"
 msgid "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
 msgstr "Tá comhad ann cheana<nl/><filename>%1</filename>.<nl/>Forscríobh?"
 
-#: gui/system/dialoghandler.cpp:58
+#: gui/system/dialoghandler.cpp:48
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -462,7 +462,7 @@ msgstr ""
 "luchtaíonn tú an cháipéis arís.<nl/>An bhfuil fonn ort na hathruithe a "
 "chaitheamh i dtraipisí?"
 
-#: gui/system/dialoghandler.cpp:71
+#: gui/system/dialoghandler.cpp:61
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -472,7 +472,7 @@ msgstr ""
 "Athraíodh <filename>%1</filename>.<nl/>An bhfuil fonn ort do chuid athruithe "
 "a shábháil?"
 
-#: gui/system/dialoghandler.cpp:95
+#: gui/system/dialoghandler.cpp:76
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""

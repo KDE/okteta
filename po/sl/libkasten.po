@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-16 00:51+0000\n"
+"POT-Creation-Date: 2023-01-07 00:55+0000\n"
 "PO-Revision-Date: 2020-01-23 15:54+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -155,7 +155,7 @@ msgctxt "@title:window"
 msgid "Filesystem"
 msgstr "Datotečni sistem"
 
-#: controllers/documentsystem/filesystembrowser/filesystembrowserview.cpp:79
+#: controllers/documentsystem/filesystembrowser/filesystembrowserview.cpp:85
 #, kde-format
 msgctxt "@action:intoolbar"
 msgid "Folder of Current Document"
@@ -431,14 +431,14 @@ msgstr ""
 "Če kliknete na gumb <interface>Ustvari</interface>, bodo glede na zgoraj "
 "vnesene nastavitve ustvarjeni podatki in vstavljeni v nov dokument."
 
-#: gui/system/dialoghandler.cpp:34
+#: gui/system/dialoghandler.cpp:33
 #, kde-kuit-format
 msgctxt "@info"
 msgid "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
 msgstr ""
 "Datoteka že obstaja:<nl/><filename>%1</filename>.<nl/>Ali naj jo prepišem?"
 
-#: gui/system/dialoghandler.cpp:58
+#: gui/system/dialoghandler.cpp:48
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -448,7 +448,7 @@ msgstr ""
 "Obstajajo neshranjene spremembe datoteke <filename>%1</filename>. Če znova "
 "naložite dokument, bodo izgubljene.<nl/>Ali jih želite zavreči?"
 
-#: gui/system/dialoghandler.cpp:71
+#: gui/system/dialoghandler.cpp:61
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -458,7 +458,7 @@ msgstr ""
 "<emphasis>%1</emphasis> je bila spremenjena.<nl/>Ali želite shraniti "
 "spremembe ali jih zavreči?"
 
-#: gui/system/dialoghandler.cpp:95
+#: gui/system/dialoghandler.cpp:76
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""

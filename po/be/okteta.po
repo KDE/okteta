@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-27 00:48+0000\n"
+"POT-Creation-Date: 2023-01-07 00:55+0000\n"
 "PO-Revision-Date: 2008-01-06 21:51+0200\n"
 "Last-Translator: Darafei Praliaskouski <komzpa@gmail.com>\n"
 "Language-Team: Belarusian (Official spelling) <i18n@mova.org>\n"
@@ -81,13 +81,13 @@ msgid "Permissions"
 msgstr "Правы доступу"
 
 #. i18n: ectx: Menu (windows)
-#: oktetaui.rc:69
+#: oktetaui.rc:65
 #, kde-format
 msgid "&Windows"
 msgstr ""
 
 #. i18n: ectx: ToolBar (mainToolBar)
-#: oktetaui.rc:82
+#: oktetaui.rc:78
 #, kde-format
 msgid "Main Toolbar"
 msgstr "Галоўная панель начыння"

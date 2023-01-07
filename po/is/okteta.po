@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-27 00:48+0000\n"
+"POT-Creation-Date: 2023-01-07 00:55+0000\n"
 "PO-Revision-Date: 2016-04-08 22:57+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic <translation-team-is@lists.sourceforge.net>\n"
@@ -80,13 +80,13 @@ msgid "Permissions"
 msgstr "Heimildir"
 
 #. i18n: ectx: Menu (windows)
-#: oktetaui.rc:69
+#: oktetaui.rc:65
 #, fuzzy, kde-format
 msgid "&Windows"
 msgstr "&Windows"
 
 #. i18n: ectx: ToolBar (mainToolBar)
-#: oktetaui.rc:82
+#: oktetaui.rc:78
 #, fuzzy, kde-format
 msgid "Main Toolbar"
 msgstr "Aðaltækjaslá"

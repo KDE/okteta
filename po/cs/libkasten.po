@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-16 00:51+0000\n"
+"POT-Creation-Date: 2023-01-07 00:55+0000\n"
 "PO-Revision-Date: 2023-01-04 10:16+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -152,7 +152,7 @@ msgctxt "@title:window"
 msgid "Filesystem"
 msgstr "Souborový systém"
 
-#: controllers/documentsystem/filesystembrowser/filesystembrowserview.cpp:79
+#: controllers/documentsystem/filesystembrowser/filesystembrowserview.cpp:85
 #, kde-format
 msgctxt "@action:intoolbar"
 msgid "Folder of Current Document"
@@ -429,13 +429,13 @@ msgstr ""
 "budou generována podle vašich předešlých nastavení a vložena do nového "
 "dokumentu."
 
-#: gui/system/dialoghandler.cpp:34
+#: gui/system/dialoghandler.cpp:33
 #, kde-kuit-format
 msgctxt "@info"
 msgid "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
 msgstr "Již existuje soubor<nl/><filename>%1</filename>.<nl/>Přepsat?"
 
-#: gui/system/dialoghandler.cpp:58
+#: gui/system/dialoghandler.cpp:48
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -445,7 +445,7 @@ msgstr ""
 "Nemáte uložené změny <filename>%1</filename>. Pokud znovu načtete dokument, "
 "tak se ztratí.<nl/>Přejete si je zahodit?"
 
-#: gui/system/dialoghandler.cpp:71
+#: gui/system/dialoghandler.cpp:61
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -454,7 +454,7 @@ msgid ""
 msgstr ""
 "<filename>%1</filename> byl změněn.<nl/>Přejete si změny uložit nebo zahodit?"
 
-#: gui/system/dialoghandler.cpp:95
+#: gui/system/dialoghandler.cpp:76
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""

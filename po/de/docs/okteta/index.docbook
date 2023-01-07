@@ -1,145 +1,195 @@
 <?xml version="1.0" ?>
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
-  <!ENTITY % English "INCLUDE">
+  <!ENTITY % German "INCLUDE">
   <!ENTITY % addindex "IGNORE">
 ]>
 
 <book id="okteta" lang="&language;">
 
 <bookinfo>
-<title>The &okteta; Handbook</title>
+<title
+>Das Handbuch zu &okteta;</title>
 
 <authorgroup>
-    <author>
-      <firstname>Friedrich</firstname><othername>W. H.</othername><surname>Kossebau</surname>
-      <affiliation>
-        <address>&Friedrich.Kossebau.email;</address>
+    <author
+><firstname
+>Friedrich</firstname
+><othername
+>W. H.</othername
+><surname
+>Kossebau</surname
+> <affiliation
+> <address
+>&Friedrich.Kossebau.email;</address>
       </affiliation>
     </author>
-    <author>
-      <firstname>Alex</firstname><surname>Richardson</surname>
-      <affiliation>
-        <address>&Alex.Richardson.email;</address>
+    <author
+><firstname
+>Alex</firstname
+><surname
+>Richardson</surname
+> <affiliation
+> <address
+>&Alex.Richardson.email;</address>
       </affiliation>
     </author>
-<!-- TRANS:ROLES_OF_TRANSLATORS -->
+<othercredit role="translator"
+><firstname
+>Ingo</firstname
+><surname
+>Malchow</surname
+><affiliation
+><address
+><email
+>ingomalchow@googlemail.com</email
+></address
+></affiliation
+><contrib
+>Übersetzung</contrib
+></othercredit
+> 
 </authorgroup>
 
 <copyright>
-<year>2008, 2010, 2011</year>
-<holder>&Friedrich.Kossebau; and &Alex.Richardson;</holder>
+<year
+>2008, 2010, 2011</year>
+<holder
+>&Friedrich.Kossebau; and &Alex.Richardson;</holder>
 </copyright>
-<legalnotice>&FDLNotice;</legalnotice>
+<legalnotice
+>&FDLNotice;</legalnotice>
 
-<date>2018-03-23</date>
-<releaseinfo>&okteta; 0.24.60</releaseinfo>
+<date
+>2018-03-23</date>
+<releaseinfo
+>&okteta; 0.24.60</releaseinfo>
 
 <abstract>
-  <para>&okteta; is a simple editor for the raw data of files. This type of program
-  is also called hex editor or binary editor.</para>
+  <para
+>&okteta; ist ein einfacher Editor für die Rohdaten von Dateien. Diese Programme werden auch Hexeditor oder Binäreditor genannt.</para>
 </abstract>
 
 <keywordset>
-<keyword>KDE</keyword>
-<keyword>Okteta</keyword>
-<keyword>view</keyword>
-<keyword>edit</keyword>
-<keyword>bits</keyword>
-<keyword>bytes</keyword>
-<keyword>binary</keyword>
-<keyword>octal</keyword>
-<keyword>hexadecimal</keyword>
-<keyword>hex editor</keyword>
-<keyword>raw data</keyword>
+<keyword
+>KDE</keyword>
+<keyword
+>Okteta</keyword>
+<keyword
+>Ansicht</keyword>
+<keyword
+>bearbeiten</keyword>
+<keyword
+>Bits</keyword>
+<keyword
+>bytes</keyword>
+<keyword
+>binär</keyword>
+<keyword
+>oktal</keyword>
+<keyword
+>hexadezimal</keyword>
+<keyword
+>Hex-Editor</keyword>
+<keyword
+>Rohdaten</keyword>
 </keywordset>
 </bookinfo>
 
 <chapter id="introduction">
-<title>Introduction</title>
+<title
+>Einführung</title>
 
-<para>&okteta; is a simple editor for the raw data of files.</para>
+<para
+>&okteta; ist ein einfacher Editor für die Rohdaten von Dateien.</para>
 
-<para>The data is displayed in two variants: as the numeric values of the bytes
-and as the character assigned to the values. Values and characters can be shown
-either in two columns (the traditional display in hex editors) or in rows with
-the value on top of the character. Editing can be done both for the values and
-for the characters.</para>
+<para
+>Die Daten werden auf zwei Arten dargestellt: Als numerische Werte der Bytes und als zugehörige Zeichen. Werte und Zeichen können in zwei Spalten (die traditionelle Anzeige von Hexeditoren) oder in Reihen mit der Anzeige der Werte über den Zeichen dargestellt werden. Die Bearbeitung der Daten ist sowohl als Werte wie auch als Zeichen möglich.</para>
 
-<para>Besides the usual editing capabilities &okteta; also brings a small set of
-tools, like a table listing decodings into common simple data types, a table
-listing all possible bytes with their character and value equivalents, an info
-view with a statistic, a checksum calculator, a filter tool and a string
-extraction tool.</para>
+<para
+>Neben den üblichen Bearbeitungsmöglichkeiten verfügt &okteta; auch über eine kleine Auswahl an Werkzeugen, wie eine Dekodierungs-Tabelle für typische einfache Datentypen, eine Byte-Tabelle mit allen möglichen Zeichen und ihren zugehörigen Werten, eine Informationsansicht mit einer Statistik; eine Prüfsummenberechnung, ein Filterwerkzeug und ein Werkzeug um Zeichenfolgen herausziehen.</para>
 
-<para>All modifications to the data loaded can be endlessly undone or redone.</para>
+<para
+>Alle Änderungen an den geladenen Daten  können beliebig oft rückgängig gemacht und wiederhergestellt werden.</para>
 
 </chapter>
 
 <chapter id="basics">
-<title>Basics</title>
+<title
+>Grundlagen</title>
 
 <sect1 id="starting-basics">
-<title>Starting &okteta;</title>
+<title
+>&okteta; starten</title>
 
-    <para>Type <userinput><command>okteta</command></userinput> at a command
-    prompt or select <guimenuitem>Hex Editor</guimenuitem> from the
-    <menuchoice><guisubmenu>Applications</guisubmenu><guisubmenu>Utilities</guisubmenu>
-    </menuchoice> group in the application launcher.</para>
+    <para
+>Geben Sie <userinput
+><command
+>okteta</command
+></userinput
+> in einer Befehlszeile ein, oder wählen Sie <guimenuitem
+>Hex-Editor</guimenuitem
+> aus der Gruppe  <menuchoice
+><guisubmenu
+>Programme</guisubmenu
+><guisubmenu
+>Dienstprogramme</guisubmenu
+></menuchoice
+> im Startmenü.</para>
 
-    <para>The standard &Qt; and &kf5-full; command line
-    options are available, and can be listed by entering
-    <userinput><command>okteta</command> <option>--help</option></userinput>.</para>
+    <para
+>Die Standard-&Qt;- und &kf5-full;-Befehlszeilenoptionen sind verfügbar, sie werden aufgelistet mit <userinput
+><command
+>okteta</command
+> <option
+>--help</option
+></userinput
+>.</para>
 
-    <para>Command line options specific to &okteta; are:</para>
+    <para
+>Es gibt folgende spezielle Befehlszeilenoptionen für &okteta;:</para>
 
-    <para><option><replaceable>&lt;&URL;(s)&gt;</replaceable></option> - open
-    file(s) from the specified &URL;(s)</para>
+    <para
+><option
+><replaceable
+>&lt;&URL;(s)&gt;</replaceable
+></option
+> - öffnet Dateien mit den angegebenen &URL;(s)</para>
 
 </sect1>
 
 <sect1 id="usage-basics">
-<title>Usage</title>
+<title
+>Benutzung</title>
 
-    <para>The main &okteta; window has the following components:
-    a menu bar, a toolbar, a status bar, one or several sidebars with tools, and
-    the main view with the tabbed data views.</para>
+    <para
+>Das Hauptfenster von &kappname; besteht aus folgende Bereichen: Eine Menüleiste, eine Werkzeugleiste, eine Statusleiste, eine Seitenleiste mit Werkzeugen und dem Hauptbereich mit der Ansicht von Daten in Unterfenstern.</para>
 
-    <para>When a file is opened or a new byte array is created, the bytes
-    contained are listed consecutively in lines with a given number of bytes
-    per line. They are displayed in two variants: as the numeric values of the
-    bytes and as the characters assigned to the values. Values and characters
-    can be shown either separated in two columns or next to each other with the
-    value on top of the character. On the left side the offsets of the first
-    byte in each line are shown.</para>
+    <para
+>Wenn eine Datei geöffnet oder ein Byte-Feld erstellt wird, werden die enthaltenen Bytes zeilenweise fortlaufend mit einer vorgegebenen Anzahl von Bytes je Zeile angezeigt. Die Daten werden auf zwei Arten dargestellt, als numerische Werte derBytes und als zugehörige Zeichen. Werte und Zeilen können entweder nebeneinander in zwei Spalten oder übereinander mit den Werten oberhalb der Zeichen gezeigt werden. Links wird in der Anzeige der Versatz (Offset) des ersten Byte der Zeile angegeben.</para>
 
-    <para>The handling is similar to that of most text editors:
-    the data can be edited, cut, copied, pasted, dragged and dropped much as
-    text in these can. A cursor marks the current position. Pressing the
-    <keycap>Insert</keycap> key toggles between the overwrite and insert modes.
-    The overwrite mode is stricter than in text editors, as it doesn't allow any
-    operation which changes the size of the byte array.</para>
+    <para
+>Die Bearbeitung funktioniert ähnlich wie in den meisten Texteditoren, die Daten können geändert, kopiert, eingefügt, gezogen und abgelegt werden. Ein Cursor markiert die aktuelle Position. Das Drücken der Taste <keycap
+>Einfg</keycap
+> schaltet zwischen Überschreiben und Einfügen um. Der Überschreiben-Modus ist strikter als in Texteditoren, eine Bearbeitung, die die Länge des Byte-Felds ändert, ist nicht möglich.</para>
 
-    <para>Other than in text editors the content is displayed in two variants.
-    Only one of these is active with regard to new input. There are two linked
-    cursors shown for the value and the character display, the cursor of
-    the active one is blinking. With the characters active, characters can be
-    entered as known from text editors. With the values active, typing a digit
-    will open a minimal editor to enter the rest of the value.</para>
+    <para
+>Anders als in Texteditoren wird der Inhalt in zwei Ansichtsfenstern auf verschiedenen Art dargestellt. Eine Eingabe ist nur für eine dieser Ansichten möglich. Die beiden Ansichten haben miteinander verbundene Cursor, der Cursor in der aktiven Ansicht blinkt. In der Zeichenansicht können Zeichen wie im Texteditor eingegeben werden. Geben Sie in der Zahlenansicht eine Ziffer ein, wird ein minimaler Editor für die weitere Eingabe aktiviert.</para>
 
-    <para>The search dialog allows the user to search for a specific string of
-    bytes, definable as values (hexadecimal, decimal, octal, binary) or text
-    (current 8-bit encoding or UTF-8).</para>
+    <para
+>Im Suchdialog können Sie nach einer bestimmten Folge von Bytes suchen, das Suchmuster kann als Wert (hexadezimal, dezimal, oktal, binär) oder als Text (kodiert in 8-Bit oder UTF-8) eingegeben werden.</para>
 
-    <para>Multiple byte arrays can be open at the same time, but only one can be
-    active. Use the <guimenu>Windows</guimenu> menu to select which byte array will
-    be active.</para>
+    <para
+>Mehrere Byte-Felder können zur gleichen Zeit geöffnet werden, aber nur eines kann aktiv sein. Benutzen Sie das Menü <guimenu
+>Fenster</guimenu
+> zum Auswählen des aktiven Byte-Feldes.</para>
 </sect1>
 
 
 </chapter>
 
 <chapter id="tools">
-  <title>Tools</title>
+  <title
+>Werkzeuge</title>
 
 <!-- The tool Versions is not part of released versions,
 just used for development, so no need to document it. -->
@@ -152,120 +202,160 @@ FIXME
 -->
 <sect1 id="tools-overview">
 
-  <title>Overview</title>
-  <para>&okteta; brings some tools, some to analyze and manipulate the byte arrays
-  and some with more general purpose. These tools can be activated or deactivated from
-  the <guimenu>Tools</guimenu> entry in the menu bar. Each tool has a small view,
-  which docks either in one of the sidebars or freely floats as a window. You
-  can dock, undock, rearrange and also stack the tool views with the mouse, by
-  pressing the &LMB; on the title bar of a tool view, moving it as you like and
-  releasing the &LMB; to complete the action, otherwise cancel it by pressing
-  the &Esc; key.</para>
+  <title
+>Übersicht</title>
+  <para
+>&okteta; enthält einige Werkzeuge, um Byte-Felder zu untersuchen und zu bearbeiten und auch Werkzeuge für einen allgemeineren Verwendungszweck. Diese Werkzeuge können im Menü <guimenu
+>Extras</guimenu
+> in der Menüleiste aktiviert werden. Für jedes Werkzeug gibt es eine kleine Ansicht, die entweder in den Seitenleisten oder freischwebend als Fenster angeordnet werden kann. Die Werkzeugansichten lassen sich in die Seitenleiste einfügen und wieder lösen, sie können neu angeordnet und gestapelt werden. Halten Sie dazu die &LMB; auf der Titelleiste der Werkzeugansicht gedrückt, verschieben Sie sie an den neuen Platz und lassen die &LMB; los, um die Aktion abzuschließen. Sie können diese Aktion durch Drücken der &Esc;-Taste abbrechen.</para>
 
 <sect2>
-  <title>Analyzers and Manipulators</title>
+  <title
+>Daten untersuchen und verändern</title>
 <variablelist>
   <varlistentry>
-    <term>Value/Char Table</term>
-    <listitem><para>The table lists all possible byte values, both as character and
-    in the different numerical codings.</para>
-    <para>The selected value can be inserted at the cursor position for a
-    defined number of bytes. This can be achieved by using the <guibutton>Insert</guibutton>
-    button or double-clicking the line in the table.</para></listitem>
+    <term
+>Werte/Zeichen-Tabelle</term>
+    <listitem
+><para
+>Diese Tabelle listet alle möglichen Byte-Werte auf, sowohl als Zeichenwerte wie auch als verschiedene numerische Kodierungen.</para>
+    <para
+>Der ausgewählte Wert kann an der Cursor-Position mit einer definierten Anzahl an Bytes eingefügt werden. Dazu drücken Sie den Knopf <guibutton
+>Einfügen</guibutton
+> oder doppelklicken Sie in der entsprechenden Zeile der Tabelle.</para
+></listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>Binary Filter</term>
-    <listitem><para>The filter performs binary operations on the selected bytes.
-    After choosing the operation (AND, OR, ROTATE..) the parameters,
-    if any, can be set in the box below. The filter is executed on the use
-    of the <guibutton>Filter</guibutton> button.</para></listitem>
+    <term
+>Binärfilter</term>
+    <listitem
+><para
+>Dieser Filter führt Binäroperationen an den ausgewählten Bytes durch. Nach der Wahl der Operation (UND, ODER, Rotieren...) können die Parameter, falls vorhanden, im darunterliegenden Abschnitt eingestellt werden. Klicken Sie auf dem Knopf <guibutton
+>Filtern</guibutton
+>, um ihn anzuwenden.</para
+></listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>Strings</term>
-    <listitem><para>This tool locates the strings in the selected bytes.
-    After choosing the minimum string length, the strings are grepped for
-    on the use of the <guibutton>Extract</guibutton> button.
-    The list of the strings displayed can be narrowed by entering a
-    filter term.</para></listitem>
+    <term
+>Zeichenfolgen</term>
+    <listitem
+><para
+>Dieses Werkzeug findet die Zeichenfolgen in den ausgewählten Bytes. Nachdem Sie die minimale Zeichenfolgenlänge eingestellt haben, werden die Zeichenfolgen beim Drücken von <guibutton
+>Extrahieren</guibutton
+> durchsucht. Der Umfang der angezeigten Zeichenfolgenliste kann durch Einstellung eines Filters eingeschränkt werden.</para
+></listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>Statistics</term>
-    <listitem><para>This tool builds a statistic for the selected bytes.
-    The statistic gives the frequency of the occurrence of each byte value
-    in the selection.
-    It can be calculated by using the <guibutton>Build</guibutton>
-    button.</para></listitem>
+    <term
+>Statistik</term>
+    <listitem
+><para
+>Dieses Werkzeug erstellt eine Statistik der ausgewählten Bytes an. Die Statistik gibt die Häufigkeit der einzelnen Bytewerte in der Auswahl an. Sie kann durch den Knopf <guibutton
+>Erstellen</guibutton
+> neu berechnet werden.</para
+></listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>Checksum</term>
-    <listitem><para>This tool calculates various checksums or hashsums for the
-    selected bytes. After choosing the algorithm and setting the parameter, if
-    any, the sum is computed on the use of the <guibutton>Calculate</guibutton>
-    button.</para></listitem>
+    <term
+>Prüfsumme</term>
+    <listitem
+><para
+>Mit diesem Werkzeug können verschiedene Prüfsummen oder Hashsummen für die ausgewählten Bytes berechnet werden. Nach der Auswahl des Berechnungsverfahrens und Einstellung der zugehörigen Parameter, falls erforderlich, wird die Summe durch Klicken auf den Knopf <guibutton
+>Berechnen</guibutton
+> ermittelt.</para
+></listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>Decoding Table</term>
-    <listitem><para>The table displays the values of the byte or the bytes
-    starting at the cursor for some common simple data types like Integer or
-    Float, but also UTF-8. Double-clicking on a line in the table opens an
-    editor, so the value can be edited and changed.</para></listitem>
+    <term
+>Dekodierungs-Tabelle</term>
+    <listitem
+><para
+>Diese Tabelle zeigt den Wert des Bytes oder der Bytes ab der Position des Cursors in einer der bekannten Datentypen wie Ganzzahl, Gleitkomma oder auch als UTF-8-Zeichen an. Durch Doppelklicken auf eine Zeile in der Tabelle wird ein Editor geöffnet, sodass der Wert bearbeitet und geändert werden kann.</para
+></listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>Structures</term>
-    <listitem><para>This tool enables investigating and editing of byte arrays
-    based on user-creatable structure definitions. Detailed instructions are in
-    an own <link linkend="tools-structures">section</link>.</para></listitem>
+    <term
+>Strukturen</term>
+    <listitem
+><para
+>Diese Werkzeug ermöglicht die Untersuchung und Bearbeitung von Byte-Feldern auf der Grundlage von benutzerdefinierten Strukturdefinitionen. Ausführlichen Anleitungen dazu finden Sie in diesem <link linkend="tools-structures"
+>Abschnitt</link
+>.</para
+></listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
 <sect2>
-  <title>General tools</title>
+  <title
+>Allgemeine Werkzeuge</title>
 <variablelist>
   <varlistentry>
-    <term>Filesystem</term>
-    <listitem><para>This tool offers an embedded file browser which
-    can be used to select files to open.</para></listitem>
+    <term
+>Dateisystem</term>
+    <listitem
+><para
+>Dieses Werkzeug ist ein Datei-Browser, damit können zu öffnende Dateien ausgewählt werden.</para
+></listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>Documents</term>
-    <listitem><para>This tool shows all currently created or loaded files.
-    Symbols mark the file with the currently active view and also show which
-    files have unsaved changes or which storage copy has been modified by
-    another program.</para></listitem>
+    <term
+>Dokumente</term>
+    <listitem
+><para
+>Dieses Werkzeug zeigt alle aktuell erstellten oder geladenen Dateien. Symbole zeigen die Datei mit der aktiven Ansicht, Dateien mit ungespeicherten Änderungen oder die Änderung der Datei durch andere Programme gegenüber der geladenen Kopie im Arbeitspeicher.</para
+></listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>Bookmarks</term>
-    <listitem><para>This tool can be used to manage the bookmarks, alternatively
-    to the <link linkend="bookmarks-menu"><guimenu>Bookmarks</guimenu></link> menu.
-    <note><para>Bookmarks are currently only transient and not saved if you
-    close a byte array or the whole program.</para></note></para></listitem>
+    <term
+>Lesezeichen</term>
+    <listitem
+><para
+>Hiermit können die Lesezeichen alternativ zum Menü <link linkend="bookmarks-menu"
+><guimenu
+>Lesezeichen</guimenu
+></link
+> verwaltet werden. <note
+><para
+>Lesezeichen sind zurzeit nur für die aktuell ausgeführte Sitzung gültig, sie werden nicht gespeichert, wenn ein Byte-Feld oder das Programm geschlossen wird.</para
+></note
+></para
+></listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>File Info</term>
-    <listitem><para>This tool displays some information about the current file,
-    including its type, the location of storage and the size.</para></listitem>
+    <term
+>Datei-Information</term>
+    <listitem
+><para
+>Dieses Werkzeug zeigt einige Informationen über die geöffnete Datei an, wie den Typ, den Speicherort und die Dateigröße.</para
+></listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>Terminal</term>
-    <listitem><para>An embedded Terminal, the working directory is not coupled with the active file.</para></listitem>
+    <term
+>Terminal</term>
+    <listitem
+><para
+>Ein eingebettetes Terminal, dessen Arbeitsordner nicht mit der aktiven Datei gekoppelt ist.</para
+></listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>Charset Conversion</term>
-    <listitem><para>The tool rewrites the bytes so the respective chars are the same as with the other charset.
-     Only 8-bit charsets are supported, and unmatched chars are currently substituted with a value hardcoded to 0.
-     </para></listitem>
+    <term
+>Zeichensatzumwandlung</term>
+    <listitem
+><para
+>Schreibt die Bytes so um, das die entsprechenden Zeichen dem anderen Zeichensatz entsprechen. Nur 8-Bit-Zeichensätze werden unterstützt, nicht übereinstimmende Zeichen werden zur Zeit durch den Wert 0 ersetzt. </para
+></listitem>
   </varlistentry>
 </variablelist>
 </sect2>
@@ -278,134 +368,213 @@ Many improvements in the Structures tool by Alex:
 Begin of a structure can be pinned to a specific offset
 Support for strings (various Unicode encodings) in definitions
   -->
-    <title>Structures Tool</title>
+    <title
+>Strukturen-Werkzeug</title>
 
     <sect2>
-      <title>General</title>
+      <title
+>Allgemein</title>
 
-      <para>The Structures tool enables analyzing and editing of byte arrays
-      based on user-creatable structure definitions, which can be built from
-      arrays, unions, primitive types and enum values.</para>
+      <para
+>Das Strukturen-Werkzeug erlaubt die Untersuchung und Bearbeitung von Byte-Feldern auf der Basis von benutzerdefinierten Strukturdefinitionen, die aus Feldern, Verbunden, einfachen Typen und Aufzählungswerten erstellt werden können.</para>
      <!-- explain/link what these types are? probably not, since most user will be programmers? -->
-      <para>It has an own settings dialog, which can be reached by using the
-      <guibutton>Settings</guibutton> button. There are various options that can be
-      configured, like the style (decimal, hexadecimal or binary) in which the
-      values are displayed. Moreover it is possible to choose which structure
-      definitions get loaded and which structures are shown in the view.</para>
-      <para>Structures are defined in &okteta; Structure Definition files (based
-      on &XML;, with the file extension <literal role="extension">.osd</literal>).
-      Additionally a <literal role="extension">.desktop</literal> file contains
-      metadata about that structure description file, such as author, homepage
-      and license.</para>
-      <para>Currently there is no built-in support for creating or editing
-      structure definitions, therefore this must be done manually as
-      described in the next sections.</para>
+      <para
+>Dieses Werkzeug hat einen eigenen Einrichtungsdialog, der durch den Knopf <guibutton
+>Einstellungen</guibutton
+> geöffnet wird. In dem Dialog kann unter anderem der Anzeigestil (Dezimal, Hexadezimal, Binär) der Werte festgelegt werden. Außerdem kann ausgewählt werden, welche Strukturdefinition geladen und welche Strukturen in der Ansicht dargestellt werden.</para>
+      <para
+>Strukturen werden in &okteta; in Strukturdefinitions-Dateien auf der Basis von &XML;-Dateien mit der Erweiterung <literal role="extension"
+>.osd</literal
+> definiert. Zusätzlich gibt es eine <literal role="extension"
+>.desktop</literal
+>-Datei mit Metadaten über die Strukturdefinitions-Datei wie zum Beispiel Autor, Webseite oder Lizenz.</para>
+      <para
+>Zurzeit ist es nicht möglich, Strukturdefinitionen in &okteta; zu erstellen oder zu bearbeiten. Diese Definitionen müssen daher wie im nächsten Abschnitt beschrieben manuell erstellt werden.</para>
     </sect2>
 
     <sect2>
-      <title>Installing structure definitions</title>
+      <title
+>Strukturdefinitionen installieren</title>
 
       <sect3>
-        <title>Installing using KNewStuff</title>
-        <para>The easiest way of installing new structure definitions is by using the built-in
-        KNewStuff support in &okteta;. To install an existing structure open the settings dialog of the
-        Structures tool. There select the <guilabel>Structures Management</guilabel> tab and press the
-        <guibutton>Get New Structures...</guibutton> button. The dialog that shows up now allows you to
-        install and uninstall structures.</para>
+        <title
+>Installation von Strukturen mit der Funktion „Neue Erweiterungen“ herunterladen</title>
+        <para
+>Am einfachsten lassen sich neue Strukturen mit der Funktion „Neue Erweiterungen“ herunterladen in &okteta; installieren. Dazu öffnen Sie den Einrichtungsdialog des Strukturwerkzeugs. Gehen Sie zur Seite <guilabel
+>Strukturen-Verwaltung</guilabel
+> und drücken den Knopf <guibutton
+>Neue Strukturen holen</guibutton
+>. Im Dialog, der dann geöffnet wird, können Strukturen installiert und deinstalliert werden.</para>
       </sect3>
       <sect3>
-        <title>Installing structure definitions manually</title>
-        <para>The Structures tool looks for structure descriptions in the
-          subdirectory <filename class="directory">okteta/structures/</filename>
-          of the user's directory for program data (find that by executing
-          <userinput><command>qtpaths</command> <option>--paths GenericDataLocation</option></userinput>).
-          You may need to create this directory if there are no structure
-          definitions installed yet.</para>
-          <para>Two files exist for every structure definition: One file for the actual definition and a
-          <literal role="extension">.desktop</literal> file for the metadata (author, version, etc.).</para>
-          <para>In that directory there is a subdirectory for each structure
-          definition, which contains both the <literal role="extension">.desktop</literal>
-          file and the <literal role="extension">.osd</literal> or
-          <filename>main.js</filename> file of that definition.</para>
-          <para>For example, with the program data directory
-          <filename class="directory"><userinput><command>qtpaths</command> <option>--paths GenericDataLocation</option></userinput></filename>
-          and a structure definition named ExampleStructure there is the directory
-          <filename class="directory">okteta/structures/ExampleStructure</filename>
-          which contains a file <filename>ExampleStructure.desktop</filename> and a
-          file <filename>ExampleStructure.osd</filename>.</para>
+        <title
+>Strukturdefinitionen manuell installieren</title>
+        <para
+>Das Werkzeug Strukturen sucht die Definitionen der Strukturen im Unterordner <filename class="directory"
+>okteta/structures/</filename
+> im Datenordner für Programme im Persönlichen Ordner des Benutzers. Diesen Ordner finden Sie mit der Eingabe von <userinput
+><command
+>qtpaths</command
+> <option
+>--paths GenericDataLocation</option
+></userinput
+> auf der Konsole. Wenn noch keine Strukturdefinitionen installiert wurden, muss dieser Ordner angelegt werden.</para>
+          <para
+>Für jede Strukturdefinition gibt es zwei Dateien: Eine Datei mit der tatsächlichen Definition und eine <literal role="extension"
+>.desktop</literal
+>-Datei mit den Metadaten (Autor, Version &etc;).</para>
+          <para
+>In diesem Ordner gibt es für jede Strukturdefinition einen eigenen Unterordner, der sowohl die <literal role="extension"
+>.desktop</literal
+>-Datei und auch die <literal role="extension"
+>.osd</literal
+>-Datei oder die <filename
+>main.js</filename
+>-Datei mit der Strukturdefinition.</para>
+          <para
+>Ist zum Beispiel der Datenordner der Programme <filename class="directory"
+><userinput
+><command
+>qtpaths</command
+> <option
+>--paths GenericDataLocation</option
+></userinput
+></filename
+>, dann finden Sie eine Strukturdefinition namens BeispielStruktur im Unterordner <filename class="directory"
+>okteta/structures/BeispielStruktur</filename
+>, darin dann die Dateien <filename
+>BeispielStruktur.desktop</filename
+> und <filename
+>BeispielStruktur.osd</filename
+>.</para>
       </sect3>
       <sect3>
-        <title>Using the newly installed structures</title>
-        <para>After having installed a new structure definition you need to restart &okteta;
-        before you can use it.
-        Once &okteta; has started, open the settings dialog of the Structures tool. There select the
-        <guilabel>Structures Management</guilabel> tab and make sure the relevant
-        structure definition is checked. Then switch to the <guilabel>Structures</guilabel> tab and
-        make sure the desired element is listed on the right-hand side.</para>
+        <title
+>Neu installierte Strukturen benutzen</title>
+        <para
+>Wenn Sie eine neue Strukturdefinition installiert haben, müssen Sie &okteta; neu starten, um sie benutzen zu können. Nach den Neustart von &okteta; den Einrichtungsdialog der Strukturen öffnen. Wählen Sie dort die Seite <guilabel
+>Strukturen-Verwaltung</guilabel
+> und überprüfen Sie, ob die neue Strukturdefinition ausgewählt ist. Wechseln Sie dann zur Seite <guilabel
+>Strukturen</guilabel
+> und überprüfen Sie, ob das gewünschte Element in der rechten Liste enthalten ist.</para>
       </sect3>
     </sect2>
 
     <sect2>
-      <title>Sharing structure definitions</title>
-      <para>For common structures you may not need to create a definition yourself,
-      but instead can reuse an already existing definition from places like
-      <ulink url="https://store.kde.org/browse/cat/214">store.kde.org</ulink>.</para>
-      <para>You also may want to share a definition yourself. To do so, create a
-      file archive (&eg; a zipped tar archive, <literal role="extension">.tar.gz</literal>)
-      containing just the subdirectory with the <literal role="extension">.desktop</literal>
-      file and the structure definition file. Looking at the example in the last section this
-      would be the directory <filename class="directory">ExampleStructure</filename> with all its contents.
-      Using this format for sharing the structure definitions allows installing them inside &okteta; and
-      requires no manual installation.</para>
+      <title
+>Strukturdefinitionen gemeinsam nutzen</title>
+      <para
+>Allgemein gebräuchlich Strukturen müssen Sie wahrscheinlich nicht selbst definieren, sondern können zum Beispiel vorhandene Definitionen von der Seite <ulink url="https://store.kde.org/browse/cat/214"
+>store.kde.org</ulink
+> benutzen.</para>
+      <para
+>Möchten Sie eine Strukturdefinition im Internet zur Verfügung stellen, packen Sie den Unterordner mit der <literal role="extension"
+>.desktop</literal
+>-Datei und der Strukturdefinitions-Datei in ein Archiv, zum Beispiel ein gezipptes Tar-Archiv (<literal role="extension"
+>.tar.gz</literal
+>). Bei dem Beispiel im vorigen Abschnitt ist das der Unterordner <filename class="directory"
+>BeispielStruktur</filename
+> mit allen Dateien darin. Verwenden Sie diese Format, dann können Strukturdefinitionen in &okteta; installiert werden. Eine manuelle Installation ist dann nicht erforderlich.</para>
     </sect2>
 
 
     <sect2>
-      <title>Creating structure definitions</title>
+      <title
+>Strukturdefinitionen erstellen</title>
 
-      <note><para>A more up to date, but not completed guide to writing structure definitions can be found
-        <ulink url="https://userbase.kde.org/Okteta/Writing_structure_definitions">on the KDE UserBase Wiki</ulink>.
-      </para></note>
+      <note
+><para
+>Eine aktuellere aber unvollständige Anleitung zum Schreiben von Strukturdefinitionen finden Sie im <ulink url="https://userbase.kde.org/Okteta/Writing_structure_definitions"
+>KDE UserBase Wiki</ulink
+>. </para
+></note>
 
-      <para>There are two different ways of creating structure definitions. The first is writing the
-      definition in &XML; the other is using JavaScript<!-- Markup??-->. The JavaScript approach allows you
-      to create more complex structures with features like &eg; validating the structure. Using &XML; gives you
-      less features but if a static structure is all you need this may be the easiest approach. If you need a dynamic
-      structure i.e. where array lengths depend on other values in the structure or the structure layout is different when
-      some member value changes, then you will have to write the structure definition in JavaScript.
-      There is one exception to that rule: if you have an array where the length is supposed to be
-      <emphasis role="bold">exactly</emphasis> the same as another value in the structure, then you can use &XML;.
-      But if it is something like <emphasis>length - 1</emphasis> it has to be JavaScript.</para>
+      <para
+>Es gibt zwei Möglichkeiten, um eine Strukturdefinition zu erstellen, entweder im &XML;-Format oder als JavaScript. Mit JavaScript können Sie komplexere Strukturen mit Funktionen wie zum Beispiel der Überprüfung der Gültigkeit der Struktur schreiben. Mit &XML; haben Sie weniger Funktionen, wenn Ihnen aber eine statische Struktur reicht, ist das der einfachste Ansatz. Brauchen Sie dynamische Strukturen, bei denen zum Beispiel eine Feldlänge oder das Strukturlayout von anderen Werten in der Struktur abhängt, dann müssen Sie die Strukturdefinition in JavaScript schreiben. Es gibt eine Ausnahme für diese Regel: Haben Sie ein Feld, dessen Länge <emphasis role="bold"
+>genau</emphasis
+> wie ein anderer Wert in der Struktur angenommen wird, dann können Sie auch &XML; verwenden. Ist dieser Wert aber so ähnlich wie <emphasis
+>Länge -1</emphasis
+>, dann müssen Sie JavaScript benutzen.</para>
     </sect2>
 
 
     <sect2>
-      <title>Structure definition &XML; file format</title>
-      <note><para>A more up to date, but not completed guide to writing structure definitions can be found
-        <ulink url="https://userbase.kde.org/Okteta/Writing_structure_definitions">on the KDE UserBase Wiki</ulink>.
-      </para></note>
-      <para>
-      <!-- TODO xml schema -->
-      The <literal role="extension">.osd</literal> &XML; file has one root element: <emphasis>&lt;data&gt;</emphasis> with no
-      attributes. Inside this element there must be one of the following elements:</para>
+      <title
+>&XML;-Dateiformat einer Strukturdefinition</title>
+      <note
+><para
+>Eine aktuellere aber unvollständige Anleitung zum Schreiben von Strukturdefinitionen finden Sie im <ulink url="https://userbase.kde.org/Okteta/Writing_structure_definitions"
+>KDE UserBase Wiki</ulink
+>. </para
+></note>
+      <para
+>Die <literal role="extension"
+>.osd</literal
+>-&XML;-Datei hat ein oberstes Element: <emphasis
+>&lt;data&gt;</emphasis
+> ohne Attribute. Innerhalb dieses Elements muss eines der folgenden Elemente enthalten sein:</para>
       <!-- TODO markup, though better than nothing this way-->
       <variablelist>
           <varlistentry>
-            <term><emphasis role="bold"><emphasis>&lt;primitive&gt;</emphasis></emphasis></term>
-            <listitem><para>To create a primitive data types like &eg; <emphasis>int</emphasis> and
-              <emphasis>float</emphasis>. This element accepts no subelements and can have the following attributes:</para>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;primitive&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Erstellt einen einfachen Typ wie &eg; <emphasis
+>int</emphasis
+> und <emphasis
+>float</emphasis
+>. Dieses Element kann keine untergeordneten Elemente enthalten und darf nur folgende Attribute haben:</para>
               <variablelist>
                 <varlistentry>
-                <term><emphasis role="bold">type</emphasis></term>
+                <term
+><emphasis role="bold"
+>type</emphasis
+></term>
                 <listitem>
-                  <para>The type of this primitive type. It must be one of the following:</para>
+                  <para
+>Der Typ dieses einfachen Typs. Folgende Typen sind erlaubt:</para>
                   <itemizedlist>
-                    <listitem><para><emphasis>char</emphasis> for a 8 bit ASCII character</para></listitem>
-                    <listitem><para><emphasis>int8, int16, int32, int64</emphasis> for a signed integer of that size</para></listitem>
-                    <listitem><para><emphasis>uint8, uint16, uint32, uint64</emphasis> for an unsigned integer of that size</para></listitem>
-                    <listitem><para><emphasis>bool8, bool16, bool32, bool64</emphasis> for an unsigned boolean (0 = false, any other value = true) of that size</para></listitem>
-                    <listitem><para><emphasis>float</emphasis> for a 32 bit IEEE754 floating point number</para></listitem>
-                    <listitem><para><emphasis>double</emphasis> for a 64 bit IEEE754 floating point number</para></listitem>
+                    <listitem
+><para
+><emphasis
+>char</emphasis
+> für ein 8 Bit ASCII-Zeichen</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>int8, int16, int32, int64</emphasis
+> für Ganzzahlwerte dieser Größen mit Vorzeichen</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>uint8, uint16, uint32, uint64</emphasis
+> für Ganzzahlwerte dieser Größen ohne Vorzeichen</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>bool8, bool16, bool32, bool64</emphasis
+> für einen vorzeichenlosen Boole'schen Wert (0 = falsch, jeder andere Wert = wahr) dieser Größe</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>float</emphasis
+> für eine 32 Bit Fließkommazahl nach IEEE754</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>double</emphasis
+> für eine 64 Bit Fließkommazahl nach IEEE754</para
+></listitem>
                   </itemizedlist>
                 </listitem>
                 </varlistentry>
@@ -414,30 +583,66 @@ Support for strings (various Unicode encodings) in definitions
           </varlistentry>
 
           <varlistentry>
-            <term><emphasis role="bold"><emphasis>&lt;bitfield&gt;</emphasis></emphasis></term>
-            <listitem><para>To create a bitfield. This element accepts no subelements and can have the following
-              attributes:</para>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;bitfield&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Zur Definition eines Bitfelds. Dieses Element kann keine untergeordneten Elemente enthalten und darf nur folgende Attribute haben:</para>
               <variablelist>
                 <varlistentry>
-                  <term><emphasis role="bold">width</emphasis></term>
-                  <listitem><para>The number of bits used by this bitfield. Must be between 1 and 64.</para></listitem>
+                  <term
+><emphasis role="bold"
+>width</emphasis
+></term>
+                  <listitem
+><para
+>Die Anzahl der von diesem Bitfeld benutzten Bits. Der Wert muss zwischen 1 und 64 liegen.</para
+></listitem>
                 </varlistentry>
                 <varlistentry>
-                  <term><emphasis role="bold">type</emphasis></term>
+                  <term
+><emphasis role="bold"
+>type</emphasis
+></term>
                   <listitem>
-                    <para>The type of this bitfield. It must be one of the following:</para>
+                    <para
+>Der Typ dieses Bitfelds. Folgende Werte sind erlaubt:</para>
                     <itemizedlist>
-                      <listitem><para><emphasis>unsigned</emphasis> for a bitfield where the value will be interpreted as
-                      an unsigned value (value range from 0 to 2<superscript>width</superscript> - 1)</para></listitem>
-                      <listitem><para><emphasis>signed</emphasis> for a bitfield where the value will be interpreted as a
-                      signed value (value range from -2<superscript>width - 1</superscript> to
-                      2<superscript>width - 1</superscript> - 1)</para></listitem>
-                      <listitem><para><emphasis>bool</emphasis> for a bitfield where the value will be interpreted as a
-                      boolean value</para></listitem>
+                      <listitem
+><para
+><emphasis
+>unsigned</emphasis
+> für ein Bitfeld, dessen Wert als vorzeichenlos interpretiert wird (Wertebereich von 0 bis 2<superscript
+>width</superscript
+> - 1)</para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>signed</emphasis
+> für ein Bitfeld, dessen Wert als Wert mit Vorzeichen interpretiert wird (Wertebereich von -2<superscript
+>width - 1</superscript
+> bis 2<superscript
+>width - 1</superscript
+> - 1)</para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>bool</emphasis
+> für ein Bitfeld, dessen Wert als Boolescher Wert interpretiert wird</para
+></listitem>
                   </itemizedlist>
-                  <note><para>Always remember to add padding after a <emphasis>&lt;bitfield&gt;</emphasis>, since otherwise
-                  the next element (except for strings and arrays, since they add padding automatically) will start in the
-                  middle of a byte. Obviously padding is not necessary if you want this behavior.</para></note>
+                  <note
+><para
+>Denken Sie daran für „padding“ nach einem <emphasis
+>&lt;bitfield&gt;</emphasis
+> einen Wert anzugeben, sonst beginnt das nächste Element (ausgenommen Zeichenfolgen (strings) und Felder (arrays), die „padding“ automatisch einfügen) mitten in einem Byte. Ist dieses Verhalten gewünscht, brauchen Sie offensichtlich kein „padding“ anzugeben.</para
+></note>
                   </listitem>
                 </varlistentry>
               </variablelist>
@@ -445,21 +650,46 @@ Support for strings (various Unicode encodings) in definitions
           </varlistentry>
 
           <varlistentry>
-            <term><emphasis role="bold"><emphasis>&lt;enum&gt;</emphasis></emphasis></term>
-            <listitem><para>To create a primitive type, but where the values are displayed as members of an enumeration if
-              possible. This element accepts no subelements (however you will need an <emphasis>&lt;enumDef&gt;</emphasis>
-              tag in the file to reference it). It has the following attributes:</para>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;enum&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Zur Definition eines einfachen Typs bei dem alle Werte als Elemente einer Aufzählung dargestellt werden. Diese Element kann keine untergeordneten Elemente enthalten, Sie brauchen jedoch ein Tag <emphasis
+>&lt;enumDef&gt;</emphasis
+> in der Datei zur Referenzierung. Folgende Attribute sind erlaubt:</para>
               <variablelist>
                 <varlistentry>
-                  <term><emphasis role="bold">enum</emphasis></term>
-                  <listitem><para>The underlying enum for this value. Must match the <emphasis>name</emphasis> attribute of
-                  one of the <emphasis>&lt;enumDef&gt;</emphasis> tags in this file.</para></listitem>
+                  <term
+><emphasis role="bold"
+>enum</emphasis
+></term>
+                  <listitem
+><para
+>Die zurückliegende Aufzählung für diesen Wert. Muss zu dem Attribut <emphasis
+>name</emphasis
+> in einer der Tags <emphasis
+>&lt;enumDef&gt;</emphasis
+> in dieser Datei passen.</para
+></listitem>
                 </varlistentry>
                 <varlistentry>
-                  <term><emphasis role="bold">type</emphasis></term>
+                  <term
+><emphasis role="bold"
+>type</emphasis
+></term>
                   <listitem>
-                    <para>The type of this enum. See type attribute of <emphasis>&lt;primitive&gt;</emphasis>.
-                    Only difference is that <emphasis>Double</emphasis> and <emphasis>Float</emphasis> make no sense.</para>
+                    <para
+>Der Typ dieser Aufzählung, mögliche Typen wie beim Element <emphasis
+>&lt;primitive&gt;</emphasis
+>. Nur die Typen <emphasis
+>Double</emphasis
+> und <emphasis
+>Float</emphasis
+> sind hier nicht sinnvoll.</para>
                   </listitem>
                 </varlistentry>
               </variablelist>
@@ -468,83 +698,205 @@ Support for strings (various Unicode encodings) in definitions
 
 
           <varlistentry>
-            <term><emphasis role="bold"><emphasis>&lt;flags&gt;</emphasis></emphasis></term>
-            <listitem><para>This is the same as <emphasis>&lt;enum&gt;</emphasis> with the only difference being
-            that values are represented as a <emphasis>bitwise-or</emphasis> of all the values of the enumeration.</para></listitem>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;flags&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Dies ähnelt dem Element <emphasis
+>&lt;enum&gt;</emphasis
+>, mit dem einen Unterschied, dass die Werte als <emphasis
+>bitweises Oder</emphasis
+> aller Werte der Aufzählung dargestellt werden.</para
+></listitem>
           </varlistentry>
 
           <varlistentry>
-            <term><emphasis role="bold"><emphasis>&lt;struct&gt;</emphasis></emphasis></term>
-            <listitem><para>To create a structure. All other elements (including <emphasis>&lt;struct&gt;</emphasis>) can
-            be a child of this and will then be part of the resulting structure</para></listitem>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;struct&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Zur Definition einer Struktur. Alle anderen Element einschließlich <emphasis
+>&lt;struct&gt;</emphasis
+> können als untergeordnetes Element eingefügt werden und sind dann Bestandteil der gesamten Struktur.</para
+></listitem>
           </varlistentry>
 
           <varlistentry>
-            <term><emphasis role="bold"><emphasis>&lt;union&gt;</emphasis></emphasis></term>
-            <listitem><para>To create a union. Basically the same as <emphasis>&lt;struct&gt;</emphasis> except for the fact
-            that all child elements will start from the same offset. Useful for interpreting the same sequence of bytes in
-            various ways.</para></listitem>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;union&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Zur Definition eines Verbund-Datentyps. Ein Verbund ähnelt einem Datentyp <emphasis
+>&lt;struct&gt;</emphasis
+>, aber alle untergeordneten Elemente beginnen am gleichen Versatz. Nützlich für die Darstellung der gleichen Bytefolge auf verschiedene Arten.</para
+></listitem>
           </varlistentry>
 
           <varlistentry>
-            <term><emphasis role="bold"><emphasis>&lt;array&gt;</emphasis></emphasis></term>
-            <listitem><para>To create an array. This element accepts exactly one child (the underlying type of the array),
-            which can be any of the elements, even <emphasis>&lt;array&gt;</emphasis> itself. It also has the following
-            attributes:</para>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;array&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Zur Definition eines Felds. Diese Element kann nur ein untergeordnete Element - den Typ des Felds - enthalten. Dieser Typ keine ein beliebiges Element sein, sogar ein <emphasis
+>&lt;array&gt;</emphasis
+> selbst. Es hat folgende Attribute:</para>
               <variablelist>
                 <varlistentry>
-                  <term><emphasis role="bold">length</emphasis></term>
-                  <listitem><para>The number of elements in this array as a decimal number.
-                  Alternatively it can also be a string which matches the name attribute of a previously defined
-                  <emphasis>&lt;primitive&gt;</emphasis>, <emphasis>&lt;enum&gt;</emphasis> or <emphasis>&lt;flags&gt;</emphasis>
-                  element. Then the length will be the value of that element.
-                  Currently it is limited to 10000, because larger arrays would use too much memory and slow down the tool
-                  too much.
-                  </para></listitem>
+                  <term
+><emphasis role="bold"
+>length</emphasis
+></term>
+                  <listitem
+><para
+>Die Anzahl der Elemente in diesem Feld als Dezimalzahl. Alternativ kann hier auch eine Zeichenfolge für das Attribut „Name“ eines bereits definierten Elements  <emphasis
+>&lt;primitive&gt;</emphasis
+>, <emphasis
+>&lt;enum&gt;</emphasis
+> or <emphasis
+>&lt;flags&gt;</emphasis
+> angeben werden, Der Wert dieses Elements gibt dann die Länge an. Dieser Wert ist zurzeit auf 10000 begrenzt, da größere Felder zu viel Speicher belegen und dieses Werkzeug verlangsamen. </para
+></listitem>
                 </varlistentry>
               </variablelist>
             </listitem>
           </varlistentry>
 
           <varlistentry>
-            <term><emphasis role="bold"><emphasis>&lt;string&gt;</emphasis></emphasis></term>
-            <listitem><para>To create a string in various encodings. By default you get a <emphasis>NULL</emphasis>-
-            terminated C-style string. However different types of string can be created with the following attributes:</para>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;string&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>Zur Definition einer Zeichenfolge in verschiedenen Kodierungen. Standard ist eine durch <emphasis
+>NULL</emphasis
+> begrenzte C-Zeichenfolge. Andere Arten von Zeichenfolgen können mit folgenden Attributen erzeugt werden:</para>
               <variablelist>
                 <varlistentry>
-                  <term><emphasis role="bold">terminatedBy</emphasis></term>
-                  <listitem><para>This attribute determines what unicode codepoint the string is terminated by. It must be a
-                  hexadecimal number (optionally with leading <emphasis>0x</emphasis>). When encoding is ASCII, only values
-                  up to 0x7f are meaningful. If neither this nor <emphasis>maxCharCount</emphasis> nor <emphasis>maxByteCount</emphasis>
-                  are set, this is assumed to be set to 0 (C-style string)
-                  </para></listitem>
+                  <term
+><emphasis role="bold"
+>terminatedBy</emphasis
+></term>
+                  <listitem
+><para
+>Dieses Attribut legt fest, welcher Unicode-Codepunkt die Zeichenfolge begrenzt. Der Wert muss eine hexadezimale Zahl sein, wahlweise mit führendem <emphasis
+>0x</emphasis
+>. Ist die Zeichenfolge in ASCII kodiert, sind nur Werte bis <emphasis
+>0x7f</emphasis
+> von Bedeutung. Ist weder eine Kodierung, noch die Attribute <emphasis
+>maxCharCount</emphasis
+> oder <emphasis
+>maxByteCount</emphasis
+> angegeben, wird für diesen Wert 0 wie bei einer C-Zeichenfolge angenommen.  </para
+></listitem>
                 </varlistentry>
                 <varlistentry>
-                  <term><emphasis role="bold">maxCharCount</emphasis></term>
-                  <listitem><para>The maximum number of chars this string can have. If <emphasis>terminatedBy</emphasis> is
-                  set too then whatever is reached first terminates the string. This is mutually exclusive with
-                  <emphasis>maxByteCount</emphasis></para></listitem>
+                  <term
+><emphasis role="bold"
+>maxCharCount</emphasis
+></term>
+                  <listitem
+><para
+>Die maximale Anzahl der Zeichen in dieser Zeichenfolge. Ist zusätzlich auch <emphasis
+>terminatedBy</emphasis
+> angegeben, begrenzt der kleiner der beiden Werte die Zeichenfolge. Die Attribute <emphasis
+>maxByteCount</emphasis
+> und <emphasis
+>maxCharCount</emphasis
+> schließen sich gegenseitig aus.</para
+></listitem>
                 </varlistentry>
                 <varlistentry>
-                  <term><emphasis role="bold">maxByteCount</emphasis></term>
-                  <listitem><para>The maximum number of bytes this string can be long. If <emphasis>terminatedBy</emphasis>
-                  is set too then whatever is reached first terminates the string. This is mutually exclusive with
-                  <emphasis>maxCharCount</emphasis>. With encodings like <emphasis>ASCII</emphasis> this is the same as
-                  <emphasis>maxCharCount</emphasis>.</para></listitem>
+                  <term
+><emphasis role="bold"
+>maxByteCount</emphasis
+></term>
+                  <listitem
+><para
+>Die maximale Länge der Zeichenfolge in Byte. Ist zusätzlich auch <emphasis
+>terminatedBy</emphasis
+> angegeben, begrenzt der kleiner der beiden Werte die Zeichenfolge. Die Attribute <emphasis
+>maxByteCount</emphasis
+> und <emphasis
+>maxCharCount</emphasis
+> schließen sich gegenseitig aus. Mit Kodierungen wie <emphasis
+>ASCII</emphasis
+> sind beide Attribute gleichwertig.</para
+></listitem>
                 </varlistentry>
                 <varlistentry>
-                  <term><emphasis role="bold">type</emphasis></term>
-                  <listitem><para>The encoding of this string. Can be one of the following:</para>
+                  <term
+><emphasis role="bold"
+>type</emphasis
+></term>
+                  <listitem
+><para
+>Die Kodierung dieser Zeichenfolge, folgende Kodierungen sind möglich:</para>
                     <itemizedlist>
-                      <listitem><para><emphasis>ASCII</emphasis></para></listitem>
-                      <listitem><para><emphasis>LATIN-1</emphasis></para></listitem>
-                      <listitem><para><emphasis>UTF-8</emphasis></para></listitem>
-                      <listitem><para><emphasis>UTF-16-LE</emphasis> or <emphasis>UTF-16-BE</emphasis>. If neither
-                      <emphasis>-LE</emphasis> or <emphasis>-BE</emphasis> suffix is given, little endian is assumed.
-                      </para></listitem>
-                      <listitem><para><emphasis>UTF-32-LE</emphasis> or <emphasis>UTF-32-BE</emphasis>. If neither
-                      <emphasis>-LE</emphasis> or <emphasis>-BE</emphasis> suffix is given, little endian is assumed.
-                      </para></listitem>
+                      <listitem
+><para
+><emphasis
+>ASCII</emphasis
+></para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>LATIN-1</emphasis
+></para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>UTF-8</emphasis
+></para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>UTF-16-LE</emphasis
+> oder <emphasis
+>UTF-16-BE</emphasis
+>. Wenn weder die Nachsilbe <emphasis
+>-LE</emphasis
+> oder <emphasis
+>-BE</emphasis
+> angegeben ist, wird die Byte-Reihenfolge <emphasis
+>-LE</emphasis
+> (Little Endian) angenommen. </para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>UTF-32-LE</emphasis
+> oder <emphasis
+>UTF-32-BE</emphasis
+>. Wenn weder die Nachsilbe <emphasis
+>-LE</emphasis
+> oder <emphasis
+>-BE</emphasis
+> angegeben ist, wird die Byte-Reihenfolge <emphasis
+>-LE</emphasis
+> (Little Endian) angenommen. </para
+></listitem>
                     </itemizedlist>
                   </listitem>
                 </varlistentry>
@@ -552,22 +904,27 @@ Support for strings (various Unicode encodings) in definitions
             </listitem>
           </varlistentry>
       </variablelist>
-      <para>
-      Every element also accepts an attribute <emphasis>name</emphasis> which is then visible in the structures view.
-      </para>
+      <para
+>Jedes Element kann außerdem ein Attribut <emphasis
+>name</emphasis
+>. Dieser Name wird dann in der Strukturansicht angezeigt. </para>
     </sect2>
 
     <sect2>
-      <title>An example structure definition in both &XML; and JavaScript</title>
-      <note><para>A more up to date, but not completed guide to writing structure definitions can be found
-        <ulink url="https://userbase.kde.org/Okteta/Writing_structure_definitions">on the KDE UserBase Wiki</ulink>.
-      </para></note>
+      <title
+>Ein Beispiel einer Strukturdefinition sowohl in &XML; als auch in JavaScript</title>
+      <note
+><para
+>Eine aktuellere aber unvollständige Anleitung zum Schreiben von Strukturdefinitionen finden Sie im <ulink url="https://userbase.kde.org/Okteta/Writing_structure_definitions"
+>KDE UserBase Wiki</ulink
+>. </para
+></note>
 
       <sect3>
-        <title>The common step shared by both approaches</title>
-        <para>
-        Our metadata file looks like this:
-        <screen>
+        <title
+>Gemeinsame Schritte für beide Ansätze</title>
+        <para
+>Die Metadatendatei hat diesen Inhalt: <screen>
         [Desktop Entry]
         Icon=arrow-up<co id="icon" />
         Type=Service
@@ -584,38 +941,56 @@ Support for strings (various Unicode encodings) in definitions
         X-KDE-PluginInfo-Category=structure
         X-KDE-PluginInfo-License=LGPL
         X-KDE-PluginInfo-EnabledByDefault=false
-        </screen>
-        <calloutlist>
-          <callout arearefs="icon">
-          <para>The icon displayed in &okteta; for this structure can be anything found by executing
-          <userinput><command>kdialog</command> <option>--geticon</option></userinput> or a path to an icon</para>
-          </callout>
-        </calloutlist>
+        </screen
+> <calloutlist
+> <callout arearefs="icon"
+> <para
+>Das in &okteta; benutzte Symbol für die Anzeige dieser Struktur kann durch Ausführung des Befehls <userinput
+><command
+>kdialog</command
+> <option
+>--geticon</option
+></userinput
+>. Alternativ kann der Pfad zu einem Symbol eingetragen werden.</para
+> </callout
+> </calloutlist
+> Die Bedeutung der Felder erschließt sich leicht aus Ihrem Namen, ausgenommen für das Feld <literal
+>X-KDE-PluginInfo-Name</literal
+>. Der Wert dieses Felds muss mit dem Namen des Ordners, in dem diese Datei enthalten ist, und auch dem Namen der<literal role="extension"
+>.desktop</literal
+>-Datei übereinstimmen. Bei &XML;-Strukturdefinitionen muss der Wert dieses Feldes außerdem den gleichen Namen wie die <literal role="extension"
+>.osd</literal
+>-Datei haben. </para>
 
-          These fields should all be pretty much self-explanatory, except for
-          <literal>X-KDE-PluginInfo-Name</literal>. The value of this field must match the name of the directory containing the file as well as the name of the <literal role="extension">.desktop</literal> file. When creating &XML; structure definitions the name of the <literal role="extension">.osd</literal> file must also match the name. </para>
-
-        <para>In this example we would have a directory named <filename>simplestruct</filename>
-        containing the file <filename>simplestruct.desktop</filename>. When defining structures in &XML;
-        the directory would also contain a file named <filename>simplestruct.osd</filename>. Using JavaScript we would have a file named <filename>main.js</filename> instead.</para>
+        <para
+>In diesem Beispiel befindet sich die Datei <filename
+>simplestruct.desktop</filename
+> im Ordner <filename
+>simplestruct</filename
+>. Bei &XML;-Strukturdefinitionen enthält der Ordner auch noch eine Datei namens <filename
+>simplestruct.osd</filename
+>. Wird JavaScript verwendet, gibt es stattdessen die Datei <filename
+>main.js</filename
+>.</para>
       </sect3>
       <sect3>
-        <title>A simple &XML; structure definition</title>
-        <para>
-          To start we create a definition for a very simple test structure
-          containing only integral data types (one char, one 32-bit signed integer, and a bitfield).
-          This would be expressed in C/C++ as:
-          <screen>
+        <title
+>Eine einfache &XML;-Strukturdefinition</title>
+        <para
+>Zuerst wird die Definition einer einfachen Teststruktur erstellt, die nur ganzzahlige Datentypen wie ein „char“, einen vorzeichenbehafteten 32-bit Integerwert  und ein Bitfeld enthält. In C/C++ wird das so geschrieben: <screen>
           struct simple {
             char aChar;
             int anInt;
             bool bitFlag :1;
             unsigned padding :7;
           };
-          </screen>
-          The first step is writing the <literal role="extension">.osd</literal> file according to the file format defined
-          in the previous section. We will call <filename>simplestruct.osd</filename>:
-          <screen><markup>
+          </screen
+> Als erstes wird die <literal role="extension"
+>.osd</literal
+>-Datei mit dem im vorherigen Abschnitt definierten Dateiformat geschrieben. Diese erhält den Namen <filename
+>simplestruct.osd</filename
+>: <screen
+><markup>
           &lt;?xml version="1.0" encoding="UTF-8"?&gt;
           &lt;data&gt;
             &lt;struct name="simple"&gt;
@@ -625,20 +1000,23 @@ Support for strings (various Unicode encodings) in definitions
               &lt;bitfield name="padding" type="unsigned" width="7"/&gt;
             &lt;/struct&gt;
           &lt;/data&gt;
-          </markup></screen>
-          which is fairly similar to the C/C++ definition.
-          </para>
-          <para>Now create a directory <filename class="directory">simplestruct</filename>
-          inside the structure installation directory (see manually installing structure definitions) <!-- markup TODO-->
-          and copy the two files to this directory. Now you can restart &okteta; and use the new structure.</para>
+          </markup
+></screen
+> Dies ist ähnlich wie die C/C++ Definition. </para>
+          <para
+>Erstellen Sie nun einen Ordner <filename class="directory"
+>simplestruct</filename
+> im Strukturinstallationsordner wie im Abschnitt manuelle Installation beschrieben. Kopieren Sie diese beiden Dateien in diesen Ordner. Starten Sie &okteta; neu und benutzen Sie die neue Struktur.</para>
       </sect3>
       <sect3>
-        <title>The simple structure in JavaScript</title>
-        <para>
-        To implement the structure above in JavaScript, create a file named <filename>main.js</filename> instead of <filename>simplestruct.osd</filename>
-        and change X-KDE-PluginInfo-Category=structure to X-KDE-PluginInfo-Category=structure/js.
-        The contents of that file should be:
-        <screen>
+        <title
+>Die einfache Struktur in JavaScript</title>
+        <para
+>Um die oben gezeigte Struktur in JavaScript zu schreiben, erstellen Sie eine Daten namens <filename
+>main.js</filename
+> anstelle der Datei <filename
+>simplestruct.osd</filename
+> und ändern Sie X-KDE-PluginInfo-Category=structure zu X-KDE-PluginInfo-Category=structure/js. Die Datei sollten folgenden Inhalt haben: <screen>
         function init() {
           var structure = struct({
             aChar : char(),
@@ -648,31 +1026,53 @@ Support for strings (various Unicode encodings) in definitions
           })
           return structure;
         }
-        </screen>
-        The structure displayed by &okteta; is always the return value of the <literal>init</literal> function.</para>
-        <para>
-        The following functions can be called to create a primitive type:
-        <itemizedlist>
-          <listitem><para>char()</para></listitem>
-          <listitem><para>int8(), int16(), int32() or int64()</para></listitem>
-          <listitem><para>uint8(), uint16(), uint32() or uint64()</para></listitem>
-          <listitem><para>bool8(), bool16(), bool32() or bool64()</para></listitem>
-          <listitem><para>float()</para></listitem>
-          <listitem><para>double()</para></listitem>
-        </itemizedlist>
-        The bitfield function takes two parameters, the first being a string consisting of
-        <literal>bool</literal>, <literal>signed</literal> or <literal>unsigned</literal>. The second parameter is an integer which sets the width in bits.
-        </para>
+        </screen
+> Die in &okteta; angezeigte Struktur ist immer der Rückgabewert der Funktion <literal
+>init</literal
+>.</para>
+        <para
+>Die folgenden Funktionen können benutzt werden, um einen primitiven Typ zu erzeugen: <itemizedlist
+> <listitem
+><para
+>char()</para
+></listitem
+> <listitem
+><para
+>int8(), int16(), int32() oder int64()</para
+></listitem
+> <listitem
+><para
+>uint8(), uint16(), uint32() oder uint64()</para
+></listitem
+> <listitem
+><para
+>bool8(), bool16(), bool32() oder bool64()</para
+></listitem
+> <listitem
+><para
+>float()</para
+></listitem
+> <listitem
+><para
+>double()</para
+></listitem
+> </itemizedlist
+> Die Funktion „bitfield“ benötigt zwei Parameter, als erstes einen String wie <literal
+>bool</literal
+>, <literal
+>signed</literal
+> oder <literal
+>unsigned</literal
+>. Der zweite Parameter ist ein Integer-Wert, der die Breite in Bits angibt. </para>
       </sect3>
       <sect3>
-        <title>More complex structures</title>
-        <para>
-        Next we create a definition of a more complex structure which we will
-        call "complex" and save in a file named <filename>complex.osd</filename>.
-        This structure will contain two arrays (one with fixed length and one
-        where the length is determined at runtime) as well as a nested structure
-        and a union.
-        <screen><markup>
+        <title
+>Komplexere Strukturen</title>
+        <para
+>Als nächstes wird eine komplexere Struktur definiert. Sie wird "complex" genannt und in der Datei <filename
+>complex.osd</filename
+> gespeichert. Diese Struktur enthält zwei Felder, eines mit fester Länge und ein anderes, dessen Länge erst zur Laufzeit bestimmt wird, außerdem noch eine verschachtelte Struktur und einen Verbund. <screen
+><markup>
           &lt;?xml version="1.0" encoding="UTF-8"?&gt;
           &lt;data&gt;
             &lt;struct name="complex"&gt;
@@ -689,10 +1089,10 @@ Support for strings (various Unicode encodings) in definitions
               &lt;/struct&gt;
             &lt;/struct&gt;
           &lt;/data&gt;
-          </markup></screen>
-          This would correspond to the following in pseudo-C/C++
-          <screen>
-          struct complex {
+          </markup
+></screen
+> Dies entspricht folgendem Pseudocode in C/C++ <screen
+>struct complex {
             uint8_t size;
             union aUnion {
               int8_t fourBytes[4];
@@ -703,20 +1103,28 @@ Support for strings (various Unicode encodings) in definitions
           };
           </screen>
           </para>
-          <note><para>You can obviously only have dynamic length arrays
-          reference fields before the array.</para></note>
-          <para>Next we create the <filename>complex.desktop</filename> file just as
-          in the example before (make sure you set <literal>X-KDE-PluginInfo-Name</literal>
-          correctly) and also do the same to install both files.</para>
+          <note
+><para
+>Referenzfelder für dynamische Felder müssen vor dem Feld definiert werden. </para
+></note>
+          <para
+>Als nächstes wird die Datei <filename
+>complex.desktop</filename
+> wie im vorher gezeigten Beispiel erstellt. Benutzen Sie für <literal
+>X-KDE-PluginInfo-Name</literal
+> den richtigen Namen und installieren Sie beide Dateien.</para>
       </sect3>
       <sect3>
-        <title>Further information</title>
-        <para>
-          A few example structure definitions can be found in the <ulink url="https://commits.kde.org/okteta?path=kasten/controllers/view/structures/examples/okteta/structures/">Git repository.</ulink>
-          This includes for example the file header for PNG files and the ELF file header.
-          An &XML; schema describing the structure of the <literal role="extension">.osd</literal> file can be found <ulink url="https://commits.kde.org/okteta?path=kasten/controllers/view/structures/schema/">here.</ulink>
-          If more information is needed feel free to contact me at &Alex.Richardson.email;
-        </para>
+        <title
+>Weitere Informationen</title>
+        <para
+>Einige Beispiele von Strukturdefinitionen finden Sie im <ulink url="https://commits.kde.org/okteta?path=kasten/controllers/view/structures/examples/okteta/structures/"
+>Git-Archiv</ulink
+>. Dort ist zum Beispiel der Vorspann für PNG- und ELF-Dateien enthalten. Ein &XML;-Schema, das die Struktur von <literal role="extension"
+>.osd</literal
+>-Dateien beschreibt, finden Sie <ulink url="https://commits.kde.org/okteta?path=kasten/controllers/view/structures/schema/"
+>hier</ulink
+>. Brauchen Sie weitere Informationen, kontaktieren Sie &Alex.Richardson.email;. </para>
       </sect3>
     </sect2>
 <!--FIXME missing
@@ -726,139 +1134,285 @@ Structures Script Console-->
 </chapter>
 
 <chapter id="interface-overview">
-<title>Interface Overview</title>
+<title
+>Benutzeroberfläche</title>
 
 <sect1 id="menu-commands">
-<title>Menu Items</title>
+<title
+>Menüeinträge</title>
 
-<para>Apart from the common &kde; menus described in the <ulink url="help:/fundamentals/menus.html">Menu</ulink>
-chapter of the &kde; Fundamentals documentation &okteta; has these application specific menu entries:
-</para>
+<para
+>Außer den bekannten &kde;-Menüeinträgen, die im Kapitel <ulink url="help:/fundamentals/menus.html"
+>Menüs</ulink
+> der &kde;-Grundlagen beschrieben werden, gibt es folgende spezielle Menüeinträge für &okteta;: </para>
 
 <sect2 id="file-menu">
-<title>File Menu</title>
+<title
+>Das Menü Datei</title>
 
 <variablelist>
     <varlistentry>
-    <term><menuchoice>
-    <shortcut>
-    <keycombo action="simul">&Ctrl;<keycap>N</keycap></keycombo>
-    </shortcut>
-    <guimenu>File</guimenu>
-    <guimenuitem>New</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Create a new byte array...</action></para>
+    <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl; <keycap
+>N</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Datei</guimenu
+> <guimenuitem
+>Neu</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Legt ein neues Byte-Feld an.</action
+></para>
     <itemizedlist>
-    <listitem><para><guimenuitem>Empty</guimenuitem>: ... as Empty one.</para>
+    <listitem
+><para
+><guimenuitem
+>Leer</guimenuitem
+>: ... als leeres Byte-Feld.</para>
     </listitem>
-    <listitem><para><guimenuitem>From Clipboard</guimenuitem>: ... by the current
-    content of the clipboard.</para></listitem>
-    <listitem><para><guimenuitem>Pattern...</guimenuitem>: ... with a given pattern.</para>
+    <listitem
+><para
+><guimenuitem
+>Aus der Zwischenablage</guimenuitem
+>: ... mit dem aktuellen Inhalt der Zwischenablage.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Muster ...</guimenuitem
+>: ... mit einem vorgegebenen Muster.</para>
     </listitem>
-    <listitem><para><guimenuitem>Random Data...</guimenuitem>: ...with random data.</para></listitem>
-    <listitem><para><guimenuitem>Sequence</guimenuitem>: ... with all the bytes
-    from 0 to 255.</para></listitem>
+    <listitem
+><para
+><guimenuitem
+>Zufällige Daten ...</guimenuitem
+>: ... mit zufälligen Daten.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Zeichenfolge</guimenuitem
+>: ... einf Folge aller Bytes von 0 bis 255.</para
+></listitem>
     </itemizedlist>
     </listitem>
     </varlistentry>
 
     <varlistentry>
-    <term><menuchoice>
-    <guimenu>File</guimenu>
-    <guisubmenu>Export</guisubmenu>
-    </menuchoice></term>
-    <listitem><para>Export the selected bytes to a file...</para>
+    <term
+><menuchoice
+><guimenu
+>Datei</guimenu
+> <guisubmenu
+>Exportieren</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+>Exportiert die ausgewählten Bytes in eine Datei...</para>
     <itemizedlist>
-    <listitem><para><guimenuitem>Values</guimenuitem>: ... encoded as byte values.
-    By default the values are separated with one whitespace. The <guilabel>Separation</guilabel>
-    characters can be changed in the <guilabel>Export</guilabel> dialog.
-    </para>
+    <listitem
+><para
+><guimenuitem
+>Werte</guimenuitem
+>: .. kodiert als Byte-Werte. Als Standard werden die werte mit einem Leerzeichen getrennt. Das <guilabel
+>Trennzeichen</guilabel
+> kann im Dialog <guilabel
+>Exportieren</guilabel
+> geändert werden. </para>
     </listitem>
-    <listitem><para><guimenuitem>Characters</guimenuitem>: ... encoded as plain text.
-    </para></listitem>
-    <listitem><para><guimenuitem>Base64</guimenuitem>: ... encoded in the
-    <ulink url="https://en.wikipedia.org/wiki/Base64">Base64</ulink>
-    format.</para></listitem>
-    <listitem><para><guimenuitem>Base32</guimenuitem>: ... encoded in the 
-    <ulink url="https://en.wikipedia.org/wiki/Base32">Base32</ulink>
-    format.</para></listitem>
-    <listitem><para><guimenuitem>Ascii85</guimenuitem>: ... encoded in the
-    <ulink url="https://en.wikipedia.org/wiki/Ascii85">Ascii85</ulink>
-    format.</para></listitem>
-    <listitem><para><guimenuitem>Uuencoding</guimenuitem>: ... encoded in the
-    <ulink url="https://en.wikipedia.org/wiki/Uuencoding">Uuencoding</ulink>
-    format.</para></listitem>
-    <listitem><para><guimenuitem>Xxencoding</guimenuitem>: ... encoded in the
-    <ulink url="https://en.wikipedia.org/wiki/Xxencoding">Xxencoding</ulink>
-    format.</para></listitem>
-    <listitem><para><guimenuitem>Intel Hex</guimenuitem>: ... encoded in the
-    <ulink url="https://en.wikipedia.org/wiki/Intel_Hex">Intel Hex</ulink>
-    format.</para></listitem>
-    <listitem><para><guimenuitem>S-Record</guimenuitem>: ... encoded in the
-    <ulink url="https://en.wikipedia.org/wiki/S-record">S-Record</ulink>
-    format.</para></listitem>
-    <listitem><para><guimenuitem>C array</guimenuitem>: ... defined as
-    an array in the programming language C.</para></listitem>
-    <listitem><para><guimenuitem>View in Plain Text</guimenuitem>:
-    ... as in the data view with offset, byte values and characters. </para></listitem>
+    <listitem
+><para
+><guimenuitem
+>Zeichen</guimenuitem
+>: ... kodiert als einfacher Text. </para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Base64</guimenuitem
+>: ... kodiert im Format <ulink url="https://de.wikipedia.org/wiki/Base64"
+>Base64</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Base32</guimenuitem
+>: ... kodiert im Format <ulink url="https://de.wikipedia.org/wiki/Base32"
+>Base32</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Ascii85</guimenuitem
+>: ... kodiert im Format <ulink url="https://de.wikipedia.org/wiki/Base85"
+>Ascii85 oder Base85</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Uu-Kodierung</guimenuitem
+>: ... kodiert im Format <ulink url="https://de.wikipedia.org/wiki/Uuencoding"
+>Uuencoding</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Xx-Kodierung</guimenuitem
+>: ... kodiert im Format <ulink url="https://en.wikipedia.org/wiki/Xxencoding"
+>Xxencoding</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Intel Hex</guimenuitem
+>: ... kodiert im Format <ulink url="https://de.wikipedia.org/wiki/Intel_HEX"
+>Intel HEX</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>S-Record</guimenuitem
+>: ... kodiert im Format <ulink url="https://de.wikipedia.org/wiki/S-Record"
+>S-Record</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>C-Feld</guimenuitem
+>: ... definiert als ein Feld in der Programmiersprache C.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Offset, Werte und Text</guimenuitem
+>: ... wie in der Datenansicht mit Offset, Byte-Werten und Zeichen. </para
+></listitem>
     </itemizedlist>
     </listitem>
 
 </varlistentry>
 
     <varlistentry>
-    <term><menuchoice>
-    <guimenu>File</guimenu>
-    <guisubmenu>Permissions</guisubmenu><guimenuitem>Set Read-only</guimenuitem>
-    </menuchoice></term>
-    <listitem><para>When set, changes may not be made to the loaded
-    byte array.</para></listitem>
+    <term
+><menuchoice
+><guimenu
+>Datei</guimenu
+> <guisubmenu
+>Zugriffsrechte</guisubmenu
+><guimenuitem
+>Nur-Lesen-Modus</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+>Mit dieser Einstellungen können die Werte im geladenen Byte-Feld nicht geändert werden.</para
+></listitem>
     </varlistentry>
 
     <varlistentry>
-    <term><menuchoice>
-    <guimenu>File</guimenu>
-    <guimenuitem>Close All Other</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Close all besides the current byte array.</action></para></listitem>
+    <term
+><menuchoice
+><guimenu
+>Datei</guimenu
+> <guimenuitem
+>Alle anderen schließen</guimenuitem
+>  </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Schließt alle Felder außer dem aktuellen Byte-Feld.</action
+></para
+></listitem>
     </varlistentry>
 
 </variablelist>
 </sect2>
 
 <sect2 id="edit-menu">
-<title>Edit Menu</title>
+<title
+>Das Menü Bearbeiten</title>
 <variablelist>
-<para>Simple copy and cut send data to the clipboard with the
-mimetype <quote>application/octetstream</quote>, &klipper; is not able to display this data.
-And almost all other applications cannot handle this, too, as this is
-simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</para>
+<para
+>&klipper; kann in die Zwischenablage ausgeschnittene und eingefügte Daten mit dem MIME-Typ <quote
+>application/octetstream</quote
+> nicht anzeigen. Fast alle anderen Anwendungen können damit auch nicht umgehen, da dies einfach nur Rohdaten sind. Daher gibt es im Menüeintrag <guisubmenu
+>Kopieren als</guisubmenu
+> die Möglichkeit, den Typ der kopierten Daten vorzugeben.</para>
     <varlistentry>
-    <term><menuchoice>
-    <guimenu>Edit</guimenu>
-    <guisubmenu>Copy as</guisubmenu>
-    </menuchoice></term>
-    <listitem><para>Copy the selected bytes in one of different formats to the clipboard.
-    For a list of available formats see the menu item <menuchoice><guimenu>File</guimenu>
-    <guisubmenu>Export</guisubmenu></menuchoice>
-    </para>
+    <term
+><menuchoice
+><guimenu
+>Bearbeiten</guimenu
+><guisubmenu
+>Kopieren als</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+>Kopiert die ausgewählten Bytes in verschiedenen Formaten in die Zwischenablage. Eine Liste der verfügbaren Formate finden Sie im Menüeintrag <menuchoice
+><guimenu
+>Datei</guimenu
+> <guisubmenu
+>Exportieren</guisubmenu
+></menuchoice
+>. </para>
     </listitem>
     </varlistentry>
 
     <varlistentry>
-    <term><menuchoice>
-    <guimenu>Edit</guimenu>
-    <guisubmenu>Insert</guisubmenu>
-    </menuchoice></term>
+    <term
+><menuchoice
+><guimenu
+>Bearbeiten</guimenu
+> <guisubmenu
+>Einfügen</guisubmenu
+> </menuchoice
+></term>
     <listitem>
     <variablelist>
     <varlistentry>
-    <term><menuchoice>
-    <guimenuitem>Insert Pattern...</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Insert a specified string of bytes at the cursor.</action></para>
-    <para>Options in the dialog box allow you to specify the number of insertion of the pattern
-    and it's format (Hexadecimal, Decimal, Octal, Binary, Character(s) or UTF-8).</para>
+    <term
+><menuchoice>
+    <guimenuitem
+>Muster ...</guimenuitem>
+    </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Fügt eine angegebenes Muster von Bytes an der Cursor-Position ein.</action
+></para>
+    <para
+>In diesem Dialogfenster können Sie das Format (<guilabel
+>Hex</guilabel
+>, <guilabel
+>Dez</guilabel
+>, <guilabel
+>Okt</guilabel
+>, <guilabel
+>Bin</guilabel
+>, <guilabel
+>Zeichen</guilabel
+> oder <guilabel
+>UTF-8</guilabel
+>) der Eingabe einstellen und vorgeben, wie oft das Muster eingefügt wird.</para>
     <!--FIXME Random Data + Sequence - use cases?-->
     </listitem>
     </varlistentry>
@@ -867,242 +1421,460 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
     </varlistentry>
 
     <varlistentry>
-    <term><menuchoice>
-    <shortcut>
-    <keycombo action="simul">&Ctrl;&Shift;<keycap>A</keycap></keycombo>
-    </shortcut>
-    <guimenu>Edit</guimenu>
-    <guimenuitem>Deselect</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Deselect the current selection.</action></para></listitem>
+    <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>A</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Bearbeiten</guimenu
+><guimenuitem
+>Auswahl aufheben</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Hebt die vorhandene Auswahl auf.</action
+></para
+></listitem>
     </varlistentry>
 
     <varlistentry>
-    <term><menuchoice>
-    <shortcut>
-    <keycombo action="simul">&Ctrl;<keycap>E</keycap></keycombo>
-    </shortcut>
-    <guimenu>Edit</guimenu>
-    <guimenuitem>Select Range...</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Opens an embedded dialog to enter the range to
-    select.</action></para></listitem>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl; <keycap
+>E</keycap
+> </keycombo
+> </shortcut
+> <guimenu
+>Bearbeiten</guimenu
+> <guimenuitem
+>Bereich auswählen ...</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Öffnet einen Dialog als Teil des Hauptfenster, in dem ein Bereich ausgewählt werden kann.</action
+></para
+></listitem>
     </varlistentry>
 
     <varlistentry>
-    <term><menuchoice>
-    <shortcut>
-    <keycombo action="simul"><keycap>Ins</keycap></keycombo>
-    </shortcut>
-    <guimenu>Edit</guimenu>
-    <guimenuitem>Overwrite Mode</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Switch between Insert mode and Overwrite mode</action>.
-    </para>
-    <note><para>Overwrite mode is implemented to be very strict, it is not possible to
-    change the size of the data (no appending or removing of bytes).</para></note>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+><keycap
+>Einfg</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bearbeiten</guimenu
+> <guimenuitem
+>Einfügen-Modus</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Schaltet</action
+> im Editor zwischen Einfügen und Überschreiben um. </para>
+    <note
+><para
+>Im Modus Überschreiben ist es nicht möglich, die Größe der Daten zu ändern (kein Anhängen oder Entfernen von Bytes).</para
+></note>
     </listitem>
     </varlistentry>
 
     <varlistentry>
-    <term><menuchoice>
-    <shortcut>
-    <keycombo action="simul">&Ctrl;<keycap>F</keycap></keycombo>
-    </shortcut>
-    <guimenu>Edit</guimenu>
-    <guimenuitem>Find...</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Find a specified pattern in the document.</action>
-    Hexadecimal, decimal, octal, binary or text patterns can be searched for.</para>
-    <para>Options in the dialog box allow you to specify the starting point,
-    direction and range of the search.</para></listitem>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>F</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bearbeiten</guimenu
+> <guimenuitem
+>Suchen ...</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Findet ein eingegebenes Muster in dem Dokument.</action
+> Es kann nach Hexadezimal-, Oktal-, Binär- oder Textmustern gesucht werden.</para>
+    <para
+>Mit den Einstellungen im Dialogfenster können Sie den Startpunkt, die Richtung und die Reichweite der Suche bestimmen.</para
+></listitem>
     </varlistentry>
 
     <varlistentry>
-    <term><menuchoice>
-    <shortcut>
-    <keycombo action="simul">&Ctrl;<keycap>G</keycap></keycombo>
-    </shortcut>
-    <guimenu>Edit</guimenu>
-    <guimenuitem>Goto Offset...</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Move the cursor to a specified
-    offset.</action></para></listitem>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>G</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bearbeiten</guimenu
+> <guimenuitem
+>Gehe zu Offset  ...</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Bewegt den Cursor zu einem angegebenen Offset.</action
+></para
+></listitem>
     </varlistentry>
 
 </variablelist>
 </sect2>
 
 <sect2 id="view-menu">
-<title>View Menu</title>
+<title
+>Das Menü Ansicht</title>
 
 <variablelist>
 
     <varlistentry>
-    <term><menuchoice>
-    <shortcut>
-    <keycap>F11</keycap>
-    </shortcut>
-    <guimenu>View</guimenu>
-    <guimenuitem>Show Line Offset</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Toggle display of the line offset on a pane to the left
-    on and off.</action></para></listitem>
+    <term
+><menuchoice
+><shortcut
+> <keycap
+>F11</keycap
+> </shortcut
+> <guimenu
+>Ansicht</guimenu
+> <guimenuitem
+>Zeilen-Offset anzeigen</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Schaltet die Anzeige des Zeilen-Offsets auf der linken Seite ein und aus.</action
+></para
+></listitem>
     </varlistentry>
 
     <varlistentry>
-    <term><menuchoice>
-    <guimenu>View</guimenu>
-    <guisubmenu>Show Values or Chars</guisubmenu>
-    </menuchoice></term>
-    <listitem><para><action>Select which of the byte interpretations are shown.</action>
-    Possible are:</para>
+    <term
+><menuchoice
+><guimenu
+>Ansicht</guimenu
+> <guisubmenu
+>Werte oder Zeichen anzeigen</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Legt fest, welche Byte-Interpretationen angezeigt werden.</action
+> Es sind folgende Einstellungen möglich:</para>
     <itemizedlist>
-    <listitem><para><guimenuitem>Values</guimenuitem></para>
+    <listitem
+><para
+><guimenuitem
+>Werte</guimenuitem
+></para>
     </listitem>
-    <listitem><para><guimenuitem>Chars</guimenuitem></para></listitem>
-    <listitem><para><guimenuitem>Values and Chars</guimenuitem></para></listitem>
+    <listitem
+><para
+><guimenuitem
+>Zeichen</guimenuitem
+></para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Werte und Zeichen</guimenuitem
+></para
+></listitem>
     </itemizedlist>
     </listitem>
     </varlistentry>
 
     <varlistentry>
-    <term><menuchoice>
-    <guimenu>View</guimenu>
-    <guisubmenu>Value Coding</guisubmenu>
-    </menuchoice></term>
-    <listitem><para><action>Select the coding of the values</action> from:</para>
+    <term
+><menuchoice
+><guimenu
+>Ansicht</guimenu
+> <guisubmenu
+>Werte-Kodierung</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Wählt die Kodierung der Werte</action
+> aus:</para>
     <itemizedlist>
-    <listitem><para><guimenuitem>Hexadecimal</guimenuitem></para></listitem>
-    <listitem><para><guimenuitem>Decimal</guimenuitem></para></listitem>
-    <listitem><para><guimenuitem>Octal</guimenuitem></para></listitem>
-    <listitem><para><guimenuitem>Binary</guimenuitem></para></listitem>
+    <listitem
+><para
+><guimenuitem
+>Hexadezimal</guimenuitem
+></para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Dezimal</guimenuitem
+></para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Oktal</guimenuitem
+></para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Binär</guimenuitem
+></para
+></listitem>
     </itemizedlist>
     </listitem>
     </varlistentry>
 
     <varlistentry>
-    <term><menuchoice>
-    <guimenu>View</guimenu>
-    <guisubmenu>Char Coding</guisubmenu>
-    </menuchoice></term>
-    <listitem><para><action>Select the coding of the chars</action>
-    from the submenu.
-    </para>
+    <term
+><menuchoice
+><guimenu
+>Ansicht</guimenu
+> <guisubmenu
+>Zeichen-Kodierung</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Wählt die Kodierung für die Zeichen</action
+> aus dem Untermenü. </para>
     </listitem>
     </varlistentry>
 
     <varlistentry>
-    <term><menuchoice>
-    <guimenu>View</guimenu>
-    <guimenuitem>Show Non-printing Chars</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Toggle display of non-printing chars on and
-    off.</action> If the display is turned off, at the corresponding places in
-    the character column a substitute char is shown instead.</para></listitem>
+    <term
+><menuchoice
+><guimenu
+>Ansicht</guimenu
+><guimenuitem
+>Nicht druckbare Zeichen anzeigen</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Schaltet die Anzeige von nicht-druckbare Zeichen ein oder aus.</action
+> Wenn diese Option deaktiviert ist, werden an den entsprechenden Stellen in der Zeichenspalte Ersatzzeichen dargestellt.</para
+></listitem>
     </varlistentry>
 
     <varlistentry>
-    <term><menuchoice>
-    <guimenu>View</guimenu>
-    <guisubmenu>Set Bytes per Line</guisubmenu>
-    </menuchoice></term>
-    <listitem><para><action>Select the displayed bytes per line</action>
-    from the dialog, the default value is 16 bytes.
-    </para>
+    <term
+><menuchoice
+><guimenu
+>Ansicht</guimenu
+> <guisubmenu
+>Bytes pro Zeile festlegen</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Auswahl der je Zeile angezeigten Bytes</action
+> in einem Dialog, der Standardwert beträgt 16 Byte. </para>
     </listitem>
     </varlistentry>
     <varlistentry>
-    <term><menuchoice>
-    <guimenu>View</guimenu>
-    <guisubmenu>Set Bytes per Group</guisubmenu>
-    </menuchoice></term>
-    <listitem><para><action>By default the hexadecimal values are displayed in groups of 4 bytes.</action>
-     Using this menu item you can adapt this to your preferences in a dialog.
-    </para>
+    <term
+><menuchoice
+><guimenu
+>Ansicht</guimenu
+> <guisubmenu
+>Bytes pro Gruppe festlegen</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>In der Voreinstellung werden die hexadezimalen Werte in Gruppen von 4 Byte angezeigt.</action
+> Mit diesem Menüeintrag können Sie diese Einstellung in einem Dialog anpassen. </para>
     </listitem>
     </varlistentry>
     <varlistentry>
-    <term><menuchoice>
-    <guimenu>View</guimenu>
-    <guisubmenu>Dynamic Layout</guisubmenu>
-    </menuchoice></term>
-    <listitem><para><action>Set the rules for the layout of the data display.</action>
-    This defines how many bytes are displayed per line, depending on the width of the
-    view. Possible rules are:</para>
+    <term
+><menuchoice
+><guimenu
+>Ansicht</guimenu
+> <guisubmenu
+>Dynamischer Umbruch</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Legt die Regeln für die Darstellung der Daten fest.</action
+> Dadurch wird bestimmt, wieviele Bytes pro Reihe dargestellt werden, abhängig von der Breite der Ansicht. Mögliche Regeln sind:</para>
     <itemizedlist>
-    <listitem><para><guimenuitem>Off</guimenuitem>: The layout is fixed to the
-    current number of bytes per line and not adapted on the change of the view size.</para>
+    <listitem
+><para
+><guimenuitem
+>Aus</guimenuitem
+>: Die Anzeige bleibt unverändert bei der aktuell vorhandenen Anzahl von Byte je Zeile und wird bei einer Größenänderung des Ansichtsfensters nicht angepasst.</para>
     </listitem>
-    <listitem><para><guimenuitem>Wrap only complete byte groups</guimenuitem>: Puts as many bytes
-    per line as possible, as long as groups of bytes are complete.
-    </para></listitem>
-    <listitem><para><guimenuitem>On</guimenuitem>: Same as previous,
-    but allows also incomplete groups of bytes.</para></listitem>
+    <listitem
+><para
+><guimenuitem
+>Nur vollständige Bytegruppen umbrechen</guimenuitem
+>: Stellt möglichst viele Bytes pro Reihe dar, Gruppen von Bytes werden nicht getrennt. </para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>An</guimenuitem
+>: Stellt möglichst viele Bytes pro Reihe dar, trennt dabei aber Gruppen von Bytes.</para
+></listitem>
     </itemizedlist>
     </listitem>
     </varlistentry>
 
     <varlistentry>
-    <term><menuchoice>
-    <guimenu>View</guimenu>
-    <guisubmenu>View Mode</guisubmenu>
-    </menuchoice></term>
-    <listitem><para><action>Select the layout for the view</action> from:</para>
+    <term
+><menuchoice
+><guimenu
+>Ansicht</guimenu
+> <guisubmenu
+>Anzeigemodus</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Wählt das Layout für die Ansicht</action
+> aus:</para>
     <itemizedlist>
-    <listitem><para><guimenuitem>Columns</guimenuitem>: The values and chars
-    interpretations are shown in the classic layout with each listed in a
-    separate column.</para></listitem>
-    <listitem><para><guimenuitem>Rows</guimenuitem>: The char
-    interpretation of a byte is directly shown under the value interpretation.</para></listitem>
+    <listitem
+><para
+><guimenuitem
+>Spalten</guimenuitem
+>: Die Interpretationen als Werte und Zeichen werden im klassischen Layout angezeigt. In diesem werden beide in getrennten Spalten aufgelistet.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Zeilen</guimenuitem
+>: Die Interpretation eines Bytes als Zeichen wird direkt neben der als Wert angezeigt.</para
+></listitem>
     </itemizedlist>
     </listitem>
     </varlistentry>
 
     <varlistentry>
-    <term><menuchoice>
-    <shortcut>
-    <keycombo action="simul">&Ctrl;&Shift;<keycap>T</keycap></keycombo>
-    </shortcut>
-    <guimenu>View</guimenu>
-    <guimenuitem>Split Horizontal</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Split the view area with the currently focused view
-    into two parts and add a copy of the current view to the new, lower area.</action></para></listitem>
+    <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>T</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Ansicht</guimenu
+> <guisubmenu
+>Geteilte Ansicht</guisubmenu
+> <guimenuitem
+>Waagerecht teilen</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Teilt den Bereich der aktuellen Ansicht in zwei Teile und zeigt eine Kopie dieser Ansicht in der unteren Hälfte an.</action
+></para
+></listitem>
     </varlistentry>
 
     <varlistentry>
-    <term><menuchoice>
-    <shortcut>
-    <keycombo action="simul">&Ctrl;&Shift;<keycap>L</keycap></keycombo>
-    </shortcut>
-    <guimenu>View</guimenu>
-    <guimenuitem>Split Vertically</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Split the view area with the currently focused view
-    into two parts and add a copy of the current view to the new, right area.</action></para></listitem>
+    <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>L</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Bearbeiten</guimenu
+><guimenuitem
+>Senkrecht teilen</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Teilt den Bereich der aktuellen Ansicht in zwei Teile und zeigt eine Kopie dieser Ansicht in der rechten Hälfte an.</action
+></para
+></listitem>
     </varlistentry>
 
     <varlistentry>
-    <term><menuchoice>
-    <shortcut>
-    <keycombo action="simul">&Ctrl;&Shift;<keycap>R</keycap></keycombo>
-    </shortcut>
-    <guimenu>View</guimenu>
-    <guimenuitem>Close View Area</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Close the view area with the currently focused view.</action></para></listitem>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>R</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Ansicht</guimenu
+> <guimenuitem
+>Ansicht schließen</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Schließt den Ansichtsbereich, die gerade aktiv ist.</action
+></para
+></listitem>
     </varlistentry>
 
     <varlistentry>
-    <term><menuchoice>
-    <guimenu>View</guimenu>
-    <guimenuitem>View Profile</guimenuitem>
-    </menuchoice></term>
-    <listitem><para>View settings can be separately stored as view profiles.
-    The currently selected profile can be updated directly from the current view
-    settings, or a new one can be created from them. All view profiles can be
-    managed in a dialog available from <menuchoice><guimenu>Settings</guimenu><guimenuitem>Manage View Profiles...</guimenuitem></menuchoice>.</para></listitem>
+    <term
+><menuchoice
+><guimenu
+>Ansicht</guimenu
+> <guimenuitem
+>Ansichtsprofil</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+>Die Einstellungen einer Ansicht können getrennt als Ansichtsprofil gespeichert werden. Das aktuell ausgewählte Profil kann direkt mit den Einstellungen der aktuellen Ansicht aktualisiert oder eine neues Profil kann damit erstellt werden. Alle Ansichtsprofile können in einem Dialog verwaltet werden, der mit <menuchoice
+><guimenu
+>Einstellungen</guimenu
+><guimenuitem
+>Ansichtsprofile verwalten ...</guimenuitem
+></menuchoice
+> geöffnet wird.</para
+></listitem>
     </varlistentry>
 
 </variablelist>
@@ -1110,76 +1882,133 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
 </sect2>
 
 <sect2 id="windows-menu">
-<title>Windows Menu</title>
+<title
+>Das Menü Fenster</title>
 
-    <para>Provides a list of the current views. Select the active window.</para>
+    <para
+>Zeigt eine Liste von aktuellen Ansichten an. Wählen Sie daraus das aktive Fenster.</para>
 
 </sect2>
 
 <sect2 id="bookmarks-menu">
-<title>Bookmarks Menu</title>
+<title
+>Das Menü Lesezeichen</title>
 
-    <para>Multiple bookmarks can be set for a single byte array. Each byte array
-    has its own set of bookmarks, and the appropriate set is displayed at the
-    bottom of the <guimenu>Bookmarks</guimenu> menu. Choose a bookmark
-    from the menu to move the cursor and the view to it.
-    <note><para>Bookmarks are currently only transient and not saved if you
-    close a byte array or the whole program.</para></note></para>
+    <para
+>Mehrere Lesezeichen können für ein einzelnes Byte-Feld gesetzt werden. Jedes Byte-Feld hat seinen eigenen Satz an Lesezeichen. Die vorhandenen Lesezeichen werden  im Menü <guimenu
+>Lesezeichen</guimenu
+> am Ende angezeigt. Wählen Sie ein Lesezeichen aus dem Menü, um den Cursor auf die entsprechende Stelle zu setzen. <note
+><para
+>Lesezeichen sind zurzeit nur für die aktuell ausgeführte Sitzung gültig, sie werden nicht gespeichert, wenn ein Byte-Feld oder das Programm geschlossen wird.</para
+></note
+></para>
 
 <variablelist>
     <varlistentry>
-    <term><menuchoice>
-    <shortcut>
-    <keycombo action="simul">&Ctrl;<keycap>B</keycap></keycombo>
-    </shortcut>
-    <guimenu>Bookmarks</guimenu>
-    <guimenuitem>Add Bookmark</guimenuitem>
-    </menuchoice></term>
-    <listitem><para>Bookmark a location within the byte array.</para></listitem>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>B</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Lesezeichen</guimenu
+> <guimenuitem
+>Lesezeichen hinzufügen</guimenuitem
+>  </menuchoice
+></term>
+    <listitem
+><para
+>Fügt ein Lesezeichen innerhalb eines Byte-Feldes ein.</para
+></listitem>
     </varlistentry>
 
     <varlistentry>
-    <term><menuchoice>
-    <shortcut>
-    <keycombo action="simul">&Ctrl;&Shift;<keycap>B</keycap></keycombo>
-    </shortcut>
-    <guimenu>Bookmarks</guimenu>
-    <guimenuitem>Remove Bookmark</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Remove the current bookmark.</action> This command
-    is only available if the cursor is at a bookmarked location.</para></listitem>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>B</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Lesezeichen</guimenu
+> <guimenuitem
+>Lesezeichen löschen</guimenuitem
+>  </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Entfernt das aktuelle Lesezeichen.</action
+> Dieser Befehl nur verfügbar, wenn der Cursor an einer Position mit Lesezeichen steht.</para
+></listitem>
     </varlistentry>
 
     <varlistentry>
-    <term><menuchoice>
-    <guimenu>Bookmarks</guimenu>
-    <guimenuitem>Remove All Bookmarks</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Clear the bookmark list.</action></para></listitem>
+    <term
+><menuchoice
+><guimenu
+>Lesezeichen</guimenu
+> <guimenuitem
+>Alle Lesezeichen löschen</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Löscht die gesamte Lesezeichenliste.</action
+></para
+></listitem>
     </varlistentry>
 
     <varlistentry>
-    <term><menuchoice>
-    <shortcut>
-    <keycombo action="simul">&Alt;<keycap>Up</keycap></keycombo>
-    </shortcut>
-    <guimenu>Bookmarks</guimenu>
-    <guimenuitem>Goto Previous Bookmark</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Move the cursor to the previous
-    bookmark.</action></para></listitem>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Alt;<keycap
+>Pfeil hoch</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Lesezeichen</guimenu
+> <guimenuitem
+>Zum vorherigen Lesezeichen gehen</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Bewegt den Cursor zu dem vorherigen Lesezeichen.</action
+></para
+></listitem>
     </varlistentry>
 
     <varlistentry>
-    <term><menuchoice>
-    <shortcut>
-    <keycombo action="simul">&Alt;<keycap>Down</keycap></keycombo>
-    </shortcut>
-    <guimenu>Bookmarks</guimenu>
-    <guimenuitem>Go to Next Bookmark</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Move the cursor to the next
-    bookmark.</action></para></listitem>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Alt;<keycap
+>Pfeil runter</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Lesezeichen</guimenu
+> <guimenuitem
+>Zum nächsten Lesezeichen gehen</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Bewegt den Cursor zu dem nächsten Lesezeichen.</action
+></para
+></listitem>
     </varlistentry>
 
 </variablelist>
@@ -1187,22 +2016,33 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
 </sect2>
 
 <sect2 id="tools-menu">
-<title>Tools Menu</title>
+<title
+>Das Menü Extras</title>
 
-<para>Provides a list of installed tools. Toggle the display of each tools
-on or off. A detailed description of each tool you find in the <link linkend="tools">Tools</link> section.</para>
+<para
+>Das Menü zeigt eine Liste mit allen installierten Werkzeuge an und erlaubt es Ihnen, die Anzeige der einzelnen Werkzeuge ein- und auszuschalten. Eine ausführliche Beschreibung für jedes Werkzeug finden Sie in dem Kapitel <link linkend="tools"
+>Werkzeuge</link
+>.</para>
 
 </sect2>
 
 <sect2 id="settings-menu">
-<title>Settings Menu</title>
+<title
+>Das Menü Einstellungen</title>
 <variablelist>
     <varlistentry>
-    <term><menuchoice>
-    <guimenu>Settings</guimenu>
-    <guimenuitem>Manage View Profiles...</guimenuitem>
-    </menuchoice></term>
-    <listitem><para>Open a dialog to create, edit, delete and set a default view profile.</para></listitem>
+    <term
+><menuchoice
+><guimenu
+>Einstellungen</guimenu
+> <guimenuitem
+>Ansichtsprofile verwalten ...</guimenuitem
+>  </menuchoice
+></term>
+    <listitem
+><para
+>Öffnet einen Dialog, in dem Sie Ansichtsprofile erstellen, bearbeiten, löschen und ein Profil als Standard setzen können.</para
+></listitem>
     </varlistentry>
 </variablelist>
 
@@ -1213,25 +2053,24 @@ on or off. A detailed description of each tool you find in the <link linkend="to
 </chapter>
 
 <chapter id="credits">
-    <title>Credits and License</title>
+    <title
+>Danksagungen und Lizenz</title>
 
-    <para>
-    &okteta;
-    </para>
+    <para
+>&okteta; </para>
 
     <!--List all the copyright holders here-->
-    <para>Program Copyright 2006-2012 &Friedrich.Kossebau;
-    &Friedrich.Kossebau.email;</para>
+    <para
+>Programm Copyright 2006-2012 &Friedrich.Kossebau; &Friedrich.Kossebau.email;</para>
 
-    <para>Documentation Copyright 2008,2010 &Friedrich.Kossebau;
-    &Friedrich.Kossebau.email;, &Alex.Richardson; &Alex.Richardson.email;</para>
+    <para
+>Dokumentation Copyright 2008,2010 &Friedrich.Kossebau; &Friedrich.Kossebau.email;, &Alex.Richardson; &Alex.Richardson.email;</para>
 
-    <!-- TRANS:CREDIT_FOR_TRANSLATORS -->
-
-    &underFDL;
-    &underGPL;
-
-</chapter>
+    <para
+>Übersetzung Ingo Malchow <email
+>ingomalchow@googlemail.com</email
+></para
+> &underFDL; &underGPL; </chapter>
 
 &documentation.index;
 </book>

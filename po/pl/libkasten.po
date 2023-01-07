@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-16 00:51+0000\n"
+"POT-Creation-Date: 2023-01-07 00:55+0000\n"
 "PO-Revision-Date: 2022-10-09 11:39+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -158,7 +158,7 @@ msgctxt "@title:window"
 msgid "Filesystem"
 msgstr "Przeglądarka plików"
 
-#: controllers/documentsystem/filesystembrowser/filesystembrowserview.cpp:79
+#: controllers/documentsystem/filesystembrowser/filesystembrowserview.cpp:85
 #, kde-format
 msgctxt "@action:intoolbar"
 msgid "Folder of Current Document"
@@ -435,13 +435,13 @@ msgstr ""
 "utworzone zgodnie z ustawieniami podanymi powyżej i umieszczone w nowym "
 "dokumencie ."
 
-#: gui/system/dialoghandler.cpp:34
+#: gui/system/dialoghandler.cpp:33
 #, kde-kuit-format
 msgctxt "@info"
 msgid "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
 msgstr "Już istnieje plik w <nl/><filename>%1</filename>.<nl/>Nadpisać?"
 
-#: gui/system/dialoghandler.cpp:58
+#: gui/system/dialoghandler.cpp:48
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -451,7 +451,7 @@ msgstr ""
 "W pliku <filename>%1</filename> są niezapisane zmiany. Zostaną utracone "
 "jeśli ponownie wczytasz dokument.<nl/>Chcesz je odrzucić?"
 
-#: gui/system/dialoghandler.cpp:71
+#: gui/system/dialoghandler.cpp:61
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -461,7 +461,7 @@ msgstr ""
 "<filename>%1</filename> został zmieniony.<nl/>Czy chcesz zapisać zmiany czy "
 "je porzucić?"
 
-#: gui/system/dialoghandler.cpp:95
+#: gui/system/dialoghandler.cpp:76
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""

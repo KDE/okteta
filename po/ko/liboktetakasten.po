@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-16 00:51+0000\n"
+"POT-Creation-Date: 2023-01-07 00:55+0000\n"
 "PO-Revision-Date: 2022-07-13 12:14+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -782,14 +782,14 @@ msgid "Modular sum 8-bit"
 msgstr "Modular sum 8-bit"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:28
-#: controllers/view/poddecoder/podtableview.cpp:80
+#: controllers/view/poddecoder/podtableview.cpp:79
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Little-endian"
 msgstr "리틀 엔디언"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:29
-#: controllers/view/poddecoder/podtableview.cpp:79
+#: controllers/view/poddecoder/podtableview.cpp:78
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Big-endian"
@@ -1017,8 +1017,8 @@ msgid "operand XOR data"
 msgstr "XOR 연산 적용"
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:74
-#: controllers/view/search/searchcontroller.cpp:107
-#: controllers/view/search/searchcontroller.cpp:113
+#: controllers/view/search/searchcontroller.cpp:106
+#: controllers/view/search/searchcontroller.cpp:112
 #, kde-format
 msgctxt "@title:window"
 msgid "Find"
@@ -1150,19 +1150,19 @@ msgctxt "@info:tooltip for column Value"
 msgid "The value of the bytes for the datatype"
 msgstr "데이터 형식에 따른 바이트의 값"
 
-#: controllers/view/poddecoder/podtableview.cpp:86
+#: controllers/view/poddecoder/podtableview.cpp:85
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte order to use for decoding the bytes."
 msgstr "바이트를 디코딩할 때 사용할 순서입니다."
 
-#: controllers/view/poddecoder/podtableview.cpp:90
+#: controllers/view/poddecoder/podtableview.cpp:89
 #, kde-format
 msgctxt "@option:check"
 msgid "Unsigned as hexadecimal:"
 msgstr "부호 없는 16진수 값:"
 
-#: controllers/view/poddecoder/podtableview.cpp:99
+#: controllers/view/poddecoder/podtableview.cpp:98
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1170,7 +1170,7 @@ msgid ""
 "hexadecimal instead of as decimal."
 msgstr "부호 없는 정수값을 16진수나 10진수로 표시할지 여부를 결정합니다."
 
-#: controllers/view/poddecoder/podtableview.cpp:130
+#: controllers/view/poddecoder/podtableview.cpp:129
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1180,19 +1180,19 @@ msgstr ""
 "새로운 값에 바이트가 <emphasis>더 적게</emphasis> 필요합니다(%2 대신 %1).<nl/"
 ">사용되지 않은 바이트를 유지하거나 삭제하시겠습니까?"
 
-#: controllers/view/poddecoder/podtableview.cpp:135
+#: controllers/view/poddecoder/podtableview.cpp:134
 #, kde-format
 msgctxt "@action:button keep the unused bytes"
 msgid "&Keep"
 msgstr "유지(&K)"
 
-#: controllers/view/poddecoder/podtableview.cpp:138
+#: controllers/view/poddecoder/podtableview.cpp:137
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Keep the unused bytes with their old values."
 msgstr "사용되지 않은 바이트를 이전 값으로 유지합니다."
 
-#: controllers/view/poddecoder/podtableview.cpp:151
+#: controllers/view/poddecoder/podtableview.cpp:146
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1202,7 +1202,7 @@ msgstr ""
 "새로운 값에 바이트가 <emphasis>더 많이</emphasis> 필요합니다(%2 대신 %1).<nl/"
 ">뒤에 있는 바이트를 덮어쓰거나 필요한 새 바이트를 추가하시겠습니까?"
 
-#: controllers/view/poddecoder/podtableview.cpp:250
+#: controllers/view/poddecoder/podtableview.cpp:236
 #: controllers/view/selectrange/selectrangeview.cpp:105
 #: controllers/view/structures/structureview.cpp:338
 #, kde-format
@@ -1326,43 +1326,43 @@ msgctxt "@info"
 msgid "Could not print."
 msgstr "인쇄할 수 없습니다."
 
-#: controllers/view/replace/replacecontroller.cpp:74
-#: controllers/view/replace/replacecontroller.cpp:88
+#: controllers/view/replace/replacecontroller.cpp:73
+#: controllers/view/replace/replacecontroller.cpp:87
 #, kde-format
 msgctxt "@title:window"
 msgid "Replace"
 msgstr "바꾸기"
 
-#: controllers/view/replace/replacecontroller.cpp:76
-#: controllers/view/replace/replacecontroller.cpp:90
+#: controllers/view/replace/replacecontroller.cpp:75
+#: controllers/view/replace/replacecontroller.cpp:89
 #, kde-format
 msgctxt "@info"
 msgid "No replacements made."
 msgstr "바꾼 것이 없습니다."
 
-#: controllers/view/replace/replacecontroller.cpp:77
-#: controllers/view/replace/replacecontroller.cpp:91
+#: controllers/view/replace/replacecontroller.cpp:76
+#: controllers/view/replace/replacecontroller.cpp:90
 #, kde-format
 msgctxt "@info"
 msgid "1 replacement made."
 msgid_plural "%1 replacements made."
 msgstr[0] "항목 %1개를 바꾸었습니다."
 
-#: controllers/view/replace/replacecontroller.cpp:80
+#: controllers/view/replace/replacecontroller.cpp:79
 #, kde-format
 msgctxt "@info"
 msgid "Replace pattern not found in byte array."
 msgstr "바이트 배열에서 바꿀 패턴을 찾지 못했습니다."
 
-#: controllers/view/replace/replacecontroller.cpp:93
-#: controllers/view/search/searchcontroller.cpp:115
+#: controllers/view/replace/replacecontroller.cpp:92
+#: controllers/view/search/searchcontroller.cpp:114
 #, kde-kuit-format
 msgctxt "@info"
 msgid "End of byte array reached.<nl/>Continue from the beginning?"
 msgstr "바이트 배열의 끝에 도달했습니다.<nl/>처음부터 다시 시작하시겠습니까?"
 
-#: controllers/view/replace/replacecontroller.cpp:94
-#: controllers/view/search/searchcontroller.cpp:116
+#: controllers/view/replace/replacecontroller.cpp:93
+#: controllers/view/search/searchcontroller.cpp:115
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Beginning of byte array reached.<nl/>Continue from the end?"
@@ -1454,7 +1454,7 @@ msgctxt "@title"
 msgid "Replace"
 msgstr "바꾸기"
 
-#: controllers/view/search/searchcontroller.cpp:108
+#: controllers/view/search/searchcontroller.cpp:107
 #, kde-format
 msgctxt "@info"
 msgid "Search key not found in byte array."

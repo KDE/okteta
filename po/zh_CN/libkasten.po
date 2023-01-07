@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-16 00:51+0000\n"
+"POT-Creation-Date: 2023-01-07 00:55+0000\n"
 "PO-Revision-Date: 2023-01-02 07:11\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -151,7 +151,7 @@ msgctxt "@title:window"
 msgid "Filesystem"
 msgstr "文件系统"
 
-#: controllers/documentsystem/filesystembrowser/filesystembrowserview.cpp:79
+#: controllers/documentsystem/filesystembrowser/filesystembrowserview.cpp:85
 #, kde-format
 msgctxt "@action:intoolbar"
 msgid "Folder of Current Document"
@@ -426,13 +426,13 @@ msgstr ""
 "如果您按下<interface>创建</interface>按钮，您在上面生成的数据将会被插入到一个"
 "新文档。"
 
-#: gui/system/dialoghandler.cpp:34
+#: gui/system/dialoghandler.cpp:33
 #, kde-kuit-format
 msgctxt "@info"
 msgid "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
 msgstr "已经有一个名为 <nl/><filename>%1</filename> 的文件。<nl/>覆盖它吗？"
 
-#: gui/system/dialoghandler.cpp:58
+#: gui/system/dialoghandler.cpp:48
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -442,7 +442,7 @@ msgstr ""
 "对文件 <filename>%1</filename> 的修改尚未保存。如果您重新加载文档，这些修改将"
 "会丢失。<nl/>您想要丢弃修改吗？"
 
-#: gui/system/dialoghandler.cpp:71
+#: gui/system/dialoghandler.cpp:61
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -450,7 +450,7 @@ msgid ""
 "changes or discard them?"
 msgstr "<filename>%1</filename> 已经被修改。<nl/>您想要保存还是丢弃更改？"
 
-#: gui/system/dialoghandler.cpp:95
+#: gui/system/dialoghandler.cpp:76
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""

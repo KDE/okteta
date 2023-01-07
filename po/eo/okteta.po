@@ -1,13 +1,15 @@
 # Translation of okteta into esperanto.
+# Copyright (C) 2009 Free Software Foundation, Inc.
 # Axel Rousseau <axel@esperanto-jeunes.org>, 2009.
+# Oliver Kellogg <okellogg@users.sourceforge.net>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-27 00:48+0000\n"
-"PO-Revision-Date: 2009-11-15 12:06+0100\n"
-"Last-Translator: Axel Rousseau <axel@esperanto-jeunes.org>\n"
+"POT-Creation-Date: 2023-01-07 00:55+0000\n"
+"PO-Revision-Date: 2023-01-06 22:00+0100\n"
+"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
@@ -19,12 +21,12 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Axel Rousseau"
+msgstr "Axel Rousseau, Oliver Kellogg"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "axel@esperanto-jeunes.org"
+msgstr "axel@esperanto-jeunes.org, okellogg@users.sourceforge.net"
 
 #: about.cpp:16
 #, kde-format
@@ -34,18 +36,17 @@ msgstr "Okteta"
 #: about.cpp:18
 #, kde-format
 msgid "Hex editor"
-msgstr ""
+msgstr "Deksesuma redaktilo"
 
 #: about.cpp:20
-#, fuzzy, kde-format
-#| msgid "Friedrich W. H. Kossebau"
+#, kde-format
 msgid "2006-%1 Friedrich W. H. Kossebau"
-msgstr "Friedrich W. H. Kossebau"
+msgstr "2006-%1 Friedrich W. H. Kossebau"
 
 #: about.cpp:21
 #, kde-format
 msgid "Edit the raw data of files"
-msgstr ""
+msgstr "Redakti la krudajn datumojn de dosieroj"
 
 #: about.cpp:26
 #, kde-format
@@ -67,23 +68,23 @@ msgstr "Alexander Richardson"
 #, kde-format
 msgctxt "Task description"
 msgid "Structures tool"
-msgstr ""
+msgstr "Ilo por strukturoj"
 
 #. i18n: ectx: Menu (permission)
 #: oktetaui.rc:15
 #, kde-format
 msgctxt "@title:menu"
 msgid "Permissions"
-msgstr ""
+msgstr "Permesoj"
 
 #. i18n: ectx: Menu (windows)
-#: oktetaui.rc:69
+#: oktetaui.rc:65
 #, kde-format
 msgid "&Windows"
 msgstr ""
 
 #. i18n: ectx: ToolBar (mainToolBar)
-#: oktetaui.rc:82
+#: oktetaui.rc:78
 #, kde-format
 msgid "Main Toolbar"
 msgstr "Ĉefa ilobreto"
@@ -91,4 +92,4 @@ msgstr "Ĉefa ilobreto"
 #: program.cpp:89
 #, kde-format
 msgid "File(s) to load."
-msgstr ""
+msgstr "Dosiero(j) ŝargenda(j)."

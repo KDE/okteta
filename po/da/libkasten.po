@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-16 00:51+0000\n"
+"POT-Creation-Date: 2023-01-07 00:55+0000\n"
 "PO-Revision-Date: 2012-04-23 18:03+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
@@ -161,7 +161,7 @@ msgctxt "@title:window"
 msgid "Filesystem"
 msgstr "Filsystem"
 
-#: controllers/documentsystem/filesystembrowser/filesystembrowserview.cpp:79
+#: controllers/documentsystem/filesystembrowser/filesystembrowserview.cpp:85
 #, kde-format
 msgctxt "@action:intoolbar"
 msgid "Folder of Current Document"
@@ -446,14 +446,14 @@ msgstr ""
 "Hvis du trykker på knappen <interface>Opret</interface>, vil data blive "
 "genereret med de indstillinger du angav ovenfor og indsat i et nyt dokument."
 
-#: gui/system/dialoghandler.cpp:34
+#: gui/system/dialoghandler.cpp:33
 #, kde-kuit-format
 msgctxt "@info"
 msgid "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
 msgstr ""
 "Der er allerede en fil på<nl/><filename>%1</filename>.<nl/>Vil du overskrive?"
 
-#: gui/system/dialoghandler.cpp:58
+#: gui/system/dialoghandler.cpp:48
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -463,7 +463,7 @@ msgstr ""
 "Der er ikke-gemte ændringer af <filename>%1</filename>. De vil gå tabt hvis "
 "du genindlæser dokumentet.<nl/>Vil du kassere dem?"
 
-#: gui/system/dialoghandler.cpp:71
+#: gui/system/dialoghandler.cpp:61
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -473,7 +473,7 @@ msgstr ""
 "<filename>%1</filename> er blevet ændret.<nl/>Vil du gemme dine ændringer "
 "eller kassere dem?"
 
-#: gui/system/dialoghandler.cpp:95
+#: gui/system/dialoghandler.cpp:76
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""

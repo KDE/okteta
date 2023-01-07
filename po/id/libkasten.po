@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-16 00:51+0000\n"
+"POT-Creation-Date: 2023-01-07 00:55+0000\n"
 "PO-Revision-Date: 2022-05-09 20:24+0700\n"
 "Last-Translator: Wantoyèk <wantoyek@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -154,7 +154,7 @@ msgctxt "@title:window"
 msgid "Filesystem"
 msgstr "Sistem file"
 
-#: controllers/documentsystem/filesystembrowser/filesystembrowserview.cpp:79
+#: controllers/documentsystem/filesystembrowser/filesystembrowserview.cpp:85
 #, kde-format
 msgctxt "@action:intoolbar"
 msgid "Folder of Current Document"
@@ -433,13 +433,13 @@ msgstr ""
 "dihasilkan dengan pengaturan yang kamu masukkan di atas dan disisipkan ke "
 "dalam dokumen baru."
 
-#: gui/system/dialoghandler.cpp:34
+#: gui/system/dialoghandler.cpp:33
 #, kde-kuit-format
 msgctxt "@info"
 msgid "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
 msgstr "Sudah ada file pada<nl/><filename>%1</filename>.<nl/>Timpa?"
 
-#: gui/system/dialoghandler.cpp:58
+#: gui/system/dialoghandler.cpp:48
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -449,7 +449,7 @@ msgstr ""
 "Ada modifikasi yang belum disimpan ke <filename>%1</filename>. Mereka akan "
 "hilang jika kamu muat ulang dokumen.<nl/>Apakah kamu ingin membuangnya?"
 
-#: gui/system/dialoghandler.cpp:71
+#: gui/system/dialoghandler.cpp:61
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -459,7 +459,7 @@ msgstr ""
 "<filename>%1</filename> telah dimodifikasi.<nl/>Apakah kamu ingin menyimpan "
 "perubahan atau membuangnya?"
 
-#: gui/system/dialoghandler.cpp:95
+#: gui/system/dialoghandler.cpp:76
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""

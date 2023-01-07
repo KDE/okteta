@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-16 00:51+0000\n"
+"POT-Creation-Date: 2023-01-07 00:55+0000\n"
 "PO-Revision-Date: 2010-07-23 22:50+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: Arabic <linuxac-kde-arabic-team@googlegroups.com>\n"
@@ -161,7 +161,7 @@ msgctxt "@title:window"
 msgid "Filesystem"
 msgstr "نظام الملفات"
 
-#: controllers/documentsystem/filesystembrowser/filesystembrowserview.cpp:79
+#: controllers/documentsystem/filesystembrowser/filesystembrowserview.cpp:85
 #, kde-format
 msgctxt "@action:intoolbar"
 msgid "Folder of Current Document"
@@ -444,7 +444,7 @@ msgstr ""
 "إذا ضغطت على زر <interface>أنشئ</interface> ؛ سيتم توليد بيانات بالإعدادات "
 "المدخلة في الأعلى ، و ستوضع في مستند جديد."
 
-#: gui/system/dialoghandler.cpp:34
+#: gui/system/dialoghandler.cpp:33
 #, kde-kuit-format
 msgctxt "@info"
 msgid "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
@@ -452,7 +452,7 @@ msgstr ""
 "يوجد مسبقا ملفا يحمل هذا الاسم <nl/><filename>%1</filename>.<nl/> هل نكتب "
 "فوقه؟"
 
-#: gui/system/dialoghandler.cpp:58
+#: gui/system/dialoghandler.cpp:48
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -462,7 +462,7 @@ msgstr ""
 "توجد تعديلات غير محفوظة في <filename>%1</filename>. ستفقد هذه التعديلات إذا "
 "أعدت تحميل المستند.<nl/>هل تريد اهمالها؟"
 
-#: gui/system/dialoghandler.cpp:71
+#: gui/system/dialoghandler.cpp:61
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -471,7 +471,7 @@ msgid ""
 msgstr ""
 "المستند <filename>%1</filename> تم تعديله.<nl/>هل تريد حفظ تغيراتك أو رفضهن ؟"
 
-#: gui/system/dialoghandler.cpp:95
+#: gui/system/dialoghandler.cpp:76
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""

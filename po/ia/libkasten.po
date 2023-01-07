@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-16 00:51+0000\n"
+"POT-Creation-Date: 2023-01-07 00:55+0000\n"
 "PO-Revision-Date: 2020-11-16 15:48+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -151,7 +151,7 @@ msgctxt "@title:window"
 msgid "Filesystem"
 msgstr "Systema de file"
 
-#: controllers/documentsystem/filesystembrowser/filesystembrowserview.cpp:79
+#: controllers/documentsystem/filesystembrowser/filesystembrowserview.cpp:85
 #, kde-format
 msgctxt "@action:intoolbar"
 msgid "Folder of Current Document"
@@ -429,13 +429,13 @@ msgstr ""
 "Si tu pressa le button <interface>Crea</interface>, le datos generate con le "
 "preferentias que tu insertava de supra e insertava in le documento nove."
 
-#: gui/system/dialoghandler.cpp:34
+#: gui/system/dialoghandler.cpp:33
 #, kde-kuit-format
 msgctxt "@info"
 msgid "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
 msgstr "Il jam ha un file in<nl/><filename>%1</filename>.<nl/>Superscribe?"
 
-#: gui/system/dialoghandler.cpp:58
+#: gui/system/dialoghandler.cpp:48
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -445,7 +445,7 @@ msgstr ""
 "Il ha modificationes non salveguardte a <filename>%1</filename>. Illos "
 "essera perdite si tu recarga le documento.<nl/>Tu vole abandonar los?"
 
-#: gui/system/dialoghandler.cpp:71
+#: gui/system/dialoghandler.cpp:61
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -455,7 +455,7 @@ msgstr ""
 "<filename>%1</filename> ha essite modificate.<nl/>Tu vole salveguardar  tu "
 "modificationes o abandonar los?"
 
-#: gui/system/dialoghandler.cpp:95
+#: gui/system/dialoghandler.cpp:76
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
