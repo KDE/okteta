@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-27 02:10+0000\n"
+"POT-Creation-Date: 2023-01-07 03:40+0000\n"
 "PO-Revision-Date: 2010-06-09 14:56+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -82,13 +82,13 @@ msgid "Permissions"
 msgstr "សិទ្ធិ"
 
 #. i18n: ectx: Menu (windows)
-#: oktetaui.rc:69
+#: oktetaui.rc:65
 #, kde-format
 msgid "&Windows"
 msgstr "បង្អួច"
 
 #. i18n: ectx: ToolBar (mainToolBar)
-#: oktetaui.rc:82
+#: oktetaui.rc:78
 #, kde-format
 msgid "Main Toolbar"
 msgstr "របារ​ឧបករណ៍​មេ"

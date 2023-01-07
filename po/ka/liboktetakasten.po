@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-16 02:46+0000\n"
-"PO-Revision-Date: 2022-10-17 08:37+0200\n"
+"PO-Revision-Date: 2023-01-06 12:46+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: controllers/document/info/documentinfotool.cpp:48
 #: controllers/document/info/documentinfotoolviewfactory.cpp:24
@@ -305,7 +305,7 @@ msgstr ""
 #, kde-format
 msgctxt "Converted from charset 1 to charset 2"
 msgid "%1 to %2"
-msgstr ""
+msgstr "%1 to %2"
 
 #: controllers/view/charsetconversion/charsetconversiontoolviewfactory.cpp:24
 #, kde-format
@@ -1062,7 +1062,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Only search within the current selection."
-msgstr ""
+msgstr "მხოლოდ მიმდინარე მონიშნულში ძებნა."
 
 #: controllers/view/overwritemode/overwritemodecontroller.cpp:26
 #, kde-format
@@ -1381,13 +1381,13 @@ msgstr ""
 #, kde-format
 msgctxt "@option:check"
 msgid "&Prompt on replace"
-msgstr ""
+msgstr "&კითხვა ჩანაცვლებისას"
 
 #: controllers/view/replace/replacedialog.cpp:60
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Ask before replacing each match found."
-msgstr ""
+msgstr "კითხვა თითოეული ჩანაცვლების წინ."
 
 #: controllers/view/replace/replaceprompt.cpp:24
 #, kde-format
@@ -1815,7 +1815,7 @@ msgstr ""
 #, kde-format
 msgctxt "data type"
 msgid "char"
-msgstr ""
+msgstr "სიმბ"
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:33
 #, kde-format
@@ -1875,7 +1875,7 @@ msgstr ""
 #, kde-format
 msgctxt "data type"
 msgid "float"
-msgstr ""
+msgstr "მცურავი"
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:43
 #, kde-format
@@ -2312,7 +2312,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button"
 msgid "Settings"
-msgstr ""
+msgstr "&მორგება"
 
 #: controllers/view/structures/structureview.cpp:129
 #, kde-format
@@ -2982,7 +2982,7 @@ msgstr "შაბლონი:"
 msgctxt "@info:whatsthis"
 msgid ""
 "Enter a pattern to search for, or select a previous pattern from the list."
-msgstr ""
+msgstr "შეიყვანეთ მოსაძებნი ნიმუში ან სიიდან აირჩიეთ წინა ნიმუში."
 
 #: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:50
 #, kde-format
