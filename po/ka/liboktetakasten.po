@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-07 00:55+0000\n"
-"PO-Revision-Date: 2022-10-06 11:30+0200\n"
+"PO-Revision-Date: 2023-01-07 07:22+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -315,13 +315,13 @@ msgstr ""
 #, kde-format
 msgctxt "Converted from charset 1 to charset 2"
 msgid "%1 to %2"
-msgstr ""
+msgstr "%1-დან %2-მდე"
 
 #: controllers/view/charsetconversion/charsetconversiontoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
 msgid "Charset Conversion"
-msgstr ""
+msgstr "სიმბოლოების კოდირების გადაყვანა"
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:48
 #, kde-format
@@ -335,7 +335,7 @@ msgstr "დასაწყისი"
 msgctxt ""
 "@item:inmenu Is converted _to_ charset (selected in combobox next to this)"
 msgid "To"
-msgstr ""
+msgstr "რომელზე"
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:57
 #, kde-format
@@ -417,7 +417,7 @@ msgstr ""
 #: controllers/view/charsetconversion/charsetconversionview.cpp:157
 #, kde-format
 msgid "Con&vert"
-msgstr ""
+msgstr "&გადაყვანა"
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:160
 #, kde-format
@@ -514,13 +514,13 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Binary Filter"
-msgstr ""
+msgstr "ბინარული ფილტრი"
 
 #: controllers/view/filter/filterview.cpp:45
 #, kde-format
 msgctxt "@label:listbox operation to use by the filter"
 msgid "Operation:"
-msgstr ""
+msgstr "ოპერაცია:"
 
 #: controllers/view/filter/filterview.cpp:52
 #, kde-format
@@ -559,7 +559,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Go to Offset..."
-msgstr ""
+msgstr "&წანაცვლებაზე გადასვლა..."
 
 #: controllers/view/gotooffset/gotooffsettool.cpp:50
 #, kde-format
@@ -598,7 +598,7 @@ msgstr ""
 #, kde-format
 msgctxt "@option:check"
 msgid "&Extend selection"
-msgstr ""
+msgstr "&მონიშნულის გაფართოება"
 
 #: controllers/view/gotooffset/gotooffsetview.cpp:71
 #: controllers/view/selectrange/selectrangeview.cpp:83
@@ -626,7 +626,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button"
 msgid "&Go"
-msgstr ""
+msgstr "&წავიდა"
 
 #: controllers/view/gotooffset/gotooffsetview.cpp:94
 #, kde-format
@@ -653,7 +653,7 @@ msgstr "სტატისტიკა"
 #, kde-format
 msgctxt "@label size of selected bytes"
 msgid "Size:"
-msgstr ""
+msgstr "ზომა:"
 
 #: controllers/view/info/infoview.cpp:48
 #, kde-format
@@ -708,7 +708,7 @@ msgstr "პროცენტი"
 #, kde-format
 msgctxt "name of the checksum algorithm"
 msgid "Adler-32"
-msgstr ""
+msgstr "Adler-32"
 
 #: controllers/view/libbytearraychecksum/algorithm/crc32bytearraychecksumalgorithm.cpp:67
 #, kde-format
@@ -738,7 +738,7 @@ msgstr "ISO 3309"
 #, kde-format
 msgctxt "@label:listbox variant used to select the CRC-64 variant"
 msgid "CRC-64 variant:"
-msgstr ""
+msgstr "CRC-64 ვარიანტი:"
 
 #: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:41
 #, kde-format
@@ -789,7 +789,7 @@ msgstr "Big-endian"
 msgctxt ""
 "@label:listbox byte order to use for decoding the bytes into integer values"
 msgid "Byte Order:"
-msgstr ""
+msgstr "ბაიტების რიგი:"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:38
 #, kde-format
@@ -881,7 +881,7 @@ msgstr ""
 #, kde-format
 msgctxt "@label:textbox operand to the arithmetic filter function"
 msgid "Operand:"
-msgstr ""
+msgstr "ოპერანდი:"
 
 #: controllers/view/libbytearrayfilter/filter/operandbytearrayfilterparametersetedit.cpp:41
 #, kde-format
@@ -1071,7 +1071,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Only search within the current selection."
-msgstr ""
+msgstr "მხოლოდ მიმდინარე მონიშნულში ძებნა."
 
 #: controllers/view/overwritemode/overwritemodecontroller.cpp:26
 #, kde-format
@@ -1092,7 +1092,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Decoding Table"
-msgstr ""
+msgstr "ცხრილის დეკოდირება"
 
 #: controllers/view/poddecoder/poddecodertool.cpp:183
 #, kde-format
@@ -1104,7 +1104,7 @@ msgstr "UTF-16:"
 #, kde-format
 msgctxt "Edited as %datatype"
 msgid "Edited as %1"
-msgstr ""
+msgstr "ჩასწორდა, როგორც %1"
 
 #: controllers/view/poddecoder/podtablemodel.cpp:150
 #, kde-format
@@ -1202,26 +1202,26 @@ msgstr ""
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Float 32-bit"
-msgstr ""
+msgstr "32-ბიტიანი მცოცავი"
 
 #: controllers/view/poddecoder/typecodecs/float64codec.cpp:20
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Float 64-bit"
-msgstr ""
+msgstr "64-ბიტიანი მცოცავი"
 
 #: controllers/view/poddecoder/typecodecs/hexadecimal8codec.cpp:20
 #, kde-format
 msgctxt ""
 "@label:textbox encoding of one byte as value in the hexadecimal format"
 msgid "Hexadecimal 8-bit"
-msgstr ""
+msgstr "8-ბიტიანი თექვსმეტობითი"
 
 #: controllers/view/poddecoder/typecodecs/octal8codec.cpp:20
 #, kde-format
 msgctxt "@label:textbox encoding of one byte as value in the octal format"
 msgid "Octal 8-bit"
-msgstr ""
+msgstr "8-ბიტიანი რვაობითი"
 
 #: controllers/view/poddecoder/typecodecs/sint16codec.cpp:20
 #, kde-format
@@ -1300,21 +1300,21 @@ msgstr ""
 #, kde-format
 msgctxt "@info"
 msgid "Could not print."
-msgstr ""
+msgstr "ბეჭდვის შეცდომა."
 
 #: controllers/view/replace/replacecontroller.cpp:73
 #: controllers/view/replace/replacecontroller.cpp:87
 #, kde-format
 msgctxt "@title:window"
 msgid "Replace"
-msgstr ""
+msgstr "ჩანაცვლება"
 
 #: controllers/view/replace/replacecontroller.cpp:75
 #: controllers/view/replace/replacecontroller.cpp:89
 #, kde-format
 msgctxt "@info"
 msgid "No replacements made."
-msgstr ""
+msgstr "ჩანაცვლება არ მომხდარა."
 
 #: controllers/view/replace/replacecontroller.cpp:76
 #: controllers/view/replace/replacecontroller.cpp:90
@@ -1322,8 +1322,8 @@ msgstr ""
 msgctxt "@info"
 msgid "1 replacement made."
 msgid_plural "%1 replacements made."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "1 ჩანაცვლება."
+msgstr[1] "%1 ჩანაცვლება."
 
 #: controllers/view/replace/replacecontroller.cpp:79
 #, kde-format
@@ -1349,13 +1349,13 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Replace Bytes"
-msgstr ""
+msgstr "ბაიტების ჩანაცვლება"
 
 #: controllers/view/replace/replacedialog.cpp:31
 #, kde-format
 msgctxt "@action;button"
 msgid "&Replace"
-msgstr ""
+msgstr "&ჩანაცვლება"
 
 #: controllers/view/replace/replacedialog.cpp:33
 #, kde-format
@@ -1390,13 +1390,13 @@ msgstr ""
 #, kde-format
 msgctxt "@option:check"
 msgid "&Prompt on replace"
-msgstr ""
+msgstr "&კითხვა ჩანაცვლებისას"
 
 #: controllers/view/replace/replacedialog.cpp:60
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Ask before replacing each match found."
-msgstr ""
+msgstr "კითხვა თითოეული ჩანაცვლების წინ."
 
 #: controllers/view/replace/replaceprompt.cpp:24
 #, kde-format
@@ -1420,7 +1420,7 @@ msgstr "გამო&ტოვება"
 #, kde-format
 msgctxt "@action:button"
 msgid "Replace"
-msgstr ""
+msgstr "ჩანაცვლება"
 
 #: controllers/view/replace/replacetool.cpp:40
 #, kde-format
@@ -1438,7 +1438,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Find Bytes"
-msgstr ""
+msgstr "ბაიტების მოძებნა"
 
 #: controllers/view/search/searchdialog.cpp:24
 #, kde-format
@@ -1470,7 +1470,7 @@ msgstr "ძებნა"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Select Range..."
-msgstr ""
+msgstr "&დიაპაზონის არჩევა..."
 
 #: controllers/view/selectrange/selectrangetool.cpp:61
 #, kde-format
@@ -1568,7 +1568,7 @@ msgstr ""
 #, kde-format
 msgctxt "@label:lineedit filter term for displayed strings"
 msgid "Filter:"
-msgstr ""
+msgstr "ფილტრი:"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:85
 #, kde-format
@@ -1643,14 +1643,14 @@ msgstr ""
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed."
-msgstr ""
+msgstr "გადამოწმების შეცდომა."
 
 #: controllers/view/structures/datatypes/datainformation.cpp:208
 #: controllers/view/structures/datatypes/datainformationwithchildren.cpp:235
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed: \"%1\""
-msgstr ""
+msgstr "გადამოწმების შეცდომა: \"%1\""
 
 #: controllers/view/structures/datatypes/datainformation.cpp:210
 #, kde-format
@@ -1663,6 +1663,13 @@ msgid ""
 "\n"
 "%5"
 msgstr ""
+"სახელი: %1\n"
+"მნიშვნელობა: %2\n"
+"\n"
+"ტიპი: %3\n"
+"ზომა: %4\n"
+"\n"
+"%5"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:214
 #, kde-format
@@ -1673,6 +1680,11 @@ msgid ""
 "Type: %3\n"
 "Size: %4"
 msgstr ""
+"სახელი: %1\n"
+"მნიშვნელობა: %2\n"
+"\n"
+"ტიპი: %3\n"
+"ზომა: %4"
 
 #: controllers/view/structures/datatypes/datainformationwithchildren.cpp:237
 #, kde-format
@@ -1693,7 +1705,21 @@ msgid_plural ""
 "\n"
 " %6"
 msgstr[0] ""
+"სახელი: %2\n"
+"მნიშვნელობა: %3\n"
+"\n"
+"ტიპი: %4\n"
+"ზომა: %5 (%1 შვილი)\n"
+"\n"
+" %6"
 msgstr[1] ""
+"სახელი: %2\n"
+"მნიშვნელობა: %3\n"
+"\n"
+"ტიპი: %4\n"
+"ზომა: %5 (%1 შვილი)\n"
+"\n"
+" %6"
 
 #: controllers/view/structures/datatypes/datainformationwithchildren.cpp:242
 #, kde-format
@@ -1820,7 +1846,7 @@ msgstr ""
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:20
 msgctxt "data type"
 msgid "char"
-msgstr ""
+msgstr "სიმბ"
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:21
 msgctxt "data type"
@@ -1870,7 +1896,7 @@ msgstr ""
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:30
 msgctxt "data type"
 msgid "float"
-msgstr ""
+msgstr "მცურავი"
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:31
 msgctxt "data type"
@@ -3031,7 +3057,7 @@ msgstr "შაბლონი:"
 msgctxt "@info:whatsthis"
 msgid ""
 "Enter a pattern to search for, or select a previous pattern from the list."
-msgstr ""
+msgstr "შეიყვანეთ მოსაძებნი ნიმუში ან სიიდან აირჩიეთ წინა ნიმუში."
 
 #: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:50
 #, kde-format
@@ -3252,7 +3278,7 @@ msgstr "ისტორიული"
 #, kde-format
 msgctxt "@item:inmenu Doing the uuencoding using the base64 encoding"
 msgid "Base64"
-msgstr ""
+msgstr "Base64"
 
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoder.cpp:51
 #, kde-format
