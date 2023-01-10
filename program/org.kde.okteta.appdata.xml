@@ -5,6 +5,7 @@
   <project_license>GPL-2.0 OR GPL-3.0</project_license>
   <name>Okteta</name>
   <name xml:lang="ast">Okteta</name>
+  <name xml:lang="bg">Okteta</name>
   <name xml:lang="bs">Okteta</name>
   <name xml:lang="ca">Okteta</name>
   <name xml:lang="ca-valencia">Okteta</name>
@@ -45,6 +46,7 @@
   <name xml:lang="zh-CN">Okteta</name>
   <name xml:lang="zh-TW">Okteta</name>
   <summary>Hex editor</summary>
+  <summary xml:lang="bg">Шестнайсетичен редактор</summary>
   <summary xml:lang="bs">Heksadekadni editor</summary>
   <summary xml:lang="ca">Editor hexadecimal</summary>
   <summary xml:lang="ca-valencia">Editor hexadecimal</summary>
@@ -85,6 +87,7 @@
   <summary xml:lang="zh-TW">十六進位資料編輯器</summary>
   <description>
     <p>Okteta is a simple editor for the raw data of files.</p>
+    <p xml:lang="bg">Okteta е прост редактор за суровите данни на файловете.</p>
     <p xml:lang="ca">L'Okteta és un editor senzill per a les dades sense processar dels fitxers.</p>
     <p xml:lang="ca-valencia">Okteta és un editor senzill per a les dades sense processar dels fitxers.</p>
     <p xml:lang="de">Okteta ist ein einfacher Editor für die Rohdaten von Dateien.</p>
@@ -120,6 +123,7 @@
     <p xml:lang="zh-CN">Okteta 是款简单的文件原始数据编辑器。</p>
     <p xml:lang="zh-TW">Okteta 是一套編輯檔案原始資料的簡易編輯器。</p>
     <p>Features:</p>
+    <p xml:lang="bg">Възможности:</p>
     <p xml:lang="bs">Svojstva:</p>
     <p xml:lang="ca">Característiques:</p>
     <p xml:lang="ca-valencia">Característiques:</p>
@@ -161,6 +165,7 @@
     <p xml:lang="zh-TW">功能：</p>
     <ul>
       <li>Values and characters shown either in two columns (the traditional display in hex editors) or in rows with the value on top of the character</li>
+      <li xml:lang="bg">Стойностите и символите се показват или в две колони (традиционното показване в шестнайсетичните редактори), или в редове със стойността върху символа.</li>
       <li xml:lang="ca">Els valors i els caràcters es mostren en dues columnes (la vista tradicional en els editors hexadecimals) o en files amb el valor a sobre del caràcter</li>
       <li xml:lang="ca-valencia">Els valors i els caràcters es mostren en dues columnes (la vista tradicional en els editors hexadecimals) o en files amb el valor damunt del caràcter</li>
       <li xml:lang="de">Werte und Zeichen können in zwei Spalten (die traditionelle Anzeige von Hexeditoren) oder in Reihen mit der Anzeige der Werte über den Zeichen dargestellt werden</li>
@@ -196,6 +201,7 @@
       <li xml:lang="zh-CN">双列展示数据值和字符(传统十六进制编辑器视图)或单行字符上方显示数据</li>
       <li xml:lang="zh-TW">數值與字元可以用兩個欄位（傳統十六進制資料編輯的方式）顯示，或是在一列中將數值顯示在字元上方。</li>
       <li>Editing and navigating similar to a text editor</li>
+      <li xml:lang="bg">Редактиране и навигация, подобно на текстови редактор</li>
       <li xml:lang="ca">Edició i navegació semblant a un editor de text</li>
       <li xml:lang="ca-valencia">Edició i navegació pareixent a un editor de text</li>
       <li xml:lang="de">Bearbeiten und navigieren ähnlich wie in einem Texteditor</li>
@@ -231,6 +237,7 @@
       <li xml:lang="zh-CN">类似于文本编辑器的编辑和导航</li>
       <li xml:lang="zh-TW">編輯與導覽類似一般文字編輯器</li>
       <li>Customizable data views, with loadable and storable profiles</li>
+      <li xml:lang="bg">Възможност за персонализиране на изгледите на данните, с възможност за зареждане и съхранение на профили</li>
       <li xml:lang="ca">Vistes de dades que es poden personalitzar, amb perfils que es poden carregar i emmagatzemar</li>
       <li xml:lang="ca-valencia">Vistes de dades que es poden personalitzar, amb perfils que es poden carregar i emmagatzemar</li>
       <li xml:lang="de">Benutzerdefinierte Datenansichten mit Profilen, die gespeichert und geladen werden können.</li>
@@ -266,6 +273,7 @@
       <li xml:lang="zh-CN">可自定义数据视图，加载和保存视图配置</li>
       <li xml:lang="zh-TW">客製化的資料檢視，可載入並儲存設定檔</li>
       <li>Tools dockable on all sides or floating</li>
+      <li xml:lang="bg">Ленти с инструменти, с възможност за прилепване от всички страни, а също и в плаващ режим</li>
       <li xml:lang="ca">Eines acoblables en totes les vores o flotants</li>
       <li xml:lang="ca-valencia">Eines acoblables en totes les vores o flotants</li>
       <li xml:lang="de">Werkzeuge können an allen Seiten verankert oder freischwebend benutzt werden</li>
@@ -301,6 +309,7 @@
       <li xml:lang="zh-CN">四周可停靠工具面板也可浮动</li>
       <li xml:lang="zh-TW">工具可以嵌在每一個側邊，或是浮出來</li>
       <li>Numerical encodings: Hexadecimal, Decimal, Octal, Binary</li>
+      <li xml:lang="bg">Числени кодировки: Шестнадесетична, десетична, осмична, двоична</li>
       <li xml:lang="ca">Codificacions numèriques: Hexadecimal, Decimal, Octal, Binari</li>
       <li xml:lang="ca-valencia">Codificacions numèriques: Hexadecimal, Decimal, Octal, Binari</li>
       <li xml:lang="de">Zahlenkodierung: Hexadezimal, Dezimal, Oktal und Binär</li>
@@ -336,6 +345,7 @@
       <li xml:lang="zh-CN">数字编码：十六进制，十进制，八进制，二进制</li>
       <li xml:lang="zh-TW">數值編碼：十六進制，十進制，八進制或二進制</li>
       <li>Character encodings: All 8-bit encodings as supplied by Qt, EBCDIC</li>
+      <li xml:lang="bg">Кодировки на знаци: Всички 8-битови кодировки, предоставени от Qt, EBCDIC</li>
       <li xml:lang="ca">Codificacions de caràcters: Totes les codificacions de 8 bits proporcionades per les Qt, EBCDIC</li>
       <li xml:lang="ca-valencia">Codificacions de caràcters: Totes les codificacions de 8 bits proporcionades per les Qt, EBCDIC</li>
       <li xml:lang="de">Zeichenkodierungen: Alle Kodierungen, die von Qt und EBCDIC unterstützt werden</li>
@@ -371,6 +381,7 @@
       <li xml:lang="zh-CN">字符编码：Qt 提供的全部 8 位编码，EBCDIC</li>
       <li xml:lang="zh-TW">字元編碼：所有 Qt 與 EBCDIC 5 支援的八位元編碼方式</li>
       <li>Fast data rendering on screen</li>
+      <li xml:lang="bg">Бързо изобразяване на данни на екрана</li>
       <li xml:lang="ca">Renderització ràpida de les dades a la pantalla</li>
       <li xml:lang="ca-valencia">Renderització ràpida de les dades a la pantalla</li>
       <li xml:lang="de">Schnelles Rendern der Daten auf dem Bildschirm</li>
@@ -407,6 +418,7 @@
       <li xml:lang="zh-CN">在屏幕上快速渲染数据</li>
       <li xml:lang="zh-TW">快速螢幕資料繪制</li>
       <li>Multiple open files</li>
+      <li xml:lang="bg">Множество отворени файлове</li>
       <li xml:lang="ca">Múltiples fitxers oberts</li>
       <li xml:lang="ca-valencia">Múltiples fitxers oberts</li>
       <li xml:lang="cs">Otevření více souborů</li>
@@ -444,6 +456,7 @@
       <li xml:lang="zh-CN">同时打开多个文件</li>
       <li xml:lang="zh-TW">可開啟多個檔案</li>
       <li>Undo/redo support</li>
+      <li xml:lang="bg">Поддръжка за отмяна/възстановяване</li>
       <li xml:lang="bs">Podrška za poništavanje/ponavljanje akcija</li>
       <li xml:lang="ca">Admet desfer/refer</li>
       <li xml:lang="ca-valencia">Admet desfer/refer</li>
@@ -482,6 +495,7 @@
       <li xml:lang="zh-CN">支持撤销/重做</li>
       <li xml:lang="zh-TW">復原/重做支援</li>
       <li>Structures tool for analyzing and editing based on user-creatable structure definitions</li>
+      <li xml:lang="bg">Инструмент за структури за анализиране и редактиране въз основа на структурни дефиниции, създадени от потребителя</li>
       <li xml:lang="ca">Eina d'estructures per a analitzar i editar, basada en definicions de l'estructura que pot crear l'usuari</li>
       <li xml:lang="ca-valencia">Eina d'estructures per a analitzar i editar, basada en definicions de l'estructura que pot crear l'usuari</li>
       <li xml:lang="de">Strukturen-Werkzeug für die Untersuchung und Bearbeitung auf der Basis von benutzerdefinierten Strukturdefinitionen</li>
@@ -517,6 +531,7 @@
       <li xml:lang="zh-CN">用于分析和编辑用户自建结构体定义的结构体工具</li>
       <li xml:lang="zh-TW">基於使用者建立的結構定義做分析與編輯的工具</li>
       <li>And more...</li>
+      <li xml:lang="bg">И още...</li>
       <li xml:lang="bs">i još %1</li>
       <li xml:lang="ca">I més...</li>
       <li xml:lang="ca-valencia">I més...</li>
