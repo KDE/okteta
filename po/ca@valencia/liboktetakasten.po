@@ -2525,7 +2525,7 @@ msgstr "Visualització dels valors"
 #: controllers/view/structures/structureview.cpp:171
 #, kde-format
 msgid "Structures management"
-msgstr "Gestió d'estructures"
+msgstr "Gestioneu les estructures"
 
 #: controllers/view/structures/structureview.cpp:258
 #, kde-format
