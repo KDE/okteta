@@ -1,0 +1,1 @@
+This directory holds all the char codecs. All it exports is the call "CharCodec::createCodec()", the rest in hidden. 

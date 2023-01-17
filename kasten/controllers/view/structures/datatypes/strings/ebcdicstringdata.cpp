@@ -13,7 +13,7 @@
 #include <structureslogging.hpp>
 
 #include <Okteta/Character>
-#include <codecs/ebcdic1047charcodec.hpp>
+#include <charcodecs/ebcdic1047charcodec.hpp>
 #include <Okteta/AbstractByteArrayModel>
 
 #include <KLocalizedString>

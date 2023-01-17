@@ -1,0 +1,1 @@
+This directory holds all the value codecs. All it exports is the call "ValueCodec::createCodec()", the rest in hidden. 

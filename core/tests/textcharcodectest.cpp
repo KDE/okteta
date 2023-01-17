@@ -9,7 +9,7 @@
 #include "textcharcodectest.hpp"
 
 // test object
-#include <codecs/textcharcodec.hpp>
+#include <charcodecs/textcharcodec.hpp>
 // KF
 #include <QTest>
 

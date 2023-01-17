@@ -9,7 +9,7 @@
 #include "ebcdic1047charcodeccharcodeciftest.hpp"
 
 // test object
-#include <codecs/ebcdic1047charcodec.hpp>
+#include <charcodecs/ebcdic1047charcodec.hpp>
 // Qt
 #include <QTest>
 

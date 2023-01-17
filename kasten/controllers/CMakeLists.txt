@@ -466,7 +466,7 @@ oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/datatyp
         Utf32StringData
         EbcdicStringData
 )
-oktetakastencontrollers_add_sublibrary_structures_tested(../../core/codecs
+oktetakastencontrollers_add_sublibrary_structures_tested(../../core/charcodecs
     PRIVATE
         Ebcdic1047CharCodec
 )

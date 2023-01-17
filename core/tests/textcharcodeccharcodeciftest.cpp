@@ -9,7 +9,7 @@
 #include "textcharcodeccharcodeciftest.hpp"
 
 // lib
-#include <codecs/textcharcodec.hpp>
+#include <charcodecs/textcharcodec.hpp>
 // Qt
 #include <QTest>
 

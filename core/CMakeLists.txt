@@ -32,19 +32,23 @@ macro(OKTETACORE_ADD_SUBLIBRARY _subdir)
     )
 endmacro()
 
-oktetacore_add_sublibrary(codecs
+oktetacore_add_sublibrary(charcodecs
     PRIVATE
-        BinaryByteCodec
-        ValueCodec
         CharCodec
-        DecimalByteCodec
         USASCIICharCodec
         EBCDIC1047CharCodec
         IBM874CharCodec
         JISX0201CharCodec
+        TextCharCodec
+)
+
+oktetacore_add_sublibrary(valuecodecs
+    PRIVATE
+        BinaryByteCodec
+        ValueCodec
+        DecimalByteCodec
         HexadecimalByteCodec
         OctalByteCodec
-        TextCharCodec
 )
 
 oktetacore_add_sublibrary(piecetable
