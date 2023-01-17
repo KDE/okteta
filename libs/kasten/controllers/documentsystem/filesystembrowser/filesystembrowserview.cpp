@@ -56,7 +56,11 @@ void FileSystemBrowserView::init()
 
     // view
     mDirOperator = new KDirOperator(QUrl::fromLocalFile(QDir::homePath()), this);
+#if KIO_VERSION >= QT_VERSION_CHECK(5, 100, 0)
+    mDirOperator->setViewMode(KFile::Detail);
+#else
     mDirOperator->setView(KFile::Detail);
+#endif
     connect(mDirOperator, &KDirOperator::urlEntered, this, &FileSystemBrowserView::setNavigatorUrl);
     connect(mDirOperator, &KDirOperator::fileSelected, this, &FileSystemBrowserView::openFile);
     layout->addWidget(mDirOperator);
