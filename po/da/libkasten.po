@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-06 03:23+0000\n"
+"POT-Creation-Date: 2023-01-18 02:39+0000\n"
 "PO-Revision-Date: 2012-04-23 18:03+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
@@ -161,7 +161,7 @@ msgctxt "@title:window"
 msgid "Filesystem"
 msgstr "Filsystem"
 
-#: controllers/documentsystem/filesystembrowser/filesystembrowserview.cpp:95
+#: controllers/documentsystem/filesystembrowser/filesystembrowserview.cpp:99
 #, kde-format
 msgctxt "@action:intoolbar"
 msgid "Folder of Current Document"

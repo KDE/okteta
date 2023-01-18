@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-06 03:23+0000\n"
+"POT-Creation-Date: 2023-01-18 02:39+0000\n"
 "PO-Revision-Date: 2010-09-16 06:02+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -159,7 +159,7 @@ msgctxt "@title:window"
 msgid "Filesystem"
 msgstr "Файлдық жүйесі"
 
-#: controllers/documentsystem/filesystembrowser/filesystembrowserview.cpp:95
+#: controllers/documentsystem/filesystembrowser/filesystembrowserview.cpp:99
 #, kde-format
 msgctxt "@action:intoolbar"
 msgid "Folder of Current Document"

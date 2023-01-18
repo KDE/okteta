@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-06 03:23+0000\n"
+"POT-Creation-Date: 2023-01-18 02:39+0000\n"
 "PO-Revision-Date: 2020-09-26 20:13+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian\n"
@@ -164,7 +164,7 @@ msgctxt "@title:window"
 msgid "Filesystem"
 msgstr "Sistem de fișiere"
 
-#: controllers/documentsystem/filesystembrowser/filesystembrowserview.cpp:95
+#: controllers/documentsystem/filesystembrowser/filesystembrowserview.cpp:99
 #, kde-format
 msgctxt "@action:intoolbar"
 msgid "Folder of Current Document"

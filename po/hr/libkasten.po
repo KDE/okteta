@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-06 03:23+0000\n"
+"POT-Creation-Date: 2023-01-18 02:39+0000\n"
 "PO-Revision-Date: 2009-09-04 22:35+0200\n"
 "Last-Translator: Zarko Pintar <zarko.pintar@gmail.com>\n"
 "Language-Team: Croatian <kde-croatia-list@lists.sourceforge.net>\n"
@@ -154,7 +154,7 @@ msgctxt "@title:window"
 msgid "Filesystem"
 msgstr ""
 
-#: controllers/documentsystem/filesystembrowser/filesystembrowserview.cpp:95
+#: controllers/documentsystem/filesystembrowser/filesystembrowserview.cpp:99
 #, kde-format
 msgctxt "@action:intoolbar"
 msgid "Folder of Current Document"
