@@ -11,8 +11,6 @@
 // lib
 #include <character.hpp>
 #include <logging.hpp>
-// KF
-#include <KCharsets>
 // Qt
 #include <QTextCodec>
 
@@ -77,7 +75,7 @@ static bool is8Bit(QTextCodec* codec)
 
 static QTextCodec* createLatin1()
 {
-    return KCharsets::charsets()->codecForName(QLatin1String(encodingDataList[0].name));
+    return QTextCodec::codecForName(encodingDataList[0].name);
 }
 
 /* heuristic seems to be doomed :(
@@ -161,8 +159,8 @@ TextCharCodec* TextCharCodec::createLocalCodec()
 TextCharCodec* TextCharCodec::createCodec(const QString& codecName)
 {
     bool isOk = false;
-    QTextCodec* codec = KCharsets::charsets()->codecForName(codecName, isOk);
-    if (isOk) {
+    QTextCodec* codec = QTextCodec::codecForName(codecName.toLatin1());
+    if (codec) {
         isOk = is8Bit(codec);
     }
     return isOk ? new TextCharCodec(codec) : nullptr;
@@ -174,12 +172,9 @@ const QStringList& TextCharCodec::codecNames()
 
     // first call?
     if (textCodecNames.isEmpty()) {
-        KCharsets* charsets = KCharsets::charsets();
         for (const auto& encodingData : encodingDataList) {
-            bool isCodecFound = false;
-            const QString codecName = QString::fromLatin1(encodingData.name);
-            QTextCodec* codec = charsets->codecForName(codecName, isCodecFound);
-            if (isCodecFound) {
+            QTextCodec* codec = QTextCodec::codecForName((encodingData.name));
+            if (codec) {
                 textCodecNames.append(QString::fromLatin1(codec->name()));
             }
         }

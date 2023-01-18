@@ -6,7 +6,6 @@ okteta_add_library(Core NAMESPACE Okteta
         Qt5::Core
     PRIVATE
         KF5::I18n
-        KF5::Codecs   #needed for codecs
     VERSION     ${OKTETACORE_VERSION}
     SOVERSION   ${OKTETACORE_SO_VERSION}
     ABIVERSION  ${OKTETALIBS_ABI_VERSION}
@@ -135,7 +134,7 @@ if(BUILD_TESTING)
     target_sources(testoktetacore PRIVATE ${oktetacore_LIB_OBJS})
     set_target_properties(testoktetacore PROPERTIES COMPILE_FLAGS -DOKTETACORE_STATIC_DEFINE)
     target_include_directories(testoktetacore PUBLIC ${CMAKE_CURRENT_BINARY_DIR})
-    target_link_libraries(testoktetacore Qt5::Core KF5::I18n KF5::Codecs)
+    target_link_libraries(testoktetacore Qt5::Core KF5::I18n)
 
     add_subdirectory(piecetable/tests)
     add_subdirectory(tests)

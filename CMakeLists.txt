@@ -99,7 +99,6 @@ if( BUILD_DESKTOPPROGRAM )
 endif()
 find_package(KF5 ${REQUIRED_KF5_VERSION} REQUIRED
     COMPONENTS
-    Codecs
     ConfigWidgets
     I18n
     ${ADDITIONAL_REQUIRED_KF_COMPONENTS}
