@@ -7,13 +7,13 @@
 # obsoleteman <tulliana@gmail.com>, 2008-2009.
 # Volkan Gezer <volkangezer@gmail.com>, 2013-2014, 2017.
 # Kaan Ozdincer <kaanozdincer@gmail.com>, 2014.
-# Emir SARI <emir_sari@icloud.com>, 2022.
+# Emir SARI <emir_sari@icloud.com>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdesdk-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-07 00:55+0000\n"
-"PO-Revision-Date: 2022-12-03 19:56+0300\n"
+"PO-Revision-Date: 2023-01-18 22:31+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.08.3\n"
+"X-Generator: Lokalize 22.12.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1075,13 +1075,13 @@ msgid ""
 "'joe' or 'JOE', only 'Joe'."
 msgstr ""
 "Aramayı BÜYÜK/küçük harf duyarlı olarak yap: 'Ali' ifadesi, 'ali' veya 'ALİ' "
-"ile uyuşmayacak, sadece 'Ali' ile eşleşecektir."
+"ile uyuşmayacak, yalnızca 'Ali' ile eşleşecektir."
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:112
 #, kde-format
 msgctxt "@option:check"
 msgid "&Whole words only"
-msgstr "Sadece tüm &sözcükler"
+msgstr "Yalnızca tüm &sözcükler"
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:113
 #, kde-format
@@ -1113,7 +1113,7 @@ msgstr "&Seçilen baytlar"
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Only search within the current selection."
-msgstr "Sadece seçili olan alanda arama yap."
+msgstr "Yalnızca seçili olan alanda arama yap."
 
 #: controllers/view/overwritemode/overwritemodecontroller.cpp:26
 #, kde-format
@@ -2650,7 +2650,7 @@ msgctxt ""
 "@item:inmenu  The layout will adapt to the size, but only with complete "
 "groups of bytes."
 msgid "&Wrap Only Complete Byte Groups"
-msgstr "Sadece Tam Bayt Gruplarını &Sarmala"
+msgstr "Yalnızca Tam Bayt Gruplarını &Sarmala"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:95
 #, kde-format
@@ -2829,7 +2829,7 @@ msgctxt ""
 "@item:inmenu  The layout will adapt to the size, but only with complete "
 "groups of bytes."
 msgid "Wrap Only Complete Byte Groups"
-msgstr "Sadece Tam Bayt Gruplarını Sarmala"
+msgstr "Yalnızca Tam Bayt Gruplarını Sarmala"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:105
 #, kde-format
