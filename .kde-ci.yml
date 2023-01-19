@@ -7,7 +7,6 @@ Dependencies:
     'frameworks/extra-cmake-modules': '@stable'
     'frameworks/kbookmarks': '@stable'
     'frameworks/kcompletion': '@stable'
-    'frameworks/kiconthemes': '@stable'
     'frameworks/kitemviews': '@stable'
     'frameworks/kio': '@stable'
     'frameworks/knewstuff': '@stable'

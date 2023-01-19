@@ -80,7 +80,6 @@ if( BUILD_OKTETAKASTENLIBS )
     list(APPEND ADDITIONAL_REQUIRED_KF_COMPONENTS
         Bookmarks
         Completion
-        IconThemes
         ItemViews
         KIO
         NewStuff

@@ -60,7 +60,6 @@ okteta_add_library(Controllers NAMESPACE Okteta Kasten
         KF5::I18n
         KF5::ConfigWidgets
         KF5::ItemViews
-        KF5::IconThemes
         KF5::Completion
         Qt5::PrintSupport
         Qt5::Script

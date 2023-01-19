@@ -12,7 +12,6 @@
 #include "documentinfotool.hpp"
 // KF
 #include <KLocalizedString>
-#include <KIconLoader>
 #include <KSeparator>
 #include <KSqueezedTextLabel>
 #include <KIO/Global>
@@ -23,8 +22,12 @@
 #include <QGridLayout>
 #include <QLocale>
 #include <QMimeType>
+#include <QIcon>
 
 namespace Kasten {
+
+// size inspired by Dolphin Information sidebar (which uses hardcoded KIconLoader::SizeEnormous)
+constexpr int MimeTypeIconSize = 128;
 
 DocumentInfoView::DocumentInfoView(DocumentInfoTool* tool, QWidget* parent)
     : QWidget(parent)
@@ -37,8 +40,8 @@ DocumentInfoView::DocumentInfoView(DocumentInfoTool* tool, QWidget* parent)
     mIconLabel = new QLabel(this);
 //     int bsize = 66 + 2 * mIconLabel->style()->pixelMetric( QStyle::PM_ButtonMargin );
 //     mIconLabel->setFixedSize(bsize, bsize);
-    mIconLabel->setFixedHeight(KIconLoader::SizeEnormous);
-    mIconLabel->setMinimumWidth(KIconLoader::SizeEnormous);
+    mIconLabel->setFixedHeight(MimeTypeIconSize);
+    mIconLabel->setMinimumWidth(MimeTypeIconSize);
     mIconLabel->setAlignment(Qt::AlignHCenter);
     baseLayout->addWidget(mIconLabel);
 
@@ -152,7 +155,7 @@ void DocumentInfoView::onMimeTypeChanged(const QMimeType& mimeType)
 //         mimeTypeIcon = ?
     } else {
         mimeTypeComment = mimeType.comment();
-        mimeTypeIcon = KIconLoader::global()->loadIcon(mimeType.iconName(), KIconLoader::Desktop, KIconLoader::SizeEnormous);
+        mimeTypeIcon = QIcon::fromTheme(mimeType.iconName()).pixmap(MimeTypeIconSize);
     }
 
     mIconLabel->setPixmap(mimeTypeIcon);
