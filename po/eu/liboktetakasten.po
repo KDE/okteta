@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-07 00:55+0000\n"
+"POT-Creation-Date: 2023-01-20 01:01+0000\n"
 "PO-Revision-Date: 2020-03-21 21:45+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -37,42 +37,42 @@ msgctxt "@title:window"
 msgid "File Info"
 msgstr "Fitxategiaren informazioa"
 
-#: controllers/document/info/documentinfoview.cpp:67
+#: controllers/document/info/documentinfoview.cpp:70
 #, kde-format
 msgid "Type:"
 msgstr "Mota:"
 
-#: controllers/document/info/documentinfoview.cpp:74
+#: controllers/document/info/documentinfoview.cpp:77
 #, kde-format
 msgid "Location:"
 msgstr "Kokapena:"
 
-#: controllers/document/info/documentinfoview.cpp:91
+#: controllers/document/info/documentinfoview.cpp:94
 #, kde-format
 msgid "Size:"
 msgstr "Neurria:"
 
-#: controllers/document/info/documentinfoview.cpp:98
+#: controllers/document/info/documentinfoview.cpp:101
 #, kde-format
 msgid "Created/Loaded:"
 msgstr "Sortuta/zamatuta:"
 
-#: controllers/document/info/documentinfoview.cpp:102
+#: controllers/document/info/documentinfoview.cpp:105
 #, kde-format
 msgid "Last modified:"
 msgstr "Azkenekoz aldatuta:"
 
-#: controllers/document/info/documentinfoview.cpp:106
+#: controllers/document/info/documentinfoview.cpp:109
 #, kde-format
 msgid "Last synchronized:"
 msgstr "Azkenekoz sinkronizatuta:"
 
-#: controllers/document/info/documentinfoview.cpp:113
+#: controllers/document/info/documentinfoview.cpp:116
 #, kde-format
 msgid "Created:"
 msgstr "Sortuta:"
 
-#: controllers/document/info/documentinfoview.cpp:165
+#: controllers/document/info/documentinfoview.cpp:168
 #, kde-format
 msgctxt "There is no storage location assigned to yet."
 msgid "[None]"

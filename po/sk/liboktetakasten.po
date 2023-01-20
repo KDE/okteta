@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-07 00:55+0000\n"
+"POT-Creation-Date: 2023-01-20 01:01+0000\n"
 "PO-Revision-Date: 2019-11-18 12:57+0100\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -36,42 +36,42 @@ msgctxt "@title:window"
 msgid "File Info"
 msgstr "Info o súbore"
 
-#: controllers/document/info/documentinfoview.cpp:67
+#: controllers/document/info/documentinfoview.cpp:70
 #, kde-format
 msgid "Type:"
 msgstr "Typ:"
 
-#: controllers/document/info/documentinfoview.cpp:74
+#: controllers/document/info/documentinfoview.cpp:77
 #, kde-format
 msgid "Location:"
 msgstr "Umiestnenie:"
 
-#: controllers/document/info/documentinfoview.cpp:91
+#: controllers/document/info/documentinfoview.cpp:94
 #, kde-format
 msgid "Size:"
 msgstr "Veľkosť:"
 
-#: controllers/document/info/documentinfoview.cpp:98
+#: controllers/document/info/documentinfoview.cpp:101
 #, kde-format
 msgid "Created/Loaded:"
 msgstr "Vytvorené/Načítané:"
 
-#: controllers/document/info/documentinfoview.cpp:102
+#: controllers/document/info/documentinfoview.cpp:105
 #, kde-format
 msgid "Last modified:"
 msgstr "Naposledy modifikované:"
 
-#: controllers/document/info/documentinfoview.cpp:106
+#: controllers/document/info/documentinfoview.cpp:109
 #, kde-format
 msgid "Last synchronized:"
 msgstr "Naposledy synchronizované:"
 
-#: controllers/document/info/documentinfoview.cpp:113
+#: controllers/document/info/documentinfoview.cpp:116
 #, kde-format
 msgid "Created:"
 msgstr "Vytvorené:"
 
-#: controllers/document/info/documentinfoview.cpp:165
+#: controllers/document/info/documentinfoview.cpp:168
 #, kde-format
 msgctxt "There is no storage location assigned to yet."
 msgid "[None]"

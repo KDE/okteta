@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-07 00:55+0000\n"
+"POT-Creation-Date: 2023-01-20 01:01+0000\n"
 "PO-Revision-Date: 2019-02-23 21:23+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -38,42 +38,42 @@ msgctxt "@title:window"
 msgid "File Info"
 msgstr "檔案資訊"
 
-#: controllers/document/info/documentinfoview.cpp:67
+#: controllers/document/info/documentinfoview.cpp:70
 #, kde-format
 msgid "Type:"
 msgstr "型態："
 
-#: controllers/document/info/documentinfoview.cpp:74
+#: controllers/document/info/documentinfoview.cpp:77
 #, kde-format
 msgid "Location:"
 msgstr "位置："
 
-#: controllers/document/info/documentinfoview.cpp:91
+#: controllers/document/info/documentinfoview.cpp:94
 #, kde-format
 msgid "Size:"
 msgstr "大小："
 
-#: controllers/document/info/documentinfoview.cpp:98
+#: controllers/document/info/documentinfoview.cpp:101
 #, kde-format
 msgid "Created/Loaded:"
 msgstr "已建立/已載入："
 
-#: controllers/document/info/documentinfoview.cpp:102
+#: controllers/document/info/documentinfoview.cpp:105
 #, kde-format
 msgid "Last modified:"
 msgstr "最後變更："
 
-#: controllers/document/info/documentinfoview.cpp:106
+#: controllers/document/info/documentinfoview.cpp:109
 #, kde-format
 msgid "Last synchronized:"
 msgstr "上次同步："
 
-#: controllers/document/info/documentinfoview.cpp:113
+#: controllers/document/info/documentinfoview.cpp:116
 #, kde-format
 msgid "Created:"
 msgstr "建立時間："
 
-#: controllers/document/info/documentinfoview.cpp:165
+#: controllers/document/info/documentinfoview.cpp:168
 #, kde-format
 msgctxt "There is no storage location assigned to yet."
 msgid "[None]"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-07 00:55+0000\n"
+"POT-Creation-Date: 2023-01-20 01:01+0000\n"
 "PO-Revision-Date: 2021-05-10 06:26+0200\n"
 "Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -37,42 +37,42 @@ msgctxt "@title:window"
 msgid "File Info"
 msgstr "Datei-Information"
 
-#: controllers/document/info/documentinfoview.cpp:67
+#: controllers/document/info/documentinfoview.cpp:70
 #, kde-format
 msgid "Type:"
 msgstr "Typ:"
 
-#: controllers/document/info/documentinfoview.cpp:74
+#: controllers/document/info/documentinfoview.cpp:77
 #, kde-format
 msgid "Location:"
 msgstr "Ort:"
 
-#: controllers/document/info/documentinfoview.cpp:91
+#: controllers/document/info/documentinfoview.cpp:94
 #, kde-format
 msgid "Size:"
 msgstr "Größe:"
 
-#: controllers/document/info/documentinfoview.cpp:98
+#: controllers/document/info/documentinfoview.cpp:101
 #, kde-format
 msgid "Created/Loaded:"
 msgstr "Erzeugt/Geladen:"
 
-#: controllers/document/info/documentinfoview.cpp:102
+#: controllers/document/info/documentinfoview.cpp:105
 #, kde-format
 msgid "Last modified:"
 msgstr "Zuletzt geändert:"
 
-#: controllers/document/info/documentinfoview.cpp:106
+#: controllers/document/info/documentinfoview.cpp:109
 #, kde-format
 msgid "Last synchronized:"
 msgstr "Zuletzt abgeglichen:"
 
-#: controllers/document/info/documentinfoview.cpp:113
+#: controllers/document/info/documentinfoview.cpp:116
 #, kde-format
 msgid "Created:"
 msgstr "Erzeugt:"
 
-#: controllers/document/info/documentinfoview.cpp:165
+#: controllers/document/info/documentinfoview.cpp:168
 #, kde-format
 msgctxt "There is no storage location assigned to yet."
 msgid "[None]"
