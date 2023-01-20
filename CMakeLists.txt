@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.16)
 
 project(Okteta VERSION 0.26.60)
 
-set(REQUIRED_KF5_VERSION "5.100.0")
-find_package(ECM ${REQUIRED_KF5_VERSION} REQUIRED NO_MODULE)
+set(REQUIRED_KF_VERSION "5.100.0")
+find_package(ECM ${REQUIRED_KF_VERSION} REQUIRED NO_MODULE)
 
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake ${ECM_MODULE_PATH})
 
@@ -96,7 +96,7 @@ if( BUILD_DESKTOPPROGRAM )
         DocTools
     )
 endif()
-find_package(KF5 ${REQUIRED_KF5_VERSION} REQUIRED
+find_package(KF5 ${REQUIRED_KF_VERSION} REQUIRED
     COMPONENTS
     ConfigWidgets
     I18n
