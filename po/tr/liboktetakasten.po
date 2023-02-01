@@ -7,13 +7,13 @@
 # obsoleteman <tulliana@gmail.com>, 2008-2009.
 # Volkan Gezer <volkangezer@gmail.com>, 2013-2014, 2017.
 # Kaan Ozdincer <kaanozdincer@gmail.com>, 2014.
-# Emir SARI <emir_sari@icloud.com>, 2022.
+# Emir SARI <emir_sari@icloud.com>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdesdk-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-16 02:46+0000\n"
-"PO-Revision-Date: 2022-12-03 19:56+0300\n"
+"PO-Revision-Date: 2023-01-31 21:50+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.08.3\n"
+"X-Generator: Lokalize 22.12.1\n"
 
 #: controllers/document/info/documentinfotool.cpp:48
 #: controllers/document/info/documentinfotoolviewfactory.cpp:24
@@ -2150,7 +2150,7 @@ msgstr "İleti"
 #, kde-format
 msgctxt "@info:label"
 msgid "Installed structures:"
-msgstr "Yüklenen yapılar:"
+msgstr "Kurulu yapılar:"
 
 #: controllers/view/structures/settings/structureaddremovewidget.cpp:50
 #, kde-format
