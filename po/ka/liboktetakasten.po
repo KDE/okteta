@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-20 01:01+0000\n"
-"PO-Revision-Date: 2023-01-07 07:22+0100\n"
+"PO-Revision-Date: 2023-02-02 13:45+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -275,20 +275,20 @@ msgstr "სიმბოლო"
 #, kde-format
 msgctxt "@title:window"
 msgid "Value/Char Table"
-msgstr ""
+msgstr "მნიშვნელობა/სიმბოლოს ცხრილი"
 
 #: controllers/view/bytetable/bytetabletool.cpp:90
 #, kde-format
 msgid "Inserted 1 Byte"
 msgid_plural "Inserted %1 Bytes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ჩასმულია 1 ბაიტი"
+msgstr[1] "ჩასმულია %1 ბაიტი"
 
 #: controllers/view/bytetable/bytetableview.cpp:80
 #, kde-format
 msgctxt "@label:spinbox number of bytes to insert"
 msgid "Number (bytes):"
-msgstr ""
+msgstr "რიცხვი (ბაიტები):"
 
 #: controllers/view/bytetable/bytetableview.cpp:88
 #, kde-format
@@ -309,7 +309,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window of the tool to convert between charsets"
 msgid "Charset Conversion"
-msgstr ""
+msgstr "სიმბოლოების კოდირების გადაყვანა"
 
 #: controllers/view/charsetconversion/charsetconversiontool.cpp:244
 #, kde-format
@@ -438,29 +438,29 @@ msgstr ""
 #, kde-format
 msgctxt "@info"
 msgid "No bytes converted."
-msgstr ""
+msgstr "ბაიტები არ გადაყვანილა."
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:201
 #, kde-format
 msgctxt "@info"
 msgid "1 byte converted."
 msgid_plural "%1 bytes converted."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "გადაყვანილია 1 ბაიტი."
+msgstr[1] "გადაყვანილია %1 ბაიტი."
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:211
 #, kde-format
 msgctxt "@info"
 msgid "No bytes substituted."
-msgstr ""
+msgstr "ბაიტები არ ჩანაცვლებულა."
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:212
 #, kde-format
 msgctxt "@info"
 msgid "1 byte substituted."
 msgid_plural "%1 bytes substituted."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ჩანაცვლდა 1 ბაიტი."
+msgstr[1] "ჩანაცვლდა %1 ბაიტი."
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:221
 #, kde-format
@@ -875,7 +875,7 @@ msgctxt ""
 "name of the filter; it switches all bits from 0 to 1 and 1 to 0 "
 "respectively, so 01111110 becomes 10000001"
 msgid "INVERT data"
-msgstr ""
+msgstr "მონაცემების ინვერსია"
 
 #: controllers/view/libbytearrayfilter/filter/operandbytearrayfilterparametersetedit.cpp:31
 #, kde-format
@@ -899,7 +899,7 @@ msgstr ""
 #, kde-format
 msgctxt "@option:check"
 msgid "Align at end:"
-msgstr ""
+msgstr "ბოლოზე სწორება:"
 
 #: controllers/view/libbytearrayfilter/filter/operandbytearrayfilterparametersetedit.cpp:59
 #, kde-format
@@ -1036,6 +1036,8 @@ msgid ""
 "Perform a case sensitive search: entering the pattern 'Joe' will not match "
 "'joe' or 'JOE', only 'Joe'."
 msgstr ""
+"რეგისტრზე დამოკიდებული ძებნა: თუ შეიყვანთ 'Joe', ის არ დაემთხვევა 'joe'-ს ან "
+"'JOE'-ს, არამედ მხოლოდ 'Joe'-ს."
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:112
 #, kde-format
@@ -1047,25 +1049,26 @@ msgstr "მხოლოდ &სრული სიტყვები"
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Require word boundaries in both ends of a match to succeed."
-msgstr ""
+msgstr "შესაბამისობა ცალკე სიტყვას უნდა წარმოადგენდეს."
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:115
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Start searching at the current cursor location rather than at the top."
 msgstr ""
+"ძებნის დოკუმენტის დასაწყისის მაგიერ კურსორის მიმდინარე პოზიციიდან დაწყება."
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:118
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Replace backwards."
-msgstr ""
+msgstr "უკუღმა ჩანაცვლება."
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:119
 #, kde-format
 msgctxt "@option:check"
 msgid "&Selected bytes"
-msgstr ""
+msgstr "&არჩეული ბაიტები"
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:120
 #, kde-format
@@ -1077,7 +1080,7 @@ msgstr "მხოლოდ მიმდინარე მონიშნულ�
 #, kde-format
 msgctxt "@option:check set the view into overwrite mode"
 msgid "Overwr&ite Mode"
-msgstr ""
+msgstr "&თავზე გადაწერის რეჟიმი"
 
 #: controllers/view/overwritemode/overwritemodecontroller.cpp:29
 #, kde-format
@@ -1122,7 +1125,7 @@ msgstr "მნიშვნელობა"
 #, kde-format
 msgctxt "@info:tooltip for column Type"
 msgid "The type of data"
-msgstr ""
+msgstr "მონაცემების ტიპი"
 
 #: controllers/view/poddecoder/podtablemodel.cpp:159
 #, kde-format
@@ -1282,19 +1285,19 @@ msgstr "UTF-8"
 #, kde-format
 msgctxt "@title:window"
 msgid "Print Byte Array %1"
-msgstr ""
+msgstr "ბაიტების მასივის (%1) დაბეჭდვა"
 
 #: controllers/view/print/printtool.cpp:92
 #, kde-format
 msgctxt "in the header of the printed page, e.g. Page 2 of 20"
 msgid "Page %p of %P"
-msgstr ""
+msgstr "გვერდი %p %P-დან"
 
 #: controllers/view/print/printtool.cpp:98
 #, kde-format
 msgctxt "in the footer of the printed page, e.g. Printed by: Joe User"
 msgid "Printed by: %U"
-msgstr ""
+msgstr "დაბეჭდილია: %U"
 
 #: controllers/view/print/printtool.cpp:163
 #, kde-format
@@ -1376,7 +1379,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:group"
 msgid "Replace With"
-msgstr ""
+msgstr "_ჩანაცვლება"
 
 #: controllers/view/replace/replacedialog.cpp:50
 #, kde-format
@@ -1488,7 +1491,7 @@ msgstr "წანაცვლების საწყისი:"
 #, kde-format
 msgctxt "@label:listbox"
 msgid "End offset:"
-msgstr ""
+msgstr "წანაცვლების ბოლო:"
 
 #: controllers/view/selectrange/selectrangeview.cpp:81
 #, kde-format
@@ -1500,7 +1503,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the range."
-msgstr ""
+msgstr "აირჩიეთ დიაპაზონი:."
 
 #: controllers/view/selectrange/selectrangeview.cpp:110
 #, kde-kuit-format
@@ -1807,12 +1810,12 @@ msgctxt ""
 "Displayed in the type column. first comes the name of the enum, then the "
 "underlying type (e.g. uint32)"
 msgid "enum %1 (%2)"
-msgstr ""
+msgstr "ჩამონათვალი %1 (%2)"
 
 #: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:75
 #, kde-format
 msgid "0x%1 (no matching flags)"
-msgstr ""
+msgstr "0x%1 (შესაბამისი ალმების გარეშე)"
 
 #: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:105
 #, kde-format
@@ -1820,28 +1823,28 @@ msgctxt ""
 "Displayed in the type column. first comes the name of the enum, then the "
 "underlying type (e.g. uint32)"
 msgid "flag %1 (%2)"
-msgstr ""
+msgstr "ალამი %1 (%2)"
 
 #: controllers/view/structures/datatypes/primitive/pointerdatainformation.cpp:116
 #, kde-format
 msgctxt "memory pointer with underlying type"
 msgid "%1 pointer"
-msgstr ""
+msgstr "%1 მაჩვენებელი"
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:17
 msgctxt "data type"
 msgid "bool (1 byte)"
-msgstr ""
+msgstr "ლოგიკური (1 ბაიტი)"
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:18
 msgctxt "data type"
 msgid "signed byte"
-msgstr ""
+msgstr "ნიშნიანი ბაიტი"
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:19
 msgctxt "data type"
 msgid "unsigned byte"
-msgstr ""
+msgstr "უნიშნო ბაიტი"
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:20
 msgctxt "data type"
@@ -1851,47 +1854,47 @@ msgstr "სიმბ"
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:21
 msgctxt "data type"
 msgid "bool (2 bytes)"
-msgstr ""
+msgstr "ლოგიკური (2 ბაიტი)"
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:22
 msgctxt "data type"
 msgid "signed short"
-msgstr ""
+msgstr "ნიშნიანი მოკლე"
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:23
 msgctxt "data type"
 msgid "unsigned short"
-msgstr ""
+msgstr "უნიშნო მოკლე"
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:24
 msgctxt "data type"
 msgid "bool (4 bytes)"
-msgstr ""
+msgstr "ლოგიკური (4 ბაიტი)"
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:25
 msgctxt "data type"
 msgid "signed int"
-msgstr ""
+msgstr "ნიშნიანი მთელი"
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:26
 msgctxt "data type"
 msgid "unsigned int"
-msgstr ""
+msgstr "უნიშნო მთელი"
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:27
 msgctxt "data type"
 msgid "bool (8 bytes)"
-msgstr ""
+msgstr "ლოგიკური (8 ბაიტი)"
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:28
 msgctxt "data type"
 msgid "signed long"
-msgstr ""
+msgstr "ნიშნიანი გრძელი"
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:29
 msgctxt "data type"
 msgid "unsigned long"
-msgstr ""
+msgstr "უნიშნო გრძელი"
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:30
 msgctxt "data type"
@@ -1906,47 +1909,47 @@ msgstr "ორმაგი"
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:32
 msgctxt "data type"
 msgid "bitfield"
-msgstr ""
+msgstr "ბიტების ველი"
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:78
 #, kde-format
 msgid "invalid type"
-msgstr ""
+msgstr "არასწორი ტიპი"
 
 #: controllers/view/structures/datatypes/strings/asciistringdata.cpp:135
 #, kde-format
 msgid "Non-ASCII char: 0x%1"
-msgstr ""
+msgstr "არა-ASCII სიმბოლო: 0x%1"
 
 #: controllers/view/structures/datatypes/strings/asciistringdata.cpp:143
 #, kde-format
 msgid "ASCII char"
-msgstr ""
+msgstr "ASCII სიმბოლო"
 
 #: controllers/view/structures/datatypes/strings/asciistringdata.cpp:153
 #, kde-format
 msgid "ASCII string"
-msgstr ""
+msgstr "ASCII სტრიქონი"
 
 #: controllers/view/structures/datatypes/strings/ebcdicstringdata.cpp:137
 #, kde-format
 msgid "EBCDIC char"
-msgstr ""
+msgstr "EBCDIC სიმბოლო"
 
 #: controllers/view/structures/datatypes/strings/ebcdicstringdata.cpp:147
 #, kde-format
 msgid "EBCDIC string"
-msgstr ""
+msgstr "EBCDIC სტრიქონი"
 
 #: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:131
 #, kde-format
 msgid "Latin1 char"
-msgstr ""
+msgstr "Latin1 სიმბოლო"
 
 #: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:141
 #, kde-format
 msgid "Latin1 string"
-msgstr ""
+msgstr "Latin1 სტრიქონი"
 
 #: controllers/view/structures/datatypes/strings/stringdatainformation.cpp:302
 #, kde-format
@@ -1956,22 +1959,22 @@ msgstr ""
 #: controllers/view/structures/datatypes/strings/utf16stringdata.cpp:32
 #, kde-format
 msgid "UTF16-LE char"
-msgstr ""
+msgstr "UTF16-LE სიმბოლო"
 
 #: controllers/view/structures/datatypes/strings/utf16stringdata.cpp:32
 #, kde-format
 msgid "UTF16-BE char"
-msgstr ""
+msgstr "UTF16-BE სიმბოლო"
 
 #: controllers/view/structures/datatypes/strings/utf16stringdata.cpp:37
 #, kde-format
 msgid "UTF16-LE string"
-msgstr ""
+msgstr "UTF16-LE სტრიქონი"
 
 #: controllers/view/structures/datatypes/strings/utf16stringdata.cpp:37
 #, kde-format
 msgid "UTF16-BE string"
-msgstr ""
+msgstr "UTF16-BE სტრიქონი"
 
 #: controllers/view/structures/datatypes/strings/utf16stringdata.cpp:56
 #: controllers/view/structures/datatypes/strings/utf32stringdata.cpp:56
@@ -1988,62 +1991,62 @@ msgstr ""
 #: controllers/view/structures/datatypes/strings/utf8stringdata.cpp:64
 #, kde-format
 msgid "%1 (U+%2)"
-msgstr ""
+msgstr "%1 (U+%2)"
 
 #: controllers/view/structures/datatypes/strings/utf32stringdata.cpp:32
 #, kde-format
 msgid "UTF32-LE char"
-msgstr ""
+msgstr "UTF32-LE სიმბოლო"
 
 #: controllers/view/structures/datatypes/strings/utf32stringdata.cpp:32
 #, kde-format
 msgid "UTF32-BE char"
-msgstr ""
+msgstr "UTF32-BE სიმბოლო"
 
 #: controllers/view/structures/datatypes/strings/utf32stringdata.cpp:37
 #, kde-format
 msgid "UTF32-LE string"
-msgstr ""
+msgstr "UTF32-LE სტრიქონი"
 
 #: controllers/view/structures/datatypes/strings/utf32stringdata.cpp:37
 #, kde-format
 msgid "UTF32-BE string"
-msgstr ""
+msgstr "UTF32-BE სტრიქონი"
 
 #: controllers/view/structures/datatypes/strings/utf8stringdata.cpp:32
 #, kde-format
 msgid "UTF8 char"
-msgstr ""
+msgstr "UTF8 სიმბოლო"
 
 #: controllers/view/structures/datatypes/strings/utf8stringdata.cpp:37
 #, kde-format
 msgid "UTF8 string"
-msgstr ""
+msgstr "UTF8 სტრიქონი"
 
 #: controllers/view/structures/datatypes/structuredatainformation.cpp:26
 #: controllers/view/structures/datatypes/taggeduniondatainformation.cpp:47
 #, kde-format
 msgctxt "data type in C/C++, then name"
 msgid "struct %1"
-msgstr ""
+msgstr "სტრუქტურა %1"
 
 #: controllers/view/structures/datatypes/taggeduniondatainformation.cpp:50
 #, kde-format
 msgctxt "data type, then name"
 msgid "tagged union %1"
-msgstr ""
+msgstr "ჭდიანი გაერთიანება %1"
 
 #: controllers/view/structures/datatypes/uniondatainformation.cpp:24
 #, kde-format
 msgctxt "data type in C/C++, then name"
 msgid "union %1"
-msgstr ""
+msgstr "გაერთიანება %1"
 
 #: controllers/view/structures/parsers/osdparser.cpp:118
 #: controllers/view/structures/parsers/osdparser.cpp:200
 #, kde-format
 msgid "<invalid name>"
-msgstr ""
+msgstr "<არასწორი სახელი>"
 
 #: controllers/view/structures/script/scriptlogger.cpp:83
 #, kde-format
@@ -2061,7 +2064,7 @@ msgstr "საწყისი"
 #, kde-format
 msgctxt "@title:column"
 msgid "Message"
-msgstr ""
+msgstr "შეტყობინება"
 
 #: controllers/view/structures/settings/aboutstructuredialog.cpp:36
 #, kde-format
@@ -2094,6 +2097,8 @@ msgid ""
 "Email author\n"
 "%1"
 msgstr ""
+"ელფოსტის ავტორი\n"
+"%1"
 
 #: controllers/view/structures/settings/aboutstructuredialog.cpp:116
 #, kde-format
@@ -2111,13 +2116,13 @@ msgstr "სა&ლიცენზიო შეთანხმება"
 #, kde-format
 msgctxt "@info:label"
 msgid "Installed structures:"
-msgstr ""
+msgstr "დაყენებული სტრუქტურები:"
 
 #: controllers/view/structures/settings/structureaddremovewidget.cpp:63
 #, kde-format
 msgctxt "@info:label"
 msgid "Used structures:"
-msgstr ""
+msgstr "გამოყენებული სტრუქტურები:"
 
 #: controllers/view/structures/settings/structureitemdelegate.cpp:114
 #, kde-format
@@ -2128,28 +2133,28 @@ msgstr "შესახებ"
 #: controllers/view/structures/settings/structuresmanagerview.cpp:45
 #, kde-format
 msgid "Get New Structures..."
-msgstr ""
+msgstr "ახალი სტრუქტურების მიღება.."
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:51
 #, kde-format
 msgid "Advanced Selection..."
-msgstr ""
+msgstr "დამატებითი მონიშვნა..."
 
 #: controllers/view/structures/settings/structuresselectiondialog.cpp:28
 #, kde-format
 msgctxt "@title:window"
 msgid "Advanced Structures Selection"
-msgstr ""
+msgstr "დამატებითი სტრუქტურების მონიშვნა"
 
 #: controllers/view/structures/settings/structuresselectionmodel.cpp:107
 #, kde-format
 msgid "Dynamic Structure Definitions"
-msgstr ""
+msgstr "დინამიკური სტრუქტურის აღწერებ"
 
 #: controllers/view/structures/settings/structuresselectionmodel.cpp:109
 #, kde-format
 msgid "Structure Definitions"
-msgstr ""
+msgstr "სტრუქტურის აღწერები"
 
 #: controllers/view/structures/settings/structuresselector.cpp:40
 #, kde-format
@@ -2228,7 +2233,7 @@ msgstr ""
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Byte order"
-msgstr ""
+msgstr "ბაიტების რიგი"
 
 #. i18n: ectx: label, entry (ByteOrder), group (StructureSettings)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:49
@@ -2345,19 +2350,19 @@ msgstr "სტრუქტურები"
 #, kde-format
 msgctxt "name of a data structure"
 msgid "Name"
-msgstr ""
+msgstr "სახელი"
 
 #: controllers/view/structures/structurestool.cpp:189
 #, kde-format
 msgctxt "type of a data structure"
 msgid "Type"
-msgstr ""
+msgstr "_ტიპი"
 
 #: controllers/view/structures/structurestool.cpp:191
 #, kde-format
 msgctxt "value of a data structure (primitive type)"
 msgid "Value"
-msgstr ""
+msgstr "მნიშვნელობა"
 
 #: controllers/view/structures/structureview.cpp:96
 #, kde-format
@@ -2369,19 +2374,19 @@ msgstr "დადასტურება"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Validate all structures."
-msgstr ""
+msgstr "ყველა სტრუქტურის გადამოწმება."
 
 #: controllers/view/structures/structureview.cpp:120
 #, kde-format
 msgctxt "@action:button"
 msgid "Script console"
-msgstr ""
+msgstr "სკრიპტის კონსოლი"
 
 #: controllers/view/structures/structureview.cpp:122
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open script console."
-msgstr ""
+msgstr "სკრიპტის კონსოლის გახსნა."
 
 #: controllers/view/structures/structureview.cpp:126
 #, kde-format
@@ -2393,17 +2398,17 @@ msgstr "&მორგება"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open settings."
-msgstr ""
+msgstr "პარამეტრების გახსნა."
 
 #: controllers/view/structures/structureview.cpp:159
 #, kde-format
 msgid "Value Display"
-msgstr ""
+msgstr "მნიშვნელობის ჩვენება"
 
 #: controllers/view/structures/structureview.cpp:171
 #, kde-format
 msgid "Structures management"
-msgstr ""
+msgstr "სტრუქტურების მართვა"
 
 #: controllers/view/structures/structureview.cpp:258
 #, kde-format
@@ -2442,39 +2447,39 @@ msgstr ""
 #, kde-format
 msgctxt "@label"
 msgid "No grouping."
-msgstr ""
+msgstr "დაჯგუფების გარეშე."
 
 #: controllers/view/viewconfig/bytespergroupdialog.cpp:37
 #: controllers/view/viewprofiles/viewprofileedit.cpp:119
 #, kde-format
 msgctxt "@label:spinbox number of bytes which are grouped"
 msgid "Bytes per Group:"
-msgstr ""
+msgstr "ბაიტები თითოეულ ჯგუფში:"
 
 #: controllers/view/viewconfig/bytespergroupdialog.cpp:52
 #, kde-format
 msgctxt "@title:window"
 msgid "Bytes per Group"
-msgstr ""
+msgstr "ბაიტები თითოეულ ჯგუფში"
 
 #: controllers/view/viewconfig/bytesperlinedialog.cpp:34
 #: controllers/view/viewprofiles/viewprofileedit.cpp:126
 #, kde-format
 msgctxt "@label:spinbox number of bytes which are shown per line"
 msgid "Bytes per Line:"
-msgstr ""
+msgstr "ბაიტები თითოეულ ხაზზე:"
 
 #: controllers/view/viewconfig/bytesperlinedialog.cpp:49
 #, kde-format
 msgctxt "@title:window"
 msgid "Bytes per Line"
-msgstr ""
+msgstr "ბაიტები თითოეულ ხაზზე"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:35
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Offset Coding"
-msgstr ""
+msgstr "&წანაცვლებული კოდირება"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:39
 #, kde-format
@@ -2492,7 +2497,7 @@ msgstr "&ათობითი"
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Value Coding"
-msgstr ""
+msgstr "&მნიშვნელობის კოდირება"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:51
 #, kde-format
@@ -2523,7 +2528,7 @@ msgstr "&ბინარული"
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Char Coding"
-msgstr ""
+msgstr "&სტრიქონის კოდირება"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:69
 #, kde-format
@@ -2569,7 +2574,7 @@ msgctxt ""
 "@item:inmenu  The layout will adapt to the size and fit in as much bytes per "
 "line as possible."
 msgid "&On"
-msgstr ""
+msgstr "&ხაზზე"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:100
 #, kde-format
@@ -2593,13 +2598,13 @@ msgstr "&მნიშვნელობები"
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "&Chars"
-msgstr ""
+msgstr "&სიმბოლოები"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:112
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Values && Chars"
-msgstr ""
+msgstr "&მნიშვნელობები და სიმბოლოები"
 
 #: controllers/view/viewmode/viewmodecontroller.cpp:25
 #, kde-format
@@ -2692,7 +2697,7 @@ msgstr "მნიშვნელობები"
 #, kde-format
 msgctxt "@item:"
 msgid "Chars"
-msgstr ""
+msgstr "სიმბოლოები"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:77
 #, kde-format
@@ -2748,7 +2753,7 @@ msgctxt ""
 "@item:inmenu  The layout will adapt to the size and fit in as much bytes per "
 "line as possible."
 msgid "On"
-msgstr ""
+msgstr "ჩართული"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:110
 #, kde-format
@@ -2934,13 +2939,13 @@ msgstr "OVR"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Insert mode"
-msgstr ""
+msgstr "ჩასმის რეჟიმი"
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:46
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Overwrite mode"
-msgstr ""
+msgstr "თავზე გადაწერის რეჟიმი"
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:61
 #, kde-format
@@ -2969,38 +2974,38 @@ msgstr "%1 ბაიტი"
 #, kde-format
 msgctxt "@info:status selection: start offset - end offset ()"
 msgid "Selection: %1 - %2 (%3)"
-msgstr ""
+msgstr "არჩევანი: %1 - %2 (%3)"
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:163
 #, kde-format
 msgctxt "@info:status offset value not available"
 msgid "Offset: -"
-msgstr ""
+msgstr "წანაცვლება: -"
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:164
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:221
 #, kde-format
 msgctxt "@info:status offset value not available"
 msgid "Selection: -"
-msgstr ""
+msgstr "მონიშნული: -"
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:219
 #, kde-format
 msgctxt "@info:status selection: start offset - end offset (number of bytes)"
 msgid "Selection: %1 - %2 (%3)"
-msgstr ""
+msgstr "მონიშნული: %1 - %2 (%3)"
 
 #: core/document/bytearraydocument.cpp:53
 #, kde-format
 msgctxt "name of the data type"
 msgid "Byte Array"
-msgstr ""
+msgstr "ბაიტების მასივი"
 
 #: core/document/bytearraydocumentfactory.cpp:36
 #, kde-format
 msgctxt "The byte array was new created."
 msgid "New created."
-msgstr ""
+msgstr "ახალი შეიქმნა."
 
 #: core/document/bytearraydocumentfactory.cpp:43
 #: core/document/bytearraydocumentfactory.cpp:80
@@ -3015,13 +3020,13 @@ msgstr[1] ""
 #, kde-format
 msgctxt "origin of the byte array"
 msgid "Created from data."
-msgstr ""
+msgstr "შეიქმნა მონაცემებიდან."
 
 #: core/io/filesystem/bytearrayrawfileloadthread.cpp:55
 #, kde-format
 msgctxt "destination of the byte array"
 msgid "Loaded from file."
-msgstr ""
+msgstr "ჩაიტვირთა ფაილიდან."
 
 #: core/io/filesystem/bytearrayrawfileloadthread.cpp:64
 #: core/io/filesystem/bytearrayrawfilereloadthread.cpp:55
@@ -3039,12 +3044,12 @@ msgstr ""
 #, kde-format
 msgctxt "name of the generated data"
 msgid "Pattern..."
-msgstr ""
+msgstr "ნიმუში..."
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:103
 #, kde-format
 msgid "Pattern inserted."
-msgstr ""
+msgstr "ნიმუში ჩასმულია."
 
 #: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:35
 #, kde-format
@@ -3081,18 +3086,18 @@ msgstr "შაბლონი"
 #, kde-format
 msgctxt "name of the generated data"
 msgid "Random Data..."
-msgstr ""
+msgstr "შემთხვევითი მონაცემები..."
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:96
 #, kde-format
 msgid "RandomData inserted."
-msgstr ""
+msgstr "შემთხვევითი მონაცემები ჩასმულია."
 
 #: gui/io/generator/randomdata/bytearrayrandomdatageneratorconfigeditor.cpp:33
 #, kde-format
 msgctxt "@label:spinbox size of the bytearray to generate"
 msgid "&Size (bytes):"
-msgstr ""
+msgstr "&ზომა (ბაიტებში):"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatageneratorconfigeditor.cpp:41
 #, kde-format
@@ -3104,7 +3109,7 @@ msgstr ""
 #, kde-format
 msgctxt "@item name of the generated data"
 msgid "Random Data"
-msgstr ""
+msgstr "შემთხვევითი მონაცემები"
 
 #: gui/io/generator/sequence/bytearraysequencegenerator.cpp:29
 #, kde-format
@@ -3115,7 +3120,7 @@ msgstr "მიმდევრობა"
 #: gui/io/generator/sequence/bytearraysequencegenerator.cpp:60
 #, kde-format
 msgid "Sequence inserted."
-msgstr ""
+msgstr "მიმდევრომა ჩასმულია."
 
 #: gui/io/streamencoder/base32/bytearraybase32streamencoder.cpp:137
 #, kde-format
@@ -3203,31 +3208,31 @@ msgstr "16-ბიტი"
 #, kde-format
 msgctxt "@item:inmenu address size"
 msgid "8-bit"
-msgstr ""
+msgstr "8-ბიტიანი"
 
 #: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoder.cpp:132
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "C Array"
-msgstr ""
+msgstr "C მასივი"
 
 #: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoderconfigeditor.cpp:36
 #, kde-format
 msgctxt "@label:textbox name of the created variable"
 msgid "Name of variable:"
-msgstr ""
+msgstr "ცვლადის სახელი:"
 
 #: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoderconfigeditor.cpp:47
 #, kde-format
 msgctxt "@label:textbox to define after how many items the list is wrapped"
 msgid "Items per line:"
-msgstr ""
+msgstr "ჩანაწერი ხაზზე:"
 
 #: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoderconfigeditor.cpp:59
 #, kde-format
 msgctxt "@label:listbox the type of the data: char, integer, etc."
 msgid "Data type:"
-msgstr ""
+msgstr "მონაცემების ტიპი:"
 
 #: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoderconfigeditor.cpp:80
 #, kde-format
@@ -3241,7 +3246,7 @@ msgstr ""
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "S-Record"
-msgstr ""
+msgstr "S-ჩანაწერი"
 
 #: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:41
 #, kde-format
@@ -3253,14 +3258,14 @@ msgstr "24-ბიტი"
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "Uuencoding"
-msgstr ""
+msgstr "Uuencoding"
 
 #: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:35
 #: gui/io/streamencoder/xxencoding/bytearrayxxencodingstreamencoderconfigeditor.cpp:34
 #, kde-format
 msgctxt "@label:textbox file name internally given to the encoded data"
 msgid "Internal name of file:"
-msgstr ""
+msgstr "ფაილის შიდა სახელი:"
 
 #: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:46
 #, kde-format
@@ -3289,19 +3294,19 @@ msgstr "მნიშვნელობები"
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:36
 #, kde-format
 msgid "Value coding:"
-msgstr ""
+msgstr "მნიშვნელობის კოდირება:"
 
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:51
 #, kde-format
 msgctxt "@label:textbox substring which separates the values"
 msgid "Separation:"
-msgstr ""
+msgstr "გაცალკევება:"
 
 #: gui/io/streamencoder/viewtext/bytearrayviewtextstreamencoder.cpp:41
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "View in Plain Text"
-msgstr ""
+msgstr "უბრალო ტექსტად ნახვა"
 
 #: gui/io/streamencoder/xxencoding/bytearrayxxencodingstreamencoder.cpp:71
 #, kde-format
@@ -3326,7 +3331,7 @@ msgstr "დეკ"
 #, kde-format
 msgctxt "@item:inlistbox coding of offset in the expression format"
 msgid "Expr"
-msgstr ""
+msgstr "გამოს"
 
 #. i18nc("@item:inlistbox guessing the coding of the bytes by the input",       "Auto"),
 #: gui/liboktetawidgets/bytearraycombobox_p.cpp:25
