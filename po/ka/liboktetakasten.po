@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-20 01:01+0000\n"
-"PO-Revision-Date: 2023-02-02 13:45+0100\n"
+"PO-Revision-Date: 2023-02-03 17:10+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -1379,7 +1379,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:group"
 msgid "Replace With"
-msgstr "_ჩანაცვლება"
+msgstr "ჩანაცვლება"
 
 #: controllers/view/replace/replacedialog.cpp:50
 #, kde-format
@@ -1790,7 +1790,7 @@ msgstr[1] ""
 #, kde-format
 msgctxt "boolean value with actual value"
 msgid "true (%1)"
-msgstr ""
+msgstr "ჭეშმარიტი (%1)"
 
 #: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:42
 #: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:81
@@ -2240,14 +2240,14 @@ msgstr "ბაიტების რიგი"
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Big endian"
-msgstr ""
+msgstr "მსხვილბოლოიანი"
 
 #. i18n: ectx: label, entry (ByteOrder), group (StructureSettings)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:50
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Little endian"
-msgstr ""
+msgstr "წვრილბოლოიანი"
 
 #: controllers/view/structures/settings/structureviewsettingswidget.cpp:49
 #, kde-format
@@ -2283,19 +2283,19 @@ msgstr "ბაიტების რიგი:"
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:46
 #, kde-format
 msgid "Big endian"
-msgstr ""
+msgstr "მსხვილბოლოიანი"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ByteOrder)
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:51
 #, kde-format
 msgid "Little endian"
-msgstr ""
+msgstr "წვრილბოლოიანი"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShortTypeNames)
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:59
 #, kde-format
 msgid "Use short type names"
-msgstr ""
+msgstr "მოკლე ტიპის სახელების გამოყენება"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_LocaleAwareDecimalFormatting)
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:66
@@ -2356,7 +2356,7 @@ msgstr "სახელი"
 #, kde-format
 msgctxt "type of a data structure"
 msgid "Type"
-msgstr "_ტიპი"
+msgstr "ტიპი"
 
 #: controllers/view/structures/structurestool.cpp:191
 #, kde-format
@@ -2628,7 +2628,7 @@ msgstr "&მწკრივები"
 #, kde-format
 msgctxt "@title:menu submenu to select the view profile or change it"
 msgid "View Profile"
-msgstr ""
+msgstr "პროფილის ნახვა"
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:46
 #, kde-format
@@ -2646,7 +2646,7 @@ msgstr "ცვლილებების შენახვა"
 #, kde-format
 msgctxt "@action:inmenu reset settings back to those of the saved base profile"
 msgid "Reset Changes"
-msgstr ""
+msgstr "ცვლილებების დაბრუნება"
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:180
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:180
@@ -2807,7 +2807,7 @@ msgstr ""
 #: controllers/view/viewprofiles/viewprofileedit.cpp:150
 #, kde-format
 msgid "Chars"
-msgstr ""
+msgstr "სიმბოლოები"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:165
 #, kde-format
@@ -2835,7 +2835,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button"
 msgid "&Create new..."
-msgstr ""
+msgstr "&ახლის შექმნა..."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:66
 #, kde-format
@@ -2856,7 +2856,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button"
 msgid "&Edit..."
-msgstr ""
+msgstr "&ჩასწორება..."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:80
 #, kde-format
@@ -2896,7 +2896,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button"
 msgid "&Delete"
-msgstr ""
+msgstr "&წაშლა"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:105
 #, kde-format
@@ -2921,7 +2921,7 @@ msgstr ""
 #, kde-format
 msgctxt "@window:title"
 msgid "\"%1\" View Profile"
-msgstr ""
+msgstr "\"%1\" პროფილის ნახვა"
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:43
 #, kde-format
@@ -3188,7 +3188,7 @@ msgstr "Intel Hex"
 #, kde-format
 msgctxt "@label:listbox the size in bits of the addresses."
 msgid "Address size:"
-msgstr ""
+msgstr "მისამართის ზომა:"
 
 #: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:40
 #: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:39
