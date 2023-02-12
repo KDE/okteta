@@ -327,6 +327,7 @@ function(okteta_add_cmakeconfig _baseName)
     set(options
     )
     set(oneValueArgs
+        COMPATIBILITY
     )
     set(multiValueArgs
         NAMESPACE
