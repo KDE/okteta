@@ -130,4 +130,7 @@ okteta_add_sublibrary(Gui  NAMESPACE Kasten
 )
 
 okteta_add_cmakeconfig(Gui NAMESPACE Kasten
+    DEPS
+        Qt5Widgets ${Qt5_VERSION}
+        KastenCore
 )

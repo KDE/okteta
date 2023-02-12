@@ -53,6 +53,9 @@ oktetakastencore_add_sublibrary(io/filesystem
 )
 
 okteta_add_cmakeconfig(Core NAMESPACE Okteta Kasten
+    DEPS
+        KastenCore
+        OktetaCore
 )
 
 if(BUILD_TESTING)

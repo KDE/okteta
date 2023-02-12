@@ -112,6 +112,9 @@ okteta_add_sublibrary(Core  NAMESPACE Kasten
 )
 
 okteta_add_cmakeconfig(Core NAMESPACE Kasten
+    DEPS
+        Qt5Gui ${Qt5_VERSION}
+        KF5KIO ${KF5_VERSION}
 )
 
 if(BUILD_TESTING)

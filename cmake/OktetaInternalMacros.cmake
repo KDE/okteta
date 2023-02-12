@@ -331,6 +331,7 @@ function(okteta_add_cmakeconfig _baseName)
     )
     set(multiValueArgs
         NAMESPACE
+        DEPS
     )
     cmake_parse_arguments(OKTETA_ADD_CMAKECONFIG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
@@ -344,6 +345,42 @@ function(okteta_add_cmakeconfig _baseName)
     else()
         set(_configName ${_fullName})
     endif()
+
+    set(_configFileTemplatePath "${CMAKE_CURRENT_BINARY_DIR}/${_configName}Config.cmake.in")
+    set(_configFileTemplate "@PACKAGE_INIT@\n\ninclude(CMakeFindDependencyMacro)\n\n")
+    set(dep_package_name)
+    foreach (dep ${OKTETA_ADD_CMAKECONFIG_DEPS})
+        if (dep_package_name)
+            set (dep_package_version ${dep})
+        else()
+            set(_dep_fullName)
+            if (TARGET ${dep})
+                get_property(_dep_fullName TARGET ${dep} PROPERTY OKTETA_FULLNAME)
+            endif()
+            if (_dep_fullName)
+                get_property(_use_versioned_package_name TARGET ${dep} PROPERTY OKTETA_USE_VERSIONED_PACKAGE_NAME)
+                if (_use_versioned_package_name)
+                    get_property(dep_package_name TARGET ${dep} PROPERTY OKTETA_FULLVERSIONEDNAME)
+                else()
+                    set(dep_package_name ${_dep_fullName})
+                endif()
+
+                get_property(dep_package_version TARGET ${dep} PROPERTY VERSION)
+            else()
+                set(dep_package_name ${dep})
+                set(dep_package_version)
+            endif()
+        endif()
+        if (dep_package_version)
+            string(APPEND _configFileTemplate "find_dependency(${dep_package_name} ${dep_package_version})\n")
+            set(dep_package_name)
+        endif()
+    endforeach()
+    if (dep_package_name)
+        message(FATAL_ERROR "DEPS expected to have a version after ${dep_package_name}.")
+    endif()
+    string(APPEND _configFileTemplate "\ninclude(\"\${CMAKE_CURRENT_LIST_DIR}/${_configName}Targets.cmake\")\n")
+    file(WRITE ${_configFileTemplatePath} "${_configFileTemplate}")
 
     set(_targets_export_name "${_fullName}Targets")
 
@@ -364,7 +401,6 @@ function(okteta_add_cmakeconfig _baseName)
         set(_configVersionFilePath)
     endif()
 
-    set(_configFileTemplatePath "${CMAKE_CURRENT_SOURCE_DIR}/${_fullName}Config.cmake.in")
     set(_configFilePath "${CMAKE_CURRENT_BINARY_DIR}/${_configName}Config.cmake")
     configure_package_config_file(
         "${_configFileTemplatePath}"

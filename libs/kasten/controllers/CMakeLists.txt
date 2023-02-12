@@ -241,4 +241,6 @@ kastencontrollers_add_sublibrary(program/quit
 )
 
 okteta_add_cmakeconfig(Controllers NAMESPACE Kasten
+    DEPS
+        KastenGui
 )

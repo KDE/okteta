@@ -1,7 +1,0 @@
-@PACKAGE_INIT@
-
-include(CMakeFindDependencyMacro)
-
-find_dependency(KastenGui @KASTEN_LIB_VERSION@)
-
-include("${CMAKE_CURRENT_LIST_DIR}/KastenControllersTargets.cmake")

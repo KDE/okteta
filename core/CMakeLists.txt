@@ -109,6 +109,8 @@ okteta_add_sublibrary(Core  NAMESPACE Okteta
 )
 
 okteta_add_cmakeconfig(Core NAMESPACE Okteta
+    DEPS
+        Qt5Core ${Qt5_VERSION}
 )
 
 okteta_add_qmakeconfig(Core NAMESPACE Okteta

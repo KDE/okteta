@@ -185,4 +185,8 @@ okteta_add_sublibrary(Gui NAMESPACE Okteta Kasten
 )
 
 okteta_add_cmakeconfig(Gui NAMESPACE Okteta Kasten
+    DEPS
+        OktetaKastenCore
+        KastenGui
+        OktetaGui
 )
