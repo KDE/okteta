@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-18 02:39+0000\n"
-"PO-Revision-Date: 2022-10-17 08:34+0200\n"
+"PO-Revision-Date: 2023-02-11 07:09+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: controllers/document/modified/modifiedbarcontroller.cpp:74
 #, kde-format
@@ -193,7 +193,7 @@ msgstr "&ბუფერში კოპირება"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Copy the selected data to the clipboard."
-msgstr ""
+msgstr "მონიშნული მონაცემების ბუფერში კოპირება."
 
 #: controllers/io/copyas/copyasdialog.cpp:76
 #, kde-kuit-format
@@ -271,7 +271,7 @@ msgstr "&ჩასმა"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Insert the generated data into the document."
-msgstr ""
+msgstr "გენერირებული მონაცემების დოკუმენტში ჩასმა."
 
 #: controllers/io/insert/insertdialog.cpp:48
 #, kde-kuit-format
@@ -305,7 +305,7 @@ msgstr "ჰორიზონტალურად გაყოფა"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close View Area"
-msgstr ""
+msgstr "ხედის დახურვა"
 
 #: controllers/shellwindow/viewlistmenu/viewlistmenucontroller.cpp:77
 #, kde-format
@@ -379,7 +379,7 @@ msgstr "შენახვა როგორც"
 #, kde-format
 msgctxt "@title:window"
 msgid "Close"
-msgstr "დაკეტვა"
+msgstr "დახურვა"
 
 #: core/system/documentsyncmanager_p.cpp:237
 #, kde-format
@@ -409,7 +409,7 @@ msgstr "&შექმნა"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Create a new document with the generated data."
-msgstr ""
+msgstr "გენერირებული მონაცემებით ახალი დოკუმენტის შექმნა."
 
 #: gui/system/createdialog.cpp:50
 #, kde-kuit-format
@@ -423,7 +423,7 @@ msgstr ""
 #, kde-kuit-format
 msgctxt "@info"
 msgid "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
-msgstr ""
+msgstr "ფაილი<nl/><filename>%1</filename> უკვე არსებობს.<nl/>გადავაწერო?"
 
 #: gui/system/dialoghandler.cpp:58
 #, kde-kuit-format
