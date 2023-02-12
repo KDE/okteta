@@ -336,14 +336,16 @@ function(okteta_add_cmakeconfig _baseName)
 
     _okteta_target_name(_targetName ${_baseName} ${OKTETA_ADD_CMAKECONFIG_NAMESPACE})
 
+    get_property(_fullName TARGET ${_targetName} PROPERTY OKTETA_FULLNAME)
+
     get_property(_use_versioned_package_name TARGET ${_targetName} PROPERTY OKTETA_USE_VERSIONED_PACKAGE_NAME)
     if (_use_versioned_package_name)
         get_property(_configName TARGET ${_targetName} PROPERTY OKTETA_FULLVERSIONEDNAME)
     else()
-        get_property(_configName TARGET ${_targetName} PROPERTY OKTETA_FULLNAME)
+        set(_configName ${_fullName})
     endif()
 
-    set(_targets_export_name "${_configName}Targets")
+    set(_targets_export_name "${_fullName}Targets")
 
     # create a Config.cmake and a ConfigVersion.cmake file and install them
     set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/${_configName}")
@@ -362,7 +364,7 @@ function(okteta_add_cmakeconfig _baseName)
         set(_configVersionFilePath)
     endif()
 
-    set(_configFileTemplatePath "${CMAKE_CURRENT_SOURCE_DIR}/${_configName}Config.cmake.in")
+    set(_configFileTemplatePath "${CMAKE_CURRENT_SOURCE_DIR}/${_fullName}Config.cmake.in")
     set(_configFilePath "${CMAKE_CURRENT_BINARY_DIR}/${_configName}Config.cmake")
     configure_package_config_file(
         "${_configFileTemplatePath}"
