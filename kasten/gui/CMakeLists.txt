@@ -18,6 +18,7 @@ okteta_add_library(Gui NAMESPACE Okteta Kasten
     REVERSE_NAMESPACE_INCLUDEDIR
     REVERSE_NAMESPACE_LIB
     NO_TARGET_NAMESPACE
+    NO_VERSIONED_EXPORTED_TARGET_NAME
 )
 
 target_compile_definitions(OktetaKastenGui PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")

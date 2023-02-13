@@ -184,6 +184,7 @@ function(okteta_add_library _baseName)
         NO_TARGET_NAMESPACE
         NO_VERSIONED_INCLUDEDIR
         NO_VERSIONED_PACKAGE_NAME
+        NO_VERSIONED_EXPORTED_TARGET_NAME
         NO_PACKAGE_NAMESPACED_INCLUDEDIR
         REVERSE_NAMESPACE_LIB
         REVERSE_NAMESPACE_INCLUDEDIR
@@ -248,11 +249,22 @@ function(okteta_add_library _baseName)
     string(TOLOWER ${_cc_include_dir} _include_dir)
 
     add_library(${_targetName} SHARED)
-    if (NOT OKTETA_ADD_LIBRARY_NO_TARGET_NAMESPACE)
-        add_library("${_namespacePrefix}::${_baseName}" ALIAS ${_targetName})
-        set(_export_name_args EXPORT_NAME ${_baseName})
+
+    if (OKTETA_ADD_LIBRARY_NO_TARGET_NAMESPACE)
+        if (OKTETA_ADD_LIBRARY_NO_VERSIONED_EXPORTED_TARGET_NAME)
+            set(_export_name_args)
+        else()
+            add_library("${_fullVersionedName}" ALIAS ${_targetName})
+            set(_export_name_args EXPORT_NAME ${_fullVersionedName})
+        endif()
     else()
-        set(_export_name_args)
+        if (OKTETA_ADD_LIBRARY_NO_VERSIONED_EXPORTED_TARGET_NAME)
+            set(_target_namespacePrefix ${_namespacePrefix})
+        else()
+            set(_target_namespacePrefix ${_versionedNamespacePrefix})
+        endif()
+        add_library("${_target_namespacePrefix}::${_baseName}" ALIAS ${_targetName})
+        set(_export_name_args EXPORT_NAME ${_baseName})
     endif()
 
     set(_exportHeaderFileName ${_lc_fullInternalName}_export.hpp)
@@ -286,8 +298,10 @@ function(okteta_add_library _baseName)
     )
     set_property(TARGET ${_targetName} PROPERTY OKTETA_FULLNAME ${_fullName})
     set_property(TARGET ${_targetName} PROPERTY OKTETA_FULLVERSIONEDNAME ${_fullVersionedName})
-    set_property(TARGET ${_targetName} PROPERTY OKTETA_NAMESPACEPREFIX ${_namespacePrefix})
     set_property(TARGET ${_targetName} PROPERTY OKTETA_NO_TARGETNAMESPACE ${OKTETA_ADD_LIBRARY_NO_TARGET_NAMESPACE})
+    if (OKTETA_ADD_LIBRARY_NO_TARGET_NAMESPACE)
+        set_property(TARGET ${_targetName} PROPERTY OKTETA_TARGET_NAMESPACEPREFIX ${_target_namespacePrefix})
+    endif()
     set_property(TARGET ${_targetName} PROPERTY OKTETA_USE_VERSIONED_PACKAGE_NAME ${_use_versioned_package_name})
 
     install( TARGETS ${_targetName}
@@ -416,7 +430,7 @@ function(okteta_add_cmakeconfig _baseName)
     )
     get_property(_no_target_namespace TARGET ${_targetName} PROPERTY OKTETA_NO_TARGETNAMESPACE)
     if(NOT _no_target_namespace)
-        get_property(_namespacePrefix TARGET ${_targetName} PROPERTY OKTETA_NAMESPACEPREFIX)
+        get_property(_namespacePrefix TARGET ${_targetName} PROPERTY OKTETA_TARGET_NAMESPACEPREFIX)
         set(_namespace_args NAMESPACE "${_namespacePrefix}::")
     endif()
     install(EXPORT ${_targets_export_name}
