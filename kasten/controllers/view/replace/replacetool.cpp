@@ -175,12 +175,28 @@ void ReplaceTool::replace(FindDirection direction, bool fromCursor, bool inSelec
             emit finished(false, 0);
             return;
         }
+        if (mSearchData.size() > selection.width()) {
+            mReplaceJob = nullptr;
+            // searched data does not even fit, so skip any search and finish now
+            // TODO: catch in dialog already
+            emit finished(false, 0);
+            return;
+        }
 
         replaceRangeStartIndex = selection.start();
         replaceRangeEndIndex =  selection.end();
         // TODO: support finding following selection direction
         direction = FindForward;
     } else {
+        if (mSearchData.size() > mByteArrayModel->size()) {
+            mReplaceJob = nullptr;
+            // searched data does not even fit, so skip any search and finish now
+            // also handles case of empty bytearray
+            // TODO: catch in dialog already
+            emit finished(false, 0);
+            return;
+        }
+
         const Okteta::Address cursorPosition = mByteArrayView->cursorPosition();
         if (fromCursor && (cursorPosition != 0)) {
             replaceRangeStartIndex = cursorPosition;

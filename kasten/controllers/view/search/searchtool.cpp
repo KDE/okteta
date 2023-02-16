@@ -152,10 +152,24 @@ void SearchTool::search(FindDirection direction, bool fromCursor, bool inSelecti
             emit dataNotFound();
             return;
         }
+        if (mSearchData.size() > selection.width()) {
+            // searched data does not even fit, so skip any search and finish now
+            // TODO: catch in dialog already
+            emit dataNotFound();
+            return;
+        }
 
         mSearchFirstIndex = selection.start();
         mSearchLastIndex =  selection.end();
     } else {
+        if (mSearchData.size() > mByteArrayModel->size()) {
+            // searched data does not even fit, so skip any search and finish now
+            // also handles case of empty bytearray
+            // TODO: catch in dialog already
+            emit dataNotFound();
+            return;
+        }
+
         const Okteta::Address cursorPosition = mByteArrayView->cursorPosition();
         if (fromCursor && (cursorPosition != 0)) {
             mSearchFirstIndex = cursorPosition;
