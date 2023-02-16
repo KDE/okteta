@@ -189,6 +189,7 @@ function(okteta_add_library _baseName)
         REVERSE_NAMESPACE_LIB
         REVERSE_NAMESPACE_INCLUDEDIR
         LOWERCASE_LIB
+        NAMELINK_SKIP
     )
     set(oneValueArgs
         INTERNAL_BASENAME
@@ -304,9 +305,14 @@ function(okteta_add_library _baseName)
     endif()
     set_property(TARGET ${_targetName} PROPERTY OKTETA_USE_VERSIONED_PACKAGE_NAME ${_use_versioned_package_name})
 
+    set(_other_install_targets_args)
+    if(OKTETA_ADD_LIBRARY_NAMELINK_SKIP)
+        list(APPEND _other_install_targets_args LIBRARY NAMELINK_SKIP)
+    endif()
     install( TARGETS ${_targetName}
         EXPORT ${_targets_export_name}
         ${KDE_INSTALL_TARGETS_DEFAULT_ARGS}
+        ${_other_install_targets_args}
     )
 
     # TODO: perhaps only do on first PUBLIC usage in okteta_add_sublibrary?
