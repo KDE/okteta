@@ -43,7 +43,7 @@ public: // AbstractTool API
 
 public: // status
     QByteArray searchData() const;
-//     Qt::CaseSensitivity caseSensitivity() const;
+    Qt::CaseSensitivity caseSensitivity() const;
     bool hasSelectedData() const;
     QString charCodingName() const;
 
@@ -86,7 +86,7 @@ private: // target
 };
 
 inline QByteArray SearchTool::searchData() const { return mSearchData; }
-// inline Qt::CaseSensitivity SearchTool::caseSensitivity()       const { return mCaseSensitivity; }
+inline Qt::CaseSensitivity SearchTool::caseSensitivity()  const { return mCaseSensitivity; }
 
 }
 

@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    SPDX-FileCopyrightText: 2006-2007, 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    SPDX-FileCopyrightText: 2006-2007, 2009, 2023 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
@@ -38,6 +38,10 @@ protected: // AbstractFindDialog API
 
 protected: // QWidget API
     void showEvent(QShowEvent* showEvent) override;
+
+private:
+    void setReplaceDataCoding(Okteta::ByteArrayComboBox::Coding replaceDataCoding);
+    Okteta::ByteArrayComboBox::Coding replaceDataCoding() const;
 
 private:
     Okteta::ByteArrayComboBox* ReplaceDataEdit;

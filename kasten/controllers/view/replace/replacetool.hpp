@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    SPDX-FileCopyrightText: 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    SPDX-FileCopyrightText: 2009, 2023 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
@@ -43,7 +43,8 @@ public: // AbstractTool API
 public: // status
     QByteArray searchData() const;
     QByteArray replaceData() const;
-//     Qt::CaseSensitivity caseSensitivity() const;
+    Qt::CaseSensitivity caseSensitivity() const;
+    bool isDoPrompt() const;
     bool hasSelectedData() const;
     QString charCodingName() const;
 
@@ -76,7 +77,7 @@ private Q_SLOTS:
 private: // settings
     QByteArray mSearchData;
     QByteArray mReplaceData;
-    Qt::CaseSensitivity mCaseSensitivity = Qt::CaseSensitive;
+    Qt::CaseSensitivity mCaseSensitivity;
     bool mDoPrompt : 1;
 
 private: // status
@@ -93,7 +94,8 @@ private: // target
 
 inline QByteArray ReplaceTool::searchData() const { return mSearchData; }
 inline QByteArray ReplaceTool::replaceData() const { return mReplaceData; }
-// inline Qt::CaseSensitivity ReplaceTool::caseSensitivity() const { return mCaseSensitivity; }
+inline Qt::CaseSensitivity ReplaceTool::caseSensitivity() const { return mCaseSensitivity; }
+inline bool ReplaceTool::isDoPrompt() const { return mDoPrompt; }
 
 }
 
