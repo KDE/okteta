@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-16 02:46+0000\n"
+"POT-Creation-Date: 2023-02-17 02:42+0000\n"
 "PO-Revision-Date: 2016-11-15 21:29+0800\n"
 "Last-Translator: Jeff Huang <s8321414@gmail.com>\n"
 "Language-Team: Chinese <kde-i18n-doc@kde.org>\n"
@@ -581,7 +581,7 @@ msgid "Enter an offset to go to, or select a previous offset from the list."
 msgstr "輸入您要跳到哪個地方，或是從先前的清單中選取。"
 
 #: controllers/view/gotooffset/gotooffsetview.cpp:64
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:114
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:112
 #, kde-format
 msgctxt "@option:check"
 msgid "From c&ursor"
@@ -607,7 +607,7 @@ msgid "Extend the selection by the cursor move."
 msgstr "用滑鼠移動來延伸選擇。"
 
 #: controllers/view/gotooffset/gotooffsetview.cpp:74
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:117
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:115
 #: controllers/view/selectrange/selectrangeview.cpp:87
 #, kde-format
 msgctxt "@option:check"
@@ -1006,7 +1006,7 @@ msgctxt "name of the filter; it does a logic XOR operation"
 msgid "operand XOR data"
 msgstr "XOR"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:74
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:72
 #: controllers/view/search/searchcontroller.cpp:107
 #: controllers/view/search/searchcontroller.cpp:113
 #, kde-format
@@ -1014,7 +1014,7 @@ msgctxt "@title:window"
 msgid "Find"
 msgstr "尋找"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:86
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:84
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1022,19 +1022,19 @@ msgid ""
 "the list."
 msgstr "輸入要搜尋的位元，或從先前的清單中選取。"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:104
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:102
 #, kde-format
 msgctxt "@title:group"
 msgid "Options"
 msgstr "選項"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:109
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:107
 #, kde-format
 msgctxt "@option:check"
 msgid "C&ase sensitive"
 msgstr "區分大小寫(&A)"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:110
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:108
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1042,37 +1042,37 @@ msgid ""
 "'joe' or 'JOE', only 'Joe'."
 msgstr "搜尋時區分大小寫。"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:112
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:110
 #, kde-format
 msgctxt "@option:check"
 msgid "&Whole words only"
 msgstr "只比對整個單字(&W)"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:113
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:111
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Require word boundaries in both ends of a match to succeed."
 msgstr "需要完全符合整個單字。"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:115
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:113
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Start searching at the current cursor location rather than at the top."
 msgstr "從目前的游標位置開始搜尋。"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:118
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:116
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Replace backwards."
 msgstr "向前取代。"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:119
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:117
 #, kde-format
 msgctxt "@option:check"
 msgid "&Selected bytes"
 msgstr "已選取位元組(&S)"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:120
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:118
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Only search within the current selection."
@@ -1352,25 +1352,25 @@ msgctxt "@info"
 msgid "Beginning of byte array reached.<nl/>Continue from the end?"
 msgstr "到達位元陣列的開端。<nl/>要從尾端繼續嗎？"
 
-#: controllers/view/replace/replacedialog.cpp:29
+#: controllers/view/replace/replacedialog.cpp:111
 #, kde-format
 msgctxt "@title:window"
 msgid "Replace Bytes"
 msgstr "取代位元組"
 
-#: controllers/view/replace/replacedialog.cpp:31
+#: controllers/view/replace/replacedialog.cpp:113
 #, kde-format
 msgctxt "@action;button"
 msgid "&Replace"
 msgstr "取代(&R)"
 
-#: controllers/view/replace/replacedialog.cpp:33
+#: controllers/view/replace/replacedialog.cpp:115
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Start replace"
 msgstr "開始取代"
 
-#: controllers/view/replace/replacedialog.cpp:35
+#: controllers/view/replace/replacedialog.cpp:117
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1381,13 +1381,13 @@ msgstr ""
 "如果您按下<interface>取代</interface>鍵，會在位元陣列中搜尋您上面輸入的位元"
 "組，並取代為您指定的位元組。"
 
-#: controllers/view/replace/replacedialog.cpp:43
+#: controllers/view/replace/replacedialog.cpp:125
 #, kde-format
 msgctxt "@title:group"
 msgid "Replace With"
 msgstr "取代為"
 
-#: controllers/view/replace/replacedialog.cpp:50
+#: controllers/view/replace/replacedialog.cpp:132
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1395,13 +1395,13 @@ msgid ""
 "from the list."
 msgstr "輸入要取代的位元，或是從清單中選取先前取代的位元。"
 
-#: controllers/view/replace/replacedialog.cpp:59
+#: controllers/view/replace/replacedialog.cpp:141
 #, kde-format
 msgctxt "@option:check"
 msgid "&Prompt on replace"
 msgstr "提示取代(&P)"
 
-#: controllers/view/replace/replacedialog.cpp:60
+#: controllers/view/replace/replacedialog.cpp:142
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Ask before replacing each match found."
@@ -1431,7 +1431,7 @@ msgctxt "@action:button"
 msgid "Replace"
 msgstr "取代"
 
-#: controllers/view/replace/replacetool.cpp:40
+#: controllers/view/replace/replacetool.cpp:75
 #, kde-format
 msgctxt "@title"
 msgid "Replace"
@@ -1443,25 +1443,25 @@ msgctxt "@info"
 msgid "Search key not found in byte array."
 msgstr "在位元陣列中找不到此鍵值。"
 
-#: controllers/view/search/searchdialog.cpp:22
+#: controllers/view/search/searchdialog.cpp:102
 #, kde-format
 msgctxt "@title:window"
 msgid "Find Bytes"
 msgstr "尋找位元組"
 
-#: controllers/view/search/searchdialog.cpp:24
+#: controllers/view/search/searchdialog.cpp:104
 #, kde-format
 msgctxt "@action:button"
 msgid "&Find"
 msgstr "尋找(&F)"
 
-#: controllers/view/search/searchdialog.cpp:26
+#: controllers/view/search/searchdialog.cpp:106
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Start searching"
 msgstr "開始搜尋"
 
-#: controllers/view/search/searchdialog.cpp:28
+#: controllers/view/search/searchdialog.cpp:108
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1469,7 +1469,7 @@ msgid ""
 "above are searched for within the byte array."
 msgstr "如果您按下<interface>尋找</interface>按鍵，則會開始尋找。"
 
-#: controllers/view/search/searchtool.cpp:44
+#: controllers/view/search/searchtool.cpp:76
 #, kde-format
 msgctxt "@title"
 msgid "Search"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-16 02:46+0000\n"
+"POT-Creation-Date: 2023-02-17 02:42+0000\n"
 "PO-Revision-Date: 2021-06-05 15:01+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -580,7 +580,7 @@ msgid "Enter an offset to go to, or select a previous offset from the list."
 msgstr "이동할 위치를 입력하거나, 목록에서 선택하십시오."
 
 #: controllers/view/gotooffset/gotooffsetview.cpp:64
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:114
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:112
 #, kde-format
 msgctxt "@option:check"
 msgid "From c&ursor"
@@ -606,7 +606,7 @@ msgid "Extend the selection by the cursor move."
 msgstr "커서가 웅직이는 대로 선택 영역을 확장합니다."
 
 #: controllers/view/gotooffset/gotooffsetview.cpp:74
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:117
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:115
 #: controllers/view/selectrange/selectrangeview.cpp:87
 #, kde-format
 msgctxt "@option:check"
@@ -1007,7 +1007,7 @@ msgctxt "name of the filter; it does a logic XOR operation"
 msgid "operand XOR data"
 msgstr "XOR 연산 적용"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:74
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:72
 #: controllers/view/search/searchcontroller.cpp:107
 #: controllers/view/search/searchcontroller.cpp:113
 #, kde-format
@@ -1015,7 +1015,7 @@ msgctxt "@title:window"
 msgid "Find"
 msgstr "찾기"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:86
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:84
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1024,19 +1024,19 @@ msgid ""
 msgstr ""
 "검색할 패턴을 입력하거나 목록에서 전에 사용했던 패턴 중에서 선택하십시오."
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:104
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:102
 #, kde-format
 msgctxt "@title:group"
 msgid "Options"
 msgstr "옵션"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:109
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:107
 #, kde-format
 msgctxt "@option:check"
 msgid "C&ase sensitive"
 msgstr "대소문자 구분(&A)"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:110
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:108
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1046,37 +1046,37 @@ msgstr ""
 "대소문자를 구분하여 검색합니다. 패턴 'Joe'를 입력하면 'joe', 'JOE'는 검색하"
 "지 않으며 'Joe'만 검색합니다."
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:112
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:110
 #, kde-format
 msgctxt "@option:check"
 msgid "&Whole words only"
 msgstr "단어 단위로(&W)"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:113
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:111
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Require word boundaries in both ends of a match to succeed."
 msgstr "단어 단위로 분리되어 있을 때만 검색합니다."
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:115
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:113
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Start searching at the current cursor location rather than at the top."
 msgstr "맨 위 대신 현재 커서 위치에서부터 검색을 시작합니다."
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:118
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:116
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Replace backwards."
 msgstr "역순으로 바꿉니다."
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:119
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:117
 #, kde-format
 msgctxt "@option:check"
 msgid "&Selected bytes"
 msgstr "선택한 바이트만(&S)"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:120
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:118
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Only search within the current selection."
@@ -1360,25 +1360,25 @@ msgid "Beginning of byte array reached.<nl/>Continue from the end?"
 msgstr ""
 "바이트 배열의 시작에 도달했습니다.<nl/>끝에서부터 다시 시작하시겠습니까?"
 
-#: controllers/view/replace/replacedialog.cpp:29
+#: controllers/view/replace/replacedialog.cpp:111
 #, kde-format
 msgctxt "@title:window"
 msgid "Replace Bytes"
 msgstr "바이트 바꾸기"
 
-#: controllers/view/replace/replacedialog.cpp:31
+#: controllers/view/replace/replacedialog.cpp:113
 #, kde-format
 msgctxt "@action;button"
 msgid "&Replace"
 msgstr "바꾸기(&R)"
 
-#: controllers/view/replace/replacedialog.cpp:33
+#: controllers/view/replace/replacedialog.cpp:115
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Start replace"
 msgstr "바꾸기 시작"
 
-#: controllers/view/replace/replacedialog.cpp:35
+#: controllers/view/replace/replacedialog.cpp:117
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1389,13 +1389,13 @@ msgstr ""
 "<interface>바꾸기</interface> 단추를 누르면 바이트 배열에서 입력한 바이트를 "
 "찾은 다음, 바꿀 바이트로 바꿉니다."
 
-#: controllers/view/replace/replacedialog.cpp:43
+#: controllers/view/replace/replacedialog.cpp:125
 #, kde-format
 msgctxt "@title:group"
 msgid "Replace With"
 msgstr "바꿀 문자열"
 
-#: controllers/view/replace/replacedialog.cpp:50
+#: controllers/view/replace/replacedialog.cpp:132
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1403,13 +1403,13 @@ msgid ""
 "from the list."
 msgstr "바꿀 패턴을 입력하거나, 예전에 사용했던 패턴을 목록에서 선택하십시오."
 
-#: controllers/view/replace/replacedialog.cpp:59
+#: controllers/view/replace/replacedialog.cpp:141
 #, kde-format
 msgctxt "@option:check"
 msgid "&Prompt on replace"
 msgstr "바꿀 때 물어보기(&P)"
 
-#: controllers/view/replace/replacedialog.cpp:60
+#: controllers/view/replace/replacedialog.cpp:142
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Ask before replacing each match found."
@@ -1439,7 +1439,7 @@ msgctxt "@action:button"
 msgid "Replace"
 msgstr "바꾸기"
 
-#: controllers/view/replace/replacetool.cpp:40
+#: controllers/view/replace/replacetool.cpp:75
 #, kde-format
 msgctxt "@title"
 msgid "Replace"
@@ -1451,25 +1451,25 @@ msgctxt "@info"
 msgid "Search key not found in byte array."
 msgstr "바이트 배열에서 검색 키를 찾을 수 없습니다."
 
-#: controllers/view/search/searchdialog.cpp:22
+#: controllers/view/search/searchdialog.cpp:102
 #, kde-format
 msgctxt "@title:window"
 msgid "Find Bytes"
 msgstr "바이트 찾기"
 
-#: controllers/view/search/searchdialog.cpp:24
+#: controllers/view/search/searchdialog.cpp:104
 #, kde-format
 msgctxt "@action:button"
 msgid "&Find"
 msgstr "찾기(&F)"
 
-#: controllers/view/search/searchdialog.cpp:26
+#: controllers/view/search/searchdialog.cpp:106
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Start searching"
 msgstr "검색 시작하기"
 
-#: controllers/view/search/searchdialog.cpp:28
+#: controllers/view/search/searchdialog.cpp:108
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1479,7 +1479,7 @@ msgstr ""
 "<interface>찾기</interface> 단추를 누르면 바이트 배열에서 지정한 바이트를 찾"
 "습니다."
 
-#: controllers/view/search/searchtool.cpp:44
+#: controllers/view/search/searchtool.cpp:76
 #, kde-format
 msgctxt "@title"
 msgid "Search"
