@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-20 01:01+0000\n"
+"POT-Creation-Date: 2023-02-17 01:02+0000\n"
 "PO-Revision-Date: 2010-01-09 18:03+0200\n"
 "Last-Translator: Viesturs Zarins <viesturs.zarins@mii.lu.lv>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -620,7 +620,7 @@ msgstr ""
 "lietoto saraksta."
 
 #: controllers/view/gotooffset/gotooffsetview.cpp:64
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:114
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:112
 #, kde-format
 msgctxt "@option:check"
 msgid "From c&ursor"
@@ -647,7 +647,7 @@ msgid "Extend the selection by the cursor move."
 msgstr "Paplašināt izvēli, kustinot kursoru."
 
 #: controllers/view/gotooffset/gotooffsetview.cpp:74
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:117
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:115
 #: controllers/view/selectrange/selectrangeview.cpp:87
 #, kde-format
 msgctxt "@option:check"
@@ -1059,7 +1059,7 @@ msgctxt "name of the filter; it does a logic XOR operation"
 msgid "operand XOR data"
 msgstr "veikt XOR ar datiem"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:74
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:72
 #: controllers/view/search/searchcontroller.cpp:106
 #: controllers/view/search/searchcontroller.cpp:112
 #, kde-format
@@ -1067,7 +1067,7 @@ msgctxt "@title:window"
 msgid "Find"
 msgstr "Meklēt"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:86
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:84
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1077,19 +1077,19 @@ msgstr ""
 "Ievadiet meklējamos baitus, vai izvēlieties no saraksta agrāk lietotu "
 "paraugu."
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:104
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:102
 #, kde-format
 msgctxt "@title:group"
 msgid "Options"
 msgstr "Opcijas"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:109
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:107
 #, kde-format
 msgctxt "@option:check"
 msgid "C&ase sensitive"
 msgstr "Reģi&strjutīgs"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:110
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:108
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1099,37 +1099,37 @@ msgstr ""
 "Meklēt, ņemot vērtā lielo un mazo burtu atšķirības. Meklējot 'Joe', netiks "
 "atrasti 'joe' vai 'JOE'."
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:112
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:110
 #, kde-format
 msgctxt "@option:check"
 msgid "&Whole words only"
 msgstr "Tikai &pilnus vārdus"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:113
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:111
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Require word boundaries in both ends of a match to succeed."
 msgstr "Atbilstībai abos parauga galos jāsatur vārda beigas."
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:115
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:113
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Start searching at the current cursor location rather than at the top."
 msgstr "Meklēt no kursora pozīcijas nevis no sākuma."
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:118
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:116
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Replace backwards."
 msgstr "Aizvietot atpakaļgaitā"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:119
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:117
 #, kde-format
 msgctxt "@option:check"
 msgid "&Selected bytes"
 msgstr "&Izvēlētos baitus"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:120
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:118
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Only search within the current selection."
@@ -1416,25 +1416,25 @@ msgctxt "@info"
 msgid "Beginning of byte array reached.<nl/>Continue from the end?"
 msgstr "Sasniegts baitu masīva sākums.<nl/>Turpināt no beigām?"
 
-#: controllers/view/replace/replacedialog.cpp:29
+#: controllers/view/replace/replacedialog.cpp:111
 #, kde-format
 msgctxt "@title:window"
 msgid "Replace Bytes"
 msgstr "Aizvietot baitus"
 
-#: controllers/view/replace/replacedialog.cpp:31
+#: controllers/view/replace/replacedialog.cpp:113
 #, kde-format
 msgctxt "@action;button"
 msgid "&Replace"
 msgstr "&Aizvietot"
 
-#: controllers/view/replace/replacedialog.cpp:33
+#: controllers/view/replace/replacedialog.cpp:115
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Start replace"
 msgstr "Sākt aizvietošanu"
 
-#: controllers/view/replace/replacedialog.cpp:35
+#: controllers/view/replace/replacedialog.cpp:117
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1445,13 +1445,13 @@ msgstr ""
 "Nospiežot pogu <b>Aizvietot</b>, tiks veikta ievadīo baitu  meklēšana un "
 "visi atrastie eksemplāri tiks aizvietoti ar aizvietošanas baitiem."
 
-#: controllers/view/replace/replacedialog.cpp:43
+#: controllers/view/replace/replacedialog.cpp:125
 #, kde-format
 msgctxt "@title:group"
 msgid "Replace With"
 msgstr "Aizvietot ar"
 
-#: controllers/view/replace/replacedialog.cpp:50
+#: controllers/view/replace/replacedialog.cpp:132
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1461,13 +1461,13 @@ msgstr ""
 "Ievadiet baitus ar kuriem aizvietot vai arī izvēlieties iepriekš lietotus no "
 "saraksta."
 
-#: controllers/view/replace/replacedialog.cpp:59
+#: controllers/view/replace/replacedialog.cpp:141
 #, kde-format
 msgctxt "@option:check"
 msgid "&Prompt on replace"
 msgstr "&Pārprasīt pie aizvietošanas"
 
-#: controllers/view/replace/replacedialog.cpp:60
+#: controllers/view/replace/replacedialog.cpp:142
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Ask before replacing each match found."
@@ -1497,7 +1497,7 @@ msgctxt "@action:button"
 msgid "Replace"
 msgstr "Aizvietot"
 
-#: controllers/view/replace/replacetool.cpp:40
+#: controllers/view/replace/replacetool.cpp:75
 #, kde-format
 msgctxt "@title"
 msgid "Replace"
@@ -1509,25 +1509,25 @@ msgctxt "@info"
 msgid "Search key not found in byte array."
 msgstr "Meklētais netika atrasts baitu masīvā."
 
-#: controllers/view/search/searchdialog.cpp:22
+#: controllers/view/search/searchdialog.cpp:102
 #, kde-format
 msgctxt "@title:window"
 msgid "Find Bytes"
 msgstr "Meklēt baitus"
 
-#: controllers/view/search/searchdialog.cpp:24
+#: controllers/view/search/searchdialog.cpp:104
 #, kde-format
 msgctxt "@action:button"
 msgid "&Find"
 msgstr "&Meklēt"
 
-#: controllers/view/search/searchdialog.cpp:26
+#: controllers/view/search/searchdialog.cpp:106
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Start searching"
 msgstr "Sākt meklēšanu"
 
-#: controllers/view/search/searchdialog.cpp:28
+#: controllers/view/search/searchdialog.cpp:108
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1536,7 +1536,7 @@ msgid ""
 msgstr ""
 "Nospiežot pogu <b>Meklēt</b>, baitu masībā tiks meklēti ievadītie baiti."
 
-#: controllers/view/search/searchtool.cpp:44
+#: controllers/view/search/searchtool.cpp:76
 #, kde-format
 msgctxt "@title"
 msgid "Search"
