@@ -26,6 +26,7 @@ public:
 
 protected: // AbstractFindDialog API
     void onFindButtonClicked() override;
+    void rememberCurrentSettings() override;
 
 protected: // QWidget API
     void showEvent(QShowEvent* showEvent) override;

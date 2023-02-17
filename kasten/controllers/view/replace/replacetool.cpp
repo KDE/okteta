@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    SPDX-FileCopyrightText: 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    SPDX-FileCopyrightText: 2009, 2023 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
@@ -17,13 +17,48 @@
 // Okteta core
 #include <Okteta/AbstractByteArrayModel>
 // KF
+#include <KConfigGroup>
+#include <KSharedConfig>
 #include <KLocalizedString>
+
+// TODO: move to helper interface lib?
+template <>
+inline Qt::CaseSensitivity KConfigGroup::readEntry(const char *key, const Qt::CaseSensitivity &defaultValue) const
+{
+    const QString entry = readEntry(key, QString());
+    const Qt::CaseSensitivity caseSensitivity =
+        (entry == QLatin1String("Sensitive")) ?   Qt::CaseSensitive :
+        (entry == QLatin1String("Insensitive")) ? Qt::CaseInsensitive :
+        /* else */                                defaultValue;
+    return caseSensitivity;
+}
+
+template <>
+inline void KConfigGroup::writeEntry(const char *key, const Qt::CaseSensitivity &value,
+                                     KConfigBase::WriteConfigFlags flags)
+{
+    const QString valueString =
+        (value == Qt::CaseSensitive) ? QLatin1String("Sensitive") : QLatin1String("Insensitive");
+    writeEntry(key, valueString, flags);
+}
+
+static constexpr Qt::CaseSensitivity DefaultCaseSensitivity = Qt::CaseInsensitive;
+static constexpr bool DefaultDoPrompt = false;
+
+static constexpr char ReplaceConfigGroupId[] = "ReplaceTool";
+
+static constexpr char CaseSensitivityConfigKey[] = "CaseSensitivity";
+static constexpr char PromptConfigKey[] = "Prompt";
 
 namespace Kasten {
 
 ReplaceTool::ReplaceTool()
 {
     setObjectName(QStringLiteral("Replace"));
+
+    const KConfigGroup configGroup(KSharedConfig::openConfig(), ReplaceConfigGroupId);
+    mCaseSensitivity = configGroup.readEntry(CaseSensitivityConfigKey, DefaultCaseSensitivity);
+    mDoPrompt = configGroup.readEntry(PromptConfigKey, DefaultDoPrompt);
 }
 
 ReplaceTool::~ReplaceTool() = default;
@@ -99,9 +134,16 @@ void ReplaceTool::setReplaceData(const QByteArray& replaceData)
 
 void ReplaceTool::setCaseSensitivity(Qt::CaseSensitivity caseSensitivity)
 {
+    if (mCaseSensitivity == caseSensitivity) {
+        return;
+    }
+
 //     const bool oldIsApplyable = isApplyable();
 
     mCaseSensitivity = caseSensitivity;
+
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ReplaceConfigGroupId);
+    configGroup.writeEntry(CaseSensitivityConfigKey, mCaseSensitivity);
 
 //     const bool newIsApplyable = isApplyable();
 //     if( oldIsApplyable != newIsApplyable )
@@ -110,7 +152,14 @@ void ReplaceTool::setCaseSensitivity(Qt::CaseSensitivity caseSensitivity)
 
 void ReplaceTool::setDoPrompt(bool doPrompt)
 {
+    if (mDoPrompt == doPrompt) {
+        return;
+    }
+
     mDoPrompt = doPrompt;
+
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ReplaceConfigGroupId);
+    configGroup.writeEntry(PromptConfigKey, mDoPrompt);
 }
 
 void ReplaceTool::replace(FindDirection direction, bool fromCursor, bool inSelection)
@@ -126,12 +175,28 @@ void ReplaceTool::replace(FindDirection direction, bool fromCursor, bool inSelec
             Q_EMIT finished(false, 0);
             return;
         }
+        if (mSearchData.size() > selection.width()) {
+            mReplaceJob = nullptr;
+            // searched data does not even fit, so skip any search and finish now
+            // TODO: catch in dialog already
+            Q_EMIT finished(false, 0);
+            return;
+        }
 
         replaceRangeStartIndex = selection.start();
         replaceRangeEndIndex =  selection.end();
         // TODO: support finding following selection direction
         direction = FindForward;
     } else {
+        if (mSearchData.size() > mByteArrayModel->size()) {
+            mReplaceJob = nullptr;
+            // searched data does not even fit, so skip any search and finish now
+            // also handles case of empty bytearray
+            // TODO: catch in dialog already
+            Q_EMIT finished(false, 0);
+            return;
+        }
+
         const Okteta::Address cursorPosition = mByteArrayView->cursorPosition();
         if (fromCursor && (cursorPosition != 0)) {
             replaceRangeStartIndex = cursorPosition;

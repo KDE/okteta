@@ -1,15 +1,13 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    SPDX-FileCopyrightText: 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    SPDX-FileCopyrightText: 2006-2007, 2023 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
 #include "abstractfinddialog.hpp"
 
-// Okteta Kasten gui
-#include <Kasten/Okteta/ByteArrayComboBox>
 // Okteta core
 #include <Okteta/OktetaCore>
 // KF
@@ -141,6 +139,11 @@ void AbstractFindDialog::setupCheckBoxes(QCheckBox* optionCheckBox)
     onSearchDataFormatChanged(SearchDataEdit->format());
 }
 
+Okteta::ByteArrayComboBox::Coding AbstractFindDialog::searchDataCoding() const
+{
+    return static_cast<Okteta::ByteArrayComboBox::Coding>(SearchDataEdit->format());
+}
+
 bool AbstractFindDialog::fromCursor()            const { return AtCursorCheckBox->isChecked(); }
 bool AbstractFindDialog::inSelection()           const { return SelectedCheckBox->isChecked(); }
 FindDirection AbstractFindDialog::direction() const
@@ -153,9 +156,14 @@ Qt::CaseSensitivity AbstractFindDialog::caseSensitivity() const
            && !CaseSensitiveCheckBox->isChecked() ? Qt::CaseInsensitive : Qt::CaseSensitive;
 }
 
-QByteArray AbstractFindDialog::data()  const
+QByteArray AbstractFindDialog::searchData()  const
 {
     return SearchDataEdit->byteArray();
+}
+
+void AbstractFindDialog::setSearchDataCoding(Okteta::ByteArrayComboBox::Coding coding)
+{
+    SearchDataEdit->setFormat(coding);
 }
 
 void AbstractFindDialog::setDirection(FindDirection Direction)
@@ -174,6 +182,16 @@ void AbstractFindDialog::setInSelectionEnabled(bool inSelectionEnabled)
         SelectedCheckBox->setChecked(false);
     }
     SelectedCheckBox->setEnabled(inSelectionEnabled);
+}
+
+void AbstractFindDialog::setCaseSensitivity(Qt::CaseSensitivity caseSensitivity)
+{
+    CaseSensitiveCheckBox->setChecked(caseSensitivity == Qt::CaseSensitive);
+}
+
+void AbstractFindDialog::setFromCursor(bool fromCursor)
+{
+    AtCursorCheckBox->setChecked(fromCursor);
 }
 
 void AbstractFindDialog::setCharCodec(const QString& codecName)

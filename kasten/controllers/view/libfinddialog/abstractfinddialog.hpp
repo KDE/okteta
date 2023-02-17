@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    SPDX-FileCopyrightText: 2006-2007, 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    SPDX-FileCopyrightText: 2006-2007, 2009, 2023 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
@@ -11,14 +11,12 @@
 
 // lib
 #include "finddirection.hpp"
+// Okteta Kasten gui
+#include <Kasten/Okteta/ByteArrayComboBox>
 // Qt
 #include <QDialog>
 #include <QByteArray>
 #include <QString>
-
-namespace Okteta {
-class ByteArrayComboBox;
-}
 
 class QGroupBox;
 class QCheckBox;
@@ -36,12 +34,16 @@ public:
     ~AbstractFindDialog() override;
 
 public: // set
+    void setSearchDataCoding(Okteta::ByteArrayComboBox::Coding codecId);
     void setDirection(FindDirection Direction);
     void setInSelection(bool InSelection);
     void setInSelectionEnabled(bool inSelectionEnabled);
+    void setCaseSensitivity(Qt::CaseSensitivity caseSensitivity);
+    void setFromCursor(bool fromCursor);
 
 public: // get
-    QByteArray data() const;
+    QByteArray searchData() const;
+    Okteta::ByteArrayComboBox::Coding searchDataCoding() const;
     bool fromCursor() const;
     bool inSelection() const;
     Qt::CaseSensitivity caseSensitivity() const;

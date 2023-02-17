@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    SPDX-FileCopyrightText: 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    SPDX-FileCopyrightText: 2009, 2023 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
@@ -19,15 +19,47 @@
 #include <Okteta/CharCodec>
 #include <Okteta/AbstractByteArrayModel>
 // KF
+#include <KConfigGroup>
+#include <KSharedConfig>
 #include <KLocalizedString>
 // Qt
 #include <QApplication>
+
+// TODO: move to helper interface lib?
+template <>
+inline Qt::CaseSensitivity KConfigGroup::readEntry(const char *key, const Qt::CaseSensitivity &defaultValue) const
+{
+    const QString entry = readEntry(key, QString());
+    const Qt::CaseSensitivity caseSensitivity =
+        (entry == QLatin1String("Sensitive")) ?   Qt::CaseSensitive :
+        (entry == QLatin1String("Insensitive")) ? Qt::CaseInsensitive :
+        /* else */                                defaultValue;
+    return caseSensitivity;
+}
+
+template <>
+inline void KConfigGroup::writeEntry(const char *key, const Qt::CaseSensitivity &value,
+                                     KConfigBase::WriteConfigFlags flags)
+{
+    const QString valueString =
+        (value == Qt::CaseSensitive) ? QLatin1String("Sensitive") : QLatin1String("Insensitive");
+    writeEntry(key, valueString, flags);
+}
+
+static constexpr Qt::CaseSensitivity DefaultCaseSensitivity = Qt::CaseInsensitive;
+
+static constexpr char SearchConfigGroupId[] = "SearchTool";
+
+static constexpr char CaseSensitivityConfigKey[] = "CaseSensitivity";
 
 namespace Kasten {
 
 SearchTool::SearchTool()
 {
     setObjectName(QStringLiteral("Search"));
+
+    const KConfigGroup configGroup(KSharedConfig::openConfig(), SearchConfigGroupId);
+    mCaseSensitivity = configGroup.readEntry(CaseSensitivityConfigKey, DefaultCaseSensitivity);
 }
 
 SearchTool::~SearchTool() = default;
@@ -93,9 +125,16 @@ void SearchTool::setSearchData(const QByteArray& searchData)
 
 void SearchTool::setCaseSensitivity(Qt::CaseSensitivity caseSensitivity)
 {
+    if (mCaseSensitivity == caseSensitivity) {
+        return;
+    }
+
 //     const bool oldIsApplyable = isApplyable();
 
     mCaseSensitivity = caseSensitivity;
+
+    KConfigGroup configGroup(KSharedConfig::openConfig(), SearchConfigGroupId);
+    configGroup.writeEntry(CaseSensitivityConfigKey, mCaseSensitivity);
 
 //     const bool newIsApplyable = isApplyable();
 //     if( oldIsApplyable != newIsApplyable )
@@ -113,10 +152,24 @@ void SearchTool::search(FindDirection direction, bool fromCursor, bool inSelecti
             Q_EMIT dataNotFound();
             return;
         }
+        if (mSearchData.size() > selection.width()) {
+            // searched data does not even fit, so skip any search and finish now
+            // TODO: catch in dialog already
+            Q_EMIT dataNotFound();
+            return;
+        }
 
         mSearchFirstIndex = selection.start();
         mSearchLastIndex =  selection.end();
     } else {
+        if (mSearchData.size() > mByteArrayModel->size()) {
+            // searched data does not even fit, so skip any search and finish now
+            // also handles case of empty bytearray
+            // TODO: catch in dialog already
+            Q_EMIT dataNotFound();
+            return;
+        }
+
         const Okteta::Address cursorPosition = mByteArrayView->cursorPosition();
         if (fromCursor && (cursorPosition != 0)) {
             mSearchFirstIndex = cursorPosition;
