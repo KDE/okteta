@@ -68,7 +68,12 @@ void SearchController::setTargetModel(AbstractModel* model)
 
 void SearchController::find()
 {
-    showDialog(FindForward);
+    // ensure dialog
+    if (!mSearchDialog) {
+        mSearchDialog = new SearchDialog(mTool, mParentWidget);
+    }
+
+    mSearchDialog->show();
 }
 
 void SearchController::findNext()
