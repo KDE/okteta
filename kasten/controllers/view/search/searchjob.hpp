@@ -41,10 +41,6 @@ public:
 Q_SIGNALS:
     void finished(Okteta::Address position);
 
-private:
-    int indexOfIgnoreCase();
-    int lastIndexOfIgnoreCase();
-
 private Q_SLOTS:
     void onBytesSearched();
 
