@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-20 01:01+0000\n"
+"POT-Creation-Date: 2023-02-17 01:02+0000\n"
 "PO-Revision-Date: 2013-02-19 20:33+0100\n"
 "Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -605,7 +605,7 @@ msgstr ""
 "Oppgi en forskyvning å gå til, eller velg en tidligere forskyvning fra lista."
 
 #: controllers/view/gotooffset/gotooffsetview.cpp:64
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:114
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:112
 #, kde-format
 msgctxt "@option:check"
 msgid "From c&ursor"
@@ -631,7 +631,7 @@ msgid "Extend the selection by the cursor move."
 msgstr "Utvid utvalget med markørflyttingen."
 
 #: controllers/view/gotooffset/gotooffsetview.cpp:74
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:117
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:115
 #: controllers/view/selectrange/selectrangeview.cpp:87
 #, kde-format
 msgctxt "@option:check"
@@ -1035,7 +1035,7 @@ msgctxt "name of the filter; it does a logic XOR operation"
 msgid "operand XOR data"
 msgstr "operand XOR data"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:74
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:72
 #: controllers/view/search/searchcontroller.cpp:106
 #: controllers/view/search/searchcontroller.cpp:112
 #, kde-format
@@ -1043,7 +1043,7 @@ msgctxt "@title:window"
 msgid "Find"
 msgstr "Finn"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:86
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:84
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1053,19 +1053,19 @@ msgstr ""
 "Skriv inn de bytene du vil søke etter, eller velg en tidligere søkestreng "
 "fra lista."
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:104
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:102
 #, kde-format
 msgctxt "@title:group"
 msgid "Options"
 msgstr "Valg"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:109
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:107
 #, kde-format
 msgctxt "@option:check"
 msgid "C&ase sensitive"
 msgstr "Skill mellom sm&å og store bokstaver"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:110
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:108
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1075,37 +1075,37 @@ msgstr ""
 "Utfør et søk som skiller mellom små og store bokstaver. Hvis du søker etter "
 "«Ola» får du ikke treff på «ola» eller «OLA», men bare «Ola»."
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:112
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:110
 #, kde-format
 msgctxt "@option:check"
 msgid "&Whole words only"
 msgstr "Bare &hele ord"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:113
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:111
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Require word boundaries in both ends of a match to succeed."
 msgstr "Krever ordgrenser i begge ender for at uttrykket skal passe."
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:115
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:113
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Start searching at the current cursor location rather than at the top."
 msgstr "Start søking fra skrivemerket i stedet for fra begynnelsen."
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:118
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:116
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Replace backwards."
 msgstr "Erstatt bakover."
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:119
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:117
 #, kde-format
 msgctxt "@option:check"
 msgid "&Selected bytes"
 msgstr "&Markerte byte"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:120
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:118
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Only search within the current selection."
@@ -1392,25 +1392,25 @@ msgctxt "@info"
 msgid "Beginning of byte array reached.<nl/>Continue from the end?"
 msgstr "Kom til begynnelsen av strengen.<nl/> Fortsett fra slutten?"
 
-#: controllers/view/replace/replacedialog.cpp:29
+#: controllers/view/replace/replacedialog.cpp:111
 #, kde-format
 msgctxt "@title:window"
 msgid "Replace Bytes"
 msgstr "Erstatt byte"
 
-#: controllers/view/replace/replacedialog.cpp:31
+#: controllers/view/replace/replacedialog.cpp:113
 #, kde-format
 msgctxt "@action;button"
 msgid "&Replace"
 msgstr "&Erstatt"
 
-#: controllers/view/replace/replacedialog.cpp:33
+#: controllers/view/replace/replacedialog.cpp:115
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Start replace"
 msgstr "Start erstatning"
 
-#: controllers/view/replace/replacedialog.cpp:35
+#: controllers/view/replace/replacedialog.cpp:117
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1422,13 +1422,13 @@ msgstr ""
 "strengen etter de bytene du oppga over, og om de finnes blir de erstattet "
 "med erstatnings-bytene."
 
-#: controllers/view/replace/replacedialog.cpp:43
+#: controllers/view/replace/replacedialog.cpp:125
 #, kde-format
 msgctxt "@title:group"
 msgid "Replace With"
 msgstr "Erstatt med"
 
-#: controllers/view/replace/replacedialog.cpp:50
+#: controllers/view/replace/replacedialog.cpp:132
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1438,13 +1438,13 @@ msgstr ""
 "Oppgi byter å erstatte med, eller velg byter som tidligere er satt inn fra "
 "lista."
 
-#: controllers/view/replace/replacedialog.cpp:59
+#: controllers/view/replace/replacedialog.cpp:141
 #, kde-format
 msgctxt "@option:check"
 msgid "&Prompt on replace"
 msgstr "S&pør ved erstatning"
 
-#: controllers/view/replace/replacedialog.cpp:60
+#: controllers/view/replace/replacedialog.cpp:142
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Ask before replacing each match found."
@@ -1474,7 +1474,7 @@ msgctxt "@action:button"
 msgid "Replace"
 msgstr "Erstatt"
 
-#: controllers/view/replace/replacetool.cpp:40
+#: controllers/view/replace/replacetool.cpp:75
 #, kde-format
 msgctxt "@title"
 msgid "Replace"
@@ -1486,25 +1486,25 @@ msgctxt "@info"
 msgid "Search key not found in byte array."
 msgstr "Søkebegrepet  ikke funnet i byte-strengen."
 
-#: controllers/view/search/searchdialog.cpp:22
+#: controllers/view/search/searchdialog.cpp:102
 #, kde-format
 msgctxt "@title:window"
 msgid "Find Bytes"
 msgstr "Finn byte"
 
-#: controllers/view/search/searchdialog.cpp:24
+#: controllers/view/search/searchdialog.cpp:104
 #, kde-format
 msgctxt "@action:button"
 msgid "&Find"
 msgstr "&Finn"
 
-#: controllers/view/search/searchdialog.cpp:26
+#: controllers/view/search/searchdialog.cpp:106
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Start searching"
 msgstr "Start søket"
 
-#: controllers/view/search/searchdialog.cpp:28
+#: controllers/view/search/searchdialog.cpp:108
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1514,7 +1514,7 @@ msgstr ""
 "Hvis du trykker <interface>Finn</interface>-knappen blir det søkt i "
 "bytestrengen etter de  bytene du oppga over."
 
-#: controllers/view/search/searchtool.cpp:44
+#: controllers/view/search/searchtool.cpp:76
 #, kde-format
 msgctxt "@title"
 msgid "Search"
