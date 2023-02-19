@@ -203,7 +203,7 @@ Notes:
     <comment xml:lang="es">Datos codificados en Ascii85</comment>
     <comment xml:lang="et">Ascii85 kodeeringus andmed</comment>
     <comment xml:lang="fi">Ascii85-koodattu tieto</comment>
-    <comment xml:lang="fr">Fichier encodé en « Ascii85 »</comment>
+    <comment xml:lang="fr">Fichier encodé en « ASCII85 »</comment>
     <comment xml:lang="ia">Datos codificate Ascii85</comment>
     <comment xml:lang="it">File codificato in Ascii85</comment>
     <comment xml:lang="ka">Ascii85 -ით კოდირებული მონაცემები</comment>
@@ -236,7 +236,7 @@ Notes:
     <comment xml:lang="es">Archivo codificado con Uuencode</comment>
     <comment xml:lang="et">Uuencode-fail</comment>
     <comment xml:lang="fi">UU-koodattu tiedosto</comment>
-    <comment xml:lang="fr">Fichier encodé en « Uuencode »</comment>
+    <comment xml:lang="fr">Fichier encodé en « UU »</comment>
     <comment xml:lang="ia">file codificate Uu</comment>
     <comment xml:lang="it">File con codifica UUencode</comment>
     <comment xml:lang="ka">Uuencoded -ის ფაილი</comment>
@@ -272,7 +272,7 @@ Notes:
     <comment xml:lang="es">Archivo codificado con Xxencode</comment>
     <comment xml:lang="et">Xxencode-fail</comment>
     <comment xml:lang="fi">XX-koodattu tiedosto</comment>
-    <comment xml:lang="fr">Fichier encodé en « Xxencode »</comment>
+    <comment xml:lang="fr">Fichier encodé en « XX »</comment>
     <comment xml:lang="ia">File codificate Xx</comment>
     <comment xml:lang="it">File con codifica Xxencoded</comment>
     <comment xml:lang="ka">Xxencoded -ის ფაილი</comment>
