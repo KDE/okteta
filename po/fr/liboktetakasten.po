@@ -11,20 +11,21 @@
 # Johnny Jazeix <jazeix@gmail.com>, 2020.
 # Xavier Besnard <xavier.besnard@neuf.fr>, 2021, 2022.
 #
+# Xavier BESNARD <xavier.besnard]neuf.fr>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-17 02:42+0000\n"
-"PO-Revision-Date: 2021-01-13 17:13+0100\n"
-"Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
-"Language-Team: French <kde-francophone@kde.org>\n"
+"PO-Revision-Date: 2023-02-17 18:08+0100\n"
+"Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
+"Language-Team: fr\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.04.1\n"
+"X-Generator: Lokalize 22.12.2\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -207,7 +208,7 @@ msgstr ""
 #, kde-format
 msgctxt "@item:intable character is not defined"
 msgid "undef."
-msgstr "indéf."
+msgstr "indéfini."
 
 #: controllers/view/bytetable/bytetablemodel.cpp:156
 #: controllers/view/info/statistictablemodel.cpp:209
@@ -242,7 +243,7 @@ msgstr "Bin."
 #, kde-format
 msgctxt "@title:column short for Character"
 msgid "Char"
-msgstr "Carac."
+msgstr "Car."
 
 #: controllers/view/bytetable/bytetablemodel.cpp:166
 #: controllers/view/info/statistictablemodel.cpp:224
@@ -1103,8 +1104,8 @@ msgid ""
 "Perform a case sensitive search: entering the pattern 'Joe' will not match "
 "'joe' or 'JOE', only 'Joe'."
 msgstr ""
-"Effectuez une recherche sensible à la casse : saisir le motif « Joe » ne "
-"correspondra pas à « joe » ou « JOE », mais seulement à « Joe »."
+"Effectuez une recherche sensible à la casse : saisir le motif « Jean » ne "
+"correspondra pas à « jean » ou « JEAN », mais seulement à « Jean »."
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:110
 #, kde-format
@@ -2073,7 +2074,7 @@ msgstr "Chaîne EBCDIC"
 #: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:131
 #, kde-format
 msgid "Latin1 char"
-msgstr "Carac. Latin1"
+msgstr "Caractère « Latin1 »"
 
 #: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:141
 #, kde-format
@@ -2088,22 +2089,22 @@ msgstr "Fin de fichier atteinte prématurément"
 #: controllers/view/structures/datatypes/strings/utf16stringdata.cpp:32
 #, kde-format
 msgid "UTF16-LE char"
-msgstr "Carac. UTF16-LE"
+msgstr "Caractère « UTF16-LE »"
 
 #: controllers/view/structures/datatypes/strings/utf16stringdata.cpp:32
 #, kde-format
 msgid "UTF16-BE char"
-msgstr "Carac. UTF16-BE"
+msgstr "Caractère « UTF16-BE »"
 
 #: controllers/view/structures/datatypes/strings/utf16stringdata.cpp:37
 #, kde-format
 msgid "UTF16-LE string"
-msgstr "Chaîne UTF16-LE"
+msgstr "Chaîne « UTF16-LE »"
 
 #: controllers/view/structures/datatypes/strings/utf16stringdata.cpp:37
 #, kde-format
 msgid "UTF16-BE string"
-msgstr "Chaîne UTF16-BE"
+msgstr "Chaîne « UTF16-BE »"
 
 #: controllers/view/structures/datatypes/strings/utf16stringdata.cpp:56
 #: controllers/view/structures/datatypes/strings/utf32stringdata.cpp:56
@@ -2125,32 +2126,32 @@ msgstr "%1 (U+%2)"
 #: controllers/view/structures/datatypes/strings/utf32stringdata.cpp:32
 #, kde-format
 msgid "UTF32-LE char"
-msgstr "Carac. UTF32-LE"
+msgstr "Caractère « UTF32-LE »"
 
 #: controllers/view/structures/datatypes/strings/utf32stringdata.cpp:32
 #, kde-format
 msgid "UTF32-BE char"
-msgstr "Carac. UTF32-BE"
+msgstr "Caractère « UTF32-BE »"
 
 #: controllers/view/structures/datatypes/strings/utf32stringdata.cpp:37
 #, kde-format
 msgid "UTF32-LE string"
-msgstr "Chaîne UTF32-LE"
+msgstr "Chaîne « UTF32-LE »"
 
 #: controllers/view/structures/datatypes/strings/utf32stringdata.cpp:37
 #, kde-format
 msgid "UTF32-BE string"
-msgstr "Chaîne UTF32-BE"
+msgstr "Chaîne « UTF32-BE »"
 
 #: controllers/view/structures/datatypes/strings/utf8stringdata.cpp:32
 #, kde-format
 msgid "UTF8 char"
-msgstr "Carac. UTF8"
+msgstr "Caractère « UTF8 »"
 
 #: controllers/view/structures/datatypes/strings/utf8stringdata.cpp:37
 #, kde-format
 msgid "UTF8 string"
-msgstr "Chaîne UTF8"
+msgstr "Chaîne « UTF8 »"
 
 #: controllers/view/structures/datatypes/structuredatainformation.cpp:26
 #: controllers/view/structures/datatypes/taggeduniondatainformation.cpp:45
@@ -2790,7 +2791,7 @@ msgstr "Valeurs"
 #, kde-format
 msgctxt "@item:"
 msgid "Chars"
-msgstr "Carac."
+msgstr "Caractères"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:77
 #, kde-format
@@ -2900,7 +2901,7 @@ msgstr "Codage :"
 #: controllers/view/viewprofiles/viewprofileedit.cpp:150
 #, kde-format
 msgid "Chars"
-msgstr "Carac."
+msgstr "Caractères"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:165
 #, kde-format
@@ -3275,7 +3276,7 @@ msgstr "Base64"
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "Ascii85"
-msgstr "Ascii85"
+msgstr "ASCII85"
 
 #: gui/io/streamencoder/bytearraytextstreamencoderpreview.cpp:27
 #, kde-format
@@ -3474,7 +3475,7 @@ msgstr "Bin."
 #, kde-format
 msgctxt "@item:inlistbox coding of the bytes as characters with the values"
 msgid "Char"
-msgstr "Carac."
+msgstr "Caractère"
 
 #: gui/liboktetawidgets/bytearraycombobox_p.cpp:30
 #, kde-format
