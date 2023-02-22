@@ -11,10 +11,9 @@ include(ECMGenerateHeaders)
 include(ECMGeneratePriFile)
 include(ECMGeneratePkgConfigFile)
 # CMake
-include(GenerateExportHeader)
 include(CMakePackageConfigHelpers)
 include(CMakeParseArguments)
-
+include(CheckCXXCompilerFlag)
 
 # helper macros
 function(_okteta_target_name _varName _baseName)
@@ -69,6 +68,107 @@ function(_okteta_setup_namespace)
     if (OKTETA_SETUP_NAMESPACE_VERSIONEDNAMESPACE_VAR)
         set(${OKTETA_SETUP_NAMESPACE_VERSIONEDNAMESPACE_VAR} ${_versioned_namespace} PARENT_SCOPE)
     endif()
+endfunction()
+
+function(_okteta_generate_version_code)
+    set(options
+    )
+    set(oneValueArgs
+        CODE_VARIABLE
+        PREFIX
+        VERSION
+    )
+    set(multiValueArgs
+    )
+    cmake_parse_arguments(ARGS "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+
+    # Omit any leading "0" in extraction, would otherwise yield an octal value string in C++ (08, 09)
+    string(REGEX REPLACE "^0*([0-9]+)\\.[0-9]+\\.[0-9]+.*" "\\1" _version_major "${ARGS_VERSION}")
+    string(REGEX REPLACE "^[0-9]+\\.0*([0-9]+)\\.[0-9]+.*" "\\1" _version_minor "${ARGS_VERSION}")
+    string(REGEX REPLACE "^[0-9]+\\.[0-9]+\\.0*([0-9]+).*" "\\1" _version_patch "${ARGS_VERSION}")
+    math(EXPR _version_hexnumber "${_version_major}*65536 + ${_version_minor}*256 + ${_version_patch}" OUTPUT_FORMAT HEXADECIMAL)
+
+    set(_content
+"#define ${ARGS_PREFIX}_VERSION_STRING \"${ARGS_VERSION}\"
+#define ${ARGS_PREFIX}_VERSION_MAJOR ${_version_major}
+#define ${ARGS_PREFIX}_VERSION_MINOR ${_version_minor}
+#define ${ARGS_PREFIX}_VERSION_PATCH ${_version_patch}
+#define ${ARGS_PREFIX}_VERSION ${_version_hexnumber}
+"
+    )
+    set(${ARGS_CODE_VARIABLE} "${_content}" PARENT_SCOPE)
+endfunction()
+
+function(_okteta_generate_export_code)
+    set(options
+    )
+    set(oneValueArgs
+        CODE_VARIABLE
+        PREFIX
+        TARGET_NAME
+    )
+    set(multiValueArgs
+    )
+    cmake_parse_arguments(ARGS "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+
+    get_target_property(_building_lib_flag ${ARGS_TARGET_NAME} DEFINE_SYMBOL)
+
+    if(NOT _building_lib_flag)
+        # calculate cmake default preprocessor definition set when building a shared library
+        set(_building_lib_flag ${ARGS_TARGET_NAME}_EXPORTS)
+        string(MAKE_C_IDENTIFIER ${_building_lib_flag} _building_lib_flag)
+    endif()
+
+    if(WIN32)
+        set(_export_attribute "__declspec(dllexport)")
+        set(_import_attribute "__declspec(dllimport)")
+    else()
+        check_cxx_compiler_flag("-fvisibility=hidden" COMPILER_SUPPORTS_HIDDEN_VISIBILITY)
+        if(COMPILER_SUPPORTS_HIDDEN_VISIBILITY)
+            set(_export_attribute "__attribute__((visibility(\"default\")))")
+            set(_import_attribute "__attribute__((visibility(\"default\")))")
+        else()
+            set(_export_attribute)
+            set(_import_attribute)
+        endif()
+    endif()
+
+    set(_export_macro_name "${ARGS_PREFIX}_EXPORT")
+    set(_content
+"#ifndef ${_export_macro_name}
+#  ifdef ${_building_lib_flag}
+     // Library is built
+#    define ${_export_macro_name} ${_export_attribute}
+#  else
+     // Library is consumed
+#    define ${_export_macro_name} ${_import_attribute}
+#  endif
+#endif
+"
+    )
+    set(${ARGS_CODE_VARIABLE} "${_content}" PARENT_SCOPE)
+endfunction()
+
+function(_okteta_generate_header_file)
+    set(options
+    )
+    set(oneValueArgs
+        CODE
+        INCLUDE_GUARD_NAME
+        EXPORT_FILE_NAME
+    )
+    set(multiValueArgs
+    )
+    cmake_parse_arguments(ARGS "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+
+    file(GENERATE OUTPUT ${ARGS_EXPORT_FILE_NAME} CONTENT
+"#ifndef ${ARGS_INCLUDE_GUARD_NAME}
+#define ${ARGS_INCLUDE_GUARD_NAME}
+
+${ARGS_CODE}
+#endif
+"
+    )
 endfunction()
 
 # TODO: consider renaming to okteta_add_classes
@@ -268,12 +368,30 @@ function(okteta_add_library _baseName)
         set(_export_name_args EXPORT_NAME ${_baseName})
     endif()
 
+    # generate header file with export & version macros
+    string(TOUPPER "${_fullName}" _definitions_prefix)
+    _okteta_generate_version_code(
+        PREFIX        ${_definitions_prefix}
+        VERSION       ${OKTETA_ADD_LIBRARY_VERSION}
+        CODE_VARIABLE _version_code
+    )
+    _okteta_generate_export_code(
+        TARGET_NAME   ${_targetName}
+        PREFIX        ${_definitions_prefix}
+        CODE_VARIABLE _export_code
+    )
+
     set(_exportHeaderFileName ${_lc_fullInternalName}_export.hpp)
     set(_exportHeaderFilePath ${CMAKE_CURRENT_BINARY_DIR}/${_exportHeaderFileName})
-    generate_export_header(${_targetName}
-        BASE_NAME ${_fullInternalName}
+    string(TOUPPER ${_exportHeaderFileName} _include_guard_name)
+    string(MAKE_C_IDENTIFIER ${_include_guard_name} _include_guard_name)
+
+    _okteta_generate_header_file(
+        CODE "${_version_code}\n${_export_code}"
+        INCLUDE_GUARD_NAME ${_include_guard_name}
         EXPORT_FILE_NAME ${_exportHeaderFilePath}
     )
+
     # Local forwarding header
     set(_forwardexportHeaderFilePath ${CMAKE_CURRENT_BINARY_DIR}/${_include_dir}/${_exportHeaderFileName})
     if (NOT EXISTS ${_forwardexportHeaderFilePath})
