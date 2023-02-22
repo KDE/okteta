@@ -111,41 +111,37 @@ function(_okteta_generate_export_code)
     )
     cmake_parse_arguments(ARGS "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
-    get_target_property(_building_lib_flag ${ARGS_TARGET_NAME} DEFINE_SYMBOL)
-
-    if(NOT _building_lib_flag)
-        # calculate cmake default preprocessor definition set when building a shared library
-        set(_building_lib_flag ${ARGS_TARGET_NAME}_EXPORTS)
-        string(MAKE_C_IDENTIFIER ${_building_lib_flag} _building_lib_flag)
-    endif()
-
+    set(_export_macro_name "${ARGS_PREFIX}_EXPORT")
+    set(_content "#ifndef ${_export_macro_name}\n")
     if(WIN32)
-        set(_export_attribute "__declspec(dllexport)")
-        set(_import_attribute "__declspec(dllimport)")
+        get_target_property(_building_lib_flag ${ARGS_TARGET_NAME} DEFINE_SYMBOL)
+
+        if(NOT _building_lib_flag)
+            # calculate cmake default preprocessor definition set when building a shared library
+            set(_building_lib_flag ${ARGS_TARGET_NAME}_EXPORTS)
+            string(MAKE_C_IDENTIFIER ${_building_lib_flag} _building_lib_flag)
+        endif()
+
+        string(APPEND _content
+"#  ifdef ${_building_lib_flag}
+     // Library is built
+#    define ${_export_macro_name} __declspec(dllexport)
+#  else
+     // Library is consumed
+#    define ${_export_macro_name} __declspec(dllimport)
+#  endif
+"
+        )
     else()
         check_cxx_compiler_flag("-fvisibility=hidden" COMPILER_SUPPORTS_HIDDEN_VISIBILITY)
         if(COMPILER_SUPPORTS_HIDDEN_VISIBILITY)
-            set(_export_attribute "__attribute__((visibility(\"default\")))")
-            set(_import_attribute "__attribute__((visibility(\"default\")))")
+            string(APPEND _content "#  define ${_export_macro_name} __attribute__((visibility(\"default\")))\n")
         else()
-            set(_export_attribute)
-            set(_import_attribute)
+            string(APPEND _content "#  define ${_export_macro_name}\n")
         endif()
     endif()
+    string(APPEND _content "#endif\n")
 
-    set(_export_macro_name "${ARGS_PREFIX}_EXPORT")
-    set(_content
-"#ifndef ${_export_macro_name}
-#  ifdef ${_building_lib_flag}
-     // Library is built
-#    define ${_export_macro_name} ${_export_attribute}
-#  else
-     // Library is consumed
-#    define ${_export_macro_name} ${_import_attribute}
-#  endif
-#endif
-"
-    )
     set(${ARGS_CODE_VARIABLE} "${_content}" PARENT_SCOPE)
 endfunction()
 
