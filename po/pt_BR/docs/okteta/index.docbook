@@ -1,34 +1,5 @@
 <?xml version="1.0" ?>
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
-  <!ENTITY okteta "<application
->Okteta</application
->">
-  <!ENTITY kappname "&okteta;">
-  <!ENTITY package "kdesdk">
-  <!ENTITY Friedrich.Kossebau
-"<personname
-><firstname
->Friedrich</firstname
-><othername
->W. H.</othername
-><surname
->Kossebau</surname
-></personname
->">
-  <!ENTITY Friedrich.Kossebau.email "<email
->kossebau@kde.org</email
->">
-  <!ENTITY Alex.Richardson
-"<personname
-><firstname
->Alex</firstname
-><surname
->Richardson</surname
-></personname
->">
-  <!ENTITY Alex.Richardson.email "<email
->alex.richardson@gmx.de</email
->">
   <!ENTITY % Brazilian-Portuguese "INCLUDE">
   <!ENTITY % addindex "IGNORE">
 ]>
@@ -89,9 +60,9 @@
 >&FDLNotice;</legalnotice>
 
 <date
->28/11/2013</date>
+>23/03/2018</date>
 <releaseinfo
->0.12 (&kde; 4.12)</releaseinfo>
+>&okteta; 0.24.60</releaseinfo>
 
 <abstract>
   <para
@@ -101,8 +72,6 @@
 <keywordset>
 <keyword
 >KDE</keyword>
-<keyword
->&package;</keyword>
 <keyword
 >Okteta</keyword>
 <keyword
@@ -168,7 +137,7 @@
 > no lançador de aplicativos.</para>
 
     <para
->Estão disponíveis as opções normais do &Qt; e do &kde;, que podem ser listadas digitando <userinput
+>Estão disponíveis as opções normais do &Qt; e do &kf5-full;, que podem ser listadas digitando <userinput
 ><command
 >okteta</command
 > <option
@@ -418,7 +387,7 @@ Support for strings (various Unicode encodings) in definitions
 >.osd</literal
 >). Além disso, um arquivo <literal role="extension"
 >.desktop</literal
-> contém os metadados sobre esse arquivo de descrição de estruturas, como o autor, a página Web e a licença.</para>
+> contém os metadados sobre esse arquivo de descrição de estruturas, como o autor, o site e a licença.</para>
       <para
 >Atualmente, não existe nenhum suporte incorporado para criar ou editar as definições das estruturas, assim elas deverão ser criadas manualmente, como se encontra descrito nas seções a seguir.</para>
     </sect2>
@@ -442,12 +411,12 @@ Support for strings (various Unicode encodings) in definitions
 >Instalar as definições das estruturas manualmente</title>
         <para
 >A ferramenta de Estruturas procura pelas descrições de estruturas na subpasta <filename class="directory"
->share/okteta/structures/</filename
+>okteta/structures/</filename
 > da pasta pessoal do usuário para os dados dos aplicativos (descubra-a com o comando <userinput
 ><command
->kf5-config</command
+>qtpaths</command
 > <option
->--path data</option
+>--paths LocalGenericoDeDados</option
 ></userinput
 >). Talvez você precise criar essa pasta, caso ainda não tenha nenhuma definição de estrutura instalada.</para>
           <para
@@ -464,9 +433,15 @@ Support for strings (various Unicode encodings) in definitions
 >para essa definição.</para>
           <para
 >Por exemplo, com a pasta de dados dos aplicativos <filename class="directory"
->.kde</filename
+><userinput
+><command
+>qtpaths</command
+> <option
+>--paths LocalGenericoDeDados</option
+></userinput
+></filename
 > e com uma definição de estrutura chamada EstruturaExemplo, existe a pasta <filename class="directory"
->.kde/share/apps/okteta/structures/EstruturaExemplo</filename
+>okteta/structures/EstruturaExemplo</filename
 >, que contém um arquivo <filename
 >EstruturaExemplo.desktop</filename
 > e um arquivo <filename
@@ -489,8 +464,8 @@ Support for strings (various Unicode encodings) in definitions
       <title
 >Compartilhar definições de estruturas</title>
       <para
->Para as estruturas comuns, você poderá não ter que criar você mesmo uma definição, mas sim reutilizar uma definição já existente de locais como o <ulink url="http://kde-files.org/index.php?xcontentmode=691"
->kde-files.org</ulink
+>Para as estruturas comuns, você poderá não ter que criar você mesmo uma definição, mas sim reutilizar uma definição já existente de locais como o <ulink url="https://store.kde.org/browse/cat/214"
+>store.kde.org</ulink
 >.</para>
       <para
 >Você poderá também querer compartilhar você mesmo uma definição. Para fazer isso, crie um pacote de arquivos (&eg;, um pacote compactado do tar, <literal role="extension"
@@ -506,8 +481,16 @@ Support for strings (various Unicode encodings) in definitions
     <sect2>
       <title
 >Criar definições de estruturas</title>
+
+      <note
+><para
+>Existe um guia mais atualizado, mas não completo, sobre a criação de definições de estruturas na <ulink url="https://userbase.kde.org/Okteta/Writing_structure_definitions"
+>Wiki do KDE UserBase</ulink
+>. </para
+></note>
+
       <para
->Existem duas maneiras diferentes de criar definições de estrutura. A primeira é escrever a definição em &XML; e a outra é usar JavaScript. A abordagem com JavaScript permite-lhe criar estruturas mais complexas com funcionalidades como, &eg;, validação da estrutura. Usar &XML; oferece menos recursos, mas se uma estrutura estática é tudo que você precisa, pode ser a abordagem mais fácil. Se você precisar de uma estrutura dinâmica, ou seja, onde as dimensões de uma matriz dependem de outros valores na estrutura ou a disposição da estrutura é diferente quando o valor de algum membro se altera, então você terá que escrever a definição da estrutura em JavaScript. Não há exceções a esta regra. Se você tiver uma matriz cujo comprimento deve ser <emphasis role="bold"
+>Existem duas maneiras diferentes de criar definições de estrutura. A primeira é escrever a definição em &XML; e a outra é usar JavaScript. A abordagem com JavaScript permite-lhe criar estruturas mais complexas com funcionalidades como, &eg;, validação da estrutura. Usar &XML; oferece menos recursos, mas se uma estrutura estática é tudo que você precisa, pode ser a abordagem mais fácil. Se você precisar de uma estrutura dinâmica, ou seja, onde as dimensões de uma matriz dependem de outros valores na estrutura ou o layout da estrutura é diferente quando o valor de algum membro se altera, então você terá que escrever a definição da estrutura em JavaScript. Não há exceções a esta regra. Se você tiver uma matriz cujo comprimento deve ser <emphasis role="bold"
 >exatamente</emphasis
 > o mesmo de acordo com outro valor na estrutura, então você pode usar &XML;. Mas se for algo como <emphasis
 >comprimento - 1</emphasis
@@ -518,6 +501,12 @@ Support for strings (various Unicode encodings) in definitions
     <sect2>
       <title
 >Formato do arquivo &XML; da definição da estrutura</title>
+      <note
+><para
+>Existe um guia mais atualizado, mas não completo, sobre a criação de definições de estruturas na <ulink url="https://userbase.kde.org/Okteta/Writing_structure_definitions"
+>Wiki do KDE UserBase</ulink
+>. </para
+></note>
       <para
 >O arquivo &XML; <literal role="extension"
 >.osd</literal
@@ -916,13 +905,19 @@ Support for strings (various Unicode encodings) in definitions
     <sect2>
       <title
 >Um exemplo de definição de estrutura em &XML; e JavaScript</title>
+      <note
+><para
+>Existe um guia mais atualizado, mas não completo, sobre a criação de definições de estruturas na <ulink url="https://userbase.kde.org/Okteta/Writing_structure_definitions"
+>Wiki do KDE UserBase</ulink
+>. </para
+></note>
+
       <sect3>
         <title
 >O passos comum, compartilhado por ambas as abordagens</title>
         <para
->Nosso arquivo de metadados seria como o seguinte: <screen>
+>Nosso arquivo de metadados se parece com isto: <screen>
         [Desktop Entry]
-        Encoding=UTF-8
         Icon=arrow-up<co id="icon" />
         Type=Service
         ServiceTypes=KPluginInfo
@@ -934,7 +929,7 @@ Support for strings (various Unicode encodings) in definitions
         X-KDE-PluginInfo-Email=foo.bar@email.org
         X-KDE-PluginInfo-Name=estruturasimples
         X-KDE-PluginInfo-Version=1.0
-        X-KDE-PluginInfo-Website=http://www.plugin.org/
+        X-KDE-PluginInfo-Website=https://www.plugin.org/
         X-KDE-PluginInfo-Category=structure
         X-KDE-PluginInfo-License=LGPL
         X-KDE-PluginInfo-EnabledByDefault=false
@@ -1013,7 +1008,7 @@ Support for strings (various Unicode encodings) in definitions
 >main.js</filename
 > em vez de <filename
 >estruturasimples.osd</filename
->. O conteúdo desse arquivo seria: <screen>
+> e altere o 'X-KDE-PluginInfo-Category=structure' para 'X-KDE-PluginInfo-Category=structure/js'. O conteúdo desse arquivo deverá ser: <screen>
         function init() {
           var estrutura = struct({
             caracter : char(),
@@ -1115,11 +1110,11 @@ Support for strings (various Unicode encodings) in definitions
         <title
 >Mais informações</title>
         <para
->Alguns exemplos de definições de estruturas poderão ser encontrados no <ulink url="https://quickgit.kde.org/?p=okteta.git&amp;a=tree&amp;f=kasten%2Fcontrollers%2Fview%2Fstructures%2Fexamples%2Fokteta%2Fstructures"
+>Alguns exemplos de definições de estruturas poderão ser encontrados no <ulink url="https://commits.kde.org/okteta?path=kasten/controllers/view/structures/examples/okteta/structures/"
 >repositório Git.</ulink
-> Isto inclui, por exemplo, o cabeçalho dos arquivos PNG e ELF. Um esquema em &XML; que descreve a estrutura do arquivo <literal role="extension"
+> Isso inclui, por exemplo, o cabeçalho dos arquivos PNG e ELF. Um esquema em &XML; que descreve a estrutura do arquivo <literal role="extension"
 >.osd</literal
-> pode ser encontrado <ulink url="https://quickgit.kde.org/?p=okteta.git&amp;a=tree&amp;f=kasten%2Fcontrollers%2Fview%2Fstructures%2Fschema"
+> pode ser encontrado <ulink url="https://commits.kde.org/okteta?path=kasten/controllers/view/structures/schema/"
 >aqui.</ulink
 > Se precisar de mais informações, sinta-se à vontade em contactar-me através do e-mail &Alex.Richardson.email; </para>
       </sect3>
@@ -1139,7 +1134,7 @@ Structures Script Console-->
 >Itens dos menus</title>
 
 <para
->Além dos menus normais do &kde;, descritos no capítulo <ulink url="help:/fundamentals/ui.html#menus"
+>Além dos menus normais do &kde;, descritos no capítulo <ulink url="help:/fundamentals/menus.html"
 >Menu</ulink
 > dos Fundamentos do &kde;, o &okteta; tem estes itens de menu específicos do aplicativo: </para>
 
@@ -1538,23 +1533,6 @@ Structures Script Console-->
     <varlistentry>
     <term
 ><menuchoice
-><guimenu
->Ver</guimenu
-> <guimenuitem
->Mostrar os Caracteres Invisíveis</guimenuitem
-> </menuchoice
-></term>
-    <listitem
-><para
-><action
->Ativa ou desativa a apresentação dos caracteres invisíveis.</action
-> Se a visualização estiver desativada, no local correspondente da coluna de caracteres, é colocado um outro caractere de substituição.</para
-></listitem>
-    </varlistentry>
-
-    <varlistentry>
-    <term
-><menuchoice
 ><shortcut
 > <keycap
 >F11</keycap
@@ -1669,6 +1647,24 @@ Structures Script Console-->
 > no submenu. </para>
     </listitem>
     </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Ver</guimenu
+> <guimenuitem
+>Mostrar os Caracteres Invisíveis</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>Ativa ou desativa a apresentação dos caracteres invisíveis.</action
+> Se a visualização estiver desativada, no local correspondente da coluna de caracteres, é colocado um outro caractere de substituição.</para
+></listitem>
+    </varlistentry>
+
     <varlistentry>
     <term
 ><menuchoice
@@ -1707,20 +1703,20 @@ Structures Script Console-->
 ><guimenu
 >Ver</guimenu
 > <guisubmenu
->Disposição dinâmica</guisubmenu
+>Layout dinâmico</guisubmenu
 > </menuchoice
 ></term>
     <listitem
 ><para
 ><action
->Define as regras de disposição da área de dados.</action
+>Define as regras de layout da área de dados.</action
 > Isto define quantos 'bytes' são apresentados por linha, dependendo da largura da janela. As regras possíveis são:</para>
     <itemizedlist>
     <listitem
 ><para
 ><guimenuitem
 >Desligado</guimenuitem
->: A disposição é fixa para o número atual de 'bytes' por linha e não se adapta à alteração do tamanho da janela.</para>
+>: O layout é fixo para o número atual de 'bytes' por linha e não se adapta à alteração do tamanho da janela.</para>
     </listitem>
     <listitem
 ><para
@@ -1750,14 +1746,14 @@ Structures Script Console-->
     <listitem
 ><para
 ><action
->Seleciona a disposição da janela</action
+>Seleciona o layout da janela</action
 > como sendo:</para>
     <itemizedlist>
     <listitem
 ><para
 ><guimenuitem
 >Colunas</guimenuitem
->: A interpretação dos valores e caracteres é apresentada na disposição clássica, com cada um deles apresentado numa coluna em separado.</para
+>: A interpretação dos valores e caracteres é apresentada no layout clássico, com cada um deles apresentado numa coluna em separado.</para
 ></listitem>
     <listitem
 ><para
@@ -2052,25 +2048,7 @@ Structures Script Console-->
 >Tradução de Marcus Gama <email
 >marcus.gama@gmail.com</email
 ></para
-> 
-&underFDL; &underGPL; </chapter>
-
-<!-- !!!do not change ANYTHING after this line!!!! -->
-
-<appendix id="installation">
-    <title
->Instalação</title>
-
-    <sect1 id="getting-kapp">
-        <title
->Como obter o &okteta;</title>
-&install.intro.documentation; </sect1>
-
-    <sect1 id="Compilation">
-        <title
->Compilação e instalação</title>
-&install.compile.documentation; </sect1>
-</appendix>
+> &underFDL; &underGPL; </chapter>
 
 &documentation.index;
 </book>
