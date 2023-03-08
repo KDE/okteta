@@ -232,7 +232,7 @@ msgstr "Exportació"
 #, kde-format
 msgctxt "@action:button"
 msgid "&Export to File..."
-msgstr "&Exporta a un fitxer..."
+msgstr "&Exporta cap a un fitxer..."
 
 #: controllers/io/export/exportdialog.cpp:74
 #, kde-format
@@ -247,7 +247,7 @@ msgid ""
 "If you press the <interface>Export to file</interface> button, the selected "
 "data will be copied to a file with the settings you entered above."
 msgstr ""
-"Si premeu el botó <interface>Exporta a un fitxer</interface>, les dades "
+"Si premeu el botó <interface>Exporta cap a un fitxer</interface>, les dades "
 "seleccionades es copiaran a un fitxer amb els paràmetres que heu indicat més "
 "amunt."
 
