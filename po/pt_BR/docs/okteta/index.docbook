@@ -1134,9 +1134,9 @@ Structures Script Console-->
 >Itens dos menus</title>
 
 <para
->Apart from the common &kde; menus described in the <ulink url="help:/fundamentals/menus.html"
+>Além dos menus normais do &kde;, descritos no capítulo <ulink url="help:/fundamentals/ui.html#menus"
 >Menu</ulink
-> chapter of the &kde; Fundamentals documentation &okteta; has these application specific menu entries: </para>
+> dos Fundamentos do &kde;, o &okteta; tem estes itens de menu específicos do aplicativo: </para>
 
 <sect2 id="file-menu">
 <title
