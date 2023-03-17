@@ -83,10 +83,10 @@ private Q_SLOTS:
     void onViewModusChanged();
 
 private:
-    void updateView(const ByteArrayViewProfile& viewProfile);
-    void updateViewProfile(ByteArrayViewProfile& viewProfile);
-    void setDirtyFlag(int dirtyFlag);
-    void connectViewSignals();
+    OKTETAKASTENGUI_NO_EXPORT void updateView(const ByteArrayViewProfile& viewProfile);
+    OKTETAKASTENGUI_NO_EXPORT void updateViewProfile(ByteArrayViewProfile& viewProfile);
+    OKTETAKASTENGUI_NO_EXPORT void setDirtyFlag(int dirtyFlag);
+    OKTETAKASTENGUI_NO_EXPORT void connectViewSignals();
 
 private:
     ByteArrayView* mView = nullptr;

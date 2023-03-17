@@ -72,7 +72,7 @@ Q_SIGNALS:
     void newDocumentRequested();
 
 private:
-    int indexOf(AbstractView* view) const;
+    KASTENGUI_NO_EXPORT int indexOf(AbstractView* view) const;
 
 private:
     Q_DECLARE_PRIVATE(MultiViewAreas)

@@ -75,12 +75,12 @@ Q_SIGNALS:
     void viewProfilesUnlocked(const QVector<Kasten::ByteArrayViewProfile::Id>& viewProfileIds);
 
 private:
-    QString filePathOfViewProfile(const ByteArrayViewProfile::Id& viewProfileId) const;
+    OKTETAKASTENGUI_NO_EXPORT QString filePathOfViewProfile(const ByteArrayViewProfile::Id& viewProfileId) const;
     // Returns the viewProfile as loaded from the file with the given fileName.
     // If the loading fails the viewProfile has no id set.
-    ByteArrayViewProfile loadViewProfile(const QString& fileName) const;
-    void saveViewProfile(const ByteArrayViewProfile& viewProfile) const;
-    void removeViewProfile(const ByteArrayViewProfile::Id& viewProfileId);
+    OKTETAKASTENGUI_NO_EXPORT ByteArrayViewProfile loadViewProfile(const QString& fileName) const;
+    OKTETAKASTENGUI_NO_EXPORT void saveViewProfile(const ByteArrayViewProfile& viewProfile) const;
+    OKTETAKASTENGUI_NO_EXPORT void removeViewProfile(const ByteArrayViewProfile::Id& viewProfileId);
 
 private Q_SLOTS:
     void onViewProfilesFolderChanged(const QString& path);
