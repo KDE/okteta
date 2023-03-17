@@ -28,7 +28,7 @@ class KASTENGUI_EXPORT TabbedViews : public AbstractGroupedViews
     )
 
 protected:
-    explicit TabbedViews(TabbedViewsPrivate* d);
+    KASTENGUI_NO_EXPORT explicit TabbedViews(TabbedViewsPrivate* d);
 
 public:
     TabbedViews();

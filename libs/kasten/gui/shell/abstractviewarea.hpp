@@ -27,7 +27,7 @@ class KASTENGUI_EXPORT AbstractViewArea : public QObject
 
 protected:
     AbstractViewArea();
-    explicit AbstractViewArea(AbstractViewAreaPrivate* d);
+    KASTENGUI_NO_EXPORT explicit AbstractViewArea(AbstractViewAreaPrivate* d);
 
 public:
     ~AbstractViewArea() override;

@@ -25,7 +25,7 @@ class KASTENCORE_EXPORT AbstractLoadJob : public KJob
     Q_OBJECT
 
 protected:
-    explicit AbstractLoadJob(AbstractLoadJobPrivate* d);
+    KASTENCORE_NO_EXPORT explicit AbstractLoadJob(AbstractLoadJobPrivate* d);
 
 public:
     AbstractLoadJob();

@@ -28,7 +28,7 @@ class KASTENGUI_EXPORT AbstractDocumentStrategy : public QObject
 
 protected:
     AbstractDocumentStrategy();
-    explicit AbstractDocumentStrategy(AbstractDocumentStrategyPrivate* d);
+    KASTENGUI_NO_EXPORT explicit AbstractDocumentStrategy(AbstractDocumentStrategyPrivate* d);
 
 public:
     ~AbstractDocumentStrategy() override;

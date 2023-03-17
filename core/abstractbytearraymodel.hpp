@@ -68,7 +68,7 @@ class OKTETACORE_EXPORT AbstractByteArrayModel : public QObject
     Q_OBJECT
 
 protected:
-    explicit AbstractByteArrayModel(AbstractByteArrayModelPrivate* d, QObject* parent = nullptr);
+    OKTETACORE_NO_EXPORT explicit AbstractByteArrayModel(AbstractByteArrayModelPrivate* d, QObject* parent = nullptr);
     explicit AbstractByteArrayModel(QObject* parent = nullptr);
 
 public:
