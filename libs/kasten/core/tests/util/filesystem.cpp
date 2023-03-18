@@ -14,7 +14,7 @@
 #include <QTest>
 
 // TODO QStringLiteral
-static constexpr char basePath[] = "/.kde-unit-test/";
+static constexpr char basePath[] = ".kde-unit-test";
 
 TestFileSystem::TestFileSystem(const QString& name)
     : mBasePath(QDir::homePath() + QLatin1Char('/')
@@ -48,6 +48,10 @@ void TestFileSystem::createDir(const QString& subPath)
 
 QString TestFileSystem::createFilePath(const QString& fileName, const QString& subPath)
 {
+    if (subPath.isEmpty()) {
+        return mBasePath + QLatin1Char('/') + fileName;
+    }
+
     return mBasePath + QLatin1Char('/') + subPath + QLatin1Char('/') + fileName;
 }
 
