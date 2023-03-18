@@ -184,7 +184,7 @@ public:
     ByteArrayViewProfileSynchronizer* synchronizer() const;
 
 private:
-    void init();
+    OKTETAKASTENGUI_NO_EXPORT void init();
 
 private Q_SLOTS:
     void setFontByGlobalSettings();

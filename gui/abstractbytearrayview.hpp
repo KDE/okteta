@@ -128,7 +128,7 @@ public:
     Q_ENUM(CodingTypes)
 
 protected:
-    AbstractByteArrayView(AbstractByteArrayViewPrivate* d, QWidget* parent);
+    OKTETAGUI_NO_EXPORT AbstractByteArrayView(AbstractByteArrayViewPrivate* d, QWidget* parent);
 
 public:
     AbstractByteArrayView() = delete;

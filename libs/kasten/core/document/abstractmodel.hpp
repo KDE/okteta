@@ -28,7 +28,7 @@ class KASTENCORE_EXPORT AbstractModel : public QObject
 
 protected:
     explicit AbstractModel(AbstractModel* baseModel = nullptr);
-    explicit AbstractModel(AbstractModelPrivate* d);
+    KASTENCORE_NO_EXPORT explicit AbstractModel(AbstractModelPrivate* d);
 
 public:
     ~AbstractModel() override;

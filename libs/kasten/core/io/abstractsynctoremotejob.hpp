@@ -24,7 +24,7 @@ class KASTENCORE_EXPORT AbstractSyncToRemoteJob : public KJob
     Q_OBJECT
 
 protected:
-    explicit AbstractSyncToRemoteJob(AbstractSyncToRemoteJobPrivate* d);
+    KASTENCORE_NO_EXPORT explicit AbstractSyncToRemoteJob(AbstractSyncToRemoteJobPrivate* d);
 
 public:
     AbstractSyncToRemoteJob();

@@ -25,7 +25,7 @@ class AbstractColumnStylistPrivate;
 class OKTETAGUI_EXPORT AbstractColumnStylist
 {
 protected:
-    explicit AbstractColumnStylist(AbstractColumnStylistPrivate* d);
+    OKTETAGUI_NO_EXPORT explicit AbstractColumnStylist(AbstractColumnStylistPrivate* d);
 
 public:
     AbstractColumnStylist();

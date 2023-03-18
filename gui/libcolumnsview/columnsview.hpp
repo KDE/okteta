@@ -34,7 +34,7 @@ class OKTETAGUI_EXPORT ColumnsView : public QAbstractScrollArea
     Q_OBJECT
 
 protected:
-    explicit ColumnsView(ColumnsViewPrivate* d, QWidget* parent = nullptr);
+    OKTETAGUI_NO_EXPORT explicit ColumnsView(ColumnsViewPrivate* d, QWidget* parent = nullptr);
 
 public:
     explicit ColumnsView(/*bool R = false,*/ QWidget* parent = nullptr);

@@ -103,7 +103,7 @@ SelectRangeView::SelectRangeView(SelectRangeTool* tool, QWidget* parent)
     const KGuiItem selectGuiItem =
         KGuiItem(i18nc("@action:button",
                        "&Select"),
-                 QString(),
+                 QStringLiteral("select-rectangular"),
                  i18nc("@info:tooltip",
                        "Select the range."),
                  xi18nc("@info:whatsthis",

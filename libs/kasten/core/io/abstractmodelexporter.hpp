@@ -32,7 +32,7 @@ class KASTENCORE_EXPORT AbstractModelExporter : public QObject
     Q_OBJECT
 
 protected:
-    AbstractModelExporter(AbstractModelExporterPrivate* d);
+    KASTENCORE_NO_EXPORT explicit AbstractModelExporter(AbstractModelExporterPrivate* d);
 
 public:
     AbstractModelExporter(const QString& remoteTypeName, const QString& remoteMimeType);
