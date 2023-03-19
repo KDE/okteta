@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-17 02:42+0000\n"
+"POT-Creation-Date: 2023-03-19 02:45+0000\n"
 "PO-Revision-Date: 2014-09-08 14:28+0200\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -1050,8 +1050,8 @@ msgid "operand XOR data"
 msgstr "operandus KIZÁRÓ_VAGY adat"
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:72
-#: controllers/view/search/searchcontroller.cpp:107
-#: controllers/view/search/searchcontroller.cpp:113
+#: controllers/view/search/searchcontroller.cpp:112
+#: controllers/view/search/searchcontroller.cpp:118
 #, kde-format
 msgctxt "@title:window"
 msgid "Find"
@@ -1391,7 +1391,7 @@ msgid "Replace pattern not found in byte array."
 msgstr "A keresett minta nem található a tartományban."
 
 #: controllers/view/replace/replacecontroller.cpp:93
-#: controllers/view/search/searchcontroller.cpp:115
+#: controllers/view/search/searchcontroller.cpp:120
 #, kde-kuit-format
 msgctxt "@info"
 msgid "End of byte array reached.<nl/>Continue from the beginning?"
@@ -1399,7 +1399,7 @@ msgstr ""
 "A kijelölt rész végéhez ért a keresés.<nl/>Folytatni szeretné az elejétől?"
 
 #: controllers/view/replace/replacecontroller.cpp:94
-#: controllers/view/search/searchcontroller.cpp:116
+#: controllers/view/search/searchcontroller.cpp:121
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Beginning of byte array reached.<nl/>Continue from the end?"
@@ -1494,7 +1494,7 @@ msgctxt "@title"
 msgid "Replace"
 msgstr "Csere"
 
-#: controllers/view/search/searchcontroller.cpp:108
+#: controllers/view/search/searchcontroller.cpp:113
 #, kde-format
 msgctxt "@info"
 msgid "Search key not found in byte array."

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-17 02:42+0000\n"
+"POT-Creation-Date: 2023-03-19 02:45+0000\n"
 "PO-Revision-Date: 2020-01-03 21:12+0100\n"
 "Last-Translator: Sofia Priego <spriego@darksylvania.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -1050,8 +1050,8 @@ msgid "operand XOR data"
 msgstr "operando XOR datos"
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:72
-#: controllers/view/search/searchcontroller.cpp:107
-#: controllers/view/search/searchcontroller.cpp:113
+#: controllers/view/search/searchcontroller.cpp:112
+#: controllers/view/search/searchcontroller.cpp:118
 #, kde-format
 msgctxt "@title:window"
 msgid "Find"
@@ -1396,7 +1396,7 @@ msgid "Replace pattern not found in byte array."
 msgstr "No se ha encontrado el patrón a sustituir en el array de bytes."
 
 #: controllers/view/replace/replacecontroller.cpp:93
-#: controllers/view/search/searchcontroller.cpp:115
+#: controllers/view/search/searchcontroller.cpp:120
 #, kde-kuit-format
 msgctxt "@info"
 msgid "End of byte array reached.<nl/>Continue from the beginning?"
@@ -1405,7 +1405,7 @@ msgstr ""
 "principio?"
 
 #: controllers/view/replace/replacecontroller.cpp:94
-#: controllers/view/search/searchcontroller.cpp:116
+#: controllers/view/search/searchcontroller.cpp:121
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Beginning of byte array reached.<nl/>Continue from the end?"
@@ -1500,7 +1500,7 @@ msgctxt "@title"
 msgid "Replace"
 msgstr "Sustituir"
 
-#: controllers/view/search/searchcontroller.cpp:108
+#: controllers/view/search/searchcontroller.cpp:113
 #, kde-format
 msgctxt "@info"
 msgid "Search key not found in byte array."
