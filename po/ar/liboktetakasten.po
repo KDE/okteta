@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-17 01:02+0000\n"
+"POT-Creation-Date: 2023-03-19 00:50+0000\n"
 "PO-Revision-Date: 2010-07-24 13:13+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: Arabic <linuxac-kde-arabic-team@googlegroups.com>\n"
@@ -1037,8 +1037,8 @@ msgid "operand XOR data"
 msgstr "عملية XOR للمعطيات"
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:72
-#: controllers/view/search/searchcontroller.cpp:106
-#: controllers/view/search/searchcontroller.cpp:112
+#: controllers/view/search/searchcontroller.cpp:111
+#: controllers/view/search/searchcontroller.cpp:117
 #, kde-format
 msgctxt "@title:window"
 msgid "Find"
@@ -1371,14 +1371,14 @@ msgid "Replace pattern not found in byte array."
 msgstr "نسق التغيير غير موجود في جدول الأثمونات"
 
 #: controllers/view/replace/replacecontroller.cpp:92
-#: controllers/view/search/searchcontroller.cpp:114
+#: controllers/view/search/searchcontroller.cpp:119
 #, fuzzy, kde-kuit-format
 msgctxt "@info"
 msgid "End of byte array reached.<nl/>Continue from the beginning?"
 msgstr "<nl/>لقد وصل إلى نهاية جدول الأثمونات<nl/>هل نكمل من البداية؟"
 
 #: controllers/view/replace/replacecontroller.cpp:93
-#: controllers/view/search/searchcontroller.cpp:115
+#: controllers/view/search/searchcontroller.cpp:120
 #, fuzzy, kde-kuit-format
 msgctxt "@info"
 msgid "Beginning of byte array reached.<nl/>Continue from the end?"
@@ -1469,7 +1469,7 @@ msgctxt "@title"
 msgid "Replace"
 msgstr "تعويض"
 
-#: controllers/view/search/searchcontroller.cpp:107
+#: controllers/view/search/searchcontroller.cpp:112
 #, fuzzy, kde-format
 msgctxt "@info"
 msgid "Search key not found in byte array."

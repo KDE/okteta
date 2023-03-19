@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: playground-utils/okteta.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-17 01:02+0000\n"
+"POT-Creation-Date: 2023-03-19 00:50+0000\n"
 "PO-Revision-Date: 2007-11-05 08:28-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -1065,8 +1065,8 @@ msgid "operand XOR data"
 msgstr "oibreann XOR sonraí"
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:72
-#: controllers/view/search/searchcontroller.cpp:106
-#: controllers/view/search/searchcontroller.cpp:112
+#: controllers/view/search/searchcontroller.cpp:111
+#: controllers/view/search/searchcontroller.cpp:117
 #, kde-format
 msgctxt "@title:window"
 msgid "Find"
@@ -1401,14 +1401,14 @@ msgid "Replace pattern not found in byte array."
 msgstr "Níor aimsíodh an patrún ionadach san eagar beart."
 
 #: controllers/view/replace/replacecontroller.cpp:92
-#: controllers/view/search/searchcontroller.cpp:114
+#: controllers/view/search/searchcontroller.cpp:119
 #, kde-kuit-format
 msgctxt "@info"
 msgid "End of byte array reached.<nl/>Continue from the beginning?"
 msgstr "Sroicheadh deireadh an eagair.<nl/>Lean ar aghaidh ón tús?"
 
 #: controllers/view/replace/replacecontroller.cpp:93
-#: controllers/view/search/searchcontroller.cpp:115
+#: controllers/view/search/searchcontroller.cpp:120
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Beginning of byte array reached.<nl/>Continue from the end?"
@@ -1500,7 +1500,7 @@ msgctxt "@title"
 msgid "Replace"
 msgstr "Ionadaigh"
 
-#: controllers/view/search/searchcontroller.cpp:107
+#: controllers/view/search/searchcontroller.cpp:112
 #, kde-format
 msgctxt "@info"
 msgid "Search key not found in byte array."
