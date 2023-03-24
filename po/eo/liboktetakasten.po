@@ -1,4 +1,6 @@
 # Translation of liboktetakasten into esperanto.
+# Copyright (C) 2009 Free Software Foundation, Inc.
+# This file is distributed under the same license as the okteta package.
 # Axel Rousseau <axel@esperanto-jeunes.org>, 2009.
 #
 msgid ""
@@ -6,8 +8,8 @@ msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-19 00:50+0000\n"
-"PO-Revision-Date: 2009-11-15 12:06+0100\n"
-"Last-Translator: Axel Rousseau <axel@esperanto-jeunes.org>\n"
+"PO-Revision-Date: 2023-03-23 21:50+0100\n"
+"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
@@ -19,12 +21,12 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
+msgstr "Axel Rousseau"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
+msgstr "axel@esperanto-jeunes.org"
 
 #: controllers/document/info/documentinfotool.cpp:48
 #: controllers/document/info/documentinfotoolviewfactory.cpp:24
@@ -279,8 +281,8 @@ msgstr ""
 #, kde-format
 msgid "Inserted 1 Byte"
 msgid_plural "Inserted %1 Bytes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Enmetis 1 Bajton"
+msgstr[1] "Enmetis %1 Bajtojn"
 
 #: controllers/view/bytetable/bytetableview.cpp:80
 #, kde-format
@@ -310,12 +312,10 @@ msgid "Charset Conversion"
 msgstr ""
 
 #: controllers/view/charsetconversion/charsetconversiontool.cpp:244
-#, fuzzy, kde-format
-#| msgctxt "@item description of bookmark"
-#| msgid "%1: %2"
+#, kde-format
 msgctxt "Converted from charset 1 to charset 2"
 msgid "%1 to %2"
-msgstr "%1: %2"
+msgstr ""
 
 #: controllers/view/charsetconversion/charsetconversiontoolviewfactory.cpp:24
 #, kde-format
@@ -689,8 +689,8 @@ msgstr ""
 #, kde-format
 msgid "1 byte"
 msgid_plural "%1 bytes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "1 bajto"
+msgstr[1] "%1 bajto"
 
 #: controllers/view/info/statistictablemodel.cpp:214
 #, kde-format
@@ -717,12 +717,10 @@ msgid "CRC-32"
 msgstr "CRC-32"
 
 #: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumalgorithm.cpp:82
-#, fuzzy, kde-format
-#| msgctxt "name of the checksum algorithm, Cyclic Redundancy Check 32"
-#| msgid "CRC-32"
+#, kde-format
 msgctxt "name of the checksum algorithm, Cyclic Redundancy Check 64"
 msgid "CRC-64"
-msgstr "CRC-32"
+msgstr ""
 
 #: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:31
 #, kde-format
@@ -1531,11 +1529,10 @@ msgid "Strings"
 msgstr ""
 
 #: controllers/view/stringsextract/stringsextracttoolviewfactory.cpp:24
-#, fuzzy, kde-format
-#| msgid "Settings"
+#, kde-format
 msgctxt "@title:window"
 msgid "Strings"
-msgstr "Agordo"
+msgstr ""
 
 #: controllers/view/stringsextract/stringsextractview.cpp:54
 #, kde-format
@@ -1626,8 +1623,8 @@ msgstr "%1[%2]"
 #, kde-format
 msgid "1 bit"
 msgid_plural "%1 bits"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "1 bito"
+msgstr[1] "%1 bito"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:62
 #, kde-format
@@ -1779,14 +1776,12 @@ msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
 #: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:88
-#, fuzzy, kde-format
-#| msgctxt "@item description of bookmark"
-#| msgid "%1: %2"
+#, kde-format
 msgctxt ""
 "Displayed in the type column. first comes the name of the enum, then the "
 "underlying type (e.g. uint32)"
 msgid "enum %1 (%2)"
-msgstr "%1: %2"
+msgstr ""
 
 #: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:75
 #, kde-format
@@ -1794,14 +1789,12 @@ msgid "0x%1 (no matching flags)"
 msgstr ""
 
 #: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:105
-#, fuzzy, kde-format
-#| msgctxt "@item description of bookmark"
-#| msgid "%1: %2"
+#, kde-format
 msgctxt ""
 "Displayed in the type column. first comes the name of the enum, then the "
 "underlying type (e.g. uint32)"
 msgid "flag %1 (%2)"
-msgstr "%1: %2"
+msgstr ""
 
 #: controllers/view/structures/datatypes/primitive/pointerdatainformation.cpp:116
 #, kde-format
@@ -1905,10 +1898,9 @@ msgid "ASCII char"
 msgstr ""
 
 #: controllers/view/structures/datatypes/strings/asciistringdata.cpp:153
-#, fuzzy, kde-format
-#| msgid "Settings"
+#, kde-format
 msgid "ASCII string"
-msgstr "Agordo"
+msgstr ""
 
 #: controllers/view/structures/datatypes/strings/ebcdicstringdata.cpp:137
 #, kde-format
@@ -1916,10 +1908,9 @@ msgid "EBCDIC char"
 msgstr ""
 
 #: controllers/view/structures/datatypes/strings/ebcdicstringdata.cpp:147
-#, fuzzy, kde-format
-#| msgid "Settings"
+#, kde-format
 msgid "EBCDIC string"
-msgstr "Agordo"
+msgstr ""
 
 #: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:131
 #, kde-format
@@ -1969,11 +1960,9 @@ msgstr ""
 #: controllers/view/structures/datatypes/strings/utf32stringdata.cpp:65
 #: controllers/view/structures/datatypes/strings/utf8stringdata.cpp:61
 #: controllers/view/structures/datatypes/strings/utf8stringdata.cpp:64
-#, fuzzy, kde-format
-#| msgctxt "@item description of bookmark"
-#| msgid "%1: %2"
+#, kde-format
 msgid "%1 (U+%2)"
-msgstr "%1: %2"
+msgstr ""
 
 #: controllers/view/structures/datatypes/strings/utf32stringdata.cpp:32
 #, kde-format
@@ -2001,10 +1990,9 @@ msgid "UTF8 char"
 msgstr ""
 
 #: controllers/view/structures/datatypes/strings/utf8stringdata.cpp:37
-#, fuzzy, kde-format
-#| msgid "Settings"
+#, kde-format
 msgid "UTF8 string"
-msgstr "Agordo"
+msgstr ""
 
 #: controllers/view/structures/datatypes/structuredatainformation.cpp:26
 #: controllers/view/structures/datatypes/taggeduniondatainformation.cpp:47
@@ -2231,12 +2219,10 @@ msgid "Little endian"
 msgstr ""
 
 #: controllers/view/structures/settings/structureviewsettingswidget.cpp:49
-#, fuzzy, kde-format
-#| msgctxt "@item:inlistbox coding of the bytes as values in the binary format"
-#| msgid "Bin"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Binary"
-msgstr "Bin"
+msgstr ""
 
 #: controllers/view/structures/settings/structureviewsettingswidget.cpp:50
 #, kde-format
@@ -2336,11 +2322,10 @@ msgid "Name"
 msgstr ""
 
 #: controllers/view/structures/structurestool.cpp:189
-#, fuzzy, kde-format
-#| msgid "Type:"
+#, kde-format
 msgctxt "type of a data structure"
 msgid "Type"
-msgstr "Tipo:"
+msgstr "Tipo"
 
 #: controllers/view/structures/structurestool.cpp:191
 #, kde-format
@@ -3107,12 +3092,10 @@ msgid "Sequence inserted."
 msgstr ""
 
 #: gui/io/streamencoder/base32/bytearraybase32streamencoder.cpp:137
-#, fuzzy, kde-format
-#| msgctxt "name of the encoding target"
-#| msgid "Base64"
+#, kde-format
 msgctxt "name of the encoding target"
 msgid "Base32"
-msgstr "Base64"
+msgstr ""
 
 #: gui/io/streamencoder/base32/bytearraybase32streamencoderconfigeditor.cpp:34
 #, kde-format
@@ -3357,24 +3340,3 @@ msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"
 msgid "UTF-8"
 msgstr "UTF-8"
-
-#~ msgid "Error"
-#~ msgstr "Eraro"
-
-#~ msgctxt "subelem type then array name and length"
-#~ msgid "%1[%2] (%3)"
-#~ msgstr "%1[%2] (%3)"
-
-#, fuzzy
-#~| msgctxt ""
-#~| "@item:inlistbox coding of the bytes as values in the binary format"
-#~| msgid "Bin"
-#~ msgctxt "Data type"
-#~ msgid "int"
-#~ msgstr "Bin"
-
-#, fuzzy
-#~| msgctxt "@item description of bookmark"
-#~| msgid "%1: %2"
-#~ msgid "%1 (U+%1)"
-#~ msgstr "%1: %2"
