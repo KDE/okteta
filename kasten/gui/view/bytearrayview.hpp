@@ -184,9 +184,9 @@ private:
     OKTETAKASTENGUI_NO_EXPORT void init();
 
 private Q_SLOTS:
-    void setFontByGlobalSettings();
+    OKTETAKASTENGUI_NO_EXPORT void setFontByGlobalSettings();
 
-    void onSelectionChanged(const Okteta::AddressRange& selection);
+    OKTETAKASTENGUI_NO_EXPORT void onSelectionChanged(const Okteta::AddressRange& selection);
 
 private:
     Okteta::ByteArrayJanusView* mWidget;

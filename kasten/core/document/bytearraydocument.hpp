@@ -71,8 +71,8 @@ Q_SIGNALS: // If::Versionable
     void headVersionChanged(int newHeadVersionIndex) override;
 
 private Q_SLOTS:
-    void onModelModified(bool newState);
-    void onHeadVersionDescriptionChanged(const QString& newDescription);
+    OKTETAKASTENCORE_NO_EXPORT void onModelModified(bool newState);
+    OKTETAKASTENCORE_NO_EXPORT void onHeadVersionDescriptionChanged(const QString& newDescription);
 
 private:
     Okteta::PieceTableByteArrayModel* mByteArray;

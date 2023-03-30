@@ -37,7 +37,7 @@ public: // AbstractView API
     bool hasFocus() const override;
 
 private Q_SLOTS:
-    void onTitleChange(const QString& newTitle);
+    KASTENGUI_NO_EXPORT void onTitleChange(const QString& newTitle);
 
 private:
     QLabel* mLabel;

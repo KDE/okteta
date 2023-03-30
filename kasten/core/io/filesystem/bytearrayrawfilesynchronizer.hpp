@@ -44,8 +44,8 @@ protected:
     void setDocument(ByteArrayDocument* document);
 
 private Q_SLOTS:
-    void onUrlChange(const QUrl& url);
-    void onModelModified(bool isModified);
+    OKTETAKASTENCORE_NO_EXPORT void onUrlChange(const QUrl& url);
+    OKTETAKASTENCORE_NO_EXPORT void onModelModified(bool isModified);
 
 private:
     ByteArrayDocument* mDocument = nullptr;
