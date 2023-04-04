@@ -17,7 +17,6 @@ class AbstractExportJobPrivate
 {
 public:
     explicit AbstractExportJobPrivate(AbstractExportJob* parent);
-    AbstractExportJobPrivate() = delete;
 
     virtual ~AbstractExportJobPrivate();
 

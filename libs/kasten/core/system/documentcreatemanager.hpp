@@ -29,7 +29,6 @@ class KASTENCORE_EXPORT DocumentCreateManager : public QObject
 
 public:
     explicit DocumentCreateManager(DocumentManager* manager);
-    DocumentCreateManager() = delete;
 
     ~DocumentCreateManager() override;
 

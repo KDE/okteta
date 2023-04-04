@@ -18,7 +18,7 @@ class AbstractByteArrayModelPrivate
 {
 public:
     explicit AbstractByteArrayModelPrivate(AbstractByteArrayModel* parent);
-    AbstractByteArrayModelPrivate() = delete;
+
     virtual ~AbstractByteArrayModelPrivate();
 
 protected:

@@ -23,7 +23,6 @@ class AbstractColumnRendererPrivate
 {
 public:
     explicit AbstractColumnRendererPrivate(AbstractColumnStylist* stylist);
-    AbstractColumnRendererPrivate() = delete;
 
     virtual ~AbstractColumnRendererPrivate();
 

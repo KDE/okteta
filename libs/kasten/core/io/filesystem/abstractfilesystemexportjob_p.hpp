@@ -22,7 +22,6 @@ class AbstractFileSystemExportJobPrivate : public AbstractExportJobPrivate
 public:
     AbstractFileSystemExportJobPrivate(AbstractFileSystemExportJob* parent,
                                        AbstractModel* model, const AbstractModelSelection* selection, const QUrl& url);
-    AbstractFileSystemExportJobPrivate() = delete;
 
     ~AbstractFileSystemExportJobPrivate() override;
 

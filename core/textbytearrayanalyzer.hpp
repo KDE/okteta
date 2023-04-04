@@ -31,7 +31,6 @@ class OKTETACORE_EXPORT TextByteArrayAnalyzer
 {
 public:
     TextByteArrayAnalyzer(const AbstractByteArrayModel* byteArrayModel, const CharCodec* charCodec);
-    TextByteArrayAnalyzer() = delete;
 
     ~TextByteArrayAnalyzer();
 

@@ -21,7 +21,6 @@ class KASTENCORE_EXPORT DocumentVersionData
 {
 public:
     DocumentVersionData(DocumentVersionId id, const QString& changeComment);
-    DocumentVersionData() = delete;
 
 public:
     DocumentVersionId id() const;

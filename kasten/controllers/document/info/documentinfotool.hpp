@@ -32,7 +32,6 @@ class DocumentInfoTool : public AbstractTool
 
 public:
     explicit DocumentInfoTool(DocumentSyncManager* syncManager);
-    DocumentInfoTool() = delete;
 
     ~DocumentInfoTool() override;
 

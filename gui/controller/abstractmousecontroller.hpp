@@ -21,7 +21,6 @@ protected:
     AbstractMouseController(AbstractByteArrayView* view, AbstractMouseController* parent);
 
 public:
-    AbstractMouseController() = delete;
     virtual ~AbstractMouseController();
 
 public: // API to be implemented

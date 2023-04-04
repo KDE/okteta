@@ -21,7 +21,6 @@ class AbstractFileSystemLoadJobPrivate : public AbstractLoadJobPrivate
 {
 public:
     AbstractFileSystemLoadJobPrivate(AbstractFileSystemLoadJob* parent, AbstractModelFileSystemSynchronizer* synchronizer, const QUrl& url);
-    AbstractFileSystemLoadJobPrivate() = delete;
 
     ~AbstractFileSystemLoadJobPrivate() override;
 

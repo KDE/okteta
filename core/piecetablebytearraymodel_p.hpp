@@ -29,7 +29,6 @@ public:
     explicit PieceTableByteArrayModelPrivate(PieceTableByteArrayModel* parent, const QByteArray& data);
     /** creates a writeable buffer which is deleted at the end */
     explicit PieceTableByteArrayModelPrivate(PieceTableByteArrayModel* parent, int size, Byte fillByte = '\0');
-    PieceTableByteArrayModelPrivate() = delete;
 
     ~PieceTableByteArrayModelPrivate() override;
 

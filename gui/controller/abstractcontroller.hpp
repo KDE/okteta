@@ -19,7 +19,6 @@ protected:
     explicit AbstractController(AbstractController* parent);
 
 public:
-    AbstractController() = delete;
     virtual ~AbstractController();
 
 public: // API to be implemented

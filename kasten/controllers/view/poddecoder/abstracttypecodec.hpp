@@ -24,7 +24,6 @@ protected:
     explicit AbstractTypeCodec(const QString& name);
 
 public:
-    AbstractTypeCodec() = delete;
     virtual ~AbstractTypeCodec();
 
 public: // API to be implemented

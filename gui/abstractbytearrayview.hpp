@@ -131,7 +131,6 @@ protected:
     OKTETAGUI_NO_EXPORT AbstractByteArrayView(AbstractByteArrayViewPrivate* d, QWidget* parent);
 
 public:
-    AbstractByteArrayView() = delete;
     ~AbstractByteArrayView() override;
 
 public: // value access

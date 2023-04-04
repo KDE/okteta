@@ -19,7 +19,6 @@ protected:
     explicit AbstractWheelController(AbstractWheelController* parent);
 
 public:
-    AbstractWheelController() = delete;
     virtual ~AbstractWheelController();
 
 public: // API to be implemented

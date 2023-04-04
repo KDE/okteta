@@ -39,7 +39,6 @@ public:
     explicit ByteArrayValidator(QObject* parent = nullptr,
                                 Coding codecId = CharCoding,
                                 int charCodecId = LocalEncoding);
-    ByteArrayValidator() = delete;
 
     ~ByteArrayValidator() override;
 

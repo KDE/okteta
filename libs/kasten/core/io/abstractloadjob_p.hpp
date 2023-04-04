@@ -18,7 +18,6 @@ class AbstractLoadJobPrivate
 {
 public:
     explicit AbstractLoadJobPrivate(AbstractLoadJob* parent);
-    AbstractLoadJobPrivate() = delete;
 
     virtual ~AbstractLoadJobPrivate();
 

@@ -34,7 +34,6 @@ class KASTENCORE_EXPORT DocumentSyncManager : public QObject
 public:
     explicit DocumentSyncManager(DocumentManager* manager);
 
-    DocumentSyncManager() = delete;
     ~DocumentSyncManager() override;
 
 public:

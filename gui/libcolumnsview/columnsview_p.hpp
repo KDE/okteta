@@ -21,7 +21,7 @@ class ColumnsViewPrivate
 {
 public:
     explicit ColumnsViewPrivate(/*bool R,*/ ColumnsView* parent);
-    ColumnsViewPrivate() = delete;
+
     virtual ~ColumnsViewPrivate();
 
 public:

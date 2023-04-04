@@ -29,7 +29,6 @@ class OKTETAGUI_EXPORT ValueByteArrayColumnRenderer : public AbstractByteArrayCo
 public:
     ValueByteArrayColumnRenderer(AbstractColumnStylist* stylist,
                                  AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges);
-    ValueByteArrayColumnRenderer() = delete;
 
     ~ValueByteArrayColumnRenderer() override;
 

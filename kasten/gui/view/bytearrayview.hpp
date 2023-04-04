@@ -55,7 +55,6 @@ public:
     ByteArrayView(ByteArrayDocument* document, ByteArrayViewProfileSynchronizer* synchronizer);
     ByteArrayView(ByteArrayView* other, ByteArrayViewProfileSynchronizer* synchronizer,
                   Qt::Alignment alignment = {});
-    ByteArrayView() = delete;
 
     ~ByteArrayView() override;
 

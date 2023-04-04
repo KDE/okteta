@@ -24,7 +24,6 @@ class AbstractModelFileSystemSynchronizerPrivate : public AbstractModelSynchroni
 {
 public:
     explicit AbstractModelFileSystemSynchronizerPrivate(AbstractModelFileSystemSynchronizer* parent);
-    AbstractModelFileSystemSynchronizerPrivate() = delete;
 
     ~AbstractModelFileSystemSynchronizerPrivate() override;
 

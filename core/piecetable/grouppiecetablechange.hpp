@@ -32,7 +32,6 @@ class GroupPieceTableChange : public AbstractPieceTableChange
 {
 public:
     GroupPieceTableChange(GroupPieceTableChange* parent, const QString& description);
-    GroupPieceTableChange() = delete;
 
     ~GroupPieceTableChange() override;
 

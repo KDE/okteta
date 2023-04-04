@@ -22,7 +22,6 @@ class AbstractLinePopupPrivate
 {
 public:
     explicit AbstractLinePopupPrivate(AbstractLinePopup* parent);
-    AbstractLinePopupPrivate() = delete;
 
     ~AbstractLinePopupPrivate();
 

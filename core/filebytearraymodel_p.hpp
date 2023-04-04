@@ -24,7 +24,6 @@ class FileByteArrayModelPrivate : public AbstractByteArrayModelPrivate
 
 public:
     FileByteArrayModelPrivate(FileByteArrayModel* parent, int pageNumber, int pageSize);
-    FileByteArrayModelPrivate() = delete;
 
     ~FileByteArrayModelPrivate() override;
 

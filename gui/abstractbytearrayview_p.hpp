@@ -47,7 +47,6 @@ class AbstractByteArrayViewPrivate : public ColumnsViewPrivate
 {
 public:
     explicit AbstractByteArrayViewPrivate(AbstractByteArrayView* parent);
-    AbstractByteArrayViewPrivate() = delete;
 
     ~AbstractByteArrayViewPrivate() override;
 

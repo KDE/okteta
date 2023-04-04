@@ -25,7 +25,6 @@ public:
     ByteArrayModelPrivate(ByteArrayModel* parent, Byte* data, int size, int rawSize, bool keepsMemory);
     ByteArrayModelPrivate(ByteArrayModel* parent, const Byte* data, int size);
     ByteArrayModelPrivate(ByteArrayModel* parent, int size, int maxSize);
-    ByteArrayModelPrivate() = delete;
 
     ~ByteArrayModelPrivate() override;
 

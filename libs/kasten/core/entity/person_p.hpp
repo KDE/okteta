@@ -21,7 +21,6 @@ class PersonPrivate : public QSharedData
 {
 public:
     PersonPrivate(const QString& name, const QIcon& faceIcon);
-    PersonPrivate() = delete;
 
     ~PersonPrivate();
 

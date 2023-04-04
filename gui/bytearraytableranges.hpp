@@ -33,7 +33,6 @@ class OKTETAGUI_EXPORT ByteArrayTableRanges
 {
 public:
     explicit ByteArrayTableRanges(ByteArrayTableLayout* layout);
-    ByteArrayTableRanges() = delete;
 
     ~ByteArrayTableRanges();
 
