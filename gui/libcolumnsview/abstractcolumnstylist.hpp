@@ -28,7 +28,11 @@ protected:
 
 public:
     AbstractColumnStylist();
+    AbstractColumnStylist(const AbstractColumnStylist&) = delete;
+
     virtual ~AbstractColumnStylist();
+
+    AbstractColumnStylist& operator=(const AbstractColumnStylist&) = delete;
 
 public: // API to be reimplemented in the subclasses
     virtual const QPalette& palette() const = 0;

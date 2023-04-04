@@ -24,7 +24,11 @@ class KASTENCONTROLLERS_EXPORT ViewAreaContextMenuControllerFactory : public Abs
 public:
     ViewAreaContextMenuControllerFactory(MultiViewAreas* multiViewAreas,
                                          DocumentSyncManager* syncManager);
+    ViewAreaContextMenuControllerFactory(const ViewAreaContextMenuControllerFactory&) = delete;
+
     ~ViewAreaContextMenuControllerFactory() override;
+
+    ViewAreaContextMenuControllerFactory& operator=(const ViewAreaContextMenuControllerFactory&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     AbstractXmlGuiController* create(KXMLGUIClient* guiClient) const override;

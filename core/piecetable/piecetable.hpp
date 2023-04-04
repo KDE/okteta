@@ -20,6 +20,11 @@ class PieceTable
 {
 public:
     explicit PieceTable(Size size = 0);
+    PieceTable(const PieceTable&) = delete;
+
+    ~PieceTable();
+
+    PieceTable& operator=(const PieceTable&) = delete;
 
 public:
     void init(Size size);
@@ -44,6 +49,8 @@ private:
     QLinkedList<Piece> mList;
     Size mSize;
 };
+
+inline PieceTable::~PieceTable() = default;
 
 inline Size PieceTable::size() const { return mSize; }
 

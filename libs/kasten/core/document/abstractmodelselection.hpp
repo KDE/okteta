@@ -22,7 +22,10 @@ protected:
     AbstractModelSelection();
 
 public:
+    AbstractModelSelection(const AbstractModelSelection&) = delete;
     virtual ~AbstractModelSelection();
+
+    AbstractModelSelection& operator=(const AbstractModelSelection&) = delete;
 
 public: // API to be implemented
 //     virtual bool isValid() const = 0;

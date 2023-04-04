@@ -21,6 +21,11 @@ class OKTETAKASTENGUI_EXPORT ByteArrayViewFactory : public AbstractViewFactory
 {
 public:
     explicit ByteArrayViewFactory(ByteArrayViewProfileManager* byteArrayViewProfileManager);
+    ByteArrayViewFactory(const ByteArrayViewFactory&) = delete;
+
+    ~ByteArrayViewFactory() = default;
+
+    ByteArrayViewFactory& operator=(const ByteArrayViewFactory&) = delete;
 
 public:
     AbstractView* createViewFor(AbstractDocument* document) override;

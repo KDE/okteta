@@ -19,9 +19,12 @@ class SafeReference;
 
 class SafeReferenceHolder
 {
-    Q_DISABLE_COPY(SafeReferenceHolder)
     SafeReferenceHolder();
     ~SafeReferenceHolder();
+
+public:
+    SafeReferenceHolder(const SafeReferenceHolder&) = delete;
+    SafeReferenceHolder& operator=(const SafeReferenceHolder&) = delete;
 
 public:
     /** sets all refereces to this object to null */
@@ -47,7 +50,9 @@ public:
     explicit SafeReference(DataInformation* data);
     SafeReference(const SafeReference& other);
     ~SafeReference();
+
     SafeReference& operator=(const SafeReference& other) = delete;
+
     inline DataInformation* data() const;
 
 private:

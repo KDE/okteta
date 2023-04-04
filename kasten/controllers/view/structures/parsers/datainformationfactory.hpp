@@ -33,58 +33,73 @@ struct CommonParsedData : public ParserInfo
         : ParserInfo(i)
         , endianess(DataInformation::DataInformationEndianess::EndianessInherit)
     {}
+    CommonParsedData(const CommonParsedData&) = delete;
+
+    ~CommonParsedData() = default;
+
+    CommonParsedData& operator=(const CommonParsedData&) = delete;
+
     QScriptValue updateFunc;
     QScriptValue validationFunc;
     QScriptValue toStringFunc;
     QString customTypeName;
     DataInformation::DataInformationEndianess endianess;
-
-private:
-    Q_DISABLE_COPY(CommonParsedData)
 };
 
 struct BitfieldParsedData : public ParserInfo
 {
     inline explicit BitfieldParsedData(const ParserInfo& i) : ParserInfo(i) {}
+    BitfieldParsedData(const BitfieldParsedData&) = delete;
+
+    ~BitfieldParsedData() = default;
+
+    BitfieldParsedData& operator=(const BitfieldParsedData&) = delete;
+
     QString type;
     ParsedNumber<int> width;
-
-private:
-    Q_DISABLE_COPY(BitfieldParsedData)
 };
 
 struct PrimitiveParsedData : public ParserInfo
 {
     inline explicit PrimitiveParsedData(const ParserInfo& i) : ParserInfo(i) {}
-    QString type;
+    PrimitiveParsedData(const PrimitiveParsedData&) = delete;
 
-private:
-    Q_DISABLE_COPY(PrimitiveParsedData)
+    ~PrimitiveParsedData() = default;
+
+    PrimitiveParsedData& operator=(const PrimitiveParsedData&) = delete;
+
+    QString type;
 };
 
 struct EnumParsedData : public ParserInfo
 {
     inline explicit EnumParsedData(const ParserInfo& i) : ParserInfo(i) {}
+    EnumParsedData(const EnumParsedData&) = delete;
+
+    ~EnumParsedData() = default;
+
+    EnumParsedData& operator=(const EnumParsedData&) = delete;
+
     QString type;
     QString enumName;
     EnumDefinition::Ptr enumDef; // TODO QMap<QString, QScriptValue> instead
     /** only used if enumDef is null, to allow sharing (only possible in OSD) */
     QScriptValue enumValuesObject;
-
-private:
-    Q_DISABLE_COPY(EnumParsedData)
 };
 
 struct StringParsedData : public ParserInfo
 {
     inline explicit StringParsedData(const ParserInfo& i) : ParserInfo(i) {}
+    StringParsedData(const StringParsedData&) = delete;
+
+    ~StringParsedData() = default;
+
+    StringParsedData& operator=(const StringParsedData&) = delete;
+
     QString encoding;
     ParsedNumber<quint32> termination;
     ParsedNumber<quint32> maxCharCount;
     ParsedNumber<quint32> maxByteCount;
-
-private:
-    Q_DISABLE_COPY(StringParsedData)
 };
 
 struct ArrayParsedData : public ParserInfo
@@ -93,11 +108,14 @@ struct ArrayParsedData : public ParserInfo
         : ParserInfo(i)
         , arrayType(nullptr)
     {}
+    ArrayParsedData(const ArrayParsedData&) = delete;
+
+    ~ArrayParsedData() = default;
+
+    ArrayParsedData& operator=(const ArrayParsedData&) = delete;
+
     QScriptValue length;
     DataInformation* arrayType;
-
-private:
-    Q_DISABLE_COPY(ArrayParsedData)
 };
 
 struct PointerParsedData : public ParserInfo
@@ -108,13 +126,16 @@ struct PointerParsedData : public ParserInfo
         , pointerTarget(nullptr)
         , pointerScale(1)
     {}
+    PointerParsedData(const PointerParsedData&) = delete;
+
+    ~PointerParsedData() = default;
+
+    PointerParsedData& operator=(const PointerParsedData&) = delete;
+
     DataInformation* valueType;
     DataInformation* pointerTarget;
     qint64           pointerScale;
     QScriptValue     interpretFunc;
-
-private:
-    Q_DISABLE_COPY(PointerParsedData)
 };
 
 struct TaggedUnionParsedData : public ParserInfo
@@ -126,21 +147,27 @@ struct TaggedUnionParsedData : public ParserInfo
         QSharedPointer<ChildrenParser> fields;
     };
     inline explicit TaggedUnionParsedData(const ParserInfo& i) : ParserInfo(i) {}
+    TaggedUnionParsedData(const TaggedUnionParsedData&) = delete;
+
+    ~TaggedUnionParsedData() = default;
+
+    TaggedUnionParsedData& operator=(const TaggedUnionParsedData&) = delete;
+
     QScopedPointer<ChildrenParser> children;
     QVector<Alternatives> alternatives;
     QScopedPointer<ChildrenParser> defaultFields;
-
-private:
-    Q_DISABLE_COPY(TaggedUnionParsedData)
 };
 
 struct StructOrUnionParsedData : public ParserInfo
 {
     inline explicit StructOrUnionParsedData(const ParserInfo& i) : ParserInfo(i) {}
-    QScopedPointer<ChildrenParser> children;
+    StructOrUnionParsedData(const StructOrUnionParsedData&) = delete;
 
-private:
-    Q_DISABLE_COPY(StructOrUnionParsedData)
+    ~StructOrUnionParsedData() = default;
+
+    StructOrUnionParsedData& operator=(const StructOrUnionParsedData&) = delete;
+
+    QScopedPointer<ChildrenParser> children;
 };
 
 namespace DataInformationFactory {

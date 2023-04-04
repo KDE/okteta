@@ -21,6 +21,11 @@ class OKTETACORE_EXPORT Character : public QChar
 public:
     constexpr Character(QChar qchar);   // krazy:exclude=explicit
     constexpr Character(QChar qchar, bool isUndefined);
+    Character(const Character&) = default;
+
+    ~Character() = default;
+
+    Character& operator=(const Character&) = default;
 
 public:
     constexpr bool isUndefined() const;

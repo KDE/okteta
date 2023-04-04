@@ -21,7 +21,12 @@ struct Char8
 {
 public:
     Char8(Okteta::Character c);
+    Char8(const Char8&) = default;
     Char8();
+
+    ~Char8() = default;
+
+    Char8& operator=(const Char8&) = default;
 
 public:
     QString toString(/** TODO: undefinedChar */) const;

@@ -28,6 +28,11 @@ class OKTETACORE_EXPORT ByteArrayChange
 public:
     ByteArrayChange();
     explicit ByteArrayChange(const ArrayChangeMetrics& metrics, const QByteArray& data = QByteArray());
+    ByteArrayChange(const ByteArrayChange&) = default;
+
+    ~ByteArrayChange() = default;
+
+    ByteArrayChange& operator=(const ByteArrayChange&) = default;
 
 public:
     const ArrayChangeMetrics& metrics() const;

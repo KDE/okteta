@@ -23,8 +23,11 @@ class AddressRangeList : public QLinkedList<AddressRange>
 {
 public:
     AddressRangeList();
+    AddressRangeList(const AddressRangeList&);
 
     ~AddressRangeList();
+
+    AddressRangeList& operator=(const AddressRangeList&) = delete;
 
 public:
     void addAddressRange(const AddressRange& addressRange);

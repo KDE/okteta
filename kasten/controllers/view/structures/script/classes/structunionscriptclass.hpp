@@ -13,8 +13,6 @@
 
 class StructUnionScriptClass : public DefaultScriptClass
 {
-    Q_DISABLE_COPY(StructUnionScriptClass)
-
 public:
     StructUnionScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
     ~StructUnionScriptClass() override;

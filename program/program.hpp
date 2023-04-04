@@ -25,7 +25,10 @@ class OktetaProgram
 {
 public:
     OktetaProgram(int& argc, char* argv[]);
+    OktetaProgram(const OktetaProgram&) = delete;
     ~OktetaProgram();
+
+    OktetaProgram& operator=(const OktetaProgram&) = delete;
 
 public:
     int execute();

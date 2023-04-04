@@ -29,7 +29,13 @@ public:
         : mLastModified(lastModified)
         , mLocked(locked)
     {}
+    ByteArrayViewProfileFileInfo(const ByteArrayViewProfileFileInfo&) = default;
 
+    ~ByteArrayViewProfileFileInfo() = default;
+
+    ByteArrayViewProfileFileInfo& operator=(const ByteArrayViewProfileFileInfo&) = default;
+
+public:
     const QDateTime& lastModified() const { return mLastModified; }
     bool isLocked()                 const { return mLocked; }
 

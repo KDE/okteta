@@ -31,8 +31,11 @@ class OKTETACORE_EXPORT TextByteArrayAnalyzer
 {
 public:
     TextByteArrayAnalyzer(const AbstractByteArrayModel* byteArrayModel, const CharCodec* charCodec);
+    TextByteArrayAnalyzer(const TextByteArrayAnalyzer&) = delete;
 
     ~TextByteArrayAnalyzer();
+
+    TextByteArrayAnalyzer& operator=(const TextByteArrayAnalyzer&) = delete;
 
 public:
     /** searches for the start of the word including the given index.

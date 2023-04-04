@@ -22,7 +22,11 @@ class KASTENCONTROLLERS_EXPORT CloseControllerFactory : public AbstractXmlGuiCon
 {
 public:
     explicit CloseControllerFactory(AbstractDocumentStrategy* documentStrategy);
+    CloseControllerFactory(const CloseControllerFactory&) = delete;
+
     ~CloseControllerFactory() override;
+
+    CloseControllerFactory& operator=(const CloseControllerFactory&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     AbstractXmlGuiController* create(KXMLGUIClient* guiClient) const override;

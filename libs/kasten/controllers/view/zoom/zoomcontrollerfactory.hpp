@@ -20,7 +20,11 @@ class KASTENCONTROLLERS_EXPORT ZoomControllerFactory : public AbstractXmlGuiCont
 {
 public:
     ZoomControllerFactory();
+    ZoomControllerFactory(const ZoomControllerFactory&) = delete;
+
     ~ZoomControllerFactory() override;
+
+    ZoomControllerFactory& operator=(const ZoomControllerFactory&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     AbstractXmlGuiController* create(KXMLGUIClient* guiClient) const override;

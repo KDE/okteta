@@ -21,6 +21,11 @@ class OKTETACORE_EXPORT BookmarksConstIterator
 {
 public:
     explicit BookmarksConstIterator(BookmarksConstIteratorAdapter* adapter = nullptr);
+    BookmarksConstIterator(const BookmarksConstIterator&) = default;
+
+    ~BookmarksConstIterator() = default;
+
+    BookmarksConstIterator& operator=(const BookmarksConstIterator&) = default;
 
 public:
     bool hasList() const;

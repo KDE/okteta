@@ -20,7 +20,11 @@ class OKTETAKASTENCONTROLLERS_EXPORT StringsExtractToolFactory : public Abstract
 {
 public:
     StringsExtractToolFactory();
+    StringsExtractToolFactory(const StringsExtractToolFactory&) = delete;
+
     ~StringsExtractToolFactory() override;
+
+    StringsExtractToolFactory& operator=(const StringsExtractToolFactory&) = delete;
 
 public: // AbstractToolFactory API
     AbstractTool* create() const override;

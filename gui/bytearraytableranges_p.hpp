@@ -22,6 +22,12 @@ public:
     explicit ByteArrayTableRangesPrivate(ByteArrayTableLayout* layout)
         : layout(layout)
     {}
+    ByteArrayTableRangesPrivate() = delete;
+    ByteArrayTableRangesPrivate(const ByteArrayTableRangesPrivate&) = delete;
+
+    ~ByteArrayTableRangesPrivate() = default;
+
+    ByteArrayTableRangesPrivate& operator=(const ByteArrayTableRangesPrivate&) = delete;
 
 public:
     ByteArrayTableLayout* const layout;

@@ -23,11 +23,13 @@ class QScriptValue;
 
 class ScriptHandler
 {
-    Q_DISABLE_COPY(ScriptHandler)
-
 public:
     ScriptHandler(QScriptEngine* engine, TopLevelDataInformation* topLevel);
+    ScriptHandler(const ScriptHandler&) = delete;
+
     virtual ~ScriptHandler();
+
+    ScriptHandler& operator=(const ScriptHandler&) = delete;
 
 public:
     void validateData(DataInformation* data);

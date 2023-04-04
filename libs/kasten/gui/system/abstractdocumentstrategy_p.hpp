@@ -17,8 +17,11 @@ class AbstractDocumentStrategyPrivate
 {
 public:
     explicit AbstractDocumentStrategyPrivate(AbstractDocumentStrategy* parent);
+    AbstractDocumentStrategyPrivate(const AbstractDocumentStrategyPrivate&) = delete;
 
     virtual ~AbstractDocumentStrategyPrivate();
+
+    AbstractDocumentStrategyPrivate& operator=(const AbstractDocumentStrategyPrivate&) = delete;
 
 protected:
     AbstractDocumentStrategy* const q_ptr;

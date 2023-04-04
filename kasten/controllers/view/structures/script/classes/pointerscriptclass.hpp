@@ -13,8 +13,6 @@
 
 class PointerScriptClass : public PrimitiveScriptClass
 {
-    Q_DISABLE_COPY(PointerScriptClass)
-
 public:
     PointerScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
     ~PointerScriptClass() override;

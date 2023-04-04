@@ -25,7 +25,11 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewProfileControllerFactory : public Abstr
 public:
     ViewProfileControllerFactory(ByteArrayViewProfileManager* viewProfileManager,
                                  QWidget* parentWidget);
+    ViewProfileControllerFactory(const ViewProfileControllerFactory&) = delete;
+
     ~ViewProfileControllerFactory() override;
+
+    ViewProfileControllerFactory& operator=(const ViewProfileControllerFactory&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     AbstractXmlGuiController* create(KXMLGUIClient* guiClient) const override;

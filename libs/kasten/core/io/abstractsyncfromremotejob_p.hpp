@@ -17,8 +17,11 @@ class AbstractSyncFromRemoteJobPrivate
 {
 public:
     explicit AbstractSyncFromRemoteJobPrivate(AbstractSyncFromRemoteJob* parent);
+    AbstractSyncFromRemoteJobPrivate(const AbstractSyncFromRemoteJobPrivate&) = delete;
 
     virtual ~AbstractSyncFromRemoteJobPrivate();
+
+    AbstractSyncFromRemoteJobPrivate& operator=(const AbstractSyncFromRemoteJobPrivate&) = delete;
 
 protected:
     AbstractSyncFromRemoteJob* const q_ptr;

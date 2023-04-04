@@ -21,6 +21,11 @@ class ByteArraySequenceGeneratorSettings
 {
 public:
     ByteArraySequenceGeneratorSettings();
+    ByteArraySequenceGeneratorSettings(const ByteArraySequenceGeneratorSettings&) = default;
+
+    ~ByteArraySequenceGeneratorSettings() = default;
+
+    ByteArraySequenceGeneratorSettings& operator=(const ByteArraySequenceGeneratorSettings&) = default;
 
 public:
     QByteArray pattern;

@@ -20,7 +20,11 @@ class OKTETAKASTENCONTROLLERS_EXPORT OverwriteOnlyControllerFactory : public Abs
 {
 public:
     OverwriteOnlyControllerFactory();
+    OverwriteOnlyControllerFactory(const OverwriteOnlyControllerFactory&) = delete;
+
     ~OverwriteOnlyControllerFactory() override;
+
+    OverwriteOnlyControllerFactory& operator=(const OverwriteOnlyControllerFactory&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     AbstractXmlGuiController* create(KXMLGUIClient* guiClient) const override;

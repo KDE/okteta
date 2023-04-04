@@ -20,7 +20,11 @@ class KASTENCONTROLLERS_EXPORT DocumentsToolViewFactory : public AbstractToolVie
 {
 public:
     DocumentsToolViewFactory();
+    DocumentsToolViewFactory(const DocumentsToolViewFactory&) = delete;
+
     ~DocumentsToolViewFactory() override;
+
+    DocumentsToolViewFactory& operator=(const DocumentsToolViewFactory&) = delete;
 
 public: // AbstractToolViewFactory API
     AbstractToolView* create(AbstractTool* tool) const override;

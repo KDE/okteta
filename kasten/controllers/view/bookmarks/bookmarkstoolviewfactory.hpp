@@ -20,7 +20,11 @@ class OKTETAKASTENCONTROLLERS_EXPORT BookmarksToolViewFactory : public AbstractT
 {
 public:
     BookmarksToolViewFactory();
+    BookmarksToolViewFactory(const BookmarksToolViewFactory&) = delete;
+
     ~BookmarksToolViewFactory() override;
+
+    BookmarksToolViewFactory& operator=(const BookmarksToolViewFactory&) = delete;
 
 public: // AbstractToolViewFactory API
     AbstractToolView* create(AbstractTool* tool) const override;

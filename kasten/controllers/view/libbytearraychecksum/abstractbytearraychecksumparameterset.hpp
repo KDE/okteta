@@ -17,7 +17,11 @@ protected:
     AbstractByteArrayChecksumParameterSet();
 
 public:
+    AbstractByteArrayChecksumParameterSet(const AbstractByteArrayChecksumParameterSet&) = delete;
+
     virtual ~AbstractByteArrayChecksumParameterSet();
+
+    AbstractByteArrayChecksumParameterSet& operator=(const AbstractByteArrayChecksumParameterSet&) = delete;
 
 public:
     virtual const char* id() const = 0;

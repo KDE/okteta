@@ -20,7 +20,11 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewContextMenuControllerFactory : public A
 {
 public:
     ViewContextMenuControllerFactory();
+    ViewContextMenuControllerFactory(const ViewContextMenuControllerFactory&) = delete;
+
     ~ViewContextMenuControllerFactory() override;
+
+    ViewContextMenuControllerFactory& operator=(const ViewContextMenuControllerFactory&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     AbstractXmlGuiController* create(KXMLGUIClient* guiClient) const override;

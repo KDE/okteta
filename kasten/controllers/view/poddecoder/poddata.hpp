@@ -24,6 +24,11 @@ public:
 
 public:
     PODData();
+    PODData(const PODData&) = delete;
+
+    ~PODData() = default;
+
+    PODData& operator=(const PODData&) = delete;
 
 public:
     void setByteOrder(QSysInfo::Endian byteOrder);

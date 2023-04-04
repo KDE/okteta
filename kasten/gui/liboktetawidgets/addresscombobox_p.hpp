@@ -21,6 +21,11 @@ class AddressComboBoxPrivate
 {
 public:
     explicit AddressComboBoxPrivate(AddressComboBox* parent);
+    AddressComboBoxPrivate(const AddressComboBoxPrivate&) = delete;
+
+    ~AddressComboBoxPrivate() = default;
+
+    AddressComboBoxPrivate& operator=(const AddressComboBoxPrivate&) = delete;
 
 public:
     Address address() const;

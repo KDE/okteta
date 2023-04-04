@@ -29,8 +29,6 @@ namespace Kasten {
  */
 class StructureDefinitionFile
 {
-    Q_DISABLE_COPY(StructureDefinitionFile)
-
 public:
     /**
      * This class uses lazy parsing
@@ -38,7 +36,11 @@ public:
      *      (passed by value so nothing bad can happen)
      */
     explicit StructureDefinitionFile(const KPluginInfo& info);
+    StructureDefinitionFile(const StructureDefinitionFile&) = delete;
+
     virtual ~StructureDefinitionFile();
+
+    StructureDefinitionFile& operator=(const StructureDefinitionFile&) = delete;
 
 public:
     QVector<TopLevelDataInformation*> structures() const;

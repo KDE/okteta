@@ -18,13 +18,12 @@ class ScriptHandlerInfo;
 
 class ComplexArrayData : public AbstractArrayData
 {
-    Q_DISABLE_COPY(ComplexArrayData)
-
 public:
     /** Takes ownership of @p data !*/
     ComplexArrayData(unsigned int initialLength, DataInformation* data, ArrayDataInformation* parent);
     ~ComplexArrayData() override;
 
+public:
     QVariant dataAt(uint index, int column, int role) override;
 
     unsigned int length() const override;

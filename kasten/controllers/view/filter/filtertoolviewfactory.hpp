@@ -20,7 +20,11 @@ class OKTETAKASTENCONTROLLERS_EXPORT FilterToolViewFactory : public AbstractTool
 {
 public:
     FilterToolViewFactory();
+    FilterToolViewFactory(const FilterToolViewFactory&) = delete;
+
     ~FilterToolViewFactory() override;
+
+    FilterToolViewFactory& operator=(const FilterToolViewFactory&) = delete;
 
 public: // AbstractToolViewFactory API
     AbstractToolView* create(AbstractTool* tool) const override;

@@ -30,11 +30,14 @@ public:
 
     static const QStringList& codecNames();
 
-protected:
-    TextCharCodec(QTextCodec* textCodec);
-
 public:
+    TextCharCodec(const TextCharCodec&) = delete;
     ~TextCharCodec() override;
+
+    TextCharCodec& operator=(const TextCharCodec&) = delete;
+
+protected:
+    explicit TextCharCodec(QTextCodec* textCodec);
 
 public: // CharCodec API
     Character decode(Byte byte) const override;

@@ -19,8 +19,11 @@ public:
     explicit AbstractModelStreamEncoderPrivate(AbstractModelStreamEncoder* parent,
                                                const QString& remoteTypeName, const QString& remoteMimeType,
                                                const QString& remoteClipboardMimeType);
+    AbstractModelStreamEncoderPrivate(const AbstractModelStreamEncoderPrivate&) = delete;
 
     virtual ~AbstractModelStreamEncoderPrivate();
+
+    AbstractModelStreamEncoderPrivate& operator=(const AbstractModelStreamEncoderPrivate&) = delete;
 
 public:
     const QString& remoteTypeName() const;

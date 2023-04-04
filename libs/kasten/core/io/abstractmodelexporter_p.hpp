@@ -18,8 +18,11 @@ class AbstractModelExporterPrivate
 public:
     AbstractModelExporterPrivate(AbstractModelExporter* parent,
                                  const QString& remoteTypeName, const QString& remoteMimeType);
+    AbstractModelExporterPrivate(const AbstractModelExporterPrivate&) = delete;
 
     virtual ~AbstractModelExporterPrivate();
+
+    AbstractModelExporterPrivate& operator=(const AbstractModelExporterPrivate&) = delete;
 
 public:
     const QString& remoteTypeName() const;

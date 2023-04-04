@@ -13,8 +13,6 @@
 
 class PrimitiveScriptClass : public DefaultScriptClass
 {
-    Q_DISABLE_COPY(PrimitiveScriptClass)
-
 public:
     PrimitiveScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
     ~PrimitiveScriptClass() override;

@@ -22,7 +22,11 @@ class KASTENCONTROLLERS_EXPORT SynchronizeControllerFactory : public AbstractXml
 {
 public:
     explicit SynchronizeControllerFactory(DocumentSyncManager* syncManager);
+    SynchronizeControllerFactory(const SynchronizeControllerFactory&) = delete;
+
     ~SynchronizeControllerFactory() override;
+
+    SynchronizeControllerFactory& operator=(const SynchronizeControllerFactory&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     AbstractXmlGuiController* create(KXMLGUIClient* guiClient) const override;

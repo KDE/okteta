@@ -17,7 +17,12 @@ struct SInt32
 {
 public:
     SInt32(qint32 v);
+    SInt32(const SInt32&) = default;
     SInt32();
+
+    ~SInt32() = default;
+
+    SInt32& operator=(const SInt32&) = default;
 
 public:
     QString toString() const;

@@ -16,6 +16,11 @@ namespace Okteta {
 
 class OctalByteCodec : public ValueCodec
 {
+public:
+    OctalByteCodec() = default;
+    OctalByteCodec(const OctalByteCodec&) = delete;
+    OctalByteCodec& operator=(const OctalByteCodec&) = delete;
+
 public: // ValueCodec API
     unsigned int encodingWidth() const override;
     Byte digitsFilledLimit() const override;

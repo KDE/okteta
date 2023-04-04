@@ -20,7 +20,11 @@ class KASTENCONTROLLERS_EXPORT ReadOnlyControllerFactory : public AbstractXmlGui
 {
 public:
     ReadOnlyControllerFactory();
+    ReadOnlyControllerFactory(const ReadOnlyControllerFactory&) = delete;
+
     ~ReadOnlyControllerFactory() override;
+
+    ReadOnlyControllerFactory& operator=(const ReadOnlyControllerFactory&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     AbstractXmlGuiController* create(KXMLGUIClient* guiClient) const override;

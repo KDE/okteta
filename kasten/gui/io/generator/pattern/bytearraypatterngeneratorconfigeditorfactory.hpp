@@ -20,8 +20,11 @@ class ByteArrayPatternGeneratorConfigEditorFactory : public AbstractModelDataGen
 {
 public:
     ByteArrayPatternGeneratorConfigEditorFactory();
+    ByteArrayPatternGeneratorConfigEditorFactory(const ByteArrayPatternGeneratorConfigEditorFactory&) = delete;
 
     ~ByteArrayPatternGeneratorConfigEditorFactory() override;
+
+    ByteArrayPatternGeneratorConfigEditorFactory& operator=(const ByteArrayPatternGeneratorConfigEditorFactory&) = delete;
 
 public:
     AbstractModelDataGeneratorConfigEditor* tryCreateConfigEditor(AbstractModelDataGenerator* generator) const override;

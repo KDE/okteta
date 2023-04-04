@@ -23,7 +23,11 @@ class RemovePieceTableChange : public AbstractPieceTableChange
 {
 public:
     RemovePieceTableChange(const AddressRange& removeRange, const PieceList& removedPieces);
+    RemovePieceTableChange(const RemovePieceTableChange&) = delete;
+
     ~RemovePieceTableChange() override;
+
+    RemovePieceTableChange& operator=(const RemovePieceTableChange&) = delete;
 
 public: // AbstractPieceTableChange API
     int type() const override;

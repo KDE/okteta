@@ -31,8 +31,11 @@ class SingleViewWindowPrivate
 public:
     SingleViewWindowPrivate(SingleViewWindow* parent,
                             AbstractView* view);
+    SingleViewWindowPrivate(const SingleViewWindowPrivate&) = delete;
 
     ~SingleViewWindowPrivate();
+
+    SingleViewWindowPrivate& operator=(const SingleViewWindowPrivate&) = delete;
 
 public:
     void init();

@@ -18,6 +18,11 @@ class TapNavigator
 {
 public:
     explicit TapNavigator(AbstractByteArrayView* view);
+    TapNavigator(const TapNavigator&) = delete;
+
+    ~TapNavigator() = default;
+
+    TapNavigator& operator=(const TapNavigator&) = delete;
 
 public:
     bool handleTapGesture(QTapGesture* tapGesture);

@@ -17,6 +17,10 @@ namespace Okteta {
 //
 class USASCIICharCodec : public CharCodec
 {
+public:
+    USASCIICharCodec(const USASCIICharCodec&) = delete;
+    USASCIICharCodec& operator=(const USASCIICharCodec&) = delete;
+
 protected:
     USASCIICharCodec();
 

@@ -22,7 +22,11 @@ class KASTENCONTROLLERS_EXPORT FileSystemBrowserToolFactory : public AbstractToo
 {
 public:
     explicit FileSystemBrowserToolFactory(DocumentSyncManager* documentSyncManager);
+    FileSystemBrowserToolFactory(const FileSystemBrowserToolFactory&) = delete;
+
     ~FileSystemBrowserToolFactory() override;
+
+    FileSystemBrowserToolFactory& operator=(const FileSystemBrowserToolFactory&) = delete;
 
 public: // AbstractToolFactory API
     AbstractTool* create() const override;

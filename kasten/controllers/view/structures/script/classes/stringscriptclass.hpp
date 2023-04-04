@@ -13,8 +13,6 @@
 
 class StringScriptClass : public DefaultScriptClass
 {
-    Q_DISABLE_COPY(StringScriptClass)
-
 public:
     StringScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
     ~StringScriptClass() override;

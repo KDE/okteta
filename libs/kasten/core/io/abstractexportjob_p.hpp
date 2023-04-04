@@ -17,8 +17,11 @@ class AbstractExportJobPrivate
 {
 public:
     explicit AbstractExportJobPrivate(AbstractExportJob* parent);
+    AbstractExportJobPrivate(const AbstractExportJobPrivate&) = delete;
 
     virtual ~AbstractExportJobPrivate();
+
+    AbstractExportJobPrivate& operator=(const AbstractExportJobPrivate&) = delete;
 
 public:
     AbstractDocument* document() const;

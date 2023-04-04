@@ -24,6 +24,11 @@ class ByteArrayViewTextStreamEncoderSettings
 {
 public:
     ByteArrayViewTextStreamEncoderSettings();
+    ByteArrayViewTextStreamEncoderSettings(const ByteArrayViewTextStreamEncoderSettings&) = default;
+
+    ~ByteArrayViewTextStreamEncoderSettings() = default;
+
+    ByteArrayViewTextStreamEncoderSettings& operator=(const ByteArrayViewTextStreamEncoderSettings&) = default;
 
 public:
 //     Okteta::OffsetFormat::Format offsetFormat;

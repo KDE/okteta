@@ -21,6 +21,9 @@ class OKTETAKASTENGUI_EXPORT ByteArrayStreamEncoderFactory
 {
 public:
     ByteArrayStreamEncoderFactory() = delete;
+    ByteArrayStreamEncoderFactory(const ByteArrayStreamEncoderFactory&) = delete;
+
+    ByteArrayStreamEncoderFactory& operator=(const ByteArrayStreamEncoderFactory&) = delete;
 
 public:
     static QVector<AbstractModelStreamEncoder*> createStreamEncoders();

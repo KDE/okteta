@@ -20,9 +20,6 @@ class AbstractByteArrayModel;
 
 class StringData
 {
-private:
-    Q_DISABLE_COPY(StringData)
-
 public:
     enum TerminationMode
     {
@@ -36,8 +33,13 @@ public:
     Q_DECLARE_FLAGS(TerminationModes, TerminationMode)
 
     explicit StringData(StringDataInformation* parent);
+    StringData(const StringData&) = delete;
+
     virtual ~StringData();
 
+    StringData& operator=(const StringData&) = delete;
+
+public:
     virtual QString typeName() const = 0;
     virtual uint count() const = 0;
     virtual QString charType() const = 0;

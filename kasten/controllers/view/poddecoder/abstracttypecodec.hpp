@@ -24,7 +24,11 @@ protected:
     explicit AbstractTypeCodec(const QString& name);
 
 public:
+    AbstractTypeCodec(const AbstractTypeCodec&) = delete;
+
     virtual ~AbstractTypeCodec();
+
+    AbstractTypeCodec& operator=(const AbstractTypeCodec&) = delete;
 
 public: // API to be implemented
     virtual QVariant value(const PODData& data, int* byteCount) const = 0;

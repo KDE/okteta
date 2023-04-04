@@ -20,7 +20,11 @@ class KASTENCONTROLLERS_EXPORT VersionViewToolViewFactory : public AbstractToolV
 {
 public:
     VersionViewToolViewFactory();
+    VersionViewToolViewFactory(const VersionViewToolViewFactory&) = delete;
+
     ~VersionViewToolViewFactory() override;
+
+    VersionViewToolViewFactory& operator=(const VersionViewToolViewFactory&) = delete;
 
 public: // AbstractToolViewFactory API
     AbstractToolView* create(AbstractTool* tool) const override;

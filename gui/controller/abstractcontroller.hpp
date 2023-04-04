@@ -19,7 +19,11 @@ protected:
     explicit AbstractController(AbstractController* parent);
 
 public:
+    AbstractController(const AbstractController&) = delete;
+
     virtual ~AbstractController();
+
+    AbstractController& operator=(const AbstractController&) = delete;
 
 public: // API to be implemented
     virtual bool handleKeyPress(QKeyEvent* keyEvent);

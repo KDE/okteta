@@ -24,7 +24,11 @@ class KASTENCONTROLLERS_EXPORT CopyAsControllerFactory : public AbstractXmlGuiCo
 public:
     explicit CopyAsControllerFactory(ModelCodecViewManager* modelCodecViewManager,
                                      ModelCodecManager* modelCodecManager);
+    CopyAsControllerFactory(const CopyAsControllerFactory&) = delete;
+
     ~CopyAsControllerFactory() override;
+
+    CopyAsControllerFactory& operator=(const CopyAsControllerFactory&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     AbstractXmlGuiController* create(KXMLGUIClient* guiClient) const override;

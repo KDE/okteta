@@ -21,8 +21,11 @@ class PieceList
 public:
     PieceList();
     explicit PieceList(const Piece& piece);
+    PieceList(const PieceList&);
 
     ~PieceList();
+
+    PieceList& operator=(const PieceList&) = default;
 
 public:
     int size() const;
@@ -41,6 +44,7 @@ private:
 };
 
 inline PieceList::PieceList() = default;
+inline PieceList::PieceList(const PieceList&) = default;
 inline PieceList::PieceList(const Piece& piece)
 {
     append(piece);

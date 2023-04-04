@@ -20,7 +20,11 @@ class OKTETAKASTENCONTROLLERS_EXPORT ChecksumToolFactory : public AbstractToolFa
 {
 public:
     ChecksumToolFactory();
+    ChecksumToolFactory(const ChecksumToolFactory&) = delete;
+
     ~ChecksumToolFactory() override;
+
+    ChecksumToolFactory& operator=(const ChecksumToolFactory&) = delete;
 
 public: // AbstractToolFactory API
     AbstractTool* create() const override;

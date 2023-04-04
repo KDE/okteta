@@ -44,8 +44,11 @@ class ByteArrayTableCursor
 {
 public:
     explicit ByteArrayTableCursor(const ByteArrayTableLayout* layout);
+    ByteArrayTableCursor(const ByteArrayTableCursor&) = delete;
 
     ~ByteArrayTableCursor();
+
+    ByteArrayTableCursor& operator=(const ByteArrayTableCursor&) = delete;
 
 public: // modificator
     void setAppendPosEnabled(bool appendPosEnabled = true);

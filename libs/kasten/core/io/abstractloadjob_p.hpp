@@ -18,8 +18,11 @@ class AbstractLoadJobPrivate
 {
 public:
     explicit AbstractLoadJobPrivate(AbstractLoadJob* parent);
+    AbstractLoadJobPrivate(const AbstractLoadJobPrivate&) = delete;
 
     virtual ~AbstractLoadJobPrivate();
+
+    AbstractLoadJobPrivate& operator=(const AbstractLoadJobPrivate&) = delete;
 
 public:
     AbstractDocument* document() const;

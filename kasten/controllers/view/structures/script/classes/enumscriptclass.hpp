@@ -13,8 +13,6 @@
 
 class EnumScriptClass : public PrimitiveScriptClass
 {
-    Q_DISABLE_COPY(EnumScriptClass)
-
 public:
     EnumScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
     ~EnumScriptClass() override;

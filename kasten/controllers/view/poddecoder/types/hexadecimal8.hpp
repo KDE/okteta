@@ -17,7 +17,12 @@ struct Hexadecimal8
 {
 public:
     Hexadecimal8(quint8 v);
+    Hexadecimal8(const Hexadecimal8&) = default;
     Hexadecimal8();
+
+    ~Hexadecimal8() = default;
+
+    Hexadecimal8& operator=(const Hexadecimal8&) = default;
 
 public:
     QString toString() const;

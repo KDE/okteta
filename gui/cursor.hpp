@@ -23,7 +23,11 @@ class Cursor
 {
 public:
     Cursor();
+    Cursor(const Cursor&) = delete;
+
     virtual ~Cursor();
+
+    Cursor& operator=(const Cursor&) = delete;
 
 public:
     /** sets size of the full cursor */

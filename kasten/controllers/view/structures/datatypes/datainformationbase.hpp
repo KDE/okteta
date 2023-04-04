@@ -34,7 +34,13 @@ class DataInformationBase
 {
 public:
     DataInformationBase();
+    DataInformationBase(const DataInformationBase&) = delete;
+
     virtual ~DataInformationBase();
+
+    DataInformationBase& operator=(const DataInformationBase&) = delete;
+
+public:
     virtual bool isTopLevel() const = 0;
     TopLevelDataInformation* asTopLevel();
     DataInformation* asDataInformation();

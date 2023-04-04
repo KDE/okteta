@@ -19,7 +19,11 @@ protected:
     explicit AbstractWheelController(AbstractWheelController* parent);
 
 public:
+    AbstractWheelController(const AbstractWheelController&) = delete;
+
     virtual ~AbstractWheelController();
+
+    AbstractWheelController& operator=(const AbstractWheelController&) = delete;
 
 public: // API to be implemented
     virtual bool handleWheelEvent(QWheelEvent* wheelEvent);

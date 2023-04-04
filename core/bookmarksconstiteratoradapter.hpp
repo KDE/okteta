@@ -24,6 +24,8 @@ protected:
     BookmarksConstIteratorAdapter();
 
 public:
+    BookmarksConstIteratorAdapter(const BookmarksConstIteratorAdapter&) = delete;
+
     virtual ~BookmarksConstIteratorAdapter();
 
 public:

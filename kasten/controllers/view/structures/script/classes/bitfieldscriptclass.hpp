@@ -13,8 +13,6 @@
 
 class BitfieldScriptClass : public PrimitiveScriptClass
 {
-    Q_DISABLE_COPY(BitfieldScriptClass)
-
 public:
     BitfieldScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
     ~BitfieldScriptClass() override;

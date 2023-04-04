@@ -17,6 +17,10 @@ namespace Okteta {
 //
 class JISX0201CharCodec : public CharCodec
 {
+public:
+    JISX0201CharCodec(const JISX0201CharCodec&) = delete;
+    JISX0201CharCodec& operator=(const JISX0201CharCodec&) = delete;
+
 protected:
     JISX0201CharCodec();
 

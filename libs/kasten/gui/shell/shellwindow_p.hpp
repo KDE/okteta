@@ -26,7 +26,11 @@ class ShellWindowPrivate
 public:
     ShellWindowPrivate(ShellWindow* parent,
                        ViewManager* viewManager);
+    ShellWindowPrivate(const ShellWindowPrivate&) = delete;
+
     ~ShellWindowPrivate();
+
+    ShellWindowPrivate& operator=(const ShellWindowPrivate&) = delete;
 
 public:
     MultiViewAreas* viewArea() const;

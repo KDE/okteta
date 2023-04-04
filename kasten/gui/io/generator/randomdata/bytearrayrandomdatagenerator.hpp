@@ -23,6 +23,11 @@ class ByteArrayRandomDataGeneratorSettings
 {
 public:
     ByteArrayRandomDataGeneratorSettings();
+    ByteArrayRandomDataGeneratorSettings(const ByteArrayRandomDataGeneratorSettings&) = default;
+
+    ~ByteArrayRandomDataGeneratorSettings() = default;
+
+    ByteArrayRandomDataGeneratorSettings& operator=(const ByteArrayRandomDataGeneratorSettings&) = default;
 
     bool operator==(const ByteArrayRandomDataGeneratorSettings& other) const;
 

@@ -22,7 +22,11 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewStatusControllerFactory : public Abstra
 {
 public:
     explicit ViewStatusControllerFactory(StatusBar* statusBar);
+    ViewStatusControllerFactory(const ViewStatusControllerFactory&) = delete;
+
     ~ViewStatusControllerFactory() override;
+
+    ViewStatusControllerFactory& operator=(const ViewStatusControllerFactory&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     AbstractXmlGuiController* create(KXMLGUIClient* guiClient) const override;

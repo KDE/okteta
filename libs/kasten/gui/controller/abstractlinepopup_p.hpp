@@ -22,8 +22,11 @@ class AbstractLinePopupPrivate
 {
 public:
     explicit AbstractLinePopupPrivate(AbstractLinePopup* parent);
+    AbstractLinePopupPrivate(const AbstractLinePopupPrivate&) = delete;
 
     ~AbstractLinePopupPrivate();
+
+    AbstractLinePopupPrivate& operator=(const AbstractLinePopupPrivate&) = delete;
 
 public:
     void init();
