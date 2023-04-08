@@ -22,7 +22,7 @@ class TestDocumentFileWriteJob : public AbstractFileSystemSyncToRemoteJob
     Q_OBJECT
 
 public:
-    TestDocumentFileWriteJob(TestDocumentFileSynchronizer* synchronizer);
+    explicit TestDocumentFileWriteJob(TestDocumentFileSynchronizer* synchronizer);
     ~TestDocumentFileWriteJob() override;
 
 protected: // AbstractFileSystemSyncToRemoteJob API
