@@ -2,7 +2,7 @@
 # Burkhard Lück <lueck@hube-lueck.de>, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2018, 2019, 2020, 2021.
 # Friedrich W. H. Kossebau <kossebau@kde.org>, 2008.
 # Johannes Obermayr <johannesobermayr@gmx.de>, 2009.
-# Frederik Schwarzer <schwarzer@kde.org>, 2009, 2010, 2011, 2012, 2013, 2015, 2016.
+# Frederik Schwarzer <schwarzer@kde.org>, 2009, 2010, 2011, 2012, 2013, 2015, 2016, 2023.
 # Panagiotis Papadopoulos <pano_90@gmx.net>, 2009, 2010, 2011.
 # Markus Slopianka <markus.s@kdemail.net>, 2010.
 # Jonathan Kolberg <bulldog98@kubuntu-de.org>, 2010.
@@ -11,24 +11,25 @@ msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-19 00:50+0000\n"
-"PO-Revision-Date: 2021-05-10 06:26+0200\n"
-"Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
+"PO-Revision-Date: 2023-04-03 16:50+0200\n"
+"Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 22.12.3\n"
 
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Thomas Reitelbach"
+msgstr "Deutsches KDE-Übersetzerteam"
 
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "tr@erdfunkstelle.de"
+msgstr "kde-i18n-de@kde.org"
 
 #: controllers/document/info/documentinfotool.cpp:48
 #: controllers/document/info/documentinfotoolviewfactory.cpp:24
@@ -2166,27 +2167,25 @@ msgstr "Nachricht"
 #, kde-format
 msgctxt "@title:window"
 msgid "About %1"
-msgstr ""
+msgstr "Über %1"
 
 #: controllers/view/structures/settings/aboutstructuredialog.cpp:44
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Versions"
+#, kde-format
 msgctxt "Version version-number"
 msgid "Version %1"
-msgstr "Versionen"
+msgstr "Version %1"
 
 #: controllers/view/structures/settings/aboutstructuredialog.cpp:81
 #: controllers/view/structures/settings/aboutstructuredialog.cpp:86
 #, kde-format
 msgid "License: %1"
-msgstr ""
+msgstr "Lizenz: %1"
 
 #: controllers/view/structures/settings/aboutstructuredialog.cpp:92
 #, kde-format
 msgctxt "@title:tab"
 msgid "About"
-msgstr ""
+msgstr "Über"
 
 #: controllers/view/structures/settings/aboutstructuredialog.cpp:107
 #, kde-format
@@ -2195,10 +2194,11 @@ msgid ""
 "Email author\n"
 "%1"
 msgstr ""
+"E-Mail-Autor\n"
+"%1"
 
 #: controllers/view/structures/settings/aboutstructuredialog.cpp:116
-#, fuzzy, kde-format
-#| msgid "Author"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Author"
 msgstr "Autor"
@@ -2207,7 +2207,7 @@ msgstr "Autor"
 #, kde-format
 msgctxt "@title:window"
 msgid "License Agreement"
-msgstr ""
+msgstr "Lizenzvereinbarung"
 
 #: controllers/view/structures/settings/structureaddremovewidget.cpp:53
 #, kde-format
@@ -2225,7 +2225,7 @@ msgstr "Verwendete Strukturen:"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "About"
-msgstr ""
+msgstr "Über"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:45
 #, kde-format
@@ -2254,12 +2254,10 @@ msgid "Structure Definitions"
 msgstr "Strukturdefinitionen"
 
 #: controllers/view/structures/settings/structuresselector.cpp:40
-#, fuzzy, kde-format
-#| msgctxt "@title"
-#| msgid "Search"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Search..."
-msgstr "Suchen"
+msgstr "Suchen ..."
 
 #. i18n: ectx: tooltip, entry (UnsignedDisplayBase), group (ValueDisplay)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:9
