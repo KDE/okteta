@@ -17,6 +17,10 @@ namespace Okteta {
 // Qt using ICU maps this onto TIS-620, which is not 100 % correct
 class IBM874CharCodec : public CharCodec
 {
+public:
+    IBM874CharCodec(const IBM874CharCodec&) = delete;
+    IBM874CharCodec& operator=(const IBM874CharCodec&) = delete;
+
 protected:
     IBM874CharCodec();
 

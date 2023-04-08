@@ -45,7 +45,12 @@ public:
 
 public:
     ArrayChangeMetrics() = default;
+    ArrayChangeMetrics(const ArrayChangeMetrics&) = default;
     constexpr ArrayChangeMetrics(Type type, Address offset, qint32 secondArgument, qint32 thirdArgument);
+
+    ~ArrayChangeMetrics() = default;
+
+    ArrayChangeMetrics& operator=(const ArrayChangeMetrics&) = default;
 
 public:
     constexpr bool operator==(const ArrayChangeMetrics& other) const;

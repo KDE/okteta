@@ -26,7 +26,11 @@ class DocumentManagerPrivate
 {
 public:
     explicit DocumentManagerPrivate(DocumentManager* q);
+    DocumentManagerPrivate(const DocumentManagerPrivate&) = delete;
+
     ~DocumentManagerPrivate();
+
+    DocumentManagerPrivate& operator=(const DocumentManagerPrivate&) = delete;
 
 public:
     void addDocument(AbstractDocument* document);

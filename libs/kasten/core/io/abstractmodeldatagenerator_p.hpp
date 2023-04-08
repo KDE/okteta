@@ -19,8 +19,11 @@ public:
     explicit AbstractModelDataGeneratorPrivate(AbstractModelDataGenerator* parent,
                                                const QString& typeName, const QString& mimeType,
                                                AbstractModelDataGenerator::Flags flags);
+    AbstractModelDataGeneratorPrivate(const AbstractModelDataGeneratorPrivate&) = delete;
 
     virtual ~AbstractModelDataGeneratorPrivate();
+
+    AbstractModelDataGeneratorPrivate& operator=(const AbstractModelDataGeneratorPrivate&) = delete;
 
 public:
     const QString& typeName() const;

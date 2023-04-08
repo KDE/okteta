@@ -20,7 +20,6 @@ class DataInformation;
 /** NOT THREAD SAFE! */
 class ScriptLogger : public QAbstractTableModel
 {
-    Q_DISABLE_COPY(ScriptLogger)
     Q_OBJECT
 
 public:
@@ -52,6 +51,9 @@ public:
         {}
         inline Data(const Data& d) = default;
         inline ~Data() = default;
+
+        Data& operator=(const Data&) = default;
+
         ScriptLogger::LogLevel level = LogInvalid;
         QString message;
         QString origin;
@@ -98,6 +100,12 @@ public:
         : logger(l)
         , context(s)
     {}
+    LoggerWithContext(const LoggerWithContext&) = delete;
+
+    ~LoggerWithContext() = default;
+
+    LoggerWithContext& operator=(const LoggerWithContext&) = delete;
+
     inline QDebug info() const { return logger ? logger->info(context) : qDebug(); }
     inline QDebug warn() const { return logger ? logger->warn(context) : qWarning(); }
     inline QDebug error() const { return logger ? logger->error(context) : qWarning(); }

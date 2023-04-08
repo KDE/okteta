@@ -21,6 +21,9 @@ class OKTETAKASTENGUI_EXPORT ByteArrayDataGeneratorConfigEditorFactoryFactory
 {
 public:
     ByteArrayDataGeneratorConfigEditorFactoryFactory() = delete;
+    ByteArrayDataGeneratorConfigEditorFactoryFactory(const ByteArrayDataGeneratorConfigEditorFactoryFactory&) = delete;
+
+    ByteArrayDataGeneratorConfigEditorFactoryFactory& operator=(const ByteArrayDataGeneratorConfigEditorFactoryFactory&) = delete;
 
 public:
     static QVector<AbstractModelDataGeneratorConfigEditorFactory*> createFactorys();

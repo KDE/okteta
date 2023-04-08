@@ -20,7 +20,11 @@ class OKTETAKASTENCONTROLLERS_EXPORT StructuresToolFactory : public AbstractTool
 {
 public:
     StructuresToolFactory();
+    StructuresToolFactory(const StructuresToolFactory&) = delete;
+
     ~StructuresToolFactory() override;
+
+    StructuresToolFactory& operator=(const StructuresToolFactory&) = delete;
 
 public:
     // AbstractToolFactory API

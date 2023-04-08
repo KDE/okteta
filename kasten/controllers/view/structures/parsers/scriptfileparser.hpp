@@ -19,8 +19,6 @@ class DataInformation;
 
 class ScriptFileParser : public AbstractStructureParser
 {
-    Q_DISABLE_COPY(ScriptFileParser)
-
 public:
     ScriptFileParser(const QString& pluginName, const QString& absolutePath);
     ~ScriptFileParser() override;

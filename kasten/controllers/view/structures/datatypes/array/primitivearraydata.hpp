@@ -18,8 +18,6 @@
 template <PrimitiveDataType type>
 class PrimitiveArrayData : public AbstractArrayData
 {
-    Q_DISABLE_COPY(PrimitiveArrayData)
-
 public:
     using T = typename PrimitiveInfo<type>::valueType;
     using DisplayClass = typename PrimitiveInfo<type>::Methods;
@@ -28,6 +26,7 @@ public:
                                 ArrayDataInformation* parent);
     ~PrimitiveArrayData() override;
 
+public:
     qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
                     BitCount64 bitsRemaining) override;
     bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,

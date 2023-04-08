@@ -13,8 +13,6 @@
 
 class ArrayScriptClass : public DefaultScriptClass
 {
-    Q_DISABLE_COPY(ArrayScriptClass)
-
 public:
     ArrayScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
     ~ArrayScriptClass() override;

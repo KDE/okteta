@@ -36,13 +36,14 @@ struct OsdParserInfo : public ParserInfo
     {}
     inline OsdParserInfo(const OsdParserInfo& i) = default;
     inline ~OsdParserInfo() = default;
+
+    OsdParserInfo& operator=(const OsdParserInfo&) = delete;
+
     QVector<EnumDefinition::Ptr> enums;
 };
 
 class OsdParser : public AbstractStructureParser
 {
-    Q_DISABLE_COPY(OsdParser)
-
 public:
     /** construct a parser which opens parses @p absolutePath */
     OsdParser(const QString& pluginName, const QString& absolutePath);
@@ -92,7 +93,12 @@ class OsdChildrenParser : public ChildrenParser
 {
 public:
     OsdChildrenParser(const OsdParserInfo& info, const QDomElement& firstChild);
+    OsdChildrenParser(const OsdChildrenParser&) = delete;
+
     ~OsdChildrenParser() override;
+
+    OsdChildrenParser& operator=(const OsdChildrenParser&) = delete;
+
     DataInformation* next() override;
     bool hasNext() override;
     void setParent(DataInformation* newParent) override;

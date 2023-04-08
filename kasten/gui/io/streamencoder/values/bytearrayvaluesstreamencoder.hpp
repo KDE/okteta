@@ -24,6 +24,11 @@ class ValuesStreamEncoderSettings
 {
 public:
     ValuesStreamEncoderSettings();
+    ValuesStreamEncoderSettings(const ValuesStreamEncoderSettings&) = default;
+
+    ~ValuesStreamEncoderSettings() = default;
+
+    ValuesStreamEncoderSettings& operator=(const ValuesStreamEncoderSettings&) = default;
 
     bool operator==(const ValuesStreamEncoderSettings& other) const;
 

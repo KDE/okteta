@@ -21,7 +21,6 @@ class AbstractDocumentPrivate : public AbstractModelPrivate
 {
 public:
     explicit AbstractDocumentPrivate(AbstractDocument* parent);
-    AbstractDocumentPrivate() = delete;
 
     ~AbstractDocumentPrivate() override;
 

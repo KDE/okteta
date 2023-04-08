@@ -22,7 +22,11 @@ class KASTENCONTROLLERS_EXPORT DocumentsToolFactory : public AbstractToolFactory
 {
 public:
     explicit DocumentsToolFactory(DocumentManager* documentManager);
+    DocumentsToolFactory(const DocumentsToolFactory&) = delete;
+
     ~DocumentsToolFactory() override;
+
+    DocumentsToolFactory& operator=(const DocumentsToolFactory&) = delete;
 
 public: // AbstractToolFactory API
     AbstractTool* create() const override;

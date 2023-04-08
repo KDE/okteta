@@ -18,8 +18,11 @@ class AbstractByteArrayModelPrivate
 {
 public:
     explicit AbstractByteArrayModelPrivate(AbstractByteArrayModel* parent);
-    AbstractByteArrayModelPrivate() = delete;
+    AbstractByteArrayModelPrivate(const AbstractByteArrayModelPrivate&) = delete;
+
     virtual ~AbstractByteArrayModelPrivate();
+
+    AbstractByteArrayModelPrivate& operator=(const AbstractByteArrayModelPrivate&) = delete;
 
 protected:
     AbstractByteArrayModel* const q_ptr;

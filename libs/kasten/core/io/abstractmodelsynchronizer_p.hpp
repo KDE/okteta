@@ -20,8 +20,11 @@ class AbstractModelSynchronizerPrivate
 {
 public:
     explicit AbstractModelSynchronizerPrivate(AbstractModelSynchronizer* parent);
+    AbstractModelSynchronizerPrivate(const AbstractModelSynchronizerPrivate&) = delete;
 
     virtual ~AbstractModelSynchronizerPrivate();
+
+    AbstractModelSynchronizerPrivate& operator=(const AbstractModelSynchronizerPrivate&) = delete;
 
 public:
     const QUrl& url() const;

@@ -35,6 +35,11 @@ public:
 
 public:
     IHexStreamEncoderSettings();
+    IHexStreamEncoderSettings(const IHexStreamEncoderSettings&) = default;
+
+    ~IHexStreamEncoderSettings() = default;
+
+    IHexStreamEncoderSettings& operator=(const IHexStreamEncoderSettings&) = default;
 
     bool operator==(const IHexStreamEncoderSettings& other) const;
 

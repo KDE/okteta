@@ -20,7 +20,11 @@ class KASTENCONTROLLERS_EXPORT SelectControllerFactory : public AbstractXmlGuiCo
 {
 public:
     SelectControllerFactory();
+    SelectControllerFactory(const SelectControllerFactory&) = delete;
+
     ~SelectControllerFactory() override;
+
+    SelectControllerFactory& operator=(const SelectControllerFactory&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     AbstractXmlGuiController* create(KXMLGUIClient* guiClient) const override;

@@ -19,7 +19,7 @@ template <typename T, class C>
 class BasicPrimitiveDataInformation : public PrimitiveDataInformation
 {
 public:
-    BasicPrimitiveDataInformation(const QString& name, DataInformation* parent = nullptr);
+    explicit BasicPrimitiveDataInformation(const QString& name, DataInformation* parent = nullptr);
     ~BasicPrimitiveDataInformation() override;
     PrimitiveDataType type() const override;
     AllPrimitiveTypes value() const override;

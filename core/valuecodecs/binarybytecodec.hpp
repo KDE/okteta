@@ -16,6 +16,11 @@ namespace Okteta {
 
 class BinaryByteCodec : public ValueCodec
 {
+public:
+    BinaryByteCodec() = default;
+    BinaryByteCodec(const BinaryByteCodec&) = delete;
+    BinaryByteCodec& operator=(const BinaryByteCodec&) = delete;
+
 public: // ValueCodec API
     unsigned int encodingWidth() const override;
     Byte digitsFilledLimit() const override;

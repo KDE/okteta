@@ -29,7 +29,6 @@ class OKTETAGUI_EXPORT OffsetColumnRenderer : public AbstractColumnRenderer
 {
 public:
     OffsetColumnRenderer(AbstractColumnStylist* stylist, ByteArrayTableLayout* layout, OffsetFormat::Format format);
-    OffsetColumnRenderer() = delete;
 
     ~OffsetColumnRenderer() override;
 

@@ -30,6 +30,11 @@ public:
     Piece(Address storageOffset, Size size, int storageId);
     Piece(const AddressRange& storageRange, int storageId);
     Piece();
+    Piece(const Piece&);
+
+    ~Piece();
+
+    Piece& operator=(const Piece&) = default;
 
 public:
     int storageId() const;
@@ -61,6 +66,8 @@ inline Piece::Piece(const AddressRange& storageRange, int storageId)
     , mStorageId(storageId)
 {}
 inline Piece::Piece() = default;
+inline Piece::Piece(const Piece&) = default;
+inline Piece::~Piece() = default;
 
 inline int Piece::storageId() const { return mStorageId; }
 

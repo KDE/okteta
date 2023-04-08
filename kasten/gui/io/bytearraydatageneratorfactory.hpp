@@ -21,6 +21,9 @@ class OKTETAKASTENGUI_EXPORT ByteArrayDataGeneratorFactory
 {
 public:
     ByteArrayDataGeneratorFactory() = delete;
+    ByteArrayDataGeneratorFactory(const ByteArrayDataGeneratorFactory&) = delete;
+
+    ByteArrayDataGeneratorFactory& operator=(const ByteArrayDataGeneratorFactory&) = delete;
 
 public:
     static QVector<AbstractModelDataGenerator*> createDataGenerators();

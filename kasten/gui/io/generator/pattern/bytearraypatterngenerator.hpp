@@ -23,6 +23,11 @@ class ByteArrayPatternGeneratorSettings
 {
 public:
     ByteArrayPatternGeneratorSettings();
+    ByteArrayPatternGeneratorSettings(const ByteArrayPatternGeneratorSettings&) = default;
+
+    ~ByteArrayPatternGeneratorSettings() = default;
+
+    ByteArrayPatternGeneratorSettings& operator=(const ByteArrayPatternGeneratorSettings&) = default;
 
     bool operator==(const ByteArrayPatternGeneratorSettings& other) const;
 

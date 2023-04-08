@@ -18,7 +18,6 @@ class KComboBox;
 class ScriptLoggerView : public QWidget
 {
     Q_OBJECT
-    Q_DISABLE_COPY(ScriptLoggerView)
 
 public:
     explicit ScriptLoggerView(const TopLevelDataInformation::List& data, QWidget* parent = nullptr);

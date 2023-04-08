@@ -36,6 +36,11 @@ public:
 
 public:
     SourceCodeStreamEncoderSettings();
+    SourceCodeStreamEncoderSettings(const SourceCodeStreamEncoderSettings&) = default;
+
+    ~SourceCodeStreamEncoderSettings() = default;
+
+    SourceCodeStreamEncoderSettings& operator=(const SourceCodeStreamEncoderSettings&) = default;
 
     bool operator==(const SourceCodeStreamEncoderSettings& other) const;
 

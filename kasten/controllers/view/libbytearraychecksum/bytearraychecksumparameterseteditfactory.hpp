@@ -13,8 +13,11 @@ class AbstractByteArrayChecksumParameterSetEdit;
 
 class ByteArrayChecksumParameterSetEditFactory
 {
-protected:
-    ByteArrayChecksumParameterSetEditFactory();
+public:
+    ByteArrayChecksumParameterSetEditFactory() = delete;
+    ByteArrayChecksumParameterSetEditFactory(const ByteArrayChecksumParameterSetEditFactory&) = delete;
+
+    ByteArrayChecksumParameterSetEditFactory& operator=(const ByteArrayChecksumParameterSetEditFactory&) = delete;
 
 public:
     static AbstractByteArrayChecksumParameterSetEdit* createEdit(const char* id);

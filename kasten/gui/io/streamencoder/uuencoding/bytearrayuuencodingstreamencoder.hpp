@@ -31,6 +31,11 @@ public:
 
 public:
     UuencodingStreamEncoderSettings();
+    UuencodingStreamEncoderSettings(const UuencodingStreamEncoderSettings&) = default;
+
+    ~UuencodingStreamEncoderSettings() = default;
+
+    UuencodingStreamEncoderSettings& operator=(const UuencodingStreamEncoderSettings&) = default;
 
     bool operator==(const UuencodingStreamEncoderSettings& other) const;
 

@@ -35,6 +35,11 @@ public:
 
 public:
     SRecStreamEncoderSettings();
+    SRecStreamEncoderSettings(const SRecStreamEncoderSettings&) = default;
+
+    ~SRecStreamEncoderSettings() = default;
+
+    SRecStreamEncoderSettings& operator=(const SRecStreamEncoderSettings&) = default;
 
     bool operator==(const SRecStreamEncoderSettings& other) const;
 

@@ -19,6 +19,11 @@ class ContainedString
 {
 public:
     ContainedString(const QString& string, Okteta::Address offset);
+    ContainedString(const ContainedString&) = default;
+
+    ~ContainedString() = default;
+
+    ContainedString& operator=(const ContainedString&) = default;
 
 public:
     void move(Okteta::Size offset);

@@ -17,7 +17,12 @@ struct Float32
 {
 public:
     Float32(float v);
+    Float32(const Float32&) = default;
     Float32();
+
+    ~Float32() = default;
+
+    Float32& operator=(const Float32&) = default;
 
 public:
     QString toString() const;

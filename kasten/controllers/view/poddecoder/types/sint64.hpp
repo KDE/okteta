@@ -17,7 +17,12 @@ struct SInt64
 {
 public:
     SInt64(qint64 v);
+    SInt64(const SInt64&) = default;
     SInt64();
+
+    ~SInt64() = default;
+
+    SInt64& operator=(const SInt64&) = default;
 
 public:
     QString toString() const;

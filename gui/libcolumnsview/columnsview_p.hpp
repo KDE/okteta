@@ -23,8 +23,11 @@ class ColumnsViewPrivate
 {
 public:
     explicit ColumnsViewPrivate(/*bool R,*/ ColumnsView* parent);
-    ColumnsViewPrivate() = delete;
+    ColumnsViewPrivate(const ColumnsViewPrivate&) = delete;
+
     virtual ~ColumnsViewPrivate();
+
+    ColumnsViewPrivate& operator=(const ColumnsViewPrivate&) = delete;
 
 public:
     void init();

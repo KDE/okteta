@@ -21,8 +21,11 @@ protected:
     AbstractMouseController(AbstractByteArrayView* view, AbstractMouseController* parent);
 
 public:
-    AbstractMouseController() = delete;
+    AbstractMouseController(const AbstractMouseController&) = delete;
+
     virtual ~AbstractMouseController();
+
+    AbstractMouseController& operator=(const AbstractMouseController&) = delete;
 
 public: // API to be implemented
     virtual bool handleMousePressEvent(QMouseEvent* mouseEvent);

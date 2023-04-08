@@ -20,8 +20,11 @@ class ByteArrayRandomDataGeneratorConfigEditorFactory : public AbstractModelData
 {
 public:
     ByteArrayRandomDataGeneratorConfigEditorFactory();
+    ByteArrayRandomDataGeneratorConfigEditorFactory(const ByteArrayRandomDataGeneratorConfigEditorFactory&) = delete;
 
     ~ByteArrayRandomDataGeneratorConfigEditorFactory() override;
+
+    ByteArrayRandomDataGeneratorConfigEditorFactory& operator=(const ByteArrayRandomDataGeneratorConfigEditorFactory&) = delete;
 
 public:
     AbstractModelDataGeneratorConfigEditor* tryCreateConfigEditor(AbstractModelDataGenerator* generator) const override;

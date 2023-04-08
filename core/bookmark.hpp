@@ -27,6 +27,11 @@ private:
 public:
     Bookmark(Address offset);   // krazy:exclude=explicit
     Bookmark();
+    Bookmark(const Bookmark&) = default;
+
+    ~Bookmark() = default;
+
+    Bookmark& operator=(const Bookmark&) = default;
 
 public:
     bool operator==(const Bookmark& other) const;

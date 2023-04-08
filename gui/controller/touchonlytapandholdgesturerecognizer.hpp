@@ -18,6 +18,9 @@ class TouchOnlyTapAndHoldGestureRecognizer : public QGestureRecognizer
 {
 public:
     TouchOnlyTapAndHoldGestureRecognizer();
+    TouchOnlyTapAndHoldGestureRecognizer(const TouchOnlyTapAndHoldGestureRecognizer&) = delete;
+
+    TouchOnlyTapAndHoldGestureRecognizer& operator=(const TouchOnlyTapAndHoldGestureRecognizer&) = delete;
 
 public:
     QGesture* create(QObject* target) override;

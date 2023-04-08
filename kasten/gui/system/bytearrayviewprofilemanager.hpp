@@ -29,7 +29,13 @@ public:
         : mLastModified(lastModified)
         , mLocked(locked)
     {}
+    ByteArrayViewProfileFileInfo(const ByteArrayViewProfileFileInfo&) = default;
 
+    ~ByteArrayViewProfileFileInfo() = default;
+
+    ByteArrayViewProfileFileInfo& operator=(const ByteArrayViewProfileFileInfo&) = default;
+
+public:
     const QDateTime& lastModified() const { return mLastModified; }
     bool isLocked()                 const { return mLocked; }
 
@@ -83,8 +89,8 @@ private:
     OKTETAKASTENGUI_NO_EXPORT void removeViewProfile(const ByteArrayViewProfile::Id& viewProfileId);
 
 private Q_SLOTS:
-    void onViewProfilesFolderChanged(const QString& path);
-    void onDefaultViewProfileChanged(const QString& path);
+    OKTETAKASTENGUI_NO_EXPORT void onViewProfilesFolderChanged(const QString& path);
+    OKTETAKASTENGUI_NO_EXPORT void onDefaultViewProfileChanged(const QString& path);
 
 private:
     QVector<ByteArrayViewProfile> mViewProfiles;

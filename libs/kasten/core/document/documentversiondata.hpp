@@ -21,7 +21,10 @@ class KASTENCORE_EXPORT DocumentVersionData
 {
 public:
     DocumentVersionData(DocumentVersionId id, const QString& changeComment);
-    DocumentVersionData() = delete;
+    DocumentVersionData(const DocumentVersionData&) = default;
+    ~DocumentVersionData() = default;
+
+    DocumentVersionData& operator=(const DocumentVersionData&) = default;
 
 public:
     DocumentVersionId id() const;

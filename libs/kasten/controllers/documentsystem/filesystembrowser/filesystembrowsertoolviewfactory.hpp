@@ -20,7 +20,11 @@ class KASTENCONTROLLERS_EXPORT FileSystemBrowserToolViewFactory : public Abstrac
 {
 public:
     FileSystemBrowserToolViewFactory();
+    FileSystemBrowserToolViewFactory(const FileSystemBrowserToolViewFactory&) = delete;
+
     ~FileSystemBrowserToolViewFactory() override;
+
+    FileSystemBrowserToolViewFactory& operator=(const FileSystemBrowserToolViewFactory&) = delete;
 
 public: // AbstractToolViewFactory API
     AbstractToolView* create(AbstractTool* tool) const override;

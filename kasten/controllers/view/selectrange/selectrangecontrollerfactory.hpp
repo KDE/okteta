@@ -24,7 +24,11 @@ class OKTETAKASTENCONTROLLERS_EXPORT SelectRangeControllerFactory : public Abstr
 {
 public:
     explicit SelectRangeControllerFactory(If::ToolInlineViewable* toolInlineViewable);
+    SelectRangeControllerFactory(const SelectRangeControllerFactory&) = delete;
+
     ~SelectRangeControllerFactory() override;
+
+    SelectRangeControllerFactory& operator=(const SelectRangeControllerFactory&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     AbstractXmlGuiController* create(KXMLGUIClient* guiClient) const override;

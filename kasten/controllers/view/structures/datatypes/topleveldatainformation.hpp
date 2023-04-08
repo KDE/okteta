@@ -34,7 +34,6 @@ class PointerDataInformation;
 class TopLevelDataInformation : public QObject
                               , public DataInformationBase
 {
-    Q_DISABLE_COPY(TopLevelDataInformation)
     Q_OBJECT
 
 public:

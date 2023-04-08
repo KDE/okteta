@@ -46,9 +46,12 @@ class OKTETAGUI_EXPORT ByteArrayTableLayout
 {
 public:
     ByteArrayTableLayout(Size noOfBytesPerLine, Address firstLineOffset, Address startOffset, Address byteArrayOffset, Size byteArrayLength);
-    // ByteArrayTableLayout();
+    ByteArrayTableLayout() = delete;
+    ByteArrayTableLayout(const ByteArrayTableLayout&) = delete;
 
     ~ByteArrayTableLayout();
+
+    ByteArrayTableLayout& operator=(const ByteArrayTableLayout&) = delete;
 
 public: // given values
     /** */

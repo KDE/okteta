@@ -24,6 +24,11 @@ class XxencodingStreamEncoderSettings
 {
 public:
     XxencodingStreamEncoderSettings();
+    XxencodingStreamEncoderSettings(const XxencodingStreamEncoderSettings&) = default;
+
+    ~XxencodingStreamEncoderSettings() = default;
+
+    XxencodingStreamEncoderSettings& operator=(const XxencodingStreamEncoderSettings&) = default;
 
     bool operator==(const XxencodingStreamEncoderSettings& other) const;
 

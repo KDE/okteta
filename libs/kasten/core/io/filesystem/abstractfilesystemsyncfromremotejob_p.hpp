@@ -24,7 +24,6 @@ class AbstractFileSystemSyncFromRemoteJobPrivate : public AbstractSyncFromRemote
 public:
     AbstractFileSystemSyncFromRemoteJobPrivate(AbstractFileSystemSyncFromRemoteJob* parent,
                                                AbstractModelFileSystemSynchronizer* synchronizer);
-    AbstractFileSystemSyncFromRemoteJobPrivate() = delete;
 
     ~AbstractFileSystemSyncFromRemoteJobPrivate() override;
 

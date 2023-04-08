@@ -20,7 +20,11 @@ class OKTETAKASTENCONTROLLERS_EXPORT PrintControllerFactory : public AbstractXml
 {
 public:
     PrintControllerFactory();
+    PrintControllerFactory(const PrintControllerFactory&) = delete;
+
     ~PrintControllerFactory() override;
+
+    PrintControllerFactory& operator=(const PrintControllerFactory&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     AbstractXmlGuiController* create(KXMLGUIClient* guiClient) const override;

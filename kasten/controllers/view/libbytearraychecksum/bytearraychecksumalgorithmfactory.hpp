@@ -14,8 +14,11 @@ template <class T> class QVector;
 
 class ByteArrayChecksumAlgorithmFactory
 {
-protected:
-    ByteArrayChecksumAlgorithmFactory();
+public:
+    ByteArrayChecksumAlgorithmFactory() = delete;
+    ByteArrayChecksumAlgorithmFactory(const ByteArrayChecksumAlgorithmFactory&) = delete;
+
+    ByteArrayChecksumAlgorithmFactory& operator=(const ByteArrayChecksumAlgorithmFactory&) = delete;
 
 public:
     static QVector<AbstractByteArrayChecksumAlgorithm*> createAlgorithms();

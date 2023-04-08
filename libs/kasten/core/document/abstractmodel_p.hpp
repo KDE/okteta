@@ -17,8 +17,11 @@ class AbstractModelPrivate
 {
 public:
     explicit AbstractModelPrivate(AbstractModel* parent, AbstractModel* baseModel = nullptr);
+    AbstractModelPrivate(const AbstractModelPrivate&) = delete;
 
     virtual ~AbstractModelPrivate();
+
+    AbstractModelPrivate& operator=(const AbstractModelPrivate&) = delete;
 
 public:
     AbstractModel* baseModel() const;

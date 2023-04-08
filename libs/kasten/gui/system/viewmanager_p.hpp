@@ -18,8 +18,11 @@ class ViewManagerPrivate
 {
 public:
     explicit ViewManagerPrivate(ViewManager* q);
+    ViewManagerPrivate(const ViewManagerPrivate&) = delete;
 
     ~ViewManagerPrivate();
+
+    ViewManagerPrivate& operator=(const ViewManagerPrivate&) = delete;
 
 public:
     void setViewFactory(AbstractViewFactory* factory);

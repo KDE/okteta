@@ -24,8 +24,11 @@ class KASTENGUI_EXPORT DialogHandler : public AbstractOverwriteDialog
 {
 public:
     explicit DialogHandler(QWidget* widget = nullptr);
+    DialogHandler(const DialogHandler&) = delete;
 
     ~DialogHandler() override;
+
+    DialogHandler& operator=(const DialogHandler&) = delete;
 
 public: // AbstractOverwriteDialog API
     Answer queryOverwrite(const QUrl& url, const QString& title) const override;

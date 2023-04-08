@@ -18,7 +18,11 @@ protected:
     AbstractByteArrayFilterParameterSet();
 
 public:
+    AbstractByteArrayFilterParameterSet(const AbstractByteArrayFilterParameterSet&) = delete;
+
     virtual ~AbstractByteArrayFilterParameterSet();
+
+    AbstractByteArrayFilterParameterSet& operator=(const AbstractByteArrayFilterParameterSet&) = delete;
 
 public:
     virtual const char* id() const = 0;

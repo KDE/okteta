@@ -32,7 +32,6 @@ public:
                             QIODevice* ioDevice,
                             AbstractModel* model, const AbstractModelSelection* selection,
                             AbstractModelStreamEncoder* encoder);
-    ModelStreamEncodeThread() = delete;
 
     ~ModelStreamEncodeThread() override;
 

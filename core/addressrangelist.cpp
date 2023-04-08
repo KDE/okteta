@@ -11,6 +11,7 @@
 namespace Okteta {
 
 AddressRangeList::AddressRangeList() = default;
+AddressRangeList::AddressRangeList(const AddressRangeList&) = default;
 
 AddressRangeList::~AddressRangeList() = default;
 

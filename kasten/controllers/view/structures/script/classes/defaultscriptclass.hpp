@@ -22,7 +22,6 @@ class ScriptHandlerInfo;
 class DefaultScriptClass : public QScriptClass
 {
     friend class DefaultscriptClassIterator;
-    Q_DISABLE_COPY(DefaultScriptClass)
 
 public:
     using DataInfPtr = DataInformation*;

@@ -18,7 +18,11 @@ class ToolViewDockWidgetPrivate
 {
 public:
     explicit ToolViewDockWidgetPrivate(AbstractToolView* mToolView);
+    ToolViewDockWidgetPrivate(const ToolViewDockWidgetPrivate&) = delete;
+
     ~ToolViewDockWidgetPrivate();
+
+    ToolViewDockWidgetPrivate& operator=(const ToolViewDockWidgetPrivate&) = delete;
 
 public:
     void init(ToolViewDockWidget* q);

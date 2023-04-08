@@ -22,7 +22,11 @@ class KASTENCONTROLLERS_EXPORT LoaderControllerFactory : public AbstractXmlGuiCo
 {
 public:
     explicit LoaderControllerFactory(AbstractDocumentStrategy* documentStrategy);
+    LoaderControllerFactory(const LoaderControllerFactory&) = delete;
+
     ~LoaderControllerFactory() override;
+
+    LoaderControllerFactory& operator=(const LoaderControllerFactory&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     AbstractXmlGuiController* create(KXMLGUIClient* guiClient) const override;

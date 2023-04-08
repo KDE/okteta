@@ -21,7 +21,7 @@ namespace Kasten {
 
 class PrintTool;
 
-class OKTETAKASTENCONTROLLERS_EXPORT PrintController : public AbstractXmlGuiController
+class PrintController : public AbstractXmlGuiController
 {
     Q_OBJECT
 

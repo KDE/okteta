@@ -14,8 +14,11 @@ template <class T> class QVector;
 
 class ByteArrayFilterFactory
 {
-protected:
-    ByteArrayFilterFactory();
+public:
+    ByteArrayFilterFactory() = delete;
+    ByteArrayFilterFactory(const ByteArrayFilterFactory&) = delete;
+
+    ByteArrayFilterFactory& operator=(const ByteArrayFilterFactory&) = delete;
 
 public:
     static QVector<AbstractByteArrayFilter*> createFilters();

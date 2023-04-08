@@ -20,7 +20,11 @@ class KASTENCONTROLLERS_EXPORT ClipboardControllerFactory : public AbstractXmlGu
 {
 public:
     ClipboardControllerFactory();
+    ClipboardControllerFactory(const ClipboardControllerFactory&) = delete;
+
     ~ClipboardControllerFactory() override;
+
+    ClipboardControllerFactory& operator=(const ClipboardControllerFactory&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     AbstractXmlGuiController* create(KXMLGUIClient* guiClient) const override;

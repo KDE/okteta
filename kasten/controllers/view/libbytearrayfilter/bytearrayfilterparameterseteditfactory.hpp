@@ -14,8 +14,11 @@ class QByteArray;
 
 class ByteArrayFilterParameterSetEditFactory
 {
-protected:
-    ByteArrayFilterParameterSetEditFactory();
+public:
+    ByteArrayFilterParameterSetEditFactory() = delete;
+    ByteArrayFilterParameterSetEditFactory(const ByteArrayFilterParameterSetEditFactory&) = delete;
+
+    ByteArrayFilterParameterSetEditFactory& operator=(const ByteArrayFilterParameterSetEditFactory&) = delete;
 
 public:
     static AbstractByteArrayFilterParameterSetEdit* createEdit(const char* id);

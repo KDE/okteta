@@ -23,6 +23,9 @@ public:
     static bool executeJob(KJob* job);
 
 public:
+    JobManager(const JobManager&) = delete;
+
+    JobManager& operator=(const JobManager&) = delete;
 };
 
 }

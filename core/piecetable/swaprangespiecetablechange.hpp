@@ -22,7 +22,11 @@ class SwapRangesPieceTableChange : public AbstractPieceTableChange
 {
 public:
     SwapRangesPieceTableChange(Address firstStart, const AddressRange& secondRange);
+    SwapRangesPieceTableChange(const SwapRangesPieceTableChange&) = delete;
+
     ~SwapRangesPieceTableChange() override;
+
+    SwapRangesPieceTableChange& operator=(const SwapRangesPieceTableChange&) = delete;
 
 public: // AbstractPieceTableChange API
     int type() const override;

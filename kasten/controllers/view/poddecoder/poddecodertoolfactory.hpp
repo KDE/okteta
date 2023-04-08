@@ -20,7 +20,11 @@ class OKTETAKASTENCONTROLLERS_EXPORT PodDecoderToolFactory : public AbstractTool
 {
 public:
     PodDecoderToolFactory();
+    PodDecoderToolFactory(const PodDecoderToolFactory&) = delete;
+
     ~PodDecoderToolFactory() override;
+
+    PodDecoderToolFactory& operator=(const PodDecoderToolFactory&) = delete;
 
 public: // AbstractToolFactory API
     AbstractTool* create() const override;

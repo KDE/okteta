@@ -20,6 +20,7 @@ namespace KPieceTable {
 class TestPieceTableChange : public AbstractPieceTableChange
 {
 public:
+    explicit
     TestPieceTableChange(int typeId = -1, const QString& description = QString(),
                          int position = 0, int storagePosition = 0, int storageId = Piece::ChangeStorage,
                          int replacedStoragePosition = 0, int replacedStorageId = Piece::ChangeStorage);

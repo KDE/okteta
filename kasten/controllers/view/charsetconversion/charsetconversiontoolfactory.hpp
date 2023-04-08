@@ -20,7 +20,11 @@ class OKTETAKASTENCONTROLLERS_EXPORT CharsetConversionToolFactory : public Abstr
 {
 public:
     CharsetConversionToolFactory();
+    CharsetConversionToolFactory(const CharsetConversionToolFactory&) = delete;
+
     ~CharsetConversionToolFactory() override;
+
+    CharsetConversionToolFactory& operator=(const CharsetConversionToolFactory&) = delete;
 
 public: // AbstractToolFactory API
     AbstractTool* create() const override;

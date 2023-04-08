@@ -55,7 +55,6 @@ public:
     ByteArrayView(ByteArrayDocument* document, ByteArrayViewProfileSynchronizer* synchronizer);
     ByteArrayView(ByteArrayView* other, ByteArrayViewProfileSynchronizer* synchronizer,
                   Qt::Alignment alignment = {});
-    ByteArrayView() = delete;
 
     ~ByteArrayView() override;
 
@@ -187,10 +186,10 @@ private:
     OKTETAKASTENGUI_NO_EXPORT void init();
 
 private Q_SLOTS:
-    void setFontByGlobalSettings();
+    OKTETAKASTENGUI_NO_EXPORT void setFontByGlobalSettings();
 
-    void onSelectionChanged(const Okteta::AddressRange& selection);
-    void onOverwriteModeChanged(bool overwriteMode);
+    OKTETAKASTENGUI_NO_EXPORT void onSelectionChanged(const Okteta::AddressRange& selection);
+    OKTETAKASTENGUI_NO_EXPORT void onOverwriteModeChanged(bool overwriteMode);
 
 private:
     Okteta::ByteArrayJanusView* mWidget;

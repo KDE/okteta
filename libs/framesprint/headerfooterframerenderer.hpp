@@ -22,6 +22,12 @@ class QString;
 class PrintInfo
 {
 public:
+    PrintInfo() = default;
+    PrintInfo(const PrintInfo&) = delete;
+
+    PrintInfo& operator=(const PrintInfo&) = delete;
+
+public:
     QUrl url() const;
     int noOfPages() const;
 

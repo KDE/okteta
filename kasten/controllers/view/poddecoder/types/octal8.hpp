@@ -17,7 +17,12 @@ struct Octal8
 {
 public:
     Octal8(quint8 v);
+    Octal8(const Octal8&) = default;
     Octal8();
+
+    ~Octal8() = default;
+
+    Octal8& operator=(const Octal8&) = default;
 
 public:
     QString toString() const;

@@ -17,6 +17,10 @@ namespace Okteta {
 //
 class EBCDIC1047CharCodec : public CharCodec
 {
+public:
+    EBCDIC1047CharCodec(const EBCDIC1047CharCodec&) = delete;
+    EBCDIC1047CharCodec& operator=(const EBCDIC1047CharCodec&) = delete;
+
 protected:
     EBCDIC1047CharCodec();
 

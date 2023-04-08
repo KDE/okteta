@@ -21,7 +21,7 @@ class TestDocumentFileSynchronizerFactory : public AbstractModelSynchronizerFact
     Q_OBJECT
 
 public:
-    TestDocumentFileSynchronizerFactory(const QByteArray& header = QByteArray());
+    explicit TestDocumentFileSynchronizerFactory(const QByteArray& header = QByteArray());
     ~TestDocumentFileSynchronizerFactory() override;
 
 public: // AbstractModelSynchronizerFactory API

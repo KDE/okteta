@@ -32,9 +32,11 @@ class GroupPieceTableChange : public AbstractPieceTableChange
 {
 public:
     GroupPieceTableChange(GroupPieceTableChange* parent, const QString& description);
-    GroupPieceTableChange() = delete;
+    GroupPieceTableChange(const GroupPieceTableChange&) = delete;
 
     ~GroupPieceTableChange() override;
+
+    GroupPieceTableChange& operator=(const GroupPieceTableChange&) = delete;
 
 public: // AbstractPieceTableChange API
     int type() const override;

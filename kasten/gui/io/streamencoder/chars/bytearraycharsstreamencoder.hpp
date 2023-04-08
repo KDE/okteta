@@ -20,6 +20,11 @@ class CharsStreamEncoderSettings
 {
 public:
     CharsStreamEncoderSettings();
+    CharsStreamEncoderSettings(const CharsStreamEncoderSettings&) = default;
+
+    ~CharsStreamEncoderSettings() = default;
+
+    CharsStreamEncoderSettings& operator=(const CharsStreamEncoderSettings&) = default;
 
 public:
     QString codecName;

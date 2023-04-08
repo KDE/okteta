@@ -22,8 +22,11 @@ class InsertPieceTableChange : public AbstractPieceTableChange
 {
 public:
     InsertPieceTableChange(Address insertOffset, Size insertLength, Address storageOffset);
+    InsertPieceTableChange(const InsertPieceTableChange&) = delete;
 
     ~InsertPieceTableChange() override;
+
+    InsertPieceTableChange& operator=(const InsertPieceTableChange&) = delete;
 
 public: // AbstractPieceTableChange API
     int type() const override;

@@ -20,7 +20,11 @@ class OKTETAKASTENCONTROLLERS_EXPORT DocumentInfoToolViewFactory : public Abstra
 {
 public:
     DocumentInfoToolViewFactory();
+    DocumentInfoToolViewFactory(const DocumentInfoToolViewFactory&) = delete;
+
     ~DocumentInfoToolViewFactory() override;
+
+    DocumentInfoToolViewFactory& operator=(const DocumentInfoToolViewFactory&) = delete;
 
 public: // AbstractToolViewFactory API
     AbstractToolView* create(AbstractTool* tool) const override;

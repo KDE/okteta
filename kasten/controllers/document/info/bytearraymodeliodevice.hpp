@@ -24,7 +24,6 @@ class ByteArrayModelIoDevice : public QIODevice
 
 public:
     explicit ByteArrayModelIoDevice(AbstractByteArrayModel* byteArrayModel, QObject* parent = nullptr);
-    ByteArrayModelIoDevice() = delete;
 
     ~ByteArrayModelIoDevice() override;
 

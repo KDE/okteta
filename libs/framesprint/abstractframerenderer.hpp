@@ -22,7 +22,11 @@ class AbstractFrameRenderer
 {
 public:
     AbstractFrameRenderer();
+    AbstractFrameRenderer(const AbstractFrameRenderer&) = delete;
+
     virtual ~AbstractFrameRenderer();
+
+    AbstractFrameRenderer& operator=(const AbstractFrameRenderer&) = delete;
 
 public: // API to be implemented
     // make this flags?

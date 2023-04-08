@@ -24,7 +24,11 @@ class KASTENCONTROLLERS_EXPORT ToolListMenuControllerFactory : public AbstractXm
 {
 public:
     explicit ToolListMenuControllerFactory(If::WidgetsDockable* widgetsDockable);
+    ToolListMenuControllerFactory(const ToolListMenuControllerFactory&) = delete;
+
     ~ToolListMenuControllerFactory() override;
+
+    ToolListMenuControllerFactory& operator=(const ToolListMenuControllerFactory&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     AbstractXmlGuiController* create(KXMLGUIClient* guiClient) const override;

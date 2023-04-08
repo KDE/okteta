@@ -17,7 +17,12 @@ struct Utf8
 {
 public:
     Utf8(QChar v);
+    Utf8(const Utf8&) = default;
     Utf8();
+
+    ~Utf8() = default;
+
+    Utf8& operator=(const Utf8&) = default;
 
 public:
     QString toString() const;

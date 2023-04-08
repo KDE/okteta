@@ -23,6 +23,11 @@ class ByteArrayComboBoxPrivate
 {
 public:
     explicit ByteArrayComboBoxPrivate(ByteArrayComboBox* parent);
+    ByteArrayComboBoxPrivate(const ByteArrayComboBoxPrivate&) = delete;
+
+    ~ByteArrayComboBoxPrivate() = default;
+
+    ByteArrayComboBoxPrivate& operator=(const ByteArrayComboBoxPrivate&) = delete;
 
 public:
     QByteArray byteArray() const;

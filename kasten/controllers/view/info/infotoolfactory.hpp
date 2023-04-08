@@ -20,7 +20,11 @@ class OKTETAKASTENCONTROLLERS_EXPORT InfoToolFactory : public AbstractToolFactor
 {
 public:
     InfoToolFactory();
+    InfoToolFactory(const InfoToolFactory&) = delete;
+
     ~InfoToolFactory() override;
+
+    InfoToolFactory& operator=(const InfoToolFactory&) = delete;
 
 public: // AbstractToolFactory API
     AbstractTool* create() const override;

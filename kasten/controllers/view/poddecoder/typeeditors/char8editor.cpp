@@ -19,7 +19,7 @@ class Char8Validator : public QValidator
     Q_OBJECT
 
 public:
-    Char8Validator(Okteta::CharCodec* charCodec, QObject* parent = nullptr);
+    explicit Char8Validator(Okteta::CharCodec* charCodec, QObject* parent = nullptr);
 
     ~Char8Validator() override;
 

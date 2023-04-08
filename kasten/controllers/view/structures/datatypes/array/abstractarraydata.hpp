@@ -31,12 +31,15 @@ class QVariant;
 
 class AbstractArrayData
 {
-    Q_DISABLE_COPY(AbstractArrayData)
-
 public:
     explicit AbstractArrayData(DataInformation* childType, ArrayDataInformation* parent);
+    AbstractArrayData(const AbstractArrayData&) = delete;
+
     virtual ~AbstractArrayData();
 
+    AbstractArrayData& operator=(const AbstractArrayData&) = delete;
+
+public:
     void setParent(ArrayDataInformation* parent);
     /** @return The current child type. Ownership is NOT transferred */
     DataInformation* childType() const;

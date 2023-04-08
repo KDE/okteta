@@ -19,6 +19,11 @@ class RevertablePieceTable
 {
 public:
     RevertablePieceTable();
+    RevertablePieceTable(const RevertablePieceTable&) = delete;
+
+    ~RevertablePieceTable();
+
+    RevertablePieceTable& operator=(const RevertablePieceTable&) = delete;
 
 public:
     void init(Size size);
@@ -82,6 +87,8 @@ private:
     PieceTable mPieceTable;
     PieceTableChangeHistory mChangeHistory;
 };
+
+inline RevertablePieceTable::~RevertablePieceTable() = default;
 
 inline bool RevertablePieceTable::getStorageData(int* storageId, Address* storageOffset, Address dataOffset) const
 {

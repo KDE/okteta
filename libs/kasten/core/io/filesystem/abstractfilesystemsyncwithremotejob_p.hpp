@@ -23,7 +23,6 @@ public:
     AbstractFileSystemSyncWithRemoteJobPrivate(AbstractFileSystemSyncWithRemoteJob* parent,
                                                AbstractModelFileSystemSynchronizer* synchronizer,
                                                const QUrl& url, AbstractModelSynchronizer::ConnectOption option);
-    AbstractFileSystemSyncWithRemoteJobPrivate() = delete;
 
     ~AbstractFileSystemSyncWithRemoteJobPrivate() override;
 

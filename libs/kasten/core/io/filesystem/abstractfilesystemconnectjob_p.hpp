@@ -24,7 +24,6 @@ public:
     AbstractFileSystemConnectJobPrivate(AbstractFileSystemConnectJob* parent,
                                         AbstractModelFileSystemSynchronizer* synchronizer, AbstractDocument* document,
                                         const QUrl& url, AbstractModelSynchronizer::ConnectOption option);
-    AbstractFileSystemConnectJobPrivate() = delete;
 
     ~AbstractFileSystemConnectJobPrivate() override;
 

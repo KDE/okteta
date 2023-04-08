@@ -20,7 +20,11 @@ class ByteArrayIHexStreamEncoderConfigEditorFactory : public AbstractModelStream
 {
 public:
     ByteArrayIHexStreamEncoderConfigEditorFactory();
+    ByteArrayIHexStreamEncoderConfigEditorFactory(const ByteArrayIHexStreamEncoderConfigEditorFactory&) = delete;
+
     ~ByteArrayIHexStreamEncoderConfigEditorFactory() override;
+
+    ByteArrayIHexStreamEncoderConfigEditorFactory& operator=(const ByteArrayIHexStreamEncoderConfigEditorFactory&) = delete;
 
 public:
     AbstractModelStreamEncoderConfigEditor* tryCreateConfigEditor(AbstractModelStreamEncoder* encoder) const override;

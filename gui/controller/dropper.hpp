@@ -24,9 +24,11 @@ class Dropper
 {
 public:
     explicit Dropper(AbstractByteArrayView* view);
-    Dropper() = delete;
+    Dropper(const Dropper&) = delete;
 
     ~Dropper();
+
+    Dropper& operator=(const Dropper&) = delete;
 
 public: // AbstractMouseController API
     bool handleDragEnterEvent(QDragEnterEvent* dragEnterEvent);
