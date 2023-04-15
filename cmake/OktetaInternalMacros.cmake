@@ -480,8 +480,10 @@ function(okteta_add_cmakeconfig _baseName)
         COMPATIBILITY
     )
     set(multiValueArgs
+        INCLUDES
         NAMESPACE
         DEPS
+        VARS
     )
     cmake_parse_arguments(OKTETA_ADD_CMAKECONFIG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
@@ -530,6 +532,15 @@ function(okteta_add_cmakeconfig _baseName)
         message(FATAL_ERROR "DEPS expected to have a version after ${dep_package_name}.")
     endif()
     string(APPEND _configFileTemplate "\ninclude(\"\${CMAKE_CURRENT_LIST_DIR}/${_configName}Targets.cmake\")\n")
+    foreach (_include ${OKTETA_ADD_CMAKECONFIG_INCLUDES})
+        string(APPEND _configFileTemplate "include(\"\${CMAKE_CURRENT_LIST_DIR}/${_include}\")\n")
+    endforeach()
+    if (OKTETA_ADD_CMAKECONFIG_VARS)
+        string(APPEND _configFileTemplate "\n")
+        foreach (_var ${OKTETA_ADD_CMAKECONFIG_VARS})
+            string(APPEND _configFileTemplate "@${_var}@\n")
+        endforeach()
+    endif()
     file(WRITE ${_configFileTemplatePath} "${_configFileTemplate}")
 
     set(_targets_export_name "${_fullName}Targets")
