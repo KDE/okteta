@@ -215,10 +215,9 @@ oktetakastencontrollers_add_sublibrary(view/checksum
 
 oktetakastencontrollers_add_sublibrary(view/libfinddialog
     BUILD_INCLUDEDIR
-    PUBLIC
-        FindDirection
     PRIVATE
         AbstractFindDialog
+        FindDirection
 )
 
 oktetakastencontrollers_add_sublibrary(view/poddecoder/typecodecs
