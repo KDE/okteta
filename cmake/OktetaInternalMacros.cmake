@@ -381,7 +381,7 @@ function(okteta_add_library _baseName)
     endif()
 
     # generate header file with export & version macros
-    string(TOUPPER "${_fullName}" _definitions_prefix)
+    string(TOUPPER "${_fullInternalName}" _definitions_prefix)
     _okteta_generate_version_code(
         PREFIX        ${_definitions_prefix}
         VERSION       ${OKTETA_ADD_LIBRARY_VERSION}
