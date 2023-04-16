@@ -9,8 +9,6 @@
 #ifndef KASTEN_BYTEARRAYTEXTSTREAMENCODERPREVIEW_HPP
 #define KASTEN_BYTEARRAYTEXTSTREAMENCODERPREVIEW_HPP
 
-// lib
-#include "oktetakastengui_export.hpp"
 // Kasten ui
 #include <Kasten/AbstractSelectionView>
 

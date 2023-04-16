@@ -9,8 +9,6 @@
 #ifndef KASTEN_BYTEARRAYSOURCECODESTREAMENCODERCONFIGEDITORFACTORY_HPP
 #define KASTEN_BYTEARRAYSOURCECODESTREAMENCODERCONFIGEDITORFACTORY_HPP
 
-// lib
-#include "oktetakastengui_export.hpp"
 // Kasten gui
 #include <Kasten/AbstractModelStreamEncoderConfigEditorFactory>
 

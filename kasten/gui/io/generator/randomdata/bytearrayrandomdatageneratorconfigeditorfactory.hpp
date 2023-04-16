@@ -9,8 +9,6 @@
 #ifndef KASTEN_BYTEARRAYRANDOMDATAGENERATORCONFIGEDITORFACTORY_HPP
 #define KASTEN_BYTEARRAYRANDOMDATAGENERATORCONFIGEDITORFACTORY_HPP
 
-// lib
-#include "oktetakastengui_export.hpp"
 // Kasten gui
 #include <Kasten/AbstractModelDataGeneratorConfigEditorFactory>
 
