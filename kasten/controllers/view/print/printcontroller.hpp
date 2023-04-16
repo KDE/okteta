@@ -9,8 +9,6 @@
 #ifndef KASTEN_PRINTCONTROLLER_HPP
 #define KASTEN_PRINTCONTROLLER_HPP
 
-// lib
-#include "oktetakastencontrollers_export.hpp"
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
 
