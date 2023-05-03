@@ -1,31 +1,32 @@
 # translation of okteta.po to galician
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-#
 # mvillarino <mvillarino@users.sourceforge.net>, 2007, 2008, 2009.
 # Marce Villarino <mvillarino@kde-espana.es>, 2009, 2013, 2014.
 # Adrian Chaves Fernandez <adriyetichaves@gmail.com>, 2013, 2015, 2017.
-# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2018, 2019.
+# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2018, 2019, 2023.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-19 02:45+0000\n"
-"PO-Revision-Date: 2019-03-03 20:30+0100\n"
+"PO-Revision-Date: 2023-05-02 20:41+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
-"Language-Team: Galician <kde-i18n-doc@kde.org>\n"
+"Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 23.04.0\n"
 
 #: controllers/document/info/documentinfotool.cpp:48
 #: controllers/document/info/documentinfotoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
 msgid "File Info"
-msgstr "Información sobre o ficheiro"
+msgstr "Información do ficheiro"
 
 #: controllers/document/info/documentinfoview.cpp:67
 #, kde-format
@@ -178,7 +179,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enables renaming of the selected bookmark."
-msgstr "Activa o renomeamento do marcador escollido."
+msgstr "Permite cambiar o nome do marcador seleccionado."
 
 #: controllers/view/bookmarks/bookmarksview.cpp:105
 #, kde-format
@@ -194,7 +195,7 @@ msgstr ""
 #, kde-format
 msgctxt "@item:intable character is not defined"
 msgid "undef."
-msgstr "non def."
+msgstr "indef."
 
 #: controllers/view/bytetable/bytetablemodel.cpp:156
 #: controllers/view/info/statistictablemodel.cpp:209
@@ -743,37 +744,35 @@ msgid "CRC-32"
 msgstr "CRC-32"
 
 #: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumalgorithm.cpp:82
-#, fuzzy, kde-format
-#| msgctxt "name of the checksum algorithm, Cyclic Redundancy Check 32"
-#| msgid "CRC-32"
+#, kde-format
 msgctxt "name of the checksum algorithm, Cyclic Redundancy Check 64"
 msgid "CRC-64"
-msgstr "CRC-32"
+msgstr "CRC-64"
 
 #. i18nc("@item:inlistbox", "Custom"));
 #: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:32
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "ECMA-182"
-msgstr ""
+msgstr "ECMA-182"
 
 #: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:33
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "ISO 3309"
-msgstr ""
+msgstr "ISO 3309"
 
 #: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:39
 #, kde-format
 msgctxt "@label:listbox variant used to select the CRC-64 variant"
 msgid "CRC-64 variant:"
-msgstr ""
+msgstr "Variante de CRC-64:"
 
 #: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:42
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "CRC-64 variant used by calculation."
-msgstr ""
+msgstr "Variante de CRC-64 que se usa en cálculos."
 
 #: controllers/view/libbytearraychecksum/algorithm/modsum16bytearraychecksumalgorithm.cpp:23
 #, kde-format
@@ -959,7 +958,7 @@ msgctxt ""
 "name of the filter; it changes the order of the bytes/bits to backwards, so "
 "ABCD becomes DCBA"
 msgid "REVERSE data"
-msgstr "REVESAR os datos"
+msgstr "INVERTER os datos"
 
 #: controllers/view/libbytearrayfilter/filter/reversebytearrayfilterparametersetedit.cpp:29
 #, kde-format
@@ -1029,7 +1028,7 @@ msgstr ""
 #, kde-format
 msgctxt "name of the filter; it moves the bits, setting freed ones to zero"
 msgid "SHIFT data"
-msgstr "TRANSLOCAR os datos"
+msgstr "MOVER os datos"
 
 #: controllers/view/libbytearrayfilter/filter/xorbytearrayfilter.cpp:22
 #, kde-format
@@ -1075,7 +1074,7 @@ msgid ""
 "'joe' or 'JOE', only 'Joe'."
 msgstr ""
 "Fai unha busca que distingue maiúsculas de minúsculas: inserir o padrón "
-"«Mónica» non casará con «mónica» nin «MóNiCa», só con «Mónica»."
+"«Cousa» non casará con «cousa» nin con «COUSA», só con «Cousa»."
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:110
 #, kde-format
@@ -2425,13 +2424,13 @@ msgstr "Validar todas as estruturas."
 #, kde-format
 msgctxt "@action:button"
 msgid "Script console"
-msgstr "Consola de scripting"
+msgstr "Consola de scripts"
 
 #: controllers/view/structures/structureview.cpp:123
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open script console."
-msgstr "Abrir a consola de scripting."
+msgstr "Abrir a consola de scripts."
 
 #: controllers/view/structures/structureview.cpp:127
 #, kde-format
@@ -2487,7 +2486,7 @@ msgstr "Bloquear a estrutura seleccionada no desprazamento actual."
 #, kde-format
 msgctxt "@title:window"
 msgid "Structures Script Console"
-msgstr "Consola de scripting de estruturas"
+msgstr "Consola de scripts de estruturas"
 
 #: controllers/view/viewconfig/bytespergroupdialog.cpp:33
 #: controllers/view/viewprofiles/viewprofileedit.cpp:115
@@ -3317,7 +3316,7 @@ msgstr "24 bits"
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "Uuencoding"
-msgstr "Codificación Uu"
+msgstr "Uuencoding"
 
 #: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:35
 #: gui/io/streamencoder/xxencoding/bytearrayxxencodingstreamencoderconfigeditor.cpp:34
@@ -3371,7 +3370,7 @@ msgstr "Ver como texto simple"
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "Xxencoding"
-msgstr "Codificación Xx"
+msgstr "Xxencoding"
 
 #. i18nc("@item:inlistbox guessing the format of the address by the input",      "Auto"),
 #: gui/liboktetawidgets/addresscombobox_p.cpp:30
