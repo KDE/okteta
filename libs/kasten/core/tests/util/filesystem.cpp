@@ -29,11 +29,6 @@ TestFileSystem::TestFileSystem(const QString& name)
 TestFileSystem::~TestFileSystem()
 {
     _removeDir(mBasePath);
-
-//     removeDir(QStringLiteral("kdatetimetest/Africa"));
-//     removeDir( QStringLiteral("share/config"));
-//     removeDir( QStringLiteral("share") );
-//     QDir().rmpath(QDir::homePath() + "/.kde-unit-test/share");
 }
 
 void TestFileSystem::removeDir(const QString& subPath)
