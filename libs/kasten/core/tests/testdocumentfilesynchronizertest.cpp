@@ -27,7 +27,7 @@
 #include <QDataStream>
 #include <QUrl>
 
-static constexpr char TestDirectory[] = "testdocumentfile1synchronizertest";
+static constexpr char TestDirectory[] = "testdocumentfilesynchronizertest";
 static constexpr char TestFileName1[] = "test1.data";
 static constexpr char TestFileName2[] = "test2.data";
 static constexpr char NotExistingFileName[] = "not.existing";
