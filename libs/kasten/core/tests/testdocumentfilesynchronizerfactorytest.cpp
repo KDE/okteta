@@ -22,7 +22,7 @@
 #include <QDataStream>
 #include <QUrl>
 
-static constexpr char TestDirectory[] = "testdocumentfile1synchronizertest";
+static constexpr char TestDirectory[] = "testdocumentfilesynchronizerfactorytest";
 static constexpr char TestFileName1[] = "test1.data";
 #if 0
 static constexpr char TestFileName2[] = "test2.data";

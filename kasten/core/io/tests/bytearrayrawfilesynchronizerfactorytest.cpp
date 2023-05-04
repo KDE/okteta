@@ -24,7 +24,7 @@
 #include <QFile>
 #include <QDataStream>
 
-static constexpr char TestDirectory[] = "bytearrayrawfilesynchronizertest";
+static constexpr char TestDirectory[] = "bytearrayrawfilesynchronizerfactorytest";
 static constexpr char TestFileName[] = "test.data";
 #if 0
 static constexpr char NotExistingUrl[] = "notexisting://";
