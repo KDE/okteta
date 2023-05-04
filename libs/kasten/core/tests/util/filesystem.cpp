@@ -61,10 +61,9 @@ void TestFileSystem::_removeDir(const QString& path)
     }
 
     QCOMPARE((int)localDir.entryList(QDir::Files).count(), 0);
-    QString subDirectory = path;
-    subDirectory.remove(QRegExp(QStringLiteral("^.*/")));
+    const QString subDirectory = localDir.dirName();
     localDir.cdUp();
-    localDir.rmpath(subDirectory);
+    localDir.rmdir(subDirectory);
 }
 
 void TestFileSystem::_createDir(const QString& path)
