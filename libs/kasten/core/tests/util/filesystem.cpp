@@ -9,7 +9,6 @@
 #include "filesystem.hpp"
 
 // Qt
-#include <QRegularExpression>
 #include <QDir>
 #include <QFile>
 #include <QTest>
@@ -30,11 +29,6 @@ TestFileSystem::TestFileSystem(const QString& name)
 TestFileSystem::~TestFileSystem()
 {
     _removeDir(mBasePath);
-
-//     removeDir(QStringLiteral("kdatetimetest/Africa"));
-//     removeDir( QStringLiteral("share/config"));
-//     removeDir( QStringLiteral("share") );
-//     QDir().rmpath(QDir::homePath() + "/.kde-unit-test/share");
 }
 
 void TestFileSystem::removeDir(const QString& subPath)
@@ -67,10 +61,9 @@ void TestFileSystem::_removeDir(const QString& path)
     }
 
     QCOMPARE((int)localDir.entryList(QDir::Files).size(), 0);
-    QString subDirectory = path;
-    subDirectory.remove(QRegularExpression(QStringLiteral("^.*/")));
+    const QString subDirectory = localDir.dirName();
     localDir.cdUp();
-    localDir.rmpath(subDirectory);
+    localDir.rmdir(subDirectory);
 }
 
 void TestFileSystem::_createDir(const QString& path)
