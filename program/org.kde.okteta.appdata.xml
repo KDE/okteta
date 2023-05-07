@@ -13,6 +13,7 @@
   <name xml:lang="de">Okteta</name>
   <name xml:lang="el">Okteta</name>
   <name xml:lang="en-GB">Okteta</name>
+  <name xml:lang="eo">Okteta</name>
   <name xml:lang="es">Okteta</name>
   <name xml:lang="et">Okteta</name>
   <name xml:lang="eu">Okteta</name>
@@ -54,6 +55,7 @@
   <summary xml:lang="de">Hex-Editor</summary>
   <summary xml:lang="el">Επεξεργαστής δεκαεξαδικών</summary>
   <summary xml:lang="en-GB">Hex editor</summary>
+  <summary xml:lang="eo">Deksesuma redaktilo</summary>
   <summary xml:lang="es">Editor hexadecimal</summary>
   <summary xml:lang="et">Binaarfailide redaktor</summary>
   <summary xml:lang="eu">Editore hamaseitarra</summary>
@@ -94,6 +96,7 @@
     <p xml:lang="de">Okteta ist ein einfacher Editor für die Rohdaten von Dateien.</p>
     <p xml:lang="el">Το Okteta είναι ένας απλός επεξεργαστής για τα ακατέργαστα δεδομένα αρχείων.</p>
     <p xml:lang="en-GB">Okteta is a simple editor for the raw data of files.</p>
+    <p xml:lang="eo">Okteta estas simpla redaktilo por la krudaj datumoj de dosieroj.</p>
     <p xml:lang="es">Okteta es un sencillo editor de archivos de datos en bruto.</p>
     <p xml:lang="et">Okteta on lihtne failide toorandmete redaktor.</p>
     <p xml:lang="eu">Okteta fitxategietako datu gordinak editatzeko editore erraz bat da.</p>
@@ -134,6 +137,7 @@
     <p xml:lang="de">Funktionen:</p>
     <p xml:lang="el">Χαρακτηριστικά:</p>
     <p xml:lang="en-GB">Features:</p>
+    <p xml:lang="eo">Trajtoj:</p>
     <p xml:lang="es">Funcionalidades:</p>
     <p xml:lang="et">Omadused:</p>
     <p xml:lang="eu">Ezaugarriak:</p>
@@ -174,6 +178,7 @@
       <li xml:lang="de">Werte und Zeichen können in zwei Spalten (die traditionelle Anzeige von Hexeditoren) oder in Reihen mit der Anzeige der Werte über den Zeichen dargestellt werden</li>
       <li xml:lang="el">Οιτιμές και οι χαρακτήρες εμφανίζονταιή σε δύο στήλες (η παραδοσιακή παρουσίαση στους επεξεργαστές δεκαεξαδικών) ή σε γραμμέςμε την τιμή στην κορυφή του χαρακτήρα</li>
       <li xml:lang="en-GB">Values and characters shown either in two columns (the traditional display in hex editors) or in rows with the value on top of the character</li>
+      <li xml:lang="eo">Valoroj kaj signoj estas montrataj aŭ en du kolumnoj (la tradicia vidigo en heks-redaktiloj) aŭ en vicoj kun la valoro super la signo</li>
       <li xml:lang="es">Muestra valores y caracteres en dos columnas (la vista tradicional para editores hexadecimales) o en filas con los valores encima de los caracteres</li>
       <li xml:lang="et">Väärtusi ja märke võib lasta näidata kahes veerus (niisuguste redaktorite tavapärane kuvamisviis) või ridades, kus väärtus on märgi peal</li>
       <li xml:lang="eu">Balioak eta karaktereak bi zutabetan (editore hamaseitarretan ohiko ikuspegia) edo errenkadatan balioa karaktere gainean duela</li>
@@ -210,6 +215,7 @@
       <li xml:lang="de">Bearbeiten und navigieren ähnlich wie in einem Texteditor</li>
       <li xml:lang="el">Επεξεργασία και πλοήγηση παρόμοια με επεξεργαστή κειμένου</li>
       <li xml:lang="en-GB">Editing and navigating similar to a text editor</li>
+      <li xml:lang="eo">Redaktado kaj navigado simila al tekstredaktilo</li>
       <li xml:lang="es">Edición y navegación similar a la de los editores de texto</li>
       <li xml:lang="et">Redigeerimine ja liikumine nagu tavalises tekstiredaktoris</li>
       <li xml:lang="eu">Testu-editore baten antzeko editatzea eta nabigatzea</li>
@@ -246,6 +252,7 @@
       <li xml:lang="de">Benutzerdefinierte Datenansichten mit Profilen, die gespeichert und geladen werden können.</li>
       <li xml:lang="el">Προσαρμόσιμες προβολές δεδομένων με φορτώσιμα και αποθηκεύσιμα προφίλ</li>
       <li xml:lang="en-GB">Customisable data views, with loadable and storable profiles</li>
+      <li xml:lang="eo">Agordeblaj datenbildigoj kun ŝargeblaj kaj konserveblaj profiloj</li>
       <li xml:lang="es">Vistas personalizadas de datos, con perfiles que se pueden guardar y cargar</li>
       <li xml:lang="et">Kohandatavad andmevaated laaditavate ja salvestatavate profiilidega</li>
       <li xml:lang="eu">Datuen ikuspegi moldagarriak, profilak zamatu eta gorde daitezke</li>
@@ -282,6 +289,7 @@
       <li xml:lang="de">Werkzeuge können an allen Seiten verankert oder freischwebend benutzt werden</li>
       <li xml:lang="el">Εργαλεία έτοιμα για διαχειριστές εργασιών σε όλες τις πλευρές ή αιωρούμενα</li>
       <li xml:lang="en-GB">Tools dockable on all sides or floating</li>
+      <li xml:lang="eo">Iloj dokeblaj je ĉiuj flankoj aŭ flosantaj</li>
       <li xml:lang="es">Cajas de herramientas empotrables o flotantes</li>
       <li xml:lang="et">Tööriistad, mida saab dokkida igale küljele või muuta hõljuvaks</li>
       <li xml:lang="eu">Tresna flotagarriak edo alde guztietan aingura daitezkeenak</li>
@@ -318,6 +326,7 @@
       <li xml:lang="de">Zahlenkodierung: Hexadezimal, Dezimal, Oktal und Binär</li>
       <li xml:lang="el">Αριθμητικές κωδικοποιήσεις: Δεκαεξαδική, δεκαδική, οκταδική, δυαδική</li>
       <li xml:lang="en-GB">Numerical encodings: Hexadecimal, Decimal, Octal, Binary</li>
+      <li xml:lang="eo">Nombraj kodigoj: Deksesuma, dekuma, okuma, duuma</li>
       <li xml:lang="es">Codificaciones numéricas (hexadecimal, decimal, octal, binaria)</li>
       <li xml:lang="et">Arvukodeeringud: kuueteistkümnend-, kümnend-, kaheksand- ja kahendsüsteemis</li>
       <li xml:lang="eu">Zenbaki kodeketa: hamaseitarra, hamartarra, zortzitarra, bitarra</li>
@@ -355,6 +364,7 @@
       <li xml:lang="de">Zeichenkodierungen: Alle Kodierungen, die von Qt und EBCDIC unterstützt werden</li>
       <li xml:lang="el">Κωδικοποίηση χαρακτήρων: όλες οι 8-bit κωδικοποιήσεις όπως έρχονται από Qt, EBCDIC</li>
       <li xml:lang="en-GB">Character encodings: All 8-bit encodings as supplied by Qt, EBCDIC</li>
+      <li xml:lang="eo">Signokodigoj: Ĉiuj 8-bitaj ĉifradoj kiel provizitaj de Qt, EBCDIC</li>
       <li xml:lang="es">Codificaciones de caracteres (todas las codificaciones de 8 bits que proporciona Qt, EBCDIC)</li>
       <li xml:lang="et">Märgikodeeringud: kõik 8-bitised kodeeringud, mida toetab Qt, EBCDIC</li>
       <li xml:lang="eu">Karaktere kodeketa: Qt bidez hornitutako 8-biteko kodeketa guztiak, EBCDIC</li>
@@ -392,6 +402,7 @@
       <li xml:lang="de">Schnelles Rendern der Daten auf dem Bildschirm</li>
       <li xml:lang="el">Γρήγορη αποτύπωση χαρακτήρων στην οθόνη</li>
       <li xml:lang="en-GB">Fast data rendering on screen</li>
+      <li xml:lang="eo">Rapida datumbildigo surekrane</li>
       <li xml:lang="es">Visualización rápida de datos en la pantalla</li>
       <li xml:lang="et">Andmete kiire renderdamine ekraanil</li>
       <li xml:lang="eu">Pantailan datuen errendatze azkarra</li>
@@ -430,6 +441,7 @@
       <li xml:lang="de">Mehrere geöffnete Dateien</li>
       <li xml:lang="el">Άνοιγμα πολλαπλών αρχείων</li>
       <li xml:lang="en-GB">Multiple open files</li>
+      <li xml:lang="eo">Pluraj malfermitaj dosieroj</li>
       <li xml:lang="es">Permite abrir varios archivos a la vez</li>
       <li xml:lang="et">Paljude failide korraga avamise võimalus</li>
       <li xml:lang="eu">Irekitako fitxategi aniztuna</li>
@@ -470,6 +482,7 @@
       <li xml:lang="de">Unterstützung für Zurücknehmen und Wiederherstellen</li>
       <li xml:lang="el">Υποστήριξη αναίρεσης/επανάληψης</li>
       <li xml:lang="en-GB">Undo/redo support</li>
+      <li xml:lang="eo">Subtenas malfar/refaron</li>
       <li xml:lang="es">Permite deshacer y rehacer acciones</li>
       <li xml:lang="et">Tagasivõtmiste ja uuestitegemiste toetus</li>
       <li xml:lang="eu">Desegin/berregin euskarria</li>
@@ -508,6 +521,7 @@
       <li xml:lang="de">Strukturen-Werkzeug für die Untersuchung und Bearbeitung auf der Basis von benutzerdefinierten Strukturdefinitionen</li>
       <li xml:lang="el">Εργαλείο δομών για ανάλυση και επεξεργασία με βάση ορισμούς δομών που δημιουργεί ο χρήστης</li>
       <li xml:lang="en-GB">Structures tool for analysing and editing based on user-creatable structure definitions</li>
+      <li xml:lang="eo">Struktureca ilo por analizi kaj redakti bazite sur uzantokreeblaj strukturdifinoj</li>
       <li xml:lang="es">Herramientas de estructuras para analizar y editar basándose en definiciones de estructuras creadas por el usuario</li>
       <li xml:lang="et">Struktuuride tööriist analüüsimiseks ja muutmiseks vastavalt kasutaja loodud struktuuridefinitsioonidele</li>
       <li xml:lang="eu">Aztertzeko eta editatzeko egituren tresna, erabiltzaileak sor ditzakeen egitura definizioetan oinarritua</li>
@@ -547,6 +561,7 @@
       <li xml:lang="de">Und noch mehr ...</li>
       <li xml:lang="el">Και πολλά άλλα...</li>
       <li xml:lang="en-GB">And more...</li>
+      <li xml:lang="eo">Kaj pli...</li>
       <li xml:lang="es">Y más...</li>
       <li xml:lang="et">Ja veel palju muud...</li>
       <li xml:lang="eu">Eta gehiago...</li>

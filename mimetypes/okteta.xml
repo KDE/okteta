@@ -24,6 +24,7 @@ Notes:
     <comment xml:lang="de">Motorola-S-Records</comment>
     <comment xml:lang="el">Motorola S-Records</comment>
     <comment xml:lang="en_GB">Motorola S-Records</comment>
+    <comment xml:lang="eo">Motorola S-Rikordoj</comment>
     <comment xml:lang="es">Motorola S-Records</comment>
     <comment xml:lang="et">Motorola S-Records</comment>
     <comment xml:lang="eu">Motorola-ren S-Records</comment>
@@ -69,6 +70,7 @@ Notes:
     <comment xml:lang="de">Intel-Hexadezimal-Objektdatei</comment>
     <comment xml:lang="el">Δεκαεξαδικό μεταφρασμένο αρχείο Intel</comment>
     <comment xml:lang="en_GB">Intel hexadecimal object file</comment>
+    <comment xml:lang="eo">Intel deksesuma objektdosiero</comment>
     <comment xml:lang="es">Archivo objeto hexadecimal de Intel</comment>
     <comment xml:lang="et">Inteli 16nd-objektfail</comment>
     <comment xml:lang="eu">Intel-en objektu-fitxategi hamaseitarra</comment>
@@ -111,6 +113,7 @@ Notes:
     <comment xml:lang="de">Base64-kodierte Daten</comment>
     <comment xml:lang="el">Κρυπτογραφημένα δεδομένα με Base64</comment>
     <comment xml:lang="en_GB">Base64 encoded data</comment>
+    <comment xml:lang="eo">Bazo64-ĉifritaj datumoj</comment>
     <comment xml:lang="es">Datos codificados en Base64</comment>
     <comment xml:lang="et">Base64 kodeeringus andmed</comment>
     <comment xml:lang="eu">Base64-arekin kodetutako datuak</comment>
@@ -147,6 +150,7 @@ Notes:
     <comment xml:lang="de">Base32-kodierte Daten</comment>
     <comment xml:lang="el">Κρυπτογραφημένα δεδομένα με Base32</comment>
     <comment xml:lang="en_GB">Base32 encoded data</comment>
+    <comment xml:lang="eo">Bazo32-ĉifritaj datumoj</comment>
     <comment xml:lang="es">Datos codificados en Base32</comment>
     <comment xml:lang="et">Base32 kodeeringus andmed</comment>
     <comment xml:lang="eu">Base32-arekin kodetutako datuak</comment>
@@ -182,6 +186,7 @@ Notes:
     <comment xml:lang="de">Btoa-kodierte Datei</comment>
     <comment xml:lang="el">Κρυπτογραφημένο αρχείο με Btoa</comment>
     <comment xml:lang="en_GB">Btoa Encoded File</comment>
+    <comment xml:lang="eo">Btoa-ĉifrita dosiero</comment>
     <comment xml:lang="es">Archivo codificado en Btoa</comment>
     <comment xml:lang="et">Btoa kodeeringus fail</comment>
     <comment xml:lang="eu">Btoa-rekin kodetutako fitxategia</comment>
@@ -221,6 +226,7 @@ Notes:
     <comment xml:lang="de">ASCII85-kodierte Daten</comment>
     <comment xml:lang="el">Κρυπτογραφημένα δεδομένα με Ascii85</comment>
     <comment xml:lang="en_GB">Ascii85 encoded data</comment>
+    <comment xml:lang="eo">Ascii85-ĉifritaj datumoj</comment>
     <comment xml:lang="es">Datos codificados en Ascii85</comment>
     <comment xml:lang="et">Ascii85 kodeeringus andmed</comment>
     <comment xml:lang="eu">Ascii85-rekin kodetutako datuak</comment>
@@ -258,6 +264,7 @@ Notes:
     <comment xml:lang="de">UUencode-Datei</comment>
     <comment xml:lang="el">Uu κρυπτογραφημένο αρχείο</comment>
     <comment xml:lang="en_GB">Uuencoded file</comment>
+    <comment xml:lang="eo">Uuenkodita dosiero</comment>
     <comment xml:lang="es">Archivo codificado con Uuencode</comment>
     <comment xml:lang="et">Uuencode-fail</comment>
     <comment xml:lang="eu">«Uuencoded» fitxategia</comment>
@@ -298,6 +305,7 @@ Notes:
     <comment xml:lang="de">Xxencode-Datei</comment>
     <comment xml:lang="el">Xx κρυπτογραφημένο αρχείο</comment>
     <comment xml:lang="en_GB">Xxencoded file</comment>
+    <comment xml:lang="eo">Xxenkodita dosiero</comment>
     <comment xml:lang="es">Archivo codificado con Xxencode</comment>
     <comment xml:lang="et">Xxencode-fail</comment>
     <comment xml:lang="eu">«Xxencoded» fitxategia</comment>
@@ -335,6 +343,7 @@ Notes:
     <comment xml:lang="de">Okteta-Strukturdefinition</comment>
     <comment xml:lang="el">Okteta δομή ορισμού</comment>
     <comment xml:lang="en_GB">Okteta Structure definition</comment>
+    <comment xml:lang="eo">Okteta Strukturdifino</comment>
     <comment xml:lang="es">Definición de estructura de Okteta</comment>
     <comment xml:lang="et">Okteta struktuuridefinitsioon</comment>
     <comment xml:lang="eu">Okteta egitura definizioa</comment>
