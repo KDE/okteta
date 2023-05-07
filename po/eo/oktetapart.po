@@ -1,13 +1,16 @@
 # Translation of oktetapart into esperanto.
+# Copyright (C) 2016 Free Software Foundation, Inc.
+# This file is distributed under the same license as the okteta package.
 # Axel Rousseau <axel@esperanto-jeunes.org>, 2009.
+# Oliver Kellogg <okellogg@users.sourceforge.net>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: oktetapart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2021-05-16 00:24+0000\n"
-"PO-Revision-Date: 2009-11-15 12:06+0100\n"
-"Last-Translator: Axel Rousseau <axel@esperanto-jeunes.org>\n"
+"PO-Revision-Date: 2023-05-06 16:20+0100\n"
+"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
@@ -21,21 +24,21 @@ msgstr ""
 #: oktetapartreadwriteui.rc:5
 #, kde-format
 msgid "&File"
-msgstr ""
+msgstr "&Dosiero"
 
 #. i18n: ectx: Menu (edit)
 #: oktetapartbrowserui.rc:8 oktetapartreadonlyui.rc:10
 #: oktetapartreadwriteui.rc:16
 #, kde-format
 msgid "&Edit"
-msgstr ""
+msgstr "R&edakti"
 
 #. i18n: ectx: Menu (view)
 #: oktetapartbrowserui.rc:21 oktetapartreadonlyui.rc:26
 #: oktetapartreadwriteui.rc:39
 #, kde-format
 msgid "&View"
-msgstr ""
+msgstr "R&igardi"
 
 #. i18n: ectx: ToolBar (mainToolBar)
 #: oktetapartbrowserui.rc:43 oktetapartreadonlyui.rc:47
@@ -49,15 +52,4 @@ msgstr "Ĉefa ilobreto"
 #, kde-format
 msgctxt "@title:menu"
 msgid "Permissions"
-msgstr ""
-
-#~ msgctxt "NAME OF TRANSLATORS"
-#~ msgid "Your names"
-#~ msgstr "Axel Rousseau"
-
-#~ msgctxt "EMAIL OF TRANSLATORS"
-#~ msgid "Your emails"
-#~ msgstr "axel@esperanto-jeunes.org"
-
-#~ msgid "Author"
-#~ msgstr "Aŭtoro"
+msgstr "Permesoj"
