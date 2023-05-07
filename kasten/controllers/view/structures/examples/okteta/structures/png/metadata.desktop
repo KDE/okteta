@@ -59,6 +59,7 @@ Comment[da]=En teststruktur som indeholder PNG-fil-headeren (filen skal være sa
 Comment[de]=Eine Test-Struktur, die einen PNG-Dateivorspann enthält (die Datei muss auf „Big Endian“ eingestellt sein)
 Comment[el]=Μια δοκιμαστική δομή που περιέχει την κεφαλίδα αρχείου PNG (το αρχείο πρέπει να οριστεί ως big-endian)
 Comment[en_GB]=A test structure containing the PNG file header (file must be set to big-endian)
+Comment[eo]=Teststrukturo enhavanta la PNG-dosierkapon (dosiero devas esti agordita al big-endian)
 Comment[es]=Una estructura de prueba que contiene la cabecera de un archivo PNG (el archivo debe fijarse como big-endian)
 Comment[et]=PNG-faili päist sisaldav teststruktuur (fail peab olema jämedaotsaline)
 Comment[eu]=PNG fitxategiko goiburua duen probako egitura bat (fitxategia «big-endian»ean ezarri behar da)
