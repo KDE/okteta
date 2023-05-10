@@ -11,13 +11,17 @@
 // KF
 #include <KColorSchemeManager>
 #include <KActionMenu>
+#if KCONFIGWIDGETS_VERSION < QT_VERSION_CHECK(5, 89, 0)
 #include <KLocalizedString>
+#endif
 #include <KSharedConfig>
 #include <KConfigGroup>
 #include <KXmlGuiWindow>
 #include <KActionCollection>
 // Qt
+#if KCONFIGWIDGETS_VERSION < QT_VERSION_CHECK(5, 89, 0)
 #include <QMenu>
+#endif
 #include <QModelIndex>
 
 namespace Kasten {
@@ -34,10 +38,13 @@ UiColorSchemeController::UiColorSchemeController(KXmlGuiWindow* window)
     const QString schemeName = configGroup.readEntry(ColorSchemeConfigKeyId);
 
     KActionMenu* selectionMenu = manager->createSchemeSelectionMenu(schemeName, this);
+
+#if KCONFIGWIDGETS_VERSION < QT_VERSION_CHECK(5, 89, 0)
     QMenu* menu = selectionMenu->menu();
 
     connect(menu, &QMenu::triggered,
             this, &UiColorSchemeController::handleSchemeChanged);
+#endif
 
     manager->activateScheme(manager->indexForScheme(schemeName));
 
@@ -49,6 +56,7 @@ void UiColorSchemeController::setTargetModel(AbstractModel* model)
     Q_UNUSED(model)
 }
 
+#if KCONFIGWIDGETS_VERSION < QT_VERSION_CHECK(5, 89, 0)
 void UiColorSchemeController::handleSchemeChanged(QAction* action)
 {
     const QString schemeName = KLocalizedString::removeAcceleratorMarker(action->text());
@@ -57,5 +65,6 @@ void UiColorSchemeController::handleSchemeChanged(QAction* action)
     configGroup.writeEntry(ColorSchemeConfigKeyId, schemeName);
     configGroup.sync();
 }
+#endif
 
 }

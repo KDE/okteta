@@ -11,9 +11,13 @@
 
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
+// KF
+#include <kconfigwidgets_version.h>
 
 class KXmlGuiWindow;
+#if KCONFIGWIDGETS_VERSION < QT_VERSION_CHECK(5, 89, 0)
 class QAction;
+#endif
 
 namespace Kasten {
 
@@ -27,8 +31,10 @@ public:
 public: // AbstractXmlGuiController API
     void setTargetModel(AbstractModel* model) override;
 
+#if KCONFIGWIDGETS_VERSION < QT_VERSION_CHECK(5, 89, 0)
 private:
     void handleSchemeChanged(QAction* action);
+#endif
 };
 
 }
