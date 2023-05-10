@@ -13,7 +13,6 @@
 #include <Kasten/AbstractXmlGuiController>
 
 class KXmlGuiWindow;
-class QAction;
 
 namespace Kasten {
 
@@ -26,9 +25,6 @@ public:
 
 public: // AbstractXmlGuiController API
     void setTargetModel(AbstractModel* model) override;
-
-private:
-    void handleSchemeChanged(QAction* action);
 };
 
 }

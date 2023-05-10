@@ -63,7 +63,7 @@ public:
     const QFont &fixedFont() const;
 
 private:
-    int mSize;
+    int mSize = -1;
     int* mByteCount;
 
     Okteta::ValueCoding mValueCoding;

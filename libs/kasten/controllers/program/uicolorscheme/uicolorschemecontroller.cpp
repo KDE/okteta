@@ -9,37 +9,26 @@
 #include "uicolorschemecontroller.hpp"
 
 // KF
+#include <kconfigwidgets_version.h>
+#if KCONFIGWIDGETS_VERSION >= QT_VERSION_CHECK(5, 107, 0)
+#include <KColorSchemeMenu>
+#endif
 #include <KColorSchemeManager>
 #include <KActionMenu>
-#include <KLocalizedString>
-#include <KSharedConfig>
-#include <KConfigGroup>
 #include <KXmlGuiWindow>
 #include <KActionCollection>
-// Qt
-#include <QMenu>
-#include <QModelIndex>
 
 namespace Kasten {
-
-static constexpr char UiSettingsConfigGroupId[] = "UiSettings";
-static constexpr char ColorSchemeConfigKeyId[] = "ColorScheme";
 
 UiColorSchemeController::UiColorSchemeController(KXmlGuiWindow* window)
 {
     auto* manager = new KColorSchemeManager(this);
 
-    KConfigGroup configGroup(KSharedConfig::openConfig(), UiSettingsConfigGroupId);
-    // empty string: system default
-    const QString schemeName = configGroup.readEntry(ColorSchemeConfigKeyId);
-
-    KActionMenu* selectionMenu = manager->createSchemeSelectionMenu(schemeName, this);
-    QMenu* menu = selectionMenu->menu();
-
-    connect(menu, &QMenu::triggered,
-            this, &UiColorSchemeController::handleSchemeChanged);
-
-    manager->activateScheme(manager->indexForScheme(schemeName));
+#if KCONFIGWIDGETS_VERSION >= QT_VERSION_CHECK(5, 107, 0)
+    KActionMenu* selectionMenu = KColorSchemeMenu::createMenu(manager, this);
+#else
+    KActionMenu* selectionMenu = manager->createSchemeSelectionMenu(this);
+#endif
 
     window->actionCollection()->addAction(QStringLiteral("settings_uicolorscheme"), selectionMenu);
 }
@@ -47,15 +36,6 @@ UiColorSchemeController::UiColorSchemeController(KXmlGuiWindow* window)
 void UiColorSchemeController::setTargetModel(AbstractModel* model)
 {
     Q_UNUSED(model)
-}
-
-void UiColorSchemeController::handleSchemeChanged(QAction* action)
-{
-    const QString schemeName = KLocalizedString::removeAcceleratorMarker(action->text());
-
-    KConfigGroup configGroup(KSharedConfig::openConfig(), UiSettingsConfigGroupId);
-    configGroup.writeEntry(ColorSchemeConfigKeyId, schemeName);
-    configGroup.sync();
 }
 
 }

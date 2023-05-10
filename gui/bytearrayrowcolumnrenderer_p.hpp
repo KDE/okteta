@@ -287,7 +287,6 @@ private: // buffering rendering data
     Line mRenderLine;
     PixelX mRenderX;
     PixelX mRenderWidth;
-    int mSpacingTrigger;
 
 private:
     ByteArrayRowColumnRenderer* const q_ptr;
