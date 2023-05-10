@@ -140,7 +140,7 @@ void AbstractByteArrayColumnRendererPrivate::recalcX()
 {
     Q_Q(AbstractByteArrayColumnRenderer);
 
-    mSpacingTrigger = noOfGroupedBytes() > 0 ? noOfGroupedBytes() - 1 : mLastLinePos + 1; // last ensures to never trigger the spacing
+    const int spacingTrigger = noOfGroupedBytes() > 0 ? noOfGroupedBytes() - 1 : mLastLinePos + 1; // last ensures to never trigger the spacing
 
     PixelX newWidth = 0;
     Size groupedBytes = 0;
@@ -153,7 +153,7 @@ void AbstractByteArrayColumnRendererPrivate::recalcX()
         *PRX = newWidth - 1;
 
         // is there a space behind the actual byte (if it is not the last)?
-        if (groupedBytes == mSpacingTrigger) {
+        if (groupedBytes == spacingTrigger) {
             newWidth += mGroupSpacingWidth;
             groupedBytes = -1;
         } else {

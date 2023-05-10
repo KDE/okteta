@@ -209,7 +209,6 @@ protected: // buffering rendering data
     Line mRenderLine;
     PixelX mRenderX;
     PixelX mRenderWidth;
-    int mSpacingTrigger;
 
 protected:
     AbstractByteArrayColumnRenderer* const q_ptr;
