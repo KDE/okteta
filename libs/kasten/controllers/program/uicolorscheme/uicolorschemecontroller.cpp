@@ -9,6 +9,9 @@
 #include "uicolorschemecontroller.hpp"
 
 // KF
+#if KCONFIGWIDGETS_VERSION >= QT_VERSION_CHECK(5, 107, 0)
+#include <KColorSchemeMenu>
+#endif
 #include <KColorSchemeManager>
 #include <KActionMenu>
 #if KCONFIGWIDGETS_VERSION < QT_VERSION_CHECK(5, 89, 0)
@@ -54,8 +57,10 @@ UiColorSchemeController::UiColorSchemeController(KXmlGuiWindow* window)
 #endif
 
     manager->activateScheme(manager->indexForScheme(schemeName));
-#else
+#elif KCONFIGWIDGETS_VERSION < QT_VERSION_CHECK(5, 107, 0)
     KActionMenu* selectionMenu = manager->createSchemeSelectionMenu(this);
+#else
+    KActionMenu* selectionMenu = KColorSchemeMenu::createMenu(manager, this);
 #endif
 
     window->actionCollection()->addAction(QStringLiteral("settings_uicolorscheme"), selectionMenu);
