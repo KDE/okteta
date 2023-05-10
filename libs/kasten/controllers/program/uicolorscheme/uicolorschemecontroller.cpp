@@ -14,25 +14,32 @@
 #if KCONFIGWIDGETS_VERSION < QT_VERSION_CHECK(5, 89, 0)
 #include <KLocalizedString>
 #endif
+#if KCONFIGWIDGETS_VERSION < QT_VERSION_CHECK(5, 93, 0)
 #include <KSharedConfig>
 #include <KConfigGroup>
+#endif
 #include <KXmlGuiWindow>
 #include <KActionCollection>
 // Qt
 #if KCONFIGWIDGETS_VERSION < QT_VERSION_CHECK(5, 89, 0)
 #include <QMenu>
 #endif
+#if KCONFIGWIDGETS_VERSION < QT_VERSION_CHECK(5, 93, 0)
 #include <QModelIndex>
+#endif
 
 namespace Kasten {
 
+#if KCONFIGWIDGETS_VERSION < QT_VERSION_CHECK(5, 93, 0)
 static constexpr char UiSettingsConfigGroupId[] = "UiSettings";
 static constexpr char ColorSchemeConfigKeyId[] = "ColorScheme";
+#endif
 
 UiColorSchemeController::UiColorSchemeController(KXmlGuiWindow* window)
 {
     auto* manager = new KColorSchemeManager(this);
 
+#if KCONFIGWIDGETS_VERSION < QT_VERSION_CHECK(5, 93, 0)
     KConfigGroup configGroup(KSharedConfig::openConfig(), UiSettingsConfigGroupId);
     // empty string: system default
     const QString schemeName = configGroup.readEntry(ColorSchemeConfigKeyId);
@@ -47,6 +54,9 @@ UiColorSchemeController::UiColorSchemeController(KXmlGuiWindow* window)
 #endif
 
     manager->activateScheme(manager->indexForScheme(schemeName));
+#else
+    KActionMenu* selectionMenu = manager->createSchemeSelectionMenu(this);
+#endif
 
     window->actionCollection()->addAction(QStringLiteral("settings_uicolorscheme"), selectionMenu);
 }
