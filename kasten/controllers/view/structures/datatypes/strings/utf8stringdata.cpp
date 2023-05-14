@@ -117,6 +117,7 @@ qint64 Utf8StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addre
     if (((mMode & CharCount) && mLength.maxChars == 0)
         || ((mMode & ByteCount) && mLength.maxBytes == 0)) {
         mCodePoints.clear();
+        mErrorIndices.clear();
         return 0;
     }
 
@@ -133,6 +134,8 @@ qint64 Utf8StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addre
         uint codePoint;
         quint8 byte = input->byte(addr);
         bool terminate = false;
+        // clear any old entry
+        mErrorIndices.remove(count);
 
         if (byte <= ASCII_MAX) {
             mOneByteCount++;
