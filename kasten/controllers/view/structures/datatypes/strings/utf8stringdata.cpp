@@ -117,6 +117,7 @@ qint64 Utf8StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addre
     if (((mMode & CharCount) && mLength.maxChars == 0)
         || ((mMode & ByteCount) && mLength.maxBytes == 0)) {
         mCodePoints.clear();
+        mErrorIndices.clear();
         return 0;
     }
 
@@ -133,6 +134,8 @@ qint64 Utf8StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addre
         uint codePoint;
         quint8 byte = input->byte(addr);
         bool terminate = false;
+        // clear any old entry
+        mErrorIndices.remove(count);
 
         if (byte <= ASCII_MAX) {
             mOneByteCount++;
@@ -184,7 +187,7 @@ qint64 Utf8StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addre
                     mErrorIndices[count] = 3;
                     codePoint = (byte << 16) | (byte2 << 8) | byte3; // just put the raw bytes in case of error
                 } else {
-                    codePoint = (byte3 & 0x3f) | ((byte2 & 0x3f) << 6) | ((byte & 0x1f) << 12);
+                    codePoint = (byte3 & 0x3f) | ((byte2 & 0x3f) << 6) | ((byte & 0xf) << 12);
                 }
             }
         } else if ((byte & 0xf8) == 0xf0) {
@@ -221,7 +224,7 @@ qint64 Utf8StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addre
                     codePoint = (byte << 16) | (byte2 << 8) | byte3; // just put the raw bytes in case of error
                 } else {
                     codePoint = (byte4 & 0x3f) | ((byte3 & 0x3f) << 6)
-                                | ((byte2 & 0x3f) << 12) | ((byte & 0x1f) << 18);
+                                | ((byte2 & 0x3f) << 12) | ((byte & 0x7) << 18);
                     if (codePoint > UNICODE_MAX) {
                         mErrorIndices[count] = 4;
                         // just put the raw bytes in case of error
