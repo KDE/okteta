@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-19 00:50+0000\n"
-"PO-Revision-Date: 2023-02-03 17:10+0100\n"
+"PO-Revision-Date: 2023-05-18 05:52+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -526,7 +526,7 @@ msgstr "ოპერაცია:"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The operation to use for the filter."
-msgstr ""
+msgstr "ფილტრის გამოსაყენებელი ოპერაცია."
 
 #: controllers/view/filter/filterview.cpp:56
 #, kde-format
@@ -632,7 +632,7 @@ msgstr "&წავიდა"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Go to the Offset"
-msgstr ""
+msgstr "წანაცვლებაზე გადასვლა"
 
 #: controllers/view/gotooffset/gotooffsetview.cpp:96
 #, kde-kuit-format
@@ -1796,7 +1796,7 @@ msgstr "ჭეშმარიტი (%1)"
 #: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:81
 #, kde-format
 msgid "%1 (value not in enum)"
-msgstr ""
+msgstr "%1 (მნიშვნელობა ჩამონათვალში არაა)"
 
 #: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:50
 #: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:78
@@ -1954,7 +1954,7 @@ msgstr "Latin1 სტრიქონი"
 #: controllers/view/structures/datatypes/strings/stringdatainformation.cpp:302
 #, kde-format
 msgid "End of file reached prematurely"
-msgstr ""
+msgstr "მიღწეული ფაილის ბოლო მოულოდნელია"
 
 #: controllers/view/structures/datatypes/strings/utf16stringdata.cpp:32
 #, kde-format
@@ -1981,7 +1981,7 @@ msgstr "UTF16-BE სტრიქონი"
 #: controllers/view/structures/datatypes/strings/utf8stringdata.cpp:55
 #, kde-format
 msgid "Value too big: 0x%1"
-msgstr ""
+msgstr "მნიშვნელობა ძალიან დიდია: 0x%1"
 
 #: controllers/view/structures/datatypes/strings/utf16stringdata.cpp:62
 #: controllers/view/structures/datatypes/strings/utf16stringdata.cpp:65
@@ -2337,7 +2337,7 @@ msgstr ""
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:126
 #, kde-format
 msgid "Character value:"
-msgstr ""
+msgstr "სტრიქონის მნიშვნელობა:"
 
 #: controllers/view/structures/structurestool.cpp:68
 #: controllers/view/structures/structurestoolviewfactory.cpp:29
@@ -2552,7 +2552,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Dynamic Layout"
-msgstr ""
+msgstr "&დინამიკური განლაგება"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:91
 #, kde-format
@@ -2580,7 +2580,7 @@ msgstr "&ხაზზე"
 #, kde-format
 msgctxt "@option:check"
 msgid "Show &Line Offset"
-msgstr ""
+msgstr "ხაზის &წანაცვლების ჩვენება"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:107
 #, kde-format
@@ -2653,7 +2653,7 @@ msgstr "ცვლილებების დაბრუნება"
 #, kde-format
 msgctxt "@window:title"
 msgid "New View Profile"
-msgstr ""
+msgstr "ახალი პროფილის ნახვა"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:55
 #, kde-format
@@ -2668,7 +2668,7 @@ msgstr "ეკრანი"
 #: controllers/view/viewprofiles/viewprofileedit.cpp:63
 #, kde-format
 msgid "Show Line Offset:"
-msgstr ""
+msgstr "ხაზის &წანაცვლების ჩვენება:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:67
 #, kde-format
@@ -2802,7 +2802,7 @@ msgstr "ბინარული"
 #: controllers/view/viewprofiles/viewprofileedit.cpp:155
 #, kde-format
 msgid "Coding:"
-msgstr ""
+msgstr "კოდირება:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:150
 #, kde-format
