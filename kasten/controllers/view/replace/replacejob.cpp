@@ -8,8 +8,8 @@
 
 #include "replacejob.hpp"
 
-// search controller
-#include "../search/searchjob.hpp"
+// libbytearraysearch
+#include <bytearraysearchjob.hpp>
 // Okteta Kasten gui
 #include <Kasten/Okteta/ByteArrayView>
 // Okteta Kasten core
@@ -100,12 +100,12 @@ void ReplaceJob::searchNextPosition()
 
     const Okteta::Address endIndex = isForward ? m_currentReplaceRangeEndIndex : m_currentReplaceRangeStartIndex;
 
-    auto* searchJob = new SearchJob(m_byteArrayModel, m_searchData, m_currentIndex, endIndex,
-                                    m_caseSensitivity, m_byteArrayView->charCodingName());
+    auto* searchJob = new ByteArraySearchJob(m_byteArrayModel, m_searchData, m_currentIndex, endIndex,
+                                             m_caseSensitivity, m_byteArrayView->charCodingName());
     // Qt::QueuedConnection to ensure passing the event loop, so we do not recursively fill the callstack
     // as any async calls (query user, search) could fire signal while being invoked
     // TODO: optimize for non-user-querying with loop variant
-    connect(searchJob, &SearchJob::finished, this, &ReplaceJob::handleSearchResult, Qt::QueuedConnection);
+    connect(searchJob, &ByteArraySearchJob::finished, this, &ReplaceJob::handleSearchResult, Qt::QueuedConnection);
     searchJob->start();
 }
 

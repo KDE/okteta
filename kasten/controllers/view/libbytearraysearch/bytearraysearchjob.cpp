@@ -6,7 +6,7 @@
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
-#include "searchjob.hpp"
+#include "bytearraysearchjob.hpp"
 
 // Okteta core
 #include <Okteta/AbstractByteArrayModel>
@@ -16,10 +16,10 @@
 
 namespace Kasten {
 
-SearchJob::SearchJob(const Okteta::AbstractByteArrayModel* model,
-                     const QByteArray& searchData,
-                     Okteta::Address startIndex, Okteta::Address endIndex,
-                     Qt::CaseSensitivity caseSensitivity, const QString& charCodecName)
+ByteArraySearchJob::ByteArraySearchJob(const Okteta::AbstractByteArrayModel* model,
+                                       const QByteArray& searchData,
+                                       Okteta::Address startIndex, Okteta::Address endIndex,
+                                       Qt::CaseSensitivity caseSensitivity, const QString& charCodecName)
     : mByteArrayModel(model)
     , mSearchData(searchData)
     , mStartIndex(startIndex)
@@ -29,22 +29,22 @@ SearchJob::SearchJob(const Okteta::AbstractByteArrayModel* model,
 {
 }
 
-SearchJob::~SearchJob()
+ByteArraySearchJob::~ByteArraySearchJob()
 {
     delete mCharCodec;
 }
 
-Okteta::Address SearchJob::exec()
+Okteta::Address ByteArraySearchJob::exec()
 {
     start();
     // no own event loop here or mutex, we know that start is sync call currently
     return m_result;
 }
 
-void SearchJob::start()
+void ByteArraySearchJob::start()
 {
     // TODO: what kind of signal could a filter send?
-    connect(mByteArrayModel, &Okteta::AbstractByteArrayModel::searchedBytes, this, &SearchJob::onBytesSearched);
+    connect(mByteArrayModel, &Okteta::AbstractByteArrayModel::searchedBytes, this, &ByteArraySearchJob::onBytesSearched);
 
     const bool searchForward = (mStartIndex < mEndIndex);
     if (searchForward) {
@@ -63,7 +63,7 @@ void SearchJob::start()
     deleteLater(); // TODO: could be reused on next search
 }
 
-void SearchJob::onBytesSearched()
+void ByteArraySearchJob::onBytesSearched()
 {
     QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
 }

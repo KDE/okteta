@@ -6,8 +6,8 @@
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
-#ifndef KASTEN_SEARCHJOB_HPP
-#define KASTEN_SEARCHJOB_HPP
+#ifndef KASTEN_BYTEARRAYSEARCHJOB_HPP
+#define KASTEN_BYTEARRAYSEARCHJOB_HPP
 
 // Okteta core
 #include <Okteta/Address>
@@ -22,17 +22,17 @@ class CharCodec;
 
 namespace Kasten {
 
-class SearchJob : public QObject // not yet: KJob
+class ByteArraySearchJob : public QObject // not yet: KJob
 {
     Q_OBJECT
 
 public:
-    SearchJob(const Okteta::AbstractByteArrayModel* model,
-              const QByteArray& searchData,
-              Okteta::Address startIndex, Okteta::Address endIndex,
-              Qt::CaseSensitivity caseSensitivity, const QString& charCodecName);
+    ByteArraySearchJob(const Okteta::AbstractByteArrayModel* model,
+                       const QByteArray& searchData,
+                       Okteta::Address startIndex, Okteta::Address endIndex,
+                       Qt::CaseSensitivity caseSensitivity, const QString& charCodecName);
 
-    ~SearchJob() override;
+    ~ByteArraySearchJob() override;
 
 public:
     Okteta::Address exec();

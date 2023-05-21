@@ -142,6 +142,11 @@ oktetakastencontrollers_add_sublibrary(view/libfinddialog
         AbstractFindDialog
 )
 
+oktetakastencontrollers_add_sublibrary(view/libbytearraysearch
+    PRIVATE
+        ByteArraySearchJob
+)
+
 oktetakastencontrollers_add_sublibrary(view/poddecoder/typecodecs
     PRIVATE
         Binary8Codec
@@ -208,7 +213,6 @@ oktetakastencontrollers_add_sublibrary(view/search
     PRIVATE
         SearchUserQueryable
         SearchDialog
-        SearchJob
         SearchTool
         SearchController
 )
@@ -601,7 +605,7 @@ if(BUILD_TESTING)
 
   #replace tool unit tests
   ecm_add_test(
-    view/search/searchjob.cpp
+    view/libbytearraysearch/bytearraysearchjob.cpp
     view/replace/replacejob.cpp
     test/replacejobtest.cpp
 
@@ -614,6 +618,7 @@ if(BUILD_TESTING)
   target_include_directories(replacejobtest
         PUBLIC
             view/libfinddialog
+            view/libbytearraysearch
   )
 endif()
 
@@ -662,6 +667,7 @@ target_include_directories(OktetaKastenControllers
     PRIVATE
         view/libbytearraychecksum
         view/libbytearrayfilter
+        view/libbytearraysearch
         view/libfinddialog
         utils
         ${LIBFRAMESPRINT_REL_DIR}

@@ -8,9 +8,10 @@
 
 #include "searchtool.hpp"
 
+// libbytearraysearch
+#include <bytearraysearchjob.hpp>
 // controller
 #include "searchuserqueryable.hpp"
-#include "searchjob.hpp"
 // Okteta Kasten gui
 #include <Kasten/Okteta/ByteArrayView>
 // Okteta Kasten core
@@ -196,8 +197,8 @@ void SearchTool::doSearch(FindDirection direction)
                                    ((direction == FindForward) ? mByteArrayModel->size() - 1 : 0) :
                                    ((direction == FindForward) ? mSearchLastIndex : mSearchFirstIndex);
 
-        SearchJob* searchJob =
-            new SearchJob(mByteArrayModel, mSearchData, startIndex, endIndex, mCaseSensitivity, mByteArrayView->charCodingName());
+        auto* searchJob =
+            new ByteArraySearchJob(mByteArrayModel, mSearchData, startIndex, endIndex, mCaseSensitivity, mByteArrayView->charCodingName());
         const Okteta::Address pos = searchJob->exec();
 
         QApplication::restoreOverrideCursor();
