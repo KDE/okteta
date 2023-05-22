@@ -92,6 +92,7 @@ void ReplaceJob::searchNextPosition()
 {
     const bool isForward = (m_direction == FindForward);
 
+    // TODO: do not rely on m_searchData.size() once pattern search is implemented
     if ((isForward && m_currentIndex > m_currentReplaceRangeEndIndex - m_searchData.size() + 1) ||
         (!isForward && (m_currentIndex < m_currentReplaceRangeStartIndex + m_searchData.size() - 1))) {
         handleEndReached();
@@ -109,20 +110,21 @@ void ReplaceJob::searchNextPosition()
     searchJob->start();
 }
 
-void ReplaceJob::handleSearchResult(Okteta::Address pos)
+void ReplaceJob::handleSearchResult(Okteta::AddressRange matchRange)
 {
-    if (pos == -1) {
+    if (!matchRange.isValid()) {
         handleEndReached();
         return;
     }
 
     m_previousFound = true;
-    m_currentIndex = pos;
+    m_currentIndex = matchRange.start();
+    m_currentMatchWidth = matchRange.width();
 
     if (m_doPrompt && m_userQueryAgent) {
         QApplication::restoreOverrideCursor();
 
-        m_byteArrayView->setSelection(pos, pos + m_searchData.size() - 1);
+        m_byteArrayView->setSelection(matchRange.start(), matchRange.end());
 
         qobject_cast<If::ReplaceUserQueryable*>(m_userQueryAgent)->queryReplaceCurrent();
     } else {
@@ -177,10 +179,10 @@ void ReplaceJob::handleReplaceCurrentFinished(ReplaceBehaviour replaceBehaviour)
 void ReplaceJob::replaceCurrent()
 {
     ++m_noOfReplacements;
-    const Okteta::Size inserted = m_byteArrayModel->replace(m_currentIndex, m_searchData.size(),
+    const Okteta::Size inserted = m_byteArrayModel->replace(m_currentIndex, m_currentMatchWidth,
                                                             reinterpret_cast<const Okteta::Byte*>(m_replaceData.constData()),
                                                             m_replaceData.size());
-    const Okteta::Size sizeDiff = inserted - m_searchData.size();
+    const Okteta::Size sizeDiff = inserted - m_currentMatchWidth;
 
     // TODO: cursors being automatically updated by the model would be nice to have here
     if (m_replaceRangeEndIndex >= m_currentIndex) {

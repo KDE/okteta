@@ -199,13 +199,13 @@ void SearchTool::doSearch(FindDirection direction)
 
         auto* searchJob =
             new ByteArraySearchJob(mByteArrayModel, mSearchData, startIndex, endIndex, mCaseSensitivity, mByteArrayView->charCodingName());
-        const Okteta::Address pos = searchJob->exec();
+        const Okteta::AddressRange matchRange = searchJob->exec();
 
         QApplication::restoreOverrideCursor();
 
-        if (pos != -1) {
+        if (matchRange.isValid()) {
             mPreviousFound = true;
-            mByteArrayView->setSelection(pos, pos + mSearchData.size() - 1);
+            mByteArrayView->setSelection(matchRange.start(), matchRange.end());
             break;
         }
 

@@ -34,7 +34,7 @@ ByteArraySearchJob::~ByteArraySearchJob()
     delete mCharCodec;
 }
 
-Okteta::Address ByteArraySearchJob::exec()
+Okteta::AddressRange ByteArraySearchJob::exec()
 {
     start();
     // no own event loop here or mutex, we know that start is sync call currently
@@ -47,17 +47,18 @@ void ByteArraySearchJob::start()
     connect(mByteArrayModel, &Okteta::AbstractByteArrayModel::searchedBytes, this, &ByteArraySearchJob::onBytesSearched);
 
     const bool searchForward = (mStartIndex < mEndIndex);
+    Okteta::Address resultIndex;
     if (searchForward) {
-        m_result = (mCaseSensitivity == Qt::CaseSensitive) ?
+        resultIndex = (mCaseSensitivity == Qt::CaseSensitive) ?
                  mByteArrayModel->indexOf(mSearchData, mStartIndex, mEndIndex) :
                  mByteArrayModel->indexOfCaseInsensitive(mCharCodec, mSearchData, mStartIndex, mEndIndex);
     } else {
         const Okteta::Address lastFromIndex = mStartIndex - mSearchData.size() + 1;
-        m_result = (mCaseSensitivity == Qt::CaseSensitive) ?
+        resultIndex = (mCaseSensitivity == Qt::CaseSensitive) ?
                  mByteArrayModel->lastIndexOf(mSearchData, lastFromIndex, mEndIndex) :
                  mByteArrayModel->lastIndexOfCaseInsensitive(mCharCodec, mSearchData, lastFromIndex, mEndIndex);
     }
-
+    m_result = (resultIndex != -1) ? Okteta::AddressRange::fromWidth(resultIndex, mSearchData.size()) : Okteta::AddressRange();
     emit finished(m_result);
 
     deleteLater(); // TODO: could be reused on next search

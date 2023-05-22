@@ -10,7 +10,7 @@
 #define KASTEN_BYTEARRAYSEARCHJOB_HPP
 
 // Okteta core
-#include <Okteta/Address>
+#include <Okteta/AddressRange>
 // Qt
 #include <QObject>
 #include <QByteArray>
@@ -35,11 +35,11 @@ public:
     ~ByteArraySearchJob() override;
 
 public:
-    Okteta::Address exec();
+    Okteta::AddressRange exec();
     void start();
 
 Q_SIGNALS:
-    void finished(Okteta::Address position);
+    void finished(Okteta::AddressRange position);
 
 private Q_SLOTS:
     void onBytesSearched();
@@ -53,7 +53,7 @@ private:
     Qt::CaseSensitivity mCaseSensitivity;
     const Okteta::CharCodec* mCharCodec;
 
-    Okteta::Address m_result = -1;
+    Okteta::AddressRange m_result;
 };
 
 }
