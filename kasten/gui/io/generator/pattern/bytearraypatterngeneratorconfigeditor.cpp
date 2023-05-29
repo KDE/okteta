@@ -35,8 +35,10 @@ ByteArrayPatternGeneratorConfigEditor::ByteArrayPatternGeneratorConfigEditor(Byt
               "Pattern:");
     mPatternEdit = new Okteta::ByteArrayComboBox(this);
     mPatternEdit->setByteArray(mSettings.pattern);
+    mPatternEdit->setFormat(static_cast<Okteta::ByteArrayComboBox::Coding>(mSettings.patternCoding));
     connect(mPatternEdit, &Okteta::ByteArrayComboBox::byteArrayChanged, this, &ByteArrayPatternGeneratorConfigEditor::onSettingsChanged);
     connect(mPatternEdit, &Okteta::ByteArrayComboBox::byteArrayChanged, this, &ByteArrayPatternGeneratorConfigEditor::onPatternChanged);
+    connect(mPatternEdit, &Okteta::ByteArrayComboBox::formatChanged, this, &ByteArrayPatternGeneratorConfigEditor::onSettingsChanged);
     const QString inputWhatsThis =
         i18nc("@info:whatsthis",
               "Enter a pattern to search for, or select a previous pattern from the list.");
@@ -81,6 +83,7 @@ void InsertPatternDialog::setCharCodec(const QString& codecName)
 void ByteArrayPatternGeneratorConfigEditor::onSettingsChanged()
 {
     mSettings.pattern = mPatternEdit->byteArray();
+    mSettings.patternCoding = static_cast<ByteArrayPatternGeneratorSettings ::Coding>(mPatternEdit->format());
     mSettings.count = mNumberInput->value();
 
     mGenerator->setSettings(mSettings);
