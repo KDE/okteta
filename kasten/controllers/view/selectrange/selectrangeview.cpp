@@ -78,24 +78,24 @@ SelectRangeView::SelectRangeView(SelectRangeTool* tool, QWidget* parent)
     auto* optionsLayout = new QVBoxLayout();
     optionsLayout->setContentsMargins(0, 0, 0, 0);
 
-    mRelativeCheckBox = new QCheckBox(i18nc("@option:check", "End relative"), this);
-    mRelativeCheckBox->setWhatsThis(
-        i18nc("@info:whatsthis", "Extend the selection by the cursor move."));
-    connect(mRelativeCheckBox, &QCheckBox::toggled,
-            mTool, &SelectRangeTool::setIsEndRelative);
-    mRelativeCheckBox->setChecked(mTool->isEndRelative());
     mBackwardsCheckBox = new QCheckBox(i18nc("@option:check", "&Backwards"), this);
     mBackwardsCheckBox->setWhatsThis(
         i18nc("@info:whatsthis", "Go backwards from the end or the current cursor location."));
     connect(mBackwardsCheckBox, &QCheckBox::toggled,
             mTool, &SelectRangeTool::setIsEndBackwards);
     mBackwardsCheckBox->setChecked(mTool->isEndBackwards());
+    mRelativeCheckBox = new QCheckBox(i18nc("@option:check", "End relative"), this);
+    mRelativeCheckBox->setWhatsThis(
+        i18nc("@info:whatsthis", "Extend the selection by the cursor move."));
+    connect(mRelativeCheckBox, &QCheckBox::toggled,
+            mTool, &SelectRangeTool::setIsEndRelative);
+    mRelativeCheckBox->setChecked(mTool->isEndRelative());
 
     connect(mRelativeCheckBox, &QCheckBox::toggled, mBackwardsCheckBox, &QCheckBox::setEnabled);
     mBackwardsCheckBox->setEnabled(mRelativeCheckBox->isChecked());
 
-    optionsLayout->addWidget(mRelativeCheckBox);
     optionsLayout->addWidget(mBackwardsCheckBox);
+    optionsLayout->addWidget(mRelativeCheckBox);
 
     baseLayout->addLayout(optionsLayout);
 
