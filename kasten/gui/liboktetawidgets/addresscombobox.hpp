@@ -38,9 +38,7 @@ public:
         InvalidCoding = -1,
         HexadecimalCoding = 0,
         DecimalCoding = 1,
-        OctalCoding = 2,
-        BinaryCoding = 3,
-        CharCoding = 4
+        ExpressionCoding = 2,
     };
 
 public:
@@ -48,6 +46,7 @@ public:
     ~AddressComboBox() override;
 
 public: // set
+    void setFormat(Coding codingId);
     void rememberCurrentAddress();
 
 public: // get

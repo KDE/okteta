@@ -2,7 +2,7 @@ Useful neutral libraries
 ========================
 Part of the Okteta project, made within the KDE community.
 
-Copyright: 2003-2022 Friedrich W. H. Kossebau <kossebau@kde.org>
+Copyright: 2003-2023 Friedrich W. H. Kossebau <kossebau@kde.org>
 
 Author/Maintainer: Friedrich W. H. Kossebau <kossebau@kde.org>
 

@@ -14,13 +14,102 @@
 #include <Kasten/Okteta/AddressComboBox>
 #include <Kasten/Okteta/AddressValidator>
 // KF
-#include <QPushButton>
 #include <KGuiItem>
+#include <KConfigGroup>
+#include <KSharedConfig>
 #include <KLocalizedString>
 // Qt
+#include <QPushButton>
 #include <QCheckBox>
 #include <QLabel>
 #include <QLayout>
+// Std
+#include <algorithm>
+#include <array>
+#include <iterator>
+
+
+// TODO: move to helper interface lib?
+// Matching Okteta::AddressComboBox::Coding
+static constexpr int codingCount = 3;
+static const std::array<QString, codingCount> codingConfigValueList = {
+    QStringLiteral("Hexadecimal"),
+    QStringLiteral("Decimal"),
+    QStringLiteral("Expression"),
+};
+
+
+template <>
+inline Okteta::AddressComboBox::Coding
+KConfigGroup::readEntry(const char *key,
+                        const Okteta::AddressComboBox::Coding &defaultValue) const
+{
+    const QString entry = readEntry(key, QString());
+
+    auto it = std::find(codingConfigValueList.cbegin(), codingConfigValueList.cend(), entry);
+    if (it == codingConfigValueList.cend()) {
+        return defaultValue;
+    }
+
+    const int listIndex = std::distance(codingConfigValueList.cbegin(), it);
+    return static_cast<Okteta::AddressComboBox::Coding>(listIndex);
+}
+
+template <>
+inline void KConfigGroup::writeEntry(const char *key,
+                                     const Okteta::AddressComboBox::Coding &value,
+                                     KConfigBase::WriteConfigFlags flags)
+{
+    QString configValue;
+    if (value == Okteta::AddressComboBox::InvalidCoding) {
+        configValue = QStringLiteral("Invalid");
+    } else {
+        const int listIndex = static_cast<int>(value);
+        configValue = codingConfigValueList[listIndex];
+    }
+    writeEntry(key, configValue, flags);
+}
+
+namespace Kasten
+{
+enum GotoDirection
+{
+    GotoForward = 0,
+    GotoBackward = 1
+};
+}
+
+template <>
+inline Kasten::GotoDirection KConfigGroup::readEntry(const char *key, const Kasten::GotoDirection &defaultValue) const
+{
+    const QString entry = readEntry(key, QString());
+    const Kasten::GotoDirection direction =
+        (entry == QLatin1String("Forward")) ?  Kasten::GotoForward :
+        (entry == QLatin1String("Backward")) ? Kasten::GotoBackward :
+        /* else */                             defaultValue;
+    return direction;
+}
+
+template <>
+inline void KConfigGroup::writeEntry(const char *key, const Kasten::GotoDirection &value,
+                                     KConfigBase::WriteConfigFlags flags)
+{
+    const QString valueString =
+        (value == Kasten::GotoForward) ? QLatin1String("Forward") : QLatin1String("Backward");
+    writeEntry(key, valueString, flags);
+}
+
+static constexpr bool DefaultFromCursor = false;
+static constexpr bool DefaultExtendSelection = false;
+static constexpr Kasten::GotoDirection DefaultDirection = Kasten::GotoForward;
+static constexpr Okteta::AddressComboBox::Coding DefaultOffsetCoding = Okteta::AddressComboBox::HexadecimalCoding;
+
+static constexpr char GotoOffsetConfigGroupId[] = "GotoOffsetTool";
+
+static constexpr char OffsetCodingConfigKey[] = "OffsetCoding";
+static constexpr char FromCursorConfigKey[] = "FromCursor";
+static constexpr char ExtendSelectionConfigKey[] = "ExtendSelection";
+static constexpr char DirectionConfigKey[] = "Direction";
 
 namespace Kasten {
 
@@ -108,6 +197,20 @@ GotoOffsetView::GotoOffsetView(GotoOffsetTool* tool, QWidget* parent)
     setTabOrder(mBackwardsCheckBox, mExtendSelectionCheckBox);
     setTabOrder(mExtendSelectionCheckBox, mGotoButton);
 
+    const KConfigGroup configGroup(KSharedConfig::openConfig(), GotoOffsetConfigGroupId);
+
+    const bool fromCursor = configGroup.readEntry(FromCursorConfigKey, DefaultFromCursor);
+    mAtCursorCheckBox->setChecked(fromCursor);
+
+    const Kasten::GotoDirection direction = configGroup.readEntry(DirectionConfigKey, DefaultDirection);
+    mBackwardsCheckBox->setChecked(direction == GotoBackward);
+
+    const bool extendSelection = configGroup.readEntry(ExtendSelectionConfigKey, DefaultExtendSelection);
+    mExtendSelectionCheckBox->setChecked(extendSelection);
+
+    const Okteta::AddressComboBox::Coding offsetCoding = configGroup.readEntry(OffsetCodingConfigKey, DefaultOffsetCoding);
+    mAddressEdit->setFormat(offsetCoding);
+
     connect(mTool, &GotoOffsetTool::isApplyableChanged,
             this, &GotoOffsetView::onApplyableChanged);
 
@@ -127,6 +230,13 @@ void GotoOffsetView::onGotoButtonClicked()
 {
     // TODO: collect recently used offset in tool instead?
     mAddressEdit->rememberCurrentAddress();
+
+    KConfigGroup configGroup(KSharedConfig::openConfig(), GotoOffsetConfigGroupId);
+    configGroup.writeEntry(OffsetCodingConfigKey, static_cast<Okteta::AddressComboBox::Coding>(mAddressEdit->format()));
+    configGroup.writeEntry(DirectionConfigKey,
+                           mBackwardsCheckBox->isChecked() ? GotoBackward : GotoForward);
+    configGroup.writeEntry(ExtendSelectionConfigKey, mExtendSelectionCheckBox->isChecked());
+    configGroup.writeEntry(FromCursorConfigKey, mAtCursorCheckBox->isChecked());
 
     mTool->gotoOffset();
 //     Q_EMIT toolUsed();

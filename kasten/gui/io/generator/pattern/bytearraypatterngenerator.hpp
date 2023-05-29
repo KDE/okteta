@@ -22,6 +22,20 @@ namespace Kasten {
 class ByteArrayPatternGeneratorSettings
 {
 public:
+    // matching Okteta::ByteArrayComboBox
+    enum Coding
+    {
+        InvalidCoding = -1,
+        HexadecimalCoding = 0,
+        DecimalCoding = 1,
+        OctalCoding = 2,
+        BinaryCoding = 3,
+        CharCoding = 4,
+        Utf8Coding = 5,
+        _CodingCount
+    };
+
+public:
     ByteArrayPatternGeneratorSettings();
     ByteArrayPatternGeneratorSettings(const ByteArrayPatternGeneratorSettings&) = default;
 
@@ -37,6 +51,7 @@ public:
 
 public:
     QByteArray pattern = QByteArray(1, 0);
+    Coding patternCoding = HexadecimalCoding;
     int count = 1;
 };
 

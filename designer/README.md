@@ -2,7 +2,7 @@ Okteta Qt Designer plugin
 =========================
 Part of the Okteta project, made within the KDE community.
 
-Copyright: 2009-2022 Friedrich W. H. Kossebau <kossebau@kde.org>
+Copyright: 2009-2023 Friedrich W. H. Kossebau <kossebau@kde.org>
 
 Author/Maintainer: Friedrich W. H. Kossebau <kossebau@kde.org>
 

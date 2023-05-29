@@ -15,32 +15,83 @@
 // Qt
 #include <QMimeData>
 #include <QByteArray>
+// Std
+#include <algorithm>
+#include <array>
+#include <iterator>
+
+static constexpr int codingCount =
+    static_cast<int>(Kasten::ByteArrayPatternGeneratorSettings::_CodingCount);
+static const std::array<QString, codingCount> codingConfigValueList = {
+    QStringLiteral("Hexadecimal"),
+    QStringLiteral("Decimal"),
+    QStringLiteral("Octal"),
+    QStringLiteral("Binary"),
+    QStringLiteral("Char"),
+    QStringLiteral("UTF-8"),
+};
+
+
+template <>
+inline Kasten::ByteArrayPatternGeneratorSettings::Coding
+KConfigGroup::readEntry(const char *key,
+                        const Kasten::ByteArrayPatternGeneratorSettings::Coding &defaultValue) const
+{
+    const QString entry = readEntry(key, QString());
+
+    auto it = std::find(codingConfigValueList.cbegin(), codingConfigValueList.cend(), entry);
+    if (it == codingConfigValueList.cend()) {
+        return defaultValue;
+    }
+
+    const int listIndex = std::distance(codingConfigValueList.cbegin(), it);
+    return static_cast<Kasten::ByteArrayPatternGeneratorSettings::Coding>(listIndex);
+}
+
+template <>
+inline void KConfigGroup::writeEntry(const char *key,
+                                     const Kasten::ByteArrayPatternGeneratorSettings::Coding &value,
+                                     KConfigBase::WriteConfigFlags flags)
+{
+    QString configValue;
+    if (value == Kasten::ByteArrayPatternGeneratorSettings::InvalidCoding) {
+        configValue = QStringLiteral("Invalid");
+    } else {
+        const int listIndex = static_cast<int>(value);
+        configValue = codingConfigValueList[listIndex];
+    }
+    writeEntry(key, configValue, flags);
+}
 
 namespace Kasten {
 
 static const QByteArray DefaultPattern = QByteArray(1, 0);
+static constexpr ByteArrayPatternGeneratorSettings::Coding DefaultPatternCoding = ByteArrayPatternGeneratorSettings::HexadecimalCoding;
 static constexpr int DefaultCount = 1;
 
 static constexpr char ByteArrayPatternGeneratorConfigGroupId[] = "ByteArrayPatternGenerator";
 static constexpr char PatternConfigKey[] = "Pattern";
+static constexpr char PatternCodingConfigKey[] = "PatternCoding";
 static constexpr char CountConfigKey[] = "Count";
 
 ByteArrayPatternGeneratorSettings::ByteArrayPatternGeneratorSettings() = default;
 
 bool ByteArrayPatternGeneratorSettings::operator==(const ByteArrayPatternGeneratorSettings& other) const
 {
-    return (pattern == other.pattern) && (count == other.count);
+    return (pattern == other.pattern) && (patternCoding == other.patternCoding) && (count == other.count);
 }
 
 void ByteArrayPatternGeneratorSettings::loadConfig(const KConfigGroup& configGroup)
 {
     pattern = configGroup.readEntry(PatternConfigKey, DefaultPattern);
     count = configGroup.readEntry(CountConfigKey, DefaultCount);
+    patternCoding = configGroup.readEntry(PatternCodingConfigKey, DefaultPatternCoding);
 }
 
 void ByteArrayPatternGeneratorSettings::saveConfig(KConfigGroup& configGroup) const
 {
     configGroup.writeEntry(PatternConfigKey, pattern);
+    configGroup.writeEntry(PatternCodingConfigKey, patternCoding);
     configGroup.writeEntry(CountConfigKey, count);
 }
 

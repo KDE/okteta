@@ -72,6 +72,16 @@ void AddressComboBoxPrivate::init()
     QWidget::setTabOrder(mFormatComboBox, mValueComboBox);
 }
 
+void AddressComboBoxPrivate::setFormat(AddressComboBox::Coding codingId)
+{
+    if (codingId == mFormatComboBox->currentIndex()) {
+        return;
+    }
+
+    mFormatComboBox->setCurrentIndex(codingId);
+    onFormatChanged(codingId);
+}
+
 void AddressComboBoxPrivate::rememberCurrentAddress()
 {
     // don't insert same value multiple times in a row
