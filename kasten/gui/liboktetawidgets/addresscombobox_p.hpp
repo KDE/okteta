@@ -34,6 +34,7 @@ public:
 
 public:
     void init();
+    void setFormat(AddressComboBox::Coding codingId);
     void rememberCurrentAddress();
 
     void onFormatChanged(int index);

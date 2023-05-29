@@ -50,6 +50,7 @@ public:
     ~AddressComboBox() override;
 
 public: // set
+    void setFormat(Coding codingId);
     void rememberCurrentAddress();
 
 public: // get
