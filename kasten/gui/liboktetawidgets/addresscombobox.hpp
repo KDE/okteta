@@ -36,8 +36,12 @@ public:
         InvalidCoding = -1,
         HexadecimalCoding = 0,
         DecimalCoding = 1,
+        ExpressionCoding = 2,
+        /// Not used
         OctalCoding = 2,
+        /// Not used
         BinaryCoding = 3,
+        /// Not used
         CharCoding = 4
     };
 
