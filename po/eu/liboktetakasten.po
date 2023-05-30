@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-19 00:50+0000\n"
+"POT-Creation-Date: 2023-05-30 00:49+0000\n"
 "PO-Revision-Date: 2020-03-21 21:45+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -597,15 +597,15 @@ msgctxt "@title:window of the tool to set a new offset for the cursor"
 msgid "Goto"
 msgstr "Joan hona"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:38
+#: controllers/view/gotooffset/gotooffsetview.cpp:127
 #, kde-format
 msgctxt "@label:listbox"
 msgid "O&ffset:"
 msgstr "&Desplazamendua:"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:48
-#: controllers/view/selectrange/selectrangeview.cpp:47
-#: controllers/view/selectrange/selectrangeview.cpp:67
+#: controllers/view/gotooffset/gotooffsetview.cpp:137
+#: controllers/view/selectrange/selectrangeview.cpp:135
+#: controllers/view/selectrange/selectrangeview.cpp:155
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Enter an offset to go to, or select a previous offset from the list."
@@ -613,60 +613,60 @@ msgstr ""
 "Sartu joan beharreko desplazamendua, edo zerrendatik aurreko desplazamendu "
 "bat hautatu."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:64
+#: controllers/view/gotooffset/gotooffsetview.cpp:153
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:112
 #, kde-format
 msgctxt "@option:check"
 msgid "From c&ursor"
 msgstr "K&urtsoretik"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:66
+#: controllers/view/gotooffset/gotooffsetview.cpp:155
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Go relative from the current cursor location and not absolute."
 msgstr "Joan kurtsorearen uneko kokapenarekiko erlatibo eta ez absolutu"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:69
+#: controllers/view/gotooffset/gotooffsetview.cpp:158
 #, kde-format
 msgctxt "@option:check"
 msgid "&Extend selection"
 msgstr "Hautapena &Hedatu"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:71
-#: controllers/view/selectrange/selectrangeview.cpp:83
+#: controllers/view/gotooffset/gotooffsetview.cpp:160
+#: controllers/view/selectrange/selectrangeview.cpp:177
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Extend the selection by the cursor move."
 msgstr "Hedatu hautapena kurtsorearen mugimenduaren arabera."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:74
+#: controllers/view/gotooffset/gotooffsetview.cpp:163
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:115
-#: controllers/view/selectrange/selectrangeview.cpp:87
+#: controllers/view/selectrange/selectrangeview.cpp:169
 #, kde-format
 msgctxt "@option:check"
 msgid "&Backwards"
 msgstr "&Atzeruntz"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:76
-#: controllers/view/selectrange/selectrangeview.cpp:89
+#: controllers/view/gotooffset/gotooffsetview.cpp:165
+#: controllers/view/selectrange/selectrangeview.cpp:171
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Go backwards from the end or the current cursor location."
 msgstr "Jo atzeruntz kurtsorearen uneko kokapenetik."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:91
+#: controllers/view/gotooffset/gotooffsetview.cpp:180
 #, kde-format
 msgctxt "@action:button"
 msgid "&Go"
 msgstr "&Joan"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:94
+#: controllers/view/gotooffset/gotooffsetview.cpp:183
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Go to the Offset"
 msgstr "Joan desplazamendura"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:96
+#: controllers/view/gotooffset/gotooffsetview.cpp:185
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1228,7 +1228,7 @@ msgid ""
 msgstr ""
 
 #: controllers/view/poddecoder/podtableview.cpp:236
-#: controllers/view/selectrange/selectrangeview.cpp:105
+#: controllers/view/selectrange/selectrangeview.cpp:193
 #: controllers/view/structures/structureview.cpp:338
 #, kde-format
 msgctxt "@action:button"
@@ -1544,31 +1544,31 @@ msgctxt "@title:window of the tool to select a range"
 msgid "Select"
 msgstr "Hautatu"
 
-#: controllers/view/selectrange/selectrangeview.cpp:41
+#: controllers/view/selectrange/selectrangeview.cpp:129
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Start offset:"
 msgstr "Jatorri-aldaketaren hasera:"
 
-#: controllers/view/selectrange/selectrangeview.cpp:61
+#: controllers/view/selectrange/selectrangeview.cpp:149
 #, kde-format
 msgctxt "@label:listbox"
 msgid "End offset:"
 msgstr "Jatorri-aldaketaren amaiera:"
 
-#: controllers/view/selectrange/selectrangeview.cpp:81
+#: controllers/view/selectrange/selectrangeview.cpp:175
 #, kde-format
 msgctxt "@option:check"
 msgid "End relative"
 msgstr ""
 
-#: controllers/view/selectrange/selectrangeview.cpp:108
+#: controllers/view/selectrange/selectrangeview.cpp:196
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the range."
 msgstr "Hautatu barrutia."
 
-#: controllers/view/selectrange/selectrangeview.cpp:110
+#: controllers/view/selectrange/selectrangeview.cpp:198
 #, fuzzy, kde-kuit-format
 #| msgctxt "@info:whatsthis"
 #| msgid ""
@@ -3312,13 +3312,13 @@ msgstr ""
 "2 GiB baino handiagoak diren fitxategiak zamatzeko euskarririk ez da "
 "oraindik gauzatu."
 
-#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:53
+#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:104
 #, kde-format
 msgctxt "name of the generated data"
 msgid "Pattern..."
 msgstr "Eredua..."
 
-#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:103
+#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:154
 #, kde-format
 msgid "Pattern inserted."
 msgstr "Eredua txertatu da."
@@ -3329,7 +3329,7 @@ msgctxt "@label:textbox"
 msgid "Pattern:"
 msgstr "Eredua:"
 
-#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:42
+#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:44
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -3337,19 +3337,19 @@ msgid ""
 msgstr ""
 "Sartu bilatu beharreko eredua, edo hautatu aurreko eredu bat zerrendatik."
 
-#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:50
+#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:52
 #, kde-format
 msgctxt "@label:spinbox number of times to insert the pattern"
 msgid "&Number:"
 msgstr "&Zenbakia:"
 
-#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:58
+#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:60
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Enter the number of times the pattern should be inserted."
 msgstr "Sartu eredua txertatu behar den aldi kopurua."
 
-#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:70
+#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:72
 #, kde-format
 msgctxt "@item name of the generated data"
 msgid "Pattern"
