@@ -10,13 +10,13 @@
 # Vincent Pinon <vpinon@kde.org>, 2019.
 # Johnny Jazeix <jazeix@gmail.com>, 2020.
 # Xavier Besnard <xavier.besnard@neuf.fr>, 2021, 2022.
+# Xavier BESNARD <xavier.besnard@neuf.fr>, 2023.
 #
-# Xavier BESNARD <xavier.besnard]neuf.fr>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-19 02:45+0000\n"
+"POT-Creation-Date: 2023-05-30 03:26+0000\n"
 "PO-Revision-Date: 2023-02-17 18:08+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
@@ -608,15 +608,15 @@ msgctxt "@title:window of the tool to set a new offset for the cursor"
 msgid "Goto"
 msgstr "Aller vers"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:38
+#: controllers/view/gotooffset/gotooffsetview.cpp:127
 #, kde-format
 msgctxt "@label:listbox"
 msgid "O&ffset:"
 msgstr "O&ffset :"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:48
-#: controllers/view/selectrange/selectrangeview.cpp:47
-#: controllers/view/selectrange/selectrangeview.cpp:67
+#: controllers/view/gotooffset/gotooffsetview.cpp:137
+#: controllers/view/selectrange/selectrangeview.cpp:135
+#: controllers/view/selectrange/selectrangeview.cpp:155
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Enter an offset to go to, or select a previous offset from the list."
@@ -624,43 +624,43 @@ msgstr ""
 "Saisissez un offset à atteindre, ou sélectionnez un offset précédent dans la "
 "liste."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:64
+#: controllers/view/gotooffset/gotooffsetview.cpp:153
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:112
 #, kde-format
 msgctxt "@option:check"
 msgid "From c&ursor"
 msgstr "Depuis le &curseur"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:66
+#: controllers/view/gotooffset/gotooffsetview.cpp:155
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Go relative from the current cursor location and not absolute."
 msgstr ""
 "Se déplacer depuis l'emplacement relatif du curseur actuel et pas absolu."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:69
+#: controllers/view/gotooffset/gotooffsetview.cpp:158
 #, kde-format
 msgctxt "@option:check"
 msgid "&Extend selection"
 msgstr "Ét&endre la sélection"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:71
-#: controllers/view/selectrange/selectrangeview.cpp:83
+#: controllers/view/gotooffset/gotooffsetview.cpp:160
+#: controllers/view/selectrange/selectrangeview.cpp:177
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Extend the selection by the cursor move."
 msgstr "Étend la sélection par le déplacement du curseur."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:74
+#: controllers/view/gotooffset/gotooffsetview.cpp:163
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:115
-#: controllers/view/selectrange/selectrangeview.cpp:87
+#: controllers/view/selectrange/selectrangeview.cpp:169
 #, kde-format
 msgctxt "@option:check"
 msgid "&Backwards"
 msgstr "En &arrière"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:76
-#: controllers/view/selectrange/selectrangeview.cpp:89
+#: controllers/view/gotooffset/gotooffsetview.cpp:165
+#: controllers/view/selectrange/selectrangeview.cpp:171
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Go backwards from the end or the current cursor location."
@@ -668,19 +668,19 @@ msgstr ""
 "Se déplacer en arrière depuis la fin ou depuis la position actuelle du "
 "curseur."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:91
+#: controllers/view/gotooffset/gotooffsetview.cpp:180
 #, kde-format
 msgctxt "@action:button"
 msgid "&Go"
 msgstr "A&ller"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:94
+#: controllers/view/gotooffset/gotooffsetview.cpp:183
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Go to the Offset"
 msgstr "Aller à l'offset"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:96
+#: controllers/view/gotooffset/gotooffsetview.cpp:185
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1261,7 +1261,7 @@ msgstr ""
 "selon les besoins ?"
 
 #: controllers/view/poddecoder/podtableview.cpp:255
-#: controllers/view/selectrange/selectrangeview.cpp:105
+#: controllers/view/selectrange/selectrangeview.cpp:193
 #: controllers/view/structures/structureview.cpp:339
 #, kde-format
 msgctxt "@action:button"
@@ -1571,31 +1571,31 @@ msgctxt "@title:window of the tool to select a range"
 msgid "Select"
 msgstr "Sélectionner"
 
-#: controllers/view/selectrange/selectrangeview.cpp:41
+#: controllers/view/selectrange/selectrangeview.cpp:129
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Start offset:"
 msgstr "Offset de départ :"
 
-#: controllers/view/selectrange/selectrangeview.cpp:61
+#: controllers/view/selectrange/selectrangeview.cpp:149
 #, kde-format
 msgctxt "@label:listbox"
 msgid "End offset:"
 msgstr "Offset de fin :"
 
-#: controllers/view/selectrange/selectrangeview.cpp:81
+#: controllers/view/selectrange/selectrangeview.cpp:175
 #, kde-format
 msgctxt "@option:check"
 msgid "End relative"
 msgstr "Fin relative"
 
-#: controllers/view/selectrange/selectrangeview.cpp:108
+#: controllers/view/selectrange/selectrangeview.cpp:196
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the range."
 msgstr "Sélectionne l'intervalle."
 
-#: controllers/view/selectrange/selectrangeview.cpp:110
+#: controllers/view/selectrange/selectrangeview.cpp:198
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -3150,13 +3150,13 @@ msgstr ""
 "La prise en charge des fichiers de plus de 2 Gio n'a pas encore été "
 "implémentée."
 
-#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:53
+#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:104
 #, kde-format
 msgctxt "name of the generated data"
 msgid "Pattern..."
 msgstr "Motif..."
 
-#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:103
+#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:154
 #, kde-format
 msgid "Pattern inserted."
 msgstr "Motif inséré."
@@ -3167,7 +3167,7 @@ msgctxt "@label:textbox"
 msgid "Pattern:"
 msgstr "Motif :"
 
-#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:42
+#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:44
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -3176,19 +3176,19 @@ msgstr ""
 "Saisissez un motif à chercher, ou sélectionnez un motif précédent dans la "
 "liste."
 
-#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:50
+#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:52
 #, kde-format
 msgctxt "@label:spinbox number of times to insert the pattern"
 msgid "&Number:"
 msgstr "&Nombre :"
 
-#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:58
+#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:60
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Enter the number of times the pattern should be inserted."
 msgstr "Saisissez le nombre de fois où le motif devra être inséré."
 
-#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:70
+#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:72
 #, kde-format
 msgctxt "@item name of the generated data"
 msgid "Pattern"

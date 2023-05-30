@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-19 02:45+0000\n"
+"POT-Creation-Date: 2023-05-30 03:26+0000\n"
 "PO-Revision-Date: 2011-04-08 21:21-0700\n"
 "Last-Translator: Fumiaki Okushi <okushi@kde.gr.jp>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
@@ -285,8 +285,7 @@ msgstr ""
 #, kde-format
 msgid "Inserted 1 Byte"
 msgid_plural "Inserted %1 Bytes"
-msgstr[0] "1 バイトを挿入"
-msgstr[1] "%1 バイトを挿入"
+msgstr[0] "%1 バイトを挿入"
 
 #: controllers/view/bytetable/bytetableview.cpp:80
 #, fuzzy, kde-format
@@ -454,7 +453,6 @@ msgctxt "@info"
 msgid "1 byte converted."
 msgid_plural "%1 bytes converted."
 msgstr[0] ""
-msgstr[1] ""
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:216
 #, kde-format
@@ -468,7 +466,6 @@ msgctxt "@info"
 msgid "1 byte substituted."
 msgid_plural "%1 bytes substituted."
 msgstr[0] ""
-msgstr[1] ""
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:226
 #, kde-format
@@ -575,75 +572,75 @@ msgctxt "@title:window of the tool to set a new offset for the cursor"
 msgid "Goto"
 msgstr "移動"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:38
+#: controllers/view/gotooffset/gotooffsetview.cpp:127
 #, kde-format
 msgctxt "@label:listbox"
 msgid "O&ffset:"
 msgstr "オフセット(&F):"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:48
-#: controllers/view/selectrange/selectrangeview.cpp:47
-#: controllers/view/selectrange/selectrangeview.cpp:67
+#: controllers/view/gotooffset/gotooffsetview.cpp:137
+#: controllers/view/selectrange/selectrangeview.cpp:135
+#: controllers/view/selectrange/selectrangeview.cpp:155
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Enter an offset to go to, or select a previous offset from the list."
 msgstr ""
 "移動先のオフセットを入力するか、以前に使ったものをリストから選択します。"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:64
+#: controllers/view/gotooffset/gotooffsetview.cpp:153
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:112
 #, kde-format
 msgctxt "@option:check"
 msgid "From c&ursor"
 msgstr "カーソル位置から(&U)"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:66
+#: controllers/view/gotooffset/gotooffsetview.cpp:155
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Go relative from the current cursor location and not absolute."
 msgstr "絶対位置ではなく、現在のカーソル位置からの相対位置に移動します。"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:69
+#: controllers/view/gotooffset/gotooffsetview.cpp:158
 #, kde-format
 msgctxt "@option:check"
 msgid "&Extend selection"
 msgstr "選択範囲を拡張する(&E)"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:71
-#: controllers/view/selectrange/selectrangeview.cpp:83
+#: controllers/view/gotooffset/gotooffsetview.cpp:160
+#: controllers/view/selectrange/selectrangeview.cpp:177
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Extend the selection by the cursor move."
 msgstr "カーソルの移動で選択範囲を拡張します。"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:74
+#: controllers/view/gotooffset/gotooffsetview.cpp:163
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:115
-#: controllers/view/selectrange/selectrangeview.cpp:87
+#: controllers/view/selectrange/selectrangeview.cpp:169
 #, kde-format
 msgctxt "@option:check"
 msgid "&Backwards"
 msgstr "後ろ向き(&B)"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:76
-#: controllers/view/selectrange/selectrangeview.cpp:89
+#: controllers/view/gotooffset/gotooffsetview.cpp:165
+#: controllers/view/selectrange/selectrangeview.cpp:171
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Go backwards from the end or the current cursor location."
 msgstr "末尾または現在のカーソル位置から後ろ向きに移動します。"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:91
+#: controllers/view/gotooffset/gotooffsetview.cpp:180
 #, kde-format
 msgctxt "@action:button"
 msgid "&Go"
 msgstr "移動(&G)"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:94
+#: controllers/view/gotooffset/gotooffsetview.cpp:183
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Go to the Offset"
 msgstr "オフセットへ移動します"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:96
+#: controllers/view/gotooffset/gotooffsetview.cpp:185
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -708,7 +705,6 @@ msgstr "選択範囲に含まれる文字列のリストを更新します"
 msgid "1 byte"
 msgid_plural "%1 bytes"
 msgstr[0] ""
-msgstr[1] ""
 
 #: controllers/view/info/statistictablemodel.cpp:214
 #, kde-format
@@ -1213,7 +1209,7 @@ msgid ""
 msgstr ""
 
 #: controllers/view/poddecoder/podtableview.cpp:255
-#: controllers/view/selectrange/selectrangeview.cpp:105
+#: controllers/view/selectrange/selectrangeview.cpp:193
 #: controllers/view/structures/structureview.cpp:339
 #, kde-format
 msgctxt "@action:button"
@@ -1356,8 +1352,7 @@ msgstr "置換したバイトはありません。"
 msgctxt "@info"
 msgid "1 replacement made."
 msgid_plural "%1 replacements made."
-msgstr[0] "1 件置換しました。"
-msgstr[1] "%1 件置換しました。"
+msgstr[0] "%1 件置換しました。"
 
 #: controllers/view/replace/replacecontroller.cpp:80
 #, kde-format
@@ -1522,31 +1517,31 @@ msgctxt "@title:window of the tool to select a range"
 msgid "Select"
 msgstr "選択"
 
-#: controllers/view/selectrange/selectrangeview.cpp:41
+#: controllers/view/selectrange/selectrangeview.cpp:129
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Start offset:"
 msgstr "開始オフセット:"
 
-#: controllers/view/selectrange/selectrangeview.cpp:61
+#: controllers/view/selectrange/selectrangeview.cpp:149
 #, kde-format
 msgctxt "@label:listbox"
 msgid "End offset:"
 msgstr "終了オフセット:"
 
-#: controllers/view/selectrange/selectrangeview.cpp:81
+#: controllers/view/selectrange/selectrangeview.cpp:175
 #, kde-format
 msgctxt "@option:check"
 msgid "End relative"
 msgstr ""
 
-#: controllers/view/selectrange/selectrangeview.cpp:108
+#: controllers/view/selectrange/selectrangeview.cpp:196
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the range."
 msgstr "範囲を選択。"
 
-#: controllers/view/selectrange/selectrangeview.cpp:110
+#: controllers/view/selectrange/selectrangeview.cpp:198
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1676,8 +1671,7 @@ msgstr "%1[%2]"
 #, kde-format
 msgid "1 bit"
 msgid_plural "%1 bits"
-msgstr[0] "1 ビット"
-msgstr[1] "%1 ビット"
+msgstr[0] "%1 ビット"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:62
 #, kde-format
@@ -1746,7 +1740,6 @@ msgid_plural ""
 "\n"
 " %6"
 msgstr[0] ""
-msgstr[1] ""
 
 #: controllers/view/structures/datatypes/datainformationwithchildren.cpp:240
 #, kde-format
@@ -1763,14 +1756,12 @@ msgid_plural ""
 "Type: %4\n"
 "Size: %5 (%1 children)"
 msgstr[0] ""
-msgstr[1] ""
 
 #: controllers/view/structures/datatypes/primitive/bitfield/abstractbitfielddatainformation.cpp:32
 #, kde-format
 msgid "%1 bit"
 msgid_plural "%1 bits"
 msgstr[0] "%1 ビット"
-msgstr[1] "%1 ビット"
 
 #: controllers/view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.cpp:46
 #: controllers/view/structures/datatypes/primitive/booldatainformation.cpp:17
@@ -1792,7 +1783,6 @@ msgctxt "Data type"
 msgid "boolean bitfield (%1 bit wide)"
 msgid_plural "boolean bitfield (%1 bits wide)"
 msgstr[0] ""
-msgstr[1] ""
 
 #: controllers/view/structures/datatypes/primitive/bitfield/signedbitfielddatainformation.cpp:94
 #, fuzzy, kde-format
@@ -1802,7 +1792,6 @@ msgctxt "Data type"
 msgid "signed bitfield (%1 bit wide)"
 msgid_plural "signed bitfield (%1 bits wide)"
 msgstr[0] "符号なし 8 ビット値:"
-msgstr[1] "符号なし 8 ビット値:"
 
 #: controllers/view/structures/datatypes/primitive/bitfield/unsignedbitfielddatainformation.cpp:76
 #, fuzzy, kde-format
@@ -1812,7 +1801,6 @@ msgctxt "Data type"
 msgid "unsigned bitfield (%1 bit wide)"
 msgid_plural "unsigned bitfield (%1 bits wide)"
 msgstr[0] "符号なし 8 ビット値:"
-msgstr[1] "符号なし 8 ビット値:"
 
 #: controllers/view/structures/datatypes/primitive/booldatainformation.cpp:24
 #, kde-format
@@ -3128,8 +3116,7 @@ msgstr "新しく作成されました。"
 msgctxt "numbered title for a created document without a filename"
 msgid "[New Byte Array]"
 msgid_plural "[New Byte Array %1]"
-msgstr[0] "[新しいバイト配列]"
-msgstr[1] "[新しいバイト配列 %1]"
+msgstr[0] "[新しいバイト配列 %1]"
 
 #: core/document/bytearraydocumentfactory.cpp:73
 #, kde-format
@@ -3155,13 +3142,13 @@ msgstr ""
 msgid "Support to load files larger than 2 GiB has not yet been implemented."
 msgstr ""
 
-#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:53
+#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:104
 #, kde-format
 msgctxt "name of the generated data"
 msgid "Pattern..."
 msgstr "パターン..."
 
-#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:103
+#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:154
 #, kde-format
 msgid "Pattern inserted."
 msgstr "パターンが挿入されました。"
@@ -3172,26 +3159,26 @@ msgctxt "@label:textbox"
 msgid "Pattern:"
 msgstr "パターン:"
 
-#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:42
+#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:44
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
 "Enter a pattern to search for, or select a previous pattern from the list."
 msgstr "検索するパターンを入力するか、以前に使ったものをリストから選択します。"
 
-#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:50
+#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:52
 #, kde-format
 msgctxt "@label:spinbox number of times to insert the pattern"
 msgid "&Number:"
 msgstr "回数(&N):"
 
-#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:58
+#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:60
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Enter the number of times the pattern should be inserted."
 msgstr "パターンを挿入する回数を指定します。"
 
-#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:70
+#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:72
 #, kde-format
 msgctxt "@item name of the generated data"
 msgid "Pattern"

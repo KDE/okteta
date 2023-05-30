@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: khexedit\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-19 02:45+0000\n"
+"POT-Creation-Date: 2023-05-30 03:26+0000\n"
 "PO-Revision-Date: 2022-10-12 16:05+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -603,56 +603,56 @@ msgctxt "@title:window of the tool to set a new offset for the cursor"
 msgid "Goto"
 msgstr "Переход"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:38
+#: controllers/view/gotooffset/gotooffsetview.cpp:127
 #, kde-format
 msgctxt "@label:listbox"
 msgid "O&ffset:"
 msgstr "&Смещение:"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:48
-#: controllers/view/selectrange/selectrangeview.cpp:47
-#: controllers/view/selectrange/selectrangeview.cpp:67
+#: controllers/view/gotooffset/gotooffsetview.cpp:137
+#: controllers/view/selectrange/selectrangeview.cpp:135
+#: controllers/view/selectrange/selectrangeview.cpp:155
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Enter an offset to go to, or select a previous offset from the list."
 msgstr "Введите значение смещения или выберите из списка."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:64
+#: controllers/view/gotooffset/gotooffsetview.cpp:153
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:112
 #, kde-format
 msgctxt "@option:check"
 msgid "From c&ursor"
 msgstr "От к&урсора"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:66
+#: controllers/view/gotooffset/gotooffsetview.cpp:155
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Go relative from the current cursor location and not absolute."
 msgstr "Перейти относительно текущей позиции курсора, а не с начала данных."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:69
+#: controllers/view/gotooffset/gotooffsetview.cpp:158
 #, kde-format
 msgctxt "@option:check"
 msgid "&Extend selection"
 msgstr "В&ыделить до указанной позиции"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:71
-#: controllers/view/selectrange/selectrangeview.cpp:83
+#: controllers/view/gotooffset/gotooffsetview.cpp:160
+#: controllers/view/selectrange/selectrangeview.cpp:177
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Extend the selection by the cursor move."
 msgstr "Выделить байты от курсора до указанной позиции"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:74
+#: controllers/view/gotooffset/gotooffsetview.cpp:163
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:115
-#: controllers/view/selectrange/selectrangeview.cpp:87
+#: controllers/view/selectrange/selectrangeview.cpp:169
 #, kde-format
 msgctxt "@option:check"
 msgid "&Backwards"
 msgstr "&Назад"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:76
-#: controllers/view/selectrange/selectrangeview.cpp:89
+#: controllers/view/gotooffset/gotooffsetview.cpp:165
+#: controllers/view/selectrange/selectrangeview.cpp:171
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Go backwards from the end or the current cursor location."
@@ -660,19 +660,19 @@ msgstr ""
 "Определять адрес в обратном направлении от конца данных или от текущей "
 "позиции курсора."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:91
+#: controllers/view/gotooffset/gotooffsetview.cpp:180
 #, kde-format
 msgctxt "@action:button"
 msgid "&Go"
 msgstr "&Перейти"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:94
+#: controllers/view/gotooffset/gotooffsetview.cpp:183
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Go to the Offset"
 msgstr "Перейти на адрес"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:96
+#: controllers/view/gotooffset/gotooffsetview.cpp:185
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1243,7 +1243,7 @@ msgstr ""
 "%2).<nl/>Заменить следующие байты или вставить новые в случае необходимости?"
 
 #: controllers/view/poddecoder/podtableview.cpp:255
-#: controllers/view/selectrange/selectrangeview.cpp:105
+#: controllers/view/selectrange/selectrangeview.cpp:193
 #: controllers/view/structures/structureview.cpp:339
 #, kde-format
 msgctxt "@action:button"
@@ -1549,31 +1549,31 @@ msgctxt "@title:window of the tool to select a range"
 msgid "Select"
 msgstr "Выбор диапазона"
 
-#: controllers/view/selectrange/selectrangeview.cpp:41
+#: controllers/view/selectrange/selectrangeview.cpp:129
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Start offset:"
 msgstr "Начальное смещение:"
 
-#: controllers/view/selectrange/selectrangeview.cpp:61
+#: controllers/view/selectrange/selectrangeview.cpp:149
 #, kde-format
 msgctxt "@label:listbox"
 msgid "End offset:"
 msgstr "Конечное смещение:"
 
-#: controllers/view/selectrange/selectrangeview.cpp:81
+#: controllers/view/selectrange/selectrangeview.cpp:175
 #, kde-format
 msgctxt "@option:check"
 msgid "End relative"
 msgstr "Относительно конца"
 
-#: controllers/view/selectrange/selectrangeview.cpp:108
+#: controllers/view/selectrange/selectrangeview.cpp:196
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the range."
 msgstr "Выбрать диапазон."
 
-#: controllers/view/selectrange/selectrangeview.cpp:110
+#: controllers/view/selectrange/selectrangeview.cpp:198
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -3147,13 +3147,13 @@ msgstr "Недостаточно рабочей памяти для загруз
 msgid "Support to load files larger than 2 GiB has not yet been implemented."
 msgstr "Загрузка файлов размером более 2 ГБ ещё не реализована."
 
-#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:53
+#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:104
 #, kde-format
 msgctxt "name of the generated data"
 msgid "Pattern..."
 msgstr "Из шаблона..."
 
-#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:103
+#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:154
 #, kde-format
 msgid "Pattern inserted."
 msgstr "Шаблон вставлен."
@@ -3164,26 +3164,26 @@ msgctxt "@label:textbox"
 msgid "Pattern:"
 msgstr "Шаблон:"
 
-#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:42
+#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:44
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
 "Enter a pattern to search for, or select a previous pattern from the list."
 msgstr "Введите шаблон для поиска, или выберите предыдущий из списка."
 
-#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:50
+#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:52
 #, kde-format
 msgctxt "@label:spinbox number of times to insert the pattern"
 msgid "&Number:"
 msgstr "&Количество:"
 
-#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:58
+#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:60
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Enter the number of times the pattern should be inserted."
 msgstr "Введите количество вставок шаблона."
 
-#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:70
+#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:72
 #, kde-format
 msgctxt "@item name of the generated data"
 msgid "Pattern"
