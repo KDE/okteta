@@ -154,7 +154,9 @@ void SearchDialog::showEvent(QShowEvent* showEvent)
     AbstractFindDialog::showEvent(showEvent);
 
     setInSelectionEnabled(mTool->hasSelectedData());
-    setInSelection(mTool->hasSelectedData());
+    // TODO: find a smart heuristic when to automatically set this flag
+    // also when to use the content of the current selection as initial search pattern
+    // setInSelection(mTool->hasSelectedData());
 }
 
 void SearchDialog::rememberCurrentSettings()
