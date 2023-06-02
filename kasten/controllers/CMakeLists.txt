@@ -145,6 +145,7 @@ oktetakastencontrollers_add_sublibrary(view/libfinddialog
 oktetakastencontrollers_add_sublibrary(view/libbytearraysearch
     PRIVATE
         ByteArraySearchJob
+        ByteArraySearchUtils
 )
 
 oktetakastencontrollers_add_sublibrary(view/poddecoder/typecodecs
@@ -602,6 +603,26 @@ if(BUILD_TESTING)
   target_compile_definitions(jsparsertest       PRIVATE QT_TESTCASE_BUILDDIR="${CMAKE_CURRENT_BINARY_DIR}")
   # TODO: still fragile once __FILE__ is neither absolute or full relative path to this build dir
   # look into using custom code intead of simple QFINDTESTDATA usage
+
+  # search tool unit tests
+  ecm_add_test(
+    view/libbytearraysearch/bytearraysearchutils.cpp
+    view/libbytearraysearch/bytearraysearchjob.cpp
+    view/search/searchtool.cpp
+    test/searchtooltest.cpp
+
+    TEST_NAME searchtooltest
+    LINK_LIBRARIES
+      OktetaKastenGui
+      OktetaKastenCore
+      KF5::I18n
+      Qt5::Test
+  )
+  target_include_directories(searchtooltest
+    PUBLIC
+      view/libfinddialog
+      view/libbytearraysearch
+  )
 
   #replace tool unit tests
   ecm_add_test(

@@ -54,9 +54,15 @@ void ByteArraySearchJob::start()
                  mByteArrayModel->indexOfCaseInsensitive(mCharCodec, mSearchData, mStartIndex, mEndIndex);
     } else {
         const Okteta::Address lastFromIndex = mStartIndex - mSearchData.size() + 1;
-        resultIndex = (mCaseSensitivity == Qt::CaseSensitive) ?
+        // Does not fit? Also prevent negative value for lastFromIndex,
+        // as fromOffset arg of lastIndexOf() handles -1 differently and is undefined for other < 0 values.
+        if (lastFromIndex < mEndIndex) {
+            resultIndex = -1;
+        } else {
+            resultIndex = (mCaseSensitivity == Qt::CaseSensitive) ?
                  mByteArrayModel->lastIndexOf(mSearchData, lastFromIndex, mEndIndex) :
                  mByteArrayModel->lastIndexOfCaseInsensitive(mCharCodec, mSearchData, lastFromIndex, mEndIndex);
+        }
     }
     m_result = (resultIndex != -1) ? Okteta::AddressRange::fromWidth(resultIndex, mSearchData.size()) : Okteta::AddressRange();
     emit finished(m_result);
