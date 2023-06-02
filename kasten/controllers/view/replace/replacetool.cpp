@@ -10,6 +10,8 @@
 
 // controller
 #include "replacejob.hpp"
+// libbytearraysearch
+#include <bytearraysearchutils.hpp>
 // Okteta Kasten gui
 #include <Kasten/Okteta/ByteArrayView>
 // Okteta Kasten core
@@ -167,44 +169,17 @@ void ReplaceTool::replace(FindDirection direction, bool fromCursor, bool inSelec
     Okteta::Address replaceRangeStartIndex;
     Okteta::Address replaceRangeEndIndex;
 
-    if (inSelection) {
-        const Okteta::AddressRange selection = mByteArrayView->selection();
-        if (!selection.isValid()) {
-            mReplaceJob = nullptr;
-            // nothing selected, so skip any search and finish now
-            emit finished(false, 0);
-            return;
-        }
-        if (mSearchData.size() > selection.width()) {
-            mReplaceJob = nullptr;
-            // searched data does not even fit, so skip any search and finish now
-            // TODO: catch in dialog already
-            emit finished(false, 0);
-            return;
-        }
-
-        replaceRangeStartIndex = selection.start();
-        replaceRangeEndIndex =  selection.end();
-        // TODO: support finding following selection direction
-        direction = FindForward;
-    } else {
-        if (mSearchData.size() > mByteArrayModel->size()) {
-            mReplaceJob = nullptr;
-            // searched data does not even fit, so skip any search and finish now
-            // also handles case of empty bytearray
-            // TODO: catch in dialog already
-            emit finished(false, 0);
-            return;
-        }
-
-        const Okteta::Address cursorPosition = mByteArrayView->cursorPosition();
-        if (fromCursor && (cursorPosition != 0)) {
-            replaceRangeStartIndex = cursorPosition;
-            replaceRangeEndIndex =  cursorPosition - 1;
-        } else {
-            replaceRangeStartIndex = 0;
-            replaceRangeEndIndex =  mByteArrayModel->size() - 1;
-        }
+    if (!ByteArraySearchUtils::getSearchIndexes(&replaceRangeStartIndex, &replaceRangeEndIndex,
+                                                mByteArrayModel,
+                                                mByteArrayView->selection(),
+                                                mByteArrayView->cursorPosition(),
+                                                mSearchData,
+                                                direction,
+                                                fromCursor, inSelection)) {
+        // no search doable, so skip any search and finish now
+        mReplaceJob = nullptr;
+        emit finished(false, 0);
+        return;
     }
 
     mReplaceJob = new ReplaceJob(mByteArrayView, mByteArrayModel, mUserQueryAgent, this);
