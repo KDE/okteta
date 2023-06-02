@@ -92,6 +92,7 @@ inline void KConfigGroup::writeEntry(const char *key, const Kasten::FindDirectio
 
 static constexpr bool DefaultFromCursor = false;
 static constexpr Kasten::FindDirection DefaultDirection = Kasten::FindForward;
+static constexpr bool DefaultInSelection = false;
 static constexpr Okteta::ByteArrayComboBox::Coding DefaultReplaceDataCoding = Okteta::ByteArrayComboBox::HexadecimalCoding;
 static constexpr Okteta::ByteArrayComboBox::Coding DefaultSearchDataCoding = Okteta::ByteArrayComboBox::HexadecimalCoding;
 
@@ -99,6 +100,7 @@ static constexpr char ReplaceConfigGroupId[] = "ReplaceTool";
 
 static constexpr char FromCursorConfigKey[] = "FromCursor";
 static constexpr char DirectionConfigKey[] = "Direction";
+static constexpr char InSelectionConfigKey[] = "InSelection";
 static constexpr char ReplaceDataCodingConfigKey[] = "ReplaceDataCoding";
 static constexpr char SearchDataCodingConfigKey[] = "SearchDataCoding";
 
@@ -163,6 +165,9 @@ ReplaceDialog::ReplaceDialog(ReplaceTool* tool, QWidget* parent)
 
     const Kasten::FindDirection direction = configGroup.readEntry(DirectionConfigKey, DefaultDirection);
     setDirection(direction);
+
+    const bool inSelection = configGroup.readEntry(InSelectionConfigKey, DefaultInSelection);
+    setInSelection(inSelection);
 }
 
 ReplaceDialog::~ReplaceDialog() = default;
@@ -212,7 +217,9 @@ void ReplaceDialog::showEvent(QShowEvent* showEvent)
     AbstractFindDialog::showEvent(showEvent);
 
     setInSelectionEnabled(mTool->hasSelectedData());
-    setInSelection(mTool->hasSelectedData());
+    // TODO: find a smart heuristic when to automatically set this flag
+    // also when to use the content of the current selection as initial search pattern
+    // setInSelection(mTool->hasSelectedData());
     setCharCodec(mTool->charCodingName());
 }
 
@@ -227,6 +234,7 @@ void ReplaceDialog::rememberCurrentSettings()
     configGroup.writeEntry(ReplaceDataCodingConfigKey, replaceDataCoding());
     configGroup.writeEntry(DirectionConfigKey, direction());
     configGroup.writeEntry(FromCursorConfigKey, fromCursor());
+    configGroup.writeEntry(InSelectionConfigKey, persistentInSelection());
 }
 
 }

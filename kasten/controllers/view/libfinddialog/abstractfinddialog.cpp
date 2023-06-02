@@ -145,7 +145,8 @@ Okteta::ByteArrayComboBox::Coding AbstractFindDialog::searchDataCoding() const
 }
 
 bool AbstractFindDialog::fromCursor()            const { return AtCursorCheckBox->isChecked(); }
-bool AbstractFindDialog::inSelection()           const { return SelectedCheckBox->isChecked(); }
+bool AbstractFindDialog::inSelection()           const { return SelectedCheckBox->isEnabled() && SelectedCheckBox->isChecked(); }
+bool AbstractFindDialog::persistentInSelection() const { return SelectedCheckBox->isEnabled() ? SelectedCheckBox->isChecked() : ShadowInSelection; }
 FindDirection AbstractFindDialog::direction() const
 {
     return BackwardsCheckBox->isChecked() ? FindBackward : FindForward;
@@ -173,15 +174,29 @@ void AbstractFindDialog::setDirection(FindDirection Direction)
 
 void AbstractFindDialog::setInSelection(bool InSelection)
 {
-    SelectedCheckBox->setChecked(InSelection);
+    if (SelectedCheckBox->isEnabled()) {
+        SelectedCheckBox->setChecked(InSelection);
+    } else {
+        ShadowInSelection = InSelection;
+    }
 }
 
 void AbstractFindDialog::setInSelectionEnabled(bool inSelectionEnabled)
 {
+    if (SelectedCheckBox->isEnabled() == inSelectionEnabled) {
+        return;
+    }
+
     if (!inSelectionEnabled) {
+        // remember
+        ShadowInSelection = SelectedCheckBox->isChecked();
         SelectedCheckBox->setChecked(false);
     }
     SelectedCheckBox->setEnabled(inSelectionEnabled);
+    if (inSelectionEnabled) {
+        // restore memory
+        SelectedCheckBox->setChecked(ShadowInSelection);
+    }
 }
 
 void AbstractFindDialog::setCaseSensitivity(Qt::CaseSensitivity caseSensitivity)
