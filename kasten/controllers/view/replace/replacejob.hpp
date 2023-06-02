@@ -14,7 +14,7 @@
 // libfinddialog
 #include <finddirection.hpp>
 // Okteta core
-#include <Okteta/Address>
+#include <Okteta/AddressRange>
 // Qt
 #include <QObject>
 #include <QByteArray>
@@ -53,7 +53,7 @@ Q_SIGNALS:
     void finished(bool previousFound, int noOfReplacements);
 
 private Q_SLOTS:
-    void handleSearchResult(Okteta::Address pos);
+    void handleSearchResult(Okteta::AddressRange matchRange);
     void handleReplaceCurrentFinished(Kasten::ReplaceBehaviour replaceBehaviour);
     void handleContinueFinished(bool result);
 
@@ -76,6 +76,7 @@ private: // status
     Okteta::Address m_currentIndex;
     Okteta::Address m_currentReplaceRangeStartIndex;
     Okteta::Address m_currentReplaceRangeEndIndex;
+    Okteta::Size m_currentMatchWidth;
     int m_noOfReplacements = 0;
     FindDirection m_direction;
     bool m_previousFound : 1;

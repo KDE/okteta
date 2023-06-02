@@ -8,9 +8,11 @@
 
 #include "searchtool.hpp"
 
+// libbytearraysearch
+#include <bytearraysearchjob.hpp>
+#include <bytearraysearchutils.hpp>
 // controller
 #include "searchuserqueryable.hpp"
-#include "searchjob.hpp"
 // Okteta Kasten gui
 #include <Kasten/Okteta/ByteArrayView>
 // Okteta Kasten core
@@ -145,39 +147,16 @@ void SearchTool::search(FindDirection direction, bool fromCursor, bool inSelecti
 {
     mPreviousFound = false;
 
-    if (inSelection) {
-        const Okteta::AddressRange selection = mByteArrayView->selection();
-        if (!selection.isValid()) {
-            // nothing selected, so skip any search and finish now
-            Q_EMIT dataNotFound();
-            return;
-        }
-        if (mSearchData.size() > selection.width()) {
-            // searched data does not even fit, so skip any search and finish now
-            // TODO: catch in dialog already
-            Q_EMIT dataNotFound();
-            return;
-        }
-
-        mSearchFirstIndex = selection.start();
-        mSearchLastIndex =  selection.end();
-    } else {
-        if (mSearchData.size() > mByteArrayModel->size()) {
-            // searched data does not even fit, so skip any search and finish now
-            // also handles case of empty bytearray
-            // TODO: catch in dialog already
-            Q_EMIT dataNotFound();
-            return;
-        }
-
-        const Okteta::Address cursorPosition = mByteArrayView->cursorPosition();
-        if (fromCursor && (cursorPosition != 0)) {
-            mSearchFirstIndex = cursorPosition;
-            mSearchLastIndex =  cursorPosition - 1;
-        } else {
-            mSearchFirstIndex = 0;
-            mSearchLastIndex =  mByteArrayModel->size() - 1;
-        }
+    if (!ByteArraySearchUtils::getSearchIndexes(&mSearchFirstIndex, &mSearchLastIndex,
+                                                mByteArrayModel,
+                                                mByteArrayView->selection(),
+                                                mByteArrayView->cursorPosition(),
+                                                mSearchData,
+                                                direction,
+                                                fromCursor, inSelection)) {
+        // no search doable, so skip any search and finish now
+        Q_EMIT dataNotFound();
+        return;
     }
 
     doSearch(direction);
@@ -190,22 +169,26 @@ void SearchTool::doSearch(FindDirection direction)
     bool wrapEnabled = (direction == FindForward) ? (mSearchLastIndex < startIndex) : (startIndex < mSearchFirstIndex);
 
     while (true) {
-        QApplication::setOverrideCursor(Qt::WaitCursor);
+        const bool isWithin = !wrapEnabled || (direction == FindForward) ? (startIndex <= mByteArrayModel->size() - 1) : (startIndex >= 0);
 
-        Okteta::Address endIndex = wrapEnabled ?
-                                   ((direction == FindForward) ? mByteArrayModel->size() - 1 : 0) :
-                                   ((direction == FindForward) ? mSearchLastIndex : mSearchFirstIndex);
+        if (isWithin) {
+            QApplication::setOverrideCursor(Qt::WaitCursor);
 
-        auto* searchJob =
-            new SearchJob(mByteArrayModel, mSearchData, startIndex, endIndex, mCaseSensitivity, mByteArrayView->charCodingName());
-        const Okteta::Address pos = searchJob->exec();
+            Okteta::Address endIndex = wrapEnabled ?
+                                    ((direction == FindForward) ? mByteArrayModel->size() - 1 : 0) :
+                                    ((direction == FindForward) ? mSearchLastIndex : mSearchFirstIndex);
 
-        QApplication::restoreOverrideCursor();
+            auto* searchJob =
+                new ByteArraySearchJob(mByteArrayModel, mSearchData, startIndex, endIndex, mCaseSensitivity, mByteArrayView->charCodingName());
+            const Okteta::AddressRange matchRange = searchJob->exec();
 
-        if (pos != -1) {
-            mPreviousFound = true;
-            mByteArrayView->setSelection(pos, pos + mSearchData.size() - 1);
-            break;
+            QApplication::restoreOverrideCursor();
+
+            if (matchRange.isValid()) {
+                mPreviousFound = true;
+                mByteArrayView->setSelection(matchRange.start(), matchRange.end());
+                break;
+            }
         }
 
         if (wrapEnabled) {

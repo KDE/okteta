@@ -220,6 +220,13 @@ oktetakastencontrollers_add_sublibrary(view/libfinddialog
         FindDirection
 )
 
+oktetakastencontrollers_add_sublibrary(view/libbytearraysearch
+    BUILD_INCLUDEDIR
+    PRIVATE
+        ByteArraySearchJob
+        ByteArraySearchUtils
+)
+
 oktetakastencontrollers_add_sublibrary(view/poddecoder/typecodecs
     PRIVATE
         Binary8Codec
@@ -286,7 +293,6 @@ oktetakastencontrollers_add_sublibrary(view/search
     PRIVATE
         SearchUserQueryable
         SearchDialog
-        SearchJob
         SearchTool
         SearchController
 )
@@ -652,9 +658,29 @@ if(BUILD_TESTING)
     # TODO: still fragile once __FILE__ is neither absolute or full relative path to this build dir
     # look into using custom code intead of simple QFINDTESTDATA usage
 
+    # search tool unit tests
+    ecm_add_test(
+        view/libbytearraysearch/bytearraysearchutils.cpp
+        view/libbytearraysearch/bytearraysearchjob.cpp
+        view/search/searchtool.cpp
+        test/searchtooltest.cpp
+
+        TEST_NAME searchtooltest
+        LINK_LIBRARIES
+            OktetaKastenGui
+            OktetaKastenCore
+            KF5::I18n
+            Qt5::Test
+    )
+    target_include_directories(searchtooltest
+        PUBLIC
+            view/libfinddialog
+            view/libbytearraysearch
+    )
+
     #replace tool unit tests
     ecm_add_test(
-        view/search/searchjob.cpp
+        view/libbytearraysearch/bytearraysearchjob.cpp
         view/replace/replacejob.cpp
         test/replacejobtest.cpp
 
@@ -667,6 +693,7 @@ if(BUILD_TESTING)
     target_include_directories(replacejobtest
         PUBLIC
             view/libfinddialog
+            view/libbytearraysearch
     )
 endif()
 

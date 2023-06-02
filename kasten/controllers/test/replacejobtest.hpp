@@ -20,6 +20,8 @@ class ReplaceJobTest : public QObject
     Q_OBJECT
 
 private Q_SLOTS: // test functions
+    void init();
+
     void testReplace_data();
     void testReplace();
 

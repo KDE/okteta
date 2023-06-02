@@ -81,6 +81,11 @@ template<int N> QByteArray byteArrayFromLiteral(const char (&data)[N])
    return QByteArray::fromRawData(data, N-1);
 }
 
+void ReplaceJobTest::init()
+{
+    qRegisterMetaType<Okteta::AddressRange>("Okteta::AddressRange");
+}
+
 void ReplaceJobTest::testReplace_data()
 {
     QTest::addColumn<QByteArray>("originalData");
