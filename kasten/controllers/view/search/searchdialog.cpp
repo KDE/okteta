@@ -85,12 +85,14 @@ inline void KConfigGroup::writeEntry(const char *key, const Kasten::FindDirectio
 
 static constexpr bool DefaultFromCursor = false;
 static constexpr Kasten::FindDirection DefaultDirection = Kasten::FindForward;
+static constexpr bool DefaultInSelection = false;
 static constexpr Okteta::ByteArrayComboBox::Coding DefaultSearchDataCoding = Okteta::ByteArrayComboBox::HexadecimalCoding;
 
 static constexpr char SearchConfigGroupId[] = "SearchTool";
 
 static constexpr char FromCursorConfigKey[] = "FromCursor";
 static constexpr char DirectionConfigKey[] = "Direction";
+static constexpr char InSelectionConfigKey[] = "InSelection";
 static constexpr char SearchDataCodingConfigKey[] = "SearchDataCoding";
 
 namespace Kasten {
@@ -130,6 +132,9 @@ SearchDialog::SearchDialog(SearchTool* tool, QWidget* parent)
     const Kasten::FindDirection direction = configGroup.readEntry(DirectionConfigKey, DefaultDirection);
     setDirection(direction);
 
+    const bool inSelection = configGroup.readEntry(InSelectionConfigKey, DefaultInSelection);
+    setInSelection(inSelection);
+
     setCharCodec(mTool->charCodingName());
     connect(mTool,  &SearchTool::charCodecChanged,
             this, &SearchDialog::setCharCodec);
@@ -167,6 +172,7 @@ void SearchDialog::rememberCurrentSettings()
     configGroup.writeEntry(SearchDataCodingConfigKey, searchDataCoding());
     configGroup.writeEntry(DirectionConfigKey, direction());
     configGroup.writeEntry(FromCursorConfigKey, fromCursor());
+    configGroup.writeEntry(InSelectionConfigKey, persistentInSelection());
 }
 
 }

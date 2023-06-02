@@ -46,6 +46,7 @@ public: // get
     Okteta::ByteArrayComboBox::Coding searchDataCoding() const;
     bool fromCursor() const;
     bool inSelection() const;
+    bool persistentInSelection() const;
     Qt::CaseSensitivity caseSensitivity() const;
     FindDirection direction() const;
 
@@ -82,6 +83,9 @@ private:
     QCheckBox* WholeWordsCheckBox;
     QCheckBox* CaseSensitiveCheckBox;
     QPushButton* FindButton;
+
+    // used to store the value when inSelection is disabled
+    bool ShadowInSelection;
 };
 
 }
