@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-30 03:26+0000\n"
+"POT-Creation-Date: 2023-06-03 02:40+0000\n"
 "PO-Revision-Date: 2009-06-13 16:12+0000\n"
 "Last-Translator: Sveinn í Felli <sveinki@nett.is>\n"
 "Language-Team: Icelandic <kde-isl@molar.is>\n"
@@ -1340,25 +1340,25 @@ msgctxt "@info"
 msgid "Beginning of byte array reached.<nl/>Continue from the end?"
 msgstr ""
 
-#: controllers/view/replace/replacedialog.cpp:111
+#: controllers/view/replace/replacedialog.cpp:113
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Replace Bytes"
 msgstr "Skipta út"
 
-#: controllers/view/replace/replacedialog.cpp:113
+#: controllers/view/replace/replacedialog.cpp:115
 #, fuzzy, kde-format
 msgctxt "@action;button"
 msgid "&Replace"
 msgstr "&Skipta út"
 
-#: controllers/view/replace/replacedialog.cpp:115
+#: controllers/view/replace/replacedialog.cpp:117
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Start replace"
 msgstr "Hefja útskiptingu"
 
-#: controllers/view/replace/replacedialog.cpp:117
+#: controllers/view/replace/replacedialog.cpp:119
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1367,13 +1367,13 @@ msgid ""
 "replaced with the replacement bytes."
 msgstr ""
 
-#: controllers/view/replace/replacedialog.cpp:125
+#: controllers/view/replace/replacedialog.cpp:127
 #, fuzzy, kde-format
 msgctxt "@title:group"
 msgid "Replace With"
 msgstr "Skipta út"
 
-#: controllers/view/replace/replacedialog.cpp:132
+#: controllers/view/replace/replacedialog.cpp:134
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1381,13 +1381,13 @@ msgid ""
 "from the list."
 msgstr "Sláðu inn mynstur til að leita eftir, eða veldu eitt út listanum."
 
-#: controllers/view/replace/replacedialog.cpp:141
+#: controllers/view/replace/replacedialog.cpp:143
 #, fuzzy, kde-format
 msgctxt "@option:check"
 msgid "&Prompt on replace"
 msgstr "Stað&festa útskiptingu"
 
-#: controllers/view/replace/replacedialog.cpp:142
+#: controllers/view/replace/replacedialog.cpp:144
 #, fuzzy, kde-format
 msgctxt "@info:whatsthis"
 msgid "Ask before replacing each match found."
@@ -1417,7 +1417,7 @@ msgctxt "@action:button"
 msgid "Replace"
 msgstr "Skipta út"
 
-#: controllers/view/replace/replacetool.cpp:75
+#: controllers/view/replace/replacetool.cpp:77
 #, fuzzy, kde-format
 msgctxt "@title"
 msgid "Replace"
@@ -1429,25 +1429,25 @@ msgctxt "@info"
 msgid "Search key not found in byte array."
 msgstr ""
 
-#: controllers/view/search/searchdialog.cpp:102
+#: controllers/view/search/searchdialog.cpp:104
 #, kde-format
 msgctxt "@title:window"
 msgid "Find Bytes"
 msgstr ""
 
-#: controllers/view/search/searchdialog.cpp:104
+#: controllers/view/search/searchdialog.cpp:106
 #, fuzzy, kde-format
 msgctxt "@action:button"
 msgid "&Find"
 msgstr "&Finna"
 
-#: controllers/view/search/searchdialog.cpp:106
+#: controllers/view/search/searchdialog.cpp:108
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Start searching"
 msgstr "Hefja leit"
 
-#: controllers/view/search/searchdialog.cpp:108
+#: controllers/view/search/searchdialog.cpp:110
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1455,7 +1455,7 @@ msgid ""
 "above are searched for within the byte array."
 msgstr ""
 
-#: controllers/view/search/searchtool.cpp:76
+#: controllers/view/search/searchtool.cpp:78
 #, fuzzy, kde-format
 msgctxt "@title"
 msgid "Search"
