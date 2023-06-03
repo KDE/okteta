@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-30 00:49+0000\n"
+"POT-Creation-Date: 2023-06-03 00:50+0000\n"
 "PO-Revision-Date: 2022-07-13 15:01-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -1412,25 +1412,25 @@ msgstr ""
 "O início da lista de bytes foi atingido.<nl/>Deseja continuar a partir do "
 "fim?"
 
-#: controllers/view/replace/replacedialog.cpp:111
+#: controllers/view/replace/replacedialog.cpp:113
 #, kde-format
 msgctxt "@title:window"
 msgid "Replace Bytes"
 msgstr "Substituir bytes"
 
-#: controllers/view/replace/replacedialog.cpp:113
+#: controllers/view/replace/replacedialog.cpp:115
 #, kde-format
 msgctxt "@action;button"
 msgid "&Replace"
 msgstr "Substitui&r"
 
-#: controllers/view/replace/replacedialog.cpp:115
+#: controllers/view/replace/replacedialog.cpp:117
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Start replace"
 msgstr "Iniciar substituição"
 
-#: controllers/view/replace/replacedialog.cpp:117
+#: controllers/view/replace/replacedialog.cpp:119
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1442,13 +1442,13 @@ msgstr ""
 "introduziu acima serão pesquisados dentro da lista de bytes, sendo que "
 "qualquer ocorrência será substituída pelos bytes de substituição."
 
-#: controllers/view/replace/replacedialog.cpp:125
+#: controllers/view/replace/replacedialog.cpp:127
 #, kde-format
 msgctxt "@title:group"
 msgid "Replace With"
 msgstr "Substituir por"
 
-#: controllers/view/replace/replacedialog.cpp:132
+#: controllers/view/replace/replacedialog.cpp:134
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1458,13 +1458,13 @@ msgstr ""
 "Informe os bytes a serem substituídos ou selecione os bytes anteriores na "
 "lista."
 
-#: controllers/view/replace/replacedialog.cpp:141
+#: controllers/view/replace/replacedialog.cpp:143
 #, kde-format
 msgctxt "@option:check"
 msgid "&Prompt on replace"
 msgstr "&Perguntar antes de substituir"
 
-#: controllers/view/replace/replacedialog.cpp:142
+#: controllers/view/replace/replacedialog.cpp:144
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Ask before replacing each match found."
@@ -1494,7 +1494,7 @@ msgctxt "@action:button"
 msgid "Replace"
 msgstr "Substituir"
 
-#: controllers/view/replace/replacetool.cpp:75
+#: controllers/view/replace/replacetool.cpp:77
 #, kde-format
 msgctxt "@title"
 msgid "Replace"
@@ -1506,25 +1506,25 @@ msgctxt "@info"
 msgid "Search key not found in byte array."
 msgstr "Chave de pesquisa não encontrada na lista de bytes."
 
-#: controllers/view/search/searchdialog.cpp:102
+#: controllers/view/search/searchdialog.cpp:104
 #, kde-format
 msgctxt "@title:window"
 msgid "Find Bytes"
 msgstr "Localizar bytes"
 
-#: controllers/view/search/searchdialog.cpp:104
+#: controllers/view/search/searchdialog.cpp:106
 #, kde-format
 msgctxt "@action:button"
 msgid "&Find"
 msgstr "&Localizar"
 
-#: controllers/view/search/searchdialog.cpp:106
+#: controllers/view/search/searchdialog.cpp:108
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Start searching"
 msgstr "Iniciar pesquisa"
 
-#: controllers/view/search/searchdialog.cpp:108
+#: controllers/view/search/searchdialog.cpp:110
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1534,7 +1534,7 @@ msgstr ""
 "Se clicar no botão <interface>Procurar</interface>, os bytes que você "
 "introduziu acima serão pesquisados dentro da lista de bytes."
 
-#: controllers/view/search/searchtool.cpp:76
+#: controllers/view/search/searchtool.cpp:78
 #, kde-format
 msgctxt "@title"
 msgid "Search"
