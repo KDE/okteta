@@ -5,9 +5,12 @@ include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/.. # okteta core includes
 )
 
-# make sure to not use KDE_EXPORT or KDE_IMPORT because we link statically
-# against a small part of the libs
-add_definitions(-DOKTETACORE_STATIC_DEFINE)
+# Configure export macros to be setup as with a static lib
+# as the source files are reused for the tests.
+# Saves doing a separate export header.
+add_definitions(
+    -DOKTETACORE_STATICLIB
+)
 
 # helper
 add_library(oktetacoretestutil  STATIC)

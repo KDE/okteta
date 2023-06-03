@@ -115,8 +115,17 @@ function(_okteta_generate_export_code)
         check_cxx_compiler_flag("-fvisibility=hidden" COMPILER_SUPPORTS_HIDDEN_VISIBILITY)
     endif()
 
+    set(_staticlib_macro_name "${ARGS_PREFIX}_STATICLIB")
     set(_export_macro_name "${ARGS_PREFIX}_EXPORT")
-    set(_content "#ifndef ${_export_macro_name}\n")
+    set(_no_export_macro_name "${ARGS_PREFIX}_NO_EXPORT")
+    set(_content
+"#ifdef ${_staticlib_macro_name}
+#  define ${_export_macro_name}
+#  define ${_no_export_macro_name}
+#else
+#  ifndef ${_export_macro_name}
+"
+    )
     if(WIN32)
         get_target_property(_building_lib_flag ${ARGS_TARGET_NAME} DEFINE_SYMBOL)
 
@@ -127,36 +136,39 @@ function(_okteta_generate_export_code)
         endif()
 
         string(APPEND _content
-"#  ifdef ${_building_lib_flag}
-     // Library is built
-#    define ${_export_macro_name} __declspec(dllexport)
-#  else
-     // Library is consumed
-#    define ${_export_macro_name} __declspec(dllimport)
-#  endif
+"#   ifdef ${_building_lib_flag}
+       // Library is built
+#      define ${_export_macro_name} __declspec(dllexport)
+#    else
+       // Library is consumed
+#      define ${_export_macro_name} __declspec(dllimport)
+#    endif
 "
         )
     else()
         if(COMPILER_SUPPORTS_HIDDEN_VISIBILITY)
-            string(APPEND _content "#  define ${_export_macro_name} __attribute__((visibility(\"default\")))\n")
+            string(APPEND _content "#    define ${_export_macro_name} __attribute__((visibility(\"default\")))\n")
         else()
-            string(APPEND _content "#  define ${_export_macro_name}\n")
+            string(APPEND _content "#    define ${_export_macro_name}\n")
         endif()
     endif()
-    string(APPEND _content "#endif\n")
+    string(APPEND _content "#  endif\n")
 
-    set(_no_export_macro_name "${ARGS_PREFIX}_NO_EXPORT")
-    string(APPEND _content "#ifndef ${_no_export_macro_name}\n")
+    string(APPEND _content "#  ifndef ${_no_export_macro_name}\n")
     if(WIN32)
-        string(APPEND _content "#  define ${_no_export_macro_name}\n")
+        string(APPEND _content "#    define ${_no_export_macro_name}\n")
     else()
         if(COMPILER_SUPPORTS_HIDDEN_VISIBILITY)
-            string(APPEND _content "#  define ${_no_export_macro_name} __attribute__((visibility(\"hidden\")))\n")
+            string(APPEND _content "#    define ${_no_export_macro_name} __attribute__((visibility(\"hidden\")))\n")
         else()
-            string(APPEND _content "#  define ${_no_export_macro_name}\n")
+            string(APPEND _content "#    define ${_no_export_macro_name}\n")
         endif()
     endif()
-    string(APPEND _content "#endif\n")
+    string(APPEND _content
+"#  endif
+#endif
+"
+    )
 
     set(${ARGS_CODE_VARIABLE} "${_content}" PARENT_SCOPE)
 endfunction()
