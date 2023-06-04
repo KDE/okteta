@@ -1,5 +1,3 @@
-set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
-
 include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}/.. # for oktetacore_export.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/.. # okteta core includes
@@ -14,10 +12,14 @@ add_definitions(
 
 # helper
 add_library(oktetacoretestutil  STATIC)
-target_link_libraries(oktetacoretestutil PUBLIC Qt5::Core)
 target_sources(oktetacoretestutil PRIVATE
     util/fill.cpp
 )
+target_link_libraries(oktetacoretestutil
+    PUBLIC
+        Qt5::Core
+)
+
 
 ecm_add_test(
     arraychangemetricstest.cpp

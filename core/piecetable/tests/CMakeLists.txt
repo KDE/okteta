@@ -1,4 +1,3 @@
-set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 set( SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/../.. )
 
 include_directories(
@@ -9,7 +8,11 @@ add_library(testpiecetablechangelib STATIC
     abstractpiecetablechangeiftest.cpp
     testpiecetablechange.cpp
 )
-target_link_libraries( testpiecetablechangelib  testoktetacore Qt5::Test Qt5::Core )
+target_link_libraries( testpiecetablechangelib
+    PUBLIC
+        testoktetacore
+        Qt5::Test
+)
 
 
 ########### piecetest ###############

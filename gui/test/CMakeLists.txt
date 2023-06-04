@@ -1,16 +1,15 @@
-set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
 set(SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/..)
+
+include_directories(
+    ${SUTDIR}
+    ${CMAKE_CURRENT_BINARY_DIR}/..
+)
 
 # Configure export macros to be setup as with a static lib
 # as the source files are reused for the tests.
 # Saves doing a separate export header.
 add_definitions(
     -DOKTETAGUI_STATICLIB
-)
-
-include_directories(
-    ${SUTDIR}
-    ${CMAKE_CURRENT_BINARY_DIR}/..
 )
 
 ecm_add_test(

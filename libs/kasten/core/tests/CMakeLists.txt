@@ -1,5 +1,3 @@
-set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
-
 set( SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/.. )
 
 include_directories(
@@ -14,10 +12,15 @@ include_directories(
 ########### util ###############
 
 add_library(kastencoretestutil STATIC)
-target_link_libraries(kastencoretestutil PRIVATE Qt5::Test Qt5::Core)
 target_sources(kastencoretestutil
     PRIVATE
         util/filesystem.cpp
+)
+target_link_libraries(kastencoretestutil
+    PUBLIC
+        Qt5::Core
+    PRIVATE
+        Qt5::Test
 )
 
 ########### io ###############

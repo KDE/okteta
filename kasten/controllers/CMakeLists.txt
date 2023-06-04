@@ -751,7 +751,16 @@ target_include_directories(OktetaKastenControllersTemplates
 # Configure export macros to be setup as with a static lib
 # as the source files are reused for static OktetaKastenControllersTemplates
 # Saves doing a separate export header.
-target_compile_definitions(OktetaKastenControllersTemplates PUBLIC OKTETAKASTENCONTROLLERS_STATICLIB)
-target_link_libraries(OktetaKastenControllersTemplates  KF5::I18n Qt5::Widgets OktetaCore)
+target_compile_definitions(OktetaKastenControllersTemplates
+    PUBLIC
+        OKTETAKASTENCONTROLLERS_STATICLIB
+)
+target_link_libraries(OktetaKastenControllersTemplates
+    PUBLIC
+        OktetaCore
+        Qt5::Widgets
+    PRIVATE
+        KF5::I18n
+)
 
 endif()

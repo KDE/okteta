@@ -136,11 +136,22 @@ if(BUILD_TESTING)
     get_property(oktetacore_LIB_OBJS TARGET OktetaCore PROPERTY SOURCES)
     target_sources(testoktetacore PRIVATE ${oktetacore_LIB_OBJS})
     # Configure export macros to be setup as with a static lib
-    # as the source files are reused for static oktetacoretestutil
+    # as the source files are reused for static testoktetacore
     # Saves doing a separate export header.
-    target_compile_definitions(testoktetacore PUBLIC OKTETACORE_STATICLIB)
-    target_include_directories(testoktetacore PUBLIC ${CMAKE_CURRENT_BINARY_DIR})
-    target_link_libraries(testoktetacore Qt5::Core KF5::I18n)
+    target_compile_definitions(testoktetacore
+        PUBLIC
+            OKTETACORE_STATICLIB
+    )
+    target_include_directories(testoktetacore
+        PUBLIC
+            ${CMAKE_CURRENT_BINARY_DIR}
+    )
+    target_link_libraries(testoktetacore
+        PUBLIC
+            Qt5::Core
+        PRIVATE
+            KF5::I18n
+    )
 
     add_subdirectory(piecetable/tests)
     add_subdirectory(tests)
