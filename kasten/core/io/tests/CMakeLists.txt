@@ -35,7 +35,7 @@ target_sources(oktetakastenio
 # Configure export macros to be setup as with a static lib
 # as the source files are reused for static oktetakastenio
 # Saves doing a separate export header.
-target_compile_definitions(oktetakastenio PUBLIC DOKTETAKASTENCORE_STATICLIB)
+target_compile_definitions(oktetakastenio PUBLIC OKTETAKASTENCORE_STATICLIB)
 
 ########### bytearrayrawfilesynchronizertest ###############
 
