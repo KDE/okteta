@@ -59,14 +59,3 @@ ecm_add_test(
 # FIXME:
 # this is a rather stupid workaround - you should link to liboktetagui instead
 set_tests_properties(libokteta-gui-bytearraytablecursortest PROPERTIES COMPILE_FLAGS "-DMAKE_OKTETAGUI_LIB" )
-
-
-########### mvctest ###############
-
-#set( mvctest_SRCS mvctest.cpp )
-
-##kde4_add_unit_test(mvctest TESTNAME okteta-mvctest  ${mvctest_SRCS} )
-
-# target_link_libraries( mvctest  oktetacore oktetagui )
-
-########### install files ###############
