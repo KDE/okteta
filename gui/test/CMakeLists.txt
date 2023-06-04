@@ -44,9 +44,6 @@ ecm_add_test(
   TEST_NAME bytearraytablelayouttest
   NAME_PREFIX libokteta-gui-
   LINK_LIBRARIES OktetaCore Qt5::Test )
-# FIXME:
-# this is a rather stupid workaround - you should link to liboktetagui instead
-set_tests_properties( libokteta-gui-bytearraytablelayouttest PROPERTIES COMPILE_FLAGS "-DMAKE_OKTETAGUI_LIB" )
 
 
 ecm_add_test(
@@ -56,6 +53,3 @@ ecm_add_test(
   TEST_NAME bytearraytablecursortest
   NAME_PREFIX libokteta-gui-
   LINK_LIBRARIES OktetaCore Qt5::Test )
-# FIXME:
-# this is a rather stupid workaround - you should link to liboktetagui instead
-set_tests_properties(libokteta-gui-bytearraytablecursortest PROPERTIES COMPILE_FLAGS "-DMAKE_OKTETAGUI_LIB" )
