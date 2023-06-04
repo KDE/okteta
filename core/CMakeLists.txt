@@ -125,7 +125,13 @@ okteta_add_pkgconfig(Core NAMESPACE Okteta
 
 if(BUILD_TESTING)
   add_library( testoktetacore STATIC ${oktetacore_LIB_OBJS} )
-  set_target_properties( testoktetacore PROPERTIES COMPILE_FLAGS -DOKTETACORE_STATIC_DEFINE )
+  # Configure export macros to be setup as with a static lib
+  # as the source files are reused for static testoktetacore
+  # Saves doing a separate export header.
+  target_compile_definitions( testoktetacore
+    PUBLIC
+      OKTETACORE_STATIC_DEFINE
+  )
   target_include_directories( testoktetacore PUBLIC ${CMAKE_CURRENT_BINARY_DIR} )
   target_link_libraries( testoktetacore
     PUBLIC

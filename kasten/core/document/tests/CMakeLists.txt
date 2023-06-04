@@ -1,16 +1,18 @@
 set( SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/.. )
 
-# make sure to not use KDE_EXPORT or KDE_IMPORT because we link statically
-# against a small part of the libs
-add_definitions(-DOKTETACORE_EXPORT=)
-add_definitions(-DOKTETAKASTENCORE_EXPORT=)
 set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
-
 
 include_directories(
   ${CMAKE_CURRENT_BINARY_DIR}/../..
   ${SUTDIR}
   ${SUTDIR}/..
+)
+
+# Configure export macros to be setup as with a static lib
+# as the source files are reused for the tests.
+# Saves doing a separate export header.
+add_definitions(
+  -DOKTETAKASTENCORE_STATIC_DEFINE
 )
 
 ########### bytearraydocumenttest ###############

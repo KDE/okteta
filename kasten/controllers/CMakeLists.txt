@@ -747,8 +747,13 @@ target_include_directories(oktetakastencontrollertemplates
         view/libbytearraychecksum
         view/libbytearraychecksum/algorithm
 )
-# MSVC needs this
-target_compile_definitions( oktetakastencontrollertemplates PUBLIC OKTETAKASTENCONTROLLERS_STATIC_DEFINE=1 )
+# Configure export macros to be setup as with a static lib
+# as the source files are reused for static oktetakastencontrollertemplates
+# Saves doing a separate export header.
+target_compile_definitions(oktetakastencontrollertemplates
+    PUBLIC
+        OKTETAKASTENCONTROLLERS_STATIC_DEFINE
+)
 target_link_libraries( oktetakastencontrollertemplates
     PUBLIC
         OktetaCore

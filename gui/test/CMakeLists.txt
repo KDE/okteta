@@ -1,13 +1,16 @@
 set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 set( SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/.. )
 
-# make sure to not use KDE_EXPORT or KDE_IMPORT because we link statically
-# against a small part of the libs
-add_definitions( -DOKTETACORE_STATIC_DEFINE -DOKTETAGUI_STATIC_DEFINE )
-
 include_directories(
   ${SUTDIR}
   ${CMAKE_CURRENT_BINARY_DIR}/..
+)
+
+# Configure export macros to be setup as with a static lib
+# as the source files are reused for the tests.
+# Saves doing a separate export header.
+add_definitions(
+  -DOKTETAGUI_STATIC_DEFINE
 )
 
 ecm_add_test(
