@@ -749,6 +749,12 @@ target_include_directories(oktetakastencontrollertemplates
 )
 # MSVC needs this
 target_compile_definitions( oktetakastencontrollertemplates PUBLIC OKTETAKASTENCONTROLLERS_STATIC_DEFINE=1 )
-target_link_libraries( oktetakastencontrollertemplates   KF5::I18n Qt5::Widgets OktetaCore )
+target_link_libraries( oktetakastencontrollertemplates
+    PUBLIC
+        OktetaCore
+        Qt5::Widgets
+    PRIVATE
+        KF5::I18n
+)
 
 endif()

@@ -13,7 +13,11 @@ add_library( testpiecetablechangelib STATIC
   abstractpiecetablechangeiftest.cpp
   testpiecetablechange.cpp
 )
-target_link_libraries( testpiecetablechangelib  testoktetacore Qt5::Test Qt5::Core )
+target_link_libraries( testpiecetablechangelib
+  PUBLIC
+    testoktetacore
+    Qt5::Test
+)
 
 
 ########### piecetest ###############

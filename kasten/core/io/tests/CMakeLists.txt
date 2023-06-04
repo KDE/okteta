@@ -29,7 +29,14 @@ set( oktetakastenio_LIB_SRCS
 )
 
 add_library( oktetakastenio  STATIC ${oktetakastenio_LIB_SRCS} )
-target_link_libraries( oktetakastenio  KastenCore OktetaCore KF5::I18n KF5::CoreAddons Qt5::Core )
+target_link_libraries( oktetakastenio
+  PUBLIC
+    KastenCore
+    OktetaCore
+  PRIVATE
+    KF5::I18n
+    KF5::CoreAddons
+)
 
 
 ########### bytearrayrawfilesynchronizertest ###############
