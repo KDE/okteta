@@ -40,16 +40,18 @@ const QString StringDataInformation::encodingNames[static_cast<int>(StringDataIn
 
 StringDataInformation::StringDataInformation(const QString& name, StringType encoding, DataInformationBase* parent)
     : DataInformationWithDummyChildren(name, parent)
-    , mDummy(new DummyDataInformation(this))
+    , mDummy(this)
     , mData(nullptr)
 {
+    mDummy.setWasAbleToRead(true);
     setEncoding(encoding); // sets mData
 }
 
 StringDataInformation::StringDataInformation(const StringDataInformation& d)
     : DataInformationWithDummyChildren(d)
-    , mDummy(new DummyDataInformation(this))
+    , mDummy(this)
 {
+    mDummy.setWasAbleToRead(true);
     setEncoding(d.mEncoding); // sets mData
     mData->copyTerminationFrom(d.mData.get());
 }
@@ -59,8 +61,8 @@ StringDataInformation::~StringDataInformation() = default;
 DataInformation* StringDataInformation::childAt(unsigned int index) const
 {
     Q_ASSERT(index < childCount());
-    mDummy->setDummyIndex(index);
-    return mDummy.get();
+    mDummy.setDummyIndex(index);
+    return const_cast<DummyDataInformation*>(&mDummy);
 }
 
 bool StringDataInformation::setData(const QVariant&, Okteta::AbstractByteArrayModel*,
@@ -144,8 +146,7 @@ QVariant StringDataInformation::childData(int row, int column, int role) const
     Q_ASSERT(column < COLUMN_COUNT);
     if (role == Qt::DisplayRole) {
         if (column == ColumnName) {
-            // TODO termination char
-            return QString(QLatin1Char('[') + QString::number(row) + QLatin1Char(']'));
+            return childNameAt(row);
         }
         if (column == ColumnType) {
             return mData->charType();
@@ -153,6 +154,10 @@ QVariant StringDataInformation::childData(int row, int column, int role) const
         if (column == ColumnValue) {
             return mData->stringValue(row);
         }
+    } else if (role == Qt::ToolTipRole) {
+        return DataInformation::tooltipString(childNameAt(row), mData->stringValue(row),
+                                              mData->charType(),
+                                              DataInformation::sizeString(childSize(row)));
     }
     // TODO mark eof reached, don't add extra item. i.e. add icon or colour
     return {};
@@ -241,6 +246,11 @@ QString StringDataInformation::childTypeName(uint index) const
     return {}; // XXX should there be something here?
 }
 
+QString StringDataInformation::childString(uint index) const
+{
+    return mData->stringValue(index);
+}
+
 void StringDataInformation::setChildWidgetData(uint index, QWidget* w) const
 {
     Q_ASSERT(false);
@@ -276,9 +286,9 @@ BitCount64 StringDataInformation::childPosition(const DataInformation* child, Ok
 {
     Q_ASSERT(child->isDummy());
     Q_ASSERT(child->parent() == this);
-    Q_ASSERT(child == mDummy.get());
+    Q_ASSERT(child == &mDummy);
     Q_UNUSED(child)
-    uint index = mDummy->dummyIndex();
+    uint index = mDummy.dummyIndex();
     Q_ASSERT(index < mData->count());
     BitCount32 offs = 0;
     for (uint i = 0; i < index; ++i) {

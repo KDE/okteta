@@ -16,8 +16,6 @@
 // Std
 #include <memory>
 
-class DummyDataInformation;
-
 class StringDataInformation : public DataInformationWithDummyChildren
 {
     DATAINFORMATION_CLONE_DECL(StringDataInformation, DataInformationWithDummyChildren);
@@ -62,6 +60,7 @@ public:
     Qt::ItemFlags childFlags(int row, int column, bool fileLoaded = true) const override;
     BitCount32 childSize(uint index) const override;
     QString childTypeName(uint index) const override;
+    QString childString(uint index) const override;
     void setChildWidgetData(uint index, QWidget* w) const override;
     QVariant dataFromChildWidget(uint index, const QWidget* w) const override;
     QWidget* createChildEditWidget(uint index, QWidget* parent) const override;
@@ -80,6 +79,7 @@ public:
     int stringLength() const;
     int stringByteLength() const;
     uint terminationMode() const;
+    QString childNameAt(int index) const;
     QString valueAt(int index) const;
     /** Removes this mode from the termination modes. If none is left, changes string to null terminated
      * @param mode The mode to remove
@@ -92,7 +92,7 @@ private:
     QString valueStringImpl() const override;
 
 private:
-    std::unique_ptr<DummyDataInformation> mDummy;
+    mutable DummyDataInformation mDummy;
     std::unique_ptr<StringData> mData;
     StringType mEncoding = StringType::InvalidEncoding;
 
@@ -151,6 +151,13 @@ inline int StringDataInformation::stringByteLength() const
 inline uint StringDataInformation::terminationMode() const
 {
     return mData->terminationMode();
+}
+
+inline QString StringDataInformation::childNameAt(int index) const
+{
+    Q_ASSERT((uint)index < mData->count());
+    // TODO termination char
+    return QString(QLatin1Char('[') + QString::number(index) + QLatin1Char(']'));
 }
 
 inline QString StringDataInformation::valueAt(int index) const

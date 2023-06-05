@@ -212,6 +212,11 @@ QString ArrayDataInformation::childTypeName(uint index) const
     return mData->dataAt(index, DataInformation::ColumnType, Qt::DisplayRole).toString();
 }
 
+QString ArrayDataInformation::childString(uint index) const
+{
+    return mData->dataAt(index, DataInformation::ColumnValue, Qt::DisplayRole).toString();
+}
+
 int ArrayDataInformation::indexOf(const DataInformation* const data) const
 {
     return mData->indexOf(data);

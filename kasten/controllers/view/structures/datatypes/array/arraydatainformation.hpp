@@ -17,9 +17,7 @@
 // Std
 #include <memory>
 
-class DummyDataInformation;
 class AbstractArrayData;
-class PrimitiveDataInformation;
 
 class ArrayDataInformation : public DataInformationWithDummyChildren
 {
@@ -60,6 +58,7 @@ public:
     unsigned int childCount() const override;
     bool canHaveChildren() const override;
     QString childTypeName(uint index) const override;
+    QString childString(uint index) const override;
     int indexOf(const DataInformation* const data) const override;
     BitCount32 childSize(uint index) const override;
 
