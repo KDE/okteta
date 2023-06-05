@@ -48,6 +48,7 @@ public:
 
 private:
     QScriptClass* scriptClass(ScriptHandlerInfo*) const override { Q_ASSERT(false); return nullptr; }
+    QString valueStringImpl() const override;
     QString typeNameImpl() const override;
 
 private:
@@ -79,6 +80,7 @@ public:
     virtual QVariant dataFromChildWidget(uint index, const QWidget* w) const = 0;
     /** initialize the delegate widget with the correct data */
     virtual void setChildWidgetData(uint index, QWidget* w) const = 0;
+    virtual QString childString(uint index) const = 0;
     virtual QString childTypeName(uint index) const = 0;
     virtual bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
                               Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset) = 0;

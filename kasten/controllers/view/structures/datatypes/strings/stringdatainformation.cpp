@@ -243,6 +243,11 @@ QString StringDataInformation::childTypeName(uint index) const
     return {}; // XXX should there be something here?
 }
 
+QString StringDataInformation::childString(uint index) const
+{
+    return mData->stringValue(index);
+}
+
 void StringDataInformation::setChildWidgetData(uint index, QWidget* w) const
 {
     Q_ASSERT(false);

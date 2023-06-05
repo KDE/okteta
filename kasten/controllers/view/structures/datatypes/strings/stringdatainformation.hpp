@@ -58,6 +58,7 @@ public:
     Qt::ItemFlags childFlags(int row, int column, bool fileLoaded = true) const override;
     BitCount32 childSize(uint index) const override;
     QString childTypeName(uint index) const override;
+    QString childString(uint index) const override;
     void setChildWidgetData(uint index, QWidget* w) const override;
     QVariant dataFromChildWidget(uint index, const QWidget* w) const override;
     QWidget* createChildEditWidget(uint index, QWidget* parent) const override;
