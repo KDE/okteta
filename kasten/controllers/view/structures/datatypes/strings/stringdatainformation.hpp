@@ -77,6 +77,7 @@ public:
     int stringLength() const;
     int stringByteLength() const;
     uint terminationMode() const;
+    QString childNameAt(int index) const;
     QString valueAt(int index) const;
     /** Removes this mode from the termination modes. If none is left, changes string to null terminated
      * @param mode The mode to remove
@@ -148,6 +149,13 @@ inline int StringDataInformation::stringByteLength() const
 inline uint StringDataInformation::terminationMode() const
 {
     return mData->terminationMode();
+}
+
+inline QString StringDataInformation::childNameAt(int index) const
+{
+    Q_ASSERT((uint)index < mData->count());
+    // TODO termination char
+    return QString(QLatin1Char('[') + QString::number(index) + QLatin1Char(']'));
 }
 
 inline QString StringDataInformation::valueAt(int index) const

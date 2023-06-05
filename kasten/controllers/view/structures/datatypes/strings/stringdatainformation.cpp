@@ -146,8 +146,7 @@ QVariant StringDataInformation::childData(int row, int column, int role) const
     Q_ASSERT(column < COLUMN_COUNT);
     if (role == Qt::DisplayRole) {
         if (column == ColumnName) {
-            // TODO termination char
-            return QString(QLatin1Char('[') + QString::number(row) + QLatin1Char(']'));
+            return childNameAt(row);
         }
         if (column == ColumnType) {
             return mData->charType();
@@ -155,6 +154,10 @@ QVariant StringDataInformation::childData(int row, int column, int role) const
         if (column == ColumnValue) {
             return mData->stringValue(row);
         }
+    } else if (role == Qt::ToolTipRole) {
+        return DataInformation::tooltipString(childNameAt(row), mData->stringValue(row),
+                                              mData->charType(),
+                                              DataInformation::sizeString(childSize(row)));
     }
     // TODO mark eof reached, don't add extra item. i.e. add icon or colour
     return {};

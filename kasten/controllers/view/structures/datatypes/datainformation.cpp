@@ -51,15 +51,20 @@ DataInformation::~DataInformation()
     SafeReferenceHolder::instance.invalidateAll(this);
 }
 
-QString DataInformation::sizeString() const
+QString DataInformation::sizeString(BitCount32 size)
 {
-    if (size() % 8 == 0) { // no bits remaining
-        return i18np("1 byte", "%1 bytes", size() / 8);
+    if (size % 8 == 0) { // no bits remaining
+        return i18np("1 byte", "%1 bytes", size / 8);
     }
 
-    QString bytes = i18np("1 byte", "%1 bytes", size() / 8);
-    QString bits = i18np("1 bit", "%1 bits", size() % 8);
+    const QString bytes = i18np("1 byte", "%1 bytes", size / 8);
+    const QString bits = i18np("1 bit", "%1 bits", size % 8);
     return i18nc("number of bytes, then number of bits", "%1 %2", bytes, bits);
+}
+
+QString DataInformation::sizeString() const
+{
+    return sizeString(size());
 }
 
 QString DataInformation::valueStringImpl() const
@@ -195,11 +200,24 @@ QVariant DataInformation::eofReachedData(int role)
     return {};
 }
 
+QString DataInformation::tooltipString(const QString& nameString, const QString& valueString,
+                                       const QString& typeString, const QString& sizeString,
+                                       const QString& validationMessage)
+{
+    if (validationMessage.isEmpty()) {
+        return i18n("Name: %1\nValue: %2\n\nType: %3\nSize: %4", nameString,
+                    valueString, typeString, sizeString);
+    }
+    return i18n("Name: %1\nValue: %2\n\nType: %3\nSize: %4\n\n%5", nameString,
+                valueString, typeString, sizeString, validationMessage);
+}
+
 QString DataInformation::tooltipString() const
 {
     QString valueStr = mWasAbleToRead ? valueString() : eofReachedData(Qt::DisplayRole).toString();
+    QString validationMsg;
     if (mHasBeenValidated && !mValidationSuccessful) {
-        QString validationMsg = validationError();
+        validationMsg = validationError();
         if (validationMsg.isEmpty()) {
             validationMsg = i18nc("not all values in this structure"
                                   " are as they should be", "Validation failed.");
@@ -207,12 +225,9 @@ QString DataInformation::tooltipString() const
             validationMsg = i18nc("not all values in this structure are as they should be",
                                   "Validation failed: \"%1\"", validationMsg);
         }
-        return i18n("Name: %1\nValue: %2\n\nType: %3\nSize: %4\n\n%5", name(),
-                    valueStr, typeName(), sizeString(), validationMsg);
     }
-
-    return i18n("Name: %1\nValue: %2\n\nType: %3\nSize: %4", name(),
-                valueStr, typeName(), sizeString());
+    return DataInformation::tooltipString(name(), valueStr, typeName(), sizeString(),
+                                          validationMsg);
 }
 
 DataInformation* DataInformation::child(const QString& name) const

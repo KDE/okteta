@@ -178,27 +178,50 @@ QVariant PrimitiveArrayData<type>::dataAt(uint index, int column, int role)
     Q_ASSERT(index < length());
     if (role == Qt::DisplayRole) {
         if (column == DataInformation::ColumnName) {
-            return QString(QLatin1Char('[') + QString::number(index) + QLatin1Char(']'));
+            return nameAt(index);
         }
         if (column == DataInformation::ColumnType) {
             return mChildType->typeName();
         }
         if (column == DataInformation::ColumnValue) {
-            // if we are outside the valid range
-            if (uint(index) >= this->mNumReadValues) {
-                return DataInformation::eofReachedData(Qt::DisplayRole);
-            }
-            if (Q_UNLIKELY(mChildType->toStringFunction().isValid())) {
-                activateIndex(index);
-                return mChildType->valueString();
-            }
-            return DisplayClass::staticValueString(mData.at(index));
+            return valueStringAt(index);
         }
     }
+    if (role == Qt::ToolTipRole) {
+        return DataInformation::tooltipString(nameAt(index), valueStringAt(index),
+                                              mChildType->typeName(), sizeStringAt(index));
+    }
+
     if (column == DataInformation::ColumnValue && uint(index) >= this->mNumReadValues) {
         return DataInformation::eofReachedData(role);
     }
     return {};
+}
+
+template <PrimitiveDataType type>
+QString PrimitiveArrayData<type>::nameAt(uint index) const
+{
+    return QString(QLatin1Char('[') + QString::number(index) + QLatin1Char(']'));
+}
+
+template <PrimitiveDataType type>
+QString PrimitiveArrayData<type>::valueStringAt(uint index)
+{
+    // if we are outside the valid range
+    if (index >= this->mNumReadValues) {
+        return DataInformation::eofReachedData(Qt::DisplayRole).toString();
+    }
+    if (Q_UNLIKELY(mChildType->toStringFunction().isValid())) {
+        activateIndex(index);
+        return mChildType->valueString();
+    }
+    return DisplayClass::staticValueString(mData.at(index));
+}
+
+template <PrimitiveDataType type>
+QString PrimitiveArrayData<type>::sizeStringAt(uint index)
+{
+    return DataInformation::sizeString(sizeAt(index));
 }
 
 template <PrimitiveDataType type>

@@ -53,6 +53,10 @@ public:
     QVariant dataFromChildWidget(uint index, const QWidget* w) const override;
     void setChildWidgetData(uint index, QWidget* w) const override;
 
+    QString nameAt(uint index) const;
+    QString valueStringAt(uint index); // cannot be const due to calling activateIndex()
+    QString sizeStringAt(uint index); // cannot be const due to calling sizeAt()
+
     static void writeOneItem(T value, Okteta::Address addr, Okteta::AbstractByteArrayModel* out, bool littleEndian);
 
 protected:
