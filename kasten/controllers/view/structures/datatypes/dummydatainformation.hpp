@@ -44,6 +44,8 @@ public:
     inline void setDummyIndex(uint newIndex) { mIndex = newIndex; }
     inline uint dummyIndex() const { return mIndex; }
 
+    inline void setWasAbleToRead(bool wasAbleToRead) { mWasAbleToRead = wasAbleToRead; }
+
 private:
     QScriptClass* scriptClass(ScriptHandlerInfo*) const override { Q_ASSERT(false); return nullptr; }
     QString typeNameImpl() const override;

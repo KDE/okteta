@@ -43,6 +43,7 @@ StringDataInformation::StringDataInformation(const QString& name, StringType enc
     , mDummy(this)
     , mData(nullptr)
 {
+    mDummy.setWasAbleToRead(true);
     setEncoding(encoding); // sets mData
 }
 
@@ -50,6 +51,7 @@ StringDataInformation::StringDataInformation(const StringDataInformation& d)
     : DataInformationWithDummyChildren(d)
     , mDummy(this)
 {
+    mDummy.setWasAbleToRead(true);
     setEncoding(d.mEncoding); // sets mData
     mData->copyTerminationFrom(d.mData.data());
 }
