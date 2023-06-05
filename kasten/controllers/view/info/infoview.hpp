@@ -37,6 +37,8 @@ public Q_SLOTS:
 
 private Q_SLOTS:
     void resizeColumnsWidth();
+    void onCopyButtonClicked();
+    void onTableSelectionChanged();
 
 private:
     InfoTool* mTool;
@@ -44,6 +46,7 @@ private:
     QLabel* mSizeLabel;
     QTreeView* mStatisticTableView;
     QAction* mUpdateAction;
+    QAction* mCopyAction;
 };
 
 inline InfoTool* InfoView::tool() const { return mTool; }

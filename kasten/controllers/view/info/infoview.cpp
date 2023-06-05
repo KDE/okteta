@@ -18,6 +18,7 @@
 #include <KLocalizedString>
 // Qt
 #include <QApplication>
+#include <QClipboard>
 #include <QSortFilterProxyModel>
 #include <QToolBar>
 #include <QLabel>
@@ -37,8 +38,8 @@ InfoView::InfoView(InfoTool* tool, QWidget* parent)
     baseLayout->setContentsMargins(0, 0, 0, 0);
     baseLayout->setSpacing(0);
 
-    auto* actionToolBar = new QToolBar(this);
-    actionToolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
+    auto* buildToolBar = new QToolBar(this);
+    buildToolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
 
     auto* label = new QLabel(i18nc("@label size of selected bytes", "Size:"), this);
 
@@ -49,19 +50,19 @@ InfoView::InfoView(InfoTool* tool, QWidget* parent)
     label->setToolTip(sizeToolTip);
     mSizeLabel->setToolTip(sizeToolTip);
     auto* labelledSizeLabel = new LabelledToolBarWidget(label, mSizeLabel, this);
-    actionToolBar->addWidget(labelledSizeLabel);
+    buildToolBar->addWidget(labelledSizeLabel);
     connect(mTool->statisticTableModel(), &StatisticTableModel::sizeChanged,
             this, &InfoView::setByteArraySize);
 
     auto* stretcher = new QWidget(this);
     stretcher->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
-    actionToolBar->addWidget(stretcher);
+    buildToolBar->addWidget(stretcher);
 
     mUpdateAction =
-        actionToolBar->addAction(QIcon::fromTheme(QStringLiteral("run-build")),
-                                 i18nc("@action:button build the statistic of the byte frequency",
-                                       "&Build"),
-                                 mTool, &InfoTool::updateStatistic);
+        buildToolBar->addAction(QIcon::fromTheme(QStringLiteral("run-build")),
+                                i18nc("@action:button build the statistic of the byte frequency",
+                                      "&Build"),
+                                mTool, &InfoTool::updateStatistic);
     mUpdateAction->setToolTip(i18nc("@info:tooltip",
                                     "Builds the byte frequency statistic for the bytes in the selected range."));
     mUpdateAction->setWhatsThis(xi18nc("@info:whatsthis",
@@ -70,7 +71,7 @@ InfoView::InfoView(InfoTool* tool, QWidget* parent)
     mUpdateAction->setEnabled(mTool->isApplyable());
     connect(mTool, &InfoTool::isApplyableChanged, mUpdateAction, &QAction::setEnabled);
 
-    baseLayout->addWidget(actionToolBar);
+    baseLayout->addWidget(buildToolBar);
 
     mStatisticTableView = new QTreeView(this);
     // TODO: find a signal/event emitted when fixedfont changes
@@ -85,21 +86,48 @@ InfoView::InfoView(InfoTool* tool, QWidget* parent)
     mStatisticTableView->setItemsExpandable(false);
     mStatisticTableView->setUniformRowHeights(true);
     mStatisticTableView->setAllColumnsShowFocus(true);
+    mStatisticTableView->setSelectionMode(QAbstractItemView::ExtendedSelection);
     mStatisticTableView->setSortingEnabled(true);
     QHeaderView* header = mStatisticTableView->header();
     header->setSectionResizeMode(QHeaderView::Interactive);
     header->setStretchLastSection(false);
-    // TODO: write subclass to filter count and percent by num, not string
     auto* proxyModel = new QSortFilterProxyModel(this);
     proxyModel->setDynamicSortFilter(true);
+    proxyModel->setSortRole(StatisticTableModel::SortRole);
     proxyModel->setSourceModel(mTool->statisticTableModel());
     mStatisticTableView->setModel(proxyModel);
     mStatisticTableView->sortByColumn(StatisticTableModel::CountId, Qt::DescendingOrder);
     connect(mTool->statisticTableModel(), &StatisticTableModel::headerChanged, this, &InfoView::updateHeader);
+    connect(mStatisticTableView->selectionModel(), &QItemSelectionModel::selectionChanged,
+            this, &InfoView::onTableSelectionChanged);
 
     baseLayout->addWidget(mStatisticTableView, 10);
 
+    // actions
+    auto* actionsToolBar = new QToolBar(this);
+    actionsToolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
+
+    mCopyAction =
+        actionsToolBar->addAction(QIcon::fromTheme(QStringLiteral("edit-copy")),
+                                  i18n("C&opy"),
+                                  this, &InfoView::onCopyButtonClicked);
+    mCopyAction->setToolTip(i18nc("@info:tooltip",
+                                  "Copies the selected statistic lines to the clipboard."));
+    mCopyAction->setWhatsThis(xi18nc("@info:whatsthis",
+                                     "If you press the <interface>Copy</interface> button, all statistic lines you selected "
+                                     "in the list are copied to the clipboard."));
+
+    actionsToolBar->addAction(mCopyAction);
+
+    auto* actionsStretcher = new QWidget(this);
+    actionsStretcher->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+    actionsToolBar->addWidget(actionsStretcher);
+
+    baseLayout->addWidget(actionsToolBar);
+
+    // init
     setByteArraySize(mTool->size());
+    onTableSelectionChanged();
 
     // if nothing has changed reuse the old values. This means the info view is fully constructed much quicker.
     const QList<int> columnsWidth = InfoViewSettings::columnsWidth();
@@ -156,5 +184,33 @@ void InfoView::setByteArraySize(int size)
 
     mSizeLabel->setText(sizeText);
 }
+
+void InfoView::onCopyButtonClicked()
+{
+    QString lines;
+
+    const QModelIndexList rows = mStatisticTableView->selectionModel()->selectedRows();
+    for (const QModelIndex& rowIndex : rows) {
+        for (int column = 0; column < StatisticTableModel::NoOfIds; ++column) {
+            lines += rowIndex.siblingAtColumn(column).data(Qt::DisplayRole).toString();
+            // add tab, but for last linefeed
+            lines += (column < StatisticTableModel::NoOfIds - 1) ? QLatin1Char('\t') :
+            QLatin1Char('\n'); // TODO: specific linefeed for platforms
+        }
+    }
+
+    QApplication::clipboard()->setText(lines);
+}
+
+void InfoView::onTableSelectionChanged()
+{
+    const QItemSelectionModel* selectionModel = mStatisticTableView->selectionModel();
+
+    // TODO: selectionModel->selectedIndexes() is a expensive operation,
+    // but with Qt 4.4.3 hasSelection() has the flaw to return true with a current index
+    const bool hasSelection = !selectionModel->selectedIndexes().isEmpty();
+    mCopyAction->setEnabled(hasSelection);
+}
+
 
 }
