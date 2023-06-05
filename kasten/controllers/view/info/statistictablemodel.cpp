@@ -123,7 +123,8 @@ int StatisticTableModel::columnCount(const QModelIndex& parent) const
 QVariant StatisticTableModel::data(const QModelIndex& index, int role) const
 {
     QVariant result;
-    if (role == Qt::DisplayRole) {
+    if ((role == Qt::DisplayRole) ||
+        (role == SortRole)) {
         const unsigned char byte = index.row();
         const int column = index.column();
         switch (column)
@@ -154,11 +155,15 @@ QVariant StatisticTableModel::data(const QModelIndex& index, int role) const
                      QVariant(mByteCount[byte]);
             break;
         case PercentId:
-            result = (mSize > 0) ?
-                     // TODO: before we printed only a string (which killed sorting) with QString::number( x, 'f', 6 )
-                     // Qt now cuts trailing 0s, results in unaligned numbers, not so beautiful.
-                     QVariant(100.0 * (double)mByteCount[byte] / mSize) :
-                     QVariant(QStringLiteral("-"));
+            if (role == SortRole) {
+                result =  (mSize == -1) ?
+                        QVariant() :
+                        QVariant(mByteCount[byte]);
+            } else {
+                result = (mSize > 0) ?
+                        QVariant(QString::number(100.0 * (double)mByteCount[byte] / mSize, 'f', 6)) :
+                        QVariant(QStringLiteral("-"));
+            }
             break;
         default:
             ;

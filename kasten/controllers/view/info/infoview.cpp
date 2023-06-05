@@ -95,6 +95,7 @@ InfoView::InfoView(InfoTool* tool, QWidget* parent)
     // TODO: write subclass to filter count and percent by num, not string
     auto* proxyModel = new QSortFilterProxyModel(this);
     proxyModel->setDynamicSortFilter(true);
+    proxyModel->setSortRole(StatisticTableModel::SortRole);
     proxyModel->setSourceModel(mTool->statisticTableModel());
     mStatisticTableView->setModel(proxyModel);
     mStatisticTableView->sortByColumn(StatisticTableModel::CountId, Qt::DescendingOrder);

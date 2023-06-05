@@ -36,6 +36,10 @@ public:
         NoOfIds = 4 // TODO: what pattern is usually used to mark number of ids?
     };
 
+    enum Roles {
+        SortRole = Qt::UserRole,
+    };
+
 public:
     explicit StatisticTableModel(int* byteCount, QObject* parent = nullptr);
     ~StatisticTableModel() override;
