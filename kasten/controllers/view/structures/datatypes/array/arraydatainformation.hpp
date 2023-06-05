@@ -15,9 +15,7 @@
 #include <QVariant>
 #include <QScriptValue>
 
-class DummyDataInformation;
 class AbstractArrayData;
-class PrimitiveDataInformation;
 
 class ArrayDataInformation : public DataInformationWithDummyChildren
 {

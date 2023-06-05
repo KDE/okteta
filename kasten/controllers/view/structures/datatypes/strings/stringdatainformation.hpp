@@ -14,8 +14,6 @@
 #include "../dummydatainformation.hpp"
 #include "stringdata.hpp"
 
-class DummyDataInformation;
-
 class StringDataInformation : public DataInformationWithDummyChildren
 {
     DATAINFORMATION_CLONE_DECL(StringDataInformation, DataInformationWithDummyChildren);
