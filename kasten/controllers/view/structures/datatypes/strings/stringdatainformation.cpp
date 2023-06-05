@@ -40,7 +40,7 @@ const QString StringDataInformation::encodingNames[static_cast<int>(StringDataIn
 
 StringDataInformation::StringDataInformation(const QString& name, StringType encoding, DataInformationBase* parent)
     : DataInformationWithDummyChildren(name, parent)
-    , mDummy(new DummyDataInformation(this))
+    , mDummy(this)
     , mData(nullptr)
 {
     setEncoding(encoding); // sets mData
@@ -48,7 +48,7 @@ StringDataInformation::StringDataInformation(const QString& name, StringType enc
 
 StringDataInformation::StringDataInformation(const StringDataInformation& d)
     : DataInformationWithDummyChildren(d)
-    , mDummy(new DummyDataInformation(this))
+    , mDummy(this)
 {
     setEncoding(d.mEncoding); // sets mData
     mData->copyTerminationFrom(d.mData.data());
@@ -59,8 +59,8 @@ StringDataInformation::~StringDataInformation() = default;
 DataInformation* StringDataInformation::childAt(unsigned int index) const
 {
     Q_ASSERT(index < childCount());
-    mDummy->setDummyIndex(index);
-    return mDummy.data();
+    mDummy.setDummyIndex(index);
+    return const_cast<DummyDataInformation*>(&mDummy);
 }
 
 bool StringDataInformation::setData(const QVariant&, Okteta::AbstractByteArrayModel*,
@@ -276,9 +276,9 @@ BitCount64 StringDataInformation::childPosition(const DataInformation* child, Ok
 {
     Q_ASSERT(child->isDummy());
     Q_ASSERT(child->parent() == this);
-    Q_ASSERT(child == mDummy.data());
+    Q_ASSERT(child == &mDummy);
     Q_UNUSED(child)
-    uint index = mDummy->dummyIndex();
+    uint index = mDummy.dummyIndex();
     Q_ASSERT(index < mData->count());
     BitCount32 offs = 0;
     for (uint i = 0; i < index; ++i) {

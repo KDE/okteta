@@ -88,7 +88,7 @@ private:
     QString valueStringImpl() const override;
 
 private:
-    QScopedPointer<DummyDataInformation> mDummy;
+    mutable DummyDataInformation mDummy;
     QScopedPointer<StringData> mData;
     StringType mEncoding = StringType::InvalidEncoding;
 
