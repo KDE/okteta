@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-03 02:40+0000\n"
+"POT-Creation-Date: 2023-06-06 02:42+0000\n"
 "PO-Revision-Date: 2021-06-05 15:01+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -184,77 +184,77 @@ msgid ""
 msgstr "이 단추를 누르면 마지막으로 선택한 책갈피를 편집합니다."
 
 #: controllers/view/bytetable/bytetablemodel.cpp:119
-#: controllers/view/info/statistictablemodel.cpp:136
+#: controllers/view/info/statistictablemodel.cpp:137
 #, kde-format
 msgctxt "@item:intable character is not defined"
 msgid "undef."
 msgstr "미정."
 
 #: controllers/view/bytetable/bytetablemodel.cpp:156
-#: controllers/view/info/statistictablemodel.cpp:209
+#: controllers/view/info/statistictablemodel.cpp:214
 #, kde-format
 msgctxt "@title:column short for Decimal"
 msgid "Dec"
 msgstr "10진"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:157
-#: controllers/view/info/statistictablemodel.cpp:208
+#: controllers/view/info/statistictablemodel.cpp:213
 #, kde-format
 msgctxt "@title:column short for Hexadecimal"
 msgid "Hex"
 msgstr "16진"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:158
-#: controllers/view/info/statistictablemodel.cpp:210
+#: controllers/view/info/statistictablemodel.cpp:215
 #, kde-format
 msgctxt "@title:column short for Octal"
 msgid "Oct"
 msgstr "8진"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:159
-#: controllers/view/info/statistictablemodel.cpp:211
+#: controllers/view/info/statistictablemodel.cpp:216
 #, kde-format
 msgctxt "@title:column short for Binary"
 msgid "Bin"
 msgstr "2진"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:160
-#: controllers/view/info/statistictablemodel.cpp:213
+#: controllers/view/info/statistictablemodel.cpp:218
 #, kde-format
 msgctxt "@title:column short for Character"
 msgid "Char"
 msgstr "문자"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:166
-#: controllers/view/info/statistictablemodel.cpp:224
+#: controllers/view/info/statistictablemodel.cpp:229
 #, kde-format
 msgctxt "@info:tooltip column contains the value in decimal format"
 msgid "Decimal"
 msgstr "10진수"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:168
-#: controllers/view/info/statistictablemodel.cpp:222
+#: controllers/view/info/statistictablemodel.cpp:227
 #, kde-format
 msgctxt "@info:tooltip column contains the value in hexadecimal format"
 msgid "Hexadecimal"
 msgstr "16진수"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:170
-#: controllers/view/info/statistictablemodel.cpp:226
+#: controllers/view/info/statistictablemodel.cpp:231
 #, kde-format
 msgctxt "@info:tooltip column contains the value in octal format"
 msgid "Octal"
 msgstr "8진수"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:172
-#: controllers/view/info/statistictablemodel.cpp:228
+#: controllers/view/info/statistictablemodel.cpp:233
 #, kde-format
 msgctxt "@info:tooltip column contains the value in binary format"
 msgid "Binary"
 msgstr "2진수"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:174
-#: controllers/view/info/statistictablemodel.cpp:232
+#: controllers/view/info/statistictablemodel.cpp:237
 #, kde-format
 msgctxt "@info:tooltip column contains the character with the value"
 msgid "Character"
@@ -649,32 +649,32 @@ msgctxt "@title:window"
 msgid "Statistics"
 msgstr "통계"
 
-#: controllers/view/info/infoview.cpp:43
+#: controllers/view/info/infoview.cpp:45
 #, kde-format
 msgctxt "@label size of selected bytes"
 msgid "Size:"
 msgstr "크기:"
 
-#: controllers/view/info/infoview.cpp:48
+#: controllers/view/info/infoview.cpp:50
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The number of the bytes the statistic was built for."
 msgstr "통계를 생성한 바이트 수입니다."
 
-#: controllers/view/info/infoview.cpp:63
+#: controllers/view/info/infoview.cpp:65
 #, kde-format
 msgctxt "@action:button build the statistic of the byte frequency"
 msgid "&Build"
 msgstr "계산(&B)"
 
-#: controllers/view/info/infoview.cpp:66
+#: controllers/view/info/infoview.cpp:68
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "Builds the byte frequency statistic for the bytes in the selected range."
 msgstr "선택한 범위에 포함된 바이트 빈도수를 계산합니다."
 
-#: controllers/view/info/infoview.cpp:68
+#: controllers/view/info/infoview.cpp:70
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -684,7 +684,7 @@ msgstr ""
 "<interface>계산</interface> 단추를 누르면 선택한 범위에 포함된 바이트 빈도수"
 "를 계산합니다."
 
-#: controllers/view/info/infoview.cpp:155
+#: controllers/view/info/infoview.cpp:178
 #: controllers/view/structures/datatypes/datainformation.cpp:57
 #: controllers/view/structures/datatypes/datainformation.cpp:60
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:217
@@ -693,13 +693,13 @@ msgid "1 byte"
 msgid_plural "%1 bytes"
 msgstr[0] "%1바이트"
 
-#: controllers/view/info/statistictablemodel.cpp:214
+#: controllers/view/info/statistictablemodel.cpp:219
 #, kde-format
 msgctxt "@title:column count of characters"
 msgid "Count"
 msgstr "개수"
 
-#: controllers/view/info/statistictablemodel.cpp:215
+#: controllers/view/info/statistictablemodel.cpp:220
 #, kde-format
 msgctxt "@title:column Percent of byte in total"
 msgid "Percent"
@@ -1658,27 +1658,28 @@ msgctxt "number of bytes, then number of bits"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:190
+#: controllers/view/structures/datatypes/datainformation.cpp:195
 #, kde-format
 msgctxt "invalid value (End of file reached)"
 msgid "<EOF reached>"
 msgstr "<파일의 끝에 도달함>"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:205
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:230
-#, kde-format
-msgctxt "not all values in this structure are as they should be"
-msgid "Validation failed."
-msgstr "검증에 실패했습니다."
-
 #: controllers/view/structures/datatypes/datainformation.cpp:208
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:233
 #, kde-format
-msgctxt "not all values in this structure are as they should be"
-msgid "Validation failed: \"%1\""
-msgstr "검증 실패: \"%1\""
+msgid ""
+"Name: %1\n"
+"Value: %2\n"
+"\n"
+"Type: %3\n"
+"Size: %4"
+msgstr ""
+"이름: %1\n"
+"값: %2\n"
+"\n"
+"형식: %3\n"
+"크기: %4"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:210
+#: controllers/view/structures/datatypes/datainformation.cpp:211
 #, kde-format
 msgid ""
 "Name: %1\n"
@@ -1697,20 +1698,19 @@ msgstr ""
 "\n"
 "%5"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:214
+#: controllers/view/structures/datatypes/datainformation.cpp:223
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:230
 #, kde-format
-msgid ""
-"Name: %1\n"
-"Value: %2\n"
-"\n"
-"Type: %3\n"
-"Size: %4"
-msgstr ""
-"이름: %1\n"
-"값: %2\n"
-"\n"
-"형식: %3\n"
-"크기: %4"
+msgctxt "not all values in this structure are as they should be"
+msgid "Validation failed."
+msgstr "검증에 실패했습니다."
+
+#: controllers/view/structures/datatypes/datainformation.cpp:226
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:233
+#, kde-format
+msgctxt "not all values in this structure are as they should be"
+msgid "Validation failed: \"%1\""
+msgstr "검증 실패: \"%1\""
 
 #: controllers/view/structures/datatypes/datainformationwithchildren.cpp:235
 #, kde-format
@@ -1982,7 +1982,7 @@ msgstr "Latin1 문자"
 msgid "Latin1 string"
 msgstr "Latin1 문자열"
 
-#: controllers/view/structures/datatypes/strings/stringdatainformation.cpp:302
+#: controllers/view/structures/datatypes/strings/stringdatainformation.cpp:312
 #, kde-format
 msgid "End of file reached prematurely"
 msgstr "파일의 끝에 예상보다 빠르게 도달함"

@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesdk-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-03 02:40+0000\n"
-"PO-Revision-Date: 2023-01-31 21:50+0300\n"
+"POT-Creation-Date: 2023-06-06 02:42+0000\n"
+"PO-Revision-Date: 2023-06-06 05:23+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.1\n"
+"X-Generator: Lokalize 23.07.70\n"
 
 #: controllers/document/info/documentinfotool.cpp:48
 #: controllers/document/info/documentinfotoolviewfactory.cpp:24
@@ -190,77 +190,77 @@ msgid ""
 msgstr "Bu düğmeye basarsanız en son seçilen yer iminin adı düzenlenebilir."
 
 #: controllers/view/bytetable/bytetablemodel.cpp:119
-#: controllers/view/info/statistictablemodel.cpp:136
+#: controllers/view/info/statistictablemodel.cpp:137
 #, kde-format
 msgctxt "@item:intable character is not defined"
 msgid "undef."
 msgstr "undef."
 
 #: controllers/view/bytetable/bytetablemodel.cpp:156
-#: controllers/view/info/statistictablemodel.cpp:209
+#: controllers/view/info/statistictablemodel.cpp:214
 #, kde-format
 msgctxt "@title:column short for Decimal"
 msgid "Dec"
-msgstr "Dec"
+msgstr "Ond"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:157
-#: controllers/view/info/statistictablemodel.cpp:208
+#: controllers/view/info/statistictablemodel.cpp:213
 #, kde-format
 msgctxt "@title:column short for Hexadecimal"
 msgid "Hex"
-msgstr "Hex"
+msgstr "Onlt"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:158
-#: controllers/view/info/statistictablemodel.cpp:210
+#: controllers/view/info/statistictablemodel.cpp:215
 #, kde-format
 msgctxt "@title:column short for Octal"
 msgid "Oct"
-msgstr "Oct"
+msgstr "Sek"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:159
-#: controllers/view/info/statistictablemodel.cpp:211
+#: controllers/view/info/statistictablemodel.cpp:216
 #, kde-format
 msgctxt "@title:column short for Binary"
 msgid "Bin"
-msgstr "Bin"
+msgstr "İkl"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:160
-#: controllers/view/info/statistictablemodel.cpp:213
+#: controllers/view/info/statistictablemodel.cpp:218
 #, kde-format
 msgctxt "@title:column short for Character"
 msgid "Char"
 msgstr "Char"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:166
-#: controllers/view/info/statistictablemodel.cpp:224
+#: controllers/view/info/statistictablemodel.cpp:229
 #, kde-format
 msgctxt "@info:tooltip column contains the value in decimal format"
 msgid "Decimal"
 msgstr "Ondalık"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:168
-#: controllers/view/info/statistictablemodel.cpp:222
+#: controllers/view/info/statistictablemodel.cpp:227
 #, kde-format
 msgctxt "@info:tooltip column contains the value in hexadecimal format"
 msgid "Hexadecimal"
 msgstr "Onaltılık"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:170
-#: controllers/view/info/statistictablemodel.cpp:226
+#: controllers/view/info/statistictablemodel.cpp:231
 #, kde-format
 msgctxt "@info:tooltip column contains the value in octal format"
 msgid "Octal"
 msgstr "Sekizlik"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:172
-#: controllers/view/info/statistictablemodel.cpp:228
+#: controllers/view/info/statistictablemodel.cpp:233
 #, kde-format
 msgctxt "@info:tooltip column contains the value in binary format"
 msgid "Binary"
 msgstr "İkilik"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:174
-#: controllers/view/info/statistictablemodel.cpp:232
+#: controllers/view/info/statistictablemodel.cpp:237
 #, kde-format
 msgctxt "@info:tooltip column contains the character with the value"
 msgid "Character"
@@ -311,7 +311,7 @@ msgstr "Karakter Kümesi Dönüşümü"
 #, kde-format
 msgctxt "Converted from charset 1 to charset 2"
 msgid "%1 to %2"
-msgstr "%1 setinden %2 setine"
+msgstr "%1 kümesinden %2 kümesine"
 
 #: controllers/view/charsetconversion/charsetconversiontoolviewfactory.cpp:24
 #, kde-format
@@ -670,32 +670,32 @@ msgctxt "@title:window"
 msgid "Statistics"
 msgstr "İstatistikler"
 
-#: controllers/view/info/infoview.cpp:43
+#: controllers/view/info/infoview.cpp:45
 #, kde-format
 msgctxt "@label size of selected bytes"
 msgid "Size:"
 msgstr "Boyut:"
 
-#: controllers/view/info/infoview.cpp:48
+#: controllers/view/info/infoview.cpp:50
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The number of the bytes the statistic was built for."
 msgstr "İstatistiğin temel aldığı bayt sayısı."
 
-#: controllers/view/info/infoview.cpp:63
+#: controllers/view/info/infoview.cpp:65
 #, kde-format
 msgctxt "@action:button build the statistic of the byte frequency"
 msgid "&Build"
 msgstr "&Derle"
 
-#: controllers/view/info/infoview.cpp:66
+#: controllers/view/info/infoview.cpp:68
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "Builds the byte frequency statistic for the bytes in the selected range."
 msgstr "Seçilen aralıktaki baytlar için bayt frekans istatistiği üretir."
 
-#: controllers/view/info/infoview.cpp:68
+#: controllers/view/info/infoview.cpp:70
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -705,7 +705,7 @@ msgstr ""
 "Eğer <interface>İnşa et</interface> düğmesine basarsanız bayt sıklığı "
 "seçilen aralıktaki baytlar için bayt sıklık istatistiği oluşturulacaktır."
 
-#: controllers/view/info/infoview.cpp:155
+#: controllers/view/info/infoview.cpp:178
 #: controllers/view/structures/datatypes/datainformation.cpp:57
 #: controllers/view/structures/datatypes/datainformation.cpp:60
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:217
@@ -715,13 +715,13 @@ msgid_plural "%1 bytes"
 msgstr[0] "1 bayt"
 msgstr[1] "%1 bayt"
 
-#: controllers/view/info/statistictablemodel.cpp:214
+#: controllers/view/info/statistictablemodel.cpp:219
 #, kde-format
 msgctxt "@title:column count of characters"
 msgid "Count"
 msgstr "Sayı"
 
-#: controllers/view/info/statistictablemodel.cpp:215
+#: controllers/view/info/statistictablemodel.cpp:220
 #, kde-format
 msgctxt "@title:column Percent of byte in total"
 msgid "Percent"
@@ -774,25 +774,25 @@ msgstr "Hesaplama tarafından kullanılan CRC-64 varyantı."
 #, kde-format
 msgctxt "name of the checksum algorithm"
 msgid "Modular sum 16-bit"
-msgstr "Modüler toplam 16-bit"
+msgstr "Modüler toplam 16 bit"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsum32bytearraychecksumalgorithm.cpp:23
 #, kde-format
 msgctxt "name of the checksum algorithm"
 msgid "Modular sum 32-bit"
-msgstr "Modüler toplam 32-bit"
+msgstr "Modüler toplam 32 bit"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsum64bytearraychecksumalgorithm.cpp:23
 #, kde-format
 msgctxt "name of the checksum algorithm"
 msgid "Modular sum 64-bit"
-msgstr "Modüler toplam 64-bit"
+msgstr "Modüler toplam 64 bit"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsum8bytearraychecksumalgorithm.cpp:20
 #, kde-format
 msgctxt "name of the checksum algorithm"
 msgid "Modular sum 8-bit"
-msgstr "Modüler toplam 8-bit"
+msgstr "Modüler toplam 8 bit"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:28
 #: controllers/view/poddecoder/podtableview.cpp:80
@@ -1232,86 +1232,86 @@ msgstr "&Seç"
 #, kde-format
 msgctxt "@label:textbox encoding of one byte as value in the binary format"
 msgid "Binary 8-bit"
-msgstr "İkilik 8-bit"
+msgstr "İkilik 8 bit"
 
 #: controllers/view/poddecoder/typecodecs/char8codec.cpp:23
 #, kde-format
 msgctxt "@label:textbox encoding of one byte as character"
 msgid "Character 8-bit"
-msgstr "Karakter 8-bit"
+msgstr "Karakter 8 bit"
 
 #: controllers/view/poddecoder/typecodecs/float32codec.cpp:20
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Float 32-bit"
-msgstr "Float 32-bit"
+msgstr "Kayan noktalı 32 bit"
 
 #: controllers/view/poddecoder/typecodecs/float64codec.cpp:20
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Float 64-bit"
-msgstr "Float 64-bit"
+msgstr "Kayan noktalı 64 bit"
 
 #: controllers/view/poddecoder/typecodecs/hexadecimal8codec.cpp:20
 #, kde-format
 msgctxt ""
 "@label:textbox encoding of one byte as value in the hexadecimal format"
 msgid "Hexadecimal 8-bit"
-msgstr "Onaltılık 8-bit"
+msgstr "Onaltılık 8 bit"
 
 #: controllers/view/poddecoder/typecodecs/octal8codec.cpp:20
 #, kde-format
 msgctxt "@label:textbox encoding of one byte as value in the octal format"
 msgid "Octal 8-bit"
-msgstr "Sekizlik 8-bit"
+msgstr "Sekizlik 8 bit"
 
 #: controllers/view/poddecoder/typecodecs/sint16codec.cpp:20
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Signed 16-bit"
-msgstr "Signed 16-bit"
+msgstr "İmzalı 16 bit"
 
 #: controllers/view/poddecoder/typecodecs/sint32codec.cpp:20
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Signed 32-bit"
-msgstr "Signed 32-bit"
+msgstr "İmzalı 32 bit"
 
 #: controllers/view/poddecoder/typecodecs/sint64codec.cpp:20
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Signed 64-bit"
-msgstr "Signed 64-bit"
+msgstr "İmzalı 64 bit"
 
 #: controllers/view/poddecoder/typecodecs/sint8codec.cpp:20
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Signed 8-bit"
-msgstr "Signed 8-bit"
+msgstr "İmzalı 8 bit"
 
 #: controllers/view/poddecoder/typecodecs/uint16codec.cpp:20
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Unsigned 16-bit"
-msgstr "Unsigned 16-bit"
+msgstr "İmzasız 16 bit"
 
 #: controllers/view/poddecoder/typecodecs/uint32codec.cpp:20
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Unsigned 32-bit"
-msgstr "Unsigned 32-bit"
+msgstr "İmzasız 32 bit"
 
 #: controllers/view/poddecoder/typecodecs/uint64codec.cpp:20
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Unsigned 64-bit"
-msgstr "Unsigned 64-bit"
+msgstr "İmzasız 64 bit"
 
 #: controllers/view/poddecoder/typecodecs/uint8codec.cpp:20
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Unsigned 8-bit"
-msgstr "Unsigned 8-bit"
+msgstr "İmzasız 8 bit"
 
 #: controllers/view/poddecoder/typecodecs/utf8codec.cpp:22
 #, kde-format
@@ -1330,7 +1330,7 @@ msgstr "%1 Bayt Dizilimini Bas"
 #, kde-format
 msgctxt "in the header of the printed page, e.g. Page 2 of 20"
 msgid "Page %p of %P"
-msgstr "%P sayfanın %p kadarı"
+msgstr "Sayfa %p/%P"
 
 #: controllers/view/print/printtool.cpp:103
 #, kde-format
@@ -1689,27 +1689,28 @@ msgctxt "number of bytes, then number of bits"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:190
+#: controllers/view/structures/datatypes/datainformation.cpp:195
 #, kde-format
 msgctxt "invalid value (End of file reached)"
 msgid "<EOF reached>"
 msgstr "<EOF ulaşıldı>"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:205
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:230
-#, kde-format
-msgctxt "not all values in this structure are as they should be"
-msgid "Validation failed."
-msgstr "Doğrulama başarısız."
-
 #: controllers/view/structures/datatypes/datainformation.cpp:208
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:233
 #, kde-format
-msgctxt "not all values in this structure are as they should be"
-msgid "Validation failed: \"%1\""
-msgstr "Doğrulama başarısız: \"%1\""
+msgid ""
+"Name: %1\n"
+"Value: %2\n"
+"\n"
+"Type: %3\n"
+"Size: %4"
+msgstr ""
+"Ad: %1\n"
+"Değer: %2\n"
+"\n"
+"Tür: %3\n"
+"Boyut: %4"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:210
+#: controllers/view/structures/datatypes/datainformation.cpp:211
 #, kde-format
 msgid ""
 "Name: %1\n"
@@ -1728,20 +1729,19 @@ msgstr ""
 "\n"
 "%5"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:214
+#: controllers/view/structures/datatypes/datainformation.cpp:223
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:230
 #, kde-format
-msgid ""
-"Name: %1\n"
-"Value: %2\n"
-"\n"
-"Type: %3\n"
-"Size: %4"
-msgstr ""
-"Ad: %1\n"
-"Değer: %2\n"
-"\n"
-"Tür: %3\n"
-"Boyut: %4"
+msgctxt "not all values in this structure are as they should be"
+msgid "Validation failed."
+msgstr "Doğrulama başarısız."
+
+#: controllers/view/structures/datatypes/datainformation.cpp:226
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:233
+#, kde-format
+msgctxt "not all values in this structure are as they should be"
+msgid "Validation failed: \"%1\""
+msgstr "Doğrulama başarısız: \"%1\""
 
 #: controllers/view/structures/datatypes/datainformationwithchildren.cpp:235
 #, kde-format
@@ -1817,14 +1817,14 @@ msgstr[1] "%1 bit"
 #, kde-format
 msgctxt "boolean value"
 msgid "false"
-msgstr "yanlış"
+msgstr "false"
 
 #: controllers/view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.cpp:47
 #: controllers/view/structures/datatypes/primitive/booldatainformation.cpp:20
 #, kde-format
 msgctxt "boolean value"
 msgid "true"
-msgstr "doğru"
+msgstr "true"
 
 #: controllers/view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.cpp:92
 #, kde-format
@@ -1854,7 +1854,7 @@ msgstr[1] "işaretsiz bit alanı (%1 bit genişliğinde)"
 #, kde-format
 msgctxt "boolean value with actual value"
 msgid "true (%1)"
-msgstr "doğru (%1)"
+msgstr "true (%1)"
 
 #: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:42
 #: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:81
@@ -2031,7 +2031,7 @@ msgstr "Latin1 karakteri"
 msgid "Latin1 string"
 msgstr "Latin1 dizisi"
 
-#: controllers/view/structures/datatypes/strings/stringdatainformation.cpp:302
+#: controllers/view/structures/datatypes/strings/stringdatainformation.cpp:312
 #, kde-format
 msgid "End of file reached prematurely"
 msgstr "Dosya sonuma erken ulaşıldı"
@@ -2314,13 +2314,13 @@ msgstr "Bayt sırası:"
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:46
 #, kde-format
 msgid "Big endian"
-msgstr "Big endian"
+msgstr "Büyük son haneli"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ByteOrder)
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:51
 #, kde-format
 msgid "Little endian"
-msgstr "Little endian"
+msgstr "Küçük son haneli"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShortTypeNames)
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:59
@@ -3240,20 +3240,20 @@ msgstr "Adres boyutu:"
 #, kde-format
 msgctxt "@item:inmenu address size"
 msgid "32-bit"
-msgstr "32-bit"
+msgstr "32 bit"
 
 #: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:42
 #: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:43
 #, kde-format
 msgctxt "@item:inmenu address size"
 msgid "16-bit"
-msgstr "16-bit"
+msgstr "16 bit"
 
 #: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:44
 #, kde-format
 msgctxt "@item:inmenu address size"
 msgid "8-bit"
-msgstr "8-bit"
+msgstr "8 bit"
 
 #: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoder.cpp:139
 #, kde-format
@@ -3297,7 +3297,7 @@ msgstr "S-Record"
 #, kde-format
 msgctxt "@item:inmenu address size"
 msgid "24-bit"
-msgstr "24-bit"
+msgstr "24 bit"
 
 #: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoder.cpp:120
 #, kde-format
@@ -3376,7 +3376,7 @@ msgstr "Ondalık"
 #, kde-format
 msgctxt "@item:inlistbox coding of offset in the expression format"
 msgid "Expr"
-msgstr "Expr"
+msgstr "İfade"
 
 #. i18nc("@item:inlistbox guessing the coding of the bytes by the input",       "Auto"),
 #: gui/liboktetawidgets/bytearraycombobox_p.cpp:25
@@ -3408,7 +3408,7 @@ msgstr "İkilik"
 #, kde-format
 msgctxt "@item:inlistbox coding of the bytes as characters with the values"
 msgid "Char"
-msgstr "Char"
+msgstr "Karakter"
 
 #: gui/liboktetawidgets/bytearraycombobox_p.cpp:30
 #, kde-format

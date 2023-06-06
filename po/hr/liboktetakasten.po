@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-03 02:40+0000\n"
+"POT-Creation-Date: 2023-06-06 02:42+0000\n"
 "PO-Revision-Date: 2010-03-02 15:30+0100\n"
 "Last-Translator: Marko Dimjasevic <marko@dimjasevic.net>\n"
 "Language-Team: Croatian <kde-croatia-list@lists.sourceforge.net>\n"
@@ -187,77 +187,77 @@ msgid ""
 msgstr ""
 
 #: controllers/view/bytetable/bytetablemodel.cpp:119
-#: controllers/view/info/statistictablemodel.cpp:136
+#: controllers/view/info/statistictablemodel.cpp:137
 #, kde-format
 msgctxt "@item:intable character is not defined"
 msgid "undef."
 msgstr ""
 
 #: controllers/view/bytetable/bytetablemodel.cpp:156
-#: controllers/view/info/statistictablemodel.cpp:209
+#: controllers/view/info/statistictablemodel.cpp:214
 #, kde-format
 msgctxt "@title:column short for Decimal"
 msgid "Dec"
 msgstr ""
 
 #: controllers/view/bytetable/bytetablemodel.cpp:157
-#: controllers/view/info/statistictablemodel.cpp:208
+#: controllers/view/info/statistictablemodel.cpp:213
 #, kde-format
 msgctxt "@title:column short for Hexadecimal"
 msgid "Hex"
 msgstr ""
 
 #: controllers/view/bytetable/bytetablemodel.cpp:158
-#: controllers/view/info/statistictablemodel.cpp:210
+#: controllers/view/info/statistictablemodel.cpp:215
 #, kde-format
 msgctxt "@title:column short for Octal"
 msgid "Oct"
 msgstr ""
 
 #: controllers/view/bytetable/bytetablemodel.cpp:159
-#: controllers/view/info/statistictablemodel.cpp:211
+#: controllers/view/info/statistictablemodel.cpp:216
 #, kde-format
 msgctxt "@title:column short for Binary"
 msgid "Bin"
 msgstr ""
 
 #: controllers/view/bytetable/bytetablemodel.cpp:160
-#: controllers/view/info/statistictablemodel.cpp:213
+#: controllers/view/info/statistictablemodel.cpp:218
 #, kde-format
 msgctxt "@title:column short for Character"
 msgid "Char"
 msgstr ""
 
 #: controllers/view/bytetable/bytetablemodel.cpp:166
-#: controllers/view/info/statistictablemodel.cpp:224
+#: controllers/view/info/statistictablemodel.cpp:229
 #, kde-format
 msgctxt "@info:tooltip column contains the value in decimal format"
 msgid "Decimal"
 msgstr ""
 
 #: controllers/view/bytetable/bytetablemodel.cpp:168
-#: controllers/view/info/statistictablemodel.cpp:222
+#: controllers/view/info/statistictablemodel.cpp:227
 #, kde-format
 msgctxt "@info:tooltip column contains the value in hexadecimal format"
 msgid "Hexadecimal"
 msgstr ""
 
 #: controllers/view/bytetable/bytetablemodel.cpp:170
-#: controllers/view/info/statistictablemodel.cpp:226
+#: controllers/view/info/statistictablemodel.cpp:231
 #, kde-format
 msgctxt "@info:tooltip column contains the value in octal format"
 msgid "Octal"
 msgstr ""
 
 #: controllers/view/bytetable/bytetablemodel.cpp:172
-#: controllers/view/info/statistictablemodel.cpp:228
+#: controllers/view/info/statistictablemodel.cpp:233
 #, kde-format
 msgctxt "@info:tooltip column contains the value in binary format"
 msgid "Binary"
 msgstr ""
 
 #: controllers/view/bytetable/bytetablemodel.cpp:174
-#: controllers/view/info/statistictablemodel.cpp:232
+#: controllers/view/info/statistictablemodel.cpp:237
 #, kde-format
 msgctxt "@info:tooltip column contains the character with the value"
 msgid "Character"
@@ -644,32 +644,32 @@ msgctxt "@title:window"
 msgid "Statistics"
 msgstr ""
 
-#: controllers/view/info/infoview.cpp:43
+#: controllers/view/info/infoview.cpp:45
 #, kde-format
 msgctxt "@label size of selected bytes"
 msgid "Size:"
 msgstr ""
 
-#: controllers/view/info/infoview.cpp:48
+#: controllers/view/info/infoview.cpp:50
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The number of the bytes the statistic was built for."
 msgstr ""
 
-#: controllers/view/info/infoview.cpp:63
+#: controllers/view/info/infoview.cpp:65
 #, kde-format
 msgctxt "@action:button build the statistic of the byte frequency"
 msgid "&Build"
 msgstr ""
 
-#: controllers/view/info/infoview.cpp:66
+#: controllers/view/info/infoview.cpp:68
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "Builds the byte frequency statistic for the bytes in the selected range."
 msgstr ""
 
-#: controllers/view/info/infoview.cpp:68
+#: controllers/view/info/infoview.cpp:70
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -677,7 +677,7 @@ msgid ""
 "statistic is built for the bytes in the selected range."
 msgstr ""
 
-#: controllers/view/info/infoview.cpp:155
+#: controllers/view/info/infoview.cpp:178
 #: controllers/view/structures/datatypes/datainformation.cpp:57
 #: controllers/view/structures/datatypes/datainformation.cpp:60
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:217
@@ -687,13 +687,13 @@ msgid_plural "%1 bytes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: controllers/view/info/statistictablemodel.cpp:214
+#: controllers/view/info/statistictablemodel.cpp:219
 #, kde-format
 msgctxt "@title:column count of characters"
 msgid "Count"
 msgstr ""
 
-#: controllers/view/info/statistictablemodel.cpp:215
+#: controllers/view/info/statistictablemodel.cpp:220
 #, kde-format
 msgctxt "@title:column Percent of byte in total"
 msgid "Percent"
@@ -1629,27 +1629,23 @@ msgctxt "number of bytes, then number of bits"
 msgid "%1 %2"
 msgstr ""
 
-#: controllers/view/structures/datatypes/datainformation.cpp:190
+#: controllers/view/structures/datatypes/datainformation.cpp:195
 #, kde-format
 msgctxt "invalid value (End of file reached)"
 msgid "<EOF reached>"
 msgstr ""
 
-#: controllers/view/structures/datatypes/datainformation.cpp:205
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:230
-#, kde-format
-msgctxt "not all values in this structure are as they should be"
-msgid "Validation failed."
-msgstr ""
-
 #: controllers/view/structures/datatypes/datainformation.cpp:208
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:233
 #, kde-format
-msgctxt "not all values in this structure are as they should be"
-msgid "Validation failed: \"%1\""
+msgid ""
+"Name: %1\n"
+"Value: %2\n"
+"\n"
+"Type: %3\n"
+"Size: %4"
 msgstr ""
 
-#: controllers/view/structures/datatypes/datainformation.cpp:210
+#: controllers/view/structures/datatypes/datainformation.cpp:211
 #, kde-format
 msgid ""
 "Name: %1\n"
@@ -1661,14 +1657,18 @@ msgid ""
 "%5"
 msgstr ""
 
-#: controllers/view/structures/datatypes/datainformation.cpp:214
+#: controllers/view/structures/datatypes/datainformation.cpp:223
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:230
 #, kde-format
-msgid ""
-"Name: %1\n"
-"Value: %2\n"
-"\n"
-"Type: %3\n"
-"Size: %4"
+msgctxt "not all values in this structure are as they should be"
+msgid "Validation failed."
+msgstr ""
+
+#: controllers/view/structures/datatypes/datainformation.cpp:226
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:233
+#, kde-format
+msgctxt "not all values in this structure are as they should be"
+msgid "Validation failed: \"%1\""
 msgstr ""
 
 #: controllers/view/structures/datatypes/datainformationwithchildren.cpp:235
@@ -1941,7 +1941,7 @@ msgstr ""
 msgid "Latin1 string"
 msgstr ""
 
-#: controllers/view/structures/datatypes/strings/stringdatainformation.cpp:302
+#: controllers/view/structures/datatypes/strings/stringdatainformation.cpp:312
 #, kde-format
 msgid "End of file reached prematurely"
 msgstr ""
