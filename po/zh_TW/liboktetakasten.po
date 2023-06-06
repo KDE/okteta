@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-03 00:50+0000\n"
+"POT-Creation-Date: 2023-06-06 00:49+0000\n"
 "PO-Revision-Date: 2019-02-23 21:23+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -197,77 +197,77 @@ msgid ""
 msgstr "若您按下此鍵，則可以編輯上次選取的書籤的名稱。"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:121
-#: controllers/view/info/statistictablemodel.cpp:136
+#: controllers/view/info/statistictablemodel.cpp:137
 #, kde-format
 msgctxt "@item:intable character is not defined"
 msgid "undef."
 msgstr "未定義"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:158
-#: controllers/view/info/statistictablemodel.cpp:209
+#: controllers/view/info/statistictablemodel.cpp:214
 #, kde-format
 msgctxt "@title:column short for Decimal"
 msgid "Dec"
 msgstr "十進位"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:159
-#: controllers/view/info/statistictablemodel.cpp:208
+#: controllers/view/info/statistictablemodel.cpp:213
 #, kde-format
 msgctxt "@title:column short for Hexadecimal"
 msgid "Hex"
 msgstr "十六進位"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:160
-#: controllers/view/info/statistictablemodel.cpp:210
+#: controllers/view/info/statistictablemodel.cpp:215
 #, kde-format
 msgctxt "@title:column short for Octal"
 msgid "Oct"
 msgstr "八進位"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:161
-#: controllers/view/info/statistictablemodel.cpp:211
+#: controllers/view/info/statistictablemodel.cpp:216
 #, kde-format
 msgctxt "@title:column short for Binary"
 msgid "Bin"
 msgstr "二進位"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:162
-#: controllers/view/info/statistictablemodel.cpp:213
+#: controllers/view/info/statistictablemodel.cpp:218
 #, kde-format
 msgctxt "@title:column short for Character"
 msgid "Char"
 msgstr "字元"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:168
-#: controllers/view/info/statistictablemodel.cpp:224
+#: controllers/view/info/statistictablemodel.cpp:229
 #, kde-format
 msgctxt "@info:tooltip column contains the value in decimal format"
 msgid "Decimal"
 msgstr "十進位"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:170
-#: controllers/view/info/statistictablemodel.cpp:222
+#: controllers/view/info/statistictablemodel.cpp:227
 #, kde-format
 msgctxt "@info:tooltip column contains the value in hexadecimal format"
 msgid "Hexadecimal"
 msgstr "十六進位"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:172
-#: controllers/view/info/statistictablemodel.cpp:226
+#: controllers/view/info/statistictablemodel.cpp:231
 #, kde-format
 msgctxt "@info:tooltip column contains the value in octal format"
 msgid "Octal"
 msgstr "八進位"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:174
-#: controllers/view/info/statistictablemodel.cpp:228
+#: controllers/view/info/statistictablemodel.cpp:233
 #, kde-format
 msgctxt "@info:tooltip column contains the value in binary format"
 msgid "Binary"
 msgstr "二進位"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:176
-#: controllers/view/info/statistictablemodel.cpp:232
+#: controllers/view/info/statistictablemodel.cpp:237
 #, kde-format
 msgctxt "@info:tooltip column contains the character with the value"
 msgid "Character"
@@ -661,32 +661,32 @@ msgctxt "@title:window"
 msgid "Statistics"
 msgstr "統計"
 
-#: controllers/view/info/infoview.cpp:43
+#: controllers/view/info/infoview.cpp:44
 #, kde-format
 msgctxt "@label size of selected bytes"
 msgid "Size:"
 msgstr "大小："
 
-#: controllers/view/info/infoview.cpp:48
+#: controllers/view/info/infoview.cpp:49
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The number of the bytes the statistic was built for."
 msgstr "建立此統計的位元數。"
 
-#: controllers/view/info/infoview.cpp:63
+#: controllers/view/info/infoview.cpp:64
 #, kde-format
 msgctxt "@action:button build the statistic of the byte frequency"
 msgid "&Build"
 msgstr "建立(&B)"
 
-#: controllers/view/info/infoview.cpp:66
+#: controllers/view/info/infoview.cpp:67
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "Builds the byte frequency statistic for the bytes in the selected range."
 msgstr "建立在選取範圍內的位元的位元頻率統計。"
 
-#: controllers/view/info/infoview.cpp:68
+#: controllers/view/info/infoview.cpp:69
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -696,7 +696,34 @@ msgstr ""
 "如果您按下<interface>建立</interface>按鍵，則會建立在選取範圍內的位元頻率的統"
 "計。"
 
-#: controllers/view/info/infoview.cpp:155
+#: controllers/view/info/infoview.cpp:112
+#: controllers/view/stringsextract/stringsextractview.cpp:136
+#, kde-format
+msgid "C&opy"
+msgstr "複製(&O)"
+
+#: controllers/view/info/infoview.cpp:115
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
+#| msgid "Copies the selected strings to the clipboard."
+msgctxt "@info:tooltip"
+msgid "Copies the selected statistic lines to the clipboard."
+msgstr "複製選取的字串到剪貼簿中。"
+
+#: controllers/view/info/infoview.cpp:117
+#, fuzzy, kde-kuit-format
+#| msgctxt "@info:whatsthis"
+#| msgid ""
+#| "If you press the <interface>Copy</interface> button, all strings you "
+#| "selected in the list are copied to the clipboard."
+msgctxt "@info:whatsthis"
+msgid ""
+"If you press the <interface>Copy</interface> button, all statistic lines you "
+"selected in the list are copied to the clipboard."
+msgstr ""
+"如果您按下<interface>複製</interface>按鍵，則會將選取的字串複製到剪貼簿中。"
+
+#: controllers/view/info/infoview.cpp:183
 #: controllers/view/structures/datatypes/datainformation.cpp:57
 #: controllers/view/structures/datatypes/datainformation.cpp:60
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:217
@@ -705,13 +732,13 @@ msgid "1 byte"
 msgid_plural "%1 bytes"
 msgstr[0] "%1 位元組"
 
-#: controllers/view/info/statistictablemodel.cpp:214
+#: controllers/view/info/statistictablemodel.cpp:219
 #, kde-format
 msgctxt "@title:column count of characters"
 msgid "Count"
 msgstr "計數"
 
-#: controllers/view/info/statistictablemodel.cpp:215
+#: controllers/view/info/statistictablemodel.cpp:220
 #, kde-format
 msgctxt "@title:column Percent of byte in total"
 msgid "Percent"
@@ -1598,11 +1625,6 @@ msgstr "過濾器："
 msgid "Enter a term to limit the list."
 msgstr "在此輸入過濾清單的字串。"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:136
-#, kde-format
-msgid "C&opy"
-msgstr "複製(&O)"
-
 #: controllers/view/stringsextract/stringsextractview.cpp:139
 #, kde-format
 msgctxt "@info:tooltip"
@@ -1655,27 +1677,28 @@ msgctxt "number of bytes, then number of bits"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:190
+#: controllers/view/structures/datatypes/datainformation.cpp:195
 #, kde-format
 msgctxt "invalid value (End of file reached)"
 msgid "<EOF reached>"
 msgstr "<到達檔案結尾>"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:205
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:232
-#, kde-format
-msgctxt "not all values in this structure are as they should be"
-msgid "Validation failed."
-msgstr "確認失敗。"
-
 #: controllers/view/structures/datatypes/datainformation.cpp:208
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:235
 #, kde-format
-msgctxt "not all values in this structure are as they should be"
-msgid "Validation failed: \"%1\""
-msgstr "確認失敗：\"%1\""
+msgid ""
+"Name: %1\n"
+"Value: %2\n"
+"\n"
+"Type: %3\n"
+"Size: %4"
+msgstr ""
+"名稱：%1\n"
+"數值：%2\n"
+"\n"
+"型態：%3\n"
+"大小：%4"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:210
+#: controllers/view/structures/datatypes/datainformation.cpp:211
 #, kde-format
 msgid ""
 "Name: %1\n"
@@ -1694,20 +1717,19 @@ msgstr ""
 "\n"
 "%5"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:214
+#: controllers/view/structures/datatypes/datainformation.cpp:223
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:232
 #, kde-format
-msgid ""
-"Name: %1\n"
-"Value: %2\n"
-"\n"
-"Type: %3\n"
-"Size: %4"
-msgstr ""
-"名稱：%1\n"
-"數值：%2\n"
-"\n"
-"型態：%3\n"
-"大小：%4"
+msgctxt "not all values in this structure are as they should be"
+msgid "Validation failed."
+msgstr "確認失敗。"
+
+#: controllers/view/structures/datatypes/datainformation.cpp:226
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:235
+#, kde-format
+msgctxt "not all values in this structure are as they should be"
+msgid "Validation failed: \"%1\""
+msgstr "確認失敗：\"%1\""
 
 #: controllers/view/structures/datatypes/datainformationwithchildren.cpp:237
 #, kde-format
@@ -1963,7 +1985,7 @@ msgstr "Latin1 字元"
 msgid "Latin1 string"
 msgstr "Latin1 字串"
 
-#: controllers/view/structures/datatypes/strings/stringdatainformation.cpp:302
+#: controllers/view/structures/datatypes/strings/stringdatainformation.cpp:312
 #, kde-format
 msgid "End of file reached prematurely"
 msgstr "意外地遇到檔案結尾"
