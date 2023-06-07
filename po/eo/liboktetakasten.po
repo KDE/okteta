@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-06 00:49+0000\n"
-"PO-Revision-Date: 2023-05-30 22:35+0100\n"
+"PO-Revision-Date: 2023-06-06 20:48+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -722,26 +722,20 @@ msgid "C&opy"
 msgstr "K&opii"
 
 #: controllers/view/info/infoview.cpp:115
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Copies the selected strings to the clipboard."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected statistic lines to the clipboard."
-msgstr "Kopias la elektitajn ĉenojn al la tondujo."
+msgstr "Kopias la elektitajn statistikliniojn al la tondujo."
 
 #: controllers/view/info/infoview.cpp:117
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info:whatsthis"
-#| msgid ""
-#| "If you press the <interface>Copy</interface> button, all strings you "
-#| "selected in the list are copied to the clipboard."
+#, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
 "If you press the <interface>Copy</interface> button, all statistic lines you "
 "selected in the list are copied to the clipboard."
 msgstr ""
-"Se vi premas la butonon <interface>Kopii</interface>, ĉiuj ĉenoj, kiujn vi "
-"elektis en la listo, estas kopiitaj al la tondujo."
+"Se vi premas la butonon <interface>Kopii</interface>, ĉiuj statistiklinioj "
+"kiujn vi elektis en la listo, estas kopiitaj al la tondujo."
 
 #: controllers/view/info/infoview.cpp:183
 #: controllers/view/structures/datatypes/datainformation.cpp:57

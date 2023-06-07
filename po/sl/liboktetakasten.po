@@ -9,17 +9,17 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-06 00:49+0000\n"
-"PO-Revision-Date: 2023-03-20 08:36+0100\n"
+"PO-Revision-Date: 2023-06-06 08:12+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
-"%100==4 ? 3 : 0);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
+"%100<=4 ? 2 : 3);\n"
 "Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -725,26 +725,20 @@ msgid "C&opy"
 msgstr "Kopiraj"
 
 #: controllers/view/info/infoview.cpp:115
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Copies the selected strings to the clipboard."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected statistic lines to the clipboard."
-msgstr "Kopira izbrane nize na odložišče."
+msgstr "Kopira izbrane vrstice statistike na odložišče."
 
 #: controllers/view/info/infoview.cpp:117
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info:whatsthis"
-#| msgid ""
-#| "If you press the <interface>Copy</interface> button, all strings you "
-#| "selected in the list are copied to the clipboard."
+#, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
 "If you press the <interface>Copy</interface> button, all statistic lines you "
 "selected in the list are copied to the clipboard."
 msgstr ""
-"Če kliknete na gumb <interface>Kopiraj</interface>, bodo vsi izbrani nizi "
-"kopirani na odložišče."
+"Če kliknete na gumb <interface>Kopiraj</interface>, bodo vse izbrane vrstice "
+"statistike kopirane na odložišče."
 
 #: controllers/view/info/infoview.cpp:183
 #: controllers/view/structures/datatypes/datainformation.cpp:57

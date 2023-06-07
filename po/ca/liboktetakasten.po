@@ -1,8 +1,8 @@
 # Translation of liboktetakasten.po to Catalan
-# Copyright (C) 2008-2022 This_file_is_part_of_KDE
+# Copyright (C) 2008-2023 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2 or later.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022.
+# Josep M. Ferrer <txemaq@gmail.com>, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
 # Joan Maspons <joanmaspons@gmail.com>, 2009.
 # Manuel Tortosa <manutortosa@chakra-project.org>, 2010, 2011, 2012.
 # Antoni Bella Pérez <antonibella5@yahoo.com>, 2012, 2014, 2015, 2016, 2020, 2022.
@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-06 00:49+0000\n"
-"PO-Revision-Date: 2022-10-23 20:26+0200\n"
+"PO-Revision-Date: 2023-06-06 08:46+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -741,26 +741,21 @@ msgid "C&opy"
 msgstr "Co&pia"
 
 #: controllers/view/info/infoview.cpp:115
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Copies the selected strings to the clipboard."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected statistic lines to the clipboard."
-msgstr "Copia les cadenes seleccionades al porta-retalls."
+msgstr "Copia les línies d'estadístiques seleccionades al porta-retalls."
 
 #: controllers/view/info/infoview.cpp:117
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info:whatsthis"
-#| msgid ""
-#| "If you press the <interface>Copy</interface> button, all strings you "
-#| "selected in the list are copied to the clipboard."
+#, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
 "If you press the <interface>Copy</interface> button, all statistic lines you "
 "selected in the list are copied to the clipboard."
 msgstr ""
-"Si premeu el botó <interface>Copia</interface>, totes les cadenes que heu "
-"seleccionat de la llista es copiaran al porta-retalls."
+"Si premeu el botó <interface>Copia</interface>, totes les línies "
+"d'estadístiques que heu seleccionat de la llista es copiaran al porta-"
+"retalls."
 
 #: controllers/view/info/infoview.cpp:183
 #: controllers/view/structures/datatypes/datainformation.cpp:57

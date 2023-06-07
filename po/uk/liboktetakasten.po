@@ -3,13 +3,13 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2018, 2019, 2020, 2022.
+# Yuri Chornoivan <yurchor@ukr.net>, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2018, 2019, 2020, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-06 00:49+0000\n"
-"PO-Revision-Date: 2022-06-09 08:49+0300\n"
+"PO-Revision-Date: 2023-06-06 07:49+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -736,26 +736,20 @@ msgid "C&opy"
 msgstr "&Копіювати"
 
 #: controllers/view/info/infoview.cpp:115
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Copies the selected strings to the clipboard."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected statistic lines to the clipboard."
-msgstr "Копіює вибрані рядки до буфера клавіатури."
+msgstr "Копіює вибрані статичні рядки до буфера обміну даними."
 
 #: controllers/view/info/infoview.cpp:117
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info:whatsthis"
-#| msgid ""
-#| "If you press the <interface>Copy</interface> button, all strings you "
-#| "selected in the list are copied to the clipboard."
+#, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
 "If you press the <interface>Copy</interface> button, all statistic lines you "
 "selected in the list are copied to the clipboard."
 msgstr ""
 "Якщо ви натиснете кнопку <interface>Копіювати</interface>, всі вибрані вами "
-"рядки у списку буде скопійовано до буфера."
+"статичні рядки у списку буде скопійовано до буфера."
 
 #: controllers/view/info/infoview.cpp:183
 #: controllers/view/structures/datatypes/datainformation.cpp:57

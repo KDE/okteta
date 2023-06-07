@@ -5,13 +5,13 @@
 # Rinse de Vries <rinsedevries@kde.nl>, 2008.
 # Kristof Bal <kristof.bal@gmail.com>, 2008.
 # Freek de Kruijf <freekdekruijf@kde.nl>, 2008.
-# Freek de Kruijf <freekdekruijf@kde.nl>, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2018, 2019, 2020, 2022.
+# Freek de Kruijf <freekdekruijf@kde.nl>, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2018, 2019, 2020, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-06 00:49+0000\n"
-"PO-Revision-Date: 2022-06-09 10:22+0200\n"
+"PO-Revision-Date: 2023-06-06 10:52+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -19,12 +19,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.04.1\n"
+"X-Generator: Lokalize 23.04.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Rinse de Vries - 2008,Kristof Bal - 2008-2009,Freek de Kruijf - 2022"
+msgstr ""
+"Rinse de Vries - 2008,Kristof Bal - 2008-2009,Freek de Kruijf - 2022 t/m 2023"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
@@ -728,26 +729,20 @@ msgid "C&opy"
 msgstr "K&opiëren"
 
 #: controllers/view/info/infoview.cpp:115
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Copies the selected strings to the clipboard."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected statistic lines to the clipboard."
-msgstr "Kopieert de geselecteerde tekenreeksen naar het klembord."
+msgstr "Kopieert de geselecteerde statistiekregels naar het klembord."
 
 #: controllers/view/info/infoview.cpp:117
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info:whatsthis"
-#| msgid ""
-#| "If you press the <interface>Copy</interface> button, all strings you "
-#| "selected in the list are copied to the clipboard."
+#, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
 "If you press the <interface>Copy</interface> button, all statistic lines you "
 "selected in the list are copied to the clipboard."
 msgstr ""
 "Als u op de knop <interface>Kopiëren</interface> drukt, zullen alle "
-"tekenreeksen die u selecteerde naar het klembord worden gekopieerd."
+"statistiekregels, die u selecteerde, naar het klembord worden gekopieerd."
 
 #: controllers/view/info/infoview.cpp:183
 #: controllers/view/structures/datatypes/datainformation.cpp:57
