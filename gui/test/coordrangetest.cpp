@@ -11,7 +11,7 @@
 // test object
 #include <coordrange.hpp>
 // Qt
-#include <QtTest>
+#include <QTest>
 
 namespace Okteta {
 
