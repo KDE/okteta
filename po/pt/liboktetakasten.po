@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-06 00:49+0000\n"
-"PO-Revision-Date: 2022-07-11 14:44+0100\n"
+"PO-Revision-Date: 2023-06-09 23:16+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: pt <kde-i18n-pt@kde.org>\n"
 "Language: pt\n"
@@ -728,26 +728,22 @@ msgid "C&opy"
 msgstr "C&opiar"
 
 #: controllers/view/info/infoview.cpp:115
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Copies the selected strings to the clipboard."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected statistic lines to the clipboard."
-msgstr "Copia os textos seleccionados para a área de transferência."
+msgstr ""
+"Copia as linhas de estatísticas seleccionadas para a área de transferência."
 
 #: controllers/view/info/infoview.cpp:117
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info:whatsthis"
-#| msgid ""
-#| "If you press the <interface>Copy</interface> button, all strings you "
-#| "selected in the list are copied to the clipboard."
+#, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
 "If you press the <interface>Copy</interface> button, all statistic lines you "
 "selected in the list are copied to the clipboard."
 msgstr ""
-"Se carregar no botão <interface>Copiar</interface>, todos os textos que "
-"seleccionou na lista serão copiados para a área de transferência."
+"Se carregar no botão <interface>Copiar</interface>, todas as linhas de "
+"estatísticas que seleccionou na lista serão copiados para a área de "
+"transferência."
 
 #: controllers/view/info/infoview.cpp:183
 #: controllers/view/structures/datatypes/datainformation.cpp:57
