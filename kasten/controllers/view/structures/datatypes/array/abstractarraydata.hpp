@@ -48,6 +48,7 @@ public:
     virtual void setLength(uint newLength) = 0;
 
     virtual QString typeName() const = 0;
+    virtual QString valueString() const = 0;
 
     virtual BitCount32 size() const = 0;
 

@@ -182,6 +182,11 @@ QString ArrayDataInformation::typeNameImpl() const
     return mData->typeName();
 }
 
+QString ArrayDataInformation::valueStringImpl() const
+{
+    return mData->valueString();
+}
+
 BitCount32 ArrayDataInformation::size() const
 {
     return mData->size();

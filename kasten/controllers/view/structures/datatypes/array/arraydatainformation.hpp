@@ -78,6 +78,7 @@ public:
 private:
     QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const override;
     QString typeNameImpl() const override;
+    QString valueStringImpl() const override;
 
 private:
     QScopedPointer<AbstractArrayData> mData;
