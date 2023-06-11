@@ -171,6 +171,9 @@ QVariant DataInformation::data(int column, int role) const
         if (column == ColumnValue) {
             return mWasAbleToRead ? valueString() : eofReachedData(Qt::DisplayRole);
         }
+        if (column == ColumnSize) {
+            return sizeString();
+        }
     } else if (role == Qt::ToolTipRole) {
         return tooltipString();
     } else if (role == Qt::DecorationRole && column == ColumnName) {

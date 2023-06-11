@@ -154,6 +154,9 @@ QVariant StringDataInformation::childData(int row, int column, int role) const
         if (column == ColumnValue) {
             return mData->stringValue(row);
         }
+        if (column == ColumnSize) {
+            return DataInformation::sizeString(childSize(row));
+        }
     } else if (role == Qt::ToolTipRole) {
         return DataInformation::tooltipString(childNameAt(row), mData->stringValue(row),
                                               mData->charType(),

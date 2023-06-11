@@ -71,6 +71,7 @@ public:
         ColumnName = 0,
         ColumnType,
         ColumnValue,
+        ColumnSize,
         COLUMN_COUNT
     };
     enum class DataInformationEndianess

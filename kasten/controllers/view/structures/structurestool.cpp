@@ -189,6 +189,8 @@ QVariant StructuresTool::headerData(int column, int role) const
             return i18nc("type of a data structure", "Type");
         case DataInformation::ColumnValue:
             return i18nc("value of a data structure (primitive type)", "Value");
+        case DataInformation::ColumnSize:
+            return i18nc("size of a data structure", "Size");
         default:
             return {};
         }

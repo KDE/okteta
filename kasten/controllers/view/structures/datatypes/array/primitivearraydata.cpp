@@ -186,6 +186,9 @@ QVariant PrimitiveArrayData<type>::dataAt(uint index, int column, int role)
         if (column == DataInformation::ColumnValue) {
             return valueStringAt(index);
         }
+        if (column == DataInformation::ColumnSize) {
+            return sizeStringAt(index);
+        }
     }
     if (role == Qt::ToolTipRole) {
         return DataInformation::tooltipString(nameAt(index), valueStringAt(index),
