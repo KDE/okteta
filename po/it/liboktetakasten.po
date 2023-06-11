@@ -4,14 +4,14 @@
 # Federico Zenith <federico.zenith@member.fsf.org>, 2008.
 # Federico Zenith <federico.zenith@member.fsf.org>, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015.
 # Nicola Ruggero <nicola@nxnt.org>, 2010.
-# Luigi Toscano <luigi.toscano@tiscali.it>, 2016, 2018, 2019, 2020, 2022.
+# Luigi Toscano <luigi.toscano@tiscali.it>, 2016, 2018, 2019, 2020, 2022, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-06 00:49+0000\n"
-"PO-Revision-Date: 2022-06-11 23:56+0200\n"
+"PO-Revision-Date: 2023-06-06 22:05+0200\n"
 "Last-Translator: Luigi Toscano <luigi.toscano@tiscali.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -735,26 +735,20 @@ msgid "C&opy"
 msgstr "C&opia"
 
 #: controllers/view/info/infoview.cpp:115
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Copies the selected strings to the clipboard."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected statistic lines to the clipboard."
-msgstr "Copia le stringhe selezionate negli appunti."
+msgstr "Copia le righe di statistica selezionate negli appunti."
 
 #: controllers/view/info/infoview.cpp:117
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info:whatsthis"
-#| msgid ""
-#| "If you press the <interface>Copy</interface> button, all strings you "
-#| "selected in the list are copied to the clipboard."
+#, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
 "If you press the <interface>Copy</interface> button, all statistic lines you "
 "selected in the list are copied to the clipboard."
 msgstr ""
-"Se premi il pulsante <interface>Copia</interface>, tutte le stringhe che hai "
-"selezionato nell'elenco sono copiate negli appunti."
+"Se premi il pulsante <interface>Copia</interface>, tutte le righe di "
+"statistica che hai selezionato nell'elenco sono copiate negli appunti."
 
 #: controllers/view/info/infoview.cpp:183
 #: controllers/view/structures/datatypes/datainformation.cpp:57
