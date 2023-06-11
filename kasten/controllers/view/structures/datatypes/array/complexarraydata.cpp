@@ -98,6 +98,11 @@ QString ComplexArrayData::typeName() const
     return i18nc("type name, then array length", "%1[%2]", type, QString::number(length()));
 }
 
+QString ComplexArrayData::valueString() const
+{
+    return QString();
+}
+
 void ComplexArrayData::setNewParentForChildren()
 {
     for (auto* child : std::as_const(mChildren)) {

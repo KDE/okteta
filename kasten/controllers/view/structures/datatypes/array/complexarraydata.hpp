@@ -31,6 +31,7 @@ public:
     BitCount32 size() const override;
 
     QString typeName() const override;
+    QString valueString() const override;
 
     DataInformation* childAt(unsigned int idx) override;
     int indexOf(const DataInformation* data) const override;

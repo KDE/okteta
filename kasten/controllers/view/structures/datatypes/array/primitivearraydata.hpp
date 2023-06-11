@@ -46,6 +46,7 @@ public:
 
     QScriptValue toScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) override;
     QString typeName() const override;
+    QString valueString() const override;
 
     bool isComplex() const override;
 

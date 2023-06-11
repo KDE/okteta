@@ -235,6 +235,12 @@ QString PrimitiveArrayData<type>::typeName() const
 }
 
 template <PrimitiveDataType type>
+QString PrimitiveArrayData<type>::valueString() const
+{
+    return QString();
+}
+
+template <PrimitiveDataType type>
 int PrimitiveArrayData<type>::indexOf(const DataInformation* data) const
 {
     if (data == &mDummy) {
@@ -277,6 +283,22 @@ void PrimitiveArrayData<type>::setChildWidgetData(uint index, QWidget* w) const
     Q_UNUSED(index)
     DisplayClass::staticSetWidgetData(mData.at(index), w);
 }
+
+template <>
+QString PrimitiveArrayData<PrimitiveDataType::Char>::valueString() const
+{
+    QString result;
+    result.reserve(length());
+    for (uint index = 0; index < length(); ++index) {
+        QChar qchar(mData.at(index), 0);
+        if (!qchar.isPrint()) {
+            qchar = QChar(QChar::ReplacementCharacter);
+        }
+        result.append(qchar);
+    }
+    return result;
+}
+
 
 // now instantiate all the template instances
 template class PrimitiveArrayData<PrimitiveDataType::Bool8>;
