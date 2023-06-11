@@ -14,6 +14,7 @@
 #include "../script/scriptlogger.hpp"
 #include "../script/safereference.hpp"
 
+#include <QApplication>
 #include <QScriptValue>
 #include <QScriptEngine>
 #include <QIcon>
@@ -202,14 +203,49 @@ QVariant DataInformation::eofReachedData(int role)
 
 QString DataInformation::tooltipString(const QString& nameString, const QString& valueString,
                                        const QString& typeString, const QString& sizeString,
+                                       unsigned int childCount,
                                        const QString& validationMessage)
 {
-    if (validationMessage.isEmpty()) {
-        return i18n("Name: %1\nValue: %2\n\nType: %3\nSize: %4", nameString,
-                    valueString, typeString, sizeString);
+    const bool textIsLeftToRight = (QApplication::layoutDirection() == Qt::LeftToRight);
+
+    const QString boldStyle = QStringLiteral(";font-weight:bold");
+    const QString one = QStringLiteral("1");
+    const QString two = QStringLiteral("2");
+    const QString line = QStringLiteral(
+        "<tr>"
+          "<td align=\"right\" style=\"white-space:nowrap%1\">%%2</td>"
+          "<td align=\"left\" style=\"white-space:nowrap%3\">%%4</td>"
+        "</tr>").arg(
+            (textIsLeftToRight ? boldStyle : QString()),
+            (textIsLeftToRight ? one : two),
+            (textIsLeftToRight ? QString() : boldStyle),
+            (textIsLeftToRight ? two : one)
+        );
+
+    const QString nameLabel = i18n("Name:").toHtmlEscaped();
+    const QString typeLabel = i18n("Type:").toHtmlEscaped();
+    const QString valueLabel = i18n("Value:").toHtmlEscaped();
+    const QString sizeLabel = i18n("Size:").toHtmlEscaped();
+
+    const QString name = nameString.toHtmlEscaped();
+    const QString type = typeString.toHtmlEscaped();
+    const QString value = valueString.toHtmlEscaped();
+    const QString size = (childCount == 0) ?  sizeString.toHtmlEscaped() :
+        i18ncp("size (elements)", "%2 (%1 child)", "%2 (%1 children)", childCount, sizeString).toHtmlEscaped();
+
+    QString result =
+        QLatin1String("<table>") +
+        line.arg(nameLabel, name) +
+        line.arg(typeLabel, type) +
+        line.arg(valueLabel, value) +
+        line.arg(sizeLabel, size) +
+        QLatin1String("</table>");
+
+    if (!validationMessage.isEmpty()) {
+        const QString validation = validationMessage.toHtmlEscaped().replace(QLatin1Char('\n'), QLatin1String("<br/>"));
+        result += QLatin1String("<p>") + validation + QLatin1String("</p>");
     }
-    return i18n("Name: %1\nValue: %2\n\nType: %3\nSize: %4\n\n%5", nameString,
-                valueString, typeString, sizeString, validationMessage);
+    return result;
 }
 
 QString DataInformation::tooltipString() const
@@ -226,7 +262,7 @@ QString DataInformation::tooltipString() const
                                   "Validation failed: \"%1\"", validationMsg);
         }
     }
-    return DataInformation::tooltipString(name(), valueStr, typeName(), sizeString(),
+    return DataInformation::tooltipString(name(), valueStr, typeName(), sizeString(), 0,
                                           validationMsg);
 }
 

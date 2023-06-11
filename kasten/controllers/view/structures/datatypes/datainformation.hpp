@@ -219,6 +219,7 @@ protected:
     static QString sizeString(BitCount32 size);
     static QString tooltipString(const QString& nameString, const QString& valueString,
                                  const QString& typeString, const QString& sizeString,
+                                 unsigned int childCount = 0,
                                  const QString& validationMessage = QString());
     static QVariant eofReachedData(int role);
     void setAdditionalFunction(AdditionalData::AdditionalDataType entry, const QScriptValue& value, const char* name);

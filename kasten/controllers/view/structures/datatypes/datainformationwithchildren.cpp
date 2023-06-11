@@ -225,8 +225,9 @@ QScriptClass* DataInformationWithChildren::scriptClass(ScriptHandlerInfo* handle
 QString DataInformationWithChildren::tooltipString() const
 {
     QString valueStr = mWasAbleToRead ? valueString() : eofReachedData(Qt::DisplayRole).toString();
+    QString validationMsg;
     if (mHasBeenValidated && !mValidationSuccessful) {
-        QString validationMsg = validationError();
+        validationMsg = validationError();
         if (validationMsg.isEmpty()) {
             validationMsg = i18nc("not all values in this structure"
                                   " are as they should be", "Validation failed.");
@@ -234,14 +235,10 @@ QString DataInformationWithChildren::tooltipString() const
             validationMsg = i18nc("not all values in this structure"
                                   " are as they should be", "Validation failed: \"%1\"", validationMsg);
         }
-        return i18np("Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 child)\n\n %6",
-                     "Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 children)\n\n %6",
-                     childCount(), name(), valueStr, typeName(), sizeString(), validationMsg);
     }
 
-    return i18np("Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 child)",
-                 "Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 children)",
-                 childCount(), name(), valueStr, typeName(), sizeString());
+    return DataInformation::tooltipString(name(), valueStr, typeName(), sizeString(), childCount(),
+                                          validationMsg);
 }
 
 QVector<DataInformation*> DataInformationWithChildren::cloneList(const QVector<DataInformation*>& other,
