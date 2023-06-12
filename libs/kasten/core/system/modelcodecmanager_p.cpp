@@ -105,6 +105,7 @@ void ModelCodecManagerPrivate::exportDocument(AbstractModelExporter* exporter,
         QFileDialog exportFileDialog(/*mWidget*/ nullptr, dialogTitle);
 
         exportFileDialog.setAcceptMode(QFileDialog::AcceptSave);
+        exportFileDialog.setOption(QFileDialog::DontConfirmOverwrite);
         exportFileDialog.setFileMode(QFileDialog::AnyFile);
         const QStringList mimeTypes = QStringList { exporter->remoteMimeType() };
         exportFileDialog.setMimeTypeFilters(mimeTypes);

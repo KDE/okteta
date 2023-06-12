@@ -335,7 +335,8 @@ void StructureView::onCustomContextMenuRequested(QPoint pos)
     menu->addAction(copyAction);
 
     // TODO: reusing string due to string freeze
-    auto* selectAction = new QAction(i18nc("@action:button", "&Select"), this);
+    auto* selectAction = new QAction(QIcon::fromTheme(QStringLiteral("select-rectangular")),
+                                     i18nc("@action:button", "&Select"), this);
     connect(selectAction, &QAction::triggered,
             this, &StructureView::selectBytesInView);
     selectAction->setData(index);
