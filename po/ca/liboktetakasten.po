@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-06 00:49+0000\n"
+"POT-Creation-Date: 2023-06-12 00:59+0000\n"
 "PO-Revision-Date: 2023-06-06 08:46+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -40,6 +40,7 @@ msgid "File Info"
 msgstr "Informació del fitxer"
 
 #: controllers/document/info/documentinfoview.cpp:70
+#: controllers/view/structures/datatypes/datainformation.cpp:229
 #, kde-format
 msgid "Type:"
 msgstr "Tipus:"
@@ -50,6 +51,7 @@ msgid "Location:"
 msgstr "Ubicació:"
 
 #: controllers/document/info/documentinfoview.cpp:94
+#: controllers/view/structures/datatypes/datainformation.cpp:231
 #, kde-format
 msgid "Size:"
 msgstr "Mida:"
@@ -758,8 +760,8 @@ msgstr ""
 "retalls."
 
 #: controllers/view/info/infoview.cpp:183
-#: controllers/view/structures/datatypes/datainformation.cpp:57
-#: controllers/view/structures/datatypes/datainformation.cpp:60
+#: controllers/view/structures/datatypes/datainformation.cpp:58
+#: controllers/view/structures/datatypes/datainformation.cpp:61
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:217
 #, kde-format
 msgid "1 byte"
@@ -1730,134 +1732,60 @@ msgctxt "type name, then array length"
 msgid "%1[%2]"
 msgstr "%1[%2]"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:61
+#: controllers/view/structures/datatypes/datainformation.cpp:62
 #, kde-format
 msgid "1 bit"
 msgid_plural "%1 bits"
 msgstr[0] "1 bit"
 msgstr[1] "%1 bits"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:62
+#: controllers/view/structures/datatypes/datainformation.cpp:63
 #, kde-format
 msgctxt "number of bytes, then number of bits"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:195
+#: controllers/view/structures/datatypes/datainformation.cpp:199
 #, kde-format
 msgctxt "invalid value (End of file reached)"
 msgid "<EOF reached>"
 msgstr "<S'ha arribat al final del fitxer>"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:208
-#, kde-format
-msgid ""
-"Name: %1\n"
-"Value: %2\n"
-"\n"
-"Type: %3\n"
-"Size: %4"
-msgstr ""
-"Nom: %1\n"
-"Valor: %2\n"
-"\n"
-"Tipus: %3\n"
-"Mida: %4"
+#: controllers/view/structures/datatypes/datainformation.cpp:228
+#, fuzzy, kde-format
+#| msgctxt "name of a data structure"
+#| msgid "Name"
+msgid "Name:"
+msgstr "Nom"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:211
-#, kde-format
-msgid ""
-"Name: %1\n"
-"Value: %2\n"
-"\n"
-"Type: %3\n"
-"Size: %4\n"
-"\n"
-"%5"
-msgstr ""
-"Nom: %1\n"
-"Valor: %2\n"
-"\n"
-"Tipus: %3\n"
-"Mida: %4\n"
-"\n"
-"%5"
+#: controllers/view/structures/datatypes/datainformation.cpp:230
+#, fuzzy, kde-format
+#| msgctxt "@title:column value of the bytes for the datatype"
+#| msgid "Value"
+msgid "Value:"
+msgstr "Valor"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:223
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:232
+#: controllers/view/structures/datatypes/datainformation.cpp:237
+#, kde-format
+msgctxt "size (elements)"
+msgid "%2 (%1 child)"
+msgid_plural "%2 (%1 children)"
+msgstr[0] ""
+msgstr[1] ""
+
+#: controllers/view/structures/datatypes/datainformation.cpp:262
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:233
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed."
 msgstr "Ha fallat la validació."
 
-#: controllers/view/structures/datatypes/datainformation.cpp:226
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:235
+#: controllers/view/structures/datatypes/datainformation.cpp:265
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:236
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed: \"%1\""
 msgstr "Ha fallat la validació: «%1»"
-
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:237
-#, kde-format
-msgid ""
-"Name: %2\n"
-"Value: %3\n"
-"\n"
-"Type: %4\n"
-"Size: %5 (%1 child)\n"
-"\n"
-" %6"
-msgid_plural ""
-"Name: %2\n"
-"Value: %3\n"
-"\n"
-"Type: %4\n"
-"Size: %5 (%1 children)\n"
-"\n"
-" %6"
-msgstr[0] ""
-"Nom: %2\n"
-"Valor: %3\n"
-"\n"
-"Tipus: %4\n"
-"Mida: %5 (%1 fill)\n"
-"\n"
-" %6"
-msgstr[1] ""
-"Nom: %2\n"
-"Valor: %3\n"
-"\n"
-"Tipus: %4\n"
-"Mida: %5 (%1 fills)\n"
-"\n"
-" %6"
-
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:242
-#, kde-format
-msgid ""
-"Name: %2\n"
-"Value: %3\n"
-"\n"
-"Type: %4\n"
-"Size: %5 (%1 child)"
-msgid_plural ""
-"Name: %2\n"
-"Value: %3\n"
-"\n"
-"Type: %4\n"
-"Size: %5 (%1 children)"
-msgstr[0] ""
-"Nom: %2\n"
-"Valor: %3\n"
-"\n"
-"Tipus: %4\n"
-"Mida: %5 (%1 fill)"
-msgstr[1] ""
-"Nom: %2\n"
-"Valor: %3\n"
-"\n"
-"Tipus: %4\n"
-"Mida: %5 (%1 fills)"
 
 #: controllers/view/structures/datatypes/primitive/bitfield/abstractbitfielddatainformation.cpp:32
 #, kde-format
@@ -2069,7 +1997,7 @@ msgstr "Caràcter Latin1"
 msgid "Latin1 string"
 msgstr "Cadena Latin1"
 
-#: controllers/view/structures/datatypes/strings/stringdatainformation.cpp:312
+#: controllers/view/structures/datatypes/strings/stringdatainformation.cpp:315
 #, kde-format
 msgid "End of file reached prematurely"
 msgstr "S'ha arribat al final del fitxer prematurament"
@@ -2491,6 +2419,13 @@ msgstr "Tipus"
 msgctxt "value of a data structure (primitive type)"
 msgid "Value"
 msgstr "Valor"
+
+#: controllers/view/structures/structurestool.cpp:193
+#, fuzzy, kde-format
+#| msgid "Size:"
+msgctxt "size of a data structure"
+msgid "Size"
+msgstr "Mida:"
 
 #: controllers/view/structures/structureview.cpp:96
 #, kde-format
@@ -3519,3 +3454,91 @@ msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"
 msgid "UTF-8"
 msgstr "UTF-8"
+
+#~ msgid ""
+#~ "Name: %1\n"
+#~ "Value: %2\n"
+#~ "\n"
+#~ "Type: %3\n"
+#~ "Size: %4"
+#~ msgstr ""
+#~ "Nom: %1\n"
+#~ "Valor: %2\n"
+#~ "\n"
+#~ "Tipus: %3\n"
+#~ "Mida: %4"
+
+#~ msgid ""
+#~ "Name: %1\n"
+#~ "Value: %2\n"
+#~ "\n"
+#~ "Type: %3\n"
+#~ "Size: %4\n"
+#~ "\n"
+#~ "%5"
+#~ msgstr ""
+#~ "Nom: %1\n"
+#~ "Valor: %2\n"
+#~ "\n"
+#~ "Tipus: %3\n"
+#~ "Mida: %4\n"
+#~ "\n"
+#~ "%5"
+
+#~ msgid ""
+#~ "Name: %2\n"
+#~ "Value: %3\n"
+#~ "\n"
+#~ "Type: %4\n"
+#~ "Size: %5 (%1 child)\n"
+#~ "\n"
+#~ " %6"
+#~ msgid_plural ""
+#~ "Name: %2\n"
+#~ "Value: %3\n"
+#~ "\n"
+#~ "Type: %4\n"
+#~ "Size: %5 (%1 children)\n"
+#~ "\n"
+#~ " %6"
+#~ msgstr[0] ""
+#~ "Nom: %2\n"
+#~ "Valor: %3\n"
+#~ "\n"
+#~ "Tipus: %4\n"
+#~ "Mida: %5 (%1 fill)\n"
+#~ "\n"
+#~ " %6"
+#~ msgstr[1] ""
+#~ "Nom: %2\n"
+#~ "Valor: %3\n"
+#~ "\n"
+#~ "Tipus: %4\n"
+#~ "Mida: %5 (%1 fills)\n"
+#~ "\n"
+#~ " %6"
+
+#~ msgid ""
+#~ "Name: %2\n"
+#~ "Value: %3\n"
+#~ "\n"
+#~ "Type: %4\n"
+#~ "Size: %5 (%1 child)"
+#~ msgid_plural ""
+#~ "Name: %2\n"
+#~ "Value: %3\n"
+#~ "\n"
+#~ "Type: %4\n"
+#~ "Size: %5 (%1 children)"
+#~ msgstr[0] ""
+#~ "Nom: %2\n"
+#~ "Valor: %3\n"
+#~ "\n"
+#~ "Tipus: %4\n"
+#~ "Mida: %5 (%1 fill)"
+#~ msgstr[1] ""
+#~ "Nom: %2\n"
+#~ "Valor: %3\n"
+#~ "\n"
+#~ "Tipus: %4\n"
+#~ "Mida: %5 (%1 fills)"

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-06 00:49+0000\n"
+"POT-Creation-Date: 2023-06-12 00:59+0000\n"
 "PO-Revision-Date: 2023-06-10 10:05+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -44,6 +44,7 @@ msgid "File Info"
 msgstr "Szczegóły pliku"
 
 #: controllers/document/info/documentinfoview.cpp:70
+#: controllers/view/structures/datatypes/datainformation.cpp:229
 #, kde-format
 msgid "Type:"
 msgstr "Rodzaj:"
@@ -54,6 +55,7 @@ msgid "Location:"
 msgstr "Położenie:"
 
 #: controllers/document/info/documentinfoview.cpp:94
+#: controllers/view/structures/datatypes/datainformation.cpp:231
 #, kde-format
 msgid "Size:"
 msgstr "Rozmiar:"
@@ -750,8 +752,8 @@ msgstr ""
 "wiersze statystyki z listy zostaną skopiowane do schowka."
 
 #: controllers/view/info/infoview.cpp:183
-#: controllers/view/structures/datatypes/datainformation.cpp:57
-#: controllers/view/structures/datatypes/datainformation.cpp:60
+#: controllers/view/structures/datatypes/datainformation.cpp:58
+#: controllers/view/structures/datatypes/datainformation.cpp:61
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:217
 #, kde-format
 msgid "1 byte"
@@ -1716,7 +1718,7 @@ msgctxt "type name, then array length"
 msgid "%1[%2]"
 msgstr "%1[%2]"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:61
+#: controllers/view/structures/datatypes/datainformation.cpp:62
 #, kde-format
 msgid "1 bit"
 msgid_plural "%1 bits"
@@ -1724,141 +1726,54 @@ msgstr[0] "1 bit"
 msgstr[1] "%1 bity"
 msgstr[2] "%1 bitów"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:62
+#: controllers/view/structures/datatypes/datainformation.cpp:63
 #, kde-format
 msgctxt "number of bytes, then number of bits"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:195
+#: controllers/view/structures/datatypes/datainformation.cpp:199
 #, kde-format
 msgctxt "invalid value (End of file reached)"
 msgid "<EOF reached>"
 msgstr "<Osiągnięto EOF>"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:208
-#, kde-format
-msgid ""
-"Name: %1\n"
-"Value: %2\n"
-"\n"
-"Type: %3\n"
-"Size: %4"
-msgstr ""
-"Nazwa: %1\n"
-"Wartość: %2\n"
-"\n"
-"Rodzaj: %3\n"
-"Rozmiar: %4"
+#: controllers/view/structures/datatypes/datainformation.cpp:228
+#, fuzzy, kde-format
+#| msgctxt "name of a data structure"
+#| msgid "Name"
+msgid "Name:"
+msgstr "Nazwa"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:211
-#, kde-format
-msgid ""
-"Name: %1\n"
-"Value: %2\n"
-"\n"
-"Type: %3\n"
-"Size: %4\n"
-"\n"
-"%5"
-msgstr ""
-"Nazwa: %1\n"
-"Wartość: %2\n"
-"\n"
-"Rodzaj: %3\n"
-"Rozmiar: %4\n"
-"\n"
-"%5"
+#: controllers/view/structures/datatypes/datainformation.cpp:230
+#, fuzzy, kde-format
+#| msgctxt "@title:column value of the bytes for the datatype"
+#| msgid "Value"
+msgid "Value:"
+msgstr "Wartość"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:223
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:232
+#: controllers/view/structures/datatypes/datainformation.cpp:237
+#, kde-format
+msgctxt "size (elements)"
+msgid "%2 (%1 child)"
+msgid_plural "%2 (%1 children)"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: controllers/view/structures/datatypes/datainformation.cpp:262
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:233
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed."
 msgstr "Błąd podczas sprawdzania."
 
-#: controllers/view/structures/datatypes/datainformation.cpp:226
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:235
+#: controllers/view/structures/datatypes/datainformation.cpp:265
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:236
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed: \"%1\""
 msgstr "Błąd podczas sprawdzania: \"%1\""
-
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:237
-#, kde-format
-msgid ""
-"Name: %2\n"
-"Value: %3\n"
-"\n"
-"Type: %4\n"
-"Size: %5 (%1 child)\n"
-"\n"
-" %6"
-msgid_plural ""
-"Name: %2\n"
-"Value: %3\n"
-"\n"
-"Type: %4\n"
-"Size: %5 (%1 children)\n"
-"\n"
-" %6"
-msgstr[0] ""
-"Nazwa: %2\n"
-"Wartość: %3\n"
-"\n"
-"Rodzaj: %4\n"
-"Rozmiar: %5 (%1 potomek)\n"
-"\n"
-" %6"
-msgstr[1] ""
-"Nazwa: %2\n"
-"Wartość %3\n"
-"\n"
-"Rodzaj: %4\n"
-"Rozmiar: %5 (%1 potomków)\n"
-"\n"
-" %6"
-msgstr[2] ""
-"Nazwa: %2\n"
-"Wartość %3\n"
-"\n"
-"Rodzaj: %4\n"
-"Rozmiar: %5 (%1 potomków)\n"
-"\n"
-" %6"
-
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:242
-#, kde-format
-msgid ""
-"Name: %2\n"
-"Value: %3\n"
-"\n"
-"Type: %4\n"
-"Size: %5 (%1 child)"
-msgid_plural ""
-"Name: %2\n"
-"Value: %3\n"
-"\n"
-"Type: %4\n"
-"Size: %5 (%1 children)"
-msgstr[0] ""
-"Nazwa: %2\n"
-"Wartość: %3\n"
-"\n"
-"Rodzaj: %4\n"
-"Rozmiar: %5 (%1 potomek)"
-msgstr[1] ""
-"Nazwa: %2\n"
-"Wartość: %3\n"
-"\n"
-"Rodzaj: %4\n"
-"Rozmiar: %5 (%1 potomków)"
-msgstr[2] ""
-"Nazwa: %2\n"
-"Wartość: %3\n"
-"\n"
-"Rodzaj: %4\n"
-"Rozmiar: %5 (%1 potomków)"
 
 #: controllers/view/structures/datatypes/primitive/bitfield/abstractbitfielddatainformation.cpp:32
 #, kde-format
@@ -2074,7 +1989,7 @@ msgstr "Znak Latin1"
 msgid "Latin1 string"
 msgstr "Ciąg znaków Latin1"
 
-#: controllers/view/structures/datatypes/strings/stringdatainformation.cpp:312
+#: controllers/view/structures/datatypes/strings/stringdatainformation.cpp:315
 #, kde-format
 msgid "End of file reached prematurely"
 msgstr "Przedwcześnie osiągnięto koniec pliku "
@@ -2491,6 +2406,13 @@ msgstr "Rodzaj"
 msgctxt "value of a data structure (primitive type)"
 msgid "Value"
 msgstr "Wartość"
+
+#: controllers/view/structures/structurestool.cpp:193
+#, fuzzy, kde-format
+#| msgid "Size:"
+msgctxt "size of a data structure"
+msgid "Size"
+msgstr "Rozmiar:"
 
 #: controllers/view/structures/structureview.cpp:96
 #, kde-format
@@ -3517,6 +3439,108 @@ msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"
 msgid "UTF-8"
 msgstr "UTF-8"
+
+#~ msgid ""
+#~ "Name: %1\n"
+#~ "Value: %2\n"
+#~ "\n"
+#~ "Type: %3\n"
+#~ "Size: %4"
+#~ msgstr ""
+#~ "Nazwa: %1\n"
+#~ "Wartość: %2\n"
+#~ "\n"
+#~ "Rodzaj: %3\n"
+#~ "Rozmiar: %4"
+
+#~ msgid ""
+#~ "Name: %1\n"
+#~ "Value: %2\n"
+#~ "\n"
+#~ "Type: %3\n"
+#~ "Size: %4\n"
+#~ "\n"
+#~ "%5"
+#~ msgstr ""
+#~ "Nazwa: %1\n"
+#~ "Wartość: %2\n"
+#~ "\n"
+#~ "Rodzaj: %3\n"
+#~ "Rozmiar: %4\n"
+#~ "\n"
+#~ "%5"
+
+#~ msgid ""
+#~ "Name: %2\n"
+#~ "Value: %3\n"
+#~ "\n"
+#~ "Type: %4\n"
+#~ "Size: %5 (%1 child)\n"
+#~ "\n"
+#~ " %6"
+#~ msgid_plural ""
+#~ "Name: %2\n"
+#~ "Value: %3\n"
+#~ "\n"
+#~ "Type: %4\n"
+#~ "Size: %5 (%1 children)\n"
+#~ "\n"
+#~ " %6"
+#~ msgstr[0] ""
+#~ "Nazwa: %2\n"
+#~ "Wartość: %3\n"
+#~ "\n"
+#~ "Rodzaj: %4\n"
+#~ "Rozmiar: %5 (%1 potomek)\n"
+#~ "\n"
+#~ " %6"
+#~ msgstr[1] ""
+#~ "Nazwa: %2\n"
+#~ "Wartość %3\n"
+#~ "\n"
+#~ "Rodzaj: %4\n"
+#~ "Rozmiar: %5 (%1 potomków)\n"
+#~ "\n"
+#~ " %6"
+#~ msgstr[2] ""
+#~ "Nazwa: %2\n"
+#~ "Wartość %3\n"
+#~ "\n"
+#~ "Rodzaj: %4\n"
+#~ "Rozmiar: %5 (%1 potomków)\n"
+#~ "\n"
+#~ " %6"
+
+#~ msgid ""
+#~ "Name: %2\n"
+#~ "Value: %3\n"
+#~ "\n"
+#~ "Type: %4\n"
+#~ "Size: %5 (%1 child)"
+#~ msgid_plural ""
+#~ "Name: %2\n"
+#~ "Value: %3\n"
+#~ "\n"
+#~ "Type: %4\n"
+#~ "Size: %5 (%1 children)"
+#~ msgstr[0] ""
+#~ "Nazwa: %2\n"
+#~ "Wartość: %3\n"
+#~ "\n"
+#~ "Rodzaj: %4\n"
+#~ "Rozmiar: %5 (%1 potomek)"
+#~ msgstr[1] ""
+#~ "Nazwa: %2\n"
+#~ "Wartość: %3\n"
+#~ "\n"
+#~ "Rodzaj: %4\n"
+#~ "Rozmiar: %5 (%1 potomków)"
+#~ msgstr[2] ""
+#~ "Nazwa: %2\n"
+#~ "Wartość: %3\n"
+#~ "\n"
+#~ "Rodzaj: %4\n"
+#~ "Rozmiar: %5 (%1 potomków)"
 
 #~ msgid "Show Non-printable:"
 #~ msgstr "Wyświetl niedrukowane:"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-06 00:49+0000\n"
+"POT-Creation-Date: 2023-06-12 00:59+0000\n"
 "PO-Revision-Date: 2023-06-06 07:49+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -38,6 +38,7 @@ msgid "File Info"
 msgstr "Відомості про файл"
 
 #: controllers/document/info/documentinfoview.cpp:70
+#: controllers/view/structures/datatypes/datainformation.cpp:229
 #, kde-format
 msgid "Type:"
 msgstr "Тип:"
@@ -48,6 +49,7 @@ msgid "Location:"
 msgstr "Адреса:"
 
 #: controllers/document/info/documentinfoview.cpp:94
+#: controllers/view/structures/datatypes/datainformation.cpp:231
 #, kde-format
 msgid "Size:"
 msgstr "Розмір:"
@@ -752,8 +754,8 @@ msgstr ""
 "статичні рядки у списку буде скопійовано до буфера."
 
 #: controllers/view/info/infoview.cpp:183
-#: controllers/view/structures/datatypes/datainformation.cpp:57
-#: controllers/view/structures/datatypes/datainformation.cpp:60
+#: controllers/view/structures/datatypes/datainformation.cpp:58
+#: controllers/view/structures/datatypes/datainformation.cpp:61
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:217
 #, kde-format
 msgid "1 byte"
@@ -1725,7 +1727,7 @@ msgctxt "type name, then array length"
 msgid "%1[%2]"
 msgstr "%1[%2]"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:61
+#: controllers/view/structures/datatypes/datainformation.cpp:62
 #, kde-format
 msgid "1 bit"
 msgid_plural "%1 bits"
@@ -1734,155 +1736,55 @@ msgstr[1] "%1 біти"
 msgstr[2] "%1 бітів"
 msgstr[3] "1 біт"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:62
+#: controllers/view/structures/datatypes/datainformation.cpp:63
 #, kde-format
 msgctxt "number of bytes, then number of bits"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:195
+#: controllers/view/structures/datatypes/datainformation.cpp:199
 #, kde-format
 msgctxt "invalid value (End of file reached)"
 msgid "<EOF reached>"
 msgstr "<досягнуто EOF>"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:208
-#, kde-format
-msgid ""
-"Name: %1\n"
-"Value: %2\n"
-"\n"
-"Type: %3\n"
-"Size: %4"
-msgstr ""
-"Назва: %1\n"
-"Значення: %2\n"
-"\n"
-"Тип: %3\n"
-"Розмір: %4"
+#: controllers/view/structures/datatypes/datainformation.cpp:228
+#, fuzzy, kde-format
+#| msgctxt "name of a data structure"
+#| msgid "Name"
+msgid "Name:"
+msgstr "Назва"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:211
-#, kde-format
-msgid ""
-"Name: %1\n"
-"Value: %2\n"
-"\n"
-"Type: %3\n"
-"Size: %4\n"
-"\n"
-"%5"
-msgstr ""
-"Назва: %1\n"
-"Значення: %2\n"
-"\n"
-"Тип: %3\n"
-"Розмір: %4\n"
-"\n"
-"%5"
+#: controllers/view/structures/datatypes/datainformation.cpp:230
+#, fuzzy, kde-format
+#| msgctxt "@title:column value of the bytes for the datatype"
+#| msgid "Value"
+msgid "Value:"
+msgstr "Значення"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:223
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:232
+#: controllers/view/structures/datatypes/datainformation.cpp:237
+#, kde-format
+msgctxt "size (elements)"
+msgid "%2 (%1 child)"
+msgid_plural "%2 (%1 children)"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#: controllers/view/structures/datatypes/datainformation.cpp:262
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:233
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed."
 msgstr "Спроба перевірки зазнала невдачі."
 
-#: controllers/view/structures/datatypes/datainformation.cpp:226
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:235
+#: controllers/view/structures/datatypes/datainformation.cpp:265
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:236
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed: \"%1\""
 msgstr "Спроба перевірки зазнала невдачі: «%1»"
-
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:237
-#, kde-format
-msgid ""
-"Name: %2\n"
-"Value: %3\n"
-"\n"
-"Type: %4\n"
-"Size: %5 (%1 child)\n"
-"\n"
-" %6"
-msgid_plural ""
-"Name: %2\n"
-"Value: %3\n"
-"\n"
-"Type: %4\n"
-"Size: %5 (%1 children)\n"
-"\n"
-" %6"
-msgstr[0] ""
-"Назва: %2\n"
-"Значення: %3\n"
-"\n"
-"Тип: %4\n"
-"Розмір: %5 (%1 дочірній об’єкт)\n"
-"\n"
-" %6"
-msgstr[1] ""
-"Назва: %2\n"
-"Значення: %3\n"
-"\n"
-"Тип: %4\n"
-"Розмір: %5 (%1 дочірні об’єкти)\n"
-"\n"
-" %6"
-msgstr[2] ""
-"Назва: %2\n"
-"Значення: %3\n"
-"\n"
-"Тип: %4\n"
-"Розмір: %5 (%1 дочірніх об’єктів)\n"
-"\n"
-" %6"
-msgstr[3] ""
-"Назва: %2\n"
-"Значення: %3\n"
-"\n"
-"Тип: %4\n"
-"Розмір: %5 (%1 дочірній об’єкт)\n"
-"\n"
-" %6"
-
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:242
-#, kde-format
-msgid ""
-"Name: %2\n"
-"Value: %3\n"
-"\n"
-"Type: %4\n"
-"Size: %5 (%1 child)"
-msgid_plural ""
-"Name: %2\n"
-"Value: %3\n"
-"\n"
-"Type: %4\n"
-"Size: %5 (%1 children)"
-msgstr[0] ""
-"Назва: %2\n"
-"Значення: %3\n"
-"\n"
-"Тип: %4\n"
-"Розмір: %5 (%1 дочірній об’єкт)"
-msgstr[1] ""
-"Назва: %2\n"
-"Значення: %3\n"
-"\n"
-"Тип: %4\n"
-"Розмір: %5 (%1 дочірні об’єкти)"
-msgstr[2] ""
-"Назва: %2\n"
-"Значення: %3\n"
-"\n"
-"Тип: %4\n"
-"Розмір: %5 (%1 дочірніх об’єктів)"
-msgstr[3] ""
-"Назва: %2\n"
-"Значення: %3\n"
-"\n"
-"Тип: %4\n"
-"Розмір: %5 (%1 дочірній об’єкт)"
 
 #: controllers/view/structures/datatypes/primitive/bitfield/abstractbitfielddatainformation.cpp:32
 #, kde-format
@@ -2102,7 +2004,7 @@ msgstr "Символ Latin1"
 msgid "Latin1 string"
 msgstr "Рядок Latin1"
 
-#: controllers/view/structures/datatypes/strings/stringdatainformation.cpp:312
+#: controllers/view/structures/datatypes/strings/stringdatainformation.cpp:315
 #, kde-format
 msgid "End of file reached prematurely"
 msgstr "Неочікуваний кінець файла"
@@ -2529,6 +2431,13 @@ msgstr "Тип"
 msgctxt "value of a data structure (primitive type)"
 msgid "Value"
 msgstr "Значення"
+
+#: controllers/view/structures/structurestool.cpp:193
+#, fuzzy, kde-format
+#| msgid "Size:"
+msgctxt "size of a data structure"
+msgid "Size"
+msgstr "Розмір:"
 
 #: controllers/view/structures/structureview.cpp:96
 #, kde-format
@@ -3553,6 +3462,122 @@ msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"
 msgid "UTF-8"
 msgstr "UTF-8"
+
+#~ msgid ""
+#~ "Name: %1\n"
+#~ "Value: %2\n"
+#~ "\n"
+#~ "Type: %3\n"
+#~ "Size: %4"
+#~ msgstr ""
+#~ "Назва: %1\n"
+#~ "Значення: %2\n"
+#~ "\n"
+#~ "Тип: %3\n"
+#~ "Розмір: %4"
+
+#~ msgid ""
+#~ "Name: %1\n"
+#~ "Value: %2\n"
+#~ "\n"
+#~ "Type: %3\n"
+#~ "Size: %4\n"
+#~ "\n"
+#~ "%5"
+#~ msgstr ""
+#~ "Назва: %1\n"
+#~ "Значення: %2\n"
+#~ "\n"
+#~ "Тип: %3\n"
+#~ "Розмір: %4\n"
+#~ "\n"
+#~ "%5"
+
+#~ msgid ""
+#~ "Name: %2\n"
+#~ "Value: %3\n"
+#~ "\n"
+#~ "Type: %4\n"
+#~ "Size: %5 (%1 child)\n"
+#~ "\n"
+#~ " %6"
+#~ msgid_plural ""
+#~ "Name: %2\n"
+#~ "Value: %3\n"
+#~ "\n"
+#~ "Type: %4\n"
+#~ "Size: %5 (%1 children)\n"
+#~ "\n"
+#~ " %6"
+#~ msgstr[0] ""
+#~ "Назва: %2\n"
+#~ "Значення: %3\n"
+#~ "\n"
+#~ "Тип: %4\n"
+#~ "Розмір: %5 (%1 дочірній об’єкт)\n"
+#~ "\n"
+#~ " %6"
+#~ msgstr[1] ""
+#~ "Назва: %2\n"
+#~ "Значення: %3\n"
+#~ "\n"
+#~ "Тип: %4\n"
+#~ "Розмір: %5 (%1 дочірні об’єкти)\n"
+#~ "\n"
+#~ " %6"
+#~ msgstr[2] ""
+#~ "Назва: %2\n"
+#~ "Значення: %3\n"
+#~ "\n"
+#~ "Тип: %4\n"
+#~ "Розмір: %5 (%1 дочірніх об’єктів)\n"
+#~ "\n"
+#~ " %6"
+#~ msgstr[3] ""
+#~ "Назва: %2\n"
+#~ "Значення: %3\n"
+#~ "\n"
+#~ "Тип: %4\n"
+#~ "Розмір: %5 (%1 дочірній об’єкт)\n"
+#~ "\n"
+#~ " %6"
+
+#~ msgid ""
+#~ "Name: %2\n"
+#~ "Value: %3\n"
+#~ "\n"
+#~ "Type: %4\n"
+#~ "Size: %5 (%1 child)"
+#~ msgid_plural ""
+#~ "Name: %2\n"
+#~ "Value: %3\n"
+#~ "\n"
+#~ "Type: %4\n"
+#~ "Size: %5 (%1 children)"
+#~ msgstr[0] ""
+#~ "Назва: %2\n"
+#~ "Значення: %3\n"
+#~ "\n"
+#~ "Тип: %4\n"
+#~ "Розмір: %5 (%1 дочірній об’єкт)"
+#~ msgstr[1] ""
+#~ "Назва: %2\n"
+#~ "Значення: %3\n"
+#~ "\n"
+#~ "Тип: %4\n"
+#~ "Розмір: %5 (%1 дочірні об’єкти)"
+#~ msgstr[2] ""
+#~ "Назва: %2\n"
+#~ "Значення: %3\n"
+#~ "\n"
+#~ "Тип: %4\n"
+#~ "Розмір: %5 (%1 дочірніх об’єктів)"
+#~ msgstr[3] ""
+#~ "Назва: %2\n"
+#~ "Значення: %3\n"
+#~ "\n"
+#~ "Тип: %4\n"
+#~ "Розмір: %5 (%1 дочірній об’єкт)"
 
 #~ msgid "Show Non-printable:"
 #~ msgstr "Показ недрукованих символів:"
