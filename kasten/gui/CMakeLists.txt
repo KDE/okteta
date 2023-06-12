@@ -77,7 +77,7 @@ oktetakastengui_add_sublibrary(io/streamencoder/viewtext
         AbstractByteArrayColumnTextRenderer
         ValueByteArrayColumnTextRenderer
         CharByteArrayColumnTextRenderer
-        ByteArrayrowsColumnTextRenderer
+        ByteArrayRowsColumnTextRenderer
         ByteArrayViewTextStreamEncoder
 )
 
