@@ -30,7 +30,8 @@ class OKTETAKASTENGUI_EXPORT AbstractByteArrayStreamEncoder : public AbstractMod
     Q_OBJECT
 
 public:
-    AbstractByteArrayStreamEncoder(const QString& remoteTypeName, const QString& remoteMimeType);
+    AbstractByteArrayStreamEncoder(const QString& remoteTypeName, const QString& remoteMimeType,
+                                   const QString& remoteClipboardMimeType = QString());
     ~AbstractByteArrayStreamEncoder() override;
 
 public: // AbstractModelStreamEncoder API

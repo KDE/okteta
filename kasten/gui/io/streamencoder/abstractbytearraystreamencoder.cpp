@@ -23,8 +23,10 @@ namespace Kasten {
 static constexpr int MaxPreviewSize = 100;
 
 AbstractByteArrayStreamEncoder::AbstractByteArrayStreamEncoder(const QString& remoteTypeName,
-                                                               const QString& remoteMimeType)
-    : AbstractModelStreamEncoder(remoteTypeName, remoteMimeType, QStringLiteral("text/plain"))
+                                                               const QString& remoteMimeType,
+                                                               const QString& remoteClipboardMimeType)
+    : AbstractModelStreamEncoder(remoteTypeName, remoteMimeType,
+                                 remoteClipboardMimeType.isEmpty() ? QStringLiteral("text/plain") : remoteClipboardMimeType)
 {}
 
 AbstractByteArrayStreamEncoder::~AbstractByteArrayStreamEncoder() = default;

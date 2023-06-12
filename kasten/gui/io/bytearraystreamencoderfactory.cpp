@@ -12,6 +12,7 @@
 #include "streamencoder/chars/bytearraycharsstreamencoder.hpp"
 #include "streamencoder/values/bytearrayvaluesstreamencoder.hpp"
 #include "streamencoder/sourcecode/bytearraysourcecodestreamencoder.hpp"
+#include "streamencoder/viewhtml/bytearrayviewhtmlstreamencoder.hpp"
 #include "streamencoder/viewtext/bytearrayviewtextstreamencoder.hpp"
 #include "streamencoder/base64/bytearraybase64streamencoder.hpp"
 #include "streamencoder/base32/bytearraybase32streamencoder.hpp"
@@ -44,6 +45,7 @@ QVector<AbstractModelStreamEncoder*> ByteArrayStreamEncoderFactory::createStream
         new ByteArraySRecStreamEncoder(),
         new ByteArraySourceCodeStreamEncoder(),
         new ByteArrayViewTextStreamEncoder(),
+        new ByteArrayViewHtmlStreamEncoder(),
 //// NEWBYTEARRAYSTREAMENCODER(start)
 //// Here add the creation of an object of your streamencoder class and add it to the list,
 //// e.g.

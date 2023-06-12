@@ -98,6 +98,17 @@ oktetakastengui_add_sublibrary(io/streamencoder/ihex
         ByteArrayIHexStreamEncoder
 )
 
+oktetakastengui_add_sublibrary(io/streamencoder/viewhtml
+    PRIVATE
+        AbstractColumnHtmlRenderer
+        OffsetColumnHtmlRenderer
+        AbstractByteArrayColumnHtmlRenderer
+        ValueByteArrayColumnHtmlRenderer
+        CharByteArrayColumnHtmlRenderer
+        ByteArrayRowsColumnHtmlRenderer
+        ByteArrayViewHtmlStreamEncoder
+)
+
 oktetakastengui_add_sublibrary(io/streamencoder/viewtext
     PRIVATE
         AbstractColumnTextRenderer
