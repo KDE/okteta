@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-06 02:42+0000\n"
+"POT-Creation-Date: 2023-06-13 02:44+0000\n"
 "PO-Revision-Date: 2016-11-15 21:29+0800\n"
 "Last-Translator: Jeff Huang <s8321414@gmail.com>\n"
 "Language-Team: Chinese <kde-i18n-doc@kde.org>\n"
@@ -1188,7 +1188,7 @@ msgstr ""
 
 #: controllers/view/poddecoder/podtableview.cpp:255
 #: controllers/view/selectrange/selectrangeview.cpp:193
-#: controllers/view/structures/structureview.cpp:339
+#: controllers/view/structures/structureview.cpp:340
 #, kde-format
 msgctxt "@action:button"
 msgid "&Select"
