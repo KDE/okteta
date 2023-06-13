@@ -33,7 +33,7 @@ namespace Kasten {
 ByteArrayViewHtmlStreamEncoderSettings::ByteArrayViewHtmlStreamEncoderSettings() = default;
 
 ByteArrayViewHtmlStreamEncoder::ByteArrayViewHtmlStreamEncoder()
-    : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "View as HTML"), QStringLiteral("text/html"), QStringLiteral("text/html"))
+    : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "View in HTML"), QStringLiteral("text/html"), QStringLiteral("text/html"))
 {}
 
 ByteArrayViewHtmlStreamEncoder::~ByteArrayViewHtmlStreamEncoder() = default;
