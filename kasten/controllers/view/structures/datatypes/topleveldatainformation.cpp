@@ -75,7 +75,7 @@ void TopLevelDataInformation::resetValidationState()
     mData->resetValidationState();
 }
 
-void TopLevelDataInformation::read(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+void TopLevelDataInformation::read(const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
                                    const Okteta::ArrayChangeMetricsList& changesList, bool forceRead)
 {
     mChildDataChanged = false;
@@ -121,7 +121,7 @@ void TopLevelDataInformation::enqueueReadData(PointerDataInformation* toRead)
     mDelayedRead.append(toRead);
 }
 
-bool TopLevelDataInformation::isReadingNecessary(Okteta::AbstractByteArrayModel* model,
+bool TopLevelDataInformation::isReadingNecessary(const Okteta::AbstractByteArrayModel* model,
                                                  Okteta::Address address, const Okteta::ArrayChangeMetricsList& changesList)
 {
     if (model != mLastModel) {

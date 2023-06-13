@@ -27,7 +27,7 @@ public:
     ~PrimitiveArrayData() override;
 
 public:
-    qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+    qint64 readData(const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
                     BitCount64 bitsRemaining) override;
     bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
                       Okteta::Address address, BitCount64 bitsRemaining) override;
@@ -64,9 +64,9 @@ protected:
     /** sets mChildType and mDummy as @p index, which must have been checked before calling this method!! */
     void activateIndex(uint index);
     /** reads @p numItems items from the input, sizes must have been checked before calling this method!! */
-    void readDataNativeOrder(uint numItems, Okteta::AbstractByteArrayModel* input, Okteta::Address addr);
+    void readDataNativeOrder(uint numItems, const Okteta::AbstractByteArrayModel* input, Okteta::Address addr);
     /** reads @p numItems items from the input, sizes must have been checked before calling this method!! */
-    void readDataNonNativeOrder(uint numItems, Okteta::AbstractByteArrayModel* input, Okteta::Address addr);
+    void readDataNonNativeOrder(uint numItems, const Okteta::AbstractByteArrayModel* input, Okteta::Address addr);
     void setNewParentForChildren() override;
 
     QVector<T> mData;

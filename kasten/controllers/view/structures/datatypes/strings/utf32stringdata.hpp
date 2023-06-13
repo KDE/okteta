@@ -22,7 +22,7 @@ public:
     QString charType() const override;
     QString completeString(bool skipInvalid = false) const override;
     uint count() const override;
-    qint64 read(Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining) override;
+    qint64 read(const Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining) override;
     BitCount32 size() const override;
     BitCount32 sizeAt(uint i) const override;
     QString stringValue(int row) const override;

@@ -32,7 +32,7 @@ inline PrimitiveArrayData<type>::PrimitiveArrayData(unsigned int initialLength, 
 }
 
 template <PrimitiveDataType type>
-qint64 PrimitiveArrayData<type>::readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+qint64 PrimitiveArrayData<type>::readData(const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
                                           BitCount64 bitsRemaining)
 {
     Q_ASSERT(bitsRemaining % 8 == 0);
@@ -60,7 +60,8 @@ qint64 PrimitiveArrayData<type>::readData(Okteta::AbstractByteArrayModel* input,
 }
 
 template <PrimitiveDataType type>
-void PrimitiveArrayData<type>::readDataNativeOrder(uint numItems, Okteta::AbstractByteArrayModel* input,
+void PrimitiveArrayData<type>::readDataNativeOrder(uint numItems,
+                                                   const Okteta::AbstractByteArrayModel* input,
                                                    Okteta::Address address)
 {
     Q_ASSERT(numItems <= length());
@@ -74,7 +75,8 @@ void PrimitiveArrayData<type>::readDataNativeOrder(uint numItems, Okteta::Abstra
 }
 
 template <PrimitiveDataType type>
-void PrimitiveArrayData<type>::readDataNonNativeOrder(uint numItems, Okteta::AbstractByteArrayModel* input,
+void PrimitiveArrayData<type>::readDataNonNativeOrder(uint numItems,
+                                                      const Okteta::AbstractByteArrayModel* input,
                                                       Okteta::Address address)
 {
     Q_ASSERT(numItems <= length());

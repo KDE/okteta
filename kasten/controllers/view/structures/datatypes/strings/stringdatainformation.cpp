@@ -84,7 +84,7 @@ bool StringDataInformation::setChildData(uint row, const QVariant& value, Okteta
     return false;
 }
 
-qint64 StringDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+qint64 StringDataInformation::readData(const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
                                        BitCount64 bitsRemaining, quint8* bitOffset)
 {
     Q_ASSERT(mHasBeenUpdated); // update must have been called prior to reading

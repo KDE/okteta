@@ -93,7 +93,7 @@ QVariant PrimitiveDataInformationWrapper::valueToQVariant(AllPrimitiveTypes valu
     return mValue->valueToQVariant(value);
 }
 
-qint64 PrimitiveDataInformationWrapper::readData(Okteta::AbstractByteArrayModel* input,
+qint64 PrimitiveDataInformationWrapper::readData(const Okteta::AbstractByteArrayModel* input,
                                                  Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset)
 {
     Q_ASSERT(mHasBeenUpdated); // update must have been called prior to reading

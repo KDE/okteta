@@ -31,12 +31,12 @@ public:
     bool isPointer() const override;
     BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const override;
     int indexOf(const DataInformation* const data) const override;
-    qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+    qint64 readData(const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
                     BitCount64 bitsRemaining, quint8* bitOffset) override;
     /** Called once the whole structure has been read. Now we can evaluate what we are pointing at.
      * @param input the input
      * @param address the address of the root structure start */
-    void delayedReadData(Okteta::AbstractByteArrayModel* input, Okteta::Address address);
+    void delayedReadData(const Okteta::AbstractByteArrayModel* input, Okteta::Address address);
 
     DataInformation* pointerTarget() const;
     /** Set a new pointer target

@@ -23,7 +23,7 @@ AsciiStringData::AsciiStringData(StringDataInformation* parent)
 
 AsciiStringData::~AsciiStringData() = default;
 
-qint64 AsciiStringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining)
+qint64 AsciiStringData::read(const Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining)
 {
     const int oldSize = count();
     if (mMode == CharCount || mMode == ByteCount) { // same for ascii

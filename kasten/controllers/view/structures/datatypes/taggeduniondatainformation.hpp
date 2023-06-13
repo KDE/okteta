@@ -41,7 +41,7 @@ public:
     explicit TaggedUnionDataInformation(const QString& name, DataInformation* parent = nullptr);
     ~TaggedUnionDataInformation() override;
 
-    qint64 readData(Okteta::AbstractByteArrayModel* input,
+    qint64 readData(const Okteta::AbstractByteArrayModel* input,
                     Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset) override;
     bool isTaggedUnion() const override;
 

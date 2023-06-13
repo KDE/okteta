@@ -129,7 +129,7 @@ int TaggedUnionDataInformation::determineSelection(TopLevelDataInformation* top)
     return -1;
 }
 
-qint64 TaggedUnionDataInformation::readData(Okteta::AbstractByteArrayModel* input,
+qint64 TaggedUnionDataInformation::readData(const Okteta::AbstractByteArrayModel* input,
                                             Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset)
 {
     Q_ASSERT(mHasBeenUpdated);

@@ -59,7 +59,7 @@ public:
      *      This parameter is only useful if the structure was locked to a specific position.
      * @param forceRead whether to always read data, ignoring the change list
      */
-    void read(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+    void read(const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
               const Okteta::ArrayChangeMetricsList& changesList, bool forceRead);
     QScriptEngine* scriptEngine() const;
 
@@ -87,7 +87,7 @@ public:
     void _childCountChanged(DataInformation* sender, uint oldCount, uint newCount);
 
 private:
-    bool isReadingNecessary(Okteta::AbstractByteArrayModel* model, Okteta::Address address,
+    bool isReadingNecessary(const Okteta::AbstractByteArrayModel* model, Okteta::Address address,
                             const Okteta::ArrayChangeMetricsList& changesList);
 
 public Q_SLOTS:
@@ -122,7 +122,7 @@ private:
     bool mChildDataChanged : 1;
     Okteta::Address mDefaultLockOffset = INVALID_OFFSET;
     Okteta::Address mLastReadOffset = INVALID_OFFSET;
-    Okteta::AbstractByteArrayModel* mLastModel = nullptr;
+    const Okteta::AbstractByteArrayModel* mLastModel = nullptr;
     QQueue<PointerDataInformation*> mDelayedRead;
 
     friend class LockToOffsetTest; // needs to call isReadingNecessary()

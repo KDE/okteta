@@ -57,7 +57,7 @@ bool BasicPrimitiveDataInformation<T, C>::setData(const QVariant& value,
 }
 
 template <typename T, typename C>
-qint64 BasicPrimitiveDataInformation<T, C>::readData(Okteta::AbstractByteArrayModel* input,
+qint64 BasicPrimitiveDataInformation<T, C>::readData(const Okteta::AbstractByteArrayModel* input,
                                                      Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset)
 {
     Q_ASSERT(mHasBeenUpdated); // update must have been called prior to reading except
