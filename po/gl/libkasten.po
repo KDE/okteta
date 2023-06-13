@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-07 00:55+0000\n"
+"POT-Creation-Date: 2023-06-13 00:51+0000\n"
 "PO-Revision-Date: 2018-05-23 13:41+0100\n"
 "Last-Translator: Adrian Chaves <adrian@chaves.io>\n"
 "Language-Team: Galician <kde-i18n-doc@kde.org>\n"
@@ -385,19 +385,19 @@ msgctxt "@title:window"
 msgid "Save As"
 msgstr "Gardar como"
 
-#: core/system/documentsyncmanager_p.cpp:202
+#: core/system/documentsyncmanager_p.cpp:203
 #, kde-format
 msgctxt "@title:window"
 msgid "Close"
 msgstr "Pechar"
 
-#: core/system/documentsyncmanager_p.cpp:237
+#: core/system/documentsyncmanager_p.cpp:238
 #, kde-format
 msgctxt "@title:window"
 msgid "Reload"
 msgstr "Cargar de novo"
 
-#: core/system/modelcodecmanager_p.cpp:112
+#: core/system/modelcodecmanager_p.cpp:113
 #, kde-format
 msgctxt "@action:button"
 msgid "&Export"

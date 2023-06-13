@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-12 00:59+0000\n"
+"POT-Creation-Date: 2023-06-13 00:51+0000\n"
 "PO-Revision-Date: 2011-09-05 22:16+0200\n"
 "Last-Translator: Manfred Wiese <m.j.wiese@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -1288,7 +1288,7 @@ msgstr ""
 
 #: controllers/view/poddecoder/podtableview.cpp:236
 #: controllers/view/selectrange/selectrangeview.cpp:193
-#: controllers/view/structures/structureview.cpp:338
+#: controllers/view/structures/structureview.cpp:339
 #, kde-format
 msgctxt "@action:button"
 msgid "&Select"
@@ -3479,6 +3479,12 @@ msgstr "Weert-Koderen:"
 msgctxt "@label:textbox substring which separates the values"
 msgid "Separation:"
 msgstr "Trennen:"
+
+#: gui/io/streamencoder/viewhtml/bytearrayviewhtmlstreamencoder.cpp:36
+#, kde-format
+msgctxt "name of the encoding target"
+msgid "View as HTML"
+msgstr ""
 
 #: gui/io/streamencoder/viewtext/bytearrayviewtextstreamencoder.cpp:41
 #, kde-format

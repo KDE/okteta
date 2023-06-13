@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-07 00:55+0000\n"
+"POT-Creation-Date: 2023-06-13 00:51+0000\n"
 "PO-Revision-Date: 2018-05-24 00:19+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
@@ -387,19 +387,19 @@ msgctxt "@title:window"
 msgid "Save As"
 msgstr "Opslaan als"
 
-#: core/system/documentsyncmanager_p.cpp:202
+#: core/system/documentsyncmanager_p.cpp:203
 #, kde-format
 msgctxt "@title:window"
 msgid "Close"
 msgstr "Sluiten"
 
-#: core/system/documentsyncmanager_p.cpp:237
+#: core/system/documentsyncmanager_p.cpp:238
 #, kde-format
 msgctxt "@title:window"
 msgid "Reload"
 msgstr "Herladen"
 
-#: core/system/modelcodecmanager_p.cpp:112
+#: core/system/modelcodecmanager_p.cpp:113
 #, kde-format
 msgctxt "@action:button"
 msgid "&Export"

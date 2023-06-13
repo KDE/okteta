@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-07 00:55+0000\n"
+"POT-Creation-Date: 2023-06-13 00:51+0000\n"
 "PO-Revision-Date: 2011-08-16 08:06+0000\n"
 "Last-Translator: Sveinn í Felli <sveinki@nett.is>\n"
 "Language-Team: Icelandic <kde-isl@molar.is>\n"
@@ -386,19 +386,19 @@ msgctxt "@title:window"
 msgid "Save As"
 msgstr "Vista sem"
 
-#: core/system/documentsyncmanager_p.cpp:202
+#: core/system/documentsyncmanager_p.cpp:203
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Close"
 msgstr "Loka"
 
-#: core/system/documentsyncmanager_p.cpp:237
+#: core/system/documentsyncmanager_p.cpp:238
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Reload"
 msgstr "Skipta út"
 
-#: core/system/modelcodecmanager_p.cpp:112
+#: core/system/modelcodecmanager_p.cpp:113
 #, fuzzy, kde-format
 msgctxt "@action:button"
 msgid "&Export"

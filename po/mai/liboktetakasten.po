@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-12 00:59+0000\n"
+"POT-Creation-Date: 2023-06-13 00:51+0000\n"
 "PO-Revision-Date: 2010-09-24 20:24+0530\n"
 "Last-Translator: Rajesh Ranjan <rajesh672@gmail.com>\n"
 "Language-Team: Maithili <bhashaghar@googlegroups.com>\n"
@@ -1213,7 +1213,7 @@ msgstr ""
 
 #: controllers/view/poddecoder/podtableview.cpp:236
 #: controllers/view/selectrange/selectrangeview.cpp:193
-#: controllers/view/structures/structureview.cpp:338
+#: controllers/view/structures/structureview.cpp:339
 #, kde-format
 msgctxt "@action:button"
 msgid "&Select"
@@ -3306,6 +3306,12 @@ msgstr ""
 #, kde-format
 msgctxt "@label:textbox substring which separates the values"
 msgid "Separation:"
+msgstr ""
+
+#: gui/io/streamencoder/viewhtml/bytearrayviewhtmlstreamencoder.cpp:36
+#, kde-format
+msgctxt "name of the encoding target"
+msgid "View as HTML"
 msgstr ""
 
 #: gui/io/streamencoder/viewtext/bytearrayviewtextstreamencoder.cpp:41

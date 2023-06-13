@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-12 00:59+0000\n"
-"PO-Revision-Date: 2023-06-06 07:49+0300\n"
+"POT-Creation-Date: 2023-06-13 00:51+0000\n"
+"PO-Revision-Date: 2023-06-12 19:52+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -1272,7 +1272,7 @@ msgstr ""
 
 #: controllers/view/poddecoder/podtableview.cpp:236
 #: controllers/view/selectrange/selectrangeview.cpp:193
-#: controllers/view/structures/structureview.cpp:338
+#: controllers/view/structures/structureview.cpp:339
 #, kde-format
 msgctxt "@action:button"
 msgid "&Select"
@@ -1749,28 +1749,24 @@ msgid "<EOF reached>"
 msgstr "<досягнуто EOF>"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:228
-#, fuzzy, kde-format
-#| msgctxt "name of a data structure"
-#| msgid "Name"
+#, kde-format
 msgid "Name:"
-msgstr "Назва"
+msgstr "Назва:"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:230
-#, fuzzy, kde-format
-#| msgctxt "@title:column value of the bytes for the datatype"
-#| msgid "Value"
+#, kde-format
 msgid "Value:"
-msgstr "Значення"
+msgstr "Значення:"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:237
 #, kde-format
 msgctxt "size (elements)"
 msgid "%2 (%1 child)"
 msgid_plural "%2 (%1 children)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%2 (%1 дочірній)"
+msgstr[1] "%2 (%1 дочірніх)"
+msgstr[2] "%2 (%1 дочірніх)"
+msgstr[3] "%2 (%1 дочірній)"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:262
 #: controllers/view/structures/datatypes/datainformationwithchildren.cpp:233
@@ -2433,11 +2429,10 @@ msgid "Value"
 msgstr "Значення"
 
 #: controllers/view/structures/structurestool.cpp:193
-#, fuzzy, kde-format
-#| msgid "Size:"
+#, kde-format
 msgctxt "size of a data structure"
 msgid "Size"
-msgstr "Розмір:"
+msgstr "Розмір"
 
 #: controllers/view/structures/structureview.cpp:96
 #, kde-format
@@ -3392,6 +3387,12 @@ msgstr "Кодування значення:"
 msgctxt "@label:textbox substring which separates the values"
 msgid "Separation:"
 msgstr "Відокремлення:"
+
+#: gui/io/streamencoder/viewhtml/bytearrayviewhtmlstreamencoder.cpp:36
+#, kde-format
+msgctxt "name of the encoding target"
+msgid "View as HTML"
+msgstr ""
 
 #: gui/io/streamencoder/viewtext/bytearrayviewtextstreamencoder.cpp:41
 #, kde-format
