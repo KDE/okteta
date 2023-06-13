@@ -40,7 +40,6 @@ namespace Okteta {
 class AbstractByteArrayModel;
 }
 
-class QScriptContext;
 class QScriptEngine;
 class QScriptValue;
 class QScriptClass;

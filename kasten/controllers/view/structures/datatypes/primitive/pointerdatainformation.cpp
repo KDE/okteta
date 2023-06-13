@@ -15,10 +15,9 @@
 #include "../../script/classes/pointerscriptclass.hpp"
 #include "../../script/scriptlogger.hpp"
 #include "../../parsers/parserutils.hpp"
-
-#include <QScriptEngine>
+// KF
 #include <KLocalizedString>
-
+// Std
 #include <limits>
 
 PointerDataInformation::PointerDataInformation(const QString& name, DataInformation* childType,

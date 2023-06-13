@@ -18,13 +18,12 @@
 #include "../../script/scripthandlerinfo.hpp"
 #include "../../script/scriptlogger.hpp"
 #include "../../script/classes/primitivescriptclass.hpp"
-
-#include <QScriptValue>
-#include <QScriptEngine>
-
-#include <KLocalizedString>
-
+// Okteta core
 #include <Okteta/AbstractByteArrayModel>
+// KF
+#include <KLocalizedString>
+// Qt
+#include <QScriptValue>
 
 template <typename T, class C>
 inline QScriptClass* BasicPrimitiveDataInformation<T, C>::scriptClass(ScriptHandlerInfo* handlerInfo) const

@@ -7,11 +7,9 @@
 */
 #include "scriptutils.hpp"
 
+// Qt
 #include <QScriptValueIterator>
 #include <QScriptValue>
-#include <QScriptString>
-#include <QScriptContext>
-#include <QScriptEngine>
 
 #include "../allprimitivetypes.hpp"
 

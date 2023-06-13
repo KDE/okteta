@@ -12,8 +12,6 @@
 #include "../datatypes/primitivedatatype.hpp"
 
 class QScriptValue;
-class QScriptContext;
-class QScriptEngine;
 union AllPrimitiveTypes;
 
 namespace ScriptUtils {

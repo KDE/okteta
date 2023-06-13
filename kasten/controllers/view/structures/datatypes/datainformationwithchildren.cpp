@@ -13,9 +13,9 @@
 #include "../script/scripthandlerinfo.hpp"
 #include "../script/classes/structunionscriptclass.hpp"
 #include "../script/scriptlogger.hpp"
-
+// KF
 #include <KLocalizedString>
-#include <QScriptEngine>
+// Qt
 #include <QLineEdit>
 
 DataInformationWithChildren::DataInformationWithChildren(const QString& name,

@@ -15,10 +15,9 @@
 #include "../datatypes/topleveldatainformation.hpp"
 #include "../datatypes/array/arraydatainformation.hpp"
 #include "../parsers/parserutils.hpp"
-
+// Qt
 #include <QStringList>
 #include <QScriptValue>
-#include <QScriptValueIterator>
 #include <QScriptEngine>
 
 ScriptHandler::ScriptHandler(QScriptEngine* engine, TopLevelDataInformation* topLevel)
