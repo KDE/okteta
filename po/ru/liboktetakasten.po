@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: khexedit\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-13 00:51+0000\n"
+"POT-Creation-Date: 2023-06-14 00:50+0000\n"
 "PO-Revision-Date: 2022-10-12 16:05+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -3391,10 +3391,12 @@ msgid "Separation:"
 msgstr "Разделитель:"
 
 #: gui/io/streamencoder/viewhtml/bytearrayviewhtmlstreamencoder.cpp:36
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "name of the encoding target"
+#| msgid "View in Plain Text"
 msgctxt "name of the encoding target"
-msgid "View as HTML"
-msgstr ""
+msgid "View in HTML"
+msgstr "Просмотреть как обычный текст"
 
 #: gui/io/streamencoder/viewtext/bytearrayviewtextstreamencoder.cpp:41
 #, kde-format

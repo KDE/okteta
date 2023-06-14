@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-13 00:51+0000\n"
-"PO-Revision-Date: 2023-06-07 08:33+0200\n"
+"POT-Creation-Date: 2023-06-14 00:50+0000\n"
+"PO-Revision-Date: 2023-06-13 06:21+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -1736,26 +1736,22 @@ msgid "<EOF reached>"
 msgstr "<acadouse a fin do ficheiro (EOF)>"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:228
-#, fuzzy, kde-format
-#| msgctxt "name of a data structure"
-#| msgid "Name"
+#, kde-format
 msgid "Name:"
-msgstr "Nome"
+msgstr "Nome:"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:230
-#, fuzzy, kde-format
-#| msgctxt "@title:column value of the bytes for the datatype"
-#| msgid "Value"
+#, kde-format
 msgid "Value:"
-msgstr "Valor"
+msgstr "Valor:"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:237
 #, kde-format
 msgctxt "size (elements)"
 msgid "%2 (%1 child)"
 msgid_plural "%2 (%1 children)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%2 (%1 subordinado)"
+msgstr[1] "%2 (%1 subordinados)"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:262
 #: controllers/view/structures/datatypes/datainformationwithchildren.cpp:233
@@ -2405,11 +2401,10 @@ msgid "Value"
 msgstr "Valor"
 
 #: controllers/view/structures/structurestool.cpp:193
-#, fuzzy, kde-format
-#| msgid "Size:"
+#, kde-format
 msgctxt "size of a data structure"
 msgid "Size"
-msgstr "Tamaño:"
+msgstr "Tamaño"
 
 #: controllers/view/structures/structureview.cpp:96
 #, kde-format
@@ -3364,10 +3359,12 @@ msgid "Separation:"
 msgstr "Separación:"
 
 #: gui/io/streamencoder/viewhtml/bytearrayviewhtmlstreamencoder.cpp:36
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "name of the encoding target"
+#| msgid "View in Plain Text"
 msgctxt "name of the encoding target"
-msgid "View as HTML"
-msgstr ""
+msgid "View in HTML"
+msgstr "Ver como texto simple"
 
 #: gui/io/streamencoder/viewtext/bytearrayviewtextstreamencoder.cpp:41
 #, kde-format

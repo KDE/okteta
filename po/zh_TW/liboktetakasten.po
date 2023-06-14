@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-13 00:51+0000\n"
+"POT-Creation-Date: 2023-06-14 00:50+0000\n"
 "PO-Revision-Date: 2019-02-23 21:23+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -3293,10 +3293,12 @@ msgid "Separation:"
 msgstr "區隔："
 
 #: gui/io/streamencoder/viewhtml/bytearrayviewhtmlstreamencoder.cpp:36
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "name of the encoding target"
+#| msgid "View in Plain Text"
 msgctxt "name of the encoding target"
-msgid "View as HTML"
-msgstr ""
+msgid "View in HTML"
+msgstr "以純文字檢視"
 
 #: gui/io/streamencoder/viewtext/bytearrayviewtextstreamencoder.cpp:41
 #, kde-format

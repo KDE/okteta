@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-13 00:51+0000\n"
-"PO-Revision-Date: 2023-05-18 05:52+0200\n"
+"POT-Creation-Date: 2023-06-14 00:50+0000\n"
+"PO-Revision-Date: 2023-06-13 05:47+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -1659,18 +1659,14 @@ msgid "<EOF reached>"
 msgstr ""
 
 #: controllers/view/structures/datatypes/datainformation.cpp:228
-#, fuzzy, kde-format
-#| msgctxt "name of a data structure"
-#| msgid "Name"
+#, kde-format
 msgid "Name:"
-msgstr "სახელი"
+msgstr "სახელი:"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:230
-#, fuzzy, kde-format
-#| msgctxt "@title:column value of the bytes for the datatype"
-#| msgid "Value"
+#, kde-format
 msgid "Value:"
-msgstr "მნიშვნელობა"
+msgstr "მნიშვნელობა:"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:237
 #, kde-format
@@ -2318,11 +2314,10 @@ msgid "Value"
 msgstr "მნიშვნელობა"
 
 #: controllers/view/structures/structurestool.cpp:193
-#, fuzzy, kde-format
-#| msgid "Size:"
+#, kde-format
 msgctxt "size of a data structure"
 msgid "Size"
-msgstr "ზომა:"
+msgstr "ზომა"
 
 #: controllers/view/structures/structureview.cpp:96
 #, kde-format
@@ -3263,10 +3258,12 @@ msgid "Separation:"
 msgstr "გაცალკევება:"
 
 #: gui/io/streamencoder/viewhtml/bytearrayviewhtmlstreamencoder.cpp:36
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "name of the encoding target"
+#| msgid "View in Plain Text"
 msgctxt "name of the encoding target"
-msgid "View as HTML"
-msgstr ""
+msgid "View in HTML"
+msgstr "უბრალო ტექსტად ნახვა"
 
 #: gui/io/streamencoder/viewtext/bytearrayviewtextstreamencoder.cpp:41
 #, kde-format
