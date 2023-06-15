@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-14 00:50+0000\n"
-"PO-Revision-Date: 2023-06-13 09:09+0300\n"
+"PO-Revision-Date: 2023-06-14 08:34+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -3389,12 +3389,10 @@ msgid "Separation:"
 msgstr "Відокремлення:"
 
 #: gui/io/streamencoder/viewhtml/bytearrayviewhtmlstreamencoder.cpp:36
-#, fuzzy, kde-format
-#| msgctxt "name of the encoding target"
-#| msgid "View as HTML"
+#, kde-format
 msgctxt "name of the encoding target"
 msgid "View in HTML"
-msgstr "Переглянути як HTML"
+msgstr "Переглянути у HTML"
 
 #: gui/io/streamencoder/viewtext/bytearrayviewtextstreamencoder.cpp:41
 #, kde-format

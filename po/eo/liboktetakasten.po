@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-14 00:50+0000\n"
-"PO-Revision-Date: 2023-06-12 22:15+0100\n"
+"PO-Revision-Date: 2023-06-14 20:54+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -3344,18 +3344,16 @@ msgid "Separation:"
 msgstr "Apartigo:"
 
 #: gui/io/streamencoder/viewhtml/bytearrayviewhtmlstreamencoder.cpp:36
-#, fuzzy, kde-format
-#| msgctxt "name of the encoding target"
-#| msgid "View in Plain Text"
+#, kde-format
 msgctxt "name of the encoding target"
 msgid "View in HTML"
-msgstr "Vidi en Klara Teksto"
+msgstr "Vidi en HTML"
 
 #: gui/io/streamencoder/viewtext/bytearrayviewtextstreamencoder.cpp:41
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "View in Plain Text"
-msgstr "Vidi en Klara Teksto"
+msgstr "Vidi en Plata Teksto"
 
 #: gui/io/streamencoder/xxencoding/bytearrayxxencodingstreamencoder.cpp:71
 #, kde-format
