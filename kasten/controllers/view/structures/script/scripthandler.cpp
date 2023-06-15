@@ -7,8 +7,8 @@
 */
 
 #include "scripthandler.hpp"
+
 #include "scriptengineinitializer.hpp"
-#include "scriptutils.hpp"
 #include "scriptlogger.hpp"
 #include "classes/defaultscriptclass.hpp"
 #include "../datatypes/datainformation.hpp"

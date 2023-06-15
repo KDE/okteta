@@ -7,7 +7,7 @@
 */
 
 #include "scriptengineinitializer.hpp"
-#include "scriptutils.hpp"
+
 #include "../datatypes/primitivefactory.hpp"
 #include "../parsers/parserutils.hpp"
 #include <QStringList>
