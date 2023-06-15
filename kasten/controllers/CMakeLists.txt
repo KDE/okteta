@@ -481,7 +481,6 @@ oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/script
         ScriptEngineInitializer
         ScriptHandler
         ScriptHandlerInfo
-        ScriptUtils
         ScriptLogger
         ScriptLoggerView
         SafeReference

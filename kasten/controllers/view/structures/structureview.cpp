@@ -22,7 +22,6 @@
 #include "settings/structureaddremovewidget.hpp"
 
 #include "datatypes/datainformation.hpp"
-#include "script/scriptutils.hpp"
 #include "script/scriptloggerview.hpp"
 
 // KF

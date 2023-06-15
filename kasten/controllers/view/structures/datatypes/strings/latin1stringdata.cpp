@@ -24,7 +24,7 @@ Latin1StringData::Latin1StringData(StringDataInformation* parent)
 
 Latin1StringData::~Latin1StringData() = default;
 
-qint64 Latin1StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining)
+qint64 Latin1StringData::read(const Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining)
 {
     const int oldSize = count();
     if (mMode == CharCount || mMode == ByteCount) { // same for ascii

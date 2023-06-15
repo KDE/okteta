@@ -44,7 +44,7 @@ public:
                  Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset) override;
     bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
                       Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset) override;
-    qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+    qint64 readData(const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
                     BitCount64 bitsRemaining, quint8* bitOffset) override;
 
     BitCount32 size() const override;

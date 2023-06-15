@@ -39,7 +39,6 @@ namespace Okteta {
 class AbstractByteArrayModel;
 }
 
-class QScriptContext;
 class QScriptEngine;
 class QScriptValue;
 class QScriptClass;
@@ -141,7 +140,7 @@ public:
      *
      * @return the number of bits read or @c -1 if none were read
      */
-    virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+    virtual qint64 readData(const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
                             BitCount64 bitsRemaining, quint8* bitOffset) = 0;
     /** sets mWasAbleToRead to false for all children and this object.
      *  Gets called once before the reading of the whole structure starts. */

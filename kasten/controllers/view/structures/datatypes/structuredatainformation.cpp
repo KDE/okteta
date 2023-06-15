@@ -31,7 +31,7 @@ bool StructureDataInformation::isStruct() const
     return true;
 }
 
-qint64 StructureDataInformation::readData(Okteta::AbstractByteArrayModel* input,
+qint64 StructureDataInformation::readData(const Okteta::AbstractByteArrayModel* input,
                                           Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset)
 {
     Q_ASSERT(mHasBeenUpdated); // update must have been called prior to reading
@@ -59,7 +59,7 @@ BitCount64 StructureDataInformation::childPosition(const DataInformation* child,
 }
 
 bool StructureDataInformation::readChildren(const QVector<DataInformation*>& children,
-                                            Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining,
+                                            const Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining,
                                             quint8* bitOffset, qint64* readBitsPtr, TopLevelDataInformation* top)
 {
     Q_CHECK_PTR(top);

@@ -35,7 +35,7 @@ public:
     bool isBitfield() const override;
     virtual Type bitfieldType() const = 0;
     Qt::ItemFlags flags(int column, bool fileLoaded) const override;
-    qint64 readData(Okteta::AbstractByteArrayModel* input,
+    qint64 readData(const Okteta::AbstractByteArrayModel* input,
                     Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset) override;
     bool setData(const QVariant& valueVariant, Okteta::AbstractByteArrayModel* out,
                  Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset) override;

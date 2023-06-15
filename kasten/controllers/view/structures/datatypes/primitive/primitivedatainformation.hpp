@@ -103,7 +103,7 @@ public:
     QVariant valueToQVariant(AllPrimitiveTypes value) const override;
 
     // we have to do slightly more than just forward with this method
-    qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+    qint64 readData(const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
                     BitCount64 bitsRemaining, quint8* bitOffset) override;
 
 protected:

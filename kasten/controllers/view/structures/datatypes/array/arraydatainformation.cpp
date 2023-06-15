@@ -127,7 +127,7 @@ BitCount64 ArrayDataInformation::childPosition(const DataInformation* child, Okt
     return mParent->asDataInformation()->childPosition(this, start) + mData->offset(child);
 }
 
-qint64 ArrayDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+qint64 ArrayDataInformation::readData(const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
                                       BitCount64 bitsRemaining, quint8* bitOffset)
 {
     if (*bitOffset != 0) {

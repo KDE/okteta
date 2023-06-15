@@ -11,7 +11,6 @@
 
 #include <KComboBox>
 #include <KLocalizedString>
-#include <QScriptValue>
 
 #include "../../script/classes/enumscriptclass.hpp"
 #include "../../script/scriptlogger.hpp"

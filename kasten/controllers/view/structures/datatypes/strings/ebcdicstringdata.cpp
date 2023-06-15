@@ -30,7 +30,7 @@ EbcdicStringData::~EbcdicStringData()
     delete mCodec;
 }
 
-qint64 EbcdicStringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining)
+qint64 EbcdicStringData::read(const Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining)
 {
     const int oldSize = count();
     if (mMode == CharCount || mMode == ByteCount) { // same for ebcdic

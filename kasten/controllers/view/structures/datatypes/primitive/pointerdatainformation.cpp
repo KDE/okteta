@@ -15,10 +15,9 @@
 #include "../../script/classes/pointerscriptclass.hpp"
 #include "../../script/scriptlogger.hpp"
 #include "../../parsers/parserutils.hpp"
-
-#include <QScriptEngine>
+// KF
 #include <KLocalizedString>
-
+// Std
 #include <limits>
 
 PointerDataInformation::PointerDataInformation(const QString& name, DataInformation* childType,
@@ -53,7 +52,7 @@ PointerDataInformation::PointerDataInformation(const PointerDataInformation& d)
 
 PointerDataInformation::~PointerDataInformation() = default;
 
-qint64 PointerDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+qint64 PointerDataInformation::readData(const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
                                         BitCount64 bitsRemaining, quint8* bitOffset)
 {
     qint64 ret = PrimitiveDataInformationWrapper::readData(input, address, bitsRemaining, bitOffset);
@@ -83,7 +82,7 @@ int PointerDataInformation::indexOf(const DataInformation* const data) const
     return data == mPointerTarget.get() ? 0 : -1;
 }
 
-void PointerDataInformation::delayedReadData(Okteta::AbstractByteArrayModel* input, Okteta::Address address)
+void PointerDataInformation::delayedReadData(const Okteta::AbstractByteArrayModel* input, Okteta::Address address)
 {
     Q_ASSERT(mHasBeenUpdated); // update must have been called prior to reading
     Q_ASSERT(mWasAbleToRead);

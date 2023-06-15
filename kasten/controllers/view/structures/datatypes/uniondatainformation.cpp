@@ -40,7 +40,7 @@ BitCount32 UnionDataInformation::size() const
     return size;
 }
 
-qint64 UnionDataInformation::readData(Okteta::AbstractByteArrayModel* input,
+qint64 UnionDataInformation::readData(const Okteta::AbstractByteArrayModel* input,
                                       Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset)
 {
     Q_ASSERT(mHasBeenUpdated); // update must have been called prior to reading

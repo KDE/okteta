@@ -24,7 +24,7 @@ public:
     explicit EbcdicStringData(StringDataInformation* parent);
     ~EbcdicStringData() override;
 
-    qint64 read(Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining) override;
+    qint64 read(const Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining) override;
     BitCount32 sizeAt(uint i) const override;
     BitCount32 size() const override;
     QString completeString(bool skipInvalid = false) const override;

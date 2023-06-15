@@ -22,13 +22,14 @@ public:
                                       DataInformation* parent = nullptr);
     ~StructureDataInformation() override;
 
-    qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+    qint64 readData(const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
                     BitCount64 bitsRemaining, quint8* bitOffset) override;
     bool isStruct() const override;
 
     BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const override;
 
-    static bool readChildren(const QVector<DataInformation*>& children, Okteta::AbstractByteArrayModel* input,
+    static bool readChildren(const QVector<DataInformation*>& children,
+                             const Okteta::AbstractByteArrayModel* input,
                              Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset, qint64* readBitsPtr,
                              TopLevelDataInformation* top);
 

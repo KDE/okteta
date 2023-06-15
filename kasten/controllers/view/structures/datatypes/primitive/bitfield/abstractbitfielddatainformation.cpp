@@ -48,7 +48,7 @@ PrimitiveDataType AbstractBitfieldDataInformation::type() const
     return PrimitiveDataType::Bitfield;
 }
 
-qint64 AbstractBitfieldDataInformation::readData(Okteta::AbstractByteArrayModel* input,
+qint64 AbstractBitfieldDataInformation::readData(const Okteta::AbstractByteArrayModel* input,
                                                  Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset)
 {
     Q_ASSERT(mHasBeenUpdated); // update must have been called prior to reading
