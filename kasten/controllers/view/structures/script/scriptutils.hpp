@@ -9,17 +9,12 @@
 #ifndef KASTEN_SCRIPTUTILS_HPP
 #define KASTEN_SCRIPTUTILS_HPP
 
-#include "../datatypes/primitivedatatype.hpp"
-
 class QScriptValue;
-union AllPrimitiveTypes;
+class QString;
 
 namespace ScriptUtils {
 
 QString qScriptValueToString(const QScriptValue& val);
-
-void wrapAllPrimitiveTypes(QScriptValue& out, AllPrimitiveTypes allPrim,
-                           PrimitiveDataType actualType);
 
 }
 

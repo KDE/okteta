@@ -11,8 +11,6 @@
 #include <QScriptValueIterator>
 #include <QScriptValue>
 
-#include "../allprimitivetypes.hpp"
-
 QString ScriptUtils::qScriptValueToString(const QScriptValue& val)
 {
     if (!val.isValid()) {
@@ -52,27 +50,4 @@ QString ScriptUtils::qScriptValueToString(const QScriptValue& val)
         }
     }
     return ret;
-}
-
-void ScriptUtils::wrapAllPrimitiveTypes(QScriptValue& out,
-                                        AllPrimitiveTypes allPrim, PrimitiveDataType actualType)
-{
-    out.setProperty(QStringLiteral("type"), PrimitiveType::standardTypeName(actualType));
-    out.setProperty(QStringLiteral("char"), QString(allPrim.value<quint8>() > 127
-                                                    ? QChar::ReplacementCharacter : QChar(allPrim.value<qint8>(), 0)));
-    out.setProperty(QStringLiteral("int8"), allPrim.value<qint8>());
-    out.setProperty(QStringLiteral("uint8"), allPrim.value<quint8>());
-    out.setProperty(QStringLiteral("int16"), allPrim.value<qint16>());
-    out.setProperty(QStringLiteral("uint16"), allPrim.value<quint16>());
-    out.setProperty(QStringLiteral("int32"), allPrim.value<qint32>());
-    out.setProperty(QStringLiteral("uint32"), allPrim.value<quint32>());
-    out.setProperty(QStringLiteral("int64"), QString::number(allPrim.value<qint64>()));
-    out.setProperty(QStringLiteral("uint64"), QString::number(allPrim.value<quint64>()));
-    // QtScript has no support for 64 bit ints, add another value which contains the higher 32 bits
-    // XXX any better solution for this?
-    out.setProperty(QStringLiteral("int64high32bits"), qint32(allPrim.value<qint64>() >> 32));
-    out.setProperty(QStringLiteral("uint64high32bits"), quint32(allPrim.value<quint64>() >> 32));
-
-    out.setProperty(QStringLiteral("float"), allPrim.value<float>());
-    out.setProperty(QStringLiteral("double"), allPrim.value<double>());
 }
