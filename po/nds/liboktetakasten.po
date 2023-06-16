@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-13 02:44+0000\n"
+"POT-Creation-Date: 2023-06-16 02:36+0000\n"
 "PO-Revision-Date: 2011-09-05 22:16+0200\n"
 "Last-Translator: Manfred Wiese <m.j.wiese@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -1249,7 +1249,7 @@ msgstr ""
 
 #: controllers/view/poddecoder/podtableview.cpp:255
 #: controllers/view/selectrange/selectrangeview.cpp:193
-#: controllers/view/structures/structureview.cpp:340
+#: controllers/view/structures/structureview.cpp:339
 #, kde-format
 msgctxt "@action:button"
 msgid "&Select"
@@ -1896,19 +1896,19 @@ msgctxt "boolean value with actual value"
 msgid "true (%1)"
 msgstr "wohr (%1)"
 
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:42
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:81
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:41
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:80
 #, kde-format
 msgid "%1 (value not in enum)"
 msgstr "%1 (Weert nich in Optellen)"
 
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:50
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:78
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:49
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:77
 #, kde-format
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:88
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:87
 #, fuzzy, kde-format
 #| msgid "enum (%1)"
 msgctxt ""
@@ -1931,7 +1931,7 @@ msgctxt ""
 msgid "flag %1 (%2)"
 msgstr "%1 (%2)"
 
-#: controllers/view/structures/datatypes/primitive/pointerdatainformation.cpp:116
+#: controllers/view/structures/datatypes/primitive/pointerdatainformation.cpp:115
 #, kde-format
 msgctxt "memory pointer with underlying type"
 msgid "%1 pointer"
@@ -2465,55 +2465,55 @@ msgctxt "value of a data structure (primitive type)"
 msgid "Value"
 msgstr "Weert"
 
-#: controllers/view/structures/structureview.cpp:97
+#: controllers/view/structures/structureview.cpp:96
 #, fuzzy, kde-format
 #| msgid "Validate"
 msgctxt "@action:button"
 msgid "Validate"
 msgstr "Pröven"
 
-#: controllers/view/structures/structureview.cpp:99
+#: controllers/view/structures/structureview.cpp:98
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Validate all structures."
 msgstr "All Strukturen pröven"
 
-#: controllers/view/structures/structureview.cpp:121
+#: controllers/view/structures/structureview.cpp:120
 #, kde-format
 msgctxt "@action:button"
 msgid "Script console"
 msgstr ""
 
-#: controllers/view/structures/structureview.cpp:123
+#: controllers/view/structures/structureview.cpp:122
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open script console."
 msgstr ""
 
-#: controllers/view/structures/structureview.cpp:127
+#: controllers/view/structures/structureview.cpp:126
 #, fuzzy, kde-format
 #| msgid "Settings"
 msgctxt "@action:button"
 msgid "Settings"
 msgstr "Instellen"
 
-#: controllers/view/structures/structureview.cpp:129
+#: controllers/view/structures/structureview.cpp:128
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open settings."
 msgstr "Instellen opmaken"
 
-#: controllers/view/structures/structureview.cpp:160
+#: controllers/view/structures/structureview.cpp:159
 #, kde-format
 msgid "Value Display"
 msgstr "Weertdorstellen"
 
-#: controllers/view/structures/structureview.cpp:172
+#: controllers/view/structures/structureview.cpp:171
 #, kde-format
 msgid "Structures management"
 msgstr "Strukturen plegen"
 
-#: controllers/view/structures/structureview.cpp:259
+#: controllers/view/structures/structureview.cpp:258
 #, fuzzy, kde-format
 #| msgctxt ""
 #| "@action:pushbutton unlock the starting offset of the current structure"
@@ -2522,7 +2522,7 @@ msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Unlock"
 msgstr "Opsluten"
 
-#: controllers/view/structures/structureview.cpp:261
+#: controllers/view/structures/structureview.cpp:260
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -2532,7 +2532,7 @@ msgstr ""
 "Köört Struktuur opsluten, d.h., de Startversetten warrt jümmers op de "
 "aktuelle Blinkerpositschoon sett."
 
-#: controllers/view/structures/structureview.cpp:266
+#: controllers/view/structures/structureview.cpp:265
 #, fuzzy, kde-format
 #| msgctxt ""
 #| "@action:pushbutton unlock the starting offset of the current structure"
@@ -2541,13 +2541,13 @@ msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Lock"
 msgstr "Afsluten"
 
-#: controllers/view/structures/structureview.cpp:268
+#: controllers/view/structures/structureview.cpp:267
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Lock selected structure to current offset."
 msgstr "Köört Struktuur op aktuell Versetten afsluten"
 
-#: controllers/view/structures/structureview.cpp:297
+#: controllers/view/structures/structureview.cpp:296
 #, fuzzy, kde-format
 #| msgid "Structure Definitions"
 msgctxt "@title:window"
