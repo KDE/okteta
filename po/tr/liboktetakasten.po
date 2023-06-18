@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: kdesdk-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-16 02:36+0000\n"
-"PO-Revision-Date: 2023-06-06 05:23+0300\n"
+"PO-Revision-Date: 2023-06-17 21:42+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -1324,7 +1324,7 @@ msgstr "UTF-8"
 #, kde-format
 msgctxt "@title:window"
 msgid "Print Byte Array %1"
-msgstr "%1 Bayt Dizilimini Bas"
+msgstr "%1 Bayt Dizilişini Yazdır"
 
 #: controllers/view/print/printtool.cpp:97
 #, kde-format
@@ -1371,21 +1371,21 @@ msgstr[1] "%1 değiştirme yapıldı."
 #, kde-format
 msgctxt "@info"
 msgid "Replace pattern not found in byte array."
-msgstr "Bayt diziliminde bulunamayan ifadeyi değiştir."
+msgstr "Bayt dizilişinde bulunamayan ifadeyi değiştir."
 
 #: controllers/view/replace/replacecontroller.cpp:93
 #: controllers/view/search/searchcontroller.cpp:120
 #, kde-kuit-format
 msgctxt "@info"
 msgid "End of byte array reached.<nl/>Continue from the beginning?"
-msgstr "Bayt diziliminin sonuna gelindi.<nl/>En baştan başlanılsın mı?"
+msgstr "Bayt dizilişinin sonuna gelindi.<nl/>En baştan başlanılsın mı?"
 
 #: controllers/view/replace/replacecontroller.cpp:94
 #: controllers/view/search/searchcontroller.cpp:121
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Beginning of byte array reached.<nl/>Continue from the end?"
-msgstr "Bayt diziliminin başına gelindi.<nl/>En sondan sürdürülsün mü?"
+msgstr "Bayt dizilişinin başına gelindi.<nl/>En sondan sürdürülsün mü?"
 
 #: controllers/view/replace/replacedialog.cpp:113
 #, kde-format
@@ -1414,7 +1414,7 @@ msgid ""
 "replaced with the replacement bytes."
 msgstr ""
 "Eğer <interface>Değiştir</interface> düğmesine basarsanız yukarıda "
-"girdiğiniz baytlar bayt diziliminde aranır ve bulunan kümeler değiştirme "
+"girdiğiniz baytlar bayt dizilişinde aranır ve bulunan kümeler değiştirme "
 "baytlarıyla değiştirilir."
 
 #: controllers/view/replace/replacedialog.cpp:127
@@ -1479,7 +1479,7 @@ msgstr "Değiştir"
 #, kde-format
 msgctxt "@info"
 msgid "Search key not found in byte array."
-msgstr "Bayt diziliminde arama anahtarı bulunamadı."
+msgstr "Bayt dizilişinde arama anahtarı bulunamadı."
 
 #: controllers/view/search/searchdialog.cpp:104
 #, kde-format
@@ -1507,7 +1507,7 @@ msgid ""
 "above are searched for within the byte array."
 msgstr ""
 "Eğer <interface>Bul</interface> düğmesine basarsanız yukarıya yazılan "
-"baytlar bayt dizilimi içinde aranır."
+"baytlar bayt dizilişi içinde aranır."
 
 #: controllers/view/search/searchtool.cpp:78
 #, kde-format
@@ -3042,7 +3042,7 @@ msgstr "Seçim: %1 - %2 (%3)"
 #, kde-format
 msgctxt "name of the data type"
 msgid "Byte Array"
-msgstr "Bayt Dizilimi"
+msgstr "Bayt Dizilişi"
 
 #: core/document/bytearraydocumentfactory.cpp:36
 #, kde-format
@@ -3056,8 +3056,8 @@ msgstr "Yeni oluşturuldu."
 msgctxt "numbered title for a created document without a filename"
 msgid "[New Byte Array]"
 msgid_plural "[New Byte Array %1]"
-msgstr[0] "[Yeni Bayt Dizilimi]"
-msgstr[1] "[Yeni Bayt Dizilimi %1]"
+msgstr[0] "[Yeni Bayt Dizilişi]"
+msgstr[1] "[Yeni Bayt Dizilişi %1]"
 
 #: core/document/bytearraydocumentfactory.cpp:73
 #, kde-format
@@ -3075,7 +3075,7 @@ msgstr "Dosyadan yükle."
 #: core/io/filesystem/bytearrayrawfilereloadthread.cpp:55
 #, kde-format
 msgid "There is not enough free working memory to load this file."
-msgstr "Bu dosyayı yüklemek için yeterli çalışma belleği mevcut değil."
+msgstr "Bu dosyayı yüklemek için yeterli çalışma belleği yok."
 
 #: core/io/filesystem/bytearrayrawfileloadthread.cpp:67
 #: core/io/filesystem/bytearrayrawfilereloadthread.cpp:58
@@ -3148,7 +3148,7 @@ msgstr "&Boyut (byte cinsinden):"
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Enter the size of the bytearray to generate."
-msgstr "Oluşturulacak dizilimin boyutunu girin."
+msgstr "Oluşturulacak dizilişin boyutunu girin."
 
 #: gui/io/generator/randomdata/bytearrayrandomdatageneratorconfigeditor.cpp:51
 #, kde-format
@@ -3259,7 +3259,7 @@ msgstr "8 bit"
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "C Array"
-msgstr "C Dizilimi"
+msgstr "C Dizilişi"
 
 #: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoderconfigeditor.cpp:36
 #, kde-format
