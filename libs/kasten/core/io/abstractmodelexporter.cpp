@@ -38,3 +38,5 @@ QString AbstractModelExporter::remoteMimeType() const
 }
 
 }
+
+#include "moc_abstractmodelexporter.cpp"

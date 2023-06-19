@@ -252,3 +252,5 @@ void AbstractFindDialog::showEvent(QShowEvent* showEvent)
 }
 
 }
+
+#include "moc_abstractfinddialog.cpp"

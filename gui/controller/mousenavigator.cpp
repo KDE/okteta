@@ -334,3 +334,5 @@ void MouseNavigator::startDrag()
 }
 
 }
+
+#include "moc_mousenavigator.cpp"

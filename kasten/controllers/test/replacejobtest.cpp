@@ -294,3 +294,4 @@ void ReplaceJobTest::testReplace()
 QTEST_MAIN(ReplaceJobTest)
 
 #include "replacejobtest.moc"
+#include "moc_replacejobtest.cpp"

@@ -33,3 +33,5 @@ void OktetaPartTest::testPartReuseWithAnotherUrl()
 }
 
 QTEST_MAIN(OktetaPartTest)
+
+#include "moc_oktetaparttest.cpp"

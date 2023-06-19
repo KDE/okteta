@@ -64,3 +64,5 @@ void ByteArrayBase32StreamEncoderConfigEditor::onSettingsChanged()
 }
 
 }
+
+#include "moc_bytearraybase32streamencoderconfigeditor.cpp"

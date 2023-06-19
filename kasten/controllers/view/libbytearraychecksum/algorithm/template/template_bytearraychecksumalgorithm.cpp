@@ -58,3 +58,5 @@ bool Template_ByteArrayChecksumAlgorithm::calculateChecksum(QString* result,
 
     return success;
 }
+
+#include "moc_template_bytearraychecksumalgorithm.cpp"

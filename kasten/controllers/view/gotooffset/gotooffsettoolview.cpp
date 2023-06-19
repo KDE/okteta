@@ -29,3 +29,5 @@ QString GotoOffsetToolView::title()      const { return mWidget->tool()->title()
 AbstractTool* GotoOffsetToolView::tool() const { return mWidget->tool(); }
 
 }
+
+#include "moc_gotooffsettoolview.cpp"

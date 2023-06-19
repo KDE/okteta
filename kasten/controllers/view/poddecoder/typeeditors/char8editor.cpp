@@ -78,3 +78,4 @@ Char8 Char8Editor::data() const
 }
 
 #include "char8editor.moc"
+#include "moc_char8editor.cpp"

@@ -313,3 +313,5 @@ ViewProfilesManageDialog::onDefaultViewProfileChanged(const ByteArrayViewProfile
 }
 
 }
+
+#include "moc_viewprofilesmanagedialog.cpp"

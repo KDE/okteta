@@ -125,3 +125,5 @@ void ViewAreaBox::onDone()
 }
 
 }
+
+#include "moc_viewareabox.cpp"

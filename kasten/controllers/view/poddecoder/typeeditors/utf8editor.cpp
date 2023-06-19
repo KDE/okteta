@@ -59,3 +59,4 @@ Utf8 Utf8Editor::data() const
 }
 
 #include "utf8editor.moc"
+#include "moc_utf8editor.cpp"

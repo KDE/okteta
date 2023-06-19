@@ -28,3 +28,5 @@ AbstractDocument* AbstractDocumentFactory::createFromData(const QMimeData* mimeD
 }
 
 }
+
+#include "moc_abstractdocumentfactory.cpp"

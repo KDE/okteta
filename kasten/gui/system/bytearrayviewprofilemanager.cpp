@@ -556,3 +556,5 @@ void ByteArrayViewProfileManager::onDefaultViewProfileChanged(const QString& pat
 }
 
 }
+
+#include "moc_bytearrayviewprofilemanager.cpp"

@@ -49,3 +49,5 @@ bool ModSum8ByteArrayChecksumAlgorithm::calculateChecksum(QString* result,
     *result = QStringLiteral("%1").arg(modSum, 2, 16, QChar::fromLatin1('0'));
     return true;
 }
+
+#include "moc_modsum8bytearraychecksumalgorithm.cpp"

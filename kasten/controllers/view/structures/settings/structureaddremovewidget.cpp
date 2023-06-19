@@ -230,3 +230,5 @@ void StructureAddRemoveWidget::moveDown()
         mTreeSelected->setCurrentItem(mTreeSelected->topLevelItem(firstIndex));
     }
 }
+
+#include "moc_structureaddremovewidget.cpp"

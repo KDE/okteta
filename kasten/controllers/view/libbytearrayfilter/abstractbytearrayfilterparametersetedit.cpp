@@ -22,3 +22,5 @@ AbstractByteArrayFilterParameterSetEdit::~AbstractByteArrayFilterParameterSetEdi
 void AbstractByteArrayFilterParameterSetEdit::setCharCodec(const QString& charCodecName) { Q_UNUSED(charCodecName) }
 bool AbstractByteArrayFilterParameterSetEdit::isValid() const { return true; }
 void AbstractByteArrayFilterParameterSetEdit::rememberCurrentSettings() {}
+
+#include "moc_abstractbytearrayfilterparametersetedit.cpp"

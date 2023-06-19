@@ -250,3 +250,5 @@ void StringsExtractView::onStringDoubleClicked(const QModelIndex& index)
 }
 
 }
+
+#include "moc_stringsextractview.cpp"

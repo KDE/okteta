@@ -90,3 +90,5 @@ const StructureEnabledList& StructuresSelector::enabledList() const
 {
     return m_structuresModel->enabledList();
 }
+
+#include "moc_structuresselector.cpp"

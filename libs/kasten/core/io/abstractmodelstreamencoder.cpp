@@ -47,3 +47,5 @@ QString AbstractModelStreamEncoder::remoteClipboardMimeType() const
 }
 
 }
+
+#include "moc_abstractmodelstreamencoder.cpp"

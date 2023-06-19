@@ -41,3 +41,5 @@ void TestDocumentFileWriteJob::startWriteToFile()
 }
 
 }
+
+#include "moc_testdocumentfilewritejob.cpp"

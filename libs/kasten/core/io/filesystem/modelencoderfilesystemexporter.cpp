@@ -42,3 +42,5 @@ QString ModelEncoderFileSystemExporter::modelTypeName(AbstractModel* model, cons
 }
 
 }
+
+#include "moc_modelencoderfilesystemexporter.cpp"

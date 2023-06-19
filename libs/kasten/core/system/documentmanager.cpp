@@ -123,3 +123,5 @@ void DocumentManager::requestFocus(AbstractDocument* document)
 }
 
 }
+
+#include "moc_documentmanager.cpp"

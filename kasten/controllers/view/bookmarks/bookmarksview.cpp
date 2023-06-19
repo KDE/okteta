@@ -178,3 +178,5 @@ void BookmarksView::onRenameBookmarkButtonClicked()
 }
 
 }
+
+#include "moc_bookmarksview.cpp"

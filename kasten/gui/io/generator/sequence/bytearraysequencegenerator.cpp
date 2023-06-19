@@ -70,3 +70,5 @@ QMimeData* ByteArraySequenceGenerator::generateData()
 }
 
 }
+
+#include "moc_bytearraysequencegenerator.cpp"

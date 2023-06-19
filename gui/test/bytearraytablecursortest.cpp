@@ -951,3 +951,5 @@ void ByteArrayTableCursorTest::testGotoPreviousByteN()
 }
 
 QTEST_MAIN(Okteta::ByteArrayTableCursorTest)
+
+#include "moc_bytearraytablecursortest.cpp"

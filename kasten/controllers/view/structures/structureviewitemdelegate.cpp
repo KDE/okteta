@@ -67,3 +67,5 @@ QSize StructureViewItemDelegate::sizeHint(const QStyleOptionViewItem& option,
 {
     return QStyledItemDelegate::sizeHint(option, index) + QSize(0, 8);
 }
+
+#include "moc_structureviewitemdelegate.cpp"

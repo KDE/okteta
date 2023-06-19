@@ -771,3 +771,5 @@ void AbstractByteArrayModelIfTest::testReplaceMore()
 }
 
 }
+
+#include "moc_abstractbytearraymodeliftest.cpp"

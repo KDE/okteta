@@ -48,3 +48,5 @@ void SetRemoteController::saveAs()
 }
 
 }
+
+#include "moc_setremotecontroller.cpp"

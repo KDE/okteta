@@ -404,3 +404,5 @@ void PODDecoderTool::onReadOnlyChanged()
 }
 
 }
+
+#include "moc_poddecodertool.cpp"

@@ -225,3 +225,5 @@ void BookmarkListModel::onHeadVersionDataChanged(const DocumentVersionData& vers
 #endif
 
 }
+
+#include "moc_bookmarklistmodel.cpp"

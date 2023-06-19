@@ -46,3 +46,5 @@ void DocumentsTool::setFocussedDocument(AbstractDocument* document)
 }
 
 }
+
+#include "moc_documentstool.cpp"

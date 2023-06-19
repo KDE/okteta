@@ -199,3 +199,5 @@ void GroupPieceTableChangeTest::testRevertBeforeChange()
 }
 
 QTEST_GUILESS_MAIN(KPieceTable::GroupPieceTableChangeTest)
+
+#include "moc_grouppiecetablechangetest.cpp"

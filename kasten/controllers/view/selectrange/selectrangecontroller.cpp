@@ -66,3 +66,5 @@ void SelectRangeController::select()
 }
 
 }
+
+#include "moc_selectrangecontroller.cpp"

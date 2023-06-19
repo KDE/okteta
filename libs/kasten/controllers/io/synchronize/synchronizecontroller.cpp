@@ -122,3 +122,5 @@ void SynchronizeController::onSyncStateChanged()
 }
 
 }
+
+#include "moc_synchronizecontroller.cpp"

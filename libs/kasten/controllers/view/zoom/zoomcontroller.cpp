@@ -134,3 +134,5 @@ void ZoomController::onZoomLevelChange(double level)
 }
 
 }
+
+#include "moc_zoomcontroller.cpp"

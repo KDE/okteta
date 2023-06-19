@@ -85,3 +85,5 @@ bool OrByteArrayFilter::filter(Okteta::Byte* result,
 
     return true;
 }
+
+#include "moc_orbytearrayfilter.cpp"

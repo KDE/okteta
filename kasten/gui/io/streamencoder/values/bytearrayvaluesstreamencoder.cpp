@@ -106,3 +106,5 @@ bool ByteArrayValuesStreamEncoder::encodeDataToStream(QIODevice* device,
 }
 
 }
+
+#include "moc_bytearrayvaluesstreamencoder.cpp"

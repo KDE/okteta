@@ -179,3 +179,5 @@ QString ByteArrayValidator::toString(const QByteArray& byteArray) const
 }
 
 }
+
+#include "moc_bytearrayvalidator.cpp"

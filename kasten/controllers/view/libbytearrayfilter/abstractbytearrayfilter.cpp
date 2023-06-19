@@ -51,3 +51,5 @@ void AbstractByteArrayFilter::saveConfig(KConfigGroup& configGroup) const
 
 QString AbstractByteArrayFilter::name() const { return d->name(); }
 QString AbstractByteArrayFilter::id() const { return d->id(); }
+
+#include "moc_abstractbytearrayfilter.cpp"

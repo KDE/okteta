@@ -264,3 +264,5 @@ void StructureItemDelegate::handleCheckClicked(bool checked)
 
     model->setData(index, checked, Qt::CheckStateRole);
 }
+
+#include "moc_structureitemdelegate.cpp"

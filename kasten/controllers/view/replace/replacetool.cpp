@@ -213,3 +213,5 @@ void ReplaceTool::onJobFinished(bool previousFound, int noOfReplacements)
 }
 
 }
+
+#include "moc_replacetool.cpp"

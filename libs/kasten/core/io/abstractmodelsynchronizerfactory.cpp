@@ -13,3 +13,5 @@ namespace Kasten {
 AbstractModelSynchronizerFactory::~AbstractModelSynchronizerFactory() = default;
 
 }
+
+#include "moc_abstractmodelsynchronizerfactory.cpp"

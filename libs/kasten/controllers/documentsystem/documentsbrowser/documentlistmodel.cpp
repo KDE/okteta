@@ -189,3 +189,5 @@ void DocumentListModel::onSyncStatesChanged()
 }
 
 }
+
+#include "moc_documentlistmodel.cpp"

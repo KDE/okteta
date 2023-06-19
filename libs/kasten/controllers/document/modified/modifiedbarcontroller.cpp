@@ -154,3 +154,5 @@ void ModifiedBarController::onSynchronizerDeleted(QObject* synchronizer)
 }
 
 }
+
+#include "moc_modifiedbarcontroller.cpp"

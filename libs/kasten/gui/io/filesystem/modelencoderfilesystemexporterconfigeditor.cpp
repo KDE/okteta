@@ -39,3 +39,5 @@ AbstractSelectionView* ModelEncoderFileSystemExporterConfigEditor::createPreview
 }
 
 }
+
+#include "moc_modelencoderfilesystemexporterconfigeditor.cpp"

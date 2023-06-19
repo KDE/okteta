@@ -64,3 +64,5 @@ void SingleViewArea::setView(AbstractView* view)
 }
 
 }
+
+#include "moc_singleviewarea.cpp"

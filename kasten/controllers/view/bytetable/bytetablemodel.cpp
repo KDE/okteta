@@ -184,3 +184,5 @@ QVariant ByteTableModel::headerData(int section, Qt::Orientation orientation, in
 }
 
 }
+
+#include "moc_bytetablemodel.cpp"

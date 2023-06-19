@@ -231,3 +231,5 @@ void OktetaPart::onModified(Kasten::LocalSyncState state)
     const bool isModified = (state != Kasten::LocalInSync);
     setModified(isModified);
 }
+
+#include "moc_part.cpp"

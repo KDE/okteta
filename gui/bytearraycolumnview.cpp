@@ -162,3 +162,5 @@ void ByteArrayColumnView::renderColumns(QPainter* painter, int cx, int cy, int c
 }
 
 }
+
+#include "moc_bytearraycolumnview.cpp"

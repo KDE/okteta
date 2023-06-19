@@ -29,3 +29,5 @@ QString InfoToolView::title()      const { return mWidget->tool()->title(); }
 AbstractTool* InfoToolView::tool() const { return mWidget->tool(); }
 
 }
+
+#include "moc_infotoolview.cpp"

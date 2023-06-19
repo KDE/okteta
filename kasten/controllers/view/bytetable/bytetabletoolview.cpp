@@ -29,3 +29,5 @@ QString ByteTableToolView::title()      const { return mWidget->tool()->title();
 AbstractTool* ByteTableToolView::tool() const { return mWidget->tool(); }
 
 }
+
+#include "moc_bytetabletoolview.cpp"

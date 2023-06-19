@@ -137,3 +137,5 @@ bool Crc64ByteArrayChecksumAlgorithm::calculateChecksum(QString* result,
     *result = QStringLiteral("%1").arg(crcBits, 16, 16, QChar::fromLatin1('0'));
     return true;
 }
+
+#include "moc_crc64bytearraychecksumalgorithm.cpp"

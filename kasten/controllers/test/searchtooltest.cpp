@@ -441,3 +441,5 @@ void SearchToolTest::testSearch()
 }
 
 QTEST_MAIN(SearchToolTest)
+
+#include "moc_searchtooltest.cpp"

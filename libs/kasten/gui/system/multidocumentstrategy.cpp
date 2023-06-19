@@ -109,3 +109,5 @@ void MultiDocumentStrategy::closeDocument(AbstractDocument* document)
 }
 
 }
+
+#include "moc_multidocumentstrategy.cpp"

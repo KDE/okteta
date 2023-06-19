@@ -29,3 +29,5 @@ QString FilterToolView::title()      const { return mWidget->tool()->title(); }
 AbstractTool* FilterToolView::tool() const { return mWidget->tool(); }
 
 }
+
+#include "moc_filtertoolview.cpp"

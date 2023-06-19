@@ -165,3 +165,5 @@ void OktetaBrowserExtension::restoreState(QDataStream& stream)
     view->setCursorPosition(position);  // , cursorBehind );
 //     view->setActiveCoding( (Okteta::ByteArrayColumnView::CodingTypeId)activeCoding );
 }
+
+#include "moc_browserextension.cpp"

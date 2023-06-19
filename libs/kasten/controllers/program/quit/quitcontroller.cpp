@@ -35,3 +35,5 @@ void QuitController::quit()
 }
 
 }
+
+#include "moc_quitcontroller.cpp"

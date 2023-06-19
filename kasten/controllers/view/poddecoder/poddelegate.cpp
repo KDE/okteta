@@ -361,3 +361,5 @@ void PODDelegate::onReadOnlyChanged(bool isReadOnly) const
 }
 
 }
+
+#include "moc_poddelegate.cpp"

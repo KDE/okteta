@@ -151,3 +151,5 @@ void VersionTableModel::onHeadVersionDataChanged(const DocumentVersionData& vers
 }
 
 }
+
+#include "moc_versiontablemodel.cpp"

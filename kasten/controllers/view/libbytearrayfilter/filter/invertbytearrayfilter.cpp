@@ -42,3 +42,5 @@ bool InvertByteArrayFilter::filter(Okteta::Byte* result,
 
     return true;
 }
+
+#include "moc_invertbytearrayfilter.cpp"

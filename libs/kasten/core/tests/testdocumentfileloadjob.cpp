@@ -42,3 +42,5 @@ void TestDocumentFileLoadJob::startLoadFromFile()
 }
 
 }
+
+#include "moc_testdocumentfileloadjob.cpp"

@@ -29,3 +29,5 @@ QString PODDecoderToolView::title()      const { return mWidget->tool()->title()
 AbstractTool* PODDecoderToolView::tool() const { return mWidget->tool(); }
 
 }
+
+#include "moc_poddecodertoolview.cpp"

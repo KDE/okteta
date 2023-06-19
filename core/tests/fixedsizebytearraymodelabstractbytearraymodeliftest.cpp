@@ -35,3 +35,5 @@ void FixedSizeByteArrayModelAbstractByteArrayModelIfTest::deleteByteArrayModel(A
 }
 
 QTEST_GUILESS_MAIN(Okteta::FixedSizeByteArrayModelAbstractByteArrayModelIfTest)
+
+#include "moc_fixedsizebytearraymodelabstractbytearraymodeliftest.cpp"

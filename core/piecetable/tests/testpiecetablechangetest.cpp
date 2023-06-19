@@ -58,3 +58,5 @@ void TestPieceTableChangeTest::testMerge()
 }
 
 QTEST_GUILESS_MAIN(KPieceTable::TestPieceTableChangeTest)
+
+#include "moc_testpiecetablechangetest.cpp"

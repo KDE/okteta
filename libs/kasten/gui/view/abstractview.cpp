@@ -18,3 +18,5 @@ AbstractView::AbstractView(AbstractModel* baseModel)
 AbstractView::~AbstractView() = default;
 
 }
+
+#include "moc_abstractview.cpp"

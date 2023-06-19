@@ -176,3 +176,5 @@ void SearchDialog::rememberCurrentSettings()
 }
 
 }
+
+#include "moc_searchdialog.cpp"

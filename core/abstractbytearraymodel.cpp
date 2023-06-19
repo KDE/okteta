@@ -252,3 +252,5 @@ Address AbstractByteArrayModel::lastIndexOfCaseInsensitive(const CharCodec* char
 }
 
 }
+
+#include "moc_abstractbytearraymodel.cpp"

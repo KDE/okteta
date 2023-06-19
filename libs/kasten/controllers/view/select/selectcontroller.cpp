@@ -67,3 +67,5 @@ void SelectController::unselect()
 }
 
 }
+
+#include "moc_selectcontroller.cpp"

@@ -137,3 +137,5 @@ void ViewAreaSplitController::onViewsChanged()
 }
 
 }
+
+#include "moc_viewareasplitcontroller.cpp"

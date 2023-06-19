@@ -24,3 +24,5 @@ Binary8 Binary8Editor::data() const
 {
     return value();
 }
+
+#include "moc_binary8editor.cpp"

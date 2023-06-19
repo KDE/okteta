@@ -72,3 +72,5 @@ bool ReverseByteArrayFilter::filter(Okteta::Byte* result,
 
     return true;
 }
+
+#include "moc_reversebytearrayfilter.cpp"

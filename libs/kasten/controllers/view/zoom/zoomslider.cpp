@@ -162,3 +162,5 @@ void ZoomSlider::onZoomLevelChange(double level)
 }
 
 }
+
+#include "moc_zoomslider.cpp"

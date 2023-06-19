@@ -247,3 +247,5 @@ QVariant StatisticTableModel::headerData(int section, Qt::Orientation orientatio
 }
 
 }
+
+#include "moc_statistictablemodel.cpp"

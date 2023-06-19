@@ -67,3 +67,5 @@ void FileSystemBrowserTool::open(const QUrl& url)
 }
 
 }
+
+#include "moc_filesystembrowsertool.cpp"

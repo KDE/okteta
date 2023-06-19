@@ -96,3 +96,5 @@ QString AbstractByteArrayStreamEncoder::previewData(AbstractModel* model, const 
 }
 
 }
+
+#include "moc_abstractbytearraystreamencoder.cpp"

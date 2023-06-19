@@ -131,3 +131,5 @@ bool RotateByteArrayFilter::filter(Okteta::Byte* result,
 
     return true;
 }
+
+#include "moc_rotatebytearrayfilter.cpp"

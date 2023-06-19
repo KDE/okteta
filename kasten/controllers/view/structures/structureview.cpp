@@ -345,3 +345,5 @@ void StructureView::onCustomContextMenuRequested(QPoint pos)
 }
 
 }
+
+#include "moc_structureview.cpp"

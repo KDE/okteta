@@ -44,3 +44,5 @@ void AbstractDocument::setSynchronizer(AbstractModelSynchronizer* synchronizer)
 }
 
 }
+
+#include "moc_abstractdocument.cpp"

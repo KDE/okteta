@@ -32,3 +32,5 @@ void VersionViewTool::setTargetModel(AbstractModel* model)
 }
 
 }
+
+#include "moc_versionviewtool.cpp"

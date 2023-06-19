@@ -32,3 +32,5 @@ AbstractSelectionView* AbstractModelStreamEncoderConfigEditor::createPreviewView
 }
 
 }
+
+#include "moc_abstractmodelstreamencoderconfigeditor.cpp"

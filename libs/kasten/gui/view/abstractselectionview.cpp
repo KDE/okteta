@@ -24,3 +24,5 @@ AbstractSelectionView::AbstractSelectionView() = default;
 AbstractSelectionView::~AbstractSelectionView() = default;
 
 }
+
+#include "moc_abstractselectionview.cpp"

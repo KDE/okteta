@@ -127,3 +127,5 @@ bool ShiftByteArrayFilter::filter(Okteta::Byte* result,
 
     return true;
 }
+
+#include "moc_shiftbytearrayfilter.cpp"

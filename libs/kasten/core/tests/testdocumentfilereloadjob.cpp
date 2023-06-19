@@ -45,3 +45,5 @@ void TestDocumentFileReloadJob::startReadFromFile()
 }
 
 }
+
+#include "moc_testdocumentfilereloadjob.cpp"

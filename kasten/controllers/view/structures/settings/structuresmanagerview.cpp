@@ -104,3 +104,5 @@ void StructuresManagerView::setEnabledStructures(const QStringList& enabledStruc
 {
     mStructuresSelector->setEnabledStructures(enabledStructures);;
 }
+
+#include "moc_structuresmanagerview.cpp"

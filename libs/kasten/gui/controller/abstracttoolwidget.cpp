@@ -27,3 +27,5 @@ void AbstractToolWidget::addButton(QPushButton* button, DefaultType defaultType)
 }
 
 }
+
+#include "moc_abstracttoolwidget.cpp"

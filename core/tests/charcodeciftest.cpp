@@ -57,3 +57,5 @@ void CharCodecIfTest::testEncodeDecode()
 }
 
 }
+
+#include "moc_charcodeciftest.cpp"

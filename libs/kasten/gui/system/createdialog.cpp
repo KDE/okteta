@@ -84,3 +84,5 @@ void CreateDialog::onFinished(int result)
 }
 
 }
+
+#include "moc_createdialog.cpp"

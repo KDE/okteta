@@ -82,3 +82,5 @@ void InsertDialog::onFinished(int result)
 }
 
 }
+
+#include "moc_insertdialog.cpp"

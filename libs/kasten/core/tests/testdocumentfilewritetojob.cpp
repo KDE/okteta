@@ -41,3 +41,5 @@ void TestDocumentFileWriteToJob::startSyncWithRemote()
 }
 
 }
+
+#include "moc_testdocumentfilewritetojob.cpp"

@@ -23,3 +23,5 @@ QList<QDesignerCustomWidgetInterface*> OktetaWidgetDesignerFactoryCollection::cu
 {
     return mWidgetFactories;
 }
+
+#include "moc_oktetawidgetdesignerfactorycollection.cpp"

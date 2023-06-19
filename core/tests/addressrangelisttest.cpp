@@ -141,3 +141,5 @@ void AddressRangeListTest::testAddNonJoinableRanges()
 }
 
 QTEST_GUILESS_MAIN(Okteta::AddressRangeListTest)
+
+#include "moc_addressrangelisttest.cpp"

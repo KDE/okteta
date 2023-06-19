@@ -248,3 +248,5 @@ void StructureTreeModel::onToolDataClear()
 }
 
 }
+
+#include "moc_structuretreemodel.cpp"

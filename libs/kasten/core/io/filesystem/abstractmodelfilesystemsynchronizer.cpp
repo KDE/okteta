@@ -89,3 +89,5 @@ void AbstractModelFileSystemSynchronizer::stopNetworkWatching()
 }
 
 }
+
+#include "moc_abstractmodelfilesystemsynchronizer.cpp"

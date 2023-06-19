@@ -21,3 +21,5 @@ AbstractTool::AbstractTool() = default;
 AbstractTool::~AbstractTool() = default;
 
 }
+
+#include "moc_abstracttool.cpp"

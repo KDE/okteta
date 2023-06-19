@@ -39,3 +39,5 @@ void UiColorSchemeController::setTargetModel(AbstractModel* model)
 }
 
 }
+
+#include "moc_uicolorschemecontroller.cpp"

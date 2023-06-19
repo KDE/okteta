@@ -55,3 +55,5 @@ void TestDocument::setContentFlags(ContentFlags contentFlags)
 }
 
 }
+
+#include "moc_testdocument.cpp"

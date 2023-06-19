@@ -41,3 +41,5 @@ ToolInlineViewWidget::~ToolInlineViewWidget()
 }
 
 }
+
+#include "moc_toolinlineviewwidget.cpp"

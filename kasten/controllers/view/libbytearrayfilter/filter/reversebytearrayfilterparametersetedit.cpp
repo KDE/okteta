@@ -54,3 +54,5 @@ void ReverseByteArrayFilterParameterSetEdit::getParameterSet(AbstractByteArrayFi
 
     reverseParameterSet->setInvertsBits(mInvertsBitsCheckBox->isChecked());
 }
+
+#include "moc_reversebytearrayfilterparametersetedit.cpp"

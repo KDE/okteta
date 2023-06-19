@@ -31,3 +31,5 @@ LabelledToolBarWidget::LabelledToolBarWidget(QLabel* label,
 }
 
 }
+
+#include "moc_labelledtoolbarwidget.cpp"

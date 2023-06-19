@@ -95,3 +95,5 @@ void ModelCodecManager::exportDocument(AbstractModelExporter* exporter,
 }
 
 }
+
+#include "moc_modelcodecmanager.cpp"

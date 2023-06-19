@@ -148,3 +148,5 @@ bool ByteArrayViewHtmlStreamEncoder::encodeDataToStream(QIODevice* device,
 }
 
 }
+
+#include "moc_bytearrayviewhtmlstreamencoder.cpp"

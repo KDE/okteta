@@ -89,3 +89,5 @@ void ByteArrayDocument::onHeadVersionDescriptionChanged(const QString& newDescri
 }
 
 }
+
+#include "moc_bytearraydocument.cpp"

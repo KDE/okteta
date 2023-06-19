@@ -56,3 +56,5 @@ void StructuresSelectionDialog::onFinished(int result)
 
     Q_EMIT structuresAccepted(enabledStructures);
 }
+
+#include "moc_structuresselectiondialog.cpp"

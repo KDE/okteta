@@ -49,3 +49,5 @@ void ReplacePieceTableChangeAbstractPieceTableChangeIfTest::deletePieceTableChan
 }
 
 QTEST_GUILESS_MAIN(KPieceTable::ReplacePieceTableChangeAbstractPieceTableChangeIfTest)
+
+#include "moc_replacepiecetablechangeabstractpiecetablechangeiftest.cpp"

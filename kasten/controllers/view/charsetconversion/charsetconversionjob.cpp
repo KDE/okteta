@@ -78,3 +78,5 @@ bool CharsetConversionJob::exec()
 }
 
 }
+
+#include "moc_charsetconversionjob.cpp"

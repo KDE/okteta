@@ -62,3 +62,5 @@ bool Qca2ByteArrayChecksumAlgorithm::calculateChecksum(QString* result,
     *result = QCA::arrayToHex(hashResult);
     return true;
 }
+
+#include "moc_qca2bytearraychecksumalgorithm.cpp"

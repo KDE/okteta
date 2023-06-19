@@ -177,3 +177,5 @@ void VersionController::onReadOnlyChanged(bool isReadOnly)
 }
 
 }
+
+#include "moc_versioncontroller.cpp"

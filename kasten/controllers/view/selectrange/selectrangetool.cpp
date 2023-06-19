@@ -186,3 +186,5 @@ void SelectRangeTool::onContentsChanged()
 }
 
 }
+
+#include "moc_selectrangetool.cpp"

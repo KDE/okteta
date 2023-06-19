@@ -26,3 +26,5 @@ QString FileSystemBrowserToolView::title()      const { return mWidget->tool()->
 AbstractTool* FileSystemBrowserToolView::tool() const { return mWidget->tool(); }
 
 }
+
+#include "moc_filesystembrowsertoolview.cpp"

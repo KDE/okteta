@@ -43,3 +43,5 @@ void ByteArrayRawFileWriteThread::run()
 }
 
 }
+
+#include "moc_bytearrayrawfilewritethread.cpp"

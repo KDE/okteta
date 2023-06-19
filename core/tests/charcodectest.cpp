@@ -78,3 +78,5 @@ void CharCodecTest::testEncodeDecode()
 }
 
 QTEST_GUILESS_MAIN(Okteta::CharCodecTest)
+
+#include "moc_charcodectest.cpp"

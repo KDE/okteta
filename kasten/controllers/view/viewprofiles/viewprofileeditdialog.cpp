@@ -79,3 +79,5 @@ void ViewProfileEditDialog::onFinished(int result)
 }
 
 }
+
+#include "moc_viewprofileeditdialog.cpp"

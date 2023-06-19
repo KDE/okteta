@@ -75,3 +75,5 @@ void ByteArrayRawFileLoadThread::run()
 }
 
 }
+
+#include "moc_bytearrayrawfileloadthread.cpp"

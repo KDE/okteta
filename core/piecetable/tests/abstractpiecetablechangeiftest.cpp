@@ -86,3 +86,5 @@ void AbstractPieceTableChangeIfTest::testRevertApply()
 }
 
 }
+
+#include "moc_abstractpiecetablechangeiftest.cpp"

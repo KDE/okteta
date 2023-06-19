@@ -41,3 +41,5 @@ void AbstractModel::setBaseModel(AbstractModel* baseModel)
 void AbstractModel::setReadOnly(bool isReadOnly) { Q_UNUSED(isReadOnly) }
 
 }
+
+#include "moc_abstractmodel.cpp"

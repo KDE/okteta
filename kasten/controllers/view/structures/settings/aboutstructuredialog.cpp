@@ -136,3 +136,5 @@ void AboutStructureDialog::emailAuthor()
     const QUrl mailToUrl(QLatin1String("mailto:") + m_structureMetaData.authorEmailAddress());
     QDesktopServices::openUrl(mailToUrl);
 }
+
+#include "moc_aboutstructuredialog.cpp"

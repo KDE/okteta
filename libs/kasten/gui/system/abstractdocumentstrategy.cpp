@@ -24,3 +24,5 @@ AbstractDocumentStrategy::AbstractDocumentStrategy(AbstractDocumentStrategyPriva
 AbstractDocumentStrategy::~AbstractDocumentStrategy() = default;
 
 }
+
+#include "moc_abstractdocumentstrategy.cpp"

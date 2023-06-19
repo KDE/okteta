@@ -26,3 +26,5 @@ QString DocumentsToolView::title()      const { return mWidget->tool()->title();
 AbstractTool* DocumentsToolView::tool() const { return mWidget->tool(); }
 
 }
+
+#include "moc_documentstoolview.cpp"

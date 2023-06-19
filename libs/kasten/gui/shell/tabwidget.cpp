@@ -103,3 +103,5 @@ void TabWidget::dropEvent(QDropEvent* event)
 }
 
 }
+
+#include "moc_tabwidget.cpp"

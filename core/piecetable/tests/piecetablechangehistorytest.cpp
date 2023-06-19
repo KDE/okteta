@@ -192,3 +192,5 @@ void PieceTableChangeHistoryTest::testRevertBeforeChange()
 }
 
 QTEST_GUILESS_MAIN(KPieceTable::PieceTableChangeHistoryTest)
+
+#include "moc_piecetablechangehistorytest.cpp"

@@ -49,3 +49,5 @@ bool Adler32ByteArrayChecksumAlgorithm::calculateChecksum(QString* result,
 
     return true;
 }
+
+#include "moc_adler32bytearraychecksumalgorithm.cpp"

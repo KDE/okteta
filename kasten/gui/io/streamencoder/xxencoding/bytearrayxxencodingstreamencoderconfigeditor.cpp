@@ -55,3 +55,5 @@ void ByteArrayXxencodingStreamEncoderConfigEditor::onSettingsChanged()
 }
 
 }
+
+#include "moc_bytearrayxxencodingstreamencoderconfigeditor.cpp"

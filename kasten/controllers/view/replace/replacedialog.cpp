@@ -238,3 +238,5 @@ void ReplaceDialog::rememberCurrentSettings()
 }
 
 }
+
+#include "moc_replacedialog.cpp"

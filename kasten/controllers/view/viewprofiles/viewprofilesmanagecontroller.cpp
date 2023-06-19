@@ -47,3 +47,5 @@ void ViewProfilesManageController::manageProfiles()
 }
 
 }
+
+#include "moc_viewprofilesmanagecontroller.cpp"

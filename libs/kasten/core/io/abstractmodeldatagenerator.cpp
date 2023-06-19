@@ -46,3 +46,5 @@ AbstractModelDataGenerator::Flags AbstractModelDataGenerator::flags() const
 }
 
 }
+
+#include "moc_abstractmodeldatagenerator.cpp"

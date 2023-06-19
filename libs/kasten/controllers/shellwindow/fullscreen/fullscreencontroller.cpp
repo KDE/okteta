@@ -36,3 +36,5 @@ void FullScreenController::switchFullScreen(bool toFullScreen)
 }
 
 }
+
+#include "moc_fullscreencontroller.cpp"

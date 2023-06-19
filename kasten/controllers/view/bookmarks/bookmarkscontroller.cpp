@@ -305,3 +305,5 @@ void BookmarksController::onBookmarkTriggered(QAction* action)
 }
 
 }
+
+#include "moc_bookmarkscontroller.cpp"

@@ -67,3 +67,5 @@ void ByteArrayRandomDataGeneratorConfigEditor::onSettingsChanged()
 }
 
 }
+
+#include "moc_bytearrayrandomdatageneratorconfigeditor.cpp"

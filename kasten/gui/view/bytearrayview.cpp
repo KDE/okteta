@@ -422,3 +422,5 @@ void ByteArrayView::setFontByGlobalSettings()
 }
 
 }
+
+#include "moc_bytearrayview.cpp"

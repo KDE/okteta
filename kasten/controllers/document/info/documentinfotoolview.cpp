@@ -29,3 +29,5 @@ QString DocumentInfoToolView::title()      const { return mWidget->tool()->title
 AbstractTool* DocumentInfoToolView::tool() const { return mWidget->tool(); }
 
 }
+
+#include "moc_documentinfotoolview.cpp"

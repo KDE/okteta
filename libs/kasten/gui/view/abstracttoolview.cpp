@@ -24,3 +24,5 @@ AbstractToolView::AbstractToolView() = default;
 AbstractToolView::~AbstractToolView() = default;
 
 }
+
+#include "moc_abstracttoolview.cpp"

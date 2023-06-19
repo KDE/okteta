@@ -92,3 +92,5 @@ void TerminalView::onTerminalPartDestroyed()
 }
 
 }
+
+#include "moc_terminalview.cpp"

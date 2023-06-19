@@ -118,3 +118,5 @@ bool ByteArrayBase85StreamEncoder::encodeDataToStream(QIODevice* device,
 }
 
 }
+
+#include "moc_bytearraybase85streamencoder.cpp"

@@ -167,3 +167,5 @@ void PrintTool::triggerPrint(QPrinter* printer)
 }
 
 }
+
+#include "moc_printtool.cpp"

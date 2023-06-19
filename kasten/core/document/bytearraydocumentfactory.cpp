@@ -85,3 +85,5 @@ AbstractDocument* ByteArrayDocumentFactory::createFromData(const QMimeData* mime
 }
 
 }
+
+#include "moc_bytearraydocumentfactory.cpp"

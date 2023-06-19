@@ -95,3 +95,5 @@ KSharedConfig::Ptr StructuresManager::config() const
 }
 
 }
+
+#include "moc_structuresmanager.cpp"

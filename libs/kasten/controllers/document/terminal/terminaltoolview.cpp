@@ -29,3 +29,5 @@ QString TerminalToolView::title()      const { return mWidget->tool()->title(); 
 AbstractTool* TerminalToolView::tool() const { return mWidget->tool(); }
 
 }
+
+#include "moc_terminaltoolview.cpp"

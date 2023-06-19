@@ -23,3 +23,5 @@ void ModelStreamEncodeThread::run()
 }
 
 }
+
+#include "moc_modelstreamencodethread.cpp"

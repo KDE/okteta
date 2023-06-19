@@ -122,3 +122,5 @@ void ReplaceController::onPromptReply(ReplaceBehaviour behaviour)
 }
 
 }
+
+#include "moc_replacecontroller.cpp"

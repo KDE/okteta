@@ -113,3 +113,5 @@ void ByteTableTool::onReadOnlyChanged(bool isReadOnly)
 }
 
 }
+
+#include "moc_bytetabletool.cpp"

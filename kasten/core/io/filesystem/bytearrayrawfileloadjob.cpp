@@ -50,3 +50,5 @@ void ByteArrayRawFileLoadJob::startLoadFromFile()
 }
 
 }
+
+#include "moc_bytearrayrawfileloadjob.cpp"

@@ -36,3 +36,5 @@ void AbstractExportJob::setDocument(AbstractDocument* document)
 }
 
 }
+
+#include "moc_abstractexportjob.cpp"

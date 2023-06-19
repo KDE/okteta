@@ -322,3 +322,5 @@ void FixedSizeByteArrayModel::reset(unsigned int offset, unsigned int length)
 }
 
 }
+
+#include "moc_fixedsizebytearraymodel.cpp"

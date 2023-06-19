@@ -35,3 +35,5 @@ AbstractModelSynchronizer* TestDocumentFileSynchronizerFactory::createSynchroniz
 }
 
 }
+
+#include "moc_testdocumentfilesynchronizerfactory.cpp"

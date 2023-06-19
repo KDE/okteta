@@ -24,3 +24,5 @@ AbstractGroupedViews::AbstractGroupedViews(AbstractGroupedViewsPrivate* d)
 AbstractGroupedViews::~AbstractGroupedViews() = default;
 
 }
+
+#include "moc_abstractgroupedviews.cpp"

@@ -33,3 +33,5 @@ void PieceTableByteArrayModelAbstractByteArrayModelIfTest::deleteByteArrayModel(
 }
 
 QTEST_GUILESS_MAIN(Okteta::PieceTableByteArrayModelAbstractByteArrayModelIfTest)
+
+#include "moc_piecetablebytearraymodelabstractbytearraymodeliftest.cpp"

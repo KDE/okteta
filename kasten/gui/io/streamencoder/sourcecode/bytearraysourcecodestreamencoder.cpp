@@ -290,3 +290,5 @@ QString ByteArraySourceCodeStreamEncoder::printFormatted(const Okteta::AbstractB
 }
 
 }
+
+#include "moc_bytearraysourcecodestreamencoder.cpp"

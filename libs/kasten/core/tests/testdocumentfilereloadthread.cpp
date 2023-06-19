@@ -55,3 +55,5 @@ void TestDocumentFileReloadThread::run()
 }
 
 }
+
+#include "moc_testdocumentfilereloadthread.cpp"

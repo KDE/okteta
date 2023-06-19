@@ -156,3 +156,5 @@ void VersionableIfTest::testFill()
 #endif
 
 }
+
+#include "moc_versionableiftest.cpp"

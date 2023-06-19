@@ -23,3 +23,5 @@ void ModelDataGenerateThread::run()
 }
 
 }
+
+#include "moc_modeldatageneratethread.cpp"

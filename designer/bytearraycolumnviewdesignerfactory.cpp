@@ -60,3 +60,5 @@ QString ByteArrayColumnViewDesignerFactory::name() const
 {
     return QStringLiteral("Okteta::ByteArrayColumnView");
 }
+
+#include "moc_bytearraycolumnviewdesignerfactory.cpp"

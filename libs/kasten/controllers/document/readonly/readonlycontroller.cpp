@@ -61,3 +61,5 @@ void ReadOnlyController::setReadOnly(bool isReadOnly)
 }
 
 }
+
+#include "moc_readonlycontroller.cpp"

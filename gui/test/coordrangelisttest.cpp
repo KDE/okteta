@@ -172,3 +172,5 @@ void CoordRangeListTest::testAddNonJoinableSections()
 }
 
 QTEST_MAIN(Okteta::CoordRangeListTest)
+
+#include "moc_coordrangelisttest.cpp"

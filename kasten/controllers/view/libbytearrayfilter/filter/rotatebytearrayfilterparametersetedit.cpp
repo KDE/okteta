@@ -91,3 +91,5 @@ void RotateByteArrayFilterParameterSetEdit::onValueChanged(int value)
 {
     Q_EMIT validityChanged(value != 0);
 }
+
+#include "moc_rotatebytearrayfilterparametersetedit.cpp"

@@ -747,3 +747,5 @@ void AddressRangeTest::testIsJoinable()
 }
 
 QTEST_GUILESS_MAIN(Okteta::AddressRangeTest)
+
+#include "moc_addressrangetest.cpp"

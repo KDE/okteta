@@ -58,3 +58,5 @@ void AddressComboBox::rememberCurrentAddress()
 }
 
 }
+
+#include "moc_addresscombobox.cpp"

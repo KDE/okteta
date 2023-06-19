@@ -121,3 +121,5 @@ void TestDocumentTest::testSetContentFlags()
 }
 
 QTEST_GUILESS_MAIN(TestDocumentTest)
+
+#include "moc_testdocumenttest.cpp"

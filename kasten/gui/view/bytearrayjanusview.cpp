@@ -370,3 +370,5 @@ void ByteArrayJanusView::propagateFont(const QFont& font)
 }
 
 }
+
+#include "moc_bytearrayjanusview.cpp"

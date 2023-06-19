@@ -81,3 +81,5 @@ void ByteArrayRawFileSynchronizer::onModelModified(bool isModified)
 }
 
 }
+
+#include "moc_bytearrayrawfilesynchronizer.cpp"

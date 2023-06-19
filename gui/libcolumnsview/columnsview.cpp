@@ -400,3 +400,5 @@ void ColumnsView::renderEmptyArea(QPainter* painter, int cx, int cy, int cw, int
 }
 
 }
+
+#include "moc_columnsview.cpp"

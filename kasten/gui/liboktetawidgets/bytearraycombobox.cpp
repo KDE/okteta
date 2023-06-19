@@ -93,3 +93,5 @@ int ByteArrayComboBox::minLength() const
 }
 
 }
+
+#include "moc_bytearraycombobox.cpp"

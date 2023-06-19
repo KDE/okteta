@@ -96,3 +96,5 @@ bool Crc32ByteArrayChecksumAlgorithm::calculateChecksum(QString* result,
 
     return true;
 }
+
+#include "moc_crc32bytearraychecksumalgorithm.cpp"

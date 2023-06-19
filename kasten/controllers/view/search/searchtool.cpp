@@ -210,3 +210,5 @@ void SearchTool::doSearch(FindDirection direction)
 }
 
 }
+
+#include "moc_searchtool.cpp"

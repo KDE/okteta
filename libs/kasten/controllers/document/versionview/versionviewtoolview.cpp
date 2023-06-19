@@ -26,3 +26,5 @@ QString VersionViewToolView::title()      const { return mWidget->tool()->title(
 AbstractTool* VersionViewToolView::tool() const { return mWidget->tool(); }
 
 }
+
+#include "moc_versionviewtoolview.cpp"

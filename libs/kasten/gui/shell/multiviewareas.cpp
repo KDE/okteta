@@ -142,3 +142,5 @@ void MultiViewAreas::closeViewArea(AbstractViewArea* viewArea)
 }
 
 }
+
+#include "moc_multiviewareas.cpp"

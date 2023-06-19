@@ -47,3 +47,5 @@ void DocumentCreateManager::createNewFromData(const QMimeData* mimeData, bool se
 }
 
 }
+
+#include "moc_documentcreatemanager.cpp"

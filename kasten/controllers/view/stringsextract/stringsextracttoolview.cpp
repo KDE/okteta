@@ -29,3 +29,5 @@ QString StringsExtractToolView::title()      const { return mWidget->tool()->tit
 AbstractTool* StringsExtractToolView::tool() const { return mWidget->tool(); }
 
 }
+
+#include "moc_stringsextracttoolview.cpp"

@@ -219,3 +219,5 @@ void FilterView::onValidityChanged(bool isValid)
 }
 
 }
+
+#include "moc_filterview.cpp"

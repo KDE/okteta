@@ -275,3 +275,5 @@ void ViewConfigController::onVisibleByteArrayCodingsChanged(int visibleByteArray
 }
 
 }
+
+#include "moc_viewconfigcontroller.cpp"

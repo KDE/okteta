@@ -57,3 +57,5 @@ void BookmarkEditPopup::onFinished(int result)
 }
 
 }
+
+#include "moc_bookmarkeditpopup.cpp"

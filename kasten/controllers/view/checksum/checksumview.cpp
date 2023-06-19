@@ -202,3 +202,5 @@ void ChecksumView::onValidityChanged(bool isValid)
 }
 
 }
+
+#include "moc_checksumview.cpp"

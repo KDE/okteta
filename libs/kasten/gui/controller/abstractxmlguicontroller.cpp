@@ -26,3 +26,5 @@ void AbstractXmlGuiController::setTargetModel(AbstractModel* model)
 }
 
 }
+
+#include "moc_abstractxmlguicontroller.cpp"

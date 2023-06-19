@@ -62,3 +62,5 @@ void ByteArrayRawFileReloadThread::run()
 }
 
 }
+
+#include "moc_bytearrayrawfilereloadthread.cpp"

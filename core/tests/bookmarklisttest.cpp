@@ -231,3 +231,5 @@ void BookmarkListTest::testAdjustToSwapped()
 }
 
 QTEST_GUILESS_MAIN(BookmarkListTest)
+
+#include "moc_bookmarklisttest.cpp"
