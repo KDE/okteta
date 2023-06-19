@@ -9,15 +9,14 @@
 #ifndef KASTEN_DOCUMENTLISTMODEL_HPP
 #define KASTEN_DOCUMENTLISTMODEL_HPP
 
-// Kasten core
-#include <Kasten/AbstractModelSynchronizer>
-#include <Kasten/AbstractDocument>
 // Qt
 #include <QAbstractTableModel>
 
 namespace Kasten {
 
 class DocumentsTool;
+class AbstractModelSynchronizer;
+class AbstractDocument;
 
 class DocumentListModel : public QAbstractTableModel
 {

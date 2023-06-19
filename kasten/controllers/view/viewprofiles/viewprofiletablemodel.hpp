@@ -13,7 +13,8 @@
 #include <Kasten/Okteta/ByteArrayViewProfile>
 // Qt
 #include <QAbstractTableModel>
-#include <QVector>
+
+template <class C> class QVector;
 
 namespace Kasten {
 class ByteArrayViewProfileManager;

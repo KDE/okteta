@@ -13,12 +13,12 @@
 #include <Kasten/AbstractXmlGuiController>
 // Okteta core
 #include <Okteta/Address>
-#include <Okteta/Bookmark>
-// Qt
-#include <QVector>
+
+template <class T> class QVector;
 
 namespace Okteta {
 class Bookmarkable;
+class Bookmark;
 class AbstractByteArrayModel;
 }
 class KXMLGUIClient;

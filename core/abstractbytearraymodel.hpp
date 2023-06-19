@@ -12,7 +12,6 @@
 // lib
 #include "oktetacore_export.hpp"
 #include "addressrange.hpp"
-#include "arraychangemetricslist.hpp"
 #include "size.hpp"
 #include "byte.hpp"
 // Qt
@@ -23,6 +22,7 @@
 
 namespace Okteta {
 
+class ArrayChangeMetricsList;
 class CharCodec;
 class AbstractByteArrayModelPrivate;
 

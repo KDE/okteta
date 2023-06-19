@@ -13,6 +13,8 @@
 #include "controller/abstractcontroller.hpp"
 #include "controller/abstractwheelcontroller.hpp"
 #include "bytearraytablelayout.hpp"
+ // Okteta core
+#include <Okteta/Bookmark>
 
 namespace Okteta {
 

@@ -15,6 +15,7 @@
 #include <KLocalizedString>
 // Qt
 #include <QApplication>
+#include <QVector>
 #include <QIcon>
 
 namespace Kasten {
