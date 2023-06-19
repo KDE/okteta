@@ -260,3 +260,5 @@ void SelectRangeView::onSelectButtonClicked()
 }
 
 }
+
+#include "moc_selectrangeview.cpp"

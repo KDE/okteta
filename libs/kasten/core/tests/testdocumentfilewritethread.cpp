@@ -36,3 +36,5 @@ void TestDocumentFileWriteThread::run()
 }
 
 }
+
+#include "moc_testdocumentfilewritethread.cpp"

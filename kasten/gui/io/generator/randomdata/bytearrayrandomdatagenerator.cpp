@@ -122,3 +122,5 @@ QMimeData* ByteArrayRandomDataGenerator::generateData()
 }
 
 }
+
+#include "moc_bytearrayrandomdatagenerator.cpp"

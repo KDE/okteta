@@ -62,3 +62,5 @@ void OverwriteModeController::setOverWrite(bool isOverWrite)
 }
 
 }
+
+#include "moc_overwritemodecontroller.cpp"

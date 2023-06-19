@@ -58,3 +58,5 @@ QValidator::State AbstractValue8Editor::validate(QString& text, int& pos) const
 
     return isCompleteTextUsed ? QValidator::Acceptable : QValidator::Invalid;
 }
+
+#include "moc_abstractvalue8editor.cpp"

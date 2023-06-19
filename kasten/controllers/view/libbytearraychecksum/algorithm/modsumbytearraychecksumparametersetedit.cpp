@@ -60,3 +60,5 @@ void ModSumByteArrayChecksumParameterSetEdit::getParameterSet(AbstractByteArrayC
 
     modSumParameterSet->setEndianness(static_cast<Endianness>(mByteOrderComboBox->currentIndex()));
 }
+
+#include "moc_modsumbytearraychecksumparametersetedit.cpp"

@@ -103,3 +103,5 @@ void KDataBufferIfTest::testCopy()
 }
 
 QTEST_GUILESS_MAIN(Okteta::FixedSizeByteArrayModelTest)
+
+#include "moc_fixedsizebytearraymodeltest.cpp"

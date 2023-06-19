@@ -231,3 +231,5 @@ void CharsetConversionView::onConversionDone(bool success, int convertedBytesCou
 }
 
 }
+
+#include "moc_charsetconversionview.cpp"

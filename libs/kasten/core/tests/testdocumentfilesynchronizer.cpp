@@ -61,3 +61,5 @@ AbstractConnectJob* TestDocumentFileSynchronizer::startConnect(AbstractDocument*
 }
 
 }
+
+#include "moc_testdocumentfilesynchronizer.cpp"

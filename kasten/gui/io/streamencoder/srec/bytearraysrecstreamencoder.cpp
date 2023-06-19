@@ -262,3 +262,5 @@ bool ByteArraySRecStreamEncoder::encodeDataToStream(QIODevice* device,
 }
 
 }
+
+#include "moc_bytearraysrecstreamencoder.cpp"

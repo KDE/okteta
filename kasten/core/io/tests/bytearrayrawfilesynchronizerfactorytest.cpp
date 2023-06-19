@@ -139,3 +139,5 @@ TODO: save mit path als Parameter ? Oder separat setzen ? Wie Kopie speichern ?
 #endif
 
 QTEST_GUILESS_MAIN(ByteArrayRawFileSynchronizerFactoryTest)
+
+#include "moc_bytearrayrawfilesynchronizerfactorytest.cpp"

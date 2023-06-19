@@ -29,3 +29,5 @@ void ZoomBarController::setTargetModel(AbstractModel* model)
 }
 
 }
+
+#include "moc_zoombarcontroller.cpp"

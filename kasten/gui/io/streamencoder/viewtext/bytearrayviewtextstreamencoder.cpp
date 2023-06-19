@@ -153,3 +153,5 @@ bool ByteArrayViewTextStreamEncoder::encodeDataToStream(QIODevice* device,
 }
 
 }
+
+#include "moc_bytearrayviewtextstreamencoder.cpp"

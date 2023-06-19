@@ -83,3 +83,5 @@ void UiColorSchemeController::handleSchemeChanged(QAction* action)
 #endif
 
 }
+
+#include "moc_uicolorschemecontroller.cpp"

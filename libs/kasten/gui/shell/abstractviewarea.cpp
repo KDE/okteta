@@ -26,3 +26,5 @@ AbstractViewArea::AbstractViewArea(AbstractViewAreaPrivate* d)
 AbstractViewArea::~AbstractViewArea() = default;
 
 }
+
+#include "moc_abstractviewarea.cpp"

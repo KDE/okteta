@@ -297,3 +297,5 @@ void StructureAddRemoveWidget::updateAvailable()
         syncData();
     }
 }
+
+#include "moc_structureaddremovewidget.cpp"

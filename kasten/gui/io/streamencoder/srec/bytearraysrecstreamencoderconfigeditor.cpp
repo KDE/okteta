@@ -64,3 +64,5 @@ void ByteArraySRecStreamEncoderConfigEditor::onSettingsChanged()
 }
 
 }
+
+#include "moc_bytearraysrecstreamencoderconfigeditor.cpp"

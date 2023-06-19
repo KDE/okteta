@@ -76,3 +76,5 @@ void ByteArraySearchJob::onBytesSearched()
 }
 
 }
+
+#include "moc_bytearraysearchjob.cpp"

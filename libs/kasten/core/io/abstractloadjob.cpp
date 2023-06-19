@@ -38,3 +38,5 @@ void AbstractLoadJob::setDocument(AbstractDocument* document)
 }
 
 }
+
+#include "moc_abstractloadjob.cpp"

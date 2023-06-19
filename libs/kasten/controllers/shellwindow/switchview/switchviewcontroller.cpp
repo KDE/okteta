@@ -85,3 +85,5 @@ void SwitchViewController::backward()
 }
 
 }
+
+#include "moc_switchviewcontroller.cpp"

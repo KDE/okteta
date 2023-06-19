@@ -35,3 +35,5 @@ void ByteArrayDocumentFactoryTest::testCreate()
 }
 
 QTEST_GUILESS_MAIN(Kasten::ByteArrayDocumentFactoryTest)
+
+#include "moc_bytearraydocumentfactorytest.cpp"

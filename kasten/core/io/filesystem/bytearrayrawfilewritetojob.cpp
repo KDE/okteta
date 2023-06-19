@@ -45,3 +45,5 @@ void ByteArrayRawFileWriteToJob::startSyncWithRemote()
 }
 
 }
+
+#include "moc_bytearrayrawfilewritetojob.cpp"

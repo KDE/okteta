@@ -61,3 +61,5 @@ void SingleViewWindow::addTool(AbstractToolView* toolView)
 }
 
 }
+
+#include "moc_singleviewwindow.cpp"

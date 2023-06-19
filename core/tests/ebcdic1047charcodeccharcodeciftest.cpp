@@ -28,3 +28,5 @@ void EBCDIC1047CharCodecCharCodecIfTest::deleteCodec(CharCodec* codec)
 }
 
 QTEST_GUILESS_MAIN(Okteta::EBCDIC1047CharCodecCharCodecIfTest)
+
+#include "moc_ebcdic1047charcodeccharcodeciftest.cpp"

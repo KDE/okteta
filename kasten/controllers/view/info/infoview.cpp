@@ -209,3 +209,5 @@ void InfoView::onTableSelectionChanged()
 
 
 }
+
+#include "moc_infoview.cpp"

@@ -56,3 +56,5 @@ void DocumentsView::onDocumentActivated(const QModelIndex& index)
 }
 
 }
+
+#include "moc_documentsview.cpp"

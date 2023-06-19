@@ -56,3 +56,5 @@ void TestDocumentFileLoadThread::run()
 }
 
 }
+
+#include "moc_testdocumentfileloadthread.cpp"

@@ -51,3 +51,5 @@ void StructuresSelectionDialog::onFinished(int result)
 
     emit structuresAccepted(m_structureAddRemoveWidget->values());
 }
+
+#include "moc_structuresselectiondialog.cpp"

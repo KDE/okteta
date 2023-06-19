@@ -121,3 +121,5 @@ void CopyAsDialog::onFinished(int result)
 }
 
 }
+
+#include "moc_copyasdialog.cpp"

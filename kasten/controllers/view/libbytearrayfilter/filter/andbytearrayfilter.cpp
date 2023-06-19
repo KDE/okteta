@@ -85,3 +85,5 @@ bool AndByteArrayFilter::filter(Okteta::Byte* result,
 
     return true;
 }
+
+#include "moc_andbytearrayfilter.cpp"

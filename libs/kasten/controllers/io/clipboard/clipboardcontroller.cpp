@@ -162,3 +162,5 @@ void ClipboardController::onClipboardDataChanged()
 }
 
 }
+
+#include "moc_clipboardcontroller.cpp"

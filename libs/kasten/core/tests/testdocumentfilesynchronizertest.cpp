@@ -268,3 +268,5 @@ void TestDocumentFileSynchronizerTest::testHeader()
 }
 
 QTEST_GUILESS_MAIN(TestDocumentFileSynchronizerTest)
+
+#include "moc_testdocumentfilesynchronizertest.cpp"

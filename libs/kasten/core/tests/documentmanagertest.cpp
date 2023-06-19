@@ -97,3 +97,5 @@ void DocumentManagerTest::testCanClose()
 }
 
 QTEST_GUILESS_MAIN(DocumentManagerTest)
+
+#include "moc_documentmanagertest.cpp"

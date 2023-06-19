@@ -164,3 +164,5 @@ QMimeData* ByteArrayPatternGenerator::generateData()
 }
 
 }
+
+#include "moc_bytearraypatterngenerator.cpp"

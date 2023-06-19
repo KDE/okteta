@@ -79,3 +79,5 @@ void UIntSpinBox::updateEditLine() const
     const QString text = mPrefix + QString::number(mValue, mBase);
     lineEdit()->setText(text);
 }
+
+#include "moc_uintspinbox.cpp"

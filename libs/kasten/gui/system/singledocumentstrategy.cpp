@@ -109,3 +109,5 @@ void SingleDocumentStrategy::closeDocument(AbstractDocument* document)
 }
 
 }
+
+#include "moc_singledocumentstrategy.cpp"

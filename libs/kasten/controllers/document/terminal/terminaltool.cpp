@@ -56,3 +56,5 @@ void TerminalTool::setTargetModel(AbstractModel* model)
 }
 
 }
+
+#include "moc_terminaltool.cpp"

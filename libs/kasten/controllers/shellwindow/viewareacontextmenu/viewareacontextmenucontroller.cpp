@@ -132,3 +132,5 @@ void ViewAreaContextMenuController::closeAllOther()
 }
 
 }
+
+#include "moc_viewareacontextmenucontroller.cpp"

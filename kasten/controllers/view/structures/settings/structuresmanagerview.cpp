@@ -187,3 +187,5 @@ void StructuresManagerView::rebuildPluginSelectorEntries()
     mRebuildingPluginsList = false;
     reloadSelectedItems();
 }
+
+#include "moc_structuresmanagerview.cpp"

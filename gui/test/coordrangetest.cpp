@@ -442,3 +442,5 @@ void CoordRangeTest::testIsJoinable()
 }
 
 QTEST_MAIN(Okteta::CoordRangeTest)
+
+#include "moc_coordrangetest.cpp"

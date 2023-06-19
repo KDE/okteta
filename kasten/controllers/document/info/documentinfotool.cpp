@@ -169,3 +169,5 @@ void DocumentInfoTool::onUrlChanged(const QUrl& url)
 }
 
 }
+
+#include "moc_documentinfotool.cpp"

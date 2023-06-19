@@ -254,3 +254,5 @@ bool ByteArrayIHexStreamEncoder::encodeDataToStream(QIODevice* device,
 }
 
 }
+
+#include "moc_bytearrayihexstreamencoder.cpp"

@@ -27,3 +27,5 @@ bool AbstractModelDataGeneratorConfigEditor::isValid() const
 }
 
 }
+
+#include "moc_abstractmodeldatageneratorconfigeditor.cpp"

@@ -43,3 +43,5 @@ void ByteArrayRawFileWriteJob::startWriteToFile()
 }
 
 }
+
+#include "moc_bytearrayrawfilewritejob.cpp"

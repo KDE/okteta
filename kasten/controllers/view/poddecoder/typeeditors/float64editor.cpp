@@ -35,3 +35,5 @@ Float64 Float64Editor::data() const
 //     interpretText();
     return text().toDouble();
 }
+
+#include "moc_float64editor.cpp"

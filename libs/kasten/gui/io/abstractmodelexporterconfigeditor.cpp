@@ -32,3 +32,5 @@ AbstractSelectionView* AbstractModelExporterConfigEditor::createPreviewView() co
 }
 
 }
+
+#include "moc_abstractmodelexporterconfigeditor.cpp"

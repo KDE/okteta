@@ -45,3 +45,5 @@ void ToggleButton::setCheckedState(const QString& text, const QString& toolTip)
 }
 
 }
+
+#include "moc_togglebutton.cpp"

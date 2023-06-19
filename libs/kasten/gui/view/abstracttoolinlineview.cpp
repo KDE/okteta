@@ -28,3 +28,5 @@ void AbstractToolInlineView::activate()
 }
 
 }
+
+#include "moc_abstracttoolinlineview.cpp"

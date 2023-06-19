@@ -163,3 +163,5 @@ void GotoOffsetTool::onContentsChanged()
 }
 
 }
+
+#include "moc_gotooffsettool.cpp"

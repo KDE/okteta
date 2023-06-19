@@ -280,3 +280,5 @@ void GotoOffsetView::onFormatChanged(int formatIndex)
 }
 
 }
+
+#include "moc_gotooffsetview.cpp"

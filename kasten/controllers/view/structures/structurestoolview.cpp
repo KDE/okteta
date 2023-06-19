@@ -37,3 +37,5 @@ AbstractTool* StructuresToolView::tool() const
 }
 
 }
+
+#include "moc_structurestoolview.cpp"

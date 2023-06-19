@@ -60,3 +60,5 @@ QString ByteArrayRowViewDesignerFactory::name() const
 {
     return QStringLiteral("Okteta::ByteArrayRowView");
 }
+
+#include "moc_bytearrayrowviewdesignerfactory.cpp"

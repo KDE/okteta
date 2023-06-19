@@ -44,3 +44,5 @@ int CreateStatisticJob::exec()
 }
 
 }
+
+#include "moc_createstatisticjob.cpp"

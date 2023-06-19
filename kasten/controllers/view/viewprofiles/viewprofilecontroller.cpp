@@ -226,3 +226,5 @@ void ViewProfileController::onSaveChangesActionTriggered()
 }
 
 }
+
+#include "moc_viewprofilecontroller.cpp"

@@ -64,3 +64,5 @@ void Crc64ByteArrayChecksumParameterSetEdit::getParameterSet(AbstractByteArrayCh
 
     crc64ParameterSet->setCrc64Variant(static_cast<Crc64Variant>(mVariantComboBox->currentIndex()));
 }
+
+#include "moc_crc64bytearraychecksumparametersetedit.cpp"

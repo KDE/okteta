@@ -212,3 +212,5 @@ void TestDocumentFileSynchronizerFactoryTest::testConnectToFile()
 #endif
 
 QTEST_GUILESS_MAIN(TestDocumentFileSynchronizerFactoryTest)
+
+#include "moc_testdocumentfilesynchronizerfactorytest.cpp"

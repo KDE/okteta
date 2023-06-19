@@ -54,3 +54,5 @@ void OverwriteOnlyController::setOverwriteOnly(bool isOverwriteOnly)
 }
 
 }
+
+#include "moc_overwriteonlycontroller.cpp"

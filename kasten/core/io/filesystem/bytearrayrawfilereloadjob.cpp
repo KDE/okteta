@@ -53,3 +53,5 @@ void ByteArrayRawFileReloadJob::startReadFromFile()
 }
 
 }
+
+#include "moc_bytearrayrawfilereloadjob.cpp"

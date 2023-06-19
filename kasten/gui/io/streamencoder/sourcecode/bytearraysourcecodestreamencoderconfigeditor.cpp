@@ -107,3 +107,5 @@ void ByteArraySourceCodeStreamEncoderConfigEditor::onSettingsChanged()
 }
 
 }
+
+#include "moc_bytearraysourcecodestreamencoderconfigeditor.cpp"

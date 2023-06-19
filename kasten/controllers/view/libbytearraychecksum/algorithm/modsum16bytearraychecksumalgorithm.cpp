@@ -112,3 +112,5 @@ quint16 ModSum16ByteArrayChecksumAlgorithm::calculateModSumWithLittleEndian(cons
 
     return modSum;
 }
+
+#include "moc_modsum16bytearraychecksumalgorithm.cpp"

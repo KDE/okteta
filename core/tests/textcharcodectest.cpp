@@ -54,3 +54,5 @@ void TextCharCodecTest::testCreateNonexistingCodec()
 }
 
 QTEST_GUILESS_MAIN(Okteta::TextCharCodecTest)
+
+#include "moc_textcharcodectest.cpp"

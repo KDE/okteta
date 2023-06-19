@@ -42,3 +42,5 @@ void ChecksumCalculateJob::onCalculatedBytes()
 }
 
 }
+
+#include "moc_checksumcalculatejob.cpp"

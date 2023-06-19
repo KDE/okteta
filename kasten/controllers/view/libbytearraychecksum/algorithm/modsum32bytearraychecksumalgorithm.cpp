@@ -128,3 +128,5 @@ quint32 ModSum32ByteArrayChecksumAlgorithm::calculateModSumWithLittleEndian(cons
 
     return modSum;
 }
+
+#include "moc_modsum32bytearraychecksumalgorithm.cpp"

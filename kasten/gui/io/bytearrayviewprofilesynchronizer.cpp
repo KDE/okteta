@@ -365,3 +365,5 @@ void ByteArrayViewProfileSynchronizer::onViewModusChanged()
 }
 
 }
+
+#include "moc_bytearrayviewprofilesynchronizer.cpp"

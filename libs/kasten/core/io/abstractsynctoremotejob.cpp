@@ -24,3 +24,5 @@ AbstractSyncToRemoteJob::AbstractSyncToRemoteJob()
 AbstractSyncToRemoteJob::~AbstractSyncToRemoteJob() = default;
 
 }
+
+#include "moc_abstractsynctoremotejob.cpp"

@@ -115,3 +115,5 @@ void Template_ByteArrayChecksumParameterSetEdit::onBitNumberChanged(int value)
     emit validityChanged(isValid);
 }
 //// ADAPT(end)
+
+#include "moc_template_bytearraychecksumparametersetedit.cpp"

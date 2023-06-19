@@ -68,3 +68,5 @@ void ReplacePrompt::onCloseButton()
 }
 
 }
+
+#include "moc_replaceprompt.cpp"

@@ -57,3 +57,5 @@ void StatusBar::changeEvent(QEvent* event)
 }
 
 }
+
+#include "moc_statusbar.cpp"

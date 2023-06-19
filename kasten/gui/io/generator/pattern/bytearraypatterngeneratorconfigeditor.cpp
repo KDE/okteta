@@ -95,3 +95,5 @@ void ByteArrayPatternGeneratorConfigEditor::onPatternChanged(const QByteArray& p
 }
 
 }
+
+#include "moc_bytearraypatterngeneratorconfigeditor.cpp"

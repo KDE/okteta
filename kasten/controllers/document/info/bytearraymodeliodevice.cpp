@@ -80,3 +80,5 @@ qint64 ByteArrayModelIoDevice::writeData(const char* data, qint64 length)
 }
 
 }
+
+#include "moc_bytearraymodeliodevice.cpp"

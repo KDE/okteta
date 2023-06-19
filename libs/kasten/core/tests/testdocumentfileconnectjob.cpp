@@ -50,3 +50,5 @@ void TestDocumentFileConnectJob::startConnectWithFile()
 }
 
 }
+
+#include "moc_testdocumentfileconnectjob.cpp"

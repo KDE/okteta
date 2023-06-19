@@ -121,3 +121,5 @@ void ExportDialog::onFinished(int result)
 }
 
 }
+
+#include "moc_exportdialog.cpp"

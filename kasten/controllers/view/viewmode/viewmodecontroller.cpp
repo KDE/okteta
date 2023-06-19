@@ -68,3 +68,5 @@ void ViewModeController::onViewModusChanged(int viewModus)
 }
 
 }
+
+#include "moc_viewmodecontroller.cpp"

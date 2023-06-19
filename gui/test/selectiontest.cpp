@@ -201,3 +201,5 @@ void SelectionTest::testReverse()
 }
 
 QTEST_MAIN(Okteta::SelectionTest)
+
+#include "moc_selectiontest.cpp"

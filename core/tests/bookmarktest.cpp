@@ -53,3 +53,5 @@ void BookmarkTest::testMove()
 }
 
 QTEST_GUILESS_MAIN(BookmarkTest)
+
+#include "moc_bookmarktest.cpp"

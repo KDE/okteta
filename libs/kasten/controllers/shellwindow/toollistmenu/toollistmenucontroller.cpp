@@ -56,3 +56,5 @@ void ToolListMenuController::updateActions()
 }
 
 }
+
+#include "moc_toollistmenucontroller.cpp"

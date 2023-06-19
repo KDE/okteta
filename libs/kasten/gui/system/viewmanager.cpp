@@ -75,3 +75,5 @@ void ViewManager::removeViews(const QVector<AbstractView*>& views)
 }
 
 }
+
+#include "moc_viewmanager.cpp"

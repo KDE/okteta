@@ -20,3 +20,5 @@ AbstractByteArrayChecksumParameterSetEdit::AbstractByteArrayChecksumParameterSet
 AbstractByteArrayChecksumParameterSetEdit::~AbstractByteArrayChecksumParameterSetEdit() = default;
 
 bool AbstractByteArrayChecksumParameterSetEdit::isValid() const { return true; }
+
+#include "moc_abstractbytearraychecksumparametersetedit.cpp"

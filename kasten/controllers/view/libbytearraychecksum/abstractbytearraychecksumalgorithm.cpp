@@ -51,3 +51,5 @@ void AbstractByteArrayChecksumAlgorithm::saveConfig(KConfigGroup& configGroup) c
 
 QString AbstractByteArrayChecksumAlgorithm::name() const { return d->name(); }
 QString AbstractByteArrayChecksumAlgorithm::id() const { return d->id(); }
+
+#include "moc_abstractbytearraychecksumalgorithm.cpp"

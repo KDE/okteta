@@ -25,3 +25,5 @@ void NoByteArrayChecksumParameterSetEdit::getParameterSet(AbstractByteArrayCheck
 {
     Q_UNUSED(parameterSet);
 }
+
+#include "moc_nobytearraychecksumparametersetedit.cpp"

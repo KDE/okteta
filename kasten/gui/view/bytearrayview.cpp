@@ -453,3 +453,4 @@ void ByteArrayView::setFontByGlobalSettings()
 
 // needed for SelectedDataCutExtension
 #include "bytearrayview.moc"
+#include "moc_bytearrayview.cpp"

@@ -36,3 +36,5 @@ void TouchOnlyTapAndHoldGesture::reset()
 }
 
 }
+
+#include "moc_touchonlytapandholdgesture.cpp"

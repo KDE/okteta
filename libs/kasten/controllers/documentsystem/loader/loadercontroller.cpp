@@ -82,3 +82,5 @@ void LoaderController::onUrlUsed(const QUrl& url)
 }
 
 }
+
+#include "moc_loadercontroller.cpp"

@@ -24,3 +24,5 @@ Octal8 Octal8Editor::data() const
 {
     return value();
 }
+
+#include "moc_octal8editor.cpp"

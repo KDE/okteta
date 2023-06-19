@@ -29,3 +29,5 @@ QString SelectRangeToolView::title()      const { return mWidget->tool()->title(
 AbstractTool* SelectRangeToolView::tool() const { return mWidget->tool(); }
 
 }
+
+#include "moc_selectrangetoolview.cpp"

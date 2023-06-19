@@ -119,3 +119,5 @@ bool AbstractLinePopup::eventFilter(QObject* object, QEvent* event)
 }
 
 }
+
+#include "moc_abstractlinepopup.cpp"

@@ -222,3 +222,5 @@ bool ByteArrayUuencodingStreamEncoder::encodeDataToStream(QIODevice* device,
 }
 
 }
+
+#include "moc_bytearrayuuencodingstreamencoder.cpp"

@@ -71,3 +71,5 @@ void BytesPerLineDialog::onFinished(int result)
 }
 
 }
+
+#include "moc_bytesperlinedialog.cpp"

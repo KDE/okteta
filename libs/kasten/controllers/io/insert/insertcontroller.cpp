@@ -142,3 +142,5 @@ void InsertController::onReadOnlyChanged(bool isReadOnly)
 }
 
 }
+
+#include "moc_insertcontroller.cpp"

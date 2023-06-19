@@ -272,3 +272,5 @@ bool TopLevelDataInformation::isTopLevel() const
 {
     return true;
 }
+
+#include "moc_topleveldatainformation.cpp"

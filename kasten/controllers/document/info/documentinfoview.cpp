@@ -176,3 +176,5 @@ void DocumentInfoView::onDocumentSizeChanged(int newSize)
 }
 
 }
+
+#include "moc_documentinfoview.cpp"

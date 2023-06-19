@@ -337,3 +337,5 @@ void PieceTest::testRemoveLocal()
 }
 
 QTEST_GUILESS_MAIN(KPieceTable::PieceTest)
+
+#include "moc_piecetest.cpp"

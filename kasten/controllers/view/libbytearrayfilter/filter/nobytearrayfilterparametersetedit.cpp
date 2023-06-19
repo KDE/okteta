@@ -25,3 +25,5 @@ void NoByteArrayFilterParameterSetEdit::getParameterSet(AbstractByteArrayFilterP
 {
     Q_UNUSED(parameterSet);
 }
+
+#include "moc_nobytearrayfilterparametersetedit.cpp"

@@ -62,3 +62,5 @@ bool Template_ByteArrayFilter::filter(Okteta::Byte* result,
 
     return success;
 }
+
+#include "moc_template_bytearrayfilter.cpp"

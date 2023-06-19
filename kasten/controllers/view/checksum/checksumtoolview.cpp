@@ -29,3 +29,5 @@ QString ChecksumToolView::title()      const { return mWidget->tool()->title(); 
 AbstractTool* ChecksumToolView::tool() const { return mWidget->tool(); }
 
 }
+
+#include "moc_checksumtoolview.cpp"

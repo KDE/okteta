@@ -141,3 +141,5 @@ QString AddressValidator::toString(Address address, AddressType addressType) con
 }
 
 }
+
+#include "moc_addressvalidator.cpp"

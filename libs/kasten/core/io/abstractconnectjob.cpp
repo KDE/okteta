@@ -23,3 +23,5 @@ AbstractConnectJob::AbstractConnectJob()
 AbstractConnectJob::~AbstractConnectJob() = default;
 
 }
+
+#include "moc_abstractconnectjob.cpp"

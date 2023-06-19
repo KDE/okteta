@@ -33,3 +33,5 @@ void PieceTableByteArrayModelVersionableIfTest::deleteVersionable(QObject* versi
 }
 
 QTEST_GUILESS_MAIN(Okteta::PieceTableByteArrayModelVersionableIfTest)
+
+#include "moc_piecetablebytearraymodelversionableiftest.cpp"

@@ -231,3 +231,5 @@ void StatusBarLayout::updateLayoutStructs() const
 }
 
 }
+
+#include "moc_statusbarlayout.cpp"

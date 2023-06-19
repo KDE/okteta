@@ -106,3 +106,5 @@ void TabBar::onTabBarDoubleClicked(int index)
 }
 
 }
+
+#include "moc_tabbar.cpp"

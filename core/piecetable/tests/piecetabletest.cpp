@@ -944,3 +944,5 @@ void PieceTableTest::testSwap()
 }
 
 QTEST_GUILESS_MAIN(KPieceTable::PieceTableTest)
+
+#include "moc_piecetabletest.cpp"

@@ -41,3 +41,5 @@ void ViewBox::add(ViewBox::Area area)
 }
 
 }
+
+#include "moc_viewbox.cpp"

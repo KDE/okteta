@@ -62,3 +62,5 @@ void ByteArrayTextStreamEncoderPreview::setFixedFontByGlobalSettings()
 }
 
 }
+
+#include "moc_bytearraytextstreamencoderpreview.cpp"

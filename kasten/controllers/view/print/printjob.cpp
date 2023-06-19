@@ -56,3 +56,5 @@ void PrintJob::onFinished()
 #endif
 
 }
+
+#include "moc_printjob.cpp"

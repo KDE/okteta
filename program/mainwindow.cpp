@@ -345,3 +345,5 @@ void OktetaMainWindow::onCloseRequest(const QVector<Kasten::AbstractView*>& view
 }
 
 }
+
+#include "moc_mainwindow.cpp"

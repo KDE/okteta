@@ -104,3 +104,5 @@ void CloseController::onDocumentsChanged()
 }
 
 }
+
+#include "moc_closecontroller.cpp"

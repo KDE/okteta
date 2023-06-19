@@ -188,3 +188,5 @@ void ByteTableView::onInsertClicked()
 }
 
 }
+
+#include "moc_bytetableview.cpp"

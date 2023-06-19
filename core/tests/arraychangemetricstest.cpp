@@ -92,3 +92,5 @@ void ArrayChangeMetricsTest::testRevert()
 }
 
 QTEST_GUILESS_MAIN(Okteta::ArrayChangeMetricsTest)
+
+#include "moc_arraychangemetricstest.cpp"

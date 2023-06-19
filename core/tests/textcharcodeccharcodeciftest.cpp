@@ -29,3 +29,5 @@ void TextCharCodecCharCodecIfTest::deleteCodec(CharCodec* codec)
 }
 
 QTEST_GUILESS_MAIN(Okteta::TextCharCodecCharCodecIfTest)
+
+#include "moc_textcharcodeccharcodeciftest.cpp"

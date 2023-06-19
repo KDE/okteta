@@ -82,3 +82,5 @@ void ExtractStringsJob::exec()
 }
 
 }
+
+#include "moc_extractstringsjob.cpp"

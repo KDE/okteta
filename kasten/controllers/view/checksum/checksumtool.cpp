@@ -226,3 +226,5 @@ void ChecksumTool::onSourceDestroyed()
 }
 
 }
+
+#include "moc_checksumtool.cpp"

@@ -104,3 +104,5 @@ bool ByteArrayBase64StreamEncoder::encodeDataToStream(QIODevice* device,
 }
 
 }
+
+#include "moc_bytearraybase64streamencoder.cpp"

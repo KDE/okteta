@@ -186,3 +186,5 @@ void BookmarksTool::onBookmarksModified()
 }
 
 }
+
+#include "moc_bookmarkstool.cpp"

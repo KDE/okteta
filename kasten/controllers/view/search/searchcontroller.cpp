@@ -139,3 +139,5 @@ bool SearchController::queryContinue(FindDirection direction) const
 }
 
 }
+
+#include "moc_searchcontroller.cpp"

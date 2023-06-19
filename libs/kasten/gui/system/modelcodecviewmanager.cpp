@@ -62,3 +62,5 @@ AbstractModelDataGeneratorConfigEditor* ModelCodecViewManager::createConfigEdito
 }
 
 }
+
+#include "moc_modelcodecviewmanager.cpp"

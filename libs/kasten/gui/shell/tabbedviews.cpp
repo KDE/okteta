@@ -114,3 +114,5 @@ void TabbedViews::setFocus()
 }
 
 }
+
+#include "moc_tabbedviews.cpp"

@@ -127,3 +127,5 @@ void FileSystemBrowserView::openFile(const KFileItem& fileItem)
 }
 
 }
+
+#include "moc_filesystembrowserview.cpp"

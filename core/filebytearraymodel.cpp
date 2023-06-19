@@ -87,3 +87,5 @@ bool FileByteArrayModel::close()
 }
 
 }
+
+#include "moc_filebytearraymodel.cpp"

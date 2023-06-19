@@ -218,3 +218,5 @@ void StringsExtractTool::extractStrings()
 }
 
 }
+
+#include "moc_stringsextracttool.cpp"

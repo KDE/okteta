@@ -124,3 +124,5 @@ void CreatorController::onNewFromGeneratorActionTriggered()
 }
 
 }
+
+#include "moc_creatorcontroller.cpp"

@@ -140,3 +140,5 @@ void ByteArrayRawFileSynchronizerTest::testNewSaveAsToUrl()
 }
 
 QTEST_GUILESS_MAIN(Kasten::ByteArrayRawFileSynchronizerTest)
+
+#include "moc_bytearrayrawfilesynchronizertest.cpp"

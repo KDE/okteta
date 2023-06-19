@@ -177,3 +177,5 @@ void FilterTool::onApplyableChanged()
 }
 
 }
+
+#include "moc_filtertool.cpp"

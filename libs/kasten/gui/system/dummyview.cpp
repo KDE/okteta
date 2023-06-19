@@ -46,3 +46,5 @@ void DummyView::onTitleChange(const QString& newTitle)
 }
 
 }
+
+#include "moc_dummyview.cpp"

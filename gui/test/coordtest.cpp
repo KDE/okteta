@@ -271,3 +271,5 @@ void CoordTest::testIndexNWidth()
 }
 
 QTEST_MAIN(Okteta::CoordTest)
+
+#include "moc_coordtest.cpp"

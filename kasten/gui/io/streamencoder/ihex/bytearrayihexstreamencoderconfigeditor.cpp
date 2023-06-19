@@ -65,3 +65,5 @@ void ByteArrayIHexStreamEncoderConfigEditor::onSettingsChanged()
 }
 
 }
+
+#include "moc_bytearrayihexstreamencoderconfigeditor.cpp"

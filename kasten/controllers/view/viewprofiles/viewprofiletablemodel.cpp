@@ -158,3 +158,5 @@ void ViewProfileTableModel::onViewProfileLocksChanged(const QVector<ByteArrayVie
 }
 
 }
+
+#include "moc_viewprofiletablemodel.cpp"

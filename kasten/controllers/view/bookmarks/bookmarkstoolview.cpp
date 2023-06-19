@@ -29,3 +29,5 @@ QString BookmarksToolView::title()      const { return mWidget->tool()->title();
 AbstractTool* BookmarksToolView::tool() const { return mWidget->tool(); }
 
 }
+
+#include "moc_bookmarkstoolview.cpp"

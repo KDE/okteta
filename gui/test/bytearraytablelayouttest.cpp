@@ -171,3 +171,5 @@ void ByteArrayTableLayoutTest::testSetNoOfLinesPerPage()
 }
 
 QTEST_MAIN(Okteta::ByteArrayTableLayoutTest)
+
+#include "moc_bytearraytablelayouttest.cpp"

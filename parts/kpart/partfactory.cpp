@@ -92,3 +92,5 @@ QObject* OktetaPartFactory::create(const char* iface,
 
     return part;
 }
+
+#include "moc_partfactory.cpp"

@@ -144,3 +144,5 @@ void InfoTool::updateStatistic()
 }
 
 }
+
+#include "moc_infotool.cpp"

@@ -24,3 +24,5 @@ Hexadecimal8 Hexadecimal8Editor::data() const
 {
     return value();
 }
+
+#include "moc_hexadecimal8editor.cpp"

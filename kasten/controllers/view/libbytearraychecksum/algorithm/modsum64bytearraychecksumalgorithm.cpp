@@ -164,3 +164,5 @@ quint64 ModSum64ByteArrayChecksumAlgorithm::calculateModSumWithLittleEndian(cons
 
     return modSum;
 }
+
+#include "moc_modsum64bytearraychecksumalgorithm.cpp"

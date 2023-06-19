@@ -89,3 +89,5 @@ void ViewListMenuController::onActionTriggered(QAction* action)
 }
 
 }
+
+#include "moc_viewlistmenucontroller.cpp"

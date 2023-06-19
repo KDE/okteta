@@ -99,3 +99,5 @@ void DocumentSyncManager::save(AbstractDocument* document)
 }
 
 }
+
+#include "moc_documentsyncmanager.cpp"

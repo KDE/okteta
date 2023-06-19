@@ -102,3 +102,5 @@ void OperandByteArrayFilterParameterSetEdit::onInputChanged(const QByteArray& da
 {
     emit validityChanged(!data.isEmpty());
 }
+
+#include "moc_operandbytearrayfilterparametersetedit.cpp"

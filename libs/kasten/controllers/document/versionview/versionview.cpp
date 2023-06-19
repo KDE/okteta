@@ -59,3 +59,5 @@ void VersionView::setModel(AbstractModel* model)
 }
 
 }
+
+#include "moc_versionview.cpp"

@@ -64,3 +64,5 @@ void GotoOffsetController::gotoOffset()
 }
 
 }
+
+#include "moc_gotooffsetcontroller.cpp"

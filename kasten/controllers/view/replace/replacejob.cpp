@@ -265,3 +265,5 @@ void ReplaceJob::finish()
 }
 
 }
+
+#include "moc_replacejob.cpp"

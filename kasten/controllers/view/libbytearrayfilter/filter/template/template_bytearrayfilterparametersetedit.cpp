@@ -113,3 +113,5 @@ void Template_ByteArrayFilterParameterSetEdit::onLevelChanged(int value)
     emit validityChanged(isValid);
 }
 //// ADAPT(end)
+
+#include "moc_template_bytearrayfilterparametersetedit.cpp"

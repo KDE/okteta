@@ -38,3 +38,5 @@ void AbstractModelSynchronizer::setUrl(const QUrl& url)
 }
 
 }
+
+#include "moc_abstractmodelsynchronizer.cpp"

@@ -50,3 +50,5 @@ void ViewContextMenuController::showContextMenu(QPoint pos)
 }
 
 }
+
+#include "moc_viewcontextmenucontroller.cpp"

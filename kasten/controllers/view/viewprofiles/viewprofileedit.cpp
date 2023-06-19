@@ -237,3 +237,5 @@ void ViewProfileEdit::onLineBreakIndexChanged(int lineBreakIndex)
 }
 
 }
+
+#include "moc_viewprofileedit.cpp"

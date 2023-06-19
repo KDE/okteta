@@ -145,3 +145,5 @@ void CopyAsController::triggerExecution(AbstractModelStreamEncoder* encoder,
 }
 
 }
+
+#include "moc_copyascontroller.cpp"

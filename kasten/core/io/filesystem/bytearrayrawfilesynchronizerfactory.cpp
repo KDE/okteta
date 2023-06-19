@@ -31,3 +31,5 @@ AbstractModelSynchronizer* ByteArrayRawFileSynchronizerFactory::createSynchroniz
 }
 
 }
+
+#include "moc_bytearrayrawfilesynchronizerfactory.cpp"

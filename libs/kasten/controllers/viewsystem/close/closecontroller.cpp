@@ -44,3 +44,5 @@ void CloseController::close()
 }
 
 }
+
+#include "moc_closecontroller.cpp"

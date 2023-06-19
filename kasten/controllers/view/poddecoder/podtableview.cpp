@@ -278,3 +278,5 @@ void PODTableView::onCurrentRowChanged(const QModelIndex& current, const QModelI
 }
 
 }
+
+#include "moc_podtableview.cpp"

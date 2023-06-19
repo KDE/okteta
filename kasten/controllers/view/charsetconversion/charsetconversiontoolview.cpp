@@ -29,3 +29,5 @@ QString CharsetConversionToolView::title()      const { return mWidget->tool()->
 AbstractTool* CharsetConversionToolView::tool() const { return mWidget->tool(); }
 
 }
+
+#include "moc_charsetconversiontoolview.cpp"

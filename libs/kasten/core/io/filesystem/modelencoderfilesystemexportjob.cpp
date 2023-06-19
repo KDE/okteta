@@ -29,3 +29,5 @@ void ModelEncoderFileSystemExportJob::startExportToFile()
 }
 
 }
+
+#include "moc_modelencoderfilesystemexportjob.cpp"

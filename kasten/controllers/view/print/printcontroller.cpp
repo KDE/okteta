@@ -48,3 +48,5 @@ void PrintController::print()
 }
 
 }
+
+#include "moc_printcontroller.cpp"

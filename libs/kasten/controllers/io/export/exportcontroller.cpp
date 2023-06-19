@@ -120,3 +120,5 @@ void ExportController::triggerExecution(AbstractModelExporter* exporter,
 }
 
 }
+
+#include "moc_exportcontroller.cpp"

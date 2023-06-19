@@ -74,3 +74,5 @@ void BytesPerGroupDialog::onFinished(int result)
 }
 
 }
+
+#include "moc_bytespergroupdialog.cpp"

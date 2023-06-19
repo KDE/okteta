@@ -268,3 +268,5 @@ void ValueCodecTest::testIsValidDigit()
 }
 
 QTEST_GUILESS_MAIN(Okteta::ValueCodecTest)
+
+#include "moc_valuecodectest.cpp"

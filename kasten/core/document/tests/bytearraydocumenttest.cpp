@@ -56,3 +56,5 @@ void ByteArrayDocumentTest::testSetTitle()
 }
 
 QTEST_GUILESS_MAIN(Kasten::ByteArrayDocumentTest)
+
+#include "moc_bytearraydocumenttest.cpp"

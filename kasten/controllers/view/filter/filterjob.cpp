@@ -33,3 +33,5 @@ void FilterJob::onFilteredBytes()
 }
 
 }
+
+#include "moc_filterjob.cpp"

@@ -26,3 +26,5 @@ PrintDialog::~PrintDialog()
 }
 
 }
+
+#include "moc_printdialog.cpp"

@@ -40,3 +40,5 @@ bool ToolViewDockWidget::isShown() const
 }
 
 }
+
+#include "moc_toolviewdockwidget.cpp"

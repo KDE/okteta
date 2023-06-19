@@ -68,3 +68,5 @@ void ShellWindow::updateControllers(AbstractView* view)
 }
 
 }
+
+#include "moc_shellwindow.cpp"

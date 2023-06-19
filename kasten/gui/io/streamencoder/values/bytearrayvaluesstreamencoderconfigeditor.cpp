@@ -77,3 +77,5 @@ void ByteArrayValuesStreamEncoderConfigEditor::onSettingsChanged()
 }
 
 }
+
+#include "moc_bytearrayvaluesstreamencoderconfigeditor.cpp"

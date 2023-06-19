@@ -83,3 +83,5 @@ void StructureViewSettingsWidget::setUnsignedDisplay(int index)
     qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "byteOrder changed to " << index;
     handleMapping(index, ui.combo_UnsignedDisplayBase, ui.kcfg_UnsignedDisplayBase);
 }
+
+#include "moc_structureviewsettingswidget.cpp"

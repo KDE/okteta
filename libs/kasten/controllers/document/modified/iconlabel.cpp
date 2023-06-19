@@ -59,3 +59,5 @@ void IconLabel::updatePixmap()
 }
 
 }
+
+#include "moc_iconlabel.cpp"

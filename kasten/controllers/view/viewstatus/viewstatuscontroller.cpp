@@ -247,3 +247,5 @@ void ViewStatusController::onCharCodecChanged(const QString& charCodecName)
 }
 
 }
+
+#include "moc_viewstatuscontroller.cpp"

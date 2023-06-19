@@ -22,3 +22,5 @@ void ByteArrayModelTest::testNothing()
 }
 
 QTEST_GUILESS_MAIN(Okteta::ByteArrayModelTest)
+
+#include "moc_bytearraymodeltest.cpp"

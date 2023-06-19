@@ -42,3 +42,5 @@ void SwapRangesPieceTableChangeAbstractPieceTableChangeIfTest::deletePieceTableC
 }
 
 QTEST_GUILESS_MAIN(KPieceTable::SwapRangesPieceTableChangeAbstractPieceTableChangeIfTest)
+
+#include "moc_swaprangespiecetablechangeabstractpiecetablechangeiftest.cpp"

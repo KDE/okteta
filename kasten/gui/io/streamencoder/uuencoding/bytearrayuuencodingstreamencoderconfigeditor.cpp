@@ -75,3 +75,5 @@ void ByteArrayUuencodingStreamEncoderConfigEditor::onSettingsChanged()
 }
 
 }
+
+#include "moc_bytearrayuuencodingstreamencoderconfigeditor.cpp"

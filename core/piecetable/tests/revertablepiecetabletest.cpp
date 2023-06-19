@@ -1007,3 +1007,5 @@ void RevertablePieceTableTest::testSwap()
 }
 
 QTEST_GUILESS_MAIN(KPieceTable::RevertablePieceTableTest)
+
+#include "moc_revertablepiecetabletest.cpp"

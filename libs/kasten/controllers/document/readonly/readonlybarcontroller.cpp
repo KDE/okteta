@@ -59,3 +59,5 @@ void ReadOnlyBarController::setReadOnly(bool isReadOnly)
 }
 
 }
+
+#include "moc_readonlybarcontroller.cpp"

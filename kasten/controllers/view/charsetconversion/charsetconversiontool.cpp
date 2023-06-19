@@ -269,3 +269,5 @@ void CharsetConversionTool::onViewChanged()
 }
 
 }
+
+#include "moc_charsetconversiontool.cpp"

@@ -33,3 +33,5 @@ void ByteArrayModelAbstractByteArrayModelIfTest::deleteByteArrayModel(AbstractBy
 }
 
 QTEST_GUILESS_MAIN(Okteta::ByteArrayModelAbstractByteArrayModelIfTest)
+
+#include "moc_bytearraymodelabstractbytearraymodeliftest.cpp"
