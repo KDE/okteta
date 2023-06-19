@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-13 00:51+0000\n"
+"POT-Creation-Date: 2023-06-16 00:49+0000\n"
 "PO-Revision-Date: 2013-02-19 20:33+0100\n"
 "Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -1249,7 +1249,7 @@ msgstr ""
 
 #: controllers/view/poddecoder/podtableview.cpp:236
 #: controllers/view/selectrange/selectrangeview.cpp:193
-#: controllers/view/structures/structureview.cpp:339
+#: controllers/view/structures/structureview.cpp:338
 #, kde-format
 msgctxt "@action:button"
 msgid "&Select"
@@ -1803,19 +1803,19 @@ msgctxt "boolean value with actual value"
 msgid "true (%1)"
 msgstr "sann (%1)"
 
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:42
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:81
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:41
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:80
 #, kde-format
 msgid "%1 (value not in enum)"
 msgstr "%1 (verdien ikke i enum)"
 
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:50
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:78
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:49
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:77
 #, kde-format
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:88
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:87
 #, kde-format
 msgctxt ""
 "Displayed in the type column. first comes the name of the enum, then the "
@@ -1836,7 +1836,7 @@ msgctxt ""
 msgid "flag %1 (%2)"
 msgstr "flagg %1 (%2)"
 
-#: controllers/view/structures/datatypes/primitive/pointerdatainformation.cpp:116
+#: controllers/view/structures/datatypes/primitive/pointerdatainformation.cpp:115
 #, kde-format
 msgctxt "memory pointer with underlying type"
 msgid "%1 pointer"
@@ -2385,59 +2385,59 @@ msgctxt "size of a data structure"
 msgid "Size"
 msgstr ""
 
-#: controllers/view/structures/structureview.cpp:96
+#: controllers/view/structures/structureview.cpp:95
 #, kde-format
 msgctxt "@action:button"
 msgid "Validate"
 msgstr "Valider"
 
-#: controllers/view/structures/structureview.cpp:98
+#: controllers/view/structures/structureview.cpp:97
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Validate all structures."
 msgstr "Valider alle strukturer."
 
-#: controllers/view/structures/structureview.cpp:120
+#: controllers/view/structures/structureview.cpp:119
 #, kde-format
 msgctxt "@action:button"
 msgid "Script console"
 msgstr "Skriptkonsoll"
 
-#: controllers/view/structures/structureview.cpp:122
+#: controllers/view/structures/structureview.cpp:121
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open script console."
 msgstr "Åpne skriptkonsoll."
 
-#: controllers/view/structures/structureview.cpp:126
+#: controllers/view/structures/structureview.cpp:125
 #, kde-format
 msgctxt "@action:button"
 msgid "Settings"
 msgstr "Innstillinger"
 
-#: controllers/view/structures/structureview.cpp:128
+#: controllers/view/structures/structureview.cpp:127
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open settings."
 msgstr "Åpne innstillinger."
 
-#: controllers/view/structures/structureview.cpp:159
+#: controllers/view/structures/structureview.cpp:158
 #, kde-format
 msgid "Value Display"
 msgstr "Verdivisning"
 
-#: controllers/view/structures/structureview.cpp:171
+#: controllers/view/structures/structureview.cpp:170
 #, kde-format
 msgid "Structures management"
 msgstr "Strukturstyring"
 
-#: controllers/view/structures/structureview.cpp:258
+#: controllers/view/structures/structureview.cpp:257
 #, kde-format
 msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Unlock"
 msgstr ""
 
-#: controllers/view/structures/structureview.cpp:260
+#: controllers/view/structures/structureview.cpp:259
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -2447,19 +2447,19 @@ msgstr ""
 "Lås opp den valgte strukturen, dvs. start-forskyvningen settes alltid til "
 "gjeldende markørposisjon."
 
-#: controllers/view/structures/structureview.cpp:265
+#: controllers/view/structures/structureview.cpp:264
 #, kde-format
 msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Lock"
 msgstr ""
 
-#: controllers/view/structures/structureview.cpp:267
+#: controllers/view/structures/structureview.cpp:266
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Lock selected structure to current offset."
 msgstr "Lås den valgte strukturen til gjeldende forskyvning."
 
-#: controllers/view/structures/structureview.cpp:296
+#: controllers/view/structures/structureview.cpp:295
 #, kde-format
 msgctxt "@title:window"
 msgid "Structures Script Console"
@@ -3342,7 +3342,7 @@ msgstr "Skillestreng:"
 #: gui/io/streamencoder/viewhtml/bytearrayviewhtmlstreamencoder.cpp:36
 #, kde-format
 msgctxt "name of the encoding target"
-msgid "View as HTML"
+msgid "View in HTML"
 msgstr ""
 
 #: gui/io/streamencoder/viewtext/bytearrayviewtextstreamencoder.cpp:41
