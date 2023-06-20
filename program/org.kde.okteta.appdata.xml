@@ -184,7 +184,7 @@
       <li xml:lang="eu">Balioak eta karaktereak bi zutabetan (editore hamaseitarretan ohiko ikuspegia) edo errenkadatan balioa karaktere gainean duela</li>
       <li xml:lang="fi">Arvot ja merkit näytetään joko kahdessa sarakkeessa (niin kuin perinteisesti heksaeditoreissa) tai riveittäin arvo merkin yläpuolella</li>
       <li xml:lang="fr">Les valeurs et les caractères sont affichés soit en deux colonnes (affichage traditionnel des éditeurs hexadécimaux) soit en rangées avec la valeur au-dessus du caractère</li>
-      <li xml:lang="gl">Os valores e caracteres poden mostrarse tanto en dúas columnas (a vista tradicional de editores de bytes) como en filas cos valores sobre os caracteres.</li>
+      <li xml:lang="gl">Os valores e caracteres poden amosarse tanto en dúas columnas (a vista tradicional de editores de bytes) como en filas cos valores sobre os caracteres.</li>
       <li xml:lang="hu">Értékek és karakterek megjelenítése hagyományos (kétoszlopos) módon, vagy sorokban (az értékek a karakterek fölött helyezkednek el)</li>
       <li xml:lang="ia">Valores e characteres monstrate o in duo columnas (le monstrator traditional in redactores hexadecimal) o in rangos con le valor al culmine del character</li>
       <li xml:lang="id">Nilai dan karakter ditampilkan antara dua kolom (displai tradisional dalam editor hex) atau dalam row dengan nilai di atas karakter</li>
@@ -332,7 +332,7 @@
       <li xml:lang="eu">Zenbaki kodeketa: hamaseitarra, hamartarra, zortzitarra, bitarra</li>
       <li xml:lang="fi">Lukujen koodaukset: heksa, desimaali, oktaali, binaari</li>
       <li xml:lang="fr">Codage des valeurs : hexadécimal, décimal, octal, binaire</li>
-      <li xml:lang="gl">Pode mostrar os valores numéricos en notacións hexadecimal, decimal, octal e binaria.</li>
+      <li xml:lang="gl">Pode amosar os valores numéricos en notacións hexadecimal, decimal, octal e binaria.</li>
       <li xml:lang="hu">Numerikus kódolások: hexadecimális, decimális, oktális, bináris</li>
       <li xml:lang="ia">Codificationes Numeric: Hexadecimal, Decimal, Octal, Binari</li>
       <li xml:lang="id">Pengenkodean nomerik: Heksadesimal, Desimal, Oktal, Biner</li>
@@ -370,7 +370,7 @@
       <li xml:lang="eu">Karaktere kodeketa: Qt bidez hornitutako 8-biteko kodeketa guztiak, EBCDIC</li>
       <li xml:lang="fi">Merkkikoodaukset: Kaikki Qt:n tarjoamat 8-bittiset koodaukset sekä EBCDIC</li>
       <li xml:lang="fr">Codage des caractères : tout les codages 8 bits fournis par Qt, EBCDIC</li>
-      <li xml:lang="gl">Pode mostrar os caracteres en todas as codificacións baseadas en 8 bits que fornece Qt, así como en EBCDIC.</li>
+      <li xml:lang="gl">Pode amosar os caracteres en todas as codificacións baseadas en 8 bits que fornece Qt, así como en EBCDIC.</li>
       <li xml:lang="hu">Karakterkódolások: minden, a Qt és EBCDIC által biztosított 8 bites kódolás</li>
       <li xml:lang="ia">Codificationes de character: Omne codificationes de 8bits como fornite per Qt, EBCDIC</li>
       <li xml:lang="id">Pengenkodean karakter: Semua pengenkodean 8-bit sebagai asupan oleh Qt, EBCDIC</li>
@@ -408,7 +408,7 @@
       <li xml:lang="eu">Pantailan datuen errendatze azkarra</li>
       <li xml:lang="fi">Datan nopea näyttäminen</li>
       <li xml:lang="fr">Rendu rapide des données à l'écran</li>
-      <li xml:lang="gl">Os datos móstranse rapidamente na pantalla.</li>
+      <li xml:lang="gl">Os datos amósanse rapidamente na pantalla.</li>
       <li xml:lang="hu">Gyors adatrenderelés a kijelzőn</li>
       <li xml:lang="ia">Rendition rapide de datos sur schermo</li>
       <li xml:lang="id">Perenderan data yang cepat pada layar</li>
