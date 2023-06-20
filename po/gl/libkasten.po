@@ -49,13 +49,13 @@ msgstr "Só lectura"
 #, kde-format
 msgctxt "@option:check set the document to read-only"
 msgid "Set Read-only"
-msgstr "Estabelecer só para lectura"
+msgstr "Definir só para lectura"
 
 #: controllers/document/readonly/readonlycontroller.cpp:27
 #, kde-format
 msgctxt "@option:check set the document to read-write"
 msgid "Set Read-write"
-msgstr "Estabelecer para lectura e escritura"
+msgstr "Definir para lectura e escritura"
 
 #: controllers/document/terminal/terminaltool.cpp:32
 #: controllers/document/terminal/terminaltoolviewfactory.cpp:24

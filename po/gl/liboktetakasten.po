@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-16 02:36+0000\n"
-"PO-Revision-Date: 2023-05-02 20:41+0200\n"
+"PO-Revision-Date: 2023-06-15 07:35+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -503,7 +503,7 @@ msgstr "Algoritmo:"
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Select the algorithm to use for the checksum."
-msgstr "Escolle o algoritmo que se vai empregar para a suma de comprobación."
+msgstr "Escolle o algoritmo que se vai usar para a suma de comprobación."
 
 #: controllers/view/checksum/checksumview.cpp:83
 #, kde-format
@@ -824,7 +824,7 @@ msgstr "Orde dos bytes:"
 msgctxt "@info:tooltip"
 msgid "The byte order to use for decoding the bytes into integer values."
 msgstr ""
-"A orde dos bytes que se empregará para descodificar os bytes como valores "
+"A orde dos bytes que se usará para descodificar os bytes como valores "
 "enteiros."
 
 #: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:70
@@ -1178,7 +1178,7 @@ msgstr "O valor dos bytes para o tipo de dato"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte order to use for decoding the bytes."
-msgstr "A orde dos bytes que se empregará para descodificalos."
+msgstr "A orde dos bytes que se usará para descodificalos."
 
 #: controllers/view/poddecoder/podtableview.cpp:90
 #, kde-format
@@ -1193,7 +1193,7 @@ msgid ""
 "Sets whether the values of the unsigned integer types are shown as "
 "hexadecimal instead of as decimal."
 msgstr ""
-"Indica se os valores dos tipos sen signo se han mostrar como hexadecimais no "
+"Indica se os valores dos tipos sen signo se han amosar como hexadecimais no "
 "canto de como decimais."
 
 #: controllers/view/poddecoder/podtableview.cpp:135
@@ -1664,7 +1664,7 @@ msgstr ""
 #: controllers/view/stringsextract/stringsextractview.cpp:150
 #, kde-format
 msgid "&Show"
-msgstr "&Mostrar"
+msgstr "&Amosar"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:153
 #, kde-format
@@ -1680,7 +1680,7 @@ msgid ""
 "last selected is marked and shown in the view."
 msgstr ""
 "Se preme o botón <interface>Ir a</interface>, marcarase a última cadea que "
-"escollese e mostrarase na vista."
+"escollese e amosarase na vista."
 
 #: controllers/view/structures/datatypes/array/complexarraydata.cpp:96
 #, kde-format
@@ -2201,28 +2201,28 @@ msgstr "Selección avanzada de estruturas"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The base to use when converting unsigned numbers to a string."
-msgstr "A base a empregar cando se converten os números sen signo nunha cadea."
+msgstr "A base a usar cando se converten os números sen signo nunha cadea."
 
 #. i18n: ectx: tooltip, entry (SignedDisplayBase), group (ValueDisplay)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:13
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The base to use when converting signed numbers to a string."
-msgstr "A base a empregar cando se converten os números con signo nunha cadea."
+msgstr "A base a usar cando se converten os números con signo nunha cadea."
 
 #. i18n: ectx: tooltip, entry (CharDisplayBase), group (ValueDisplay)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:17
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The base to use when converting characters to a value string."
-msgstr "A base a empregar cando se converten caracteres nunha cadea de valor."
+msgstr "A base a usar cando se converten caracteres nunha cadea de valor."
 
 #. i18n: ectx: tooltip, entry (ShowCharNumericalValue), group (ValueDisplay)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:21
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Whether to show the numerical value of chars"
-msgstr "Indica se debe mostrar o valor numérico dos chars"
+msgstr "Indica se debe amosar o valor numérico dos chars"
 
 #. i18n: ectx: tooltip, entry (LocaleAwareFloatFormatting), group (ValueDisplay)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:25
@@ -2250,7 +2250,7 @@ msgid ""
 "If true, integers being displayed in decimal format will be formatted "
 "according to the current locale settings"
 msgstr ""
-"Se o escolle os valores que se mostran no formato decimal formataranse "
+"Se o escolle os valores que se amosan no formato decimal formataranse "
 "segundo a configuración rexional actual"
 
 #. i18n: ectx: whatsthis, entry (LocaleAwareDecimalFormatting), group (ValueDisplay)
@@ -2345,7 +2345,7 @@ msgstr "Usar nomes de tipos curtos."
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:66
 #, kde-format
 msgid "Use locale-aware integer formatting"
-msgstr "Empregar un formato de enteiros segundo a configuración rexional"
+msgstr "Usar un formato de enteiros segundo a configuración rexional"
 
 #. i18n: ectx: property (text), widget (QLabel, unsigned_label)
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:73
@@ -2363,7 +2363,7 @@ msgstr "Valores con signo:"
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:99
 #, kde-format
 msgid "Use locale-aware floating-point formatting"
-msgstr "Empregar un formato de coma flotante segundo a configuración rexional"
+msgstr "Usar un formato de coma flotante segundo a configuración rexional"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:106
@@ -2375,7 +2375,7 @@ msgstr "Precisión da coma flotante:"
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:119
 #, kde-format
 msgid "Show numerical value of chars"
-msgstr "Mostrar o valor numérico dos chars"
+msgstr "Amosar o valor numérico dos chars"
 
 #. i18n: ectx: property (text), widget (QLabel, char_label)
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:126
@@ -2580,7 +2580,7 @@ msgstr "Codificación dos &caracteres"
 #, kde-format
 msgctxt "@option:check"
 msgid "Show &Non-printing Chars"
-msgstr "Mostrar os caracteres &non imprimíbeis"
+msgstr "Amosar os caracteres &non imprimíbeis"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:87
 #, kde-format
@@ -2626,13 +2626,13 @@ msgstr "&Activada"
 #, kde-format
 msgctxt "@option:check"
 msgid "Show &Line Offset"
-msgstr "Mostrar o desprazamentos na &liña"
+msgstr "Amosar o desprazamentos na &liña"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:123
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Show Values or Chars"
-msgstr "&Mostrar os valores dos caracteres"
+msgstr "&Amosar os valores dos caracteres"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:126
 #, kde-format
@@ -2709,12 +2709,12 @@ msgstr "Título:"
 #: controllers/view/viewprofiles/viewprofileedit.cpp:59
 #, kde-format
 msgid "Display"
-msgstr "Mostrar"
+msgstr "Amosar"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:63
 #, kde-format
 msgid "Show Line Offset:"
-msgstr "Mostrar o desprazamentos na liña:"
+msgstr "Amosar o desprazamentos na liña:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:67
 #, kde-format
@@ -2754,13 +2754,13 @@ msgstr "Valores e caracteres"
 #: controllers/view/viewprofiles/viewprofileedit.cpp:80
 #, kde-format
 msgid "Show Values or Chars:"
-msgstr "Mostrar os valores ou caracteres:"
+msgstr "Amosar os valores ou caracteres:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:84
 #, kde-format
 msgctxt "@label:listbox "
 msgid "Show with Rows or Columns:"
-msgstr "Mostrar en filas e columnas:"
+msgstr "Amosar en filas e columnas:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:87
 #, kde-format
