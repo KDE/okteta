@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-13 00:51+0000\n"
+"POT-Creation-Date: 2023-06-20 00:58+0000\n"
 "PO-Revision-Date: 2023-06-17 09:14+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
@@ -49,13 +49,13 @@ msgstr "Só lectura"
 #, kde-format
 msgctxt "@option:check set the document to read-only"
 msgid "Set Read-only"
-msgstr "Estabelecer só para lectura"
+msgstr "Definir só para lectura"
 
 #: controllers/document/readonly/readonlycontroller.cpp:27
 #, kde-format
 msgctxt "@option:check set the document to read-write"
 msgid "Set Read-write"
-msgstr "Estabelecer para lectura e escritura"
+msgstr "Definir para lectura e escritura"
 
 #: controllers/document/terminal/terminaltool.cpp:32
 #: controllers/document/terminal/terminaltoolviewfactory.cpp:24
@@ -128,14 +128,14 @@ msgid "From Clipboard"
 msgstr "Do portapapeis"
 
 #. i18nc("@title:column Id of the version",         "Id") :
-#: controllers/documentsystem/documentsbrowser/documentlistmodel.cpp:111
+#: controllers/documentsystem/documentsbrowser/documentlistmodel.cpp:114
 #, kde-format
 msgctxt "@title:column description of the change"
 msgid "Title"
 msgstr "Título"
 
 #. i18nc("@info:tooltip","Id of the version") :
-#: controllers/documentsystem/documentsbrowser/documentlistmodel.cpp:117
+#: controllers/documentsystem/documentsbrowser/documentlistmodel.cpp:120
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Title of the document"

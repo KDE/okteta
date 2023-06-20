@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-13 00:51+0000\n"
+"POT-Creation-Date: 2023-06-20 00:58+0000\n"
 "PO-Revision-Date: 2021-10-30 13:01+0200\n"
 "Last-Translator: Kristof Kiszel <kiszel.kristof@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -126,14 +126,14 @@ msgid "From Clipboard"
 msgstr "A vágólapról"
 
 #. i18nc("@title:column Id of the version",         "Id") :
-#: controllers/documentsystem/documentsbrowser/documentlistmodel.cpp:111
+#: controllers/documentsystem/documentsbrowser/documentlistmodel.cpp:114
 #, kde-format
 msgctxt "@title:column description of the change"
 msgid "Title"
 msgstr "Cím"
 
 #. i18nc("@info:tooltip","Id of the version") :
-#: controllers/documentsystem/documentsbrowser/documentlistmodel.cpp:117
+#: controllers/documentsystem/documentsbrowser/documentlistmodel.cpp:120
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Title of the document"

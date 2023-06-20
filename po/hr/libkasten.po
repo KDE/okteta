@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-13 00:51+0000\n"
+"POT-Creation-Date: 2023-06-20 00:58+0000\n"
 "PO-Revision-Date: 2009-09-04 22:35+0200\n"
 "Last-Translator: Zarko Pintar <zarko.pintar@gmail.com>\n"
 "Language-Team: Croatian <kde-croatia-list@lists.sourceforge.net>\n"
@@ -127,14 +127,14 @@ msgid "From Clipboard"
 msgstr ""
 
 #. i18nc("@title:column Id of the version",         "Id") :
-#: controllers/documentsystem/documentsbrowser/documentlistmodel.cpp:111
+#: controllers/documentsystem/documentsbrowser/documentlistmodel.cpp:114
 #, kde-format
 msgctxt "@title:column description of the change"
 msgid "Title"
 msgstr ""
 
 #. i18nc("@info:tooltip","Id of the version") :
-#: controllers/documentsystem/documentsbrowser/documentlistmodel.cpp:117
+#: controllers/documentsystem/documentsbrowser/documentlistmodel.cpp:120
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Title of the document"
