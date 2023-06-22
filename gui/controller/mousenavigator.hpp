@@ -68,8 +68,6 @@ private: // parameters
     bool mLMBPressed : 1;
     /** flag if a double click is happening */
     bool mInLMBDoubleClick : 1;
-    /** flag if a Drag'n'Drop is happening */
-    bool mInDnD : 1;
     /** flag if a drag might have started */
     bool mDragStartPossible : 1;
 };

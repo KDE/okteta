@@ -15,7 +15,6 @@
 namespace Kasten {
 
 class ByteArrayRawFileSynchronizer;
-class ByteArrayRawFileLoadThread;
 
 class ByteArrayRawFileLoadJob : public AbstractFileSystemLoadJob
 {
@@ -30,9 +29,6 @@ protected: // AbstractFileSystemLoadJob API
 
 private Q_SLOTS:
 //     void onDataPulled();
-
-private:
-    ByteArrayRawFileLoadThread* mLoadThread;
 };
 
 }

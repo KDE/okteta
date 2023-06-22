@@ -54,7 +54,6 @@ private Q_SLOTS: // execute slots
     void addNewViewProfile(const Kasten::ByteArrayViewProfile& viewProfile);
 
 private:
-    KXMLGUIClient* mGuiClient;
     ByteArrayViewProfileManager* mViewProfileManager;
     QWidget* mParentWidget;
 
