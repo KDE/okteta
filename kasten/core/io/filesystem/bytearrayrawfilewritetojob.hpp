@@ -15,7 +15,6 @@
 namespace Kasten {
 
 class ByteArrayRawFileSynchronizer;
-class ByteArrayRawFileWriteThread;
 
 class ByteArrayRawFileWriteToJob : public AbstractFileSystemSyncWithRemoteJob
 {
@@ -31,9 +30,6 @@ protected: // AbstractFileSystemSyncWithRemoteJob API
 
 private Q_SLOTS:
 //     void onDataPulled();
-
-private:
-    ByteArrayRawFileWriteThread* mWriteThread;
 };
 
 }

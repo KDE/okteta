@@ -30,8 +30,7 @@ namespace Kasten {
 ViewProfileController::ViewProfileController(ByteArrayViewProfileManager* viewProfileManager,
                                              QWidget* parentWidget,
                                              KXMLGUIClient* guiClient)
-    : mGuiClient(guiClient)
-    , mViewProfileManager(viewProfileManager)
+    : mViewProfileManager(viewProfileManager)
     , mParentWidget(parentWidget)
 {
     mViewProfileActionMenu =

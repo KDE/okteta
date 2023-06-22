@@ -29,7 +29,6 @@ MouseNavigator::MouseNavigator(AbstractByteArrayView* view, AbstractMouseControl
     : AbstractMouseController(view, parent)
     , mLMBPressed(false)
     , mInLMBDoubleClick(false)
-    , mInDnD(false)
     , mDragStartPossible(false)
 {
     mScrollTimer = new QTimer(this);
