@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-20 00:58+0000\n"
+"POT-Creation-Date: 2023-06-23 00:51+0000\n"
 "PO-Revision-Date: 2019-02-23 21:23+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -2608,31 +2608,31 @@ msgctxt "@item:inmenu"
 msgid "&Rows"
 msgstr "列(&R)"
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:39
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:38
 #, kde-format
 msgctxt "@title:menu submenu to select the view profile or change it"
 msgid "View Profile"
 msgstr "檢視設定檔"
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:46
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:45
 #, kde-format
 msgctxt "@action:inmenu create a new view profile"
 msgid "Create New..."
 msgstr "建立新的…"
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:53
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:52
 #, kde-format
 msgctxt "@action:inmenu save changed to the view profile to the base profile"
 msgid "Save Changes"
 msgstr "儲存變更"
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:60
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:59
 #, kde-format
 msgctxt "@action:inmenu reset settings back to those of the saved base profile"
 msgid "Reset Changes"
 msgstr "重設變更"
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:180
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:179
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:180
 #, kde-format
 msgctxt "@window:title"

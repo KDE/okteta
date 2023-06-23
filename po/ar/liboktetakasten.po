@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-20 00:58+0000\n"
+"POT-Creation-Date: 2023-06-23 00:51+0000\n"
 "PO-Revision-Date: 2010-07-24 13:13+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: Arabic <linuxac-kde-arabic-team@googlegroups.com>\n"
@@ -2668,31 +2668,31 @@ msgctxt "@item:inmenu"
 msgid "&Rows"
 msgstr "ال&صفوف"
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:39
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:38
 #, kde-format
 msgctxt "@title:menu submenu to select the view profile or change it"
 msgid "View Profile"
 msgstr ""
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:46
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:45
 #, kde-format
 msgctxt "@action:inmenu create a new view profile"
 msgid "Create New..."
 msgstr ""
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:53
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:52
 #, fuzzy, kde-format
 msgctxt "@action:inmenu save changed to the view profile to the base profile"
 msgid "Save Changes"
 msgstr "إحفظ %1 ك ...."
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:60
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:59
 #, fuzzy, kde-format
 msgctxt "@action:inmenu reset settings back to those of the saved base profile"
 msgid "Reset Changes"
 msgstr "إحفظ %1 ك ...."
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:180
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:179
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:180
 #, kde-format
 msgctxt "@window:title"
