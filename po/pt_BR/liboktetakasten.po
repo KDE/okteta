@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-23 00:51+0000\n"
-"PO-Revision-Date: 2023-06-07 10:51-0300\n"
+"PO-Revision-Date: 2023-06-26 17:20-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -1743,26 +1743,22 @@ msgid "<EOF reached>"
 msgstr "<fim do arquivo atingido>"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:228
-#, fuzzy, kde-format
-#| msgctxt "name of a data structure"
-#| msgid "Name"
+#, kde-format
 msgid "Name:"
-msgstr "Nome"
+msgstr "Nome:"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:230
-#, fuzzy, kde-format
-#| msgctxt "@title:column value of the bytes for the datatype"
-#| msgid "Value"
+#, kde-format
 msgid "Value:"
-msgstr "Valor"
+msgstr "Valor:"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:237
 #, kde-format
 msgctxt "size (elements)"
 msgid "%2 (%1 child)"
 msgid_plural "%2 (%1 children)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%2 (%1 filho)"
+msgstr[1] "%2 (%1 filhos)"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:262
 #: controllers/view/structures/datatypes/datainformationwithchildren.cpp:233
@@ -2413,11 +2409,10 @@ msgid "Value"
 msgstr "Valor"
 
 #: controllers/view/structures/structurestool.cpp:193
-#, fuzzy, kde-format
-#| msgid "Size:"
+#, kde-format
 msgctxt "size of a data structure"
 msgid "Size"
-msgstr "Tamanho:"
+msgstr "Tamanho"
 
 #: controllers/view/structures/structureview.cpp:95
 #, kde-format
@@ -3373,12 +3368,10 @@ msgid "Separation:"
 msgstr "Separação:"
 
 #: gui/io/streamencoder/viewhtml/bytearrayviewhtmlstreamencoder.cpp:36
-#, fuzzy, kde-format
-#| msgctxt "name of the encoding target"
-#| msgid "View in Plain Text"
+#, kde-format
 msgctxt "name of the encoding target"
 msgid "View in HTML"
-msgstr "Exibir em texto sem formatação"
+msgstr "Exibir em HTML"
 
 #: gui/io/streamencoder/viewtext/bytearrayviewtextstreamencoder.cpp:41
 #, kde-format
