@@ -8,28 +8,11 @@
 
 #include "modsumbytearraychecksumparameterset.hpp"
 
+// libconfigentries
+#include <endiannessconfigentry.hpp>
 // KF
 #include <KConfigGroup>
 
-template <>
-inline QSysInfo::Endian KConfigGroup::readEntry(const char *key, const QSysInfo::Endian &defaultValue) const
-{
-    const QString entry = readEntry(key, QString());
-    const QSysInfo::Endian endianess =
-        (entry == QLatin1String("BigEndian")) ?    QSysInfo::BigEndian :
-        (entry == QLatin1String("LittleEndian")) ? QSysInfo::LittleEndian :
-        /* else */                                 defaultValue;
-    return endianess;
-}
-
-template <>
-inline void KConfigGroup::writeEntry(const char *key, const QSysInfo::Endian &value,
-                                     KConfigBase::WriteConfigFlags flags)
-{
-    const QString valueString =
-        (value == QSysInfo::BigEndian) ? QLatin1String("BigEndian") : QLatin1String("LittleEndian");
-    writeEntry(key, valueString, flags);
-}
 
 static constexpr QSysInfo::Endian DefaultByteOrder = QSysInfo::ByteOrder;
 

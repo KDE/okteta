@@ -20,6 +20,7 @@
 #include <array>
 #include <iterator>
 
+// TODO: deduplicate with kasten/controllers/libconfigentries/
 static constexpr int codingCount =
     static_cast<int>(Kasten::ByteArrayPatternGeneratorSettings::_CodingCount);
 static const std::array<QString, codingCount> codingConfigValueList = {

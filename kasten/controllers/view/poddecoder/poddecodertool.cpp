@@ -26,6 +26,8 @@
 #include "typecodecs/utf8codec.hpp"
 #include "abstracttypecodec.hpp"
 #include "abstractdifferentsizedialog.hpp"
+// libconfigentries
+#include <endiannessconfigentry.hpp>
 // Okteta Kasten gui
 #include <Kasten/Okteta/ByteArrayView>
 // Okteta Kasten core
@@ -40,26 +42,6 @@
 #include <KSharedConfig>
 #include <KLocalizedString>
 
-// TODO: move to helper interface lib?
-template <>
-inline QSysInfo::Endian KConfigGroup::readEntry(const char *key, const QSysInfo::Endian &defaultValue) const
-{
-    const QString entry = readEntry(key, QString());
-    const QSysInfo::Endian endianess =
-        (entry == QLatin1String("BigEndian")) ?    QSysInfo::BigEndian :
-        (entry == QLatin1String("LittleEndian")) ? QSysInfo::LittleEndian :
-        /* else */                                 defaultValue;
-    return endianess;
-}
-
-template <>
-inline void KConfigGroup::writeEntry(const char *key, const QSysInfo::Endian &value,
-                                     KConfigBase::WriteConfigFlags flags)
-{
-    const QString valueString =
-        (value == QSysInfo::BigEndian) ? QLatin1String("BigEndian") : QLatin1String("LittleEndian");
-    writeEntry(key, valueString, flags);
-}
 
 namespace Kasten {
 

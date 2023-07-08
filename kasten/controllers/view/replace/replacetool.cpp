@@ -10,6 +10,8 @@
 
 // controller
 #include "replacejob.hpp"
+// libconfigentries
+#include <casesensitivityconfigentry.hpp>
 // libbytearraysearch
 #include <bytearraysearchutils.hpp>
 // Okteta Kasten gui
@@ -23,26 +25,6 @@
 #include <KSharedConfig>
 #include <KLocalizedString>
 
-// TODO: move to helper interface lib?
-template <>
-inline Qt::CaseSensitivity KConfigGroup::readEntry(const char *key, const Qt::CaseSensitivity &defaultValue) const
-{
-    const QString entry = readEntry(key, QString());
-    const Qt::CaseSensitivity caseSensitivity =
-        (entry == QLatin1String("Sensitive")) ?   Qt::CaseSensitive :
-        (entry == QLatin1String("Insensitive")) ? Qt::CaseInsensitive :
-        /* else */                                defaultValue;
-    return caseSensitivity;
-}
-
-template <>
-inline void KConfigGroup::writeEntry(const char *key, const Qt::CaseSensitivity &value,
-                                     KConfigBase::WriteConfigFlags flags)
-{
-    const QString valueString =
-        (value == Qt::CaseSensitive) ? QLatin1String("Sensitive") : QLatin1String("Insensitive");
-    writeEntry(key, valueString, flags);
-}
 
 static constexpr Qt::CaseSensitivity DefaultCaseSensitivity = Qt::CaseInsensitive;
 static constexpr bool DefaultDoPrompt = false;

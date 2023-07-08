@@ -26,6 +26,17 @@ macro(OKTETAKASTENCONTROLLERS_ADD_SUBLIBRARY_STRUCTURES_TESTED _subdir)
 endmacro()
 
 
+oktetakastencontrollers_add_sublibrary(libconfigentries
+    PRIVATE
+        AddressComboBoxCodingConfigEntry
+        ByteArrayCodingConfigEntry
+        ByteArrayComboBoxCodingConfigEntry
+        CaseSensitivityConfigEntry
+        DirectionConfigEntry
+        EndiannessConfigEntry
+        FindDirectionConfigEntry
+)
+
 oktetakastencontrollers_add_sublibrary(document/info
     PUBLIC
         DocumentInfoToolFactory
@@ -619,6 +630,7 @@ if(BUILD_TESTING)
   )
   target_include_directories(searchtooltest
     PUBLIC
+      libconfigentries
       view/libfinddialog
       view/libbytearraysearch
   )
@@ -689,6 +701,7 @@ target_include_directories(OktetaKastenControllers
         view/libbytearrayfilter
         view/libbytearraysearch
         view/libfinddialog
+        libconfigentries
         utils
         ${LIBFRAMESPRINT_REL_DIR}
 )
