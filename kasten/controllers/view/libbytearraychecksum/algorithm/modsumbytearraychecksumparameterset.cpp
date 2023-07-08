@@ -12,26 +12,26 @@
 #include <KConfigGroup>
 
 template <>
-inline Endianness KConfigGroup::readEntry(const char *key, const Endianness &defaultValue) const
+inline QSysInfo::Endian KConfigGroup::readEntry(const char *key, const QSysInfo::Endian &defaultValue) const
 {
     const QString entry = readEntry(key, QString());
-    const Endianness endianess =
-        (entry == QLatin1String("BigEndian")) ?    BigEndian :
-        (entry == QLatin1String("LittleEndian")) ? LittleEndian :
+    const QSysInfo::Endian endianess =
+        (entry == QLatin1String("BigEndian")) ?    QSysInfo::BigEndian :
+        (entry == QLatin1String("LittleEndian")) ? QSysInfo::LittleEndian :
         /* else */                                 defaultValue;
     return endianess;
 }
 
 template <>
-inline void KConfigGroup::writeEntry(const char *key, const Endianness &value,
+inline void KConfigGroup::writeEntry(const char *key, const QSysInfo::Endian &value,
                                      KConfigBase::WriteConfigFlags flags)
 {
     const QString valueString =
-        (value == BigEndian) ? QLatin1String("BigEndian") : QLatin1String("LittleEndian");
+        (value == QSysInfo::BigEndian) ? QLatin1String("BigEndian") : QLatin1String("LittleEndian");
     writeEntry(key, valueString, flags);
 }
 
-static constexpr Endianness DefaultByteOrder = ThisMachineEndianness;
+static constexpr QSysInfo::Endian DefaultByteOrder = QSysInfo::ByteOrder;
 
 static constexpr char ByteOrderConfigKey[] = "ByteOrder";
 
@@ -41,9 +41,9 @@ ModSumByteArrayChecksumParameterSet::~ModSumByteArrayChecksumParameterSet() = de
 
 const char* ModSumByteArrayChecksumParameterSet::id() const { return "ModSum"; }
 
-Endianness ModSumByteArrayChecksumParameterSet::endianness() const { return mEndianness; }
+QSysInfo::Endian ModSumByteArrayChecksumParameterSet::endianness() const { return mEndianness; }
 
-void ModSumByteArrayChecksumParameterSet::setEndianness(Endianness endianness) { mEndianness = endianness; }
+void ModSumByteArrayChecksumParameterSet::setEndianness(QSysInfo::Endian endianness) { mEndianness = endianness; }
 
 void ModSumByteArrayChecksumParameterSet::loadConfig(const KConfigGroup& configGroup)
 {

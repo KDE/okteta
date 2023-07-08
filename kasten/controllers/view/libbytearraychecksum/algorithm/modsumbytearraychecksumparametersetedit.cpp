@@ -25,8 +25,8 @@ ModSumByteArrayChecksumParameterSetEdit::ModSumByteArrayChecksumParameterSetEdit
     baseLayout->setContentsMargins(0, 0, 0, 0);
 
     mByteOrderComboBox = new KComboBox(this);
-    mByteOrderComboBox->addItem(i18nc("@item:inlistbox", "Little-endian"));  // add first for index
-    mByteOrderComboBox->addItem(i18nc("@item:inlistbox", "Big-endian"));     // add second for index
+    mByteOrderComboBox->addItem(i18nc("@item:inlistbox", "Big-endian"));     // add first for index
+    mByteOrderComboBox->addItem(i18nc("@item:inlistbox", "Little-endian"));  // add second for index
     connect(mByteOrderComboBox, QOverload<int>::of(&KComboBox::activated),
             this, &ModSumByteArrayChecksumParameterSetEdit::valuesChanged);
 
@@ -58,7 +58,7 @@ void ModSumByteArrayChecksumParameterSetEdit::getParameterSet(AbstractByteArrayC
     auto* modSumParameterSet =
         static_cast<ModSumByteArrayChecksumParameterSet*>(parameterSet);
 
-    modSumParameterSet->setEndianness(static_cast<Endianness>(mByteOrderComboBox->currentIndex()));
+    modSumParameterSet->setEndianness(static_cast<QSysInfo::Endian>(mByteOrderComboBox->currentIndex()));
 }
 
 #include "moc_modsumbytearraychecksumparametersetedit.cpp"
