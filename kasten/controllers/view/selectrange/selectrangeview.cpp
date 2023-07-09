@@ -10,6 +10,9 @@
 
 // tool
 #include "selectrangetool.hpp"
+// libconfigentries
+#include <addresscomboboxcodingconfigentry.hpp>
+#include <directionconfigentry.hpp>
 // Okteta Kasten gui
 #include <Kasten/Okteta/AddressComboBox>
 // KF
@@ -22,51 +25,6 @@
 #include <QCheckBox>
 #include <QLabel>
 #include <QLayout>
-// Std
-#include <algorithm>
-#include <array>
-#include <iterator>
-
-// TODO: move to helper interface lib?
-// Matching Okteta::AddressComboBox::Coding
-static constexpr int codingCount = 3;
-static const std::array<QString, codingCount> codingConfigValueList = {
-    QStringLiteral("Hexadecimal"),
-    QStringLiteral("Decimal"),
-    QStringLiteral("Expression"),
-};
-
-
-template <>
-inline Okteta::AddressComboBox::Coding
-KConfigGroup::readEntry(const char *key,
-                        const Okteta::AddressComboBox::Coding &defaultValue) const
-{
-    const QString entry = readEntry(key, QString());
-
-    auto it = std::find(codingConfigValueList.cbegin(), codingConfigValueList.cend(), entry);
-    if (it == codingConfigValueList.cend()) {
-        return defaultValue;
-    }
-
-    const int listIndex = std::distance(codingConfigValueList.cbegin(), it);
-    return static_cast<Okteta::AddressComboBox::Coding>(listIndex);
-}
-
-template <>
-inline void KConfigGroup::writeEntry(const char *key,
-                                     const Okteta::AddressComboBox::Coding &value,
-                                     KConfigBase::WriteConfigFlags flags)
-{
-    QString configValue;
-    if (value == Okteta::AddressComboBox::InvalidCoding) {
-        configValue = QStringLiteral("Invalid");
-    } else {
-        const int listIndex = static_cast<int>(value);
-        configValue = codingConfigValueList[listIndex];
-    }
-    writeEntry(key, configValue, flags);
-}
 
 namespace Kasten
 {
@@ -80,21 +38,14 @@ enum SelectDirection
 template <>
 inline Kasten::SelectDirection KConfigGroup::readEntry(const char *key, const Kasten::SelectDirection &defaultValue) const
 {
-    const QString entry = readEntry(key, QString());
-    const Kasten::SelectDirection direction =
-        (entry == QLatin1String("Forward")) ?  Kasten::SelectForward :
-        (entry == QLatin1String("Backward")) ? Kasten::SelectBackward :
-        /* else */                             defaultValue;
-    return direction;
+    return static_cast<Kasten::SelectDirection>(KConfigGroup::readEntry(key, static_cast<Kasten::Direction>(defaultValue)));
 }
 
 template <>
 inline void KConfigGroup::writeEntry(const char *key, const Kasten::SelectDirection &value,
                                      KConfigBase::WriteConfigFlags flags)
 {
-    const QString valueString =
-        (value == Kasten::SelectForward) ? QLatin1String("Forward") : QLatin1String("Backward");
-    writeEntry(key, valueString, flags);
+    writeEntry(key, static_cast<Kasten::Direction>(value), flags);
 }
 
 static constexpr Okteta::AddressComboBox::Coding DefaultStartOffsetCoding = Okteta::AddressComboBox::HexadecimalCoding;

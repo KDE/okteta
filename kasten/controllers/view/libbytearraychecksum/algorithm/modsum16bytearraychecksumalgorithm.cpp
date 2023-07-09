@@ -46,7 +46,7 @@ void ModSum16ByteArrayChecksumAlgorithm::saveConfig(KConfigGroup& configGroup) c
 bool ModSum16ByteArrayChecksumAlgorithm::calculateChecksum(QString* result,
                                                            const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const
 {
-    const bool useLittleEndian = (mParameterSet.endianness() == LittleEndian);
+    const bool useLittleEndian = (mParameterSet.endianness() == QSysInfo::LittleEndian);
     quint16 modSum = useLittleEndian ?
                      calculateModSumWithLittleEndian(model, range) :
                      calculateModSumWithBigEndian(model, range);

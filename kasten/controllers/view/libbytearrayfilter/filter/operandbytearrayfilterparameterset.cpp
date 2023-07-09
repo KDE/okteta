@@ -8,39 +8,17 @@
 
 #include "operandbytearrayfilterparameterset.hpp"
 
+// libconfigentries
+#include <bytearraycodingconfigentry.hpp>
 // KF
 #include <KConfigGroup>
-// Std
-#include <array>
-#include <algorithm>
-#include <iterator>
-
-static constexpr int codingCount =
-    static_cast<int>(OperandByteArrayFilterParameterSet::_CodingCount);
-static const std::array<QString, codingCount> codingConfigValueList = {
-    QStringLiteral("Hexadecimal"),
-    QStringLiteral("Decimal"),
-    QStringLiteral("Octal"),
-    QStringLiteral("Binary"),
-    QStringLiteral("Char"),
-    QStringLiteral("UTF-8"),
-};
-
 
 template <>
 inline OperandByteArrayFilterParameterSet::Coding
 KConfigGroup::readEntry(const char *key,
                         const OperandByteArrayFilterParameterSet::Coding &defaultValue) const
 {
-    const QString entry = readEntry(key, QString());
-
-    auto it = std::find(codingConfigValueList.cbegin(), codingConfigValueList.cend(), entry);
-    if (it == codingConfigValueList.cend()) {
-        return defaultValue;
-    }
-
-    const int listIndex = std::distance(codingConfigValueList.cbegin(), it);
-    return static_cast<OperandByteArrayFilterParameterSet::Coding>(listIndex);
+    return static_cast<OperandByteArrayFilterParameterSet::Coding>(readEntry(key, static_cast<Kasten::ByteArrayCoding>(defaultValue)));
 }
 
 template <>
@@ -48,14 +26,7 @@ inline void KConfigGroup::writeEntry(const char *key,
                                      const OperandByteArrayFilterParameterSet::Coding &value,
                                      KConfigBase::WriteConfigFlags flags)
 {
-    QString configValue;
-    if (value == OperandByteArrayFilterParameterSet::InvalidCoding) {
-        configValue = QStringLiteral("Invalid");
-    } else {
-        const int listIndex = static_cast<int>(value);
-        configValue = codingConfigValueList[listIndex];
-    }
-    writeEntry(key, configValue, flags);
+    writeEntry(key, static_cast<Kasten::ByteArrayCoding>(value), flags);
 }
 
 static const QByteArray DefaultOperand = QByteArray();
