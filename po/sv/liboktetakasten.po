@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-23 02:52+0000\n"
+"POT-Creation-Date: 2023-07-10 02:45+0000\n"
 "PO-Revision-Date: 2020-01-03 18:24+0100\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -586,15 +586,15 @@ msgctxt "@title:window of the tool to set a new offset for the cursor"
 msgid "Goto"
 msgstr "Gå till"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:127
+#: controllers/view/gotooffset/gotooffsetview.cpp:77
 #, kde-format
 msgctxt "@label:listbox"
 msgid "O&ffset:"
 msgstr "&Position:"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:137
-#: controllers/view/selectrange/selectrangeview.cpp:135
-#: controllers/view/selectrange/selectrangeview.cpp:155
+#: controllers/view/gotooffset/gotooffsetview.cpp:87
+#: controllers/view/selectrange/selectrangeview.cpp:86
+#: controllers/view/selectrange/selectrangeview.cpp:106
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Enter an offset to go to, or select a previous offset from the list."
@@ -602,60 +602,60 @@ msgstr ""
 "Ange en position att gå till, eller välj en tidigare använd position i "
 "listan."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:153
+#: controllers/view/gotooffset/gotooffsetview.cpp:103
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:112
 #, kde-format
 msgctxt "@option:check"
 msgid "From c&ursor"
 msgstr "&Från markören"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:155
+#: controllers/view/gotooffset/gotooffsetview.cpp:105
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Go relative from the current cursor location and not absolute."
 msgstr "Gå relativt från nuvarande markörposition, och inte absolut."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:158
+#: controllers/view/gotooffset/gotooffsetview.cpp:108
 #, kde-format
 msgctxt "@option:check"
 msgid "&Extend selection"
 msgstr "&Utöka markering"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:160
-#: controllers/view/selectrange/selectrangeview.cpp:177
+#: controllers/view/gotooffset/gotooffsetview.cpp:110
+#: controllers/view/selectrange/selectrangeview.cpp:128
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Extend the selection by the cursor move."
 msgstr "Utöka markeringen genom att flytta markören."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:163
+#: controllers/view/gotooffset/gotooffsetview.cpp:113
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:115
-#: controllers/view/selectrange/selectrangeview.cpp:169
+#: controllers/view/selectrange/selectrangeview.cpp:120
 #, kde-format
 msgctxt "@option:check"
 msgid "&Backwards"
 msgstr "&Bakåt"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:165
-#: controllers/view/selectrange/selectrangeview.cpp:171
+#: controllers/view/gotooffset/gotooffsetview.cpp:115
+#: controllers/view/selectrange/selectrangeview.cpp:122
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Go backwards from the end or the current cursor location."
 msgstr "Gå bakåt från slutet eller från nuvarande markörposition."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:180
+#: controllers/view/gotooffset/gotooffsetview.cpp:130
 #, kde-format
 msgctxt "@action:button"
 msgid "&Go"
 msgstr "&Gå"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:183
+#: controllers/view/gotooffset/gotooffsetview.cpp:133
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Go to the Offset"
 msgstr "Gå till positionen"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:185
+#: controllers/view/gotooffset/gotooffsetview.cpp:135
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -797,18 +797,18 @@ msgid "Modular sum 8-bit"
 msgstr "Modulär summa 8-bitar"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:28
-#: controllers/view/poddecoder/podtableview.cpp:80
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Little-endian"
-msgstr "Little endian"
-
-#: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:29
 #: controllers/view/poddecoder/podtableview.cpp:79
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Big-endian"
 msgstr "Big endian"
+
+#: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:29
+#: controllers/view/poddecoder/podtableview.cpp:80
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Little-endian"
+msgstr "Little endian"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:35
 #, kde-format
@@ -1122,20 +1122,20 @@ msgid ""
 msgstr ""
 "Välj om du vill inmatning ska infogas eller skriva över befintlig data."
 
-#: controllers/view/poddecoder/poddecodertool.cpp:118
+#: controllers/view/poddecoder/poddecodertool.cpp:100
 #: controllers/view/poddecoder/poddecodertoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
 msgid "Decoding Table"
 msgstr "Avkodningstabell"
 
-#: controllers/view/poddecoder/poddecodertool.cpp:183
+#: controllers/view/poddecoder/poddecodertool.cpp:165
 #, kde-format
 msgctxt "@label:textbox"
 msgid "UTF-16:"
 msgstr "UTF-16:"
 
-#: controllers/view/poddecoder/poddecodertool.cpp:329
+#: controllers/view/poddecoder/poddecodertool.cpp:311
 #, kde-format
 msgctxt "Edited as %datatype"
 msgid "Edited as %1"
@@ -1220,7 +1220,7 @@ msgstr ""
 "<nl/>Skriv över efterföljande byte eller infoga nya efter behov?"
 
 #: controllers/view/poddecoder/podtableview.cpp:255
-#: controllers/view/selectrange/selectrangeview.cpp:193
+#: controllers/view/selectrange/selectrangeview.cpp:144
 #: controllers/view/structures/structureview.cpp:339
 #, kde-format
 msgctxt "@action:button"
@@ -1386,25 +1386,25 @@ msgctxt "@info"
 msgid "Beginning of byte array reached.<nl/>Continue from the end?"
 msgstr "Byte-fältets början uppnådd.<nl/>Fortsätt från slutet?"
 
-#: controllers/view/replace/replacedialog.cpp:113
+#: controllers/view/replace/replacedialog.cpp:48
 #, kde-format
 msgctxt "@title:window"
 msgid "Replace Bytes"
 msgstr "Ersätt byte"
 
-#: controllers/view/replace/replacedialog.cpp:115
+#: controllers/view/replace/replacedialog.cpp:50
 #, kde-format
 msgctxt "@action;button"
 msgid "&Replace"
 msgstr "&Ersätt"
 
-#: controllers/view/replace/replacedialog.cpp:117
+#: controllers/view/replace/replacedialog.cpp:52
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Start replace"
 msgstr "Starta ersättning"
 
-#: controllers/view/replace/replacedialog.cpp:119
+#: controllers/view/replace/replacedialog.cpp:54
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1416,13 +1416,13 @@ msgstr ""
 "byte-fältet efter de värden du skrev in ovan, och alla förekomster ersätts "
 "av ersättningsvärdet."
 
-#: controllers/view/replace/replacedialog.cpp:127
+#: controllers/view/replace/replacedialog.cpp:62
 #, kde-format
 msgctxt "@title:group"
 msgid "Replace With"
 msgstr "Ersätt med"
 
-#: controllers/view/replace/replacedialog.cpp:134
+#: controllers/view/replace/replacedialog.cpp:69
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1431,13 +1431,13 @@ msgid ""
 msgstr ""
 "Ange byte att ersätta med, eller välj byte tidigare ersatta med i listan."
 
-#: controllers/view/replace/replacedialog.cpp:143
+#: controllers/view/replace/replacedialog.cpp:78
 #, kde-format
 msgctxt "@option:check"
 msgid "&Prompt on replace"
 msgstr "Fråga &vid ersättning"
 
-#: controllers/view/replace/replacedialog.cpp:144
+#: controllers/view/replace/replacedialog.cpp:79
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Ask before replacing each match found."
@@ -1467,7 +1467,7 @@ msgctxt "@action:button"
 msgid "Replace"
 msgstr "Ersätt"
 
-#: controllers/view/replace/replacetool.cpp:77
+#: controllers/view/replace/replacetool.cpp:59
 #, kde-format
 msgctxt "@title"
 msgid "Replace"
@@ -1479,25 +1479,25 @@ msgctxt "@info"
 msgid "Search key not found in byte array."
 msgstr "Sökvärdet hittades inte i byte-fältet."
 
-#: controllers/view/search/searchdialog.cpp:104
+#: controllers/view/search/searchdialog.cpp:40
 #, kde-format
 msgctxt "@title:window"
 msgid "Find Bytes"
 msgstr "Sök byte"
 
-#: controllers/view/search/searchdialog.cpp:106
+#: controllers/view/search/searchdialog.cpp:42
 #, kde-format
 msgctxt "@action:button"
 msgid "&Find"
 msgstr "&Sök"
 
-#: controllers/view/search/searchdialog.cpp:108
+#: controllers/view/search/searchdialog.cpp:44
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Start searching"
 msgstr "Starta sökning"
 
-#: controllers/view/search/searchdialog.cpp:110
+#: controllers/view/search/searchdialog.cpp:46
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1507,7 +1507,7 @@ msgstr ""
 "Om du klickar på knappen <interface>Sök</interface>, utförs en sökning i "
 "byte-fältet efter de värden du skrev in ovan."
 
-#: controllers/view/search/searchtool.cpp:78
+#: controllers/view/search/searchtool.cpp:60
 #, kde-format
 msgctxt "@title"
 msgid "Search"
@@ -1525,31 +1525,31 @@ msgctxt "@title:window of the tool to select a range"
 msgid "Select"
 msgstr "Markera"
 
-#: controllers/view/selectrange/selectrangeview.cpp:129
+#: controllers/view/selectrange/selectrangeview.cpp:80
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Start offset:"
 msgstr "Startposition:"
 
-#: controllers/view/selectrange/selectrangeview.cpp:149
+#: controllers/view/selectrange/selectrangeview.cpp:100
 #, kde-format
 msgctxt "@label:listbox"
 msgid "End offset:"
 msgstr "Slutposition:"
 
-#: controllers/view/selectrange/selectrangeview.cpp:175
+#: controllers/view/selectrange/selectrangeview.cpp:126
 #, kde-format
 msgctxt "@option:check"
 msgid "End relative"
 msgstr "Relativt slut"
 
-#: controllers/view/selectrange/selectrangeview.cpp:196
+#: controllers/view/selectrange/selectrangeview.cpp:147
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the range."
 msgstr "Markera intervallet."
 
-#: controllers/view/selectrange/selectrangeview.cpp:198
+#: controllers/view/selectrange/selectrangeview.cpp:149
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -3082,13 +3082,13 @@ msgid "Support to load files larger than 2 GiB has not yet been implemented."
 msgstr ""
 "Stöd för att läsa in filer större än 2 GiByte har ännu inte implementerats."
 
-#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:104
+#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:105
 #, kde-format
 msgctxt "name of the generated data"
 msgid "Pattern..."
 msgstr "Mönster..."
 
-#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:154
+#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:155
 #, kde-format
 msgid "Pattern inserted."
 msgstr "Mönster infogat."

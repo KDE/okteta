@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-23 02:52+0000\n"
+"POT-Creation-Date: 2023-07-10 02:45+0000\n"
 "PO-Revision-Date: 2022-10-23 20:26+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -599,15 +599,15 @@ msgctxt "@title:window of the tool to set a new offset for the cursor"
 msgid "Goto"
 msgstr "Ves a"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:127
+#: controllers/view/gotooffset/gotooffsetview.cpp:77
 #, kde-format
 msgctxt "@label:listbox"
 msgid "O&ffset:"
 msgstr "Des&plaçament:"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:137
-#: controllers/view/selectrange/selectrangeview.cpp:135
-#: controllers/view/selectrange/selectrangeview.cpp:155
+#: controllers/view/gotooffset/gotooffsetview.cpp:87
+#: controllers/view/selectrange/selectrangeview.cpp:86
+#: controllers/view/selectrange/selectrangeview.cpp:106
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Enter an offset to go to, or select a previous offset from the list."
@@ -615,14 +615,14 @@ msgstr ""
 "Introduïu un desplaçament a on anar, o seleccioneu un desplaçament anterior "
 "de la llista."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:153
+#: controllers/view/gotooffset/gotooffsetview.cpp:103
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:112
 #, kde-format
 msgctxt "@option:check"
 msgid "From c&ursor"
 msgstr "Des del c&ursor"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:155
+#: controllers/view/gotooffset/gotooffsetview.cpp:105
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Go relative from the current cursor location and not absolute."
@@ -630,47 +630,47 @@ msgstr ""
 "Va a una posició relativa a la ubicació actual del cursor, en lloc "
 "d'absoluta."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:158
+#: controllers/view/gotooffset/gotooffsetview.cpp:108
 #, kde-format
 msgctxt "@option:check"
 msgid "&Extend selection"
 msgstr "&Estén la selecció"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:160
-#: controllers/view/selectrange/selectrangeview.cpp:177
+#: controllers/view/gotooffset/gotooffsetview.cpp:110
+#: controllers/view/selectrange/selectrangeview.cpp:128
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Extend the selection by the cursor move."
 msgstr "Estén la selecció amb el moviment del cursor."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:163
+#: controllers/view/gotooffset/gotooffsetview.cpp:113
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:115
-#: controllers/view/selectrange/selectrangeview.cpp:169
+#: controllers/view/selectrange/selectrangeview.cpp:120
 #, kde-format
 msgctxt "@option:check"
 msgid "&Backwards"
 msgstr "E&nrere"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:165
-#: controllers/view/selectrange/selectrangeview.cpp:171
+#: controllers/view/gotooffset/gotooffsetview.cpp:115
+#: controllers/view/selectrange/selectrangeview.cpp:122
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Go backwards from the end or the current cursor location."
 msgstr "Va enrere des del final o des de la ubicació actual del cursor."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:180
+#: controllers/view/gotooffset/gotooffsetview.cpp:130
 #, kde-format
 msgctxt "@action:button"
 msgid "&Go"
 msgstr "&Ves"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:183
+#: controllers/view/gotooffset/gotooffsetview.cpp:133
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Go to the Offset"
 msgstr "Ves al desplaçament"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:185
+#: controllers/view/gotooffset/gotooffsetview.cpp:135
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -814,18 +814,18 @@ msgid "Modular sum 8-bit"
 msgstr "Suma modular de 8 bits"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:28
-#: controllers/view/poddecoder/podtableview.cpp:80
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Little-endian"
-msgstr "«Little-endian»"
-
-#: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:29
 #: controllers/view/poddecoder/podtableview.cpp:79
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Big-endian"
 msgstr "«Big-endian»"
+
+#: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:29
+#: controllers/view/poddecoder/podtableview.cpp:80
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Little-endian"
+msgstr "«Little-endian»"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:35
 #, kde-format
@@ -1144,20 +1144,20 @@ msgstr ""
 "Seleccioneu si voleu que l'entrada s'insereixi o que sobreescrigui les dades "
 "existents."
 
-#: controllers/view/poddecoder/poddecodertool.cpp:118
+#: controllers/view/poddecoder/poddecodertool.cpp:100
 #: controllers/view/poddecoder/poddecodertoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
 msgid "Decoding Table"
 msgstr "Taula de descodificació"
 
-#: controllers/view/poddecoder/poddecodertool.cpp:183
+#: controllers/view/poddecoder/poddecodertool.cpp:165
 #, kde-format
 msgctxt "@label:textbox"
 msgid "UTF-16:"
 msgstr "UTF-16:"
 
-#: controllers/view/poddecoder/poddecodertool.cpp:329
+#: controllers/view/poddecoder/poddecodertool.cpp:311
 #, kde-format
 msgctxt "Edited as %datatype"
 msgid "Edited as %1"
@@ -1242,7 +1242,7 @@ msgstr ""
 ">Sobreescric els bytes següents o n'insereixo de nous segons es necessiti?"
 
 #: controllers/view/poddecoder/podtableview.cpp:255
-#: controllers/view/selectrange/selectrangeview.cpp:193
+#: controllers/view/selectrange/selectrangeview.cpp:144
 #: controllers/view/structures/structureview.cpp:339
 #, kde-format
 msgctxt "@action:button"
@@ -1410,25 +1410,25 @@ msgid "Beginning of byte array reached.<nl/>Continue from the end?"
 msgstr ""
 "S'ha arribat a l'inici de la matriu de bytes.<nl/>Continuo des del final?"
 
-#: controllers/view/replace/replacedialog.cpp:113
+#: controllers/view/replace/replacedialog.cpp:48
 #, kde-format
 msgctxt "@title:window"
 msgid "Replace Bytes"
 msgstr "Substitució de bytes"
 
-#: controllers/view/replace/replacedialog.cpp:115
+#: controllers/view/replace/replacedialog.cpp:50
 #, kde-format
 msgctxt "@action;button"
 msgid "&Replace"
 msgstr "&Substitueix"
 
-#: controllers/view/replace/replacedialog.cpp:117
+#: controllers/view/replace/replacedialog.cpp:52
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Start replace"
 msgstr "Comença la substitució"
 
-#: controllers/view/replace/replacedialog.cpp:119
+#: controllers/view/replace/replacedialog.cpp:54
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1440,13 +1440,13 @@ msgstr ""
 "introduït més amunt se cercaran en la matriu de bytes i totes les "
 "ocurrències se substituiran amb els bytes de substitució."
 
-#: controllers/view/replace/replacedialog.cpp:127
+#: controllers/view/replace/replacedialog.cpp:62
 #, kde-format
 msgctxt "@title:group"
 msgid "Replace With"
 msgstr "Substitueix per"
 
-#: controllers/view/replace/replacedialog.cpp:134
+#: controllers/view/replace/replacedialog.cpp:69
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1456,13 +1456,13 @@ msgstr ""
 "Introduïu els bytes amb els quals substituir, o seleccioneu els bytes previs "
 "de substitució de la llista."
 
-#: controllers/view/replace/replacedialog.cpp:143
+#: controllers/view/replace/replacedialog.cpp:78
 #, kde-format
 msgctxt "@option:check"
 msgid "&Prompt on replace"
 msgstr "&Pregunta en substituir"
 
-#: controllers/view/replace/replacedialog.cpp:144
+#: controllers/view/replace/replacedialog.cpp:79
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Ask before replacing each match found."
@@ -1492,7 +1492,7 @@ msgctxt "@action:button"
 msgid "Replace"
 msgstr "Substitueix"
 
-#: controllers/view/replace/replacetool.cpp:77
+#: controllers/view/replace/replacetool.cpp:59
 #, kde-format
 msgctxt "@title"
 msgid "Replace"
@@ -1504,25 +1504,25 @@ msgctxt "@info"
 msgid "Search key not found in byte array."
 msgstr "No s'ha trobat el text a cercar en la matriu de bytes."
 
-#: controllers/view/search/searchdialog.cpp:104
+#: controllers/view/search/searchdialog.cpp:40
 #, kde-format
 msgctxt "@title:window"
 msgid "Find Bytes"
 msgstr "Cerca de bytes"
 
-#: controllers/view/search/searchdialog.cpp:106
+#: controllers/view/search/searchdialog.cpp:42
 #, kde-format
 msgctxt "@action:button"
 msgid "&Find"
 msgstr "&Cerca"
 
-#: controllers/view/search/searchdialog.cpp:108
+#: controllers/view/search/searchdialog.cpp:44
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Start searching"
 msgstr "Comença la cerca"
 
-#: controllers/view/search/searchdialog.cpp:110
+#: controllers/view/search/searchdialog.cpp:46
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1532,7 +1532,7 @@ msgstr ""
 "Si premeu el botó <interface>Cerca</interface>, els bytes que heu introduït "
 "més amunt se cercaran en la matriu de bytes."
 
-#: controllers/view/search/searchtool.cpp:78
+#: controllers/view/search/searchtool.cpp:60
 #, kde-format
 msgctxt "@title"
 msgid "Search"
@@ -1550,31 +1550,31 @@ msgctxt "@title:window of the tool to select a range"
 msgid "Select"
 msgstr "Selecció"
 
-#: controllers/view/selectrange/selectrangeview.cpp:129
+#: controllers/view/selectrange/selectrangeview.cpp:80
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Start offset:"
 msgstr "Desplaçament inicial:"
 
-#: controllers/view/selectrange/selectrangeview.cpp:149
+#: controllers/view/selectrange/selectrangeview.cpp:100
 #, kde-format
 msgctxt "@label:listbox"
 msgid "End offset:"
 msgstr "Desplaçament final:"
 
-#: controllers/view/selectrange/selectrangeview.cpp:175
+#: controllers/view/selectrange/selectrangeview.cpp:126
 #, kde-format
 msgctxt "@option:check"
 msgid "End relative"
 msgstr "Final relatiu"
 
-#: controllers/view/selectrange/selectrangeview.cpp:196
+#: controllers/view/selectrange/selectrangeview.cpp:147
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the range."
 msgstr "Seleccioneu l'interval."
 
-#: controllers/view/selectrange/selectrangeview.cpp:198
+#: controllers/view/selectrange/selectrangeview.cpp:149
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -3114,13 +3114,13 @@ msgstr ""
 msgid "Support to load files larger than 2 GiB has not yet been implemented."
 msgstr "Encara no s'ha implementat la càrrega de fitxers més grans de 2 GiB."
 
-#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:104
+#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:105
 #, kde-format
 msgctxt "name of the generated data"
 msgid "Pattern..."
 msgstr "Patró..."
 
-#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:154
+#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:155
 #, kde-format
 msgid "Pattern inserted."
 msgstr "S'ha inserit el patró."
