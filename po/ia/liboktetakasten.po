@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the okteta package.
 #
-# giovanni <g.sora@tiscali.it>, 2020, 2021.
+# giovanni <g.sora@tiscali.it>, 2020, 2021, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-10 02:45+0000\n"
-"PO-Revision-Date: 2021-10-25 12:39+0200\n"
+"PO-Revision-Date: 2023-07-10 11:43+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 20.04.2\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: controllers/document/info/documentinfotool.cpp:48
 #: controllers/document/info/documentinfotoolviewfactory.cpp:24
@@ -779,7 +779,7 @@ msgstr "Little-endian"
 msgctxt ""
 "@label:listbox byte order to use for decoding the bytes into integer values"
 msgid "Byte Order:"
-msgstr ""
+msgstr "Ordine de Byte:"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:38
 #, kde-format
@@ -1463,7 +1463,7 @@ msgstr "Cerca"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Select Range..."
-msgstr ""
+msgstr "&Selige extension..."
 
 #: controllers/view/selectrange/selectrangetool.cpp:61
 #, kde-format
@@ -2155,7 +2155,7 @@ msgstr ""
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Byte order"
-msgstr ""
+msgstr "Ordine de Byte:"
 
 #. i18n: ectx: label, entry (ByteOrder), group (StructureSettings)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:49
@@ -2199,7 +2199,7 @@ msgstr "Hexadecimal"
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:32
 #, kde-format
 msgid "Byte order:"
-msgstr ""
+msgstr "Ordine de Byte:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ByteOrder)
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:46
@@ -2320,7 +2320,7 @@ msgstr "Preferentias"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open settings."
-msgstr ""
+msgstr "Preferentias aperite."
 
 #: controllers/view/structures/structureview.cpp:159
 #, kde-format
@@ -2745,13 +2745,13 @@ msgstr ""
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage View Profiles..."
-msgstr ""
+msgstr "Gere profilos de vista..."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:36
 #, kde-format
 msgctxt "@title:window"
 msgid "View Profiles"
-msgstr ""
+msgstr "Profilos de vista"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:63
 #, kde-format
@@ -2837,7 +2837,7 @@ msgstr ""
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:174
 #, kde-format
 msgid "Modification of %1"
-msgstr ""
+msgstr "Modification de %1"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:211
 #, kde-format
@@ -3039,12 +3039,12 @@ msgstr "Datos casual"
 #, kde-format
 msgctxt "name of the generated data"
 msgid "Sequence"
-msgstr ""
+msgstr "Sequentia"
 
 #: gui/io/generator/sequence/bytearraysequencegenerator.cpp:60
 #, kde-format
 msgid "Sequence inserted."
-msgstr ""
+msgstr "Sequentia insertate."
 
 #: gui/io/streamencoder/base32/bytearraybase32streamencoder.cpp:137
 #, kde-format
@@ -3112,7 +3112,7 @@ msgstr ""
 #, kde-format
 msgctxt "@label:listbox the size in bits of the addresses."
 msgid "Address size:"
-msgstr ""
+msgstr "Grandor de adresse:"
 
 #: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:40
 #: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:39
