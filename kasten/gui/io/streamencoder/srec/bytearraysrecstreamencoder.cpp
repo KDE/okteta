@@ -21,13 +21,11 @@
 // Qt
 #include <QTextStream>
 // Std
-#include <array>
 #include <algorithm>
 #include <iterator>
 
-static constexpr int addressSizeCount =
-    static_cast<int>(Kasten::SRecStreamEncoderSettings::AddressSizeId::_Count);
-static const std::array<QString, addressSizeCount> addressSizeConfigValueList = {
+const std::array<QString, Kasten::SRecStreamEncoderSettings::AddressSizeCount>
+Kasten::SRecStreamEncoderSettings::addressSizeConfigValueList = {
     QStringLiteral("32"),
     QStringLiteral("24"),
     QStringLiteral("16"),
@@ -39,12 +37,14 @@ inline Kasten::SRecStreamEncoderSettings::AddressSizeId KConfigGroup::readEntry(
 {
     const QString entry = readEntry(key, QString());
 
-    auto it = std::find(addressSizeConfigValueList.cbegin(), addressSizeConfigValueList.cend(), entry);
-    if (it == addressSizeConfigValueList.cend()) {
+    auto it = std::find(Kasten::SRecStreamEncoderSettings::addressSizeConfigValueList.cbegin(),
+                        Kasten::SRecStreamEncoderSettings::addressSizeConfigValueList.cend(),
+                        entry);
+    if (it == Kasten::SRecStreamEncoderSettings::addressSizeConfigValueList.cend()) {
         return defaultValue;
     }
 
-    const int listIndex = std::distance(addressSizeConfigValueList.cbegin(), it);
+    const int listIndex = std::distance(Kasten::SRecStreamEncoderSettings::addressSizeConfigValueList.cbegin(), it);
     return static_cast<Kasten::SRecStreamEncoderSettings::AddressSizeId>(listIndex);
 }
 
@@ -54,16 +54,10 @@ inline void KConfigGroup::writeEntry(const char *key,
                                      KConfigBase::WriteConfigFlags flags)
 {
     const int listIndex = static_cast<int>(value);
-    writeEntry(key, addressSizeConfigValueList[listIndex], flags);
+    writeEntry(key, Kasten::SRecStreamEncoderSettings::addressSizeConfigValueList[listIndex], flags);
 }
 
 namespace Kasten {
-
-static constexpr SRecStreamEncoderSettings::AddressSizeId DefaultAddressSize =
-    SRecStreamEncoderSettings::AddressSizeId::FourBytes;
-
-static constexpr char ByteArraySRecStreamEncoderConfigGroupId[] = "ByteArraySRecordStreamEncoder";
-static constexpr char AddressSizeConfigKey[] = "AddressSize";
 
 static inline constexpr
 int addressSize(SRecStreamEncoderSettings::AddressSizeId id)
@@ -176,7 +170,7 @@ void ByteArraySRecStreamEncoder::streamBlockEnd(QTextStream& textStream, unsigne
 ByteArraySRecStreamEncoder::ByteArraySRecStreamEncoder()
     : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "S-Record"), QStringLiteral("text/x-srecord"))
 {
-    const KConfigGroup configGroup(KSharedConfig::openConfig(), ByteArraySRecStreamEncoderConfigGroupId);
+    const KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     mSettings.loadConfig(configGroup);
 }
 
@@ -189,7 +183,7 @@ void ByteArraySRecStreamEncoder::setSettings(const SRecStreamEncoderSettings& se
     }
 
     mSettings = settings;
-    KConfigGroup configGroup(KSharedConfig::openConfig(), ByteArraySRecStreamEncoderConfigGroupId);
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     mSettings.saveConfig(configGroup);
     Q_EMIT settingsChanged();
 }

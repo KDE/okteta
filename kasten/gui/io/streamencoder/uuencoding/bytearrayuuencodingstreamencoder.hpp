@@ -29,6 +29,12 @@ public:
         Base64 = 1
     };
 
+private:
+    static inline constexpr char FileNameConfigKey[] = "FileName";
+    static inline constexpr char EncodingTypeConfigKey[] = "EncodingType";
+    static inline constexpr EncodingType DefaultEncodingType = EncodingType::Base64;
+    static const QString DefaultFileName;
+
 public:
     UuencodingStreamEncoderSettings();
     UuencodingStreamEncoderSettings(const UuencodingStreamEncoderSettings&) = default;
@@ -59,6 +65,14 @@ public:
         Second,
         Third
     };
+
+private:
+    static inline constexpr int defaultUuInputLineLength = 45;
+    static inline constexpr int uuInputLineLength = defaultUuInputLineLength;
+    static inline constexpr int uuInputGroupLength = 3;
+    static inline constexpr int maxInputGroupsPerLine = uuInputLineLength / uuInputGroupLength;
+
+    static inline constexpr char ConfigGroupId[] = "ByteArrayUuencodingStreamEncoder";
 
 public:
     ByteArrayUuencodingStreamEncoder();

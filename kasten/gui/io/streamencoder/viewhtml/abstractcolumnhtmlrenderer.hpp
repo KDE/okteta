@@ -20,6 +20,9 @@ namespace Kasten {
  */
 class AbstractColumnHtmlRenderer
 {
+private:
+    static inline constexpr int DefaultNoOfSublines = 1;
+
 protected:
     static QString whiteSpace(unsigned int length);
     static QString emptyCells(unsigned int length, unsigned int codingWidth);

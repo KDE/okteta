@@ -39,8 +39,6 @@
 // Qt
 #include <QApplication>
 
-static constexpr char ChecksumConfigGroupId[] = "ChecksumTool";
-static constexpr char AlgorithmConfigKey[] = "Algorithm";
 
 namespace Kasten {
 
@@ -58,7 +56,7 @@ ChecksumTool::ChecksumTool()
 
     mAlgorithmList = ByteArrayChecksumAlgorithmFactory::createAlgorithms();
 
-    const KConfigGroup configGroup(KSharedConfig::openConfig(), ChecksumConfigGroupId);
+    const KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     for (auto *algorithm : std::as_const(mAlgorithmList)) {
         algorithm->loadConfig(configGroup);
     }
@@ -177,7 +175,7 @@ void ChecksumTool::setAlgorithm(int algorithmId)
 
     AbstractByteArrayChecksumAlgorithm* algorithm = mAlgorithmList.at(mAlgorithmId);
     if (algorithm) {
-        KConfigGroup configGroup(KSharedConfig::openConfig(), ChecksumConfigGroupId);
+        KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
         configGroup.writeEntry(AlgorithmConfigKey, algorithm->id());
     }
 
@@ -195,7 +193,7 @@ void ChecksumTool::resetSourceTool()
 
     AbstractByteArrayChecksumAlgorithm* algorithm = mAlgorithmList.at(mAlgorithmId);
     if (algorithm) {
-        KConfigGroup configGroup(KSharedConfig::openConfig(), ChecksumConfigGroupId);
+        KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
         algorithm->saveConfig(configGroup);
     }
 

@@ -29,13 +29,8 @@ inline void KConfigGroup::writeEntry(const char *key,
     writeEntry(key, static_cast<Kasten::ByteArrayCoding>(value), flags);
 }
 
-static const QByteArray DefaultOperand = QByteArray();
-static constexpr OperandByteArrayFilterParameterSet::Coding DefaultOperandFormat = OperandByteArrayFilterParameterSet::HexadecimalCoding;
-static constexpr bool DefaultAlignAtEnd = false;
+const QByteArray OperandByteArrayFilterParameterSet::DefaultOperand = QByteArray();
 
-static constexpr char OperandConfigKey[] = "Operand";
-static constexpr char ByteOrderConfigKey[] = "OperandFormat";
-static constexpr char AlignAtEndConfigKey[] = "AlignAtEnd";
 
 OperandByteArrayFilterParameterSet::OperandByteArrayFilterParameterSet() = default;
 

@@ -66,14 +66,8 @@ inline void KConfigGroup::writeEntry(const char *key,
 
 namespace Kasten {
 
-static const QByteArray DefaultPattern = QByteArray(1, 0);
-static constexpr ByteArrayPatternGeneratorSettings::Coding DefaultPatternCoding = ByteArrayPatternGeneratorSettings::HexadecimalCoding;
-static constexpr int DefaultCount = 1;
+const QByteArray ByteArrayPatternGeneratorSettings::DefaultPattern = QByteArray(1, 0);
 
-static constexpr char ByteArrayPatternGeneratorConfigGroupId[] = "ByteArrayPatternGenerator";
-static constexpr char PatternConfigKey[] = "Pattern";
-static constexpr char PatternCodingConfigKey[] = "PatternCoding";
-static constexpr char CountConfigKey[] = "Count";
 
 ByteArrayPatternGeneratorSettings::ByteArrayPatternGeneratorSettings() = default;
 
@@ -106,7 +100,7 @@ ByteArrayPatternGenerator::ByteArrayPatternGenerator()
         QStringLiteral("application/octet-stream"),
         DynamicGeneration)
 {
-    const KConfigGroup configGroup(KSharedConfig::openConfig(), ByteArrayPatternGeneratorConfigGroupId);
+    const KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
 
     mSettings.loadConfig(configGroup);
 }
@@ -121,7 +115,7 @@ void ByteArrayPatternGenerator::setSettings(const ByteArrayPatternGeneratorSetti
 
     mSettings = settings;
 
-    KConfigGroup configGroup(KSharedConfig::openConfig(), ByteArrayPatternGeneratorConfigGroupId);
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     mSettings.saveConfig(configGroup);
 //     Q_EMIT settingsChanged();
 }

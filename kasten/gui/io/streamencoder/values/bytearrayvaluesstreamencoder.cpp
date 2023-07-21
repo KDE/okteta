@@ -22,11 +22,7 @@
 
 namespace Kasten {
 
-static const QString DefaultSeparator = QStringLiteral(" ");
-
-static constexpr char ByteArrayValuesStreamEncoderConfigGroupId[] = "ByteArrayValuesStreamEncoder";
-
-static constexpr char SeparatorConfigKey[] = "Separator";
+const QString ValuesStreamEncoderSettings::DefaultSeparator = QStringLiteral(" ");
 
 ValuesStreamEncoderSettings::ValuesStreamEncoderSettings() = default;
 
@@ -50,7 +46,7 @@ void ValuesStreamEncoderSettings::saveConfig(KConfigGroup& configGroup) const
 ByteArrayValuesStreamEncoder::ByteArrayValuesStreamEncoder()
     : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "Values"), QStringLiteral("text/plain"))
 {
-    const KConfigGroup configGroup(KSharedConfig::openConfig(), ByteArrayValuesStreamEncoderConfigGroupId);
+    const KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     mSettings.loadConfig(configGroup);
 }
 
@@ -63,7 +59,7 @@ void ByteArrayValuesStreamEncoder::setSettings(const ValuesStreamEncoderSettings
     }
 
     mSettings = settings;
-    KConfigGroup configGroup(KSharedConfig::openConfig(), ByteArrayValuesStreamEncoderConfigGroupId);
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     mSettings.saveConfig(configGroup);
     Q_EMIT settingsChanged();
 }

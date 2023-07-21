@@ -35,6 +35,16 @@ public:
         _CodingCount
     };
 
+private:
+    static const QByteArray DefaultPattern;
+
+    static inline constexpr Coding DefaultPatternCoding = HexadecimalCoding;
+    static inline constexpr int DefaultCount = 1;
+
+    static inline constexpr char PatternConfigKey[] = "Pattern";
+    static inline constexpr char PatternCodingConfigKey[] = "PatternCoding";
+    static inline constexpr char CountConfigKey[] = "Count";
+
 public:
     ByteArrayPatternGeneratorSettings();
     ByteArrayPatternGeneratorSettings(const ByteArrayPatternGeneratorSettings&) = default;
@@ -58,6 +68,9 @@ public:
 class ByteArrayPatternGenerator : public AbstractModelDataGenerator
 {
     Q_OBJECT
+
+private:
+    static inline constexpr char ConfigGroupId[] = "ByteArrayPatternGenerator";
 
 public:
     ByteArrayPatternGenerator();

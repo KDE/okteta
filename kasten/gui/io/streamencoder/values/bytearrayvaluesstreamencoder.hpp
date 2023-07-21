@@ -22,6 +22,11 @@ namespace Kasten {
 
 class ValuesStreamEncoderSettings
 {
+private:
+    static inline constexpr char SeparatorConfigKey[] = "Separator";
+
+    static const QString DefaultSeparator;
+
 public:
     ValuesStreamEncoderSettings();
     ValuesStreamEncoderSettings(const ValuesStreamEncoderSettings&) = default;
@@ -46,6 +51,9 @@ public:
 class ByteArrayValuesStreamEncoder : public AbstractByteArrayStreamEncoder
 {
     Q_OBJECT
+
+private:
+    static inline constexpr char ConfigGroupId[] = "ByteArrayValuesStreamEncoder";
 
 public:
     ByteArrayValuesStreamEncoder();

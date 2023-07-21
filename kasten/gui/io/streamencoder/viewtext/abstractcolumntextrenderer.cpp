@@ -13,8 +13,6 @@
 
 namespace Kasten {
 
-static constexpr int DefaultNoOfSublines = 1;
-
 AbstractColumnTextRenderer::~AbstractColumnTextRenderer() = default;
 
 QString AbstractColumnTextRenderer::whiteSpace(unsigned int length)

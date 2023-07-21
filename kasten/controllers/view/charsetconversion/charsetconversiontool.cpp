@@ -25,6 +25,7 @@
 // Qt
 #include <QApplication>
 
+
 template <>
 inline Kasten::CharsetConversionTool::ConversionDirection KConfigGroup::readEntry(const char *key,
                                                                                    const Kasten::CharsetConversionTool::ConversionDirection &defaultValue) const
@@ -80,21 +81,11 @@ inline void KConfigGroup::writeEntry(const char *key,
 
 namespace Kasten {
 
-static constexpr bool DefaultSubstituteMissingChars = false;
-static constexpr Okteta::Byte DefaultSubstituteByte = 0;
-static constexpr CharsetConversionTool::ConversionDirection DefaultConversionDirection = CharsetConversionTool::ConvertFrom;
-
-static constexpr char CharsetConversionConfigGroupId[] = "CharsetConversionTool";
-static constexpr char OtherCharCodecNameConfigKey[] = "OtherCharCodecName";
-static constexpr char ConversionDirectionConfigKey[] = "ConversionDirection";
-static constexpr char SubstituteMissingCharsConfigKey[] = "SubstituteMissingChars";
-static constexpr char SubstituteByteConfigKey[] = "SubstituteByte";
-
 CharsetConversionTool::CharsetConversionTool()
 {
     setObjectName(QStringLiteral("CharsetConversion"));
 
-    const KConfigGroup configGroup(KSharedConfig::openConfig(), CharsetConversionConfigGroupId);
+    const KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
 
     mOtherCharCodecName = configGroup.readEntry(OtherCharCodecNameConfigKey);
     mConversionDirection = configGroup.readEntry(ConversionDirectionConfigKey, DefaultConversionDirection);
@@ -168,7 +159,7 @@ void CharsetConversionTool::setOtherCharCodecName(const QString& codecName)
 
     mOtherCharCodecName = codecName;
 
-    KConfigGroup configGroup(KSharedConfig::openConfig(), CharsetConversionConfigGroupId);
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     configGroup.writeEntry(OtherCharCodecNameConfigKey, mOtherCharCodecName);
 
     Q_EMIT isApplyableChanged(isApplyable());
@@ -182,7 +173,7 @@ void CharsetConversionTool::setConversionDirection(int conversionDirection)
 
     mConversionDirection = (ConversionDirection)conversionDirection;
 
-    KConfigGroup configGroup(KSharedConfig::openConfig(), CharsetConversionConfigGroupId);
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     configGroup.writeEntry(ConversionDirectionConfigKey, mConversionDirection);
 }
 
@@ -194,7 +185,7 @@ void CharsetConversionTool::setSubstitutingMissingChars(bool isSubstitutingMissi
 
     mSubstitutingMissingChars = isSubstitutingMissingChars;
 
-    KConfigGroup configGroup(KSharedConfig::openConfig(), CharsetConversionConfigGroupId);
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     configGroup.writeEntry(SubstituteMissingCharsConfigKey, mSubstitutingMissingChars);
 }
 
@@ -206,7 +197,7 @@ void CharsetConversionTool::setSubstituteByte(int byte)
 
     mSubstituteByte = static_cast<Okteta::Byte>(byte);
 
-    KConfigGroup configGroup(KSharedConfig::openConfig(), CharsetConversionConfigGroupId);
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     configGroup.writeEntry(SubstituteByteConfigKey, ByteParameter{mSubstituteByte});
 }
 

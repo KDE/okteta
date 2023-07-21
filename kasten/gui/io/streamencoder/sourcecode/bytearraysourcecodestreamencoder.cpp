@@ -61,17 +61,7 @@ inline void KConfigGroup::writeEntry(const char *key,
 
 namespace Kasten {
 
-static const QString DefaultVariableName = QStringLiteral("array");
-static constexpr SourceCodeStreamEncoderSettings::PrimitiveDataType DefaultDataType =
-    SourceCodeStreamEncoderSettings::PrimitiveDataType::UnsignedChar;
-static constexpr int DefaultElementsPerLine = 4;
-static constexpr bool DefaultUnsignedAsHexadecimal = true;
-
-static constexpr char ByteArraySourceCodeStreamEncoderConfigGroupId[] = "ByteArraySourceCodeStreamEncoder";
-static constexpr char VariableNameConfigKey[] = "VariableName";
-static constexpr char DataTypeConfigKey[] = "DataType";
-static constexpr char ElementsPerLineConfigKey[] = "ElementsPerLine";
-static constexpr char UnsignedAsHexadecimalConfigKey[] = "UnsignedAsHexadecimal";
+const QString SourceCodeStreamEncoderSettings::DefaultVariableName = QStringLiteral("array");
 
 static constexpr  const char* PrimitiveDataTypeName[] = {
     "char",
@@ -131,7 +121,7 @@ void SourceCodeStreamEncoderSettings::saveConfig(KConfigGroup& configGroup) cons
 ByteArraySourceCodeStreamEncoder::ByteArraySourceCodeStreamEncoder()
     : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "C Array"), QStringLiteral("text/x-csrc"))
 {
-    const KConfigGroup configGroup(KSharedConfig::openConfig(), ByteArraySourceCodeStreamEncoderConfigGroupId);
+    const KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     mSettings.loadConfig(configGroup);
 }
 
@@ -147,7 +137,7 @@ void ByteArraySourceCodeStreamEncoder::setSettings(const SourceCodeStreamEncoder
     }
 
     mSettings = settings;
-    KConfigGroup configGroup(KSharedConfig::openConfig(), ByteArraySourceCodeStreamEncoderConfigGroupId);
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     mSettings.saveConfig(configGroup);
     Q_EMIT settingsChanged();
 }

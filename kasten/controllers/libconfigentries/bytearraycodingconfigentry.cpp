@@ -14,8 +14,8 @@
 #include <iterator>
 
 // Matching Kasten::ByteArrayCoding
-static constexpr int codingCount = 6;
-static const std::array<QString, codingCount> codingConfigValueList = {
+static constexpr int ByteArrayCodingCount = 6;
+static const std::array<QString, ByteArrayCodingCount> byteArrayCodingConfigValueList = {
     QStringLiteral("Hexadecimal"),
     QStringLiteral("Decimal"),
     QStringLiteral("Octal"),
@@ -31,12 +31,12 @@ KConfigGroup::readEntry(const char *key,
 {
     const QString entry = readEntry(key, QString());
 
-    auto it = std::find(codingConfigValueList.cbegin(), codingConfigValueList.cend(), entry);
-    if (it == codingConfigValueList.cend()) {
+    auto it = std::find(byteArrayCodingConfigValueList.cbegin(), byteArrayCodingConfigValueList.cend(), entry);
+    if (it == byteArrayCodingConfigValueList.cend()) {
         return defaultValue;
     }
 
-    const int listIndex = std::distance(codingConfigValueList.cbegin(), it);
+    const int listIndex = std::distance(byteArrayCodingConfigValueList.cbegin(), it);
     return static_cast<Kasten::ByteArrayCoding>(listIndex);
 }
 
@@ -50,7 +50,7 @@ void KConfigGroup::writeEntry(const char *key,
         configValue = QStringLiteral("Invalid");
     } else {
         const int listIndex = static_cast<int>(value);
-        configValue = codingConfigValueList[listIndex];
+        configValue = byteArrayCodingConfigValueList[listIndex];
     }
     writeEntry(key, configValue, flags);
 }

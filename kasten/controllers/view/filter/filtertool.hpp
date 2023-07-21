@@ -30,6 +30,10 @@ class FilterTool : public AbstractTool
 {
     Q_OBJECT
 
+private:
+    static inline constexpr char ConfigGroupId[] = "FilterTool";
+    static inline constexpr char OperationConfigKey[] = "Operation";
+
 public:
     FilterTool();
     ~FilterTool() override;

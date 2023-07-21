@@ -19,11 +19,7 @@
 
 namespace Kasten {
 
-static const QString DefaultFileName = QStringLiteral("okteta-export");
-
-static constexpr char ByteArrayXxencodingStreamEncoderConfigGroupId[] = "ByteArrayXxencodingStreamEncoder";
-
-static constexpr char FileNameConfigKey[] = "FileName";
+const QString XxencodingStreamEncoderSettings::DefaultFileName;
 
 static constexpr char xxencodeMap[64] = {
     '+', '-', '0', '1', '2', '3', '4', '5',
@@ -36,11 +32,6 @@ static constexpr char xxencodeMap[64] = {
     's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
 };
 static constexpr const char* paddingData[2] = {"++", "+"};
-
-static constexpr int defaultxxInputLineLength = 45;
-static constexpr int xxInputLineLength = defaultxxInputLineLength;
-static constexpr int xxInputGroupLength = 3;
-static constexpr int maxXxInputGroupsPerLine = xxInputLineLength / xxInputGroupLength;
 
 static inline constexpr char xxmapByte(char byte) { return xxencodeMap[static_cast<int>(byte)]; }
 
@@ -70,7 +61,7 @@ void XxencodingStreamEncoderSettings::saveConfig(KConfigGroup& configGroup) cons
 ByteArrayXxencodingStreamEncoder::ByteArrayXxencodingStreamEncoder()
     : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "Xxencoding"), QStringLiteral("text/x-xxencode"))
 {
-    const KConfigGroup configGroup(KSharedConfig::openConfig(), ByteArrayXxencodingStreamEncoderConfigGroupId);
+    const KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     mSettings.loadConfig(configGroup);
 }
 
@@ -83,7 +74,7 @@ void ByteArrayXxencodingStreamEncoder::setSettings(const XxencodingStreamEncoder
     }
 
     mSettings = settings;
-    KConfigGroup configGroup(KSharedConfig::openConfig(), ByteArrayXxencodingStreamEncoderConfigGroupId);
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     mSettings.saveConfig(configGroup);
     Q_EMIT settingsChanged();
 }

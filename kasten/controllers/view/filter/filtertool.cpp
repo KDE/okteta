@@ -28,8 +28,6 @@
 #include <QApplication>
 #include <QByteArray>
 
-static constexpr char FilterConfigGroupId[] = "FilterTool";
-static constexpr char OperationConfigKey[] = "Operation";
 
 namespace Kasten {
 
@@ -39,7 +37,7 @@ FilterTool::FilterTool()
 
     mFilterList = ByteArrayFilterFactory::createFilters();
 
-    const KConfigGroup configGroup(KSharedConfig::openConfig(), FilterConfigGroupId);
+    const KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     for (auto* filter : std::as_const(mFilterList)) {
         filter->loadConfig(configGroup);
     }
@@ -111,7 +109,7 @@ void FilterTool::saveParameterSet(int filterId)
         return;
     }
 
-    KConfigGroup configGroup(KSharedConfig::openConfig(), FilterConfigGroupId);
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     byteArrayFilter->saveConfig(configGroup);
 }
 
@@ -125,7 +123,7 @@ void FilterTool::setFilter(int filterId)
 
     AbstractByteArrayFilter* byteArrayFilter = mFilterList.at(mFilterId);
     if (byteArrayFilter) {
-        KConfigGroup configGroup(KSharedConfig::openConfig(), FilterConfigGroupId);
+        KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
         configGroup.writeEntry(OperationConfigKey, byteArrayFilter->id());
     }
 

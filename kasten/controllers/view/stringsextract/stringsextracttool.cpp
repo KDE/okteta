@@ -27,18 +27,13 @@
 
 namespace Kasten {
 
-static constexpr int DefaultMinLength = 3;
-
-static constexpr char StringsExtractConfigGroupId[] = "StringsExtractTool";
-static constexpr char MinimumLengthConfigKey[] = "MinimumLength";
-
 StringsExtractTool::StringsExtractTool()
     : mExtractedStringsUptodate(false)
     , mSourceByteArrayModelUptodate(false)
 {
     setObjectName(QStringLiteral("Strings"));
 
-    const KConfigGroup configGroup(KSharedConfig::openConfig(), StringsExtractConfigGroupId);
+    const KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
 
     mMinLength = configGroup.readEntry(MinimumLengthConfigKey, DefaultMinLength);
 }
@@ -112,7 +107,7 @@ void StringsExtractTool::setMinLength(int minLength)
 
     mMinLength = minLength;
 
-    KConfigGroup configGroup(KSharedConfig::openConfig(), StringsExtractConfigGroupId);
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     configGroup.writeEntry(MinimumLengthConfigKey, mMinLength);
 
     checkUptoDate();

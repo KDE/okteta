@@ -23,14 +23,14 @@ namespace Kasten {
 
 static constexpr QChar StatisticsDefaultSubstituteChar =  QLatin1Char('.');
 static constexpr QChar StatisticsDefaultUndefinedChar =   QChar(QChar::ReplacementCharacter);
-static constexpr Okteta::ValueCoding DefaultValueCoding =  Okteta::HexadecimalCoding;
+static constexpr Okteta::ValueCoding StatisticsDefaultValueCoding =  Okteta::HexadecimalCoding;
 static constexpr int StatisticsByteSetSize = 256;
 
 StatisticTableModel::StatisticTableModel(int* byteCount, QObject* parent)
     : QAbstractTableModel(parent)
     , mByteCount(byteCount)
-    , mValueCoding(DefaultValueCoding)
-    , mValueCodec(Okteta::ValueCodec::createCodec(DefaultValueCoding))
+    , mValueCoding(StatisticsDefaultValueCoding)
+    , mValueCodec(Okteta::ValueCodec::createCodec(StatisticsDefaultValueCoding))
     , mCharCodec(Okteta::CharCodec::createCodec(Okteta::LocalEncoding))
     , mSubstituteChar(StatisticsDefaultSubstituteChar)
     , mUndefinedChar(StatisticsDefaultUndefinedChar)

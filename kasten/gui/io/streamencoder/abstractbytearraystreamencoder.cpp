@@ -20,8 +20,6 @@
 
 namespace Kasten {
 
-static constexpr int MaxPreviewSize = 100;
-
 AbstractByteArrayStreamEncoder::AbstractByteArrayStreamEncoder(const QString& remoteTypeName,
                                                                const QString& remoteMimeType,
                                                                const QString& remoteClipboardMimeType)

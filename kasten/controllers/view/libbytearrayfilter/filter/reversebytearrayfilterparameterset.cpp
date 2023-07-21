@@ -11,9 +11,6 @@
 // KF
 #include <KConfigGroup>
 
-static constexpr bool DefaultInvertsBits = false;
-
-static constexpr char InvertsBitsConfigKey[] = "InvertsBits";
 
 ReverseByteArrayFilterParameterSet::ReverseByteArrayFilterParameterSet() = default;
 

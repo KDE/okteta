@@ -25,6 +25,13 @@ class ByteTableView : public AbstractToolWidget
 {
     Q_OBJECT
 
+private:
+    // TODO: move config store/restore to tool
+    static inline constexpr int DefaultInsertCount = 1;
+
+    static inline constexpr char ConfigGroupId[] = "ByteTableTool";
+    static inline constexpr char InsertCountConfigKey[] = "InsertCount";
+
 public:
     explicit ByteTableView(ByteTableTool* tool, QWidget* parent = nullptr);
     ~ByteTableView() override;

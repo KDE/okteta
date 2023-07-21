@@ -36,9 +36,17 @@ class PODDecoderTool : public AbstractTool
     Q_OBJECT
 
 public:
-    static constexpr int MaxPODSize = sizeof(double);
+    static inline constexpr int MaxPODSize = sizeof(double);
     // ensure strict alignment for double as needed on some architectures (e.g. PA-RISC)
     using Aligned64Bit = union { unsigned char Data[MaxPODSize]; double Dummy; };
+
+private:
+    static inline constexpr char ConfigGroupId[] = "PODDecoderTool";
+    static inline constexpr char ByteOrderConfigKey[] = "ByteOrder";
+    static inline constexpr char UnsignedAsHexConfigKey[] = "UnsignedAsHexadecimal";
+
+    static inline constexpr QSysInfo::Endian DefaultByteOrder = QSysInfo::ByteOrder;
+    static inline constexpr bool DefaultUnsignedAsHex = true;
 
 public:
     PODDecoderTool();

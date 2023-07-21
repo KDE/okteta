@@ -45,13 +45,6 @@
 
 namespace Kasten {
 
-static constexpr QSysInfo::Endian DefaultByteOrder = QSysInfo::ByteOrder;
-static constexpr bool DefaultUnsignedAsHex = true;
-
-static constexpr char PODDecoderConfigGroupId[] = "PODDecoderTool";
-static constexpr char ByteOrderConfigKey[] = "ByteOrder";
-static constexpr char UnsignedAsHexConfigKey[] = "UnsignedAsHexadecimal";
-
 enum PODTypes
 {
     BinaryId = 0,
@@ -80,7 +73,7 @@ PODDecoderTool::PODDecoderTool()
 {
     setObjectName(QStringLiteral("PODDecoder"));
 
-    const KConfigGroup configGroup(KSharedConfig::openConfig(), PODDecoderConfigGroupId);
+    const KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
 
     const QSysInfo::Endian byteOrder = configGroup.readEntry(ByteOrderConfigKey, DefaultByteOrder);
     mPODData.setByteOrder(byteOrder);
@@ -182,7 +175,7 @@ void PODDecoderTool::setUnsignedAsHex(bool unsignedAsHex)
 
     mUnsignedAsHex = unsignedAsHex;
 
-    KConfigGroup configGroup(KSharedConfig::openConfig(), PODDecoderConfigGroupId);
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     configGroup.writeEntry(UnsignedAsHexConfigKey, mUnsignedAsHex);
 
     updateData();
@@ -194,7 +187,7 @@ void PODDecoderTool::setByteOrder(int byteOrderValue)
     // TODO: test on no change is done in PODData, not this level
     mPODData.setByteOrder(byteOrder);
 
-    KConfigGroup configGroup(KSharedConfig::openConfig(), PODDecoderConfigGroupId);
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     configGroup.writeEntry(ByteOrderConfigKey, byteOrder);
 
     updateData();
