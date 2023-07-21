@@ -9,12 +9,11 @@
 #ifndef KASTEN_SELECTRANGEVIEW_HPP
 #define KASTEN_SELECTRANGEVIEW_HPP
 
+// Okteta Kasten gui
+#include <Kasten/Okteta/AddressComboBox>
 // Kasten gui
 #include <Kasten/AbstractToolWidget>
 
-namespace Okteta {
-class AddressComboBox;
-}
 
 class QPushButton;
 
@@ -27,6 +26,26 @@ class SelectRangeTool;
 class SelectRangeView : public AbstractToolWidget
 {
     Q_OBJECT
+
+public:
+    enum SelectDirection
+    {
+        SelectForward = 0,
+        SelectBackward = 1,
+    };
+
+private:
+    static constexpr Okteta::AddressComboBox::Coding DefaultStartOffsetCoding = Okteta::AddressComboBox::HexadecimalCoding;
+    static constexpr Okteta::AddressComboBox::Coding DefaultEndOffsetCoding = Okteta::AddressComboBox::HexadecimalCoding;
+    static constexpr bool DefaultRelativeToEnd = false;
+    static constexpr SelectDirection DefaultDirection = SelectForward;
+
+    static constexpr char ConfigGroupId[] = "SelectRangeTool";
+
+    static constexpr char StartOffsetCodingConfigKey[] = "StartOffsetCoding";
+    static constexpr char EndOffsetCodingConfigKey[] = "EndOffsetCoding";
+    static constexpr char RelativeToEndConfigKey[] = "RelativeToEnd";
+    static constexpr char DirectionConfigKey[] = "Direction";
 
 public:
     explicit SelectRangeView(SelectRangeTool* tool, QWidget* parent = nullptr);

@@ -29,13 +29,16 @@ inline void KConfigGroup::writeEntry(const char *key,
     writeEntry(key, static_cast<Kasten::ByteArrayCoding>(value), flags);
 }
 
-static const QByteArray DefaultOperand = QByteArray();
-static constexpr OperandByteArrayFilterParameterSet::Coding DefaultOperandFormat = OperandByteArrayFilterParameterSet::HexadecimalCoding;
-static constexpr bool DefaultAlignAtEnd = false;
+const QByteArray OperandByteArrayFilterParameterSet::DefaultOperand = QByteArray();
 
-static constexpr char OperandConfigKey[] = "Operand";
-static constexpr char ByteOrderConfigKey[] = "OperandFormat";
-static constexpr char AlignAtEndConfigKey[] = "AlignAtEnd";
+// C++11 needs a definition for static constexpr members
+constexpr OperandByteArrayFilterParameterSet::Coding OperandByteArrayFilterParameterSet::DefaultOperandFormat;
+constexpr bool OperandByteArrayFilterParameterSet::DefaultAlignAtEnd;
+
+constexpr char OperandByteArrayFilterParameterSet::OperandConfigKey[];
+constexpr char OperandByteArrayFilterParameterSet::ByteOrderConfigKey[];
+constexpr char OperandByteArrayFilterParameterSet::AlignAtEndConfigKey[];
+
 
 OperandByteArrayFilterParameterSet::OperandByteArrayFilterParameterSet() = default;
 

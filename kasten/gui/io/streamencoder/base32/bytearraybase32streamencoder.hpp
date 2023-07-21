@@ -31,6 +31,11 @@ public:
         _Count,
     };
 
+private:
+    static constexpr EncodingType DefaultEncodingType = EncodingType::Classic;
+
+    static constexpr char EncodingTypeConfigKey[] = "EncodingType";
+
 public:
     Base32StreamEncoderSettings();
     Base32StreamEncoderSettings(const Base32StreamEncoderSettings&) = default;
@@ -54,12 +59,6 @@ class ByteArrayBase32StreamEncoder : public AbstractByteArrayStreamEncoder
     Q_OBJECT
 
 public:
-    static constexpr int inputGroupLength = 5;
-
-    static constexpr int outputLineLength = 76;
-    static constexpr int outputGroupLength = 8;
-    static constexpr int maxOutputGroupsPerLine = outputLineLength / outputGroupLength;
-
     enum class InputByteIndex
     {
         First = 0,
@@ -68,6 +67,15 @@ public:
         Fourth,
         Fifth
     };
+
+private:
+    static constexpr int inputGroupLength = 5;
+
+    static constexpr int outputLineLength = 76;
+    static constexpr int outputGroupLength = 8;
+    static constexpr int maxOutputGroupsPerLine = outputLineLength / outputGroupLength;
+
+    static constexpr char ConfigGroupId[] = "ByteArrayBase32StreamEncoder";
 
 public:
     ByteArrayBase32StreamEncoder();

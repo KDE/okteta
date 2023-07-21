@@ -39,10 +39,13 @@
 // Qt
 #include <QApplication>
 
-static constexpr char ChecksumConfigGroupId[] = "ChecksumTool";
-static constexpr char AlgorithmConfigKey[] = "Algorithm";
 
 namespace Kasten {
+
+// C++11 needs a definition for static constexpr members
+constexpr char ChecksumTool::ConfigGroupId[];
+constexpr char ChecksumTool::AlgorithmConfigKey[];
+
 
 ChecksumTool::ChecksumTool()
     : mChecksumUptodate(false)
@@ -58,7 +61,7 @@ ChecksumTool::ChecksumTool()
 
     mAlgorithmList = ByteArrayChecksumAlgorithmFactory::createAlgorithms();
 
-    const KConfigGroup configGroup(KSharedConfig::openConfig(), ChecksumConfigGroupId);
+    const KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     for (auto *algorithm : qAsConst(mAlgorithmList)) {
         algorithm->loadConfig(configGroup);
     }
@@ -177,7 +180,7 @@ void ChecksumTool::setAlgorithm(int algorithmId)
 
     AbstractByteArrayChecksumAlgorithm* algorithm = mAlgorithmList.at(mAlgorithmId);
     if (algorithm) {
-        KConfigGroup configGroup(KSharedConfig::openConfig(), ChecksumConfigGroupId);
+        KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
         configGroup.writeEntry(AlgorithmConfigKey, algorithm->id());
     }
 
@@ -195,7 +198,7 @@ void ChecksumTool::resetSourceTool()
 
     AbstractByteArrayChecksumAlgorithm* algorithm = mAlgorithmList.at(mAlgorithmId);
     if (algorithm) {
-        KConfigGroup configGroup(KSharedConfig::openConfig(), ChecksumConfigGroupId);
+        KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
         algorithm->saveConfig(configGroup);
     }
 

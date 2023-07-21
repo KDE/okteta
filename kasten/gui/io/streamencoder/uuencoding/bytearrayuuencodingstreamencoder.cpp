@@ -47,19 +47,18 @@ inline void KConfigGroup::writeEntry(const char *key,
 
 namespace Kasten {
 
-static const QString DefaultFileName = QStringLiteral("okteta-export");
-static constexpr Kasten::UuencodingStreamEncoderSettings::EncodingType DefaultEncodingType =
-    Kasten::UuencodingStreamEncoderSettings::EncodingType::Base64;
+// C++11 needs a definition for static constexpr members
+constexpr char ByteArrayUuencodingStreamEncoder::ConfigGroupId[];
 
-static constexpr char ByteArrayUuencodingStreamEncoderConfigGroupId[] = "ByteArrayUuencodingStreamEncoder";
+constexpr char UuencodingStreamEncoderSettings::FileNameConfigKey[];
+constexpr char UuencodingStreamEncoderSettings::EncodingTypeConfigKey[];
 
-static constexpr char FileNameConfigKey[] = "FileName";
-static constexpr char EncodingTypeConfigKey[] = "EncodingType";
+constexpr int ByteArrayUuencodingStreamEncoder::uuInputLineLength;
+constexpr int ByteArrayUuencodingStreamEncoder::maxInputGroupsPerLine;
 
-static constexpr int defaultUuInputLineLength = 45;
-static constexpr int uuInputLineLength = defaultUuInputLineLength;
-static constexpr int uuInputGroupLength = 3;
-static constexpr int maxInputGroupsPerLine = uuInputLineLength / uuInputGroupLength;
+constexpr UuencodingStreamEncoderSettings::EncodingType UuencodingStreamEncoderSettings::DefaultEncodingType;
+
+const QString UuencodingStreamEncoderSettings::DefaultFileName = QStringLiteral("okteta-export");
 
 static inline constexpr char uumapByteHistorical(char byte) { return (byte > 0) ? (byte + 32) : '`'; }
 static inline char uumapByteBase64(char byte)     { return base64EncodeMap[(int)byte]; }
@@ -119,7 +118,7 @@ void UuencodingStreamEncoderSettings::saveConfig(KConfigGroup& configGroup) cons
 ByteArrayUuencodingStreamEncoder::ByteArrayUuencodingStreamEncoder()
     : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "Uuencoding"), QStringLiteral("text/x-uuencode"))
 {
-    const KConfigGroup configGroup(KSharedConfig::openConfig(), ByteArrayUuencodingStreamEncoderConfigGroupId);
+    const KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     mSettings.loadConfig(configGroup);
 }
 
@@ -132,7 +131,7 @@ void ByteArrayUuencodingStreamEncoder::setSettings(const UuencodingStreamEncoder
     }
 
     mSettings = settings;
-    KConfigGroup configGroup(KSharedConfig::openConfig(), ByteArrayUuencodingStreamEncoderConfigGroupId);
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     mSettings.saveConfig(configGroup);
     emit settingsChanged();
 }

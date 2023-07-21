@@ -13,7 +13,8 @@
 
 namespace Kasten {
 
-static constexpr int DefaultNoOfSublines = 1;
+// C++11 needs a definition for static constexpr members
+constexpr int AbstractColumnTextRenderer::DefaultNoOfSublines;
 
 AbstractColumnTextRenderer::~AbstractColumnTextRenderer() = default;
 

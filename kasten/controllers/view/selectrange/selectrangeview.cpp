@@ -26,41 +26,35 @@
 #include <QLabel>
 #include <QLayout>
 
-namespace Kasten
+
+template <>
+inline Kasten::SelectRangeView::SelectDirection KConfigGroup::readEntry(const char *key, const Kasten::SelectRangeView::SelectDirection &defaultValue) const
 {
-enum SelectDirection
-{
-    SelectForward = 0,
-    SelectBackward = 1
-};
+    return static_cast<Kasten::SelectRangeView::SelectDirection>(KConfigGroup::readEntry(key, static_cast<Kasten::Direction>(defaultValue)));
 }
 
 template <>
-inline Kasten::SelectDirection KConfigGroup::readEntry(const char *key, const Kasten::SelectDirection &defaultValue) const
-{
-    return static_cast<Kasten::SelectDirection>(KConfigGroup::readEntry(key, static_cast<Kasten::Direction>(defaultValue)));
-}
-
-template <>
-inline void KConfigGroup::writeEntry(const char *key, const Kasten::SelectDirection &value,
+inline void KConfigGroup::writeEntry(const char *key, const Kasten::SelectRangeView::SelectDirection &value,
                                      KConfigBase::WriteConfigFlags flags)
 {
     writeEntry(key, static_cast<Kasten::Direction>(value), flags);
 }
 
-static constexpr Okteta::AddressComboBox::Coding DefaultStartOffsetCoding = Okteta::AddressComboBox::HexadecimalCoding;
-static constexpr Okteta::AddressComboBox::Coding DefaultEndOffsetCoding = Okteta::AddressComboBox::HexadecimalCoding;
-static constexpr bool DefaultRelativeToEnd = false;
-static constexpr Kasten::SelectDirection DefaultDirection = Kasten::SelectForward;
-
-static constexpr char SelectRangeConfigGroupId[] = "SelectRangeTool";
-
-static constexpr char StartOffsetCodingConfigKey[] = "StartOffsetCoding";
-static constexpr char EndOffsetCodingConfigKey[] = "EndOffsetCoding";
-static constexpr char RelativeToEndConfigKey[] = "RelativeToEnd";
-static constexpr char DirectionConfigKey[] = "Direction";
-
 namespace Kasten {
+
+// C++11 needs a definition for static constexpr members
+constexpr char SelectRangeView::ConfigGroupId[];
+
+constexpr char SelectRangeView::StartOffsetCodingConfigKey[];
+constexpr char SelectRangeView::EndOffsetCodingConfigKey[];
+constexpr char SelectRangeView::RelativeToEndConfigKey[];
+constexpr char SelectRangeView::DirectionConfigKey[];
+
+constexpr Okteta::AddressComboBox::Coding SelectRangeView::DefaultStartOffsetCoding;
+constexpr Okteta::AddressComboBox::Coding SelectRangeView::DefaultEndOffsetCoding;
+constexpr bool SelectRangeView::DefaultRelativeToEnd;
+constexpr SelectRangeView::SelectDirection SelectRangeView::DefaultDirection;
+
 
 SelectRangeView::SelectRangeView(SelectRangeTool* tool, QWidget* parent)
     : AbstractToolWidget(parent)
@@ -163,7 +157,7 @@ SelectRangeView::SelectRangeView(SelectRangeTool* tool, QWidget* parent)
     setTabOrder(mRelativeCheckBox, mBackwardsCheckBox);
     setTabOrder(mBackwardsCheckBox, mSelectButton);
 
-    const KConfigGroup configGroup(KSharedConfig::openConfig(), SelectRangeConfigGroupId);
+    const KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
 
     const Okteta::AddressComboBox::Coding startOffsetCoding = configGroup.readEntry(StartOffsetCodingConfigKey, DefaultStartOffsetCoding);
     mStartEdit->setFormat(startOffsetCoding);
@@ -171,7 +165,7 @@ SelectRangeView::SelectRangeView(SelectRangeTool* tool, QWidget* parent)
     const Okteta::AddressComboBox::Coding endOffsetCoding = configGroup.readEntry(EndOffsetCodingConfigKey, DefaultEndOffsetCoding);
     mEndEdit->setFormat(endOffsetCoding);
 
-    const Kasten::SelectDirection direction = configGroup.readEntry(DirectionConfigKey, DefaultDirection);
+    const SelectDirection direction = configGroup.readEntry(DirectionConfigKey, DefaultDirection);
     mBackwardsCheckBox->setChecked(direction == SelectBackward);
 
     const bool relativeToEnd = configGroup.readEntry(RelativeToEndConfigKey, DefaultRelativeToEnd);
@@ -197,7 +191,7 @@ void SelectRangeView::onSelectButtonClicked()
     mStartEdit->rememberCurrentAddress();
     mEndEdit->rememberCurrentAddress();
 
-    KConfigGroup configGroup(KSharedConfig::openConfig(), SelectRangeConfigGroupId);
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     configGroup.writeEntry(StartOffsetCodingConfigKey,
                            static_cast<Okteta::AddressComboBox::Coding>(mStartEdit->format()));
     configGroup.writeEntry(EndOffsetCodingConfigKey,

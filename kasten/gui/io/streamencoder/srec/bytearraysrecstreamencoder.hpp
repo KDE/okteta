@@ -15,6 +15,8 @@
 #include <Okteta/OktetaCore>
 // Qt
 #include <QString>
+// Std
+#include <array>
 
 class KConfigGroup;
 
@@ -32,6 +34,14 @@ public:
         TwoBytes = 2,
         _Count,
     };
+
+    static constexpr int AddressSizeCount = static_cast<int>(AddressSizeId::_Count);
+    static const std::array<QString, AddressSizeCount> addressSizeConfigValueList;
+
+private:
+    static constexpr AddressSizeId DefaultAddressSize = AddressSizeId::FourBytes;
+
+    static constexpr char AddressSizeConfigKey[] = "AddressSize";
 
 public:
     SRecStreamEncoderSettings();
@@ -75,6 +85,8 @@ private:
     static constexpr int addressLineOffset = byteCountLineOffset + byteCountLineSize;
 
     static const char hexDigits[16];
+
+    static constexpr char ConfigGroupId[] = "ByteArraySRecordStreamEncoder";
 
 private:
     static RecordType dataSequenceRecordType(SRecStreamEncoderSettings::AddressSizeId id);

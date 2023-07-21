@@ -34,6 +34,18 @@ public:
         _Count,
     };
 
+private:
+    static const QString DefaultVariableName;
+
+    static constexpr PrimitiveDataType DefaultDataType = PrimitiveDataType::UnsignedChar;
+    static constexpr int DefaultElementsPerLine = 4;
+    static constexpr bool DefaultUnsignedAsHexadecimal = true;
+
+    static constexpr char VariableNameConfigKey[] = "VariableName";
+    static constexpr char DataTypeConfigKey[] = "DataType";
+    static constexpr char ElementsPerLineConfigKey[] = "ElementsPerLine";
+    static constexpr char UnsignedAsHexadecimalConfigKey[] = "UnsignedAsHexadecimal";
+
 public:
     SourceCodeStreamEncoderSettings();
     SourceCodeStreamEncoderSettings(const SourceCodeStreamEncoderSettings&) = default;
@@ -60,6 +72,9 @@ public:
 class ByteArraySourceCodeStreamEncoder : public AbstractByteArrayStreamEncoder
 {
     Q_OBJECT
+
+private:
+    static constexpr char ConfigGroupId[] = "ByteArraySourceCodeStreamEncoder";
 
 public:
     ByteArraySourceCodeStreamEncoder();

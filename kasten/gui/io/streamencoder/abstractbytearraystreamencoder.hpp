@@ -29,6 +29,9 @@ class OKTETAKASTENGUI_EXPORT AbstractByteArrayStreamEncoder : public AbstractMod
 {
     Q_OBJECT
 
+private:
+    static constexpr int MaxPreviewSize = 100;
+
 public:
     AbstractByteArrayStreamEncoder(const QString& remoteTypeName, const QString& remoteMimeType);
     ~AbstractByteArrayStreamEncoder() override;

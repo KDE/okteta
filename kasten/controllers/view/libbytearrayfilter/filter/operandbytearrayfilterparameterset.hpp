@@ -32,6 +32,16 @@ public:
         _CodingCount
     };
 
+private:
+    static constexpr OperandByteArrayFilterParameterSet::Coding DefaultOperandFormat = OperandByteArrayFilterParameterSet::HexadecimalCoding;
+    static constexpr bool DefaultAlignAtEnd = false;
+
+    static const QByteArray DefaultOperand;
+
+    static constexpr char OperandConfigKey[] = "Operand";
+    static constexpr char ByteOrderConfigKey[] = "OperandFormat";
+    static constexpr char AlignAtEndConfigKey[] = "AlignAtEnd";
+
 public:
     OperandByteArrayFilterParameterSet();
     ~OperandByteArrayFilterParameterSet() override;

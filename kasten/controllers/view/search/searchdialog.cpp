@@ -19,19 +19,21 @@
 #include <KLocalizedString>
 
 
-static constexpr bool DefaultFromCursor = false;
-static constexpr Kasten::FindDirection DefaultDirection = Kasten::FindForward;
-static constexpr bool DefaultInSelection = false;
-static constexpr Okteta::ByteArrayComboBox::Coding DefaultSearchDataCoding = Okteta::ByteArrayComboBox::HexadecimalCoding;
-
-static constexpr char SearchConfigGroupId[] = "SearchTool";
-
-static constexpr char FromCursorConfigKey[] = "FromCursor";
-static constexpr char DirectionConfigKey[] = "Direction";
-static constexpr char InSelectionConfigKey[] = "InSelection";
-static constexpr char SearchDataCodingConfigKey[] = "SearchDataCoding";
-
 namespace Kasten {
+
+// C++11 needs a definition for static constexpr members
+constexpr char SearchDialog::ConfigGroupId[];
+
+constexpr char SearchDialog::FromCursorConfigKey[];
+constexpr char SearchDialog::DirectionConfigKey[];
+constexpr char SearchDialog::InSelectionConfigKey[];
+constexpr char SearchDialog::SearchDataCodingConfigKey[];
+
+constexpr bool SearchDialog::DefaultFromCursor;
+constexpr Kasten::FindDirection SearchDialog::DefaultDirection;
+constexpr bool SearchDialog::DefaultInSelection;
+constexpr Okteta::ByteArrayComboBox::Coding SearchDialog::DefaultSearchDataCoding;
+
 
 SearchDialog::SearchDialog(SearchTool* tool, QWidget* parent)
     : AbstractFindDialog(parent)
@@ -57,7 +59,7 @@ SearchDialog::SearchDialog(SearchTool* tool, QWidget* parent)
     //
     setCaseSensitivity(mTool->caseSensitivity());
 
-    const KConfigGroup configGroup(KSharedConfig::openConfig(), SearchConfigGroupId);
+    const KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
 
     const Okteta::ByteArrayComboBox::Coding searchDataCoding = configGroup.readEntry(SearchDataCodingConfigKey, DefaultSearchDataCoding);
     setSearchDataCoding(searchDataCoding);
@@ -104,7 +106,7 @@ void SearchDialog::rememberCurrentSettings()
 {
     AbstractFindDialog::rememberCurrentSettings();
 
-    KConfigGroup configGroup(KSharedConfig::openConfig(), SearchConfigGroupId);
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     configGroup.writeEntry(SearchDataCodingConfigKey, searchDataCoding());
     configGroup.writeEntry(DirectionConfigKey, direction());
     configGroup.writeEntry(FromCursorConfigKey, fromCursor());

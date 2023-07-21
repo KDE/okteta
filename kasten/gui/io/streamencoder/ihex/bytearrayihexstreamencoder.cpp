@@ -21,13 +21,11 @@
 // Qt
 #include <QTextStream>
 // Std
-#include <array>
 #include <algorithm>
 #include <iterator>
 
-static constexpr int addressSizeCount =
-    static_cast<int>(Kasten::IHexStreamEncoderSettings::AddressSizeId::_Count);
-static const std::array<QString, addressSizeCount> addressSizeConfigValueList = {
+const std::array<QString, Kasten::IHexStreamEncoderSettings::AddressSizeCount>
+Kasten::IHexStreamEncoderSettings::addressSizeConfigValueList = {
     QStringLiteral("32"),
     QStringLiteral("16"),
     QStringLiteral("8"),
@@ -39,12 +37,14 @@ inline Kasten::IHexStreamEncoderSettings::AddressSizeId KConfigGroup::readEntry(
 {
     const QString entry = readEntry(key, QString());
 
-    auto it = std::find(addressSizeConfigValueList.cbegin(), addressSizeConfigValueList.cend(), entry);
-    if (it == addressSizeConfigValueList.cend()) {
+    auto it = std::find(Kasten::IHexStreamEncoderSettings::addressSizeConfigValueList.cbegin(),
+                        Kasten::IHexStreamEncoderSettings::addressSizeConfigValueList.cend(),
+                        entry);
+    if (it == Kasten::IHexStreamEncoderSettings::addressSizeConfigValueList.cend()) {
         return defaultValue;
     }
 
-    const int listIndex = std::distance(addressSizeConfigValueList.cbegin(), it);
+    const int listIndex = std::distance(Kasten::IHexStreamEncoderSettings::addressSizeConfigValueList.cbegin(), it);
     return static_cast<Kasten::IHexStreamEncoderSettings::AddressSizeId>(listIndex);
 }
 
@@ -54,16 +54,16 @@ inline void KConfigGroup::writeEntry(const char *key,
                                      KConfigBase::WriteConfigFlags flags)
 {
     const int listIndex = static_cast<int>(value);
-    writeEntry(key, addressSizeConfigValueList[listIndex], flags);
+    writeEntry(key, Kasten::IHexStreamEncoderSettings::addressSizeConfigValueList[listIndex], flags);
 }
 
 namespace Kasten {
 
-static constexpr IHexStreamEncoderSettings::AddressSizeId DefaultAddressSize =
-    IHexStreamEncoderSettings::AddressSizeId::Bits32;
+// C++11 needs a definition for static constexpr members
+constexpr char ByteArrayIHexStreamEncoder::ConfigGroupId[];
+constexpr char IHexStreamEncoderSettings::AddressSizeConfigKey[];
 
-static constexpr char ByteArrayIHexStreamEncoderConfigGroupId[] = "ByteArrayIntelHexStreamEncoder";
-static constexpr char AddressSizeConfigKey[] = "AddressSize";
+constexpr IHexStreamEncoderSettings::AddressSizeId IHexStreamEncoderSettings::DefaultAddressSize;
 
 const char ByteArrayIHexStreamEncoder::hexDigits[16] = {
     '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'
@@ -156,7 +156,7 @@ void ByteArrayIHexStreamEncoder::streamEndOfFile(QTextStream& textStream,
 ByteArrayIHexStreamEncoder::ByteArrayIHexStreamEncoder()
     : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "Intel Hex"), QStringLiteral("text/x-ihex"))
 {
-    const KConfigGroup configGroup(KSharedConfig::openConfig(), ByteArrayIHexStreamEncoderConfigGroupId);
+    const KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     mSettings.loadConfig(configGroup);
 }
 
@@ -169,7 +169,7 @@ void ByteArrayIHexStreamEncoder::setSettings(const IHexStreamEncoderSettings& se
     }
 
     mSettings = settings;
-    KConfigGroup configGroup(KSharedConfig::openConfig(), ByteArrayIHexStreamEncoderConfigGroupId);
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     mSettings.saveConfig(configGroup);
     emit settingsChanged();
 }

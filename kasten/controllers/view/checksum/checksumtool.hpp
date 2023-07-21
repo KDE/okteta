@@ -36,6 +36,10 @@ class ChecksumTool : public AbstractTool
 {
     Q_OBJECT
 
+private:
+    static constexpr char ConfigGroupId[] = "ChecksumTool";
+    static constexpr char AlgorithmConfigKey[] = "Algorithm";
+
 public:
     ChecksumTool();
     ~ChecksumTool() override;

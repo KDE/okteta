@@ -61,17 +61,19 @@ inline void KConfigGroup::writeEntry(const char *key,
 
 namespace Kasten {
 
-static const QString DefaultVariableName = QStringLiteral("array");
-static constexpr SourceCodeStreamEncoderSettings::PrimitiveDataType DefaultDataType =
-    SourceCodeStreamEncoderSettings::PrimitiveDataType::UnsignedChar;
-static constexpr int DefaultElementsPerLine = 4;
-static constexpr bool DefaultUnsignedAsHexadecimal = true;
+// C++11 needs a definition for static constexpr members
+constexpr char ByteArraySourceCodeStreamEncoder::ConfigGroupId[];
 
-static constexpr char ByteArraySourceCodeStreamEncoderConfigGroupId[] = "ByteArraySourceCodeStreamEncoder";
-static constexpr char VariableNameConfigKey[] = "VariableName";
-static constexpr char DataTypeConfigKey[] = "DataType";
-static constexpr char ElementsPerLineConfigKey[] = "ElementsPerLine";
-static constexpr char UnsignedAsHexadecimalConfigKey[] = "UnsignedAsHexadecimal";
+constexpr char SourceCodeStreamEncoderSettings::VariableNameConfigKey[];
+constexpr char SourceCodeStreamEncoderSettings::DataTypeConfigKey[];
+constexpr char SourceCodeStreamEncoderSettings::ElementsPerLineConfigKey[];
+constexpr char SourceCodeStreamEncoderSettings::UnsignedAsHexadecimalConfigKey[];
+
+constexpr SourceCodeStreamEncoderSettings::PrimitiveDataType SourceCodeStreamEncoderSettings::DefaultDataType;
+constexpr int SourceCodeStreamEncoderSettings::DefaultElementsPerLine;
+constexpr bool SourceCodeStreamEncoderSettings::DefaultUnsignedAsHexadecimal;
+
+const QString SourceCodeStreamEncoderSettings::DefaultVariableName = QStringLiteral("array");
 
 static constexpr  const char* PrimitiveDataTypeName[] = {
     "char",
@@ -138,7 +140,7 @@ void SourceCodeStreamEncoderSettings::saveConfig(KConfigGroup& configGroup) cons
 ByteArraySourceCodeStreamEncoder::ByteArraySourceCodeStreamEncoder()
     : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "C Array"), QStringLiteral("text/x-csrc"))
 {
-    const KConfigGroup configGroup(KSharedConfig::openConfig(), ByteArraySourceCodeStreamEncoderConfigGroupId);
+    const KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     mSettings.loadConfig(configGroup);
 }
 
@@ -154,7 +156,7 @@ void ByteArraySourceCodeStreamEncoder::setSettings(const SourceCodeStreamEncoder
     }
 
     mSettings = settings;
-    KConfigGroup configGroup(KSharedConfig::openConfig(), ByteArraySourceCodeStreamEncoderConfigGroupId);
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     mSettings.saveConfig(configGroup);
     emit settingsChanged();
 }

@@ -30,6 +30,15 @@ class ReplaceTool : public AbstractTool
 {
     Q_OBJECT
 
+private:
+    static constexpr char ConfigGroupId[] = "ReplaceTool";
+
+    static constexpr char CaseSensitivityConfigKey[] = "CaseSensitivity";
+    static constexpr char PromptConfigKey[] = "Prompt";
+
+    static constexpr Qt::CaseSensitivity DefaultCaseSensitivity = Qt::CaseInsensitive;
+    static constexpr bool DefaultDoPrompt = false;
+
 public:
     ReplaceTool();
     ~ReplaceTool() override;

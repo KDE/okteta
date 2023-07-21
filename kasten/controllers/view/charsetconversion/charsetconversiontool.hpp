@@ -37,6 +37,17 @@ public:
         ConvertTo
     };
 
+private:
+    static constexpr char ConfigGroupId[] = "CharsetConversionTool";
+    static constexpr char OtherCharCodecNameConfigKey[] = "OtherCharCodecName";
+    static constexpr char ConversionDirectionConfigKey[] = "ConversionDirection";
+    static constexpr char SubstituteMissingCharsConfigKey[] = "SubstituteMissingChars";
+    static constexpr char SubstituteByteConfigKey[] = "SubstituteByte";
+
+    static constexpr bool DefaultSubstituteMissingChars = false;
+    static constexpr Okteta::Byte DefaultSubstituteByte = 0;
+    static constexpr ConversionDirection DefaultConversionDirection = ConvertFrom;
+
 public:
     CharsetConversionTool();
     ~CharsetConversionTool() override;

@@ -13,8 +13,6 @@
 // libconfigentries
 #include <bytearraycomboboxcodingconfigentry.hpp>
 #include <finddirectionconfigentry.hpp>
-// Okteta Kasten gui
-#include <Kasten/Okteta/ByteArrayComboBox>
 // KF
 #include <KConfigGroup>
 #include <KSharedConfig>
@@ -25,21 +23,24 @@
 #include <QLayout>
 #include <QPushButton>
 
-static constexpr bool DefaultFromCursor = false;
-static constexpr Kasten::FindDirection DefaultDirection = Kasten::FindForward;
-static constexpr bool DefaultInSelection = false;
-static constexpr Okteta::ByteArrayComboBox::Coding DefaultReplaceDataCoding = Okteta::ByteArrayComboBox::HexadecimalCoding;
-static constexpr Okteta::ByteArrayComboBox::Coding DefaultSearchDataCoding = Okteta::ByteArrayComboBox::HexadecimalCoding;
-
-static constexpr char ReplaceConfigGroupId[] = "ReplaceTool";
-
-static constexpr char FromCursorConfigKey[] = "FromCursor";
-static constexpr char DirectionConfigKey[] = "Direction";
-static constexpr char InSelectionConfigKey[] = "InSelection";
-static constexpr char ReplaceDataCodingConfigKey[] = "ReplaceDataCoding";
-static constexpr char SearchDataCodingConfigKey[] = "SearchDataCoding";
 
 namespace Kasten {
+
+// C++11 needs a definition for static constexpr members
+constexpr char ReplaceDialog::ConfigGroupId[];
+
+constexpr char ReplaceDialog::FromCursorConfigKey[];
+constexpr char ReplaceDialog::DirectionConfigKey[];
+constexpr char ReplaceDialog::InSelectionConfigKey[];
+constexpr char ReplaceDialog::ReplaceDataCodingConfigKey[];
+constexpr char ReplaceDialog::SearchDataCodingConfigKey[];
+
+constexpr bool ReplaceDialog::DefaultFromCursor;
+constexpr Kasten::FindDirection ReplaceDialog::DefaultDirection;
+constexpr bool ReplaceDialog::DefaultInSelection;
+constexpr Okteta::ByteArrayComboBox::Coding ReplaceDialog::DefaultReplaceDataCoding;
+constexpr Okteta::ByteArrayComboBox::Coding ReplaceDialog::DefaultSearchDataCoding;
+
 
 ReplaceDialog::ReplaceDialog(ReplaceTool* tool, QWidget* parent)
     : AbstractFindDialog(parent)
@@ -87,7 +88,7 @@ ReplaceDialog::ReplaceDialog(ReplaceTool* tool, QWidget* parent)
     setCaseSensitivity(mTool->caseSensitivity());
     PromptCheckBox->setChecked(mTool->isDoPrompt());
 
-    const KConfigGroup configGroup(KSharedConfig::openConfig(), ReplaceConfigGroupId);
+    const KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
 
     const Okteta::ByteArrayComboBox::Coding searchDataCoding = configGroup.readEntry(SearchDataCodingConfigKey, DefaultSearchDataCoding);
     setSearchDataCoding(searchDataCoding);
@@ -164,7 +165,7 @@ void ReplaceDialog::rememberCurrentSettings()
 
     ReplaceDataEdit->rememberCurrentByteArray();
 
-    KConfigGroup configGroup(KSharedConfig::openConfig(), ReplaceConfigGroupId);
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     configGroup.writeEntry(SearchDataCodingConfigKey, searchDataCoding());
     configGroup.writeEntry(ReplaceDataCodingConfigKey, replaceDataCoding());
     configGroup.writeEntry(DirectionConfigKey, direction());

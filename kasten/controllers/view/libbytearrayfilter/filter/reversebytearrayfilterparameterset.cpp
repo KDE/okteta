@@ -11,9 +11,12 @@
 // KF
 #include <KConfigGroup>
 
-static constexpr bool DefaultInvertsBits = false;
 
-static constexpr char InvertsBitsConfigKey[] = "InvertsBits";
+// C++11 needs a definition for static constexpr members
+constexpr bool ReverseByteArrayFilterParameterSet::DefaultInvertsBits;
+
+constexpr char ReverseByteArrayFilterParameterSet::InvertsBitsConfigKey[];
+
 
 ReverseByteArrayFilterParameterSet::ReverseByteArrayFilterParameterSet() = default;
 

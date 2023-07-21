@@ -9,12 +9,10 @@
 #ifndef KASTEN_GOTOOFFSETVIEW_HPP
 #define KASTEN_GOTOOFFSETVIEW_HPP
 
+// Okteta Kasten gui
+#include <Kasten/Okteta/AddressComboBox>
 // Kasten gui
 #include <Kasten/AbstractToolWidget>
-
-namespace Okteta {
-class AddressComboBox;
-}
 
 class QPushButton;
 
@@ -27,6 +25,26 @@ class GotoOffsetTool;
 class GotoOffsetView : public AbstractToolWidget
 {
     Q_OBJECT
+
+public:
+    enum GotoDirection
+    {
+        GotoForward = 0,
+        GotoBackward = 1,
+    };
+
+private:
+    static constexpr char ConfigGroupId[] = "GotoOffsetTool";
+
+    static constexpr char OffsetCodingConfigKey[] = "OffsetCoding";
+    static constexpr char FromCursorConfigKey[] = "FromCursor";
+    static constexpr char ExtendSelectionConfigKey[] = "ExtendSelection";
+    static constexpr char DirectionConfigKey[] = "Direction";
+
+    static constexpr bool DefaultFromCursor = false;
+    static constexpr bool DefaultExtendSelection = false;
+    static constexpr GotoDirection DefaultDirection = GotoForward;
+    static constexpr Okteta::AddressComboBox::Coding DefaultOffsetCoding = Okteta::AddressComboBox::HexadecimalCoding;
 
 public:
     explicit GotoOffsetView(GotoOffsetTool* tool, QWidget* parent = nullptr);

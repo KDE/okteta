@@ -56,11 +56,11 @@ inline void KConfigGroup::writeEntry(const char *key,
 
 namespace Kasten {
 
-static constexpr Base32StreamEncoderSettings::EncodingType DefaultEncodingType =
-    Base32StreamEncoderSettings::EncodingType::Classic;
+// C++11 needs a definition for static constexpr members
+constexpr char ByteArrayBase32StreamEncoder::ConfigGroupId[];
+constexpr char Base32StreamEncoderSettings::EncodingTypeConfigKey[];
 
-static constexpr char ByteArrayBase32StreamEncoderConfigGroupId[] = "ByteArrayBase32StreamEncoder";
-static constexpr char EncodingTypeConfigKey[] = "EncodingType";
+constexpr Base32StreamEncoderSettings::EncodingType Base32StreamEncoderSettings::DefaultEncodingType;
 
 static constexpr char base32ClassicEncodeMap[32] =
 {
@@ -136,7 +136,7 @@ void Base32StreamEncoderSettings::saveConfig(KConfigGroup& configGroup) const
 ByteArrayBase32StreamEncoder::ByteArrayBase32StreamEncoder()
     : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "Base32"), QStringLiteral("text/x-base32"))
 {
-    const KConfigGroup configGroup(KSharedConfig::openConfig(), ByteArrayBase32StreamEncoderConfigGroupId);
+    const KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     mSettings.loadConfig(configGroup);
 }
 
@@ -150,7 +150,7 @@ void ByteArrayBase32StreamEncoder::setSettings(const Base32StreamEncoderSettings
     }
 
     mSettings = settings;
-    KConfigGroup configGroup(KSharedConfig::openConfig(), ByteArrayBase32StreamEncoderConfigGroupId);
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     mSettings.saveConfig(configGroup);
     emit settingsChanged();
 }

@@ -14,8 +14,8 @@
 #include <iterator>
 
 // Matching Okteta::AddressComboBox::Coding
-static constexpr int codingCount = 3;
-static const std::array<QString, codingCount> codingConfigValueList = {
+static constexpr int AddressCcodingCount = 3;
+static const std::array<QString, AddressCcodingCount> addressCodingConfigValueList = {
     QStringLiteral("Hexadecimal"),
     QStringLiteral("Decimal"),
     QStringLiteral("Expression"),
@@ -28,12 +28,12 @@ KConfigGroup::readEntry(const char *key,
 {
     const QString entry = readEntry(key, QString());
 
-    auto it = std::find(codingConfigValueList.cbegin(), codingConfigValueList.cend(), entry);
-    if (it == codingConfigValueList.cend()) {
+    auto it = std::find(addressCodingConfigValueList.cbegin(), addressCodingConfigValueList.cend(), entry);
+    if (it == addressCodingConfigValueList.cend()) {
         return defaultValue;
     }
 
-    const int listIndex = std::distance(codingConfigValueList.cbegin(), it);
+    const int listIndex = std::distance(addressCodingConfigValueList.cbegin(), it);
     return static_cast<Okteta::AddressComboBox::Coding>(listIndex);
 }
 
@@ -47,7 +47,7 @@ void KConfigGroup::writeEntry(const char *key,
         configValue = QStringLiteral("Invalid");
     } else {
         const int listIndex = static_cast<int>(value);
-        configValue = codingConfigValueList[listIndex];
+        configValue = addressCodingConfigValueList[listIndex];
     }
     writeEntry(key, configValue, flags);
 }

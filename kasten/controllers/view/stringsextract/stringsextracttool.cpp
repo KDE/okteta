@@ -27,10 +27,12 @@
 
 namespace Kasten {
 
-static constexpr int DefaultMinLength = 3;
+// C++11 needs a definition for static constexpr members
+constexpr char StringsExtractTool::ConfigGroupId[];
+constexpr char StringsExtractTool::MinimumLengthConfigKey[];
 
-static constexpr char StringsExtractConfigGroupId[] = "StringsExtractTool";
-static constexpr char MinimumLengthConfigKey[] = "MinimumLength";
+constexpr int StringsExtractTool::DefaultMinLength;
+
 
 StringsExtractTool::StringsExtractTool()
     : mExtractedStringsUptodate(false)
@@ -38,7 +40,7 @@ StringsExtractTool::StringsExtractTool()
 {
     setObjectName(QStringLiteral("Strings"));
 
-    const KConfigGroup configGroup(KSharedConfig::openConfig(), StringsExtractConfigGroupId);
+    const KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
 
     mMinLength = configGroup.readEntry(MinimumLengthConfigKey, DefaultMinLength);
 }
@@ -112,7 +114,7 @@ void StringsExtractTool::setMinLength(int minLength)
 
     mMinLength = minLength;
 
-    KConfigGroup configGroup(KSharedConfig::openConfig(), StringsExtractConfigGroupId);
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     configGroup.writeEntry(MinimumLengthConfigKey, mMinLength);
 
     checkUptoDate();

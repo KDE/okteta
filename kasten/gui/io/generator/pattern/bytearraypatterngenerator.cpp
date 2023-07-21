@@ -66,14 +66,17 @@ inline void KConfigGroup::writeEntry(const char *key,
 
 namespace Kasten {
 
-static const QByteArray DefaultPattern = QByteArray(1, 0);
-static constexpr ByteArrayPatternGeneratorSettings::Coding DefaultPatternCoding = ByteArrayPatternGeneratorSettings::HexadecimalCoding;
-static constexpr int DefaultCount = 1;
+// C++11 needs a definition for static constexpr members
+constexpr char ByteArrayPatternGenerator::ConfigGroupId[];
+constexpr char ByteArrayPatternGeneratorSettings::PatternConfigKey[];
+constexpr char ByteArrayPatternGeneratorSettings::PatternCodingConfigKey[];
+constexpr char ByteArrayPatternGeneratorSettings::CountConfigKey[];
 
-static constexpr char ByteArrayPatternGeneratorConfigGroupId[] = "ByteArrayPatternGenerator";
-static constexpr char PatternConfigKey[] = "Pattern";
-static constexpr char PatternCodingConfigKey[] = "PatternCoding";
-static constexpr char CountConfigKey[] = "Count";
+constexpr ByteArrayPatternGeneratorSettings::Coding ByteArrayPatternGeneratorSettings::DefaultPatternCoding;
+constexpr int ByteArrayPatternGeneratorSettings::DefaultCount;
+
+const QByteArray ByteArrayPatternGeneratorSettings::DefaultPattern = QByteArray(1, 0);
+
 
 ByteArrayPatternGeneratorSettings::ByteArrayPatternGeneratorSettings() = default;
 
@@ -106,7 +109,7 @@ ByteArrayPatternGenerator::ByteArrayPatternGenerator()
         QStringLiteral("application/octet-stream"),
         DynamicGeneration)
 {
-    const KConfigGroup configGroup(KSharedConfig::openConfig(), ByteArrayPatternGeneratorConfigGroupId);
+    const KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
 
     mSettings.loadConfig(configGroup);
 }
@@ -121,7 +124,7 @@ void ByteArrayPatternGenerator::setSettings(const ByteArrayPatternGeneratorSetti
 
     mSettings = settings;
 
-    KConfigGroup configGroup(KSharedConfig::openConfig(), ByteArrayPatternGeneratorConfigGroupId);
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     mSettings.saveConfig(configGroup);
 //     emit settingsChanged();
 }

@@ -40,6 +40,14 @@ public:
     // ensure strict alignment for double as needed on some architectures (e.g. PA-RISC)
     using Aligned64Bit = union { unsigned char Data[MaxPODSize]; double Dummy; };
 
+private:
+    static constexpr char ConfigGroupId[] = "PODDecoderTool";
+    static constexpr char ByteOrderConfigKey[] = "ByteOrder";
+    static constexpr char UnsignedAsHexConfigKey[] = "UnsignedAsHexadecimal";
+
+    static constexpr QSysInfo::Endian DefaultByteOrder = QSysInfo::ByteOrder;
+    static constexpr bool DefaultUnsignedAsHex = true;
+
 public:
     PODDecoderTool();
 

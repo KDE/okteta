@@ -15,6 +15,8 @@
 #include <Okteta/OktetaCore>
 // Qt
 #include <QString>
+// Std
+#include <array>
 
 class KConfigGroup;
 
@@ -32,6 +34,14 @@ public:
         Bits8 = 2,
         _Count,
     };
+
+    static constexpr int AddressSizeCount = static_cast<int>(AddressSizeId::_Count);
+    static const std::array<QString, AddressSizeCount> addressSizeConfigValueList;
+
+private:
+    static constexpr char AddressSizeConfigKey[] = "AddressSize";
+
+    static constexpr AddressSizeId DefaultAddressSize = AddressSizeId::Bits32;
 
 public:
     IHexStreamEncoderSettings();
@@ -56,6 +66,8 @@ class ByteArrayIHexStreamEncoder : public AbstractByteArrayStreamEncoder
     Q_OBJECT
 
 private:
+    static constexpr char ConfigGroupId[] = "ByteArrayIntelHexStreamEncoder";
+
     static constexpr unsigned char dataRecordCode = 0x0;
     static constexpr unsigned char endOfFileRecordCode = 0x1;
     static constexpr unsigned char extendedSegmentAddressRecordCode = 0x2;

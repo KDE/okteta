@@ -27,10 +27,12 @@
 
 namespace Kasten {
 
-static constexpr int DefaultSize = 256;
+// C++11 needs a definition for static constexpr members
+constexpr char ByteArrayRandomDataGenerator::ConfigGroupId[];
+constexpr char ByteArrayRandomDataGeneratorSettings::SizeConfigKey[];
 
-static constexpr char ByteArrayRandomDataGeneratorConfigGroupId[] = "ByteArrayRandomDataGenerator";
-static constexpr char SizeConfigKey[] = "Size";
+constexpr int ByteArrayRandomDataGeneratorSettings::DefaultSize;
+
 
 ByteArrayRandomDataGeneratorSettings::ByteArrayRandomDataGeneratorSettings() = default;
 
@@ -59,7 +61,7 @@ ByteArrayRandomDataGenerator::ByteArrayRandomDataGenerator()
         QStringLiteral("application/octet-stream"),
         DynamicGeneration)
 {
-    const KConfigGroup configGroup(KSharedConfig::openConfig(), ByteArrayRandomDataGeneratorConfigGroupId);
+    const KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
 
     mSettings.loadConfig(configGroup);
 }
@@ -74,7 +76,7 @@ void ByteArrayRandomDataGenerator::setSettings(const ByteArrayRandomDataGenerato
 
     mSettings = settings;
 
-    KConfigGroup configGroup(KSharedConfig::openConfig(), ByteArrayRandomDataGeneratorConfigGroupId);
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     mSettings.saveConfig(configGroup);
 //     emit settingsChanged();
 }

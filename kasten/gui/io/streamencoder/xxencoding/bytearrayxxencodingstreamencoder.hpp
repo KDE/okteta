@@ -22,6 +22,11 @@ namespace Kasten {
 
 class XxencodingStreamEncoderSettings
 {
+private:
+    static const QString DefaultFileName;
+
+    static constexpr char FileNameConfigKey[] = "FileName";
+
 public:
     XxencodingStreamEncoderSettings();
     XxencodingStreamEncoderSettings(const XxencodingStreamEncoderSettings&) = default;
@@ -51,6 +56,13 @@ public:
         Second,
         Third
     };
+private:
+    static constexpr int defaultxxInputLineLength = 45;
+    static constexpr int xxInputLineLength = defaultxxInputLineLength;
+    static constexpr int xxInputGroupLength = 3;
+    static constexpr int maxXxInputGroupsPerLine = xxInputLineLength / xxInputGroupLength;
+
+    static constexpr char ConfigGroupId[] = "ByteArrayXxencodingStreamEncoder";
 
 public:
     ByteArrayXxencodingStreamEncoder();

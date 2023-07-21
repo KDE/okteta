@@ -11,11 +11,14 @@
 // KF
 #include <KConfigGroup>
 
-static constexpr int DefaultGroupSize = 1;
-static constexpr int DefaultMoveBitWidth = 0;
 
-static constexpr char GroupSizeConfigKey[] = "GroupSize";
-static constexpr char MoveBitWidthConfigKey[] = "MoveBitWidth";
+// C++11 needs a definition for static constexpr members
+constexpr char RotateByteArrayFilterParameterSet::GroupSizeConfigKey[];
+constexpr char RotateByteArrayFilterParameterSet::MoveBitWidthConfigKey[];
+
+constexpr int RotateByteArrayFilterParameterSet::DefaultGroupSize;
+constexpr int RotateByteArrayFilterParameterSet::DefaultMoveBitWidth;
+
 
 RotateByteArrayFilterParameterSet::RotateByteArrayFilterParameterSet() = default;
 

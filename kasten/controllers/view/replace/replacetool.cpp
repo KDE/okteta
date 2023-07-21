@@ -26,21 +26,23 @@
 #include <KLocalizedString>
 
 
-static constexpr Qt::CaseSensitivity DefaultCaseSensitivity = Qt::CaseInsensitive;
-static constexpr bool DefaultDoPrompt = false;
-
-static constexpr char ReplaceConfigGroupId[] = "ReplaceTool";
-
-static constexpr char CaseSensitivityConfigKey[] = "CaseSensitivity";
-static constexpr char PromptConfigKey[] = "Prompt";
-
 namespace Kasten {
+
+// C++11 needs a definition for static constexpr members
+constexpr char ReplaceTool::ConfigGroupId[];
+
+constexpr char ReplaceTool::CaseSensitivityConfigKey[];
+constexpr char ReplaceTool::PromptConfigKey[];
+
+constexpr Qt::CaseSensitivity ReplaceTool::DefaultCaseSensitivity;
+constexpr bool ReplaceTool::DefaultDoPrompt;
+
 
 ReplaceTool::ReplaceTool()
 {
     setObjectName(QStringLiteral("Replace"));
 
-    const KConfigGroup configGroup(KSharedConfig::openConfig(), ReplaceConfigGroupId);
+    const KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     mCaseSensitivity = configGroup.readEntry(CaseSensitivityConfigKey, DefaultCaseSensitivity);
     mDoPrompt = configGroup.readEntry(PromptConfigKey, DefaultDoPrompt);
 }
@@ -126,7 +128,7 @@ void ReplaceTool::setCaseSensitivity(Qt::CaseSensitivity caseSensitivity)
 
     mCaseSensitivity = caseSensitivity;
 
-    KConfigGroup configGroup(KSharedConfig::openConfig(), ReplaceConfigGroupId);
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     configGroup.writeEntry(CaseSensitivityConfigKey, mCaseSensitivity);
 
 //     const bool newIsApplyable = isApplyable();
@@ -142,7 +144,7 @@ void ReplaceTool::setDoPrompt(bool doPrompt)
 
     mDoPrompt = doPrompt;
 
-    KConfigGroup configGroup(KSharedConfig::openConfig(), ReplaceConfigGroupId);
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     configGroup.writeEntry(PromptConfigKey, mDoPrompt);
 }
 

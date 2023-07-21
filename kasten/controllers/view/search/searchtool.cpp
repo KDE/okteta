@@ -30,19 +30,20 @@
 #include <QApplication>
 
 
-static constexpr Qt::CaseSensitivity DefaultCaseSensitivity = Qt::CaseInsensitive;
-
-static constexpr char SearchConfigGroupId[] = "SearchTool";
-
-static constexpr char CaseSensitivityConfigKey[] = "CaseSensitivity";
-
 namespace Kasten {
+
+// C++11 needs a definition for static constexpr members
+constexpr char SearchTool::ConfigGroupId[];
+constexpr char SearchTool::CaseSensitivityConfigKey[];
+
+constexpr Qt::CaseSensitivity SearchTool::DefaultCaseSensitivity;
+
 
 SearchTool::SearchTool()
 {
     setObjectName(QStringLiteral("Search"));
 
-    const KConfigGroup configGroup(KSharedConfig::openConfig(), SearchConfigGroupId);
+    const KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     mCaseSensitivity = configGroup.readEntry(CaseSensitivityConfigKey, DefaultCaseSensitivity);
 }
 
@@ -117,7 +118,7 @@ void SearchTool::setCaseSensitivity(Qt::CaseSensitivity caseSensitivity)
 
     mCaseSensitivity = caseSensitivity;
 
-    KConfigGroup configGroup(KSharedConfig::openConfig(), SearchConfigGroupId);
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     configGroup.writeEntry(CaseSensitivityConfigKey, mCaseSensitivity);
 
 //     const bool newIsApplyable = isApplyable();

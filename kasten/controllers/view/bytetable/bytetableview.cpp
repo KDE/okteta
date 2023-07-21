@@ -33,11 +33,13 @@
 
 namespace Kasten {
 
+// C++11 needs a definition for static constexpr members
 // TODO: move config store/restore to tool
-static constexpr int DefaultInsertCount = 1;
+constexpr int ByteTableView::DefaultInsertCount;
 
-static constexpr char ByteTableConfigGroupId[] = "ByteTableTool";
-static constexpr char InsertCountConfigKey[] = "InsertCount";
+constexpr char ByteTableView::ConfigGroupId[];
+constexpr char ByteTableView::InsertCountConfigKey[];
+
 
 ByteTableView::ByteTableView(ByteTableTool* tool, QWidget* parent)
     : AbstractToolWidget(parent)
@@ -125,7 +127,7 @@ ByteTableView::ByteTableView(ByteTableTool* tool, QWidget* parent)
         }
     }
 
-    const KConfigGroup configGroup(KSharedConfig::openConfig(), ByteTableConfigGroupId);
+    const KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     const int insertCount = configGroup.readEntry(InsertCountConfigKey, DefaultInsertCount);
 
     mInsertCountEdit->setValue(insertCount);
@@ -167,7 +169,7 @@ void ByteTableView::resizeColumnsWidth()
 
 void ByteTableView::onInsertCountEditChanged()
 {
-    KConfigGroup configGroup(KSharedConfig::openConfig(), ByteTableConfigGroupId);
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     configGroup.writeEntry(InsertCountConfigKey, mInsertCountEdit->value());
 }
 

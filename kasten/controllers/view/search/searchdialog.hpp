@@ -11,6 +11,8 @@
 
 // lib
 #include <abstractfinddialog.hpp>
+// Okteta Kasten gui
+#include <Kasten/Okteta/ByteArrayComboBox>
 
 namespace Kasten {
 
@@ -19,6 +21,19 @@ class SearchTool;
 class SearchDialog : public AbstractFindDialog
 {
     Q_OBJECT
+
+private:
+    static constexpr char ConfigGroupId[] = "SearchTool";
+
+    static constexpr char FromCursorConfigKey[] = "FromCursor";
+    static constexpr char DirectionConfigKey[] = "Direction";
+    static constexpr char InSelectionConfigKey[] = "InSelection";
+    static constexpr char SearchDataCodingConfigKey[] = "SearchDataCoding";
+
+    static constexpr bool DefaultFromCursor = false;
+    static constexpr Kasten::FindDirection DefaultDirection = Kasten::FindForward;
+    static constexpr bool DefaultInSelection = false;
+    static constexpr Okteta::ByteArrayComboBox::Coding DefaultSearchDataCoding = Okteta::ByteArrayComboBox::HexadecimalCoding;
 
 public:
     explicit SearchDialog(SearchTool* tool, QWidget* parent = nullptr);
