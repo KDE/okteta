@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-10 02:45+0000\n"
+"POT-Creation-Date: 2023-07-22 02:42+0000\n"
 "PO-Revision-Date: 2020-08-14 20:52+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -282,20 +282,20 @@ msgid_plural "Inserted %1 Bytes"
 msgstr[0] "Lisättiin 1 tavu"
 msgstr[1] "Lisättiin %1 tavua"
 
-#: controllers/view/bytetable/bytetableview.cpp:80
+#: controllers/view/bytetable/bytetableview.cpp:82
 #, kde-format
 msgctxt "@label:spinbox number of bytes to insert"
 msgid "Number (bytes):"
 msgstr "Määrä (tavuina):"
 
-#: controllers/view/bytetable/bytetableview.cpp:88
+#: controllers/view/bytetable/bytetableview.cpp:90
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "Number of repeats of the currently selected byte in the table to be inserted."
 msgstr "Montako taulukosta valitun tavun monikertaa lisätään"
 
-#: controllers/view/bytetable/bytetableview.cpp:104
+#: controllers/view/bytetable/bytetableview.cpp:106
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -303,13 +303,13 @@ msgid ""
 "times."
 msgstr "Lisää taulukosta valittu tavu annetun määrän kertoja"
 
-#: controllers/view/charsetconversion/charsetconversiontool.cpp:118
+#: controllers/view/charsetconversion/charsetconversiontool.cpp:121
 #, kde-format
 msgctxt "@title:window of the tool to convert between charsets"
 msgid "Charset Conversion"
 msgstr "Merkistömuunnos"
 
-#: controllers/view/charsetconversion/charsetconversiontool.cpp:244
+#: controllers/view/charsetconversion/charsetconversiontool.cpp:247
 #, kde-format
 msgctxt "Converted from charset 1 to charset 2"
 msgid "%1 to %2"
@@ -478,7 +478,7 @@ msgid ""
 "Conversion cancelled because of chars which are not in the target charset."
 msgstr "Muuntaminen peruttiin, koska osaa merkeistä ei ole kohdemerkistössä."
 
-#: controllers/view/checksum/checksumtool.cpp:93
+#: controllers/view/checksum/checksumtool.cpp:96
 #: controllers/view/checksum/checksumtoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window of the tool to calculate checksums"
@@ -518,7 +518,7 @@ msgid ""
 "the set minimum length."
 msgstr "Painaessasi tästä tarkistussumma lasketaan valituille tavuille."
 
-#: controllers/view/filter/filtertool.cpp:64
+#: controllers/view/filter/filtertool.cpp:67
 #: controllers/view/filter/filtertoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
@@ -578,15 +578,15 @@ msgctxt "@title:window of the tool to set a new offset for the cursor"
 msgid "Goto"
 msgstr "Siirry"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:77
+#: controllers/view/gotooffset/gotooffsetview.cpp:71
 #, kde-format
 msgctxt "@label:listbox"
 msgid "O&ffset:"
 msgstr "P&oikkeuma:"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:87
-#: controllers/view/selectrange/selectrangeview.cpp:86
-#: controllers/view/selectrange/selectrangeview.cpp:106
+#: controllers/view/gotooffset/gotooffsetview.cpp:81
+#: controllers/view/selectrange/selectrangeview.cpp:80
+#: controllers/view/selectrange/selectrangeview.cpp:100
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Enter an offset to go to, or select a previous offset from the list."
@@ -594,14 +594,14 @@ msgstr ""
 "Anna poikkeuma, johon siirrytään, tai valitse viimeksi käytetty poikkeuma "
 "listalta."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:103
+#: controllers/view/gotooffset/gotooffsetview.cpp:97
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:112
 #, kde-format
 msgctxt "@option:check"
 msgid "From c&ursor"
 msgstr "&Kohdistimesta"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:105
+#: controllers/view/gotooffset/gotooffsetview.cpp:99
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Go relative from the current cursor location and not absolute."
@@ -609,47 +609,47 @@ msgstr ""
 "Siirry suhteellisesti lähtien kohdistimen nykyisestä sijainnista "
 "absoluuttisen alun tai lopun sijaan."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:108
+#: controllers/view/gotooffset/gotooffsetview.cpp:102
 #, kde-format
 msgctxt "@option:check"
 msgid "&Extend selection"
 msgstr "&Valitse liikuttu väli"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:110
-#: controllers/view/selectrange/selectrangeview.cpp:128
+#: controllers/view/gotooffset/gotooffsetview.cpp:104
+#: controllers/view/selectrange/selectrangeview.cpp:122
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Extend the selection by the cursor move."
 msgstr "Pidennä valintaa kohdistimen liikkuman välin perusteella."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:113
+#: controllers/view/gotooffset/gotooffsetview.cpp:107
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:115
-#: controllers/view/selectrange/selectrangeview.cpp:120
+#: controllers/view/selectrange/selectrangeview.cpp:114
 #, kde-format
 msgctxt "@option:check"
 msgid "&Backwards"
 msgstr "&Taaksepäin"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:115
-#: controllers/view/selectrange/selectrangeview.cpp:122
+#: controllers/view/gotooffset/gotooffsetview.cpp:109
+#: controllers/view/selectrange/selectrangeview.cpp:116
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Go backwards from the end or the current cursor location."
 msgstr "Mene lopusta tai kohdistimen nykyisestä sijainnista taaksepäin"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:130
+#: controllers/view/gotooffset/gotooffsetview.cpp:124
 #, kde-format
 msgctxt "@action:button"
 msgid "&Go"
 msgstr "&Siirry"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:133
+#: controllers/view/gotooffset/gotooffsetview.cpp:127
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Go to the Offset"
 msgstr "Siirry poikkeumakohtaan"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:135
+#: controllers/view/gotooffset/gotooffsetview.cpp:129
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1113,20 +1113,20 @@ msgid ""
 "data."
 msgstr "Lisätäänkö syöte tai korvataanko nykyinen data."
 
-#: controllers/view/poddecoder/poddecodertool.cpp:100
+#: controllers/view/poddecoder/poddecodertool.cpp:101
 #: controllers/view/poddecoder/poddecodertoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
 msgid "Decoding Table"
 msgstr "Dekoodaustaulukko"
 
-#: controllers/view/poddecoder/poddecodertool.cpp:165
+#: controllers/view/poddecoder/poddecodertool.cpp:166
 #, kde-format
 msgctxt "@label:textbox"
 msgid "UTF-16:"
 msgstr "UTF-16:"
 
-#: controllers/view/poddecoder/poddecodertool.cpp:311
+#: controllers/view/poddecoder/poddecodertool.cpp:312
 #, kde-format
 msgctxt "Edited as %datatype"
 msgid "Edited as %1"
@@ -1211,7 +1211,7 @@ msgstr ""
 ">Korvataanko seuraavat tavut vai lisätäänkö tarpeen mukaan uusia?"
 
 #: controllers/view/poddecoder/podtableview.cpp:255
-#: controllers/view/selectrange/selectrangeview.cpp:144
+#: controllers/view/selectrange/selectrangeview.cpp:138
 #: controllers/view/structures/structureview.cpp:339
 #, kde-format
 msgctxt "@action:button"
@@ -1377,25 +1377,25 @@ msgctxt "@info"
 msgid "Beginning of byte array reached.<nl/>Continue from the end?"
 msgstr "Saavutettiin tavutaulukon alku.<nl/>Jatketaanko lopusta?"
 
-#: controllers/view/replace/replacedialog.cpp:48
+#: controllers/view/replace/replacedialog.cpp:49
 #, kde-format
 msgctxt "@title:window"
 msgid "Replace Bytes"
 msgstr "Korvaa tavuja"
 
-#: controllers/view/replace/replacedialog.cpp:50
+#: controllers/view/replace/replacedialog.cpp:51
 #, kde-format
 msgctxt "@action;button"
 msgid "&Replace"
 msgstr "&Korvaa"
 
-#: controllers/view/replace/replacedialog.cpp:52
+#: controllers/view/replace/replacedialog.cpp:53
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Start replace"
 msgstr "Aloita korvaaminen"
 
-#: controllers/view/replace/replacedialog.cpp:54
+#: controllers/view/replace/replacedialog.cpp:55
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1406,13 +1406,13 @@ msgstr ""
 "Painaessasi tästä antamiasi tavuja etsitään tavutaulukosta ja kaikki osumat "
 "korvataan korvaustavuilla."
 
-#: controllers/view/replace/replacedialog.cpp:62
+#: controllers/view/replace/replacedialog.cpp:63
 #, kde-format
 msgctxt "@title:group"
 msgid "Replace With"
 msgstr "Korvaa"
 
-#: controllers/view/replace/replacedialog.cpp:69
+#: controllers/view/replace/replacedialog.cpp:70
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1420,13 +1420,13 @@ msgid ""
 "from the list."
 msgstr "Anna korvaustavu, tai valitse edellinen listalta"
 
-#: controllers/view/replace/replacedialog.cpp:78
+#: controllers/view/replace/replacedialog.cpp:79
 #, kde-format
 msgctxt "@option:check"
 msgid "&Prompt on replace"
 msgstr "&Kysy korvattaessa"
 
-#: controllers/view/replace/replacedialog.cpp:79
+#: controllers/view/replace/replacedialog.cpp:80
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Ask before replacing each match found."
@@ -1456,7 +1456,7 @@ msgctxt "@action:button"
 msgid "Replace"
 msgstr "Korvaa"
 
-#: controllers/view/replace/replacetool.cpp:59
+#: controllers/view/replace/replacetool.cpp:61
 #, kde-format
 msgctxt "@title"
 msgid "Replace"
@@ -1468,25 +1468,25 @@ msgctxt "@info"
 msgid "Search key not found in byte array."
 msgstr "Hakuavainta ei löytynyt tavutaulukosta."
 
-#: controllers/view/search/searchdialog.cpp:40
+#: controllers/view/search/searchdialog.cpp:42
 #, kde-format
 msgctxt "@title:window"
 msgid "Find Bytes"
 msgstr "Etsi tavuja"
 
-#: controllers/view/search/searchdialog.cpp:42
+#: controllers/view/search/searchdialog.cpp:44
 #, kde-format
 msgctxt "@action:button"
 msgid "&Find"
 msgstr "&Etsi"
 
-#: controllers/view/search/searchdialog.cpp:44
+#: controllers/view/search/searchdialog.cpp:46
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Start searching"
 msgstr "Käynnistä etsintä"
 
-#: controllers/view/search/searchdialog.cpp:46
+#: controllers/view/search/searchdialog.cpp:48
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1494,7 +1494,7 @@ msgid ""
 "above are searched for within the byte array."
 msgstr "Painaessasi tästä antamiasi tavuja etsitään tavutaulukosta."
 
-#: controllers/view/search/searchtool.cpp:60
+#: controllers/view/search/searchtool.cpp:61
 #, kde-format
 msgctxt "@title"
 msgid "Search"
@@ -1512,31 +1512,31 @@ msgctxt "@title:window of the tool to select a range"
 msgid "Select"
 msgstr "Valitse"
 
-#: controllers/view/selectrange/selectrangeview.cpp:80
+#: controllers/view/selectrange/selectrangeview.cpp:74
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Start offset:"
 msgstr "Alkupoikkeuma:"
 
-#: controllers/view/selectrange/selectrangeview.cpp:100
+#: controllers/view/selectrange/selectrangeview.cpp:94
 #, kde-format
 msgctxt "@label:listbox"
 msgid "End offset:"
 msgstr "Loppupoikkeuma:"
 
-#: controllers/view/selectrange/selectrangeview.cpp:126
+#: controllers/view/selectrange/selectrangeview.cpp:120
 #, kde-format
 msgctxt "@option:check"
 msgid "End relative"
 msgstr "Suhteellinen loppu"
 
-#: controllers/view/selectrange/selectrangeview.cpp:147
+#: controllers/view/selectrange/selectrangeview.cpp:141
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the range."
 msgstr "Valitse väli"
 
-#: controllers/view/selectrange/selectrangeview.cpp:149
+#: controllers/view/selectrange/selectrangeview.cpp:143
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1558,7 +1558,7 @@ msgctxt "@title:column string extracted from the byte array"
 msgid "String"
 msgstr "Merkkijono"
 
-#: controllers/view/stringsextract/stringsextracttool.cpp:59
+#: controllers/view/stringsextract/stringsextracttool.cpp:61
 #, kde-format
 msgctxt "@title:window of the tool to extract strings"
 msgid "Strings"
@@ -3061,13 +3061,13 @@ msgstr "Vapaata työmuistia ei ole tarpeeksi tämän tiedoston lataamiseen."
 msgid "Support to load files larger than 2 GiB has not yet been implemented."
 msgstr "2 GiB suurempien tiedostojen latausta ei vielä tueta."
 
-#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:105
+#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:108
 #, kde-format
 msgctxt "name of the generated data"
 msgid "Pattern..."
 msgstr "Kuvio…"
 
-#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:155
+#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:158
 #, kde-format
 msgid "Pattern inserted."
 msgstr "Lisättiin kuvio."
@@ -3103,13 +3103,13 @@ msgctxt "@item name of the generated data"
 msgid "Pattern"
 msgstr "Kuvio"
 
-#: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:58
+#: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:60
 #, kde-format
 msgctxt "name of the generated data"
 msgid "Random Data..."
 msgstr "Satunnaisdata…"
 
-#: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:112
+#: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:114
 #, kde-format
 msgid "RandomData inserted."
 msgstr "Lisättiin satunnaisdataa."
@@ -3232,7 +3232,7 @@ msgctxt "@item:inmenu address size"
 msgid "8-bit"
 msgstr "8-bittinen"
 
-#: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoder.cpp:139
+#: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoder.cpp:141
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "C Array"
@@ -3279,7 +3279,7 @@ msgid "24-bit"
 msgstr "24-bittinen"
 
 # https://en.wikipedia.org/wiki/Uuencoding
-#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoder.cpp:120
+#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoder.cpp:119
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "Uuencoding"
@@ -3327,13 +3327,13 @@ msgctxt "@label:textbox substring which separates the values"
 msgid "Separation:"
 msgstr "Erotin:"
 
-#: gui/io/streamencoder/viewtext/bytearrayviewtextstreamencoder.cpp:46
+#: gui/io/streamencoder/viewtext/bytearrayviewtextstreamencoder.cpp:39
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "View in Plain Text"
 msgstr "Katsele vain tekstinä"
 
-#: gui/io/streamencoder/xxencoding/bytearrayxxencodingstreamencoder.cpp:71
+#: gui/io/streamencoder/xxencoding/bytearrayxxencodingstreamencoder.cpp:69
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "Xxencoding"
