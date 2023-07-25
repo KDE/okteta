@@ -1,14 +1,14 @@
 # Translation of okteta to Korean.
 # Copyright (C) 2008 This_file_is_part_of_KDE
 # This file is distributed under the same license as the kdeutils package.
-# Shinjo Park <kde@peremen.name>, 2008, 2009, 2014, 2015, 2017, 2018, 2019, 2020, 2021, 2022.
+# Shinjo Park <kde@peremen.name>, 2008, 2009, 2014, 2015, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-22 00:53+0000\n"
-"PO-Revision-Date: 2022-07-13 12:14+0200\n"
+"PO-Revision-Date: 2023-07-25 01:10+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -703,25 +703,19 @@ msgid "C&opy"
 msgstr "복사(&O)"
 
 #: controllers/view/info/infoview.cpp:115
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Copies the selected strings to the clipboard."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected statistic lines to the clipboard."
-msgstr "선택한 문자열을 클립보드에 복사합니다."
+msgstr "선택한 통계 줄을 클립보드에 복사합니다."
 
 #: controllers/view/info/infoview.cpp:117
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info:whatsthis"
-#| msgid ""
-#| "If you press the <interface>Copy</interface> button, all strings you "
-#| "selected in the list are copied to the clipboard."
+#, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
 "If you press the <interface>Copy</interface> button, all statistic lines you "
 "selected in the list are copied to the clipboard."
 msgstr ""
-"<interface>복사</interface> 단추를 누르면 목록에서 선택한 모든 문자열을 클립"
+"<interface>복사</interface> 단추를 누르면 목록에서 선택한 모든 통계 줄을 클립"
 "보드에 복사합니다."
 
 #: controllers/view/info/infoview.cpp:183
@@ -1699,25 +1693,21 @@ msgid "<EOF reached>"
 msgstr "<파일의 끝에 도달함>"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:228
-#, fuzzy, kde-format
-#| msgctxt "name of a data structure"
-#| msgid "Name"
+#, kde-format
 msgid "Name:"
-msgstr "이름"
+msgstr "이름:"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:230
-#, fuzzy, kde-format
-#| msgctxt "@title:column value of the bytes for the datatype"
-#| msgid "Value"
+#, kde-format
 msgid "Value:"
-msgstr "값"
+msgstr "값:"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:237
 #, kde-format
 msgctxt "size (elements)"
 msgid "%2 (%1 child)"
 msgid_plural "%2 (%1 children)"
-msgstr[0] ""
+msgstr[0] "%2(자식 항목 %1개)"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:262
 #: controllers/view/structures/datatypes/datainformationwithchildren.cpp:233
@@ -2354,11 +2344,10 @@ msgid "Value"
 msgstr "값"
 
 #: controllers/view/structures/structurestool.cpp:193
-#, fuzzy, kde-format
-#| msgid "Size:"
+#, kde-format
 msgctxt "size of a data structure"
 msgid "Size"
-msgstr "크기:"
+msgstr "크기"
 
 #: controllers/view/structures/structureview.cpp:95
 #, kde-format
@@ -3309,12 +3298,10 @@ msgid "Separation:"
 msgstr "구분:"
 
 #: gui/io/streamencoder/viewhtml/bytearrayviewhtmlstreamencoder.cpp:36
-#, fuzzy, kde-format
-#| msgctxt "name of the encoding target"
-#| msgid "View in Plain Text"
+#, kde-format
 msgctxt "name of the encoding target"
 msgid "View in HTML"
-msgstr "일반 텍스트로 보기"
+msgstr "HTML로 보기"
 
 #: gui/io/streamencoder/viewtext/bytearrayviewtextstreamencoder.cpp:41
 #, kde-format
