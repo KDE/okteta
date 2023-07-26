@@ -13,8 +13,6 @@
 // KF
 #include <KConfigGroup>
 #include <KLocalizedString>
-// Qt
-#include <QtGlobal>
 // Std
 #include <cstdlib>
 

@@ -18,6 +18,8 @@ namespace Okteta {
 class AbstractByteArrayModel;
 }
 
+class QByteArray;
+
 namespace Kasten {
 
 namespace ByteArraySearchUtils {

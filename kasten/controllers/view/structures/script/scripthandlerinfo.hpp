@@ -9,8 +9,6 @@
 #ifndef KASTEN_SCRIPTHANDLERINFO_HPP
 #define KASTEN_SCRIPTHANDLERINFO_HPP
 
-// Qt
-#include <QtGlobal>
 // Std
 #include <memory>
 

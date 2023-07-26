@@ -20,6 +20,7 @@ class ScriptLogger;
 class TopLevelDataInformation;
 class QScriptEngineDebugger;
 class QScriptValue;
+class QString;
 
 class ScriptHandler
 {
