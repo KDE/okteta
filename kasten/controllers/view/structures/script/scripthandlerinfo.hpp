@@ -9,7 +9,6 @@
 #ifndef KASTEN_SCRIPTHANDLERINFO_HPP
 #define KASTEN_SCRIPTHANDLERINFO_HPP
 
-#include <QtGlobal>
 #include <QScopedPointer>
 
 class EnumScriptClass;
