@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-22 02:42+0000\n"
+"POT-Creation-Date: 2023-07-27 02:29+0000\n"
 "PO-Revision-Date: 2021-05-10 06:11+0200\n"
 "Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -986,7 +986,7 @@ msgid "If set, the bits are arranged in reverse order as well."
 msgstr ""
 "Wenn diese Einstellung aktiviert ist, werden auch Bits umgekehrt angeordnet."
 
-#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilter.cpp:28
+#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilter.cpp:26
 #, kde-format
 msgctxt ""
 "name of the filter; it moves the bits and pushes the ones over the end to "
@@ -1040,7 +1040,7 @@ msgstr ""
 "Legt die Laufweite der Bit-Verschiebung fest. Positive Werte verschieben "
 "Bits nach rechts, negative nach links."
 
-#: controllers/view/libbytearrayfilter/filter/shiftbytearrayfilter.cpp:29
+#: controllers/view/libbytearrayfilter/filter/shiftbytearrayfilter.cpp:27
 #, kde-format
 msgctxt "name of the filter; it moves the bits, setting freed ones to zero"
 msgid "SHIFT data"
