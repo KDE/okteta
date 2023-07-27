@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-22 00:53+0000\n"
+"POT-Creation-Date: 2023-07-27 00:49+0000\n"
 "PO-Revision-Date: 2023-01-03 09:17+0200\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -1022,7 +1022,7 @@ msgctxt "@info:whatsthis"
 msgid "If set, the bits are arranged in reverse order as well."
 msgstr "Αν επιλεγεί, τα bit τοποθετούνται επίσης ανάστροφα."
 
-#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilter.cpp:28
+#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilter.cpp:26
 #, kde-format
 msgctxt ""
 "name of the filter; it moves the bits and pushes the ones over the end to "
@@ -1074,7 +1074,7 @@ msgstr ""
 "Έλεγχος του πλάτους ύψωσης. Οι θετικοί αριθμοί μετακινούν τα bits στα δεξιά, "
 "ενώ οι αρνητικοί στα αριστερά."
 
-#: controllers/view/libbytearrayfilter/filter/shiftbytearrayfilter.cpp:29
+#: controllers/view/libbytearrayfilter/filter/shiftbytearrayfilter.cpp:27
 #, kde-format
 msgctxt "name of the filter; it moves the bits, setting freed ones to zero"
 msgid "SHIFT data"

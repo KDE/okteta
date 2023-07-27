@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-22 00:53+0000\n"
+"POT-Creation-Date: 2023-07-27 00:49+0000\n"
 "PO-Revision-Date: 2019-02-23 21:23+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -985,7 +985,7 @@ msgctxt "@info:whatsthis"
 msgid "If set, the bits are arranged in reverse order as well."
 msgstr "設定的話，也會將位元反轉。"
 
-#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilter.cpp:28
+#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilter.cpp:26
 #, kde-format
 msgctxt ""
 "name of the filter; it moves the bits and pushes the ones over the end to "
@@ -1033,7 +1033,7 @@ msgid ""
 "negative to the left."
 msgstr "控制位元偏移寬度。正值往右移，負值往左移。"
 
-#: controllers/view/libbytearrayfilter/filter/shiftbytearrayfilter.cpp:29
+#: controllers/view/libbytearrayfilter/filter/shiftbytearrayfilter.cpp:27
 #, kde-format
 msgctxt "name of the filter; it moves the bits, setting freed ones to zero"
 msgid "SHIFT data"

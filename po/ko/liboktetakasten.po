@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-22 00:53+0000\n"
+"POT-Creation-Date: 2023-07-27 00:49+0000\n"
 "PO-Revision-Date: 2023-07-25 01:10+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -976,7 +976,7 @@ msgctxt "@info:whatsthis"
 msgid "If set, the bits are arranged in reverse order as well."
 msgstr "설정하면 비트도 역순으로 배치됩니다."
 
-#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilter.cpp:28
+#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilter.cpp:26
 #, kde-format
 msgctxt ""
 "name of the filter; it moves the bits and pushes the ones over the end to "
@@ -1028,7 +1028,7 @@ msgstr ""
 "미는 크기를 제어합니다. 양의 정수는 오른쪽으로 밀리고, 음의 정수는 왼쪽으로 "
 "밀립니다."
 
-#: controllers/view/libbytearrayfilter/filter/shiftbytearrayfilter.cpp:29
+#: controllers/view/libbytearrayfilter/filter/shiftbytearrayfilter.cpp:27
 #, kde-format
 msgctxt "name of the filter; it moves the bits, setting freed ones to zero"
 msgid "SHIFT data"

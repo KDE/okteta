@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesdk-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-22 00:53+0000\n"
+"POT-Creation-Date: 2023-07-27 00:49+0000\n"
 "PO-Revision-Date: 2023-06-17 21:42+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -998,7 +998,7 @@ msgctxt "@info:whatsthis"
 msgid "If set, the bits are arranged in reverse order as well."
 msgstr "Seçiliyse bitler de ters sıralı olarak düzenlenir."
 
-#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilter.cpp:28
+#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilter.cpp:26
 #, kde-format
 msgctxt ""
 "name of the filter; it moves the bits and pushes the ones over the end to "
@@ -1051,7 +1051,7 @@ msgstr ""
 "Kaydırmanın genişliğini denetler. Pozitif sayılar bitleri sağa, negatif "
 "sayılar sola kaydırır."
 
-#: controllers/view/libbytearrayfilter/filter/shiftbytearrayfilter.cpp:29
+#: controllers/view/libbytearrayfilter/filter/shiftbytearrayfilter.cpp:27
 #, kde-format
 msgctxt "name of the filter; it moves the bits, setting freed ones to zero"
 msgid "SHIFT data"

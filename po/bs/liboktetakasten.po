@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-22 00:53+0000\n"
+"POT-Creation-Date: 2023-07-27 00:49+0000\n"
 "PO-Revision-Date: 2015-02-04 16:00+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: bosanski <bs@li.org>\n"
@@ -1020,7 +1020,7 @@ msgctxt "@info:whatsthis"
 msgid "If set, the bits are arranged in reverse order as well."
 msgstr "Ako je popunjeno, i bitovima se obrće redoslijed."
 
-#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilter.cpp:28
+#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilter.cpp:26
 #, kde-format
 msgctxt ""
 "name of the filter; it moves the bits and pushes the ones over the end to "
@@ -1072,7 +1072,7 @@ msgstr ""
 "Određuje širinu pomaka. Pozitivni brojevi pomeraju bitove udesno, negativni "
 "ulevo."
 
-#: controllers/view/libbytearrayfilter/filter/shiftbytearrayfilter.cpp:29
+#: controllers/view/libbytearrayfilter/filter/shiftbytearrayfilter.cpp:27
 #, kde-format
 msgctxt "name of the filter; it moves the bits, setting freed ones to zero"
 msgid "SHIFT data"
