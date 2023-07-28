@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-10 02:45+0000\n"
+"POT-Creation-Date: 2023-07-27 02:29+0000\n"
 "PO-Revision-Date: 2013-02-19 20:33+0100\n"
 "Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -281,20 +281,20 @@ msgid_plural "Inserted %1 Bytes"
 msgstr[0] "Satt inn én byte"
 msgstr[1] "Satt inn %1 byte"
 
-#: controllers/view/bytetable/bytetableview.cpp:80
+#: controllers/view/bytetable/bytetableview.cpp:82
 #, kde-format
 msgctxt "@label:spinbox number of bytes to insert"
 msgid "Number (bytes):"
 msgstr ""
 
-#: controllers/view/bytetable/bytetableview.cpp:88
+#: controllers/view/bytetable/bytetableview.cpp:90
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "Number of repeats of the currently selected byte in the table to be inserted."
 msgstr ""
 
-#: controllers/view/bytetable/bytetableview.cpp:104
+#: controllers/view/bytetable/bytetableview.cpp:106
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -302,13 +302,13 @@ msgid ""
 "times."
 msgstr ""
 
-#: controllers/view/charsetconversion/charsetconversiontool.cpp:118
+#: controllers/view/charsetconversion/charsetconversiontool.cpp:121
 #, kde-format
 msgctxt "@title:window of the tool to convert between charsets"
 msgid "Charset Conversion"
 msgstr "Tegnsettkonvertering"
 
-#: controllers/view/charsetconversion/charsetconversiontool.cpp:244
+#: controllers/view/charsetconversion/charsetconversiontool.cpp:247
 #, kde-format
 msgctxt "Converted from charset 1 to charset 2"
 msgid "%1 to %2"
@@ -476,7 +476,7 @@ msgid ""
 msgstr ""
 "Konvertering avbrutt på grunn av tegn som ikke finnes i mål-tegnsettet."
 
-#: controllers/view/checksum/checksumtool.cpp:93
+#: controllers/view/checksum/checksumtool.cpp:96
 #: controllers/view/checksum/checksumtoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window of the tool to calculate checksums"
@@ -519,7 +519,7 @@ msgstr ""
 "oppdatert  til alle strenger som finnes i området og har den oppgitte "
 "minstelengden."
 
-#: controllers/view/filter/filtertool.cpp:64
+#: controllers/view/filter/filtertool.cpp:67
 #: controllers/view/filter/filtertoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
@@ -579,75 +579,75 @@ msgctxt "@title:window of the tool to set a new offset for the cursor"
 msgid "Goto"
 msgstr "Gå til"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:77
+#: controllers/view/gotooffset/gotooffsetview.cpp:71
 #, kde-format
 msgctxt "@label:listbox"
 msgid "O&ffset:"
 msgstr "&Forskyvning:"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:87
-#: controllers/view/selectrange/selectrangeview.cpp:86
-#: controllers/view/selectrange/selectrangeview.cpp:106
+#: controllers/view/gotooffset/gotooffsetview.cpp:81
+#: controllers/view/selectrange/selectrangeview.cpp:80
+#: controllers/view/selectrange/selectrangeview.cpp:100
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Enter an offset to go to, or select a previous offset from the list."
 msgstr ""
 "Oppgi en forskyvning å gå til, eller velg en tidligere forskyvning fra lista."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:103
+#: controllers/view/gotooffset/gotooffsetview.cpp:97
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:112
 #, kde-format
 msgctxt "@option:check"
 msgid "From c&ursor"
 msgstr "Fra skri&vemerket"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:105
+#: controllers/view/gotooffset/gotooffsetview.cpp:99
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Go relative from the current cursor location and not absolute."
 msgstr "Gå relativt fra gjeldende markørposisjon og ikke absolutt."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:108
+#: controllers/view/gotooffset/gotooffsetview.cpp:102
 #, kde-format
 msgctxt "@option:check"
 msgid "&Extend selection"
 msgstr "&Utvid utvalget"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:110
-#: controllers/view/selectrange/selectrangeview.cpp:128
+#: controllers/view/gotooffset/gotooffsetview.cpp:104
+#: controllers/view/selectrange/selectrangeview.cpp:122
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Extend the selection by the cursor move."
 msgstr "Utvid utvalget med markørflyttingen."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:113
+#: controllers/view/gotooffset/gotooffsetview.cpp:107
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:115
-#: controllers/view/selectrange/selectrangeview.cpp:120
+#: controllers/view/selectrange/selectrangeview.cpp:114
 #, kde-format
 msgctxt "@option:check"
 msgid "&Backwards"
 msgstr "&Bakover"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:115
-#: controllers/view/selectrange/selectrangeview.cpp:122
+#: controllers/view/gotooffset/gotooffsetview.cpp:109
+#: controllers/view/selectrange/selectrangeview.cpp:116
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Go backwards from the end or the current cursor location."
 msgstr "Gå bakover fra slutten eller gjeldende markørposisjon."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:130
+#: controllers/view/gotooffset/gotooffsetview.cpp:124
 #, kde-format
 msgctxt "@action:button"
 msgid "&Go"
 msgstr "&Gå"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:133
+#: controllers/view/gotooffset/gotooffsetview.cpp:127
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Go to the Offset"
 msgstr "Gå til forskyvningen"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:135
+#: controllers/view/gotooffset/gotooffsetview.cpp:129
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -962,7 +962,7 @@ msgctxt "@info:whatsthis"
 msgid "If set, the bits are arranged in reverse order as well."
 msgstr "Hvis dette er på blir bit-ene også ordnet i omvendt rekkefølge."
 
-#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilter.cpp:28
+#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilter.cpp:26
 #, kde-format
 msgctxt ""
 "name of the filter; it moves the bits and pushes the ones over the end to "
@@ -1014,7 +1014,7 @@ msgstr ""
 "Styr hvor bredt bitflyttingen gjøres.  Positive tall flytter bit til høyre, "
 "negative til venstre."
 
-#: controllers/view/libbytearrayfilter/filter/shiftbytearrayfilter.cpp:29
+#: controllers/view/libbytearrayfilter/filter/shiftbytearrayfilter.cpp:27
 #, kde-format
 msgctxt "name of the filter; it moves the bits, setting freed ones to zero"
 msgid "SHIFT data"
@@ -1118,20 +1118,20 @@ msgstr ""
 "Velg om du vil at inndata legges til det som er oppgitt, eller skriver over "
 "eksisterende data."
 
-#: controllers/view/poddecoder/poddecodertool.cpp:100
+#: controllers/view/poddecoder/poddecodertool.cpp:101
 #: controllers/view/poddecoder/poddecodertoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
 msgid "Decoding Table"
 msgstr "Dekodingstabell"
 
-#: controllers/view/poddecoder/poddecodertool.cpp:165
+#: controllers/view/poddecoder/poddecodertool.cpp:166
 #, kde-format
 msgctxt "@label:textbox"
 msgid "UTF-16:"
 msgstr "UTF-16:"
 
-#: controllers/view/poddecoder/poddecodertool.cpp:311
+#: controllers/view/poddecoder/poddecodertool.cpp:312
 #, kde-format
 msgctxt "Edited as %datatype"
 msgid "Edited as %1"
@@ -1217,7 +1217,7 @@ msgstr ""
 "behov?"
 
 #: controllers/view/poddecoder/podtableview.cpp:255
-#: controllers/view/selectrange/selectrangeview.cpp:144
+#: controllers/view/selectrange/selectrangeview.cpp:138
 #: controllers/view/structures/structureview.cpp:339
 #, kde-format
 msgctxt "@action:button"
@@ -1383,25 +1383,25 @@ msgctxt "@info"
 msgid "Beginning of byte array reached.<nl/>Continue from the end?"
 msgstr "Kom til begynnelsen av strengen.<nl/> Fortsett fra slutten?"
 
-#: controllers/view/replace/replacedialog.cpp:48
+#: controllers/view/replace/replacedialog.cpp:49
 #, kde-format
 msgctxt "@title:window"
 msgid "Replace Bytes"
 msgstr "Erstatt byte"
 
-#: controllers/view/replace/replacedialog.cpp:50
+#: controllers/view/replace/replacedialog.cpp:51
 #, kde-format
 msgctxt "@action;button"
 msgid "&Replace"
 msgstr "&Erstatt"
 
-#: controllers/view/replace/replacedialog.cpp:52
+#: controllers/view/replace/replacedialog.cpp:53
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Start replace"
 msgstr "Start erstatning"
 
-#: controllers/view/replace/replacedialog.cpp:54
+#: controllers/view/replace/replacedialog.cpp:55
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1413,13 +1413,13 @@ msgstr ""
 "strengen etter de bytene du oppga over, og om de finnes blir de erstattet "
 "med erstatnings-bytene."
 
-#: controllers/view/replace/replacedialog.cpp:62
+#: controllers/view/replace/replacedialog.cpp:63
 #, kde-format
 msgctxt "@title:group"
 msgid "Replace With"
 msgstr "Erstatt med"
 
-#: controllers/view/replace/replacedialog.cpp:69
+#: controllers/view/replace/replacedialog.cpp:70
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1429,13 +1429,13 @@ msgstr ""
 "Oppgi byter å erstatte med, eller velg byter som tidligere er satt inn fra "
 "lista."
 
-#: controllers/view/replace/replacedialog.cpp:78
+#: controllers/view/replace/replacedialog.cpp:79
 #, kde-format
 msgctxt "@option:check"
 msgid "&Prompt on replace"
 msgstr "S&pør ved erstatning"
 
-#: controllers/view/replace/replacedialog.cpp:79
+#: controllers/view/replace/replacedialog.cpp:80
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Ask before replacing each match found."
@@ -1465,7 +1465,7 @@ msgctxt "@action:button"
 msgid "Replace"
 msgstr "Erstatt"
 
-#: controllers/view/replace/replacetool.cpp:59
+#: controllers/view/replace/replacetool.cpp:61
 #, kde-format
 msgctxt "@title"
 msgid "Replace"
@@ -1477,25 +1477,25 @@ msgctxt "@info"
 msgid "Search key not found in byte array."
 msgstr "Søkebegrepet  ikke funnet i byte-strengen."
 
-#: controllers/view/search/searchdialog.cpp:40
+#: controllers/view/search/searchdialog.cpp:42
 #, kde-format
 msgctxt "@title:window"
 msgid "Find Bytes"
 msgstr "Finn byte"
 
-#: controllers/view/search/searchdialog.cpp:42
+#: controllers/view/search/searchdialog.cpp:44
 #, kde-format
 msgctxt "@action:button"
 msgid "&Find"
 msgstr "&Finn"
 
-#: controllers/view/search/searchdialog.cpp:44
+#: controllers/view/search/searchdialog.cpp:46
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Start searching"
 msgstr "Start søket"
 
-#: controllers/view/search/searchdialog.cpp:46
+#: controllers/view/search/searchdialog.cpp:48
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1505,7 +1505,7 @@ msgstr ""
 "Hvis du trykker <interface>Finn</interface>-knappen blir det søkt i "
 "bytestrengen etter de  bytene du oppga over."
 
-#: controllers/view/search/searchtool.cpp:60
+#: controllers/view/search/searchtool.cpp:61
 #, kde-format
 msgctxt "@title"
 msgid "Search"
@@ -1523,31 +1523,31 @@ msgctxt "@title:window of the tool to select a range"
 msgid "Select"
 msgstr "Velg"
 
-#: controllers/view/selectrange/selectrangeview.cpp:80
+#: controllers/view/selectrange/selectrangeview.cpp:74
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Start offset:"
 msgstr "Startforskyvning:"
 
-#: controllers/view/selectrange/selectrangeview.cpp:100
+#: controllers/view/selectrange/selectrangeview.cpp:94
 #, kde-format
 msgctxt "@label:listbox"
 msgid "End offset:"
 msgstr "Sluttforskyvning:"
 
-#: controllers/view/selectrange/selectrangeview.cpp:126
+#: controllers/view/selectrange/selectrangeview.cpp:120
 #, kde-format
 msgctxt "@option:check"
 msgid "End relative"
 msgstr "Sljutt relativ"
 
-#: controllers/view/selectrange/selectrangeview.cpp:147
+#: controllers/view/selectrange/selectrangeview.cpp:141
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the range."
 msgstr "Velg området."
 
-#: controllers/view/selectrange/selectrangeview.cpp:149
+#: controllers/view/selectrange/selectrangeview.cpp:143
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1569,7 +1569,7 @@ msgctxt "@title:column string extracted from the byte array"
 msgid "String"
 msgstr "Streng"
 
-#: controllers/view/stringsextract/stringsextracttool.cpp:59
+#: controllers/view/stringsextract/stringsextracttool.cpp:61
 #, kde-format
 msgctxt "@title:window of the tool to extract strings"
 msgid "Strings"
@@ -3081,13 +3081,13 @@ msgstr "Det er ikke nok ledig arbeidsminne til å laste inn denne fila."
 msgid "Support to load files larger than 2 GiB has not yet been implemented."
 msgstr "Det er ennå ikke støtte for å laste inn filer større enn 2 GiB."
 
-#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:105
+#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:108
 #, kde-format
 msgctxt "name of the generated data"
 msgid "Pattern..."
 msgstr "Mønster …"
 
-#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:155
+#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:158
 #, kde-format
 msgid "Pattern inserted."
 msgstr "Mønster satt inn."
@@ -3125,13 +3125,13 @@ msgctxt "@item name of the generated data"
 msgid "Pattern"
 msgstr "Mønster"
 
-#: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:58
+#: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:60
 #, kde-format
 msgctxt "name of the generated data"
 msgid "Random Data..."
 msgstr "Tilfeldige data …"
 
-#: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:112
+#: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:114
 #, kde-format
 msgid "RandomData inserted."
 msgstr "Tilfeldige data satt inn."
@@ -3253,7 +3253,7 @@ msgctxt "@item:inmenu address size"
 msgid "8-bit"
 msgstr "8-bit"
 
-#: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoder.cpp:139
+#: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoder.cpp:141
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "C Array"
@@ -3297,7 +3297,7 @@ msgctxt "@item:inmenu address size"
 msgid "24-bit"
 msgstr "24-bit"
 
-#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoder.cpp:120
+#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoder.cpp:119
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "Uuencoding"
@@ -3345,13 +3345,13 @@ msgctxt "@label:textbox substring which separates the values"
 msgid "Separation:"
 msgstr "Skillestreng:"
 
-#: gui/io/streamencoder/viewtext/bytearrayviewtextstreamencoder.cpp:46
+#: gui/io/streamencoder/viewtext/bytearrayviewtextstreamencoder.cpp:39
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "View in Plain Text"
 msgstr "Vis i ren tekst"
 
-#: gui/io/streamencoder/xxencoding/bytearrayxxencodingstreamencoder.cpp:71
+#: gui/io/streamencoder/xxencoding/bytearrayxxencodingstreamencoder.cpp:69
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "Xxencoding"
