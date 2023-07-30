@@ -8,16 +8,17 @@
 
 #include "uintdatainformation.hpp"
 
+// controller
+#include "structureviewpreferences.hpp"
 #include <structureslogging.hpp>
-
+// libdatatypeeditors
+#include <uintspinbox.hpp>
 // KF
 #include <KLocalizedString>
 // Qt
 #include <QScriptValue>
 #include <QLocale>
 
-#include "../../../poddecoder/typeeditors/uintspinbox.hpp"
-#include "structureviewpreferences.hpp"
 
 template <typename T>
 QScriptValue UIntDataInformationMethods<T>::asScriptValue(T value, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)

@@ -8,12 +8,14 @@
 
 #include "unsignedbitfielddatainformation.hpp"
 
-#include <KLocalizedString>
-
-#include <QScriptValue>
-
-#include <view/poddecoder/typeeditors/uintspinbox.hpp>
+// controller
 #include "../uintdatainformation.hpp"
+// libdatatypeeditors
+#include <uintspinbox.hpp>
+// KF
+#include <KLocalizedString>
+// Qt
+#include <QScriptValue>
 
 QString UnsignedBitfieldDataInformation::valueStringImpl() const
 {

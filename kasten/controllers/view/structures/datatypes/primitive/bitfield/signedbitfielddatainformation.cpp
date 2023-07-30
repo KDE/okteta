@@ -8,12 +8,15 @@
 
 #include "signedbitfielddatainformation.hpp"
 
+// controller
+#include "../sintdatainformation.hpp"
+// libdatatypeeditors
+#include <sintspinbox.hpp>
+// KF
 #include <KLocalizedString>
-
+// Qt
 #include <QScriptValue>
 
-#include <view/poddecoder/typeeditors/sintspinbox.hpp>
-#include "../sintdatainformation.hpp"
 
 QString SignedBitfieldDataInformation::valueStringImpl() const
 {

@@ -6,9 +6,9 @@ set( LIBFRAMESPRINT_REL_DIR ../../libs/framesprint )
 # create static libraries for sharing between unit tests and actual library product
 # This means we don't have to compile the sources twice
 
-add_library(poddecoder-typeeditors STATIC)
-set_target_properties(poddecoder-typeeditors PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
-target_link_libraries(poddecoder-typeeditors
+add_library(datatypeeditors STATIC)
+set_target_properties(datatypeeditors PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
+target_link_libraries(datatypeeditors
     PUBLIC
         OktetaGui
     PRIVATE
@@ -27,6 +27,7 @@ target_link_libraries(structureview-tested-srcs
         Qt5::Xml
         Qt5::Widgets
     PRIVATE
+        datatypeeditors
         KF5::Completion
         KF5::ConfigWidgets
 )
@@ -47,7 +48,7 @@ okteta_add_library(Controllers NAMESPACE Okteta Kasten
         KastenCore
     PRIVATE
         structureview-tested-srcs
-        poddecoder-typeeditors
+        datatypeeditors
         KF5::NewStuffWidgets
         KF5::I18n
         KF5::ConfigWidgets
@@ -229,7 +230,7 @@ oktetakastencontrollers_add_sublibrary(view/libbytearraysearch
 
 oktetakastencontrollers_add_sublibrary(view/libdatatypes
     BUILD_INCLUDEDIR
-    LIBRARY poddecoder-typeeditors
+    LIBRARY datatypeeditors
     PRIVATE
         Binary8
         Octal8
@@ -247,6 +248,25 @@ oktetakastencontrollers_add_sublibrary(view/libdatatypes
         Char8
         Utf8
         Utf16
+)
+
+oktetakastencontrollers_add_sublibrary(view/libdatatypeeditors
+    BUILD_INCLUDEDIR
+    LIBRARY datatypeeditors
+    PRIVATE
+        AbstractValue8Editor
+        Binary8Editor
+        Octal8Editor
+        Hexadecimal8Editor
+        UIntSpinBox
+        SIntSpinBox
+        Float32Editor
+        Float64Editor
+        Char8Editor
+        Char8StringParser
+        Char8StringValidator
+        Utf8Editor
+        Utf16Editor
 )
 
 oktetakastencontrollers_add_sublibrary(view/poddecoder/typecodecs
@@ -281,24 +301,6 @@ oktetakastencontrollers_add_sublibrary(view/poddecoder
         PODTableView
         PODDecoderTool
         PODDecoderToolView
-)
-
-oktetakastencontrollers_add_sublibrary(view/poddecoder/typeeditors
-    LIBRARY poddecoder-typeeditors
-    PRIVATE
-        AbstractValue8Editor
-        Binary8Editor
-        Octal8Editor
-        Hexadecimal8Editor
-        UIntSpinBox
-        SIntSpinBox
-        Float32Editor
-        Float64Editor
-        Char8Editor
-        Char8StringParser
-        Char8StringValidator
-        Utf8Editor
-        Utf16Editor
 )
 
 oktetakastencontrollers_add_sublibrary(view/bytetable
@@ -654,10 +656,10 @@ oktetakastencontrollers_add_sublibrary(utils
 )
 
 if(BUILD_TESTING)
-    # poddecoder typeeditors unit tests
+    # libdatatypeeditors unit tests
     ecm_add_test(
-        view/poddecoder/typeeditors/char8stringvalidator.cpp
-        view/poddecoder/typeeditors/char8stringparser.cpp
+        view/libdatatypeeditors/char8stringvalidator.cpp
+        view/libdatatypeeditors/char8stringparser.cpp
         test/char8stringvalidatortest.cpp
 
         TEST_NAME char8stringvalidatortest
@@ -668,7 +670,7 @@ if(BUILD_TESTING)
     )
     target_include_directories(char8stringvalidatortest
         PUBLIC
-            view/poddecoder/typeeditors
+            view/libdatatypeeditors
     )
 
     #structures view unit tests
@@ -688,7 +690,7 @@ if(BUILD_TESTING)
         test/locktooffsettest.cpp
 
         NAME_PREFIX structures-
-        LINK_LIBRARIES structureview-tested-srcs Qt5::Test poddecoder-typeeditors
+        LINK_LIBRARIES structureview-tested-srcs Qt5::Test
     )
 
     # remove useless default definition of QT_TESTCASE_BUILDDIR in interface from imported target Qt5::Test

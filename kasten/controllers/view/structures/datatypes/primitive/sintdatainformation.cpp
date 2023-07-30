@@ -7,9 +7,11 @@
 */
 
 #include "sintdatainformation.hpp"
-#include <structureslogging.hpp>
-#include <view/poddecoder/typeeditors/sintspinbox.hpp>
 
+// controller
+#include <structureslogging.hpp>
+// libdatatypeeditors
+#include <sintspinbox.hpp>
 // KF
 #include <KLocalizedString>
 // Qt

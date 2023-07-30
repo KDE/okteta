@@ -8,13 +8,16 @@
 
 #include "boolbitfielddatainformation.hpp"
 
+// controller
+#include "../booldatainformation.hpp"
+// libdatatypeeditors
+#include <uintspinbox.hpp>
+// KF
 #include <KLocalizedString>
 #include <KComboBox>
-
+// Qt
 #include <QScriptValue>
 
-#include "../booldatainformation.hpp"
-#include "../../../../poddecoder/typeeditors/uintspinbox.hpp"
 
 QString BoolBitfieldDataInformation::valueStringImpl() const
 {
