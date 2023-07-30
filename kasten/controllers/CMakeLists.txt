@@ -269,8 +269,11 @@ oktetakastencontrollers_add_sublibrary(view/libdatatypeeditors
         Utf16Editor
 )
 
-oktetakastencontrollers_add_sublibrary(view/poddecoder/typecodecs
+oktetakastencontrollers_add_sublibrary(view/libdatatypecodecs
+    BUILD_INCLUDEDIR
     PRIVATE
+        PODData
+        AbstractTypeCodec
         Binary8Codec
         Octal8Codec
         Hexadecimal8Codec
@@ -294,7 +297,6 @@ oktetakastencontrollers_add_sublibrary(view/poddecoder
         PODDecoderToolFactory
         PODDecoderToolViewFactory
     PRIVATE
-        PODData
         PODDisplayModel
         PODTableModel
         PODDelegate
