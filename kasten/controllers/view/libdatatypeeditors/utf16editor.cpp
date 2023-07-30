@@ -11,6 +11,8 @@
 // Qt
 #include <QValidator>
 
+namespace Okteta {
+
 class Utf16CharValidator : public QValidator
 {
     Q_OBJECT
@@ -56,6 +58,8 @@ Utf16 Utf16Editor::data() const
 {
     const QString t = text();
     return {t.isEmpty() ? QChar(0) : t[0]};
+}
+
 }
 
 #include "utf16editor.moc"

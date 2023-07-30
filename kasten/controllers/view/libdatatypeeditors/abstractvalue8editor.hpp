@@ -6,8 +6,8 @@
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
-#ifndef KASTEN_ABSTRACTVALUE8EDITOR_HPP
-#define KASTEN_ABSTRACTVALUE8EDITOR_HPP
+#ifndef OKTETA_ABSTRACTVALUE8EDITOR_HPP
+#define OKTETA_ABSTRACTVALUE8EDITOR_HPP
 
 // OKteta core
 #include <Okteta/OktetaCore>
@@ -16,7 +16,6 @@
 
 namespace Okteta {
 class ValueCodec;
-}
 
 class AbstractValue8Editor : public QSpinBox
 {
@@ -36,5 +35,7 @@ protected: // QSpinBox API
 protected:
     Okteta::ValueCodec* mValueCodec;
 };
+
+}
 
 #endif

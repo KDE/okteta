@@ -13,6 +13,8 @@
 // C++
 #include <limits>
 
+namespace Okteta {
+
 AbstractValue8Editor::AbstractValue8Editor(Okteta::ValueCoding valueCoding, QWidget* parent)
     : QSpinBox(parent)
 {
@@ -57,6 +59,8 @@ QValidator::State AbstractValue8Editor::validate(QString& text, int& pos) const
     const bool isCompleteTextUsed = (textLength == usedChars);
 
     return isCompleteTextUsed ? QValidator::Acceptable : QValidator::Invalid;
+}
+
 }
 
 #include "moc_abstractvalue8editor.cpp"

@@ -6,13 +6,15 @@
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
-#ifndef KASTEN_FLOAT32_HPP
-#define KASTEN_FLOAT32_HPP
+#ifndef OKTETA_FLOAT32_HPP
+#define OKTETA_FLOAT32_HPP
 
 // Qt
 #include <QLocale>
 #include <QMetaType>
 #include <QString>
+
+namespace Okteta {
 
 struct Float32
 {
@@ -46,6 +48,8 @@ inline QString Float32::toString(const QLocale& locale) const
     return locale.toString(value, 'e', 16);
 }
 
-Q_DECLARE_METATYPE(Float32)
+}
+
+Q_DECLARE_METATYPE(Okteta::Float32)
 
 #endif

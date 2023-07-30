@@ -6,12 +6,14 @@
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
-#ifndef KASTEN_HEXADECIMAL8_HPP
-#define KASTEN_HEXADECIMAL8_HPP
+#ifndef OKTETA_HEXADECIMAL8_HPP
+#define OKTETA_HEXADECIMAL8_HPP
 
 // Qt
 #include <QMetaType>
 #include <QString>
+
+namespace Okteta {
 
 struct Hexadecimal8
 {
@@ -39,6 +41,8 @@ inline QString Hexadecimal8::toString() const
     return QStringLiteral("%1").arg(value, 2, 16, QChar::fromLatin1('0'));
 }
 
-Q_DECLARE_METATYPE(Hexadecimal8)
+}
+
+Q_DECLARE_METATYPE(Okteta::Hexadecimal8)
 
 #endif

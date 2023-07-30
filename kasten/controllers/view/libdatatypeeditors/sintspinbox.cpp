@@ -11,6 +11,8 @@
 // Qt
 #include <QLineEdit>
 
+namespace Okteta {
+
 QValidator::State SIntSpinBox::validate(QString& input, int& pos) const
 {
     Q_UNUSED(pos);
@@ -79,6 +81,8 @@ void SIntSpinBox::updateEditLine() const
 {
     const QString text = QString::number(mValue, mBase);
     lineEdit()->setText(text);
+}
+
 }
 
 #include "moc_sintspinbox.cpp"

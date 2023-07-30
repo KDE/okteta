@@ -6,12 +6,14 @@
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
-#ifndef KASTEN_BINARY8_HPP
-#define KASTEN_BINARY8_HPP
+#ifndef OKTETA_BINARY8_HPP
+#define OKTETA_BINARY8_HPP
 
 // Qt
 #include <QMetaType>
 #include <QString>
+
+namespace Okteta {
 
 struct Binary8
 {
@@ -39,6 +41,8 @@ inline QString Binary8::toString() const
     return QStringLiteral("%1").arg(value, 8, 2, QChar::fromLatin1('0'));
 }
 
-Q_DECLARE_METATYPE(Binary8)
+}
+
+Q_DECLARE_METATYPE(Okteta::Binary8)
 
 #endif

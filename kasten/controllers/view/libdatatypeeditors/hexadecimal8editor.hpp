@@ -6,13 +6,15 @@
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
-#ifndef KASTEN_HEXADECIMAL8EDITOR_HPP
-#define KASTEN_HEXADECIMAL8EDITOR_HPP
+#ifndef OKTETA_HEXADECIMAL8EDITOR_HPP
+#define OKTETA_HEXADECIMAL8EDITOR_HPP
 
 // lib
 #include "abstractvalue8editor.hpp"
 // libdatatypes
 #include <hexadecimal8.hpp>
+
+namespace Okteta {
 
 class Hexadecimal8Editor : public AbstractValue8Editor
 {
@@ -28,5 +30,7 @@ public:
     void setData(Hexadecimal8 data);
     Hexadecimal8 data() const;
 };
+
+}
 
 #endif

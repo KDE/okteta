@@ -6,8 +6,8 @@
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
-#ifndef KASTEN_CHAR8_HPP
-#define KASTEN_CHAR8_HPP
+#ifndef OKTETA_CHAR8_HPP
+#define OKTETA_CHAR8_HPP
 
 // Okteta gui
 #include <Okteta/OktetaGui>
@@ -17,10 +17,12 @@
 #include <QMetaType>
 #include <QString>
 
+namespace Okteta {
+
 struct Char8
 {
 public:
-    Char8(Okteta::Character c);
+    Char8(Character c);
     Char8(const Char8&) = default;
     Char8();
 
@@ -32,12 +34,14 @@ public:
     QString toString(/** TODO: undefinedChar */) const;
 
 public:
-    Okteta::Character character = {QChar(0)};
+    Character character = {QChar(0)};
 };
 
 inline Char8::Char8() = default;
-inline Char8::Char8(Okteta::Character c) : character(c) {}
+inline Char8::Char8(Character c) : character(c) {}
 
-Q_DECLARE_METATYPE(Char8)
+}
+
+Q_DECLARE_METATYPE(Okteta::Char8)
 
 #endif

@@ -14,6 +14,8 @@
 // C++
 #include <limits>
 
+namespace Okteta {
+
 Float32Editor::Float32Editor(QWidget* parent)
     : QLineEdit(parent)
 {
@@ -40,6 +42,8 @@ Float32 Float32Editor::data() const
 {
 //     interpretText();
     return text().toFloat();
+}
+
 }
 
 #include "moc_float32editor.cpp"

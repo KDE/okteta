@@ -6,12 +6,14 @@
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
-#ifndef KASTEN_UTF8_HPP
-#define KASTEN_UTF8_HPP
+#ifndef OKTETA_UTF8_HPP
+#define OKTETA_UTF8_HPP
 
 // Qt
 #include <QMetaType>
 #include <QString>
+
+namespace Okteta {
 
 struct Utf8
 {
@@ -36,6 +38,8 @@ inline Utf8::Utf8(QChar v) : value(v) {}
 
 inline QString Utf8::toString() const { return QString(value); }
 
-Q_DECLARE_METATYPE(Utf8)
+}
+
+Q_DECLARE_METATYPE(Okteta::Utf8)
 
 #endif

@@ -6,13 +6,15 @@
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
-#ifndef KASTEN_UTF16EDITOR_HPP
-#define KASTEN_UTF16EDITOR_HPP
+#ifndef OKTETA_UTF16EDITOR_HPP
+#define OKTETA_UTF16EDITOR_HPP
 
 // libdatatypes
 #include <utf16.hpp>
 // Qt
 #include <QLineEdit>
+
+namespace Okteta {
 
 class Utf16Editor : public QLineEdit
 {
@@ -28,5 +30,7 @@ public:
     void setData(Utf16 data);
     Utf16 data() const;
 };
+
+}
 
 #endif

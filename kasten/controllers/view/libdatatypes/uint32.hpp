@@ -6,13 +6,15 @@
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
-#ifndef KASTEN_UINT32_HPP
-#define KASTEN_UINT32_HPP
+#ifndef OKTETA_UINT32_HPP
+#define OKTETA_UINT32_HPP
 
 // Qt
 #include <QLocale>
 #include <QMetaType>
 #include <QString>
+
+namespace Okteta {
 
 struct UInt32
 {
@@ -48,6 +50,8 @@ inline QString UInt32::toString(bool asHex, const QLocale& locale) const
                    locale.toString(value);
 }
 
-Q_DECLARE_METATYPE(UInt32)
+}
+
+Q_DECLARE_METATYPE(Okteta::UInt32)
 
 #endif

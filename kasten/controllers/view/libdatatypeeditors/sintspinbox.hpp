@@ -6,13 +6,15 @@
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
-#ifndef KASTEN_SINTSPINBOX_HPP
-#define KASTEN_SINTSPINBOX_HPP
+#ifndef OKTETA_SINTSPINBOX_HPP
+#define OKTETA_SINTSPINBOX_HPP
 
 // Qt
 #include <QAbstractSpinBox>
 // C++
 #include <limits>
+
+namespace Okteta {
 
 class SIntSpinBox : public QAbstractSpinBox
 {
@@ -141,6 +143,8 @@ inline SIntSpinBox* SIntSpinBox::createSInt8Spinbox(QWidget* parent)
     auto* ret = new SIntSpinBox(parent);
     ret->setRange(std::numeric_limits<qint8>::min(), std::numeric_limits<qint8>::max());
     return ret;
+}
+
 }
 
 #endif

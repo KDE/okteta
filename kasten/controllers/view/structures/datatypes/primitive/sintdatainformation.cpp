@@ -70,7 +70,7 @@ QScriptValue SIntDataInformationMethods<qint64>::asScriptValue(qint64 value, QSc
 template <typename T>
 inline QWidget* SIntDataInformationMethods<T>::staticCreateEditWidget(QWidget* parent)
 {
-    auto* ret = new SIntSpinBox(parent, Kasten::StructureViewPreferences::signedDisplayBase());
+    auto* ret = new Okteta::SIntSpinBox(parent, Kasten::StructureViewPreferences::signedDisplayBase());
     ret->setRange(std::numeric_limits<T>::min(), std::numeric_limits<T>::max());
     return ret;
 }
@@ -78,7 +78,7 @@ inline QWidget* SIntDataInformationMethods<T>::staticCreateEditWidget(QWidget* p
 template <typename T>
 inline QVariant SIntDataInformationMethods<T>::staticDataFromWidget(const QWidget* w)
 {
-    const auto* spin = qobject_cast<const SIntSpinBox*>(w);
+    const auto* spin = qobject_cast<const Okteta::SIntSpinBox*>(w);
     Q_CHECK_PTR(spin);
     if (spin) {
         return spin->value();
@@ -91,7 +91,7 @@ inline QVariant SIntDataInformationMethods<T>::staticDataFromWidget(const QWidge
 template <typename T>
 inline void SIntDataInformationMethods<T>::staticSetWidgetData(T value, QWidget* w)
 {
-    auto* spin = qobject_cast<SIntSpinBox*>(w);
+    auto* spin = qobject_cast<Okteta::SIntSpinBox*>(w);
     Q_CHECK_PTR(spin);
     if (spin) {
         spin->setValue(value);

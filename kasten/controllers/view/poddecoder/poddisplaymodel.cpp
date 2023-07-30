@@ -59,53 +59,53 @@ QVariant PODDisplayModel::data(const QModelIndex& index, int role) const
     switch (column)
     {
     case PODTableModel::ValueId:
-        if (data.canConvert<Binary8>()) {
-            Binary8 binary8 = data.value<Binary8>();
+        if (data.canConvert<Okteta::Binary8>()) {
+            Okteta::Binary8 binary8 = data.value<Okteta::Binary8>();
             result = binary8.toString();
-        } else if (data.canConvert<Octal8>()) {
-            Octal8 octal8 = data.value<Octal8>();
+        } else if (data.canConvert<Okteta::Octal8>()) {
+            Okteta::Octal8 octal8 = data.value<Okteta::Octal8>();
             result = octal8.toString();
-        } else if (data.canConvert<Hexadecimal8>()) {
-            Hexadecimal8 hexadecimal8 = data.value<Hexadecimal8>();
+        } else if (data.canConvert<Okteta::Hexadecimal8>()) {
+            Okteta::Hexadecimal8 hexadecimal8 = data.value<Okteta::Hexadecimal8>();
             result = hexadecimal8.toString();
-        } else if (data.canConvert<SInt8>()) {
-            SInt8 sInt8 = data.value<SInt8>();
+        } else if (data.canConvert<Okteta::SInt8>()) {
+            Okteta::SInt8 sInt8 = data.value<Okteta::SInt8>();
             result = sInt8.toString(m_uiWidget->locale());
-        } else if (data.canConvert<SInt16>()) {
-            SInt16 sInt16 = data.value<SInt16>();
+        } else if (data.canConvert<Okteta::SInt16>()) {
+            Okteta::SInt16 sInt16 = data.value<Okteta::SInt16>();
             result = sInt16.toString(m_uiWidget->locale());
-        } else if (data.canConvert<SInt32>()) {
-            SInt32 sInt32 = data.value<SInt32>();
+        } else if (data.canConvert<Okteta::SInt32>()) {
+            Okteta::SInt32 sInt32 = data.value<Okteta::SInt32>();
             result = sInt32.toString(m_uiWidget->locale());
-        } else if (data.canConvert<SInt64>()) {
-            SInt64 sInt64 = data.value<SInt64>();
+        } else if (data.canConvert<Okteta::SInt64>()) {
+            Okteta::SInt64 sInt64 = data.value<Okteta::SInt64>();
             result = sInt64.toString(m_uiWidget->locale());
-        } else if (data.canConvert<UInt8>()) {
-            UInt8 uInt8 = data.value<UInt8>();
+        } else if (data.canConvert<Okteta::UInt8>()) {
+            Okteta::UInt8 uInt8 = data.value<Okteta::UInt8>();
             result = uInt8.toString(m_tool->isUnsignedAsHex(),m_uiWidget->locale());
-        } else if (data.canConvert<UInt16>()) {
-            UInt16 uInt16 = data.value<UInt16>();
+        } else if (data.canConvert<Okteta::UInt16>()) {
+            Okteta::UInt16 uInt16 = data.value<Okteta::UInt16>();
             result = uInt16.toString(m_tool->isUnsignedAsHex(), m_uiWidget->locale());
-        } else if (data.canConvert<UInt32>()) {
-            UInt32 uInt32 = data.value<UInt32>();
+        } else if (data.canConvert<Okteta::UInt32>()) {
+            Okteta::UInt32 uInt32 = data.value<Okteta::UInt32>();
             result = uInt32.toString(m_tool->isUnsignedAsHex(), m_uiWidget->locale());
-        } else if (data.canConvert<UInt64>()) {
-            UInt64 uInt64 = data.value<UInt64>();
+        } else if (data.canConvert<Okteta::UInt64>()) {
+            Okteta::UInt64 uInt64 = data.value<Okteta::UInt64>();
             result = uInt64.toString(m_tool->isUnsignedAsHex(), m_uiWidget->locale());
-        } else if (data.canConvert<Float32>()) {
-            Float32 float32 = data.value<Float32>();
+        } else if (data.canConvert<Okteta::Float32>()) {
+            Okteta::Float32 float32 = data.value<Okteta::Float32>();
             result = float32.toString(m_uiWidget->locale());
-        } else if (data.canConvert<Float64>()) {
-            Float64 float64 = data.value<Float64>();
+        } else if (data.canConvert<Okteta::Float64>()) {
+            Okteta::Float64 float64 = data.value<Okteta::Float64>();
             result = float64.toString(m_uiWidget->locale());
-        } else if (data.canConvert<Char8>()) {
-            Char8 char8 = data.value<Char8>();
+        } else if (data.canConvert<Okteta::Char8>()) {
+            Okteta::Char8 char8 = data.value<Okteta::Char8>();
             result = char8.toString();
-        } else if (data.canConvert<Utf8>()) {
-            Utf8 utf8 = data.value<Utf8>();
+        } else if (data.canConvert<Okteta::Utf8>()) {
+            Okteta::Utf8 utf8 = data.value<Okteta::Utf8>();
             result = utf8.toString();
-        } else if (data.canConvert<Utf16>()) {
-            Utf16 utf16 = data.value<Utf16>();
+        } else if (data.canConvert<Okteta::Utf16>()) {
+            Okteta::Utf16 utf16 = data.value<Okteta::Utf16>();
             result = utf16.toString();
         } else {
             result = data;

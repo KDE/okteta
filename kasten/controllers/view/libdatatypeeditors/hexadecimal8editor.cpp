@@ -8,6 +8,8 @@
 
 #include "hexadecimal8editor.hpp"
 
+namespace Okteta {
+
 Hexadecimal8Editor::Hexadecimal8Editor(QWidget* parent)
     : AbstractValue8Editor(Okteta::HexadecimalCoding, parent)
 {
@@ -23,6 +25,8 @@ void Hexadecimal8Editor::setData(Hexadecimal8 data)
 Hexadecimal8 Hexadecimal8Editor::data() const
 {
     return value();
+}
+
 }
 
 #include "moc_hexadecimal8editor.cpp"

@@ -8,6 +8,8 @@
 
 #include "octal8editor.hpp"
 
+namespace Okteta {
+
 Octal8Editor::Octal8Editor(QWidget* parent)
     : AbstractValue8Editor(Okteta::OctalCoding, parent)
 {
@@ -23,6 +25,8 @@ void Octal8Editor::setData(Octal8 data)
 Octal8 Octal8Editor::data() const
 {
     return value();
+}
+
 }
 
 #include "moc_octal8editor.cpp"

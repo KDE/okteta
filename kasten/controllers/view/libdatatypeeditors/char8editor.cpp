@@ -15,11 +15,13 @@
 #include <Okteta/CharCodec>
 
 
-Char8Editor::Char8Editor(const Okteta::CharCodec* charCodec, QWidget* parent)
+namespace Okteta {
+
+Char8Editor::Char8Editor(const CharCodec* charCodec, QWidget* parent)
     : QLineEdit(parent)
     , m_parser(charCodec)
 {
-    setValidator(new Okteta::Char8StringValidator(&m_parser, this));
+    setValidator(new Char8StringValidator(&m_parser, this));
     setClearButtonEnabled(true);
 }
 
@@ -33,12 +35,14 @@ void Char8Editor::setData(Char8 data)
 Char8 Char8Editor::data() const
 {
     QChar c;
-    const Okteta::Char8StringParser::SyntaxState evalResult = m_parser.evaluate(&c, text());
-    if (evalResult != Okteta::Char8StringParser::SyntaxAcceptable) {
+    const Char8StringParser::SyntaxState evalResult = m_parser.evaluate(&c, text());
+    if (evalResult != Char8StringParser::SyntaxAcceptable) {
         return {QChar(0)};
     }
 
     return {c};
+}
+
 }
 
 #include "moc_char8editor.cpp"

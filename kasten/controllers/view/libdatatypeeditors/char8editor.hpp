@@ -6,8 +6,8 @@
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
-#ifndef KASTEN_CHAR8EDITOR_HPP
-#define KASTEN_CHAR8EDITOR_HPP
+#ifndef OKTETA_CHAR8EDITOR_HPP
+#define OKTETA_CHAR8EDITOR_HPP
 
 // lib
 #include "char8stringparser.hpp"
@@ -18,7 +18,6 @@
 
 namespace Okteta {
 class CharCodec;
-}
 
 class Char8Editor : public QLineEdit
 {
@@ -26,7 +25,7 @@ class Char8Editor : public QLineEdit
     Q_PROPERTY(Char8 data READ data WRITE setData USER true)
 
 public:
-    Char8Editor(const Okteta::CharCodec* charCodec, QWidget* parent);
+    Char8Editor(const CharCodec* charCodec, QWidget* parent);
 
     ~Char8Editor() override;
 
@@ -35,7 +34,9 @@ public:
     Char8 data() const;
 
 private:
-    Okteta::Char8StringParser m_parser;
+    Char8StringParser m_parser;
 };
+
+}
 
 #endif

@@ -12,6 +12,8 @@
 #include <QDoubleValidator>
 #include <QLocale>
 
+namespace Okteta {
+
 Float64Editor::Float64Editor(QWidget* parent)
     : QLineEdit(parent)
 {
@@ -34,6 +36,8 @@ Float64 Float64Editor::data() const
 {
 //     interpretText();
     return text().toDouble();
+}
+
 }
 
 #include "moc_float64editor.cpp"

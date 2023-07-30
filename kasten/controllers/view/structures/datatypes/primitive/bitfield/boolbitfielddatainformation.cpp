@@ -50,7 +50,7 @@ QWidget* BoolBitfieldDataInformation::createEditWidget(QWidget* parent) const
         box->addItem(i18nc("boolean value", "true"));
         return box;
     }
-    auto* ret = new UIntSpinBox(parent);
+    auto* ret = new Okteta::UIntSpinBox(parent);
     ret->setBase(Kasten::StructureViewPreferences::unsignedDisplayBase());
     ret->setMaximum(mask());
     return ret;
@@ -63,7 +63,7 @@ QVariant BoolBitfieldDataInformation::dataFromWidget(const QWidget* w) const
         Q_CHECK_PTR(box);
         return box->currentIndex();
     }
-    const auto* spin = qobject_cast<const UIntSpinBox*>(w);
+    const auto* spin = qobject_cast<const Okteta::UIntSpinBox*>(w);
     Q_CHECK_PTR(spin);
     if (spin) {
         return spin->value();
@@ -79,7 +79,7 @@ void BoolBitfieldDataInformation::setWidgetData(QWidget* w) const
         box->setCurrentIndex((mValue.value<quint64>() == 0) ? 0 : 1);
         return;
     }
-    auto* spin = qobject_cast<UIntSpinBox*> (w);
+    auto* spin = qobject_cast<Okteta::UIntSpinBox*> (w);
     if (spin) {
         spin->setValue(mValue.value<quint64>());
     }

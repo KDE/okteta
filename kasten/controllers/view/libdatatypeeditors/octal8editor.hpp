@@ -6,13 +6,15 @@
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
-#ifndef KASTEN_OCTAL8EDITOR_HPP
-#define KASTEN_OCTAL8EDITOR_HPP
+#ifndef OKTETA_OCTAL8EDITOR_HPP
+#define OKTETA_OCTAL8EDITOR_HPP
 
 // lib
 #include "abstractvalue8editor.hpp"
 // libdatatypes
 #include <octal8.hpp>
+
+namespace Okteta {
 
 class Octal8Editor : public AbstractValue8Editor
 {
@@ -28,5 +30,7 @@ public:
     void setData(Octal8 data);
     Octal8 data() const;
 };
+
+}
 
 #endif

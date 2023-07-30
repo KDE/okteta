@@ -8,6 +8,8 @@
 
 #include "char8.hpp"
 
+namespace Okteta {
+
 // TODO: add toDisplayString variant, tag /x and undefined for display formatting
 QString Char8::toString() const
 {
@@ -28,4 +30,6 @@ QString Char8::toString() const
     }
 
     return QString(character);
+}
+
 }

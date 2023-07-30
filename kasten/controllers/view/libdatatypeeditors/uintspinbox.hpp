@@ -6,13 +6,15 @@
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
-#ifndef KASTEN_UINTSPINBOX_HPP
-#define KASTEN_UINTSPINBOX_HPP
+#ifndef OKTETA_UINTSPINBOX_HPP
+#define OKTETA_UINTSPINBOX_HPP
 
 // Qt
 #include <QAbstractSpinBox>
 // C++
 #include <limits>
+
+namespace Okteta {
 
 class UIntSpinBox : public QAbstractSpinBox
 {
@@ -140,6 +142,8 @@ inline UIntSpinBox* UIntSpinBox::createUInt8Spinbox(QWidget* parent)
     auto* ret = new UIntSpinBox(parent);
     ret->setMaximum(std::numeric_limits<quint8>::max());
     return ret;
+}
+
 }
 
 #endif

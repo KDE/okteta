@@ -6,13 +6,15 @@
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
-#ifndef KASTEN_FLOAT64EDITOR_HPP
-#define KASTEN_FLOAT64EDITOR_HPP
+#ifndef OKTETA_FLOAT64EDITOR_HPP
+#define OKTETA_FLOAT64EDITOR_HPP
 
 // libdatatypes
 #include <float64.hpp>
 // Qt
 #include <QLineEdit>
+
+namespace Okteta {
 
 class Float64Editor : public QLineEdit
 {
@@ -28,5 +30,7 @@ public:
     void setData(Float64 data);
     Float64 data() const;
 };
+
+}
 
 #endif

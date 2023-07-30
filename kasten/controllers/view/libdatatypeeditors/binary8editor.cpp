@@ -8,6 +8,8 @@
 
 #include "binary8editor.hpp"
 
+namespace Okteta {
+
 Binary8Editor::Binary8Editor(QWidget* parent)
     : AbstractValue8Editor(Okteta::BinaryCoding, parent)
 {
@@ -23,6 +25,8 @@ void Binary8Editor::setData(Binary8 data)
 Binary8 Binary8Editor::data() const
 {
     return value();
+}
+
 }
 
 #include "moc_binary8editor.cpp"
