@@ -9,8 +9,8 @@
 #ifndef KASTEN_UTF8EDITOR_HPP
 #define KASTEN_UTF8EDITOR_HPP
 
-// lib
-#include "../types/utf8.hpp"
+// libdatatypes
+#include <utf8.hpp>
 // Qt
 #include <QLineEdit>
 

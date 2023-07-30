@@ -9,8 +9,9 @@
 #include "char8codec.hpp"
 
 // tool
-#include "../types/char8.hpp"
 #include "../poddata.hpp"
+// libdatatypes
+#include <char8.hpp>
 // Okteta core
 #include <Okteta/CharCodec>
 #include <Okteta/Character>

@@ -20,14 +20,15 @@
 #include "typeeditors/sintspinbox.hpp"
 #include "typeeditors/uintspinbox.hpp"
 #include "poddecodertool.hpp"
-#include "types/sint8.hpp"
-#include "types/sint16.hpp"
-#include "types/sint32.hpp"
-#include "types/sint64.hpp"
-#include "types/uint8.hpp"
-#include "types/uint16.hpp"
-#include "types/uint32.hpp"
-#include "types/uint64.hpp"
+// libdatatypes
+#include <sint8.hpp>
+#include <sint16.hpp>
+#include <sint32.hpp>
+#include <sint64.hpp>
+#include <uint8.hpp>
+#include <uint16.hpp>
+#include <uint32.hpp>
+#include <uint64.hpp>
 
 // TODO: Stranger that you are reading this: please help out and show how to add QVariant::Types for custom datatypes,
 // so that instead of this unflexible maintanance mess^WWWunlooped code QItemEditorCreator can be used!

@@ -9,8 +9,9 @@
 #include "binary8codec.hpp"
 
 // tool
-#include "../types/binary8.hpp"
 #include "../poddata.hpp"
+// libdatatypes
+#include <binary8.hpp>
 // KF
 #include <KLocalizedString>
 

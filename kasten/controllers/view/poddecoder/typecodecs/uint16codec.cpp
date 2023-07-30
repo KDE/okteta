@@ -9,8 +9,9 @@
 #include "uint16codec.hpp"
 
 // tool
-#include "../types/uint16.hpp"
 #include "../poddata.hpp"
+// libdatatypes
+#include <uint16.hpp>
 // KF
 #include <KLocalizedString>
 

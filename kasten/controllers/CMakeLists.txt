@@ -227,6 +227,28 @@ oktetakastencontrollers_add_sublibrary(view/libbytearraysearch
         ByteArraySearchUtils
 )
 
+oktetakastencontrollers_add_sublibrary(view/libdatatypes
+    BUILD_INCLUDEDIR
+    LIBRARY poddecoder-typeeditors
+    PRIVATE
+        Binary8
+        Octal8
+        Hexadecimal8
+        UInt8
+        UInt16
+        UInt32
+        UInt64
+        SInt8
+        SInt16
+        SInt32
+        SInt64
+        Float32
+        Float64
+        Char8
+        Utf8
+        Utf16
+)
+
 oktetakastencontrollers_add_sublibrary(view/poddecoder/typecodecs
     PRIVATE
         Binary8Codec
@@ -259,12 +281,6 @@ oktetakastencontrollers_add_sublibrary(view/poddecoder
         PODTableView
         PODDecoderTool
         PODDecoderToolView
-)
-
-oktetakastencontrollers_add_sublibrary(view/poddecoder/types
-    LIBRARY poddecoder-typeeditors
-    PRIVATE
-        Char8
 )
 
 oktetakastencontrollers_add_sublibrary(view/poddecoder/typeeditors

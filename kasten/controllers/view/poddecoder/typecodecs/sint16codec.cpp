@@ -9,8 +9,9 @@
 #include "sint16codec.hpp"
 
 // tool
-#include "../types/sint16.hpp"
 #include "../poddata.hpp"
+// libdatatypes
+#include <sint16.hpp>
 // KF
 #include <KLocalizedString>
 

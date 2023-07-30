@@ -11,7 +11,8 @@
 
 // lib
 #include "char8stringparser.hpp"
-#include "../types/char8.hpp"
+// libdatatypes
+#include <char8.hpp>
 // Qt
 #include <QLineEdit>
 

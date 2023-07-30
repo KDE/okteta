@@ -9,8 +9,9 @@
 #include "float64codec.hpp"
 
 // tool
-#include "../types/float64.hpp"
 #include "../poddata.hpp"
+// libdatatypes
+#include <float64.hpp>
 // KF
 #include <KLocalizedString>
 

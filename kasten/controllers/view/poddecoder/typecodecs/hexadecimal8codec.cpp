@@ -9,8 +9,9 @@
 #include "hexadecimal8codec.hpp"
 
 // tool
-#include "../types/hexadecimal8.hpp"
 #include "../poddata.hpp"
+// libdatatypes
+#include <hexadecimal8.hpp>
 // KF
 #include <KLocalizedString>
 

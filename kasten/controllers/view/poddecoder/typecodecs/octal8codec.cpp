@@ -9,8 +9,9 @@
 #include "octal8codec.hpp"
 
 // tool
-#include "../types/octal8.hpp"
 #include "../poddata.hpp"
+// libdatatypes
+#include <octal8.hpp>
 // KF
 #include <KLocalizedString>
 

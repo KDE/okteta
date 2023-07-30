@@ -10,8 +10,9 @@
 #define KASTEN_HEXADECIMAL8EDITOR_HPP
 
 // lib
-#include "../types/hexadecimal8.hpp"
 #include "abstractvalue8editor.hpp"
+// libdatatypes
+#include <hexadecimal8.hpp>
 
 class Hexadecimal8Editor : public AbstractValue8Editor
 {

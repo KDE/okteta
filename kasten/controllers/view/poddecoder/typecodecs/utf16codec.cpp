@@ -9,8 +9,9 @@
 #include "utf16codec.hpp"
 
 // tool
-#include "../types/utf16.hpp"
 #include "../poddata.hpp"
+// libdatatypes
+#include <utf16.hpp>
 // KF
 #include <KLocalizedString>
 // Qt

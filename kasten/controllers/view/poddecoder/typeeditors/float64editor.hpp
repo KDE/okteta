@@ -9,8 +9,8 @@
 #ifndef KASTEN_FLOAT64EDITOR_HPP
 #define KASTEN_FLOAT64EDITOR_HPP
 
-// lib
-#include "../types/float64.hpp"
+// libdatatypes
+#include <float64.hpp>
 // Qt
 #include <QLineEdit>
 

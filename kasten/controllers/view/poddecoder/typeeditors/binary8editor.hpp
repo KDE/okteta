@@ -10,8 +10,9 @@
 #define KASTEN_BINARY8EDITOR_HPP
 
 // lib
-#include "../types/binary8.hpp"
 #include "abstractvalue8editor.hpp"
+// libdatatypes
+#include <binary8.hpp>
 
 class Binary8Editor : public AbstractValue8Editor
 {

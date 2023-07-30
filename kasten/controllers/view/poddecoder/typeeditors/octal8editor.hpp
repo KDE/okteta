@@ -10,8 +10,9 @@
 #define KASTEN_OCTAL8EDITOR_HPP
 
 // lib
-#include "../types/octal8.hpp"
 #include "abstractvalue8editor.hpp"
+// libdatatypes
+#include <octal8.hpp>
 
 class Octal8Editor : public AbstractValue8Editor
 {
