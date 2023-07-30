@@ -9,8 +9,6 @@
 #ifndef KASTEN_ABSTRACTVALUE8EDITOR_HPP
 #define KASTEN_ABSTRACTVALUE8EDITOR_HPP
 
-// lib
-#include "../types/binary8.hpp"
 // OKteta core
 #include <Okteta/OktetaCore>
 // Qt
