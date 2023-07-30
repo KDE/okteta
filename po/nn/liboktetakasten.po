@@ -1,12 +1,12 @@
 # Translation of liboktetakasten to Norwegian Nynorsk
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2009, 2016, 2018, 2019, 2020, 2022.
+# Karl Ove Hufthammer <karl@huftis.org>, 2009, 2016, 2018, 2019, 2020, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-27 00:49+0000\n"
-"PO-Revision-Date: 2022-07-27 20:55+0200\n"
+"PO-Revision-Date: 2023-07-29 12:24+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.04.3\n"
+"X-Generator: Lokalize 23.04.3\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -720,7 +720,7 @@ msgstr "K&opier"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected statistic lines to the clipboard."
-msgstr ""
+msgstr "Kopierer dei merkte statiske linjene til utklippstavla."
 
 #: controllers/view/info/infoview.cpp:117
 #, kde-kuit-format
@@ -729,6 +729,8 @@ msgid ""
 "If you press the <interface>Copy</interface> button, all statistic lines you "
 "selected in the list are copied to the clipboard."
 msgstr ""
+"Trykk <interface>Kopier</interface> for å kopiera alle dei merkte statiske "
+"linjene i lista til utklippstavla."
 
 #: controllers/view/info/infoview.cpp:183
 #: controllers/view/structures/datatypes/datainformation.cpp:58
@@ -1720,20 +1722,20 @@ msgstr "<Filslutt nådd>"
 #: controllers/view/structures/datatypes/datainformation.cpp:228
 #, kde-format
 msgid "Name:"
-msgstr ""
+msgstr "Namn:"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:230
 #, kde-format
 msgid "Value:"
-msgstr ""
+msgstr "Verdi:"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:237
 #, kde-format
 msgctxt "size (elements)"
 msgid "%2 (%1 child)"
 msgid_plural "%2 (%1 children)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%2 (%1 barn)"
+msgstr[1] "%2 (%1 barn)"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:262
 #: controllers/view/structures/datatypes/datainformationwithchildren.cpp:233
@@ -2388,7 +2390,7 @@ msgstr "Verdi"
 #, kde-format
 msgctxt "size of a data structure"
 msgid "Size"
-msgstr ""
+msgstr "Storleik"
 
 #: controllers/view/structures/structureview.cpp:95
 #, kde-format
@@ -3345,7 +3347,7 @@ msgstr "Skilje:"
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "View in HTML"
-msgstr ""
+msgstr "Vis som HTML"
 
 #: gui/io/streamencoder/viewtext/bytearrayviewtextstreamencoder.cpp:41
 #, kde-format
