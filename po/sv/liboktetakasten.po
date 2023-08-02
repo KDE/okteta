@@ -2,21 +2,21 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2018, 2019, 2020.
+# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2018, 2019, 2020, 2023.
 # Arve Eriksson <031299870@telia.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-27 00:49+0000\n"
-"PO-Revision-Date: 2020-01-03 18:24+0100\n"
+"PO-Revision-Date: 2023-08-01 08:28+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 19.04.3\n"
+"X-Generator: Lokalize 20.08.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -726,26 +726,20 @@ msgid "C&opy"
 msgstr "K&opiera"
 
 #: controllers/view/info/infoview.cpp:115
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Copies the selected strings to the clipboard."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected statistic lines to the clipboard."
-msgstr "Kopierar markerade strängar till klippbordet."
+msgstr "Kopierar markerade statistikrader till klippbordet."
 
 #: controllers/view/info/infoview.cpp:117
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info:whatsthis"
-#| msgid ""
-#| "If you press the <interface>Copy</interface> button, all strings you "
-#| "selected in the list are copied to the clipboard."
+#, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
 "If you press the <interface>Copy</interface> button, all statistic lines you "
 "selected in the list are copied to the clipboard."
 msgstr ""
 "Om du klickar på knappen <interface>Kopiera</interface>, kopieras alla "
-"strängar du har markerat i listan dill klippbordet."
+"statistikrader du har markerat i listan dill klippbordet."
 
 #: controllers/view/info/infoview.cpp:183
 #: controllers/view/structures/datatypes/datainformation.cpp:58
@@ -1731,26 +1725,22 @@ msgid "<EOF reached>"
 msgstr "<filslut nått>"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:228
-#, fuzzy, kde-format
-#| msgctxt "name of a data structure"
-#| msgid "Name"
+#, kde-format
 msgid "Name:"
-msgstr "Namn"
+msgstr "Namn:"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:230
-#, fuzzy, kde-format
-#| msgctxt "@title:column value of the bytes for the datatype"
-#| msgid "Value"
+#, kde-format
 msgid "Value:"
-msgstr "Värde"
+msgstr "Värde:"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:237
 #, kde-format
 msgctxt "size (elements)"
 msgid "%2 (%1 child)"
 msgid_plural "%2 (%1 children)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%2 (%1 underliggande objekt)"
+msgstr[1] "%2 (%1 underliggande objekt)"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:262
 #: controllers/view/structures/datatypes/datainformationwithchildren.cpp:233
@@ -2095,27 +2085,25 @@ msgstr "Meddelande"
 #, kde-format
 msgctxt "@title:window"
 msgid "About %1"
-msgstr ""
+msgstr "Om %1"
 
 #: controllers/view/structures/settings/aboutstructuredialog.cpp:44
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Versions"
+#, kde-format
 msgctxt "Version version-number"
 msgid "Version %1"
-msgstr "Versioner"
+msgstr "Version %1"
 
 #: controllers/view/structures/settings/aboutstructuredialog.cpp:81
 #: controllers/view/structures/settings/aboutstructuredialog.cpp:86
 #, kde-format
 msgid "License: %1"
-msgstr ""
+msgstr "Licens: %1"
 
 #: controllers/view/structures/settings/aboutstructuredialog.cpp:92
 #, kde-format
 msgctxt "@title:tab"
 msgid "About"
-msgstr ""
+msgstr "Om"
 
 #: controllers/view/structures/settings/aboutstructuredialog.cpp:107
 #, kde-format
@@ -2124,10 +2112,11 @@ msgid ""
 "Email author\n"
 "%1"
 msgstr ""
+"Skicka e-post till upphovsmannen\n"
+"%1"
 
 #: controllers/view/structures/settings/aboutstructuredialog.cpp:116
-#, fuzzy, kde-format
-#| msgid "Author"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Author"
 msgstr "Upphovsman"
@@ -2136,7 +2125,7 @@ msgstr "Upphovsman"
 #, kde-format
 msgctxt "@title:window"
 msgid "License Agreement"
-msgstr ""
+msgstr "Licensavtal"
 
 #: controllers/view/structures/settings/structureaddremovewidget.cpp:53
 #, kde-format
@@ -2154,7 +2143,7 @@ msgstr "Använda strukturer:"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "About"
-msgstr ""
+msgstr "Om"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:45
 #, kde-format
@@ -2183,12 +2172,10 @@ msgid "Structure Definitions"
 msgstr "Strukturdefinitioner"
 
 #: controllers/view/structures/settings/structuresselector.cpp:40
-#, fuzzy, kde-format
-#| msgctxt "@title"
-#| msgid "Search"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Search..."
-msgstr "Sök"
+msgstr "Sök..."
 
 #. i18n: ectx: tooltip, entry (UnsignedDisplayBase), group (ValueDisplay)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:9
@@ -2398,11 +2385,10 @@ msgid "Value"
 msgstr "Värde"
 
 #: controllers/view/structures/structurestool.cpp:193
-#, fuzzy, kde-format
-#| msgid "Size:"
+#, kde-format
 msgctxt "size of a data structure"
 msgid "Size"
-msgstr "Storlek:"
+msgstr "Storlek"
 
 #: controllers/view/structures/structureview.cpp:95
 #, kde-format
@@ -3359,12 +3345,10 @@ msgid "Separation:"
 msgstr "Avdelare:"
 
 #: gui/io/streamencoder/viewhtml/bytearrayviewhtmlstreamencoder.cpp:36
-#, fuzzy, kde-format
-#| msgctxt "name of the encoding target"
-#| msgid "View in Plain Text"
+#, kde-format
 msgctxt "name of the encoding target"
 msgid "View in HTML"
-msgstr "Visa som vanlig text"
+msgstr "Visa i HTML"
 
 #: gui/io/streamencoder/viewtext/bytearrayviewtextstreamencoder.cpp:41
 #, kde-format
