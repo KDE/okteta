@@ -10,6 +10,7 @@
 #define KASTEN_CHAR8EDITOR_HPP
 
 // lib
+#include "char8stringparser.hpp"
 #include "../types/char8.hpp"
 // Qt
 #include <QLineEdit>
@@ -24,13 +25,16 @@ class Char8Editor : public QLineEdit
     Q_PROPERTY(Char8 data READ data WRITE setData USER true)
 
 public:
-    Char8Editor(Okteta::CharCodec* charCodec, QWidget* parent);
+    Char8Editor(const Okteta::CharCodec* charCodec, QWidget* parent);
 
     ~Char8Editor() override;
 
 public:
     void setData(Char8 data);
     Char8 data() const;
+
+private:
+    Okteta::Char8StringParser m_parser;
 };
 
 #endif

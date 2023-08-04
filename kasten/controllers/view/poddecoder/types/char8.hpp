@@ -38,11 +38,6 @@ public:
 inline Char8::Char8() = default;
 inline Char8::Char8(Okteta::Character c) : character(c) {}
 
-inline QString Char8::toString() const
-{
-    return QString(character.isUndefined() ? Okteta::DefaultUndefinedChar : (QChar)character);
-}
-
 Q_DECLARE_METATYPE(Char8)
 
 #endif
