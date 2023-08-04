@@ -112,7 +112,13 @@ set_package_properties(Qca-qt5 PROPERTIES
 )
 
 ecm_set_disabled_deprecation_versions(
+    # Disable Qt deprecation warnings as there should be no new deprecations in Qt5,
+    # and QLinkedList porting will take some time, also not blocking Qt6 port
+    DISABLE_NEWER_WARNINGS
     QT 5.14.0 # QLinkedList
+)
+
+ecm_set_disabled_deprecation_versions(
     KF 5.100
 )
 
