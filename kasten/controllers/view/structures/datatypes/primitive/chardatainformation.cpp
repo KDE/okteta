@@ -32,7 +32,7 @@ QString charString(quint8 value)
     case '\v': return QStringLiteral("'\\v'");
     default: break;
     }
-    QChar qchar = QChar(quint32(value));
+    QChar qchar = (value > 127) ? QChar::ReplacementCharacter : QChar(value, 0);
     if (!qchar.isPrint()) {
         qchar = QChar::ReplacementCharacter;
     }
