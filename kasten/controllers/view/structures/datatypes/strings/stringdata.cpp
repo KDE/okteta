@@ -32,7 +32,7 @@ void StringData::setTerminationCodePoint(uint term)
     mMode |= Sequence;
 }
 
-void StringData::setLittleEndian(bool littleEndian)
+void StringData::setEndianness(QSysInfo::Endian endianness)
 {
-    mLittleEndian = littleEndian;
+    mLittleEndian = (endianness == QSysInfo::LittleEndian);
 }

@@ -186,11 +186,11 @@ void StringDataInformation::setEncoding(StringDataInformation::StringType encodi
     if (mData && ((mEncoding == StringType::UTF16_LE && encoding == StringType::UTF16_BE) ||
                   (mEncoding == StringType::UTF16_BE && encoding == StringType::UTF16_LE))) {
         // only set endianess, since is already utf 16
-        mData->setLittleEndian(encoding == StringType::UTF16_LE);
+        mData->setEndianness((encoding == StringType::UTF16_LE) ? QSysInfo::LittleEndian : QSysInfo::BigEndian);
     } else if (mData && ((mEncoding == StringType::UTF32_LE && encoding == StringType::UTF32_BE) ||
                          (mEncoding == StringType::UTF32_BE && encoding == StringType::UTF32_LE))) {
         // only set endianess, since is already utf 32
-        mData->setLittleEndian(encoding == StringType::UTF32_LE);
+        mData->setEndianness((encoding == StringType::UTF32_LE) ? QSysInfo::LittleEndian : QSysInfo::BigEndian);
     } else {
         StringData* data = nullptr;
         switch (encoding) {
@@ -205,19 +205,19 @@ void StringDataInformation::setEncoding(StringDataInformation::StringType encodi
             break;
         case StringType::UTF16_LE:
             data = new Utf16StringData(this);
-            data->setLittleEndian(true);
+            data->setEndianness(QSysInfo::LittleEndian);
             break;
         case StringType::UTF16_BE:
             data = new Utf16StringData(this);
-            data->setLittleEndian(false);
+            data->setEndianness(QSysInfo::BigEndian);
             break;
         case StringType::UTF32_LE:
             data = new Utf32StringData(this);
-            data->setLittleEndian(true);
+            data->setEndianness(QSysInfo::LittleEndian);
             break;
         case StringType::UTF32_BE:
             data = new Utf32StringData(this);
-            data->setLittleEndian(false);
+            data->setEndianness(QSysInfo::BigEndian);
             break;
         case StringType::EBCDIC:
             data = new EbcdicStringData(this);
