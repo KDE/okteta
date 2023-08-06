@@ -3,14 +3,6 @@ set(OKTETAKASTENCONTROLLERS_SO_VERSION ${OKTETAKASTEN_LIB_SOVERSION})
 
 set( LIBFRAMESPRINT_REL_DIR ../../libs/framesprint )
 
-set(HAVE_QCA2 ${Qca-qt5_FOUND})
-configure_file(config-qca2.hpp.in  ${CMAKE_CURRENT_BINARY_DIR}/config-qca2.hpp)
-
-set(OPTIONAL_PRIVATE)
-if(Qca-qt5_FOUND)
-    set(OPTIONAL_PRIVATE qca-qt5)
-endif()
-
 # create static libraries for sharing between unit tests and actual library product
 # This means we don't have to compile the sources twice
 
@@ -64,7 +56,6 @@ okteta_add_library(Controllers NAMESPACE Okteta Kasten
         Qt5::PrintSupport
         Qt5::Script
 #         Qt5::Test # QAbstractItemModelTester
-        ${OPTIONAL_PRIVATE}
     VERSION     ${OKTETAKASTENCONTROLLERS_VERSION}
     SOVERSION   ${OKTETAKASTENCONTROLLERS_SO_VERSION}
     ABIVERSION  ${OKTETAKASTEN_ABI_VERSION} ${KASTEN_ABI_VERSION}
@@ -179,11 +170,7 @@ oktetakastencontrollers_add_sublibrary(view/libbytearraychecksum
         ByteArrayChecksumAlgorithmFactory
         ByteArrayChecksumParameterSetEditFactory
 )
-if( Qca-qt5_FOUND )
-    set( QCA2CHECKSUM_CLASSES
-        Qca2ByteArrayChecksumAlgorithm
-    )
-endif()
+
 oktetakastencontrollers_add_sublibrary(view/libbytearraychecksum/algorithm
     PRIVATE
         Crc32ByteArrayChecksumAlgorithm
@@ -193,6 +180,7 @@ oktetakastencontrollers_add_sublibrary(view/libbytearraychecksum/algorithm
         ModSum16ByteArrayChecksumAlgorithm
         ModSum32ByteArrayChecksumAlgorithm
         ModSum64ByteArrayChecksumAlgorithm
+        QCryptographicByteArrayChecksumAlgorithm
 ## NEWCHECKSUM(start)
 ## Here add the names of your classes of your checksum algorithm,
 ## e.g.
@@ -211,7 +199,6 @@ oktetakastencontrollers_add_sublibrary(view/libbytearraychecksum/algorithm
 ##         MyByteArrayChecksumParameterSet
 ##         MyByteArrayChecksumParameterSetEdit
 ## NEWCHECKSUMPARAMETERSET(end)
-        ${QCA2CHECKSUM_CLASSES}
 )
 
 oktetakastencontrollers_add_sublibrary(view/checksum

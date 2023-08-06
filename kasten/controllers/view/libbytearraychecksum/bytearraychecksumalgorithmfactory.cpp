@@ -1,21 +1,10 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    SPDX-FileCopyrightText: 2009, 2011 Friedrich W. H. Kossebau <kossebau@kde.org>
+    SPDX-FileCopyrightText: 2009, 2011, 2023 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
-
-// QCA
-// need to have this first, as QCA needs QT_NO_CAST_FROM_ASCII disabled when included
-#include <config-qca2.hpp> // krazy:excludeall=includes
-#if HAVE_QCA2
-// disable QT_NO_CAST_FROM_ASCII
-#ifdef QT_NO_CAST_FROM_ASCII
-#undef QT_NO_CAST_FROM_ASCII
-#endif
-#include <QtCrypto>
-#endif
 
 #include "bytearraychecksumalgorithmfactory.hpp"
 
@@ -27,9 +16,7 @@
 #include "algorithm/modsum16bytearraychecksumalgorithm.hpp"
 #include "algorithm/modsum32bytearraychecksumalgorithm.hpp"
 #include "algorithm/modsum64bytearraychecksumalgorithm.hpp"
-#if HAVE_QCA2
-#include "algorithm/qca2bytearraychecksumalgorithm.hpp"
-#endif
+#include "algorithm/qcryptographicbytearraychecksumalgorithm.hpp"
 // NEWCHECKSUM(start)
 // Here add the name of your header file of your checksum algorithm,
 // e.g.
@@ -39,15 +26,6 @@
 #include <KLocalizedString>
 // Qt
 #include <QVector>
-
-#if HAVE_QCA2
-static inline void addQca2Algorithm(QVector<AbstractByteArrayChecksumAlgorithm*>& algorithmList, const QString& name, const QString& id, const char* type)
-{
-    if (QCA::isSupported(type)) {
-        algorithmList << new Qca2ByteArrayChecksumAlgorithm(name, id, QString::fromLatin1(type));
-    }
-}
-#endif
 
 QVector<AbstractByteArrayChecksumAlgorithm*> ByteArrayChecksumAlgorithmFactory::createAlgorithms()
 {
@@ -59,37 +37,46 @@ QVector<AbstractByteArrayChecksumAlgorithm*> ByteArrayChecksumAlgorithmFactory::
         new Adler32ByteArrayChecksumAlgorithm(),
         new Crc32ByteArrayChecksumAlgorithm(),
         new Crc64ByteArrayChecksumAlgorithm(),
+        // TODO: MD2? was provided by QCA
+        new QCryptographicByteArrayChecksumAlgorithm(i18nc("name of the hash algorithm", "MD4"),
+                     QStringLiteral("MD4"),  QCryptographicHash::Md4),
+        new QCryptographicByteArrayChecksumAlgorithm(i18nc("name of the hash algorithm", "MD5"),
+                     QStringLiteral("MD5"),  QCryptographicHash::Md5),
+        // TODO: SHA0? was provided by QCA
+        new QCryptographicByteArrayChecksumAlgorithm(i18nc("name of the hash algorithm", "SHA-1"),
+                     QStringLiteral("SHA-1"), QCryptographicHash::Sha1),
+        // TODO: RIPEMD160? was provided by QCA
+        new QCryptographicByteArrayChecksumAlgorithm(i18nc("name of the hash algorithm", "SHA-224"),
+                     QStringLiteral("SHA-224"),  QCryptographicHash::Sha224),
+        new QCryptographicByteArrayChecksumAlgorithm(i18nc("name of the hash algorithm", "SHA-256"),
+                     QStringLiteral("SHA-256"),  QCryptographicHash::Sha256),
+        new QCryptographicByteArrayChecksumAlgorithm(i18nc("name of the hash algorithm", "SHA-384"),
+                     QStringLiteral("SHA-384"),  QCryptographicHash::Sha384),
+        new QCryptographicByteArrayChecksumAlgorithm(i18nc("name of the hash algorithm", "SHA-512"),
+                     QStringLiteral("SHA-512"),  QCryptographicHash::Sha512),
+        new QCryptographicByteArrayChecksumAlgorithm(i18nc("name of the hash algorithm", "SHA3-224"),
+                     QStringLiteral("SHA3-224"),  QCryptographicHash::Sha3_224),
+        new QCryptographicByteArrayChecksumAlgorithm(i18nc("name of the hash algorithm", "SHA3-256"),
+                     QStringLiteral("SHA3-256"),  QCryptographicHash::Sha3_256),
+        new QCryptographicByteArrayChecksumAlgorithm(i18nc("name of the hash algorithm", "SHA3-384"),
+                     QStringLiteral("SHA3-384"),  QCryptographicHash::Sha3_384),
+        new QCryptographicByteArrayChecksumAlgorithm(i18nc("name of the hash algorithm", "SHA3-512"),
+                     QStringLiteral("SHA3-512"),  QCryptographicHash::Sha3_512),
+        new QCryptographicByteArrayChecksumAlgorithm(i18nc("name of the hash algorithm", "Keccak-224"),
+                     QStringLiteral("Keccak-224"),  QCryptographicHash::Keccak_224),
+        new QCryptographicByteArrayChecksumAlgorithm(i18nc("name of the hash algorithm", "Keccak-256"),
+                     QStringLiteral("Keccak-256"),  QCryptographicHash::Keccak_256),
+        new QCryptographicByteArrayChecksumAlgorithm(i18nc("name of the hash algorithm", "Keccak-384"),
+                     QStringLiteral("Keccak-384"),  QCryptographicHash::Keccak_384),
+        new QCryptographicByteArrayChecksumAlgorithm(i18nc("name of the hash algorithm", "Keccak-512"),
+                     QStringLiteral("Keccak-512"),  QCryptographicHash::Keccak_512),
+        // TODO: Whirlpool? was provided by QCA
 // NEWCHECKSUM(start)
 // Here add the creation of an object of your checksum algorithm class and add it to the list,
 // e.g.
 //         new MyByteArrayChecksumAlgorithm(),
 // NEWCHECKSUM(end)
     };
-
-#if HAVE_QCA2
-    addQca2Algorithm(result, i18nc("name of the hash algorithm", "SHA-0"),
-                     QStringLiteral("SHA0"),  "sha0");
-    addQca2Algorithm(result, i18nc("name of the hash algorithm", "SHA-1"),
-                     QStringLiteral("SHA1"),  "sha1");
-    addQca2Algorithm(result, i18nc("name of the hash algorithm", "MD2"),
-                     QStringLiteral("MD2"),  "md2");
-    addQca2Algorithm(result, i18nc("name of the hash algorithm", "MD4"),
-                     QStringLiteral("MD4"),  "md4");
-    addQca2Algorithm(result, i18nc("name of the hash algorithm", "MD5"),
-                     QStringLiteral("MD5"),  "md5");
-    addQca2Algorithm(result, i18nc("name of the hash algorithm", "RIPEMD160"),
-                     QStringLiteral("RIPEMD160"),  "ripemd160");
-    addQca2Algorithm(result, i18nc("name of the hash algorithm", "SHA-224"),
-                     QStringLiteral("SHA224"),  "sha224");
-    addQca2Algorithm(result, i18nc("name of the hash algorithm", "SHA-256"),
-                     QStringLiteral("SHA256"),  "sha256");
-    addQca2Algorithm(result, i18nc("name of the hash algorithm", "SHA-384"),
-                     QStringLiteral("SHA384"),  "sha384");
-    addQca2Algorithm(result, i18nc("name of the hash algorithm", "SHA-512"),
-                     QStringLiteral("SHA512"),  "sha512");
-    addQca2Algorithm(result, i18nc("name of the hash algorithm", "Whirlpool"),
-                     QStringLiteral("Whirlpool"),  "whirlpool");
-#endif
 
     return result;
 }

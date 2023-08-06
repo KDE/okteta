@@ -1,26 +1,29 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    SPDX-FileCopyrightText: 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    SPDX-FileCopyrightText: 2009, 2023 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
-#ifndef KASTEN_QCA2BYTEARRAYCHECKSUMALGORITHM_HPP
-#define KASTEN_QCA2BYTEARRAYCHECKSUMALGORITHM_HPP
+#ifndef KASTEN_QCRYPTOGRAPHICBYTEARRAYCHECKSUMALGORITHM_HPP
+#define KASTEN_QCRYPTOGRAPHICBYTEARRAYCHECKSUMALGORITHM_HPP
 
 //
 #include "nobytearraychecksumparameterset.hpp"
 //
 #include <abstractbytearraychecksumalgorithm.hpp>
+// Qt
+#include <QCryptographicHash>
 
-class Qca2ByteArrayChecksumAlgorithm : public AbstractByteArrayChecksumAlgorithm
+class QCryptographicByteArrayChecksumAlgorithm : public AbstractByteArrayChecksumAlgorithm
 {
     Q_OBJECT
 
 public:
-    Qca2ByteArrayChecksumAlgorithm(const QString& name, const QString& id, const QString& type);
-    ~Qca2ByteArrayChecksumAlgorithm() override;
+    QCryptographicByteArrayChecksumAlgorithm(const QString& name, const QString& id,
+                                             QCryptographicHash::Algorithm algorithm);
+    ~QCryptographicByteArrayChecksumAlgorithm() override;
 
 public: // AbstractByteArrayChecksumAlgorithm API
     bool calculateChecksum(QString* result, const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const override;
@@ -28,7 +31,7 @@ public: // AbstractByteArrayChecksumAlgorithm API
 
 private:
     NoByteArrayChecksumParameterSet mParameterSet;
-    const QString mType;
+    const QCryptographicHash::Algorithm m_algorithm;
 };
 
 #endif

@@ -6,17 +6,6 @@
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
-// QCA
-// need to have this first, as QCA needs QT_NO_CAST_FROM_ASCII disabled when included
-#include <config-qca2.hpp> // krazy:excludeall=includes
-#if HAVE_QCA2
-// disable QT_NO_CAST_FROM_ASCII
-#ifdef QT_NO_CAST_FROM_ASCII
-#undef QT_NO_CAST_FROM_ASCII
-#endif
-#include <QtCrypto>
-#endif
-
 #include "checksumtool.hpp"
 
 // lib
@@ -48,12 +37,6 @@ ChecksumTool::ChecksumTool()
 {
     setObjectName(QStringLiteral("Checksum"));
 
-// TODO: find a better place to do and store the initialization
-#if HAVE_QCA2
-    mQcaInitializer = new QCA::Initializer(QCA::Practical, 64);
-    qCDebug(LOG_OKTETA_KASTEN_CONTROLLER_CHECKSUM) << QCA::supportedFeatures();// Hash::supportedTypes();
-#endif
-
     mAlgorithmList = ByteArrayChecksumAlgorithmFactory::createAlgorithms();
 
     const KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
@@ -76,9 +59,6 @@ ChecksumTool::ChecksumTool()
 ChecksumTool::~ChecksumTool()
 {
     qDeleteAll(mAlgorithmList);
-#if HAVE_QCA2
-    delete mQcaInitializer;
-#endif
 }
 
 QVector<AbstractByteArrayChecksumAlgorithm*> ChecksumTool::algorithmList() const { return mAlgorithmList; }

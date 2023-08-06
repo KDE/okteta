@@ -103,14 +103,6 @@ find_package(KF5 ${REQUIRED_KF_VERSION} REQUIRED
     ${ADDITIONAL_REQUIRED_KF_COMPONENTS}
 )
 
-find_package(Qca-qt5 2.1.0)
-set_package_properties(Qca-qt5 PROPERTIES
-    DESCRIPTION "Qt Cryptographic Architecture"
-    URL "https://commits.kde.org/qca"
-    TYPE OPTIONAL
-    PURPOSE "Needed for most of the algorithms of the checksum tool"
-)
-
 ecm_set_disabled_deprecation_versions(
     # Disable Qt deprecation warnings as there should be no new deprecations in Qt5,
     # and QLinkedList porting will take some time, also not blocking Qt6 port

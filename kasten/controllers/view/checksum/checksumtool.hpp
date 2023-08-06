@@ -9,8 +9,6 @@
 #ifndef KASTEN_CHECKSUMTOOL_HPP
 #define KASTEN_CHECKSUMTOOL_HPP
 
-// lib
-#include <config-qca2.hpp>
 // Kasten core
 #include <Kasten/AbstractTool>
 // Okteta core
@@ -23,9 +21,6 @@ class AbstractByteArrayChecksumAlgorithm;
 
 namespace Okteta {
 class AbstractByteArrayModel;
-}
-namespace QCA {
-class Initializer;
 }
 
 namespace Kasten {
@@ -89,9 +84,6 @@ private: // created data
 
 private: // settings
     QVector<AbstractByteArrayChecksumAlgorithm*> mAlgorithmList;
-#if HAVE_QCA2
-    QCA::Initializer* mQcaInitializer;
-#endif
     int mAlgorithmId = 0;
 
 private: // sources
