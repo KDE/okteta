@@ -75,7 +75,7 @@ Char8StringParser::SyntaxState Char8StringParser::evaluate(QChar* result,
                 if (stringLength == 2) {
                     return SyntaxIntermediate;
                 }
-                const QStringView hexValueString = QStringView(string).mid(2, 2); // 2 chars
+                const QStringRef hexValueString = string.midRef(2, 2); // 2 chars
                 // toInt just ignores unparseable data at the end, so test outselves
                 QRegularExpressionMatch match = m_hexNumberMatcher.match(hexValueString);
                 if (match.hasMatch()) {
@@ -84,7 +84,7 @@ Char8StringParser::SyntaxState Char8StringParser::evaluate(QChar* result,
             }
             // octal escape:
             else {
-                const QStringView octalValueString = QStringView(string).mid(1, 3); // 3 chars
+                const QStringRef octalValueString = string.midRef(1, 3); // 3 chars
                 // toInt just ignores unparseable data at the end, so test outselves
                 QRegularExpressionMatch match = m_octalNumberMatcher.match(octalValueString);
                 if (match.hasMatch()) {
