@@ -258,6 +258,12 @@ oktetakastencontrollers_add_sublibrary(view/poddecoder
         PODDecoderToolView
 )
 
+oktetakastencontrollers_add_sublibrary(view/poddecoder/types
+    LIBRARY poddecoder-typeeditors
+    PRIVATE
+        Char8
+)
+
 oktetakastencontrollers_add_sublibrary(view/poddecoder/typeeditors
     LIBRARY poddecoder-typeeditors
     PRIVATE
@@ -270,6 +276,8 @@ oktetakastencontrollers_add_sublibrary(view/poddecoder/typeeditors
         Float32Editor
         Float64Editor
         Char8Editor
+        Char8StringParser
+        Char8StringValidator
         Utf8Editor
 )
 
@@ -626,6 +634,23 @@ oktetakastencontrollers_add_sublibrary(utils
 )
 
 if(BUILD_TESTING)
+    # poddecoder typeeditors unit tests
+    ecm_add_test(
+        view/poddecoder/typeeditors/char8stringvalidator.cpp
+        view/poddecoder/typeeditors/char8stringparser.cpp
+        test/char8stringvalidatortest.cpp
+
+        TEST_NAME char8stringvalidatortest
+        LINK_LIBRARIES
+            OktetaCore
+            Qt5::Gui
+            Qt5::Test
+    )
+    target_include_directories(char8stringvalidatortest
+        PUBLIC
+            view/poddecoder/typeeditors
+    )
+
     #structures view unit tests
     ecm_add_tests(
         test/primitivearraytest.cpp

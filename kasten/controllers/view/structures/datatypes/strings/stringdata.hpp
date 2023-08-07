@@ -11,6 +11,8 @@
 
 #include <Okteta/Address>
 #include "../datainformationbase.hpp"
+// Qt
+#include <QSysInfo>
 
 class StringDataInformation;
 
@@ -49,7 +51,7 @@ public:
     virtual BitCount32 sizeAt(uint index) const = 0;
     virtual qint64 read(const Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining) = 0;
     /** by default just sets value, if more logic is needed can be overridden */
-    virtual void setLittleEndian(bool littleEndian);
+    virtual void setEndianness(QSysInfo::Endian endianness);
     TerminationMode terminationMode() const;
     void setTerminationMode(TerminationMode mode);
 

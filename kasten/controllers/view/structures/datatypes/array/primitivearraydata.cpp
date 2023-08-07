@@ -103,8 +103,7 @@ bool PrimitiveArrayData<type>::setChildData(uint row, const QVariant& value, Okt
                                  << bitsRemaining << ") need " << ((row + 1) * sizeof(T) * 8);
         return false;
     }
-    QSysInfo::Endian byteOrder = mChildType->effectiveByteOrder();
-    bool littleEndian = byteOrder == QSysInfo::LittleEndian;
+    const QSysInfo::Endian byteOrder = mChildType->effectiveByteOrder();
     bool ok = false;
     T convertedVal = DisplayClass::fromVariant(value, &ok);
     if (!ok) {
@@ -115,24 +114,25 @@ bool PrimitiveArrayData<type>::setChildData(uint row, const QVariant& value, Okt
         << AbstractArrayData::mParent->fullObjectPath() << "setting index" << row << "to"
         << value << "(= " << convertedVal << ")";
     this->mData[row] = convertedVal;
-    this->writeOneItem(convertedVal, address + (row * sizeof(T)), out, littleEndian);
+    this->writeOneItem(convertedVal, address, out, byteOrder);
     return true;
 }
 
 template <PrimitiveDataType type>
 void PrimitiveArrayData<type>::writeOneItem(T value, Okteta::Address addr,
-                                            Okteta::AbstractByteArrayModel* out, bool littleEndian)
+                                            Okteta::AbstractByteArrayModel* out, QSysInfo::Endian endianness)
 {
-    if (littleEndian) {
+    if (endianness == QSysInfo::LittleEndian) {
         for (uint i = 0; i < sizeof(T); ++i) {
             // compiler should be smart enough not to create a loop
             quint8 val = (quint64(value) & (quint64(0xff) << (8 * i))) >> (8 * i);
             out->setByte(addr + i, val);
         }
     } else {
-        for (uint i = 1; i <= sizeof(T); ++i) {
+        for (uint i = 0; i < sizeof(T); ++i) {
             // compiler should be smart enough not to create a loop
-            quint8 val = (quint64(value) & (quint64(0xff) << (8 * (sizeof(T) - i)))) >> (8 * (sizeof(T) - i));
+            const int maskBitOffset = 8 * (sizeof(T) - i - 1);
+            quint8 val = (quint64(value) & (quint64(0xff) << maskBitOffset)) >> maskBitOffset;
             out->setByte(addr + i, val);
         }
     }
@@ -140,26 +140,28 @@ void PrimitiveArrayData<type>::writeOneItem(T value, Okteta::Address addr,
 
 template <>
 void PrimitiveArrayData<PrimitiveDataType::Float>::writeOneItem(float value, Okteta::Address addr,
-                                                                Okteta::AbstractByteArrayModel* out, bool littleEndian)
+                                                                Okteta::AbstractByteArrayModel* out,
+                                                                QSysInfo::Endian endianness)
 {
     Q_ASSERT(sizeof(float) == sizeof(quint32));
     union {
         quint32 intVal; float floatVal;
     } un;
     un.floatVal = value;
-    PrimitiveArrayData<PrimitiveDataType::UInt32>::writeOneItem(un.intVal, addr, out, littleEndian);
+    PrimitiveArrayData<PrimitiveDataType::UInt32>::writeOneItem(un.intVal, addr, out, endianness);
 }
 
 template <>
 void PrimitiveArrayData<PrimitiveDataType::Double>::writeOneItem(double value, Okteta::Address addr,
-                                                                 Okteta::AbstractByteArrayModel* out, bool littleEndian)
+                                                                 Okteta::AbstractByteArrayModel* out,
+                                                                 QSysInfo::Endian endianness)
 {
     Q_ASSERT(sizeof(double) == sizeof(quint64));
     union {
         quint64 intVal; double doubleVal;
     } un;
     un.doubleVal = value;
-    PrimitiveArrayData<PrimitiveDataType::UInt64>::writeOneItem(un.intVal, addr, out, littleEndian);
+    PrimitiveArrayData<PrimitiveDataType::UInt64>::writeOneItem(un.intVal, addr, out, endianness);
 }
 
 template <PrimitiveDataType type>

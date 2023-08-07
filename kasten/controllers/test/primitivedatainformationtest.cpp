@@ -430,7 +430,7 @@ QString charString(quint32 i)
     } else if (i == '\a') {
         charString = QStringLiteral("\\a");
     } else {
-        QChar unicode(i);
+        QChar unicode = (i > 127) ? QChar::ReplacementCharacter : QChar(i, 0);
         if (unicode.isPrint()) {
             charString = QString(unicode);
         } else {
