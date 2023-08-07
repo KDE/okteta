@@ -114,7 +114,7 @@ bool PrimitiveArrayData<type>::setChildData(uint row, const QVariant& value, Okt
         << AbstractArrayData::mParent->fullObjectPath() << "setting index" << row << "to"
         << value << "(= " << convertedVal << ")";
     this->mData[row] = convertedVal;
-    this->writeOneItem(convertedVal, address + (row * sizeof(T)), out, byteOrder);
+    this->writeOneItem(convertedVal, address, out, byteOrder);
     return true;
 }
 
