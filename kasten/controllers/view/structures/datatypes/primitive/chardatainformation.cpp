@@ -38,6 +38,37 @@ QString charString(quint8 value)
     }
     return QString(QLatin1Char('\'') + qchar + QLatin1Char('\''));
 }
+
+QString editString(quint8 value)
+{
+    switch (value) {
+    case '\0': return QStringLiteral("\\0");
+    case '\a': return QStringLiteral("\\a");
+    case '\b': return QStringLiteral("\\b");
+    case '\f': return QStringLiteral("\\f");
+    case '\n': return QStringLiteral("\\n");
+    case '\r': return QStringLiteral("\\r");
+    case '\t': return QStringLiteral("\\t");
+    case '\v': return QStringLiteral("\\v");
+    default: break;
+    }
+
+    if (value < 128) {
+        const QChar qchar(value, 0);
+        if (qchar.isPrint()) {
+            return QString(qchar);
+        }
+    }
+
+    int base = Kasten::StructureViewPreferences::charDisplayBase();
+    // only support octal & hexadecomal for now, given only that is parsed
+    // default to hexadecomal
+    if (base != 8) {
+        base = 16;
+    }
+    const QString escapePrefix = (base == 8) ? QStringLiteral("\\") : QStringLiteral("\\x");
+    return escapePrefix + QString::number(value, base);
+}
 }
 
 QString CharDataInformationMethods::staticValueString(quint8 value)
@@ -124,11 +155,7 @@ void CharDataInformationMethods::staticSetWidgetData(quint8 value, QWidget* w)
 {
     auto* edit = qobject_cast<QLineEdit*> (w);
     if (edit) {
-        QChar qchar(value, 0);
-        if (!qchar.isPrint()) {
-            qchar = QChar(QChar::ReplacementCharacter);
-        }
-        edit->setText(qchar);
+        edit->setText(editString(value));
     }
 }
 
