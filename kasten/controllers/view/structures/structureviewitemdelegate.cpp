@@ -47,7 +47,10 @@ void StructureViewItemDelegate::setModelData(QWidget* editor, QAbstractItemModel
     }
     DataInformation* data = dataB->asDataInformation();
     QVariant value = data->dataFromWidget(editor);
-    model->setData(index, value, Qt::EditRole);
+    // editor might have intermediate edit state, will return invalid QVariant
+    if (value.isValid()) {
+        model->setData(index, value, Qt::EditRole);
+    }
 }
 
 void StructureViewItemDelegate::setEditorData(QWidget* editor, const QModelIndex& index) const
