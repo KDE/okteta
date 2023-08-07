@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-13 02:44+0000\n"
-"PO-Revision-Date: 2023-06-17 09:14+0200\n"
+"PO-Revision-Date: 2023-08-06 05:35+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.2\n"
+"X-Generator: Lokalize 23.04.3\n"
 
 #: controllers/document/modified/modifiedbarcontroller.cpp:74
 #, kde-format
@@ -80,7 +80,7 @@ msgstr "Cambios"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Id of the version"
-msgstr "Id da versión"
+msgstr "Identificador da versión."
 
 #: controllers/document/versionview/versiontablemodel.cpp:115
 #, kde-format
@@ -139,7 +139,7 @@ msgstr "Título"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Title of the document"
-msgstr "O título do documento"
+msgstr "O título do documento."
 
 #: controllers/documentsystem/documentsbrowser/documentstool.cpp:34
 #: controllers/documentsystem/documentsbrowser/documentstoolviewfactory.cpp:24
@@ -378,7 +378,7 @@ msgstr "Axustar ao tamaño"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Zoom: %1%"
-msgstr "Ampliación: %1%"
+msgstr "Ampliación: %1%."
 
 #: core/system/documentsyncmanager_p.cpp:114
 #, kde-format
