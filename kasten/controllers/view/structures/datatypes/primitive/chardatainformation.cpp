@@ -95,6 +95,18 @@ QVariant CharDataInformationMethods::staticDataFromWidget(const QWidget* w)
             if (text.at(1) == QLatin1Char('r')) {
                 return (quint8) '\r'; // cr
             }
+            if (text.at(1) == QLatin1Char('v')) {
+                return (quint8) '\v'; // vertical tab
+            }
+            if (text.at(1) == QLatin1Char('f')) {
+                return (quint8) '\f'; // form feed - new page
+            }
+            if (text.at(1) == QLatin1Char('b')) {
+                return (quint8) '\b'; // backspace
+            }
+            if (text.at(1) == QLatin1Char('a')) {
+                return (quint8) '\a'; // audible bell
+            }
             // octal escape:
             bool okay;
             const QStringRef valStr = text.midRef(1, 3); // only 2 chars
