@@ -8,37 +8,39 @@
 
 #include "doubledatainformation.hpp"
 
+// tool
+#include "structureviewpreferences.hpp"
+// libdatatypeeditors
+#include <float64editor.hpp>
 // KF
 #include <KLocalizedString>
 // Qt
 #include <QScriptValue>
 #include <QLocale>
-#include <QDoubleSpinBox>
 
-#include "structureviewpreferences.hpp"
 
 QWidget* DoubleDataInformationMethods::staticCreateEditWidget(QWidget* parent)
 {
-    auto* ret = new QDoubleSpinBox(parent);
+    auto* ret = new Okteta::Float64Editor(parent);
     return ret;
 }
 
 QVariant DoubleDataInformationMethods::staticDataFromWidget(const QWidget* w)
 {
-    const auto* spin = qobject_cast<const QDoubleSpinBox*> (w);
-    Q_CHECK_PTR(spin);
-    if (spin) {
-        return spin->value();
+    const auto* editor = qobject_cast<const Okteta::Float64Editor*> (w);
+    Q_CHECK_PTR(editor);
+    if (editor) {
+        return editor->data().value;
     }
     return {};
 }
 
 void DoubleDataInformationMethods::staticSetWidgetData(double value, QWidget* w)
 {
-    auto* spin = qobject_cast<QDoubleSpinBox*> (w);
-    Q_CHECK_PTR(spin);
-    if (spin) {
-        spin->setValue(value);
+    auto* editor = qobject_cast<Okteta::Float64Editor*> (w);
+    Q_CHECK_PTR(editor);
+    if (editor) {
+        editor->setData(value);
     }
 }
 

@@ -15,6 +15,8 @@
 #include <char8.hpp>
 // Qt
 #include <QLineEdit>
+// Std
+#include <optional>
 
 namespace Okteta {
 class CharCodec;
@@ -30,6 +32,9 @@ public:
     ~Char8Editor() override;
 
 public:
+    void setByte(quint8 byte);
+    std::optional<quint8> byte() const;
+
     void setData(Char8 data);
     Char8 data() const;
 

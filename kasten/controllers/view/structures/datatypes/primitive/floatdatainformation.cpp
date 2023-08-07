@@ -8,40 +8,39 @@
 
 #include "floatdatainformation.hpp"
 
-#include <limits>
+// tool
+#include "structureviewpreferences.hpp"
+// libdatatypeeditors
+#include <float32editor.hpp>
 // KF
 #include <KLocalizedString>
 // Qt
 #include <QScriptValue>
-#include <QDoubleSpinBox>
 #include <QLocale>
 
-#include "structureviewpreferences.hpp"
 
 QWidget* FloatDataInformationMethods::staticCreateEditWidget(QWidget* parent)
 {
-    auto* ret = new QDoubleSpinBox(parent);
-    ret->setMinimum(std::numeric_limits<float>::lowest());
-    ret->setMaximum(std::numeric_limits<float>::max());
+    auto* ret = new Okteta::Float32Editor(parent);
     return ret;
 }
 
 QVariant FloatDataInformationMethods::staticDataFromWidget(const QWidget* w)
 {
-    const auto* spin = qobject_cast<const QDoubleSpinBox*> (w);
-    Q_CHECK_PTR(spin);
-    if (spin) {
-        return ((float) spin->value());
+    const auto* editor = qobject_cast<const Okteta::Float32Editor*> (w);
+    Q_CHECK_PTR(editor);
+    if (editor) {
+        return editor->data().value;
     }
     return {};
 }
 
 void FloatDataInformationMethods::staticSetWidgetData(float value, QWidget* w)
 {
-    auto* spin = qobject_cast<QDoubleSpinBox*> (w);
-    Q_CHECK_PTR(spin);
-    if (spin) {
-        spin->setValue(value);
+    auto* editor = qobject_cast<Okteta::Float32Editor*> (w);
+    Q_CHECK_PTR(editor);
+    if (editor) {
+        editor->setData(value);
     }
 }
 

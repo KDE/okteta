@@ -31,6 +31,7 @@ public:
 
 public:
     SyntaxState evaluate(QChar* result, const QString& string) const;
+    const Okteta::CharCodec* charCodec() const;
 
 private:
     const CharCodec* const m_charCodec;
@@ -38,6 +39,8 @@ private:
     const QRegularExpression m_octalNumberMatcher;
     const QRegularExpression m_hexNumberMatcher;
 };
+
+inline const Okteta::CharCodec* Char8StringParser::charCodec() const { return m_charCodec; }
 
 }
 

@@ -27,9 +27,31 @@ Char8Editor::Char8Editor(const CharCodec* charCodec, QWidget* parent)
 
 Char8Editor::~Char8Editor() = default;
 
+void Char8Editor::setByte(quint8 byte)
+{
+    const Okteta::Character decodedChar = m_parser.charCodec()->decode(byte);
+    setData(decodedChar);
+}
+
 void Char8Editor::setData(Char8 data)
 {
     setText(data.character.isUndefined() ? QString() : data.toString());
+}
+
+std::optional<quint8> Char8Editor::byte() const
+{
+    const Okteta::Character character = data().character;
+
+    bool success = (!character.isUndefined());
+    Okteta::Byte byte;
+
+    if (success) {
+        success = m_parser.charCodec()->encode(&byte, character);
+    }
+    if (success) {
+        return {byte};
+    }
+    return {};
 }
 
 Char8 Char8Editor::data() const

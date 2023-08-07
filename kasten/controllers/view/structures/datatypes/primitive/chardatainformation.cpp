@@ -8,14 +8,18 @@
 
 #include "chardatainformation.hpp"
 
+// lib
+#include "structureviewpreferences.hpp"
+// libdatatypeeditors
+#include <char8editor.hpp>
+// Okteta core
+#include <Okteta/CharCodec>
 // KF
 #include <KLocalizedString>
 // Qt
 #include <QLocale>
 #include <QScriptValue>
-#include <QLineEdit>
 
-#include "structureviewpreferences.hpp"
 
 namespace {
 QString charString(quint8 value)
@@ -38,38 +42,23 @@ QString charString(quint8 value)
     }
     return QString(QLatin1Char('\'') + qchar + QLatin1Char('\''));
 }
+}
 
-QString editString(quint8 value)
+class CodecOwner : public QObject
 {
-    switch (value) {
-    case '\0': return QStringLiteral("\\0");
-    case '\a': return QStringLiteral("\\a");
-    case '\b': return QStringLiteral("\\b");
-    case '\f': return QStringLiteral("\\f");
-    case '\n': return QStringLiteral("\\n");
-    case '\r': return QStringLiteral("\\r");
-    case '\t': return QStringLiteral("\\t");
-    case '\v': return QStringLiteral("\\v");
-    default: break;
-    }
+public:
+    CodecOwner(Okteta::CharCodec* charCodec, QObject* parent);
 
-    if (value < 128) {
-        const QChar qchar(value, 0);
-        if (qchar.isPrint()) {
-            return QString(qchar);
-        }
-    }
+private:
+    std::unique_ptr<Okteta::CharCodec> m_charCodec;
+};
 
-    int base = Kasten::StructureViewPreferences::charDisplayBase();
-    // only support octal & hexadecomal for now, given only that is parsed
-    // default to hexadecomal
-    if (base != 8) {
-        base = 16;
-    }
-    const QString escapePrefix = (base == 8) ? QStringLiteral("\\") : QStringLiteral("\\x");
-    return escapePrefix + QString::number(value, base);
+CodecOwner::CodecOwner(Okteta::CharCodec* charCodec, QObject* parent)
+    : QObject(parent)
+    , m_charCodec(charCodec)
+{
 }
-}
+
 
 QString CharDataInformationMethods::staticValueString(quint8 value)
 {
@@ -87,65 +76,20 @@ QString CharDataInformationMethods::staticValueString(quint8 value)
 
 QWidget* CharDataInformationMethods::staticCreateEditWidget(QWidget* parent)
 {
-    auto* editWidget = new QLineEdit(parent);
-    editWidget->setClearButtonEnabled(true);
+    Okteta::CharCodec* charCodec = Okteta::CharCodec::createCodec(QStringLiteral("US-ASCII"));
+    auto* editWidget = new Okteta::Char8Editor(charCodec, parent);
+    new CodecOwner(charCodec, editWidget);
     return editWidget;
 }
 
 QVariant CharDataInformationMethods::staticDataFromWidget(const QWidget* w)
 {
     // TODO fix this code!!
-    const auto* edit = qobject_cast<const QLineEdit*> (w);
+    const auto* edit = qobject_cast<const Okteta::Char8Editor*> (w);
     if (edit) {
-        QString text = edit->text();
-        if (text.length() == 0) {
-            return {};
-        }
-        if (text.length() == 1) {
-            // TODO char codec
-            return (unsigned char) text.at(0).toLatin1();
-        }
-        if (text.at(0) == QLatin1Char('\\')) {
-            // escape sequence
-            if (text.at(1) == QLatin1Char('x')) {
-                // hex escape:
-                bool okay;
-                const QStringRef valStr = text.midRef(2, 2); // only 2 chars
-                quint8 val = valStr.toInt(&okay, 16);
-                if (okay) {
-                    return val;
-                }
-                return {};
-            }
-            if (text.at(1) == QLatin1Char('n')) {
-                return (quint8) '\n'; // newline
-            }
-            if (text.at(1) == QLatin1Char('t')) {
-                return (quint8) '\t'; // tab
-            }
-            if (text.at(1) == QLatin1Char('r')) {
-                return (quint8) '\r'; // cr
-            }
-            if (text.at(1) == QLatin1Char('v')) {
-                return (quint8) '\v'; // vertical tab
-            }
-            if (text.at(1) == QLatin1Char('f')) {
-                return (quint8) '\f'; // form feed - new page
-            }
-            if (text.at(1) == QLatin1Char('b')) {
-                return (quint8) '\b'; // backspace
-            }
-            if (text.at(1) == QLatin1Char('a')) {
-                return (quint8) '\a'; // audible bell
-            }
-            // octal escape:
-            bool okay;
-            const QStringRef valStr = text.midRef(1, 3); // only 2 chars
-            quint8 val = valStr.toInt(&okay, 8);
-            if (okay) {
-                return val;
-            }
-            return {};
+        const std::optional<quint8> byte = edit->byte();
+        if (byte) {
+            return byte.value();
         }
     }
     return {};
@@ -153,9 +97,9 @@ QVariant CharDataInformationMethods::staticDataFromWidget(const QWidget* w)
 
 void CharDataInformationMethods::staticSetWidgetData(quint8 value, QWidget* w)
 {
-    auto* edit = qobject_cast<QLineEdit*> (w);
+    auto* edit = qobject_cast<Okteta::Char8Editor*>(w);
     if (edit) {
-        edit->setText(editString(value));
+        edit->setByte(value);
     }
 }
 
