@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-27 00:49+0000\n"
+"POT-Creation-Date: 2023-08-07 00:53+0000\n"
 "PO-Revision-Date: 2015-02-04 16:00+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: bosanski <bs@li.org>\n"
@@ -499,7 +499,7 @@ msgid ""
 "Conversion cancelled because of chars which are not in the target charset."
 msgstr "Konverzija otkazana zbog znakova koji nisu u odredišnom skupu znakova."
 
-#: controllers/view/checksum/checksumtool.cpp:91
+#: controllers/view/checksum/checksumtool.cpp:71
 #: controllers/view/checksum/checksumtoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window of the tool to calculate checksums"
@@ -870,71 +870,103 @@ msgctxt "@info:tooltip"
 msgid "The byte order to use for decoding the bytes into integer values."
 msgstr "Redoslijed bajtova pri dekodiranju u cjelobrojne vrijednosti."
 
-#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:70
-#, kde-format
-msgctxt "name of the hash algorithm"
-msgid "SHA-0"
-msgstr "SHA-0"
-
-#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:72
-#, kde-format
-msgctxt "name of the hash algorithm"
-msgid "SHA-1"
-msgstr "SHA-1"
-
-#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:74
-#, kde-format
-msgctxt "name of the hash algorithm"
-msgid "MD2"
-msgstr "MD2"
-
-#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:76
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:41
 #, kde-format
 msgctxt "name of the hash algorithm"
 msgid "MD4"
 msgstr "MD4"
 
-#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:78
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:43
 #, kde-format
 msgctxt "name of the hash algorithm"
 msgid "MD5"
 msgstr "MD5"
 
-#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:80
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:46
 #, kde-format
 msgctxt "name of the hash algorithm"
-msgid "RIPEMD160"
-msgstr "RIPEMD‑160"
+msgid "SHA-1"
+msgstr "SHA-1"
 
-#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:82
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:49
 #, kde-format
 msgctxt "name of the hash algorithm"
 msgid "SHA-224"
 msgstr "SHA‑224"
 
-#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:84
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:51
 #, kde-format
 msgctxt "name of the hash algorithm"
 msgid "SHA-256"
 msgstr "SHA‑256"
 
-#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:86
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:53
 #, kde-format
 msgctxt "name of the hash algorithm"
 msgid "SHA-384"
 msgstr "SHA‑384"
 
-#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:88
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:55
 #, kde-format
 msgctxt "name of the hash algorithm"
 msgid "SHA-512"
 msgstr "SHA‑512"
 
-#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:90
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:57
+#, fuzzy, kde-format
+#| msgctxt "name of the hash algorithm"
+#| msgid "SHA-224"
+msgctxt "name of the hash algorithm"
+msgid "SHA3-224"
+msgstr "SHA‑224"
+
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:59
+#, fuzzy, kde-format
+#| msgctxt "name of the hash algorithm"
+#| msgid "SHA-256"
+msgctxt "name of the hash algorithm"
+msgid "SHA3-256"
+msgstr "SHA‑256"
+
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:61
+#, fuzzy, kde-format
+#| msgctxt "name of the hash algorithm"
+#| msgid "SHA-384"
+msgctxt "name of the hash algorithm"
+msgid "SHA3-384"
+msgstr "SHA‑384"
+
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:63
+#, fuzzy, kde-format
+#| msgctxt "name of the hash algorithm"
+#| msgid "SHA-512"
+msgctxt "name of the hash algorithm"
+msgid "SHA3-512"
+msgstr "SHA‑512"
+
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:65
 #, kde-format
 msgctxt "name of the hash algorithm"
-msgid "Whirlpool"
-msgstr "Whirlpool"
+msgid "Keccak-224"
+msgstr ""
+
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:67
+#, kde-format
+msgctxt "name of the hash algorithm"
+msgid "Keccak-256"
+msgstr ""
+
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:69
+#, kde-format
+msgctxt "name of the hash algorithm"
+msgid "Keccak-384"
+msgstr ""
+
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:71
+#, kde-format
+msgctxt "name of the hash algorithm"
+msgid "Keccak-512"
+msgstr ""
 
 #: controllers/view/libbytearrayfilter/filter/andbytearrayfilter.cpp:22
 #, kde-format
@@ -3467,6 +3499,22 @@ msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"
 msgid "UTF-8"
 msgstr "UTF-8"
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "SHA-0"
+#~ msgstr "SHA-0"
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "MD2"
+#~ msgstr "MD2"
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "RIPEMD160"
+#~ msgstr "RIPEMD‑160"
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "Whirlpool"
+#~ msgstr "Whirlpool"
 
 #~ msgid ""
 #~ "Name: %1\n"

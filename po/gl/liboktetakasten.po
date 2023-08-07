@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-27 00:49+0000\n"
-"PO-Revision-Date: 2023-06-15 07:35+0200\n"
+"POT-Creation-Date: 2023-08-07 00:53+0000\n"
+"PO-Revision-Date: 2023-08-06 05:35+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.2\n"
+"X-Generator: Lokalize 23.04.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -249,35 +249,35 @@ msgstr "Char"
 #, kde-format
 msgctxt "@info:tooltip column contains the value in decimal format"
 msgid "Decimal"
-msgstr "Decimal"
+msgstr "Decimal."
 
 #: controllers/view/bytetable/bytetablemodel.cpp:170
 #: controllers/view/info/statistictablemodel.cpp:227
 #, kde-format
 msgctxt "@info:tooltip column contains the value in hexadecimal format"
 msgid "Hexadecimal"
-msgstr "Hexadecimal"
+msgstr "Hexadecimal."
 
 #: controllers/view/bytetable/bytetablemodel.cpp:172
 #: controllers/view/info/statistictablemodel.cpp:231
 #, kde-format
 msgctxt "@info:tooltip column contains the value in octal format"
 msgid "Octal"
-msgstr "Octal"
+msgstr "Octal."
 
 #: controllers/view/bytetable/bytetablemodel.cpp:174
 #: controllers/view/info/statistictablemodel.cpp:233
 #, kde-format
 msgctxt "@info:tooltip column contains the value in binary format"
 msgid "Binary"
-msgstr "Binario"
+msgstr "Binario."
 
 #: controllers/view/bytetable/bytetablemodel.cpp:176
 #: controllers/view/info/statistictablemodel.cpp:237
 #, kde-format
 msgctxt "@info:tooltip column contains the character with the value"
 msgid "Character"
-msgstr "Carácter"
+msgstr "Carácter."
 
 #: controllers/view/bytetable/bytetabletool.cpp:35
 #: controllers/view/bytetable/bytetabletoolviewfactory.cpp:24
@@ -498,7 +498,7 @@ msgstr ""
 "Cancelouse a conversión por mor de caracteres que non existen na "
 "codificación de destino."
 
-#: controllers/view/checksum/checksumtool.cpp:91
+#: controllers/view/checksum/checksumtool.cpp:71
 #: controllers/view/checksum/checksumtoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window of the tool to calculate checksums"
@@ -667,7 +667,7 @@ msgstr "&Ir"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Go to the Offset"
-msgstr "Lévao ao desprazamento"
+msgstr "Lévao ao desprazamento."
 
 #: controllers/view/gotooffset/gotooffsetview.cpp:115
 #, kde-kuit-format
@@ -860,71 +860,103 @@ msgstr ""
 "A orde dos bytes que se usará para descodificar os bytes como valores "
 "enteiros."
 
-#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:70
-#, kde-format
-msgctxt "name of the hash algorithm"
-msgid "SHA-0"
-msgstr "SHA-0"
-
-#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:72
-#, kde-format
-msgctxt "name of the hash algorithm"
-msgid "SHA-1"
-msgstr "SHA-1"
-
-#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:74
-#, kde-format
-msgctxt "name of the hash algorithm"
-msgid "MD2"
-msgstr "MD2"
-
-#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:76
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:41
 #, kde-format
 msgctxt "name of the hash algorithm"
 msgid "MD4"
 msgstr "MD4"
 
-#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:78
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:43
 #, kde-format
 msgctxt "name of the hash algorithm"
 msgid "MD5"
 msgstr "MD5"
 
-#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:80
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:46
 #, kde-format
 msgctxt "name of the hash algorithm"
-msgid "RIPEMD160"
-msgstr "RIPEMD160"
+msgid "SHA-1"
+msgstr "SHA-1"
 
-#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:82
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:49
 #, kde-format
 msgctxt "name of the hash algorithm"
 msgid "SHA-224"
 msgstr "SHA-224"
 
-#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:84
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:51
 #, kde-format
 msgctxt "name of the hash algorithm"
 msgid "SHA-256"
 msgstr "SHA-256"
 
-#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:86
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:53
 #, kde-format
 msgctxt "name of the hash algorithm"
 msgid "SHA-384"
 msgstr "SHA-384"
 
-#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:88
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:55
 #, kde-format
 msgctxt "name of the hash algorithm"
 msgid "SHA-512"
 msgstr "SHA-512"
 
-#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:90
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:57
+#, fuzzy, kde-format
+#| msgctxt "name of the hash algorithm"
+#| msgid "SHA-224"
+msgctxt "name of the hash algorithm"
+msgid "SHA3-224"
+msgstr "SHA-224"
+
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:59
+#, fuzzy, kde-format
+#| msgctxt "name of the hash algorithm"
+#| msgid "SHA-256"
+msgctxt "name of the hash algorithm"
+msgid "SHA3-256"
+msgstr "SHA-256"
+
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:61
+#, fuzzy, kde-format
+#| msgctxt "name of the hash algorithm"
+#| msgid "SHA-384"
+msgctxt "name of the hash algorithm"
+msgid "SHA3-384"
+msgstr "SHA-384"
+
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:63
+#, fuzzy, kde-format
+#| msgctxt "name of the hash algorithm"
+#| msgid "SHA-512"
+msgctxt "name of the hash algorithm"
+msgid "SHA3-512"
+msgstr "SHA-512"
+
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:65
 #, kde-format
 msgctxt "name of the hash algorithm"
-msgid "Whirlpool"
-msgstr "Whirlpool"
+msgid "Keccak-224"
+msgstr ""
+
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:67
+#, kde-format
+msgctxt "name of the hash algorithm"
+msgid "Keccak-256"
+msgstr ""
+
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:69
+#, kde-format
+msgctxt "name of the hash algorithm"
+msgid "Keccak-384"
+msgstr ""
+
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:71
+#, kde-format
+msgctxt "name of the hash algorithm"
+msgid "Keccak-512"
+msgstr ""
 
 #: controllers/view/libbytearrayfilter/filter/andbytearrayfilter.cpp:22
 #, kde-format
@@ -1199,13 +1231,13 @@ msgstr "Valor"
 #, kde-format
 msgctxt "@info:tooltip for column Type"
 msgid "The type of data"
-msgstr "O tipo dos datos"
+msgstr "O tipo dos datos."
 
 #: controllers/view/poddecoder/podtablemodel.cpp:159
 #, kde-format
 msgctxt "@info:tooltip for column Value"
 msgid "The value of the bytes for the datatype"
-msgstr "O valor dos bytes para o tipo de dato"
+msgstr "O valor dos bytes para o tipo de dato."
 
 #: controllers/view/poddecoder/podtableview.cpp:85
 #, kde-format
@@ -1445,7 +1477,7 @@ msgstr "&Substituír"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Start replace"
-msgstr "Comezar a substituír"
+msgstr "Comezar a substituír."
 
 #: controllers/view/replace/replacedialog.cpp:55
 #, kde-kuit-format
@@ -1539,7 +1571,7 @@ msgstr "&Atopar"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Start searching"
-msgstr "Comeza a busca"
+msgstr "Comeza a busca."
 
 #: controllers/view/search/searchdialog.cpp:34
 #, kde-kuit-format
@@ -2154,7 +2186,7 @@ msgstr "Estruturas empregadas:"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "About"
-msgstr "Sobre"
+msgstr "Sobre."
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:45
 #, kde-format
@@ -2214,7 +2246,7 @@ msgstr "A base a usar cando se converten caracteres nunha cadea de valor."
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Whether to show the numerical value of chars"
-msgstr "Indica se debe amosar o valor numérico dos chars"
+msgstr "Indica se debe amosar o valor numérico dos caracteres."
 
 #. i18n: ectx: tooltip, entry (LocaleAwareFloatFormatting), group (ValueDisplay)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:25
@@ -2223,7 +2255,7 @@ msgctxt "@info:tooltip"
 msgid "Whether to format floating point values according to the current locale"
 msgstr ""
 "Indica se debe formatar os valores de coma flotante segundo a configuración "
-"rexional actual"
+"rexional actual."
 
 #. i18n: ectx: tooltip, entry (ShortTypeNames), group (ValueDisplay)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:29
@@ -2243,7 +2275,7 @@ msgid ""
 "according to the current locale settings"
 msgstr ""
 "Se o escolle os valores que se amosan no formato decimal formataranse "
-"segundo a configuración rexional actual"
+"segundo a configuración rexional actual."
 
 #. i18n: ectx: whatsthis, entry (LocaleAwareDecimalFormatting), group (ValueDisplay)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:34
@@ -2262,7 +2294,7 @@ msgid ""
 "of decimal digits)"
 msgstr ""
 "A precisión utilizada para converter os números en coma flotante nunha cadea "
-"(número de díxitos decimais)"
+"(número de díxitos decimais)."
 
 #. i18n: ectx: label, entry (ByteOrder), group (StructureSettings)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:47
@@ -2337,7 +2369,7 @@ msgstr "Usar nomes de tipos curtos."
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:66
 #, kde-format
 msgid "Use locale-aware integer formatting"
-msgstr "Usar un formato de enteiros segundo a configuración rexional"
+msgstr "Usar un formato de enteiros segundo a configuración rexional."
 
 #. i18n: ectx: property (text), widget (QLabel, unsigned_label)
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:73
@@ -2355,7 +2387,7 @@ msgstr "Valores con signo:"
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:99
 #, kde-format
 msgid "Use locale-aware floating-point formatting"
-msgstr "Usar un formato de coma flotante segundo a configuración rexional"
+msgstr "Usar un formato de coma flotante segundo a configuración rexional."
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:106
@@ -2367,7 +2399,7 @@ msgstr "Precisión da coma flotante:"
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:119
 #, kde-format
 msgid "Show numerical value of chars"
-msgstr "Amosar o valor numérico dos chars"
+msgstr "Amosar o valor numérico dos caracteres."
 
 #. i18n: ectx: property (text), widget (QLabel, char_label)
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:126
@@ -2979,29 +3011,31 @@ msgctxt "@window:title"
 msgid "\"%1\" View Profile"
 msgstr "Perfil de vista «%1»"
 
+# skip-rule: gl-punto-final
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:43
 #, kde-format
 msgctxt "@info:status short for: Insert mode"
 msgid "INS"
 msgstr "INS"
 
+# skip-rule: gl-punto-final
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:44
 #, kde-format
 msgctxt "@info:status short for: Overwrite mode"
 msgid "OVR"
-msgstr "OVR"
+msgstr "SUB"
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:45
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Insert mode"
-msgstr "Modo de inserción"
+msgstr "Modo de inserción."
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:46
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Overwrite mode"
-msgstr "Modo de sobrescrita"
+msgstr "Modo de sobrescrita."
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:61
 #, kde-format
@@ -3030,26 +3064,26 @@ msgstr "%1 bytes"
 #, kde-format
 msgctxt "@info:status selection: start offset - end offset ()"
 msgid "Selection: %1 - %2 (%3)"
-msgstr "Selección: %1 - %2 (%3)"
+msgstr "Selección: %1 - %2 (%3)."
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:163
 #, kde-format
 msgctxt "@info:status offset value not available"
 msgid "Offset: -"
-msgstr "Desprazamento: -"
+msgstr "Desprazamento: -."
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:164
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:221
 #, kde-format
 msgctxt "@info:status offset value not available"
 msgid "Selection: -"
-msgstr "Selección: -"
+msgstr "Selección: -."
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:219
 #, kde-format
 msgctxt "@info:status selection: start offset - end offset (number of bytes)"
 msgid "Selection: %1 - %2 (%3)"
-msgstr "Selección: %1 - %2 (%3)"
+msgstr "Selección: %1 - %2 (%3)."
 
 #: core/document/bytearraydocument.cpp:53
 #, kde-format
@@ -3433,6 +3467,22 @@ msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"
 msgid "UTF-8"
 msgstr "UTF-8"
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "SHA-0"
+#~ msgstr "SHA-0"
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "MD2"
+#~ msgstr "MD2"
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "RIPEMD160"
+#~ msgstr "RIPEMD160"
+
+#~ msgctxt "name of the hash algorithm"
+#~ msgid "Whirlpool"
+#~ msgstr "Whirlpool"
 
 #~ msgid ""
 #~ "Name: %1\n"
