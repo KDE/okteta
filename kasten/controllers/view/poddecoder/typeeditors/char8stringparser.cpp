@@ -44,7 +44,7 @@ Char8StringParser::SyntaxState Char8StringParser::evaluate(QChar* result,
     } else if (c0 == QLatin1Char('\\')) {
         const QChar c1 = string.at(1);
         if (stringLength == 2) {
-            QChar escapedChar = 0;
+            QChar escapedChar;
             if (c1 == QLatin1Char('n')) {
                 escapedChar = QLatin1Char('\n'); // newline
             } else if (c1 == QLatin1Char('r')) {
