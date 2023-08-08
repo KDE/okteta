@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-07 00:53+0000\n"
-"PO-Revision-Date: 2023-06-14 08:04+0200\n"
+"PO-Revision-Date: 2023-08-07 12:31+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.04.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -918,60 +918,52 @@ msgid "SHA-512"
 msgstr "SHA-512"
 
 #: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:57
-#, fuzzy, kde-format
-#| msgctxt "name of the hash algorithm"
-#| msgid "SHA-224"
+#, kde-format
 msgctxt "name of the hash algorithm"
 msgid "SHA3-224"
-msgstr "SHA-224"
+msgstr "SHA3-224"
 
 #: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:59
-#, fuzzy, kde-format
-#| msgctxt "name of the hash algorithm"
-#| msgid "SHA-256"
+#, kde-format
 msgctxt "name of the hash algorithm"
 msgid "SHA3-256"
-msgstr "SHA-256"
+msgstr "SHA3-256"
 
 #: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:61
-#, fuzzy, kde-format
-#| msgctxt "name of the hash algorithm"
-#| msgid "SHA-384"
+#, kde-format
 msgctxt "name of the hash algorithm"
 msgid "SHA3-384"
-msgstr "SHA-384"
+msgstr "SHA3-384"
 
 #: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:63
-#, fuzzy, kde-format
-#| msgctxt "name of the hash algorithm"
-#| msgid "SHA-512"
+#, kde-format
 msgctxt "name of the hash algorithm"
 msgid "SHA3-512"
-msgstr "SHA-512"
+msgstr "SHA3-512"
 
 #: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:65
 #, kde-format
 msgctxt "name of the hash algorithm"
 msgid "Keccak-224"
-msgstr ""
+msgstr "Keccak-224"
 
 #: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:67
 #, kde-format
 msgctxt "name of the hash algorithm"
 msgid "Keccak-256"
-msgstr ""
+msgstr "Keccak-256"
 
 #: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:69
 #, kde-format
 msgctxt "name of the hash algorithm"
 msgid "Keccak-384"
-msgstr ""
+msgstr "Keccak-384"
 
 #: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:71
 #, kde-format
 msgctxt "name of the hash algorithm"
 msgid "Keccak-512"
-msgstr ""
+msgstr "Keccak-512"
 
 #: controllers/view/libbytearrayfilter/filter/andbytearrayfilter.cpp:22
 #, kde-format
