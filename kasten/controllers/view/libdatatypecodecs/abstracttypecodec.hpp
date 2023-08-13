@@ -6,8 +6,8 @@
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
-#ifndef KASTEN_ABSTRACTTYPECODEC_HPP
-#define KASTEN_ABSTRACTTYPECODEC_HPP
+#ifndef OKTETA_ABSTRACTTYPECODEC_HPP
+#define OKTETA_ABSTRACTTYPECODEC_HPP
 
 // Qt
 #include <QString>

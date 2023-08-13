@@ -6,8 +6,8 @@
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
-#ifndef KASTEN_FLOAT32CODEC_HPP
-#define KASTEN_FLOAT32CODEC_HPP
+#ifndef OKTETA_FLOAT32CODEC_HPP
+#define OKTETA_FLOAT32CODEC_HPP
 
 // lib
 #include "abstracttypecodec.hpp"

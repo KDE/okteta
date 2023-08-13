@@ -6,8 +6,8 @@
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
-#ifndef KASTEN_PODDATA_HPP
-#define KASTEN_PODDATA_HPP
+#ifndef OKTETA_PODDATA_HPP
+#define OKTETA_PODDATA_HPP
 
 // Okteta core
 #include <Okteta/Byte>
