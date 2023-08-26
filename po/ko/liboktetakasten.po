@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-07 00:53+0000\n"
-"PO-Revision-Date: 2023-08-08 00:56+0200\n"
+"PO-Revision-Date: 2023-08-25 22:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -1394,7 +1394,7 @@ msgstr "바꾼 것이 없습니다."
 msgctxt "@info"
 msgid "1 replacement made."
 msgid_plural "%1 replacements made."
-msgstr[0] "항목 %1개를 바꾸었습니다."
+msgstr[0] "%1개를 바꾸었습니다."
 
 #: controllers/view/replace/replacecontroller.cpp:79
 #, kde-format
