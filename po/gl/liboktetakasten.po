@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-27 02:29+0000\n"
-"PO-Revision-Date: 2023-08-06 05:35+0200\n"
+"PO-Revision-Date: 2023-08-26 04:45+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -179,7 +179,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enables renaming of the selected bookmark."
-msgstr "Permite cambiar o nome do marcador seleccionado."
+msgstr "Permite renomear o marcador seleccionado."
 
 #: controllers/view/bookmarks/bookmarksview.cpp:105
 #, kde-format
@@ -526,8 +526,8 @@ msgid ""
 "the set minimum length."
 msgstr ""
 "Se preme o botón <interface>Calcular</interface>, a lista actualizarase con "
-"todas as cadeas que estean contidas no intervalo escollido e teña "
-"estabelecida a lonxitude mínima."
+"todas as cadeas que estean contidas no intervalo escollido e teña definida a "
+"lonxitude mínima."
 
 #: controllers/view/filter/filtertool.cpp:67
 #: controllers/view/filter/filtertoolviewfactory.cpp:24
@@ -601,8 +601,7 @@ msgstr "&Desprazamento:"
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Enter an offset to go to, or select a previous offset from the list."
-msgstr ""
-"Insira un desprazamento a onde ir, ou escolla na lista un xa empregado."
+msgstr "Insira un desprazamento a onde ir, ou escolla na lista un xa usado."
 
 #: controllers/view/gotooffset/gotooffsetview.cpp:97
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:112
@@ -923,7 +922,7 @@ msgstr "O operando co que facer a operación."
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Enter an operand, or select a previous operand from the list."
-msgstr "Insira un operando, ou escolla na lista un xa empregado."
+msgstr "Insira un operando, ou escolla na lista un xa usado."
 
 #: controllers/view/libbytearrayfilter/filter/operandbytearrayfilterparametersetedit.cpp:52
 #, kde-format
@@ -1193,7 +1192,7 @@ msgid ""
 "Sets whether the values of the unsigned integer types are shown as "
 "hexadecimal instead of as decimal."
 msgstr ""
-"Indica se os valores dos tipos sen signo se han amosar como hexadecimais no "
+"Define se os valores dos tipos sen signo se han amosar como hexadecimais no "
 "canto de como decimais."
 
 #: controllers/view/poddecoder/podtableview.cpp:135
@@ -1204,7 +1203,7 @@ msgid ""
 ">Keep the unused bytes or remove them?"
 msgstr ""
 "O novo valor precisa de <emphasis>menos</emphasis> bytes (%1 no canto de %2)."
-"<nl/>Desexa manter ou retirar os bytes non utilizados?"
+"<nl/>Quere manter ou retirar os bytes non utilizados?"
 
 #: controllers/view/poddecoder/podtableview.cpp:140
 #, kde-format
@@ -1226,7 +1225,7 @@ msgid ""
 ">Overwrite the following bytes or insert new ones as needed?"
 msgstr ""
 "O novo valor precisa de <emphasis>máis</emphasis> bytes (%1 no canto de %2)."
-"<nl/>Desexa sobrescribir os seguintes bytes ou inserir novos segundo se "
+"<nl/>Quere sobrescribir os seguintes bytes ou inserir novos segundo se "
 "precise?"
 
 #: controllers/view/poddecoder/podtableview.cpp:255
@@ -1387,14 +1386,14 @@ msgstr "Non se atopou o padrón que se debía substituír no array de bytes."
 #, kde-kuit-format
 msgctxt "@info"
 msgid "End of byte array reached.<nl/>Continue from the beginning?"
-msgstr "Acadouse a fin do array de bytes.<nl/>Desexa continuar desde o comezo?"
+msgstr "Acadouse a fin do array de bytes.<nl/>Quere continuar desde o comezo?"
 
 #: controllers/view/replace/replacecontroller.cpp:94
 #: controllers/view/search/searchcontroller.cpp:121
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Beginning of byte array reached.<nl/>Continue from the end?"
-msgstr "Acadouse o comezo do array de bytes.<nl/>Desexa continuar desde a fin?"
+msgstr "Acadouse o comezo do array de bytes.<nl/>Quere continuar desde a fin?"
 
 #: controllers/view/replace/replacedialog.cpp:49
 #, kde-format
@@ -1626,8 +1625,8 @@ msgid ""
 "found will be listed in the view below."
 msgstr ""
 "Se preme o botón <interface>Extraer</interface>, buscaranse todas as cadeas "
-"no intervalo que teñan a lonxitude mínima que se indicase. As cadeas que se "
-"atopen listaranse na vista en baixo."
+"no intervalo que teñan a lonxitude mínima definida. As cadeas que se atopen "
+"listaranse na vista en baixo."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:81
 #, kde-format
@@ -2168,7 +2167,7 @@ msgstr "Estruturas instaladas:"
 #, kde-format
 msgctxt "@info:label"
 msgid "Used structures:"
-msgstr "Estruturas empregadas:"
+msgstr "Estruturas usadas:"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:51
 #, kde-format
@@ -2934,7 +2933,7 @@ msgstr "&Facer predeterminado"
 msgctxt "@info:tooltip"
 msgid "Sets the selected view profile as default for all views."
 msgstr ""
-"Converte o perfil de vista seleccionado no predeterminado para todas as "
+"Define o perfil de vista seleccionado como predeterminado para todas as "
 "vistas."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:95
@@ -3034,7 +3033,7 @@ msgstr "%1 bytes"
 #, kde-format
 msgctxt "@info:status selection: start offset - end offset ()"
 msgid "Selection: %1 - %2 (%3)"
-msgstr "Selección: %1 - %2 (%3)."
+msgstr "Selección: %1 — %2 (%3)."
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:163
 #, kde-format
@@ -3053,7 +3052,7 @@ msgstr "Selección: -."
 #, kde-format
 msgctxt "@info:status selection: start offset - end offset (number of bytes)"
 msgid "Selection: %1 - %2 (%3)"
-msgstr "Selección: %1 - %2 (%3)."
+msgstr "Selección: %1 — %2 (%3)."
 
 #: core/document/bytearraydocument.cpp:53
 #, kde-format
