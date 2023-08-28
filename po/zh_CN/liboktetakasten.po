@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-07 00:53+0000\n"
-"PO-Revision-Date: 2023-08-02 12:40\n"
+"PO-Revision-Date: 2023-08-27 03:41\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -20,12 +20,12 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
+msgstr "KDE 中国, Guo Yunhe, Tyson Tan"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
+msgstr "kde-china@kde.org, i@guoyunhe.me, tysontan@tysontan.com"
 
 #: controllers/document/info/documentinfotool.cpp:48
 #: controllers/document/info/documentinfotoolviewfactory.cpp:24
@@ -702,7 +702,7 @@ msgstr "复制(&O)"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected statistic lines to the clipboard."
-msgstr ""
+msgstr "复制所选统计数据到剪贴板"
 
 #: controllers/view/info/infoview.cpp:117
 #, kde-kuit-format
@@ -711,6 +711,8 @@ msgid ""
 "If you press the <interface>Copy</interface> button, all statistic lines you "
 "selected in the list are copied to the clipboard."
 msgstr ""
+"如果您按下<interface>复制</interface>按钮，您选中的所有统计信息将会被复制到剪"
+"贴板。"
 
 #: controllers/view/info/infoview.cpp:183
 #: controllers/view/structures/datatypes/datainformation.cpp:58
@@ -869,60 +871,52 @@ msgid "SHA-512"
 msgstr "SHA-512"
 
 #: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:57
-#, fuzzy, kde-format
-#| msgctxt "name of the hash algorithm"
-#| msgid "SHA-224"
+#, kde-format
 msgctxt "name of the hash algorithm"
 msgid "SHA3-224"
-msgstr "SHA-224"
+msgstr "SHA3-224"
 
 #: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:59
-#, fuzzy, kde-format
-#| msgctxt "name of the hash algorithm"
-#| msgid "SHA-256"
+#, kde-format
 msgctxt "name of the hash algorithm"
 msgid "SHA3-256"
-msgstr "SHA-256"
+msgstr "SHA3-256"
 
 #: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:61
-#, fuzzy, kde-format
-#| msgctxt "name of the hash algorithm"
-#| msgid "SHA-384"
+#, kde-format
 msgctxt "name of the hash algorithm"
 msgid "SHA3-384"
-msgstr "SHA-384"
+msgstr "SHA3-384"
 
 #: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:63
-#, fuzzy, kde-format
-#| msgctxt "name of the hash algorithm"
-#| msgid "SHA-512"
+#, kde-format
 msgctxt "name of the hash algorithm"
 msgid "SHA3-512"
-msgstr "SHA-512"
+msgstr "SHA3-512"
 
 #: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:65
 #, kde-format
 msgctxt "name of the hash algorithm"
 msgid "Keccak-224"
-msgstr ""
+msgstr "Keccak-224"
 
 #: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:67
 #, kde-format
 msgctxt "name of the hash algorithm"
 msgid "Keccak-256"
-msgstr ""
+msgstr "Keccak-256"
 
 #: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:69
 #, kde-format
 msgctxt "name of the hash algorithm"
 msgid "Keccak-384"
-msgstr ""
+msgstr "Keccak-384"
 
 #: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:71
 #, kde-format
 msgctxt "name of the hash algorithm"
 msgid "Keccak-512"
-msgstr ""
+msgstr "Keccak-512"
 
 #: controllers/view/libbytearrayfilter/filter/andbytearrayfilter.cpp:22
 #, kde-format
@@ -1711,19 +1705,19 @@ msgstr "<已到达 EOF>"
 #: controllers/view/structures/datatypes/datainformation.cpp:228
 #, kde-format
 msgid "Name:"
-msgstr ""
+msgstr "名称："
 
 #: controllers/view/structures/datatypes/datainformation.cpp:230
 #, kde-format
 msgid "Value:"
-msgstr ""
+msgstr "值："
 
 #: controllers/view/structures/datatypes/datainformation.cpp:237
 #, kde-format
 msgctxt "size (elements)"
 msgid "%2 (%1 child)"
 msgid_plural "%2 (%1 children)"
-msgstr[0] ""
+msgstr[0] "%2 (%1 子要素)"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:262
 #: controllers/view/structures/datatypes/datainformationwithchildren.cpp:233
@@ -2064,25 +2058,25 @@ msgstr "信件"
 #, kde-format
 msgctxt "@title:window"
 msgid "About %1"
-msgstr ""
+msgstr "关于 %1"
 
 #: controllers/view/structures/settings/aboutstructuredialog.cpp:44
 #, kde-format
 msgctxt "Version version-number"
 msgid "Version %1"
-msgstr ""
+msgstr "版本 %1"
 
 #: controllers/view/structures/settings/aboutstructuredialog.cpp:81
 #: controllers/view/structures/settings/aboutstructuredialog.cpp:86
 #, kde-format
 msgid "License: %1"
-msgstr ""
+msgstr "许可证：%1"
 
 #: controllers/view/structures/settings/aboutstructuredialog.cpp:92
 #, kde-format
 msgctxt "@title:tab"
 msgid "About"
-msgstr ""
+msgstr "关于"
 
 #: controllers/view/structures/settings/aboutstructuredialog.cpp:107
 #, kde-format
@@ -2091,18 +2085,20 @@ msgid ""
 "Email author\n"
 "%1"
 msgstr ""
+"发送电子邮件给作者\n"
+"%1"
 
 #: controllers/view/structures/settings/aboutstructuredialog.cpp:116
 #, kde-format
 msgctxt "@title:tab"
 msgid "Author"
-msgstr ""
+msgstr "作者"
 
 #: controllers/view/structures/settings/licensedialog.cpp:29
 #, kde-format
 msgctxt "@title:window"
 msgid "License Agreement"
-msgstr ""
+msgstr "许可证协议"
 
 #: controllers/view/structures/settings/structureaddremovewidget.cpp:53
 #, kde-format
@@ -2120,7 +2116,7 @@ msgstr "已用的结构："
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "About"
-msgstr ""
+msgstr "关于"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:45
 #, kde-format
@@ -2152,7 +2148,7 @@ msgstr "结构定义"
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Search..."
-msgstr ""
+msgstr "搜索..."
 
 #. i18n: ectx: tooltip, entry (UnsignedDisplayBase), group (ValueDisplay)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:9
@@ -2360,7 +2356,7 @@ msgstr "价值"
 #, kde-format
 msgctxt "size of a data structure"
 msgid "Size"
-msgstr ""
+msgstr "大小"
 
 #: controllers/view/structures/structureview.cpp:95
 #, kde-format
@@ -3310,7 +3306,7 @@ msgstr "分离度："
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "View in HTML"
-msgstr ""
+msgstr "作为 HTML 查看"
 
 #: gui/io/streamencoder/viewtext/bytearrayviewtextstreamencoder.cpp:41
 #, kde-format
@@ -3381,19 +3377,3 @@ msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"
 msgid "UTF-8"
 msgstr "UTF-8"
-
-#~ msgctxt "name of the hash algorithm"
-#~ msgid "SHA-0"
-#~ msgstr "SHA-0"
-
-#~ msgctxt "name of the hash algorithm"
-#~ msgid "MD2"
-#~ msgstr "MD2"
-
-#~ msgctxt "name of the hash algorithm"
-#~ msgid "RIPEMD160"
-#~ msgstr "RIPEMD160"
-
-#~ msgctxt "name of the hash algorithm"
-#~ msgid "Whirlpool"
-#~ msgstr "Whirlpool"
