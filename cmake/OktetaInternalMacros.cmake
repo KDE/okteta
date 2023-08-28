@@ -12,7 +12,6 @@ include(ECMGeneratePriFile)
 include(ECMGeneratePkgConfigFile)
 # CMake
 include(CMakePackageConfigHelpers)
-include(CMakeParseArguments)
 include(CheckCXXCompilerFlag)
 
 # helper macros
