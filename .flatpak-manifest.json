@@ -1,0 +1,28 @@
+{
+    "id": "org.kde.okteta",
+    "branch": "master",
+    "runtime": "org.kde.Platform",
+    "runtime-version": "5.15-22.08",
+    "sdk": "org.kde.Sdk",
+    "command": "okteta",
+    "tags": ["nightly"],
+    "desktop-file-name-suffix": " (Nightly)",
+    "finish-args": [
+        "--device=dri",
+        "--share=ipc",
+        "--socket=cups",
+        "--socket=wayland",
+        "--socket=x11"
+    ],
+    "cleanup": [
+        "/include",
+        "/lib/pkgconfig"
+    ],
+    "modules": [
+        {
+            "name": "okteta",
+            "buildsystem": "cmake",
+            "sources": [ { "type": "dir", "path": ".", "branch": "master" } ]
+        }
+    ]
+}
