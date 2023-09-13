@@ -2261,7 +2261,7 @@ msgstr ""
 msgctxt "@info:tooltip"
 msgid "Whether to use short type names (i.e. uint32 instead of unsigned int)"
 msgstr ""
-"Si s'ha d'utilitzar el tipus de noms curts (p. ex. uint32 en lloc d'enter "
+"Si s'ha d'utilitzar el tipus de noms curts (p. ex., uint32 en lloc d'enter "
 "sense signe)"
 
 #. i18n: ectx: tooltip, entry (LocaleAwareDecimalFormatting), group (ValueDisplay)
@@ -2489,8 +2489,8 @@ msgid ""
 "Unlock selected structure, i.e. the starting offset is always set to the "
 "current cursor position."
 msgstr ""
-"Desbloqueja l'estructura seleccionada, p. ex. el desplaçament inicial sempre "
-"se situa en la posició actual del cursor."
+"Desbloqueja l'estructura seleccionada, p. ex., el desplaçament inicial "
+"sempre se situa en la posició actual del cursor."
 
 #: controllers/view/structures/structureview.cpp:265
 #, kde-format
