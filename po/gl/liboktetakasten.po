@@ -1260,7 +1260,7 @@ msgid ""
 ">Keep the unused bytes or remove them?"
 msgstr ""
 "O novo valor precisa de <emphasis>menos</emphasis> bytes (%1 no canto de %2)."
-"<nl/>Quere manter ou retirar os bytes non utilizados?"
+"<nl/>Quere manter ou retirar os bytes non usados?"
 
 #: controllers/view/poddecoder/podtableview.cpp:134
 #, kde-format
@@ -1272,7 +1272,7 @@ msgstr "&Manter"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Keep the unused bytes with their old values."
-msgstr "Mantén os bytes non utilizados cos valores vellos."
+msgstr "Mantén os bytes non usados cos valores vellos."
 
 #: controllers/view/poddecoder/podtableview.cpp:146
 #, kde-kuit-format
@@ -1407,7 +1407,7 @@ msgstr "Impreso por: %U"
 #, kde-format
 msgctxt "@info"
 msgid "Could not print."
-msgstr "Non se puido imprimir."
+msgstr "Non foi posíbel imprimir."
 
 #: controllers/view/replace/replacecontroller.cpp:73
 #: controllers/view/replace/replacecontroller.cpp:87
@@ -2284,7 +2284,7 @@ msgid ""
 "The precision used for converting floating-point numbers to strings (number "
 "of decimal digits)"
 msgstr ""
-"A precisión utilizada para converter os números en coma flotante nunha cadea "
+"A precisión usada para converter os números en coma flotante nunha cadea "
 "(número de díxitos decimais)."
 
 #. i18n: ectx: label, entry (ByteOrder), group (StructureSettings)
