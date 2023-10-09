@@ -3586,19 +3586,3 @@ msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"
 msgid "UTF-8"
 msgstr "UTF-8"
-
-#~ msgctxt "name of the hash algorithm"
-#~ msgid "SHA-0"
-#~ msgstr "SHA-0"
-
-#~ msgctxt "name of the hash algorithm"
-#~ msgid "MD2"
-#~ msgstr "MD2"
-
-#~ msgctxt "name of the hash algorithm"
-#~ msgid "RIPEMD160"
-#~ msgstr "RIPEMD160"
-
-#~ msgctxt "name of the hash algorithm"
-#~ msgid "Whirlpool"
-#~ msgstr "Whirlpool"
