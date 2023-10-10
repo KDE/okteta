@@ -54,25 +54,21 @@ QPair<AllPrimitiveTypes, QString> EnumDefinition::convertToEnumEntry(const QStri
         minValue = std::numeric_limits<qint64>::min();
         break;
     case PrimitiveDataType::Bool8:
-        // fall through
     case PrimitiveDataType::UInt8:
         maxValue = std::numeric_limits<quint8>::max();
         minValue = 0;
         break;
     case PrimitiveDataType::Bool16:
-        // fall through
     case PrimitiveDataType::UInt16:
         maxValue = std::numeric_limits<quint16>::max();
         minValue = 0;
         break;
     case PrimitiveDataType::Bool32:
-        // fall through
     case PrimitiveDataType::UInt32:
         maxValue = std::numeric_limits<quint32>::max();
         minValue = 0;
         break;
     case PrimitiveDataType::Bool64:
-        // fall through
     case PrimitiveDataType::UInt64:
         maxValue = std::numeric_limits<quint64>::max();
         minValue = 0;
