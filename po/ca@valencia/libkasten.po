@@ -189,7 +189,7 @@ msgstr "Vista prèvia"
 #, kde-format
 msgctxt "@action:button"
 msgid "&Copy to clipboard"
-msgstr "&Copia al porta-retalls"
+msgstr "&Copia a dins del porta-retalls"
 
 #: controllers/io/copyas/copyasdialog.cpp:74
 #, kde-format
@@ -205,8 +205,8 @@ msgid ""
 "selected data will be copied to the clipboard with the settings you entered "
 "above."
 msgstr ""
-"Si premeu el botó <interface>Copia al porta-retalls</interface>, les dades "
-"seleccionades es copiaran al porta-retalls amb els paràmetres que heu "
+"Si premeu el botó <interface>Copia a dins del porta-retalls</interface>, les "
+"dades seleccionades es copiaran al porta-retalls amb els paràmetres que heu "
 "indicat més amunt."
 
 #: controllers/io/export/exportcontroller.cpp:40
