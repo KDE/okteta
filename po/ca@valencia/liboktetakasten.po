@@ -627,7 +627,7 @@ msgstr "Des del c&ursor"
 msgctxt "@info:whatsthis"
 msgid "Go relative from the current cursor location and not absolute."
 msgstr ""
-"Va a una posició relativa a la ubicació actual del cursor, en lloc "
+"Va fins a una posició relativa a la ubicació actual del cursor, en lloc "
 "d'absoluta."
 
 #: controllers/view/gotooffset/gotooffsetview.cpp:102
@@ -1402,8 +1402,8 @@ msgstr "No s'ha trobat el patró de substitució a la matriu de bytes."
 msgctxt "@info"
 msgid "End of byte array reached.<nl/>Continue from the beginning?"
 msgstr ""
-"S'ha arribat al final de la matriu de bytes.<nl/>Voleu continuar des de "
-"l'inici?"
+"S'ha arribat al final de la matriu de bytes.<nl/>Voleu continuar des del "
+"començament?"
 
 #: controllers/view/replace/replacecontroller.cpp:94
 #: controllers/view/search/searchcontroller.cpp:121
