@@ -31,7 +31,6 @@ DocumentInfoView::DocumentInfoView(DocumentInfoTool* tool, QWidget* parent)
     , mTool(tool)
 {
     auto* baseLayout = new QVBoxLayout(this);
-    baseLayout->setContentsMargins(0, 0, 0, 0);
 
     // icon
     mIconLabel = new QLabel(this);
