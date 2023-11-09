@@ -20,7 +20,7 @@
 #include <QFont>
 #include <QLabel>
 #include <QLayout>
-#include <QGridLayout>
+#include <QFormLayout>
 #include <QLocale>
 #include <QMimeType>
 
@@ -56,23 +56,13 @@ DocumentInfoView::DocumentInfoView(DocumentInfoTool* tool, QWidget* parent)
     baseLayout->addWidget(separator);
 
     // property grid
-    auto* propertyGrid = new QGridLayout(); // unknown rows
-    propertyGrid->setColumnStretch(0, 0);
-    propertyGrid->setColumnStretch(1, 1);
-
-    int currentPropertyRow = 0;
+    auto* propertyGrid = new QFormLayout(); // unknown rows
 
     // type property
-    QLabel* label = new QLabel(i18n("Type:"), this);
-    propertyGrid->addWidget(label, currentPropertyRow, 0, Qt::AlignRight);
-
     mMimeTypeLabel = new QLabel(QString(), this);
-    propertyGrid->addWidget(mMimeTypeLabel, currentPropertyRow++, 1);
+    propertyGrid->addRow(i18n("Type:"), mMimeTypeLabel);
 
     // location property
-    label = new QLabel(i18n("Location:"), this);
-    propertyGrid->addWidget(label, currentPropertyRow, 0, Qt::AlignRight);
-
     mLocationLabel = new KSqueezedTextLabel(this);
     // force the layout direction to be always LTR
     mLocationLabel->setLayoutDirection(Qt::LeftToRight);
@@ -84,14 +74,11 @@ DocumentInfoView::DocumentInfoView(DocumentInfoTool* tool, QWidget* parent)
     // TODO: for some reason if building with enable_final flag the compiler sees
     // an ambiguous conversion without the explicit Qt::TextInteractionFlags(...)
     mLocationLabel->setTextInteractionFlags(Qt::TextInteractionFlags(Qt::TextSelectableByMouse | Qt::TextSelectableByKeyboard));
-    propertyGrid->addWidget(mLocationLabel, currentPropertyRow++, 1);
+    propertyGrid->addRow(i18n("Location:"), mLocationLabel);
 
     // size property
-    label = new QLabel(i18n("Size:"), this);
-    propertyGrid->addWidget(label, currentPropertyRow, 0, Qt::AlignRight);
-
     mSizeLabel = new QLabel(this);
-    propertyGrid->addWidget(mSizeLabel, currentPropertyRow++, 1);
+    propertyGrid->addRow(i18n("Size:"), mSizeLabel);
 
 #if 0
     label = new QLabel(i18n("Created/Loaded:"), this);   // TODO: make adjustable depending on document
