@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-27 02:29+0000\n"
+"POT-Creation-Date: 2023-11-10 02:40+0000\n"
 "PO-Revision-Date: 2009-06-13 16:12+0000\n"
 "Last-Translator: Sveinn í Felli <sveinki@nett.is>\n"
 "Language-Team: Icelandic <kde-isl@molar.is>\n"
@@ -27,42 +27,42 @@ msgctxt "@title:window"
 msgid "File Info"
 msgstr "Upplýsingar"
 
-#: controllers/document/info/documentinfoview.cpp:67
+#: controllers/document/info/documentinfoview.cpp:63
 #, fuzzy, kde-format
 msgid "Type:"
 msgstr "Tegund:"
 
-#: controllers/document/info/documentinfoview.cpp:74
+#: controllers/document/info/documentinfoview.cpp:77
 #, fuzzy, kde-format
 msgid "Location:"
 msgstr "Staðsetning:"
 
-#: controllers/document/info/documentinfoview.cpp:91
+#: controllers/document/info/documentinfoview.cpp:81
 #, fuzzy, kde-format
 msgid "Size:"
 msgstr "Stærð:"
 
-#: controllers/document/info/documentinfoview.cpp:98
+#: controllers/document/info/documentinfoview.cpp:84
 #, fuzzy, kde-format
 msgid "Created/Loaded:"
 msgstr "Búið til:"
 
-#: controllers/document/info/documentinfoview.cpp:102
+#: controllers/document/info/documentinfoview.cpp:88
 #, fuzzy, kde-format
 msgid "Last modified:"
 msgstr "Síðast breytt:"
 
-#: controllers/document/info/documentinfoview.cpp:106
+#: controllers/document/info/documentinfoview.cpp:92
 #, fuzzy, kde-format
 msgid "Last synchronized:"
 msgstr "Síðast breytt:"
 
-#: controllers/document/info/documentinfoview.cpp:113
+#: controllers/document/info/documentinfoview.cpp:99
 #, fuzzy, kde-format
 msgid "Created:"
 msgstr "Búið til:"
 
-#: controllers/document/info/documentinfoview.cpp:165
+#: controllers/document/info/documentinfoview.cpp:151
 #, kde-format
 msgctxt "There is no storage location assigned to yet."
 msgid "[None]"

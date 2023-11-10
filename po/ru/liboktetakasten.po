@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: khexedit\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-27 02:29+0000\n"
+"POT-Creation-Date: 2023-11-10 02:40+0000\n"
 "PO-Revision-Date: 2022-10-12 16:05+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -40,42 +40,42 @@ msgctxt "@title:window"
 msgid "File Info"
 msgstr "Сведения о файле"
 
-#: controllers/document/info/documentinfoview.cpp:67
+#: controllers/document/info/documentinfoview.cpp:63
 #, kde-format
 msgid "Type:"
 msgstr "Тип:"
 
-#: controllers/document/info/documentinfoview.cpp:74
+#: controllers/document/info/documentinfoview.cpp:77
 #, kde-format
 msgid "Location:"
 msgstr "Адрес:"
 
-#: controllers/document/info/documentinfoview.cpp:91
+#: controllers/document/info/documentinfoview.cpp:81
 #, kde-format
 msgid "Size:"
 msgstr "Размер:"
 
-#: controllers/document/info/documentinfoview.cpp:98
+#: controllers/document/info/documentinfoview.cpp:84
 #, kde-format
 msgid "Created/Loaded:"
 msgstr "Создано/загружено:"
 
-#: controllers/document/info/documentinfoview.cpp:102
+#: controllers/document/info/documentinfoview.cpp:88
 #, kde-format
 msgid "Last modified:"
 msgstr "Последнее изменение:"
 
-#: controllers/document/info/documentinfoview.cpp:106
+#: controllers/document/info/documentinfoview.cpp:92
 #, kde-format
 msgid "Last synchronized:"
 msgstr "Последняя синхронизация:"
 
-#: controllers/document/info/documentinfoview.cpp:113
+#: controllers/document/info/documentinfoview.cpp:99
 #, kde-format
 msgid "Created:"
 msgstr "Создано:"
 
-#: controllers/document/info/documentinfoview.cpp:165
+#: controllers/document/info/documentinfoview.cpp:151
 #, kde-format
 msgctxt "There is no storage location assigned to yet."
 msgid "[None]"
