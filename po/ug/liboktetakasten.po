@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:41+0000\n"
+"POT-Creation-Date: 2023-11-10 00:44+0000\n"
 "PO-Revision-Date: 2013-09-08 07:05+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -34,44 +34,44 @@ msgctxt "@title:window"
 msgid "File Info"
 msgstr "ھۆججەت ئۇچۇرى"
 
-#: controllers/document/info/documentinfoview.cpp:70
+#: controllers/document/info/documentinfoview.cpp:66
 #: controllers/view/structures/datatypes/datainformation.cpp:229
 #, kde-format
 msgid "Type:"
 msgstr "تىپى:"
 
-#: controllers/document/info/documentinfoview.cpp:77
+#: controllers/document/info/documentinfoview.cpp:80
 #, kde-format
 msgid "Location:"
 msgstr "ئورنى:"
 
-#: controllers/document/info/documentinfoview.cpp:94
+#: controllers/document/info/documentinfoview.cpp:84
 #: controllers/view/structures/datatypes/datainformation.cpp:231
 #, kde-format
 msgid "Size:"
 msgstr "چوڭلۇقى:"
 
-#: controllers/document/info/documentinfoview.cpp:101
+#: controllers/document/info/documentinfoview.cpp:87
 #, kde-format
 msgid "Created/Loaded:"
 msgstr ""
 
-#: controllers/document/info/documentinfoview.cpp:105
+#: controllers/document/info/documentinfoview.cpp:91
 #, kde-format
 msgid "Last modified:"
 msgstr "ئاخىرقى ئۆزگەرتىلگەن ۋاقىت:"
 
-#: controllers/document/info/documentinfoview.cpp:109
+#: controllers/document/info/documentinfoview.cpp:95
 #, kde-format
 msgid "Last synchronized:"
 msgstr ""
 
-#: controllers/document/info/documentinfoview.cpp:116
+#: controllers/document/info/documentinfoview.cpp:102
 #, kde-format
 msgid "Created:"
 msgstr "قۇرۇلغان:"
 
-#: controllers/document/info/documentinfoview.cpp:168
+#: controllers/document/info/documentinfoview.cpp:154
 #, kde-format
 msgctxt "There is no storage location assigned to yet."
 msgid "[None]"
