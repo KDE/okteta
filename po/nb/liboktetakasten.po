@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:41+0000\n"
+"POT-Creation-Date: 2023-11-10 00:44+0000\n"
 "PO-Revision-Date: 2013-02-19 20:33+0100\n"
 "Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -36,44 +36,44 @@ msgctxt "@title:window"
 msgid "File Info"
 msgstr "Filinformasjon"
 
-#: controllers/document/info/documentinfoview.cpp:70
+#: controllers/document/info/documentinfoview.cpp:66
 #: controllers/view/structures/datatypes/datainformation.cpp:229
 #, kde-format
 msgid "Type:"
 msgstr "Type:"
 
-#: controllers/document/info/documentinfoview.cpp:77
+#: controllers/document/info/documentinfoview.cpp:80
 #, kde-format
 msgid "Location:"
 msgstr "Sted:"
 
-#: controllers/document/info/documentinfoview.cpp:94
+#: controllers/document/info/documentinfoview.cpp:84
 #: controllers/view/structures/datatypes/datainformation.cpp:231
 #, kde-format
 msgid "Size:"
 msgstr "Størrelse:"
 
-#: controllers/document/info/documentinfoview.cpp:101
+#: controllers/document/info/documentinfoview.cpp:87
 #, kde-format
 msgid "Created/Loaded:"
 msgstr "Opprettet/lastet:"
 
-#: controllers/document/info/documentinfoview.cpp:105
+#: controllers/document/info/documentinfoview.cpp:91
 #, kde-format
 msgid "Last modified:"
 msgstr "Sist endret:"
 
-#: controllers/document/info/documentinfoview.cpp:109
+#: controllers/document/info/documentinfoview.cpp:95
 #, kde-format
 msgid "Last synchronized:"
 msgstr "Sist synkronisert:"
 
-#: controllers/document/info/documentinfoview.cpp:116
+#: controllers/document/info/documentinfoview.cpp:102
 #, kde-format
 msgid "Created:"
 msgstr "Opprettet:"
 
-#: controllers/document/info/documentinfoview.cpp:168
+#: controllers/document/info/documentinfoview.cpp:154
 #, kde-format
 msgctxt "There is no storage location assigned to yet."
 msgid "[None]"
