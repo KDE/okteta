@@ -6,19 +6,20 @@
 # Jeff Huang <s8321414@gmail.com>, 2016.
 # pan93412 <pan93412@gmail.com>, 2019.
 # Frank Weng (a.k.a. Franklin) <franklin at goodhorse dot idv dot tw>, 2008, 2009, 2010.
+# SPDX-FileCopyrightText: 2023 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-10 00:44+0000\n"
-"PO-Revision-Date: 2019-02-23 21:23+0800\n"
-"Last-Translator: pan93412 <pan93412@gmail.com>\n"
-"Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
+"PO-Revision-Date: 2023-11-29 17:37+0900\n"
+"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
+"Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 18.12.2\n"
+"X-Generator: Lokalize 23.08.3\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #, kde-format
@@ -3060,7 +3061,7 @@ msgstr "沒有足夠的記憶體載入此檔案。"
 #: core/io/filesystem/bytearrayrawfilereloadthread.cpp:58
 #, kde-format
 msgid "Support to load files larger than 2 GiB has not yet been implemented."
-msgstr "載入大於 2GB 的檔案的功能尚未實作。"
+msgstr "載入大於 2GiB 的檔案的功能尚未實作。"
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:99
 #, kde-format
