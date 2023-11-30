@@ -894,11 +894,7 @@ msgid "operand AND data"
 msgstr "operando KAJ datumoj"
 
 #: controllers/view/libbytearrayfilter/filter/invertbytearrayfilter.cpp:19
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "name of the filter; it switches all bits from 0 to 1 and 1 to 0 "
-#| "¦respectively, so 01111110 becomes 10000001"
-#| msgid "INVERT data"
+#, kde-format
 msgctxt ""
 "name of the filter; it switches all bits from 0 to 1 and 1 to 0 "
 "respectively, so 01111110 becomes 10000001"
@@ -952,11 +948,7 @@ msgid "operand OR data"
 msgstr "operando AŬ datumoj"
 
 #: controllers/view/libbytearrayfilter/filter/reversebytearrayfilter.cpp:22
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "name of the filter; it changes the order of the bytes/bits to backwards, "
-#| "so ¦ABCD becomes DCBA"
-#| msgid "REVERSE data"
+#, kde-format
 msgctxt ""
 "name of the filter; it changes the order of the bytes/bits to backwards, so "
 "ABCD becomes DCBA"
@@ -976,11 +968,7 @@ msgid "If set, the bits are arranged in reverse order as well."
 msgstr "Se fiksite, la bitoj estas aranĝitaj en inversa sinsekvo ankaŭ."
 
 #: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilter.cpp:26
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "name of the filter; it moves the bits and pushes the ones over the end to "
-#| "¦the begin again"
-#| msgid "ROTATE data"
+#, kde-format
 msgctxt ""
 "name of the filter; it moves the bits and pushes the ones over the end to "
 "the begin again"
@@ -1848,11 +1836,7 @@ msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
 #: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:87
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Displayed in the type column. first comes the name of the enum, then the "
-#| "¦underlying type (e.g. uint32)"
-#| msgid "enum %1 (%2)"
+#, kde-format
 msgctxt ""
 "Displayed in the type column. first comes the name of the enum, then the "
 "underlying type (e.g. uint32)"
@@ -1865,11 +1849,7 @@ msgid "0x%1 (no matching flags)"
 msgstr "0x%1 (neniu kongruaj flagoj)"
 
 #: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:105
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Displayed in the type column. first comes the name of the enum, then the "
-#| "¦underlying type (e.g. uint32)"
-#| msgid "flag %1 (%2)"
+#, kde-format
 msgctxt ""
 "Displayed in the type column. first comes the name of the enum, then the "
 "underlying type (e.g. uint32)"
@@ -2576,11 +2556,7 @@ msgid "&Off"
 msgstr "&Malŝaltita"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:105
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@item:inmenu  The layout will adapt to the size, but only with complete "
-#| "¦groups of bytes."
-#| msgid "&Wrap Only Complete Byte Groups"
+#, kde-format
 msgctxt ""
 "@item:inmenu  The layout will adapt to the size, but only with complete "
 "groups of bytes."
@@ -2588,11 +2564,7 @@ msgid "&Wrap Only Complete Byte Groups"
 msgstr "&Envolvi Nur Kompletajn Bajtajn Grupojn"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:107
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@item:inmenu  The layout will adapt to the size and fit in as much bytes "
-#| "per ¦line as possible."
-#| msgid "&On"
+#, kde-format
 msgctxt ""
 "@item:inmenu  The layout will adapt to the size and fit in as much bytes per "
 "line as possible."
@@ -2763,11 +2735,7 @@ msgid "Off"
 msgstr "Malŝaltita"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:103
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@item:inmenu  The layout will adapt to the size, but only with complete "
-#| "¦groups of bytes."
-#| msgid "Wrap Only Complete Byte Groups"
+#, kde-format
 msgctxt ""
 "@item:inmenu  The layout will adapt to the size, but only with complete "
 "groups of bytes."
@@ -2775,11 +2743,7 @@ msgid "Wrap Only Complete Byte Groups"
 msgstr "Envolvi Nur Kompletajn Bajtajn Grupojn"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:105
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@item:inmenu  The layout will adapt to the size and fit in as much bytes "
-#| "per ¦line as possible."
-#| msgid "On"
+#, kde-format
 msgctxt ""
 "@item:inmenu  The layout will adapt to the size and fit in as much bytes per "
 "line as possible."
@@ -3172,11 +3136,7 @@ msgid "Base32"
 msgstr "Bazo 32"
 
 #: gui/io/streamencoder/base32/bytearraybase32streamencoderconfigeditor.cpp:34
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@label:listbox the type of the used encoding: Classic, Base32hex or z-"
-#| "¦base-32."
-#| msgid "Encoding:"
+#, kde-format
 msgctxt ""
 "@label:listbox the type of the used encoding: Classic, Base32hex or z-"
 "base-32."
