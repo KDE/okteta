@@ -83,6 +83,7 @@ public:
     {
         HexadecimalOffset = 0,
         DecimalOffset = 1,
+        OctalOffset = 2,
         MaxOffsetCodingId = 0xFF
     };
     Q_ENUM(OffsetCoding)

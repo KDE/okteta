@@ -13,10 +13,13 @@
 
 namespace Okteta {
 
-const unsigned int OffsetFormat::CodingWidth[2] = { 9, 10 };
+const unsigned int OffsetFormat::CodingWidth[3] = { 9, 10, 11 };
 
-const OffsetFormat::print OffsetFormat::PrintFunction[2] =
-{ OffsetFormat::printHexadecimalOffset, OffsetFormat::printDecimalOffset };
+const OffsetFormat::print OffsetFormat::PrintFunction[3] = {
+    OffsetFormat::printHexadecimalOffset,
+    OffsetFormat::printDecimalOffset,
+    OffsetFormat::printOctalOffset,
+};
 
 void OffsetFormat::printHexadecimalOffset(char* Buffer, unsigned int Offset)
 {
@@ -31,6 +34,11 @@ void OffsetFormat::printHexadecimalSmallOffset(char* Buffer, unsigned int Offset
 void OffsetFormat::printDecimalOffset(char* Buffer, unsigned int Offset)
 {
     sprintf(Buffer, "%010u", Offset);
+}
+
+void OffsetFormat::printOctalOffset(char* Buffer, unsigned int Offset)
+{
+    sprintf(Buffer, "%011o", Offset);
 }
 
 }

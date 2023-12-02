@@ -27,10 +27,11 @@ public:
     enum Format
     {
         Hexadecimal = 0,
-        Decimal
+        Decimal,
+        Octal,
     };
     /** */
-    static constexpr int MaxFormatWidth = 10;
+    static constexpr int MaxFormatWidth = 11;
 
 public:
     OffsetFormat() = delete;
@@ -49,12 +50,13 @@ public:
     static void printHexadecimalOffset(char* Buffer, unsigned int Offset);
     static void printHexadecimalSmallOffset(char* Buffer, unsigned int Offset);
     static void printDecimalOffset(char* Buffer, unsigned int Offset);
+    static void printOctalOffset(char* Buffer, unsigned int Offset);
 
 private:
     /** */
-    static const unsigned int CodingWidth[2]; // TODO: would sizeof(Coding} work?
+    static const unsigned int CodingWidth[3]; // TODO: would sizeof(Coding} work?
     /** */
-    static const print PrintFunction[2];
+    static const print PrintFunction[3];
 };
 
 inline unsigned int OffsetFormat::codingWidth(int i)
