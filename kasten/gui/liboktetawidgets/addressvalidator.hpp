@@ -30,8 +30,9 @@ public:
     {
         InvalidCoding = -1,
         HexadecimalCoding = 0,
-        DecimalCoding = 1,
-        ExpressionCoding = 2
+        DecimalCoding,
+        OctalCoding,
+        ExpressionCoding
     };
     // XXX shouldn't this better be in address.h? Sometime later maybe
     enum AddressType

@@ -114,8 +114,7 @@ Address AddressValidator::toAddress(const QString& string, AddressType* addressT
             }
         }
     } else {
-        const bool isHexadecimal = (mCodecId == HexadecimalCoding);
-        const int base = isHexadecimal ? 16 : 10;
+        const int base = (mCodecId == HexadecimalCoding) ? 16 : (mCodecId == DecimalCoding) ? 10 : 8;
         address = expression.toInt(nullptr, base);
     }
 
@@ -125,8 +124,7 @@ Address AddressValidator::toAddress(const QString& string, AddressType* addressT
 QString AddressValidator::toString(Address address, AddressType addressType) const
 {
     // ExpressionCoding just uses base 10 so no need to adjust this code
-    const bool isHexadecimal = (mCodecId == HexadecimalCoding);
-    const int base = isHexadecimal ? 16 : 10;
+    const int base = (mCodecId == HexadecimalCoding) ? 16 : (mCodecId == DecimalCoding) ? 10 : 8;
 
     QString string = QString::number(address, base);
 

@@ -37,8 +37,9 @@ public:
     {
         InvalidCoding = -1,
         HexadecimalCoding = 0,
-        DecimalCoding = 1,
-        ExpressionCoding = 2,
+        DecimalCoding,
+        OctalCoding,
+        ExpressionCoding,
     };
 
 public:
