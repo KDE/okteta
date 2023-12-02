@@ -174,7 +174,7 @@ void GotoOffsetView::onGotoButtonClicked()
 
 void GotoOffsetView::onAddressTypeChanged(int addressType)
 {
-    const bool isNotExpression = (mAddressEdit->format() != 2);
+    const bool isNotExpression = (mAddressEdit->format() != Okteta::AddressComboBox::ExpressionCoding);
     if (isNotExpression
         || addressType == Okteta::AddressValidator::InvalidAddressType) {
         return;
@@ -202,8 +202,7 @@ void GotoOffsetView::onAddressTypeChanged(int addressType)
 
 void GotoOffsetView::onFormatChanged(int formatIndex)
 {
-    // TODO: make sure Expr is always at index 2
-    const bool isNotExpression = (formatIndex != 2);
+    const bool isNotExpression = (formatIndex != Okteta::AddressComboBox::ExpressionCoding);
 
     mAtCursorCheckBox->setEnabled(isNotExpression);
     mBackwardsCheckBox->setEnabled(isNotExpression);
