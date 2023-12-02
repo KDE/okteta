@@ -23,7 +23,6 @@
 // Qt
 #include <QLayout>
 #include <QLabel>
-#include <QFontMetrics>
 
 // TODO: make status bar capable to hide entries if size is too small, use priorisation
 
@@ -80,7 +79,7 @@ ViewStatusController::ViewStatusController(StatusBar* statusBar)
 // see https://frinring.wordpress.com/2008/10/14/better-width-with-open-sources/
 void ViewStatusController::fixWidths(int offsetCoding)
 {
-    const QFontMetrics metrics = mStatusBar->fontMetrics();
+    auto* sizeEstimationDummyLabel = new QLabel(mStatusBar);
 
     // mOffsetLabel
     constexpr int hexDigitsCount = 16;
@@ -105,7 +104,8 @@ void ViewStatusController::fixWidths(int offsetCoding)
         }
 
         const QString offsetText = i18n("Offset: %1", offset);
-        const int offsetWidth = metrics.boundingRect(offsetText).width();
+        sizeEstimationDummyLabel->setText(offsetText);
+        const int offsetWidth = sizeEstimationDummyLabel->sizeHint().width();
         if (largestOffsetWidth < offsetWidth) {
             largestOffsetWidth = offsetWidth;
         }
@@ -116,7 +116,8 @@ void ViewStatusController::fixWidths(int offsetCoding)
         const QString selectionString = i18nc("@info:status selection: start offset - end offset ()",
                                               "Selection: %1 - %2 (%3)", offset, offset, bytesCount);
 
-        const int selectionWidth = metrics.boundingRect(selectionString).width();
+        sizeEstimationDummyLabel->setText(selectionString);
+        const int selectionWidth = sizeEstimationDummyLabel->sizeHint().width();
         if (largestSelectionWidth < selectionWidth) {
             if (i < firstLetterIndex) {
                 widestDigitIndex = i;
@@ -124,6 +125,8 @@ void ViewStatusController::fixWidths(int offsetCoding)
             largestSelectionWidth = selectionWidth;
         }
     }
+
+    delete sizeEstimationDummyLabel;
 
     mOffsetLabel->setFixedWidth(largestOffsetWidth);
     mSelectionLabel->setFixedWidth(largestSelectionWidth);
