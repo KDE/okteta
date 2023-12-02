@@ -39,6 +39,8 @@ ViewConfigController::ViewConfigController(KXMLGUIClient* guiClient)
               "&Hexadecimal"),
         i18nc("@item:inmenu offset in the decimal format",
               "&Decimal"),
+        i18nc("@item:inmenu offset in the octal format",
+              "&Octal"),
     });
     connect(mOffsetCodingAction, &KSelectAction::indexTriggered,
             this, &ViewConfigController::setOffsetCoding);

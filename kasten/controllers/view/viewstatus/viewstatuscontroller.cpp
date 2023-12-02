@@ -84,6 +84,7 @@ void ViewStatusController::fixWidths(int offsetCoding)
     // mOffsetLabel
     constexpr int hexDigitsCount = 16;
     constexpr int decimalDigitsCount = 10;
+    constexpr int octalDigitsCount = 8;
     constexpr int firstLetterIndex = 10;
     constexpr char digits[hexDigitsCount] = {
         '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
@@ -93,14 +94,19 @@ void ViewStatusController::fixWidths(int offsetCoding)
     int largestOffsetWidth = 0;
     int largestSelectionWidth = 0;
     int widestDigitIndex = 0;
-    const int digitsCount = (offsetCoding == Okteta::OffsetFormat::Hexadecimal) ? hexDigitsCount : decimalDigitsCount;
+    const int digitsCount =
+        (offsetCoding == Okteta::OffsetFormat::Hexadecimal) ? hexDigitsCount :
+        (offsetCoding == Okteta::OffsetFormat::Decimal) ? decimalDigitsCount :
+        octalDigitsCount;
     for (int i = 0; i < digitsCount; ++i) {
         QString offset;
         if (offsetCoding == Okteta::OffsetFormat::Hexadecimal) {
             offset = QString(9, QLatin1Char(digits[i]));
             offset[4] = QLatin1Char(':');
-        } else {
+        } else if (offsetCoding == Okteta::OffsetFormat::Decimal) {
             offset = QString(10, QLatin1Char(digits[i]));
+        } else {
+            offset = QString(11, QLatin1Char(digits[i]));
         }
 
         const QString offsetText = i18n("Offset: %1", offset);

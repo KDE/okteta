@@ -66,6 +66,7 @@ ViewProfileEdit::ViewProfileEdit(QWidget* parent)
     const QStringList offsetCodingList {
         i18nc("@item:inmenu offset in the hexadecimal format", "Hexadecimal"),
         i18nc("@item:inmenu offset in the decimal format", "Decimal"),
+        i18nc("@item:inmenu offset in the octal format", "Octal"),
     };
     mOffsetCodingComboBox->addItems(offsetCodingList);
     displayBoxFormLayout->addRow(i18n("Offset Coding:"), mOffsetCodingComboBox);
