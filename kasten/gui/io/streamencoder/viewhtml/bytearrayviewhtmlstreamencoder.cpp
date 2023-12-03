@@ -70,7 +70,7 @@ bool ByteArrayViewHtmlStreamEncoder::encodeDataToStream(QIODevice* device,
 
     if (byteArrayView->offsetColumnVisible()) {
         columnHtmlRendererList.append(
-            new OffsetColumnHtmlRenderer(Okteta::OffsetFormat::Hexadecimal, mSettings.firstLineOffset, mSettings.delta, (viewModus == 0)));
+            new OffsetColumnHtmlRenderer(byteArrayView->offsetCoding(), mSettings.firstLineOffset, mSettings.delta, (viewModus == 0)));
     }
 
     if (viewModus == 0) {
