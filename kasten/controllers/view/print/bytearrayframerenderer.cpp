@@ -33,6 +33,7 @@ static constexpr Okteta::Address DefaultStartOffset = 0;
 static constexpr Okteta::Address DefaultFirstLineOffset = 0;
 static constexpr int DefaultNoOfBytesPerLine =  16;
 static constexpr LayoutStyle DefaultResizeStyle = FixedLayoutStyle; // krazy:exclude=staticobjects
+static constexpr Okteta::OffsetFormat::Format DefaultOffsetCoding =  Okteta::OffsetFormat::Hexadecimal; // krazy:exclude=staticobjects
 static constexpr Okteta::ValueCoding DefaultValueCoding =  Okteta::HexadecimalCoding; // krazy:exclude=staticobjects
 static constexpr Okteta::CharCoding DefaultCharCoding = Okteta::LocalEncoding; // krazy:exclude=staticobjects
 
@@ -58,7 +59,7 @@ ByteArrayFrameRenderer::ByteArrayFrameRenderer()
 
     // creating the columns in the needed order
     mOffsetColumnRenderer =
-        new Okteta::OffsetColumnRenderer(mStylist, mLayout, Okteta::OffsetFormat::Hexadecimal);
+        new Okteta::OffsetColumnRenderer(mStylist, mLayout, DefaultOffsetCoding);
     mFirstBorderColumnRenderer =
         new Okteta::BorderColumnRenderer(mStylist, true, false);
     mValueColumnRenderer =
@@ -110,6 +111,8 @@ Okteta::CharCoding ByteArrayFrameRenderer::charCoding()     const { return mChar
 const QString& ByteArrayFrameRenderer::charCodingName()      const { return mCharCodec->name(); }
 
 bool ByteArrayFrameRenderer::offsetColumnVisible() const { return mOffsetColumnRenderer->isVisible(); }
+Okteta::OffsetFormat::Format ByteArrayFrameRenderer::offsetCoding() const { return mOffsetColumnRenderer->format(); }
+
 int ByteArrayFrameRenderer::visibleByteArrayCodings() const
 { return (mValueColumnRenderer->isVisible() ? ValueCodingId : 0) | (mCharColumnRenderer->isVisible() ? CharCodingId : 0); }
 
@@ -395,6 +398,19 @@ void ByteArrayFrameRenderer::showOffsetColumn(bool visible)
 
     mOffsetColumnRenderer->setVisible(visible);
     mFirstBorderColumnRenderer->setVisible(visible);
+
+    adjustToWidth();
+}
+
+void ByteArrayFrameRenderer::setOffsetCoding(Okteta::OffsetFormat::Format offsetCoding)
+{
+    const Okteta::OffsetFormat::Format currentFormat = mOffsetColumnRenderer->format();
+    // no change?
+    if (currentFormat == offsetCoding) {
+        return;
+    }
+
+    mOffsetColumnRenderer->setFormat(offsetCoding, QFontMetrics(mFont));
 
     adjustToWidth();
 }

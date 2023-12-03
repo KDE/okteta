@@ -129,6 +129,7 @@ void PrintTool::triggerPrint(QPrinter* printer)
     const Okteta::Address firstLineOffset = mByteArrayView->firstLineOffset() + line * noOfBytesPerLine;
     byteArrayFrameRenderer->setFirstLineOffset(firstLineOffset);
     byteArrayFrameRenderer->setStartOffset(startOffset);
+    byteArrayFrameRenderer->setOffsetCoding((Okteta::OffsetFormat::Format)mByteArrayView->offsetCoding());
 
     byteArrayFrameRenderer->setCharCoding(mByteArrayView->charCodingName());
     byteArrayFrameRenderer->setBufferSpacing(mByteArrayView->byteSpacingWidth(),
