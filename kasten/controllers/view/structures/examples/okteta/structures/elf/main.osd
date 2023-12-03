@@ -100,7 +100,7 @@
 		<primitive name="e_version" type="UInt32" />
 		<primitive name="e_entry" type="UInt32" />
 		<pointer name="e_phoff" type="UInt32">
-			<array name="Section headers" length="function(root) { return root.e_phnum.value; }">
+			<array name="Program headers" length="function(root) { return root.e_phnum.value; }">
 				<struct name="Elf32_Phdr">
 					<primitive name="p_type" type="UInt32" />
 					<pointer name="p_offset" type="UInt32">
