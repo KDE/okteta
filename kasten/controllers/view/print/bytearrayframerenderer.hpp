@@ -11,6 +11,8 @@
 
 // lib
 #include "abstractcolumnframerenderer.hpp"
+// Okteta gui
+#include <Okteta/OffsetFormat>
 // Okteta core
 #include <Okteta/OktetaCore>
 #include <Okteta/Address>
@@ -93,6 +95,8 @@ public:
     QString charCodingName() const;
 
     bool offsetColumnVisible() const;
+    Okteta::OffsetFormat::Format offsetCoding() const;
+
     int visibleByteArrayCodings() const;
 
 public:
@@ -117,6 +121,7 @@ public:
     void setCharCoding(const QString& charCodingName);
     void showByteArrayColumns(int newColumns);
     void showOffsetColumn(bool visible);
+    void setOffsetCoding(Okteta::OffsetFormat::Format offsetCoding);
 
 protected: // AbstractColumnFrameRenderer API
 //     virtual void setNoOfLines( int newNoOfLines );
