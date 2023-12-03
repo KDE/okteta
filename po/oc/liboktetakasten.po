@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-10 02:40+0000\n"
+"POT-Creation-Date: 2023-12-03 02:27+0000\n"
 "PO-Revision-Date: 2008-08-05 22:28+0200\n"
 "Last-Translator: Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>\n"
 "Language-Team: Occitan (lengadocian) <ubuntu-l10n-oci@lists.ubuntu.com>\n"
@@ -717,7 +717,7 @@ msgstr ""
 #: controllers/view/info/infoview.cpp:178
 #: controllers/view/structures/datatypes/datainformation.cpp:57
 #: controllers/view/structures/datatypes/datainformation.cpp:60
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:217
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:220
 #, kde-format
 msgid "1 byte"
 msgid_plural "%1 bytes"
@@ -2885,7 +2885,7 @@ msgid "Values"
 msgstr "Valors"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:137
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:54
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:53
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:41
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip column contains the value in hexadecimal format"
@@ -2896,7 +2896,7 @@ msgid "Hexadecimal"
 msgstr "Exadecimal"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:139
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:55
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:54
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:42
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip column contains the value in decimal format"
@@ -2906,7 +2906,7 @@ msgid "Decimal"
 msgstr "Decimal"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:141
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:56
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:55
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:43
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
@@ -2914,7 +2914,7 @@ msgid "Octal"
 msgstr ""
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:143
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:57
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:56
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:44
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip column contains the value in binary format"
@@ -3050,19 +3050,19 @@ msgctxt "@window:title"
 msgid "\"%1\" View Profile"
 msgstr ""
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:43
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:42
 #, kde-format
 msgctxt "@info:status short for: Insert mode"
 msgid "INS"
 msgstr ""
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:44
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:43
 #, kde-format
 msgctxt "@info:status short for: Overwrite mode"
 msgid "OVR"
 msgstr ""
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:45
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:44
 #, fuzzy, kde-format
 #| msgctxt "@title:menu"
 #| msgid "Insert"
@@ -3070,7 +3070,7 @@ msgctxt "@info:tooltip"
 msgid "Insert mode"
 msgstr "Inserir"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:46
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:45
 #, fuzzy, kde-format
 #| msgctxt "@title:menu"
 #| msgid "Insert"
@@ -3078,20 +3078,20 @@ msgctxt "@info:tooltip"
 msgid "Overwrite mode"
 msgstr "Inserir"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:61
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:60
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Coding of the value interpretation in the current view."
 msgstr ""
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:69
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:68
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Encoding in the character column of the current view."
 msgstr ""
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:107
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:200
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:106
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:203
 #, kde-format
 msgid "Offset: %1"
 msgstr ""
@@ -3109,20 +3109,20 @@ msgctxt "@info:status selection: start offset - end offset ()"
 msgid "Selection: %1 - %2 (%3)"
 msgstr ""
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:163
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:166
 #, kde-format
 msgctxt "@info:status offset value not available"
 msgid "Offset: -"
 msgstr ""
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:164
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:221
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:167
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:224
 #, kde-format
 msgctxt "@info:status offset value not available"
 msgid "Selection: -"
 msgstr ""
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:219
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:222
 #, kde-format
 msgctxt "@info:status selection: start offset - end offset (number of bytes)"
 msgid "Selection: %1 - %2 (%3)"
