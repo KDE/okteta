@@ -24,6 +24,7 @@
 #include "typecodecs/float64codec.hpp"
 #include "typecodecs/char8codec.hpp"
 #include "typecodecs/utf8codec.hpp"
+#include "typecodecs/utf16codec.hpp"
 #include "abstracttypecodec.hpp"
 #include "abstractdifferentsizedialog.hpp"
 // libconfigentries
@@ -62,7 +63,7 @@ enum PODTypes
     Float64BitId,
     Char8BitId,
     UTF8Id,
-//     UTF16Id,
+    UTF16Id,
     PODTypeCount
 };
 
@@ -152,11 +153,7 @@ void PODDecoderTool::setupDecoder()
     mTypeCodecs[Float64BitId] =    new Okteta::Float64Codec();
     mTypeCodecs[Char8BitId] =      new Okteta::Char8Codec(mCharCodec);
     mTypeCodecs[UTF8Id] =          new Okteta::Utf8Codec();
-
-#if 0
-    mDecoderNameList[UTF16Id] =
-        i18nc("@label:textbox", "UTF-16:");
-#endif
+    mTypeCodecs[UTF16Id] =         new Okteta::Utf16Codec();
 
     mDecodedValueList.resize(PODTypeCount);
     mDecodedValueByteCountList.resize(PODTypeCount);

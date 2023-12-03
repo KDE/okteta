@@ -16,6 +16,7 @@
 #include "typeeditors/float64editor.hpp"
 #include "typeeditors/char8editor.hpp"
 #include "typeeditors/utf8editor.hpp"
+#include "typeeditors/utf16editor.hpp"
 #include "typeeditors/sintspinbox.hpp"
 #include "typeeditors/uintspinbox.hpp"
 #include "poddecodertool.hpp"
@@ -52,6 +53,7 @@ PODDelegate::PODDelegate(PODDecoderTool* tool, QObject* parent)
     qRegisterMetaType<Float64>();
     qRegisterMetaType<Char8>();
     qRegisterMetaType<Utf8>();
+    qRegisterMetaType<Utf16>();
 
     connect(mTool, &PODDecoderTool::readOnlyChanged, this, &PODDelegate::onReadOnlyChanged);
 }
@@ -146,6 +148,11 @@ QWidget* PODDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem& 
         connect(editor, &Utf8Editor::editingFinished,
                 this, &PODDelegate::onEditorDone);
         result = editor;
+    } else if (data.canConvert<Utf16>()) {
+        auto* editor = new Utf16Editor(parent);
+        connect(editor, &Utf16Editor::editingFinished,
+                this, &PODDelegate::onEditorDone);
+        result = editor;
     } else {
         result = QStyledItemDelegate::createEditor(parent, option, index);
     }
@@ -220,6 +227,10 @@ void PODDelegate::setEditorData(QWidget* editor, const QModelIndex& index) const
         Utf8 utf8 = data.value<Utf8>();
         auto* utf8Editor = qobject_cast<Utf8Editor*>(editor);
         utf8Editor->setData(utf8);
+    } else if (data.canConvert<Utf16>()) {
+        Utf16 utf16 = data.value<Utf16>();
+        auto* utf16Editor = qobject_cast<Utf16Editor*>(editor);
+        utf16Editor->setData(utf16);
     } else {
         QStyledItemDelegate::setEditorData(editor, index);
     }
@@ -278,6 +289,9 @@ void PODDelegate::setModelData(QWidget* editor, QAbstractItemModel* model, const
     } else if (data.canConvert<Utf8>()) {
         auto* utf8Editor = qobject_cast<Utf8Editor*>(editor);
         model->setData(index, QVariant::fromValue(utf8Editor->data()));
+    } else if (data.canConvert<Utf16>()) {
+        auto* utf16Editor = qobject_cast<Utf16Editor*>(editor);
+        model->setData(index, QVariant::fromValue(utf16Editor->data()));
     } else {
         QStyledItemDelegate::setModelData(editor, model, index);
     }
@@ -332,6 +346,9 @@ QString PODDelegate::displayText(const QVariant& data, const QLocale& locale) co
     } else if (data.canConvert<Utf8>()) {
         Utf8 utf8 = data.value<Utf8>();
         result = utf8.toString();
+    } else if (data.canConvert<Utf16>()) {
+        Utf16 utf16 = data.value<Utf16>();
+        result = utf16.toString();
     } else {
         result = QStyledItemDelegate::displayText(data, locale);
     }

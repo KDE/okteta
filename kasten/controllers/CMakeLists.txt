@@ -243,6 +243,7 @@ oktetakastencontrollers_add_sublibrary(view/poddecoder/typecodecs
         Float64Codec
         Char8Codec
         Utf8Codec
+        Utf16Codec
 )
 
 oktetakastencontrollers_add_sublibrary(view/poddecoder
@@ -279,6 +280,7 @@ oktetakastencontrollers_add_sublibrary(view/poddecoder/typeeditors
         Char8StringParser
         Char8StringValidator
         Utf8Editor
+        Utf16Editor
 )
 
 oktetakastencontrollers_add_sublibrary(view/bytetable
