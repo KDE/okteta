@@ -81,7 +81,7 @@ bool ByteArrayViewTextStreamEncoder::encodeDataToStream(QIODevice* device,
 
     if (byteArrayView->offsetColumnVisible()) {
         columnTextRendererList.append(
-            new OffsetColumnTextRenderer(Okteta::OffsetFormat::Hexadecimal, mSettings.firstLineOffset, mSettings.delta));
+            new OffsetColumnTextRenderer(byteArrayView->offsetCoding(), mSettings.firstLineOffset, mSettings.delta));
         columnTextRendererList.append(new BorderColumnTextRenderer());
     }
 
