@@ -135,12 +135,13 @@ bool ValueEditor::handleKeyPress(QKeyEvent* keyEvent)
             const QString text = keyEvent->text();
             if (text.length() > 0
                 && (!(keyEvent->modifiers() & (Qt::CTRL | Qt::ALT | Qt::META)))) {
-                const int input = text.at(0).toLatin1();
+                const QChar enteredChar = text.at(0);
                 // no usable char?
-                if (input < 32) {
+                if (!enteredChar.isPrint()) {
                     keyUsed = false;
                     break;
                 }
+                const int input = enteredChar.toLatin1();
 
                 const Okteta::ValueCodec* valueCodec = mView->valueCodec();
                 if (mInEditMode) {
