@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-03 02:27+0000\n"
+"POT-Creation-Date: 2023-12-04 02:28+0000\n"
 "PO-Revision-Date: 2020-01-03 11:29+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
@@ -1332,7 +1332,7 @@ msgid "UTF-8"
 msgstr "UTF-8"
 
 #: controllers/view/print/printtool.cpp:67
-#: controllers/view/print/printtool.cpp:170
+#: controllers/view/print/printtool.cpp:171
 #, kde-format
 msgctxt "@title:window"
 msgid "Print Byte Array %1"
@@ -1350,7 +1350,7 @@ msgctxt "in the footer of the printed page, e.g. Printed by: Joe User"
 msgid "Printed by: %U"
 msgstr "Geprint door: %U"
 
-#: controllers/view/print/printtool.cpp:168
+#: controllers/view/print/printtool.cpp:169
 #, kde-format
 msgctxt "@info"
 msgid "Could not print."

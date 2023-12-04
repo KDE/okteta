@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-03 02:27+0000\n"
+"POT-Creation-Date: 2023-12-04 02:28+0000\n"
 "PO-Revision-Date: 2008-08-05 22:28+0200\n"
 "Last-Translator: Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>\n"
 "Language-Team: Occitan (lengadocian) <ubuntu-l10n-oci@lists.ubuntu.com>\n"
@@ -1352,7 +1352,7 @@ msgid "UTF-8"
 msgstr ""
 
 #: controllers/view/print/printtool.cpp:67
-#: controllers/view/print/printtool.cpp:170
+#: controllers/view/print/printtool.cpp:171
 #, kde-format
 msgctxt "@title:window"
 msgid "Print Byte Array %1"
@@ -1370,7 +1370,7 @@ msgctxt "in the footer of the printed page, e.g. Printed by: Joe User"
 msgid "Printed by: %U"
 msgstr ""
 
-#: controllers/view/print/printtool.cpp:168
+#: controllers/view/print/printtool.cpp:169
 #, kde-format
 msgctxt "@info"
 msgid "Could not print."
