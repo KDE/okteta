@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-03 00:43+0000\n"
+"POT-Creation-Date: 2023-12-04 00:43+0000\n"
 "PO-Revision-Date: 2023-08-13 16:27+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -1201,20 +1201,14 @@ msgstr ""
 "Wählen Sie aus, ob neu geschriebener Text in den bestehenden Text eingefügt "
 "oder dieser überschrieben werden soll."
 
-#: controllers/view/poddecoder/poddecodertool.cpp:93
+#: controllers/view/poddecoder/poddecodertool.cpp:94
 #: controllers/view/poddecoder/poddecodertoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
 msgid "Decoding Table"
 msgstr "Dekodierungs-Tabelle"
 
-#: controllers/view/poddecoder/poddecodertool.cpp:158
-#, kde-format
-msgctxt "@label:textbox"
-msgid "UTF-16:"
-msgstr "UTF-16:"
-
-#: controllers/view/poddecoder/poddecodertool.cpp:304
+#: controllers/view/poddecoder/poddecodertool.cpp:301
 #, kde-format
 msgctxt "Edited as %datatype"
 msgid "Edited as %1"
@@ -1391,6 +1385,14 @@ msgctxt "@label:textbox"
 msgid "Unsigned 8-bit"
 msgstr "8-Bit ohne Vorzeichen"
 
+#: controllers/view/poddecoder/typecodecs/utf16codec.cpp:24
+#, fuzzy, kde-format
+#| msgctxt "@label:textbox"
+#| msgid "UTF-16:"
+msgctxt "@label:textbox"
+msgid "UTF-16"
+msgstr "UTF-16:"
+
 #: controllers/view/poddecoder/typecodecs/utf8codec.cpp:22
 #, kde-format
 msgctxt "@label:textbox"
@@ -1398,7 +1400,7 @@ msgid "UTF-8"
 msgstr "UTF-8"
 
 #: controllers/view/print/printtool.cpp:67
-#: controllers/view/print/printtool.cpp:165
+#: controllers/view/print/printtool.cpp:166
 #, kde-format
 msgctxt "@title:window"
 msgid "Print Byte Array %1"
@@ -1416,7 +1418,7 @@ msgctxt "in the footer of the printed page, e.g. Printed by: Joe User"
 msgid "Printed by: %U"
 msgstr "Gedruckt von: %U"
 
-#: controllers/view/print/printtool.cpp:163
+#: controllers/view/print/printtool.cpp:164
 #, kde-format
 msgctxt "@info"
 msgid "Could not print."

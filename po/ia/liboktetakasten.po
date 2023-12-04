@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-03 00:43+0000\n"
+"POT-Creation-Date: 2023-12-04 00:43+0000\n"
 "PO-Revision-Date: 2023-10-16 14:15+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -1135,20 +1135,14 @@ msgid ""
 "data."
 msgstr ""
 
-#: controllers/view/poddecoder/poddecodertool.cpp:93
+#: controllers/view/poddecoder/poddecodertool.cpp:94
 #: controllers/view/poddecoder/poddecodertoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
 msgid "Decoding Table"
 msgstr ""
 
-#: controllers/view/poddecoder/poddecodertool.cpp:158
-#, kde-format
-msgctxt "@label:textbox"
-msgid "UTF-16:"
-msgstr "UTF-16:"
-
-#: controllers/view/poddecoder/poddecodertool.cpp:304
+#: controllers/view/poddecoder/poddecodertool.cpp:301
 #, kde-format
 msgctxt "Edited as %datatype"
 msgid "Edited as %1"
@@ -1319,6 +1313,14 @@ msgctxt "@label:textbox"
 msgid "Unsigned 8-bit"
 msgstr ""
 
+#: controllers/view/poddecoder/typecodecs/utf16codec.cpp:24
+#, fuzzy, kde-format
+#| msgctxt "@label:textbox"
+#| msgid "UTF-16:"
+msgctxt "@label:textbox"
+msgid "UTF-16"
+msgstr "UTF-16:"
+
 #: controllers/view/poddecoder/typecodecs/utf8codec.cpp:22
 #, kde-format
 msgctxt "@label:textbox"
@@ -1326,7 +1328,7 @@ msgid "UTF-8"
 msgstr "UTF-8"
 
 #: controllers/view/print/printtool.cpp:67
-#: controllers/view/print/printtool.cpp:165
+#: controllers/view/print/printtool.cpp:166
 #, kde-format
 msgctxt "@title:window"
 msgid "Print Byte Array %1"
@@ -1344,7 +1346,7 @@ msgctxt "in the footer of the printed page, e.g. Printed by: Joe User"
 msgid "Printed by: %U"
 msgstr "Imprimite per: %U"
 
-#: controllers/view/print/printtool.cpp:163
+#: controllers/view/print/printtool.cpp:164
 #, kde-format
 msgctxt "@info"
 msgid "Could not print."

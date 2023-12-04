@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-03 00:43+0000\n"
-"PO-Revision-Date: 2023-08-07 09:13+0300\n"
+"POT-Creation-Date: 2023-12-04 00:43+0000\n"
+"PO-Revision-Date: 2023-12-03 08:33+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -1197,20 +1197,14 @@ msgstr ""
 "Виберіть, чи бажаєте ви щоб введену вами інформацію було вставлено між вже "
 "існуючою, чи існуючу інформацію заміщено введеною."
 
-#: controllers/view/poddecoder/poddecodertool.cpp:93
+#: controllers/view/poddecoder/poddecodertool.cpp:94
 #: controllers/view/poddecoder/poddecodertoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
 msgid "Decoding Table"
 msgstr "Таблиця розкодування"
 
-#: controllers/view/poddecoder/poddecodertool.cpp:158
-#, kde-format
-msgctxt "@label:textbox"
-msgid "UTF-16:"
-msgstr "UTF-16:"
-
-#: controllers/view/poddecoder/poddecodertool.cpp:304
+#: controllers/view/poddecoder/poddecodertool.cpp:301
 #, kde-format
 msgctxt "Edited as %datatype"
 msgid "Edited as %1"
@@ -1387,6 +1381,14 @@ msgctxt "@label:textbox"
 msgid "Unsigned 8-bit"
 msgstr "8-бітове без знака"
 
+#: controllers/view/poddecoder/typecodecs/utf16codec.cpp:24
+#, fuzzy, kde-format
+#| msgctxt "@label:textbox"
+#| msgid "UTF-16:"
+msgctxt "@label:textbox"
+msgid "UTF-16"
+msgstr "UTF-16:"
+
 #: controllers/view/poddecoder/typecodecs/utf8codec.cpp:22
 #, kde-format
 msgctxt "@label:textbox"
@@ -1394,7 +1396,7 @@ msgid "UTF-8"
 msgstr "UTF-8"
 
 #: controllers/view/print/printtool.cpp:67
-#: controllers/view/print/printtool.cpp:165
+#: controllers/view/print/printtool.cpp:166
 #, kde-format
 msgctxt "@title:window"
 msgid "Print Byte Array %1"
@@ -1412,7 +1414,7 @@ msgctxt "in the footer of the printed page, e.g. Printed by: Joe User"
 msgid "Printed by: %U"
 msgstr "Надруковано: %U"
 
-#: controllers/view/print/printtool.cpp:163
+#: controllers/view/print/printtool.cpp:164
 #, kde-format
 msgctxt "@info"
 msgid "Could not print."
@@ -2590,12 +2592,10 @@ msgid "&Decimal"
 msgstr "&Десятковий"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:43
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
-#| msgid "&Octal"
+#, kde-format
 msgctxt "@item:inmenu offset in the octal format"
 msgid "&Octal"
-msgstr "&Вісімкове"
+msgstr "&Вісімковий"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:49
 #, kde-format
@@ -2787,12 +2787,10 @@ msgid "Decimal"
 msgstr "Десятковий"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:69
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip column contains the value in octal format"
-#| msgid "Octal"
+#, kde-format
 msgctxt "@item:inmenu offset in the octal format"
 msgid "Octal"
-msgstr "Вісімкове"
+msgstr "Вісімковий"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:72
 #, kde-format
@@ -3460,9 +3458,7 @@ msgid "Dec"
 msgstr "Дес."
 
 #: gui/liboktetawidgets/addresscombobox_p.cpp:32
-#, fuzzy, kde-format
-#| msgctxt "@title:column short for Octal"
-#| msgid "Oct"
+#, kde-format
 msgctxt "@item:inlistbox coding of offset in the octal format"
 msgid "Oct"
 msgstr "Віс."

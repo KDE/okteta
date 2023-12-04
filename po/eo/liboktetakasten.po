@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-03 00:43+0000\n"
+"POT-Creation-Date: 2023-12-04 00:43+0000\n"
 "PO-Revision-Date: 2023-11-26 20:12+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -1179,20 +1179,14 @@ msgstr ""
 "Elektu ĉu vi volas ke la enigo estu enigita aŭ anstataŭigi ekzistantajn "
 "datumojn."
 
-#: controllers/view/poddecoder/poddecodertool.cpp:93
+#: controllers/view/poddecoder/poddecodertool.cpp:94
 #: controllers/view/poddecoder/poddecodertoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
 msgid "Decoding Table"
 msgstr "Malkoda Tablo"
 
-#: controllers/view/poddecoder/poddecodertool.cpp:158
-#, kde-format
-msgctxt "@label:textbox"
-msgid "UTF-16:"
-msgstr "UTF-16:"
-
-#: controllers/view/poddecoder/poddecodertool.cpp:304
+#: controllers/view/poddecoder/poddecodertool.cpp:301
 #, kde-format
 msgctxt "Edited as %datatype"
 msgid "Edited as %1"
@@ -1369,6 +1363,14 @@ msgctxt "@label:textbox"
 msgid "Unsigned 8-bit"
 msgstr "Nesubskribita 8-bita"
 
+#: controllers/view/poddecoder/typecodecs/utf16codec.cpp:24
+#, fuzzy, kde-format
+#| msgctxt "@label:textbox"
+#| msgid "UTF-16:"
+msgctxt "@label:textbox"
+msgid "UTF-16"
+msgstr "UTF-16:"
+
 #: controllers/view/poddecoder/typecodecs/utf8codec.cpp:22
 #, kde-format
 msgctxt "@label:textbox"
@@ -1376,7 +1378,7 @@ msgid "UTF-8"
 msgstr "UTF-8"
 
 #: controllers/view/print/printtool.cpp:67
-#: controllers/view/print/printtool.cpp:165
+#: controllers/view/print/printtool.cpp:166
 #, kde-format
 msgctxt "@title:window"
 msgid "Print Byte Array %1"
@@ -1394,7 +1396,7 @@ msgctxt "in the footer of the printed page, e.g. Printed by: Joe User"
 msgid "Printed by: %U"
 msgstr "Presita de: %U"
 
-#: controllers/view/print/printtool.cpp:163
+#: controllers/view/print/printtool.cpp:164
 #, kde-format
 msgctxt "@info"
 msgid "Could not print."
@@ -2547,9 +2549,7 @@ msgid "&Decimal"
 msgstr "&Dekuma"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:43
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
-#| msgid "&Octal"
+#, kde-format
 msgctxt "@item:inmenu offset in the octal format"
 msgid "&Octal"
 msgstr "&Okuma"
@@ -2744,12 +2744,10 @@ msgid "Decimal"
 msgstr "Decimal"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:69
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip column contains the value in octal format"
-#| msgid "Octal"
+#, kde-format
 msgctxt "@item:inmenu offset in the octal format"
 msgid "Octal"
-msgstr "Okuma"
+msgstr "Oktala"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:72
 #, kde-format
@@ -3415,9 +3413,7 @@ msgid "Dec"
 msgstr "Dec"
 
 #: gui/liboktetawidgets/addresscombobox_p.cpp:32
-#, fuzzy, kde-format
-#| msgctxt "@title:column short for Octal"
-#| msgid "Oct"
+#, kde-format
 msgctxt "@item:inlistbox coding of offset in the octal format"
 msgid "Oct"
 msgstr "Okt"

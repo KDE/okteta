@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-03 00:43+0000\n"
-"PO-Revision-Date: 2023-08-07 12:31+0200\n"
+"POT-Creation-Date: 2023-12-04 00:43+0000\n"
+"PO-Revision-Date: 2023-12-03 11:36+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
-"X-Generator: Lokalize 23.04.3\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1202,20 +1202,14 @@ msgstr ""
 "Seleccioneu si voleu que l'entrada s'insereixi o que sobreescrigui les dades "
 "existents."
 
-#: controllers/view/poddecoder/poddecodertool.cpp:93
+#: controllers/view/poddecoder/poddecodertool.cpp:94
 #: controllers/view/poddecoder/poddecodertoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
 msgid "Decoding Table"
 msgstr "Taula de descodificació"
 
-#: controllers/view/poddecoder/poddecodertool.cpp:158
-#, kde-format
-msgctxt "@label:textbox"
-msgid "UTF-16:"
-msgstr "UTF-16:"
-
-#: controllers/view/poddecoder/poddecodertool.cpp:304
+#: controllers/view/poddecoder/poddecodertool.cpp:301
 #, kde-format
 msgctxt "Edited as %datatype"
 msgid "Edited as %1"
@@ -1392,6 +1386,14 @@ msgctxt "@label:textbox"
 msgid "Unsigned 8-bit"
 msgstr "Sense signe de 8 bits"
 
+#: controllers/view/poddecoder/typecodecs/utf16codec.cpp:24
+#, fuzzy, kde-format
+#| msgctxt "@label:textbox"
+#| msgid "UTF-16:"
+msgctxt "@label:textbox"
+msgid "UTF-16"
+msgstr "UTF-16:"
+
 #: controllers/view/poddecoder/typecodecs/utf8codec.cpp:22
 #, kde-format
 msgctxt "@label:textbox"
@@ -1399,7 +1401,7 @@ msgid "UTF-8"
 msgstr "UTF-8"
 
 #: controllers/view/print/printtool.cpp:67
-#: controllers/view/print/printtool.cpp:165
+#: controllers/view/print/printtool.cpp:166
 #, kde-format
 msgctxt "@title:window"
 msgid "Print Byte Array %1"
@@ -1417,7 +1419,7 @@ msgctxt "in the footer of the printed page, e.g. Printed by: Joe User"
 msgid "Printed by: %U"
 msgstr "Imprès per: %U"
 
-#: controllers/view/print/printtool.cpp:163
+#: controllers/view/print/printtool.cpp:164
 #, kde-format
 msgctxt "@info"
 msgid "Could not print."
@@ -2578,9 +2580,7 @@ msgid "&Decimal"
 msgstr "&Decimal"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:43
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
-#| msgid "&Octal"
+#, kde-format
 msgctxt "@item:inmenu offset in the octal format"
 msgid "&Octal"
 msgstr "&Octal"
@@ -2775,9 +2775,7 @@ msgid "Decimal"
 msgstr "Decimal"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:69
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip column contains the value in octal format"
-#| msgid "Octal"
+#, kde-format
 msgctxt "@item:inmenu offset in the octal format"
 msgid "Octal"
 msgstr "Octal"
@@ -3451,9 +3449,7 @@ msgstr "Dec"
 
 # skip-rule: abbreviations-oct
 #: gui/liboktetawidgets/addresscombobox_p.cpp:32
-#, fuzzy, kde-format
-#| msgctxt "@title:column short for Octal"
-#| msgid "Oct"
+#, kde-format
 msgctxt "@item:inlistbox coding of offset in the octal format"
 msgid "Oct"
 msgstr "Oct"
@@ -3504,19 +3500,3 @@ msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"
 msgid "UTF-8"
 msgstr "UTF-8"
-
-#~ msgctxt "name of the hash algorithm"
-#~ msgid "SHA-0"
-#~ msgstr "SHA-0"
-
-#~ msgctxt "name of the hash algorithm"
-#~ msgid "MD2"
-#~ msgstr "MD2"
-
-#~ msgctxt "name of the hash algorithm"
-#~ msgid "RIPEMD160"
-#~ msgstr "RIPEMD160"
-
-#~ msgctxt "name of the hash algorithm"
-#~ msgid "Whirlpool"
-#~ msgstr "«Whirlpool»"
