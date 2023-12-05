@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:41+0000\n"
+"POT-Creation-Date: 2023-12-05 00:43+0000\n"
 "PO-Revision-Date: 2020-10-10 09:35+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -59,14 +59,14 @@ msgid "Re&do"
 msgstr "&Повторить"
 
 # BUGME: где появляется эта строка? --aspotashev
-#: controller/valueeditor.cpp:159
+#: controller/valueeditor.cpp:160
 #, kde-format
 msgctxt "name of the change"
 msgid "Insert"
 msgstr "вставка"
 
 # BUGME: где появляется эта строка? --aspotashev
-#: controller/valueeditor.cpp:200
+#: controller/valueeditor.cpp:201
 #, kde-format
 msgctxt "name of the change"
 msgid "Replace"

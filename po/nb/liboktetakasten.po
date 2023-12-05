@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-10 00:44+0000\n"
+"POT-Creation-Date: 2023-12-04 00:43+0000\n"
 "PO-Revision-Date: 2013-02-19 20:33+0100\n"
 "Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -734,7 +734,7 @@ msgstr ""
 #: controllers/view/info/infoview.cpp:183
 #: controllers/view/structures/datatypes/datainformation.cpp:58
 #: controllers/view/structures/datatypes/datainformation.cpp:61
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:217
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:226
 #, kde-format
 msgid "1 byte"
 msgid_plural "%1 bytes"
@@ -1173,20 +1173,14 @@ msgstr ""
 "Velg om du vil at inndata legges til det som er oppgitt, eller skriver over "
 "eksisterende data."
 
-#: controllers/view/poddecoder/poddecodertool.cpp:93
+#: controllers/view/poddecoder/poddecodertool.cpp:94
 #: controllers/view/poddecoder/poddecodertoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
 msgid "Decoding Table"
 msgstr "Dekodingstabell"
 
-#: controllers/view/poddecoder/poddecodertool.cpp:158
-#, kde-format
-msgctxt "@label:textbox"
-msgid "UTF-16:"
-msgstr "UTF-16:"
-
-#: controllers/view/poddecoder/poddecodertool.cpp:304
+#: controllers/view/poddecoder/poddecodertool.cpp:301
 #, kde-format
 msgctxt "Edited as %datatype"
 msgid "Edited as %1"
@@ -1364,6 +1358,12 @@ msgctxt "@label:textbox"
 msgid "Unsigned 8-bit"
 msgstr "8-bit uten fortegn"
 
+#: controllers/view/poddecoder/typecodecs/utf16codec.cpp:24
+#, kde-format
+msgctxt "@label:textbox"
+msgid "UTF-16"
+msgstr ""
+
 #: controllers/view/poddecoder/typecodecs/utf8codec.cpp:22
 #, kde-format
 msgctxt "@label:textbox"
@@ -1371,7 +1371,7 @@ msgid "UTF-8"
 msgstr "UTF-8"
 
 #: controllers/view/print/printtool.cpp:67
-#: controllers/view/print/printtool.cpp:165
+#: controllers/view/print/printtool.cpp:166
 #, kde-format
 msgctxt "@title:window"
 msgid "Print Byte Array %1"
@@ -1389,7 +1389,7 @@ msgctxt "in the footer of the printed page, e.g. Printed by: Joe User"
 msgid "Printed by: %U"
 msgstr "Skrevet ut av: %U"
 
-#: controllers/view/print/printtool.cpp:163
+#: controllers/view/print/printtool.cpp:164
 #, kde-format
 msgctxt "@info"
 msgid "Could not print."
@@ -2490,14 +2490,14 @@ msgid "Structures Script Console"
 msgstr ""
 
 #: controllers/view/viewconfig/bytespergroupdialog.cpp:33
-#: controllers/view/viewprofiles/viewprofileedit.cpp:115
+#: controllers/view/viewprofiles/viewprofileedit.cpp:116
 #, kde-format
 msgctxt "@label"
 msgid "No grouping."
 msgstr "Ingen gruppering."
 
 #: controllers/view/viewconfig/bytespergroupdialog.cpp:37
-#: controllers/view/viewprofiles/viewprofileedit.cpp:119
+#: controllers/view/viewprofiles/viewprofileedit.cpp:120
 #, kde-format
 msgctxt "@label:spinbox number of bytes which are grouped"
 msgid "Bytes per Group:"
@@ -2510,7 +2510,7 @@ msgid "Bytes per Group"
 msgstr "Byte pr. gruppe"
 
 #: controllers/view/viewconfig/bytesperlinedialog.cpp:34
-#: controllers/view/viewprofiles/viewprofileedit.cpp:126
+#: controllers/view/viewprofiles/viewprofileedit.cpp:127
 #, kde-format
 msgctxt "@label:spinbox number of bytes which are shown per line"
 msgid "Bytes per Line:"
@@ -2540,74 +2540,80 @@ msgctxt "@item:inmenu offset in the decimal format"
 msgid "&Decimal"
 msgstr "&Desimal"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:47
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:43
+#, kde-format
+msgctxt "@item:inmenu offset in the octal format"
+msgid "&Octal"
+msgstr ""
+
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:49
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Value Coding"
 msgstr "&Verdi-koding"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:51
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:53
 #, kde-format
 msgctxt ""
 "@item:inmenu encoding of the bytes as values in the hexadecimal format"
 msgid "&Hexadecimal"
 msgstr "&Heksadesimal"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:53
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:55
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
 msgid "&Decimal"
 msgstr "&Desimal"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:55
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:57
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
 msgid "&Octal"
 msgstr "&Oktal"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:57
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:59
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
 msgid "&Binary"
 msgstr "&Binær"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:63
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:65
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Char Coding"
 msgstr "&Tegnkoding"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:69
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:71
 #, kde-format
 msgctxt "@option:check"
 msgid "Show &Non-printing Chars"
 msgstr "Vis &tegn som ikke skrives ut"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:75
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:77
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Set Bytes per Line..."
 msgstr "Angi byte pr. linje …"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:81
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:83
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Set Bytes per Group..."
 msgstr "Angi byte pr. gruppe …"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:87
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:89
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Dynamic Layout"
 msgstr "&Dynamisk utforming"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:91
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:93
 #, kde-format
 msgctxt "@item:inmenu  The layout will not change on size changes."
 msgid "&Off"
 msgstr "A&v"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:93
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:95
 #, kde-format
 msgctxt ""
 "@item:inmenu  The layout will adapt to the size, but only with complete "
@@ -2615,7 +2621,7 @@ msgctxt ""
 msgid "&Wrap Only Complete Byte Groups"
 msgstr "&Fold bare komplette byte-grupper"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:95
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:97
 #, kde-format
 msgctxt ""
 "@item:inmenu  The layout will adapt to the size and fit in as much bytes per "
@@ -2623,31 +2629,31 @@ msgctxt ""
 msgid "&On"
 msgstr "&På"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:100
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:102
 #, kde-format
 msgctxt "@option:check"
 msgid "Show &Line Offset"
 msgstr "Vis &Linjeforskyvning"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:107
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:109
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Show Values or Chars"
 msgstr "Vi&s verdier eller tegn"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:110
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:112
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "&Values"
 msgstr "&Verdier"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:111
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:113
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "&Chars"
 msgstr "&Tegn"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:112
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:114
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Values && Chars"
@@ -2729,64 +2735,70 @@ msgctxt "@item:inmenu offset in the decimal format"
 msgid "Decimal"
 msgstr "Desimal"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:71
+#: controllers/view/viewprofiles/viewprofileedit.cpp:69
+#, kde-format
+msgctxt "@item:inmenu offset in the octal format"
+msgid "Octal"
+msgstr ""
+
+#: controllers/view/viewprofiles/viewprofileedit.cpp:72
 #, kde-format
 msgid "Offset Coding:"
 msgstr "Forskyvningskoding:"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:75
+#: controllers/view/viewprofiles/viewprofileedit.cpp:76
 #, kde-format
 msgctxt "@item:"
 msgid "Values"
 msgstr "Verdier"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:76
+#: controllers/view/viewprofiles/viewprofileedit.cpp:77
 #, kde-format
 msgctxt "@item:"
 msgid "Chars"
 msgstr "Tegn"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:77
+#: controllers/view/viewprofiles/viewprofileedit.cpp:78
 #, kde-format
 msgctxt "@item:"
 msgid "Values & Chars"
 msgstr "Verdier &og tegn"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:80
+#: controllers/view/viewprofiles/viewprofileedit.cpp:81
 #, kde-format
 msgid "Show Values or Chars:"
 msgstr "Vis verdier eller tegn:"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:84
+#: controllers/view/viewprofiles/viewprofileedit.cpp:85
 #, kde-format
 msgctxt "@label:listbox "
 msgid "Show with Rows or Columns:"
 msgstr "Vis med rader eller kolonner:"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:87
+#: controllers/view/viewprofiles/viewprofileedit.cpp:88
 #, kde-format
 msgctxt "@item:"
 msgid "Columns"
 msgstr "Kolonner"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:88
+#: controllers/view/viewprofiles/viewprofileedit.cpp:89
 #, kde-format
 msgctxt "@item:"
 msgid "Rows"
 msgstr "Rader"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:95
+#: controllers/view/viewprofiles/viewprofileedit.cpp:96
 #, kde-format
 msgid "Layout"
 msgstr "Utforming"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:101
+#: controllers/view/viewprofiles/viewprofileedit.cpp:102
 #, kde-format
 msgctxt "@item:inmenu  The layout will not change on size changes."
 msgid "Off"
 msgstr "Av"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:103
+#: controllers/view/viewprofiles/viewprofileedit.cpp:104
 #, kde-format
 msgctxt ""
 "@item:inmenu  The layout will adapt to the size, but only with complete "
@@ -2794,7 +2806,7 @@ msgctxt ""
 msgid "Wrap Only Complete Byte Groups"
 msgstr "Fold bare komplette byte-grupper"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:105
+#: controllers/view/viewprofiles/viewprofileedit.cpp:106
 #, kde-format
 msgctxt ""
 "@item:inmenu  The layout will adapt to the size and fit in as much bytes per "
@@ -2802,19 +2814,19 @@ msgctxt ""
 msgid "On"
 msgstr "På"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:110
+#: controllers/view/viewprofiles/viewprofileedit.cpp:111
 #, kde-format
 msgid "Break lines:"
 msgstr "Bryt linjer:"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:131
+#: controllers/view/viewprofiles/viewprofileedit.cpp:132
 #, kde-format
 msgid "Values"
 msgstr "Verdier"
 
 # unreviewed-context
-#: controllers/view/viewprofiles/viewprofileedit.cpp:137
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:54
+#: controllers/view/viewprofiles/viewprofileedit.cpp:138
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:53
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:41
 #, kde-format
 msgctxt ""
@@ -2822,8 +2834,8 @@ msgctxt ""
 msgid "Hexadecimal"
 msgstr "Heksadesimal"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:139
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:55
+#: controllers/view/viewprofiles/viewprofileedit.cpp:140
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:54
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:42
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
@@ -2831,8 +2843,8 @@ msgid "Decimal"
 msgstr "Desimal"
 
 # unreviewed-context
-#: controllers/view/viewprofiles/viewprofileedit.cpp:141
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:56
+#: controllers/view/viewprofiles/viewprofileedit.cpp:142
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:55
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:43
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
@@ -2840,31 +2852,31 @@ msgid "Octal"
 msgstr "Oktal"
 
 # unreviewed-context
-#: controllers/view/viewprofiles/viewprofileedit.cpp:143
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:57
+#: controllers/view/viewprofiles/viewprofileedit.cpp:144
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:56
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:44
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
 msgid "Binary"
 msgstr "Binær"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:146
-#: controllers/view/viewprofiles/viewprofileedit.cpp:155
+#: controllers/view/viewprofiles/viewprofileedit.cpp:147
+#: controllers/view/viewprofiles/viewprofileedit.cpp:156
 #, kde-format
 msgid "Coding:"
 msgstr "Tegnkoding:"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:150
+#: controllers/view/viewprofiles/viewprofileedit.cpp:151
 #, kde-format
 msgid "Chars"
 msgstr "Tegn"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:165
+#: controllers/view/viewprofiles/viewprofileedit.cpp:166
 #, kde-format
 msgid "Char for non-printable bytes:"
 msgstr "Tegn for byte som ikke kan skrives ut:"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:170
+#: controllers/view/viewprofiles/viewprofileedit.cpp:171
 #, kde-format
 msgid "Char for undefined bytes:"
 msgstr "Tegn for udefinerte byte:"
@@ -2982,73 +2994,73 @@ msgctxt "@window:title"
 msgid "\"%1\" View Profile"
 msgstr "Visningsprofil «%1»"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:43
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:42
 #, kde-format
 msgctxt "@info:status short for: Insert mode"
 msgid "INS"
 msgstr "INN"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:44
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:43
 #, kde-format
 msgctxt "@info:status short for: Overwrite mode"
 msgid "OVR"
 msgstr "OVR"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:45
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:44
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Insert mode"
 msgstr "Innsetingsmodus"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:46
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:45
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Overwrite mode"
 msgstr "Overskrivingsmodus"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:61
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:60
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Coding of the value interpretation in the current view."
 msgstr "Koding i verditolkingen i gjeldende visning."
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:69
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:68
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Encoding in the character column of the current view."
 msgstr "Koding i tegnkolonnen i gjeldende visning."
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:107
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:200
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:112
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:209
 #, kde-format
 msgid "Offset: %1"
 msgstr "Forskyvning: %1"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:115
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:121
 #, kde-format
 msgid "%1 bytes"
 msgstr "%1 byte"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:117
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:123
 #, kde-format
 msgctxt "@info:status selection: start offset - end offset ()"
 msgid "Selection: %1 - %2 (%3)"
 msgstr "Utvalg: %1 – %2 (%3)"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:163
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:172
 #, kde-format
 msgctxt "@info:status offset value not available"
 msgid "Offset: -"
 msgstr "Forskyvning: -"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:164
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:221
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:173
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:230
 #, kde-format
 msgctxt "@info:status offset value not available"
 msgid "Selection: -"
 msgstr " Utvalg: – "
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:219
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:228
 #, kde-format
 msgctxt "@info:status selection: start offset - end offset (number of bytes)"
 msgid "Selection: %1 - %2 (%3)"
@@ -3395,6 +3407,12 @@ msgid "Dec"
 msgstr "Des"
 
 #: gui/liboktetawidgets/addresscombobox_p.cpp:32
+#, kde-format
+msgctxt "@item:inlistbox coding of offset in the octal format"
+msgid "Oct"
+msgstr ""
+
+#: gui/liboktetawidgets/addresscombobox_p.cpp:33
 #, kde-format
 msgctxt "@item:inlistbox coding of offset in the expression format"
 msgid "Expr"
