@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-04 00:43+0000\n"
-"PO-Revision-Date: 2023-08-08 06:57+0200\n"
+"PO-Revision-Date: 2023-12-06 06:25+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -1315,12 +1315,10 @@ msgid "Unsigned 8-bit"
 msgstr ""
 
 #: controllers/view/poddecoder/typecodecs/utf16codec.cpp:24
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox"
-#| msgid "UTF-16:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "UTF-16"
-msgstr "UTF-16:"
+msgstr "UTF-16"
 
 #: controllers/view/poddecoder/typecodecs/utf8codec.cpp:22
 #, kde-format
@@ -2475,9 +2473,7 @@ msgid "&Decimal"
 msgstr "&ათობითი"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:43
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
-#| msgid "&Octal"
+#, kde-format
 msgctxt "@item:inmenu offset in the octal format"
 msgid "&Octal"
 msgstr "&რვაობითი"
@@ -2672,9 +2668,7 @@ msgid "Decimal"
 msgstr "ათობითი"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:69
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip column contains the value in octal format"
-#| msgid "Octal"
+#, kde-format
 msgctxt "@item:inmenu offset in the octal format"
 msgid "Octal"
 msgstr "რვაობითი"
@@ -3331,12 +3325,10 @@ msgid "Dec"
 msgstr "დეკ"
 
 #: gui/liboktetawidgets/addresscombobox_p.cpp:32
-#, fuzzy, kde-format
-#| msgctxt "@title:column short for Octal"
-#| msgid "Oct"
+#, kde-format
 msgctxt "@item:inlistbox coding of offset in the octal format"
 msgid "Oct"
-msgstr "ოქტ"
+msgstr "რვაობ"
 
 #: gui/liboktetawidgets/addresscombobox_p.cpp:33
 #, kde-format

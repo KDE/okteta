@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-04 00:43+0000\n"
-"PO-Revision-Date: 2023-12-04 09:14+0100\n"
+"PO-Revision-Date: 2023-12-05 11:43+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -1406,12 +1406,10 @@ msgid "Unsigned 8-bit"
 msgstr "Non signé sur 8 bits"
 
 #: controllers/view/poddecoder/typecodecs/utf16codec.cpp:24
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox"
-#| msgid "UTF-16:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "UTF-16"
-msgstr "UTF-16 :"
+msgstr "UTF-16"
 
 #: controllers/view/poddecoder/typecodecs/utf8codec.cpp:22
 #, kde-format

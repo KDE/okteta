@@ -1,7 +1,7 @@
 # translation of liboktetakasten.po to Slovak
 # Richard Fric <Richard.Fric@kdemail.net>, 2008, 2009.
 # Milan Basa <minkob@mail.t-com.sk>, 2010.
-# Roman Paholík <wizzardsk@gmail.com>, 2012, 2013, 2014, 2015, 2016.
+# SPDX-FileCopyrightText: 2012, 2013, 2014, 2015, 2016, 2023 Roman Paholík <wizzardsk@gmail.com>
 # Mthw <jari_45@hotmail.com>, 2019.
 # Matej Mrenica <matejm98mthw@gmail.com>, 2019.
 msgid ""
@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-04 00:43+0000\n"
-"PO-Revision-Date: 2019-11-18 12:57+0100\n"
-"Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
-"Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2023-12-06 19:12+0100\n"
+"Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
+"Language-Team: Slovak <kde-sk@linux.sk>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 19.11.80\n"
+"X-Generator: Lokalize 23.08.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #, kde-format
@@ -27,7 +27,7 @@ msgstr ""
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
+msgstr "wizzardsk@gmail.com"
 
 #: controllers/document/info/documentinfotool.cpp:48
 #: controllers/document/info/documentinfotoolviewfactory.cpp:24
@@ -779,36 +779,34 @@ msgid "CRC-32"
 msgstr "CRC-32"
 
 #: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumalgorithm.cpp:82
-#, fuzzy, kde-format
-#| msgctxt "name of the checksum algorithm, Cyclic Redundancy Check 32"
-#| msgid "CRC-32"
+#, kde-format
 msgctxt "name of the checksum algorithm, Cyclic Redundancy Check 64"
 msgid "CRC-64"
-msgstr "CRC-32"
+msgstr "CRC-64"
 
 #: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:31
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "ECMA-182"
-msgstr ""
+msgstr "ECMA-182"
 
 #: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:32
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "ISO 3309"
-msgstr ""
+msgstr "ISO 3309"
 
 #: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:38
 #, kde-format
 msgctxt "@label:listbox variant used to select the CRC-64 variant"
 msgid "CRC-64 variant:"
-msgstr ""
+msgstr "CRC-64 variant:"
 
 #: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:41
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "CRC-64 variant used by calculation."
-msgstr ""
+msgstr "CRC-64 variant použitý pri výpočte."
 
 #: controllers/view/libbytearraychecksum/algorithm/modsum16bytearraychecksumalgorithm.cpp:23
 #, kde-format
@@ -906,36 +904,28 @@ msgid "SHA-512"
 msgstr "SHA-512"
 
 #: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:57
-#, fuzzy, kde-format
-#| msgctxt "name of the hash algorithm"
-#| msgid "SHA-224"
+#, kde-format
 msgctxt "name of the hash algorithm"
 msgid "SHA3-224"
-msgstr "SHA-224"
+msgstr "SHA3-224"
 
 #: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:59
-#, fuzzy, kde-format
-#| msgctxt "name of the hash algorithm"
-#| msgid "SHA-256"
+#, kde-format
 msgctxt "name of the hash algorithm"
 msgid "SHA3-256"
-msgstr "SHA-256"
+msgstr "SHA3-256"
 
 #: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:61
-#, fuzzy, kde-format
-#| msgctxt "name of the hash algorithm"
-#| msgid "SHA-384"
+#, kde-format
 msgctxt "name of the hash algorithm"
 msgid "SHA3-384"
-msgstr "SHA-384"
+msgstr "SHA3-384"
 
 #: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:63
-#, fuzzy, kde-format
-#| msgctxt "name of the hash algorithm"
-#| msgid "SHA-512"
+#, kde-format
 msgctxt "name of the hash algorithm"
 msgid "SHA3-512"
-msgstr "SHA-512"
+msgstr "SHA3-512"
 
 #: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:65
 #, kde-format
@@ -968,11 +958,7 @@ msgid "operand AND data"
 msgstr "operand AND dáta"
 
 #: controllers/view/libbytearrayfilter/filter/invertbytearrayfilter.cpp:19
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "name of the filter; it switches all bits from 0 to 1 and 1 to 0 "
-#| "respectivly, so 01111110 becomes 10000001"
-#| msgid "INVERT data"
+#, kde-format
 msgctxt ""
 "name of the filter; it switches all bits from 0 to 1 and 1 to 0 "
 "respectively, so 01111110 becomes 10000001"
@@ -1380,12 +1366,10 @@ msgid "Unsigned 8-bit"
 msgstr "Unsigned 8-bit"
 
 #: controllers/view/poddecoder/typecodecs/utf16codec.cpp:24
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox"
-#| msgid "UTF-16:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "UTF-16"
-msgstr "UTF-16:"
+msgstr "UTF-16"
 
 #: controllers/view/poddecoder/typecodecs/utf8codec.cpp:22
 #, kde-format
@@ -1767,27 +1751,23 @@ msgid "<EOF reached>"
 msgstr "<dosiahnutý EOF>"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:228
-#, fuzzy, kde-format
-#| msgctxt "name of a data structure"
-#| msgid "Name"
+#, kde-format
 msgid "Name:"
-msgstr "Meno"
+msgstr "Názov:"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:230
-#, fuzzy, kde-format
-#| msgctxt "@title:column value of the bytes for the datatype"
-#| msgid "Value"
+#, kde-format
 msgid "Value:"
-msgstr "Hodnota"
+msgstr "Hodnota:"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:237
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "size (elements)"
 msgid "%2 (%1 child)"
 msgid_plural "%2 (%1 children)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Potomok"
+msgstr[1] "Deti"
+msgstr[2] "Deti"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:262
 #: controllers/view/structures/datatypes/datainformationwithchildren.cpp:233
@@ -2136,27 +2116,25 @@ msgstr "Správa"
 #, kde-format
 msgctxt "@title:window"
 msgid "About %1"
-msgstr ""
+msgstr "O aplikácii %1"
 
 #: controllers/view/structures/settings/aboutstructuredialog.cpp:44
-#, fuzzy, kde-format
-#| msgctxt "data type in C/C++, then name"
-#| msgid "union %1"
+#, kde-format
 msgctxt "Version version-number"
 msgid "Version %1"
-msgstr "union %1"
+msgstr "Verzia %1"
 
 #: controllers/view/structures/settings/aboutstructuredialog.cpp:81
 #: controllers/view/structures/settings/aboutstructuredialog.cpp:86
 #, kde-format
 msgid "License: %1"
-msgstr ""
+msgstr "Licencia: %1"
 
 #: controllers/view/structures/settings/aboutstructuredialog.cpp:92
 #, kde-format
 msgctxt "@title:tab"
 msgid "About"
-msgstr ""
+msgstr "O aplikácii"
 
 #: controllers/view/structures/settings/aboutstructuredialog.cpp:107
 #, kde-format
@@ -2170,13 +2148,13 @@ msgstr ""
 #, kde-format
 msgctxt "@title:tab"
 msgid "Author"
-msgstr ""
+msgstr "Tvorca"
 
 #: controllers/view/structures/settings/licensedialog.cpp:29
 #, kde-format
 msgctxt "@title:window"
 msgid "License Agreement"
-msgstr ""
+msgstr "Licenčná zmluva"
 
 #: controllers/view/structures/settings/structureaddremovewidget.cpp:53
 #, kde-format
@@ -2194,7 +2172,7 @@ msgstr "Použité štruktúry:"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "About"
-msgstr ""
+msgstr "O aplikácii"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:45
 #, kde-format
@@ -2223,12 +2201,10 @@ msgid "Structure Definitions"
 msgstr "Definície štruktúry"
 
 #: controllers/view/structures/settings/structuresselector.cpp:40
-#, fuzzy, kde-format
-#| msgctxt "@title"
-#| msgid "Search"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Search..."
-msgstr "Hľadať"
+msgstr "Hľadať..."
 
 #. i18n: ectx: tooltip, entry (UnsignedDisplayBase), group (ValueDisplay)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:9
@@ -2441,11 +2417,10 @@ msgid "Value"
 msgstr "Hodnota"
 
 #: controllers/view/structures/structurestool.cpp:193
-#, fuzzy, kde-format
-#| msgid "Size:"
+#, kde-format
 msgctxt "size of a data structure"
 msgid "Size"
-msgstr "Veľkosť:"
+msgstr "Size"
 
 #: controllers/view/structures/structureview.cpp:95
 #, kde-format
@@ -2579,9 +2554,7 @@ msgid "&Decimal"
 msgstr "&Decimálny"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:43
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
-#| msgid "&Octal"
+#, kde-format
 msgctxt "@item:inmenu offset in the octal format"
 msgid "&Octal"
 msgstr "&Osmičkový"
@@ -2776,12 +2749,10 @@ msgid "Decimal"
 msgstr "Dekadický"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:69
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip column contains the value in octal format"
-#| msgid "Octal"
+#, kde-format
 msgctxt "@item:inmenu offset in the octal format"
 msgid "Octal"
-msgstr "Osmičkový"
+msgstr "Octal"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:72
 #, kde-format
@@ -3448,9 +3419,7 @@ msgid "Dec"
 msgstr "Dec"
 
 #: gui/liboktetawidgets/addresscombobox_p.cpp:32
-#, fuzzy, kde-format
-#| msgctxt "@title:column short for Octal"
-#| msgid "Oct"
+#, kde-format
 msgctxt "@item:inlistbox coding of offset in the octal format"
 msgid "Oct"
 msgstr "Oct"

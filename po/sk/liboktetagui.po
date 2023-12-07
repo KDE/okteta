@@ -1,55 +1,56 @@
 # translation of liboktetagui.po to Slovak
 # Richard Fric <Richard.Fric@kdemail.net>, 2010.
+# SPDX-FileCopyrightText: 2023 Roman Paholik <wizzardsk@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: liboktetagui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-05 00:43+0000\n"
-"PO-Revision-Date: 2010-11-06 13:53+0100\n"
-"Last-Translator: Richard Fric <Richard.Fric@kdemail.net>\n"
+"PO-Revision-Date: 2023-12-06 19:13+0100\n"
+"Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.0\n"
+"X-Generator: Lokalize 23.08.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: controller/clipboardcontroller.cpp:57
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Copy"
-msgstr ""
+msgstr "Kopírovať"
 
 #: controller/clipboardcontroller.cpp:67
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Cu&t"
-msgstr ""
+msgstr "Vys&trihnúť"
 
 #: controller/clipboardcontroller.cpp:74
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Paste"
-msgstr ""
+msgstr "V&ložiť"
 
 #: controller/keynavigator.cpp:143
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Select &All"
-msgstr ""
+msgstr "Vybrať &všetko"
 
 #: controller/undoredocontroller.cpp:64
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Undo"
-msgstr ""
+msgstr "&Späť"
 
 #: controller/undoredocontroller.cpp:70
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Re&do"
-msgstr ""
+msgstr "Zn&ovu"
 
 #: controller/valueeditor.cpp:160
 #, kde-format
