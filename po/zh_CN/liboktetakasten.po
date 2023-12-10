@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-04 00:43+0000\n"
-"PO-Revision-Date: 2023-11-25 02:29\n"
+"PO-Revision-Date: 2023-12-09 09:27\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -1326,12 +1326,10 @@ msgid "Unsigned 8-bit"
 msgstr "无符号 8 位"
 
 #: controllers/view/poddecoder/typecodecs/utf16codec.cpp:24
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox"
-#| msgid "UTF-16:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "UTF-16"
-msgstr "UTF-16："
+msgstr "UTF-16"
 
 #: controllers/view/poddecoder/typecodecs/utf8codec.cpp:22
 #, kde-format
@@ -2490,9 +2488,7 @@ msgid "&Decimal"
 msgstr "十进制(&D)"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:43
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
-#| msgid "&Octal"
+#, kde-format
 msgctxt "@item:inmenu offset in the octal format"
 msgid "&Octal"
 msgstr "八进制(&O)"
@@ -2687,9 +2683,7 @@ msgid "Decimal"
 msgstr "十进制"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:69
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip column contains the value in octal format"
-#| msgid "Octal"
+#, kde-format
 msgctxt "@item:inmenu offset in the octal format"
 msgid "Octal"
 msgstr "八进制"
@@ -3352,9 +3346,7 @@ msgid "Dec"
 msgstr "十进制"
 
 #: gui/liboktetawidgets/addresscombobox_p.cpp:32
-#, fuzzy, kde-format
-#| msgctxt "@title:column short for Octal"
-#| msgid "Oct"
+#, kde-format
 msgctxt "@item:inlistbox coding of offset in the octal format"
 msgid "Oct"
 msgstr "八进制"
