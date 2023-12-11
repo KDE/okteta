@@ -347,6 +347,10 @@ void AbstractByteArrayViewPrivate::changeEvent(QEvent* event)
         // might this need atomic signalling rather?
         emit q->zoomLevelChanged(m_fontScalingZoomState.scale());
         emit q->zoomLevelsChanged();
+    } else if (event->type() == QEvent::StyleChange) {
+        if (mCursorVisible) {
+            updateCursors();
+        }
     }
 }
 
