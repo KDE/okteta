@@ -195,6 +195,8 @@ void AbstractByteArrayViewPrivate::init()
 
     mOffsetColumn =
         new OffsetColumnRenderer(mStylist, mTableLayout, OffsetFormat::Hexadecimal);
+    const int headerMargin = q->style()->pixelMetric(QStyle::PM_HeaderMargin);
+    mOffsetColumn->setMargin(headerMargin);
     mOffsetBorderColumn =
         new BorderColumnRenderer(mStylist, false);
 
@@ -348,6 +350,15 @@ void AbstractByteArrayViewPrivate::changeEvent(QEvent* event)
         emit q->zoomLevelChanged(m_fontScalingZoomState.scale());
         emit q->zoomLevelsChanged();
     } else if (event->type() == QEvent::StyleChange) {
+        // get new values
+        const int headerMargin = q->style()->pixelMetric(QStyle::PM_HeaderMargin);
+        mOffsetColumn->setMargin(headerMargin);
+
+        // update all dependent structures
+        mTableLayout->setNoOfLinesPerPage(q->noOfLinesPerPage());
+
+        updateViewByWidth();
+
         if (mCursorVisible) {
             updateCursors();
         }
