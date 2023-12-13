@@ -25,8 +25,6 @@ public: // QStyledItemDelegate API
     void setEditorData(QWidget* editor, const QModelIndex& index) const override;
     QWidget* createEditor(QWidget* parent,
                           const QStyleOptionViewItem& option, const QModelIndex& index) const override;
-    QSize sizeHint(const QStyleOptionViewItem& option,
-                   const QModelIndex& index) const override;
 };
 
 #endif

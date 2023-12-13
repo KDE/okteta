@@ -67,10 +67,4 @@ void StructureViewItemDelegate::setEditorData(QWidget* editor, const QModelIndex
     data->setWidgetData(editor);
 }
 
-QSize StructureViewItemDelegate::sizeHint(const QStyleOptionViewItem& option,
-                                          const QModelIndex& index) const
-{
-    return QStyledItemDelegate::sizeHint(option, index) + QSize(0, 8);
-}
-
 #include "moc_structureviewitemdelegate.cpp"
