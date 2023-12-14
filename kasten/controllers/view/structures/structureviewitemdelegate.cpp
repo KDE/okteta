@@ -25,11 +25,10 @@ QWidget* StructureViewItemDelegate::createEditor(QWidget* parent, const QStyleOp
     if (!index.isValid()) {
         return nullptr;
     }
-    auto* dataB = static_cast<DataInformationBase*> (index.internalPointer());
-    if (!dataB || dataB->isTopLevel()) {
+    auto* data = static_cast<DataInformation*> (index.internalPointer());
+    if (!data) {
         return nullptr;
     }
-    DataInformation* data = dataB->asDataInformation();
     QWidget* ret = data->createEditWidget(parent);
     ret->setFocusPolicy(Qt::WheelFocus);
     return ret;
@@ -41,11 +40,10 @@ void StructureViewItemDelegate::setModelData(QWidget* editor, QAbstractItemModel
     if (!index.isValid()) {
         return;
     }
-    auto* dataB = static_cast<DataInformationBase*> (index.internalPointer());
-    if (!dataB || dataB->isTopLevel()) {
+    auto* data = static_cast<DataInformation*> (index.internalPointer());
+    if (!data) {
         return;
     }
-    DataInformation* data = dataB->asDataInformation();
     QVariant value = data->dataFromWidget(editor);
     // editor might have intermediate edit state, will return invalid QVariant
     if (value.isValid()) {
@@ -59,11 +57,10 @@ void StructureViewItemDelegate::setEditorData(QWidget* editor, const QModelIndex
     if (!index.isValid()) {
         return;
     }
-    auto* dataB = static_cast<DataInformationBase*> (index.internalPointer());
-    if (!dataB || dataB->isTopLevel()) {
+    auto* data = static_cast<DataInformation*> (index.internalPointer());
+    if (!data) {
         return;
     }
-    DataInformation* data = dataB->asDataInformation();
     data->setWidgetData(editor);
 }
 
