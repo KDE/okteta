@@ -10,6 +10,7 @@
 #include "structurestool.hpp"
 #include "structuredefinitionfile.hpp"
 #include "structuresmanager.hpp"
+#include "structuretreemodel.hpp"
 #include "structlogging.hpp"
 // Okteta Kasten core
 #include <Kasten/Okteta/ByteArrayDocument>
@@ -312,7 +313,7 @@ void StructuresTool::selectBytesInView(const QModelIndex& idx)
     if (!mByteArrayModel || !mByteArrayView || !idx.isValid()) {
         return;
     }
-    const auto* data = static_cast<const DataInformation*>(idx.internalPointer());
+    const auto* data = idx.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
     if (!data) {
         return;
     }
@@ -326,11 +327,12 @@ void StructuresTool::mark(const QModelIndex& idx)
     if (!mByteArrayModel || !mByteArrayView || !idx.isValid()) {
         return;
     }
-    const auto* data = static_cast<const DataInformation*>(idx.internalPointer());
+    const auto* data = idx.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
     if (!data) {
         return;
     }
     const Okteta::AddressRange markingRange = dataRange(data);
+
     mByteArrayView->setMarking(markingRange, true);
     mIsStructureMarked = true;
 }
@@ -370,13 +372,13 @@ bool StructuresTool::isFileLoaded() const
 
 void StructuresTool::lockStructure(const QModelIndex& idx)
 {
-    if (!mByteArrayModel) { // no point without ByteArrayModel
+    if (!mByteArrayModel || !idx.isValid()) {
         return;
     }
-    if (!idx.isValid() || !idx.internalPointer()) {
+    auto* data = idx.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
+    if (!data) {
         return;
     }
-    auto* data = static_cast<DataInformation*>(idx.internalPointer());
     TopLevelDataInformation* top = data->topLevelDataInformation();
     Q_ASSERT(top);
     if (top) {
@@ -386,13 +388,13 @@ void StructuresTool::lockStructure(const QModelIndex& idx)
 
 void StructuresTool::unlockStructure(const QModelIndex& idx)
 {
-    if (!mByteArrayModel) { // no point without ByteArrayModel
+    if (!mByteArrayModel || !idx.isValid()) {
         return;
     }
-    if (!idx.isValid() || !idx.internalPointer()) {
+    auto* data = idx.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
+    if (!data) {
         return;
     }
-    auto* data = static_cast<DataInformation*>(idx.internalPointer());
     TopLevelDataInformation* top = data->topLevelDataInformation();
     Q_CHECK_PTR(top);
 
@@ -410,13 +412,13 @@ void StructuresTool::unlockStructure(const QModelIndex& idx)
 
 bool StructuresTool::isStructureLocked(const QModelIndex& idx) const
 {
-    if (!mByteArrayModel) { // no point without ByteArrayModel
+    if (!mByteArrayModel || !idx.isValid()) {
         return false;
     }
-    if (!idx.isValid() || !idx.internalPointer()) {
+    auto* data = idx.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
+    if (!data) {
         return false;
     }
-    auto* data = static_cast<DataInformation*>(idx.internalPointer());
     TopLevelDataInformation* top = data->topLevelDataInformation();
     Q_ASSERT(top);
     if (top) {
@@ -428,7 +430,7 @@ bool StructuresTool::isStructureLocked(const QModelIndex& idx) const
 bool StructuresTool::canStructureBeLocked(const QModelIndex& idx) const
 {
     // we need a valid model and a valid index
-    return mByteArrayModel && idx.isValid() && idx.internalPointer();
+    return mByteArrayModel && idx.isValid() && idx.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
 }
 
 void StructuresTool::onChildItemDataChanged()

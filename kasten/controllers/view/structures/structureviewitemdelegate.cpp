@@ -7,6 +7,8 @@
 */
 
 #include "structureviewitemdelegate.hpp"
+
+#include "structuretreemodel.hpp"
 #include "datatypes/datainformation.hpp"
 
 #include <QScopedPointer>
@@ -27,7 +29,7 @@ QWidget* StructureViewItemDelegate::createEditor(QWidget* parent, const QStyleOp
     if (!index.isValid()) {
         return nullptr;
     }
-    auto* data = static_cast<DataInformation*> (index.internalPointer());
+    auto* data = index.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
     if (!data) {
         return nullptr;
     }
@@ -42,7 +44,7 @@ void StructureViewItemDelegate::setModelData(QWidget* editor, QAbstractItemModel
     if (!index.isValid()) {
         return;
     }
-    auto* data = static_cast<DataInformation*> (index.internalPointer());
+    auto* data = index.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
     if (!data) {
         return;
     }
@@ -59,7 +61,7 @@ void StructureViewItemDelegate::setEditorData(QWidget* editor, const QModelIndex
     if (!index.isValid()) {
         return;
     }
-    auto* data = static_cast<DataInformation*> (index.internalPointer());
+    auto* data = index.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
     if (!data) {
         return;
     }
