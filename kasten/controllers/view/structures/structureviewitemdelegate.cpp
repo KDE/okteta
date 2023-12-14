@@ -11,6 +11,8 @@
 
 #include <QScopedPointer>
 
+namespace Kasten {
+
 StructureViewItemDelegate::StructureViewItemDelegate(QObject* parent)
     : QStyledItemDelegate(parent)
 {
@@ -62,6 +64,8 @@ void StructureViewItemDelegate::setEditorData(QWidget* editor, const QModelIndex
         return;
     }
     data->setWidgetData(editor);
+}
+
 }
 
 #include "moc_structureviewitemdelegate.cpp"

@@ -11,6 +11,8 @@
 
 #include <QStyledItemDelegate>
 
+namespace Kasten {
+
 class StructureViewItemDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
@@ -26,5 +28,7 @@ public: // QStyledItemDelegate API
     QWidget* createEditor(QWidget* parent,
                           const QStyleOptionViewItem& option, const QModelIndex& index) const override;
 };
+
+}
 
 #endif
