@@ -279,7 +279,7 @@ void StructureView::copyToClipboard()
 {
     auto* action = static_cast<QAction*>(sender());
     const QModelIndex index = action->data().value<QModelIndex>();
-    auto* item = static_cast<DataInformation*> (index.internalPointer());
+    auto* item = index.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
 
     auto* mimeData = new QMimeData;
 
@@ -317,7 +317,7 @@ void StructureView::onCustomContextMenuRequested(QPoint pos)
     if (!index.isValid()) {
         return;
     }
-    const auto* data = static_cast<const DataInformation*>(index.internalPointer());
+    const auto* data = index.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
     if (!data) {
         return;
     }

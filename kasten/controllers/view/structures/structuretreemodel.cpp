@@ -102,6 +102,16 @@ QVariant StructureTreeModel::data(const QModelIndex& index, int role) const
     }
 
     auto* item = static_cast<DataInformation*> (index.internalPointer());
+
+    if (role == DataInformationRole) {
+        // Using ArrayDataInformation::childAt() needed with DataInformationWithDummyChildren for updated dummy
+        if (item->parent()->isArray()) {
+            ArrayDataInformation* array = item->parent()->asArray();
+            item = array->childAt(index.row());
+        }
+        return QVariant::fromValue(item);
+    }
+
     const int column = index.column();
     if (role == Qt::FontRole) {
         if (column == 0 && item->parent()->isTopLevel()) {
@@ -127,12 +137,12 @@ bool StructureTreeModel::setData(const QModelIndex& index, const QVariant& value
         return false;
     }
 
-    if (!index.internalPointer()) {
+    auto* item = index.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
+    if (!item) {
         qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "item == NULL";
         return false;
     }
 
-    auto* item = static_cast<DataInformation*> (index.internalPointer());
     bool change = mTool->setData(value, role, item, index.row());
 
     return change;

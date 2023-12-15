@@ -7,7 +7,12 @@
 */
 
 #include "structureviewitemdelegate.hpp"
+
+#include "structuretreemodel.hpp"
 #include "datatypes/datainformation.hpp"
+
+
+namespace Kasten {
 
 StructureViewItemDelegate::StructureViewItemDelegate(QObject* parent)
     : QStyledItemDelegate(parent)
@@ -23,11 +28,10 @@ QWidget* StructureViewItemDelegate::createEditor(QWidget* parent, const QStyleOp
     if (!index.isValid()) {
         return nullptr;
     }
-    auto* dataB = static_cast<DataInformationBase*> (index.internalPointer());
-    if (!dataB || dataB->isTopLevel()) {
+    auto* data = index.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
+    if (!data) {
         return nullptr;
     }
-    DataInformation* data = dataB->asDataInformation();
     QWidget* ret = data->createEditWidget(parent);
     ret->setFocusPolicy(Qt::WheelFocus);
     return ret;
@@ -39,11 +43,10 @@ void StructureViewItemDelegate::setModelData(QWidget* editor, QAbstractItemModel
     if (!index.isValid()) {
         return;
     }
-    auto* dataB = static_cast<DataInformationBase*> (index.internalPointer());
-    if (!dataB || dataB->isTopLevel()) {
+    auto* data = index.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
+    if (!data) {
         return;
     }
-    DataInformation* data = dataB->asDataInformation();
     QVariant value = data->dataFromWidget(editor);
     // editor might have intermediate edit state, will return invalid QVariant
     if (value.isValid()) {
@@ -57,18 +60,13 @@ void StructureViewItemDelegate::setEditorData(QWidget* editor, const QModelIndex
     if (!index.isValid()) {
         return;
     }
-    auto* dataB = static_cast<DataInformationBase*> (index.internalPointer());
-    if (!dataB || dataB->isTopLevel()) {
+    auto* data = index.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
+    if (!data) {
         return;
     }
-    DataInformation* data = dataB->asDataInformation();
     data->setWidgetData(editor);
 }
 
-QSize StructureViewItemDelegate::sizeHint(const QStyleOptionViewItem& option,
-                                          const QModelIndex& index) const
-{
-    return QStyledItemDelegate::sizeHint(option, index) + QSize(0, 8);
 }
 
 #include "moc_structureviewitemdelegate.cpp"

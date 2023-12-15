@@ -431,7 +431,10 @@ void AbstractByteArrayColumnRendererPrivate::renderLinePositions(QPainter* paint
                 markingFlag &= ~StartsBefore;
             }
             // TODO: hack: needed because otherwise the spacing will be plain
-            else if (positionsPart.start() == firstLinePosition && selectedRange.includes(byteIndizesPart.start())) {
+            else if ((positionsPart.start() == firstLinePosition) &&
+                     selectedRange.includes(byteIndizesPart.start()) &&
+                     (selectedRange.startsBefore(byteIndizesPart) ||
+                      (selectionFlag & StartsBefore))) {
                 renderSelectionSpaceBehind(painter, firstLinePosition - 1);
             }
 
@@ -439,7 +442,10 @@ void AbstractByteArrayColumnRendererPrivate::renderLinePositions(QPainter* paint
                 markingFlag &= ~EndsLater;
             }
             // TODO: hack: needed because otherwise the spacing will be plain
-            else if (positionsPart.end() == linePositions.end() && selectedRange.includes(byteIndizesPart.end())) {
+            else if ((positionsPart.end() == linePositions.end()) &&
+                     selectedRange.includes(byteIndizesPart.end()) &&
+                     (selectedRange.endsBehind(byteIndizesPart) ||
+                      (selectionFlag & EndsLater))) {
                 renderSelectionSpaceBehind(painter, positionsPart.end());
             }
 

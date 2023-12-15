@@ -23,6 +23,11 @@ class StructureTreeModel : public QAbstractItemModel
     Q_OBJECT
 
 public:
+    enum Roles {
+        DataInformationRole = Qt::UserRole,
+    };
+
+public:
     explicit StructureTreeModel(StructuresTool* tool, QObject* parent = nullptr);
     ~StructureTreeModel() override;
 

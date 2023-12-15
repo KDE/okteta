@@ -98,9 +98,9 @@ bool PrimitiveArrayData<type>::setChildData(uint row, const QVariant& value, Okt
     Q_ASSERT(row < length());
     Q_ASSERT(value.isValid());
     Q_ASSERT(bitsRemaining % 8 == 0);
-    if ((row + 1) * sizeof(T) * 8 >= bitsRemaining) {
+    if (sizeof(T) * 8 > bitsRemaining) {
         this->mParent->logInfo() << " not enough bits remaining ("
-                                 << bitsRemaining << ") need " << ((row + 1) * sizeof(T) * 8);
+                                 << bitsRemaining << ") need " << (sizeof(T) * 8);
         return false;
     }
     const QSysInfo::Endian byteOrder = mChildType->effectiveByteOrder();
