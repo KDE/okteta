@@ -1319,12 +1319,10 @@ msgid "Unsigned 8-bit"
 msgstr "Unsigned 8 bit"
 
 #: controllers/view/poddecoder/typecodecs/utf16codec.cpp:24
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox"
-#| msgid "UTF-16:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "UTF-16"
-msgstr "UTF-16:"
+msgstr ""
 
 #: controllers/view/poddecoder/typecodecs/utf8codec.cpp:22
 #, kde-format
@@ -2484,12 +2482,10 @@ msgid "&Decimal"
 msgstr "&Desítková"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:43
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
-#| msgid "&Octal"
+#, kde-format
 msgctxt "@item:inmenu offset in the octal format"
 msgid "&Octal"
-msgstr "&Osmičková"
+msgstr ""
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:49
 #, kde-format
@@ -2681,12 +2677,10 @@ msgid "Decimal"
 msgstr "Desítková"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:69
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip column contains the value in octal format"
-#| msgid "Octal"
+#, kde-format
 msgctxt "@item:inmenu offset in the octal format"
 msgid "Octal"
-msgstr "Osmičková"
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:72
 #, kde-format
@@ -3341,12 +3335,10 @@ msgid "Dec"
 msgstr "Dec"
 
 #: gui/liboktetawidgets/addresscombobox_p.cpp:32
-#, fuzzy, kde-format
-#| msgctxt "@title:column short for Octal"
-#| msgid "Oct"
+#, kde-format
 msgctxt "@item:inlistbox coding of offset in the octal format"
 msgid "Oct"
-msgstr "Oct"
+msgstr ""
 
 #: gui/liboktetawidgets/addresscombobox_p.cpp:33
 #, kde-format
