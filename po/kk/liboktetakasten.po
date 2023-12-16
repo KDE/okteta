@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-04 00:43+0000\n"
+"POT-Creation-Date: 2023-12-16 00:44+0000\n"
 "PO-Revision-Date: 2013-06-21 06:20+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -827,14 +827,14 @@ msgid "Modular sum 8-bit"
 msgstr "8-битті модульдік қосындысы"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:28
-#: controllers/view/poddecoder/podtableview.cpp:78
+#: controllers/view/poddecoder/podtableview.cpp:79
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Big-endian"
 msgstr "Кері байтар реті"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:29
-#: controllers/view/poddecoder/podtableview.cpp:79
+#: controllers/view/poddecoder/podtableview.cpp:80
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Little-endian"
@@ -1231,19 +1231,19 @@ msgctxt "@info:tooltip for column Value"
 msgid "The value of the bytes for the datatype"
 msgstr "Бұл деректер түрі байтарының мәні"
 
-#: controllers/view/poddecoder/podtableview.cpp:85
+#: controllers/view/poddecoder/podtableview.cpp:86
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte order to use for decoding the bytes."
 msgstr "Байттардың кодын шешу үшін қолданатын байттар реті."
 
-#: controllers/view/poddecoder/podtableview.cpp:89
+#: controllers/view/poddecoder/podtableview.cpp:90
 #, kde-format
 msgctxt "@option:check"
 msgid "Unsigned as hexadecimal:"
 msgstr "Таңбасыз16-лық сан ретінде:"
 
-#: controllers/view/poddecoder/podtableview.cpp:98
+#: controllers/view/poddecoder/podtableview.cpp:99
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1253,7 +1253,7 @@ msgstr ""
 "Таңбасыз бүтін сандарының мәні, ондық сан орнына, таңбасыз 16-лық сан "
 "ретінде көрсетуін ұйғару."
 
-#: controllers/view/poddecoder/podtableview.cpp:129
+#: controllers/view/poddecoder/podtableview.cpp:130
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1263,19 +1263,19 @@ msgstr ""
 "Жаңа мәні  <emphasis>шамалырақ</emphasis> байттарды қажет етеді (%2 орнына "
 "%1).<nl/>Артық байттар қала берсін бе, әлде өшірілсін бе?"
 
-#: controllers/view/poddecoder/podtableview.cpp:134
+#: controllers/view/poddecoder/podtableview.cpp:135
 #, kde-format
 msgctxt "@action:button keep the unused bytes"
 msgid "&Keep"
 msgstr "Қ&алсын"
 
-#: controllers/view/poddecoder/podtableview.cpp:137
+#: controllers/view/poddecoder/podtableview.cpp:138
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Keep the unused bytes with their old values."
 msgstr "Артық байтарды ескі мәндерімен қалдыру."
 
-#: controllers/view/poddecoder/podtableview.cpp:146
+#: controllers/view/poddecoder/podtableview.cpp:147
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1286,7 +1286,7 @@ msgstr ""
 "%1).<nl/>Сыймағанын соңынан кейінгілердің үстінен, әлде қосымша байттарды "
 "енгізіп жазайық па?"
 
-#: controllers/view/poddecoder/podtableview.cpp:236
+#: controllers/view/poddecoder/podtableview.cpp:238
 #: controllers/view/selectrange/selectrangeview.cpp:124
 #: controllers/view/structures/structureview.cpp:338
 #, kde-format
@@ -2402,32 +2402,32 @@ msgstr "Символдарының сандық мәндері көрсетіл�
 msgid "Character value:"
 msgstr "Символдың мәні:"
 
-#: controllers/view/structures/structurestool.cpp:68
+#: controllers/view/structures/structurestool.cpp:69
 #: controllers/view/structures/structurestoolviewfactory.cpp:29
 #, kde-format
 msgctxt "@title:window"
 msgid "Structures"
 msgstr "Құрылымдар"
 
-#: controllers/view/structures/structurestool.cpp:187
+#: controllers/view/structures/structurestool.cpp:188
 #, kde-format
 msgctxt "name of a data structure"
 msgid "Name"
 msgstr "Атауы"
 
-#: controllers/view/structures/structurestool.cpp:189
+#: controllers/view/structures/structurestool.cpp:190
 #, kde-format
 msgctxt "type of a data structure"
 msgid "Type"
 msgstr "Түрі"
 
-#: controllers/view/structures/structurestool.cpp:191
+#: controllers/view/structures/structurestool.cpp:192
 #, kde-format
 msgctxt "value of a data structure (primitive type)"
 msgid "Value"
 msgstr "Мәні"
 
-#: controllers/view/structures/structurestool.cpp:193
+#: controllers/view/structures/structurestool.cpp:194
 #, fuzzy, kde-format
 #| msgid "Size:"
 msgctxt "size of a data structure"
