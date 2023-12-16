@@ -60,6 +60,7 @@ DocumentInfoView::DocumentInfoView(DocumentInfoTool* tool, QWidget* parent)
 
     // type property
     mMimeTypeLabel = new QLabel(QString(), this);
+    mMimeTypeLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
     propertyGrid->addRow(i18n("Type:"), mMimeTypeLabel);
 
     // location property
@@ -78,6 +79,7 @@ DocumentInfoView::DocumentInfoView(DocumentInfoTool* tool, QWidget* parent)
 
     // size property
     mSizeLabel = new QLabel(this);
+    mSizeLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
     propertyGrid->addRow(i18n("Size:"), mSizeLabel);
 
 #if 0
