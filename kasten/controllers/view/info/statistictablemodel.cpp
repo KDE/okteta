@@ -161,8 +161,8 @@ QVariant StatisticTableModel::data(const QModelIndex& index, int role) const
                         QVariant(mByteCount[byte]);
             } else {
                 result = (mSize > 0) ?
-                        QVariant(QString::number(100.0 * (double)mByteCount[byte] / mSize, 'f', 6)) :
-                        QVariant(QStringLiteral("-"));
+                        QVariant(100.0 * (double)mByteCount[byte] / mSize) :
+                        QVariant();
             }
             break;
         default:

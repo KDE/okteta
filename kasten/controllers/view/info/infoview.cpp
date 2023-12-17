@@ -11,6 +11,7 @@
 // tool
 #include "infotool.hpp"
 #include "statistictablemodel.hpp"
+#include "statisticdisplaymodel.hpp"
 #include <infoviewsettings.h>
 // utils
 #include <labelledtoolbarwidget.hpp>
@@ -92,11 +93,13 @@ InfoView::InfoView(InfoTool* tool, QWidget* parent)
     QHeaderView* header = mStatisticTableView->header();
     header->setSectionResizeMode(QHeaderView::Interactive);
     header->setStretchLastSection(false);
+    auto* displayModel = new StatisticDisplayModel(mStatisticTableView, this);
+    displayModel->setSourceModel(mTool->statisticTableModel());
     // TODO: write subclass to filter count and percent by num, not string
     auto* proxyModel = new QSortFilterProxyModel(this);
     proxyModel->setDynamicSortFilter(true);
     proxyModel->setSortRole(StatisticTableModel::SortRole);
-    proxyModel->setSourceModel(mTool->statisticTableModel());
+    proxyModel->setSourceModel(displayModel);
     mStatisticTableView->setModel(proxyModel);
     mStatisticTableView->sortByColumn(StatisticTableModel::CountId, Qt::DescendingOrder);
     connect(mTool->statisticTableModel(), &StatisticTableModel::headerChanged, this, &InfoView::updateHeader);

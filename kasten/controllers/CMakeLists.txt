@@ -70,6 +70,7 @@ oktetakastencontrollers_add_sublibrary(view/info
         InfoToolViewFactory
     PRIVATE
         CreateStatisticJob
+        StatisticDisplayModel
         StatisticTableModel
         InfoView
         InfoTool
