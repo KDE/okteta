@@ -27,6 +27,9 @@ public:
 
 public: // QAbstractItemModel API
     QVariant data(const QModelIndex& index, int role) const override;
+    Qt::ItemFlags flags(const QModelIndex& index) const override;
+    QMimeData* mimeData(const QModelIndexList& indexes) const override;
+    QStringList mimeTypes() const override;
 
 private:
     QWidget* const m_uiWidget;

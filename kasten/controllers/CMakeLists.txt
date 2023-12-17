@@ -512,6 +512,9 @@ oktetakastencontrollers_add_sublibrary(view/print
 set_source_files_properties(view/print/printtool.cpp PROPERTIES
     COMPILE_FLAGS -DOKTETA_VERSION=\\\"${Okteta_VERSION}\\\"
 )
+set_source_files_properties(view/info/statisticdisplaymodel.cpp PROPERTIES
+    COMPILE_FLAGS -DOKTETA_VERSION=\\\"${Okteta_VERSION}\\\"
+)
 
 
 oktetakastencontrollers_add_sublibrary(view/viewconfig

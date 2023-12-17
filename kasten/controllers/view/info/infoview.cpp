@@ -29,6 +29,7 @@
 #include <QTreeView>
 #include <QAction>
 #include <QIcon>
+#include <QMimeData>
 
 namespace Kasten {
 
@@ -89,6 +90,8 @@ InfoView::InfoView(InfoTool* tool, QWidget* parent)
     mStatisticTableView->setUniformRowHeights(true);
     mStatisticTableView->setAllColumnsShowFocus(true);
     mStatisticTableView->setSelectionMode(QAbstractItemView::ExtendedSelection);
+    mStatisticTableView->setDragEnabled(true);
+    mStatisticTableView->setDragDropMode(QAbstractItemView::DragOnly);
     mStatisticTableView->setSortingEnabled(true);
     QHeaderView* header = mStatisticTableView->header();
     header->setSectionResizeMode(QHeaderView::Interactive);
@@ -185,19 +188,12 @@ void InfoView::setByteArraySize(int size)
 
 void InfoView::onCopyButtonClicked()
 {
-    QString lines;
+    const QItemSelectionModel* selectionModel = mStatisticTableView->selectionModel();
 
-    const QModelIndexList rows = mStatisticTableView->selectionModel()->selectedRows();
-    for (const QModelIndex& rowIndex : rows) {
-        for (int column = 0; column < StatisticTableModel::NoOfIds; ++column) {
-            lines += rowIndex.siblingAtColumn(column).data(Qt::DisplayRole).toString();
-            // add tab, but for last linefeed
-            lines += (column < StatisticTableModel::NoOfIds - 1) ? QLatin1Char('\t') :
-            QLatin1Char('\n'); // TODO: specific linefeed for platforms
-        }
-    }
+    const QModelIndexList selectedIndexes = selectionModel->selectedIndexes();
+    QMimeData* mimeData = mStatisticTableView->model()->mimeData(selectedIndexes);
 
-    QApplication::clipboard()->setText(lines);
+    QApplication::clipboard()->setMimeData(mimeData);
 }
 
 void InfoView::onTableSelectionChanged()
