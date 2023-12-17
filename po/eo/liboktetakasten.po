@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-16 00:44+0000\n"
-"PO-Revision-Date: 2023-12-04 14:32+0100\n"
+"PO-Revision-Date: 2023-12-16 23:54+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -540,7 +540,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Binary Filter"
-msgstr "Binara Filtrilo"
+msgstr "Duuma Filtrilo"
 
 #: controllers/view/filter/filterview.cpp:45
 #, kde-format
@@ -1282,7 +1282,7 @@ msgstr "&Selekti"
 #, kde-format
 msgctxt "@label:textbox encoding of one byte as value in the binary format"
 msgid "Binary 8-bit"
-msgstr "Binara 8-bita"
+msgstr "Duuma 8-bita"
 
 #: controllers/view/poddecoder/typecodecs/char8codec.cpp:23
 #, kde-format
@@ -1313,7 +1313,7 @@ msgstr "Deksesuma 8-bita"
 #, kde-format
 msgctxt "@label:textbox encoding of one byte as value in the octal format"
 msgid "Octal 8-bit"
-msgstr "Oktala 8-bita"
+msgstr "Okuma 8-bita"
 
 #: controllers/view/poddecoder/typecodecs/sint16codec.cpp:20
 #, kde-format
@@ -1736,7 +1736,7 @@ msgstr "%1[%2]"
 msgid "1 bit"
 msgid_plural "%1 bits"
 msgstr[0] "1 bito"
-msgstr[1] "%1 bito"
+msgstr[1] "%1 bitoj"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:63
 #, kde-format
@@ -2298,25 +2298,25 @@ msgstr "Eta endian"
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Binary"
-msgstr "Binara"
+msgstr "Duuma"
 
 #: controllers/view/structures/settings/structureviewsettingswidget.cpp:50
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Octal"
-msgstr "Octal"
+msgstr "Okuma"
 
 #: controllers/view/structures/settings/structureviewsettingswidget.cpp:51
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Decimal"
-msgstr "Decimal"
+msgstr "Decimala"
 
 #: controllers/view/structures/settings/structureviewsettingswidget.cpp:52
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Hexadecimal"
-msgstr "Hexadecimal"
+msgstr "Deksesuma"
 
 #. i18n: ectx: property (text), widget (QLabel, byteOrderLabel)
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:32
@@ -2739,7 +2739,7 @@ msgstr "Hexadecimal"
 #, kde-format
 msgctxt "@item:inmenu offset in the decimal format"
 msgid "Decimal"
-msgstr "Decimal"
+msgstr "Dekuma"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:69
 #, kde-format
@@ -2837,7 +2837,7 @@ msgstr "Valoroj"
 msgctxt ""
 "@item:inmenu encoding of the bytes as values in the hexadecimal format"
 msgid "Hexadecimal"
-msgstr "Hexadecimal"
+msgstr "Deksesuma"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:140
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:54
@@ -2845,7 +2845,7 @@ msgstr "Hexadecimal"
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
 msgid "Decimal"
-msgstr "Decimal"
+msgstr "Decimala"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:142
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:55
@@ -2853,7 +2853,7 @@ msgstr "Decimal"
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
 msgid "Octal"
-msgstr "Octal"
+msgstr "Okuma"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:144
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:56
@@ -2861,7 +2861,7 @@ msgstr "Octal"
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
 msgid "Binary"
-msgstr "Binara"
+msgstr "Duuma"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:147
 #: controllers/view/viewprofiles/viewprofileedit.cpp:156
