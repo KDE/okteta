@@ -185,6 +185,7 @@ oktetakastencontrollers_add_sublibrary(view/poddecoder
         PODDecoderToolViewFactory
     PRIVATE
         PODData
+        PODDisplayModel
         PODTableModel
         PODDelegate
         PODTableView

@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    SPDX-FileCopyrightText: 2006-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    SPDX-FileCopyrightText: 2006-2009, 2023 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
@@ -9,6 +9,7 @@
 #include "podtableview.hpp"
 
 // controller
+#include "poddisplaymodel.hpp"
 #include "podtablemodel.hpp"
 #include "poddelegate.hpp"
 #include "poddecodertool.hpp"
@@ -56,8 +57,8 @@ PODTableView::PODTableView(PODDecoderTool* tool, QWidget* parent)
     mPODTableView->setAllColumnsShowFocus(true);
     mPODTableView->setEditTriggers(QAbstractItemView::EditKeyPressed | QAbstractItemView::DoubleClicked);
     mPODTableView->setDragEnabled(true);
+    mPODTableView->setDragDropMode(QAbstractItemView::DragOnly);
     mPODTableView->setSortingEnabled(false);
-    mPODTableView->setModel(mPODTableModel);
     mPODTableView->installEventFilter(this);
     mPODTableView->setContextMenuPolicy(Qt::CustomContextMenu);
     mPODDelegate = new PODDelegate(mTool, this);
@@ -70,6 +71,10 @@ PODTableView::PODTableView(PODDecoderTool* tool, QWidget* parent)
             this, &PODTableView::onCurrentRowChanged);
     connect(mPODTableView, &QWidget::customContextMenuRequested,
             this, &PODTableView::onCustomContextMenuRequested);
+
+    auto* displayModel = new PODDisplayModel(mPODTableView, mTool, this);
+    displayModel->setSourceModel(mPODTableModel);
+    mPODTableView->setModel(displayModel);
 
     baseLayout->addWidget(mPODTableView, 10);
 
