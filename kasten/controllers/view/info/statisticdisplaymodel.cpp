@@ -83,6 +83,33 @@ static QString tableAsText(const QModelIndexList& indexes)
     return lines;
 }
 
+static QString tableAsHtml(const QModelIndexList& indexes)
+{
+    QString html;
+
+    if (!indexes.isEmpty()) {
+        // assumes indexes are in row-wise order as seen on screen
+        // wrap each items in row with <td>,
+        // but for last add <tr> end & start, matched by global start / end wrapper
+        int lastRow = indexes.first().row();
+        for (const QModelIndex &index : indexes) {
+            const int row = index.row();
+            if (row != lastRow) {
+                lastRow = row;
+                if (!html.isEmpty()) {
+                    html.append(QLatin1String("</tr><tr>"));
+                }
+            }
+
+            html.append(QLatin1String("<td>") + index.data(Qt::DisplayRole).toString() + QLatin1String("</td>"));
+        }
+    }
+
+    html = QLatin1String("<html><head><meta name=\"generator\" content=\"Okteta Statistics Tool " OKTETA_VERSION "\"></head><table><tr>") +  html + QLatin1String("</tr></table></html>");
+
+    return html;
+}
+
 QMimeData* StatisticDisplayModel::mimeData(const QModelIndexList& indexes) const
 {
     if (indexes.isEmpty()) {
@@ -93,6 +120,8 @@ QMimeData* StatisticDisplayModel::mimeData(const QModelIndexList& indexes) const
 
     const QString text = tableAsText(indexes);
     mimeData->setText(text);
+    const QString html = tableAsHtml(indexes);
+    mimeData->setHtml(html);
 
     return mimeData;
 }
@@ -101,6 +130,7 @@ QStringList StatisticDisplayModel::mimeTypes() const
 {
     return {
         QStringLiteral("text/plain"),
+        QStringLiteral("text/html"),
     };
 }
 
