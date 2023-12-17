@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-16 02:33+0000\n"
-"PO-Revision-Date: 2023-11-26 20:12+0100\n"
+"PO-Revision-Date: 2023-12-04 14:32+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -239,7 +239,7 @@ msgstr "Char"
 #, kde-format
 msgctxt "@info:tooltip column contains the value in decimal format"
 msgid "Decimal"
-msgstr "Dekuma"
+msgstr "Decimala"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:168
 #: controllers/view/info/statistictablemodel.cpp:227
@@ -528,7 +528,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Binary Filter"
-msgstr "Binara Filtrilo"
+msgstr "Duuma Filtrilo"
 
 #: controllers/view/filter/filterview.cpp:45
 #, kde-format
@@ -953,19 +953,19 @@ msgctxt ""
 "name of the filter; it changes the order of the bytes/bits to backwards, so "
 "ABCD becomes DCBA"
 msgid "REVERSE data"
-msgstr "REVERSA datumo"
+msgstr "REVERSE datumo"
 
 #: controllers/view/libbytearrayfilter/filter/reversebytearrayfilterparametersetedit.cpp:29
 #, kde-format
 msgctxt "@option:check"
 msgid "Reverse also bits:"
-msgstr "Inversa ankaŭ bitoj:"
+msgstr "Inversigi ankaŭ bitojn:"
 
 #: controllers/view/libbytearrayfilter/filter/reversebytearrayfilterparametersetedit.cpp:36
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "If set, the bits are arranged in reverse order as well."
-msgstr "Se fiksite, la bitoj estas aranĝitaj en inversa sinsekvo ankaŭ."
+msgstr "Se metite, la bitoj estas aranĝitaj en inversa sinsekvo ankaŭ."
 
 #: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilter.cpp:26
 #, kde-format
@@ -1231,7 +1231,7 @@ msgstr "&Selekti"
 #, kde-format
 msgctxt "@label:textbox encoding of one byte as value in the binary format"
 msgid "Binary 8-bit"
-msgstr "Binara 8-bita"
+msgstr "Duuma 8-bita"
 
 #: controllers/view/poddecoder/typecodecs/char8codec.cpp:23
 #, kde-format
@@ -1262,7 +1262,7 @@ msgstr "Deksesuma 8-bita"
 #, kde-format
 msgctxt "@label:textbox encoding of one byte as value in the octal format"
 msgid "Octal 8-bit"
-msgstr "Oktala 8-bita"
+msgstr "Okuma 8-bita"
 
 #: controllers/view/poddecoder/typecodecs/sint16codec.cpp:20
 #, kde-format
@@ -1684,7 +1684,7 @@ msgstr "%1[%2]"
 msgid "1 bit"
 msgid_plural "%1 bits"
 msgstr[0] "1 bito"
-msgstr[1] "%1 bito"
+msgstr[1] "%1 bitoj"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:62
 #, kde-format
@@ -1777,7 +1777,7 @@ msgstr[1] ""
 msgid "%1 bit"
 msgid_plural "%1 bits"
 msgstr[0] "1 bito"
-msgstr[1] "%1 bito"
+msgstr[1] "%1 bitoj"
 
 #: controllers/view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.cpp:46
 #: controllers/view/structures/datatypes/primitive/booldatainformation.cpp:17
@@ -2258,7 +2258,7 @@ msgstr "Okuma"
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Decimal"
-msgstr "Dekuma"
+msgstr "Decimala"
 
 #: controllers/view/structures/settings/structureviewsettingswidget.cpp:52
 #, kde-format
@@ -2675,7 +2675,7 @@ msgstr "Deksesuma"
 #, kde-format
 msgctxt "@item:inmenu offset in the decimal format"
 msgid "Decimal"
-msgstr "Dekuma"
+msgstr "Decimala"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:71
 #, kde-format
@@ -2775,7 +2775,7 @@ msgstr "Deksesuma"
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
 msgid "Decimal"
-msgstr "Dekuma"
+msgstr "Decimala"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:141
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:55
@@ -2973,7 +2973,7 @@ msgstr "deŝovo: %1"
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:115
 #, kde-format
 msgid "%1 bytes"
-msgstr ""
+msgstr "%1 bajtoj"
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:117
 #, kde-format
@@ -3242,9 +3242,7 @@ msgid "Data type:"
 msgstr "Tipo de datumoj:"
 
 #: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoderconfigeditor.cpp:80
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Unsigned as hexadecimal:"
+#, kde-format
 msgctxt ""
 "@option:check Encode the values in hexadecimal instead of decimal, if the "
 "datatype has the property Unsigned"
@@ -3380,9 +3378,3 @@ msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"
 msgid "UTF-8"
 msgstr "UTF-8"
-
-#~ msgctxt ""
-#~ "@option:check Encode the values in hexadecimal instead of decimal, if the "
-#~ "¦datatype has the property Unsigned"
-#~ msgid "Unsigned as hexadecimal:"
-#~ msgstr "Nesubskribita kiel deksesuma:"
