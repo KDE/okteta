@@ -140,6 +140,7 @@ oktetakastencontrollers_add_sublibrary(view/info
         InfoToolViewFactory
     PRIVATE
         CreateStatisticJob
+        StatisticDisplayModel
         StatisticTableModel
         InfoView
         InfoTool
@@ -252,6 +253,7 @@ oktetakastencontrollers_add_sublibrary(view/poddecoder
         PODDecoderToolViewFactory
     PRIVATE
         PODData
+        PODDisplayModel
         PODTableModel
         PODDelegate
         PODTableView

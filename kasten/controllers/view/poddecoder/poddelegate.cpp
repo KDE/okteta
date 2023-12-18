@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    SPDX-FileCopyrightText: 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    SPDX-FileCopyrightText: 2009, 2ß23 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
@@ -68,7 +68,7 @@ QWidget* PODDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem& 
 {
     QWidget* result;
 
-    QVariant data = index.data();
+    QVariant data = index.data(Qt::EditRole);
     if (data.canConvert<Binary8>()) {
         auto* editor = new Binary8Editor(parent);
         connect(editor, &Binary8Editor::editingFinished,
@@ -165,7 +165,7 @@ QWidget* PODDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem& 
 
 void PODDelegate::setEditorData(QWidget* editor, const QModelIndex& index) const
 {
-    QVariant data = index.data();
+    QVariant data = index.data(Qt::EditRole);
 
     if (data.canConvert<Binary8>()) {
         Binary8 binary8 = data.value<Binary8>();
@@ -242,7 +242,7 @@ void PODDelegate::setModelData(QWidget* editor, QAbstractItemModel* model, const
         return;
     }
 
-    QVariant data = index.data();
+    QVariant data = index.data(Qt::EditRole);
 
     if (data.canConvert<Binary8>()) {
         auto* binary8Editor = qobject_cast<Binary8Editor*>(editor);
@@ -295,65 +295,6 @@ void PODDelegate::setModelData(QWidget* editor, QAbstractItemModel* model, const
     } else {
         QStyledItemDelegate::setModelData(editor, model, index);
     }
-}
-
-QString PODDelegate::displayText(const QVariant& data, const QLocale& locale) const
-{
-    QString result;
-
-    if (data.canConvert<Binary8>()) {
-        Binary8 binary8 = data.value<Binary8>();
-        result = binary8.toString();
-    } else if (data.canConvert<Octal8>()) {
-        Octal8 octal8 = data.value<Octal8>();
-        result = octal8.toString();
-    } else if (data.canConvert<Hexadecimal8>()) {
-        Hexadecimal8 hexadecimal8 = data.value<Hexadecimal8>();
-        result = hexadecimal8.toString();
-    } else if (data.canConvert<SInt8>()) {
-        SInt8 sInt8 = data.value<SInt8>();
-        result = sInt8.toString();
-    } else if (data.canConvert<SInt16>()) {
-        SInt16 sInt16 = data.value<SInt16>();
-        result = sInt16.toString();
-    } else if (data.canConvert<SInt32>()) {
-        SInt32 sInt32 = data.value<SInt32>();
-        result = sInt32.toString();
-    } else if (data.canConvert<SInt64>()) {
-        SInt64 sInt64 = data.value<SInt64>();
-        result = sInt64.toString();
-    } else if (data.canConvert<UInt8>()) {
-        UInt8 uInt8 = data.value<UInt8>();
-        result = uInt8.toString(mTool->isUnsignedAsHex());
-    } else if (data.canConvert<UInt16>()) {
-        UInt16 uInt16 = data.value<UInt16>();
-        result = uInt16.toString(mTool->isUnsignedAsHex());
-    } else if (data.canConvert<UInt32>()) {
-        UInt32 uInt32 = data.value<UInt32>();
-        result = uInt32.toString(mTool->isUnsignedAsHex());
-    } else if (data.canConvert<UInt64>()) {
-        UInt64 uInt64 = data.value<UInt64>();
-        result = uInt64.toString(mTool->isUnsignedAsHex());
-    } else if (data.canConvert<Float32>()) {
-        Float32 float32 = data.value<Float32>();
-        result = float32.toString();
-    } else if (data.canConvert<Float64>()) {
-        Float64 float64 = data.value<Float64>();
-        result = float64.toString();
-    } else if (data.canConvert<Char8>()) {
-        Char8 char8 = data.value<Char8>();
-        result = char8.toString();
-    } else if (data.canConvert<Utf8>()) {
-        Utf8 utf8 = data.value<Utf8>();
-        result = utf8.toString();
-    } else if (data.canConvert<Utf16>()) {
-        Utf16 utf16 = data.value<Utf16>();
-        result = utf16.toString();
-    } else {
-        result = QStyledItemDelegate::displayText(data, locale);
-    }
-
-    return result;
 }
 
 // QSize PODDelegate::updateEditorGeometry( QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index ) const
