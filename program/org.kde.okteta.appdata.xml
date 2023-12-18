@@ -175,6 +175,7 @@
       <li xml:lang="de">Werte und Zeichen können in zwei Spalten (die traditionelle Anzeige von Hexeditoren) oder in Reihen mit der Anzeige der Werte über den Zeichen dargestellt werden</li>
       <li xml:lang="el">Οιτιμές και οι χαρακτήρες εμφανίζονταιή σε δύο στήλες (η παραδοσιακή παρουσίαση στους επεξεργαστές δεκαεξαδικών) ή σε γραμμέςμε την τιμή στην κορυφή του χαρακτήρα</li>
       <li xml:lang="en-GB">Values and characters shown either in two columns (the traditional display in hex editors) or in rows with the value on top of the character</li>
+      <li xml:lang="eo">Valoroj kaj signoj estas montrataj aŭ en du kolumnoj (la tradicia vidigo en heks-redaktiloj) aŭ en vicoj kun la valoro super la signo</li>
       <li xml:lang="es">Muestra valores y caracteres en dos columnas (la vista tradicional para editores hexadecimales) o en filas con los valores encima de los caracteres</li>
       <li xml:lang="et">Väärtusi ja märke võib lasta näidata kahes veerus (niisuguste redaktorite tavapärane kuvamisviis) või ridades, kus väärtus on märgi peal</li>
       <li xml:lang="eu">Balioak eta karaktereak bi zutabetan (editore hamaseitarretan ohiko ikuspegia) edo errenkadatan balioa karaktere gainean duela</li>
@@ -513,6 +514,7 @@
       <li xml:lang="de">Strukturen-Werkzeug für die Untersuchung und Bearbeitung auf der Basis von benutzerdefinierten Strukturdefinitionen</li>
       <li xml:lang="el">Εργαλείο δομών για ανάλυση και επεξεργασία με βάση ορισμούς δομών που δημιουργεί ο χρήστης</li>
       <li xml:lang="en-GB">Structures tool for analysing and editing based on user-creatable structure definitions</li>
+      <li xml:lang="eo">Struktureca ilo por analizi kaj redakti bazite sur uzantokreeblaj strukturdifinoj</li>
       <li xml:lang="es">Herramientas de estructuras para analizar y editar basándose en definiciones de estructuras creadas por el usuario</li>
       <li xml:lang="et">Struktuuride tööriist analüüsimiseks ja muutmiseks vastavalt kasutaja loodud struktuuridefinitsioonidele</li>
       <li xml:lang="eu">Aztertzeko eta editatzeko egituren tresna, erabiltzaileak sor ditzakeen egitura definizioetan oinarritua</li>
