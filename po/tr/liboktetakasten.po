@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesdk-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-16 02:33+0000\n"
+"POT-Creation-Date: 2023-12-18 03:16+0000\n"
 "PO-Revision-Date: 2023-06-17 21:42+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -30,42 +30,42 @@ msgctxt "@title:window"
 msgid "File Info"
 msgstr "Dosya Bilgisi"
 
-#: controllers/document/info/documentinfoview.cpp:63
+#: controllers/document/info/documentinfoview.cpp:64
 #, kde-format
 msgid "Type:"
 msgstr "Tür:"
 
-#: controllers/document/info/documentinfoview.cpp:77
+#: controllers/document/info/documentinfoview.cpp:78
 #, kde-format
 msgid "Location:"
 msgstr "Konum:"
 
-#: controllers/document/info/documentinfoview.cpp:81
+#: controllers/document/info/documentinfoview.cpp:83
 #, kde-format
 msgid "Size:"
 msgstr "Boyut:"
 
-#: controllers/document/info/documentinfoview.cpp:84
+#: controllers/document/info/documentinfoview.cpp:86
 #, kde-format
 msgid "Created/Loaded:"
 msgstr "Oluşturulma/Yüklenme:"
 
-#: controllers/document/info/documentinfoview.cpp:88
+#: controllers/document/info/documentinfoview.cpp:90
 #, kde-format
 msgid "Last modified:"
 msgstr "Son düzenlenme:"
 
-#: controllers/document/info/documentinfoview.cpp:92
+#: controllers/document/info/documentinfoview.cpp:94
 #, kde-format
 msgid "Last synchronized:"
 msgstr "Son eşzamanlama zamanı:"
 
-#: controllers/document/info/documentinfoview.cpp:99
+#: controllers/document/info/documentinfoview.cpp:101
 #, kde-format
 msgid "Created:"
 msgstr "Oluşturulma zamanı:"
 
-#: controllers/document/info/documentinfoview.cpp:151
+#: controllers/document/info/documentinfoview.cpp:153
 #, kde-format
 msgctxt "There is no storage location assigned to yet."
 msgid "[None]"
@@ -670,32 +670,32 @@ msgctxt "@title:window"
 msgid "Statistics"
 msgstr "İstatistikler"
 
-#: controllers/view/info/infoview.cpp:45
+#: controllers/view/info/infoview.cpp:47
 #, kde-format
 msgctxt "@label size of selected bytes"
 msgid "Size:"
 msgstr "Boyut:"
 
-#: controllers/view/info/infoview.cpp:50
+#: controllers/view/info/infoview.cpp:52
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The number of the bytes the statistic was built for."
 msgstr "İstatistiğin temel aldığı bayt sayısı."
 
-#: controllers/view/info/infoview.cpp:65
+#: controllers/view/info/infoview.cpp:67
 #, kde-format
 msgctxt "@action:button build the statistic of the byte frequency"
 msgid "&Build"
 msgstr "&Derle"
 
-#: controllers/view/info/infoview.cpp:68
+#: controllers/view/info/infoview.cpp:70
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "Builds the byte frequency statistic for the bytes in the selected range."
 msgstr "Seçilen aralıktaki baytlar için bayt frekans istatistiği üretir."
 
-#: controllers/view/info/infoview.cpp:70
+#: controllers/view/info/infoview.cpp:72
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -705,7 +705,7 @@ msgstr ""
 "Eğer <interface>İnşa et</interface> düğmesine basarsanız bayt sıklığı "
 "seçilen aralıktaki baytlar için bayt sıklık istatistiği oluşturulacaktır."
 
-#: controllers/view/info/infoview.cpp:178
+#: controllers/view/info/infoview.cpp:184
 #: controllers/view/structures/datatypes/datainformation.cpp:57
 #: controllers/view/structures/datatypes/datainformation.cpp:60
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:220
@@ -795,14 +795,14 @@ msgid "Modular sum 8-bit"
 msgstr "Modüler toplam 8 bit"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:28
-#: controllers/view/poddecoder/podtableview.cpp:80
+#: controllers/view/poddecoder/podtableview.cpp:85
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Big-endian"
 msgstr "Big-endian"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:29
-#: controllers/view/poddecoder/podtableview.cpp:81
+#: controllers/view/poddecoder/podtableview.cpp:86
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Little-endian"
@@ -1165,19 +1165,19 @@ msgctxt "@info:tooltip for column Value"
 msgid "The value of the bytes for the datatype"
 msgstr "Veri türü için baytların değeri"
 
-#: controllers/view/poddecoder/podtableview.cpp:87
+#: controllers/view/poddecoder/podtableview.cpp:92
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte order to use for decoding the bytes."
 msgstr "Baytları çözmek için kullanılacak bayt sırası"
 
-#: controllers/view/poddecoder/podtableview.cpp:91
+#: controllers/view/poddecoder/podtableview.cpp:96
 #, kde-format
 msgctxt "@option:check"
 msgid "Unsigned as hexadecimal:"
 msgstr "İşaretsizleri onaltılık göster:"
 
-#: controllers/view/poddecoder/podtableview.cpp:100
+#: controllers/view/poddecoder/podtableview.cpp:105
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1187,7 +1187,7 @@ msgstr ""
 "İşaretsiz tam sayı tiplerinin değerlerinin ondalık yerine onaltılık sistemde "
 "gösterilip gösterilmeyeceğini ayarlar."
 
-#: controllers/view/poddecoder/podtableview.cpp:136
+#: controllers/view/poddecoder/podtableview.cpp:141
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1197,19 +1197,19 @@ msgstr ""
 "Yeni değer <emphasis>daha az</emphasis> bayt gerektiriyor (%2 yerine %1).<nl/"
 ">Kullanılmayan baytlar saklansın mı kaldırılsın mı?"
 
-#: controllers/view/poddecoder/podtableview.cpp:141
+#: controllers/view/poddecoder/podtableview.cpp:146
 #, kde-format
 msgctxt "@action:button keep the unused bytes"
 msgid "&Keep"
 msgstr "&Koru"
 
-#: controllers/view/poddecoder/podtableview.cpp:144
+#: controllers/view/poddecoder/podtableview.cpp:149
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Keep the unused bytes with their old values."
 msgstr "Kullanılmayan baytları eski değerlerinde tut."
 
-#: controllers/view/poddecoder/podtableview.cpp:157
+#: controllers/view/poddecoder/podtableview.cpp:162
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1220,7 +1220,7 @@ msgstr ""
 "<nl/>Aşağıdaki baytların üzerine mi yazılsın yoksa gerektiği gibi yenileri "
 "mi eklensin?"
 
-#: controllers/view/poddecoder/podtableview.cpp:257
+#: controllers/view/poddecoder/podtableview.cpp:262
 #: controllers/view/selectrange/selectrangeview.cpp:138
 #: controllers/view/structures/structureview.cpp:339
 #, kde-format

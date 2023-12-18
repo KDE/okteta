@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-16 02:33+0000\n"
+"POT-Creation-Date: 2023-12-18 03:16+0000\n"
 "PO-Revision-Date: 2020-01-03 11:29+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
@@ -28,42 +28,42 @@ msgctxt "@title:window"
 msgid "File Info"
 msgstr "Bestandsinformatie"
 
-#: controllers/document/info/documentinfoview.cpp:63
+#: controllers/document/info/documentinfoview.cpp:64
 #, kde-format
 msgid "Type:"
 msgstr "Type:"
 
-#: controllers/document/info/documentinfoview.cpp:77
+#: controllers/document/info/documentinfoview.cpp:78
 #, kde-format
 msgid "Location:"
 msgstr "Locatie:"
 
-#: controllers/document/info/documentinfoview.cpp:81
+#: controllers/document/info/documentinfoview.cpp:83
 #, kde-format
 msgid "Size:"
 msgstr "Grootte:"
 
-#: controllers/document/info/documentinfoview.cpp:84
+#: controllers/document/info/documentinfoview.cpp:86
 #, kde-format
 msgid "Created/Loaded:"
 msgstr "Aangemaakt/geladen:"
 
-#: controllers/document/info/documentinfoview.cpp:88
+#: controllers/document/info/documentinfoview.cpp:90
 #, kde-format
 msgid "Last modified:"
 msgstr "Laatst bewerkt:"
 
-#: controllers/document/info/documentinfoview.cpp:92
+#: controllers/document/info/documentinfoview.cpp:94
 #, kde-format
 msgid "Last synchronized:"
 msgstr "Laatst gesynchroniseerd:"
 
-#: controllers/document/info/documentinfoview.cpp:99
+#: controllers/document/info/documentinfoview.cpp:101
 #, kde-format
 msgid "Created:"
 msgstr "Aangemaakt:"
 
-#: controllers/document/info/documentinfoview.cpp:151
+#: controllers/document/info/documentinfoview.cpp:153
 #, kde-format
 msgctxt "There is no storage location assigned to yet."
 msgid "[None]"
@@ -675,25 +675,25 @@ msgctxt "@title:window"
 msgid "Statistics"
 msgstr "Statistieken"
 
-#: controllers/view/info/infoview.cpp:45
+#: controllers/view/info/infoview.cpp:47
 #, kde-format
 msgctxt "@label size of selected bytes"
 msgid "Size:"
 msgstr "Grootte:"
 
-#: controllers/view/info/infoview.cpp:50
+#: controllers/view/info/infoview.cpp:52
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The number of the bytes the statistic was built for."
 msgstr "Het aantal bytes waarvoor de statistieken zijn gebouwd."
 
-#: controllers/view/info/infoview.cpp:65
+#: controllers/view/info/infoview.cpp:67
 #, kde-format
 msgctxt "@action:button build the statistic of the byte frequency"
 msgid "&Build"
 msgstr "&Bouwen"
 
-#: controllers/view/info/infoview.cpp:68
+#: controllers/view/info/infoview.cpp:70
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -701,7 +701,7 @@ msgid ""
 msgstr ""
 "Bouwt de frequentiestatistiek voor de bytes in het geselecteerde gebied."
 
-#: controllers/view/info/infoview.cpp:70
+#: controllers/view/info/infoview.cpp:72
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -711,7 +711,7 @@ msgstr ""
 "Als u op de knop <interface>Bouwen</interface> drukt, zal de "
 "frequentiestatistiek van de geselecteerde bytes worden gebouwd."
 
-#: controllers/view/info/infoview.cpp:178
+#: controllers/view/info/infoview.cpp:184
 #: controllers/view/structures/datatypes/datainformation.cpp:57
 #: controllers/view/structures/datatypes/datainformation.cpp:60
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:220
@@ -801,14 +801,14 @@ msgid "Modular sum 8-bit"
 msgstr "Modulaire som 8-bit"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:28
-#: controllers/view/poddecoder/podtableview.cpp:80
+#: controllers/view/poddecoder/podtableview.cpp:85
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Big-endian"
 msgstr "Big-endian"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:29
-#: controllers/view/poddecoder/podtableview.cpp:81
+#: controllers/view/poddecoder/podtableview.cpp:86
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Little-endian"
@@ -1178,19 +1178,19 @@ msgctxt "@info:tooltip for column Value"
 msgid "The value of the bytes for the datatype"
 msgstr "De waarde van de bytes voor het gegevenstype"
 
-#: controllers/view/poddecoder/podtableview.cpp:87
+#: controllers/view/poddecoder/podtableview.cpp:92
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte order to use for decoding the bytes."
 msgstr "De te gebruiken bytevolgorde voor het decoderen van de bytes."
 
-#: controllers/view/poddecoder/podtableview.cpp:91
+#: controllers/view/poddecoder/podtableview.cpp:96
 #, kde-format
 msgctxt "@option:check"
 msgid "Unsigned as hexadecimal:"
 msgstr "Zonder teken als hexadecimaal:"
 
-#: controllers/view/poddecoder/podtableview.cpp:100
+#: controllers/view/poddecoder/podtableview.cpp:105
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1200,7 +1200,7 @@ msgstr ""
 "Stelt in of de waarden van gehele getallen zonder teken getoond worden als "
 "hexadecimaal of als decimaal."
 
-#: controllers/view/poddecoder/podtableview.cpp:136
+#: controllers/view/poddecoder/podtableview.cpp:141
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1210,19 +1210,19 @@ msgstr ""
 "De nieuwe waarde heeft <emphasis>minder</emphasis> bytes nodig (%1 in plaats "
 "van %2).<nl/>Behoudt de ongebruikte bytes of verwijder deze?"
 
-#: controllers/view/poddecoder/podtableview.cpp:141
+#: controllers/view/poddecoder/podtableview.cpp:146
 #, kde-format
 msgctxt "@action:button keep the unused bytes"
 msgid "&Keep"
 msgstr "&Behouden"
 
-#: controllers/view/poddecoder/podtableview.cpp:144
+#: controllers/view/poddecoder/podtableview.cpp:149
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Keep the unused bytes with their old values."
 msgstr "Behoudt de ongebruikte bytes met hun oude waarden."
 
-#: controllers/view/poddecoder/podtableview.cpp:157
+#: controllers/view/poddecoder/podtableview.cpp:162
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1232,7 +1232,7 @@ msgstr ""
 "De nieuwe waarde heeft <emphasis>meer</emphasis> bytes nodig (%1 in plaats "
 "van %2).<nl/>Overschrijf de volgende bytes of voeg nieuwe in naar behoefte?"
 
-#: controllers/view/poddecoder/podtableview.cpp:257
+#: controllers/view/poddecoder/podtableview.cpp:262
 #: controllers/view/selectrange/selectrangeview.cpp:138
 #: controllers/view/structures/structureview.cpp:339
 #, kde-format

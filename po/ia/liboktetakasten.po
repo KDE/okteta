@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-16 02:33+0000\n"
+"POT-Creation-Date: 2023-12-18 03:16+0000\n"
 "PO-Revision-Date: 2023-07-10 11:43+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -24,42 +24,42 @@ msgctxt "@title:window"
 msgid "File Info"
 msgstr "Info de file"
 
-#: controllers/document/info/documentinfoview.cpp:63
+#: controllers/document/info/documentinfoview.cpp:64
 #, kde-format
 msgid "Type:"
 msgstr "Typo:"
 
-#: controllers/document/info/documentinfoview.cpp:77
+#: controllers/document/info/documentinfoview.cpp:78
 #, kde-format
 msgid "Location:"
 msgstr "Location:"
 
-#: controllers/document/info/documentinfoview.cpp:81
+#: controllers/document/info/documentinfoview.cpp:83
 #, kde-format
 msgid "Size:"
 msgstr "Dimension:"
 
-#: controllers/document/info/documentinfoview.cpp:84
+#: controllers/document/info/documentinfoview.cpp:86
 #, kde-format
 msgid "Created/Loaded:"
 msgstr "Create/Cargate:"
 
-#: controllers/document/info/documentinfoview.cpp:88
+#: controllers/document/info/documentinfoview.cpp:90
 #, kde-format
 msgid "Last modified:"
 msgstr "Le ultime modificate:"
 
-#: controllers/document/info/documentinfoview.cpp:92
+#: controllers/document/info/documentinfoview.cpp:94
 #, kde-format
 msgid "Last synchronized:"
 msgstr "Ultime synchronisate:"
 
-#: controllers/document/info/documentinfoview.cpp:99
+#: controllers/document/info/documentinfoview.cpp:101
 #, kde-format
 msgid "Created:"
 msgstr "Create:"
 
-#: controllers/document/info/documentinfoview.cpp:151
+#: controllers/document/info/documentinfoview.cpp:153
 #, kde-format
 msgctxt "There is no storage location assigned to yet."
 msgid "[None]"
@@ -638,32 +638,32 @@ msgctxt "@title:window"
 msgid "Statistics"
 msgstr "Statistica"
 
-#: controllers/view/info/infoview.cpp:45
+#: controllers/view/info/infoview.cpp:47
 #, kde-format
 msgctxt "@label size of selected bytes"
 msgid "Size:"
 msgstr "Dimension:"
 
-#: controllers/view/info/infoview.cpp:50
+#: controllers/view/info/infoview.cpp:52
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The number of the bytes the statistic was built for."
 msgstr ""
 
-#: controllers/view/info/infoview.cpp:65
+#: controllers/view/info/infoview.cpp:67
 #, kde-format
 msgctxt "@action:button build the statistic of the byte frequency"
 msgid "&Build"
 msgstr "&Construe"
 
-#: controllers/view/info/infoview.cpp:68
+#: controllers/view/info/infoview.cpp:70
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "Builds the byte frequency statistic for the bytes in the selected range."
 msgstr ""
 
-#: controllers/view/info/infoview.cpp:70
+#: controllers/view/info/infoview.cpp:72
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -671,7 +671,7 @@ msgid ""
 "statistic is built for the bytes in the selected range."
 msgstr ""
 
-#: controllers/view/info/infoview.cpp:178
+#: controllers/view/info/infoview.cpp:184
 #: controllers/view/structures/datatypes/datainformation.cpp:57
 #: controllers/view/structures/datatypes/datainformation.cpp:60
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:220
@@ -761,14 +761,14 @@ msgid "Modular sum 8-bit"
 msgstr ""
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:28
-#: controllers/view/poddecoder/podtableview.cpp:80
+#: controllers/view/poddecoder/podtableview.cpp:85
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Big-endian"
 msgstr "Big-endian"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:29
-#: controllers/view/poddecoder/podtableview.cpp:81
+#: controllers/view/poddecoder/podtableview.cpp:86
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Little-endian"
@@ -1123,19 +1123,19 @@ msgctxt "@info:tooltip for column Value"
 msgid "The value of the bytes for the datatype"
 msgstr ""
 
-#: controllers/view/poddecoder/podtableview.cpp:87
+#: controllers/view/poddecoder/podtableview.cpp:92
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte order to use for decoding the bytes."
 msgstr ""
 
-#: controllers/view/poddecoder/podtableview.cpp:91
+#: controllers/view/poddecoder/podtableview.cpp:96
 #, kde-format
 msgctxt "@option:check"
 msgid "Unsigned as hexadecimal:"
 msgstr ""
 
-#: controllers/view/poddecoder/podtableview.cpp:100
+#: controllers/view/poddecoder/podtableview.cpp:105
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1143,7 +1143,7 @@ msgid ""
 "hexadecimal instead of as decimal."
 msgstr ""
 
-#: controllers/view/poddecoder/podtableview.cpp:136
+#: controllers/view/poddecoder/podtableview.cpp:141
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1151,19 +1151,19 @@ msgid ""
 ">Keep the unused bytes or remove them?"
 msgstr ""
 
-#: controllers/view/poddecoder/podtableview.cpp:141
+#: controllers/view/poddecoder/podtableview.cpp:146
 #, kde-format
 msgctxt "@action:button keep the unused bytes"
 msgid "&Keep"
 msgstr "&Mantene"
 
-#: controllers/view/poddecoder/podtableview.cpp:144
+#: controllers/view/poddecoder/podtableview.cpp:149
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Keep the unused bytes with their old values."
 msgstr ""
 
-#: controllers/view/poddecoder/podtableview.cpp:157
+#: controllers/view/poddecoder/podtableview.cpp:162
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1171,7 +1171,7 @@ msgid ""
 ">Overwrite the following bytes or insert new ones as needed?"
 msgstr ""
 
-#: controllers/view/poddecoder/podtableview.cpp:257
+#: controllers/view/poddecoder/podtableview.cpp:262
 #: controllers/view/selectrange/selectrangeview.cpp:138
 #: controllers/view/structures/structureview.cpp:339
 #, kde-format
