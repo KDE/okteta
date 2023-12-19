@@ -113,6 +113,8 @@ StringsExtractView::StringsExtractView(StringsExtractTool* tool, QWidget* parent
     mContainedStringTableView->setUniformRowHeights(true);
     mContainedStringTableView->setAllColumnsShowFocus(true);
     mContainedStringTableView->setSelectionMode(QAbstractItemView::ExtendedSelection);
+    mContainedStringTableView->setDragEnabled(true);
+    mContainedStringTableView->setDragDropMode(QAbstractItemView::DragOnly);
     mContainedStringTableView->setSortingEnabled(true);
     mContainedStringTableView->installEventFilter(this);
     QHeaderView* header = mContainedStringTableView->header();
@@ -215,17 +217,12 @@ void StringsExtractView::onGotoButtonClicked()
 
 void StringsExtractView::onCopyButtonClicked()
 {
-    const QModelIndexList selectedRows = mContainedStringTableView->selectionModel()->selectedRows();
-    const QList<ContainedString>* containedStringList = mTool->containedStringList();
+    const QItemSelectionModel* selectionModel = mContainedStringTableView->selectionModel();
 
-    QString strings;
-    for (const QModelIndex& index : selectedRows) {
-        const int i = mSortFilterProxyModel->mapToSource(index).row();
-        strings += containedStringList->at(i).string();
-        strings += QLatin1Char('\n'); // TODO: specific linefeed for platforms
-    }
+    const QModelIndexList selectedIndexes = selectionModel->selectedIndexes();
+    QMimeData* mimeData = mContainedStringTableView->model()->mimeData(selectedIndexes);
 
-    QApplication::clipboard()->setText(strings);
+    QApplication::clipboard()->setMimeData(mimeData);
 }
 
 void StringsExtractView::onStringSelectionChanged()
