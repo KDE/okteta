@@ -46,6 +46,7 @@ public: // AbstractDifferentSizeDialog API
 private Q_SLOTS:
     void onCurrentRowChanged(const QModelIndex& current, const QModelIndex& previous);
     void onCustomContextMenuRequested(QPoint pos);
+    void editData();
     void copyToClipboard();
     void selectBytesInView();
 

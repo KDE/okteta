@@ -164,6 +164,15 @@ Answer PODTableView::query(int newValueSize, int oldValueSize, int sizeLeft)
     return answer;
 }
 
+void PODTableView::editData()
+{
+    auto* action = static_cast<QAction*>(sender());
+    const QModelIndex index = action->data().value<QModelIndex>();
+
+    mPODTableView->setCurrentIndex(index);
+    mPODTableView->edit(index);
+}
+
 void PODTableView::selectBytesInView()
 {
     auto* action = static_cast<QAction*>(sender());
@@ -231,6 +240,13 @@ void PODTableView::onCustomContextMenuRequested(QPoint pos)
     }
 
     auto* menu = new QMenu(this);
+
+    auto* editAction = new QAction(QIcon::fromTheme(QStringLiteral("document-edit")),
+                                   i18nc("@action:inmenu", "Edit"), this);
+    connect(editAction, &QAction::triggered,
+            this, &PODTableView::editData);
+    editAction->setData(index.siblingAtColumn(PODTableModel::ValueId));
+    menu->addAction(editAction);
 
     // TODO: split into explicit "Copy As Data" and "Copy As Text"
     auto* copyAction =  KStandardAction::copy(this, &PODTableView::copyToClipboard,  this);
