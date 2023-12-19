@@ -115,7 +115,14 @@ QVariant PODDisplayModel::data(const QModelIndex& index, int role) const
 
 Qt::ItemFlags PODDisplayModel::flags(const QModelIndex& index) const
 {
-    return QIdentityProxyModel::flags(index) | Qt::ItemIsDragEnabled;
+    Qt::ItemFlags flags = QIdentityProxyModel::flags(index);
+
+    const int podId = index.row();
+    if (!m_tool->value(podId).isNull()) {
+        flags |= Qt::ItemIsDragEnabled;
+    }
+
+    return flags;
 }
 
 QMimeData* PODDisplayModel::mimeData(const QModelIndexList& indexes) const
