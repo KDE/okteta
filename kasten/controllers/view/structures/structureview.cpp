@@ -267,6 +267,15 @@ void StructureView::onLockButtonToggled(bool structureLocked)
     }
 }
 
+void StructureView::editData()
+{
+    auto* action = static_cast<QAction*>(sender());
+    const QModelIndex index = action->data().value<QModelIndex>();
+
+    mStructTreeView->setCurrentIndex(index);
+    mStructTreeView->edit(index);
+}
+
 void StructureView::selectBytesInView()
 {
     auto* action = static_cast<QAction*>(sender());
@@ -326,6 +335,16 @@ void StructureView::onCustomContextMenuRequested(QPoint pos)
     }
 
     auto* menu = new QMenu(this);
+
+    const QModelIndex valueIndex = index.siblingAtColumn(DataInformation::ColumnValue);
+    if (valueIndex.flags() & Qt::ItemIsEditable) {
+        auto* editAction = new QAction(QIcon::fromTheme(QStringLiteral("document-edit")),
+                                    i18nc("@action:inmenu", "Edit"), this);
+        connect(editAction, &QAction::triggered,
+                this, &StructureView::editData);
+        editAction->setData(valueIndex);
+        menu->addAction(editAction);
+    }
 
     // TODO: split into explicit "Copy As Data" and "Copy As Text"
     auto* copyAction =  KStandardAction::copy(this, &StructureView::copyToClipboard,  this);

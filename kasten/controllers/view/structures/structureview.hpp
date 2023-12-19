@@ -48,6 +48,7 @@ private Q_SLOTS:
 
 private:
     void setLockButtonState(const QModelIndex& current);
+    void editData();
     void selectBytesInView();
     void copyToClipboard();
 
