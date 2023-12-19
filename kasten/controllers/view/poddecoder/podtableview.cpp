@@ -193,13 +193,9 @@ void PODTableView::selectBytesInView()
 void PODTableView::copyToClipboard()
 {
     auto* action = static_cast<QAction*>(sender());
-    const int podId = action->data().toInt();
+    const QModelIndex index = action->data().value<QModelIndex>();
 
-    auto* mimeData = new QMimeData;
-
-    const QString displayText = mPODDelegate->displayText(mTool->value(podId), mPODTableView->locale());
-    mimeData->setText(displayText);
-    mimeData->setData(QStringLiteral("application/octet-stream"), mTool->bytes(podId));
+    QMimeData* mimeData = mPODTableView->model()->mimeData({index});
 
     QApplication::clipboard()->setMimeData(mimeData);
 }
@@ -253,7 +249,7 @@ void PODTableView::onCustomContextMenuRequested(QPoint pos)
     // TODO: split into explicit "Copy As Data" and "Copy As Text"
     auto* copyAction =  KStandardAction::copy(this, &PODTableView::copyToClipboard,  this);
     copyAction->setShortcut(QKeySequence());
-    copyAction->setData(podId);
+    copyAction->setData(index);
     menu->addAction(copyAction);
 
     // TODO: reusing string due to string freeze
