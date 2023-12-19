@@ -12,8 +12,9 @@
 #include "datatypes/datainformationwithchildren.hpp"
 #include "datatypes/topleveldatainformation.hpp"
 #include "datatypes/array/arraydatainformation.hpp"
-
+// Qt
 #include <QFont>
+#include <QMimeData>
 
 namespace Kasten {
 
@@ -154,7 +155,38 @@ Qt::ItemFlags StructureTreeModel::flags(const QModelIndex& index) const
         return Qt::NoItemFlags;
     }
     auto* item = static_cast<DataInformation*> (index.internalPointer());
-    return item->flags(index.column(), mTool->isFileLoaded());
+    Qt::ItemFlags flags = item->flags(index.column(), mTool->isFileLoaded());
+    if (item->wasAbleToRead()) {
+        flags |= Qt::ItemIsDragEnabled;
+    }
+
+    return flags;
+}
+
+QMimeData* StructureTreeModel::mimeData(const QModelIndexList& indexes) const
+{
+    if (indexes.isEmpty()) {
+        return nullptr;
+    }
+
+    const QModelIndex index = indexes.first();
+
+    auto* item = index.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
+
+    auto* mimeData = new QMimeData;
+
+    mimeData->setText(item->valueString());
+    mimeData->setData(QStringLiteral("application/octet-stream"), mTool->bytes(item));
+
+    return mimeData;
+}
+
+QStringList StructureTreeModel::mimeTypes() const
+{
+    return {
+        QStringLiteral("application/octet-stream"),
+        QStringLiteral("text/plain"),
+    };
 }
 
 QVariant StructureTreeModel::headerData(int section, Qt::Orientation orientation,
