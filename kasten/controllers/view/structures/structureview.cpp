@@ -72,7 +72,8 @@ StructureView::StructureView(StructuresTool* tool, QWidget* parent)
     mStructTreeView->setAllColumnsShowFocus(true);
     mStructTreeView->setEditTriggers(QAbstractItemView::DoubleClicked | QAbstractItemView::EditKeyPressed);
     mStructTreeView->setItemDelegate(mDelegate);
-    mStructTreeView->setDragEnabled(false);
+    mStructTreeView->setDragEnabled(true);
+    mStructTreeView->setDragDropMode(QAbstractItemView::DragOnly);
     mStructTreeView->setSortingEnabled(false);
     mStructTreeView->setModel(mStructureTreeModel);
     mStructTreeView->setHeaderHidden(false);
@@ -288,12 +289,7 @@ void StructureView::copyToClipboard()
 {
     auto* action = static_cast<QAction*>(sender());
     const QModelIndex index = action->data().value<QModelIndex>();
-    auto* item = index.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
-
-    auto* mimeData = new QMimeData;
-
-    mimeData->setText(item->valueString());
-    mimeData->setData(QStringLiteral("application/octet-stream"), mTool->bytes(item));
+    QMimeData* mimeData = mStructTreeView->model()->mimeData({index});
 
     QApplication::clipboard()->setMimeData(mimeData);
 }
