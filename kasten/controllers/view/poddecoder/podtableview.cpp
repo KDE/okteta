@@ -66,15 +66,14 @@ PODTableView::PODTableView(PODDecoderTool* tool, QWidget* parent)
     QHeaderView* header = mPODTableView->header();
     header->setSectionResizeMode(QHeaderView::Interactive);
     header->setStretchLastSection(false);
+    auto* displayModel = new PODDisplayModel(mPODTableView, mTool, this);
+    displayModel->setSourceModel(mPODTableModel);
+    mPODTableView->setModel(displayModel);
     connect(mPODTableView->selectionModel(),
             &QItemSelectionModel::currentRowChanged,
             this, &PODTableView::onCurrentRowChanged);
     connect(mPODTableView, &QWidget::customContextMenuRequested,
             this, &PODTableView::onCustomContextMenuRequested);
-
-    auto* displayModel = new PODDisplayModel(mPODTableView, mTool, this);
-    displayModel->setSourceModel(mPODTableModel);
-    mPODTableView->setModel(displayModel);
 
     baseLayout->addWidget(mPODTableView, 10);
 
