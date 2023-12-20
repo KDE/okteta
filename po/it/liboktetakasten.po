@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-18 03:16+0000\n"
+"POT-Creation-Date: 2023-12-20 02:27+0000\n"
 "PO-Revision-Date: 2020-01-12 16:36+0100\n"
 "Last-Translator: Luigi Toscano <luigi.toscano@tiscali.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -808,14 +808,14 @@ msgid "Modular sum 8-bit"
 msgstr "Somma modulare a 8 bit"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:28
-#: controllers/view/poddecoder/podtableview.cpp:85
+#: controllers/view/poddecoder/podtableview.cpp:84
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Big-endian"
 msgstr "Big endian"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:29
-#: controllers/view/poddecoder/podtableview.cpp:86
+#: controllers/view/poddecoder/podtableview.cpp:85
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Little-endian"
@@ -1179,19 +1179,19 @@ msgctxt "@info:tooltip for column Value"
 msgid "The value of the bytes for the datatype"
 msgstr "Il valore dei byte per il tipo di dati"
 
-#: controllers/view/poddecoder/podtableview.cpp:92
+#: controllers/view/poddecoder/podtableview.cpp:91
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte order to use for decoding the bytes."
 msgstr "Ordine dei byte da usare per decifrare i byte."
 
-#: controllers/view/poddecoder/podtableview.cpp:96
+#: controllers/view/poddecoder/podtableview.cpp:95
 #, kde-format
 msgctxt "@option:check"
 msgid "Unsigned as hexadecimal:"
 msgstr "Senza segno come esadecimale"
 
-#: controllers/view/poddecoder/podtableview.cpp:105
+#: controllers/view/poddecoder/podtableview.cpp:104
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1201,7 +1201,7 @@ msgstr ""
 "Sceglie se i valori di interi senza segno vadano mostrati come esadecimali "
 "al posto che decimali."
 
-#: controllers/view/poddecoder/podtableview.cpp:141
+#: controllers/view/poddecoder/podtableview.cpp:140
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1211,19 +1211,19 @@ msgstr ""
 "Il nuovo valore necessita di <emphasis>meno</emphasis> byte (%1 invece di "
 "%2).<nl/>Mantengo i byte inutilizzati oppure li rimuovo?"
 
-#: controllers/view/poddecoder/podtableview.cpp:146
+#: controllers/view/poddecoder/podtableview.cpp:145
 #, kde-format
 msgctxt "@action:button keep the unused bytes"
 msgid "&Keep"
 msgstr "&Mantieni"
 
-#: controllers/view/poddecoder/podtableview.cpp:149
+#: controllers/view/poddecoder/podtableview.cpp:148
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Keep the unused bytes with their old values."
 msgstr "Mantieni i byte inutilizzati con i loro vecchi valori."
 
-#: controllers/view/poddecoder/podtableview.cpp:162
+#: controllers/view/poddecoder/podtableview.cpp:161
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1233,9 +1233,9 @@ msgstr ""
 "Il nuovo valore necessita di <emphasis>più</emphasis> byte (%1 invece di %2)."
 "<nl/>Sovrascrivo i byte seguenti oppure ne inserisco di nuovi come richiesto?"
 
-#: controllers/view/poddecoder/podtableview.cpp:262
+#: controllers/view/poddecoder/podtableview.cpp:257
 #: controllers/view/selectrange/selectrangeview.cpp:138
-#: controllers/view/structures/structureview.cpp:339
+#: controllers/view/structures/structureview.cpp:335
 #, kde-format
 msgctxt "@action:button"
 msgid "&Select"
@@ -1575,13 +1575,13 @@ msgstr ""
 "spostato nel documento, oppure, a tua scelta, dello slittamento inserito "
 "sopra."
 
-#: controllers/view/stringsextract/containedstringtablemodel.cpp:97
+#: controllers/view/stringsextract/containedstringtablemodel.cpp:98
 #, kde-format
 msgctxt "@title:column offset of the extracted string"
 msgid "Offset"
 msgstr "Slittamento"
 
-#: controllers/view/stringsextract/containedstringtablemodel.cpp:98
+#: controllers/view/stringsextract/containedstringtablemodel.cpp:99
 #, kde-format
 msgctxt "@title:column string extracted from the byte array"
 msgid "String"
@@ -1645,18 +1645,18 @@ msgstr "Filtro:"
 msgid "Enter a term to limit the list."
 msgstr "Inserisci qui un termine per limitare la lista."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:136
+#: controllers/view/stringsextract/stringsextractview.cpp:138
 #, kde-format
 msgid "C&opy"
 msgstr "C&opia"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:139
+#: controllers/view/stringsextract/stringsextractview.cpp:141
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected strings to the clipboard."
 msgstr "Copia le stringhe selezionate negli appunti."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:141
+#: controllers/view/stringsextract/stringsextractview.cpp:143
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1666,18 +1666,18 @@ msgstr ""
 "Se premi il pulsante <interface>Copia</interface>, tutte le stringhe che hai "
 "selezionato nell'elenco sono copiate negli appunti."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:150
+#: controllers/view/stringsextract/stringsextractview.cpp:152
 #, kde-format
 msgid "&Show"
 msgstr "Mo&stra"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:153
+#: controllers/view/stringsextract/stringsextractview.cpp:155
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Shows the selected string in the view."
 msgstr "Mostra la stringa selezionata nella vista."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:155
+#: controllers/view/stringsextract/stringsextractview.cpp:157
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -2416,59 +2416,59 @@ msgctxt "value of a data structure (primitive type)"
 msgid "Value"
 msgstr "Valore"
 
-#: controllers/view/structures/structureview.cpp:96
+#: controllers/view/structures/structureview.cpp:97
 #, kde-format
 msgctxt "@action:button"
 msgid "Validate"
 msgstr "Convalida"
 
-#: controllers/view/structures/structureview.cpp:98
+#: controllers/view/structures/structureview.cpp:99
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Validate all structures."
 msgstr "Convalida tutte le strutture."
 
-#: controllers/view/structures/structureview.cpp:120
+#: controllers/view/structures/structureview.cpp:121
 #, kde-format
 msgctxt "@action:button"
 msgid "Script console"
 msgstr "Console per script"
 
-#: controllers/view/structures/structureview.cpp:122
+#: controllers/view/structures/structureview.cpp:123
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open script console."
 msgstr "Apri la console per gli script."
 
-#: controllers/view/structures/structureview.cpp:126
+#: controllers/view/structures/structureview.cpp:127
 #, kde-format
 msgctxt "@action:button"
 msgid "Settings"
 msgstr "Impostazioni"
 
-#: controllers/view/structures/structureview.cpp:128
+#: controllers/view/structures/structureview.cpp:129
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open settings."
 msgstr "Apri impostazioni."
 
-#: controllers/view/structures/structureview.cpp:159
+#: controllers/view/structures/structureview.cpp:160
 #, kde-format
 msgid "Value Display"
 msgstr "Mostra valori"
 
-#: controllers/view/structures/structureview.cpp:171
+#: controllers/view/structures/structureview.cpp:172
 #, kde-format
 msgid "Structures management"
 msgstr "Gestione strutture"
 
-#: controllers/view/structures/structureview.cpp:258
+#: controllers/view/structures/structureview.cpp:259
 #, kde-format
 msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Unlock"
 msgstr "Sblocca"
 
-#: controllers/view/structures/structureview.cpp:260
+#: controllers/view/structures/structureview.cpp:261
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -2478,19 +2478,19 @@ msgstr ""
 "Sblocca la struttura selezionata, cioè imposta sempre lo slittamento "
 "iniziale alla posizione attuale del cursore."
 
-#: controllers/view/structures/structureview.cpp:265
+#: controllers/view/structures/structureview.cpp:266
 #, kde-format
 msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Lock"
 msgstr "Blocca"
 
-#: controllers/view/structures/structureview.cpp:267
+#: controllers/view/structures/structureview.cpp:268
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Lock selected structure to current offset."
 msgstr "Blocca la struttura selezionata allo slittamento attuale."
 
-#: controllers/view/structures/structureview.cpp:296
+#: controllers/view/structures/structureview.cpp:292
 #, kde-format
 msgctxt "@title:window"
 msgid "Structures Script Console"

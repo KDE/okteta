@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-18 03:16+0000\n"
+"POT-Creation-Date: 2023-12-20 02:27+0000\n"
 "PO-Revision-Date: 2022-06-10 00:48+0000\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -761,14 +761,14 @@ msgid "Modular sum 8-bit"
 msgstr ""
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:28
-#: controllers/view/poddecoder/podtableview.cpp:85
+#: controllers/view/poddecoder/podtableview.cpp:84
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Big-endian"
 msgstr ""
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:29
-#: controllers/view/poddecoder/podtableview.cpp:86
+#: controllers/view/poddecoder/podtableview.cpp:85
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Little-endian"
@@ -1120,19 +1120,19 @@ msgctxt "@info:tooltip for column Value"
 msgid "The value of the bytes for the datatype"
 msgstr ""
 
-#: controllers/view/poddecoder/podtableview.cpp:92
+#: controllers/view/poddecoder/podtableview.cpp:91
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte order to use for decoding the bytes."
 msgstr ""
 
-#: controllers/view/poddecoder/podtableview.cpp:96
+#: controllers/view/poddecoder/podtableview.cpp:95
 #, kde-format
 msgctxt "@option:check"
 msgid "Unsigned as hexadecimal:"
 msgstr ""
 
-#: controllers/view/poddecoder/podtableview.cpp:105
+#: controllers/view/poddecoder/podtableview.cpp:104
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1140,7 +1140,7 @@ msgid ""
 "hexadecimal instead of as decimal."
 msgstr ""
 
-#: controllers/view/poddecoder/podtableview.cpp:141
+#: controllers/view/poddecoder/podtableview.cpp:140
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1148,19 +1148,19 @@ msgid ""
 ">Keep the unused bytes or remove them?"
 msgstr ""
 
-#: controllers/view/poddecoder/podtableview.cpp:146
+#: controllers/view/poddecoder/podtableview.cpp:145
 #, kde-format
 msgctxt "@action:button keep the unused bytes"
 msgid "&Keep"
 msgstr ""
 
-#: controllers/view/poddecoder/podtableview.cpp:149
+#: controllers/view/poddecoder/podtableview.cpp:148
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Keep the unused bytes with their old values."
 msgstr ""
 
-#: controllers/view/poddecoder/podtableview.cpp:162
+#: controllers/view/poddecoder/podtableview.cpp:161
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1168,9 +1168,9 @@ msgid ""
 ">Overwrite the following bytes or insert new ones as needed?"
 msgstr ""
 
-#: controllers/view/poddecoder/podtableview.cpp:262
+#: controllers/view/poddecoder/podtableview.cpp:257
 #: controllers/view/selectrange/selectrangeview.cpp:138
-#: controllers/view/structures/structureview.cpp:339
+#: controllers/view/structures/structureview.cpp:335
 #, kde-format
 msgctxt "@action:button"
 msgid "&Select"
@@ -1500,13 +1500,13 @@ msgid ""
 "moved in the document to or, on your option, by the offset you entered above."
 msgstr ""
 
-#: controllers/view/stringsextract/containedstringtablemodel.cpp:97
+#: controllers/view/stringsextract/containedstringtablemodel.cpp:98
 #, kde-format
 msgctxt "@title:column offset of the extracted string"
 msgid "Offset"
 msgstr ""
 
-#: controllers/view/stringsextract/containedstringtablemodel.cpp:98
+#: controllers/view/stringsextract/containedstringtablemodel.cpp:99
 #, kde-format
 msgctxt "@title:column string extracted from the byte array"
 msgid "String"
@@ -1565,18 +1565,18 @@ msgstr ""
 msgid "Enter a term to limit the list."
 msgstr ""
 
-#: controllers/view/stringsextract/stringsextractview.cpp:136
+#: controllers/view/stringsextract/stringsextractview.cpp:138
 #, kde-format
 msgid "C&opy"
 msgstr ""
 
-#: controllers/view/stringsextract/stringsextractview.cpp:139
+#: controllers/view/stringsextract/stringsextractview.cpp:141
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected strings to the clipboard."
 msgstr ""
 
-#: controllers/view/stringsextract/stringsextractview.cpp:141
+#: controllers/view/stringsextract/stringsextractview.cpp:143
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1584,18 +1584,18 @@ msgid ""
 "selected in the list are copied to the clipboard."
 msgstr ""
 
-#: controllers/view/stringsextract/stringsextractview.cpp:150
+#: controllers/view/stringsextract/stringsextractview.cpp:152
 #, kde-format
 msgid "&Show"
 msgstr ""
 
-#: controllers/view/stringsextract/stringsextractview.cpp:153
+#: controllers/view/stringsextract/stringsextractview.cpp:155
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Shows the selected string in the view."
 msgstr ""
 
-#: controllers/view/stringsextract/stringsextractview.cpp:155
+#: controllers/view/stringsextract/stringsextractview.cpp:157
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -2283,59 +2283,59 @@ msgctxt "value of a data structure (primitive type)"
 msgid "Value"
 msgstr ""
 
-#: controllers/view/structures/structureview.cpp:96
+#: controllers/view/structures/structureview.cpp:97
 #, kde-format
 msgctxt "@action:button"
 msgid "Validate"
 msgstr ""
 
-#: controllers/view/structures/structureview.cpp:98
+#: controllers/view/structures/structureview.cpp:99
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Validate all structures."
 msgstr ""
 
-#: controllers/view/structures/structureview.cpp:120
+#: controllers/view/structures/structureview.cpp:121
 #, kde-format
 msgctxt "@action:button"
 msgid "Script console"
 msgstr ""
 
-#: controllers/view/structures/structureview.cpp:122
+#: controllers/view/structures/structureview.cpp:123
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open script console."
 msgstr ""
 
-#: controllers/view/structures/structureview.cpp:126
+#: controllers/view/structures/structureview.cpp:127
 #, kde-format
 msgctxt "@action:button"
 msgid "Settings"
 msgstr ""
 
-#: controllers/view/structures/structureview.cpp:128
+#: controllers/view/structures/structureview.cpp:129
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open settings."
 msgstr ""
 
-#: controllers/view/structures/structureview.cpp:159
+#: controllers/view/structures/structureview.cpp:160
 #, kde-format
 msgid "Value Display"
 msgstr ""
 
-#: controllers/view/structures/structureview.cpp:171
+#: controllers/view/structures/structureview.cpp:172
 #, kde-format
 msgid "Structures management"
 msgstr ""
 
-#: controllers/view/structures/structureview.cpp:258
+#: controllers/view/structures/structureview.cpp:259
 #, kde-format
 msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Unlock"
 msgstr ""
 
-#: controllers/view/structures/structureview.cpp:260
+#: controllers/view/structures/structureview.cpp:261
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -2343,19 +2343,19 @@ msgid ""
 "current cursor position."
 msgstr ""
 
-#: controllers/view/structures/structureview.cpp:265
+#: controllers/view/structures/structureview.cpp:266
 #, kde-format
 msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Lock"
 msgstr ""
 
-#: controllers/view/structures/structureview.cpp:267
+#: controllers/view/structures/structureview.cpp:268
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Lock selected structure to current offset."
 msgstr ""
 
-#: controllers/view/structures/structureview.cpp:296
+#: controllers/view/structures/structureview.cpp:292
 #, kde-format
 msgctxt "@title:window"
 msgid "Structures Script Console"
