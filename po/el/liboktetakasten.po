@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-18 00:44+0000\n"
+"POT-Creation-Date: 2023-12-20 00:43+0000\n"
 "PO-Revision-Date: 2023-01-03 09:17+0200\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -733,7 +733,7 @@ msgstr ""
 "στατιστικών συχνότητας για τους χαρακτήρες στο επιλεγμένο εύρος."
 
 #: controllers/view/info/infoview.cpp:118
-#: controllers/view/stringsextract/stringsextractview.cpp:136
+#: controllers/view/stringsextract/stringsextractview.cpp:138
 #, kde-format
 msgid "C&opy"
 msgstr "&Αντιγραφή"
@@ -849,14 +849,14 @@ msgid "Modular sum 8-bit"
 msgstr "Modular sum 8-bit"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:28
-#: controllers/view/poddecoder/podtableview.cpp:84
+#: controllers/view/poddecoder/podtableview.cpp:83
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Big-endian"
 msgstr "Big-endian"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:29
-#: controllers/view/poddecoder/podtableview.cpp:85
+#: controllers/view/poddecoder/podtableview.cpp:84
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Little-endian"
@@ -1248,19 +1248,19 @@ msgctxt "@info:tooltip for column Value"
 msgid "The value of the bytes for the datatype"
 msgstr "Η τιμή των χαρακτήρων για τον τύπο δεδομένων"
 
-#: controllers/view/poddecoder/podtableview.cpp:91
+#: controllers/view/poddecoder/podtableview.cpp:90
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte order to use for decoding the bytes."
 msgstr "Η σειρά των χαρακτήρων για την αποκωδικοποίησή τους."
 
-#: controllers/view/poddecoder/podtableview.cpp:95
+#: controllers/view/poddecoder/podtableview.cpp:94
 #, kde-format
 msgctxt "@option:check"
 msgid "Unsigned as hexadecimal:"
 msgstr "Χωρίς πρόσημο ως δεκαεξαδικός:"
 
-#: controllers/view/poddecoder/podtableview.cpp:104
+#: controllers/view/poddecoder/podtableview.cpp:103
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1270,7 +1270,7 @@ msgstr ""
 "Ρυθμίζει αν οι τιμές των χωρίς πρόσημο τύπων ακεραίου φαίνονται ως "
 "δεκαεξαδικοί αντί ως δεκαδικοί."
 
-#: controllers/view/poddecoder/podtableview.cpp:135
+#: controllers/view/poddecoder/podtableview.cpp:134
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1280,19 +1280,19 @@ msgstr ""
 "Η νέα τιμή χρειάζεται <emphasis>λιγότερους</emphasis> χαρακτήρες (%1 αντί "
 "για %2).<nl/>Να διατηρηθούν οι αχρησιμοποίητοι χαρακτήρες ή να αφαιρεθούν;"
 
-#: controllers/view/poddecoder/podtableview.cpp:140
+#: controllers/view/poddecoder/podtableview.cpp:139
 #, kde-format
 msgctxt "@action:button keep the unused bytes"
 msgid "&Keep"
 msgstr "Να &διατηρηθούν"
 
-#: controllers/view/poddecoder/podtableview.cpp:143
+#: controllers/view/poddecoder/podtableview.cpp:142
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Keep the unused bytes with their old values."
 msgstr "Να διατηρηθούν οι αχρησιμοποίητοι χαρακτήρες με τις παλιές τιμές."
 
-#: controllers/view/poddecoder/podtableview.cpp:152
+#: controllers/view/poddecoder/podtableview.cpp:151
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1303,9 +1303,18 @@ msgstr ""
 "για %2).<nl/>Να αντικατασταθούν οι ακόλουθοι χαρακτήρες ή να εισαχθούν νέοι "
 "όπως απαιτείται;"
 
-#: controllers/view/poddecoder/podtableview.cpp:243
-#: controllers/view/selectrange/selectrangeview.cpp:124
+#: controllers/view/poddecoder/podtableview.cpp:240
 #: controllers/view/structures/structureview.cpp:338
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "&Edit..."
+msgctxt "@action:inmenu"
+msgid "Edit"
+msgstr "&Επεξεργασία..."
+
+#: controllers/view/poddecoder/podtableview.cpp:254
+#: controllers/view/selectrange/selectrangeview.cpp:124
+#: controllers/view/structures/structureview.cpp:353
 #, kde-format
 msgctxt "@action:button"
 msgid "&Select"
@@ -1653,13 +1662,13 @@ msgstr ""
 "μετακινηθεί στο έγγραφο ή, κατ' επιλογή σας, κατά την μετατόπιση που έχετε "
 "εισαγάγει."
 
-#: controllers/view/stringsextract/containedstringtablemodel.cpp:97
+#: controllers/view/stringsextract/containedstringtablemodel.cpp:98
 #, kde-format
 msgctxt "@title:column offset of the extracted string"
 msgid "Offset"
 msgstr "Μετατόπιση"
 
-#: controllers/view/stringsextract/containedstringtablemodel.cpp:98
+#: controllers/view/stringsextract/containedstringtablemodel.cpp:99
 #, kde-format
 msgctxt "@title:column string extracted from the byte array"
 msgid "String"
@@ -1723,13 +1732,13 @@ msgstr "Φίλτρο:"
 msgid "Enter a term to limit the list."
 msgstr "Εισάγετε έναν όρο περιορισμού της λίστας."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:139
+#: controllers/view/stringsextract/stringsextractview.cpp:141
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected strings to the clipboard."
 msgstr "Αντιγραφή επιλεγμένων συμβολοσειρών στο πρόχειρο."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:141
+#: controllers/view/stringsextract/stringsextractview.cpp:143
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1739,18 +1748,18 @@ msgstr ""
 "Αν πιέσετε το κουμπί <interface>Αντιγραφή</interface>, όλες οι συμβολοσειρές "
 "που έχετε επιλέξει στη λίστα, θα αντιγραφούν στο πρόχειρο."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:150
+#: controllers/view/stringsextract/stringsextractview.cpp:152
 #, kde-format
 msgid "&Show"
 msgstr "&Εμφάνιση"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:153
+#: controllers/view/stringsextract/stringsextractview.cpp:155
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Shows the selected string in the view."
 msgstr "Εμφάνιση επιλεγμένης συμβολοσειράς στην προβολή."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:155
+#: controllers/view/stringsextract/stringsextractview.cpp:157
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -2459,59 +2468,59 @@ msgctxt "size of a data structure"
 msgid "Size"
 msgstr "Μέγεθος:"
 
-#: controllers/view/structures/structureview.cpp:95
+#: controllers/view/structures/structureview.cpp:96
 #, kde-format
 msgctxt "@action:button"
 msgid "Validate"
 msgstr "Επαλήθευση"
 
-#: controllers/view/structures/structureview.cpp:97
+#: controllers/view/structures/structureview.cpp:98
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Validate all structures."
 msgstr "Επαλήθευση όλων των δομών."
 
-#: controllers/view/structures/structureview.cpp:119
+#: controllers/view/structures/structureview.cpp:120
 #, kde-format
 msgctxt "@action:button"
 msgid "Script console"
 msgstr "Κονσόλα σεναρίων"
 
-#: controllers/view/structures/structureview.cpp:121
+#: controllers/view/structures/structureview.cpp:122
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open script console."
 msgstr "Άνοιγμα κονσόλας σεναρίων."
 
-#: controllers/view/structures/structureview.cpp:125
+#: controllers/view/structures/structureview.cpp:126
 #, kde-format
 msgctxt "@action:button"
 msgid "Settings"
 msgstr "Ρυθμίσεις"
 
-#: controllers/view/structures/structureview.cpp:127
+#: controllers/view/structures/structureview.cpp:128
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open settings."
 msgstr "Άνοιγμα ρυθμίσεων."
 
-#: controllers/view/structures/structureview.cpp:158
+#: controllers/view/structures/structureview.cpp:159
 #, kde-format
 msgid "Value Display"
 msgstr "Εμφάνιση τιμής"
 
-#: controllers/view/structures/structureview.cpp:170
+#: controllers/view/structures/structureview.cpp:171
 #, kde-format
 msgid "Structures management"
 msgstr "Διαχείριση δομών"
 
-#: controllers/view/structures/structureview.cpp:257
+#: controllers/view/structures/structureview.cpp:258
 #, kde-format
 msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Unlock"
 msgstr "Ξεκλείδωμα"
 
-#: controllers/view/structures/structureview.cpp:259
+#: controllers/view/structures/structureview.cpp:260
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -2521,19 +2530,19 @@ msgstr ""
 "Ξεκλείδωμα επιλεγμένων δομών, δηλ. η αρχική μετατόπιση ρυθμίζεται πάντα στην "
 "τρέχουσα θέση του δρομέα."
 
-#: controllers/view/structures/structureview.cpp:264
+#: controllers/view/structures/structureview.cpp:265
 #, kde-format
 msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Lock"
 msgstr "Κλείδωμα"
 
-#: controllers/view/structures/structureview.cpp:266
+#: controllers/view/structures/structureview.cpp:267
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Lock selected structure to current offset."
 msgstr "Κλείδωμα επιλεγμένων δομών στην τρέχουσα μετατόπιση."
 
-#: controllers/view/structures/structureview.cpp:295
+#: controllers/view/structures/structureview.cpp:300
 #, kde-format
 msgctxt "@title:window"
 msgid "Structures Script Console"

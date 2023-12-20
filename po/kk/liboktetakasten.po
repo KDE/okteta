@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-18 00:44+0000\n"
+"POT-Creation-Date: 2023-12-20 00:43+0000\n"
 "PO-Revision-Date: 2013-06-21 06:20+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -710,7 +710,7 @@ msgstr ""
 "ауқымындағы байттың жиілік статистикасын есептеледі."
 
 #: controllers/view/info/infoview.cpp:118
-#: controllers/view/stringsextract/stringsextractview.cpp:136
+#: controllers/view/stringsextract/stringsextractview.cpp:138
 #, kde-format
 msgid "C&opy"
 msgstr "К&өшіріп алу"
@@ -827,14 +827,14 @@ msgid "Modular sum 8-bit"
 msgstr "8-битті модульдік қосындысы"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:28
-#: controllers/view/poddecoder/podtableview.cpp:84
+#: controllers/view/poddecoder/podtableview.cpp:83
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Big-endian"
 msgstr "Кері байтар реті"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:29
-#: controllers/view/poddecoder/podtableview.cpp:85
+#: controllers/view/poddecoder/podtableview.cpp:84
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Little-endian"
@@ -1231,19 +1231,19 @@ msgctxt "@info:tooltip for column Value"
 msgid "The value of the bytes for the datatype"
 msgstr "Бұл деректер түрі байтарының мәні"
 
-#: controllers/view/poddecoder/podtableview.cpp:91
+#: controllers/view/poddecoder/podtableview.cpp:90
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte order to use for decoding the bytes."
 msgstr "Байттардың кодын шешу үшін қолданатын байттар реті."
 
-#: controllers/view/poddecoder/podtableview.cpp:95
+#: controllers/view/poddecoder/podtableview.cpp:94
 #, kde-format
 msgctxt "@option:check"
 msgid "Unsigned as hexadecimal:"
 msgstr "Таңбасыз16-лық сан ретінде:"
 
-#: controllers/view/poddecoder/podtableview.cpp:104
+#: controllers/view/poddecoder/podtableview.cpp:103
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1253,7 +1253,7 @@ msgstr ""
 "Таңбасыз бүтін сандарының мәні, ондық сан орнына, таңбасыз 16-лық сан "
 "ретінде көрсетуін ұйғару."
 
-#: controllers/view/poddecoder/podtableview.cpp:135
+#: controllers/view/poddecoder/podtableview.cpp:134
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1263,19 +1263,19 @@ msgstr ""
 "Жаңа мәні  <emphasis>шамалырақ</emphasis> байттарды қажет етеді (%2 орнына "
 "%1).<nl/>Артық байттар қала берсін бе, әлде өшірілсін бе?"
 
-#: controllers/view/poddecoder/podtableview.cpp:140
+#: controllers/view/poddecoder/podtableview.cpp:139
 #, kde-format
 msgctxt "@action:button keep the unused bytes"
 msgid "&Keep"
 msgstr "Қ&алсын"
 
-#: controllers/view/poddecoder/podtableview.cpp:143
+#: controllers/view/poddecoder/podtableview.cpp:142
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Keep the unused bytes with their old values."
 msgstr "Артық байтарды ескі мәндерімен қалдыру."
 
-#: controllers/view/poddecoder/podtableview.cpp:152
+#: controllers/view/poddecoder/podtableview.cpp:151
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1286,9 +1286,18 @@ msgstr ""
 "%1).<nl/>Сыймағанын соңынан кейінгілердің үстінен, әлде қосымша байттарды "
 "енгізіп жазайық па?"
 
-#: controllers/view/poddecoder/podtableview.cpp:243
-#: controllers/view/selectrange/selectrangeview.cpp:124
+#: controllers/view/poddecoder/podtableview.cpp:240
 #: controllers/view/structures/structureview.cpp:338
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "&Edit..."
+msgctxt "@action:inmenu"
+msgid "Edit"
+msgstr "&Өзгерту...."
+
+#: controllers/view/poddecoder/podtableview.cpp:254
+#: controllers/view/selectrange/selectrangeview.cpp:124
+#: controllers/view/structures/structureview.cpp:353
 #, kde-format
 msgctxt "@action:button"
 msgid "&Select"
@@ -1637,13 +1646,13 @@ msgstr ""
 "келтірілген шегінісіне. құжаттың басынан не, қалауыңыз бойынша, өзі тұрған "
 "орыннан, жылжиды."
 
-#: controllers/view/stringsextract/containedstringtablemodel.cpp:97
+#: controllers/view/stringsextract/containedstringtablemodel.cpp:98
 #, kde-format
 msgctxt "@title:column offset of the extracted string"
 msgid "Offset"
 msgstr "Шегінісі"
 
-#: controllers/view/stringsextract/containedstringtablemodel.cpp:98
+#: controllers/view/stringsextract/containedstringtablemodel.cpp:99
 #, kde-format
 msgctxt "@title:column string extracted from the byte array"
 msgid "String"
@@ -1705,13 +1714,13 @@ msgstr "Сүзгісі:"
 msgid "Enter a term to limit the list."
 msgstr "Тізімді шектейтін шартты келтіріңіз."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:139
+#: controllers/view/stringsextract/stringsextractview.cpp:141
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected strings to the clipboard."
 msgstr "Таңдалған жолдарды алмасу буферіне көшіріп алу."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:141
+#: controllers/view/stringsextract/stringsextractview.cpp:143
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1721,18 +1730,18 @@ msgstr ""
 "<interface>Көшіріп алу</interface> батырмасын басқанда барлық таңдалған "
 "мәтін жолдары алмасу буферіне көшіріп алынады."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:150
+#: controllers/view/stringsextract/stringsextractview.cpp:152
 #, kde-format
 msgid "&Show"
 msgstr "&Көрсету"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:153
+#: controllers/view/stringsextract/stringsextractview.cpp:155
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Shows the selected string in the view."
 msgstr "Таңдалған жолдарды өрісінде көрсету."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:155
+#: controllers/view/stringsextract/stringsextractview.cpp:157
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -2434,53 +2443,53 @@ msgctxt "size of a data structure"
 msgid "Size"
 msgstr "Өлшемі:"
 
-#: controllers/view/structures/structureview.cpp:95
+#: controllers/view/structures/structureview.cpp:96
 #, kde-format
 msgctxt "@action:button"
 msgid "Validate"
 msgstr "Дұрыстығын тексеру"
 
-#: controllers/view/structures/structureview.cpp:97
+#: controllers/view/structures/structureview.cpp:98
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Validate all structures."
 msgstr "Барлық құрылымдардың дұрыстығын тексеру"
 
-#: controllers/view/structures/structureview.cpp:119
+#: controllers/view/structures/structureview.cpp:120
 #, kde-format
 msgctxt "@action:button"
 msgid "Script console"
 msgstr "Скрипт консолі"
 
-#: controllers/view/structures/structureview.cpp:121
+#: controllers/view/structures/structureview.cpp:122
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open script console."
 msgstr "Скрипт консолін ашу"
 
-#: controllers/view/structures/structureview.cpp:125
+#: controllers/view/structures/structureview.cpp:126
 #, kde-format
 msgctxt "@action:button"
 msgid "Settings"
 msgstr "Баптау"
 
-#: controllers/view/structures/structureview.cpp:127
+#: controllers/view/structures/structureview.cpp:128
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open settings."
 msgstr "Баптау параметрлерін ашу."
 
-#: controllers/view/structures/structureview.cpp:158
+#: controllers/view/structures/structureview.cpp:159
 #, kde-format
 msgid "Value Display"
 msgstr "Мәндерін көрсету"
 
-#: controllers/view/structures/structureview.cpp:170
+#: controllers/view/structures/structureview.cpp:171
 #, kde-format
 msgid "Structures management"
 msgstr "Құрылымдарды басқару"
 
-#: controllers/view/structures/structureview.cpp:257
+#: controllers/view/structures/structureview.cpp:258
 #, fuzzy, kde-format
 #| msgctxt ""
 #| "@action:pushbutton unlock the starting offset of the current structure"
@@ -2489,7 +2498,7 @@ msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Unlock"
 msgstr "Бұғатын шешу"
 
-#: controllers/view/structures/structureview.cpp:259
+#: controllers/view/structures/structureview.cpp:260
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -2499,7 +2508,7 @@ msgstr ""
 "Таңдалған құрылымының бұғатын шешу, яғни қазіргі меңзер орынан басталатын "
 "қылу."
 
-#: controllers/view/structures/structureview.cpp:264
+#: controllers/view/structures/structureview.cpp:265
 #, fuzzy, kde-format
 #| msgctxt ""
 #| "@action:pushbutton unlock the starting offset of the current structure"
@@ -2508,13 +2517,13 @@ msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Lock"
 msgstr "Бұғаттау"
 
-#: controllers/view/structures/structureview.cpp:266
+#: controllers/view/structures/structureview.cpp:267
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Lock selected structure to current offset."
 msgstr "Таңдалған құрылымының қазіргі орнында басталатын қылып қалдыру."
 
-#: controllers/view/structures/structureview.cpp:295
+#: controllers/view/structures/structureview.cpp:300
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "Script console"

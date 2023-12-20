@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-18 00:44+0000\n"
+"POT-Creation-Date: 2023-12-20 00:43+0000\n"
 "PO-Revision-Date: 2023-08-28 18:02+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -712,7 +712,7 @@ msgid ""
 msgstr "Painaessasi tästä valinnan eri tavujen esiintymistiheydet lasketaan."
 
 #: controllers/view/info/infoview.cpp:118
-#: controllers/view/stringsextract/stringsextractview.cpp:136
+#: controllers/view/stringsextract/stringsextractview.cpp:138
 #, kde-format
 msgid "C&opy"
 msgstr "K&opioi"
@@ -822,14 +822,14 @@ msgid "Modular sum 8-bit"
 msgstr "8-bittinen modulaarinen summa"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:28
-#: controllers/view/poddecoder/podtableview.cpp:84
+#: controllers/view/poddecoder/podtableview.cpp:83
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Big-endian"
 msgstr "Big-endian"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:29
-#: controllers/view/poddecoder/podtableview.cpp:85
+#: controllers/view/poddecoder/podtableview.cpp:84
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Little-endian"
@@ -1207,19 +1207,19 @@ msgctxt "@info:tooltip for column Value"
 msgid "The value of the bytes for the datatype"
 msgstr "Tavujen arvo tietotyypissä"
 
-#: controllers/view/poddecoder/podtableview.cpp:91
+#: controllers/view/poddecoder/podtableview.cpp:90
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte order to use for decoding the bytes."
 msgstr "Tavujärjestys tavuja dekoodattaessa"
 
-#: controllers/view/poddecoder/podtableview.cpp:95
+#: controllers/view/poddecoder/podtableview.cpp:94
 #, kde-format
 msgctxt "@option:check"
 msgid "Unsigned as hexadecimal:"
 msgstr "Etumerkittömät heksadesimaalisena:"
 
-#: controllers/view/poddecoder/podtableview.cpp:104
+#: controllers/view/poddecoder/podtableview.cpp:103
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1229,7 +1229,7 @@ msgstr ""
 "Määrää, näytetäänkö etumerkittömien kokonaislukutyyppien arvot "
 "heksadesimaalisena desimaaliesityksen sijaan"
 
-#: controllers/view/poddecoder/podtableview.cpp:135
+#: controllers/view/poddecoder/podtableview.cpp:134
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1239,19 +1239,19 @@ msgstr ""
 "Uusi arvo tarvitsee <emphasis>vähemmän</emphasis> tavuja (%1 %2:n sijaan)."
 "<nl/>Pidetäänkö käyttämättömät tavut vai poistetaanko ne?"
 
-#: controllers/view/poddecoder/podtableview.cpp:140
+#: controllers/view/poddecoder/podtableview.cpp:139
 #, kde-format
 msgctxt "@action:button keep the unused bytes"
 msgid "&Keep"
 msgstr "&Pidä"
 
-#: controllers/view/poddecoder/podtableview.cpp:143
+#: controllers/view/poddecoder/podtableview.cpp:142
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Keep the unused bytes with their old values."
 msgstr "Pidä käyttämättömät tavut alkuperäisissä arvoissaan"
 
-#: controllers/view/poddecoder/podtableview.cpp:152
+#: controllers/view/poddecoder/podtableview.cpp:151
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1261,9 +1261,18 @@ msgstr ""
 "Uusi arvo tarvitsee <emphasis>enemmän</emphasis> tavuja (%1 %2:n sijaan).<nl/"
 ">Korvataanko seuraavat tavut vai lisätäänkö tarpeen mukaan uusia?"
 
-#: controllers/view/poddecoder/podtableview.cpp:243
-#: controllers/view/selectrange/selectrangeview.cpp:124
+#: controllers/view/poddecoder/podtableview.cpp:240
 #: controllers/view/structures/structureview.cpp:338
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "&Edit..."
+msgctxt "@action:inmenu"
+msgid "Edit"
+msgstr "&Muokkaa…"
+
+#: controllers/view/poddecoder/podtableview.cpp:254
+#: controllers/view/selectrange/selectrangeview.cpp:124
+#: controllers/view/structures/structureview.cpp:353
 #, kde-format
 msgctxt "@action:button"
 msgid "&Select"
@@ -1605,13 +1614,13 @@ msgstr ""
 "Painaessasi tästä kohdistin joko siirretään antamaasi poikkeumakohtaan tai "
 "sitä siirretään poikkeuman verran haluamaasi suuntaan."
 
-#: controllers/view/stringsextract/containedstringtablemodel.cpp:97
+#: controllers/view/stringsextract/containedstringtablemodel.cpp:98
 #, kde-format
 msgctxt "@title:column offset of the extracted string"
 msgid "Offset"
 msgstr "Poikkeuma"
 
-#: controllers/view/stringsextract/containedstringtablemodel.cpp:98
+#: controllers/view/stringsextract/containedstringtablemodel.cpp:99
 #, kde-format
 msgctxt "@title:column string extracted from the byte array"
 msgid "String"
@@ -1673,13 +1682,13 @@ msgstr "Suodatin:"
 msgid "Enter a term to limit the list."
 msgstr "Rajaa listaa kirjoittamalla hakusana"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:139
+#: controllers/view/stringsextract/stringsextractview.cpp:141
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected strings to the clipboard."
 msgstr "Kopioi valitut merkkijonot leikepöydälle"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:141
+#: controllers/view/stringsextract/stringsextractview.cpp:143
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1689,18 +1698,18 @@ msgstr ""
 "Painaessasi tästä kaikki listalta valitut merkkijonot kopioidaan "
 "leikepöydälle."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:150
+#: controllers/view/stringsextract/stringsextractview.cpp:152
 #, kde-format
 msgid "&Show"
 msgstr "&Näytä"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:153
+#: controllers/view/stringsextract/stringsextractview.cpp:155
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Shows the selected string in the view."
 msgstr "Näytä valittu merkkijono näkymässä"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:155
+#: controllers/view/stringsextract/stringsextractview.cpp:157
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -2401,59 +2410,59 @@ msgctxt "size of a data structure"
 msgid "Size"
 msgstr "Koko"
 
-#: controllers/view/structures/structureview.cpp:95
+#: controllers/view/structures/structureview.cpp:96
 #, kde-format
 msgctxt "@action:button"
 msgid "Validate"
 msgstr "Validoi"
 
-#: controllers/view/structures/structureview.cpp:97
+#: controllers/view/structures/structureview.cpp:98
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Validate all structures."
 msgstr "Tarkasta kaikkien rakenteiden kelvollisuus"
 
-#: controllers/view/structures/structureview.cpp:119
+#: controllers/view/structures/structureview.cpp:120
 #, kde-format
 msgctxt "@action:button"
 msgid "Script console"
 msgstr "Skriptikonsoli"
 
-#: controllers/view/structures/structureview.cpp:121
+#: controllers/view/structures/structureview.cpp:122
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open script console."
 msgstr "Avaa skriptikonsoli"
 
-#: controllers/view/structures/structureview.cpp:125
+#: controllers/view/structures/structureview.cpp:126
 #, kde-format
 msgctxt "@action:button"
 msgid "Settings"
 msgstr "Asetukset"
 
-#: controllers/view/structures/structureview.cpp:127
+#: controllers/view/structures/structureview.cpp:128
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open settings."
 msgstr "Avaa asetukset"
 
-#: controllers/view/structures/structureview.cpp:158
+#: controllers/view/structures/structureview.cpp:159
 #, kde-format
 msgid "Value Display"
 msgstr "Arvojen esitystapa"
 
-#: controllers/view/structures/structureview.cpp:170
+#: controllers/view/structures/structureview.cpp:171
 #, kde-format
 msgid "Structures management"
 msgstr "Rakenteiden hallinta"
 
-#: controllers/view/structures/structureview.cpp:257
+#: controllers/view/structures/structureview.cpp:258
 #, kde-format
 msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Unlock"
 msgstr "Avaa lukitus"
 
-#: controllers/view/structures/structureview.cpp:259
+#: controllers/view/structures/structureview.cpp:260
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -2463,19 +2472,19 @@ msgstr ""
 "Avaa valitun rakenteen lukitus eli aloituspoikkeuma on aina kohdistimen "
 "nykyinen sijainti"
 
-#: controllers/view/structures/structureview.cpp:264
+#: controllers/view/structures/structureview.cpp:265
 #, kde-format
 msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Lock"
 msgstr "Lukitse"
 
-#: controllers/view/structures/structureview.cpp:266
+#: controllers/view/structures/structureview.cpp:267
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Lock selected structure to current offset."
 msgstr "Lukitse valittu rakenne nykyiseen poikkeumaan"
 
-#: controllers/view/structures/structureview.cpp:295
+#: controllers/view/structures/structureview.cpp:300
 #, kde-format
 msgctxt "@title:window"
 msgid "Structures Script Console"

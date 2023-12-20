@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-18 00:44+0000\n"
+"POT-Creation-Date: 2023-12-20 00:43+0000\n"
 "PO-Revision-Date: 2023-12-17 11:29\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -693,7 +693,7 @@ msgstr ""
 "息。"
 
 #: controllers/view/info/infoview.cpp:118
-#: controllers/view/stringsextract/stringsextractview.cpp:136
+#: controllers/view/stringsextract/stringsextractview.cpp:138
 #, kde-format
 msgid "C&opy"
 msgstr "复制(&O)"
@@ -802,14 +802,14 @@ msgid "Modular sum 8-bit"
 msgstr "8 位 Modular"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:28
-#: controllers/view/poddecoder/podtableview.cpp:84
+#: controllers/view/poddecoder/podtableview.cpp:83
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Big-endian"
 msgstr "高位优先"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:29
-#: controllers/view/poddecoder/podtableview.cpp:85
+#: controllers/view/poddecoder/podtableview.cpp:84
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Little-endian"
@@ -1180,19 +1180,19 @@ msgctxt "@info:tooltip for column Value"
 msgid "The value of the bytes for the datatype"
 msgstr "数据类型的字节值"
 
-#: controllers/view/poddecoder/podtableview.cpp:91
+#: controllers/view/poddecoder/podtableview.cpp:90
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte order to use for decoding the bytes."
 msgstr "用于字节解码的字节顺序。"
 
-#: controllers/view/poddecoder/podtableview.cpp:95
+#: controllers/view/poddecoder/podtableview.cpp:94
 #, kde-format
 msgctxt "@option:check"
 msgid "Unsigned as hexadecimal:"
 msgstr "将无符号数显示为十六进制数："
 
-#: controllers/view/poddecoder/podtableview.cpp:104
+#: controllers/view/poddecoder/podtableview.cpp:103
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1200,7 +1200,7 @@ msgid ""
 "hexadecimal instead of as decimal."
 msgstr "设定是否将无符号整型值按十六进制显示，而非按十进制显示。"
 
-#: controllers/view/poddecoder/podtableview.cpp:135
+#: controllers/view/poddecoder/podtableview.cpp:134
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1210,19 +1210,19 @@ msgstr ""
 "新的值需要<emphasis>更少</emphasis>的字节数(从 %2 缩小为 %1)。<nl/>是保留未使"
 "用的字节还是移除他们？"
 
-#: controllers/view/poddecoder/podtableview.cpp:140
+#: controllers/view/poddecoder/podtableview.cpp:139
 #, kde-format
 msgctxt "@action:button keep the unused bytes"
 msgid "&Keep"
 msgstr "保留(&K)"
 
-#: controllers/view/poddecoder/podtableview.cpp:143
+#: controllers/view/poddecoder/podtableview.cpp:142
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Keep the unused bytes with their old values."
 msgstr "保留未使用的字节为其原值。"
 
-#: controllers/view/poddecoder/podtableview.cpp:152
+#: controllers/view/poddecoder/podtableview.cpp:151
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1232,9 +1232,18 @@ msgstr ""
 "新的值需要<emphasis>更多</emphasis>的字节数(从 %2 增加到 %1)。<nl/>要覆盖后面"
 "的字节还是按需插入新字节？"
 
-#: controllers/view/poddecoder/podtableview.cpp:243
-#: controllers/view/selectrange/selectrangeview.cpp:124
+#: controllers/view/poddecoder/podtableview.cpp:240
 #: controllers/view/structures/structureview.cpp:338
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "&Edit..."
+msgctxt "@action:inmenu"
+msgid "Edit"
+msgstr "编辑(&E)..."
+
+#: controllers/view/poddecoder/podtableview.cpp:254
+#: controllers/view/selectrange/selectrangeview.cpp:124
+#: controllers/view/structures/structureview.cpp:353
 #, kde-format
 msgctxt "@action:button"
 msgid "&Select"
@@ -1574,13 +1583,13 @@ msgid ""
 msgstr ""
 "如果您按下<interface>选择</interface>按钮，光标会移动到文档中指定的偏移点处。"
 
-#: controllers/view/stringsextract/containedstringtablemodel.cpp:97
+#: controllers/view/stringsextract/containedstringtablemodel.cpp:98
 #, kde-format
 msgctxt "@title:column offset of the extracted string"
 msgid "Offset"
 msgstr "偏移量"
 
-#: controllers/view/stringsextract/containedstringtablemodel.cpp:98
+#: controllers/view/stringsextract/containedstringtablemodel.cpp:99
 #, kde-format
 msgctxt "@title:column string extracted from the byte array"
 msgid "String"
@@ -1641,13 +1650,13 @@ msgstr "过滤："
 msgid "Enter a term to limit the list."
 msgstr "输入列表限制条件。"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:139
+#: controllers/view/stringsextract/stringsextractview.cpp:141
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected strings to the clipboard."
 msgstr "将所选字符串复制到剪贴板。"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:141
+#: controllers/view/stringsextract/stringsextractview.cpp:143
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1657,18 +1666,18 @@ msgstr ""
 "如果您按下<interface>复制</interface>按钮，您选中的所有字符串将会被复制到剪贴"
 "板。"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:150
+#: controllers/view/stringsextract/stringsextractview.cpp:152
 #, kde-format
 msgid "&Show"
 msgstr "显示(&S)"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:153
+#: controllers/view/stringsextract/stringsextractview.cpp:155
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Shows the selected string in the view."
 msgstr "在视图中显示所选字符串。"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:155
+#: controllers/view/stringsextract/stringsextractview.cpp:157
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -2358,59 +2367,59 @@ msgctxt "size of a data structure"
 msgid "Size"
 msgstr "大小"
 
-#: controllers/view/structures/structureview.cpp:95
+#: controllers/view/structures/structureview.cpp:96
 #, kde-format
 msgctxt "@action:button"
 msgid "Validate"
 msgstr "验证"
 
-#: controllers/view/structures/structureview.cpp:97
+#: controllers/view/structures/structureview.cpp:98
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Validate all structures."
 msgstr "校验全部结构。"
 
-#: controllers/view/structures/structureview.cpp:119
+#: controllers/view/structures/structureview.cpp:120
 #, kde-format
 msgctxt "@action:button"
 msgid "Script console"
 msgstr "脚本控制台"
 
-#: controllers/view/structures/structureview.cpp:121
+#: controllers/view/structures/structureview.cpp:122
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open script console."
 msgstr "打开脚本控制台。"
 
-#: controllers/view/structures/structureview.cpp:125
+#: controllers/view/structures/structureview.cpp:126
 #, kde-format
 msgctxt "@action:button"
 msgid "Settings"
 msgstr "设置"
 
-#: controllers/view/structures/structureview.cpp:127
+#: controllers/view/structures/structureview.cpp:128
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open settings."
 msgstr "打开设置。"
 
-#: controllers/view/structures/structureview.cpp:158
+#: controllers/view/structures/structureview.cpp:159
 #, kde-format
 msgid "Value Display"
 msgstr "数值显示"
 
-#: controllers/view/structures/structureview.cpp:170
+#: controllers/view/structures/structureview.cpp:171
 #, kde-format
 msgid "Structures management"
 msgstr "结构管理"
 
-#: controllers/view/structures/structureview.cpp:257
+#: controllers/view/structures/structureview.cpp:258
 #, kde-format
 msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Unlock"
 msgstr "解除锁定"
 
-#: controllers/view/structures/structureview.cpp:259
+#: controllers/view/structures/structureview.cpp:260
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -2418,19 +2427,19 @@ msgid ""
 "current cursor position."
 msgstr "解锁所选结构块，初始偏移通常会被设到当前光标位置处。"
 
-#: controllers/view/structures/structureview.cpp:264
+#: controllers/view/structures/structureview.cpp:265
 #, kde-format
 msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Lock"
 msgstr "锁定"
 
-#: controllers/view/structures/structureview.cpp:266
+#: controllers/view/structures/structureview.cpp:267
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Lock selected structure to current offset."
 msgstr "锁定所选结构块到当前偏移处。"
 
-#: controllers/view/structures/structureview.cpp:295
+#: controllers/view/structures/structureview.cpp:300
 #, kde-format
 msgctxt "@title:window"
 msgid "Structures Script Console"
