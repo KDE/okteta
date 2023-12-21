@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-20 00:43+0000\n"
-"PO-Revision-Date: 2023-12-04 11:55+0100\n"
+"PO-Revision-Date: 2023-12-20 10:24+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -19,13 +19,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.3\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr ""
-"Rinse de Vries - 2008,Kristof Bal - 2008-2009,Freek de Kruijf - 2022 t/m 2023"
+"Rinse de Vries - 2008,Kristof Bal - 2008-2009,Freek de Kruijf - 2022 t/m 2024"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
@@ -1286,12 +1286,10 @@ msgstr ""
 
 #: controllers/view/poddecoder/podtableview.cpp:240
 #: controllers/view/structures/structureview.cpp:338
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Edit..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit"
-msgstr "B&ewerken..."
+msgstr "Bewerken"
 
 #: controllers/view/poddecoder/podtableview.cpp:254
 #: controllers/view/selectrange/selectrangeview.cpp:124

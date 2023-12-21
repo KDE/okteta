@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: kdesdk-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-20 00:43+0000\n"
-"PO-Revision-Date: 2023-12-04 20:06+0300\n"
+"PO-Revision-Date: 2023-12-20 12:40+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.11.70\n"
+"X-Generator: Lokalize 24.01.85\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -443,7 +443,7 @@ msgstr "D&önüştür"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Converts the bytes in the selected range."
-msgstr "Baytları seçilen aralıkta dönüştürür"
+msgstr "Seçili erimdeki baytları dönüştürür."
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:162
 #, kde-kuit-format
@@ -453,15 +453,15 @@ msgid ""
 "selected range will be replaced by bytes which represent the same character "
 "in the selected target charset."
 msgstr ""
-"Eğer <interface>Dönüştür</interface> düğmesine basarsanız seçilen aralıktaki "
-"tüm baytlar seçilen hedef karakter kümesinde aynı karakteri temsil eden "
+"Eğer <interface>Dönüştür</interface> düğmesine basarsanız seçili erimdeki "
+"tüm baytlar seçili hedef karakter kümesinde aynı karakteri temsil eden "
 "baytlar ile değiştirilecektir."
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:200
 #, kde-format
 msgctxt "@info"
 msgid "No bytes converted."
-msgstr "Hiçbir bayt dönüştürülmedi."
+msgstr "Dönüştürülen bayt yok."
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:201
 #, kde-format
@@ -475,7 +475,7 @@ msgstr[1] "%1 bayt dönüştürüldü."
 #, kde-format
 msgctxt "@info"
 msgid "No bytes substituted."
-msgstr "Hiçbir bayt değiştirilmedi."
+msgstr "Değiştirilen bayt yok."
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:212
 #, kde-format
@@ -499,7 +499,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window of the tool to calculate checksums"
 msgid "Checksum"
-msgstr "Sağlama"
+msgstr "Sağlama Toplamı"
 
 #: controllers/view/checksum/checksumview.cpp:49
 #, kde-format
@@ -511,7 +511,7 @@ msgstr "Algoritma:"
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Select the algorithm to use for the checksum."
-msgstr "Checksum için kullanılacak algoritmayı seçin."
+msgstr "Sağlama toplamı için kullanılacak algoritmayı seçin."
 
 #: controllers/view/checksum/checksumview.cpp:83
 #, kde-format
@@ -523,7 +523,7 @@ msgstr "&Hesapla"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Calculate the checksum for the bytes in the selected range."
-msgstr "Seçilen aralıktaki baytlar için checksum hesaplar."
+msgstr "Seçili erimdeki baytlar için sağlama toplamını hesaplar."
 
 #: controllers/view/checksum/checksumview.cpp:88
 #, kde-kuit-format
@@ -534,7 +534,7 @@ msgid ""
 "the set minimum length."
 msgstr ""
 "Eğer <interface>Hesapla</interface> düğmesine basarsanız liste, seçili "
-"aralıkta bulunan ve en kısa uzunluğa sahip dizileri içerecek şekilde "
+"erimde bulunan ve en kısa uzunluğa sahip dizileri içerecek şekilde "
 "güncellenecektir."
 
 #: controllers/view/filter/filtertool.cpp:62
@@ -572,7 +572,7 @@ msgstr "S&üz"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Executes the filter for the bytes in the selected range."
-msgstr "Seçili aralıktaki baytlar için süzgeç çalıştırır."
+msgstr "Seçili erimdeki baytlar için süzgeci yürütür."
 
 #: controllers/view/filter/filterview.cpp:90
 #, kde-kuit-format
@@ -583,7 +583,7 @@ msgid ""
 "given options."
 msgstr ""
 "Eğer <interface>Süzgeç</interface> düğmesine basarsanız yukarıda seçtiğiniz "
-"işlem seçili aralıktaki baytlar için verdiğiniz seçeneklerle çalıştırılır."
+"işlem seçili erimdeki baytlar için verdiğiniz seçeneklerle çalıştırılır."
 
 #: controllers/view/gotooffset/gotooffsetcontroller.cpp:32
 #, kde-format
@@ -698,14 +698,14 @@ msgstr "İstatistiğin temel aldığı bayt sayısı."
 #, kde-format
 msgctxt "@action:button build the statistic of the byte frequency"
 msgid "&Build"
-msgstr "&Derle"
+msgstr "&Yap"
 
 #: controllers/view/info/infoview.cpp:69
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "Builds the byte frequency statistic for the bytes in the selected range."
-msgstr "Seçilen aralıktaki baytlar için bayt frekans istatistiği üretir."
+msgstr "Seçili erimdeki baytlar için bayt frekans istatistiğini yapar."
 
 #: controllers/view/info/infoview.cpp:71
 #, kde-kuit-format
@@ -714,8 +714,8 @@ msgid ""
 "If you press the <interface>Build</interface> button, the byte frequency "
 "statistic is built for the bytes in the selected range."
 msgstr ""
-"Eğer <interface>İnşa et</interface> düğmesine basarsanız bayt sıklığı "
-"seçilen aralıktaki baytlar için bayt sıklık istatistiği oluşturulacaktır."
+"Eğer <interface>Yap</interface> düğmesine basarsanız bayt sıklığı seçilen "
+"erimdeki baytlar için bayt sıklık istatistiği yapılır."
 
 #: controllers/view/info/infoview.cpp:118
 #: controllers/view/stringsextract/stringsextractview.cpp:138
@@ -1155,7 +1155,7 @@ msgstr "Geriye doğru değiştir."
 #, kde-format
 msgctxt "@option:check"
 msgid "&Selected bytes"
-msgstr "&Seçilen baytlar"
+msgstr "&Seçili baytlar"
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:118
 #, kde-format
@@ -1167,7 +1167,7 @@ msgstr "Yalnızca seçili olan alanda arama yap."
 #, kde-format
 msgctxt "@option:check set the view into overwrite mode"
 msgid "Overwr&ite Mode"
-msgstr "Ü&zerine yazma kipi"
+msgstr "Ü&zerine Yazma Kipi"
 
 #: controllers/view/overwritemode/overwritemodecontroller.cpp:29
 #, kde-format
@@ -1226,7 +1226,7 @@ msgstr "Baytları çözmek için kullanılacak bayt sırası"
 #, kde-format
 msgctxt "@option:check"
 msgid "Unsigned as hexadecimal:"
-msgstr "İşaretsizleri onaltılık göster:"
+msgstr "Onaltılık olarak imzasız:"
 
 #: controllers/view/poddecoder/podtableview.cpp:103
 #, kde-format
@@ -1235,7 +1235,7 @@ msgid ""
 "Sets whether the values of the unsigned integer types are shown as "
 "hexadecimal instead of as decimal."
 msgstr ""
-"İşaretsiz tam sayı tiplerinin değerlerinin ondalık yerine onaltılık sistemde "
+"İmzasız tamsayı türlerinin değerlerinin ondalık yerine onaltılı olarak "
 "gösterilip gösterilmeyeceğini ayarlar."
 
 #: controllers/view/poddecoder/podtableview.cpp:134
@@ -1273,12 +1273,10 @@ msgstr ""
 
 #: controllers/view/poddecoder/podtableview.cpp:240
 #: controllers/view/structures/structureview.cpp:338
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Edit..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit"
-msgstr "Dü&zenle..."
+msgstr "Düzenle"
 
 #: controllers/view/poddecoder/podtableview.cpp:254
 #: controllers/view/selectrange/selectrangeview.cpp:124
@@ -1585,7 +1583,7 @@ msgstr "Ara"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Select Range..."
-msgstr "&Aralığı Seç..."
+msgstr "&Erimi Seç..."
 
 #: controllers/view/selectrange/selectrangetool.cpp:61
 #, kde-format
@@ -1597,25 +1595,25 @@ msgstr "Seç"
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Start offset:"
-msgstr "Başlama konumu:"
+msgstr "Başlangıç ofseti:"
 
 #: controllers/view/selectrange/selectrangeview.cpp:80
 #, kde-format
 msgctxt "@label:listbox"
 msgid "End offset:"
-msgstr "Bitiş konumu:"
+msgstr "Bitiş ofseti:"
 
 #: controllers/view/selectrange/selectrangeview.cpp:106
 #, kde-format
 msgctxt "@option:check"
 msgid "End relative"
-msgstr "Göreli bitiş:"
+msgstr "Göreceli bitiş"
 
 #: controllers/view/selectrange/selectrangeview.cpp:127
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the range."
-msgstr "Aralığı seç."
+msgstr "Erimi seçin."
 
 #: controllers/view/selectrange/selectrangeview.cpp:129
 #, kde-kuit-format
@@ -1670,7 +1668,7 @@ msgctxt "@info:tooltip"
 msgid ""
 "Finds the strings contained in the selected range and lists them in the view "
 "below."
-msgstr "Seçili aralıkta bulunan dizileri bulur ve aşağıda listeler."
+msgstr "Seçili erimde bulunan dizileri bulur ve aşağıda listeler."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:71
 #, kde-kuit-format
@@ -1680,8 +1678,8 @@ msgid ""
 "is searched for all strings which have the set minimum length. This strings "
 "found will be listed in the view below."
 msgstr ""
-"Eğer <interface>Çıkar</interface> düğmesine basarsanız seçili aralık en kısa "
-"uzunluğa sahip tüm diziler aranır. Bulunan diziler aşağıda listelenir."
+"Eğer <interface>Çıkar</interface> düğmesine basarsanız seçili erimdeki en "
+"kısa uzunluğa sahip tüm diziler aranır. Bulunan diziler aşağıda listelenir."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:81
 #, kde-format
@@ -1719,7 +1717,7 @@ msgstr "&Göster"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Shows the selected string in the view."
-msgstr "Görünümde seçilen diziyi gösterir."
+msgstr "Görünümde seçili diziyi gösterir."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:157
 #, kde-kuit-format
@@ -1728,7 +1726,7 @@ msgid ""
 "If you press the <interface>Go to</interface> button, the string which was "
 "last selected is marked and shown in the view."
 msgstr ""
-"Eğer <interface>Atla</interface> düğmesine basarsanız son seçilen dizi "
+"Eğer <interface>Atla</interface> düğmesine basarsanız son seçili dizi "
 "işaretlenir ve görüntülenir."
 
 #: controllers/view/structures/datatypes/array/complexarraydata.cpp:98
@@ -2381,7 +2379,7 @@ msgstr "Yerel-bağımlı kayan-noktalı biçimleme kullan"
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:106
 #, kde-format
 msgid "Floating-point precision:"
-msgstr "Kayan-nokta hassasiyeti:"
+msgstr "Kayan nokta duyarlılığı:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowCharNumericalValue)
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:119
@@ -2531,13 +2529,13 @@ msgstr "Grup başına Bayt:"
 #, kde-format
 msgctxt "@label:spinbox number of bytes which are shown per line"
 msgid "Bytes per Line:"
-msgstr "Satır başına Bayt:"
+msgstr "Satır başına bayt:"
 
 #: controllers/view/viewconfig/bytesperlinedialog.cpp:49
 #, kde-format
 msgctxt "@title:window"
 msgid "Bytes per Line"
-msgstr "Satır başına Bayt:"
+msgstr "Satır başına bayt:"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:35
 #, kde-format
@@ -2610,19 +2608,19 @@ msgstr "&Yazdırılamaz Karakterleri Göster"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Set Bytes per Line..."
-msgstr "Satır başına Bayt Miktarını Ayarla:"
+msgstr "Satır Başına Bayt Sayısını Ayarla..."
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:83
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Set Bytes per Group..."
-msgstr "Grup başına Bayt Miktarını Ayarla:"
+msgstr "Grup Başına Bayt Sayısını Ayarla..."
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:89
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Dynamic Layout"
-msgstr "Devingen &Düzen"
+msgstr "Devingen &Yerleşim"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:93
 #, kde-format
@@ -2636,7 +2634,7 @@ msgctxt ""
 "@item:inmenu  The layout will adapt to the size, but only with complete "
 "groups of bytes."
 msgid "&Wrap Only Complete Byte Groups"
-msgstr "Yalnızca Tam Bayt Gruplarını &Sarmala"
+msgstr "Yalnızca Tam Bayt Gruplarını &Kaydır"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:97
 #, kde-format
@@ -2807,7 +2805,7 @@ msgstr "Satırlar"
 #: controllers/view/viewprofiles/viewprofileedit.cpp:96
 #, kde-format
 msgid "Layout"
-msgstr "Düzen"
+msgstr "Yerleşim"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:102
 #, kde-format
@@ -2821,7 +2819,7 @@ msgctxt ""
 "@item:inmenu  The layout will adapt to the size, but only with complete "
 "groups of bytes."
 msgid "Wrap Only Complete Byte Groups"
-msgstr "Yalnızca Tam Bayt Gruplarını Sarmala"
+msgstr "Yalnızca Tam Bayt Gruplarını Kaydır"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:106
 #, kde-format
@@ -2888,7 +2886,7 @@ msgstr "Karakterler"
 #: controllers/view/viewprofiles/viewprofileedit.cpp:166
 #, kde-format
 msgid "Char for non-printable bytes:"
-msgstr "Yazdırılabilir-olmayan baytlar için karakter:"
+msgstr "Yazdırılabilir olmayan baytlar için karakter:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:171
 #, kde-format
