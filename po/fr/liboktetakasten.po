@@ -9,15 +9,15 @@
 # Simon Depiets <sdepiets@gmail.com>, 2018, 2019.
 # Vincent Pinon <vpinon@kde.org>, 2019.
 # Johnny Jazeix <jazeix@gmail.com>, 2020.
-# SPDX-FileCopyrightText: 2021, 2022, 2023 Xavier Besnard <xavier.besnard@neuf.fr>
-# Xavier BESNARD <xavier.besnard@neuf.fr>, 2023.
+# SPDX-FileCopyrightText: 2021, 2022, 2023 Xavier Besnard <xavier.besnard@kde.org>
+# Xavier Besnard <xavier.besnard@kde.org>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-20 00:43+0000\n"
-"PO-Revision-Date: 2023-12-20 09:48+0100\n"
+"PO-Revision-Date: 2023-12-21 08:56+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -1314,12 +1314,10 @@ msgstr ""
 
 #: controllers/view/poddecoder/podtableview.cpp:240
 #: controllers/view/structures/structureview.cpp:338
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Edit..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit"
-msgstr "&Modifier..."
+msgstr "Modifier"
 
 #: controllers/view/poddecoder/podtableview.cpp:254
 #: controllers/view/selectrange/selectrangeview.cpp:124
