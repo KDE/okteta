@@ -4,7 +4,7 @@
 # Bruno Patri <bruno.patri@gmail.com>, 2007, 2008, 2009.
 # Xavier Guerrin <xavier.guerrin@gmail.com>, 2009, 2013.
 # Simon Depiets <sdepiets@gmail.com>, 2017, 2019.
-# Xavier Besnard <xavier.besnard@neuf.fr>, 2020, 2021.
+# Xavier Besnard <xavier.besnard@kde.org>, 2020, 2021.
 #
 msgid ""
 msgstr ""
