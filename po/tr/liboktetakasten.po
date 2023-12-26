@@ -7,13 +7,13 @@
 # obsoleteman <tulliana@gmail.com>, 2008-2009.
 # Volkan Gezer <volkangezer@gmail.com>, 2013-2014, 2017.
 # Kaan Ozdincer <kaanozdincer@gmail.com>, 2014.
-# Emir SARI <emir_sari@icloud.com>, 2022, 2023.
+# SPDX-FileCopyrightText: 2022, 2023 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdesdk-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-20 00:43+0000\n"
-"PO-Revision-Date: 2023-12-20 12:40+0300\n"
+"PO-Revision-Date: 2023-12-25 13:45+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -296,7 +296,7 @@ msgstr[1] "%1 bayt eklendi"
 #, kde-format
 msgctxt "@label:spinbox number of bytes to insert"
 msgid "Number (bytes):"
-msgstr "Sayı (byte cinsinden):"
+msgstr "Sayı (bayt türünden):"
 
 #: controllers/view/bytetable/bytetableview.cpp:82
 #, kde-format
@@ -948,7 +948,7 @@ msgstr "Keccak-512"
 #, kde-format
 msgctxt "name of the filter; it does a logic AND operation"
 msgid "operand AND data"
-msgstr "operand VE veri"
+msgstr "işlenen AND veri"
 
 #: controllers/view/libbytearrayfilter/filter/invertbytearrayfilter.cpp:19
 #, kde-format
@@ -962,19 +962,19 @@ msgstr "INVERT veri"
 #, kde-format
 msgctxt "@label:textbox operand to the arithmetic filter function"
 msgid "Operand:"
-msgstr "Operand:"
+msgstr "İşlenen:"
 
 #: controllers/view/libbytearrayfilter/filter/operandbytearrayfilterparametersetedit.cpp:41
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The operand to do the operation with."
-msgstr "İşlemin yapılacağı operand."
+msgstr "İşlemin yapılacağı işlenen."
 
 #: controllers/view/libbytearrayfilter/filter/operandbytearrayfilterparametersetedit.cpp:44
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Enter an operand, or select a previous operand from the list."
-msgstr "Bir operand girin veya listeden eski bir operand seçin."
+msgstr "Bir işlenen girin veya listeden eski bir işleneni seçin."
 
 #: controllers/view/libbytearrayfilter/filter/operandbytearrayfilterparametersetedit.cpp:52
 #, kde-format
@@ -994,13 +994,13 @@ msgstr "İşlemin, verinin başı yerine sonuna hizalanacağını ayarlar."
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "If set, the operation will be aligned to the end of the data."
-msgstr "Seçiliyse işlem verinin sonuna hizalanacaktır."
+msgstr "Ayarlıysa işlem verinin sonuna hizalanacaktır."
 
 #: controllers/view/libbytearrayfilter/filter/orbytearrayfilter.cpp:22
 #, kde-format
 msgctxt "name of the filter; it does a logic OR operation"
 msgid "operand OR data"
-msgstr "operand VEYA veri"
+msgstr "işlenen OR veri"
 
 #: controllers/view/libbytearrayfilter/filter/reversebytearrayfilter.cpp:22
 #, kde-format
@@ -1034,7 +1034,7 @@ msgstr "DÖNDÜR veri"
 #, kde-format
 msgctxt "@label:spinbox number of bytes the movement is done within"
 msgid "&Group size (bytes):"
-msgstr "&Grup boyutu (byte cinsinden):"
+msgstr "&Grup boyutu (bayt türünden):"
 
 #: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilterparametersetedit.cpp:39
 #, kde-format
@@ -1053,7 +1053,7 @@ msgstr ""
 #, kde-format
 msgctxt "@label:spinbox width (in number of bits) the bits are moved"
 msgid "S&hift width (bits):"
-msgstr "&Kaydırma genişliği (byte cinsinden):"
+msgstr "&Kaydırma genişliği (bayt türünden):"
 
 #: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilterparametersetedit.cpp:60
 #, kde-format
@@ -1085,7 +1085,7 @@ msgstr "veri KAYDIR"
 #, kde-format
 msgctxt "name of the filter; it does a logic XOR operation"
 msgid "operand XOR data"
-msgstr "operand XOR veri"
+msgstr "işlenen XOR veri"
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:72
 #: controllers/view/search/searchcontroller.cpp:111
@@ -1752,7 +1752,7 @@ msgstr "%1 %2"
 #, kde-format
 msgctxt "invalid value (End of file reached)"
 msgid "<EOF reached>"
-msgstr "<EOF ulaşıldı>"
+msgstr "<dosyanın sonuna ulaşıldı>"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:228
 #, kde-format
@@ -1868,7 +1868,7 @@ msgctxt ""
 "Displayed in the type column. first comes the name of the enum, then the "
 "underlying type (e.g. uint32)"
 msgid "flag %1 (%2)"
-msgstr "flag %1 (%2)"
+msgstr "bayrak %1 (%2)"
 
 #: controllers/view/structures/datatypes/primitive/pointerdatainformation.cpp:115
 #, kde-format
@@ -3183,13 +3183,13 @@ msgstr "Rastgele veri eklendi."
 #, kde-format
 msgctxt "@label:spinbox size of the bytearray to generate"
 msgid "&Size (bytes):"
-msgstr "&Boyut (byte cinsinden):"
+msgstr "&Boyut (bayt türünden):"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatageneratorconfigeditor.cpp:41
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Enter the size of the bytearray to generate."
-msgstr "Oluşturulacak dizilişin boyutunu girin."
+msgstr "Oluşturulacak bayt dizilişinin boyutunu girin."
 
 #: gui/io/generator/randomdata/bytearrayrandomdatageneratorconfigeditor.cpp:51
 #, kde-format
