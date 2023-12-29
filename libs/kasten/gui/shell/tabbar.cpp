@@ -19,6 +19,7 @@ TabBar::TabBar(QWidget* parent)
     : QTabBar(parent)
 {
     setAcceptDrops(true);
+    setChangeCurrentOnDrag(true);
 
     // catch non-LMB double clicks
     installEventFilter(this);
@@ -56,19 +57,29 @@ void TabBar::dragEnterEvent(QDragEnterEvent* event)
     // 'accept' accordingly.
     emit testCanDecode(event, accept);
 
-    event->setAccepted(accept);
+    if (accept) {
+        event->setAccepted(true);
+        return;
+    }
+
+    QTabBar::dragEnterEvent(event);
 }
 
 void TabBar::dragMoveEvent(QDragMoveEvent* event)
 {
-    bool accept = false;
     if (tabAt(event->pos()) == -1) {
+        bool accept = false;
         // The receivers of the testCanDecode() signal has to adjust
         // 'accept' accordingly.
         emit testCanDecode(event, accept);
+
+        if (accept) {
+            event->setAccepted(true);
+            return;
+        }
     }
 
-    event->setAccepted(accept);
+    QTabBar::dragMoveEvent(event);
 }
 
 void TabBar::dropEvent(QDropEvent* event)
