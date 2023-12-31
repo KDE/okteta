@@ -242,6 +242,7 @@ protected:
     bool mHasBeenValidated : 1;
     bool mHasBeenUpdated : 1;
     bool mWasAbleToRead : 1;
+    bool mWasAbleToReadBefore : 1;
     DataInformationEndianess mByteOrder = DataInformationEndianess::EndianessInherit;
     mutable ScriptLogger::LogLevel mLoggedData : 2; // mutable is ugly but i guess it is the best solution
 };

@@ -57,14 +57,13 @@ qint64 AbstractBitfieldDataInformation::readData(const Okteta::AbstractByteArray
         mValue = 0;
         return -1;
     }
-    bool wasValid = mWasAbleToRead;
     AllPrimitiveTypes oldVal(mValue);
     AllPrimitiveTypes newVal(mValue);
 
     mWasAbleToRead = newVal.readBits(size(), input, effectiveByteOrder(), address, bitsRemaining,
                                      bitOffset);
 
-    if (oldVal != newVal || wasValid != mWasAbleToRead) {
+    if (oldVal != newVal || mWasAbleToReadBefore != mWasAbleToRead) {
         topLevelDataInformation()->setChildDataChanged();
         mValue = newVal;
     }

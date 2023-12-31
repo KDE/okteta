@@ -28,6 +28,7 @@ DataInformation::DataInformation(const QString& name, DataInformationBase* paren
     , mHasBeenValidated(false)
     , mHasBeenUpdated(false)
     , mWasAbleToRead(false)
+    , mWasAbleToReadBefore(false)
     , mLoggedData(ScriptLogger::LogInvalid)
 {
 }
@@ -40,6 +41,7 @@ DataInformation::DataInformation(const DataInformation& d)
     , mHasBeenValidated(false)
     , mHasBeenUpdated(false)
     , mWasAbleToRead(false)
+    , mWasAbleToReadBefore(false)
     , mByteOrder(d.mByteOrder)
     , mLoggedData(ScriptLogger::LogInvalid)
 {
@@ -120,6 +122,10 @@ void DataInformation::resetValidationState()
 
 void DataInformation::beginRead()
 {
+    // remember old state
+    // TODO: perhaps just do in some way (virtual method) for those subclasses which use this flag?
+    mWasAbleToReadBefore = mWasAbleToRead;
+
     mHasBeenUpdated = false;
     mWasAbleToRead = false;
     mHasBeenValidated = false;
