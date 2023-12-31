@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-20 02:27+0000\n"
+"POT-Creation-Date: 2023-12-31 03:11+0000\n"
 "PO-Revision-Date: 2020-01-19 15:47+0100\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -704,8 +704,8 @@ msgstr ""
 "frekvencie bajtov pre bajty vo vybranom rozsahu."
 
 #: controllers/view/info/infoview.cpp:184
-#: controllers/view/structures/datatypes/datainformation.cpp:57
-#: controllers/view/structures/datatypes/datainformation.cpp:60
+#: controllers/view/structures/datatypes/datainformation.cpp:59
+#: controllers/view/structures/datatypes/datainformation.cpp:62
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:220
 #, kde-format
 msgid "1 byte"
@@ -1672,7 +1672,7 @@ msgctxt "type name, then array length"
 msgid "%1[%2]"
 msgstr "%1[%2]"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:61
+#: controllers/view/structures/datatypes/datainformation.cpp:63
 #, kde-format
 msgid "1 bit"
 msgid_plural "%1 bits"
@@ -1680,19 +1680,19 @@ msgstr[0] "1 bit"
 msgstr[1] "%1 bity"
 msgstr[2] "%1 bitov"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:62
+#: controllers/view/structures/datatypes/datainformation.cpp:64
 #, kde-format
 msgctxt "number of bytes, then number of bits"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:195
+#: controllers/view/structures/datatypes/datainformation.cpp:201
 #, kde-format
 msgctxt "invalid value (End of file reached)"
 msgid "<EOF reached>"
 msgstr "<dosiahnutý EOF>"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:208
+#: controllers/view/structures/datatypes/datainformation.cpp:214
 #, kde-format
 msgid ""
 "Name: %1\n"
@@ -1707,7 +1707,7 @@ msgstr ""
 "Typ: %3\n"
 "Veľkosť: %4"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:211
+#: controllers/view/structures/datatypes/datainformation.cpp:217
 #, kde-format
 msgid ""
 "Name: %1\n"
@@ -1725,14 +1725,14 @@ msgstr ""
 "Veľkosť: %4\n"
 "%5"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:223
+#: controllers/view/structures/datatypes/datainformation.cpp:229
 #: controllers/view/structures/datatypes/datainformationwithchildren.cpp:230
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed."
 msgstr "Kontrola zlyhala."
 
-#: controllers/view/structures/datatypes/datainformation.cpp:226
+#: controllers/view/structures/datatypes/datainformation.cpp:232
 #: controllers/view/structures/datatypes/datainformationwithchildren.cpp:233
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
