@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-20 00:43+0000\n"
+"POT-Creation-Date: 2024-01-01 00:43+0000\n"
 "PO-Revision-Date: 2023-12-06 19:12+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -37,7 +37,7 @@ msgid "File Info"
 msgstr "Info o súbore"
 
 #: controllers/document/info/documentinfoview.cpp:67
-#: controllers/view/structures/datatypes/datainformation.cpp:229
+#: controllers/view/structures/datatypes/datainformation.cpp:235
 #, kde-format
 msgid "Type:"
 msgstr "Typ:"
@@ -48,7 +48,7 @@ msgid "Location:"
 msgstr "Umiestnenie:"
 
 #: controllers/document/info/documentinfoview.cpp:86
-#: controllers/view/structures/datatypes/datainformation.cpp:231
+#: controllers/view/structures/datatypes/datainformation.cpp:237
 #, kde-format
 msgid "Size:"
 msgstr "Veľkosť:"
@@ -744,8 +744,8 @@ msgstr ""
 "reťazce sa skopírujú do schránky."
 
 #: controllers/view/info/infoview.cpp:189
-#: controllers/view/structures/datatypes/datainformation.cpp:58
-#: controllers/view/structures/datatypes/datainformation.cpp:61
+#: controllers/view/structures/datatypes/datainformation.cpp:60
+#: controllers/view/structures/datatypes/datainformation.cpp:63
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:226
 #, kde-format
 msgid "1 byte"
@@ -1739,7 +1739,7 @@ msgctxt "type name, then array length"
 msgid "%1[%2]"
 msgstr "%1[%2]"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:62
+#: controllers/view/structures/datatypes/datainformation.cpp:64
 #, kde-format
 msgid "1 bit"
 msgid_plural "%1 bits"
@@ -1747,29 +1747,29 @@ msgstr[0] "1 bit"
 msgstr[1] "%1 bity"
 msgstr[2] "%1 bitov"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:63
+#: controllers/view/structures/datatypes/datainformation.cpp:65
 #, kde-format
 msgctxt "number of bytes, then number of bits"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:199
+#: controllers/view/structures/datatypes/datainformation.cpp:205
 #, kde-format
 msgctxt "invalid value (End of file reached)"
 msgid "<EOF reached>"
 msgstr "<dosiahnutý EOF>"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:228
+#: controllers/view/structures/datatypes/datainformation.cpp:234
 #, kde-format
 msgid "Name:"
 msgstr "Názov:"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:230
+#: controllers/view/structures/datatypes/datainformation.cpp:236
 #, kde-format
 msgid "Value:"
 msgstr "Hodnota:"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:237
+#: controllers/view/structures/datatypes/datainformation.cpp:243
 #, fuzzy, kde-format
 msgctxt "size (elements)"
 msgid "%2 (%1 child)"
@@ -1778,14 +1778,14 @@ msgstr[0] "Potomok"
 msgstr[1] "Deti"
 msgstr[2] "Deti"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:262
+#: controllers/view/structures/datatypes/datainformation.cpp:268
 #: controllers/view/structures/datatypes/datainformationwithchildren.cpp:233
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed."
 msgstr "Kontrola zlyhala."
 
-#: controllers/view/structures/datatypes/datainformation.cpp:265
+#: controllers/view/structures/datatypes/datainformation.cpp:271
 #: controllers/view/structures/datatypes/datainformationwithchildren.cpp:236
 #, kde-format
 msgctxt "not all values in this structure are as they should be"

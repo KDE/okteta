@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: playground-utils/okteta.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-20 00:43+0000\n"
+"POT-Creation-Date: 2024-01-01 00:43+0000\n"
 "PO-Revision-Date: 2007-11-05 08:28-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -35,7 +35,7 @@ msgid "File Info"
 msgstr "Eolas faoin Chomhad"
 
 #: controllers/document/info/documentinfoview.cpp:67
-#: controllers/view/structures/datatypes/datainformation.cpp:229
+#: controllers/view/structures/datatypes/datainformation.cpp:235
 #, kde-format
 msgid "Type:"
 msgstr "Cineál:"
@@ -46,7 +46,7 @@ msgid "Location:"
 msgstr "Suíomh:"
 
 #: controllers/document/info/documentinfoview.cpp:86
-#: controllers/view/structures/datatypes/datainformation.cpp:231
+#: controllers/view/structures/datatypes/datainformation.cpp:237
 #, kde-format
 msgid "Size:"
 msgstr "Méid:"
@@ -759,8 +759,8 @@ msgstr ""
 "teaghrán roghnaithe sa liosta go dtí an ghearrthaisce."
 
 #: controllers/view/info/infoview.cpp:189
-#: controllers/view/structures/datatypes/datainformation.cpp:58
-#: controllers/view/structures/datatypes/datainformation.cpp:61
+#: controllers/view/structures/datatypes/datainformation.cpp:60
+#: controllers/view/structures/datatypes/datainformation.cpp:63
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:226
 #, kde-format
 msgid "1 byte"
@@ -1782,7 +1782,7 @@ msgctxt "type name, then array length"
 msgid "%1[%2]"
 msgstr "%1[%2]"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:62
+#: controllers/view/structures/datatypes/datainformation.cpp:64
 #, kde-format
 msgid "1 bit"
 msgid_plural "%1 bits"
@@ -1792,33 +1792,33 @@ msgstr[2] "%1 ghiotán"
 msgstr[3] "%1 ngiotán"
 msgstr[4] "%1 giotán"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:63
+#: controllers/view/structures/datatypes/datainformation.cpp:65
 #, kde-format
 msgctxt "number of bytes, then number of bits"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:199
+#: controllers/view/structures/datatypes/datainformation.cpp:205
 #, kde-format
 msgctxt "invalid value (End of file reached)"
 msgid "<EOF reached>"
 msgstr ""
 
-#: controllers/view/structures/datatypes/datainformation.cpp:228
+#: controllers/view/structures/datatypes/datainformation.cpp:234
 #, fuzzy, kde-format
 #| msgctxt "name of a data structure"
 #| msgid "Name"
 msgid "Name:"
 msgstr "Ainm"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:230
+#: controllers/view/structures/datatypes/datainformation.cpp:236
 #, fuzzy, kde-format
 #| msgctxt "@title:column value of the bytes for the datatype"
 #| msgid "Value"
 msgid "Value:"
 msgstr "Luach"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:237
+#: controllers/view/structures/datatypes/datainformation.cpp:243
 #, kde-format
 msgctxt "size (elements)"
 msgid "%2 (%1 child)"
@@ -1829,14 +1829,14 @@ msgstr[2] ""
 msgstr[3] ""
 msgstr[4] ""
 
-#: controllers/view/structures/datatypes/datainformation.cpp:262
+#: controllers/view/structures/datatypes/datainformation.cpp:268
 #: controllers/view/structures/datatypes/datainformationwithchildren.cpp:233
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed."
 msgstr ""
 
-#: controllers/view/structures/datatypes/datainformation.cpp:265
+#: controllers/view/structures/datatypes/datainformation.cpp:271
 #: controllers/view/structures/datatypes/datainformationwithchildren.cpp:236
 #, kde-format
 msgctxt "not all values in this structure are as they should be"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-20 00:43+0000\n"
+"POT-Creation-Date: 2024-01-01 00:43+0000\n"
 "PO-Revision-Date: 2010-07-24 13:13+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: Arabic <linuxac-kde-arabic-team@googlegroups.com>\n"
@@ -37,7 +37,7 @@ msgid "File Info"
 msgstr "معلومات الملف"
 
 #: controllers/document/info/documentinfoview.cpp:67
-#: controllers/view/structures/datatypes/datainformation.cpp:229
+#: controllers/view/structures/datatypes/datainformation.cpp:235
 #, kde-format
 msgid "Type:"
 msgstr "النوع:"
@@ -48,7 +48,7 @@ msgid "Location:"
 msgstr "الموقع:"
 
 #: controllers/document/info/documentinfoview.cpp:86
-#: controllers/view/structures/datatypes/datainformation.cpp:231
+#: controllers/view/structures/datatypes/datainformation.cpp:237
 #, kde-format
 msgid "Size:"
 msgstr "الحجم:"
@@ -734,8 +734,8 @@ msgstr ""
 "قد حدثت."
 
 #: controllers/view/info/infoview.cpp:189
-#: controllers/view/structures/datatypes/datainformation.cpp:58
-#: controllers/view/structures/datatypes/datainformation.cpp:61
+#: controllers/view/structures/datatypes/datainformation.cpp:60
+#: controllers/view/structures/datatypes/datainformation.cpp:63
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:226
 #, kde-format
 msgid "1 byte"
@@ -1730,7 +1730,7 @@ msgctxt "type name, then array length"
 msgid "%1[%2]"
 msgstr "%1[%2]"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:62
+#: controllers/view/structures/datatypes/datainformation.cpp:64
 #, fuzzy, kde-format
 msgid "1 bit"
 msgid_plural "%1 bits"
@@ -1741,29 +1741,29 @@ msgstr[3] "العد الثنائي"
 msgstr[4] "العد الثنائي"
 msgstr[5] "العد الثنائي"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:63
+#: controllers/view/structures/datatypes/datainformation.cpp:65
 #, kde-format
 msgctxt "number of bytes, then number of bits"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:199
+#: controllers/view/structures/datatypes/datainformation.cpp:205
 #, kde-format
 msgctxt "invalid value (End of file reached)"
 msgid "<EOF reached>"
 msgstr ""
 
-#: controllers/view/structures/datatypes/datainformation.cpp:228
+#: controllers/view/structures/datatypes/datainformation.cpp:234
 #, kde-format
 msgid "Name:"
 msgstr ""
 
-#: controllers/view/structures/datatypes/datainformation.cpp:230
+#: controllers/view/structures/datatypes/datainformation.cpp:236
 #, fuzzy, kde-format
 msgid "Value:"
 msgstr "قيم"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:237
+#: controllers/view/structures/datatypes/datainformation.cpp:243
 #, kde-format
 msgctxt "size (elements)"
 msgid "%2 (%1 child)"
@@ -1775,14 +1775,14 @@ msgstr[3] ""
 msgstr[4] ""
 msgstr[5] ""
 
-#: controllers/view/structures/datatypes/datainformation.cpp:262
+#: controllers/view/structures/datatypes/datainformation.cpp:268
 #: controllers/view/structures/datatypes/datainformationwithchildren.cpp:233
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed."
 msgstr ""
 
-#: controllers/view/structures/datatypes/datainformation.cpp:265
+#: controllers/view/structures/datatypes/datainformation.cpp:271
 #: controllers/view/structures/datatypes/datainformationwithchildren.cpp:236
 #, kde-format
 msgctxt "not all values in this structure are as they should be"

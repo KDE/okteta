@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-20 00:43+0000\n"
+"POT-Creation-Date: 2024-01-01 00:43+0000\n"
 "PO-Revision-Date: 2015-02-04 16:00+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: bosanski <bs@li.org>\n"
@@ -40,7 +40,7 @@ msgid "File Info"
 msgstr "Info datoteke"
 
 #: controllers/document/info/documentinfoview.cpp:67
-#: controllers/view/structures/datatypes/datainformation.cpp:229
+#: controllers/view/structures/datatypes/datainformation.cpp:235
 #, kde-format
 msgid "Type:"
 msgstr "Tip:"
@@ -51,7 +51,7 @@ msgid "Location:"
 msgstr "Mjesto:"
 
 #: controllers/document/info/documentinfoview.cpp:86
-#: controllers/view/structures/datatypes/datainformation.cpp:231
+#: controllers/view/structures/datatypes/datainformation.cpp:237
 #, kde-format
 msgid "Size:"
 msgstr "Veličina:"
@@ -753,8 +753,8 @@ msgstr ""
 "sve izabrane stavke sa spiska."
 
 #: controllers/view/info/infoview.cpp:189
-#: controllers/view/structures/datatypes/datainformation.cpp:58
-#: controllers/view/structures/datatypes/datainformation.cpp:61
+#: controllers/view/structures/datatypes/datainformation.cpp:60
+#: controllers/view/structures/datatypes/datainformation.cpp:63
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:226
 #, kde-format
 msgid "1 byte"
@@ -1772,7 +1772,7 @@ msgctxt "type name, then array length"
 msgid "%1[%2]"
 msgstr "%1[%2]"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:62
+#: controllers/view/structures/datatypes/datainformation.cpp:64
 #, kde-format
 msgid "1 bit"
 msgid_plural "%1 bits"
@@ -1780,33 +1780,33 @@ msgstr[0] "%1 bit"
 msgstr[1] "%1 bita"
 msgstr[2] "%1 bitova"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:63
+#: controllers/view/structures/datatypes/datainformation.cpp:65
 #, kde-format
 msgctxt "number of bytes, then number of bits"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:199
+#: controllers/view/structures/datatypes/datainformation.cpp:205
 #, kde-format
 msgctxt "invalid value (End of file reached)"
 msgid "<EOF reached>"
 msgstr "<EOF dosegnut>"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:228
+#: controllers/view/structures/datatypes/datainformation.cpp:234
 #, fuzzy, kde-format
 #| msgctxt "name of a data structure"
 #| msgid "Name"
 msgid "Name:"
 msgstr "Ime"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:230
+#: controllers/view/structures/datatypes/datainformation.cpp:236
 #, fuzzy, kde-format
 #| msgctxt "@title:column value of the bytes for the datatype"
 #| msgid "Value"
 msgid "Value:"
 msgstr "Vrijednost"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:237
+#: controllers/view/structures/datatypes/datainformation.cpp:243
 #, kde-format
 msgctxt "size (elements)"
 msgid "%2 (%1 child)"
@@ -1815,14 +1815,14 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: controllers/view/structures/datatypes/datainformation.cpp:262
+#: controllers/view/structures/datatypes/datainformation.cpp:268
 #: controllers/view/structures/datatypes/datainformationwithchildren.cpp:233
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed."
 msgstr "Ovjera nije prošla."
 
-#: controllers/view/structures/datatypes/datainformation.cpp:265
+#: controllers/view/structures/datatypes/datainformation.cpp:271
 #: controllers/view/structures/datatypes/datainformationwithchildren.cpp:236
 #, kde-format
 msgctxt "not all values in this structure are as they should be"

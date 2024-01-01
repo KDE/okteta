@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-20 00:43+0000\n"
+"POT-Creation-Date: 2024-01-01 00:43+0000\n"
 "PO-Revision-Date: 2023-12-28 14:35+0100\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -37,7 +37,7 @@ msgid "File Info"
 msgstr "Filinformation"
 
 #: controllers/document/info/documentinfoview.cpp:67
-#: controllers/view/structures/datatypes/datainformation.cpp:229
+#: controllers/view/structures/datatypes/datainformation.cpp:235
 #, kde-format
 msgid "Type:"
 msgstr "Typ:"
@@ -48,7 +48,7 @@ msgid "Location:"
 msgstr "Plats:"
 
 #: controllers/document/info/documentinfoview.cpp:86
-#: controllers/view/structures/datatypes/datainformation.cpp:231
+#: controllers/view/structures/datatypes/datainformation.cpp:237
 #, kde-format
 msgid "Size:"
 msgstr "Storlek:"
@@ -742,8 +742,8 @@ msgstr ""
 "statistikrader du har markerat i listan dill klippbordet."
 
 #: controllers/view/info/infoview.cpp:189
-#: controllers/view/structures/datatypes/datainformation.cpp:58
-#: controllers/view/structures/datatypes/datainformation.cpp:61
+#: controllers/view/structures/datatypes/datainformation.cpp:60
+#: controllers/view/structures/datatypes/datainformation.cpp:63
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:226
 #, kde-format
 msgid "1 byte"
@@ -1736,36 +1736,36 @@ msgctxt "type name, then array length"
 msgid "%1[%2]"
 msgstr "%1[%2]"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:62
+#: controllers/view/structures/datatypes/datainformation.cpp:64
 #, kde-format
 msgid "1 bit"
 msgid_plural "%1 bits"
 msgstr[0] "1 bit"
 msgstr[1] "%1 bitar"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:63
+#: controllers/view/structures/datatypes/datainformation.cpp:65
 #, kde-format
 msgctxt "number of bytes, then number of bits"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:199
+#: controllers/view/structures/datatypes/datainformation.cpp:205
 #, kde-format
 msgctxt "invalid value (End of file reached)"
 msgid "<EOF reached>"
 msgstr "<filslut nått>"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:228
+#: controllers/view/structures/datatypes/datainformation.cpp:234
 #, kde-format
 msgid "Name:"
 msgstr "Namn:"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:230
+#: controllers/view/structures/datatypes/datainformation.cpp:236
 #, kde-format
 msgid "Value:"
 msgstr "Värde:"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:237
+#: controllers/view/structures/datatypes/datainformation.cpp:243
 #, kde-format
 msgctxt "size (elements)"
 msgid "%2 (%1 child)"
@@ -1773,14 +1773,14 @@ msgid_plural "%2 (%1 children)"
 msgstr[0] "%2 (%1 underliggande objekt)"
 msgstr[1] "%2 (%1 underliggande objekt)"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:262
+#: controllers/view/structures/datatypes/datainformation.cpp:268
 #: controllers/view/structures/datatypes/datainformationwithchildren.cpp:233
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed."
 msgstr "Validering misslyckades."
 
-#: controllers/view/structures/datatypes/datainformation.cpp:265
+#: controllers/view/structures/datatypes/datainformation.cpp:271
 #: controllers/view/structures/datatypes/datainformationwithchildren.cpp:236
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
