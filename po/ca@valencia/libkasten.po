@@ -195,7 +195,7 @@ msgstr "&Copia a dins del porta-retalls"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Copy the selected data to the clipboard."
-msgstr "Copia les dades seleccionades al porta-retalls."
+msgstr "Copia les dades seleccionades a dins del porta-retalls."
 
 #: controllers/io/copyas/copyasdialog.cpp:76
 #, kde-kuit-format
@@ -206,8 +206,8 @@ msgid ""
 "above."
 msgstr ""
 "Si premeu el botó <interface>Copia a dins del porta-retalls</interface>, les "
-"dades seleccionades es copiaran al porta-retalls amb els paràmetres que heu "
-"indicat més amunt."
+"dades seleccionades es copiaran a dins del porta-retalls amb els paràmetres "
+"que heu indicat més amunt."
 
 #: controllers/io/export/exportcontroller.cpp:40
 #, kde-format

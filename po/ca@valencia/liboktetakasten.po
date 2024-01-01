@@ -1668,7 +1668,7 @@ msgstr "Co&pia"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected strings to the clipboard."
-msgstr "Copia les cadenes seleccionades al porta-retalls."
+msgstr "Copia les cadenes seleccionades a dins del porta-retalls."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:143
 #, kde-kuit-format
@@ -1678,7 +1678,7 @@ msgid ""
 "selected in the list are copied to the clipboard."
 msgstr ""
 "Si premeu el botó <interface>Copia</interface>, totes les cadenes que heu "
-"seleccionat de la llista es copiaran al porta-retalls."
+"seleccionat de la llista es copiaran a dins del porta-retalls."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:152
 #, kde-format
