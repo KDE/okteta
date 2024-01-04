@@ -11,7 +11,7 @@
 // lib
 #include <abstractmodelstreamencoderconfigeditor.hpp>
 // Qt
-#include <QLayout>
+#include <QHBoxLayout>
 
 namespace Kasten {
 

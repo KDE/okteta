@@ -237,7 +237,7 @@ void TestDocumentFileSynchronizerTest::testHeader()
 // TODO: failing calls in AbstractDocumentFileSystemSynchronizer trigger GUI here, so far it worked ;)
 #if 0
     // try to load false header
-    Kasten::TestDocumentFileSynchronizer* synchronizer = new Kasten::TestDocumentFileSynchronizer(fileUrl, header);
+    auto* synchronizer = new Kasten::TestDocumentFileSynchronizer(fileUrl, header);
     Kasten::AbstractDocument* document = synchronizer->document();
     QVERIFY(document == 0);
     delete synchronizer;

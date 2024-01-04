@@ -24,7 +24,6 @@
 #include <QFormLayout>
 #include <QVBoxLayout>
 #include <QCheckBox>
-#include <QLabel>
 #include <QGroupBox>
 #include <QAction>
 #include <QIcon>

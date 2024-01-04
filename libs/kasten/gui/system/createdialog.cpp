@@ -13,7 +13,7 @@
 // KF
 #include <KLocalizedString>
 // Qt
-#include <QLayout>
+#include <QVBoxLayout>
 #include <QLabel>
 #include <QPushButton>
 #include <QIcon>

@@ -199,7 +199,7 @@ Size ByteArrayModelPrivate::replace(const AddressRange& _removeRange, const Byte
     // raw array not big enough?
     if (mRawSize < newSize) {
         // create new buffer
-        Byte* newData = new Byte[newSize];
+        auto* newData = new Byte[newSize];
         if (!newData) {
             return 0;
         }
@@ -294,7 +294,7 @@ bool ByteArrayModelPrivate::swap(Address firstStart, const AddressRange& _second
     }
 
     // copy smaller part to tempbuffer
-    Byte* temp = new Byte[smallPartLength];
+    auto* temp = new Byte[smallPartLength];
     memcpy(temp, &mData[smallPartStart], smallPartLength);
 
     // move the larger part
@@ -405,7 +405,7 @@ int ByteArrayModelPrivate::addSize(int addSize, int splitPosition, bool saveUppe
             NewRawSize += chunkSize;
         }
         // create new buffer
-        Byte* newData = new Byte[NewRawSize];
+        auto* newData = new Byte[NewRawSize];
 
         // move old data to its (new) places
         memcpy(newData, mData, splitPosition);

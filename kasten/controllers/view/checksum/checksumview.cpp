@@ -28,7 +28,6 @@
 #include <QLineEdit>
 #include <QAction>
 #include <QVBoxLayout>
-#include <QHBoxLayout>
 #include <QClipboard>
 #include <QApplication>
 #include <QAbstractItemView>

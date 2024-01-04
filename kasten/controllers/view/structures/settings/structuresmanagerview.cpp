@@ -22,7 +22,8 @@
 // Qt
 #include <QPushButton>
 #include <QListWidgetItem>
-#include <QLayout>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
 #include <QSizePolicy>
 
 StructuresManagerView::StructuresManagerView(Kasten::StructuresTool* tool, QWidget* parent)

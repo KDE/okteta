@@ -18,7 +18,7 @@
 // Qt
 #include <QToolBar>
 #include <QAction>
-#include <QLayout>
+#include <QVBoxLayout>
 #include <QTreeView>
 #include <QHeaderView>
 #include <QIcon>

@@ -17,7 +17,7 @@
 #include <KParts/ReadOnlyPart>
 #include <kde_terminal_interface.h>
 // Qt
-#include <QLayout>
+#include <QVBoxLayout>
 #include <QFrame>
 #include <QUrl>
 #include <QDir>

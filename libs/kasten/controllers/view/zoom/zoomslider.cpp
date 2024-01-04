@@ -17,7 +17,7 @@
 // Qt
 #include <QSlider>
 #include <QToolButton>
-#include <QLayout>
+#include <QHBoxLayout>
 #include <QApplication>
 #include <QHelpEvent>
 

@@ -15,7 +15,8 @@
 // Qt
 #include <QCheckBox>
 #include <QGroupBox>
-#include <QLayout>
+#include <QGridLayout>
+#include <QVBoxLayout>
 #include <QIcon>
 #include <QPushButton>
 #include <QDialogButtonBox>

@@ -108,7 +108,7 @@ void CopyAsController::onActionTriggered(QAction* action)
 
     if (configEditor) {
         auto* dialog = new CopyAsDialog(encoder->remoteTypeName(), configEditor, encoder,
-                                                QApplication::activeWindow());
+                                        QApplication::activeWindow());
         dialog->setData(mModel, selection);
         connect(dialog, &CopyAsDialog::copyAccepted, this, &CopyAsController::triggerExecution);
         dialog->open();

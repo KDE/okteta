@@ -15,7 +15,6 @@
 #include <KComboBox>
 // Qt
 #include <QFormLayout>
-#include <QLabel>
 #include <QLineEdit>
 
 namespace Kasten {

@@ -14,8 +14,7 @@
 #include <KLocalizedString>
 // #include <KComboBox>
 // Qt
-#include <QLayout>
-#include <QLabel>
+#include <QFormLayout>
 #include <QLineEdit>
 
 namespace Kasten {
@@ -26,10 +25,8 @@ ByteArrayValuesStreamEncoderConfigEditor::ByteArrayValuesStreamEncoderConfigEdit
 {
     mSettings = mEncoder->settings();
 
-    auto* pageLayout = new QGridLayout(this);   // unknown rows
+    auto* pageLayout = new QFormLayout(this);   // unknown rows
     pageLayout->setContentsMargins(0, 0, 0, 0);
-    pageLayout->setColumnStretch(0, 0);
-    pageLayout->setColumnStretch(1, 0);
 
 #if 0
     // data type
@@ -48,17 +45,14 @@ ByteArrayValuesStreamEncoderConfigEditor::ByteArrayValuesStreamEncoderConfigEdit
     pageLayout->addWidget(mValueCodingSelect, 0, 1);
 #endif
     // separation string
-    auto* label = new QLabel(i18nc("@label:textbox substring which separates the values", "Separation:"), this);
-    pageLayout->addWidget(label, 0, 0, Qt::AlignRight);
+    const QString separationLabel =
+        i18nc("@label:textbox substring which separates the values", "Separation:");
 
     mSeparationEdit = new QLineEdit(this);
     mSeparationEdit->setClearButtonEnabled(true);
     mSeparationEdit->setText(mSettings.separation);
     connect(mSeparationEdit, &QLineEdit::textChanged, this, &ByteArrayValuesStreamEncoderConfigEditor::onSettingsChanged);
-    pageLayout->addWidget(mSeparationEdit, 0, 1);
-
-    // finish
-    pageLayout->setRowStretch(2, 10);
+    pageLayout->addRow(separationLabel, mSeparationEdit);
 }
 
 ByteArrayValuesStreamEncoderConfigEditor::~ByteArrayValuesStreamEncoderConfigEditor() = default;

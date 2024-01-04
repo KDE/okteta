@@ -18,7 +18,7 @@
 // Qt
 #include <QFont>
 #include <QLabel>
-#include <QLayout>
+#include <QVBoxLayout>
 #include <QFormLayout>
 #include <QLocale>
 #include <QMimeType>

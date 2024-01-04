@@ -10,7 +10,7 @@
 
 // Qt
 #include <QIcon>
-#include <QLayout>
+#include <QHBoxLayout>
 #include <QLabel>
 #include <QApplication>
 

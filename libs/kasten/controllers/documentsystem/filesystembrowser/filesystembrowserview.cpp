@@ -18,7 +18,7 @@
 #include <KToolBar>
 #include <KLocalizedString>
 // Qt
-#include <QLayout>
+#include <QVBoxLayout>
 #include <QUrl>
 #include <QDir>
 

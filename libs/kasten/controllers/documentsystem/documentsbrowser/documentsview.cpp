@@ -13,7 +13,7 @@
 #include "documentstool.hpp"
 // Qt
 #include <QTreeView>
-#include <QLayout>
+#include <QVBoxLayout>
 
 namespace Kasten {
 

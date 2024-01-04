@@ -32,8 +32,8 @@
 // Qt
 #include <QDialog>
 #include <QDialogButtonBox>
-#include <QLabel>
-#include <QLayout>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
 #include <QTreeView>
 #include <QPushButton>
 #include <QHeaderView>
@@ -55,7 +55,7 @@ StructureView::StructureView(StructuresTool* tool, QWidget* parent)
     , mDelegate(new StructureViewItemDelegate(this))
     , mStructTreeViewFocusChild(nullptr)
 {
-    QBoxLayout* baseLayout = new QVBoxLayout(this);
+    auto* baseLayout = new QVBoxLayout(this);
     setLayout(baseLayout);
     baseLayout->setContentsMargins(0, 0, 0, 0);
     baseLayout->setSpacing(0);

@@ -106,7 +106,7 @@ T* newEnumOrFlags(const EnumParsedData& pd)
 template <class T>
 T* newStructOrUnion(const StructOrUnionParsedData& supd)
 {
-    T* structOrUnion = new T(supd.name, QVector<DataInformation*>(), supd.parent);
+    auto* structOrUnion = new T(supd.name, QVector<DataInformation*>(), supd.parent);
     supd.children->setParent(structOrUnion);
     while (supd.children->hasNext()) {
         DataInformation* data = supd.children->next();

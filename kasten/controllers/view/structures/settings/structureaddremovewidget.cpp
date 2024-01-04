@@ -17,7 +17,8 @@
 // Qt
 #include <QPushButton>
 #include <QLabel>
-#include <QLayout>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
 #include <QRegularExpression>
@@ -40,16 +41,10 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(const QMap<QString, Kasten::S
                                                    QWidget* parent)
     : QWidget(parent)
 {
-    QHBoxLayout* baseLayout;
-    QVBoxLayout* tree1Layout;
-    QVBoxLayout* tree2Layout;
-    QVBoxLayout* leftRightLayout;
-    QVBoxLayout* upDownLayout;
-
-    baseLayout = new QHBoxLayout();
+    auto* baseLayout = new QHBoxLayout();
     baseLayout->setContentsMargins(0, 0, 0, 0);
 
-    tree1Layout = new QVBoxLayout();
+    auto* tree1Layout = new QVBoxLayout();
     mTree1Label = new QLabel(i18nc("@info:label", "Installed structures:"), this);
     tree1Layout->addWidget(mTree1Label);
     mTreeAvailable = new QTreeWidget(this);
@@ -59,7 +54,7 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(const QMap<QString, Kasten::S
     mTreeAvailable->setColumnHidden(1, true);
     tree1Layout->addWidget(mTreeAvailable);
 
-    tree2Layout = new QVBoxLayout();
+    auto* tree2Layout = new QVBoxLayout();
     mTree2Label = new QLabel(i18nc("@info:label", "Used structures:"), this);
     tree2Layout->addWidget(mTree2Label);
     mTreeSelected = new QTreeWidget(this);
@@ -69,7 +64,7 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(const QMap<QString, Kasten::S
     mTreeSelected->setColumnHidden(1, true);
     tree2Layout->addWidget(mTreeSelected);
 
-    leftRightLayout = new QVBoxLayout();
+    auto* leftRightLayout = new QVBoxLayout();
     leftRightLayout->addStretch();
     mRightButton = new QPushButton(QIcon::fromTheme(QStringLiteral("arrow-right")), QString(), this);
     leftRightLayout->addWidget(mRightButton);
@@ -77,7 +72,7 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(const QMap<QString, Kasten::S
     leftRightLayout->addWidget(mLeftButton);
     leftRightLayout->addStretch();
 
-    upDownLayout = new QVBoxLayout();
+    auto* upDownLayout = new QVBoxLayout();
     upDownLayout->addStretch();
     mUpButton = new QPushButton(QIcon::fromTheme(QStringLiteral("arrow-up")), QString(), this);
     upDownLayout->addWidget(mUpButton);

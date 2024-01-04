@@ -12,7 +12,7 @@
 #include <Okteta/ByteArrayColumnView>
 #include <Okteta/ByteArrayRowView>
 // Qt
-#include <QLayout>
+#include <QHBoxLayout>
 #include <QScrollBar>
 
 namespace Okteta {

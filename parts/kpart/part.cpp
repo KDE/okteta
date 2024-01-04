@@ -53,7 +53,7 @@
 #include <KPluginMetaData>
 // Qt
 #include <QWidget>
-#include <QLayout>
+#include <QVBoxLayout>
 #include <QUrl>
 // Std
 #include <utility>
