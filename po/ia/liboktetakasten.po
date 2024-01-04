@@ -2,12 +2,13 @@
 # This file is distributed under the same license as the okteta package.
 #
 # SPDX-FileCopyrightText: 2020, 2021, 2022, 2023 giovanni <g.sora@tiscali.it>
+# giovanni <g.sora@tiscali.it>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-01 00:43+0000\n"
-"PO-Revision-Date: 2023-10-16 14:15+0200\n"
+"PO-Revision-Date: 2024-01-03 14:58+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -15,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.2\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1222,12 +1223,10 @@ msgstr ""
 
 #: controllers/view/poddecoder/podtableview.cpp:240
 #: controllers/view/structures/structureview.cpp:338
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Edit..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit"
-msgstr "&Modifica..."
+msgstr "Modifica"
 
 #: controllers/view/poddecoder/podtableview.cpp:254
 #: controllers/view/selectrange/selectrangeview.cpp:124
@@ -1323,9 +1322,7 @@ msgid "Unsigned 8-bit"
 msgstr ""
 
 #: controllers/view/poddecoder/typecodecs/utf16codec.cpp:24
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox"
-#| msgid "UTF-16:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "UTF-16"
 msgstr "UTF-16:"
@@ -2481,9 +2478,7 @@ msgid "&Decimal"
 msgstr "&Decimal"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:43
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
-#| msgid "&Octal"
+#, kde-format
 msgctxt "@item:inmenu offset in the octal format"
 msgid "&Octal"
 msgstr "&Octal"
@@ -2678,9 +2673,7 @@ msgid "Decimal"
 msgstr "Decimal"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:69
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip column contains the value in octal format"
-#| msgid "Octal"
+#, kde-format
 msgctxt "@item:inmenu offset in the octal format"
 msgid "Octal"
 msgstr "Octal"
@@ -3339,9 +3332,7 @@ msgid "Dec"
 msgstr "Dec"
 
 #: gui/liboktetawidgets/addresscombobox_p.cpp:32
-#, fuzzy, kde-format
-#| msgctxt "@title:column short for Octal"
-#| msgid "Oct"
+#, kde-format
 msgctxt "@item:inlistbox coding of offset in the octal format"
 msgid "Oct"
 msgstr "Oct"
