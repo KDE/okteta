@@ -20,7 +20,7 @@
 // Qt
 #include <QCheckBox>
 #include <QGroupBox>
-#include <QLayout>
+#include <QVBoxLayout>
 #include <QPushButton>
 
 

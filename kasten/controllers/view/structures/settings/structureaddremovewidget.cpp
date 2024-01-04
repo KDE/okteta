@@ -13,7 +13,8 @@
 
 #include <QPushButton>
 #include <QLabel>
-#include <QLayout>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
 

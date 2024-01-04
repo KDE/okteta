@@ -17,7 +17,8 @@
 #include <QSplitter>
 #include <QGroupBox>
 #include <QLabel>
-#include <QLayout>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
 #include <QPushButton>
 #include <QIcon>
 #include <QFont>

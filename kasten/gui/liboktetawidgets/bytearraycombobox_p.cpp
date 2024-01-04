@@ -12,7 +12,7 @@
 // KF
 #include <KLocalizedString>
 // Qt
-#include <QLayout>
+#include <QHBoxLayout>
 #include <QLineEdit>
 #include <QAbstractItemView>
 

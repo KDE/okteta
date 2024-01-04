@@ -15,7 +15,7 @@
 #include <Kasten/Versionable>
 #include <Kasten/AbstractModel>
 // Qt
-#include <QLayout>
+#include <QVBoxLayout>
 #include <QTreeView>
 
 namespace Kasten {

@@ -55,7 +55,7 @@
 #endif
 // Qt
 #include <QWidget>
-#include <QLayout>
+#include <QVBoxLayout>
 #include <QUrl>
 
 static constexpr const char* UIFileName[] =

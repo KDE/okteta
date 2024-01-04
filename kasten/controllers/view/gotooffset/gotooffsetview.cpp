@@ -24,7 +24,8 @@
 #include <QPushButton>
 #include <QCheckBox>
 #include <QLabel>
-#include <QLayout>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
 
 
 template <>

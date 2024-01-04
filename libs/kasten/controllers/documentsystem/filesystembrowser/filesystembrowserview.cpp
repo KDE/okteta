@@ -19,7 +19,7 @@
 #include <KLocalizedString>
 #include <kio_version.h>
 // Qt
-#include <QLayout>
+#include <QVBoxLayout>
 #include <QUrl>
 #include <QDir>
 
