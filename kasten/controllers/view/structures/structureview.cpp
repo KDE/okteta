@@ -34,7 +34,6 @@
 // Qt
 #include <QDialog>
 #include <QDialogButtonBox>
-#include <QLabel>
 #include <QLayout>
 #include <QTreeView>
 #include <QPushButton>
