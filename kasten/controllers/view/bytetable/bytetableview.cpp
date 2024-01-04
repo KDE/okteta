@@ -79,7 +79,7 @@ ByteTableView::ByteTableView(ByteTableTool* tool, QWidget* parent)
     stretcher->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     insertToolBar->addWidget(stretcher);
 
-    QLabel* label = new QLabel(i18nc("@label:spinbox number of bytes to insert", "Number (bytes):"), this);
+    auto* label = new QLabel(i18nc("@label:spinbox number of bytes to insert", "Number (bytes):"), this);
 
     mInsertCountEdit = new QSpinBox(this);
     mInsertCountEdit->setRange(1, std::numeric_limits<int>::max());

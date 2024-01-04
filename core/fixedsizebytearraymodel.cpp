@@ -212,7 +212,7 @@ bool FixedSizeByteArrayModel::swap(Address firstStart, const AddressRange& _seco
     }
 
     // copy smaller part to tempbuffer
-    Byte* tempBuffer = new Byte[smallPartLength];
+    auto* tempBuffer = new Byte[smallPartLength];
     memcpy(tempBuffer, &mData[smallPartStart], smallPartLength);
 
     // move the larger part

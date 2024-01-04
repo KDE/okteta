@@ -34,14 +34,14 @@ InsertDialog::InsertDialog(AbstractModelDataGeneratorConfigEditor* configEditor,
     setWindowTitle(i18nc("@title:window", "Insert"));
 
     // editor
-    QLabel* editorLabel = new QLabel(mConfigEditor->name());
+    auto* editorLabel = new QLabel(mConfigEditor->name());
     QFont font = editorLabel->font();
     font.setBold(true);
     editorLabel->setFont(font);
 
     // dialog buttons
     auto* dialogButtonBox = new QDialogButtonBox;
-    QPushButton* insertButton = new QPushButton(i18nc("@action:button", "&Insert"));
+    auto* insertButton = new QPushButton(i18nc("@action:button", "&Insert"));
     insertButton->setToolTip(i18nc("@info:tooltip",
                                    "Insert the generated data into the document."));
     insertButton->setWhatsThis(xi18nc("@info:whatsthis",

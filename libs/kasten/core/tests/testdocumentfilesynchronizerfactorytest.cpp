@@ -87,7 +87,7 @@ void TestDocumentFileSynchronizerFactoryTest::checkFileContent(const QUrl& fileU
 // ------------------------------------------------------------------ tests ----
 void TestDocumentFileSynchronizerFactoryTest::testCreate()
 {
-    Kasten::TestDocumentFileSynchronizerFactory* factory = new Kasten::TestDocumentFileSynchronizerFactory();
+    auto* factory = new Kasten::TestDocumentFileSynchronizerFactory();
 
     QVERIFY(factory != nullptr);
 

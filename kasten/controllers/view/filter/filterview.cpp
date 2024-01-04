@@ -42,7 +42,7 @@ FilterView::FilterView(FilterTool* tool, QWidget* parent)
 
     // filter selection
     auto* filterSelectionToolBar = new QToolBar(this);
-    QLabel* label = new QLabel(i18nc("@label:listbox operation to use by the filter", "Operation:"), this);
+    auto* label = new QLabel(i18nc("@label:listbox operation to use by the filter", "Operation:"), this);
     mOperationComboBox = new KComboBox(this);
     connect(mOperationComboBox, QOverload<int>::of(&KComboBox::activated),
             mTool, &FilterTool::setFilter);
@@ -61,7 +61,7 @@ FilterView::FilterView(FilterTool* tool, QWidget* parent)
     filterSelectionToolBar->addWidget(labelledAlgorithmComboBox);
     baseLayout->addWidget(filterSelectionToolBar);
 
-    QGroupBox* parameterSetBox = new QGroupBox(i18nc("@title:group", "Parameters"), this);
+    auto* parameterSetBox = new QGroupBox(i18nc("@title:group", "Parameters"), this);
     baseLayout->addWidget(parameterSetBox);
 
     auto* parameterSetLayout = new QVBoxLayout;

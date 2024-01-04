@@ -45,7 +45,7 @@ ChecksumView::ChecksumView(ChecksumTool* tool, QWidget* parent)
 
     // algorithm
     auto* algorithmToolBar = new QToolBar(this);
-    QLabel* label = new QLabel(i18nc("@label:listbox algorithm to use for the checksum", "Algorithm:"), this);
+    auto* label = new QLabel(i18nc("@label:listbox algorithm to use for the checksum", "Algorithm:"), this);
     mAlgorithmComboBox = new KComboBox(this);
     connect(mAlgorithmComboBox, QOverload<int>::of(&KComboBox::activated),
             mTool, &ChecksumTool::setAlgorithm);
@@ -61,7 +61,7 @@ ChecksumView::ChecksumView(ChecksumTool* tool, QWidget* parent)
     baseLayout->addWidget(algorithmToolBar);
 
     // parameter
-    QGroupBox* parameterSetBox = new QGroupBox(i18nc("@title:group", "Parameters"), this);
+    auto* parameterSetBox = new QGroupBox(i18nc("@title:group", "Parameters"), this);
     baseLayout->addWidget(parameterSetBox);
 
     auto* parameterSetLayout = new QVBoxLayout(parameterSetBox);

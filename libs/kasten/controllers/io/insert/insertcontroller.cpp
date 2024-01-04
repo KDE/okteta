@@ -87,7 +87,7 @@ void InsertController::updateActions()
             mInsertSelectAction->addAction(action);
         }
     } else {
-        QAction* noneAction = new QAction(i18nc("@item There are no generators.", "Not available."), mInsertSelectAction);
+        auto* noneAction = new QAction(i18nc("@item There are no generators.", "Not available."), mInsertSelectAction);
         noneAction->setEnabled(false);
         mInsertSelectAction->addAction(noneAction);
     }

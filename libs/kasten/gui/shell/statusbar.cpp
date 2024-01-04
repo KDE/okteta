@@ -20,7 +20,7 @@ StatusBar::StatusBar(QWidget* parent)
 {
 //     setMinimumWidth( 1 );
 
-    QWidget* baseWidget = new QWidget(this);
+    auto* baseWidget = new QWidget(this);
 
     mLayout = new StatusBarLayout(baseWidget);
     mLayout->setSpacing(6);   // hard coded in QStatusBar

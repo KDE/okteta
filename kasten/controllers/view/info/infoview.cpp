@@ -44,7 +44,7 @@ InfoView::InfoView(InfoTool* tool, QWidget* parent)
     auto* buildToolBar = new QToolBar(this);
     buildToolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
 
-    QLabel* label = new QLabel(i18nc("@label size of selected bytes", "Size:"), this);
+    auto* label = new QLabel(i18nc("@label size of selected bytes", "Size:"), this);
 
     mSizeLabel = new QLabel(this);
     const QString sizeToolTip =

@@ -84,7 +84,7 @@ void ExportController::updateActions()
             mExportSelectAction->addAction(action);
         }
     } else {
-        QAction* noneAction = new QAction(i18nc("@item There are no exporters.", "Not available."), mExportSelectAction);
+        auto* noneAction = new QAction(i18nc("@item There are no exporters.", "Not available."), mExportSelectAction);
         noneAction->setEnabled(false);
         mExportSelectAction->addAction(noneAction);
     }
@@ -102,8 +102,8 @@ void ExportController::onActionTriggered(QAction* action)
         mModelCodecViewManager->createConfigEditor(exporter);
 
     if (configEditor) {
-        ExportDialog* dialog = new ExportDialog(exporter->remoteTypeName(), configEditor, exporter,
-                                                QApplication::activeWindow());
+        auto* dialog = new ExportDialog(exporter->remoteTypeName(), configEditor, exporter,
+                                        QApplication::activeWindow());
         dialog->setData(mModel, selection);
         connect(dialog, &ExportDialog::exportAccepted, this, &ExportController::triggerExecution);
         dialog->open();

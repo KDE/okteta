@@ -70,7 +70,7 @@ void ArrayDataInformationTest::initTestCase()
     structsChildren << PrimitiveFactory::newInstance(QStringLiteral("first"), PrimitiveDataType::UInt32, lwc)
                     << PrimitiveFactory::newInstance(QStringLiteral("second"), PrimitiveDataType::UInt32, lwc);
 
-    StructureDataInformation* structs = new StructureDataInformation(QStringLiteral("vals"), structsChildren);
+    auto* structs = new StructureDataInformation(QStringLiteral("vals"), structsChildren);
 
     complexSize = 64;
     complex = new ArrayDataInformation(QStringLiteral("complex"), 0, structs);

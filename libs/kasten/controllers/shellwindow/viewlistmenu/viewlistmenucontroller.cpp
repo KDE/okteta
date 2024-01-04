@@ -65,7 +65,7 @@ void ViewListMenuController::updateActions()
         for (int v = 0; v < views.size(); ++v) {
             AbstractView* view = views.at(v);
             const QString title = KStringHandler::rsqueeze(view->title(), MaxEntryLength);
-            QAction* action = new QAction(v < 9 ? QStringLiteral("&%1 %2").arg(v + 1).arg(title) : title, mWindowsActionGroup);
+            auto* action = new QAction(v < 9 ? QStringLiteral("&%1 %2").arg(v + 1).arg(title) : title, mWindowsActionGroup);
             //         action->setCheckable( true );
 
             //         if(m_viewManager->activeView() && doc == m_viewManager->activeView()->document())
@@ -74,7 +74,7 @@ void ViewListMenuController::updateActions()
             mWindowsActionGroup->addAction(action);
         }
     } else {
-        QAction* noneAction = new QAction(i18nc("@item There are no windows.", "None."), mWindowsActionGroup);
+        auto* noneAction = new QAction(i18nc("@item There are no windows.", "None."), mWindowsActionGroup);
         mWindowsActionGroup->addAction(noneAction);
     }
     mWindowsActionGroup->setEnabled(hasViews);

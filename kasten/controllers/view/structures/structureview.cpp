@@ -56,7 +56,7 @@ StructureView::StructureView(StructuresTool* tool, QWidget* parent)
     , mDelegate(new StructureViewItemDelegate(this))
     , mStructTreeViewFocusChild(nullptr)
 {
-    QBoxLayout* baseLayout = new QVBoxLayout(this);
+    auto* baseLayout = new QVBoxLayout(this);
     setLayout(baseLayout);
     baseLayout->setContentsMargins(0, 0, 0, 0);
     baseLayout->setSpacing(0);
@@ -153,8 +153,8 @@ void StructureView::openSettingsDlg()
     }
 
     // KConfigDialog didn't find an instance of this dialog, so lets create it :
-    KConfigDialog* dialog = new KConfigDialog(this, QStringLiteral("Structures Tool Settings"),
-                                              StructureViewPreferences::self());
+    auto* dialog = new KConfigDialog(this, QStringLiteral("Structures Tool Settings"),
+                                     StructureViewPreferences::self());
 
     auto* displaySettings = new StructureViewSettingsWidget();
     KPageWidgetItem* displ = dialog->addPage(displaySettings, i18n("Value Display"),
@@ -162,7 +162,7 @@ void StructureView::openSettingsDlg()
 
     // cannot use StructuresManagerView directly as page even if the only element
     // because KConfigDialogManager only scans the children of the page for kcfg_ elements
-    QWidget* structSelectionPage = new QWidget();
+    auto* structSelectionPage = new QWidget();
     auto* hbox = new QHBoxLayout();
     hbox->setContentsMargins(0, 0, 0, 0);
     structSelectionPage->setLayout(hbox);
@@ -288,7 +288,7 @@ void StructureView::copyToClipboard()
 
 void StructureView::openScriptConsole()
 {
-    QDialog* dialog = new QDialog(this);
+    auto* dialog = new QDialog(this);
     dialog->setWindowTitle(i18nc("@title:window", "Structures Script Console"));
     auto* layout = new QVBoxLayout;
     auto* dialogButtonBox = new QDialogButtonBox;

@@ -27,7 +27,7 @@ AbstractFindDialog::AbstractFindDialog(QWidget* parent)
     : QDialog(parent)
 {
     // main widget
-    QWidget* mainWidget = new QWidget;
+    auto* mainWidget = new QWidget;
     MainWidgetLayout = new QVBoxLayout(mainWidget);
     MainWidgetLayout->setContentsMargins(0, 0, 0, 0);
 
@@ -70,7 +70,7 @@ void AbstractFindDialog::setFindButtonEnabled(bool enabled)
 void AbstractFindDialog::setupFindBox()
 {
     // find term
-    QGroupBox* findBox = new QGroupBox(i18nc("@title:window", "Find"));
+    auto* findBox = new QGroupBox(i18nc("@title:window", "Find"));
     MainWidgetLayout->addWidget(findBox);
 
     auto* findBoxLayout = new QVBoxLayout;
@@ -100,7 +100,7 @@ void AbstractFindDialog::setupOperationBox(QGroupBox* operationBox)
 void AbstractFindDialog::setupCheckBoxes(QCheckBox* optionCheckBox)
 {
     // options
-    QGroupBox* optionsBox = new QGroupBox(i18nc("@title:group", "Options"));
+    auto* optionsBox = new QGroupBox(i18nc("@title:group", "Options"));
     MainWidgetLayout->addWidget(optionsBox);
 
     auto* optionsBoxLayout = new QGridLayout(optionsBox);

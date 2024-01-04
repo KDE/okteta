@@ -52,7 +52,7 @@ DocumentInfoView::DocumentInfoView(DocumentInfoTool* tool, QWidget* parent)
     baseLayout->addWidget(mDocumentTitleLabel);
 
     // separator
-    KSeparator* separator = new KSeparator(Qt::Horizontal, this);
+    auto* separator = new KSeparator(Qt::Horizontal, this);
     baseLayout->addWidget(separator);
 
     // property grid

@@ -92,7 +92,7 @@ CharsetConversionView::CharsetConversionView(CharsetConversionTool* tool, QWidge
     baseLayout->addWidget(directionCharsetToolBar);
 
     // settings
-    QGroupBox* settingsBox = new QGroupBox(i18nc("@title:group", "Parameters"), this);
+    auto* settingsBox = new QGroupBox(i18nc("@title:group", "Parameters"), this);
 
     auto* settingsLayout = new QFormLayout();
 
