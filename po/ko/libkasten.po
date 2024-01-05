@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-13 02:44+0000\n"
+"POT-Creation-Date: 2024-01-05 02:31+0000\n"
 "PO-Revision-Date: 2018-08-14 23:46+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -170,32 +170,32 @@ msgctxt "@item There are no encoders."
 msgid "Not available."
 msgstr "사용할 수 없음."
 
-#: controllers/io/copyas/copyasdialog.cpp:39
+#: controllers/io/copyas/copyasdialog.cpp:40
 #, kde-format
 msgctxt "@title:window"
 msgid "Copy As"
 msgstr "다음으로 복사"
 
-#: controllers/io/copyas/copyasdialog.cpp:61
-#: controllers/io/export/exportdialog.cpp:61
+#: controllers/io/copyas/copyasdialog.cpp:62
+#: controllers/io/export/exportdialog.cpp:62
 #, kde-format
 msgctxt "@title:group"
 msgid "Preview"
 msgstr "미리 보기"
 
-#: controllers/io/copyas/copyasdialog.cpp:72
+#: controllers/io/copyas/copyasdialog.cpp:73
 #, kde-format
 msgctxt "@action:button"
 msgid "&Copy to clipboard"
 msgstr "클립보드에 복사(&C)"
 
-#: controllers/io/copyas/copyasdialog.cpp:74
+#: controllers/io/copyas/copyasdialog.cpp:75
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Copy the selected data to the clipboard."
 msgstr "선택한 데이터를 클립보드에 복사합니다."
 
-#: controllers/io/copyas/copyasdialog.cpp:76
+#: controllers/io/copyas/copyasdialog.cpp:77
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -218,26 +218,26 @@ msgctxt "@item There are no exporters."
 msgid "Not available."
 msgstr "사용할 수 없음."
 
-#: controllers/io/export/exportdialog.cpp:39
+#: controllers/io/export/exportdialog.cpp:40
 #: core/system/modelcodecmanager_p.cpp:101
 #, kde-format
 msgctxt "@title:window"
 msgid "Export"
 msgstr "내보내기"
 
-#: controllers/io/export/exportdialog.cpp:72
+#: controllers/io/export/exportdialog.cpp:73
 #, kde-format
 msgctxt "@action:button"
 msgid "&Export to File..."
 msgstr "파일로 내보내기(&E)..."
 
-#: controllers/io/export/exportdialog.cpp:74
+#: controllers/io/export/exportdialog.cpp:75
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Export the selected data to a file."
 msgstr "선택한 데이터를 파일로 내보냅니다."
 
-#: controllers/io/export/exportdialog.cpp:76
+#: controllers/io/export/exportdialog.cpp:77
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""

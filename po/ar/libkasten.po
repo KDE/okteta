@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-13 02:44+0000\n"
+"POT-Creation-Date: 2024-01-05 02:31+0000\n"
 "PO-Revision-Date: 2010-07-23 22:50+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: Arabic <linuxac-kde-arabic-team@googlegroups.com>\n"
@@ -179,32 +179,32 @@ msgctxt "@item There are no encoders."
 msgid "Not available."
 msgstr "غير متوفر."
 
-#: controllers/io/copyas/copyasdialog.cpp:39
+#: controllers/io/copyas/copyasdialog.cpp:40
 #, kde-format
 msgctxt "@title:window"
 msgid "Copy As"
 msgstr "انسخ كـ"
 
-#: controllers/io/copyas/copyasdialog.cpp:61
-#: controllers/io/export/exportdialog.cpp:61
+#: controllers/io/copyas/copyasdialog.cpp:62
+#: controllers/io/export/exportdialog.cpp:62
 #, kde-format
 msgctxt "@title:group"
 msgid "Preview"
 msgstr "معاينة"
 
-#: controllers/io/copyas/copyasdialog.cpp:72
+#: controllers/io/copyas/copyasdialog.cpp:73
 #, kde-format
 msgctxt "@action:button"
 msgid "&Copy to clipboard"
 msgstr "ا&نسخ إلى الحافظة"
 
-#: controllers/io/copyas/copyasdialog.cpp:74
+#: controllers/io/copyas/copyasdialog.cpp:75
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Copy the selected data to the clipboard."
 msgstr "انسخ البيانات المختارة إلى الحافظة"
 
-#: controllers/io/copyas/copyasdialog.cpp:76
+#: controllers/io/copyas/copyasdialog.cpp:77
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -227,26 +227,26 @@ msgctxt "@item There are no exporters."
 msgid "Not available."
 msgstr "غير متوفر."
 
-#: controllers/io/export/exportdialog.cpp:39
+#: controllers/io/export/exportdialog.cpp:40
 #: core/system/modelcodecmanager_p.cpp:101
 #, kde-format
 msgctxt "@title:window"
 msgid "Export"
 msgstr "التصدير"
 
-#: controllers/io/export/exportdialog.cpp:72
+#: controllers/io/export/exportdialog.cpp:73
 #, kde-format
 msgctxt "@action:button"
 msgid "&Export to File..."
 msgstr "&صدر إلى الملف..."
 
-#: controllers/io/export/exportdialog.cpp:74
+#: controllers/io/export/exportdialog.cpp:75
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Export the selected data to a file."
 msgstr "تصدر البيانات المختارة إلى ملف."
 
-#: controllers/io/export/exportdialog.cpp:76
+#: controllers/io/export/exportdialog.cpp:77
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""

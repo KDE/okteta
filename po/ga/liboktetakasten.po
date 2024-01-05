@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: playground-utils/okteta.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-31 03:11+0000\n"
+"POT-Creation-Date: 2024-01-05 02:31+0000\n"
 "PO-Revision-Date: 2007-11-05 08:28-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -326,27 +326,27 @@ msgctxt "@title:window"
 msgid "Charset Conversion"
 msgstr ""
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:48
+#: controllers/view/charsetconversion/charsetconversionview.cpp:47
 #, kde-format
 msgctxt ""
 "@item:inmenu Is converted _from_ charset (selected in combobox next to this)"
 msgid "From"
 msgstr "Ó"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:50
+#: controllers/view/charsetconversion/charsetconversionview.cpp:49
 #, kde-format
 msgctxt ""
 "@item:inmenu Is converted _to_ charset (selected in combobox next to this)"
 msgid "To"
 msgstr "Go"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:57
+#: controllers/view/charsetconversion/charsetconversionview.cpp:56
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The direction the bytes are converted, to or from the selected charset."
 msgstr ""
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:61
+#: controllers/view/charsetconversion/charsetconversionview.cpp:60
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -354,34 +354,34 @@ msgid ""
 "charset."
 msgstr ""
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:77
+#: controllers/view/charsetconversion/charsetconversionview.cpp:76
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The charset the bytes are converted to."
 msgstr ""
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:81
+#: controllers/view/charsetconversion/charsetconversionview.cpp:80
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Select the charset the bytes are converted to."
 msgstr ""
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:96
-#: controllers/view/checksum/checksumview.cpp:65
+#: controllers/view/charsetconversion/charsetconversionview.cpp:95
+#: controllers/view/checksum/checksumview.cpp:64
 #: controllers/view/filter/filterview.cpp:64
 #, kde-format
 msgctxt "@title:group"
 msgid "Parameters"
 msgstr "Paraiméadair"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:102
+#: controllers/view/charsetconversion/charsetconversionview.cpp:101
 #, kde-format
 msgctxt ""
 "@option:check substitute bytes whose char is not part of the target charset"
 msgid "Substitute missing:"
 msgstr ""
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:107
+#: controllers/view/charsetconversion/charsetconversionview.cpp:106
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -389,7 +389,7 @@ msgid ""
 "the source charset is not part of the target charset."
 msgstr ""
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:111
+#: controllers/view/charsetconversion/charsetconversionview.cpp:110
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -397,38 +397,38 @@ msgid ""
 "in the source charset is not part of the target charset."
 msgstr ""
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:127
+#: controllers/view/charsetconversion/charsetconversionview.cpp:126
 #, kde-format
 msgctxt ""
 "@label:textbox byte to use for chars which are not part of the target charset"
 msgid "Substitute byte:"
 msgstr ""
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:133
+#: controllers/view/charsetconversion/charsetconversionview.cpp:132
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte to use for chars which are not part of the target charset."
 msgstr ""
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:136
+#: controllers/view/charsetconversion/charsetconversionview.cpp:135
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
 "Define the byte to use for chars which are not part of the target charset."
 msgstr ""
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:162
+#: controllers/view/charsetconversion/charsetconversionview.cpp:161
 #, kde-format
 msgid "Con&vert"
 msgstr "&Tiontaigh"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:165
+#: controllers/view/charsetconversion/charsetconversionview.cpp:164
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Converts the bytes in the selected range."
 msgstr "Tiontaíonn sé seo na bearta sa raon roghnaithe."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:167
+#: controllers/view/charsetconversion/charsetconversionview.cpp:166
 #, fuzzy, kde-kuit-format
 #| msgctxt "@info:whatsthis"
 #| msgid ""
@@ -445,13 +445,13 @@ msgstr ""
 "roghnaigh tú thuas i bhfeidhm ar na bearta sa raon roghnaithe leis na "
 "roghanna a thug tú."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:205
+#: controllers/view/charsetconversion/charsetconversionview.cpp:204
 #, kde-format
 msgctxt "@info"
 msgid "No bytes converted."
 msgstr ""
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:206
+#: controllers/view/charsetconversion/charsetconversionview.cpp:205
 #, kde-format
 msgctxt "@info"
 msgid "1 byte converted."
@@ -462,13 +462,13 @@ msgstr[2] "Tiontaíodh %1 bheart."
 msgstr[3] "Tiontaíodh %1 mbeart."
 msgstr[4] "Tiontaíodh %1 beart."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:216
+#: controllers/view/charsetconversion/charsetconversionview.cpp:215
 #, kde-format
 msgctxt "@info"
 msgid "No bytes substituted."
 msgstr ""
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:217
+#: controllers/view/charsetconversion/charsetconversionview.cpp:216
 #, kde-format
 msgctxt "@info"
 msgid "1 byte substituted."
@@ -479,7 +479,7 @@ msgstr[2] ""
 msgstr[3] ""
 msgstr[4] ""
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:226
+#: controllers/view/charsetconversion/charsetconversionview.cpp:225
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -493,31 +493,31 @@ msgctxt "@title:window of the tool to calculate checksums"
 msgid "Checksum"
 msgstr "Suim sheiceála"
 
-#: controllers/view/checksum/checksumview.cpp:49
+#: controllers/view/checksum/checksumview.cpp:48
 #, kde-format
 msgctxt "@label:listbox algorithm to use for the checksum"
 msgid "Algorithm:"
 msgstr "Algartam:"
 
-#: controllers/view/checksum/checksumview.cpp:56
+#: controllers/view/checksum/checksumview.cpp:55
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Select the algorithm to use for the checksum."
 msgstr "Roghnaigh an t-algartam le haghaidh na suime seiceála."
 
-#: controllers/view/checksum/checksumview.cpp:83
+#: controllers/view/checksum/checksumview.cpp:82
 #, kde-format
 msgctxt "@action:button calculate the checksum"
 msgid "&Calculate"
 msgstr "&Ríomh"
 
-#: controllers/view/checksum/checksumview.cpp:86
+#: controllers/view/checksum/checksumview.cpp:85
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Calculate the checksum for the bytes in the selected range."
 msgstr "Ríomh an tsuim sheiceála le haghaidh na mbeart sa raon roghnaithe."
 
-#: controllers/view/checksum/checksumview.cpp:88
+#: controllers/view/checksum/checksumview.cpp:87
 #, fuzzy, kde-kuit-format
 #| msgctxt "@info:whatsthis"
 #| msgid ""
@@ -596,15 +596,15 @@ msgctxt "@title:window of the tool to set a new offset for the cursor"
 msgid "Goto"
 msgstr "Téigh go"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:71
+#: controllers/view/gotooffset/gotooffsetview.cpp:72
 #, kde-format
 msgctxt "@label:listbox"
 msgid "O&ffset:"
 msgstr "&Fritháireamh:"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:81
-#: controllers/view/selectrange/selectrangeview.cpp:80
-#: controllers/view/selectrange/selectrangeview.cpp:100
+#: controllers/view/gotooffset/gotooffsetview.cpp:82
+#: controllers/view/selectrange/selectrangeview.cpp:81
+#: controllers/view/selectrange/selectrangeview.cpp:101
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Enter an offset to go to, or select a previous offset from the list."
@@ -612,61 +612,61 @@ msgstr ""
 "Iontráil fritháireamh a rachfar chuige, nó roghnaigh sean-fhritháireamh ón "
 "liosta."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:97
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:112
+#: controllers/view/gotooffset/gotooffsetview.cpp:98
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:113
 #, kde-format
 msgctxt "@option:check"
 msgid "From c&ursor"
 msgstr "Ón &chúrsóir"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:99
+#: controllers/view/gotooffset/gotooffsetview.cpp:100
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Go relative from the current cursor location and not absolute."
 msgstr ""
 "Téigh i gcoibhneas do shuíomh reatha an chúrsóra seachas dearbhshuíomh."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:102
+#: controllers/view/gotooffset/gotooffsetview.cpp:103
 #, kde-format
 msgctxt "@option:check"
 msgid "&Extend selection"
 msgstr "&Fadaigh an roghnúchán"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:104
-#: controllers/view/selectrange/selectrangeview.cpp:122
+#: controllers/view/gotooffset/gotooffsetview.cpp:105
+#: controllers/view/selectrange/selectrangeview.cpp:123
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Extend the selection by the cursor move."
 msgstr "Fadaigh an roghnúchán an mhéid a bhog an cúrsóir."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:107
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:115
-#: controllers/view/selectrange/selectrangeview.cpp:114
+#: controllers/view/gotooffset/gotooffsetview.cpp:108
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:116
+#: controllers/view/selectrange/selectrangeview.cpp:115
 #, kde-format
 msgctxt "@option:check"
 msgid "&Backwards"
 msgstr "&Siar"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:109
-#: controllers/view/selectrange/selectrangeview.cpp:116
+#: controllers/view/gotooffset/gotooffsetview.cpp:110
+#: controllers/view/selectrange/selectrangeview.cpp:117
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Go backwards from the end or the current cursor location."
 msgstr "Téigh ar gcúl ón deireadh nó ó shuíomh reatha an chúrsóra."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:124
+#: controllers/view/gotooffset/gotooffsetview.cpp:125
 #, kde-format
 msgctxt "@action:button"
 msgid "&Go"
 msgstr "Téi&gh"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:127
+#: controllers/view/gotooffset/gotooffsetview.cpp:128
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Go to the Offset"
 msgstr "Téigh go dtí an Fritháireamh"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:129
+#: controllers/view/gotooffset/gotooffsetview.cpp:130
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -721,7 +721,7 @@ msgstr ""
 #: controllers/view/info/infoview.cpp:184
 #: controllers/view/structures/datatypes/datainformation.cpp:59
 #: controllers/view/structures/datatypes/datainformation.cpp:62
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:220
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:219
 #, kde-format
 msgid "1 byte"
 msgid_plural "%1 bytes"
@@ -1055,7 +1055,7 @@ msgctxt "name of the filter; it does a logic XOR operation"
 msgid "operand XOR data"
 msgstr "oibreann XOR sonraí"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:72
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:73
 #: controllers/view/search/searchcontroller.cpp:112
 #: controllers/view/search/searchcontroller.cpp:118
 #, kde-format
@@ -1063,7 +1063,7 @@ msgctxt "@title:window"
 msgid "Find"
 msgstr "Aimsigh"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:84
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:85
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1071,19 +1071,19 @@ msgid ""
 "the list."
 msgstr ""
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:102
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:103
 #, kde-format
 msgctxt "@title:group"
 msgid "Options"
 msgstr "Roghanna"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:107
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:108
 #, kde-format
 msgctxt "@option:check"
 msgid "C&ase sensitive"
 msgstr "&Cásíogair"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:108
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:109
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1093,37 +1093,37 @@ msgstr ""
 "Déan cuardach cásíogair; m.sh. ní bheidh an patrún 'Seosamh' comhoiriúnach "
 "do 'seosamh' or 'SEOSAMH', ach le 'Seosamh' amháin."
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:110
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:111
 #, kde-format
 msgctxt "@option:check"
 msgid "&Whole words only"
 msgstr "&Focail iomlána amháin"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:111
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:112
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Require word boundaries in both ends of a match to succeed."
 msgstr "Éiligh teorainneacha focail ag tús agus deireadh an teaghráin."
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:113
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:114
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Start searching at the current cursor location rather than at the top."
 msgstr "Tosaigh an cuardach ó shuíomh reatha an chúrsóra seachas ón bharr."
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:116
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:117
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Replace backwards."
 msgstr "Ionadaigh ar gcúl."
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:117
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:118
 #, kde-format
 msgctxt "@option:check"
 msgid "&Selected bytes"
 msgstr "Bearta &roghnaithe"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:118
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:119
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Only search within the current selection."
@@ -1236,7 +1236,7 @@ msgid ""
 msgstr ""
 
 #: controllers/view/poddecoder/podtableview.cpp:257
-#: controllers/view/selectrange/selectrangeview.cpp:138
+#: controllers/view/selectrange/selectrangeview.cpp:139
 #: controllers/view/structures/structureview.cpp:335
 #, kde-format
 msgctxt "@action:button"
@@ -1545,31 +1545,31 @@ msgctxt "@title:window of the tool to select a range"
 msgid "Select"
 msgstr "Roghnaigh"
 
-#: controllers/view/selectrange/selectrangeview.cpp:74
+#: controllers/view/selectrange/selectrangeview.cpp:75
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Start offset:"
 msgstr "Fritháireamh tosaigh:"
 
-#: controllers/view/selectrange/selectrangeview.cpp:94
+#: controllers/view/selectrange/selectrangeview.cpp:95
 #, kde-format
 msgctxt "@label:listbox"
 msgid "End offset:"
 msgstr "Fritháireamh deiridh:"
 
-#: controllers/view/selectrange/selectrangeview.cpp:120
+#: controllers/view/selectrange/selectrangeview.cpp:121
 #, kde-format
 msgctxt "@option:check"
 msgid "End relative"
 msgstr ""
 
-#: controllers/view/selectrange/selectrangeview.cpp:141
+#: controllers/view/selectrange/selectrangeview.cpp:142
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the range."
 msgstr "Roghnaigh an raon."
 
-#: controllers/view/selectrange/selectrangeview.cpp:143
+#: controllers/view/selectrange/selectrangeview.cpp:144
 #, fuzzy, kde-kuit-format
 #| msgctxt "@info:whatsthis"
 #| msgid ""
@@ -2203,34 +2203,34 @@ msgctxt "@title:column"
 msgid "Message"
 msgstr ""
 
-#: controllers/view/structures/settings/structureaddremovewidget.cpp:40
+#: controllers/view/structures/settings/structureaddremovewidget.cpp:35
 #, kde-format
 msgctxt "@info:label"
 msgid "Installed structures:"
 msgstr "Struchtúir shuiteáilte:"
 
-#: controllers/view/structures/settings/structureaddremovewidget.cpp:50
+#: controllers/view/structures/settings/structureaddremovewidget.cpp:45
 #, kde-format
 msgctxt "@info:label"
 msgid "Used structures:"
 msgstr "Struchtúir úsáidte:"
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:51
+#: controllers/view/structures/settings/structuresmanagerview.cpp:52
 #, kde-format
 msgid "Get New Structures..."
 msgstr "Faigh Struchtúir Nua..."
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:58
+#: controllers/view/structures/settings/structuresmanagerview.cpp:59
 #, kde-format
 msgid "Advanced Selection..."
 msgstr ""
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:180
+#: controllers/view/structures/settings/structuresmanagerview.cpp:181
 #, kde-format
 msgid "Structure Definitions"
 msgstr "Sainmhínithe ar Struchtúir"
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:183
+#: controllers/view/structures/settings/structuresmanagerview.cpp:184
 #, kde-format
 msgid "Dynamic Structure Definitions"
 msgstr ""
@@ -2867,8 +2867,8 @@ msgid "Values"
 msgstr "Luachanna"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:137
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:53
-#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:41
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:52
+#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:38
 #, kde-format
 msgctxt ""
 "@item:inmenu encoding of the bytes as values in the hexadecimal format"
@@ -2876,24 +2876,24 @@ msgid "Hexadecimal"
 msgstr "Heicsidheachúlach"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:139
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:54
-#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:42
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:53
+#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:39
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
 msgid "Decimal"
 msgstr "Deachúil"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:141
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:55
-#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:43
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:54
+#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:40
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
 msgid "Octal"
 msgstr "Ochtnártha"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:143
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:56
-#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:44
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:55
+#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:41
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
 msgid "Binary"
@@ -3045,73 +3045,73 @@ msgctxt "@window:title"
 msgid "\"%1\" View Profile"
 msgstr "Próifíl Amhairc \"%1\""
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:42
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:41
 #, kde-format
 msgctxt "@info:status short for: Insert mode"
 msgid "INS"
 msgstr "IONS"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:43
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:42
 #, kde-format
 msgctxt "@info:status short for: Overwrite mode"
 msgid "OVR"
 msgstr "FOR"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:44
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:43
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Insert mode"
 msgstr "Mód ionsáite"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:45
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:44
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Overwrite mode"
 msgstr "Mód forscríofa"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:60
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:59
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Coding of the value interpretation in the current view."
 msgstr "Códú an léirmhínithe luacha san amharc reatha."
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:68
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:67
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Encoding in the character column of the current view."
 msgstr "Ionchódú sa cholún carachtair den amharc reatha."
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:106
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:203
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:105
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:202
 #, kde-format
 msgid "Offset: %1"
 msgstr "Fritháireamh: %1"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:115
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:114
 #, kde-format
 msgid "%1 bytes"
 msgstr "%1 bheart"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:117
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:116
 #, kde-format
 msgctxt "@info:status selection: start offset - end offset ()"
 msgid "Selection: %1 - %2 (%3)"
 msgstr "Roghnúchán: %1 - %2 (%3)"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:166
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:165
 #, kde-format
 msgctxt "@info:status offset value not available"
 msgid "Offset: -"
 msgstr "Fritháireamh: -"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:167
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:224
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:166
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:223
 #, kde-format
 msgctxt "@info:status offset value not available"
 msgid "Selection: -"
 msgstr "Roghnúchán: -"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:222
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:221
 #, kde-format
 msgctxt "@info:status selection: start offset - end offset (number of bytes)"
 msgid "Selection: %1 - %2 (%3)"
@@ -3257,7 +3257,7 @@ msgctxt "name of the encoding target"
 msgid "Base32"
 msgstr ""
 
-#: gui/io/streamencoder/base32/bytearraybase32streamencoderconfigeditor.cpp:34
+#: gui/io/streamencoder/base32/bytearraybase32streamencoderconfigeditor.cpp:33
 #, kde-format
 msgctxt ""
 "@label:listbox the type of the used encoding: Classic, Base32hex or z-"
@@ -3265,19 +3265,19 @@ msgctxt ""
 msgid "Encoding:"
 msgstr "Ionchódú:"
 
-#: gui/io/streamencoder/base32/bytearraybase32streamencoderconfigeditor.cpp:39
+#: gui/io/streamencoder/base32/bytearraybase32streamencoderconfigeditor.cpp:38
 #, kde-format
 msgctxt "@item:inmenu Doing the base32 using the classical encoding"
 msgid "Classic"
 msgstr "Clasaiceach"
 
-#: gui/io/streamencoder/base32/bytearraybase32streamencoderconfigeditor.cpp:41
+#: gui/io/streamencoder/base32/bytearraybase32streamencoderconfigeditor.cpp:40
 #, kde-format
 msgctxt "@item:inmenu Doing the base32 using the Base32hex encoding"
 msgid "Base32hex"
 msgstr "Base32hex"
 
-#: gui/io/streamencoder/base32/bytearraybase32streamencoderconfigeditor.cpp:43
+#: gui/io/streamencoder/base32/bytearraybase32streamencoderconfigeditor.cpp:42
 #, kde-format
 msgctxt "@item:inmenu Doing the base32 using the z-base-32 encoding"
 msgid "z-base-32"
@@ -3312,28 +3312,28 @@ msgctxt "name of the encoding target"
 msgid "Intel Hex"
 msgstr "Heics Intel"
 
-#: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:34
-#: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:34
+#: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:33
+#: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:33
 #, kde-format
 msgctxt "@label:listbox the size in bits of the addresses."
 msgid "Address size:"
 msgstr ""
 
-#: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:40
-#: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:39
+#: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:39
+#: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:38
 #, kde-format
 msgctxt "@item:inmenu address size"
 msgid "32-bit"
 msgstr "32-giotán"
 
-#: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:42
-#: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:43
+#: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:41
+#: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:42
 #, kde-format
 msgctxt "@item:inmenu address size"
 msgid "16-bit"
 msgstr "16-giotán"
 
-#: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:44
+#: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:43
 #, kde-format
 msgctxt "@item:inmenu address size"
 msgid "8-bit"
@@ -3377,7 +3377,7 @@ msgctxt "name of the encoding target"
 msgid "S-Record"
 msgstr ""
 
-#: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:41
+#: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:40
 #, kde-format
 msgctxt "@item:inmenu address size"
 msgid "24-bit"
@@ -3389,26 +3389,26 @@ msgctxt "name of the encoding target"
 msgid "Uuencoding"
 msgstr "Uu-ionchódú"
 
-#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:35
-#: gui/io/streamencoder/xxencoding/bytearrayxxencodingstreamencoderconfigeditor.cpp:34
+#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:34
+#: gui/io/streamencoder/xxencoding/bytearrayxxencodingstreamencoderconfigeditor.cpp:33
 #, kde-format
 msgctxt "@label:textbox file name internally given to the encoded data"
 msgid "Internal name of file:"
 msgstr "Ainm inmheánach an chomhaid:"
 
-#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:46
+#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:45
 #, kde-format
 msgctxt "@label:listbox the type of the used encoding: historical or Base64."
 msgid "Encoding:"
 msgstr "Ionchódú:"
 
-#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:51
+#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:50
 #, kde-format
 msgctxt "@item:inmenu Doing the uuencoding using the historical encoding"
 msgid "Historical"
 msgstr "Stairiúil"
 
-#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:53
+#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:52
 #, kde-format
 msgctxt "@item:inmenu Doing the uuencoding using the base64 encoding"
 msgid "Base64"
@@ -3420,12 +3420,12 @@ msgctxt "name of the encoding target"
 msgid "Values"
 msgstr "Luachanna"
 
-#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:36
+#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:33
 #, kde-format
 msgid "Value coding:"
 msgstr "Códú luachanna:"
 
-#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:51
+#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:49
 #, kde-format
 msgctxt "@label:textbox substring which separates the values"
 msgid "Separation:"
