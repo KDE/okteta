@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-01 00:43+0000\n"
+"POT-Creation-Date: 2024-01-05 00:43+0000\n"
 "PO-Revision-Date: 2023-11-29 17:37+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -328,27 +328,27 @@ msgctxt "@title:window"
 msgid "Charset Conversion"
 msgstr "字元集轉換"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:48
+#: controllers/view/charsetconversion/charsetconversionview.cpp:47
 #, kde-format
 msgctxt ""
 "@item:inmenu Is converted _from_ charset (selected in combobox next to this)"
 msgid "From"
 msgstr "從"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:50
+#: controllers/view/charsetconversion/charsetconversionview.cpp:49
 #, kde-format
 msgctxt ""
 "@item:inmenu Is converted _to_ charset (selected in combobox next to this)"
 msgid "To"
 msgstr "到"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:57
+#: controllers/view/charsetconversion/charsetconversionview.cpp:56
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The direction the bytes are converted, to or from the selected charset."
 msgstr "要轉換位元組的方向，是來源還是目標字元集。"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:61
+#: controllers/view/charsetconversion/charsetconversionview.cpp:60
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -356,34 +356,34 @@ msgid ""
 "charset."
 msgstr "選擇要轉換位元組的方向，是來源還是目標字元集。"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:77
+#: controllers/view/charsetconversion/charsetconversionview.cpp:76
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The charset the bytes are converted to."
 msgstr "位元組要轉換為哪個字元集。"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:81
+#: controllers/view/charsetconversion/charsetconversionview.cpp:80
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Select the charset the bytes are converted to."
 msgstr "選擇位元組要轉換為哪個字元集。"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:91
-#: controllers/view/checksum/checksumview.cpp:65
+#: controllers/view/charsetconversion/charsetconversionview.cpp:90
+#: controllers/view/checksum/checksumview.cpp:64
 #: controllers/view/filter/filterview.cpp:64
 #, kde-format
 msgctxt "@title:group"
 msgid "Parameters"
 msgstr "參數"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:97
+#: controllers/view/charsetconversion/charsetconversionview.cpp:96
 #, kde-format
 msgctxt ""
 "@option:check substitute bytes whose char is not part of the target charset"
 msgid "Substitute missing:"
 msgstr "替換不存在的目標字元："
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:102
+#: controllers/view/charsetconversion/charsetconversionview.cpp:101
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -393,7 +393,7 @@ msgstr ""
 "若是某個位元組在來源字元集中存在，但不存在於目標字元集因此無法轉換時，是否要"
 "以預設位元組替換。"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:106
+#: controllers/view/charsetconversion/charsetconversionview.cpp:105
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -403,38 +403,38 @@ msgstr ""
 "若是某個位元組在來源字元集中存在，但不存在於目標字元集因此無法轉換時，設為"
 "「真」則會以預設位元組替換。"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:122
+#: controllers/view/charsetconversion/charsetconversionview.cpp:121
 #, kde-format
 msgctxt ""
 "@label:textbox byte to use for chars which are not part of the target charset"
 msgid "Substitute byte:"
 msgstr "替換位元組："
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:128
+#: controllers/view/charsetconversion/charsetconversionview.cpp:127
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte to use for chars which are not part of the target charset."
 msgstr "若是目標位元組裡沒有該字元時，要用哪個位元組替代。"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:131
+#: controllers/view/charsetconversion/charsetconversionview.cpp:130
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
 "Define the byte to use for chars which are not part of the target charset."
 msgstr "定義若是目標位元組裡沒有該字元時，要用哪個位元組替代。"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:157
+#: controllers/view/charsetconversion/charsetconversionview.cpp:156
 #, kde-format
 msgid "Con&vert"
 msgstr "轉換(&V)"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:160
+#: controllers/view/charsetconversion/charsetconversionview.cpp:159
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Converts the bytes in the selected range."
 msgstr "轉換在選取範圍內的位元組。"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:162
+#: controllers/view/charsetconversion/charsetconversionview.cpp:161
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -445,33 +445,33 @@ msgstr ""
 "如果您按下<interface>轉換</interface>按鍵，會對選取範圍內的位元組執行取代為目"
 "標字元集的動作。"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:200
+#: controllers/view/charsetconversion/charsetconversionview.cpp:199
 #, kde-format
 msgctxt "@info"
 msgid "No bytes converted."
 msgstr "沒有轉換任何位元組。"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:201
+#: controllers/view/charsetconversion/charsetconversionview.cpp:200
 #, kde-format
 msgctxt "@info"
 msgid "1 byte converted."
 msgid_plural "%1 bytes converted."
 msgstr[0] "轉換了 %1 個位元組。"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:211
+#: controllers/view/charsetconversion/charsetconversionview.cpp:210
 #, kde-format
 msgctxt "@info"
 msgid "No bytes substituted."
 msgstr "沒有替換任何位元組。"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:212
+#: controllers/view/charsetconversion/charsetconversionview.cpp:211
 #, kde-format
 msgctxt "@info"
 msgid "1 byte substituted."
 msgid_plural "%1 bytes substituted."
 msgstr[0] "替換了 %1 個位元組"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:221
+#: controllers/view/charsetconversion/charsetconversionview.cpp:220
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -485,31 +485,31 @@ msgctxt "@title:window of the tool to calculate checksums"
 msgid "Checksum"
 msgstr "檢查碼"
 
-#: controllers/view/checksum/checksumview.cpp:49
+#: controllers/view/checksum/checksumview.cpp:48
 #, kde-format
 msgctxt "@label:listbox algorithm to use for the checksum"
 msgid "Algorithm:"
 msgstr "演算法："
 
-#: controllers/view/checksum/checksumview.cpp:56
+#: controllers/view/checksum/checksumview.cpp:55
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Select the algorithm to use for the checksum."
 msgstr "選擇計算檢查碼使用的演算法。"
 
-#: controllers/view/checksum/checksumview.cpp:83
+#: controllers/view/checksum/checksumview.cpp:82
 #, kde-format
 msgctxt "@action:button calculate the checksum"
 msgid "&Calculate"
 msgstr "計算(&C)"
 
-#: controllers/view/checksum/checksumview.cpp:86
+#: controllers/view/checksum/checksumview.cpp:85
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Calculate the checksum for the bytes in the selected range."
 msgstr "計算在選取範圍內的位元的檢查碼。"
 
-#: controllers/view/checksum/checksumview.cpp:88
+#: controllers/view/checksum/checksumview.cpp:87
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -580,74 +580,74 @@ msgctxt "@title:window of the tool to set a new offset for the cursor"
 msgid "Goto"
 msgstr "前往"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:57
+#: controllers/view/gotooffset/gotooffsetview.cpp:58
 #, kde-format
 msgctxt "@label:listbox"
 msgid "O&ffset:"
 msgstr "位移(&F)："
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:67
-#: controllers/view/selectrange/selectrangeview.cpp:66
-#: controllers/view/selectrange/selectrangeview.cpp:86
+#: controllers/view/gotooffset/gotooffsetview.cpp:68
+#: controllers/view/selectrange/selectrangeview.cpp:67
+#: controllers/view/selectrange/selectrangeview.cpp:87
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Enter an offset to go to, or select a previous offset from the list."
 msgstr "輸入您要跳到哪個地方，或是從先前的清單中選取。"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:83
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:112
+#: controllers/view/gotooffset/gotooffsetview.cpp:84
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:113
 #, kde-format
 msgctxt "@option:check"
 msgid "From c&ursor"
 msgstr "從游標(&U)"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:85
+#: controllers/view/gotooffset/gotooffsetview.cpp:86
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Go relative from the current cursor location and not absolute."
 msgstr "從游標算起多少位移。"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:88
+#: controllers/view/gotooffset/gotooffsetview.cpp:89
 #, kde-format
 msgctxt "@option:check"
 msgid "&Extend selection"
 msgstr "延伸選擇(&E)"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:90
-#: controllers/view/selectrange/selectrangeview.cpp:108
+#: controllers/view/gotooffset/gotooffsetview.cpp:91
+#: controllers/view/selectrange/selectrangeview.cpp:109
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Extend the selection by the cursor move."
 msgstr "用滑鼠移動來延伸選擇。"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:93
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:115
-#: controllers/view/selectrange/selectrangeview.cpp:100
+#: controllers/view/gotooffset/gotooffsetview.cpp:94
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:116
+#: controllers/view/selectrange/selectrangeview.cpp:101
 #, kde-format
 msgctxt "@option:check"
 msgid "&Backwards"
 msgstr "往前(&B)"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:95
-#: controllers/view/selectrange/selectrangeview.cpp:102
+#: controllers/view/gotooffset/gotooffsetview.cpp:96
+#: controllers/view/selectrange/selectrangeview.cpp:103
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Go backwards from the end or the current cursor location."
 msgstr "往前移動。"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:110
+#: controllers/view/gotooffset/gotooffsetview.cpp:111
 #, kde-format
 msgctxt "@action:button"
 msgid "&Go"
 msgstr "走(&G)"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:113
+#: controllers/view/gotooffset/gotooffsetview.cpp:114
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Go to the Offset"
 msgstr "跳到位移"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:115
+#: controllers/view/gotooffset/gotooffsetview.cpp:116
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -729,7 +729,7 @@ msgstr ""
 #: controllers/view/info/infoview.cpp:189
 #: controllers/view/structures/datatypes/datainformation.cpp:60
 #: controllers/view/structures/datatypes/datainformation.cpp:63
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:226
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:225
 #, kde-format
 msgid "1 byte"
 msgid_plural "%1 bytes"
@@ -1078,7 +1078,7 @@ msgctxt "name of the filter; it does a logic XOR operation"
 msgid "operand XOR data"
 msgstr "XOR"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:72
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:73
 #: controllers/view/search/searchcontroller.cpp:111
 #: controllers/view/search/searchcontroller.cpp:117
 #, kde-format
@@ -1086,7 +1086,7 @@ msgctxt "@title:window"
 msgid "Find"
 msgstr "尋找"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:84
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:85
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1094,19 +1094,19 @@ msgid ""
 "the list."
 msgstr "輸入要搜尋的位元，或從先前的清單中選取。"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:102
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:103
 #, kde-format
 msgctxt "@title:group"
 msgid "Options"
 msgstr "選項"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:107
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:108
 #, kde-format
 msgctxt "@option:check"
 msgid "C&ase sensitive"
 msgstr "區分大小寫(&A)"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:108
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:109
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1114,37 +1114,37 @@ msgid ""
 "'joe' or 'JOE', only 'Joe'."
 msgstr "搜尋時區分大小寫。"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:110
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:111
 #, kde-format
 msgctxt "@option:check"
 msgid "&Whole words only"
 msgstr "只比對整個單字(&W)"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:111
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:112
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Require word boundaries in both ends of a match to succeed."
 msgstr "需要完全符合整個單字。"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:113
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:114
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Start searching at the current cursor location rather than at the top."
 msgstr "從目前的游標位置開始搜尋。"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:116
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:117
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Replace backwards."
 msgstr "向前取代。"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:117
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:118
 #, kde-format
 msgctxt "@option:check"
 msgid "&Selected bytes"
 msgstr "已選取位元組(&S)"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:118
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:119
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Only search within the current selection."
@@ -1262,7 +1262,7 @@ msgid "Edit"
 msgstr "編輯(&E)..."
 
 #: controllers/view/poddecoder/podtableview.cpp:254
-#: controllers/view/selectrange/selectrangeview.cpp:124
+#: controllers/view/selectrange/selectrangeview.cpp:125
 #: controllers/view/structures/structureview.cpp:353
 #, kde-format
 msgctxt "@action:button"
@@ -1570,31 +1570,31 @@ msgctxt "@title:window of the tool to select a range"
 msgid "Select"
 msgstr "選擇"
 
-#: controllers/view/selectrange/selectrangeview.cpp:60
+#: controllers/view/selectrange/selectrangeview.cpp:61
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Start offset:"
 msgstr "開始位移："
 
-#: controllers/view/selectrange/selectrangeview.cpp:80
+#: controllers/view/selectrange/selectrangeview.cpp:81
 #, kde-format
 msgctxt "@label:listbox"
 msgid "End offset:"
 msgstr "結束位移："
 
-#: controllers/view/selectrange/selectrangeview.cpp:106
+#: controllers/view/selectrange/selectrangeview.cpp:107
 #, kde-format
 msgctxt "@option:check"
 msgid "End relative"
 msgstr "結束相對"
 
-#: controllers/view/selectrange/selectrangeview.cpp:127
+#: controllers/view/selectrange/selectrangeview.cpp:128
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the range."
 msgstr "選擇範圍。"
 
-#: controllers/view/selectrange/selectrangeview.cpp:129
+#: controllers/view/selectrange/selectrangeview.cpp:130
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -2131,13 +2131,13 @@ msgctxt "@title:window"
 msgid "License Agreement"
 msgstr ""
 
-#: controllers/view/structures/settings/structureaddremovewidget.cpp:53
+#: controllers/view/structures/settings/structureaddremovewidget.cpp:48
 #, kde-format
 msgctxt "@info:label"
 msgid "Installed structures:"
 msgstr "已安裝的結構："
 
-#: controllers/view/structures/settings/structureaddremovewidget.cpp:63
+#: controllers/view/structures/settings/structureaddremovewidget.cpp:58
 #, kde-format
 msgctxt "@info:label"
 msgid "Used structures:"
@@ -2149,12 +2149,12 @@ msgctxt "@info:tooltip"
 msgid "About"
 msgstr ""
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:45
+#: controllers/view/structures/settings/structuresmanagerview.cpp:46
 #, kde-format
 msgid "Get New Structures..."
 msgstr "取得新結構..."
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:51
+#: controllers/view/structures/settings/structuresmanagerview.cpp:52
 #, kde-format
 msgid "Advanced Selection..."
 msgstr "進階選取..."
@@ -2810,8 +2810,8 @@ msgid "Values"
 msgstr "數值"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:138
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:53
-#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:41
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:52
+#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:38
 #, kde-format
 msgctxt ""
 "@item:inmenu encoding of the bytes as values in the hexadecimal format"
@@ -2819,24 +2819,24 @@ msgid "Hexadecimal"
 msgstr "十六進位"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:140
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:54
-#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:42
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:53
+#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:39
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
 msgid "Decimal"
 msgstr "十進位"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:142
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:55
-#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:43
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:54
+#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:40
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
 msgid "Octal"
 msgstr "八進位"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:144
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:56
-#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:44
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:55
+#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:41
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
 msgid "Binary"
@@ -2974,73 +2974,73 @@ msgctxt "@window:title"
 msgid "\"%1\" View Profile"
 msgstr "檢視設定檔 %1"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:42
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:41
 #, kde-format
 msgctxt "@info:status short for: Insert mode"
 msgid "INS"
 msgstr "插入"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:43
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:42
 #, kde-format
 msgctxt "@info:status short for: Overwrite mode"
 msgid "OVR"
 msgstr "覆寫"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:44
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:43
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Insert mode"
 msgstr "插入模式"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:45
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:44
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Overwrite mode"
 msgstr "覆寫模式"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:60
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:59
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Coding of the value interpretation in the current view."
 msgstr "在目前檢視中的數值解譯中的編碼。"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:68
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:67
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Encoding in the character column of the current view."
 msgstr "在目前檢視中的字元欄位中的編碼。"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:112
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:209
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:111
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:208
 #, kde-format
 msgid "Offset: %1"
 msgstr "位移：%1"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:121
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:120
 #, kde-format
 msgid "%1 bytes"
 msgstr "%1 位元組"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:123
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:122
 #, kde-format
 msgctxt "@info:status selection: start offset - end offset ()"
 msgid "Selection: %1 - %2 (%3)"
 msgstr "選擇區：%1 - %2（%3）"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:172
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:171
 #, kde-format
 msgctxt "@info:status offset value not available"
 msgid "Offset: -"
 msgstr "位移：-"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:173
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:230
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:172
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:229
 #, kde-format
 msgctxt "@info:status offset value not available"
 msgid "Selection: -"
 msgstr "選擇區： -"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:228
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:227
 #, kde-format
 msgctxt "@info:status selection: start offset - end offset (number of bytes)"
 msgid "Selection: %1 - %2 (%3)"
@@ -3178,7 +3178,7 @@ msgctxt "name of the encoding target"
 msgid "Base32"
 msgstr "Base32"
 
-#: gui/io/streamencoder/base32/bytearraybase32streamencoderconfigeditor.cpp:34
+#: gui/io/streamencoder/base32/bytearraybase32streamencoderconfigeditor.cpp:33
 #, kde-format
 msgctxt ""
 "@label:listbox the type of the used encoding: Classic, Base32hex or z-"
@@ -3186,19 +3186,19 @@ msgctxt ""
 msgid "Encoding:"
 msgstr "編碼："
 
-#: gui/io/streamencoder/base32/bytearraybase32streamencoderconfigeditor.cpp:39
+#: gui/io/streamencoder/base32/bytearraybase32streamencoderconfigeditor.cpp:38
 #, kde-format
 msgctxt "@item:inmenu Doing the base32 using the classical encoding"
 msgid "Classic"
 msgstr "傳統"
 
-#: gui/io/streamencoder/base32/bytearraybase32streamencoderconfigeditor.cpp:41
+#: gui/io/streamencoder/base32/bytearraybase32streamencoderconfigeditor.cpp:40
 #, kde-format
 msgctxt "@item:inmenu Doing the base32 using the Base32hex encoding"
 msgid "Base32hex"
 msgstr "Base32hex"
 
-#: gui/io/streamencoder/base32/bytearraybase32streamencoderconfigeditor.cpp:43
+#: gui/io/streamencoder/base32/bytearraybase32streamencoderconfigeditor.cpp:42
 #, kde-format
 msgctxt "@item:inmenu Doing the base32 using the z-base-32 encoding"
 msgid "z-base-32"
@@ -3233,28 +3233,28 @@ msgctxt "name of the encoding target"
 msgid "Intel Hex"
 msgstr "Intel Hex"
 
-#: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:34
-#: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:34
+#: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:33
+#: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:33
 #, kde-format
 msgctxt "@label:listbox the size in bits of the addresses."
 msgid "Address size:"
 msgstr "位址大小："
 
-#: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:40
-#: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:39
+#: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:39
+#: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:38
 #, kde-format
 msgctxt "@item:inmenu address size"
 msgid "32-bit"
 msgstr "32 位元"
 
-#: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:42
-#: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:43
+#: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:41
+#: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:42
 #, kde-format
 msgctxt "@item:inmenu address size"
 msgid "16-bit"
 msgstr "16 位元"
 
-#: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:44
+#: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:43
 #, kde-format
 msgctxt "@item:inmenu address size"
 msgid "8-bit"
@@ -3298,7 +3298,7 @@ msgctxt "name of the encoding target"
 msgid "S-Record"
 msgstr "S-Record"
 
-#: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:41
+#: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:40
 #, kde-format
 msgctxt "@item:inmenu address size"
 msgid "24-bit"
@@ -3310,26 +3310,26 @@ msgctxt "name of the encoding target"
 msgid "Uuencoding"
 msgstr "Uuencoding"
 
-#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:35
-#: gui/io/streamencoder/xxencoding/bytearrayxxencodingstreamencoderconfigeditor.cpp:34
+#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:34
+#: gui/io/streamencoder/xxencoding/bytearrayxxencodingstreamencoderconfigeditor.cpp:33
 #, kde-format
 msgctxt "@label:textbox file name internally given to the encoded data"
 msgid "Internal name of file:"
 msgstr "檔案內部名稱："
 
-#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:46
+#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:45
 #, kde-format
 msgctxt "@label:listbox the type of the used encoding: historical or Base64."
 msgid "Encoding:"
 msgstr "編碼："
 
-#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:51
+#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:50
 #, kde-format
 msgctxt "@item:inmenu Doing the uuencoding using the historical encoding"
 msgid "Historical"
 msgstr "歷史"
 
-#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:53
+#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:52
 #, kde-format
 msgctxt "@item:inmenu Doing the uuencoding using the base64 encoding"
 msgid "Base64"
@@ -3341,12 +3341,12 @@ msgctxt "name of the encoding target"
 msgid "Values"
 msgstr "數值"
 
-#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:36
+#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:33
 #, kde-format
 msgid "Value coding:"
 msgstr "數值編碼："
 
-#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:51
+#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:49
 #, kde-format
 msgctxt "@label:textbox substring which separates the values"
 msgid "Separation:"

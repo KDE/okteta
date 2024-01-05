@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-01 00:43+0000\n"
+"POT-Creation-Date: 2024-01-05 00:43+0000\n"
 "PO-Revision-Date: 2015-02-04 16:00+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: bosanski <bs@li.org>\n"
@@ -341,27 +341,27 @@ msgctxt "@title:window"
 msgid "Charset Conversion"
 msgstr "Prevođenje skupa znakova"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:48
+#: controllers/view/charsetconversion/charsetconversionview.cpp:47
 #, kde-format
 msgctxt ""
 "@item:inmenu Is converted _from_ charset (selected in combobox next to this)"
 msgid "From"
 msgstr "Iz"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:50
+#: controllers/view/charsetconversion/charsetconversionview.cpp:49
 #, kde-format
 msgctxt ""
 "@item:inmenu Is converted _to_ charset (selected in combobox next to this)"
 msgid "To"
 msgstr "U"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:57
+#: controllers/view/charsetconversion/charsetconversionview.cpp:56
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The direction the bytes are converted, to or from the selected charset."
 msgstr "Pravac konvertovanih bajtova, u ili iz izabranog skupa znakova."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:61
+#: controllers/view/charsetconversion/charsetconversionview.cpp:60
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -369,34 +369,34 @@ msgid ""
 "charset."
 msgstr "Odaberite pravac konverzije bajtova, u ili iz izabranog skupa znakova."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:77
+#: controllers/view/charsetconversion/charsetconversionview.cpp:76
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The charset the bytes are converted to."
 msgstr "Skup znakova u koje se konvertuju bajtovi."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:81
+#: controllers/view/charsetconversion/charsetconversionview.cpp:80
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Select the charset the bytes are converted to."
 msgstr "Odaberite skup znakova u koje se konvertuju bajtovi."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:91
-#: controllers/view/checksum/checksumview.cpp:65
+#: controllers/view/charsetconversion/charsetconversionview.cpp:90
+#: controllers/view/checksum/checksumview.cpp:64
 #: controllers/view/filter/filterview.cpp:64
 #, kde-format
 msgctxt "@title:group"
 msgid "Parameters"
 msgstr "Parametri"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:97
+#: controllers/view/charsetconversion/charsetconversionview.cpp:96
 #, kde-format
 msgctxt ""
 "@option:check substitute bytes whose char is not part of the target charset"
 msgid "Substitute missing:"
 msgstr "Zamijeni nedostajuće:"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:102
+#: controllers/view/charsetconversion/charsetconversionview.cpp:101
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -406,7 +406,7 @@ msgstr ""
 "Određuje da li se bajtovi trebaju zamijeniti podrazumijevanim bajtom ako "
 "njegov znak u izvornom skupu znakova nije dio odredišnog skupa znakova."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:106
+#: controllers/view/charsetconversion/charsetconversionview.cpp:105
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -416,21 +416,21 @@ msgstr ""
 "Postavite na tačno ako se bajtovi trebaju zamijeniti podrazumijevanim bajtom "
 "kada njegov znak u izvornom skupu znakova nije dio odredišnog skupa znakova."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:122
+#: controllers/view/charsetconversion/charsetconversionview.cpp:121
 #, kde-format
 msgctxt ""
 "@label:textbox byte to use for chars which are not part of the target charset"
 msgid "Substitute byte:"
 msgstr "Zamjenski bajt:"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:128
+#: controllers/view/charsetconversion/charsetconversionview.cpp:127
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte to use for chars which are not part of the target charset."
 msgstr ""
 "Bajt koji će se koristiti za znakove koji nisu dio odredišnog skupa znakova."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:131
+#: controllers/view/charsetconversion/charsetconversionview.cpp:130
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -439,18 +439,18 @@ msgstr ""
 "Definiše bajt koji će se koristiti za znakove koji nisu dio odredišnog skupa "
 "znakova."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:157
+#: controllers/view/charsetconversion/charsetconversionview.cpp:156
 #, kde-format
 msgid "Con&vert"
 msgstr "Kon&verzija"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:160
+#: controllers/view/charsetconversion/charsetconversionview.cpp:159
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Converts the bytes in the selected range."
 msgstr "Konvertuje bajtove u izabranom opsegu."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:162
+#: controllers/view/charsetconversion/charsetconversionview.cpp:161
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -462,13 +462,13 @@ msgstr ""
 "opsegu će biti zamijenjeni bajtovima koji predstavljaju isti znak u "
 "odredišnom skupu znakova."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:200
+#: controllers/view/charsetconversion/charsetconversionview.cpp:199
 #, kde-format
 msgctxt "@info"
 msgid "No bytes converted."
 msgstr "Nema konvertovanih bajtova."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:201
+#: controllers/view/charsetconversion/charsetconversionview.cpp:200
 #, kde-format
 msgctxt "@info"
 msgid "1 byte converted."
@@ -477,13 +477,13 @@ msgstr[0] "%1 konvertovan bajt."
 msgstr[1] "%1 konvertovana bajt."
 msgstr[2] "%1 konvertovanih bajtova."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:211
+#: controllers/view/charsetconversion/charsetconversionview.cpp:210
 #, kde-format
 msgctxt "@info"
 msgid "No bytes substituted."
 msgstr "Nema zamijenjenih bajtova."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:212
+#: controllers/view/charsetconversion/charsetconversionview.cpp:211
 #, kde-format
 msgctxt "@info"
 msgid "1 byte substituted."
@@ -492,7 +492,7 @@ msgstr[0] "%1 zamijenjen bajt."
 msgstr[1] "%1 zamijenjena bajta."
 msgstr[2] "%1 zamijenjenih bajtova."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:221
+#: controllers/view/charsetconversion/charsetconversionview.cpp:220
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -506,31 +506,31 @@ msgctxt "@title:window of the tool to calculate checksums"
 msgid "Checksum"
 msgstr "Kontrolna suma"
 
-#: controllers/view/checksum/checksumview.cpp:49
+#: controllers/view/checksum/checksumview.cpp:48
 #, kde-format
 msgctxt "@label:listbox algorithm to use for the checksum"
 msgid "Algorithm:"
 msgstr "Algoritam:"
 
-#: controllers/view/checksum/checksumview.cpp:56
+#: controllers/view/checksum/checksumview.cpp:55
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Select the algorithm to use for the checksum."
 msgstr "Izaberite algoritam za kontrolno sumiranje."
 
-#: controllers/view/checksum/checksumview.cpp:83
+#: controllers/view/checksum/checksumview.cpp:82
 #, kde-format
 msgctxt "@action:button calculate the checksum"
 msgid "&Calculate"
 msgstr "&Izračunaj"
 
-#: controllers/view/checksum/checksumview.cpp:86
+#: controllers/view/checksum/checksumview.cpp:85
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Calculate the checksum for the bytes in the selected range."
 msgstr "Izračunajte kontrolnu sumu bajtova u izabranom opsegu."
 
-#: controllers/view/checksum/checksumview.cpp:88
+#: controllers/view/checksum/checksumview.cpp:87
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -602,15 +602,15 @@ msgctxt "@title:window of the tool to set a new offset for the cursor"
 msgid "Goto"
 msgstr "Idi na"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:57
+#: controllers/view/gotooffset/gotooffsetview.cpp:58
 #, kde-format
 msgctxt "@label:listbox"
 msgid "O&ffset:"
 msgstr "&Pomjeraj:"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:67
-#: controllers/view/selectrange/selectrangeview.cpp:66
-#: controllers/view/selectrange/selectrangeview.cpp:86
+#: controllers/view/gotooffset/gotooffsetview.cpp:68
+#: controllers/view/selectrange/selectrangeview.cpp:67
+#: controllers/view/selectrange/selectrangeview.cpp:87
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Enter an offset to go to, or select a previous offset from the list."
@@ -618,61 +618,61 @@ msgstr ""
 "Unesite pomak na koji treba skočiti, ili izaberite neki od prethodnih sa "
 "spiska."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:83
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:112
+#: controllers/view/gotooffset/gotooffsetview.cpp:84
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:113
 #, kde-format
 msgctxt "@option:check"
 msgid "From c&ursor"
 msgstr "&Od pokazivača"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:85
+#: controllers/view/gotooffset/gotooffsetview.cpp:86
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Go relative from the current cursor location and not absolute."
 msgstr ""
 "Skok je relativan u odnosu na tekući položaj kursora (umjesto apsolutan)."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:88
+#: controllers/view/gotooffset/gotooffsetview.cpp:89
 #, kde-format
 msgctxt "@option:check"
 msgid "&Extend selection"
 msgstr "&Proširi izbor"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:90
-#: controllers/view/selectrange/selectrangeview.cpp:108
+#: controllers/view/gotooffset/gotooffsetview.cpp:91
+#: controllers/view/selectrange/selectrangeview.cpp:109
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Extend the selection by the cursor move."
 msgstr "Izbor se proširuje prateći premještanje kursora."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:93
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:115
-#: controllers/view/selectrange/selectrangeview.cpp:100
+#: controllers/view/gotooffset/gotooffsetview.cpp:94
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:116
+#: controllers/view/selectrange/selectrangeview.cpp:101
 #, kde-format
 msgctxt "@option:check"
 msgid "&Backwards"
 msgstr "&Unazad"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:95
-#: controllers/view/selectrange/selectrangeview.cpp:102
+#: controllers/view/gotooffset/gotooffsetview.cpp:96
+#: controllers/view/selectrange/selectrangeview.cpp:103
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Go backwards from the end or the current cursor location."
 msgstr "Skače unazad, s kraja dokumenta ili od tekućeg položaja kursora."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:110
+#: controllers/view/gotooffset/gotooffsetview.cpp:111
 #, kde-format
 msgctxt "@action:button"
 msgid "&Go"
 msgstr "&Kreni"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:113
+#: controllers/view/gotooffset/gotooffsetview.cpp:114
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Go to the Offset"
 msgstr "Idi na pomak"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:115
+#: controllers/view/gotooffset/gotooffsetview.cpp:116
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -755,7 +755,7 @@ msgstr ""
 #: controllers/view/info/infoview.cpp:189
 #: controllers/view/structures/datatypes/datainformation.cpp:60
 #: controllers/view/structures/datatypes/datainformation.cpp:63
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:226
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:225
 #, kde-format
 msgid "1 byte"
 msgid_plural "%1 bytes"
@@ -1116,7 +1116,7 @@ msgctxt "name of the filter; it does a logic XOR operation"
 msgid "operand XOR data"
 msgstr "operator ISKLJUČIVO ILI podaci"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:72
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:73
 #: controllers/view/search/searchcontroller.cpp:111
 #: controllers/view/search/searchcontroller.cpp:117
 #, kde-format
@@ -1124,7 +1124,7 @@ msgctxt "@title:window"
 msgid "Find"
 msgstr "Nađi"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:84
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:85
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1134,19 +1134,19 @@ msgstr ""
 "Unesite bajtove za traženje, ili izaberite neke od prethodno traženih sa "
 "spiska."
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:102
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:103
 #, kde-format
 msgctxt "@title:group"
 msgid "Options"
 msgstr "Opcije"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:107
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:108
 #, kde-format
 msgctxt "@option:check"
 msgid "C&ase sensitive"
 msgstr "&Razlikuj velika i mala slova"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:108
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:109
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1156,37 +1156,37 @@ msgstr ""
 "Razlikuj velika i mala slova: ako unesete tekst 'Zdravo' nećete pronaći "
 "'zdravo' ili 'ZDRAVO', samo 'Zdravo'."
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:110
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:111
 #, kde-format
 msgctxt "@option:check"
 msgid "&Whole words only"
 msgstr "Samo &cijele riječi"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:111
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:112
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Require word boundaries in both ends of a match to succeed."
 msgstr "Zahtijevaj granice riječi na oba kraja da bi poklapanje uspjelo."
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:113
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:114
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Start searching at the current cursor location rather than at the top."
 msgstr "Počni traženje od tekuće pozicije kursora umjesto od vrha."
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:116
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:117
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Replace backwards."
 msgstr "Zamjenjuje se unazad."
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:117
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:118
 #, kde-format
 msgctxt "@option:check"
 msgid "&Selected bytes"
 msgstr "&Izabrani bajtovi"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:118
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:119
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Only search within the current selection."
@@ -1310,7 +1310,7 @@ msgid "Edit"
 msgstr "&Izmijeni..."
 
 #: controllers/view/poddecoder/podtableview.cpp:254
-#: controllers/view/selectrange/selectrangeview.cpp:124
+#: controllers/view/selectrange/selectrangeview.cpp:125
 #: controllers/view/structures/structureview.cpp:353
 #, kde-format
 msgctxt "@action:button"
@@ -1627,31 +1627,31 @@ msgctxt "@title:window of the tool to select a range"
 msgid "Select"
 msgstr "Odaberi"
 
-#: controllers/view/selectrange/selectrangeview.cpp:60
+#: controllers/view/selectrange/selectrangeview.cpp:61
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Start offset:"
 msgstr "Početni pomak:"
 
-#: controllers/view/selectrange/selectrangeview.cpp:80
+#: controllers/view/selectrange/selectrangeview.cpp:81
 #, kde-format
 msgctxt "@label:listbox"
 msgid "End offset:"
 msgstr "Krajnji pomak:"
 
-#: controllers/view/selectrange/selectrangeview.cpp:106
+#: controllers/view/selectrange/selectrangeview.cpp:107
 #, kde-format
 msgctxt "@option:check"
 msgid "End relative"
 msgstr "Kraj je relativan"
 
-#: controllers/view/selectrange/selectrangeview.cpp:127
+#: controllers/view/selectrange/selectrangeview.cpp:128
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the range."
 msgstr "Izaberite opseg."
 
-#: controllers/view/selectrange/selectrangeview.cpp:129
+#: controllers/view/selectrange/selectrangeview.cpp:130
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -2206,13 +2206,13 @@ msgctxt "@title:window"
 msgid "License Agreement"
 msgstr ""
 
-#: controllers/view/structures/settings/structureaddremovewidget.cpp:53
+#: controllers/view/structures/settings/structureaddremovewidget.cpp:48
 #, kde-format
 msgctxt "@info:label"
 msgid "Installed structures:"
 msgstr "Instalirane strukture:"
 
-#: controllers/view/structures/settings/structureaddremovewidget.cpp:63
+#: controllers/view/structures/settings/structureaddremovewidget.cpp:58
 #, kde-format
 msgctxt "@info:label"
 msgid "Used structures:"
@@ -2224,12 +2224,12 @@ msgctxt "@info:tooltip"
 msgid "About"
 msgstr ""
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:45
+#: controllers/view/structures/settings/structuresmanagerview.cpp:46
 #, kde-format
 msgid "Get New Structures..."
 msgstr "Dobavi nove strukture..."
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:51
+#: controllers/view/structures/settings/structuresmanagerview.cpp:52
 #, kde-format
 msgid "Advanced Selection..."
 msgstr "Napredna selekcija..."
@@ -2901,8 +2901,8 @@ msgid "Values"
 msgstr "Vrijednosti"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:138
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:53
-#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:41
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:52
+#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:38
 #, kde-format
 msgctxt ""
 "@item:inmenu encoding of the bytes as values in the hexadecimal format"
@@ -2910,24 +2910,24 @@ msgid "Hexadecimal"
 msgstr "Heksadecimalno"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:140
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:54
-#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:42
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:53
+#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:39
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
 msgid "Decimal"
 msgstr "Decimalno"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:142
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:55
-#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:43
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:54
+#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:40
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
 msgid "Octal"
 msgstr "Oktalno"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:144
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:56
-#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:44
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:55
+#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:41
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
 msgid "Binary"
@@ -3068,73 +3068,73 @@ msgctxt "@window:title"
 msgid "\"%1\" View Profile"
 msgstr "\"%1\" Profil pogleda"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:42
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:41
 #, kde-format
 msgctxt "@info:status short for: Insert mode"
 msgid "INS"
 msgstr "INS"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:43
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:42
 #, kde-format
 msgctxt "@info:status short for: Overwrite mode"
 msgid "OVR"
 msgstr "OVR"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:44
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:43
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Insert mode"
 msgstr "Režim umetanja"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:45
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:44
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Overwrite mode"
 msgstr "Režim prepisivanja preko"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:60
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:59
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Coding of the value interpretation in the current view."
 msgstr "Kodiranje tumačenja vrijednosti u tekućem prikazu."
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:68
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:67
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Encoding in the character column of the current view."
 msgstr "Kodiranje u koloni znakova tekućeg prikaza."
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:112
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:209
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:111
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:208
 #, kde-format
 msgid "Offset: %1"
 msgstr "Pomjeraj: %1"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:121
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:120
 #, kde-format
 msgid "%1 bytes"
 msgstr "%1 bajtova"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:123
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:122
 #, kde-format
 msgctxt "@info:status selection: start offset - end offset ()"
 msgid "Selection: %1 - %2 (%3)"
 msgstr "Izbor: %1–%2 (%3)"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:172
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:171
 #, kde-format
 msgctxt "@info:status offset value not available"
 msgid "Offset: -"
 msgstr "Pomak: -"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:173
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:230
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:172
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:229
 #, kde-format
 msgctxt "@info:status offset value not available"
 msgid "Selection: -"
 msgstr "Izbor: -"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:228
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:227
 #, kde-format
 msgctxt "@info:status selection: start offset - end offset (number of bytes)"
 msgid "Selection: %1 - %2 (%3)"
@@ -3275,7 +3275,7 @@ msgctxt "name of the encoding target"
 msgid "Base32"
 msgstr "Base32"
 
-#: gui/io/streamencoder/base32/bytearraybase32streamencoderconfigeditor.cpp:34
+#: gui/io/streamencoder/base32/bytearraybase32streamencoderconfigeditor.cpp:33
 #, kde-format
 msgctxt ""
 "@label:listbox the type of the used encoding: Classic, Base32hex or z-"
@@ -3283,19 +3283,19 @@ msgctxt ""
 msgid "Encoding:"
 msgstr "Kodiranje:"
 
-#: gui/io/streamencoder/base32/bytearraybase32streamencoderconfigeditor.cpp:39
+#: gui/io/streamencoder/base32/bytearraybase32streamencoderconfigeditor.cpp:38
 #, kde-format
 msgctxt "@item:inmenu Doing the base32 using the classical encoding"
 msgid "Classic"
 msgstr "Klasično"
 
-#: gui/io/streamencoder/base32/bytearraybase32streamencoderconfigeditor.cpp:41
+#: gui/io/streamencoder/base32/bytearraybase32streamencoderconfigeditor.cpp:40
 #, kde-format
 msgctxt "@item:inmenu Doing the base32 using the Base32hex encoding"
 msgid "Base32hex"
 msgstr "Base32hex"
 
-#: gui/io/streamencoder/base32/bytearraybase32streamencoderconfigeditor.cpp:43
+#: gui/io/streamencoder/base32/bytearraybase32streamencoderconfigeditor.cpp:42
 #, kde-format
 msgctxt "@item:inmenu Doing the base32 using the z-base-32 encoding"
 msgid "z-base-32"
@@ -3330,28 +3330,28 @@ msgctxt "name of the encoding target"
 msgid "Intel Hex"
 msgstr "Intel Hex"
 
-#: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:34
-#: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:34
+#: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:33
+#: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:33
 #, kde-format
 msgctxt "@label:listbox the size in bits of the addresses."
 msgid "Address size:"
 msgstr "Veličina adrese:"
 
-#: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:40
-#: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:39
+#: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:39
+#: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:38
 #, kde-format
 msgctxt "@item:inmenu address size"
 msgid "32-bit"
 msgstr "32‑bitno"
 
-#: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:42
-#: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:43
+#: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:41
+#: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:42
 #, kde-format
 msgctxt "@item:inmenu address size"
 msgid "16-bit"
 msgstr "16‑bitno"
 
-#: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:44
+#: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:43
 #, kde-format
 msgctxt "@item:inmenu address size"
 msgid "8-bit"
@@ -3395,7 +3395,7 @@ msgctxt "name of the encoding target"
 msgid "S-Record"
 msgstr "S-Record"
 
-#: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:41
+#: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:40
 #, kde-format
 msgctxt "@item:inmenu address size"
 msgid "24-bit"
@@ -3407,26 +3407,26 @@ msgctxt "name of the encoding target"
 msgid "Uuencoding"
 msgstr "UU kodiranje"
 
-#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:35
-#: gui/io/streamencoder/xxencoding/bytearrayxxencodingstreamencoderconfigeditor.cpp:34
+#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:34
+#: gui/io/streamencoder/xxencoding/bytearrayxxencodingstreamencoderconfigeditor.cpp:33
 #, kde-format
 msgctxt "@label:textbox file name internally given to the encoded data"
 msgid "Internal name of file:"
 msgstr "Interno ime datoteke:"
 
-#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:46
+#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:45
 #, kde-format
 msgctxt "@label:listbox the type of the used encoding: historical or Base64."
 msgid "Encoding:"
 msgstr "Kodiranje:"
 
-#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:51
+#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:50
 #, kde-format
 msgctxt "@item:inmenu Doing the uuencoding using the historical encoding"
 msgid "Historical"
 msgstr "Istorijski"
 
-#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:53
+#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:52
 #, kde-format
 msgctxt "@item:inmenu Doing the uuencoding using the base64 encoding"
 msgid "Base64"
@@ -3438,12 +3438,12 @@ msgctxt "name of the encoding target"
 msgid "Values"
 msgstr "Vrijednosti"
 
-#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:36
+#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:33
 #, kde-format
 msgid "Value coding:"
 msgstr "Kodiranje vrijednosti:"
 
-#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:51
+#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:49
 #, kde-format
 msgctxt "@label:textbox substring which separates the values"
 msgid "Separation:"
