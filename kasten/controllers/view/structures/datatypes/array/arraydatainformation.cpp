@@ -207,11 +207,6 @@ unsigned int ArrayDataInformation::childCount() const
     return mData->length();
 }
 
-bool ArrayDataInformation::canHaveChildren() const
-{
-    return true;
-}
-
 QString ArrayDataInformation::childTypeName(uint index) const
 {
     return mData->dataAt(index, DataInformation::ColumnType, Qt::DisplayRole).toString();

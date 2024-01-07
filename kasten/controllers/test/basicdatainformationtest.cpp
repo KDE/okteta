@@ -34,7 +34,6 @@ struct ExpectedResults
         , isPrimitive(false)
         , isString(false)
         , isDummy(false)
-        , canHaveChildren(false)
         , hasChildren(false)
     {
         columnFlags[DataInformation::ColumnName] = Qt::ItemIsSelectable | Qt::ItemIsEnabled;
@@ -55,7 +54,6 @@ struct ExpectedResults
     bool isPrimitive : 1;
     bool isString : 1;
     bool isDummy : 1;
-    bool canHaveChildren : 1;
     bool hasChildren : 1;
     Qt::ItemFlags columnFlags[DataInformation::COLUMN_COUNT];
     Qt::ItemFlags noFileColumnFlags[DataInformation::COLUMN_COUNT];
@@ -334,7 +332,6 @@ void BasicDataInformationTest::testArrays()
 {
     ExpectedResults exp;
     exp.isArray = true;
-    exp.canHaveChildren = true;
     exp.size = 0;
     basicTest(emptyComplexArray, exp);
     basicTest(emptyPrimitiveArray, exp);
@@ -360,7 +357,6 @@ void BasicDataInformationTest::testStructs()
 {
     ExpectedResults exp;
     exp.isStruct = true;
-    exp.canHaveChildren = true;
     exp.size = 0;
     basicTest(emptyStruct, exp);
     exp.hasChildren = true;
@@ -372,7 +368,6 @@ void BasicDataInformationTest::testUnions()
 {
     ExpectedResults exp;
     exp.isUnion = true;
-    exp.canHaveChildren = true;
     exp.size = 0;
     basicTest(emptyUnion, exp);
     exp.hasChildren = true;
@@ -392,7 +387,6 @@ void BasicDataInformationTest::testString()
 {
     ExpectedResults exp;
     exp.isString = true;
-    exp.canHaveChildren = true;
     exp.size = 0;
     basicTest(emptyString, exp);
 }

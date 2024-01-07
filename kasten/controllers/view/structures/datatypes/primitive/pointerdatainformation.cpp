@@ -156,11 +156,6 @@ QScriptClass* PointerDataInformation::scriptClass(ScriptHandlerInfo* handlerInfo
     return handlerInfo->mPointerClass.data();
 }
 
-bool PointerDataInformation::canHaveChildren() const
-{
-    return true;
-}
-
 bool PointerDataInformation::isPointer() const
 {
     return true;

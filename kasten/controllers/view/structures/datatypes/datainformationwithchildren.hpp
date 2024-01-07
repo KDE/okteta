@@ -39,7 +39,6 @@ public:
     int indexOf(const DataInformation* const data) const override;
 
     DataInformation* childAt(unsigned int index) const override;
-    bool canHaveChildren() const override;
     unsigned int childCount() const override;
     QString tooltipString() const override;
 

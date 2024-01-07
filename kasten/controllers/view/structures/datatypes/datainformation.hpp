@@ -82,8 +82,6 @@ public:
     };
 
     // methods for children:
-    /** true for unions and structs and arrays*/
-    virtual bool canHaveChildren() const = 0;
     virtual unsigned int childCount() const = 0;
     virtual DataInformation* childAt(unsigned int) const = 0;
     /** @brief Looks for a child of this object with given name
@@ -270,11 +268,6 @@ inline void DataInformation::setName(const QString& newName)
 inline DataInformation* DataInformation::childAt(unsigned int) const
 {
     return nullptr;
-}
-
-inline bool DataInformation::canHaveChildren() const
-{
-    return false;
 }
 
 inline unsigned int DataInformation::childCount() const
