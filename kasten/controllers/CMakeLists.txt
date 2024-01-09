@@ -250,6 +250,14 @@ oktetakastencontrollers_add_sublibrary(view/libdatatypes
         Utf16
 )
 
+oktetakastencontrollers_add_sublibrary(view/libdatatypedisplaystringifiers
+    BUILD_INCLUDEDIR
+    LIBRARY datatypeeditors
+    PRIVATE
+        AbstractDataTypeDisplayStringifier
+        DataTypeDisplayStringifierManager
+)
+
 oktetakastencontrollers_add_sublibrary(view/libdatatypeeditors
     BUILD_INCLUDEDIR
     LIBRARY datatypeeditors

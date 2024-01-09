@@ -1,0 +1,38 @@
+/*
+    This file is part of the Okteta Kasten module, made within the KDE community.
+
+    SPDX-FileCopyrightText: 2024 Friedrich W. H. Kossebau <kossebau@kde.org>
+
+    SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
+*/
+
+#ifndef OKTETA_DATATYPEDISPLAYSTRINGIFIERMANAGER_HPP
+#define OKTETA_DATATYPEDISPLAYSTRINGIFIERMANAGER_HPP
+
+// Qt
+#include <QHash>
+
+namespace Okteta {
+
+class AbstractDataTypeDisplayStringifier;
+
+class DataTypeDisplayStringifierManager
+{
+public:
+    DataTypeDisplayStringifierManager();
+    ~DataTypeDisplayStringifierManager();
+
+    DataTypeDisplayStringifierManager(const DataTypeDisplayStringifierManager&) = delete;
+
+    DataTypeDisplayStringifierManager& operator=(const DataTypeDisplayStringifierManager&) = delete;
+
+public:
+    AbstractDataTypeDisplayStringifier* stringifier(int metaTypeId) const;
+
+private:
+    QHash<int, AbstractDataTypeDisplayStringifier*> m_stringifiers;
+};
+
+}
+
+#endif

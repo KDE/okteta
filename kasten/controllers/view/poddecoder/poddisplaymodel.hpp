@@ -9,6 +9,8 @@
 #ifndef KASTEN_PODDISPLAYMODEL_HPP
 #define KASTEN_PODDISPLAYMODEL_HPP
 
+// libdatatypedisplaystringifiers
+#include <datatypedisplaystringifiermanager.hpp>
 // Qt
 #include <QIdentityProxyModel>
 
@@ -36,6 +38,8 @@ public: // QAbstractItemModel API
 private:
     QWidget* const m_uiWidget;
     PODDecoderTool* const m_tool;
+
+    const Okteta::DataTypeDisplayStringifierManager m_dataTypeDisplayStringifierManager;
 };
 
 }
