@@ -1227,12 +1227,10 @@ msgstr ""
 
 #: controllers/view/poddecoder/podtableview.cpp:240
 #: controllers/view/structures/structureview.cpp:338
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Edit..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit"
-msgstr "&Upravit..."
+msgstr "Upravit"
 
 #: controllers/view/poddecoder/podtableview.cpp:254
 #: controllers/view/selectrange/selectrangeview.cpp:125
