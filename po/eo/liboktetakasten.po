@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-05 02:31+0000\n"
-"PO-Revision-Date: 2023-12-04 14:32+0100\n"
+"PO-Revision-Date: 2024-01-07 20:13+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -891,7 +891,7 @@ msgstr "Whirlpool"
 #, kde-format
 msgctxt "name of the filter; it does a logic AND operation"
 msgid "operand AND data"
-msgstr "operando KAJ datumoj"
+msgstr "operando AND datumoj"
 
 #: controllers/view/libbytearrayfilter/filter/invertbytearrayfilter.cpp:19
 #, kde-format
@@ -899,7 +899,7 @@ msgctxt ""
 "name of the filter; it switches all bits from 0 to 1 and 1 to 0 "
 "respectively, so 01111110 becomes 10000001"
 msgid "INVERT data"
-msgstr "INVERTI datumojn"
+msgstr "INVERT datumon"
 
 #: controllers/view/libbytearrayfilter/filter/operandbytearrayfilterparametersetedit.cpp:31
 #, kde-format
@@ -953,7 +953,7 @@ msgctxt ""
 "name of the filter; it changes the order of the bytes/bits to backwards, so "
 "ABCD becomes DCBA"
 msgid "REVERSE data"
-msgstr "REVERSE datumo"
+msgstr "REVERSE datumon"
 
 #: controllers/view/libbytearrayfilter/filter/reversebytearrayfilterparametersetedit.cpp:29
 #, kde-format
@@ -1023,7 +1023,7 @@ msgstr ""
 #, kde-format
 msgctxt "name of the filter; it moves the bits, setting freed ones to zero"
 msgid "SHIFT data"
-msgstr "SHIFT-datumoj"
+msgstr "SHIFT datumon"
 
 #: controllers/view/libbytearrayfilter/filter/xorbytearrayfilter.cpp:22
 #, kde-format
