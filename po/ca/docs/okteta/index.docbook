@@ -159,7 +159,7 @@
 > es commuta entre els modes de sobreescriptura i inserció. El mode de sobreescriptura és més estricte que en els editors de text, ja que no permet cap operació que canviï la mida de la matriu de bytes.</para>
 
     <para
->Contràriament als editors de text, el contingut es mostra en dues variants. Només un d'ells està actiu respecte a l'entrada nova. Hi ha dos cursors enllaçats per la visualització dels valors i dels caràcters, el cursor actiu estarà parpellejant. Amb els caràcters actius, aquests es poden introduir com es fa als editors de text. Amb els valors actius, escriure un dígit obrirà un editor mínim per introduir la resta del valor.</para>
+>Contràriament als editors de text, el contingut es mostra en dues variants. Només un d'ells està actiu respecte a l'entrada nova. Hi ha dos cursors enllaçats per la visualització dels valors i dels caràcters, el cursor actiu estarà parpellejant. Amb els caràcters actius, aquests es poden introduir com es fa als editors de text. Amb els valors actius, escriure un dígit obrirà un editor mínim per a introduir la resta del valor.</para>
 
     <para
 >El diàleg de cerca permet a l'usuari cercar una cadena específica de bytes, definible com a valors (hexadecimal, decimal, octal, binari) o com a text (codificació actual de 8 bits o UTF-8).</para>
@@ -191,9 +191,9 @@ FIXME
   <title
 >Vista general</title>
   <para
->L'&okteta; porta algunes eines, algunes per analitzar i manipular matrius de bytes i altres amb un propòsit més general. Aquestes eines es poden activar o desactivar des de l'entrada <guimenu
+>L'&okteta; porta algunes eines, algunes per a analitzar i manipular matrius de bytes i altres amb un propòsit més general. Aquestes eines es poden activar o desactivar des de l'entrada <guimenu
 >Eines</guimenu
-> a la barra de menús. Cada eina té una vista petita, que s'acobla en una de les barres laterals o flota lliurement com a finestra. Podeu acoblar, desacoblar, reorganitzar i també apilar les vistes d'eina amb el ratolí, prement el &BER; sobre la barra de títol d'una vista d'eina, movent-la com vulgueu i alliberant el &BER; per completar l'acció, en cas contrari cancel·leu-la prement la tecla &Esc;.</para>
+> a la barra de menús. Cada eina té una vista petita, que s'acobla en una de les barres laterals o flota lliurement com a finestra. Podeu acoblar, desacoblar, reorganitzar i també apilar les vistes d'eina amb el ratolí, prement el &BER; sobre la barra de títol d'una vista d'eina, movent-la com vulgueu i alliberant el &BER; per a completar l'acció, en cas contrari cancel·leu-la prement la tecla &Esc;.</para>
 
 <sect2>
   <title
@@ -287,7 +287,7 @@ FIXME
 >Sistema de fitxers</term>
     <listitem
 ><para
->Aquesta eina ofereix un navegador de fitxers incrustat que es pot utilitzar per seleccionar fitxers a obrir.</para
+>Aquesta eina ofereix un navegador de fitxers incrustat que es pot utilitzar per a seleccionar fitxers a obrir.</para
 ></listitem>
   </varlistentry>
 
@@ -305,7 +305,7 @@ FIXME
 >Adreces d'interès</term>
     <listitem
 ><para
->Aquesta eina es pot utilitzar per gestionar les adreces d'interès, alternativament al menú <link linkend="bookmarks-menu"
+>Aquesta eina es pot utilitzar per a gestionar les adreces d'interès, alternativament al menú <link linkend="bookmarks-menu"
 ><guimenu
 >adreces d'interès</guimenu
 ></link
@@ -386,7 +386,7 @@ Support for strings (various Unicode encodings) in definitions
         <title
 >Instal·lació utilitzant el KNewStuff</title>
         <para
->La manera més fàcil d'instal·lar definicions noves d'estructura és utilitzant el suport integrat del KNewStuff a l'&okteta;. Per instal·lar una estructura existent obriu el diàleg de configuració de l'eina Estructura. Allà seleccioneu la pestanya <guilabel
+>La manera més fàcil d'instal·lar definicions noves d'estructura és utilitzant el suport integrat del KNewStuff a l'&okteta;. Per a instal·lar una estructura existent obriu el diàleg de configuració de l'eina Estructura. Allà seleccioneu la pestanya <guilabel
 >Gestió d'estructures</guilabel
 > i premeu el botó <guibutton
 >Obtén estructures noves...</guibutton
@@ -454,13 +454,13 @@ Support for strings (various Unicode encodings) in definitions
 >store.kde.org</ulink
 >.</para>
       <para
->També és possible que vulgueu compartir una definició vós mateix. Per fer-ho, creeu un arxiu de fitxer (&pex; un arxiu tar comprimit amb zip, <literal role="extension"
+>També és possible que vulgueu compartir una definició vós mateix. Per a fer-ho, creeu un arxiu de fitxer (&pex; un arxiu tar comprimit amb zip, <literal role="extension"
 >.tar.gz</literal
 >) que contingui només el subdirectori amb el fitxer <literal role="extension"
 >.desktop</literal
 > i el fitxer de definició d'estructura. Mirant l'exemple de l'última secció aquest seria el directori <filename class="directory"
 >ExampleStructure</filename
-> amb tot el seu contingut. Utilitzar aquest format per compartir les definicions d'estructures permet instal·lar-les dins de l'&okteta; i no requereix cap instal·lació manual.</para>
+> amb tot el seu contingut. Utilitzar aquest format per a compartir les definicions d'estructures permet instal·lar-les dins de l'&okteta; i no requereix cap instal·lació manual.</para>
     </sect2>
 
 
@@ -577,7 +577,7 @@ Support for strings (various Unicode encodings) in definitions
 ></term>
             <listitem
 ><para
->Per crear un camp de bits. Aquest element no accepta subelements i pot tenir els atributs següents:</para>
+>Per a crear un camp de bits. Aquest element no accepta subelements i pot tenir els atributs següents:</para>
               <variablelist>
                 <varlistentry>
                   <term
@@ -627,7 +627,7 @@ Support for strings (various Unicode encodings) in definitions
 ><para
 >Recordeu sempre afegir un farciment després d'un <emphasis
 >&lt;bitfield&gt;</emphasis
->, ja que en cas contrari el següent element (excepte les cadenes i matrius, que afegeixen automàticament el farciment) començarà enmig d'un byte. Òbviament, no és necessari fer farciments si voleu aquest comportament.</para
+>, ja que en cas contrari l'element següent (excepte les cadenes i matrius, que afegeixen automàticament el farciment) començarà enmig d'un byte. Òbviament, no és necessari fer farciments si voleu aquest comportament.</para
 ></note>
                   </listitem>
                 </varlistentry>
@@ -644,9 +644,9 @@ Support for strings (various Unicode encodings) in definitions
 ></term>
             <listitem
 ><para
->Per crear un tipus primitiu, però on els valors es mostren com a membres d'una enumeració si és possible. Aquest element no accepta subelements (tot i que necessitareu una etiqueta <emphasis
+>Per a crear un tipus primitiu, però on els valors es mostren com a membres d'una enumeració si és possible. Aquest element no accepta subelements (tot i que necessitareu una etiqueta <emphasis
 >&lt;enumDef&gt;</emphasis
-> al fitxer per fer-hi referència). Té els atributs següents:</para>
+> al fitxer per a fer-hi referència). Té els atributs següents:</para>
               <variablelist>
                 <varlistentry>
                   <term
@@ -709,7 +709,7 @@ Support for strings (various Unicode encodings) in definitions
 ></term>
             <listitem
 ><para
->Per crear una estructura. Tots els altres elements (incloent-hi <emphasis
+>Per a crear una estructura. Tots els altres elements (incloent-hi <emphasis
 >&lt;struct&gt;</emphasis
 >) poden ser un fill d'això i després formar part de l'estructura resultant</para
 ></listitem>
@@ -724,9 +724,9 @@ Support for strings (various Unicode encodings) in definitions
 ></term>
             <listitem
 ><para
->Per crear una unió. Bàsicament el mateix que <emphasis
+>Per a crear una unió. Bàsicament el mateix que <emphasis
 >&lt;struct&gt;</emphasis
-> excepte el fet que tots els elements fills començaran des del mateix desplaçament. Útil per interpretar la mateixa seqüència de bytes de diverses maneres.</para
+> excepte el fet que tots els elements fills començaran des del mateix desplaçament. Útil per a interpretar la mateixa seqüència de bytes de diverses maneres.</para
 ></listitem>
           </varlistentry>
 
@@ -739,7 +739,7 @@ Support for strings (various Unicode encodings) in definitions
 ></term>
             <listitem
 ><para
->Per crear una matriu. Aquest element accepta exactament un fill (el tipus subjacent de la matriu), que pot ser qualsevol dels elements, fins i tot la mateixa <emphasis
+>Per a crear una matriu. Aquest element accepta exactament un fill (el tipus subjacent de la matriu), que pot ser qualsevol dels elements, fins i tot la mateixa <emphasis
 >&lt;array&gt;</emphasis
 >. També té els atributs següents:</para>
               <variablelist>
@@ -772,7 +772,7 @@ Support for strings (various Unicode encodings) in definitions
 ></term>
             <listitem
 ><para
->Per crear una cadena en diverses codificacions. Per defecte obtindreu una cadena a l'estil C finalitzada amb <emphasis
+>Per a crear una cadena en diverses codificacions. Per defecte obtindreu una cadena a l'estil C finalitzada amb <emphasis
 >NULL</emphasis
 >. No obstant això, es poden crear tipus de cadena diferents amb els atributs següents:</para>
               <variablelist>
@@ -955,7 +955,7 @@ Support for strings (various Unicode encodings) in definitions
         <title
 >Una definició d'estructura &XML; senzilla</title>
         <para
->Per començar creem una definició per a una estructura de prova molt senzilla que conté només tipus de dades integrals (un caràcter, un enter amb signe de 32 bits i un camp de bits). Això s'expressa en C/C++ com: <screen>
+>Per a començar creem una definició per a una estructura de prova molt senzilla que conté només tipus de dades integrals (un caràcter, un enter amb signe de 32 bits i un camp de bits). Això s'expressa en C/C++ com: <screen>
           struct simple {
             char aChar;
             int anInt;
@@ -990,7 +990,7 @@ Support for strings (various Unicode encodings) in definitions
         <title
 >L'estructura senzilla en JavaScript</title>
         <para
->Per implementar l'estructura anterior en JavaScript, creeu un fitxer anomenat <filename
+>Per a implementar l'estructura anterior en JavaScript, creeu un fitxer anomenat <filename
 >main.js</filename
 > en lloc de <filename
 >simpletruct.osd</filename
@@ -1009,7 +1009,7 @@ Support for strings (various Unicode encodings) in definitions
 >init</literal
 >.</para>
         <para
->Les funcions següents es poden anomenar per crear un tipus primitiu: <itemizedlist
+>Les funcions següents es poden anomenar per a crear un tipus primitiu: <itemizedlist
 > <listitem
 ><para
 >char()</para
@@ -1090,7 +1090,7 @@ Support for strings (various Unicode encodings) in definitions
 >complex.desktop</filename
 > com en l'exemple anterior (assegureu-vos que heu establert <literal
 >X-KDE-PluginInfo-Name</literal
-> correctament) i també feu el mateix per instal·lar els dos fitxers.</para>
+> correctament) i també feu el mateix per a instal·lar els dos fitxers.</para>
       </sect3>
       <sect3>
         <title
@@ -1427,7 +1427,7 @@ Structures Script Console-->
     <listitem
 ><para
 ><action
->Obre un diàleg incrustat per introduir l'interval a seleccionar.</action
+>Obre un diàleg incrustat per a introduir l'interval a seleccionar.</action
 ></para
 ></listitem>
     </varlistentry>
@@ -1454,7 +1454,7 @@ Structures Script Console-->
 >. </para>
     <note
 ><para
->El mode de sobreescriptura s'implementa per ser molt estricte, no és possible canviar la mida de les dades (no afegeix ni elimina bytes).</para
+>El mode de sobreescriptura s'implementa per a ser molt estricte, no és possible canviar la mida de les dades (no afegeix ni elimina bytes).</para
 ></note>
     </listitem>
     </varlistentry>
@@ -2005,7 +2005,7 @@ Structures Script Console-->
 ></term>
     <listitem
 ><para
->Obre un diàleg per crear, editar, suprimir i establir un perfil de vista predeterminat.</para
+>Obre un diàleg per a crear, editar, suprimir i establir un perfil de vista predeterminat.</para
 ></listitem>
     </varlistentry>
 </variablelist>
