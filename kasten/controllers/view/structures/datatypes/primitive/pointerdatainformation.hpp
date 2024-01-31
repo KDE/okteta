@@ -27,7 +27,6 @@ public:
                            qint64 pointerScale, const QScriptValue& interpretFunction);
     ~PointerDataInformation() override;
 
-    bool canHaveChildren() const override;
     uint childCount() const override;
     DataInformation* childAt(uint index) const override;
     bool isPointer() const override;

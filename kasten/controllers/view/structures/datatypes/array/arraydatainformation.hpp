@@ -56,7 +56,6 @@ public:
     QVariant childData(int row, int column, int role) const override;
     DataInformation* childAt(unsigned int idx) const override;
     unsigned int childCount() const override;
-    bool canHaveChildren() const override;
     QString childTypeName(uint index) const override;
     QString childString(uint index) const override;
     int indexOf(const DataInformation* const data) const override;

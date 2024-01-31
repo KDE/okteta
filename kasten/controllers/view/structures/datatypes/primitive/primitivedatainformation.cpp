@@ -56,11 +56,6 @@ DataInformation* PrimitiveDataInformation::childAt(unsigned int) const
     return nullptr;
 }
 
-bool PrimitiveDataInformation::canHaveChildren() const
-{
-    return false;
-}
-
 BitCount64 PrimitiveDataInformation::childPosition(const DataInformation*, Okteta::Address) const
 {
     Q_ASSERT(false);

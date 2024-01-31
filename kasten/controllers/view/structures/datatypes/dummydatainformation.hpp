@@ -35,7 +35,6 @@ public:
     bool isDummy() const override;
     QVariant data(int column, int role) const override;
 
-    bool canHaveChildren() const override { return false; }
     unsigned int childCount() const override { return 0; }
     DataInformation* childAt(unsigned int) const override { Q_ASSERT(false); return nullptr; }
     BitCount64 childPosition(const DataInformation*, Okteta::Address) const override { Q_ASSERT(false); return 0; }

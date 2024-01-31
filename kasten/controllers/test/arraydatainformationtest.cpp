@@ -57,7 +57,6 @@ void ArrayDataInformationTest::initTestCase()
     QCOMPARE(primitive->isString(), false);
     QCOMPARE(primitive->isUnion(), false);
     QCOMPARE(primitive->mainStructure(), primitive);
-    QCOMPARE(primitive->canHaveChildren(), true);
     QCOMPARE(primitive->childCount(), 0U);
     QCOMPARE(primitive->length(), 0U);
     QCOMPARE(primitive->size(), 0U);
@@ -84,7 +83,6 @@ void ArrayDataInformationTest::initTestCase()
     QCOMPARE(complex->isString(), false);
     QCOMPARE(complex->isUnion(), false);
     QCOMPARE(complex->mainStructure(), complex);
-    QCOMPARE(complex->canHaveChildren(), true);
     QCOMPARE(complex->childCount(), 0U);
     QCOMPARE(complex->length(), 0U);
     QCOMPARE(complex->size(), 0U);

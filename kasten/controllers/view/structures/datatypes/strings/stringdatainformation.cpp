@@ -336,8 +336,3 @@ QScriptClass* StringDataInformation::scriptClass(ScriptHandlerInfo* handlerInfo)
 {
     return handlerInfo->mStringClass.get();
 }
-
-bool StringDataInformation::canHaveChildren() const
-{
-    return true;
-}

@@ -37,7 +37,6 @@ public:
     StringDataInformation(const QString& name, StringType encoding, DataInformationBase* parent = nullptr);
     ~StringDataInformation() override;
 
-    bool canHaveChildren() const override;
     DataInformation* childAt(unsigned int) const override;
 
     bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* input,

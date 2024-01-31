@@ -42,7 +42,6 @@ public:
 
     unsigned int childCount() const override;
     DataInformation* childAt(unsigned int) const override;
-    bool canHaveChildren() const override;
     BitCount64 childPosition(const DataInformation*, Okteta::Address) const override;
     int indexOf(const DataInformation* const) const override;
 
