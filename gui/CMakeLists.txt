@@ -40,10 +40,6 @@ oktetagui_add_sublibrary(libcolumnsview
         AbstractColumnRenderer
         ColumnsView
         PixelMetrics # TODO: this header needs to be redone
-
-    PRIVATE
-        AbstractColumnStylist
-        AbstractColumnRenderer
 )
 
 okteta_add_sublibrary(Gui  NAMESPACE Okteta
