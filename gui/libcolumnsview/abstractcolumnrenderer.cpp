@@ -119,7 +119,7 @@ bool AbstractColumnRenderer::overlaps(const PixelXRange& xSpan) const
     return d->mXSpan.overlaps(xSpan);
 }
 
-void AbstractColumnRenderer::renderFirstLine(QPainter* painter, const PixelXRange& xSpan, int firstLineIndex)
+void AbstractColumnRenderer::renderFirstLine(QPainter* painter, const PixelXRange& xSpan, Line firstLineIndex)
 {
     Q_UNUSED(xSpan)
     Q_UNUSED(firstLineIndex)
