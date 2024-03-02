@@ -9,8 +9,6 @@
 #include "abstractcolumnrenderer.hpp"
 #include "abstractcolumnrenderer_p.hpp"
 
-// lib
-#include "columnsview.hpp"
 // Qt
 #include <QPainter>
 

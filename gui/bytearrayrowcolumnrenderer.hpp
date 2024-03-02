@@ -11,7 +11,7 @@
 
 // lib
 #include "abstractbytearrayview.hpp"
-// ColumnsView
+// libcolumnsview
 #include "abstractcolumnrenderer.hpp"
 #include "linepositionrange.hpp"
 // Okteta core

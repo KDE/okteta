@@ -10,6 +10,7 @@
 
 // lib
 #include <abstractbytearrayview.hpp>
+#include <abstractbytearrayview_p.hpp>
 #include <bytearraytableranges.hpp>
 #include <bytearraytablecursor.hpp>
 #include <bytearraytablelayout.hpp>
@@ -70,7 +71,8 @@ bool MouseNavigator::handleMousePressEvent(QMouseEvent* mouseEvent)
             mView->updateChanged();
         } else {
             // TODO: pos() is now, not at the moment of the event, use globalPos() for that,.says dox
-            const QPoint mousePoint = mView->viewportToColumns(mouseEvent->pos());
+            AbstractByteArrayViewPrivate* viewPrivate = mView->d_func();
+            const QPoint mousePoint = viewPrivate->viewportToColumns(mouseEvent->pos());
 
             // start of a drag perhaps?
             if (tableRanges->hasSelection() && tableRanges->selectionIncludes(mView->indexByPoint(mousePoint))) {
@@ -120,7 +122,8 @@ bool MouseNavigator::handleMouseMoveEvent(QMouseEvent* mouseEvent)
     bool eventUsed = false;
 
     if (mouseEvent->buttons() == Qt::LeftButton) {
-        const QPoint movePoint = mView->viewportToColumns(mouseEvent->pos());
+        AbstractByteArrayViewPrivate* viewPrivate = mView->d_func();
+        const QPoint movePoint = viewPrivate->viewportToColumns(mouseEvent->pos());
 
         if (mLMBPressed) {
             if (mDragStartPossible) {
@@ -242,7 +245,8 @@ bool MouseNavigator::handleMouseDoubleClickEvent(QMouseEvent* mouseEvent)
 void MouseNavigator::autoScrollTimerDone()
 {
     if (mLMBPressed) {
-        handleMouseMove(mView->viewportToColumns(mView->viewport()->mapFromGlobal(QCursor::pos())));
+        AbstractByteArrayViewPrivate* viewPrivate = mView->d_func();
+        handleMouseMove(viewPrivate->viewportToColumns(mView->viewport()->mapFromGlobal(QCursor::pos())));
     }
 }
 
@@ -251,8 +255,9 @@ void MouseNavigator::handleMouseMove(QPoint point)   // handles the move of the 
     ByteArrayTableCursor* tableCursor = mView->tableCursor();
     ByteArrayTableRanges* tableRanges = mView->tableRanges();
 
-    const int yOffset = mView->yOffset();
-    const int behindLastYOffset = yOffset + mView->visibleHeight();
+    AbstractByteArrayViewPrivate* viewPrivate = mView->d_func();
+    const int yOffset = viewPrivate->yOffset();
+    const int behindLastYOffset = yOffset + viewPrivate->visibleHeight();
     // scrolltimer but inside of viewport?
     if (mScrollTimer->isActive()) {
         if (yOffset <= point.y() && point.y() < behindLastYOffset) {

@@ -11,7 +11,7 @@
 
 // this
 #include "lineposition.hpp"
-// ColumnsView
+// libcolumnsview
 #include "pixelmetrics.hpp"
 // Okteta core
 #include <Okteta/Byte>

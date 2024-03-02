@@ -10,6 +10,7 @@
 
 // lib
 #include <abstractbytearrayview.hpp>
+#include <abstractbytearrayview_p.hpp>
 #include <bytearraytableranges.hpp>
 // Qt
 #include <QTapGesture>
@@ -28,7 +29,8 @@ bool TapNavigator::handleTapGesture(QTapGesture* tapGesture)
         mView->finishByteEdit();
 
         const QPoint viewportPos = tapGesture->position().toPoint();;
-        const QPoint tapPoint = mView->viewportToColumns(viewportPos);
+        AbstractByteArrayViewPrivate* viewPrivate = mView->d_func();
+        const QPoint tapPoint = viewPrivate->viewportToColumns(viewportPos);
         mView->placeCursor(tapPoint);
         ByteArrayTableRanges* tableRanges = mView->tableRanges();
         tableRanges->removeSelection();

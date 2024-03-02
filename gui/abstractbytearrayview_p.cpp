@@ -135,7 +135,7 @@ Qt::GestureType touchOnlyTapAndHoldGestureType()
 }
 
 AbstractByteArrayViewPrivate::AbstractByteArrayViewPrivate(AbstractByteArrayView* parent)
-    : ColumnsViewPrivate(parent)
+    : ColumnsViewScrollAreaEngine(parent)
     , mByteArrayModel(nullModel())
     , mTableLayout(new ByteArrayTableLayout(DefaultNoOfBytesPerLine, DefaultFirstLineOffset, DefaultStartOffset, 0, 0))
     , mTableCursor(new ByteArrayTableCursor(mTableLayout))
@@ -187,9 +187,11 @@ void AbstractByteArrayViewPrivate::init()
 {
     Q_Q(AbstractByteArrayView);
 
+    ColumnsViewScrollAreaEngine::init();
+
     // initialize layout
     mTableLayout->setLength(mByteArrayModel->size());
-    mTableLayout->setNoOfLinesPerPage(q->noOfLinesPerPage());
+    mTableLayout->setNoOfLinesPerPage(noOfLinesPerPage());
 
     mStylist = new WidgetColumnStylist(q);
 
@@ -329,11 +331,17 @@ void AbstractByteArrayViewPrivate::setOffsetCoding(AbstractByteArrayView::Offset
     Q_EMIT q->offsetCodingChanged(offsetCoding);
 }
 
+void AbstractByteArrayViewPrivate::setNoOfLines(int newNoOfLines)
+{
+    ColumnsViewScrollAreaEngine::setNoOfLines(newNoOfLines > 1 ? newNoOfLines : 1);
+}
+
+
 void AbstractByteArrayViewPrivate::changeEvent(QEvent* event)
 {
     Q_Q(AbstractByteArrayView);
 
-    q->ColumnsView::changeEvent(event);
+    q->QAbstractScrollArea::changeEvent(event);
 
     if (event->type() == QEvent::FontChange
         && !mInZooming) {
@@ -971,7 +979,7 @@ void AbstractByteArrayViewPrivate::adjustLayoutToSize()
         }
     }
 
-    q->setNoOfLines(mTableLayout->noOfLines());
+    setNoOfLines(mTableLayout->noOfLines());
 }
 
 void AbstractByteArrayViewPrivate::onCursorFlashTimeChanged(int flashTime)
@@ -1074,7 +1082,7 @@ void AbstractByteArrayViewPrivate::mousePressEvent(QMouseEvent* mousePressEvent)
     if (mMouseController->handleMousePressEvent(mousePressEvent)) {
         mousePressEvent->accept();
     } else {
-        q->ColumnsView::mousePressEvent(mousePressEvent);
+        q->QAbstractScrollArea::mousePressEvent(mousePressEvent);
     }
 }
 
@@ -1085,7 +1093,7 @@ void AbstractByteArrayViewPrivate::mouseMoveEvent(QMouseEvent* mouseMoveEvent)
     if (mMouseController->handleMouseMoveEvent(mouseMoveEvent)) {
         mouseMoveEvent->accept();
     } else {
-        q->ColumnsView::mouseMoveEvent(mouseMoveEvent);
+        q->QAbstractScrollArea::mouseMoveEvent(mouseMoveEvent);
     }
 }
 
@@ -1096,7 +1104,7 @@ void AbstractByteArrayViewPrivate::mouseReleaseEvent(QMouseEvent* mouseReleaseEv
     if (mMouseController->handleMouseReleaseEvent(mouseReleaseEvent)) {
         mouseReleaseEvent->accept();
     } else {
-        q->ColumnsView::mouseReleaseEvent(mouseReleaseEvent);
+        q->QAbstractScrollArea::mouseReleaseEvent(mouseReleaseEvent);
     }
 }
 
@@ -1108,7 +1116,7 @@ void AbstractByteArrayViewPrivate::mouseDoubleClickEvent(QMouseEvent* mouseDoubl
     if (mMouseController->handleMouseDoubleClickEvent(mouseDoubleClickEvent)) {
         mouseDoubleClickEvent->accept();
     } else {
-        q->ColumnsView::mouseDoubleClickEvent(mouseDoubleClickEvent);
+        q->QAbstractScrollArea::mouseDoubleClickEvent(mouseDoubleClickEvent);
     }
 }
 
@@ -1147,7 +1155,7 @@ bool AbstractByteArrayViewPrivate::event(QEvent* event)
                                                   q->viewport()->mapToGlobal(cursorPos));
         adaptedContextMenuEvent.setAccepted(event->isAccepted());
 
-        const bool result = q->ColumnsView::event(&adaptedContextMenuEvent);
+        const bool result = q->QAbstractScrollArea::event(&adaptedContextMenuEvent);
         event->setAccepted(adaptedContextMenuEvent.isAccepted());
 
         return result;
@@ -1171,7 +1179,7 @@ bool AbstractByteArrayViewPrivate::event(QEvent* event)
                                                           q->viewport()->mapToGlobal(viewPortPos));
                 simulatedContextMenuEvent.setAccepted(event->isAccepted());
 
-                const bool result = q->ColumnsView::event(&simulatedContextMenuEvent);
+                const bool result = q->QAbstractScrollArea::event(&simulatedContextMenuEvent);
                 event->setAccepted(simulatedContextMenuEvent.isAccepted());
 
                 return result;
@@ -1181,7 +1189,9 @@ bool AbstractByteArrayViewPrivate::event(QEvent* event)
         };
     }
 
-    return q->ColumnsView::event(event);
+    ColumnsViewScrollAreaEngine::event(event);
+
+    return q->QAbstractScrollArea::event(event);
 }
 
 bool AbstractByteArrayViewPrivate::viewportEvent(QEvent* event)
@@ -1195,7 +1205,7 @@ bool AbstractByteArrayViewPrivate::viewportEvent(QEvent* event)
 
         Bookmarkable* bookmarks = qobject_cast<Bookmarkable*>(mByteArrayModel);
         if (bookmarks) {
-            const Address index = indexByPoint(q->viewportToColumns(helpEvent->pos()));
+            const Address index = indexByPoint(viewportToColumns(helpEvent->pos()));
             if (index != -1) {
                 if (bookmarks->containsBookmarkFor(index)) {
                     toolTip = bookmarks->bookmarkFor(index).name();
@@ -1222,7 +1232,7 @@ bool AbstractByteArrayViewPrivate::viewportEvent(QEvent* event)
         }
     }
 
-    return q->ColumnsView::viewportEvent(event);
+    return q->QAbstractScrollArea::viewportEvent(event);
 }
 
 void AbstractByteArrayViewPrivate::resizeEvent(QResizeEvent* resizeEvent)
@@ -1232,21 +1242,23 @@ void AbstractByteArrayViewPrivate::resizeEvent(QResizeEvent* resizeEvent)
     if (mResizeStyle != AbstractByteArrayView::FixedLayoutStyle) {
         // changes?
         if (mTableLayout->setNoOfBytesPerLine(fittingBytesPerLine())) {
-            q->setNoOfLines(mTableLayout->noOfLines());
+            setNoOfLines(mTableLayout->noOfLines());
             updateViewByWidth();
         }
     }
 
-    q->ColumnsView::resizeEvent(resizeEvent);
+    ColumnsViewScrollAreaEngine::resizeEvent(resizeEvent);
 
-    mTableLayout->setNoOfLinesPerPage(q->noOfLinesPerPage());   // TODO: doesn't work with the new size!!!
+    q->QAbstractScrollArea::resizeEvent(resizeEvent);
+
+    mTableLayout->setNoOfLinesPerPage(noOfLinesPerPage());   // TODO: doesn't work with the new size!!!
 }
 
 void AbstractByteArrayViewPrivate::focusInEvent(QFocusEvent* focusEvent)
 {
     Q_Q(AbstractByteArrayView);
 
-    q->ColumnsView::focusInEvent(focusEvent);
+    q->QAbstractScrollArea::focusInEvent(focusEvent);
     startCursor();
 
     const Qt::FocusReason focusReason = focusEvent->reason();
@@ -1261,7 +1273,7 @@ void AbstractByteArrayViewPrivate::focusOutEvent(QFocusEvent* focusEvent)
     Q_Q(AbstractByteArrayView);
 
     stopCursor();
-    q->ColumnsView::focusOutEvent(focusEvent);
+    q->QAbstractScrollArea::focusOutEvent(focusEvent);
 
     const Qt::FocusReason focusReason = focusEvent->reason();
     if (focusReason != Qt::ActiveWindowFocusReason
@@ -1322,7 +1334,7 @@ void AbstractByteArrayViewPrivate::timerEvent(QTimerEvent* timerEvent)
         blinkCursor();
     }
 
-    q->ColumnsView::timerEvent(timerEvent);
+    q->QAbstractScrollArea::timerEvent(timerEvent);
 }
 
 void AbstractByteArrayViewPrivate::onBookmarksChange(const QVector<Bookmark>& bookmarks)
@@ -1356,18 +1368,16 @@ void AbstractByteArrayViewPrivate::onByteArrayReadOnlyChange(bool isByteArrayRea
 
 void AbstractByteArrayViewPrivate::onContentsChanged(const ArrayChangeMetricsList& changeList)
 {
-    Q_Q(AbstractByteArrayView);
-
     pauseCursor();
 
     const bool atEnd = mTableCursor->atEnd();
     const Size oldLength = mTableLayout->length(); // TODO: hack for mDataCursor->adaptSelectionToChange
     // update lengths
-    int oldNoOfLines = q->noOfLines();
+    int oldNoOfLines = noOfLines();
     mTableLayout->setLength(mByteArrayModel->size());
     const int newNoOfLines = mTableLayout->noOfLines();
     if (oldNoOfLines != newNoOfLines) {
-        q->setNoOfLines(newNoOfLines);
+        setNoOfLines(newNoOfLines);
         const LineRange changedLines = (oldNoOfLines < newNoOfLines) ?
                                        LineRange(oldNoOfLines, newNoOfLines - 1) :
                                        LineRange(newNoOfLines, oldNoOfLines - 1);

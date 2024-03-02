@@ -10,11 +10,15 @@
 #define OKTETA_ABSTRACTBYTEARRAYVIEW_HPP
 
 // lib
-#include "columnsview.hpp"
+#include "oktetagui_export.hpp"
+#include "pixelmetrics.hpp"
 // Okteta core
 #include <Okteta/AddressRange>
 // Qt
+#include <QAbstractScrollArea>
 #include <QClipboard>
+// Std
+#include <memory>
 
 class QMenu;
 class QMimeData;
@@ -35,9 +39,7 @@ class ByteArrayTableRanges;
 
 class AbstractByteArrayViewPrivate;
 
-// TODO: for now inherit from ColumnsView, but later on invert this,
-// so it's AbstractByteArrayView < ColumnsView < {ByteArrayRowView,ByteArrayColumnView}
-class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
+class OKTETAGUI_EXPORT AbstractByteArrayView : public QAbstractScrollArea
 {
     friend class TabController;
     friend class KeyNavigator;
@@ -451,16 +453,18 @@ protected: // QWidget API
     void dropEvent(QDropEvent* dropEvent) override;
     void contextMenuEvent(QContextMenuEvent* contextMenuEvent) override;
     void timerEvent(QTimerEvent* timerEvent) override;
+    void paintEvent(QPaintEvent* paintEvent) override;
 
 protected: // QAbstractScrollArea API
     void wheelEvent(QWheelEvent* wheelEvent) override;
     bool viewportEvent(QEvent* event) override;
-
-protected: // ColumnsView API
-    void setNoOfLines(int newNoOfLines) override;
+    void scrollContentsBy(int dx, int dy) override;
 
 protected: // Q_SLOTS QWidget API
     void changeEvent(QEvent* event) override;
+
+protected:
+    const std::unique_ptr<AbstractByteArrayViewPrivate> d_ptr;
 
 private:
     Q_PRIVATE_SLOT(d_func(), void onBookmarksChange(const QVector<Okteta::Bookmark> &bookmarks))

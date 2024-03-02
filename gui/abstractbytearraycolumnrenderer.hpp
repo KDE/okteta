@@ -9,7 +9,7 @@
 #ifndef OKTETA_ABSTRACTBYTEARRAYCOLUMNRENDERER_HPP
 #define OKTETA_ABSTRACTBYTEARRAYCOLUMNRENDERER_HPP
 
-// ColumnsView
+// libcolumnsview
 #include "abstractcolumnrenderer.hpp"
 #include "linepositionrange.hpp"
 #include "linerange.hpp"

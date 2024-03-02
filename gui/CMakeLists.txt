@@ -63,8 +63,10 @@ oktetagui_add_sublibrary(libcolumnsview
     PUBLIC
         AbstractColumnStylist
         AbstractColumnRenderer
-        ColumnsView
         PixelMetrics # TODO: this header needs to be redone
+
+    PRIVATE
+        ColumnsViewScrollAreaEngine
 )
 
 okteta_add_sublibrary(Gui  NAMESPACE Okteta

@@ -9,6 +9,7 @@
 #include "mousepaster.hpp"
 
 // lib
+#include <abstractbytearrayview_p.hpp>
 #include <bytearraycolumnview.hpp>
 #include <bytearraytableranges.hpp>
 #include <bytearraytablecursor.hpp>
@@ -53,7 +54,8 @@ bool MousePaster::handleMouseReleaseEvent(QMouseEvent* mouseEvent)
     bool eventUsed = false;
     // middle mouse button paste?
     if (mouseEvent->button() == Qt::MiddleButton && !mView->isReadOnly()) {
-        const QPoint releasePoint = mView->viewportToColumns(mouseEvent->pos());
+        AbstractByteArrayViewPrivate* viewPrivate = mView->d_func();
+        const QPoint releasePoint = viewPrivate->viewportToColumns(mouseEvent->pos());
 
         mView->pauseCursor();
         mView->finishByteEdit();

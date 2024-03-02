@@ -10,7 +10,7 @@
 #define OKTETA_ABSTRACTBYTEARRAYVIEW_P_HPP
 
 // lib
-#include "columnsview_p.hpp"
+#include "columnsviewscrollareaengine.hpp"
 #include "abstractbytearrayview.hpp"
 #include "bytearraytablecursor.hpp"
 #include "bytearraytableranges.hpp"
@@ -43,7 +43,7 @@ class WidgetColumnStylist;
 class Cursor;
 class BorderColumnRenderer;
 
-class AbstractByteArrayViewPrivate : public ColumnsViewPrivate
+class AbstractByteArrayViewPrivate : public ColumnsViewScrollAreaEngine
 {
 public:
     explicit AbstractByteArrayViewPrivate(AbstractByteArrayView* parent);
@@ -157,6 +157,9 @@ public: // API to be implemented
     virtual QRect cursorRect() const = 0;
     virtual Address indexByPoint(QPoint point) const = 0;
     virtual void blinkCursor() = 0;
+
+public: // ColumnsViewScrollAreaEngine API
+    void setNoOfLines(int newNoOfLines) override;
 
 public: // events
     bool event(QEvent* event);

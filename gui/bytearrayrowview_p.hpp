@@ -89,7 +89,7 @@ private:
      * and updates the dependent values
      */
     void ensureVisible(const ByteArrayRowColumnRenderer& column, Coord coord);
-    void renderColumns(QPainter* painter, int cx, int cy, int cw, int ch);
+    void renderColumns(QPainter* painter, int cx, int cy, int cw, int ch) override;
 
 protected: // AbstractByteArrayViewPrivate API
     // cursor control

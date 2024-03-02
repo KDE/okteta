@@ -19,7 +19,8 @@
 namespace Okteta {
 
 AbstractByteArrayView::AbstractByteArrayView(AbstractByteArrayViewPrivate* dd, QWidget* parent)
-    : ColumnsView(dd, parent)
+    : QAbstractScrollArea(parent)
+    , d_ptr(dd)
 {
     Q_D(AbstractByteArrayView);
     d->init();
@@ -439,11 +440,6 @@ void AbstractByteArrayView::setZoomLevel(double zoomLevel)
     d->setZoomLevel(zoomLevel);
 }
 
-void AbstractByteArrayView::setNoOfLines(int newNoOfLines)
-{
-    ColumnsView::setNoOfLines(newNoOfLines > 1 ? newNoOfLines : 1);
-}
-
 void AbstractByteArrayView::changeEvent(QEvent* event)
 {
     Q_D(AbstractByteArrayView);
@@ -506,6 +502,22 @@ QMenu* AbstractByteArrayView::createStandardContextMenu(QPoint position)
     return d->createStandardContextMenu(position);
 }
 
+void AbstractByteArrayView::scrollContentsBy(int dx, int dy)
+{
+    Q_D(AbstractByteArrayView);
+
+    d->scrollContentsBy(dx, dy);
+}
+
+void AbstractByteArrayView::paintEvent(QPaintEvent* paintEvent)
+{
+    Q_D(AbstractByteArrayView);
+
+    QAbstractScrollArea::paintEvent(paintEvent);
+
+    d->paintEvent(paintEvent);
+}
+
 bool AbstractByteArrayView::event(QEvent* event)
 {
     Q_D(AbstractByteArrayView);
@@ -514,14 +526,17 @@ bool AbstractByteArrayView::event(QEvent* event)
 
 void AbstractByteArrayView::showEvent(QShowEvent* showEvent)
 {
-    ColumnsView::showEvent(showEvent);
+    Q_D(AbstractByteArrayView);
+
+    QAbstractScrollArea::showEvent(showEvent);
     // TODO: why is this needed?
-    layout()->setNoOfLinesPerPage(noOfLinesPerPage());
+    layout()->setNoOfLinesPerPage(d->noOfLinesPerPage());
 }
 
 void AbstractByteArrayView::resizeEvent(QResizeEvent* resizeEvent)
 {
     Q_D(AbstractByteArrayView);
+
     d->resizeEvent(resizeEvent);
 }
 
@@ -543,7 +558,7 @@ void AbstractByteArrayView::keyPressEvent(QKeyEvent* keyEvent)
 {
     Q_D(AbstractByteArrayView);
     if (!d->controller()->handleKeyPress(keyEvent)) {
-        ColumnsView::keyPressEvent(keyEvent);
+        QAbstractScrollArea::keyPressEvent(keyEvent);
     }
 }
 
@@ -576,7 +591,7 @@ void AbstractByteArrayView::wheelEvent(QWheelEvent* wheelEvent)
 {
     Q_D(AbstractByteArrayView);
     if (!d->wheelController()->handleWheelEvent(wheelEvent)) {
-        ColumnsView::wheelEvent(wheelEvent);
+        QAbstractScrollArea::wheelEvent(wheelEvent);
     }
 }
 

@@ -47,11 +47,11 @@ void ByteArrayColumnViewPrivate::init()
     mCharColumn =
         new CharByteArrayColumnRenderer(mStylist, mByteArrayModel, mTableLayout, mTableRanges);
 
-    q->addColumn(mOffsetColumn);
-    q->addColumn(mOffsetBorderColumn);
-    q->addColumn(mValueColumn);
-    q->addColumn(mMiddleBorderColumn);
-    q->addColumn(mCharColumn);
+    addColumn(mOffsetColumn);
+    addColumn(mOffsetBorderColumn);
+    addColumn(mValueColumn);
+    addColumn(mMiddleBorderColumn);
+    addColumn(mCharColumn);
 
     // select the active column
     mActiveColumn = mCharColumn;
@@ -121,7 +121,7 @@ void ByteArrayColumnViewPrivate::setValueCoding(AbstractByteArrayView::ValueCodi
 
     // no change in the width?
     if (newCodingWidth == oldCodingWidth) {
-        q->updateColumn(*mValueColumn);
+        updateColumn(*mValueColumn);
     } else {
         updateViewByWidth();
     }
@@ -173,7 +173,7 @@ void ByteArrayColumnViewPrivate::setSubstituteChar(QChar substituteChar)
         return;
     }
     pauseCursor();
-    q->updateColumn(*mCharColumn);
+    updateColumn(*mCharColumn);
     unpauseCursor();
 
     Q_EMIT q->substituteCharChanged(substituteChar);
@@ -187,7 +187,7 @@ void ByteArrayColumnViewPrivate::setUndefinedChar(QChar undefinedChar)
         return;
     }
     pauseCursor();
-    q->updateColumn(*mCharColumn);
+    updateColumn(*mCharColumn);
     unpauseCursor();
 
     Q_EMIT q->undefinedCharChanged(undefinedChar);
@@ -201,7 +201,7 @@ void ByteArrayColumnViewPrivate::setShowsNonprinting(bool showsNonprinting)
         return;
     }
     pauseCursor();
-    q->updateColumn(*mCharColumn);
+    updateColumn(*mCharColumn);
     unpauseCursor();
 
     Q_EMIT q->showsNonprintingChanged(showsNonprinting);
@@ -222,8 +222,8 @@ void ByteArrayColumnViewPrivate::setCharCoding(AbstractByteArrayView::CharCoding
     mValueColumn->setCharCodec(mCharCodec);
     mCharColumn->setCharCodec(mCharCodec);
 
-    q->updateColumn(*mValueColumn);
-    q->updateColumn(*mCharColumn);
+    updateColumn(*mValueColumn);
+    updateColumn(*mCharColumn);
 
     unpauseCursor();
 
@@ -246,8 +246,8 @@ void ByteArrayColumnViewPrivate::setCharCoding(const QString& newCharCodingName)
     mValueColumn->setCharCodec(mCharCodec);
     mCharColumn->setCharCodec(mCharCodec);
 
-    q->updateColumn(*mValueColumn);
-    q->updateColumn(*mCharColumn);
+    updateColumn(*mValueColumn);
+    updateColumn(*mCharColumn);
 
     unpauseCursor();
 
@@ -256,8 +256,6 @@ void ByteArrayColumnViewPrivate::setCharCoding(const QString& newCharCodingName)
 
 void ByteArrayColumnViewPrivate::setByteTypeColored(bool isColored)
 {
-    Q_Q(ByteArrayColumnView);
-
     if (isColored == mValueColumn->isByteTypeColored()) {
         return;
     }
@@ -266,8 +264,8 @@ void ByteArrayColumnViewPrivate::setByteTypeColored(bool isColored)
     mCharColumn->setByteTypeColored(isColored);
 
     pauseCursor();
-    q->updateColumn(*mValueColumn);
-    q->updateColumn(*mCharColumn);
+    updateColumn(*mValueColumn);
+    updateColumn(*mCharColumn);
     unpauseCursor();
 }
 
@@ -291,22 +289,20 @@ void ByteArrayColumnViewPrivate::changeEvent(QEvent* event)
     mValueColumn->setFontMetrics(newFontMetrics);
     mCharColumn->setFontMetrics(newFontMetrics);
 
-    q->setLineHeight(digitHeight);
+    setLineHeight(digitHeight);
 
     // update all dependent structures
-    mTableLayout->setNoOfLinesPerPage(q->noOfLinesPerPage());
+    mTableLayout->setNoOfLinesPerPage(noOfLinesPerPage());
 
     updateViewByWidth();
 }
 
 void ByteArrayColumnViewPrivate::adjustToLayoutNoOfBytesPerLine()
 {
-    Q_Q(ByteArrayColumnView);
-
     mValueColumn->resetXBuffer();
     mCharColumn->resetXBuffer();
 
-    q->updateWidths();
+    updateWidths();
 }
 
 QSize ByteArrayColumnViewPrivate::minimumSizeHint() const
@@ -321,8 +317,8 @@ QSize ByteArrayColumnViewPrivate::minimumSizeHint() const
         + mValueColumn->byteWidth()
         + mCharColumn->byteWidth();
     const int minHeight =
-        q->lineHeight()
-        + q->noOfLines() > 1 ? q->style()->pixelMetric(QStyle::PM_ScrollBarExtent) : 0;
+        lineHeight()
+        + noOfLines() > 1 ? q->style()->pixelMetric(QStyle::PM_ScrollBarExtent) : 0;
 
     return {qMin(minWidth, 100), qMin(minHeight, 100)};
 }
@@ -435,7 +431,7 @@ int ByteArrayColumnViewPrivate::fittingBytesPerLine() const
 
         const int newNoOfLines = (mTableLayout->length() + mTableLayout->startOffset() + fittingBytesPerLine - 1)
                                  / fittingBytesPerLine;
-        const PixelY newHeight =  newNoOfLines * q->lineHeight();
+        const PixelY newHeight =  newNoOfLines * lineHeight();
 
         if (verticalScrollbarIsVisible) {
             if (matchRun == TestWithoutScrollbar) {
@@ -542,7 +538,7 @@ void ByteArrayColumnViewPrivate::placeCursor(QPoint point)
 
     // get coord of click and whether this click was closer to the end of the pos
     const int linePosition = mActiveColumn->magneticLinePositionOfX(point.x());
-    const int lineIndex = q->lineAt(point.y());
+    const int lineIndex = lineAt(point.y());
     const Coord coord(linePosition, lineIndex);
 
     mTableCursor->gotoCCoord(coord);
@@ -551,13 +547,11 @@ void ByteArrayColumnViewPrivate::placeCursor(QPoint point)
 
 Address ByteArrayColumnViewPrivate::indexByPoint(QPoint point) const
 {
-    Q_Q(const ByteArrayColumnView);
-
     const AbstractByteArrayColumnRenderer* column =
         (mCharColumn->isVisible() && point.x() >= mCharColumn->x()) ?
         (AbstractByteArrayColumnRenderer*)mCharColumn : (AbstractByteArrayColumnRenderer*)mValueColumn;
 
-    const Coord coord(column->linePositionOfX(point.x()), q->lineAt(point.y()));
+    const Coord coord(column->linePositionOfX(point.x()), lineAt(point.y()));
 
     return mTableLayout->indexAtCCoord(coord);
 }
@@ -597,7 +591,7 @@ QRect ByteArrayColumnViewPrivate::cursorRect() const
     Q_Q(const ByteArrayColumnView);
 
     QRect cursorRect = mActiveColumn->byteRect(mTableCursor->coord());
-    cursorRect.translate(-q->xOffset(), -q->yOffset());
+    cursorRect.translate(-xOffset(), -yOffset());
 
     return cursorRect;
 }
@@ -611,7 +605,7 @@ void ByteArrayColumnViewPrivate::updateCursor(const AbstractByteArrayColumnRende
     }
 
     QRect cursorRect = column.byteRect(mTableCursor->coord());
-    cursorRect.translate(-q->xOffset(), -q->yOffset());
+    cursorRect.translate(-xOffset(), -yOffset());
 
     q->viewport()->update(cursorRect);
 }
@@ -623,7 +617,7 @@ void ByteArrayColumnViewPrivate::createCursorPixmaps()
     const PixelX byteWidth = mActiveColumn->byteWidth();
 
     // create mCursorPixmaps
-    mCursorPixmaps->setSize(byteWidth, q->lineHeight(), q->devicePixelRatio());
+    mCursorPixmaps->setSize(byteWidth, lineHeight(), q->devicePixelRatio());
 
     const Address index = mTableCursor->validIndex();
 
@@ -664,7 +658,7 @@ void ByteArrayColumnViewPrivate::drawActiveCursor(QPainter* painter)
     }
 
     const int x = mActiveColumn->xOfLinePosition(mTableCursor->pos());
-    const int y = q->lineHeight() * mTableCursor->line();
+    const int y = lineHeight() * mTableCursor->line();
 
     painter->translate(x, y);
 
@@ -700,7 +694,7 @@ void ByteArrayColumnViewPrivate::drawInactiveCursor(QPainter* painter)
     const Address index = mTableCursor->validIndex();
 
     const int x = mInactiveColumn->xOfLinePosition(mTableCursor->pos());
-    const int y = q->lineHeight() * mTableCursor->line();
+    const int y = lineHeight() * mTableCursor->line();
 
     painter->translate(x, y);
 
@@ -715,14 +709,12 @@ void ByteArrayColumnViewPrivate::drawInactiveCursor(QPainter* painter)
 
 void ByteArrayColumnViewPrivate::renderColumns(QPainter* painter, int cx, int cy, int cw, int ch)
 {
-    Q_Q(ByteArrayColumnView);
-
-    q->AbstractByteArrayView::renderColumns(painter, cx, cy, cw, ch);
+    AbstractByteArrayViewPrivate::renderColumns(painter, cx, cy, cw, ch);
     // TODO: update non blinking cursors. Should this perhaps be done in the buffercolumn?
     // Then it needs to know about inactive, insideByte and the like... well...
     // perhaps subclassing the buffer columns even more, to CharByteArrayColumnRenderer and ValueByteArrayColumnRenderer?
 
-    if (q->visibleLines(PixelYRange::fromWidth(cy, ch)).includes(mTableCursor->line())) {
+    if (visibleLines(PixelYRange::fromWidth(cy, ch)).includes(mTableCursor->line())) {
         drawActiveCursor(painter);
         drawInactiveCursor(painter);
     }
@@ -732,13 +724,13 @@ void ByteArrayColumnViewPrivate::updateChanged()
 {
     Q_Q(ByteArrayColumnView);
 
-    const int xOffset = q->xOffset();
-    const PixelXRange Xs = PixelXRange::fromWidth(xOffset, q->visibleWidth());
+    const int xOffset = this->xOffset();
+    const PixelXRange Xs = PixelXRange::fromWidth(xOffset, visibleWidth());
 
     // do updates in offset column
     const LineRange changedOffsetLines = mTableRanges->changedOffsetLines();
     if (!changedOffsetLines.isEmpty()) {
-        q->updateColumn(*mOffsetColumn, changedOffsetLines);
+        updateColumn(*mOffsetColumn, changedOffsetLines);
     }
 
     // collect affected buffer columns
@@ -762,13 +754,13 @@ void ByteArrayColumnViewPrivate::updateChanged()
     if (!dirtyColumns.isEmpty()) {
         // calculate affected lines/indizes
         const LinePositionRange fullPositions(0, mTableLayout->noOfBytesPerLine() - 1);
-        CoordRange visibleRange(fullPositions, q->visibleLines());
+        CoordRange visibleRange(fullPositions, visibleLines());
 
-        const int lineHeight = q->lineHeight();
+        const int lineHeight = this->lineHeight();
         CoordRange changedRange;
         // as there might be multiple selections on this line redo until no more is changed
         while (getNextChangedRange(&changedRange, visibleRange)) {
-            PixelY cy = q->yOffsetOfLine(changedRange.start().line());
+            PixelY cy = yOffsetOfLine(changedRange.start().line());
 
             // only one line?
             if (changedRange.start().line() == changedRange.end().line()) {
@@ -843,8 +835,8 @@ void ByteArrayColumnViewPrivate::ensureVisible(const AbstractByteArrayColumnRend
     const PixelXRange byteXs = PixelXRange::fromWidth(byteRect.x(), byteRect.width());
     const PixelYRange byteYs = PixelYRange::fromWidth(byteRect.y(), byteRect.height());
 
-    const PixelXRange visibleXs = PixelXRange::fromWidth(q->xOffset(), q->visibleWidth());
-    const PixelYRange visibleYs = PixelXRange::fromWidth(q->yOffset(), q->visibleHeight());
+    const PixelXRange visibleXs = PixelXRange::fromWidth(xOffset(), visibleWidth());
+    const PixelYRange visibleYs = PixelXRange::fromWidth(yOffset(), visibleHeight());
 
     q->horizontalScrollBar()->setValue(visibleXs.startForInclude(byteXs));
     q->verticalScrollBar()->setValue(visibleYs.startForInclude(byteYs));

@@ -66,9 +66,6 @@ public: // AbstractByteArrayView API
     void setCharCoding(const QString& charCodingName) override;
     void setByteTypeColored(bool isColored) override;
 
-public: // ColumnsView API
-    void renderColumns(QPainter* painter, int cx, int cy, int cw, int ch) override;
-
 public: // QWidget API
     QSize minimumSizeHint() const override;
 

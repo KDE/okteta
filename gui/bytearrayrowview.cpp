@@ -153,12 +153,6 @@ QSize ByteArrayRowView::minimumSizeHint() const
     return d->minimumSizeHint();
 }
 
-void ByteArrayRowView::renderColumns(QPainter* painter, int cx, int cy, int cw, int ch)
-{
-    Q_D(ByteArrayRowView);
-    d->renderColumns(painter, cx, cy, cw, ch);
-}
-
 }
 
 #include "moc_bytearrayrowview.cpp"
