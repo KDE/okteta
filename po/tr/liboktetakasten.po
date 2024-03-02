@@ -7,13 +7,13 @@
 # obsoleteman <tulliana@gmail.com>, 2008-2009.
 # Volkan Gezer <volkangezer@gmail.com>, 2013-2014, 2017.
 # Kaan Ozdincer <kaanozdincer@gmail.com>, 2014.
-# Emir SARI <emir_sari@icloud.com>, 2022, 2023.
+# SPDX-FileCopyrightText: 2022, 2023, 2024 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdesdk-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-05 02:31+0000\n"
-"PO-Revision-Date: 2023-12-20 12:40+0300\n"
+"PO-Revision-Date: 2024-03-01 16:12+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.01.85\n"
+"X-Generator: Lokalize 24.02.0\n"
 
 #: controllers/document/info/documentinfotool.cpp:48
 #: controllers/document/info/documentinfotoolviewfactory.cpp:24
@@ -1371,7 +1371,7 @@ msgstr[1] "%1 değiştirme yapıldı."
 #, kde-format
 msgctxt "@info"
 msgid "Replace pattern not found in byte array."
-msgstr "Bayt dizilişinde bulunamayan ifadeyi değiştir."
+msgstr "Bayt dizilişinde bulunamayan dizgiyi değiştirin."
 
 #: controllers/view/replace/replacecontroller.cpp:93
 #: controllers/view/search/searchcontroller.cpp:120
@@ -3087,18 +3087,18 @@ msgstr "2 GiB'tan büyük dosyaları yükleme desteği henüz kullanılamıyor."
 #, kde-format
 msgctxt "name of the generated data"
 msgid "Pattern..."
-msgstr "İfade..."
+msgstr "Dizgi..."
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:158
 #, kde-format
 msgid "Pattern inserted."
-msgstr "İfade eklendi."
+msgstr "Dizgi eklendi."
 
 #: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:35
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Pattern:"
-msgstr "İfade:"
+msgstr "Dizgi:"
 
 #: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:44
 #, kde-format
@@ -3119,13 +3119,13 @@ msgstr "&Numara:"
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Enter the number of times the pattern should be inserted."
-msgstr "Eklenecek ifadenin kaç kere ekleneceğini girin."
+msgstr "Eklenecek dizginin kaç kez ekleneceğini girin."
 
 #: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:72
 #, kde-format
 msgctxt "@item name of the generated data"
 msgid "Pattern"
-msgstr "İfade"
+msgstr "Dizgi"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:60
 #, kde-format
