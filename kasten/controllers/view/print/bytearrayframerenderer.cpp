@@ -35,7 +35,7 @@ static constexpr int DefaultNoOfBytesPerLine =  16;
 static constexpr LayoutStyle DefaultResizeStyle = FixedLayoutStyle; // krazy:exclude=staticobjects
 static constexpr Okteta::OffsetFormat::Format DefaultOffsetCoding =  Okteta::OffsetFormat::Hexadecimal; // krazy:exclude=staticobjects
 static constexpr Okteta::ValueCoding DefaultValueCoding =  Okteta::HexadecimalCoding; // krazy:exclude=staticobjects
-static constexpr Okteta::CharCoding DefaultCharCoding = Okteta::LocalEncoding; // krazy:exclude=staticobjects
+static inline QString DefaultCharCoding() { return QString(); } // -> local 8-bit
 
 static constexpr int BAFInitialHeight = 50;
 static constexpr int BAFInitialWidth = 50;
@@ -52,7 +52,7 @@ ByteArrayFrameRenderer::ByteArrayFrameRenderer()
     // set codecs
     mValueCodec = Okteta::ValueCodec::createCodec((Okteta::ValueCoding)DefaultValueCoding);
     mValueCoding = DefaultValueCoding;
-    mCharCodec = Okteta::CharCodec::createCodec(DefaultCharCoding);
+    mCharCodec = Okteta::CharCodec::createCodec(DefaultCharCoding());
 
     mStylist = new Okteta::PrintColumnStylist();
 

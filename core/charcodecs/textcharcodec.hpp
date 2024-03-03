@@ -25,7 +25,6 @@ class TextCharCodec : public CharCodec
 {
 public:
     static TextCharCodec* createCodec(const QString& codecName);
-    static TextCharCodec* createCodec(CharCoding charCoding);
     static TextCharCodec* createLocalCodec();
 
     static const QStringList& codecNames();

@@ -20,41 +20,40 @@ namespace Okteta {
 
 static constexpr struct EncodingData
 {
-    CharCoding encodingId;
     const char* name;
 }
 encodingDataList[] =
 {
-    { ISO8859_1Encoding, "ISO-8859-1" },
-    { ISO8859_2Encoding, "ISO-8859-2" },
-    { ISO8859_3Encoding, "ISO-8859-3" },
-    { ISO8859_4Encoding, "ISO-8859-4" },
-    { ISO8859_5Encoding, "ISO-8859-5" },
-    { ISO8859_6Encoding, "ISO-8859-6" },
-    { ISO8859_7Encoding, "ISO-8859-7" },
-    { ISO8859_8Encoding, "ISO-8859-8" },
+    { "ISO-8859-1" },
+    { "ISO-8859-2" },
+    { "ISO-8859-3" },
+    { "ISO-8859-4" },
+    { "ISO-8859-5" },
+    { "ISO-8859-6" },
+    { "ISO-8859-7" },
+    { "ISO-8859-8" },
 //     { ISO8859_8_IEncoding, "ISO-8859-8-I" }, Qt (at least 5.15) delivers this variant already for ISO-8859-8
-    { ISO8859_9Encoding, "ISO-8859-9" },
-    { ISO8859_10Encoding, "ISO-8859-10" },
-    { ISO8859_11Encoding, "TIS-620" }, // was: ISO-8859-11
-    { ISO8859_13Encoding, "ISO-8859-13" },
-    { ISO8859_14Encoding, "ISO-8859-14" },
-    { ISO8859_15Encoding, "ISO-8859-15" },
-    { ISO8859_16Encoding, "ISO-8859-16" },
-    { CP1250Encoding, "windows-1250" },
-    { CP1251Encoding, "windows-1251" },
-    { CP1252Encoding, "windows-1252" },
-    { CP1253Encoding, "windows-1253" },
-    { CP1254Encoding, "windows-1254" },
-    { CP1255Encoding, "windows-1255" },
-    { CP1256Encoding, "windows-1256" },
-    { CP1257Encoding, "windows-1257" },
-    { CP1258Encoding, "windows-1258" },
-    { IBM850Encoding, "IBM850" },
-    { IBM866Encoding, "IBM866" },
+    { "ISO-8859-9" },
+    { "ISO-8859-10" },
+    { "TIS-620" }, // was: ISO-8859-11
+    { "ISO-8859-13" },
+    { "ISO-8859-14" },
+    { "ISO-8859-15" },
+    { "ISO-8859-16" },
+    { "windows-1250" },
+    { "windows-1251" },
+    { "windows-1252" },
+    { "windows-1253" },
+    { "windows-1254" },
+    { "windows-1255" },
+    { "windows-1256" },
+    { "windows-1257" },
+    { "windows-1258" },
+    { "IBM850" },
+    { "IBM866" },
 //     { IBM874Encoding, "IBM874" }, using our own IBM874CharCodec, see docs there
-    { KOI8_REncoding, "KOI8-R" },
-    { KOI8_UEncoding, "KOI8-U" }
+    { "KOI8-R" },
+    { "KOI8-U" }
 };
 // TODO: WS2
 

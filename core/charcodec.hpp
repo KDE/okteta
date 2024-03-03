@@ -28,10 +28,11 @@ public:
     virtual ~CharCodec();
 
 public:
-    /** */
-    static CharCodec* createCodec(CharCoding charCoding);
-    /** */
+    /**
+     * If @p name is empty, creates a system-local 8-bit char codec
+     */
     static CharCodec* createCodec(const QString& name);
+    static CharCodec* createCodecForLocale();
 
     static QStringList codecNames();
 

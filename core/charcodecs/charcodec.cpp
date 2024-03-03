@@ -61,26 +61,9 @@ CharCodec* CharCodec::createCodec(const QString& name)
     return result;
 }
 
-CharCodec* CharCodec::createCodec(CharCoding charCoding)
+CharCodec* CharCodec::createCodecForLocale()
 {
-    CharCodec* result;
-
-    if (charCoding == EBCDIC1047Encoding) {
-        result = EBCDIC1047CharCodec::create();
-    } else if (charCoding == ISO8859_1Encoding) {
-        result = TextCharCodec::createCodec(QStringLiteral("ISO-8859-1"));
-    }
-    // LocalEncoding
-    else {
-        result = nullptr;
-    }
-
-    // ensure at least a codec
-    if (!result) {
-        result = TextCharCodec::createLocalCodec();
-    }
-
-    return result;
+    return TextCharCodec::createLocalCodec();
 }
 
 }

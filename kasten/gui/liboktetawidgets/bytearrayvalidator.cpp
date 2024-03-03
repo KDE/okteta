@@ -15,11 +15,10 @@
 
 namespace Okteta {
 
-ByteArrayValidator::ByteArrayValidator(QObject* parent, Coding codecId, int charCodecId)
+ByteArrayValidator::ByteArrayValidator(QObject* parent, Coding codecId, const QString& charCodecName)
     : QValidator(parent)
-    , mCharCodec(CharCodec::createCodec(Okteta::LocalEncoding))
+    , mCharCodec(CharCodec::createCodec(charCodecName))
 {
-    Q_UNUSED(charCodecId)
     setCodec(codecId);
 }
 

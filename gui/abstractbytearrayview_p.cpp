@@ -66,7 +66,8 @@ static constexpr int MinFontPointSize = 4;
 static constexpr int MaxFontPointSize = 128;
 
 static constexpr AbstractByteArrayView::ValueCoding DefaultValueCoding =  AbstractByteArrayView::HexadecimalCoding;
-static constexpr Okteta::CharCoding DefaultCharCoding = Okteta::LocalEncoding;
+
+static inline QString DefaultCharCoding() { return QString(); } // -> local 8-bit
 
 static constexpr AbstractByteArrayView::LayoutStyle DefaultResizeStyle = AbstractByteArrayView::FixedLayoutStyle;
 
@@ -202,7 +203,7 @@ void AbstractByteArrayViewPrivate::init()
 
     mValueCodec = ValueCodec::createCodec((ValueCoding)DefaultValueCoding);
     mValueCoding = DefaultValueCoding;
-    mCharCodec = CharCodec::createCodec(DefaultCharCoding);
+    mCharCodec = CharCodec::createCodec(DefaultCharCoding());
 
     mTabController = new TabController(q, nullptr);
     mUndoRedoController = new UndoRedoController(q, mTabController);

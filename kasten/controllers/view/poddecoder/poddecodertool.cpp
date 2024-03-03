@@ -70,7 +70,7 @@ enum PODTypes
 PODDecoderTool::PODDecoderTool()
     : mReadOnly(true)
     , mIsPodMarked(false)
-    , mCharCodec(Okteta::CharCodec::createCodec(Okteta::LocalEncoding))
+    , mCharCodec(Okteta::CharCodec::createCodecForLocale())
 {
     setObjectName(QStringLiteral("PODDecoder"));
 

@@ -34,7 +34,7 @@ static constexpr int DefaultViewModus = 0;
 static constexpr int DefaultVisibleByteArrayCodings = 3;
 static constexpr int DefaultOffsetCoding = 0;
 static constexpr int DefaultValueCoding = 0;
-QString DefaultCharCoding() { return {}; }
+static inline QString DefaultCharCoding() { return QString(); } // -> local 8-bit
 
 static QVector<ByteArrayViewProfile::Id>
 lockedViewProfileIds(const ByteArrayViewProfileFileInfoLookup& viewProfileFileInfoLookup)

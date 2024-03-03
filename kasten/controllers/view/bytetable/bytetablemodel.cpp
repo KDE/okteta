@@ -29,7 +29,7 @@ static constexpr int ByteSetSize = 256;
 
 ByteTableModel::ByteTableModel(QObject* parent)
     : QAbstractTableModel(parent)
-    , mCharCodec(Okteta::CharCodec::createCodec(Okteta::LocalEncoding))
+    , mCharCodec(Okteta::CharCodec::createCodecForLocale())
     , mSubstituteChar(ByteTableDefaultSubstituteChar)
     , mUndefinedChar(ByteTableDefaultUndefinedChar)
     , mFixedFont(QFontDatabase::systemFont(QFontDatabase::FixedFont))

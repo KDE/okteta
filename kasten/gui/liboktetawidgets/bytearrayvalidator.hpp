@@ -38,7 +38,7 @@ public:
 public:
     explicit ByteArrayValidator(QObject* parent = nullptr,
                                 Coding codecId = CharCoding,
-                                int charCodecId = LocalEncoding);
+                                const QString& charCodecName = QString());
 
     ~ByteArrayValidator() override;
 
