@@ -11,7 +11,6 @@
 
 // lib
 #include "oktetagui_export.hpp"
-#include "pixelmetrics.hpp"
 // Okteta core
 #include <Okteta/AddressRange>
 // Qt
