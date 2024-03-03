@@ -27,7 +27,6 @@ static constexpr unsigned int StartsBefore = 1;
 static constexpr unsigned int EndsLater = 2;
 static constexpr Byte EmptyByte = ' ';
 
-static constexpr PixelX DefaultCursorWidth = 2;
 static constexpr PixelX DefaultByteSpacingWidth = 3;
 static constexpr PixelX DefaultGroupSpacingWidth = 9;
 static constexpr PixelX DefaultRowSpacingHeight = 0;
