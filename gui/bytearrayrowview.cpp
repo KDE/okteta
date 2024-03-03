@@ -120,13 +120,6 @@ void ByteArrayRowView::setShowsNonprinting(bool showsNonprinting)
     d->setShowsNonprinting(showsNonprinting);
 }
 
-void ByteArrayRowView::setCharCoding(CharCoding charCoding)
-{
-    Q_D(ByteArrayRowView);
-    d->setCharCoding(charCoding);
-}
-
-// TODO: join with function above!
 void ByteArrayRowView::setCharCoding(const QString& charCodingName)
 {
     Q_D(ByteArrayRowView);

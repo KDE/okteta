@@ -69,7 +69,6 @@ public:
     void setShowsNonprinting(bool showsNonprinting = true);
     void setSubstituteChar(QChar substituteChar);
     void setUndefinedChar(QChar undefinedChar);
-    void setCharCoding(AbstractByteArrayView::CharCoding charCoding);
     void setCharCoding(const QString& charCodingName);
     void setByteTypeColored(bool isColored);
 

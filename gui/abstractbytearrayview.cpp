@@ -74,11 +74,6 @@ const Okteta::ValueCodec* AbstractByteArrayView::valueCodec() const
     Q_D(const AbstractByteArrayView);
     return d->valueCodec();
 }
-AbstractByteArrayView::CharCoding AbstractByteArrayView::charCoding() const
-{
-    Q_D(const AbstractByteArrayView);
-    return d->charCoding();
-}
 QString AbstractByteArrayView::charCodingName() const
 {
     Q_D(const AbstractByteArrayView);

@@ -207,30 +207,6 @@ void ByteArrayColumnViewPrivate::setShowsNonprinting(bool showsNonprinting)
     Q_EMIT q->showsNonprintingChanged(showsNonprinting);
 }
 
-void ByteArrayColumnViewPrivate::setCharCoding(AbstractByteArrayView::CharCoding charCoding)
-{
-    Q_Q(ByteArrayColumnView);
-
-    if (mCharCoding == charCoding) {
-        return;
-    }
-
-    AbstractByteArrayViewPrivate::setCharCoding(charCoding);
-
-    pauseCursor();
-
-    mValueColumn->setCharCodec(mCharCodec);
-    mCharColumn->setCharCodec(mCharCodec);
-
-    updateColumn(*mValueColumn);
-    updateColumn(*mCharColumn);
-
-    unpauseCursor();
-
-    Q_EMIT q->charCodecChanged(charCodingName());
-}
-
-// TODO: join with function above!
 void ByteArrayColumnViewPrivate::setCharCoding(const QString& newCharCodingName)
 {
     Q_Q(ByteArrayColumnView);

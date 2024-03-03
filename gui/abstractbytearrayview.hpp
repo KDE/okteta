@@ -98,15 +98,6 @@ public:
         MaxCodingId = 0xFFFF
     };
     Q_ENUM(ValueCoding)
-    enum CharCoding
-    {
-        LocalEncoding = 0,
-        ISO8859_1Encoding = 1,
-        EBCDIC1047Encoding = 2,
-        StartOfOwnEncoding = 0x8000,
-        MaxEncodingId = 0xFFFF
-    };
-    Q_ENUM(CharCoding)
     enum LayoutStyle
     {
         FixedLayoutStyle = 0,
@@ -170,10 +161,6 @@ public: // value access
     AddressRange marking() const;
 
     ValueCoding valueCoding() const;
-    /**
-     * @return encoding used for the chars
-     */
-    CharCoding charCoding() const;
     /**
      * @return name of the encoding used for the chars
      */
@@ -253,9 +240,6 @@ public:
      * returns true if there was a change
      */
     virtual void setUndefinedChar(QChar undefinedChar) = 0;
-    /** sets the encoding of the char column. Default is Okteta::LocalEncoding.
-     * If the encoding is not available the format will not be changed. */
-    virtual void setCharCoding(CharCoding charCoding) = 0;
     /** sets the encoding of the char column. Default is Okteta::LocalEncoding.
      * If the encoding is not available the format will not be changed.
      * @param charCodingName name of the encoding

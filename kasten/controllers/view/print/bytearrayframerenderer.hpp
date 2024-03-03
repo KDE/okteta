@@ -91,7 +91,6 @@ public:
     bool showsNonprinting() const;
     QChar substituteChar() const;
     QChar undefinedChar() const;
-    Okteta::CharCoding charCoding() const;
     QString charCodingName() const;
 
     bool offsetColumnVisible() const;
@@ -117,7 +116,6 @@ public:
     void setSubstituteChar(QChar substituteChar);
     void setUndefinedChar(QChar undefinedChar);
     void setShowsNonprinting(bool showsNonprinting);
-    void setCharCoding(Okteta::CharCoding charCoding);
     void setCharCoding(const QString& charCodingName);
     void showByteArrayColumns(int newColumns);
     void showOffsetColumn(bool visible);
@@ -161,8 +159,6 @@ private:
     Okteta::ValueCoding mValueCoding;
     /** */
     Okteta::CharCodec* mCharCodec = nullptr;
-    /** */
-    Okteta::CharCoding mCharCoding;
 
 private: // parameters
     LayoutStyle mResizeStyle;

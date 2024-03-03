@@ -66,7 +66,7 @@ static constexpr int MinFontPointSize = 4;
 static constexpr int MaxFontPointSize = 128;
 
 static constexpr AbstractByteArrayView::ValueCoding DefaultValueCoding =  AbstractByteArrayView::HexadecimalCoding;
-static constexpr AbstractByteArrayView::CharCoding DefaultCharCoding = AbstractByteArrayView::LocalEncoding;
+static constexpr Okteta::CharCoding DefaultCharCoding = Okteta::LocalEncoding;
 
 static constexpr AbstractByteArrayView::LayoutStyle DefaultResizeStyle = AbstractByteArrayView::FixedLayoutStyle;
 
@@ -202,8 +202,7 @@ void AbstractByteArrayViewPrivate::init()
 
     mValueCodec = ValueCodec::createCodec((ValueCoding)DefaultValueCoding);
     mValueCoding = DefaultValueCoding;
-    mCharCodec = CharCodec::createCodec((CharCoding)DefaultCharCoding);
-    mCharCoding = DefaultCharCoding;
+    mCharCodec = CharCodec::createCodec(DefaultCharCoding);
 
     mTabController = new TabController(q, nullptr);
     mUndoRedoController = new UndoRedoController(q, mTabController);
@@ -617,22 +616,6 @@ void AbstractByteArrayViewPrivate::setValueCoding(AbstractByteArrayView::ValueCo
     mValueCodec = newValueCodec;
     mValueCoding = valueCoding;
 }
-void AbstractByteArrayViewPrivate::setCharCoding(AbstractByteArrayView::CharCoding charCoding)
-{
-    if (mCharCoding == charCoding) {
-        return;
-    }
-
-    CharCodec* newCharCodec
-        = CharCodec::createCodec((CharCoding)charCoding);
-    if (!newCharCodec) {
-        return;
-    }
-
-    delete mCharCodec;
-    mCharCodec = newCharCodec;
-    mCharCoding = charCoding;
-}
 void AbstractByteArrayViewPrivate::setCharCoding(const QString& charCodingName)
 {
     if (mCharCodec->name() == charCodingName) {
@@ -647,7 +630,6 @@ void AbstractByteArrayViewPrivate::setCharCoding(const QString& charCodingName)
 
     delete mCharCodec;
     mCharCodec = newCharCodec;
-    mCharCoding = AbstractByteArrayView::LocalEncoding; // TODO: add encoding no to every known codec
 }
 
 void AbstractByteArrayViewPrivate::setMarking(const AddressRange& _marking)

@@ -52,8 +52,7 @@ ByteArrayFrameRenderer::ByteArrayFrameRenderer()
     // set codecs
     mValueCodec = Okteta::ValueCodec::createCodec((Okteta::ValueCoding)DefaultValueCoding);
     mValueCoding = DefaultValueCoding;
-    mCharCodec = Okteta::CharCodec::createCodec((Okteta::CharCoding)DefaultCharCoding);
-    mCharCoding = DefaultCharCoding;
+    mCharCodec = Okteta::CharCodec::createCodec(DefaultCharCoding);
 
     mStylist = new Okteta::PrintColumnStylist();
 
@@ -107,7 +106,6 @@ Okteta::PixelX ByteArrayFrameRenderer::binaryGapWidth()             const { retu
 bool ByteArrayFrameRenderer::showsNonprinting()              const { return mCharColumnRenderer->isShowingNonprinting(); }
 QChar ByteArrayFrameRenderer::substituteChar()               const { return mCharColumnRenderer->substituteChar(); }
 QChar ByteArrayFrameRenderer::undefinedChar()                const { return mCharColumnRenderer->undefinedChar(); }
-Okteta::CharCoding ByteArrayFrameRenderer::charCoding()     const { return mCharCoding; }
 QString ByteArrayFrameRenderer::charCodingName()             const { return mCharCodec->name(); }
 
 bool ByteArrayFrameRenderer::offsetColumnVisible() const { return mOffsetColumnRenderer->isVisible(); }
@@ -291,26 +289,6 @@ void ByteArrayFrameRenderer::setValueCoding(Okteta::ValueCoding valueCoding)
     }
 }
 
-void ByteArrayFrameRenderer::setCharCoding(Okteta::CharCoding charCoding)
-{
-    if (mCharCoding == charCoding) {
-        return;
-    }
-
-    Okteta::CharCodec* newCharCodec = Okteta::CharCodec::createCodec(charCoding);
-    if (!newCharCodec) {
-        return;
-    }
-
-    delete mCharCodec;
-    mCharCodec = newCharCodec;
-    mCharCoding = charCoding;
-
-    mValueColumnRenderer->setCharCodec(mCharCodec);
-    mCharColumnRenderer->setCharCodec(mCharCodec);
-}
-
-// TODO: join with function above!
 void ByteArrayFrameRenderer::setCharCoding(const QString& newCharCodingName)
 {
     if (charCodingName() == newCharCodingName) {
@@ -324,7 +302,6 @@ void ByteArrayFrameRenderer::setCharCoding(const QString& newCharCodingName)
 
     delete mCharCodec;
     mCharCodec = newCharCodec;
-    mCharCoding = Okteta::LocalEncoding; // TODO: add encoding no to every known codec
 
     mValueColumnRenderer->setCharCodec(mCharCodec);
     mCharColumnRenderer->setCharCodec(mCharCodec);

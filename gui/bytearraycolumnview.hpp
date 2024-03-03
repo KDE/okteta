@@ -62,7 +62,6 @@ public: // AbstractByteArrayView API
     void setShowsNonprinting(bool showsNonprinting = true) override;
     void setSubstituteChar(QChar substituteChar) override;
     void setUndefinedChar(QChar undefinedChar) override;
-    void setCharCoding(CharCoding charCoding) override;
     void setCharCoding(const QString& charCodingName) override;
     void setByteTypeColored(bool isColored) override;
 

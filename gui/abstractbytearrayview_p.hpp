@@ -97,7 +97,6 @@ public: // value access
     const ValueCodec* valueCodec() const;
     AbstractByteArrayView::ValueCoding valueCoding() const;
     const CharCodec* charCodec() const;
-    AbstractByteArrayView::CharCoding charCoding() const;
     QString charCodingName() const;
 
     double zoomLevel() const;
@@ -114,7 +113,6 @@ public:
 
 public: // setting parameters
     void setValueCoding(AbstractByteArrayView::ValueCoding valueCoding);
-    void setCharCoding(AbstractByteArrayView::CharCoding charCoding);
     void setCharCoding(const QString& charCodingName);
     void setLayoutStyle(AbstractByteArrayView::LayoutStyle layoutStyle);
     void setNoOfBytesPerLine(int noOfBytesPerLine);
@@ -318,8 +316,6 @@ protected:
     AbstractByteArrayView::ValueCoding mValueCoding;
     /** */
     CharCodec* mCharCodec;
-    /** */
-    AbstractByteArrayView::CharCoding mCharCoding;
     /** style of resizing */
     AbstractByteArrayView::LayoutStyle mResizeStyle;
 
@@ -344,10 +340,6 @@ inline ByteArrayTableRanges* AbstractByteArrayViewPrivate::tableRanges() const {
 inline const ValueCodec* AbstractByteArrayViewPrivate::valueCodec()  const { return mValueCodec; }
 inline AbstractByteArrayView::ValueCoding AbstractByteArrayViewPrivate::valueCoding() const { return mValueCoding; }
 inline const CharCodec* AbstractByteArrayViewPrivate::charCodec()   const { return mCharCodec; }
-inline AbstractByteArrayView::CharCoding AbstractByteArrayViewPrivate::charCoding() const
-{
-    return (AbstractByteArrayView::CharCoding)mCharCoding;
-}
 inline QString AbstractByteArrayViewPrivate::charCodingName() const { return mCharCodec->name(); }
 inline AbstractByteArrayView::LayoutStyle AbstractByteArrayViewPrivate::layoutStyle() const { return mResizeStyle; }
 inline Address AbstractByteArrayViewPrivate::cursorPosition()   const { return mTableCursor->realIndex(); }

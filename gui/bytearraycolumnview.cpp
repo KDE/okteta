@@ -122,13 +122,6 @@ void ByteArrayColumnView::setShowsNonprinting(bool showsNonprinting)
     d->setShowsNonprinting(showsNonprinting);
 }
 
-void ByteArrayColumnView::setCharCoding(CharCoding charCoding)
-{
-    Q_D(ByteArrayColumnView);
-    d->setCharCoding(charCoding);
-}
-
-// TODO: join with function above!
 void ByteArrayColumnView::setCharCoding(const QString& charCodingName)
 {
     Q_D(ByteArrayColumnView);
