@@ -16,14 +16,14 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="Okteta::ByteArrayColumnView" name="mByteArrayColumnView">
-     <property name="NoOfBytesPerLine">
+     <property name="noOfBytesPerLine">
       <number>8</number>
      </property>
     </widget>
    </item>
    <item>
     <widget class="Okteta::ByteArrayRowView" name="mByteArrayRowView">
-     <property name="NoOfBytesPerLine">
+     <property name="noOfBytesPerLine">
       <number>8</number>
      </property>
     </widget>
