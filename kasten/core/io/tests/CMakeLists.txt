@@ -35,7 +35,7 @@ target_link_libraries( oktetakastenio
 # Saves doing a separate export header.
 target_compile_definitions(oktetakastenio
   PUBLIC
-    DOKTETAKASTENCORE_STATIC_DEFINE
+    OKTETAKASTENCORE_STATIC_DEFINE
 )
 
 
