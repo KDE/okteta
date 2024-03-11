@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-05 00:43+0000\n"
+"POT-Creation-Date: 2024-03-11 01:36+0000\n"
 "PO-Revision-Date: 2011-09-05 22:16+0200\n"
 "Last-Translator: Manfred Wiese <m.j.wiese@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -1129,6 +1129,105 @@ msgctxt "name of the filter; it does a logic XOR operation"
 msgid "operand XOR data"
 msgstr "Operand XOR Daten"
 
+#: controllers/view/libdatatypecodecs/binary8codec.cpp:21
+#, kde-format
+msgctxt "@label:textbox encoding of one byte as value in the binary format"
+msgid "Binary 8-bit"
+msgstr "8 Bits bineer"
+
+#: controllers/view/libdatatypecodecs/char8codec.cpp:24
+#, kde-format
+msgctxt "@label:textbox encoding of one byte as character"
+msgid "Character 8-bit"
+msgstr "8 Bits Teken"
+
+#: controllers/view/libdatatypecodecs/float32codec.cpp:21
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Float 32-bit"
+msgstr "32 Bits Fleetkomma"
+
+#: controllers/view/libdatatypecodecs/float64codec.cpp:21
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Float 64-bit"
+msgstr "64 Bits Fleetkomma"
+
+#: controllers/view/libdatatypecodecs/hexadecimal8codec.cpp:21
+#, kde-format
+msgctxt ""
+"@label:textbox encoding of one byte as value in the hexadecimal format"
+msgid "Hexadecimal 8-bit"
+msgstr "8 Bits hexadezimaal"
+
+#: controllers/view/libdatatypecodecs/octal8codec.cpp:21
+#, kde-format
+msgctxt "@label:textbox encoding of one byte as value in the octal format"
+msgid "Octal 8-bit"
+msgstr "8 Bits oktaal"
+
+#: controllers/view/libdatatypecodecs/sint16codec.cpp:21
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Signed 16-bit"
+msgstr "16 Bits mit Vörteken"
+
+#: controllers/view/libdatatypecodecs/sint32codec.cpp:21
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Signed 32-bit"
+msgstr "32 Bits mit Vörteken"
+
+#: controllers/view/libdatatypecodecs/sint64codec.cpp:21
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Signed 64-bit"
+msgstr "64 Bits mit Vörteken"
+
+#: controllers/view/libdatatypecodecs/sint8codec.cpp:21
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Signed 8-bit"
+msgstr "8 Bits mit Vörteken"
+
+#: controllers/view/libdatatypecodecs/uint16codec.cpp:21
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Unsigned 16-bit"
+msgstr "16 Bits ahn Vörteken"
+
+#: controllers/view/libdatatypecodecs/uint32codec.cpp:21
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Unsigned 32-bit"
+msgstr "32 Bits ahn Vörteken"
+
+#: controllers/view/libdatatypecodecs/uint64codec.cpp:21
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Unsigned 64-bit"
+msgstr "64 Bits ahn Vörteken"
+
+#: controllers/view/libdatatypecodecs/uint8codec.cpp:21
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Unsigned 8-bit"
+msgstr "8 Bits ahn Vörteken"
+
+#: controllers/view/libdatatypecodecs/utf16codec.cpp:25
+#, fuzzy, kde-format
+#| msgctxt "@label:textbox"
+#| msgid "UTF-16:"
+msgctxt "@label:textbox"
+msgid "UTF-16"
+msgstr "UTF-16:"
+
+#: controllers/view/libdatatypecodecs/utf8codec.cpp:23
+#, kde-format
+msgctxt "@label:textbox"
+msgid "UTF-8"
+msgstr "UTF-8"
+
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:73
 #: controllers/view/search/searchcontroller.cpp:111
 #: controllers/view/search/searchcontroller.cpp:117
@@ -1328,105 +1427,6 @@ msgstr "B&ewerken..."
 msgctxt "@action:button"
 msgid "&Select"
 msgstr "&Utsöken"
-
-#: controllers/view/poddecoder/typecodecs/binary8codec.cpp:20
-#, kde-format
-msgctxt "@label:textbox encoding of one byte as value in the binary format"
-msgid "Binary 8-bit"
-msgstr "8 Bits bineer"
-
-#: controllers/view/poddecoder/typecodecs/char8codec.cpp:23
-#, kde-format
-msgctxt "@label:textbox encoding of one byte as character"
-msgid "Character 8-bit"
-msgstr "8 Bits Teken"
-
-#: controllers/view/poddecoder/typecodecs/float32codec.cpp:20
-#, kde-format
-msgctxt "@label:textbox"
-msgid "Float 32-bit"
-msgstr "32 Bits Fleetkomma"
-
-#: controllers/view/poddecoder/typecodecs/float64codec.cpp:20
-#, kde-format
-msgctxt "@label:textbox"
-msgid "Float 64-bit"
-msgstr "64 Bits Fleetkomma"
-
-#: controllers/view/poddecoder/typecodecs/hexadecimal8codec.cpp:20
-#, kde-format
-msgctxt ""
-"@label:textbox encoding of one byte as value in the hexadecimal format"
-msgid "Hexadecimal 8-bit"
-msgstr "8 Bits hexadezimaal"
-
-#: controllers/view/poddecoder/typecodecs/octal8codec.cpp:20
-#, kde-format
-msgctxt "@label:textbox encoding of one byte as value in the octal format"
-msgid "Octal 8-bit"
-msgstr "8 Bits oktaal"
-
-#: controllers/view/poddecoder/typecodecs/sint16codec.cpp:20
-#, kde-format
-msgctxt "@label:textbox"
-msgid "Signed 16-bit"
-msgstr "16 Bits mit Vörteken"
-
-#: controllers/view/poddecoder/typecodecs/sint32codec.cpp:20
-#, kde-format
-msgctxt "@label:textbox"
-msgid "Signed 32-bit"
-msgstr "32 Bits mit Vörteken"
-
-#: controllers/view/poddecoder/typecodecs/sint64codec.cpp:20
-#, kde-format
-msgctxt "@label:textbox"
-msgid "Signed 64-bit"
-msgstr "64 Bits mit Vörteken"
-
-#: controllers/view/poddecoder/typecodecs/sint8codec.cpp:20
-#, kde-format
-msgctxt "@label:textbox"
-msgid "Signed 8-bit"
-msgstr "8 Bits mit Vörteken"
-
-#: controllers/view/poddecoder/typecodecs/uint16codec.cpp:20
-#, kde-format
-msgctxt "@label:textbox"
-msgid "Unsigned 16-bit"
-msgstr "16 Bits ahn Vörteken"
-
-#: controllers/view/poddecoder/typecodecs/uint32codec.cpp:20
-#, kde-format
-msgctxt "@label:textbox"
-msgid "Unsigned 32-bit"
-msgstr "32 Bits ahn Vörteken"
-
-#: controllers/view/poddecoder/typecodecs/uint64codec.cpp:20
-#, kde-format
-msgctxt "@label:textbox"
-msgid "Unsigned 64-bit"
-msgstr "64 Bits ahn Vörteken"
-
-#: controllers/view/poddecoder/typecodecs/uint8codec.cpp:20
-#, kde-format
-msgctxt "@label:textbox"
-msgid "Unsigned 8-bit"
-msgstr "8 Bits ahn Vörteken"
-
-#: controllers/view/poddecoder/typecodecs/utf16codec.cpp:24
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox"
-#| msgid "UTF-16:"
-msgctxt "@label:textbox"
-msgid "UTF-16"
-msgstr "UTF-16:"
-
-#: controllers/view/poddecoder/typecodecs/utf8codec.cpp:22
-#, kde-format
-msgctxt "@label:textbox"
-msgid "UTF-8"
-msgstr "UTF-8"
 
 #: controllers/view/print/printtool.cpp:67
 #: controllers/view/print/printtool.cpp:166
@@ -1846,21 +1846,21 @@ msgid_plural "%1 bits"
 msgstr[0] "%1 Bit"
 msgstr[1] "%1 Bits"
 
-#: controllers/view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.cpp:46
+#: controllers/view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.cpp:49
 #: controllers/view/structures/datatypes/primitive/booldatainformation.cpp:17
 #, kde-format
 msgctxt "boolean value"
 msgid "false"
 msgstr "falsch"
 
-#: controllers/view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.cpp:47
+#: controllers/view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.cpp:50
 #: controllers/view/structures/datatypes/primitive/booldatainformation.cpp:20
 #, kde-format
 msgctxt "boolean value"
 msgid "true"
 msgstr "wohr"
 
-#: controllers/view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.cpp:92
+#: controllers/view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.cpp:95
 #, fuzzy, kde-format
 #| msgctxt "Data type"
 #| msgid "bitfield (%1 bit wide)"
@@ -1871,7 +1871,7 @@ msgid_plural "boolean bitfield (%1 bits wide)"
 msgstr[0] "Bitfeld (%1 Bit breed)"
 msgstr[1] "Bitfeld (%1 Bits breed)"
 
-#: controllers/view/structures/datatypes/primitive/bitfield/signedbitfielddatainformation.cpp:94
+#: controllers/view/structures/datatypes/primitive/bitfield/signedbitfielddatainformation.cpp:97
 #, fuzzy, kde-format
 #| msgctxt "Data type"
 #| msgid "bitfield (%1 bit wide)"
@@ -1882,7 +1882,7 @@ msgid_plural "signed bitfield (%1 bits wide)"
 msgstr[0] "Bitfeld (%1 Bit breed)"
 msgstr[1] "Bitfeld (%1 Bits breed)"
 
-#: controllers/view/structures/datatypes/primitive/bitfield/unsignedbitfielddatainformation.cpp:76
+#: controllers/view/structures/datatypes/primitive/bitfield/unsignedbitfielddatainformation.cpp:78
 #, fuzzy, kde-format
 #| msgctxt "Data type"
 #| msgid "bitfield (%1 bit wide)"
