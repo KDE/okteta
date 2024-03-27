@@ -165,7 +165,7 @@ msgstr "Si premeu este botó, se suprimiran tots els punts seleccionats."
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Moves the cursor to the selected bookmark."
-msgstr "Mou el cursor al punt seleccionat."
+msgstr "Mou el cursor fins el punt seleccionat."
 
 #: controllers/view/bookmarks/bookmarksview.cpp:95
 #, kde-format
