@@ -37,7 +37,7 @@ StructuresSelector::StructuresSelector(QWidget* parent)
     // search field
     m_lineEdit = new QLineEdit(this);
     m_lineEdit->setClearButtonEnabled(true);
-    m_lineEdit->setPlaceholderText(i18nc("@info:placeholder", "Search..."));
+    m_lineEdit->setPlaceholderText(i18nc("@info:placeholder", "Search…"));
     connect(m_lineEdit, &QLineEdit::textChanged,
             m_soirtFilterProxyModel, &StructuresSelectionSortFilterProxyModel::setFilterString);
 

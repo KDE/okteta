@@ -60,12 +60,12 @@ ViewProfilesManageDialog::ViewProfilesManageDialog(ByteArrayViewProfileManager* 
                          new QPushButton;
     KGuiItem::assign(createButton,
                      KGuiItem(i18nc("@action:button",
-                                    "&Create new..."),
+                                    "&Create New…"),
                               QStringLiteral("document-new"),
                               i18nc("@info:tooltip",
                                     "Opens an editor for a new view profile."),
                               xi18nc("@info:whatsthis",
-                                     "If you press the <interface>Create new...</interface> button, "
+                                     "If you press the <interface>Create New…</interface> button, "
                                      "an editor is opened where you can create and edit a new view profile. "
                                      "The values will be based on the ones of the view profile you selected "
                                      "in the list.")));
@@ -74,12 +74,12 @@ ViewProfilesManageDialog::ViewProfilesManageDialog(ByteArrayViewProfileManager* 
     mEditButton = new QPushButton;
     KGuiItem::assign(mEditButton,
                      KGuiItem(i18nc("@action:button",
-                                    "&Edit..."),
+                                    "&Edit…"),
                               QStringLiteral("document-edit"),
                               i18nc("@info:tooltip",
                                     "Opens an editor for the view profile."),
                               xi18nc("@info:whatsthis",
-                                     "If you press the <interface>Edit...</interface> button, "
+                                     "If you press the <interface>Edit…</interface> button, "
                                      "an editor will be opened for the view profile you selected "
                                      "in the list.")));
     connect(mEditButton, &QPushButton::clicked, this, &ViewProfilesManageDialog::onEditButtonClicked);

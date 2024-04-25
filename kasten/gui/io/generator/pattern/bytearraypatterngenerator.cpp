@@ -96,7 +96,7 @@ void ByteArrayPatternGeneratorSettings::saveConfig(KConfigGroup& configGroup) co
 
 ByteArrayPatternGenerator::ByteArrayPatternGenerator()
     : AbstractModelDataGenerator(
-        i18nc("name of the generated data", "Pattern..."),
+        i18nc("name of the generated data", "Pattern…"),
         QStringLiteral("application/octet-stream"),
         DynamicGeneration)
 {

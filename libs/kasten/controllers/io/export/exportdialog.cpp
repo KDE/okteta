@@ -70,7 +70,7 @@ ExportDialog::ExportDialog(const QString& remoteTypeName,
     // dialog buttons
     auto* dialogButtonBox = new QDialogButtonBox;
     auto* exportButton = new QPushButton(QIcon::fromTheme(QStringLiteral("document-export")),
-                                         i18nc("@action:button", "&Export to File..."));
+                                         i18nc("@action:button", "&Export to File…"));
     exportButton->setToolTip(i18nc("@info:tooltip",
                                    "Export the selected data to a file."));
     exportButton->setWhatsThis(xi18nc("@info:whatsthis",

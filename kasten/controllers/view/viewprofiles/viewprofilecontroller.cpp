@@ -42,7 +42,7 @@ ViewProfileController::ViewProfileController(ByteArrayViewProfileManager* viewPr
     mCreateNewAction =
         new QAction(QIcon::fromTheme(QStringLiteral("document-new")),
                     i18nc("@action:inmenu create a new view profile",
-                          "Create New..."),
+                          "Create New…"),
                     this);
     connect(mCreateNewAction, &QAction::triggered, this, &ViewProfileController::onCreateNewActionTriggered);
 

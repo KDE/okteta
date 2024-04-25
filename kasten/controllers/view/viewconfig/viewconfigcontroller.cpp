@@ -74,13 +74,13 @@ ViewConfigController::ViewConfigController(KXMLGUIClient* guiClient)
             this, &ViewConfigController::setShowsNonprinting);
 
     // bytes per line
-    mSetBytesPerLineAction = new QAction(i18nc("@action:inmenu", "Set Bytes per Line..."), this);
+    mSetBytesPerLineAction = new QAction(i18nc("@action:inmenu", "Set Bytes per Line…"), this);
     mSetBytesPerLineAction->setObjectName(QStringLiteral("view_bytesperline"));
     connect(mSetBytesPerLineAction, &QAction::triggered,
             this, &ViewConfigController::showBytesPerLineDialog);
 
     // byte groups size
-    mSetBytesPerGroupAction = new QAction(i18nc("@action:inmenu", "Set Bytes per Group..."), this);
+    mSetBytesPerGroupAction = new QAction(i18nc("@action:inmenu", "Set Bytes per Group…"), this);
     mSetBytesPerGroupAction->setObjectName(QStringLiteral("view_bytespergroup"));
     connect(mSetBytesPerGroupAction, &QAction::triggered,
             this, &ViewConfigController::showBytesPerGroupDialog);

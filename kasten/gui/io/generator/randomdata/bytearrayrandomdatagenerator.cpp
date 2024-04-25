@@ -44,7 +44,7 @@ void ByteArrayRandomDataGeneratorSettings::saveConfig(KConfigGroup& configGroup)
 
 ByteArrayRandomDataGenerator::ByteArrayRandomDataGenerator()
     : AbstractModelDataGenerator(
-        i18nc("name of the generated data", "Random Data..."),
+        i18nc("name of the generated data", "Random Data…"),
         QStringLiteral("application/octet-stream"),
         DynamicGeneration)
 {

@@ -28,7 +28,7 @@ ViewProfilesManageController::ViewProfilesManageController(KXMLGUIClient* guiCli
     , mViewProfileManager(viewProfileManager)
 {
     mManageAction = new QAction(QIcon::fromTheme(QStringLiteral("configure")),
-                                i18nc("@action:inmenu", "Manage View Profiles..."), this);
+                                i18nc("@action:inmenu", "Manage View Profiles…"), this);
     connect(mManageAction, &QAction::triggered,
             this, &ViewProfilesManageController::manageProfiles);
 
