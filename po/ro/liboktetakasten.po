@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-11 01:36+0000\n"
+"POT-Creation-Date: 2024-04-26 01:39+0000\n"
 "PO-Revision-Date: 2012-12-22 11:55+0200\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -588,7 +588,7 @@ msgstr ""
 #: controllers/view/gotooffset/gotooffsetcontroller.cpp:32
 #, kde-format
 msgctxt "@action:inmenu"
-msgid "&Go to Offset..."
+msgid "&Go to Offset…"
 msgstr ""
 
 #: controllers/view/gotooffset/gotooffsettool.cpp:50
@@ -1634,7 +1634,7 @@ msgstr "Bară de cău&tare"
 #| msgctxt "@info:status offset value not available"
 #| msgid "Selection: -"
 msgctxt "@action:inmenu"
-msgid "&Select Range..."
+msgid "&Select Range…"
 msgstr "Selecție: -"
 
 #: controllers/view/selectrange/selectrangetool.cpp:61
@@ -2312,12 +2312,14 @@ msgstr ""
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Replace Bytes"
-msgid "Get New Structures..."
+msgctxt "@action:button"
+msgid "Get New Structures…"
 msgstr "Înlocuiește octeți"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:52
 #, kde-format
-msgid "Advanced Selection..."
+msgctxt "@action:button"
+msgid "Advanced Selection…"
 msgstr ""
 
 #: controllers/view/structures/settings/structuresselectiondialog.cpp:28
@@ -2340,7 +2342,7 @@ msgstr ""
 #, fuzzy, kde-format
 #| msgid "Searc&hbar"
 msgctxt "@info:placeholder"
-msgid "Search..."
+msgid "Search…"
 msgstr "Bară de cău&tare"
 
 #. i18n: ectx: tooltip, entry (UnsignedDisplayBase), group (ValueDisplay)
@@ -2786,7 +2788,7 @@ msgstr ""
 #| msgctxt "@label:textbox to define after how many items the list is wrapped"
 #| msgid "Items per line:"
 msgctxt "@action:inmenu"
-msgid "Set Bytes per Line..."
+msgid "Set Bytes per Line…"
 msgstr "Elemente pe linie:"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:83
@@ -2794,7 +2796,7 @@ msgstr "Elemente pe linie:"
 #| msgctxt "@label:textbox to define after how many items the list is wrapped"
 #| msgid "Items per line:"
 msgctxt "@action:inmenu"
-msgid "Set Bytes per Group..."
+msgid "Set Bytes per Group…"
 msgstr "Elemente pe linie:"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:89
@@ -2889,7 +2891,7 @@ msgstr "Regim &vizualizare"
 #| msgctxt "@label:textbox"
 #| msgid "Pattern:"
 msgctxt "@action:inmenu create a new view profile"
-msgid "Create New..."
+msgid "Create New…"
 msgstr "Model:"
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:52
@@ -3110,10 +3112,12 @@ msgid "Char for undefined bytes:"
 msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilesmanagecontroller.cpp:31
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@title:menu"
+#| msgid "&View Mode"
 msgctxt "@action:inmenu"
-msgid "Manage View Profiles..."
-msgstr ""
+msgid "Manage View Profiles…"
+msgstr "Regim &vizualizare"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:36
 #, fuzzy, kde-format
@@ -3124,10 +3128,12 @@ msgid "View Profiles"
 msgstr "Regim &vizualizare"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:63
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@label:textbox"
+#| msgid "Pattern:"
 msgctxt "@action:button"
-msgid "&Create new..."
-msgstr ""
+msgid "&Create New…"
+msgstr "Model:"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:66
 #, kde-format
@@ -3139,7 +3145,7 @@ msgstr ""
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
-"If you press the <interface>Create new...</interface> button, an editor is "
+"If you press the <interface>Create New…</interface> button, an editor is "
 "opened where you can create and edit a new view profile. The values will be "
 "based on the ones of the view profile you selected in the list."
 msgstr ""
@@ -3147,7 +3153,7 @@ msgstr ""
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:77
 #, kde-format
 msgctxt "@action:button"
-msgid "&Edit..."
+msgid "&Edit…"
 msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:80
@@ -3160,7 +3166,7 @@ msgstr ""
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
-"If you press the <interface>Edit...</interface> button, an editor will be "
+"If you press the <interface>Edit…</interface> button, an editor will be "
 "opened for the view profile you selected in the list."
 msgstr ""
 
@@ -3345,7 +3351,7 @@ msgstr ""
 #| msgctxt "@label:textbox"
 #| msgid "Pattern:"
 msgctxt "name of the generated data"
-msgid "Pattern..."
+msgid "Pattern…"
 msgstr "Model:"
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:149
@@ -3391,7 +3397,7 @@ msgstr "Model:"
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:47
 #, kde-format
 msgctxt "name of the generated data"
-msgid "Random Data..."
+msgid "Random Data…"
 msgstr ""
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:91
@@ -3728,6 +3734,19 @@ msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"
 msgid "UTF-8"
 msgstr "UTF-8:"
+
+#, fuzzy
+#~| msgid "Searc&hbar"
+#~ msgctxt "@info:placeholder"
+#~ msgid "Search..."
+#~ msgstr "Bară de cău&tare"
+
+#, fuzzy
+#~| msgctxt "@label:textbox"
+#~| msgid "Pattern:"
+#~ msgctxt "name of the generated data"
+#~ msgid "Pattern..."
+#~ msgstr "Model:"
 
 #~ msgctxt "name of the hash algorithm"
 #~ msgid "SHA-0"

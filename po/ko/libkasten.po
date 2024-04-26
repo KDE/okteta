@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-05 00:43+0000\n"
+"POT-Creation-Date: 2024-04-26 01:39+0000\n"
 "PO-Revision-Date: 2018-08-14 23:46+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -226,9 +226,11 @@ msgid "Export"
 msgstr "내보내기"
 
 #: controllers/io/export/exportdialog.cpp:73
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "&Export to File..."
 msgctxt "@action:button"
-msgid "&Export to File..."
+msgid "&Export to File…"
 msgstr "파일로 내보내기(&E)..."
 
 #: controllers/io/export/exportdialog.cpp:75

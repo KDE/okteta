@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-05 00:43+0000\n"
+"POT-Creation-Date: 2024-04-26 01:39+0000\n"
 "PO-Revision-Date: 2018-05-28 13:52+0100\n"
 "Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -227,9 +227,11 @@ msgid "Export"
 msgstr "Exportieren"
 
 #: controllers/io/export/exportdialog.cpp:73
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "&Export to File..."
 msgctxt "@action:button"
-msgid "&Export to File..."
+msgid "&Export to File…"
 msgstr "In Datei &exportieren ..."
 
 #: controllers/io/export/exportdialog.cpp:75

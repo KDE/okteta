@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-05 00:43+0000\n"
+"POT-Creation-Date: 2024-04-26 01:39+0000\n"
 "PO-Revision-Date: 2023-01-07 07:24+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -224,9 +224,11 @@ msgid "Export"
 msgstr "გატანa"
 
 #: controllers/io/export/exportdialog.cpp:73
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "&Export to File..."
 msgctxt "@action:button"
-msgid "&Export to File..."
+msgid "&Export to File…"
 msgstr "&ფაილში გატანა..."
 
 #: controllers/io/export/exportdialog.cpp:75

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: khexedit\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-05 00:43+0000\n"
+"POT-Creation-Date: 2024-04-26 01:39+0000\n"
 "PO-Revision-Date: 2018-08-14 09:46+0300\n"
 "Last-Translator: Александр Яворский <yavorsky.a@t-rosta.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -238,9 +238,11 @@ msgid "Export"
 msgstr "Экспорт"
 
 #: controllers/io/export/exportdialog.cpp:73
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "&Export to File..."
 msgctxt "@action:button"
-msgid "&Export to File..."
+msgid "&Export to File…"
 msgstr "&Экспорт в файл..."
 
 #: controllers/io/export/exportdialog.cpp:75

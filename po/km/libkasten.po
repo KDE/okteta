@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-05 00:43+0000\n"
+"POT-Creation-Date: 2024-04-26 01:39+0000\n"
 "PO-Revision-Date: 2008-12-19 10:25+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -228,7 +228,7 @@ msgstr "នាំចេញ"
 #: controllers/io/export/exportdialog.cpp:73
 #, kde-format
 msgctxt "@action:button"
-msgid "&Export to File..."
+msgid "&Export to File…"
 msgstr ""
 
 #: controllers/io/export/exportdialog.cpp:75

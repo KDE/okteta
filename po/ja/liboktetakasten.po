@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-11 01:36+0000\n"
+"POT-Creation-Date: 2024-04-26 01:39+0000\n"
 "PO-Revision-Date: 2011-04-08 21:21-0700\n"
 "Last-Translator: Fumiaki Okushi <okushi@kde.gr.jp>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -573,9 +573,11 @@ msgid ""
 msgstr ""
 
 #: controllers/view/gotooffset/gotooffsetcontroller.cpp:32
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "&Go to Offset..."
 msgctxt "@action:inmenu"
-msgid "&Go to Offset..."
+msgid "&Go to Offset…"
 msgstr "オフセットへ移動(&G)..."
 
 #: controllers/view/gotooffset/gotooffsettool.cpp:50
@@ -1588,7 +1590,7 @@ msgstr "検索"
 #| msgctxt "@action:inmenu"
 #| msgid "&Select range..."
 msgctxt "@action:inmenu"
-msgid "&Select Range..."
+msgid "&Select Range…"
 msgstr "検索範囲(&S)..."
 
 #: controllers/view/selectrange/selectrangetool.cpp:61
@@ -2248,12 +2250,14 @@ msgstr ""
 #, fuzzy, kde-format
 #| msgctxt "@option:check"
 #| msgid "&Selected bytes"
-msgid "Get New Structures..."
+msgctxt "@action:button"
+msgid "Get New Structures…"
 msgstr "選択したバイトのみ(&S)"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:52
 #, kde-format
-msgid "Advanced Selection..."
+msgctxt "@action:button"
+msgid "Advanced Selection…"
 msgstr ""
 
 #: controllers/view/structures/settings/structuresselectiondialog.cpp:28
@@ -2277,7 +2281,7 @@ msgstr ""
 #| msgctxt "@title"
 #| msgid "Search"
 msgctxt "@info:placeholder"
-msgid "Search..."
+msgid "Search…"
 msgstr "検索"
 
 #. i18n: ectx: tooltip, entry (UnsignedDisplayBase), group (ValueDisplay)
@@ -2718,9 +2722,11 @@ msgid "Show &Non-printing Chars"
 msgstr "印字不可能な文字を表示する(&N)"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:77
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Set Bytes per Line..."
 msgctxt "@action:inmenu"
-msgid "Set Bytes per Line..."
+msgid "Set Bytes per Line…"
 msgstr "1 行あたりのバイト数を設定..."
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:83
@@ -2728,7 +2734,7 @@ msgstr "1 行あたりのバイト数を設定..."
 #| msgctxt "@label:textbox to define after how many items the list is wrapped"
 #| msgid "Items per line:"
 msgctxt "@action:inmenu"
-msgid "Set Bytes per Group..."
+msgid "Set Bytes per Group…"
 msgstr "1 行あたりのアイテム数:"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:89
@@ -2822,7 +2828,7 @@ msgstr "表示モード(&V)"
 #| msgctxt "@label:textbox"
 #| msgid "Pattern:"
 msgctxt "@action:inmenu create a new view profile"
-msgid "Create New..."
+msgid "Create New…"
 msgstr "パターン:"
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:52
@@ -3030,10 +3036,12 @@ msgid "Char for undefined bytes:"
 msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilesmanagecontroller.cpp:31
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@title:menu"
+#| msgid "&View Mode"
 msgctxt "@action:inmenu"
-msgid "Manage View Profiles..."
-msgstr ""
+msgid "Manage View Profiles…"
+msgstr "表示モード(&V)"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:36
 #, fuzzy, kde-format
@@ -3044,10 +3052,12 @@ msgid "View Profiles"
 msgstr "表示モード(&V)"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:63
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@label:textbox"
+#| msgid "Pattern:"
 msgctxt "@action:button"
-msgid "&Create new..."
-msgstr ""
+msgid "&Create New…"
+msgstr "パターン:"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:66
 #, kde-format
@@ -3059,7 +3069,7 @@ msgstr ""
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
-"If you press the <interface>Create new...</interface> button, an editor is "
+"If you press the <interface>Create New…</interface> button, an editor is "
 "opened where you can create and edit a new view profile. The values will be "
 "based on the ones of the view profile you selected in the list."
 msgstr ""
@@ -3067,7 +3077,7 @@ msgstr ""
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:77
 #, kde-format
 msgctxt "@action:button"
-msgid "&Edit..."
+msgid "&Edit…"
 msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:80
@@ -3077,12 +3087,18 @@ msgid "Opens an editor for the view profile."
 msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:82
-#, kde-kuit-format
+#, fuzzy, kde-kuit-format
+#| msgctxt "@info:whatsthis"
+#| msgid ""
+#| "If you press the <interface>Find</interface> button, the bytes you "
+#| "entered above are searched for within the byte array."
 msgctxt "@info:whatsthis"
 msgid ""
-"If you press the <interface>Edit...</interface> button, an editor will be "
+"If you press the <interface>Edit…</interface> button, an editor will be "
 "opened for the view profile you selected in the list."
 msgstr ""
+"<interface>検索</interface>ボタンを押すと、上で入力したバイトをバイト配列の中"
+"で検索します。"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:90
 #, kde-format
@@ -3260,10 +3276,12 @@ msgid "Support to load files larger than 2 GiB has not yet been implemented."
 msgstr ""
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:99
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item name of the generated data"
+#| msgid "Pattern"
 msgctxt "name of the generated data"
-msgid "Pattern..."
-msgstr "パターン..."
+msgid "Pattern…"
+msgstr "パターン"
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:149
 #, kde-format
@@ -3302,10 +3320,12 @@ msgid "Pattern"
 msgstr "パターン"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:47
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item name of the generated data"
+#| msgid "Random Data"
 msgctxt "name of the generated data"
-msgid "Random Data..."
-msgstr ""
+msgid "Random Data…"
+msgstr "ランダムデータ"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:91
 #, kde-format
@@ -3619,3 +3639,14 @@ msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"
 msgid "UTF-8"
 msgstr "UTF-8"
+
+#, fuzzy
+#~| msgctxt "@title"
+#~| msgid "Search"
+#~ msgctxt "@info:placeholder"
+#~ msgid "Search..."
+#~ msgstr "検索"
+
+#~ msgctxt "name of the generated data"
+#~ msgid "Pattern..."
+#~ msgstr "パターン..."

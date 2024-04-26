@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-11 01:36+0000\n"
+"POT-Creation-Date: 2024-04-26 01:39+0000\n"
 "PO-Revision-Date: 2024-02-06 00:39+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -566,9 +566,11 @@ msgstr ""
 "한 바이트에 적용합니다."
 
 #: controllers/view/gotooffset/gotooffsetcontroller.cpp:32
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "&Go to Offset..."
 msgctxt "@action:inmenu"
-msgid "&Go to Offset..."
+msgid "&Go to Offset…"
 msgstr "위치로 이동(&G)..."
 
 #: controllers/view/gotooffset/gotooffsettool.cpp:50
@@ -1550,9 +1552,11 @@ msgid "Search"
 msgstr "찾기"
 
 #: controllers/view/selectrange/selectrangecontroller.cpp:33
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "&Select Range..."
 msgctxt "@action:inmenu"
-msgid "&Select Range..."
+msgid "&Select Range…"
 msgstr "범위 선택(&S)..."
 
 #: controllers/view/selectrange/selectrangetool.cpp:61
@@ -2140,13 +2144,17 @@ msgid "About"
 msgstr "정보"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:46
-#, kde-format
-msgid "Get New Structures..."
+#, fuzzy, kde-format
+#| msgid "Get New Structures..."
+msgctxt "@action:button"
+msgid "Get New Structures…"
 msgstr "새 구조체 가져오기..."
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:52
-#, kde-format
-msgid "Advanced Selection..."
+#, fuzzy, kde-format
+#| msgid "Advanced Selection..."
+msgctxt "@action:button"
+msgid "Advanced Selection…"
 msgstr "고급 선택..."
 
 #: controllers/view/structures/settings/structuresselectiondialog.cpp:28
@@ -2166,10 +2174,12 @@ msgid "Structure Definitions"
 msgstr "구조체 정의"
 
 #: controllers/view/structures/settings/structuresselector.cpp:40
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@title"
+#| msgid "Search"
 msgctxt "@info:placeholder"
-msgid "Search..."
-msgstr "검색..."
+msgid "Search…"
+msgstr "찾기"
 
 #. i18n: ectx: tooltip, entry (UnsignedDisplayBase), group (ValueDisplay)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:9
@@ -2560,15 +2570,19 @@ msgid "Show &Non-printing Chars"
 msgstr "인쇄할 수 없는 문자 표시(&N)"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:77
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Set Bytes per Line..."
 msgctxt "@action:inmenu"
-msgid "Set Bytes per Line..."
+msgid "Set Bytes per Line…"
 msgstr "줄당 바이트 수 설정..."
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:83
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Set Bytes per Group..."
 msgctxt "@action:inmenu"
-msgid "Set Bytes per Group..."
+msgid "Set Bytes per Group…"
 msgstr "그룹당 바이트 수 설정..."
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:89
@@ -2654,9 +2668,11 @@ msgid "View Profile"
 msgstr "프로필 보기"
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:45
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu create a new view profile"
+#| msgid "Create New..."
 msgctxt "@action:inmenu create a new view profile"
-msgid "Create New..."
+msgid "Create New…"
 msgstr "새로 만들기..."
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:52
@@ -2849,9 +2865,11 @@ msgid "Char for undefined bytes:"
 msgstr "정의되지 않은 바이트 대체 문자:"
 
 #: controllers/view/viewprofiles/viewprofilesmanagecontroller.cpp:31
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Manage View Profiles..."
 msgctxt "@action:inmenu"
-msgid "Manage View Profiles..."
+msgid "Manage View Profiles…"
 msgstr "보기 프로필 관리..."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:36
@@ -2861,10 +2879,12 @@ msgid "View Profiles"
 msgstr "보기 프로필"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:63
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu create a new view profile"
+#| msgid "Create New..."
 msgctxt "@action:button"
-msgid "&Create new..."
-msgstr "새로 만들기(&C)..."
+msgid "&Create New…"
+msgstr "새로 만들기..."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:66
 #, kde-format
@@ -2873,10 +2893,15 @@ msgid "Opens an editor for a new view profile."
 msgstr "새 보기 프로필 편집기를 엽니다."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:68
-#, kde-kuit-format
+#, fuzzy, kde-kuit-format
+#| msgctxt "@info:whatsthis"
+#| msgid ""
+#| "If you press the <interface>Create new...</interface> button, an editor "
+#| "is opened where you can create and edit a new view profile. The values "
+#| "will be based on the ones of the view profile you selected in the list."
 msgctxt "@info:whatsthis"
 msgid ""
-"If you press the <interface>Create new...</interface> button, an editor is "
+"If you press the <interface>Create New…</interface> button, an editor is "
 "opened where you can create and edit a new view profile. The values will be "
 "based on the ones of the view profile you selected in the list."
 msgstr ""
@@ -2885,10 +2910,12 @@ msgstr ""
 "으로 생성합니다."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:77
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Edit"
 msgctxt "@action:button"
-msgid "&Edit..."
-msgstr "편집(&E)..."
+msgid "&Edit…"
+msgstr "편집"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:80
 #, kde-format
@@ -2897,10 +2924,14 @@ msgid "Opens an editor for the view profile."
 msgstr "보기 프로필 편집기를 엽니다."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:82
-#, kde-kuit-format
+#, fuzzy, kde-kuit-format
+#| msgctxt "@info:whatsthis"
+#| msgid ""
+#| "If you press the <interface>Edit...</interface> button, an editor will be "
+#| "opened for the view profile you selected in the list."
 msgctxt "@info:whatsthis"
 msgid ""
-"If you press the <interface>Edit...</interface> button, an editor will be "
+"If you press the <interface>Edit…</interface> button, an editor will be "
 "opened for the view profile you selected in the list."
 msgstr ""
 "<interface>편집...</interface> 단추를 누르면 선택한 보기 프로필을 편집할 편집"
@@ -3078,10 +3109,12 @@ msgid "Support to load files larger than 2 GiB has not yet been implemented."
 msgstr "2GiB 이상의 파일을 아직 불러올 수 없습니다."
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:99
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item name of the generated data"
+#| msgid "Pattern"
 msgctxt "name of the generated data"
-msgid "Pattern..."
-msgstr "패턴..."
+msgid "Pattern…"
+msgstr "패턴"
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:149
 #, kde-format
@@ -3121,10 +3154,12 @@ msgid "Pattern"
 msgstr "패턴"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:47
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item name of the generated data"
+#| msgid "Random Data"
 msgctxt "name of the generated data"
-msgid "Random Data..."
-msgstr "무작위 데이터..."
+msgid "Random Data…"
+msgstr "무작위 데이터"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:91
 #, kde-format
@@ -3421,6 +3456,26 @@ msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"
 msgid "UTF-8"
 msgstr "UTF-8"
+
+#~ msgctxt "@info:placeholder"
+#~ msgid "Search..."
+#~ msgstr "검색..."
+
+#~ msgctxt "@action:button"
+#~ msgid "&Create new..."
+#~ msgstr "새로 만들기(&C)..."
+
+#~ msgctxt "@action:button"
+#~ msgid "&Edit..."
+#~ msgstr "편집(&E)..."
+
+#~ msgctxt "name of the generated data"
+#~ msgid "Pattern..."
+#~ msgstr "패턴..."
+
+#~ msgctxt "name of the generated data"
+#~ msgid "Random Data..."
+#~ msgstr "무작위 데이터..."
 
 #~ msgctxt "name of the hash algorithm"
 #~ msgid "SHA-0"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-11 01:36+0000\n"
+"POT-Creation-Date: 2024-04-26 01:39+0000\n"
 "PO-Revision-Date: 2014-09-08 14:28+0200\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -596,9 +596,11 @@ msgstr ""
 "művelet végrehajtódik a megadott tartományon."
 
 #: controllers/view/gotooffset/gotooffsetcontroller.cpp:32
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "&Go to Offset..."
 msgctxt "@action:inmenu"
-msgid "&Go to Offset..."
+msgid "&Go to Offset…"
 msgstr "Ugrás adott &pozícióra..."
 
 #: controllers/view/gotooffset/gotooffsettool.cpp:50
@@ -1621,7 +1623,7 @@ msgstr "Keresés"
 #| msgctxt "@action:inmenu"
 #| msgid "&Select range..."
 msgctxt "@action:inmenu"
-msgid "&Select Range..."
+msgid "&Select Range…"
 msgstr "K&ijelölés..."
 
 #: controllers/view/selectrange/selectrangetool.cpp:61
@@ -2224,13 +2226,17 @@ msgid "About"
 msgstr ""
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:46
-#, kde-format
-msgid "Get New Structures..."
+#, fuzzy, kde-format
+#| msgid "Get New Structures..."
+msgctxt "@action:button"
+msgid "Get New Structures…"
 msgstr "Új struktúrák beszerzése…"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:52
-#, kde-format
-msgid "Advanced Selection..."
+#, fuzzy, kde-format
+#| msgid "Advanced Selection..."
+msgctxt "@action:button"
+msgid "Advanced Selection…"
 msgstr "Speciális kijelölés…"
 
 #: controllers/view/structures/settings/structuresselectiondialog.cpp:28
@@ -2255,7 +2261,7 @@ msgstr "Struktúradefiníciók"
 #| msgctxt "@title"
 #| msgid "Search"
 msgctxt "@info:placeholder"
-msgid "Search..."
+msgid "Search…"
 msgstr "Keresés"
 
 #. i18n: ectx: tooltip, entry (UnsignedDisplayBase), group (ValueDisplay)
@@ -2657,15 +2663,19 @@ msgid "Show &Non-printing Chars"
 msgstr "A nem nyomtatható k&arakterek is"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:77
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Set Bytes per Line..."
 msgctxt "@action:inmenu"
-msgid "Set Bytes per Line..."
+msgid "Set Bytes per Line…"
 msgstr "Soronkénti bájtok beállítása..."
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:83
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Set Bytes per Group..."
 msgctxt "@action:inmenu"
-msgid "Set Bytes per Group..."
+msgid "Set Bytes per Group…"
 msgstr "Csoportonkénti bájtok beállítása..."
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:89
@@ -2755,7 +2765,7 @@ msgstr "Nézetmód"
 #| msgctxt "@title:menu create a new view profile"
 #| msgid "Create new..."
 msgctxt "@action:inmenu create a new view profile"
-msgid "Create New..."
+msgid "Create New…"
 msgstr "Új létrehozása..."
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:52
@@ -2954,9 +2964,11 @@ msgid "Char for undefined bytes:"
 msgstr "Karakter nem definiált bájtokhoz:"
 
 #: controllers/view/viewprofiles/viewprofilesmanagecontroller.cpp:31
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Manage View Profiles..."
 msgctxt "@action:inmenu"
-msgid "Manage View Profiles..."
+msgid "Manage View Profiles…"
 msgstr "Nézetmódok kezelése..."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:36
@@ -2966,10 +2978,12 @@ msgid "View Profiles"
 msgstr "Nézetmódok"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:63
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@title:menu create a new view profile"
+#| msgid "Create new..."
 msgctxt "@action:button"
-msgid "&Create new..."
-msgstr "&Új létrehozása…"
+msgid "&Create New…"
+msgstr "Új létrehozása..."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:66
 #, kde-format
@@ -2978,10 +2992,15 @@ msgid "Opens an editor for a new view profile."
 msgstr "Megnyit egy szerkesztőt az új nézetprofilhoz."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:68
-#, kde-kuit-format
+#, fuzzy, kde-kuit-format
+#| msgctxt "@info:whatsthis"
+#| msgid ""
+#| "If you press the <interface>Create new...</interface> button, an editor "
+#| "is opened where you can create and edit a new view profile. The values "
+#| "will be based on the ones of the view profile you selected in the list."
 msgctxt "@info:whatsthis"
 msgid ""
-"If you press the <interface>Create new...</interface> button, an editor is "
+"If you press the <interface>Create New…</interface> button, an editor is "
 "opened where you can create and edit a new view profile. The values will be "
 "based on the ones of the view profile you selected in the list."
 msgstr ""
@@ -2991,9 +3010,11 @@ msgstr ""
 "alapulni."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:77
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "&Edit..."
 msgctxt "@action:button"
-msgid "&Edit..."
+msgid "&Edit…"
 msgstr "Sz&erkesztés..."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:80
@@ -3003,10 +3024,14 @@ msgid "Opens an editor for the view profile."
 msgstr "Megnyit egy szerkesztőt a nézetprofilhoz."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:82
-#, kde-kuit-format
+#, fuzzy, kde-kuit-format
+#| msgctxt "@info:whatsthis"
+#| msgid ""
+#| "If you press the <interface>Edit...</interface> button, an editor will be "
+#| "opened for the view profile you selected in the list."
 msgctxt "@info:whatsthis"
 msgid ""
-"If you press the <interface>Edit...</interface> button, an editor will be "
+"If you press the <interface>Edit…</interface> button, an editor will be "
 "opened for the view profile you selected in the list."
 msgstr ""
 "Ha a <interface>Szerkesztés…</interface> gombra kattint, egy szerkesztő fog "
@@ -3188,10 +3213,12 @@ msgstr ""
 "megvalósítva."
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:99
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item name of the generated data"
+#| msgid "Pattern"
 msgctxt "name of the generated data"
-msgid "Pattern..."
-msgstr "Minta..."
+msgid "Pattern…"
+msgstr "Minta"
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:149
 #, kde-format
@@ -3232,10 +3259,12 @@ msgid "Pattern"
 msgstr "Minta"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:47
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item name of the generated data"
+#| msgid "Random Data"
 msgctxt "name of the generated data"
-msgid "Random Data..."
-msgstr "Véletlenszerű adatok..."
+msgid "Random Data…"
+msgstr "Véletlenszerű adat"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:91
 #, kde-format
@@ -3536,6 +3565,29 @@ msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"
 msgid "UTF-8"
 msgstr "UTF-8"
+
+#, fuzzy
+#~| msgctxt "@title"
+#~| msgid "Search"
+#~ msgctxt "@info:placeholder"
+#~ msgid "Search..."
+#~ msgstr "Keresés"
+
+#~ msgctxt "@action:button"
+#~ msgid "&Create new..."
+#~ msgstr "&Új létrehozása…"
+
+#~ msgctxt "@action:button"
+#~ msgid "&Edit..."
+#~ msgstr "Sz&erkesztés..."
+
+#~ msgctxt "name of the generated data"
+#~ msgid "Pattern..."
+#~ msgstr "Minta..."
+
+#~ msgctxt "name of the generated data"
+#~ msgid "Random Data..."
+#~ msgstr "Véletlenszerű adatok..."
 
 #~ msgctxt "name of the hash algorithm"
 #~ msgid "SHA-0"

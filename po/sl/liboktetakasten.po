@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-11 01:36+0000\n"
+"POT-Creation-Date: 2024-04-26 01:39+0000\n"
 "PO-Revision-Date: 2023-12-20 07:28+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -589,9 +589,11 @@ msgstr ""
 "operacija s podanimi možnostmi izvedena za bajte v izbranem obsegu."
 
 #: controllers/view/gotooffset/gotooffsetcontroller.cpp:32
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "&Go to Offset..."
 msgctxt "@action:inmenu"
-msgid "&Go to Offset..."
+msgid "&Go to Offset…"
 msgstr "Pojdi na odmik..."
 
 #: controllers/view/gotooffset/gotooffsettool.cpp:50
@@ -1586,9 +1588,11 @@ msgid "Search"
 msgstr "Poišči"
 
 #: controllers/view/selectrange/selectrangecontroller.cpp:33
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "&Select Range..."
 msgctxt "@action:inmenu"
-msgid "&Select Range..."
+msgid "&Select Range…"
 msgstr "Izberi obseg..."
 
 #: controllers/view/selectrange/selectrangetool.cpp:61
@@ -2197,13 +2201,17 @@ msgid "About"
 msgstr "O programu"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:46
-#, kde-format
-msgid "Get New Structures..."
+#, fuzzy, kde-format
+#| msgid "Get New Structures..."
+msgctxt "@action:button"
+msgid "Get New Structures…"
 msgstr "Dobi nove strukture..."
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:52
-#, kde-format
-msgid "Advanced Selection..."
+#, fuzzy, kde-format
+#| msgid "Advanced Selection..."
+msgctxt "@action:button"
+msgid "Advanced Selection…"
 msgstr "Napreden izbor ..."
 
 #: controllers/view/structures/settings/structuresselectiondialog.cpp:28
@@ -2223,10 +2231,12 @@ msgid "Structure Definitions"
 msgstr "Določila struktur"
 
 #: controllers/view/structures/settings/structuresselector.cpp:40
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@title"
+#| msgid "Search"
 msgctxt "@info:placeholder"
-msgid "Search..."
-msgstr "Poišči..."
+msgid "Search…"
+msgstr "Poišči"
 
 #. i18n: ectx: tooltip, entry (UnsignedDisplayBase), group (ValueDisplay)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:9
@@ -2627,15 +2637,19 @@ msgid "Show &Non-printing Chars"
 msgstr "Prikaži &nenatisljive znake"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:77
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Set Bytes per Line..."
 msgctxt "@action:inmenu"
-msgid "Set Bytes per Line..."
+msgid "Set Bytes per Line…"
 msgstr "Nastavi bajte na vrstico ..."
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:83
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Set Bytes per Group..."
 msgctxt "@action:inmenu"
-msgid "Set Bytes per Group..."
+msgid "Set Bytes per Group…"
 msgstr "Nastavi bajte na skupino ..."
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:89
@@ -2721,9 +2735,11 @@ msgid "View Profile"
 msgstr "Profil prikaza"
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:45
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu create a new view profile"
+#| msgid "Create New..."
 msgctxt "@action:inmenu create a new view profile"
-msgid "Create New..."
+msgid "Create New…"
 msgstr "Ustvari novi..."
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:52
@@ -2916,9 +2932,11 @@ msgid "Char for undefined bytes:"
 msgstr "Znak za nedoločene bajte:"
 
 #: controllers/view/viewprofiles/viewprofilesmanagecontroller.cpp:31
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Manage View Profiles..."
 msgctxt "@action:inmenu"
-msgid "Manage View Profiles..."
+msgid "Manage View Profiles…"
 msgstr "Upravljanje profilov prikaza ..."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:36
@@ -2928,10 +2946,12 @@ msgid "View Profiles"
 msgstr "Profili prikaza"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:63
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu create a new view profile"
+#| msgid "Create New..."
 msgctxt "@action:button"
-msgid "&Create new..."
-msgstr "Ustvari novega..."
+msgid "&Create New…"
+msgstr "Ustvari novi..."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:66
 #, kde-format
@@ -2940,10 +2960,15 @@ msgid "Opens an editor for a new view profile."
 msgstr "Odpre urejevalnik za nov profil prikaza."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:68
-#, kde-kuit-format
+#, fuzzy, kde-kuit-format
+#| msgctxt "@info:whatsthis"
+#| msgid ""
+#| "If you press the <interface>Create new...</interface> button, an editor "
+#| "is opened where you can create and edit a new view profile. The values "
+#| "will be based on the ones of the view profile you selected in the list."
 msgctxt "@info:whatsthis"
 msgid ""
-"If you press the <interface>Create new...</interface> button, an editor is "
+"If you press the <interface>Create New…</interface> button, an editor is "
 "opened where you can create and edit a new view profile. The values will be "
 "based on the ones of the view profile you selected in the list."
 msgstr ""
@@ -2952,10 +2977,12 @@ msgstr ""
 "bodo osnovane na vrednostih trenutno izbranega profila prikaza."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:77
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Edit"
 msgctxt "@action:button"
-msgid "&Edit..."
-msgstr "Ur&edi..."
+msgid "&Edit…"
+msgstr "Uredi"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:80
 #, kde-format
@@ -2964,10 +2991,14 @@ msgid "Opens an editor for the view profile."
 msgstr "Odpre urejevalnik profila prikaza."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:82
-#, kde-kuit-format
+#, fuzzy, kde-kuit-format
+#| msgctxt "@info:whatsthis"
+#| msgid ""
+#| "If you press the <interface>Edit...</interface> button, an editor will be "
+#| "opened for the view profile you selected in the list."
 msgctxt "@info:whatsthis"
 msgid ""
-"If you press the <interface>Edit...</interface> button, an editor will be "
+"If you press the <interface>Edit…</interface> button, an editor will be "
 "opened for the view profile you selected in the list."
 msgstr ""
 "Če kliknete na gumb<interface>Uredi</interface>, se bo odprl urejevalnik za "
@@ -3148,10 +3179,12 @@ msgid "Support to load files larger than 2 GiB has not yet been implemented."
 msgstr "Podpora za nalaganje datotek večjih od 2 GiB še ni na voljo."
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:99
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item name of the generated data"
+#| msgid "Pattern"
 msgctxt "name of the generated data"
-msgid "Pattern..."
-msgstr "Vzorec ..."
+msgid "Pattern…"
+msgstr "Vzorec"
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:149
 #, kde-format
@@ -3191,10 +3224,12 @@ msgid "Pattern"
 msgstr "Vzorec"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:47
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item name of the generated data"
+#| msgid "Random Data"
 msgctxt "name of the generated data"
-msgid "Random Data..."
-msgstr "Naključni podatki ..."
+msgid "Random Data…"
+msgstr "Naključni podatki"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:91
 #, kde-format
@@ -3491,6 +3526,26 @@ msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"
 msgid "UTF-8"
 msgstr "UTF-8"
+
+#~ msgctxt "@info:placeholder"
+#~ msgid "Search..."
+#~ msgstr "Poišči..."
+
+#~ msgctxt "@action:button"
+#~ msgid "&Create new..."
+#~ msgstr "Ustvari novega..."
+
+#~ msgctxt "@action:button"
+#~ msgid "&Edit..."
+#~ msgstr "Ur&edi..."
+
+#~ msgctxt "name of the generated data"
+#~ msgid "Pattern..."
+#~ msgstr "Vzorec ..."
+
+#~ msgctxt "name of the generated data"
+#~ msgid "Random Data..."
+#~ msgstr "Naključni podatki ..."
 
 #~ msgctxt "name of the hash algorithm"
 #~ msgid "SHA-0"

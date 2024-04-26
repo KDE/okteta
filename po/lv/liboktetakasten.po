@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-11 01:36+0000\n"
+"POT-Creation-Date: 2024-04-26 01:39+0000\n"
 "PO-Revision-Date: 2010-01-09 18:03+0200\n"
 "Last-Translator: Viesturs Zarins <viesturs.zarins@mii.lu.lv>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -594,10 +594,12 @@ msgstr ""
 "baitiem tiks izpildīta jūsu izvēlētā darbība ar tai norādītajiem parametriem."
 
 #: controllers/view/gotooffset/gotooffsetcontroller.cpp:32
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Go to Offset"
 msgctxt "@action:inmenu"
-msgid "&Go to Offset..."
-msgstr "&Doties uz nobīdi..."
+msgid "&Go to Offset…"
+msgstr "Iet uz nobīdi"
 
 #: controllers/view/gotooffset/gotooffsettool.cpp:50
 #, kde-format
@@ -1618,7 +1620,7 @@ msgstr "Meklēšana"
 #| msgctxt "@action:inmenu"
 #| msgid "&Select range..."
 msgctxt "@action:inmenu"
-msgid "&Select Range..."
+msgid "&Select Range…"
 msgstr "&Izvēlēties diapazonu..."
 
 #: controllers/view/selectrange/selectrangetool.cpp:61
@@ -2309,13 +2311,16 @@ msgstr ""
 #: controllers/view/structures/settings/structuresmanagerview.cpp:46
 #, fuzzy, kde-format
 #| msgid "Structures"
-msgid "Get New Structures..."
+msgctxt "@action:button"
+msgid "Get New Structures…"
 msgstr "Struktūras"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:52
-#, kde-format
-msgid "Advanced Selection..."
-msgstr ""
+#, fuzzy, kde-format
+#| msgid "Structure Definitions"
+msgctxt "@action:button"
+msgid "Advanced Selection…"
+msgstr "Struktūras definīcijas"
 
 #: controllers/view/structures/settings/structuresselectiondialog.cpp:28
 #, fuzzy, kde-format
@@ -2340,7 +2345,7 @@ msgstr "Struktūras definīcijas"
 #| msgctxt "@title"
 #| msgid "Search"
 msgctxt "@info:placeholder"
-msgid "Search..."
+msgid "Search…"
 msgstr "Meklēšana"
 
 #. i18n: ectx: tooltip, entry (UnsignedDisplayBase), group (ValueDisplay)
@@ -2778,14 +2783,16 @@ msgstr "Rādīt &nedrukājamās rakstzīmes"
 #| msgctxt "@label:textbox to define after how many items the list is wrapped"
 #| msgid "Items per line:"
 msgctxt "@action:inmenu"
-msgid "Set Bytes per Line..."
+msgid "Set Bytes per Line…"
 msgstr "Ieraksti rindā:"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:83
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@label:textbox to define after how many items the list is wrapped"
+#| msgid "Items per line:"
 msgctxt "@action:inmenu"
-msgid "Set Bytes per Group..."
-msgstr ""
+msgid "Set Bytes per Group…"
+msgstr "Ieraksti rindā:"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:89
 #, kde-format
@@ -2876,7 +2883,7 @@ msgstr "&Skata režīms"
 #| msgctxt "name of the generated data"
 #| msgid "Pattern..."
 msgctxt "@action:inmenu create a new view profile"
-msgid "Create New..."
+msgid "Create New…"
 msgstr "Paraugs..."
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:52
@@ -3112,10 +3119,12 @@ msgid "Char for undefined bytes:"
 msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilesmanagecontroller.cpp:31
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@title:menu"
+#| msgid "&View Mode"
 msgctxt "@action:inmenu"
-msgid "Manage View Profiles..."
-msgstr ""
+msgid "Manage View Profiles…"
+msgstr "&Skata režīms"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:36
 #, fuzzy, kde-format
@@ -3126,10 +3135,12 @@ msgid "View Profiles"
 msgstr "&Skata režīms"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:63
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "name of the generated data"
+#| msgid "Pattern..."
 msgctxt "@action:button"
-msgid "&Create new..."
-msgstr ""
+msgid "&Create New…"
+msgstr "Paraugs..."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:66
 #, kde-format
@@ -3145,7 +3156,7 @@ msgstr ""
 #| "selected in the list are copied to the clipboard."
 msgctxt "@info:whatsthis"
 msgid ""
-"If you press the <interface>Create new...</interface> button, an editor is "
+"If you press the <interface>Create New…</interface> button, an editor is "
 "opened where you can create and edit a new view profile. The values will be "
 "based on the ones of the view profile you selected in the list."
 msgstr ""
@@ -3155,7 +3166,7 @@ msgstr ""
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:77
 #, kde-format
 msgctxt "@action:button"
-msgid "&Edit..."
+msgid "&Edit…"
 msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:80
@@ -3172,7 +3183,7 @@ msgstr ""
 #| "selected in the list are copied to the clipboard."
 msgctxt "@info:whatsthis"
 msgid ""
-"If you press the <interface>Edit...</interface> button, an editor will be "
+"If you press the <interface>Edit…</interface> button, an editor will be "
 "opened for the view profile you selected in the list."
 msgstr ""
 "Nospiežot pogu <interface>Kopēt</interface>, visas izvēlētās virknes tiks "
@@ -3369,10 +3380,12 @@ msgid "Support to load files larger than 2 GiB has not yet been implemented."
 msgstr ""
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:99
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item name of the generated data"
+#| msgid "Pattern"
 msgctxt "name of the generated data"
-msgid "Pattern..."
-msgstr "Paraugs..."
+msgid "Pattern…"
+msgstr "Paraugs"
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:149
 #, kde-format
@@ -3413,10 +3426,12 @@ msgid "Pattern"
 msgstr "Paraugs"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:47
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item name of the generated data"
+#| msgid "Random Data"
 msgctxt "name of the generated data"
-msgid "Random Data..."
-msgstr "Nejauši dati..."
+msgid "Random Data…"
+msgstr "Nejauši dati"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:91
 #, kde-format
@@ -3747,6 +3762,25 @@ msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"
 msgid "UTF-8"
 msgstr "UTF-8"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "&Go to Offset..."
+#~ msgstr "&Doties uz nobīdi..."
+
+#, fuzzy
+#~| msgctxt "@title"
+#~| msgid "Search"
+#~ msgctxt "@info:placeholder"
+#~ msgid "Search..."
+#~ msgstr "Meklēšana"
+
+#~ msgctxt "name of the generated data"
+#~ msgid "Pattern..."
+#~ msgstr "Paraugs..."
+
+#~ msgctxt "name of the generated data"
+#~ msgid "Random Data..."
+#~ msgstr "Nejauši dati..."
 
 #~ msgctxt "name of the hash algorithm"
 #~ msgid "SHA-0"
@@ -4395,10 +4429,6 @@ msgstr "UTF-8"
 #~ msgctxt "@option:check the document is read-only"
 #~ msgid "Read-only"
 #~ msgstr "Tikai lasāms"
-
-#~ msgctxt "@title:window"
-#~ msgid "Go to Offset"
-#~ msgstr "Iet uz nobīdi"
 
 #, fuzzy
 #~| msgctxt "@title:group"

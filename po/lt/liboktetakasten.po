@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-11 01:36+0000\n"
+"POT-Creation-Date: 2024-04-26 01:39+0000\n"
 "PO-Revision-Date: 2017-06-25 15:12+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -573,7 +573,7 @@ msgstr ""
 #: controllers/view/gotooffset/gotooffsetcontroller.cpp:32
 #, kde-format
 msgctxt "@action:inmenu"
-msgid "&Go to Offset..."
+msgid "&Go to Offset…"
 msgstr ""
 
 #: controllers/view/gotooffset/gotooffsettool.cpp:50
@@ -1559,7 +1559,7 @@ msgstr "Ieškoti"
 #| msgctxt "@action:button"
 #| msgid "&Select"
 msgctxt "@action:inmenu"
-msgid "&Select Range..."
+msgid "&Select Range…"
 msgstr "&Pažymėti"
 
 #: controllers/view/selectrange/selectrangetool.cpp:61
@@ -2163,13 +2163,17 @@ msgid "About"
 msgstr ""
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:46
-#, kde-format
-msgid "Get New Structures..."
-msgstr ""
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Structures"
+msgctxt "@action:button"
+msgid "Get New Structures…"
+msgstr "Struktūros"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:52
 #, kde-format
-msgid "Advanced Selection..."
+msgctxt "@action:button"
+msgid "Advanced Selection…"
 msgstr ""
 
 #: controllers/view/structures/settings/structuresselectiondialog.cpp:28
@@ -2193,7 +2197,7 @@ msgstr ""
 #| msgctxt "@title"
 #| msgid "Search"
 msgctxt "@info:placeholder"
-msgid "Search..."
+msgid "Search…"
 msgstr "Ieškoti"
 
 #. i18n: ectx: tooltip, entry (UnsignedDisplayBase), group (ValueDisplay)
@@ -2594,13 +2598,13 @@ msgstr ""
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:77
 #, kde-format
 msgctxt "@action:inmenu"
-msgid "Set Bytes per Line..."
+msgid "Set Bytes per Line…"
 msgstr ""
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:83
 #, kde-format
 msgctxt "@action:inmenu"
-msgid "Set Bytes per Group..."
+msgid "Set Bytes per Group…"
 msgstr ""
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:89
@@ -2690,7 +2694,7 @@ msgstr ""
 #| msgctxt "@title:menu create a new view profile"
 #| msgid "Create new..."
 msgctxt "@action:inmenu create a new view profile"
-msgid "Create New..."
+msgid "Create New…"
 msgstr "Sukurti naują..."
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:52
@@ -2891,7 +2895,7 @@ msgstr ""
 #: controllers/view/viewprofiles/viewprofilesmanagecontroller.cpp:31
 #, kde-format
 msgctxt "@action:inmenu"
-msgid "Manage View Profiles..."
+msgid "Manage View Profiles…"
 msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:36
@@ -2901,10 +2905,12 @@ msgid "View Profiles"
 msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:63
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@title:menu create a new view profile"
+#| msgid "Create new..."
 msgctxt "@action:button"
-msgid "&Create new..."
-msgstr "&Sukurti naują..."
+msgid "&Create New…"
+msgstr "Sukurti naują..."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:66
 #, kde-format
@@ -2916,15 +2922,17 @@ msgstr ""
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
-"If you press the <interface>Create new...</interface> button, an editor is "
+"If you press the <interface>Create New…</interface> button, an editor is "
 "opened where you can create and edit a new view profile. The values will be "
 "based on the ones of the view profile you selected in the list."
 msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:77
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "&Edit..."
 msgctxt "@action:button"
-msgid "&Edit..."
+msgid "&Edit…"
 msgstr "&Keisti..."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:80
@@ -2937,7 +2945,7 @@ msgstr ""
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
-"If you press the <interface>Edit...</interface> button, an editor will be "
+"If you press the <interface>Edit…</interface> button, an editor will be "
 "opened for the view profile you selected in the list."
 msgstr ""
 
@@ -3112,10 +3120,12 @@ msgid "Support to load files larger than 2 GiB has not yet been implemented."
 msgstr ""
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:99
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item name of the generated data"
+#| msgid "Pattern"
 msgctxt "name of the generated data"
-msgid "Pattern..."
-msgstr "Šablonas..."
+msgid "Pattern…"
+msgstr "Šablonas"
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:149
 #, kde-format
@@ -3157,7 +3167,7 @@ msgstr "Šablonas"
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:47
 #, kde-format
 msgctxt "name of the generated data"
-msgid "Random Data..."
+msgid "Random Data…"
 msgstr ""
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:91
@@ -3455,6 +3465,25 @@ msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"
 msgid "UTF-8"
 msgstr "UTF-8"
+
+#, fuzzy
+#~| msgctxt "@title"
+#~| msgid "Search"
+#~ msgctxt "@info:placeholder"
+#~ msgid "Search..."
+#~ msgstr "Ieškoti"
+
+#~ msgctxt "@action:button"
+#~ msgid "&Create new..."
+#~ msgstr "&Sukurti naują..."
+
+#~ msgctxt "@action:button"
+#~ msgid "&Edit..."
+#~ msgstr "&Keisti..."
+
+#~ msgctxt "name of the generated data"
+#~ msgid "Pattern..."
+#~ msgstr "Šablonas..."
 
 #~ msgctxt "name of the hash algorithm"
 #~ msgid "SHA-0"

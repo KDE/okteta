@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-11 01:36+0000\n"
+"POT-Creation-Date: 2024-04-26 01:39+0000\n"
 "PO-Revision-Date: 2023-08-13 16:27+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -594,10 +594,12 @@ msgstr ""
 "ausgewählten Optionen ausgeführt."
 
 #: controllers/view/gotooffset/gotooffsetcontroller.cpp:32
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Go to Offset"
 msgctxt "@action:inmenu"
-msgid "&Go to Offset..."
-msgstr "&Gehe zu Offset ..."
+msgid "&Go to Offset…"
+msgstr "Gehe zu Offset"
 
 #: controllers/view/gotooffset/gotooffsettool.cpp:50
 #, kde-format
@@ -1605,9 +1607,11 @@ msgid "Search"
 msgstr "Suchen"
 
 #: controllers/view/selectrange/selectrangecontroller.cpp:33
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "&Select Range..."
 msgctxt "@action:inmenu"
-msgid "&Select Range..."
+msgid "&Select Range…"
 msgstr "Bereich au&swählen ..."
 
 #: controllers/view/selectrange/selectrangetool.cpp:61
@@ -2204,13 +2208,17 @@ msgid "About"
 msgstr "Über"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:46
-#, kde-format
-msgid "Get New Structures..."
+#, fuzzy, kde-format
+#| msgid "Get New Structures..."
+msgctxt "@action:button"
+msgid "Get New Structures…"
 msgstr "Neue Strukturen holen ..."
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:52
-#, kde-format
-msgid "Advanced Selection..."
+#, fuzzy, kde-format
+#| msgid "Advanced Selection..."
+msgctxt "@action:button"
+msgid "Advanced Selection…"
 msgstr "Erweiterte Auswahl ..."
 
 #: controllers/view/structures/settings/structuresselectiondialog.cpp:28
@@ -2230,10 +2238,12 @@ msgid "Structure Definitions"
 msgstr "Strukturdefinitionen"
 
 #: controllers/view/structures/settings/structuresselector.cpp:40
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@title"
+#| msgid "Search"
 msgctxt "@info:placeholder"
-msgid "Search..."
-msgstr "Suchen ..."
+msgid "Search…"
+msgstr "Suchen"
 
 #. i18n: ectx: tooltip, entry (UnsignedDisplayBase), group (ValueDisplay)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:9
@@ -2642,15 +2652,19 @@ msgid "Show &Non-printing Chars"
 msgstr "Nicht &druckbare Zeichen anzeigen"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:77
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Set Bytes per Line..."
 msgctxt "@action:inmenu"
-msgid "Set Bytes per Line..."
+msgid "Set Bytes per Line…"
 msgstr "Bytes pro Zeile festlegen ..."
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:83
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Set Bytes per Group..."
 msgctxt "@action:inmenu"
-msgid "Set Bytes per Group..."
+msgid "Set Bytes per Group…"
 msgstr "Bytes pro Gruppe festlegen ..."
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:89
@@ -2736,9 +2750,11 @@ msgid "View Profile"
 msgstr "Ansichtsprofil"
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:45
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu create a new view profile"
+#| msgid "Create New..."
 msgctxt "@action:inmenu create a new view profile"
-msgid "Create New..."
+msgid "Create New…"
 msgstr "Neu erstellen ..."
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:52
@@ -2933,9 +2949,11 @@ msgid "Char for undefined bytes:"
 msgstr "Zeichen für undefinierte Bytes:"
 
 #: controllers/view/viewprofiles/viewprofilesmanagecontroller.cpp:31
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Manage View Profiles..."
 msgctxt "@action:inmenu"
-msgid "Manage View Profiles..."
+msgid "Manage View Profiles…"
 msgstr "Ansichtsprofile verwalten ..."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:36
@@ -2945,10 +2963,12 @@ msgid "View Profiles"
 msgstr "Ansichtsprofile"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:63
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu create a new view profile"
+#| msgid "Create New..."
 msgctxt "@action:button"
-msgid "&Create new..."
-msgstr "&Neues erstellen ..."
+msgid "&Create New…"
+msgstr "Neu erstellen ..."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:66
 #, kde-format
@@ -2957,10 +2977,15 @@ msgid "Opens an editor for a new view profile."
 msgstr "Öffnet einen Editor für ein neues Ansichtsprofil."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:68
-#, kde-kuit-format
+#, fuzzy, kde-kuit-format
+#| msgctxt "@info:whatsthis"
+#| msgid ""
+#| "If you press the <interface>Create new...</interface> button, an editor "
+#| "is opened where you can create and edit a new view profile. The values "
+#| "will be based on the ones of the view profile you selected in the list."
 msgctxt "@info:whatsthis"
 msgid ""
-"If you press the <interface>Create new...</interface> button, an editor is "
+"If you press the <interface>Create New…</interface> button, an editor is "
 "opened where you can create and edit a new view profile. The values will be "
 "based on the ones of the view profile you selected in the list."
 msgstr ""
@@ -2970,9 +2995,11 @@ msgstr ""
 "in der Liste ausgewählten Ansichtsprofils."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:77
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "&Edit..."
 msgctxt "@action:button"
-msgid "&Edit..."
+msgid "&Edit…"
 msgstr "&Bearbeiten ..."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:80
@@ -2982,10 +3009,14 @@ msgid "Opens an editor for the view profile."
 msgstr "Öffnet einen Editor für das Ansichtsprofil."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:82
-#, kde-kuit-format
+#, fuzzy, kde-kuit-format
+#| msgctxt "@info:whatsthis"
+#| msgid ""
+#| "If you press the <interface>Edit...</interface> button, an editor will be "
+#| "opened for the view profile you selected in the list."
 msgctxt "@info:whatsthis"
 msgid ""
-"If you press the <interface>Edit...</interface> button, an editor will be "
+"If you press the <interface>Edit…</interface> button, an editor will be "
 "opened for the view profile you selected in the list."
 msgstr ""
 "Wenn Sie auf <interface>Bearbeiten ...</interface> klicken, wird das in der "
@@ -3170,10 +3201,12 @@ msgstr ""
 "programmiert worden."
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:99
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item name of the generated data"
+#| msgid "Pattern"
 msgctxt "name of the generated data"
-msgid "Pattern..."
-msgstr "Muster ..."
+msgid "Pattern…"
+msgstr "Muster"
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:149
 #, kde-format
@@ -3214,10 +3247,12 @@ msgid "Pattern"
 msgstr "Muster"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:47
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item name of the generated data"
+#| msgid "Random Data"
 msgctxt "name of the generated data"
-msgid "Random Data..."
-msgstr "Zufällige Daten ..."
+msgid "Random Data…"
+msgstr "Zufällige Daten"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:91
 #, kde-format
@@ -3516,6 +3551,30 @@ msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"
 msgid "UTF-8"
 msgstr "UTF-8"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "&Go to Offset..."
+#~ msgstr "&Gehe zu Offset ..."
+
+#~ msgctxt "@info:placeholder"
+#~ msgid "Search..."
+#~ msgstr "Suchen ..."
+
+#~ msgctxt "@action:button"
+#~ msgid "&Create new..."
+#~ msgstr "&Neues erstellen ..."
+
+#~ msgctxt "@action:button"
+#~ msgid "&Edit..."
+#~ msgstr "&Bearbeiten ..."
+
+#~ msgctxt "name of the generated data"
+#~ msgid "Pattern..."
+#~ msgstr "Muster ..."
+
+#~ msgctxt "name of the generated data"
+#~ msgid "Random Data..."
+#~ msgstr "Zufällige Daten ..."
 
 #~ msgctxt "name of the hash algorithm"
 #~ msgid "SHA-0"
@@ -4158,10 +4217,6 @@ msgstr "UTF-8"
 #~ msgctxt "@option:check the document is read-only"
 #~ msgid "Read-only"
 #~ msgstr "Nur-Lesen"
-
-#~ msgctxt "@title:window"
-#~ msgid "Go to Offset"
-#~ msgstr "Gehe zu Offset"
 
 #~ msgctxt "@title:group"
 #~ msgid "Go To"
