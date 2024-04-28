@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-05 00:43+0000\n"
+"POT-Creation-Date: 2024-04-26 01:39+0000\n"
 "PO-Revision-Date: 2010-03-28 13:37+0200\n"
 "Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -230,8 +230,8 @@ msgstr "Eksporter"
 #: controllers/io/export/exportdialog.cpp:73
 #, kde-format
 msgctxt "@action:button"
-msgid "&Export to File..."
-msgstr "&Eksporter til fil …"
+msgid "&Export to File…"
+msgstr ""
 
 #: controllers/io/export/exportdialog.cpp:75
 #, kde-format

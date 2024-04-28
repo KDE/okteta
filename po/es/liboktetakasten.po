@@ -4,7 +4,7 @@
 #
 # Sofia Priego <spriego@darksylvania.net>, %Y.
 # Sofía Priego <spriego@darksylvania.net>, %Y.
-# SPDX-FileCopyrightText: 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2018, 2019, 2020, 2022, 2023 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2018, 2019, 2020, 2022, 2023, 2024 Eloy Cuadra <ecuadra@eloihr.net>
 # Ricardo Varas Santana <ricardoivaras@gmail.com>, 2011.
 # Javier Viñal <fjvinal@gmail.com>, 2013.
 msgid ""
@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-26 01:39+0000\n"
-"PO-Revision-Date: 2023-12-27 00:46+0100\n"
+"PO-Revision-Date: 2024-04-27 12:16+0100\n"
 "Last-Translator: Sofía Priego <spriego@darksylvania.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 24.02.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -600,9 +600,7 @@ msgstr ""
 "con las opciones especificadas."
 
 #: controllers/view/gotooffset/gotooffsetcontroller.cpp:32
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Go to Offset..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Go to Offset…"
 msgstr "&Ir al desplazamiento..."
@@ -1608,9 +1606,7 @@ msgid "Search"
 msgstr "Buscar"
 
 #: controllers/view/selectrange/selectrangecontroller.cpp:33
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Select Range..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Select Range…"
 msgstr "&Seleccionar intervalo..."
@@ -2211,15 +2207,13 @@ msgid "About"
 msgstr "Acerca de"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:46
-#, fuzzy, kde-format
-#| msgid "Get New Structures..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Get New Structures…"
 msgstr "Obtener nuevas estructuras..."
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:52
-#, fuzzy, kde-format
-#| msgid "Advanced Selection..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Advanced Selection…"
 msgstr "Selección avanzada..."
@@ -2241,12 +2235,10 @@ msgid "Structure Definitions"
 msgstr "Definiciones de estructuras"
 
 #: controllers/view/structures/settings/structuresselector.cpp:40
-#, fuzzy, kde-format
-#| msgctxt "@title"
-#| msgid "Search"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Search…"
-msgstr "Buscar"
+msgstr "Buscar..."
 
 #. i18n: ectx: tooltip, entry (UnsignedDisplayBase), group (ValueDisplay)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:9
@@ -2645,17 +2637,13 @@ msgid "Show &Non-printing Chars"
 msgstr "Mostrar caracteres &no imprimibles"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:77
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Set Bytes per Line..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Set Bytes per Line…"
 msgstr "Fijar bytes por línea..."
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:83
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Set Bytes per Group..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Set Bytes per Group…"
 msgstr "Fijar bytes por grupo..."
@@ -2743,9 +2731,7 @@ msgid "View Profile"
 msgstr "Perfil de vista"
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:45
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu create a new view profile"
-#| msgid "Create New..."
+#, kde-format
 msgctxt "@action:inmenu create a new view profile"
 msgid "Create New…"
 msgstr "Crear nuevo..."
@@ -2940,12 +2926,10 @@ msgid "Char for undefined bytes:"
 msgstr "Carácter para bytes no definidos:"
 
 #: controllers/view/viewprofiles/viewprofilesmanagecontroller.cpp:31
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Manage View Profiles..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage View Profiles…"
-msgstr "Gestionar perfiles de vista..."
+msgstr "Gestión de perfiles de vista..."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:36
 #, kde-format
@@ -2954,12 +2938,10 @@ msgid "View Profiles"
 msgstr "Perfiles de vista"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:63
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu create a new view profile"
-#| msgid "Create New..."
+#, kde-format
 msgctxt "@action:button"
 msgid "&Create New…"
-msgstr "Crear nuevo..."
+msgstr "&Crear nuevo..."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:66
 #, kde-format
@@ -2968,12 +2950,7 @@ msgid "Opens an editor for a new view profile."
 msgstr "Abre un editor para un nuevo perfil de vista."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:68
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info:whatsthis"
-#| msgid ""
-#| "If you press the <interface>Create new...</interface> button, an editor "
-#| "is opened where you can create and edit a new view profile. The values "
-#| "will be based on the ones of the view profile you selected in the list."
+#, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
 "If you press the <interface>Create New…</interface> button, an editor is "
@@ -2985,12 +2962,10 @@ msgstr ""
 "en los del perfil de vista que haya seleccionado en la lista."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:77
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Edit"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Edit…"
-msgstr "Editar"
+msgstr "&Editar"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:80
 #, kde-format
@@ -2999,11 +2974,7 @@ msgid "Opens an editor for the view profile."
 msgstr "Abre un editor para el perfil de vista."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:82
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info:whatsthis"
-#| msgid ""
-#| "If you press the <interface>Edit...</interface> button, an editor will be "
-#| "opened for the view profile you selected in the list."
+#, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
 "If you press the <interface>Edit…</interface> button, an editor will be "
@@ -3189,12 +3160,10 @@ msgstr ""
 "Aún no se ha implementado la posibilidad de cargar archivos mayores de 2 GiB."
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:99
-#, fuzzy, kde-format
-#| msgctxt "@item name of the generated data"
-#| msgid "Pattern"
+#, kde-format
 msgctxt "name of the generated data"
 msgid "Pattern…"
-msgstr "Patrón"
+msgstr "Patrón..."
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:149
 #, kde-format
@@ -3233,12 +3202,10 @@ msgid "Pattern"
 msgstr "Patrón"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:47
-#, fuzzy, kde-format
-#| msgctxt "@item name of the generated data"
-#| msgid "Random Data"
+#, kde-format
 msgctxt "name of the generated data"
 msgid "Random Data…"
-msgstr "Datos aleatorios"
+msgstr "Datos aleatorios..."
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:91
 #, kde-format

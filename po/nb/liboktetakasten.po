@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-11 01:36+0000\n"
+"POT-Creation-Date: 2024-04-26 01:39+0000\n"
 "PO-Revision-Date: 2013-02-19 20:33+0100\n"
 "Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -582,8 +582,8 @@ msgstr ""
 #: controllers/view/gotooffset/gotooffsetcontroller.cpp:32
 #, kde-format
 msgctxt "@action:inmenu"
-msgid "&Go to Offset..."
-msgstr "&Gå til forskyvning …"
+msgid "&Go to Offset…"
+msgstr ""
 
 #: controllers/view/gotooffset/gotooffsettool.cpp:50
 #, kde-format
@@ -1576,7 +1576,7 @@ msgstr "Søk"
 #: controllers/view/selectrange/selectrangecontroller.cpp:33
 #, kde-format
 msgctxt "@action:inmenu"
-msgid "&Select Range..."
+msgid "&Select Range…"
 msgstr ""
 
 #: controllers/view/selectrange/selectrangetool.cpp:61
@@ -2172,13 +2172,15 @@ msgstr ""
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:46
 #, kde-format
-msgid "Get New Structures..."
-msgstr "Hent nye strukturer …"
+msgctxt "@action:button"
+msgid "Get New Structures…"
+msgstr ""
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:52
 #, kde-format
-msgid "Advanced Selection..."
-msgstr "Avansert utvalg …"
+msgctxt "@action:button"
+msgid "Advanced Selection…"
+msgstr ""
 
 #: controllers/view/structures/settings/structuresselectiondialog.cpp:28
 #, kde-format
@@ -2199,7 +2201,7 @@ msgstr "Strukturdefinisjoner"
 #: controllers/view/structures/settings/structuresselector.cpp:40
 #, kde-format
 msgctxt "@info:placeholder"
-msgid "Search..."
+msgid "Search…"
 msgstr ""
 
 #. i18n: ectx: tooltip, entry (UnsignedDisplayBase), group (ValueDisplay)
@@ -2599,14 +2601,14 @@ msgstr "Vis &tegn som ikke skrives ut"
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:77
 #, kde-format
 msgctxt "@action:inmenu"
-msgid "Set Bytes per Line..."
-msgstr "Angi byte pr. linje …"
+msgid "Set Bytes per Line…"
+msgstr ""
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:83
 #, kde-format
 msgctxt "@action:inmenu"
-msgid "Set Bytes per Group..."
-msgstr "Angi byte pr. gruppe …"
+msgid "Set Bytes per Group…"
+msgstr ""
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:89
 #, kde-format
@@ -2693,7 +2695,7 @@ msgstr "Visningsprofil"
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:45
 #, kde-format
 msgctxt "@action:inmenu create a new view profile"
-msgid "Create New..."
+msgid "Create New…"
 msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:52
@@ -2891,8 +2893,8 @@ msgstr "Tegn for udefinerte byte:"
 #: controllers/view/viewprofiles/viewprofilesmanagecontroller.cpp:31
 #, kde-format
 msgctxt "@action:inmenu"
-msgid "Manage View Profiles..."
-msgstr "Håndter visningsprofiler …"
+msgid "Manage View Profiles…"
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:36
 #, kde-format
@@ -2903,8 +2905,8 @@ msgstr "Visningsprofiler"
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:63
 #, kde-format
 msgctxt "@action:button"
-msgid "&Create new..."
-msgstr "&Opprett ny …"
+msgid "&Create New…"
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:66
 #, kde-format
@@ -2916,19 +2918,16 @@ msgstr "Åpner en redigering for en ny visningsprofil."
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
-"If you press the <interface>Create new...</interface> button, an editor is "
+"If you press the <interface>Create New…</interface> button, an editor is "
 "opened where you can create and edit a new view profile. The values will be "
 "based on the ones of the view profile you selected in the list."
 msgstr ""
-"Hvis du trykker <interface>Opprett ny</interface>-knappen, blir det åpnet et "
-"redigeringsvindu der du kan opprette og redigere en ny visningsprofil. "
-"Verdiene blir basert på den visningsprofilen du valgte i lista."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:77
 #, kde-format
 msgctxt "@action:button"
-msgid "&Edit..."
-msgstr "&Rediger …"
+msgid "&Edit…"
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:80
 #, kde-format
@@ -2940,11 +2939,9 @@ msgstr "Åpner en redigering for visningsprofilen."
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
-"If you press the <interface>Edit...</interface> button, an editor will be "
+"If you press the <interface>Edit…</interface> button, an editor will be "
 "opened for the view profile you selected in the list."
 msgstr ""
-"Hvis du trykker <interface>Rediger …</interface>-knappen, blir det åpnet et "
-"redigeringsvindu for visningsprofilen du valgte i lista."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:90
 #, kde-format
@@ -3121,8 +3118,8 @@ msgstr "Det er ennå ikke støtte for å laste inn filer større enn 2 GiB."
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:99
 #, kde-format
 msgctxt "name of the generated data"
-msgid "Pattern..."
-msgstr "Mønster …"
+msgid "Pattern…"
+msgstr ""
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:149
 #, kde-format
@@ -3165,8 +3162,8 @@ msgstr "Mønster"
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:47
 #, kde-format
 msgctxt "name of the generated data"
-msgid "Random Data..."
-msgstr "Tilfeldige data …"
+msgid "Random Data…"
+msgstr ""
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:91
 #, kde-format

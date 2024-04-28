@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-05 00:43+0000\n"
+"POT-Creation-Date: 2024-04-26 01:39+0000\n"
 "PO-Revision-Date: 2018-08-25 16:52+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -229,8 +229,8 @@ msgstr "Eksporter"
 #: controllers/io/export/exportdialog.cpp:73
 #, kde-format
 msgctxt "@action:button"
-msgid "&Export to File..."
-msgstr "&Eksporter til fil …"
+msgid "&Export to File…"
+msgstr ""
 
 #: controllers/io/export/exportdialog.cpp:75
 #, kde-format
