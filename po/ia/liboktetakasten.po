@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-26 01:39+0000\n"
-"PO-Revision-Date: 2024-01-03 14:58+0100\n"
+"PO-Revision-Date: 2024-04-30 12:37+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -1523,9 +1523,7 @@ msgid "Search"
 msgstr "Cerca"
 
 #: controllers/view/selectrange/selectrangecontroller.cpp:33
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Select Range..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Select Range…"
 msgstr "&Selige extension..."
@@ -1702,12 +1700,12 @@ msgid "Value:"
 msgstr "Valor:"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:243
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "size (elements)"
 msgid "%2 (%1 child)"
 msgid_plural "%2 (%1 children)"
-msgstr[0] "filio"
-msgstr[1] ""
+msgstr[0] "%2 (%1 filio)"
+msgstr[1] "%2 (%1 filios)"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:268
 #: controllers/view/structures/datatypes/datainformationwithchildren.cpp:233
@@ -2111,12 +2109,10 @@ msgid "About"
 msgstr "A proposito"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:46
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Structures"
+#, kde-format
 msgctxt "@action:button"
 msgid "Get New Structures…"
-msgstr "Structuras"
+msgstr "Obtene Nove Structuras…"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:52
 #, kde-format
@@ -2141,12 +2137,10 @@ msgid "Structure Definitions"
 msgstr ""
 
 #: controllers/view/structures/settings/structuresselector.cpp:40
-#, fuzzy, kde-format
-#| msgctxt "@title"
-#| msgid "Search"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Search…"
-msgstr "Cerca"
+msgstr "Cerca..."
 
 #. i18n: ectx: tooltip, entry (UnsignedDisplayBase), group (ValueDisplay)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:9
@@ -2535,12 +2529,10 @@ msgid "Show &Non-printing Chars"
 msgstr ""
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:77
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox to define after how many items the list is wrapped"
-#| msgid "Items per line:"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Set Bytes per Line…"
-msgstr "Elementos per rango:"
+msgstr "Assigna Bytes per rango:"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:83
 #, kde-format
@@ -2631,9 +2623,7 @@ msgid "View Profile"
 msgstr "Profilo de vista "
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:45
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu create a new view profile"
-#| msgid "Create New..."
+#, kde-format
 msgctxt "@action:inmenu create a new view profile"
 msgid "Create New…"
 msgstr "Crea nove..."
@@ -2828,9 +2818,7 @@ msgid "Char for undefined bytes:"
 msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilesmanagecontroller.cpp:31
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Manage View Profiles..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage View Profiles…"
 msgstr "Gere profilos de vista..."
@@ -2842,12 +2830,10 @@ msgid "View Profiles"
 msgstr "Profilos de vista"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:63
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu create a new view profile"
-#| msgid "Create New..."
+#, kde-format
 msgctxt "@action:button"
 msgid "&Create New…"
-msgstr "Crea nove..."
+msgstr "&Crea nove..."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:66
 #, kde-format
@@ -2865,12 +2851,10 @@ msgid ""
 msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:77
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Edit"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Edit…"
-msgstr "Modifica"
+msgstr "&Modifica..."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:80
 #, kde-format
@@ -3055,12 +3039,10 @@ msgid "Support to load files larger than 2 GiB has not yet been implemented."
 msgstr ""
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:99
-#, fuzzy, kde-format
-#| msgctxt "@item name of the generated data"
-#| msgid "Pattern"
+#, kde-format
 msgctxt "name of the generated data"
 msgid "Pattern…"
-msgstr "Patrono"
+msgstr "Patrono..."
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:149
 #, kde-format
@@ -3101,12 +3083,10 @@ msgid "Pattern"
 msgstr "Patrono"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:47
-#, fuzzy, kde-format
-#| msgctxt "@item name of the generated data"
-#| msgid "Random Data"
+#, kde-format
 msgctxt "name of the generated data"
 msgid "Random Data…"
-msgstr "Datos casual"
+msgstr "Datos casual..."
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:91
 #, kde-format
