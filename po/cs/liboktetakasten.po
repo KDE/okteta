@@ -1528,12 +1528,10 @@ msgid "Search"
 msgstr "Hledat"
 
 #: controllers/view/selectrange/selectrangecontroller.cpp:33
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Select Range..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Select Range…"
-msgstr "Zvolte roz&sah..."
+msgstr ""
 
 #: controllers/view/selectrange/selectrangetool.cpp:61
 #, kde-format
@@ -2122,20 +2120,16 @@ msgid "About"
 msgstr "O aplikaci"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:46
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Structures"
+#, kde-format
 msgctxt "@action:button"
 msgid "Get New Structures…"
-msgstr "Struktury"
+msgstr ""
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:52
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Advanced Structures Selection"
+#, kde-format
 msgctxt "@action:button"
 msgid "Advanced Selection…"
-msgstr "Pokročilý výběr struktur"
+msgstr ""
 
 #: controllers/view/structures/settings/structuresselectiondialog.cpp:28
 #, kde-format
@@ -2154,12 +2148,10 @@ msgid "Structure Definitions"
 msgstr ""
 
 #: controllers/view/structures/settings/structuresselector.cpp:40
-#, fuzzy, kde-format
-#| msgctxt "@title"
-#| msgid "Search"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Search…"
-msgstr "Hledat"
+msgstr ""
 
 #. i18n: ectx: tooltip, entry (UnsignedDisplayBase), group (ValueDisplay)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:9
@@ -2642,12 +2634,10 @@ msgid "View Profile"
 msgstr "Prohlížet profil"
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:45
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu create a new view profile"
-#| msgid "Create New..."
+#, kde-format
 msgctxt "@action:inmenu create a new view profile"
 msgid "Create New…"
-msgstr "Vytvořit nový..."
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:52
 #, kde-format
@@ -2839,12 +2829,10 @@ msgid "Char for undefined bytes:"
 msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilesmanagecontroller.cpp:31
-#, fuzzy, kde-format
-#| msgctxt "@title:menu submenu to select the view profile or change it"
-#| msgid "View Profile"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage View Profiles…"
-msgstr "Prohlížet profil"
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:36
 #, kde-format
@@ -2853,12 +2841,10 @@ msgid "View Profiles"
 msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:63
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu create a new view profile"
-#| msgid "Create New..."
+#, kde-format
 msgctxt "@action:button"
 msgid "&Create New…"
-msgstr "Vytvořit nový..."
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:66
 #, kde-format
@@ -2876,12 +2862,10 @@ msgid ""
 msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:77
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Edit"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Edit…"
-msgstr "Upravit"
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:80
 #, kde-format
@@ -3067,12 +3051,10 @@ msgid "Support to load files larger than 2 GiB has not yet been implemented."
 msgstr ""
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:99
-#, fuzzy, kde-format
-#| msgctxt "@item name of the generated data"
-#| msgid "Pattern"
+#, kde-format
 msgctxt "name of the generated data"
 msgid "Pattern…"
-msgstr "Vzorek"
+msgstr ""
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:149
 #, kde-format
@@ -3111,12 +3093,10 @@ msgid "Pattern"
 msgstr "Vzorek"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:47
-#, fuzzy, kde-format
-#| msgctxt "@item name of the generated data"
-#| msgid "Random Data"
+#, kde-format
 msgctxt "name of the generated data"
 msgid "Random Data…"
-msgstr "Náhodná data"
+msgstr ""
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:91
 #, kde-format
@@ -3413,23 +3393,3 @@ msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"
 msgid "UTF-8"
 msgstr "UTF-8"
-
-#~ msgctxt "@info:placeholder"
-#~ msgid "Search..."
-#~ msgstr "Hledat..."
-
-#~ msgctxt "@action:button"
-#~ msgid "&Create new..."
-#~ msgstr "Vy&tvořit nový..."
-
-#~ msgctxt "@action:button"
-#~ msgid "&Edit..."
-#~ msgstr "&Upravit..."
-
-#~ msgctxt "name of the generated data"
-#~ msgid "Pattern..."
-#~ msgstr "Vzorek..."
-
-#~ msgctxt "name of the generated data"
-#~ msgid "Random Data..."
-#~ msgstr "Náhodná data..."

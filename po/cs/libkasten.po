@@ -226,12 +226,10 @@ msgid "Export"
 msgstr "Export"
 
 #: controllers/io/export/exportdialog.cpp:73
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Export to File..."
+#, kde-format
 msgctxt "@action:button"
 msgid "&Export to File…"
-msgstr "&Exportovat do souboru..."
+msgstr ""
 
 #: controllers/io/export/exportdialog.cpp:75
 #, kde-format

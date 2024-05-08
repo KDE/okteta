@@ -562,12 +562,10 @@ msgstr ""
 "选项指定的操作。"
 
 #: controllers/view/gotooffset/gotooffsetcontroller.cpp:32
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Go to Offset..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Go to Offset…"
-msgstr "跳转到偏移量(&G)..."
+msgstr ""
 
 #: controllers/view/gotooffset/gotooffsettool.cpp:50
 #, kde-format
@@ -1539,12 +1537,10 @@ msgid "Search"
 msgstr "查找"
 
 #: controllers/view/selectrange/selectrangecontroller.cpp:33
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Select Range..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Select Range…"
-msgstr "选择范围(&S)..."
+msgstr ""
 
 #: controllers/view/selectrange/selectrangetool.cpp:61
 #, kde-format
@@ -2130,18 +2126,16 @@ msgid "About"
 msgstr "关于"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:46
-#, fuzzy, kde-format
-#| msgid "Get New Structures..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Get New Structures…"
-msgstr "获得新结构..."
+msgstr ""
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:52
-#, fuzzy, kde-format
-#| msgid "Advanced Selection..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Advanced Selection…"
-msgstr "高级选择..."
+msgstr ""
 
 #: controllers/view/structures/settings/structuresselectiondialog.cpp:28
 #, kde-format
@@ -2160,12 +2154,10 @@ msgid "Structure Definitions"
 msgstr "结构定义"
 
 #: controllers/view/structures/settings/structuresselector.cpp:40
-#, fuzzy, kde-format
-#| msgctxt "@title"
-#| msgid "Search"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Search…"
-msgstr "查找"
+msgstr ""
 
 #. i18n: ectx: tooltip, entry (UnsignedDisplayBase), group (ValueDisplay)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:9
@@ -2554,20 +2546,16 @@ msgid "Show &Non-printing Chars"
 msgstr "显示不可打印字符(&N)"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:77
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Set Bytes per Line..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Set Bytes per Line…"
-msgstr "设定每行字节数..."
+msgstr ""
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:83
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Set Bytes per Group..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Set Bytes per Group…"
-msgstr "每组字节数..."
+msgstr ""
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:89
 #, kde-format
@@ -2652,12 +2640,10 @@ msgid "View Profile"
 msgstr "查看模式"
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:45
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu create a new view profile"
-#| msgid "Create New..."
+#, kde-format
 msgctxt "@action:inmenu create a new view profile"
 msgid "Create New…"
-msgstr "新建..."
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:52
 #, kde-format
@@ -2849,12 +2835,10 @@ msgid "Char for undefined bytes:"
 msgstr "用于显示未定义字节的字符："
 
 #: controllers/view/viewprofiles/viewprofilesmanagecontroller.cpp:31
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Manage View Profiles..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage View Profiles…"
-msgstr "管理查看模式..."
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:36
 #, kde-format
@@ -2863,12 +2847,10 @@ msgid "View Profiles"
 msgstr "查看模式"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:63
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu create a new view profile"
-#| msgid "Create New..."
+#, kde-format
 msgctxt "@action:button"
 msgid "&Create New…"
-msgstr "新建..."
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:66
 #, kde-format
@@ -2877,28 +2859,19 @@ msgid "Opens an editor for a new view profile."
 msgstr "用新建查看模式打开编辑器。"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:68
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info:whatsthis"
-#| msgid ""
-#| "If you press the <interface>Create new...</interface> button, an editor "
-#| "is opened where you can create and edit a new view profile. The values "
-#| "will be based on the ones of the view profile you selected in the list."
+#, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
 "If you press the <interface>Create New…</interface> button, an editor is "
 "opened where you can create and edit a new view profile. The values will be "
 "based on the ones of the view profile you selected in the list."
 msgstr ""
-"如果您按下<interface>创建新...</interface>按钮，将打开新编辑器让您创建和编辑"
-"新的查看模式。模式配置值会基于您列表中所选的查看模式。"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:77
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Edit"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Edit…"
-msgstr "编辑"
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:80
 #, kde-format
@@ -2907,18 +2880,12 @@ msgid "Opens an editor for the view profile."
 msgstr "用查看模式打开编辑器。"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:82
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info:whatsthis"
-#| msgid ""
-#| "If you press the <interface>Edit...</interface> button, an editor will be "
-#| "opened for the view profile you selected in the list."
+#, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
 "If you press the <interface>Edit…</interface> button, an editor will be "
 "opened for the view profile you selected in the list."
 msgstr ""
-"如果您按下<interface>编辑...</interface>按钮，将用您列表中所选的查看模式打开"
-"编辑器。"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:90
 #, kde-format
@@ -3091,12 +3058,10 @@ msgid "Support to load files larger than 2 GiB has not yet been implemented."
 msgstr "尚未实现加载超过 2 GiB 的文件支持。"
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:99
-#, fuzzy, kde-format
-#| msgctxt "@item name of the generated data"
-#| msgid "Pattern"
+#, kde-format
 msgctxt "name of the generated data"
 msgid "Pattern…"
-msgstr "表达式"
+msgstr ""
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:149
 #, kde-format
@@ -3135,12 +3100,10 @@ msgid "Pattern"
 msgstr "表达式"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:47
-#, fuzzy, kde-format
-#| msgctxt "@item name of the generated data"
-#| msgid "Random Data"
+#, kde-format
 msgctxt "name of the generated data"
 msgid "Random Data…"
-msgstr "随机数据"
+msgstr ""
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:91
 #, kde-format
@@ -3437,23 +3400,3 @@ msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"
 msgid "UTF-8"
 msgstr "UTF-8"
-
-#~ msgctxt "@info:placeholder"
-#~ msgid "Search..."
-#~ msgstr "搜索..."
-
-#~ msgctxt "@action:button"
-#~ msgid "&Create new..."
-#~ msgstr "新建(&C)..."
-
-#~ msgctxt "@action:button"
-#~ msgid "&Edit..."
-#~ msgstr "编辑(&E)..."
-
-#~ msgctxt "name of the generated data"
-#~ msgid "Pattern..."
-#~ msgstr "表达式..."
-
-#~ msgctxt "name of the generated data"
-#~ msgid "Random Data..."
-#~ msgstr "随机数据..."
