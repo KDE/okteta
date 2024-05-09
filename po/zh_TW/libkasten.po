@@ -4,20 +4,20 @@
 #
 # Frank Weng (a.k.a. Franklin) <franklin at goodhorse dot idv dot tw>, 2008, 2009, 2010.
 # Franklin Weng <franklin@mail.everfocus.com.tw>, 2008.
+# SPDX-FileCopyrightText: 2024 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-05 02:31+0000\n"
-"PO-Revision-Date: 2010-05-30 14:11+0800\n"
-"Last-Translator: Frank Weng (a.k.a. Franklin) <franklin at goodhorse dot idv "
-"dot tw>\n"
-"Language-Team: Chinese Traditional <zh-l10n@lists.linux.org.tw>\n"
+"PO-Revision-Date: 2024-05-09 06:42+0900\n"
+"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
+"Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.0\n"
+"X-Generator: Lokalize 24.04.70\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: controllers/document/modified/modifiedbarcontroller.cpp:74
@@ -443,7 +443,7 @@ msgid ""
 "lost if you reload the document.<nl/>Do you want to discard them?"
 msgstr ""
 "檔案 <filename>%1</filename> 中有些未儲存的變更。若您重新載入文件，這些變更會"
-"遺失。<nl/>您要丟棄這些變更嗎？"
+"遺失。<nl/>您要捨棄這些變更嗎？"
 
 #: gui/system/dialoghandler.cpp:71
 #, kde-kuit-format
@@ -451,7 +451,7 @@ msgctxt "@info \"%title\" has been modified."
 msgid ""
 "<filename>%1</filename> has been modified.<nl/>Do you want to save your "
 "changes or discard them?"
-msgstr "<filename>%1</filename> 已變更。<nl/>您要儲存您的變更，還是要丟棄？"
+msgstr "<filename>%1</filename> 已變更。<nl/>您要儲存您的變更，還是要捨棄？"
 
 #: gui/system/dialoghandler.cpp:95
 #, kde-kuit-format
@@ -459,4 +459,4 @@ msgctxt "@info \"%title\" has been modified."
 msgid ""
 "<filename>%1</filename> has been modified.<nl/>Do you want to discard your "
 "changes?"
-msgstr "<filename>%1</filename>已變更。<nl />您要丟棄您的變更嗎？"
+msgstr "<filename>%1</filename>已變更。<nl />您要捨棄您的變更嗎？"
