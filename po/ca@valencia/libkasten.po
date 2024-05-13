@@ -232,7 +232,7 @@ msgstr "Exportació"
 #, kde-format
 msgctxt "@action:button"
 msgid "&Export to File..."
-msgstr "&Exporta cap a un fitxer..."
+msgstr "&Exporta cap a un fitxer…"
 
 #: controllers/io/export/exportdialog.cpp:75
 #, kde-format

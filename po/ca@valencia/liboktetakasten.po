@@ -591,7 +591,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Go to Offset..."
-msgstr "&Ves fins al desplaçament..."
+msgstr "&Ves fins al desplaçament…"
 
 #: controllers/view/gotooffset/gotooffsettool.cpp:50
 #, kde-format
@@ -960,7 +960,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "If set, the operation will be aligned to the end of the data."
-msgstr "Si s'ha marcat, l'operació s'alinearà al final de les dades."
+msgstr "Si està marcada, l'operació s'alinearà al final de les dades."
 
 #: controllers/view/libbytearrayfilter/filter/orbytearrayfilter.cpp:22
 #, kde-format
@@ -986,7 +986,7 @@ msgstr "Invertix també els bits:"
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "If set, the bits are arranged in reverse order as well."
-msgstr "Si s'ha marcat, els bits també es disposaran en ordre invers."
+msgstr "Si està marcada, els bits també es disposaran en ordre invers."
 
 #: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilter.cpp:26
 #, kde-format
@@ -1546,7 +1546,7 @@ msgstr "Busca"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Select Range..."
-msgstr "&Selecciona l'interval..."
+msgstr "&Selecciona l'interval…"
 
 #: controllers/view/selectrange/selectrangetool.cpp:61
 #, kde-format
@@ -2192,12 +2192,12 @@ msgstr "Estructures utilitzades:"
 #: controllers/view/structures/settings/structuresmanagerview.cpp:52
 #, kde-format
 msgid "Get New Structures..."
-msgstr "Obtín estructures noves..."
+msgstr "Obtín estructures noves…"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:59
 #, kde-format
 msgid "Advanced Selection..."
-msgstr "Selecció avançada..."
+msgstr "Selecció avançada…"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:181
 #, kde-format
@@ -2608,13 +2608,13 @@ msgstr "Mostra els caràcters no &imprimibles"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Set Bytes per Line..."
-msgstr "Establix els bytes per línia..."
+msgstr "Establix els bytes per línia…"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:93
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Set Bytes per Group..."
-msgstr "Establix els bytes per grup..."
+msgstr "Establix els bytes per grup…"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:99
 #, kde-format
@@ -2702,7 +2702,7 @@ msgstr "Perfil de vista"
 #, kde-format
 msgctxt "@action:inmenu create a new view profile"
 msgid "Create New..."
-msgstr "Crea nou..."
+msgstr "Crea nou…"
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:55
 #, kde-format
@@ -2891,7 +2891,7 @@ msgstr "Caràcters per als bytes indefinits:"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage View Profiles..."
-msgstr "Gestiona els perfils de vista..."
+msgstr "Gestiona els perfils de vista…"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:36
 #, kde-format
@@ -2903,7 +2903,7 @@ msgstr "Perfils de vista"
 #, kde-format
 msgctxt "@action:button"
 msgid "&Create new..."
-msgstr "&Crea nou..."
+msgstr "&Crea nou…"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:66
 #, kde-format
@@ -2919,15 +2919,15 @@ msgid ""
 "opened where you can create and edit a new view profile. The values will be "
 "based on the ones of the view profile you selected in the list."
 msgstr ""
-"Si premeu el botó <interface>Crea nou...</interface>, s'obrirà un editor a "
-"on podreu crear i editar un perfil de vista nou. Els valors es basaran en "
-"els del perfil de vista que heu seleccionat de la llista."
+"Si premeu el botó <interface>Crea nou…</interface>, s'obrirà un editor a on "
+"podreu crear i editar un perfil de vista nou. Els valors es basaran en els "
+"del perfil de vista que heu seleccionat de la llista."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:77
 #, kde-format
 msgctxt "@action:button"
 msgid "&Edit..."
-msgstr "&Edita..."
+msgstr "&Edita…"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:80
 #, kde-format
@@ -2942,7 +2942,7 @@ msgid ""
 "If you press the <interface>Edit...</interface> button, an editor will be "
 "opened for the view profile you selected in the list."
 msgstr ""
-"Si premeu el botó <interface>Edita...</interface>, s'obrirà un editor per al "
+"Si premeu el botó <interface>Edita…</interface>, s'obrirà un editor per al "
 "perfil de vista que heu seleccionat en la llista."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:90
@@ -3125,7 +3125,7 @@ msgstr "Encara no s'ha implementat la càrrega de fitxers més grans de 2 GiB."
 #, kde-format
 msgctxt "name of the generated data"
 msgid "Pattern..."
-msgstr "Patró..."
+msgstr "Patró…"
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:158
 #, kde-format
@@ -3170,7 +3170,7 @@ msgstr "Patró"
 #, kde-format
 msgctxt "name of the generated data"
 msgid "Random Data..."
-msgstr "Dades aleatòries..."
+msgstr "Dades aleatòries…"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:114
 #, kde-format
