@@ -2,15 +2,15 @@
 # Copyright (C) 2003 Free Software Foundation, Inc.
 # This file is distributed under the same license as the okteta package.
 # Axel Rousseau <axel@esperanto-jeunes.org>, 2009.
-# Oliver Kellogg <okellogg@users.sourceforge.net>, 2023.
+# Oliver Kellogg <olivermkellogg@gmail.com>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libkasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-26 01:39+0000\n"
-"PO-Revision-Date: 2024-04-27 22:44+0100\n"
-"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
+"PO-Revision-Date: 2024-05-30 22:41+0200\n"
+"Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
@@ -188,7 +188,7 @@ msgstr "Antaŭrigardo"
 #, kde-format
 msgctxt "@action:button"
 msgid "&Copy to clipboard"
-msgstr "Kopii al tondujo"
+msgstr "&Kopii al tondujo"
 
 #: controllers/io/copyas/copyasdialog.cpp:75
 #, kde-format

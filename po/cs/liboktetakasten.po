@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-26 01:39+0000\n"
-"PO-Revision-Date: 2024-04-17 09:36+0200\n"
+"PO-Revision-Date: 2024-05-30 09:48+0200\n"
 "Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 24.02.1\n"
+"X-Generator: Lokalize 24.02.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1531,7 +1531,7 @@ msgstr "Hledat"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Select Range…"
-msgstr ""
+msgstr "Zvolte roz&sah…"
 
 #: controllers/view/selectrange/selectrangetool.cpp:61
 #, kde-format
@@ -2123,13 +2123,13 @@ msgstr "O aplikaci"
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Structures…"
-msgstr ""
+msgstr "Získat nové struktury..."
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:52
 #, kde-format
 msgctxt "@action:button"
 msgid "Advanced Selection…"
-msgstr ""
+msgstr "Pokročilý výběr…"
 
 #: controllers/view/structures/settings/structuresselectiondialog.cpp:28
 #, kde-format
@@ -2151,7 +2151,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Search…"
-msgstr ""
+msgstr "Hledat…"
 
 #. i18n: ectx: tooltip, entry (UnsignedDisplayBase), group (ValueDisplay)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:9
@@ -2637,7 +2637,7 @@ msgstr "Prohlížet profil"
 #, kde-format
 msgctxt "@action:inmenu create a new view profile"
 msgid "Create New…"
-msgstr ""
+msgstr "Vytvořit novou…"
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:52
 #, kde-format
@@ -2844,7 +2844,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button"
 msgid "&Create New…"
-msgstr ""
+msgstr "Vy&tvořit nový…"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:66
 #, kde-format
@@ -2865,7 +2865,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button"
 msgid "&Edit…"
-msgstr ""
+msgstr "&Upravit…"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:80
 #, kde-format
@@ -2880,6 +2880,8 @@ msgid ""
 "If you press the <interface>Edit…</interface> button, an editor will be "
 "opened for the view profile you selected in the list."
 msgstr ""
+"Pokud stisknete tlačítko <interface>Upravit…</interface> , bude otevřen "
+"editor pro zobrazení profilu, který jste vybrali ze seznamu."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:90
 #, kde-format
@@ -3054,7 +3056,7 @@ msgstr ""
 #, kde-format
 msgctxt "name of the generated data"
 msgid "Pattern…"
-msgstr ""
+msgstr "Vzorek…"
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:149
 #, kde-format
@@ -3096,7 +3098,7 @@ msgstr "Vzorek"
 #, kde-format
 msgctxt "name of the generated data"
 msgid "Random Data…"
-msgstr ""
+msgstr "Náhodná data…"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:91
 #, kde-format
