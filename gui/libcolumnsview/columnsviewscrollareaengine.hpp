@@ -223,8 +223,6 @@ inline PixelX ColumnsViewScrollAreaEngine::columnsWidth() const
 
 inline QPoint ColumnsViewScrollAreaEngine::viewportToColumns(QPoint point) const
 {
-    Q_Q(const QAbstractScrollArea);
-
     return QPoint(xOffset(), yOffset()) + point;
 }
 
