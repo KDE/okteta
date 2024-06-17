@@ -20,7 +20,7 @@
 
 namespace Okteta {
 
-Char8Codec::Char8Codec(CharCodec* charCodec)
+Char8Codec::Char8Codec(const CharCodec* charCodec)
     : AbstractTypeCodec(i18nc("@label:textbox encoding of one byte as character", "Character 8-bit"))
     , mCharCodec(charCodec)
 {}

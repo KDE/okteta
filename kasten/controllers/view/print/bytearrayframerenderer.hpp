@@ -154,11 +154,11 @@ private:
 
 private:
     /** */
-    Okteta::ValueCodec* mValueCodec;
+    const Okteta::ValueCodec* mValueCodec;
     /** */
     Okteta::ValueCoding mValueCoding;
     /** */
-    Okteta::CharCodec* mCharCodec = nullptr;
+    const Okteta::CharCodec* mCharCodec = nullptr;
 
 private: // parameters
     LayoutStyle mResizeStyle;

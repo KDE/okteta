@@ -44,7 +44,7 @@ bool ByteArrayCharsStreamEncoder::encodeDataToStream(QIODevice* device,
     // encode
     QTextStream textStream(device);
 
-    Okteta::CharCodec* charCodec = Okteta::CharCodec::createCodec(mSettings.codecName);
+    const Okteta::CharCodec* charCodec = Okteta::CharCodec::createCodec(mSettings.codecName);
     const QChar tabChar = QLatin1Char('\t');
     const QChar returnChar = QLatin1Char('\n');
 

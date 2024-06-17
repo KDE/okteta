@@ -607,7 +607,7 @@ void AbstractByteArrayViewPrivate::setValueCoding(AbstractByteArrayView::ValueCo
         return;
     }
 
-    ValueCodec* newValueCodec
+    const ValueCodec* newValueCodec
         = ValueCodec::createCodec((ValueCoding)valueCoding);
     if (!newValueCodec) {
         return;
@@ -623,7 +623,7 @@ void AbstractByteArrayViewPrivate::setCharCoding(const QString& charCodingName)
         return;
     }
 
-    CharCodec* newCharCodec =
+    const CharCodec* newCharCodec =
         CharCodec::createCodec(charCodingName);
     if (!newCharCodec) {
         return;

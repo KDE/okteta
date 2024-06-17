@@ -57,8 +57,8 @@ private:
     const int mNoOfBytesPerLine;
 
     const int mVisibleCodings;
-    std::unique_ptr<Okteta::ValueCodec> const mValueCodec;
-    std::unique_ptr<Okteta::CharCodec> const mCharCodec;
+    const std::unique_ptr<const Okteta::ValueCodec> mValueCodec;
+    const std::unique_ptr<const Okteta::CharCodec> mCharCodec;
     const QChar mSubstituteChar;
     const QChar mUndefinedChar;
 

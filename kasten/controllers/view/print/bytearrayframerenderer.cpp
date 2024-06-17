@@ -269,7 +269,7 @@ void ByteArrayFrameRenderer::setValueCoding(Okteta::ValueCoding valueCoding)
 
     const uint oldCodingWidth = mValueCodec->encodingWidth();
 
-    Okteta::ValueCodec* newValueCodec =
+    const Okteta::ValueCodec* newValueCodec =
         Okteta::ValueCodec::createCodec(valueCoding);
     if (!newValueCodec) {
         return;
@@ -295,7 +295,7 @@ void ByteArrayFrameRenderer::setCharCoding(const QString& newCharCodingName)
         return;
     }
 
-    Okteta::CharCodec* newCharCodec = Okteta::CharCodec::createCodec(newCharCodingName);
+    const Okteta::CharCodec* newCharCodec = Okteta::CharCodec::createCodec(newCharCodingName);
     if (!newCharCodec) {
         return;
     }

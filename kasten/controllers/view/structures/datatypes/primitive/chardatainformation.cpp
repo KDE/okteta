@@ -47,13 +47,13 @@ QString charString(quint8 value)
 class CodecOwner : public QObject
 {
 public:
-    CodecOwner(Okteta::CharCodec* charCodec, QObject* parent);
+    CodecOwner(const Okteta::CharCodec* charCodec, QObject* parent);
 
 private:
-    std::unique_ptr<Okteta::CharCodec> m_charCodec;
+    std::unique_ptr<const Okteta::CharCodec> m_charCodec;
 };
 
-CodecOwner::CodecOwner(Okteta::CharCodec* charCodec, QObject* parent)
+CodecOwner::CodecOwner(const Okteta::CharCodec* charCodec, QObject* parent)
     : QObject(parent)
     , m_charCodec(charCodec)
 {
@@ -76,7 +76,7 @@ QString CharDataInformationMethods::staticValueString(quint8 value)
 
 QWidget* CharDataInformationMethods::staticCreateEditWidget(QWidget* parent)
 {
-    Okteta::CharCodec* charCodec = Okteta::CharCodec::createCodec(QStringLiteral("US-ASCII"));
+    const Okteta::CharCodec* charCodec = Okteta::CharCodec::createCodec(QStringLiteral("US-ASCII"));
     auto* editWidget = new Okteta::Char8Editor(charCodec, parent);
     new CodecOwner(charCodec, editWidget);
     return editWidget;

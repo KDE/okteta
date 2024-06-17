@@ -36,7 +36,7 @@ protected: // AbstractByteArrayColumnHtmlRenderer API
     void renderLine(QTextStream* stream, bool isSubline) const override;
 
 private:
-    std::unique_ptr<Okteta::ValueCodec> const mValueCodec;
+    const std::unique_ptr<const Okteta::ValueCodec> mValueCodec;
 };
 
 }

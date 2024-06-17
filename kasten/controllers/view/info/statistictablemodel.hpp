@@ -71,8 +71,8 @@ private:
     int* mByteCount;
 
     Okteta::ValueCoding mValueCoding;
-    Okteta::ValueCodec* mValueCodec;
-    Okteta::CharCodec* mCharCodec;
+    const Okteta::ValueCodec* mValueCodec;
+    const Okteta::CharCodec* mCharCodec;
     QChar mSubstituteChar;
     QChar mUndefinedChar;
     QFont mFixedFont;

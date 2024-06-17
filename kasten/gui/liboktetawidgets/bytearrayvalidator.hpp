@@ -75,8 +75,8 @@ private:
 //     QString zeroExtend( const QString &src, int destLen ) const;
 
     Coding mCodecId = InvalidCoding;
-    ValueCodec* mValueCodec = nullptr;
-    CharCodec* mCharCodec;
+    const ValueCodec* mValueCodec = nullptr;
+    const CharCodec* mCharCodec;
     int mMaxLength = 32767;
     int mMinLength = 0;
 };

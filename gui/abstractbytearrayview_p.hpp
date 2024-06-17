@@ -311,11 +311,11 @@ protected:
 
     // parameters
     /** */
-    ValueCodec* mValueCodec;
+    const ValueCodec* mValueCodec;
     /** */
     AbstractByteArrayView::ValueCoding mValueCoding;
     /** */
-    CharCodec* mCharCodec;
+    const CharCodec* mCharCodec;
     /** style of resizing */
     AbstractByteArrayView::LayoutStyle mResizeStyle;
 

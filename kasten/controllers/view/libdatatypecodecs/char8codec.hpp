@@ -18,7 +18,7 @@ class CharCodec;
 class Char8Codec : public AbstractTypeCodec
 {
 public:
-    explicit Char8Codec(CharCodec* charCodec);
+    explicit Char8Codec(const CharCodec* charCodec);
 
     ~Char8Codec() override;
 
@@ -29,14 +29,14 @@ public: // AbstractTypeCodec API
     bool areEqual(const QVariant& value, QVariant& otherValue) const override;
 
 public:
-    void setCharCodec(CharCodec* charCodec);
+    void setCharCodec(const CharCodec* charCodec);
 
 private:
-    CharCodec* mCharCodec;
+    const CharCodec* mCharCodec;
     QChar mUndefinedChar;
 };
 
-inline void Char8Codec::setCharCodec(CharCodec* charCodec) { mCharCodec = charCodec; }
+inline void Char8Codec::setCharCodec(const CharCodec* charCodec) { mCharCodec = charCodec; }
 
 }
 

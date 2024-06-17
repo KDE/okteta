@@ -209,13 +209,13 @@ void CharsetConversionTool::convertChars()
     QByteArray conversionResult;
     conversionResult.resize(convertedSection.width());
 
-    Okteta::CharCodec* viewCharCodec =
+    const Okteta::CharCodec* viewCharCodec =
         Okteta::CharCodec::createCodec(mByteArrayView->charCodingName());
-    Okteta::CharCodec* otherCharCodec =
+    const Okteta::CharCodec* otherCharCodec =
         Okteta::CharCodec::createCodec(mOtherCharCodecName);
     const bool convertToOther = (mConversionDirection == ConvertTo);
-    Okteta::CharCodec* fromCharCodec = convertToOther ? viewCharCodec : otherCharCodec;
-    Okteta::CharCodec* toCharCodec = convertToOther ? otherCharCodec : viewCharCodec;
+    const Okteta::CharCodec* fromCharCodec = convertToOther ? viewCharCodec : otherCharCodec;
+    const Okteta::CharCodec* toCharCodec = convertToOther ? otherCharCodec : viewCharCodec;
     auto* charsetConversionJob =
         new CharsetConversionJob(reinterpret_cast<Okteta::Byte*>(conversionResult.data()),
                                  mByteArrayModel, convertedSection,

@@ -33,7 +33,7 @@ protected: // QSpinBox API
     QValidator::State validate(QString& text, int& pos) const override;
 
 protected:
-    Okteta::ValueCodec* mValueCodec;
+    const Okteta::ValueCodec* mValueCodec;
 };
 
 }

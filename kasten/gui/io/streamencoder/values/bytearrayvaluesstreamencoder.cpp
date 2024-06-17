@@ -79,7 +79,7 @@ bool ByteArrayValuesStreamEncoder::encodeDataToStream(QIODevice* device,
     // encode
     QTextStream textStream(device);
 
-    Okteta::ValueCodec* valueCodec = Okteta::ValueCodec::createCodec(mSettings.valueCoding);
+    const Okteta::ValueCodec* valueCodec = Okteta::ValueCodec::createCodec(mSettings.valueCoding);
 
     // prepare
     QString valueString;

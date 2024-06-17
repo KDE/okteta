@@ -61,7 +61,7 @@ public:
 
 private:
     Coding mCodecId;
-    ValueCodec* mValueCodec;
+    const ValueCodec* mValueCodec;
 
     static const QRegularExpression expressionRegex;
 };

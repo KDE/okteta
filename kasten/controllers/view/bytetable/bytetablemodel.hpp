@@ -57,8 +57,8 @@ private:
     static constexpr int NofOfValueCodings = 4;
 
 private:
-    Okteta::ValueCodec* mValueCodec[NofOfValueCodings];
-    Okteta::CharCodec* mCharCodec;
+    const Okteta::ValueCodec* mValueCodec[NofOfValueCodings];
+    const Okteta::CharCodec* mCharCodec;
     QChar mSubstituteChar;
     QChar mUndefinedChar;
     QFont mFixedFont;

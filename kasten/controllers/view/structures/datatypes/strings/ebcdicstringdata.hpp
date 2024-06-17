@@ -35,7 +35,7 @@ public:
 
 private:
     QVector<quint8> mData;
-    Okteta::CharCodec* mCodec;
+    const Okteta::CharCodec* mCodec;
 };
 
 #endif // KASTEN_EBCDICSTRINGDATA_HPP

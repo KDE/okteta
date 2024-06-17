@@ -70,7 +70,7 @@ public:
     // TODO: add option to display & edit data in locale
     bool isUnsignedAsHex() const;
     QSysInfo::Endian byteOrder() const;
-    Okteta::CharCodec* charCodec() const;
+    const Okteta::CharCodec* charCodec() const;
 
 public:
     void setData(const QVariant& data, int podId);
@@ -110,7 +110,7 @@ private: // source
     bool mIsPodMarked : 1;
 
     QVector<Okteta::AbstractTypeCodec*> mTypeCodecs;
-    Okteta::CharCodec* mCharCodec;
+    const Okteta::CharCodec* mCharCodec;
     AbstractDifferentSizeDialog* mDifferentSizeDialog = nullptr;
 
 private: // settings
@@ -124,7 +124,7 @@ private: // decoded data
 
 inline bool PODDecoderTool::isUnsignedAsHex() const { return mUnsignedAsHex; }
 inline QSysInfo::Endian PODDecoderTool::byteOrder() const { return mPODData.byteOrder(); }
-inline Okteta::CharCodec* PODDecoderTool::charCodec() const { return mCharCodec; }
+inline const Okteta::CharCodec* PODDecoderTool::charCodec() const { return mCharCodec; }
 
 }
 
