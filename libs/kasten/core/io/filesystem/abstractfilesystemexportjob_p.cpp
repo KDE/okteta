@@ -23,7 +23,7 @@ void AbstractFileSystemExportJobPrivate::exportToFile()
     bool isWorkFileOk;
     if (mUrl.isLocalFile()) {
         mWorkFilePath = mUrl.toLocalFile();
-        mFile = new QFile(mWorkFilePath);
+        mFile.reset(new QFile(mWorkFilePath));
         isWorkFileOk = mFile->open(QIODevice::WriteOnly);
     } else {
 
@@ -31,7 +31,7 @@ void AbstractFileSystemExportJobPrivate::exportToFile()
         isWorkFileOk = temporaryFile->open();
 
         mWorkFilePath = temporaryFile->fileName();
-        mFile = temporaryFile;
+        mFile.reset(temporaryFile);
     }
 
     if (isWorkFileOk) {
@@ -65,7 +65,7 @@ void AbstractFileSystemExportJobPrivate::completeExport(bool success)
         q->setErrorText(mFile->errorString());
     }
 
-    delete mFile;
+    mFile.reset();
 
     q->emitResult();
 }

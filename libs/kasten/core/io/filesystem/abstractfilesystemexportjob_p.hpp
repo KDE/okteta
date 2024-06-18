@@ -13,7 +13,10 @@
 #include "abstractfilesystemexportjob.hpp"
 #include <abstractexportjob_p.hpp>
 // Qt
+#include <QFile>
 #include <QUrl>
+// Std
+#include <memory>
 
 namespace Kasten {
 
@@ -43,7 +46,7 @@ protected:
     AbstractModel* const mModel;
     const AbstractModelSelection* const mSelection;
     const QUrl mUrl;
-    QFile* mFile = nullptr;
+    std::unique_ptr<QFile> mFile;
     QString mWorkFilePath;
 
 private:
@@ -63,7 +66,7 @@ inline AbstractFileSystemExportJobPrivate::~AbstractFileSystemExportJobPrivate()
 
 inline AbstractModel* AbstractFileSystemExportJobPrivate::model()                    const { return mModel; }
 inline const AbstractModelSelection* AbstractFileSystemExportJobPrivate::selection() const { return mSelection; }
-inline QFile* AbstractFileSystemExportJobPrivate::file()                             const { return mFile; }
+inline QFile* AbstractFileSystemExportJobPrivate::file()                             const { return mFile.get(); }
 
 inline void AbstractFileSystemExportJobPrivate::start()
 {

@@ -12,8 +12,11 @@
 // lib
 #include "abstractfilesystemloadjob.hpp"
 #include <abstractloadjob_p.hpp>
-
+// Qt
+#include <QFile>
 #include <QUrl>
+// Std
+#include <memory>
 
 namespace Kasten {
 
@@ -41,7 +44,7 @@ public: // slots
 protected:
     AbstractModelFileSystemSynchronizer* const mSynchronizer;
     const QUrl mUrl;
-    QFile* mFile = nullptr;
+    std::unique_ptr<QFile> mFile;
     QString mWorkFilePath;
     QString mTempFilePath;
 
@@ -64,7 +67,7 @@ inline AbstractModelFileSystemSynchronizer* AbstractFileSystemLoadJobPrivate::sy
 }
 inline const QUrl& AbstractFileSystemLoadJobPrivate::url() const { return mUrl; }
 
-inline QFile* AbstractFileSystemLoadJobPrivate::file()     const { return mFile; }
+inline QFile* AbstractFileSystemLoadJobPrivate::file()     const { return mFile.get(); }
 // TODO: setup a notification system
 
 inline void AbstractFileSystemLoadJobPrivate::start()

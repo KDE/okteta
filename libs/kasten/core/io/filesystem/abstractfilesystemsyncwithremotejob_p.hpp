@@ -12,8 +12,11 @@
 // library
 #include "abstractfilesystemsyncwithremotejob.hpp"
 #include <abstractsyncwithremotejob_p.hpp>
-
+// Qt
 #include <QUrl>
+#include <QFile>
+// Std
+#include <memory>
 
 namespace Kasten {
 
@@ -43,7 +46,7 @@ protected:
     AbstractModelFileSystemSynchronizer* const mSynchronizer;
     const QUrl mUrl;
     const AbstractModelSynchronizer::ConnectOption mOption;
-    QFile* mFile = nullptr;
+    std::unique_ptr<QFile> mFile;
     QString mWorkFilePath;
     QString mTempFilePath;
 
@@ -62,7 +65,7 @@ inline AbstractFileSystemSyncWithRemoteJobPrivate::AbstractFileSystemSyncWithRem
 
 inline AbstractFileSystemSyncWithRemoteJobPrivate::~AbstractFileSystemSyncWithRemoteJobPrivate() = default;
 
-inline QFile* AbstractFileSystemSyncWithRemoteJobPrivate::file()     const { return mFile; }
+inline QFile* AbstractFileSystemSyncWithRemoteJobPrivate::file()     const { return mFile.get(); }
 // TODO: setup a notification system
 inline AbstractModelFileSystemSynchronizer* AbstractFileSystemSyncWithRemoteJobPrivate::synchronizer() const
 {

@@ -15,6 +15,8 @@
 // Qt
 #include <QFile>
 #include <QUrl>
+// Std
+#include <memory>
 
 namespace Kasten {
 
@@ -46,7 +48,7 @@ protected:
     AbstractDocument* const mDocument;
     const QUrl mUrl;
     const AbstractModelSynchronizer::ConnectOption mOption;
-    QFile* mFile = nullptr;
+    std::unique_ptr<QFile> mFile ;
     QString mWorkFilePath;
     QString mTempFilePath;
 
@@ -71,7 +73,7 @@ inline AbstractModelFileSystemSynchronizer* AbstractFileSystemConnectJobPrivate:
     return mSynchronizer;
 }
 inline AbstractDocument* AbstractFileSystemConnectJobPrivate::document()   const { return mDocument; }
-inline QFile* AbstractFileSystemConnectJobPrivate::file()                  const { return mFile; }
+inline QFile* AbstractFileSystemConnectJobPrivate::file()                  const { return mFile.get(); }
 // TODO: setup a notification system
 
 inline void AbstractFileSystemConnectJobPrivate::start()

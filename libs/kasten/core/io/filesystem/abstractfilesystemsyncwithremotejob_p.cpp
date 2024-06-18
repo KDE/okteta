@@ -29,7 +29,7 @@ void AbstractFileSystemSyncWithRemoteJobPrivate::syncWithRemote()
     if (mOption == AbstractModelSynchronizer::ReplaceRemote) {
         if (mUrl.isLocalFile()) {
             mWorkFilePath = mUrl.toLocalFile();
-            mFile = new QFile(mWorkFilePath);
+            mFile.reset(new QFile(mWorkFilePath));
             isWorkFileOk = mFile->open(QIODevice::WriteOnly);
         } else {
             auto* temporaryFile = new QTemporaryFile;
@@ -37,7 +37,7 @@ void AbstractFileSystemSyncWithRemoteJobPrivate::syncWithRemote()
 
             mWorkFilePath = temporaryFile->fileName();
             mTempFilePath = mWorkFilePath;
-            mFile = temporaryFile;
+            mFile.reset(temporaryFile);
         }
         if (!isWorkFileOk) {
             q->setErrorText(mFile->errorString());
@@ -66,7 +66,7 @@ void AbstractFileSystemSyncWithRemoteJobPrivate::syncWithRemote()
         }
 
         if (isWorkFileOk) {
-            mFile = new QFile(mWorkFilePath);
+            mFile.reset(new QFile(mWorkFilePath));
             isWorkFileOk = mFile->open(QIODevice::ReadWrite);
             if (!isWorkFileOk) {
                 q->setErrorText(mFile->errorString());
@@ -85,7 +85,7 @@ void AbstractFileSystemSyncWithRemoteJobPrivate::syncWithRemote()
         q->startSyncWithRemote();
     } else {
         q->setError(KJob::KilledJobError);
-        delete mFile;
+        mFile.reset();
         // TODO: should we rather skip completeSync in success API?
         q->emitResult();
     }
@@ -125,7 +125,7 @@ void AbstractFileSystemSyncWithRemoteJobPrivate::completeSync(bool success)
         q->setErrorText(mFile->errorString());
     }
 
-    delete mFile;
+    mFile.reset();
 
     if (!mTempFilePath.isEmpty()) {
         QFile::remove(mTempFilePath);

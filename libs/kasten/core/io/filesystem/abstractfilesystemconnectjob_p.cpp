@@ -29,7 +29,7 @@ void AbstractFileSystemConnectJobPrivate::connectWithFile()
     if (mOption == AbstractModelSynchronizer::ReplaceRemote) {
         if (mUrl.isLocalFile()) {
             mWorkFilePath = mUrl.toLocalFile();
-            mFile = new QFile(mWorkFilePath);
+            mFile.reset(new QFile(mWorkFilePath));
             isWorkFileOk = mFile->open(QIODevice::WriteOnly);
         } else {
             auto* temporaryFile = new QTemporaryFile;
@@ -37,7 +37,7 @@ void AbstractFileSystemConnectJobPrivate::connectWithFile()
 
             mWorkFilePath = temporaryFile->fileName();
             mTempFilePath = mWorkFilePath;
-            mFile = temporaryFile;
+            mFile.reset(temporaryFile);
         }
         if (!isWorkFileOk) {
             q->setErrorText(mFile->errorString());
@@ -66,7 +66,7 @@ void AbstractFileSystemConnectJobPrivate::connectWithFile()
         }
 
         if (isWorkFileOk) {
-            mFile = new QFile(mWorkFilePath);
+            mFile.reset(new QFile(mWorkFilePath));
             isWorkFileOk = mFile->open(QIODevice::ReadOnly);
             if (!isWorkFileOk) {
                 q->setErrorText(mFile->errorString());
@@ -78,7 +78,7 @@ void AbstractFileSystemConnectJobPrivate::connectWithFile()
         q->startConnectWithFile();
     } else {
         q->setError(KJob::KilledJobError);
-        delete mFile;
+        mFile.reset();
         // TODO: should we rather skip setDocument in the API?
         q->emitResult();
     }
@@ -124,7 +124,7 @@ void AbstractFileSystemConnectJobPrivate::complete(bool success)
         q->setErrorText(mFile->errorString());
     }
 
-    delete mFile;
+    mFile.reset();
 
     if (!mTempFilePath.isEmpty()) {
         QFile::remove(mTempFilePath);

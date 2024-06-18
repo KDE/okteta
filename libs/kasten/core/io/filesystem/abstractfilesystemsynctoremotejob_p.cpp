@@ -29,7 +29,7 @@ void AbstractFileSystemSyncToRemoteJobPrivate::syncToRemote()
 
     if (url.isLocalFile()) {
         mWorkFilePath = url.toLocalFile();
-        mFile = new QFile(mWorkFilePath);
+        mFile.reset(new QFile(mWorkFilePath));
         isWorkFileOk = mFile->open(QIODevice::WriteOnly);
 
         mSynchronizer->pauseFileWatching();
@@ -38,7 +38,7 @@ void AbstractFileSystemSyncToRemoteJobPrivate::syncToRemote()
         isWorkFileOk = temporaryFile->open();
 
         mWorkFilePath = temporaryFile->fileName();
-        mFile = temporaryFile;
+        mFile.reset(temporaryFile);
     }
 
     if (isWorkFileOk) {
@@ -46,7 +46,7 @@ void AbstractFileSystemSyncToRemoteJobPrivate::syncToRemote()
     } else {
         q->setError(KJob::KilledJobError);
         q->setErrorText(mFile->errorString());
-        delete mFile;
+        mFile.reset();
         q->emitResult();
     }
 }
@@ -84,7 +84,7 @@ void AbstractFileSystemSyncToRemoteJobPrivate::completeWrite(bool success)
         q->setErrorText(mFile->errorString());
     }
 
-    delete mFile;
+    mFile.reset();
 
     q->emitResult();
 }

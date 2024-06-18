@@ -50,7 +50,7 @@ void AbstractFileSystemLoadJobPrivate::load()
     }
 
     if (isWorkFileOk) {
-        mFile = new QFile(mWorkFilePath);
+        mFile.reset(new QFile(mWorkFilePath));
         isWorkFileOk = mFile->open(QIODevice::ReadOnly);
         if (!isWorkFileOk) {
             q->setErrorText(mFile->errorString());
@@ -92,7 +92,7 @@ void AbstractFileSystemLoadJobPrivate::setDocument(AbstractDocument* document)
         delete mSynchronizer;
     }
 
-    delete mFile;
+    mFile.reset();
 
     if (!mTempFilePath.isEmpty()) {
         QFile::remove(mTempFilePath);

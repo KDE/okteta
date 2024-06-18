@@ -52,7 +52,7 @@ void AbstractFileSystemSyncFromRemoteJobPrivate::syncFromRemote()
     }
 
     if (isWorkFileOk) {
-        mFile = new QFile(mWorkFilePath);
+        mFile.reset(new QFile(mWorkFilePath));
         isWorkFileOk = mFile->open(QIODevice::ReadOnly);
         if (!isWorkFileOk) {
             q->setErrorText(mFile->errorString());
@@ -63,7 +63,7 @@ void AbstractFileSystemSyncFromRemoteJobPrivate::syncFromRemote()
         q->startReadFromFile();
     } else {
         q->setError(KJob::KilledJobError);
-        delete mFile;
+        mFile.reset();
         q->emitResult();
     }
 }
@@ -81,7 +81,7 @@ void AbstractFileSystemSyncFromRemoteJobPrivate::completeRead(bool success)
         mSynchronizer->setRemoteState(isLocalFile ? RemoteInSync : RemoteUnknown);
     }
 
-    delete mFile;
+    mFile.reset();
 
     if (!mTempFilePath.isEmpty()) {
         QFile::remove(mTempFilePath);
