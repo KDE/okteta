@@ -31,7 +31,7 @@ ByteArrayRawFileConnectJob::~ByteArrayRawFileConnectJob() = default;
 void ByteArrayRawFileConnectJob::startConnectWithFile()
 {
     auto* byteArrayDocument = qobject_cast<ByteArrayDocument*>(document());
-    auto* writeThread = new ByteArrayRawFileWriteThread(this, byteArrayDocument, file());
+    auto writeThread = std::make_unique<ByteArrayRawFileWriteThread>(this, byteArrayDocument, file());
     writeThread->start();
     while (!writeThread->wait(100)) {
         QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
@@ -39,7 +39,7 @@ void ByteArrayRawFileConnectJob::startConnectWithFile()
 
     qobject_cast<ByteArrayRawFileSynchronizer*>(synchronizer())->setDocument(byteArrayDocument);
     const bool success = writeThread->success();
-    delete writeThread;
+    writeThread.reset();
 
 //     if( success )
 //         ExternalBookmarkStorage().writeBookmarks( byteArrayDocument, synchronizer()->url() );

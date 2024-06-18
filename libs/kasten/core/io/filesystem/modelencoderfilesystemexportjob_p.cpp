@@ -20,14 +20,14 @@ void ModelEncoderFileSystemExportJobPrivate::startExportToFile()
 {
     Q_Q(ModelEncoderFileSystemExportJob);
 
-    auto* exportThread = new ModelStreamEncodeThread(q, file(), model(), selection(), mEncoder);
+    auto exportThread = std::make_unique<ModelStreamEncodeThread>(q, file(), model(), selection(), mEncoder);
     exportThread->start();
     while (!exportThread->wait(100)) {
         QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
     }
 
     const bool success = exportThread->success();
-    delete exportThread;
+    exportThread.reset();
 
     q->completeExport(success);
 }

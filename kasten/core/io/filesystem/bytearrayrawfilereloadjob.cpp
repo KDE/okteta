@@ -29,7 +29,7 @@ ByteArrayRawFileReloadJob::~ByteArrayRawFileReloadJob() = default;
 void ByteArrayRawFileReloadJob::startReadFromFile()
 {
     auto* document = qobject_cast<ByteArrayDocument*>(synchronizer()->document());
-    auto* reloadThread = new ByteArrayRawFileReloadThread(this, /*document, */ file());
+    auto reloadThread = std::make_unique<ByteArrayRawFileReloadThread>(this, /*document, */ file());
     reloadThread->start();
     while (!reloadThread->wait(100)) {
         QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
@@ -47,7 +47,7 @@ void ByteArrayRawFileReloadJob::startReadFromFile()
         setErrorText(reloadThread->errorString());
     }
 
-    delete reloadThread;
+    reloadThread.reset();
 
     completeRead(success);
 }

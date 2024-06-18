@@ -119,7 +119,7 @@ void InsertController::triggerExecution(AbstractModelDataGenerator* generator)
 {
     QApplication::setOverrideCursor(Qt::WaitCursor);
 
-    auto* generateThread = new ModelDataGenerateThread(this, generator);
+    auto generateThread = std::make_unique<ModelDataGenerateThread>(this, generator);
     generateThread->start();
     while (!generateThread->wait(100)) {
         QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
@@ -127,7 +127,7 @@ void InsertController::triggerExecution(AbstractModelDataGenerator* generator)
 
     QMimeData* mimeData = generateThread->data();
 
-    delete generateThread;
+    generateThread.reset();
 
     mSelectedDataWriteableControl->insertData(mimeData);
 

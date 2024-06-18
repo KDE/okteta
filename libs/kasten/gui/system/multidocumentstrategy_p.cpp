@@ -76,7 +76,7 @@ void MultiDocumentStrategyPrivate::triggerGeneration(AbstractModelDataGenerator*
 
     QApplication::setOverrideCursor(Qt::WaitCursor);
 
-    auto* generateThread = new ModelDataGenerateThread(q, generator);
+    auto generateThread = std::make_unique<ModelDataGenerateThread>(q, generator);
     generateThread->start();
     while (!generateThread->wait(100)) {
         QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
@@ -84,7 +84,7 @@ void MultiDocumentStrategyPrivate::triggerGeneration(AbstractModelDataGenerator*
 
     QMimeData* mimeData = generateThread->data();
 
-    delete generateThread;
+    generateThread.reset();
 
     const bool setModified = (generator->flags() & AbstractModelDataGenerator::DynamicGeneration);
     mDocumentManager->createManager()->createNewFromData(mimeData, setModified);

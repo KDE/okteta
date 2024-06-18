@@ -127,13 +127,13 @@ void CopyAsController::triggerExecution(AbstractModelStreamEncoder* encoder,
     QBuffer exportDataBuffer(&exportData);
     exportDataBuffer.open(QIODevice::WriteOnly);
 
-    auto* encodeThread = new ModelStreamEncodeThread(this, &exportDataBuffer, mModel, selection, encoder);
+    auto encodeThread = std::make_unique<ModelStreamEncodeThread>(this, &exportDataBuffer, mModel, selection, encoder);
     encodeThread->start();
     while (!encodeThread->wait(100)) {
         QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
     }
 
-    delete encodeThread;
+    encodeThread.reset();
 
     exportDataBuffer.close();
 

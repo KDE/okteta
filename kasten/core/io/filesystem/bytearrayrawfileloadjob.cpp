@@ -27,7 +27,7 @@ ByteArrayRawFileLoadJob::~ByteArrayRawFileLoadJob() = default;
 
 void ByteArrayRawFileLoadJob::startLoadFromFile()
 {
-    auto* loadThread = new ByteArrayRawFileLoadThread(this, file());
+    auto loadThread = std::make_unique<ByteArrayRawFileLoadThread>(this, file());
     loadThread->start();
     while (!loadThread->wait(100)) {
         QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
@@ -44,7 +44,7 @@ void ByteArrayRawFileLoadJob::startLoadFromFile()
         setErrorText(loadThread->errorString());
     }
 
-    delete loadThread;
+    loadThread.reset();
 
     setDocument(document);
 }

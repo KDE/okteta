@@ -27,8 +27,7 @@ void TestDocumentFileReloadJob::startReadFromFile()
 {
     auto* testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>(synchronizer());
     auto* document = qobject_cast<TestDocument*>(synchronizer()->document());
-    auto* reloadThread =
-        new TestDocumentFileReloadThread(this, testSynchronizer->header(), /*document, */ file());
+    auto reloadThread = std::make_unique<TestDocumentFileReloadThread>(this, testSynchronizer->header(), /*document, */ file());
     reloadThread->start();
     while (!reloadThread->wait(100)) {
         QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
@@ -39,7 +38,7 @@ void TestDocumentFileReloadJob::startReadFromFile()
     if (success) {
         document->setData(reloadThread->byteArray());
     }
-    delete reloadThread;
+    reloadThread.reset();
 
     completeRead(success);
 }

@@ -27,7 +27,7 @@ void TestDocumentFileLoadJob::startLoadFromFile()
 {
     auto* testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>(synchronizer());
 
-    auto* loadThread = new TestDocumentFileLoadThread(this, testSynchronizer->header(), file());
+    auto loadThread = std::make_unique<TestDocumentFileLoadThread>(this, testSynchronizer->header(), file());
     loadThread->start();
     while (!loadThread->wait(100)) {
         QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
@@ -36,7 +36,7 @@ void TestDocumentFileLoadJob::startLoadFromFile()
     TestDocument* document = loadThread->document();
     testSynchronizer->setDocument(document);
 
-    delete loadThread;
+    loadThread.reset();
 
     setDocument(document);
 }

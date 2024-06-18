@@ -31,8 +31,7 @@ void TestDocumentFileConnectJob::startConnectWithFile()
 {
     auto* testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>(synchronizer());
     auto* testDocument = qobject_cast<TestDocument*>(document());
-    auto* writeThread =
-        new TestDocumentFileWriteThread(this, testSynchronizer->header(), testDocument, file());
+    auto writeThread = std::make_unique<TestDocumentFileWriteThread>(this, testSynchronizer->header(), testDocument, file());
 
     writeThread->start();
     while (!writeThread->wait(100)) {
@@ -44,7 +43,7 @@ void TestDocumentFileConnectJob::startConnectWithFile()
     if (success) {
         testSynchronizer->setDocument(testDocument);
     }
-    delete writeThread;
+    writeThread.reset();
 
     complete(success);
 }

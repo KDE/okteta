@@ -27,14 +27,14 @@ ByteArrayRawFileWriteJob::~ByteArrayRawFileWriteJob() = default;
 void ByteArrayRawFileWriteJob::startWriteToFile()
 {
     auto* document = qobject_cast<ByteArrayDocument*>(synchronizer()->document());
-    auto* writeThread = new ByteArrayRawFileWriteThread(this, document, file());
+    auto writeThread = std::make_unique<ByteArrayRawFileWriteThread>(this, document, file());
     writeThread->start();
     while (!writeThread->wait(100)) {
         QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
     }
 
     const bool success = writeThread->success();
-    delete writeThread;
+    writeThread.reset();
 
 //     if( success )
 //         ExternalBookmarkStorage().writeBookmarks( document, synchronizer()->url() );
