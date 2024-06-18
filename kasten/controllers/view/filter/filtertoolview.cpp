@@ -19,12 +19,9 @@ FilterToolView::FilterToolView(FilterTool* tool)
 {
 }
 
-FilterToolView::~FilterToolView()
-{
-    delete mWidget;
-}
+FilterToolView::~FilterToolView() = default;
 
-QWidget* FilterToolView::widget()    const { return mWidget; }
+QWidget* FilterToolView::widget()    const { return mWidget.get(); }
 QString FilterToolView::title()      const { return mWidget->tool()->title(); }
 AbstractTool* FilterToolView::tool() const { return mWidget->tool(); }
 

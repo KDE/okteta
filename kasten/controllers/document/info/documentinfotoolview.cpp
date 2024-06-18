@@ -19,12 +19,9 @@ DocumentInfoToolView::DocumentInfoToolView(DocumentInfoTool* tool)
 {
 }
 
-DocumentInfoToolView::~DocumentInfoToolView()
-{
-    delete mWidget;
-}
+DocumentInfoToolView::~DocumentInfoToolView() = default;
 
-QWidget* DocumentInfoToolView::widget()    const { return mWidget; }
+QWidget* DocumentInfoToolView::widget()    const { return mWidget.get(); }
 QString DocumentInfoToolView::title()      const { return mWidget->tool()->title(); }
 AbstractTool* DocumentInfoToolView::tool() const { return mWidget->tool(); }
 

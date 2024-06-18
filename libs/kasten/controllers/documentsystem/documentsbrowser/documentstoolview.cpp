@@ -21,7 +21,7 @@ DocumentsToolView::DocumentsToolView(DocumentsTool* tool)
 
 DocumentsToolView::~DocumentsToolView() = default;
 
-QWidget* DocumentsToolView::widget()    const { return mWidget; }
+QWidget* DocumentsToolView::widget()    const { return mWidget.get(); }
 QString DocumentsToolView::title()      const { return mWidget->tool()->title(); }
 AbstractTool* DocumentsToolView::tool() const { return mWidget->tool(); }
 

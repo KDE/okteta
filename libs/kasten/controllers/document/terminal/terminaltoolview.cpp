@@ -19,12 +19,9 @@ TerminalToolView::TerminalToolView(TerminalTool* tool)
 {
 }
 
-TerminalToolView::~TerminalToolView()
-{
-    delete mWidget;
-}
+TerminalToolView::~TerminalToolView() = default;
 
-QWidget* TerminalToolView::widget()    const { return mWidget; }
+QWidget* TerminalToolView::widget()    const { return mWidget.get(); }
 QString TerminalToolView::title()      const { return mWidget->tool()->title(); }
 AbstractTool* TerminalToolView::tool() const { return mWidget->tool(); }
 

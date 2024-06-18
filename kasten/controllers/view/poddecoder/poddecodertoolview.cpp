@@ -19,12 +19,9 @@ PODDecoderToolView::PODDecoderToolView(PODDecoderTool* tool)
 {
 }
 
-PODDecoderToolView::~PODDecoderToolView()
-{
-    delete mWidget;
-}
+PODDecoderToolView::~PODDecoderToolView() = default;
 
-QWidget* PODDecoderToolView::widget()    const { return mWidget; }
+QWidget* PODDecoderToolView::widget()    const { return mWidget.get(); }
 QString PODDecoderToolView::title()      const { return mWidget->tool()->title(); }
 AbstractTool* PODDecoderToolView::tool() const { return mWidget->tool(); }
 

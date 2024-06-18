@@ -11,6 +11,8 @@
 
 // Kasten gui
 #include <Kasten/AbstractToolInlineView>
+// Std
+#include <memory>
 
 namespace Kasten {
 
@@ -31,7 +33,7 @@ public: // AbstractToolView API
     AbstractTool* tool() const override;
 
 private:
-    GotoOffsetView* mWidget;
+    const std::unique_ptr<GotoOffsetView> mWidget;
 };
 
 }

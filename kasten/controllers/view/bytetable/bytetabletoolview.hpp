@@ -11,6 +11,8 @@
 
 // Kasten gui
 #include <Kasten/AbstractToolView>
+// Std
+#include <memory>
 
 namespace Kasten {
 
@@ -31,7 +33,7 @@ public: // AbstractToolView API
     AbstractTool* tool() const override;
 
 private:
-    ByteTableView* mWidget;
+    const std::unique_ptr<ByteTableView> mWidget;
 };
 
 }

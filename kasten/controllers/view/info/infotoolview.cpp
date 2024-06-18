@@ -19,12 +19,9 @@ InfoToolView::InfoToolView(InfoTool* tool)
 {
 }
 
-InfoToolView::~InfoToolView()
-{
-    delete mWidget;
-}
+InfoToolView::~InfoToolView() = default;
 
-QWidget* InfoToolView::widget()    const { return mWidget; }
+QWidget* InfoToolView::widget()    const { return mWidget.get(); }
 QString InfoToolView::title()      const { return mWidget->tool()->title(); }
 AbstractTool* InfoToolView::tool() const { return mWidget->tool(); }
 

@@ -19,12 +19,9 @@ ByteTableToolView::ByteTableToolView(ByteTableTool* tool)
 {
 }
 
-ByteTableToolView::~ByteTableToolView()
-{
-    delete mWidget;
-}
+ByteTableToolView::~ByteTableToolView() = default;
 
-QWidget* ByteTableToolView::widget()    const { return mWidget; }
+QWidget* ByteTableToolView::widget()    const { return mWidget.get(); }
 QString ByteTableToolView::title()      const { return mWidget->tool()->title(); }
 AbstractTool* ByteTableToolView::tool() const { return mWidget->tool(); }
 

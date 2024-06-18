@@ -19,12 +19,9 @@ GotoOffsetToolView::GotoOffsetToolView(GotoOffsetTool* tool)
 {
 }
 
-GotoOffsetToolView::~GotoOffsetToolView()
-{
-    delete mWidget;
-}
+GotoOffsetToolView::~GotoOffsetToolView() = default;
 
-QWidget* GotoOffsetToolView::widget()    const { return mWidget; }
+QWidget* GotoOffsetToolView::widget()    const { return mWidget.get(); }
 QString GotoOffsetToolView::title()      const { return mWidget->tool()->title(); }
 AbstractTool* GotoOffsetToolView::tool() const { return mWidget->tool(); }
 

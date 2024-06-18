@@ -21,7 +21,7 @@ FileSystemBrowserToolView::FileSystemBrowserToolView(FileSystemBrowserTool* tool
 
 FileSystemBrowserToolView::~FileSystemBrowserToolView() = default;
 
-QWidget* FileSystemBrowserToolView::widget()    const { return mWidget; }
+QWidget* FileSystemBrowserToolView::widget()    const { return mWidget.get(); }
 QString FileSystemBrowserToolView::title()      const { return mWidget->tool()->title(); }
 AbstractTool* FileSystemBrowserToolView::tool() const { return mWidget->tool(); }
 

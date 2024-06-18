@@ -18,14 +18,11 @@ StructuresToolView::StructuresToolView(StructuresTool* tool) :
 {
 }
 
-StructuresToolView::~StructuresToolView()
-{
-    delete mWidget;
-}
+StructuresToolView::~StructuresToolView() = default;
 
 QWidget* StructuresToolView::widget() const
 {
-    return mWidget;
+    return mWidget.get();
 }
 QString StructuresToolView::title() const
 {

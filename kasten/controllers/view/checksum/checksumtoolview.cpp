@@ -19,12 +19,9 @@ ChecksumToolView::ChecksumToolView(ChecksumTool* tool)
 {
 }
 
-ChecksumToolView::~ChecksumToolView()
-{
-    delete mWidget;
-}
+ChecksumToolView::~ChecksumToolView() = default;
 
-QWidget* ChecksumToolView::widget()    const { return mWidget; }
+QWidget* ChecksumToolView::widget()    const { return mWidget.get(); }
 QString ChecksumToolView::title()      const { return mWidget->tool()->title(); }
 AbstractTool* ChecksumToolView::tool() const { return mWidget->tool(); }
 

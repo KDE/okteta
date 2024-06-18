@@ -19,12 +19,9 @@ SelectRangeToolView::SelectRangeToolView(SelectRangeTool* tool)
 {
 }
 
-SelectRangeToolView::~SelectRangeToolView()
-{
-    delete mWidget;
-}
+SelectRangeToolView::~SelectRangeToolView() = default;
 
-QWidget* SelectRangeToolView::widget()    const { return mWidget; }
+QWidget* SelectRangeToolView::widget()    const { return mWidget.get(); }
 QString SelectRangeToolView::title()      const { return mWidget->tool()->title(); }
 AbstractTool* SelectRangeToolView::tool() const { return mWidget->tool(); }
 

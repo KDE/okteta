@@ -19,12 +19,9 @@ CharsetConversionToolView::CharsetConversionToolView(CharsetConversionTool* tool
 {
 }
 
-CharsetConversionToolView::~CharsetConversionToolView()
-{
-    delete mWidget;
-}
+CharsetConversionToolView::~CharsetConversionToolView() = default;
 
-QWidget* CharsetConversionToolView::widget()    const { return mWidget; }
+QWidget* CharsetConversionToolView::widget()    const { return mWidget.get(); }
 QString CharsetConversionToolView::title()      const { return mWidget->tool()->title(); }
 AbstractTool* CharsetConversionToolView::tool() const { return mWidget->tool(); }
 

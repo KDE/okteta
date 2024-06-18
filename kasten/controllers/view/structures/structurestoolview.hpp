@@ -11,6 +11,8 @@
 
 // Kasten gui
 #include <Kasten/AbstractToolView>
+// Std
+#include <memory>
 
 namespace Kasten {
 class StructureView;
@@ -30,7 +32,7 @@ public: // AbstractToolView API
     AbstractTool* tool() const override;
 
 private:
-    StructureView* mWidget;
+    const std::unique_ptr<StructureView> mWidget;
 };
 
 }

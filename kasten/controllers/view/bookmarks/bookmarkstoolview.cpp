@@ -19,12 +19,9 @@ BookmarksToolView::BookmarksToolView(BookmarksTool* tool)
 {
 }
 
-BookmarksToolView::~BookmarksToolView()
-{
-    delete mWidget;
-}
+BookmarksToolView::~BookmarksToolView() = default;
 
-QWidget* BookmarksToolView::widget()    const { return mWidget; }
+QWidget* BookmarksToolView::widget()    const { return mWidget.get(); }
 QString BookmarksToolView::title()      const { return mWidget->tool()->title(); }
 AbstractTool* BookmarksToolView::tool() const { return mWidget->tool(); }
 
