@@ -219,8 +219,8 @@ void CharsetConversionTool::convertChars()
     auto* charsetConversionJob =
         new CharsetConversionJob(reinterpret_cast<Okteta::Byte*>(conversionResult.data()),
                                  mByteArrayModel, convertedSection,
-                                 convertToOther ? viewCharCodec : otherCharCodec,
-                                 convertToOther ? otherCharCodec : viewCharCodec,
+                                 fromCharCodec,
+                                 toCharCodec,
                                  mSubstitutingMissingChars, mSubstituteByte
                                  ); // TODO: report also actually converted bytes
     const bool success = charsetConversionJob->exec();
