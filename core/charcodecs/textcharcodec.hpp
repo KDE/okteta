@@ -47,7 +47,8 @@ public: // CharCodec API
     QString name() const override;
 
 private:
-    QTextCodec* mCodec;
+    // Qt owns all QTextCodec instances
+    QTextCodec* const mCodec;
     /** decodes the chars to unicode */
     const std::unique_ptr<QTextDecoder> mDecoder;
     /** encodes the chars from unicode */

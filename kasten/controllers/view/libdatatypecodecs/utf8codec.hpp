@@ -30,7 +30,8 @@ public: // AbstractTypeCodec API
     bool areEqual(const QVariant& value, QVariant& otherValue) const override;
 
 private:
-    QTextCodec* mUtf8Codec;
+    // Qt owns all QTextCodec instances
+    QTextCodec* const mUtf8Codec;
 };
 
 }
