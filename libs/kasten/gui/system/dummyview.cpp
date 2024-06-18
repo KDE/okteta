@@ -26,13 +26,10 @@ DummyView::DummyView(AbstractDocument* document)
             this, &DummyView::onTitleChange);
 }
 
-DummyView::~DummyView()
-{
-    delete mLabel;
-}
+DummyView::~DummyView() = default;
 
 bool DummyView::hasFocus()               const { return mLabel->hasFocus(); } // TODO: make sure, label really holds focus after setFocus()
-QWidget* DummyView::widget()             const { return mLabel; }
+QWidget* DummyView::widget()             const { return mLabel.get(); }
 QString DummyView::title()               const { return mDocument->title(); }
 
 void DummyView::setFocus()

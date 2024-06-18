@@ -17,6 +17,7 @@
 #include <QSplitter>
 // Std
 #include <utility>
+#include <memory>
 
 class QDragMoveEvent;
 class QDropEvent;
@@ -73,13 +74,13 @@ private:
 
 private:
     QVector<TabbedViews*> mViewAreaList;
-    QSplitter* mMainSplitter;
+    std::unique_ptr<QSplitter> mMainSplitter;
 
     TabbedViews* mCurrentViewArea = nullptr;
     TabbedViews* mCurrentInlineToolViewArea = nullptr;
 };
 
-inline QWidget* MultiViewAreasPrivate::widget()                 const { return mMainSplitter; }
+inline QWidget* MultiViewAreasPrivate::widget()                 const { return mMainSplitter.get(); }
 inline bool MultiViewAreasPrivate::hasFocus()                   const { return mCurrentViewArea->hasFocus(); }
 inline AbstractView* MultiViewAreasPrivate::viewFocus()         const { return mCurrentViewArea->viewFocus(); }
 inline AbstractViewArea* MultiViewAreasPrivate::viewAreaFocus() const { return mCurrentViewArea; }

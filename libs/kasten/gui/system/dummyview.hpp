@@ -11,6 +11,8 @@
 
 // lib
 #include "abstractview.hpp"
+// Std
+#include <memory>
 
 class QLabel;
 
@@ -40,7 +42,7 @@ private Q_SLOTS:
     KASTENGUI_NO_EXPORT void onTitleChange(const QString& newTitle);
 
 private:
-    QLabel* mLabel;
+    const std::unique_ptr<QLabel> mLabel;
     AbstractDocument* mDocument;
 };
 

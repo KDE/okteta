@@ -20,8 +20,8 @@ namespace Kasten {
 
 ByteArrayTextStreamEncoderPreview::ByteArrayTextStreamEncoderPreview(AbstractByteArrayStreamEncoder* encoder)
     : mEncoder(encoder)
+    , mWidget(new QTextEdit()) // TODO: use KSyntaxHighlighting for syntax highlighting
 {
-    mWidget = new QTextEdit(); // TODO: use Kate for syntax highlighting
     mWidget->setReadOnly(true);
     mWidget->setLineWrapMode(QTextEdit::NoWrap);
     mWidget->setToolTip(i18n("The preview uses maximal the first 100 bytes."));
@@ -34,12 +34,9 @@ ByteArrayTextStreamEncoderPreview::ByteArrayTextStreamEncoderPreview(AbstractByt
     connect(mEncoder, &AbstractByteArrayStreamEncoder::settingsChanged, this, &ByteArrayTextStreamEncoderPreview::update);
 }
 
-ByteArrayTextStreamEncoderPreview::~ByteArrayTextStreamEncoderPreview()
-{
-    delete mWidget;
-}
+ByteArrayTextStreamEncoderPreview::~ByteArrayTextStreamEncoderPreview() = default;
 
-QWidget* ByteArrayTextStreamEncoderPreview::widget() const { return mWidget; }
+QWidget* ByteArrayTextStreamEncoderPreview::widget() const { return mWidget.get(); }
 
 void ByteArrayTextStreamEncoderPreview::setData(AbstractModel* model, const AbstractModelSelection* selection)
 {

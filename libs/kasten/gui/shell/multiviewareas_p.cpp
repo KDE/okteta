@@ -31,14 +31,13 @@ MultiViewAreasPrivate::MultiViewAreasPrivate(MultiViewAreas* parent)
 MultiViewAreasPrivate::~MultiViewAreasPrivate()
 {
     qDeleteAll(mViewAreaList);
-    delete mMainSplitter;
 }
 
 void MultiViewAreasPrivate::init()
 {
     Q_Q(MultiViewAreas);
 
-    mMainSplitter = new QSplitter();
+    mMainSplitter = std::make_unique<QSplitter>();
 
     // create start view area
     auto* viewArea = new TabbedViews();
@@ -142,7 +141,7 @@ void MultiViewAreasPrivate::onViewsRemoved()
 
         QWidget* otherWidget = baseSplitter->widget(otherIndex);
         // do not delete the main splitter
-        if (baseSplitter != mMainSplitter) {
+        if (baseSplitter != mMainSplitter.get()) {
             auto* baseOfBaseSplitter = static_cast<QSplitter*>(baseSplitter->parentWidget());
 
             const QList<int> baseOfBaseSplitterSizes = baseOfBaseSplitter->sizes();
@@ -215,7 +214,7 @@ void MultiViewAreasPrivate::onContextMenuRequested(AbstractView* view, QPoint po
     auto* viewArea = qobject_cast<TabbedViews*>(q->sender());
 
     auto* viewAreaWidget = viewArea->widget();
-    Q_EMIT q->contextMenuRequested(viewArea, view, viewAreaWidget->mapTo(mMainSplitter, pos));
+    Q_EMIT q->contextMenuRequested(viewArea, view, viewAreaWidget->mapTo(mMainSplitter.get(), pos));
 }
 
 #if 0

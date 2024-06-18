@@ -11,6 +11,8 @@
 
 // Kasten ui
 #include <Kasten/AbstractSelectionView>
+// Std
+#include <memory>
 
 class QTextEdit;
 
@@ -44,7 +46,7 @@ private:
     AbstractModel* mModel = nullptr;
     const AbstractModelSelection* mSelection = nullptr;
 
-    QTextEdit* mWidget;
+    const std::unique_ptr<QTextEdit> mWidget;
 };
 
 }

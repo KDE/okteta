@@ -78,7 +78,7 @@ ViewStatusController::ViewStatusController(StatusBar* statusBar)
 // see https://frinring.wordpress.com/2008/10/14/better-width-with-open-sources/
 void ViewStatusController::fixWidths(int offsetCoding)
 {
-    auto* sizeEstimationDummyLabel = new QLabel(mStatusBar);
+    auto sizeEstimationDummyLabel = std::make_unique<QLabel>(mStatusBar);
 
     // mOffsetLabel
     constexpr int hexDigitsCount = 16;
@@ -131,7 +131,7 @@ void ViewStatusController::fixWidths(int offsetCoding)
         }
     }
 
-    delete sizeEstimationDummyLabel;
+    sizeEstimationDummyLabel.reset();
 
     mOffsetLabel->setFixedWidth(largestOffsetWidth);
     mSelectionLabel->setFixedWidth(largestSelectionWidth);
