@@ -13,7 +13,7 @@
 #include "abstractfilesystemsyncfromremotejob.hpp"
 #include <abstractsyncfromremotejob_p.hpp>
 // KF
-#include <QTemporaryFile>
+#include <QFile>
 
 namespace Kasten {
 

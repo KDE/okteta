@@ -13,8 +13,8 @@
 #include "abstractfilesystemconnectjob.hpp"
 #include <abstractconnectjob_p.hpp>
 // Qt
+#include <QFile>
 #include <QUrl>
-#include <QTemporaryFile>
 
 namespace Kasten {
 

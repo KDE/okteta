@@ -15,8 +15,8 @@
 // library
 #include "abstractmodelfilesystemsynchronizer.hpp"
 // Qt
+#include <QFile>
 #include <QUrl>
-#include <QTemporaryFile>
 
 namespace Kasten {
 class AbstractFileSystemSyncToRemoteJobPrivate : public AbstractSyncToRemoteJobPrivate
