@@ -14,6 +14,8 @@
 // Qt
 #include <QObject>
 #include <QByteArray>
+// Std
+#include <memory>
 
 namespace Okteta {
 class AbstractByteArrayModel;
@@ -51,7 +53,7 @@ private:
     Okteta::Address mStartIndex;
     Okteta::Address mEndIndex;
     Qt::CaseSensitivity mCaseSensitivity;
-    const Okteta::CharCodec* mCharCodec;
+    const std::unique_ptr<const Okteta::CharCodec> mCharCodec;
 
     Okteta::AddressRange m_result;
 };

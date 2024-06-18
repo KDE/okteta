@@ -209,13 +209,13 @@ void CharsetConversionTool::convertChars()
     QByteArray conversionResult;
     conversionResult.resize(convertedSection.width());
 
-    const Okteta::CharCodec* viewCharCodec =
-        Okteta::CharCodec::createCodec(mByteArrayView->charCodingName());
-    const Okteta::CharCodec* otherCharCodec =
-        Okteta::CharCodec::createCodec(mOtherCharCodecName);
+    std::unique_ptr<const Okteta::CharCodec> viewCharCodec(
+        Okteta::CharCodec::createCodec(mByteArrayView->charCodingName()));
+    std::unique_ptr<const Okteta::CharCodec> otherCharCodec(
+        Okteta::CharCodec::createCodec(mOtherCharCodecName));
     const bool convertToOther = (mConversionDirection == ConvertTo);
-    const Okteta::CharCodec* fromCharCodec = convertToOther ? viewCharCodec : otherCharCodec;
-    const Okteta::CharCodec* toCharCodec = convertToOther ? otherCharCodec : viewCharCodec;
+    const Okteta::CharCodec* fromCharCodec = convertToOther ? viewCharCodec.get() : otherCharCodec.get();
+    const Okteta::CharCodec* toCharCodec = convertToOther ? otherCharCodec.get() : viewCharCodec.get();
     auto* charsetConversionJob =
         new CharsetConversionJob(reinterpret_cast<Okteta::Byte*>(conversionResult.data()),
                                  mByteArrayModel, convertedSection,
@@ -241,8 +241,8 @@ void CharsetConversionTool::convertChars()
         }
     }
 
-    delete viewCharCodec;
-    delete otherCharCodec;
+    viewCharCodec.reset();
+    otherCharCodec.reset();
 
     QApplication::restoreOverrideCursor();
 

@@ -17,19 +17,16 @@ namespace Okteta {
 
 AbstractValue8Editor::AbstractValue8Editor(Okteta::ValueCoding valueCoding, QWidget* parent)
     : QSpinBox(parent)
+    , mValueCodec(Okteta::ValueCodec::createCodec(valueCoding))
 {
     const quint8 int8Max = std::numeric_limits<quint8>::max();
     const quint8 int8Min = std::numeric_limits<quint8>::min();
 
     setRange(int8Min, int8Max);
 
-    mValueCodec = Okteta::ValueCodec::createCodec(valueCoding);
 }
 
-AbstractValue8Editor::~AbstractValue8Editor()
-{
-    delete mValueCodec;
-}
+AbstractValue8Editor::~AbstractValue8Editor() = default;
 
 QString AbstractValue8Editor::textFromValue(int value) const
 {

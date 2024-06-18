@@ -29,10 +29,7 @@ AddressValidator::AddressValidator(QObject* parent, Coding codecId)
     setCodec(codecId);
 }
 
-AddressValidator::~AddressValidator()
-{
-    delete mValueCodec;
-}
+AddressValidator::~AddressValidator() = default;
 
 void AddressValidator::setCodec(Coding codecId)
 {
@@ -42,8 +39,7 @@ void AddressValidator::setCodec(Coding codecId)
 
     mCodecId = codecId;
 
-    delete mValueCodec;
-    mValueCodec = ValueCodec::createCodec((Okteta::ValueCoding)mCodecId);
+    mValueCodec.reset(ValueCodec::createCodec((Okteta::ValueCoding)mCodecId));
 }
 
 const QRegularExpression AddressValidator::expressionRegex =

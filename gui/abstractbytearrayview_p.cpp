@@ -178,8 +178,6 @@ AbstractByteArrayViewPrivate::~AbstractByteArrayViewPrivate()
     delete mTableRanges;
     delete mTableCursor;
     delete mTableLayout;
-    delete mValueCodec;
-    delete mCharCodec;
 
     delete mCursorPixmaps;
 }
@@ -201,9 +199,9 @@ void AbstractByteArrayViewPrivate::init()
     mOffsetBorderColumn =
         new BorderColumnRenderer(mStylist, false);
 
-    mValueCodec = ValueCodec::createCodec((ValueCoding)DefaultValueCoding);
+    mValueCodec.reset(ValueCodec::createCodec((ValueCoding)DefaultValueCoding));
     mValueCoding = DefaultValueCoding;
-    mCharCodec = CharCodec::createCodec(DefaultCharCoding());
+    mCharCodec.reset(CharCodec::createCodec(DefaultCharCoding()));
 
     mTabController = new TabController(q, nullptr);
     mUndoRedoController = new UndoRedoController(q, mTabController);
@@ -613,8 +611,7 @@ void AbstractByteArrayViewPrivate::setValueCoding(AbstractByteArrayView::ValueCo
         return;
     }
 
-    delete mValueCodec;
-    mValueCodec = newValueCodec;
+    mValueCodec.reset(newValueCodec);
     mValueCoding = valueCoding;
 }
 void AbstractByteArrayViewPrivate::setCharCoding(const QString& charCodingName)
@@ -629,8 +626,7 @@ void AbstractByteArrayViewPrivate::setCharCoding(const QString& charCodingName)
         return;
     }
 
-    delete mCharCodec;
-    mCharCodec = newCharCodec;
+    mCharCodec.reset(newCharCodec);
 }
 
 void AbstractByteArrayViewPrivate::setMarking(const AddressRange& _marking)
@@ -655,7 +651,7 @@ bool AbstractByteArrayViewPrivate::selectWord(Address index)
     bool result = false;
 
     if (0 <= index && index < mTableLayout->length()) {
-        const TextByteArrayAnalyzer textAnalyzer(mByteArrayModel, mCharCodec);
+        const TextByteArrayAnalyzer textAnalyzer(mByteArrayModel, mCharCodec.get());
         const AddressRange wordSection = textAnalyzer.wordSection(index);
         if (wordSection.isValid()) {
             pauseCursor();

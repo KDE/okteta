@@ -25,10 +25,7 @@ EbcdicStringData::EbcdicStringData(StringDataInformation* parent)
 {
 }
 
-EbcdicStringData::~EbcdicStringData()
-{
-    delete mCodec;
-}
+EbcdicStringData::~EbcdicStringData() = default;
 
 qint64 EbcdicStringData::read(const Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining)
 {

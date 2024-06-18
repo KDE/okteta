@@ -50,9 +50,9 @@ ByteArrayFrameRenderer::ByteArrayFrameRenderer()
     mTableRanges = new Okteta::ByteArrayTableRanges(mLayout);
 
     // set codecs
-    mValueCodec = Okteta::ValueCodec::createCodec((Okteta::ValueCoding)DefaultValueCoding);
+    mValueCodec.reset(Okteta::ValueCodec::createCodec((Okteta::ValueCoding)DefaultValueCoding));
     mValueCoding = DefaultValueCoding;
-    mCharCodec = Okteta::CharCodec::createCodec(DefaultCharCoding());
+    mCharCodec.reset(Okteta::CharCodec::createCodec(DefaultCharCoding()));
 
     mStylist = new Okteta::PrintColumnStylist();
 
@@ -74,9 +74,9 @@ ByteArrayFrameRenderer::ByteArrayFrameRenderer()
     addColumn(mSecondBorderColumnRenderer);
     addColumn(mCharColumnRenderer);
 
-    mValueColumnRenderer->setValueCodec((Okteta::ValueCoding)mValueCoding, mValueCodec);
-    mValueColumnRenderer->setCharCodec(mCharCodec);
-    mCharColumnRenderer->setCharCodec(mCharCodec);
+    mValueColumnRenderer->setValueCodec((Okteta::ValueCoding)mValueCoding, mValueCodec.get());
+    mValueColumnRenderer->setCharCodec(mCharCodec.get());
+    mCharColumnRenderer->setCharCodec(mCharCodec.get());
 
     setFont(QFontDatabase::systemFont(QFontDatabase::FixedFont));
 }
@@ -86,8 +86,6 @@ ByteArrayFrameRenderer::~ByteArrayFrameRenderer()
     delete mStylist;
     delete mTableRanges;
     delete mLayout;
-    delete mValueCodec;
-    delete mCharCodec;
 }
 
 Okteta::AbstractByteArrayModel* ByteArrayFrameRenderer::byteArrayModel() const { return mByteArrayModel; }
@@ -275,11 +273,10 @@ void ByteArrayFrameRenderer::setValueCoding(Okteta::ValueCoding valueCoding)
         return;
     }
 
-    delete mValueCodec;
-    mValueCodec = newValueCodec;
+    mValueCodec.reset(newValueCodec);
     mValueCoding = valueCoding;
 
-    mValueColumnRenderer->setValueCodec((Okteta::ValueCoding)mValueCoding, mValueCodec);
+    mValueColumnRenderer->setValueCodec((Okteta::ValueCoding)mValueCoding, mValueCodec.get());
 
     const uint newCodingWidth = mValueCodec->encodingWidth();
 
@@ -300,11 +297,10 @@ void ByteArrayFrameRenderer::setCharCoding(const QString& newCharCodingName)
         return;
     }
 
-    delete mCharCodec;
-    mCharCodec = newCharCodec;
+    mCharCodec.reset(newCharCodec);
 
-    mValueColumnRenderer->setCharCodec(mCharCodec);
-    mCharColumnRenderer->setCharCodec(mCharCodec);
+    mValueColumnRenderer->setCharCodec(mCharCodec.get());
+    mCharColumnRenderer->setCharCodec(mCharCodec.get());
 }
 
 void ByteArrayFrameRenderer::setFont(const QFont& font)

@@ -38,11 +38,7 @@ StatisticTableModel::StatisticTableModel(int* byteCount, QObject* parent)
 {
 }
 
-StatisticTableModel::~StatisticTableModel()
-{
-    delete mValueCodec;
-    delete mCharCodec;
-}
+StatisticTableModel::~StatisticTableModel() = default;
 
 void StatisticTableModel::update(int size)
 {
@@ -88,10 +84,8 @@ void StatisticTableModel::setValueCoding(int valueCoding)
         return;
     }
 
-    delete mValueCodec;
-
     mValueCoding = (Okteta::ValueCoding)valueCoding;
-    mValueCodec = Okteta::ValueCodec::createCodec(mValueCoding);
+    mValueCodec.reset(Okteta::ValueCodec::createCodec(mValueCoding));
 //     CodedByte.resize( ByteCodec->encodingWidth() );
 
     Q_EMIT dataChanged(index(0, ValueId), index(StatisticsByteSetSize - 1, ValueId));
@@ -104,8 +98,7 @@ void StatisticTableModel::setCharCodec(const QString& codecName)
         return;
     }
 
-    delete mCharCodec;
-    mCharCodec = Okteta::CharCodec::createCodec(codecName);
+    mCharCodec.reset(Okteta::CharCodec::createCodec(codecName));
 
     Q_EMIT dataChanged(index(0, CharacterId), index(StatisticsByteSetSize - 1, CharacterId));
 }

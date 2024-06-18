@@ -41,18 +41,11 @@ ByteTableModel::ByteTableModel(QObject* parent)
         Okteta::BinaryCoding
     };
     for (int i = 0; i < NofOfValueCodings; ++i) {
-        mValueCodec[i] = Okteta::ValueCodec::createCodec(CodingIds[i]);
+        mValueCodec[i].reset(Okteta::ValueCodec::createCodec(CodingIds[i]));
     }
 }
 
-ByteTableModel::~ByteTableModel()
-{
-    for (auto* codec : std::as_const(mValueCodec)) {
-        delete codec;
-    }
-
-    delete mCharCodec;
-}
+ByteTableModel::~ByteTableModel() = default;
 
 void ByteTableModel::setSubstituteChar(QChar substituteChar)
 {
@@ -90,8 +83,7 @@ void ByteTableModel::setCharCodec(const QString& codecName)
         return;
     }
 
-    delete mCharCodec;
-    mCharCodec = Okteta::CharCodec::createCodec(codecName);
+    mCharCodec.reset(Okteta::CharCodec::createCodec(codecName));
 
     Q_EMIT dataChanged(index(0, CharacterId), index(ByteSetSize - 1, CharacterId));
 }

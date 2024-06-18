@@ -52,8 +52,8 @@ void ByteArrayRowViewPrivate::init()
     mInactiveCoding = AbstractByteArrayView::ValueCodingId;
 
     // set char encoding
-    mByteArrayColumn->setValueCodec((ValueCoding)mValueCoding, mValueCodec);
-    mByteArrayColumn->setCharCodec(mCharCodec);
+    mByteArrayColumn->setValueCodec((ValueCoding)mValueCoding, mValueCodec.get());
+    mByteArrayColumn->setCharCodec(mCharCodec.get());
 //     mByteArrayColumn->setActiveCoding( mActiveCoding );
 
     adaptController();
@@ -96,7 +96,7 @@ void ByteArrayRowViewPrivate::setValueCoding(AbstractByteArrayView::ValueCoding 
 
     AbstractByteArrayViewPrivate::setValueCoding(valueCoding);
 
-    mByteArrayColumn->setValueCodec((ValueCoding)mValueCoding, mValueCodec);
+    mByteArrayColumn->setValueCodec((ValueCoding)mValueCoding, mValueCodec.get());
     mValueEditor->adaptToValueCodecChange();
 
     const uint newCodingWidth = mValueCodec->encodingWidth();
@@ -201,7 +201,7 @@ void ByteArrayRowViewPrivate::setCharCoding(const QString& newCharCodingName)
 
     pauseCursor();
 
-    mByteArrayColumn->setCharCodec(mCharCodec);
+    mByteArrayColumn->setCharCodec(mCharCodec.get());
 
     updateColumn(*mByteArrayColumn);
 

@@ -13,6 +13,8 @@
 #include <Okteta/OktetaCore>
 // Qt
 #include <QSpinBox>
+// Std
+#include <memory>
 
 namespace Okteta {
 class ValueCodec;
@@ -33,7 +35,7 @@ protected: // QSpinBox API
     QValidator::State validate(QString& text, int& pos) const override;
 
 protected:
-    const Okteta::ValueCodec* mValueCodec;
+    const std::unique_ptr<const Okteta::ValueCodec> mValueCodec;
 };
 
 }

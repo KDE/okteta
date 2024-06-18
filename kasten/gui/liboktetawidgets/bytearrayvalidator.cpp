@@ -22,11 +22,7 @@ ByteArrayValidator::ByteArrayValidator(QObject* parent, Coding codecId, const QS
     setCodec(codecId);
 }
 
-ByteArrayValidator::~ByteArrayValidator()
-{
-    delete mValueCodec;
-    delete mCharCodec;
-}
+ByteArrayValidator::~ByteArrayValidator() = default;
 
 void ByteArrayValidator::setCharCodec(const QString& charCodecName)
 {
@@ -34,8 +30,7 @@ void ByteArrayValidator::setCharCodec(const QString& charCodecName)
         return;
     }
 
-    delete mCharCodec;
-    mCharCodec = CharCodec::createCodec(charCodecName);
+    mCharCodec.reset(CharCodec::createCodec(charCodecName));
 }
 
 void ByteArrayValidator::setCodec(Coding codecId)
@@ -48,8 +43,7 @@ void ByteArrayValidator::setCodec(Coding codecId)
 
     if (mCodecId != CharCoding
         && mCodecId != Utf8Coding) {
-        delete mValueCodec;
-        mValueCodec = ValueCodec::createCodec((Okteta::ValueCoding)mCodecId);
+        mValueCodec.reset(ValueCodec::createCodec((Okteta::ValueCoding)mCodecId));
     }
 }
 

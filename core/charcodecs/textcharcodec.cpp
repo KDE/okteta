@@ -189,11 +189,7 @@ TextCharCodec::TextCharCodec(QTextCodec* textCodec)
 {
 }
 
-TextCharCodec::~TextCharCodec()
-{
-    delete mDecoder;
-    delete mEncoder;
-}
+TextCharCodec::~TextCharCodec() = default;
 
 bool TextCharCodec::canEncode(QChar _char) const
 {

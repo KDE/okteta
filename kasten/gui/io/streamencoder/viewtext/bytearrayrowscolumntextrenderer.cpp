@@ -43,8 +43,6 @@ ByteArrayRowsColumnTextRenderer::ByteArrayRowsColumnTextRenderer(const Okteta::A
 ByteArrayRowsColumnTextRenderer::~ByteArrayRowsColumnTextRenderer()
 {
     delete [] mLinePositions;
-    delete mCharCodec;
-    delete mValueCodec;
 }
 
 int ByteArrayRowsColumnTextRenderer::noOfSublinesNeeded() const

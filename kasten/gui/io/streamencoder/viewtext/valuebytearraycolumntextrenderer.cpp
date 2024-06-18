@@ -28,10 +28,7 @@ ValueByteArrayColumnTextRenderer::ValueByteArrayColumnTextRenderer(
     setWidths(mValueCodec->encodingWidth(), byteSpacingWidth, noOfGroupedBytes);
 }
 
-ValueByteArrayColumnTextRenderer::~ValueByteArrayColumnTextRenderer()
-{
-    delete mValueCodec;
-}
+ValueByteArrayColumnTextRenderer::~ValueByteArrayColumnTextRenderer() = default;
 
 void ValueByteArrayColumnTextRenderer::renderLine(QTextStream* stream, bool isSubline) const
 {

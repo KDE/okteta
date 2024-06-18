@@ -18,6 +18,8 @@
 #include <Okteta/Address>
 // Qt
 #include <QVector>
+// Std
+#include <memory>
 
 namespace Okteta {
 class AbstractTypeCodec;
@@ -110,7 +112,7 @@ private: // source
     bool mIsPodMarked : 1;
 
     QVector<Okteta::AbstractTypeCodec*> mTypeCodecs;
-    const Okteta::CharCodec* mCharCodec;
+    std::unique_ptr<const Okteta::CharCodec> mCharCodec;
     AbstractDifferentSizeDialog* mDifferentSizeDialog = nullptr;
 
 private: // settings
@@ -124,7 +126,7 @@ private: // decoded data
 
 inline bool PODDecoderTool::isUnsignedAsHex() const { return mUnsignedAsHex; }
 inline QSysInfo::Endian PODDecoderTool::byteOrder() const { return mPODData.byteOrder(); }
-inline const Okteta::CharCodec* PODDecoderTool::charCodec() const { return mCharCodec; }
+inline const Okteta::CharCodec* PODDecoderTool::charCodec() const { return mCharCodec.get(); }
 
 }
 

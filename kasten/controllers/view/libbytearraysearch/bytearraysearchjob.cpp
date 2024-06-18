@@ -29,10 +29,7 @@ ByteArraySearchJob::ByteArraySearchJob(const Okteta::AbstractByteArrayModel* mod
 {
 }
 
-ByteArraySearchJob::~ByteArraySearchJob()
-{
-    delete mCharCodec;
-}
+ByteArraySearchJob::~ByteArraySearchJob() = default;
 
 Okteta::AddressRange ByteArraySearchJob::exec()
 {
@@ -51,7 +48,7 @@ void ByteArraySearchJob::start()
     if (searchForward) {
         resultIndex = (mCaseSensitivity == Qt::CaseSensitive) ?
                  mByteArrayModel->indexOf(mSearchData, mStartIndex, mEndIndex) :
-                 mByteArrayModel->indexOfCaseInsensitive(mCharCodec, mSearchData, mStartIndex, mEndIndex);
+                 mByteArrayModel->indexOfCaseInsensitive(mCharCodec.get(), mSearchData, mStartIndex, mEndIndex);
     } else {
         const Okteta::Address lastFromIndex = mStartIndex - mSearchData.size() + 1;
         // Does not fit? Also prevent negative value for lastFromIndex,
@@ -61,7 +58,7 @@ void ByteArraySearchJob::start()
         } else {
             resultIndex = (mCaseSensitivity == Qt::CaseSensitive) ?
                  mByteArrayModel->lastIndexOf(mSearchData, lastFromIndex, mEndIndex) :
-                 mByteArrayModel->lastIndexOfCaseInsensitive(mCharCodec, mSearchData, lastFromIndex, mEndIndex);
+                 mByteArrayModel->lastIndexOfCaseInsensitive(mCharCodec.get(), mSearchData, lastFromIndex, mEndIndex);
         }
     }
 

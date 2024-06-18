@@ -17,6 +17,8 @@
 #include <Okteta/OktetaCore>
 // Qt
 #include <QChar>
+// Std
+#include <memory>
 
 namespace Okteta {
 class ValueCodec;
@@ -62,8 +64,8 @@ private:
     const int mNoOfBytesPerLine;
 
     const int mVisibleCodings;
-    const Okteta::ValueCodec* mValueCodec;
-    const Okteta::CharCodec* mCharCodec;
+    const std::unique_ptr<const Okteta::ValueCodec> mValueCodec;
+    const std::unique_ptr<const Okteta::CharCodec> mCharCodec;
     const QChar mSubstituteChar;
     const QChar mUndefinedChar;
 

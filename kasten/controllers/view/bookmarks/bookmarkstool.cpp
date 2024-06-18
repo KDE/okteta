@@ -117,10 +117,10 @@ Okteta::Bookmark BookmarksTool::createBookmark()
         const int cursorPosition = mByteArrayView->cursorPosition();
 
         // search for text at cursor
-        const Okteta::CharCodec* charCodec = Okteta::CharCodec::createCodec(mByteArrayView->charCodingName());
-        const Okteta::TextByteArrayAnalyzer textAnalyzer(mByteArray, charCodec);
+        std::unique_ptr<const Okteta::CharCodec> charCodec(Okteta::CharCodec::createCodec(mByteArrayView->charCodingName()));
+        const Okteta::TextByteArrayAnalyzer textAnalyzer(mByteArray, charCodec.get());
         QString bookmarkName = textAnalyzer.text(cursorPosition, cursorPosition + MaxBookmarkNameSize - 1);
-        delete charCodec;
+        charCodec.reset();
 
         if (bookmarkName.isEmpty()) {
             bookmarkName = i18nc("default name of a bookmark", "Bookmark");

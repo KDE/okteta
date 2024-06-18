@@ -21,6 +21,8 @@
 // Okteta core
 #include <Okteta/AbstractByteArrayModel>
 #include <Okteta/CharCodec>
+// Std
+#include <memory>
 
 namespace Okteta {
 
@@ -311,11 +313,11 @@ protected:
 
     // parameters
     /** */
-    const ValueCodec* mValueCodec;
+    std::unique_ptr<const ValueCodec> mValueCodec;
     /** */
     AbstractByteArrayView::ValueCoding mValueCoding;
     /** */
-    const CharCodec* mCharCodec;
+    std::unique_ptr<const CharCodec> mCharCodec;
     /** style of resizing */
     AbstractByteArrayView::LayoutStyle mResizeStyle;
 
@@ -337,9 +339,9 @@ inline ByteArrayTableLayout* AbstractByteArrayViewPrivate::layout()      const {
 inline ByteArrayTableCursor* AbstractByteArrayViewPrivate::tableCursor() const { return mTableCursor; }
 inline ByteArrayTableRanges* AbstractByteArrayViewPrivate::tableRanges() const { return mTableRanges; }
 
-inline const ValueCodec* AbstractByteArrayViewPrivate::valueCodec()  const { return mValueCodec; }
+inline const ValueCodec* AbstractByteArrayViewPrivate::valueCodec()  const { return mValueCodec.get(); }
 inline AbstractByteArrayView::ValueCoding AbstractByteArrayViewPrivate::valueCoding() const { return mValueCoding; }
-inline const CharCodec* AbstractByteArrayViewPrivate::charCodec()   const { return mCharCodec; }
+inline const CharCodec* AbstractByteArrayViewPrivate::charCodec()   const { return mCharCodec.get(); }
 inline QString AbstractByteArrayViewPrivate::charCodingName() const { return mCharCodec->name(); }
 inline AbstractByteArrayView::LayoutStyle AbstractByteArrayViewPrivate::layoutStyle() const { return mResizeStyle; }
 inline Address AbstractByteArrayViewPrivate::cursorPosition()   const { return mTableCursor->realIndex(); }

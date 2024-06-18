@@ -13,6 +13,8 @@
 #include "stringdata.hpp"
 
 #include <QVector>
+// Std
+#include <memory>
 
 namespace Okteta {
 class CharCodec;
@@ -35,7 +37,7 @@ public:
 
 private:
     QVector<quint8> mData;
-    const Okteta::CharCodec* mCodec;
+    const std::unique_ptr<const Okteta::CharCodec> mCodec;
 };
 
 #endif // KASTEN_EBCDICSTRINGDATA_HPP

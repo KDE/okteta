@@ -13,6 +13,8 @@
 #include "abstractbytearraycolumntextrenderer.hpp"
 // Okteta core
 #include <Okteta/OktetaCore>
+// Std
+#include <memory>
 
 namespace Okteta {
 class ValueCodec;
@@ -34,7 +36,7 @@ protected: // AbstractByteArrayColumnTextRenderer API
     void renderLine(QTextStream* stream, bool isSubline) const override;
 
 private:
-    const Okteta::ValueCodec* mValueCodec;
+    const std::unique_ptr<const Okteta::ValueCodec> mValueCodec;
 };
 
 }

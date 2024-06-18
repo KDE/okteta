@@ -19,6 +19,8 @@
 #include <Okteta/Size>
 // Qt
 #include <QFont>
+// Std
+#include <memory>
 
 namespace Okteta {
 class OffsetColumnRenderer;
@@ -154,11 +156,11 @@ private:
 
 private:
     /** */
-    const Okteta::ValueCodec* mValueCodec;
+    std::unique_ptr<const Okteta::ValueCodec> mValueCodec;
     /** */
     Okteta::ValueCoding mValueCoding;
     /** */
-    const Okteta::CharCodec* mCharCodec = nullptr;
+    std::unique_ptr<const Okteta::CharCodec> mCharCodec;
 
 private: // parameters
     LayoutStyle mResizeStyle;

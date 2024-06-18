@@ -87,7 +87,6 @@ PODDecoderTool::PODDecoderTool()
 
 PODDecoderTool::~PODDecoderTool()
 {
-    delete mCharCodec;
     qDeleteAll(mTypeCodecs);
 }
 
@@ -151,7 +150,7 @@ void PODDecoderTool::setupDecoder()
     mTypeCodecs[Unsigned64BitId] = new Okteta::UInt64Codec();
     mTypeCodecs[Float32BitId] =    new Okteta::Float32Codec();
     mTypeCodecs[Float64BitId] =    new Okteta::Float64Codec();
-    mTypeCodecs[Char8BitId] =      new Okteta::Char8Codec(mCharCodec);
+    mTypeCodecs[Char8BitId] =      new Okteta::Char8Codec(mCharCodec.get());
     mTypeCodecs[UTF8Id] =          new Okteta::Utf8Codec();
     mTypeCodecs[UTF16Id] =         new Okteta::Utf16Codec();
 
@@ -196,9 +195,8 @@ void PODDecoderTool::onCharCodecChange(const QString& codecName)
         return;
     }
 
-    delete mCharCodec;
-    mCharCodec = Okteta::CharCodec::createCodec(codecName);
-    static_cast<Okteta::Char8Codec*>(mTypeCodecs[Char8BitId])->setCharCodec(mCharCodec);
+    mCharCodec.reset(Okteta::CharCodec::createCodec(codecName));
+    static_cast<Okteta::Char8Codec*>(mTypeCodecs[Char8BitId])->setCharCodec(mCharCodec.get());
     updateData();
 }
 

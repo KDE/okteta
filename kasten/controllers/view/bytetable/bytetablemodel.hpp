@@ -12,6 +12,8 @@
 // Qt
 #include <QAbstractTableModel>
 #include <QFont>
+// Std
+#include <memory>
 
 namespace Okteta {
 class CharCodec;
@@ -57,8 +59,8 @@ private:
     static constexpr int NofOfValueCodings = 4;
 
 private:
-    const Okteta::ValueCodec* mValueCodec[NofOfValueCodings];
-    const Okteta::CharCodec* mCharCodec;
+    std::unique_ptr<const Okteta::ValueCodec> mValueCodec[NofOfValueCodings];
+    std::unique_ptr<const Okteta::CharCodec> mCharCodec;
     QChar mSubstituteChar;
     QChar mUndefinedChar;
     QFont mFixedFont;

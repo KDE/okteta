@@ -13,6 +13,8 @@
 #include <charcodec.hpp>
 // Qt
 #include <QString>
+// Std
+#include <memory>
 
 class QTextCodec;
 class QTextDecoder;
@@ -47,9 +49,9 @@ public: // CharCodec API
 private:
     QTextCodec* mCodec;
     /** decodes the chars to unicode */
-    QTextDecoder* mDecoder;
+    const std::unique_ptr<QTextDecoder> mDecoder;
     /** encodes the chars from unicode */
-    QTextEncoder* mEncoder;
+    const std::unique_ptr<QTextEncoder> mEncoder;
     /** */
     mutable QString mName;
 };

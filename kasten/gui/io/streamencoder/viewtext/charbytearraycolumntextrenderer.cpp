@@ -30,10 +30,7 @@ CharByteArrayColumnTextRenderer::CharByteArrayColumnTextRenderer(
     setWidths(1, byteSpacingWidth, noOfGroupedBytes);
 }
 
-CharByteArrayColumnTextRenderer::~CharByteArrayColumnTextRenderer()
-{
-    delete mCharCodec;
-}
+CharByteArrayColumnTextRenderer::~CharByteArrayColumnTextRenderer() = default;
 
 void CharByteArrayColumnTextRenderer::renderLine(QTextStream* stream, bool isSubline) const
 {

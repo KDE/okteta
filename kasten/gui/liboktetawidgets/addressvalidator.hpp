@@ -15,6 +15,8 @@
 // Qt
 #include <QValidator>
 #include <QRegularExpression>
+// Std
+#include <memory>
 
 namespace Okteta {
 
@@ -61,7 +63,7 @@ public:
 
 private:
     Coding mCodecId;
-    const ValueCodec* mValueCodec;
+    std::unique_ptr<const ValueCodec> mValueCodec;
 
     static const QRegularExpression expressionRegex;
 };

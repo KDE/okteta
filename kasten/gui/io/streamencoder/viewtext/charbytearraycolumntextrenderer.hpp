@@ -13,6 +13,8 @@
 #include "abstractbytearraycolumntextrenderer.hpp"
 // Qt
 #include <QChar>
+// Std
+#include <memory>
 
 namespace Okteta {
 class CharCodec;
@@ -34,7 +36,7 @@ protected: // AbstractByteArrayColumnTextRenderer API
     void renderLine(QTextStream* stream, bool isSubline) const override;
 
 private:
-    const Okteta::CharCodec* mCharCodec;
+    const std::unique_ptr<const Okteta::CharCodec> mCharCodec;
     const QChar mSubstituteChar;
     const QChar mUndefinedChar;
 };

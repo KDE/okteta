@@ -185,12 +185,12 @@ void StringsExtractTool::extractStrings()
 
     QApplication::setOverrideCursor(Qt::WaitCursor);
 
-    const Okteta::CharCodec* charCodec = Okteta::CharCodec::createCodec(mByteArrayView->charCodingName());
+    std::unique_ptr<const Okteta::CharCodec> charCodec(Okteta::CharCodec::createCodec(mByteArrayView->charCodingName()));
     auto* extractStringsJob =
-        new ExtractStringsJob(mByteArrayModel, mByteArrayView->selection(), charCodec, mMinLength,
+        new ExtractStringsJob(mByteArrayModel, mByteArrayView->selection(), charCodec.get(), mMinLength,
                               &mContainedStringList);
     extractStringsJob->exec();
-    delete charCodec;
+    charCodec.reset();
 
     QApplication::restoreOverrideCursor();
 

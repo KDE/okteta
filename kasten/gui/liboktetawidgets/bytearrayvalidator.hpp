@@ -13,6 +13,8 @@
 #include <Okteta/OktetaCore>
 // Qt
 #include <QValidator>
+// Std
+#include <memory>
 
 namespace Okteta {
 class ValueCodec;
@@ -75,8 +77,8 @@ private:
 //     QString zeroExtend( const QString &src, int destLen ) const;
 
     Coding mCodecId = InvalidCoding;
-    const ValueCodec* mValueCodec = nullptr;
-    const CharCodec* mCharCodec;
+    std::unique_ptr<const ValueCodec> mValueCodec;
+    std::unique_ptr<const CharCodec> mCharCodec;
     int mMaxLength = 32767;
     int mMinLength = 0;
 };

@@ -44,7 +44,7 @@ bool ByteArrayCharsStreamEncoder::encodeDataToStream(QIODevice* device,
     // encode
     QTextStream textStream(device);
 
-    const Okteta::CharCodec* charCodec = Okteta::CharCodec::createCodec(mSettings.codecName);
+    const std::unique_ptr<Okteta::CharCodec> charCodec(Okteta::CharCodec::createCodec(mSettings.codecName));
     const QChar tabChar = QLatin1Char('\t');
     const QChar returnChar = QLatin1Char('\n');
 
@@ -58,9 +58,6 @@ bool ByteArrayCharsStreamEncoder::encodeDataToStream(QIODevice* device,
                                                                (QChar)byteChar;
         textStream << streamChar;
     }
-
-    // clean up
-    delete charCodec;
 
     return success;
 }
