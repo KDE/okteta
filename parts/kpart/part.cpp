@@ -78,8 +78,8 @@ OktetaPart::OktetaPart(QObject* parent,
     setMetaData(metaData);
 
     auto* widget = new QWidget();
-    mLayout = new QVBoxLayout(widget);
-    mLayout->setContentsMargins(0, 0, 0, 0);
+    auto* layout = new QVBoxLayout(widget);
+    layout->setContentsMargins(0, 0, 0, 0);
 
     setWidget(widget);
 
@@ -87,8 +87,8 @@ OktetaPart::OktetaPart(QObject* parent,
 
     mSingleViewArea = new Kasten::SingleViewArea();
     QWidget* areaWidget = mSingleViewArea->widget();
-    mLayout->addWidget(areaWidget);
-    mLayout->parentWidget()->setFocusProxy(areaWidget);
+    layout->addWidget(areaWidget);
+    layout->parentWidget()->setFocusProxy(areaWidget);
 
     if (modus == Modus::ReadWrite) {
         addController(Kasten::VersionControllerFactory());

@@ -29,7 +29,6 @@ class AbstractXmlGuiControllerFactory;
 class AbstractDocument;
 }
 class KPluginMetaData;
-class QVBoxLayout;
 
 class OktetaPart : public KParts::ReadWritePart
 {
@@ -80,7 +79,6 @@ private Q_SLOTS:
 
 private:
     const Modus mModus;
-    QVBoxLayout* mLayout;
 
     Kasten::ByteArrayDocument* mDocument;
     Kasten::ByteArrayView* mByteArrayView;
