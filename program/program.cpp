@@ -62,21 +62,14 @@ OktetaProgram::OktetaProgram(int& argc, char* argv[])
     KCrash::initialize();
 }
 
-OktetaProgram::~OktetaProgram()
-{
-    delete mDocumentStrategy;
-    delete mDocumentManager;
-    delete mViewManager;
-    delete mDialogHandler;
-    delete mByteArrayViewProfileManager;
-}
+OktetaProgram::~OktetaProgram() = default;
 
 int OktetaProgram::execute()
 {
-    mDocumentManager = new DocumentManager();
-    mViewManager = new ViewManager();
-    mDocumentStrategy = new MultiDocumentStrategy(mDocumentManager, mViewManager);
-    mDialogHandler = new DialogHandler();
+    mDocumentManager = std::make_unique<DocumentManager>();
+    mViewManager = std::make_unique<ViewManager>();
+    mDocumentStrategy = std::make_unique<MultiDocumentStrategy>(mDocumentManager.get(), mViewManager.get());
+    mDialogHandler = std::make_unique<DialogHandler>();
 
     OktetaAboutData aboutData;
     KAboutData::setApplicationData(aboutData);
@@ -99,7 +92,7 @@ int OktetaProgram::execute()
     KDBusService programDBusService(KDBusService::Multiple | KDBusService::NoExitOnFailure);
 
     // TODO:
-    mByteArrayViewProfileManager = new ByteArrayViewProfileManager();
+    mByteArrayViewProfileManager = std::make_unique<ByteArrayViewProfileManager>();
     // mModelManagerManager->addModelManager( byteArrayViewProfileManager );
 
     const QVector<AbstractModelStreamEncoder*> encoderList =
@@ -116,13 +109,13 @@ int OktetaProgram::execute()
 
     mDocumentManager->codecManager()->setEncoders(encoderList);
     mDocumentManager->codecManager()->setGenerators(generatorList);
-    mDocumentManager->codecManager()->setOverwriteDialog(mDialogHandler);
+    mDocumentManager->codecManager()->setOverwriteDialog(mDialogHandler.get());
     mDocumentManager->createManager()->setDocumentFactory(new ByteArrayDocumentFactory());
     mDocumentManager->syncManager()->setDocumentSynchronizerFactory(new ByteArrayRawFileSynchronizerFactory());
-    mDocumentManager->syncManager()->setOverwriteDialog(mDialogHandler);
-    mDocumentManager->syncManager()->setSaveDiscardDialog(mDialogHandler);
+    mDocumentManager->syncManager()->setOverwriteDialog(mDialogHandler.get());
+    mDocumentManager->syncManager()->setSaveDiscardDialog(mDialogHandler.get());
 
-    mViewManager->setViewFactory(new ByteArrayViewFactory(mByteArrayViewProfileManager));
+    mViewManager->setViewFactory(new ByteArrayViewFactory(mByteArrayViewProfileManager.get()));
     mViewManager->codecViewManager()->setEncoderConfigEditorFactories(encoderConfigEditorFactoryList);
     mViewManager->codecViewManager()->setGeneratorConfigEditorFactories(generatorConfigEditorFactoryList);
 

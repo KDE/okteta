@@ -11,6 +11,8 @@
 
 // Qt
 #include <QApplication>
+// Std
+#include <memory>
 
 namespace Kasten {
 
@@ -43,19 +45,20 @@ public:
 private:
     QApplication mApp;
 
-    DocumentManager* mDocumentManager;
-    ViewManager* mViewManager;
-    MultiDocumentStrategy* mDocumentStrategy;
+    // in (reverse) order of destruction
+    std::unique_ptr<ByteArrayViewProfileManager> mByteArrayViewProfileManager;
 
-    DialogHandler* mDialogHandler;
+    std::unique_ptr<DialogHandler> mDialogHandler;
 
-    ByteArrayViewProfileManager* mByteArrayViewProfileManager;
+    std::unique_ptr<DocumentManager> mDocumentManager;
+    std::unique_ptr<ViewManager> mViewManager;
+    std::unique_ptr<MultiDocumentStrategy> mDocumentStrategy;
 };
 
-inline DocumentManager* OktetaProgram::documentManager() { return mDocumentManager; }
-inline ViewManager* OktetaProgram::viewManager()         { return mViewManager; }
-inline MultiDocumentStrategy* OktetaProgram::documentStrategy() { return mDocumentStrategy; }
-inline ByteArrayViewProfileManager* OktetaProgram::byteArrayViewProfileManager() { return mByteArrayViewProfileManager; }
+inline DocumentManager* OktetaProgram::documentManager() { return mDocumentManager.get(); }
+inline ViewManager* OktetaProgram::viewManager()         { return mViewManager.get(); }
+inline MultiDocumentStrategy* OktetaProgram::documentStrategy() { return mDocumentStrategy.get(); }
+inline ByteArrayViewProfileManager* OktetaProgram::byteArrayViewProfileManager() { return mByteArrayViewProfileManager.get(); }
 
 }
 
