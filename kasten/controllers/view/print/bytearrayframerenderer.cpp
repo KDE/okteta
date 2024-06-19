@@ -43,30 +43,29 @@ static constexpr int BAFInitialWidth = 50;
 ByteArrayFrameRenderer::ByteArrayFrameRenderer()
     : mHeight(BAFInitialHeight)
     , mWidth(BAFInitialWidth)
+    , mLayout(new Okteta::ByteArrayTableLayout(DefaultNoOfBytesPerLine, DefaultFirstLineOffset, DefaultStartOffset, 0, 0))
+    , mTableRanges(new Okteta::ByteArrayTableRanges(mLayout.get()))
+    , mStylist(new Okteta::PrintColumnStylist())
     , mResizeStyle(DefaultResizeStyle)
 {
-    mLayout = new Okteta::ByteArrayTableLayout(DefaultNoOfBytesPerLine, DefaultFirstLineOffset, DefaultStartOffset, 0, 0);
     mLayout->setNoOfLinesPerPage(noOfLinesPerFrame());
-    mTableRanges = new Okteta::ByteArrayTableRanges(mLayout);
 
     // set codecs
     mValueCodec.reset(Okteta::ValueCodec::createCodec((Okteta::ValueCoding)DefaultValueCoding));
     mValueCoding = DefaultValueCoding;
     mCharCodec.reset(Okteta::CharCodec::createCodec(DefaultCharCoding()));
 
-    mStylist = new Okteta::PrintColumnStylist();
-
     // creating the columns in the needed order
     mOffsetColumnRenderer =
-        new Okteta::OffsetColumnRenderer(mStylist, mLayout, DefaultOffsetCoding);
+        new Okteta::OffsetColumnRenderer(mStylist.get(), mLayout.get(), DefaultOffsetCoding);
     mFirstBorderColumnRenderer =
-        new Okteta::BorderColumnRenderer(mStylist, true, false);
+        new Okteta::BorderColumnRenderer(mStylist.get(), true, false);
     mValueColumnRenderer =
-        new Okteta::ValueByteArrayColumnRenderer(mStylist, mByteArrayModel, mLayout, mTableRanges);
+        new Okteta::ValueByteArrayColumnRenderer(mStylist.get(), mByteArrayModel, mLayout.get(), mTableRanges.get());
     mSecondBorderColumnRenderer =
-        new Okteta::BorderColumnRenderer(mStylist, true, false);
+        new Okteta::BorderColumnRenderer(mStylist.get(), true, false);
     mCharColumnRenderer =
-        new Okteta::CharByteArrayColumnRenderer(mStylist, mByteArrayModel, mLayout, mTableRanges);
+        new Okteta::CharByteArrayColumnRenderer(mStylist.get(), mByteArrayModel, mLayout.get(), mTableRanges.get());
 
     addColumn(mOffsetColumnRenderer);
     addColumn(mFirstBorderColumnRenderer);
@@ -81,12 +80,7 @@ ByteArrayFrameRenderer::ByteArrayFrameRenderer()
     setFont(QFontDatabase::systemFont(QFontDatabase::FixedFont));
 }
 
-ByteArrayFrameRenderer::~ByteArrayFrameRenderer()
-{
-    delete mStylist;
-    delete mTableRanges;
-    delete mLayout;
-}
+ByteArrayFrameRenderer::~ByteArrayFrameRenderer() = default;
 
 Okteta::AbstractByteArrayModel* ByteArrayFrameRenderer::byteArrayModel() const { return mByteArrayModel; }
 Okteta::Address ByteArrayFrameRenderer::offset()                         const { return mLayout->startOffset(); }

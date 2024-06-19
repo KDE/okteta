@@ -141,18 +141,19 @@ private:
 
     Okteta::AbstractByteArrayModel* mByteArrayModel = nullptr;
 
+    // in (reverse) order of destruction
 private:
     /** holds the logical layout */
-    Okteta::ByteArrayTableLayout* mLayout;
-    Okteta::ByteArrayTableRanges* mTableRanges;
+    std::unique_ptr<Okteta::ByteArrayTableLayout> mLayout;
+    std::unique_ptr<Okteta::ByteArrayTableRanges> mTableRanges;
 
 private:
+    std::unique_ptr<Okteta::PrintColumnStylist> mStylist;
     Okteta::OffsetColumnRenderer*         mOffsetColumnRenderer;
     Okteta::BorderColumnRenderer*         mFirstBorderColumnRenderer;
     Okteta::ValueByteArrayColumnRenderer* mValueColumnRenderer;
     Okteta::BorderColumnRenderer*         mSecondBorderColumnRenderer;
     Okteta::CharByteArrayColumnRenderer*  mCharColumnRenderer;
-    Okteta::PrintColumnStylist* mStylist;
 
 private:
     /** */
