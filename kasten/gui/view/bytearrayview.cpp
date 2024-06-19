@@ -24,8 +24,8 @@ namespace Kasten {
 
 ByteArrayView::ByteArrayView(ByteArrayDocument* document, ByteArrayViewProfileSynchronizer* synchronizer)
     : AbstractView(document)
-    , mDocument(document)
     , mByteArrayViewProfileSynchronizer(synchronizer)
+    , mDocument(document)
 {
     init();
     if (synchronizer) {
@@ -36,8 +36,8 @@ ByteArrayView::ByteArrayView(ByteArrayDocument* document, ByteArrayViewProfileSy
 ByteArrayView::ByteArrayView(ByteArrayView* other, ByteArrayViewProfileSynchronizer* synchronizer,
                              Qt::Alignment alignment)
     : AbstractView(static_cast<ByteArrayDocument*>(other->baseModel()))
-    , mDocument(static_cast<ByteArrayDocument*>(other->baseModel()))
     , mByteArrayViewProfileSynchronizer(synchronizer)
+    , mDocument(static_cast<ByteArrayDocument*>(other->baseModel()))
 {
     init();
 
@@ -89,16 +89,12 @@ ByteArrayView::ByteArrayView(ByteArrayView* other, ByteArrayViewProfileSynchroni
     }
 }
 
-ByteArrayView::~ByteArrayView()
-{
-    delete mByteArrayViewProfileSynchronizer;
-    delete mWidget;
-}
+ByteArrayView::~ByteArrayView() = default;
 
 void ByteArrayView::init()
 {
     Okteta::AbstractByteArrayModel* content = mDocument->content();
-    mWidget = new Okteta::ByteArrayJanusView();
+    mWidget.reset(new Okteta::ByteArrayJanusView());
     mWidget->setByteArrayModel(content);
 
     // TODO: find a signal/event emitted when fixedfont changes
@@ -114,36 +110,36 @@ void ByteArrayView::init()
     // propagate signals
     using Okteta::ByteArrayJanusView;
     connect(mDocument, &ByteArrayDocument::titleChanged, this, &ByteArrayView::titleChanged);
-    connect(mWidget, &ByteArrayJanusView::hasSelectedDataChanged, this, &ByteArrayView::hasSelectedDataChanged);
-    connect(mWidget, &ByteArrayJanusView::readOnlyChanged, this, &ByteArrayView::readOnlyChanged);
-    connect(mWidget, &ByteArrayJanusView::overwriteModeChanged, this, &ByteArrayView::overwriteModeChanged);
-    connect(mWidget, &ByteArrayJanusView::overwriteModeChanged, this, &ByteArrayView::onOverwriteModeChanged);
-    connect(mWidget, &ByteArrayJanusView::selectionChanged, this, &ByteArrayView::onSelectionChanged);
-    connect(mWidget, &ByteArrayJanusView::cursorPositionChanged, this, &ByteArrayView::cursorPositionChanged);
-    connect(mWidget, &ByteArrayJanusView::valueCodingChanged, this, &ByteArrayView::valueCodingChanged);
-    connect(mWidget, &ByteArrayJanusView::charCodecChanged, this, &ByteArrayView::charCodecChanged);
-    connect(mWidget, &ByteArrayJanusView::focusChanged, this, &ByteArrayView::focusChanged);
+    connect(mWidget.get(), &ByteArrayJanusView::hasSelectedDataChanged, this, &ByteArrayView::hasSelectedDataChanged);
+    connect(mWidget.get(), &ByteArrayJanusView::readOnlyChanged, this, &ByteArrayView::readOnlyChanged);
+    connect(mWidget.get(), &ByteArrayJanusView::overwriteModeChanged, this, &ByteArrayView::overwriteModeChanged);
+    connect(mWidget.get(), &ByteArrayJanusView::overwriteModeChanged, this, &ByteArrayView::onOverwriteModeChanged);
+    connect(mWidget.get(), &ByteArrayJanusView::selectionChanged, this, &ByteArrayView::onSelectionChanged);
+    connect(mWidget.get(), &ByteArrayJanusView::cursorPositionChanged, this, &ByteArrayView::cursorPositionChanged);
+    connect(mWidget.get(), &ByteArrayJanusView::valueCodingChanged, this, &ByteArrayView::valueCodingChanged);
+    connect(mWidget.get(), &ByteArrayJanusView::charCodecChanged, this, &ByteArrayView::charCodecChanged);
+    connect(mWidget.get(), &ByteArrayJanusView::focusChanged, this, &ByteArrayView::focusChanged);
 
-    connect(mWidget, &ByteArrayJanusView::offsetColumnVisibleChanged, this, &ByteArrayView::offsetColumnVisibleChanged);
-    connect(mWidget, &ByteArrayJanusView::offsetCodingChanged, this, &ByteArrayView::offsetCodingChanged);
-    connect(mWidget, &ByteArrayJanusView::visibleByteArrayCodingsChanged, this, &ByteArrayView::visibleByteArrayCodingsChanged);
-    connect(mWidget, &ByteArrayJanusView::layoutStyleChanged, this, &ByteArrayView::layoutStyleChanged);
-    connect(mWidget, &ByteArrayJanusView::noOfBytesPerLineChanged, this, &ByteArrayView::noOfBytesPerLineChanged);
-    connect(mWidget, &ByteArrayJanusView::showsNonprintingChanged, this, &ByteArrayView::showsNonprintingChanged);
-    connect(mWidget, &ByteArrayJanusView::substituteCharChanged, this, &ByteArrayView::substituteCharChanged);
-    connect(mWidget, &ByteArrayJanusView::undefinedCharChanged, this, &ByteArrayView::undefinedCharChanged);
-    connect(mWidget, &ByteArrayJanusView::noOfGroupedBytesChanged, this, &ByteArrayView::noOfGroupedBytesChanged);
-    connect(mWidget, &ByteArrayJanusView::zoomLevelChanged, this, &ByteArrayView::zoomLevelChanged);
-    connect(mWidget, &ByteArrayJanusView::viewModusChanged, this, &ByteArrayView::viewModusChanged);
+    connect(mWidget.get(), &ByteArrayJanusView::offsetColumnVisibleChanged, this, &ByteArrayView::offsetColumnVisibleChanged);
+    connect(mWidget.get(), &ByteArrayJanusView::offsetCodingChanged, this, &ByteArrayView::offsetCodingChanged);
+    connect(mWidget.get(), &ByteArrayJanusView::visibleByteArrayCodingsChanged, this, &ByteArrayView::visibleByteArrayCodingsChanged);
+    connect(mWidget.get(), &ByteArrayJanusView::layoutStyleChanged, this, &ByteArrayView::layoutStyleChanged);
+    connect(mWidget.get(), &ByteArrayJanusView::noOfBytesPerLineChanged, this, &ByteArrayView::noOfBytesPerLineChanged);
+    connect(mWidget.get(), &ByteArrayJanusView::showsNonprintingChanged, this, &ByteArrayView::showsNonprintingChanged);
+    connect(mWidget.get(), &ByteArrayJanusView::substituteCharChanged, this, &ByteArrayView::substituteCharChanged);
+    connect(mWidget.get(), &ByteArrayJanusView::undefinedCharChanged, this, &ByteArrayView::undefinedCharChanged);
+    connect(mWidget.get(), &ByteArrayJanusView::noOfGroupedBytesChanged, this, &ByteArrayView::noOfGroupedBytesChanged);
+    connect(mWidget.get(), &ByteArrayJanusView::zoomLevelChanged, this, &ByteArrayView::zoomLevelChanged);
+    connect(mWidget.get(), &ByteArrayJanusView::viewModusChanged, this, &ByteArrayView::viewModusChanged);
 
-    connect(mWidget, &ByteArrayJanusView::viewContextMenuRequested, this, &ByteArrayView::viewContextMenuRequested);
+    connect(mWidget.get(), &ByteArrayJanusView::viewContextMenuRequested, this, &ByteArrayView::viewContextMenuRequested);
 }
 
-ByteArrayViewProfileSynchronizer* ByteArrayView::synchronizer() const { return mByteArrayViewProfileSynchronizer; }
+ByteArrayViewProfileSynchronizer* ByteArrayView::synchronizer() const { return mByteArrayViewProfileSynchronizer.get(); }
 
 const AbstractModelSelection* ByteArrayView::modelSelection() const { return &mSelection; }
 
-QWidget* ByteArrayView::widget()             const { return mWidget; }
+QWidget* ByteArrayView::widget()             const { return mWidget.get(); }
 bool ByteArrayView::hasFocus()               const { return mWidget->focusWidget()->hasFocus(); } // TODO: does this work?
 
 QString ByteArrayView::title()               const { return mDocument->title(); }

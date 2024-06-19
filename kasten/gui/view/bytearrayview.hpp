@@ -20,6 +20,8 @@
 #include <Kasten/SelectedDataWriteable>
 // Okteta core
 #include <Okteta/AddressRange>
+// Std
+#include <memory>
 
 namespace Okteta {
 class ByteArrayJanusView;
@@ -192,12 +194,13 @@ private Q_SLOTS:
     OKTETAKASTENGUI_NO_EXPORT void onOverwriteModeChanged(bool overwriteMode);
 
 private:
-    Okteta::ByteArrayJanusView* mWidget;
+    const std::unique_ptr<ByteArrayViewProfileSynchronizer> mByteArrayViewProfileSynchronizer;
+
+    std::unique_ptr<Okteta::ByteArrayJanusView> mWidget;
+
     ByteArrayDocument* mDocument;
     ByteArraySelection mSelection;
 //     KCursorProxy *mCursorProxy;
-
-    ByteArrayViewProfileSynchronizer* const mByteArrayViewProfileSynchronizer;
 };
 
 }
