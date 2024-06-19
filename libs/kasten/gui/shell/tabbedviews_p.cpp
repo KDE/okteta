@@ -28,37 +28,33 @@ TabbedViewsPrivate::TabbedViewsPrivate(TabbedViews* parent)
 {
 }
 
-TabbedViewsPrivate::~TabbedViewsPrivate()
-{
-    delete mViewAreaBox;
-    delete mTabWidget;
-}
+TabbedViewsPrivate::~TabbedViewsPrivate() = default;
 
 void TabbedViewsPrivate::init()
 {
     Q_Q(TabbedViews);
 
-    mTabWidget = new TabWidget();
+    mTabWidget = std::make_unique<TabWidget>();
     mTabWidget->setMovable(true);
     mTabWidget->setContextMenuPolicy(Qt::CustomContextMenu);
 
-    mViewAreaBox = new ViewAreaBox(mTabWidget);
+    mViewAreaBox = std::make_unique<ViewAreaBox>(mTabWidget.get());
 
-    QObject::connect(mTabWidget, &QTabWidget::tabCloseRequested,
+    QObject::connect(mTabWidget.get(), &QTabWidget::tabCloseRequested,
                      q, [&](int index) { onTabCloseRequest(index); });
-    QObject::connect(mTabWidget, &QTabWidget::currentChanged,
+    QObject::connect(mTabWidget.get(), &QTabWidget::currentChanged,
                      q, [&](int index) { onCurrentChanged(index); });
 
-    QObject::connect(mTabWidget, &QWidget::customContextMenuRequested,
+    QObject::connect(mTabWidget.get(), &QWidget::customContextMenuRequested,
                      q, [&](const QPoint& pos) { onContextMenuRequested(pos); });
 
-    QObject::connect(mTabWidget, &TabWidget::testCanDecode,
+    QObject::connect(mTabWidget.get(), &TabWidget::testCanDecode,
                      q, [&](const QDragMoveEvent* event, bool& accept) { onDragMoveEvent(event, accept); });
-    QObject::connect(mTabWidget, &TabWidget::receivedDropEvent,
+    QObject::connect(mTabWidget.get(), &TabWidget::receivedDropEvent,
                      q, [&](QDropEvent* event) { onDropEvent(event); });
-    QObject::connect(mTabWidget, &TabWidget::mouseMiddleClick,
+    QObject::connect(mTabWidget.get(), &TabWidget::mouseMiddleClick,
                      q, [&]() { onMouseMiddleClick(); });
-    QObject::connect(mTabWidget, &TabWidget::emptySpaceMouseDoubleClicked,
+    QObject::connect(mTabWidget.get(), &TabWidget::emptySpaceMouseDoubleClicked,
                      q, [&]() { onEmptySpaceMouseDoubleClicked(); });
 }
 
@@ -106,7 +102,7 @@ void TabbedViewsPrivate::addViews(const QVector<AbstractView*>& views)
         QObject::connect(view, &AbstractModel::titleChanged,
                          q, [&](const QString& title) { onTitleChanged(title); });
 
-        auto* viewBox = new ViewBox(view, mTabWidget);
+        auto* viewBox = new ViewBox(view, mTabWidget.get());
         mTabWidget->insertTab(insertIndex, viewBox, view->title());
         ++insertIndex;
     }
@@ -253,13 +249,13 @@ void TabbedViewsPrivate::onContextMenuRequested(QPoint pos)
 
     AbstractView* view = nullptr;
     QTabBar* tabBar = mTabWidget->tabBar();
-    const int tabIndex = tabBar->tabAt(tabBar->mapFrom(mTabWidget, pos));
+    const int tabIndex = tabBar->tabAt(tabBar->mapFrom(mTabWidget.get(), pos));
     if (tabIndex != -1) {
         const QWidget* widget = mTabWidget->widget(tabIndex);
         const auto* viewBox = static_cast<const ViewBox*>(widget);
         view = viewBox->view();
     }
-    Q_EMIT q->contextMenuRequested(view, mTabWidget->mapTo(mViewAreaBox, pos));
+    Q_EMIT q->contextMenuRequested(view, mTabWidget->mapTo(mViewAreaBox.get(), pos));
 }
 
 void TabbedViewsPrivate::onMouseMiddleClick()

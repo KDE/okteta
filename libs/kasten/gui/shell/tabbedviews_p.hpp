@@ -16,6 +16,8 @@
 #include "viewbox.hpp"
 #include <abstractview.hpp>
 #include "tabwidget.hpp"
+// Std
+#include <memory>
 
 namespace Kasten {
 
@@ -66,14 +68,15 @@ private:
     Q_DECLARE_PUBLIC(TabbedViews)
 
 private:
-    ViewAreaBox* mViewAreaBox;
-    TabWidget* mTabWidget;
+    // in (reverse) order of destruction
+    std::unique_ptr<TabWidget> mTabWidget;
+    std::unique_ptr<ViewAreaBox> mViewAreaBox;
 
     AbstractView* mCurrentView = nullptr;
     AbstractToolInlineView* mCurrentToolInlineView = nullptr;
 };
 
-inline QWidget* TabbedViewsPrivate::widget() const { return mViewAreaBox; }
+inline QWidget* TabbedViewsPrivate::widget() const { return mViewAreaBox.get(); }
 inline int TabbedViewsPrivate::viewCount()   const { return mTabWidget->count(); }
 
 inline AbstractView* TabbedViewsPrivate::viewFocus() const
