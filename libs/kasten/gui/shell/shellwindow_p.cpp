@@ -36,11 +36,11 @@ ShellWindowPrivate::ShellWindowPrivate(ShellWindow* parent,
     parent->setCentralWidget(mGroupedViews->widget());
 
     QObject::connect(mViewManager, &ViewManager::opened,
-                     mGroupedViews, &AbstractGroupedViews::addViews);
+                     mGroupedViews.get(), &AbstractGroupedViews::addViews);
     QObject::connect(mViewManager, &ViewManager::closing,
-                     mGroupedViews, &AbstractGroupedViews::removeViews);
+                     mGroupedViews.get(), &AbstractGroupedViews::removeViews);
 
-    QObject::connect(mGroupedViews, &AbstractGroupedViews::viewFocusChanged,
+    QObject::connect(mGroupedViews.get(), &AbstractGroupedViews::viewFocusChanged,
                      parent, [&](Kasten::AbstractView* view) { onViewFocusChanged(view); });
 }
 
@@ -57,8 +57,6 @@ ShellWindowPrivate::~ShellWindowPrivate()
     qDeleteAll(mControllers);
     qDeleteAll(mDockWidgets);
     qDeleteAll(mTools);
-
-    delete mGroupedViews;
 }
 
 void ShellWindowPrivate::addTool(AbstractToolView* toolView)

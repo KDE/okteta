@@ -15,6 +15,8 @@
 #include <kastencore.hpp>
 // Qt
 #include <QVector>
+// Std
+#include <memory>
 
 namespace Kasten {
 class AbstractModelSynchronizer;
@@ -61,7 +63,8 @@ private:
 
     ViewManager* const mViewManager;
 
-    MultiViewAreas* mGroupedViews;
+    const std::unique_ptr<MultiViewAreas> mGroupedViews;
+
     // hack:
     // used to store a pointer to the current, so we can disconnect to its signals... well, not perfect
     AbstractView* mCurrentView = nullptr;
@@ -74,7 +77,7 @@ private:
     QVector<AbstractTool*> mTools;
 };
 
-inline MultiViewAreas* ShellWindowPrivate::viewArea() const { return mGroupedViews; }
+inline MultiViewAreas* ShellWindowPrivate::viewArea() const { return mGroupedViews.get(); }
 inline ViewManager* ShellWindowPrivate::viewManager() const { return mViewManager; }
 inline QVector<ToolViewDockWidget*> ShellWindowPrivate::dockWidgets() const { return mDockWidgets; }
 
