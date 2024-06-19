@@ -564,8 +564,6 @@ void ByteArrayColumnViewPrivate::pauseCursor()
 
 QRect ByteArrayColumnViewPrivate::cursorRect() const
 {
-    Q_Q(const ByteArrayColumnView);
-
     QRect cursorRect = mActiveColumn->byteRect(mTableCursor->coord());
     cursorRect.translate(-xOffset(), -yOffset());
 

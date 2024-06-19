@@ -948,8 +948,6 @@ void AbstractByteArrayViewPrivate::updateViewByWidth()
 
 void AbstractByteArrayViewPrivate::adjustLayoutToSize()
 {
-    Q_Q(AbstractByteArrayView);
-
     // check whether there is a change with the numbers of fitting bytes per line
     if (mResizeStyle != AbstractByteArrayView::FixedLayoutStyle) {
         // changes?
