@@ -31,6 +31,7 @@ TabbedViewsPrivate::TabbedViewsPrivate(TabbedViews* parent)
 TabbedViewsPrivate::~TabbedViewsPrivate()
 {
     delete mViewAreaBox;
+    delete mTabWidget;
 }
 
 void TabbedViewsPrivate::init()
