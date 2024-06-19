@@ -36,10 +36,7 @@ DocumentSyncManagerPrivate::DocumentSyncManagerPrivate(DocumentSyncManager* q, D
     , mManager(manager)
 {}
 
-DocumentSyncManagerPrivate::~DocumentSyncManagerPrivate()
-{
-    delete mSynchronizerFactory;
-}
+DocumentSyncManagerPrivate::~DocumentSyncManagerPrivate() = default;
 
 void DocumentSyncManagerPrivate::setSaveDiscardDialog(AbstractSaveDiscardDialog* saveDiscardDialog)
 {
@@ -72,7 +69,7 @@ QUrl DocumentSyncManagerPrivate::urlOf(AbstractDocument* document) const
 
 void DocumentSyncManagerPrivate::setDocumentSynchronizerFactory(AbstractModelSynchronizerFactory* synchronizerFactory)
 {
-    mSynchronizerFactory = synchronizerFactory;
+    mSynchronizerFactory.reset(synchronizerFactory);
 }
 
 void DocumentSyncManagerPrivate::load(const QUrl& url)

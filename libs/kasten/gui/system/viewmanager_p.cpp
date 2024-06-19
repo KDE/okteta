@@ -32,14 +32,11 @@ ViewManagerPrivate::~ViewManagerPrivate()
 {
     // TODO: signal closing here, too?
     qDeleteAll(mViewList);
-
-    delete mCodecViewManager;
-    delete mFactory;
 }
 
 void ViewManagerPrivate::setViewFactory(AbstractViewFactory* factory)
 {
-    mFactory = factory;
+    mFactory.reset(factory);
 }
 
 QVector<AbstractView*> ViewManagerPrivate::views() const

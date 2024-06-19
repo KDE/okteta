@@ -20,10 +20,7 @@ DocumentCreateManagerPrivate::DocumentCreateManagerPrivate(DocumentManager* mana
 {
 }
 
-DocumentCreateManagerPrivate::~DocumentCreateManagerPrivate()
-{
-    delete mFactory;
-}
+DocumentCreateManagerPrivate::~DocumentCreateManagerPrivate() = default;
 
 bool DocumentCreateManagerPrivate::canCreateNewFromData(const QMimeData* mimeData) const
 {
@@ -32,7 +29,7 @@ bool DocumentCreateManagerPrivate::canCreateNewFromData(const QMimeData* mimeDat
 
 void DocumentCreateManagerPrivate::setDocumentFactory(AbstractDocumentFactory* factory)
 {
-    mFactory = factory;
+    mFactory.reset(factory);
 }
 
 void DocumentCreateManagerPrivate::createNew() const

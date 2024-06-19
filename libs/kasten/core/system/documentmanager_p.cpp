@@ -38,10 +38,6 @@ DocumentManagerPrivate::~DocumentManagerPrivate()
 {
     // TODO: emit signal here, too?
     qDeleteAll(mList);
-
-    delete mCreateManager;
-    delete mSyncManager;
-    delete mCodecManager;
 } // TODO: destroy all documents?
 
 void DocumentManagerPrivate::addDocument(AbstractDocument* document)

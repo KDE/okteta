@@ -11,6 +11,8 @@
 
 // lib
 #include "documentcreatemanager.hpp"
+// Std
+#include <memory>
 
 namespace Kasten {
 
@@ -40,7 +42,7 @@ private:
     DocumentManager* const mManager;
 
     // temporary hack: hard coded factory for byte arrays
-    AbstractDocumentFactory* mFactory = nullptr;
+    std::unique_ptr<AbstractDocumentFactory> mFactory;
 };
 
 }

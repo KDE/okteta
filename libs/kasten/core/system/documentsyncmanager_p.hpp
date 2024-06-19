@@ -11,6 +11,8 @@
 
 // lib
 #include "documentsyncmanager.hpp"
+// Std
+#include <memory>
 
 namespace Kasten {
 
@@ -51,7 +53,7 @@ private:
     DocumentManager* const mManager;
 
     // temporary hack: hard coded factories for byte arrays
-    AbstractModelSynchronizerFactory* mSynchronizerFactory = nullptr;
+    std::unique_ptr<AbstractModelSynchronizerFactory> mSynchronizerFactory;
 
     AbstractSaveDiscardDialog* mSaveDiscardDialog = nullptr;
     AbstractOverwriteDialog* mOverwriteDialog = nullptr;

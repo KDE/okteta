@@ -11,6 +11,8 @@
 
 // lib
 #include "viewmanager.hpp"
+// Std
+#include <memory>
 
 namespace Kasten {
 
@@ -44,16 +46,16 @@ public:
 private:
     ViewManager* const q_ptr;
 
-    QVector<AbstractView*> mViewList;
-    AbstractViewFactory* mFactory = nullptr;
-
     // TODO: remove into own singleton
-    ModelCodecViewManager* mCodecViewManager;
+    const std::unique_ptr<ModelCodecViewManager> mCodecViewManager;
+
+    QVector<AbstractView*> mViewList;
+    std::unique_ptr<AbstractViewFactory> mFactory;
 
     Q_DECLARE_PUBLIC(ViewManager)
 };
 
-inline ModelCodecViewManager* ViewManagerPrivate::codecViewManager() const { return mCodecViewManager; }
+inline ModelCodecViewManager* ViewManagerPrivate::codecViewManager() const { return mCodecViewManager.get(); }
 
 }
 

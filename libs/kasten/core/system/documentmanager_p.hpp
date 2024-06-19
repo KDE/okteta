@@ -13,6 +13,8 @@
 #include "documentmanager.hpp"
 // Qt
 #include <QVector>
+// Std
+#include <memory>
 
 namespace Kasten {
 
@@ -64,17 +66,17 @@ private:
     QVector<AbstractDocument*> mList;
 
     // TODO: remove into own singleton
-    DocumentCreateManager* mCreateManager;
-    DocumentSyncManager* mSyncManager;
-    ModelCodecManager* mCodecManager;
+    const std::unique_ptr<DocumentCreateManager> mCreateManager;
+    const std::unique_ptr<DocumentSyncManager> mSyncManager;
+    const std::unique_ptr<ModelCodecManager> mCodecManager;
 
     Q_DECLARE_PUBLIC(DocumentManager)
 };
 
 
-inline DocumentCreateManager* DocumentManagerPrivate::createManager() const { return mCreateManager; }
-inline DocumentSyncManager* DocumentManagerPrivate::syncManager() const { return mSyncManager; }
-inline ModelCodecManager* DocumentManagerPrivate::codecManager() const { return mCodecManager; }
+inline DocumentCreateManager* DocumentManagerPrivate::createManager() const { return mCreateManager.get(); }
+inline DocumentSyncManager* DocumentManagerPrivate::syncManager() const { return mSyncManager.get(); }
+inline ModelCodecManager* DocumentManagerPrivate::codecManager() const { return mCodecManager.get(); }
 
 inline QVector<AbstractDocument*> DocumentManagerPrivate::documents() const { return mList; }
 inline bool DocumentManagerPrivate::isEmpty() const { return mList.isEmpty(); }
