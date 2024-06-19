@@ -20,10 +20,7 @@ ToolViewDockWidgetPrivate::ToolViewDockWidgetPrivate(AbstractToolView* toolView)
 {
 }
 
-ToolViewDockWidgetPrivate::~ToolViewDockWidgetPrivate()
-{
-    delete mToolView;
-}
+ToolViewDockWidgetPrivate::~ToolViewDockWidgetPrivate() = default;
 
 void ToolViewDockWidgetPrivate::init(ToolViewDockWidget* q)
 {

@@ -11,6 +11,8 @@
 
 // lib
 #include "toolviewdockwidget.hpp"
+// Std
+#include <memory>
 
 namespace Kasten {
 
@@ -35,12 +37,12 @@ private: // slots
     void onVisibilityChanged(bool isVisible);
 
 private:
-    AbstractToolView* const mToolView;
+    const std::unique_ptr<AbstractToolView> mToolView;
     // TODO: find out why isVisible does not work here
     bool mIsShown = false;
 };
 
-inline AbstractToolView* ToolViewDockWidgetPrivate::toolView() const { return mToolView; }
+inline AbstractToolView* ToolViewDockWidgetPrivate::toolView() const { return mToolView.get(); }
 inline bool ToolViewDockWidgetPrivate::isShown() const { return mIsShown; }
 
 }
