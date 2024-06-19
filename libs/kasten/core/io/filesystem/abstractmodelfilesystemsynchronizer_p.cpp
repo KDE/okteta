@@ -12,15 +12,10 @@
 #include <logging.hpp>
 // KF
 #include <KDirWatch>
-// Qt
-#include <QNetworkConfigurationManager>
 
 namespace Kasten {
 
-AbstractModelFileSystemSynchronizerPrivate::~AbstractModelFileSystemSynchronizerPrivate()
-{
-    delete mNetworkConfigurationManager;
-}
+AbstractModelFileSystemSynchronizerPrivate::~AbstractModelFileSystemSynchronizerPrivate() = default;
 
 void AbstractModelFileSystemSynchronizerPrivate::startFileWatching()
 {
@@ -76,15 +71,14 @@ void AbstractModelFileSystemSynchronizerPrivate::startNetworkWatching()
     QT_WARNING_PUSH
     QT_WARNING_DISABLE_CLANG("-Wdeprecated-declarations")
     QT_WARNING_DISABLE_GCC("-Wdeprecated-declarations")
-    mNetworkConfigurationManager = new QNetworkConfigurationManager();
-    QObject::connect(mNetworkConfigurationManager, &QNetworkConfigurationManager::onlineStateChanged,
+    mNetworkConfigurationManager.reset(new QNetworkConfigurationManager());
+    QObject::connect(mNetworkConfigurationManager.get(), &QNetworkConfigurationManager::onlineStateChanged,
                      q, [&](bool online) { onOnlineStateChanged(online); });
     QT_WARNING_POP
 }
 void AbstractModelFileSystemSynchronizerPrivate::stopNetworkWatching()
 {
-    delete mNetworkConfigurationManager;
-    mNetworkConfigurationManager = nullptr;
+    mNetworkConfigurationManager.reset();
 }
 
 void AbstractModelFileSystemSynchronizerPrivate::onFileDirty(const QString& fileName)

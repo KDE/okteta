@@ -15,8 +15,9 @@
 #include <abstractmodelsynchronizer_p.hpp>
 // Qt
 #include <QDateTime>
-
-class QNetworkConfigurationManager;
+#include <QNetworkConfigurationManager>
+// Std
+#include <memory>
 
 namespace Kasten {
 
@@ -51,7 +52,7 @@ public:
 protected:
     QDateTime mFileDateTime;
     RemoteSyncState mRemoteState = RemoteUnknown;
-    QNetworkConfigurationManager* mNetworkConfigurationManager = nullptr;
+    std::unique_ptr<QNetworkConfigurationManager> mNetworkConfigurationManager;
     mutable KDirWatch* mDirWatch = nullptr;
 
 private:
