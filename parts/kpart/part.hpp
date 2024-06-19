@@ -16,6 +16,8 @@
 #include <KParts/ReadWritePart>
 // Qt
 #include <QVector>
+// Std
+#include <memory>
 
 namespace Kasten {
 class ByteArrayViewProfileManager;
@@ -81,13 +83,14 @@ private:
     const Modus mModus;
     Kasten::ByteArrayViewProfileManager* const mViewProfileManager;
 
-    Kasten::ByteArrayDocument* mDocument;
-    Kasten::ByteArrayView* mByteArrayView;
+    // in (reverse) order of destruction
+    std::unique_ptr<Kasten::ByteArrayDocument> mDocument;
+    std::unique_ptr<Kasten::ByteArrayView> mByteArrayView;
 
-    Kasten::SingleViewArea* mSingleViewArea;
+    std::unique_ptr<Kasten::SingleViewArea> mSingleViewArea;
     QVector<Kasten::AbstractXmlGuiController*> mControllers;
 };
 
-inline Kasten::ByteArrayView* OktetaPart::byteArrayView() const { return mByteArrayView; }
+inline Kasten::ByteArrayView* OktetaPart::byteArrayView() const { return mByteArrayView.get(); }
 
 #endif

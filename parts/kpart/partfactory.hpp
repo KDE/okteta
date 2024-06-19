@@ -12,6 +12,8 @@
 // KF
 #include <kparts_version.h>
 #include <KPluginFactory>
+// Std
+#include <memory>
 
 namespace Kasten {
 class ByteArrayViewProfileManager;
@@ -42,9 +44,9 @@ public: // KPluginFactory API
                     const QString& keyword) override;
 
 private:
-    Kasten::ByteArrayViewProfileManager* mByteArrayViewProfileManager;
-    Kasten::ModelCodecViewManager* mModelCodecViewManager;
-    Kasten::ModelCodecManager* mModelCodecManager;
+    const std::unique_ptr<Kasten::ByteArrayViewProfileManager> mByteArrayViewProfileManager;
+    const std::unique_ptr<Kasten::ModelCodecViewManager> mModelCodecViewManager;
+    const std::unique_ptr<Kasten::ModelCodecManager> mModelCodecManager;
 };
 
 #endif

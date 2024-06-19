@@ -24,11 +24,10 @@
 #include <KLocalizedString>
 
 OktetaPartFactory::OktetaPartFactory()
+    : mByteArrayViewProfileManager(new Kasten::ByteArrayViewProfileManager())
+    , mModelCodecViewManager(new Kasten::ModelCodecViewManager())
+    , mModelCodecManager(new Kasten::ModelCodecManager())
 {
-    mByteArrayViewProfileManager = new Kasten::ByteArrayViewProfileManager();
-
-    mModelCodecViewManager = new Kasten::ModelCodecViewManager();
-    mModelCodecManager = new Kasten::ModelCodecManager();
 
     const QVector<Kasten::AbstractModelStreamEncoder*> encoderList =
         Kasten::ByteArrayStreamEncoderFactory::createStreamEncoders();
@@ -49,12 +48,7 @@ OktetaPartFactory::OktetaPartFactory()
     mModelCodecViewManager->setGeneratorConfigEditorFactories(generatorConfigEditorFactoryList);
 }
 
-OktetaPartFactory::~OktetaPartFactory()
-{
-    delete mByteArrayViewProfileManager;
-    delete mModelCodecViewManager;
-    delete mModelCodecManager;
-}
+OktetaPartFactory::~OktetaPartFactory() = default;
 
 QObject* OktetaPartFactory::create(const char* iface,
                                    QWidget* parentWidget,
@@ -71,7 +65,7 @@ QObject* OktetaPartFactory::create(const char* iface,
         (strcmp(iface, "KParts::ReadOnlyPart") == 0) ? OktetaPart::Modus::ReadOnly :
         /* else */                                     OktetaPart::Modus::ReadWrite;
 
-    auto* part = new OktetaPart(parent, metaData(), modus, mByteArrayViewProfileManager, mModelCodecManager, mModelCodecViewManager);
+    auto* part = new OktetaPart(parent, metaData(), modus, mByteArrayViewProfileManager.get(), mModelCodecManager.get(), mModelCodecViewManager.get());
 
     return part;
 }

@@ -85,7 +85,7 @@ OktetaPart::OktetaPart(QObject* parent,
 
     setXMLFile(QLatin1String(UIFileName[modus]));
 
-    mSingleViewArea = new Kasten::SingleViewArea();
+    mSingleViewArea = std::make_unique<Kasten::SingleViewArea>();
     QWidget* areaWidget = mSingleViewArea->widget();
     layout->addWidget(areaWidget);
     layout->parentWidget()->setFocusProxy(areaWidget);
@@ -114,8 +114,8 @@ OktetaPart::OktetaPart(QObject* parent,
     if (modus == Modus::ReadWrite) {
         addController(Kasten::ReplaceControllerFactory(widget));
     }
-    addController(Kasten::GotoOffsetControllerFactory(mSingleViewArea));
-    addController(Kasten::SelectRangeControllerFactory(mSingleViewArea));
+    addController(Kasten::GotoOffsetControllerFactory(mSingleViewArea.get()));
+    addController(Kasten::SelectRangeControllerFactory(mSingleViewArea.get()));
 //     addController(Kasten::BookmarksControllerFactory());
     addController(Kasten::PrintControllerFactory());
     addController(Kasten::ViewConfigControllerFactory());
@@ -139,9 +139,9 @@ OktetaPart::OktetaPart(QObject* parent,
 
     // TODO: BrowserExtension might rely on existing objects (session snap while loadJob),
     // so this hack just creates some dummies
-    mDocument = new Kasten::ByteArrayDocument(QString());
+    mDocument = std::make_unique<Kasten::ByteArrayDocument>(QString());
     auto* viewProfileSynchronizer = new Kasten::ByteArrayViewProfileSynchronizer(viewProfileManager);
-    mByteArrayView = new Kasten::ByteArrayView(mDocument, viewProfileSynchronizer);
+    mByteArrayView = std::make_unique<Kasten::ByteArrayView>(mDocument.get(), viewProfileSynchronizer);
 
     if (modus == Modus::BrowserView) {
         new OktetaBrowserExtension(this);
@@ -151,9 +151,6 @@ OktetaPart::OktetaPart(QObject* parent,
 OktetaPart::~OktetaPart()
 {
     qDeleteAll(mControllers);
-    delete mSingleViewArea;
-    delete mByteArrayView;
-    delete mDocument;
 }
 
 void OktetaPart::addController(const Kasten::AbstractXmlGuiControllerFactory& factory)
@@ -171,15 +168,13 @@ void OktetaPart::setReadWrite(bool readWrite)
 
 bool OktetaPart::openFile()
 {
-    auto* synchronizerFactory = new Kasten::ByteArrayRawFileSynchronizerFactory();
+    const auto synchronizerFactory = std::make_unique<Kasten::ByteArrayRawFileSynchronizerFactory>();
     Kasten::AbstractModelSynchronizer* synchronizer = synchronizerFactory->createSynchronizer();
 
     Kasten::AbstractLoadJob* loadJob = synchronizer->startLoad(QUrl::fromLocalFile(localFilePath()));
     connect(loadJob, &Kasten::AbstractLoadJob::documentLoaded,
             this, &OktetaPart::onDocumentLoaded);
     Kasten::JobManager::executeJob(loadJob);
-
-    delete synchronizerFactory;
 
     return true;
 }
@@ -202,10 +197,9 @@ void OktetaPart::onDocumentLoaded(Kasten::AbstractDocument* document)
             controller->setTargetModel(nullptr);
         }
         mSingleViewArea->setView(nullptr);
-        delete mByteArrayView;
-        delete mDocument;
+        mByteArrayView.reset();
 
-        mDocument = static_cast<Kasten::ByteArrayDocument*>(document);
+        mDocument.reset(static_cast<Kasten::ByteArrayDocument*>(document));
         mDocument->setReadOnly(mModus != Modus::ReadWrite);
         connect(mDocument->synchronizer(), &Kasten::AbstractModelSynchronizer::localSyncStateChanged,
                 this, &OktetaPart::onModified);
@@ -213,13 +207,13 @@ void OktetaPart::onDocumentLoaded(Kasten::AbstractDocument* document)
         auto* viewProfileSynchronizer = new Kasten::ByteArrayViewProfileSynchronizer(mViewProfileManager);
         viewProfileSynchronizer->setViewProfileId(mViewProfileManager->defaultViewProfileId());
 
-        mByteArrayView = new Kasten::ByteArrayView(mDocument, viewProfileSynchronizer);
-        connect(mByteArrayView, SIGNAL(hasSelectedDataChanged(bool)), SIGNAL(hasSelectedDataChanged(bool)));
+        mByteArrayView.reset(new Kasten::ByteArrayView(mDocument.get(), viewProfileSynchronizer));
+        connect(mByteArrayView.get(), SIGNAL(hasSelectedDataChanged(bool)), SIGNAL(hasSelectedDataChanged(bool)));
 
-        mSingleViewArea->setView(mByteArrayView);
+        mSingleViewArea->setView(mByteArrayView.get());
 
         for (Kasten::AbstractXmlGuiController* controller : std::as_const(mControllers)) {
-            controller->setTargetModel(mByteArrayView);
+            controller->setTargetModel(mByteArrayView.get());
         }
 
         setModified(false);
