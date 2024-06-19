@@ -17,6 +17,8 @@
 #include <Kasten/AbstractDocument>
 // Qt
 #include <QString>
+// Std
+#include <memory>
 
 namespace Okteta {
 class AbstractByteArrayModel;
@@ -75,7 +77,7 @@ private Q_SLOTS:
     OKTETAKASTENCORE_NO_EXPORT void onHeadVersionDescriptionChanged(const QString& newDescription);
 
 private:
-    Okteta::PieceTableByteArrayModel* mByteArray;
+    const std::unique_ptr<Okteta::PieceTableByteArrayModel> mByteArray;
 
     mutable QString mTitle;
 

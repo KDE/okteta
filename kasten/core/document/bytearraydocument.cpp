@@ -21,32 +21,29 @@ ByteArrayDocument::ByteArrayDocument(const QString& initDescription)
     : mByteArray(new Okteta::PieceTableByteArrayModel())
     , mInitDescription(initDescription)
 {
-    connect(mByteArray, &PieceTableByteArrayModel::modifiedChanged, this, &ByteArrayDocument::onModelModified);
-    connect(mByteArray, &PieceTableByteArrayModel::readOnlyChanged, this, &ByteArrayDocument::readOnlyChanged);
-    connect(mByteArray, &PieceTableByteArrayModel::revertedToVersionIndex, this, &ByteArrayDocument::revertedToVersionIndex);
-    connect(mByteArray, &PieceTableByteArrayModel::headVersionChanged, this, &ByteArrayDocument::headVersionChanged);
-    connect(mByteArray, &PieceTableByteArrayModel::headVersionDescriptionChanged,
+    connect(mByteArray.get(), &PieceTableByteArrayModel::modifiedChanged, this, &ByteArrayDocument::onModelModified);
+    connect(mByteArray.get(), &PieceTableByteArrayModel::readOnlyChanged, this, &ByteArrayDocument::readOnlyChanged);
+    connect(mByteArray.get(), &PieceTableByteArrayModel::revertedToVersionIndex, this, &ByteArrayDocument::revertedToVersionIndex);
+    connect(mByteArray.get(), &PieceTableByteArrayModel::headVersionChanged, this, &ByteArrayDocument::headVersionChanged);
+    connect(mByteArray.get(), &PieceTableByteArrayModel::headVersionDescriptionChanged,
             this, &ByteArrayDocument::onHeadVersionDescriptionChanged);
 }
 
-ByteArrayDocument::~ByteArrayDocument()
-{
-    delete mByteArray;
-}
+ByteArrayDocument::~ByteArrayDocument() = default;
 
 ByteArrayDocument::ByteArrayDocument(Okteta::PieceTableByteArrayModel* byteArray, const QString& initDescription)
     : mByteArray(byteArray)
     , mInitDescription(initDescription)
 {
-    connect(mByteArray, &PieceTableByteArrayModel::modifiedChanged, this, &ByteArrayDocument::onModelModified);
-    connect(mByteArray, &PieceTableByteArrayModel::readOnlyChanged, this, &ByteArrayDocument::readOnlyChanged);
-    connect(mByteArray, &PieceTableByteArrayModel::revertedToVersionIndex, this, &ByteArrayDocument::revertedToVersionIndex);
-    connect(mByteArray, &PieceTableByteArrayModel::headVersionChanged, this, &ByteArrayDocument::headVersionChanged);
-    connect(mByteArray, &PieceTableByteArrayModel::headVersionDescriptionChanged,
+    connect(mByteArray.get(), &PieceTableByteArrayModel::modifiedChanged, this, &ByteArrayDocument::onModelModified);
+    connect(mByteArray.get(), &PieceTableByteArrayModel::readOnlyChanged, this, &ByteArrayDocument::readOnlyChanged);
+    connect(mByteArray.get(), &PieceTableByteArrayModel::revertedToVersionIndex, this, &ByteArrayDocument::revertedToVersionIndex);
+    connect(mByteArray.get(), &PieceTableByteArrayModel::headVersionChanged, this, &ByteArrayDocument::headVersionChanged);
+    connect(mByteArray.get(), &PieceTableByteArrayModel::headVersionDescriptionChanged,
             this, &ByteArrayDocument::onHeadVersionDescriptionChanged);
 }
 
-Okteta::AbstractByteArrayModel* ByteArrayDocument::content() const { return mByteArray; }
+Okteta::AbstractByteArrayModel* ByteArrayDocument::content() const { return mByteArray.get(); }
 
 QString ByteArrayDocument::title() const { return mTitle; }
 QString ByteArrayDocument::mimeType() const { return QStringLiteral("ByteArrayDocument"); }
