@@ -45,8 +45,6 @@ SingleViewWindowPrivate::~SingleViewWindowPrivate()
     qDeleteAll(mControllers);
     qDeleteAll(mDockWidgets);
     qDeleteAll(mTools);
-
-    delete mViewArea;
 }
 
 void SingleViewWindowPrivate::setView(AbstractView* view)

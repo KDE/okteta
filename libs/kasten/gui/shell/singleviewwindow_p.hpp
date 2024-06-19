@@ -15,6 +15,8 @@
 #include <Kasten/KastenCore>
 // Qt
 #include <QVector>
+// Std
+#include <memory>
 
 class QDragMoveEvent;
 class QDropEvent;
@@ -69,7 +71,7 @@ private:
     AbstractDocument* mDocument = nullptr;
     AbstractModelSynchronizer* mSynchronizer = nullptr;
 
-    SingleViewArea* const mViewArea;
+    const std::unique_ptr<SingleViewArea> mViewArea;
     QVector<AbstractXmlGuiController*> mControllers;
     QVector<ToolViewDockWidget*> mDockWidgets;
     QVector<AbstractTool*> mTools;
@@ -77,7 +79,7 @@ private:
 
 inline QVector<ToolViewDockWidget*> SingleViewWindowPrivate::dockWidgets() const { return mDockWidgets; }
 inline AbstractView* SingleViewWindowPrivate::view() const { return mView; }
-inline SingleViewArea* SingleViewWindowPrivate::viewArea() const { return mViewArea; }
+inline SingleViewArea* SingleViewWindowPrivate::viewArea() const { return mViewArea.get(); }
 
 }
 
