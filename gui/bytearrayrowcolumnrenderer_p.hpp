@@ -218,9 +218,9 @@ private:
     /** pointer to the buffer */
     AbstractByteArrayModel* mByteArrayModel;
     /** pointer to the layout */
-    const ByteArrayTableLayout* mLayout;
+    const ByteArrayTableLayout* const mLayout;
     /** pointer to the ranges */
-    ByteArrayTableRanges* mRanges;
+    ByteArrayTableRanges* const mRanges;
     /** */
     Bookmarkable* mBookmarks;
     /** */

@@ -39,8 +39,8 @@ private:
     void updateActions();
 
 private:
-    If::WidgetsDockable* mWidgetsDockable;
-    KXMLGUIClient* mGuiClient;
+    If::WidgetsDockable* const mWidgetsDockable;
+    KXMLGUIClient* const mGuiClient;
 
     QList<QAction*> mToolActionList;
 };

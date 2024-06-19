@@ -50,7 +50,7 @@ private Q_SLOTS:
     void onNewDocumentRequested();
 
 private:
-    OktetaProgram* mProgram;
+    OktetaProgram* const mProgram;
 };
 
 }

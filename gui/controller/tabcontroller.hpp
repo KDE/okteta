@@ -29,7 +29,7 @@ public:
     void setTabChangesFocus(bool tabChangesFocus);
 
 private:
-    AbstractByteArrayView* mView;
+    AbstractByteArrayView* const mView;
     /** flag if tab key should be ignored */
     bool mTabChangesFocus : 1;
 };

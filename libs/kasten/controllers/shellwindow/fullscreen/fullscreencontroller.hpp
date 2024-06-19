@@ -31,7 +31,7 @@ private Q_SLOTS:
 
 private:
 //     KProgram *Program;
-    KXmlGuiWindow* mMainWindow;
+    KXmlGuiWindow* const mMainWindow;
 };
 
 }

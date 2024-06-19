@@ -39,7 +39,8 @@ protected:
     qint64 writeData(const char* data, qint64 length) override;
 
 private:
-    AbstractByteArrayModel* mByteArrayModel;
+    AbstractByteArrayModel* const mByteArrayModel;
+
     Address mReadOffset = 0;
 };
 

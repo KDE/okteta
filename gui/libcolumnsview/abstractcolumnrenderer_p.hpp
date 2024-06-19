@@ -35,7 +35,8 @@ public:
 
 public: // general column data
     /** pointer to the view */
-    AbstractColumnStylist* mStylist;
+    AbstractColumnStylist* const mStylist;
+
     /** should Column be displayed? */
     bool mIsVisible = true;  // TODO: would false be better?
 

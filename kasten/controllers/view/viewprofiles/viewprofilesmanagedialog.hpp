@@ -49,7 +49,8 @@ private Q_SLOTS:
     void onDefaultViewProfileChanged(const Kasten::ByteArrayViewProfile::Id& viewProfileId);
 
 private:
-    ByteArrayViewProfileManager* mViewProfileManager;
+    ByteArrayViewProfileManager* const mViewProfileManager;
+
     ViewProfileTableModel* mViewProfileTableModel;
     ByteArrayViewProfile::Id mCurrentViewProfileId;
 

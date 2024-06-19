@@ -89,12 +89,12 @@ private:
     OKTETAKASTENGUI_NO_EXPORT void connectViewSignals();
 
 private:
+    ByteArrayViewProfileManager* const mViewProfileManager;
+
     ByteArrayView* mView = nullptr;
     ByteArrayViewProfile::Id mViewProfileId;
     int mDirtyFlags = 0;
     bool mUpdatingView = false;
-
-    ByteArrayViewProfileManager* mViewProfileManager;
 };
 
 inline ByteArrayView* ByteArrayViewProfileSynchronizer::view() const { return mView; }

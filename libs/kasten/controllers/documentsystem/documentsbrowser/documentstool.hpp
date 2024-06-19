@@ -42,7 +42,7 @@ Q_SIGNALS:
     void focussedDocumentChanged(Kasten::AbstractDocument* document);
 
 private: // sources
-    DocumentManager* mDocumentManager;
+    DocumentManager* const mDocumentManager;
 
     AbstractDocument* mFocussedDocument = nullptr;
 };

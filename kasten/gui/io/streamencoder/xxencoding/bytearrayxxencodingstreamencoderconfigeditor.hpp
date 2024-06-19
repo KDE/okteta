@@ -34,7 +34,8 @@ private Q_SLOTS:
     void onSettingsChanged();
 
 private:
-    ByteArrayXxencodingStreamEncoder* mEncoder;
+    ByteArrayXxencodingStreamEncoder* const mEncoder;
+
     XxencodingStreamEncoderSettings mSettings;
 
     QLineEdit* mFileNameEdit;

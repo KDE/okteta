@@ -43,7 +43,7 @@ private Q_SLOTS:
     void onUrlUsed(const QUrl& url);
 
 private:
-    AbstractDocumentStrategy* mDocumentStrategy;
+    AbstractDocumentStrategy* const mDocumentStrategy;
 
     KRecentFilesAction* mOpenRecentAction;
 };

@@ -51,7 +51,8 @@ private Q_SLOTS:
     void onValidityChanged(bool isValid);
 
 private:
-    FilterTool* mTool;
+    FilterTool* const mTool;
+
     KComboBox* mOperationComboBox;
     QStackedWidget* mParameterSetEditStack;
     QAction* mFilterAction;

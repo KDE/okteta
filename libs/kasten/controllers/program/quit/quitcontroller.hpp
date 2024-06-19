@@ -30,7 +30,7 @@ private Q_SLOTS:
     void quit();
 
 private:
-    KXmlGuiWindow* mMainWindow;
+    KXmlGuiWindow* const mMainWindow;
 };
 
 }

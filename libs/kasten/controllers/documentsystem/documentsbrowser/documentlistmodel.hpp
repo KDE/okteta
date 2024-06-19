@@ -50,7 +50,7 @@ private Q_SLOTS:
     void onSynchronizerChanged(Kasten::AbstractModelSynchronizer* synchronizer);
 
 private:
-    DocumentsTool* mDocumentsTool;
+    DocumentsTool* const mDocumentsTool;
 };
 
 }

@@ -57,7 +57,7 @@ private:
     void setWidths(int byteWidth, int byteSpacingWidth, int noOfGroupedBytes);
 
 private:
-    const Okteta::AbstractByteArrayModel* mByteArrayModel;
+    const Okteta::AbstractByteArrayModel* const mByteArrayModel;
 
     const Okteta::CoordRange mCoordRange;
 

@@ -29,7 +29,7 @@ public: // API to be implemented
     virtual bool handleKeyPress(QKeyEvent* keyEvent);
 
 protected:
-    AbstractController* mParent;
+    AbstractController* const mParent;
 };
 
 }

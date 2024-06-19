@@ -41,7 +41,7 @@ private Q_SLOTS:
     void onTableSelectionChanged();
 
 private:
-    InfoTool* mTool;
+    InfoTool* const mTool;
 
     QLabel* mSizeLabel;
     QTreeView* mStatisticTableView;

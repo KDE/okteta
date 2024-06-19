@@ -56,7 +56,8 @@ private Q_SLOTS:
     void onChildrenInserted(const DataInformation* sender, uint startIndex, uint endIndex);
 
 private:
-    StructuresTool* mTool;
+    StructuresTool* const mTool;
+
     // just for checking in debug mode:
     DataInformation* mLastSender;
     uint mLastStartIndex;

@@ -17,8 +17,8 @@ namespace Kasten {
 
 DummyView::DummyView(AbstractDocument* document)
     : AbstractView(document)
-    , mLabel(new QLabel())
     , mDocument(document)
+    , mLabel(new QLabel())
 {
     mLabel->setText(mDocument->title());
 

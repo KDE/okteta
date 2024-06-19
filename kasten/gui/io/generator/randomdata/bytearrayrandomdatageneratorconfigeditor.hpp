@@ -34,7 +34,8 @@ private Q_SLOTS:
     void onSettingsChanged();
 
 private:
-    ByteArrayRandomDataGenerator* mGenerator;
+    ByteArrayRandomDataGenerator* const mGenerator;
+
     ByteArrayRandomDataGeneratorSettings mSettings;
 
     QSpinBox* mSizeInput;

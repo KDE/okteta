@@ -47,7 +47,7 @@ protected: // QWidget API
     void showEvent(QShowEvent* showEvent) override;
 
 private:
-    SearchTool* mTool;
+    SearchTool* const mTool;
 };
 
 }

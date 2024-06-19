@@ -49,7 +49,7 @@ private Q_SLOTS: // tool
     void onCanHighlightStringChanged(bool canHighlightString);
 
 private:
-    StringsExtractTool* mTool;
+    StringsExtractTool* const mTool;
 
     ContainedStringTableModel* mContainedStringTableModel;
     QSortFilterProxyModel* mSortFilterProxyModel;

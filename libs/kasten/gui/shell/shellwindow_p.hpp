@@ -59,6 +59,8 @@ private:
 private:
     ShellWindow* const q_ptr;
 
+    ViewManager* const mViewManager;
+
     MultiViewAreas* mGroupedViews;
     // hack:
     // used to store a pointer to the current, so we can disconnect to its signals... well, not perfect
@@ -66,7 +68,6 @@ private:
     AbstractDocument* mCurrentDocument = nullptr;
     AbstractModelSynchronizer* mCurrentSynchronizer = nullptr;
 
-    ViewManager* mViewManager;
     QVector<AbstractXmlGuiController*> mControllers;
 
     QVector<ToolViewDockWidget*> mDockWidgets;

@@ -28,7 +28,8 @@ public:
     bool handlePinchGesture(QPinchGesture* pinchGesture);
 
 private:
-    AbstractByteArrayView* mView;
+    AbstractByteArrayView* const mView;
+
     double mOriginalZoomLevel = -1;
 };
 

@@ -34,9 +34,10 @@ private Q_SLOTS:
     void saveAs();
 
 private:
+    DocumentSyncManager* const mSyncManager;
+
     QAction* mSaveAsAction;
 
-    DocumentSyncManager* mSyncManager;
     AbstractDocument* mDocument;
 };
 

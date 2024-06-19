@@ -33,7 +33,7 @@ private Q_SLOTS:
     void close();
 
 private:
-    ViewManager* mViewManager;
+    ViewManager* const mViewManager;
 
     AbstractView* mView;
     KAction* mCloseAction;

@@ -39,7 +39,8 @@ private Q_SLOTS:
     void onPatternChanged(const QByteArray& pattern);
 
 private:
-    ByteArrayPatternGenerator* mGenerator;
+    ByteArrayPatternGenerator* const mGenerator;
+
     ByteArrayPatternGeneratorSettings mSettings;
 
     QSpinBox* mNumberInput;

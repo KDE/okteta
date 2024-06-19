@@ -38,10 +38,10 @@ private Q_SLOTS:
     void onFilteredBytes();
 
 private:
-    AbstractByteArrayFilter* mByteArrayFilter;
+    AbstractByteArrayFilter* const mByteArrayFilter;
 
-    Okteta::Byte* mResult;
-    Okteta::AbstractByteArrayModel* mModel;
+    Okteta::Byte* const mResult;
+    Okteta::AbstractByteArrayModel* const mModel;
     const Okteta::AddressRange mRange;
 };
 

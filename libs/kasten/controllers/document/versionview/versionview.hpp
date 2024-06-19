@@ -35,7 +35,7 @@ public Q_SLOTS:
     void setModel(Kasten::AbstractModel* model);
 
 private:
-    VersionViewTool* mTool;
+    VersionViewTool* const mTool;
 
     VersionTableModel* mVersionTableModel;
 

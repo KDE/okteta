@@ -51,7 +51,7 @@ private Q_SLOTS:
     void setEnabledStructures(const QStringList& enabledStructures);
 
 private:
-    Kasten::StructuresTool* mTool;
+    Kasten::StructuresTool* const mTool;
 
     KNSWidgets::Button* mGetNewStructuresButton;
     QPushButton* mAdvancedSelectionButton;

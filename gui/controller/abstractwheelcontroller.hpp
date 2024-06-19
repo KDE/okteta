@@ -29,7 +29,7 @@ public: // API to be implemented
     virtual bool handleWheelEvent(QWheelEvent* wheelEvent);
 
 protected:
-    AbstractWheelController* mParent;
+    AbstractWheelController* const mParent;
 };
 
 }

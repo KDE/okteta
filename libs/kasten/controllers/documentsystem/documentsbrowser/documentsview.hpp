@@ -35,7 +35,7 @@ private Q_SLOTS:
     void onDocumentActivated(const QModelIndex& index);
 
 private:
-    DocumentsTool* mTool;
+    DocumentsTool* const mTool;
 
     DocumentListModel* mDocumentListModel;
 

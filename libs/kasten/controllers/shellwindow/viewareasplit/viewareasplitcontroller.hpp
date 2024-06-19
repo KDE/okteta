@@ -47,8 +47,9 @@ private Q_SLOTS:
     void onViewsChanged();
 
 private:
-    ViewManager* mViewManager;
-    AbstractGroupedViews* mGroupedViews;
+    ViewManager* const mViewManager;
+    AbstractGroupedViews* const mGroupedViews;
+
     If::ViewAreaSplitable* mViewAreaSplitable = nullptr;
     AbstractGroupedViews* mCurrentViewArea = nullptr;
 

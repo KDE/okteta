@@ -62,7 +62,7 @@ private Q_SLOTS: // tool
     void onApplyableChanged(bool isApplyable);
 
 private:
-    GotoOffsetTool* mTool;
+    GotoOffsetTool* const mTool;
 
     Okteta::AddressComboBox* mAddressEdit;
     QPushButton* mGotoButton;

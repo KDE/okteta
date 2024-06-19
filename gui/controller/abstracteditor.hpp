@@ -41,8 +41,8 @@ protected:
     void doEditAction(EditAction action);
 
 protected:
-    ByteArrayTableCursor* mCursor;
-    AbstractByteArrayView* mView;
+    ByteArrayTableCursor* const mCursor;
+    AbstractByteArrayView* const mView;
 };
 
 }

@@ -53,7 +53,7 @@ private:
     void copyToClipboard();
 
 private:
-    StructuresTool* mTool;
+    StructuresTool* const mTool;
 
     StructureTreeModel* mStructureTreeModel;
 

@@ -41,11 +41,11 @@ private Q_SLOTS:
 
 private:
 //     PrintThread *mPrintThread;
-    FramesToPaperPrinter* mFramesPrinter;
+    FramesToPaperPrinter* const mFramesPrinter;
     const int mFirstPage;
     const int mLastPage;
 
-    QPrinter* mPrinter;
+    QPrinter* const mPrinter;
 };
 
 inline PrintJob::PrintJob(FramesToPaperPrinter* framesPrinter, int firstPage, int lastPage, QPrinter* printer)

@@ -33,7 +33,8 @@ private Q_SLOTS:
     void onSettingsChanged();
 
 private:
-    ByteArraySRecStreamEncoder* mEncoder;
+    ByteArraySRecStreamEncoder* const mEncoder;
+
     SRecStreamEncoderSettings mSettings;
 
     KComboBox* mAddressSizeSelect;

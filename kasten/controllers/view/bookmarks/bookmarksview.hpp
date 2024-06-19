@@ -41,7 +41,7 @@ private Q_SLOTS:
     void onRenameBookmarkButtonClicked();
 
 private:
-    BookmarksTool* mTool;
+    BookmarksTool* const mTool;
 
     BookmarkListModel* mBookmarkListModel;
 

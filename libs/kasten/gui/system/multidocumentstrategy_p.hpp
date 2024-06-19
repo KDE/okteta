@@ -60,8 +60,8 @@ private:
     Q_DECLARE_PUBLIC(MultiDocumentStrategy)
 
 private:
-    DocumentManager* mDocumentManager;
-    ViewManager* mViewManager;
+    DocumentManager* const mDocumentManager;
+    ViewManager* const mViewManager;
 };
 
 inline

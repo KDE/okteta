@@ -40,7 +40,7 @@ Q_SIGNALS:
     void currentUrlChanged(const QUrl& currentUrl);
 
 private: // sources
-    DocumentSyncManager* mDocumentSyncManager;
+    DocumentSyncManager* const mDocumentSyncManager;
 
     AbstractDocument* mDocument = nullptr;
 };

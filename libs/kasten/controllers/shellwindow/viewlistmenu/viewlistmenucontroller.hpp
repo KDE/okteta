@@ -36,9 +36,9 @@ private Q_SLOTS:
     void onActionTriggered(QAction* action);
 
 private:
-    ViewManager* mViewManager;
-    AbstractGroupedViews* mGroupedViews;
-    KXMLGUIClient* mGuiClient;
+    ViewManager* const mViewManager;
+    AbstractGroupedViews* const mGroupedViews;
+    KXMLGUIClient* const mGuiClient;
 
     QActionGroup* mWindowsActionGroup;
 };

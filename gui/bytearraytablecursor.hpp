@@ -136,7 +136,7 @@ private:
 
 private:
     /** layout, tells how the column is organized  */
-    const ByteArrayTableLayout* mLayout;
+    const ByteArrayTableLayout* const mLayout;
 
     /** Position in buffer */
     Address mIndex;

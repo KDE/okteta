@@ -58,8 +58,8 @@ private:
     Q_DECLARE_PUBLIC(SingleDocumentStrategy)
 
 private:
-    DocumentManager* mDocumentManager;
-    ViewManager* mViewManager;
+    DocumentManager* const mDocumentManager;
+    ViewManager* const mViewManager;
 };
 
 inline

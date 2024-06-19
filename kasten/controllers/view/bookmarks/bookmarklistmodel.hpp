@@ -62,7 +62,7 @@ private Q_SLOTS:
     void onOffsetCodingChanged(int offsetCoding);
 
 private:
-    BookmarksTool* mTool;
+    BookmarksTool* const mTool;
 
     Okteta::OffsetFormat::print mPrintFunction;
     mutable char mCodedOffset[Okteta::OffsetFormat::MaxFormatWidth + 1];

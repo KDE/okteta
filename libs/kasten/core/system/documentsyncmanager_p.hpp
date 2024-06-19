@@ -48,7 +48,7 @@ private:
     DocumentSyncManager* const q_ptr;
 
     // unless there is a singleton
-    DocumentManager* mManager;
+    DocumentManager* const mManager;
 
     // temporary hack: hard coded factories for byte arrays
     AbstractModelSynchronizerFactory* mSynchronizerFactory = nullptr;

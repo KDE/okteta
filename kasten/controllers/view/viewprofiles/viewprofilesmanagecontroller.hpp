@@ -34,8 +34,8 @@ private Q_SLOTS: // action slots
     void manageProfiles();
 
 private:
-    QWidget* mParentWidget;
-    ByteArrayViewProfileManager* mViewProfileManager;
+    ByteArrayViewProfileManager* const mViewProfileManager;
+    QWidget* const mParentWidget;
 
     QAction* mManageAction;
 };

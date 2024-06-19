@@ -45,7 +45,7 @@ private:
     void renderColumnBackground(QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys);
 
 public: // user settings
-    ByteArrayTableLayout* mLayout;
+    ByteArrayTableLayout* const mLayout;
 
 public: // pixel related
     /** */

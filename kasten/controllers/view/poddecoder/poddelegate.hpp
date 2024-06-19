@@ -40,7 +40,7 @@ private Q_SLOTS:
     void onReadOnlyChanged(bool isReadOnly) const;
 
 private:
-    PODDecoderTool* mTool;
+    PODDecoderTool* const mTool;
 
     mutable QPointer<QWidget> mEditor = nullptr;
 };

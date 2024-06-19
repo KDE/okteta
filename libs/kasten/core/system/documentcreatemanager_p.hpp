@@ -37,7 +37,7 @@ public:
 
 private:
     // unless there is a singleton
-    DocumentManager* mManager;
+    DocumentManager* const mManager;
 
     // temporary hack: hard coded factory for byte arrays
     AbstractDocumentFactory* mFactory = nullptr;

@@ -42,7 +42,7 @@ Q_SIGNALS:
     void generated(QMimeData* data);
 
 private:
-    AbstractModelDataGenerator* mGenerator;
+    AbstractModelDataGenerator* const mGenerator;
 
     QMimeData* mMimeData = nullptr;
 };

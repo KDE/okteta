@@ -47,7 +47,7 @@ private Q_SLOTS: // tool
                           const QMap<Okteta::Byte, int>& failedPerByteCount);
 
 private:
-    CharsetConversionTool* mTool;
+    CharsetConversionTool* const mTool;
 
     KComboBox* mDirectionComboBox;
     KComboBox* mOtherCharSetComboBox;

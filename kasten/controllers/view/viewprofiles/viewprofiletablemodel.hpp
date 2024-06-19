@@ -51,7 +51,7 @@ private Q_SLOTS:
     void onViewProfileLocksChanged(const QVector<Kasten::ByteArrayViewProfile::Id>& viewProfileIds);
 
 private:
-    const ByteArrayViewProfileManager* mViewProfileManager;
+    const ByteArrayViewProfileManager* const mViewProfileManager;
 };
 
 }

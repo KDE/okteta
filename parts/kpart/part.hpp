@@ -79,14 +79,13 @@ private Q_SLOTS:
 
 private:
     const Modus mModus;
+    Kasten::ByteArrayViewProfileManager* const mViewProfileManager;
 
     Kasten::ByteArrayDocument* mDocument;
     Kasten::ByteArrayView* mByteArrayView;
 
     Kasten::SingleViewArea* mSingleViewArea;
     QVector<Kasten::AbstractXmlGuiController*> mControllers;
-
-    Kasten::ByteArrayViewProfileManager* mViewProfileManager;
 };
 
 inline Kasten::ByteArrayView* OktetaPart::byteArrayView() const { return mByteArrayView; }

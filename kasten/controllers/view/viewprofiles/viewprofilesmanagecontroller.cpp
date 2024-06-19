@@ -24,8 +24,8 @@ namespace Kasten {
 ViewProfilesManageController::ViewProfilesManageController(KXMLGUIClient* guiClient,
                                                            ByteArrayViewProfileManager* viewProfileManager,
                                                            QWidget* parentWidget)
-    : mParentWidget(parentWidget)
-    , mViewProfileManager(viewProfileManager)
+    : mViewProfileManager(viewProfileManager)
+    , mParentWidget(parentWidget)
 {
     mManageAction = new QAction(QIcon::fromTheme(QStringLiteral("configure")),
                                 i18nc("@action:inmenu", "Manage View Profiles…"), this);

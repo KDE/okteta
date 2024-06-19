@@ -42,8 +42,9 @@ private Q_SLOTS:
     KASTENGUI_NO_EXPORT void onTitleChange(const QString& newTitle);
 
 private:
+    AbstractDocument* const mDocument;
+
     const std::unique_ptr<QLabel> mLabel;
-    AbstractDocument* mDocument;
 };
 
 }

@@ -54,8 +54,8 @@ private Q_SLOTS: // execute slots
     void addNewViewProfile(const Kasten::ByteArrayViewProfile& viewProfile);
 
 private:
-    ByteArrayViewProfileManager* mViewProfileManager;
-    QWidget* mParentWidget;
+    ByteArrayViewProfileManager* const mViewProfileManager;
+    QWidget* const mParentWidget;
 
     ByteArrayView* mByteArrayView = nullptr;
     ByteArrayViewProfileSynchronizer* mByteArrayViewProfileSynchronizer = nullptr;

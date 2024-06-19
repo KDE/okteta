@@ -39,7 +39,7 @@ Q_SIGNALS:
     void documentRead(Kasten::ByteArrayDocument* document);
 
 private:
-    QFile* mFile;
+    QFile* const mFile;
 
     ByteArrayDocument* mDocument = nullptr;
     QString mErrorString;

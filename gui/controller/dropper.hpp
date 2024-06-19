@@ -43,7 +43,7 @@ private:
     void handleInternalDrag(QDropEvent* dropEvent, AbstractByteArrayView* sourceByteArrayView);
 
 private:
-    AbstractByteArrayView* mByteArrayView;
+    AbstractByteArrayView* const mByteArrayView;
 
     Address mBeforeDragCursorPos;
     bool mBeforeDragCursorIsBehind : 1;

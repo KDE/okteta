@@ -41,7 +41,7 @@ private Q_SLOTS:
     void onDocumentsChanged();
 
 private:
-    AbstractDocumentStrategy* mDocumentStrategy;
+    AbstractDocumentStrategy* const mDocumentStrategy;
 
     AbstractDocument* mDocument = nullptr;
     QAction* mCloseAction;

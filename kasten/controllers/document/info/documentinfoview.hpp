@@ -39,7 +39,7 @@ private Q_SLOTS:
     void onDocumentSizeChanged(int newSize);
 
 private:
-    DocumentInfoTool* mTool;
+    DocumentInfoTool* const mTool;
 
     QLabel* mIconLabel;
     QLabel* mDocumentTitleLabel;

@@ -45,8 +45,8 @@ private Q_SLOTS:
                           const Kasten::AbstractModelSelection* selection);
 
 private:
-    ModelCodecViewManager* mModelCodecViewManager;
-    ModelCodecManager* mModelCodecManager;
+    ModelCodecViewManager* const mModelCodecViewManager;
+    ModelCodecManager* const mModelCodecManager;
 
     AbstractModel* mModel = nullptr;
     If::DataSelectable* mSelectionControl = nullptr;

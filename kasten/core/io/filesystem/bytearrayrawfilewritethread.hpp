@@ -38,8 +38,8 @@ Q_SIGNALS:
     void documentWritten(bool success);
 
 private:
-    ByteArrayDocument* mDocument;
-    QFile* mFile;
+    ByteArrayDocument* const mDocument;
+    QFile* const mFile;
 
     bool mSuccess = false;
 };

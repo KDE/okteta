@@ -38,7 +38,7 @@ public:
     void add(ViewBox::Area area);
 
 private:
-    AbstractView* mView;
+    AbstractView* const mView;
 };
 
 }

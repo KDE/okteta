@@ -46,8 +46,8 @@ private Q_SLOTS:
     void triggerExecution(Kasten::AbstractModelDataGenerator* generator);
 
 private:
-    ModelCodecViewManager* mModelCodecViewManager;
-    ModelCodecManager* mModelCodecManager;
+    ModelCodecViewManager* const mModelCodecViewManager;
+    ModelCodecManager* const mModelCodecManager;
 
     AbstractModel* mModel = nullptr;
     If::SelectedDataWriteable* mSelectedDataWriteableControl = nullptr;

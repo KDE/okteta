@@ -37,7 +37,8 @@ private Q_SLOTS:
     void onSettingsChanged();
 
 private:
-    ByteArraySourceCodeStreamEncoder* mEncoder;
+    ByteArraySourceCodeStreamEncoder* const mEncoder;
+
     SourceCodeStreamEncoderSettings mSettings;
 
     QLineEdit* mVariableNameEdit;

@@ -61,7 +61,7 @@ private Q_SLOTS: // tool
     void onApplyableChanged(bool isApplyable);
 
 private:
-    SelectRangeTool* mTool;
+    SelectRangeTool* const mTool;
 
     Okteta::AddressComboBox* mStartEdit;
     Okteta::AddressComboBox* mEndEdit;

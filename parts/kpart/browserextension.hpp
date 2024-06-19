@@ -39,7 +39,7 @@ private Q_SLOTS:
     void onSelectionChanged(bool hasSelection);
 
 private:
-    OktetaPart* mPart;
+    OktetaPart* const mPart;
 };
 
 #endif

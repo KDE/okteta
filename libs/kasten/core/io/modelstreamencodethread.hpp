@@ -45,10 +45,10 @@ Q_SIGNALS:
     void modelExported(bool success);
 
 private:
-    QIODevice* mIODevice;
-    AbstractModel* mModel;
-    const AbstractModelSelection* mSelection;
-    AbstractModelStreamEncoder* mEncoder;
+    QIODevice* const mIODevice;
+    AbstractModel* const mModel;
+    const AbstractModelSelection* const mSelection;
+    AbstractModelStreamEncoder* const mEncoder;
 
     bool mSuccess = false;
 };

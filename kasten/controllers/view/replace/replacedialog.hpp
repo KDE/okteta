@@ -64,7 +64,7 @@ private:
     Okteta::ByteArrayComboBox* ReplaceDataEdit;
     QCheckBox* PromptCheckBox;
 
-    ReplaceTool* mTool;
+    ReplaceTool* const mTool;
 };
 
 }

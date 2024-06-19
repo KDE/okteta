@@ -84,7 +84,7 @@ private:
     void calculateHeight();
 
 private:
-    const PrintInfo* mInfo;
+    const PrintInfo* const mInfo;
 
     int mHeight = 0;
     int mWidth = 0;

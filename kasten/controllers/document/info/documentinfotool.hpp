@@ -66,7 +66,7 @@ private:
 
     AbstractModelSynchronizer* mSynchronizer = nullptr;
 
-    DocumentSyncManager* mDocumentSyncManager;
+    DocumentSyncManager* const mDocumentSyncManager;
 
     QTimer* mMimeTypeUpdateTimer;
     QMimeType mMimeType;

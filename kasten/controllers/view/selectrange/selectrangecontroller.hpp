@@ -38,9 +38,9 @@ private Q_SLOTS: // action slots
     void select();
 
 private:
-    QAction* mSelectAction;
+    If::ToolInlineViewable* const mToolInlineViewable;
 
-    If::ToolInlineViewable* mToolInlineViewable;
+    QAction* mSelectAction;
 
     SelectRangeToolView* mView;
     SelectRangeTool* mTool;

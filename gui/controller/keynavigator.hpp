@@ -51,7 +51,7 @@ private:
     void selectAll();
 
 private:
-    AbstractByteArrayView* mView;
+    AbstractByteArrayView* const mView;
 };
 
 }

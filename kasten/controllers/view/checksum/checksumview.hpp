@@ -53,7 +53,7 @@ private Q_SLOTS: // tool
     void onValidityChanged(bool isValid);
 
 private:
-    ChecksumTool* mTool;
+    ChecksumTool* const mTool;
 
     KComboBox* mAlgorithmComboBox;
     QStackedWidget* mParameterSetEditStack;

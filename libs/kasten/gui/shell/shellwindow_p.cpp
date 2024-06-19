@@ -30,8 +30,8 @@ namespace Kasten {
 ShellWindowPrivate::ShellWindowPrivate(ShellWindow* parent,
                                        ViewManager* viewManager)
     : q_ptr(parent)
-    , mGroupedViews(new MultiViewAreas())
     , mViewManager(viewManager)
+    , mGroupedViews(new MultiViewAreas())
 {
     parent->setCentralWidget(mGroupedViews->widget());
 

@@ -57,7 +57,7 @@ private Q_SLOTS: // action slots
     void onFinished(bool previousFound, int noOfReplacements);
 
 private:
-    QWidget* mParentWidget;
+    QWidget* const mParentWidget;
 
     QAction* mReplaceAction;
 

@@ -42,7 +42,8 @@ private Q_SLOTS:
     void onSyncStateChanged();
 
 private:
-    DocumentSyncManager* mSyncManager;
+    DocumentSyncManager* const mSyncManager;
+
     AbstractDocument* mDocument = nullptr;
     AbstractModelFileSystemSynchronizer* mSynchronizer = nullptr;
 

@@ -39,12 +39,12 @@ public:
     void exec();
 
 private:
-    const Okteta::AbstractByteArrayModel* mByteArrayModel;
+    const Okteta::AbstractByteArrayModel* const mByteArrayModel;
     const Okteta::AddressRange mSelection;
-    const Okteta::CharCodec* mCharCodec;
+    const Okteta::CharCodec* const mCharCodec;
     const int mMinLength;
 
-    QList<ContainedString>* mContainedStringList;
+    QList<ContainedString>* const mContainedStringList;
 };
 
 inline ExtractStringsJob::ExtractStringsJob(const Okteta::AbstractByteArrayModel* model,

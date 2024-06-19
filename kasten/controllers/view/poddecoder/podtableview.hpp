@@ -51,7 +51,7 @@ private Q_SLOTS:
     void selectBytesInView();
 
 private:
-    PODDecoderTool* mTool;
+    PODDecoderTool* const mTool;
 
     PODTableModel* mPODTableModel;
 

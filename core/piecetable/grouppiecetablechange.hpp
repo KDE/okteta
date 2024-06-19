@@ -79,7 +79,7 @@ public:
 
 private:
     QStack<AbstractPieceTableChange*> mChangeStack;
-    GroupPieceTableChange* mParent;
+    GroupPieceTableChange* const mParent;
 
     QString mDescription;
     ///

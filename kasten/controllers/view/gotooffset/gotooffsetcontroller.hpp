@@ -40,7 +40,7 @@ private Q_SLOTS: // action slots
 private:
     QAction* mGotoOffsetAction;
 
-    If::ToolInlineViewable* mToolInlineViewable;
+    If::ToolInlineViewable* const mToolInlineViewable;
 
     GotoOffsetToolView* mView;
     GotoOffsetTool* mTool;

@@ -51,7 +51,7 @@ private Q_SLOTS: // action slots
     void onDataNotFound();
 
 private:
-    QWidget* mParentWidget;
+    QWidget* const mParentWidget;
 
     QAction* mFindAction;
     QAction* mFindNextAction;

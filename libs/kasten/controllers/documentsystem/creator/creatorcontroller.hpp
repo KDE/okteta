@@ -38,8 +38,8 @@ private Q_SLOTS:
     void onNewFromGeneratorActionTriggered();
 
 private:
-    ModelCodecManager* mModelCodecManager;
-    AbstractDocumentStrategy* mDocumentStrategy;
+    ModelCodecManager* const mModelCodecManager;
+    AbstractDocumentStrategy* const mDocumentStrategy;
 };
 
 }

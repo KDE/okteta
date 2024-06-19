@@ -28,7 +28,7 @@ public:
     bool handleTapGesture(QTapGesture* tapGesture);
 
 private:
-    AbstractByteArrayView* mView;
+    AbstractByteArrayView* const mView;
 };
 
 }

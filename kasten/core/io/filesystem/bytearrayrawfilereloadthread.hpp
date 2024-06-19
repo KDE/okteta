@@ -39,7 +39,7 @@ Q_SIGNALS:
     void documentReloaded(bool success);
 
 private:
-    QFile* mFile;
+    QFile* const mFile;
 
     bool mSuccess = false;
     QString mErrorString;

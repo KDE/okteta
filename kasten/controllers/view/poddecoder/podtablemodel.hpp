@@ -47,7 +47,8 @@ private Q_SLOTS:
     void onDataChanged();
 
 private:
-    PODDecoderTool* mTool;
+    PODDecoderTool* const mTool;
+
     const QString mEmptyNote;
 };
 
