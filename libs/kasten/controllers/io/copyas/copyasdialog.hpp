@@ -11,6 +11,8 @@
 
 // Qt
 #include <QDialog>
+// Std
+#include <memory>
 
 namespace Kasten {
 
@@ -49,7 +51,9 @@ private Q_SLOTS:
 private:
     AbstractModelStreamEncoderConfigEditor* const mConfigEditor;
     AbstractModelStreamEncoder* const m_encoder;
-    AbstractSelectionView* mPreviewView;
+
+    std::unique_ptr<AbstractSelectionView> mPreviewView;
+
     const AbstractModelSelection* m_selection = nullptr;
 };
 

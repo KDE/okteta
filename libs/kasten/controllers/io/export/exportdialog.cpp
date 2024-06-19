@@ -56,7 +56,7 @@ ExportDialog::ExportDialog(const QString& remoteTypeName,
     splitter->addWidget(editorPage);
     splitter->setCollapsible(0, false);
 
-    mPreviewView = configEditor->createPreviewView();
+    mPreviewView.reset(configEditor->createPreviewView());
 
     if (mPreviewView) {
         auto* previewBox = new QGroupBox(i18nc("@title:group", "Preview"), this);
@@ -98,10 +98,7 @@ ExportDialog::ExportDialog(const QString& remoteTypeName,
     connect(this, &QDialog::finished, this, &ExportDialog::onFinished);
 }
 
-ExportDialog::~ExportDialog()
-{
-    delete mPreviewView;
-}
+ExportDialog::~ExportDialog() = default;
 
 void ExportDialog::setData(AbstractModel* model, const AbstractModelSelection* selection)
 {

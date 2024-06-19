@@ -56,7 +56,7 @@ CopyAsDialog::CopyAsDialog(const QString& remoteTypeName,
     splitter->addWidget(editorPage);
     splitter->setCollapsible(0, false);
 
-    mPreviewView = configEditor->createPreviewView();
+    mPreviewView.reset(configEditor->createPreviewView());
 
     if (mPreviewView) {
         auto* previewBox = new QGroupBox(i18nc("@title:group", "Preview"), this);
@@ -98,10 +98,7 @@ CopyAsDialog::CopyAsDialog(const QString& remoteTypeName,
     connect(this, &QDialog::finished, this, &CopyAsDialog::onFinished);
 }
 
-CopyAsDialog::~CopyAsDialog()
-{
-    delete mPreviewView;
-}
+CopyAsDialog::~CopyAsDialog() = default;
 
 void CopyAsDialog::setData(AbstractModel* model, const AbstractModelSelection* selection)
 {
