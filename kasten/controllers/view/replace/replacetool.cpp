@@ -151,18 +151,17 @@ void ReplaceTool::replace(FindDirection direction, bool fromCursor, bool inSelec
                                                 direction,
                                                 fromCursor, inSelection)) {
         // no search doable, so skip any search and finish now
-        mReplaceJob = nullptr;
         Q_EMIT finished(false, 0);
         return;
     }
 
-    mReplaceJob = new ReplaceJob(mByteArrayView, mByteArrayModel, mUserQueryAgent, this);
+    mReplaceJob = std::make_unique<ReplaceJob>(mByteArrayView, mByteArrayModel, mUserQueryAgent, this);
     mReplaceJob->setSearchData(mSearchData);
     mReplaceJob->setReplaceData(mReplaceData);
     mReplaceJob->setCaseSensitivity(mCaseSensitivity);
     mReplaceJob->setDoPrompt(mDoPrompt);
     mReplaceJob->setRange(replaceRangeStartIndex, replaceRangeEndIndex, direction);
-    connect(mReplaceJob, &ReplaceJob::finished, this, &ReplaceTool::onJobFinished);
+    connect(mReplaceJob.get(), &ReplaceJob::finished, this, &ReplaceTool::onJobFinished);
 
     Q_EMIT isApplyableChanged(isApplyable());
 
@@ -179,8 +178,7 @@ void ReplaceTool::onReadOnlyChanged(bool isReadOnly)
 
 void ReplaceTool::onJobFinished(bool previousFound, int noOfReplacements)
 {
-    delete mReplaceJob;
-    mReplaceJob = nullptr;
+    mReplaceJob.reset();
 
     Q_EMIT finished(previousFound, noOfReplacements);
     Q_EMIT isApplyableChanged(isApplyable());

@@ -15,6 +15,8 @@
 #include <Kasten/AbstractTool>
 // Okteta core
 #include <Okteta/Address>
+// Std
+#include <memory>
 
 namespace Okteta {
 class AbstractByteArrayModel;
@@ -90,7 +92,7 @@ private: // settings
     bool mDoPrompt : 1;
 
 private: // status
-    ReplaceJob* mReplaceJob = nullptr;
+    std::unique_ptr<ReplaceJob> mReplaceJob;
 
 private:
     // expected to implement If::ReplaceUserQueryable
