@@ -9,11 +9,12 @@
 #ifndef KASTEN_ABSTRACTDOCUMENT_P_HPP
 #define KASTEN_ABSTRACTDOCUMENT_P_HPP
 
+// lib
 #include "abstractmodel_p.hpp"
 #include "abstractdocument.hpp"
-
-// lib
 #include "abstractmodelsynchronizer.hpp"
+// Std
+#include <memory>
 
 namespace Kasten {
 
@@ -37,33 +38,29 @@ private:
 
 private:
     QString mId;
-    AbstractModelSynchronizer* mSynchronizer = nullptr; // TODO: should this be here, with public setters and getters?
+    std::unique_ptr<AbstractModelSynchronizer> mSynchronizer; // TODO: should this be here, with public setters and getters?
 };
 
 inline AbstractDocumentPrivate::AbstractDocumentPrivate(AbstractDocument* parent)
     : AbstractModelPrivate(parent)
 {}
 
-inline AbstractDocumentPrivate::~AbstractDocumentPrivate()
-{
-    delete mSynchronizer;
-}
+inline AbstractDocumentPrivate::~AbstractDocumentPrivate() = default;
 
 inline const QString& AbstractDocumentPrivate::id() const { return mId; }
 inline void AbstractDocumentPrivate::setId(const QString& id) { mId = id; }
 
-inline AbstractModelSynchronizer* AbstractDocumentPrivate::synchronizer() const { return mSynchronizer; }
+inline AbstractModelSynchronizer* AbstractDocumentPrivate::synchronizer() const { return mSynchronizer.get(); }
 inline void AbstractDocumentPrivate::setSynchronizer(AbstractModelSynchronizer* synchronizer)
 {
     Q_Q(AbstractDocument);
 
     // plugging the same more than once?
-    if (mSynchronizer == synchronizer) {
+    if (mSynchronizer.get() == synchronizer) {
         return;
     }
 
-    delete mSynchronizer;
-    mSynchronizer = synchronizer;
+    mSynchronizer.reset(synchronizer);
 
     Q_EMIT q->synchronizerChanged(synchronizer);
 }
