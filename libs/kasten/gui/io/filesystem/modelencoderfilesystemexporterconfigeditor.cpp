@@ -20,13 +20,10 @@ ModelEncoderFileSystemExporterConfigEditor::ModelEncoderFileSystemExporterConfig
 {
     auto* layout = new QHBoxLayout(this);
     layout->setSpacing(0);
-    layout->addWidget(mEncoderConfigEditor);
+    layout->addWidget(mEncoderConfigEditor.get());
 }
 
-ModelEncoderFileSystemExporterConfigEditor::~ModelEncoderFileSystemExporterConfigEditor()
-{
-    delete mEncoderConfigEditor;
-}
+ModelEncoderFileSystemExporterConfigEditor::~ModelEncoderFileSystemExporterConfigEditor() = default;
 
 bool ModelEncoderFileSystemExporterConfigEditor::isValid() const
 {

@@ -11,6 +11,8 @@
 
 // lib
 #include "abstractmodelexporterconfigeditor.hpp"
+// Std
+#include <memory>
 
 namespace Kasten {
 
@@ -29,7 +31,7 @@ public: // AbstractModelExporterConfigEditor API
     AbstractSelectionView* createPreviewView() const override;
 
 private:
-    AbstractModelStreamEncoderConfigEditor* mEncoderConfigEditor;
+    const std::unique_ptr<AbstractModelStreamEncoderConfigEditor> mEncoderConfigEditor;
 };
 
 }
