@@ -35,22 +35,19 @@ GotoOffsetController::GotoOffsetController(If::ToolInlineViewable* toolInlineVie
 
     actionCollection->addAction(QStringLiteral("goto_offset"), mGotoOffsetAction);
 
-    mTool = new GotoOffsetTool();
-    connect(mTool, &GotoOffsetTool::isUsableChanged,
+    mTool = std::make_unique<GotoOffsetTool>();
+    connect(mTool.get(), &GotoOffsetTool::isUsableChanged,
             mGotoOffsetAction, &QAction::setEnabled);
     mGotoOffsetAction->setEnabled(mTool->isUsable());
 
-    mView = new GotoOffsetToolView(mTool);
+    mView = std::make_unique<GotoOffsetToolView>(mTool.get());
 }
 
 GotoOffsetController::~GotoOffsetController()
 {
-    if (mToolInlineViewable->currentToolInlineView() == mView) {
+    if (mToolInlineViewable->currentToolInlineView() == mView.get()) {
         mToolInlineViewable->setCurrentToolInlineView(nullptr);
     }
-
-    delete mView;
-    delete mTool;
 }
 
 void GotoOffsetController::setTargetModel(AbstractModel* model)
@@ -60,7 +57,7 @@ void GotoOffsetController::setTargetModel(AbstractModel* model)
 
 void GotoOffsetController::gotoOffset()
 {
-    mToolInlineViewable->setCurrentToolInlineView(mView);
+    mToolInlineViewable->setCurrentToolInlineView(mView.get());
 }
 
 }

@@ -11,6 +11,8 @@
 
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
+// Std
+#include <memory>
 
 class QAction;
 class KXMLGUIClient;
@@ -36,7 +38,7 @@ public: // TODO: this is a hack to enable the browser extension of the KPart to 
 private:
     QAction* mPrintAction;
 
-    PrintTool* mPrintTool;
+    const std::unique_ptr<PrintTool> mPrintTool;
 };
 
 }

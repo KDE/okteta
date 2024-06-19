@@ -15,6 +15,8 @@
 #include "finddirection.hpp"
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
+// Std
+#include <memory>
 
 class KXMLGUIClient;
 class QAction;
@@ -61,9 +63,10 @@ private:
 
     QAction* mReplaceAction;
 
-    ReplaceDialog* mReplaceDialog = nullptr;
-    mutable ReplacePrompt* mReplacePrompt = nullptr;
-    ReplaceTool* mTool;
+    // in (reverse) order of destruction
+    std::unique_ptr<ReplaceTool> mTool;
+    mutable std::unique_ptr<ReplacePrompt> mReplacePrompt;
+    std::unique_ptr<ReplaceDialog> mReplaceDialog;
 };
 
 }

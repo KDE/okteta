@@ -11,6 +11,8 @@
 
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
+// Std
+#include <memory>
 
 class QAction;
 class KXMLGUIClient;
@@ -42,8 +44,9 @@ private:
 
     If::ToolInlineViewable* const mToolInlineViewable;
 
-    GotoOffsetToolView* mView;
-    GotoOffsetTool* mTool;
+    // in (reverse) order of destruction
+    std::unique_ptr<GotoOffsetTool> mTool;
+    std::unique_ptr<GotoOffsetToolView> mView;
 };
 
 }

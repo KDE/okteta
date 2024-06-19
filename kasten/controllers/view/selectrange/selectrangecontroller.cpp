@@ -36,22 +36,19 @@ SelectRangeController::SelectRangeController(If::ToolInlineViewable* toolInlineV
 
     actionCollection->addAction(QStringLiteral("edit_select"), mSelectAction);
 
-    mTool = new SelectRangeTool();
-    connect(mTool, &SelectRangeTool::isUsableChanged,
+    mTool = std::make_unique<SelectRangeTool>();
+    connect(mTool.get(), &SelectRangeTool::isUsableChanged,
             mSelectAction, &QAction::setEnabled);
     mSelectAction->setEnabled(mTool->isUsable());
 
-    mView = new SelectRangeToolView(mTool);
+    mView = std::make_unique<SelectRangeToolView>(mTool.get());
 }
 
 SelectRangeController::~SelectRangeController()
 {
-    if (mToolInlineViewable->currentToolInlineView() == mView) {
+    if (mToolInlineViewable->currentToolInlineView() == mView.get()) {
         mToolInlineViewable->setCurrentToolInlineView(nullptr);
     }
-
-    delete mView;
-    delete mTool;
 }
 
 void SelectRangeController::setTargetModel(AbstractModel* model)
@@ -62,7 +59,7 @@ void SelectRangeController::setTargetModel(AbstractModel* model)
 void SelectRangeController::select()
 {
 //     mView->activate(); // TODO: show would be better here, or should instead toolInlineViewable be asked?
-    mToolInlineViewable->setCurrentToolInlineView(mView);
+    mToolInlineViewable->setCurrentToolInlineView(mView.get());
 }
 
 }

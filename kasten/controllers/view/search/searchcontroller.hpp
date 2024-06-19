@@ -15,6 +15,8 @@
 #include "finddirection.hpp"
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
+// Std
+#include <memory>
 
 class KXMLGUIClient;
 class QAction;
@@ -57,8 +59,9 @@ private:
     QAction* mFindNextAction;
     QAction* mFindPrevAction;
 
-    SearchDialog* mSearchDialog = nullptr;
-    SearchTool* mTool;
+    // in (reverse) order of destruction
+    std::unique_ptr<SearchTool> mTool;
+    std::unique_ptr<SearchDialog> mSearchDialog;
 };
 
 }

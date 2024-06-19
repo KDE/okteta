@@ -11,6 +11,8 @@
 
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
+// Std
+#include <memory>
 
 class QAction;
 class KXMLGUIClient;
@@ -42,8 +44,9 @@ private:
 
     QAction* mSelectAction;
 
-    SelectRangeToolView* mView;
-    SelectRangeTool* mTool;
+    // in (reverse) order of destruction
+    std::unique_ptr<SelectRangeTool> mTool;
+    std::unique_ptr<SelectRangeToolView> mView;
 };
 
 }

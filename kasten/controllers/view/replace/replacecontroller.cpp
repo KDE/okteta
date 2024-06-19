@@ -31,23 +31,18 @@ ReplaceController::ReplaceController(KXMLGUIClient* guiClient, QWidget* parentWi
 
     guiClient->actionCollection()->addAction(mReplaceAction->objectName(), mReplaceAction);
 
-    mTool = new ReplaceTool();
+    mTool = std::make_unique<ReplaceTool>();
     mTool->setUserQueryAgent(this);
 
-    connect(mTool, &ReplaceTool::isApplyableChanged,
+    connect(mTool.get(), &ReplaceTool::isApplyableChanged,
             mReplaceAction, &QAction::setEnabled);
 
-    connect(mTool, &ReplaceTool::finished, this, &ReplaceController::onFinished);
+    connect(mTool.get(), &ReplaceTool::finished, this, &ReplaceController::onFinished);
 
     mReplaceAction->setEnabled(false);
 }
 
-ReplaceController::~ReplaceController()
-{
-    delete mReplaceDialog;
-    delete mReplacePrompt;
-    delete mTool;
-}
+ReplaceController::~ReplaceController() = default;
 
 void ReplaceController::setTargetModel(AbstractModel* model)
 {
@@ -58,7 +53,7 @@ void ReplaceController::replace()
 {
     // ensure dialog
     if (!mReplaceDialog) {
-        mReplaceDialog = new ReplaceDialog(mTool, mParentWidget);
+        mReplaceDialog = std::make_unique<ReplaceDialog>(mTool.get(), mParentWidget);
     }
 
     mReplaceDialog->show();
@@ -105,8 +100,8 @@ void ReplaceController::queryContinue(FindDirection direction, int noOfReplaceme
 void ReplaceController::queryReplaceCurrent()
 {
     if (!mReplacePrompt) {
-        mReplacePrompt = new ReplacePrompt(mParentWidget);
-        connect(mReplacePrompt, &ReplacePrompt::finished,
+        mReplacePrompt = std::make_unique<ReplacePrompt>(mParentWidget);
+        connect(mReplacePrompt.get(), &ReplacePrompt::finished,
                 this, &ReplaceController::onPromptReply);
     }
     mReplacePrompt->show();

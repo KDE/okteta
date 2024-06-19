@@ -37,28 +37,24 @@ SearchController::SearchController(KXMLGUIClient* guiClient, QWidget* parentWidg
     });
 
 
-    mTool = new SearchTool();
+    mTool = std::make_unique<SearchTool>();
     mTool->setUserQueryAgent(this);
 
-    connect(mTool, &SearchTool::isApplyableChanged,
+    connect(mTool.get(), &SearchTool::isApplyableChanged,
             mFindAction, &QAction::setEnabled);
-    connect(mTool, &SearchTool::isApplyableChanged,
+    connect(mTool.get(), &SearchTool::isApplyableChanged,
             mFindNextAction, &QAction::setEnabled);
-    connect(mTool, &SearchTool::isApplyableChanged,
+    connect(mTool.get(), &SearchTool::isApplyableChanged,
             mFindPrevAction, &QAction::setEnabled);
 
-    connect(mTool, &SearchTool::dataNotFound, this, &SearchController::onDataNotFound);
+    connect(mTool.get(), &SearchTool::dataNotFound, this, &SearchController::onDataNotFound);
 
     mFindAction->setEnabled(false);
     mFindNextAction->setEnabled(false);
     mFindPrevAction->setEnabled(false);
 }
 
-SearchController::~SearchController()
-{
-    delete mSearchDialog;
-    delete mTool;
-}
+SearchController::~SearchController() = default;
 
 void SearchController::setTargetModel(AbstractModel* model)
 {
@@ -69,7 +65,7 @@ void SearchController::find()
 {
     // ensure dialog
     if (!mSearchDialog) {
-        mSearchDialog = new SearchDialog(mTool, mParentWidget);
+        mSearchDialog = std::make_unique<SearchDialog>(mTool.get(), mParentWidget);
     }
 
     mSearchDialog->show();
@@ -98,7 +94,7 @@ void SearchController::showDialog(FindDirection direction)
 {
     // ensure dialog
     if (!mSearchDialog) {
-        mSearchDialog = new SearchDialog(mTool, mParentWidget);
+        mSearchDialog = std::make_unique<SearchDialog>(mTool.get(), mParentWidget);
     }
 
     mSearchDialog->setDirection(direction);
