@@ -224,7 +224,7 @@ private:
     /** */
     Bookmarkable* mBookmarks;
     /** */
-    const CharCodec* mCharCodec;
+    const CharCodec* mCharCodec = nullptr;
 
     AbstractByteArrayView::CodingTypes mVisibleCodings;
     /** */

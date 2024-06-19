@@ -171,7 +171,7 @@ protected:
     /** */
     Bookmarkable* mBookmarks;
     /** */
-    const CharCodec* mCharCodec;
+    const CharCodec* mCharCodec = nullptr;
 
     /** */
     PixelX mDigitWidth = 0;
