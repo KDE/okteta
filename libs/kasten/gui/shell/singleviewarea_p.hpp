@@ -14,6 +14,8 @@
 #include "singleviewarea.hpp"
 #include "viewareabox.hpp"
 #include "abstractview.hpp"
+// Std
+#include <memory>
 
 class QDragMoveEvent;
 class QDropEvent;
@@ -46,12 +48,13 @@ private:
     Q_DECLARE_PUBLIC(SingleViewArea)
 
 private:
-    ViewAreaBox* mViewAreaBox = nullptr;
+    std::unique_ptr<ViewAreaBox> mViewAreaBox;
+
     AbstractView* mCurrentView = nullptr;
     AbstractToolInlineView* mCurrentToolInlineView = nullptr;
 };
 
-inline QWidget* SingleViewAreaPrivate::widget()  const { return mViewAreaBox; }
+inline QWidget* SingleViewAreaPrivate::widget()  const { return mViewAreaBox.get(); }
 inline bool SingleViewAreaPrivate::hasFocus()    const
 {
     return mCurrentView ? mCurrentView->hasFocus() : false;

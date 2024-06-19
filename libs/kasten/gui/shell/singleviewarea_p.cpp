@@ -21,16 +21,13 @@ SingleViewAreaPrivate::SingleViewAreaPrivate(SingleViewArea* parent)
 {
 }
 
-SingleViewAreaPrivate::~SingleViewAreaPrivate()
-{
-    delete mViewAreaBox;
-}
+SingleViewAreaPrivate::~SingleViewAreaPrivate() = default;
 
 void SingleViewAreaPrivate::init()
 {
 //     Q_Q( SingleViewArea );
 
-    mViewAreaBox = new ViewAreaBox(nullptr);   // TODO: atm cannot replace this
+    mViewAreaBox = std::make_unique<ViewAreaBox>(nullptr);   // TODO: atm cannot replace this
 
 //     TODO: get drag/drop events
 //     q->connect( mTabWidget, SIGNAL(testCanDecode(const QDragMoveEvent*,bool&)),
