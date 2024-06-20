@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-26 01:39+0000\n"
+"POT-Creation-Date: 2024-06-20 01:50+0000\n"
 "PO-Revision-Date: 2015-02-04 16:00+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: bosanski <bs@li.org>\n"
@@ -203,78 +203,78 @@ msgid ""
 msgstr ""
 "Po pritisku ovog dugmeta moći ćete da uredite posljednju izabranu zabilješku."
 
-#: controllers/view/bytetable/bytetablemodel.cpp:121
-#: controllers/view/info/statistictablemodel.cpp:137
+#: controllers/view/bytetable/bytetablemodel.cpp:113
+#: controllers/view/info/statistictablemodel.cpp:130
 #, kde-format
 msgctxt "@item:intable character is not defined"
 msgid "undef."
 msgstr "nedef."
 
-#: controllers/view/bytetable/bytetablemodel.cpp:158
-#: controllers/view/info/statistictablemodel.cpp:214
+#: controllers/view/bytetable/bytetablemodel.cpp:150
+#: controllers/view/info/statistictablemodel.cpp:207
 #, kde-format
 msgctxt "@title:column short for Decimal"
 msgid "Dec"
 msgstr "Dec"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:159
-#: controllers/view/info/statistictablemodel.cpp:213
+#: controllers/view/bytetable/bytetablemodel.cpp:151
+#: controllers/view/info/statistictablemodel.cpp:206
 #, kde-format
 msgctxt "@title:column short for Hexadecimal"
 msgid "Hex"
 msgstr "Heks"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:160
-#: controllers/view/info/statistictablemodel.cpp:215
+#: controllers/view/bytetable/bytetablemodel.cpp:152
+#: controllers/view/info/statistictablemodel.cpp:208
 #, kde-format
 msgctxt "@title:column short for Octal"
 msgid "Oct"
 msgstr "Okt"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:161
-#: controllers/view/info/statistictablemodel.cpp:216
+#: controllers/view/bytetable/bytetablemodel.cpp:153
+#: controllers/view/info/statistictablemodel.cpp:209
 #, kde-format
 msgctxt "@title:column short for Binary"
 msgid "Bin"
 msgstr "Bin"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:162
-#: controllers/view/info/statistictablemodel.cpp:218
+#: controllers/view/bytetable/bytetablemodel.cpp:154
+#: controllers/view/info/statistictablemodel.cpp:211
 #, kde-format
 msgctxt "@title:column short for Character"
 msgid "Char"
 msgstr "Char"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:168
-#: controllers/view/info/statistictablemodel.cpp:229
+#: controllers/view/bytetable/bytetablemodel.cpp:160
+#: controllers/view/info/statistictablemodel.cpp:222
 #, kde-format
 msgctxt "@info:tooltip column contains the value in decimal format"
 msgid "Decimal"
 msgstr "Decimalni"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:170
-#: controllers/view/info/statistictablemodel.cpp:227
+#: controllers/view/bytetable/bytetablemodel.cpp:162
+#: controllers/view/info/statistictablemodel.cpp:220
 #, kde-format
 msgctxt "@info:tooltip column contains the value in hexadecimal format"
 msgid "Hexadecimal"
 msgstr "Хексадекадни"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:172
-#: controllers/view/info/statistictablemodel.cpp:231
+#: controllers/view/bytetable/bytetablemodel.cpp:164
+#: controllers/view/info/statistictablemodel.cpp:224
 #, kde-format
 msgctxt "@info:tooltip column contains the value in octal format"
 msgid "Octal"
 msgstr "Oktalni"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:174
-#: controllers/view/info/statistictablemodel.cpp:233
+#: controllers/view/bytetable/bytetablemodel.cpp:166
+#: controllers/view/info/statistictablemodel.cpp:226
 #, kde-format
 msgctxt "@info:tooltip column contains the value in binary format"
 msgid "Binary"
 msgstr "Binarni"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:176
-#: controllers/view/info/statistictablemodel.cpp:237
+#: controllers/view/bytetable/bytetablemodel.cpp:168
+#: controllers/view/info/statistictablemodel.cpp:230
 #, kde-format
 msgctxt "@info:tooltip column contains the character with the value"
 msgid "Character"
@@ -765,13 +765,13 @@ msgstr[0] "%1 bajt"
 msgstr[1] "%1 bajta"
 msgstr[2] "%1 bajtova"
 
-#: controllers/view/info/statistictablemodel.cpp:219
+#: controllers/view/info/statistictablemodel.cpp:212
 #, kde-format
 msgctxt "@title:column count of characters"
 msgid "Count"
 msgstr "Broj"
 
-#: controllers/view/info/statistictablemodel.cpp:220
+#: controllers/view/info/statistictablemodel.cpp:213
 #, kde-format
 msgctxt "@title:column Percent of byte in total"
 msgid "Percent"
@@ -1218,8 +1218,8 @@ msgid "UTF-8"
 msgstr "UTF‑8"
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:73
-#: controllers/view/search/searchcontroller.cpp:111
-#: controllers/view/search/searchcontroller.cpp:117
+#: controllers/view/search/searchcontroller.cpp:107
+#: controllers/view/search/searchcontroller.cpp:113
 #, kde-format
 msgctxt "@title:window"
 msgid "Find"
@@ -1309,14 +1309,14 @@ msgstr ""
 "Izaberite želite li da se unos umeće u postojeće podatke, ili da ih "
 "prebrisuje."
 
-#: controllers/view/poddecoder/poddecodertool.cpp:94
+#: controllers/view/poddecoder/poddecodertool.cpp:93
 #: controllers/view/poddecoder/poddecodertoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
 msgid "Decoding Table"
 msgstr "Tabela dekodiranja"
 
-#: controllers/view/poddecoder/poddecodertool.cpp:301
+#: controllers/view/poddecoder/poddecodertool.cpp:299
 #, kde-format
 msgctxt "Edited as %datatype"
 msgid "Edited as %1"
@@ -1443,22 +1443,22 @@ msgctxt "@info"
 msgid "Could not print."
 msgstr "Ne mogu da štampam."
 
-#: controllers/view/replace/replacecontroller.cpp:73
-#: controllers/view/replace/replacecontroller.cpp:87
+#: controllers/view/replace/replacecontroller.cpp:68
+#: controllers/view/replace/replacecontroller.cpp:82
 #, kde-format
 msgctxt "@title:window"
 msgid "Replace"
 msgstr "Zamijeni"
 
-#: controllers/view/replace/replacecontroller.cpp:75
-#: controllers/view/replace/replacecontroller.cpp:89
+#: controllers/view/replace/replacecontroller.cpp:70
+#: controllers/view/replace/replacecontroller.cpp:84
 #, kde-format
 msgctxt "@info"
 msgid "No replacements made."
 msgstr "Ništa nije zamijenjeno."
 
-#: controllers/view/replace/replacecontroller.cpp:76
-#: controllers/view/replace/replacecontroller.cpp:90
+#: controllers/view/replace/replacecontroller.cpp:71
+#: controllers/view/replace/replacecontroller.cpp:85
 #, kde-format
 msgctxt "@info"
 msgid "1 replacement made."
@@ -1467,21 +1467,21 @@ msgstr[0] "Izvršena %1 zamjena."
 msgstr[1] "Izvršene %1 zamjene."
 msgstr[2] "Izvršeno %1 zamjena."
 
-#: controllers/view/replace/replacecontroller.cpp:79
+#: controllers/view/replace/replacecontroller.cpp:74
 #, kde-format
 msgctxt "@info"
 msgid "Replace pattern not found in byte array."
 msgstr "Obrazac za zamjenu nije nađen u nizu bajtova."
 
-#: controllers/view/replace/replacecontroller.cpp:92
-#: controllers/view/search/searchcontroller.cpp:119
+#: controllers/view/replace/replacecontroller.cpp:87
+#: controllers/view/search/searchcontroller.cpp:115
 #, kde-kuit-format
 msgctxt "@info"
 msgid "End of byte array reached.<nl/>Continue from the beginning?"
 msgstr "Dostignut kraj niza bajtova.<nl/>Nastaviti od početka?"
 
-#: controllers/view/replace/replacecontroller.cpp:93
-#: controllers/view/search/searchcontroller.cpp:120
+#: controllers/view/replace/replacecontroller.cpp:88
+#: controllers/view/search/searchcontroller.cpp:116
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Beginning of byte array reached.<nl/>Continue from the end?"
@@ -1575,7 +1575,7 @@ msgctxt "@title"
 msgid "Replace"
 msgstr "Izmjesti"
 
-#: controllers/view/search/searchcontroller.cpp:112
+#: controllers/view/search/searchcontroller.cpp:108
 #, kde-format
 msgctxt "@info"
 msgid "Search key not found in byte array."
@@ -2025,13 +2025,13 @@ msgstr "ASCII char"
 msgid "ASCII string"
 msgstr "ASCII Niz znakova"
 
-#: controllers/view/structures/datatypes/strings/ebcdicstringdata.cpp:137
+#: controllers/view/structures/datatypes/strings/ebcdicstringdata.cpp:134
 #, fuzzy, kde-format
 #| msgid "ASCII char"
 msgid "EBCDIC char"
 msgstr "ASCII char"
 
-#: controllers/view/structures/datatypes/strings/ebcdicstringdata.cpp:147
+#: controllers/view/structures/datatypes/strings/ebcdicstringdata.cpp:144
 #, fuzzy, kde-format
 #| msgid "ASCII string"
 msgid "EBCDIC string"
@@ -3165,7 +3165,7 @@ msgctxt "@info:status selection: start offset - end offset (number of bytes)"
 msgid "Selection: %1 - %2 (%3)"
 msgstr "Izbor: %1–%2 (%3)"
 
-#: core/document/bytearraydocument.cpp:53
+#: core/document/bytearraydocument.cpp:50
 #, kde-format
 msgctxt "name of the data type"
 msgid "Byte Array"

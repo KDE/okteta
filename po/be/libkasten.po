@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-26 01:39+0000\n"
+"POT-Creation-Date: 2024-06-20 01:50+0000\n"
 "PO-Revision-Date: 2008-01-06 21:51+0200\n"
 "Last-Translator: Darafei Praliaskouski <komzpa@gmail.com>\n"
 "Language-Team: Belarusian (Official spelling) <i18n@mova.org>\n"
@@ -382,19 +382,19 @@ msgctxt "@info:tooltip"
 msgid "Zoom: %1%"
 msgstr ""
 
-#: core/system/documentsyncmanager_p.cpp:114
+#: core/system/documentsyncmanager_p.cpp:111
 #, kde-format
 msgctxt "@title:window"
 msgid "Save As"
 msgstr ""
 
-#: core/system/documentsyncmanager_p.cpp:203
+#: core/system/documentsyncmanager_p.cpp:200
 #, kde-format
 msgctxt "@title:window"
 msgid "Close"
 msgstr ""
 
-#: core/system/documentsyncmanager_p.cpp:238
+#: core/system/documentsyncmanager_p.cpp:235
 #, kde-format
 msgctxt "@title:window"
 msgid "Reload"

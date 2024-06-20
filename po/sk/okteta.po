@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:41+0000\n"
+"POT-Creation-Date: 2024-06-20 01:50+0000\n"
 "PO-Revision-Date: 2023-12-06 19:12+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -89,7 +89,7 @@ msgstr "Okno(&W)"
 msgid "Main Toolbar"
 msgstr "Hlavná lišta nástrojov"
 
-#: program.cpp:89
+#: program.cpp:82
 #, kde-format
 msgid "File(s) to load."
 msgstr "Súbor(y) na načítanie."

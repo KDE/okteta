@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-26 01:39+0000\n"
+"POT-Creation-Date: 2024-06-20 01:50+0000\n"
 "PO-Revision-Date: 2010-01-09 18:03+0200\n"
 "Last-Translator: Viesturs Zarins <viesturs.zarins@mii.lu.lv>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -198,78 +198,78 @@ msgid ""
 "can be edited."
 msgstr "Nospiežot pogu, varēsiet rediģēt izvēlētās grāmatzīmes nosaukumu."
 
-#: controllers/view/bytetable/bytetablemodel.cpp:121
-#: controllers/view/info/statistictablemodel.cpp:137
+#: controllers/view/bytetable/bytetablemodel.cpp:113
+#: controllers/view/info/statistictablemodel.cpp:130
 #, kde-format
 msgctxt "@item:intable character is not defined"
 msgid "undef."
 msgstr "nedef."
 
-#: controllers/view/bytetable/bytetablemodel.cpp:158
-#: controllers/view/info/statistictablemodel.cpp:214
+#: controllers/view/bytetable/bytetablemodel.cpp:150
+#: controllers/view/info/statistictablemodel.cpp:207
 #, kde-format
 msgctxt "@title:column short for Decimal"
 msgid "Dec"
 msgstr "Dec"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:159
-#: controllers/view/info/statistictablemodel.cpp:213
+#: controllers/view/bytetable/bytetablemodel.cpp:151
+#: controllers/view/info/statistictablemodel.cpp:206
 #, kde-format
 msgctxt "@title:column short for Hexadecimal"
 msgid "Hex"
 msgstr " Heks"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:160
-#: controllers/view/info/statistictablemodel.cpp:215
+#: controllers/view/bytetable/bytetablemodel.cpp:152
+#: controllers/view/info/statistictablemodel.cpp:208
 #, kde-format
 msgctxt "@title:column short for Octal"
 msgid "Oct"
 msgstr "Okt"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:161
-#: controllers/view/info/statistictablemodel.cpp:216
+#: controllers/view/bytetable/bytetablemodel.cpp:153
+#: controllers/view/info/statistictablemodel.cpp:209
 #, kde-format
 msgctxt "@title:column short for Binary"
 msgid "Bin"
 msgstr "Bin"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:162
-#: controllers/view/info/statistictablemodel.cpp:218
+#: controllers/view/bytetable/bytetablemodel.cpp:154
+#: controllers/view/info/statistictablemodel.cpp:211
 #, kde-format
 msgctxt "@title:column short for Character"
 msgid "Char"
 msgstr "Rakstzīme"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:168
-#: controllers/view/info/statistictablemodel.cpp:229
+#: controllers/view/bytetable/bytetablemodel.cpp:160
+#: controllers/view/info/statistictablemodel.cpp:222
 #, kde-format
 msgctxt "@info:tooltip column contains the value in decimal format"
 msgid "Decimal"
 msgstr "Decimāli"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:170
-#: controllers/view/info/statistictablemodel.cpp:227
+#: controllers/view/bytetable/bytetablemodel.cpp:162
+#: controllers/view/info/statistictablemodel.cpp:220
 #, kde-format
 msgctxt "@info:tooltip column contains the value in hexadecimal format"
 msgid "Hexadecimal"
 msgstr "Heksadecimāli"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:172
-#: controllers/view/info/statistictablemodel.cpp:231
+#: controllers/view/bytetable/bytetablemodel.cpp:164
+#: controllers/view/info/statistictablemodel.cpp:224
 #, kde-format
 msgctxt "@info:tooltip column contains the value in octal format"
 msgid "Octal"
 msgstr "Oktāli"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:174
-#: controllers/view/info/statistictablemodel.cpp:233
+#: controllers/view/bytetable/bytetablemodel.cpp:166
+#: controllers/view/info/statistictablemodel.cpp:226
 #, kde-format
 msgctxt "@info:tooltip column contains the value in binary format"
 msgid "Binary"
 msgstr "Bināri"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:176
-#: controllers/view/info/statistictablemodel.cpp:237
+#: controllers/view/bytetable/bytetablemodel.cpp:168
+#: controllers/view/info/statistictablemodel.cpp:230
 #, kde-format
 msgctxt "@info:tooltip column contains the character with the value"
 msgid "Character"
@@ -768,13 +768,13 @@ msgstr[0] "%1 baits"
 msgstr[1] "%1 baiti"
 msgstr[2] "%1 baitu"
 
-#: controllers/view/info/statistictablemodel.cpp:219
+#: controllers/view/info/statistictablemodel.cpp:212
 #, kde-format
 msgctxt "@title:column count of characters"
 msgid "Count"
 msgstr "Skaits"
 
-#: controllers/view/info/statistictablemodel.cpp:220
+#: controllers/view/info/statistictablemodel.cpp:213
 #, kde-format
 msgctxt "@title:column Percent of byte in total"
 msgid "Percent"
@@ -1223,8 +1223,8 @@ msgid "UTF-8"
 msgstr "UTF-8"
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:73
-#: controllers/view/search/searchcontroller.cpp:111
-#: controllers/view/search/searchcontroller.cpp:117
+#: controllers/view/search/searchcontroller.cpp:107
+#: controllers/view/search/searchcontroller.cpp:113
 #, kde-format
 msgctxt "@title:window"
 msgid "Find"
@@ -1314,14 +1314,14 @@ msgid ""
 "data."
 msgstr "Izvēlieties, vai vēlaties, lai ievadītais pārraksta esošos datus."
 
-#: controllers/view/poddecoder/poddecodertool.cpp:94
+#: controllers/view/poddecoder/poddecodertool.cpp:93
 #: controllers/view/poddecoder/poddecodertoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
 msgid "Decoding Table"
 msgstr "Dekodēšanas tabula"
 
-#: controllers/view/poddecoder/poddecodertool.cpp:301
+#: controllers/view/poddecoder/poddecodertool.cpp:299
 #, kde-format
 msgctxt "Edited as %datatype"
 msgid "Edited as %1"
@@ -1445,22 +1445,22 @@ msgctxt "@info"
 msgid "Could not print."
 msgstr "Neizdevās izdrukāt."
 
-#: controllers/view/replace/replacecontroller.cpp:73
-#: controllers/view/replace/replacecontroller.cpp:87
+#: controllers/view/replace/replacecontroller.cpp:68
+#: controllers/view/replace/replacecontroller.cpp:82
 #, kde-format
 msgctxt "@title:window"
 msgid "Replace"
 msgstr "Aizvietot"
 
-#: controllers/view/replace/replacecontroller.cpp:75
-#: controllers/view/replace/replacecontroller.cpp:89
+#: controllers/view/replace/replacecontroller.cpp:70
+#: controllers/view/replace/replacecontroller.cpp:84
 #, kde-format
 msgctxt "@info"
 msgid "No replacements made."
 msgstr "Netika veikta neviena aizvietošana."
 
-#: controllers/view/replace/replacecontroller.cpp:76
-#: controllers/view/replace/replacecontroller.cpp:90
+#: controllers/view/replace/replacecontroller.cpp:71
+#: controllers/view/replace/replacecontroller.cpp:85
 #, kde-format
 msgctxt "@info"
 msgid "1 replacement made."
@@ -1469,21 +1469,21 @@ msgstr[0] "Veikta %1 aizvietošana"
 msgstr[1] "Veiktas %1 aizvietošanas"
 msgstr[2] "Veikts %1 aizvietošanu"
 
-#: controllers/view/replace/replacecontroller.cpp:79
+#: controllers/view/replace/replacecontroller.cpp:74
 #, kde-format
 msgctxt "@info"
 msgid "Replace pattern not found in byte array."
 msgstr "Paraugs nav atrasts baitu masīvā."
 
-#: controllers/view/replace/replacecontroller.cpp:92
-#: controllers/view/search/searchcontroller.cpp:119
+#: controllers/view/replace/replacecontroller.cpp:87
+#: controllers/view/search/searchcontroller.cpp:115
 #, kde-kuit-format
 msgctxt "@info"
 msgid "End of byte array reached.<nl/>Continue from the beginning?"
 msgstr "Sasniegtas baitu masīva beigas.<nl/>Turpināt no sākuma?"
 
-#: controllers/view/replace/replacecontroller.cpp:93
-#: controllers/view/search/searchcontroller.cpp:120
+#: controllers/view/replace/replacecontroller.cpp:88
+#: controllers/view/search/searchcontroller.cpp:116
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Beginning of byte array reached.<nl/>Continue from the end?"
@@ -1576,7 +1576,7 @@ msgctxt "@title"
 msgid "Replace"
 msgstr "Aizvietot"
 
-#: controllers/view/search/searchcontroller.cpp:112
+#: controllers/view/search/searchcontroller.cpp:108
 #, kde-format
 msgctxt "@info"
 msgid "Search key not found in byte array."
@@ -2092,12 +2092,12 @@ msgstr ""
 msgid "ASCII string"
 msgstr "Virkne"
 
-#: controllers/view/structures/datatypes/strings/ebcdicstringdata.cpp:137
+#: controllers/view/structures/datatypes/strings/ebcdicstringdata.cpp:134
 #, kde-format
 msgid "EBCDIC char"
 msgstr ""
 
-#: controllers/view/structures/datatypes/strings/ebcdicstringdata.cpp:147
+#: controllers/view/structures/datatypes/strings/ebcdicstringdata.cpp:144
 #, fuzzy, kde-format
 #| msgctxt "@title:column string extracted from the byte array"
 #| msgid "String"
@@ -3332,7 +3332,7 @@ msgctxt "@info:status selection: start offset - end offset (number of bytes)"
 msgid "Selection: %1 - %2 (%3)"
 msgstr "Izvēle: %1 - %2 (%3)"
 
-#: core/document/bytearraydocument.cpp:53
+#: core/document/bytearraydocument.cpp:50
 #, kde-format
 msgctxt "name of the data type"
 msgid "Byte Array"
