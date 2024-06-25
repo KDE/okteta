@@ -23,10 +23,7 @@ AbstractByteArrayColumnTextRenderer::AbstractByteArrayColumnTextRenderer(const O
 {
 }
 
-AbstractByteArrayColumnTextRenderer::~AbstractByteArrayColumnTextRenderer()
-{
-    delete [] mLinePositions;
-}
+AbstractByteArrayColumnTextRenderer::~AbstractByteArrayColumnTextRenderer() = default;
 
 void AbstractByteArrayColumnTextRenderer::setWidths(int byteWidth, int byteSpacingWidth, int noOfGroupedBytes)
 {
@@ -43,7 +40,7 @@ void AbstractByteArrayColumnTextRenderer::setWidths(int byteWidth, int byteSpaci
     int N = 0;
     int p = 0;
     int gs = 0;
-    int* P = mLinePositions;
+    int* P = mLinePositions.get();
     for (; P < &mLinePositions[mNoOfBytesPerLine]; ++P, ++p, ++gs) {
         *P = N;
         N += byteWidth;

@@ -13,6 +13,8 @@
 #include "abstractcolumntextrenderer.hpp"
 // Okteta gui
 #include <Okteta/CoordRange>
+// Std
+#include <memory>
 
 namespace Okteta {
 class AbstractByteArrayModel;
@@ -59,7 +61,7 @@ protected:
     /** buffered value of how many chars a line needs */
     int mNoOfCharsPerLine = 0;
     // positions where to paint the
-    int* const mLinePositions;
+    const std::unique_ptr<int[]> mLinePositions;
 };
 
 }

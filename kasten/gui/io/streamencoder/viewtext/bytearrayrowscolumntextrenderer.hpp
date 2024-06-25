@@ -77,7 +77,7 @@ private:
     /** buffered value of how many chars a line needs */
     int mNoOfCharsPerLine = 0;
     // positions where to paint the
-    int* const mLinePositions;
+    const std::unique_ptr<int[]> mLinePositions;
 };
 
 }
