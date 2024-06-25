@@ -19,6 +19,8 @@
 #include <Okteta/Character>
 // Qt
 #include <QFontMetrics>
+// Std
+#include <vector>
 
 class QColor;
 class QBrush;
@@ -196,8 +198,8 @@ protected: // individual data
     /** pointer to array with buffered linePositions (relative to column position)
      * a spacing gets assigned to the left byte -> ...c|c|c |c|c...
      */
-    PixelX* mLinePosLeftPixelX = nullptr;
-    PixelX* mLinePosRightPixelX = nullptr;
+    std::vector<PixelX> mLinePosLeftPixelX;
+    std::vector<PixelX> mLinePosRightPixelX;
     /** index of right position */
     LinePosition mLastLinePos = 0;
 
@@ -235,11 +237,7 @@ inline AbstractByteArrayColumnRendererPrivate::AbstractByteArrayColumnRendererPr
 {
 }
 
-inline AbstractByteArrayColumnRendererPrivate::~AbstractByteArrayColumnRendererPrivate()
-{
-    delete [] mLinePosLeftPixelX;
-    delete [] mLinePosRightPixelX;
-}
+inline AbstractByteArrayColumnRendererPrivate::~AbstractByteArrayColumnRendererPrivate() = default;
 
 inline PixelX AbstractByteArrayColumnRendererPrivate::byteWidth()         const { return mByteWidth; }
 inline PixelX AbstractByteArrayColumnRendererPrivate::digitWidth()        const { return mDigitWidth; }

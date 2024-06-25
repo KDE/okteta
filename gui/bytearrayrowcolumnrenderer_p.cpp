@@ -62,14 +62,11 @@ void ByteArrayRowColumnRendererPrivate::set(AbstractByteArrayModel* byteArrayMod
 
 void ByteArrayRowColumnRendererPrivate::resetXBuffer()
 {
-    delete [] mLinePosLeftPixelX;
-    delete [] mLinePosRightPixelX;
-
     mLastLinePos = mLayout->noOfBytesPerLine() - 1;
-    mLinePosLeftPixelX =  new PixelX[mLastLinePos + 1];
-    mLinePosRightPixelX = new PixelX[mLastLinePos + 1];
+    mLinePosLeftPixelX.resize(mLastLinePos + 1);
+    mLinePosRightPixelX.resize(mLastLinePos + 1);
 
-    if (mLinePosLeftPixelX) {
+    if (!mLinePosLeftPixelX.empty()) {
         recalcX();
     }
 }
@@ -90,7 +87,7 @@ void ByteArrayRowColumnRendererPrivate::setFontMetrics(const QFontMetrics& fontM
     // recalculate depend sizes
     recalcByteWidth();
 
-    if (mLinePosLeftPixelX) {
+    if (!mLinePosLeftPixelX.empty()) {
         recalcX();
     }
 }
@@ -107,7 +104,7 @@ bool ByteArrayRowColumnRendererPrivate::setSpacing(PixelX byteSpacingWidth, Size
     mGroupSpacingWidth = groupSpacingWidth;
 
     // recalculate depend sizes
-    if (mLinePosLeftPixelX) {
+    if (!mLinePosLeftPixelX.empty()) {
         recalcX();
     }
 
@@ -124,7 +121,7 @@ bool ByteArrayRowColumnRendererPrivate::setByteSpacingWidth(PixelX byteSpacingWi
     mByteSpacingWidth = byteSpacingWidth;
 
     // recalculate depend sizes
-    if (mLinePosLeftPixelX) {
+    if (!mLinePosLeftPixelX.empty()) {
         recalcX();
     }
 
@@ -140,7 +137,7 @@ bool ByteArrayRowColumnRendererPrivate::setNoOfGroupedBytes(Size noOfGroupedByte
 
     mNoOfGroupedBytes = noOfGroupedBytes;
 
-    if (mLinePosLeftPixelX) {
+    if (!mLinePosLeftPixelX.empty()) {
         recalcX();
     }
     return true;
@@ -156,7 +153,7 @@ bool ByteArrayRowColumnRendererPrivate::setGroupSpacingWidth(PixelX groupSpacing
     mGroupSpacingWidth = groupSpacingWidth;
 
     // recalculate depend sizes
-    if (mLinePosLeftPixelX) {
+    if (!mLinePosLeftPixelX.empty()) {
         recalcX();
     }
 
@@ -172,7 +169,7 @@ void ByteArrayRowColumnRendererPrivate::setValueCodec(ValueCoding valueCoding, c
     // recalculate depend sizes
     recalcByteWidth();
 
-    if (mLinePosLeftPixelX) {
+    if (!mLinePosLeftPixelX.empty()) {
         recalcX();
     }
 }
@@ -189,7 +186,7 @@ bool ByteArrayRowColumnRendererPrivate::setBinaryGapWidth(PixelX binaryGapWidth)
     // recalculate depend sizes
     recalcByteWidth();
 
-    if (mLinePosLeftPixelX) {
+    if (!mLinePosLeftPixelX.empty()) {
         recalcX();
     }
     return true;
@@ -268,8 +265,8 @@ void ByteArrayRowColumnRendererPrivate::recalcX()
 
     PixelX newWidth = 0;
     Size groupedBytes = 0;
-    PixelX* PX = mLinePosLeftPixelX;
-    PixelX* PRX = mLinePosRightPixelX;
+    auto PX = mLinePosLeftPixelX.begin();
+    auto PRX = mLinePosRightPixelX.begin();
     LinePosition p = 0;
     for (; p <= mLastLinePos; ++PX, ++PRX, ++p, ++groupedBytes) {
         *PX = newWidth;
@@ -294,7 +291,7 @@ void ByteArrayRowColumnRendererPrivate::recalcX()
 {
     Q_Q(const ByteArrayRowColumnRenderer);
 
-    if (!mLinePosLeftPixelX) {
+    if (mLinePosLeftPixelX.empty()) {
         return NoByteFound;
     }
 
@@ -314,7 +311,7 @@ LinePosition ByteArrayRowColumnRendererPrivate::magneticLinePositionOfX(PixelX P
 {
     Q_Q(const ByteArrayRowColumnRenderer);
 
-    if (!mLinePosLeftPixelX) {
+    if (mLinePosLeftPixelX.empty()) {
         return NoByteFound;
     }
 
@@ -338,7 +335,7 @@ LinePositionRange ByteArrayRowColumnRendererPrivate::linePositionsOfX(PixelX x, 
 {
     Q_Q(const ByteArrayRowColumnRenderer);
 
-    if (!mLinePosLeftPixelX) {
+    if (mLinePosLeftPixelX.empty()) {
         return LinePositionRange();
     }
 
@@ -369,19 +366,19 @@ PixelX ByteArrayRowColumnRendererPrivate::xOfLinePosition(LinePosition linePosit
 {
     Q_Q(const ByteArrayRowColumnRenderer);
 
-    return q->x() + (mLinePosLeftPixelX ? mLinePosLeftPixelX[linePosition] : 0);
+    return q->x() + (mLinePosLeftPixelX.empty() ? 0 : mLinePosLeftPixelX[linePosition]);
 }
 
 PixelX ByteArrayRowColumnRendererPrivate::rightXOfLinePosition(LinePosition linePosition) const
 {
     Q_Q(const ByteArrayRowColumnRenderer);
 
-    return q->x() + (mLinePosRightPixelX ? mLinePosRightPixelX[linePosition] : 0);
+    return q->x() + (mLinePosRightPixelX.empty() ? 0 : mLinePosRightPixelX[linePosition]);
 }
 
 LinePosition ByteArrayRowColumnRendererPrivate::linePositionOfColumnX(PixelX PX) const
 {
-    if (!mLinePosLeftPixelX) {
+    if (mLinePosLeftPixelX.empty()) {
         return NoByteFound;
     }
 
@@ -397,7 +394,7 @@ LinePosition ByteArrayRowColumnRendererPrivate::linePositionOfColumnX(PixelX PX)
 
 LinePositionRange ByteArrayRowColumnRendererPrivate::linePositionsOfColumnXs(PixelX pixelX, PixelX pixelWidth) const
 {
-    if (!mLinePosLeftPixelX) {
+    if (mLinePosLeftPixelX.empty()) {
         return LinePositionRange();
     }
 
@@ -425,12 +422,12 @@ LinePositionRange ByteArrayRowColumnRendererPrivate::linePositionsOfColumnXs(Pix
 
 PixelX ByteArrayRowColumnRendererPrivate::columnXOfLinePosition(LinePosition linePosition) const
 {
-    return mLinePosLeftPixelX ? mLinePosLeftPixelX[linePosition] : 0;
+    return mLinePosLeftPixelX.empty() ? 0 :mLinePosLeftPixelX[linePosition];
 }
 
 PixelX ByteArrayRowColumnRendererPrivate::columnRightXOfLinePosition(LinePosition linePosition) const
 {
-    return mLinePosRightPixelX ? mLinePosRightPixelX[linePosition] : 0;
+    return mLinePosRightPixelX.empty() ? 0 : mLinePosRightPixelX[linePosition];
 }
 
 PixelXRange ByteArrayRowColumnRendererPrivate::xsOfLinePositionsInclSpaces(const LinePositionRange& linePositions) const

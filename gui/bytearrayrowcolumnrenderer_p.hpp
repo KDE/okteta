@@ -19,6 +19,8 @@
 #include <Okteta/Character>
 // Qt
 #include <QFontMetrics>
+// Std
+#include <vector>
 
 class QColor;
 class QBrush;
@@ -249,11 +251,12 @@ private: // individual data
     /** number of grouped bytes */
     Size mNoOfGroupedBytes;
 
-    /** pointer to array with buffered linePositions (relative to column position)
+    /**
+     * array with buffered linePositions (relative to column position)
      * any spacing gets assigned to the byte left to it -> ...|c|c|c |c|c...
      */
-    PixelX* mLinePosLeftPixelX = nullptr;
-    PixelX* mLinePosRightPixelX = nullptr;
+    std::vector<PixelX> mLinePosLeftPixelX;
+    std::vector<PixelX> mLinePosRightPixelX;
     /** index of right position */
     LinePosition mLastLinePos = 0;
 
@@ -317,11 +320,7 @@ inline ByteArrayRowColumnRendererPrivate::ByteArrayRowColumnRendererPrivate(Byte
 {
 }
 
-inline ByteArrayRowColumnRendererPrivate::~ByteArrayRowColumnRendererPrivate()
-{
-    delete [] mLinePosLeftPixelX;
-    delete [] mLinePosRightPixelX;
-}
+inline ByteArrayRowColumnRendererPrivate::~ByteArrayRowColumnRendererPrivate() = default;
 
 inline AbstractByteArrayView::CodingTypes ByteArrayRowColumnRendererPrivate::visibleCodings() const { return mVisibleCodings; }
 

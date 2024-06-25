@@ -32,7 +32,7 @@ void ValueByteArrayColumnRendererPrivate::setValueCodec(ValueCoding valueCoding,
     // recalculate depend sizes
     recalcByteWidth();
 
-    if (mLinePosLeftPixelX) {
+    if (!mLinePosLeftPixelX.empty()) {
         recalcX();
     }
 }
@@ -49,7 +49,7 @@ bool ValueByteArrayColumnRendererPrivate::setBinaryGapWidth(PixelX binaryGapWidt
     // recalculate depend sizes
     recalcByteWidth();
 
-    if (mLinePosLeftPixelX) {
+    if (!mLinePosLeftPixelX.empty()) {
         recalcX();
     }
     return true;
