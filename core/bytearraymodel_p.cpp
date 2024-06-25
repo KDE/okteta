@@ -63,13 +63,12 @@ void ByteArrayModelPrivate::setData(Byte* data, int size, int rawSize, bool keep
 {
     Q_Q(ByteArrayModel);
 
-    // use delete [], since usually mData should be allocated by calling new Byte[n]
-    if (mAutoDelete) {
-        delete [] mData;
+    if (!mAutoDelete) {
+        mData.release();
     }
     const int oldSize = mSize;
 
-    mData = data;
+    mData.reset(data);
     mSize = size;
     mRawSize = (rawSize < size) ? size : rawSize;
     if (mMaxSize != -1 && mMaxSize < size) {
@@ -205,13 +204,11 @@ Size ByteArrayModelPrivate::replace(const AddressRange& _removeRange, const Byte
         }
 
         // move old data to its (new) places
-        memcpy(newData, mData, removeRange.start());
+        memcpy(newData, mData.get(), removeRange.start());
         memcpy(&newData[behindInsertPos], &mData[behindRemovePos], mSize - behindRemovePos);
 
-        // remove old
-        delete [] mData;
-        // set new values
-        mData = newData;
+        // remove old & set new values
+        mData.reset(newData);
         mRawSize = newSize;
     } else {
         // move old data to its (new) places
@@ -294,15 +291,15 @@ bool ByteArrayModelPrivate::swap(Address firstStart, const AddressRange& _second
     }
 
     // copy smaller part to tempbuffer
-    auto* temp = new Byte[smallPartLength];
-    memcpy(temp, &mData[smallPartStart], smallPartLength);
+    auto temp = std::make_unique<Byte>(smallPartLength);
+    memcpy(temp.get(), &mData[smallPartStart], smallPartLength);
 
     // move the larger part
     memmove(&mData[largePartDest], &mData[largePartStart], largePartLength);
 
     // copy smaller part to its new dest
-    memcpy(&mData[smallPartDest], temp, smallPartLength);
-    delete [] temp;
+    memcpy(&mData[smallPartDest], temp.get(), smallPartLength);
+    temp.reset();
 
     const bool bookmarksModified = toRight ?
                                    m_bookmarks.adjustToSwapped(secondRange.start(), secondRange.nextBehindEnd(), firstStart - secondRange.end() - 1) :
@@ -408,15 +405,13 @@ int ByteArrayModelPrivate::addSize(int addSize, int splitPosition, bool saveUppe
         auto* newData = new Byte[NewRawSize];
 
         // move old data to its (new) places
-        memcpy(newData, mData, splitPosition);
+        memcpy(newData, mData.get(), splitPosition);
         if (saveUpperPart) {
             memcpy(&newData[BehindSplitPos], &mData[splitPosition], mSize - splitPosition);
         }
 
-        // remove old
-        delete [] mData;
-        // set new values
-        mData = newData;
+        // remove old & set new values
+        mData.reset(newData);
         mRawSize = NewRawSize;
     }
     // old buffer kept

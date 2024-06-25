@@ -41,8 +41,8 @@ FixedSizeByteArrayModel::FixedSizeByteArrayModel(int size, Byte fillUpByte, QObj
 
 FixedSizeByteArrayModel::~FixedSizeByteArrayModel()
 {
-    if (mAutoDelete) {
-        delete [] mData;
+    if (!mAutoDelete) {
+        mData.release();
     }
 }
 
@@ -213,15 +213,15 @@ bool FixedSizeByteArrayModel::swap(Address firstStart, const AddressRange& _seco
     }
 
     // copy smaller part to tempbuffer
-    auto* tempBuffer = new Byte[smallPartLength];
-    memcpy(tempBuffer, &mData[smallPartStart], smallPartLength);
+    auto tempBuffer = std::make_unique<Byte[]>(smallPartLength);
+    memcpy(tempBuffer.get(), &mData[smallPartStart], smallPartLength);
 
     // move the larger part
     memmove(&mData[largePartDest], &mData[largePartStart], largePartLength);
 
     // copy smaller part to its new dest
-    memcpy(&mData[smallPartDest], tempBuffer, smallPartLength);
-    delete [] tempBuffer;
+    memcpy(&mData[smallPartDest], tempBuffer.get(), smallPartLength);
+    tempBuffer.reset();
 
     mModified = true;
 

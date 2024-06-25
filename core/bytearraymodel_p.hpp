@@ -16,6 +16,8 @@
 #include "bookmarklistconstiteratoradapter.hpp"
 #include "bookmarklist.hpp"
 #include "arraychangemetricslist.hpp"
+// Std
+#include <memory>
 
 namespace Okteta {
 
@@ -84,7 +86,7 @@ private:
 
 private:
     /** */
-    Byte* mData;
+    std::unique_ptr<Byte[]> mData;
     /** size of the data */
     int mSize;
     /** mSize of data array */
@@ -106,11 +108,10 @@ private:
     Q_DECLARE_PUBLIC(ByteArrayModel)
 };
 
-// use delete [], since usually mData should be allocated by calling new Byte[n]
 inline ByteArrayModelPrivate::~ByteArrayModelPrivate()
 {
-    if (mAutoDelete) {
-        delete [] mData;
+    if (!mAutoDelete) {
+        mData.release();
     }
 }
 
@@ -152,7 +153,7 @@ inline void ByteArrayModelPrivate::setModified(bool modified)
     Q_EMIT q->modifiedChanged(mModified);
 }
 
-inline Byte* ByteArrayModelPrivate::data()       const { return mData; }
+inline Byte* ByteArrayModelPrivate::data()       const { return mData.get(); }
 inline int ByteArrayModelPrivate::maxSize()      const { return mMaxSize; }
 inline bool ByteArrayModelPrivate::keepsMemory() const { return mKeepsMemory; }
 inline bool ByteArrayModelPrivate::autoDelete()  const { return mAutoDelete; }

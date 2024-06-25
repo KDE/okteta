@@ -11,6 +11,8 @@
 
 // lib
 #include "abstractbytearraymodel.hpp"
+// Std
+#include <memory>
 
 namespace Okteta {
 
@@ -61,7 +63,7 @@ private:
 
 private:
     /** */
-    Byte* mData;
+    std::unique_ptr<Byte[]> mData;
     /***/
     int mSize;
     /** */
@@ -89,7 +91,7 @@ inline int FixedSizeByteArrayModel::compare(const AbstractByteArrayModel& other)
 inline int FixedSizeByteArrayModel::compare(const AbstractByteArrayModel& other, Address otherOffset, Size otherLength, Address offset)
 { return compare(other, AddressRange::fromWidth(otherOffset, otherLength), offset); }
 
-inline Byte* FixedSizeByteArrayModel::rawData() const { return mData; }
+inline Byte* FixedSizeByteArrayModel::rawData() const { return mData.get(); }
 
 }
 
