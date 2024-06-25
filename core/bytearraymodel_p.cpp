@@ -291,7 +291,7 @@ bool ByteArrayModelPrivate::swap(Address firstStart, const AddressRange& _second
     }
 
     // copy smaller part to tempbuffer
-    auto temp = std::make_unique<Byte>(smallPartLength);
+    auto temp = std::make_unique<Byte[]>(smallPartLength);
     memcpy(temp.get(), &mData[smallPartStart], smallPartLength);
 
     // move the larger part
