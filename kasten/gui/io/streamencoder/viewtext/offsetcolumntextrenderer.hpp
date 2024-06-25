@@ -13,6 +13,8 @@
 #include "abstractcolumntextrenderer.hpp"
 // Okteta gui
 #include <Okteta/OffsetFormat>
+// Std
+#include <memory>
 
 namespace Kasten {
 
@@ -37,7 +39,7 @@ private:
 
     /** the line we are in */
     mutable int mRenderLine;
-    mutable char* mEncodedOffsetBuffer;
+    mutable std::unique_ptr<char[]> mEncodedOffsetBuffer;
 };
 
 }

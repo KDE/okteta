@@ -19,14 +19,11 @@ OffsetColumnTextRenderer::OffsetColumnTextRenderer(int offsetFormat, int firstLi
     , mDelta(delta)
     , printFunction(Okteta::OffsetFormat::printFunction(offsetFormat))
     , mCodingWidth(Okteta::OffsetFormat::codingWidth(offsetFormat))
+    , mEncodedOffsetBuffer(new char[mCodingWidth + 1])
 {
-    mEncodedOffsetBuffer = new char[mCodingWidth + 1];
 }
 
-OffsetColumnTextRenderer::~OffsetColumnTextRenderer()
-{
-    delete [] mEncodedOffsetBuffer;
-}
+OffsetColumnTextRenderer::~OffsetColumnTextRenderer() = default;
 
 void OffsetColumnTextRenderer::renderFirstLine(QTextStream* stream, int lineIndex) const
 {
@@ -45,8 +42,8 @@ void OffsetColumnTextRenderer::renderLine(QTextStream* stream, bool isSubline) c
         *stream << whiteSpace(mCodingWidth);
     } else {
         // TODO: fix me (no more printFunction)
-        printFunction(mEncodedOffsetBuffer, mFirstLineOffset + mDelta * mRenderLine);
-        *stream << mEncodedOffsetBuffer;
+        printFunction(mEncodedOffsetBuffer.get(), mFirstLineOffset + mDelta * mRenderLine);
+        *stream << mEncodedOffsetBuffer.get();
 
         ++mRenderLine;
     }
