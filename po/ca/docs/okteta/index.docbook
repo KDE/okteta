@@ -1016,15 +1016,15 @@ Support for strings (various Unicode encodings) in definitions
 ></listitem
 > <listitem
 ><para
->int8(), int16(), int32() or int64()</para
+>int8(), int16(), int32() o int64()</para
 ></listitem
 > <listitem
 ><para
->uint8(), uint16(), uint32() or uint64()</para
+>uint8(), uint16(), uint32() o uint64()</para
 ></listitem
 > <listitem
 ><para
->bool8(), bool16(), bool32() or bool64()</para
+>bool8(), bool16(), bool32() o bool64()</para
 ></listitem
 > <listitem
 ><para
