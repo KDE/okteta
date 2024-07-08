@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-20 01:50+0000\n"
-"PO-Revision-Date: 2023-12-24 05:16+0100\n"
+"PO-Revision-Date: 2024-07-07 10:30+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -558,12 +558,10 @@ msgid ""
 msgstr ""
 
 #: controllers/view/gotooffset/gotooffsetcontroller.cpp:32
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Go to Offset..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Go to Offset…"
-msgstr "&წანაცვლებაზე გადასვლა..."
+msgstr "&წანაცვლებაზე გადასვლა…"
 
 #: controllers/view/gotooffset/gotooffsettool.cpp:50
 #, kde-format
@@ -1525,12 +1523,10 @@ msgid "Search"
 msgstr "ძებნა"
 
 #: controllers/view/selectrange/selectrangecontroller.cpp:33
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Select Range..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Select Range…"
-msgstr "&დიაპაზონის არჩევა..."
+msgstr "&დიაპაზონის არჩევა…"
 
 #: controllers/view/selectrange/selectrangetool.cpp:61
 #, kde-format
@@ -2115,18 +2111,16 @@ msgid "About"
 msgstr "შესახებ"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:46
-#, fuzzy, kde-format
-#| msgid "Get New Structures..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Get New Structures…"
-msgstr "ახალი სტრუქტურების მიღება.."
+msgstr "ახალი სტრუქტურების მიღება…"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:52
-#, fuzzy, kde-format
-#| msgid "Advanced Selection..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Advanced Selection…"
-msgstr "დამატებითი მონიშვნა..."
+msgstr "დამატებითი მონიშვნა…"
 
 #: controllers/view/structures/settings/structuresselectiondialog.cpp:28
 #, kde-format
@@ -2145,12 +2139,10 @@ msgid "Structure Definitions"
 msgstr "სტრუქტურის აღწერები"
 
 #: controllers/view/structures/settings/structuresselector.cpp:40
-#, fuzzy, kde-format
-#| msgctxt "@title"
-#| msgid "Search"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Search…"
-msgstr "ძებნა"
+msgstr "ძებნა…"
 
 #. i18n: ectx: tooltip, entry (UnsignedDisplayBase), group (ValueDisplay)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:9
@@ -2539,20 +2531,16 @@ msgid "Show &Non-printing Chars"
 msgstr ""
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:77
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Bytes per Line"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Set Bytes per Line…"
-msgstr "ბაიტები თითოეულ ხაზზე"
+msgstr "ბაიტები თითოეულ ხაზზე…"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:83
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Bytes per Group"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Set Bytes per Group…"
-msgstr "ბაიტები თითოეულ ჯგუფში"
+msgstr "ბაიტები თითოეულ ჯგუფში…"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:89
 #, kde-format
@@ -2637,12 +2625,10 @@ msgid "View Profile"
 msgstr "პროფილის ნახვა"
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:45
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu create a new view profile"
-#| msgid "Create New..."
+#, kde-format
 msgctxt "@action:inmenu create a new view profile"
 msgid "Create New…"
-msgstr "ახლის შექმნა..."
+msgstr "ახლის შექმნა…"
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:52
 #, kde-format
@@ -2834,12 +2820,10 @@ msgid "Char for undefined bytes:"
 msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilesmanagecontroller.cpp:31
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "View Profiles"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage View Profiles…"
-msgstr "პროფილების ნახვა"
+msgstr "ხედის პროფილების მართვა…"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:36
 #, kde-format
@@ -2848,12 +2832,10 @@ msgid "View Profiles"
 msgstr "პროფილების ნახვა"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:63
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu create a new view profile"
-#| msgid "Create New..."
+#, kde-format
 msgctxt "@action:button"
 msgid "&Create New…"
-msgstr "ახლის შექმნა..."
+msgstr "&ახლის შექმნა…"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:66
 #, kde-format
@@ -2871,12 +2853,10 @@ msgid ""
 msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:77
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Edit"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Edit…"
-msgstr "ჩასწორება"
+msgstr "&ჩასწორება…"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:80
 #, kde-format
@@ -3061,12 +3041,10 @@ msgid "Support to load files larger than 2 GiB has not yet been implemented."
 msgstr ""
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:99
-#, fuzzy, kde-format
-#| msgctxt "@item name of the generated data"
-#| msgid "Pattern"
+#, kde-format
 msgctxt "name of the generated data"
 msgid "Pattern…"
-msgstr "შაბლონი"
+msgstr "შაბლონი…"
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:149
 #, kde-format
@@ -3105,12 +3083,10 @@ msgid "Pattern"
 msgstr "შაბლონი"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:47
-#, fuzzy, kde-format
-#| msgctxt "@item name of the generated data"
-#| msgid "Random Data"
+#, kde-format
 msgctxt "name of the generated data"
 msgid "Random Data…"
-msgstr "შემთხვევითი მონაცემები"
+msgstr "შემთხვევითი მონაცემები…"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:91
 #, kde-format

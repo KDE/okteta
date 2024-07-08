@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-20 01:50+0000\n"
-"PO-Revision-Date: 2023-01-07 07:24+0100\n"
+"PO-Revision-Date: 2024-07-07 10:29+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #: controllers/document/modified/modifiedbarcontroller.cpp:74
 #, kde-format
@@ -224,12 +224,10 @@ msgid "Export"
 msgstr "გატანa"
 
 #: controllers/io/export/exportdialog.cpp:73
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Export to File..."
+#, kde-format
 msgctxt "@action:button"
 msgid "&Export to File…"
-msgstr "&ფაილში გატანა..."
+msgstr "ფ&აილში გატანა…"
 
 #: controllers/io/export/exportdialog.cpp:75
 #, kde-format
