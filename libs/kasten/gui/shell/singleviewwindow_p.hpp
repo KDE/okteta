@@ -16,6 +16,7 @@
 // Qt
 #include <QVector>
 // Std
+#include <vector>
 #include <memory>
 
 class QDragMoveEvent;
@@ -74,7 +75,7 @@ private:
     const std::unique_ptr<SingleViewArea> mViewArea;
     QVector<AbstractXmlGuiController*> mControllers;
     QVector<ToolViewDockWidget*> mDockWidgets;
-    QVector<AbstractTool*> mTools;
+    std::vector<std::unique_ptr<AbstractTool>> mTools;
 };
 
 inline QVector<ToolViewDockWidget*> SingleViewWindowPrivate::dockWidgets() const { return mDockWidgets; }

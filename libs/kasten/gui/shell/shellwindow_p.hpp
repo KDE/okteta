@@ -17,6 +17,7 @@
 #include <QVector>
 // Std
 #include <memory>
+#include <vector>
 
 namespace Kasten {
 class AbstractModelSynchronizer;
@@ -74,7 +75,7 @@ private:
     QVector<AbstractXmlGuiController*> mControllers;
 
     QVector<ToolViewDockWidget*> mDockWidgets;
-    QVector<AbstractTool*> mTools;
+    std::vector<std::unique_ptr<AbstractTool>> mTools;
 };
 
 inline MultiViewAreas* ShellWindowPrivate::viewArea() const { return mGroupedViews.get(); }

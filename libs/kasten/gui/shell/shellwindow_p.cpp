@@ -56,7 +56,6 @@ ShellWindowPrivate::~ShellWindowPrivate()
 
     qDeleteAll(mControllers);
     qDeleteAll(mDockWidgets);
-    qDeleteAll(mTools);
 }
 
 void ShellWindowPrivate::addTool(AbstractToolView* toolView)
@@ -67,7 +66,7 @@ void ShellWindowPrivate::addTool(AbstractToolView* toolView)
     // TODO: where to set the initial area?
     q->addDockWidget(Qt::RightDockWidgetArea, dockWidget);
 
-    mTools.append(toolView->tool());
+    mTools.emplace_back(toolView->tool());
     mDockWidgets.append(dockWidget);
 
     if (dockWidget->isVisible() && mCurrentView) {
