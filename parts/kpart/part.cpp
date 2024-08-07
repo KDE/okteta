@@ -148,15 +148,12 @@ OktetaPart::OktetaPart(QObject* parent,
     }
 }
 
-OktetaPart::~OktetaPart()
-{
-    qDeleteAll(mControllers);
-}
+OktetaPart::~OktetaPart() = default;
 
 void OktetaPart::addController(const Kasten::AbstractXmlGuiControllerFactory& factory)
 {
     Kasten::AbstractXmlGuiController* controller = factory.create(this);
-    mControllers.append(controller);
+    mControllers.emplace_back(controller);
 }
 
 void OktetaPart::setReadWrite(bool readWrite)
@@ -193,7 +190,7 @@ bool OktetaPart::saveFile()
 void OktetaPart::onDocumentLoaded(Kasten::AbstractDocument* document)
 {
     if (document) {
-        for (Kasten::AbstractXmlGuiController* controller : std::as_const(mControllers)) {
+        for (auto& controller : std::as_const(mControllers)) {
             controller->setTargetModel(nullptr);
         }
         mSingleViewArea->setView(nullptr);
@@ -212,7 +209,7 @@ void OktetaPart::onDocumentLoaded(Kasten::AbstractDocument* document)
 
         mSingleViewArea->setView(mByteArrayView.get());
 
-        for (Kasten::AbstractXmlGuiController* controller : std::as_const(mControllers)) {
+        for (auto& controller : std::as_const(mControllers)) {
             controller->setTargetModel(mByteArrayView.get());
         }
 

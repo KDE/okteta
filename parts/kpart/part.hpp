@@ -14,9 +14,8 @@
 // KF
 #include <kparts_version.h>
 #include <KParts/ReadWritePart>
-// Qt
-#include <QVector>
 // Std
+#include <vector>
 #include <memory>
 
 namespace Kasten {
@@ -88,7 +87,7 @@ private:
     std::unique_ptr<Kasten::ByteArrayView> mByteArrayView;
 
     std::unique_ptr<Kasten::SingleViewArea> mSingleViewArea;
-    QVector<Kasten::AbstractXmlGuiController*> mControllers;
+    std::vector<std::unique_ptr<Kasten::AbstractXmlGuiController>> mControllers;
 };
 
 inline Kasten::ByteArrayView* OktetaPart::byteArrayView() const { return mByteArrayView.get(); }
