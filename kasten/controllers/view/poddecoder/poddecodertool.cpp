@@ -85,10 +85,7 @@ PODDecoderTool::PODDecoderTool()
     setupDecoder();
 }
 
-PODDecoderTool::~PODDecoderTool()
-{
-    qDeleteAll(mTypeCodecs);
-}
+PODDecoderTool::~PODDecoderTool()= default;
 
 QString PODDecoderTool::title() const { return i18nc("@title:window", "Decoding Table"); }
 bool PODDecoderTool::isReadOnly() const { return mReadOnly; }
@@ -137,22 +134,22 @@ void PODDecoderTool::setTargetModel(AbstractModel* model)
 void PODDecoderTool::setupDecoder()
 {
     mTypeCodecs.resize(PODTypeCount);
-    mTypeCodecs[BinaryId] =        new Okteta::Binary8Codec();
-    mTypeCodecs[OctalId] =         new Okteta::Octal8Codec();
-    mTypeCodecs[HexadecimalId] =   new Okteta::Hexadecimal8Codec();
-    mTypeCodecs[Signed8BitId] =    new Okteta::SInt8Codec();
-    mTypeCodecs[Unsigned8BitId] =  new Okteta::UInt8Codec();
-    mTypeCodecs[Signed16BitId] =   new Okteta::SInt16Codec();
-    mTypeCodecs[Unsigned16BitId] = new Okteta::UInt16Codec();
-    mTypeCodecs[Signed32BitId] =   new Okteta::SInt32Codec();
-    mTypeCodecs[Unsigned32BitId] = new Okteta::UInt32Codec();
-    mTypeCodecs[Signed64BitId] =   new Okteta::SInt64Codec();
-    mTypeCodecs[Unsigned64BitId] = new Okteta::UInt64Codec();
-    mTypeCodecs[Float32BitId] =    new Okteta::Float32Codec();
-    mTypeCodecs[Float64BitId] =    new Okteta::Float64Codec();
-    mTypeCodecs[Char8BitId] =      new Okteta::Char8Codec(mCharCodec.get());
-    mTypeCodecs[UTF8Id] =          new Okteta::Utf8Codec();
-    mTypeCodecs[UTF16Id] =         new Okteta::Utf16Codec();
+    mTypeCodecs[BinaryId].reset(        new Okteta::Binary8Codec());
+    mTypeCodecs[OctalId].reset(         new Okteta::Octal8Codec());
+    mTypeCodecs[HexadecimalId].reset(   new Okteta::Hexadecimal8Codec());
+    mTypeCodecs[Signed8BitId].reset(    new Okteta::SInt8Codec());
+    mTypeCodecs[Unsigned8BitId].reset(  new Okteta::UInt8Codec());
+    mTypeCodecs[Signed16BitId].reset(   new Okteta::SInt16Codec());
+    mTypeCodecs[Unsigned16BitId].reset( new Okteta::UInt16Codec());
+    mTypeCodecs[Signed32BitId].reset(   new Okteta::SInt32Codec());
+    mTypeCodecs[Unsigned32BitId].reset( new Okteta::UInt32Codec());
+    mTypeCodecs[Signed64BitId].reset(   new Okteta::SInt64Codec());
+    mTypeCodecs[Unsigned64BitId].reset( new Okteta::UInt64Codec());
+    mTypeCodecs[Float32BitId].reset(    new Okteta::Float32Codec());
+    mTypeCodecs[Float64BitId].reset(    new Okteta::Float64Codec());
+    mTypeCodecs[Char8BitId].reset(      new Okteta::Char8Codec(mCharCodec.get()));
+    mTypeCodecs[UTF8Id].reset(          new Okteta::Utf8Codec());
+    mTypeCodecs[UTF16Id].reset(         new Okteta::Utf16Codec());
 
     mDecodedValueList.resize(PODTypeCount);
     mDecodedValueByteCountList.resize(PODTypeCount);
@@ -196,7 +193,7 @@ void PODDecoderTool::onCharCodecChange(const QString& codecName)
     }
 
     mCharCodec.reset(Okteta::CharCodec::createCodec(codecName));
-    static_cast<Okteta::Char8Codec*>(mTypeCodecs[Char8BitId])->setCharCodec(mCharCodec.get());
+    static_cast<Okteta::Char8Codec*>(mTypeCodecs[Char8BitId].get())->setCharCodec(mCharCodec.get());
     updateData();
 }
 
@@ -227,7 +224,7 @@ QVariant PODDecoderTool::value(int podId) const
 
 QByteArray PODDecoderTool::bytes(int podId) const
 {
-    Okteta::AbstractTypeCodec* typeCodec = mTypeCodecs[podId];
+    Okteta::AbstractTypeCodec* const typeCodec = mTypeCodecs[podId].get();
 
     // TODO: consider adding size property to AbstractTypeCodec and just get the data from mPODData
     QByteArray bytes = typeCodec->valueToBytes(mDecodedValueList[podId]);
@@ -249,7 +246,7 @@ QByteArray PODDecoderTool::bytes(int podId) const
 
 void PODDecoderTool::setData(const QVariant& data, int podId)
 {
-    Okteta::AbstractTypeCodec* typeCodec = mTypeCodecs[podId];
+    Okteta::AbstractTypeCodec* const typeCodec = mTypeCodecs[podId].get();
 
     // QVariant::operator=() only compares values' addresses for custom types,
     // so the comparison for values needs to be done by someone with knowledge about the type.

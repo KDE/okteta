@@ -20,6 +20,7 @@
 #include <QVector>
 // Std
 #include <memory>
+#include <vector>
 
 namespace Okteta {
 class AbstractTypeCodec;
@@ -111,7 +112,7 @@ private: // source
     bool mReadOnly : 1;
     bool mIsPodMarked : 1;
 
-    QVector<Okteta::AbstractTypeCodec*> mTypeCodecs;
+    std::vector<std::unique_ptr<Okteta::AbstractTypeCodec>> mTypeCodecs;
     std::unique_ptr<const Okteta::CharCodec> mCharCodec;
     AbstractDifferentSizeDialog* mDifferentSizeDialog = nullptr;
 
