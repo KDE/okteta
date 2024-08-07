@@ -13,8 +13,9 @@
 #include <Kasten/AbstractTool>
 // Okteta core
 #include <Okteta/AddressRange>
-// Qt
-#include <QVector>
+// Std
+#include <memory>
+#include <vector>
 
 class AbstractByteArrayChecksumParameterSet;
 class AbstractByteArrayChecksumAlgorithm;
@@ -51,7 +52,7 @@ public: // status
     bool isApplyable() const; // candidate for AbstractTool API
     bool isUptodate() const;
 
-    QVector<AbstractByteArrayChecksumAlgorithm*> algorithmList() const;
+    const std::vector<std::unique_ptr<AbstractByteArrayChecksumAlgorithm>>& algorithmList() const;
 
 public:
     AbstractByteArrayChecksumParameterSet* parameterSet();
@@ -83,7 +84,7 @@ private: // created data
     bool mSourceByteArrayModelUptodate : 1;
 
 private: // settings
-    QVector<AbstractByteArrayChecksumAlgorithm*> mAlgorithmList;
+    std::vector<std::unique_ptr<AbstractByteArrayChecksumAlgorithm>> mAlgorithmList;
     int mAlgorithmId = 0;
 
 private: // sources

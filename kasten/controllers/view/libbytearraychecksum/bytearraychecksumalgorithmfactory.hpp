@@ -9,8 +9,11 @@
 #ifndef KASTEN_BYTEARRAYCHECKSUMALGORITHMFACTORY_HPP
 #define KASTEN_BYTEARRAYCHECKSUMALGORITHMFACTORY_HPP
 
+// Std
+#include <memory>
+#include <vector>
+
 class AbstractByteArrayChecksumAlgorithm;
-template <class T> class QVector;
 
 class ByteArrayChecksumAlgorithmFactory
 {
@@ -21,7 +24,7 @@ public:
     ByteArrayChecksumAlgorithmFactory& operator=(const ByteArrayChecksumAlgorithmFactory&) = delete;
 
 public:
-    static QVector<AbstractByteArrayChecksumAlgorithm*> createAlgorithms();
+    static std::vector<std::unique_ptr<AbstractByteArrayChecksumAlgorithm>> createAlgorithms();
 
 };
 

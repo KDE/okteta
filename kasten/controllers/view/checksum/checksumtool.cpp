@@ -40,14 +40,14 @@ ChecksumTool::ChecksumTool()
     mAlgorithmList = ByteArrayChecksumAlgorithmFactory::createAlgorithms();
 
     const KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
-    for (auto *algorithm : std::as_const(mAlgorithmList)) {
+    for (auto& algorithm : std::as_const(mAlgorithmList)) {
         algorithm->loadConfig(configGroup);
     }
 
     mAlgorithmId = 0;
     const QString algorithmId = configGroup.readEntry(AlgorithmConfigKey);
     if (!algorithmId.isEmpty()) {
-        for (int i = 0; i < mAlgorithmList.size(); ++i) {
+        for (std::size_t i = 0; i < mAlgorithmList.size(); ++i) {
             if (mAlgorithmList[i]->id() == algorithmId) {
                 mAlgorithmId = i;
                 break;
@@ -56,12 +56,12 @@ ChecksumTool::ChecksumTool()
     }
 }
 
-ChecksumTool::~ChecksumTool()
-{
-    qDeleteAll(mAlgorithmList);
-}
+ChecksumTool::~ChecksumTool() = default;
 
-QVector<AbstractByteArrayChecksumAlgorithm*> ChecksumTool::algorithmList() const { return mAlgorithmList; }
+const std::vector<std::unique_ptr<AbstractByteArrayChecksumAlgorithm>>& ChecksumTool::algorithmList() const
+{
+    return mAlgorithmList;
+}
 
 bool ChecksumTool::isApplyable() const
 {
@@ -72,7 +72,7 @@ QString ChecksumTool::title() const { return i18nc("@title:window of the tool to
 
 AbstractByteArrayChecksumParameterSet* ChecksumTool::parameterSet()
 {
-    AbstractByteArrayChecksumAlgorithm* algorithm = mAlgorithmList.at(mAlgorithmId);
+    auto& algorithm = mAlgorithmList.at(mAlgorithmId);
 
     return algorithm ? algorithm->parameterSet() : nullptr;
 }
@@ -112,7 +112,7 @@ void ChecksumTool::checkUptoDate()
 
 void ChecksumTool::calculateChecksum()
 {
-    AbstractByteArrayChecksumAlgorithm* algorithm = mAlgorithmList.at(mAlgorithmId);
+    auto& algorithm = mAlgorithmList.at(mAlgorithmId);
 
     if (algorithm) {
         // forget old string source
@@ -123,7 +123,7 @@ void ChecksumTool::calculateChecksum()
         QApplication::setOverrideCursor(Qt::WaitCursor);
 
         auto* checksumCalculateJob =
-            new ChecksumCalculateJob(&mCheckSum, algorithm, mByteArrayModel, mByteArrayView->selection());
+            new ChecksumCalculateJob(&mCheckSum, algorithm.get(), mByteArrayModel, mByteArrayView->selection());
         checksumCalculateJob->exec();
 
         QApplication::restoreOverrideCursor();
@@ -153,7 +153,7 @@ void ChecksumTool::setAlgorithm(int algorithmId)
     mAlgorithmId = algorithmId;
     checkUptoDate();
 
-    AbstractByteArrayChecksumAlgorithm* algorithm = mAlgorithmList.at(mAlgorithmId);
+    auto& algorithm = mAlgorithmList.at(mAlgorithmId);
     if (algorithm) {
         KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
         configGroup.writeEntry(AlgorithmConfigKey, algorithm->id());
@@ -171,7 +171,7 @@ void ChecksumTool::resetSourceTool()
 {
     mSourceAlgorithmId = -1;
 
-    AbstractByteArrayChecksumAlgorithm* algorithm = mAlgorithmList.at(mAlgorithmId);
+    auto& algorithm = mAlgorithmList.at(mAlgorithmId);
     if (algorithm) {
         KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
         algorithm->saveConfig(configGroup);

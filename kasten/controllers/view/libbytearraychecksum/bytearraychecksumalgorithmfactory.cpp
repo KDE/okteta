@@ -24,12 +24,19 @@
 // NEWCHECKSUM(end)
 // KF
 #include <KLocalizedString>
-// Qt
-#include <QVector>
 
-QVector<AbstractByteArrayChecksumAlgorithm*> ByteArrayChecksumAlgorithmFactory::createAlgorithms()
+template<typename T, typename ... Ptrs>
+auto make_unique_vector(Ptrs&& ... ptrs)
 {
-    QVector<AbstractByteArrayChecksumAlgorithm*> result {
+    std::vector<std::unique_ptr<T>> vector;
+    vector.reserve(sizeof...(Ptrs));
+    ( vector.emplace_back(std::unique_ptr<T>(ptrs)), ... );
+    return vector;
+}
+
+std::vector<std::unique_ptr<AbstractByteArrayChecksumAlgorithm>> ByteArrayChecksumAlgorithmFactory::createAlgorithms()
+{
+    std::vector<std::unique_ptr<AbstractByteArrayChecksumAlgorithm>> result = make_unique_vector<AbstractByteArrayChecksumAlgorithm>(
         new ModSum8ByteArrayChecksumAlgorithm(),
         new ModSum16ByteArrayChecksumAlgorithm(),
         new ModSum32ByteArrayChecksumAlgorithm(),
@@ -69,14 +76,14 @@ QVector<AbstractByteArrayChecksumAlgorithm*> ByteArrayChecksumAlgorithmFactory::
         new QCryptographicByteArrayChecksumAlgorithm(i18nc("name of the hash algorithm", "Keccak-384"),
                      QStringLiteral("Keccak-384"),  QCryptographicHash::Keccak_384),
         new QCryptographicByteArrayChecksumAlgorithm(i18nc("name of the hash algorithm", "Keccak-512"),
-                     QStringLiteral("Keccak-512"),  QCryptographicHash::Keccak_512),
+                     QStringLiteral("Keccak-512"),  QCryptographicHash::Keccak_512)
         // TODO: Whirlpool? was provided by QCA
 // NEWCHECKSUM(start)
 // Here add the creation of an object of your checksum algorithm class and add it to the list,
 // e.g.
 //         new MyByteArrayChecksumAlgorithm(),
 // NEWCHECKSUM(end)
-    };
+    );
 
     return result;
 }
