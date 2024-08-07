@@ -16,8 +16,10 @@
 // Qt
 #include <QSplitter>
 // Std
+#include <algorithm>
 #include <utility>
 #include <memory>
+#include <vector>
 
 class QDragMoveEvent;
 class QDropEvent;
@@ -73,8 +75,8 @@ private:
     Q_DECLARE_PUBLIC(MultiViewAreas)
 
 private:
-    QVector<TabbedViews*> mViewAreaList;
     std::unique_ptr<QSplitter> mMainSplitter;
+    std::vector<std::unique_ptr<TabbedViews>> mViewAreaList;
 
     TabbedViews* mCurrentViewArea = nullptr;
     TabbedViews* mCurrentInlineToolViewArea = nullptr;
@@ -91,7 +93,7 @@ inline QVector<AbstractView*> MultiViewAreasPrivate::viewList() const
     QVector<AbstractView*> result;
 
     result.reserve(mViewAreaList.size());
-    for (const TabbedViews* viewArea : mViewAreaList) {
+    for (const auto& viewArea : mViewAreaList) {
         result.append(viewArea->viewList());
     }
 
@@ -102,7 +104,7 @@ inline int MultiViewAreasPrivate::viewCount() const
 {
     int result = 0;
 
-    for (const TabbedViews* viewArea : mViewAreaList) {
+    for (const auto& viewArea : mViewAreaList) {
         result += viewArea->viewCount();
     }
 
@@ -114,7 +116,7 @@ inline int MultiViewAreasPrivate::indexOf(AbstractView* view) const
     int result = -1;
 
     int globalBaseIndex = 0;
-    for (const TabbedViews* viewArea : mViewAreaList) {
+    for (const auto& viewArea : mViewAreaList) {
         const int localIndexOf = viewArea->indexOf(view);
         if (localIndexOf != -1) {
             result = globalBaseIndex + localIndexOf;
@@ -145,7 +147,7 @@ inline void MultiViewAreasPrivate::removeViews(const QVector<AbstractView*>& vie
     Q_Q(MultiViewAreas);
 
     // TODO: possible to just send the views of the given area?
-    for (TabbedViews* viewArea : std::as_const(mViewAreaList)) {
+    for (auto& viewArea : std::as_const(mViewAreaList)) {
         viewArea->removeViews(views);
     }
 
@@ -172,7 +174,7 @@ inline AbstractToolInlineView* MultiViewAreasPrivate::currentToolInlineView() co
 inline void MultiViewAreasPrivate::setViewFocus(AbstractView* view)
 {
     // TODO: makes this more efficient!
-    for (TabbedViews* viewArea : std::as_const(mViewAreaList)) {
+    for (auto& viewArea : std::as_const(mViewAreaList)) {
         const int localIndex = viewArea->indexOf(view);
         if (localIndex != -1) {
             viewArea->setViewFocus(view);
@@ -189,7 +191,10 @@ inline void MultiViewAreasPrivate::setViewAreaFocus(AbstractViewArea* _viewArea)
         return;
     }
 
-    if (mViewAreaList.contains(viewArea)) {
+    auto it = std::find_if(mViewAreaList.cbegin(), mViewAreaList.cend(), [viewArea](const auto& area){
+        return (area.get() == viewArea);
+    });
+    if (it != mViewAreaList.cend()) {
         viewArea->setFocus();
     }
 }

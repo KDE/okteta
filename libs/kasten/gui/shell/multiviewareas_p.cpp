@@ -28,10 +28,7 @@ MultiViewAreasPrivate::MultiViewAreasPrivate(MultiViewAreas* parent)
 {
 }
 
-MultiViewAreasPrivate::~MultiViewAreasPrivate()
-{
-    qDeleteAll(mViewAreaList);
-}
+MultiViewAreasPrivate::~MultiViewAreasPrivate() = default;
 
 void MultiViewAreasPrivate::init()
 {
@@ -59,7 +56,7 @@ void MultiViewAreasPrivate::init()
     QObject::connect(viewArea, &TabbedViews::newDocumentRequested,
                      q, &MultiViewAreas::newDocumentRequested);
 
-    mViewAreaList.append(viewArea);
+    mViewAreaList.emplace_back(viewArea);
     mCurrentViewArea = viewArea;
 
     mMainSplitter->addWidget(viewArea->widget());
@@ -102,7 +99,7 @@ AbstractViewArea* MultiViewAreasPrivate::splitViewArea(AbstractViewArea* _viewAr
     QObject::connect(secondViewArea, &TabbedViews::dataDropped,
                      q, &MultiViewAreas::dataDropped);
 
-    mViewAreaList.append(secondViewArea);
+    mViewAreaList.emplace_back(secondViewArea);
     mCurrentViewArea = secondViewArea;
 
     splitter->setOrientation(orientation == Qt::Horizontal ? Qt::Vertical : Qt::Horizontal);
@@ -152,7 +149,14 @@ void MultiViewAreasPrivate::onViewsRemoved()
             baseOfBaseSplitter->setSizes(baseOfBaseSplitterSizes);
         }
 
-        mViewAreaList.removeOne(viewArea);
+        auto it = std::find_if(mViewAreaList.begin(), mViewAreaList.end(), [viewArea](const auto& area){
+            return (area.get() == viewArea);
+        });
+        if (it != mViewAreaList.end()) {
+            // remove from list, but keep alive a bit more, deleted nelow finally
+            it->release();
+            mViewAreaList.erase(it);
+        }
 
         if (mCurrentInlineToolViewArea == viewArea) {
             mCurrentInlineToolViewArea = nullptr;
@@ -169,7 +173,7 @@ void MultiViewAreasPrivate::onViewsRemoved()
                 }
             }
 
-            for (TabbedViews* viewArea : std::as_const(mViewAreaList)) {
+            for (auto& viewArea : std::as_const(mViewAreaList)) {
                 if (viewArea->widget() == otherWidget) {
                     viewArea->setFocus();
                     break;
