@@ -26,7 +26,9 @@
 // Qt
 #include <QTextStream>
 // Std
+#include <memory>
 #include <utility>
+#include <vector>
 
 namespace Kasten {
 
@@ -66,29 +68,29 @@ bool ByteArrayViewHtmlStreamEncoder::encodeDataToStream(QIODevice* device,
     const int noOfGroupedBytes = byteArrayView->noOfGroupedBytes();
     const int visibleByteArrayCodings = byteArrayView->visibleByteArrayCodings();
 
-    QVector<AbstractColumnHtmlRenderer*> columnHtmlRendererList;
+    std::vector<std::unique_ptr<AbstractColumnHtmlRenderer>> columnHtmlRendererList;
 
     if (byteArrayView->offsetColumnVisible()) {
-        columnHtmlRendererList.append(
+        columnHtmlRendererList.emplace_back(
             new OffsetColumnHtmlRenderer(byteArrayView->offsetCoding(), mSettings.firstLineOffset, mSettings.delta, (viewModus == 0)));
     }
 
     if (viewModus == 0) {
         if (visibleByteArrayCodings & Okteta::AbstractByteArrayView::ValueCodingId) {
-            columnHtmlRendererList.append(
+            columnHtmlRendererList.emplace_back(
                 new ValueByteArrayColumnHtmlRenderer(byteArrayModel, range.start(), coordRange,
                                                      noOfBytesPerLine, noOfGroupedBytes,
                                                      mSettings.valueCoding));
         }
 
         if (visibleByteArrayCodings & Okteta::AbstractByteArrayView::CharCodingId) {
-            columnHtmlRendererList.append(
+            columnHtmlRendererList.emplace_back(
                 new CharByteArrayColumnHtmlRenderer(byteArrayModel, range.start(), coordRange,
                                                     noOfBytesPerLine,
                                                     mSettings.codecName, mSettings.substituteChar, mSettings.undefinedChar));
         }
     } else {
-        columnHtmlRendererList.append(
+        columnHtmlRendererList.emplace_back(
             new ByteArrayRowsColumnHtmlRenderer(byteArrayModel, range.start(), coordRange,
                                                 noOfBytesPerLine, noOfGroupedBytes,
                                                 visibleByteArrayCodings,
@@ -97,7 +99,7 @@ bool ByteArrayViewHtmlStreamEncoder::encodeDataToStream(QIODevice* device,
     }
 
     int subLinesCount = 1;
-    for (const AbstractColumnHtmlRenderer* renderer : std::as_const(columnHtmlRendererList)) {
+    for (const auto& renderer : std::as_const(columnHtmlRendererList)) {
         if (renderer->noOfSublinesNeeded() > subLinesCount) {
             subLinesCount = renderer->noOfSublinesNeeded();
         }
@@ -112,7 +114,7 @@ bool ByteArrayViewHtmlStreamEncoder::encodeDataToStream(QIODevice* device,
     textStream << "<tr>";
 
     int l = coordRange.start().line();
-    for (const AbstractColumnHtmlRenderer* renderer : std::as_const(columnHtmlRendererList)) {
+    for (const auto& renderer : std::as_const(columnHtmlRendererList)) {
         renderer->renderFirstLine(&textStream, l);
     }
 
@@ -131,7 +133,7 @@ bool ByteArrayViewHtmlStreamEncoder::encodeDataToStream(QIODevice* device,
         textStream << "<tr>";
 
         const bool isSubline = (subLine > 0);
-        for (const AbstractColumnHtmlRenderer* renderer : std::as_const(columnHtmlRendererList)) {
+        for (const auto& renderer : std::as_const(columnHtmlRendererList)) {
             renderer->renderNextLine(&textStream, isSubline);
         }
 
@@ -140,9 +142,6 @@ bool ByteArrayViewHtmlStreamEncoder::encodeDataToStream(QIODevice* device,
     }
 
     textStream << "</table></html>" << Qt::endl;
-
-    // clean up
-    qDeleteAll(columnHtmlRendererList);
 
     return success;
 }

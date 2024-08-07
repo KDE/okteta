@@ -11,8 +11,10 @@
 
 // Qt
 #include <QObject>
-#include <QVector>
 #include <QRect>
+// Std
+#include <memory>
+#include <vector>
 
 class QPrinter;
 class AbstractFrameRenderer;
@@ -40,7 +42,7 @@ Q_SIGNALS:
     void printedPage(int pageIndex);
 
 private:
-    QVector<AbstractFrameRenderer*> mFrameRendererList;
+    std::vector<std::unique_ptr<AbstractFrameRenderer>> mFrameRendererList;
     QRect mPaperRect;
     QRect mPageRect;
 };

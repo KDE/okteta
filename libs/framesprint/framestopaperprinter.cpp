@@ -18,10 +18,7 @@
 
 FramesToPaperPrinter::FramesToPaperPrinter() = default;
 
-FramesToPaperPrinter::~FramesToPaperPrinter()
-{
-    qDeleteAll(mFrameRendererList);
-}
+FramesToPaperPrinter::~FramesToPaperPrinter() = default;
 
 QRect FramesToPaperPrinter::pageRect() const { return mPageRect; }
 
@@ -30,21 +27,21 @@ void FramesToPaperPrinter::setPageRect(QRect pageRect) { mPageRect = pageRect; }
 
 void FramesToPaperPrinter::addFrameRenderer(AbstractFrameRenderer* frameRenderer)
 {
-    mFrameRendererList.append(frameRenderer);
+    mFrameRendererList.emplace_back(frameRenderer);
 }
 
 bool FramesToPaperPrinter::print(QPrinter* printer, int firstPageIndex, int lastPageIndex)
 {
     bool success = true;
 
-    for (AbstractFrameRenderer* frameRenderer : std::as_const(mFrameRendererList)) {
+    for (auto& frameRenderer : std::as_const(mFrameRendererList)) {
         frameRenderer->prepare();
     }
 
     QPainter painter(printer);
     int pageIndex = firstPageIndex;
     while (true) {
-        for (AbstractFrameRenderer* frameRenderer : std::as_const(mFrameRendererList)) {
+        for (auto& frameRenderer : std::as_const(mFrameRendererList)) {
             const int x = frameRenderer->x();
             const int y = frameRenderer->y();
             painter.translate(x, y);

@@ -26,7 +26,9 @@
 // Qt
 #include <QTextStream>
 // Std
+#include <memory>
 #include <utility>
+#include <vector>
 
 namespace Kasten {
 
@@ -72,17 +74,17 @@ bool ByteArrayViewTextStreamEncoder::encodeDataToStream(QIODevice* device,
     const int noOfGroupedBytes = byteArrayView->noOfGroupedBytes();
     const int visibleByteArrayCodings = byteArrayView->visibleByteArrayCodings();
 
-    QVector<AbstractColumnTextRenderer*> columnTextRendererList;
+    std::vector<std::unique_ptr<AbstractColumnTextRenderer>> columnTextRendererList;
 
     if (byteArrayView->offsetColumnVisible()) {
-        columnTextRendererList.append(
+        columnTextRendererList.emplace_back(
             new OffsetColumnTextRenderer(byteArrayView->offsetCoding(), mSettings.firstLineOffset, mSettings.delta));
-        columnTextRendererList.append(new BorderColumnTextRenderer());
+        columnTextRendererList.emplace_back(new BorderColumnTextRenderer());
     }
 
     if (viewModus == 0) {
         if (visibleByteArrayCodings & Okteta::AbstractByteArrayView::ValueCodingId) {
-            columnTextRendererList.append(
+            columnTextRendererList.emplace_back(
                 new ValueByteArrayColumnTextRenderer(byteArrayModel, range.start(), coordRange,
                                                      noOfBytesPerLine, byteSpacingWidth, noOfGroupedBytes,
                                                      mSettings.valueCoding));
@@ -90,15 +92,15 @@ bool ByteArrayViewTextStreamEncoder::encodeDataToStream(QIODevice* device,
 
         if (visibleByteArrayCodings & Okteta::AbstractByteArrayView::CharCodingId) {
             if (visibleByteArrayCodings & Okteta::AbstractByteArrayView::ValueCodingId) {
-                columnTextRendererList.append(new BorderColumnTextRenderer());
+                columnTextRendererList.emplace_back(new BorderColumnTextRenderer());
             }
-            columnTextRendererList.append(
+            columnTextRendererList.emplace_back(
                 new CharByteArrayColumnTextRenderer(byteArrayModel, range.start(), coordRange,
                                                     noOfBytesPerLine, 0, 0,
                                                     mSettings.codecName, mSettings.substituteChar, mSettings.undefinedChar));
         }
     } else {
-        columnTextRendererList.append(
+        columnTextRendererList.emplace_back(
             new ByteArrayRowsColumnTextRenderer(byteArrayModel, range.start(), coordRange,
                                                 noOfBytesPerLine, byteSpacingWidth, noOfGroupedBytes,
                                                 visibleByteArrayCodings,
@@ -107,7 +109,7 @@ bool ByteArrayViewTextStreamEncoder::encodeDataToStream(QIODevice* device,
     }
 
     int subLinesCount = 1;
-    for (const AbstractColumnTextRenderer* renderer : std::as_const(columnTextRendererList)) {
+    for (const auto& renderer : std::as_const(columnTextRendererList)) {
         if (renderer->noOfSublinesNeeded() > subLinesCount) {
             subLinesCount = renderer->noOfSublinesNeeded();
         }
@@ -117,7 +119,7 @@ bool ByteArrayViewTextStreamEncoder::encodeDataToStream(QIODevice* device,
     QTextStream textStream(device);
 
     int l = coordRange.start().line();
-    for (const AbstractColumnTextRenderer* renderer : std::as_const(columnTextRendererList)) {
+    for (const auto& renderer : std::as_const(columnTextRendererList)) {
         renderer->renderFirstLine(&textStream, l);
     }
 
@@ -133,16 +135,13 @@ bool ByteArrayViewTextStreamEncoder::encodeDataToStream(QIODevice* device,
             subLine = 0;
         }
         const bool isSubline = (subLine > 0);
-        for (const AbstractColumnTextRenderer* renderer : std::as_const(columnTextRendererList)) {
+        for (const auto& renderer : std::as_const(columnTextRendererList)) {
             renderer->renderNextLine(&textStream, isSubline);
         }
 
         textStream << Qt::endl;
         ++subLine;
     }
-
-    // clean up
-    qDeleteAll(columnTextRendererList);
 
     return success;
 }

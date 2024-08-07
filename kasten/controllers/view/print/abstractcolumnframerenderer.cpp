@@ -13,9 +13,11 @@
 #include <Okteta/AbstractColumnRenderer>
 // Qt
 #include <QPainter>
-#include <QVector>
 // Std
+#include <algorithm>
+#include <memory>
 #include <utility>
+#include <vector>
 
 class AbstractColumnFrameRendererPrivate
 {
@@ -28,7 +30,7 @@ public:
 
 public: // calculated
     /** collection of all the columns. All columns will be autodeleted. */
-    QVector<Okteta::AbstractColumnRenderer*> mColumns;
+    std::vector<std::unique_ptr<Okteta::AbstractColumnRenderer>> mColumns;
     /** the number of lines which the columnRenderer view has */
     Okteta::LineSize mNoOfLines = 0;
     /** the height of each line in pixels */
@@ -39,15 +41,12 @@ public: // calculated
 
 AbstractColumnFrameRendererPrivate::AbstractColumnFrameRendererPrivate() = default;
 
-AbstractColumnFrameRendererPrivate::~AbstractColumnFrameRendererPrivate()
-{
-    qDeleteAll(mColumns);
-}
+AbstractColumnFrameRendererPrivate::~AbstractColumnFrameRendererPrivate() = default;
 
 void AbstractColumnFrameRendererPrivate::updateWidths()
 {
     mColumnsWidth = 0;
-    for (auto* columnRenderer : std::as_const(mColumns)) {
+    for (auto& columnRenderer : std::as_const(mColumns)) {
         columnRenderer->setX(mColumnsWidth);
         mColumnsWidth += columnRenderer->visibleWidth();
     }
@@ -86,7 +85,7 @@ void AbstractColumnFrameRenderer::setLineHeight(Okteta::PixelY newLineHeight)
     }
     d->mLineHeight = newLineHeight;
 
-    for (auto* columnRenderer : std::as_const(d->mColumns)) {
+    for (auto& columnRenderer : std::as_const(d->mColumns)) {
         columnRenderer->setLineHeight(d->mLineHeight);
     }
 }
@@ -115,19 +114,20 @@ Okteta::LineSize AbstractColumnFrameRenderer::noOfLinesPerFrame() const
 
 void AbstractColumnFrameRenderer::addColumn(Okteta::AbstractColumnRenderer* columnRenderer)
 {
-    d->mColumns.append(columnRenderer);
+    d->mColumns.emplace_back(columnRenderer);
 
     updateWidths();
 }
 
 void AbstractColumnFrameRenderer::removeColumn(Okteta::AbstractColumnRenderer* columnRenderer)
 {
-    const int columnPos = d->mColumns.indexOf(columnRenderer);
-    if (columnPos != -1) {
-        d->mColumns.removeAt(columnPos);
+    auto it = std::find_if(d->mColumns.begin(), d->mColumns.end(), [columnRenderer](const auto& column) {
+        return column.get() == columnRenderer;
+    });
+    if (it == d->mColumns.end()) {
+        return;
     }
-
-    delete columnRenderer;
+    d->mColumns.erase(it);
 
     updateWidths();
 }
@@ -141,9 +141,9 @@ void AbstractColumnFrameRenderer::renderFrame(QPainter* painter, int frameIndex)
         // collect affected columns
         QVector<Okteta::AbstractColumnRenderer*> columnRenderers;
         columnRenderers.reserve(d->mColumns.size());
-        for (auto* columnRenderer : std::as_const(d->mColumns)) {
+        for (auto& columnRenderer : std::as_const(d->mColumns)) {
             if (columnRenderer->isVisible() && columnRenderer->overlaps(renderedXs)) {
-                columnRenderers.append(columnRenderer);
+                columnRenderers.append(columnRenderer.get());
             }
         }
 
