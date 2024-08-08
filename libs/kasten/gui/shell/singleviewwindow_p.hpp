@@ -73,7 +73,7 @@ private:
     AbstractModelSynchronizer* mSynchronizer = nullptr;
 
     const std::unique_ptr<SingleViewArea> mViewArea;
-    QVector<AbstractXmlGuiController*> mControllers;
+    std::vector<std::unique_ptr<AbstractXmlGuiController>> mControllers;
     QVector<ToolViewDockWidget*> mDockWidgets;
     std::vector<std::unique_ptr<AbstractTool>> mTools;
 };

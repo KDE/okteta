@@ -54,8 +54,12 @@ ShellWindowPrivate::~ShellWindowPrivate()
     // TODO: make this call unneeded
     mGroupedViews->setCurrentToolInlineView(nullptr);
 
-    qDeleteAll(mControllers);
     qDeleteAll(mDockWidgets);
+}
+
+void ShellWindowPrivate::addXmlGuiController(AbstractXmlGuiController* controller)
+{
+    mControllers.emplace_back(controller);
 }
 
 void ShellWindowPrivate::addTool(AbstractToolView* toolView)
@@ -100,7 +104,7 @@ void ShellWindowPrivate::showDocument(AbstractDocument* document)
 
 void ShellWindowPrivate::updateControllers(AbstractView* view)
 {
-    for (AbstractXmlGuiController* controller : std::as_const(mControllers)) {
+    for (const auto& controller : std::as_const(mControllers)) {
         controller->setTargetModel(view);
     }
 

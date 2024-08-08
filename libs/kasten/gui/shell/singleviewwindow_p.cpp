@@ -42,7 +42,6 @@ SingleViewWindowPrivate::~SingleViewWindowPrivate()
     // TODO: make this call unneeded
     mViewArea->setCurrentToolInlineView(nullptr);
 
-    qDeleteAll(mControllers);
     qDeleteAll(mDockWidgets);
 }
 
@@ -62,7 +61,7 @@ void SingleViewWindowPrivate::setView(AbstractView* view)
     mView = view;
     mViewArea->setView(view);
 
-    for (AbstractXmlGuiController* controller : std::as_const(mControllers)) {
+    for (const auto& controller : std::as_const(mControllers)) {
         controller->setTargetModel(view);
     }
 
@@ -119,7 +118,7 @@ void SingleViewWindowPrivate::setView(AbstractView* view)
 
 void SingleViewWindowPrivate::addXmlGuiController(AbstractXmlGuiController* controller)
 {
-    mControllers.append(controller);
+    mControllers.emplace_back(controller);
 }
 
 void SingleViewWindowPrivate::addTool(AbstractToolView* toolView)

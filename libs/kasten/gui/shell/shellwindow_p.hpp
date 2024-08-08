@@ -72,7 +72,7 @@ private:
     AbstractDocument* mCurrentDocument = nullptr;
     AbstractModelSynchronizer* mCurrentSynchronizer = nullptr;
 
-    QVector<AbstractXmlGuiController*> mControllers;
+    std::vector<std::unique_ptr<AbstractXmlGuiController>> mControllers;
 
     QVector<ToolViewDockWidget*> mDockWidgets;
     std::vector<std::unique_ptr<AbstractTool>> mTools;
@@ -81,11 +81,6 @@ private:
 inline MultiViewAreas* ShellWindowPrivate::viewArea() const { return mGroupedViews.get(); }
 inline ViewManager* ShellWindowPrivate::viewManager() const { return mViewManager; }
 inline QVector<ToolViewDockWidget*> ShellWindowPrivate::dockWidgets() const { return mDockWidgets; }
-
-inline void ShellWindowPrivate::addXmlGuiController(AbstractXmlGuiController* controller)
-{
-    mControllers.append(controller);
-}
 
 }
 
