@@ -619,6 +619,7 @@
   </provides>
   <launchable type="desktop-id">org.kde.okteta.desktop</launchable>
   <releases>
+    <release version="0.26.16" date="2024-08-08"/>
     <release version="0.26.15" date="2024-01-01"/>
     <release version="0.26.14" date="2023-12-12"/>
     <release version="0.26.13" date="2023-08-08"/>
