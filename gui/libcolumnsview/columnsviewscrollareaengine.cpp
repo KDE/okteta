@@ -43,9 +43,9 @@ void ColumnsViewScrollAreaEngine::renderColumns(QPainter* painter, int cx, int c
         // collect affected columns
         QVector<AbstractColumnRenderer*> dirtyColumns;
         dirtyColumns.reserve(columns.size());
-        for (auto* column : std::as_const(columns)) {
+        for (const auto& column : std::as_const(columns)) {
             if (column->isVisible() && column->overlaps(dirtyXs)) {
-                dirtyColumns.append(column);
+                dirtyColumns.append(column.get());
             }
         }
 
@@ -57,7 +57,7 @@ void ColumnsViewScrollAreaEngine::renderColumns(QPainter* painter, int cx, int c
 
             if (dirtyLines.isValid()) {
                 // paint full columns
-                for (auto* column : std::as_const(columns)) {
+                for (const auto& column : std::as_const(columns)) {
                     column->renderColumn(painter, dirtyXs, dirtyYs);
                 }
 
@@ -142,7 +142,7 @@ void ColumnsViewScrollAreaEngine::setLineHeight(PixelY newLineHeight)
 
     LineHeight = newLineHeight;
 
-    for (auto* column : std::as_const(columns)) {
+    for (const auto& column : std::as_const(columns)) {
         column->setLineHeight(LineHeight);
     }
 

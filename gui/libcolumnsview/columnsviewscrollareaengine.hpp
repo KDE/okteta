@@ -17,9 +17,10 @@
 #include <QEvent>
 #include <QScrollBar>
 #include <QStyle>
-#include <QVector>
 // Std
+#include <memory>
 #include <utility>
+#include <vector>
 
 namespace Okteta {
 
@@ -130,7 +131,7 @@ public: // recalculations
 
 public: // calculated
     /** collection of all the columns. All columns will be autodeleted. */
-    QVector<AbstractColumnRenderer*> columns;
+    std::vector<std::unique_ptr<AbstractColumnRenderer>> columns;
     /** the number of lines which the column view has */
     LineSize NoOfLines = 0;
     /** the height of each line in pixels */
@@ -155,15 +156,12 @@ inline ColumnsViewScrollAreaEngine::ColumnsViewScrollAreaEngine(/*bool R,*/ QAbs
 {
 }
 
-inline ColumnsViewScrollAreaEngine::~ColumnsViewScrollAreaEngine()
-{
-    qDeleteAll(columns);
-}
+inline ColumnsViewScrollAreaEngine::~ColumnsViewScrollAreaEngine() = default;
 
 inline void ColumnsViewScrollAreaEngine::updateWidths()
 {
     ColumnsWidth = 0;
-    for (auto* column : std::as_const(columns)) {
+    for (const auto& column : std::as_const(columns)) {
         column->setX(ColumnsWidth);
         ColumnsWidth += column->visibleWidth();
     }
@@ -311,19 +309,21 @@ inline void ColumnsViewScrollAreaEngine::addColumn(AbstractColumnRenderer* colum
 //   if( Reversed )
 //     Columns.prepend( C );
 //   else
-    columns.append(columnRenderer);
+    columns.emplace_back(columnRenderer);
 
     updateWidths();
 }
 
 inline void ColumnsViewScrollAreaEngine::removeColumn(AbstractColumnRenderer* columnRenderer)
 {
-    const int columnRendererIndex = columns.indexOf(columnRenderer);
-    if (columnRendererIndex != -1) {
-        columns.removeAt(columnRendererIndex);
+    auto it = std::find_if(columns.begin(), columns.end(), [columnRenderer](const auto& column){
+        return (column.get() == columnRenderer);
+    });
+    if (it == columns.end()) {
+        return;
     }
 
-    delete columnRenderer;
+    columns.erase(it);
 
     updateWidths();
 }
