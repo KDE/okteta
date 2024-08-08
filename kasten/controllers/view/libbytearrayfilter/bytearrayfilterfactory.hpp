@@ -9,8 +9,11 @@
 #ifndef KASTEN_BYTEARRAYFILTERFACTORY_HPP
 #define KASTEN_BYTEARRAYFILTERFACTORY_HPP
 
+// Std
+#include <memory>
+#include <vector>
+
 class AbstractByteArrayFilter;
-template <class T> class QVector;
 
 class ByteArrayFilterFactory
 {
@@ -21,7 +24,7 @@ public:
     ByteArrayFilterFactory& operator=(const ByteArrayFilterFactory&) = delete;
 
 public:
-    static QVector<AbstractByteArrayFilter*> createFilters();
+    static std::vector<std::unique_ptr<AbstractByteArrayFilter>> createFilters();
 
 };
 

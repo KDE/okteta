@@ -38,14 +38,14 @@ FilterTool::FilterTool()
     mFilterList = ByteArrayFilterFactory::createFilters();
 
     const KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
-    for (auto* filter : std::as_const(mFilterList)) {
+    for (const auto& filter : std::as_const(mFilterList)) {
         filter->loadConfig(configGroup);
     }
 
     mFilterId = 0;
     const QString operationId = configGroup.readEntry(OperationConfigKey);
     if (!operationId.isEmpty()) {
-        for (int i = 0; i < mFilterList.size(); ++i) {
+        for (std::size_t i = 0; i < mFilterList.size(); ++i) {
             if (mFilterList[i]->id() == operationId) {
                 mFilterId = i;
                 break;
@@ -54,13 +54,10 @@ FilterTool::FilterTool()
     }
 }
 
-FilterTool::~FilterTool()
-{
-    qDeleteAll(mFilterList);
-}
+FilterTool::~FilterTool() = default;
 
 QString FilterTool::title() const { return i18nc("@title:window", "Binary Filter"); }
-QVector<AbstractByteArrayFilter*> FilterTool::filterList() const { return mFilterList; }
+const std::vector<std::unique_ptr<AbstractByteArrayFilter>>& FilterTool::filterList() const { return mFilterList; }
 QString FilterTool::charCodecName() const
 {
     return mByteArrayView ? mByteArrayView->charCodingName() : QString();
@@ -70,7 +67,7 @@ bool FilterTool::hasWriteable() const { return mHasWritable; }
 
 AbstractByteArrayFilterParameterSet* FilterTool::parameterSet(int filterId)
 {
-    AbstractByteArrayFilter* byteArrayFilter = mFilterList.at(filterId);
+    const auto& byteArrayFilter = mFilterList.at(filterId);
 
     return byteArrayFilter ? byteArrayFilter->parameterSet() : nullptr;
 }
@@ -103,7 +100,7 @@ void FilterTool::setTargetModel(AbstractModel* model)
 
 void FilterTool::saveParameterSet(int filterId)
 {
-    AbstractByteArrayFilter* byteArrayFilter = mFilterList.at(filterId);
+    const auto& byteArrayFilter = mFilterList.at(filterId);
 
     if (!byteArrayFilter) {
         return;
@@ -121,7 +118,7 @@ void FilterTool::setFilter(int filterId)
 
     mFilterId = filterId;
 
-    AbstractByteArrayFilter* byteArrayFilter = mFilterList.at(mFilterId);
+    const auto& byteArrayFilter = mFilterList.at(mFilterId);
     if (byteArrayFilter) {
         KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
         configGroup.writeEntry(OperationConfigKey, byteArrayFilter->id());
@@ -132,7 +129,7 @@ void FilterTool::setFilter(int filterId)
 
 void FilterTool::filter() const
 {
-    AbstractByteArrayFilter* byteArrayFilter = mFilterList.at(mFilterId);
+    const auto& byteArrayFilter = mFilterList.at(mFilterId);
 
     if (byteArrayFilter) {
         const Okteta::AddressRange filteredSection = mByteArrayView->selection();
@@ -142,7 +139,7 @@ void FilterTool::filter() const
 
         QApplication::setOverrideCursor(Qt::WaitCursor);
 
-        auto* filterJob = new FilterJob(byteArrayFilter, reinterpret_cast<Okteta::Byte*>(filterResult.data()), mByteArrayModel, filteredSection);
+        auto* filterJob = new FilterJob(byteArrayFilter.get(), reinterpret_cast<Okteta::Byte*>(filterResult.data()), mByteArrayModel, filteredSection);
         const bool success = filterJob->exec();
 
         QApplication::restoreOverrideCursor();

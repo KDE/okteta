@@ -113,8 +113,8 @@ FilterView::~FilterView() = default;
 void FilterView::addFilters()
 {
     //
-    const QVector<AbstractByteArrayFilter*> filterList = mTool->filterList();
-    for (AbstractByteArrayFilter* filter : filterList) {
+    const auto& filterList = mTool->filterList();
+    for (const auto& filter : filterList) {
         mOperationComboBox->addItem(filter->name());
 
         const char* parameterSetId = filter->parameterSet()->id();

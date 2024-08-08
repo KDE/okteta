@@ -21,24 +21,36 @@
 // e.g.
 // #include "filter/my_bytearrayfilter.hpp"
 // NEWFILTER(end)
-// Qt
-#include <QVector>
 
-QVector<AbstractByteArrayFilter*> ByteArrayFilterFactory::createFilters()
+namespace Filters {
+
+template<typename T, typename ... Ptrs>
+auto make_unique_vector(Ptrs&& ... ptrs)
 {
-    const QVector<AbstractByteArrayFilter*> result {
+    std::vector<std::unique_ptr<T>> vector;
+    vector.reserve(sizeof...(Ptrs));
+    ( vector.emplace_back(std::unique_ptr<T>(ptrs)), ... );
+    return vector;
+}
+
+}
+
+std::vector<std::unique_ptr<AbstractByteArrayFilter>> ByteArrayFilterFactory::createFilters()
+{
+    auto result = Filters::make_unique_vector<AbstractByteArrayFilter>(
         new AndByteArrayFilter(),
         new OrByteArrayFilter(),
         new XOrByteArrayFilter(),
         new InvertByteArrayFilter(),
         new ReverseByteArrayFilter(),
         new RotateByteArrayFilter(),
-        new ShiftByteArrayFilter(),
+        new ShiftByteArrayFilter()
 // NEWFILTER(start)
 // Here add the creation of an object of your filter class and add it to the list,
 // e.g.
 //         new My_ByteArrayFilter(),
 // NEWFILTER(end)
-    };
+    );
+
     return result;
 }

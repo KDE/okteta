@@ -11,8 +11,9 @@
 
 // Kasten core
 #include <Kasten/AbstractTool>
-// Qt
-#include <QVector>
+// Std
+#include <memory>
+#include <vector>
 
 class AbstractByteArrayFilterParameterSet;
 class AbstractByteArrayFilter;
@@ -47,7 +48,7 @@ public: // AbstractTool API
 public:
     int filterId() const;
     bool hasWriteable() const;
-    QVector<AbstractByteArrayFilter*> filterList() const;
+    const std::vector<std::unique_ptr<AbstractByteArrayFilter>>& filterList() const;
 
 public:
     QString charCodecName() const;
@@ -71,7 +72,7 @@ private:
     Okteta::AbstractByteArrayModel* mByteArrayModel = nullptr;
     bool mHasWritable = false;
 
-    QVector<AbstractByteArrayFilter*> mFilterList;
+    std::vector<std::unique_ptr<AbstractByteArrayFilter>> mFilterList;
 
     int mFilterId = 0;
 };
