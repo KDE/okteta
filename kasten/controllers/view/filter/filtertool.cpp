@@ -67,9 +67,11 @@ bool FilterTool::hasWriteable() const { return mHasWritable; }
 
 AbstractByteArrayFilterParameterSet* FilterTool::parameterSet(int filterId)
 {
-    const auto& byteArrayFilter = mFilterList.at(filterId);
+    if ((filterId < 0) || (static_cast<int>(mFilterList.size()) <= filterId)) {
+        return nullptr;
+    }
 
-    return byteArrayFilter ? byteArrayFilter->parameterSet() : nullptr;
+    return mFilterList[filterId]->parameterSet();
 }
 
 void FilterTool::setTargetModel(AbstractModel* model)
@@ -100,14 +102,12 @@ void FilterTool::setTargetModel(AbstractModel* model)
 
 void FilterTool::saveParameterSet(int filterId)
 {
-    const auto& byteArrayFilter = mFilterList.at(filterId);
-
-    if (!byteArrayFilter) {
-        return;
+    if ((filterId < 0) || (static_cast<int>(mFilterList.size()) <= filterId)) {
+        return;;
     }
 
     KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
-    byteArrayFilter->saveConfig(configGroup);
+    mFilterList[filterId]->saveConfig(configGroup);
 }
 
 void FilterTool::setFilter(int filterId)
@@ -116,45 +116,48 @@ void FilterTool::setFilter(int filterId)
         return;
     }
 
+    if ((filterId < 0) || (static_cast<int>(mFilterList.size()) <= filterId)) {
+        return;;
+    }
+
     mFilterId = filterId;
 
-    const auto& byteArrayFilter = mFilterList.at(mFilterId);
-    if (byteArrayFilter) {
-        KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
-        configGroup.writeEntry(OperationConfigKey, byteArrayFilter->id());
-    }
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
+    configGroup.writeEntry(OperationConfigKey, mFilterList[mFilterId]->id());
 
     Q_EMIT filterChanged(mFilterId);
 }
 
 void FilterTool::filter() const
 {
-    const auto& byteArrayFilter = mFilterList.at(mFilterId);
+    if ((mFilterId < 0) || (static_cast<int>(mFilterList.size()) <= mFilterId)) {
+        return;;
+    }
 
-    if (byteArrayFilter) {
-        const Okteta::AddressRange filteredSection = mByteArrayView->selection();
+    const auto& byteArrayFilter = mFilterList[mFilterId];
 
-        QByteArray filterResult;
-        filterResult.resize(filteredSection.width());
+    const Okteta::AddressRange filteredSection = mByteArrayView->selection();
 
-        QApplication::setOverrideCursor(Qt::WaitCursor);
+    QByteArray filterResult;
+    filterResult.resize(filteredSection.width());
 
-        auto* filterJob = new FilterJob(byteArrayFilter.get(), reinterpret_cast<Okteta::Byte*>(filterResult.data()), mByteArrayModel, filteredSection);
-        const bool success = filterJob->exec();
+    QApplication::setOverrideCursor(Qt::WaitCursor);
 
-        QApplication::restoreOverrideCursor();
+    auto* filterJob = new FilterJob(byteArrayFilter.get(), reinterpret_cast<Okteta::Byte*>(filterResult.data()), mByteArrayModel, filteredSection);
+    const bool success = filterJob->exec();
 
-        if (success) {
-            Okteta::ChangesDescribable* changesDescribable =
-                qobject_cast<Okteta::ChangesDescribable*>(mByteArrayModel);
+    QApplication::restoreOverrideCursor();
 
-            if (changesDescribable) {
-                changesDescribable->openGroupedChange(byteArrayFilter->name());
-            }
-            mByteArrayModel->replace(filteredSection, filterResult);
-            if (changesDescribable) {
-                changesDescribable->closeGroupedChange();
-            }
+    if (success) {
+        Okteta::ChangesDescribable* changesDescribable =
+            qobject_cast<Okteta::ChangesDescribable*>(mByteArrayModel);
+
+        if (changesDescribable) {
+            changesDescribable->openGroupedChange(byteArrayFilter->name());
+        }
+        mByteArrayModel->replace(filteredSection, filterResult);
+        if (changesDescribable) {
+            changesDescribable->closeGroupedChange();
         }
     }
 

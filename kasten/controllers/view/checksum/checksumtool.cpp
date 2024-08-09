@@ -72,9 +72,11 @@ QString ChecksumTool::title() const { return i18nc("@title:window of the tool to
 
 AbstractByteArrayChecksumParameterSet* ChecksumTool::parameterSet()
 {
-    auto& algorithm = mAlgorithmList.at(mAlgorithmId);
+    if ((mAlgorithmId < 0) || (static_cast<int>(mAlgorithmList.size()) <= mAlgorithmId)) {
+        return nullptr;
+    }
 
-    return algorithm ? algorithm->parameterSet() : nullptr;
+    return mAlgorithmList[mAlgorithmId]->parameterSet();
 }
 
 void ChecksumTool::setTargetModel(AbstractModel* model)
@@ -112,40 +114,44 @@ void ChecksumTool::checkUptoDate()
 
 void ChecksumTool::calculateChecksum()
 {
-    auto& algorithm = mAlgorithmList.at(mAlgorithmId);
-
-    if (algorithm) {
-        // forget old string source
-        if (mSourceByteArrayModel) {
-            mSourceByteArrayModel->disconnect(this);
-        }
-
-        QApplication::setOverrideCursor(Qt::WaitCursor);
-
-        auto* checksumCalculateJob =
-            new ChecksumCalculateJob(&mCheckSum, algorithm.get(), mByteArrayModel, mByteArrayView->selection());
-        checksumCalculateJob->exec();
-
-        QApplication::restoreOverrideCursor();
-
-        // remember checksum source
-        mSourceAlgorithmId = mAlgorithmId;
-        mSourceByteArrayModel = mByteArrayModel;
-        mSourceSelection = mByteArrayView->selection();
-        connect(mSourceByteArrayModel,  &Okteta::AbstractByteArrayModel::contentsChanged,
-                this, &ChecksumTool::onSourceChanged);
-        connect(mSourceByteArrayModel,  &Okteta::AbstractByteArrayModel::destroyed,
-                this, &ChecksumTool::onSourceDestroyed);
-
-        mChecksumUptodate = true;
-        mSourceByteArrayModelUptodate = true;
-        Q_EMIT checksumChanged(mCheckSum);
-        Q_EMIT uptodateChanged(true);
+    if ((mAlgorithmId < 0) || (static_cast<int>(mAlgorithmList.size()) <= mAlgorithmId)) {
+        return;
     }
+
+    // forget old string source
+    if (mSourceByteArrayModel) {
+        mSourceByteArrayModel->disconnect(this);
+    }
+
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+
+    auto* checksumCalculateJob =
+        new ChecksumCalculateJob(&mCheckSum, mAlgorithmList[mAlgorithmId].get(), mByteArrayModel, mByteArrayView->selection());
+    checksumCalculateJob->exec();
+
+    QApplication::restoreOverrideCursor();
+
+    // remember checksum source
+    mSourceAlgorithmId = mAlgorithmId;
+    mSourceByteArrayModel = mByteArrayModel;
+    mSourceSelection = mByteArrayView->selection();
+    connect(mSourceByteArrayModel,  &Okteta::AbstractByteArrayModel::contentsChanged,
+            this, &ChecksumTool::onSourceChanged);
+    connect(mSourceByteArrayModel,  &Okteta::AbstractByteArrayModel::destroyed,
+            this, &ChecksumTool::onSourceDestroyed);
+
+    mChecksumUptodate = true;
+    mSourceByteArrayModelUptodate = true;
+    Q_EMIT checksumChanged(mCheckSum);
+    Q_EMIT uptodateChanged(true);
 }
 
 void ChecksumTool::setAlgorithm(int algorithmId)
 {
+    if ((algorithmId < 0) || (static_cast<int>(mAlgorithmList.size()) <= algorithmId)) {
+        return;
+    }
+
     if (mAlgorithmId == algorithmId) {
         return;
     }
@@ -153,11 +159,8 @@ void ChecksumTool::setAlgorithm(int algorithmId)
     mAlgorithmId = algorithmId;
     checkUptoDate();
 
-    auto& algorithm = mAlgorithmList.at(mAlgorithmId);
-    if (algorithm) {
-        KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
-        configGroup.writeEntry(AlgorithmConfigKey, algorithm->id());
-    }
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
+    configGroup.writeEntry(AlgorithmConfigKey, mAlgorithmList[mAlgorithmId]->id());
 
     Q_EMIT algorithmChanged(mAlgorithmId);
     Q_EMIT uptodateChanged(mChecksumUptodate);
@@ -171,10 +174,9 @@ void ChecksumTool::resetSourceTool()
 {
     mSourceAlgorithmId = -1;
 
-    auto& algorithm = mAlgorithmList.at(mAlgorithmId);
-    if (algorithm) {
+    if ((0 <= mAlgorithmId) && (mAlgorithmId < static_cast<int>(mAlgorithmList.size()))) {
         KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
-        algorithm->saveConfig(configGroup);
+        mAlgorithmList[mAlgorithmId]->saveConfig(configGroup);
     }
 
     checkUptoDate();
