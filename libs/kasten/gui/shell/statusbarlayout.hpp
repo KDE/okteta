@@ -11,7 +11,8 @@
 
 // Qt
 #include <QLayout>
-#include <QVector>
+// Std
+#include <vector>
 
 class QWidgetItem;
 
@@ -50,7 +51,7 @@ private:
     void updateLayoutStructs() const;
 
 private:
-    QVector<QWidgetItem*> mWidgetList;
+    std::vector<QWidgetItem*> mWidgetList;
 
     bool mIsDirty : 1;
     bool mIsEmpty : 1;

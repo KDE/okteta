@@ -47,19 +47,19 @@ bool StatusBarLayout::isEmpty() const
 
 QLayoutItem* StatusBarLayout::itemAt(int index) const
 {
-    if (index < 0 || mWidgetList.size() <= index) {
+    if (index < 0 || static_cast<int>(mWidgetList.size()) <= index) {
         return nullptr;
     }
 
-    return mWidgetList.at(index);
+    return mWidgetList[index];
 }
 
 int StatusBarLayout::indexOf(QWidget* widget) const
 {
     int result = -1;
 
-    for (int i = 0; i < mWidgetList.size(); ++i) {
-        if (mWidgetList.at(i)->widget() == widget) {
+    for (int i = 0; i < static_cast<int>(mWidgetList.size()); ++i) {
+        if (mWidgetList[i]->widget() == widget) {
             result = i;
             break;
         }
@@ -90,11 +90,13 @@ void StatusBarLayout::addItem(QLayoutItem* item)
 
 QLayoutItem* StatusBarLayout::takeAt(int index)
 {
-    if (index < 0 || mWidgetList.size() <= index) {
+    if (index < 0 || static_cast<int>(mWidgetList.size()) <= index) {
         return nullptr;
     }
 
-    QWidgetItem* item = mWidgetList.takeAt(index);
+    auto it = mWidgetList.begin() + index;
+    QWidgetItem* item = *it;
+    mWidgetList.erase(it);
 
     // TODO: any need to delete or reparent the widget?
 
@@ -115,7 +117,7 @@ void StatusBarLayout::addWidget(QWidget* widget)
     if (widget) {
         // TODO: ideally also called, but results in some endless loop, yet to be investigated
         // addChildWidget(widget);
-        mWidgetList.append(new QWidgetItem(widget));
+        mWidgetList.emplace_back(new QWidgetItem(widget));
         invalidate();
     }
 }
@@ -156,8 +158,8 @@ void StatusBarLayout::setGeometry(const QRect& _rect)
     int usedWidth = 0;
     int visibleCount = 0;
     int i;
-    for (i = 0; i < mWidgetList.size(); ++i) {
-        QWidgetItem* item = mWidgetList.at(i);
+    for (i = 0; i < static_cast<int>(mWidgetList.size()); ++i) {
+        QWidgetItem* const item = mWidgetList[i];
         QWidget* widget = item->widget();
 
         // TODO: is there really no way to get to the geometry data if a widget is hidden?
@@ -190,8 +192,8 @@ void StatusBarLayout::setGeometry(const QRect& _rect)
     }
 
     // hide the rest if needed
-    for (; i < mWidgetList.size(); ++i) {
-        QWidgetItem* item = mWidgetList.at(i);
+    for (; i < static_cast<int>(mWidgetList.size()); ++i) {
+        QWidgetItem* const item = mWidgetList[i];
         QWidget* widget = item->widget();
 
         if (!widget->isHidden()) {
@@ -210,8 +212,8 @@ void StatusBarLayout::updateLayoutStructs() const
     QSize sizeHint(0, 0);
 
     int visibleCount = 0;
-    for (int i = 0; i < mWidgetList.size(); ++i) {
-        QWidgetItem* item = mWidgetList.at(i);
+    for (int i = 0; i < static_cast<int>(mWidgetList.size()); ++i) {
+        QWidgetItem* const item = mWidgetList[i];
 
         if (!item->isEmpty()) {
             const QSize itemSizeHint = item->sizeHint();
