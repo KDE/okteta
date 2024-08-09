@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-08 01:50+0000\n"
+"POT-Creation-Date: 2024-08-09 01:47+0000\n"
 "PO-Revision-Date: 2023-08-13 16:27+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -544,7 +544,7 @@ msgstr ""
 "alle Zeichenfolgen aktualisiert, die sich im ausgewählten Bereich befinden "
 "und die eingestellte Mindestlänge aufweisen."
 
-#: controllers/view/filter/filtertool.cpp:62
+#: controllers/view/filter/filtertool.cpp:59
 #: controllers/view/filter/filtertoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"

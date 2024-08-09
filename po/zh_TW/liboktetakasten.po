@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-08 01:50+0000\n"
+"POT-Creation-Date: 2024-08-09 01:47+0000\n"
 "PO-Revision-Date: 2024-05-06 09:52+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -522,7 +522,7 @@ msgstr ""
 "如果您按下<interface>計算</interface>按鍵，清單會被更新為目前選取的範圍內，符"
 "合設定的最小長度的字串。"
 
-#: controllers/view/filter/filtertool.cpp:62
+#: controllers/view/filter/filtertool.cpp:59
 #: controllers/view/filter/filtertoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-08 01:50+0000\n"
+"POT-Creation-Date: 2024-08-09 01:47+0000\n"
 "PO-Revision-Date: 2013-06-21 06:20+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -529,7 +529,7 @@ msgstr ""
 "<interface>Есептеу</interface> батырмасын басқанда таңдалған ауқымынан "
 "барлық минималды ұзындығы сәйкес келетін мәтін жолдар тізімі жаңартылады."
 
-#: controllers/view/filter/filtertool.cpp:62
+#: controllers/view/filter/filtertool.cpp:59
 #: controllers/view/filter/filtertoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"

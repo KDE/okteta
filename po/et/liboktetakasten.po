@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-08 01:50+0000\n"
+"POT-Creation-Date: 2024-08-09 01:47+0000\n"
 "PO-Revision-Date: 2020-01-03 20:25+0200\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -526,7 +526,7 @@ msgstr ""
 "stringe, mis sisalduvad valitud vahemikus ja on vähemalt minimaalse "
 "pikkusega."
 
-#: controllers/view/filter/filtertool.cpp:62
+#: controllers/view/filter/filtertool.cpp:59
 #: controllers/view/filter/filtertoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"

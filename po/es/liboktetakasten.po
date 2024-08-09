@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-08 01:50+0000\n"
+"POT-Creation-Date: 2024-08-09 01:47+0000\n"
 "PO-Revision-Date: 2024-04-27 12:16+0100\n"
 "Last-Translator: Sofía Priego <spriego@darksylvania.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -550,7 +550,7 @@ msgstr ""
 "de todas las cadenas contenidas en el intervalo seleccionado y tengan "
 "establecida la mínima longitud."
 
-#: controllers/view/filter/filtertool.cpp:62
+#: controllers/view/filter/filtertool.cpp:59
 #: controllers/view/filter/filtertoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
