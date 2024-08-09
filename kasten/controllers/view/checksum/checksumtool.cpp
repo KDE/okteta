@@ -40,7 +40,7 @@ ChecksumTool::ChecksumTool()
     mAlgorithmList = ByteArrayChecksumAlgorithmFactory::createAlgorithms();
 
     const KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
-    for (auto& algorithm : std::as_const(mAlgorithmList)) {
+    for (auto& algorithm : mAlgorithmList) {
         algorithm->loadConfig(configGroup);
     }
 

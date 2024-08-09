@@ -190,7 +190,7 @@ bool OktetaPart::saveFile()
 void OktetaPart::onDocumentLoaded(Kasten::AbstractDocument* document)
 {
     if (document) {
-        for (auto& controller : std::as_const(mControllers)) {
+        for (const auto& controller : mControllers) {
             controller->setTargetModel(nullptr);
         }
         mSingleViewArea->setView(nullptr);
@@ -209,7 +209,7 @@ void OktetaPart::onDocumentLoaded(Kasten::AbstractDocument* document)
 
         mSingleViewArea->setView(mByteArrayView.get());
 
-        for (auto& controller : std::as_const(mControllers)) {
+        for (const auto& controller : mControllers) {
             controller->setTargetModel(mByteArrayView.get());
         }
 

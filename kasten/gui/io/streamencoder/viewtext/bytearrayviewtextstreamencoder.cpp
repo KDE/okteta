@@ -109,7 +109,7 @@ bool ByteArrayViewTextStreamEncoder::encodeDataToStream(QIODevice* device,
     }
 
     int subLinesCount = 1;
-    for (const auto& renderer : std::as_const(columnTextRendererList)) {
+    for (const auto& renderer : columnTextRendererList) {
         if (renderer->noOfSublinesNeeded() > subLinesCount) {
             subLinesCount = renderer->noOfSublinesNeeded();
         }
@@ -119,7 +119,7 @@ bool ByteArrayViewTextStreamEncoder::encodeDataToStream(QIODevice* device,
     QTextStream textStream(device);
 
     int l = coordRange.start().line();
-    for (const auto& renderer : std::as_const(columnTextRendererList)) {
+    for (const auto& renderer : columnTextRendererList) {
         renderer->renderFirstLine(&textStream, l);
     }
 
@@ -135,7 +135,7 @@ bool ByteArrayViewTextStreamEncoder::encodeDataToStream(QIODevice* device,
             subLine = 0;
         }
         const bool isSubline = (subLine > 0);
-        for (const auto& renderer : std::as_const(columnTextRendererList)) {
+        for (const auto& renderer : columnTextRendererList) {
             renderer->renderNextLine(&textStream, isSubline);
         }
 

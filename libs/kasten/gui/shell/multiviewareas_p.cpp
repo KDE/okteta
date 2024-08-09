@@ -173,7 +173,7 @@ void MultiViewAreasPrivate::onViewsRemoved()
                 }
             }
 
-            for (auto& viewArea : std::as_const(mViewAreaList)) {
+            for (const auto& viewArea : mViewAreaList) {
                 if (viewArea->widget() == otherWidget) {
                     viewArea->setFocus();
                     break;

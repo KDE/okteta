@@ -61,7 +61,7 @@ void SingleViewWindowPrivate::setView(AbstractView* view)
     mView = view;
     mViewArea->setView(view);
 
-    for (const auto& controller : std::as_const(mControllers)) {
+    for (const auto& controller : mControllers) {
         controller->setTargetModel(view);
     }
 

@@ -38,7 +38,7 @@ FilterTool::FilterTool()
     mFilterList = ByteArrayFilterFactory::createFilters();
 
     const KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
-    for (const auto& filter : std::as_const(mFilterList)) {
+    for (const auto& filter : mFilterList) {
         filter->loadConfig(configGroup);
     }
 

@@ -99,7 +99,7 @@ bool ByteArrayViewHtmlStreamEncoder::encodeDataToStream(QIODevice* device,
     }
 
     int subLinesCount = 1;
-    for (const auto& renderer : std::as_const(columnHtmlRendererList)) {
+    for (const auto& renderer : columnHtmlRendererList) {
         if (renderer->noOfSublinesNeeded() > subLinesCount) {
             subLinesCount = renderer->noOfSublinesNeeded();
         }
@@ -114,7 +114,7 @@ bool ByteArrayViewHtmlStreamEncoder::encodeDataToStream(QIODevice* device,
     textStream << "<tr>";
 
     int l = coordRange.start().line();
-    for (const auto& renderer : std::as_const(columnHtmlRendererList)) {
+    for (const auto& renderer : columnHtmlRendererList) {
         renderer->renderFirstLine(&textStream, l);
     }
 
@@ -133,7 +133,7 @@ bool ByteArrayViewHtmlStreamEncoder::encodeDataToStream(QIODevice* device,
         textStream << "<tr>";
 
         const bool isSubline = (subLine > 0);
-        for (const auto& renderer : std::as_const(columnHtmlRendererList)) {
+        for (const auto& renderer : columnHtmlRendererList) {
             renderer->renderNextLine(&textStream, isSubline);
         }
 

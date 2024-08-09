@@ -147,7 +147,7 @@ inline void MultiViewAreasPrivate::removeViews(const QVector<AbstractView*>& vie
     Q_Q(MultiViewAreas);
 
     // TODO: possible to just send the views of the given area?
-    for (auto& viewArea : std::as_const(mViewAreaList)) {
+    for (const auto& viewArea : mViewAreaList) {
         viewArea->removeViews(views);
     }
 
@@ -174,7 +174,7 @@ inline AbstractToolInlineView* MultiViewAreasPrivate::currentToolInlineView() co
 inline void MultiViewAreasPrivate::setViewFocus(AbstractView* view)
 {
     // TODO: makes this more efficient!
-    for (auto& viewArea : std::as_const(mViewAreaList)) {
+    for (const auto& viewArea : mViewAreaList) {
         const int localIndex = viewArea->indexOf(view);
         if (localIndex != -1) {
             viewArea->setViewFocus(view);

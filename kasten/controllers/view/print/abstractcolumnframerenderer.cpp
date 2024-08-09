@@ -46,7 +46,7 @@ AbstractColumnFrameRendererPrivate::~AbstractColumnFrameRendererPrivate() = defa
 void AbstractColumnFrameRendererPrivate::updateWidths()
 {
     mColumnsWidth = 0;
-    for (auto& columnRenderer : std::as_const(mColumns)) {
+    for (auto& columnRenderer : mColumns) {
         columnRenderer->setX(mColumnsWidth);
         mColumnsWidth += columnRenderer->visibleWidth();
     }
@@ -85,7 +85,7 @@ void AbstractColumnFrameRenderer::setLineHeight(Okteta::PixelY newLineHeight)
     }
     d->mLineHeight = newLineHeight;
 
-    for (auto& columnRenderer : std::as_const(d->mColumns)) {
+    for (const auto& columnRenderer : d->mColumns) {
         columnRenderer->setLineHeight(d->mLineHeight);
     }
 }
@@ -141,7 +141,7 @@ void AbstractColumnFrameRenderer::renderFrame(QPainter* painter, int frameIndex)
         // collect affected columns
         std::vector<Okteta::AbstractColumnRenderer*> columnRenderers;
         columnRenderers.reserve(d->mColumns.size());
-        for (auto& columnRenderer : std::as_const(d->mColumns)) {
+        for (const auto& columnRenderer : d->mColumns) {
             if (columnRenderer->isVisible() && columnRenderer->overlaps(renderedXs)) {
                 columnRenderers.emplace_back(columnRenderer.get());
             }
