@@ -139,11 +139,11 @@ void AbstractColumnFrameRenderer::renderFrame(QPainter* painter, int frameIndex)
     // content to be shown?
     if (renderedXs.startsBefore(d->mColumnsWidth)) {
         // collect affected columns
-        QVector<Okteta::AbstractColumnRenderer*> columnRenderers;
+        std::vector<Okteta::AbstractColumnRenderer*> columnRenderers;
         columnRenderers.reserve(d->mColumns.size());
         for (auto& columnRenderer : std::as_const(d->mColumns)) {
             if (columnRenderer->isVisible() && columnRenderer->overlaps(renderedXs)) {
-                columnRenderers.append(columnRenderer.get());
+                columnRenderers.emplace_back(columnRenderer.get());
             }
         }
 
@@ -157,21 +157,21 @@ void AbstractColumnFrameRenderer::renderFrame(QPainter* painter, int frameIndex)
         // any lines of any columns to be drawn?
         if (renderedLines.isValid()) {
             // paint full columns
-            for (auto* columnRenderer : std::as_const(columnRenderers)) {
+            for (auto* const columnRenderer : columnRenderers) {
                 columnRenderer->renderColumn(painter, renderedXs, renderedYs);
             }
 
             Okteta::PixelY cy = 0;
             // starting painting with the first line
             Okteta::Line line = renderedLines.start();
-            auto it = columnRenderers.constBegin();
+            auto it = columnRenderers.cbegin();
             Okteta::AbstractColumnRenderer* columnRenderer = *it;
             painter->translate(columnRenderer->x(), cy);
 
             while (true) {
                 columnRenderer->renderFirstLine(painter, renderedXs, line);
                 ++it;
-                if (it == columnRenderers.constEnd()) {
+                if (it == columnRenderers.cend()) {
                     break;
                 }
                 painter->translate(columnRenderer->width(), 0);
@@ -187,14 +187,14 @@ void AbstractColumnFrameRenderer::renderFrame(QPainter* painter, int frameIndex)
                     break;
                 }
 
-                auto it = columnRenderers.constBegin();
+                auto it = columnRenderers.cbegin();
                 columnRenderer = *it;
                 painter->translate(columnRenderer->x(), d->mLineHeight);
 
                 while (true) {
                     columnRenderer->renderNextLine(painter);
                     ++it;
-                    if (it == columnRenderers.constEnd()) {
+                    if (it == columnRenderers.cend()) {
                         break;
                     }
                     painter->translate(columnRenderer->width(), 0);
@@ -210,7 +210,7 @@ void AbstractColumnFrameRenderer::renderFrame(QPainter* painter, int frameIndex)
         // draw empty columns?
         renderedYs.set(renderedYs.nextBehindEnd(), height() - 1);
         if (renderedYs.isValid()) {
-            for (auto* columnRenderer : std::as_const(columnRenderers)) {
+            for (auto* const columnRenderer : columnRenderers) {
                 columnRenderer->renderEmptyColumn(painter, renderedXs, renderedYs);
             }
         }
