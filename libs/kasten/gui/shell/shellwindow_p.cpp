@@ -20,8 +20,6 @@
 #include <Kasten/AbstractTool>
 #include <Kasten/AbstractModelSynchronizer>
 #include <Kasten/AbstractDocument>
-// Qt
-#include <QHash>
 // Std
 #include <utility>
 

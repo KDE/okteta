@@ -22,7 +22,6 @@
 #include <Okteta/ValueCodec>
 #include <Okteta/CharCodec>
 // Qt
-#include <QHash>
 #include <QDateTime>
 #include <QPainter>
 #include <QFontMetrics>
