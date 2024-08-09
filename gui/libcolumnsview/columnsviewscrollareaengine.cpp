@@ -13,6 +13,8 @@
 // Qt
 #include <QPainter>
 #include <QPaintEvent>
+// Std
+#include <vector>
 
 namespace Okteta {
 
@@ -41,11 +43,11 @@ void ColumnsViewScrollAreaEngine::renderColumns(QPainter* painter, int cx, int c
         PixelYRange dirtyYs = PixelYRange::fromWidth(cy, ch);
 
         // collect affected columns
-        QVector<AbstractColumnRenderer*> dirtyColumns;
+        std::vector<AbstractColumnRenderer*> dirtyColumns;
         dirtyColumns.reserve(columns.size());
         for (const auto& column : std::as_const(columns)) {
             if (column->isVisible() && column->overlaps(dirtyXs)) {
-                dirtyColumns.append(column.get());
+                dirtyColumns.emplace_back(column.get());
             }
         }
 
@@ -65,14 +67,14 @@ void ColumnsViewScrollAreaEngine::renderColumns(QPainter* painter, int cx, int c
                 // qCDebug(LOG_OKTETA_GUI)<<"Dirty lines: "<<dirtyLines.start()<<"-"<<dirtyLines.end();
                 // starting painting with the first line
                 Line line = dirtyLines.start();
-                auto it = dirtyColumns.constBegin();
+                auto it = dirtyColumns.cbegin();
                 AbstractColumnRenderer* column = *it;
                 painter->translate(column->x(), cy);
 
                 while (true) {
                     column->renderFirstLine(painter, dirtyXs, line);
                     ++it;
-                    if (it == dirtyColumns.constEnd()) {
+                    if (it == dirtyColumns.cend()) {
                         break;
                     }
                     painter->translate(column->width(), 0);
@@ -88,14 +90,14 @@ void ColumnsViewScrollAreaEngine::renderColumns(QPainter* painter, int cx, int c
                         break;
                     }
 
-                    it = dirtyColumns.constBegin();
+                    it = dirtyColumns.cbegin();
                     column = *it;
                     painter->translate(column->x(), LineHeight);
 
                     while (true) {
                         column->renderNextLine(painter);
                         ++it;
-                        if (it == dirtyColumns.constEnd()) {
+                        if (it == dirtyColumns.cend()) {
                             break;
                         }
                         painter->translate(column->width(), 0);
@@ -112,7 +114,7 @@ void ColumnsViewScrollAreaEngine::renderColumns(QPainter* painter, int cx, int c
         // draw empty columns?
         dirtyYs.setStart(columnsHeight());
         if (dirtyYs.isValid()) {
-            for (auto* column : std::as_const(dirtyColumns)) {
+            for (auto* const column : dirtyColumns) {
                 column->renderEmptyColumn(painter, dirtyXs, dirtyYs);
             }
         }

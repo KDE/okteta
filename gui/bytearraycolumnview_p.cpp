@@ -25,6 +25,7 @@
 #include <QEvent>
 // Std
 #include <utility>
+#include <vector>
 
 namespace Okteta {
 
@@ -708,13 +709,13 @@ void ByteArrayColumnViewPrivate::updateChanged()
     }
 
     // collect affected buffer columns
-    QVector<AbstractByteArrayColumnRenderer*> dirtyColumns;
+    std::vector<AbstractByteArrayColumnRenderer*> dirtyColumns;
     dirtyColumns.reserve(2);
 
     AbstractByteArrayColumnRenderer* column = mValueColumn;
     while (true) {
         if (column->isVisible() && column->overlaps(Xs)) {
-            dirtyColumns.append(column);
+            dirtyColumns.emplace_back(column);
             column->prepareRendering(Xs);
         }
 
@@ -725,7 +726,7 @@ void ByteArrayColumnViewPrivate::updateChanged()
     }
 
     // any columns to paint?
-    if (!dirtyColumns.isEmpty()) {
+    if (!dirtyColumns.empty()) {
         // calculate affected lines/indizes
         const LinePositionRange fullPositions(0, mTableLayout->noOfBytesPerLine() - 1);
         CoordRange visibleRange(fullPositions, visibleLines());
@@ -739,7 +740,7 @@ void ByteArrayColumnViewPrivate::updateChanged()
             // only one line?
             if (changedRange.start().line() == changedRange.end().line()) {
                 const LinePositionRange changedPositions(changedRange.start().pos(), changedRange.end().pos());
-                for (auto* column : std::as_const(dirtyColumns)) {
+                for (auto* const column : dirtyColumns) {
                     const PixelXRange xPixels = column->xsOfLinePositionsInclSpaces(changedPositions);
 
                     q->viewport()->update(xPixels.start() - xOffset, cy, xPixels.width(), lineHeight);
@@ -749,7 +750,7 @@ void ByteArrayColumnViewPrivate::updateChanged()
             else {
                 // first line
                 const LinePositionRange firstChangedPositions(changedRange.start().pos(), fullPositions.end());
-                for (auto* column : std::as_const(dirtyColumns)) {
+                for (auto* const column : dirtyColumns) {
                     const PixelXRange XPixels = column->xsOfLinePositionsInclSpaces(firstChangedPositions);
 
                     q->viewport()->update(XPixels.start() - xOffset, cy, XPixels.width(), lineHeight);
@@ -758,7 +759,7 @@ void ByteArrayColumnViewPrivate::updateChanged()
                 // at least one full line?
                 for (int l = changedRange.start().line() + 1; l < changedRange.end().line(); ++l) {
                     cy += lineHeight;
-                    for (auto* column : std::as_const(dirtyColumns)) {
+                    for (auto* const column : dirtyColumns) {
                         const PixelXRange XPixels = column->xsOfLinePositionsInclSpaces(fullPositions);
 
                         q->viewport()->update(XPixels.start() - xOffset, cy, XPixels.width(), lineHeight);
@@ -768,7 +769,7 @@ void ByteArrayColumnViewPrivate::updateChanged()
                 // last line
                 cy += lineHeight;
                 const LinePositionRange lastChangedPositions(fullPositions.start(), changedRange.end().pos());
-                for (auto* column : std::as_const(dirtyColumns)) {
+                for (auto* const column : dirtyColumns) {
                     const PixelXRange XPixels = column->xsOfLinePositionsInclSpaces(lastChangedPositions);
 
                     q->viewport()->update(XPixels.start() - xOffset, cy, XPixels.width(), lineHeight);
