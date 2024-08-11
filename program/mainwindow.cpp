@@ -100,6 +100,9 @@
 // Qt
 #include <QUrl>
 #include <QMimeData>
+// Std
+#include <algorithm>
+#include <vector>
 
 namespace Kasten {
 
@@ -312,22 +315,21 @@ void OktetaMainWindow::onNewDocumentRequested()
 void OktetaMainWindow::onCloseRequest(const QVector<Kasten::AbstractView*>& views)
 {
     // group views per document
-    QHash<AbstractDocument*, QVector<AbstractView*>> viewsToClosePerDocument;
+    QHash<AbstractDocument*, std::vector<AbstractView*>> viewsToClosePerDocument;
     for (AbstractView* view : views) {
         auto* document = view->findBaseModel<AbstractDocument*>();
-        viewsToClosePerDocument[document].append(view);
+        viewsToClosePerDocument[document].emplace_back(view);
     }
 
     // find documents which lose all views
     const QVector<AbstractView*> allViews = viewManager()->views();
     for (AbstractView* view : allViews) {
         auto* document = view->findBaseModel<AbstractDocument*>();
-        QHash<AbstractDocument*, QVector<AbstractView*>>::Iterator it =
-            viewsToClosePerDocument.find(document);
+        auto it = viewsToClosePerDocument.find(document);
 
         if (it != viewsToClosePerDocument.end()) {
-            const QVector<AbstractView*>& viewsOfDocument = it.value();
-            const bool isAnotherView = !viewsOfDocument.contains(view);
+            const std::vector<AbstractView*>& viewsOfDocument = it.value();
+            const bool isAnotherView = (std::find(viewsOfDocument.cbegin(), viewsOfDocument.cend(), view) == viewsOfDocument.cend());
             if (isAnotherView) {
                 viewsToClosePerDocument.erase(it);
             }
