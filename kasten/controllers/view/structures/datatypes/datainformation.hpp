@@ -251,7 +251,7 @@ Q_DECLARE_METATYPE(const DataInformation*)
 inline Qt::ItemFlags DataInformation::flags(int column, bool fileLoaded) const
 {
     Q_UNUSED(column)
-    Q_UNUSED(fileLoaded);
+    Q_UNUSED(fileLoaded)
     return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
 }
 

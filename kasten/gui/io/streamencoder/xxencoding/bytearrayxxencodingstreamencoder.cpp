@@ -92,7 +92,7 @@ bool ByteArrayXxencodingStreamEncoder::encodeDataToStream(QIODevice* device,
                                                           const Okteta::AbstractByteArrayModel* byteArrayModel,
                                                           const Okteta::AddressRange& range)
 {
-    Q_UNUSED(byteArrayView);
+    Q_UNUSED(byteArrayView)
 
     const char header[] = "begin";
     const char footer[] = "\n+\nend\n";

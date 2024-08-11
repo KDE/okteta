@@ -22,7 +22,7 @@ ZoomBarControllerFactory::~ZoomBarControllerFactory() = default;
 
 AbstractXmlGuiController* ZoomBarControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    Q_UNUSED(guiClient);
+    Q_UNUSED(guiClient)
 
     return new ZoomBarController(m_statusBar);
 }

@@ -41,12 +41,12 @@ AbstractByteArrayFilter::~AbstractByteArrayFilter() = default;
 
 void AbstractByteArrayFilter::loadConfig(const KConfigGroup& configGroup)
 {
-    Q_UNUSED(configGroup);
+    Q_UNUSED(configGroup)
 }
 
 void AbstractByteArrayFilter::saveConfig(KConfigGroup& configGroup) const
 {
-    Q_UNUSED(configGroup);
+    Q_UNUSED(configGroup)
 }
 
 QString AbstractByteArrayFilter::name() const { return d->name(); }

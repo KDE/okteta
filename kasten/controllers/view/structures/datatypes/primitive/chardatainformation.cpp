@@ -161,7 +161,7 @@ void CharDataInformationMethods::staticSetWidgetData(quint8 value, QWidget* w)
 
 QScriptValue CharDataInformationMethods::asScriptValue(quint8 value, QScriptEngine* engine, ScriptHandlerInfo* handler)
 {
-    Q_UNUSED(engine);
-    Q_UNUSED(handler);
+    Q_UNUSED(engine)
+    Q_UNUSED(handler)
     return QScriptValue(QString(value > 127 ? QChar::ReplacementCharacter : QChar(value, 0)));
 }

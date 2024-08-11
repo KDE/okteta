@@ -185,7 +185,7 @@ void CharsetConversionView::onApplyableChanged(bool isApplyable)
 
 void CharsetConversionView::onDefaultByteEditChanged(const QByteArray& byteArray)
 {
-    Q_UNUSED(byteArray);
+    Q_UNUSED(byteArray)
 }
 
 void CharsetConversionView::onConvertButtonClicked()

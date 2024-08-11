@@ -41,12 +41,12 @@ AbstractByteArrayChecksumAlgorithm::~AbstractByteArrayChecksumAlgorithm() = defa
 
 void AbstractByteArrayChecksumAlgorithm::loadConfig(const KConfigGroup& configGroup)
 {
-    Q_UNUSED(configGroup);
+    Q_UNUSED(configGroup)
 }
 
 void AbstractByteArrayChecksumAlgorithm::saveConfig(KConfigGroup& configGroup) const
 {
-    Q_UNUSED(configGroup);
+    Q_UNUSED(configGroup)
 }
 
 QString AbstractByteArrayChecksumAlgorithm::name() const { return d->name(); }

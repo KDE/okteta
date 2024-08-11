@@ -1047,7 +1047,7 @@ void AbstractByteArrayViewPrivate::initPainterFromWidget(QPainter* painter) cons
 
 QMenu* AbstractByteArrayViewPrivate::createStandardContextMenu(QPoint position)
 {
-    Q_UNUSED(position);
+    Q_UNUSED(position)
 
     Q_Q(AbstractByteArrayView);
 

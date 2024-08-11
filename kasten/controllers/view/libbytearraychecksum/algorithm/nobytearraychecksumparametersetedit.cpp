@@ -18,12 +18,12 @@ NoByteArrayChecksumParameterSetEdit::~NoByteArrayChecksumParameterSetEdit() = de
 
 void NoByteArrayChecksumParameterSetEdit::setParameterSet(const AbstractByteArrayChecksumParameterSet* parameterSet)
 {
-    Q_UNUSED(parameterSet);
+    Q_UNUSED(parameterSet)
 }
 
 void NoByteArrayChecksumParameterSetEdit::getParameterSet(AbstractByteArrayChecksumParameterSet* parameterSet) const
 {
-    Q_UNUSED(parameterSet);
+    Q_UNUSED(parameterSet)
 }
 
 #include "moc_nobytearraychecksumparametersetedit.cpp"

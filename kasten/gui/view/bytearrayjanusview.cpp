@@ -274,7 +274,7 @@ bool ByteArrayJanusView::isOverwriteMode() const
 
 void ByteArrayJanusView::setShowsNonprinting(bool on)
 {
-    Q_UNUSED(on);
+    Q_UNUSED(on)
     // TODOSHOWNONPRINTING mView->setShowsNonprinting(on);
 }
 

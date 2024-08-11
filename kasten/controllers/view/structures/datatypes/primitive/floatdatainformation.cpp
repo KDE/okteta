@@ -47,8 +47,8 @@ void FloatDataInformationMethods::staticSetWidgetData(float value, QWidget* w)
 
 QScriptValue FloatDataInformationMethods::asScriptValue(float value, QScriptEngine* engine, ScriptHandlerInfo* handler)
 {
-    Q_UNUSED(engine);
-    Q_UNUSED(handler);
+    Q_UNUSED(engine)
+    Q_UNUSED(handler)
     return {value};
 }
 

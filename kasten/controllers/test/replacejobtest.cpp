@@ -55,7 +55,7 @@ private:
 
 void TestReplaceUserQueryAgent::queryContinue(Kasten::FindDirection direction, int noOfReplacements)
 {
-    Q_UNUSED(direction);
+    Q_UNUSED(direction)
     m_noOfReplacements = noOfReplacements;
     emit queryContinueFinished(true);
 }

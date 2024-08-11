@@ -13,7 +13,7 @@
 
 QValidator::State UIntSpinBox::validate(QString& input, int& pos) const
 {
-    Q_UNUSED(pos);
+    Q_UNUSED(pos)
 
     QValidator::State result;
 
@@ -38,7 +38,7 @@ QValidator::State UIntSpinBox::validate(QString& input, int& pos) const
 
 void UIntSpinBox::fixup(QString& input) const
 {
-    Q_UNUSED(input);
+    Q_UNUSED(input)
 
     // TODO: what can be done here? remove localized stuff?
 }

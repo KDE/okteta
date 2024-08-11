@@ -69,7 +69,7 @@ private:
 
 bool TestSearchUserQueryable::queryContinue(Kasten::FindDirection direction) const
 {
-    Q_UNUSED(direction);
+    Q_UNUSED(direction)
     mWrapQueryStatus = WrapQueried;
     return true;
 }

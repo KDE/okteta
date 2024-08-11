@@ -48,7 +48,7 @@ int AbstractValue8Editor::valueFromText(const QString& text) const
 
 QValidator::State AbstractValue8Editor::validate(QString& text, int& pos) const
 {
-    Q_UNUSED(pos);
+    Q_UNUSED(pos)
 
     Okteta::Byte byte;
     const int textLength = text.length();

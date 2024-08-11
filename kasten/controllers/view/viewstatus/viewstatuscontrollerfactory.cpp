@@ -22,7 +22,7 @@ ViewStatusControllerFactory::~ViewStatusControllerFactory() = default;
 
 AbstractXmlGuiController* ViewStatusControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    Q_UNUSED(guiClient);
+    Q_UNUSED(guiClient)
 
     return new ViewStatusController(m_statusBar);
 }

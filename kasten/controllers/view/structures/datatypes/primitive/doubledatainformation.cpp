@@ -44,8 +44,8 @@ void DoubleDataInformationMethods::staticSetWidgetData(double value, QWidget* w)
 
 QScriptValue DoubleDataInformationMethods::asScriptValue(double value, QScriptEngine* engine, ScriptHandlerInfo* handler)
 {
-    Q_UNUSED(engine);
-    Q_UNUSED(handler);
+    Q_UNUSED(engine)
+    Q_UNUSED(handler)
     return {value};
 }
 

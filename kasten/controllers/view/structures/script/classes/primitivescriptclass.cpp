@@ -161,9 +161,9 @@ QScriptValue PrimitiveScriptClass::additionalProperty(const DataInformation* dat
 
 bool PrimitiveScriptClass::setAdditionalProperty(DataInformation* data, const QScriptString& name, uint, const QScriptValue& value)
 {
-    Q_UNUSED(value);
-    Q_UNUSED(data);
-    Q_UNUSED(name);
+    Q_UNUSED(value)
+    Q_UNUSED(data)
+    Q_UNUSED(name)
     // TODO allow changing type
     return false;
 }

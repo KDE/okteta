@@ -22,7 +22,7 @@ UiColorSchemeControllerFactory::~UiColorSchemeControllerFactory() = default;
 
 AbstractXmlGuiController* UiColorSchemeControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    Q_UNUSED(guiClient);
+    Q_UNUSED(guiClient)
 
     return new UiColorSchemeController(m_window);
 }

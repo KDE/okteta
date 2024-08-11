@@ -171,9 +171,9 @@ QString StringDataInformation::valueStringImpl() const
 
 Qt::ItemFlags StringDataInformation::childFlags(int row, int column, bool fileLoaded) const
 {
-    Q_UNUSED(fileLoaded);
-    Q_UNUSED(row);
-    Q_UNUSED(column);
+    Q_UNUSED(fileLoaded)
+    Q_UNUSED(row)
+    Q_UNUSED(column)
     return Qt::ItemIsSelectable | Qt::ItemIsEnabled; // not editable atm
     // TODO make editable
 }
