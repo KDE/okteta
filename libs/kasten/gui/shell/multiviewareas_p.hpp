@@ -147,7 +147,13 @@ inline void MultiViewAreasPrivate::removeViews(const QVector<AbstractView*>& vie
     Q_Q(MultiViewAreas);
 
     // TODO: possible to just send the views of the given area?
+    // create copy of current list, as areas might be emptied and removed in handlers during the loop
+    std::vector<TabbedViews*> currentViewAreas;
+    currentViewAreas.reserve(mViewAreaList.size());
     for (const auto& viewArea : mViewAreaList) {
+        currentViewAreas.emplace_back(viewArea.get());
+    }
+    for (auto* const viewArea : currentViewAreas) {
         viewArea->removeViews(views);
     }
 
