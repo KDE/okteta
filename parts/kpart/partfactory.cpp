@@ -41,7 +41,7 @@ OktetaPartFactory::OktetaPartFactory()
     const QVector<Kasten::AbstractModelDataGeneratorConfigEditorFactory*> generatorConfigEditorFactoryList =
         Kasten::ByteArrayDataGeneratorConfigEditorFactoryFactory::createFactorys();
 
-    mModelCodecManager->setEncoders( encoderList );
+    mModelCodecManager->setStreamEncoders(encoderList);
     mModelCodecManager->setGenerators( generatorList );
 
     mModelCodecViewManager->setEncoderConfigEditorFactories(encoderConfigEditorFactoryList);

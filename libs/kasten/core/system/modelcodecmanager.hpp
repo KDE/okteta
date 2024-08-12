@@ -53,7 +53,7 @@ public:
     QVector<AbstractModelExporter*> exporterList(AbstractModel* model, const AbstractModelSelection* selection) const;
 
 public:
-    void setEncoders(const QVector<AbstractModelStreamEncoder*>& encoderList);
+    void setStreamEncoders(const QVector<AbstractModelStreamEncoder*>& encoderList);
     void setDecoders(const QVector<AbstractModelStreamDecoder*>& decoderList);
     void setGenerators(const QVector<AbstractModelDataGenerator*>& generatorList);
     void setOverwriteDialog(AbstractOverwriteDialog* overwriteDialog);

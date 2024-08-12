@@ -57,11 +57,11 @@ void ModelCodecManager::setOverwriteDialog(AbstractOverwriteDialog* overwriteDia
     d->setOverwriteDialog(overwriteDialog);
 }
 
-void ModelCodecManager::setEncoders(const QVector<AbstractModelStreamEncoder*>& encoderList)
+void ModelCodecManager::setStreamEncoders(const QVector<AbstractModelStreamEncoder*>& encoderList)
 {
     Q_D(ModelCodecManager);
 
-    d->setEncoders(encoderList);
+    d->setStreamEncoders(encoderList);
 }
 
 void ModelCodecManager::setDecoders(const QVector<AbstractModelStreamDecoder*>& decoderList)

@@ -61,7 +61,7 @@ void ModelCodecManagerPrivate::setOverwriteDialog(AbstractOverwriteDialog* overw
     mOverwriteDialog = overwriteDialog;
 }
 
-void ModelCodecManagerPrivate::setEncoders(const QVector<AbstractModelStreamEncoder*>& encoderList)
+void ModelCodecManagerPrivate::setStreamEncoders(const QVector<AbstractModelStreamEncoder*>& encoderList)
 {
     mEncoderList = encoderList;
 

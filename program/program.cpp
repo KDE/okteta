@@ -107,7 +107,7 @@ int OktetaProgram::execute()
     const QVector<AbstractModelDataGeneratorConfigEditorFactory*> generatorConfigEditorFactoryList =
         ByteArrayDataGeneratorConfigEditorFactoryFactory::createFactorys();
 
-    mDocumentManager->codecManager()->setEncoders(encoderList);
+    mDocumentManager->codecManager()->setStreamEncoders(encoderList);
     mDocumentManager->codecManager()->setGenerators(generatorList);
     mDocumentManager->codecManager()->setOverwriteDialog(mDialogHandler.get());
     mDocumentManager->createManager()->setDocumentFactory(new ByteArrayDocumentFactory());
