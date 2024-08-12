@@ -47,7 +47,7 @@ void OffsetColumnRendererPrivate::renderColumnBackground(QPainter* painter, cons
 
 void OffsetColumnRendererPrivate::renderFirstLine(QPainter* painter, const PixelXRange& Xs, Line firstLineIndex)
 {
-    Q_UNUSED(Xs);
+    Q_UNUSED(Xs)
 
     mRenderLineIndex = firstLineIndex;
     renderLine(painter, mRenderLineIndex++);

@@ -37,8 +37,8 @@ class Binary8DisplayStringifier : public AbstractDataTypeDisplayStringifier
 public:
     QString displayText(const QVariant& data, const QLocale& locale, bool asHex) const override
     {
-        Q_UNUSED(locale);
-        Q_UNUSED(asHex);
+        Q_UNUSED(locale)
+        Q_UNUSED(asHex)
 
         const Okteta::Binary8 binary8 = data.value<Okteta::Binary8>();
         return binary8.toString();
@@ -50,8 +50,8 @@ class Octal8DisplayStringifier : public AbstractDataTypeDisplayStringifier
 public:
     QString displayText(const QVariant& data, const QLocale& locale, bool asHex) const override
     {
-        Q_UNUSED(locale);
-        Q_UNUSED(asHex);
+        Q_UNUSED(locale)
+        Q_UNUSED(asHex)
 
         const Okteta::Octal8 octal8 = data.value<Okteta::Octal8>();
         return octal8.toString();
@@ -63,8 +63,8 @@ class Hexadecimal8DisplayStringifier : public AbstractDataTypeDisplayStringifier
 public:
     QString displayText(const QVariant& data, const QLocale& locale, bool asHex) const override
     {
-        Q_UNUSED(locale);
-        Q_UNUSED(asHex);
+        Q_UNUSED(locale)
+        Q_UNUSED(asHex)
 
         const Okteta::Hexadecimal8 hexadecimal8 = data.value<Okteta::Hexadecimal8>();
         return hexadecimal8.toString();
@@ -76,7 +76,7 @@ class SInt8DisplayStringifier : public AbstractDataTypeDisplayStringifier
 public:
     QString displayText(const QVariant& data, const QLocale& locale, bool asHex) const override
     {
-        Q_UNUSED(asHex);
+        Q_UNUSED(asHex)
 
         const Okteta::SInt8 sInt8 = data.value<Okteta::SInt8>();
         return sInt8.toString(locale);
@@ -88,7 +88,7 @@ class SInt16DisplayStringifier : public AbstractDataTypeDisplayStringifier
 public:
     QString displayText(const QVariant& data, const QLocale& locale, bool asHex) const override
     {
-        Q_UNUSED(asHex);
+        Q_UNUSED(asHex)
 
         const Okteta::SInt16 sInt16 = data.value<Okteta::SInt16>();
         return sInt16.toString(locale);
@@ -100,7 +100,7 @@ class SInt32DisplayStringifier : public AbstractDataTypeDisplayStringifier
 public:
     QString displayText(const QVariant& data, const QLocale& locale, bool asHex) const override
     {
-        Q_UNUSED(asHex);
+        Q_UNUSED(asHex)
 
         const Okteta::SInt32 sInt32 = data.value<Okteta::SInt32>();
         return sInt32.toString(locale);
@@ -112,7 +112,7 @@ class SInt64DisplayStringifier : public AbstractDataTypeDisplayStringifier
 public:
     QString displayText(const QVariant& data, const QLocale& locale, bool asHex) const override
     {
-        Q_UNUSED(asHex);
+        Q_UNUSED(asHex)
 
         const Okteta::SInt64 sInt64 = data.value<Okteta::SInt64>();
         return sInt64.toString(locale);
@@ -164,7 +164,7 @@ class Float32DisplayStringifier : public AbstractDataTypeDisplayStringifier
 public:
     QString displayText(const QVariant& data, const QLocale& locale, bool asHex) const override
     {
-        Q_UNUSED(asHex);
+        Q_UNUSED(asHex)
 
         const Okteta::Float32 float32 = data.value<Okteta::Float32>();
         return float32.toString(locale);
@@ -176,7 +176,7 @@ class Float64DisplayStringifier : public AbstractDataTypeDisplayStringifier
 public:
     QString displayText(const QVariant& data, const QLocale& locale, bool asHex) const override
     {
-        Q_UNUSED(asHex);
+        Q_UNUSED(asHex)
 
         const Okteta::Float64 float64 = data.value<Okteta::Float64>();
         return float64.toString(locale);
@@ -188,8 +188,8 @@ class Char8DisplayStringifier : public AbstractDataTypeDisplayStringifier
 public:
     QString displayText(const QVariant& data, const QLocale& locale, bool asHex) const override
     {
-        Q_UNUSED(locale);
-        Q_UNUSED(asHex);
+        Q_UNUSED(locale)
+        Q_UNUSED(asHex)
 
         const Okteta::Char8 char8 = data.value<Okteta::Char8>();
         return char8.toString();
@@ -201,8 +201,8 @@ class Utf8DisplayStringifier : public AbstractDataTypeDisplayStringifier
 public:
     QString displayText(const QVariant& data, const QLocale& locale, bool asHex) const override
     {
-        Q_UNUSED(locale);
-        Q_UNUSED(asHex);
+        Q_UNUSED(locale)
+        Q_UNUSED(asHex)
 
         const Okteta::Utf8 utf8 = data.value<Okteta::Utf8>();
         return utf8.toString();
@@ -214,8 +214,8 @@ class Utf16DisplayStringifier : public AbstractDataTypeDisplayStringifier
 public:
     QString displayText(const QVariant& data, const QLocale& locale, bool asHex) const override
     {
-        Q_UNUSED(locale);
-        Q_UNUSED(asHex);
+        Q_UNUSED(locale)
+        Q_UNUSED(asHex)
 
         const Okteta::Utf16 utf16 = data.value<Okteta::Utf16>();
         return utf16.toString();

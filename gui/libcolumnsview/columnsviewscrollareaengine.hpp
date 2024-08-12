@@ -344,7 +344,7 @@ inline void ColumnsViewScrollAreaEngine::event(QEvent* event)
 
 inline void ColumnsViewScrollAreaEngine::resizeEvent(QResizeEvent* resizeEvent)
 {
-    Q_UNUSED(resizeEvent);
+    Q_UNUSED(resizeEvent)
 
     updateScrollBars();
 }

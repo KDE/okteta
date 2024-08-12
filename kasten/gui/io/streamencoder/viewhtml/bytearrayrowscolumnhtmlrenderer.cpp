@@ -35,7 +35,7 @@ ByteArrayRowsColumnHtmlRenderer::ByteArrayRowsColumnHtmlRenderer(const Okteta::A
     , mUndefinedChar(undefinedChar)
     , mOffset(offset)
 {
-    Q_UNUSED(noOfGroupedBytes);
+    Q_UNUSED(noOfGroupedBytes)
 }
 
 ByteArrayRowsColumnHtmlRenderer::~ByteArrayRowsColumnHtmlRenderer() = default;

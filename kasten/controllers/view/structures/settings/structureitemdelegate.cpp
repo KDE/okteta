@@ -103,7 +103,7 @@ QSize StructureItemDelegate::sizeHint(const QStyleOptionViewItem& option, const 
 
 QList<QWidget*> StructureItemDelegate::createItemWidgets(const QModelIndex& index) const
 {
-    Q_UNUSED(index);
+    Q_UNUSED(index)
 
     auto* enabledCheckBox = new QCheckBox;
     connect(enabledCheckBox, &QAbstractButton::clicked,
