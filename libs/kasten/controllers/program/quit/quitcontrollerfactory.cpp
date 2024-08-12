@@ -22,7 +22,7 @@ QuitControllerFactory::~QuitControllerFactory() = default;
 
 AbstractXmlGuiController* QuitControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    Q_UNUSED(guiClient);
+    Q_UNUSED(guiClient)
 
     return new QuitController(m_window);
 }

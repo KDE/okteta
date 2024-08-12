@@ -130,7 +130,7 @@ bool ByteArrayUuencodingStreamEncoder::encodeDataToStream(QIODevice* device,
                                                           const Okteta::AbstractByteArrayModel* byteArrayModel,
                                                           const Okteta::AddressRange& range)
 {
-    Q_UNUSED(byteArrayView);
+    Q_UNUSED(byteArrayView)
 
     bool success = true;
 

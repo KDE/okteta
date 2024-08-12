@@ -22,7 +22,7 @@ ModifiedBarControllerFactory::~ModifiedBarControllerFactory() = default;
 
 AbstractXmlGuiController* ModifiedBarControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    Q_UNUSED(guiClient);
+    Q_UNUSED(guiClient)
 
     return new ModifiedBarController(m_statusBar);
 }

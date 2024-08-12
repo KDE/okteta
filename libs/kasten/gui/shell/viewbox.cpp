@@ -37,7 +37,7 @@ AbstractView* ViewBox::view() const { return mView; }
 
 void ViewBox::add(ViewBox::Area area)
 {
-    Q_UNUSED(area);
+    Q_UNUSED(area)
 }
 
 }

@@ -15,7 +15,7 @@ namespace Okteta {
 
 QValidator::State SIntSpinBox::validate(QString& input, int& pos) const
 {
-    Q_UNUSED(pos);
+    Q_UNUSED(pos)
 
     QValidator::State result;
 
@@ -41,7 +41,7 @@ QValidator::State SIntSpinBox::validate(QString& input, int& pos) const
 
 void SIntSpinBox::fixup(QString& input) const
 {
-    Q_UNUSED(input);
+    Q_UNUSED(input)
 
     // TODO: what can be done here? remove localized stuff?
 }

@@ -123,7 +123,7 @@ PODTableView::~PODTableView() = default;
 
 Answer PODTableView::query(int newValueSize, int oldValueSize, int sizeLeft)
 {
-    Q_UNUSED(sizeLeft);
+    Q_UNUSED(sizeLeft)
 
     Answer answer;
 

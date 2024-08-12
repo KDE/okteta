@@ -89,7 +89,7 @@ void PrimitiveArrayData<type>::readDataNativeOrder(uint numItems,
     }
     const Okteta::Size numCopied = input->copyTo(vectorBytes, address, numItems * sizeof(T));
     Q_ASSERT(numCopied == numBytes);
-    Q_UNUSED(numCopied);
+    Q_UNUSED(numCopied)
 }
 
 // TODO: see isDataEqualNativeOrder

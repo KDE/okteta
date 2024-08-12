@@ -22,7 +22,7 @@ ReadOnlyBarControllerFactory::~ReadOnlyBarControllerFactory() = default;
 
 AbstractXmlGuiController* ReadOnlyBarControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    Q_UNUSED(guiClient);
+    Q_UNUSED(guiClient)
 
     return new ReadOnlyBarController(m_statusBar);
 }

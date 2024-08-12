@@ -22,7 +22,7 @@ TouchOnlyTapAndHoldGestureRecognizer::TouchOnlyTapAndHoldGestureRecognizer() = d
 
 QGesture *TouchOnlyTapAndHoldGestureRecognizer::create(QObject* target)
 {
-    Q_UNUSED(target);
+    Q_UNUSED(target)
 
     return new TouchOnlyTapAndHoldGesture;
 }

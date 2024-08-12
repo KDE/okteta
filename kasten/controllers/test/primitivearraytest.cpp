@@ -115,7 +115,7 @@ void PrimitiveArrayTest::initTestCase()
 template <typename T>
 bool PrimitiveArrayTest::compareItems(T first, T second, uint index)
 {
-    Q_UNUSED(index);
+    Q_UNUSED(index)
     return first == second;
 }
 
@@ -174,8 +174,8 @@ inline void PrimitiveArrayTest::testReadPrimitive()
 
 QScriptValue customToStringFunc(QScriptContext* context, QScriptEngine* engine)
 {
-    Q_UNUSED(context);
-    Q_UNUSED(engine);
+    Q_UNUSED(context)
+    Q_UNUSED(engine)
     return QStringLiteral("myvalue");
 }
 

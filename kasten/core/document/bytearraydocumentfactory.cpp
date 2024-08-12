@@ -25,7 +25,7 @@ static int newByteArrayDocumentCounter = 0;
 
 bool ByteArrayDocumentFactory::canCreateFromData(const QMimeData* mimeData)
 {
-    Q_UNUSED(mimeData);
+    Q_UNUSED(mimeData)
 
     // we currently take everything, see createFromData()
     return true;

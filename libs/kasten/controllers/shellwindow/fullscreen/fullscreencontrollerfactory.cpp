@@ -22,7 +22,7 @@ FullScreenControllerFactory::~FullScreenControllerFactory() = default;
 
 AbstractXmlGuiController* FullScreenControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    Q_UNUSED(guiClient);
+    Q_UNUSED(guiClient)
 
     return new FullScreenController(m_window);
 }

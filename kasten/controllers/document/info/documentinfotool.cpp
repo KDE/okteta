@@ -163,7 +163,7 @@ void DocumentInfoTool::onSynchronizerChanged(AbstractModelSynchronizer* synchron
 
 void DocumentInfoTool::onUrlChanged(const QUrl& url)
 {
-    Q_UNUSED(url);
+    Q_UNUSED(url)
 
     Q_EMIT locationChanged(location());
 }

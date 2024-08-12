@@ -23,8 +23,8 @@
 template <typename T>
 QScriptValue UIntDataInformationMethods<T>::asScriptValue(T value, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
 {
-    Q_UNUSED(engine);
-    Q_UNUSED(handlerInfo);
+    Q_UNUSED(engine)
+    Q_UNUSED(handlerInfo)
     return {value};
 }
 
@@ -32,8 +32,8 @@ template <>
 QScriptValue UIntDataInformationMethods<quint64>::asScriptValue(quint64 value, QScriptEngine* engine,
                                                                 ScriptHandlerInfo* handlerInfo)
 {
-    Q_UNUSED(engine);
-    Q_UNUSED(handlerInfo);
+    Q_UNUSED(engine)
+    Q_UNUSED(handlerInfo)
     return {QString::number(value, 10)};
 }
 
