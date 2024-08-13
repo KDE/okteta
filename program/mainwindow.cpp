@@ -102,6 +102,7 @@
 #include <QMimeData>
 // Std
 #include <algorithm>
+#include <unordered_map>
 #include <vector>
 
 namespace Kasten {
@@ -315,7 +316,7 @@ void OktetaMainWindow::onNewDocumentRequested()
 void OktetaMainWindow::onCloseRequest(const QVector<Kasten::AbstractView*>& views)
 {
     // group views per document
-    QHash<AbstractDocument*, std::vector<AbstractView*>> viewsToClosePerDocument;
+    std::unordered_map<AbstractDocument*, std::vector<AbstractView*>> viewsToClosePerDocument;
     for (AbstractView* view : views) {
         auto* document = view->findBaseModel<AbstractDocument*>();
         viewsToClosePerDocument[document].emplace_back(view);
@@ -328,7 +329,7 @@ void OktetaMainWindow::onCloseRequest(const QVector<Kasten::AbstractView*>& view
         auto it = viewsToClosePerDocument.find(document);
 
         if (it != viewsToClosePerDocument.end()) {
-            const std::vector<AbstractView*>& viewsOfDocument = it.value();
+            const std::vector<AbstractView*>& viewsOfDocument = it->second;
             const bool isAnotherView = (std::find(viewsOfDocument.cbegin(), viewsOfDocument.cend(), view) == viewsOfDocument.cend());
             if (isAnotherView) {
                 viewsToClosePerDocument.erase(it);
@@ -336,7 +337,11 @@ void OktetaMainWindow::onCloseRequest(const QVector<Kasten::AbstractView*>& view
         }
     }
 
-    const QVector<AbstractDocument*> documentsWithoutViews = viewsToClosePerDocument.keys().toVector();
+    QVector<AbstractDocument*> documentsWithoutViews;
+    documentsWithoutViews.reserve(viewsToClosePerDocument.size());
+    std::transform(viewsToClosePerDocument.cbegin(), viewsToClosePerDocument.cend(),
+                   std::back_inserter(documentsWithoutViews),
+                   [](const std::pair<AbstractDocument*, std::vector<AbstractView*>>& entry){ return entry.first; });
 
     DocumentManager* const documentManager = mProgram->documentManager();
     if (documentManager->canClose(documentsWithoutViews)) {
