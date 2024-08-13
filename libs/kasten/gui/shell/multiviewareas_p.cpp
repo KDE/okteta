@@ -100,6 +100,8 @@ AbstractViewArea* MultiViewAreasPrivate::splitViewArea(AbstractViewArea* _viewAr
                      q, &MultiViewAreas::dataOffered);
     QObject::connect(secondViewArea, &TabbedViews::dataDropped,
                      q, &MultiViewAreas::dataDropped);
+    QObject::connect(secondViewArea, &TabbedViews::newDocumentRequested,
+                     q, &MultiViewAreas::newDocumentRequested);
 
     mViewAreaList.append(secondViewArea);
     mCurrentViewArea = secondViewArea;
