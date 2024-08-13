@@ -20,6 +20,7 @@
 #include <QDir>
 #include <QUuid>
 // Std
+#include <algorithm>
 #include <utility>
 
 namespace Kasten {
@@ -41,14 +42,9 @@ lockedViewProfileIds(const ByteArrayViewProfileFileInfoLookup& viewProfileFileIn
 {
     QVector<ByteArrayViewProfile::Id> result;
 
-    ByteArrayViewProfileFileInfoLookup::ConstIterator end =
-        viewProfileFileInfoLookup.constEnd();
-    for (ByteArrayViewProfileFileInfoLookup::ConstIterator it =
-             viewProfileFileInfoLookup.constBegin();
-         it != end;
-         ++it) {
-        if (it.value().isLocked()) {
-            result.append(it.key());
+    for (const auto& entry : viewProfileFileInfoLookup) {
+        if (entry.second.isLocked()) {
+            result.append(entry.first);
         }
     }
 
@@ -64,22 +60,18 @@ updateLockStatus(ByteArrayViewProfileFileInfoLookup& viewProfileFileInfoLookup,
         return;
     }
 
-    ByteArrayViewProfileFileInfoLookup::Iterator end =
-        viewProfileFileInfoLookup.end();
-    for (ByteArrayViewProfileFileInfoLookup::Iterator it = viewProfileFileInfoLookup.begin();
-         it != end;
-         ++it) {
+    for (auto& entry : viewProfileFileInfoLookup) {
         bool isLocked;
 
-        if (lockedViewProfileIds.contains(it.key())) {
+        if (lockedViewProfileIds.contains(entry.first)) {
             isLocked = true;
-        } else if (unlockedViewProfileIds.contains(it.key())) {
+        } else if (unlockedViewProfileIds.contains(entry.first)) {
             isLocked = false;
         } else {
             continue;
         }
 
-        it.value().setLocked(isLocked);
+        entry.second.setLocked(isLocked);
     }
 }
 
@@ -188,11 +180,11 @@ ByteArrayViewProfileManager::isViewProfileLocked(const ByteArrayViewProfile::Id&
     bool result = false;
 
     // search in all folders for the info
-    for (const ByteArrayViewProfileFileInfoLookup& viewProfileFileInfoLookup : mViewProfileFileInfoLookupPerFolder) {
-        ByteArrayViewProfileFileInfoLookup::ConstIterator it =
-            viewProfileFileInfoLookup.find(viewProfileId);
-        if (it != viewProfileFileInfoLookup.constEnd()) {
-            result = it->isLocked();
+    for (const auto& entry : mViewProfileFileInfoLookupPerFolder) {
+        const ByteArrayViewProfileFileInfoLookup& viewProfileFileInfoLookup = entry.second;
+        const auto it = viewProfileFileInfoLookup.find(viewProfileId);
+        if (it != viewProfileFileInfoLookup.cend()) {
+            result = it->second.isLocked();
             break;
         }
     }
@@ -377,18 +369,12 @@ ByteArrayViewProfileManager::filePathOfViewProfile(const ByteArrayViewProfile::I
 {
     QString result;
 
-    for (QHash<QString, ByteArrayViewProfileFileInfoLookup>::ConstIterator foldersIt =
-             mViewProfileFileInfoLookupPerFolder.constBegin();
-         foldersIt != mViewProfileFileInfoLookupPerFolder.constEnd() && result.isEmpty();
-         ++foldersIt) {
-        const ByteArrayViewProfileFileInfoLookup& fileInfoList = foldersIt.value();
-        for (ByteArrayViewProfileFileInfoLookup::ConstIterator folderIt = fileInfoList.constBegin();
-             folderIt != fileInfoList.constEnd();
-             ++folderIt) {
-            if (folderIt.key() == viewProfileId) {
-                result = foldersIt.key() + QLatin1Char('/') + viewProfileFileName(viewProfileId);
-                break;
-            }
+    for (const auto& fileInfosFolderEntry : mViewProfileFileInfoLookupPerFolder) {
+        const ByteArrayViewProfileFileInfoLookup& fileInfoList = fileInfosFolderEntry.second;
+        const auto folderIt = fileInfoList.find(viewProfileId);
+        if (folderIt != fileInfoList.cend()) {
+            result = fileInfosFolderEntry.first + QLatin1Char('/') + viewProfileFileName(viewProfileId);
+            break;
         }
     }
 
@@ -403,7 +389,12 @@ ByteArrayViewProfileManager::onViewProfilesFolderChanged(const QString& viewProf
 
     // TODO: reparse for new, removed and changed files
     // assume all are removed and unlocked in the beginning
-    QVector<ByteArrayViewProfile::Id> removedViewProfileIds = viewProfileFileInfoLookup.keys().toVector();
+    QVector<ByteArrayViewProfile::Id> removedViewProfileIds;
+    removedViewProfileIds.reserve(viewProfileFileInfoLookup.size());
+    std::transform(viewProfileFileInfoLookup.cbegin(), viewProfileFileInfoLookup.cend(),
+                   std::back_inserter(removedViewProfileIds),
+                   [](const ByteArrayViewProfileFileInfoLookup::value_type& entry){ return entry.first; });
+
     QVector<ByteArrayViewProfile> newViewProfiles;
     QVector<ByteArrayViewProfile> changedViewProfiles;
 
@@ -438,24 +429,24 @@ ByteArrayViewProfileManager::onViewProfilesFolderChanged(const QString& viewProf
             continue;
         }
 
-        const ByteArrayViewProfileFileInfoLookup::Iterator infoIt =
-            viewProfileFileInfoLookup.find(viewProfileId);
+        const auto infoIt = viewProfileFileInfoLookup.find(viewProfileId);
         const bool isKnown = (infoIt != viewProfileFileInfoLookup.end());
         const QDateTime fileInfoLastModified = viewProfileFileInfo.lastModified();
         // is known?
         if (isKnown) {
+            ByteArrayViewProfileFileInfo& fileInfo = infoIt->second;
+
             removedViewProfileIds.removeOne(viewProfileId);
 
             // check timestamp
-            if (fileInfoLastModified == infoIt->lastModified()) {
+            if (fileInfoLastModified == fileInfo.lastModified()) {
                 continue;
             }
 
             // update timestamp
-            infoIt->setLastModified(fileInfoLastModified);
+            fileInfo.setLastModified(fileInfoLastModified);
         } else {
-            ByteArrayViewProfileFileInfo info(fileInfoLastModified, false);
-            viewProfileFileInfoLookup.insert(viewProfileId, info);
+            viewProfileFileInfoLookup.emplace(viewProfileId, ByteArrayViewProfileFileInfo(fileInfoLastModified, false));
         }
 
         if (isKnown) {
@@ -482,7 +473,10 @@ ByteArrayViewProfileManager::onViewProfilesFolderChanged(const QString& viewProf
     }
 
     for (const ByteArrayViewProfile::Id& viewProfileId : std::as_const(removedViewProfileIds)) {
-        viewProfileFileInfoLookup.remove(viewProfileId);
+        const auto it = viewProfileFileInfoLookup.find(viewProfileId);
+        if (it != viewProfileFileInfoLookup.end()) {
+            viewProfileFileInfoLookup.erase(it);
+        }
         if (viewProfileId == mDefaultViewProfileId) {
             mDefaultViewProfileId.clear();
         }

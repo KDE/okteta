@@ -15,7 +15,8 @@
 #include <QObject>
 #include <QVector>
 #include <QDateTime>
-#include <QHash>
+// Std
+#include <unordered_map>
 
 class KDirWatch;
 
@@ -48,7 +49,7 @@ private:
 //     bool mUserOwned;
 };
 
-using ByteArrayViewProfileFileInfoLookup = QHash<ByteArrayViewProfile::Id, ByteArrayViewProfileFileInfo>;
+using ByteArrayViewProfileFileInfoLookup = std::unordered_map<ByteArrayViewProfile::Id, ByteArrayViewProfileFileInfo>;
 
 class OKTETAKASTENGUI_EXPORT ByteArrayViewProfileManager : public QObject
 {
@@ -99,7 +100,7 @@ private:
 
     KDirWatch* mViewProfileFileWatcher;
 
-    QHash<QString, ByteArrayViewProfileFileInfoLookup> mViewProfileFileInfoLookupPerFolder;
+    std::unordered_map<QString, ByteArrayViewProfileFileInfoLookup> mViewProfileFileInfoLookupPerFolder;
 };
 
 }
