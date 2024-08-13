@@ -30,14 +30,12 @@ MultiViewAreasPrivate::MultiViewAreasPrivate(MultiViewAreas* parent)
 
 MultiViewAreasPrivate::~MultiViewAreasPrivate() = default;
 
-void MultiViewAreasPrivate::init()
+TabbedViews* MultiViewAreasPrivate::createViewArea(QSplitter* splitter)
 {
     Q_Q(MultiViewAreas);
 
-    mMainSplitter = std::make_unique<QSplitter>();
-
-    // create start view area
     auto* viewArea = new TabbedViews();
+
     QObject::connect(viewArea, &AbstractViewArea::focusChanged,
                      q, [&](bool hasFocus) { onViewAreaFocusChanged(hasFocus); });
     QObject::connect(viewArea, &AbstractGroupedViews::viewFocusChanged,
@@ -59,7 +57,17 @@ void MultiViewAreasPrivate::init()
     mViewAreaList.emplace_back(viewArea);
     mCurrentViewArea = viewArea;
 
-    mMainSplitter->addWidget(viewArea->widget());
+    splitter->addWidget(viewArea->widget());
+
+    return viewArea;
+}
+
+void MultiViewAreasPrivate::init()
+{
+    mMainSplitter = new QSplitter();
+
+    // create start view area
+    createViewArea(mMainSplitter);
 }
 
 AbstractViewArea* MultiViewAreasPrivate::splitViewArea(AbstractViewArea* _viewArea, Qt::Orientation orientation)
@@ -82,28 +90,10 @@ AbstractViewArea* MultiViewAreasPrivate::splitViewArea(AbstractViewArea* _viewAr
         baseSplitter->setSizes(baseSplitterSizes);
     }
 
-    auto* secondViewArea = new TabbedViews();
-    QObject::connect(secondViewArea, &AbstractViewArea::focusChanged,
-                     q, [&](bool hasFocus) { onViewAreaFocusChanged(hasFocus); });
-    QObject::connect(secondViewArea, &AbstractGroupedViews::viewFocusChanged,
-                     q, &AbstractGroupedViews::viewFocusChanged);
-    QObject::connect(secondViewArea, &AbstractGroupedViews::closeRequest,
-                     q, &AbstractGroupedViews::closeRequest);
-    QObject::connect(secondViewArea, &AbstractGroupedViews::removing,
-                     q, [&]() { onViewsRemoved(); });
-
-    QObject::connect(secondViewArea, &TabbedViews::contextMenuRequested,
-                     q, [&](AbstractView* view, QPoint pos) { onContextMenuRequested(view, pos); });
-    QObject::connect(secondViewArea, &TabbedViews::dataOffered,
-                     q, &MultiViewAreas::dataOffered);
-    QObject::connect(secondViewArea, &TabbedViews::dataDropped,
-                     q, &MultiViewAreas::dataDropped);
-
-    mViewAreaList.emplace_back(secondViewArea);
-    mCurrentViewArea = secondViewArea;
-
     splitter->setOrientation(orientation == Qt::Horizontal ? Qt::Vertical : Qt::Horizontal);
-    splitter->addWidget(secondViewArea->widget());
+
+    TabbedViews* secondViewArea = createViewArea(splitter);
+
     // set to equal sizes
     QList<int> splitterSizes = splitter->sizes();
     // TODO: check if there are more, style-dependent spaces

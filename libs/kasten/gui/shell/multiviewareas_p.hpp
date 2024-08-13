@@ -65,6 +65,7 @@ public: // If::ViewAreaSplitable API
 
 private:
     int indexOf(AbstractView* view) const;
+    TabbedViews* createViewArea(QSplitter* splitter);
 
 private:  // slots
     void onViewsRemoved();
