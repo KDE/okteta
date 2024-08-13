@@ -64,10 +64,10 @@ TabbedViews* MultiViewAreasPrivate::createViewArea(QSplitter* splitter)
 
 void MultiViewAreasPrivate::init()
 {
-    mMainSplitter = new QSplitter();
+    mMainSplitter = std::make_unique<QSplitter>();
 
     // create start view area
-    createViewArea(mMainSplitter);
+    createViewArea(mMainSplitter.get());
 }
 
 AbstractViewArea* MultiViewAreasPrivate::splitViewArea(AbstractViewArea* _viewArea, Qt::Orientation orientation)
