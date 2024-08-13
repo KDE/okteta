@@ -13,11 +13,12 @@
 #include <KUser>
 // Qt
 #include <QLocale>
-#include <QHash>
 #include <QDateTime>
 #include <QPainter>
 #include <QFontMetrics>
 #include <QRegularExpression>
+// Std
+#include <unordered_map>
 
 HeaderFooterFrameRenderer::HeaderFooterFrameRenderer(const PrintInfo* info)
     : mInfo(info)
@@ -74,7 +75,7 @@ void HeaderFooterFrameRenderer::prepare()
     const QUrl url = mInfo->url();
 
     // create list of replacements
-    QHash<char, QString> tagReplacements;
+    std::unordered_map<char, QString> tagReplacements;
 
     QLocale locale;
     tagReplacements['d'] = locale.toString(dateTime, QLocale::ShortFormat);
