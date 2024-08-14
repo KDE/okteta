@@ -16,8 +16,6 @@
 // Okteta core
 #include <Okteta/OktetaCore>
 #include <Okteta/Address>
-// Qt
-#include <QVector>
 // Std
 #include <memory>
 #include <vector>
@@ -121,8 +119,8 @@ private: // settings
 
 private: // decoded data
     Okteta::PODData mPODData;
-    QVector<QVariant> mDecodedValueList;
-    QVector<int> mDecodedValueByteCountList;
+    std::vector<QVariant> mDecodedValueList;
+    std::vector<int> mDecodedValueByteCountList;
 };
 
 inline bool PODDecoderTool::isUnsignedAsHex() const { return mUnsignedAsHex; }
