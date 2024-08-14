@@ -29,6 +29,8 @@
 #include <uint64.hpp>
 // Qt
 #include <QLocale>
+// Std
+#include <initializer_list>
 
 namespace Okteta {
 
@@ -222,9 +224,25 @@ public:
     }
 };
 
+namespace DataTypeDisplayStringifierManagerNS {
+
+template<typename K, typename V>
+auto make_unique_unordered_map(std::initializer_list<std::pair<K, V*>> list)
+{
+    std::unordered_map<K, std::unique_ptr<V>> map;
+
+    for (const auto& entry : list) {
+        map.emplace(entry.first, std::unique_ptr<V>(entry.second));
+    }
+
+    return map;
+}
+
+}
+
 DataTypeDisplayStringifierManager::DataTypeDisplayStringifierManager()
 {
-    m_stringifiers = {
+    m_stringifiers = DataTypeDisplayStringifierManagerNS::make_unique_unordered_map<int, AbstractDataTypeDisplayStringifier>({
         {qMetaTypeId<Okteta::Binary8>(),      new Binary8DisplayStringifier},
         {qMetaTypeId<Okteta::Octal8>(),       new Octal8DisplayStringifier},
         {qMetaTypeId<Okteta::Hexadecimal8>(), new Hexadecimal8DisplayStringifier},
@@ -241,17 +259,16 @@ DataTypeDisplayStringifierManager::DataTypeDisplayStringifierManager()
         {qMetaTypeId<Okteta::Char8>(),        new Char8DisplayStringifier},
         {qMetaTypeId<Okteta::Utf8>(),         new Utf8DisplayStringifier},
         {qMetaTypeId<Okteta::Utf16>(),        new Utf16DisplayStringifier},
-    };
+    });
 }
 
-DataTypeDisplayStringifierManager::~DataTypeDisplayStringifierManager()
-{
-    qDeleteAll(m_stringifiers);
-}
+DataTypeDisplayStringifierManager::~DataTypeDisplayStringifierManager() = default;
 
 AbstractDataTypeDisplayStringifier* DataTypeDisplayStringifierManager::stringifier(int metaTypeId) const
 {
-    return m_stringifiers.value(metaTypeId, nullptr);
+    auto it = m_stringifiers.find(metaTypeId);
+
+    return (it != m_stringifiers.cend()) ? it->second.get() : nullptr;
 }
 
 }

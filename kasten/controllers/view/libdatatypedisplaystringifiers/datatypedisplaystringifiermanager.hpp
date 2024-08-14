@@ -9,8 +9,9 @@
 #ifndef OKTETA_DATATYPEDISPLAYSTRINGIFIERMANAGER_HPP
 #define OKTETA_DATATYPEDISPLAYSTRINGIFIERMANAGER_HPP
 
-// Qt
-#include <QHash>
+// Std
+#include <memory>
+#include <unordered_map>
 
 namespace Okteta {
 
@@ -30,7 +31,7 @@ public:
     AbstractDataTypeDisplayStringifier* stringifier(int metaTypeId) const;
 
 private:
-    QHash<int, AbstractDataTypeDisplayStringifier*> m_stringifiers;
+    std::unordered_map<int, std::unique_ptr<AbstractDataTypeDisplayStringifier>> m_stringifiers;
 };
 
 }
