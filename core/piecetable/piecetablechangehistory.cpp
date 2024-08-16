@@ -18,9 +18,7 @@ namespace KPieceTable {
 
 void PieceTableChangeHistory::clear()
 {
-    while (!mChangeStack.isEmpty()) {
-        delete mChangeStack.pop();
-    }
+    mChangeStack.clear();
 
     mTryToMergeAppendedChange = false;
     mAppliedChangesCount = 0;
@@ -33,7 +31,7 @@ void PieceTableChangeHistory::clear()
 void PieceTableChangeHistory::getChangeData(ArrayChangeMetrics* metrics, Address* storageOffset,
                                             int versionIndex) const
 {
-    AbstractPieceTableChange* change = mChangeStack.at(versionIndex);
+    const auto& change = mChangeStack[versionIndex];
     *metrics = change->metrics();
     *storageOffset = change->storageOffset();
 }
@@ -74,15 +72,14 @@ void PieceTableChangeHistory::finishChange()
 bool PieceTableChangeHistory::appendChange(AbstractPieceTableChange* change)
 {
     // chop unapplied changes
-    if (mAppliedChangesCount < mChangeStack.size()) {
+    if (mAppliedChangesCount < static_cast<int>(mChangeStack.size())) {
         // hide baseindex if needed
         if (mBaseBeforeChangeIndex > mAppliedChangesCount) {
             mBaseBeforeChangeIndex = -1;
         }
         do {
-            AbstractPieceTableChange* droppedChange = mChangeStack.pop();
-            delete droppedChange;
-        } while (mAppliedChangesCount < mChangeStack.size());
+            mChangeStack.pop_back();
+        } while (mAppliedChangesCount < static_cast<int>(mChangeStack.size()));
     }
 
     mAppliedChangesDataSize += change->dataSize();
@@ -93,13 +90,13 @@ bool PieceTableChangeHistory::appendChange(AbstractPieceTableChange* change)
         isNotMerged = false; // TODO: hack for as long as subgroups are not undoable
     } else {
         if (mTryToMergeAppendedChange && mAppliedChangesCount > 0) {
-            isNotMerged = !mChangeStack.top()->merge(change);
+            isNotMerged = !mChangeStack.back()->merge(change);
         } else {
             mTryToMergeAppendedChange = true;
         }
 
         if (isNotMerged) {
-            mChangeStack.push(change);
+            mChangeStack.emplace_back(change);
             ++mAppliedChangesCount;
         } else {
             delete change;
@@ -126,10 +123,10 @@ bool PieceTableChangeHistory::revertBeforeChange(PieceTable* pieceTable, int cha
 
     if (currentChangeId < changeId) {
         for (; currentChangeId < changeId; ++currentChangeId) {
-            const AbstractPieceTableChange* change = mChangeStack[currentChangeId];
+            const auto& change = mChangeStack[currentChangeId];
 
             if (change->type() == AbstractPieceTableChange::GroupId) {
-                const auto* groupChange = static_cast<const GroupPieceTableChange*>(change);
+                const auto* const groupChange = static_cast<const GroupPieceTableChange*>(change.get());
                 const AddressRangeList changedRangeList = groupChange->applyGroup(pieceTable);
                 changedRanges->addAddressRangeList(changedRangeList);
 
@@ -147,10 +144,10 @@ bool PieceTableChangeHistory::revertBeforeChange(PieceTable* pieceTable, int cha
         }
     } else {
         for (--currentChangeId; changeId <= currentChangeId; --currentChangeId) {
-            const AbstractPieceTableChange* change = mChangeStack[currentChangeId];
+            const auto& change = mChangeStack[currentChangeId];
 
             if (change->type() == AbstractPieceTableChange::GroupId) {
-                const auto* groupChange = static_cast<const GroupPieceTableChange*>(change);
+                const auto* const groupChange = static_cast<const GroupPieceTableChange*>(change.get());
                 const AddressRangeList changedRangeList = groupChange->revertGroup(pieceTable);
                 changedRanges->addAddressRangeList(changedRangeList);
 

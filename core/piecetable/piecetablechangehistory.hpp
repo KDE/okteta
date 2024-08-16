@@ -12,8 +12,10 @@
 // lib
 #include "abstractpiecetablechange.hpp"
 // Qt
-#include <QStack>
 #include <QString>
+// Std
+#include <memory>
+#include <vector>
 
 namespace Okteta {
 class AddressRangeList;
@@ -83,7 +85,7 @@ private:
     ///
     int mBaseBeforeChangeIndex = 0;
     ///
-    QStack<AbstractPieceTableChange*> mChangeStack;
+    std::vector<std::unique_ptr<AbstractPieceTableChange>> mChangeStack;
     ///
     Size mAppliedChangesDataSize = 0;
 
@@ -93,7 +95,7 @@ private:
 
 inline PieceTableChangeHistory::PieceTableChangeHistory() = default;
 
-inline PieceTableChangeHistory::~PieceTableChangeHistory() { clear(); }
+inline PieceTableChangeHistory::~PieceTableChangeHistory() = default;
 
 inline int PieceTableChangeHistory::count()                     const { return mChangeStack.size(); }
 inline int PieceTableChangeHistory::appliedChangesCount()       const { return mAppliedChangesCount; }
@@ -106,9 +108,11 @@ inline Size PieceTableChangeHistory::appliedChangesDataSize()    const { return 
 
 inline QString PieceTableChangeHistory::changeDescription(int changeId) const
 {
-    const AbstractPieceTableChange* change = mChangeStack.value(changeId);
+    if ((changeId < 0) || (static_cast<int>(mChangeStack.size()) <= changeId)) {
+        return QString();
+    }
 
-    return change ? change->description() : QString();
+    return mChangeStack[changeId]->description();
 }
 
 }
