@@ -18,13 +18,6 @@
 
 namespace KPieceTable {
 
-GroupPieceTableChange::~GroupPieceTableChange()
-{
-    while (!mChangeStack.isEmpty()) {
-        delete mChangeStack.pop();
-    }
-}
-
 int GroupPieceTableChange::type() const { return GroupId; }
 
 QString GroupPieceTableChange::description() const
@@ -36,8 +29,8 @@ bool GroupPieceTableChange::merge(const AbstractPieceTableChange* other)
 {
     bool result = false;
 
-    if (!mChangeStack.isEmpty()) {
-        result = mChangeStack.last()->merge(other);
+    if (!mChangeStack.empty()) {
+        result = mChangeStack.back()->merge(other);
     }
 
     return result;
@@ -85,13 +78,13 @@ bool GroupPieceTableChange::appendChange(AbstractPieceTableChange* change)
 
     bool isNotMerged = true;
     if (mTryToMergeAppendedChange && mAppliedChangesCount > 0) {
-        isNotMerged = !mChangeStack.top()->merge(change);
+        isNotMerged = !mChangeStack.back()->merge(change);
     } else {
         mTryToMergeAppendedChange = true;
     }
 
     if (isNotMerged) {
-        mChangeStack.push(change);
+        mChangeStack.emplace_back(change);
         ++mAppliedChangesCount;
     } else {
         delete change;
@@ -104,9 +97,9 @@ AddressRangeList GroupPieceTableChange::applyGroup(PieceTable* pieceTable) const
 {
     AddressRangeList result;
 
-    for (const AbstractPieceTableChange* change : mChangeStack) {
+    for (const auto& change : mChangeStack) {
         if (change->type() == AbstractPieceTableChange::GroupId) {
-            const auto* groupChange = static_cast<const GroupPieceTableChange*>(change);
+            const auto* const groupChange = static_cast<const GroupPieceTableChange*>(change.get());
             const AddressRangeList changedRangeList = groupChange->applyGroup(pieceTable);
             result.addAddressRangeList(changedRangeList);
         } else {
@@ -121,12 +114,12 @@ AddressRangeList GroupPieceTableChange::revertGroup(PieceTable* pieceTable) cons
 {
     AddressRangeList result;
 
-    QStack<AbstractPieceTableChange*>::ConstIterator it = mChangeStack.end();
-    while (it != mChangeStack.begin()) {
+    auto it = mChangeStack.cend();
+    while (it != mChangeStack.cbegin()) {
         --it;
-        AbstractPieceTableChange* change = *it;
+        const auto& change = *it;
         if (change->type() == AbstractPieceTableChange::GroupId) {
-            const auto* groupChange = static_cast<const GroupPieceTableChange*>(change);
+            const auto* const groupChange = static_cast<const GroupPieceTableChange*>(change.get());
             const AddressRangeList changedRangeList = groupChange->revertGroup(pieceTable);
             result.addAddressRangeList(changedRangeList);
         } else {
@@ -141,9 +134,9 @@ ArrayChangeMetricsList GroupPieceTableChange::groupMetrics(bool reverted) const
 {
     ArrayChangeMetricsList result;
 
-    for (const AbstractPieceTableChange* change : mChangeStack) {
+    for (const auto& change : mChangeStack) {
         if (change->type() == AbstractPieceTableChange::GroupId) {
-            const auto* groupChange = static_cast<const GroupPieceTableChange*>(change);
+            const auto* const groupChange = static_cast<const GroupPieceTableChange*>(change.get());
             const ArrayChangeMetricsList metricsList = groupChange->groupMetrics(reverted);
             result += metricsList;
         } else {

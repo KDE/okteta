@@ -12,8 +12,10 @@
 // lib
 #include "abstractpiecetablechange.hpp"
 // Qt
-#include <QStack>
 #include <QString>
+// Std
+#include <memory>
+#include <vector>
 
 namespace Okteta {
 class AddressRangeList;
@@ -78,7 +80,7 @@ public:
     int appliedChangesDataSize() const;
 
 private:
-    QStack<AbstractPieceTableChange*> mChangeStack;
+    std::vector<std::unique_ptr<AbstractPieceTableChange>> mChangeStack;
     GroupPieceTableChange* const mParent;
 
     QString mDescription;
@@ -95,6 +97,8 @@ inline GroupPieceTableChange::GroupPieceTableChange(GroupPieceTableChange* paren
     , mDescription(description)
 {}
 
+inline GroupPieceTableChange::~GroupPieceTableChange() = default;
+
 inline void GroupPieceTableChange::setDescription(const QString& description) { mDescription = description; }
 inline GroupPieceTableChange* GroupPieceTableChange::parent() const { return mParent; }
 inline void GroupPieceTableChange::finishChange() { mTryToMergeAppendedChange = false; }
@@ -103,9 +107,11 @@ inline int GroupPieceTableChange::appliedChangesCount()       const { return mAp
 inline QString GroupPieceTableChange::headChangeDescription() const { return changeDescription(count() - 1); }
 inline QString GroupPieceTableChange::changeDescription(int changeId) const
 {
-    const AbstractPieceTableChange* change = mChangeStack.value(changeId);
+    if ((changeId < 0) || (static_cast<int>(mChangeStack.size()) <= changeId)) {
+        return QString();
+    }
 
-    return change ? change->description() : QString();
+    return mChangeStack[changeId]->description();
 }
 
 }
