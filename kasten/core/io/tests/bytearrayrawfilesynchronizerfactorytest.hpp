@@ -11,6 +11,8 @@
 
 // Qt
 #include <QObject>
+// Std
+#include <memory>
 
 class TestFileSystem;
 
@@ -32,7 +34,7 @@ private: // not working tests
 #endif
 
 private:
-    TestFileSystem* mFileSystem;
+    std::unique_ptr<TestFileSystem> mFileSystem;
 };
 
 #endif

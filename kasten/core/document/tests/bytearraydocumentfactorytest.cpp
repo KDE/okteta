@@ -14,22 +14,21 @@
 #include <bytearraydocument.hpp>
 // Qt
 #include <QTest>
+// Std
+#include <memory>
 
 namespace Kasten {
 
 void ByteArrayDocumentFactoryTest::testCreate()
 {
-    auto* factory = new ByteArrayDocumentFactory();
+    auto factory = std::make_unique<ByteArrayDocumentFactory>();
 
-    AbstractDocument* document = factory->create();
-    auto* byteArrayDocument = qobject_cast<ByteArrayDocument*>(document);
+    auto document = std::unique_ptr<AbstractDocument>(factory->create());
+    auto* byteArrayDocument = qobject_cast<ByteArrayDocument*>(document.get());
 
     QVERIFY(document != nullptr);
     QVERIFY(byteArrayDocument != nullptr);
     QCOMPARE(document->contentFlags(), Kasten::ContentStateNormal);
-
-    delete document;
-    delete factory;
 }
 
 }

@@ -22,6 +22,9 @@ Q_DECLARE_METATYPE(Okteta::ArrayChangeMetricsList)
 
 namespace Okteta {
 
+AbstractByteArrayModelIfTest::AbstractByteArrayModelIfTest() = default;
+AbstractByteArrayModelIfTest::~AbstractByteArrayModelIfTest() = default;
+
 bool AbstractByteArrayModelIfTest::byteArrayModelSizeCanBeChanged() const
 {
     return true;
@@ -34,14 +37,14 @@ void AbstractByteArrayModelIfTest::init()
     mByteArrayModel = createByteArrayModel();
 
     qRegisterMetaType<ArrayChangeMetricsList>("Okteta::ArrayChangeMetricsList");
-    ContentsChangeListSpy = new QSignalSpy(mByteArrayModel, SIGNAL(contentsChanged(Okteta::ArrayChangeMetricsList)));
+    ContentsChangeListSpy = std::make_unique<QSignalSpy>(mByteArrayModel, SIGNAL(contentsChanged(Okteta::ArrayChangeMetricsList)));
 }
 
 void AbstractByteArrayModelIfTest::cleanup()
 {
     deleteByteArrayModel(mByteArrayModel);
 
-    delete ContentsChangeListSpy;
+    ContentsChangeListSpy.reset();
 }
 
 void AbstractByteArrayModelIfTest::clearSignalSpys()
@@ -341,11 +344,11 @@ struct KTestData
     const Byte* insertionData() { return insertData.rawData(); }
 };
 
-KTestData* AbstractByteArrayModelIfTest::prepareTestInsert()
+std::unique_ptr<KTestData> AbstractByteArrayModelIfTest::prepareTestInsert() const
 {
     Size size = mByteArrayModel->size();
 
-    auto* testData = new KTestData(size + 3 * insertSize, insertSize);
+    auto testData = std::make_unique<KTestData>(size + 3 * insertSize, insertSize);
 
     // prepare insertData
     textureByteArrayModel(&testData->insertData, 10, 99);
@@ -353,6 +356,7 @@ KTestData* AbstractByteArrayModelIfTest::prepareTestInsert()
     textureByteArrayModel(mByteArrayModel, 100, 255);
     mByteArrayModel->copyTo(testData->copy.rawData(), 0, size);
     mByteArrayModel->setModified(false);
+
     return testData;
 }
 
@@ -365,7 +369,7 @@ void AbstractByteArrayModelIfTest::testInsertAtBegin()
     }
 
     // prepare
-    KTestData* data = prepareTestInsert();
+    auto data = prepareTestInsert();
     Size size = mByteArrayModel->size();
     AddressRange insertRange(0, -1);
     clearSignalSpys();
@@ -377,8 +381,6 @@ void AbstractByteArrayModelIfTest::testInsertAtBegin()
     QCOMPARE(data->copy.compare(*mByteArrayModel, insertRange.nextBehindEnd(), size - insertRange.end() - 1, insertRange.start()), 0);
     QCOMPARE(mByteArrayModel->isModified(), inserted > 0);
     checkContentsReplaced(insertRange.start(), 0, inserted);
-
-    delete data;
 }
 
 void AbstractByteArrayModelIfTest::testInsertAtMid()
@@ -390,7 +392,7 @@ void AbstractByteArrayModelIfTest::testInsertAtMid()
     }
 
     // prepare
-    KTestData* data = prepareTestInsert();
+    auto data = prepareTestInsert();
     Size size = mByteArrayModel->size();
     AddressRange insertRange(size / 2, -1);
     clearSignalSpys();
@@ -405,8 +407,6 @@ void AbstractByteArrayModelIfTest::testInsertAtMid()
     if (inserted > 0) {
         checkContentsReplaced(insertRange.start(), 0, inserted);
     }
-
-    delete data;
 }
 
 void AbstractByteArrayModelIfTest::testInsertAtEnd()
@@ -418,7 +418,7 @@ void AbstractByteArrayModelIfTest::testInsertAtEnd()
     }
 
     // prepare
-    KTestData* data = prepareTestInsert();
+    auto data = prepareTestInsert();
     Size size = mByteArrayModel->size();
     AddressRange insertRange(size, -1);
     clearSignalSpys();
@@ -437,8 +437,6 @@ void AbstractByteArrayModelIfTest::testInsertAtEnd()
     if (inserted > 0) {
         checkContentsReplaced(insertRange.start(), 0, inserted);
     }
-
-    delete data;
 }
 
 // how the test works:

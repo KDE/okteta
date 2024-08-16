@@ -11,6 +11,8 @@
 
 // Qt
 #include <QObject>
+// Std
+#include <memory>
 
 // namespace Okteta {
 class TestFileSystem;
@@ -34,7 +36,7 @@ private: // not working tests
     void testLoadFromNotExistingUrl();
 
 private:
-    TestFileSystem* mFileSystem;
+    std::unique_ptr<TestFileSystem> mFileSystem;
 };
 
 }

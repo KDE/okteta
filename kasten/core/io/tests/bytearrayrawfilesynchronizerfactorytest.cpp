@@ -37,7 +37,7 @@ void ByteArrayRawFileSynchronizerFactoryTest::initTestCase()
     QByteArray byteArray(TestDataSize, TestDataChar);
     ::textureByteArray(&byteArray);
 
-    mFileSystem = new TestFileSystem(QLatin1String(TestDirectory));
+    mFileSystem = std::make_unique<TestFileSystem>(QLatin1String(TestDirectory));
     const QString filePath = mFileSystem->createFilePath(QLatin1String(TestFileName));
     QFile file;
     file.setFileName(filePath);
@@ -55,7 +55,7 @@ void ByteArrayRawFileSynchronizerFactoryTest::initTestCase()
 
 void ByteArrayRawFileSynchronizerFactoryTest::cleanupTestCase()
 {
-    delete mFileSystem;
+    mFileSystem.reset();
 }
 
 #if 0
@@ -69,11 +69,9 @@ void ByteArrayRawFileSynchronizerFactoryTest::init()
 
 void ByteArrayRawFileSynchronizerFactoryTest::testCreate()
 {
-    auto* factory = new Kasten::ByteArrayRawFileSynchronizerFactory();
+    auto factory = std::make_unique<Kasten::ByteArrayRawFileSynchronizerFactory>();
 
     QVERIFY(factory != nullptr);
-
-    delete factory;
 }
 #if 0
 void ByteArrayRawFileSynchronizerFactoryTest::testLoadFromUrl()

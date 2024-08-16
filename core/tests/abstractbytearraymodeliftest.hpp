@@ -13,15 +13,21 @@
 #include <addressrange.hpp>
 // Qt
 #include <QObject>
+// Std
+#include <memory>
 
 class QSignalSpy;
 
 namespace Okteta {
 class AbstractByteArrayModel;
+struct KTestData;
 
 class AbstractByteArrayModelIfTest : public QObject
 {
     Q_OBJECT
+
+public:
+    ~AbstractByteArrayModelIfTest();
 
 protected:
     AbstractByteArrayModelIfTest();
@@ -38,7 +44,7 @@ private:
     void checkContentsSwapped(Address firstStart, const AddressRange& secondSection);
     void clearSignalSpys();
 
-    struct KTestData* prepareTestInsert();
+    std::unique_ptr<KTestData> prepareTestInsert() const;
 
 private Q_SLOTS: // test functions
     void init();
@@ -64,10 +70,8 @@ private: // used in all tests
     /** pointer to the model to test */
     AbstractByteArrayModel* mByteArrayModel = nullptr;
 
-    QSignalSpy* ContentsChangeListSpy = nullptr;
+    std::unique_ptr<QSignalSpy> ContentsChangeListSpy;
 };
-
-inline AbstractByteArrayModelIfTest::AbstractByteArrayModelIfTest() = default;
 
 }
 

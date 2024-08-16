@@ -11,6 +11,8 @@
 
 // Qt
 #include <QObject>
+// Std
+#include <memory>
 
 class QSignalSpy;
 
@@ -21,6 +23,9 @@ class Versionable;
 class VersionableIfTest : public QObject
 {
     Q_OBJECT
+
+public:
+    ~VersionableIfTest();
 
 protected:
     VersionableIfTest();
@@ -46,12 +51,10 @@ private: // used in all tests
     QObject* mObject = nullptr;
     Versionable* mVersionableControl = nullptr;
 
-    QSignalSpy* mRevertedToVersionIndexSpy = nullptr;
-    QSignalSpy* mHeadVersionDescriptionChangedSpy = nullptr;
-    QSignalSpy* mHeadVersionChangedSpy = nullptr;
+    std::unique_ptr<QSignalSpy> mRevertedToVersionIndexSpy;
+    std::unique_ptr<QSignalSpy> mHeadVersionDescriptionChangedSpy;
+    std::unique_ptr<QSignalSpy> mHeadVersionChangedSpy;
 };
-
-inline VersionableIfTest::VersionableIfTest() = default;
 
 }
 

@@ -42,7 +42,7 @@ void ByteArrayRawFileSynchronizerTest::initTestCase()
     QByteArray byteArray(TestDataSize, TestDataChar);
     ::textureByteArray(&byteArray);
 
-    mFileSystem = new TestFileSystem(QLatin1String(TestDirectory));
+    mFileSystem = std::make_unique<TestFileSystem>(QLatin1String(TestDirectory));
     const QString filePath = mFileSystem->createFilePath(QLatin1String(TestFileName));
     QFile file;
     file.setFileName(filePath);
@@ -60,7 +60,7 @@ void ByteArrayRawFileSynchronizerTest::initTestCase()
 
 void ByteArrayRawFileSynchronizerTest::cleanupTestCase()
 {
-    delete mFileSystem;
+    mFileSystem.reset();
 }
 
 #if 0
@@ -77,40 +77,37 @@ void ByteArrayRawFileSynchronizerTest::testLoadFromUrl()
     const QUrl fileUrl = QUrl::fromLocalFile(mFileSystem->createFilePath(QLatin1String(TestFileName)));
     auto* synchronizer = new ByteArrayRawFileSynchronizer();
     synchronizer->startLoad(fileUrl)->exec();
-    AbstractDocument* document = synchronizer->document();
+    auto document = std::unique_ptr<AbstractDocument>(synchronizer->document());
 
-    auto* byteArrayDocument = qobject_cast<ByteArrayDocument*>(document);
+    auto* byteArrayDocument = qobject_cast<ByteArrayDocument*>(document.get());
 
     QVERIFY(document != nullptr);
     QVERIFY(byteArrayDocument != nullptr);
     QVERIFY(document->synchronizer() != nullptr);
-    QCOMPARE(document->synchronizer()->document(), document);
+    QCOMPARE(document->synchronizer()->document(), document.get());
     QCOMPARE(document->contentFlags(), Kasten::ContentStateNormal);
     QCOMPARE(document->synchronizer()->localSyncState(), Kasten::LocalInSync);
     QCOMPARE(document->synchronizer()->remoteSyncState(), Kasten::RemoteInSync);
 
     QCOMPARE(document->synchronizer()->url(), fileUrl);
-
-    delete document;
 }
 
 void ByteArrayRawFileSynchronizerTest::testLoadFromNotExistingUrl()
 {
     const QUrl fileUrl = QUrl(QLatin1String(NotExistingUrl));
 
-    auto* synchronizer = new ByteArrayRawFileSynchronizer();
+    auto synchronizer = std::make_unique<ByteArrayRawFileSynchronizer>();
     synchronizer->startLoad(fileUrl)->exec();
     AbstractDocument* document = synchronizer->document();
 
     QVERIFY(document == nullptr);
-    delete synchronizer;
 }
 
 void ByteArrayRawFileSynchronizerTest::testNewSaveAsToUrl()
 {
     const QUrl fileUrl = QUrl::fromLocalFile(mFileSystem->createFilePath(QLatin1String(TestFileName)));
 
-    auto* document = new Kasten::ByteArrayDocument(QStringLiteral("New created for test."));
+    auto document = std::make_unique<Kasten::ByteArrayDocument>(QStringLiteral("New created for test."));
     auto* byteArray = qobject_cast<Okteta::PieceTableByteArrayModel*>(document->content());
 
     // fill array
@@ -120,8 +117,8 @@ void ByteArrayRawFileSynchronizerTest::testNewSaveAsToUrl()
 
     // save
     auto* synchronizer = new ByteArrayRawFileSynchronizer();
-    synchronizer->startConnect(document, fileUrl, AbstractModelSynchronizer::ReplaceRemote)->exec();
-    QCOMPARE(synchronizer->document(), document);
+    synchronizer->startConnect(document.get(), fileUrl, AbstractModelSynchronizer::ReplaceRemote)->exec();
+    QCOMPARE(synchronizer->document(), document.get());
 
 //     // load into other and...
 //     ByteArrayDocument* otherDocument = new ByteArrayDocument( filePath );
@@ -132,8 +129,6 @@ void ByteArrayRawFileSynchronizerTest::testNewSaveAsToUrl()
 //     Okteta::PieceTableByteArrayModel *otherByteArray = document->content();
 //     QCOMPARE( byteArray->size(), otherByteArray->size() );
 //     QVERIFY( qstrncmp(byteArray->data(),otherByteArray->data(),byteArray->size()) == 0 );
-
-    delete document;
 }
 
 }

@@ -20,7 +20,8 @@
 // Qt
 #include <QTest>
 #include <QSignalSpy>
-
+// Std
+#include <memory>
 
 Q_DECLARE_METATYPE(QVector<Kasten::ReplaceBehaviour>)
 
@@ -242,11 +243,14 @@ void ReplaceJobTest::testReplace()
     QFETCH(int, expectedReplacementCount);
     QFETCH(QVector<Kasten::ReplaceBehaviour>, replies);
 
-    TestReplaceUserQueryAgent* queryAgent = replies.isEmpty() ? nullptr : new TestReplaceUserQueryAgent(replies);
+    std::unique_ptr<TestReplaceUserQueryAgent> queryAgent;
+    if (!replies.isEmpty()) {
+        queryAgent = std::make_unique<TestReplaceUserQueryAgent>(replies);
+    }
 
     auto* byteArray = new Okteta::PieceTableByteArrayModel(originalData);
-    auto* document = new Kasten::ByteArrayDocument(byteArray, QStringLiteral("init"));
-    auto* view = new Kasten::ByteArrayView(document, nullptr);
+    auto document = std::make_unique<Kasten::ByteArrayDocument>(byteArray, QStringLiteral("init"));
+    auto view = std::make_unique<Kasten::ByteArrayView>(document.get(), nullptr);
 
     Okteta::Address  replaceFirstIndex;
     Okteta::Address  replaceLastIndex;
@@ -261,14 +265,14 @@ void ReplaceJobTest::testReplace()
         replaceLastIndex =  byteArray->size() - 1;
     }
 
-    auto* job = new Kasten::ReplaceJob(view, byteArray, queryAgent);
+    auto job = std::make_unique<Kasten::ReplaceJob>(view.get(), byteArray, queryAgent.get());
     job->setSearchData(searchData);
     job->setReplaceData(replaceData);
     job->setRange(replaceFirstIndex, replaceLastIndex,
                   backwards ? Kasten::FindBackward : Kasten::FindForward);
     job->setDoPrompt(queryAgent != nullptr);
 
-    QSignalSpy finishedSpy(job, &Kasten::ReplaceJob::finished);
+    QSignalSpy finishedSpy(job.get(), &Kasten::ReplaceJob::finished);
 
     job->start();
     if (finishedSpy.size() == 0) {
@@ -283,12 +287,6 @@ void ReplaceJobTest::testReplace()
     const QList<QVariant> arguments = finishedSpy.takeFirst();
     QCOMPARE(arguments.at(0).toBool(), true);
     QCOMPARE(arguments.at(1).toInt() + beforeWrap, expectedReplacementCount);
-
-    delete job;
-    delete view;
-    delete document;
-
-    delete queryAgent;
 }
 
 QTEST_MAIN(ReplaceJobTest)

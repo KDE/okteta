@@ -51,7 +51,7 @@ void TestDocumentFileSynchronizerTest::writeToFile(const QString& filePath, cons
 
 void TestDocumentFileSynchronizerTest::initTestCase()
 {
-    mFileSystem = new TestFileSystem(QLatin1String(TestDirectory));
+    mFileSystem = std::make_unique<TestFileSystem>(QLatin1String(TestDirectory));
 }
 
 void TestDocumentFileSynchronizerTest::init()
@@ -64,7 +64,7 @@ void TestDocumentFileSynchronizerTest::init()
 
 void TestDocumentFileSynchronizerTest::cleanupTestCase()
 {
-    delete mFileSystem;
+    mFileSystem.reset();
 }
 
 void TestDocumentFileSynchronizerTest::checkFileContent(const QUrl& fileUrl, const QByteArray& data,
@@ -73,14 +73,12 @@ void TestDocumentFileSynchronizerTest::checkFileContent(const QUrl& fileUrl, con
 
     auto* synchronizer = new Kasten::TestDocumentFileSynchronizer(header);
     synchronizer->startLoad(fileUrl)->exec();
-    Kasten::AbstractDocument* document = synchronizer->document();
+    auto document = std::unique_ptr<Kasten::AbstractDocument>(synchronizer->document());
 
-    auto* testDocument = qobject_cast<Kasten::TestDocument*>(document);
+    auto* testDocument = qobject_cast<Kasten::TestDocument*>(document.get());
 
     QVERIFY(testDocument != nullptr);
     QCOMPARE(*testDocument->data(), data);
-
-    delete document;
 }
 
 // ------------------------------------------------------------------ tests ----
@@ -92,42 +90,38 @@ void TestDocumentFileSynchronizerTest::testLoadFromFile()
 
     auto* synchronizer = new Kasten::TestDocumentFileSynchronizer();
     synchronizer->startLoad(fileUrl)->exec();
-    Kasten::AbstractDocument* document = synchronizer->document();
+    auto document = std::unique_ptr<Kasten::AbstractDocument>(synchronizer->document());
 
-    auto* testDocument = qobject_cast<Kasten::TestDocument*>(document);
+    auto* testDocument = qobject_cast<Kasten::TestDocument*>(document.get());
 
     QVERIFY(document != nullptr);
     QVERIFY(testDocument != nullptr);
     QVERIFY(document->synchronizer() != nullptr);
-    QCOMPARE(document->synchronizer()->document(), document);
+    QCOMPARE(document->synchronizer()->document(), document.get());
     QCOMPARE(document->contentFlags(), Kasten::ContentStateNormal);
     QCOMPARE(*testDocument->data(), testData);
     QCOMPARE(document->synchronizer()->url(), fileUrl);
-
-    delete document;
 }
 
 void TestDocumentFileSynchronizerTest::testLoadFromNotExistingUrl()
 {
     const QUrl fileUrl = QUrl(QLatin1String(NotExistingUrlName));
-    auto* synchronizer = new Kasten::TestDocumentFileSynchronizer();
+    auto synchronizer = std::make_unique<Kasten::TestDocumentFileSynchronizer>();
     Kasten::AbstractLoadJob* loadJob = synchronizer->startLoad(fileUrl);
     loadJob->exec();
     Kasten::AbstractDocument* document = synchronizer->document();
 
     QVERIFY(document == nullptr);
-    delete synchronizer;
 }
 
 void TestDocumentFileSynchronizerTest::testLoadFromNotExistingFile()
 {
     const QUrl fileUrl = QUrl::fromLocalFile(mFileSystem->createFilePath(QLatin1String(NotExistingFileName)));
-    auto* synchronizer = new Kasten::TestDocumentFileSynchronizer();
+    auto synchronizer = std::make_unique<Kasten::TestDocumentFileSynchronizer>();
     synchronizer->startLoad(fileUrl)->exec();
     Kasten::AbstractDocument* document = synchronizer->document();
 
     QVERIFY(document == nullptr);
-    delete synchronizer;
 }
 
 void TestDocumentFileSynchronizerTest::testLoadSaveFile()
@@ -136,16 +130,16 @@ void TestDocumentFileSynchronizerTest::testLoadSaveFile()
     const QUrl fileUrl = QUrl::fromLocalFile(mFileSystem->createFilePath(QLatin1String(TestFileName1)));
     auto* synchronizer = new Kasten::TestDocumentFileSynchronizer();
     synchronizer->startLoad(fileUrl)->exec();
-    Kasten::AbstractDocument* document = synchronizer->document();
+    auto document = std::unique_ptr<Kasten::AbstractDocument>(synchronizer->document());
 
-    auto* testDocument = qobject_cast<Kasten::TestDocument*>(document);
+    auto* testDocument = qobject_cast<Kasten::TestDocument*>(document.get());
     QVERIFY(testDocument != nullptr);
     // change and save
     testDocument->setData(otherData);
     document->synchronizer()->startSyncToRemote()->exec();
 
     // now delete document and load new
-    delete document;
+    document.reset();
 
     checkFileContent(fileUrl, otherData);
 }
@@ -158,9 +152,9 @@ void TestDocumentFileSynchronizerTest::testLoadReloadFile()
 
     auto* synchronizer = new Kasten::TestDocumentFileSynchronizer();
     synchronizer->startLoad(fileUrl)->exec();
-    Kasten::AbstractDocument* document = synchronizer->document();
+    auto document = std::unique_ptr<Kasten::AbstractDocument>(synchronizer->document());
 
-    auto* testDocument = qobject_cast<Kasten::TestDocument*>(document);
+    auto* testDocument = qobject_cast<Kasten::TestDocument*>(document.get());
     QVERIFY(testDocument != nullptr);
 
     // change on disc and reload
@@ -171,8 +165,6 @@ void TestDocumentFileSynchronizerTest::testLoadReloadFile()
     document->synchronizer()->startSyncFromRemote()->exec();
 
     QCOMPARE(*testDocument->data(), otherData);
-
-    delete document;
 }
 
 void TestDocumentFileSynchronizerTest::testChangeFile()
@@ -186,14 +178,14 @@ void TestDocumentFileSynchronizerTest::testChangeFile()
     // load from 1
     auto* synchronizer = new Kasten::TestDocumentFileSynchronizer();
     synchronizer->startLoad(fileUrl1)->exec();
-    Kasten::AbstractDocument* document = synchronizer->document();
+    auto document = std::unique_ptr<Kasten::AbstractDocument>(synchronizer->document());
 
     // prepare 2 and overwrite
     writeToFile(filePath2, otherData);
     synchronizer->startSyncWithRemote(fileUrl2, Kasten::AbstractModelSynchronizer::ReplaceRemote)->exec();
 
     // now delete document and load new
-    delete document;
+    document.reset();
 
     checkFileContent(fileUrl2, data);
 }
@@ -206,22 +198,22 @@ void TestDocumentFileSynchronizerTest::testConnectToFile()
     const QUrl fileUrl2 = QUrl::fromLocalFile(QString(filePath2));
 
     auto* testDocument = new Kasten::TestDocument();
-    Kasten::AbstractDocument* document = testDocument;
+    auto document = std::unique_ptr<Kasten::AbstractDocument>(testDocument);
     testDocument->setData(otherData);
 
     // file 1
     auto* synchronizer = new Kasten::TestDocumentFileSynchronizer();
-    synchronizer->startConnect(document, fileUrl1, Kasten::TestDocumentFileSynchronizer::ReplaceRemote)->exec();
-    QCOMPARE(synchronizer->document(), document);
+    synchronizer->startConnect(document.get(), fileUrl1, Kasten::TestDocumentFileSynchronizer::ReplaceRemote)->exec();
+    QCOMPARE(synchronizer->document(), document.get());
 
     // file 2
     synchronizer =
         new Kasten::TestDocumentFileSynchronizer();
-    synchronizer->startConnect(document, fileUrl2, Kasten::TestDocumentFileSynchronizer::ReplaceRemote)->exec();
-    QCOMPARE(synchronizer->document(), document);
+    synchronizer->startConnect(document.get(), fileUrl2, Kasten::TestDocumentFileSynchronizer::ReplaceRemote)->exec();
+    QCOMPARE(synchronizer->document(), document.get());
 
     // now delete document and load new
-    delete document;
+    document.reset();
 
     checkFileContent(fileUrl1, otherData);
     checkFileContent(fileUrl2, otherData);

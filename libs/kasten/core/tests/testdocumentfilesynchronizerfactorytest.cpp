@@ -51,7 +51,7 @@ void TestDocumentFileSynchronizerFactoryTest::writeToFile(const QString& filePat
 
 void TestDocumentFileSynchronizerFactoryTest::initTestCase()
 {
-    mFileSystem = new TestFileSystem(QLatin1String(TestDirectory));
+    mFileSystem = std::make_unique<TestFileSystem>(QLatin1String(TestDirectory));
 }
 
 void TestDocumentFileSynchronizerFactoryTest::init()
@@ -64,7 +64,7 @@ void TestDocumentFileSynchronizerFactoryTest::init()
 
 void TestDocumentFileSynchronizerFactoryTest::cleanupTestCase()
 {
-    delete mFileSystem;
+    mFileSystem.reset();
 }
 
 void TestDocumentFileSynchronizerFactoryTest::checkFileContent(const QUrl& fileUrl, const QByteArray& data,
@@ -72,7 +72,7 @@ void TestDocumentFileSynchronizerFactoryTest::checkFileContent(const QUrl& fileU
 {
     Q_UNUSED(data)
     Q_UNUSED(fileUrl)
-    auto* factory = new Kasten::TestDocumentFileSynchronizerFactory(header);
+    auto factory = std::make_unique<Kasten::TestDocumentFileSynchronizerFactory>(header);
 #if 0
     AbstractDocument* document = factory->loadNewDocument(fileUrl);
     Kasten::TestDocument* testDocument = qobject_cast<Kasten::TestDocument*>(document);
@@ -81,17 +81,14 @@ void TestDocumentFileSynchronizerFactoryTest::checkFileContent(const QUrl& fileU
 
     delete document;
 #endif
-    delete factory;
 }
 
 // ------------------------------------------------------------------ tests ----
 void TestDocumentFileSynchronizerFactoryTest::testCreate()
 {
-    auto* factory = new Kasten::TestDocumentFileSynchronizerFactory();
+    auto factory = std::make_unique<Kasten::TestDocumentFileSynchronizerFactory>();
 
     QVERIFY(factory != nullptr);
-
-    delete factory;
 }
 #if 0
 void TestDocumentFileSynchronizerFactoryTest::testLoadFromFile()

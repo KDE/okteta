@@ -13,11 +13,13 @@
 #include <part.hpp>
 // Qt
 #include <QTest>
+// Std
+#include <memory>
 
 void OktetaPartTest::testPartReuseWithAnotherUrl()
 {
-    KPluginFactory* factory = new OktetaPartFactory();
-    auto* part = factory->create<KParts::ReadOnlyPart>(nullptr, nullptr, QVariantList());
+    auto factory = std::make_unique<OktetaPartFactory>();
+    auto part = std::unique_ptr<KParts::ReadOnlyPart>(factory->create<KParts::ReadOnlyPart>(nullptr, nullptr, QVariantList()));
     QVERIFY(part != nullptr);
 
     const QUrl url1 = QUrl::fromLocalFile(QStringLiteral(TESTPATH1));
@@ -27,9 +29,6 @@ void OktetaPartTest::testPartReuseWithAnotherUrl()
     const QUrl url2 = QUrl::fromLocalFile(QStringLiteral(TESTPATH2));
     part->openUrl(url2);
     QCOMPARE(part->url(), url2);
-
-    delete part;
-    delete factory;
 }
 
 QTEST_MAIN(OktetaPartTest)

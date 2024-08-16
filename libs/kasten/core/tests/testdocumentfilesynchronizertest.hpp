@@ -12,6 +12,8 @@
 // Qt
 #include <QObject>
 #include <QByteArray>
+// Std
+#include <memory>
 
 class TestFileSystem;
 class QString;
@@ -44,7 +46,7 @@ private: // not working tests
     void testLoadFromNotExistingFile();
 
 private:
-    TestFileSystem* mFileSystem;
+    std::unique_ptr<TestFileSystem> mFileSystem;
 };
 
 #endif

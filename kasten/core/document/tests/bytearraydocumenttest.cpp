@@ -16,6 +16,8 @@
 #include <QTest>
 #include <QSignalSpy>
 #include <QByteArray>
+// Std
+#include <memory>
 
 namespace Kasten {
 
@@ -23,7 +25,7 @@ static constexpr char Title[] = "title";
 
 void ByteArrayDocumentTest::testCreateNew()
 {
-    auto* document = new ByteArrayDocument(QStringLiteral("New created for test."));
+    auto document = std::make_unique<ByteArrayDocument>(QStringLiteral("New created for test."));
 
     QVERIFY(document != nullptr);
     QCOMPARE(document->contentFlags(), Kasten::ContentStateNormal);
@@ -32,14 +34,12 @@ void ByteArrayDocumentTest::testCreateNew()
     QVERIFY(byteArray != nullptr);
     QCOMPARE(byteArray->size(), 0);
     QVERIFY(!byteArray->isModified());
-
-    delete document;
 }
 
 void ByteArrayDocumentTest::testSetTitle()
 {
-    auto* document = new ByteArrayDocument(QStringLiteral("New created for test."));
-    auto* titleChangeSpy =  new QSignalSpy(document, SIGNAL(titleChanged(QString)));
+    auto document = std::make_unique<ByteArrayDocument>(QStringLiteral("New created for test."));
+    auto titleChangeSpy =  std::make_unique<QSignalSpy>(document.get(), SIGNAL(titleChanged(QString)));
 
     const QLatin1String title(Title);
     document->setTitle(title);
@@ -48,9 +48,6 @@ void ByteArrayDocumentTest::testSetTitle()
     QCOMPARE(titleChangeSpy->size(), 1);
     const QList<QVariant> arguments = titleChangeSpy->takeFirst();
     QCOMPARE(arguments.at(0).toString(), title);
-
-    delete document;
-    delete titleChangeSpy;
 }
 
 }

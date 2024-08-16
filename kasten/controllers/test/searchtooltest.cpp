@@ -19,6 +19,8 @@
 #include <Okteta/PieceTableByteArrayModel>
 // Qt
 #include <QTest>
+// Std
+#include <memory>
 
 Q_DECLARE_METATYPE(Okteta::AddressRange)
 namespace Okteta {
@@ -410,14 +412,14 @@ void SearchToolTest::testSearch()
     const ViewData viewData = parseToViewData(viewMarkup);
 
     auto* byteArray = new Okteta::PieceTableByteArrayModel(viewData.data);
-    auto* document = new Kasten::ByteArrayDocument(byteArray, QStringLiteral("init"));
-    auto* view = new Kasten::ByteArrayView(document, nullptr);
+    auto document = std::make_unique<Kasten::ByteArrayDocument>(byteArray, QStringLiteral("init"));
+    auto view = std::make_unique<Kasten::ByteArrayView>(document.get(), nullptr);
 
-    auto* queryAgent = new TestSearchUserQueryable();
-    auto* tool = new Kasten::SearchTool();
-    tool->setTargetModel(view);
+    auto queryAgent = std::make_unique<TestSearchUserQueryable>();
+    auto tool = std::make_unique<Kasten::SearchTool>();
+    tool->setTargetModel(view.get());
     tool->setSearchData(searchData);
-    tool->setUserQueryAgent(queryAgent);
+    tool->setUserQueryAgent(queryAgent.get());
 
     if (viewData.selection.isValid()) {
         view->setSelection(viewData.selection.start(), viewData.selection.end());
@@ -433,11 +435,6 @@ void SearchToolTest::testSearch()
 
     QCOMPARE(match, viewData.match);
     QCOMPARE(queryAgent->wrapQueryStatus(), wrapQueryStatus);
-
-    delete tool;
-    delete view;
-    delete document;
-    delete queryAgent;
 }
 
 QTEST_MAIN(SearchToolTest)

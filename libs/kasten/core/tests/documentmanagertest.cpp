@@ -15,6 +15,8 @@
 // Qt
 #include <QTest>
 #include <QSignalSpy>
+// Std
+#include <memory>
 
 void DocumentManagerTest::checkAdded(QSignalSpy* changedSpy, Kasten::AbstractDocument* document)
 {
@@ -47,8 +49,7 @@ void DocumentManagerTest::initTestCase()
 
 void DocumentManagerTest::testConstructor()
 {
-    auto* documentManager = new Kasten::DocumentManager();
-    delete documentManager;
+    auto documentManager = std::make_unique<Kasten::DocumentManager>();
 }
 
 void DocumentManagerTest::testAddRemove()
@@ -57,43 +58,37 @@ void DocumentManagerTest::testAddRemove()
     auto* doc2 = new Kasten::TestDocument();
     auto* doc3 = new Kasten::TestDocument();
 
-    auto* documentManager = new Kasten::DocumentManager();
-    auto* addedSpy = new QSignalSpy(documentManager, SIGNAL(added(QVector<Kasten::AbstractDocument*>)));
-    auto* closingSpy = new QSignalSpy(documentManager, SIGNAL(closing(QVector<Kasten::AbstractDocument*>)));
+    auto documentManager = std::make_unique<Kasten::DocumentManager>();
+    auto addedSpy = std::make_unique<QSignalSpy>(documentManager.get(), SIGNAL(added(QVector<Kasten::AbstractDocument*>)));
+    auto closingSpy = std::make_unique<QSignalSpy>(documentManager.get(), SIGNAL(closing(QVector<Kasten::AbstractDocument*>)));
 
     documentManager->addDocument(doc1);
-    checkAdded(addedSpy, doc1);
+    checkAdded(addedSpy.get(), doc1);
 
     documentManager->closeDocument(doc1);
-    checkAdded(closingSpy, doc1);
+    checkAdded(closingSpy.get(), doc1);
 
     documentManager->addDocument(doc2);
-    checkAdded(addedSpy, doc2);
+    checkAdded(addedSpy.get(), doc2);
     documentManager->addDocument(doc3);
-    checkAdded(addedSpy, doc3);
+    checkAdded(addedSpy.get(), doc3);
 
     documentManager->closeDocument(doc3);
-    checkAdded(closingSpy, doc3);
+    checkAdded(closingSpy.get(), doc3);
     documentManager->closeDocument(doc2);
-    checkAdded(closingSpy, doc2);
-
-    delete documentManager;
-    delete addedSpy;
-    delete closingSpy;
+    checkAdded(closingSpy.get(), doc2);
 }
 
 void DocumentManagerTest::testCanClose()
 {
     auto* doc = new Kasten::TestDocument();
 
-    auto* documentManager = new Kasten::DocumentManager();
+    auto documentManager = std::make_unique<Kasten::DocumentManager>();
     documentManager->addDocument(doc);
     QVERIFY(documentManager->canClose(doc));
 
 //     doc->setSyncStates( Kasten::LocalHasChanges );
 //     QVERIFY( !documentManager->canClose(doc) );
-
-    delete documentManager;
 }
 
 QTEST_GUILESS_MAIN(DocumentManagerTest)

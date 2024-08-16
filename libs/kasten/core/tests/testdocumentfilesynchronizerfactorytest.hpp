@@ -12,6 +12,8 @@
 // Qt
 #include <QObject>
 #include <QByteArray>
+// Std
+#include <memory>
 
 class TestFileSystem;
 class QUrl;
@@ -46,7 +48,7 @@ private: // not working tests
 #endif
 
 private:
-    TestFileSystem* mFileSystem;
+    std::unique_ptr<TestFileSystem> mFileSystem;
 };
 
 #endif

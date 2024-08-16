@@ -16,6 +16,9 @@
 
 namespace Okteta {
 
+VersionableIfTest::VersionableIfTest() = default;
+VersionableIfTest::~VersionableIfTest() = default;
+
 // ---------------------------------------------------------------- Tests -----
 
 void VersionableIfTest::init()
@@ -25,20 +28,20 @@ void VersionableIfTest::init()
     mVersionableControl = qobject_cast<Okteta::Versionable*>(mObject);
 
     mRevertedToVersionIndexSpy =
-        new QSignalSpy(mObject, SIGNAL(revertedToVersionIndex(int)));
+        std::make_unique<QSignalSpy>(mObject, SIGNAL(revertedToVersionIndex(int)));
     mHeadVersionDescriptionChangedSpy =
-        new QSignalSpy(mObject, SIGNAL(headVersionDescriptionChanged(QString)));
+        std::make_unique<QSignalSpy>(mObject, SIGNAL(headVersionDescriptionChanged(QString)));
     mHeadVersionChangedSpy =
-        new QSignalSpy(mObject, SIGNAL(headVersionChanged(int)));
+        std::make_unique<QSignalSpy>(mObject, SIGNAL(headVersionChanged(int)));
 }
 
 void VersionableIfTest::cleanup()
 {
     deleteVersionable(mObject);
 
-    delete mRevertedToVersionIndexSpy;
-    delete mHeadVersionDescriptionChangedSpy;
-    delete mHeadVersionChangedSpy;
+    mRevertedToVersionIndexSpy.reset();
+    mHeadVersionDescriptionChangedSpy.reset();
+    mHeadVersionChangedSpy.reset();
 }
 
 void VersionableIfTest::clearSignalSpys()
