@@ -37,6 +37,7 @@ public:
     ~OktetaPartFactory() override;
 
 public: // KPluginFactory API
+    using KPluginFactory::create;
     QObject* create(const char* iface,
                     QWidget* parentWidget,
                     QObject* parent,
