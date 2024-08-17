@@ -33,8 +33,8 @@ protected:
     AbstractByteArrayModelIfTest();
 
 protected: // our API
-    virtual AbstractByteArrayModel* createByteArrayModel() = 0;
-    virtual void deleteByteArrayModel(AbstractByteArrayModel* byteArrayModel) = 0;
+    virtual std::unique_ptr<AbstractByteArrayModel> createByteArrayModel() = 0;
+    virtual void deleteByteArrayModel(std::unique_ptr<AbstractByteArrayModel>&& byteArrayModel) = 0;
     virtual bool byteArrayModelSizeCanBeChanged() const;
 
 private:
@@ -67,8 +67,8 @@ private Q_SLOTS: // test functions
     void testReplaceMore();
 
 private: // used in all tests
-    /** pointer to the model to test */
-    AbstractByteArrayModel* mByteArrayModel = nullptr;
+    /** the model to test */
+    std::unique_ptr<AbstractByteArrayModel> mByteArrayModel;
 
     std::unique_ptr<QSignalSpy> ContentsChangeListSpy;
 };

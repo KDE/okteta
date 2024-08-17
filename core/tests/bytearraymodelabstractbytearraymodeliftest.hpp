@@ -19,8 +19,8 @@ class ByteArrayModelAbstractByteArrayModelIfTest : public AbstractByteArrayModel
     Q_OBJECT
 
 protected: // AbstractByteArrayModelIfTest API
-    AbstractByteArrayModel* createByteArrayModel() override;
-    void deleteByteArrayModel(AbstractByteArrayModel* byteArrayModel) override;
+    std::unique_ptr<AbstractByteArrayModel> createByteArrayModel() override;
+    void deleteByteArrayModel(std::unique_ptr<AbstractByteArrayModel>&& byteArrayModel) override;
 };
 
 }

@@ -22,14 +22,14 @@ bool FixedSizeByteArrayModelAbstractByteArrayModelIfTest::byteArrayModelSizeCanB
     return false;
 }
 
-AbstractByteArrayModel* FixedSizeByteArrayModelAbstractByteArrayModelIfTest::createByteArrayModel()
+std::unique_ptr<AbstractByteArrayModel> FixedSizeByteArrayModelAbstractByteArrayModelIfTest::createByteArrayModel()
 {
-    return new FixedSizeByteArrayModel(FixedSizeByteArrayModelSize);
+    return std::make_unique<FixedSizeByteArrayModel>(FixedSizeByteArrayModelSize);
 }
 
-void FixedSizeByteArrayModelAbstractByteArrayModelIfTest::deleteByteArrayModel(AbstractByteArrayModel* byteArrayModel)
+void FixedSizeByteArrayModelAbstractByteArrayModelIfTest::deleteByteArrayModel(std::unique_ptr<AbstractByteArrayModel>&& byteArrayModel)
 {
-    delete byteArrayModel;
+    Q_UNUSED(byteArrayModel)
 }
 
 }

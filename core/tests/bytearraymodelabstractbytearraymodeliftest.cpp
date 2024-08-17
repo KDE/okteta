@@ -17,17 +17,17 @@ namespace Okteta {
 
 static constexpr Size ByteArrayModelSize = 60;
 
-AbstractByteArrayModel* ByteArrayModelAbstractByteArrayModelIfTest::createByteArrayModel()
+std::unique_ptr<AbstractByteArrayModel> ByteArrayModelAbstractByteArrayModelIfTest::createByteArrayModel()
 {
-    auto* byteArrayModel = new ByteArrayModel(ByteArrayModelSize);
+    auto byteArrayModel = std::make_unique<ByteArrayModel>(ByteArrayModelSize);
     byteArrayModel->setReadOnly(false);
 
     return byteArrayModel;
 }
 
-void ByteArrayModelAbstractByteArrayModelIfTest::deleteByteArrayModel(AbstractByteArrayModel* byteArrayModel)
+void ByteArrayModelAbstractByteArrayModelIfTest::deleteByteArrayModel(std::unique_ptr<AbstractByteArrayModel>&& byteArrayModel)
 {
-    delete byteArrayModel;
+    Q_UNUSED(byteArrayModel)
 }
 
 }

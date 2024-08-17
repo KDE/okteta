@@ -37,12 +37,12 @@ void AbstractByteArrayModelIfTest::init()
     mByteArrayModel = createByteArrayModel();
 
     qRegisterMetaType<ArrayChangeMetricsList>("Okteta::ArrayChangeMetricsList");
-    ContentsChangeListSpy = std::make_unique<QSignalSpy>(mByteArrayModel, SIGNAL(contentsChanged(Okteta::ArrayChangeMetricsList)));
+    ContentsChangeListSpy = std::make_unique<QSignalSpy>(mByteArrayModel.get(), SIGNAL(contentsChanged(Okteta::ArrayChangeMetricsList)));
 }
 
 void AbstractByteArrayModelIfTest::cleanup()
 {
-    deleteByteArrayModel(mByteArrayModel);
+    deleteByteArrayModel(std::move(mByteArrayModel));
 
     ContentsChangeListSpy.reset();
 }
@@ -114,7 +114,7 @@ void AbstractByteArrayModelIfTest::testCopyTo()
 {
     if (!mByteArrayModel->isReadOnly()) {
         // prepare mByteArrayModel
-        textureByteArrayModel(mByteArrayModel);
+        textureByteArrayModel(mByteArrayModel.get());
         mByteArrayModel->setModified(false);
     }
 
@@ -283,7 +283,7 @@ void AbstractByteArrayModelIfTest::testRemove()
         return;
     }
 
-    textureByteArrayModel(mByteArrayModel);
+    textureByteArrayModel(mByteArrayModel.get());
     constexpr Size removeSize = 10;
     // create copy
     Size size = mByteArrayModel->size();
@@ -353,7 +353,7 @@ std::unique_ptr<KTestData> AbstractByteArrayModelIfTest::prepareTestInsert() con
     // prepare insertData
     textureByteArrayModel(&testData->insertData, 10, 99);
 
-    textureByteArrayModel(mByteArrayModel, 100, 255);
+    textureByteArrayModel(mByteArrayModel.get(), 100, 255);
     mByteArrayModel->copyTo(testData->copy.rawData(), 0, size);
     mByteArrayModel->setModified(false);
 
@@ -459,8 +459,8 @@ void AbstractByteArrayModelIfTest::testSwap()
     FixedSizeByteArrayModel copy(size);
 
     // prepare mByteArrayModel
-    textureByteArrayModel(mByteArrayModel, 100, 255, 0, origin.nextBeforeStart());
-    textureByteArrayModel(mByteArrayModel, 10, 99, origin);
+    textureByteArrayModel(mByteArrayModel.get(), 100, 255, 0, origin.nextBeforeStart());
+    textureByteArrayModel(mByteArrayModel.get(), 10, 99, origin);
     AddressRange Source = origin;
     mByteArrayModel->setModified(false);
 
@@ -556,7 +556,7 @@ void AbstractByteArrayModelIfTest::testReplaceEqual()
 
     // prepare mByteArrayModel
     Size size = mByteArrayModel->size();
-    textureByteArrayModel(mByteArrayModel, 100, 255);
+    textureByteArrayModel(mByteArrayModel.get(), 100, 255);
     mByteArrayModel->setModified(false);
 
     // create copy
@@ -577,7 +577,7 @@ void AbstractByteArrayModelIfTest::testReplaceEqual()
     checkContentsReplaced(targetRange, inserted);
 
     // clean
-    textureByteArrayModel(mByteArrayModel, 100, 255);
+    textureByteArrayModel(mByteArrayModel.get(), 100, 255);
     mByteArrayModel->copyTo(copy.rawData(), 0, size);
     mByteArrayModel->setModified(false);
 
@@ -596,7 +596,7 @@ void AbstractByteArrayModelIfTest::testReplaceEqual()
     checkContentsReplaced(targetRange, inserted);
 
     // clean
-    textureByteArrayModel(mByteArrayModel, 100, 255);
+    textureByteArrayModel(mByteArrayModel.get(), 100, 255);
     mByteArrayModel->copyTo(copy.rawData(), 0, size);
     mByteArrayModel->setModified(false);
 
@@ -631,7 +631,7 @@ void AbstractByteArrayModelIfTest::testReplaceLess()
 
     // prepare mByteArrayModel
     Size size = mByteArrayModel->size();
-    textureByteArrayModel(mByteArrayModel, 100, 255);
+    textureByteArrayModel(mByteArrayModel.get(), 100, 255);
     mByteArrayModel->setModified(false);
 
     // create copy
@@ -653,7 +653,7 @@ void AbstractByteArrayModelIfTest::testReplaceLess()
 
     // clean
     size = mByteArrayModel->size();
-    textureByteArrayModel(mByteArrayModel, 100, 255);
+    textureByteArrayModel(mByteArrayModel.get(), 100, 255);
     mByteArrayModel->copyTo(copy.rawData(), 0, size);
     mByteArrayModel->setModified(false);
 
@@ -673,7 +673,7 @@ void AbstractByteArrayModelIfTest::testReplaceLess()
 
     // clean
     size = mByteArrayModel->size();
-    textureByteArrayModel(mByteArrayModel, 100, 255);
+    textureByteArrayModel(mByteArrayModel.get(), 100, 255);
     mByteArrayModel->copyTo(copy.rawData(), 0, size);
     mByteArrayModel->setModified(false);
 
@@ -708,7 +708,7 @@ void AbstractByteArrayModelIfTest::testReplaceMore()
 
     // prepare mByteArrayModel
     Size size = mByteArrayModel->size();
-    textureByteArrayModel(mByteArrayModel, 100, 255);
+    textureByteArrayModel(mByteArrayModel.get(), 100, 255);
     mByteArrayModel->setModified(false);
 
     // create copy
@@ -730,7 +730,7 @@ void AbstractByteArrayModelIfTest::testReplaceMore()
 
     // clean
     size = mByteArrayModel->size();
-    textureByteArrayModel(mByteArrayModel, 100, 255);
+    textureByteArrayModel(mByteArrayModel.get(), 100, 255);
     mByteArrayModel->copyTo(copy.rawData(), 0, size);
     mByteArrayModel->setModified(false);
     // Action: replace at middle
@@ -749,7 +749,7 @@ void AbstractByteArrayModelIfTest::testReplaceMore()
 
     // clean
     size = mByteArrayModel->size();
-    textureByteArrayModel(mByteArrayModel, 100, 255);
+    textureByteArrayModel(mByteArrayModel.get(), 100, 255);
     mByteArrayModel->copyTo(copy.rawData(), 0, size);
     mByteArrayModel->setModified(false);
 
