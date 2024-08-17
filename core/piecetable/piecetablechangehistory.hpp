@@ -41,7 +41,7 @@ public:
 public:
     void clear();
     /// returns true, if a new change is appended, false if merged
-    bool appendChange(AbstractPieceTableChange* change);
+    bool appendChange(std::unique_ptr<AbstractPieceTableChange>&& change);
 
     /**
      * @param pieceTable

@@ -19,8 +19,8 @@ class SwapRangesPieceTableChangeAbstractPieceTableChangeIfTest : public Abstract
     Q_OBJECT
 
 protected: // AbstractPieceTableChangeIfTest API
-    AbstractPieceTableChange* createPieceTableChange() override;
-    void deletePieceTableChange(AbstractPieceTableChange* pieceTableChange) override;
+    std::unique_ptr<AbstractPieceTableChange> createPieceTableChange() override;
+    void deletePieceTableChange(std::unique_ptr<AbstractPieceTableChange>&& pieceTableChange) override;
     void changePieceTable(PieceTable* pieceTable) override;
 };
 

@@ -62,7 +62,7 @@ public:
     GroupPieceTableChange* parent() const;
 
 public: // TODO: this interface part is shared with PieceTableChangeHistory, try to use this fact
-    bool appendChange(AbstractPieceTableChange* change);
+    bool appendChange(std::unique_ptr<AbstractPieceTableChange>&& change);
     void finishChange();
 
 public:

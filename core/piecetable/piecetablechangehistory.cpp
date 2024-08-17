@@ -44,10 +44,10 @@ void PieceTableChangeHistory::setBeforeCurrentChangeAsBase(bool hide)
 
 void PieceTableChangeHistory::openGroupedChange(const QString& description)
 {
-    auto* groupChange = new GroupPieceTableChange(mActiveGroupChange, description);
+    auto groupChange = std::make_unique<GroupPieceTableChange>(mActiveGroupChange, description);
 
-    appendChange(groupChange);
-    mActiveGroupChange = groupChange;
+    mActiveGroupChange = groupChange.get();
+    appendChange(std::move(groupChange));
 }
 
 void PieceTableChangeHistory::closeGroupedChange(const QString& description)
@@ -69,7 +69,7 @@ void PieceTableChangeHistory::finishChange()
     }
 }
 
-bool PieceTableChangeHistory::appendChange(AbstractPieceTableChange* change)
+bool PieceTableChangeHistory::appendChange(std::unique_ptr<AbstractPieceTableChange>&& change)
 {
     // chop unapplied changes
     if (mAppliedChangesCount < static_cast<int>(mChangeStack.size())) {
@@ -86,20 +86,18 @@ bool PieceTableChangeHistory::appendChange(AbstractPieceTableChange* change)
 
     bool isNotMerged = true;
     if (mActiveGroupChange) {
-        mActiveGroupChange->appendChange(change);
+        mActiveGroupChange->appendChange(std::move(change));
         isNotMerged = false; // TODO: hack for as long as subgroups are not undoable
     } else {
         if (mTryToMergeAppendedChange && mAppliedChangesCount > 0) {
-            isNotMerged = !mChangeStack.back()->merge(change);
+            isNotMerged = !mChangeStack.back()->merge(change.get());
         } else {
             mTryToMergeAppendedChange = true;
         }
 
         if (isNotMerged) {
-            mChangeStack.emplace_back(change);
+            mChangeStack.emplace_back(std::move(change));
             ++mAppliedChangesCount;
-        } else {
-            delete change;
         }
     }
 

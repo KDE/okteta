@@ -21,9 +21,9 @@ static constexpr Address InsertOffset = 30;
 static constexpr Size InsertLength = 80;
 static constexpr Address StorageOffset = 67;
 
-AbstractPieceTableChange* InsertPieceTableChangeAbstractPieceTableChangeIfTest::createPieceTableChange()
+std::unique_ptr<AbstractPieceTableChange> InsertPieceTableChangeAbstractPieceTableChangeIfTest::createPieceTableChange()
 {
-    auto* pieceTableChange = new InsertPieceTableChange(InsertOffset, InsertLength, StorageOffset);
+    auto pieceTableChange = std::make_unique<InsertPieceTableChange>(InsertOffset, InsertLength, StorageOffset);
 
     return pieceTableChange;
 }
@@ -33,9 +33,9 @@ void InsertPieceTableChangeAbstractPieceTableChangeIfTest::changePieceTable(Piec
     pieceTable->insert(InsertOffset, InsertLength, StorageOffset);
 }
 
-void InsertPieceTableChangeAbstractPieceTableChangeIfTest::deletePieceTableChange(AbstractPieceTableChange* pieceTableChange)
+void InsertPieceTableChangeAbstractPieceTableChangeIfTest::deletePieceTableChange(std::unique_ptr<AbstractPieceTableChange>&& pieceTableChange)
 {
-    delete pieceTableChange;
+    Q_UNUSED(pieceTableChange)
 }
 
 }

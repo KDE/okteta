@@ -25,13 +25,13 @@ static constexpr Address InsertStorageOffset = 67;
 
 static constexpr Address ChangeStorageOffset = 23;
 
-AbstractPieceTableChange* ReplacePieceTableChangeAbstractPieceTableChangeIfTest::createPieceTableChange()
+std::unique_ptr<AbstractPieceTableChange> ReplacePieceTableChangeAbstractPieceTableChangeIfTest::createPieceTableChange()
 {
     const Piece replacedPiece(AddressRange::fromWidth(Start + ChangeStorageOffset, Width), Piece::ChangeStorage);
 
-    auto* pieceTableChange =
-        new ReplacePieceTableChange(AddressRange(Start, End), InsertLength, InsertStorageOffset,
-                                    PieceList(replacedPiece));
+    auto pieceTableChange =
+        std::make_unique<ReplacePieceTableChange>(AddressRange(Start, End), InsertLength, InsertStorageOffset,
+                                                  PieceList(replacedPiece));
 
     return pieceTableChange;
 }
@@ -41,9 +41,9 @@ void ReplacePieceTableChangeAbstractPieceTableChangeIfTest::changePieceTable(Pie
 }
 
 void ReplacePieceTableChangeAbstractPieceTableChangeIfTest::deletePieceTableChange(
-    AbstractPieceTableChange* pieceTableChange)
+    std::unique_ptr<AbstractPieceTableChange>&& pieceTableChange)
 {
-    delete pieceTableChange;
+    Q_UNUSED(pieceTableChange)
 }
 
 }

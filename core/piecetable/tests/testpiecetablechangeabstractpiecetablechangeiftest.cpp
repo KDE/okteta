@@ -21,12 +21,12 @@ static constexpr int ReplacedStorageOffset = 53;
 
 namespace KPieceTable {
 
-KPieceTable::AbstractPieceTableChange* TestPieceTableChangeAbstractPieceTableChangeIfTest::createPieceTableChange()
+std::unique_ptr<AbstractPieceTableChange> TestPieceTableChangeAbstractPieceTableChangeIfTest::createPieceTableChange()
 {
-    auto* pieceTableChange =
-        new TestPieceTableChange(0, QString(),
-                                 TestOffset, StorageOffset, Piece::ChangeStorage,
-                                 ReplacedStorageOffset);
+    auto pieceTableChange =
+        std::make_unique<TestPieceTableChange>(0, QString(),
+                                               TestOffset, StorageOffset, Piece::ChangeStorage,
+                                               ReplacedStorageOffset);
 
     return pieceTableChange;
 }
@@ -36,9 +36,9 @@ void TestPieceTableChangeAbstractPieceTableChangeIfTest::changePieceTable(PieceT
 }
 
 void TestPieceTableChangeAbstractPieceTableChangeIfTest::deletePieceTableChange(
-    AbstractPieceTableChange* pieceTableChange)
+    std::unique_ptr<AbstractPieceTableChange>&& pieceTableChange)
 {
-    delete pieceTableChange;
+    Q_UNUSED(pieceTableChange)
 }
 
 }

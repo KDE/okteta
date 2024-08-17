@@ -21,10 +21,10 @@ static constexpr Address FirstRangeStart = 30;
 static constexpr Address SecondRangeStart = 50;
 static constexpr Address SecondRangeEnd = 66;
 
-AbstractPieceTableChange* SwapRangesPieceTableChangeAbstractPieceTableChangeIfTest::createPieceTableChange()
+std::unique_ptr<AbstractPieceTableChange> SwapRangesPieceTableChangeAbstractPieceTableChangeIfTest::createPieceTableChange()
 {
-    auto* pieceTableChange =
-        new SwapRangesPieceTableChange(FirstRangeStart, AddressRange(SecondRangeStart, SecondRangeEnd));
+    auto pieceTableChange =
+        std::make_unique<SwapRangesPieceTableChange>(FirstRangeStart, AddressRange(SecondRangeStart, SecondRangeEnd));
 
     return pieceTableChange;
 }
@@ -34,9 +34,9 @@ void SwapRangesPieceTableChangeAbstractPieceTableChangeIfTest::changePieceTable(
     pieceTable->swap(FirstRangeStart, AddressRange(SecondRangeStart, SecondRangeEnd));
 }
 
-void SwapRangesPieceTableChangeAbstractPieceTableChangeIfTest::deletePieceTableChange(AbstractPieceTableChange* pieceTableChange)
+void SwapRangesPieceTableChangeAbstractPieceTableChangeIfTest::deletePieceTableChange(std::unique_ptr<AbstractPieceTableChange>&& pieceTableChange)
 {
-    delete pieceTableChange;
+    Q_UNUSED(pieceTableChange)
 }
 
 }

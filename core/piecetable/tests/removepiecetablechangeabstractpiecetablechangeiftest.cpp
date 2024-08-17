@@ -23,11 +23,11 @@ static constexpr Size Width = End - Start + 1;
 
 static constexpr Address ChangeStorageOffset = 23;
 
-AbstractPieceTableChange* RemovePieceTableChangeAbstractPieceTableChangeIfTest::createPieceTableChange()
+std::unique_ptr<AbstractPieceTableChange> RemovePieceTableChangeAbstractPieceTableChangeIfTest::createPieceTableChange()
 {
     const Piece removedPiece(AddressRange::fromWidth(Start + ChangeStorageOffset, Width), Piece::ChangeStorage);
-    auto* pieceTableChange =
-        new RemovePieceTableChange(AddressRange(Start, End), PieceList(removedPiece));
+    auto pieceTableChange =
+        std::make_unique<RemovePieceTableChange>(AddressRange(Start, End), PieceList(removedPiece));
 
     return pieceTableChange;
 }
@@ -37,9 +37,9 @@ void RemovePieceTableChangeAbstractPieceTableChangeIfTest::changePieceTable(Piec
 }
 
 void RemovePieceTableChangeAbstractPieceTableChangeIfTest::deletePieceTableChange(
-    AbstractPieceTableChange* pieceTableChange)
+    std::unique_ptr<AbstractPieceTableChange>&& pieceTableChange)
 {
-    delete pieceTableChange;
+    Q_UNUSED(pieceTableChange)
 }
 
 }

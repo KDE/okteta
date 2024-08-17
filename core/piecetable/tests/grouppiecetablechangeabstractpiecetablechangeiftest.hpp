@@ -17,8 +17,8 @@ namespace KPieceTable {
 class GroupPieceTableChangeAbstractPieceTableChangeIfTest : public AbstractPieceTableChangeIfTest
 {
 protected: // AbstractPieceTableChangeIfTest API
-    virtual AbstractPieceTableChange* createPieceTableChange();
-    virtual void deletePieceTableChange(AbstractPieceTableChange* pieceTableChange);
+    virtual std::unique_ptr<AbstractPieceTableChange> createPieceTableChange();
+    virtual void deletePieceTableChange(std::unique_ptr<AbstractPieceTableChange>&& pieceTableChange);
     virtual void changePieceTable(PieceTable* pieceTable);
 };
 

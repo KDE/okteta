@@ -57,7 +57,7 @@ ArrayChangeMetrics GroupPieceTableChange::metrics() const
     return ArrayChangeMetrics::asReplacement(0, 0, 0);
 }
 
-bool GroupPieceTableChange::appendChange(AbstractPieceTableChange* change)
+bool GroupPieceTableChange::appendChange(std::unique_ptr<AbstractPieceTableChange>&& change)
 {
 #if 0
     // chop unapplied changes
@@ -78,16 +78,14 @@ bool GroupPieceTableChange::appendChange(AbstractPieceTableChange* change)
 
     bool isNotMerged = true;
     if (mTryToMergeAppendedChange && mAppliedChangesCount > 0) {
-        isNotMerged = !mChangeStack.back()->merge(change);
+        isNotMerged = !mChangeStack.back()->merge(change.get());
     } else {
         mTryToMergeAppendedChange = true;
     }
 
     if (isNotMerged) {
-        mChangeStack.emplace_back(change);
+        mChangeStack.emplace_back(std::move(change));
         ++mAppliedChangesCount;
-    } else {
-        delete change;
     }
 
     return isNotMerged;

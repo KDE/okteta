@@ -11,6 +11,8 @@
 
 // Qt
 #include <QObject>
+// Std
+#include <memory>
 
 namespace KPieceTable {
 
@@ -21,12 +23,15 @@ class AbstractPieceTableChangeIfTest : public QObject
 {
     Q_OBJECT
 
+public:
+    ~AbstractPieceTableChangeIfTest() override;
+
 protected:
     AbstractPieceTableChangeIfTest();
 
 protected: // our API
-    virtual AbstractPieceTableChange* createPieceTableChange() = 0;
-    virtual void deletePieceTableChange(AbstractPieceTableChange* pieceTableChange) = 0;
+    virtual std::unique_ptr<AbstractPieceTableChange> createPieceTableChange() = 0;
+    virtual void deletePieceTableChange(std::unique_ptr<AbstractPieceTableChange>&& pieceTableChange) = 0;
 
     virtual void changePieceTable(PieceTable* pieceTable) = 0;
 
@@ -41,8 +46,8 @@ private Q_SLOTS: // test functions
     void testRevertApply();
 
 private: // used in all tests
-    /** pointer to the change to test */
-    AbstractPieceTableChange* mPieceTableChange = nullptr;
+    /** the change to test */
+    std::unique_ptr<AbstractPieceTableChange> mPieceTableChange;
 };
 
 inline AbstractPieceTableChangeIfTest::AbstractPieceTableChangeIfTest() = default;

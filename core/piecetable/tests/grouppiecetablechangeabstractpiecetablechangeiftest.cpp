@@ -36,29 +36,30 @@ static constexpr Address RemovedEnd = 78;
 static constexpr Size RemovedWidth = RemovedEnd - RemovedStart + 1;
 static constexpr Address RemovedOldStorageOffset = 23;
 
-AbstractPieceTableChange* GroupPieceTableChangeAbstractPieceTableChangeIfTest::createPieceTableChange()
+std::unique_ptr<AbstractPieceTableChange> GroupPieceTableChangeAbstractPieceTableChangeIfTest::createPieceTableChange()
 {
     const Piece replacedPiece(AddressRange::fromWidth(ReplacedOldStorageOffset, ReplacedWidth), Piece::ChangeStorage);
     const Piece removedPiece(AddressRange::fromWidth(RemovedOldStorageOffset, RemovedWidth), Piece::ChangeStorage);
 
-    ReplacePieceTableChange* replaceChange =
-        new ReplacePieceTableChange(AddressRange(ReplacedStart, ReplacedEnd),
-                                    ReplaceLength, ReplaceInsertStorageOffset,
-                                    PieceList(replacedPiece));
-    InsertPieceTableChange* insertChange =
-        new InsertPieceTableChange(InsertOffset, InsertLength, InsertStorageOffset);
-    RemovePieceTableChange* removeChange =
-        new RemovePieceTableChange(AddressRange(RemovedStart, RemovedEnd), PieceList(removedPiece));
+    auto replaceChange =
+        std::make_unique<ReplacePieceTableChange>(AddressRange(ReplacedStart, ReplacedEnd),
+                                                  ReplaceLength, ReplaceInsertStorageOffset,
+                                                  PieceList(replacedPiece));
+    auto insertChange =
+        std::make_unique<InsertPieceTableChange>(InsertOffset, InsertLength, InsertStorageOffset);
+    auto removeChange =
+        std::make_unique<RemovePieceTableChange>(AddressRange(RemovedStart, RemovedEnd), PieceList(removedPiece));
 
-    GroupPieceTableChange* pieceTableChange =
-        new GroupPieceTableChange(0, QString());
+    auto pieceTableChange =
+        std::make_unique<GroupPieceTableChange>(nullptr, QString());
 
-    pieceTableChange->appendChange(replaceChange);
-    pieceTableChange->appendChange(insertChange);
-    pieceTableChange->appendChange(removeChange);
+    pieceTableChange->appendChange(std::move(replaceChange));
+    pieceTableChange->appendChange(std::move(insertChange));
+    pieceTableChange->appendChange(std::move(removeChange));
 
     return pieceTableChange;
 }
+
 void GroupPieceTableChangeAbstractPieceTableChangeIfTest::changePieceTable(PieceTable* pieceTable)
 {
     pieceTable->replace(AddressRange(ReplacedStart, ReplacedEnd), ReplaceLength, ReplaceInsertStorageOffset);
@@ -67,9 +68,9 @@ void GroupPieceTableChangeAbstractPieceTableChangeIfTest::changePieceTable(Piece
 }
 
 void GroupPieceTableChangeAbstractPieceTableChangeIfTest::deletePieceTableChange(
-    AbstractPieceTableChange* pieceTableChange)
+    std::unique_ptr<AbstractPieceTableChange>&& pieceTableChange)
 {
-    delete pieceTableChange;
+    Q_UNUSED(pieceTableChange)
 }
 
 }

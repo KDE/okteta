@@ -47,13 +47,13 @@ void GroupPieceTableChangeTest::testAppendChange()
     const QString description2 = QStringLiteral("2");
     const QString description3 = QStringLiteral("3");
     const QString description4 = QStringLiteral("4");
-    auto* change1 = new TestPieceTableChange(type1Id, description1);
-    auto* change2 = new TestPieceTableChange(type2Id, description2);
-    auto* change3 = new TestPieceTableChange(type3Id, description3);
-    auto* change4 = new TestPieceTableChange(type4Id, description4);
+    auto change1 = std::make_unique<TestPieceTableChange>(type1Id, description1);
+    auto change2 = std::make_unique<TestPieceTableChange>(type2Id, description2);
+    auto change3 = std::make_unique<TestPieceTableChange>(type3Id, description3);
+    auto change4 = std::make_unique<TestPieceTableChange>(type4Id, description4);
 
     // adding first
-    bool result = groupPieceTableChange.appendChange(change1);
+    bool result = groupPieceTableChange.appendChange(std::move(change1));
 
     QVERIFY(result);
     QCOMPARE(groupPieceTableChange.count(), 1);
@@ -62,7 +62,7 @@ void GroupPieceTableChangeTest::testAppendChange()
     QCOMPARE(groupPieceTableChange.changeDescription(0), description1);
 
     // adding first
-    result = groupPieceTableChange.appendChange(change2);
+    result = groupPieceTableChange.appendChange(std::move(change2));
 
     QVERIFY(result);
     QCOMPARE(groupPieceTableChange.count(), 2);
@@ -72,7 +72,7 @@ void GroupPieceTableChangeTest::testAppendChange()
     QCOMPARE(groupPieceTableChange.changeDescription(1), description2);
 
     // adding third which should be merged
-    result = groupPieceTableChange.appendChange(change3);
+    result = groupPieceTableChange.appendChange(std::move(change3));
 
     QVERIFY(!result);
     QCOMPARE(groupPieceTableChange.count(), 2);
@@ -83,7 +83,7 @@ void GroupPieceTableChangeTest::testAppendChange()
 
     // adding third which should not be merged as we call finishChange before
     groupPieceTableChange.finishChange();
-    result = groupPieceTableChange.appendChange(change4);
+    result = groupPieceTableChange.appendChange(std::move(change4));
 
     QVERIFY(result);
     QCOMPARE(groupPieceTableChange.count(), 3);
@@ -109,10 +109,10 @@ void GroupPieceTableChangeTest::testRevertBeforeChange()
     const QString description2("2");
     const QString description3("3");
     const QString description4("4");
-    TestPieceTableChange* change1 = new TestPieceTableChange(type1Id, description1, 1);
-    TestPieceTableChange* change2 = new TestPieceTableChange(type2Id, description2, 2);
-    TestPieceTableChange* change3 = new TestPieceTableChange(type3Id, description3, 3);
-    TestPieceTableChange* change4 = new TestPieceTableChange(type4Id, description4, 4);
+    auto change1 = std::make_unique<TestPieceTableChange>(type1Id, description1, 1);
+    auto change2 = std::make_unique<TestPieceTableChange>(type2Id, description2, 2);
+    auto change3 = std::make_unique<TestPieceTableChange>(type3Id, description3, 3);
+    auto change4 = std::make_unique<TestPieceTableChange>(type4Id, description4, 4);
     Okteta::ArrayChangeMetrics changeMetrics1 = change1->metrics();
     Okteta::ArrayChangeMetrics changeMetrics2 = change2->metrics();
     Okteta::ArrayChangeMetrics changeMetrics3 = change3->metrics();
@@ -122,10 +122,10 @@ void GroupPieceTableChangeTest::testRevertBeforeChange()
     Okteta::ArrayChangeMetrics revertedChangeMetrics3 = change3->metrics(); revertedChangeMetrics3.revert();
     Okteta::ArrayChangeMetrics revertedChangeMetrics4 = change4->metrics(); revertedChangeMetrics4.revert();
 
-    bool result = groupPieceTableChange.appendChange(change1);
-    result = groupPieceTableChange.appendChange(change2);
-    result = groupPieceTableChange.appendChange(change3);
-    result = groupPieceTableChange.appendChange(change4);
+    bool result = groupPieceTableChange.appendChange(std::move(change1));
+    result = groupPieceTableChange.appendChange(std::move(change2));
+    result = groupPieceTableChange.appendChange(std::move(change3));
+    result = groupPieceTableChange.appendChange(std::move(change4));
 
     // revert before first change
     SectionList changedSectionList;

@@ -21,6 +21,8 @@ namespace KPieceTable {
 static constexpr Size BaseSize = 100;
 static constexpr Address ChangeStorageOffset = 23;
 
+AbstractPieceTableChangeIfTest::~AbstractPieceTableChangeIfTest() = default;
+
 //---------------------------------------------------------------- Tests -----
 
 void AbstractPieceTableChangeIfTest::init()
@@ -30,7 +32,7 @@ void AbstractPieceTableChangeIfTest::init()
 
 void AbstractPieceTableChangeIfTest::cleanup()
 {
-    deletePieceTableChange(mPieceTableChange);
+    deletePieceTableChange(std::move(mPieceTableChange));
 }
 
 //---------------------------------------------------------------- Tests -----

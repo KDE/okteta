@@ -37,18 +37,18 @@ bool RevertablePieceTable::insert(Address dataOffset, Size length, Address* stor
 
     mPieceTable.insert(dataOffset, length, *storageOffset);
 
-    auto* change = new InsertPieceTableChange(dataOffset, length, *storageOffset);
+    auto change = std::make_unique<InsertPieceTableChange>(dataOffset, length, *storageOffset);
 
-    return mChangeHistory.appendChange(change);
+    return mChangeHistory.appendChange(std::move(change));
 }
 
 bool RevertablePieceTable::remove(const AddressRange& removeRange)
 {
     const PieceList removedPieces = mPieceTable.remove(removeRange);
 
-    auto* change = new RemovePieceTableChange(removeRange, removedPieces);
+    auto change = std::make_unique<RemovePieceTableChange>(removeRange, removedPieces);
 
-    return mChangeHistory.appendChange(change);
+    return mChangeHistory.appendChange(std::move(change));
 }
 
 bool RevertablePieceTable::replace(const AddressRange& removeRange, Size insertLength, Size* storageSize)
@@ -58,18 +58,18 @@ bool RevertablePieceTable::replace(const AddressRange& removeRange, Size insertL
     const PieceList replacedPieces = mPieceTable.remove(removeRange);
     mPieceTable.insert(removeRange.start(), insertLength, *storageSize);
 
-    auto* change = new ReplacePieceTableChange(removeRange, insertLength, *storageSize, replacedPieces);
+    auto change = std::make_unique<ReplacePieceTableChange>(removeRange, insertLength, *storageSize, replacedPieces);
 
-    return mChangeHistory.appendChange(change);
+    return mChangeHistory.appendChange(std::move(change));
 }
 
 bool RevertablePieceTable::swap(Address firstStart, const AddressRange& secondRange)
 {
     mPieceTable.swap(firstStart, secondRange);
 
-    auto* change = new SwapRangesPieceTableChange(firstStart, secondRange);
+    auto change = std::make_unique<SwapRangesPieceTableChange>(firstStart, secondRange);
 
-    return mChangeHistory.appendChange(change);
+    return mChangeHistory.appendChange(std::move(change));
 }
 
 bool RevertablePieceTable::replaceOne(Address dataOffset, Size* storageSize)
@@ -79,10 +79,10 @@ bool RevertablePieceTable::replaceOne(Address dataOffset, Size* storageSize)
     const Piece replacedPiece = mPieceTable.replaceOne(dataOffset, *storageSize);
     const PieceList replacedPieces(replacedPiece);
 
-    auto* change =
-        new ReplacePieceTableChange(AddressRange::fromWidth(dataOffset, 1), 1, *storageSize, replacedPieces);
+    auto change =
+        std::make_unique<ReplacePieceTableChange>(AddressRange::fromWidth(dataOffset, 1), 1, *storageSize, replacedPieces);
 
-    return mChangeHistory.appendChange(change);
+    return mChangeHistory.appendChange(std::move(change));
 }
 
 }

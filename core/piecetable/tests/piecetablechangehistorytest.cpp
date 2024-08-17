@@ -41,13 +41,13 @@ void PieceTableChangeHistoryTest::testAppendChange()
     const QString description2 = QStringLiteral("2");
     const QString description3 = QStringLiteral("3");
     const QString description4 = QStringLiteral("4");
-    auto* change1 = new TestPieceTableChange(type1Id, description1);
-    auto* change2 = new TestPieceTableChange(type2Id, description2);
-    auto* change3 = new TestPieceTableChange(type3Id, description3);
-    auto* change4 = new TestPieceTableChange(type4Id, description4);
+    auto change1 = std::make_unique<TestPieceTableChange>(type1Id, description1);
+    auto change2 = std::make_unique<TestPieceTableChange>(type2Id, description2);
+    auto change3 = std::make_unique<TestPieceTableChange>(type3Id, description3);
+    auto change4 = std::make_unique<TestPieceTableChange>(type4Id, description4);
 
     // adding first
-    bool result = pieceTableChangeHistory.appendChange(change1);
+    bool result = pieceTableChangeHistory.appendChange(std::move(change1));
 
     QVERIFY(result);
     QCOMPARE(pieceTableChangeHistory.count(), 1);
@@ -56,7 +56,7 @@ void PieceTableChangeHistoryTest::testAppendChange()
     QCOMPARE(pieceTableChangeHistory.changeDescription(0), description1);
 
     // adding first
-    result = pieceTableChangeHistory.appendChange(change2);
+    result = pieceTableChangeHistory.appendChange(std::move(change2));
 
     QVERIFY(result);
     QCOMPARE(pieceTableChangeHistory.count(), 2);
@@ -66,7 +66,7 @@ void PieceTableChangeHistoryTest::testAppendChange()
     QCOMPARE(pieceTableChangeHistory.changeDescription(1), description2);
 
     // adding third which should be merged
-    result = pieceTableChangeHistory.appendChange(change3);
+    result = pieceTableChangeHistory.appendChange(std::move(change3));
 
     QVERIFY(!result);
     QCOMPARE(pieceTableChangeHistory.count(), 2);
@@ -77,7 +77,7 @@ void PieceTableChangeHistoryTest::testAppendChange()
 
     // adding third which should not be merged as we call finishChange before
     pieceTableChangeHistory.finishChange();
-    result = pieceTableChangeHistory.appendChange(change4);
+    result = pieceTableChangeHistory.appendChange(std::move(change4));
 
     QVERIFY(result);
     QCOMPARE(pieceTableChangeHistory.count(), 3);
@@ -102,10 +102,10 @@ void PieceTableChangeHistoryTest::testRevertBeforeChange()
     const QString description2 = QStringLiteral("2");
     const QString description3 = QStringLiteral("3");
     const QString description4 = QStringLiteral("4");
-    auto* change1 = new TestPieceTableChange(type1Id, description1, 1);
-    auto* change2 = new TestPieceTableChange(type2Id, description2, 2);
-    auto* change3 = new TestPieceTableChange(type3Id, description3, 3);
-    auto* change4 = new TestPieceTableChange(type4Id, description4, 4);
+    auto change1 = std::make_unique<TestPieceTableChange>(type1Id, description1, 1);
+    auto change2 = std::make_unique<TestPieceTableChange>(type2Id, description2, 2);
+    auto change3 = std::make_unique<TestPieceTableChange>(type3Id, description3, 3);
+    auto change4 = std::make_unique<TestPieceTableChange>(type4Id, description4, 4);
     ArrayChangeMetrics changeMetrics1 = change1->metrics();
     ArrayChangeMetrics changeMetrics2 = change2->metrics();
     ArrayChangeMetrics changeMetrics3 = change3->metrics();
@@ -115,10 +115,10 @@ void PieceTableChangeHistoryTest::testRevertBeforeChange()
     ArrayChangeMetrics revertedChangeMetrics3 = change3->metrics(); revertedChangeMetrics3.revert();
     ArrayChangeMetrics revertedChangeMetrics4 = change4->metrics(); revertedChangeMetrics4.revert();
 
-    bool result = pieceTableChangeHistory.appendChange(change1);
-    result = pieceTableChangeHistory.appendChange(change2);
-    result = pieceTableChangeHistory.appendChange(change3);
-    result = pieceTableChangeHistory.appendChange(change4);
+    bool result = pieceTableChangeHistory.appendChange(std::move(change1));
+    result = pieceTableChangeHistory.appendChange(std::move(change2));
+    result = pieceTableChangeHistory.appendChange(std::move(change3));
+    result = pieceTableChangeHistory.appendChange(std::move(change4));
 
     // revert before first change
     AddressRangeList changedSectionList;
