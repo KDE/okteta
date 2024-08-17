@@ -146,23 +146,26 @@ QString TextCharCodec::nameOfEncoding( CharCoding _char )
 }
  */
 
-TextCharCodec* TextCharCodec::createLocalCodec()
+std::unique_ptr<TextCharCodec> TextCharCodec::createLocalCodec()
 {
     QTextCodec* codec = QTextCodec::codecForLocale();
     if (!is8Bit(codec)) {
         codec = createLatin1();
     }
-    return new TextCharCodec(codec);
+    return std::make_unique<TextCharCodec>(codec, ConstructorTag());
 }
 
-TextCharCodec* TextCharCodec::createCodec(const QString& codecName)
+std::unique_ptr<TextCharCodec> TextCharCodec::createCodec(const QString& codecName)
 {
     bool isOk = false;
     QTextCodec* codec = QTextCodec::codecForName(codecName.toLatin1());
     if (codec) {
         isOk = is8Bit(codec);
     }
-    return isOk ? new TextCharCodec(codec) : nullptr;
+    if (!isOk) {
+        return {};
+    }
+    return std::make_unique<TextCharCodec>(codec, ConstructorTag());
 }
 
 const QStringList& TextCharCodec::codecNames()
@@ -182,7 +185,7 @@ const QStringList& TextCharCodec::codecNames()
     return textCodecNames;
 }
 
-TextCharCodec::TextCharCodec(QTextCodec* textCodec)
+TextCharCodec::TextCharCodec(QTextCodec* textCodec, TextCharCodec::ConstructorTag)
     : mCodec(textCodec)
     , mDecoder(textCodec->makeDecoder())
     , mEncoder(textCodec->makeEncoder())

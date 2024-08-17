@@ -32,12 +32,10 @@ void CharCodecTest::testCreateCodec()
 {
     QFETCH(QString, codecName);
 
-    CharCodec* codec = CharCodec::createCodec(codecName);
+    auto codec = CharCodec::createCodec(codecName);
 
     QVERIFY(codec != nullptr);
     QCOMPARE(codec->name(), codecName);
-
-    delete codec;
 }
 
 void CharCodecTest::testEncodeDecode_data()
@@ -58,7 +56,7 @@ void CharCodecTest::testEncodeDecode()
     QFETCH(QString, codecName);
     QFETCH(int, byteValue);
 
-    CharCodec* codec = CharCodec::createCodec(codecName);
+    auto codec = CharCodec::createCodec(codecName);
 
     // current assumption: the mapping of chars to byte values is biunique for all used charsets
     const Byte byte = Byte(byteValue);
@@ -71,8 +69,6 @@ void CharCodecTest::testEncodeDecode()
         QVERIFY(encodeSuccess);
         QCOMPARE(encodedByte, byte);
     }
-
-    delete codec;
 }
 
 }

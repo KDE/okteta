@@ -52,7 +52,7 @@ ByteArrayFrameRenderer::ByteArrayFrameRenderer()
     // set codecs
     mValueCodec.reset(Okteta::ValueCodec::createCodec((Okteta::ValueCoding)DefaultValueCoding));
     mValueCoding = DefaultValueCoding;
-    mCharCodec.reset(Okteta::CharCodec::createCodec(DefaultCharCoding()));
+    mCharCodec = Okteta::CharCodec::createCodec(DefaultCharCoding());
 
     // creating the columns in the needed order
     mOffsetColumnRenderer =
@@ -285,12 +285,12 @@ void ByteArrayFrameRenderer::setCharCoding(const QString& newCharCodingName)
         return;
     }
 
-    const Okteta::CharCodec* newCharCodec = Okteta::CharCodec::createCodec(newCharCodingName);
+    auto newCharCodec = Okteta::CharCodec::createCodec(newCharCodingName);
     if (!newCharCodec) {
         return;
     }
 
-    mCharCodec.reset(newCharCodec);
+    mCharCodec = std::move(newCharCodec);
 
     mValueColumnRenderer->setCharCodec(mCharCodec.get());
     mCharColumnRenderer->setCharCodec(mCharCodec.get());

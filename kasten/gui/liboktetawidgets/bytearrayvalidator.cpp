@@ -30,7 +30,7 @@ void ByteArrayValidator::setCharCodec(const QString& charCodecName)
         return;
     }
 
-    mCharCodec.reset(CharCodec::createCodec(charCodecName));
+    mCharCodec = CharCodec::createCodec(charCodecName);
 }
 
 void ByteArrayValidator::setCodec(Coding codecId)

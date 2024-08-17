@@ -83,7 +83,7 @@ void ByteTableModel::setCharCodec(const QString& codecName)
         return;
     }
 
-    mCharCodec.reset(Okteta::CharCodec::createCodec(codecName));
+    mCharCodec = Okteta::CharCodec::createCodec(codecName);
 
     Q_EMIT dataChanged(index(0, CharacterId), index(ByteSetSize - 1, CharacterId));
 }

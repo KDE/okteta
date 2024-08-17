@@ -30,24 +30,21 @@ void TextCharCodecTest::testCreateCodec()
 {
     QFETCH(QString, codecName);
 
-    CharCodec* codec = TextCharCodec::createCodec(codecName);
+    auto codec = TextCharCodec::createCodec(codecName);
 
     QVERIFY(codec != nullptr);
     QCOMPARE(codec->name(), codecName);
-
-    delete codec;
 }
 
 void TextCharCodecTest::testCreateLocalCodec()
 {
-    TextCharCodec* codec = TextCharCodec::createLocalCodec();
+    auto codec = TextCharCodec::createLocalCodec();
     QVERIFY(codec != nullptr);
-    delete codec;
 }
 
 void TextCharCodecTest::testCreateNonexistingCodec()
 {
-    TextCharCodec* codec = TextCharCodec::createCodec(QStringLiteral("NonexistingCode"));
+    auto codec = TextCharCodec::createCodec(QStringLiteral("NonexistingCode"));
     QVERIFY(codec == nullptr);
 }
 

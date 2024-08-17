@@ -17,12 +17,16 @@ namespace Okteta {
 //
 class USASCIICharCodec : public CharCodec
 {
+    struct ConstructorTag
+    {
+        ConstructorTag() {}
+        ConstructorTag(const ConstructorTag&) = default;
+    };
+
 public:
+    explicit USASCIICharCodec(ConstructorTag);
     USASCIICharCodec(const USASCIICharCodec&) = delete;
     USASCIICharCodec& operator=(const USASCIICharCodec&) = delete;
-
-protected:
-    USASCIICharCodec();
 
 public: // CharCodec API
     Character decode(Byte byte) const override;
@@ -31,13 +35,13 @@ public: // CharCodec API
     QString name() const override;
 
 public:
-    static USASCIICharCodec* create();
+    static std::unique_ptr<USASCIICharCodec> create();
     static const QString& codecName();
 };
 
-inline USASCIICharCodec::USASCIICharCodec() = default;
+inline USASCIICharCodec::USASCIICharCodec(USASCIICharCodec::ConstructorTag) {}
 
-inline USASCIICharCodec* USASCIICharCodec::create() { return new USASCIICharCodec(); }
+inline std::unique_ptr<USASCIICharCodec> USASCIICharCodec::create() { return std::make_unique<USASCIICharCodec>(ConstructorTag()); }
 
 }
 

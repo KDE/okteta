@@ -13,6 +13,8 @@
 #include "oktetacore_export.hpp"
 #include "oktetacore.hpp"
 #include "byte.hpp"
+// Std
+#include <memory>
 
 class QStringList;
 class QString;
@@ -31,8 +33,8 @@ public:
     /**
      * If @p name is empty, creates a system-local 8-bit char codec
      */
-    static CharCodec* createCodec(const QString& name);
-    static CharCodec* createCodecForLocale();
+    static std::unique_ptr<CharCodec> createCodec(const QString& name);
+    static std::unique_ptr<CharCodec> createCodecForLocale();
 
     static QStringList codecNames();
 

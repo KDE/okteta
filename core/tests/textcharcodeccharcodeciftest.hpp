@@ -19,8 +19,8 @@ class TextCharCodecCharCodecIfTest : public CharCodecIfTest
     Q_OBJECT
 
 protected: // CharCodecIfTest API
-    CharCodec* createCodec() override;
-    void deleteCodec(CharCodec* codec) override;
+    std::unique_ptr<CharCodec> createCodec() override;
+    void deleteCodec(std::unique_ptr<CharCodec>&& codec) override;
 };
 
 }

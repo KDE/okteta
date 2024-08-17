@@ -15,15 +15,15 @@
 
 namespace Okteta {
 
-CharCodec* TextCharCodecCharCodecIfTest::createCodec()
+std::unique_ptr<CharCodec> TextCharCodecCharCodecIfTest::createCodec()
 {
     return TextCharCodec::createCodec(QStringLiteral("ISO8859-1"));
     // TODO: test for some more, e.g. KOI8-R
 }
 
-void TextCharCodecCharCodecIfTest::deleteCodec(CharCodec* codec)
+void TextCharCodecCharCodecIfTest::deleteCodec(std::unique_ptr<CharCodec>&& codec)
 {
-    delete codec;
+    Q_UNUSED(codec)
 }
 
 }

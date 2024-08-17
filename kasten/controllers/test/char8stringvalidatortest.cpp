@@ -77,12 +77,12 @@ void Char8StringValidatorTest::testValidate()
     QFETCH(const QValidator::State, expectedValidateResult);
     QFETCH(QChar, expectedParseResult);
 
-    Okteta::CharCodec* codec = Okteta::CharCodec::createCodec(codecName);
+    auto codec = Okteta::CharCodec::createCodec(codecName);
 
     QVERIFY(codec != nullptr);
     QCOMPARE(codec->name(), codecName);
 
-    Okteta::Char8StringParser parser(codec);
+    Okteta::Char8StringParser parser(codec.get());
     Okteta::Char8StringValidator validator(&parser);
 
     int dummyCursorPos = 0;
@@ -98,9 +98,6 @@ void Char8StringValidatorTest::testValidate()
 
         QCOMPARE(parseResult, expectedParseResult);
     }
-
-    // clean up
-    delete codec;
 }
 
 QTEST_GUILESS_MAIN(Char8StringValidatorTest)

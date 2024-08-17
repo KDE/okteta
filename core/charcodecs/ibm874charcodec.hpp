@@ -17,12 +17,16 @@ namespace Okteta {
 // Qt using ICU maps this onto TIS-620, which is not 100 % correct
 class IBM874CharCodec : public CharCodec
 {
+    struct ConstructorTag
+    {
+        ConstructorTag() {}
+        ConstructorTag(const ConstructorTag&) = default;
+    };
+
 public:
+    explicit IBM874CharCodec(ConstructorTag);
     IBM874CharCodec(const IBM874CharCodec&) = delete;
     IBM874CharCodec& operator=(const IBM874CharCodec&) = delete;
-
-protected:
-    IBM874CharCodec();
 
 public: // CharCodec API
     Character decode(Byte byte) const override;
@@ -31,13 +35,13 @@ public: // CharCodec API
     QString name() const override;
 
 public:
-    static IBM874CharCodec* create();
+    static std::unique_ptr<IBM874CharCodec> create();
     static const QString& codecName();
 };
 
-inline IBM874CharCodec::IBM874CharCodec() = default;
+inline IBM874CharCodec::IBM874CharCodec(IBM874CharCodec::ConstructorTag) {}
 
-inline IBM874CharCodec* IBM874CharCodec::create() { return new IBM874CharCodec(); }
+inline std::unique_ptr<IBM874CharCodec> IBM874CharCodec::create() { return std::make_unique<IBM874CharCodec>(ConstructorTag()); }
 
 }
 

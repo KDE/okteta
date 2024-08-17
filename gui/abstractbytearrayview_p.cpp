@@ -201,7 +201,7 @@ void AbstractByteArrayViewPrivate::init()
 
     mValueCodec.reset(ValueCodec::createCodec((ValueCoding)DefaultValueCoding));
     mValueCoding = DefaultValueCoding;
-    mCharCodec.reset(CharCodec::createCodec(DefaultCharCoding()));
+    mCharCodec = CharCodec::createCodec(DefaultCharCoding());
 
     mTabController = new TabController(q, nullptr);
     mUndoRedoController = new UndoRedoController(q, mTabController);
@@ -620,13 +620,12 @@ void AbstractByteArrayViewPrivate::setCharCoding(const QString& charCodingName)
         return;
     }
 
-    const CharCodec* newCharCodec =
-        CharCodec::createCodec(charCodingName);
+    auto newCharCodec = CharCodec::createCodec(charCodingName);
     if (!newCharCodec) {
         return;
     }
 
-    mCharCodec.reset(newCharCodec);
+    mCharCodec = std::move(newCharCodec);
 }
 
 void AbstractByteArrayViewPrivate::setMarking(const AddressRange& _marking)

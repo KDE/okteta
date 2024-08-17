@@ -11,6 +11,8 @@
 
 // Qt
 #include <QObject>
+// Std
+#include <memory>
 
 namespace Okteta {
 class CharCodec;
@@ -23,8 +25,8 @@ protected:
     CharCodecIfTest();
 
 protected: // API to be implemented
-    virtual CharCodec* createCodec() = 0;
-    virtual void deleteCodec(CharCodec* codec) = 0;
+    virtual std::unique_ptr<CharCodec> createCodec() = 0;
+    virtual void deleteCodec(std::unique_ptr<CharCodec>&& codec) = 0;
 
 private Q_SLOTS: // test functions
     void init();
@@ -34,8 +36,8 @@ private Q_SLOTS: // test functions
     void testEncodeDecode();
 
 private:
-    /** pointer to the buffer to test */
-    CharCodec* mCharCodec = nullptr;
+    /** the codec to test */
+    std::unique_ptr<CharCodec> mCharCodec;
 };
 
 inline CharCodecIfTest::CharCodecIfTest() = default;

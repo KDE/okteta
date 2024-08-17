@@ -35,9 +35,9 @@ QStringList CharCodec::codecNames()
     return codecNames;
 }
 
-CharCodec* CharCodec::createCodec(const QString& name)
+std::unique_ptr<CharCodec> CharCodec::createCodec(const QString& name)
 {
-    CharCodec* result;
+    std::unique_ptr<CharCodec> result;
 
     if (TextCharCodec::codecNames().indexOf(name) != -1) {
         result = TextCharCodec::createCodec(name);
@@ -61,7 +61,7 @@ CharCodec* CharCodec::createCodec(const QString& name)
     return result;
 }
 
-CharCodec* CharCodec::createCodecForLocale()
+std::unique_ptr<CharCodec> CharCodec::createCodecForLocale()
 {
     return TextCharCodec::createLocalCodec();
 }

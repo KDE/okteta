@@ -17,12 +17,16 @@ namespace Okteta {
 //
 class JISX0201CharCodec : public CharCodec
 {
+    struct ConstructorTag
+    {
+        ConstructorTag() {}
+        ConstructorTag(const ConstructorTag&) = default;
+    };
+
 public:
+    explicit JISX0201CharCodec(ConstructorTag);
     JISX0201CharCodec(const JISX0201CharCodec&) = delete;
     JISX0201CharCodec& operator=(const JISX0201CharCodec&) = delete;
-
-protected:
-    JISX0201CharCodec();
 
 public: // CharCodec API
     Character decode(Byte byte) const override;
@@ -31,13 +35,13 @@ public: // CharCodec API
     QString name() const override;
 
 public:
-    static JISX0201CharCodec* create();
+    static std::unique_ptr<JISX0201CharCodec> create();
     static const QString& codecName();
 };
 
-inline JISX0201CharCodec::JISX0201CharCodec() = default;
+inline JISX0201CharCodec::JISX0201CharCodec(JISX0201CharCodec::ConstructorTag) {}
 
-inline JISX0201CharCodec* JISX0201CharCodec::create() { return new JISX0201CharCodec(); }
+inline std::unique_ptr<JISX0201CharCodec> JISX0201CharCodec::create() { return std::make_unique<JISX0201CharCodec>(ConstructorTag()); }
 
 }
 

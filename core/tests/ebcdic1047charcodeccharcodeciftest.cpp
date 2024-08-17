@@ -15,14 +15,14 @@
 
 namespace Okteta {
 
-CharCodec* EBCDIC1047CharCodecCharCodecIfTest::createCodec()
+std::unique_ptr<CharCodec> EBCDIC1047CharCodecCharCodecIfTest::createCodec()
 {
     return EBCDIC1047CharCodec::create();
 }
 
-void EBCDIC1047CharCodecCharCodecIfTest::deleteCodec(CharCodec* codec)
+void EBCDIC1047CharCodecCharCodecIfTest::deleteCodec(std::unique_ptr<CharCodec>&& codec)
 {
-    delete codec;
+    Q_UNUSED(codec)
 }
 
 }

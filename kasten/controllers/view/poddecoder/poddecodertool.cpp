@@ -192,7 +192,7 @@ void PODDecoderTool::onCharCodecChange(const QString& codecName)
         return;
     }
 
-    mCharCodec.reset(Okteta::CharCodec::createCodec(codecName));
+    mCharCodec = Okteta::CharCodec::createCodec(codecName);
     static_cast<Okteta::Char8Codec*>(mTypeCodecs[Char8BitId].get())->setCharCodec(mCharCodec.get());
     updateData();
 }

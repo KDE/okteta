@@ -25,20 +25,24 @@ namespace Okteta {
 // used by all codecs with full char coping, i.e. there are no undefined chars
 class TextCharCodec : public CharCodec
 {
+    struct ConstructorTag
+    {
+        ConstructorTag() {}
+        ConstructorTag(const ConstructorTag&) = default;
+    };
+
 public:
-    static TextCharCodec* createCodec(const QString& codecName);
-    static TextCharCodec* createLocalCodec();
+    static std::unique_ptr<TextCharCodec> createCodec(const QString& codecName);
+    static std::unique_ptr<TextCharCodec> createLocalCodec();
 
     static const QStringList& codecNames();
 
 public:
+    explicit TextCharCodec(QTextCodec* textCodec, ConstructorTag);
     TextCharCodec(const TextCharCodec&) = delete;
     ~TextCharCodec() override;
 
     TextCharCodec& operator=(const TextCharCodec&) = delete;
-
-protected:
-    explicit TextCharCodec(QTextCodec* textCodec);
 
 public: // CharCodec API
     Character decode(Byte byte) const override;

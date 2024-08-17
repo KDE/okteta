@@ -24,7 +24,7 @@ void CharCodecIfTest::init()
 
 void CharCodecIfTest::cleanup()
 {
-    deleteCodec(mCharCodec);
+    deleteCodec(std::move(mCharCodec));
 }
 
 void CharCodecIfTest::testEncodeDecode_data()
