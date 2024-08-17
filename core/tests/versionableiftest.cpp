@@ -25,19 +25,19 @@ void VersionableIfTest::init()
 {
     mObject = createVersionable();
 
-    mVersionableControl = qobject_cast<Okteta::Versionable*>(mObject);
+    mVersionableControl = qobject_cast<Okteta::Versionable*>(mObject.get());
 
     mRevertedToVersionIndexSpy =
-        std::make_unique<QSignalSpy>(mObject, SIGNAL(revertedToVersionIndex(int)));
+        std::make_unique<QSignalSpy>(mObject.get(), SIGNAL(revertedToVersionIndex(int)));
     mHeadVersionDescriptionChangedSpy =
-        std::make_unique<QSignalSpy>(mObject, SIGNAL(headVersionDescriptionChanged(QString)));
+        std::make_unique<QSignalSpy>(mObject.get(), SIGNAL(headVersionDescriptionChanged(QString)));
     mHeadVersionChangedSpy =
-        std::make_unique<QSignalSpy>(mObject, SIGNAL(headVersionChanged(int)));
+        std::make_unique<QSignalSpy>(mObject.get(), SIGNAL(headVersionChanged(int)));
 }
 
 void VersionableIfTest::cleanup()
 {
-    deleteVersionable(mObject);
+    deleteVersionable(std::move(mObject));
 
     mRevertedToVersionIndexSpy.reset();
     mHeadVersionDescriptionChangedSpy.reset();

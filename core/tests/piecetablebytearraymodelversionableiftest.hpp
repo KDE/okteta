@@ -19,8 +19,8 @@ class PieceTableByteArrayModelVersionableIfTest : public VersionableIfTest
     Q_OBJECT
 
 protected: // VersionableIfTest API
-    QObject* createVersionable() override;
-    void deleteVersionable(QObject* versionable) override;
+    std::unique_ptr<QObject> createVersionable() override;
+    void deleteVersionable(std::unique_ptr<QObject>&& versionable) override;
 };
 
 }

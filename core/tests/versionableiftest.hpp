@@ -31,8 +31,8 @@ protected:
     VersionableIfTest();
 
 protected: // our API
-    virtual QObject* createVersionable() = 0;
-    virtual void deleteVersionable(QObject* versionable) = 0;
+    virtual std::unique_ptr<QObject> createVersionable() = 0;
+    virtual void deleteVersionable(std::unique_ptr<QObject>&& versionable) = 0;
 
 private:
     void checkRevertedToVersionIndex(int versionIndex);
@@ -47,8 +47,8 @@ private Q_SLOTS: // test functions
     void testBegin();
 
 private: // used in all tests
-    /** pointer to the class to test */
-    QObject* mObject = nullptr;
+    /** the object to test */
+    std::unique_ptr<QObject> mObject;
     Versionable* mVersionableControl = nullptr;
 
     std::unique_ptr<QSignalSpy> mRevertedToVersionIndexSpy;

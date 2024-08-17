@@ -17,17 +17,17 @@ namespace Okteta {
 
 static constexpr Size ByteArrayModelSize = 60;
 
-QObject* PieceTableByteArrayModelVersionableIfTest::createVersionable()
+std::unique_ptr<QObject> PieceTableByteArrayModelVersionableIfTest::createVersionable()
 {
-    auto* byteArrayModel = new PieceTableByteArrayModel(ByteArrayModelSize);
+    auto byteArrayModel = std::make_unique<PieceTableByteArrayModel>(ByteArrayModelSize);
     byteArrayModel->setReadOnly(false);
 
     return byteArrayModel;
 }
 
-void PieceTableByteArrayModelVersionableIfTest::deleteVersionable(QObject* versionable)
+void PieceTableByteArrayModelVersionableIfTest::deleteVersionable(std::unique_ptr<QObject>&& versionable)
 {
-    delete versionable;
+    Q_UNUSED(versionable)
 }
 
 }
