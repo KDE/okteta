@@ -39,7 +39,7 @@ void AddressValidator::setCodec(Coding codecId)
 
     mCodecId = codecId;
 
-    mValueCodec.reset(ValueCodec::createCodec((Okteta::ValueCoding)mCodecId));
+    mValueCodec = ValueCodec::createCodec((Okteta::ValueCoding)mCodecId);
 }
 
 const QRegularExpression AddressValidator::expressionRegex =

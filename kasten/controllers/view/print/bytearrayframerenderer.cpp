@@ -50,7 +50,7 @@ ByteArrayFrameRenderer::ByteArrayFrameRenderer()
     mLayout->setNoOfLinesPerPage(noOfLinesPerFrame());
 
     // set codecs
-    mValueCodec.reset(Okteta::ValueCodec::createCodec((Okteta::ValueCoding)DefaultValueCoding));
+    mValueCodec = Okteta::ValueCodec::createCodec((Okteta::ValueCoding)DefaultValueCoding);
     mValueCoding = DefaultValueCoding;
     mCharCodec = Okteta::CharCodec::createCodec(DefaultCharCoding());
 
@@ -260,13 +260,12 @@ void ByteArrayFrameRenderer::setValueCoding(Okteta::ValueCoding valueCoding)
 
     const uint oldCodingWidth = mValueCodec->encodingWidth();
 
-    const Okteta::ValueCodec* newValueCodec =
-        Okteta::ValueCodec::createCodec(valueCoding);
+    auto newValueCodec = Okteta::ValueCodec::createCodec(valueCoding);
     if (!newValueCodec) {
         return;
     }
 
-    mValueCodec.reset(newValueCodec);
+    mValueCodec = std::move(newValueCodec);
     mValueCoding = valueCoding;
 
     mValueColumnRenderer->setValueCodec((Okteta::ValueCoding)mValueCoding, mValueCodec.get());

@@ -53,12 +53,10 @@ void ValueCodecTest::testCreateCodec()
     QFETCH(int, codecId);
     QFETCH(uint, encodingWidth);
 
-    ValueCodec* codec = ValueCodec::createCodec((ValueCoding)codecId);
+    auto codec = ValueCodec::createCodec((ValueCoding)codecId);
 
     QVERIFY(codec != nullptr);
     QCOMPARE(codec->encodingWidth(), encodingWidth);
-
-    delete codec;
 }
 
 void ValueCodecTest::testEncodeDecode_data()
@@ -84,7 +82,7 @@ void ValueCodecTest::testEncodeDecode()
     QFETCH(int, codecId);
     QFETCH(Byte, byte);
 
-    ValueCodec* codec = ValueCodec::createCodec((ValueCoding)codecId);
+    auto codec = ValueCodec::createCodec((ValueCoding)codecId);
 
     QString digits;
     codec->encode(&digits, 0, byte);
@@ -94,8 +92,6 @@ void ValueCodecTest::testEncodeDecode()
     const int usedDigits = codec->decode(&decodedByte, digits, 0);
     QCOMPARE(usedDigits, digits.length());
     QCOMPARE(decodedByte, byte);
-
-    delete codec;
 }
 
 void ValueCodecTest::testEncodeShortDecode_data()
@@ -121,7 +117,7 @@ void ValueCodecTest::testEncodeShortDecode()
     QFETCH(int, codecId);
     QFETCH(Byte, byte);
 
-    ValueCodec* codec = ValueCodec::createCodec((ValueCoding)codecId);
+    auto codec = ValueCodec::createCodec((ValueCoding)codecId);
 
     QString digits;
     codec->encodeShort(&digits, 0, byte);
@@ -132,8 +128,6 @@ void ValueCodecTest::testEncodeShortDecode()
     const int usedDigits = codec->decode(&decodedByte, digits, 0);
     QCOMPARE(usedDigits, digits.length());
     QCOMPARE(decodedByte, byte);
-
-    delete codec;
 }
 
 void ValueCodecTest::testAppendDigit_data()
@@ -159,7 +153,7 @@ void ValueCodecTest::testAppendDigit()
     QFETCH(int, codecId);
     QFETCH(Byte, byte);
 
-    ValueCodec* codec = ValueCodec::createCodec((ValueCoding)codecId);
+    auto codec = ValueCodec::createCodec((ValueCoding)codecId);
 
     QString digits;
     codec->encode(&digits, 0, byte);
@@ -170,8 +164,6 @@ void ValueCodecTest::testAppendDigit()
     }
 
     QCOMPARE(decodedByte, byte);
-
-    delete codec;
 }
 
 void ValueCodecTest::testRemoveLastDigit_data()
@@ -202,7 +194,7 @@ void ValueCodecTest::testRemoveLastDigit()
     QFETCH(Byte, byte);
     QFETCH(uint, removedDigitCount);
 
-    ValueCodec* codec = ValueCodec::createCodec((ValueCoding)codecId);
+    auto codec = ValueCodec::createCodec((ValueCoding)codecId);
 
     QString digits;
     codec->encode(&digits, 0, byte);
@@ -217,8 +209,6 @@ void ValueCodecTest::testRemoveLastDigit()
 
     QVERIFY(digits.startsWith(modifiedDigits.mid(removedDigitCount)));
     QVERIFY(modifiedDigits.startsWith(QString(removedDigitCount, QLatin1Char('0'))));
-
-    delete codec;
 }
 
 void ValueCodecTest::testIsValidDigit_data()
@@ -260,11 +250,9 @@ void ValueCodecTest::testIsValidDigit()
     QFETCH(uchar, digit);
     QFETCH(bool, isValid);
 
-    ValueCodec* codec = ValueCodec::createCodec((ValueCoding)codecId);
+    auto codec = ValueCodec::createCodec((ValueCoding)codecId);
 
     QCOMPARE(codec->isValidDigit(digit), isValid);
-
-    delete codec;
 }
 
 }

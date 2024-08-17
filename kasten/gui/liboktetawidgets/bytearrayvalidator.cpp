@@ -43,7 +43,7 @@ void ByteArrayValidator::setCodec(Coding codecId)
 
     if (mCodecId != CharCoding
         && mCodecId != Utf8Coding) {
-        mValueCodec.reset(ValueCodec::createCodec((Okteta::ValueCoding)mCodecId));
+        mValueCodec = ValueCodec::createCodec((Okteta::ValueCoding)mCodecId);
     }
 }
 

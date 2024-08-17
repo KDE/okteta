@@ -85,7 +85,7 @@ void StatisticTableModel::setValueCoding(int valueCoding)
     }
 
     mValueCoding = (Okteta::ValueCoding)valueCoding;
-    mValueCodec.reset(Okteta::ValueCodec::createCodec(mValueCoding));
+    mValueCodec = Okteta::ValueCodec::createCodec(mValueCoding);
 //     CodedByte.resize( ByteCodec->encodingWidth() );
 
     Q_EMIT dataChanged(index(0, ValueId), index(StatisticsByteSetSize - 1, ValueId));

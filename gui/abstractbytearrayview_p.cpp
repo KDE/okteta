@@ -199,7 +199,7 @@ void AbstractByteArrayViewPrivate::init()
     mOffsetBorderColumn =
         new BorderColumnRenderer(mStylist, false);
 
-    mValueCodec.reset(ValueCodec::createCodec((ValueCoding)DefaultValueCoding));
+    mValueCodec = ValueCodec::createCodec((ValueCoding)DefaultValueCoding);
     mValueCoding = DefaultValueCoding;
     mCharCodec = CharCodec::createCodec(DefaultCharCoding());
 
@@ -605,13 +605,12 @@ void AbstractByteArrayViewPrivate::setValueCoding(AbstractByteArrayView::ValueCo
         return;
     }
 
-    const ValueCodec* newValueCodec
-        = ValueCodec::createCodec((ValueCoding)valueCoding);
+    auto newValueCodec = ValueCodec::createCodec((ValueCoding)valueCoding);
     if (!newValueCodec) {
         return;
     }
 
-    mValueCodec.reset(newValueCodec);
+    mValueCodec = std::move(newValueCodec);
     mValueCoding = valueCoding;
 }
 void AbstractByteArrayViewPrivate::setCharCoding(const QString& charCodingName)

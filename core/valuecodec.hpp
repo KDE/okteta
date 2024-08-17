@@ -13,6 +13,8 @@
 #include "oktetacore.hpp"
 #include "oktetacore_export.hpp"
 #include "byte.hpp"
+// Std
+#include <memory>
 
 class QString;
 
@@ -29,7 +31,7 @@ namespace Okteta {
 class OKTETACORE_EXPORT ValueCodec
 {
 public:
-    static ValueCodec* createCodec(ValueCoding valueCoding);
+    static std::unique_ptr<ValueCodec> createCodec(ValueCoding valueCoding);
 
 public:
     virtual ~ValueCodec();

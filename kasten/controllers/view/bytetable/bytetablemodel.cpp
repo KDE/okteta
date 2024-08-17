@@ -41,7 +41,7 @@ ByteTableModel::ByteTableModel(QObject* parent)
         Okteta::BinaryCoding
     };
     for (int i = 0; i < NofOfValueCodings; ++i) {
-        mValueCodec[i].reset(Okteta::ValueCodec::createCodec(CodingIds[i]));
+        mValueCodec[i] = Okteta::ValueCodec::createCodec(CodingIds[i]);
     }
 }
 

@@ -20,16 +20,16 @@ namespace Okteta {
 
 ValueCodec::~ValueCodec() = default;
 
-ValueCodec* ValueCodec::createCodec(ValueCoding valueCoding)
+std::unique_ptr<ValueCodec> ValueCodec::createCodec(ValueCoding valueCoding)
 {
-    ValueCodec* result;
+    std::unique_ptr<ValueCodec> result;
     switch (valueCoding)
     {
-    case DecimalCoding: result = new DecimalByteCodec(); break;
-    case OctalCoding:   result = new OctalByteCodec();   break;
-    case BinaryCoding:  result = new BinaryByteCodec();  break;
+    case DecimalCoding: result = std::make_unique<DecimalByteCodec>(); break;
+    case OctalCoding:   result = std::make_unique<OctalByteCodec>();   break;
+    case BinaryCoding:  result = std::make_unique<BinaryByteCodec>();  break;
     case HexadecimalCoding:
-    default:            result = new HexadecimalByteCodec();
+    default:            result = std::make_unique<HexadecimalByteCodec>();
     }
     return result;
 }
