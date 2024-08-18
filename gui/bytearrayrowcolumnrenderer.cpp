@@ -92,11 +92,11 @@ LinePositionRange ByteArrayRowColumnRenderer::visibleLinePositions() const
     return d->visibleLinePositions();
 }
 
-const ByteArrayTableLayout* ByteArrayRowColumnRenderer::layout() const
+const ByteArrayTableLayout* ByteArrayRowColumnRenderer::tableLayout() const
 {
     Q_D(const ByteArrayRowColumnRenderer);
 
-    return d->layout();
+    return d->tableLayout();
 }
 
 void ByteArrayRowColumnRenderer::setCharCodec(const CharCodec* charCodec)

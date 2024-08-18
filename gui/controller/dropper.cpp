@@ -162,7 +162,7 @@ void Dropper::handleInternalDrag(QDropEvent* dropEvent, AbstractByteArrayView* s
 
         if (!data.isEmpty()) {
             if (mByteArrayView->isOverwriteMode()) {
-                const Size length = mByteArrayView->layout()->length();
+                const Size length = mByteArrayView->tableLayout()->length();
                 if (!tableCursor->isBehind() && length > 0) {
                     AddressRange overwriteRange = AddressRange::fromWidth(insertIndex, data.size());
                     overwriteRange.restrictEndTo(length - 1);

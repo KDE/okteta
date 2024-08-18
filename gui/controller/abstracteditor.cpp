@@ -94,7 +94,7 @@ void AbstractEditor::doEditAction(EditAction action)
     case CharDelete:
         if (!mView->isOverwriteMode()) {
             const Address index = mCursor->realIndex();
-            if (index < mView->layout()->length()) {
+            if (index < mView->tableLayout()->length()) {
                 byteArrayModel->remove(AddressRange::fromWidth(index, 1));
             }
         }
@@ -102,7 +102,7 @@ void AbstractEditor::doEditAction(EditAction action)
     case WordDelete: // kills data until the start of the next word
         if (!mView->isOverwriteMode()) {
             const Address index = mCursor->realIndex();
-            if (index < mView->layout()->length()) {
+            if (index < mView->tableLayout()->length()) {
                 const TextByteArrayAnalyzer textAnalyzer(byteArrayModel, mView->charCodec());
                 const Address end = textAnalyzer.indexOfBeforeNextWordStart(index);
                 byteArrayModel->remove(AddressRange(index, end));

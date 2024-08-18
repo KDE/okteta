@@ -92,7 +92,7 @@ public: // value access
     ValueEditor* valueEditor() const;
     Dropper* dropper() const;
 
-    ByteArrayTableLayout* layout() const;
+    ByteArrayTableLayout* tableLayout() const;
     ByteArrayTableCursor* tableCursor() const;
     ByteArrayTableRanges* tableRanges() const;
 
@@ -336,7 +336,7 @@ inline bool AbstractByteArrayViewPrivate::isViewReadOnly()      const { return m
 inline bool AbstractByteArrayViewPrivate::isEffectiveReadOnly() const { return mReadOnly || mByteArrayModel->isReadOnly(); }
 inline double AbstractByteArrayViewPrivate::zoomLevel()        const { return mZoomLevel; }
 
-inline ByteArrayTableLayout* AbstractByteArrayViewPrivate::layout()      const { return mTableLayout; }
+inline ByteArrayTableLayout* AbstractByteArrayViewPrivate::tableLayout() const { return mTableLayout; }
 inline ByteArrayTableCursor* AbstractByteArrayViewPrivate::tableCursor() const { return mTableCursor; }
 inline ByteArrayTableRanges* AbstractByteArrayViewPrivate::tableRanges() const { return mTableRanges; }
 

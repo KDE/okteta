@@ -189,7 +189,7 @@ public: // value access
     LinePosition firstLinePos() const;
     LinePosition lastLinePos()  const;
     LinePositionRange visibleLinePositions() const;
-    const ByteArrayTableLayout* layout() const;
+    const ByteArrayTableLayout* tableLayout() const;
     bool isByteTypeColored() const;
 
     AbstractByteArrayView::CodingTypes visibleCodings() const;
@@ -335,7 +335,7 @@ inline LinePosition ByteArrayRowColumnRendererPrivate::firstLinePos() const { re
 inline LinePosition ByteArrayRowColumnRendererPrivate::lastLinePos()  const { return mRenderLinePositions.end(); }
 inline LinePositionRange ByteArrayRowColumnRendererPrivate::visibleLinePositions() const { return mRenderLinePositions; }
 
-inline const ByteArrayTableLayout* ByteArrayRowColumnRendererPrivate::layout() const { return mLayout; }
+inline const ByteArrayTableLayout* ByteArrayRowColumnRendererPrivate::tableLayout() const { return mLayout; }
 
 inline void ByteArrayRowColumnRendererPrivate::setCharCodec(const CharCodec* charCodec)
 {

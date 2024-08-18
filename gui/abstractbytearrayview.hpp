@@ -416,7 +416,7 @@ protected:
     const Okteta::CharCodec* charCodec() const;
     ByteArrayTableCursor* tableCursor() const;
     ByteArrayTableRanges* tableRanges() const;
-    ByteArrayTableLayout* layout() const;
+    ByteArrayTableLayout* tableLayout() const;
 
 protected: // QWidget API
     void keyPressEvent(QKeyEvent* keyEvent) override;

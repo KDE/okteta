@@ -51,7 +51,7 @@ bool MouseNavigator::handleMousePressEvent(QMouseEvent* mouseEvent)
     if (mouseEvent->button() == Qt::LeftButton) {
         ByteArrayTableCursor* tableCursor = mView->tableCursor();
         ByteArrayTableRanges* tableRanges = mView->tableRanges();
-        ByteArrayTableLayout* tableLayout = mView->layout();
+        const ByteArrayTableLayout* const tableLayout = mView->tableLayout();
 
         mView->pauseCursor();
         mView->finishByteEdit();

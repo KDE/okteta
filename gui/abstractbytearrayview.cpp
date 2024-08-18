@@ -59,10 +59,10 @@ double AbstractByteArrayView::zoomLevel() const
     Q_D(const AbstractByteArrayView);
     return d->zoomLevel();
 }
-ByteArrayTableLayout* AbstractByteArrayView::layout() const
+ByteArrayTableLayout* AbstractByteArrayView::tableLayout() const
 {
     Q_D(const AbstractByteArrayView);
-    return d->layout();
+    return d->tableLayout();
 }
 AbstractByteArrayView::ValueCoding AbstractByteArrayView::valueCoding() const
 {
@@ -525,7 +525,7 @@ void AbstractByteArrayView::showEvent(QShowEvent* showEvent)
 
     QAbstractScrollArea::showEvent(showEvent);
     // TODO: why is this needed?
-    layout()->setNoOfLinesPerPage(d->noOfLinesPerPage());
+    tableLayout()->setNoOfLinesPerPage(d->noOfLinesPerPage());
 }
 
 void AbstractByteArrayView::resizeEvent(QResizeEvent* resizeEvent)

@@ -154,7 +154,7 @@ public: // value access
     LinePosition firstLinePos() const;
     LinePosition lastLinePos()  const;
     LinePositionRange visibleLinePositions() const;
-    const ByteArrayTableLayout* layout() const;
+    const ByteArrayTableLayout* tableLayout() const;
     bool isByteTypeColored() const;
 
 private:

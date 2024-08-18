@@ -77,11 +77,11 @@ LinePositionRange AbstractByteArrayColumnRenderer::visibleLinePositions() const
     return d->visibleLinePositions();
 }
 
-const ByteArrayTableLayout* AbstractByteArrayColumnRenderer::layout() const
+const ByteArrayTableLayout* AbstractByteArrayColumnRenderer::tableLayout() const
 {
     Q_D(const AbstractByteArrayColumnRenderer);
 
-    return d->layout();
+    return d->tableLayout();
 }
 
 void AbstractByteArrayColumnRenderer::setCharCodec(const CharCodec* charCodec)
