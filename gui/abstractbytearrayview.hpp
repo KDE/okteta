@@ -350,9 +350,9 @@ public: // cursor control
 
 public:
     // clipboard interaction
-    virtual void copy();
-    virtual void cut();
-    virtual void paste();
+    void copy();
+    void cut();
+    void paste();
 
 public:
     QRect cursorRect() const;
