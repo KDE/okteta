@@ -203,21 +203,21 @@ void AbstractByteArrayViewPrivate::init()
     mValueCoding = DefaultValueCoding;
     mCharCodec = CharCodec::createCodec(DefaultCharCoding());
 
-    mTabController = new TabController(q, nullptr);
-    mUndoRedoController = new UndoRedoController(q, mTabController);
-    mClipboardController = new ClipboardController(q, mUndoRedoController);
-    mKeyNavigator = new KeyNavigator(q, mClipboardController);
-    mValueEditor = new ValueEditor(mTableCursor, q, mKeyNavigator);
-    mCharEditor = new CharEditor(mTableCursor, q, mKeyNavigator);
+    mTabController = new TabController(this, nullptr);
+    mUndoRedoController = new UndoRedoController(this, mTabController);
+    mClipboardController = new ClipboardController(this, mUndoRedoController);
+    mKeyNavigator = new KeyNavigator(this, mClipboardController);
+    mValueEditor = new ValueEditor(mTableCursor, this, mKeyNavigator);
+    mCharEditor = new CharEditor(mTableCursor, this, mKeyNavigator);
 
-    mMousePaster = new MousePaster(q, nullptr);
-    mMouseNavigator = new MouseNavigator(q, mMousePaster);
+    mMousePaster = new MousePaster(this, nullptr);
+    mMouseNavigator = new MouseNavigator(this, mMousePaster);
     mMouseController = mMouseNavigator;
-    mTapNavigator = new TapNavigator(q);
+    mTapNavigator = new TapNavigator(this);
 
-    mZoomWheelController = new ZoomWheelController(q, nullptr);
-    mDropper = new Dropper(q);
-    mZoomPinchController = new ZoomPinchController(q);
+    mZoomWheelController = new ZoomWheelController(this, nullptr);
+    mDropper = new Dropper(this);
+    mZoomPinchController = new ZoomPinchController(this);
 
     setWheelController(mZoomWheelController);
 
@@ -1403,6 +1403,34 @@ void AbstractByteArrayViewPrivate::emitSelectionUpdates()
         Q_EMIT q->hasSelectedDataChanged(hasSelection);
     }
     Q_EMIT q->cursorPositionChanged(cursorPosition());
+}
+
+void AbstractByteArrayViewPrivate::emitCursorPositionChanged()
+{
+    Q_Q(AbstractByteArrayView);
+
+    Q_EMIT q->cursorPositionChanged(cursorPosition());
+}
+
+void AbstractByteArrayViewPrivate::emitDoubleClicked(Address index)
+{
+    Q_Q(AbstractByteArrayView);
+
+    Q_EMIT q->doubleClicked(index);
+}
+
+void AbstractByteArrayViewPrivate::setMouseCursor(Qt::CursorShape cursorShape)
+{
+    Q_Q(AbstractByteArrayView);
+
+    q->viewport()->setCursor(cursorShape);
+}
+
+QPoint AbstractByteArrayViewPrivate::mapViewportFromGlobal(QPoint pos) const
+{
+    Q_Q(const AbstractByteArrayView);
+
+    return q->viewport()->mapFromGlobal(pos);
 }
 
 #if 0

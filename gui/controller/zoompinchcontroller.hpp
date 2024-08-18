@@ -12,12 +12,12 @@
 class QPinchGesture;
 
 namespace Okteta {
-class AbstractByteArrayView;
+class AbstractByteArrayViewPrivate;
 
 class ZoomPinchController
 {
 public:
-    explicit ZoomPinchController(AbstractByteArrayView* view);
+    explicit ZoomPinchController(AbstractByteArrayViewPrivate* view);
     ZoomPinchController(const ZoomPinchController&) = delete;
 
     ~ZoomPinchController() = default;
@@ -28,7 +28,7 @@ public:
     bool handlePinchGesture(QPinchGesture* pinchGesture);
 
 private:
-    AbstractByteArrayView* const mView;
+    AbstractByteArrayViewPrivate* const mView;
 
     double mOriginalZoomLevel = -1;
 };

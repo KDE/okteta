@@ -9,7 +9,6 @@
 #include "tapnavigator.hpp"
 
 // lib
-#include <abstractbytearrayview.hpp>
 #include <abstractbytearrayview_p.hpp>
 #include <bytearraytableranges.hpp>
 // Qt
@@ -17,7 +16,7 @@
 
 namespace Okteta {
 
-TapNavigator::TapNavigator(AbstractByteArrayView* view)
+TapNavigator::TapNavigator(AbstractByteArrayViewPrivate* view)
     : mView(view)
 {
 }
@@ -26,11 +25,10 @@ bool TapNavigator::handleTapGesture(QTapGesture* tapGesture)
 {
     if (tapGesture->state() == Qt::GestureFinished) {
         mView->pauseCursor();
-        mView->finishByteEdit();
+        mView->finishByteEditor();
 
         const QPoint viewportPos = tapGesture->position().toPoint();;
-        AbstractByteArrayViewPrivate* viewPrivate = mView->d_func();
-        const QPoint tapPoint = viewPrivate->viewportToColumns(viewportPos);
+        const QPoint tapPoint = mView->viewportToColumns(viewportPos);
         mView->placeCursor(tapPoint);
         ByteArrayTableRanges* tableRanges = mView->tableRanges();
         tableRanges->removeSelection();
@@ -40,7 +38,7 @@ bool TapNavigator::handleTapGesture(QTapGesture* tapGesture)
             mView->updateChanged();
         }
         mView->unpauseCursor();
-        mView->emitSelectionSignals();
+        mView->emitSelectionUpdates();
     }
 
     return true;

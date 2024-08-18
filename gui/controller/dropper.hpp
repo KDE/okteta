@@ -18,12 +18,12 @@ class QDragLeaveEvent;
 class QDropEvent;
 
 namespace Okteta {
-class AbstractByteArrayView;
+class AbstractByteArrayViewPrivate;
 
 class Dropper
 {
 public:
-    explicit Dropper(AbstractByteArrayView* view);
+    explicit Dropper(AbstractByteArrayViewPrivate* view);
     Dropper(const Dropper&) = delete;
 
     ~Dropper();
@@ -40,10 +40,10 @@ public:
     bool isActive() const;
 
 private:
-    void handleInternalDrag(QDropEvent* dropEvent, AbstractByteArrayView* sourceByteArrayView);
+    void handleInternalDrag(QDropEvent* dropEvent, AbstractByteArrayViewPrivate* sourceByteArrayView);
 
 private:
-    AbstractByteArrayView* const mByteArrayView;
+    AbstractByteArrayViewPrivate* const mByteArrayView;
 
     Address mBeforeDragCursorPos;
     bool mBeforeDragCursorIsBehind : 1;

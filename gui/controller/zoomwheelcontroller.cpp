@@ -9,13 +9,13 @@
 #include "zoomwheelcontroller.hpp"
 
 // lib
-#include <abstractbytearrayview.hpp>
+#include <abstractbytearrayview_p.hpp>
 // Qt
 #include <QWheelEvent>
 
 namespace Okteta {
 
-ZoomWheelController::ZoomWheelController(AbstractByteArrayView* view, AbstractWheelController* parent)
+ZoomWheelController::ZoomWheelController(AbstractByteArrayViewPrivate* view, AbstractWheelController* parent)
     : AbstractWheelController(parent)
     , mView(view)
 {

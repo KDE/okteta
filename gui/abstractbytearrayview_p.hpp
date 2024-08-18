@@ -21,11 +21,14 @@
 // Okteta core
 #include <Okteta/AbstractByteArrayModel>
 #include <Okteta/CharCodec>
+// Qt
+#include <QClipboard>
 // Std
 #include <memory>
 
 namespace Okteta {
 
+class AbstractController;
 class ClipboardController;
 class UndoRedoController;
 class KeyNavigator;
@@ -36,6 +39,7 @@ class TapNavigator;
 class Dropper;
 
 class AbstractMouseController;
+class AbstractWheelController;
 class MouseNavigator;
 class MousePaster;
 
@@ -47,6 +51,19 @@ class BorderColumnRenderer;
 
 class AbstractByteArrayViewPrivate : public ColumnsViewScrollAreaEngine
 {
+    friend class AbstractEditor;
+    friend class CharEditor;
+    friend class ClipboardController;
+    friend class Dragger;
+    friend class Dropper;
+    friend class KeyNavigator;
+    friend class MouseNavigator;
+    friend class MousePaster;
+    friend class TabController;
+    friend class TapNavigator;
+    friend class UndoRedoController;
+    friend class ValueEditor;
+
 public:
     explicit AbstractByteArrayViewPrivate(AbstractByteArrayView* parent);
 
@@ -234,6 +251,12 @@ protected: // API to be implemented
     virtual void adjustToLayoutNoOfBytesPerLine() = 0;
     /** repaints all the parts that are signed as changed */
     virtual void updateChanged() = 0;
+
+protected:
+    void emitDoubleClicked(Address index);
+    void emitCursorPositionChanged();
+    void setMouseCursor(Qt::CursorShape cursorShape);
+    QPoint mapViewportFromGlobal(QPoint pos) const;
 
 private:
     /** Emits updates on selection & cursor position after a change */

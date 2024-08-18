@@ -13,6 +13,7 @@
 #include <bytearraytablecursor.hpp>
 #include <bytearraytablelayout.hpp>
 #include <abstractbytearrayview.hpp>
+#include <abstractbytearrayview_p.hpp>
 // Okteta core
 #include <Okteta/AbstractByteArrayModel>
 // Qt
@@ -27,7 +28,7 @@ namespace Okteta {
 
 static constexpr char DropperOctetStreamFormatName[] = "application/octet-stream";
 
-Dropper::Dropper(AbstractByteArrayView* view)
+Dropper::Dropper(AbstractByteArrayViewPrivate* view)
     : mByteArrayView(view)
     , mIsActive(false)
 {
@@ -41,7 +42,7 @@ bool Dropper::handleDragEnterEvent(QDragEnterEvent* dragEnterEvent)
 {
     bool eventUsed = false;
 
-    if (!mByteArrayView->isReadOnly()
+    if (!mByteArrayView->isEffectiveReadOnly()
         && mByteArrayView->canReadData(dragEnterEvent->mimeData())) {
         mIsActive = true;
         // TODO: store value edit data
@@ -61,14 +62,14 @@ bool Dropper::handleDragMoveEvent(QDragMoveEvent* dragMoveEvent)
 {
     bool eventUsed = false;
 
-    if (!mByteArrayView->isReadOnly()
+    if (!mByteArrayView->isEffectiveReadOnly()
         && mByteArrayView->canReadData(dragMoveEvent->mimeData())) {
         mCursorIsMovedByDrag = true;
 
         // let text cursor follow mouse
         mByteArrayView->pauseCursor();
         // TODO: just for following skip the value edit, remember we are and get back
-        mByteArrayView->finishByteEdit();
+        mByteArrayView->finishByteEditor();
         mByteArrayView->placeCursor(dragMoveEvent->pos());
         mByteArrayView->unpauseCursor();
 
@@ -103,7 +104,7 @@ bool Dropper::handleDropEvent(QDropEvent* dropEvent)
 {
     bool eventUsed = false;
 
-    if (!mByteArrayView->isReadOnly()
+    if (!mByteArrayView->isEffectiveReadOnly()
         && mByteArrayView->canReadData(dropEvent->mimeData())) {
         // leave state
         mIsActive = false;
@@ -112,7 +113,7 @@ bool Dropper::handleDropEvent(QDropEvent* dropEvent)
         auto* sourceByteArrayView = qobject_cast<AbstractByteArrayView*>(dropEvent->source());
         if (sourceByteArrayView
             && sourceByteArrayView->byteArrayModel() == mByteArrayView->byteArrayModel()) {
-            handleInternalDrag(dropEvent, sourceByteArrayView);
+            handleInternalDrag(dropEvent, sourceByteArrayView->d_func());
         } else {
             // mByteArrayView->tableRanges()->removeSelection();
             mByteArrayView->pasteData(dropEvent->mimeData());
@@ -122,7 +123,7 @@ bool Dropper::handleDropEvent(QDropEvent* dropEvent)
     return eventUsed;
 }
 
-void Dropper::handleInternalDrag(QDropEvent* dropEvent, AbstractByteArrayView* sourceByteArrayView)
+void Dropper::handleInternalDrag(QDropEvent* dropEvent, AbstractByteArrayViewPrivate* sourceByteArrayView)
 {
     // get drag origin
     AddressRange selection = sourceByteArrayView->tableRanges()->removeSelection();
@@ -149,7 +150,7 @@ void Dropper::handleInternalDrag(QDropEvent* dropEvent, AbstractByteArrayView* s
         const bool success = byteArrayModel->swap(insertIndex, selection);
         if (success) {
             tableCursor->gotoCIndex(newCursorIndex);
-            Q_EMIT mByteArrayView->cursorPositionChanged(tableCursor->realIndex());
+            mByteArrayView->emitCursorPositionChanged();
         }
     }
     // is a copy

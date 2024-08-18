@@ -13,12 +13,12 @@ class QMouseEvent;
 
 namespace Okteta {
 
-class AbstractByteArrayView;
+class AbstractByteArrayViewPrivate;
 
 class AbstractMouseController
 {
 protected:
-    AbstractMouseController(AbstractByteArrayView* view, AbstractMouseController* parent);
+    AbstractMouseController(AbstractByteArrayViewPrivate* view, AbstractMouseController* parent);
 
 public:
     AbstractMouseController(const AbstractMouseController&) = delete;
@@ -35,7 +35,7 @@ public: // API to be implemented
 
 protected:
     AbstractMouseController* mParent;
-    AbstractByteArrayView* mView;
+    AbstractByteArrayViewPrivate* const mView;
 };
 
 }

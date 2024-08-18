@@ -16,12 +16,12 @@ class QMenu;
 
 namespace Okteta {
 
-class AbstractByteArrayView;
+class AbstractByteArrayViewPrivate;
 
 class UndoRedoController : public AbstractController
 {
 public:
-    UndoRedoController(AbstractByteArrayView* view, AbstractController* parent);
+    UndoRedoController(AbstractByteArrayViewPrivate* view, AbstractController* parent);
     ~UndoRedoController() override;
 
 public: // AbstractController API
@@ -35,7 +35,7 @@ private:
     bool redo();
 
 private:
-    AbstractByteArrayView* const mView;
+    AbstractByteArrayViewPrivate* const mView;
 };
 
 }

@@ -26,7 +26,7 @@ class MouseNavigator : public QObject
     Q_OBJECT
 
 public:
-    MouseNavigator(AbstractByteArrayView* view, AbstractMouseController* parent);
+    MouseNavigator(AbstractByteArrayViewPrivate* view, AbstractMouseController* parent);
 
     ~MouseNavigator() override;
 

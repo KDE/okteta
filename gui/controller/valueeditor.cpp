@@ -10,7 +10,7 @@
 
 // lib
 #include <bytearraytablecursor.hpp>
-#include <abstractbytearrayview.hpp>
+#include <abstractbytearrayview_p.hpp>
 // Okteta core
 #include <Okteta/AbstractByteArrayModel>
 #include <Okteta/ChangesDescribable>
@@ -22,7 +22,7 @@
 
 namespace Okteta {
 
-ValueEditor::ValueEditor(ByteArrayTableCursor* cursor, AbstractByteArrayView* view, AbstractController* parent)
+ValueEditor::ValueEditor(ByteArrayTableCursor* cursor, AbstractByteArrayViewPrivate* view, AbstractController* parent)
     : AbstractEditor(cursor, view, parent)
     , mInEditMode(false)
     , mEditModeByInsert(false)
@@ -167,7 +167,7 @@ bool ValueEditor::handleKeyPress(QKeyEvent* keyEvent)
                                 mCursor->gotoIndex(index);
                                 mView->ensureCursorVisible();
 //                                 mView->updateCursors();
-                                Q_EMIT mView->cursorPositionChanged(mCursor->realIndex());
+                                mView->emitCursorPositionChanged();
                             } else {
                                 cancelEdit();
                             }
@@ -278,7 +278,7 @@ void ValueEditor::doValueEditAction(ValueEditAction Action, int input)
 
         mView->unpauseCursor();
         if (moveToNext) {
-            Q_EMIT mView->cursorPositionChanged(mCursor->realIndex());
+            mView->emitCursorPositionChanged();
         }
     }
 }

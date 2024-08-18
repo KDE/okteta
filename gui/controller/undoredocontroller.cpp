@@ -9,7 +9,7 @@
 #include "undoredocontroller.hpp"
 
 // lib
-#include <abstractbytearrayview.hpp>
+#include <abstractbytearrayview_p.hpp>
 #include <abstractbytearraymodel.hpp>
 #include <versionable.hpp>
 // KF
@@ -21,7 +21,7 @@
 
 namespace Okteta {
 
-UndoRedoController::UndoRedoController(AbstractByteArrayView* view, AbstractController* parent)
+UndoRedoController::UndoRedoController(AbstractByteArrayViewPrivate* view, AbstractController* parent)
     : AbstractController(parent)
     , mView(view)
 {
@@ -34,7 +34,7 @@ bool UndoRedoController::handleKeyPress(QKeyEvent* keyEvent)
 {
     bool keyUsed = false;
 
-    if (!mView->isReadOnly()) {
+    if (!mView->isEffectiveReadOnly()) {
         if (keyEvent == QKeySequence::Undo) {
             keyUsed = undo();
         } else if (keyEvent == QKeySequence::Redo) {
@@ -47,7 +47,7 @@ bool UndoRedoController::handleKeyPress(QKeyEvent* keyEvent)
 
 int UndoRedoController::addContextMenuActions(QMenu* menu)
 {
-    if (mView->isReadOnly()) {
+    if (mView->isEffectiveReadOnly()) {
         return 0;
     }
 
@@ -62,13 +62,13 @@ int UndoRedoController::addContextMenuActions(QMenu* menu)
 
     QAction* undoAction = menu->addAction(QIcon::fromTheme(QStringLiteral("edit-undo")),
                                           i18nc("@action:inmenu", "&Undo") + QLatin1Char('\t') + QKeySequence(QKeySequence::Undo).toString(QKeySequence::NativeText),
-                                          mView, [this] { undo(); });
+                                          mView->q_func(), [this] { undo(); });
     undoAction->setEnabled(0 < versionIndex);
     undoAction->setObjectName(QStringLiteral("edit-undo"));
 
     QAction* redoAction = menu->addAction(QIcon::fromTheme(QStringLiteral("edit-redo")),
                                           i18nc("@action:inmenu", "Re&do") + QLatin1Char('\t') + QKeySequence(QKeySequence::Redo).toString(QKeySequence::NativeText),
-                                          mView, [this] { redo(); });
+                                          mView->q_func(), [this] { redo(); });
     redoAction->setEnabled(versionIndex+1 < versionCount);
     redoAction->setObjectName(QStringLiteral("edit-redo"));
 

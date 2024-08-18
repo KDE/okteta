@@ -16,12 +16,12 @@ class QMenu;
 
 namespace Okteta {
 
-class AbstractByteArrayView;
+class AbstractByteArrayViewPrivate;
 
 class ClipboardController : public AbstractController
 {
 public:
-    ClipboardController(AbstractByteArrayView* view, AbstractController* parent);
+    ClipboardController(AbstractByteArrayViewPrivate* view, AbstractController* parent);
 
 public: // AbstractController API
     bool handleKeyPress(QKeyEvent* keyEvent) override;
@@ -30,7 +30,7 @@ public:
     int addContextMenuActions(QMenu* menu);
 
 private:
-    AbstractByteArrayView* const mView;
+    AbstractByteArrayViewPrivate* const mView;
 };
 
 }

@@ -17,7 +17,7 @@
 #include <QString>
 
 namespace Okteta {
-class AbstractByteArrayView;
+class AbstractByteArrayViewPrivate;
 
 class ValueEditor : public AbstractEditor
 {
@@ -34,7 +34,7 @@ private:
     };
 
 public:
-    ValueEditor(ByteArrayTableCursor* cursor, AbstractByteArrayView* view, AbstractController* parent);
+    ValueEditor(ByteArrayTableCursor* cursor, AbstractByteArrayViewPrivate* view, AbstractController* parent);
     ~ValueEditor() override;
 
 public: // AbstractController API

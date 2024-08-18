@@ -10,7 +10,6 @@
 #include "abstractbytearrayview_p.hpp"
 
 // lib
-#include "controller/abstractcontroller.hpp"
 #include "controller/abstractwheelcontroller.hpp"
 #include "bytearraytablelayout.hpp"
  // Okteta core
@@ -59,11 +58,7 @@ double AbstractByteArrayView::zoomLevel() const
     Q_D(const AbstractByteArrayView);
     return d->zoomLevel();
 }
-ByteArrayTableLayout* AbstractByteArrayView::tableLayout() const
-{
-    Q_D(const AbstractByteArrayView);
-    return d->tableLayout();
-}
+
 AbstractByteArrayView::ValueCoding AbstractByteArrayView::valueCoding() const
 {
     Q_D(const AbstractByteArrayView);
@@ -83,17 +78,6 @@ const Okteta::CharCodec* AbstractByteArrayView::charCodec() const
 {
     Q_D(const AbstractByteArrayView);
     return d->charCodec();
-}
-
-ByteArrayTableCursor* AbstractByteArrayView::tableCursor() const
-{
-    Q_D(const AbstractByteArrayView);
-    return d->tableCursor();
-}
-ByteArrayTableRanges* AbstractByteArrayView::tableRanges() const
-{
-    Q_D(const AbstractByteArrayView);
-    return d->tableRanges();
 }
 
 int AbstractByteArrayView::noOfBytesPerLine() const
@@ -453,38 +437,6 @@ Address AbstractByteArrayView::indexByPoint(QPoint point) const
     return d->indexByPoint(point);
 }
 
-void AbstractByteArrayView::finishByteEdit()
-{
-    Q_D(AbstractByteArrayView);
-    d->finishByteEditor();
-}
-
-// TODO: remove me!
-void AbstractByteArrayView::emitSelectionSignals()
-{
-    Q_D(AbstractByteArrayView);
-
-    d->emitSelectionUpdates();
-}
-
-void AbstractByteArrayView::updateChanged()
-{
-    Q_D(AbstractByteArrayView);
-    d->updateChanged();
-}
-
-void AbstractByteArrayView::copyToClipboard(QClipboard::Mode mode) const
-{
-    Q_D(const AbstractByteArrayView);
-    d->copyToClipboard(mode);
-}
-
-void AbstractByteArrayView::pasteFromClipboard(QClipboard::Mode mode)
-{
-    Q_D(AbstractByteArrayView);
-    d->pasteFromClipboard(mode);
-}
-
 QRect AbstractByteArrayView::cursorRect() const
 {
     Q_D(const AbstractByteArrayView);
@@ -525,7 +477,7 @@ void AbstractByteArrayView::showEvent(QShowEvent* showEvent)
 
     QAbstractScrollArea::showEvent(showEvent);
     // TODO: why is this needed?
-    tableLayout()->setNoOfLinesPerPage(d->noOfLinesPerPage());
+    d->tableLayout()->setNoOfLinesPerPage(d->noOfLinesPerPage());
 }
 
 void AbstractByteArrayView::resizeEvent(QResizeEvent* resizeEvent)

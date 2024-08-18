@@ -19,7 +19,7 @@
 
 namespace Okteta {
 
-MousePaster::MousePaster(AbstractByteArrayView* view, AbstractMouseController* parent)
+MousePaster::MousePaster(AbstractByteArrayViewPrivate* view, AbstractMouseController* parent)
     : AbstractMouseController(view, parent)
 {
 }
@@ -30,16 +30,16 @@ bool MousePaster::handleMousePressEvent(QMouseEvent* mouseEvent)
 {
     bool eventUsed = false;
 
-    if (mouseEvent->button() == Qt::MiddleButton && !mView->isReadOnly()) {
+    if (mouseEvent->button() == Qt::MiddleButton && !mView->isEffectiveReadOnly()) {
         mView->pauseCursor();
-        mView->finishByteEdit();
+        mView->finishByteEditor();
 
         ByteArrayTableRanges* tableRanges = mView->tableRanges();
         tableRanges->removeSelection();
 
         if (tableRanges->isModified()) {
             mView->updateChanged();
-            mView->viewport()->setCursor(mView->isReadOnly() ? Qt::ArrowCursor : Qt::IBeamCursor);
+            mView->setMouseCursor(mView->isEffectiveReadOnly() ? Qt::ArrowCursor : Qt::IBeamCursor);
         }
         mView->unpauseCursor();
 
@@ -53,12 +53,11 @@ bool MousePaster::handleMouseReleaseEvent(QMouseEvent* mouseEvent)
 {
     bool eventUsed = false;
     // middle mouse button paste?
-    if (mouseEvent->button() == Qt::MiddleButton && !mView->isReadOnly()) {
-        AbstractByteArrayViewPrivate* viewPrivate = mView->d_func();
-        const QPoint releasePoint = viewPrivate->viewportToColumns(mouseEvent->pos());
+    if (mouseEvent->button() == Qt::MiddleButton && !mView->isEffectiveReadOnly()) {
+        const QPoint releasePoint = mView->viewportToColumns(mouseEvent->pos());
 
         mView->pauseCursor();
-        mView->finishByteEdit();
+        mView->finishByteEditor();
 
         mView->placeCursor(releasePoint);
 
@@ -80,7 +79,7 @@ bool MousePaster::handleMouseReleaseEvent(QMouseEvent* mouseEvent)
         // ensure selection changes to be drawn TODO: create a insert/pasteAtCursor that leaves out drawing
         mView->updateChanged();
         mView->unpauseCursor();
-        mView->emitSelectionSignals();
+        mView->emitSelectionUpdates();
 
         eventUsed = true;
     }

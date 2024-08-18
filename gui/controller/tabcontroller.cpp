@@ -9,13 +9,13 @@
 #include "tabcontroller.hpp"
 
 // lib
-#include <abstractbytearrayview.hpp>
+#include <abstractbytearrayview_p.hpp>
 // Qt
 #include <QKeyEvent>
 
 namespace Okteta {
 
-TabController::TabController(AbstractByteArrayView* view, AbstractController* parent)
+TabController::TabController(AbstractByteArrayViewPrivate* view, AbstractController* parent)
     : AbstractController(parent)
     , mView(view)
     , mTabChangesFocus(true)

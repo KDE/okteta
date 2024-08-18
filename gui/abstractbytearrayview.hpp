@@ -15,7 +15,6 @@
 #include <Okteta/AddressRange>
 // Qt
 #include <QAbstractScrollArea>
-#include <QClipboard>
 // Std
 #include <memory>
 
@@ -28,28 +27,12 @@ class Bookmark;
 class ValueCodec;
 class CharCodec;
 class AbstractByteArrayModel;
-class ArrayChangeMetricsList;
-
-class AbstractController;
-class AbstractWheelController;
-class ByteArrayTableLayout;
-class ByteArrayTableCursor;
-class ByteArrayTableRanges;
 
 class AbstractByteArrayViewPrivate;
 
 class OKTETAGUI_EXPORT AbstractByteArrayView : public QAbstractScrollArea
 {
-    friend class TabController;
-    friend class KeyNavigator;
-    friend class AbstractEditor;
-    friend class ValueEditor;
-    friend class CharEditor;
     friend class Dropper;
-    friend class MouseNavigator;
-    friend class MousePaster;
-    friend class Dragger;
-    friend class TapNavigator;
 
     Q_OBJECT
     Q_PROPERTY(bool overwriteMode READ isOverwriteMode WRITE setOverwriteMode NOTIFY overwriteModeChanged)
@@ -405,18 +388,8 @@ Q_SIGNALS:
     void zoomLevelChanged(double level);
 
 protected:
-    void finishByteEdit();
-    void emitSelectionSignals();
-    void updateChanged();
-    void copyToClipboard(QClipboard::Mode mode) const;
-    void pasteFromClipboard(QClipboard::Mode mode);
-
-protected:
     const Okteta::ValueCodec* valueCodec() const;
     const Okteta::CharCodec* charCodec() const;
-    ByteArrayTableCursor* tableCursor() const;
-    ByteArrayTableRanges* tableRanges() const;
-    ByteArrayTableLayout* tableLayout() const;
 
 protected: // QWidget API
     void keyPressEvent(QKeyEvent* keyEvent) override;

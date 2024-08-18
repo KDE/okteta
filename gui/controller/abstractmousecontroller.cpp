@@ -10,7 +10,7 @@
 
 namespace Okteta {
 
-AbstractMouseController::AbstractMouseController(AbstractByteArrayView* view, AbstractMouseController* parent)
+AbstractMouseController::AbstractMouseController(AbstractByteArrayViewPrivate* view, AbstractMouseController* parent)
     : mParent(parent)
     , mView(view)
 {

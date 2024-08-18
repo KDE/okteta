@@ -15,7 +15,7 @@
 class QMenu;
 
 namespace Okteta {
-class AbstractByteArrayView;
+class AbstractByteArrayViewPrivate;
 
 class KeyNavigator : public AbstractController
 {
@@ -37,7 +37,7 @@ private:
     };
 
 public:
-    KeyNavigator(AbstractByteArrayView* view, AbstractController* parent);
+    KeyNavigator(AbstractByteArrayViewPrivate* view, AbstractController* parent);
 
 public: // AbstractController API
     bool handleKeyPress(QKeyEvent* keyEvent) override;
@@ -51,7 +51,7 @@ private:
     void selectAll();
 
 private:
-    AbstractByteArrayView* const mView;
+    AbstractByteArrayViewPrivate* const mView;
 };
 
 }

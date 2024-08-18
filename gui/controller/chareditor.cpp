@@ -9,7 +9,7 @@
 #include "chareditor.hpp"
 
 // lib
-#include <abstractbytearrayview.hpp>
+#include <abstractbytearrayview_p.hpp>
 // Okteta core
 #include <Okteta/CharCodec>
 // Qt
@@ -17,7 +17,7 @@
 
 namespace Okteta {
 
-CharEditor::CharEditor(ByteArrayTableCursor* cursor, AbstractByteArrayView* view, AbstractController* parent)
+CharEditor::CharEditor(ByteArrayTableCursor* cursor, AbstractByteArrayViewPrivate* view, AbstractController* parent)
     : AbstractEditor(cursor, view, parent)
 {
 }

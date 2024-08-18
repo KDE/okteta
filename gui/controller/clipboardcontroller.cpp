@@ -9,7 +9,7 @@
 #include "clipboardcontroller.hpp"
 
 // lib
-#include <abstractbytearrayview.hpp>
+#include <abstractbytearrayview_p.hpp>
 #include <abstractbytearraymodel.hpp>
 #include <versionable.hpp>
 // KF
@@ -23,7 +23,7 @@
 
 namespace Okteta {
 
-ClipboardController::ClipboardController(AbstractByteArrayView* view, AbstractController* parent)
+ClipboardController::ClipboardController(AbstractByteArrayViewPrivate* view, AbstractController* parent)
     : AbstractController(parent)
     , mView(view)
 {
@@ -34,16 +34,16 @@ bool ClipboardController::handleKeyPress(QKeyEvent* keyEvent)
     bool keyUsed = false;
 
     if (keyEvent == QKeySequence::Copy) {
-        mView->copy();
+        mView->copyToClipboard();
         keyUsed = true;
-    } else if (!mView->isReadOnly()) {
+    } else if (!mView->isEffectiveReadOnly()) {
         if (keyEvent == QKeySequence::Cut) {
             if (!mView->isOverwriteMode()) {
-                mView->cut();
+                mView->cutToClipboard();
                 keyUsed = true;
             }
         } else if (keyEvent == QKeySequence::Paste) {
-            mView->paste();
+            mView->pasteFromClipboard();
             keyUsed = true;
         }
     }
@@ -55,24 +55,24 @@ int ClipboardController::addContextMenuActions(QMenu* menu)
 {
     QAction* copyAction = menu->addAction(QIcon::fromTheme(QStringLiteral("edit-copy")),
                                           i18nc("@action:inmenu", "&Copy") + QLatin1Char('\t') + QKeySequence(QKeySequence::Copy).toString(QKeySequence::NativeText),
-                                          mView, &AbstractByteArrayView::copy);
+                                          mView->q_func(), [this] { mView->copyToClipboard(); });
     copyAction->setEnabled(mView->hasSelectedData());
     copyAction->setObjectName(QStringLiteral("edit-copy"));
 
-    if (mView->isReadOnly()) {
+    if (mView->isEffectiveReadOnly()) {
         return 1;
     }
 
     QAction* cutAction = menu->addAction(QIcon::fromTheme(QStringLiteral("edit-cut")),
                                          i18nc("@action:inmenu", "Cu&t") + QLatin1Char('\t') + QKeySequence(QKeySequence::Cut).toString(QKeySequence::NativeText),
-                                         mView, &AbstractByteArrayView::cut);
+                                         mView->q_func(), [this] { mView->cutToClipboard(); });
     const bool canCutData = mView->hasSelectedData() && !mView->isOverwriteMode();
     cutAction->setEnabled(canCutData);
     cutAction->setObjectName(QStringLiteral("edit-cut"));
 
     QAction* pasteAction = menu->addAction(QIcon::fromTheme(QStringLiteral("edit-paste")),
                                            i18nc("@action:inmenu", "&Paste") + QLatin1Char('\t') + QKeySequence(QKeySequence::Paste).toString(QKeySequence::NativeText),
-                                           mView, &AbstractByteArrayView::paste);
+                                           mView->q_func(), [this] { mView->pasteFromClipboard(); });
     const QMimeData* clipboardMimeData = QApplication::clipboard()->mimeData(QClipboard::Clipboard);
     const bool canReadData = mView->canReadData(clipboardMimeData);
     pasteAction->setEnabled(canReadData);

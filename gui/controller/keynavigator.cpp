@@ -11,7 +11,7 @@
 // lib
 #include <bytearraytableranges.hpp>
 #include <bytearraytablecursor.hpp>
-#include <abstractbytearrayview.hpp>
+#include <abstractbytearrayview_p.hpp>
 // Okteta core
 #include <Okteta/TextByteArrayAnalyzer>
 #include <Okteta/AbstractByteArrayModel>
@@ -24,7 +24,7 @@
 
 namespace Okteta {
 
-KeyNavigator::KeyNavigator(AbstractByteArrayView* view, AbstractController* parent)
+KeyNavigator::KeyNavigator(AbstractByteArrayViewPrivate* view, AbstractController* parent)
     : AbstractController(parent)
     , mView(view)
 {
@@ -87,7 +87,7 @@ bool KeyNavigator::handleKeyPress(QKeyEvent* keyEvent)
 void KeyNavigator::moveCursor(MoveAction action, bool select)
 {
     mView->pauseCursor();
-    mView->finishByteEdit();
+    mView->finishByteEditor();
 
     ByteArrayTableCursor* tableCursor = mView->tableCursor();
     ByteArrayTableRanges* tableRanges = mView->tableRanges();
@@ -134,14 +134,14 @@ void KeyNavigator::moveCursor(MoveAction action, bool select)
 
     mView->updateChanged();
     mView->unpauseCursor();
-    mView->emitSelectionSignals();
+    mView->emitSelectionUpdates();
 }
 
 int KeyNavigator::addContextMenuActions(QMenu* menu)
 {
     QAction* selectAllAction = menu->addAction(QIcon::fromTheme(QStringLiteral("edit-select-all")),
                                                i18nc("@action:inmenu", "Select &All") + QLatin1Char('\t') + QKeySequence(QKeySequence::SelectAll).toString(QKeySequence::NativeText),
-                                               mView, [this] { selectAll(); });
+                                               mView->q_func(), [this] { selectAll(); });
     selectAllAction->setEnabled(mView->byteArrayModel()->size() > 0);
 
     selectAllAction->setObjectName(QStringLiteral("select-all"));

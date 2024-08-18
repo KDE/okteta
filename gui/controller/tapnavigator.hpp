@@ -12,12 +12,12 @@
 class QTapGesture;
 
 namespace Okteta {
-class AbstractByteArrayView;
+class AbstractByteArrayViewPrivate;
 
 class TapNavigator
 {
 public:
-    explicit TapNavigator(AbstractByteArrayView* view);
+    explicit TapNavigator(AbstractByteArrayViewPrivate* view);
     TapNavigator(const TapNavigator&) = delete;
 
     ~TapNavigator() = default;
@@ -28,7 +28,7 @@ public:
     bool handleTapGesture(QTapGesture* tapGesture);
 
 private:
-    AbstractByteArrayView* const mView;
+    AbstractByteArrayViewPrivate* const mView;
 };
 
 }

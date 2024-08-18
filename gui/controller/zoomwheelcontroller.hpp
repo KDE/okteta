@@ -13,19 +13,19 @@
 #include "abstractwheelcontroller.hpp"
 
 namespace Okteta {
-class AbstractByteArrayView;
+class AbstractByteArrayViewPrivate;
 
 class ZoomWheelController : public AbstractWheelController
 {
 public:
-    ZoomWheelController(AbstractByteArrayView* view, AbstractWheelController* parent);
+    ZoomWheelController(AbstractByteArrayViewPrivate* view, AbstractWheelController* parent);
     ~ZoomWheelController() override;
 
 public: // AbstractWheelController API
     bool handleWheelEvent(QWheelEvent* wheelEvent) override;
 
 private:
-    AbstractByteArrayView* mView;
+    AbstractByteArrayViewPrivate* const mView;
 };
 
 }

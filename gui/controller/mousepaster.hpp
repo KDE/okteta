@@ -17,7 +17,7 @@ namespace Okteta {
 class MousePaster : public AbstractMouseController
 {
 public:
-    MousePaster(AbstractByteArrayView* view, AbstractMouseController* parent);
+    MousePaster(AbstractByteArrayViewPrivate* view, AbstractMouseController* parent);
 
     ~MousePaster() override;
 

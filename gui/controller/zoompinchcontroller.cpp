@@ -9,13 +9,13 @@
 #include "zoompinchcontroller.hpp"
 
 // lib
-#include <abstractbytearrayview.hpp>
+#include <abstractbytearrayview_p.hpp>
 // Qt
 #include <QPinchGesture>
 
 namespace Okteta {
 
-ZoomPinchController::ZoomPinchController(AbstractByteArrayView* view)
+ZoomPinchController::ZoomPinchController(AbstractByteArrayViewPrivate* view)
     : mView(view)
 {
 }

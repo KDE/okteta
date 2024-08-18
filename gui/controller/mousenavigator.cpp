@@ -26,7 +26,7 @@
 namespace Okteta {
 static constexpr int DefaultScrollTimerPeriod = 100;
 
-MouseNavigator::MouseNavigator(AbstractByteArrayView* view, AbstractMouseController* parent)
+MouseNavigator::MouseNavigator(AbstractByteArrayViewPrivate* view, AbstractMouseController* parent)
     : AbstractMouseController(view, parent)
     , mLMBPressed(false)
     , mInLMBDoubleClick(false)
@@ -54,7 +54,7 @@ bool MouseNavigator::handleMousePressEvent(QMouseEvent* mouseEvent)
         const ByteArrayTableLayout* const tableLayout = mView->tableLayout();
 
         mView->pauseCursor();
-        mView->finishByteEdit();
+        mView->finishByteEditor();
 
         mLMBPressed = true;
 
@@ -71,8 +71,7 @@ bool MouseNavigator::handleMousePressEvent(QMouseEvent* mouseEvent)
             mView->updateChanged();
         } else {
             // TODO: pos() is now, not at the moment of the event, use globalPos() for that,.says dox
-            AbstractByteArrayViewPrivate* viewPrivate = mView->d_func();
-            const QPoint mousePoint = viewPrivate->viewportToColumns(mouseEvent->pos());
+            const QPoint mousePoint = mView->viewportToColumns(mouseEvent->pos());
 
             // start of a drag perhaps?
             if (tableRanges->hasSelection() && tableRanges->selectionIncludes(mView->indexByPoint(mousePoint))) {
@@ -94,7 +93,7 @@ bool MouseNavigator::handleMousePressEvent(QMouseEvent* mouseEvent)
                 } else {   // start of a new selection possible
                     tableRanges->setSelectionStart(realIndex);
 
-                    if (!mView->isReadOnly() && (mouseEvent->modifiers() & Qt::SHIFT)) { // TODO: why only for readwrite?
+                    if (!mView->isEffectiveReadOnly() && (mouseEvent->modifiers() & Qt::SHIFT)) { // TODO: why only for readwrite?
                         tableRanges->setSelectionEnd(realIndex);
                     }
                 }
@@ -104,12 +103,12 @@ bool MouseNavigator::handleMousePressEvent(QMouseEvent* mouseEvent)
 
             if (tableRanges->isModified()) {
                 mView->updateChanged();
-                mView->viewport()->setCursor(mView->isReadOnly() ? Qt::ArrowCursor : Qt::IBeamCursor);
+                mView->setMouseCursor(mView->isEffectiveReadOnly() ? Qt::ArrowCursor : Qt::IBeamCursor);
             }
         }
 
         mView->unpauseCursor();
-        mView->emitSelectionSignals();
+        mView->emitSelectionUpdates();
 
         eventUsed = true;
     }
@@ -122,8 +121,7 @@ bool MouseNavigator::handleMouseMoveEvent(QMouseEvent* mouseEvent)
     bool eventUsed = false;
 
     if (mouseEvent->buttons() == Qt::LeftButton) {
-        AbstractByteArrayViewPrivate* viewPrivate = mView->d_func();
-        const QPoint movePoint = viewPrivate->viewportToColumns(mouseEvent->pos());
+        const QPoint movePoint = mView->viewportToColumns(mouseEvent->pos());
 
         if (mLMBPressed) {
             if (mDragStartPossible) {
@@ -132,20 +130,20 @@ bool MouseNavigator::handleMouseMoveEvent(QMouseEvent* mouseEvent)
                 if ((movePoint - mDragStartPoint).manhattanLength() > QApplication::startDragDistance()) {
                     startDrag();
                 }
-                if (!mView->isReadOnly()) {
-                    mView->viewport()->setCursor(Qt::IBeamCursor);
+                if (!mView->isEffectiveReadOnly()) {
+                    mView->setMouseCursor(Qt::IBeamCursor);
                 }
             } else {
                 // selecting
                 handleMouseMove(movePoint);
             }
-        } else if (!mView->isReadOnly()) {
+        } else if (!mView->isEffectiveReadOnly()) {
             ByteArrayTableRanges* tableRanges = mView->tableRanges();
 
             // visual feedback for possible dragging
             const bool InSelection =
                 tableRanges->hasSelection() && tableRanges->selectionIncludes(mView->indexByPoint(movePoint));
-            mView->viewport()->setCursor(InSelection ? Qt::ArrowCursor : Qt::IBeamCursor);
+            mView->setMouseCursor(InSelection ? Qt::ArrowCursor : Qt::IBeamCursor);
         }
         eventUsed = true;
     }
@@ -196,7 +194,7 @@ bool MouseNavigator::handleMouseReleaseEvent(QMouseEvent* mouseEvent)
             }
         }
 
-        Q_EMIT mView->cursorPositionChanged(mView->cursorPosition());
+        mView->emitCursorPositionChanged();
 
         mInLMBDoubleClick = false;
 
@@ -204,7 +202,7 @@ bool MouseNavigator::handleMouseReleaseEvent(QMouseEvent* mouseEvent)
             tableRanges->removeSelection();
         }
 
-        mView->emitSelectionSignals();
+        mView->emitSelectionUpdates();
         eventUsed = true;
     }
 
@@ -235,7 +233,7 @@ bool MouseNavigator::handleMouseDoubleClickEvent(QMouseEvent* mouseEvent)
         mInLMBDoubleClick = true; //
         mLMBPressed = true;
 
-        Q_EMIT mView->doubleClicked(index);
+        mView->emitDoubleClicked(index);
         eventUsed = true;
     }
 
@@ -245,8 +243,7 @@ bool MouseNavigator::handleMouseDoubleClickEvent(QMouseEvent* mouseEvent)
 void MouseNavigator::autoScrollTimerDone()
 {
     if (mLMBPressed) {
-        AbstractByteArrayViewPrivate* viewPrivate = mView->d_func();
-        handleMouseMove(viewPrivate->viewportToColumns(mView->viewport()->mapFromGlobal(QCursor::pos())));
+        handleMouseMove(mView->viewportToColumns(mView->mapViewportFromGlobal(QCursor::pos())));
     }
 }
 
@@ -255,9 +252,8 @@ void MouseNavigator::handleMouseMove(QPoint point)   // handles the move of the 
     ByteArrayTableCursor* tableCursor = mView->tableCursor();
     ByteArrayTableRanges* tableRanges = mView->tableRanges();
 
-    AbstractByteArrayViewPrivate* viewPrivate = mView->d_func();
-    const int yOffset = viewPrivate->yOffset();
-    const int behindLastYOffset = yOffset + viewPrivate->visibleHeight();
+    const int yOffset = mView->yOffset();
+    const int behindLastYOffset = yOffset + mView->visibleHeight();
     // scrolltimer but inside of viewport?
     if (mScrollTimer->isActive()) {
         if (yOffset <= point.y() && point.y() < behindLastYOffset) {
@@ -305,7 +301,7 @@ void MouseNavigator::handleMouseMove(QPoint point)   // handles the move of the 
 
     mView->updateChanged();
     mView->unpauseCursor();
-    mView->emitSelectionSignals();
+    mView->emitSelectionUpdates();
 }
 
 void MouseNavigator::startDrag()
@@ -321,10 +317,10 @@ void MouseNavigator::startDrag()
         return;
     }
 
-    auto* drag = new QDrag(mView);
+    auto* drag = new QDrag(mView->q_func());
     drag->setMimeData(dragData);
 
-    Qt::DropActions request = (mView->isReadOnly() || mView->isOverwriteMode()) ? Qt::CopyAction : Qt::CopyAction | Qt::MoveAction;
+    Qt::DropActions request = (mView->isEffectiveReadOnly() || mView->isOverwriteMode()) ? Qt::CopyAction : Qt::CopyAction | Qt::MoveAction;
     Qt::DropAction dropAction = drag->exec(request);
 
     if (dropAction == Qt::MoveAction) {

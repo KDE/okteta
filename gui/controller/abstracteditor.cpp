@@ -11,7 +11,7 @@
 // lib
 #include <bytearraytablelayout.hpp>
 #include <bytearraytablecursor.hpp>
-#include <abstractbytearrayview.hpp>
+#include <abstractbytearrayview_p.hpp>
 // Okteta core
 #include <Okteta/AbstractByteArrayModel>
 #include <Okteta/TextByteArrayAnalyzer>
@@ -20,7 +20,7 @@
 
 namespace Okteta {
 
-AbstractEditor::AbstractEditor(ByteArrayTableCursor* cursor, AbstractByteArrayView* view, AbstractController* parent)
+AbstractEditor::AbstractEditor(ByteArrayTableCursor* cursor, AbstractByteArrayViewPrivate* view, AbstractController* parent)
     : AbstractController(parent)
     , mCursor(cursor)
     , mView(view)
@@ -44,7 +44,7 @@ bool AbstractEditor::handleKeyPress(QKeyEvent* keyEvent)
     {
     case Qt::Key_Delete:
         if (shiftPressed) {
-            mView->cut();
+            mView->cutToClipboard();
         } else if (mView->hasSelectedData()) {
             mView->removeSelectedData();
         } else {
@@ -53,9 +53,9 @@ bool AbstractEditor::handleKeyPress(QKeyEvent* keyEvent)
         break;
     case Qt::Key_Insert:
         if (shiftPressed) {
-            mView->paste();
+            mView->pasteFromClipboard();
         } else if (controlPressed) {
-            mView->copy();
+            mView->copyToClipboard();
         } else {
             mView->setOverwriteMode(!mView->isOverwriteMode());
         }
@@ -71,13 +71,13 @@ bool AbstractEditor::handleKeyPress(QKeyEvent* keyEvent)
         doEditAction(controlPressed ? WordBackspace : CharBackspace);
         break;
     case Qt::Key_F16: // "Copy" key on Sun keyboards
-        mView->copy();
+        mView->copyToClipboard();
         break;
     case Qt::Key_F18: // "Paste" key on Sun keyboards
-        mView->paste();
+        mView->pasteFromClipboard();
         break;
     case Qt::Key_F20: // "Cut" key on Sun keyboards
-        mView->cut();
+        mView->cutToClipboard();
         break;
     default:
         keyUsed = false;

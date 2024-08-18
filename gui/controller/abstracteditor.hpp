@@ -13,7 +13,7 @@
 #include "abstractcontroller.hpp"
 
 namespace Okteta {
-class AbstractByteArrayView;
+class AbstractByteArrayViewPrivate;
 class ByteArrayTableCursor;
 
 class AbstractEditor : public AbstractController
@@ -28,7 +28,7 @@ protected:
     };
 
 protected:
-    AbstractEditor(ByteArrayTableCursor* cursor, AbstractByteArrayView* view, AbstractController* parent);
+    AbstractEditor(ByteArrayTableCursor* cursor, AbstractByteArrayViewPrivate* view, AbstractController* parent);
 
 public:
     ~AbstractEditor() override;
@@ -42,7 +42,7 @@ protected:
 
 protected:
     ByteArrayTableCursor* const mCursor;
-    AbstractByteArrayView* const mView;
+    AbstractByteArrayViewPrivate* const mView;
 };
 
 }

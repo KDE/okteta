@@ -13,12 +13,12 @@
 #include "abstractcontroller.hpp"
 
 namespace Okteta {
-class AbstractByteArrayView;
+class AbstractByteArrayViewPrivate;
 
 class TabController : public AbstractController
 {
 public:
-    TabController(AbstractByteArrayView* view, AbstractController* parent);
+    TabController(AbstractByteArrayViewPrivate* view, AbstractController* parent);
 
 public: // AbstractController API
     bool handleKeyPress(QKeyEvent* keyEvent) override;
@@ -29,7 +29,7 @@ public:
     void setTabChangesFocus(bool tabChangesFocus);
 
 private:
-    AbstractByteArrayView* const mView;
+    AbstractByteArrayViewPrivate* const mView;
     /** flag if tab key should be ignored */
     bool mTabChangesFocus : 1;
 };
