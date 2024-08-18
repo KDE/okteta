@@ -350,7 +350,7 @@ public: // cursor control
 
 public:
     // clipboard interaction
-    void copy();
+    void copy() const;
     void cut();
     void paste();
 

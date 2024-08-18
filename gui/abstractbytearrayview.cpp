@@ -186,9 +186,9 @@ void AbstractByteArrayView::cut()
     d->cutToClipboard();
 }
 
-void AbstractByteArrayView::copy()
+void AbstractByteArrayView::copy() const
 {
-    Q_D(AbstractByteArrayView);
+    Q_D(const AbstractByteArrayView);
     d->copyToClipboard();
 }
 
