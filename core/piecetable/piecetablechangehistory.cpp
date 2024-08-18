@@ -46,8 +46,9 @@ void PieceTableChangeHistory::openGroupedChange(const QString& description)
 {
     auto groupChange = std::make_unique<GroupPieceTableChange>(mActiveGroupChange, description);
 
-    mActiveGroupChange = groupChange.get();
+    auto* const nextActiveGroupChange = groupChange.get();
     appendChange(std::move(groupChange));
+    mActiveGroupChange = nextActiveGroupChange;
 }
 
 void PieceTableChangeHistory::closeGroupedChange(const QString& description)
