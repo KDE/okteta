@@ -15,6 +15,7 @@
 #include "bytearraytablecursor.hpp"
 #include "bytearraytableranges.hpp"
 #include "bytearraytablelayout.hpp"
+#include "cursor.hpp"
 #include "controller/valueeditor.hpp"
 #include "controller/tabcontroller.hpp"
 #include "offsetcolumnrenderer.hpp"
@@ -46,7 +47,6 @@ class MousePaster;
 class ZoomWheelController;
 
 class WidgetColumnStylist;
-class Cursor;
 class BorderColumnRenderer;
 
 class AbstractByteArrayViewPrivate : public ColumnsViewScrollAreaEngine
@@ -313,7 +313,7 @@ protected:
     int mCursorBlinkTimerId = 0;
 
     /** object to store the blinking cursor pixmaps */
-    Cursor* mCursorPixmaps;
+    Cursor mCursorPixmaps;
 
 protected:
     /** flag whether the widget is set to readonly. Cannot override the databuffer's setting, of course. */

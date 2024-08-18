@@ -23,7 +23,6 @@
 #include "controller/touchonlytapandholdgesturerecognizer.hpp"
 
 #include "widgetcolumnstylist.hpp"
-#include "cursor.hpp"
 #include "bordercolumnrenderer.hpp"
 #include "oktetagui.hpp"
 #include <logging.hpp>
@@ -141,7 +140,6 @@ AbstractByteArrayViewPrivate::AbstractByteArrayViewPrivate(AbstractByteArrayView
     , mTableLayout(new ByteArrayTableLayout(DefaultNoOfBytesPerLine, DefaultFirstLineOffset, DefaultStartOffset, 0, 0))
     , mTableCursor(new ByteArrayTableCursor(mTableLayout))
     , mTableRanges(new ByteArrayTableRanges(mTableLayout))
-    , mCursorPixmaps(new Cursor())
     , mReadOnly(false)
     , mOverWriteOnly(false)
     , mOverWrite(true)
@@ -178,8 +176,6 @@ AbstractByteArrayViewPrivate::~AbstractByteArrayViewPrivate()
     delete mTableRanges;
     delete mTableCursor;
     delete mTableLayout;
-
-    delete mCursorPixmaps;
 }
 
 void AbstractByteArrayViewPrivate::init()

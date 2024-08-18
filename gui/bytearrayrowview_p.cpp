@@ -13,7 +13,6 @@
 #include "bordercolumnrenderer.hpp"
 #include "widgetcolumnstylist.hpp"
 #include "controller/dropper.hpp"
-#include "cursor.hpp"
 #include <logging.hpp>
 // Okteta core
 #include <Okteta/ValueCodec>
@@ -564,17 +563,17 @@ void ByteArrayRowViewPrivate::createCursorPixmaps()
     const PixelX byteWidth = mByteArrayColumn->byteWidth();
 
     // create mCursorPixmaps
-    mCursorPixmaps->setSize(byteWidth, mByteArrayColumn->digitHeight(), q->devicePixelRatio());
+    mCursorPixmaps.setSize(byteWidth, mByteArrayColumn->digitHeight(), q->devicePixelRatio());
 
     const Address index = mTableCursor->validIndex();
 
     QPainter painter;
-    painter.begin(&mCursorPixmaps->offPixmap());
+    painter.begin(&mCursorPixmaps.offPixmap());
     initPainterFromWidget(&painter);
     mByteArrayColumn->renderByte(&painter, index, mActiveCoding);
     painter.end();
 
-    painter.begin(&mCursorPixmaps->onPixmap());
+    painter.begin(&mCursorPixmaps.onPixmap());
     initPainterFromWidget(&painter);
     mByteArrayColumn->renderCursor(&painter, index, mActiveCoding);
     painter.end();
@@ -589,7 +588,7 @@ void ByteArrayRowViewPrivate::createCursorPixmaps()
         cursorX = 0;
         cursorW = mOverWrite ? -1 : InsertCursorWidth;
     }
-    mCursorPixmaps->setShape(cursorX, cursorW, q->devicePixelRatio());
+    mCursorPixmaps.setShape(cursorX, cursorW, q->devicePixelRatio());
 }
 
 void ByteArrayRowViewPrivate::drawActiveCursor(QPainter* painter)
@@ -617,9 +616,9 @@ void ByteArrayRowViewPrivate::drawActiveCursor(QPainter* painter)
             mByteArrayColumn->renderByte(painter, index, mActiveCoding);
         }
     } else {
-        painter->drawPixmap(mCursorPixmaps->cursorX(), 0,
-                            mBlinkCursorVisible ? mCursorPixmaps->onPixmap() : mCursorPixmaps->offPixmap(),
-                            mCursorPixmaps->shapeX(), 0, mCursorPixmaps->shapeW(), -1);
+        painter->drawPixmap(mCursorPixmaps.cursorX(), 0,
+                            mBlinkCursorVisible ? mCursorPixmaps.onPixmap() : mCursorPixmaps.offPixmap(),
+                            mCursorPixmaps.shapeX(), 0, mCursorPixmaps.shapeW(), -1);
     }
 
     painter->translate(-x, -y);
