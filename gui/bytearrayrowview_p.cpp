@@ -41,7 +41,7 @@ void ByteArrayRowViewPrivate::init()
 
     // creating the columns in the needed order
     mByteArrayColumn =
-        new ByteArrayRowColumnRenderer(mStylist, mByteArrayModel, mTableLayout, mTableRanges);
+        new ByteArrayRowColumnRenderer(mStylist, mByteArrayModel, &mTableLayout, mTableRanges);
 
     addColumn(mOffsetColumn);
     addColumn(mOffsetBorderColumn);
@@ -246,7 +246,7 @@ void ByteArrayRowViewPrivate::changeEvent(QEvent* event)
     setLineHeight(rowHeight);
 
     // update all dependent structures
-    mTableLayout->setNoOfLinesPerPage(noOfLinesPerPage());
+    mTableLayout.setNoOfLinesPerPage(noOfLinesPerPage());
 
     updateViewByWidth();
 }
@@ -375,7 +375,7 @@ int ByteArrayRowViewPrivate::fittingBytesPerLine() const
 //              << ", h:" << byteGroupWidth
 //              << ", s:" << groupSpacingWidth << ") " <<fittingBytesPerLine<< endl;
 
-        const int newNoOfLines = (mTableLayout->length() + mTableLayout->startOffset() + fittingBytesPerLine - 1)
+        const int newNoOfLines = (mTableLayout.length() + mTableLayout.startOffset() + fittingBytesPerLine - 1)
                                  / fittingBytesPerLine;
         const PixelY newHeight =  newNoOfLines * lineHeight();
 
@@ -390,7 +390,7 @@ int ByteArrayRowViewPrivate::fittingBytesPerLine() const
             }
 
             // a chance for to perhaps fit in height?
-            if (fittingBytesPerLine <= mTableLayout->noOfBytesPerLine()) {
+            if (fittingBytesPerLine <= mTableLayout.noOfBytesPerLine()) {
                 // remember this trial's result and calc number of bytes with vertical scrollbar on
                 fittingBytesPerLineWithScrollbar = fittingBytesPerLine;
                 availableWidth = fullWidth;
@@ -499,7 +499,7 @@ Address ByteArrayRowViewPrivate::indexByPoint(QPoint point) const
 
     const Coord coord(linePosition, lineIndex);
 
-    return mTableLayout->indexAtCCoord(coord);
+    return mTableLayout.indexAtCCoord(coord);
 }
 
 void ByteArrayRowViewPrivate::blinkCursor()
@@ -688,7 +688,7 @@ void ByteArrayRowViewPrivate::updateChanged()
     // any columns to paint?
     if (!dirtyColumns.empty()) {
         // calculate affected lines/indizes
-        const LinePositionRange fullPositions(0, mTableLayout->noOfBytesPerLine() - 1);
+        const LinePositionRange fullPositions(0, mTableLayout.noOfBytesPerLine() - 1);
         CoordRange visibleRange(fullPositions, visibleLines());
 
         const int lineHeight = this->lineHeight();
@@ -754,7 +754,7 @@ void ByteArrayRowViewPrivate::ensureCursorVisible()
 
 void ByteArrayRowViewPrivate::ensureVisible(const AddressRange& range, bool ensureStartVisible)
 {
-    const CoordRange coords = mTableLayout->coordRangeOfIndizes(range);
+    const CoordRange coords = mTableLayout.coordRangeOfIndizes(range);
 
     // TODO: this is a make-it-work-hack, better do a smart calculation
     ensureVisible(*mByteArrayColumn, ensureStartVisible ? coords.end() : coords.start());

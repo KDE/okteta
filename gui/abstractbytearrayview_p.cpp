@@ -137,9 +137,9 @@ Qt::GestureType touchOnlyTapAndHoldGestureType()
 AbstractByteArrayViewPrivate::AbstractByteArrayViewPrivate(AbstractByteArrayView* parent)
     : ColumnsViewScrollAreaEngine(parent)
     , mByteArrayModel(nullModel())
-    , mTableLayout(new ByteArrayTableLayout(DefaultNoOfBytesPerLine, DefaultFirstLineOffset, DefaultStartOffset, 0, 0))
-    , mTableCursor(new ByteArrayTableCursor(mTableLayout))
-    , mTableRanges(new ByteArrayTableRanges(mTableLayout))
+    , mTableLayout(DefaultNoOfBytesPerLine, DefaultFirstLineOffset, DefaultStartOffset, 0, 0)
+    , mTableCursor(new ByteArrayTableCursor(&mTableLayout))
+    , mTableRanges(new ByteArrayTableRanges(&mTableLayout))
     , mReadOnly(false)
     , mOverWriteOnly(false)
     , mOverWrite(true)
@@ -175,7 +175,6 @@ AbstractByteArrayViewPrivate::~AbstractByteArrayViewPrivate()
 
     delete mTableRanges;
     delete mTableCursor;
-    delete mTableLayout;
 }
 
 void AbstractByteArrayViewPrivate::init()
@@ -185,13 +184,13 @@ void AbstractByteArrayViewPrivate::init()
     ColumnsViewScrollAreaEngine::init();
 
     // initialize layout
-    mTableLayout->setLength(mByteArrayModel->size());
-    mTableLayout->setNoOfLinesPerPage(noOfLinesPerPage());
+    mTableLayout.setLength(mByteArrayModel->size());
+    mTableLayout.setNoOfLinesPerPage(noOfLinesPerPage());
 
     mStylist = new WidgetColumnStylist(q);
 
     mOffsetColumn =
-        new OffsetColumnRenderer(mStylist, mTableLayout, OffsetFormat::Hexadecimal);
+        new OffsetColumnRenderer(mStylist, &mTableLayout, OffsetFormat::Hexadecimal);
     mOffsetBorderColumn =
         new BorderColumnRenderer(mStylist, false);
 
@@ -254,7 +253,7 @@ void AbstractByteArrayViewPrivate::setByteArrayModel(AbstractByteArrayModel* byt
 
     // affected:
     // length -> no of lines -> width
-    mTableLayout->setLength(mByteArrayModel->size());
+    mTableLayout.setLength(mByteArrayModel->size());
     adjustLayoutToSize();
 
     // if the model is readonly make the view too, per default
@@ -457,7 +456,7 @@ void AbstractByteArrayViewPrivate::setStartOffset(Address startOffset)
 {
     Q_Q(AbstractByteArrayView);
 
-    if (!mTableLayout->setStartOffset(startOffset)) {
+    if (!mTableLayout.setStartOffset(startOffset)) {
         return;
     }
 
@@ -480,7 +479,7 @@ void AbstractByteArrayViewPrivate::setFirstLineOffset(Address firstLineOffset)
 {
     Q_Q(AbstractByteArrayView);
 
-    if (!mTableLayout->setFirstLineOffset(firstLineOffset)) {
+    if (!mTableLayout.setFirstLineOffset(firstLineOffset)) {
         return;
     }
 
@@ -522,13 +521,13 @@ void AbstractByteArrayViewPrivate::setNoOfBytesPerLine(int noOfBytesPerLine)
     // if the number is explicitly set we expect a wish for no automatic resize
     setLayoutStyle(AbstractByteArrayView::FixedLayoutStyle);
 
-    if (!mTableLayout->setNoOfBytesPerLine(noOfBytesPerLine)) {
+    if (!mTableLayout.setNoOfBytesPerLine(noOfBytesPerLine)) {
         return;
     }
 
     updateViewByWidth();
 
-    Q_EMIT q->noOfBytesPerLineChanged(mTableLayout->noOfBytesPerLine());
+    Q_EMIT q->noOfBytesPerLineChanged(mTableLayout.noOfBytesPerLine());
 }
 
 void AbstractByteArrayViewPrivate::setReadOnly(bool readOnly)
@@ -626,7 +625,7 @@ void AbstractByteArrayViewPrivate::setCharCoding(const QString& charCodingName)
 void AbstractByteArrayViewPrivate::setMarking(const AddressRange& _marking)
 {
     AddressRange marking(_marking);
-    marking.restrictEndTo(mTableLayout->length() - 1);
+    marking.restrictEndTo(mTableLayout.length() - 1);
 
     const AddressRange oldMarking = mTableRanges->marking();
 
@@ -644,7 +643,7 @@ bool AbstractByteArrayViewPrivate::selectWord(Address index)
 {
     bool result = false;
 
-    if (0 <= index && index < mTableLayout->length()) {
+    if (0 <= index && index < mTableLayout.length()) {
         const TextByteArrayAnalyzer textAnalyzer(mByteArrayModel, mCharCodec.get());
         const AddressRange wordSection = textAnalyzer.wordSection(index);
         if (wordSection.isValid()) {
@@ -669,7 +668,7 @@ void AbstractByteArrayViewPrivate::selectAll(bool select)
     finishByteEditor();
 
     if (select) {
-        mTableRanges->setSelection(AddressRange(0, mTableLayout->length() - 1));
+        mTableRanges->setSelection(AddressRange(0, mTableLayout.length() - 1));
         mTableCursor->gotoEnd();
     } else {
         mTableRanges->removeSelection();
@@ -717,7 +716,7 @@ void AbstractByteArrayViewPrivate::setSelectionCursorPosition(Address index)
 void AbstractByteArrayViewPrivate::setSelection(const AddressRange& _selection)
 {
     AddressRange selection(_selection);
-    selection.restrictEndTo(mTableLayout->length() - 1);
+    selection.restrictEndTo(mTableLayout.length() - 1);
 
     const AddressRange oldSelection = mTableRanges->selection();
 
@@ -732,7 +731,7 @@ void AbstractByteArrayViewPrivate::setSelection(const AddressRange& _selection)
     mTableRanges->setSelection(selection);
     mTableCursor->gotoCIndex(selection.nextBehindEnd());
 
-// TODO:            ensureVisible( *mActiveColumn, mTableLayout->coordOfIndex(selection.start()) );
+// TODO:            ensureVisible( *mActiveColumn, mTableLayout.coordOfIndex(selection.start()) );
     ensureCursorVisible();
 
     endViewUpdate();
@@ -851,7 +850,7 @@ void AbstractByteArrayViewPrivate::insert(const QByteArray& data)
             insertionOffset = selection.start();
             lengthOfInserted = mByteArrayModel->replace(selection, reinterpret_cast<const Byte*>(data.constData()), selection.width());
         } else {
-            const Size length = mTableLayout->length();
+            const Size length = mTableLayout.length();
             if (!isCursorBehind() && length > 0) {
                 // replacing the normal data, at least until the end
                 AddressRange insertRange = AddressRange::fromWidth(cursorPosition(), data.size());
@@ -945,12 +944,12 @@ void AbstractByteArrayViewPrivate::adjustLayoutToSize()
     // check whether there is a change with the numbers of fitting bytes per line
     if (mResizeStyle != AbstractByteArrayView::FixedLayoutStyle) {
         // changes?
-        if (mTableLayout->setNoOfBytesPerLine(fittingBytesPerLine())) {
+        if (mTableLayout.setNoOfBytesPerLine(fittingBytesPerLine())) {
             adjustToLayoutNoOfBytesPerLine();
         }
     }
 
-    setNoOfLines(mTableLayout->noOfLines());
+    setNoOfLines(mTableLayout.noOfLines());
 }
 
 void AbstractByteArrayViewPrivate::onCursorFlashTimeChanged(int flashTime)
@@ -1212,8 +1211,8 @@ void AbstractByteArrayViewPrivate::resizeEvent(QResizeEvent* resizeEvent)
 
     if (mResizeStyle != AbstractByteArrayView::FixedLayoutStyle) {
         // changes?
-        if (mTableLayout->setNoOfBytesPerLine(fittingBytesPerLine())) {
-            setNoOfLines(mTableLayout->noOfLines());
+        if (mTableLayout.setNoOfBytesPerLine(fittingBytesPerLine())) {
+            setNoOfLines(mTableLayout.noOfLines());
             updateViewByWidth();
         }
     }
@@ -1222,7 +1221,7 @@ void AbstractByteArrayViewPrivate::resizeEvent(QResizeEvent* resizeEvent)
 
     q->QAbstractScrollArea::resizeEvent(resizeEvent);
 
-    mTableLayout->setNoOfLinesPerPage(noOfLinesPerPage());   // TODO: doesn't work with the new size!!!
+    mTableLayout.setNoOfLinesPerPage(noOfLinesPerPage());   // TODO: doesn't work with the new size!!!
 }
 
 void AbstractByteArrayViewPrivate::focusInEvent(QFocusEvent* focusEvent)
@@ -1342,11 +1341,11 @@ void AbstractByteArrayViewPrivate::onContentsChanged(const ArrayChangeMetricsLis
     pauseCursor();
 
     const bool atEnd = mTableCursor->atEnd();
-    const Size oldLength = mTableLayout->length(); // TODO: hack for mDataCursor->adaptSelectionToChange
+    const Size oldLength = mTableLayout.length(); // TODO: hack for mDataCursor->adaptSelectionToChange
     // update lengths
     int oldNoOfLines = noOfLines();
-    mTableLayout->setLength(mByteArrayModel->size());
-    const int newNoOfLines = mTableLayout->noOfLines();
+    mTableLayout.setLength(mByteArrayModel->size());
+    const int newNoOfLines = mTableLayout.noOfLines();
     if (oldNoOfLines != newNoOfLines) {
         setNoOfLines(newNoOfLines);
         const LineRange changedLines = (oldNoOfLines < newNoOfLines) ?
@@ -1364,7 +1363,7 @@ void AbstractByteArrayViewPrivate::onContentsChanged(const ArrayChangeMetricsLis
 
     mTableRanges->adaptToChanges(changeList, oldLength);
     // qCDebug(LOG_OKTETA_GUI) << "Cursor:"<<mDataCursor->index()<<", selection:"<<mTableRanges->selectionStart()<<"-"<<mTableRanges->selectionEnd()
-    //          <<", BytesPerLine: "<<mTableLayout->noOfBytesPerLine()<<endl;
+    //          <<", BytesPerLine: "<<mTableLayout.noOfBytesPerLine()<<endl;
     ensureCursorVisible();
 
     endViewUpdate();

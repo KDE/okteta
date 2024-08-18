@@ -109,7 +109,8 @@ public: // value access
     ValueEditor* valueEditor() const;
     Dropper* dropper() const;
 
-    ByteArrayTableLayout* tableLayout() const;
+    ByteArrayTableLayout* tableLayout();
+    const ByteArrayTableLayout* tableLayout() const;
     ByteArrayTableCursor* tableCursor() const;
     ByteArrayTableRanges* tableRanges() const;
 
@@ -273,7 +274,7 @@ protected:
     AbstractWheelController* mWheelController;
 
     /** holds the logical layout */
-    ByteArrayTableLayout* mTableLayout;
+    ByteArrayTableLayout mTableLayout;
     /** */
     ByteArrayTableCursor* mTableCursor;
     /** */
@@ -359,7 +360,8 @@ inline bool AbstractByteArrayViewPrivate::isViewReadOnly()      const { return m
 inline bool AbstractByteArrayViewPrivate::isEffectiveReadOnly() const { return mReadOnly || mByteArrayModel->isReadOnly(); }
 inline double AbstractByteArrayViewPrivate::zoomLevel()        const { return mZoomLevel; }
 
-inline ByteArrayTableLayout* AbstractByteArrayViewPrivate::tableLayout() const { return mTableLayout; }
+inline const ByteArrayTableLayout* AbstractByteArrayViewPrivate::tableLayout() const { return &mTableLayout; }
+inline ByteArrayTableLayout* AbstractByteArrayViewPrivate::tableLayout() { return &mTableLayout; }
 inline ByteArrayTableCursor* AbstractByteArrayViewPrivate::tableCursor() const { return mTableCursor; }
 inline ByteArrayTableRanges* AbstractByteArrayViewPrivate::tableRanges() const { return mTableRanges; }
 
@@ -371,9 +373,9 @@ inline AbstractByteArrayView::LayoutStyle AbstractByteArrayViewPrivate::layoutSt
 inline Address AbstractByteArrayViewPrivate::cursorPosition()   const { return mTableCursor->realIndex(); }
 inline bool AbstractByteArrayViewPrivate::isCursorBehind()  const { return mTableCursor->isBehind(); }
 inline bool AbstractByteArrayViewPrivate::isModified()      const { return mByteArrayModel->isModified(); }
-inline int AbstractByteArrayViewPrivate::noOfBytesPerLine() const { return mTableLayout->noOfBytesPerLine(); }
-inline Address AbstractByteArrayViewPrivate::firstLineOffset()  const { return mTableLayout->firstLineOffset(); }
-inline Address AbstractByteArrayViewPrivate::startOffset()      const { return mTableLayout->startOffset(); }
+inline int AbstractByteArrayViewPrivate::noOfBytesPerLine()    const { return mTableLayout.noOfBytesPerLine(); }
+inline Address AbstractByteArrayViewPrivate::firstLineOffset() const { return mTableLayout.firstLineOffset(); }
+inline Address AbstractByteArrayViewPrivate::startOffset()     const { return mTableLayout.startOffset(); }
 
 inline AddressRange AbstractByteArrayViewPrivate::selection() const { return mTableRanges->selection(); }
 inline bool AbstractByteArrayViewPrivate::hasSelectedData()    const { return mTableRanges->hasSelection(); }
