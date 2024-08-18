@@ -105,13 +105,14 @@ public: // value access
 
 public:
     void init();
-    void setByteArrayModel(AbstractByteArrayModel* byteArrayModel);
     // TODO: delete old controller?
     void setController(AbstractController* controller);
     void setWheelController(AbstractWheelController* wheelController);
     void setReadOnly(bool readOnly);
     void setOverwriteOnly(bool overwriteOnly);
     void setOverwriteMode(bool overwriteMode);
+
+    virtual void setByteArrayModel(AbstractByteArrayModel* byteArrayModel);
 
 public: // setting parameters
     void setValueCoding(AbstractByteArrayView::ValueCoding valueCoding);

@@ -190,7 +190,7 @@ public: // value access API
     virtual bool isByteTypeColored() const = 0;
 
 public:
-    virtual void setByteArrayModel(Okteta::AbstractByteArrayModel* byteArrayModel);
+    void setByteArrayModel(Okteta::AbstractByteArrayModel* byteArrayModel);
 
     // setting parameters
     // value column parameters

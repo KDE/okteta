@@ -37,7 +37,6 @@ public: // AbstractByteArrayView API
 
     bool isByteTypeColored() const override;
 
-    void setByteArrayModel(AbstractByteArrayModel* byteArrayModel) override;
     void setByteSpacingWidth(int /*PixelX*/ byteSpacingWidth) override;
     void setNoOfGroupedBytes(int noOfGroupedBytes) override;
     void setGroupSpacingWidth(int /*PixelX*/ groupSpacingWidth) override;

@@ -20,12 +20,6 @@ ByteArrayRowView::ByteArrayRowView(QWidget* parent)
 
 ByteArrayRowView::~ByteArrayRowView() = default;
 
-void ByteArrayRowView::setByteArrayModel(AbstractByteArrayModel* byteArrayModel)
-{
-    Q_D(ByteArrayRowView);
-    d->setByteArrayModel(byteArrayModel);
-}
-
 PixelX ByteArrayRowView::byteSpacingWidth() const
 {
     Q_D(const ByteArrayRowView);

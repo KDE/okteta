@@ -62,12 +62,6 @@ bool ByteArrayColumnView::isByteTypeColored() const
     return d->isByteTypeColored();
 }
 
-void ByteArrayColumnView::setByteArrayModel(AbstractByteArrayModel* _byteArrayModel)
-{
-    Q_D(ByteArrayColumnView);
-    d->setByteArrayModel(_byteArrayModel);
-}
-
 void ByteArrayColumnView::setBufferSpacing(/*PixelX*/ int byteSpacing, int noOfGroupedBytes, /*PixelX*/ int groupSpacing)
 {
     Q_D(ByteArrayColumnView);

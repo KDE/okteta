@@ -46,9 +46,9 @@ public: // logic value service
     QSize minimumSizeHint() const;
 
 public: // modification access
-    void setByteArrayModel(AbstractByteArrayModel* byteArrayModel);
 
 public: // AbstractByteArrayViewPrivate API
+    void setByteArrayModel(AbstractByteArrayModel* byteArrayModel) override;
     void ensureVisible(const AddressRange& range, bool ensureStartVisible) override;
     void ensureCursorVisible() override;
     void placeCursor(QPoint point) override;
