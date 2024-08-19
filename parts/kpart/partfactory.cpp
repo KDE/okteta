@@ -44,7 +44,7 @@ OktetaPartFactory::OktetaPartFactory()
     mModelCodecManager->setStreamEncoders(encoderList);
     mModelCodecManager->setDataGenerators(generatorList);
 
-    mModelCodecViewManager->setEncoderConfigEditorFactories(encoderConfigEditorFactoryList);
+    mModelCodecViewManager->setStreamEncoderConfigEditorFactories(encoderConfigEditorFactoryList);
     mModelCodecViewManager->setGeneratorConfigEditorFactories(generatorConfigEditorFactoryList);
 }
 

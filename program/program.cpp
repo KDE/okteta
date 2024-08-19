@@ -116,7 +116,7 @@ int OktetaProgram::execute()
     mDocumentManager->syncManager()->setSaveDiscardDialog(mDialogHandler.get());
 
     mViewManager->setViewFactory(new ByteArrayViewFactory(mByteArrayViewProfileManager.get()));
-    mViewManager->codecViewManager()->setEncoderConfigEditorFactories(encoderConfigEditorFactoryList);
+    mViewManager->codecViewManager()->setStreamEncoderConfigEditorFactories(encoderConfigEditorFactoryList);
     mViewManager->codecViewManager()->setGeneratorConfigEditorFactories(generatorConfigEditorFactoryList);
 
     auto* mainWindow = new OktetaMainWindow(this);
