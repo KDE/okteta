@@ -64,11 +64,11 @@ void ModelCodecManager::setStreamEncoders(const QVector<AbstractModelStreamEncod
     d->setStreamEncoders(encoderList);
 }
 
-void ModelCodecManager::setDecoders(const QVector<AbstractModelStreamDecoder*>& decoderList)
+void ModelCodecManager::setStreamDecoders(const QVector<AbstractModelStreamDecoder*>& decoderList)
 {
     Q_D(ModelCodecManager);
 
-    d->setDecoders(decoderList);
+    d->setStreamDecoders(decoderList);
 }
 
 void ModelCodecManager::setGenerators(const QVector<AbstractModelDataGenerator*>& generatorList)

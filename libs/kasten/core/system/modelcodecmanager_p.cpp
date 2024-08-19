@@ -74,7 +74,7 @@ void ModelCodecManagerPrivate::setStreamEncoders(const QVector<AbstractModelStre
     }
 }
 
-void ModelCodecManagerPrivate::setDecoders(const QVector<AbstractModelStreamDecoder*>& decoderList)
+void ModelCodecManagerPrivate::setStreamDecoders(const QVector<AbstractModelStreamDecoder*>& decoderList)
 {
     mDecoderList = decoderList;
 }

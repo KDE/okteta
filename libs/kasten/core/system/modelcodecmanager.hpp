@@ -54,7 +54,7 @@ public:
 
 public:
     void setStreamEncoders(const QVector<AbstractModelStreamEncoder*>& encoderList);
-    void setDecoders(const QVector<AbstractModelStreamDecoder*>& decoderList);
+    void setStreamDecoders(const QVector<AbstractModelStreamDecoder*>& decoderList);
     void setGenerators(const QVector<AbstractModelDataGenerator*>& generatorList);
     void setOverwriteDialog(AbstractOverwriteDialog* overwriteDialog);
 
