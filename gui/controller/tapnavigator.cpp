@@ -30,7 +30,7 @@ bool TapNavigator::handleTapGesture(QTapGesture* tapGesture)
         const QPoint viewportPos = tapGesture->position().toPoint();;
         const QPoint tapPoint = mView->viewportToColumns(viewportPos);
         mView->placeCursor(tapPoint);
-        ByteArrayTableRanges* tableRanges = mView->tableRanges();
+        ByteArrayTableRanges* const tableRanges = mView->tableRanges();
         tableRanges->removeSelection();
         mView->ensureCursorVisible();
 

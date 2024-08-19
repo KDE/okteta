@@ -139,7 +139,7 @@ AbstractByteArrayViewPrivate::AbstractByteArrayViewPrivate(AbstractByteArrayView
     , mByteArrayModel(nullModel())
     , mTableLayout(DefaultNoOfBytesPerLine, DefaultFirstLineOffset, DefaultStartOffset, 0, 0)
     , mTableCursor(&mTableLayout)
-    , mTableRanges(new ByteArrayTableRanges(&mTableLayout))
+    , mTableRanges(&mTableLayout)
     , mReadOnly(false)
     , mOverWriteOnly(false)
     , mOverWrite(true)
@@ -172,8 +172,6 @@ AbstractByteArrayViewPrivate::~AbstractByteArrayViewPrivate()
     delete mTapNavigator;
 
     delete mStylist;
-
-    delete mTableRanges;
 }
 
 void AbstractByteArrayViewPrivate::init()
@@ -575,7 +573,7 @@ void AbstractByteArrayViewPrivate::setOverwriteMode(bool overwriteMode)
     }
 
     Q_EMIT q->overwriteModeChanged(mOverWrite);
-    Q_EMIT q->cutAvailable(!mOverWrite && mTableRanges->hasSelection());
+    Q_EMIT q->cutAvailable(!mOverWrite && mTableRanges.hasSelection());
 }
 
 void AbstractByteArrayViewPrivate::setOverwriteOnly(bool overwriteOnly)
@@ -626,13 +624,13 @@ void AbstractByteArrayViewPrivate::setMarking(const AddressRange& _marking)
     AddressRange marking(_marking);
     marking.restrictEndTo(mTableLayout.length() - 1);
 
-    const AddressRange oldMarking = mTableRanges->marking();
+    const AddressRange oldMarking = mTableRanges.marking();
 
     if (marking == oldMarking) {
         return;
     }
 
-    mTableRanges->setMarking(marking);
+    mTableRanges.setMarking(marking);
 
     updateChanged();
 }
@@ -649,7 +647,7 @@ bool AbstractByteArrayViewPrivate::selectWord(Address index)
             pauseCursor();
             finishByteEditor();
 
-            mTableRanges->setFirstWordSelection(wordSection);
+            mTableRanges.setFirstWordSelection(wordSection);
             mTableCursor.gotoIndex(wordSection.nextBehindEnd());
 
             endViewUpdate();
@@ -667,10 +665,10 @@ void AbstractByteArrayViewPrivate::selectAll(bool select)
     finishByteEditor();
 
     if (select) {
-        mTableRanges->setSelection(AddressRange(0, mTableLayout.length() - 1));
+        mTableRanges.setSelection(AddressRange(0, mTableLayout.length() - 1));
         mTableCursor.gotoEnd();
     } else {
-        mTableRanges->removeSelection();
+        mTableRanges.removeSelection();
     }
 
     endViewUpdate();
@@ -689,7 +687,7 @@ void AbstractByteArrayViewPrivate::setCursorPosition(Address index, bool behind)
         mTableCursor.stepBehind();
     }
 
-    mTableRanges->removeSelection();
+    mTableRanges.removeSelection();
     ensureCursorVisible();
 
     endViewUpdate();
@@ -700,13 +698,13 @@ void AbstractByteArrayViewPrivate::setSelectionCursorPosition(Address index)
     pauseCursor();
     finishByteEditor();
 
-    if (!mTableRanges->selectionStarted()) {
-        mTableRanges->setSelectionStart(mTableCursor.realIndex());
+    if (!mTableRanges.selectionStarted()) {
+        mTableRanges.setSelectionStart(mTableCursor.realIndex());
     }
 
     mTableCursor.gotoCIndex(index);
 
-    mTableRanges->setSelectionEnd(mTableCursor.realIndex());
+    mTableRanges.setSelectionEnd(mTableCursor.realIndex());
     ensureCursorVisible();
 
     endViewUpdate();
@@ -717,7 +715,7 @@ void AbstractByteArrayViewPrivate::setSelection(const AddressRange& _selection)
     AddressRange selection(_selection);
     selection.restrictEndTo(mTableLayout.length() - 1);
 
-    const AddressRange oldSelection = mTableRanges->selection();
+    const AddressRange oldSelection = mTableRanges.selection();
 
     if (!selection.isValid()
         || selection == oldSelection) {
@@ -727,7 +725,7 @@ void AbstractByteArrayViewPrivate::setSelection(const AddressRange& _selection)
     pauseCursor();
     finishByteEditor();
 
-    mTableRanges->setSelection(selection);
+    mTableRanges.setSelection(selection);
     mTableCursor.gotoCIndex(selection.nextBehindEnd());
 
 // TODO:            ensureVisible( *mActiveColumn, mTableLayout.coordOfIndex(selection.start()) );
@@ -738,11 +736,11 @@ void AbstractByteArrayViewPrivate::setSelection(const AddressRange& _selection)
 
 QByteArray AbstractByteArrayViewPrivate::selectedData() const
 {
-    if (!mTableRanges->hasSelection()) {
+    if (!mTableRanges.hasSelection()) {
         return {};
     }
 
-    const AddressRange selection = mTableRanges->selection();
+    const AddressRange selection = mTableRanges.selection();
     QByteArray data;
     data.resize(selection.width());
     byteArrayModel()->copyTo(reinterpret_cast<Byte*>(data.data()), selection.start(), selection.width());
@@ -751,7 +749,7 @@ QByteArray AbstractByteArrayViewPrivate::selectedData() const
 
 QMimeData* AbstractByteArrayViewPrivate::selectionAsMimeData() const
 {
-    if (!mTableRanges->hasSelection()) {
+    if (!mTableRanges.hasSelection()) {
         return nullptr;
     }
 
@@ -841,10 +839,10 @@ void AbstractByteArrayViewPrivate::insert(const QByteArray& data)
     Size lengthOfInserted;
     Address insertionOffset = -1;
     if (mOverWrite) {
-        if (mTableRanges->hasSelection()) {
+        if (mTableRanges.hasSelection()) {
             // replacing the selection:
             // we restrict the replacement to the minimum length of selection and input
-            AddressRange selection = mTableRanges->removeSelection();
+            AddressRange selection = mTableRanges.removeSelection();
             selection.restrictEndByWidth(data.size());
             insertionOffset = selection.start();
             lengthOfInserted = mByteArrayModel->replace(selection, reinterpret_cast<const Byte*>(data.constData()), selection.width());
@@ -861,9 +859,9 @@ void AbstractByteArrayViewPrivate::insert(const QByteArray& data)
             }
         }
     } else {
-        if (mTableRanges->hasSelection()) {
+        if (mTableRanges.hasSelection()) {
             // replacing the selection
-            const AddressRange selection = mTableRanges->removeSelection();
+            const AddressRange selection = mTableRanges.removeSelection();
             insertionOffset = selection.start();
             lengthOfInserted = mByteArrayModel->replace(selection, data);
         } else {
@@ -890,7 +888,7 @@ void AbstractByteArrayViewPrivate::removeSelectedData()
         return;
     }
 
-    const AddressRange selection = mTableRanges->removeSelection();
+    const AddressRange selection = mTableRanges.removeSelection();
 
     mByteArrayModel->remove(selection);
 
@@ -899,7 +897,7 @@ void AbstractByteArrayViewPrivate::removeSelectedData()
 
 bool AbstractByteArrayViewPrivate::getNextChangedRange(CoordRange* changedRange, const CoordRange& visibleRange) const
 {
-    const bool result = mTableRanges->overlapsChanges(visibleRange, changedRange);
+    const bool result = mTableRanges.overlapsChanges(visibleRange, changedRange);
 
     if (result) {
         changedRange->restrictTo(visibleRange);
@@ -1310,7 +1308,7 @@ void AbstractByteArrayViewPrivate::onBookmarksChange(const QVector<Bookmark>& bo
 {
     for (const Bookmark& bookmark : bookmarks) {
         const Address position = bookmark.offset();
-        mTableRanges->addChangedRange(position, position);
+        mTableRanges.addChangedRange(position, position);
     }
 
     updateChanged();
@@ -1350,7 +1348,7 @@ void AbstractByteArrayViewPrivate::onContentsChanged(const ArrayChangeMetricsLis
         const LineRange changedLines = (oldNoOfLines < newNoOfLines) ?
                                        LineRange(oldNoOfLines, newNoOfLines - 1) :
                                        LineRange(newNoOfLines, oldNoOfLines - 1);
-        mTableRanges->addChangedOffsetLines(changedLines);
+        mTableRanges.addChangedOffsetLines(changedLines);
     }
 
     // adapt cursor(s)
@@ -1360,8 +1358,8 @@ void AbstractByteArrayViewPrivate::onContentsChanged(const ArrayChangeMetricsLis
         mTableCursor.adaptToChanges(changeList, oldLength);
     }
 
-    mTableRanges->adaptToChanges(changeList, oldLength);
-    // qCDebug(LOG_OKTETA_GUI) << "Cursor:"<<mDataCursor->index()<<", selection:"<<mTableRanges->selectionStart()<<"-"<<mTableRanges->selectionEnd()
+    mTableRanges.adaptToChanges(changeList, oldLength);
+    // qCDebug(LOG_OKTETA_GUI) << "Cursor:"<<mDataCursor->index()<<", selection:"<<mTableRanges.selectionStart()<<"-"<<mTableRanges.selectionEnd()
     //          <<", BytesPerLine: "<<mTableLayout.noOfBytesPerLine()<<endl;
     ensureCursorVisible();
 
@@ -1383,13 +1381,13 @@ void AbstractByteArrayViewPrivate::emitSelectionUpdates()
 
     bool selectionChanged = false;
     bool hasSelectionChanged = false;
-    mTableRanges->takeHasSelectionChanged(&hasSelectionChanged, &selectionChanged);
+    mTableRanges.takeHasSelectionChanged(&hasSelectionChanged, &selectionChanged);
 
     if (selectionChanged) {
-        Q_EMIT q->selectionChanged(mTableRanges->selection());
+        Q_EMIT q->selectionChanged(mTableRanges.selection());
     }
     if (hasSelectionChanged) {
-        const bool hasSelection = mTableRanges->hasSelection();
+        const bool hasSelection = mTableRanges.hasSelection();
         if (!mOverWrite) {
             Q_EMIT q->cutAvailable(hasSelection);
         }

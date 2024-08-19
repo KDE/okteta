@@ -50,7 +50,7 @@ bool MouseNavigator::handleMousePressEvent(QMouseEvent* mouseEvent)
 
     if (mouseEvent->button() == Qt::LeftButton) {
         ByteArrayTableCursor* const tableCursor = mView->tableCursor();
-        ByteArrayTableRanges* tableRanges = mView->tableRanges();
+        ByteArrayTableRanges* const tableRanges = mView->tableRanges();
         const ByteArrayTableLayout* const tableLayout = mView->tableLayout();
 
         mView->pauseCursor();
@@ -138,7 +138,7 @@ bool MouseNavigator::handleMouseMoveEvent(QMouseEvent* mouseEvent)
                 handleMouseMove(movePoint);
             }
         } else if (!mView->isEffectiveReadOnly()) {
-            ByteArrayTableRanges* tableRanges = mView->tableRanges();
+            const ByteArrayTableRanges* const tableRanges = mView->tableRanges();
 
             // visual feedback for possible dragging
             const bool InSelection =
@@ -156,7 +156,7 @@ bool MouseNavigator::handleMouseReleaseEvent(QMouseEvent* mouseEvent)
     bool eventUsed = false;
 
     if (mouseEvent->button() == Qt::LeftButton) {
-        ByteArrayTableRanges* tableRanges = mView->tableRanges();
+        ByteArrayTableRanges* const tableRanges = mView->tableRanges();
 
 //         const QPoint releasePoint = mView->viewportToColumns( mouseEvent->pos() );
 
@@ -250,7 +250,7 @@ void MouseNavigator::autoScrollTimerDone()
 void MouseNavigator::handleMouseMove(QPoint point)   // handles the move of the mouse with pressed buttons
 {
     ByteArrayTableCursor* const tableCursor = mView->tableCursor();
-    ByteArrayTableRanges* tableRanges = mView->tableRanges();
+    ByteArrayTableRanges* const tableRanges = mView->tableRanges();
 
     const int yOffset = mView->yOffset();
     const int behindLastYOffset = yOffset + mView->visibleHeight();

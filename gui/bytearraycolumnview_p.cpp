@@ -41,11 +41,11 @@ void ByteArrayColumnViewPrivate::init()
 
     // creating the columns in the needed order
     mValueColumn =
-        new ValueByteArrayColumnRenderer(mStylist, mByteArrayModel, &mTableLayout, mTableRanges);
+        new ValueByteArrayColumnRenderer(mStylist, mByteArrayModel, &mTableLayout, &mTableRanges);
     mMiddleBorderColumn =
         new BorderColumnRenderer(mStylist, true);
     mCharColumn =
-        new CharByteArrayColumnRenderer(mStylist, mByteArrayModel, &mTableLayout, mTableRanges);
+        new CharByteArrayColumnRenderer(mStylist, mByteArrayModel, &mTableLayout, &mTableRanges);
 
     addColumn(mOffsetColumn);
     addColumn(mOffsetBorderColumn);
@@ -702,7 +702,7 @@ void ByteArrayColumnViewPrivate::updateChanged()
     const PixelXRange Xs = PixelXRange::fromWidth(xOffset, visibleWidth());
 
     // do updates in offset column
-    const LineRange changedOffsetLines = mTableRanges->changedOffsetLines();
+    const LineRange changedOffsetLines = mTableRanges.changedOffsetLines();
     if (!changedOffsetLines.isEmpty()) {
         updateColumn(*mOffsetColumn, changedOffsetLines);
     }
@@ -783,7 +783,7 @@ void ByteArrayColumnViewPrivate::updateChanged()
         }
     }
 
-    mTableRanges->resetChangedRanges();
+    mTableRanges.resetChangedRanges();
 }
 
 void ByteArrayColumnViewPrivate::ensureCursorVisible()

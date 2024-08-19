@@ -113,7 +113,8 @@ public: // value access
     const ByteArrayTableLayout* tableLayout() const;
     ByteArrayTableCursor* tableCursor();
     const ByteArrayTableCursor* tableCursor() const;
-    ByteArrayTableRanges* tableRanges() const;
+    ByteArrayTableRanges* tableRanges();
+    const ByteArrayTableRanges* tableRanges() const;
 
     const ValueCodec* valueCodec() const;
     AbstractByteArrayView::ValueCoding valueCoding() const;
@@ -279,7 +280,7 @@ protected:
     /** */
     ByteArrayTableCursor mTableCursor;
     /** */
-    ByteArrayTableRanges* mTableRanges;
+    ByteArrayTableRanges mTableRanges;
 
     OffsetColumnRenderer* mOffsetColumn;
     BorderColumnRenderer* mOffsetBorderColumn;
@@ -365,7 +366,8 @@ inline const ByteArrayTableLayout* AbstractByteArrayViewPrivate::tableLayout() c
 inline ByteArrayTableLayout* AbstractByteArrayViewPrivate::tableLayout() { return &mTableLayout; }
 inline const ByteArrayTableCursor* AbstractByteArrayViewPrivate::tableCursor() const { return &mTableCursor; }
 inline ByteArrayTableCursor* AbstractByteArrayViewPrivate::tableCursor() { return &mTableCursor; }
-inline ByteArrayTableRanges* AbstractByteArrayViewPrivate::tableRanges() const { return mTableRanges; }
+inline const ByteArrayTableRanges* AbstractByteArrayViewPrivate::tableRanges() const { return &mTableRanges; }
+inline ByteArrayTableRanges* AbstractByteArrayViewPrivate::tableRanges() { return &mTableRanges; }
 
 inline const ValueCodec* AbstractByteArrayViewPrivate::valueCodec()  const { return mValueCodec.get(); }
 inline AbstractByteArrayView::ValueCoding AbstractByteArrayViewPrivate::valueCoding() const { return mValueCoding; }
@@ -379,10 +381,10 @@ inline int AbstractByteArrayViewPrivate::noOfBytesPerLine()    const { return mT
 inline Address AbstractByteArrayViewPrivate::firstLineOffset() const { return mTableLayout.firstLineOffset(); }
 inline Address AbstractByteArrayViewPrivate::startOffset()     const { return mTableLayout.startOffset(); }
 
-inline AddressRange AbstractByteArrayViewPrivate::selection() const { return mTableRanges->selection(); }
-inline bool AbstractByteArrayViewPrivate::hasSelectedData()    const { return mTableRanges->hasSelection(); }
+inline AddressRange AbstractByteArrayViewPrivate::selection() const { return mTableRanges.selection(); }
+inline bool AbstractByteArrayViewPrivate::hasSelectedData()   const { return mTableRanges.hasSelection(); }
 
-inline AddressRange AbstractByteArrayViewPrivate::marking() const { return mTableRanges->marking(); }
+inline AddressRange AbstractByteArrayViewPrivate::marking() const { return mTableRanges.marking(); }
 
 inline bool AbstractByteArrayViewPrivate::tabChangesFocus()      const { return mTabController->tabChangesFocus(); }
 inline bool AbstractByteArrayViewPrivate::isByteEditorActive()   const { return mValueEditor->isInEditMode(); }

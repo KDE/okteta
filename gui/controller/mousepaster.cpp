@@ -34,7 +34,7 @@ bool MousePaster::handleMousePressEvent(QMouseEvent* mouseEvent)
         mView->pauseCursor();
         mView->finishByteEditor();
 
-        ByteArrayTableRanges* tableRanges = mView->tableRanges();
+        ByteArrayTableRanges* const tableRanges = mView->tableRanges();
         tableRanges->removeSelection();
 
         if (tableRanges->isModified()) {
@@ -61,7 +61,7 @@ bool MousePaster::handleMouseReleaseEvent(QMouseEvent* mouseEvent)
 
         mView->placeCursor(releasePoint);
 
-        ByteArrayTableRanges* tableRanges = mView->tableRanges();
+        ByteArrayTableRanges* const tableRanges = mView->tableRanges();
         const ByteArrayTableCursor* const tableCursor = mView->tableCursor();
         // replace no selection?
         if (tableRanges->hasSelection() && !tableRanges->selectionIncludes(tableCursor->index())) {

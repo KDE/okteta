@@ -90,7 +90,7 @@ void KeyNavigator::moveCursor(MoveAction action, bool select)
     mView->finishByteEditor();
 
     ByteArrayTableCursor* const tableCursor = mView->tableCursor();
-    ByteArrayTableRanges* tableRanges = mView->tableRanges();
+    ByteArrayTableRanges* const tableRanges = mView->tableRanges();
 
     if (select) {
         if (!tableRanges->selectionStarted()) {
