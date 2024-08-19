@@ -42,7 +42,7 @@ OktetaPartFactory::OktetaPartFactory()
         Kasten::ByteArrayDataGeneratorConfigEditorFactoryFactory::createFactorys();
 
     mModelCodecManager->setStreamEncoders(encoderList);
-    mModelCodecManager->setGenerators( generatorList );
+    mModelCodecManager->setDataGenerators(generatorList);
 
     mModelCodecViewManager->setEncoderConfigEditorFactories(encoderConfigEditorFactoryList);
     mModelCodecViewManager->setGeneratorConfigEditorFactories(generatorConfigEditorFactoryList);

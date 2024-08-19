@@ -79,7 +79,7 @@ void ModelCodecManagerPrivate::setStreamDecoders(const QVector<AbstractModelStre
     mDecoderList = decoderList;
 }
 
-void ModelCodecManagerPrivate::setGenerators(const QVector<AbstractModelDataGenerator*>& generatorList)
+void ModelCodecManagerPrivate::setDataGenerators(const QVector<AbstractModelDataGenerator*>& generatorList)
 {
     mGeneratorList = generatorList;
 }

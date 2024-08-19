@@ -108,7 +108,7 @@ int OktetaProgram::execute()
         ByteArrayDataGeneratorConfigEditorFactoryFactory::createFactorys();
 
     mDocumentManager->codecManager()->setStreamEncoders(encoderList);
-    mDocumentManager->codecManager()->setGenerators(generatorList);
+    mDocumentManager->codecManager()->setDataGenerators(generatorList);
     mDocumentManager->codecManager()->setOverwriteDialog(mDialogHandler.get());
     mDocumentManager->createManager()->setDocumentFactory(new ByteArrayDocumentFactory());
     mDocumentManager->syncManager()->setDocumentSynchronizerFactory(new ByteArrayRawFileSynchronizerFactory());

@@ -71,11 +71,11 @@ void ModelCodecManager::setStreamDecoders(const QVector<AbstractModelStreamDecod
     d->setStreamDecoders(decoderList);
 }
 
-void ModelCodecManager::setGenerators(const QVector<AbstractModelDataGenerator*>& generatorList)
+void ModelCodecManager::setDataGenerators(const QVector<AbstractModelDataGenerator*>& generatorList)
 {
     Q_D(ModelCodecManager);
 
-    d->setGenerators(generatorList);
+    d->setDataGenerators(generatorList);
 }
 
 void ModelCodecManager::encodeToStream(AbstractModelStreamEncoder* encoder,
