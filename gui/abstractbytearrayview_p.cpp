@@ -138,7 +138,7 @@ AbstractByteArrayViewPrivate::AbstractByteArrayViewPrivate(AbstractByteArrayView
     : ColumnsViewScrollAreaEngine(parent)
     , mByteArrayModel(nullModel())
     , mTableLayout(DefaultNoOfBytesPerLine, DefaultFirstLineOffset, DefaultStartOffset, 0, 0)
-    , mTableCursor(new ByteArrayTableCursor(&mTableLayout))
+    , mTableCursor(&mTableLayout)
     , mTableRanges(new ByteArrayTableRanges(&mTableLayout))
     , mReadOnly(false)
     , mOverWriteOnly(false)
@@ -174,7 +174,6 @@ AbstractByteArrayViewPrivate::~AbstractByteArrayViewPrivate()
     delete mStylist;
 
     delete mTableRanges;
-    delete mTableCursor;
 }
 
 void AbstractByteArrayViewPrivate::init()
@@ -202,8 +201,8 @@ void AbstractByteArrayViewPrivate::init()
     mUndoRedoController = new UndoRedoController(this, mTabController);
     mClipboardController = new ClipboardController(this, mUndoRedoController);
     mKeyNavigator = new KeyNavigator(this, mClipboardController);
-    mValueEditor = new ValueEditor(mTableCursor, this, mKeyNavigator);
-    mCharEditor = new CharEditor(mTableCursor, this, mKeyNavigator);
+    mValueEditor = new ValueEditor(&mTableCursor, this, mKeyNavigator);
+    mCharEditor = new CharEditor(&mTableCursor, this, mKeyNavigator);
 
     mMousePaster = new MousePaster(this, nullptr);
     mMouseNavigator = new MouseNavigator(this, mMousePaster);
@@ -281,7 +280,7 @@ void AbstractByteArrayViewPrivate::setByteArrayModel(AbstractByteArrayModel* byt
 
     q->viewport()->update();
 
-    mTableCursor->gotoStart();
+    mTableCursor.gotoStart();
     ensureCursorVisible();
 
     unpauseCursor();
@@ -468,7 +467,7 @@ void AbstractByteArrayViewPrivate::setStartOffset(Address startOffset)
 
     q->viewport()->update();
 
-    mTableCursor->updateCoord();
+    mTableCursor.updateCoord();
     ensureCursorVisible();
 
     unpauseCursor();
@@ -491,7 +490,7 @@ void AbstractByteArrayViewPrivate::setFirstLineOffset(Address firstLineOffset)
 
     q->viewport()->update();
 
-    mTableCursor->updateCoord();
+    mTableCursor.updateCoord();
     ensureCursorVisible();
 
     unpauseCursor();
@@ -569,7 +568,7 @@ void AbstractByteArrayViewPrivate::setOverwriteMode(bool overwriteMode)
         pauseCursor();
     }
 
-    mTableCursor->setAppendPosEnabled(!mOverWrite);
+    mTableCursor.setAppendPosEnabled(!mOverWrite);
 
     if (changeCursor) {
         unpauseCursor();
@@ -651,7 +650,7 @@ bool AbstractByteArrayViewPrivate::selectWord(Address index)
             finishByteEditor();
 
             mTableRanges->setFirstWordSelection(wordSection);
-            mTableCursor->gotoIndex(wordSection.nextBehindEnd());
+            mTableCursor.gotoIndex(wordSection.nextBehindEnd());
 
             endViewUpdate();
 
@@ -669,7 +668,7 @@ void AbstractByteArrayViewPrivate::selectAll(bool select)
 
     if (select) {
         mTableRanges->setSelection(AddressRange(0, mTableLayout.length() - 1));
-        mTableCursor->gotoEnd();
+        mTableCursor.gotoEnd();
     } else {
         mTableRanges->removeSelection();
     }
@@ -685,9 +684,9 @@ void AbstractByteArrayViewPrivate::setCursorPosition(Address index, bool behind)
     if (behind) {
         --index;
     }
-    mTableCursor->gotoCIndex(index);
+    mTableCursor.gotoCIndex(index);
     if (behind) {
-        mTableCursor->stepBehind();
+        mTableCursor.stepBehind();
     }
 
     mTableRanges->removeSelection();
@@ -702,12 +701,12 @@ void AbstractByteArrayViewPrivate::setSelectionCursorPosition(Address index)
     finishByteEditor();
 
     if (!mTableRanges->selectionStarted()) {
-        mTableRanges->setSelectionStart(mTableCursor->realIndex());
+        mTableRanges->setSelectionStart(mTableCursor.realIndex());
     }
 
-    mTableCursor->gotoCIndex(index);
+    mTableCursor.gotoCIndex(index);
 
-    mTableRanges->setSelectionEnd(mTableCursor->realIndex());
+    mTableRanges->setSelectionEnd(mTableCursor.realIndex());
     ensureCursorVisible();
 
     endViewUpdate();
@@ -729,7 +728,7 @@ void AbstractByteArrayViewPrivate::setSelection(const AddressRange& _selection)
     finishByteEditor();
 
     mTableRanges->setSelection(selection);
-    mTableCursor->gotoCIndex(selection.nextBehindEnd());
+    mTableCursor.gotoCIndex(selection.nextBehindEnd());
 
 // TODO:            ensureVisible( *mActiveColumn, mTableLayout.coordOfIndex(selection.start()) );
     ensureCursorVisible();
@@ -877,7 +876,7 @@ void AbstractByteArrayViewPrivate::insert(const QByteArray& data)
         const Address postInsertionOffset = insertionOffset + lengthOfInserted;
         if (postInsertionOffset != cursorPosition()) {
             pauseCursor();
-            mTableCursor->gotoCIndex(postInsertionOffset);
+            mTableCursor.gotoCIndex(postInsertionOffset);
             unpauseCursor();
             Q_EMIT q->cursorPositionChanged(cursorPosition());
         }
@@ -929,7 +928,7 @@ void AbstractByteArrayViewPrivate::updateViewByWidth()
 
     q->viewport()->update();
 
-    mTableCursor->updateCoord();
+    mTableCursor.updateCoord();
     // TODO: see for what actions if would be usable to have ensureCursorVisible()
     // TODO: think about adding action "showCursor"/"show FocusItem" to menu
     // disabled as this prevents splitting views with aligned areas from working
@@ -1340,7 +1339,7 @@ void AbstractByteArrayViewPrivate::onContentsChanged(const ArrayChangeMetricsLis
 {
     pauseCursor();
 
-    const bool atEnd = mTableCursor->atEnd();
+    const bool atEnd = mTableCursor.atEnd();
     const Size oldLength = mTableLayout.length(); // TODO: hack for mDataCursor->adaptSelectionToChange
     // update lengths
     int oldNoOfLines = noOfLines();
@@ -1356,9 +1355,9 @@ void AbstractByteArrayViewPrivate::onContentsChanged(const ArrayChangeMetricsLis
 
     // adapt cursor(s)
     if (atEnd) {
-        mTableCursor->gotoEnd();
+        mTableCursor.gotoEnd();
     } else {
-        mTableCursor->adaptToChanges(changeList, oldLength);
+        mTableCursor.adaptToChanges(changeList, oldLength);
     }
 
     mTableRanges->adaptToChanges(changeList, oldLength);

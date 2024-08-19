@@ -111,7 +111,8 @@ public: // value access
 
     ByteArrayTableLayout* tableLayout();
     const ByteArrayTableLayout* tableLayout() const;
-    ByteArrayTableCursor* tableCursor() const;
+    ByteArrayTableCursor* tableCursor();
+    const ByteArrayTableCursor* tableCursor() const;
     ByteArrayTableRanges* tableRanges() const;
 
     const ValueCodec* valueCodec() const;
@@ -276,7 +277,7 @@ protected:
     /** holds the logical layout */
     ByteArrayTableLayout mTableLayout;
     /** */
-    ByteArrayTableCursor* mTableCursor;
+    ByteArrayTableCursor mTableCursor;
     /** */
     ByteArrayTableRanges* mTableRanges;
 
@@ -362,7 +363,8 @@ inline double AbstractByteArrayViewPrivate::zoomLevel()        const { return mZ
 
 inline const ByteArrayTableLayout* AbstractByteArrayViewPrivate::tableLayout() const { return &mTableLayout; }
 inline ByteArrayTableLayout* AbstractByteArrayViewPrivate::tableLayout() { return &mTableLayout; }
-inline ByteArrayTableCursor* AbstractByteArrayViewPrivate::tableCursor() const { return mTableCursor; }
+inline const ByteArrayTableCursor* AbstractByteArrayViewPrivate::tableCursor() const { return &mTableCursor; }
+inline ByteArrayTableCursor* AbstractByteArrayViewPrivate::tableCursor() { return &mTableCursor; }
 inline ByteArrayTableRanges* AbstractByteArrayViewPrivate::tableRanges() const { return mTableRanges; }
 
 inline const ValueCodec* AbstractByteArrayViewPrivate::valueCodec()  const { return mValueCodec.get(); }
@@ -370,8 +372,8 @@ inline AbstractByteArrayView::ValueCoding AbstractByteArrayViewPrivate::valueCod
 inline const CharCodec* AbstractByteArrayViewPrivate::charCodec()   const { return mCharCodec.get(); }
 inline QString AbstractByteArrayViewPrivate::charCodingName() const { return mCharCodec->name(); }
 inline AbstractByteArrayView::LayoutStyle AbstractByteArrayViewPrivate::layoutStyle() const { return mResizeStyle; }
-inline Address AbstractByteArrayViewPrivate::cursorPosition()   const { return mTableCursor->realIndex(); }
-inline bool AbstractByteArrayViewPrivate::isCursorBehind()  const { return mTableCursor->isBehind(); }
+inline Address AbstractByteArrayViewPrivate::cursorPosition()   const { return mTableCursor.realIndex(); }
+inline bool AbstractByteArrayViewPrivate::isCursorBehind()  const { return mTableCursor.isBehind(); }
 inline bool AbstractByteArrayViewPrivate::isModified()      const { return mByteArrayModel->isModified(); }
 inline int AbstractByteArrayViewPrivate::noOfBytesPerLine()    const { return mTableLayout.noOfBytesPerLine(); }
 inline Address AbstractByteArrayViewPrivate::firstLineOffset() const { return mTableLayout.firstLineOffset(); }

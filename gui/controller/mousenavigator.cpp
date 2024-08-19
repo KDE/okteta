@@ -49,7 +49,7 @@ bool MouseNavigator::handleMousePressEvent(QMouseEvent* mouseEvent)
     bool eventUsed = false;
 
     if (mouseEvent->button() == Qt::LeftButton) {
-        ByteArrayTableCursor* tableCursor = mView->tableCursor();
+        ByteArrayTableCursor* const tableCursor = mView->tableCursor();
         ByteArrayTableRanges* tableRanges = mView->tableRanges();
         const ByteArrayTableLayout* const tableLayout = mView->tableLayout();
 
@@ -214,7 +214,7 @@ bool MouseNavigator::handleMouseDoubleClickEvent(QMouseEvent* mouseEvent)
     bool eventUsed = false;
 
     if (mouseEvent->button() == Qt::LeftButton) {
-        ByteArrayTableCursor* tableCursor = mView->tableCursor();
+        const ByteArrayTableCursor* const tableCursor = mView->tableCursor();
 
         mDoubleClickLine = tableCursor->line();
 
@@ -249,7 +249,7 @@ void MouseNavigator::autoScrollTimerDone()
 
 void MouseNavigator::handleMouseMove(QPoint point)   // handles the move of the mouse with pressed buttons
 {
-    ByteArrayTableCursor* tableCursor = mView->tableCursor();
+    ByteArrayTableCursor* const tableCursor = mView->tableCursor();
     ByteArrayTableRanges* tableRanges = mView->tableRanges();
 
     const int yOffset = mView->yOffset();

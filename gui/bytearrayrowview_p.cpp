@@ -488,7 +488,7 @@ void ByteArrayRowViewPrivate::placeCursor(QPoint point)
     const int linePosition = mByteArrayColumn->magneticLinePositionOfX(point.x());
     const Coord coord(linePosition, lineIndex);
 
-    mTableCursor->gotoCCoord(coord);
+    mTableCursor.gotoCCoord(coord);
     Q_EMIT q->cursorPositionChanged(cursorPosition());
 }
 
@@ -534,7 +534,7 @@ void ByteArrayRowViewPrivate::pauseCursor()
 
 QRect ByteArrayRowViewPrivate::cursorRect() const
 {
-    QRect cursorRect = mByteArrayColumn->byteRect(mTableCursor->coord(), mActiveCoding);
+    QRect cursorRect = mByteArrayColumn->byteRect(mTableCursor.coord(), mActiveCoding);
     cursorRect.translate(-xOffset(), -yOffset());
 
     return cursorRect;
@@ -550,7 +550,7 @@ void ByteArrayRowViewPrivate::updateCursor(const ByteArrayRowColumnRenderer& col
         return;
     }
 
-    QRect cursorRect = column.byteRect(mTableCursor->coord(), codingId);
+    QRect cursorRect = column.byteRect(mTableCursor.coord(), codingId);
     cursorRect.translate(-xOffset(), -yOffset());
 
     q->viewport()->update(cursorRect);
@@ -565,7 +565,7 @@ void ByteArrayRowViewPrivate::createCursorPixmaps()
     // create mCursorPixmaps
     mCursorPixmaps.setSize(byteWidth, mByteArrayColumn->digitHeight(), q->devicePixelRatio());
 
-    const Address index = mTableCursor->validIndex();
+    const Address index = mTableCursor.validIndex();
 
     QPainter painter;
     painter.begin(&mCursorPixmaps.offPixmap());
@@ -600,15 +600,15 @@ void ByteArrayRowViewPrivate::drawActiveCursor(QPainter* painter)
         return;
     }
 
-    const int x = mByteArrayColumn->xOfLinePosition(mTableCursor->pos());
-    const int y = lineHeight() * mTableCursor->line()
+    const int x = mByteArrayColumn->xOfLinePosition(mTableCursor.pos());
+    const int y = lineHeight() * mTableCursor.line()
                   + mByteArrayColumn->yOfCodingId(mActiveCoding);
 
     painter->translate(x, y);
 
     // paint edited byte?
     if (mValueEditor->isInEditMode()) {
-        const Address index = mTableCursor->index();
+        const Address index = mTableCursor.index();
 
         if (mBlinkCursorVisible) {
             mByteArrayColumn->renderEditedByte(painter, mValueEditor->value(), mValueEditor->valueAsString());
@@ -635,15 +635,15 @@ void ByteArrayRowViewPrivate::drawInactiveCursor(QPainter* painter)
         return;
     }
 
-    const Address index = mTableCursor->validIndex();
+    const Address index = mTableCursor.validIndex();
 
-    const int x = mByteArrayColumn->xOfLinePosition(mTableCursor->pos());
-    const int y = lineHeight() * mTableCursor->line()
+    const int x = mByteArrayColumn->xOfLinePosition(mTableCursor.pos());
+    const int y = lineHeight() * mTableCursor.line()
                   + mByteArrayColumn->yOfCodingId(mInactiveCoding);
     painter->translate(x, y);
 
     const ByteArrayRowColumnRenderer::FrameStyle frameStyle =
-        mTableCursor->isBehind() ?                   ByteArrayRowColumnRenderer::Right :
+        mTableCursor.isBehind() ?                      ByteArrayRowColumnRenderer::Right :
         (mOverWrite || mValueEditor->isInEditMode()) ? ByteArrayRowColumnRenderer::Frame :
         ByteArrayRowColumnRenderer::Left;
     mByteArrayColumn->renderFramedByte(painter, index, mInactiveCoding, frameStyle);
@@ -658,7 +658,7 @@ void ByteArrayRowViewPrivate::renderColumns(QPainter* painter, int cx, int cy, i
     // Then it needs to know about inactive, insideByte and the like... well...
     // perhaps subclassing the buffer columns even more, to CharByteArrayColumnRenderer and ValueByteArrayColumnRenderer?
 
-    if (visibleLines(PixelYRange::fromWidth(cy, ch)).includes(mTableCursor->line())) {
+    if (visibleLines(PixelYRange::fromWidth(cy, ch)).includes(mTableCursor.line())) {
         drawActiveCursor(painter);
         drawInactiveCursor(painter);
     }
@@ -749,7 +749,7 @@ void ByteArrayRowViewPrivate::updateChanged()
 
 void ByteArrayRowViewPrivate::ensureCursorVisible()
 {
-    ensureVisible(*mByteArrayColumn, mTableCursor->coord());
+    ensureVisible(*mByteArrayColumn, mTableCursor.coord());
 }
 
 void ByteArrayRowViewPrivate::ensureVisible(const AddressRange& range, bool ensureStartVisible)

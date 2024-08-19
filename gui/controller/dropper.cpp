@@ -46,7 +46,7 @@ bool Dropper::handleDragEnterEvent(QDragEnterEvent* dragEnterEvent)
         && mByteArrayView->canReadData(dragEnterEvent->mimeData())) {
         mIsActive = true;
         // TODO: store value edit data
-        ByteArrayTableCursor* tableCursor = mByteArrayView->tableCursor();
+        const ByteArrayTableCursor* const tableCursor = mByteArrayView->tableCursor();
         // TODO: behind state should not be controllable, add cursorData for (re)storingdragEnterEvent
         mBeforeDragCursorPos = tableCursor->index();
         mBeforeDragCursorIsBehind = tableCursor->isBehind();
@@ -89,7 +89,7 @@ bool Dropper::handleDragLeaveEvent(QDragLeaveEvent* dragLeaveEvent)
     if (mCursorIsMovedByDrag) {
         mByteArrayView->pauseCursor();
         // TODO: get back to value edit mode if we were in
-        ByteArrayTableCursor* tableCursor = mByteArrayView->tableCursor();
+        ByteArrayTableCursor* const tableCursor = mByteArrayView->tableCursor();
         tableCursor->gotoIndex(mBeforeDragCursorPos);
         if (mBeforeDragCursorIsBehind) {
             tableCursor->stepBehind();
@@ -128,7 +128,7 @@ void Dropper::handleInternalDrag(QDropEvent* dropEvent, AbstractByteArrayViewPri
     // get drag origin
     AddressRange selection = sourceByteArrayView->tableRanges()->removeSelection();
 
-    ByteArrayTableCursor* tableCursor = mByteArrayView->tableCursor();
+    ByteArrayTableCursor* const tableCursor = mByteArrayView->tableCursor();
     AbstractByteArrayModel* byteArrayModel = mByteArrayView->byteArrayModel();
 
     Address insertIndex = tableCursor->realIndex();
