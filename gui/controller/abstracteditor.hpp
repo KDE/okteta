@@ -14,7 +14,6 @@
 
 namespace Okteta {
 class AbstractByteArrayViewPrivate;
-class ByteArrayTableCursor;
 
 class AbstractEditor : public AbstractController
 {
@@ -28,7 +27,7 @@ protected:
     };
 
 protected:
-    AbstractEditor(ByteArrayTableCursor* cursor, AbstractByteArrayViewPrivate* view, AbstractController* parent);
+    AbstractEditor(AbstractByteArrayViewPrivate* view, AbstractController* parent);
 
 public:
     ~AbstractEditor() override;
@@ -41,7 +40,6 @@ protected:
     void doEditAction(EditAction action);
 
 protected:
-    ByteArrayTableCursor* const mCursor;
     AbstractByteArrayViewPrivate* const mView;
 };
 

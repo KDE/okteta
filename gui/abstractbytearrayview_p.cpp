@@ -199,8 +199,8 @@ void AbstractByteArrayViewPrivate::init()
     mUndoRedoController = new UndoRedoController(this, mTabController);
     mClipboardController = new ClipboardController(this, mUndoRedoController);
     mKeyNavigator = new KeyNavigator(this, mClipboardController);
-    mValueEditor = new ValueEditor(&mTableCursor, this, mKeyNavigator);
-    mCharEditor = new CharEditor(&mTableCursor, this, mKeyNavigator);
+    mValueEditor = new ValueEditor(this, mKeyNavigator);
+    mCharEditor = new CharEditor(this, mKeyNavigator);
 
     mMousePaster = new MousePaster(this, nullptr);
     mMouseNavigator = new MouseNavigator(this, mMousePaster);

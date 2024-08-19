@@ -34,7 +34,7 @@ private:
     };
 
 public:
-    ValueEditor(ByteArrayTableCursor* cursor, AbstractByteArrayViewPrivate* view, AbstractController* parent);
+    ValueEditor(AbstractByteArrayViewPrivate* view, AbstractController* parent);
     ~ValueEditor() override;
 
 public: // AbstractController API

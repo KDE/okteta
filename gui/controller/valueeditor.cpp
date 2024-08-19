@@ -22,8 +22,8 @@
 
 namespace Okteta {
 
-ValueEditor::ValueEditor(ByteArrayTableCursor* cursor, AbstractByteArrayViewPrivate* view, AbstractController* parent)
-    : AbstractEditor(cursor, view, parent)
+ValueEditor::ValueEditor(AbstractByteArrayViewPrivate* view, AbstractController* parent)
+    : AbstractEditor(view, parent)
     , mInEditMode(false)
     , mEditModeByInsert(false)
 {
@@ -155,7 +155,8 @@ bool ValueEditor::handleKeyPress(QKeyEvent* keyEvent)
                         if (mView->isOverwriteMode()) {
                             doValueEditAction(ValueEdit, inputValue);
                         } else {
-                            const Address index = mCursor->realIndex();
+                            ByteArrayTableCursor* const tableCursor = mView->tableCursor();
+                            const Address index = tableCursor->realIndex();
 
                             startEdit(i18nc("name of the change", "Insert"));
                             if (mView->byteArrayModel()->insert(index, &inputValue, 1) > 0) {
@@ -164,7 +165,7 @@ bool ValueEditor::handleKeyPress(QKeyEvent* keyEvent)
                                 mInsertedDigitsCount = 1;
                                 valueCodec->encode(&mValueString, 0, mEditValue);
 
-                                mCursor->gotoIndex(index);
+                                tableCursor->gotoIndex(index);
                                 mView->ensureCursorVisible();
 //                                 mView->updateCursors();
                                 mView->emitCursorPositionChanged();
@@ -189,12 +190,13 @@ bool ValueEditor::handleKeyPress(QKeyEvent* keyEvent)
 void ValueEditor::doValueEditAction(ValueEditAction Action, int input)
 {
     const Okteta::ValueCodec* valueCodec = mView->valueCodec();
+    ByteArrayTableCursor* const tableCursor = mView->tableCursor();
 
     // we are not yet in edit mode?
     if (!mInEditMode) {
-        const Address validIndex = mCursor->validIndex();
+        const Address validIndex = tableCursor->validIndex();
         // no valid cursor position?
-        if (validIndex == -1 || (!mView->isOverwriteMode() && input == -1) || mCursor->isBehind()) {
+        if (validIndex == -1 || (!mView->isOverwriteMode() && input == -1) || tableCursor->isBehind()) {
             return;
         }
 
@@ -263,7 +265,7 @@ void ValueEditor::doValueEditAction(ValueEditAction Action, int input)
         // sync value
         mEditValue = newValue;
         valueCodec->encode(&mValueString, 0, mEditValue);
-        mView->byteArrayModel()->replace(mCursor->index(), 1, &mEditValue, 1);
+        mView->byteArrayModel()->replace(tableCursor->index(), 1, &mEditValue, 1);
     }
 
 //     mView->updateCursors();
@@ -273,7 +275,7 @@ void ValueEditor::doValueEditAction(ValueEditAction Action, int input)
         finishEdit();
 
         if (moveToNext) {
-            mCursor->gotoNextByte();
+            tableCursor->gotoNextByte();
         }
 
         mView->unpauseCursor();

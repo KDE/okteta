@@ -17,7 +17,7 @@ namespace Okteta {
 class CharEditor : public AbstractEditor
 {
 public:
-    CharEditor(ByteArrayTableCursor* cursor, AbstractByteArrayViewPrivate* view, AbstractController* parent);
+    CharEditor(AbstractByteArrayViewPrivate* view, AbstractController* parent);
     ~CharEditor() override;
 
 public: // AbstractController API

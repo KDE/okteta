@@ -20,9 +20,8 @@
 
 namespace Okteta {
 
-AbstractEditor::AbstractEditor(ByteArrayTableCursor* cursor, AbstractByteArrayViewPrivate* view, AbstractController* parent)
+AbstractEditor::AbstractEditor(AbstractByteArrayViewPrivate* view, AbstractController* parent)
     : AbstractController(parent)
-    , mCursor(cursor)
     , mView(view)
 {
 }
@@ -89,11 +88,13 @@ bool AbstractEditor::handleKeyPress(QKeyEvent* keyEvent)
 void AbstractEditor::doEditAction(EditAction action)
 {
     Okteta::AbstractByteArrayModel* byteArrayModel = mView->byteArrayModel();
+    ByteArrayTableCursor* const tableCursor = mView->tableCursor();
+
     switch (action)
     {
     case CharDelete:
         if (!mView->isOverwriteMode()) {
-            const Address index = mCursor->realIndex();
+            const Address index = tableCursor->realIndex();
             if (index < mView->tableLayout()->length()) {
                 byteArrayModel->remove(AddressRange::fromWidth(index, 1));
             }
@@ -101,7 +102,7 @@ void AbstractEditor::doEditAction(EditAction action)
         break;
     case WordDelete: // kills data until the start of the next word
         if (!mView->isOverwriteMode()) {
-            const Address index = mCursor->realIndex();
+            const Address index = tableCursor->realIndex();
             if (index < mView->tableLayout()->length()) {
                 const TextByteArrayAnalyzer textAnalyzer(byteArrayModel, mView->charCodec());
                 const Address end = textAnalyzer.indexOfBeforeNextWordStart(index);
@@ -112,11 +113,11 @@ void AbstractEditor::doEditAction(EditAction action)
     case CharBackspace:
         if (mView->isOverwriteMode()) {
             mView->pauseCursor();
-            mCursor->gotoPreviousByte();
+            tableCursor->gotoPreviousByte();
             mView->ensureCursorVisible();
             mView->unpauseCursor();
         } else {
-            const Address deleteIndex = mCursor->realIndex() - 1;
+            const Address deleteIndex = tableCursor->realIndex() - 1;
             if (deleteIndex >= 0) {
                 byteArrayModel->remove(AddressRange::fromWidth(deleteIndex, 1));
             }
@@ -124,7 +125,7 @@ void AbstractEditor::doEditAction(EditAction action)
         break;
     case WordBackspace:
     {
-        const int leftIndex = mCursor->realIndex() - 1;
+        const int leftIndex = tableCursor->realIndex() - 1;
         if (leftIndex >= 0) {
             const TextByteArrayAnalyzer textAnalyzer(byteArrayModel, mView->charCodec());
             const Address wordStart = textAnalyzer.indexOfPreviousWordStart(leftIndex);
