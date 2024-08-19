@@ -9,19 +9,8 @@
 #include "abstractbytearrayview_p.hpp"
 
 // lib
-#include "controller/undoredocontroller.hpp"
-#include "controller/clipboardcontroller.hpp"
-#include "controller/keynavigator.hpp"
-#include "controller/chareditor.hpp"
-#include "controller/dropper.hpp"
-#include "controller/mousenavigator.hpp"
-#include "controller/mousepaster.hpp"
-#include "controller/tapnavigator.hpp"
-#include "controller/zoomwheelcontroller.hpp"
-#include "controller/zoompinchcontroller.hpp"
 #include "controller/touchonlytapandholdgesture.hpp"
 #include "controller/touchonlytapandholdgesturerecognizer.hpp"
-
 #include "widgetcolumnstylist.hpp"
 #include "bordercolumnrenderer.hpp"
 #include "oktetagui.hpp"
@@ -140,6 +129,19 @@ AbstractByteArrayViewPrivate::AbstractByteArrayViewPrivate(AbstractByteArrayView
     , mTableLayout(DefaultNoOfBytesPerLine, DefaultFirstLineOffset, DefaultStartOffset, 0, 0)
     , mTableCursor(&mTableLayout)
     , mTableRanges(&mTableLayout)
+    , mTapNavigator(this)
+    , mZoomPinchController(this)
+    , mTabController(this, nullptr)
+    , mUndoRedoController(this, &mTabController)
+    , mClipboardController(this, &mUndoRedoController)
+    , mKeyNavigator(this, &mClipboardController)
+    , mValueEditor(this, &mKeyNavigator)
+    , mCharEditor(this, &mKeyNavigator)
+    , mMousePaster(this, nullptr)
+    , mMouseNavigator(this, &mMousePaster)
+    , mZoomWheelController(this, nullptr)
+    , mDropper(this)
+    , mMouseController(&mMouseNavigator)
     , mReadOnly(false)
     , mOverWriteOnly(false)
     , mOverWrite(true)
@@ -152,25 +154,7 @@ AbstractByteArrayViewPrivate::AbstractByteArrayViewPrivate(AbstractByteArrayView
 {
 }
 
-AbstractByteArrayViewPrivate::~AbstractByteArrayViewPrivate()
-{
-    delete mDropper;
-
-    delete mZoomWheelController;
-
-    delete mMousePaster;
-    delete mMouseNavigator;
-
-    delete mCharEditor;
-    delete mValueEditor;
-    delete mKeyNavigator;
-    delete mClipboardController;
-    delete mUndoRedoController;
-    delete mTabController;
-
-    delete mZoomPinchController;
-    delete mTapNavigator;
-}
+AbstractByteArrayViewPrivate::~AbstractByteArrayViewPrivate() = default;
 
 void AbstractByteArrayViewPrivate::init()
 {
@@ -195,23 +179,7 @@ void AbstractByteArrayViewPrivate::init()
     mValueCoding = DefaultValueCoding;
     mCharCodec = CharCodec::createCodec(DefaultCharCoding());
 
-    mTabController = new TabController(this, nullptr);
-    mUndoRedoController = new UndoRedoController(this, mTabController);
-    mClipboardController = new ClipboardController(this, mUndoRedoController);
-    mKeyNavigator = new KeyNavigator(this, mClipboardController);
-    mValueEditor = new ValueEditor(this, mKeyNavigator);
-    mCharEditor = new CharEditor(this, mKeyNavigator);
-
-    mMousePaster = new MousePaster(this, nullptr);
-    mMouseNavigator = new MouseNavigator(this, mMousePaster);
-    mMouseController = mMouseNavigator;
-    mTapNavigator = new TapNavigator(this);
-
-    mZoomWheelController = new ZoomWheelController(this, nullptr);
-    mDropper = new Dropper(this);
-    mZoomPinchController = new ZoomPinchController(this);
-
-    mWheelController = mZoomWheelController;
+    mWheelController = &mZoomWheelController;
 
     QObject::connect(QGuiApplication::styleHints(), &QStyleHints::cursorFlashTimeChanged,
                      q, [&](int flashTime) { onCursorFlashTimeChanged(flashTime); });
@@ -909,9 +877,9 @@ bool AbstractByteArrayViewPrivate::getNextChangedRange(CoordRange* changedRange,
 void AbstractByteArrayViewPrivate::adaptController()
 {
     AbstractController* controller =
-        isEffectiveReadOnly() ?                                 static_cast<AbstractController*>(mKeyNavigator) :
-        activeCoding() == AbstractByteArrayView::CharCodingId ? static_cast<AbstractController*>(mCharEditor) :
-                                                                static_cast<AbstractController*>(mValueEditor);
+        isEffectiveReadOnly() ?                                 static_cast<AbstractController*>(&mKeyNavigator) :
+        activeCoding() == AbstractByteArrayView::CharCodingId ? static_cast<AbstractController*>(&mCharEditor) :
+                                                                static_cast<AbstractController*>(&mValueEditor);
 
     mController = controller;
 }
@@ -1030,15 +998,15 @@ QMenu* AbstractByteArrayViewPrivate::createStandardContextMenu(QPoint position)
 
     auto* menu = new QMenu(q);
 
-    if (mUndoRedoController->addContextMenuActions(menu) > 0) {
+    if (mUndoRedoController.addContextMenuActions(menu) > 0) {
         menu->addSeparator();
     }
 
-    if (mClipboardController->addContextMenuActions(menu) > 0) {
+    if (mClipboardController.addContextMenuActions(menu) > 0) {
         menu->addSeparator();
     }
 
-    mKeyNavigator->addContextMenuActions(menu);
+    mKeyNavigator.addContextMenuActions(menu);
 
     return menu;
 }
@@ -1130,7 +1098,7 @@ bool AbstractByteArrayViewPrivate::event(QEvent* event)
     } else if (event->type() == QEvent::Gesture) {
         auto* gestureEvent = static_cast<QGestureEvent*>(event);
         if (auto* tapGesture = static_cast<QTapGesture*>(gestureEvent->gesture(Qt::TapGesture))) {
-            return mTapNavigator->handleTapGesture(tapGesture);
+            return mTapNavigator.handleTapGesture(tapGesture);
         } else if (auto* tapAndHoldGesture = static_cast<TouchOnlyTapAndHoldGesture*>(gestureEvent->gesture(touchOnlyTapAndHoldGestureType()))) {
             if (tapAndHoldGesture->state() == Qt::GestureFinished) {
                 const QPoint viewPortPos = tapAndHoldGesture->position().toPoint();
@@ -1153,7 +1121,7 @@ bool AbstractByteArrayViewPrivate::event(QEvent* event)
                 return result;
             }
         } else if (auto* pinchGesture = static_cast<QPinchGesture*>(gestureEvent->gesture(Qt::PinchGesture))) {
-            return mZoomPinchController->handlePinchGesture(pinchGesture);
+            return mZoomPinchController.handlePinchGesture(pinchGesture);
         };
     }
 
@@ -1252,7 +1220,7 @@ void AbstractByteArrayViewPrivate::focusOutEvent(QFocusEvent* focusEvent)
 
 void AbstractByteArrayViewPrivate::dragEnterEvent(QDragEnterEvent* dragEnterEvent)
 {
-    if (mDropper->handleDragEnterEvent(dragEnterEvent)) {
+    if (mDropper.handleDragEnterEvent(dragEnterEvent)) {
         dragEnterEvent->accept();
     } else {
         dragEnterEvent->ignore();
@@ -1261,7 +1229,7 @@ void AbstractByteArrayViewPrivate::dragEnterEvent(QDragEnterEvent* dragEnterEven
 
 void AbstractByteArrayViewPrivate::dragMoveEvent(QDragMoveEvent* dragMoveEvent)
 {
-    if (mDropper->handleDragMoveEvent(dragMoveEvent)) {
+    if (mDropper.handleDragMoveEvent(dragMoveEvent)) {
         dragMoveEvent->accept();
     } else {
         dragMoveEvent->ignore();
@@ -1270,7 +1238,7 @@ void AbstractByteArrayViewPrivate::dragMoveEvent(QDragMoveEvent* dragMoveEvent)
 
 void AbstractByteArrayViewPrivate::dragLeaveEvent(QDragLeaveEvent* dragLeaveEvent)
 {
-    if (mDropper->handleDragLeaveEvent(dragLeaveEvent)) {
+    if (mDropper.handleDragLeaveEvent(dragLeaveEvent)) {
         dragLeaveEvent->accept();
     } else {
         dragLeaveEvent->ignore();
@@ -1279,7 +1247,7 @@ void AbstractByteArrayViewPrivate::dragLeaveEvent(QDragLeaveEvent* dragLeaveEven
 
 void AbstractByteArrayViewPrivate::dropEvent(QDropEvent* dropEvent)
 {
-    if (mDropper->handleDropEvent(dropEvent)) {
+    if (mDropper.handleDropEvent(dropEvent)) {
         dropEvent->accept();
     } else {
         dropEvent->ignore();

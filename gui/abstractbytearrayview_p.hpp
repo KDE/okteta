@@ -16,8 +16,18 @@
 #include "bytearraytableranges.hpp"
 #include "bytearraytablelayout.hpp"
 #include "cursor.hpp"
-#include "controller/valueeditor.hpp"
+#include "controller/undoredocontroller.hpp"
+#include "controller/chareditor.hpp"
+#include "controller/clipboardcontroller.hpp"
+#include "controller/dropper.hpp"
+#include "controller/keynavigator.hpp"
+#include "controller/mousenavigator.hpp"
+#include "controller/mousepaster.hpp"
 #include "controller/tabcontroller.hpp"
+#include "controller/tapnavigator.hpp"
+#include "controller/valueeditor.hpp"
+#include "controller/zoomwheelcontroller.hpp"
+#include "controller/zoompinchcontroller.hpp"
 #include "offsetcolumnrenderer.hpp"
 // Okteta core
 #include <Okteta/AbstractByteArrayModel>
@@ -28,23 +38,6 @@
 #include <memory>
 
 namespace Okteta {
-
-class AbstractController;
-class ClipboardController;
-class UndoRedoController;
-class KeyNavigator;
-class CharEditor;
-
-class ZoomPinchController;
-class TapNavigator;
-class Dropper;
-
-class AbstractMouseController;
-class AbstractWheelController;
-class MouseNavigator;
-class MousePaster;
-
-class ZoomWheelController;
 
 class WidgetColumnStylist;
 class BorderColumnRenderer;
@@ -264,11 +257,6 @@ private:
 protected:
     AbstractByteArrayModel* mByteArrayModel;
 
-    /** the current input controller */
-    AbstractController* mController;
-    AbstractMouseController* mMouseController;
-    AbstractWheelController* mWheelController;
-
     /** holds the logical layout */
     ByteArrayTableLayout mTableLayout;
     /** */
@@ -282,28 +270,33 @@ protected:
     std::unique_ptr<WidgetColumnStylist> mStylist;
 
 protected:
-    /** */
-    TabController* mTabController;
-    /** */
-    UndoRedoController* mUndoRedoController;
-    /** */
-    KeyNavigator* mKeyNavigator;
-    /** */
-    ClipboardController* mClipboardController;
-    /** */
-    ValueEditor* mValueEditor;
-    /** */
-    CharEditor* mCharEditor;
+    TapNavigator mTapNavigator;
+    ZoomPinchController mZoomPinchController;
 
-    Dropper* mDropper;
+    /** */
+    TabController mTabController;
+    /** */
+    UndoRedoController mUndoRedoController;
+    /** */
+    ClipboardController mClipboardController;
+    /** */
+    KeyNavigator mKeyNavigator;
+    /** */
+    ValueEditor mValueEditor;
+    /** */
+    CharEditor mCharEditor;
 
-    MouseNavigator* mMouseNavigator;
-    MousePaster* mMousePaster;
+    MousePaster mMousePaster;
+    MouseNavigator mMouseNavigator;
 
-    ZoomWheelController* mZoomWheelController;
+    ZoomWheelController mZoomWheelController;
 
-    ZoomPinchController* mZoomPinchController;
-    TapNavigator* mTapNavigator;
+    Dropper mDropper;
+
+    /** the current input controller */
+    AbstractController* mController;
+    AbstractMouseController* mMouseController;
+    AbstractWheelController* mWheelController;
 
 protected:
     /** Timer that controls the blinking of the cursor */
@@ -380,8 +373,8 @@ inline bool AbstractByteArrayViewPrivate::hasSelectedData()   const { return mTa
 
 inline AddressRange AbstractByteArrayViewPrivate::marking() const { return mTableRanges.marking(); }
 
-inline bool AbstractByteArrayViewPrivate::tabChangesFocus()      const { return mTabController->tabChangesFocus(); }
-inline bool AbstractByteArrayViewPrivate::isByteEditorActive()   const { return mValueEditor->isInEditMode(); }
+inline bool AbstractByteArrayViewPrivate::tabChangesFocus()      const { return mTabController.tabChangesFocus(); }
+inline bool AbstractByteArrayViewPrivate::isByteEditorActive()   const { return mValueEditor.isInEditMode(); }
 inline bool AbstractByteArrayViewPrivate::offsetColumnVisible()  const { return mOffsetColumn->isVisible(); }
 inline AbstractByteArrayView::OffsetCoding AbstractByteArrayViewPrivate::offsetCoding() const
 {
@@ -390,15 +383,15 @@ inline AbstractByteArrayView::OffsetCoding AbstractByteArrayViewPrivate::offsetC
 
 inline void AbstractByteArrayViewPrivate::cancelByteEditor()
 {
-    mValueEditor->cancelEdit(false);
+    mValueEditor.cancelEdit(false);
 }
 inline void AbstractByteArrayViewPrivate::finishByteEditor()
 {
-    mValueEditor->finishEdit();
+    mValueEditor.finishEdit();
 }
 inline void AbstractByteArrayViewPrivate::setTabChangesFocus(bool tabChangesFocus)
 {
-    mTabController->setTabChangesFocus(tabChangesFocus);
+    mTabController.setTabChangesFocus(tabChangesFocus);
 }
 
 inline void AbstractByteArrayViewPrivate::setModified(bool modified) { mByteArrayModel->setModified(modified); }

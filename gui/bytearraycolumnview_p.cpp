@@ -84,7 +84,7 @@ AbstractByteArrayView::CodingTypes ByteArrayColumnViewPrivate::visibleCodings() 
 
 void ByteArrayColumnViewPrivate::setByteArrayModel(AbstractByteArrayModel* _byteArrayModel)
 {
-    mValueEditor->reset();
+    mValueEditor.reset();
 
     // TODO: this fails if _byteArrayModel == null
     mValueColumn->set(_byteArrayModel);
@@ -115,7 +115,7 @@ void ByteArrayColumnViewPrivate::setValueCoding(AbstractByteArrayView::ValueCodi
     AbstractByteArrayViewPrivate::setValueCoding(valueCoding);
 
     mValueColumn->setValueCodec((ValueCoding)mValueCoding, mValueCodec.get());
-    mValueEditor->adaptToValueCodecChange();
+    mValueEditor.adaptToValueCodecChange();
 
     const uint newCodingWidth = mValueCodec->encodingWidth();
 
@@ -483,7 +483,7 @@ void ByteArrayColumnViewPrivate::setActiveCoding(AbstractByteArrayView::CodingTy
     }
 
     pauseCursor();
-    mValueEditor->finishEdit();
+    mValueEditor.finishEdit();
 
     if (codingId == AbstractByteArrayView::ValueCodingId) {
         mActiveColumn = mValueColumn;
@@ -535,7 +535,7 @@ Address ByteArrayColumnViewPrivate::indexByPoint(QPoint point) const
 void ByteArrayColumnViewPrivate::blinkCursor()
 {
     // skip the cursor drawing?
-    if (mCursorPaused || mValueEditor->isInEditMode()) {
+    if (mCursorPaused || mValueEditor.isInEditMode()) {
         return;
     }
 
@@ -627,7 +627,7 @@ void ByteArrayColumnViewPrivate::drawActiveCursor(QPainter* painter)
     // see also rowView
 
     // any reason to skip the cursor drawing?
-    if (!q->hasFocus() && !q->viewport()->hasFocus() && !mDropper->isActive()) {
+    if (!q->hasFocus() && !q->viewport()->hasFocus() && !mDropper.isActive()) {
         return;
     }
 
@@ -637,11 +637,11 @@ void ByteArrayColumnViewPrivate::drawActiveCursor(QPainter* painter)
     painter->translate(x, y);
 
     // paint edited byte?
-    if (mValueEditor->isInEditMode()) {
+    if (mValueEditor.isInEditMode()) {
         const Address index = mTableCursor.index();
 
         if (mBlinkCursorVisible) {
-            mValueColumn->renderEditedByte(painter, mValueEditor->value(), mValueEditor->valueAsString());
+            mValueColumn->renderEditedByte(painter, mValueEditor.value(), mValueEditor.valueAsString());
         } else {
             mValueColumn->renderByte(painter, index);
         }
@@ -661,7 +661,7 @@ void ByteArrayColumnViewPrivate::drawInactiveCursor(QPainter* painter)
     // any reason to skip the cursor drawing?
     if (!mInactiveColumn->isVisible()
         || mCursorPaused
-        || (!mCursorPaused && !q->hasFocus() && !q->viewport()->hasFocus() && !mDropper->isActive())) {
+        || (!mCursorPaused && !q->hasFocus() && !q->viewport()->hasFocus() && !mDropper.isActive())) {
         return;
     }
 
@@ -673,8 +673,8 @@ void ByteArrayColumnViewPrivate::drawInactiveCursor(QPainter* painter)
     painter->translate(x, y);
 
     const AbstractByteArrayColumnRenderer::FrameStyle frameStyle =
-        mTableCursor.isBehind() ?                      AbstractByteArrayColumnRenderer::Right :
-        (mOverWrite || mValueEditor->isInEditMode()) ? AbstractByteArrayColumnRenderer::Frame :
+        mTableCursor.isBehind() ?                     AbstractByteArrayColumnRenderer::Right :
+        (mOverWrite || mValueEditor.isInEditMode()) ? AbstractByteArrayColumnRenderer::Frame :
         AbstractByteArrayColumnRenderer::Left;
     mInactiveColumn->renderFramedByte(painter, index, frameStyle);
 
