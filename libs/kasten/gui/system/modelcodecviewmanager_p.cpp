@@ -54,7 +54,7 @@ void ModelCodecViewManagerPrivate::setExporterConfigEditorFactories(const QVecto
     mExporterFactoryList = factoryList;
 }
 
-void ModelCodecViewManagerPrivate::setGeneratorConfigEditorFactories(const QVector<AbstractModelDataGeneratorConfigEditorFactory*>& factoryList)
+void ModelCodecViewManagerPrivate::setDataGeneratorConfigEditorFactories(const QVector<AbstractModelDataGeneratorConfigEditorFactory*>& factoryList)
 {
     qDeleteAll(mGeneratorFactoryList);
     mGeneratorFactoryList = factoryList;

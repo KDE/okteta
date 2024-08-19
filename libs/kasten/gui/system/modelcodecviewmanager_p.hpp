@@ -43,7 +43,7 @@ public:
 public:
     void setStreamEncoderConfigEditorFactories(const QVector<AbstractModelStreamEncoderConfigEditorFactory*>& factoryList);
     void setExporterConfigEditorFactories(const QVector<AbstractModelExporterConfigEditorFactory*>& factoryList);
-    void setGeneratorConfigEditorFactories(const QVector<AbstractModelDataGeneratorConfigEditorFactory*>& factoryList);
+    void setDataGeneratorConfigEditorFactories(const QVector<AbstractModelDataGeneratorConfigEditorFactory*>& factoryList);
 
 private:
     QVector<AbstractModelStreamEncoderConfigEditorFactory*> mEncoderFactoryList;

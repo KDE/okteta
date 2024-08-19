@@ -117,7 +117,7 @@ int OktetaProgram::execute()
 
     mViewManager->setViewFactory(new ByteArrayViewFactory(mByteArrayViewProfileManager.get()));
     mViewManager->codecViewManager()->setStreamEncoderConfigEditorFactories(encoderConfigEditorFactoryList);
-    mViewManager->codecViewManager()->setGeneratorConfigEditorFactories(generatorConfigEditorFactoryList);
+    mViewManager->codecViewManager()->setDataGeneratorConfigEditorFactories(generatorConfigEditorFactoryList);
 
     auto* mainWindow = new OktetaMainWindow(this);
     mDialogHandler->setWidget(mainWindow);
