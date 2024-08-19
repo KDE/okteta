@@ -122,7 +122,6 @@ public: // value access
 
 public:
     void init();
-    void setWheelController(AbstractWheelController* wheelController);
     void setReadOnly(bool readOnly);
     void setOverwriteOnly(bool overwriteOnly);
     void setOverwriteMode(bool overwriteMode);
@@ -402,7 +401,6 @@ inline void AbstractByteArrayViewPrivate::setTabChangesFocus(bool tabChangesFocu
     mTabController->setTabChangesFocus(tabChangesFocus);
 }
 
-inline void AbstractByteArrayViewPrivate::setWheelController(AbstractWheelController* wheelController) { mWheelController = wheelController; }
 inline void AbstractByteArrayViewPrivate::setModified(bool modified) { mByteArrayModel->setModified(modified); }
 
 }

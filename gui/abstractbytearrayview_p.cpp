@@ -211,7 +211,7 @@ void AbstractByteArrayViewPrivate::init()
     mDropper = new Dropper(this);
     mZoomPinchController = new ZoomPinchController(this);
 
-    setWheelController(mZoomWheelController);
+    mWheelController = mZoomWheelController;
 
     QObject::connect(QGuiApplication::styleHints(), &QStyleHints::cursorFlashTimeChanged,
                      q, [&](int flashTime) { onCursorFlashTimeChanged(flashTime); });
