@@ -106,9 +106,6 @@ public: // value access
     AbstractController* controller() const;
     AbstractWheelController* wheelController() const;
 
-    ValueEditor* valueEditor() const;
-    Dropper* dropper() const;
-
     ByteArrayTableLayout* tableLayout();
     const ByteArrayTableLayout* tableLayout() const;
     ByteArrayTableCursor* tableCursor();
@@ -388,8 +385,6 @@ inline AddressRange AbstractByteArrayViewPrivate::marking() const { return mTabl
 
 inline bool AbstractByteArrayViewPrivate::tabChangesFocus()      const { return mTabController->tabChangesFocus(); }
 inline bool AbstractByteArrayViewPrivate::isByteEditorActive()   const { return mValueEditor->isInEditMode(); }
-inline ValueEditor* AbstractByteArrayViewPrivate::valueEditor()  const { return mValueEditor; }
-inline Dropper* AbstractByteArrayViewPrivate::dropper()          const { return mDropper; }
 inline bool AbstractByteArrayViewPrivate::offsetColumnVisible()  const { return mOffsetColumn->isVisible(); }
 inline AbstractByteArrayView::OffsetCoding AbstractByteArrayViewPrivate::offsetCoding() const
 {
