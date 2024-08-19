@@ -122,8 +122,6 @@ public: // value access
 
 public:
     void init();
-    // TODO: delete old controller?
-    void setController(AbstractController* controller);
     void setWheelController(AbstractWheelController* wheelController);
     void setReadOnly(bool readOnly);
     void setOverwriteOnly(bool overwriteOnly);
@@ -404,7 +402,6 @@ inline void AbstractByteArrayViewPrivate::setTabChangesFocus(bool tabChangesFocu
     mTabController->setTabChangesFocus(tabChangesFocus);
 }
 
-inline void AbstractByteArrayViewPrivate::setController(AbstractController* controller) { mController = controller; }
 inline void AbstractByteArrayViewPrivate::setWheelController(AbstractWheelController* wheelController) { mWheelController = wheelController; }
 inline void AbstractByteArrayViewPrivate::setModified(bool modified) { mByteArrayModel->setModified(modified); }
 

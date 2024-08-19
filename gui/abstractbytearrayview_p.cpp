@@ -912,7 +912,8 @@ void AbstractByteArrayViewPrivate::adaptController()
         isEffectiveReadOnly() ?                                 static_cast<AbstractController*>(mKeyNavigator) :
         activeCoding() == AbstractByteArrayView::CharCodingId ? static_cast<AbstractController*>(mCharEditor) :
                                                                 static_cast<AbstractController*>(mValueEditor);
-    setController(controller);
+
+    mController = controller;
 }
 
 void AbstractByteArrayViewPrivate::updateViewByWidth()
