@@ -41,11 +41,11 @@ void ByteArrayColumnViewPrivate::init()
 
     // creating the columns in the needed order
     mValueColumn =
-        new ValueByteArrayColumnRenderer(mStylist, mByteArrayModel, &mTableLayout, &mTableRanges);
+        new ValueByteArrayColumnRenderer(mStylist.get(), mByteArrayModel, &mTableLayout, &mTableRanges);
     mMiddleBorderColumn =
-        new BorderColumnRenderer(mStylist, true);
+        new BorderColumnRenderer(mStylist.get(), true);
     mCharColumn =
-        new CharByteArrayColumnRenderer(mStylist, mByteArrayModel, &mTableLayout, &mTableRanges);
+        new CharByteArrayColumnRenderer(mStylist.get(), mByteArrayModel, &mTableLayout, &mTableRanges);
 
     addColumn(mOffsetColumn);
     addColumn(mOffsetBorderColumn);

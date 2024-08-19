@@ -170,8 +170,6 @@ AbstractByteArrayViewPrivate::~AbstractByteArrayViewPrivate()
 
     delete mZoomPinchController;
     delete mTapNavigator;
-
-    delete mStylist;
 }
 
 void AbstractByteArrayViewPrivate::init()
@@ -184,12 +182,14 @@ void AbstractByteArrayViewPrivate::init()
     mTableLayout.setLength(mByteArrayModel->size());
     mTableLayout.setNoOfLinesPerPage(noOfLinesPerPage());
 
-    mStylist = new WidgetColumnStylist(q);
+    mStylist = std::make_unique<WidgetColumnStylist>(q);
 
+    // TODO: on destruction, columns are destructed after mStylist instance in ~ColumnsViewScrollAreaEngine
+    // small window of dangling pointer
     mOffsetColumn =
-        new OffsetColumnRenderer(mStylist, &mTableLayout, OffsetFormat::Hexadecimal);
+        new OffsetColumnRenderer(mStylist.get(), &mTableLayout, OffsetFormat::Hexadecimal);
     mOffsetBorderColumn =
-        new BorderColumnRenderer(mStylist, false);
+        new BorderColumnRenderer(mStylist.get(), false);
 
     mValueCodec = ValueCodec::createCodec((ValueCoding)DefaultValueCoding);
     mValueCoding = DefaultValueCoding;

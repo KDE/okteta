@@ -285,6 +285,8 @@ protected:
     OffsetColumnRenderer* mOffsetColumn;
     BorderColumnRenderer* mOffsetBorderColumn;
 
+    std::unique_ptr<WidgetColumnStylist> mStylist;
+
 protected:
     /** */
     TabController* mTabController;
@@ -308,8 +310,6 @@ protected:
 
     ZoomPinchController* mZoomPinchController;
     TapNavigator* mTapNavigator;
-
-    WidgetColumnStylist* mStylist;
 
 protected:
     /** Timer that controls the blinking of the cursor */

@@ -41,7 +41,7 @@ void ByteArrayRowViewPrivate::init()
 
     // creating the columns in the needed order
     mByteArrayColumn =
-        new ByteArrayRowColumnRenderer(mStylist, mByteArrayModel, &mTableLayout, &mTableRanges);
+        new ByteArrayRowColumnRenderer(mStylist.get(), mByteArrayModel, &mTableLayout, &mTableRanges);
 
     addColumn(mOffsetColumn);
     addColumn(mOffsetBorderColumn);
