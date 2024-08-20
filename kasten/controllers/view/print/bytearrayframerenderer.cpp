@@ -42,9 +42,9 @@ static constexpr int BAFInitialWidth = 50;
 ByteArrayFrameRenderer::ByteArrayFrameRenderer()
     : mHeight(BAFInitialHeight)
     , mWidth(BAFInitialWidth)
-    , mLayout(new Okteta::ByteArrayTableLayout(DefaultNoOfBytesPerLine, DefaultFirstLineOffset, DefaultStartOffset, 0, 0))
-    , mTableRanges(new Okteta::ByteArrayTableRanges(mLayout.get()))
-    , mStylist(new Okteta::PrintColumnStylist())
+    , mLayout(std::make_unique<Okteta::ByteArrayTableLayout>(DefaultNoOfBytesPerLine, DefaultFirstLineOffset, DefaultStartOffset, 0, 0))
+    , mTableRanges(std::make_unique<Okteta::ByteArrayTableRanges>(mLayout.get()))
+    , mStylist(std::make_unique<Okteta::PrintColumnStylist>())
     , mResizeStyle(DefaultResizeStyle)
 {
     mLayout->setNoOfLinesPerPage(noOfLinesPerFrame());

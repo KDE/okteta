@@ -15,7 +15,7 @@
 namespace Kasten {
 
 FileSystemBrowserToolView::FileSystemBrowserToolView(FileSystemBrowserTool* tool)
-    : mWidget(new FileSystemBrowserView(tool))
+    : mWidget(std::make_unique<FileSystemBrowserView>(tool))
 {
 }
 

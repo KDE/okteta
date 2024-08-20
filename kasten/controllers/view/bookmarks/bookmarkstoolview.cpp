@@ -15,7 +15,7 @@
 namespace Kasten {
 
 BookmarksToolView::BookmarksToolView(BookmarksTool* tool)
-    : mWidget(new BookmarksView(tool))
+    : mWidget(std::make_unique<BookmarksView>(tool))
 {
 }
 

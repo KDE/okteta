@@ -15,7 +15,7 @@
 namespace Kasten {
 
 CharsetConversionToolView::CharsetConversionToolView(CharsetConversionTool* tool)
-    : mWidget(new CharsetConversionView(tool))
+    : mWidget(std::make_unique<CharsetConversionView>(tool))
 {
 }
 

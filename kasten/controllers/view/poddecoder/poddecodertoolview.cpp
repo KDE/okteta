@@ -15,7 +15,7 @@
 namespace Kasten {
 
 PODDecoderToolView::PODDecoderToolView(PODDecoderTool* tool)
-    : mWidget(new PODTableView(tool))
+    : mWidget(std::make_unique<PODTableView>(tool))
 {
 }
 

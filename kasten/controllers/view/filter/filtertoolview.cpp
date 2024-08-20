@@ -15,7 +15,7 @@
 namespace Kasten {
 
 FilterToolView::FilterToolView(FilterTool* tool)
-    : mWidget(new FilterView(tool))
+    : mWidget(std::make_unique<FilterView>(tool))
 {
 }
 

@@ -15,7 +15,7 @@
 namespace Kasten {
 
 TerminalToolView::TerminalToolView(TerminalTool* tool)
-    : mWidget(new TerminalView(tool))
+    : mWidget(std::make_unique<TerminalView>(tool))
 {
 }
 

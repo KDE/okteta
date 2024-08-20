@@ -15,7 +15,7 @@
 namespace Kasten {
 
 VersionViewToolView::VersionViewToolView(VersionViewTool* tool)
-    : mWidget(new VersionView(tool))
+    : mWidget(std::make_unique<VersionView>(tool))
 {
 }
 

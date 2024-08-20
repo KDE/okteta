@@ -15,7 +15,7 @@
 namespace Kasten {
 
 InfoToolView::InfoToolView(InfoTool* tool)
-    : mWidget(new InfoView(tool))
+    : mWidget(std::make_unique<InfoView>(tool))
 {
 }
 

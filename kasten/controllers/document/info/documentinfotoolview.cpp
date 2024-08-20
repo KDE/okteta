@@ -15,7 +15,7 @@
 namespace Kasten {
 
 DocumentInfoToolView::DocumentInfoToolView(DocumentInfoTool* tool)
-    : mWidget(new DocumentInfoView(tool))
+    : mWidget(std::make_unique<DocumentInfoView>(tool))
 {
 }
 

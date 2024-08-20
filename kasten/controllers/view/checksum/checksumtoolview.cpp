@@ -15,7 +15,7 @@
 namespace Kasten {
 
 ChecksumToolView::ChecksumToolView(ChecksumTool* tool)
-    : mWidget(new ChecksumView(tool))
+    : mWidget(std::make_unique<ChecksumView>(tool))
 {
 }
 

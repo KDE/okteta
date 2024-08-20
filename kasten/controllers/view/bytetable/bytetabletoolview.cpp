@@ -15,7 +15,7 @@
 namespace Kasten {
 
 ByteTableToolView::ByteTableToolView(ByteTableTool* tool)
-    : mWidget(new ByteTableView(tool))
+    : mWidget(std::make_unique<ByteTableView>(tool))
 {
 }
 

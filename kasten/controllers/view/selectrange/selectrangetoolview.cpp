@@ -15,7 +15,7 @@
 namespace Kasten {
 
 SelectRangeToolView::SelectRangeToolView(SelectRangeTool* tool)
-    : mWidget(new SelectRangeView(tool))
+    : mWidget(std::make_unique<SelectRangeView>(tool))
 {
 }
 

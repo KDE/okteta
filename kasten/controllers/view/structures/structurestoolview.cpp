@@ -13,8 +13,8 @@
 
 namespace Kasten {
 
-StructuresToolView::StructuresToolView(StructuresTool* tool) :
-    mWidget(new StructureView(tool))
+StructuresToolView::StructuresToolView(StructuresTool* tool)
+    : mWidget(std::make_unique<StructureView>(tool))
 {
 }
 

@@ -18,7 +18,7 @@ using Okteta::PieceTableByteArrayModel;
 namespace Kasten {
 
 ByteArrayDocument::ByteArrayDocument(const QString& initDescription)
-    : mByteArray(new Okteta::PieceTableByteArrayModel())
+    : mByteArray(std::make_unique<Okteta::PieceTableByteArrayModel>())
     , mInitDescription(initDescription)
 {
     connect(mByteArray.get(), &PieceTableByteArrayModel::modifiedChanged, this, &ByteArrayDocument::onModelModified);

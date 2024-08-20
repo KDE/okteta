@@ -28,9 +28,9 @@
 #include <KLocalizedString>
 
 OktetaPartFactory::OktetaPartFactory()
-    : mByteArrayViewProfileManager(new Kasten::ByteArrayViewProfileManager())
-    , mModelCodecViewManager(new Kasten::ModelCodecViewManager())
-    , mModelCodecManager(new Kasten::ModelCodecManager())
+    : mByteArrayViewProfileManager(std::make_unique<Kasten::ByteArrayViewProfileManager>())
+    , mModelCodecViewManager(std::make_unique<Kasten::ModelCodecViewManager>())
+    , mModelCodecManager(std::make_unique<Kasten::ModelCodecManager>())
 {
 
     auto streamEncoderList = Kasten::ByteArrayStreamEncoderFactory::createStreamEncoders();

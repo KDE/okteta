@@ -18,7 +18,7 @@ namespace Kasten {
 DummyView::DummyView(AbstractDocument* document)
     : AbstractView(document)
     , mDocument(document)
-    , mLabel(new QLabel())
+    , mLabel(std::make_unique<QLabel>())
 {
     mLabel->setText(mDocument->title());
 

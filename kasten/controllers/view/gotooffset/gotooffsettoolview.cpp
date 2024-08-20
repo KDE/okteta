@@ -15,7 +15,7 @@
 namespace Kasten {
 
 GotoOffsetToolView::GotoOffsetToolView(GotoOffsetTool* tool)
-    : mWidget(new GotoOffsetView(tool))
+    : mWidget(std::make_unique<GotoOffsetView>(tool))
 {
 }
 

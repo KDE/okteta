@@ -20,7 +20,7 @@ namespace Kasten {
 
 ByteArrayTextStreamEncoderPreview::ByteArrayTextStreamEncoderPreview(AbstractByteArrayStreamEncoder* encoder)
     : mEncoder(encoder)
-    , mWidget(new QTextEdit()) // TODO: use KSyntaxHighlighting for syntax highlighting
+    , mWidget(std::make_unique<QTextEdit>()) // TODO: use KSyntaxHighlighting for syntax highlighting
 {
     mWidget->setReadOnly(true);
     mWidget->setLineWrapMode(QTextEdit::NoWrap);

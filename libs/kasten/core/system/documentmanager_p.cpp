@@ -28,9 +28,9 @@ static int lastDocumentId = 0;
 
 DocumentManagerPrivate::DocumentManagerPrivate(DocumentManager* q)
     : q_ptr(q)
-    , mCreateManager(new DocumentCreateManager(q))
-    , mSyncManager(new DocumentSyncManager(q))
-    , mCodecManager(new ModelCodecManager())
+    , mCreateManager(std::make_unique<DocumentCreateManager>(q))
+    , mSyncManager(std::make_unique<DocumentSyncManager>(q))
+    , mCodecManager(std::make_unique<ModelCodecManager>())
 {
 }
 

@@ -24,7 +24,7 @@ namespace Kasten {
 
 ViewManagerPrivate::ViewManagerPrivate(ViewManager* q)
     : q_ptr(q)
-    , mCodecViewManager(new ModelCodecViewManager())
+    , mCodecViewManager(std::make_unique<ModelCodecViewManager>())
 {
 }
 

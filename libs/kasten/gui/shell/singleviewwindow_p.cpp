@@ -25,7 +25,7 @@ namespace Kasten {
 SingleViewWindowPrivate::SingleViewWindowPrivate(SingleViewWindow* parent,
                                                  AbstractView* view)
     : q_ptr(parent)
-    , mViewArea(new SingleViewArea())
+    , mViewArea(std::make_unique<SingleViewArea>())
 {
     parent->setCentralWidget(mViewArea->widget());
 

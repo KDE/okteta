@@ -15,7 +15,7 @@
 namespace Kasten {
 
 StringsExtractToolView::StringsExtractToolView(StringsExtractTool* tool)
-    : mWidget(new StringsExtractView(tool))
+    : mWidget(std::make_unique<StringsExtractView>(tool))
 {
 }
 
