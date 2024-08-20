@@ -43,12 +43,12 @@ public:
 public:
     void setStreamEncoderConfigEditorFactories(std::vector<std::unique_ptr<AbstractModelStreamEncoderConfigEditorFactory>>&& factoryList);
     void setExporterConfigEditorFactories(const QVector<AbstractModelExporterConfigEditorFactory*>& factoryList);
-    void setDataGeneratorConfigEditorFactories(const QVector<AbstractModelDataGeneratorConfigEditorFactory*>& factoryList);
+    void setDataGeneratorConfigEditorFactories(std::vector<std::unique_ptr<AbstractModelDataGeneratorConfigEditorFactory>>&& factoryList);
 
 private:
     std::vector<std::unique_ptr<AbstractModelStreamEncoderConfigEditorFactory>> mEncoderFactoryList;
     QVector<AbstractModelExporterConfigEditorFactory*> mExporterFactoryList;
-    QVector<AbstractModelDataGeneratorConfigEditorFactory*> mGeneratorFactoryList;
+    std::vector<std::unique_ptr<AbstractModelDataGeneratorConfigEditorFactory>> mGeneratorFactoryList;
 };
 
 }

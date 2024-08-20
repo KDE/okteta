@@ -33,11 +33,11 @@ void ModelCodecViewManager::setExporterConfigEditorFactories(const QVector<Abstr
     d->setExporterConfigEditorFactories(factoryList);
 }
 
-void ModelCodecViewManager::setDataGeneratorConfigEditorFactories(const QVector<AbstractModelDataGeneratorConfigEditorFactory*>& factoryList)
+void ModelCodecViewManager::setDataGeneratorConfigEditorFactories(std::vector<std::unique_ptr<AbstractModelDataGeneratorConfigEditorFactory>>&& factoryList)
 {
     Q_D(ModelCodecViewManager);
 
-    d->setDataGeneratorConfigEditorFactories(factoryList);
+    d->setDataGeneratorConfigEditorFactories(std::move(factoryList));
 }
 
 AbstractModelStreamEncoderConfigEditor* ModelCodecViewManager::createConfigEditor(AbstractModelStreamEncoder* encoder) const

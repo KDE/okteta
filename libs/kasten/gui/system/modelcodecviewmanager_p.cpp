@@ -30,7 +30,6 @@ ModelCodecViewManagerPrivate::ModelCodecViewManagerPrivate() = default;
 ModelCodecViewManagerPrivate::~ModelCodecViewManagerPrivate()
 {
     qDeleteAll(mExporterFactoryList);
-    qDeleteAll(mGeneratorFactoryList);
 }
 
 void ModelCodecViewManagerPrivate::setStreamEncoderConfigEditorFactories(std::vector<std::unique_ptr<AbstractModelStreamEncoderConfigEditorFactory>>&& factoryList)
@@ -52,10 +51,9 @@ void ModelCodecViewManagerPrivate::setExporterConfigEditorFactories(const QVecto
     mExporterFactoryList = factoryList;
 }
 
-void ModelCodecViewManagerPrivate::setDataGeneratorConfigEditorFactories(const QVector<AbstractModelDataGeneratorConfigEditorFactory*>& factoryList)
+void ModelCodecViewManagerPrivate::setDataGeneratorConfigEditorFactories(std::vector<std::unique_ptr<AbstractModelDataGeneratorConfigEditorFactory>>&& factoryList)
 {
-    qDeleteAll(mGeneratorFactoryList);
-    mGeneratorFactoryList = factoryList;
+    mGeneratorFactoryList = std::move(factoryList);
 }
 
 AbstractModelStreamEncoderConfigEditor* ModelCodecViewManagerPrivate::createConfigEditor(AbstractModelStreamEncoder* encoder) const
@@ -90,7 +88,7 @@ AbstractModelDataGeneratorConfigEditor* ModelCodecViewManagerPrivate::createConf
 {
     AbstractModelDataGeneratorConfigEditor* result = nullptr;
 
-    for (const AbstractModelDataGeneratorConfigEditorFactory* factory : mGeneratorFactoryList) {
+    for (const auto& factory : mGeneratorFactoryList) {
         result = factory->tryCreateConfigEditor(generator);
         if (result) {
             break;

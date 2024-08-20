@@ -11,8 +11,9 @@
 
 // lib
 #include "oktetakastengui_export.hpp"
-
-template <class T> class QVector;
+// Std
+#include <memory>
+#include <vector>
 
 namespace Kasten {
 class AbstractModelDataGeneratorConfigEditorFactory;
@@ -26,7 +27,7 @@ public:
     ByteArrayDataGeneratorConfigEditorFactoryFactory& operator=(const ByteArrayDataGeneratorConfigEditorFactoryFactory&) = delete;
 
 public:
-    static QVector<AbstractModelDataGeneratorConfigEditorFactory*> createFactorys();
+    static std::vector<std::unique_ptr<AbstractModelDataGeneratorConfigEditorFactory>> createFactorys();
 
 };
 

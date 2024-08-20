@@ -16,22 +16,33 @@
 //// e.g.
 //// #include "my_bytearraydatageneratorconfigeditorfactory.hpp"
 //// NEWBYTEARRAYDATAGENERATORCONFIGEDITORFACTORY(end)
-// Qt
-#include <QVector>
 
 namespace Kasten {
 
-QVector<AbstractModelDataGeneratorConfigEditorFactory*> ByteArrayDataGeneratorConfigEditorFactoryFactory::createFactorys()
+namespace ByteArrayDataGeneratorConfigEditorFactory {
+
+template<typename T, typename ... Ptrs>
+auto make_unique_vector(Ptrs&& ... ptrs)
 {
-    const QVector<AbstractModelDataGeneratorConfigEditorFactory*> result {
+    std::vector<std::unique_ptr<T>> vector;
+    vector.reserve(sizeof...(Ptrs));
+    ( vector.emplace_back(std::unique_ptr<T>(ptrs)), ... );
+    return vector;
+}
+
+}
+
+std::vector<std::unique_ptr<AbstractModelDataGeneratorConfigEditorFactory>> ByteArrayDataGeneratorConfigEditorFactoryFactory::createFactorys()
+{
+    auto result = ByteArrayDataGeneratorConfigEditorFactory::make_unique_vector<AbstractModelDataGeneratorConfigEditorFactory>(
         new ByteArrayPatternGeneratorConfigEditorFactory(),
-        new ByteArrayRandomDataGeneratorConfigEditorFactory(),
+        new ByteArrayRandomDataGeneratorConfigEditorFactory()
 //// NEWBYTEARRAYDATAGENERATORCONFIGEDITORFACTORY(start)
 //// Here add the creation of an object of your configeditorfactory class and add it to the list,
 //// e.g.
 ////         new My_ByteArrayDataGeneratorConfigEditorFactory();,
 //// NEWBYTEARRAYDATAGENERATORCONFIGEDITORFACTORY(end)
-    };
+    );
 
     return result;
 }

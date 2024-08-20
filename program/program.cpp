@@ -23,6 +23,7 @@
 // tmp
 #include <Kasten/Okteta/ByteArrayViewProfileManager>
 // Kasten gui
+#include <Kasten/AbstractModelDataGeneratorConfigEditorFactory>
 #include <Kasten/AbstractModelStreamEncoderConfigEditorFactory>
 #include <Kasten/MultiDocumentStrategy>
 #include <Kasten/DialogHandler>
@@ -40,7 +41,6 @@
 #include <KCrash>
 // Qt
 #include <QCommandLineParser>
-#include <QVector>
 #include <QUrl>
 #include <QDir>
 
@@ -105,7 +105,7 @@ int OktetaProgram::execute()
     auto encoderConfigEditorFactoryList =
         ByteArrayStreamEncoderConfigEditorFactoryFactory::createFactorys();
 
-    const QVector<AbstractModelDataGeneratorConfigEditorFactory*> generatorConfigEditorFactoryList =
+    auto generatorConfigEditorFactoryList =
         ByteArrayDataGeneratorConfigEditorFactoryFactory::createFactorys();
 
     mDocumentManager->codecManager()->setStreamEncoders(std::move(streamEncoderList));
@@ -118,7 +118,7 @@ int OktetaProgram::execute()
 
     mViewManager->setViewFactory(new ByteArrayViewFactory(mByteArrayViewProfileManager.get()));
     mViewManager->codecViewManager()->setStreamEncoderConfigEditorFactories(std::move(encoderConfigEditorFactoryList));
-    mViewManager->codecViewManager()->setDataGeneratorConfigEditorFactories(generatorConfigEditorFactoryList);
+    mViewManager->codecViewManager()->setDataGeneratorConfigEditorFactories(std::move(generatorConfigEditorFactoryList));
 
     auto* mainWindow = new OktetaMainWindow(this);
     mDialogHandler->setWidget(mainWindow);
