@@ -17,7 +17,7 @@ AbstractModelSynchronizer::AbstractModelSynchronizer(AbstractModelSynchronizerPr
 }
 
 AbstractModelSynchronizer::AbstractModelSynchronizer()
-    : d_ptr(new AbstractModelSynchronizerPrivate(this))
+    : d_ptr(std::make_unique<AbstractModelSynchronizerPrivate>(this))
 {
 }
 

@@ -16,7 +16,7 @@ AbstractExportJob::AbstractExportJob(AbstractExportJobPrivate* d)
 {}
 
 AbstractExportJob::AbstractExportJob()
-    : d_ptr(new AbstractExportJobPrivate(this))
+    : d_ptr(std::make_unique<AbstractExportJobPrivate>(this))
 {}
 
 AbstractExportJob::~AbstractExportJob() = default;

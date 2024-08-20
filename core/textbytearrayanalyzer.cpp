@@ -32,7 +32,7 @@ TextByteArrayAnalyzerPrivate::TextByteArrayAnalyzerPrivate(const AbstractByteArr
 
 
 TextByteArrayAnalyzer::TextByteArrayAnalyzer(const AbstractByteArrayModel* byteArrayModel, const CharCodec* charCodec)
-    : d_ptr(new TextByteArrayAnalyzerPrivate(byteArrayModel, charCodec))
+    : d_ptr(std::make_unique<TextByteArrayAnalyzerPrivate>(byteArrayModel, charCodec))
 {
 }
 

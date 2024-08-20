@@ -13,7 +13,7 @@ class AbstractByteArrayFilterParameterSetPrivate
 };
 
 AbstractByteArrayFilterParameterSet::AbstractByteArrayFilterParameterSet()
-    : d(new AbstractByteArrayFilterParameterSetPrivate())
+    : d(std::make_unique<AbstractByteArrayFilterParameterSetPrivate>())
 {}
 
 AbstractByteArrayFilterParameterSet::~AbstractByteArrayFilterParameterSet() = default;

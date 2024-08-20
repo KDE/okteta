@@ -12,7 +12,7 @@
 namespace Kasten {
 
 ModelCodecManager::ModelCodecManager()
-    : d_ptr(new ModelCodecManagerPrivate())
+    : d_ptr(std::make_unique<ModelCodecManagerPrivate>())
 {
 }
 

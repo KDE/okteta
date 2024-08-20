@@ -17,7 +17,7 @@ AbstractModelExporter::AbstractModelExporter(AbstractModelExporterPrivate* d)
 }
 
 AbstractModelExporter::AbstractModelExporter(const QString& remoteTypeName, const QString& remoteMimeType)
-    : d_ptr(new AbstractModelExporterPrivate(this, remoteTypeName, remoteMimeType))
+    : d_ptr(std::make_unique<AbstractModelExporterPrivate>(this, remoteTypeName, remoteMimeType))
 {
 }
 

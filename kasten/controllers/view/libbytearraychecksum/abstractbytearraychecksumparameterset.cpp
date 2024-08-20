@@ -13,7 +13,7 @@ class AbstractByteArrayChecksumParameterSetPrivate
 };
 
 AbstractByteArrayChecksumParameterSet::AbstractByteArrayChecksumParameterSet()
-    : d(new AbstractByteArrayChecksumParameterSetPrivate())
+    : d(std::make_unique<AbstractByteArrayChecksumParameterSetPrivate>())
 {}
 
 AbstractByteArrayChecksumParameterSet::~AbstractByteArrayChecksumParameterSet() = default;

@@ -24,7 +24,7 @@ public:
 };
 AbstractFrameRendererPrivate::AbstractFrameRendererPrivate() = default;
 
-AbstractFrameRenderer::AbstractFrameRenderer() : d(new AbstractFrameRendererPrivate()) {}
+AbstractFrameRenderer::AbstractFrameRenderer() : d(std::make_unique<AbstractFrameRendererPrivate>()) {}
 AbstractFrameRenderer::~AbstractFrameRenderer() = default;
 
 QPoint AbstractFrameRenderer::pos() const { return {d->mX, d->mY}; }

@@ -34,7 +34,7 @@ inline const QString& AbstractByteArrayFilterPrivate::name() const { return mNam
 inline const QString& AbstractByteArrayFilterPrivate::id() const { return mId; }
 
 AbstractByteArrayFilter::AbstractByteArrayFilter(const QString& name, const QString& id)
-    : d(new AbstractByteArrayFilterPrivate(name, id))
+    : d(std::make_unique<AbstractByteArrayFilterPrivate>(name, id))
 {}
 
 AbstractByteArrayFilter::~AbstractByteArrayFilter() = default;

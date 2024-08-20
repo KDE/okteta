@@ -14,7 +14,7 @@ class AbstractByteArrayFilterParameterSetEditPrivate
 
 AbstractByteArrayFilterParameterSetEdit::AbstractByteArrayFilterParameterSetEdit(QWidget* parent)
     : QWidget(parent)
-    , d(new AbstractByteArrayFilterParameterSetEditPrivate())
+    , d(std::make_unique<AbstractByteArrayFilterParameterSetEditPrivate>())
 {}
 
 AbstractByteArrayFilterParameterSetEdit::~AbstractByteArrayFilterParameterSetEdit() = default;

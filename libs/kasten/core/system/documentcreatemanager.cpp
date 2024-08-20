@@ -12,7 +12,7 @@
 namespace Kasten {
 
 DocumentCreateManager::DocumentCreateManager(DocumentManager* manager)
-    : d_ptr(new DocumentCreateManagerPrivate(manager))
+    : d_ptr(std::make_unique<DocumentCreateManagerPrivate>(manager))
 {
 }
 

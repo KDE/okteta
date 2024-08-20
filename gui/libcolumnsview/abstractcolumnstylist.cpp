@@ -12,7 +12,7 @@
 namespace Okteta {
 
 AbstractColumnStylist::AbstractColumnStylist()
-    : d_ptr(new AbstractColumnStylistPrivate())
+    : d_ptr(std::make_unique<AbstractColumnStylistPrivate>())
 {
 }
 

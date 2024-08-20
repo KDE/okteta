@@ -12,7 +12,7 @@
 namespace Kasten {
 
 DocumentManager::DocumentManager()
-    : d_ptr(new DocumentManagerPrivate(this))
+    : d_ptr(std::make_unique<DocumentManagerPrivate>(this))
 {
 }
 

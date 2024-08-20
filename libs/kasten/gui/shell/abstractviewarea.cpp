@@ -15,7 +15,7 @@
 namespace Kasten {
 
 AbstractViewArea::AbstractViewArea()
-    : d_ptr(new AbstractViewAreaPrivate(this))
+    : d_ptr(std::make_unique<AbstractViewAreaPrivate>(this))
 {}
 
 AbstractViewArea::AbstractViewArea(AbstractViewAreaPrivate* d)

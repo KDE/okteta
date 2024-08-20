@@ -17,7 +17,7 @@ AbstractLoadJob::AbstractLoadJob(AbstractLoadJobPrivate* d)
 }
 
 AbstractLoadJob::AbstractLoadJob()
-    : d_ptr(new AbstractLoadJobPrivate(this))
+    : d_ptr(std::make_unique<AbstractLoadJobPrivate>(this))
 {
 }
 

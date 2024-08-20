@@ -12,7 +12,7 @@
 namespace Kasten {
 
 AbstractDocumentStrategy::AbstractDocumentStrategy()
-    : d_ptr(new AbstractDocumentStrategyPrivate(this))
+    : d_ptr(std::make_unique<AbstractDocumentStrategyPrivate>(this))
 {
 }
 

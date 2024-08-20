@@ -17,7 +17,7 @@ AbstractSyncToRemoteJob::AbstractSyncToRemoteJob(AbstractSyncToRemoteJobPrivate*
 }
 
 AbstractSyncToRemoteJob::AbstractSyncToRemoteJob()
-    : d_ptr(new AbstractSyncToRemoteJobPrivate(this))
+    : d_ptr(std::make_unique<AbstractSyncToRemoteJobPrivate>(this))
 {
 }
 

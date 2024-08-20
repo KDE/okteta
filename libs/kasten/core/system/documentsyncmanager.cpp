@@ -15,7 +15,7 @@
 namespace Kasten {
 
 DocumentSyncManager::DocumentSyncManager(DocumentManager* manager)
-    : d_ptr(new DocumentSyncManagerPrivate(this, manager))
+    : d_ptr(std::make_unique<DocumentSyncManagerPrivate>(this, manager))
 {}
 
 DocumentSyncManager::~DocumentSyncManager() = default;

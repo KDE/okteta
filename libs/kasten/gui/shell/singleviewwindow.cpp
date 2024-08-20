@@ -12,7 +12,7 @@
 namespace Kasten {
 
 SingleViewWindow::SingleViewWindow(AbstractView* view)
-    : d_ptr(new SingleViewWindowPrivate(this, view))
+    : d_ptr(std::make_unique<SingleViewWindowPrivate>(this, view))
 {
 }
 

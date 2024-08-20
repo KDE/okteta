@@ -19,7 +19,7 @@ AbstractModelStreamEncoder::AbstractModelStreamEncoder(AbstractModelStreamEncode
 AbstractModelStreamEncoder::AbstractModelStreamEncoder(const QString& remoteTypeName,
                                                        const QString& remoteMimeType,
                                                        const QString& remoteClipboardMimeType)
-    : d_ptr(new AbstractModelStreamEncoderPrivate(this, remoteTypeName, remoteMimeType, remoteClipboardMimeType))
+    : d_ptr(std::make_unique<AbstractModelStreamEncoderPrivate>(this, remoteTypeName, remoteMimeType, remoteClipboardMimeType))
 {
 }
 

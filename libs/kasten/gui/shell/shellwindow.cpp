@@ -12,7 +12,7 @@
 namespace Kasten {
 
 ShellWindow::ShellWindow(ViewManager* viewManager)
-    : d_ptr(new ShellWindowPrivate(this, viewManager))
+    : d_ptr(std::make_unique<ShellWindowPrivate>(this, viewManager))
 {
 }
 

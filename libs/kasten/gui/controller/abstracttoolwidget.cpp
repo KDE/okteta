@@ -13,7 +13,7 @@ namespace Kasten {
 
 AbstractToolWidget::AbstractToolWidget(QWidget* parent)
     : QWidget(parent)
-    , d_ptr(new AbstractToolWidgetPrivate(this))
+    , d_ptr(std::make_unique<AbstractToolWidgetPrivate>(this))
 {
 }
 

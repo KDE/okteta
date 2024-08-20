@@ -14,7 +14,7 @@ class AbstractByteArrayChecksumParameterSetEditPrivate
 
 AbstractByteArrayChecksumParameterSetEdit::AbstractByteArrayChecksumParameterSetEdit(QWidget* parent)
     : QWidget(parent)
-    , d(new AbstractByteArrayChecksumParameterSetEditPrivate())
+    , d(std::make_unique<AbstractByteArrayChecksumParameterSetEditPrivate>())
 {}
 
 AbstractByteArrayChecksumParameterSetEdit::~AbstractByteArrayChecksumParameterSetEdit() = default;

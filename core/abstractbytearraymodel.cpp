@@ -24,7 +24,7 @@ AbstractByteArrayModel::AbstractByteArrayModel(AbstractByteArrayModelPrivate* dd
 
 AbstractByteArrayModel::AbstractByteArrayModel(QObject* parent)
     : QObject(parent)
-    , d_ptr(new AbstractByteArrayModelPrivate(this))
+    , d_ptr(std::make_unique<AbstractByteArrayModelPrivate>(this))
 {}
 
 AbstractByteArrayModel::~AbstractByteArrayModel() = default;

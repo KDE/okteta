@@ -16,7 +16,7 @@ namespace Kasten {
 
 AbstractLinePopup::AbstractLinePopup(QWidget* parent)
     : QWidget(parent, Qt::Popup)
-    , d_ptr(new AbstractLinePopupPrivate(this))
+    , d_ptr(std::make_unique<AbstractLinePopupPrivate>(this))
 {
     Q_D(AbstractLinePopup);
 

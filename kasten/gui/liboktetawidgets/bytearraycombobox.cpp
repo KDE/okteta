@@ -13,7 +13,7 @@ namespace Okteta {
 
 ByteArrayComboBox::ByteArrayComboBox(QWidget* parent)
     : QWidget(parent)
-    , d_ptr(new ByteArrayComboBoxPrivate(this))
+    , d_ptr(std::make_unique<ByteArrayComboBoxPrivate>(this))
 {
     Q_D(ByteArrayComboBox);
 

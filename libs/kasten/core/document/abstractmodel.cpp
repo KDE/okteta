@@ -12,7 +12,7 @@
 namespace Kasten {
 
 AbstractModel::AbstractModel(AbstractModel* baseModel)
-    : d_ptr(new AbstractModelPrivate(this, baseModel))
+    : d_ptr(std::make_unique<AbstractModelPrivate>(this, baseModel))
 {}
 
 AbstractModel::AbstractModel(AbstractModelPrivate* d)

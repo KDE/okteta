@@ -34,7 +34,7 @@ inline const QString& AbstractByteArrayChecksumAlgorithmPrivate::name() const { 
 inline const QString& AbstractByteArrayChecksumAlgorithmPrivate::id() const { return mId; }
 
 AbstractByteArrayChecksumAlgorithm::AbstractByteArrayChecksumAlgorithm(const QString& name, const QString& id)
-    : d(new AbstractByteArrayChecksumAlgorithmPrivate(name, id))
+    : d(std::make_unique<AbstractByteArrayChecksumAlgorithmPrivate>(name, id))
 {}
 
 AbstractByteArrayChecksumAlgorithm::~AbstractByteArrayChecksumAlgorithm() = default;

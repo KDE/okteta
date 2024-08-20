@@ -17,7 +17,7 @@ AbstractConnectJob::AbstractConnectJob(AbstractConnectJobPrivate* d)
 }
 
 AbstractConnectJob::AbstractConnectJob()
-    : d_ptr(new AbstractConnectJobPrivate(this))
+    : d_ptr(std::make_unique<AbstractConnectJobPrivate>(this))
 {}
 
 AbstractConnectJob::~AbstractConnectJob() = default;

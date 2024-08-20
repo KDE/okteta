@@ -13,7 +13,7 @@ namespace Okteta {
 
 AddressComboBox::AddressComboBox(QWidget* parent)
     : QWidget(parent)
-    , d_ptr(new AddressComboBoxPrivate(this))
+    , d_ptr(std::make_unique<AddressComboBoxPrivate>(this))
 {
     Q_D(AddressComboBox);
 

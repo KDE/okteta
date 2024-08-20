@@ -53,7 +53,7 @@ void AbstractColumnFrameRendererPrivate::updateWidths()
 }
 
 AbstractColumnFrameRenderer::AbstractColumnFrameRenderer()
-    : d(new AbstractColumnFrameRendererPrivate())
+    : d(std::make_unique<AbstractColumnFrameRendererPrivate>())
 {
 }
 

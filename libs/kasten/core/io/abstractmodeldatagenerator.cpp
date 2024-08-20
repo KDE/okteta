@@ -18,7 +18,7 @@ AbstractModelDataGenerator::AbstractModelDataGenerator(AbstractModelDataGenerato
 
 AbstractModelDataGenerator::AbstractModelDataGenerator(const QString& typeName,
                                                        const QString& mimeType, Flags flags)
-    : d_ptr(new AbstractModelDataGeneratorPrivate(this, typeName, mimeType, flags))
+    : d_ptr(std::make_unique<AbstractModelDataGeneratorPrivate>(this, typeName, mimeType, flags))
 {
 }
 

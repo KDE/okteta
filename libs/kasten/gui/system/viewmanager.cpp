@@ -12,7 +12,7 @@
 namespace Kasten {
 
 ViewManager::ViewManager()
-    : d_ptr(new ViewManagerPrivate(this))
+    : d_ptr(std::make_unique<ViewManagerPrivate>(this))
 {
 }
 

@@ -20,7 +20,7 @@ AbstractColumnRenderer::AbstractColumnRenderer(AbstractColumnRendererPrivate* d)
 }
 
 AbstractColumnRenderer::AbstractColumnRenderer(AbstractColumnStylist* stylist)
-    : d_ptr(new AbstractColumnRendererPrivate(stylist))
+    : d_ptr(std::make_unique<AbstractColumnRendererPrivate>(stylist))
 {
 }
 

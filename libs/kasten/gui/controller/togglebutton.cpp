@@ -13,7 +13,7 @@ namespace Kasten {
 
 ToggleButton::ToggleButton(const QIcon& icon, const QString& text, const QString& toolTip, QWidget* parent)
     : QToolButton(parent)
-    , d_ptr(new ToggleButtonPrivate(this))
+    , d_ptr(std::make_unique<ToggleButtonPrivate>(this))
 {
     setIcon(icon);
     setText(text);
@@ -22,7 +22,7 @@ ToggleButton::ToggleButton(const QIcon& icon, const QString& text, const QString
 
 ToggleButton::ToggleButton(const QString& text, const QString& toolTip, QWidget* parent)
     : QToolButton(parent)
-    , d_ptr(new ToggleButtonPrivate(this))
+    , d_ptr(std::make_unique<ToggleButtonPrivate>(this))
 {
     setText(text);
     setToolTip(toolTip);
