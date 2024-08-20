@@ -72,30 +72,30 @@ bool ByteArrayViewHtmlStreamEncoder::encodeDataToStream(QIODevice* device,
 
     if (byteArrayView->offsetColumnVisible()) {
         columnHtmlRendererList.emplace_back(
-            new OffsetColumnHtmlRenderer(byteArrayView->offsetCoding(), mSettings.firstLineOffset, mSettings.delta, (viewModus == 0)));
+            std::make_unique<OffsetColumnHtmlRenderer>(byteArrayView->offsetCoding(), mSettings.firstLineOffset, mSettings.delta, (viewModus == 0)));
     }
 
     if (viewModus == 0) {
         if (visibleByteArrayCodings & Okteta::AbstractByteArrayView::ValueCodingId) {
             columnHtmlRendererList.emplace_back(
-                new ValueByteArrayColumnHtmlRenderer(byteArrayModel, range.start(), coordRange,
-                                                     noOfBytesPerLine, noOfGroupedBytes,
-                                                     mSettings.valueCoding));
+                std::make_unique<ValueByteArrayColumnHtmlRenderer>(byteArrayModel, range.start(), coordRange,
+                                                                   noOfBytesPerLine, noOfGroupedBytes,
+                                                                   mSettings.valueCoding));
         }
 
         if (visibleByteArrayCodings & Okteta::AbstractByteArrayView::CharCodingId) {
             columnHtmlRendererList.emplace_back(
-                new CharByteArrayColumnHtmlRenderer(byteArrayModel, range.start(), coordRange,
-                                                    noOfBytesPerLine,
-                                                    mSettings.codecName, mSettings.substituteChar, mSettings.undefinedChar));
+                std::make_unique<CharByteArrayColumnHtmlRenderer>(byteArrayModel, range.start(), coordRange,
+                                                                  noOfBytesPerLine,
+                                                                  mSettings.codecName, mSettings.substituteChar, mSettings.undefinedChar));
         }
     } else {
         columnHtmlRendererList.emplace_back(
-            new ByteArrayRowsColumnHtmlRenderer(byteArrayModel, range.start(), coordRange,
-                                                noOfBytesPerLine, noOfGroupedBytes,
-                                                visibleByteArrayCodings,
-                                                mSettings.valueCoding,
-                                                mSettings.codecName, mSettings.substituteChar, mSettings.undefinedChar));
+            std::make_unique<ByteArrayRowsColumnHtmlRenderer>(byteArrayModel, range.start(), coordRange,
+                                                              noOfBytesPerLine, noOfGroupedBytes,
+                                                              visibleByteArrayCodings,
+                                                              mSettings.valueCoding,
+                                                              mSettings.codecName, mSettings.substituteChar, mSettings.undefinedChar));
     }
 
     int subLinesCount = 1;

@@ -78,34 +78,34 @@ bool ByteArrayViewTextStreamEncoder::encodeDataToStream(QIODevice* device,
 
     if (byteArrayView->offsetColumnVisible()) {
         columnTextRendererList.emplace_back(
-            new OffsetColumnTextRenderer(byteArrayView->offsetCoding(), mSettings.firstLineOffset, mSettings.delta));
-        columnTextRendererList.emplace_back(new BorderColumnTextRenderer());
+            std::make_unique<OffsetColumnTextRenderer>(byteArrayView->offsetCoding(), mSettings.firstLineOffset, mSettings.delta));
+        columnTextRendererList.emplace_back(std::make_unique<BorderColumnTextRenderer>());
     }
 
     if (viewModus == 0) {
         if (visibleByteArrayCodings & Okteta::AbstractByteArrayView::ValueCodingId) {
             columnTextRendererList.emplace_back(
-                new ValueByteArrayColumnTextRenderer(byteArrayModel, range.start(), coordRange,
-                                                     noOfBytesPerLine, byteSpacingWidth, noOfGroupedBytes,
-                                                     mSettings.valueCoding));
+                std::make_unique<ValueByteArrayColumnTextRenderer>(byteArrayModel, range.start(), coordRange,
+                                                                   noOfBytesPerLine, byteSpacingWidth, noOfGroupedBytes,
+                                                                   mSettings.valueCoding));
         }
 
         if (visibleByteArrayCodings & Okteta::AbstractByteArrayView::CharCodingId) {
             if (visibleByteArrayCodings & Okteta::AbstractByteArrayView::ValueCodingId) {
-                columnTextRendererList.emplace_back(new BorderColumnTextRenderer());
+                columnTextRendererList.emplace_back(std::make_unique<BorderColumnTextRenderer>());
             }
             columnTextRendererList.emplace_back(
-                new CharByteArrayColumnTextRenderer(byteArrayModel, range.start(), coordRange,
-                                                    noOfBytesPerLine, 0, 0,
-                                                    mSettings.codecName, mSettings.substituteChar, mSettings.undefinedChar));
+                std::make_unique<CharByteArrayColumnTextRenderer>(byteArrayModel, range.start(), coordRange,
+                                                                  noOfBytesPerLine, 0, 0,
+                                                                  mSettings.codecName, mSettings.substituteChar, mSettings.undefinedChar));
         }
     } else {
         columnTextRendererList.emplace_back(
-            new ByteArrayRowsColumnTextRenderer(byteArrayModel, range.start(), coordRange,
-                                                noOfBytesPerLine, byteSpacingWidth, noOfGroupedBytes,
-                                                visibleByteArrayCodings,
-                                                mSettings.valueCoding,
-                                                mSettings.codecName, mSettings.substituteChar, mSettings.undefinedChar));
+            std::make_unique<ByteArrayRowsColumnTextRenderer>(byteArrayModel, range.start(), coordRange,
+                                                              noOfBytesPerLine, byteSpacingWidth, noOfGroupedBytes,
+                                                              visibleByteArrayCodings,
+                                                              mSettings.valueCoding,
+                                                              mSettings.codecName, mSettings.substituteChar, mSettings.undefinedChar));
     }
 
     int subLinesCount = 1;
