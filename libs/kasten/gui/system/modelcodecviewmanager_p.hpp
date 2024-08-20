@@ -46,7 +46,7 @@ public:
 
 private:
     std::vector<std::unique_ptr<AbstractModelStreamEncoderConfigEditorFactory>> mEncoderFactoryList;
-    QVector<AbstractModelExporterConfigEditorFactory*> mExporterFactoryList;
+    std::vector<std::unique_ptr<AbstractModelExporterConfigEditorFactory>> mExporterFactoryList;
     std::vector<std::unique_ptr<AbstractModelDataGeneratorConfigEditorFactory>> mGeneratorFactoryList;
 };
 

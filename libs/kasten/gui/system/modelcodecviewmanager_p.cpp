@@ -27,21 +27,17 @@ namespace Kasten {
 
 ModelCodecViewManagerPrivate::ModelCodecViewManagerPrivate() = default;
 
-ModelCodecViewManagerPrivate::~ModelCodecViewManagerPrivate()
-{
-    qDeleteAll(mExporterFactoryList);
-}
+ModelCodecViewManagerPrivate::~ModelCodecViewManagerPrivate() = default;
 
 void ModelCodecViewManagerPrivate::setStreamEncoderConfigEditorFactories(std::vector<std::unique_ptr<AbstractModelStreamEncoderConfigEditorFactory>>&& factoryList)
 {
-    mEncoderFactoryList = std::move(factoryList);
-
-    qDeleteAll(mExporterFactoryList);
     mExporterFactoryList.clear();
+
+    mEncoderFactoryList = std::move(factoryList);
 
     mExporterFactoryList.reserve(mEncoderFactoryList.size());
     for (const auto& factory : mEncoderFactoryList) {
-        mExporterFactoryList << new ModelEncoderFileSystemExporterConfigEditorFactory(factory.get());
+        mExporterFactoryList.emplace_back(std::make_unique<ModelEncoderFileSystemExporterConfigEditorFactory>(factory.get()));
     }
 }
 
@@ -68,7 +64,7 @@ AbstractModelExporterConfigEditor* ModelCodecViewManagerPrivate::createConfigEdi
 {
     AbstractModelExporterConfigEditor* result = nullptr;
 
-    for (const AbstractModelExporterConfigEditorFactory* factory : mExporterFactoryList) {
+    for (const auto& factory : mExporterFactoryList) {
         result = factory->tryCreateConfigEditor(exporter);
         if (result) {
             break;
