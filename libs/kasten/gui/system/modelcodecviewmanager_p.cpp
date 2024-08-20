@@ -45,12 +45,6 @@ void ModelCodecViewManagerPrivate::setStreamEncoderConfigEditorFactories(std::ve
     }
 }
 
-void ModelCodecViewManagerPrivate::setExporterConfigEditorFactories(const QVector<AbstractModelExporterConfigEditorFactory*>& factoryList)
-{
-    qDeleteAll(mExporterFactoryList);
-    mExporterFactoryList = factoryList;
-}
-
 void ModelCodecViewManagerPrivate::setDataGeneratorConfigEditorFactories(std::vector<std::unique_ptr<AbstractModelDataGeneratorConfigEditorFactory>>&& factoryList)
 {
     mGeneratorFactoryList = std::move(factoryList);

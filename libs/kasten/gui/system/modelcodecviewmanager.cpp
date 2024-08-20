@@ -26,13 +26,6 @@ void ModelCodecViewManager::setStreamEncoderConfigEditorFactories(std::vector<st
     d->setStreamEncoderConfigEditorFactories(std::move(factoryList));
 }
 
-void ModelCodecViewManager::setExporterConfigEditorFactories(const QVector<AbstractModelExporterConfigEditorFactory*>& factoryList)
-{
-    Q_D(ModelCodecViewManager);
-
-    d->setExporterConfigEditorFactories(factoryList);
-}
-
 void ModelCodecViewManager::setDataGeneratorConfigEditorFactories(std::vector<std::unique_ptr<AbstractModelDataGeneratorConfigEditorFactory>>&& factoryList)
 {
     Q_D(ModelCodecViewManager);

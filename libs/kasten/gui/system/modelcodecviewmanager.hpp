@@ -13,7 +13,6 @@
 #include "kastengui_export.hpp"
 // Qt
 #include <QObject>
-#include <QVector>
 // Std
 #include <vector>
 #include <memory>
@@ -23,7 +22,6 @@ namespace Kasten {
 class AbstractModelStreamEncoderConfigEditorFactory;
 class AbstractModelStreamEncoderConfigEditor;
 class AbstractModelStreamEncoder;
-class AbstractModelExporterConfigEditorFactory;
 class AbstractModelExporterConfigEditor;
 class AbstractModelExporter;
 class AbstractModelDataGeneratorConfigEditorFactory;
@@ -47,7 +45,6 @@ public:
 
 public:
     void setStreamEncoderConfigEditorFactories(std::vector<std::unique_ptr<AbstractModelStreamEncoderConfigEditorFactory>>&& factoryList);
-    void setExporterConfigEditorFactories(const QVector<AbstractModelExporterConfigEditorFactory*>& factoryList);
     void setDataGeneratorConfigEditorFactories(std::vector<std::unique_ptr<AbstractModelDataGeneratorConfigEditorFactory>>&& factoryList);
 
 private:
