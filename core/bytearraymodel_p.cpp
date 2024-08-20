@@ -198,17 +198,17 @@ Size ByteArrayModelPrivate::replace(const AddressRange& _removeRange, const Byte
     // raw array not big enough?
     if (mRawSize < newSize) {
         // create new buffer
-        auto* newData = new Byte[newSize];
+        auto newData = std::unique_ptr<Byte[]>(new Byte[newSize]); // no make_unique, no need for initialization
         if (!newData) {
             return 0;
         }
 
         // move old data to its (new) places
-        memcpy(newData, mData.get(), removeRange.start());
+        memcpy(newData.get(), mData.get(), removeRange.start());
         memcpy(&newData[behindInsertPos], &mData[behindRemovePos], mSize - behindRemovePos);
 
         // remove old & set new values
-        mData.reset(newData);
+        mData = std::move(newData);
         mRawSize = newSize;
     } else {
         // move old data to its (new) places
@@ -402,16 +402,16 @@ int ByteArrayModelPrivate::addSize(int addSize, int splitPosition, bool saveUppe
             NewRawSize += chunkSize;
         }
         // create new buffer
-        auto* newData = new Byte[NewRawSize];
+        auto newData = std::unique_ptr<Byte[]>(new Byte[NewRawSize]); // no make_unique, no need for initialization
 
         // move old data to its (new) places
-        memcpy(newData, mData.get(), splitPosition);
+        memcpy(newData.get(), mData.get(), splitPosition);
         if (saveUpperPart) {
             memcpy(&newData[BehindSplitPos], &mData[splitPosition], mSize - splitPosition);
         }
 
         // remove old & set new values
-        mData.reset(newData);
+        mData = std::move(newData);
         mRawSize = NewRawSize;
     }
     // old buffer kept
