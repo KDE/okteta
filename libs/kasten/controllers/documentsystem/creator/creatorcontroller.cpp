@@ -66,10 +66,9 @@ CreatorController::CreatorController(ModelCodecManager* modelCodecManager,
     newMenuAction->addAction(newFromClipboardDocumentAction);
 
     // generators
-    const QVector<AbstractModelDataGenerator*> generatorList =
-        mModelCodecManager->generatorList();
+    const auto generatorList = mModelCodecManager->dataGenerators();
 
-    const bool hasGenerators = (!generatorList.isEmpty());
+    const bool hasGenerators = (!generatorList.empty());
 
     if (hasGenerators) {
         newMenuAction->addSeparator();

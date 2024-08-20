@@ -50,7 +50,6 @@ ModelCodecManagerPrivate::~ModelCodecManagerPrivate()
 {
     qDeleteAll(mExporterList);
 //     qDeleteAll( mDecoderList );
-    qDeleteAll(mGeneratorList);
 }
 
 std::vector<AbstractModelStreamEncoder*>
@@ -63,8 +62,12 @@ ModelCodecManagerPrivate::streamEncoders(AbstractModel* model, const AbstractMod
 QVector<AbstractModelStreamDecoder*>
 ModelCodecManagerPrivate::decoderList() const { return mDecoderList; }
 
-QVector<AbstractModelDataGenerator*>
-ModelCodecManagerPrivate::generatorList() const { return mGeneratorList; }
+std::vector<AbstractModelDataGenerator*>
+ModelCodecManagerPrivate::dataGenerators() const
+{
+    return ModelCodecManagerNS::make_vector(mDataGeneratorList);
+
+}
 
 QVector<AbstractModelExporter*>
 ModelCodecManagerPrivate::exporterList(AbstractModel* model, const AbstractModelSelection* selection) const
@@ -96,9 +99,9 @@ void ModelCodecManagerPrivate::setStreamDecoders(const QVector<AbstractModelStre
     mDecoderList = decoderList;
 }
 
-void ModelCodecManagerPrivate::setDataGenerators(const QVector<AbstractModelDataGenerator*>& generatorList)
+void ModelCodecManagerPrivate::setDataGenerators(std::vector<std::unique_ptr<AbstractModelDataGenerator>>&& dataGeneratorList)
 {
-    mGeneratorList = generatorList;
+    mDataGeneratorList = std::move(dataGeneratorList);
 }
 
 void ModelCodecManagerPrivate::encodeToStream(AbstractModelStreamEncoder* encoder,

@@ -34,12 +34,11 @@ ModelCodecManager::decoderList() const
     return d->decoderList();
 }
 
-QVector<AbstractModelDataGenerator*>
-ModelCodecManager::generatorList() const
+std::vector<AbstractModelDataGenerator*> ModelCodecManager::dataGenerators() const
 {
     Q_D(const ModelCodecManager);
 
-    return d->generatorList();
+    return d->dataGenerators();
 }
 
 QVector<AbstractModelExporter*>
@@ -71,11 +70,11 @@ void ModelCodecManager::setStreamDecoders(const QVector<AbstractModelStreamDecod
     d->setStreamDecoders(decoderList);
 }
 
-void ModelCodecManager::setDataGenerators(const QVector<AbstractModelDataGenerator*>& generatorList)
+void ModelCodecManager::setDataGenerators(std::vector<std::unique_ptr<AbstractModelDataGenerator>>&& dataGeneratorList)
 {
     Q_D(ModelCodecManager);
 
-    d->setDataGenerators(generatorList);
+    d->setDataGenerators(std::move(dataGeneratorList));
 }
 
 void ModelCodecManager::encodeToStream(AbstractModelStreamEncoder* encoder,

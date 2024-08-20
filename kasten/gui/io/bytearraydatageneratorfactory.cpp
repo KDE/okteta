@@ -17,23 +17,34 @@
 //// e.g.
 //// #include "my_bytearraydatagenerator.hpp"
 //// NEWBYTEARRAYDATAGENERATOR(end)
-// Qt
-#include <QVector>
 
 namespace Kasten {
 
-QVector<AbstractModelDataGenerator*> ByteArrayDataGeneratorFactory::createDataGenerators()
+namespace ByteArrayDataGenerator {
+
+template<typename T, typename ... Ptrs>
+auto make_unique_vector(Ptrs&& ... ptrs)
 {
-    const QVector<AbstractModelDataGenerator*> result {
+    std::vector<std::unique_ptr<T>> vector;
+    vector.reserve(sizeof...(Ptrs));
+    ( vector.emplace_back(std::unique_ptr<T>(ptrs)), ... );
+    return vector;
+}
+
+}
+
+std::vector<std::unique_ptr<AbstractModelDataGenerator>> ByteArrayDataGeneratorFactory::createDataGenerators()
+{
+    auto result = ByteArrayDataGenerator::make_unique_vector<AbstractModelDataGenerator>(
         new ByteArrayPatternGenerator(),
         new ByteArrayRandomDataGenerator(),
-        new ByteArraySequenceGenerator(),
+        new ByteArraySequenceGenerator()
 //// NEWBYTEARRAYDATAGENERATOR(start)
 //// Here add the creation of an object of your datagenerator class and add it to the list,
 //// e.g.
 ////         new My_ByteArrayDataGenerator(),
 //// NEWBYTEARRAYDATAGENERATOR(end)
-    };
+    );
     return result;
 }
 

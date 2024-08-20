@@ -45,14 +45,14 @@ public:
 public:
     std::vector<AbstractModelStreamEncoder*> streamEncoders(AbstractModel* model, const AbstractModelSelection* selection) const;
     QVector<AbstractModelStreamDecoder*> decoderList() const;
-    QVector<AbstractModelDataGenerator*> generatorList() const;
+    std::vector<AbstractModelDataGenerator*> dataGenerators() const;
 
     QVector<AbstractModelExporter*> exporterList(AbstractModel* model, const AbstractModelSelection* selection) const;
 
 public:
     void setStreamEncoders(std::vector<std::unique_ptr<AbstractModelStreamEncoder>>&& streamEncoderList);
     void setStreamDecoders(const QVector<AbstractModelStreamDecoder*>& decoderList);
-    void setDataGenerators(const QVector<AbstractModelDataGenerator*>& generatorList);
+    void setDataGenerators(std::vector<std::unique_ptr<AbstractModelDataGenerator>>&& dataGeneratorList);
     void setOverwriteDialog(AbstractOverwriteDialog* overwriteDialog);
 
 private:
@@ -62,7 +62,7 @@ private:
     // temporary hack: hard coded codecs for byte arrays
     std::vector<std::unique_ptr<AbstractModelStreamEncoder>> mStreamEncoderList;
     QVector<AbstractModelStreamDecoder*> mDecoderList;
-    QVector<AbstractModelDataGenerator*> mGeneratorList;
+    std::vector<std::unique_ptr<AbstractModelDataGenerator>> mDataGeneratorList;
     QVector<AbstractModelExporter*> mExporterList;
 };
 

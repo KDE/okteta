@@ -18,6 +18,7 @@
 #include <Kasten/Okteta/ByteArrayStreamEncoderFactory>
 #include <Kasten/Okteta/ByteArrayDataGeneratorFactory>
 // Kasten
+#include <Kasten/AbstractModelDataGenerator>
 #include <Kasten/ModelCodecViewManager>
 #include <Kasten/ModelCodecManager>
 // KF
@@ -32,8 +33,7 @@ OktetaPartFactory::OktetaPartFactory()
 
     auto streamEncoderList = Kasten::ByteArrayStreamEncoderFactory::createStreamEncoders();
 
-    const QVector<Kasten::AbstractModelDataGenerator*> generatorList =
-        Kasten::ByteArrayDataGeneratorFactory::createDataGenerators();
+    auto dataGeneratorList = Kasten::ByteArrayDataGeneratorFactory::createDataGenerators();
 
     const QVector<Kasten::AbstractModelStreamEncoderConfigEditorFactory*> encoderConfigEditorFactoryList =
         Kasten::ByteArrayStreamEncoderConfigEditorFactoryFactory::createFactorys();
@@ -42,7 +42,7 @@ OktetaPartFactory::OktetaPartFactory()
         Kasten::ByteArrayDataGeneratorConfigEditorFactoryFactory::createFactorys();
 
     mModelCodecManager->setStreamEncoders(std::move(streamEncoderList));
-    mModelCodecManager->setDataGenerators(generatorList);
+    mModelCodecManager->setDataGenerators(std::move(dataGeneratorList));
 
     mModelCodecViewManager->setStreamEncoderConfigEditorFactories(encoderConfigEditorFactoryList);
     mModelCodecViewManager->setDataGeneratorConfigEditorFactories(generatorConfigEditorFactoryList);

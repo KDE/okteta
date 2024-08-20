@@ -28,6 +28,7 @@
 #include <Kasten/ViewManager>
 #include <Kasten/ModelCodecViewManager>
 // Kasten core
+#include <Kasten/AbstractModelDataGenerator>
 #include <Kasten/DocumentManager>
 #include <Kasten/DocumentCreateManager>
 #include <Kasten/DocumentSyncManager>
@@ -98,8 +99,7 @@ int OktetaProgram::execute()
 
     auto streamEncoderList = ByteArrayStreamEncoderFactory::createStreamEncoders();
 
-    const QVector<AbstractModelDataGenerator*> generatorList =
-        ByteArrayDataGeneratorFactory::createDataGenerators();
+    auto dataGeneratorList = ByteArrayDataGeneratorFactory::createDataGenerators();
 
     const QVector<AbstractModelStreamEncoderConfigEditorFactory*> encoderConfigEditorFactoryList =
         ByteArrayStreamEncoderConfigEditorFactoryFactory::createFactorys();
@@ -108,7 +108,7 @@ int OktetaProgram::execute()
         ByteArrayDataGeneratorConfigEditorFactoryFactory::createFactorys();
 
     mDocumentManager->codecManager()->setStreamEncoders(std::move(streamEncoderList));
-    mDocumentManager->codecManager()->setDataGenerators(generatorList);
+    mDocumentManager->codecManager()->setDataGenerators(std::move(dataGeneratorList));
     mDocumentManager->codecManager()->setOverwriteDialog(mDialogHandler.get());
     mDocumentManager->createManager()->setDocumentFactory(new ByteArrayDocumentFactory());
     mDocumentManager->syncManager()->setDocumentSynchronizerFactory(new ByteArrayRawFileSynchronizerFactory());
