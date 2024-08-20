@@ -13,7 +13,7 @@ namespace Kasten {
 
 AbstractFileSystemSyncWithRemoteJob::AbstractFileSystemSyncWithRemoteJob(AbstractModelFileSystemSynchronizer* synchronizer,
                                                                          const QUrl& url, AbstractModelSynchronizer::ConnectOption option)
-    : AbstractSyncWithRemoteJob(new AbstractFileSystemSyncWithRemoteJobPrivate(this, synchronizer, url, option))
+    : AbstractSyncWithRemoteJob(std::make_unique<AbstractFileSystemSyncWithRemoteJobPrivate>(this, synchronizer, url, option))
 {}
 
 AbstractFileSystemSyncWithRemoteJob::~AbstractFileSystemSyncWithRemoteJob() = default;

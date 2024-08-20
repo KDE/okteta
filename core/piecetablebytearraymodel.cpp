@@ -13,11 +13,11 @@ namespace Okteta {
 // TODO: a wrapper to a raw data, plus a function to dump the current version to the original data
 
 PieceTableByteArrayModel::PieceTableByteArrayModel(const QByteArray& data, QObject* parent)
-    : AbstractByteArrayModel(new PieceTableByteArrayModelPrivate(this, data), parent)
+    : AbstractByteArrayModel(std::make_unique<PieceTableByteArrayModelPrivate>(this, data), parent)
 {}
 
 PieceTableByteArrayModel::PieceTableByteArrayModel(int size, Byte fillByte, QObject* parent)
-    : AbstractByteArrayModel(new PieceTableByteArrayModelPrivate(this, size, fillByte), parent)
+    : AbstractByteArrayModel(std::make_unique<PieceTableByteArrayModelPrivate>(this, size, fillByte), parent)
 {}
 
 PieceTableByteArrayModel::~PieceTableByteArrayModel() = default;

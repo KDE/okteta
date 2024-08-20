@@ -13,7 +13,7 @@ namespace Okteta {
 
 CharByteArrayColumnRenderer::CharByteArrayColumnRenderer(AbstractColumnStylist* stylist,
                                                          AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges)
-    : AbstractByteArrayColumnRenderer(new CharByteArrayColumnRendererPrivate(this, stylist, byteArrayModel, layout, ranges))
+    : AbstractByteArrayColumnRenderer(std::make_unique<CharByteArrayColumnRendererPrivate>(this, stylist, byteArrayModel, layout, ranges))
 {
     Q_D(CharByteArrayColumnRenderer);
 

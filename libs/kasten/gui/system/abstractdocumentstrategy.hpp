@@ -30,7 +30,7 @@ class KASTENGUI_EXPORT AbstractDocumentStrategy : public QObject
 
 protected:
     AbstractDocumentStrategy();
-    KASTENGUI_NO_EXPORT explicit AbstractDocumentStrategy(AbstractDocumentStrategyPrivate* d);
+    KASTENGUI_NO_EXPORT explicit AbstractDocumentStrategy(std::unique_ptr<AbstractDocumentStrategyPrivate>&& dd);
 
 public:
     ~AbstractDocumentStrategy() override;

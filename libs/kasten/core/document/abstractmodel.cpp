@@ -15,8 +15,8 @@ AbstractModel::AbstractModel(AbstractModel* baseModel)
     : d_ptr(std::make_unique<AbstractModelPrivate>(this, baseModel))
 {}
 
-AbstractModel::AbstractModel(AbstractModelPrivate* d)
-    : d_ptr(d)
+AbstractModel::AbstractModel(std::unique_ptr<AbstractModelPrivate>&& dd)
+    : d_ptr(std::move(dd))
 {}
 
 AbstractModel::~AbstractModel() = default;

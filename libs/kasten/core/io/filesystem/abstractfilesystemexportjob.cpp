@@ -13,12 +13,12 @@ namespace Kasten {
 
 AbstractFileSystemExportJob::AbstractFileSystemExportJob(AbstractModel* model, const AbstractModelSelection* selection,
                                                          const QUrl& url)
-    : AbstractExportJob(new AbstractFileSystemExportJobPrivate(this, model, selection, url))
+    : AbstractExportJob(std::make_unique<AbstractFileSystemExportJobPrivate>(this, model, selection, url))
 {
 }
 
-AbstractFileSystemExportJob::AbstractFileSystemExportJob(AbstractFileSystemExportJobPrivate* d)
-    : AbstractExportJob(d)
+AbstractFileSystemExportJob::AbstractFileSystemExportJob(std::unique_ptr<AbstractFileSystemExportJobPrivate>&& dd)
+    : AbstractExportJob(std::move(dd))
 {
 }
 

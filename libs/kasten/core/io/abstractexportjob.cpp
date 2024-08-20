@@ -11,8 +11,8 @@
 
 namespace Kasten {
 
-AbstractExportJob::AbstractExportJob(AbstractExportJobPrivate* d)
-    : d_ptr(d)
+AbstractExportJob::AbstractExportJob(std::unique_ptr<AbstractExportJobPrivate>&& dd)
+    : d_ptr(std::move(dd))
 {}
 
 AbstractExportJob::AbstractExportJob()

@@ -13,7 +13,7 @@ namespace Okteta {
 
 OffsetColumnRenderer::OffsetColumnRenderer(AbstractColumnStylist* stylist,
                                            ByteArrayTableLayout* layout, OffsetFormat::Format format)
-    : AbstractColumnRenderer(new OffsetColumnRendererPrivate(this, stylist, layout, format))
+    : AbstractColumnRenderer(std::make_unique<OffsetColumnRendererPrivate>(this, stylist, layout, format))
 {
     Q_D(OffsetColumnRenderer);
 

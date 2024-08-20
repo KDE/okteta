@@ -37,7 +37,7 @@ class KASTENCORE_EXPORT AbstractModelStreamEncoder : public QObject
     Q_OBJECT
 
 protected:
-    KASTENCORE_NO_EXPORT explicit AbstractModelStreamEncoder(AbstractModelStreamEncoderPrivate* d);
+    KASTENCORE_NO_EXPORT explicit AbstractModelStreamEncoder(std::unique_ptr<AbstractModelStreamEncoderPrivate>&& dd);
 
 public:
     AbstractModelStreamEncoder(const QString& remoteTypeName, const QString& remoteMimeType,

@@ -14,8 +14,8 @@
 
 namespace Okteta {
 
-AbstractByteArrayColumnRenderer::AbstractByteArrayColumnRenderer(AbstractByteArrayColumnRendererPrivate* d)
-    : AbstractColumnRenderer(d)
+AbstractByteArrayColumnRenderer::AbstractByteArrayColumnRenderer(std::unique_ptr<AbstractByteArrayColumnRendererPrivate>&& dd)
+    : AbstractColumnRenderer(std::move(dd))
 {
 }
 

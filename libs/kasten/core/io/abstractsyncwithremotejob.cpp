@@ -11,8 +11,8 @@
 
 namespace Kasten {
 
-AbstractSyncWithRemoteJob::AbstractSyncWithRemoteJob(AbstractSyncWithRemoteJobPrivate* d)
-    : d_ptr(d)
+AbstractSyncWithRemoteJob::AbstractSyncWithRemoteJob(std::unique_ptr<AbstractSyncWithRemoteJobPrivate>&& dd)
+    : d_ptr(std::move(dd))
 {
 }
 

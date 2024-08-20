@@ -15,15 +15,15 @@
 namespace Okteta {
 
 ByteArrayModel::ByteArrayModel(Byte* data, int size, int rawSize, bool keepMemory, QObject* parent)
-    : AbstractByteArrayModel(new ByteArrayModelPrivate(this, data, size, rawSize, keepMemory), parent)
+    : AbstractByteArrayModel(std::make_unique<ByteArrayModelPrivate>(this, data, size, rawSize, keepMemory), parent)
 {}
 
 ByteArrayModel::ByteArrayModel(const Byte* data, int size, QObject* parent)
-    : AbstractByteArrayModel(new ByteArrayModelPrivate(this, data, size), parent)
+    : AbstractByteArrayModel(std::make_unique<ByteArrayModelPrivate>(this, data, size), parent)
 {}
 
 ByteArrayModel::ByteArrayModel(int size, int maxSize, QObject* parent)
-    : AbstractByteArrayModel(new ByteArrayModelPrivate(this, size, maxSize), parent)
+    : AbstractByteArrayModel(std::make_unique<ByteArrayModelPrivate>(this, size, maxSize), parent)
 {}
 
 ByteArrayModel::~ByteArrayModel() = default;

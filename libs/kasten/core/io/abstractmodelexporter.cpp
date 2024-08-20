@@ -11,8 +11,8 @@
 
 namespace Kasten {
 
-AbstractModelExporter::AbstractModelExporter(AbstractModelExporterPrivate* d)
-    : d_ptr(d)
+AbstractModelExporter::AbstractModelExporter(std::unique_ptr<AbstractModelExporterPrivate>&& dd)
+    : d_ptr(std::move(dd))
 {
 }
 

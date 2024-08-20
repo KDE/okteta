@@ -12,7 +12,7 @@
 namespace Kasten {
 
 ModelEncoderFileSystemExporter::ModelEncoderFileSystemExporter(AbstractModelStreamEncoder* encoder)
-    : AbstractModelExporter(new ModelEncoderFileSystemExporterPrivate(this, encoder->remoteTypeName(), encoder->remoteMimeType(), encoder))
+    : AbstractModelExporter(std::make_unique<ModelEncoderFileSystemExporterPrivate>(this, encoder->remoteTypeName(), encoder->remoteMimeType(), encoder))
 {
 }
 

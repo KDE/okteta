@@ -11,8 +11,8 @@
 
 namespace Kasten {
 
-AbstractModelStreamEncoder::AbstractModelStreamEncoder(AbstractModelStreamEncoderPrivate* d)
-    : d_ptr(d)
+AbstractModelStreamEncoder::AbstractModelStreamEncoder(std::unique_ptr<AbstractModelStreamEncoderPrivate>&& dd)
+    : d_ptr(std::move(dd))
 {
 }
 

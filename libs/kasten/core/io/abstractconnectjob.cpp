@@ -11,8 +11,8 @@
 
 namespace Kasten {
 
-AbstractConnectJob::AbstractConnectJob(AbstractConnectJobPrivate* d)
-    : d_ptr(d)
+AbstractConnectJob::AbstractConnectJob(std::unique_ptr<AbstractConnectJobPrivate>&& dd)
+    : d_ptr(std::move(dd))
 {
 }
 

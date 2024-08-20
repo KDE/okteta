@@ -25,7 +25,7 @@ class KASTENGUI_EXPORT AbstractGroupedViews : public AbstractViewArea
 
 protected:
     AbstractGroupedViews();
-    KASTENGUI_NO_EXPORT explicit AbstractGroupedViews(AbstractGroupedViewsPrivate* d);
+    KASTENGUI_NO_EXPORT explicit AbstractGroupedViews(std::unique_ptr<AbstractGroupedViewsPrivate>&& dd);
 
 public:
     ~AbstractGroupedViews() override;

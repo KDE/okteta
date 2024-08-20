@@ -29,7 +29,7 @@ ShellWindowPrivate::ShellWindowPrivate(ShellWindow* parent,
                                        ViewManager* viewManager)
     : q_ptr(parent)
     , mViewManager(viewManager)
-    , mGroupedViews(new MultiViewAreas())
+    , mGroupedViews(std::make_unique<MultiViewAreas>())
 {
     parent->setCentralWidget(mGroupedViews->widget());
 

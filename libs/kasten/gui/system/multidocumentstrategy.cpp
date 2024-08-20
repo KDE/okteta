@@ -13,9 +13,9 @@ namespace Kasten {
 
 MultiDocumentStrategy::MultiDocumentStrategy(DocumentManager* documentManager,
                                              ViewManager* viewManager)
-    : AbstractDocumentStrategy(new MultiDocumentStrategyPrivate(this,
-                                                                documentManager,
-                                                                viewManager))
+    : AbstractDocumentStrategy(std::make_unique<MultiDocumentStrategyPrivate>(this,
+                                                                              documentManager,
+                                                                              viewManager))
 {
     Q_D(MultiDocumentStrategy);
 

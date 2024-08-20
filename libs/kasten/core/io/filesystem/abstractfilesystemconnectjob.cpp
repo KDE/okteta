@@ -14,7 +14,7 @@ namespace Kasten {
 AbstractFileSystemConnectJob::AbstractFileSystemConnectJob(AbstractModelFileSystemSynchronizer* synchronizer,
                                                            AbstractDocument* document,
                                                            const QUrl& url, AbstractModelSynchronizer::ConnectOption option)
-    : AbstractConnectJob(new AbstractFileSystemConnectJobPrivate(this, synchronizer, document, url, option))
+    : AbstractConnectJob(std::make_unique<AbstractFileSystemConnectJobPrivate>(this, synchronizer, document, url, option))
 {
 }
 

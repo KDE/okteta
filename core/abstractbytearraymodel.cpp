@@ -17,9 +17,9 @@ namespace Okteta {
 
 static constexpr int SearchedByteCountSignalLimit = 10000;
 
-AbstractByteArrayModel::AbstractByteArrayModel(AbstractByteArrayModelPrivate* dd, QObject* parent)
+AbstractByteArrayModel::AbstractByteArrayModel(std::unique_ptr<AbstractByteArrayModelPrivate>&& dd, QObject* parent)
     : QObject(parent)
-    , d_ptr(dd)
+    , d_ptr(std::move(dd))
 {}
 
 AbstractByteArrayModel::AbstractByteArrayModel(QObject* parent)

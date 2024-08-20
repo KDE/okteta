@@ -11,8 +11,8 @@
 
 namespace Kasten {
 
-AbstractModelDataGenerator::AbstractModelDataGenerator(AbstractModelDataGeneratorPrivate* d)
-    : d_ptr(d)
+AbstractModelDataGenerator::AbstractModelDataGenerator(std::unique_ptr<AbstractModelDataGeneratorPrivate>&& dd)
+    : d_ptr(std::move(dd))
 {
 }
 

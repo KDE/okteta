@@ -16,8 +16,8 @@ AbstractDocumentStrategy::AbstractDocumentStrategy()
 {
 }
 
-AbstractDocumentStrategy::AbstractDocumentStrategy(AbstractDocumentStrategyPrivate* d)
-    : d_ptr(d)
+AbstractDocumentStrategy::AbstractDocumentStrategy(std::unique_ptr<AbstractDocumentStrategyPrivate>&& dd)
+    : d_ptr(std::move(dd))
 {
 }
 

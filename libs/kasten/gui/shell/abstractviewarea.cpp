@@ -18,8 +18,8 @@ AbstractViewArea::AbstractViewArea()
     : d_ptr(std::make_unique<AbstractViewAreaPrivate>(this))
 {}
 
-AbstractViewArea::AbstractViewArea(AbstractViewAreaPrivate* d)
-    : d_ptr(d)
+AbstractViewArea::AbstractViewArea(std::unique_ptr<AbstractViewAreaPrivate>&& dd)
+    : d_ptr(std::move(dd))
 {
 }
 

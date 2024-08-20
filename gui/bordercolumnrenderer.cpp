@@ -13,7 +13,7 @@
 namespace Okteta {
 
 BorderColumnRenderer::BorderColumnRenderer(AbstractColumnStylist* stylist, bool lineDrawn, bool inEmpty)
-    : AbstractColumnRenderer(new BorderColumnRendererPrivate(this, stylist, lineDrawn, inEmpty))
+    : AbstractColumnRenderer(std::make_unique<BorderColumnRendererPrivate>(this, stylist, lineDrawn, inEmpty))
 {
     Q_D(BorderColumnRenderer);
 

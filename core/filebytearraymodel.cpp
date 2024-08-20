@@ -16,7 +16,7 @@
 namespace Okteta {
 
 FileByteArrayModel::FileByteArrayModel(int pageNumber, int pageSize, QObject* parent)
-    : AbstractByteArrayModel(new FileByteArrayModelPrivate(this, pageNumber, pageSize), parent)
+    : AbstractByteArrayModel(std::make_unique<FileByteArrayModelPrivate>(this, pageNumber, pageSize), parent)
 {
 }
 

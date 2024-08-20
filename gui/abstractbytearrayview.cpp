@@ -17,9 +17,9 @@
 
 namespace Okteta {
 
-AbstractByteArrayView::AbstractByteArrayView(AbstractByteArrayViewPrivate* dd, QWidget* parent)
+AbstractByteArrayView::AbstractByteArrayView(std::unique_ptr<AbstractByteArrayViewPrivate>&& dd, QWidget* parent)
     : QAbstractScrollArea(parent)
-    , d_ptr(dd)
+    , d_ptr(std::move(dd))
 {
     Q_D(AbstractByteArrayView);
     d->init();

@@ -104,7 +104,7 @@ public:
     Q_ENUM(CodingTypes)
 
 protected:
-    OKTETAGUI_NO_EXPORT AbstractByteArrayView(AbstractByteArrayViewPrivate* d, QWidget* parent);
+    OKTETAGUI_NO_EXPORT AbstractByteArrayView(std::unique_ptr<AbstractByteArrayViewPrivate>&& dd, QWidget* parent);
 
 public:
     ~AbstractByteArrayView() override;

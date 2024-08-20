@@ -50,7 +50,7 @@ public:
     };
 
 protected:
-    OKTETAGUI_NO_EXPORT explicit AbstractByteArrayColumnRenderer(AbstractByteArrayColumnRendererPrivate* d);
+    OKTETAGUI_NO_EXPORT explicit AbstractByteArrayColumnRenderer(std::unique_ptr<AbstractByteArrayColumnRendererPrivate>&& dd);
 
 public:
     ~AbstractByteArrayColumnRenderer() override;

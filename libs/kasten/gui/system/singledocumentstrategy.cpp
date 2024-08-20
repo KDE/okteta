@@ -13,9 +13,9 @@ namespace Kasten {
 
 SingleDocumentStrategy::SingleDocumentStrategy(DocumentManager* documentManager,
                                                ViewManager* viewManager)
-    : AbstractDocumentStrategy(new SingleDocumentStrategyPrivate(this,
-                                                                 documentManager,
-                                                                 viewManager))
+    : AbstractDocumentStrategy(std::make_unique<SingleDocumentStrategyPrivate>(this,
+                                                                               documentManager,
+                                                                               viewManager))
 {
     Q_D(SingleDocumentStrategy);
 

@@ -12,7 +12,7 @@
 namespace Okteta {
 
 ByteArrayRowView::ByteArrayRowView(QWidget* parent)
-    : AbstractByteArrayView(new ByteArrayRowViewPrivate(this), parent)
+    : AbstractByteArrayView(std::make_unique<ByteArrayRowViewPrivate>(this), parent)
 {
     Q_D(ByteArrayRowView);
     d->init();

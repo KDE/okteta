@@ -15,7 +15,7 @@ ModelEncoderFileSystemExportJob::ModelEncoderFileSystemExportJob(AbstractModel* 
                                                                  const AbstractModelSelection* selection,
                                                                  const QUrl& url,
                                                                  AbstractModelStreamEncoder* encoder)
-    : AbstractFileSystemExportJob(new ModelEncoderFileSystemExportJobPrivate(this, model, selection, url, encoder))
+    : AbstractFileSystemExportJob(std::make_unique<ModelEncoderFileSystemExportJobPrivate>(this, model, selection, url, encoder))
 {
 }
 

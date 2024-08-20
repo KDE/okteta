@@ -35,7 +35,7 @@ public:
     };
 
 protected:
-    KASTENCORE_NO_EXPORT explicit AbstractModelDataGenerator(AbstractModelDataGeneratorPrivate* d);
+    KASTENCORE_NO_EXPORT explicit AbstractModelDataGenerator(std::unique_ptr<AbstractModelDataGeneratorPrivate>&& dd);
 
 public:
     AbstractModelDataGenerator(const QString& typeName, const QString& mimeType, Flags flags);

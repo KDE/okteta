@@ -12,7 +12,7 @@
 namespace Kasten {
 // TODO: catch area focus change!
 SingleViewArea::SingleViewArea()
-    : AbstractViewArea(new SingleViewAreaPrivate(this))
+    : AbstractViewArea(std::make_unique<SingleViewAreaPrivate>(this))
 {
     Q_D(SingleViewArea);
 

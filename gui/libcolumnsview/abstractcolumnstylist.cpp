@@ -16,8 +16,8 @@ AbstractColumnStylist::AbstractColumnStylist()
 {
 }
 
-AbstractColumnStylist::AbstractColumnStylist(AbstractColumnStylistPrivate* d)
-    : d_ptr(d)
+AbstractColumnStylist::AbstractColumnStylist(std::unique_ptr<AbstractColumnStylistPrivate>&& dd)
+    : d_ptr(std::move(dd))
 {
 }
 

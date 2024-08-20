@@ -12,7 +12,7 @@
 namespace Okteta {
 
 ByteArrayColumnView::ByteArrayColumnView(QWidget* parent)
-    : AbstractByteArrayView(new ByteArrayColumnViewPrivate(this), parent)
+    : AbstractByteArrayView(std::make_unique<ByteArrayColumnViewPrivate>(this), parent)
 {
     Q_D(ByteArrayColumnView);
 

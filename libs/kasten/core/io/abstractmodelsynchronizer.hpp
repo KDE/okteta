@@ -57,7 +57,7 @@ public:
     };
 
 protected:
-    KASTENCORE_NO_EXPORT explicit AbstractModelSynchronizer(AbstractModelSynchronizerPrivate* d);
+    KASTENCORE_NO_EXPORT explicit AbstractModelSynchronizer(std::unique_ptr<AbstractModelSynchronizerPrivate>&& dd);
 
 public:
     AbstractModelSynchronizer();

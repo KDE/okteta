@@ -27,7 +27,7 @@ class KASTENCORE_EXPORT AbstractFileSystemExportJob : public AbstractExportJob
     Q_OBJECT
 
 protected:
-    KASTENCORE_NO_EXPORT explicit AbstractFileSystemExportJob(AbstractFileSystemExportJobPrivate* d);
+    KASTENCORE_NO_EXPORT explicit AbstractFileSystemExportJob(std::unique_ptr<AbstractFileSystemExportJobPrivate>&& dd);
 
 public:
     AbstractFileSystemExportJob(AbstractModel* model, const AbstractModelSelection* selection,

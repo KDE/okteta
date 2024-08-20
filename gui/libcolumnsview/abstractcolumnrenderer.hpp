@@ -37,7 +37,7 @@ class OKTETAGUI_EXPORT AbstractColumnRenderer
 //    friend class ColumnsView;
 
 protected:
-    OKTETAGUI_NO_EXPORT explicit AbstractColumnRenderer(AbstractColumnRendererPrivate* d);
+    OKTETAGUI_NO_EXPORT explicit AbstractColumnRenderer(std::unique_ptr<AbstractColumnRendererPrivate>&& dd);
 
 public:
     explicit AbstractColumnRenderer(AbstractColumnStylist* stylist);

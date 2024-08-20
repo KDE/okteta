@@ -12,12 +12,12 @@
 namespace Kasten {
 
 AbstractGroupedViews::AbstractGroupedViews()
-    : AbstractViewArea(new AbstractGroupedViewsPrivate(this))
+    : AbstractViewArea(std::make_unique<AbstractGroupedViewsPrivate>(this))
 {
 }
 
-AbstractGroupedViews::AbstractGroupedViews(AbstractGroupedViewsPrivate* d)
-    : AbstractViewArea(d)
+AbstractGroupedViews::AbstractGroupedViews(std::unique_ptr<AbstractGroupedViewsPrivate>&& dd)
+    : AbstractViewArea(std::move(dd))
 {
 }
 

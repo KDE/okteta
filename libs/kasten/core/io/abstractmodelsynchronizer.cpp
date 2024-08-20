@@ -11,8 +11,8 @@
 
 namespace Kasten {
 
-AbstractModelSynchronizer::AbstractModelSynchronizer(AbstractModelSynchronizerPrivate* d)
-    : d_ptr(d)
+AbstractModelSynchronizer::AbstractModelSynchronizer(std::unique_ptr<AbstractModelSynchronizerPrivate>&& dd)
+    : d_ptr(std::move(dd))
 {
 }
 

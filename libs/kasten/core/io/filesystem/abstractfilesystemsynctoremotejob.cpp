@@ -12,7 +12,7 @@
 namespace Kasten {
 
 AbstractFileSystemSyncToRemoteJob::AbstractFileSystemSyncToRemoteJob(AbstractModelFileSystemSynchronizer* synchronizer)
-    : AbstractSyncToRemoteJob(new AbstractFileSystemSyncToRemoteJobPrivate(this, synchronizer))
+    : AbstractSyncToRemoteJob(std::make_unique<AbstractFileSystemSyncToRemoteJobPrivate>(this, synchronizer))
 {
 }
 

@@ -16,7 +16,7 @@ namespace Okteta {
 
 ByteArrayRowColumnRenderer::ByteArrayRowColumnRenderer(AbstractColumnStylist* stylist,
                                                        AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges)
-    : AbstractColumnRenderer(new ByteArrayRowColumnRendererPrivate(this, stylist, byteArrayModel, layout, ranges))
+    : AbstractColumnRenderer(std::make_unique<ByteArrayRowColumnRendererPrivate>(this, stylist, byteArrayModel, layout, ranges))
 {
 }
 

@@ -13,7 +13,7 @@ namespace Kasten {
 
 AbstractFileSystemLoadJob::AbstractFileSystemLoadJob(AbstractModelFileSystemSynchronizer* synchronizer,
                                                      const QUrl& url)
-    : AbstractLoadJob(new AbstractFileSystemLoadJobPrivate(this, synchronizer, url))
+    : AbstractLoadJob(std::make_unique<AbstractFileSystemLoadJobPrivate>(this, synchronizer, url))
 {
 }
 

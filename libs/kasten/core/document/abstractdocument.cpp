@@ -12,7 +12,7 @@
 namespace Kasten {
 
 AbstractDocument::AbstractDocument()
-    : AbstractModel(new AbstractDocumentPrivate(this))
+    : AbstractModel(std::make_unique<AbstractDocumentPrivate>(this))
 {}
 
 AbstractDocument::~AbstractDocument() = default;

@@ -12,7 +12,7 @@
 namespace Kasten {
 // TODO: catch area focus change!
 MultiViewAreas::MultiViewAreas()
-    : AbstractGroupedViews(new MultiViewAreasPrivate(this))
+    : AbstractGroupedViews(std::make_unique<MultiViewAreasPrivate>(this))
 {
     Q_D(MultiViewAreas);
 

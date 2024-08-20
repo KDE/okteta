@@ -11,8 +11,8 @@
 
 namespace Kasten {
 
-AbstractLoadJob::AbstractLoadJob(AbstractLoadJobPrivate* d)
-    : d_ptr(d)
+AbstractLoadJob::AbstractLoadJob(std::unique_ptr<AbstractLoadJobPrivate>&& dd)
+    : d_ptr(std::move(dd))
 {
 }
 

@@ -14,13 +14,13 @@
 
 namespace Kasten {
 
-AbstractModelFileSystemSynchronizer::AbstractModelFileSystemSynchronizer(AbstractModelFileSystemSynchronizerPrivate* d)
-    : AbstractModelSynchronizer(d)
+AbstractModelFileSystemSynchronizer::AbstractModelFileSystemSynchronizer(std::unique_ptr<AbstractModelFileSystemSynchronizerPrivate>&& dd)
+    : AbstractModelSynchronizer(std::move(dd))
 {
 }
 
 AbstractModelFileSystemSynchronizer::AbstractModelFileSystemSynchronizer()
-    : AbstractModelSynchronizer(new AbstractModelFileSystemSynchronizerPrivate(this))
+    : AbstractModelSynchronizer(std::make_unique<AbstractModelFileSystemSynchronizerPrivate>(this))
 {}
 
 AbstractModelFileSystemSynchronizer::~AbstractModelFileSystemSynchronizer() = default;

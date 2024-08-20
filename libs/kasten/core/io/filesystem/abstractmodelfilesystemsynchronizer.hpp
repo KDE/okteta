@@ -29,7 +29,7 @@ class KASTENCORE_EXPORT AbstractModelFileSystemSynchronizer : public AbstractMod
     friend class AbstractFileSystemSyncToRemoteJobPrivate;
 
 protected:
-    KASTENCORE_NO_EXPORT explicit AbstractModelFileSystemSynchronizer(AbstractModelFileSystemSynchronizerPrivate* d);
+    KASTENCORE_NO_EXPORT explicit AbstractModelFileSystemSynchronizer(std::unique_ptr<AbstractModelFileSystemSynchronizerPrivate>&& dd);
 
 public:
     AbstractModelFileSystemSynchronizer();

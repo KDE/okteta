@@ -14,8 +14,8 @@
 
 namespace Okteta {
 
-AbstractColumnRenderer::AbstractColumnRenderer(AbstractColumnRendererPrivate* d)
-    : d_ptr(d)
+AbstractColumnRenderer::AbstractColumnRenderer(std::unique_ptr<AbstractColumnRendererPrivate>&& dd)
+    : d_ptr(std::move(dd))
 {
 }
 

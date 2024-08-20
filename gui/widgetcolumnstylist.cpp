@@ -15,7 +15,7 @@
 namespace Okteta {
 
 WidgetColumnStylist::WidgetColumnStylist(QWidget* parent)
-    : AbstractColumnStylist(new WidgetColumnStylistPrivate(parent))
+    : AbstractColumnStylist(std::make_unique<WidgetColumnStylistPrivate>(parent))
 {
 }
 

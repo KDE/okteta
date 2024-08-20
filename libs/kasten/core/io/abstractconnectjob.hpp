@@ -25,7 +25,7 @@ class KASTENCORE_EXPORT AbstractConnectJob : public KJob
     Q_OBJECT
 
 protected:
-    KASTENCORE_NO_EXPORT explicit AbstractConnectJob(AbstractConnectJobPrivate* d);
+    KASTENCORE_NO_EXPORT explicit AbstractConnectJob(std::unique_ptr<AbstractConnectJobPrivate>&& dd);
 
 public:
     AbstractConnectJob();

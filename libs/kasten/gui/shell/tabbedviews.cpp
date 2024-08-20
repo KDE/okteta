@@ -11,8 +11,8 @@
 
 namespace Kasten {
 
-TabbedViews::TabbedViews(TabbedViewsPrivate* _d)
-    : AbstractGroupedViews(_d)
+TabbedViews::TabbedViews(std::unique_ptr<TabbedViewsPrivate>&& dd)
+    : AbstractGroupedViews(std::move(dd))
 {
     Q_D(TabbedViews);
 
@@ -20,7 +20,7 @@ TabbedViews::TabbedViews(TabbedViewsPrivate* _d)
 }
 
 TabbedViews::TabbedViews()
-    : AbstractGroupedViews(new TabbedViewsPrivate(this))
+    : AbstractGroupedViews(std::make_unique<TabbedViewsPrivate>(this))
 {
     Q_D(TabbedViews);
 
