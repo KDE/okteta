@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-05 00:43+0000\n"
+"POT-Creation-Date: 2024-08-20 02:03+0000\n"
 "PO-Revision-Date: 2019-02-23 21:22+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -54,13 +54,13 @@ msgctxt "@action:inmenu"
 msgid "Re&do"
 msgstr "重作(&D)"
 
-#: controller/valueeditor.cpp:160
+#: controller/valueeditor.cpp:161
 #, kde-format
 msgctxt "name of the change"
 msgid "Insert"
 msgstr "插入"
 
-#: controller/valueeditor.cpp:201
+#: controller/valueeditor.cpp:203
 #, kde-format
 msgctxt "name of the change"
 msgid "Replace"

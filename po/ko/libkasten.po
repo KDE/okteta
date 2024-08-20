@@ -1,14 +1,14 @@
 # Translation of okteta to Korean.
 # Copyright (C) 2008 This_file_is_part_of_KDE
 # This file is distributed under the same license as the kdeutils package.
-# Shinjo Park <kde@peremen.name>, 2008, 2009, 2011, 2018.
+# SPDX-FileCopyrightText: 2008, 2009, 2011, 2018, 2024 Shinjo Park <kde@peremen.name>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-20 01:50+0000\n"
-"PO-Revision-Date: 2018-08-14 23:46+0100\n"
+"PO-Revision-Date: 2024-08-19 23:36+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: controllers/document/modified/modifiedbarcontroller.cpp:74
 #, kde-format
@@ -226,12 +226,10 @@ msgid "Export"
 msgstr "내보내기"
 
 #: controllers/io/export/exportdialog.cpp:73
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Export to File..."
+#, kde-format
 msgctxt "@action:button"
 msgid "&Export to File…"
-msgstr "파일로 내보내기(&E)..."
+msgstr "파일로 내보내기(&E)…"
 
 #: controllers/io/export/exportdialog.cpp:75
 #, kde-format
