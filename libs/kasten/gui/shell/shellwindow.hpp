@@ -45,7 +45,7 @@ public Q_SLOTS:
 public:
     void updateControllers(AbstractView* view);
     void addXmlGuiController(std::unique_ptr<AbstractXmlGuiController>&& controller);
-    void addTool(AbstractToolView* toolView);
+    void addTool(std::unique_ptr<AbstractToolView>&& toolView);
 
 public: // If::WidgetsDockable API
     QVector<ToolViewDockWidget*> dockWidgets() const override;

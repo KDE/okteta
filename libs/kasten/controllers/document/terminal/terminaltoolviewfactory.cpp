@@ -25,9 +25,9 @@ QString TerminalToolViewFactory::title()    const { return i18nc("@title:window"
 QString TerminalToolViewFactory::id()       const { return QStringLiteral("org.kde.kasten.TerminalToolView"); }
 SidePosition TerminalToolViewFactory::defaultPosition() const { return BottomSidePosition; }
 
-AbstractToolView* TerminalToolViewFactory::create(AbstractTool* tool) const
+std::unique_ptr<AbstractToolView> TerminalToolViewFactory::create(AbstractTool* tool) const
 {
-    return new TerminalToolView(qobject_cast<TerminalTool*>(tool));
+    return std::make_unique<TerminalToolView>(qobject_cast<TerminalTool*>(tool));
 }
 
 }

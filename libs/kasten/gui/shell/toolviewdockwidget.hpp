@@ -27,7 +27,7 @@ class KASTENGUI_EXPORT ToolViewDockWidget : public QDockWidget
     Q_OBJECT
 
 public:
-    ToolViewDockWidget(AbstractToolView* mToolView, QWidget* parent);
+    ToolViewDockWidget(std::unique_ptr<AbstractToolView>&& mToolView, QWidget* parent);
     ~ToolViewDockWidget() override;
 
 public:

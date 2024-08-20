@@ -121,19 +121,20 @@ void SingleViewWindowPrivate::addXmlGuiController(std::unique_ptr<AbstractXmlGui
     mControllers.emplace_back(std::move(controller));
 }
 
-void SingleViewWindowPrivate::addTool(AbstractToolView* toolView)
+void SingleViewWindowPrivate::addTool(std::unique_ptr<AbstractToolView>&& toolView)
 {
     Q_Q(SingleViewWindow);
 
-    auto* dockWidget = new ToolViewDockWidget(toolView, q);
+    auto* tool = toolView->tool();
+    auto* dockWidget = new ToolViewDockWidget(std::move(toolView), q);
     // TODO: where to set the initial area?
     q->addDockWidget(Qt::RightDockWidgetArea, dockWidget);
 
-    mTools.emplace_back(std::unique_ptr<AbstractTool>(toolView->tool()));
+    mTools.emplace_back(std::unique_ptr<AbstractTool>(tool));
     mDockWidgets.append(dockWidget);
 
     if (dockWidget->isVisible() && mView) {
-        toolView->tool()->setTargetModel(mView);
+        tool->setTargetModel(mView);
     }
 
     QObject::connect(dockWidget, &QDockWidget::visibilityChanged,

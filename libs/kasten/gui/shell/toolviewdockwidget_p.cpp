@@ -15,8 +15,8 @@
 
 namespace Kasten {
 
-ToolViewDockWidgetPrivate::ToolViewDockWidgetPrivate(AbstractToolView* toolView)
-    : mToolView(toolView)
+ToolViewDockWidgetPrivate::ToolViewDockWidgetPrivate(std::unique_ptr<AbstractToolView>&& toolView)
+    : mToolView(std::move(toolView))
 {
 }
 

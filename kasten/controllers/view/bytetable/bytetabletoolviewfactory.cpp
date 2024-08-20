@@ -25,9 +25,9 @@ QString ByteTableToolViewFactory::title()    const { return i18nc("@title:window
 QString ByteTableToolViewFactory::id()       const { return QStringLiteral("org.kde.okteta.ByteTableToolView"); }
 SidePosition ByteTableToolViewFactory::defaultPosition() const { return RightSidePosition; }
 
-AbstractToolView* ByteTableToolViewFactory::create(AbstractTool* tool) const
+std::unique_ptr<AbstractToolView> ByteTableToolViewFactory::create(AbstractTool* tool) const
 {
-    return new ByteTableToolView(qobject_cast<ByteTableTool*>(tool));
+    return std::make_unique<ByteTableToolView>(qobject_cast<ByteTableTool*>(tool));
 }
 
 }

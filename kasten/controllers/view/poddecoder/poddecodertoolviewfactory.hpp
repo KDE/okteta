@@ -27,7 +27,7 @@ public:
     PodDecoderToolViewFactory& operator=(const PodDecoderToolViewFactory&) = delete;
 
 public: // AbstractToolViewFactory API
-    AbstractToolView* create(AbstractTool* tool) const override;
+    std::unique_ptr<AbstractToolView> create(AbstractTool* tool) const override;
 
     QString iconName() const override;
     QString title() const override;

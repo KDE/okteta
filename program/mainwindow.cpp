@@ -84,6 +84,7 @@
 #include <Kasten/UiColorSchemeControllerFactory>
 #include <Kasten/QuitControllerFactory>
 // Kasten gui
+#include <Kasten/AbstractToolView>
 #include <Kasten/AbstractXmlGuiController>
 #include <Kasten/MultiDocumentStrategy>
 #include <Kasten/ModelCodecViewManager>
@@ -236,9 +237,9 @@ void OktetaMainWindow::addToolFromFactory(const AbstractToolViewFactory& toolVie
                                           const AbstractToolFactory& toolFactory)
 {
     AbstractTool* tool = toolFactory.create();
-    AbstractToolView* toolView = toolViewFactory.create(tool);
+    auto toolView = toolViewFactory.create(tool);
 
-    addTool(toolView);
+    addTool(std::move(toolView));
 }
 
 void OktetaMainWindow::addXmlGuiControllerFromFactory(const AbstractXmlGuiControllerFactory& factory)

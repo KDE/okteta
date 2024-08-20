@@ -25,9 +25,9 @@ QString FileSystemBrowserToolViewFactory::title()    const { return i18nc("@titl
 QString FileSystemBrowserToolViewFactory::id()       const { return QStringLiteral("org.kde.kasten.FileSystemBrowserToolView"); }
 SidePosition FileSystemBrowserToolViewFactory::defaultPosition() const { return LeftSidePosition; }
 
-AbstractToolView* FileSystemBrowserToolViewFactory::create(AbstractTool* tool) const
+std::unique_ptr<AbstractToolView> FileSystemBrowserToolViewFactory::create(AbstractTool* tool) const
 {
-    return new FileSystemBrowserToolView(qobject_cast<FileSystemBrowserTool*>(tool));
+    return std::make_unique<FileSystemBrowserToolView>(qobject_cast<FileSystemBrowserTool*>(tool));
 }
 
 }

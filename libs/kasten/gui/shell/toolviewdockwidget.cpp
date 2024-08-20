@@ -14,9 +14,9 @@
 
 namespace Kasten {
 
-ToolViewDockWidget::ToolViewDockWidget(AbstractToolView* toolView, QWidget* parent)
+ToolViewDockWidget::ToolViewDockWidget(std::unique_ptr<AbstractToolView>&& toolView, QWidget* parent)
     : QDockWidget(toolView->title(), parent)
-    , d_ptr(std::make_unique<ToolViewDockWidgetPrivate>(toolView))
+    , d_ptr(std::make_unique<ToolViewDockWidgetPrivate>(std::move(toolView)))
 {
     Q_D(ToolViewDockWidget);
 

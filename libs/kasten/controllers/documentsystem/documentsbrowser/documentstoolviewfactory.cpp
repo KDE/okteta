@@ -25,9 +25,9 @@ QString DocumentsToolViewFactory::title()    const { return i18nc("@title:window
 QString DocumentsToolViewFactory::id()       const { return QStringLiteral("org.kde.kasten.DocumentsToolView"); }
 SidePosition DocumentsToolViewFactory::defaultPosition() const { return LeftSidePosition; }
 
-AbstractToolView* DocumentsToolViewFactory::create(AbstractTool* tool) const
+std::unique_ptr<AbstractToolView> DocumentsToolViewFactory::create(AbstractTool* tool) const
 {
-    return new DocumentsToolView(qobject_cast<DocumentsTool*>(tool));
+    return std::make_unique<DocumentsToolView>(qobject_cast<DocumentsTool*>(tool));
 }
 
 }

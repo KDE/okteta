@@ -60,19 +60,20 @@ void ShellWindowPrivate::addXmlGuiController(std::unique_ptr<AbstractXmlGuiContr
     mControllers.emplace_back(std::move(controller));
 }
 
-void ShellWindowPrivate::addTool(AbstractToolView* toolView)
+void ShellWindowPrivate::addTool(std::unique_ptr<AbstractToolView>&& toolView)
 {
     Q_Q(ShellWindow);
 
-    auto* dockWidget = new ToolViewDockWidget(toolView, q);
+    auto* tool = toolView->tool();
+    auto* dockWidget = new ToolViewDockWidget(std::move(toolView), q);
     // TODO: where to set the initial area?
     q->addDockWidget(Qt::RightDockWidgetArea, dockWidget);
 
-    mTools.emplace_back(std::unique_ptr<AbstractTool>(toolView->tool()));
+    mTools.emplace_back(std::unique_ptr<AbstractTool>(tool));
     mDockWidgets.append(dockWidget);
 
     if (dockWidget->isVisible() && mCurrentView) {
-        toolView->tool()->setTargetModel(mCurrentView);
+        tool->setTargetModel(mCurrentView);
     }
 
     QObject::connect(dockWidget, &QDockWidget::visibilityChanged,

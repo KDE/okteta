@@ -25,9 +25,9 @@ QString DocumentInfoToolViewFactory::title()    const { return i18nc("@title:win
 QString DocumentInfoToolViewFactory::id()       const { return QStringLiteral("org.kde.okteta.DocumentInfoToolView"); }
 SidePosition DocumentInfoToolViewFactory::defaultPosition() const { return LeftSidePosition; }
 
-AbstractToolView* DocumentInfoToolViewFactory::create(AbstractTool* tool) const
+std::unique_ptr<AbstractToolView> DocumentInfoToolViewFactory::create(AbstractTool* tool) const
 {
-    return new DocumentInfoToolView(qobject_cast<DocumentInfoTool*>(tool));
+    return std::make_unique<DocumentInfoToolView>(qobject_cast<DocumentInfoTool*>(tool));
 }
 
 }

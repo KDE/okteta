@@ -25,9 +25,9 @@ QString VersionViewToolViewFactory::title()    const { return i18nc("@title:wind
 QString VersionViewToolViewFactory::id()       const { return QStringLiteral("org.kde.kasten.VersionViewToolView"); }
 SidePosition VersionViewToolViewFactory::defaultPosition() const { return RightSidePosition; }
 
-AbstractToolView* VersionViewToolViewFactory::create(AbstractTool* tool) const
+std::unique_ptr<AbstractToolView> VersionViewToolViewFactory::create(AbstractTool* tool) const
 {
-    return new VersionViewToolView(qobject_cast<VersionViewTool*>(tool));
+    return std::make_unique<VersionViewToolView>(qobject_cast<VersionViewTool*>(tool));
 }
 
 }

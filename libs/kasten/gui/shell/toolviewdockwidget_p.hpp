@@ -19,7 +19,7 @@ namespace Kasten {
 class ToolViewDockWidgetPrivate
 {
 public:
-    explicit ToolViewDockWidgetPrivate(AbstractToolView* mToolView);
+    explicit ToolViewDockWidgetPrivate(std::unique_ptr<AbstractToolView>&& toolView);
     ToolViewDockWidgetPrivate(const ToolViewDockWidgetPrivate&) = delete;
 
     ~ToolViewDockWidgetPrivate();

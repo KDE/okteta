@@ -27,7 +27,7 @@ public:
     InfoToolViewFactory& operator=(const InfoToolViewFactory&) = delete;
 
 public: // AbstractToolViewFactory API
-    AbstractToolView* create(AbstractTool* tool) const override;
+    std::unique_ptr<AbstractToolView> create(AbstractTool* tool) const override;
 
     QString iconName() const override;
     QString title() const override;

@@ -25,9 +25,9 @@ QString BookmarksToolViewFactory::title()       const { return i18nc("@title:win
 QString BookmarksToolViewFactory::id()       const { return QStringLiteral("org.kde.okteta.BookmarksToolView"); }
 SidePosition BookmarksToolViewFactory::defaultPosition() const { return LeftSidePosition; }
 
-AbstractToolView* BookmarksToolViewFactory::create(AbstractTool* tool) const
+std::unique_ptr<AbstractToolView> BookmarksToolViewFactory::create(AbstractTool* tool) const
 {
-    return new BookmarksToolView(qobject_cast<BookmarksTool*>(tool));
+    return std::make_unique<BookmarksToolView>(qobject_cast<BookmarksTool*>(tool));
 }
 
 }
