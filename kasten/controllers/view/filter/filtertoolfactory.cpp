@@ -17,9 +17,9 @@ FilterToolFactory::FilterToolFactory() = default;
 
 FilterToolFactory::~FilterToolFactory() = default;
 
-AbstractTool* FilterToolFactory::create() const
+std::unique_ptr<AbstractTool> FilterToolFactory::create() const
 {
-    return new FilterTool();
+    return std::make_unique<FilterTool>();
 }
 
 }

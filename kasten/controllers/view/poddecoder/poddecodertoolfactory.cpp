@@ -17,9 +17,9 @@ PodDecoderToolFactory::PodDecoderToolFactory() = default;
 
 PodDecoderToolFactory::~PodDecoderToolFactory() = default;
 
-AbstractTool* PodDecoderToolFactory::create() const
+std::unique_ptr<AbstractTool> PodDecoderToolFactory::create() const
 {
-    return new PODDecoderTool();
+    return std::make_unique<PODDecoderTool>();
 }
 
 }

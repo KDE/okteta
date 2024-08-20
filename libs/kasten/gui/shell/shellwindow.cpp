@@ -46,11 +46,11 @@ void ShellWindow::addXmlGuiController(std::unique_ptr<AbstractXmlGuiController>&
     d->addXmlGuiController(std::move(controller));
 }
 
-void ShellWindow::addTool(std::unique_ptr<AbstractToolView>&& toolView)
+void ShellWindow::addTool(std::unique_ptr<AbstractTool>&& tool, std::unique_ptr<AbstractToolView>&& toolView)
 {
     Q_D(ShellWindow);
 
-    d->addTool(std::move(toolView));
+    d->addTool(std::move(tool), std::move(toolView));
 }
 
 void ShellWindow::showDocument(AbstractDocument* document)

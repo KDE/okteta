@@ -20,9 +20,9 @@ DocumentsToolFactory::DocumentsToolFactory(DocumentManager* documentManager)
 
 DocumentsToolFactory::~DocumentsToolFactory() = default;
 
-AbstractTool* DocumentsToolFactory::create() const
+std::unique_ptr<AbstractTool> DocumentsToolFactory::create() const
 {
-    return new DocumentsTool(m_documentManager);
+    return std::make_unique<DocumentsTool>(m_documentManager);
 }
 
 }

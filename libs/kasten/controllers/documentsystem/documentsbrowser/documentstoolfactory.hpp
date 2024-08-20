@@ -29,7 +29,7 @@ public:
     DocumentsToolFactory& operator=(const DocumentsToolFactory&) = delete;
 
 public: // AbstractToolFactory API
-    AbstractTool* create() const override;
+    std::unique_ptr<AbstractTool> create() const override;
 
 private:
     DocumentManager* const m_documentManager;

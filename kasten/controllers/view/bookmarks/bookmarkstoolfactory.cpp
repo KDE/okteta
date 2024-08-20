@@ -17,9 +17,9 @@ BookmarksToolFactory::BookmarksToolFactory() = default;
 
 BookmarksToolFactory::~BookmarksToolFactory() = default;
 
-AbstractTool* BookmarksToolFactory::create() const
+std::unique_ptr<AbstractTool> BookmarksToolFactory::create() const
 {
-    return new BookmarksTool();
+    return std::make_unique<BookmarksTool>();
 }
 
 }

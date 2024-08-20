@@ -17,9 +17,9 @@ StructuresToolFactory::StructuresToolFactory() = default;
 
 StructuresToolFactory::~StructuresToolFactory() = default;
 
-AbstractTool* StructuresToolFactory::create() const
+std::unique_ptr<AbstractTool> StructuresToolFactory::create() const
 {
-    return new StructuresTool();
+    return std::make_unique<StructuresTool>();
 }
 
 }

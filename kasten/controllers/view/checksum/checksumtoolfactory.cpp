@@ -17,9 +17,9 @@ ChecksumToolFactory::ChecksumToolFactory() = default;
 
 ChecksumToolFactory::~ChecksumToolFactory() = default;
 
-AbstractTool* ChecksumToolFactory::create() const
+std::unique_ptr<AbstractTool> ChecksumToolFactory::create() const
 {
-    return new ChecksumTool();
+    return std::make_unique<ChecksumTool>();
 }
 
 }

@@ -17,9 +17,9 @@ StringsExtractToolFactory::StringsExtractToolFactory() = default;
 
 StringsExtractToolFactory::~StringsExtractToolFactory() = default;
 
-AbstractTool* StringsExtractToolFactory::create() const
+std::unique_ptr<AbstractTool> StringsExtractToolFactory::create() const
 {
-    return new StringsExtractTool();
+    return std::make_unique<StringsExtractTool>();
 }
 
 }

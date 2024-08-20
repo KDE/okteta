@@ -17,9 +17,9 @@ ByteTableToolFactory::ByteTableToolFactory() = default;
 
 ByteTableToolFactory::~ByteTableToolFactory() = default;
 
-AbstractTool* ByteTableToolFactory::create() const
+std::unique_ptr<AbstractTool> ByteTableToolFactory::create() const
 {
-    return new ByteTableTool();
+    return std::make_unique<ByteTableTool>();
 }
 
 }

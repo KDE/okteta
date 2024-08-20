@@ -11,6 +11,8 @@
 
 // lib
 #include "kastencore_export.hpp"
+// Std
+#include <memory>
 
 namespace Kasten {
 
@@ -22,7 +24,7 @@ public:
     virtual ~AbstractToolFactory();
 
 public: // API to be implemented
-    virtual AbstractTool* create() const = 0;
+    virtual std::unique_ptr<AbstractTool> create() const = 0;
 };
 
 inline AbstractToolFactory::~AbstractToolFactory() = default;

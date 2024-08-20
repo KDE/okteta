@@ -29,7 +29,7 @@ public:
     TerminalToolFactory& operator=(const TerminalToolFactory&) = delete;
 
 public: // AbstractToolFactory API
-    AbstractTool* create() const override;
+    std::unique_ptr<AbstractTool> create() const override;
 
 private:
     DocumentSyncManager* const m_documentSyncManager;

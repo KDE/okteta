@@ -17,9 +17,9 @@ CharsetConversionToolFactory::CharsetConversionToolFactory() = default;
 
 CharsetConversionToolFactory::~CharsetConversionToolFactory() = default;
 
-AbstractTool* CharsetConversionToolFactory::create() const
+std::unique_ptr<AbstractTool> CharsetConversionToolFactory::create() const
 {
-    return new CharsetConversionTool();
+    return std::make_unique<CharsetConversionTool>();
 }
 
 }

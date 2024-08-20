@@ -20,9 +20,9 @@ FileSystemBrowserToolFactory::FileSystemBrowserToolFactory(DocumentSyncManager* 
 
 FileSystemBrowserToolFactory::~FileSystemBrowserToolFactory() = default;
 
-AbstractTool* FileSystemBrowserToolFactory::create() const
+std::unique_ptr<AbstractTool> FileSystemBrowserToolFactory::create() const
 {
-    return new FileSystemBrowserTool(m_documentSyncManager);
+    return std::make_unique<FileSystemBrowserTool>(m_documentSyncManager);
 }
 
 }

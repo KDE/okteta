@@ -92,6 +92,7 @@
 #include <Kasten/MultiViewAreas>
 #include <Kasten/StatusBar>
 // Kasten core
+#include <Kasten/AbstractTool>
 #include <Kasten/ModelCodecManager>
 #include <Kasten/DocumentCreateManager>
 #include <Kasten/DocumentSyncManager>
@@ -236,10 +237,10 @@ void OktetaMainWindow::setupControllers()
 void OktetaMainWindow::addToolFromFactory(const AbstractToolViewFactory& toolViewFactory,
                                           const AbstractToolFactory& toolFactory)
 {
-    AbstractTool* tool = toolFactory.create();
-    auto toolView = toolViewFactory.create(tool);
+    auto tool = toolFactory.create();
+    auto toolView = toolViewFactory.create(tool.get());
 
-    addTool(std::move(toolView));
+    addTool(std::move(tool), std::move(toolView));
 }
 
 void OktetaMainWindow::addXmlGuiControllerFromFactory(const AbstractXmlGuiControllerFactory& factory)

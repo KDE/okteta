@@ -17,9 +17,9 @@ VersionViewToolFactory::VersionViewToolFactory() = default;
 
 VersionViewToolFactory::~VersionViewToolFactory() = default;
 
-AbstractTool* VersionViewToolFactory::create() const
+std::unique_ptr<AbstractTool> VersionViewToolFactory::create() const
 {
-    return new VersionViewTool();
+    return std::make_unique<VersionViewTool>();
 }
 
 }

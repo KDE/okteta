@@ -53,11 +53,11 @@ void SingleViewWindow::addXmlGuiController(std::unique_ptr<AbstractXmlGuiControl
     d->addXmlGuiController(std::move(controller));
 }
 
-void SingleViewWindow::addTool(std::unique_ptr<AbstractToolView>&& toolView)
+void SingleViewWindow::addTool(std::unique_ptr<AbstractTool>&& tool, std::unique_ptr<AbstractToolView>&& toolView)
 {
     Q_D(SingleViewWindow);
 
-    d->addTool(std::move(toolView));
+    d->addTool(std::move(tool), std::move(toolView));
 }
 
 }

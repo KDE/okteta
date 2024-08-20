@@ -20,9 +20,9 @@ TerminalToolFactory::TerminalToolFactory(DocumentSyncManager* documentSyncManage
 
 TerminalToolFactory::~TerminalToolFactory() = default;
 
-AbstractTool* TerminalToolFactory::create() const
+std::unique_ptr<AbstractTool> TerminalToolFactory::create() const
 {
-    return new TerminalTool(m_documentSyncManager);
+    return std::make_unique<TerminalTool>(m_documentSyncManager);
 }
 
 }

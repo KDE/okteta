@@ -24,6 +24,7 @@ namespace Kasten {
 class SingleViewWindowPrivate;
 
 class AbstractView;
+class AbstractTool;
 class AbstractToolView;
 class AbstractXmlGuiController;
 class SingleViewArea;
@@ -42,7 +43,7 @@ public:
 
 public:
     void addXmlGuiController(std::unique_ptr<AbstractXmlGuiController>&& controller);
-    void addTool(std::unique_ptr<AbstractToolView>&& toolView);
+    void addTool(std::unique_ptr<AbstractTool>&& tool, std::unique_ptr<AbstractToolView>&& toolView);
 
     void setView(AbstractView* view);
 

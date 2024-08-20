@@ -20,9 +20,9 @@ DocumentInfoToolFactory::DocumentInfoToolFactory(DocumentSyncManager* syncManage
 
 DocumentInfoToolFactory::~DocumentInfoToolFactory() = default;
 
-AbstractTool* DocumentInfoToolFactory::create() const
+std::unique_ptr<AbstractTool> DocumentInfoToolFactory::create() const
 {
-    return new DocumentInfoTool(m_syncManager);
+    return std::make_unique<DocumentInfoTool>(m_syncManager);
 }
 
 }

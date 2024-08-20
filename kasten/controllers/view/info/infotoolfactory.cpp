@@ -17,9 +17,9 @@ InfoToolFactory::InfoToolFactory() = default;
 
 InfoToolFactory::~InfoToolFactory() = default;
 
-AbstractTool* InfoToolFactory::create() const
+std::unique_ptr<AbstractTool> InfoToolFactory::create() const
 {
-    return new InfoTool();
+    return std::make_unique<InfoTool>();
 }
 
 }
