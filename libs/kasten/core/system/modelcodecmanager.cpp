@@ -18,12 +18,12 @@ ModelCodecManager::ModelCodecManager()
 
 ModelCodecManager::~ModelCodecManager() = default;
 
-QVector<AbstractModelStreamEncoder*>
-ModelCodecManager::encoderList(AbstractModel* model, const AbstractModelSelection* selection) const
+std::vector<AbstractModelStreamEncoder*>
+ModelCodecManager::streamEncoders(AbstractModel* model, const AbstractModelSelection* selection) const
 {
     Q_D(const ModelCodecManager);
 
-    return d->encoderList(model, selection);
+    return d->streamEncoders(model, selection);
 }
 
 QVector<AbstractModelStreamDecoder*>
@@ -57,11 +57,11 @@ void ModelCodecManager::setOverwriteDialog(AbstractOverwriteDialog* overwriteDia
     d->setOverwriteDialog(overwriteDialog);
 }
 
-void ModelCodecManager::setStreamEncoders(const QVector<AbstractModelStreamEncoder*>& encoderList)
+void ModelCodecManager::setStreamEncoders(std::vector<std::unique_ptr<AbstractModelStreamEncoder>>&& streamEncoderList)
 {
     Q_D(ModelCodecManager);
 
-    d->setStreamEncoders(encoderList);
+    d->setStreamEncoders(std::move(streamEncoderList));
 }
 
 void ModelCodecManager::setStreamDecoders(const QVector<AbstractModelStreamDecoder*>& decoderList)

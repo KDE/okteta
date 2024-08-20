@@ -16,6 +16,7 @@
 #include <QVector>
 // Std
 #include <memory>
+#include <vector>
 
 namespace Kasten {
 
@@ -46,14 +47,14 @@ public:
                         AbstractModel* model, const AbstractModelSelection* selection);
 
 public:
-    QVector<AbstractModelStreamEncoder*> encoderList(AbstractModel* model, const AbstractModelSelection* selection) const;
+    std::vector<AbstractModelStreamEncoder*> streamEncoders(AbstractModel* model, const AbstractModelSelection* selection) const;
     QVector<AbstractModelStreamDecoder*> decoderList() const;
     QVector<AbstractModelDataGenerator*> generatorList() const;
 
     QVector<AbstractModelExporter*> exporterList(AbstractModel* model, const AbstractModelSelection* selection) const;
 
 public:
-    void setStreamEncoders(const QVector<AbstractModelStreamEncoder*>& encoderList);
+    void setStreamEncoders(std::vector<std::unique_ptr<AbstractModelStreamEncoder>>&& streamEncoderList);
     void setStreamDecoders(const QVector<AbstractModelStreamDecoder*>& decoderList);
     void setDataGenerators(const QVector<AbstractModelDataGenerator*>& generatorList);
     void setOverwriteDialog(AbstractOverwriteDialog* overwriteDialog);

@@ -28,19 +28,36 @@
 
 namespace Kasten {
 
+namespace ModelCodecManagerNS {
+
+// TODO: is there a way/pattern to reuse the original unique_ptr_vector memory?
+template<typename T>
+auto make_vector(const std::vector<std::unique_ptr<T>>& unique_ptr_vector)
+{
+    std::vector<T*> vector;
+    vector.reserve(unique_ptr_vector.size());
+    for (const auto& unique_ptr : unique_ptr_vector) {
+        vector.emplace_back(unique_ptr.get());
+    }
+    return vector;
+}
+
+}
+
+ModelCodecManagerPrivate::ModelCodecManagerPrivate() = default;
+
 ModelCodecManagerPrivate::~ModelCodecManagerPrivate()
 {
     qDeleteAll(mExporterList);
-    qDeleteAll(mEncoderList);
 //     qDeleteAll( mDecoderList );
     qDeleteAll(mGeneratorList);
 }
 
-QVector<AbstractModelStreamEncoder*>
-ModelCodecManagerPrivate::encoderList(AbstractModel* model, const AbstractModelSelection* selection) const
+std::vector<AbstractModelStreamEncoder*>
+ModelCodecManagerPrivate::streamEncoders(AbstractModel* model, const AbstractModelSelection* selection) const
 {
     Q_UNUSED(selection)
-    return model ? mEncoderList : QVector<AbstractModelStreamEncoder*>();
+    return model ? ModelCodecManagerNS::make_vector(mStreamEncoderList) : std::vector<AbstractModelStreamEncoder*>();
 }
 
 QVector<AbstractModelStreamDecoder*>
@@ -61,16 +78,16 @@ void ModelCodecManagerPrivate::setOverwriteDialog(AbstractOverwriteDialog* overw
     mOverwriteDialog = overwriteDialog;
 }
 
-void ModelCodecManagerPrivate::setStreamEncoders(const QVector<AbstractModelStreamEncoder*>& encoderList)
+void ModelCodecManagerPrivate::setStreamEncoders(std::vector<std::unique_ptr<AbstractModelStreamEncoder>>&& streamStreamEncoderList)
 {
-    mEncoderList = encoderList;
+    mStreamEncoderList = std::move(streamStreamEncoderList);
 
     qDeleteAll(mExporterList);
     mExporterList.clear();
 
-    mExporterList.reserve(mEncoderList.size());
-    for (AbstractModelStreamEncoder* encoder : std::as_const(mEncoderList)) {
-        mExporterList << new ModelEncoderFileSystemExporter(encoder);
+    mExporterList.reserve(mStreamEncoderList.size());
+    for (const auto& encoder : mStreamEncoderList) {
+        mExporterList << new ModelEncoderFileSystemExporter(encoder.get());
     }
 }
 

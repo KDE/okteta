@@ -26,14 +26,26 @@
 //// e.g.
 //// #include "my_bytearraystreamencoder.hpp"
 //// NEWBYTEARRAYSTREAMENCODER(end)
-// Qt
-#include <QVector>
 
 namespace Kasten {
 
-QVector<AbstractModelStreamEncoder*> ByteArrayStreamEncoderFactory::createStreamEncoders()
+namespace ByteArrayStreamEncoder {
+
+template<typename T, typename ... Ptrs>
+auto make_unique_vector(Ptrs&& ... ptrs)
 {
-    const QVector<AbstractModelStreamEncoder*> result {
+    std::vector<std::unique_ptr<T>> vector;
+    vector.reserve(sizeof...(Ptrs));
+    ( vector.emplace_back(std::unique_ptr<T>(ptrs)), ... );
+    return vector;
+}
+
+}
+
+std::vector<std::unique_ptr<AbstractModelStreamEncoder>>
+ByteArrayStreamEncoderFactory::createStreamEncoders()
+{
+    auto result = ByteArrayStreamEncoder::make_unique_vector<AbstractModelStreamEncoder>(
         new ByteArrayValuesStreamEncoder(),
         new ByteArrayCharsStreamEncoder(),
         new ByteArrayBase64StreamEncoder(),
@@ -45,13 +57,13 @@ QVector<AbstractModelStreamEncoder*> ByteArrayStreamEncoderFactory::createStream
         new ByteArraySRecStreamEncoder(),
         new ByteArraySourceCodeStreamEncoder(),
         new ByteArrayViewTextStreamEncoder(),
-        new ByteArrayViewHtmlStreamEncoder(),
+        new ByteArrayViewHtmlStreamEncoder()
 //// NEWBYTEARRAYSTREAMENCODER(start)
 //// Here add the creation of an object of your streamencoder class and add it to the list,
 //// e.g.
 ////         new My_ByteArrayStreamEncoder(),
 //// NEWBYTEARRAYSTREAMENCODER(end)
-    };
+    );
     return result;
 }
 

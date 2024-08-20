@@ -17,6 +17,7 @@
 #include <Kasten/Okteta/ByteArrayRawFileSynchronizerFactory>
 #include <Kasten/Okteta/ByteArrayStreamEncoderConfigEditorFactoryFactory>
 #include <Kasten/Okteta/ByteArrayDataGeneratorConfigEditorFactoryFactory>
+#include <Kasten/Okteta/AbstractByteArrayStreamEncoder>
 #include <Kasten/Okteta/ByteArrayStreamEncoderFactory>
 #include <Kasten/Okteta/ByteArrayDataGeneratorFactory>
 // tmp
@@ -95,8 +96,7 @@ int OktetaProgram::execute()
     mByteArrayViewProfileManager = std::make_unique<ByteArrayViewProfileManager>();
     // mModelManagerManager->addModelManager( byteArrayViewProfileManager );
 
-    const QVector<AbstractModelStreamEncoder*> encoderList =
-        ByteArrayStreamEncoderFactory::createStreamEncoders();
+    auto streamEncoderList = ByteArrayStreamEncoderFactory::createStreamEncoders();
 
     const QVector<AbstractModelDataGenerator*> generatorList =
         ByteArrayDataGeneratorFactory::createDataGenerators();
@@ -107,7 +107,7 @@ int OktetaProgram::execute()
     const QVector<AbstractModelDataGeneratorConfigEditorFactory*> generatorConfigEditorFactoryList =
         ByteArrayDataGeneratorConfigEditorFactoryFactory::createFactorys();
 
-    mDocumentManager->codecManager()->setStreamEncoders(encoderList);
+    mDocumentManager->codecManager()->setStreamEncoders(std::move(streamEncoderList));
     mDocumentManager->codecManager()->setDataGenerators(generatorList);
     mDocumentManager->codecManager()->setOverwriteDialog(mDialogHandler.get());
     mDocumentManager->createManager()->setDocumentFactory(new ByteArrayDocumentFactory());

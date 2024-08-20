@@ -14,6 +14,7 @@
 #include <Kasten/Okteta/ByteArrayViewProfileManager>
 #include <Kasten/Okteta/ByteArrayStreamEncoderConfigEditorFactoryFactory>
 #include <Kasten/Okteta/ByteArrayDataGeneratorConfigEditorFactoryFactory>
+#include <Kasten/Okteta/AbstractByteArrayStreamEncoder>
 #include <Kasten/Okteta/ByteArrayStreamEncoderFactory>
 #include <Kasten/Okteta/ByteArrayDataGeneratorFactory>
 // Kasten
@@ -29,8 +30,7 @@ OktetaPartFactory::OktetaPartFactory()
     , mModelCodecManager(new Kasten::ModelCodecManager())
 {
 
-    const QVector<Kasten::AbstractModelStreamEncoder*> encoderList =
-        Kasten::ByteArrayStreamEncoderFactory::createStreamEncoders();
+    auto streamEncoderList = Kasten::ByteArrayStreamEncoderFactory::createStreamEncoders();
 
     const QVector<Kasten::AbstractModelDataGenerator*> generatorList =
         Kasten::ByteArrayDataGeneratorFactory::createDataGenerators();
@@ -41,7 +41,7 @@ OktetaPartFactory::OktetaPartFactory()
     const QVector<Kasten::AbstractModelDataGeneratorConfigEditorFactory*> generatorConfigEditorFactoryList =
         Kasten::ByteArrayDataGeneratorConfigEditorFactoryFactory::createFactorys();
 
-    mModelCodecManager->setStreamEncoders(encoderList);
+    mModelCodecManager->setStreamEncoders(std::move(streamEncoderList));
     mModelCodecManager->setDataGenerators(generatorList);
 
     mModelCodecViewManager->setStreamEncoderConfigEditorFactories(encoderConfigEditorFactoryList);
