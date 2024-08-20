@@ -13,7 +13,6 @@
 #include "kastencore_export.hpp"
 // Qt
 #include <QObject>
-#include <QVector>
 // Std
 #include <memory>
 #include <vector>
@@ -53,7 +52,7 @@ public:
 #endif
     std::vector<AbstractModelDataGenerator*> dataGenerators() const;
 
-    QVector<AbstractModelExporter*> exporterList(AbstractModel* model, const AbstractModelSelection* selection) const;
+    std::vector<AbstractModelExporter*> exporters(AbstractModel* model, const AbstractModelSelection* selection) const;
 
 public:
     void setStreamEncoders(std::vector<std::unique_ptr<AbstractModelStreamEncoder>>&& streamEncoderList);

@@ -43,12 +43,12 @@ std::vector<AbstractModelDataGenerator*> ModelCodecManager::dataGenerators() con
     return d->dataGenerators();
 }
 
-QVector<AbstractModelExporter*>
-ModelCodecManager::exporterList(AbstractModel* model, const AbstractModelSelection* selection) const
+std::vector<AbstractModelExporter*>
+ModelCodecManager::exporters(AbstractModel* model, const AbstractModelSelection* selection) const
 {
     Q_D(const ModelCodecManager);
 
-    return d->exporterList(model, selection);
+    return d->exporters(model, selection);
 }
 
 void ModelCodecManager::setOverwriteDialog(AbstractOverwriteDialog* overwriteDialog)

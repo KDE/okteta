@@ -45,10 +45,7 @@ auto make_vector(const std::vector<std::unique_ptr<T>>& unique_ptr_vector)
 
 ModelCodecManagerPrivate::ModelCodecManagerPrivate() = default;
 
-ModelCodecManagerPrivate::~ModelCodecManagerPrivate()
-{
-    qDeleteAll(mExporterList);
-}
+ModelCodecManagerPrivate::~ModelCodecManagerPrivate() = default;
 
 std::vector<AbstractModelStreamEncoder*>
 ModelCodecManagerPrivate::streamEncoders(AbstractModel* model, const AbstractModelSelection* selection) const
@@ -72,11 +69,11 @@ ModelCodecManagerPrivate::dataGenerators() const
 
 }
 
-QVector<AbstractModelExporter*>
-ModelCodecManagerPrivate::exporterList(AbstractModel* model, const AbstractModelSelection* selection) const
+std::vector<AbstractModelExporter*>
+ModelCodecManagerPrivate::exporters(AbstractModel* model, const AbstractModelSelection* selection) const
 {
     Q_UNUSED(selection)
-    return model ? mExporterList : QVector<AbstractModelExporter*>();
+    return model ? ModelCodecManagerNS::make_vector(mExporterList) : std::vector<AbstractModelExporter*>();
 }
 
 void ModelCodecManagerPrivate::setOverwriteDialog(AbstractOverwriteDialog* overwriteDialog)
@@ -86,14 +83,13 @@ void ModelCodecManagerPrivate::setOverwriteDialog(AbstractOverwriteDialog* overw
 
 void ModelCodecManagerPrivate::setStreamEncoders(std::vector<std::unique_ptr<AbstractModelStreamEncoder>>&& streamStreamEncoderList)
 {
-    mStreamEncoderList = std::move(streamStreamEncoderList);
-
-    qDeleteAll(mExporterList);
     mExporterList.clear();
+
+    mStreamEncoderList = std::move(streamStreamEncoderList);
 
     mExporterList.reserve(mStreamEncoderList.size());
     for (const auto& encoder : mStreamEncoderList) {
-        mExporterList << new ModelEncoderFileSystemExporter(encoder.get());
+        mExporterList.emplace_back(std::make_unique<ModelEncoderFileSystemExporter>(encoder.get()));
     }
 }
 

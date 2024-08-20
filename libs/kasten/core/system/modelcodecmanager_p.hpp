@@ -9,8 +9,6 @@
 #ifndef KASTEN_MODELCODECMANAGER_P_HPP
 #define KASTEN_MODELCODECMANAGER_P_HPP
 
-// Qt
-#include <QVector>
 // Std
 #include <memory>
 #include <vector>
@@ -49,7 +47,7 @@ public:
 #endif
     std::vector<AbstractModelDataGenerator*> dataGenerators() const;
 
-    QVector<AbstractModelExporter*> exporterList(AbstractModel* model, const AbstractModelSelection* selection) const;
+    std::vector<AbstractModelExporter*> exporters(AbstractModel* model, const AbstractModelSelection* selection) const;
 
 public:
     void setStreamEncoders(std::vector<std::unique_ptr<AbstractModelStreamEncoder>>&& streamEncoderList);
@@ -69,7 +67,7 @@ private:
     std::vector<std::unique_ptr<AbstractModelStreamDecoder>> mStreamDecoderList;
 #endif
     std::vector<std::unique_ptr<AbstractModelDataGenerator>> mDataGeneratorList;
-    QVector<AbstractModelExporter*> mExporterList;
+    std::vector<std::unique_ptr<AbstractModelExporter>> mExporterList;
 };
 
 
