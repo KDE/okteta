@@ -29,7 +29,7 @@ void AbstractFileSystemConnectJobPrivate::connectWithFile()
     if (mOption == AbstractModelSynchronizer::ReplaceRemote) {
         if (mUrl.isLocalFile()) {
             mWorkFilePath = mUrl.toLocalFile();
-            mFile.reset(new QFile(mWorkFilePath));
+            mFile = std::make_unique<QFile>(mWorkFilePath);
             isWorkFileOk = mFile->open(QIODevice::WriteOnly);
         } else {
             auto* temporaryFile = new QTemporaryFile;
@@ -66,7 +66,7 @@ void AbstractFileSystemConnectJobPrivate::connectWithFile()
         }
 
         if (isWorkFileOk) {
-            mFile.reset(new QFile(mWorkFilePath));
+            mFile = std::make_unique<QFile>(mWorkFilePath);
             isWorkFileOk = mFile->open(QIODevice::ReadOnly);
             if (!isWorkFileOk) {
                 q->setErrorText(mFile->errorString());

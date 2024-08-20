@@ -29,7 +29,7 @@ void AbstractFileSystemSyncToRemoteJobPrivate::syncToRemote()
 
     if (url.isLocalFile()) {
         mWorkFilePath = url.toLocalFile();
-        mFile.reset(new QFile(mWorkFilePath));
+        mFile = std::make_unique<QFile>(mWorkFilePath);
         isWorkFileOk = mFile->open(QIODevice::WriteOnly);
 
         mSynchronizer->pauseFileWatching();

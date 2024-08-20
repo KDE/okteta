@@ -23,7 +23,7 @@ void AbstractFileSystemExportJobPrivate::exportToFile()
     bool isWorkFileOk;
     if (mUrl.isLocalFile()) {
         mWorkFilePath = mUrl.toLocalFile();
-        mFile.reset(new QFile(mWorkFilePath));
+        mFile = std::make_unique<QFile>(mWorkFilePath);
         isWorkFileOk = mFile->open(QIODevice::WriteOnly);
     } else {
 

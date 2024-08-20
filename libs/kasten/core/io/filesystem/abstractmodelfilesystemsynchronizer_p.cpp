@@ -71,7 +71,7 @@ void AbstractModelFileSystemSynchronizerPrivate::startNetworkWatching()
     QT_WARNING_PUSH
     QT_WARNING_DISABLE_CLANG("-Wdeprecated-declarations")
     QT_WARNING_DISABLE_GCC("-Wdeprecated-declarations")
-    mNetworkConfigurationManager.reset(new QNetworkConfigurationManager());
+    mNetworkConfigurationManager = std::make_unique<QNetworkConfigurationManager>();
     QObject::connect(mNetworkConfigurationManager.get(), &QNetworkConfigurationManager::onlineStateChanged,
                      q, [&](bool online) { onOnlineStateChanged(online); });
     QT_WARNING_POP

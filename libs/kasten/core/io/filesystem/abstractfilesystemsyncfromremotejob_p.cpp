@@ -52,7 +52,7 @@ void AbstractFileSystemSyncFromRemoteJobPrivate::syncFromRemote()
     }
 
     if (isWorkFileOk) {
-        mFile.reset(new QFile(mWorkFilePath));
+        mFile = std::make_unique<QFile>(mWorkFilePath);
         isWorkFileOk = mFile->open(QIODevice::ReadOnly);
         if (!isWorkFileOk) {
             q->setErrorText(mFile->errorString());

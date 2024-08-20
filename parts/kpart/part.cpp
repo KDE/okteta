@@ -204,7 +204,7 @@ void OktetaPart::onDocumentLoaded(Kasten::AbstractDocument* document)
         auto* viewProfileSynchronizer = new Kasten::ByteArrayViewProfileSynchronizer(mViewProfileManager);
         viewProfileSynchronizer->setViewProfileId(mViewProfileManager->defaultViewProfileId());
 
-        mByteArrayView.reset(new Kasten::ByteArrayView(mDocument.get(), viewProfileSynchronizer));
+        mByteArrayView = std::make_unique<Kasten::ByteArrayView>(mDocument.get(), viewProfileSynchronizer);
         connect(mByteArrayView.get(), SIGNAL(hasSelectedDataChanged(bool)), SIGNAL(hasSelectedDataChanged(bool)));
 
         mSingleViewArea->setView(mByteArrayView.get());

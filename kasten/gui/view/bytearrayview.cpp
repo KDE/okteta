@@ -94,7 +94,7 @@ ByteArrayView::~ByteArrayView() = default;
 void ByteArrayView::init()
 {
     Okteta::AbstractByteArrayModel* content = mDocument->content();
-    mWidget.reset(new Okteta::ByteArrayJanusView());
+    mWidget = std::make_unique<Okteta::ByteArrayJanusView>();
     mWidget->setByteArrayModel(content);
 
     // TODO: find a signal/event emitted when fixedfont changes
