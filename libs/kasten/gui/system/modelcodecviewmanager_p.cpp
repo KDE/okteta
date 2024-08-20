@@ -29,22 +29,20 @@ ModelCodecViewManagerPrivate::ModelCodecViewManagerPrivate() = default;
 
 ModelCodecViewManagerPrivate::~ModelCodecViewManagerPrivate()
 {
-    qDeleteAll(mEncoderFactoryList);
     qDeleteAll(mExporterFactoryList);
     qDeleteAll(mGeneratorFactoryList);
 }
 
-void ModelCodecViewManagerPrivate::setStreamEncoderConfigEditorFactories(const QVector<AbstractModelStreamEncoderConfigEditorFactory*>& factoryList)
+void ModelCodecViewManagerPrivate::setStreamEncoderConfigEditorFactories(std::vector<std::unique_ptr<AbstractModelStreamEncoderConfigEditorFactory>>&& factoryList)
 {
-    qDeleteAll(mEncoderFactoryList);
-    mEncoderFactoryList = factoryList;
+    mEncoderFactoryList = std::move(factoryList);
 
     qDeleteAll(mExporterFactoryList);
     mExporterFactoryList.clear();
 
     mExporterFactoryList.reserve(mEncoderFactoryList.size());
-    for (AbstractModelStreamEncoderConfigEditorFactory* factory : std::as_const(mEncoderFactoryList)) {
-        mExporterFactoryList << new ModelEncoderFileSystemExporterConfigEditorFactory(factory);
+    for (const auto& factory : mEncoderFactoryList) {
+        mExporterFactoryList << new ModelEncoderFileSystemExporterConfigEditorFactory(factory.get());
     }
 }
 
@@ -64,7 +62,7 @@ AbstractModelStreamEncoderConfigEditor* ModelCodecViewManagerPrivate::createConf
 {
     AbstractModelStreamEncoderConfigEditor* result = nullptr;
 
-    for (const AbstractModelStreamEncoderConfigEditorFactory* factory : mEncoderFactoryList) {
+    for (const auto& factory : mEncoderFactoryList) {
         result = factory->tryCreateConfigEditor(encoder);
         if (result) {
             break;

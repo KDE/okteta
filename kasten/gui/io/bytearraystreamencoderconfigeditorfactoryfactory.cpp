@@ -21,27 +21,38 @@
 //// e.g.
 //// #include "my_bytearraystreamencoder.hpp"
 //// NEWBYTEARRAYSTREAMENCODERCONFIGEDITORFACTORY(end)
-// Qt
-#include <QVector>
 
 namespace Kasten {
 
-QVector<AbstractModelStreamEncoderConfigEditorFactory*> ByteArrayStreamEncoderConfigEditorFactoryFactory::createFactorys()
+namespace ByteArrayStreamEncoderConfigEditorFactory {
+
+template<typename T, typename ... Ptrs>
+auto make_unique_vector(Ptrs&& ... ptrs)
 {
-    const QVector<AbstractModelStreamEncoderConfigEditorFactory*> result {
+    std::vector<std::unique_ptr<T>> vector;
+    vector.reserve(sizeof...(Ptrs));
+    ( vector.emplace_back(std::unique_ptr<T>(ptrs)), ... );
+    return vector;
+}
+
+}
+
+std::vector<std::unique_ptr<AbstractModelStreamEncoderConfigEditorFactory>> ByteArrayStreamEncoderConfigEditorFactoryFactory::createFactorys()
+{
+    auto result = ByteArrayStreamEncoderConfigEditorFactory::make_unique_vector<AbstractModelStreamEncoderConfigEditorFactory>(
         new ByteArraySourceCodeStreamEncoderConfigEditorFactory(),
         new ByteArrayValuesStreamEncoderConfigEditorFactory(),
         new ByteArrayBase32StreamEncoderConfigEditorFactory(),
         new ByteArraySRecStreamEncoderConfigEditorFactory(),
         new ByteArrayIHexStreamEncoderConfigEditorFactory(),
         new ByteArrayUuencodingStreamEncoderConfigEditorFactory(),
-        new ByteArrayXxencodingStreamEncoderConfigEditorFactory(),
+        new ByteArrayXxencodingStreamEncoderConfigEditorFactory()
 //// NEWBYTEARRAYSTREAMENCODERCONFIGEDITORFACTORY(start)
 //// Here add the creation of an object of your streamencoder class and add it to the list,
 //// e.g.
 ////         new My_ByteArrayStreamEncoderConfigEditorFactory(),
 //// NEWBYTEARRAYSTREAMENCODERCONFIGEDITORFACTORY(end)
-    };
+    );
     return result;
 }
 

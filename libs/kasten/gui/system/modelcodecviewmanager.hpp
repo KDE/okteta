@@ -15,6 +15,7 @@
 #include <QObject>
 #include <QVector>
 // Std
+#include <vector>
 #include <memory>
 
 namespace Kasten {
@@ -45,7 +46,7 @@ public:
     AbstractModelDataGeneratorConfigEditor* createConfigEditor(AbstractModelDataGenerator* generator) const;
 
 public:
-    void setStreamEncoderConfigEditorFactories(const QVector<AbstractModelStreamEncoderConfigEditorFactory*>& factoryList);
+    void setStreamEncoderConfigEditorFactories(std::vector<std::unique_ptr<AbstractModelStreamEncoderConfigEditorFactory>>&& factoryList);
     void setExporterConfigEditorFactories(const QVector<AbstractModelExporterConfigEditorFactory*>& factoryList);
     void setDataGeneratorConfigEditorFactories(const QVector<AbstractModelDataGeneratorConfigEditorFactory*>& factoryList);
 

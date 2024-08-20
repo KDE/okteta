@@ -19,11 +19,11 @@ ModelCodecViewManager::ModelCodecViewManager()
 
 ModelCodecViewManager::~ModelCodecViewManager() = default;
 
-void ModelCodecViewManager::setStreamEncoderConfigEditorFactories(const QVector<AbstractModelStreamEncoderConfigEditorFactory*>& factoryList)
+void ModelCodecViewManager::setStreamEncoderConfigEditorFactories(std::vector<std::unique_ptr<AbstractModelStreamEncoderConfigEditorFactory>>&& factoryList)
 {
     Q_D(ModelCodecViewManager);
 
-    d->setStreamEncoderConfigEditorFactories(factoryList);
+    d->setStreamEncoderConfigEditorFactories(std::move(factoryList));
 }
 
 void ModelCodecViewManager::setExporterConfigEditorFactories(const QVector<AbstractModelExporterConfigEditorFactory*>& factoryList)
