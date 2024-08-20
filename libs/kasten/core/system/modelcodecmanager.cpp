@@ -26,13 +26,15 @@ ModelCodecManager::streamEncoders(AbstractModel* model, const AbstractModelSelec
     return d->streamEncoders(model, selection);
 }
 
-QVector<AbstractModelStreamDecoder*>
-ModelCodecManager::decoderList() const
+#if 0
+std::vector<AbstractModelStreamDecoder*>
+ModelCodecManager::streamDecoders() const
 {
     Q_D(const ModelCodecManager);
 
-    return d->decoderList();
+    return d->streamDecoders();
 }
+#endif
 
 std::vector<AbstractModelDataGenerator*> ModelCodecManager::dataGenerators() const
 {
@@ -63,12 +65,14 @@ void ModelCodecManager::setStreamEncoders(std::vector<std::unique_ptr<AbstractMo
     d->setStreamEncoders(std::move(streamEncoderList));
 }
 
-void ModelCodecManager::setStreamDecoders(const QVector<AbstractModelStreamDecoder*>& decoderList)
+#if 0
+void ModelCodecManager::setStreamDecoders(std::vector<std::unique_ptr<AbstractModelStreamDecoder>>&& streamDecoderList)
 {
     Q_D(ModelCodecManager);
 
-    d->setStreamDecoders(decoderList);
+    d->setStreamDecoders(std::move(streamDecoderList));
 }
+#endif
 
 void ModelCodecManager::setDataGenerators(std::vector<std::unique_ptr<AbstractModelDataGenerator>>&& dataGeneratorList)
 {

@@ -11,7 +11,6 @@
 // lib
 #include "modelencoderfilesystemexporter.hpp"
 #include "abstractmodelstreamencoder.hpp"
-// #include "abstractmodelstreamdecoder.hpp"
 #include "abstractmodeldatagenerator.hpp"
 #include "abstractoverwritedialog.hpp"
 #include "jobmanager.hpp"
@@ -49,7 +48,6 @@ ModelCodecManagerPrivate::ModelCodecManagerPrivate() = default;
 ModelCodecManagerPrivate::~ModelCodecManagerPrivate()
 {
     qDeleteAll(mExporterList);
-//     qDeleteAll( mDecoderList );
 }
 
 std::vector<AbstractModelStreamEncoder*>
@@ -59,8 +57,13 @@ ModelCodecManagerPrivate::streamEncoders(AbstractModel* model, const AbstractMod
     return model ? ModelCodecManagerNS::make_vector(mStreamEncoderList) : std::vector<AbstractModelStreamEncoder*>();
 }
 
-QVector<AbstractModelStreamDecoder*>
-ModelCodecManagerPrivate::decoderList() const { return mDecoderList; }
+#if 0
+std::vector<AbstractModelStreamDecoder*>
+ModelCodecManagerPrivate::streamDecoders() const
+{
+    return ModelCodecManagerNS::make_vector(mStreamDecoderList);
+}
+#endif
 
 std::vector<AbstractModelDataGenerator*>
 ModelCodecManagerPrivate::dataGenerators() const
@@ -94,10 +97,12 @@ void ModelCodecManagerPrivate::setStreamEncoders(std::vector<std::unique_ptr<Abs
     }
 }
 
-void ModelCodecManagerPrivate::setStreamDecoders(const QVector<AbstractModelStreamDecoder*>& decoderList)
+#if 0
+void ModelCodecManagerPrivate::setStreamDecoders(std::vector<std::unique_ptr<AbstractModelStreamDecoder>>&& streamDecoderList)
 {
-    mDecoderList = decoderList;
+    mStreamDecoderList = std::move(streamDecoderList);
 }
+#endif
 
 void ModelCodecManagerPrivate::setDataGenerators(std::vector<std::unique_ptr<AbstractModelDataGenerator>>&& dataGeneratorList)
 {
