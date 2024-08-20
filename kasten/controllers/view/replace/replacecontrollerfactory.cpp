@@ -20,9 +20,9 @@ ReplaceControllerFactory::ReplaceControllerFactory(QWidget* parentWidget)
 
 ReplaceControllerFactory::~ReplaceControllerFactory() = default;
 
-AbstractXmlGuiController* ReplaceControllerFactory::create(KXMLGUIClient* guiClient) const
+std::unique_ptr<AbstractXmlGuiController> ReplaceControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    return new ReplaceController(guiClient, m_parentWidget);
+    return std::make_unique<ReplaceController>(guiClient, m_parentWidget);
 }
 
 }

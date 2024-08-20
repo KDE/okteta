@@ -17,9 +17,9 @@ ClipboardControllerFactory::ClipboardControllerFactory() = default;
 
 ClipboardControllerFactory::~ClipboardControllerFactory() = default;
 
-AbstractXmlGuiController* ClipboardControllerFactory::create(KXMLGUIClient* guiClient) const
+std::unique_ptr<AbstractXmlGuiController> ClipboardControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    return new ClipboardController(guiClient);
+    return std::make_unique<ClipboardController>(guiClient);
 }
 
 }

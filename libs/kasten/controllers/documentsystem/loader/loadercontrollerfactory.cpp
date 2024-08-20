@@ -20,9 +20,9 @@ LoaderControllerFactory::LoaderControllerFactory(AbstractDocumentStrategy* docum
 
 LoaderControllerFactory::~LoaderControllerFactory() = default;
 
-AbstractXmlGuiController* LoaderControllerFactory::create(KXMLGUIClient* guiClient) const
+std::unique_ptr<AbstractXmlGuiController> LoaderControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    return new LoaderController(m_documentStrategy, guiClient);
+    return std::make_unique<LoaderController>(m_documentStrategy, guiClient);
 }
 
 }

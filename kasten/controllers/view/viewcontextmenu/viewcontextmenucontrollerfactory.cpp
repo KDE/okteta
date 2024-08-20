@@ -17,9 +17,9 @@ ViewContextMenuControllerFactory::ViewContextMenuControllerFactory() = default;
 
 ViewContextMenuControllerFactory::~ViewContextMenuControllerFactory() = default;
 
-AbstractXmlGuiController* ViewContextMenuControllerFactory::create(KXMLGUIClient* guiClient) const
+std::unique_ptr<AbstractXmlGuiController> ViewContextMenuControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    return new ViewContextMenuController(guiClient);
+    return std::make_unique<ViewContextMenuController>(guiClient);
 }
 
 }

@@ -45,7 +45,7 @@ public:
 
 public:
     void setView(AbstractView* view);
-    void addXmlGuiController(AbstractXmlGuiController* controller);
+    void addXmlGuiController(std::unique_ptr<AbstractXmlGuiController>&& controller);
     void addTool(AbstractToolView* toolView);
 
 public: // If::WidgetsDockable API

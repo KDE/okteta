@@ -22,9 +22,9 @@ ViewAreaSplitControllerFactory::ViewAreaSplitControllerFactory(ViewManager* view
 
 ViewAreaSplitControllerFactory::~ViewAreaSplitControllerFactory() = default;
 
-AbstractXmlGuiController* ViewAreaSplitControllerFactory::create(KXMLGUIClient* guiClient) const
+std::unique_ptr<AbstractXmlGuiController> ViewAreaSplitControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    return new ViewAreaSplitController(m_viewManager, m_groupedViews, guiClient);
+    return std::make_unique<ViewAreaSplitController>(m_viewManager, m_groupedViews, guiClient);
 }
 
 }

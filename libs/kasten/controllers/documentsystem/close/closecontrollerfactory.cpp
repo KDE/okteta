@@ -20,9 +20,9 @@ CloseControllerFactory::CloseControllerFactory(AbstractDocumentStrategy* documen
 
 CloseControllerFactory::~CloseControllerFactory() = default;
 
-AbstractXmlGuiController* CloseControllerFactory::create(KXMLGUIClient* guiClient) const
+std::unique_ptr<AbstractXmlGuiController> CloseControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    return new CloseController(m_documentStrategy, guiClient);
+    return std::make_unique<CloseController>(m_documentStrategy, guiClient);
 }
 
 }

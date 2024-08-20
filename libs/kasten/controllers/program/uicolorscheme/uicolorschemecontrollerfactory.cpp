@@ -20,11 +20,11 @@ UiColorSchemeControllerFactory::UiColorSchemeControllerFactory(KXmlGuiWindow* wi
 
 UiColorSchemeControllerFactory::~UiColorSchemeControllerFactory() = default;
 
-AbstractXmlGuiController* UiColorSchemeControllerFactory::create(KXMLGUIClient* guiClient) const
+std::unique_ptr<AbstractXmlGuiController> UiColorSchemeControllerFactory::create(KXMLGUIClient* guiClient) const
 {
     Q_UNUSED(guiClient)
 
-    return new UiColorSchemeController(m_window);
+    return std::make_unique<UiColorSchemeController>(m_window);
 }
 
 }

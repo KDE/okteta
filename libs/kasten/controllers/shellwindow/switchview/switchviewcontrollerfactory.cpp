@@ -20,9 +20,9 @@ SwitchViewControllerFactory::SwitchViewControllerFactory(AbstractGroupedViews* g
 
 SwitchViewControllerFactory::~SwitchViewControllerFactory() = default;
 
-AbstractXmlGuiController* SwitchViewControllerFactory::create(KXMLGUIClient* guiClient) const
+std::unique_ptr<AbstractXmlGuiController> SwitchViewControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    return new SwitchViewController(m_groupedViews, guiClient);
+    return std::make_unique<SwitchViewController>(m_groupedViews, guiClient);
 }
 
 }

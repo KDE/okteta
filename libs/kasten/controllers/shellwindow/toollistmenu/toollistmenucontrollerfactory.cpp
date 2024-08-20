@@ -20,9 +20,9 @@ ToolListMenuControllerFactory::ToolListMenuControllerFactory(If::WidgetsDockable
 
 ToolListMenuControllerFactory::~ToolListMenuControllerFactory() = default;
 
-AbstractXmlGuiController* ToolListMenuControllerFactory::create(KXMLGUIClient* guiClient) const
+std::unique_ptr<AbstractXmlGuiController> ToolListMenuControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    return new ToolListMenuController(m_widgetsDockable, guiClient);
+    return std::make_unique<ToolListMenuController>(m_widgetsDockable, guiClient);
 }
 
 }

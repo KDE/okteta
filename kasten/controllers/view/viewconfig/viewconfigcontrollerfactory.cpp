@@ -17,9 +17,9 @@ ViewConfigControllerFactory::ViewConfigControllerFactory() = default;
 
 ViewConfigControllerFactory::~ViewConfigControllerFactory() = default;
 
-AbstractXmlGuiController* ViewConfigControllerFactory::create(KXMLGUIClient* guiClient) const
+std::unique_ptr<AbstractXmlGuiController> ViewConfigControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    return new ViewConfigController(guiClient);
+    return std::make_unique<ViewConfigController>(guiClient);
 }
 
 }

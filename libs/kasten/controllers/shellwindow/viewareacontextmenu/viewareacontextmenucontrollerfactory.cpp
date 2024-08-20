@@ -22,9 +22,9 @@ ViewAreaContextMenuControllerFactory::ViewAreaContextMenuControllerFactory(Multi
 
 ViewAreaContextMenuControllerFactory::~ViewAreaContextMenuControllerFactory() = default;
 
-AbstractXmlGuiController* ViewAreaContextMenuControllerFactory::create(KXMLGUIClient* guiClient) const
+std::unique_ptr<AbstractXmlGuiController> ViewAreaContextMenuControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    return new ViewAreaContextMenuController(m_multiViewAreas, m_syncManager, guiClient);
+    return std::make_unique<ViewAreaContextMenuController>(m_multiViewAreas, m_syncManager, guiClient);
 }
 
 }

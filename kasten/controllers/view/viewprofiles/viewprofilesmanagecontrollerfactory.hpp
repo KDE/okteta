@@ -32,7 +32,7 @@ public:
     ViewProfilesManageControllerFactory& operator=(const ViewProfilesManageControllerFactory&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
-    AbstractXmlGuiController* create(KXMLGUIClient* guiClient) const override;
+    std::unique_ptr<AbstractXmlGuiController> create(KXMLGUIClient* guiClient) const override;
 
 private:
     ByteArrayViewProfileManager* const m_viewProfileManager;

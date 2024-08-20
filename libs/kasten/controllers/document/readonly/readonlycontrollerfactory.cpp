@@ -17,9 +17,9 @@ ReadOnlyControllerFactory::ReadOnlyControllerFactory() = default;
 
 ReadOnlyControllerFactory::~ReadOnlyControllerFactory() = default;
 
-AbstractXmlGuiController* ReadOnlyControllerFactory::create(KXMLGUIClient* guiClient) const
+std::unique_ptr<AbstractXmlGuiController> ReadOnlyControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    return new ReadOnlyController(guiClient);
+    return std::make_unique<ReadOnlyController>(guiClient);
 }
 
 }

@@ -17,9 +17,9 @@ SelectControllerFactory::SelectControllerFactory() = default;
 
 SelectControllerFactory::~SelectControllerFactory() = default;
 
-AbstractXmlGuiController* SelectControllerFactory::create(KXMLGUIClient* guiClient) const
+std::unique_ptr<AbstractXmlGuiController> SelectControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    return new SelectController(guiClient);
+    return std::make_unique<SelectController>(guiClient);
 }
 
 }

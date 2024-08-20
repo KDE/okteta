@@ -20,11 +20,11 @@ ViewStatusControllerFactory::ViewStatusControllerFactory(StatusBar* statusBar)
 
 ViewStatusControllerFactory::~ViewStatusControllerFactory() = default;
 
-AbstractXmlGuiController* ViewStatusControllerFactory::create(KXMLGUIClient* guiClient) const
+std::unique_ptr<AbstractXmlGuiController> ViewStatusControllerFactory::create(KXMLGUIClient* guiClient) const
 {
     Q_UNUSED(guiClient)
 
-    return new ViewStatusController(m_statusBar);
+    return std::make_unique<ViewStatusController>(m_statusBar);
 }
 
 }

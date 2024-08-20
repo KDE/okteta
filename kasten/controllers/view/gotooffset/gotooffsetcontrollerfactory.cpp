@@ -20,9 +20,9 @@ GotoOffsetControllerFactory::GotoOffsetControllerFactory(If::ToolInlineViewable*
 
 GotoOffsetControllerFactory::~GotoOffsetControllerFactory() = default;
 
-AbstractXmlGuiController* GotoOffsetControllerFactory::create(KXMLGUIClient* guiClient) const
+std::unique_ptr<AbstractXmlGuiController> GotoOffsetControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    return new GotoOffsetController(m_toolInlineViewable, guiClient);
+    return std::make_unique<GotoOffsetController>(m_toolInlineViewable, guiClient);
 }
 
 }

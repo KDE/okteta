@@ -17,9 +17,9 @@ PrintControllerFactory::PrintControllerFactory() = default;
 
 PrintControllerFactory::~PrintControllerFactory() = default;
 
-AbstractXmlGuiController* PrintControllerFactory::create(KXMLGUIClient* guiClient) const
+std::unique_ptr<AbstractXmlGuiController> PrintControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    return new PrintController(guiClient);
+    return std::make_unique<PrintController>(guiClient);
 }
 
 }

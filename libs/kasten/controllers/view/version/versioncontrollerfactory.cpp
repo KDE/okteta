@@ -17,9 +17,9 @@ VersionControllerFactory::VersionControllerFactory() = default;
 
 VersionControllerFactory::~VersionControllerFactory() = default;
 
-AbstractXmlGuiController* VersionControllerFactory::create(KXMLGUIClient* guiClient) const
+std::unique_ptr<AbstractXmlGuiController> VersionControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    return new VersionController(guiClient);
+    return std::make_unique<VersionController>(guiClient);
 }
 
 }

@@ -17,9 +17,9 @@ ViewModeControllerFactory::ViewModeControllerFactory() = default;
 
 ViewModeControllerFactory::~ViewModeControllerFactory() = default;
 
-AbstractXmlGuiController* ViewModeControllerFactory::create(KXMLGUIClient* guiClient) const
+std::unique_ptr<AbstractXmlGuiController> ViewModeControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    return new ViewModeController(guiClient);
+    return std::make_unique<ViewModeController>(guiClient);
 }
 
 }

@@ -22,9 +22,9 @@ ExportControllerFactory::ExportControllerFactory(ModelCodecViewManager* modelCod
 
 ExportControllerFactory::~ExportControllerFactory() = default;
 
-AbstractXmlGuiController* ExportControllerFactory::create(KXMLGUIClient* guiClient) const
+std::unique_ptr<AbstractXmlGuiController> ExportControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    return new ExportController(m_modelCodecViewManager, m_modelCodecManager, guiClient);
+    return std::make_unique<ExportController>(m_modelCodecViewManager, m_modelCodecManager, guiClient);
 }
 
 }

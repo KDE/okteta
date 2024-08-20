@@ -31,7 +31,7 @@ public:
     CreatorControllerFactory& operator=(const CreatorControllerFactory&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
-    AbstractXmlGuiController* create(KXMLGUIClient* guiClient) const override;
+    std::unique_ptr<AbstractXmlGuiController> create(KXMLGUIClient* guiClient) const override;
 
 private:
     ModelCodecManager* const m_modelCodecManager;

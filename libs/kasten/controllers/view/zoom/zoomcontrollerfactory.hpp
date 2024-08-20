@@ -27,7 +27,7 @@ public:
     ZoomControllerFactory& operator=(const ZoomControllerFactory&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
-    AbstractXmlGuiController* create(KXMLGUIClient* guiClient) const override;
+    std::unique_ptr<AbstractXmlGuiController> create(KXMLGUIClient* guiClient) const override;
 };
 
 }

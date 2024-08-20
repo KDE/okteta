@@ -20,9 +20,9 @@ SetRemoteControllerFactory::SetRemoteControllerFactory(DocumentSyncManager* sync
 
 SetRemoteControllerFactory::~SetRemoteControllerFactory() = default;
 
-AbstractXmlGuiController* SetRemoteControllerFactory::create(KXMLGUIClient* guiClient) const
+std::unique_ptr<AbstractXmlGuiController> SetRemoteControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    return new SetRemoteController(m_syncManager, guiClient);
+    return std::make_unique<SetRemoteController>(m_syncManager, guiClient);
 }
 
 }

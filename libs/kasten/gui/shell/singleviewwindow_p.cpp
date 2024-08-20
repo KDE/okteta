@@ -116,9 +116,9 @@ void SingleViewWindowPrivate::setView(AbstractView* view)
     }
 }
 
-void SingleViewWindowPrivate::addXmlGuiController(AbstractXmlGuiController* controller)
+void SingleViewWindowPrivate::addXmlGuiController(std::unique_ptr<AbstractXmlGuiController>&& controller)
 {
-    mControllers.emplace_back(std::unique_ptr<AbstractXmlGuiController>(controller));
+    mControllers.emplace_back(std::move(controller));
 }
 
 void SingleViewWindowPrivate::addTool(AbstractToolView* toolView)

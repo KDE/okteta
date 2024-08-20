@@ -17,9 +17,9 @@ OverwriteOnlyControllerFactory::OverwriteOnlyControllerFactory() = default;
 
 OverwriteOnlyControllerFactory::~OverwriteOnlyControllerFactory() = default;
 
-AbstractXmlGuiController* OverwriteOnlyControllerFactory::create(KXMLGUIClient* guiClient) const
+std::unique_ptr<AbstractXmlGuiController> OverwriteOnlyControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    return new OverwriteOnlyController(guiClient);
+    return std::make_unique<OverwriteOnlyController>(guiClient);
 }
 
 }

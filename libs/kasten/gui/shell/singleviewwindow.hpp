@@ -41,7 +41,7 @@ public:
     ~SingleViewWindow() override;
 
 public:
-    void addXmlGuiController(AbstractXmlGuiController* controller);
+    void addXmlGuiController(std::unique_ptr<AbstractXmlGuiController>&& controller);
     void addTool(AbstractToolView* toolView);
 
     void setView(AbstractView* view);

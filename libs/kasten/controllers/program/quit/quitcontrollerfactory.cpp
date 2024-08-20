@@ -20,11 +20,11 @@ QuitControllerFactory::QuitControllerFactory(KXmlGuiWindow* window)
 
 QuitControllerFactory::~QuitControllerFactory() = default;
 
-AbstractXmlGuiController* QuitControllerFactory::create(KXMLGUIClient* guiClient) const
+std::unique_ptr<AbstractXmlGuiController> QuitControllerFactory::create(KXMLGUIClient* guiClient) const
 {
     Q_UNUSED(guiClient)
 
-    return new QuitController(m_window);
+    return std::make_unique<QuitController>(m_window);
 }
 
 }

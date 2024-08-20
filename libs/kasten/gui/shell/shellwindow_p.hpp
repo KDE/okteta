@@ -41,7 +41,7 @@ public:
 
 public:
     void updateControllers(AbstractView* view);
-    void addXmlGuiController(AbstractXmlGuiController* controller);
+    void addXmlGuiController(std::unique_ptr<AbstractXmlGuiController>&& controller);
     void addTool(AbstractToolView* toolView);
     void showDocument(AbstractDocument* document);
 

@@ -20,11 +20,11 @@ ZoomBarControllerFactory::ZoomBarControllerFactory(StatusBar* statusBar)
 
 ZoomBarControllerFactory::~ZoomBarControllerFactory() = default;
 
-AbstractXmlGuiController* ZoomBarControllerFactory::create(KXMLGUIClient* guiClient) const
+std::unique_ptr<AbstractXmlGuiController> ZoomBarControllerFactory::create(KXMLGUIClient* guiClient) const
 {
     Q_UNUSED(guiClient)
 
-    return new ZoomBarController(m_statusBar);
+    return std::make_unique<ZoomBarController>(m_statusBar);
 }
 
 }

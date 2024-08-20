@@ -17,9 +17,9 @@ BookmarksControllerFactory::BookmarksControllerFactory() = default;
 
 BookmarksControllerFactory::~BookmarksControllerFactory() = default;
 
-AbstractXmlGuiController* BookmarksControllerFactory::create(KXMLGUIClient* guiClient) const
+std::unique_ptr<AbstractXmlGuiController> BookmarksControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    return new BookmarksController(guiClient);
+    return std::make_unique<BookmarksController>(guiClient);
 }
 
 }

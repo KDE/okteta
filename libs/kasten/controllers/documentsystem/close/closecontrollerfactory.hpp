@@ -29,7 +29,7 @@ public:
     CloseControllerFactory& operator=(const CloseControllerFactory&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
-    AbstractXmlGuiController* create(KXMLGUIClient* guiClient) const override;
+    std::unique_ptr<AbstractXmlGuiController> create(KXMLGUIClient* guiClient) const override;
 
 private:
     AbstractDocumentStrategy* const m_documentStrategy;

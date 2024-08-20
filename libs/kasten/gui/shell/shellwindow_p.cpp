@@ -55,9 +55,9 @@ ShellWindowPrivate::~ShellWindowPrivate()
     qDeleteAll(mDockWidgets);
 }
 
-void ShellWindowPrivate::addXmlGuiController(AbstractXmlGuiController* controller)
+void ShellWindowPrivate::addXmlGuiController(std::unique_ptr<AbstractXmlGuiController>&& controller)
 {
-    mControllers.emplace_back(std::unique_ptr<AbstractXmlGuiController>(controller));
+    mControllers.emplace_back(std::move(controller));
 }
 
 void ShellWindowPrivate::addTool(AbstractToolView* toolView)

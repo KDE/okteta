@@ -20,11 +20,11 @@ ReadOnlyBarControllerFactory::ReadOnlyBarControllerFactory(StatusBar* statusBar)
 
 ReadOnlyBarControllerFactory::~ReadOnlyBarControllerFactory() = default;
 
-AbstractXmlGuiController* ReadOnlyBarControllerFactory::create(KXMLGUIClient* guiClient) const
+std::unique_ptr<AbstractXmlGuiController> ReadOnlyBarControllerFactory::create(KXMLGUIClient* guiClient) const
 {
     Q_UNUSED(guiClient)
 
-    return new ReadOnlyBarController(m_statusBar);
+    return std::make_unique<ReadOnlyBarController>(m_statusBar);
 }
 
 }

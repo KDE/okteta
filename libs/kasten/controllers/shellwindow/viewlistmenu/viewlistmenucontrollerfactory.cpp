@@ -22,9 +22,9 @@ ViewListMenuControllerFactory::ViewListMenuControllerFactory(ViewManager* viewMa
 
 ViewListMenuControllerFactory::~ViewListMenuControllerFactory() = default;
 
-AbstractXmlGuiController* ViewListMenuControllerFactory::create(KXMLGUIClient* guiClient) const
+std::unique_ptr<AbstractXmlGuiController> ViewListMenuControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    return new ViewListMenuController(m_viewManager, m_groupedViews, guiClient);
+    return std::make_unique<ViewListMenuController>(m_viewManager, m_groupedViews, guiClient);
 }
 
 }

@@ -39,11 +39,11 @@ QVector<ToolViewDockWidget*> ShellWindow::dockWidgets() const
     return d->dockWidgets();
 }
 
-void ShellWindow::addXmlGuiController(AbstractXmlGuiController* controller)
+void ShellWindow::addXmlGuiController(std::unique_ptr<AbstractXmlGuiController>&& controller)
 {
     Q_D(ShellWindow);
 
-    d->addXmlGuiController(controller);
+    d->addXmlGuiController(std::move(controller));
 }
 
 void ShellWindow::addTool(AbstractToolView* toolView)

@@ -31,7 +31,7 @@ public:
     ToolListMenuControllerFactory& operator=(const ToolListMenuControllerFactory&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
-    AbstractXmlGuiController* create(KXMLGUIClient* guiClient) const override;
+    std::unique_ptr<AbstractXmlGuiController> create(KXMLGUIClient* guiClient) const override;
 
 private:
     If::WidgetsDockable* const m_widgetsDockable;

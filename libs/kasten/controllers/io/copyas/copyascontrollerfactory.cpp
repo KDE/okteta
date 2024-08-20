@@ -22,9 +22,9 @@ CopyAsControllerFactory::CopyAsControllerFactory(ModelCodecViewManager* modelCod
 
 CopyAsControllerFactory::~CopyAsControllerFactory() = default;
 
-AbstractXmlGuiController* CopyAsControllerFactory::create(KXMLGUIClient* guiClient) const
+std::unique_ptr<AbstractXmlGuiController> CopyAsControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    return new CopyAsController(m_modelCodecViewManager, m_modelCodecManager, guiClient);
+    return std::make_unique<CopyAsController>(m_modelCodecViewManager, m_modelCodecManager, guiClient);
 }
 
 }

@@ -20,9 +20,9 @@ SearchControllerFactory::SearchControllerFactory(QWidget* parentWidget)
 
 SearchControllerFactory::~SearchControllerFactory() = default;
 
-AbstractXmlGuiController* SearchControllerFactory::create(KXMLGUIClient* guiClient) const
+std::unique_ptr<AbstractXmlGuiController> SearchControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    return new SearchController(guiClient, m_parentWidget);
+    return std::make_unique<SearchController>(guiClient, m_parentWidget);
 }
 
 }

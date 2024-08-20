@@ -22,9 +22,9 @@ CreatorControllerFactory::CreatorControllerFactory(ModelCodecManager* modelCodec
 
 CreatorControllerFactory::~CreatorControllerFactory() = default;
 
-AbstractXmlGuiController* CreatorControllerFactory::create(KXMLGUIClient* guiClient) const
+std::unique_ptr<AbstractXmlGuiController> CreatorControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    return new CreatorController(m_modelCodecManager, m_documentStrategy, guiClient);
+    return std::make_unique<CreatorController>(m_modelCodecManager, m_documentStrategy, guiClient);
 }
 
 }

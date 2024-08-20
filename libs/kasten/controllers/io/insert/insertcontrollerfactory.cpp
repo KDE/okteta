@@ -22,9 +22,9 @@ InsertControllerFactory::InsertControllerFactory(ModelCodecViewManager* modelCod
 
 InsertControllerFactory::~InsertControllerFactory() = default;
 
-AbstractXmlGuiController* InsertControllerFactory::create(KXMLGUIClient* guiClient) const
+std::unique_ptr<AbstractXmlGuiController> InsertControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    return new InsertController(m_modelCodecViewManager, m_modelCodecManager, guiClient);
+    return std::make_unique<InsertController>(m_modelCodecViewManager, m_modelCodecManager, guiClient);
 }
 
 }

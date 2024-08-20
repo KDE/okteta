@@ -46,11 +46,11 @@ void SingleViewWindow::setView(AbstractView* view)
     d->setView(view);
 }
 
-void SingleViewWindow::addXmlGuiController(AbstractXmlGuiController* controller)
+void SingleViewWindow::addXmlGuiController(std::unique_ptr<AbstractXmlGuiController>&& controller)
 {
     Q_D(SingleViewWindow);
 
-    d->addXmlGuiController(controller);
+    d->addXmlGuiController(std::move(controller));
 }
 
 void SingleViewWindow::addTool(AbstractToolView* toolView)

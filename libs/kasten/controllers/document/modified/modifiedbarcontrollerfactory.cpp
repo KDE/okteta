@@ -20,11 +20,11 @@ ModifiedBarControllerFactory::ModifiedBarControllerFactory(StatusBar* statusBar)
 
 ModifiedBarControllerFactory::~ModifiedBarControllerFactory() = default;
 
-AbstractXmlGuiController* ModifiedBarControllerFactory::create(KXMLGUIClient* guiClient) const
+std::unique_ptr<AbstractXmlGuiController> ModifiedBarControllerFactory::create(KXMLGUIClient* guiClient) const
 {
     Q_UNUSED(guiClient)
 
-    return new ModifiedBarController(m_statusBar);
+    return std::make_unique<ModifiedBarController>(m_statusBar);
 }
 
 }

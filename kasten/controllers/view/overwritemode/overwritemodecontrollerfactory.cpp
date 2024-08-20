@@ -17,9 +17,9 @@ OverwriteModeControllerFactory::OverwriteModeControllerFactory() = default;
 
 OverwriteModeControllerFactory::~OverwriteModeControllerFactory() = default;
 
-AbstractXmlGuiController* OverwriteModeControllerFactory::create(KXMLGUIClient* guiClient) const
+std::unique_ptr<AbstractXmlGuiController> OverwriteModeControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    return new OverwriteModeController(guiClient);
+    return std::make_unique<OverwriteModeController>(guiClient);
 }
 
 }

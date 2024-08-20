@@ -20,11 +20,11 @@ FullScreenControllerFactory::FullScreenControllerFactory(KXmlGuiWindow* window)
 
 FullScreenControllerFactory::~FullScreenControllerFactory() = default;
 
-AbstractXmlGuiController* FullScreenControllerFactory::create(KXMLGUIClient* guiClient) const
+std::unique_ptr<AbstractXmlGuiController> FullScreenControllerFactory::create(KXMLGUIClient* guiClient) const
 {
     Q_UNUSED(guiClient)
 
-    return new FullScreenController(m_window);
+    return std::make_unique<FullScreenController>(m_window);
 }
 
 }

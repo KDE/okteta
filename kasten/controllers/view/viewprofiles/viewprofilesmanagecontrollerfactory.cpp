@@ -22,9 +22,9 @@ ViewProfilesManageControllerFactory::ViewProfilesManageControllerFactory(ByteArr
 
 ViewProfilesManageControllerFactory::~ViewProfilesManageControllerFactory() = default;
 
-AbstractXmlGuiController* ViewProfilesManageControllerFactory::create(KXMLGUIClient* guiClient) const
+std::unique_ptr<AbstractXmlGuiController> ViewProfilesManageControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    return new ViewProfilesManageController(guiClient, m_viewProfileManager, m_parentWidget);
+    return std::make_unique<ViewProfilesManageController>(guiClient, m_viewProfileManager, m_parentWidget);
 }
 
 }

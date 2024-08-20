@@ -31,7 +31,7 @@ public:
     GotoOffsetControllerFactory& operator=(const GotoOffsetControllerFactory&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
-    AbstractXmlGuiController* create(KXMLGUIClient* guiClient) const override;
+    std::unique_ptr<AbstractXmlGuiController> create(KXMLGUIClient* guiClient) const override;
 
 private:
     If::ToolInlineViewable* const m_toolInlineViewable;

@@ -20,9 +20,9 @@ SelectRangeControllerFactory::SelectRangeControllerFactory(If::ToolInlineViewabl
 
 SelectRangeControllerFactory::~SelectRangeControllerFactory() = default;
 
-AbstractXmlGuiController* SelectRangeControllerFactory::create(KXMLGUIClient* guiClient) const
+std::unique_ptr<AbstractXmlGuiController> SelectRangeControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    return new SelectRangeController(m_toolInlineViewable, guiClient);
+    return std::make_unique<SelectRangeController>(m_toolInlineViewable, guiClient);
 }
 
 }

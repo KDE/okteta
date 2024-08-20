@@ -20,9 +20,9 @@ SynchronizeControllerFactory::SynchronizeControllerFactory(DocumentSyncManager* 
 
 SynchronizeControllerFactory::~SynchronizeControllerFactory() = default;
 
-AbstractXmlGuiController* SynchronizeControllerFactory::create(KXMLGUIClient* guiClient) const
+std::unique_ptr<AbstractXmlGuiController> SynchronizeControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    return new SynchronizeController(m_syncManager, guiClient);
+    return std::make_unique<SynchronizeController>(m_syncManager, guiClient);
 }
 
 }

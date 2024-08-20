@@ -17,9 +17,9 @@ ZoomControllerFactory::ZoomControllerFactory() = default;
 
 ZoomControllerFactory::~ZoomControllerFactory() = default;
 
-AbstractXmlGuiController* ZoomControllerFactory::create(KXMLGUIClient* guiClient) const
+std::unique_ptr<AbstractXmlGuiController> ZoomControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    return new ZoomController(guiClient);
+    return std::make_unique<ZoomController>(guiClient);
 }
 
 }

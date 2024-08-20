@@ -11,6 +11,8 @@
 
 // lib
 #include "kastengui_export.hpp"
+// Std
+#include <memory>
 
 class KXMLGUIClient;
 
@@ -24,7 +26,7 @@ public:
     virtual ~AbstractXmlGuiControllerFactory();
 
 public: // API to be implemented
-    virtual AbstractXmlGuiController* create(KXMLGUIClient* guiClient) const = 0;
+    virtual std::unique_ptr<AbstractXmlGuiController> create(KXMLGUIClient* guiClient) const = 0;
 };
 
 inline AbstractXmlGuiControllerFactory::~AbstractXmlGuiControllerFactory() = default;
