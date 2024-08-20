@@ -27,7 +27,7 @@ void FramesToPaperPrinter::setPageRect(QRect pageRect) { mPageRect = pageRect; }
 
 void FramesToPaperPrinter::addFrameRenderer(AbstractFrameRenderer* frameRenderer)
 {
-    mFrameRendererList.emplace_back(frameRenderer);
+    mFrameRendererList.emplace_back(std::unique_ptr<AbstractFrameRenderer>(frameRenderer));
 }
 
 bool FramesToPaperPrinter::print(QPrinter* printer, int firstPageIndex, int lastPageIndex)

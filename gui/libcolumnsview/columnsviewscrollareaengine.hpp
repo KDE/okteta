@@ -309,7 +309,7 @@ inline void ColumnsViewScrollAreaEngine::addColumn(AbstractColumnRenderer* colum
 //   if( Reversed )
 //     Columns.prepend( C );
 //   else
-    columns.emplace_back(columnRenderer);
+    columns.emplace_back(std::unique_ptr<AbstractColumnRenderer>(columnRenderer));
 
     updateWidths();
 }

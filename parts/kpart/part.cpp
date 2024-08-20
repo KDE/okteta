@@ -153,7 +153,7 @@ OktetaPart::~OktetaPart() = default;
 void OktetaPart::addController(const Kasten::AbstractXmlGuiControllerFactory& factory)
 {
     Kasten::AbstractXmlGuiController* controller = factory.create(this);
-    mControllers.emplace_back(controller);
+    mControllers.emplace_back(std::unique_ptr<Kasten::AbstractXmlGuiController>(controller));
 }
 
 void OktetaPart::setReadWrite(bool readWrite)
