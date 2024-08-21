@@ -102,11 +102,10 @@ void CopyAsController::onActionTriggered(QAction* action)
 
     const AbstractModelSelection* selection = mSelectionControl->modelSelection();
 
-    AbstractModelStreamEncoderConfigEditor* configEditor =
-        mModelCodecViewManager->createConfigEditor(encoder);
+    auto configEditor = mModelCodecViewManager->createConfigEditor(encoder);
 
     if (configEditor) {
-        auto* dialog = new CopyAsDialog(encoder->remoteTypeName(), configEditor, encoder,
+        auto* dialog = new CopyAsDialog(encoder->remoteTypeName(), std::move(configEditor), encoder,
                                         QApplication::activeWindow());
         dialog->setData(mModel, selection);
         connect(dialog, &CopyAsDialog::copyAccepted, this, &CopyAsController::triggerExecution);

@@ -17,8 +17,8 @@
 
 namespace Kasten {
 
-ModelEncoderFileSystemExporterConfigEditor::ModelEncoderFileSystemExporterConfigEditor(AbstractModelStreamEncoderConfigEditor* encoderConfigEditor)
-    : mEncoderConfigEditor(encoderConfigEditor)
+ModelEncoderFileSystemExporterConfigEditor::ModelEncoderFileSystemExporterConfigEditor(std::unique_ptr<AbstractModelStreamEncoderConfigEditor>&& encoderConfigEditor)
+    : mEncoderConfigEditor(encoderConfigEditor.release()) // to be life-time handled by QWidget parentship
 {
     mEncoderConfigEditor->setParent(this);
 

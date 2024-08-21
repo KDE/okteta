@@ -11,6 +11,8 @@
 
 // lib
 #include "kastengui_export.hpp"
+// Std
+#include <memory>
 
 namespace Kasten {
 
@@ -23,7 +25,7 @@ public:
     virtual ~AbstractModelStreamEncoderConfigEditorFactory();
 
 public:
-    virtual AbstractModelStreamEncoderConfigEditor* tryCreateConfigEditor(AbstractModelStreamEncoder* encoder) const = 0;
+    virtual std::unique_ptr<AbstractModelStreamEncoderConfigEditor> tryCreateConfigEditor(AbstractModelStreamEncoder* encoder) const = 0;
 };
 
 inline AbstractModelStreamEncoderConfigEditorFactory::~AbstractModelStreamEncoderConfigEditorFactory() = default;

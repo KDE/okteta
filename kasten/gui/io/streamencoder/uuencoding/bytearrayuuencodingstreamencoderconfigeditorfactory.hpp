@@ -25,7 +25,7 @@ public:
     ByteArrayUuencodingStreamEncoderConfigEditorFactory& operator=(const ByteArrayUuencodingStreamEncoderConfigEditorFactory&) = delete;
 
 public:
-    AbstractModelStreamEncoderConfigEditor* tryCreateConfigEditor(AbstractModelStreamEncoder* encoder) const override;
+    std::unique_ptr<AbstractModelStreamEncoderConfigEditor> tryCreateConfigEditor(AbstractModelStreamEncoder* encoder) const override;
 };
 
 }

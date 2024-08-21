@@ -46,9 +46,9 @@ void ModelCodecViewManagerPrivate::setDataGeneratorConfigEditorFactories(std::ve
     mGeneratorFactoryList = std::move(factoryList);
 }
 
-AbstractModelStreamEncoderConfigEditor* ModelCodecViewManagerPrivate::createConfigEditor(AbstractModelStreamEncoder* encoder) const
+std::unique_ptr<AbstractModelStreamEncoderConfigEditor> ModelCodecViewManagerPrivate::createConfigEditor(AbstractModelStreamEncoder* encoder) const
 {
-    AbstractModelStreamEncoderConfigEditor* result = nullptr;
+    std::unique_ptr<AbstractModelStreamEncoderConfigEditor> result;
 
     for (const auto& factory : mEncoderFactoryList) {
         result = factory->tryCreateConfigEditor(encoder);

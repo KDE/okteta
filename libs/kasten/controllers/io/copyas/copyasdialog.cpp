@@ -27,11 +27,11 @@
 namespace Kasten {
 
 CopyAsDialog::CopyAsDialog(const QString& remoteTypeName,
-                           AbstractModelStreamEncoderConfigEditor* configEditor,
+                           std::unique_ptr<AbstractModelStreamEncoderConfigEditor>&& configEditor,
                            AbstractModelStreamEncoder* encoder,
                            QWidget* parent)
     : QDialog(parent)
-    , mConfigEditor(configEditor)
+    , mConfigEditor(configEditor.release()) // to be life-time handled by QWidget parentship
     , m_encoder(encoder)
 {
     setAttribute(Qt::WA_DeleteOnClose, true);
@@ -56,7 +56,7 @@ CopyAsDialog::CopyAsDialog(const QString& remoteTypeName,
     splitter->addWidget(editorPage);
     splitter->setCollapsible(0, false);
 
-    mPreviewView = configEditor->createPreviewView();
+    mPreviewView = mConfigEditor->createPreviewView();
 
     if (mPreviewView) {
         auto* previewBox = new QGroupBox(i18nc("@title:group", "Preview"), this);
@@ -83,8 +83,8 @@ CopyAsDialog::CopyAsDialog(const QString& remoteTypeName,
     dialogButtonBox->addButton(QDialogButtonBox::Cancel);
     connect(dialogButtonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
-    exportButton->setEnabled(configEditor->isValid());
-    connect(configEditor, &AbstractModelStreamEncoderConfigEditor::validityChanged,
+    exportButton->setEnabled(mConfigEditor->isValid());
+    connect(mConfigEditor, &AbstractModelStreamEncoderConfigEditor::validityChanged,
             exportButton, &QWidget::setEnabled);
 
     // main layout

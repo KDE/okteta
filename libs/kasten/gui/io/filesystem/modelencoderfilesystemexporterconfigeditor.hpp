@@ -23,7 +23,7 @@ class KASTENGUI_EXPORT ModelEncoderFileSystemExporterConfigEditor : public Abstr
     Q_OBJECT
 
 public:
-    explicit ModelEncoderFileSystemExporterConfigEditor(AbstractModelStreamEncoderConfigEditor* encoderConfigEditor);
+    explicit ModelEncoderFileSystemExporterConfigEditor(std::unique_ptr<AbstractModelStreamEncoderConfigEditor>&& encoderConfigEditor);
     ~ModelEncoderFileSystemExporterConfigEditor() override;
 
 public: // AbstractModelExporterConfigEditor API

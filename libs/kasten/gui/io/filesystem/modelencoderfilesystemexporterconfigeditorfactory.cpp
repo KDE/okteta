@@ -11,6 +11,7 @@
 // lib
 #include "modelencoderfilesystemexporterconfigeditor.hpp"
 #include <abstractmodelstreamencoderconfigeditorfactory.hpp>
+#include <abstractmodelstreamencoderconfigeditor.hpp>
 // Kasten core
 #include <Kasten/ModelEncoderFileSystemExporter>
 
@@ -33,11 +34,11 @@ std::unique_ptr<AbstractModelExporterConfigEditor> ModelEncoderFileSystemExporte
     auto* modelEncoderFileSystemExporter = qobject_cast<ModelEncoderFileSystemExporter*>(exporter);
 
     if (modelEncoderFileSystemExporter) {
-        AbstractModelStreamEncoderConfigEditor* encoderConfigEditor =
+        auto encoderConfigEditor =
             mEncoderConfigEditorFactory->tryCreateConfigEditor(modelEncoderFileSystemExporter->encoder());
 
         if (encoderConfigEditor) {
-            result = std::make_unique<ModelEncoderFileSystemExporterConfigEditor>(encoderConfigEditor);
+            result = std::make_unique<ModelEncoderFileSystemExporterConfigEditor>(std::move(encoderConfigEditor));
         }
     }
 

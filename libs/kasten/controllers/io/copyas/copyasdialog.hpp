@@ -30,7 +30,7 @@ public:
     /**
      * @param configEditor the editor to embed, dialog takes ownership
      */
-    CopyAsDialog(const QString& remoteTypeName, AbstractModelStreamEncoderConfigEditor* configEditor,
+    CopyAsDialog(const QString& remoteTypeName, std::unique_ptr<AbstractModelStreamEncoderConfigEditor>&& configEditor,
                  AbstractModelStreamEncoder* encoder,
                  QWidget* parent = nullptr);
 

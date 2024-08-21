@@ -39,7 +39,7 @@ public:
     ~ModelCodecViewManager() override;
 
 public:
-    AbstractModelStreamEncoderConfigEditor* createConfigEditor(AbstractModelStreamEncoder* encoder) const;
+    std::unique_ptr<AbstractModelStreamEncoderConfigEditor> createConfigEditor(AbstractModelStreamEncoder* encoder) const;
     std::unique_ptr<AbstractModelExporterConfigEditor> createConfigEditor(AbstractModelExporter* exporter) const;
     std::unique_ptr<AbstractModelDataGeneratorConfigEditor> createConfigEditor(AbstractModelDataGenerator* generator) const;
 

@@ -18,13 +18,13 @@ ByteArrayIHexStreamEncoderConfigEditorFactory::ByteArrayIHexStreamEncoderConfigE
 
 ByteArrayIHexStreamEncoderConfigEditorFactory::~ByteArrayIHexStreamEncoderConfigEditorFactory() = default;
 
-AbstractModelStreamEncoderConfigEditor* ByteArrayIHexStreamEncoderConfigEditorFactory::tryCreateConfigEditor(AbstractModelStreamEncoder* encoder) const
+std::unique_ptr<AbstractModelStreamEncoderConfigEditor> ByteArrayIHexStreamEncoderConfigEditorFactory::tryCreateConfigEditor(AbstractModelStreamEncoder* encoder) const
 {
-    AbstractModelStreamEncoderConfigEditor* result = nullptr;
+    std::unique_ptr<AbstractModelStreamEncoderConfigEditor> result;
     auto* srecStreamEncoder = qobject_cast<ByteArrayIHexStreamEncoder*>(encoder);
 
     if (srecStreamEncoder) {
-        result = new ByteArrayIHexStreamEncoderConfigEditor(srecStreamEncoder);
+        result = std::make_unique<ByteArrayIHexStreamEncoderConfigEditor>(srecStreamEncoder);
     }
 
     return result;

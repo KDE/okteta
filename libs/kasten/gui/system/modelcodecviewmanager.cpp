@@ -10,6 +10,7 @@
 #include "modelcodecviewmanager_p.hpp"
 
 // lib
+#include <abstractmodelstreamencoderconfigeditor.hpp>
 #include <abstractmodelexporterconfigeditor.hpp>
 #include <abstractmodeldatageneratorconfigeditor.hpp>
 
@@ -36,7 +37,7 @@ void ModelCodecViewManager::setDataGeneratorConfigEditorFactories(std::vector<st
     d->setDataGeneratorConfigEditorFactories(std::move(factoryList));
 }
 
-AbstractModelStreamEncoderConfigEditor* ModelCodecViewManager::createConfigEditor(AbstractModelStreamEncoder* encoder) const
+std::unique_ptr<AbstractModelStreamEncoderConfigEditor> ModelCodecViewManager::createConfigEditor(AbstractModelStreamEncoder* encoder) const
 {
     Q_D(const ModelCodecViewManager);
 
