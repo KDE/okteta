@@ -34,17 +34,17 @@ void DocumentCreateManagerPrivate::setDocumentFactory(std::unique_ptr<AbstractDo
 
 void DocumentCreateManagerPrivate::createNew() const
 {
-    AbstractDocument* document = mFactory->create();
+    auto document = mFactory->create();
     if (document) {
-        mManager->addDocument(document);
+        mManager->addDocument(std::move(document));
     }
 }
 
 void DocumentCreateManagerPrivate::createNewFromData(const QMimeData* mimeData, bool setModified) const
 {
-    AbstractDocument* document = mFactory->createFromData(mimeData, setModified);
+    auto document = mFactory->createFromData(mimeData, setModified);
     if (document) {
-        mManager->addDocument(document);
+        mManager->addDocument(std::move(document));
     }
 }
 

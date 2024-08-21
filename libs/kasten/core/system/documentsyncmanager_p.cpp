@@ -256,7 +256,7 @@ void DocumentSyncManagerPrivate::save(AbstractDocument* document)
 void DocumentSyncManagerPrivate::onDocumentLoaded(AbstractDocument* document)
 {
     if (document) {
-        mManager->addDocument(document);
+        mManager->addDocument(std::unique_ptr<AbstractDocument>(document));
     }
 }
 

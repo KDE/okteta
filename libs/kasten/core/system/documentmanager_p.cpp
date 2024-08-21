@@ -40,15 +40,16 @@ DocumentManagerPrivate::~DocumentManagerPrivate()
     qDeleteAll(mList);
 } // TODO: destroy all documents?
 
-void DocumentManagerPrivate::addDocument(AbstractDocument* document)
+void DocumentManagerPrivate::addDocument(std::unique_ptr<AbstractDocument>&& document)
 {
     Q_Q(DocumentManager);
 
     // TODO: check for double insert
     document->setId(QString::number(++lastDocumentId));
-    mList.append(document);
+    auto* rawDocument = document.release();
+    mList.append(rawDocument);
     // TODO: only emit if document was not included before
-    const QVector<AbstractDocument*> addedDocuments { document };
+    const QVector<AbstractDocument*> addedDocuments { rawDocument };
     Q_EMIT q->added(addedDocuments);
 }
 

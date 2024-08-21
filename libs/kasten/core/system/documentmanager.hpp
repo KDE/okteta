@@ -38,7 +38,7 @@ public:
     ~DocumentManager() override;
 
 public:
-    void addDocument(AbstractDocument* document);
+    void addDocument(std::unique_ptr<AbstractDocument>&& document);
 
     void closeDocument(AbstractDocument* document);
     void closeDocuments(const QVector<AbstractDocument*>& documents);

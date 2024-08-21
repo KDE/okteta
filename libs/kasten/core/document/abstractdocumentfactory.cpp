@@ -8,6 +8,9 @@
 
 #include "abstractdocumentfactory.hpp"
 
+// lib
+#include "abstractdocument.hpp"
+
 namespace Kasten {
 
 AbstractDocumentFactory::~AbstractDocumentFactory() = default;
@@ -19,12 +22,12 @@ bool AbstractDocumentFactory::canCreateFromData(const QMimeData* mimeData)
     return false;
 }
 
-AbstractDocument* AbstractDocumentFactory::createFromData(const QMimeData* mimeData, bool setModified)
+std::unique_ptr<AbstractDocument> AbstractDocumentFactory::createFromData(const QMimeData* mimeData, bool setModified)
 {
     Q_UNUSED(mimeData)
     Q_UNUSED(setModified)
 
-    return nullptr;
+    return {};
 }
 
 }

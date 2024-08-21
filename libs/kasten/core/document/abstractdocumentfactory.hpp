@@ -13,6 +13,8 @@
 #include "kastencore_export.hpp"
 // Qt
 #include <QObject>
+// Std
+#include <memory>
 
 class QMimeData;
 
@@ -31,9 +33,9 @@ public: // API to be implemented
     /// default returns false
     virtual bool canCreateFromData(const QMimeData* mimeData);
 
-    virtual AbstractDocument* create() = 0;
+    virtual std::unique_ptr<AbstractDocument> create() = 0;
     /// default returns 0
-    virtual AbstractDocument* createFromData(const QMimeData* mimeData, bool setModified);
+    virtual std::unique_ptr<AbstractDocument> createFromData(const QMimeData* mimeData, bool setModified);
 };
 
 }

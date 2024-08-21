@@ -31,9 +31,9 @@ bool ByteArrayDocumentFactory::canCreateFromData(const QMimeData* mimeData)
     return true;
 }
 
-AbstractDocument* ByteArrayDocumentFactory::create()
+std::unique_ptr<AbstractDocument> ByteArrayDocumentFactory::create()
 {
-    auto* document = new ByteArrayDocument(i18nc("The byte array was new created.", "New created."));
+    auto document = std::make_unique<ByteArrayDocument>(i18nc("The byte array was new created.", "New created."));
 
     ++newByteArrayDocumentCounter;
 
@@ -47,7 +47,7 @@ AbstractDocument* ByteArrayDocumentFactory::create()
     return document;
 }
 
-AbstractDocument* ByteArrayDocumentFactory::createFromData(const QMimeData* mimeData, bool setModified)
+std::unique_ptr<AbstractDocument> ByteArrayDocumentFactory::createFromData(const QMimeData* mimeData, bool setModified)
 {
     if (!mimeData || mimeData->formats().isEmpty()) {
         return create();
@@ -70,7 +70,7 @@ AbstractDocument* ByteArrayDocumentFactory::createFromData(const QMimeData* mime
     byteArray->setModified(setModified);
 
     // TODO: pass name of generator
-    auto* document = new ByteArrayDocument(byteArray, i18nc("origin of the byte array", "Created from data."));
+    auto document = std::make_unique<ByteArrayDocument>(byteArray, i18nc("origin of the byte array", "Created from data."));
 
     ++newByteArrayDocumentCounter;
 

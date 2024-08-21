@@ -52,11 +52,11 @@ bool DocumentManager::isEmpty() const
     return d->isEmpty();
 }
 
-void DocumentManager::addDocument(AbstractDocument* document)
+void DocumentManager::addDocument(std::unique_ptr<AbstractDocument>&& document)
 {
     Q_D(DocumentManager);
 
-    d->addDocument(document);
+    d->addDocument(std::move(document));
 }
 
 void DocumentManager::closeDocument(AbstractDocument* document)
