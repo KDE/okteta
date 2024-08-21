@@ -86,14 +86,14 @@ void PrintTool::triggerPrint(QPrinter* printer)
     const int left = pageRect.left();
     const int width = pageRect.width();
 
-    auto* headerFrameRenderer = new HeaderFooterFrameRenderer(&info);
+    auto headerFrameRenderer = std::make_unique<HeaderFooterFrameRenderer>(&info);
     headerFrameRenderer->setTexts(QStringLiteral("%d"),
                                     QStringLiteral("%f"),
                                     i18nc("in the header of the printed page, e.g. Page 2 of 20", "Page %p of %P"));
     headerFrameRenderer->setWidth(width);
     headerFrameRenderer->setPos(pageRect.topLeft());
 
-    auto* footerFrameRenderer = new HeaderFooterFrameRenderer(&info);
+    auto footerFrameRenderer = std::make_unique<HeaderFooterFrameRenderer>(&info);
     footerFrameRenderer->setTexts(i18nc("in the footer of the printed page, e.g. Printed by: Joe User",
                                         "Printed by: %U"),
                                     QString(),
@@ -104,7 +104,7 @@ void PrintTool::triggerPrint(QPrinter* printer)
 
     const int contentHeight = pageRect.height() - footerFrameRenderer->height() - headerFrameRenderer->height();
     const int contentTop = pageRect.top() + headerFrameRenderer->height();
-    auto* byteArrayFrameRenderer = new ByteArrayFrameRenderer;
+    auto byteArrayFrameRenderer = std::make_unique<ByteArrayFrameRenderer>();
     byteArrayFrameRenderer->setPos(left, contentTop);
     byteArrayFrameRenderer->setWidth(width);
     byteArrayFrameRenderer->setHeight(contentHeight);
@@ -138,14 +138,15 @@ void PrintTool::triggerPrint(QPrinter* printer)
     byteArrayFrameRenderer->setUndefinedChar(mByteArrayView->undefinedChar());
     byteArrayFrameRenderer->showByteArrayColumns(mByteArrayView->visibleByteArrayCodings());
 
+    const int framesCount = byteArrayFrameRenderer->framesCount();
 //     if( !confirmPrintPageNumber( byteArrayFrameRenderer->framesCount()) )
 //         return;
 
-    framesPrinter.addFrameRenderer(headerFrameRenderer);
-    framesPrinter.addFrameRenderer(byteArrayFrameRenderer);
-    framesPrinter.addFrameRenderer(footerFrameRenderer);
+    framesPrinter.addFrameRenderer(std::move(headerFrameRenderer));
+    framesPrinter.addFrameRenderer(std::move(byteArrayFrameRenderer));
+    framesPrinter.addFrameRenderer(std::move(footerFrameRenderer));
 
-    info.setNoOfPages(byteArrayFrameRenderer->framesCount());
+    info.setNoOfPages(framesCount);
     AbstractModelSynchronizer* synchronizer = mDocument->synchronizer();
     if (synchronizer) {
         info.setUrl(synchronizer->url());
@@ -153,7 +154,7 @@ void PrintTool::triggerPrint(QPrinter* printer)
 
     QApplication::setOverrideCursor(Qt::WaitCursor);
 
-    auto* printJob = new PrintJob(&framesPrinter, 0, byteArrayFrameRenderer->framesCount() - 1, printer);
+    auto* printJob = new PrintJob(&framesPrinter, 0, framesCount - 1, printer);
     const bool success = printJob->exec();
 
     delete printer;

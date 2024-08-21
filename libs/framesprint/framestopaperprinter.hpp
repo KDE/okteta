@@ -31,7 +31,7 @@ public:
     void setPaperRect(QRect paperRect);
     void setPageRect(QRect pageRect);
 
-    void addFrameRenderer(AbstractFrameRenderer* frameRenderer);
+    void addFrameRenderer(std::unique_ptr<AbstractFrameRenderer>&& frameRenderer);
 
     bool print(QPrinter* printer, int firstPageIndex, int lastPageIndex);
 
