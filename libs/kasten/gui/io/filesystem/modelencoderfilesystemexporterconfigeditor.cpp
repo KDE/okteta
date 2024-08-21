@@ -20,9 +20,11 @@ namespace Kasten {
 ModelEncoderFileSystemExporterConfigEditor::ModelEncoderFileSystemExporterConfigEditor(AbstractModelStreamEncoderConfigEditor* encoderConfigEditor)
     : mEncoderConfigEditor(encoderConfigEditor)
 {
+    mEncoderConfigEditor->setParent(this);
+
     auto* layout = new QHBoxLayout(this);
     layout->setSpacing(0);
-    layout->addWidget(mEncoderConfigEditor.get());
+    layout->addWidget(mEncoderConfigEditor);
 }
 
 ModelEncoderFileSystemExporterConfigEditor::~ModelEncoderFileSystemExporterConfigEditor() = default;

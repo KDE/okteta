@@ -31,7 +31,7 @@ public: // AbstractModelExporterConfigEditor API
     std::unique_ptr<AbstractSelectionView> createPreviewView() const override;
 
 private:
-    const std::unique_ptr<AbstractModelStreamEncoderConfigEditor> mEncoderConfigEditor;
+    AbstractModelStreamEncoderConfigEditor* const mEncoderConfigEditor;
 };
 
 }
