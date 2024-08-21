@@ -26,9 +26,9 @@ ModelEncoderFileSystemExporterConfigEditorFactory::~ModelEncoderFileSystemExport
     // TODO: do not delete mEncoderConfigEditorFactory here, is deleted outside, no clear control that way
 }
 
-AbstractModelExporterConfigEditor* ModelEncoderFileSystemExporterConfigEditorFactory::tryCreateConfigEditor(AbstractModelExporter* exporter) const
+std::unique_ptr<AbstractModelExporterConfigEditor> ModelEncoderFileSystemExporterConfigEditorFactory::tryCreateConfigEditor(AbstractModelExporter* exporter) const
 {
-    AbstractModelExporterConfigEditor* result = nullptr;
+    std::unique_ptr<AbstractModelExporterConfigEditor> result;
 
     auto* modelEncoderFileSystemExporter = qobject_cast<ModelEncoderFileSystemExporter*>(exporter);
 
@@ -37,7 +37,7 @@ AbstractModelExporterConfigEditor* ModelEncoderFileSystemExporterConfigEditorFac
             mEncoderConfigEditorFactory->tryCreateConfigEditor(modelEncoderFileSystemExporter->encoder());
 
         if (encoderConfigEditor) {
-            result = new ModelEncoderFileSystemExporterConfigEditor(encoderConfigEditor);
+            result = std::make_unique<ModelEncoderFileSystemExporterConfigEditor>(encoderConfigEditor);
         }
     }
 

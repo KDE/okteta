@@ -60,9 +60,9 @@ AbstractModelStreamEncoderConfigEditor* ModelCodecViewManagerPrivate::createConf
     return result;
 }
 
-AbstractModelExporterConfigEditor* ModelCodecViewManagerPrivate::createConfigEditor(AbstractModelExporter* exporter) const
+std::unique_ptr<AbstractModelExporterConfigEditor> ModelCodecViewManagerPrivate::createConfigEditor(AbstractModelExporter* exporter) const
 {
-    AbstractModelExporterConfigEditor* result = nullptr;
+    std::unique_ptr<AbstractModelExporterConfigEditor> result;
 
     for (const auto& factory : mExporterFactoryList) {
         result = factory->tryCreateConfigEditor(exporter);

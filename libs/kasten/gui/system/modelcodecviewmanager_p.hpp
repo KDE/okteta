@@ -37,7 +37,7 @@ public:
 
 public:
     AbstractModelStreamEncoderConfigEditor* createConfigEditor(AbstractModelStreamEncoder* encoder) const;
-    AbstractModelExporterConfigEditor* createConfigEditor(AbstractModelExporter* exporter) const;
+    std::unique_ptr<AbstractModelExporterConfigEditor> createConfigEditor(AbstractModelExporter* exporter) const;
     std::unique_ptr<AbstractModelDataGeneratorConfigEditor> createConfigEditor(AbstractModelDataGenerator* generator) const;
 
 public:

@@ -97,11 +97,10 @@ void ExportController::onActionTriggered(QAction* action)
 
     const AbstractModelSelection* selection = mSelectionControl ? mSelectionControl->modelSelection() : nullptr;
 
-    AbstractModelExporterConfigEditor* configEditor =
-        mModelCodecViewManager->createConfigEditor(exporter);
+    auto configEditor = mModelCodecViewManager->createConfigEditor(exporter);
 
     if (configEditor) {
-        auto* dialog = new ExportDialog(exporter->remoteTypeName(), configEditor, exporter,
+        auto* dialog = new ExportDialog(exporter->remoteTypeName(), std::move(configEditor), exporter,
                                         QApplication::activeWindow());
         dialog->setData(mModel, selection);
         connect(dialog, &ExportDialog::exportAccepted, this, &ExportController::triggerExecution);

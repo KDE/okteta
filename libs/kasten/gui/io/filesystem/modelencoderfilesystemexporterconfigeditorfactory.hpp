@@ -23,7 +23,7 @@ public:
     ~ModelEncoderFileSystemExporterConfigEditorFactory() override;
 
 public:
-    AbstractModelExporterConfigEditor* tryCreateConfigEditor(AbstractModelExporter* exporter) const override;
+    std::unique_ptr<AbstractModelExporterConfigEditor> tryCreateConfigEditor(AbstractModelExporter* exporter) const override;
 
 private:
     AbstractModelStreamEncoderConfigEditorFactory* mEncoderConfigEditorFactory;

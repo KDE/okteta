@@ -27,7 +27,7 @@ class ExportDialog : public QDialog
     Q_OBJECT
 
 public:
-    ExportDialog(const QString& remoteTypeName, AbstractModelExporterConfigEditor* configEditor,
+    ExportDialog(const QString& remoteTypeName, std::unique_ptr<AbstractModelExporterConfigEditor>&& configEditor,
                  AbstractModelExporter* exporter,
                  QWidget* parent = nullptr);
 
