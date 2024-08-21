@@ -27,7 +27,7 @@ public:
     ViewManagerPrivate& operator=(const ViewManagerPrivate&) = delete;
 
 public:
-    void setViewFactory(AbstractViewFactory* factory);
+    void setViewFactory(std::unique_ptr<AbstractViewFactory>&& factory);
 
     void createCopyOfView(AbstractView* view, Qt::Alignment alignment = {});
     void removeViews(const QVector<AbstractView*>& views);

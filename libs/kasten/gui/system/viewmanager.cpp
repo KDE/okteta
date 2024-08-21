@@ -25,11 +25,11 @@ ModelCodecViewManager* ViewManager::codecViewManager() const
     return d->codecViewManager();
 }
 
-void ViewManager::setViewFactory(AbstractViewFactory* factory)
+void ViewManager::setViewFactory(std::unique_ptr<AbstractViewFactory>&& factory)
 {
     Q_D(ViewManager);
 
-    d->setViewFactory(factory);
+    d->setViewFactory(std::move(factory));
 }
 
 QVector<AbstractView*> ViewManager::views() const

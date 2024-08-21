@@ -118,7 +118,7 @@ int OktetaProgram::execute()
     mDocumentManager->syncManager()->setOverwriteDialog(mDialogHandler.get());
     mDocumentManager->syncManager()->setSaveDiscardDialog(mDialogHandler.get());
 
-    mViewManager->setViewFactory(new ByteArrayViewFactory(mByteArrayViewProfileManager.get()));
+    mViewManager->setViewFactory(std::make_unique<ByteArrayViewFactory>(mByteArrayViewProfileManager.get()));
     mViewManager->codecViewManager()->setStreamEncoderConfigEditorFactories(std::move(encoderConfigEditorFactoryList));
     mViewManager->codecViewManager()->setDataGeneratorConfigEditorFactories(std::move(generatorConfigEditorFactoryList));
 

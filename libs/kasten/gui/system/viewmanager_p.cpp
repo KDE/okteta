@@ -34,9 +34,9 @@ ViewManagerPrivate::~ViewManagerPrivate()
     qDeleteAll(mViewList);
 }
 
-void ViewManagerPrivate::setViewFactory(AbstractViewFactory* factory)
+void ViewManagerPrivate::setViewFactory(std::unique_ptr<AbstractViewFactory>&& factory)
 {
-    mFactory.reset(factory);
+    mFactory = std::move(factory);
 }
 
 QVector<AbstractView*> ViewManagerPrivate::views() const
