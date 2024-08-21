@@ -248,8 +248,9 @@ void ReplaceJobTest::testReplace()
         queryAgent = std::make_unique<TestReplaceUserQueryAgent>(replies);
     }
 
-    auto* byteArray = new Okteta::PieceTableByteArrayModel(originalData);
-    auto document = std::make_unique<Kasten::ByteArrayDocument>(byteArray, QStringLiteral("init"));
+    auto byteArray = std::make_unique<Okteta::PieceTableByteArrayModel>(originalData);
+    auto* const rawByteArray = byteArray.get();
+    auto document = std::make_unique<Kasten::ByteArrayDocument>(std::move(byteArray), QStringLiteral("init"));
     auto view = std::make_unique<Kasten::ByteArrayView>(document.get(), nullptr);
 
     Okteta::Address  replaceFirstIndex;
@@ -257,15 +258,15 @@ void ReplaceJobTest::testReplace()
     if (!backwards && startIndex > 0) {
         replaceFirstIndex = startIndex;
         replaceLastIndex =  startIndex - 1;
-    } else if (backwards && startIndex < byteArray->size())  {
+    } else if (backwards && startIndex < rawByteArray->size())  {
         replaceFirstIndex = startIndex + 1;
         replaceLastIndex =  startIndex;
     } else {
         replaceFirstIndex = 0;
-        replaceLastIndex =  byteArray->size() - 1;
+        replaceLastIndex =  rawByteArray->size() - 1;
     }
 
-    auto job = std::make_unique<Kasten::ReplaceJob>(view.get(), byteArray, queryAgent.get());
+    auto job = std::make_unique<Kasten::ReplaceJob>(view.get(), rawByteArray, queryAgent.get());
     job->setSearchData(searchData);
     job->setReplaceData(replaceData);
     job->setRange(replaceFirstIndex, replaceLastIndex,
@@ -281,7 +282,7 @@ void ReplaceJobTest::testReplace()
 
     QCOMPARE(finishedSpy.size(), 1);
 
-    compare(byteArray, expectedData);
+    compare(rawByteArray, expectedData);
 
     const int beforeWrap = queryAgent ? queryAgent->noOfReplacements() : 0;
     const QList<QVariant> arguments = finishedSpy.takeFirst();

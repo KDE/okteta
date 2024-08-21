@@ -41,7 +41,7 @@ class OKTETAKASTENCORE_EXPORT ByteArrayDocument : public AbstractDocument
 
 public:
     explicit ByteArrayDocument(const QString& initDescription);
-    ByteArrayDocument(Okteta::PieceTableByteArrayModel* byteArray, const QString& initDescription);
+    ByteArrayDocument(std::unique_ptr<Okteta::PieceTableByteArrayModel>&& byteArray, const QString& initDescription);
     ~ByteArrayDocument() override;
 
 public: // AbstractModel API

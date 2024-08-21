@@ -31,8 +31,8 @@ ByteArrayDocument::ByteArrayDocument(const QString& initDescription)
 
 ByteArrayDocument::~ByteArrayDocument() = default;
 
-ByteArrayDocument::ByteArrayDocument(Okteta::PieceTableByteArrayModel* byteArray, const QString& initDescription)
-    : mByteArray(byteArray)
+ByteArrayDocument::ByteArrayDocument(std::unique_ptr<Okteta::PieceTableByteArrayModel>&& byteArray, const QString& initDescription)
+    : mByteArray(std::move(byteArray))
     , mInitDescription(initDescription)
 {
     connect(mByteArray.get(), &PieceTableByteArrayModel::modifiedChanged, this, &ByteArrayDocument::onModelModified);

@@ -411,8 +411,8 @@ void SearchToolTest::testSearch()
 
     const ViewData viewData = parseToViewData(viewMarkup);
 
-    auto* byteArray = new Okteta::PieceTableByteArrayModel(viewData.data);
-    auto document = std::make_unique<Kasten::ByteArrayDocument>(byteArray, QStringLiteral("init"));
+    auto byteArray = std::make_unique<Okteta::PieceTableByteArrayModel>(viewData.data);
+    auto document = std::make_unique<Kasten::ByteArrayDocument>(std::move(byteArray), QStringLiteral("init"));
     auto view = std::make_unique<Kasten::ByteArrayView>(document.get(), nullptr);
 
     auto queryAgent = std::make_unique<TestSearchUserQueryable>();

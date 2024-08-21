@@ -49,13 +49,13 @@ void ByteArrayRawFileLoadThread::run()
             success = (inStream.status() == QDataStream::Ok);
 
             if (success) {
-                auto* byteArray = new Okteta::PieceTableByteArrayModel(data);
+                auto byteArray = std::make_unique<Okteta::PieceTableByteArrayModel>(data);
                 byteArray->setModified(false);
-
-                mDocument = new ByteArrayDocument(byteArray, i18nc("destination of the byte array", "Loaded from file."));
-//                 mDocument->setOwner(Person::createEgo());
                 // TODO: make PieceTableByteArrayModel a child by constructor argument parent
                 byteArray->moveToThread(QCoreApplication::instance()->thread());
+
+                mDocument = new ByteArrayDocument(std::move(byteArray), i18nc("destination of the byte array", "Loaded from file."));
+//                 mDocument->setOwner(Person::createEgo());
                 mDocument->moveToThread(QCoreApplication::instance()->thread());
             } else {
                 mErrorString = mFile->errorString();

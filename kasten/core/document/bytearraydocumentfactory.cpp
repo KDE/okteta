@@ -66,11 +66,11 @@ std::unique_ptr<AbstractDocument> ByteArrayDocumentFactory::createFromData(const
 
     const QByteArray data = mimeData->data(dataFormatName);
 
-    auto* byteArray = new Okteta::PieceTableByteArrayModel(data);
+    auto byteArray = std::make_unique<Okteta::PieceTableByteArrayModel>(data);
     byteArray->setModified(setModified);
 
     // TODO: pass name of generator
-    auto document = std::make_unique<ByteArrayDocument>(byteArray, i18nc("origin of the byte array", "Created from data."));
+    auto document = std::make_unique<ByteArrayDocument>(std::move(byteArray), i18nc("origin of the byte array", "Created from data."));
 
     ++newByteArrayDocumentCounter;
 
