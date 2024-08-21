@@ -59,6 +59,11 @@ OktetaProgram::OktetaProgram(int& argc, char* argv[])
 {
     QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
     KLocalizedString::setApplicationDomain("okteta");
+
+    OktetaAboutData aboutData;
+    KAboutData::setApplicationData(aboutData);
+    QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("okteta")));
+
     KCrash::initialize();
 }
 
@@ -78,10 +83,7 @@ int OktetaProgram::execute()
     mDocumentStrategy = new MultiDocumentStrategy(mDocumentManager, mViewManager);
     mDialogHandler = new DialogHandler();
 
-    OktetaAboutData aboutData;
-    KAboutData::setApplicationData(aboutData);
-    QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("okteta")));
-
+    KAboutData aboutData = KAboutData::applicationData();
     QCommandLineParser parser;
     aboutData.setupCommandLine(&parser);
 
