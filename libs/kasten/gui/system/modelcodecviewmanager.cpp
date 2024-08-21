@@ -9,6 +9,8 @@
 #include "modelcodecviewmanager.hpp"
 #include "modelcodecviewmanager_p.hpp"
 
+// lib
+#include <abstractmodeldatageneratorconfigeditor.hpp>
 
 namespace Kasten {
 
@@ -47,7 +49,7 @@ AbstractModelExporterConfigEditor* ModelCodecViewManager::createConfigEditor(Abs
     return d->createConfigEditor(exporter);
 }
 
-AbstractModelDataGeneratorConfigEditor* ModelCodecViewManager::createConfigEditor(AbstractModelDataGenerator* generator) const
+std::unique_ptr<AbstractModelDataGeneratorConfigEditor> ModelCodecViewManager::createConfigEditor(AbstractModelDataGenerator* generator) const
 {
     Q_D(const ModelCodecViewManager);
 

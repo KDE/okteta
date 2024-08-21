@@ -18,14 +18,14 @@ ByteArrayRandomDataGeneratorConfigEditorFactory::ByteArrayRandomDataGeneratorCon
 
 ByteArrayRandomDataGeneratorConfigEditorFactory::~ByteArrayRandomDataGeneratorConfigEditorFactory() = default;
 
-AbstractModelDataGeneratorConfigEditor* ByteArrayRandomDataGeneratorConfigEditorFactory::tryCreateConfigEditor(AbstractModelDataGenerator* generator) const
+std::unique_ptr<AbstractModelDataGeneratorConfigEditor> ByteArrayRandomDataGeneratorConfigEditorFactory::tryCreateConfigEditor(AbstractModelDataGenerator* generator) const
 {
-    AbstractModelDataGeneratorConfigEditor* result = nullptr;
+    std::unique_ptr<AbstractModelDataGeneratorConfigEditor> result;
 
     auto* randomDataGenerator = qobject_cast<ByteArrayRandomDataGenerator*>(generator);
 
     if (randomDataGenerator) {
-        result = new ByteArrayRandomDataGeneratorConfigEditor(randomDataGenerator);
+        result = std::make_unique<ByteArrayRandomDataGeneratorConfigEditor>(randomDataGenerator);
     }
 
     return result;

@@ -22,7 +22,7 @@ class CreateDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit CreateDialog(AbstractModelDataGeneratorConfigEditor* configEditor,
+    explicit CreateDialog(std::unique_ptr<AbstractModelDataGeneratorConfigEditor>&& configEditor,
                           AbstractModelDataGenerator* generator,
                           QWidget* parent = nullptr);
 

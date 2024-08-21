@@ -41,7 +41,7 @@ public:
 public:
     AbstractModelStreamEncoderConfigEditor* createConfigEditor(AbstractModelStreamEncoder* encoder) const;
     AbstractModelExporterConfigEditor* createConfigEditor(AbstractModelExporter* exporter) const;
-    AbstractModelDataGeneratorConfigEditor* createConfigEditor(AbstractModelDataGenerator* generator) const;
+    std::unique_ptr<AbstractModelDataGeneratorConfigEditor> createConfigEditor(AbstractModelDataGenerator* generator) const;
 
 public:
     void setStreamEncoderConfigEditorFactories(std::vector<std::unique_ptr<AbstractModelStreamEncoderConfigEditorFactory>>&& factoryList);

@@ -11,6 +11,8 @@
 
 // lib
 #include "kastengui_export.hpp"
+// Std
+#include <memory>
 
 namespace Kasten {
 
@@ -23,7 +25,7 @@ public:
     virtual ~AbstractModelDataGeneratorConfigEditorFactory();
 
 public:
-    virtual AbstractModelDataGeneratorConfigEditor* tryCreateConfigEditor(AbstractModelDataGenerator* generator) const = 0;
+    virtual std::unique_ptr<AbstractModelDataGeneratorConfigEditor> tryCreateConfigEditor(AbstractModelDataGenerator* generator) const = 0;
 };
 
 inline AbstractModelDataGeneratorConfigEditorFactory::~AbstractModelDataGeneratorConfigEditorFactory() = default;

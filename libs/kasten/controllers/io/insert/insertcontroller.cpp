@@ -100,11 +100,10 @@ void InsertController::onActionTriggered(QAction* action)
 {
     auto* generator = action->data().value<AbstractModelDataGenerator*>();
 
-    AbstractModelDataGeneratorConfigEditor* configEditor =
-        mModelCodecViewManager->createConfigEditor(generator);
+    auto configEditor = mModelCodecViewManager->createConfigEditor(generator);
 
     if (configEditor) {
-        auto* dialog = new InsertDialog(configEditor, generator, QApplication::activeWindow());
+        auto* dialog = new InsertDialog(std::move(configEditor), generator, QApplication::activeWindow());
 //         dialog->setData( mModel, selection ); TODO
         connect(dialog, &InsertDialog::insertAccepted, this, &InsertController::triggerExecution);
         dialog->open();

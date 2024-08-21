@@ -22,11 +22,11 @@
 
 namespace Kasten {
 
-CreateDialog::CreateDialog(AbstractModelDataGeneratorConfigEditor* configEditor,
+CreateDialog::CreateDialog(std::unique_ptr<AbstractModelDataGeneratorConfigEditor>&& configEditor,
                            AbstractModelDataGenerator* generator,
                            QWidget* parent)
     : QDialog(parent)
-    , mConfigEditor(configEditor)
+    , mConfigEditor(configEditor.release()) // to be life-time handled by QWidget parentship
     , m_generator(generator)
 {
     setAttribute(Qt::WA_DeleteOnClose, true);
@@ -56,8 +56,8 @@ CreateDialog::CreateDialog(AbstractModelDataGeneratorConfigEditor* configEditor,
     dialogButtonBox->addButton(QDialogButtonBox::Cancel);
     connect(dialogButtonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
-    createButton->setEnabled(configEditor->isValid());
-    connect(configEditor, &AbstractModelDataGeneratorConfigEditor::validityChanged,
+    createButton->setEnabled(mConfigEditor->isValid());
+    connect(mConfigEditor, &AbstractModelDataGeneratorConfigEditor::validityChanged,
             createButton, &QWidget::setEnabled);
 
     // main layout

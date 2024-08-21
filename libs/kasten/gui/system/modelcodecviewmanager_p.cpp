@@ -74,9 +74,9 @@ AbstractModelExporterConfigEditor* ModelCodecViewManagerPrivate::createConfigEdi
     return result;
 }
 
-AbstractModelDataGeneratorConfigEditor* ModelCodecViewManagerPrivate::createConfigEditor(AbstractModelDataGenerator* generator) const
+std::unique_ptr<AbstractModelDataGeneratorConfigEditor> ModelCodecViewManagerPrivate::createConfigEditor(AbstractModelDataGenerator* generator) const
 {
-    AbstractModelDataGeneratorConfigEditor* result = nullptr;
+    std::unique_ptr<AbstractModelDataGeneratorConfigEditor> result;
 
     for (const auto& factory : mGeneratorFactoryList) {
         result = factory->tryCreateConfigEditor(generator);

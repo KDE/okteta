@@ -99,12 +99,11 @@ void SingleDocumentStrategyPrivate::createNewWithGenerator(AbstractModelDataGene
         return;
     }
 
-    AbstractModelDataGeneratorConfigEditor* configEditor =
-        mViewManager->codecViewManager()->createConfigEditor(generator);
+    auto configEditor = mViewManager->codecViewManager()->createConfigEditor(generator);
 
     if (configEditor) {
         // TODO: make dialog abstract for different UIs
-        auto* dialog = new CreateDialog(configEditor, generator, QApplication::activeWindow());
+        auto* dialog = new CreateDialog(std::move(configEditor), generator, QApplication::activeWindow());
 //         dialog->setData( mModel, selection ); TODO
         QObject::connect(dialog, &CreateDialog::createAccepted, q, [this](AbstractModelDataGenerator* generator) {
             triggerGeneration(generator);

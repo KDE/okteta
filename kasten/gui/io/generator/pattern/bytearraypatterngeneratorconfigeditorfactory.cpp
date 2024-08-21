@@ -18,14 +18,14 @@ ByteArrayPatternGeneratorConfigEditorFactory::ByteArrayPatternGeneratorConfigEdi
 
 ByteArrayPatternGeneratorConfigEditorFactory::~ByteArrayPatternGeneratorConfigEditorFactory() = default;
 
-AbstractModelDataGeneratorConfigEditor* ByteArrayPatternGeneratorConfigEditorFactory::tryCreateConfigEditor(AbstractModelDataGenerator* generator) const
+std::unique_ptr<AbstractModelDataGeneratorConfigEditor> ByteArrayPatternGeneratorConfigEditorFactory::tryCreateConfigEditor(AbstractModelDataGenerator* generator) const
 {
-    AbstractModelDataGeneratorConfigEditor* result = nullptr;
+    std::unique_ptr<AbstractModelDataGeneratorConfigEditor> result;
 
     auto* patternGenerator = qobject_cast<ByteArrayPatternGenerator*>(generator);
 
     if (patternGenerator) {
-        result = new ByteArrayPatternGeneratorConfigEditor(patternGenerator);
+        result = std::make_unique<ByteArrayPatternGeneratorConfigEditor>(patternGenerator);
     }
 
     return result;
