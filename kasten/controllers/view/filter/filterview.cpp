@@ -118,10 +118,10 @@ void FilterView::addFilters()
         mOperationComboBox->addItem(filter->name());
 
         const char* parameterSetId = filter->parameterSet()->id();
-        AbstractByteArrayFilterParameterSetEdit* parameterEdit =
+        std::unique_ptr<AbstractByteArrayFilterParameterSetEdit> parameterEdit =
             ByteArrayFilterParameterSetEditFactory::createEdit(parameterSetId);
 
-        mParameterSetEditStack->addWidget(parameterEdit);
+        mParameterSetEditStack->addWidget(parameterEdit.release()); // life-time handled by QWidget parentship
     }
 
     onFilterChanged(mTool->filterId());

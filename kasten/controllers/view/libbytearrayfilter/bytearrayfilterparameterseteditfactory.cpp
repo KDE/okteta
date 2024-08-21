@@ -19,26 +19,26 @@
 //// #include "filter/my_bytearrayfilterparametersetedit.hpp"
 //// NEWFILTERPARAMETERSET(end)
 
-AbstractByteArrayFilterParameterSetEdit* ByteArrayFilterParameterSetEditFactory::createEdit(const char* id)
+std::unique_ptr<AbstractByteArrayFilterParameterSetEdit> ByteArrayFilterParameterSetEditFactory::createEdit(const char* id)
 {
-    AbstractByteArrayFilterParameterSetEdit* result;
+    std::unique_ptr<AbstractByteArrayFilterParameterSetEdit> result;
 
     if (qstrcmp(id, OperandByteArrayFilterParameterSetEdit::Id) == 0) {
-        result = new OperandByteArrayFilterParameterSetEdit();
+        result = std::make_unique<OperandByteArrayFilterParameterSetEdit>();
     } else if (qstrcmp(id, ReverseByteArrayFilterParameterSetEdit::Id) == 0) {
-        result = new ReverseByteArrayFilterParameterSetEdit();
+        result = std::make_unique<ReverseByteArrayFilterParameterSetEdit>();
     } else if (qstrcmp(id, RotateByteArrayFilterParameterSetEdit::Id) == 0) {
-        result = new RotateByteArrayFilterParameterSetEdit();
+        result = std::make_unique<RotateByteArrayFilterParameterSetEdit>();
     }
 //// NEWFILTERPARAMETERSET(start)
 //// Here add the check for the id of your parameter set
 //// and if it matches the creation of the widget
 //// e.g.
 ////     else if (qstrcmp(id, My_ByteArrayFilterParameterSetEdit::Id) == 0)
-////         result = new My_ByteArrayFilterParameterSetEdit();
+////         result = std::make_unique<My_ByteArrayFilterParameterSetEdit>();
 //// NEWFILTERPARAMETERSET(end)
     else { // if (qstrcmp(id, NoByteArrayFilterParameterSetEdit::Id) == 0) TODO: default should be a message "Not found"
-        result = new NoByteArrayFilterParameterSetEdit();
+        result = std::make_unique<NoByteArrayFilterParameterSetEdit>();
     }
 
     return result;

@@ -9,6 +9,9 @@
 #ifndef KASTEN_BYTEARRAYFILTERPARAMETERSETEDITFACTORY_HPP
 #define KASTEN_BYTEARRAYFILTERPARAMETERSETEDITFACTORY_HPP
 
+// Std
+#include <memory>
+
 class AbstractByteArrayFilterParameterSetEdit;
 class QByteArray;
 
@@ -21,7 +24,7 @@ public:
     ByteArrayFilterParameterSetEditFactory& operator=(const ByteArrayFilterParameterSetEditFactory&) = delete;
 
 public:
-    static AbstractByteArrayFilterParameterSetEdit* createEdit(const char* id);
+    static std::unique_ptr<AbstractByteArrayFilterParameterSetEdit> createEdit(const char* id);
 };
 
 #endif
