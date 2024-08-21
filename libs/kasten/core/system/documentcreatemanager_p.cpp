@@ -27,9 +27,9 @@ bool DocumentCreateManagerPrivate::canCreateNewFromData(const QMimeData* mimeDat
     return mFactory->canCreateFromData(mimeData);
 }
 
-void DocumentCreateManagerPrivate::setDocumentFactory(AbstractDocumentFactory* factory)
+void DocumentCreateManagerPrivate::setDocumentFactory(std::unique_ptr<AbstractDocumentFactory>&& factory)
 {
-    mFactory.reset(factory);
+    mFactory = std::move(factory);
 }
 
 void DocumentCreateManagerPrivate::createNew() const

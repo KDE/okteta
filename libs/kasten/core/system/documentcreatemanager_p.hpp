@@ -35,7 +35,7 @@ public:
     void createNewFromData(const QMimeData* mimeData, bool setModified) const;
 
 public:
-    void setDocumentFactory(AbstractDocumentFactory* factory);
+    void setDocumentFactory(std::unique_ptr<AbstractDocumentFactory>&& factory);
 
 private:
     // unless there is a singleton

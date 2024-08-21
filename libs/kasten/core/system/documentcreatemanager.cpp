@@ -25,11 +25,11 @@ bool DocumentCreateManager::canCreateNewFromData(const QMimeData* mimeData) cons
     return d->canCreateNewFromData(mimeData);
 }
 
-void DocumentCreateManager::setDocumentFactory(AbstractDocumentFactory* factory)
+void DocumentCreateManager::setDocumentFactory(std::unique_ptr<AbstractDocumentFactory>&& factory)
 {
     Q_D(DocumentCreateManager);
 
-    d->setDocumentFactory(factory);
+    d->setDocumentFactory(std::move(factory));
 }
 
 void DocumentCreateManager::createNew() const
