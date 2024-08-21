@@ -21,23 +21,23 @@ public:
 
 public:
     // TODO: there can be views not only on documents
-    virtual AbstractView* createViewFor(AbstractDocument* document) = 0;
+    virtual std::unique_ptr<AbstractView> createViewFor(AbstractDocument* document) = 0;
     // TODO: is alignment best done here? needs view to be stable on creation of view copy
     // doesn't work if the new view is not next to the old, but are there usecases for this?
     /**
      * @param alignment on which side the new view is placed to show a continuous whole view
      */
-    virtual AbstractView* createCopyOfView(AbstractView* view, Qt::Alignment alignment = {});
+    virtual std::unique_ptr<AbstractView> createCopyOfView(AbstractView* view, Qt::Alignment alignment = {});
 };
 
 inline AbstractViewFactory::~AbstractViewFactory() = default;
 
 // TODO: is this default implementation useful? Like, if the base is not a document, but a subdocument/model?
-inline AbstractView* AbstractViewFactory::createCopyOfView(AbstractView* view, Qt::Alignment alignment)
+inline std::unique_ptr<AbstractView> AbstractViewFactory::createCopyOfView(AbstractView* view, Qt::Alignment alignment)
 {
     Q_UNUSED(alignment)
 
-    AbstractView * viewCopy = createViewFor(view->findBaseModel<AbstractDocument*>());
+    auto viewCopy = createViewFor(view->findBaseModel<AbstractDocument*>());
     if (viewCopy) {
         viewCopy->setReadOnly(view->isReadOnly());
     }

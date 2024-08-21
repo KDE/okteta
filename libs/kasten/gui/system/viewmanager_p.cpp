@@ -57,15 +57,17 @@ void ViewManagerPrivate::createCopyOfView(AbstractView* view, Qt::Alignment alig
 {
     Q_Q(ViewManager);
 
-    AbstractView* viewCopy = mFactory->createCopyOfView(view, alignment);
+    auto viewCopy = mFactory->createCopyOfView(view, alignment);
     if (!viewCopy) {
         auto* documentOfView = view->findBaseModel<AbstractDocument*>();
-        viewCopy = new DummyView(documentOfView);
+        viewCopy = std::make_unique<DummyView>(documentOfView);
     }
 
-    mViewList.append(viewCopy);
+    auto* rawViewCopy = viewCopy.release();
 
-    const QVector<Kasten::AbstractView*> views { viewCopy };
+    mViewList.append(rawViewCopy);
+
+    const QVector<Kasten::AbstractView*> views { rawViewCopy };
     Q_EMIT q->opened(views);
 }
 
@@ -78,13 +80,14 @@ void ViewManagerPrivate::createViewsFor(const QVector<Kasten::AbstractDocument*>
     openedViews.reserve(documents.size());
     mViewList.reserve(mViewList.size() + documents.size());
     for (AbstractDocument* document : documents) {
-        AbstractView* view = mFactory->createViewFor(document);
+        auto view = mFactory->createViewFor(document);
         if (!view) {
-            view = new DummyView(document);
+            view = std::make_unique<DummyView>(document);
         }
 
-        mViewList.append(view);
-        openedViews.append(view);
+        auto* rawView = view.release();
+        mViewList.append(rawView);
+        openedViews.append(rawView);
     }
 
     if (!openedViews.isEmpty()) {

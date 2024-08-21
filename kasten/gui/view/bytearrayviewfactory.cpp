@@ -22,9 +22,9 @@ ByteArrayViewFactory::ByteArrayViewFactory(ByteArrayViewProfileManager* byteArra
 {
 }
 
-AbstractView* ByteArrayViewFactory::createViewFor(AbstractDocument* _document)
+std::unique_ptr<AbstractView> ByteArrayViewFactory::createViewFor(AbstractDocument* _document)
 {
-    ByteArrayView* result = nullptr;
+    std::unique_ptr<ByteArrayView> result;
 
     auto* document = static_cast<ByteArrayDocument*>(_document);
     if (document) {
@@ -32,15 +32,15 @@ AbstractView* ByteArrayViewFactory::createViewFor(AbstractDocument* _document)
 
         synchronizer->setViewProfileId(mByteArrayViewProfileManager->defaultViewProfileId());
 
-        result = new ByteArrayView(document, synchronizer);
+        result = std::make_unique<ByteArrayView>(document, synchronizer);
     }
 
     return result;
 }
 
-AbstractView* ByteArrayViewFactory::createCopyOfView(AbstractView* _view, Qt::Alignment alignment)
+std::unique_ptr<AbstractView> ByteArrayViewFactory::createCopyOfView(AbstractView* _view, Qt::Alignment alignment)
 {
-    ByteArrayView* result = nullptr;
+    std::unique_ptr<ByteArrayView> result;
 
     auto* view = qobject_cast<ByteArrayView*>(_view);
     if (view) {
@@ -48,7 +48,7 @@ AbstractView* ByteArrayViewFactory::createCopyOfView(AbstractView* _view, Qt::Al
 
         synchronizer->setViewProfileId(view->synchronizer()->viewProfileId());
 
-        result = new ByteArrayView(view, synchronizer, alignment);
+        result = std::make_unique<ByteArrayView>(view, synchronizer, alignment);
     }
 
     return result;

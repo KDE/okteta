@@ -28,8 +28,8 @@ public:
     ByteArrayViewFactory& operator=(const ByteArrayViewFactory&) = delete;
 
 public:
-    AbstractView* createViewFor(AbstractDocument* document) override;
-    AbstractView* createCopyOfView(AbstractView* view, Qt::Alignment alignment) override;
+    std::unique_ptr<AbstractView> createViewFor(AbstractDocument* document) override;
+    std::unique_ptr<AbstractView> createCopyOfView(AbstractView* view, Qt::Alignment alignment) override;
 
 private:
     ByteArrayViewProfileManager* const mByteArrayViewProfileManager;
