@@ -28,7 +28,7 @@ public:
 
 public: // AbstractModelExporterConfigEditor API
     bool isValid() const override;
-    AbstractSelectionView* createPreviewView() const override;
+    std::unique_ptr<AbstractSelectionView> createPreviewView() const override;
 
 private:
     const std::unique_ptr<AbstractModelStreamEncoderConfigEditor> mEncoderConfigEditor;

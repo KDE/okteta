@@ -56,7 +56,7 @@ CopyAsDialog::CopyAsDialog(const QString& remoteTypeName,
     splitter->addWidget(editorPage);
     splitter->setCollapsible(0, false);
 
-    mPreviewView.reset(configEditor->createPreviewView());
+    mPreviewView = configEditor->createPreviewView();
 
     if (mPreviewView) {
         auto* previewBox = new QGroupBox(i18nc("@title:group", "Preview"), this);

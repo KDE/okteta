@@ -8,6 +8,9 @@
 
 #include "abstractmodelstreamencoderconfigeditor.hpp"
 
+// Kasten
+#include <Kasten/AbstractSelectionView>
+
 namespace Kasten {
 
 class AbstractModelStreamEncoderConfigEditorPrivate
@@ -26,9 +29,9 @@ bool AbstractModelStreamEncoderConfigEditor::isValid() const
     return true;
 }
 
-AbstractSelectionView* AbstractModelStreamEncoderConfigEditor::createPreviewView() const
+std::unique_ptr<AbstractSelectionView> AbstractModelStreamEncoderConfigEditor::createPreviewView() const
 {
-    return nullptr;
+    return {};
 }
 
 }

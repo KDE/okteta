@@ -92,9 +92,9 @@ bool ByteArraySourceCodeStreamEncoderConfigEditor::isValid() const
     return true; // TODO: warn if not all selected bytes are used due to the data type length
 }
 
-AbstractSelectionView* ByteArraySourceCodeStreamEncoderConfigEditor::createPreviewView() const
+std::unique_ptr<AbstractSelectionView> ByteArraySourceCodeStreamEncoderConfigEditor::createPreviewView() const
 {
-    return new ByteArrayTextStreamEncoderPreview(mEncoder);
+    return std::make_unique<ByteArrayTextStreamEncoderPreview>(mEncoder);
 }
 
 void ByteArraySourceCodeStreamEncoderConfigEditor::onSettingsChanged()

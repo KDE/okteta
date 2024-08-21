@@ -57,9 +57,9 @@ ByteArrayValuesStreamEncoderConfigEditor::ByteArrayValuesStreamEncoderConfigEdit
 
 ByteArrayValuesStreamEncoderConfigEditor::~ByteArrayValuesStreamEncoderConfigEditor() = default;
 
-AbstractSelectionView* ByteArrayValuesStreamEncoderConfigEditor::createPreviewView() const
+std::unique_ptr<AbstractSelectionView> ByteArrayValuesStreamEncoderConfigEditor::createPreviewView() const
 {
-    return new ByteArrayTextStreamEncoderPreview(mEncoder);
+    return std::make_unique<ByteArrayTextStreamEncoderPreview>(mEncoder);
 }
 
 void ByteArrayValuesStreamEncoderConfigEditor::onSettingsChanged()

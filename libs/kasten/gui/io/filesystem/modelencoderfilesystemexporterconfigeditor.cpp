@@ -10,6 +10,8 @@
 
 // lib
 #include <abstractmodelstreamencoderconfigeditor.hpp>
+// Kasten
+#include <Kasten/AbstractSelectionView>
 // Qt
 #include <QHBoxLayout>
 
@@ -30,7 +32,7 @@ bool ModelEncoderFileSystemExporterConfigEditor::isValid() const
     return mEncoderConfigEditor->isValid();
 }
 
-AbstractSelectionView* ModelEncoderFileSystemExporterConfigEditor::createPreviewView() const
+std::unique_ptr<AbstractSelectionView> ModelEncoderFileSystemExporterConfigEditor::createPreviewView() const
 {
     return mEncoderConfigEditor->createPreviewView();
 }

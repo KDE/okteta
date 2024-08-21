@@ -8,6 +8,9 @@
 
 #include "abstractmodelexporterconfigeditor.hpp"
 
+// Kasten
+#include <Kasten/AbstractSelectionView>
+
 namespace Kasten {
 
 class AbstractModelExporterConfigEditorPrivate
@@ -26,9 +29,9 @@ bool AbstractModelExporterConfigEditor::isValid() const
     return true;
 }
 
-AbstractSelectionView* AbstractModelExporterConfigEditor::createPreviewView() const
+std::unique_ptr<AbstractSelectionView> AbstractModelExporterConfigEditor::createPreviewView() const
 {
-    return nullptr;
+    return {};
 }
 
 }

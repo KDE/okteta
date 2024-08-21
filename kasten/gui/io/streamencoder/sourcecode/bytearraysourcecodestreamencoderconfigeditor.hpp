@@ -31,7 +31,7 @@ public:
 
 public: // AbstractModelStreamEncoderConfigEditor API
     bool isValid() const override;
-    AbstractSelectionView* createPreviewView() const override;
+    std::unique_ptr<AbstractSelectionView> createPreviewView() const override;
 
 private Q_SLOTS:
     void onSettingsChanged();
