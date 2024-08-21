@@ -18,24 +18,24 @@
 //// #include "algorithm/mybytearraychecksumparametersetedit.hpp"
 //// NEWCHECKSUMPARAMETERSET(end)
 
-AbstractByteArrayChecksumParameterSetEdit* ByteArrayChecksumParameterSetEditFactory::createEdit(const char* id)
+std::unique_ptr<AbstractByteArrayChecksumParameterSetEdit> ByteArrayChecksumParameterSetEditFactory::createEdit(const char* id)
 {
-    AbstractByteArrayChecksumParameterSetEdit* result;
+    std::unique_ptr<AbstractByteArrayChecksumParameterSetEdit> result;
 
     if (qstrcmp(id, ModSumByteArrayChecksumParameterSetEdit::Id) == 0) {
-        result = new ModSumByteArrayChecksumParameterSetEdit();
+        result = std::make_unique<ModSumByteArrayChecksumParameterSetEdit>();
     } else if (qstrcmp(id, Crc64ByteArrayChecksumParameterSetEdit::Id) == 0) {
-        result = new Crc64ByteArrayChecksumParameterSetEdit();
+        result = std::make_unique<Crc64ByteArrayChecksumParameterSetEdit>();
     }
 //// NEWCHECKSUMPARAMETERSET(start)
 //// Here add the check for the id of your parameter set
 //// and, if it matches, the creation of the widget
 //// e.g.
 ////     else if (qstrcmp(id, MyByteArrayChecksumParameterSetEdit::Id) == 0)
-////         result = new MyByteArrayChecksumParameterSetEdit();
+////         result = std::make_unique<MyByteArrayChecksumParameterSetEdit>();
 //// NEWCHECKSUMPARAMETERSET(end)
     else { // if (qstrcmp(id, NoByteArrayChecksumParameterSetEdit::Id) == 0) TODO: default should be a message "Not found"
-        result = new NoByteArrayChecksumParameterSetEdit();
+        result = std::make_unique<NoByteArrayChecksumParameterSetEdit>();
     }
 
     return result;

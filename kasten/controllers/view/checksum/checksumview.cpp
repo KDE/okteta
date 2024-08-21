@@ -124,10 +124,10 @@ void ChecksumView::addAlgorithms()
         mAlgorithmComboBox->addItem(algorithm->name());
 
         const char* const parameterSetId = algorithm->parameterSet()->id();
-        AbstractByteArrayChecksumParameterSetEdit* parameterEdit =
+        auto parameterEdit =
             ByteArrayChecksumParameterSetEditFactory::createEdit(parameterSetId);
 
-        mParameterSetEditStack->addWidget(parameterEdit);
+        mParameterSetEditStack->addWidget(parameterEdit.release()); // life-time handled by QWidget parentship
     }
 
     onAlgorithmChanged(mTool->algorithmId());

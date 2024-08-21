@@ -9,6 +9,9 @@
 #ifndef KASTEN_BYTEARRAYCHECKSUMPARAMETERSETEDITFACTORY_HPP
 #define KASTEN_BYTEARRAYCHECKSUMPARAMETERSETEDITFACTORY_HPP
 
+// Std
+#include <memory>
+
 class AbstractByteArrayChecksumParameterSetEdit;
 
 class ByteArrayChecksumParameterSetEditFactory
@@ -20,7 +23,7 @@ public:
     ByteArrayChecksumParameterSetEditFactory& operator=(const ByteArrayChecksumParameterSetEditFactory&) = delete;
 
 public:
-    static AbstractByteArrayChecksumParameterSetEdit* createEdit(const char* id);
+    static std::unique_ptr<AbstractByteArrayChecksumParameterSetEdit> createEdit(const char* id);
 };
 
 #endif
