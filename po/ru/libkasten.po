@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: khexedit\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-20 01:50+0000\n"
+"POT-Creation-Date: 2024-08-21 01:59+0000\n"
 "PO-Revision-Date: 2018-08-14 09:46+0300\n"
 "Last-Translator: Александр Яворский <yavorsky.a@t-rosta.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -176,7 +176,7 @@ msgctxt "@title:menu"
 msgid "Copy As"
 msgstr "Копировать как"
 
-#: controllers/io/copyas/copyascontroller.cpp:91
+#: controllers/io/copyas/copyascontroller.cpp:90
 #, kde-format
 msgctxt "@item There are no encoders."
 msgid "Not available."
@@ -224,14 +224,14 @@ msgctxt "@title:menu"
 msgid "Export"
 msgstr "Экспорт"
 
-#: controllers/io/export/exportcontroller.cpp:87
+#: controllers/io/export/exportcontroller.cpp:86
 #, kde-format
 msgctxt "@item There are no exporters."
 msgid "Not available."
 msgstr "Недоступно."
 
 #: controllers/io/export/exportdialog.cpp:40
-#: core/system/modelcodecmanager_p.cpp:103
+#: core/system/modelcodecmanager_p.cpp:124
 #, kde-format
 msgctxt "@title:window"
 msgid "Export"
@@ -267,7 +267,7 @@ msgctxt "@title:menu"
 msgid "Insert"
 msgstr "Вставка"
 
-#: controllers/io/insert/insertcontroller.cpp:90
+#: controllers/io/insert/insertcontroller.cpp:89
 #, kde-format
 msgctxt "@item There are no generators."
 msgid "Not available."
@@ -408,7 +408,7 @@ msgctxt "@title:window"
 msgid "Reload"
 msgstr "Обновить"
 
-#: core/system/modelcodecmanager_p.cpp:113
+#: core/system/modelcodecmanager_p.cpp:134
 #, kde-format
 msgctxt "@action:button"
 msgid "&Export"

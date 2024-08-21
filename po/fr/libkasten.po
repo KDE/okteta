@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-20 01:50+0000\n"
+"POT-Creation-Date: 2024-08-21 01:59+0000\n"
 "PO-Revision-Date: 2024-05-03 14:59+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -171,7 +171,7 @@ msgctxt "@title:menu"
 msgid "Copy As"
 msgstr "Copier sous"
 
-#: controllers/io/copyas/copyascontroller.cpp:91
+#: controllers/io/copyas/copyascontroller.cpp:90
 #, kde-format
 msgctxt "@item There are no encoders."
 msgid "Not available."
@@ -220,14 +220,14 @@ msgctxt "@title:menu"
 msgid "Export"
 msgstr "Exporter"
 
-#: controllers/io/export/exportcontroller.cpp:87
+#: controllers/io/export/exportcontroller.cpp:86
 #, kde-format
 msgctxt "@item There are no exporters."
 msgid "Not available."
 msgstr "Indisponible."
 
 #: controllers/io/export/exportdialog.cpp:40
-#: core/system/modelcodecmanager_p.cpp:103
+#: core/system/modelcodecmanager_p.cpp:124
 #, kde-format
 msgctxt "@title:window"
 msgid "Export"
@@ -262,7 +262,7 @@ msgctxt "@title:menu"
 msgid "Insert"
 msgstr "Insérer"
 
-#: controllers/io/insert/insertcontroller.cpp:90
+#: controllers/io/insert/insertcontroller.cpp:89
 #, kde-format
 msgctxt "@item There are no generators."
 msgid "Not available."
@@ -403,7 +403,7 @@ msgctxt "@title:window"
 msgid "Reload"
 msgstr "Recharger"
 
-#: core/system/modelcodecmanager_p.cpp:113
+#: core/system/modelcodecmanager_p.cpp:134
 #, kde-format
 msgctxt "@action:button"
 msgid "&Export"

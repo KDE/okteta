@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-20 01:50+0000\n"
+"POT-Creation-Date: 2024-08-21 01:59+0000\n"
 "PO-Revision-Date: 2022-09-27 17:35+0700\n"
 "Last-Translator: Wantoyèk <wantoyek@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -90,7 +90,7 @@ msgstr "&Jendela"
 msgid "Main Toolbar"
 msgstr "Bilah Alat Utama"
 
-#: program.cpp:82
+#: program.cpp:85
 #, kde-format
 msgid "File(s) to load."
 msgstr "File yang akan dimuat"

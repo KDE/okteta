@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-20 01:50+0000\n"
+"POT-Creation-Date: 2024-08-21 01:59+0000\n"
 "PO-Revision-Date: 2024-04-22 16:05\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -163,7 +163,7 @@ msgctxt "@title:menu"
 msgid "Copy As"
 msgstr "复制为"
 
-#: controllers/io/copyas/copyascontroller.cpp:91
+#: controllers/io/copyas/copyascontroller.cpp:90
 #, kde-format
 msgctxt "@item There are no encoders."
 msgid "Not available."
@@ -211,14 +211,14 @@ msgctxt "@title:menu"
 msgid "Export"
 msgstr "导出"
 
-#: controllers/io/export/exportcontroller.cpp:87
+#: controllers/io/export/exportcontroller.cpp:86
 #, kde-format
 msgctxt "@item There are no exporters."
 msgid "Not available."
 msgstr "不可用。"
 
 #: controllers/io/export/exportdialog.cpp:40
-#: core/system/modelcodecmanager_p.cpp:103
+#: core/system/modelcodecmanager_p.cpp:124
 #, kde-format
 msgctxt "@title:window"
 msgid "Export"
@@ -252,7 +252,7 @@ msgctxt "@title:menu"
 msgid "Insert"
 msgstr "Insert"
 
-#: controllers/io/insert/insertcontroller.cpp:90
+#: controllers/io/insert/insertcontroller.cpp:89
 #, kde-format
 msgctxt "@item There are no generators."
 msgid "Not available."
@@ -392,7 +392,7 @@ msgctxt "@title:window"
 msgid "Reload"
 msgstr "重新加载"
 
-#: core/system/modelcodecmanager_p.cpp:113
+#: core/system/modelcodecmanager_p.cpp:134
 #, kde-format
 msgctxt "@action:button"
 msgid "&Export"

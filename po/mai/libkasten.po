@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-20 01:50+0000\n"
+"POT-Creation-Date: 2024-08-21 01:59+0000\n"
 "PO-Revision-Date: 2010-09-24 20:23+0530\n"
 "Last-Translator: Rajesh Ranjan <rajesh672@gmail.com>\n"
 "Language-Team: Maithili <bhashaghar@googlegroups.com>\n"
@@ -171,7 +171,7 @@ msgctxt "@title:menu"
 msgid "Copy As"
 msgstr ""
 
-#: controllers/io/copyas/copyascontroller.cpp:91
+#: controllers/io/copyas/copyascontroller.cpp:90
 #, kde-format
 msgctxt "@item There are no encoders."
 msgid "Not available."
@@ -217,14 +217,14 @@ msgctxt "@title:menu"
 msgid "Export"
 msgstr "निर्यात"
 
-#: controllers/io/export/exportcontroller.cpp:87
+#: controllers/io/export/exportcontroller.cpp:86
 #, kde-format
 msgctxt "@item There are no exporters."
 msgid "Not available."
 msgstr "उपलब्ध नहि"
 
 #: controllers/io/export/exportdialog.cpp:40
-#: core/system/modelcodecmanager_p.cpp:103
+#: core/system/modelcodecmanager_p.cpp:124
 #, kde-format
 msgctxt "@title:window"
 msgid "Export"
@@ -256,7 +256,7 @@ msgctxt "@title:menu"
 msgid "Insert"
 msgstr "जोडू"
 
-#: controllers/io/insert/insertcontroller.cpp:90
+#: controllers/io/insert/insertcontroller.cpp:89
 #, kde-format
 msgctxt "@item There are no generators."
 msgid "Not available."
@@ -396,7 +396,7 @@ msgctxt "@title:window"
 msgid "Reload"
 msgstr "पुनः लोड करू"
 
-#: core/system/modelcodecmanager_p.cpp:113
+#: core/system/modelcodecmanager_p.cpp:134
 #, kde-format
 msgctxt "@action:button"
 msgid "&Export"

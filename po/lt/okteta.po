@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-20 01:50+0000\n"
+"POT-Creation-Date: 2024-08-21 01:59+0000\n"
 "PO-Revision-Date: 2014-03-16 18:47+0200\n"
 "Last-Translator: Liudas Ališauskas <liudas@aksioma.lt>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -93,7 +93,7 @@ msgstr "&Langai"
 msgid "Main Toolbar"
 msgstr "Pagrindinė įrankinė"
 
-#: program.cpp:82
+#: program.cpp:85
 #, fuzzy, kde-format
 #| msgid "File(s) to load"
 msgid "File(s) to load."

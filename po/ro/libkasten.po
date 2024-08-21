@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-20 01:50+0000\n"
+"POT-Creation-Date: 2024-08-21 01:59+0000\n"
 "PO-Revision-Date: 2020-09-26 20:13+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian\n"
@@ -176,7 +176,7 @@ msgctxt "@title:menu"
 msgid "Copy As"
 msgstr "Copiază ca"
 
-#: controllers/io/copyas/copyascontroller.cpp:91
+#: controllers/io/copyas/copyascontroller.cpp:90
 #, kde-format
 msgctxt "@item There are no encoders."
 msgid "Not available."
@@ -224,14 +224,14 @@ msgctxt "@title:menu"
 msgid "Export"
 msgstr "Export"
 
-#: controllers/io/export/exportcontroller.cpp:87
+#: controllers/io/export/exportcontroller.cpp:86
 #, kde-format
 msgctxt "@item There are no exporters."
 msgid "Not available."
 msgstr "Nu este disponibil."
 
 #: controllers/io/export/exportdialog.cpp:40
-#: core/system/modelcodecmanager_p.cpp:103
+#: core/system/modelcodecmanager_p.cpp:124
 #, kde-format
 msgctxt "@title:window"
 msgid "Export"
@@ -265,7 +265,7 @@ msgctxt "@title:menu"
 msgid "Insert"
 msgstr "Inserare"
 
-#: controllers/io/insert/insertcontroller.cpp:90
+#: controllers/io/insert/insertcontroller.cpp:89
 #, fuzzy, kde-format
 #| msgctxt "@item There are no encoders."
 #| msgid "Not available."
@@ -413,7 +413,7 @@ msgctxt "@title:window"
 msgid "Reload"
 msgstr "Înlocuiește"
 
-#: core/system/modelcodecmanager_p.cpp:113
+#: core/system/modelcodecmanager_p.cpp:134
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Export"

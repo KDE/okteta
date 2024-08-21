@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-20 01:50+0000\n"
+"POT-Creation-Date: 2024-08-21 01:59+0000\n"
 "PO-Revision-Date: 2013-03-28 14:37+0530\n"
 "Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
 "Language-Team: Marathi <kde-i18n-doc@kde.org>\n"
@@ -89,7 +89,7 @@ msgstr "चौकटी (&W)"
 msgid "Main Toolbar"
 msgstr "मुख्य साधनपट्टी"
 
-#: program.cpp:82
+#: program.cpp:85
 #, fuzzy, kde-format
 #| msgid "File(s) to load"
 msgid "File(s) to load."
