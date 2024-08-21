@@ -67,9 +67,9 @@ QUrl DocumentSyncManagerPrivate::urlOf(AbstractDocument* document) const
     return synchronizer ? synchronizer->url() : QUrl();
 }
 
-void DocumentSyncManagerPrivate::setDocumentSynchronizerFactory(AbstractModelSynchronizerFactory* synchronizerFactory)
+void DocumentSyncManagerPrivate::setDocumentSynchronizerFactory(std::unique_ptr<AbstractModelSynchronizerFactory>&& synchronizerFactory)
 {
-    mSynchronizerFactory.reset(synchronizerFactory);
+    mSynchronizerFactory = std::move(synchronizerFactory);
 }
 
 void DocumentSyncManagerPrivate::load(const QUrl& url)

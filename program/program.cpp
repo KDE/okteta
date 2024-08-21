@@ -114,7 +114,7 @@ int OktetaProgram::execute()
     mDocumentManager->codecManager()->setDataGenerators(std::move(dataGeneratorList));
     mDocumentManager->codecManager()->setOverwriteDialog(mDialogHandler.get());
     mDocumentManager->createManager()->setDocumentFactory(std::make_unique<ByteArrayDocumentFactory>());
-    mDocumentManager->syncManager()->setDocumentSynchronizerFactory(new ByteArrayRawFileSynchronizerFactory());
+    mDocumentManager->syncManager()->setDocumentSynchronizerFactory(std::make_unique<ByteArrayRawFileSynchronizerFactory>());
     mDocumentManager->syncManager()->setOverwriteDialog(mDialogHandler.get());
     mDocumentManager->syncManager()->setSaveDiscardDialog(mDialogHandler.get());
 

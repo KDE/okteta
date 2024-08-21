@@ -39,7 +39,7 @@ public:
     QUrl urlOf(AbstractDocument* document) const;
 
 public:
-    void setDocumentSynchronizerFactory(AbstractModelSynchronizerFactory* synchronizerFactory);
+    void setDocumentSynchronizerFactory(std::unique_ptr<AbstractModelSynchronizerFactory>&& synchronizerFactory);
     void setSaveDiscardDialog(AbstractSaveDiscardDialog* saveDiscardDialog);
     void setOverwriteDialog(AbstractOverwriteDialog* overwriteDialog);
 

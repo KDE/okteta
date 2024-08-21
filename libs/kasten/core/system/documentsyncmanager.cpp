@@ -56,11 +56,11 @@ QUrl DocumentSyncManager::urlOf(AbstractDocument* document) const
     return d->urlOf(document);
 }
 
-void DocumentSyncManager::setDocumentSynchronizerFactory(AbstractModelSynchronizerFactory* synchronizerFactory)
+void DocumentSyncManager::setDocumentSynchronizerFactory(std::unique_ptr<AbstractModelSynchronizerFactory>&& synchronizerFactory)
 {
     Q_D(DocumentSyncManager);
 
-    d->setDocumentSynchronizerFactory(synchronizerFactory);
+    d->setDocumentSynchronizerFactory(std::move(synchronizerFactory));
 }
 
 void DocumentSyncManager::load(const QUrl& url)
