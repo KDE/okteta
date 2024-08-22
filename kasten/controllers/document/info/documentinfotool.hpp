@@ -13,12 +13,12 @@
 #include <Kasten/AbstractTool>
 // Qt
 #include <QMimeType>
+#include <QTimer>
 
 namespace Okteta {
 class AbstractByteArrayModel;
 }
 class QString;
-class QTimer;
 
 namespace Kasten {
 
@@ -68,7 +68,7 @@ private:
 
     DocumentSyncManager* const mDocumentSyncManager;
 
-    QTimer* mMimeTypeUpdateTimer;
+    QTimer mMimeTypeUpdateTimer;
     QMimeType mMimeType;
 };
 

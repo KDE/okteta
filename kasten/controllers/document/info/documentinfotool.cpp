@@ -23,7 +23,6 @@
 #include <KLocalizedString>
 // Qt
 #include <QApplication>
-#include <QTimer>
 #include <QUrl>
 #include <QMimeDatabase>
 
@@ -33,13 +32,12 @@ static constexpr int mimeTypeUpdateTimeInterval = 500; // msec
 
 DocumentInfoTool::DocumentInfoTool(DocumentSyncManager* syncManager)
     : mDocumentSyncManager(syncManager)
-    , mMimeTypeUpdateTimer(new QTimer(this))
 {
     setObjectName(QStringLiteral("DocumentInfo"));
 
-    mMimeTypeUpdateTimer->setInterval(mimeTypeUpdateTimeInterval);
-    mMimeTypeUpdateTimer->setSingleShot(true);
-    connect(mMimeTypeUpdateTimer, &QTimer::timeout, this, &DocumentInfoTool::updateMimeType);
+    mMimeTypeUpdateTimer.setInterval(mimeTypeUpdateTimeInterval);
+    mMimeTypeUpdateTimer.setSingleShot(true);
+    connect(&mMimeTypeUpdateTimer, &QTimer::timeout, this, &DocumentInfoTool::updateMimeType);
 }
 
 DocumentInfoTool::~DocumentInfoTool() = default;
@@ -133,8 +131,8 @@ void DocumentInfoTool::updateMimeType()
 
 void DocumentInfoTool::onContentsChanged()
 {
-    if (!mMimeTypeUpdateTimer->isActive()) {
-        mMimeTypeUpdateTimer->start();
+    if (!mMimeTypeUpdateTimer.isActive()) {
+        mMimeTypeUpdateTimer.start();
     }
 
     Q_EMIT documentSizeChanged(mByteArrayModel->size());
@@ -143,8 +141,8 @@ void DocumentInfoTool::onContentsChanged()
 void DocumentInfoTool::onSynchronizerChanged(AbstractModelSynchronizer* synchronizer)
 {
     // do an instant update, no need to delay
-    if (mMimeTypeUpdateTimer->isActive()) {
-        mMimeTypeUpdateTimer->stop();
+    if (mMimeTypeUpdateTimer.isActive()) {
+        mMimeTypeUpdateTimer.stop();
     }
     updateMimeType();
 
