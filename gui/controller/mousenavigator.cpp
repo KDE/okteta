@@ -21,7 +21,6 @@
 #include <QClipboard>
 #include <QMouseEvent>
 #include <QDrag>
-#include <QTimer>
 
 namespace Okteta {
 static constexpr int DefaultScrollTimerPeriod = 100;
@@ -32,14 +31,10 @@ MouseNavigator::MouseNavigator(AbstractByteArrayViewPrivate* view, AbstractMouse
     , mInLMBDoubleClick(false)
     , mDragStartPossible(false)
 {
-    mScrollTimer = new QTimer(this);
-    mDragStartTimer = new QTimer(this);
-    mTrippleClickTimer = new QTimer(this);
-
-    connect(mScrollTimer,      &QTimer::timeout, this, &MouseNavigator::autoScrollTimerDone);
-    connect(mDragStartTimer,   &QTimer::timeout, this, &MouseNavigator::startDrag);
-    mDragStartTimer->setSingleShot(true);
-    mTrippleClickTimer->setSingleShot(true);
+    connect(&mScrollTimer,      &QTimer::timeout, this, &MouseNavigator::autoScrollTimerDone);
+    connect(&mDragStartTimer,   &QTimer::timeout, this, &MouseNavigator::startDrag);
+    mDragStartTimer.setSingleShot(true);
+    mTrippleClickTimer.setSingleShot(true);
 }
 
 MouseNavigator::~MouseNavigator() = default;
@@ -59,9 +54,9 @@ bool MouseNavigator::handleMousePressEvent(QMouseEvent* mouseEvent)
         mLMBPressed = true;
 
         // select whole line?
-        if (mTrippleClickTimer->isActive()
+        if (mTrippleClickTimer.isActive()
             && (mouseEvent->globalPos() - mDoubleClickPoint).manhattanLength() < QApplication::startDragDistance()) {
-            mTrippleClickTimer->stop();
+            mTrippleClickTimer.stop();
             const Address indexAtFirstDoubleClickLinePosition = tableLayout->indexAtFirstLinePosition(mDoubleClickLine);
             tableRanges->setSelectionStart(indexAtFirstDoubleClickLinePosition);
             tableCursor->gotoIndex(indexAtFirstDoubleClickLinePosition);
@@ -76,7 +71,7 @@ bool MouseNavigator::handleMousePressEvent(QMouseEvent* mouseEvent)
             // start of a drag perhaps?
             if (tableRanges->hasSelection() && tableRanges->selectionIncludes(mView->indexByPoint(mousePoint))) {
                 mDragStartPossible = true;
-                mDragStartTimer->start(QApplication::startDragTime());
+                mDragStartTimer.start(QApplication::startDragTime());
                 mDragStartPoint = mousePoint;
             } else {
                 mView->placeCursor(mousePoint);
@@ -125,7 +120,7 @@ bool MouseNavigator::handleMouseMoveEvent(QMouseEvent* mouseEvent)
 
         if (mLMBPressed) {
             if (mDragStartPossible) {
-                mDragStartTimer->stop();
+                mDragStartTimer.stop();
                 // moved enough for a drag?
                 if ((movePoint - mDragStartPoint).manhattanLength() > QApplication::startDragDistance()) {
                     startDrag();
@@ -171,14 +166,14 @@ bool MouseNavigator::handleMouseReleaseEvent(QMouseEvent* mouseEvent)
         if (mLMBPressed) {
             mLMBPressed = false;
 
-            if (mScrollTimer->isActive()) {
-                mScrollTimer->stop();
+            if (mScrollTimer.isActive()) {
+                mScrollTimer.stop();
             }
 
             // was only click inside selection, nothing dragged?
             if (mDragStartPossible) {
                 mView->selectAll(false);
-                mDragStartTimer->stop();
+                mDragStartTimer.stop();
                 mDragStartPossible = false;
 
                 mView->placeCursor(mDragStartPoint);
@@ -224,7 +219,7 @@ bool MouseNavigator::handleMouseDoubleClickEvent(QMouseEvent* mouseEvent)
             mView->selectWord(index);
 
             // as we already have a doubleclick maybe it is a tripple click
-            mTrippleClickTimer->start(qApp->doubleClickInterval());
+            mTrippleClickTimer.start(qApp->doubleClickInterval());
             mDoubleClickPoint = mouseEvent->globalPos();
         }
         //  else
@@ -255,15 +250,15 @@ void MouseNavigator::handleMouseMove(QPoint point)   // handles the move of the 
     const int yOffset = mView->yOffset();
     const int behindLastYOffset = yOffset + mView->visibleHeight();
     // scrolltimer but inside of viewport?
-    if (mScrollTimer->isActive()) {
+    if (mScrollTimer.isActive()) {
         if (yOffset <= point.y() && point.y() < behindLastYOffset) {
-            mScrollTimer->stop();
+            mScrollTimer.stop();
         }
     }
     // no scrolltimer and outside of viewport?
     else {
         if (point.y() < yOffset || behindLastYOffset <= point.y()) {
-            mScrollTimer->start(DefaultScrollTimerPeriod);
+            mScrollTimer.start(DefaultScrollTimerPeriod);
         }
     }
     mView->pauseCursor();

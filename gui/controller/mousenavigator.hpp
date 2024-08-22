@@ -14,9 +14,9 @@
 // Qt
 #include <QObject>
 #include <QPoint>
+#include <QTimer>
 
 class QMouseEvent;
-class QTimer;
 
 namespace Okteta {
 
@@ -48,12 +48,12 @@ private Q_SLOTS:
 
 private:
     /** Timer that triggers ensureCursorVisible function calls */
-    QTimer* mScrollTimer;
+    QTimer mScrollTimer;
 /*     QTimer *ChangeIntervalTimer, */
     /** Timer to start a drag */
-    QTimer* mDragStartTimer;
+    QTimer mDragStartTimer;
     /** timer to measure whether the time between a double click and the following counts for a tripleclick */
-    QTimer* mTrippleClickTimer;
+    QTimer mTrippleClickTimer;
 
 private:
     /** point at which the current double click happended (used by TrippleClick) */
