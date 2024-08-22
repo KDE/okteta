@@ -29,7 +29,7 @@ FixedSizeByteArrayModel::FixedSizeByteArrayModel(Byte* data, int size, Byte fill
 
 FixedSizeByteArrayModel::FixedSizeByteArrayModel(int size, Byte fillUpByte, QObject* parent)
     : AbstractByteArrayModel(parent)
-    , mData(new Byte[size])
+    , mData(std::unique_ptr<Byte[]>(new Byte[size])) // no make_unique, no need for initialization
     , mSize(size)
     , mFillUpByte(fillUpByte)
     , mReadOnly(false)
