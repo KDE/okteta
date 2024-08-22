@@ -131,6 +131,8 @@ void InsertController::triggerExecution(AbstractModelDataGenerator* generator)
 
     mSelectedDataWriteableControl->insertData(mimeData);
 
+    delete mimeData;
+
     QApplication::restoreOverrideCursor();
 }
 

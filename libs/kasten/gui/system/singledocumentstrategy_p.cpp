@@ -135,6 +135,8 @@ void SingleDocumentStrategyPrivate::triggerGeneration(AbstractModelDataGenerator
     const bool setModified = (generator->flags() & AbstractModelDataGenerator::DynamicGeneration);
     mDocumentManager->createManager()->createNewFromData(mimeData, setModified);
 
+    delete mimeData;
+
     QApplication::restoreOverrideCursor();
 }
 
