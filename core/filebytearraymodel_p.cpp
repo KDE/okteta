@@ -67,7 +67,7 @@ bool FileByteArrayModelPrivate::open(const QString& fileName)
     int noOfPages = fileSize / mPageSize + 1;
 
     // initialize Page pointers
-    mData.fill(nullptr, noOfPages);
+    mData.resize(noOfPages);
 
     mFirstPage = mLastPage = 0;
 
@@ -87,10 +87,9 @@ bool FileByteArrayModelPrivate::close()
     }
 
     // free pages
-    std::for_each(mData.begin(), mData.end(), [](char*& pageData) {
-        delete [] pageData;
-        pageData = nullptr;
-    });
+    for (auto& pageData : mData) {
+        pageData.reset();
+    }
 
     mFirstPage = mLastPage = -1;
     mNoOfFreePages = mNoOfUsedPages;
@@ -105,7 +104,7 @@ bool FileByteArrayModelPrivate::ensurePageLoaded(unsigned int pageIndex) const
     }
     // page loaded?
     if (mData[pageIndex]) {
-        mActualPage = mData[pageIndex];
+        mActualPage = mData[pageIndex].get();
         mOffsetOfActualPage = pageIndex * mPageSize;
         return true;
     }
@@ -125,13 +124,13 @@ bool FileByteArrayModelPrivate::ensurePageLoaded(unsigned int pageIndex) const
     }
 
     // create Page
-    mData[pageIndex] = new char[mPageSize];
+    mData[pageIndex] = std::unique_ptr<char[]>(new char[mPageSize]); // no make_unique, no need for initialization
     --mNoOfFreePages;
 
     // jump to position and read the page's data in
     bool success = mFile.seek((unsigned long)(pageIndex * mPageSize));
     if (success) {
-        success = mFile.read(mData[pageIndex], mPageSize) > 0;
+        success = mFile.read(mData[pageIndex].get(), mPageSize) > 0;
     }
 
     if (success) {
@@ -144,7 +143,7 @@ bool FileByteArrayModelPrivate::ensurePageLoaded(unsigned int pageIndex) const
             mLastPage = pageIndex;
         }
 
-        mActualPage = mData[pageIndex];
+        mActualPage = mData[pageIndex].get();
         mOffsetOfActualPage = pageIndex * mPageSize;
     }
 
@@ -154,12 +153,11 @@ bool FileByteArrayModelPrivate::ensurePageLoaded(unsigned int pageIndex) const
 bool FileByteArrayModelPrivate::freePage(unsigned int pageIndex) const
 {
     // check range and if is loaded at all
-    if ((int)pageIndex >= mData.size() || !mData[pageIndex]) {
+    if (pageIndex >= static_cast<unsigned int>(mData.size()) || !mData[pageIndex]) {
         return false;
     }
 
-    delete [] mData[pageIndex];
-    mData[pageIndex] = nullptr;
+    mData[pageIndex].reset();
     ++mNoOfFreePages;
     return true;
 }
