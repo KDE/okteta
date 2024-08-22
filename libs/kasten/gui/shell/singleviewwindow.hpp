@@ -17,8 +17,6 @@
 // Std
 #include <memory>
 
-class QMimeData;
-
 namespace Kasten {
 
 class SingleViewWindowPrivate;
