@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-21 01:59+0000\n"
+"POT-Creation-Date: 2024-08-22 01:56+0000\n"
 "PO-Revision-Date: 2021-01-29 14:48+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -94,7 +94,7 @@ msgstr "&Okna"
 msgid "Main Toolbar"
 msgstr "Glavna orodna vrstica"
 
-#: program.cpp:85
+#: program.cpp:87
 #, kde-format
 msgid "File(s) to load."
 msgstr "Datoteke za odpreti."

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-21 01:59+0000\n"
+"POT-Creation-Date: 2024-08-22 01:56+0000\n"
 "PO-Revision-Date: 2013-06-27 04:20+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -89,7 +89,7 @@ msgstr "&Терезелер"
 msgid "Main Toolbar"
 msgstr "Негізгі құралдар"
 
-#: program.cpp:85
+#: program.cpp:87
 #, fuzzy, kde-format
 #| msgid "File(s) to load"
 msgid "File(s) to load."

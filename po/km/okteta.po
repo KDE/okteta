@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-21 01:59+0000\n"
+"POT-Creation-Date: 2024-08-22 01:56+0000\n"
 "PO-Revision-Date: 2010-06-09 14:56+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -93,7 +93,7 @@ msgstr "បង្អួច"
 msgid "Main Toolbar"
 msgstr "របារ​ឧបករណ៍​មេ"
 
-#: program.cpp:85
+#: program.cpp:87
 #, fuzzy, kde-format
 #| msgid "File(s) to load"
 msgid "File(s) to load."

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-09 01:47+0000\n"
+"POT-Creation-Date: 2024-08-22 01:56+0000\n"
 "PO-Revision-Date: 2014-09-08 14:28+0200\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -1421,7 +1421,7 @@ msgid "&Select"
 msgstr "&Kijelölés"
 
 #: controllers/view/print/printtool.cpp:67
-#: controllers/view/print/printtool.cpp:166
+#: controllers/view/print/printtool.cpp:167
 #, kde-format
 msgctxt "@title:window"
 msgid "Print Byte Array %1"
@@ -1439,7 +1439,7 @@ msgctxt "in the footer of the printed page, e.g. Printed by: Joe User"
 msgid "Printed by: %U"
 msgstr "Nyomtatta: %U"
 
-#: controllers/view/print/printtool.cpp:164
+#: controllers/view/print/printtool.cpp:165
 #, kde-format
 msgctxt "@info"
 msgid "Could not print."
@@ -3192,7 +3192,7 @@ msgctxt "origin of the byte array"
 msgid "Created from data."
 msgstr "Létrehozva az adatokból."
 
-#: core/io/filesystem/bytearrayrawfileloadthread.cpp:55
+#: core/io/filesystem/bytearrayrawfileloadthread.cpp:57
 #, kde-format
 msgctxt "destination of the byte array"
 msgid "Loaded from file."

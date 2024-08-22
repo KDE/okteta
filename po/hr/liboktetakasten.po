@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-09 01:47+0000\n"
+"POT-Creation-Date: 2024-08-22 01:56+0000\n"
 "PO-Revision-Date: 2010-03-02 15:30+0100\n"
 "Last-Translator: Marko Dimjasevic <marko@dimjasevic.net>\n"
 "Language-Team: Croatian <kde-croatia-list@lists.sourceforge.net>\n"
@@ -1336,7 +1336,7 @@ msgid "&Select"
 msgstr ""
 
 #: controllers/view/print/printtool.cpp:67
-#: controllers/view/print/printtool.cpp:166
+#: controllers/view/print/printtool.cpp:167
 #, kde-format
 msgctxt "@title:window"
 msgid "Print Byte Array %1"
@@ -1354,7 +1354,7 @@ msgctxt "in the footer of the printed page, e.g. Printed by: Joe User"
 msgid "Printed by: %U"
 msgstr ""
 
-#: controllers/view/print/printtool.cpp:164
+#: controllers/view/print/printtool.cpp:165
 #, kde-format
 msgctxt "@info"
 msgid "Could not print."
@@ -3028,7 +3028,7 @@ msgctxt "origin of the byte array"
 msgid "Created from data."
 msgstr ""
 
-#: core/io/filesystem/bytearrayrawfileloadthread.cpp:55
+#: core/io/filesystem/bytearrayrawfileloadthread.cpp:57
 #, kde-format
 msgctxt "destination of the byte array"
 msgid "Loaded from file."

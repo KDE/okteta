@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-21 01:59+0000\n"
+"POT-Creation-Date: 2024-08-22 01:56+0000\n"
 "PO-Revision-Date: 2009-09-04 22:36+0200\n"
 "Last-Translator: Zarko Pintar <zarko.pintar@gmail.com>\n"
 "Language-Team: Croatian <kde-croatia-list@lists.sourceforge.net>\n"
@@ -91,7 +91,7 @@ msgstr ""
 msgid "Main Toolbar"
 msgstr ""
 
-#: program.cpp:85
+#: program.cpp:87
 #, kde-format
 msgid "File(s) to load."
 msgstr ""
