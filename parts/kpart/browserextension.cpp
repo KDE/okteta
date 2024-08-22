@@ -20,6 +20,7 @@
 #include <QClipboard>
 #include <QApplication>
 #include <QDataStream>
+#include <QMimeData>
 #include <QAction>
 
 OktetaBrowserExtension::OktetaBrowserExtension(OktetaPart* part)
@@ -37,12 +38,12 @@ OktetaBrowserExtension::OktetaBrowserExtension(OktetaPart* part)
 
 void OktetaBrowserExtension::copy()
 {
-    QMimeData* data = mPart->byteArrayView()->copySelectedData();
+    auto data = mPart->byteArrayView()->copySelectedData();
     if (!data) {
         return;
     }
 
-    QApplication::clipboard()->setMimeData(data, QClipboard::Clipboard);
+    QApplication::clipboard()->setMimeData(data.release(), QClipboard::Clipboard);
 }
 
 void OktetaBrowserExtension::print()

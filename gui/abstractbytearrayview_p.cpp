@@ -715,13 +715,13 @@ QByteArray AbstractByteArrayViewPrivate::selectedData() const
     return data;
 }
 
-QMimeData* AbstractByteArrayViewPrivate::selectionAsMimeData() const
+std::unique_ptr<QMimeData> AbstractByteArrayViewPrivate::selectionAsMimeData() const
 {
     if (!mTableRanges.hasSelection()) {
-        return nullptr;
+        return {};
     }
 
-    auto* mimeData = new QMimeData;
+    auto mimeData = std::make_unique<QMimeData>();
     mimeData->setData(octetStreamFormatName(), selectedData());
     return mimeData;
 }
@@ -732,19 +732,19 @@ void AbstractByteArrayViewPrivate::cutToClipboard(QClipboard::Mode mode)
         return;
     }
 
-    QMimeData* cutData = selectionAsMimeData();
+    auto cutData = selectionAsMimeData();
     if (!cutData) {
         return;
     }
 
-    QApplication::clipboard()->setMimeData(cutData, mode);
+    QApplication::clipboard()->setMimeData(cutData.release(), mode);
 
     removeSelectedData();
 }
 
 void AbstractByteArrayViewPrivate::copyToClipboard(QClipboard::Mode mode) const
 {
-    QMimeData* cutData = selectionAsMimeData();
+    auto cutData = selectionAsMimeData();
     if (!cutData) {
         return;
     }
@@ -752,7 +752,7 @@ void AbstractByteArrayViewPrivate::copyToClipboard(QClipboard::Mode mode) const
 //     if( mode == QClipboard::Selection )
 //         q->disconnect( QApplication::clipboard(), SIGNAL(selectionChanged()) );
 
-    QApplication::clipboard()->setMimeData(cutData, mode);
+    QApplication::clipboard()->setMimeData(cutData.release(), mode);
 
     // TODO: why did we do this? And why does the disconnect above not work?
     // got connected multiple times after a few selections by mouse

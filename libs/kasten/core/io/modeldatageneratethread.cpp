@@ -19,7 +19,7 @@ void ModelDataGenerateThread::run()
 {
     mMimeData = mGenerator->generateData();
 
-    Q_EMIT generated(mMimeData);
+    Q_EMIT generated(mMimeData.get());
 }
 
 }

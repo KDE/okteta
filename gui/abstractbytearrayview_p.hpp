@@ -92,7 +92,7 @@ public: // value access
     bool hasSelectedData() const;
     AddressRange selection() const;
     QByteArray selectedData() const;
-    QMimeData* selectionAsMimeData() const;
+    std::unique_ptr<QMimeData> selectionAsMimeData() const;
 
     AddressRange marking() const;
 

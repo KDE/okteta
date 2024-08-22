@@ -57,7 +57,7 @@ public:
     ~ByteArrayRandomDataGenerator() override;
 
 public: // AbstractModelDataGenerator API
-    QMimeData* generateData() override;
+    std::unique_ptr<QMimeData> generateData() override;
 
 public:
     ByteArrayRandomDataGeneratorSettings settings() const;

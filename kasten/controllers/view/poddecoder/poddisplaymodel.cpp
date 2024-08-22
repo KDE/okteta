@@ -78,7 +78,7 @@ QMimeData* PODDisplayModel::mimeData(const QModelIndexList& indexes) const
 
     const QModelIndex index = indexes.first().siblingAtColumn(PODTableModel::ValueId);
 
-    auto* mimeData = new QMimeData;
+    auto mimeData = std::make_unique<QMimeData>();
 
     const QString displayText = index.data(Qt::DisplayRole).toString();
     mimeData->setText(displayText);
@@ -86,7 +86,7 @@ QMimeData* PODDisplayModel::mimeData(const QModelIndexList& indexes) const
     const int podId = index.row();
     mimeData->setData(QStringLiteral("application/octet-stream"), m_tool->bytes(podId));
 
-    return mimeData;
+    return mimeData.release();
 }
 
 QStringList PODDisplayModel::mimeTypes() const

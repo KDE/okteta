@@ -83,7 +83,7 @@ Q_SIGNALS:
 public: // If::DataSelectable API
     void selectAllData(bool selectAll) override;
     bool hasSelectedData() const override;
-    QMimeData* copySelectedData() const override;
+    std::unique_ptr<QMimeData> copySelectedData() const override;
     const AbstractModelSelection* modelSelection() const override;
 //     virtual void setSelection();
 Q_SIGNALS:
@@ -92,7 +92,7 @@ Q_SIGNALS:
 
 public: // If::SelectedDataWriteable API
     void insertData(const QMimeData* data) override;
-    QMimeData* cutSelectedData() override;
+    std::unique_ptr<QMimeData> cutSelectedData() override;
     void deleteSelectedData() override;
     bool canReadData(const QMimeData* data) const override;
     bool canCutSelectedData() const override;

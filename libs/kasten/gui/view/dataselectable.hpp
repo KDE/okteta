@@ -11,6 +11,8 @@
 
 // Qt
 #include <QtPlugin>
+// Std
+#include <memory>
 
 class QMimeData;
 
@@ -31,7 +33,7 @@ public: // set
 
 public: // get
     virtual bool hasSelectedData() const = 0;
-    virtual QMimeData* copySelectedData() const = 0; // TODO: move into AbstractModelSelection
+    virtual std::unique_ptr<QMimeData> copySelectedData() const = 0; // TODO: move into AbstractModelSelection
     virtual const AbstractModelSelection* modelSelection() const = 0;
 
 public: // signal

@@ -81,12 +81,12 @@ void MultiDocumentStrategyPrivate::triggerGeneration(AbstractModelDataGenerator*
         QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
     }
 
-    QMimeData* mimeData = generateThread->data();
+    auto mimeData = generateThread->releaseData();
 
     generateThread.reset();
 
     const bool setModified = (generator->flags() & AbstractModelDataGenerator::DynamicGeneration);
-    mDocumentManager->createManager()->createNewFromData(mimeData, setModified);
+    mDocumentManager->createManager()->createNewFromData(mimeData.get(), setModified);
 
     QApplication::restoreOverrideCursor();
 }

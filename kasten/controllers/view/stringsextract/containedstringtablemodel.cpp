@@ -138,12 +138,12 @@ QMimeData* ContainedStringTableModel::mimeData(const QModelIndexList& indexes) c
         return nullptr;
     }
 
-    auto* mimeData = new QMimeData;
+    auto mimeData = std::make_unique<QMimeData>();
 
     const QString text = stringColumnAsText(indexes);
     mimeData->setText(text);
 
-    return mimeData;
+    return mimeData.release();
 }
 
 QStringList ContainedStringTableModel::mimeTypes() const

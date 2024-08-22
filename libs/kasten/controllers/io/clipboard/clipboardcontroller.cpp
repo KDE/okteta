@@ -81,22 +81,22 @@ void ClipboardController::setTargetModel(AbstractModel* model)
 
 void ClipboardController::cut()
 {
-    QMimeData* data = mMimeDataControl->cutSelectedData();
+    auto data = mMimeDataControl->cutSelectedData();
     if (!data) {
         return;
     }
 
-    QApplication::clipboard()->setMimeData(data, QClipboard::Clipboard);
+    QApplication::clipboard()->setMimeData(data.release(), QClipboard::Clipboard);
 }
 
 void ClipboardController::copy()
 {
-    QMimeData* data = mSelectionControl->copySelectedData();
+    auto data = mSelectionControl->copySelectedData();
     if (!data) {
         return;
     }
 
-    QApplication::clipboard()->setMimeData(data, QClipboard::Clipboard);
+    QApplication::clipboard()->setMimeData(data.release(), QClipboard::Clipboard);
 }
 
 void ClipboardController::paste()

@@ -65,7 +65,7 @@ public:
     void pasteData(const QMimeData* data);
     void insert(const QByteArray& byteArray);
     bool hasSelectedData() const;
-    QMimeData* selectionAsMimeData() const;
+    std::unique_ptr<QMimeData> selectionAsMimeData() const;
     bool canReadData(const QMimeData* data) const;
     AddressRange selection() const;
 

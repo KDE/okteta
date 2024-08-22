@@ -173,12 +173,12 @@ QMimeData* StructureTreeModel::mimeData(const QModelIndexList& indexes) const
 
     auto* item = index.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
 
-    auto* mimeData = new QMimeData;
+    auto mimeData = std::make_unique<QMimeData>();
 
     mimeData->setText(item->valueString());
     mimeData->setData(QStringLiteral("application/octet-stream"), mTool->bytes(item));
 
-    return mimeData;
+    return mimeData.release();
 }
 
 QStringList StructureTreeModel::mimeTypes() const

@@ -123,11 +123,11 @@ void InsertController::triggerExecution(AbstractModelDataGenerator* generator)
         QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
     }
 
-    QMimeData* mimeData = generateThread->data();
+    auto mimeData = generateThread->releaseData();
 
     generateThread.reset();
 
-    mSelectedDataWriteableControl->insertData(mimeData);
+    mSelectedDataWriteableControl->insertData(mimeData.get());
 
     QApplication::restoreOverrideCursor();
 }

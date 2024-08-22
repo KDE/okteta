@@ -122,7 +122,7 @@ void ByteArrayPatternGenerator::setSettings(const ByteArrayPatternGeneratorSetti
 
 // TODO: optimize and check if pattern is just one byte, so memset can be used
 // TODO: see if copying larger chunks with memcpy is faster, so
-QMimeData* ByteArrayPatternGenerator::generateData()
+std::unique_ptr<QMimeData> ByteArrayPatternGenerator::generateData()
 {
     const int patternSize = mSettings.pattern.size();
 
@@ -137,7 +137,7 @@ QMimeData* ByteArrayPatternGenerator::generateData()
         memcpy(&rawInsertData[i], rawPatternData, patternSize);
     }
 
-    auto* mimeData = new QMimeData;
+    auto mimeData = std::make_unique<QMimeData>();
     mimeData->setData(mimeType(), insertData);
 
 // TODO: a method to get the description of the change, e.g.

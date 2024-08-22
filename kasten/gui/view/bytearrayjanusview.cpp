@@ -13,6 +13,7 @@
 #include <Okteta/ByteArrayRowView>
 // Qt
 #include <QHBoxLayout>
+#include <QMimeData>
 #include <QScrollBar>
 
 namespace Okteta {
@@ -130,7 +131,7 @@ bool ByteArrayJanusView::hasSelectedData() const
     return mView->hasSelectedData();
 }
 
-QMimeData* ByteArrayJanusView::selectionAsMimeData() const
+std::unique_ptr<QMimeData> ByteArrayJanusView::selectionAsMimeData() const
 {
     return mView->selectionAsMimeData();
 }

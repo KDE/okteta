@@ -19,6 +19,7 @@
 // Qt
 #include <QApplication>
 #include <QClipboard>
+#include <QMimeData>
 #include <QMouseEvent>
 #include <QDrag>
 
@@ -307,13 +308,13 @@ void MouseNavigator::startDrag()
     mDragStartPossible = false;
 
     // create data
-    QMimeData* dragData = mView->selectionAsMimeData();
+    auto dragData = mView->selectionAsMimeData();
     if (!dragData) {
         return;
     }
 
     auto* drag = new QDrag(mView->q_func());
-    drag->setMimeData(dragData);
+    drag->setMimeData(dragData.release());
 
     Qt::DropActions request = (mView->isEffectiveReadOnly() || mView->isOverwriteMode()) ? Qt::CopyAction : Qt::CopyAction | Qt::MoveAction;
     Qt::DropAction dropAction = drag->exec(request);

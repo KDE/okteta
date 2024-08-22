@@ -43,7 +43,7 @@ public:
     ~AbstractModelDataGenerator() override;
 
 public: // API to be implemented
-    virtual QMimeData* generateData() = 0;
+    virtual std::unique_ptr<QMimeData> generateData() = 0;
 
 public:
     QString typeName() const;

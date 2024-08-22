@@ -135,9 +135,9 @@ void CopyAsController::triggerExecution(AbstractModelStreamEncoder* encoder,
 
     exportDataBuffer.close();
 
-    auto* mimeData = new QMimeData;
+    auto mimeData = std::make_unique<QMimeData>();
     mimeData->setData(encoder->remoteClipboardMimeType(), exportData);
-    QApplication::clipboard()->setMimeData(mimeData, QClipboard::Clipboard);
+    QApplication::clipboard()->setMimeData(mimeData.release(), QClipboard::Clipboard);
 
     QApplication::restoreOverrideCursor();
 }

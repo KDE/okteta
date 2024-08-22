@@ -14,6 +14,8 @@
 #include "bytearraytablelayout.hpp"
  // Okteta core
 #include <Okteta/Bookmark>
+// Qt
+#include <QMimeData>
 
 namespace Okteta {
 
@@ -140,7 +142,7 @@ QByteArray AbstractByteArrayView::selectedData() const
     Q_D(const AbstractByteArrayView);
     return d->selectedData();
 }
-QMimeData* AbstractByteArrayView::selectionAsMimeData() const
+std::unique_ptr<QMimeData> AbstractByteArrayView::selectionAsMimeData() const
 {
     Q_D(const AbstractByteArrayView);
     return d->selectionAsMimeData();

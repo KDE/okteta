@@ -271,7 +271,7 @@ public:
      * @return deep copy of the selected data
      */
     QByteArray selectedData() const;
-    QMimeData* selectionAsMimeData() const;
+    std::unique_ptr<QMimeData> selectionAsMimeData() const;
 
 public: // modification access
     void pasteData(const QMimeData* data);

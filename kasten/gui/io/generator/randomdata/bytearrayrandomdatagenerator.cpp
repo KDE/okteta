@@ -69,7 +69,7 @@ void ByteArrayRandomDataGenerator::setSettings(const ByteArrayRandomDataGenerato
 }
 
 // TODO: use different RNG, with multiple characteristics and offer them in the config
-QMimeData* ByteArrayRandomDataGenerator::generateData()
+std::unique_ptr<QMimeData> ByteArrayRandomDataGenerator::generateData()
 {
     const int insertDataSize = mSettings.size;
     QByteArray insertData(insertDataSize, '\0');
@@ -79,7 +79,7 @@ QMimeData* ByteArrayRandomDataGenerator::generateData()
         insertData[i] = static_cast<char>(randomGenerator->bounded(256));
     }
 
-    auto* mimeData = new QMimeData;
+    auto mimeData = std::make_unique<QMimeData>();
     mimeData->setData(mimeType(), insertData);
 
 // TODO: a method to get the description of the change, e.g.

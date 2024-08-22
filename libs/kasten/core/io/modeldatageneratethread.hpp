@@ -12,7 +12,10 @@
 // lib
 #include "kastencore_export.hpp"
 // Qt
+#include <QMimeData>
 #include <QThread>
+// Std
+#include <memory>
 
 class QMimeData;
 
@@ -35,16 +38,16 @@ public: // QThread API
     void run() override;
 
 public:
-    /// the result of the thread, if successful. Needs to be deleted by the thread::run() caller
-    QMimeData* data() const;
+    /// the result of the thread, if successful
+    std::unique_ptr<QMimeData> releaseData();
 
 Q_SIGNALS:
-    void generated(QMimeData* data);
+    void generated(const QMimeData* data);
 
 private:
     AbstractModelDataGenerator* const mGenerator;
 
-    QMimeData* mMimeData = nullptr;
+    std::unique_ptr<QMimeData> mMimeData;
 };
 
 inline ModelDataGenerateThread::ModelDataGenerateThread(QObject* parent,
@@ -53,7 +56,7 @@ inline ModelDataGenerateThread::ModelDataGenerateThread(QObject* parent,
     , mGenerator(generator)
 {}
 
-inline QMimeData* ModelDataGenerateThread::data() const { return mMimeData; }
+inline std::unique_ptr<QMimeData> ModelDataGenerateThread::releaseData() { return std::move(mMimeData); }
 
 }
 

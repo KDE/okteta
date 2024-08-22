@@ -35,7 +35,7 @@ ByteArraySequenceGenerator::~ByteArraySequenceGenerator() = default;
 
 // TODO: optimize and check if pattern is just one byte, so memset can be used
 // TODO: see if copying larger chunks with memcpy is faster, so
-QMimeData* ByteArraySequenceGenerator::generateData()
+std::unique_ptr<QMimeData> ByteArraySequenceGenerator::generateData()
 {
     const Okteta::Byte firstByte = 0;
     const Okteta::Byte lastByte = 255;
@@ -48,7 +48,7 @@ QMimeData* ByteArraySequenceGenerator::generateData()
         insertData[i] = byte;
     }
 
-    auto* mimeData = new QMimeData;
+    auto mimeData = std::make_unique<QMimeData>();
     mimeData->setData(mimeType(), insertData);
 
 // TODO: a method to get the description of the change, e.g.

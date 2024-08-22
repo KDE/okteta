@@ -117,14 +117,14 @@ QMimeData* StatisticDisplayModel::mimeData(const QModelIndexList& indexes) const
         return nullptr;
     }
 
-    auto* mimeData = new QMimeData;
+    auto mimeData = std::make_unique<QMimeData>();
 
     const QString text = tableAsText(indexes);
     mimeData->setText(text);
     const QString html = tableAsHtml(indexes);
     mimeData->setHtml(html);
 
-    return mimeData;
+    return mimeData.release();
 }
 
 QStringList StatisticDisplayModel::mimeTypes() const

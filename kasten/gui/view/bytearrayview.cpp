@@ -19,6 +19,7 @@
 #include <Okteta/AbstractByteArrayModel>
 // Qt
 #include <QFontDatabase>
+#include <QMimeData>
 
 namespace Kasten {
 
@@ -173,7 +174,7 @@ bool ByteArrayView::hasSelectedData() const
     return mWidget->hasSelectedData();
 }
 
-QMimeData* ByteArrayView::copySelectedData() const
+std::unique_ptr<QMimeData> ByteArrayView::copySelectedData() const
 {
     return mWidget->selectionAsMimeData();
 }
@@ -183,11 +184,11 @@ void ByteArrayView::insertData(const QMimeData* data)
     mWidget->pasteData(data);
 }
 
-QMimeData* ByteArrayView::cutSelectedData()
+std::unique_ptr<QMimeData> ByteArrayView::cutSelectedData()
 {
-    QMimeData* result = mWidget->selectionAsMimeData();
+    auto result = mWidget->selectionAsMimeData();
     mWidget->removeSelectedData();
-    return result;
+    return std::move(result);
 }
 
 void ByteArrayView::deleteSelectedData()
