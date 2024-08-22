@@ -28,11 +28,11 @@ std::unique_ptr<AbstractView> ByteArrayViewFactory::createViewFor(AbstractDocume
 
     auto* document = static_cast<ByteArrayDocument*>(_document);
     if (document) {
-        auto* synchronizer = new ByteArrayViewProfileSynchronizer(mByteArrayViewProfileManager);
+        auto synchronizer = std::make_unique<ByteArrayViewProfileSynchronizer>(mByteArrayViewProfileManager);
 
         synchronizer->setViewProfileId(mByteArrayViewProfileManager->defaultViewProfileId());
 
-        result = std::make_unique<ByteArrayView>(document, synchronizer);
+        result = std::make_unique<ByteArrayView>(document, std::move(synchronizer));
     }
 
     return result;
@@ -44,11 +44,11 @@ std::unique_ptr<AbstractView> ByteArrayViewFactory::createCopyOfView(AbstractVie
 
     auto* view = qobject_cast<ByteArrayView*>(_view);
     if (view) {
-        auto* synchronizer = new ByteArrayViewProfileSynchronizer(mByteArrayViewProfileManager);
+        auto synchronizer = std::make_unique<ByteArrayViewProfileSynchronizer>(mByteArrayViewProfileManager);
 
         synchronizer->setViewProfileId(view->synchronizer()->viewProfileId());
 
-        result = std::make_unique<ByteArrayView>(view, synchronizer, alignment);
+        result = std::make_unique<ByteArrayView>(view, std::move(synchronizer), alignment);
     }
 
     return result;

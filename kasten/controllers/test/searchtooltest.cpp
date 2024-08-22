@@ -13,6 +13,7 @@
 #include <view/search/searchuserqueryable.hpp>
 // Okteta Kasten gui
 #include <Kasten/Okteta/ByteArrayView>
+#include <Kasten/Okteta/ByteArrayViewProfileSynchronizer>
 // Okteta Kasten core
 #include <Kasten/Okteta/ByteArrayDocument>
 // Okteta Core

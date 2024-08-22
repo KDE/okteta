@@ -22,21 +22,21 @@
 
 namespace Kasten {
 
-ByteArrayView::ByteArrayView(ByteArrayDocument* document, ByteArrayViewProfileSynchronizer* synchronizer)
+ByteArrayView::ByteArrayView(ByteArrayDocument* document, std::unique_ptr<ByteArrayViewProfileSynchronizer>&& synchronizer)
     : AbstractView(document)
-    , mByteArrayViewProfileSynchronizer(synchronizer)
+    , mByteArrayViewProfileSynchronizer(std::move(synchronizer))
     , mDocument(document)
 {
     init();
-    if (synchronizer) {
-        synchronizer->setView(this);
+    if (mByteArrayViewProfileSynchronizer) {
+        mByteArrayViewProfileSynchronizer->setView(this);
     }
 }
 
-ByteArrayView::ByteArrayView(ByteArrayView* other, ByteArrayViewProfileSynchronizer* synchronizer,
+ByteArrayView::ByteArrayView(ByteArrayView* other, std::unique_ptr<ByteArrayViewProfileSynchronizer>&& synchronizer,
                              Qt::Alignment alignment)
     : AbstractView(static_cast<ByteArrayDocument*>(other->baseModel()))
-    , mByteArrayViewProfileSynchronizer(synchronizer)
+    , mByteArrayViewProfileSynchronizer(std::move(synchronizer))
     , mDocument(static_cast<ByteArrayDocument*>(other->baseModel()))
 {
     init();
@@ -84,8 +84,8 @@ ByteArrayView::ByteArrayView(ByteArrayView* other, ByteArrayViewProfileSynchroni
     // and then ensureCursorVisible destroys the fun
     mWidget->setViewPos(viewPos);
 
-    if (synchronizer) {
-        synchronizer->setView(this);
+    if (mByteArrayViewProfileSynchronizer) {
+        mByteArrayViewProfileSynchronizer->setView(this);
     }
 }
 

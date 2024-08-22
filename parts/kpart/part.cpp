@@ -140,8 +140,8 @@ OktetaPart::OktetaPart(QObject* parent,
     // TODO: BrowserExtension might rely on existing objects (session snap while loadJob),
     // so this hack just creates some dummies
     mDocument = std::make_unique<Kasten::ByteArrayDocument>(QString());
-    auto* viewProfileSynchronizer = new Kasten::ByteArrayViewProfileSynchronizer(viewProfileManager);
-    mByteArrayView = std::make_unique<Kasten::ByteArrayView>(mDocument.get(), viewProfileSynchronizer);
+    auto viewProfileSynchronizer = std::make_unique<Kasten::ByteArrayViewProfileSynchronizer>(viewProfileManager);
+    mByteArrayView = std::make_unique<Kasten::ByteArrayView>(mDocument.get(), std::move(viewProfileSynchronizer));
 
     if (modus == Modus::BrowserView) {
         new OktetaBrowserExtension(this);
@@ -201,10 +201,10 @@ void OktetaPart::onDocumentLoaded(Kasten::AbstractDocument* document)
         connect(mDocument->synchronizer(), &Kasten::AbstractModelSynchronizer::localSyncStateChanged,
                 this, &OktetaPart::onModified);
 
-        auto* viewProfileSynchronizer = new Kasten::ByteArrayViewProfileSynchronizer(mViewProfileManager);
+        auto viewProfileSynchronizer = std::make_unique<Kasten::ByteArrayViewProfileSynchronizer>(mViewProfileManager);
         viewProfileSynchronizer->setViewProfileId(mViewProfileManager->defaultViewProfileId());
 
-        mByteArrayView = std::make_unique<Kasten::ByteArrayView>(mDocument.get(), viewProfileSynchronizer);
+        mByteArrayView = std::make_unique<Kasten::ByteArrayView>(mDocument.get(), std::move(viewProfileSynchronizer));
         connect(mByteArrayView.get(), SIGNAL(hasSelectedDataChanged(bool)), SIGNAL(hasSelectedDataChanged(bool)));
 
         mSingleViewArea->setView(mByteArrayView.get());

@@ -54,8 +54,8 @@ public:
     };
 
 public:
-    ByteArrayView(ByteArrayDocument* document, ByteArrayViewProfileSynchronizer* synchronizer);
-    ByteArrayView(ByteArrayView* other, ByteArrayViewProfileSynchronizer* synchronizer,
+    ByteArrayView(ByteArrayDocument* document, std::unique_ptr<ByteArrayViewProfileSynchronizer>&& synchronizer);
+    ByteArrayView(ByteArrayView* other, std::unique_ptr<ByteArrayViewProfileSynchronizer>&& synchronizer,
                   Qt::Alignment alignment = {});
 
     ~ByteArrayView() override;
