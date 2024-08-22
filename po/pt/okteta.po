@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-07 03:40+0000\n"
+"POT-Creation-Date: 2024-08-22 03:33+0000\n"
 "PO-Revision-Date: 2020-06-30 11:34+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: pt <kde-i18n-pt@kde.org>\n"
@@ -87,7 +87,7 @@ msgstr "&Janelas"
 msgid "Main Toolbar"
 msgstr "Barra Principal"
 
-#: program.cpp:89
+#: program.cpp:91
 #, kde-format
 msgid "File(s) to load."
 msgstr "O(s) ficheiro(s) a carregar."

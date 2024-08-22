@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-07 03:40+0000\n"
+"POT-Creation-Date: 2024-08-22 03:33+0000\n"
 "PO-Revision-Date: 2016-04-08 22:57+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic <translation-team-is@lists.sourceforge.net>\n"
@@ -91,7 +91,7 @@ msgstr "&Windows"
 msgid "Main Toolbar"
 msgstr "Aðaltækjaslá"
 
-#: program.cpp:89
+#: program.cpp:91
 #, kde-format
 msgid "File(s) to load."
 msgstr ""
