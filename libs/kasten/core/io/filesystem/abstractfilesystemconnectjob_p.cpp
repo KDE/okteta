@@ -32,12 +32,12 @@ void AbstractFileSystemConnectJobPrivate::connectWithFile()
             mFile = std::make_unique<QFile>(mWorkFilePath);
             isWorkFileOk = mFile->open(QIODevice::WriteOnly);
         } else {
-            auto* temporaryFile = new QTemporaryFile;
+            auto temporaryFile = std::make_unique<QTemporaryFile>();
             isWorkFileOk = temporaryFile->open();
 
             mWorkFilePath = temporaryFile->fileName();
             mTempFilePath = mWorkFilePath;
-            mFile.reset(temporaryFile);
+            mFile = std::move(temporaryFile);
         }
         if (!isWorkFileOk) {
             q->setErrorText(mFile->errorString());

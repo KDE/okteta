@@ -27,11 +27,11 @@ void AbstractFileSystemExportJobPrivate::exportToFile()
         isWorkFileOk = mFile->open(QIODevice::WriteOnly);
     } else {
 
-        auto* temporaryFile = new QTemporaryFile();
+        auto temporaryFile = std::make_unique<QTemporaryFile>();
         isWorkFileOk = temporaryFile->open();
 
         mWorkFilePath = temporaryFile->fileName();
-        mFile.reset(temporaryFile);
+        mFile = std::move(temporaryFile);
     }
 
     if (isWorkFileOk) {

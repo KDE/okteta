@@ -34,11 +34,11 @@ void AbstractFileSystemSyncToRemoteJobPrivate::syncToRemote()
 
         mSynchronizer->pauseFileWatching();
     } else {
-        auto* temporaryFile = new QTemporaryFile;
+        auto temporaryFile = std::make_unique<QTemporaryFile>();
         isWorkFileOk = temporaryFile->open();
 
         mWorkFilePath = temporaryFile->fileName();
-        mFile.reset(temporaryFile);
+        mFile = std::move(temporaryFile);
     }
 
     if (isWorkFileOk) {
