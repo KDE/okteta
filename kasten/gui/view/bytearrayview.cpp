@@ -188,7 +188,7 @@ std::unique_ptr<QMimeData> ByteArrayView::cutSelectedData()
 {
     auto result = mWidget->selectionAsMimeData();
     mWidget->removeSelectedData();
-    return std::move(result);
+    return result;
 }
 
 void ByteArrayView::deleteSelectedData()
