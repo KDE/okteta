@@ -33,12 +33,12 @@ void TestDocumentFileLoadJob::startLoadFromFile()
         QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
     }
 
-    TestDocument* document = loadThread->document();
-    testSynchronizer->setDocument(document);
+    auto document = loadThread->releaseDocument();
+    testSynchronizer->setDocument(document.get());
 
     loadThread.reset();
 
-    setDocument(document);
+    setDocument(std::move(document));
 }
 
 }

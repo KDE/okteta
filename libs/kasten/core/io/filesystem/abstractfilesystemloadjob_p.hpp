@@ -31,7 +31,7 @@ public: // KJob API
     void start();
 
 public: // AbstractLoadJob API
-    void setDocument(AbstractDocument* document);
+    void setDocument(std::unique_ptr<AbstractDocument>&& document);
 
 public:
     AbstractModelFileSystemSynchronizer* synchronizer() const;

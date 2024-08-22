@@ -9,14 +9,16 @@
 #ifndef KASTEN_BYTEARRAYRAWFILELOADTHREAD_HPP
 #define KASTEN_BYTEARRAYRAWFILELOADTHREAD_HPP
 
+// lib
+#include "bytearraydocument.hpp"
 // Qt
 #include <QThread>
+// Std
+#include <memory>
 
 class QFile;
 
 namespace Kasten {
-
-class ByteArrayDocument;
 
 class ByteArrayRawFileLoadThread : public QThread
 {
@@ -31,7 +33,7 @@ public: // QThread API
     void run() override;
 
 public:
-    ByteArrayDocument* document() const;
+    std::unique_ptr<ByteArrayDocument> releaseDocument();
 
     const QString& errorString() const;
 
@@ -41,7 +43,7 @@ Q_SIGNALS:
 private:
     QFile* const mFile;
 
-    ByteArrayDocument* mDocument = nullptr;
+    std::unique_ptr<ByteArrayDocument> mDocument;
     QString mErrorString;
 };
 
@@ -50,7 +52,7 @@ inline ByteArrayRawFileLoadThread::ByteArrayRawFileLoadThread(QObject* parent, Q
     , mFile(file)
 {}
 
-inline ByteArrayDocument* ByteArrayRawFileLoadThread::document() const { return mDocument; }
+inline std::unique_ptr<ByteArrayDocument> ByteArrayRawFileLoadThread::releaseDocument() { return std::move(mDocument); }
 inline const QString& ByteArrayRawFileLoadThread::errorString()  const { return mErrorString; }
 
 }

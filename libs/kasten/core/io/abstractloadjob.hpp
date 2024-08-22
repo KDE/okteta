@@ -43,7 +43,7 @@ Q_SIGNALS:
 protected:
     // emits documentLoaded()
     // TODO: or better name property LoadedDocument?
-    virtual void setDocument(AbstractDocument* document);
+    virtual void setDocument(std::unique_ptr<AbstractDocument>&& document);
 
 protected:
     const std::unique_ptr<AbstractLoadJobPrivate> d_ptr;

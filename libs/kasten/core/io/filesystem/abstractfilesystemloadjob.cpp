@@ -47,11 +47,11 @@ void AbstractFileSystemLoadJob::start()
     d->start();
 }
 
-void AbstractFileSystemLoadJob::setDocument(AbstractDocument* document)
+void AbstractFileSystemLoadJob::setDocument(std::unique_ptr<AbstractDocument>&& document)
 {
     Q_D(AbstractFileSystemLoadJob);
 
-    d->setDocument(document);
+    d->setDocument(std::move(document));
 }
 
 }

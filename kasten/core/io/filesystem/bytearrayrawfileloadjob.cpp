@@ -33,8 +33,8 @@ void ByteArrayRawFileLoadJob::startLoadFromFile()
         QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
     }
 
-    ByteArrayDocument* document = loadThread->document();
-    qobject_cast<ByteArrayRawFileSynchronizer*>(synchronizer())->setDocument(document);
+    auto document = loadThread->releaseDocument();
+    qobject_cast<ByteArrayRawFileSynchronizer*>(synchronizer())->setDocument(document.get());
 
     if (document) {
 //         ExternalBookmarkStorage().readBookmarks( document, url() );
@@ -46,7 +46,7 @@ void ByteArrayRawFileLoadJob::startLoadFromFile()
 
     loadThread.reset();
 
-    setDocument(document);
+    setDocument(std::move(document));
 }
 
 }

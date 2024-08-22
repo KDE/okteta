@@ -30,11 +30,11 @@ AbstractDocument* AbstractLoadJob::document() const
     return d->document();
 }
 
-void AbstractLoadJob::setDocument(AbstractDocument* document)
+void AbstractLoadJob::setDocument(std::unique_ptr<AbstractDocument>&& document)
 {
     Q_D(AbstractLoadJob);
 
-    d->setDocument(document);
+    d->setDocument(std::move(document));
 }
 
 }

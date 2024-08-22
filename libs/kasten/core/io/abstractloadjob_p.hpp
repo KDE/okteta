@@ -28,7 +28,7 @@ public:
     AbstractDocument* document() const;
 
 public:
-    void setDocument(AbstractDocument* document);
+    void setDocument(std::unique_ptr<AbstractDocument>&& document);
 
 protected:
     AbstractLoadJob* const q_ptr;
@@ -46,13 +46,13 @@ inline AbstractLoadJobPrivate::AbstractLoadJobPrivate(AbstractLoadJob* parent)
 inline AbstractLoadJobPrivate::~AbstractLoadJobPrivate() = default;
 
 inline AbstractDocument* AbstractLoadJobPrivate::document() const { return mDocument; }
-inline void AbstractLoadJobPrivate::setDocument(AbstractDocument* document)
+inline void AbstractLoadJobPrivate::setDocument(std::unique_ptr<AbstractDocument>&& document)
 {
     Q_Q(AbstractLoadJob);
 
     if (document) {
-        mDocument = document;
-        Q_EMIT q->documentLoaded(document);
+        mDocument = document.release(); // TODO: make consumer of AbstractLoadJob not only use signal
+        Q_EMIT q->documentLoaded(mDocument);
     }
 
     q->emitResult();

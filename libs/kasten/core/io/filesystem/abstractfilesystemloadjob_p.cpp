@@ -66,7 +66,7 @@ void AbstractFileSystemLoadJobPrivate::load()
     }
 }
 
-void AbstractFileSystemLoadJobPrivate::setDocument(AbstractDocument* document)
+void AbstractFileSystemLoadJobPrivate::setDocument(std::unique_ptr<AbstractDocument>&& document)
 {
     Q_Q(AbstractFileSystemLoadJob);
 
@@ -98,7 +98,7 @@ void AbstractFileSystemLoadJobPrivate::setDocument(AbstractDocument* document)
         QFile::remove(mTempFilePath);
     }
 
-    q->AbstractLoadJob::setDocument(document);
+    q->AbstractLoadJob::setDocument(std::move(document));
 }
 
 }

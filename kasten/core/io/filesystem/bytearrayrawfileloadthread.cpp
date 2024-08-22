@@ -8,8 +8,6 @@
 
 #include "bytearrayrawfileloadthread.hpp"
 
-// lib
-#include "bytearraydocument.hpp"
 // Kasten core
 // #include <Kasten/Person>
 // Okteta core
@@ -54,7 +52,7 @@ void ByteArrayRawFileLoadThread::run()
                 // TODO: make PieceTableByteArrayModel a child by constructor argument parent
                 byteArray->moveToThread(QCoreApplication::instance()->thread());
 
-                mDocument = new ByteArrayDocument(std::move(byteArray), i18nc("destination of the byte array", "Loaded from file."));
+                mDocument = std::make_unique<ByteArrayDocument>(std::move(byteArray), i18nc("destination of the byte array", "Loaded from file."));
 //                 mDocument->setOwner(Person::createEgo());
                 mDocument->moveToThread(QCoreApplication::instance()->thread());
             } else {
@@ -67,11 +65,7 @@ void ByteArrayRawFileLoadThread::run()
         mErrorString = i18n("Support to load files larger than 2 GiB has not yet been implemented.");
     }
 
-    if (!success) {
-        mDocument = nullptr;
-    }
-
-    Q_EMIT documentRead(mDocument);
+    Q_EMIT documentRead(mDocument.get());
 }
 
 }

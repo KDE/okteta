@@ -8,8 +8,6 @@
 
 #include "testdocumentfileloadthread.hpp"
 
-// lib
-#include "testdocument.hpp"
 // KF
 #include <KLocalizedString>
 // Qt
@@ -32,9 +30,7 @@ void TestDocumentFileLoadThread::run()
     const int headerSize = mHeader.size();
     QByteArray header(headerSize, ' ');
     const int headerResult = inStream.readRawData(header.data(), headerSize);
-    if (headerResult == -1 || header != mHeader) {
-        mDocument = nullptr;
-    } else {
+    if ((headerResult != -1) && (header == mHeader)) {
         QByteArray byteArray(fileSize, ' ');
 
         inStream.readRawData(byteArray.data(), fileSize);
@@ -45,14 +41,12 @@ void TestDocumentFileLoadThread::run()
         //     if( success )
         //         *success = streamIsOk ? 0 : 1;
         if (streamIsOk) {
-            mDocument = new TestDocument(byteArray);
+            mDocument = std::make_unique<TestDocument>(byteArray);
             mDocument->moveToThread(QCoreApplication::instance()->thread());
-        } else {
-            mDocument = nullptr;
         }
     }
 
-    Q_EMIT documentRead(mDocument);
+    Q_EMIT documentRead(mDocument.get());
 }
 
 }

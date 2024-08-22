@@ -9,8 +9,12 @@
 #ifndef KASTEN_TESTDOCUMENTFILELOADTHREAD_HPP
 #define KASTEN_TESTDOCUMENTFILELOADTHREAD_HPP
 
+// lib
+#include "testdocument.hpp"
 // Qt
 #include <QThread>
+// Std
+#include <memory>
 
 class QFile;
 
@@ -31,7 +35,7 @@ public: // QThread API
     void run() override;
 
 public:
-    TestDocument* document() const;
+    std::unique_ptr<TestDocument> releaseDocument();
 
 Q_SIGNALS:
     void documentRead(Kasten::TestDocument* document);
@@ -40,7 +44,7 @@ private:
     QFile* mFile;
     const QByteArray mHeader;
 
-    TestDocument* mDocument = nullptr;
+    std::unique_ptr<TestDocument> mDocument = nullptr;
 };
 
 inline TestDocumentFileLoadThread::TestDocumentFileLoadThread(QObject* parent, const QByteArray& header, QFile* file)
@@ -49,7 +53,7 @@ inline TestDocumentFileLoadThread::TestDocumentFileLoadThread(QObject* parent, c
     , mHeader(header)
 {}
 
-inline TestDocument* TestDocumentFileLoadThread::document() const { return mDocument; }
+inline std::unique_ptr<TestDocument> TestDocumentFileLoadThread::releaseDocument() { return std::move(mDocument); }
 
 }
 

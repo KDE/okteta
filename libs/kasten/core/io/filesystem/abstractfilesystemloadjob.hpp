@@ -34,7 +34,7 @@ public: // KJob API
     void start() override;
 
 protected: // AbstractLoadJob API
-    void setDocument(AbstractDocument* document) override;
+    void setDocument(std::unique_ptr<AbstractDocument>&& document) override;
 
 protected: // API to be implemented
     virtual void startLoadFromFile() = 0;
