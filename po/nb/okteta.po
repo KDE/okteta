@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-20 01:50+0000\n"
+"POT-Creation-Date: 2024-08-22 01:56+0000\n"
 "PO-Revision-Date: 2014-02-26 09:09+0100\n"
 "Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -90,7 +90,7 @@ msgstr "&Vinduer"
 msgid "Main Toolbar"
 msgstr "Hovedverktøylinje"
 
-#: program.cpp:82
+#: program.cpp:87
 #, kde-format
 msgid "File(s) to load."
 msgstr ""

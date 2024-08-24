@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-20 01:50+0000\n"
+"POT-Creation-Date: 2024-08-22 01:56+0000\n"
 "PO-Revision-Date: 2021-01-04 21:03+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -90,7 +90,7 @@ msgstr "V&indauge"
 msgid "Main Toolbar"
 msgstr "Hovudverktøylinje"
 
-#: program.cpp:82
+#: program.cpp:87
 #, kde-format
 msgid "File(s) to load."
 msgstr "Fil(er) som skal opnast."
