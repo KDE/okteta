@@ -66,6 +66,7 @@ kastencontrollers_add_sublibrary(documentsystem/documentsbrowser
         DocumentsToolView
 )
 
+if (BUILD_TERMINALTOOL)
 kastencontrollers_add_sublibrary(document/terminal
     PUBLIC
         TerminalToolFactory
@@ -75,6 +76,7 @@ kastencontrollers_add_sublibrary(document/terminal
         TerminalTool
         TerminalToolView
 )
+endif()
 
 kastencontrollers_add_sublibrary(document/modified
     PUBLIC

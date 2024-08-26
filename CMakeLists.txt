@@ -42,6 +42,8 @@ option(BUILD_DESIGNERPLUGIN "Build the Designer plugin." ON)
 add_feature_info(DESIGNERPLUGIN ${BUILD_DESIGNERPLUGIN} "Qt Designer plugin")
 option(BUILD_OKTETAKASTENLIBS "Build the Okteta Kasten libraries." ON)
 add_feature_info(OKTETAKASTENLIBS ${BUILD_OKTETAKASTENLIBS} "Okteta Kasten libraries")
+cmake_dependent_option(BUILD_TERMINALTOOL "Build the Terminal tool (needs Konsole/Qt5 KPart)." ON "BUILD_OKTETAKASTENLIBS" OFF)
+add_feature_info(KPARTSPLUGIN ${BUILD_KPARTSPLUGIN} "KParts plugin")
 
 cmake_dependent_option(BUILD_KPARTSPLUGIN "Build the KParts plugin." ON "BUILD_OKTETAKASTENLIBS" OFF)
 add_feature_info(KPARTSPLUGIN ${BUILD_KPARTSPLUGIN} "KParts plugin")

@@ -41,8 +41,10 @@
 #include <Kasten/FileSystemBrowserToolFactory>
 #include <Kasten/DocumentsToolViewFactory>
 #include <Kasten/DocumentsToolFactory>
+#if KASTEN_BUILD_TERMINALTOOL
 #include <Kasten/TerminalToolViewFactory>
 #include <Kasten/TerminalToolFactory>
+#endif
 // controllers
 // #include <Kasten/Okteta/OverwriteOnlyControllerFactory>
 #include <Kasten/Okteta/OverwriteModeControllerFactory>
@@ -102,6 +104,8 @@
 // Qt
 #include <QUrl>
 #include <QMimeData>
+#include <QDebug>
+#include <Kasten/AbstractTool>
 
 namespace Kasten {
 
@@ -144,7 +148,9 @@ OktetaMainWindow::OktetaMainWindow(OktetaProgram* program)
     setStatusBar(new Kasten::StatusBar(this));
 
     setupControllers();
+qDebug() << "BEFORE SETUP"  << size() << "sizehint" << sizeHint();
     setupGUI();
+qDebug() << "AFTER  SETUP"  << size() << "sizehint" << sizeHint();
 
     // all controllers which use plugActionList have to do so after(!) setupGUI() or their entries will be removed
     // TODO: why is this so?
@@ -193,7 +199,9 @@ void OktetaMainWindow::setupControllers()
 
     addToolFromFactory(FileSystemBrowserToolViewFactory(), FileSystemBrowserToolFactory(syncManager));
     addToolFromFactory(DocumentsToolViewFactory(), DocumentsToolFactory(documentManager));
+#if KASTEN_BUILD_TERMINALTOOL
     addToolFromFactory(TerminalToolViewFactory(), TerminalToolFactory(syncManager));
+#endif
 #ifndef NDEBUG
     addToolFromFactory(VersionViewToolViewFactory(), VersionViewToolFactory());
 #endif
@@ -238,6 +246,7 @@ void OktetaMainWindow::addToolFromFactory(const AbstractToolViewFactory& toolVie
     AbstractToolView* toolView = toolViewFactory.create(tool);
 
     addTool(toolView);
+qDebug() << "DOCK" << tool->title() << "size" << size() << "sizehint" << sizeHint();
 }
 
 void OktetaMainWindow::addXmlGuiControllerFromFactory(const AbstractXmlGuiControllerFactory& factory)

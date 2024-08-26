@@ -9,6 +9,10 @@ set_source_files_properties(about.cpp PROPERTIES
     COMPILE_FLAGS -DOKTETA_VERSION=\\\"${Okteta_VERSION}\\\"
 )
 
+set_source_files_properties(mainwindow.cpp PROPERTIES
+    COMPILE_FLAGS -DKASTEN_BUILD_TERMINALTOOL=$<BOOL:${BUILD_TERMINALTOOL}>
+)
+
 qt5_add_resources(okteta_SRCS
     okteta.qrc
 )
