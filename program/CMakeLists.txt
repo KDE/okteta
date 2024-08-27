@@ -28,6 +28,10 @@ set_source_files_properties(about.cpp PROPERTIES
     COMPILE_FLAGS -DOKTETA_VERSION=\\\"${Okteta_VERSION}\\\"
 )
 
+set_source_files_properties(mainwindow.cpp PROPERTIES
+    COMPILE_FLAGS -DKASTEN_BUILD_TERMINALTOOL=$<BOOL:${BUILD_TERMINALTOOL}>
+)
+
 ecm_add_app_icon(okteta
     ICONS
         ${CMAKE_CURRENT_SOURCE_DIR}/16-apps-okteta.png

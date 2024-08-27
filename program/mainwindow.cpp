@@ -41,8 +41,10 @@
 #include <Kasten/FileSystemBrowserToolFactory>
 #include <Kasten/DocumentsToolViewFactory>
 #include <Kasten/DocumentsToolFactory>
+#if KASTEN_BUILD_TERMINALTOOL
 #include <Kasten/TerminalToolViewFactory>
 #include <Kasten/TerminalToolFactory>
+#endif
 // controllers
 // #include <Kasten/Okteta/OverwriteOnlyControllerFactory>
 #include <Kasten/Okteta/OverwriteModeControllerFactory>
@@ -196,7 +198,9 @@ void OktetaMainWindow::setupControllers()
 
     addToolFromFactory(FileSystemBrowserToolViewFactory(), FileSystemBrowserToolFactory(syncManager));
     addToolFromFactory(DocumentsToolViewFactory(), DocumentsToolFactory(documentManager));
+#if KASTEN_BUILD_TERMINALTOOL
     addToolFromFactory(TerminalToolViewFactory(), TerminalToolFactory(syncManager));
+#endif
 #ifndef NDEBUG
     addToolFromFactory(VersionViewToolViewFactory(), VersionViewToolFactory());
 #endif
