@@ -22,6 +22,7 @@
 #include <KLocalizedString>
 // Qt
 #include <QFileDialog>
+#include <QPointer>
 #include <QUrl>
 
 namespace Kasten {
@@ -100,19 +101,26 @@ void ModelCodecManagerPrivate::exportDocument(AbstractModelExporter* exporter,
     const QString dialogTitle =
         i18nc("@title:window", "Export");
     do {
-        QFileDialog exportFileDialog(/*mWidget*/ nullptr, dialogTitle);
+        QPointer<QFileDialog> exportFileDialog = new QFileDialog(/*mWidget*/ nullptr, dialogTitle);
 
-        exportFileDialog.setAcceptMode(QFileDialog::AcceptSave);
-        exportFileDialog.setOption(QFileDialog::DontConfirmOverwrite);
-        exportFileDialog.setFileMode(QFileDialog::AnyFile);
+        exportFileDialog->setAcceptMode(QFileDialog::AcceptSave);
+        exportFileDialog->setOption(QFileDialog::DontConfirmOverwrite);
+        exportFileDialog->setFileMode(QFileDialog::AnyFile);
         const QStringList mimeTypes = QStringList { exporter->remoteMimeType() };
-        exportFileDialog.setMimeTypeFilters(mimeTypes);
+        exportFileDialog->setMimeTypeFilters(mimeTypes);
 
-        exportFileDialog.setLabelText(QFileDialog::Accept, i18nc("@action:button", "&Export"));
+        exportFileDialog->setLabelText(QFileDialog::Accept, i18nc("@action:button", "&Export"));
 
-        exportFileDialog.exec();
+        if (exportFileDialog->exec() == QDialog::Rejected) {
+            break;
+        }
+        if (!exportFileDialog) {
+            break;
+        }
 
-        const QList<QUrl> exportUrls = exportFileDialog.selectedUrls();
+        const QList<QUrl> exportUrls = exportFileDialog->selectedUrls();
+
+        delete exportFileDialog;
 
         if (!exportUrls.isEmpty()) {
             const QUrl& exportUrl = exportUrls.at(0);

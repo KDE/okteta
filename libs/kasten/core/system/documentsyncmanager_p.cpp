@@ -28,6 +28,7 @@
 #include <QUrl>
 #include <QFileDialog>
 #include <QMimeDatabase>
+#include <QPointer>
 
 namespace Kasten {
 
@@ -113,11 +114,21 @@ bool DocumentSyncManagerPrivate::setSynchronizer(AbstractDocument* document)
     const QString processTitle =
         i18nc("@title:window", "Save As");
     do {
-        QFileDialog dialog(/*mWidget*/ nullptr, processTitle, /*mWorkingUrl.url()*/ QString());
-        dialog.setMimeTypeFilters(supportedRemoteTypes());
-        dialog.setAcceptMode(QFileDialog::AcceptSave);
-        dialog.setOption(QFileDialog::DontConfirmOverwrite);
-        const QUrl newUrl = (dialog.exec() != 0) ? dialog.selectedUrls().value(0) : QUrl();
+        QPointer<QFileDialog> saveAsFileDialog = new QFileDialog(/*mWidget*/ nullptr, processTitle, /*mWorkingUrl.url()*/ QString());
+        saveAsFileDialog->setMimeTypeFilters(supportedRemoteTypes());
+        saveAsFileDialog->setAcceptMode(QFileDialog::AcceptSave);
+        saveAsFileDialog->setOption(QFileDialog::DontConfirmOverwrite);
+
+        if (saveAsFileDialog->exec() == QDialog::Rejected) {
+            break;
+        }
+        if (!saveAsFileDialog) {
+            break;
+        }
+
+        const QUrl newUrl = saveAsFileDialog->selectedUrls().value(0);
+
+        delete saveAsFileDialog;
 
         if (newUrl.isValid()) {
             const bool isNewUrl = (!currentSynchronizer)
