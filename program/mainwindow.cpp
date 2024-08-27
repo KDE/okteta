@@ -104,8 +104,6 @@
 // Qt
 #include <QUrl>
 #include <QMimeData>
-#include <QDebug>
-#include <Kasten/AbstractTool>
 
 namespace Kasten {
 
@@ -148,9 +146,7 @@ OktetaMainWindow::OktetaMainWindow(OktetaProgram* program)
     setStatusBar(new Kasten::StatusBar(this));
 
     setupControllers();
-qDebug() << "BEFORE SETUP"  << size() << "sizehint" << sizeHint();
     setupGUI();
-qDebug() << "AFTER  SETUP"  << size() << "sizehint" << sizeHint();
 
     // all controllers which use plugActionList have to do so after(!) setupGUI() or their entries will be removed
     // TODO: why is this so?
@@ -246,7 +242,6 @@ void OktetaMainWindow::addToolFromFactory(const AbstractToolViewFactory& toolVie
     AbstractToolView* toolView = toolViewFactory.create(tool);
 
     addTool(toolView);
-qDebug() << "DOCK" << tool->title() << "size" << size() << "sizehint" << sizeHint();
 }
 
 void OktetaMainWindow::addXmlGuiControllerFromFactory(const AbstractXmlGuiControllerFactory& factory)
