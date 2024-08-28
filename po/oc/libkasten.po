@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-21 01:59+0000\n"
+"POT-Creation-Date: 2024-08-28 01:58+0000\n"
 "PO-Revision-Date: 2008-08-05 22:28+0200\n"
 "Last-Translator: Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>\n"
 "Language-Team: Occitan (lengadocian) <ubuntu-l10n-oci@lists.ubuntu.com>\n"
@@ -226,7 +226,7 @@ msgid "Not available."
 msgstr ""
 
 #: controllers/io/export/exportdialog.cpp:40
-#: core/system/modelcodecmanager_p.cpp:124
+#: core/system/modelcodecmanager_p.cpp:125
 #, fuzzy, kde-format
 #| msgctxt "@title:menu"
 #| msgid "Export"
@@ -387,19 +387,19 @@ msgctxt "@info:tooltip"
 msgid "Zoom: %1%"
 msgstr "Zoom"
 
-#: core/system/documentsyncmanager_p.cpp:111
+#: core/system/documentsyncmanager_p.cpp:112
 #, kde-format
 msgctxt "@title:window"
 msgid "Save As"
 msgstr ""
 
-#: core/system/documentsyncmanager_p.cpp:200
+#: core/system/documentsyncmanager_p.cpp:211
 #, kde-format
 msgctxt "@title:window"
 msgid "Close"
 msgstr ""
 
-#: core/system/documentsyncmanager_p.cpp:235
+#: core/system/documentsyncmanager_p.cpp:246
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Replace"
@@ -407,7 +407,7 @@ msgctxt "@title:window"
 msgid "Reload"
 msgstr "Remplaçar"
 
-#: core/system/modelcodecmanager_p.cpp:134
+#: core/system/modelcodecmanager_p.cpp:135
 #, fuzzy, kde-format
 #| msgctxt "@title:menu"
 #| msgid "Export"

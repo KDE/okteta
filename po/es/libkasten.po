@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-21 01:59+0000\n"
+"POT-Creation-Date: 2024-08-28 01:58+0000\n"
 "PO-Revision-Date: 2024-04-27 12:14+0100\n"
 "Last-Translator: Sofía Priego <spriego@darksylvania.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -223,7 +223,7 @@ msgid "Not available."
 msgstr "No disponible."
 
 #: controllers/io/export/exportdialog.cpp:40
-#: core/system/modelcodecmanager_p.cpp:124
+#: core/system/modelcodecmanager_p.cpp:125
 #, kde-format
 msgctxt "@title:window"
 msgid "Export"
@@ -381,25 +381,25 @@ msgctxt "@info:tooltip"
 msgid "Zoom: %1%"
 msgstr "Ampliación: %1%"
 
-#: core/system/documentsyncmanager_p.cpp:111
+#: core/system/documentsyncmanager_p.cpp:112
 #, kde-format
 msgctxt "@title:window"
 msgid "Save As"
 msgstr "Guardar como"
 
-#: core/system/documentsyncmanager_p.cpp:200
+#: core/system/documentsyncmanager_p.cpp:211
 #, kde-format
 msgctxt "@title:window"
 msgid "Close"
 msgstr "Cerrar"
 
-#: core/system/documentsyncmanager_p.cpp:235
+#: core/system/documentsyncmanager_p.cpp:246
 #, kde-format
 msgctxt "@title:window"
 msgid "Reload"
 msgstr "Volver a cargar"
 
-#: core/system/modelcodecmanager_p.cpp:134
+#: core/system/modelcodecmanager_p.cpp:135
 #, kde-format
 msgctxt "@action:button"
 msgid "&Export"
