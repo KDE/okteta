@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-05 02:31+0000\n"
+"POT-Creation-Date: 2024-08-28 03:42+0000\n"
 "PO-Revision-Date: 2011-08-16 08:06+0000\n"
 "Last-Translator: Sveinn í Felli <sveinki@nett.is>\n"
 "Language-Team: Icelandic <kde-isl@molar.is>\n"
@@ -228,7 +228,7 @@ msgid "Not available."
 msgstr "Ekki tiltækt."
 
 #: controllers/io/export/exportdialog.cpp:40
-#: core/system/modelcodecmanager_p.cpp:101
+#: core/system/modelcodecmanager_p.cpp:102
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Export"
@@ -380,25 +380,25 @@ msgctxt "@info:tooltip"
 msgid "Zoom: %1%"
 msgstr "Aðdráttur"
 
-#: core/system/documentsyncmanager_p.cpp:114
+#: core/system/documentsyncmanager_p.cpp:115
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Save As"
 msgstr "Vista sem"
 
-#: core/system/documentsyncmanager_p.cpp:203
+#: core/system/documentsyncmanager_p.cpp:214
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Close"
 msgstr "Loka"
 
-#: core/system/documentsyncmanager_p.cpp:238
+#: core/system/documentsyncmanager_p.cpp:249
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Reload"
 msgstr "Skipta út"
 
-#: core/system/modelcodecmanager_p.cpp:111
+#: core/system/modelcodecmanager_p.cpp:112
 #, fuzzy, kde-format
 msgctxt "@action:button"
 msgid "&Export"

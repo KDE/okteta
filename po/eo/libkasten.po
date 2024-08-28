@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-05 02:31+0000\n"
+"POT-Creation-Date: 2024-08-28 03:42+0000\n"
 "PO-Revision-Date: 2023-05-06 16:20+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -221,7 +221,7 @@ msgid "Not available."
 msgstr "Ne disponebla."
 
 #: controllers/io/export/exportdialog.cpp:40
-#: core/system/modelcodecmanager_p.cpp:101
+#: core/system/modelcodecmanager_p.cpp:102
 #, kde-format
 msgctxt "@title:window"
 msgid "Export"
@@ -379,25 +379,25 @@ msgctxt "@info:tooltip"
 msgid "Zoom: %1%"
 msgstr "Zomo: %1%"
 
-#: core/system/documentsyncmanager_p.cpp:114
+#: core/system/documentsyncmanager_p.cpp:115
 #, kde-format
 msgctxt "@title:window"
 msgid "Save As"
 msgstr "Konservi kiel"
 
-#: core/system/documentsyncmanager_p.cpp:203
+#: core/system/documentsyncmanager_p.cpp:214
 #, kde-format
 msgctxt "@title:window"
 msgid "Close"
 msgstr "Fermi"
 
-#: core/system/documentsyncmanager_p.cpp:238
+#: core/system/documentsyncmanager_p.cpp:249
 #, kde-format
 msgctxt "@title:window"
 msgid "Reload"
 msgstr "Reŝargi"
 
-#: core/system/modelcodecmanager_p.cpp:111
+#: core/system/modelcodecmanager_p.cpp:112
 #, kde-format
 msgctxt "@action:button"
 msgid "&Export"

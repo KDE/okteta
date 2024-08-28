@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-05 02:31+0000\n"
+"POT-Creation-Date: 2024-08-28 03:42+0000\n"
 "PO-Revision-Date: 2018-09-08 15:38+0100\n"
 "Last-Translator: Mthw <jari_45@hotmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -219,7 +219,7 @@ msgid "Not available."
 msgstr "Nie je možné."
 
 #: controllers/io/export/exportdialog.cpp:40
-#: core/system/modelcodecmanager_p.cpp:101
+#: core/system/modelcodecmanager_p.cpp:102
 #, kde-format
 msgctxt "@title:window"
 msgid "Export"
@@ -376,25 +376,25 @@ msgctxt "@info:tooltip"
 msgid "Zoom: %1%"
 msgstr "Zoom: %1%"
 
-#: core/system/documentsyncmanager_p.cpp:114
+#: core/system/documentsyncmanager_p.cpp:115
 #, kde-format
 msgctxt "@title:window"
 msgid "Save As"
 msgstr "Uložiť ako"
 
-#: core/system/documentsyncmanager_p.cpp:203
+#: core/system/documentsyncmanager_p.cpp:214
 #, kde-format
 msgctxt "@title:window"
 msgid "Close"
 msgstr "Zavrieť"
 
-#: core/system/documentsyncmanager_p.cpp:238
+#: core/system/documentsyncmanager_p.cpp:249
 #, kde-format
 msgctxt "@title:window"
 msgid "Reload"
 msgstr "Znovu načítať"
 
-#: core/system/modelcodecmanager_p.cpp:111
+#: core/system/modelcodecmanager_p.cpp:112
 #, kde-format
 msgctxt "@action:button"
 msgid "&Export"
