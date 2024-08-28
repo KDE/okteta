@@ -15,7 +15,6 @@
 #include <Kasten/ModelCodecManager>
 #include <Kasten/AbstractModelDataGenerator>
 // KF
-#include <kwidgetsaddons_version.h>
 #include <KLocalizedString>
 #include <KActionCollection>
 #include <KActionMenu>

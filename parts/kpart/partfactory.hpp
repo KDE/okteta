@@ -10,7 +10,6 @@
 #define OKTETAPARTFACTORY_HPP
 
 // KF
-#include <kparts_version.h>
 #include <KPluginFactory>
 // Std
 #include <memory>

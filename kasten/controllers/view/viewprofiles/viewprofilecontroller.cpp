@@ -15,7 +15,6 @@
 #include <Kasten/Okteta/ByteArrayViewProfileSynchronizer>
 #include <Kasten/Okteta/ByteArrayView>
 // KF
-#include <kwidgetsaddons_version.h>
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>
 #include <KActionMenu>

@@ -11,7 +11,6 @@
 // Okteta Kasten gui
 #include <Kasten/Okteta/ByteArrayView>
 // KF
-#include <kwidgetsaddons_version.h>
 #include <KXMLGUIClient>
 #include <KLocalizedString>
 #include <KActionCollection>

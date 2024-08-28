@@ -12,7 +12,6 @@
 // Kasten
 #include <Kasten/KastenCore>
 // KF
-#include <kparts_version.h>
 #include <KParts/ReadWritePart>
 // Std
 #include <vector>
