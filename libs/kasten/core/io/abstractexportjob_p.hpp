@@ -23,14 +23,8 @@ public:
 
     AbstractExportJobPrivate& operator=(const AbstractExportJobPrivate&) = delete;
 
-public:
-    AbstractDocument* document() const;
-    void setDocument(AbstractDocument* document);
-
 protected:
     AbstractExportJob* const q_ptr;
-
-    AbstractDocument* mDocument = nullptr;
 };
 
 inline AbstractExportJobPrivate::AbstractExportJobPrivate(AbstractExportJob* parent)
@@ -38,15 +32,6 @@ inline AbstractExportJobPrivate::AbstractExportJobPrivate(AbstractExportJob* par
 {}
 
 inline AbstractExportJobPrivate::~AbstractExportJobPrivate() = default;
-
-inline AbstractDocument* AbstractExportJobPrivate::document() const { return mDocument; }
-inline void AbstractExportJobPrivate::setDocument(AbstractDocument* document)
-{
-    mDocument = document;
-
-    Q_EMIT q_ptr->documentLoaded(document);
-    q_ptr->emitResult();
-}
 
 }
 

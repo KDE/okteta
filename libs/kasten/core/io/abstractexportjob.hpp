@@ -18,8 +18,6 @@
 
 namespace Kasten {
 
-class AbstractDocument;
-
 class AbstractExportJobPrivate;
 
 class KASTENCORE_EXPORT AbstractExportJob : public KJob
@@ -33,17 +31,6 @@ public:
     AbstractExportJob();
 
     ~AbstractExportJob() override;
-
-public:
-    AbstractDocument* document() const;
-
-Q_SIGNALS:
-    void documentLoaded(Kasten::AbstractDocument* document);
-
-protected:
-    // emits documentLoaded()
-    // TODO: or better name property LoadedDocument?
-    virtual void setDocument(AbstractDocument* document);
 
 protected:
     const std::unique_ptr<AbstractExportJobPrivate> d_ptr;

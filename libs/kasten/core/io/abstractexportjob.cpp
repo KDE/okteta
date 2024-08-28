@@ -21,20 +21,6 @@ AbstractExportJob::AbstractExportJob()
 
 AbstractExportJob::~AbstractExportJob() = default;
 
-AbstractDocument* AbstractExportJob::document() const
-{
-    Q_D(const AbstractExportJob);
-
-    return d->document();
-}
-
-void AbstractExportJob::setDocument(AbstractDocument* document)
-{
-    Q_D(AbstractExportJob);
-
-    d->setDocument(document);
-}
-
 }
 
 #include "moc_abstractexportjob.cpp"
