@@ -24,6 +24,8 @@
 #include <QFile>
 #include <QDataStream>
 
+namespace Kasten {
+
 static constexpr char TestDirectory[] = "bytearrayrawfilesynchronizerfactorytest";
 static constexpr char TestFileName[] = "test.data";
 #if 0
@@ -136,6 +138,8 @@ TODO: save mit path als Parameter ? Oder separat setzen ? Wie Kopie speichern ?
 }
 #endif
 
-QTEST_GUILESS_MAIN(ByteArrayRawFileSynchronizerFactoryTest)
+}
+
+QTEST_GUILESS_MAIN(Kasten::ByteArrayRawFileSynchronizerFactoryTest)
 
 #include "moc_bytearrayrawfilesynchronizerfactorytest.cpp"

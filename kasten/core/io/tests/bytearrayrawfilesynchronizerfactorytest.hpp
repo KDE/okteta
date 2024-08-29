@@ -16,6 +16,8 @@
 
 class TestFileSystem;
 
+namespace Kasten {
+
 class ByteArrayRawFileSynchronizerFactoryTest : public QObject
 {
     Q_OBJECT
@@ -36,5 +38,7 @@ private: // not working tests
 private:
     std::unique_ptr<TestFileSystem> mFileSystem;
 };
+
+}
 
 #endif
