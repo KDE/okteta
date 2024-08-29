@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-23 01:48+0000\n"
+"POT-Creation-Date: 2024-08-29 01:48+0000\n"
 "PO-Revision-Date: 2024-05-06 09:52+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -2480,98 +2480,98 @@ msgctxt "@title:window"
 msgid "Bytes per Line"
 msgstr "每行位元組數"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:35
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:34
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Offset Coding"
 msgstr "位移編碼(&O)"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:39
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:38
 #, kde-format
 msgctxt "@item:inmenu offset in the hexadecimal format"
 msgid "&Hexadecimal"
 msgstr "十六進位(&H)"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:41
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:40
 #, kde-format
 msgctxt "@item:inmenu offset in the decimal format"
 msgid "&Decimal"
 msgstr "十進位(&D)"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:43
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:42
 #, kde-format
 msgctxt "@item:inmenu offset in the octal format"
 msgid "&Octal"
 msgstr "八進位(&O)"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:49
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:48
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Value Coding"
 msgstr "數值編碼(&V)"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:53
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:52
 #, kde-format
 msgctxt ""
 "@item:inmenu encoding of the bytes as values in the hexadecimal format"
 msgid "&Hexadecimal"
 msgstr "十六進位(&H)"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:55
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:54
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
 msgid "&Decimal"
 msgstr "十進位(&D)"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:57
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:56
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
 msgid "&Octal"
 msgstr "八進位(&O)"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:59
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:58
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
 msgid "&Binary"
 msgstr "二進位(&B)"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:65
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:64
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Char Coding"
 msgstr "字元編碼(&C)"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:71
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:70
 #, kde-format
 msgctxt "@option:check"
 msgid "Show &Non-printing Chars"
 msgstr "顯示不可列印字元(&N)"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:77
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:76
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Set Bytes per Line…"
 msgstr "設定每行位元組數…"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:83
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:82
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Set Bytes per Group…"
 msgstr "設定每群組位元組數…"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:89
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:88
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Dynamic Layout"
 msgstr "動態佈局(&D)"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:93
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:92
 #, kde-format
 msgctxt "@item:inmenu  The layout will not change on size changes."
 msgid "&Off"
 msgstr "關閉(&O)"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:95
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:94
 #, kde-format
 msgctxt ""
 "@item:inmenu  The layout will adapt to the size, but only with complete "
@@ -2579,7 +2579,7 @@ msgctxt ""
 msgid "&Wrap Only Complete Byte Groups"
 msgstr "只在位元群組完成後換行(&W)"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:97
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:96
 #, kde-format
 msgctxt ""
 "@item:inmenu  The layout will adapt to the size and fit in as much bytes per "
@@ -2587,79 +2587,79 @@ msgctxt ""
 msgid "&On"
 msgstr "開啟(&O)"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:102
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:101
 #, kde-format
 msgctxt "@option:check"
 msgid "Show &Line Offset"
 msgstr "顯示行位移(&L)"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:109
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:108
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Show Values or Chars"
 msgstr "顯示數值或字元(&S)"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:112
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:111
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "&Values"
 msgstr "數值(&V)"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:113
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:112
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "&Chars"
 msgstr "字元(&C)"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:114
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:113
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Values && Chars"
 msgstr "數值與字元(&A)"
 
-#: controllers/view/viewmode/viewmodecontroller.cpp:25
+#: controllers/view/viewmode/viewmodecontroller.cpp:24
 #, kde-format
 msgctxt "@title:menu"
 msgid "&View Mode"
 msgstr "檢視模式(&V)"
 
-#: controllers/view/viewmode/viewmodecontroller.cpp:27
+#: controllers/view/viewmode/viewmodecontroller.cpp:26
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "&Columns"
 msgstr "欄(&C)"
 
-#: controllers/view/viewmode/viewmodecontroller.cpp:28
+#: controllers/view/viewmode/viewmodecontroller.cpp:27
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "&Rows"
 msgstr "列(&R)"
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:38
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:37
 #, kde-format
 msgctxt "@title:menu submenu to select the view profile or change it"
 msgid "View Profile"
 msgstr "檢視設定檔"
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:45
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:44
 #, kde-format
 msgctxt "@action:inmenu create a new view profile"
 msgid "Create New…"
 msgstr "建立新的…"
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:52
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:51
 #, kde-format
 msgctxt "@action:inmenu save changed to the view profile to the base profile"
 msgid "Save Changes"
 msgstr "儲存變更"
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:59
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:58
 #, kde-format
 msgctxt "@action:inmenu reset settings back to those of the saved base profile"
 msgid "Reset Changes"
 msgstr "重設變更"
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:179
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:178
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:180
 #, kde-format
 msgctxt "@window:title"

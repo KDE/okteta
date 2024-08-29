@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-23 01:48+0000\n"
+"POT-Creation-Date: 2024-08-29 01:48+0000\n"
 "PO-Revision-Date: 2010-07-24 13:13+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: Arabic <linuxac-kde-arabic-team@googlegroups.com>\n"
@@ -2561,25 +2561,25 @@ msgctxt "@title:window"
 msgid "Bytes per Line"
 msgstr ""
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:35
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:34
 #, fuzzy, kde-format
 msgctxt "@title:menu"
 msgid "&Offset Coding"
 msgstr "ترميز الق&يمة"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:39
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:38
 #, fuzzy, kde-format
 msgctxt "@item:inmenu offset in the hexadecimal format"
 msgid "&Hexadecimal"
 msgstr "ست& عشري"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:41
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:40
 #, fuzzy, kde-format
 msgctxt "@item:inmenu offset in the decimal format"
 msgid "&Decimal"
 msgstr "عش&ري"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:43
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:42
 #, fuzzy, kde-format
 #| msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
 #| msgid "&Octal"
@@ -2587,74 +2587,74 @@ msgctxt "@item:inmenu offset in the octal format"
 msgid "&Octal"
 msgstr "ثم&اتي"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:49
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:48
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Value Coding"
 msgstr "ترميز الق&يمة"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:53
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:52
 #, kde-format
 msgctxt ""
 "@item:inmenu encoding of the bytes as values in the hexadecimal format"
 msgid "&Hexadecimal"
 msgstr "ست عشري"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:55
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:54
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
 msgid "&Decimal"
 msgstr "عش&ري"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:57
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:56
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
 msgid "&Octal"
 msgstr "ثم&اتي"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:59
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:58
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
 msgid "&Binary"
 msgstr "ثنا&ئي"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:65
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:64
 #, fuzzy, kde-format
 msgctxt "@title:menu"
 msgid "&Char Coding"
 msgstr "ترميز& الأحرف"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:71
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:70
 #, kde-format
 msgctxt "@option:check"
 msgid "Show &Non-printing Chars"
 msgstr "أظهر الرموز &غير القابلة للطباعة"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:77
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:76
 #, fuzzy, kde-format
 msgctxt "@action:inmenu"
 msgid "Set Bytes per Line…"
 msgstr "العناصر لكل سطر:"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:83
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:82
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Set Bytes per Group…"
 msgstr ""
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:89
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:88
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Dynamic Layout"
 msgstr ""
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:93
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:92
 #, kde-format
 msgctxt "@item:inmenu  The layout will not change on size changes."
 msgid "&Off"
 msgstr ""
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:95
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:94
 #, kde-format
 msgctxt ""
 "@item:inmenu  The layout will adapt to the size, but only with complete "
@@ -2662,7 +2662,7 @@ msgctxt ""
 msgid "&Wrap Only Complete Byte Groups"
 msgstr ""
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:97
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:96
 #, kde-format
 msgctxt ""
 "@item:inmenu  The layout will adapt to the size and fit in as much bytes per "
@@ -2670,79 +2670,79 @@ msgctxt ""
 msgid "&On"
 msgstr ""
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:102
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:101
 #, kde-format
 msgctxt "@option:check"
 msgid "Show &Line Offset"
 msgstr "إ&إظهار إنزياح الخط"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:109
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:108
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Show Values or Chars"
 msgstr ""
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:112
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:111
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "&Values"
 msgstr "ال&قيم"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:113
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:112
 #, fuzzy, kde-format
 msgctxt "@item:inmenu"
 msgid "&Chars"
 msgstr "Char"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:114
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:113
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Values && Chars"
 msgstr ""
 
-#: controllers/view/viewmode/viewmodecontroller.cpp:25
+#: controllers/view/viewmode/viewmodecontroller.cpp:24
 #, kde-format
 msgctxt "@title:menu"
 msgid "&View Mode"
 msgstr ""
 
-#: controllers/view/viewmode/viewmodecontroller.cpp:27
+#: controllers/view/viewmode/viewmodecontroller.cpp:26
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "&Columns"
 msgstr "الأع&مدة"
 
-#: controllers/view/viewmode/viewmodecontroller.cpp:28
+#: controllers/view/viewmode/viewmodecontroller.cpp:27
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "&Rows"
 msgstr "ال&صفوف"
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:38
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:37
 #, kde-format
 msgctxt "@title:menu submenu to select the view profile or change it"
 msgid "View Profile"
 msgstr ""
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:45
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:44
 #, kde-format
 msgctxt "@action:inmenu create a new view profile"
 msgid "Create New…"
 msgstr ""
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:52
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:51
 #, fuzzy, kde-format
 msgctxt "@action:inmenu save changed to the view profile to the base profile"
 msgid "Save Changes"
 msgstr "إحفظ %1 ك ...."
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:59
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:58
 #, fuzzy, kde-format
 msgctxt "@action:inmenu reset settings back to those of the saved base profile"
 msgid "Reset Changes"
 msgstr "إحفظ %1 ك ...."
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:179
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:178
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:180
 #, kde-format
 msgctxt "@window:title"

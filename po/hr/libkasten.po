@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-28 01:58+0000\n"
+"POT-Creation-Date: 2024-08-29 01:48+0000\n"
 "PO-Revision-Date: 2009-09-04 22:35+0200\n"
 "Last-Translator: Zarko Pintar <zarko.pintar@gmail.com>\n"
 "Language-Team: Croatian <kde-croatia-list@lists.sourceforge.net>\n"
@@ -108,19 +108,19 @@ msgctxt "@action:inmenu"
 msgid "Close All Other"
 msgstr ""
 
-#: controllers/documentsystem/creator/creatorcontroller.cpp:41
+#: controllers/documentsystem/creator/creatorcontroller.cpp:40
 #, kde-format
 msgctxt "@title:menu create new byte arrays from different sources"
 msgid "New"
 msgstr ""
 
-#: controllers/documentsystem/creator/creatorcontroller.cpp:49
+#: controllers/documentsystem/creator/creatorcontroller.cpp:48
 #, kde-format
 msgctxt "@item:inmenu create a new empty document"
 msgid "Empty"
 msgstr ""
 
-#: controllers/documentsystem/creator/creatorcontroller.cpp:60
+#: controllers/documentsystem/creator/creatorcontroller.cpp:59
 #, kde-format
 msgctxt "@item:inmenu create a new document from data in the clipboard"
 msgid "From Clipboard"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-28 01:58+0000\n"
+"POT-Creation-Date: 2024-08-29 01:48+0000\n"
 "PO-Revision-Date: 2013-03-13 14:58+0530\n"
 "Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
 "Language-Team: Marathi <kde-i18n-doc@kde.org>\n"
@@ -107,13 +107,13 @@ msgctxt "@action:inmenu"
 msgid "Close All Other"
 msgstr ""
 
-#: controllers/documentsystem/creator/creatorcontroller.cpp:41
+#: controllers/documentsystem/creator/creatorcontroller.cpp:40
 #, kde-format
 msgctxt "@title:menu create new byte arrays from different sources"
 msgid "New"
 msgstr "नवीन"
 
-#: controllers/documentsystem/creator/creatorcontroller.cpp:49
+#: controllers/documentsystem/creator/creatorcontroller.cpp:48
 #, fuzzy, kde-format
 #| msgctxt "@title:menu create a new empty document"
 #| msgid "Empty"
@@ -121,7 +121,7 @@ msgctxt "@item:inmenu create a new empty document"
 msgid "Empty"
 msgstr "रिकामी"
 
-#: controllers/documentsystem/creator/creatorcontroller.cpp:60
+#: controllers/documentsystem/creator/creatorcontroller.cpp:59
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "&Copy to clipboard"

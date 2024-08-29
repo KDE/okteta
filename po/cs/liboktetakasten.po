@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-23 01:48+0000\n"
+"POT-Creation-Date: 2024-08-29 01:48+0000\n"
 "PO-Revision-Date: 2024-05-30 09:48+0200\n"
 "Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -2472,98 +2472,98 @@ msgctxt "@title:window"
 msgid "Bytes per Line"
 msgstr ""
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:35
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:34
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Offset Coding"
 msgstr ""
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:39
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:38
 #, kde-format
 msgctxt "@item:inmenu offset in the hexadecimal format"
 msgid "&Hexadecimal"
 msgstr "Š&estnáctková"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:41
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:40
 #, kde-format
 msgctxt "@item:inmenu offset in the decimal format"
 msgid "&Decimal"
 msgstr "&Desítková"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:43
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:42
 #, kde-format
 msgctxt "@item:inmenu offset in the octal format"
 msgid "&Octal"
 msgstr "&Osmičková"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:49
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:48
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Value Coding"
 msgstr "Kódo&vání hodnot"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:53
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:52
 #, kde-format
 msgctxt ""
 "@item:inmenu encoding of the bytes as values in the hexadecimal format"
 msgid "&Hexadecimal"
 msgstr "Š&estnáctková"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:55
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:54
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
 msgid "&Decimal"
 msgstr "&Desítková"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:57
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:56
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
 msgid "&Octal"
 msgstr "&Osmičková"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:59
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:58
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
 msgid "&Binary"
 msgstr "&Dvojková"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:65
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:64
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Char Coding"
 msgstr ""
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:71
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:70
 #, kde-format
 msgctxt "@option:check"
 msgid "Show &Non-printing Chars"
 msgstr "Zobrazit netiskn&utelné znaky"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:77
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:76
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Set Bytes per Line…"
 msgstr ""
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:83
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:82
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Set Bytes per Group…"
 msgstr ""
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:89
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:88
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Dynamic Layout"
 msgstr ""
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:93
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:92
 #, kde-format
 msgctxt "@item:inmenu  The layout will not change on size changes."
 msgid "&Off"
 msgstr "Vypnut&o"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:95
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:94
 #, kde-format
 msgctxt ""
 "@item:inmenu  The layout will adapt to the size, but only with complete "
@@ -2571,7 +2571,7 @@ msgctxt ""
 msgid "&Wrap Only Complete Byte Groups"
 msgstr ""
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:97
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:96
 #, kde-format
 msgctxt ""
 "@item:inmenu  The layout will adapt to the size and fit in as much bytes per "
@@ -2579,79 +2579,79 @@ msgctxt ""
 msgid "&On"
 msgstr "Zapnut&o"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:102
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:101
 #, kde-format
 msgctxt "@option:check"
 msgid "Show &Line Offset"
 msgstr ""
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:109
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:108
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Show Values or Chars"
 msgstr ""
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:112
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:111
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "&Values"
 msgstr "Ho&dnoty"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:113
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:112
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "&Chars"
 msgstr "Zn&aky"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:114
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:113
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Values && Chars"
 msgstr ""
 
-#: controllers/view/viewmode/viewmodecontroller.cpp:25
+#: controllers/view/viewmode/viewmodecontroller.cpp:24
 #, kde-format
 msgctxt "@title:menu"
 msgid "&View Mode"
 msgstr "Režim zobrazení"
 
-#: controllers/view/viewmode/viewmodecontroller.cpp:27
+#: controllers/view/viewmode/viewmodecontroller.cpp:26
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "&Columns"
 msgstr "Sloup&ce"
 
-#: controllers/view/viewmode/viewmodecontroller.cpp:28
+#: controllers/view/viewmode/viewmodecontroller.cpp:27
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "&Rows"
 msgstr "Řá&dky"
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:38
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:37
 #, kde-format
 msgctxt "@title:menu submenu to select the view profile or change it"
 msgid "View Profile"
 msgstr "Prohlížet profil"
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:45
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:44
 #, kde-format
 msgctxt "@action:inmenu create a new view profile"
 msgid "Create New…"
 msgstr "Vytvořit novou…"
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:52
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:51
 #, kde-format
 msgctxt "@action:inmenu save changed to the view profile to the base profile"
 msgid "Save Changes"
 msgstr "Uložit změny"
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:59
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:58
 #, kde-format
 msgctxt "@action:inmenu reset settings back to those of the saved base profile"
 msgid "Reset Changes"
 msgstr "Vrátit změny"
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:179
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:178
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:180
 #, kde-format
 msgctxt "@window:title"

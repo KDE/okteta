@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-23 01:48+0000\n"
+"POT-Creation-Date: 2024-08-29 01:48+0000\n"
 "PO-Revision-Date: 2010-01-09 18:03+0200\n"
 "Last-Translator: Viesturs Zarins <viesturs.zarins@mii.lu.lv>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -2702,7 +2702,7 @@ msgctxt "@title:window"
 msgid "Bytes per Line"
 msgstr "Ieraksti rindā:"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:35
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:34
 #, fuzzy, kde-format
 #| msgctxt "@title:menu"
 #| msgid "&Value Coding"
@@ -2710,7 +2710,7 @@ msgctxt "@title:menu"
 msgid "&Offset Coding"
 msgstr "&Vērtības kodējums"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:39
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:38
 #, fuzzy, kde-format
 #| msgctxt ""
 #| "@item:inmenu encoding of the bytes as values in the hexadecimal format"
@@ -2719,7 +2719,7 @@ msgctxt "@item:inmenu offset in the hexadecimal format"
 msgid "&Hexadecimal"
 msgstr "&Heksadecimāls"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:41
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:40
 #, fuzzy, kde-format
 #| msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
 #| msgid "&Decimal"
@@ -2727,7 +2727,7 @@ msgctxt "@item:inmenu offset in the decimal format"
 msgid "&Decimal"
 msgstr "&Decimāls"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:43
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:42
 #, fuzzy, kde-format
 #| msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
 #| msgid "&Octal"
@@ -2735,50 +2735,50 @@ msgctxt "@item:inmenu offset in the octal format"
 msgid "&Octal"
 msgstr "&Oktāls"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:49
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:48
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Value Coding"
 msgstr "&Vērtības kodējums"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:53
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:52
 #, kde-format
 msgctxt ""
 "@item:inmenu encoding of the bytes as values in the hexadecimal format"
 msgid "&Hexadecimal"
 msgstr "&Heksadecimāls"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:55
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:54
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
 msgid "&Decimal"
 msgstr "&Decimāls"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:57
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:56
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
 msgid "&Octal"
 msgstr "&Oktāls"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:59
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:58
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
 msgid "&Binary"
 msgstr "&Binārs"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:65
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:64
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Char Coding"
 msgstr "&Rakstzīmju kodējums"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:71
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:70
 #, kde-format
 msgctxt "@option:check"
 msgid "Show &Non-printing Chars"
 msgstr "Rādīt &nedrukājamās rakstzīmes"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:77
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:76
 #, fuzzy, kde-format
 #| msgctxt "@label:textbox to define after how many items the list is wrapped"
 #| msgid "Items per line:"
@@ -2786,7 +2786,7 @@ msgctxt "@action:inmenu"
 msgid "Set Bytes per Line…"
 msgstr "Ieraksti rindā:"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:83
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:82
 #, fuzzy, kde-format
 #| msgctxt "@label:textbox to define after how many items the list is wrapped"
 #| msgid "Items per line:"
@@ -2794,19 +2794,19 @@ msgctxt "@action:inmenu"
 msgid "Set Bytes per Group…"
 msgstr "Ieraksti rindā:"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:89
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:88
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Dynamic Layout"
 msgstr "&Dinamisks izkārtojums"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:93
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:92
 #, kde-format
 msgctxt "@item:inmenu  The layout will not change on size changes."
 msgid "&Off"
 msgstr "&Izslēgts"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:95
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:94
 #, kde-format
 msgctxt ""
 "@item:inmenu  The layout will adapt to the size, but only with complete "
@@ -2814,7 +2814,7 @@ msgctxt ""
 msgid "&Wrap Only Complete Byte Groups"
 msgstr "&Aplauzt tikai pilnas baitu grupas"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:97
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:96
 #, kde-format
 msgctxt ""
 "@item:inmenu  The layout will adapt to the size and fit in as much bytes per "
@@ -2822,55 +2822,55 @@ msgctxt ""
 msgid "&On"
 msgstr "&Ieslēgts"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:102
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:101
 #, kde-format
 msgctxt "@option:check"
 msgid "Show &Line Offset"
 msgstr "Rādīt &rindas nobīdi"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:109
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:108
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Show Values or Chars"
 msgstr "Rā&dīt vērtības vai rakstzīmes"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:112
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:111
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "&Values"
 msgstr "&Vērtības"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:113
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:112
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "&Chars"
 msgstr "&Rakstzīmes"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:114
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:113
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Values && Chars"
 msgstr "Vērtības un rakstzīmes"
 
-#: controllers/view/viewmode/viewmodecontroller.cpp:25
+#: controllers/view/viewmode/viewmodecontroller.cpp:24
 #, kde-format
 msgctxt "@title:menu"
 msgid "&View Mode"
 msgstr "&Skata režīms"
 
-#: controllers/view/viewmode/viewmodecontroller.cpp:27
+#: controllers/view/viewmode/viewmodecontroller.cpp:26
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "&Columns"
 msgstr "&Kolonas"
 
-#: controllers/view/viewmode/viewmodecontroller.cpp:28
+#: controllers/view/viewmode/viewmodecontroller.cpp:27
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "&Rows"
 msgstr "&Rindas"
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:38
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:37
 #, fuzzy, kde-format
 #| msgctxt "@title:menu"
 #| msgid "&View Mode"
@@ -2878,7 +2878,7 @@ msgctxt "@title:menu submenu to select the view profile or change it"
 msgid "View Profile"
 msgstr "&Skata režīms"
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:45
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:44
 #, fuzzy, kde-format
 #| msgctxt "name of the generated data"
 #| msgid "Pattern..."
@@ -2886,7 +2886,7 @@ msgctxt "@action:inmenu create a new view profile"
 msgid "Create New…"
 msgstr "Paraugs..."
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:52
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:51
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Save As"
@@ -2894,7 +2894,7 @@ msgctxt "@action:inmenu save changed to the view profile to the base profile"
 msgid "Save Changes"
 msgstr "Saglabāt kā"
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:59
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:58
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Save As"
@@ -2902,7 +2902,7 @@ msgctxt "@action:inmenu reset settings back to those of the saved base profile"
 msgid "Reset Changes"
 msgstr "Saglabāt kā"
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:179
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:178
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:180
 #, fuzzy, kde-format
 #| msgctxt "@title:menu"
