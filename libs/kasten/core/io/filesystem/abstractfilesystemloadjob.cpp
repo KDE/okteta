@@ -11,9 +11,9 @@
 
 namespace Kasten {
 
-AbstractFileSystemLoadJob::AbstractFileSystemLoadJob(AbstractModelFileSystemSynchronizer* synchronizer,
+AbstractFileSystemLoadJob::AbstractFileSystemLoadJob(std::unique_ptr<AbstractModelFileSystemSynchronizer>&& synchronizer,
                                                      const QUrl& url)
-    : AbstractLoadJob(std::make_unique<AbstractFileSystemLoadJobPrivate>(this, synchronizer, url))
+    : AbstractLoadJob(std::make_unique<AbstractFileSystemLoadJobPrivate>(this, std::move(synchronizer), url))
 {
 }
 

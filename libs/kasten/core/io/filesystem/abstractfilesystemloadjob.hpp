@@ -26,7 +26,7 @@ class KASTENCORE_EXPORT AbstractFileSystemLoadJob : public AbstractLoadJob
     Q_OBJECT
 
 public:
-    AbstractFileSystemLoadJob(AbstractModelFileSystemSynchronizer* synchronizer, const QUrl& url);
+    AbstractFileSystemLoadJob(std::unique_ptr<AbstractModelFileSystemSynchronizer>&& synchronizer, const QUrl& url);
 
     ~AbstractFileSystemLoadJob() override;
 

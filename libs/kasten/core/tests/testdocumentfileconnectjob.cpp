@@ -17,11 +17,11 @@
 
 namespace Kasten {
 
-TestDocumentFileConnectJob::TestDocumentFileConnectJob(TestDocumentFileSynchronizer* synchronizer,
+TestDocumentFileConnectJob::TestDocumentFileConnectJob(std::unique_ptr<TestDocumentFileSynchronizer>&& synchronizer,
                                                        AbstractDocument* document,
                                                        const QUrl& url,
                                                        AbstractModelSynchronizer::ConnectOption option)
-    : AbstractFileSystemConnectJob(synchronizer, document, url, option)
+    : AbstractFileSystemConnectJob(std::move(synchronizer), document, url, option)
 {
 }
 

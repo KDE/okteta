@@ -9,8 +9,6 @@
 #include "bytearrayrawfilesynchronizer.hpp"
 
 // lib
-#include "bytearrayrawfileloadjob.hpp"
-#include "bytearrayrawfileconnectjob.hpp"
 #include "bytearrayrawfilewritejob.hpp"
 #include "bytearrayrawfilereloadjob.hpp"
 #include "bytearrayrawfilewritetojob.hpp"
@@ -44,11 +42,6 @@ void ByteArrayRawFileSynchronizer::setDocument(ByteArrayDocument* document)
     }
 }
 
-AbstractLoadJob* ByteArrayRawFileSynchronizer::startLoad(const QUrl& url)
-{
-    return new ByteArrayRawFileLoadJob(this, url);
-}
-
 AbstractSyncToRemoteJob* ByteArrayRawFileSynchronizer::startSyncToRemote()
 {
     return new ByteArrayRawFileWriteJob(this);
@@ -62,12 +55,6 @@ AbstractSyncFromRemoteJob* ByteArrayRawFileSynchronizer::startSyncFromRemote()
 AbstractSyncWithRemoteJob* ByteArrayRawFileSynchronizer::startSyncWithRemote(const QUrl& url, AbstractModelSynchronizer::ConnectOption option)
 {
     return new ByteArrayRawFileWriteToJob(this, url, option);
-}
-
-AbstractConnectJob* ByteArrayRawFileSynchronizer::startConnect(AbstractDocument* document,
-                                                               const QUrl& url, AbstractModelSynchronizer::ConnectOption option)
-{
-    return new ByteArrayRawFileConnectJob(this, document, url, option);
 }
 
 void ByteArrayRawFileSynchronizer::onUrlChange(const QUrl& url)

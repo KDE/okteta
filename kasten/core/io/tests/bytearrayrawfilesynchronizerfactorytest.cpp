@@ -17,6 +17,9 @@
 #include <util/fill.hpp>
 // Okteta core
 #include <Okteta/PieceTableByteArrayModel>
+// Kasten core
+#include <Kasten/AbstractLoadJob>
+#include <Kasten/AbstractConnectJob>
 // Qt
 #include <QTest>
 #include <QSignalSpy>
@@ -28,9 +31,7 @@ namespace Kasten {
 
 static constexpr char TestDirectory[] = "bytearrayrawfilesynchronizerfactorytest";
 static constexpr char TestFileName[] = "test.data";
-#if 0
 static constexpr char NotExistingUrl[] = "notexisting://";
-#endif
 static constexpr int TestDataSize = 50;
 static constexpr char TestDataChar = 0;
 
@@ -75,39 +76,70 @@ void ByteArrayRawFileSynchronizerFactoryTest::testCreate()
 
     QVERIFY(factory != nullptr);
 }
-#if 0
+
 void ByteArrayRawFileSynchronizerFactoryTest::testLoadFromUrl()
 {
-    const QUrl fileUrl = QUrl::fromLocalFile(mFileSystem->createFilePath(QStringLiteral(TestFileName)));
-    Kasten::ByteArrayRawFileSynchronizerFactory* factory = new Kasten::ByteArrayRawFileSynchronizerFactory();
-    AbstractDocument* document = factory->loadNewDocument(fileUrl);
+    const QUrl fileUrl = QUrl::fromLocalFile(mFileSystem->createFilePath(QLatin1String(TestFileName)));
 
-    ByteArrayDocument* byteArrayDocument = qobject_cast<ByteArrayDocument*>(document);
+    auto factory = std::make_unique<ByteArrayRawFileSynchronizerFactory>();
+    auto* loadJob = factory->startLoad(fileUrl);
+    const bool loadSuccess = loadJob->exec();
+    QVERIFY(loadSuccess);
+    auto document = loadJob->releaseDocument();
 
-    QVERIFY(document != 0);
-    QVERIFY(byteArrayDocument != 0);
-    QVERIFY(document->synchronizer() != 0);
-    QCOMPARE(document->synchronizer()->document(), document);
-    QCOMPARE(document->hasLocalChanges(), false);
+    auto* byteArrayDocument = qobject_cast<ByteArrayDocument*>(document.get());
+
+    QVERIFY(document != nullptr);
+    QVERIFY(byteArrayDocument != nullptr);
+    QVERIFY(document->synchronizer() != nullptr);
+    QCOMPARE(document->synchronizer()->document(), document.get());
+    QCOMPARE(document->contentFlags(), Kasten::ContentStateNormal);
+    QCOMPARE(document->synchronizer()->localSyncState(), Kasten::LocalInSync);
+    QCOMPARE(document->synchronizer()->remoteSyncState(), Kasten::RemoteInSync);
 
     QCOMPARE(document->synchronizer()->url(), fileUrl);
-
-    delete document;
-    delete factory;
 }
 
 void ByteArrayRawFileSynchronizerFactoryTest::testLoadFromNotExistingUrl()
 {
-    const QUrl fileUrl = QUrl(QStringLiteral(NotExistingUrl));
+    const QUrl fileUrl = QUrl(QLatin1String(NotExistingUrl));
 
-    Kasten::ByteArrayRawFileSynchronizerFactory* factory = new Kasten::ByteArrayRawFileSynchronizerFactory();
-    AbstractDocument* document = factory->loadNewDocument(fileUrl);
+    auto factory = std::make_unique<ByteArrayRawFileSynchronizerFactory>();
+    auto* loadJob = factory->startLoad(fileUrl);
+    const bool loadSuccess = loadJob->exec();
+    QVERIFY(!loadSuccess);
+    auto document = loadJob->releaseDocument();
 
-    QVERIFY(document == 0);
-
-    delete factory;
+    QVERIFY(document == nullptr);
 }
-#endif
+
+void ByteArrayRawFileSynchronizerFactoryTest::testNewSaveAsToUrl()
+{
+    const QUrl fileUrl = QUrl::fromLocalFile(mFileSystem->createFilePath(QLatin1String(TestFileName)));
+
+    auto document = std::make_unique<Kasten::ByteArrayDocument>(QStringLiteral("New created for test."));
+    auto* byteArray = qobject_cast<Okteta::PieceTableByteArrayModel*>(document->content());
+
+    // fill array
+    QByteArray testData(TestDataSize, TestDataChar);
+    ::textureByteArray(&testData);
+    byteArray->setData(testData);
+
+    // save
+    auto factory = std::make_unique<ByteArrayRawFileSynchronizerFactory>();
+    factory->startConnect(document.get(), fileUrl, AbstractModelSynchronizer::ReplaceRemote)->exec();
+
+//     // load into other and...
+//     ByteArrayDocument* otherDocument = new ByteArrayDocument( filePath );
+
+//     QVERIFY( document != 0 );
+
+//     // compare with old
+//     Okteta::PieceTableByteArrayModel *otherByteArray = document->content();
+//     QCOMPARE( byteArray->size(), otherByteArray->size() );
+//     QVERIFY( qstrncmp(byteArray->data(),otherByteArray->data(),byteArray->size()) == 0 );
+}
+
 #if 0
 void ByteArrayRawFileSynchronizerFactoryTest::testSaveToFile()
 {

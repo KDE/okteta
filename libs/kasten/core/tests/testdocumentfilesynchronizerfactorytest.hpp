@@ -35,17 +35,17 @@ private Q_SLOTS:
 
 private Q_SLOTS: // test functions
     void testCreate();
-#if 0
     void testLoadFromFile();
+#if 0
     void testLoadSaveFile();
     void testLoadReloadFile();
+#endif
     void testConnectToFile();
 
 private: // not working tests
     // TODO: need a way besides popups to report problems
     void testLoadFromNotExistingUrl();
     void testLoadFromNotExistingFile();
-#endif
 
 private:
     std::unique_ptr<TestFileSystem> mFileSystem;

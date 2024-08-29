@@ -23,7 +23,7 @@ class ByteArrayRawFileConnectJob : public AbstractFileSystemConnectJob
     Q_OBJECT
 
 public:
-    ByteArrayRawFileConnectJob(ByteArrayRawFileSynchronizer* synchronizer, AbstractDocument* document,
+    ByteArrayRawFileConnectJob(std::unique_ptr<ByteArrayRawFileSynchronizer>&& synchronizer, AbstractDocument* document,
                                const QUrl& url, AbstractModelSynchronizer::ConnectOption option);
     ~ByteArrayRawFileConnectJob() override;
 

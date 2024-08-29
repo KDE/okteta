@@ -28,12 +28,11 @@ private Q_SLOTS:
 
 private Q_SLOTS: // test functions
     void testCreate();
-#if 0
     void testLoadFromUrl();
+    void testNewSaveAsToUrl();
 
 private: // not working tests
     void testLoadFromNotExistingUrl();
-#endif
 
 private:
     std::unique_ptr<TestFileSystem> mFileSystem;

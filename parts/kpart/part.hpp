@@ -17,6 +17,8 @@
 #include <vector>
 #include <memory>
 
+class KJob;
+
 namespace Kasten {
 class ByteArrayViewProfileManager;
 class ByteArrayView;
@@ -26,7 +28,6 @@ class ModelCodecViewManager;
 class ModelCodecManager;
 class AbstractXmlGuiController;
 class AbstractXmlGuiControllerFactory;
-class AbstractDocument;
 }
 class KPluginMetaData;
 
@@ -74,7 +75,7 @@ private:
     Kasten::ByteArrayView* byteArrayView() const;
 
 private Q_SLOTS:
-    void onDocumentLoaded(Kasten::AbstractDocument* document);
+    void onDocumentLoadJobResult(KJob* job);
     void onModified(Kasten::LocalSyncState state);
 
 private:

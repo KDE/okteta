@@ -36,11 +36,11 @@ void AbstractDocument::setId(const QString& id)
 
     d->setId(id);
 }
-void AbstractDocument::setSynchronizer(AbstractModelSynchronizer* synchronizer)
+void AbstractDocument::setSynchronizer(std::unique_ptr<AbstractModelSynchronizer>&& synchronizer)
 {
     Q_D(AbstractDocument);
 
-    d->setSynchronizer(synchronizer);
+    d->setSynchronizer(std::move(synchronizer));
 }
 
 }

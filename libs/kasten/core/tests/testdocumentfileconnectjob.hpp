@@ -23,7 +23,7 @@ class TestDocumentFileConnectJob : public AbstractFileSystemConnectJob
     Q_OBJECT
 
 public:
-    TestDocumentFileConnectJob(TestDocumentFileSynchronizer* synchronizer, AbstractDocument* document,
+    TestDocumentFileConnectJob(std::unique_ptr<TestDocumentFileSynchronizer>&& synchronizer, AbstractDocument* document,
                                const QUrl& url, AbstractModelSynchronizer::ConnectOption option);
     ~TestDocumentFileConnectJob() override;
 

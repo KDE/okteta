@@ -16,6 +16,9 @@
 
 namespace Kasten {
 
+class AbstractLoadJob;
+class AbstractConnectJob;
+
 // not really a classic factory, functions do some more, instead it is what?
 // TODO: improve the whole vodoo, especially linking document and synchronizer
 // make it foolproof
@@ -31,16 +34,20 @@ public:
     ~AbstractModelSynchronizerFactory() override;
 
 public: // API to be implemented
-    virtual AbstractModelSynchronizer* createSynchronizer() const = 0;
+    // TODO: perhaps restore again to aloow 3rd-party juggling with synchronizers
+    // possibly together with some concept with pre-creation document types for loading
+    // virtual AbstractModelSynchronizer* createSynchronizer() const = 0;
 
 //     virtual AbstractDocument* loadNewDocument( const QUrl& originUrl ) const = 0;
-//     virtual AbstractLoadJob* startLoad( const QUrl& url ) = 0;
+    virtual AbstractLoadJob* startLoad(const QUrl& url) = 0;
+
     // TODO: better name than connect: bind?
 
 //     virtual bool connectDocument( AbstractDocument* document, const QUrl& originUrl,
 //                                   AbstractDocumentSynchronizer::ConnectOption option ) const = 0;
-//     virtual AbstractConnectJob* startConnect( AbstractDocument* document,
-//                                               const QUrl& url, AbstractDocumentSynchronizer::ConnectOption option ) = 0;
+    // perhaps to be moved again to AbstractModelSynchronizer later, if they can be standalone
+    virtual AbstractConnectJob* startConnect(AbstractDocument* document,
+                                             const QUrl& url, AbstractModelSynchronizer::ConnectOption option) = 0;
 
 //     virtual bool exportDocument( AbstractDocument* document, const QUrl& originUrl ) const = 0;
 //     virtual AbstractExportJob* startExport( AbstractDocument* document, const QUrl& originUrl ) const = 0;

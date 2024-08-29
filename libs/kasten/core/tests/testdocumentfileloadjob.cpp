@@ -17,8 +17,8 @@
 
 namespace Kasten {
 
-TestDocumentFileLoadJob::TestDocumentFileLoadJob(TestDocumentFileSynchronizer* synchronizer, const QUrl& url)
-    : AbstractFileSystemLoadJob(synchronizer, url)
+TestDocumentFileLoadJob::TestDocumentFileLoadJob(std::unique_ptr<TestDocumentFileSynchronizer>&& synchronizer, const QUrl& url)
+    : AbstractFileSystemLoadJob(std::move(synchronizer), url)
 {}
 
 TestDocumentFileLoadJob::~TestDocumentFileLoadJob() = default;

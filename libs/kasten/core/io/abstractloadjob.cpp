@@ -23,11 +23,11 @@ AbstractLoadJob::AbstractLoadJob()
 
 AbstractLoadJob::~AbstractLoadJob() = default;
 
-AbstractDocument* AbstractLoadJob::document() const
+std::unique_ptr<AbstractDocument> AbstractLoadJob::releaseDocument()
 {
-    Q_D(const AbstractLoadJob);
+    Q_D(AbstractLoadJob);
 
-    return d->document();
+    return d->releaseDocument();
 }
 
 void AbstractLoadJob::setDocument(std::unique_ptr<AbstractDocument>&& document)

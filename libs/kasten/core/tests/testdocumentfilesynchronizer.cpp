@@ -9,8 +9,6 @@
 #include "testdocumentfilesynchronizer.hpp"
 
 // lib
-#include "testdocumentfileloadjob.hpp"
-#include "testdocumentfileconnectjob.hpp"
 #include "testdocumentfilewritejob.hpp"
 #include "testdocumentfilereloadjob.hpp"
 #include "testdocumentfilewritetojob.hpp"
@@ -34,11 +32,6 @@ LocalSyncState TestDocumentFileSynchronizer::localSyncState() const
         ((mDocument->contentFlags() & ContentHasUnstoredChanges) ? LocalHasChanges : LocalInSync) : LocalInSync;
 }
 
-AbstractLoadJob* TestDocumentFileSynchronizer::startLoad(const QUrl& url)
-{
-    return new TestDocumentFileLoadJob(this, url);
-}
-
 AbstractSyncToRemoteJob* TestDocumentFileSynchronizer::startSyncToRemote()
 {
     return new TestDocumentFileWriteJob(this);
@@ -52,12 +45,6 @@ AbstractSyncFromRemoteJob* TestDocumentFileSynchronizer::startSyncFromRemote()
 AbstractSyncWithRemoteJob* TestDocumentFileSynchronizer::startSyncWithRemote(const QUrl& url, AbstractModelSynchronizer::ConnectOption option)
 {
     return new TestDocumentFileWriteToJob(this, url, option);
-}
-
-AbstractConnectJob* TestDocumentFileSynchronizer::startConnect(AbstractDocument* document,
-                                                               const QUrl& url, AbstractModelSynchronizer::ConnectOption option)
-{
-    return new TestDocumentFileConnectJob(this, document, url, option);
 }
 
 }

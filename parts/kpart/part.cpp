@@ -166,11 +166,10 @@ void OktetaPart::setReadWrite(bool readWrite)
 bool OktetaPart::openFile()
 {
     const auto synchronizerFactory = std::make_unique<Kasten::ByteArrayRawFileSynchronizerFactory>();
-    Kasten::AbstractModelSynchronizer* synchronizer = synchronizerFactory->createSynchronizer();
 
-    Kasten::AbstractLoadJob* loadJob = synchronizer->startLoad(QUrl::fromLocalFile(localFilePath()));
-    connect(loadJob, &Kasten::AbstractLoadJob::documentLoaded,
-            this, &OktetaPart::onDocumentLoaded);
+    Kasten::AbstractLoadJob* loadJob = synchronizerFactory->startLoad(QUrl::fromLocalFile(localFilePath()));
+    connect(loadJob, &KJob::result,
+            this, &OktetaPart::onDocumentLoadJobResult);
     Kasten::JobManager::executeJob(loadJob);
 
     return true;
@@ -187,8 +186,11 @@ bool OktetaPart::saveFile()
     return syncSucceeded;
 }
 
-void OktetaPart::onDocumentLoaded(Kasten::AbstractDocument* document)
+void OktetaPart::onDocumentLoadJobResult(KJob* job)
 {
+    auto* loadJob = qobject_cast<Kasten::AbstractLoadJob*>(job);
+    auto document = loadJob->releaseDocument();
+
     if (document) {
         for (const auto& controller : mControllers) {
             controller->setTargetModel(nullptr);
@@ -196,7 +198,8 @@ void OktetaPart::onDocumentLoaded(Kasten::AbstractDocument* document)
         mSingleViewArea->setView(nullptr);
         mByteArrayView.reset();
 
-        mDocument.reset(static_cast<Kasten::ByteArrayDocument*>(document));
+        // is there a nicer way to upcycle a unique_ptr properly?
+        mDocument.reset(static_cast<Kasten::ByteArrayDocument*>(document.release()));
         mDocument->setReadOnly(mModus != Modus::ReadWrite);
         connect(mDocument->synchronizer(), &Kasten::AbstractModelSynchronizer::localSyncStateChanged,
                 this, &OktetaPart::onModified);

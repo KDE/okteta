@@ -29,11 +29,6 @@ private Q_SLOTS:
     void cleanupTestCase();
 
 private Q_SLOTS: // test functions
-    void testLoadFromUrl();
-    void testNewSaveAsToUrl();
-
-private: // not working tests
-    void testLoadFromNotExistingUrl();
 
 private:
     std::unique_ptr<TestFileSystem> mFileSystem;

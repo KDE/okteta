@@ -35,13 +35,9 @@ public:
     ~AbstractLoadJob() override;
 
 public:
-    AbstractDocument* document() const;
-
-Q_SIGNALS:
-    void documentLoaded(Kasten::AbstractDocument* document);
+    std::unique_ptr<AbstractDocument> releaseDocument();
 
 protected:
-    // emits documentLoaded()
     // TODO: or better name property LoadedDocument?
     virtual void setDocument(std::unique_ptr<AbstractDocument>&& document);
 

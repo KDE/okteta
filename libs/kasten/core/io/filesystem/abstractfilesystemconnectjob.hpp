@@ -26,7 +26,8 @@ class KASTENCORE_EXPORT AbstractFileSystemConnectJob : public AbstractConnectJob
     Q_OBJECT
 
 public:
-    AbstractFileSystemConnectJob(AbstractModelFileSystemSynchronizer* synchronizer, AbstractDocument* document,
+    AbstractFileSystemConnectJob(std::unique_ptr<AbstractModelFileSystemSynchronizer>&& synchronizer,
+                                 AbstractDocument* document,
                                  const QUrl& url, AbstractModelSynchronizer::ConnectOption option);
 
     ~AbstractFileSystemConnectJob() override;

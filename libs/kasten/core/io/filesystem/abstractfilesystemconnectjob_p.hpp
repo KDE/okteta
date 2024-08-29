@@ -12,6 +12,7 @@
 // library
 #include "abstractfilesystemconnectjob.hpp"
 #include <abstractconnectjob_p.hpp>
+#include "abstractmodelfilesystemsynchronizer.hpp"
 // Qt
 #include <QFile>
 #include <QUrl>
@@ -24,7 +25,8 @@ class AbstractFileSystemConnectJobPrivate : public AbstractConnectJobPrivate
 {
 public:
     AbstractFileSystemConnectJobPrivate(AbstractFileSystemConnectJob* parent,
-                                        AbstractModelFileSystemSynchronizer* synchronizer, AbstractDocument* document,
+                                        std::unique_ptr<AbstractModelFileSystemSynchronizer>&& synchronizer,
+                                        AbstractDocument* document,
                                         const QUrl& url, AbstractModelSynchronizer::ConnectOption option);
 
     ~AbstractFileSystemConnectJobPrivate() override;
@@ -44,7 +46,7 @@ public:
     void connectWithFile();
 
 protected:
-    AbstractModelFileSystemSynchronizer* const mSynchronizer;
+    std::unique_ptr<AbstractModelFileSystemSynchronizer> mSynchronizer;
     AbstractDocument* const mDocument;
     const QUrl mUrl;
     const AbstractModelSynchronizer::ConnectOption mOption;
@@ -57,10 +59,10 @@ private:
 };
 
 inline AbstractFileSystemConnectJobPrivate::AbstractFileSystemConnectJobPrivate(AbstractFileSystemConnectJob* parent,
-                                                                                AbstractModelFileSystemSynchronizer* synchronizer, AbstractDocument* document,
+                                                                                std::unique_ptr<AbstractModelFileSystemSynchronizer>&& synchronizer, AbstractDocument* document,
                                                                                 const QUrl& url, AbstractModelSynchronizer::ConnectOption option)
     : AbstractConnectJobPrivate(parent)
-    , mSynchronizer(synchronizer)
+    , mSynchronizer(std::move(synchronizer))
     , mDocument(document)
     , mUrl(url)
     , mOption(option)
@@ -70,7 +72,7 @@ inline AbstractFileSystemConnectJobPrivate::~AbstractFileSystemConnectJobPrivate
 
 inline AbstractModelFileSystemSynchronizer* AbstractFileSystemConnectJobPrivate::synchronizer() const
 {
-    return mSynchronizer;
+    return mSynchronizer.get();
 }
 inline AbstractDocument* AbstractFileSystemConnectJobPrivate::document()   const { return mDocument; }
 inline QFile* AbstractFileSystemConnectJobPrivate::file()                  const { return mFile.get(); }

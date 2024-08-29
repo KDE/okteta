@@ -21,7 +21,7 @@ class ByteArrayRawFileLoadJob : public AbstractFileSystemLoadJob
     Q_OBJECT
 
 public:
-    ByteArrayRawFileLoadJob(ByteArrayRawFileSynchronizer* synchronizer, const QUrl& url);
+    ByteArrayRawFileLoadJob(std::unique_ptr<ByteArrayRawFileSynchronizer>&& synchronizer, const QUrl& url);
     ~ByteArrayRawFileLoadJob() override;
 
 protected: // AbstractFileSystemLoadJob API

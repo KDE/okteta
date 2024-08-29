@@ -87,9 +87,9 @@ void AbstractFileSystemLoadJobPrivate::setDocument(std::unique_ptr<AbstractDocum
         }
         mSynchronizer->setRemoteState(isLocalFile ? RemoteInSync : RemoteUnknown);
 
-        document->setSynchronizer(mSynchronizer);
+        document->setSynchronizer(std::move(mSynchronizer));
     } else {
-        delete mSynchronizer;
+        mSynchronizer.reset();
     }
 
     mFile.reset();

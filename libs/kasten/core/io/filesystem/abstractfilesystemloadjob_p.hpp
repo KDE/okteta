@@ -12,6 +12,7 @@
 // lib
 #include "abstractfilesystemloadjob.hpp"
 #include <abstractloadjob_p.hpp>
+#include "abstractmodelfilesystemsynchronizer.hpp"
 // Qt
 #include <QFile>
 #include <QUrl>
@@ -23,7 +24,8 @@ namespace Kasten {
 class AbstractFileSystemLoadJobPrivate : public AbstractLoadJobPrivate
 {
 public:
-    AbstractFileSystemLoadJobPrivate(AbstractFileSystemLoadJob* parent, AbstractModelFileSystemSynchronizer* synchronizer, const QUrl& url);
+    AbstractFileSystemLoadJobPrivate(AbstractFileSystemLoadJob* parent,
+                                     std::unique_ptr<AbstractModelFileSystemSynchronizer>&& synchronizer, const QUrl& url);
 
     ~AbstractFileSystemLoadJobPrivate() override;
 
@@ -42,7 +44,7 @@ public: // slots
     void load();
 
 protected:
-    AbstractModelFileSystemSynchronizer* const mSynchronizer;
+    std::unique_ptr<AbstractModelFileSystemSynchronizer> mSynchronizer;
     const QUrl mUrl;
     std::unique_ptr<QFile> mFile;
     QString mWorkFilePath;
@@ -53,9 +55,9 @@ private:
 };
 
 inline AbstractFileSystemLoadJobPrivate::AbstractFileSystemLoadJobPrivate(AbstractFileSystemLoadJob* parent,
-                                                                          AbstractModelFileSystemSynchronizer* synchronizer, const QUrl& url)
+                                                                          std::unique_ptr<AbstractModelFileSystemSynchronizer>&& synchronizer, const QUrl& url)
     : AbstractLoadJobPrivate(parent)
-    , mSynchronizer(synchronizer)
+    , mSynchronizer(std::move(synchronizer))
     , mUrl(url)
 {}
 
@@ -63,7 +65,7 @@ inline AbstractFileSystemLoadJobPrivate::~AbstractFileSystemLoadJobPrivate() = d
 
 inline AbstractModelFileSystemSynchronizer* AbstractFileSystemLoadJobPrivate::synchronizer() const
 {
-    return mSynchronizer;
+    return mSynchronizer.get();
 }
 inline const QUrl& AbstractFileSystemLoadJobPrivate::url() const { return mUrl; }
 

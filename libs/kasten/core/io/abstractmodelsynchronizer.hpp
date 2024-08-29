@@ -21,8 +21,6 @@ class QUrl;
 
 namespace Kasten {
 
-class AbstractLoadJob;
-class AbstractConnectJob;
 class AbstractSyncToRemoteJob;
 class AbstractSyncFromRemoteJob;
 class AbstractSyncWithRemoteJob;
@@ -73,7 +71,7 @@ public: // API to be implemented
 //     virtual void startOffering( AbstractDocument* document ) = 0;
     // TODO: once the synchronizer is attached to a document, this function should not be called
     // is there a way to ensure this?
-    virtual AbstractLoadJob* startLoad(const QUrl& url) = 0;
+//    virtual AbstractLoadJob* startLoad(const QUrl& url) = 0;
     /** */
     // TODO: not in constructor? cannot be called twice, each synchronizer is attached to its document
 //     virtual AbstractDocument* createWorkingCopy( const QUrl& originUrl, int* success ) const = 0;
@@ -90,8 +88,8 @@ public: // API to be implemented
     /** changes the  */ // TODO: better name for replace: overwrite?
     virtual AbstractSyncWithRemoteJob* startSyncWithRemote(const QUrl& url, AbstractModelSynchronizer::ConnectOption option) = 0;
 
-    virtual AbstractConnectJob* startConnect(AbstractDocument* document,
-                                             const QUrl& url, AbstractModelSynchronizer::ConnectOption option) = 0;
+//    virtual AbstractConnectJob* startConnect(AbstractDocument* document,
+//                                             const QUrl& url, AbstractModelSynchronizer::ConnectOption option) = 0;
 //     virtual bool syncBiDirectly() = 0;
 //     virtual bool canSyncBiDirectly() const = 0;
 //     virtual bool deleteDocument();

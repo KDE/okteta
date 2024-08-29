@@ -10,9 +10,12 @@
 
 // lib
 #include "bytearrayrawfilesynchronizer.hpp"
+#include "bytearrayrawfileloadjob.hpp"
+#include "bytearrayrawfileconnectjob.hpp"
 #include "bytearraydocument.hpp"
 // Qt
 #include <QString>
+#include <QUrl>
 
 namespace Kasten {
 
@@ -25,9 +28,18 @@ ByteArrayRawFileSynchronizerFactory::~ByteArrayRawFileSynchronizerFactory() = de
 QString ByteArrayRawFileSynchronizerFactory::supportedWorkType() const { return QStringLiteral("ByteArrayDocument");}
 QString ByteArrayRawFileSynchronizerFactory::supportedRemoteType() const { return QStringLiteral("application/octet-stream");}
 
-AbstractModelSynchronizer* ByteArrayRawFileSynchronizerFactory::createSynchronizer() const
+AbstractLoadJob* ByteArrayRawFileSynchronizerFactory::startLoad(const QUrl& url)
 {
-    return new ByteArrayRawFileSynchronizer();
+    auto synchronizer = std::make_unique<ByteArrayRawFileSynchronizer>();
+    return new ByteArrayRawFileLoadJob(std::move(synchronizer), url);
+}
+
+AbstractConnectJob* ByteArrayRawFileSynchronizerFactory::startConnect(AbstractDocument* document,
+                                                                      const QUrl& url,
+                                                                      AbstractModelSynchronizer::ConnectOption option)
+{
+    auto synchronizer = std::make_unique<ByteArrayRawFileSynchronizer>();
+    return new ByteArrayRawFileConnectJob(std::move(synchronizer), document, url, option);
 }
 
 }

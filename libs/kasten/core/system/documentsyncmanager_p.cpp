@@ -86,10 +86,9 @@ void DocumentSyncManagerPrivate::load(const QUrl& url)
         }
     }
 
-    AbstractModelSynchronizer* synchronizer = mSynchronizerFactory->createSynchronizer();
-    AbstractLoadJob* loadJob = synchronizer->startLoad(url);
-    QObject::connect(loadJob, &AbstractLoadJob::documentLoaded,
-                     q, [this](AbstractDocument* document) { onDocumentLoaded(document); });
+    AbstractLoadJob* loadJob = mSynchronizerFactory->startLoad(url);
+    QObject::connect(loadJob, &KJob::result,
+                     q, [this](KJob* job) { onDocumentLoadJobResult(job); });
 
     JobManager::executeJob(loadJob);   // TODO: pass a ui handler to jobmanager
 
@@ -165,9 +164,9 @@ bool DocumentSyncManagerPrivate::setSynchronizer(AbstractDocument* document)
                     storingDone = syncSucceeded;
                 } else {
                     // TODO: is overwrite for now, is this useful?
-                    AbstractModelSynchronizer* synchronizer = mSynchronizerFactory->createSynchronizer();
-                    AbstractConnectJob* connectJob = synchronizer->startConnect(document, newUrl,
-                                                                                AbstractModelSynchronizer::ReplaceRemote);
+                    AbstractConnectJob* connectJob =
+                        mSynchronizerFactory->startConnect(document, newUrl,
+                                                           AbstractModelSynchronizer::ReplaceRemote);
                     const bool connectSucceeded = JobManager::executeJob(connectJob);
 
                     storingDone = connectSucceeded;
@@ -264,10 +263,13 @@ void DocumentSyncManagerPrivate::save(AbstractDocument* document)
     JobManager::executeJob(syncJob);
 }
 
-void DocumentSyncManagerPrivate::onDocumentLoaded(AbstractDocument* document)
+void DocumentSyncManagerPrivate::onDocumentLoadJobResult(KJob* job)
 {
+    auto* loadJob = qobject_cast<Kasten::AbstractLoadJob*>(job);
+    auto document = loadJob->releaseDocument()
+;
     if (document) {
-        mManager->addDocument(std::unique_ptr<AbstractDocument>(document));
+        mManager->addDocument(std::move(document));
     }
 }
 

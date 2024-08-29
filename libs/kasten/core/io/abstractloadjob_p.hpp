@@ -11,6 +11,7 @@
 
 // lib
 #include "abstractloadjob.hpp"
+#include "abstractdocument.hpp"
 
 namespace Kasten {
 
@@ -25,7 +26,7 @@ public:
     AbstractLoadJobPrivate& operator=(const AbstractLoadJobPrivate&) = delete;
 
 public:
-    AbstractDocument* document() const;
+    std::unique_ptr<AbstractDocument> releaseDocument();
 
 public:
     void setDocument(std::unique_ptr<AbstractDocument>&& document);
@@ -36,7 +37,7 @@ protected:
 private:
     Q_DECLARE_PUBLIC(AbstractLoadJob)
 
-    AbstractDocument* mDocument = nullptr;
+    std::unique_ptr<AbstractDocument> mDocument;
 };
 
 inline AbstractLoadJobPrivate::AbstractLoadJobPrivate(AbstractLoadJob* parent)
@@ -45,15 +46,12 @@ inline AbstractLoadJobPrivate::AbstractLoadJobPrivate(AbstractLoadJob* parent)
 
 inline AbstractLoadJobPrivate::~AbstractLoadJobPrivate() = default;
 
-inline AbstractDocument* AbstractLoadJobPrivate::document() const { return mDocument; }
+inline std::unique_ptr<AbstractDocument> AbstractLoadJobPrivate::releaseDocument() { return std::move(mDocument); }
 inline void AbstractLoadJobPrivate::setDocument(std::unique_ptr<AbstractDocument>&& document)
 {
     Q_Q(AbstractLoadJob);
 
-    if (document) {
-        mDocument = document.release(); // TODO: make consumer of AbstractLoadJob not only use signal
-        Q_EMIT q->documentLoaded(mDocument);
-    }
+    mDocument = std::move(document);
 
     q->emitResult();
 }

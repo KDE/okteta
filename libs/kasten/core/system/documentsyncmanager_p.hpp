@@ -14,6 +14,8 @@
 // Std
 #include <memory>
 
+class KJob;
+
 namespace Kasten {
 
 class DocumentSyncManagerPrivate
@@ -44,7 +46,7 @@ public:
     void setOverwriteDialog(AbstractOverwriteDialog* overwriteDialog);
 
 private: // slots
-    void onDocumentLoaded(Kasten::AbstractDocument* document);
+    void onDocumentLoadJobResult(KJob* job);
 
 private:
     DocumentSyncManager* const q_ptr;

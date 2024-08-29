@@ -19,8 +19,8 @@
 
 namespace Kasten {
 
-ByteArrayRawFileLoadJob::ByteArrayRawFileLoadJob(ByteArrayRawFileSynchronizer* synchronizer, const QUrl& url)
-    : AbstractFileSystemLoadJob(synchronizer, url)
+ByteArrayRawFileLoadJob::ByteArrayRawFileLoadJob(std::unique_ptr<ByteArrayRawFileSynchronizer>&& synchronizer, const QUrl& url)
+    : AbstractFileSystemLoadJob(std::move(synchronizer), url)
 {}
 
 ByteArrayRawFileLoadJob::~ByteArrayRawFileLoadJob() = default;

@@ -18,11 +18,11 @@
 
 namespace Kasten {
 
-ByteArrayRawFileConnectJob::ByteArrayRawFileConnectJob(ByteArrayRawFileSynchronizer* synchronizer,
+ByteArrayRawFileConnectJob::ByteArrayRawFileConnectJob(std::unique_ptr<ByteArrayRawFileSynchronizer>&& synchronizer,
                                                        AbstractDocument* document,
                                                        const QUrl& url,
                                                        AbstractModelSynchronizer::ConnectOption option)
-    : AbstractFileSystemConnectJob(synchronizer, document, url, option)
+    : AbstractFileSystemConnectJob(std::move(synchronizer), document, url, option)
 {
 }
 

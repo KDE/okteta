@@ -10,10 +10,13 @@
 
 // test object
 #include <testdocumentfilesynchronizerfactory.hpp>
-// lib
-#include <testdocument.hpp>
+#include <testdocumentfilesynchronizer.hpp>
 // test utils
+#include <testdocument.hpp>
 #include <util/filesystem.hpp>
+// lib
+#include <abstractloadjob.hpp>
+#include <abstractconnectjob.hpp>
 // Qt
 #include <QTest>
 #include <QSignalSpy>
@@ -24,14 +27,12 @@
 
 static constexpr char TestDirectory[] = "testdocumentfilesynchronizerfactorytest";
 static constexpr char TestFileName1[] = "test1.data";
-#if 0
 static constexpr char TestFileName2[] = "test2.data";
 static constexpr char NotExistingFileName[] = "not.existing";
 static constexpr char NotExistingUrlName[] = "not://existing";
-#endif
 static constexpr char TestData1[] = "TestData1";
-#if 0
 static constexpr char TestData2[] = "TestData2";
+#if 0
 static constexpr char Header1[] = "Header1";
 static constexpr char Header2[] = "Header2";
 #endif
@@ -70,17 +71,17 @@ void TestDocumentFileSynchronizerFactoryTest::cleanupTestCase()
 void TestDocumentFileSynchronizerFactoryTest::checkFileContent(const QUrl& fileUrl, const QByteArray& data,
                                                                const QByteArray& header)
 {
-    Q_UNUSED(data)
-    Q_UNUSED(fileUrl)
     auto factory = std::make_unique<Kasten::TestDocumentFileSynchronizerFactory>(header);
-#if 0
-    AbstractDocument* document = factory->loadNewDocument(fileUrl);
-    Kasten::TestDocument* testDocument = qobject_cast<Kasten::TestDocument*>(document);
-    QVERIFY(testDocument != 0);
+    auto* loadJob = factory->startLoad(fileUrl);
+    const bool loadSuccess = loadJob->exec();
+    QVERIFY(loadSuccess);
+    auto document = loadJob->releaseDocument();
+
+    auto* testDocument = qobject_cast<Kasten::TestDocument*>(document.get());
+
+    QVERIFY(testDocument != nullptr);
     QCOMPARE(*testDocument->data(), data);
 
-    delete document;
-#endif
 }
 
 // ------------------------------------------------------------------ tests ----
@@ -90,49 +91,59 @@ void TestDocumentFileSynchronizerFactoryTest::testCreate()
 
     QVERIFY(factory != nullptr);
 }
-#if 0
+
 void TestDocumentFileSynchronizerFactoryTest::testLoadFromFile()
 {
     const QByteArray testData(TestData1);
-    const QUrl fileUrl = QUrl::fromLocalFile(mFileSystem->createFilePath(QStringLiteral(TestFileName1)));
+    const QUrl fileUrl = QUrl::fromLocalFile(mFileSystem->createFilePath(QLatin1String(TestFileName1)));
 
-    Kasten::TestDocumentFileSynchronizerFactory* factory = new Kasten::TestDocumentFileSynchronizerFactory();
-    AbstractDocument* document = factory->loadNewDocument(fileUrl);
+    auto facrory = std::make_unique<Kasten::TestDocumentFileSynchronizerFactory>();
 
-    Kasten::TestDocument* testDocument = qobject_cast<Kasten::TestDocument*>(document);
+    auto* loadJob = facrory->startLoad(fileUrl);
+    const bool loadSuccess = loadJob->exec();
+    QVERIFY(loadSuccess);
+    auto document = loadJob->releaseDocument();
 
-    QVERIFY(document != 0);
-    QVERIFY(testDocument != 0);
-    QVERIFY(document->synchronizer() != 0);
-    QCOMPARE(document->synchronizer()->document(), document);
-    QCOMPARE(document->hasLocalChanges(), false);
+    auto* testDocument = qobject_cast<Kasten::TestDocument*>(document.get());
+
+    QVERIFY(document != nullptr);
+    QVERIFY(testDocument != nullptr);
+    QVERIFY(document->synchronizer() != nullptr);
+    QCOMPARE(document->synchronizer()->document(), document.get());
+    QCOMPARE(document->contentFlags(), Kasten::ContentStateNormal);
     QCOMPARE(*testDocument->data(), testData);
     QCOMPARE(document->synchronizer()->url(), fileUrl);
-
-    delete document;
-    delete factory;
 }
 
 void TestDocumentFileSynchronizerFactoryTest::testLoadFromNotExistingUrl()
 {
-    const QUrl fileUrl(QString::fromLatin1(NotExistingUrlName));
-    Kasten::TestDocumentFileSynchronizerFactory* factory = new Kasten::TestDocumentFileSynchronizerFactory();
-    AbstractDocument* document = factory->loadNewDocument(fileUrl);
+    const QUrl fileUrl = QUrl(QLatin1String(NotExistingUrlName));
 
-    QVERIFY(document == 0);
-    delete factory;
+    auto facrory = std::make_unique<Kasten::TestDocumentFileSynchronizerFactory>();
+
+    auto* loadJob = facrory->startLoad(fileUrl);
+    const bool loadSuccess = loadJob->exec();
+    QVERIFY(!loadSuccess);
+    auto document = loadJob->releaseDocument();
+
+    QVERIFY(document == nullptr);
 }
 
 void TestDocumentFileSynchronizerFactoryTest::testLoadFromNotExistingFile()
 {
-    const QUrl fileUrl = QUrl::fromLocalFile(mFileSystem->createFilePath(QStringLiteral(NotExistingFileName)));
-    Kasten::TestDocumentFileSynchronizerFactory* factory = new Kasten::TestDocumentFileSynchronizerFactory();
-    AbstractDocument* document = factory->loadNewDocument(fileUrl);
+    const QUrl fileUrl = QUrl::fromLocalFile(mFileSystem->createFilePath(QLatin1String(NotExistingFileName)));
 
-    QVERIFY(document == 0);
-    delete factory;
+    auto facrory = std::make_unique<Kasten::TestDocumentFileSynchronizerFactory>();
+
+    auto* loadJob = facrory->startLoad(fileUrl);
+    const bool loadSuccess = loadJob->exec();
+    QVERIFY(!loadSuccess);
+    auto document = loadJob->releaseDocument();
+
+    QVERIFY(document == nullptr);
 }
 
+#if 0
 void TestDocumentFileSynchronizerFactoryTest::testLoadSaveFile()
 {
     const QByteArray otherData(TestData2);
@@ -178,35 +189,37 @@ void TestDocumentFileSynchronizerFactoryTest::testLoadReloadFile()
     delete document;
     delete factory;
 }
+#endif
 
 void TestDocumentFileSynchronizerFactoryTest::testConnectToFile()
 {
     const QByteArray otherData(TestData2);
-    const QUrl fileUrl1 = QUrl::::fromLocalFile(mFileSystem->createFilePath(QStringLiteral(TestFileName1)));
-    const QString filePath2 = mFileSystem->createFilePath(QStringLiteral(TestFileName2));
-    const QUrl fileUrl2 = QUrl::fromLocalFile(filePath2);
+    const QUrl fileUrl1 = QUrl::fromLocalFile(mFileSystem->createFilePath(QLatin1String(TestFileName1)));
+    const QString filePath2 = mFileSystem->createFilePath(QLatin1String(TestFileName2));
+    const QUrl fileUrl2 = QUrl::fromLocalFile(QString(filePath2));
 
-    Kasten::TestDocumentFileSynchronizerFactory* factory = new Kasten::TestDocumentFileSynchronizerFactory();
-    Kasten::TestDocument* testDocument = new Kasten::TestDocument();
-    AbstractDocument* document = testDocument;
+    auto* testDocument = new Kasten::TestDocument();
+    auto document = std::unique_ptr<Kasten::AbstractDocument>(testDocument);
     testDocument->setData(otherData);
 
+    auto facrory = std::make_unique<Kasten::TestDocumentFileSynchronizerFactory>();
+
     // file 1
-    bool result = factory->connectDocument(document, fileUrl1, AbstractModelSynchronizer::ReplaceRemote);
-    QVERIFY(result);
+    auto connectJob1 = facrory->startConnect(document.get(), fileUrl1, Kasten::TestDocumentFileSynchronizer::ReplaceRemote);
+    const bool connectSuccess1 = connectJob1->exec();
+    QVERIFY(connectSuccess1);
 
     // file 2
-    result = factory->connectDocument(document, fileUrl2, AbstractModelSynchronizer::ReplaceRemote);
-    QVERIFY(result);
+    auto connectJob2 = facrory->startConnect(document.get(), fileUrl2, Kasten::TestDocumentFileSynchronizer::ReplaceRemote);
+    const bool connectSuccess2 = connectJob2->exec();
+    QVERIFY(connectSuccess2);
 
     // now delete document and load new
-    delete document;
-    delete factory;
+    document.reset();
 
     checkFileContent(fileUrl1, otherData);
     checkFileContent(fileUrl2, otherData);
 }
-#endif
 
 QTEST_GUILESS_MAIN(TestDocumentFileSynchronizerFactoryTest)
 

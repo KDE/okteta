@@ -16,8 +16,6 @@
 #include <util/filesystem.hpp>
 #include <util/fill.hpp>
 // Kasten core
-#include <Kasten/AbstractLoadJob>
-#include <Kasten/AbstractConnectJob>
 #include <Kasten/AbstractSyncToRemoteJob>
 #include <Kasten/AbstractSyncWithRemoteJob>
 // Okteta core
@@ -71,65 +69,6 @@ void ByteArrayRawFileSynchronizerTest::init()
     mModifiedSpy =  new QSignalSpy(ByteArrayModel, SIGNAL(modified(bool)));
 }
 #endif
-
-void ByteArrayRawFileSynchronizerTest::testLoadFromUrl()
-{
-    const QUrl fileUrl = QUrl::fromLocalFile(mFileSystem->createFilePath(QLatin1String(TestFileName)));
-    auto* synchronizer = new ByteArrayRawFileSynchronizer();
-    synchronizer->startLoad(fileUrl)->exec();
-    auto document = std::unique_ptr<AbstractDocument>(synchronizer->document());
-
-    auto* byteArrayDocument = qobject_cast<ByteArrayDocument*>(document.get());
-
-    QVERIFY(document != nullptr);
-    QVERIFY(byteArrayDocument != nullptr);
-    QVERIFY(document->synchronizer() != nullptr);
-    QCOMPARE(document->synchronizer()->document(), document.get());
-    QCOMPARE(document->contentFlags(), Kasten::ContentStateNormal);
-    QCOMPARE(document->synchronizer()->localSyncState(), Kasten::LocalInSync);
-    QCOMPARE(document->synchronizer()->remoteSyncState(), Kasten::RemoteInSync);
-
-    QCOMPARE(document->synchronizer()->url(), fileUrl);
-}
-
-void ByteArrayRawFileSynchronizerTest::testLoadFromNotExistingUrl()
-{
-    const QUrl fileUrl = QUrl(QLatin1String(NotExistingUrl));
-
-    auto synchronizer = std::make_unique<ByteArrayRawFileSynchronizer>();
-    synchronizer->startLoad(fileUrl)->exec();
-    AbstractDocument* document = synchronizer->document();
-
-    QVERIFY(document == nullptr);
-}
-
-void ByteArrayRawFileSynchronizerTest::testNewSaveAsToUrl()
-{
-    const QUrl fileUrl = QUrl::fromLocalFile(mFileSystem->createFilePath(QLatin1String(TestFileName)));
-
-    auto document = std::make_unique<Kasten::ByteArrayDocument>(QStringLiteral("New created for test."));
-    auto* byteArray = qobject_cast<Okteta::PieceTableByteArrayModel*>(document->content());
-
-    // fill array
-    QByteArray testData(TestDataSize, TestDataChar);
-    ::textureByteArray(&testData);
-    byteArray->setData(testData);
-
-    // save
-    auto* synchronizer = new ByteArrayRawFileSynchronizer();
-    synchronizer->startConnect(document.get(), fileUrl, AbstractModelSynchronizer::ReplaceRemote)->exec();
-    QCOMPARE(synchronizer->document(), document.get());
-
-//     // load into other and...
-//     ByteArrayDocument* otherDocument = new ByteArrayDocument( filePath );
-
-//     QVERIFY( document != 0 );
-
-//     // compare with old
-//     Okteta::PieceTableByteArrayModel *otherByteArray = document->content();
-//     QCOMPARE( byteArray->size(), otherByteArray->size() );
-//     QVERIFY( qstrncmp(byteArray->data(),otherByteArray->data(),byteArray->size()) == 0 );
-}
 
 }
 

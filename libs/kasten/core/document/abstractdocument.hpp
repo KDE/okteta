@@ -42,7 +42,7 @@ public: // API to be implemented
     virtual ContentFlags contentFlags() const = 0;
 
 public:
-    void setSynchronizer(AbstractModelSynchronizer* synchronizer);
+    void setSynchronizer(std::unique_ptr<AbstractModelSynchronizer>&& synchronizer);
 
 public: // helper or basic?
     AbstractModelSynchronizer* synchronizer() const;

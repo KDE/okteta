@@ -22,7 +22,7 @@ class TestDocumentFileLoadJob : public AbstractFileSystemLoadJob
     Q_OBJECT
 
 public:
-    TestDocumentFileLoadJob(TestDocumentFileSynchronizer* synchronizer, const QUrl& url);
+    TestDocumentFileLoadJob(std::unique_ptr<TestDocumentFileSynchronizer>&& synchronizer, const QUrl& url);
     ~TestDocumentFileLoadJob() override;
 
 protected: // AbstractFileSystemLoadJob API

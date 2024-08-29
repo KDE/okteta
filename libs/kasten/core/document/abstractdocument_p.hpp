@@ -31,7 +31,7 @@ public:
 
 public:
     void setId(const QString& id);
-    void setSynchronizer(AbstractModelSynchronizer* synchronizer);
+    void setSynchronizer(std::unique_ptr<AbstractModelSynchronizer>&& synchronizer);
 
 private:
     Q_DECLARE_PUBLIC(AbstractDocument)
@@ -51,18 +51,18 @@ inline const QString& AbstractDocumentPrivate::id() const { return mId; }
 inline void AbstractDocumentPrivate::setId(const QString& id) { mId = id; }
 
 inline AbstractModelSynchronizer* AbstractDocumentPrivate::synchronizer() const { return mSynchronizer.get(); }
-inline void AbstractDocumentPrivate::setSynchronizer(AbstractModelSynchronizer* synchronizer)
+inline void AbstractDocumentPrivate::setSynchronizer(std::unique_ptr<AbstractModelSynchronizer>&& synchronizer)
 {
     Q_Q(AbstractDocument);
 
     // plugging the same more than once?
-    if (mSynchronizer.get() == synchronizer) {
+    if (mSynchronizer == synchronizer) {
         return;
     }
 
-    mSynchronizer.reset(synchronizer);
+    mSynchronizer = std::move(synchronizer);
 
-    Q_EMIT q->synchronizerChanged(synchronizer);
+    Q_EMIT q->synchronizerChanged(mSynchronizer.get());
 }
 
 }

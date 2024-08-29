@@ -116,9 +116,9 @@ void AbstractFileSystemConnectJobPrivate::complete(bool success)
         // TODO; in path of both constructor by url and synchWithRemote
         // only needed for the first, so constructor writers can forget about this
         // for now we just check in setSynchronizer that new != old before deleting old
-        mDocument->setSynchronizer(mSynchronizer);
+        mDocument->setSynchronizer(std::move(mSynchronizer));
     } else {
-        delete mSynchronizer;
+        mSynchronizer.reset();
         // TODO: these reports should go to a notification system, for log or popup
         q->setError(KJob::KilledJobError);
         q->setErrorText(mFile->errorString());

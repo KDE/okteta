@@ -25,7 +25,9 @@ public:
     ~TestDocumentFileSynchronizerFactory() override;
 
 public: // AbstractModelSynchronizerFactory API
-    AbstractModelSynchronizer* createSynchronizer() const override;
+    AbstractLoadJob* startLoad(const QUrl& url) override;
+    AbstractConnectJob* startConnect(AbstractDocument* document,
+                                     const QUrl& url, AbstractModelSynchronizer::ConnectOption option) override;
 
     QString supportedWorkType() const override;
     QString supportedRemoteType() const override;
