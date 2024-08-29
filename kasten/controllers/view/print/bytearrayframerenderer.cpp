@@ -55,22 +55,27 @@ ByteArrayFrameRenderer::ByteArrayFrameRenderer()
     mCharCodec = Okteta::CharCodec::createCodec(DefaultCharCoding());
 
     // creating the columns in the needed order
-    mOffsetColumnRenderer =
-        new Okteta::OffsetColumnRenderer(mStylist.get(), mLayout.get(), DefaultOffsetCoding);
-    mFirstBorderColumnRenderer =
-        new Okteta::BorderColumnRenderer(mStylist.get(), true, false);
-    mValueColumnRenderer =
-        new Okteta::ValueByteArrayColumnRenderer(mStylist.get(), mByteArrayModel, mLayout.get(), mTableRanges.get());
-    mSecondBorderColumnRenderer =
-        new Okteta::BorderColumnRenderer(mStylist.get(), true, false);
-    mCharColumnRenderer =
-        new Okteta::CharByteArrayColumnRenderer(mStylist.get(), mByteArrayModel, mLayout.get(), mTableRanges.get());
+    auto offsetColumnRenderer =
+        std::make_unique<Okteta::OffsetColumnRenderer>(mStylist.get(), mLayout.get(), DefaultOffsetCoding);
+    mOffsetColumnRenderer = offsetColumnRenderer.get();
+    auto  firstBorderColumnRenderer =
+        std::make_unique<Okteta::BorderColumnRenderer>(mStylist.get(), true, false);
+    mFirstBorderColumnRenderer = firstBorderColumnRenderer.get();
+    auto valueColumnRenderer =
+        std::make_unique<Okteta::ValueByteArrayColumnRenderer>(mStylist.get(), mByteArrayModel, mLayout.get(), mTableRanges.get());
+    mValueColumnRenderer = valueColumnRenderer.get();
+    auto secondBorderColumnRenderer =
+        std::make_unique<Okteta::BorderColumnRenderer>(mStylist.get(), true, false);
+    mSecondBorderColumnRenderer = secondBorderColumnRenderer.get();
+    auto charColumnRenderer =
+        std::make_unique<Okteta::CharByteArrayColumnRenderer>(mStylist.get(), mByteArrayModel, mLayout.get(), mTableRanges.get());
+    mCharColumnRenderer = charColumnRenderer.get();
 
-    addColumn(mOffsetColumnRenderer);
-    addColumn(mFirstBorderColumnRenderer);
-    addColumn(mValueColumnRenderer);
-    addColumn(mSecondBorderColumnRenderer);
-    addColumn(mCharColumnRenderer);
+    addColumn(std::move(offsetColumnRenderer));
+    addColumn(std::move(firstBorderColumnRenderer));
+    addColumn(std::move(valueColumnRenderer));
+    addColumn(std::move(secondBorderColumnRenderer));
+    addColumn(std::move(charColumnRenderer));
 
     mValueColumnRenderer->setValueCodec((Okteta::ValueCoding)mValueCoding, mValueCodec.get());
     mValueColumnRenderer->setCharCodec(mCharCodec.get());

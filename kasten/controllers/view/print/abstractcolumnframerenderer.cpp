@@ -112,9 +112,9 @@ Okteta::LineSize AbstractColumnFrameRenderer::noOfLinesPerFrame() const
     return noOfLinesPerFrame;
 }
 
-void AbstractColumnFrameRenderer::addColumn(Okteta::AbstractColumnRenderer* columnRenderer)
+void AbstractColumnFrameRenderer::addColumn(std::unique_ptr<Okteta::AbstractColumnRenderer>&& columnRenderer)
 {
-    d->mColumns.emplace_back(std::unique_ptr<Okteta::AbstractColumnRenderer>(columnRenderer));
+    d->mColumns.emplace_back(std::move(columnRenderer));
 
     updateWidths();
 }

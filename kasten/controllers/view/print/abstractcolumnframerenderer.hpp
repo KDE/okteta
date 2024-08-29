@@ -78,7 +78,7 @@ protected:
 
 protected:
     /** takes ownership of column renderer */
-    void addColumn(Okteta::AbstractColumnRenderer* column);
+    void addColumn(std::unique_ptr<Okteta::AbstractColumnRenderer>&& column);
     void removeColumn(Okteta::AbstractColumnRenderer* column);
 
 protected: // recalculations
