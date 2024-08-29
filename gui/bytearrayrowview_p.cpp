@@ -40,12 +40,10 @@ void ByteArrayRowViewPrivate::init()
     Q_Q(ByteArrayRowView);
 
     // creating the columns in the needed order
-    mByteArrayColumn =
-        new ByteArrayRowColumnRenderer(mStylist.get(), mByteArrayModel, &mTableLayout, &mTableRanges);
-
-    addColumn(mOffsetColumn);
-    addColumn(mOffsetBorderColumn);
-    addColumn(mByteArrayColumn);
+    auto byteArrayColumn =
+        std::make_unique<ByteArrayRowColumnRenderer>(mStylist.get(), mByteArrayModel, &mTableLayout, &mTableRanges);
+    mByteArrayColumn = byteArrayColumn.get();
+    addColumn(std::move(byteArrayColumn));
 
     // select the active column
     mActiveCoding = AbstractByteArrayView::CharCodingId;

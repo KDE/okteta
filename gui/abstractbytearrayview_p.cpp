@@ -170,10 +170,16 @@ void AbstractByteArrayViewPrivate::init()
 
     // TODO: on destruction, columns are destructed after mStylist instance in ~ColumnsViewScrollAreaEngine
     // small window of dangling pointer
-    mOffsetColumn =
-        new OffsetColumnRenderer(mStylist.get(), &mTableLayout, OffsetFormat::Hexadecimal);
-    mOffsetBorderColumn =
-        new BorderColumnRenderer(mStylist.get(), false);
+    // TODO: here and in subclasses look for better pattern to refer to intsances owned by engine
+    auto offsetColumn =
+        std::make_unique<OffsetColumnRenderer>(mStylist.get(), &mTableLayout, OffsetFormat::Hexadecimal);
+    mOffsetColumn = offsetColumn.get();
+    auto offsetBorderColumn =
+        std::make_unique<BorderColumnRenderer>(mStylist.get(), false);
+    mOffsetBorderColumn = offsetBorderColumn.get();
+
+    addColumn(std::move(offsetColumn));
+    addColumn(std::move(offsetBorderColumn));
 
     mValueCodec = ValueCodec::createCodec((ValueCoding)DefaultValueCoding);
     mValueCoding = DefaultValueCoding;

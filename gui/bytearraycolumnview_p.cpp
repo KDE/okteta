@@ -40,18 +40,19 @@ void ByteArrayColumnViewPrivate::init()
     Q_Q(ByteArrayColumnView);
 
     // creating the columns in the needed order
-    mValueColumn =
-        new ValueByteArrayColumnRenderer(mStylist.get(), mByteArrayModel, &mTableLayout, &mTableRanges);
-    mMiddleBorderColumn =
-        new BorderColumnRenderer(mStylist.get(), true);
-    mCharColumn =
-        new CharByteArrayColumnRenderer(mStylist.get(), mByteArrayModel, &mTableLayout, &mTableRanges);
+    auto valueColumn =
+        std::make_unique<ValueByteArrayColumnRenderer>(mStylist.get(), mByteArrayModel, &mTableLayout, &mTableRanges);
+    mValueColumn = valueColumn.get();
+    auto widdleBorderColumn =
+        std::make_unique<BorderColumnRenderer>(mStylist.get(), true);
+    mMiddleBorderColumn = widdleBorderColumn.get();
+    auto charColumn =
+        std::make_unique<CharByteArrayColumnRenderer>(mStylist.get(), mByteArrayModel, &mTableLayout, &mTableRanges);
+    mCharColumn = charColumn.get();
 
-    addColumn(mOffsetColumn);
-    addColumn(mOffsetBorderColumn);
-    addColumn(mValueColumn);
-    addColumn(mMiddleBorderColumn);
-    addColumn(mCharColumn);
+    addColumn(std::move(valueColumn));
+    addColumn(std::move(widdleBorderColumn));
+    addColumn(std::move(charColumn));
 
     // select the active column
     mActiveColumn = mCharColumn;

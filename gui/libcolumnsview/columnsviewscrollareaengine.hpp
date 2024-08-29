@@ -117,7 +117,7 @@ public:
     virtual void setNoOfLines(LineSize noOfLines);
 
 public:
-    void addColumn(AbstractColumnRenderer* columnRenderer);
+    void addColumn(std::unique_ptr<AbstractColumnRenderer>&& columnRenderer);
     void removeColumn(AbstractColumnRenderer* columnRenderer);
 
 public: // recalculations
@@ -304,12 +304,12 @@ inline LineSize ColumnsViewScrollAreaEngine::noOfLinesPerPage() const
     return result;
 }
 
-inline void ColumnsViewScrollAreaEngine::addColumn(AbstractColumnRenderer* columnRenderer)
+inline void ColumnsViewScrollAreaEngine::addColumn(std::unique_ptr<AbstractColumnRenderer>&& columnRenderer)
 {
 //   if( Reversed )
 //     Columns.prepend( C );
 //   else
-    columns.emplace_back(std::unique_ptr<AbstractColumnRenderer>(columnRenderer));
+    columns.emplace_back(std::move(columnRenderer));
 
     updateWidths();
 }
