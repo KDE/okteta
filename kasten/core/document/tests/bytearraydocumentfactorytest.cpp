@@ -23,7 +23,7 @@ void ByteArrayDocumentFactoryTest::testCreate()
 {
     auto factory = std::make_unique<ByteArrayDocumentFactory>();
 
-    auto document = std::unique_ptr<AbstractDocument>(factory->create());
+    auto document = factory->create();
     auto* byteArrayDocument = qobject_cast<ByteArrayDocument*>(document.get());
 
     QVERIFY(document != nullptr);
