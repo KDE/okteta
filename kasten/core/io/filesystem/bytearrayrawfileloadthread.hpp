@@ -37,9 +37,6 @@ public:
 
     const QString& errorString() const;
 
-Q_SIGNALS:
-    void documentRead(Kasten::ByteArrayDocument* document);
-
 private:
     QFile* const mFile;
 

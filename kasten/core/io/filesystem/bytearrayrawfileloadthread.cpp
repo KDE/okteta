@@ -64,8 +64,6 @@ void ByteArrayRawFileLoadThread::run()
     } else {
         mErrorString = i18n("Support to load files larger than 2 GiB has not yet been implemented.");
     }
-
-    Q_EMIT documentRead(mDocument.get());
 }
 
 }
