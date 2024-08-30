@@ -31,7 +31,6 @@ namespace Kasten {
 
 static constexpr char TestDirectory[] = "bytearrayrawfilesynchronizertest";
 static constexpr char TestFileName[] = "test.data";
-static constexpr char NotExistingUrl[] = "notexisting://";
 static constexpr int TestDataSize = 50;
 static constexpr char TestDataChar = 0;
 

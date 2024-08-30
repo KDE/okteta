@@ -31,8 +31,6 @@
 static constexpr char TestDirectory[] = "testdocumentfilesynchronizertest";
 static constexpr char TestFileName1[] = "test1.data";
 static constexpr char TestFileName2[] = "test2.data";
-static constexpr char NotExistingFileName[] = "not.existing";
-static constexpr char NotExistingUrlName[] = "not://existing";
 static constexpr char TestData1[] = "TestData1";
 static constexpr char TestData2[] = "TestData2";
 static constexpr char Header1[] = "Header1";
