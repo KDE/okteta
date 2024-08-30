@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-29 01:48+0000\n"
+"POT-Creation-Date: 2024-08-30 01:55+0000\n"
 "PO-Revision-Date: 2010-04-11 06:23+0200\n"
 "Last-Translator: Manfred Wiese <m.j.wiese@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -396,19 +396,19 @@ msgctxt "@info:tooltip"
 msgid "Zoom: %1%"
 msgstr "Ansichtgrött: %1%"
 
-#: core/system/documentsyncmanager_p.cpp:112
+#: core/system/documentsyncmanager_p.cpp:111
 #, kde-format
 msgctxt "@title:window"
 msgid "Save As"
 msgstr "Sekern as"
 
-#: core/system/documentsyncmanager_p.cpp:211
+#: core/system/documentsyncmanager_p.cpp:210
 #, kde-format
 msgctxt "@title:window"
 msgid "Close"
 msgstr "Tomaken"
 
-#: core/system/documentsyncmanager_p.cpp:246
+#: core/system/documentsyncmanager_p.cpp:245
 #, kde-format
 msgctxt "@title:window"
 msgid "Reload"

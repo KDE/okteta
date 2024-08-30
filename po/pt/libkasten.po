@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-29 01:48+0000\n"
+"POT-Creation-Date: 2024-08-30 01:55+0000\n"
 "PO-Revision-Date: 2018-05-23 10:57+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -380,19 +380,19 @@ msgctxt "@info:tooltip"
 msgid "Zoom: %1%"
 msgstr "Ampliação: %1%"
 
-#: core/system/documentsyncmanager_p.cpp:112
+#: core/system/documentsyncmanager_p.cpp:111
 #, kde-format
 msgctxt "@title:window"
 msgid "Save As"
 msgstr "Gravar Como"
 
-#: core/system/documentsyncmanager_p.cpp:211
+#: core/system/documentsyncmanager_p.cpp:210
 #, kde-format
 msgctxt "@title:window"
 msgid "Close"
 msgstr "Fechar"
 
-#: core/system/documentsyncmanager_p.cpp:246
+#: core/system/documentsyncmanager_p.cpp:245
 #, kde-format
 msgctxt "@title:window"
 msgid "Reload"
