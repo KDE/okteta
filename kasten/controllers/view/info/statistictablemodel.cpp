@@ -134,7 +134,7 @@ QVariant StatisticTableModel::data(const QModelIndex& index, int role) const
             const Okteta::Character decodedChar = mCharCodec->decode(byte);
             result =
                 decodedChar.isUndefined() ?
-                    i18nc("@item:intable character is not defined", "undef.") :
+                    QString(mUndefinedChar) :
                 !decodedChar.isPrint() ?
                     QString(mSubstituteChar) :
                     QString(static_cast<QChar>(decodedChar));
@@ -167,6 +167,16 @@ QVariant StatisticTableModel::data(const QModelIndex& index, int role) const
             break;
         default:
             ;
+        }
+    } else if (role == Qt::ToolTipRole) {
+        const int column = index.column();
+        if (column == CharacterId) {
+            const unsigned char byte = index.row();
+            const Okteta::Character decodedChar = mCharCodec->decode(byte);
+            if (decodedChar.isUndefined()) {
+                // reusing old string in string freeze
+                result = i18nc("@item:intable character is not defined", "undef.");
+            }
         }
     } else if (role == Qt::TextAlignmentRole) {
         result = static_cast<int>(Qt::AlignVCenter | Qt::AlignRight);
