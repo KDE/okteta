@@ -10,7 +10,6 @@
 #define KASTEN_CHAR8STRINGPARSER_HPP
 
 // Qt
-#include <QValidator>
 #include <QRegularExpression>
 
 namespace Okteta {
