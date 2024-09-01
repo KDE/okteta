@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-21 01:59+0000\n"
+"POT-Creation-Date: 2024-08-30 01:55+0000\n"
 "PO-Revision-Date: 2010-03-28 13:37+0200\n"
 "Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -107,19 +107,19 @@ msgctxt "@action:inmenu"
 msgid "Close All Other"
 msgstr ""
 
-#: controllers/documentsystem/creator/creatorcontroller.cpp:41
+#: controllers/documentsystem/creator/creatorcontroller.cpp:40
 #, kde-format
 msgctxt "@title:menu create new byte arrays from different sources"
 msgid "New"
 msgstr "Ny"
 
-#: controllers/documentsystem/creator/creatorcontroller.cpp:49
+#: controllers/documentsystem/creator/creatorcontroller.cpp:48
 #, kde-format
 msgctxt "@item:inmenu create a new empty document"
 msgid "Empty"
 msgstr ""
 
-#: controllers/documentsystem/creator/creatorcontroller.cpp:60
+#: controllers/documentsystem/creator/creatorcontroller.cpp:59
 #, kde-format
 msgctxt "@item:inmenu create a new document from data in the clipboard"
 msgid "From Clipboard"
@@ -221,7 +221,7 @@ msgid "Not available."
 msgstr "Ikke tilgjengelig."
 
 #: controllers/io/export/exportdialog.cpp:40
-#: core/system/modelcodecmanager_p.cpp:124
+#: core/system/modelcodecmanager_p.cpp:125
 #, kde-format
 msgctxt "@title:window"
 msgid "Export"
@@ -384,19 +384,19 @@ msgctxt "@title:window"
 msgid "Save As"
 msgstr "Lagre som"
 
-#: core/system/documentsyncmanager_p.cpp:200
+#: core/system/documentsyncmanager_p.cpp:210
 #, kde-format
 msgctxt "@title:window"
 msgid "Close"
 msgstr "Lukk"
 
-#: core/system/documentsyncmanager_p.cpp:235
+#: core/system/documentsyncmanager_p.cpp:245
 #, kde-format
 msgctxt "@title:window"
 msgid "Reload"
 msgstr "Last på nytt"
 
-#: core/system/modelcodecmanager_p.cpp:134
+#: core/system/modelcodecmanager_p.cpp:135
 #, kde-format
 msgctxt "@action:button"
 msgid "&Export"
