@@ -21,12 +21,12 @@ Char8StringParser::Char8StringParser(const CharCodec* charCodec)
 {
 }
 
-Char8StringParser::SyntaxState Char8StringParser::evaluate(QChar* result,
-                                                           const QString& string) const
+Char8StringParser::CodeState Char8StringParser::evaluate(QChar* result,
+                                                         const QString& string) const
 {
     const int stringLength = string.length();
     if (stringLength == 0) {
-        return SyntaxIntermediate;
+        return CodeIntermediate;
     }
 
     const QChar c0 = string.at(0);
@@ -35,11 +35,11 @@ Char8StringParser::SyntaxState Char8StringParser::evaluate(QChar* result,
             if (result) {
                 *result = c0;
             }
-            return SyntaxAcceptable;
+            return CodeAcceptable;
         }
         // escape started?
         if (c0 == QLatin1Char('\\')) {
-            return SyntaxIntermediate;
+            return CodeIntermediate;
         }
     } else if (c0 == QLatin1Char('\\')) {
         const QChar c1 = string.at(1);
@@ -64,7 +64,7 @@ Char8StringParser::SyntaxState Char8StringParser::evaluate(QChar* result,
                 if (result) {
                     *result = escapedChar;
                 }
-                return SyntaxAcceptable;
+                return CodeAcceptable;
             }
         }
         if (stringLength < 5) {
@@ -73,7 +73,7 @@ Char8StringParser::SyntaxState Char8StringParser::evaluate(QChar* result,
             // hex escape
             if ((c1 == QLatin1Char('x')) || (c1 == QLatin1Char('X'))) {
                 if (stringLength == 2) {
-                    return SyntaxIntermediate;
+                    return CodeIntermediate;
                 }
                 const QStringRef hexValueString = string.midRef(2, 2); // 2 chars
                 // toInt just ignores unparseable data at the end, so test outselves
@@ -97,13 +97,13 @@ Char8StringParser::SyntaxState Char8StringParser::evaluate(QChar* result,
                     if (result) {
                         *result = character;
                     }
-                    return SyntaxAcceptable;
+                    return CodeAcceptable;
                 }
             }
         }
     }
 
-    return SyntaxInvalid;
+    return CodeInvalid;
 }
 
 }

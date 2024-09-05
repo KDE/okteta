@@ -19,17 +19,17 @@ class CharCodec;
 class Char8StringParser
 {
 public:
-    enum SyntaxState {
-        SyntaxInvalid,
-        SyntaxIntermediate,
-        SyntaxAcceptable,
+    enum CodeState {
+        CodeInvalid,
+        CodeIntermediate,
+        CodeAcceptable,
     };
 
 public:
     explicit Char8StringParser(const CharCodec* charCodec);
 
 public:
-    SyntaxState evaluate(QChar* result, const QString& string) const;
+    CodeState evaluate(QChar* result, const QString& string) const;
 
 private:
     const CharCodec* const m_charCodec;

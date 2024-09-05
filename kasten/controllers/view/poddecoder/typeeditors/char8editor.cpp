@@ -33,8 +33,8 @@ void Char8Editor::setData(Char8 data)
 Char8 Char8Editor::data() const
 {
     QChar c;
-    const Okteta::Char8StringParser::SyntaxState evalResult = m_parser.evaluate(&c, text());
-    if (evalResult != Okteta::Char8StringParser::SyntaxAcceptable) {
+    const Okteta::Char8StringParser::CodeState evalResult = m_parser.evaluate(&c, text());
+    if (evalResult != Okteta::Char8StringParser::CodeAcceptable) {
         return {QChar(0)};
     }
 
