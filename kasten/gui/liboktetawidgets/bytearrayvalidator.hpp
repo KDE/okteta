@@ -9,14 +9,12 @@
 #ifndef KASTEN_BYTEARRAYVALIDATOR_HPP
 #define KASTEN_BYTEARRAYVALIDATOR_HPP
 
-// Okteta core
-#include <Okteta/OktetaCore>
+// lib
+#include "abstractbytearraystringvalidator.hpp"
 // Qt
 #include <QValidator>
 
 namespace Okteta {
-class ValueCodec;
-class CharCodec;
 
 class ByteArrayValidator : public QValidator
 {
@@ -36,9 +34,8 @@ public:
     };
 
 public:
-    explicit ByteArrayValidator(QObject* parent = nullptr,
-                                Coding codecId = CharCoding,
-                                int charCodecId = LocalEncoding);
+    /// Initial coding: HexadecimalCoding
+    explicit ByteArrayValidator(QObject* parent = nullptr);
 
     ~ByteArrayValidator() override;
 
@@ -60,29 +57,19 @@ public:
 public:
     int maxLength() const;
     int minLength() const;
+    ByteArrayValidator::Coding coding() const;
 
-public:
     QByteArray toByteArray(const QString& string) const;
     QString toString(const QByteArray& byteArray) const;
 
 private:
-    /**
-     * Returns a string that is at least as long as @p destLen number of characters,
-     * by adding zeroes to the left as necessary.
-     *
-     * e.g. zeroExtend( "32", 3 ) => "032"
-     */
-//     QString zeroExtend( const QString &src, int destLen ) const;
+    AbstractByteArrayStringValidator* m_stringValidator = nullptr;
 
-    Coding mCodecId = InvalidCoding;
-    ValueCodec* mValueCodec = nullptr;
-    CharCodec* mCharCodec;
-    int mMaxLength = 32767;
-    int mMinLength = 0;
+    Coding mCodecId;
+    QString m_charCodecName;
 };
 
-inline int ByteArrayValidator::maxLength() const { return mMaxLength; }
-inline int ByteArrayValidator::minLength() const { return mMinLength; }
+inline ByteArrayValidator::Coding ByteArrayValidator::coding() const { return mCodecId; }
 
 }
 

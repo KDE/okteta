@@ -17,7 +17,15 @@ oktetakastengui_add_sublibrary(liboktetawidgets
         AddressComboBox
         ByteArrayComboBox
     PRIVATE
+        AbstractByteArrayStringValidator
+        ByteArrayChar8StringDecoder
+        ByteArrayChar8StringEncoder
+        ByteArrayChar8StringValidator
+        ByteArrayUtf8StringDecoder
+        ByteArrayUtf8StringEncoder
+        ByteArrayUtf8StringValidator
         ByteArrayValidator
+        ByteArrayValueStringValidator
 )
 
 oktetakastengui_add_sublibrary(io/streamencoder/values
@@ -186,3 +194,7 @@ target_include_directories(OktetaKastenGui
 
 okteta_add_cmakeconfig(Gui NAMESPACE Okteta Kasten
 )
+
+if(BUILD_TESTING)
+    add_subdirectory(liboktetawidgets/tests)
+endif()

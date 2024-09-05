@@ -1,0 +1,30 @@
+/*
+    This file is part of the Okteta Kasten module, made within the KDE community.
+
+    SPDX-FileCopyrightText: 2024 Friedrich W. H. Kossebau <kossebau@kde.org>
+
+    SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
+*/
+
+#ifndef OKTETA_BYTEARRAYCHAR8STRINGDECODERTEST_HPP
+#define OKTETA_BYTEARRAYCHAR8STRINGDECODERTEST_HPP
+
+// Qt
+#include <QObject>
+
+namespace Okteta {
+
+class ByteArrayChar8StringDecoderTest : public QObject
+{
+    Q_OBJECT
+
+private Q_SLOTS: // test functions
+    void testDecode();
+    void testDecode_data();
+    void testDecodeMaxSize();
+    void testDecodeMaxSize_data();
+};
+
+}
+
+#endif
