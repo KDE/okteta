@@ -17,12 +17,12 @@ QValidator::State Char8StringValidator::validate(QString& input, int& pos) const
 {
     Q_UNUSED(pos)
 
-    const Char8StringParser::SyntaxState evalResult = m_parser->evaluate(nullptr, input);
+    const Char8StringParser::CodeState evalResult = m_parser->evaluate(nullptr, input);
 
     return
-        (evalResult == Char8StringParser::SyntaxAcceptable) ?   QValidator::Acceptable :
-        (evalResult == Char8StringParser::SyntaxIntermediate) ? QValidator::Intermediate :
-        /* else */                                              QValidator::Invalid;
+        (evalResult == Char8StringParser::CodeAcceptable) ?   QValidator::Acceptable :
+        (evalResult == Char8StringParser::CodeIntermediate) ? QValidator::Intermediate :
+        /* else */                                            QValidator::Invalid;
 
 
 }

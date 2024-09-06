@@ -110,7 +110,7 @@ QVariant ByteTableModel::data(const QModelIndex& index, int role) const
             const Okteta::Character decodedChar = mCharCodec->decode(byte);
             content =
                 decodedChar.isUndefined() ?
-                    i18nc("@item:intable character is not defined", "undef.") :
+                    QString(mUndefinedChar) :
                 !decodedChar.isPrint() ?
                     QString(mSubstituteChar) :
                     QString(static_cast<QChar>(decodedChar));
@@ -130,6 +130,15 @@ QVariant ByteTableModel::data(const QModelIndex& index, int role) const
                 const QPalette& palette = QApplication::palette();
                 const KColorScheme colorScheme(palette.currentColorGroup(), KColorScheme::View);
                 result = colorScheme.foreground(KColorScheme::InactiveText);
+            }
+        }
+    } else if (role == Qt::ToolTipRole) {
+        const int column = index.column();
+        if (column == CharacterId) {
+            const unsigned char byte = index.row();
+            const Okteta::Character decodedChar = mCharCodec->decode(byte);
+            if (decodedChar.isUndefined()) {
+                result = i18nc("@info:tooltip", "Character not defined.");
             }
         }
     } else if (role == Qt::TextAlignmentRole) {

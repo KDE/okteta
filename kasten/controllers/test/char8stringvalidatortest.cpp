@@ -44,8 +44,8 @@ void Char8StringValidatorTest::testValidate_data()
         << QStringLiteral("\\n") << iso8859_1 << QValidator::Acceptable << QChar::fromLatin1('\n');
     QTest::newRow("newline-n-ISO-8859-1")
         << QStringLiteral("\\nn") << iso8859_1 << QValidator::Invalid << dummyByte;
-    QTest::newRow("newline-ISO-8859-1")
-        << QStringLiteral("\\foo") << iso8859_1 << QValidator::Invalid << dummyByte;
+    QTest::newRow("escaped-A-ISO-8859-1")
+        << QStringLiteral("\\A") << iso8859_1 << QValidator::Invalid << dummyByte;
     QTest::newRow("escaped-hex-x-US-ASCII")
         << QStringLiteral("\\x") << usAscii << QValidator::Intermediate << dummyByte;
     QTest::newRow("escaped-hex-x2-US-ASCII")

@@ -57,8 +57,8 @@ std::optional<quint8> Char8Editor::byte() const
 Char8 Char8Editor::data() const
 {
     QChar c;
-    const Char8StringParser::SyntaxState evalResult = m_parser.evaluate(&c, text());
-    if (evalResult != Char8StringParser::SyntaxAcceptable) {
+    const Char8StringParser::CodeState evalResult = m_parser.evaluate(&c, text());
+    if (evalResult != Char8StringParser::CodeAcceptable) {
         return {QChar(0)};
     }
 

@@ -10,7 +10,6 @@
 #define OKTETA_CHAR8STRINGPARSER_HPP
 
 // Qt
-#include <QValidator>
 #include <QRegularExpression>
 
 namespace Okteta {
@@ -20,17 +19,17 @@ class CharCodec;
 class Char8StringParser
 {
 public:
-    enum SyntaxState {
-        SyntaxInvalid,
-        SyntaxIntermediate,
-        SyntaxAcceptable,
+    enum CodeState {
+        CodeInvalid,
+        CodeIntermediate,
+        CodeAcceptable,
     };
 
 public:
     explicit Char8StringParser(const CharCodec* charCodec);
 
 public:
-    SyntaxState evaluate(QChar* result, const QString& string) const;
+    CodeState evaluate(QChar* result, const QString& string) const;
     const Okteta::CharCodec* charCodec() const;
 
 private:
