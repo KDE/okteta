@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-29 01:48+0000\n"
+"POT-Creation-Date: 2024-09-07 01:47+0000\n"
 "PO-Revision-Date: 2024-04-30 12:37+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -195,78 +195,78 @@ msgid ""
 "can be edited."
 msgstr ""
 
-#: controllers/view/bytetable/bytetablemodel.cpp:113
-#: controllers/view/info/statistictablemodel.cpp:130
+#: controllers/view/bytetable/bytetablemodel.cpp:141
+#: controllers/view/info/statistictablemodel.cpp:170
 #, kde-format
-msgctxt "@item:intable character is not defined"
-msgid "undef."
-msgstr "indef. "
+msgctxt "@info:tooltip"
+msgid "Character not defined."
+msgstr ""
 
-#: controllers/view/bytetable/bytetablemodel.cpp:150
-#: controllers/view/info/statistictablemodel.cpp:207
+#: controllers/view/bytetable/bytetablemodel.cpp:159
+#: controllers/view/info/statistictablemodel.cpp:216
 #, kde-format
 msgctxt "@title:column short for Decimal"
 msgid "Dec"
 msgstr "Dec"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:151
-#: controllers/view/info/statistictablemodel.cpp:206
+#: controllers/view/bytetable/bytetablemodel.cpp:160
+#: controllers/view/info/statistictablemodel.cpp:215
 #, kde-format
 msgctxt "@title:column short for Hexadecimal"
 msgid "Hex"
 msgstr "Hex"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:152
-#: controllers/view/info/statistictablemodel.cpp:208
+#: controllers/view/bytetable/bytetablemodel.cpp:161
+#: controllers/view/info/statistictablemodel.cpp:217
 #, kde-format
 msgctxt "@title:column short for Octal"
 msgid "Oct"
 msgstr "Oct"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:153
-#: controllers/view/info/statistictablemodel.cpp:209
+#: controllers/view/bytetable/bytetablemodel.cpp:162
+#: controllers/view/info/statistictablemodel.cpp:218
 #, kde-format
 msgctxt "@title:column short for Binary"
 msgid "Bin"
 msgstr "Bin"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:154
-#: controllers/view/info/statistictablemodel.cpp:211
+#: controllers/view/bytetable/bytetablemodel.cpp:163
+#: controllers/view/info/statistictablemodel.cpp:220
 #, kde-format
 msgctxt "@title:column short for Character"
 msgid "Char"
 msgstr "Char"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:160
-#: controllers/view/info/statistictablemodel.cpp:222
+#: controllers/view/bytetable/bytetablemodel.cpp:169
+#: controllers/view/info/statistictablemodel.cpp:231
 #, kde-format
 msgctxt "@info:tooltip column contains the value in decimal format"
 msgid "Decimal"
 msgstr "Decimal"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:162
-#: controllers/view/info/statistictablemodel.cpp:220
+#: controllers/view/bytetable/bytetablemodel.cpp:171
+#: controllers/view/info/statistictablemodel.cpp:229
 #, kde-format
 msgctxt "@info:tooltip column contains the value in hexadecimal format"
 msgid "Hexadecimal"
 msgstr "Hexadecimal"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:164
-#: controllers/view/info/statistictablemodel.cpp:224
+#: controllers/view/bytetable/bytetablemodel.cpp:173
+#: controllers/view/info/statistictablemodel.cpp:233
 #, kde-format
 msgctxt "@info:tooltip column contains the value in octal format"
 msgid "Octal"
 msgstr "Octal"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:166
-#: controllers/view/info/statistictablemodel.cpp:226
+#: controllers/view/bytetable/bytetablemodel.cpp:175
+#: controllers/view/info/statistictablemodel.cpp:235
 #, kde-format
 msgctxt "@info:tooltip column contains the value in binary format"
 msgid "Binary"
 msgstr "Binari"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:168
-#: controllers/view/info/statistictablemodel.cpp:230
+#: controllers/view/bytetable/bytetablemodel.cpp:177
+#: controllers/view/info/statistictablemodel.cpp:239
 #, kde-format
 msgctxt "@info:tooltip column contains the character with the value"
 msgid "Character"
@@ -714,13 +714,13 @@ msgid_plural "%1 bytes"
 msgstr[0] "1 Byte"
 msgstr[1] "%1 bytes"
 
-#: controllers/view/info/statistictablemodel.cpp:212
+#: controllers/view/info/statistictablemodel.cpp:221
 #, kde-format
 msgctxt "@title:column count of characters"
 msgid "Count"
 msgstr "Computo"
 
-#: controllers/view/info/statistictablemodel.cpp:213
+#: controllers/view/info/statistictablemodel.cpp:222
 #, kde-format
 msgctxt "@title:column Percent of byte in total"
 msgid "Percent"
@@ -3383,6 +3383,10 @@ msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"
 msgid "UTF-8"
 msgstr "UTF-8"
+
+#~ msgctxt "@item:intable character is not defined"
+#~ msgid "undef."
+#~ msgstr "indef. "
 
 #~ msgctxt "@info:placeholder"
 #~ msgid "Search..."
