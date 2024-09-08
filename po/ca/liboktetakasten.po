@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-07 01:47+0000\n"
-"PO-Revision-Date: 2024-04-26 12:14+0200\n"
+"PO-Revision-Date: 2024-09-07 12:53+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 24.08.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -210,7 +210,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Character not defined."
-msgstr ""
+msgstr "Caràcter no definit."
 
 # skip-rule: abbreviations-dec
 #: controllers/view/bytetable/bytetablemodel.cpp:159

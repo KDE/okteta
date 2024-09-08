@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-07 01:47+0000\n"
-"PO-Revision-Date: 2024-07-21 12:44+0200\n"
+"PO-Revision-Date: 2024-09-07 18:12+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -215,7 +215,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Character not defined."
-msgstr ""
+msgstr "Znak jest nieokreślony."
 
 #: controllers/view/bytetable/bytetablemodel.cpp:159
 #: controllers/view/info/statistictablemodel.cpp:216
