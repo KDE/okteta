@@ -238,7 +238,6 @@ okteta_add_library(Controllers NAMESPACE Kasten
         KF5::ConfigWidgets
         KF5::XmlGui
         KF5::KIOFileWidgets
-        KF5::Parts
     VERSION     ${KASTENCONTROLLERS_VERSION}
     SOVERSION   ${KASTENCONTROLLERS_SO_VERSION}
     ABIVERSION  ${KASTEN_ABI_VERSION}
@@ -252,6 +251,9 @@ okteta_add_library(Controllers NAMESPACE Kasten
 
 if (NOT HAVE_UICOLORSCHEMECONTROLLER)
     target_compile_definitions(KastenControllers INTERFACE KASTEN_NO_UICOLORSCHEMECONTROLLER)
+endif()
+if (BUILD_TERMINALTOOL)
+    target_link_libraries(KastenControllers PRIVATE KF5::Parts)
 endif()
 
 okteta_add_cmakeconfig(Controllers NAMESPACE Kasten

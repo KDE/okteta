@@ -84,10 +84,14 @@ if( BUILD_OKTETAKASTENLIBS )
         KCMUtils
         KIO
         NewStuff
-        Parts
         Service
         WidgetsAddons
         XmlGui
+    )
+endif()
+if (BUILD_TERMINALTOOL OR BUILD_KPARTSPLUGIN)
+    list(APPEND ADDITIONAL_REQUIRED_KF_COMPONENTS
+        Parts
     )
 endif()
 if( BUILD_DESKTOPPROGRAM )
