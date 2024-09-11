@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-07 01:47+0000\n"
-"PO-Revision-Date: 2024-04-29 18:59+0200\n"
+"PO-Revision-Date: 2024-09-07 17:00+0200\n"
 "Last-Translator: Luigi Toscano <luigi.toscano@tiscali.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -210,7 +210,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Character not defined."
-msgstr ""
+msgstr "Carattere non definito."
 
 #: controllers/view/bytetable/bytetablemodel.cpp:159
 #: controllers/view/info/statistictablemodel.cpp:216
