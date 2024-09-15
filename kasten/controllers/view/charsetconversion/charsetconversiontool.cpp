@@ -221,15 +221,17 @@ void CharsetConversionTool::setSubstitutingMissingChars(bool isSubstitutingMissi
 
     KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     configGroup.writeEntry(SubstituteMissingCharsConfigKey, mSubstitutingMissingChars);
+
+    emit isSubstitutingMissingCharsChanged(mSubstitutingMissingChars);
 }
 
-void CharsetConversionTool::setSubstituteByte(int byte)
+void CharsetConversionTool::setSubstituteByte(Okteta::Byte byte)
 {
-    if (mSubstituteByte == static_cast<Okteta::Byte>(byte)) {
+    if (mSubstituteByte == byte) {
         return;
     }
 
-    mSubstituteByte = static_cast<Okteta::Byte>(byte);
+    mSubstituteByte = byte;
 
     KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     configGroup.writeEntry(SubstituteByteConfigKey, ByteParameter{mSubstituteByte});
