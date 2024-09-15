@@ -121,6 +121,13 @@ QString CharsetConversionTool::title() const
                  "Charset Conversion");
 }
 
+QString CharsetConversionTool::targetCharCodecName() const
+{
+    return (mConversionDirection == ConvertTo) ?
+        mOtherCharCodecName :
+        mByteArrayView ? mByteArrayView->charCodingName() : QString();
+}
+
 QString CharsetConversionTool::otherCharCodecName() const
 {
     return mOtherCharCodecName;
@@ -155,9 +162,13 @@ void CharsetConversionTool::setTargetModel(AbstractModel* model)
 
     if (mByteArrayView && mByteArrayModel) {
         connect(mByteArrayView,  &ByteArrayView::charCodecChanged,
+                this, &CharsetConversionTool::onViewCharCodecChanged);
+        connect(mByteArrayView,  &ByteArrayView::charCodecChanged,
                 this, &CharsetConversionTool::onViewChanged);
         connect(mByteArrayView,  &ByteArrayView::selectedDataChanged,
                 this, &CharsetConversionTool::onViewChanged);
+
+        onViewCharCodecChanged(mByteArrayView->charCodingName());
     }
 
     onViewChanged();
@@ -174,6 +185,9 @@ void CharsetConversionTool::setOtherCharCodecName(const QString& codecName)
     KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     configGroup.writeEntry(OtherCharCodecNameConfigKey, mOtherCharCodecName);
 
+    if (mConversionDirection == ConvertTo) {
+        emit targetCharCodecChanged(mOtherCharCodecName);
+    }
     emit isApplyableChanged(isApplyable());
 }
 
@@ -183,10 +197,18 @@ void CharsetConversionTool::setConversionDirection(int conversionDirection)
         return;
     }
 
+    const QString oldTargetCharCodecName = CharsetConversionTool::targetCharCodecName();
+
     mConversionDirection = (ConversionDirection)conversionDirection;
 
     KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     configGroup.writeEntry(ConversionDirectionConfigKey, mConversionDirection);
+
+    const QString newTargetCharCodecName = CharsetConversionTool::targetCharCodecName();
+
+    if (oldTargetCharCodecName != newTargetCharCodecName) {
+        emit targetCharCodecChanged(newTargetCharCodecName);
+    }
 }
 
 void CharsetConversionTool::setSubstitutingMissingChars(bool isSubstitutingMissingChars)
@@ -264,6 +286,13 @@ void CharsetConversionTool::convertChars()
     mByteArrayView->setFocus();
 
     emit conversionDone(success, convertedBytesCount, failedPerByteCount);
+}
+
+void CharsetConversionTool::onViewCharCodecChanged(const QString& charCodecName)
+{
+    if (mConversionDirection == ConvertFrom) {
+        emit targetCharCodecChanged(charCodecName);
+    }
 }
 
 void CharsetConversionTool::onViewChanged()

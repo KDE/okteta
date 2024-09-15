@@ -127,6 +127,7 @@ CharsetConversionView::CharsetConversionView(CharsetConversionTool* tool, QWidge
     mSubstituteByteEdit = new Okteta::ByteArrayComboBox(this);
     mSubstituteByteEdit->setMinLength(1);
     mSubstituteByteEdit->setMaxLength(1);
+    mSubstituteByteEdit->setCharCodec(mTool->targetCharCodecName());
     const QString substituteByteToolTip =
         i18nc("@info:tooltip",
               "The byte to use for chars which are not part of the target charset.");
@@ -141,6 +142,8 @@ CharsetConversionView::CharsetConversionView(CharsetConversionTool* tool, QWidge
             this, &CharsetConversionView::onDefaultByteEditChanged);
 //     connect( mSubstituteMissingCharCheckBox, SIGNAL(toggled(bool)),
 //              mSubstituteByteEdit, SLOT(setEnabled(bool)) );
+    connect(mTool, &CharsetConversionTool::targetCharCodecChanged,
+            mSubstituteByteEdit, &Okteta::ByteArrayComboBox::setCharCodec);
     mSubstituteByteEdit->setByteArray(QByteArray(1, mTool->substituteByte()));
     settingsLayout->addRow(substituteByteLabelText, mSubstituteByteEdit);
 

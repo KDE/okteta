@@ -61,6 +61,7 @@ public: // AbstractTool API
 public: // status
     bool isApplyable() const; // candidate for AbstractTool API
 
+    QString targetCharCodecName() const;
     QString otherCharCodecName() const;
     ConversionDirection conversionDirection() const;
     bool isSubstitutingMissingChars() const;
@@ -77,10 +78,12 @@ public Q_SLOTS: // actions
 
 Q_SIGNALS:
     void isApplyableChanged(bool isApplyable);    // candidate for AbstractTool API
+    void targetCharCodecChanged(const QString& charCodingName);
     void conversionDone(bool success, int convertedBytesCount,
                         const QMap<Okteta::Byte, int>& failedPerByteCount);
 
 private Q_SLOTS:
+    void onViewCharCodecChanged(const QString& charCodecName);
     void onViewChanged();
 
 private: // settings
