@@ -14,6 +14,8 @@
 #include <Kasten/Okteta/ByteArrayView>
 // Okteta Kasten core
 #include <Kasten/Okteta/ByteArrayDocument>
+// libconfigentries
+#include <bytearraycodingconfigentry.hpp>
 // Okteta core
 #include <Okteta/CharCodec>
 #include <Okteta/AbstractByteArrayModel>
@@ -78,6 +80,21 @@ inline void KConfigGroup::writeEntry(const char *key,
     writeEntry(key, static_cast<uint>(value.value), flags);
 }
 
+template <>
+inline Kasten::CharsetConversionTool::Coding
+KConfigGroup::readEntry(const char *key,
+                        const Kasten::CharsetConversionTool::Coding &defaultValue) const
+{
+    return static_cast<Kasten::CharsetConversionTool::Coding>(readEntry(key, static_cast<Kasten::ByteArrayCoding>(defaultValue)));
+}
+
+template <>
+inline void KConfigGroup::writeEntry(const char *key,
+                                     const Kasten::CharsetConversionTool::Coding &value,
+                                     KConfigBase::WriteConfigFlags flags)
+{
+    writeEntry(key, static_cast<Kasten::ByteArrayCoding>(value), flags);
+}
 
 namespace Kasten {
 
@@ -87,9 +104,11 @@ constexpr char CharsetConversionTool::OtherCharCodecNameConfigKey[];
 constexpr char CharsetConversionTool::ConversionDirectionConfigKey[];
 constexpr char CharsetConversionTool::SubstituteMissingCharsConfigKey[];
 constexpr char CharsetConversionTool::SubstituteByteConfigKey[];
+constexpr char CharsetConversionTool::SubstituteByteCodingConfigKey[];
 
 constexpr bool CharsetConversionTool::DefaultSubstituteMissingChars;
 constexpr Okteta::Byte CharsetConversionTool::DefaultSubstituteByte;
+constexpr CharsetConversionTool::Coding CharsetConversionTool::DefaultSubstituteByteCoding;
 constexpr CharsetConversionTool::ConversionDirection CharsetConversionTool::DefaultConversionDirection;
 
 
@@ -103,6 +122,7 @@ CharsetConversionTool::CharsetConversionTool()
     mConversionDirection = configGroup.readEntry(ConversionDirectionConfigKey, DefaultConversionDirection);
     mSubstitutingMissingChars = configGroup.readEntry(SubstituteMissingCharsConfigKey, DefaultSubstituteMissingChars);
     mSubstituteByte = configGroup.readEntry(SubstituteByteConfigKey, ByteParameter{DefaultSubstituteByte});
+    mSubstituteByteCoding = configGroup.readEntry(SubstituteByteCodingConfigKey, DefaultSubstituteByteCoding);
 }
 
 CharsetConversionTool::~CharsetConversionTool() = default;
@@ -147,6 +167,12 @@ Okteta::Byte CharsetConversionTool::substituteByte() const
 {
     return mSubstituteByte;
 }
+
+CharsetConversionTool::Coding CharsetConversionTool::substituteByteCoding() const
+{
+    return mSubstituteByteCoding;
+}
+
 
 void CharsetConversionTool::setTargetModel(AbstractModel* model)
 {
@@ -235,6 +261,18 @@ void CharsetConversionTool::setSubstituteByte(Okteta::Byte byte)
 
     KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
     configGroup.writeEntry(SubstituteByteConfigKey, ByteParameter{mSubstituteByte});
+}
+
+void CharsetConversionTool::setSubstituteByteCoding(Coding coding)
+{
+    if (mSubstituteByteCoding == coding) {
+        return;
+    }
+
+    mSubstituteByteCoding = coding;
+
+    KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
+    configGroup.writeEntry(SubstituteByteCodingConfigKey, mSubstituteByteCoding);
 }
 
 void CharsetConversionTool::convertChars()

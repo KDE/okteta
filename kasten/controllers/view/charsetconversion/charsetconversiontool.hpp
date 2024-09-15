@@ -37,16 +37,31 @@ public:
         ConvertTo
     };
 
+    // matching Okteta::ByteArrayComboBox
+    enum Coding
+    {
+        InvalidCoding = -1,
+        HexadecimalCoding = 0,
+        DecimalCoding = 1,
+        OctalCoding = 2,
+        BinaryCoding = 3,
+        CharCoding = 4,
+        Utf8Coding = 5,
+        _CodingCount
+    };
+
 private:
     static constexpr char ConfigGroupId[] = "CharsetConversionTool";
     static constexpr char OtherCharCodecNameConfigKey[] = "OtherCharCodecName";
     static constexpr char ConversionDirectionConfigKey[] = "ConversionDirection";
     static constexpr char SubstituteMissingCharsConfigKey[] = "SubstituteMissingChars";
     static constexpr char SubstituteByteConfigKey[] = "SubstituteByte";
+    static constexpr char SubstituteByteCodingConfigKey[] = "SubstituteByteCoding";
 
     static constexpr bool DefaultSubstituteMissingChars = false;
     static constexpr Okteta::Byte DefaultSubstituteByte = 0;
     static constexpr ConversionDirection DefaultConversionDirection = ConvertFrom;
+    static constexpr CharsetConversionTool::Coding DefaultSubstituteByteCoding = CharsetConversionTool::HexadecimalCoding;
 
 public:
     CharsetConversionTool();
@@ -66,12 +81,14 @@ public: // status
     ConversionDirection conversionDirection() const;
     bool isSubstitutingMissingChars() const;
     Okteta::Byte substituteByte() const;
+    Coding substituteByteCoding() const;
 
 public Q_SLOTS: // settings
     void setConversionDirection(int conversionDirection);
     void setOtherCharCodecName(const QString& codecName);
     void setSubstitutingMissingChars(bool isSubstitutingMissingChars);
     void setSubstituteByte(Okteta::Byte byte);
+    void setSubstituteByteCoding(Coding coding);
 
 public Q_SLOTS: // actions
     void convertChars();
@@ -92,6 +109,7 @@ private: // settings
     ConversionDirection mConversionDirection = ConvertFrom;
     bool mSubstitutingMissingChars = false;
     Okteta::Byte mSubstituteByte = 0;
+    Coding mSubstituteByteCoding = HexadecimalCoding;
 
 private: // sources
     ByteArrayView* mByteArrayView = nullptr;
