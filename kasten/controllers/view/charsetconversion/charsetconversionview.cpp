@@ -198,7 +198,7 @@ void CharsetConversionView::onConvertButtonClicked()
 }
 
 void CharsetConversionView::onConversionDone(bool success, int convertedBytesCount,
-                                             const QMap<Okteta::Byte, int>& failedPerByteCount)
+                                             const std::map<Okteta::Byte, int>* failedPerByteCount)
 {
 
     const QString messageBoxTitle = mTool->title();
@@ -209,8 +209,8 @@ void CharsetConversionView::onConversionDone(bool success, int convertedBytesCou
                                    i18ncp("@info", "1 byte converted.", "%1 bytes converted.", convertedBytesCount);
         if (mTool->isSubstitutingMissingChars()) {
             int totalFailedByteCount = 0;
-            for (int failedByteCount : failedPerByteCount) {
-                totalFailedByteCount += failedByteCount;
+            for (const auto& failedByteCount : *failedPerByteCount) {
+                totalFailedByteCount += failedByteCount.second;
             }
 
             // TODO: show table with failed bytes and their number.

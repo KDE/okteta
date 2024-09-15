@@ -13,6 +13,8 @@
 #include <Okteta/Byte>
 // Qt
 #include <QWidget>
+// Std
+#include <map>
 
 namespace Okteta {
 class ByteArrayComboBox;
@@ -20,7 +22,6 @@ class ByteArrayComboBox;
 class KComboBox;
 class QCheckBox;
 class QAction;
-template <class Key, class T> class QMap;
 
 namespace Kasten {
 
@@ -44,7 +45,7 @@ private Q_SLOTS: // gui
 private Q_SLOTS: // tool
     void onApplyableChanged(bool isApplyable);
     void onConversionDone(bool success, int convertedBytesCount,
-                          const QMap<Okteta::Byte, int>& failedPerByteCount);
+                          const std::map<Okteta::Byte, int>* failedPerByteCount);
 
 private:
     CharsetConversionTool* const mTool;

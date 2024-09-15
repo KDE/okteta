@@ -270,12 +270,12 @@ void CharsetConversionTool::convertChars()
 
     QApplication::restoreOverrideCursor();
 
-    const QMap<Okteta::Byte, int>& failedPerByteCount = charsetConversionJob->failedPerByteCount();
+    const std::map<Okteta::Byte, int>& failedPerByteCount = charsetConversionJob->failedPerByteCount();
     const int convertedBytesCount = charsetConversionJob->convertedBytesCount();
 
     mByteArrayView->setFocus();
 
-    Q_EMIT conversionDone(success, convertedBytesCount, failedPerByteCount);
+    Q_EMIT conversionDone(success, convertedBytesCount, &failedPerByteCount);
 }
 
 void CharsetConversionTool::onViewCharCodecChanged(const QString& charCodecName)

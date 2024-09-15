@@ -13,8 +13,9 @@
 #include <Okteta/AddressRange>
 #include <Okteta/Byte>
 // Qt
-#include <QMap>
 #include <QObject>
+// Std
+#include <map>
 
 namespace Okteta {
 class AbstractByteArrayModel;
@@ -41,7 +42,7 @@ public:
 
 public:
     int convertedBytesCount() const;
-    const QMap<Okteta::Byte, int>& failedPerByteCount() const;
+    const std::map<Okteta::Byte, int>& failedPerByteCount() const;
 
 private:
     Okteta::Byte* const mResult;
@@ -55,7 +56,7 @@ private:
     Okteta::Byte mSubstituteByte;
 
     int mConvertedBytesCount;
-    QMap<Okteta::Byte, int> mFailedPerByteCount;
+    std::map<Okteta::Byte, int> mFailedPerByteCount;
 };
 
 inline CharsetConversionJob::CharsetConversionJob(Okteta::Byte* result,
@@ -76,7 +77,7 @@ inline CharsetConversionJob::CharsetConversionJob(Okteta::Byte* result,
 
 inline int CharsetConversionJob::convertedBytesCount() const { return mConvertedBytesCount; }
 
-inline const QMap<Okteta::Byte, int>& CharsetConversionJob::failedPerByteCount() const { return mFailedPerByteCount; }
+inline const std::map<Okteta::Byte, int>& CharsetConversionJob::failedPerByteCount() const { return mFailedPerByteCount; }
 
 }
 

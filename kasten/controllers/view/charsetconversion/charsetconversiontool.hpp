@@ -13,12 +13,13 @@
 #include <Kasten/AbstractTool>
 // Okteta core
 #include <Okteta/Byte>
+// Std
+#include <map>
 
 namespace Okteta {
 class AbstractByteArrayModel;
 class CharCodec;
 }
-template <class Key, class T> class QMap;
 
 namespace Kasten {
 
@@ -81,7 +82,7 @@ Q_SIGNALS:
     void isSubstitutingMissingCharsChanged(bool isSubstitutingMissingChars);
     void targetCharCodecChanged(const QString& charCodingName);
     void conversionDone(bool success, int convertedBytesCount,
-                        const QMap<Okteta::Byte, int>& failedPerByteCount);
+                        const std::map<Okteta::Byte, int>* failedPerByteCount);
 
 private Q_SLOTS:
     void onViewCharCodecChanged(const QString& charCodecName);
