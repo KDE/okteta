@@ -8,29 +8,33 @@
 
 #include "bytearrayvalidator.hpp"
 
-// Okteta core
-#include <Okteta/ValueCodec>
-#include <Okteta/Character>
-#include <Okteta/CharCodec>
+// lib
+#include "bytearraychar8stringvalidator.hpp"
+#include "bytearrayutf8stringvalidator.hpp"
+#include "bytearrayvaluestringvalidator.hpp"
 
 namespace Okteta {
 
-ByteArrayValidator::ByteArrayValidator(QObject* parent, Coding codecId, const QString& charCodecName)
+ByteArrayValidator::ByteArrayValidator(QObject* parent)
     : QValidator(parent)
-    , mCharCodec(CharCodec::createCodec(charCodecName))
+    , m_stringValidator(std::make_unique<ByteArrayValueStringValidator>(ByteArrayValueStringValidator::HexadecimalCoding))
 {
-    setCodec(codecId);
 }
 
 ByteArrayValidator::~ByteArrayValidator() = default;
 
 void ByteArrayValidator::setCharCodec(const QString& charCodecName)
 {
-    if (charCodecName == mCharCodec->name()) {
+    if (m_charCodecName == charCodecName) {
         return;
     }
 
-    mCharCodec = CharCodec::createCodec(charCodecName);
+    m_charCodecName = charCodecName;
+
+    if (mCodecId == CharCoding) {
+        static_cast<ByteArrayChar8StringValidator*>(m_stringValidator.get())->setCharCodec(m_charCodecName);
+        Q_EMIT changed();
+    }
 }
 
 void ByteArrayValidator::setCodec(Coding codecId)
@@ -39,135 +43,86 @@ void ByteArrayValidator::setCodec(Coding codecId)
         return;
     }
 
+    const int oldMinLength = m_stringValidator->minLength();
+    const int oldMaxLength = m_stringValidator->maxLength();
+
+    const bool isAnotherValueCoding =
+        (mCodecId != CharCoding) && (mCodecId != Utf8Coding) &&
+        (codecId != CharCoding) && (codecId != Utf8Coding);
+
     mCodecId = codecId;
 
-    if (mCodecId != CharCoding
-        && mCodecId != Utf8Coding) {
-        mValueCodec = ValueCodec::createCodec((Okteta::ValueCoding)mCodecId);
+    if (mCodecId == CharCoding) {
+        auto char8StringValidator = std::make_unique<ByteArrayChar8StringValidator>();
+        char8StringValidator->setCharCodec(m_charCodecName);
+        m_stringValidator = std::move(char8StringValidator);
+    } else if (mCodecId == Utf8Coding) {
+        m_stringValidator = std::make_unique<ByteArrayUtf8StringValidator>();
+    } else {
+        if (isAnotherValueCoding) {
+            static_cast<ByteArrayValueStringValidator*>(m_stringValidator.get())->setCoding(static_cast<ByteArrayValueStringValidator::Coding>(codecId));
+        } else {
+            m_stringValidator = std::make_unique<ByteArrayValueStringValidator>(static_cast<ByteArrayValueStringValidator::Coding>(codecId));
+        }
     }
+    if (!isAnotherValueCoding) {
+        m_stringValidator->setMinLength(oldMinLength);
+        m_stringValidator->setMaxLength(oldMaxLength);
+    }
+}
+
+int ByteArrayValidator::maxLength() const
+{
+    return m_stringValidator->maxLength();
+}
+
+int ByteArrayValidator::minLength() const
+{
+    return m_stringValidator->minLength();
 }
 
 void ByteArrayValidator::setMaxLength(int maxLength)
 {
-    mMaxLength = maxLength;
-    if (maxLength < mMinLength) {
-        mMinLength = maxLength;
+    if (m_stringValidator->maxLength() == maxLength) {
+        return;
     }
+
+    m_stringValidator->setMaxLength(maxLength);
+
+    Q_EMIT changed();
 }
 
 void ByteArrayValidator::setMinLength(int minLength)
 {
-    mMinLength = minLength;
-    if (minLength > mMaxLength) {
-        mMaxLength = minLength;
+    if (m_stringValidator->minLength() == minLength) {
+        return;
     }
+
+    m_stringValidator->setMinLength(minLength);
+
+    Q_EMIT changed();
 }
 
 QValidator::State ByteArrayValidator::validate(QString& string, int& pos) const
 {
     Q_UNUSED(pos)
 
-    State result = QValidator::Acceptable;
-
-    int stringLength = string.length();
-
-    if (mCodecId == CharCoding) {
-        if (stringLength > mMaxLength) {
-            string.truncate(mMaxLength);
-            stringLength = mMaxLength;
-        }
-
-        for (int i = 0; i < stringLength; ++i) {
-            const QChar c = string.at(i);
-            if (!mCharCodec->canEncode(c)) {
-                result = QValidator::Invalid;
-                break;
-            }
-        }
-    } else if (mCodecId != Utf8Coding) {
-        const int encodingWidth = mValueCodec->encodingWidth();
-        int byteCount = 0;
-        for (int i = 0; i < stringLength;) {
-            Okteta::Byte dummyByte;
-            const int usedCharCount = mValueCodec->decode(&dummyByte, string, i);
-
-            // could not decode?
-            if (usedCharCount == 0) {
-                result = QValidator::Invalid;
-                break;
-            }
-            i += usedCharCount;
-            ++byteCount;
-
-            if (byteCount >= mMaxLength) {
-                string.truncate(i);
-                break;
-            }
-        }
-
-        if (byteCount < mMinLength) {
-            const int paddingCount = (mMinLength - byteCount) * encodingWidth;
-            string += QString(paddingCount, QLatin1Char('0'));
-        }
-    }
+    const State result = m_stringValidator->validate(string, pos);
 
     return result;
 }
 
 QByteArray ByteArrayValidator::toByteArray(const QString& string) const
 {
-    QByteArray result;
-
-    const int stringLength = string.length();
-    if (mCodecId == CharCoding) {
-        result.resize(stringLength);
-        for (int i = 0; i < stringLength; ++i) {
-            Byte byte;
-            const bool success = mCharCodec->encode(&byte, string[i]);
-            result[i] = success ? byte : '?'; // TODO: define unknown symbol
-        }
-    } else if (mCodecId == Utf8Coding) {
-        result = string.toUtf8();
-    } else {
-        int i = 0;
-        while (i < stringLength) {
-            Byte byte;
-            const int readChars = mValueCodec->decode(&byte, string, i);
-            if (readChars > 0) {
-                i += readChars;
-                result.append(byte);
-            } else {
-                while (i < stringLength && !mValueCodec->isValidDigit(string[i].toLatin1())) {
-                    ++i;
-                }
-            }
-        }
-    }
+    const QByteArray result = m_stringValidator->toByteArray(string);
 
     return result;
 }
 
 QString ByteArrayValidator::toString(const QByteArray& byteArray) const
 {
-    QString result;
+    const QString result = m_stringValidator->toString(byteArray);
 
-    const int byteArraySize = byteArray.size();
-    if (mCodecId == Utf8Coding) {
-        result = QString::fromUtf8(byteArray.constData(), byteArraySize);
-    } else if (mCodecId == CharCoding) {
-        result.resize(byteArraySize);
-        for (int i = 0; i < byteArraySize; ++i) {
-            Character c = mCharCodec->decode(byteArray[i]);
-            result[i] = c.isUndefined() ? QChar::fromLatin1('?') : c; // TODO: define unknown symbol
-        }
-    } else {
-        const int encodingWidth = mValueCodec->encodingWidth();
-        result.resize(byteArraySize * encodingWidth);
-        int r = 0;
-        for (int i = 0; i < byteArraySize; ++i, r += encodingWidth) {
-            mValueCodec->encode(&result, r, byteArray[i]);
-        }
-    }
     return result;
 }
 

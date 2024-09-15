@@ -160,15 +160,12 @@ void ByteArrayComboBoxPrivate::onFormatChanged(int index)
     Q_Q(ByteArrayComboBox);
 
     const QString currentValueText = mValueComboBox->currentText();
-    const bool isCurrentValueTextEmpty = currentValueText.isEmpty();
-    const QByteArray byteArray = isCurrentValueTextEmpty ? QByteArray() : mValidator->toByteArray(currentValueText);
+    const QByteArray byteArray = mValidator->toByteArray(currentValueText);
 
     mValidator->setCodec(static_cast<ByteArrayValidator::Coding>(index));
 
-    if (!isCurrentValueTextEmpty) {
-        const QString convertedValueText = mValidator->toString(byteArray);
-        mValueComboBox->setEditText(convertedValueText);
-    }
+    const QString convertedValueText = mValidator->toString(byteArray);
+    mValueComboBox->setEditText(convertedValueText);
 
     Q_EMIT q->formatChanged(index);
 }

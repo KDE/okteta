@@ -122,6 +122,7 @@ CharsetConversionView::CharsetConversionView(CharsetConversionTool* tool, QWidge
     mSubstituteByteEdit = new Okteta::ByteArrayComboBox(this);
     mSubstituteByteEdit->setMinLength(1);
     mSubstituteByteEdit->setMaxLength(1);
+    mSubstituteByteEdit->setCharCodec(mTool->targetCharCodecName());
     const QString substituteByteToolTip =
         i18nc("@info:tooltip",
               "The byte to use for chars which are not part of the target charset.");
@@ -130,14 +131,19 @@ CharsetConversionView::CharsetConversionView(CharsetConversionTool* tool, QWidge
               "Define the byte to use for chars which are not part of the target charset.");
     mSubstituteByteEdit->setToolTip(substituteByteToolTip);
     mSubstituteByteEdit->setWhatsThis(substituteByteWhatsThis);
-//     mSubstituteByteEdit->setEnabled( mTool->isSubstitutingMissingChars() );
-    mSubstituteByteEdit->setEnabled(false);   // TODO: fix char entering and enable again
+    mSubstituteByteEdit->setEnabled(mTool->isSubstitutingMissingChars());
     connect(mSubstituteByteEdit, &Okteta::ByteArrayComboBox::byteArrayChanged,
             this, &CharsetConversionView::onDefaultByteEditChanged);
-//     connect( mSubstituteMissingCharCheckBox, SIGNAL(toggled(bool)),
-//              mSubstituteByteEdit, SLOT(setEnabled(bool)) );
+    connect(mTool, &CharsetConversionTool::isSubstitutingMissingCharsChanged,
+            mSubstituteByteEdit, &QWidget::setEnabled);
+    connect(mTool, &CharsetConversionTool::targetCharCodecChanged,
+            mSubstituteByteEdit, &Okteta::ByteArrayComboBox::setCharCodec);
     mSubstituteByteEdit->setByteArray(QByteArray(1, mTool->substituteByte()));
     settingsLayout->addRow(substituteByteLabelText, mSubstituteByteEdit);
+    QWidget* const substituteByteEditLabel = settingsLayout->labelForField(mSubstituteByteEdit);
+    substituteByteEditLabel->setEnabled(mTool->isSubstitutingMissingChars());
+    connect(mTool, &CharsetConversionTool::isSubstitutingMissingCharsChanged,
+            substituteByteEditLabel, &QWidget::setEnabled);
 
     settingsBox->setLayout(settingsLayout);
 
@@ -180,11 +186,14 @@ void CharsetConversionView::onApplyableChanged(bool isApplyable)
 
 void CharsetConversionView::onDefaultByteEditChanged(const QByteArray& byteArray)
 {
-    Q_UNUSED(byteArray)
+    const Okteta::Byte byte = byteArray.isEmpty() ? 0 : byteArray[0];
+    mTool->setSubstituteByte(byte);
 }
 
 void CharsetConversionView::onConvertButtonClicked()
 {
+    mSubstituteByteEdit->rememberCurrentByteArray();
+
     mTool->convertChars();
 }
 
