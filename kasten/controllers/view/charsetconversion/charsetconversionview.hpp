@@ -40,6 +40,7 @@ public:
 
 private Q_SLOTS: // gui
     void onDefaultByteEditChanged(const QByteArray& byteArray);
+    void onDefaultByteEditCodingChanged(int coding);
     void onConvertButtonClicked();
 
 private Q_SLOTS: // tool

@@ -134,10 +134,13 @@ CharsetConversionView::CharsetConversionView(CharsetConversionTool* tool, QWidge
     mSubstituteByteEdit->setEnabled(mTool->isSubstitutingMissingChars());
     connect(mSubstituteByteEdit, &Okteta::ByteArrayComboBox::byteArrayChanged,
             this, &CharsetConversionView::onDefaultByteEditChanged);
+    connect(mSubstituteByteEdit, &Okteta::ByteArrayComboBox::formatChanged,
+            this, &CharsetConversionView::onDefaultByteEditCodingChanged);
     connect(mTool, &CharsetConversionTool::isSubstitutingMissingCharsChanged,
             mSubstituteByteEdit, &QWidget::setEnabled);
     connect(mTool, &CharsetConversionTool::targetCharCodecChanged,
             mSubstituteByteEdit, &Okteta::ByteArrayComboBox::setCharCodec);
+    mSubstituteByteEdit->setFormat(static_cast<Okteta::ByteArrayComboBox::Coding>(mTool->substituteByteCoding()));
     mSubstituteByteEdit->setByteArray(QByteArray(1, mTool->substituteByte()));
     settingsLayout->addRow(substituteByteLabelText, mSubstituteByteEdit);
     QWidget* const substituteByteEditLabel = settingsLayout->labelForField(mSubstituteByteEdit);
@@ -188,6 +191,11 @@ void CharsetConversionView::onDefaultByteEditChanged(const QByteArray& byteArray
 {
     const Okteta::Byte byte = byteArray.isEmpty() ? 0 : byteArray[0];
     mTool->setSubstituteByte(byte);
+}
+
+void CharsetConversionView::onDefaultByteEditCodingChanged(int coding)
+{
+    mTool->setSubstituteByteCoding(static_cast<CharsetConversionTool::Coding>(coding));
 }
 
 void CharsetConversionView::onConvertButtonClicked()
