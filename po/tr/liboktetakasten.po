@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesdk-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-07 01:47+0000\n"
+"POT-Creation-Date: 2024-09-16 02:10+0000\n"
 "PO-Revision-Date: 2024-09-07 14:17+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -313,13 +313,13 @@ msgid ""
 "times."
 msgstr "Tablodaki seçili baytı verelin tekrar sayısı kadar ekle."
 
-#: controllers/view/charsetconversion/charsetconversiontool.cpp:109
+#: controllers/view/charsetconversion/charsetconversiontool.cpp:127
 #, kde-format
 msgctxt "@title:window of the tool to convert between charsets"
 msgid "Charset Conversion"
 msgstr "Karakter Kümesi Dönüşümü"
 
-#: controllers/view/charsetconversion/charsetconversiontool.cpp:235
+#: controllers/view/charsetconversion/charsetconversiontool.cpp:295
 #, kde-format
 msgctxt "Converted from charset 1 to charset 2"
 msgid "%1 to %2"
@@ -418,14 +418,14 @@ msgctxt ""
 msgid "Substitute byte:"
 msgstr "Yedek bayt:"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:127
+#: controllers/view/charsetconversion/charsetconversionview.cpp:128
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte to use for chars which are not part of the target charset."
 msgstr ""
 "Hedef karakter kümesinin parçası olmayan karakterleri çin kullanılacak bayt."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:130
+#: controllers/view/charsetconversion/charsetconversionview.cpp:131
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -434,18 +434,18 @@ msgstr ""
 "Hedef karakter kümesinin parçası olmayan karakterleri çin kullanılacak baytı "
 "tanımlayın."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:156
+#: controllers/view/charsetconversion/charsetconversionview.cpp:165
 #, kde-format
 msgid "Con&vert"
 msgstr "D&önüştür"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:159
+#: controllers/view/charsetconversion/charsetconversionview.cpp:168
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Converts the bytes in the selected range."
 msgstr "Seçili erimdeki baytları dönüştürür."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:161
+#: controllers/view/charsetconversion/charsetconversionview.cpp:170
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -457,13 +457,13 @@ msgstr ""
 "tüm baytlar seçili hedef karakter kümesinde aynı karakteri temsil eden "
 "baytlar ile değiştirilecektir."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:199
+#: controllers/view/charsetconversion/charsetconversionview.cpp:216
 #, kde-format
 msgctxt "@info"
 msgid "No bytes converted."
 msgstr "Dönüştürülen bayt yok."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:200
+#: controllers/view/charsetconversion/charsetconversionview.cpp:217
 #, kde-format
 msgctxt "@info"
 msgid "1 byte converted."
@@ -471,13 +471,13 @@ msgid_plural "%1 bytes converted."
 msgstr[0] "1 bayt dönüştürüldü."
 msgstr[1] "%1 bayt dönüştürüldü."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:210
+#: controllers/view/charsetconversion/charsetconversionview.cpp:227
 #, kde-format
 msgctxt "@info"
 msgid "No bytes substituted."
 msgstr "Değiştirilen bayt yok."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:211
+#: controllers/view/charsetconversion/charsetconversionview.cpp:228
 #, kde-format
 msgctxt "@info"
 msgid "1 byte substituted."
@@ -485,7 +485,7 @@ msgid_plural "%1 bytes substituted."
 msgstr[0] "1 bayt değiştirildi."
 msgstr[1] "%1 bayt değiştirildi."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:220
+#: controllers/view/charsetconversion/charsetconversionview.cpp:237
 #, kde-format
 msgctxt "@info"
 msgid ""

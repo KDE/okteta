@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-07 01:47+0000\n"
+"POT-Creation-Date: 2024-09-16 02:10+0000\n"
 "PO-Revision-Date: 2024-09-07 13:10+0100\n"
 "Last-Translator: Sofía Priego <spriego@darksylvania.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -323,13 +323,13 @@ msgstr ""
 "Inserta el byte seleccionado actualmente en la tabla repetido el número de "
 "veces indicado."
 
-#: controllers/view/charsetconversion/charsetconversiontool.cpp:109
+#: controllers/view/charsetconversion/charsetconversiontool.cpp:127
 #, kde-format
 msgctxt "@title:window of the tool to convert between charsets"
 msgid "Charset Conversion"
 msgstr "Conversión de juegos de caracteres"
 
-#: controllers/view/charsetconversion/charsetconversiontool.cpp:235
+#: controllers/view/charsetconversion/charsetconversiontool.cpp:295
 #, kde-format
 msgctxt "Converted from charset 1 to charset 2"
 msgid "%1 to %2"
@@ -429,7 +429,7 @@ msgctxt ""
 msgid "Substitute byte:"
 msgstr "Byte sustituto:"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:127
+#: controllers/view/charsetconversion/charsetconversionview.cpp:128
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte to use for chars which are not part of the target charset."
@@ -437,7 +437,7 @@ msgstr ""
 "El byte a usar para caracteres que no son parte del juego de caracteres de "
 "destino."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:130
+#: controllers/view/charsetconversion/charsetconversionview.cpp:131
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -446,18 +446,18 @@ msgstr ""
 "Defina el byte a usar para caracteres que no son parte del juego de "
 "caracteres de destino."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:156
+#: controllers/view/charsetconversion/charsetconversionview.cpp:165
 #, kde-format
 msgid "Con&vert"
 msgstr "Con&vertir"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:159
+#: controllers/view/charsetconversion/charsetconversionview.cpp:168
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Converts the bytes in the selected range."
 msgstr "Convierte los bytes del intervalo seleccionado."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:161
+#: controllers/view/charsetconversion/charsetconversionview.cpp:170
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -469,13 +469,13 @@ msgstr ""
 "rango seleccionado son remplazados por bytes que representan el mismo "
 "carácter en el juego de caracteres de destino seleccionado."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:199
+#: controllers/view/charsetconversion/charsetconversionview.cpp:216
 #, kde-format
 msgctxt "@info"
 msgid "No bytes converted."
 msgstr "No se ha convertido ningún byte."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:200
+#: controllers/view/charsetconversion/charsetconversionview.cpp:217
 #, kde-format
 msgctxt "@info"
 msgid "1 byte converted."
@@ -483,13 +483,13 @@ msgid_plural "%1 bytes converted."
 msgstr[0] "1 byte convertido."
 msgstr[1] "%1 bytes convertidos."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:210
+#: controllers/view/charsetconversion/charsetconversionview.cpp:227
 #, kde-format
 msgctxt "@info"
 msgid "No bytes substituted."
 msgstr "No se ha sustituido ningún byte."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:211
+#: controllers/view/charsetconversion/charsetconversionview.cpp:228
 #, kde-format
 msgctxt "@info"
 msgid "1 byte substituted."
@@ -497,7 +497,7 @@ msgid_plural "%1 bytes substituted."
 msgstr[0] "1 byte sustituido."
 msgstr[1] "%1 bytes sustituidos."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:220
+#: controllers/view/charsetconversion/charsetconversionview.cpp:237
 #, kde-format
 msgctxt "@info"
 msgid ""
