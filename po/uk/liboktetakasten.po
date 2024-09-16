@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-07 03:17+0000\n"
+"POT-Creation-Date: 2024-09-16 03:41+0000\n"
 "PO-Revision-Date: 2020-01-04 18:09+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -308,13 +308,13 @@ msgid ""
 "times."
 msgstr "Вставити поточний позначений байт у таблиці вказану кількість разів."
 
-#: controllers/view/charsetconversion/charsetconversiontool.cpp:121
+#: controllers/view/charsetconversion/charsetconversiontool.cpp:141
 #, kde-format
 msgctxt "@title:window of the tool to convert between charsets"
 msgid "Charset Conversion"
 msgstr "Перетворення наборів символів"
 
-#: controllers/view/charsetconversion/charsetconversiontool.cpp:247
+#: controllers/view/charsetconversion/charsetconversiontool.cpp:309
 #, kde-format
 msgctxt "Converted from charset 1 to charset 2"
 msgid "%1 to %2"
@@ -412,7 +412,7 @@ msgctxt ""
 msgid "Substitute byte:"
 msgstr "Байт-замінник:"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:132
+#: controllers/view/charsetconversion/charsetconversionview.cpp:133
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte to use for chars which are not part of the target charset."
@@ -420,7 +420,7 @@ msgstr ""
 "Байт, який буде використано для символів, які не є частиною набору символів "
 "призначення."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:135
+#: controllers/view/charsetconversion/charsetconversionview.cpp:136
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -429,18 +429,18 @@ msgstr ""
 "Визначте байт, який буде використано для символів, які не є частиною набору "
 "символів призначення."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:161
+#: controllers/view/charsetconversion/charsetconversionview.cpp:170
 #, kde-format
 msgid "Con&vert"
 msgstr "Пе&ретворити"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:164
+#: controllers/view/charsetconversion/charsetconversionview.cpp:173
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Converts the bytes in the selected range."
 msgstr "Перетворює байти позначеного діапазону."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:166
+#: controllers/view/charsetconversion/charsetconversionview.cpp:175
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -452,13 +452,13 @@ msgstr ""
 "позначеному діапазоні буде замінено байтами відповідних символів вказаного "
 "вами набору символів призначення."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:204
+#: controllers/view/charsetconversion/charsetconversionview.cpp:221
 #, kde-format
 msgctxt "@info"
 msgid "No bytes converted."
 msgstr "Не перетворено жодного байта."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:205
+#: controllers/view/charsetconversion/charsetconversionview.cpp:222
 #, kde-format
 msgctxt "@info"
 msgid "1 byte converted."
@@ -468,13 +468,13 @@ msgstr[1] "Перетворено %1 байти."
 msgstr[2] "Перетворено %1 байтів."
 msgstr[3] "Перетворено один байт."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:215
+#: controllers/view/charsetconversion/charsetconversionview.cpp:232
 #, kde-format
 msgctxt "@info"
 msgid "No bytes substituted."
 msgstr "Жодного байта не замінено."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:216
+#: controllers/view/charsetconversion/charsetconversionview.cpp:233
 #, kde-format
 msgctxt "@info"
 msgid "1 byte substituted."
@@ -484,7 +484,7 @@ msgstr[1] "Замінено %1 байти."
 msgstr[2] "Замінено %1 байтів."
 msgstr[3] "Замінено один байт."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:225
+#: controllers/view/charsetconversion/charsetconversionview.cpp:242
 #, kde-format
 msgctxt "@info"
 msgid ""

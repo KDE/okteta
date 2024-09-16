@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-07 03:17+0000\n"
+"POT-Creation-Date: 2024-09-16 03:41+0000\n"
 "PO-Revision-Date: 2013-06-21 06:20+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -307,13 +307,13 @@ msgid ""
 "times."
 msgstr "Кестеде таңдалған байтты келтірілген нөмірімен енгізу."
 
-#: controllers/view/charsetconversion/charsetconversiontool.cpp:121
+#: controllers/view/charsetconversion/charsetconversiontool.cpp:141
 #, kde-format
 msgctxt "@title:window of the tool to convert between charsets"
 msgid "Charset Conversion"
 msgstr "Кодтаманы аудару"
 
-#: controllers/view/charsetconversion/charsetconversiontool.cpp:247
+#: controllers/view/charsetconversion/charsetconversiontool.cpp:309
 #, kde-format
 msgctxt "Converted from charset 1 to charset 2"
 msgid "%1 to %2"
@@ -407,31 +407,31 @@ msgctxt ""
 msgid "Substitute byte:"
 msgstr "Ауыстыратын байт:"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:132
+#: controllers/view/charsetconversion/charsetconversionview.cpp:133
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte to use for chars which are not part of the target charset."
 msgstr "Мақсатты кодтамада жоқ символды ауыстыратын байт."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:135
+#: controllers/view/charsetconversion/charsetconversionview.cpp:136
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
 "Define the byte to use for chars which are not part of the target charset."
 msgstr "Мақсатты кодтамада жоқ символды ауыстыратын байтты анықтаңыз."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:161
+#: controllers/view/charsetconversion/charsetconversionview.cpp:170
 #, kde-format
 msgid "Con&vert"
 msgstr "Ау&дару"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:164
+#: controllers/view/charsetconversion/charsetconversionview.cpp:173
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Converts the bytes in the selected range."
 msgstr "Таңдалған ауқымдағы байттарды аудару."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:166
+#: controllers/view/charsetconversion/charsetconversionview.cpp:175
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -442,33 +442,33 @@ msgstr ""
 "<interface>Аудару</interface> батырмасын басқанда бүкіл таңдалған байттар, "
 "сол симводарының мақсатты кодтамасының кодтарымен ауыстырылады."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:204
+#: controllers/view/charsetconversion/charsetconversionview.cpp:221
 #, kde-format
 msgctxt "@info"
 msgid "No bytes converted."
 msgstr "Ешбір байт аударылған жоқ."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:205
+#: controllers/view/charsetconversion/charsetconversionview.cpp:222
 #, kde-format
 msgctxt "@info"
 msgid "1 byte converted."
 msgid_plural "%1 bytes converted."
 msgstr[0] "%1 байт аударылды."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:215
+#: controllers/view/charsetconversion/charsetconversionview.cpp:232
 #, kde-format
 msgctxt "@info"
 msgid "No bytes substituted."
 msgstr "Ешбір байт ауыстырылған жоқ."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:216
+#: controllers/view/charsetconversion/charsetconversionview.cpp:233
 #, kde-format
 msgctxt "@info"
 msgid "1 byte substituted."
 msgid_plural "%1 bytes substituted."
 msgstr[0] "%1 байт ауыстырылды."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:225
+#: controllers/view/charsetconversion/charsetconversionview.cpp:242
 #, kde-format
 msgctxt "@info"
 msgid ""

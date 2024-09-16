@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: playground-utils/okteta.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-07 03:17+0000\n"
+"POT-Creation-Date: 2024-09-16 03:41+0000\n"
 "PO-Revision-Date: 2007-11-05 08:28-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -308,13 +308,13 @@ msgid ""
 "times."
 msgstr ""
 
-#: controllers/view/charsetconversion/charsetconversiontool.cpp:121
+#: controllers/view/charsetconversion/charsetconversiontool.cpp:141
 #, kde-format
 msgctxt "@title:window of the tool to convert between charsets"
 msgid "Charset Conversion"
 msgstr ""
 
-#: controllers/view/charsetconversion/charsetconversiontool.cpp:247
+#: controllers/view/charsetconversion/charsetconversiontool.cpp:309
 #, kde-format
 msgctxt "Converted from charset 1 to charset 2"
 msgid "%1 to %2"
@@ -404,31 +404,31 @@ msgctxt ""
 msgid "Substitute byte:"
 msgstr ""
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:132
+#: controllers/view/charsetconversion/charsetconversionview.cpp:133
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte to use for chars which are not part of the target charset."
 msgstr ""
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:135
+#: controllers/view/charsetconversion/charsetconversionview.cpp:136
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
 "Define the byte to use for chars which are not part of the target charset."
 msgstr ""
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:161
+#: controllers/view/charsetconversion/charsetconversionview.cpp:170
 #, kde-format
 msgid "Con&vert"
 msgstr "&Tiontaigh"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:164
+#: controllers/view/charsetconversion/charsetconversionview.cpp:173
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Converts the bytes in the selected range."
 msgstr "Tiontaíonn sé seo na bearta sa raon roghnaithe."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:166
+#: controllers/view/charsetconversion/charsetconversionview.cpp:175
 #, fuzzy, kde-kuit-format
 #| msgctxt "@info:whatsthis"
 #| msgid ""
@@ -445,13 +445,13 @@ msgstr ""
 "roghnaigh tú thuas i bhfeidhm ar na bearta sa raon roghnaithe leis na "
 "roghanna a thug tú."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:204
+#: controllers/view/charsetconversion/charsetconversionview.cpp:221
 #, kde-format
 msgctxt "@info"
 msgid "No bytes converted."
 msgstr ""
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:205
+#: controllers/view/charsetconversion/charsetconversionview.cpp:222
 #, kde-format
 msgctxt "@info"
 msgid "1 byte converted."
@@ -462,13 +462,13 @@ msgstr[2] "Tiontaíodh %1 bheart."
 msgstr[3] "Tiontaíodh %1 mbeart."
 msgstr[4] "Tiontaíodh %1 beart."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:215
+#: controllers/view/charsetconversion/charsetconversionview.cpp:232
 #, kde-format
 msgctxt "@info"
 msgid "No bytes substituted."
 msgstr ""
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:216
+#: controllers/view/charsetconversion/charsetconversionview.cpp:233
 #, kde-format
 msgctxt "@info"
 msgid "1 byte substituted."
@@ -479,7 +479,7 @@ msgstr[2] ""
 msgstr[3] ""
 msgstr[4] ""
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:225
+#: controllers/view/charsetconversion/charsetconversionview.cpp:242
 #, kde-format
 msgctxt "@info"
 msgid ""
