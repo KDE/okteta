@@ -13,7 +13,7 @@
 #include <QWidget>
 
 class QSlider;
-class QToolButton;
+class QAction;
 
 namespace Kasten {
 
@@ -51,9 +51,9 @@ private:
     If::Zoomable* mZoomControl = nullptr;
 
     QSlider* mSlider;
-    QToolButton* mZoomInButton;
-    QToolButton* mZoomOutButton;
-    QToolButton* mZoomNormalButton;
+    QAction* m_zoomNormalAction;
+    QAction* m_zoomOutAction;
+    QAction* m_zoomInAction;
 
     /// Cached value to reduce resetting tooltip text, as
     /// QSlider signals alueChanged and sliderMoved are both processed.
