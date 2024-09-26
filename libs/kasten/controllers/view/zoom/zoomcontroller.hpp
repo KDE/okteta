@@ -43,8 +43,6 @@ private:
     AbstractModel* mModel = nullptr;
     If::Zoomable* mZoomControl = nullptr;
 
-    double mZoomLevel;
-
     QAction* mZoomInAction;
     QAction* mZoomOutAction;
     QAction* mZoomNormalAction;
