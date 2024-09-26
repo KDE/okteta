@@ -34,6 +34,7 @@ public: // AbstractXmlGuiController API
 private Q_SLOTS: // action slots
     void zoomIn();
     void zoomOut();
+    void zoomNormal();
 
 private Q_SLOTS:
     void onZoomLevelChange(double level);
@@ -46,6 +47,7 @@ private:
 
     QAction* mZoomInAction;
     QAction* mZoomOutAction;
+    QAction* mZoomNormalAction;
 };
 
 }

@@ -26,10 +26,12 @@ ZoomController::ZoomController(KXMLGUIClient* guiClient)
 {
     mZoomInAction = KStandardAction::zoomIn(  this, &ZoomController::zoomIn,  this);
     mZoomOutAction = KStandardAction::zoomOut(this, &ZoomController::zoomOut, this);
+    mZoomNormalAction = KStandardAction::actualSize(this, &ZoomController::zoomNormal, this);
 
     guiClient->actionCollection()->addActions({
         mZoomInAction,
-        mZoomOutAction
+        mZoomOutAction,
+        mZoomNormalAction,
     });
 
 #if 0
@@ -82,6 +84,8 @@ void ZoomController::setTargetModel(AbstractModel* model)
     const bool hasView = (mZoomControl != nullptr);
     mZoomInAction->setEnabled(hasView);
     mZoomOutAction->setEnabled(hasView);
+    const bool isZoomed = hasView && (mZoomLevel != 1.0);
+    mZoomNormalAction->setEnabled(isZoomed);
 }
 
 void ZoomController::zoomIn()
@@ -92,6 +96,11 @@ void ZoomController::zoomIn()
 void ZoomController::zoomOut()
 {
     mZoomControl->setZoomLevel(mZoomLevel / 1.10);
+}
+
+void ZoomController::zoomNormal()
+{
+    mZoomControl->setZoomLevel(1.0);
 }
 #if 0
 void ZoomController::zoomTo(const QString& nz)
@@ -130,7 +139,14 @@ void ZoomController::fitToSize()
 #endif
 void ZoomController::onZoomLevelChange(double level)
 {
+    if (mZoomLevel == level) {
+        return;
+    }
+
     mZoomLevel = level;
+
+    const bool isZoomed = (mZoomLevel != 1.0);
+    mZoomNormalAction->setEnabled(isZoomed);
 }
 
 }
