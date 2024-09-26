@@ -52,6 +52,12 @@ private:
     QSlider* mSlider;
     QToolButton* mZoomInButton;
     QToolButton* mZoomOutButton;
+
+    /// Cached value to reduce resetting tooltip text, as
+    /// QSlider signals alueChanged and sliderMoved are both processed.
+    int m_toolTipSliderValue = -1;
+    /// flag to avoid potential(?) endless loops due to rounding errors
+    bool m_isUpdatingSlider = false;
 };
 
 }

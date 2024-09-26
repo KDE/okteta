@@ -102,7 +102,13 @@ void ZoomSlider::setTargetModel(AbstractModel* model)
 
 void ZoomSlider::updateToolTip(int sliderValue)
 {
-    const float zoomLevel = 50.0 / (100 - sliderValue);
+    if (m_toolTipSliderValue == sliderValue) {
+        return;
+    }
+
+    m_toolTipSliderValue = sliderValue;
+
+    const float zoomLevel = 50.0 / (100 - m_toolTipSliderValue);
     const int zoomPercent = static_cast<int>(zoomLevel * 100 + 0.5);
     mSlider->setToolTip(i18nc("@info:tooltip", "Zoom: %1%", zoomPercent));
 // TODO: get the text by a signal toolTipNeeded( int zoomLevel, QString* toolTipText ); ?
@@ -126,18 +132,24 @@ void ZoomSlider::onSliderValueChanged(int sliderValue)
     mZoomOutButton->setEnabled(sliderValue > mSlider->minimum());
     mZoomInButton->setEnabled(sliderValue < mSlider->maximum());
 
+    if (m_isUpdatingSlider) {
+        return;
+    }
+
     if (mZoomControl) {
         mZoomControl->setZoomLevel(50.0 / (100 - sliderValue));
     }
 }
 
-// TODO: which signal comes first, valueChanged or sliderMoved?
 // ensure correct calculation of zoomLevel, best by model
 // but can be timeconsuming?
 // use timer to delay resize, so that sliding is not delayed by resizing
 void ZoomSlider::onSliderMoved(int sliderValue)
 {
-    Q_UNUSED(sliderValue)
+    // QSlider::sliderMoved gets emitted before valueChanged
+    // so we have to make sure the tooltip text is updated
+    // before sending synchronously the tooltip event next
+    updateToolTip(sliderValue);
 
     QPoint toolTipPoint = mSlider->rect().topLeft();
     toolTipPoint.ry() += mSlider->height() / 2;
@@ -149,15 +161,12 @@ void ZoomSlider::onSliderMoved(int sliderValue)
 
 void ZoomSlider::onZoomLevelChange(double level)
 {
+    m_isUpdatingSlider = true;
+
     const int newSliderValue = 100 - static_cast<int>(50.0 / level + 0.5);
-    if (newSliderValue != mSlider->value()) {
-        disconnect(mSlider, &QSlider::valueChanged,
-                   this, &ZoomSlider::onSliderValueChanged);
-        mSlider->setSliderPosition(newSliderValue);
-        updateToolTip(mSlider->value());
-        connect(mSlider, &QSlider::valueChanged,
-                this, &ZoomSlider::onSliderValueChanged);
-    }
+    mSlider->setValue(newSliderValue);
+
+    m_isUpdatingSlider = false;
 }
 
 }
