@@ -33,6 +33,10 @@ static constexpr int ZoomSliderWidth = 150;
 ZoomSlider::ZoomSlider(QWidget* parent)
     : QWidget(parent)
 {
+    mZoomNormalButton = new QToolButton(this);
+    mZoomNormalButton->setIcon(QIcon::fromTheme(QStringLiteral("zoom-original")));
+    mZoomNormalButton->setAutoRaise(true);
+
     mZoomOutButton = new QToolButton(this);
     mZoomOutButton->setIcon(QIcon::fromTheme(QStringLiteral("zoom-out")));
     mZoomOutButton->setAutoRaise(true);
@@ -46,10 +50,13 @@ ZoomSlider::ZoomSlider(QWidget* parent)
     auto* layout = new QHBoxLayout(this);
     layout->setSpacing(0);
     layout->setContentsMargins(0, 0, 0, 0);
+    layout->addWidget(mZoomNormalButton);
     layout->addWidget(mZoomOutButton);
     layout->addWidget(mSlider);
     layout->addWidget(mZoomInButton);
 
+    connect(mZoomNormalButton, &QAbstractButton::clicked,
+            this, &ZoomSlider::zoomNormal);
     connect(mZoomOutButton, &QAbstractButton::clicked,
             this, &ZoomSlider::zoomOut);
     connect(mZoomInButton, &QAbstractButton::clicked,
@@ -86,10 +93,13 @@ void ZoomSlider::setTargetModel(AbstractModel* model)
 
         onZoomLevelChange(mZoomControl->zoomLevel());
         const int sliderValue = mSlider->value();
+        const bool isZoomed = (sliderValue != 50);
+        mZoomNormalButton->setEnabled(isZoomed);
         mZoomOutButton->setEnabled(sliderValue > mSlider->minimum());
         mZoomInButton->setEnabled(sliderValue < mSlider->maximum());
         connect(mModel, SIGNAL(zoomLevelChanged(double)), SLOT(onZoomLevelChange(double)));
     } else {
+        mZoomNormalButton->setEnabled(false);
         mZoomOutButton->setEnabled(false);
         mZoomInButton->setEnabled(false);
         // put slider in the middle
@@ -126,9 +136,16 @@ void ZoomSlider::zoomIn()
     mSlider->setValue(newValue);
 }
 
+void ZoomSlider::zoomNormal()
+{
+    mSlider->setValue(50);
+}
+
 void ZoomSlider::onSliderValueChanged(int sliderValue)
 {
     updateToolTip(sliderValue);
+    const bool isZoomed = (sliderValue != 50);
+    mZoomNormalButton->setEnabled(isZoomed);
     mZoomOutButton->setEnabled(sliderValue > mSlider->minimum());
     mZoomInButton->setEnabled(sliderValue < mSlider->maximum());
 

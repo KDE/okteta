@@ -39,6 +39,7 @@ private:
 private Q_SLOTS: // action slots
     void zoomIn();
     void zoomOut();
+    void zoomNormal();
     void onSliderValueChanged(int sliderValue);
     void onSliderMoved(int sliderValue);
 
@@ -52,6 +53,7 @@ private:
     QSlider* mSlider;
     QToolButton* mZoomInButton;
     QToolButton* mZoomOutButton;
+    QToolButton* mZoomNormalButton;
 
     /// Cached value to reduce resetting tooltip text, as
     /// QSlider signals alueChanged and sliderMoved are both processed.
