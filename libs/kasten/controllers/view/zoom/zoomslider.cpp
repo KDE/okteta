@@ -149,8 +149,7 @@ void ZoomSlider::onSliderMoved(int sliderValue)
 
 void ZoomSlider::onZoomLevelChange(double level)
 {
-    mZoomLevel = level;
-    const int newSliderValue = 100 - static_cast<int>(50.0 / mZoomLevel + 0.5);
+    const int newSliderValue = 100 - static_cast<int>(50.0 / level + 0.5);
     if (newSliderValue != mSlider->value()) {
         disconnect(mSlider, &QSlider::valueChanged,
                    this, &ZoomSlider::onSliderValueChanged);

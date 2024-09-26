@@ -49,8 +49,6 @@ private:
     AbstractModel* mModel = nullptr;
     If::Zoomable* mZoomControl = nullptr;
 
-    double mZoomLevel;
-
     QSlider* mSlider;
     QToolButton* mZoomInButton;
     QToolButton* mZoomOutButton;
