@@ -176,9 +176,14 @@ public: // value access
      */
     const QString& charCodingName() const;
 
+public: // zooming values
     // TODO: on next ABI change, rename to zoomScale
     double zoomLevel() const;
     inline double zoomScale() const { return zoomLevel(); }
+    int zoomInLevelsSize() const;
+    int zoomOutLevelsSize() const;
+    double zoomScaleForLevel(int zoomLevel) const;
+    int zoomLevelForScale(double zoomScale) const;
 
 public: // value access API
     // value column
@@ -422,6 +427,7 @@ Q_SIGNALS:
 
     // TODO: on next ABI change, rename to zoomScaleChanged
     void zoomLevelChanged(double zoomScale);
+    void zoomLevelsChanged();
 
 protected:
     void finishByteEdit();

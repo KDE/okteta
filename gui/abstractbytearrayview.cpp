@@ -56,6 +56,27 @@ double AbstractByteArrayView::zoomLevel() const
     Q_D(const AbstractByteArrayView);
     return d->zoomScale();
 }
+int AbstractByteArrayView::zoomInLevelsSize() const
+{
+    Q_D(const AbstractByteArrayView);
+    return d->zoomInLevelsSize();
+}
+int AbstractByteArrayView::zoomOutLevelsSize() const
+{
+    Q_D(const AbstractByteArrayView);
+    return d->zoomOutLevelsSize();
+}
+double AbstractByteArrayView::zoomScaleForLevel(int zoomLevel) const
+{
+    Q_D(const AbstractByteArrayView);
+    return d->zoomScaleForLevel(zoomLevel);
+}
+int AbstractByteArrayView::zoomLevelForScale(double zoomScale) const
+{
+    Q_D(const AbstractByteArrayView);
+    return d->zoomLevelForScale(zoomScale);
+}
+
 ByteArrayTableLayout* AbstractByteArrayView::layout() const
 {
     Q_D(const AbstractByteArrayView);

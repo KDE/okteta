@@ -13,6 +13,8 @@
 #include <bytearrayviewprofilesynchronizer.hpp>
 // Okteta Kasten core
 #include <Kasten/Okteta/ByteArrayDocument>
+// Kasten gui
+#include <Kasten/ZoomLevelsQueryable>
 // Okteta gui
 #include <Okteta/AbstractByteArrayView>
 // Okteta core
@@ -25,10 +27,12 @@ namespace Kasten {
 // TODO: merge into ByteArrayView on next ABI break
 class ByteArrayViewExtensions : public QObject
                               , public If::SelectedDataCutable
+                              , public If::ZoomLevelsQueryable
 {
     Q_OBJECT
     Q_INTERFACES(
         Kasten::If::SelectedDataCutable
+        Kasten::If::ZoomLevelsQueryable
     )
 
 public:
@@ -39,14 +43,26 @@ public: // If::SelectedDataCutable API
 Q_SIGNALS:
     void canCutSelectedDataChanged(bool canCutSelectedData) override;
 
+public: // If::ZoomLevelsQueryable API
+    int zoomInLevelsSize() const override;
+    int zoomOutLevelsSize() const override;
+    double zoomScaleForLevel(int zoomLevel) const override;
+    int zoomLevelForScale(double zoomScale) const override;
+Q_SIGNALS:
+    void zoomLevelsChanged() override;
+
 private Q_SLOTS:
     void onOverwriteModeChanged(bool overwriteMode);
+
+private:
+    Okteta::ByteArrayJanusView* view() const;
 };
 
 ByteArrayViewExtensions::ByteArrayViewExtensions(ByteArrayView* view)
     : QObject(view)
 {
     connect(view, &ByteArrayView::overwriteModeChanged, this, &ByteArrayViewExtensions::onOverwriteModeChanged);
+    connect(view, &ByteArrayView::zoomLevelsChanged, this, &ByteArrayViewExtensions::zoomLevelsChanged);
 }
 
 bool ByteArrayViewExtensions::canCutSelectedData() const
@@ -59,6 +75,30 @@ void ByteArrayViewExtensions::onOverwriteModeChanged(bool overwriteMode)
     emit canCutSelectedDataChanged(!overwriteMode);
 }
 
+int ByteArrayViewExtensions::zoomInLevelsSize() const
+{
+    return view()->zoomInLevelsSize();
+}
+
+int ByteArrayViewExtensions::zoomOutLevelsSize() const
+{
+    return view()->zoomOutLevelsSize();
+}
+
+double ByteArrayViewExtensions::zoomScaleForLevel(int zoomLevel) const
+{
+    return view()->zoomScaleForLevel(zoomLevel);
+}
+
+int ByteArrayViewExtensions::zoomLevelForScale(double zoomScale) const
+{
+    return view()->zoomLevelForScale(zoomScale);
+}
+
+Okteta::ByteArrayJanusView* ByteArrayViewExtensions::view() const
+{
+    return static_cast<Okteta::ByteArrayJanusView*>(static_cast<ByteArrayView*>(parent())->widget());
+}
 
 ByteArrayView::ByteArrayView(ByteArrayDocument* document, ByteArrayViewProfileSynchronizer* synchronizer)
     : AbstractView(document)
@@ -171,6 +211,7 @@ void ByteArrayView::init()
     connect(mWidget, &ByteArrayJanusView::undefinedCharChanged, this, &ByteArrayView::undefinedCharChanged);
     connect(mWidget, &ByteArrayJanusView::noOfGroupedBytesChanged, this, &ByteArrayView::noOfGroupedBytesChanged);
     connect(mWidget, &ByteArrayJanusView::zoomScaleChanged, this, &ByteArrayView::zoomLevelChanged);
+    connect(mWidget, &ByteArrayJanusView::zoomLevelsChanged, this, &ByteArrayView::zoomLevelsChanged);
     connect(mWidget, &ByteArrayJanusView::viewModusChanged, this, &ByteArrayView::viewModusChanged);
 
     connect(mWidget, &ByteArrayJanusView::viewContextMenuRequested, this, &ByteArrayView::viewContextMenuRequested);

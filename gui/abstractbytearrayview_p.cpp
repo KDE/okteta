@@ -339,7 +339,33 @@ void AbstractByteArrayViewPrivate::changeEvent(QEvent* event)
         mDefaultFontSize = q->font().pointSize();
         // TODO: why reset zoom scale here? should this not rather recalculate the new applied font size?
         m_zoomScale = 1.0;
+        m_zoomOutLevels = (MinFontPointSize < mDefaultFontSize) ? mDefaultFontSize - MinFontPointSize : 0;
+        m_zoomInLevels = (mDefaultFontSize < MaxFontPointSize) ? MaxFontPointSize - mDefaultFontSize : 0;
+        emit q->zoomLevelsChanged();
     }
+}
+
+double AbstractByteArrayViewPrivate::zoomScaleForLevel(int level)   const
+{
+    if (m_zoomOutLevels < -level) {
+        level = -m_zoomOutLevels;
+    } else if (m_zoomInLevels < level) {
+        level = m_zoomInLevels;
+    }
+    const int newPointSize = mDefaultFontSize + level;
+    return static_cast<double>(newPointSize) / mDefaultFontSize;
+}
+
+int AbstractByteArrayViewPrivate::zoomLevelForScale(double zoomScale) const
+{
+    const double pointSize = zoomScale * mDefaultFontSize;
+    int level = static_cast<int>(pointSize - mDefaultFontSize);
+    if (m_zoomOutLevels < -level) {
+        level = -m_zoomOutLevels;
+    } else if (m_zoomInLevels < level) {
+        level = m_zoomInLevels;
+    }
+    return level;
 }
 
 void AbstractByteArrayViewPrivate::zoomIn()  { zoomIn(DefaultZoomStep); }

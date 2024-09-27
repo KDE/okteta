@@ -167,6 +167,9 @@ Q_SIGNALS:
     void undefinedCharChanged(QChar undefinedChar);
     void noOfGroupedBytesChanged(int noOfGroupedBytes);
 
+Q_SIGNALS:
+    void zoomLevelsChanged();
+
 public:
     void setViewModus(int viewModus);
     int viewModus() const;
