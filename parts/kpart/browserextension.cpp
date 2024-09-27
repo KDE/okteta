@@ -68,7 +68,7 @@ void OktetaBrowserExtension::saveState(QDataStream& stream)
     const QString viewProfileId = viewProfileSynchronizer ? viewProfileSynchronizer->viewProfileId() : QString();
 
     stream
-        << view->zoomLevel()
+        << view->zoomScale()
 
         << (int)view->offsetColumnVisible()
         << view->offsetCoding()
@@ -96,7 +96,7 @@ void OktetaBrowserExtension::restoreState(QDataStream& stream)
 {
     KParts::BrowserExtension::restoreState(stream);
 
-    double zoomLevel;
+    double zoomScale;
 
     int offsetColumnVisible;
     int offsetCoding;
@@ -119,7 +119,7 @@ void OktetaBrowserExtension::restoreState(QDataStream& stream)
     QString viewProfileId;
 
     stream
-        >> zoomLevel
+        >> zoomScale
 
         >> offsetColumnVisible
         >> offsetCoding
@@ -146,7 +146,7 @@ void OktetaBrowserExtension::restoreState(QDataStream& stream)
         viewProfileSynchronizer->setViewProfileId(viewProfileId);
     }
 
-    view->setZoomLevel(zoomLevel);
+    view->setZoomScale(zoomScale);
 
     view->setViewModus(viewModus);
 

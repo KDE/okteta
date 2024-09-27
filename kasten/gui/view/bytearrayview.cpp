@@ -101,7 +101,7 @@ ByteArrayView::ByteArrayView(ByteArrayView* other, ByteArrayViewProfileSynchroni
 
     const Okteta::AddressRange selection = other->selection();
     setSelection(selection.start(), selection.end());
-    setZoomLevel(other->zoomLevel());
+    setZoomScale(other->zoomScale());
     setCursorPosition(other->cursorPosition());
 
     setOverwriteMode(other->isOverwriteMode());
@@ -170,7 +170,7 @@ void ByteArrayView::init()
     connect(mWidget, &ByteArrayJanusView::substituteCharChanged, this, &ByteArrayView::substituteCharChanged);
     connect(mWidget, &ByteArrayJanusView::undefinedCharChanged, this, &ByteArrayView::undefinedCharChanged);
     connect(mWidget, &ByteArrayJanusView::noOfGroupedBytesChanged, this, &ByteArrayView::noOfGroupedBytesChanged);
-    connect(mWidget, &ByteArrayJanusView::zoomLevelChanged, this, &ByteArrayView::zoomLevelChanged);
+    connect(mWidget, &ByteArrayJanusView::zoomScaleChanged, this, &ByteArrayView::zoomLevelChanged);
     connect(mWidget, &ByteArrayJanusView::viewModusChanged, this, &ByteArrayView::viewModusChanged);
 
     connect(mWidget, &ByteArrayJanusView::viewContextMenuRequested, this, &ByteArrayView::viewContextMenuRequested);
@@ -196,14 +196,14 @@ void ByteArrayView::setFocus()
 
 void ByteArrayView::setReadOnly(bool isReadOnly) { mWidget->setReadOnly(isReadOnly); }
 
-void ByteArrayView::setZoomLevel(double Level)
+void ByteArrayView::setZoomLevel(double zoomScale)
 {
-    mWidget->setZoomLevel(Level);
+    mWidget->setZoomScale(zoomScale);
 }
 
 double ByteArrayView::zoomLevel() const
 {
-    return mWidget->zoomLevel();
+    return mWidget->zoomScale();
 }
 
 void ByteArrayView::selectAllData(bool selectAll)

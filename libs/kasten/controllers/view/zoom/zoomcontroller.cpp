@@ -77,8 +77,8 @@ void ZoomController::setTargetModel(AbstractModel* model)
     mZoomControl = mModel ? qobject_cast<If::Zoomable*>(mModel) : nullptr;
 
     if (mZoomControl) {
-        onZoomLevelChange(mZoomControl->zoomLevel());
-        connect(mModel, SIGNAL(zoomLevelChanged(double)), SLOT(onZoomLevelChange(double)));
+        onZoomScaleChange(mZoomControl->zoomScale());
+        connect(mModel, SIGNAL(zoomLevelChanged(double)), SLOT(onZoomScaleChange(double)));
     } else {
         mZoomNormalAction->setEnabled(false);
     }
@@ -90,17 +90,17 @@ void ZoomController::setTargetModel(AbstractModel* model)
 
 void ZoomController::zoomIn()
 {
-    mZoomControl->setZoomLevel(mZoomControl->zoomLevel() * 1.10);
+    mZoomControl->setZoomScale(mZoomControl->zoomScale() * 1.10);
 }
 
 void ZoomController::zoomOut()
 {
-    mZoomControl->setZoomLevel(mZoomControl->zoomLevel() / 1.10);
+    mZoomControl->setZoomScale(mZoomControl->zoomScale() / 1.10);
 }
 
 void ZoomController::zoomNormal()
 {
-    mZoomControl->setZoomLevel(1.0);
+    mZoomControl->setZoomScale(1.0);
 }
 #if 0
 void ZoomController::zoomTo(const QString& nz)
@@ -137,9 +137,9 @@ void ZoomController::fitToSize()
     updateZoomActions();
 }
 #endif
-void ZoomController::onZoomLevelChange(double zoomLevel)
+void ZoomController::onZoomScaleChange(double zoomScale)
 {
-    const bool isZoomed = (zoomLevel != 1.0);
+    const bool isZoomed = (zoomScale != 1.0);
     mZoomNormalAction->setEnabled(isZoomed);
 }
 

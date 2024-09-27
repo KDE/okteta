@@ -44,7 +44,7 @@ private Q_SLOTS: // action slots
     void onSliderMoved(int sliderValue);
 
 private Q_SLOTS:
-    void onZoomLevelChange(double level);
+    void onZoomScaleChange(double zoomScale);
 
 private:
     AbstractModel* mModel = nullptr;

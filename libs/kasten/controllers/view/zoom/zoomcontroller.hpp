@@ -37,7 +37,7 @@ private Q_SLOTS: // action slots
     void zoomNormal();
 
 private Q_SLOTS:
-    void onZoomLevelChange(double level);
+    void onZoomScaleChange(double zoomScale);
 
 private:
     AbstractModel* mModel = nullptr;

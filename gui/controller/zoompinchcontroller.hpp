@@ -29,7 +29,7 @@ public:
 
 private:
     AbstractByteArrayView* mView;
-    double mOriginalZoomLevel = -1;
+    double m_originalZoomScale = -1;
 };
 
 }

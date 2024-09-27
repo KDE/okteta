@@ -54,7 +54,7 @@ bool AbstractByteArrayView::isModified() const
 double AbstractByteArrayView::zoomLevel() const
 {
     Q_D(const AbstractByteArrayView);
-    return d->zoomLevel();
+    return d->zoomScale();
 }
 ByteArrayTableLayout* AbstractByteArrayView::layout() const
 {
@@ -431,10 +431,10 @@ void AbstractByteArrayView::unZoom()
     Q_D(AbstractByteArrayView);
     d->unZoom();
 }
-void AbstractByteArrayView::setZoomLevel(double zoomLevel)
+void AbstractByteArrayView::setZoomLevel(double zoomScale)
 {
     Q_D(AbstractByteArrayView);
-    d->setZoomLevel(zoomLevel);
+    d->setZoomScale(zoomScale);
 }
 
 void AbstractByteArrayView::setNoOfLines(int newNoOfLines)

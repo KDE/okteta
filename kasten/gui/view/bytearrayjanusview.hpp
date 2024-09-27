@@ -39,8 +39,8 @@ public:
 public:
     void setByteArrayModel(AbstractByteArrayModel* byteArrayModel);
 
-    void setZoomLevel(double Level);
-    double zoomLevel() const;
+    void setZoomScale(double zoomScale);
+    double zoomScale() const;
 
 public:
     void setReadOnly(bool isReadOnly);
@@ -138,7 +138,7 @@ Q_SIGNALS:
     void substituteCharChanged(QChar substituteChar);
     void undefinedCharChanged(QChar undefinedChar);
     void noOfGroupedBytesChanged(int noOfGroupedBytes);
-    void zoomLevelChanged(double level);
+    void zoomScaleChanged(double zoomScale);
     void viewModusChanged(int viewModus);
     void viewContextMenuRequested(QPoint pos);
 

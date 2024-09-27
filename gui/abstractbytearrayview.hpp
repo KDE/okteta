@@ -176,7 +176,9 @@ public: // value access
      */
     const QString& charCodingName() const;
 
+    // TODO: on next ABI change, rename to zoomScale
     double zoomLevel() const;
+    inline double zoomScale() const { return zoomLevel(); }
 
 public: // value access API
     // value column
@@ -350,7 +352,9 @@ public: // zooming
     void zoomOut();
     void zoomTo(int pointSize);
     void unZoom();
-    void setZoomLevel(double level);
+    // TODO: on next ABI change, renamve to setZoomScale
+    void setZoomLevel(double zoomScale);
+    inline void setZoomScale(double zoomScale) { setZoomLevel(zoomScale); }
 
 public: // cursor control
     /** we have focus again, start the timer */
@@ -416,7 +420,8 @@ Q_SIGNALS:
     void undefinedCharChanged(QChar undefinedChar);
     void noOfGroupedBytesChanged(int noOfGroupedBytes);
 
-    void zoomLevelChanged(double level);
+    // TODO: on next ABI change, rename to zoomScaleChanged
+    void zoomLevelChanged(double zoomScale);
 
 protected:
     void finishByteEdit();

@@ -100,7 +100,7 @@ public: // value access
     AbstractByteArrayView::CharCoding charCoding() const;
     const QString& charCodingName() const;
 
-    double zoomLevel() const;
+    double zoomScale() const;
 
 public:
     void init();
@@ -137,7 +137,7 @@ public: // zooming
     void zoomOut();
     void zoomTo(int pointSize);
     void unZoom();
-    void setZoomLevel(double level);
+    void setZoomScale(double zoomScale);
 
 public: // interaction
     void selectAll(bool select);
@@ -306,7 +306,7 @@ protected:
 
     /** font size as set by user (used for zooming) */
     int mDefaultFontSize;
-    double mZoomLevel = 1.0;
+    double m_zoomScale = 1.0;
 
     // parameters
     /** */
@@ -332,7 +332,7 @@ inline bool AbstractByteArrayViewPrivate::isOverwriteMode() const { return mOver
 inline bool AbstractByteArrayViewPrivate::isOverwriteOnly() const { return mOverWriteOnly; }
 inline bool AbstractByteArrayViewPrivate::isViewReadOnly()      const { return mReadOnly; }
 inline bool AbstractByteArrayViewPrivate::isEffectiveReadOnly() const { return mReadOnly || mByteArrayModel->isReadOnly(); }
-inline double AbstractByteArrayViewPrivate::zoomLevel()        const { return mZoomLevel; }
+inline double AbstractByteArrayViewPrivate::zoomScale()         const { return m_zoomScale; }
 
 inline ByteArrayTableLayout* AbstractByteArrayViewPrivate::layout()      const { return mTableLayout; }
 inline ByteArrayTableCursor* AbstractByteArrayViewPrivate::tableCursor() const { return mTableCursor; }
