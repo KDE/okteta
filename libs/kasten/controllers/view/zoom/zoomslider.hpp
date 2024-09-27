@@ -9,6 +9,8 @@
 #ifndef KASTEN_ZOOMSLIDER_HPP
 #define KASTEN_ZOOMSLIDER_HPP
 
+// Kasten gui
+#include <Kasten/ZoomLevelsQueryable>
 // Qt
 #include <QWidget>
 
@@ -45,10 +47,12 @@ private Q_SLOTS: // action slots
 
 private Q_SLOTS:
     void onZoomScaleChange(double zoomScale);
+    void onZoomLevelsChanged();
 
 private:
     AbstractModel* mModel = nullptr;
     If::Zoomable* mZoomControl = nullptr;
+    If::ZoomLevelsQueryable* m_zoomLevelsControl = nullptr;
 
     QSlider* mSlider;
     QAction* m_zoomNormalAction;

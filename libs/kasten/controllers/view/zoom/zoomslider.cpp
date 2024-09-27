@@ -26,6 +26,9 @@ namespace Kasten {
 
 static constexpr int ZoomSliderWidth = 150;
 
+static constexpr double DefaultZoomSliderZoomOutLevelsSize = 49;
+static constexpr double DefaultZoomSliderZoomInLevelsSize = 50;
+
 // TODO: look at Dolphin/Krita/KOffice zoom tool
 
 // TODO: different zoom strategies: fixed step size, relative step size
@@ -46,7 +49,10 @@ ZoomSlider::ZoomSlider(QWidget* parent)
     zoomOutButton->setDefaultAction(m_zoomOutAction);
     zoomOutButton->setAutoRaise(true);
 
+    // slider: use 0 as 100 % value, negative values for zoom-out levels, positive for zoom-in levels
     mSlider = new QSlider(Qt::Horizontal, this);
+    mSlider->setSingleStep(1);   // mZoomControl->zoomLevelSingleStep()?
+    mSlider->setPageStep(5);   // mZoomControl->zoomLevelPageStep()?
 
     auto* zoomInButton = new QToolButton(this);
     m_zoomInAction = KStandardAction::zoomIn(this, &ZoomSlider::zoomIn,  this);
@@ -82,19 +88,25 @@ void ZoomSlider::setTargetModel(AbstractModel* model)
 
     mModel = model ? model->findBaseModelWithInterface<If::Zoomable*>() : nullptr;
     mZoomControl = mModel ? qobject_cast<If::Zoomable*>(mModel) : nullptr;
+    m_zoomLevelsControl = nullptr;
 
     const bool hasView = (mZoomControl != nullptr);
     if (hasView) {
-        mSlider->setSingleStep(1);   // mZoomControl->zoomLevelSingleStep()?
-        mSlider->setPageStep(5);   // mZoomControl->zoomLevelPageStep()?
+        const auto children = mModel->findChildren<QObject*>(QString(), Qt::FindDirectChildrenOnly);
+        for (auto* child : children) {
+            m_zoomLevelsControl = qobject_cast<If::ZoomLevelsQueryable*>(child);
+            if (m_zoomLevelsControl) {
+                connect(child, SIGNAL(zoomLevelsChanged()),
+                        this, SLOT(onZoomLevelsChanged()));
+                break;
+            }
+        }
 
-        const int min = 0; // mZoomControl->minimumZoomLevel();
-        const int max = 99; // mZoomControl->maximumZoomLevel();
-        mSlider->setRange(min, max);
+        onZoomLevelsChanged();
 
         onZoomScaleChange(mZoomControl->zoomScale());
         const int sliderValue = mSlider->value();
-        const bool isZoomed = (sliderValue != 50);
+        const bool isZoomed = (sliderValue != 0);
         m_zoomNormalAction->setEnabled(isZoomed);
         m_zoomOutAction->setEnabled(sliderValue > mSlider->minimum());
         m_zoomInAction->setEnabled(sliderValue < mSlider->maximum());
@@ -104,8 +116,8 @@ void ZoomSlider::setTargetModel(AbstractModel* model)
         m_zoomOutAction->setEnabled(false);
         m_zoomInAction->setEnabled(false);
         // put slider in the middle
-        mSlider->setRange(0, 99);
-        mSlider->setValue(50);
+        mSlider->setRange(-DefaultZoomSliderZoomInLevelsSize, DefaultZoomSliderZoomOutLevelsSize);
+        mSlider->setValue(0);
     }
 
     mSlider->setEnabled(hasView);
@@ -119,7 +131,7 @@ void ZoomSlider::updateToolTip(int sliderValue)
 
     m_toolTipSliderValue = sliderValue;
 
-    const float zoomScale = 50.0 / (100 - m_toolTipSliderValue);
+    const float zoomScale = m_zoomLevelsControl ? m_zoomLevelsControl->zoomScaleForLevel(m_toolTipSliderValue) : 50.0 / (50 - m_toolTipSliderValue);
     const int zoomPercent = static_cast<int>(zoomScale * 100 + 0.5);
     mSlider->setToolTip(i18nc("@info:tooltip", "Zoom: %1%", zoomPercent));
 // TODO: get the text by a signal toolTipNeeded( int zoomScale, QString* toolTipText ); ?
@@ -139,13 +151,13 @@ void ZoomSlider::zoomIn()
 
 void ZoomSlider::zoomNormal()
 {
-    mSlider->setValue(50);
+    mSlider->setValue(0);
 }
 
 void ZoomSlider::onSliderValueChanged(int sliderValue)
 {
     updateToolTip(sliderValue);
-    const bool isZoomed = (sliderValue != 50);
+    const bool isZoomed = (sliderValue != 0);
     m_zoomNormalAction->setEnabled(isZoomed);
     m_zoomOutAction->setEnabled(sliderValue > mSlider->minimum());
     m_zoomInAction->setEnabled(sliderValue < mSlider->maximum());
@@ -155,7 +167,9 @@ void ZoomSlider::onSliderValueChanged(int sliderValue)
     }
 
     if (mZoomControl) {
-        mZoomControl->setZoomScale(50.0 / (100 - sliderValue));
+        const double zoomScale = m_zoomLevelsControl ? m_zoomLevelsControl->zoomScaleForLevel(sliderValue) : 50.0 / (50 - sliderValue);
+
+        mZoomControl->setZoomScale(zoomScale);
     }
 }
 
@@ -181,10 +195,17 @@ void ZoomSlider::onZoomScaleChange(double zoomScale)
 {
     m_isUpdatingSlider = true;
 
-    const int newSliderValue = 100 - static_cast<int>(50.0 / zoomScale + 0.5);
+    const int newSliderValue = m_zoomLevelsControl ? m_zoomLevelsControl->zoomLevelForScale(zoomScale) : 50 - static_cast<int>(50.0 / zoomScale + 0.5);
     mSlider->setValue(newSliderValue);
 
     m_isUpdatingSlider = false;
+}
+
+void ZoomSlider::onZoomLevelsChanged()
+{
+    const int zoomOutLevelsSize = m_zoomLevelsControl ? m_zoomLevelsControl->zoomOutLevelsSize() : DefaultZoomSliderZoomOutLevelsSize;
+    const int zoomInLevelsSize = m_zoomLevelsControl ? m_zoomLevelsControl->zoomInLevelsSize() : DefaultZoomSliderZoomInLevelsSize;
+    mSlider->setRange(-zoomOutLevelsSize, zoomInLevelsSize);
 }
 
 }
