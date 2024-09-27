@@ -61,8 +61,8 @@ static constexpr Address DefaultFirstLineOffset = 0;
 
 // zooming is done in steps of font size points
 static constexpr int DefaultZoomStep = 1;
-static constexpr int MinFontPointSize = 4;
-static constexpr int MaxFontPointSize = 128;
+static constexpr int MinFontPointSize = 2;
+static constexpr int MaxFontPointSize = 96;
 
 static constexpr AbstractByteArrayView::ValueCoding DefaultValueCoding =  AbstractByteArrayView::HexadecimalCoding;
 static constexpr AbstractByteArrayView::CharCoding DefaultCharCoding = AbstractByteArrayView::LocalEncoding;
