@@ -11,6 +11,7 @@
 
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
+#include <Kasten/ZoomLevelsQueryable>
 
 class KXMLGUIClient;
 class QAction;
@@ -37,11 +38,13 @@ private Q_SLOTS: // action slots
     void zoomNormal();
 
 private Q_SLOTS:
-    void onZoomScaleChange(double zoomScale);
+    void updateActionsToZoomScale(double zoomScale);
+    void onZoomLevelsChanged();
 
 private:
     AbstractModel* mModel = nullptr;
     If::Zoomable* mZoomControl = nullptr;
+    If::ZoomLevelsQueryable* m_zoomLevelsControl = nullptr;
 
     QAction* mZoomInAction;
     QAction* mZoomOutAction;
