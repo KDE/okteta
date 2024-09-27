@@ -50,8 +50,8 @@ static constexpr Address DefaultFirstLineOffset = 0;
 
 // zooming is done in steps of font size points
 static constexpr int DefaultZoomStep = 1;
-static constexpr int MinFontPointSize = 4;
-static constexpr int MaxFontPointSize = 128;
+static constexpr int MinFontPointSize = 2;
+static constexpr int MaxFontPointSize = 96;
 
 static constexpr AbstractByteArrayView::ValueCoding DefaultValueCoding =  AbstractByteArrayView::HexadecimalCoding;
 
@@ -310,9 +310,35 @@ void AbstractByteArrayViewPrivate::changeEvent(QEvent* event)
     if (event->type() == QEvent::FontChange
         && !mInZooming) {
         mDefaultFontSize = q->font().pointSize();
-        // TODO: why reset zoomlevel here? should this not rather recalculate the new applied font size?
-        mZoomLevel = 1.0;
+        // TODO: why reset zoom scale here? should this not rather recalculate the new applied font size?
+        m_zoomScale = 1.0;
+        m_zoomOutLevels = (MinFontPointSize < mDefaultFontSize) ? mDefaultFontSize - MinFontPointSize : 0;
+        m_zoomInLevels = (mDefaultFontSize < MaxFontPointSize) ? MaxFontPointSize - mDefaultFontSize : 0;
+        Q_EMIT q->zoomLevelsChanged();
     }
+}
+
+double AbstractByteArrayViewPrivate::zoomScaleForLevel(int level)   const
+{
+    if (m_zoomOutLevels < -level) {
+        level = -m_zoomOutLevels;
+    } else if (m_zoomInLevels < level) {
+        level = m_zoomInLevels;
+    }
+    const int newPointSize = mDefaultFontSize + level;
+    return static_cast<double>(newPointSize) / mDefaultFontSize;
+}
+
+int AbstractByteArrayViewPrivate::zoomLevelForScale(double zoomScale) const
+{
+    const double pointSize = zoomScale * mDefaultFontSize;
+    int level = static_cast<int>(pointSize - mDefaultFontSize);
+    if (m_zoomOutLevels < -level) {
+        level = -m_zoomOutLevels;
+    } else if (m_zoomInLevels < level) {
+        level = m_zoomInLevels;
+    }
+    return level;
 }
 
 void AbstractByteArrayViewPrivate::zoomIn()  { zoomIn(DefaultZoomStep); }
@@ -328,14 +354,14 @@ void AbstractByteArrayViewPrivate::zoomIn(int pointIncrement)
         newPointSize = MaxFontPointSize;
     }
 
-    mZoomLevel = (double)newPointSize / mDefaultFontSize;
+    m_zoomScale = (double)newPointSize / mDefaultFontSize;
     newFont.setPointSize(newPointSize);
 
     mInZooming = true;
     q->setFont(newFont);
     mInZooming = false;
 
-    Q_EMIT q->zoomLevelChanged(mZoomLevel);
+    Q_EMIT q->zoomLevelChanged(m_zoomScale);
 }
 
 void AbstractByteArrayViewPrivate::zoomOut(int pointDecrement)
@@ -348,14 +374,14 @@ void AbstractByteArrayViewPrivate::zoomOut(int pointDecrement)
         newPointSize = MinFontPointSize;
     }
 
-    mZoomLevel = (double)newPointSize / mDefaultFontSize;
+    m_zoomScale = (double)newPointSize / mDefaultFontSize;
     newFont.setPointSize(newPointSize);
 
     mInZooming = true;
     q->setFont(newFont);
     mInZooming = false;
 
-    Q_EMIT q->zoomLevelChanged(mZoomLevel);
+    Q_EMIT q->zoomLevelChanged(m_zoomScale);
 }
 
 void AbstractByteArrayViewPrivate::zoomTo(int newPointSize)
@@ -374,13 +400,13 @@ void AbstractByteArrayViewPrivate::zoomTo(int newPointSize)
     }
 
     newFont.setPointSize(newPointSize);
-    mZoomLevel = (double)newPointSize / mDefaultFontSize;
+    m_zoomScale = (double)newPointSize / mDefaultFontSize;
 
     mInZooming = true;
     q->setFont(newFont);
     mInZooming = false;
 
-    Q_EMIT q->zoomLevelChanged(mZoomLevel);
+    Q_EMIT q->zoomLevelChanged(m_zoomScale);
 }
 
 void AbstractByteArrayViewPrivate::unZoom()
@@ -388,19 +414,19 @@ void AbstractByteArrayViewPrivate::unZoom()
     zoomTo(mDefaultFontSize);
 }
 
-void AbstractByteArrayViewPrivate::setZoomLevel(double zoomLevel)
+void AbstractByteArrayViewPrivate::setZoomScale(double zoomScale)
 {
     Q_Q(AbstractByteArrayView);
 
     const int currentPointSize = q->fontInfo().pointSize();
 
-    // TODO: here we catch any new zoomlevels which are out of bounds and the zoom already at that bound
-    if ((currentPointSize <= MinFontPointSize && zoomLevel < (double)MinFontPointSize / mDefaultFontSize)
-        || (MaxFontPointSize <= currentPointSize && (double)MaxFontPointSize / mDefaultFontSize < zoomLevel)) {
+    // TODO: here we catch any new zoom scales which are out of bounds and the zoom already at that bound
+    if ((currentPointSize <= MinFontPointSize && zoomScale < (double)MinFontPointSize / mDefaultFontSize)
+        || (MaxFontPointSize <= currentPointSize && (double)MaxFontPointSize / mDefaultFontSize < zoomScale)) {
         return;
     }
 
-    int newPointSize = (int)(zoomLevel * mDefaultFontSize);
+    int newPointSize = (int)(zoomScale * mDefaultFontSize);
     if (newPointSize < MinFontPointSize) {
         newPointSize = MinFontPointSize;
     } else if (newPointSize > MaxFontPointSize) {
@@ -409,18 +435,18 @@ void AbstractByteArrayViewPrivate::setZoomLevel(double zoomLevel)
 
     QFont newFont(q->font());
 
-    // other than in zoomTo(), where the new zoomlevel is calculated from the integers, here
-    // use the passed zoomlevel value, to avoid getting trapped inside a small integer value,
+    // other than in zoomTo(), where the new zoom scale is calculated from the integers, here
+    // use the passed zoom scale value, to avoid getting trapped inside a small integer value,
     // if the zoom tool operates relatively
     // think about, if this is the right approach
-    mZoomLevel = zoomLevel;
+    m_zoomScale = zoomScale;
     newFont.setPointSize(newPointSize);
 
     mInZooming = true;
     q->setFont(newFont);
     mInZooming = false;
 
-    Q_EMIT q->zoomLevelChanged(mZoomLevel);
+    Q_EMIT q->zoomLevelChanged(m_zoomScale);
 }
 
 void AbstractByteArrayViewPrivate::setStartOffset(Address startOffset)

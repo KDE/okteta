@@ -58,7 +58,28 @@ bool AbstractByteArrayView::isModified() const
 double AbstractByteArrayView::zoomLevel() const
 {
     Q_D(const AbstractByteArrayView);
-    return d->zoomLevel();
+    return d->zoomScale();
+}
+
+int AbstractByteArrayView::zoomInLevelsSize() const
+{
+    Q_D(const AbstractByteArrayView);
+    return d->zoomInLevelsSize();
+}
+int AbstractByteArrayView::zoomOutLevelsSize() const
+{
+    Q_D(const AbstractByteArrayView);
+    return d->zoomOutLevelsSize();
+}
+double AbstractByteArrayView::zoomScaleForLevel(int zoomLevel) const
+{
+    Q_D(const AbstractByteArrayView);
+    return d->zoomScaleForLevel(zoomLevel);
+}
+int AbstractByteArrayView::zoomLevelForScale(double zoomScale) const
+{
+    Q_D(const AbstractByteArrayView);
+    return d->zoomLevelForScale(zoomScale);
 }
 
 AbstractByteArrayView::ValueCoding AbstractByteArrayView::valueCoding() const
@@ -415,10 +436,10 @@ void AbstractByteArrayView::unZoom()
     Q_D(AbstractByteArrayView);
     d->unZoom();
 }
-void AbstractByteArrayView::setZoomLevel(double zoomLevel)
+void AbstractByteArrayView::setZoomLevel(double zoomScale)
 {
     Q_D(AbstractByteArrayView);
-    d->setZoomLevel(zoomLevel);
+    d->setZoomScale(zoomScale);
 }
 
 void AbstractByteArrayView::changeEvent(QEvent* event)

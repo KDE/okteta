@@ -64,7 +64,7 @@ ByteArrayView::ByteArrayView(ByteArrayView* other, std::unique_ptr<ByteArrayView
 
     const Okteta::AddressRange selection = other->selection();
     setSelection(selection.start(), selection.end());
-    setZoomLevel(other->zoomLevel());
+    setZoomScale(other->zoomScale());
     setCursorPosition(other->cursorPosition());
 
     setOverwriteMode(other->isOverwriteMode());
@@ -130,7 +130,8 @@ void ByteArrayView::init()
     connect(mWidget.get(), &ByteArrayJanusView::substituteCharChanged, this, &ByteArrayView::substituteCharChanged);
     connect(mWidget.get(), &ByteArrayJanusView::undefinedCharChanged, this, &ByteArrayView::undefinedCharChanged);
     connect(mWidget.get(), &ByteArrayJanusView::noOfGroupedBytesChanged, this, &ByteArrayView::noOfGroupedBytesChanged);
-    connect(mWidget.get(), &ByteArrayJanusView::zoomLevelChanged, this, &ByteArrayView::zoomLevelChanged);
+    connect(mWidget.get(), &ByteArrayJanusView::zoomScaleChanged, this, &ByteArrayView::zoomLevelChanged);
+    connect(mWidget.get(), &ByteArrayJanusView::zoomLevelsChanged, this, &ByteArrayView::zoomLevelsChanged);
     connect(mWidget.get(), &ByteArrayJanusView::viewModusChanged, this, &ByteArrayView::viewModusChanged);
 
     connect(mWidget.get(), &ByteArrayJanusView::viewContextMenuRequested, this, &ByteArrayView::viewContextMenuRequested);
@@ -154,14 +155,34 @@ void ByteArrayView::setFocus()
 
 void ByteArrayView::setReadOnly(bool isReadOnly) { mWidget->setReadOnly(isReadOnly); }
 
-void ByteArrayView::setZoomLevel(double Level)
+void ByteArrayView::setZoomLevel(double zoomScale)
 {
-    mWidget->setZoomLevel(Level);
+    mWidget->setZoomScale(zoomScale);
 }
 
 double ByteArrayView::zoomLevel() const
 {
-    return mWidget->zoomLevel();
+    return mWidget->zoomScale();
+}
+
+int ByteArrayView::zoomInLevelsSize() const
+{
+    return mWidget->zoomInLevelsSize();
+}
+
+int ByteArrayView::zoomOutLevelsSize() const
+{
+    return mWidget->zoomOutLevelsSize();
+}
+
+double ByteArrayView::zoomScaleForLevel(int zoomLevel) const
+{
+    return mWidget->zoomScaleForLevel(zoomLevel);
+}
+
+int ByteArrayView::zoomLevelForScale(double zoomScale) const
+{
+    return mWidget->zoomLevelForScale(zoomScale);
 }
 
 void ByteArrayView::selectAllData(bool selectAll)

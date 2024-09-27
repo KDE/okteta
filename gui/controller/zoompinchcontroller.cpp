@@ -24,15 +24,15 @@ bool ZoomPinchController::handlePinchGesture(QPinchGesture* pinchGesture)
 {
     switch (pinchGesture->state()) {
         case Qt::GestureStarted :
-            mOriginalZoomLevel = mView->zoomLevel();
+            m_originalZoomScale = mView->zoomScale();
             break;
         case Qt::GestureCanceled :
-            mView->setZoomLevel(mOriginalZoomLevel);
+            mView->setZoomScale(m_originalZoomScale);
             break;
         case Qt::GestureUpdated:
         case Qt::GestureFinished:
             if (pinchGesture->changeFlags() & QPinchGesture::ScaleFactorChanged) {
-                mView->setZoomLevel(pinchGesture->totalScaleFactor() * mOriginalZoomLevel);
+                mView->setZoomScale(pinchGesture->totalScaleFactor() * m_originalZoomScale);
             }
             break;
         default:

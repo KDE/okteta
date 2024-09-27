@@ -40,6 +40,7 @@ kastengui_add_sublibrary(view
         SelectedDataWriteable
         DataSelectable
         Zoomable
+        ZoomLevelsQueryable
 
         AbstractView
         AbstractViewFactory

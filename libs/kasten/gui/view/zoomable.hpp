@@ -24,13 +24,18 @@ public:
     virtual ~Zoomable();
 
 public: // set/action
-    virtual void setZoomLevel(double Level) = 0;
+    // TODO: on next ABI change, rename to setZoomScale
+    virtual void setZoomLevel(double zoomScale) = 0;
+    inline void setZoomScale(double zoomScale) { setZoomLevel(zoomScale); }
 
 public: // get
+    // TODO: on next ABI change, rename to zoomScale
     virtual double zoomLevel() const = 0;
+    inline double zoomScale() const { return zoomLevel(); }
 
 public: // signal
-    virtual void zoomLevelChanged(double Level) = 0;
+    // TODO: on next ABI change, rename to zoomScaleChanged
+    virtual void zoomLevelChanged(double zoomScale) = 0;
 };
 
 inline Zoomable::~Zoomable() = default;

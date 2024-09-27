@@ -16,6 +16,7 @@
 // Kasten gui
 #include <Kasten/AbstractView>
 #include <Kasten/Zoomable> // TODO: able instead of interface? or else?
+#include <Kasten/ZoomLevelsQueryable>
 #include <Kasten/DataSelectable>
 #include <Kasten/SelectedDataWriteable>
 // Okteta core
@@ -36,12 +37,14 @@ class KCursorProxy;
 
 class OKTETAKASTENGUI_EXPORT ByteArrayView : public AbstractView
                                            , public If::Zoomable
+                                           , public If::ZoomLevelsQueryable
                                            , public If::DataSelectable
                                            , public If::SelectedDataWriteable
 {
     Q_OBJECT
     Q_INTERFACES(
         Kasten::If::Zoomable
+        Kasten::If::ZoomLevelsQueryable
         Kasten::If::DataSelectable
         Kasten::If::SelectedDataWriteable
     )
@@ -75,10 +78,18 @@ public: // AbstractView API
     bool hasFocus() const override;
 
 public: // If::Zoomable API TODO: make all such methods slots?
-    void setZoomLevel(double Level) override;
+    void setZoomLevel(double zoomScale) override;
     double zoomLevel() const override;
 Q_SIGNALS:
-    void zoomLevelChanged(double Level) override;
+    void zoomLevelChanged(double zoomScale) override;
+
+public: // If::ZoomLevelsQueryable API
+    int zoomInLevelsSize() const override;
+    int zoomOutLevelsSize() const override;
+    double zoomScaleForLevel(int zoomLevel) const override;
+    int zoomLevelForScale(double zoomScale) const override;
+Q_SIGNALS:
+    void zoomLevelsChanged() override;
 
 public: // If::DataSelectable API
     void selectAllData(bool selectAll) override;

@@ -148,7 +148,14 @@ public: // value access
      */
     QString charCodingName() const;
 
+public: // zooming values
+    // TODO: on next ABI change, rename to zoomScale
     double zoomLevel() const;
+    inline double zoomScale() const { return zoomLevel(); }
+    int zoomInLevelsSize() const;
+    int zoomOutLevelsSize() const;
+    double zoomScaleForLevel(int zoomLevel) const;
+    int zoomLevelForScale(double zoomScale) const;
 
 public: // value access API
     // value column
@@ -319,7 +326,9 @@ public: // zooming
     void zoomOut();
     void zoomTo(int pointSize);
     void unZoom();
-    void setZoomLevel(double level);
+    // TODO: on next ABI change, renamve to setZoomScale
+    void setZoomLevel(double zoomScale);
+    inline void setZoomScale(double zoomScale) { setZoomLevel(zoomScale); }
 
 public: // cursor control
     /** we have focus again, start the timer */
@@ -385,7 +394,9 @@ Q_SIGNALS:
     void undefinedCharChanged(QChar undefinedChar);
     void noOfGroupedBytesChanged(int noOfGroupedBytes);
 
-    void zoomLevelChanged(double level);
+    // TODO: on next ABI change, rename to zoomScaleChanged
+    void zoomLevelChanged(double zoomScale);
+    void zoomLevelsChanged();
 
 protected:
     const Okteta::ValueCodec* valueCodec() const;

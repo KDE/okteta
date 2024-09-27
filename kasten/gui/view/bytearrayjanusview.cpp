@@ -50,7 +50,7 @@ void ByteArrayJanusView::setViewModus(int viewModus)
         newView->setByteArrayModel(mView->byteArrayModel());
         newView->setReadOnly(mView->isReadOnly());
         newView->setOverwriteMode(mView->isOverwriteMode());
-        newView->setZoomLevel(mView->zoomLevel());
+        newView->setZoomScale(mView->zoomScale());
         newView->setShowsNonprinting(mView->showsNonprinting());
         newView->setValueCoding(mView->valueCoding());
         newView->setCharCoding(mView->charCodingName());
@@ -103,7 +103,8 @@ void ByteArrayJanusView::setViewModus(int viewModus)
     connect(mView, &AbstractByteArrayView::substituteCharChanged, this, &ByteArrayJanusView::substituteCharChanged);
     connect(mView, &AbstractByteArrayView::undefinedCharChanged, this, &ByteArrayJanusView::undefinedCharChanged);
     connect(mView, &AbstractByteArrayView::noOfGroupedBytesChanged, this, &ByteArrayJanusView::noOfGroupedBytesChanged);
-    connect(mView, &AbstractByteArrayView::zoomLevelChanged, this, &ByteArrayJanusView::zoomLevelChanged);
+    connect(mView, &AbstractByteArrayView::zoomLevelChanged, this, &ByteArrayJanusView::zoomScaleChanged);
+    connect(mView, &AbstractByteArrayView::zoomLevelsChanged, this, &ByteArrayJanusView::zoomLevelsChanged);
 
     Q_EMIT viewModusChanged(mViewModus);
 }
@@ -111,14 +112,34 @@ void ByteArrayJanusView::setViewModus(int viewModus)
 bool ByteArrayJanusView::isReadOnly()             const { return mView->isReadOnly(); }
 void ByteArrayJanusView::setReadOnly(bool isReadOnly) { mView->setReadOnly(isReadOnly); }
 
-void ByteArrayJanusView::setZoomLevel(double Level)
+void ByteArrayJanusView::setZoomScale(double zoomScale)
 {
-    mView->setZoomLevel(Level);
+    mView->setZoomScale(zoomScale);
 }
 
-double ByteArrayJanusView::zoomLevel() const
+double ByteArrayJanusView::zoomScale() const
 {
-    return mView->zoomLevel();
+    return mView->zoomScale();
+}
+
+int ByteArrayJanusView::zoomInLevelsSize() const
+{
+    return mView->zoomInLevelsSize();
+}
+
+int ByteArrayJanusView::zoomOutLevelsSize() const
+{
+    return mView->zoomOutLevelsSize();
+}
+
+double ByteArrayJanusView::zoomScaleForLevel(int zoomLevel) const
+{
+    return mView->zoomScaleForLevel(zoomLevel);
+}
+
+int ByteArrayJanusView::zoomLevelForScale(double zoomScale) const
+{
+    return mView->zoomLevelForScale(zoomScale);
 }
 
 void ByteArrayJanusView::selectAll(bool selectAll)
