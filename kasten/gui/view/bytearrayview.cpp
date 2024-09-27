@@ -130,7 +130,7 @@ void ByteArrayView::init()
     connect(mWidget.get(), &ByteArrayJanusView::substituteCharChanged, this, &ByteArrayView::substituteCharChanged);
     connect(mWidget.get(), &ByteArrayJanusView::undefinedCharChanged, this, &ByteArrayView::undefinedCharChanged);
     connect(mWidget.get(), &ByteArrayJanusView::noOfGroupedBytesChanged, this, &ByteArrayView::noOfGroupedBytesChanged);
-    connect(mWidget.get(), &ByteArrayJanusView::zoomScaleChanged, this, &ByteArrayView::zoomLevelChanged);
+    connect(mWidget.get(), &ByteArrayJanusView::zoomScaleChanged, this, &ByteArrayView::zoomScaleChanged);
     connect(mWidget.get(), &ByteArrayJanusView::zoomLevelsChanged, this, &ByteArrayView::zoomLevelsChanged);
     connect(mWidget.get(), &ByteArrayJanusView::viewModusChanged, this, &ByteArrayView::viewModusChanged);
 
@@ -155,12 +155,12 @@ void ByteArrayView::setFocus()
 
 void ByteArrayView::setReadOnly(bool isReadOnly) { mWidget->setReadOnly(isReadOnly); }
 
-void ByteArrayView::setZoomLevel(double zoomScale)
+void ByteArrayView::setZoomScale(double zoomScale)
 {
     mWidget->setZoomScale(zoomScale);
 }
 
-double ByteArrayView::zoomLevel() const
+double ByteArrayView::zoomScale() const
 {
     return mWidget->zoomScale();
 }

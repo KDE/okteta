@@ -105,7 +105,7 @@ void ZoomSlider::setTargetModel(AbstractModel* model)
         m_zoomNormalAction->setEnabled(isZoomed);
         m_zoomOutAction->setEnabled(sliderValue > mSlider->minimum());
         m_zoomInAction->setEnabled(sliderValue < mSlider->maximum());
-        connect(mModel, SIGNAL(zoomLevelChanged(double)), SLOT(onZoomScaleChange(double)));
+        connect(mModel, SIGNAL(zoomScaleChanged(double)), SLOT(onZoomScaleChange(double)));
     } else {
         m_zoomNormalAction->setEnabled(false);
         m_zoomOutAction->setEnabled(false);

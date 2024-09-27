@@ -361,7 +361,7 @@ void AbstractByteArrayViewPrivate::zoomIn(int pointIncrement)
     q->setFont(newFont);
     mInZooming = false;
 
-    Q_EMIT q->zoomLevelChanged(m_zoomScale);
+    Q_EMIT q->zoomScaleChanged(m_zoomScale);
 }
 
 void AbstractByteArrayViewPrivate::zoomOut(int pointDecrement)
@@ -381,7 +381,7 @@ void AbstractByteArrayViewPrivate::zoomOut(int pointDecrement)
     q->setFont(newFont);
     mInZooming = false;
 
-    Q_EMIT q->zoomLevelChanged(m_zoomScale);
+    Q_EMIT q->zoomScaleChanged(m_zoomScale);
 }
 
 void AbstractByteArrayViewPrivate::zoomTo(int newPointSize)
@@ -406,7 +406,7 @@ void AbstractByteArrayViewPrivate::zoomTo(int newPointSize)
     q->setFont(newFont);
     mInZooming = false;
 
-    Q_EMIT q->zoomLevelChanged(m_zoomScale);
+    Q_EMIT q->zoomScaleChanged(m_zoomScale);
 }
 
 void AbstractByteArrayViewPrivate::unZoom()
@@ -446,7 +446,7 @@ void AbstractByteArrayViewPrivate::setZoomScale(double zoomScale)
     q->setFont(newFont);
     mInZooming = false;
 
-    Q_EMIT q->zoomLevelChanged(m_zoomScale);
+    Q_EMIT q->zoomScaleChanged(m_zoomScale);
 }
 
 void AbstractByteArrayViewPrivate::setStartOffset(Address startOffset)

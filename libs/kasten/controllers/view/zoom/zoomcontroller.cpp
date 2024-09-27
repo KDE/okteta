@@ -88,7 +88,7 @@ void ZoomController::setTargetModel(AbstractModel* model)
         }
 
         updateActionsToZoomScale(mZoomControl->zoomScale());
-        connect(mModel, SIGNAL(zoomLevelChanged(double)), SLOT(updateActionsToZoomScale(double)));
+        connect(mModel, SIGNAL(zoomScaleChanged(double)), SLOT(updateActionsToZoomScale(double)));
     } else {
         mZoomNormalAction->setEnabled(false);
         mZoomInAction->setEnabled(false);

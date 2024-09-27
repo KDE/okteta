@@ -17,25 +17,20 @@ namespace If {
 
 // TODO: add support for automatic zoom
 // enum { Manual, Width, Height, FullSize };
-// perhaps zoomLevelChanged needs a flag automatically
+// perhaps zoomScaleChanged needs a flag automatically
 class Zoomable
 {
 public:
     virtual ~Zoomable();
 
 public: // set/action
-    // TODO: on next ABI change, rename to setZoomScale
-    virtual void setZoomLevel(double zoomScale) = 0;
-    inline void setZoomScale(double zoomScale) { setZoomLevel(zoomScale); }
+    virtual void setZoomScale(double zoomScale) = 0;
 
 public: // get
-    // TODO: on next ABI change, rename to zoomScale
-    virtual double zoomLevel() const = 0;
-    inline double zoomScale() const { return zoomLevel(); }
+    virtual double zoomScale() const = 0;
 
 public: // signal
-    // TODO: on next ABI change, rename to zoomScaleChanged
-    virtual void zoomLevelChanged(double zoomScale) = 0;
+    virtual void zoomScaleChanged(double zoomScale) = 0;
 };
 
 inline Zoomable::~Zoomable() = default;

@@ -78,10 +78,10 @@ public: // AbstractView API
     bool hasFocus() const override;
 
 public: // If::Zoomable API TODO: make all such methods slots?
-    void setZoomLevel(double zoomScale) override;
-    double zoomLevel() const override;
+    void setZoomScale(double zoomScale) override;
+    double zoomScale() const override;
 Q_SIGNALS:
-    void zoomLevelChanged(double zoomScale) override;
+    void zoomScaleChanged(double zoomScale) override;
 
 public: // If::ZoomLevelsQueryable API
     int zoomInLevelsSize() const override;

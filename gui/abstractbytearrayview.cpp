@@ -55,7 +55,7 @@ bool AbstractByteArrayView::isModified() const
     return d->isModified();
 }
 
-double AbstractByteArrayView::zoomLevel() const
+double AbstractByteArrayView::zoomScale() const
 {
     Q_D(const AbstractByteArrayView);
     return d->zoomScale();
@@ -436,7 +436,7 @@ void AbstractByteArrayView::unZoom()
     Q_D(AbstractByteArrayView);
     d->unZoom();
 }
-void AbstractByteArrayView::setZoomLevel(double zoomScale)
+void AbstractByteArrayView::setZoomScale(double zoomScale)
 {
     Q_D(AbstractByteArrayView);
     d->setZoomScale(zoomScale);

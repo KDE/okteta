@@ -149,9 +149,7 @@ public: // value access
     QString charCodingName() const;
 
 public: // zooming values
-    // TODO: on next ABI change, rename to zoomScale
-    double zoomLevel() const;
-    inline double zoomScale() const { return zoomLevel(); }
+    double zoomScale() const;
     int zoomInLevelsSize() const;
     int zoomOutLevelsSize() const;
     double zoomScaleForLevel(int zoomLevel) const;
@@ -326,9 +324,7 @@ public: // zooming
     void zoomOut();
     void zoomTo(int pointSize);
     void unZoom();
-    // TODO: on next ABI change, renamve to setZoomScale
-    void setZoomLevel(double zoomScale);
-    inline void setZoomScale(double zoomScale) { setZoomLevel(zoomScale); }
+    void setZoomScale(double zoomScale);
 
 public: // cursor control
     /** we have focus again, start the timer */
@@ -394,8 +390,7 @@ Q_SIGNALS:
     void undefinedCharChanged(QChar undefinedChar);
     void noOfGroupedBytesChanged(int noOfGroupedBytes);
 
-    // TODO: on next ABI change, rename to zoomScaleChanged
-    void zoomLevelChanged(double zoomScale);
+    void zoomScaleChanged(double zoomScale);
     void zoomLevelsChanged();
 
 protected:

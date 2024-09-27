@@ -103,7 +103,7 @@ void ByteArrayJanusView::setViewModus(int viewModus)
     connect(mView, &AbstractByteArrayView::substituteCharChanged, this, &ByteArrayJanusView::substituteCharChanged);
     connect(mView, &AbstractByteArrayView::undefinedCharChanged, this, &ByteArrayJanusView::undefinedCharChanged);
     connect(mView, &AbstractByteArrayView::noOfGroupedBytesChanged, this, &ByteArrayJanusView::noOfGroupedBytesChanged);
-    connect(mView, &AbstractByteArrayView::zoomLevelChanged, this, &ByteArrayJanusView::zoomScaleChanged);
+    connect(mView, &AbstractByteArrayView::zoomScaleChanged, this, &ByteArrayJanusView::zoomScaleChanged);
     connect(mView, &AbstractByteArrayView::zoomLevelsChanged, this, &ByteArrayJanusView::zoomLevelsChanged);
 
     Q_EMIT viewModusChanged(mViewModus);
