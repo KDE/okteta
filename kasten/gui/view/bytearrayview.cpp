@@ -23,7 +23,8 @@
 namespace Kasten {
 
 // TODO: merge into ByteArrayView on next ABI break
-class SelectedDataCutExtension : public QObject, public If::SelectedDataCutable
+class ByteArrayViewExtensions : public QObject
+                              , public If::SelectedDataCutable
 {
     Q_OBJECT
     Q_INTERFACES(
@@ -31,7 +32,7 @@ class SelectedDataCutExtension : public QObject, public If::SelectedDataCutable
     )
 
 public:
-    explicit SelectedDataCutExtension(ByteArrayView* view);
+    explicit ByteArrayViewExtensions(ByteArrayView* view);
 
 public: // If::SelectedDataCutable API
     bool canCutSelectedData() const override;
@@ -42,18 +43,18 @@ private Q_SLOTS:
     void onOverwriteModeChanged(bool overwriteMode);
 };
 
-SelectedDataCutExtension::SelectedDataCutExtension(ByteArrayView* view)
+ByteArrayViewExtensions::ByteArrayViewExtensions(ByteArrayView* view)
     : QObject(view)
 {
-    connect(view, &ByteArrayView::overwriteModeChanged, this, &SelectedDataCutExtension::onOverwriteModeChanged);
+    connect(view, &ByteArrayView::overwriteModeChanged, this, &ByteArrayViewExtensions::onOverwriteModeChanged);
 }
 
-bool SelectedDataCutExtension::canCutSelectedData() const
+bool ByteArrayViewExtensions::canCutSelectedData() const
 {
     return !static_cast<ByteArrayView*>(parent())->isOverwriteMode();
 }
 
-void SelectedDataCutExtension::onOverwriteModeChanged(bool overwriteMode)
+void ByteArrayViewExtensions::onOverwriteModeChanged(bool overwriteMode)
 {
     emit canCutSelectedDataChanged(!overwriteMode);
 }
@@ -174,7 +175,7 @@ void ByteArrayView::init()
 
     connect(mWidget, &ByteArrayJanusView::viewContextMenuRequested, this, &ByteArrayView::viewContextMenuRequested);
 
-    new SelectedDataCutExtension(this);
+    new ByteArrayViewExtensions(this);
 }
 
 ByteArrayViewProfileSynchronizer* ByteArrayView::synchronizer() const { return mByteArrayViewProfileSynchronizer; }
@@ -451,6 +452,6 @@ void ByteArrayView::setFontByGlobalSettings()
 
 }
 
-// needed for SelectedDataCutExtension
+// needed for ByteArrayViewExtensions
 #include "bytearrayview.moc"
 #include "moc_bytearrayview.cpp"
