@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-30 01:55+0000\n"
+"POT-Creation-Date: 2024-09-28 01:50+0000\n"
 "PO-Revision-Date: 2008-01-06 21:51+0200\n"
 "Last-Translator: Darafei Praliaskouski <komzpa@gmail.com>\n"
 "Language-Team: Belarusian (Official spelling) <i18n@mova.org>\n"
@@ -350,33 +350,33 @@ msgctxt "@action Redo: [change]"
 msgid "Redo: %1"
 msgstr ""
 
-#: controllers/view/zoom/zoomcontroller.cpp:36
+#: controllers/view/zoom/zoomcontroller.cpp:42
 #, kde-format
 msgid "Zoom"
 msgstr ""
 
-#: controllers/view/zoom/zoomcontroller.cpp:45
+#: controllers/view/zoom/zoomcontroller.cpp:51
 #, kde-format
 msgctxt "zoom-factor (percentage)"
 msgid "%1%"
 msgstr ""
 
-#: controllers/view/zoom/zoomcontroller.cpp:58
+#: controllers/view/zoom/zoomcontroller.cpp:64
 #, kde-format
 msgid "&Fit to Width"
 msgstr ""
 
-#: controllers/view/zoom/zoomcontroller.cpp:60
+#: controllers/view/zoom/zoomcontroller.cpp:66
 #, kde-format
 msgid "&Fit to Height"
 msgstr ""
 
-#: controllers/view/zoom/zoomcontroller.cpp:62
+#: controllers/view/zoom/zoomcontroller.cpp:68
 #, kde-format
 msgid "&Fit to Size"
 msgstr ""
 
-#: controllers/view/zoom/zoomslider.cpp:107
+#: controllers/view/zoom/zoomslider.cpp:131
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Zoom: %1%"
