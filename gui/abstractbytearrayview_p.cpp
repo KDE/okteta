@@ -221,7 +221,7 @@ void AbstractByteArrayViewPrivate::init()
     setWheelController(mZoomWheelController);
 
     QObject::connect(QGuiApplication::styleHints(), &QStyleHints::cursorFlashTimeChanged,
-                     q, [&](int flashTime) { onCursorFlashTimeChanged(flashTime); });
+                     q, [this](int flashTime) { onCursorFlashTimeChanged(flashTime); });
 
     q->setAcceptDrops(true);
 
@@ -266,9 +266,9 @@ void AbstractByteArrayViewPrivate::setByteArrayModel(AbstractByteArrayModel* byt
     }
 
     QObject::connect(mByteArrayModel, &AbstractByteArrayModel::readOnlyChanged,
-                     q, [&](bool isReadOnly) { onByteArrayReadOnlyChange(isReadOnly); });
+                     q, [this](bool isReadOnly) { onByteArrayReadOnlyChange(isReadOnly); });
     QObject::connect(mByteArrayModel, &AbstractByteArrayModel::contentsChanged,
-                     q, [&](const Okteta::ArrayChangeMetricsList& changeList) { onContentsChanged(changeList); });
+                     q, [this](const Okteta::ArrayChangeMetricsList& changeList) { onContentsChanged(changeList); });
 
     Bookmarkable* bookmarks = qobject_cast<Bookmarkable*>(mByteArrayModel);
     if (bookmarks) {

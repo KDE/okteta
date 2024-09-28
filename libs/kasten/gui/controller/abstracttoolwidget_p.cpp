@@ -21,7 +21,7 @@ AbstractToolWidgetPrivate::AbstractToolWidgetPrivate(AbstractToolWidget* parent)
     mReturnShortcut = new QShortcut(Qt::Key_Return, p);   // TODO: what about Enter?
     mReturnShortcut->setContext(Qt::WidgetWithChildrenShortcut);
     QObject::connect(mReturnShortcut, &QShortcut::activated,
-                     p, [&]() { onReturnPressed(); });
+                     p, [this]() { onReturnPressed(); });
 }
 
 void AbstractToolWidgetPrivate::addButton(QPushButton* button, AbstractToolWidget::DefaultType defaultType)

@@ -39,7 +39,7 @@ ShellWindowPrivate::ShellWindowPrivate(ShellWindow* parent,
                      mGroupedViews, &AbstractGroupedViews::removeViews);
 
     QObject::connect(mGroupedViews, &AbstractGroupedViews::viewFocusChanged,
-                     parent, [&](Kasten::AbstractView* view) { onViewFocusChanged(view); });
+                     parent, [this](Kasten::AbstractView* view) { onViewFocusChanged(view); });
 }
 
 ShellWindowPrivate::~ShellWindowPrivate()
@@ -80,7 +80,7 @@ void ShellWindowPrivate::addTool(AbstractToolView* toolView)
     }
 
     QObject::connect(dockWidget, &QDockWidget::visibilityChanged,
-                     q, [&](bool visible) { onToolVisibilityChanged(visible); });
+                     q, [this](bool visible) { onToolVisibilityChanged(visible); });
 }
 
 void ShellWindowPrivate::showDocument(AbstractDocument* document)
@@ -187,20 +187,20 @@ void ShellWindowPrivate::onViewFocusChanged(AbstractView* view)
 
     if (view) {
         QObject::connect(view, &AbstractModel::titleChanged,
-                         q, [&](const QString& Title) { onTitleChanged(Title); });
+                         q, [this](const QString& Title) { onTitleChanged(Title); });
     }
 
     if (mCurrentSynchronizer) {
         if (isNewSynchronizer) {
             QObject::connect(mCurrentSynchronizer, &AbstractModelSynchronizer::localSyncStateChanged,
-                             q, [&](LocalSyncState localSyncState) { onLocalSyncStateChanged(localSyncState); });
+                             q, [this](LocalSyncState localSyncState) { onLocalSyncStateChanged(localSyncState); });
             QObject::connect(mCurrentSynchronizer, &QObject::destroyed,
-                             q, [&](QObject* object) { onSynchronizerDeleted(object); });
+                             q, [this](QObject* object) { onSynchronizerDeleted(object); });
         }
     } else if (mCurrentDocument) {
         if (isNewDocument) {
             QObject::connect(mCurrentDocument, &AbstractDocument::contentFlagsChanged,
-                             q, [&](ContentFlags contentFlags) { onContentFlagsChanged(contentFlags); });
+                             q, [this](ContentFlags contentFlags) { onContentFlagsChanged(contentFlags); });
         }
     }
 }
@@ -228,7 +228,7 @@ void ShellWindowPrivate::onSynchronizerDeleted(QObject* synchronizer)
 
     // switch to document state
     QObject::connect(mCurrentDocument, &AbstractDocument::contentFlagsChanged,
-                     q, [&](ContentFlags contentFlags) { onContentFlagsChanged(contentFlags); });
+                     q, [this](ContentFlags contentFlags) { onContentFlagsChanged(contentFlags); });
 
     onContentFlagsChanged(mCurrentDocument->contentFlags());
 }
