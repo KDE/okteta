@@ -13,6 +13,7 @@
 #include "browserextension.hpp"
 // Okteta Kasten controllers
 // #include <Kasten/Okteta/OverwriteOnlyControllerFactory>
+#include <Kasten/Okteta/CropControllerFactory>
 #include <Kasten/Okteta/OverwriteModeControllerFactory>
 #include <Kasten/Okteta/GotoOffsetControllerFactory>
 #include <Kasten/Okteta/SelectRangeControllerFactory>
@@ -107,6 +108,9 @@ OktetaPart::OktetaPart(QObject* parent,
         addController(Kasten::InsertControllerFactory(modelCodecViewManager, modelCodecManager));
     }
     addController(Kasten::CopyAsControllerFactory(modelCodecViewManager, modelCodecManager));
+    if (modus == Modus::ReadWrite) {
+        addController(Kasten::CropControllerFactory());
+    }
     if (modus == Modus::ReadWrite) {
         addController(Kasten::OverwriteModeControllerFactory());
     }

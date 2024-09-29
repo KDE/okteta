@@ -1,5 +1,5 @@
 <!DOCTYPE gui SYSTEM "kpartgui.dtd">
-<gui name="oktetapartreadwrite" version="3" translationDomain="oktetapart">
+<gui name="oktetapartreadwrite" version="4" translationDomain="oktetapart">
 
 <MenuBar>
   <Menu name="file"><text>&amp;File</text>
@@ -22,6 +22,8 @@
     <Action name="edit_paste" group="edit_paste_merge" />
     <Action name="copy_as" group="edit_paste_merge" />
     <Action name="insert" group="edit_paste_merge" />
+    <Separator group="edit_paste_merge" />
+    <Action name="edit_crop" group="edit_paste_merge" />
     <Separator group="edit_paste_merge" />
     <Action name="edit_select_all" group="edit_select_merge" />
     <Action name="edit_deselect" group="edit_select_merge" />

@@ -326,6 +326,13 @@ oktetakastencontrollers_add_sublibrary(view/bytetable
         bytetableviewsettings.kcfgc
 )
 
+oktetakastencontrollers_add_sublibrary(view/crop
+    PUBLIC
+        CropControllerFactory
+    PRIVATE
+        CropController
+)
+
 oktetakastencontrollers_add_sublibrary(view/search
     PUBLIC
         SearchControllerFactory

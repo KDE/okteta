@@ -47,6 +47,7 @@
 #endif
 // controllers
 // #include <Kasten/Okteta/OverwriteOnlyControllerFactory>
+#include <Kasten/Okteta/CropControllerFactory>
 #include <Kasten/Okteta/OverwriteModeControllerFactory>
 #include <Kasten/Okteta/GotoOffsetControllerFactory>
 #include <Kasten/Okteta/SelectRangeControllerFactory>
@@ -207,6 +208,7 @@ void OktetaMainWindow::setupControllers()
 
     // Okteta specific
 //     addXmlGuiControllerFromFactory(OverwriteOnlyControllerFactory() );
+    addXmlGuiControllerFromFactory(CropControllerFactory());
     addXmlGuiControllerFromFactory(OverwriteModeControllerFactory());
     addXmlGuiControllerFromFactory(SearchControllerFactory(this));
     addXmlGuiControllerFromFactory(ReplaceControllerFactory(this));
