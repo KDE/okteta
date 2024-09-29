@@ -82,7 +82,7 @@ void ByteArrayRawFileSynchronizerFactoryTest::testLoadFromUrl()
     Kasten::ByteArrayRawFileSynchronizerFactory* factory = new Kasten::ByteArrayRawFileSynchronizerFactory();
     AbstractDocument* document = factory->loadNewDocument(fileUrl);
 
-    ByteArrayDocument* byteArrayDocument = qobject_cast<ByteArrayDocument*>(document);
+    auto* byteArrayDocument = qobject_cast<ByteArrayDocument*>(document);
 
     QVERIFY(document != 0);
     QVERIFY(byteArrayDocument != 0);

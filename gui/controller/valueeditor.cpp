@@ -42,8 +42,7 @@ void ValueEditor::startEdit(const QString& description)
     Q_ASSERT(!mInEditMode);
 
     Okteta::AbstractByteArrayModel* byteArrayModel = mView->byteArrayModel();
-    Okteta::ChangesDescribable* changesDescribable =
-        qobject_cast<Okteta::ChangesDescribable*>(byteArrayModel);
+    auto* changesDescribable = qobject_cast<Okteta::ChangesDescribable*>(byteArrayModel);
 
     if (changesDescribable) {
         changesDescribable->openGroupedChange(description);
@@ -63,8 +62,7 @@ void ValueEditor::cancelEdit(bool undoChanges)
 
     if (undoChanges) {
         Okteta::AbstractByteArrayModel* byteArrayModel = mView->byteArrayModel();
-        Okteta::ChangesDescribable* changesDescribable =
-            qobject_cast<Okteta::ChangesDescribable*>(byteArrayModel);
+        auto* changesDescribable = qobject_cast<Okteta::ChangesDescribable*>(byteArrayModel);
 
         // TODO: if !changesDescribable the changes need to be undone, too
         if (changesDescribable) {
@@ -82,8 +80,7 @@ void ValueEditor::finishEdit()
     mInEditMode = false;
 
     Okteta::AbstractByteArrayModel* byteArrayModel = mView->byteArrayModel();
-    Okteta::ChangesDescribable* changesDescribable =
-        qobject_cast<Okteta::ChangesDescribable*>(byteArrayModel);
+    auto* changesDescribable = qobject_cast<Okteta::ChangesDescribable*>(byteArrayModel);
 
     if (changesDescribable) {
         changesDescribable->closeGroupedChange();

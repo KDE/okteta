@@ -81,8 +81,7 @@ void ByteTableTool::insert(unsigned char byte, int count)
 {
     const QByteArray data(count, byte);
 
-    Okteta::ChangesDescribable* changesDescribable =
-        qobject_cast<Okteta::ChangesDescribable*>(mByteArrayModel);
+    auto* changesDescribable = qobject_cast<Okteta::ChangesDescribable*>(mByteArrayModel);
 
     if (changesDescribable) {
         // TODO: how to note the byte? charcoding might change...

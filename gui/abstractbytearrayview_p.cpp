@@ -270,14 +270,14 @@ void AbstractByteArrayViewPrivate::setByteArrayModel(AbstractByteArrayModel* byt
     QObject::connect(mByteArrayModel, &AbstractByteArrayModel::contentsChanged,
                      q, [this](const Okteta::ArrayChangeMetricsList& changeList) { onContentsChanged(changeList); });
 
-    Bookmarkable* bookmarks = qobject_cast<Bookmarkable*>(mByteArrayModel);
+    auto* bookmarks = qobject_cast<Bookmarkable*>(mByteArrayModel);
     if (bookmarks) {
         QObject::connect(mByteArrayModel, SIGNAL(bookmarksAdded(QVector<Okteta::Bookmark>)),
                          q, SLOT(onBookmarksChange(QVector<Okteta::Bookmark>)));
         QObject::connect(mByteArrayModel, SIGNAL(bookmarksRemoved(QVector<Okteta::Bookmark>)),
                          q, SLOT(onBookmarksChange(QVector<Okteta::Bookmark>)));
     }
-    Versionable* versionControl = qobject_cast<Versionable*>(mByteArrayModel);
+    auto* versionControl = qobject_cast<Versionable*>(mByteArrayModel);
     if (versionControl) {
         QObject::connect(mByteArrayModel, SIGNAL(revertedToVersionIndex(int)),
                          q, SLOT(onRevertedToVersionIndex(int)));
@@ -1218,7 +1218,7 @@ bool AbstractByteArrayViewPrivate::viewportEvent(QEvent* event)
 
         QString toolTip;
 
-        Bookmarkable* bookmarks = qobject_cast<Bookmarkable*>(mByteArrayModel);
+        auto* bookmarks = qobject_cast<Bookmarkable*>(mByteArrayModel);
         if (bookmarks) {
             const Address index = indexByPoint(q->viewportToColumns(helpEvent->pos()));
             if (index != -1) {

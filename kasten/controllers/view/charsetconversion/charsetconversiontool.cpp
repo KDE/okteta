@@ -300,8 +300,7 @@ void CharsetConversionTool::convertChars()
     const bool success = charsetConversionJob->exec();
 
     if (success) { // TODO: if nothing needed to be converted, just report and don't add change
-        Okteta::ChangesDescribable* changesDescribable =
-            qobject_cast<Okteta::ChangesDescribable*>(mByteArrayModel);
+        auto* changesDescribable = qobject_cast<Okteta::ChangesDescribable*>(mByteArrayModel);
 
         if (changesDescribable) {
             const QString description =

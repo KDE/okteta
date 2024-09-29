@@ -210,7 +210,7 @@ void MultiViewAreasPrivate::onContextMenuRequested(AbstractView* view, QPoint po
 void MultiViewAreasPrivate::onModifiedChanged(AbstractDocument::SyncStates newStates)
 {
     Q_UNUSED(newStates)
-    AbstractView * view = qobject_cast<AbstractView*>(sender());
+    auto* view = qobject_cast<AbstractView*>(sender());
     if (view) {
         const int index = indexOf(view);
         if (index != -1) {

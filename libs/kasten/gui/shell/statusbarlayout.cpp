@@ -124,7 +124,7 @@ void StatusBarLayout::addWidget(QWidget* widget)
 #if 0
 void StatusBarLayout::updateMarginAndSpacing()
 {
-    Statusbar* statusBar = qobject_cast<Statusbar*>(parentWidget());
+    auto* statusBar = qobject_cast<Statusbar*>(parentWidget());
     if (!statusBar) {
         return;
     }

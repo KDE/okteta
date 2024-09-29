@@ -220,7 +220,7 @@ void TabbedViewsPrivate::onTitleChanged(const QString& newTitle)
 void TabbedViewsPrivate::onModifiedChanged(AbstractDocument::SyncStates newStates)
 {
     Q_UNUSED(newStates)
-    AbstractView * view = qobject_cast<AbstractView*>(sender());
+    auto* view = qobject_cast<AbstractView*>(sender());
     if (view) {
         const int index = indexOf(view);
         if (index != -1) {
@@ -239,7 +239,7 @@ void TabbedViewsPrivate::onViewFocusChanged(bool hasFocus)
 {
     Q_Q(TabbedViews);
 
-//     AbstractView* view = qobject_cast<AbstractView *>( q->sender() );
+//     auto* view = qobject_cast<AbstractView*>( q->sender() );
 // qCDebug(LOG_KASTEN_GUI)<<view<<view->title()<<hasFocus;
 
     emit q->focusChanged(hasFocus);
