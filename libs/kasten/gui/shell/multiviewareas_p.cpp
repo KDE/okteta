@@ -39,16 +39,16 @@ TabbedViews* MultiViewAreasPrivate::createViewArea(QSplitter* splitter)
     auto* viewArea = mViewAreaList.back().get();
 
     QObject::connect(viewArea, &AbstractViewArea::focusChanged,
-                     q, [&](bool hasFocus) { onViewAreaFocusChanged(hasFocus); });
+                     q, [this](bool hasFocus) { onViewAreaFocusChanged(hasFocus); });
     QObject::connect(viewArea, &AbstractGroupedViews::viewFocusChanged,
                      q, &AbstractGroupedViews::viewFocusChanged);
     QObject::connect(viewArea, &AbstractGroupedViews::closeRequest,
                      q, &AbstractGroupedViews::closeRequest);
     QObject::connect(viewArea, &AbstractGroupedViews::removing,
-                     q, [&]() { onViewsRemoved(); });
+                     q, [this]() { onViewsRemoved(); });
 
     QObject::connect(viewArea, &TabbedViews::contextMenuRequested,
-                     q, [&](AbstractView* view, QPoint pos) { onContextMenuRequested(view, pos); });
+                     q, [this](AbstractView* view, QPoint pos) { onContextMenuRequested(view, pos); });
     QObject::connect(viewArea, &TabbedViews::dataOffered,
                      q, &MultiViewAreas::dataOffered);
     QObject::connect(viewArea, &TabbedViews::dataDropped,
@@ -216,7 +216,7 @@ void MultiViewAreasPrivate::onContextMenuRequested(AbstractView* view, QPoint po
 void MultiViewAreasPrivate::onModifiedChanged(AbstractDocument::SyncStates newStates)
 {
     Q_UNUSED(newStates)
-    AbstractView * view = qobject_cast<AbstractView*>(sender());
+    auto* view = qobject_cast<AbstractView*>(sender());
     if (view) {
         const int index = indexOf(view);
         if (index != -1) {

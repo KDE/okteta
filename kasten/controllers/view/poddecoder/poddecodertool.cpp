@@ -289,8 +289,7 @@ void PODDecoderTool::setData(const QVariant& data, int podId)
         }
     }
 
-    Okteta::ChangesDescribable* changesDescribable =
-        qobject_cast<Okteta::ChangesDescribable*>(mByteArrayModel);
+    auto* changesDescribable = qobject_cast<Okteta::ChangesDescribable*>(mByteArrayModel);
 
     if (changesDescribable) {
         changesDescribable->openGroupedChange(i18nc("Edited as %datatype", "Edited as %1", typeCodec->name()));

@@ -149,8 +149,7 @@ void FilterTool::filter() const
     QApplication::restoreOverrideCursor();
 
     if (success) {
-        Okteta::ChangesDescribable* changesDescribable =
-            qobject_cast<Okteta::ChangesDescribable*>(mByteArrayModel);
+        auto* changesDescribable = qobject_cast<Okteta::ChangesDescribable*>(mByteArrayModel);
 
         if (changesDescribable) {
             changesDescribable->openGroupedChange(byteArrayFilter->name());

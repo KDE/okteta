@@ -41,21 +41,21 @@ void TabbedViewsPrivate::init()
     mViewAreaBox = std::make_unique<ViewAreaBox>(mTabWidget.get());
 
     QObject::connect(mTabWidget.get(), &QTabWidget::tabCloseRequested,
-                     q, [&](int index) { onTabCloseRequest(index); });
+                     q, [this](int index) { onTabCloseRequest(index); });
     QObject::connect(mTabWidget.get(), &QTabWidget::currentChanged,
-                     q, [&](int index) { onCurrentChanged(index); });
+                     q, [this](int index) { onCurrentChanged(index); });
 
     QObject::connect(mTabWidget.get(), &QWidget::customContextMenuRequested,
-                     q, [&](const QPoint& pos) { onContextMenuRequested(pos); });
+                     q, [this](const QPoint& pos) { onContextMenuRequested(pos); });
 
     QObject::connect(mTabWidget.get(), &TabWidget::testCanDecode,
-                     q, [&](const QDragMoveEvent* event, bool& accept) { onDragMoveEvent(event, accept); });
+                     q, [this](const QDragMoveEvent* event, bool& accept) { onDragMoveEvent(event, accept); });
     QObject::connect(mTabWidget.get(), &TabWidget::receivedDropEvent,
-                     q, [&](QDropEvent* event) { onDropEvent(event); });
+                     q, [this](QDropEvent* event) { onDropEvent(event); });
     QObject::connect(mTabWidget.get(), &TabWidget::mouseMiddleClick,
-                     q, [&]() { onMouseMiddleClick(); });
+                     q, [this]() { onMouseMiddleClick(); });
     QObject::connect(mTabWidget.get(), &TabWidget::emptySpaceMouseDoubleClicked,
-                     q, [&]() { onEmptySpaceMouseDoubleClicked(); });
+                     q, [this]() { onEmptySpaceMouseDoubleClicked(); });
 }
 
 QVector<AbstractView*> TabbedViewsPrivate::viewList() const
@@ -100,7 +100,7 @@ void TabbedViewsPrivate::addViews(const QVector<AbstractView*>& views)
     int insertIndex = mTabWidget->currentIndex() + 1;
     for (AbstractView* view : views) {
         QObject::connect(view, &AbstractModel::titleChanged,
-                         q, [&](const QString& title) { onTitleChanged(title); });
+                         q, [this](const QString& title) { onTitleChanged(title); });
 
         auto* viewBox = new ViewBox(view, mTabWidget.get());
         mTabWidget->insertTab(insertIndex, viewBox, view->title());
@@ -182,7 +182,7 @@ void TabbedViewsPrivate::onCurrentChanged(int index)
 
     if (view) {
         QObject::connect(view, &AbstractView::focusChanged,
-                         q, [&](bool hasFocus) { onViewFocusChanged(hasFocus); });
+                         q, [this](bool hasFocus) { onViewFocusChanged(hasFocus); });
         view->widget()->setFocus();
     }
 
@@ -218,7 +218,7 @@ void TabbedViewsPrivate::onTitleChanged(const QString& newTitle)
 void TabbedViewsPrivate::onModifiedChanged(AbstractDocument::SyncStates newStates)
 {
     Q_UNUSED(newStates)
-    AbstractView * view = qobject_cast<AbstractView*>(sender());
+    auto* view = qobject_cast<AbstractView*>(sender());
     if (view) {
         const int index = indexOf(view);
         if (index != -1) {
@@ -237,7 +237,7 @@ void TabbedViewsPrivate::onViewFocusChanged(bool hasFocus)
 {
     Q_Q(TabbedViews);
 
-//     AbstractView* view = qobject_cast<AbstractView *>( q->sender() );
+//     auto* view = qobject_cast<AbstractView*>( q->sender() );
 // qCDebug(LOG_KASTEN_GUI)<<view<<view->title()<<hasFocus;
 
     Q_EMIT q->focusChanged(hasFocus);

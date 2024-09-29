@@ -152,7 +152,7 @@ void TestDocumentFileSynchronizerFactoryTest::testLoadSaveFile()
     Kasten::TestDocumentFileSynchronizerFactory* factory = new Kasten::TestDocumentFileSynchronizerFactory();
     AbstractDocument* document = factory->loadNewDocument(fileUrl);
 
-    Kasten::TestDocument* testDocument = qobject_cast<Kasten::TestDocument*>(document);
+    auto* testDocument = qobject_cast<Kasten::TestDocument*>(document);
     QVERIFY(testDocument != 0);
     // change and save
     testDocument->setData(otherData);
@@ -174,7 +174,7 @@ void TestDocumentFileSynchronizerFactoryTest::testLoadReloadFile()
     Kasten::TestDocumentFileSynchronizerFactory* factory = new Kasten::TestDocumentFileSynchronizerFactory();
     AbstractDocument* document = factory->loadNewDocument(fileUrl);
 
-    Kasten::TestDocument* testDocument = qobject_cast<Kasten::TestDocument*>(document);
+    auto* testDocument = qobject_cast<Kasten::TestDocument*>(document);
     QVERIFY(testDocument != 0);
 
     // change on disc and reload

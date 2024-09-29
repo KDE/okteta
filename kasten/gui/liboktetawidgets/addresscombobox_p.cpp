@@ -46,7 +46,7 @@ void AddressComboBoxPrivate::init()
     mFormatComboBox = new KComboBox(q);
     mFormatComboBox->addItems(formatStrings());
     QObject::connect(mFormatComboBox, qOverload<int>(&QComboBox::activated),
-                     q, [&](int index) { onFormatChanged(index); });
+                     q, [this](int index) { onFormatChanged(index); });
 
     mValueComboBox = new KComboBox(q);
     mValueComboBox->setEditable(true);
@@ -55,7 +55,7 @@ void AddressComboBoxPrivate::init()
     mValueComboBox->setDuplicatesEnabled(false);
     q->setFocusProxy(mValueComboBox);
     QObject::connect(mValueComboBox->lineEdit(), &QLineEdit::textEdited,
-                     q, [&](const QString& text) { onValueEdited(text); });
+                     q, [this](const QString& text) { onValueEdited(text); });
     QAbstractItemView* formatComboBoxListView = mFormatComboBox->view();
     QObject::connect(formatComboBoxListView, &QAbstractItemView::activated,
                      mValueComboBox, qOverload<>(&KComboBox::setFocus));
@@ -67,7 +67,7 @@ void AddressComboBoxPrivate::init()
     mValidator->setCodec(coding);
     mValueComboBox->setValidator(mValidator);
     QObject::connect(mValueComboBox, qOverload<int>(&QComboBox::activated),
-                     q, [&](int index) { onValueActivated(index); });
+                     q, [this](int index) { onValueActivated(index); });
     baseLayout->addWidget(mFormatComboBox);
     baseLayout->addWidget(mValueComboBox, 1);
     QWidget::setTabOrder(mFormatComboBox, mValueComboBox);

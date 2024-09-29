@@ -188,7 +188,7 @@ void AbstractByteArrayViewPrivate::init()
     mWheelController = &mZoomWheelController;
 
     QObject::connect(QGuiApplication::styleHints(), &QStyleHints::cursorFlashTimeChanged,
-                     q, [&](int flashTime) { onCursorFlashTimeChanged(flashTime); });
+                     q, [this](int flashTime) { onCursorFlashTimeChanged(flashTime); });
 
     q->setAcceptDrops(true);
 
@@ -233,18 +233,18 @@ void AbstractByteArrayViewPrivate::setByteArrayModel(AbstractByteArrayModel* byt
     }
 
     QObject::connect(mByteArrayModel, &AbstractByteArrayModel::readOnlyChanged,
-                     q, [&](bool isReadOnly) { onByteArrayReadOnlyChange(isReadOnly); });
+                     q, [this](bool isReadOnly) { onByteArrayReadOnlyChange(isReadOnly); });
     QObject::connect(mByteArrayModel, &AbstractByteArrayModel::contentsChanged,
-                     q, [&](const Okteta::ArrayChangeMetricsList& changeList) { onContentsChanged(changeList); });
+                     q, [this](const Okteta::ArrayChangeMetricsList& changeList) { onContentsChanged(changeList); });
 
-    Bookmarkable* bookmarks = qobject_cast<Bookmarkable*>(mByteArrayModel);
+    auto* bookmarks = qobject_cast<Bookmarkable*>(mByteArrayModel);
     if (bookmarks) {
         QObject::connect(mByteArrayModel, SIGNAL(bookmarksAdded(QVector<Okteta::Bookmark>)),
                          q, SLOT(onBookmarksChange(QVector<Okteta::Bookmark>)));
         QObject::connect(mByteArrayModel, SIGNAL(bookmarksRemoved(QVector<Okteta::Bookmark>)),
                          q, SLOT(onBookmarksChange(QVector<Okteta::Bookmark>)));
     }
-    Versionable* versionControl = qobject_cast<Versionable*>(mByteArrayModel);
+    auto* versionControl = qobject_cast<Versionable*>(mByteArrayModel);
     if (versionControl) {
         QObject::connect(mByteArrayModel, SIGNAL(revertedToVersionIndex(int)),
                          q, SLOT(onRevertedToVersionIndex(int)));
@@ -1171,7 +1171,7 @@ bool AbstractByteArrayViewPrivate::viewportEvent(QEvent* event)
 
         QString toolTip;
 
-        Bookmarkable* bookmarks = qobject_cast<Bookmarkable*>(mByteArrayModel);
+        auto* bookmarks = qobject_cast<Bookmarkable*>(mByteArrayModel);
         if (bookmarks) {
             const Address index = indexByPoint(viewportToColumns(helpEvent->pos()));
             if (index != -1) {

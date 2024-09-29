@@ -24,13 +24,13 @@ void AbstractModelFileSystemSynchronizerPrivate::startFileWatching()
     if (!mDirWatch) {
         mDirWatch = new KDirWatch(q);
         QObject::connect(mDirWatch, &KDirWatch::dirty,
-                         q, [&](const QString& path) { onFileDirty(path); });
+                         q, [this](const QString& path) { onFileDirty(path); });
 
         QObject::connect(mDirWatch, &KDirWatch::created,
-                         q, [&](const QString& path) { onFileCreated(path); });
+                         q, [this](const QString& path) { onFileCreated(path); });
 
         QObject::connect(mDirWatch, &KDirWatch::deleted,
-                         q, [&](const QString& path) { onFileDeleted(path); });
+                         q, [this](const QString& path) { onFileDeleted(path); });
     }
 
     mDirWatch->addFile(mUrl.toLocalFile());
@@ -73,7 +73,7 @@ void AbstractModelFileSystemSynchronizerPrivate::startNetworkWatching()
     QT_WARNING_DISABLE_GCC("-Wdeprecated-declarations")
     mNetworkConfigurationManager = std::make_unique<QNetworkConfigurationManager>();
     QObject::connect(mNetworkConfigurationManager.get(), &QNetworkConfigurationManager::onlineStateChanged,
-                     q, [&](bool online) { onOnlineStateChanged(online); });
+                     q, [this](bool online) { onOnlineStateChanged(online); });
     QT_WARNING_POP
 }
 void AbstractModelFileSystemSynchronizerPrivate::stopNetworkWatching()
