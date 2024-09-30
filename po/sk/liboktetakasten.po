@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-16 02:10+0000\n"
+"POT-Creation-Date: 2024-09-30 01:51+0000\n"
 "PO-Revision-Date: 2023-12-06 19:12+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -283,7 +283,7 @@ msgctxt "@title:window"
 msgid "Value/Char Table"
 msgstr "Tabuľka hodnoty/znaku"
 
-#: controllers/view/bytetable/bytetabletool.cpp:90
+#: controllers/view/bytetable/bytetabletool.cpp:89
 #, kde-format
 msgid "Inserted 1 Byte"
 msgid_plural "Inserted %1 Bytes"
@@ -319,7 +319,7 @@ msgctxt "@title:window of the tool to convert between charsets"
 msgid "Charset Conversion"
 msgstr "Konverzia znakovej sady"
 
-#: controllers/view/charsetconversion/charsetconversiontool.cpp:295
+#: controllers/view/charsetconversion/charsetconversiontool.cpp:294
 #, kde-format
 msgctxt "Converted from charset 1 to charset 2"
 msgid "%1 to %2"
@@ -533,6 +533,18 @@ msgstr ""
 "Ak stlačíte tlačidlo <interface>Vypočítať</interface>, zoznam sa aktualizuje "
 "na všetky reťazce, ktoré obsahuje vybraný rozsah a má nastavenú minimálnu "
 "dĺžku."
+
+#: controllers/view/crop/cropcontroller.cpp:33
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Crop"
+msgstr ""
+
+#: controllers/view/crop/cropcontroller.cpp:91
+#, kde-format
+msgctxt "name of the change"
+msgid "Crop"
+msgstr ""
 
 #: controllers/view/filter/filtertool.cpp:59
 #: controllers/view/filter/filtertoolviewfactory.cpp:24
@@ -1287,7 +1299,7 @@ msgctxt "@title:window"
 msgid "Decoding Table"
 msgstr "Dekódovacia tabuľka"
 
-#: controllers/view/poddecoder/poddecodertool.cpp:296
+#: controllers/view/poddecoder/poddecodertool.cpp:295
 #, kde-format
 msgctxt "Edited as %datatype"
 msgid "Edited as %1"
@@ -3170,7 +3182,7 @@ msgctxt "name of the generated data"
 msgid "Pattern…"
 msgstr "Šablóna"
 
-#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:149
+#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:148
 #, kde-format
 msgid "Pattern inserted."
 msgstr "Šablóna vložená."
@@ -3215,7 +3227,7 @@ msgctxt "name of the generated data"
 msgid "Random Data…"
 msgstr "Náhodné dáta"
 
-#: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:91
+#: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:90
 #, kde-format
 msgid "RandomData inserted."
 msgstr "Vložené náhodné dáta."
@@ -3244,7 +3256,7 @@ msgctxt "name of the generated data"
 msgid "Sequence"
 msgstr "Sekvencia"
 
-#: gui/io/generator/sequence/bytearraysequencegenerator.cpp:60
+#: gui/io/generator/sequence/bytearraysequencegenerator.cpp:59
 #, kde-format
 msgid "Sequence inserted."
 msgstr "Vložená sekvencia"

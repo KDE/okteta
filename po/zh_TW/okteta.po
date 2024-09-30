@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-22 01:56+0000\n"
+"POT-Creation-Date: 2024-09-30 01:51+0000\n"
 "PO-Revision-Date: 2024-02-05 18:25+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -82,13 +82,13 @@ msgid "Permissions"
 msgstr "權限"
 
 #. i18n: ectx: Menu (windows)
-#: oktetaui.rc:65
+#: oktetaui.rc:67
 #, kde-format
 msgid "&Windows"
 msgstr "視窗(&W)"
 
 #. i18n: ectx: ToolBar (mainToolBar)
-#: oktetaui.rc:78
+#: oktetaui.rc:80
 #, kde-format
 msgid "Main Toolbar"
 msgstr "主工具列"

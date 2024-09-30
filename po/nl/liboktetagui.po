@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-20 02:03+0000\n"
+"POT-Creation-Date: 2024-09-30 01:51+0000\n"
 "PO-Revision-Date: 2019-02-23 22:57+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
@@ -53,13 +53,13 @@ msgctxt "@action:inmenu"
 msgid "Re&do"
 msgstr "Opnie&uw"
 
-#: controller/valueeditor.cpp:161
+#: controller/valueeditor.cpp:158
 #, kde-format
 msgctxt "name of the change"
 msgid "Insert"
 msgstr "Invoegen"
 
-#: controller/valueeditor.cpp:203
+#: controller/valueeditor.cpp:200
 #, kde-format
 msgctxt "name of the change"
 msgid "Replace"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: playground-utils/okteta.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-16 02:10+0000\n"
+"POT-Creation-Date: 2024-09-30 01:51+0000\n"
 "PO-Revision-Date: 2007-11-05 08:28-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -287,7 +287,7 @@ msgctxt "@title:window"
 msgid "Value/Char Table"
 msgstr ""
 
-#: controllers/view/bytetable/bytetabletool.cpp:90
+#: controllers/view/bytetable/bytetabletool.cpp:89
 #, kde-format
 msgid "Inserted 1 Byte"
 msgid_plural "Inserted %1 Bytes"
@@ -326,7 +326,7 @@ msgctxt "@title:window of the tool to convert between charsets"
 msgid "Charset Conversion"
 msgstr ""
 
-#: controllers/view/charsetconversion/charsetconversiontool.cpp:295
+#: controllers/view/charsetconversion/charsetconversiontool.cpp:294
 #, kde-format
 msgctxt "Converted from charset 1 to charset 2"
 msgid "%1 to %2"
@@ -545,6 +545,18 @@ msgstr ""
 "Má bhrúnn tú an cnaipe <interface>Nuashonraigh</interface>, nuashonrófar an "
 "liosta sa chaoi go mbeidh gach teaghrán sa raon roghnaithe atá níos faide ná "
 "an fad íosta ann."
+
+#: controllers/view/crop/cropcontroller.cpp:33
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Crop"
+msgstr ""
+
+#: controllers/view/crop/cropcontroller.cpp:91
+#, kde-format
+msgctxt "name of the change"
+msgid "Crop"
+msgstr ""
 
 #: controllers/view/filter/filtertool.cpp:59
 #: controllers/view/filter/filtertoolviewfactory.cpp:24
@@ -1323,7 +1335,7 @@ msgctxt "@title:window"
 msgid "Decoding Table"
 msgstr "Tábla Díchódaithe"
 
-#: controllers/view/poddecoder/poddecodertool.cpp:296
+#: controllers/view/poddecoder/poddecodertool.cpp:295
 #, kde-format
 msgctxt "Edited as %datatype"
 msgid "Edited as %1"
@@ -3261,7 +3273,7 @@ msgctxt "name of the generated data"
 msgid "Pattern…"
 msgstr "Patrún"
 
-#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:149
+#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:148
 #, kde-format
 msgid "Pattern inserted."
 msgstr "Ionsádh patrún."
@@ -3305,7 +3317,7 @@ msgctxt "name of the generated data"
 msgid "Random Data…"
 msgstr "Sonraí Randamacha"
 
-#: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:91
+#: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:90
 #, kde-format
 msgid "RandomData inserted."
 msgstr "Ionsádh sonraí randamacha."
@@ -3338,7 +3350,7 @@ msgctxt "name of the generated data"
 msgid "Sequence"
 msgstr "Seicheamh"
 
-#: gui/io/generator/sequence/bytearraysequencegenerator.cpp:60
+#: gui/io/generator/sequence/bytearraysequencegenerator.cpp:59
 #, kde-format
 msgid "Sequence inserted."
 msgstr "Ionsádh seicheamh."

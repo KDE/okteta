@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-22 01:56+0000\n"
+"POT-Creation-Date: 2024-09-30 01:51+0000\n"
 "PO-Revision-Date: 2021-06-30 10:00+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -81,13 +81,13 @@ msgid "Permissions"
 msgstr "Δικαιώματα"
 
 #. i18n: ectx: Menu (windows)
-#: oktetaui.rc:65
+#: oktetaui.rc:67
 #, kde-format
 msgid "&Windows"
 msgstr "&Παράθυρα"
 
 #. i18n: ectx: ToolBar (mainToolBar)
-#: oktetaui.rc:78
+#: oktetaui.rc:80
 #, kde-format
 msgid "Main Toolbar"
 msgstr "Κύρια γραμμή εργαλείων"

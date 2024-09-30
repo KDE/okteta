@@ -1,5 +1,5 @@
 # translation of oktetapart.po to
-# Version: $Revision: 1681059 $
+# Version: $Revision: 1691747 $
 # Major part translated by Piotr Roszatycki <dexter@fnet.pl>
 # Minor latest updates by Jacek Stolarczyk <jacek@mer.chemia.polsl.gliwice.pl>
 # Michal Rudolf <mrudolf@kdewebdev.org>, 2003.
@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: oktetapart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:41+0000\n"
+"POT-Creation-Date: 2024-09-30 01:51+0000\n"
 "PO-Revision-Date: 2021-02-28 09:02+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -38,14 +38,14 @@ msgstr "&Edycja"
 
 #. i18n: ectx: Menu (view)
 #: oktetapartbrowserui.rc:21 oktetapartreadonlyui.rc:26
-#: oktetapartreadwriteui.rc:39
+#: oktetapartreadwriteui.rc:41
 #, kde-format
 msgid "&View"
 msgstr "&Widok"
 
 #. i18n: ectx: ToolBar (mainToolBar)
 #: oktetapartbrowserui.rc:43 oktetapartreadonlyui.rc:47
-#: oktetapartreadwriteui.rc:60
+#: oktetapartreadwriteui.rc:62
 #, kde-format
 msgid "Main Toolbar"
 msgstr "Główny pasek narzędzi"

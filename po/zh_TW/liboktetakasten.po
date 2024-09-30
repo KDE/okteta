@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-16 02:10+0000\n"
+"POT-Creation-Date: 2024-09-30 01:51+0000\n"
 "PO-Revision-Date: 2024-05-06 09:52+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -285,7 +285,7 @@ msgctxt "@title:window"
 msgid "Value/Char Table"
 msgstr "數值/字元表"
 
-#: controllers/view/bytetable/bytetabletool.cpp:90
+#: controllers/view/bytetable/bytetabletool.cpp:89
 #, kde-format
 msgid "Inserted 1 Byte"
 msgid_plural "Inserted %1 Bytes"
@@ -318,7 +318,7 @@ msgctxt "@title:window of the tool to convert between charsets"
 msgid "Charset Conversion"
 msgstr "字元集轉換"
 
-#: controllers/view/charsetconversion/charsetconversiontool.cpp:295
+#: controllers/view/charsetconversion/charsetconversiontool.cpp:294
 #, kde-format
 msgctxt "Converted from charset 1 to charset 2"
 msgid "%1 to %2"
@@ -521,6 +521,18 @@ msgid ""
 msgstr ""
 "如果您按下<interface>計算</interface>按鍵，清單會被更新為目前選取的範圍內，符"
 "合設定的最小長度的字串。"
+
+#: controllers/view/crop/cropcontroller.cpp:33
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Crop"
+msgstr ""
+
+#: controllers/view/crop/cropcontroller.cpp:91
+#, kde-format
+msgctxt "name of the change"
+msgid "Crop"
+msgstr ""
 
 #: controllers/view/filter/filtertool.cpp:59
 #: controllers/view/filter/filtertoolviewfactory.cpp:24
@@ -1254,7 +1266,7 @@ msgctxt "@title:window"
 msgid "Decoding Table"
 msgstr "解碼表"
 
-#: controllers/view/poddecoder/poddecodertool.cpp:296
+#: controllers/view/poddecoder/poddecodertool.cpp:295
 #, kde-format
 msgctxt "Edited as %datatype"
 msgid "Edited as %1"
@@ -3069,7 +3081,7 @@ msgctxt "name of the generated data"
 msgid "Pattern…"
 msgstr "樣式…"
 
-#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:149
+#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:148
 #, kde-format
 msgid "Pattern inserted."
 msgstr "樣式已插入。"
@@ -3111,7 +3123,7 @@ msgctxt "name of the generated data"
 msgid "Random Data…"
 msgstr "隨機資料…"
 
-#: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:91
+#: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:90
 #, kde-format
 msgid "RandomData inserted."
 msgstr "隨機資料已插入。"
@@ -3140,7 +3152,7 @@ msgctxt "name of the generated data"
 msgid "Sequence"
 msgstr "序列"
 
-#: gui/io/generator/sequence/bytearraysequencegenerator.cpp:60
+#: gui/io/generator/sequence/bytearraysequencegenerator.cpp:59
 #, kde-format
 msgid "Sequence inserted."
 msgstr "序列已插入。"

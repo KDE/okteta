@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-22 01:56+0000\n"
+"POT-Creation-Date: 2024-09-30 01:51+0000\n"
 "PO-Revision-Date: 2021-03-20 22:51+0100\n"
 "Last-Translator: Giovanni Sora <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -77,13 +77,13 @@ msgid "Permissions"
 msgstr "Permissiones"
 
 #. i18n: ectx: Menu (windows)
-#: oktetaui.rc:65
+#: oktetaui.rc:67
 #, kde-format
 msgid "&Windows"
 msgstr "&Fenestras"
 
 #. i18n: ectx: ToolBar (mainToolBar)
-#: oktetaui.rc:78
+#: oktetaui.rc:80
 #, kde-format
 msgid "Main Toolbar"
 msgstr "Barra de instrumento principal"

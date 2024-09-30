@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: oktetapart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:41+0000\n"
+"POT-Creation-Date: 2024-09-30 01:51+0000\n"
 "PO-Revision-Date: 2023-05-06 16:20+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -35,14 +35,14 @@ msgstr "R&edakti"
 
 #. i18n: ectx: Menu (view)
 #: oktetapartbrowserui.rc:21 oktetapartreadonlyui.rc:26
-#: oktetapartreadwriteui.rc:39
+#: oktetapartreadwriteui.rc:41
 #, kde-format
 msgid "&View"
 msgstr "R&igardi"
 
 #. i18n: ectx: ToolBar (mainToolBar)
 #: oktetapartbrowserui.rc:43 oktetapartreadonlyui.rc:47
-#: oktetapartreadwriteui.rc:60
+#: oktetapartreadwriteui.rc:62
 #, kde-format
 msgid "Main Toolbar"
 msgstr "Ĉefa ilobreto"

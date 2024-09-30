@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-22 01:56+0000\n"
+"POT-Creation-Date: 2024-09-30 01:51+0000\n"
 "PO-Revision-Date: 2011-01-30 11:13+0100\n"
 "Last-Translator: Manfred Wiese <m.j.wiese@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -81,13 +81,13 @@ msgid "Permissions"
 msgstr "Verlöven"
 
 #. i18n: ectx: Menu (windows)
-#: oktetaui.rc:65
+#: oktetaui.rc:67
 #, kde-format
 msgid "&Windows"
 msgstr "&Finstern"
 
 #. i18n: ectx: ToolBar (mainToolBar)
-#: oktetaui.rc:78
+#: oktetaui.rc:80
 #, kde-format
 msgid "Main Toolbar"
 msgstr "Hööft-Warktüüchbalken"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:41+0000\n"
+"POT-Creation-Date: 2024-09-30 01:51+0000\n"
 "PO-Revision-Date: 2024-04-23 19:31\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -33,14 +33,14 @@ msgstr "编辑(&E)"
 
 #. i18n: ectx: Menu (view)
 #: oktetapartbrowserui.rc:21 oktetapartreadonlyui.rc:26
-#: oktetapartreadwriteui.rc:39
+#: oktetapartreadwriteui.rc:41
 #, kde-format
 msgid "&View"
 msgstr "查看(&V)"
 
 #. i18n: ectx: ToolBar (mainToolBar)
 #: oktetapartbrowserui.rc:43 oktetapartreadonlyui.rc:47
-#: oktetapartreadwriteui.rc:60
+#: oktetapartreadwriteui.rc:62
 #, kde-format
 msgid "Main Toolbar"
 msgstr "主工具栏"

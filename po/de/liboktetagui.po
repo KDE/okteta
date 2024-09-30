@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetagui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-20 02:03+0000\n"
+"POT-Creation-Date: 2024-09-30 01:51+0000\n"
 "PO-Revision-Date: 2019-02-27 14:42+0100\n"
 "Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -50,13 +50,13 @@ msgctxt "@action:inmenu"
 msgid "Re&do"
 msgstr "Wie&derherstellen"
 
-#: controller/valueeditor.cpp:161
+#: controller/valueeditor.cpp:158
 #, kde-format
 msgctxt "name of the change"
 msgid "Insert"
 msgstr "Einfügen"
 
-#: controller/valueeditor.cpp:203
+#: controller/valueeditor.cpp:200
 #, kde-format
 msgctxt "name of the change"
 msgid "Replace"

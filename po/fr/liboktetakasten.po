@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-16 02:10+0000\n"
+"POT-Creation-Date: 2024-09-30 01:51+0000\n"
 "PO-Revision-Date: 2024-09-08 08:27+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -299,7 +299,7 @@ msgctxt "@title:window"
 msgid "Value/Char Table"
 msgstr "Tableau valeur / caractère"
 
-#: controllers/view/bytetable/bytetabletool.cpp:90
+#: controllers/view/bytetable/bytetabletool.cpp:89
 #, kde-format
 msgid "Inserted 1 Byte"
 msgid_plural "Inserted %1 Bytes"
@@ -337,7 +337,7 @@ msgctxt "@title:window of the tool to convert between charsets"
 msgid "Charset Conversion"
 msgstr "Conversion de jeu de caractères"
 
-#: controllers/view/charsetconversion/charsetconversiontool.cpp:295
+#: controllers/view/charsetconversion/charsetconversiontool.cpp:294
 #, kde-format
 msgctxt "Converted from charset 1 to charset 2"
 msgid "%1 to %2"
@@ -558,6 +558,18 @@ msgstr ""
 "Si vous cliquez sur le bouton <interface>Calculer</interface>, la liste sera "
 "mise à jour avec toutes les chaînes de caractères contenues dans "
 "l'intervalle sélectionné et comportant la longueur minimale définie."
+
+#: controllers/view/crop/cropcontroller.cpp:33
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Crop"
+msgstr ""
+
+#: controllers/view/crop/cropcontroller.cpp:91
+#, kde-format
+msgctxt "name of the change"
+msgid "Crop"
+msgstr ""
 
 #: controllers/view/filter/filtertool.cpp:59
 #: controllers/view/filter/filtertoolviewfactory.cpp:24
@@ -1324,7 +1336,7 @@ msgctxt "@title:window"
 msgid "Decoding Table"
 msgstr "Table de décodage"
 
-#: controllers/view/poddecoder/poddecodertool.cpp:296
+#: controllers/view/poddecoder/poddecodertool.cpp:295
 #, kde-format
 msgctxt "Edited as %datatype"
 msgid "Edited as %1"
@@ -3200,7 +3212,7 @@ msgctxt "name of the generated data"
 msgid "Pattern…"
 msgstr "Motif…"
 
-#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:149
+#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:148
 #, kde-format
 msgid "Pattern inserted."
 msgstr "Motif inséré."
@@ -3244,7 +3256,7 @@ msgctxt "name of the generated data"
 msgid "Random Data…"
 msgstr "Données aléatoires..."
 
-#: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:91
+#: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:90
 #, kde-format
 msgid "RandomData inserted."
 msgstr "Données aléatoires insérées."
@@ -3273,7 +3285,7 @@ msgctxt "name of the generated data"
 msgid "Sequence"
 msgstr "Séquence"
 
-#: gui/io/generator/sequence/bytearraysequencegenerator.cpp:60
+#: gui/io/generator/sequence/bytearraysequencegenerator.cpp:59
 #, kde-format
 msgid "Sequence inserted."
 msgstr "Séquence insérée."
