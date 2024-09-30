@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-16 03:41+0000\n"
+"POT-Creation-Date: 2024-09-30 03:19+0000\n"
 "PO-Revision-Date: 2024-03-30 19:46\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -266,7 +266,7 @@ msgctxt "@title:window"
 msgid "Value/Char Table"
 msgstr "值/字符表"
 
-#: controllers/view/bytetable/bytetabletool.cpp:90
+#: controllers/view/bytetable/bytetabletool.cpp:89
 #, kde-format
 msgid "Inserted 1 Byte"
 msgid_plural "Inserted %1 Bytes"
@@ -299,7 +299,7 @@ msgctxt "@title:window of the tool to convert between charsets"
 msgid "Charset Conversion"
 msgstr "字符集转换"
 
-#: controllers/view/charsetconversion/charsetconversiontool.cpp:309
+#: controllers/view/charsetconversion/charsetconversiontool.cpp:308
 #, kde-format
 msgctxt "Converted from charset 1 to charset 2"
 msgid "%1 to %2"
@@ -1099,7 +1099,7 @@ msgctxt "@label:textbox"
 msgid "UTF-16:"
 msgstr "UTF-16："
 
-#: controllers/view/poddecoder/poddecodertool.cpp:312
+#: controllers/view/poddecoder/poddecodertool.cpp:311
 #, kde-format
 msgctxt "Edited as %datatype"
 msgid "Edited as %1"
@@ -3009,7 +3009,7 @@ msgctxt "name of the generated data"
 msgid "Pattern..."
 msgstr "表达式..."
 
-#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:158
+#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:157
 #, kde-format
 msgid "Pattern inserted."
 msgstr "表达式已插入。"
@@ -3051,7 +3051,7 @@ msgctxt "name of the generated data"
 msgid "Random Data..."
 msgstr "随机数据..."
 
-#: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:114
+#: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:113
 #, kde-format
 msgid "RandomData inserted."
 msgstr "随机数据已插入。"
@@ -3080,7 +3080,7 @@ msgctxt "name of the generated data"
 msgid "Sequence"
 msgstr "序列"
 
-#: gui/io/generator/sequence/bytearraysequencegenerator.cpp:60
+#: gui/io/generator/sequence/bytearraysequencegenerator.cpp:59
 #, kde-format
 msgid "Sequence inserted."
 msgstr "序列已插入。"
