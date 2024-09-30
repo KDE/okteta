@@ -30,6 +30,8 @@ static const std::array<QString, primitiveDataTypeCount> primitiveDataTypeConfig
     QStringLiteral("UnsignedShort"),
     QStringLiteral("Integer"),
     QStringLiteral("UnsignedInteger"),
+    QStringLiteral("Long"),
+    QStringLiteral("UnsignedLong"),
     QStringLiteral("Float"),
     QStringLiteral("Double"),
 };
@@ -75,18 +77,22 @@ constexpr bool SourceCodeStreamEncoderSettings::DefaultUnsignedAsHexadecimal;
 
 const QString SourceCodeStreamEncoderSettings::DefaultVariableName = QStringLiteral("array");
 
-static constexpr  const char* PrimitiveDataTypeName[] = {
+static constexpr int NoOfPrimitiveDataTypes = 10;
+
+static constexpr  const char* PrimitiveDataTypeName[NoOfPrimitiveDataTypes] = {
     "char",
     "unsigned char",
     "int16_t",
     "uint16_t",
     "int32_t",
     "uint32_t",
+    "int64_t",
+    "uint64_t",
     "float",
     "double"
 };
 
-static constexpr int SizeOfPrimitiveDataType[] =
+static constexpr int SizeOfPrimitiveDataType[NoOfPrimitiveDataTypes] =
 {
     sizeof(char),
     sizeof(unsigned char),
@@ -94,11 +100,11 @@ static constexpr int SizeOfPrimitiveDataType[] =
     sizeof(uint16_t),
     sizeof(int32_t),
     sizeof(uint32_t),
+    sizeof(int64_t),
+    sizeof(uint64_t),
     sizeof(float),
     sizeof(double)
 };
-
-static constexpr int NoOfPrimitiveDataTypes = 8;
 
 inline QString decimalFormattedNumberPlaceHolder() { return QStringLiteral("%1"); }
 inline QString hexadecimalFormattedNumberPlaceHolder() { return QStringLiteral("0x%1"); }
@@ -268,6 +274,26 @@ QString ByteArraySourceCodeStreamEncoder::printFormatted(const Okteta::AbstractB
         byteArrayModel->copyTo(reinterpret_cast<Okteta::Byte*>(&e), offset, qMin(uint(sizeof(e)), dataSize));
         const int base = mSettings.unsignedAsHexadecimal ? 16 : 10;
         const int fieldWidth = mSettings.unsignedAsHexadecimal ? 8 : 10;
+        const QString formattedNumberPlaceHolder = mSettings.unsignedAsHexadecimal ?
+                                                   hexadecimalFormattedNumberPlaceHolder() : decimalFormattedNumberPlaceHolder();
+        const QChar stuffChar = QLatin1Char(mSettings.unsignedAsHexadecimal ? '0' : ' ');
+        result = formattedNumberPlaceHolder.arg(e, fieldWidth, base, stuffChar);
+        break;
+    }
+    case SourceCodeStreamEncoderSettings::PrimitiveDataType::LongInteger:
+    {
+        int64_t e = 0;
+        byteArrayModel->copyTo(reinterpret_cast<Okteta::Byte*>(&e), offset, qMin(uint(sizeof(e)), dataSize));
+        constexpr int fieldWidth = 20;
+        result = decimalFormattedNumberPlaceHolder().arg(e, fieldWidth);
+        break;
+    }
+    case SourceCodeStreamEncoderSettings::PrimitiveDataType::UnsignedLongInteger:
+    {
+        uint64_t e = 0;
+        byteArrayModel->copyTo(reinterpret_cast<Okteta::Byte*>(&e), offset, qMin(uint(sizeof(e)), dataSize));
+        const int base = mSettings.unsignedAsHexadecimal ? 16 : 10;
+        const int fieldWidth = mSettings.unsignedAsHexadecimal ? 16 : 20;
         const QString formattedNumberPlaceHolder = mSettings.unsignedAsHexadecimal ?
                                                    hexadecimalFormattedNumberPlaceHolder() : decimalFormattedNumberPlaceHolder();
         const QChar stuffChar = QLatin1Char(mSettings.unsignedAsHexadecimal ? '0' : ' ');

@@ -29,6 +29,8 @@ public:
         UnsignedShort,
         Integer,
         UnsignedInteger,
+        LongInteger,
+        UnsignedLongInteger,
         Float,
         Double,
         _Count,
