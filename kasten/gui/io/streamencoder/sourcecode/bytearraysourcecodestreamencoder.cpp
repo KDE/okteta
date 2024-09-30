@@ -78,10 +78,10 @@ const QString SourceCodeStreamEncoderSettings::DefaultVariableName = QStringLite
 static constexpr  const char* PrimitiveDataTypeName[] = {
     "char",
     "unsigned char",
-    "short",
-    "unsigned short",
-    "int",
-    "unsigned int",
+    "int16_t",
+    "uint16_t",
+    "int32_t",
+    "uint32_t",
     "float",
     "double"
 };
@@ -90,10 +90,10 @@ static constexpr int SizeOfPrimitiveDataType[] =
 {
     sizeof(char),
     sizeof(unsigned char),
-    sizeof(short),
-    sizeof(unsigned short),
-    sizeof(int),
-    sizeof(unsigned int),
+    sizeof(int16_t),
+    sizeof(uint16_t),
+    sizeof(int32_t),
+    sizeof(uint32_t),
     sizeof(float),
     sizeof(double)
 };
@@ -236,7 +236,7 @@ QString ByteArraySourceCodeStreamEncoder::printFormatted(const Okteta::AbstractB
     }
     case SourceCodeStreamEncoderSettings::PrimitiveDataType::Short:
     {
-        short e = 0;
+        int16_t e = 0;
         byteArrayModel->copyTo(reinterpret_cast<Okteta::Byte*>(&e), offset, qMin(uint(sizeof(e)), dataSize));
         constexpr int fieldWidth = 6;
         result = decimalFormattedNumberPlaceHolder().arg(e, fieldWidth);
@@ -244,7 +244,7 @@ QString ByteArraySourceCodeStreamEncoder::printFormatted(const Okteta::AbstractB
     }
     case SourceCodeStreamEncoderSettings::PrimitiveDataType::UnsignedShort:
     {
-        unsigned short e = 0;
+        uint16_t e = 0;
         byteArrayModel->copyTo(reinterpret_cast<Okteta::Byte*>(&e), offset, qMin(uint(sizeof(e)), dataSize));
         const int base = mSettings.unsignedAsHexadecimal ? 16 : 10;
         const int fieldWidth = mSettings.unsignedAsHexadecimal ? 4 : 5;
@@ -256,7 +256,7 @@ QString ByteArraySourceCodeStreamEncoder::printFormatted(const Okteta::AbstractB
     }
     case SourceCodeStreamEncoderSettings::PrimitiveDataType::Integer:
     {
-        int e = 0;
+        int32_t e = 0;
         byteArrayModel->copyTo(reinterpret_cast<Okteta::Byte*>(&e), offset, qMin(uint(sizeof(e)), dataSize));
         constexpr int fieldWidth = 11;
         result = decimalFormattedNumberPlaceHolder().arg(e, fieldWidth);
@@ -264,7 +264,7 @@ QString ByteArraySourceCodeStreamEncoder::printFormatted(const Okteta::AbstractB
     }
     case SourceCodeStreamEncoderSettings::PrimitiveDataType::UnsignedInteger:
     {
-        unsigned int e = 0;
+        uint32_t e = 0;
         byteArrayModel->copyTo(reinterpret_cast<Okteta::Byte*>(&e), offset, qMin(uint(sizeof(e)), dataSize));
         const int base = mSettings.unsignedAsHexadecimal ? 16 : 10;
         const int fieldWidth = mSettings.unsignedAsHexadecimal ? 8 : 10;
