@@ -233,6 +233,7 @@ protected: // API to be implemented
     virtual int fittingBytesPerLine() const = 0;
     /** recalcs all dependent values with the actual NoOfBytesPerLine  */
     virtual void adjustToLayoutNoOfBytesPerLine() = 0;
+    virtual void adjustTToScaledFont() = 0;
     /** repaints all the parts that are signed as changed */
     virtual void updateChanged() = 0;
 
@@ -293,6 +294,8 @@ protected:
     /** object to store the blinking cursor pixmaps */
     Cursor* mCursorPixmaps;
 
+    QFont m_scaledFont;
+
 protected:
     /** flag whether the widget is set to readonly. Cannot override the databuffer's setting, of course. */
     bool mReadOnly : 1;
@@ -300,8 +303,6 @@ protected:
     bool mOverWriteOnly : 1;
     /** flag if overwrite mode is active */
     bool mOverWrite : 1;
-    /** flag whether the font is changed due to a zooming */
-    bool mInZooming : 1;
     /** flag if the cursor should be invisible */
     bool mCursorPaused : 1;
     /** flag if the cursor is visible when blinking */
