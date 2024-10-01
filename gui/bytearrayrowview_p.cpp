@@ -221,20 +221,10 @@ void ByteArrayRowViewPrivate::setByteTypeColored(bool isColored)
     unpauseCursor();
 }
 
-void ByteArrayRowViewPrivate::changeEvent(QEvent* event)
+void ByteArrayRowViewPrivate::adjustTToScaledFont()
 {
-    Q_Q(ByteArrayRowView);
-
-    // make sure base class deals with this event first,
-    // as some values which are used here are updated there
-    q->AbstractByteArrayView::changeEvent(event);
-
-    if (event->type() != QEvent::FontChange) {
-        return;
-    }
-
     // get new values
-    const QFontMetrics newFontMetrics = q->fontMetrics();
+    const QFontMetrics newFontMetrics(m_scaledFont);
 
     mOffsetColumn->setFontMetrics(newFontMetrics);
     mByteArrayColumn->setFontMetrics(newFontMetrics);
@@ -651,6 +641,9 @@ void ByteArrayRowViewPrivate::drawInactiveCursor(QPainter* painter)
 
 void ByteArrayRowViewPrivate::renderColumns(QPainter* painter, int cx, int cy, int cw, int ch)
 {
+    // TODO: consider moving font zooming into ColumnsView
+    painter->setFont(m_scaledFont);
+
     AbstractByteArrayViewPrivate::renderColumns(painter, cx, cy, cw, ch);
     // TODO: update non blinking cursors. Should this perhaps be done in the buffercolumn?
     // Then it needs to know about inactive, insideByte and the like... well...

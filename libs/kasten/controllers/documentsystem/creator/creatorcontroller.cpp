@@ -10,7 +10,6 @@
 
 // Kasten gui
 #include <Kasten/AbstractDocumentStrategy>
-#include <Kasten/SelectedDataWriteable>
 // Kasten core
 #include <Kasten/ModelCodecManager>
 #include <Kasten/AbstractModelDataGenerator>

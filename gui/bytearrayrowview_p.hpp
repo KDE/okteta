@@ -80,9 +80,6 @@ private: // drawing related operations
     void drawInactiveCursor(QPainter* painter);
     void updateCursor(const ByteArrayRowColumnRenderer& column, AbstractByteArrayView::CodingTypeId codingId);
 
-private: // partial operations
-    void changeEvent(QEvent* event);
-
 private:
     /** recalcs a layout due to the resize style that fits into the view size
      * and updates the dependent values
@@ -103,6 +100,7 @@ protected: // AbstractByteArrayViewPrivate API
     AbstractByteArrayView::CodingTypes visibleCodings() const override;
     int fittingBytesPerLine() const override;
     void adjustToLayoutNoOfBytesPerLine() override;
+    void adjustTToScaledFont() override;
     void updateChanged() override;
 
 private:
