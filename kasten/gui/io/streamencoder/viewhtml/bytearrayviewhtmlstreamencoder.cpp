@@ -75,7 +75,7 @@ bool ByteArrayViewHtmlStreamEncoder::encodeDataToStream(QIODevice* device,
             std::make_unique<OffsetColumnHtmlRenderer>(byteArrayView->offsetCoding(), mSettings.firstLineOffset, mSettings.delta, (viewModus == 0)));
     }
 
-    if (viewModus == 0) {
+    if (viewModus == ByteArrayView::ColumnViewId) {
         if (visibleByteArrayCodings & Okteta::AbstractByteArrayView::ValueCodingId) {
             columnHtmlRendererList.emplace_back(
                 std::make_unique<ValueByteArrayColumnHtmlRenderer>(byteArrayModel, range.start(), coordRange,
