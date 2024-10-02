@@ -82,7 +82,7 @@ bool ByteArrayViewTextStreamEncoder::encodeDataToStream(QIODevice* device,
         columnTextRendererList.emplace_back(std::make_unique<BorderColumnTextRenderer>());
     }
 
-    if (viewModus == 0) {
+    if (viewModus == ByteArrayView::ColumnViewId) {
         if (visibleByteArrayCodings & Okteta::AbstractByteArrayView::ValueCodingId) {
             columnTextRendererList.emplace_back(
                 std::make_unique<ValueByteArrayColumnTextRenderer>(byteArrayModel, range.start(), coordRange,

@@ -13,7 +13,8 @@
 #include "printdialog.hpp"
 #include "framestopaperprinter.hpp"
 #include "headerfooterframerenderer.hpp"
-#include "bytearrayframerenderer.hpp"
+#include "bytearraycolumnframerenderer.hpp"
+#include "bytearrayrowframerenderer.hpp"
 // Okteta Kasten gui
 #include <Kasten/Okteta/ByteArrayView>
 // Okteta Kasten core
@@ -104,7 +105,9 @@ void PrintTool::triggerPrint(QPrinter* printer)
 
     const int contentHeight = pageRect.height() - footerFrameRenderer->height() - headerFrameRenderer->height();
     const int contentTop = pageRect.top() + headerFrameRenderer->height();
-    auto byteArrayFrameRenderer = std::make_unique<ByteArrayFrameRenderer>();
+    auto byteArrayFrameRenderer = (mByteArrayView->viewModus() == ByteArrayView::ColumnViewId) ?
+        std::unique_ptr<AbstractByteArrayFrameRenderer>(std::make_unique<ByteArrayColumnFrameRenderer>()) :
+        std::unique_ptr<AbstractByteArrayFrameRenderer>(std::make_unique<ByteArrayRowFrameRenderer>());
     byteArrayFrameRenderer->setPos(left, contentTop);
     byteArrayFrameRenderer->setWidth(width);
     byteArrayFrameRenderer->setHeight(contentHeight);

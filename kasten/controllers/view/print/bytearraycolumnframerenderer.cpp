@@ -1,12 +1,12 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    SPDX-FileCopyrightText: 2003, 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    SPDX-FileCopyrightText: 2003, 2008-2009, 2024 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
-#include "bytearrayframerenderer.hpp"
+#include "bytearraycolumnframerenderer.hpp"
 
 // lib
 #include "printcolumnstylist.hpp"
@@ -22,41 +22,16 @@
 #include <Okteta/ValueCodec>
 #include <Okteta/CharCodec>
 // Qt
-#include <QDateTime>
-#include <QPainter>
 #include <QFontMetrics>
 #include <QFontDatabase>
-#include <QApplication>
 
-static constexpr Okteta::Address DefaultStartOffset = 0;
-static constexpr Okteta::Address DefaultFirstLineOffset = 0;
-static constexpr int DefaultNoOfBytesPerLine =  16;
-static constexpr LayoutStyle DefaultResizeStyle = FixedLayoutStyle; // krazy:exclude=staticobjects
-static constexpr Okteta::OffsetFormat::Format DefaultOffsetCoding =  Okteta::OffsetFormat::Hexadecimal; // krazy:exclude=staticobjects
-static constexpr Okteta::ValueCoding DefaultValueCoding =  Okteta::HexadecimalCoding; // krazy:exclude=staticobjects
-static inline QString DefaultCharCoding() { return QString(); } // -> local 8-bit
+static constexpr Okteta::OffsetFormat::Format DefaultColumnOffsetCoding =  Okteta::OffsetFormat::Hexadecimal; // krazy:exclude=staticobjects
 
-static constexpr int BAFInitialHeight = 50;
-static constexpr int BAFInitialWidth = 50;
-
-ByteArrayFrameRenderer::ByteArrayFrameRenderer()
-    : mHeight(BAFInitialHeight)
-    , mWidth(BAFInitialWidth)
-    , mLayout(std::make_unique<Okteta::ByteArrayTableLayout>(DefaultNoOfBytesPerLine, DefaultFirstLineOffset, DefaultStartOffset, 0, 0))
-    , mTableRanges(std::make_unique<Okteta::ByteArrayTableRanges>(mLayout.get()))
-    , mStylist(std::make_unique<Okteta::PrintColumnStylist>())
-    , mResizeStyle(DefaultResizeStyle)
+ByteArrayColumnFrameRenderer::ByteArrayColumnFrameRenderer()
 {
-    mLayout->setNoOfLinesPerPage(noOfLinesPerFrame());
-
-    // set codecs
-    mValueCodec = Okteta::ValueCodec::createCodec((Okteta::ValueCoding)DefaultValueCoding);
-    mValueCoding = DefaultValueCoding;
-    mCharCodec = Okteta::CharCodec::createCodec(DefaultCharCoding());
-
     // creating the columns in the needed order
     auto offsetColumnRenderer =
-        std::make_unique<Okteta::OffsetColumnRenderer>(mStylist.get(), mLayout.get(), DefaultOffsetCoding);
+        std::make_unique<Okteta::OffsetColumnRenderer>(mStylist.get(), mLayout.get(), DefaultColumnOffsetCoding);
     mOffsetColumnRenderer = offsetColumnRenderer.get();
     auto  firstBorderColumnRenderer =
         std::make_unique<Okteta::BorderColumnRenderer>(mStylist.get(), true, false);
@@ -84,48 +59,23 @@ ByteArrayFrameRenderer::ByteArrayFrameRenderer()
     setFont(QFontDatabase::systemFont(QFontDatabase::FixedFont));
 }
 
-ByteArrayFrameRenderer::~ByteArrayFrameRenderer() = default;
+ByteArrayColumnFrameRenderer::~ByteArrayColumnFrameRenderer() = default;
 
-Okteta::AbstractByteArrayModel* ByteArrayFrameRenderer::byteArrayModel() const { return mByteArrayModel; }
-Okteta::Address ByteArrayFrameRenderer::offset()                         const { return mLayout->startOffset(); }
-Okteta::Size ByteArrayFrameRenderer::length()                            const { return mLayout->length(); }
+Okteta::PixelX ByteArrayColumnFrameRenderer::byteSpacingWidth()           const { return mValueColumnRenderer->byteSpacingWidth(); }
+int ByteArrayColumnFrameRenderer::noOfGroupedBytes()               const { return mValueColumnRenderer->noOfGroupedBytes(); }
+Okteta::PixelX ByteArrayColumnFrameRenderer::groupSpacingWidth()          const { return mValueColumnRenderer->groupSpacingWidth(); }
+Okteta::PixelX ByteArrayColumnFrameRenderer::binaryGapWidth()             const { return mValueColumnRenderer->binaryGapWidth(); }
+bool ByteArrayColumnFrameRenderer::showsNonprinting()              const { return mCharColumnRenderer->isShowingNonprinting(); }
+QChar ByteArrayColumnFrameRenderer::substituteChar()               const { return mCharColumnRenderer->substituteChar(); }
+QChar ByteArrayColumnFrameRenderer::undefinedChar()                const { return mCharColumnRenderer->undefinedChar(); }
 
-int ByteArrayFrameRenderer::noOfBytesPerLine()               const { return mLayout->noOfBytesPerLine(); }
-Okteta::Address ByteArrayFrameRenderer::firstLineOffset()    const { return mLayout->firstLineOffset(); }
-Okteta::Address ByteArrayFrameRenderer::startOffset()        const { return mLayout->startOffset(); }
-LayoutStyle ByteArrayFrameRenderer::layoutStyle()            const { return mResizeStyle; }
-Okteta::ValueCoding ByteArrayFrameRenderer::valueCoding()   const { return mValueCoding; }
-Okteta::PixelX ByteArrayFrameRenderer::byteSpacingWidth()           const { return mValueColumnRenderer->byteSpacingWidth(); }
-int ByteArrayFrameRenderer::noOfGroupedBytes()               const { return mValueColumnRenderer->noOfGroupedBytes(); }
-Okteta::PixelX ByteArrayFrameRenderer::groupSpacingWidth()          const { return mValueColumnRenderer->groupSpacingWidth(); }
-Okteta::PixelX ByteArrayFrameRenderer::binaryGapWidth()             const { return mValueColumnRenderer->binaryGapWidth(); }
-bool ByteArrayFrameRenderer::showsNonprinting()              const { return mCharColumnRenderer->isShowingNonprinting(); }
-QChar ByteArrayFrameRenderer::substituteChar()               const { return mCharColumnRenderer->substituteChar(); }
-QChar ByteArrayFrameRenderer::undefinedChar()                const { return mCharColumnRenderer->undefinedChar(); }
-QString ByteArrayFrameRenderer::charCodingName()             const { return mCharCodec->name(); }
+bool ByteArrayColumnFrameRenderer::offsetColumnVisible() const { return mOffsetColumnRenderer->isVisible(); }
+Okteta::OffsetFormat::Format ByteArrayColumnFrameRenderer::offsetCoding() const { return mOffsetColumnRenderer->format(); }
 
-bool ByteArrayFrameRenderer::offsetColumnVisible() const { return mOffsetColumnRenderer->isVisible(); }
-Okteta::OffsetFormat::Format ByteArrayFrameRenderer::offsetCoding() const { return mOffsetColumnRenderer->format(); }
-
-int ByteArrayFrameRenderer::visibleByteArrayCodings() const
+int ByteArrayColumnFrameRenderer::visibleByteArrayCodings() const
 { return (mValueColumnRenderer->isVisible() ? ValueCodingId : 0) | (mCharColumnRenderer->isVisible() ? CharCodingId : 0); }
 
-int ByteArrayFrameRenderer::height() const { return mHeight; }
-int ByteArrayFrameRenderer::width() const { return mWidth; }
-
-int ByteArrayFrameRenderer::framesCount() const
-{
-    const int charsPerFrame = mLayout->noOfBytesPerLine() * noOfLinesPerFrame();
-
-    // clever calculation works: at least one page for the rest
-    // hard to describe, think yourself
-    // TODO: needs to include the offset in the first line
-    const int frames = ((mLayout->length() - 1) / charsPerFrame) + 1;
-
-    return frames;
-}
-
-void ByteArrayFrameRenderer::setByteArrayModel(Okteta::AbstractByteArrayModel* byteArrayModel,
+void ByteArrayColumnFrameRenderer::setByteArrayModel(Okteta::AbstractByteArrayModel* byteArrayModel,
                                                Okteta::Address offset, Okteta::Size length)
 {
     mByteArrayModel = byteArrayModel;
@@ -145,41 +95,7 @@ void ByteArrayFrameRenderer::setByteArrayModel(Okteta::AbstractByteArrayModel* b
     adjustLayoutToSize();
 }
 
-void ByteArrayFrameRenderer::setHeight(int height) { mHeight = height; }
-void ByteArrayFrameRenderer::setWidth(int width)
-{
-    if (mWidth == width) {
-        return;
-    }
-
-    mWidth = width;
-
-    adjustToWidth();
-}
-
-void ByteArrayFrameRenderer::setFirstLineOffset(Okteta::Address firstLineOffset)
-{
-    if (!mLayout->setFirstLineOffset(firstLineOffset)) {
-        return;
-    }
-
-    // affects:
-    // the no of lines -> width
-    adjustLayoutToSize();
-}
-
-void ByteArrayFrameRenderer::setStartOffset(Okteta::Address startOffset)
-{
-    if (!mLayout->setStartOffset(startOffset)) {
-        return;
-    }
-
-    // affects:
-    // the no of lines -> width
-    adjustLayoutToSize();
-}
-
-void ByteArrayFrameRenderer::setBufferSpacing(Okteta::PixelX byteSpacing, int noOfGroupedBytes, Okteta::PixelX groupSpacing)
+void ByteArrayColumnFrameRenderer::setBufferSpacing(Okteta::PixelX byteSpacing, int noOfGroupedBytes, Okteta::PixelX groupSpacing)
 {
     if (!mValueColumnRenderer->setSpacing(byteSpacing, noOfGroupedBytes, groupSpacing)) {
         return;
@@ -188,29 +104,7 @@ void ByteArrayFrameRenderer::setBufferSpacing(Okteta::PixelX byteSpacing, int no
     adjustToWidth();
 }
 
-void ByteArrayFrameRenderer::setLayoutStyle(LayoutStyle style)
-{
-    if (mResizeStyle == style) {
-        return;
-    }
-
-    mResizeStyle = style;
-
-    adjustToWidth();
-}
-
-void ByteArrayFrameRenderer::setNoOfBytesPerLine(int noOfBytesPerLine)
-{
-    // if the number is explicitly set we expect a wish for no automatic resize
-    mResizeStyle = FixedLayoutStyle;
-
-    if (!mLayout->setNoOfBytesPerLine(noOfBytesPerLine)) {
-        return;
-    }
-    adjustToWidth();
-}
-
-void ByteArrayFrameRenderer::setByteSpacingWidth(Okteta::PixelX byteSpacingWidth)
+void ByteArrayColumnFrameRenderer::setByteSpacingWidth(Okteta::PixelX byteSpacingWidth)
 {
     if (!mValueColumnRenderer->setByteSpacingWidth(byteSpacingWidth)) {
         return;
@@ -218,7 +112,7 @@ void ByteArrayFrameRenderer::setByteSpacingWidth(Okteta::PixelX byteSpacingWidth
     adjustToWidth();
 }
 
-void ByteArrayFrameRenderer::setNoOfGroupedBytes(int noOfGroupedBytes)
+void ByteArrayColumnFrameRenderer::setNoOfGroupedBytes(int noOfGroupedBytes)
 {
     if (!mValueColumnRenderer->setNoOfGroupedBytes(noOfGroupedBytes)) {
         return;
@@ -226,7 +120,7 @@ void ByteArrayFrameRenderer::setNoOfGroupedBytes(int noOfGroupedBytes)
     adjustToWidth();
 }
 
-void ByteArrayFrameRenderer::setGroupSpacingWidth(Okteta::PixelX groupSpacingWidth)
+void ByteArrayColumnFrameRenderer::setGroupSpacingWidth(Okteta::PixelX groupSpacingWidth)
 {
     if (!mValueColumnRenderer->setGroupSpacingWidth(groupSpacingWidth)) {
         return;
@@ -234,7 +128,7 @@ void ByteArrayFrameRenderer::setGroupSpacingWidth(Okteta::PixelX groupSpacingWid
     adjustToWidth();
 }
 
-void ByteArrayFrameRenderer::setBinaryGapWidth(Okteta::PixelX binaryGapWidth)
+void ByteArrayColumnFrameRenderer::setBinaryGapWidth(Okteta::PixelX binaryGapWidth)
 {
     if (!mValueColumnRenderer->setBinaryGapWidth(binaryGapWidth)) {
         return;
@@ -242,22 +136,22 @@ void ByteArrayFrameRenderer::setBinaryGapWidth(Okteta::PixelX binaryGapWidth)
     adjustToWidth();
 }
 
-void ByteArrayFrameRenderer::setSubstituteChar(QChar substituteChar)
+void ByteArrayColumnFrameRenderer::setSubstituteChar(QChar substituteChar)
 {
     mCharColumnRenderer->setSubstituteChar(substituteChar);
 }
 
-void ByteArrayFrameRenderer::setUndefinedChar(QChar undefinedChar)
+void ByteArrayColumnFrameRenderer::setUndefinedChar(QChar undefinedChar)
 {
     mCharColumnRenderer->setUndefinedChar(undefinedChar);
 }
 
-void ByteArrayFrameRenderer::setShowsNonprinting(bool showsNonprinting)
+void ByteArrayColumnFrameRenderer::setShowsNonprinting(bool showsNonprinting)
 {
     mCharColumnRenderer->setShowingNonprinting(showsNonprinting);
 }
 
-void ByteArrayFrameRenderer::setValueCoding(Okteta::ValueCoding valueCoding)
+void ByteArrayColumnFrameRenderer::setValueCoding(Okteta::ValueCoding valueCoding)
 {
     if (mValueCoding == valueCoding) {
         return;
@@ -283,7 +177,7 @@ void ByteArrayFrameRenderer::setValueCoding(Okteta::ValueCoding valueCoding)
     }
 }
 
-void ByteArrayFrameRenderer::setCharCoding(const QString& newCharCodingName)
+void ByteArrayColumnFrameRenderer::setCharCoding(const QString& newCharCodingName)
 {
     if (charCodingName() == newCharCodingName) {
         return;
@@ -300,7 +194,7 @@ void ByteArrayFrameRenderer::setCharCoding(const QString& newCharCodingName)
     mCharColumnRenderer->setCharCodec(mCharCodec.get());
 }
 
-void ByteArrayFrameRenderer::setFont(const QFont& font)
+void ByteArrayColumnFrameRenderer::setFont(const QFont& font)
 {
     mFont = font;
 
@@ -319,38 +213,7 @@ void ByteArrayFrameRenderer::setFont(const QFont& font)
     adjustToWidth();
 }
 
-void ByteArrayFrameRenderer::prepare()
-{
-}
-
-void ByteArrayFrameRenderer::renderFrame(QPainter* painter, int frameIndex)
-{
-    painter->setFont(mFont);
-    AbstractColumnFrameRenderer::renderFrame(painter, frameIndex);
-}
-
-void ByteArrayFrameRenderer::adjustToWidth()
-{
-    adjustToLayoutNoOfBytesPerLine();
-    adjustLayoutToSize();
-}
-
-void ByteArrayFrameRenderer::adjustLayoutToSize()
-{
-    // check whether there is a change with the numbers of fitting bytes per line
-    if (mResizeStyle != FixedLayoutStyle) {
-        const int bytesPerLine = fittingBytesPerLine();
-
-        // changes?
-        if (mLayout->setNoOfBytesPerLine(bytesPerLine)) {
-            adjustToLayoutNoOfBytesPerLine();
-        }
-    }
-
-    setNoOfLines(mLayout->noOfLines());
-}
-
-void ByteArrayFrameRenderer::adjustToLayoutNoOfBytesPerLine()
+void ByteArrayColumnFrameRenderer::adjustToLayoutNoOfBytesPerLine()
 {
     mValueColumnRenderer->resetXBuffer();
     mCharColumnRenderer->resetXBuffer();
@@ -358,7 +221,7 @@ void ByteArrayFrameRenderer::adjustToLayoutNoOfBytesPerLine()
     updateWidths();
 }
 
-void ByteArrayFrameRenderer::showOffsetColumn(bool visible)
+void ByteArrayColumnFrameRenderer::showOffsetColumn(bool visible)
 {
     bool OCVisible = mOffsetColumnRenderer->isVisible();
     // no change?
@@ -372,7 +235,7 @@ void ByteArrayFrameRenderer::showOffsetColumn(bool visible)
     adjustToWidth();
 }
 
-void ByteArrayFrameRenderer::setOffsetCoding(Okteta::OffsetFormat::Format offsetCoding)
+void ByteArrayColumnFrameRenderer::setOffsetCoding(Okteta::OffsetFormat::Format offsetCoding)
 {
     const Okteta::OffsetFormat::Format currentFormat = mOffsetColumnRenderer->format();
     // no change?
@@ -386,12 +249,12 @@ void ByteArrayFrameRenderer::setOffsetCoding(Okteta::OffsetFormat::Format offset
 }
 
 #if 0
-QSize ByteArrayFrameRenderer::sizeHint() const
+QSize ByteArrayColumnFrameRenderer::sizeHint() const
 {
     return QSize(columnsWidth(), columnsHeight());
 }
 
-QSize ByteArrayFrameRenderer::minimumSizeHint() const
+QSize ByteArrayColumnFrameRenderer::minimumSizeHint() const
 {
     // TODO: better minimal width (visibility!)
 
@@ -407,7 +270,7 @@ QSize ByteArrayFrameRenderer::minimumSizeHint() const
 }
 #endif
 
-int ByteArrayFrameRenderer::fittingBytesPerLine() const
+int ByteArrayColumnFrameRenderer::fittingBytesPerLine() const
 {
     const Okteta::PixelX nonDataWidth =
         mOffsetColumnRenderer->visibleWidth()
@@ -473,7 +336,7 @@ int ByteArrayFrameRenderer::fittingBytesPerLine() const
     return fittingBytesPerLine;
 }
 
-void ByteArrayFrameRenderer::showByteArrayColumns(int newColumns)
+void ByteArrayColumnFrameRenderer::showByteArrayColumns(int newColumns)
 {
     int columns = visibleByteArrayCodings();
 

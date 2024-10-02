@@ -89,8 +89,7 @@ CopyAsDialog::CopyAsDialog(const QString& remoteTypeName,
 
     // main layout
     auto* layout = new QVBoxLayout;
-    layout->addWidget(splitter);
-    layout->addStretch();
+    layout->addWidget(splitter, 1);
     layout->addWidget(dialogButtonBox);
 
     setLayout(layout);
