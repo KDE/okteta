@@ -85,7 +85,7 @@ bool ByteArrayViewTextStreamEncoder::encodeDataToStream(QIODevice* device,
         columnTextRendererList.append(new BorderColumnTextRenderer());
     }
 
-    if (viewModus == 0) {
+    if (viewModus == ByteArrayView::ColumnViewId) {
         if (visibleByteArrayCodings & Okteta::AbstractByteArrayView::ValueCodingId) {
             columnTextRendererList.append(
                 new ValueByteArrayColumnTextRenderer(byteArrayModel, range.start(), coordRange,
