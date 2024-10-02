@@ -505,8 +505,10 @@ oktetakastencontrollers_add_sublibrary(view/print
         PrintTool
         PrintJob
         AbstractColumnFrameRenderer
+        AbstractByteArrayFrameRenderer
         PrintColumnStylist
-        ByteArrayFrameRenderer
+        ByteArrayColumnFrameRenderer
+        ByteArrayRowFrameRenderer
         PrintDialog
         PrintController
 )
