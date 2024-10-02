@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: oktetapart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:41+0000\n"
+"POT-Creation-Date: 2024-09-30 01:51+0000\n"
 "PO-Revision-Date: 2021-01-04 21:03+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -36,14 +36,14 @@ msgstr "&Rediger"
 
 #. i18n: ectx: Menu (view)
 #: oktetapartbrowserui.rc:21 oktetapartreadonlyui.rc:26
-#: oktetapartreadwriteui.rc:39
+#: oktetapartreadwriteui.rc:41
 #, kde-format
 msgid "&View"
 msgstr "&Vis"
 
 #. i18n: ectx: ToolBar (mainToolBar)
 #: oktetapartbrowserui.rc:43 oktetapartreadonlyui.rc:47
-#: oktetapartreadwriteui.rc:60
+#: oktetapartreadwriteui.rc:62
 #, kde-format
 msgid "Main Toolbar"
 msgstr "Hovudverktøylinje"

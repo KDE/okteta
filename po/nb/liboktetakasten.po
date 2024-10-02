@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-16 02:10+0000\n"
+"POT-Creation-Date: 2024-09-30 01:51+0000\n"
 "PO-Revision-Date: 2013-02-19 20:33+0100\n"
 "Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -286,7 +286,7 @@ msgctxt "@title:window"
 msgid "Value/Char Table"
 msgstr "Verdi/tegn-tabell"
 
-#: controllers/view/bytetable/bytetabletool.cpp:90
+#: controllers/view/bytetable/bytetabletool.cpp:89
 #, kde-format
 msgid "Inserted 1 Byte"
 msgid_plural "Inserted %1 Bytes"
@@ -320,7 +320,7 @@ msgctxt "@title:window of the tool to convert between charsets"
 msgid "Charset Conversion"
 msgstr "Tegnsettkonvertering"
 
-#: controllers/view/charsetconversion/charsetconversiontool.cpp:295
+#: controllers/view/charsetconversion/charsetconversiontool.cpp:294
 #, kde-format
 msgctxt "Converted from charset 1 to charset 2"
 msgid "%1 to %2"
@@ -530,6 +530,18 @@ msgstr ""
 "Hvis du trykker <interface>Regn ut</interface>-knappen, blir lista "
 "oppdatert  til alle strenger som finnes i området og har den oppgitte "
 "minstelengden."
+
+#: controllers/view/crop/cropcontroller.cpp:33
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Crop"
+msgstr ""
+
+#: controllers/view/crop/cropcontroller.cpp:91
+#, kde-format
+msgctxt "name of the change"
+msgid "Crop"
+msgstr ""
 
 #: controllers/view/filter/filtertool.cpp:59
 #: controllers/view/filter/filtertoolviewfactory.cpp:24
@@ -1277,7 +1289,7 @@ msgctxt "@title:window"
 msgid "Decoding Table"
 msgstr "Dekodingstabell"
 
-#: controllers/view/poddecoder/poddecodertool.cpp:296
+#: controllers/view/poddecoder/poddecodertool.cpp:295
 #, kde-format
 msgctxt "Edited as %datatype"
 msgid "Edited as %1"
@@ -3121,7 +3133,7 @@ msgctxt "name of the generated data"
 msgid "Pattern…"
 msgstr ""
 
-#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:149
+#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:148
 #, kde-format
 msgid "Pattern inserted."
 msgstr "Mønster satt inn."
@@ -3165,7 +3177,7 @@ msgctxt "name of the generated data"
 msgid "Random Data…"
 msgstr ""
 
-#: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:91
+#: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:90
 #, kde-format
 msgid "RandomData inserted."
 msgstr "Tilfeldige data satt inn."
@@ -3194,7 +3206,7 @@ msgctxt "name of the generated data"
 msgid "Sequence"
 msgstr "Sekvens"
 
-#: gui/io/generator/sequence/bytearraysequencegenerator.cpp:60
+#: gui/io/generator/sequence/bytearraysequencegenerator.cpp:59
 #, kde-format
 msgid "Sequence inserted."
 msgstr "Sekvens satt inn."
