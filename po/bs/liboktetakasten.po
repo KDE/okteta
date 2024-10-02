@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-30 03:19+0000\n"
+"POT-Creation-Date: 2024-10-02 03:20+0000\n"
 "PO-Revision-Date: 2015-02-04 16:00+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: bosanski <bs@li.org>\n"
@@ -3300,7 +3300,7 @@ msgctxt "@item:inmenu address size"
 msgid "8-bit"
 msgstr "8 bita"
 
-#: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoder.cpp:141
+#: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoder.cpp:147
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "C Array"

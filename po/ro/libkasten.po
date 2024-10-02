@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-28 03:19+0000\n"
+"POT-Creation-Date: 2024-10-02 03:20+0000\n"
 "PO-Revision-Date: 2020-09-26 20:13+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian\n"
@@ -116,19 +116,19 @@ msgctxt "@action:inmenu"
 msgid "Close All Other"
 msgstr "Închide"
 
-#: controllers/documentsystem/creator/creatorcontroller.cpp:41
+#: controllers/documentsystem/creator/creatorcontroller.cpp:40
 #, kde-format
 msgctxt "@title:menu create new byte arrays from different sources"
 msgid "New"
 msgstr ""
 
-#: controllers/documentsystem/creator/creatorcontroller.cpp:54
+#: controllers/documentsystem/creator/creatorcontroller.cpp:53
 #, kde-format
 msgctxt "@item:inmenu create a new empty document"
 msgid "Empty"
 msgstr ""
 
-#: controllers/documentsystem/creator/creatorcontroller.cpp:65
+#: controllers/documentsystem/creator/creatorcontroller.cpp:64
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "&Copy to clipboard"

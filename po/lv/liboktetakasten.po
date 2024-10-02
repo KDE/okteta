@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-30 03:19+0000\n"
+"POT-Creation-Date: 2024-10-02 03:20+0000\n"
 "PO-Revision-Date: 2010-01-09 18:03+0200\n"
 "Last-Translator: Viesturs Zarins <viesturs.zarins@mii.lu.lv>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -3495,7 +3495,7 @@ msgctxt "@item:inmenu address size"
 msgid "8-bit"
 msgstr " bits"
 
-#: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoder.cpp:141
+#: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoder.cpp:147
 #, fuzzy, kde-format
 #| msgctxt "@item name of the encoding result"
 #| msgid "C Array"

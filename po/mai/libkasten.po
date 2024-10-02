@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-28 03:19+0000\n"
+"POT-Creation-Date: 2024-10-02 03:20+0000\n"
 "PO-Revision-Date: 2010-09-24 20:23+0530\n"
 "Last-Translator: Rajesh Ranjan <rajesh672@gmail.com>\n"
 "Language-Team: Maithili <bhashaghar@googlegroups.com>\n"
@@ -109,13 +109,13 @@ msgctxt "@action:inmenu"
 msgid "Close All Other"
 msgstr ""
 
-#: controllers/documentsystem/creator/creatorcontroller.cpp:41
+#: controllers/documentsystem/creator/creatorcontroller.cpp:40
 #, kde-format
 msgctxt "@title:menu create new byte arrays from different sources"
 msgid "New"
 msgstr "नवीन"
 
-#: controllers/documentsystem/creator/creatorcontroller.cpp:54
+#: controllers/documentsystem/creator/creatorcontroller.cpp:53
 #, fuzzy, kde-format
 #| msgctxt "@title:menu create a new empty document"
 #| msgid "Empty"
@@ -123,7 +123,7 @@ msgctxt "@item:inmenu create a new empty document"
 msgid "Empty"
 msgstr "खाली"
 
-#: controllers/documentsystem/creator/creatorcontroller.cpp:65
+#: controllers/documentsystem/creator/creatorcontroller.cpp:64
 #, fuzzy, kde-format
 #| msgctxt "@title:menu create a new document from data in the clipboard"
 #| msgid "From Clipboard"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-30 03:19+0000\n"
+"POT-Creation-Date: 2024-10-02 03:20+0000\n"
 "PO-Revision-Date: 2017-06-25 15:12+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -3166,7 +3166,7 @@ msgctxt "@item:inmenu address size"
 msgid "8-bit"
 msgstr "8-bitų"
 
-#: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoder.cpp:141
+#: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoder.cpp:147
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "C Array"

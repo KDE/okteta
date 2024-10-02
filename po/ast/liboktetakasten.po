@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-30 03:19+0000\n"
+"POT-Creation-Date: 2024-10-02 03:20+0000\n"
 "PO-Revision-Date: 2016-12-19 02:45+0100\n"
 "Last-Translator: enolp <enolp@softastur.org>\n"
 "Language-Team: Asturian <alministradores@softastur.org>\n"
@@ -3129,7 +3129,7 @@ msgctxt "@item:inmenu address size"
 msgid "8-bit"
 msgstr ""
 
-#: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoder.cpp:141
+#: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoder.cpp:147
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "C Array"
