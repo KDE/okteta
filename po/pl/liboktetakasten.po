@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-02 03:20+0000\n"
+"POT-Creation-Date: 2024-10-03 03:17+0000\n"
 "PO-Revision-Date: 2024-02-11 11:31+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -1331,26 +1331,26 @@ msgctxt "@label:textbox"
 msgid "UTF-8"
 msgstr "UTF-8"
 
-#: controllers/view/print/printtool.cpp:67
-#: controllers/view/print/printtool.cpp:171
+#: controllers/view/print/printtool.cpp:68
+#: controllers/view/print/printtool.cpp:174
 #, kde-format
 msgctxt "@title:window"
 msgid "Print Byte Array %1"
 msgstr "Drukowanie macierzy bajtów %1"
 
-#: controllers/view/print/printtool.cpp:97
+#: controllers/view/print/printtool.cpp:98
 #, kde-format
 msgctxt "in the header of the printed page, e.g. Page 2 of 20"
 msgid "Page %p of %P"
 msgstr "Strona %p z %P"
 
-#: controllers/view/print/printtool.cpp:103
+#: controllers/view/print/printtool.cpp:104
 #, kde-format
 msgctxt "in the footer of the printed page, e.g. Printed by: Joe User"
 msgid "Printed by: %U"
 msgstr "Wydrukowane przez: %U"
 
-#: controllers/view/print/printtool.cpp:169
+#: controllers/view/print/printtool.cpp:172
 #, kde-format
 msgctxt "@info"
 msgid "Could not print."
