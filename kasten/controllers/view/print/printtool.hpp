@@ -56,12 +56,17 @@ public:
 
 public Q_SLOTS:
     void print();
+    void printPreview();
 
 Q_SIGNALS:
     void viewChanged(bool hasView);
 
 private Q_SLOTS:
     void triggerPrint(QPrinter* printer);
+    void triggerPrintPreview(QPrinter* printer);
+
+private:
+    bool doPrint(QPrinter* printer);
 
 private:
     ByteArrayDocument* mDocument = nullptr;

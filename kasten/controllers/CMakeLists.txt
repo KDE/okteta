@@ -510,6 +510,7 @@ oktetakastencontrollers_add_sublibrary(view/print
         ByteArrayColumnFrameRenderer
         ByteArrayRowFrameRenderer
         PrintDialog
+        PrintPreviewDialog
         PrintController
 )
 set_source_files_properties(view/print/printtool.cpp PROPERTIES

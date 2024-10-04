@@ -11,6 +11,7 @@
 // controller
 #include "printjob.hpp"
 #include "printdialog.hpp"
+#include "printpreviewdialog.hpp"
 #include "framestopaperprinter.hpp"
 #include "headerfooterframerenderer.hpp"
 #include "bytearraycolumnframerenderer.hpp"
@@ -70,7 +71,36 @@ void PrintTool::print()
     printDialog->open();
 }
 
+void PrintTool::printPreview()
+{
+    auto* printer = new QPrinter;
+
+    auto* previewDialog = new PrintPreviewDialog(printer, QApplication::activeWindow());
+
+    connect(previewDialog, &QPrintPreviewDialog::paintRequested,
+            this, &PrintTool::triggerPrintPreview);
+    previewDialog->show();
+}
+
 void PrintTool::triggerPrint(QPrinter* printer)
+{
+    const bool success = doPrint(printer);
+
+    delete printer;
+
+    if (!success) {
+        const QString message = i18nc("@info", "Could not print.");
+
+        KMessageBox::error(QApplication::activeWindow(), message, i18nc("@title:window", "Print Byte Array %1", mDocument->title()));
+    }
+}
+
+void PrintTool::triggerPrintPreview(QPrinter* printer)
+{
+    doPrint(printer);
+}
+
+bool PrintTool::doPrint(QPrinter* printer)
 {
     const QString creator = QStringLiteral("Print Plugin for Okteta " OKTETA_VERSION);   // no i18n(), keep space at end as separator
     printer->setCreator(creator);
@@ -165,15 +195,9 @@ void PrintTool::triggerPrint(QPrinter* printer)
     auto* printJob = new PrintJob(&framesPrinter, 0, byteArrayFrameRenderer->framesCount() - 1, printer);
     const bool success = printJob->exec();
 
-    delete printer;
-
     QApplication::restoreOverrideCursor();
 
-    if (!success) {
-        const QString message = i18nc("@info", "Could not print.");
-
-        KMessageBox::error(QApplication::activeWindow(), message, i18nc("@title:window", "Print Byte Array %1", mDocument->title()));
-    }
+    return success;
 }
 
 }
