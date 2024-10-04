@@ -11,6 +11,7 @@
 // controller
 #include "printjob.hpp"
 #include "printdialog.hpp"
+#include "printpreviewdialog.hpp"
 #include "framestopaperprinter.hpp"
 #include "headerfooterframerenderer.hpp"
 #include "bytearraycolumnframerenderer.hpp"
@@ -70,7 +71,36 @@ void PrintTool::print()
     printDialog->open();
 }
 
+void PrintTool::printPreview()
+{
+    auto* printer = new QPrinter;
+
+    auto* previewDialog = new PrintPreviewDialog(printer, QApplication::activeWindow());
+
+    connect(previewDialog, &QPrintPreviewDialog::paintRequested,
+            this, &PrintTool::triggerPrintPreview);
+    previewDialog->show();
+}
+
 void PrintTool::triggerPrint(QPrinter* printer)
+{
+    const bool success = doPrint(printer);
+
+    delete printer;
+
+    if (!success) {
+        const QString message = i18nc("@info", "Could not print.");
+
+        KMessageBox::error(QApplication::activeWindow(), message, i18nc("@title:window", "Print Byte Array %1", mDocument->title()));
+    }
+}
+
+void PrintTool::triggerPrintPreview(QPrinter* printer)
+{
+    doPrint(printer);
+}
+
+bool PrintTool::doPrint(QPrinter* printer)
 {
     const QString creator = QStringLiteral("Print Plugin for Okteta " OKTETA_VERSION);   // no i18n(), keep space at end as separator
     printer->setCreator(creator);
@@ -80,10 +110,11 @@ void PrintTool::triggerPrint(QPrinter* printer)
     const int printerResolution = printer->resolution();
     framesPrinter.setPaperRect(pageLayout.fullRectPixels(printerResolution));
     framesPrinter.setPageRect(pageLayout.paintRectPixels(printerResolution));
+    framesPrinter.setPageMargins(pageLayout.marginsPixels(printerResolution));
     printer->setFullPage(true);
 
     PrintInfo info;
-    const QRect pageRect = framesPrinter.pageRect();
+    const QRect pageRect = framesPrinter.contentsRect();
     const int left = pageRect.left();
     const int width = pageRect.width();
 
@@ -118,9 +149,9 @@ void PrintTool::triggerPrint(QPrinter* printer)
     }
     byteArrayFrameRenderer->setByteArrayModel(mByteArrayModel, range.start(), range.width());
 
-    // TODO: use noOfBytesPerLine of view, scale resolution down if it does not fit the page
+    // TODO: scale resolution down if it does not fit the page
     const int noOfBytesPerLine = mByteArrayView->noOfBytesPerLine();
-//         byteArrayFrameRenderer->setNoOfBytesPerLine( mByteArrayView->noOfBytesPerLine() );
+    byteArrayFrameRenderer->setNoOfBytesPerLine(mByteArrayView->noOfBytesPerLine());
 
     const Okteta::Address startOffset = mByteArrayView->startOffset() + range.start();
     const int line = startOffset / noOfBytesPerLine;
@@ -160,15 +191,9 @@ void PrintTool::triggerPrint(QPrinter* printer)
     auto* printJob = new PrintJob(&framesPrinter, 0, framesCount - 1, printer);
     const bool success = printJob->exec();
 
-    delete printer;
-
     QApplication::restoreOverrideCursor();
 
-    if (!success) {
-        const QString message = i18nc("@info", "Could not print.");
-
-        KMessageBox::error(QApplication::activeWindow(), message, i18nc("@title:window", "Print Byte Array %1", mDocument->title()));
-    }
+    return success;
 }
 
 }

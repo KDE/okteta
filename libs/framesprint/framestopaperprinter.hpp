@@ -30,6 +30,7 @@ public:
 public:
     void setPaperRect(QRect paperRect);
     void setPageRect(QRect pageRect);
+    void setPageMargins(QMargins pageMargins);
 
     void addFrameRenderer(std::unique_ptr<AbstractFrameRenderer>&& frameRenderer);
 
@@ -37,6 +38,8 @@ public:
 
 public:
     QRect pageRect() const;
+    QMargins pageMargins() const;
+    QRect contentsRect() const;
 
 Q_SIGNALS:
     void printedPage(int pageIndex);
@@ -45,6 +48,7 @@ private:
     std::vector<std::unique_ptr<AbstractFrameRenderer>> mFrameRendererList;
     QRect mPaperRect;
     QRect mPageRect;
+    QMargins mPageMargins;
 };
 
 #endif

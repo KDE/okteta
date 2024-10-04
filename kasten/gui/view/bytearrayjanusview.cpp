@@ -45,6 +45,9 @@ void ByteArrayJanusView::setViewModus(int viewModus)
 
     const bool hasFocus = mView ? mView->hasFocus() : false;
     if (mView) {
+        // start by preparing content constraints, for view settings which depend on those
+        // avoids potential scrollbar flickering on resze after show
+        newView->resize(mView->size());
         newView->setFont(mView->font());
 
         newView->setByteArrayModel(mView->byteArrayModel());

@@ -37,6 +37,7 @@ public: // TODO: this is a hack to enable the browser extension of the KPart to 
 
 private:
     QAction* mPrintAction;
+    QAction* mPrintPreviewAction;
 
     const std::unique_ptr<PrintTool> mPrintTool;
 };

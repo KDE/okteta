@@ -21,9 +21,12 @@ FramesToPaperPrinter::FramesToPaperPrinter() = default;
 FramesToPaperPrinter::~FramesToPaperPrinter() = default;
 
 QRect FramesToPaperPrinter::pageRect() const { return mPageRect; }
+QMargins FramesToPaperPrinter::pageMargins() const { return mPageMargins; }
+QRect FramesToPaperPrinter::contentsRect() const { return mPaperRect - mPageMargins; }
 
 void FramesToPaperPrinter::setPaperRect(QRect paperRect) { mPaperRect = paperRect; }
 void FramesToPaperPrinter::setPageRect(QRect pageRect) { mPageRect = pageRect; }
+void FramesToPaperPrinter::setPageMargins(QMargins pageMargins) { mPageMargins = pageMargins; }
 
 void FramesToPaperPrinter::addFrameRenderer(std::unique_ptr<AbstractFrameRenderer>&& frameRenderer)
 {
