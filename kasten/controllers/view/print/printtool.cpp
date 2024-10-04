@@ -123,9 +123,9 @@ void PrintTool::triggerPrint(QPrinter* printer)
     }
     byteArrayFrameRenderer->setByteArrayModel(mByteArrayModel, range.start(), range.width());
 
-    // TODO: use noOfBytesPerLine of view, scale resolution down if it does not fit the page
+    // TODO: scale resolution down if it does not fit the page
     const int noOfBytesPerLine = mByteArrayView->noOfBytesPerLine();
-//         byteArrayFrameRenderer->setNoOfBytesPerLine( mByteArrayView->noOfBytesPerLine() );
+    byteArrayFrameRenderer->setNoOfBytesPerLine(mByteArrayView->noOfBytesPerLine());
 
     const Okteta::Address startOffset = mByteArrayView->startOffset() + range.start();
     const int line = startOffset / noOfBytesPerLine;
