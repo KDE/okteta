@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-03 01:49+0000\n"
+"POT-Creation-Date: 2024-10-05 01:49+0000\n"
 "PO-Revision-Date: 2015-02-04 16:00+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: bosanski <bs@li.org>\n"
@@ -1430,30 +1430,30 @@ msgctxt "@action:button"
 msgid "&Select"
 msgstr "&Izaberi"
 
-#: controllers/view/print/printtool.cpp:68
-#: controllers/view/print/printtool.cpp:170
+#: controllers/view/print/printtool.cpp:69
+#: controllers/view/print/printtool.cpp:94
 #, kde-format
 msgctxt "@title:window"
 msgid "Print Byte Array %1"
 msgstr "Štampanje niza bajtova %1"
 
-#: controllers/view/print/printtool.cpp:93
+#: controllers/view/print/printtool.cpp:92
+#, kde-format
+msgctxt "@info"
+msgid "Could not print."
+msgstr "Ne mogu da štampam."
+
+#: controllers/view/print/printtool.cpp:124
 #, kde-format
 msgctxt "in the header of the printed page, e.g. Page 2 of 20"
 msgid "Page %p of %P"
 msgstr "Stranica %p od %P"
 
-#: controllers/view/print/printtool.cpp:99
+#: controllers/view/print/printtool.cpp:130
 #, kde-format
 msgctxt "in the footer of the printed page, e.g. Printed by: Joe User"
 msgid "Printed by: %U"
 msgstr "Odštampao: %U"
-
-#: controllers/view/print/printtool.cpp:168
-#, kde-format
-msgctxt "@info"
-msgid "Could not print."
-msgstr "Ne mogu da štampam."
 
 #: controllers/view/replace/replacecontroller.cpp:68
 #: controllers/view/replace/replacecontroller.cpp:82
