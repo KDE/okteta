@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-03 03:17+0000\n"
+"POT-Creation-Date: 2024-10-05 03:16+0000\n"
 "PO-Revision-Date: 2022-10-23 20:26+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -1342,30 +1342,30 @@ msgctxt "@label:textbox"
 msgid "UTF-8"
 msgstr "UTF-8"
 
-#: controllers/view/print/printtool.cpp:68
-#: controllers/view/print/printtool.cpp:174
+#: controllers/view/print/printtool.cpp:69
+#: controllers/view/print/printtool.cpp:94
 #, kde-format
 msgctxt "@title:window"
 msgid "Print Byte Array %1"
 msgstr "Imprimix la matriu de bytes %1"
 
-#: controllers/view/print/printtool.cpp:98
+#: controllers/view/print/printtool.cpp:92
+#, kde-format
+msgctxt "@info"
+msgid "Could not print."
+msgstr "No s'ha pogut imprimir."
+
+#: controllers/view/print/printtool.cpp:129
 #, kde-format
 msgctxt "in the header of the printed page, e.g. Page 2 of 20"
 msgid "Page %p of %P"
 msgstr "Pàgina %p de %P"
 
-#: controllers/view/print/printtool.cpp:104
+#: controllers/view/print/printtool.cpp:135
 #, kde-format
 msgctxt "in the footer of the printed page, e.g. Printed by: Joe User"
 msgid "Printed by: %U"
 msgstr "Imprés per: %U"
-
-#: controllers/view/print/printtool.cpp:172
-#, kde-format
-msgctxt "@info"
-msgid "Could not print."
-msgstr "No s'ha pogut imprimir."
 
 #: controllers/view/replace/replacecontroller.cpp:74
 #: controllers/view/replace/replacecontroller.cpp:88

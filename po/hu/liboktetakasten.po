@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-03 03:17+0000\n"
+"POT-Creation-Date: 2024-10-05 03:16+0000\n"
 "PO-Revision-Date: 2014-09-08 14:28+0200\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -1336,30 +1336,30 @@ msgctxt "@label:textbox"
 msgid "UTF-8"
 msgstr "UTF-8"
 
-#: controllers/view/print/printtool.cpp:68
-#: controllers/view/print/printtool.cpp:174
+#: controllers/view/print/printtool.cpp:69
+#: controllers/view/print/printtool.cpp:94
 #, kde-format
 msgctxt "@title:window"
 msgid "Print Byte Array %1"
 msgstr "Kinyomtatás: %1 bájtsorozat"
 
-#: controllers/view/print/printtool.cpp:98
+#: controllers/view/print/printtool.cpp:92
+#, kde-format
+msgctxt "@info"
+msgid "Could not print."
+msgstr "Nem sikerült a nyomtatás."
+
+#: controllers/view/print/printtool.cpp:129
 #, kde-format
 msgctxt "in the header of the printed page, e.g. Page 2 of 20"
 msgid "Page %p of %P"
 msgstr "Oldal: %P/%p"
 
-#: controllers/view/print/printtool.cpp:104
+#: controllers/view/print/printtool.cpp:135
 #, kde-format
 msgctxt "in the footer of the printed page, e.g. Printed by: Joe User"
 msgid "Printed by: %U"
 msgstr "Nyomtatta: %U"
-
-#: controllers/view/print/printtool.cpp:172
-#, kde-format
-msgctxt "@info"
-msgid "Could not print."
-msgstr "Nem sikerült a nyomtatás."
 
 #: controllers/view/replace/replacecontroller.cpp:74
 #: controllers/view/replace/replacecontroller.cpp:88
