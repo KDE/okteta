@@ -11,6 +11,8 @@
 
 // Qt
 #include <QObject>
+#include <QPageLayout>
+#include <QPageSize>
 
 namespace Okteta {
 class AbstractByteArrayModel;
@@ -47,6 +49,29 @@ class PrintTool : public QObject
 {
     Q_OBJECT
 
+private:
+    static inline constexpr char ConfigGroupId[] = "PrintTool";
+
+    static inline constexpr char PageLayoutUnitConfigKey[] = "PageLayoutUnit";
+    static inline constexpr char PageMarginLeftConfigKey[] = "PageMarginLeft";
+    static inline constexpr char PageMarginRightConfigKey[] = "PageMarginRight";
+    static inline constexpr char PageMarginTopConfigKey[] = "PageMarginTop";
+    static inline constexpr char PageMarginBottomConfigKey[] = "PageMarginBottom";
+    static inline constexpr char PageSizeIdConfigKey[] = "PageSizeId";
+    static inline constexpr char PageSizeUnitConfigKey[] = "PageSizeUnit";
+    static inline constexpr char PageWidthConfigKey[] = "PageWidth";
+    static inline constexpr char PageHeightConfigKey[] = "PageHeight";
+    static inline constexpr char PageOrientationConfigKey[] = "PageOrientation";
+
+    static inline constexpr QPageLayout::Unit DefaultPageLayoutUnit = QPageLayout::Millimeter;
+    static inline constexpr qreal DefaultPageMarginLeft = 20; // mm
+    static inline constexpr qreal DefaultPageMarginRight = 20; // mm
+    static inline constexpr qreal DefaultPageMarginTop = 20; // mm
+    static inline constexpr qreal DefaultPageMarginBottom = 20; // mm
+    static inline constexpr QPageLayout::Orientation DefaultPageOrientation = QPageLayout::Portrait;
+    static inline constexpr QPageSize::PageSizeId DefaultPageSizeId = QPageSize::A4;
+    static inline constexpr QPageSize::Unit DefaultPageSizeUnit = QPageSize::Millimeter;
+
 public:
     PrintTool();
     ~PrintTool() override;
@@ -67,6 +92,8 @@ private Q_SLOTS:
 
 private:
     bool doPrint(QPrinter* printer);
+    void loadConfig(QPrinter* printer) const;
+    void storeConfig(const QPrinter* printer);
 
 private:
     ByteArrayDocument* mDocument = nullptr;
