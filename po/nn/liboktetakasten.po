@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-30 03:19+0000\n"
+"POT-Creation-Date: 2024-10-05 03:16+0000\n"
 "PO-Revision-Date: 2020-05-02 23:21+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -1316,30 +1316,30 @@ msgctxt "@label:textbox"
 msgid "UTF-8"
 msgstr "UTF-8"
 
-#: controllers/view/print/printtool.cpp:67
-#: controllers/view/print/printtool.cpp:171
+#: controllers/view/print/printtool.cpp:69
+#: controllers/view/print/printtool.cpp:94
 #, kde-format
 msgctxt "@title:window"
 msgid "Print Byte Array %1"
 msgstr "Skriv ut byte-tabell %1"
 
-#: controllers/view/print/printtool.cpp:97
+#: controllers/view/print/printtool.cpp:92
+#, kde-format
+msgctxt "@info"
+msgid "Could not print."
+msgstr "Klarte ikkje skriva ut."
+
+#: controllers/view/print/printtool.cpp:129
 #, kde-format
 msgctxt "in the header of the printed page, e.g. Page 2 of 20"
 msgid "Page %p of %P"
 msgstr "Side %p av %P"
 
-#: controllers/view/print/printtool.cpp:103
+#: controllers/view/print/printtool.cpp:135
 #, kde-format
 msgctxt "in the footer of the printed page, e.g. Printed by: Joe User"
 msgid "Printed by: %U"
 msgstr "Skrive ut av: %U"
-
-#: controllers/view/print/printtool.cpp:169
-#, kde-format
-msgctxt "@info"
-msgid "Could not print."
-msgstr "Klarte ikkje skriva ut."
 
 #: controllers/view/replace/replacecontroller.cpp:74
 #: controllers/view/replace/replacecontroller.cpp:88
@@ -3252,7 +3252,7 @@ msgctxt "@item:inmenu address size"
 msgid "8-bit"
 msgstr "8-bit"
 
-#: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoder.cpp:141
+#: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoder.cpp:147
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "C Array"
