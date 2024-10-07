@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-05 03:16+0000\n"
+"POT-Creation-Date: 2024-10-07 03:15+0000\n"
 "PO-Revision-Date: 2024-03-20 18:22+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -1284,26 +1284,26 @@ msgctxt "@label:textbox"
 msgid "UTF-8"
 msgstr "UTF-8"
 
-#: controllers/view/print/printtool.cpp:69
-#: controllers/view/print/printtool.cpp:94
+#: controllers/view/print/printtool.cpp:299
+#: controllers/view/print/printtool.cpp:326
 #, kde-format
 msgctxt "@title:window"
 msgid "Print Byte Array %1"
 msgstr "列印位元陣列 %1"
 
-#: controllers/view/print/printtool.cpp:92
+#: controllers/view/print/printtool.cpp:324
 #, kde-format
 msgctxt "@info"
 msgid "Could not print."
 msgstr "無法列印。"
 
-#: controllers/view/print/printtool.cpp:129
+#: controllers/view/print/printtool.cpp:361
 #, kde-format
 msgctxt "in the header of the printed page, e.g. Page 2 of 20"
 msgid "Page %p of %P"
 msgstr "第 %p 頁，共 %P 頁"
 
-#: controllers/view/print/printtool.cpp:135
+#: controllers/view/print/printtool.cpp:367
 #, kde-format
 msgctxt "in the footer of the printed page, e.g. Printed by: Joe User"
 msgid "Printed by: %U"
