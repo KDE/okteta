@@ -199,7 +199,7 @@ msgstr "如果您按下此按钮，可以编辑您上一次选中的书签的名
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Character not defined."
-msgstr ""
+msgstr "字符未定义。"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:159
 #: controllers/view/info/statistictablemodel.cpp:216
