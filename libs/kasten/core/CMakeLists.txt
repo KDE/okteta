@@ -45,6 +45,12 @@ endmacro()
 #         Person
 # )
 
+kastencore_add_sublibrary(usermessages
+    BUILD_INCLUDEDIR
+    PUBLIC
+        UserNotification
+)
+
 kastencore_add_sublibrary(document
     BUILD_INCLUDEDIR
     PUBLIC
@@ -97,6 +103,8 @@ kastencore_add_sublibrary(io/filesystem
 kastencore_add_sublibrary(system
     BUILD_INCLUDEDIR
     PUBLIC
+        AbstractUserMessagesHandler
+
         AbstractOverwriteDialog
         AbstractSaveDiscardDialog
 
