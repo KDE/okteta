@@ -26,6 +26,7 @@ class ByteArrayDocument;
 class SingleViewArea;
 class ModelCodecViewManager;
 class ModelCodecManager;
+class UserMessagesHandler;
 class AbstractXmlGuiController;
 class AbstractXmlGuiControllerFactory;
 }
@@ -50,6 +51,7 @@ public:
                const KPluginMetaData& metaData,
                Modus modus,
                Kasten::ByteArrayViewProfileManager* viewProfileManager,
+               Kasten::UserMessagesHandler* userMessagesHandler,
                Kasten::ModelCodecManager* modelCodecManager,
                Kasten::ModelCodecViewManager* modelCodecViewManager);
 

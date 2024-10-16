@@ -23,12 +23,14 @@
 #include <Kasten/AbstractModelStreamEncoderConfigEditorFactory>
 #include <Kasten/ModelCodecViewManager>
 #include <Kasten/ModelCodecManager>
+#include <Kasten/UserMessagesHandler>
 // KF
 #include <KPluginMetaData>
 #include <KLocalizedString>
 
 OktetaPartFactory::OktetaPartFactory()
     : mByteArrayViewProfileManager(std::make_unique<Kasten::ByteArrayViewProfileManager>())
+    , m_userMessagesHandler(std::make_unique<Kasten::UserMessagesHandler>())
     , mModelCodecViewManager(std::make_unique<Kasten::ModelCodecViewManager>())
     , mModelCodecManager(std::make_unique<Kasten::ModelCodecManager>())
 {
@@ -67,7 +69,10 @@ QObject* OktetaPartFactory::create(const char* iface,
         (strcmp(iface, "KParts::ReadOnlyPart") == 0) ? OktetaPart::Modus::ReadOnly :
         /* else */                                     OktetaPart::Modus::ReadWrite;
 
-    auto* part = new OktetaPart(parent, metaData(), modus, mByteArrayViewProfileManager.get(), mModelCodecManager.get(), mModelCodecViewManager.get());
+    auto* part = new OktetaPart(parent, metaData(), modus,
+                                mByteArrayViewProfileManager.get(),
+                                m_userMessagesHandler.get(),
+                                mModelCodecManager.get(), mModelCodecViewManager.get());
 
     return part;
 }

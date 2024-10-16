@@ -18,6 +18,7 @@ namespace Kasten {
 class ByteArrayViewProfileManager;
 class ModelCodecViewManager;
 class ModelCodecManager;
+class UserMessagesHandler;
 }
 
 class OktetaPartFactory : public KPluginFactory
@@ -45,6 +46,7 @@ public: // KPluginFactory API
 
 private:
     const std::unique_ptr<Kasten::ByteArrayViewProfileManager> mByteArrayViewProfileManager;
+    const std::unique_ptr<Kasten::UserMessagesHandler> m_userMessagesHandler;
     const std::unique_ptr<Kasten::ModelCodecViewManager> mModelCodecViewManager;
     const std::unique_ptr<Kasten::ModelCodecManager> mModelCodecManager;
 };

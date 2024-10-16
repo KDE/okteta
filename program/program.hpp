@@ -17,6 +17,7 @@
 namespace Kasten {
 
 class DialogHandler;
+class UserMessagesHandler;
 class DocumentManager;
 class ViewManager;
 class MultiDocumentStrategy;
@@ -37,6 +38,7 @@ public:
     void quit();
 
 public:
+    UserMessagesHandler* userMessagesHandler();
     DocumentManager* documentManager();
     ViewManager* viewManager();
     MultiDocumentStrategy* documentStrategy();
@@ -49,12 +51,14 @@ private:
     std::unique_ptr<ByteArrayViewProfileManager> mByteArrayViewProfileManager;
 
     std::unique_ptr<DialogHandler> mDialogHandler;
+    std::unique_ptr<UserMessagesHandler> m_userMessagesHandler;
 
     std::unique_ptr<DocumentManager> mDocumentManager;
     std::unique_ptr<ViewManager> mViewManager;
     std::unique_ptr<MultiDocumentStrategy> mDocumentStrategy;
 };
 
+inline UserMessagesHandler* OktetaProgram::userMessagesHandler() { return m_userMessagesHandler.get(); }
 inline DocumentManager* OktetaProgram::documentManager() { return mDocumentManager.get(); }
 inline ViewManager* OktetaProgram::viewManager()         { return mViewManager.get(); }
 inline MultiDocumentStrategy* OktetaProgram::documentStrategy() { return mDocumentStrategy.get(); }

@@ -89,6 +89,7 @@
 // Kasten gui
 #include <Kasten/AbstractToolView>
 #include <Kasten/AbstractXmlGuiController>
+#include <Kasten/UserMessagesHandler>
 #include <Kasten/MultiDocumentStrategy>
 #include <Kasten/ModelCodecViewManager>
 #include <Kasten/ViewManager>
@@ -165,6 +166,7 @@ OktetaMainWindow::~OktetaMainWindow() = default;
 
 void OktetaMainWindow::setupControllers()
 {
+    AbstractUserMessagesHandler* const userMessagesHandler = mProgram->userMessagesHandler();
     MultiDocumentStrategy* const documentStrategy = mProgram->documentStrategy();
     ViewManager* const viewManager = this->viewManager();
     MultiViewAreas* const viewArea = this->viewArea();

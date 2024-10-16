@@ -27,6 +27,7 @@
 #include <Kasten/AbstractModelStreamEncoderConfigEditorFactory>
 #include <Kasten/MultiDocumentStrategy>
 #include <Kasten/DialogHandler>
+#include <Kasten/UserMessagesHandler>
 #include <Kasten/ViewManager>
 #include <Kasten/ModelCodecViewManager>
 // Kasten core
@@ -78,6 +79,7 @@ int OktetaProgram::execute()
     mViewManager = std::make_unique<ViewManager>();
     mDocumentStrategy = std::make_unique<MultiDocumentStrategy>(mDocumentManager.get(), mViewManager.get());
     mDialogHandler = std::make_unique<DialogHandler>();
+    m_userMessagesHandler = std::make_unique<UserMessagesHandler>();
 
     KAboutData aboutData = KAboutData::applicationData();
     QCommandLineParser parser;
@@ -124,6 +126,7 @@ int OktetaProgram::execute()
 
     auto* mainWindow = new OktetaMainWindow(this);
     mDialogHandler->setWidget(mainWindow);
+    m_userMessagesHandler->setWidget(mainWindow);
 
     // started by session management?
     if (mApp.isSessionRestored() && KMainWindow::canBeRestored(1)) {

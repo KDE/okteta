@@ -50,6 +50,7 @@
 #include <Kasten/JobManager>
 #include <Kasten/AbstractLoadJob>
 #include <Kasten/AbstractSyncWithRemoteJob>
+#include <Kasten/UserMessagesHandler>
 // KF
 #include <KPluginMetaData>
 // Qt
@@ -70,6 +71,7 @@ OktetaPart::OktetaPart(QObject* parent,
                        const KPluginMetaData& metaData,
                        Modus modus,
                        Kasten::ByteArrayViewProfileManager* viewProfileManager,
+                       Kasten::UserMessagesHandler* userMessagesHandler,
                        Kasten::ModelCodecManager* modelCodecManager,
                        Kasten::ModelCodecViewManager* modelCodecViewManager)
     : KParts::ReadWritePart(parent)
