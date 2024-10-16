@@ -34,7 +34,6 @@ class QPoint;
 namespace Kasten {
 class ByteArrayViewProfileSynchronizer;
 class ByteArrayDocument;
-class KCursorProxy;
 
 class OKTETAKASTENGUI_EXPORT ByteArrayView : public AbstractView
                                            , public If::Zoomable
@@ -217,7 +216,6 @@ private:
 
     ByteArrayDocument* mDocument;
     ByteArraySelection mSelection;
-//     KCursorProxy *mCursorProxy;
 };
 
 }
