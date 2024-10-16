@@ -50,6 +50,11 @@ bool ReplaceTool::isApplyable() const
 
 QString ReplaceTool::title() const { return i18nc("@title", "Replace"); }
 
+AbstractModel* ReplaceTool::targetModel() const
+{
+    return mByteArrayView;
+}
+
 bool ReplaceTool::hasSelectedData()   const { return mByteArrayView->hasSelectedData(); }
 QString ReplaceTool::charCodingName() const { return mByteArrayView->charCodingName(); }
 

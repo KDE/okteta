@@ -24,6 +24,7 @@ class QWidget;
 
 namespace Kasten {
 
+class AbstractUserMessagesHandler;
 class ReplaceDialog;
 class ReplacePrompt;
 class ReplaceTool;
@@ -37,7 +38,7 @@ class ReplaceController : public AbstractXmlGuiController
     )
 
 public:
-    ReplaceController(KXMLGUIClient* guiClient, QWidget* parentWidget);
+    ReplaceController(KXMLGUIClient* guiClient, AbstractUserMessagesHandler* userMessagesHandler, QWidget* parentWidget);
 
     ~ReplaceController() override;
 
@@ -59,6 +60,7 @@ private Q_SLOTS: // action slots
     void onFinished(bool previousFound, int noOfReplacements);
 
 private:
+    AbstractUserMessagesHandler* const m_userMessagesHandler;
     QWidget* const mParentWidget;
 
     QAction* mReplaceAction;

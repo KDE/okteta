@@ -18,10 +18,12 @@ class QWidget;
 
 namespace Kasten {
 
+class AbstractUserMessagesHandler;
+
 class OKTETAKASTENCONTROLLERS_EXPORT ReplaceControllerFactory : public AbstractXmlGuiControllerFactory
 {
 public:
-    explicit ReplaceControllerFactory(QWidget* parentWidget);
+    explicit ReplaceControllerFactory(AbstractUserMessagesHandler* userMessagesHandler, QWidget* parentWidget);
     ReplaceControllerFactory(const ReplaceControllerFactory&) = delete;
 
     ~ReplaceControllerFactory() override;
@@ -32,6 +34,7 @@ public: // AbstractXmlGuiControllerFactory API
     std::unique_ptr<AbstractXmlGuiController> create(KXMLGUIClient* guiClient) const override;
 
 private:
+    AbstractUserMessagesHandler* const m_userMessagesHandler;
     QWidget* const m_parentWidget;
 };
 

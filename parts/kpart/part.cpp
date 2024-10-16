@@ -118,7 +118,7 @@ OktetaPart::OktetaPart(QObject* parent,
     }
     addController(Kasten::SearchControllerFactory(userMessagesHandler, widget));
     if (modus == Modus::ReadWrite) {
-        addController(Kasten::ReplaceControllerFactory(widget));
+        addController(Kasten::ReplaceControllerFactory(userMessagesHandler, widget));
     }
     addController(Kasten::GotoOffsetControllerFactory(mSingleViewArea.get()));
     addController(Kasten::SelectRangeControllerFactory(mSingleViewArea.get()));

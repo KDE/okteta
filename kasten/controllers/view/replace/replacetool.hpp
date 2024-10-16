@@ -59,6 +59,8 @@ public: // status
     bool hasSelectedData() const;
     QString charCodingName() const;
 
+    AbstractModel* targetModel() const;
+
     bool isApplyable() const; // candidate for AbstractTool API
 
 public: // actions

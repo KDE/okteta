@@ -13,8 +13,9 @@
 
 namespace Kasten {
 
-ReplaceControllerFactory::ReplaceControllerFactory(QWidget* parentWidget)
-    : m_parentWidget(parentWidget)
+ReplaceControllerFactory::ReplaceControllerFactory(AbstractUserMessagesHandler* userMessagesHandler, QWidget* parentWidget)
+    : m_userMessagesHandler(userMessagesHandler)
+    , m_parentWidget(parentWidget)
 {
 }
 
@@ -22,7 +23,7 @@ ReplaceControllerFactory::~ReplaceControllerFactory() = default;
 
 std::unique_ptr<AbstractXmlGuiController> ReplaceControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    return std::make_unique<ReplaceController>(guiClient, m_parentWidget);
+    return std::make_unique<ReplaceController>(guiClient, m_userMessagesHandler, m_parentWidget);
 }
 
 }

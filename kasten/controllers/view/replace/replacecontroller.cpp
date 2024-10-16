@@ -12,6 +12,9 @@
 #include "replacedialog.hpp"
 #include "replaceprompt.hpp"
 #include "replacetool.hpp"
+// Kasten core
+#include <Kasten/AbstractUserMessagesHandler>
+#include <Kasten/UserNotification>
 // KF
 #include <KXmlGuiWindow>
 #include <KLocalizedString>
@@ -24,8 +27,9 @@
 namespace Kasten {
 
 // TODO: for docked widgets signal widgets if embedded or floating, if horizontal/vertical
-ReplaceController::ReplaceController(KXMLGUIClient* guiClient, QWidget* parentWidget)
-    : mParentWidget(parentWidget)
+ReplaceController::ReplaceController(KXMLGUIClient* guiClient, AbstractUserMessagesHandler* userMessagesHandler, QWidget* parentWidget)
+    : m_userMessagesHandler(userMessagesHandler)
+    , mParentWidget(parentWidget)
 {
     mReplaceAction = KStandardAction::replace(this, &ReplaceController::replace, this);
 
@@ -66,15 +70,17 @@ void ReplaceController::onFinished(bool previousFound, int noOfReplacements)
     }
 
     const QString messageBoxTitle = i18nc("@title:window", "Replace");
-    const QString replacementReport = (noOfReplacements == 0) ?
-                                      i18nc("@info", "No replacements made.") :
-                                      i18ncp("@info", "1 replacement made.", "%1 replacements made.", noOfReplacements);
+    QString replacementReport;
 
     if (!previousFound) {
-        KMessageBox::information(mParentWidget, i18nc("@info", "Replace pattern not found in byte array."), messageBoxTitle);
+        replacementReport = i18nc("@info", "Replace pattern not found in byte array.");
     } else {
-        KMessageBox::information(mParentWidget, replacementReport, messageBoxTitle);
+        replacementReport = (noOfReplacements == 0) ?
+                            i18nc("@info", "No replacements made.") :
+                            i18ncp("@info", "1 replacement made.", "%1 replacements made.", noOfReplacements);
     }
+    auto message = std::make_unique<Kasten::UserNotification>(mTool->targetModel(), replacementReport, messageBoxTitle);
+    m_userMessagesHandler->postNotification(std::move(message));
 }
 
 void ReplaceController::queryContinue(FindDirection direction, int noOfReplacements)
