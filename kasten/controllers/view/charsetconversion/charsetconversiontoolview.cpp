@@ -14,8 +14,9 @@
 
 namespace Kasten {
 
-CharsetConversionToolView::CharsetConversionToolView(CharsetConversionTool* tool)
-    : mWidget(std::make_unique<CharsetConversionView>(tool))
+CharsetConversionToolView::CharsetConversionToolView(CharsetConversionTool* tool,
+                                                     AbstractUserMessagesHandler* userMessagesHandler)
+    : mWidget(std::make_unique<CharsetConversionView>(tool, userMessagesHandler))
 {
 }
 

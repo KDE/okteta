@@ -16,10 +16,12 @@
 
 namespace Kasten {
 
+class AbstractUserMessagesHandler;
+
 class OKTETAKASTENCONTROLLERS_EXPORT CharsetConversionToolViewFactory : public AbstractToolViewFactory
 {
 public:
-    CharsetConversionToolViewFactory();
+    explicit CharsetConversionToolViewFactory(AbstractUserMessagesHandler* userMessagesHandler);
     CharsetConversionToolViewFactory(const CharsetConversionToolViewFactory&) = delete;
 
     ~CharsetConversionToolViewFactory() override;
@@ -33,6 +35,9 @@ public: // AbstractToolViewFactory API
     QString title() const override;
     QString id() const override;
     SidePosition defaultPosition() const override;
+
+private:
+    AbstractUserMessagesHandler* const m_userMessagesHandler;
 };
 
 }

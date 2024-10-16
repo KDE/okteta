@@ -233,7 +233,7 @@ void OktetaMainWindow::setupControllers()
     addToolFromFactory(DocumentInfoToolViewFactory(), DocumentInfoToolFactory(syncManager));
     addToolFromFactory(ChecksumToolViewFactory(), ChecksumToolFactory());
     addToolFromFactory(FilterToolViewFactory(), FilterToolFactory());
-    addToolFromFactory(CharsetConversionToolViewFactory(), CharsetConversionToolFactory());
+    addToolFromFactory(CharsetConversionToolViewFactory(userMessagesHandler), CharsetConversionToolFactory());
     addToolFromFactory(StringsExtractToolViewFactory(), StringsExtractToolFactory());
     addToolFromFactory(ByteTableToolViewFactory(), ByteTableToolFactory());
     addToolFromFactory(InfoToolViewFactory(), InfoToolFactory());

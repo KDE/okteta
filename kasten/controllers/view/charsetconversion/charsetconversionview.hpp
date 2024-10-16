@@ -25,6 +25,7 @@ class QAction;
 
 namespace Kasten {
 
+class AbstractUserMessagesHandler;
 class CharsetConversionTool;
 
 class CharsetConversionView : public QWidget
@@ -32,7 +33,9 @@ class CharsetConversionView : public QWidget
     Q_OBJECT
 
 public:
-    explicit CharsetConversionView(CharsetConversionTool* tool, QWidget* parent = nullptr);
+    explicit CharsetConversionView(CharsetConversionTool* tool,
+                                   AbstractUserMessagesHandler* userMessagesHandler,
+                                   QWidget* parent = nullptr);
     ~CharsetConversionView() override;
 
 public:
@@ -50,6 +53,8 @@ private Q_SLOTS: // tool
 
 private:
     CharsetConversionTool* const mTool;
+
+    AbstractUserMessagesHandler* const m_userMessagesHandler;
 
     KComboBox* mDirectionComboBox;
     KComboBox* mOtherCharSetComboBox;

@@ -12,6 +12,9 @@
 #include "charsetconversiontool.hpp"
 // Okteta Kasten gui
 #include <Kasten/Okteta/ByteArrayComboBox>
+// Kasten core
+#include <Kasten/AbstractUserMessagesHandler>
+#include <Kasten/UserNotification>
 // Okteta core
 #include <Okteta/CharCodec>
 // KF
@@ -30,9 +33,12 @@
 
 namespace Kasten {
 
-CharsetConversionView::CharsetConversionView(CharsetConversionTool* tool, QWidget* parent)
+CharsetConversionView::CharsetConversionView(CharsetConversionTool* tool,
+                                             AbstractUserMessagesHandler* userMessagseHandler,
+                                             QWidget* parent)
     : QWidget(parent)
     , mTool(tool)
+    , m_userMessagesHandler(userMessagseHandler)
 {
     auto* baseLayout = new QVBoxLayout(this);
     baseLayout->setContentsMargins(0, 0, 0, 0);
@@ -227,9 +233,9 @@ void CharsetConversionView::onConversionDone(bool success, int convertedBytesCou
                                 i18nc("@info", "No bytes substituted.") :
                                 i18ncp("@info", "1 byte substituted.", "%1 bytes substituted.", totalFailedByteCount);
         }
-        KMessageBox::information(/*mParentWidget*/ nullptr,
-                                 conversionReport,
+        auto message = std::make_unique<Kasten::UserNotification>(mTool->targetModel(), conversionReport,
                                  messageBoxTitle);
+        m_userMessagesHandler->postNotification(std::move(message));
     } else {
         // TODO: show/goto byte which on which conversion fails
         KMessageBox::error(/*mParentWidget*/ nullptr,

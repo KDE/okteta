@@ -127,6 +127,11 @@ QString CharsetConversionTool::title() const
                  "Charset Conversion");
 }
 
+AbstractModel* CharsetConversionTool::targetModel() const
+{
+    return mByteArrayView;
+}
+
 QString CharsetConversionTool::targetCharCodecName() const
 {
     return (mConversionDirection == ConvertTo) ?

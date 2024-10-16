@@ -16,7 +16,10 @@
 
 namespace Kasten {
 
-CharsetConversionToolViewFactory::CharsetConversionToolViewFactory() = default;
+CharsetConversionToolViewFactory::CharsetConversionToolViewFactory(AbstractUserMessagesHandler* userMessagesHandler) 
+    : m_userMessagesHandler(userMessagesHandler)
+{
+}
 
 CharsetConversionToolViewFactory::~CharsetConversionToolViewFactory() = default;
 
@@ -27,7 +30,7 @@ SidePosition CharsetConversionToolViewFactory::defaultPosition() const { return 
 
 std::unique_ptr<AbstractToolView> CharsetConversionToolViewFactory::create(AbstractTool* tool) const
 {
-    return std::make_unique<CharsetConversionToolView>(qobject_cast<CharsetConversionTool*>(tool));
+    return std::make_unique<CharsetConversionToolView>(qobject_cast<CharsetConversionTool*>(tool), m_userMessagesHandler);
 }
 
 }

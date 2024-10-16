@@ -69,7 +69,6 @@ public:
     ~CharsetConversionTool() override;
 
 public: // AbstractTool API
-//     virtual AbstractModel* targetModel() const;
     QString title() const override;
 
     void setTargetModel(AbstractModel* model) override;
@@ -83,6 +82,11 @@ public: // status
     bool isSubstitutingMissingChars() const;
     Okteta::Byte substituteByte() const;
     Coding substituteByteCoding() const;
+
+    /// AbstractTool API candidate
+    /// most outer model which is used
+    /// what if multiple models are touched?
+    AbstractModel* targetModel() const;
 
 public Q_SLOTS: // settings
     void setConversionDirection(int conversionDirection);

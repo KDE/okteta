@@ -16,6 +16,7 @@
 
 namespace Kasten {
 
+class AbstractUserMessagesHandler;
 class CharsetConversionView;
 class CharsetConversionTool;
 
@@ -24,7 +25,8 @@ class CharsetConversionToolView : public AbstractToolView
     Q_OBJECT
 
 public:
-    explicit CharsetConversionToolView(CharsetConversionTool* tool);
+    explicit CharsetConversionToolView(CharsetConversionTool* tool,
+                                       AbstractUserMessagesHandler* userMessagesHandler);
     ~CharsetConversionToolView() override;
 
 public: // AbstractToolView API
