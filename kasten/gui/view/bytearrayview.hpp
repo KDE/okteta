@@ -19,6 +19,7 @@
 #include <Kasten/ZoomLevelsQueryable>
 #include <Kasten/DataSelectable>
 #include <Kasten/SelectedDataWriteable>
+#include <Kasten/UserNotificationsInlineable>
 // Okteta core
 #include <Okteta/AddressRange>
 // Std
@@ -40,6 +41,7 @@ class OKTETAKASTENGUI_EXPORT ByteArrayView : public AbstractView
                                            , public If::ZoomLevelsQueryable
                                            , public If::DataSelectable
                                            , public If::SelectedDataWriteable
+                                           , public If::UserNotificationsInlineable
 {
     Q_OBJECT
     Q_INTERFACES(
@@ -47,6 +49,7 @@ class OKTETAKASTENGUI_EXPORT ByteArrayView : public AbstractView
         Kasten::If::ZoomLevelsQueryable
         Kasten::If::DataSelectable
         Kasten::If::SelectedDataWriteable
+        Kasten::If::UserNotificationsInlineable
     )
 
 public:
@@ -109,6 +112,9 @@ public: // If::SelectedDataWriteable API
     bool canCutSelectedData() const override;
 Q_SIGNALS:
     void canCutSelectedDataChanged(bool canCutSelectedData) override;
+
+public: // If::UserNotificationsInlineable API
+    void showNotification(UserNotification* notification) override;
 
 public: // cursor API
     void setCursorPosition(Okteta::Address cursorPosition);

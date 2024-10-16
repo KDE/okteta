@@ -12,17 +12,14 @@
 #include <Okteta/ByteArrayColumnView>
 #include <Okteta/ByteArrayRowView>
 // Qt
-#include <QHBoxLayout>
 #include <QMimeData>
 #include <QScrollBar>
 
 namespace Okteta {
 
 ByteArrayJanusView::ByteArrayJanusView(QWidget* parent)
-    : QWidget(parent)
+    : Kasten::UserMessagesOverlayedWidget(parent)
 {
-    mLayout = new QHBoxLayout(this);
-    mLayout->setContentsMargins(0, 0, 0, 0);
     setViewModus(ColumnViewId);
 }
 
@@ -72,13 +69,13 @@ void ByteArrayJanusView::setViewModus(int viewModus)
         newView->setSelection(mView->selection());
         newView->setMarking(mView->marking());
 
-        mLayout->removeWidget(mView);
         delete mView;
     }
 
     mView = newView;
 
-    mLayout->addWidget(mView);
+    setMainWidget(mView);
+
     setFocusProxy(mView);
     if (hasFocus) {
         mView->setFocus();
@@ -390,7 +387,10 @@ QRect ByteArrayJanusView::viewRect() const
 
 void ByteArrayJanusView::propagateFont(const QFont& font)
 {
-    setFont(font);
+    // TODO: nothing currently queries the font, so okay to not set it on the wrapper
+    // Though message widgets use the parent wigdet, i.e. this, to take the font.
+    // Needs some way to specify the font used in the message displays.
+    // setFont(font);
     mView->setFont(font);
 }
 

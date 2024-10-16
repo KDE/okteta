@@ -189,6 +189,8 @@ oktetakastengui_add_sublibrary(view
         ByteArrayViewProfile
     PRIVATE
         ByteArrayJanusview
+        UserMessagesOverlayLayout
+        UserMessagesOverlayedWidget
 )
 
 oktetakastengui_add_sublibrary(system

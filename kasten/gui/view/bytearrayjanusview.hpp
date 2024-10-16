@@ -9,19 +9,18 @@
 #ifndef KASTEN_BYTEARRAYJANUSVIEW_HPP
 #define KASTEN_BYTEARRAYJANUSVIEW_HPP
 
+// lib
+#include "usermessagesoverlayedwidget.hpp"
 // Okteta core
 #include <Okteta/AddressRange>
-// Qt
-#include <QWidget>
 
-class QHBoxLayout;
 class QMimeData;
 
 namespace Okteta {
 class AbstractByteArrayView;
 class AbstractByteArrayModel;
 
-class ByteArrayJanusView : public QWidget
+class ByteArrayJanusView : public Kasten::UserMessagesOverlayedWidget
 {
     Q_OBJECT
 
@@ -150,7 +149,6 @@ Q_SIGNALS:
 private:
     AbstractByteArrayView* mView = nullptr;
     int mViewModus = -1;
-    QHBoxLayout* mLayout;
 };
 
 inline int ByteArrayJanusView::viewModus()               const { return mViewModus; }

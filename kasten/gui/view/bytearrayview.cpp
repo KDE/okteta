@@ -239,6 +239,11 @@ void ByteArrayView::onOverwriteModeChanged(bool overwriteMode)
     Q_EMIT canCutSelectedDataChanged(!overwriteMode);
 }
 
+void ByteArrayView::showNotification(UserNotification* notification)
+{
+    mWidget->showNotification(notification);
+}
+
 void ByteArrayView::setCursorPosition(Okteta::Address cursorPosition)
 {
     mWidget->setCursorPosition(cursorPosition);
