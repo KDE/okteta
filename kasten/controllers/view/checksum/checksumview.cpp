@@ -61,7 +61,7 @@ ChecksumView::ChecksumView(ChecksumTool* tool, QWidget* parent)
     baseLayout->addWidget(algorithmToolBar);
 
     // parameter
-    auto* parameterSetBox = new QGroupBox(i18nc("@title:group", "Parameters"), this);
+    auto* parameterSetBox = new QGroupBox(this);
     baseLayout->addWidget(parameterSetBox);
 
     auto* parameterSetLayout = new QVBoxLayout(parameterSetBox);

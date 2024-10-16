@@ -61,7 +61,7 @@ FilterView::FilterView(FilterTool* tool, QWidget* parent)
     filterSelectionToolBar->addWidget(labelledAlgorithmComboBox);
     baseLayout->addWidget(filterSelectionToolBar);
 
-    auto* parameterSetBox = new QGroupBox(i18nc("@title:group", "Parameters"), this);
+    auto* parameterSetBox = new QGroupBox(this);
     baseLayout->addWidget(parameterSetBox);
 
     auto* parameterSetLayout = new QVBoxLayout;
