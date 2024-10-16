@@ -39,6 +39,7 @@ kastengui_add_sublibrary(view
     PUBLIC
         SelectedDataWriteable
         DataSelectable
+        UserNotificationsInlineable
         Zoomable
         ZoomLevelsQueryable
 
@@ -78,6 +79,8 @@ kastengui_add_sublibrary(system
         SingleDocumentStrategy
 
         DialogHandler
+        UserMessagesHandler
+
         DummyView
         ModelCodecViewManager
         ViewManager
