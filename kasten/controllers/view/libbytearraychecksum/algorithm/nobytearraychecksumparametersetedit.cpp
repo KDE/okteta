@@ -8,11 +8,24 @@
 
 #include "nobytearraychecksumparametersetedit.hpp"
 
+// KF
+#include <KLocalizedString>
+// Qt
+#include <QLabel>
+#include <QVBoxLayout>
+
 const char NoByteArrayChecksumParameterSetEdit::Id[] = "None";
 
 NoByteArrayChecksumParameterSetEdit::NoByteArrayChecksumParameterSetEdit(QWidget* parent)
     : AbstractByteArrayChecksumParameterSetEdit(parent)
-{}
+{
+    auto* baseLayout = new QVBoxLayout(this);
+    baseLayout->setContentsMargins(0, 0, 0, 0);
+
+    auto* label = new QLabel(i18nc("@info", "No parameters."), this);
+    label->setEnabled(false);
+    baseLayout->addWidget(label, 0, Qt::AlignCenter);
+}
 
 NoByteArrayChecksumParameterSetEdit::~NoByteArrayChecksumParameterSetEdit() = default;
 
