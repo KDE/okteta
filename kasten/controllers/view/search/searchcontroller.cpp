@@ -11,6 +11,9 @@
 // controller
 #include "searchdialog.hpp"
 #include "searchtool.hpp"
+// Kasten core
+#include <Kasten/AbstractUserMessagesHandler>
+#include <Kasten/UserNotification>
 // KF
 #include <KXMLGUIClient>
 #include <KLocalizedString>
@@ -23,8 +26,10 @@
 namespace Kasten {
 
 // TODO: for docked widgets signal widgets if embedded or floating, if horizontal/vertical
-SearchController::SearchController(KXMLGUIClient* guiClient, QWidget* parentWidget)
-    : mParentWidget(parentWidget)
+SearchController::SearchController(KXMLGUIClient* guiClient,
+                                   AbstractUserMessagesHandler* userMessagesHandler, QWidget* parentWidget)
+    : m_userMessagesHandler(userMessagesHandler)
+    , mParentWidget(parentWidget)
 {
     mFindAction     = KStandardAction::find(    this, &SearchController::find,         this);
     mFindNextAction = KStandardAction::findNext(this, &SearchController::findNext,     this);
@@ -105,7 +110,9 @@ void SearchController::showDialog(FindDirection direction)
 void SearchController::onDataNotFound()
 {
     const QString messageBoxTitle = i18nc("@title:window", "Find");
-    KMessageBox::information(mParentWidget, i18nc("@info", "Search key not found in byte array."), messageBoxTitle);
+    const QString messageText = i18nc("@info", "Search key not found in byte array.");
+    auto message = std::make_unique<Kasten::UserNotification>(mTool->targetModel(), messageText, messageBoxTitle);
+    m_userMessagesHandler->postNotification(std::move(message));
 }
 
 bool SearchController::queryContinue(FindDirection direction) const

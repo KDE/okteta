@@ -212,7 +212,7 @@ void OktetaMainWindow::setupControllers()
 //     addXmlGuiControllerFromFactory(OverwriteOnlyControllerFactory() );
     addXmlGuiControllerFromFactory(CropControllerFactory());
     addXmlGuiControllerFromFactory(OverwriteModeControllerFactory());
-    addXmlGuiControllerFromFactory(SearchControllerFactory(this));
+    addXmlGuiControllerFromFactory(SearchControllerFactory(userMessagesHandler, this));
     addXmlGuiControllerFromFactory(ReplaceControllerFactory(this));
     addXmlGuiControllerFromFactory(GotoOffsetControllerFactory(viewArea));
     addXmlGuiControllerFromFactory(SelectRangeControllerFactory(viewArea));

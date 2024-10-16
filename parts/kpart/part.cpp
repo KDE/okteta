@@ -116,7 +116,7 @@ OktetaPart::OktetaPart(QObject* parent,
     if (modus == Modus::ReadWrite) {
         addController(Kasten::OverwriteModeControllerFactory());
     }
-    addController(Kasten::SearchControllerFactory(widget));
+    addController(Kasten::SearchControllerFactory(userMessagesHandler, widget));
     if (modus == Modus::ReadWrite) {
         addController(Kasten::ReplaceControllerFactory(widget));
     }

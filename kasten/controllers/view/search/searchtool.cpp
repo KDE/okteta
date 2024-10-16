@@ -53,6 +53,11 @@ bool SearchTool::isApplyable() const
 
 QString SearchTool::title() const { return i18nc("@title", "Search"); }
 
+AbstractModel* SearchTool::targetModel() const
+{
+    return mByteArrayView;
+}
+
 bool SearchTool::hasSelectedData()   const { return mByteArrayView->hasSelectedData(); }
 QString SearchTool::charCodingName() const { return mByteArrayView->charCodingName(); }
 

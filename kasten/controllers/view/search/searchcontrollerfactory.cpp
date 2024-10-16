@@ -13,8 +13,9 @@
 
 namespace Kasten {
 
-SearchControllerFactory::SearchControllerFactory(QWidget* parentWidget)
-    : m_parentWidget(parentWidget)
+SearchControllerFactory::SearchControllerFactory(AbstractUserMessagesHandler* userMessagesHandler, QWidget* parentWidget)
+    : m_userMessagesHandler(userMessagesHandler)
+    , m_parentWidget(parentWidget)
 {
 }
 
@@ -22,7 +23,7 @@ SearchControllerFactory::~SearchControllerFactory() = default;
 
 std::unique_ptr<AbstractXmlGuiController> SearchControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    return std::make_unique<SearchController>(guiClient, m_parentWidget);
+    return std::make_unique<SearchController>(guiClient, m_userMessagesHandler, m_parentWidget);
 }
 
 }

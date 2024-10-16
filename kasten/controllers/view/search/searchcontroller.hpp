@@ -24,6 +24,7 @@ class QWidget;
 
 namespace Kasten {
 
+class AbstractUserMessagesHandler;
 class SearchDialog;
 class SearchTool;
 
@@ -33,7 +34,7 @@ class SearchController : public AbstractXmlGuiController
     Q_OBJECT
 
 public:
-    SearchController(KXMLGUIClient* guiClient, QWidget* parentWidget);
+    SearchController(KXMLGUIClient* guiClient, AbstractUserMessagesHandler* userMessagesHandler, QWidget* parentWidget);
     ~SearchController() override;
 
 public: // AbstractXmlGuiController API
@@ -53,6 +54,7 @@ private Q_SLOTS: // action slots
     void onDataNotFound();
 
 private:
+    AbstractUserMessagesHandler* const m_userMessagesHandler;
     QWidget* const mParentWidget;
 
     QAction* mFindAction;
