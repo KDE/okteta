@@ -38,7 +38,7 @@ void UserMessagesOverlayedWidget::createNotificationWidget()
     m_notificationWidget->setMessageType(KMessageWidget::Information);
     m_notificationWidget->hide();
 
-    m_layout->setMessageWidget(m_notificationWidget);
+    m_layout->setNotificationWidget(m_notificationWidget);
 
     connect(&m_notificationAutoHideTimer, &QTimer::timeout,
             m_notificationWidget, &KMessageWidget::animatedHide);

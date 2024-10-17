@@ -28,10 +28,10 @@ public: // QLayout API
     void setGeometry(const QRect& rect) override;
 
 public:
-    void setMessageWidget(QWidget* messageWidget);
+    void setNotificationWidget(QWidget* notificationWidget);
 
 private:
-    QWidget* m_messageWidget = nullptr;
+    QWidget* m_notificationWidget = nullptr;
 };
 
 }

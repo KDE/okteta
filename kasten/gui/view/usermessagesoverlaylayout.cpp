@@ -26,7 +26,7 @@ void UserMessagesOverlayLayout::setGeometry(const QRect& rect)
 {
     QVBoxLayout::setGeometry(rect);
 
-    if (m_messageWidget) {
+    if (m_notificationWidget) {
         // using style margins for now, perhaps should use separate matrics?
         QWidget* const widget = parentWidget();
         QStyle* const style = widget ? widget->style() : qApp->style();
@@ -35,18 +35,18 @@ void UserMessagesOverlayLayout::setGeometry(const QRect& rect)
         const int rightMargin = style->pixelMetric(QStyle::PM_LayoutRightMargin, nullptr, widget);
         const int bottomMargin = style->pixelMetric(QStyle::PM_LayoutBottomMargin, nullptr, widget);
         const QRect adjustedRect = rect.adjusted(leftMargin, topMargin, -rightMargin, -bottomMargin);
-        const QSize messageSize = m_messageWidget->sizeHint();
-        const QRect messageRect(adjustedRect.x(),
-                                adjustedRect.height() - messageSize.height(),
-                                messageSize.width(),
-                                messageSize.height());
-        m_messageWidget->setGeometry(messageRect);
+        const QSize notificationSize = m_notificationWidget->sizeHint();
+        const QRect notificationRect(adjustedRect.x(),
+                                     adjustedRect.height() - notificationSize.height(),
+                                     notificationSize.width(),
+                                     notificationSize.height());
+        m_notificationWidget->setGeometry(notificationRect);
     }
 }
 
-void UserMessagesOverlayLayout::setMessageWidget(QWidget* messageWidget)
+void UserMessagesOverlayLayout::setNotificationWidget(QWidget* notificationWidget)
 {
-    m_messageWidget = messageWidget;
+    m_notificationWidget = notificationWidget;
     invalidate();
 }
 
