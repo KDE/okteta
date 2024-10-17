@@ -22,21 +22,21 @@ static constexpr int DefaultMessageAutoHideTimeout = 6 * 1000;
 UserMessagesOverlayedWidget::UserMessagesOverlayedWidget(QWidget* parent)
     : QWidget(parent)
 {
-    m_messageAutoHideTimer.setSingleShot(true);
-    m_messageAutoHideTimer.setInterval(DefaultMessageAutoHideTimeout);
+    m_notificationAutoHideTimer.setSingleShot(true);
+    m_notificationAutoHideTimer.setInterval(DefaultMessageAutoHideTimeout);
 
     m_layout = new UserMessagesOverlayLayout(this);
     m_layout->setContentsMargins(0, 0, 0, 0);
 
-    m_messageWidget = new KMessageWidget(this);
-    m_messageWidget->setCloseButtonVisible(false);
-    m_messageWidget->setMessageType(KMessageWidget::Information);
-    m_messageWidget->hide();
+    m_notificationWidget = new KMessageWidget(this);
+    m_notificationWidget->setCloseButtonVisible(false);
+    m_notificationWidget->setMessageType(KMessageWidget::Information);
+    m_notificationWidget->hide();
 
-    m_layout->setMessageWidget(m_messageWidget);
+    m_layout->setMessageWidget(m_notificationWidget);
 
-    connect(&m_messageAutoHideTimer, &QTimer::timeout,
-            m_messageWidget, &KMessageWidget::animatedHide);
+    connect(&m_notificationAutoHideTimer, &QTimer::timeout,
+            m_notificationWidget, &KMessageWidget::animatedHide);
 }
 
 UserMessagesOverlayedWidget::~UserMessagesOverlayedWidget() = default;
@@ -47,14 +47,14 @@ void UserMessagesOverlayedWidget::setMainWidget(QWidget* widget)
     setFocusProxy(widget);
 
     // ensure z-order of message widgets
-    m_messageWidget->raise();
+    m_notificationWidget->raise();
 }
 
 void UserMessagesOverlayedWidget::showNotification(UserNotification* notification)
 {
-    m_messageWidget->setText(notification->text());
-    m_messageWidget->animatedShow();
-    m_messageAutoHideTimer.start();
+    m_notificationWidget->setText(notification->text());
+    m_notificationWidget->animatedShow();
+    m_notificationAutoHideTimer.start();
 }
 
 }

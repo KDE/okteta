@@ -36,8 +36,8 @@ public:
 private:
     UserMessagesOverlayLayout* m_layout;
 
-    KMessageWidget* m_messageWidget;
-    QTimer m_messageAutoHideTimer;
+    KMessageWidget* m_notificationWidget;
+    QTimer m_notificationAutoHideTimer;
 };
 
 }
