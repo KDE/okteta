@@ -27,7 +27,12 @@ UserMessagesOverlayedWidget::UserMessagesOverlayedWidget(QWidget* parent)
 
     m_layout = new UserMessagesOverlayLayout(this);
     m_layout->setContentsMargins(0, 0, 0, 0);
+}
 
+UserMessagesOverlayedWidget::~UserMessagesOverlayedWidget() = default;
+
+void UserMessagesOverlayedWidget::createNotificationWidget()
+{
     m_notificationWidget = new KMessageWidget(this);
     m_notificationWidget->setCloseButtonVisible(false);
     m_notificationWidget->setMessageType(KMessageWidget::Information);
@@ -39,19 +44,23 @@ UserMessagesOverlayedWidget::UserMessagesOverlayedWidget(QWidget* parent)
             m_notificationWidget, &KMessageWidget::animatedHide);
 }
 
-UserMessagesOverlayedWidget::~UserMessagesOverlayedWidget() = default;
-
 void UserMessagesOverlayedWidget::setMainWidget(QWidget* widget)
 {
     m_layout->addWidget(widget);
     setFocusProxy(widget);
 
     // ensure z-order of message widgets
-    m_notificationWidget->raise();
+    if (m_notificationWidget) {
+        m_notificationWidget->raise();
+    }
 }
 
 void UserMessagesOverlayedWidget::showNotification(UserNotification* notification)
 {
+    if (! m_notificationWidget) {
+        createNotificationWidget();
+    }
+
     m_notificationWidget->setText(notification->text());
     m_notificationWidget->animatedShow();
     m_notificationAutoHideTimer.start();

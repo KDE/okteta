@@ -34,9 +34,12 @@ public:
     void setMainWidget(QWidget* widget);
 
 private:
+    void createNotificationWidget();
+
+private:
     UserMessagesOverlayLayout* m_layout;
 
-    KMessageWidget* m_notificationWidget;
+    KMessageWidget* m_notificationWidget = nullptr;
     QTimer m_notificationAutoHideTimer;
 };
 
