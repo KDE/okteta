@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-07 01:47+0000\n"
+"POT-Creation-Date: 2024-10-17 01:50+0000\n"
 "PO-Revision-Date: 2024-05-06 09:52+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -318,39 +318,39 @@ msgctxt "@title:window of the tool to convert between charsets"
 msgid "Charset Conversion"
 msgstr "字元集轉換"
 
-#: controllers/view/charsetconversion/charsetconversiontool.cpp:294
+#: controllers/view/charsetconversion/charsetconversiontool.cpp:299
 #, kde-format
 msgctxt "Converted from charset 1 to charset 2"
 msgid "%1 to %2"
 msgstr "%1 到 %2"
 
-#: controllers/view/charsetconversion/charsetconversiontoolviewfactory.cpp:24
+#: controllers/view/charsetconversion/charsetconversiontoolviewfactory.cpp:27
 #, kde-format
 msgctxt "@title:window"
 msgid "Charset Conversion"
 msgstr "字元集轉換"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:47
+#: controllers/view/charsetconversion/charsetconversionview.cpp:53
 #, kde-format
 msgctxt ""
 "@item:inmenu Is converted _from_ charset (selected in combobox next to this)"
 msgid "From"
 msgstr "從"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:49
+#: controllers/view/charsetconversion/charsetconversionview.cpp:55
 #, kde-format
 msgctxt ""
 "@item:inmenu Is converted _to_ charset (selected in combobox next to this)"
 msgid "To"
 msgstr "到"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:56
+#: controllers/view/charsetconversion/charsetconversionview.cpp:62
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The direction the bytes are converted, to or from the selected charset."
 msgstr "要轉換位元組的方向，是來源還是目標字元集。"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:60
+#: controllers/view/charsetconversion/charsetconversionview.cpp:66
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -358,34 +358,26 @@ msgid ""
 "charset."
 msgstr "選擇要轉換位元組的方向，是來源還是目標字元集。"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:76
+#: controllers/view/charsetconversion/charsetconversionview.cpp:82
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The charset the bytes are converted to."
 msgstr "位元組要轉換為哪個字元集。"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:80
+#: controllers/view/charsetconversion/charsetconversionview.cpp:86
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Select the charset the bytes are converted to."
 msgstr "選擇位元組要轉換為哪個字元集。"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:90
-#: controllers/view/checksum/checksumview.cpp:64
-#: controllers/view/filter/filterview.cpp:64
-#, kde-format
-msgctxt "@title:group"
-msgid "Parameters"
-msgstr "參數"
-
-#: controllers/view/charsetconversion/charsetconversionview.cpp:96
+#: controllers/view/charsetconversion/charsetconversionview.cpp:102
 #, kde-format
 msgctxt ""
 "@option:check substitute bytes whose char is not part of the target charset"
 msgid "Substitute missing:"
 msgstr "替換不存在的目標字元："
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:101
+#: controllers/view/charsetconversion/charsetconversionview.cpp:107
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -395,7 +387,7 @@ msgstr ""
 "若是某個位元組在來源字元集中存在，但不存在於目標字元集因此無法轉換時，是否要"
 "以預設位元組替換。"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:105
+#: controllers/view/charsetconversion/charsetconversionview.cpp:111
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -405,38 +397,38 @@ msgstr ""
 "若是某個位元組在來源字元集中存在，但不存在於目標字元集因此無法轉換時，設為"
 "「真」則會以預設位元組替換。"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:121
+#: controllers/view/charsetconversion/charsetconversionview.cpp:127
 #, kde-format
 msgctxt ""
 "@label:textbox byte to use for chars which are not part of the target charset"
 msgid "Substitute byte:"
 msgstr "替換位元組："
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:128
+#: controllers/view/charsetconversion/charsetconversionview.cpp:134
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte to use for chars which are not part of the target charset."
 msgstr "若是目標位元組裡沒有該字元時，要用哪個位元組替代。"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:131
+#: controllers/view/charsetconversion/charsetconversionview.cpp:137
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
 "Define the byte to use for chars which are not part of the target charset."
 msgstr "定義若是目標位元組裡沒有該字元時，要用哪個位元組替代。"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:165
+#: controllers/view/charsetconversion/charsetconversionview.cpp:171
 #, kde-format
 msgid "Con&vert"
 msgstr "轉換(&V)"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:168
+#: controllers/view/charsetconversion/charsetconversionview.cpp:174
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Converts the bytes in the selected range."
 msgstr "轉換在選取範圍內的位元組。"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:170
+#: controllers/view/charsetconversion/charsetconversionview.cpp:176
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -447,33 +439,33 @@ msgstr ""
 "如果您按下<interface>轉換</interface>按鍵，會對選取範圍內的位元組執行取代為目"
 "標字元集的動作。"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:216
+#: controllers/view/charsetconversion/charsetconversionview.cpp:222
 #, kde-format
 msgctxt "@info"
 msgid "No bytes converted."
 msgstr "沒有轉換任何位元組。"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:217
+#: controllers/view/charsetconversion/charsetconversionview.cpp:223
 #, kde-format
 msgctxt "@info"
 msgid "1 byte converted."
 msgid_plural "%1 bytes converted."
 msgstr[0] "轉換了 %1 個位元組。"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:227
+#: controllers/view/charsetconversion/charsetconversionview.cpp:233
 #, kde-format
 msgctxt "@info"
 msgid "No bytes substituted."
 msgstr "沒有替換任何位元組。"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:228
+#: controllers/view/charsetconversion/charsetconversionview.cpp:234
 #, kde-format
 msgctxt "@info"
 msgid "1 byte substituted."
 msgid_plural "%1 bytes substituted."
 msgstr[0] "替換了 %1 個位元組"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:237
+#: controllers/view/charsetconversion/charsetconversionview.cpp:243
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -848,6 +840,15 @@ msgctxt "@info:tooltip"
 msgid "The byte order to use for decoding the bytes into integer values."
 msgstr "用於將位元組解為整數值時的位元組順序。"
 
+#: controllers/view/libbytearraychecksum/algorithm/nobytearraychecksumparametersetedit.cpp:25
+#: controllers/view/libbytearrayfilter/filter/nobytearrayfilterparametersetedit.cpp:25
+#, fuzzy, kde-format
+#| msgctxt "@title:group"
+#| msgid "Parameters"
+msgctxt "@info"
+msgid "No parameters."
+msgstr "參數"
+
 #: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:48
 #, kde-format
 msgctxt "name of the hash algorithm"
@@ -1174,8 +1175,8 @@ msgid "UTF-8"
 msgstr "UTF-8"
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:73
-#: controllers/view/search/searchcontroller.cpp:107
-#: controllers/view/search/searchcontroller.cpp:113
+#: controllers/view/search/searchcontroller.cpp:112
+#: controllers/view/search/searchcontroller.cpp:120
 #, kde-format
 msgctxt "@title:window"
 msgid "Find"
@@ -1387,43 +1388,43 @@ msgctxt "in the footer of the printed page, e.g. Printed by: Joe User"
 msgid "Printed by: %U"
 msgstr "列印者：%U"
 
-#: controllers/view/replace/replacecontroller.cpp:68
-#: controllers/view/replace/replacecontroller.cpp:82
+#: controllers/view/replace/replacecontroller.cpp:72
+#: controllers/view/replace/replacecontroller.cpp:88
 #, kde-format
 msgctxt "@title:window"
 msgid "Replace"
 msgstr "取代"
 
-#: controllers/view/replace/replacecontroller.cpp:70
-#: controllers/view/replace/replacecontroller.cpp:84
+#: controllers/view/replace/replacecontroller.cpp:76
+#, kde-format
+msgctxt "@info"
+msgid "Replace pattern not found in byte array."
+msgstr "在位元陣列中找不到要取代的對象。"
+
+#: controllers/view/replace/replacecontroller.cpp:79
+#: controllers/view/replace/replacecontroller.cpp:90
 #, kde-format
 msgctxt "@info"
 msgid "No replacements made."
 msgstr "沒有完成任何取代。"
 
-#: controllers/view/replace/replacecontroller.cpp:71
-#: controllers/view/replace/replacecontroller.cpp:85
+#: controllers/view/replace/replacecontroller.cpp:80
+#: controllers/view/replace/replacecontroller.cpp:91
 #, kde-format
 msgctxt "@info"
 msgid "1 replacement made."
 msgid_plural "%1 replacements made."
 msgstr[0] "完成了 %1 個取代。"
 
-#: controllers/view/replace/replacecontroller.cpp:74
-#, kde-format
-msgctxt "@info"
-msgid "Replace pattern not found in byte array."
-msgstr "在位元陣列中找不到要取代的對象。"
-
-#: controllers/view/replace/replacecontroller.cpp:87
-#: controllers/view/search/searchcontroller.cpp:115
+#: controllers/view/replace/replacecontroller.cpp:93
+#: controllers/view/search/searchcontroller.cpp:122
 #, kde-kuit-format
 msgctxt "@info"
 msgid "End of byte array reached.<nl/>Continue from the beginning?"
 msgstr "到達位元陣列的尾端。<nl/>要從開頭繼續嗎？"
 
-#: controllers/view/replace/replacecontroller.cpp:88
-#: controllers/view/search/searchcontroller.cpp:116
+#: controllers/view/replace/replacecontroller.cpp:94
+#: controllers/view/search/searchcontroller.cpp:123
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Beginning of byte array reached.<nl/>Continue from the end?"
@@ -1514,7 +1515,7 @@ msgctxt "@title"
 msgid "Replace"
 msgstr "取代"
 
-#: controllers/view/search/searchcontroller.cpp:108
+#: controllers/view/search/searchcontroller.cpp:113
 #, kde-format
 msgctxt "@info"
 msgid "Search key not found in byte array."

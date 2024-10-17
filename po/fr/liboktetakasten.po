@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-07 01:47+0000\n"
+"POT-Creation-Date: 2024-10-17 01:50+0000\n"
 "PO-Revision-Date: 2024-10-02 09:08+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -337,33 +337,33 @@ msgctxt "@title:window of the tool to convert between charsets"
 msgid "Charset Conversion"
 msgstr "Conversion de jeu de caractères"
 
-#: controllers/view/charsetconversion/charsetconversiontool.cpp:294
+#: controllers/view/charsetconversion/charsetconversiontool.cpp:299
 #, kde-format
 msgctxt "Converted from charset 1 to charset 2"
 msgid "%1 to %2"
 msgstr "%1 vers %2"
 
-#: controllers/view/charsetconversion/charsetconversiontoolviewfactory.cpp:24
+#: controllers/view/charsetconversion/charsetconversiontoolviewfactory.cpp:27
 #, kde-format
 msgctxt "@title:window"
 msgid "Charset Conversion"
 msgstr "Conversion d'un jeu de caractères"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:47
+#: controllers/view/charsetconversion/charsetconversionview.cpp:53
 #, kde-format
 msgctxt ""
 "@item:inmenu Is converted _from_ charset (selected in combobox next to this)"
 msgid "From"
 msgstr "De"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:49
+#: controllers/view/charsetconversion/charsetconversionview.cpp:55
 #, kde-format
 msgctxt ""
 "@item:inmenu Is converted _to_ charset (selected in combobox next to this)"
 msgid "To"
 msgstr "Vers"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:56
+#: controllers/view/charsetconversion/charsetconversionview.cpp:62
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The direction the bytes are converted, to or from the selected charset."
@@ -371,7 +371,7 @@ msgstr ""
 "La direction dans laquelle les octets sont convertis, depuis ou vers le jeu "
 "de caractères sélectionné."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:60
+#: controllers/view/charsetconversion/charsetconversionview.cpp:66
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -381,35 +381,27 @@ msgstr ""
 "Sélectionnez la direction dans laquelle les octets sont convertis, vers ou "
 "depuis le jeu de caractères sélectionné."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:76
+#: controllers/view/charsetconversion/charsetconversionview.cpp:82
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The charset the bytes are converted to."
 msgstr "Le jeu de caractères vers lequel les octets sont convertis."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:80
+#: controllers/view/charsetconversion/charsetconversionview.cpp:86
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Select the charset the bytes are converted to."
 msgstr ""
 "Sélectionnez le jeu de caractères dans lequel les octets sont convertis."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:90
-#: controllers/view/checksum/checksumview.cpp:64
-#: controllers/view/filter/filterview.cpp:64
-#, kde-format
-msgctxt "@title:group"
-msgid "Parameters"
-msgstr "Paramètres"
-
-#: controllers/view/charsetconversion/charsetconversionview.cpp:96
+#: controllers/view/charsetconversion/charsetconversionview.cpp:102
 #, kde-format
 msgctxt ""
 "@option:check substitute bytes whose char is not part of the target charset"
 msgid "Substitute missing:"
 msgstr "Substituer ce qui manque :"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:101
+#: controllers/view/charsetconversion/charsetconversionview.cpp:107
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -420,7 +412,7 @@ msgstr ""
 "caractère dans le jeu de caractères source ne fait pas partie du jeu de "
 "caractères cible."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:105
+#: controllers/view/charsetconversion/charsetconversionview.cpp:111
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -431,14 +423,14 @@ msgstr ""
 "un octet par défaut si son caractère dans le jeu de caractères source ne "
 "fait pas partie du jeu de caractères cible."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:121
+#: controllers/view/charsetconversion/charsetconversionview.cpp:127
 #, kde-format
 msgctxt ""
 "@label:textbox byte to use for chars which are not part of the target charset"
 msgid "Substitute byte:"
 msgstr "Octet de substitution :"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:128
+#: controllers/view/charsetconversion/charsetconversionview.cpp:134
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte to use for chars which are not part of the target charset."
@@ -446,7 +438,7 @@ msgstr ""
 "L'octet à utiliser pour les caractères ne faisant pas partie du jeu de "
 "caractères cible."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:131
+#: controllers/view/charsetconversion/charsetconversionview.cpp:137
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -455,18 +447,18 @@ msgstr ""
 "Définissez l'octet à utiliser pour les caractères ne faisant pas partie du "
 "jeu de caractères cible."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:165
+#: controllers/view/charsetconversion/charsetconversionview.cpp:171
 #, kde-format
 msgid "Con&vert"
 msgstr "Con&vertir"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:168
+#: controllers/view/charsetconversion/charsetconversionview.cpp:174
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Converts the bytes in the selected range."
 msgstr "Convertit les octets situés dans l'intervalle sélectionné."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:170
+#: controllers/view/charsetconversion/charsetconversionview.cpp:176
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -478,13 +470,13 @@ msgstr ""
 "octets situés dans l'intervalle sélectionné seront remplacés par les octets "
 "représentant le même caractère dans le jeu de caractères sélectionné."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:216
+#: controllers/view/charsetconversion/charsetconversionview.cpp:222
 #, kde-format
 msgctxt "@info"
 msgid "No bytes converted."
 msgstr "Pas d'octets à convertir."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:217
+#: controllers/view/charsetconversion/charsetconversionview.cpp:223
 #, kde-format
 msgctxt "@info"
 msgid "1 byte converted."
@@ -492,13 +484,13 @@ msgid_plural "%1 bytes converted."
 msgstr[0] "Un octet converti."
 msgstr[1] "%1 octets convertis."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:227
+#: controllers/view/charsetconversion/charsetconversionview.cpp:233
 #, kde-format
 msgctxt "@info"
 msgid "No bytes substituted."
 msgstr "Pas d'octets substitués."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:228
+#: controllers/view/charsetconversion/charsetconversionview.cpp:234
 #, kde-format
 msgctxt "@info"
 msgid "1 byte substituted."
@@ -506,7 +498,7 @@ msgid_plural "%1 bytes substituted."
 msgstr[0] "Un octet substitué."
 msgstr[1] "%1 octets substitués."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:237
+#: controllers/view/charsetconversion/charsetconversionview.cpp:243
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -899,6 +891,15 @@ msgid "The byte order to use for decoding the bytes into integer values."
 msgstr ""
 "L'ordre des octets à utiliser pour décoder les octets en valeurs entières."
 
+#: controllers/view/libbytearraychecksum/algorithm/nobytearraychecksumparametersetedit.cpp:25
+#: controllers/view/libbytearrayfilter/filter/nobytearrayfilterparametersetedit.cpp:25
+#, fuzzy, kde-format
+#| msgctxt "@title:group"
+#| msgid "Parameters"
+msgctxt "@info"
+msgid "No parameters."
+msgstr "Paramètres"
+
 #: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:48
 #, kde-format
 msgctxt "name of the hash algorithm"
@@ -1235,8 +1236,8 @@ msgid "UTF-8"
 msgstr "UTF-8"
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:73
-#: controllers/view/search/searchcontroller.cpp:107
-#: controllers/view/search/searchcontroller.cpp:113
+#: controllers/view/search/searchcontroller.cpp:112
+#: controllers/view/search/searchcontroller.cpp:120
 #, kde-format
 msgctxt "@title:window"
 msgid "Find"
@@ -1461,22 +1462,29 @@ msgctxt "in the footer of the printed page, e.g. Printed by: Joe User"
 msgid "Printed by: %U"
 msgstr "Imprimé par : %U"
 
-#: controllers/view/replace/replacecontroller.cpp:68
-#: controllers/view/replace/replacecontroller.cpp:82
+#: controllers/view/replace/replacecontroller.cpp:72
+#: controllers/view/replace/replacecontroller.cpp:88
 #, kde-format
 msgctxt "@title:window"
 msgid "Replace"
 msgstr "Remplacer"
 
-#: controllers/view/replace/replacecontroller.cpp:70
-#: controllers/view/replace/replacecontroller.cpp:84
+#: controllers/view/replace/replacecontroller.cpp:76
+#, kde-format
+msgctxt "@info"
+msgid "Replace pattern not found in byte array."
+msgstr ""
+"Impossible de trouver le motif de remplacement dans le tableau d'octets."
+
+#: controllers/view/replace/replacecontroller.cpp:79
+#: controllers/view/replace/replacecontroller.cpp:90
 #, kde-format
 msgctxt "@info"
 msgid "No replacements made."
 msgstr "Aucun remplacement effectué."
 
-#: controllers/view/replace/replacecontroller.cpp:71
-#: controllers/view/replace/replacecontroller.cpp:85
+#: controllers/view/replace/replacecontroller.cpp:80
+#: controllers/view/replace/replacecontroller.cpp:91
 #, kde-format
 msgctxt "@info"
 msgid "1 replacement made."
@@ -1484,23 +1492,16 @@ msgid_plural "%1 replacements made."
 msgstr[0] "Un remplacement effectué."
 msgstr[1] "%1 remplacements effectués."
 
-#: controllers/view/replace/replacecontroller.cpp:74
-#, kde-format
-msgctxt "@info"
-msgid "Replace pattern not found in byte array."
-msgstr ""
-"Impossible de trouver le motif de remplacement dans le tableau d'octets."
-
-#: controllers/view/replace/replacecontroller.cpp:87
-#: controllers/view/search/searchcontroller.cpp:115
+#: controllers/view/replace/replacecontroller.cpp:93
+#: controllers/view/search/searchcontroller.cpp:122
 #, kde-kuit-format
 msgctxt "@info"
 msgid "End of byte array reached.<nl/>Continue from the beginning?"
 msgstr ""
 "La fin du tableau d'octets à été atteinte.<nl/>Continuer depuis le début ?"
 
-#: controllers/view/replace/replacecontroller.cpp:88
-#: controllers/view/search/searchcontroller.cpp:116
+#: controllers/view/replace/replacecontroller.cpp:94
+#: controllers/view/search/searchcontroller.cpp:123
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Beginning of byte array reached.<nl/>Continue from the end?"
@@ -1596,7 +1597,7 @@ msgctxt "@title"
 msgid "Replace"
 msgstr "Remplacer"
 
-#: controllers/view/search/searchcontroller.cpp:108
+#: controllers/view/search/searchcontroller.cpp:113
 #, kde-format
 msgctxt "@info"
 msgid "Search key not found in byte array."
