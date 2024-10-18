@@ -39,6 +39,7 @@ kastengui_add_sublibrary(view
     PUBLIC
         SelectedDataWriteable
         DataSelectable
+        UserErrorReportsInlineable
         UserNotificationsInlineable
         Zoomable
         ZoomLevelsQueryable
