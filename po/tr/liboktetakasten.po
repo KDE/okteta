@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: kdesdk-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-07 03:15+0000\n"
-"PO-Revision-Date: 2024-03-01 16:12+0300\n"
+"PO-Revision-Date: 2024-10-18 01:30+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.02.0\n"
+"X-Generator: Lokalize 24.11.70\n"
 
 #: controllers/document/info/documentinfotool.cpp:48
 #: controllers/document/info/documentinfotoolviewfactory.cpp:24
@@ -799,27 +799,27 @@ msgstr "Modüler toplam 8 bit"
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Big-endian"
-msgstr "Big-endian"
+msgstr "Küçük son haneli"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:29
 #: controllers/view/poddecoder/podtableview.cpp:85
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Little-endian"
-msgstr "Little-endian"
+msgstr "Küçük son haneli"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:35
 #, kde-format
 msgctxt ""
 "@label:listbox byte order to use for decoding the bytes into integer values"
 msgid "Byte Order:"
-msgstr "Bayt Sıralaması:"
+msgstr "Bayt sıralaması:"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:38
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte order to use for decoding the bytes into integer values."
-msgstr "Baytları tam sayı değerlere çözmek için kullanılacak bayt sırası."
+msgstr "Baytları tamsayı değerlere çözmek için kullanılacak bayt sırası."
 
 #: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:70
 #, kde-format
@@ -1741,7 +1741,7 @@ msgstr "Doğrulama başarısız."
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed: \"%1\""
-msgstr "Doğrulama başarısız: \"%1\""
+msgstr "Doğrulama başarısız: “%1”"
 
 #: controllers/view/structures/datatypes/datainformationwithchildren.cpp:235
 #, kde-format
@@ -2182,7 +2182,7 @@ msgstr "Devingen Yapı Tanımları"
 #, kde-format
 msgctxt "@title:window"
 msgid "Advanced Structures Selection"
-msgstr "Gelişmiş Yapılar Seçimi..."
+msgstr "Gelişmiş Yapılar Seçimi…"
 
 #. i18n: ectx: tooltip, entry (UnsignedDisplayBase), group (ValueDisplay)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:9
@@ -2246,7 +2246,8 @@ msgstr ""
 #, kde-format
 msgid "Whether to format integer values according to the current locale"
 msgstr ""
-"Tam sayı değerlerin mevcut yerele göre biçimlendirip biçimlendirilmeyeceği"
+"Tamsayı değerlerin geçerli yerel ayara göre biçimlendirip "
+"biçimlendirilmeyeceği"
 
 #. i18n: ectx: tooltip, entry (FloatPrecision), group (ValueDisplay)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:38
@@ -2271,14 +2272,14 @@ msgstr "Bayt sıralaması"
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Big endian"
-msgstr "Big endian"
+msgstr "Büyük son haneli"
 
 #. i18n: ectx: label, entry (ByteOrder), group (StructureSettings)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:50
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Little endian"
-msgstr "Little endian"
+msgstr "Küçük son haneli"
 
 #: controllers/view/structures/settings/structureviewsettingswidget.cpp:49
 #, kde-format
@@ -2332,25 +2333,25 @@ msgstr "Kısa tür adları kullan"
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:66
 #, kde-format
 msgid "Use locale-aware integer formatting"
-msgstr "Yerel-bağımlı tam sayı biçimleme kullan"
+msgstr "Yerel ayarlara uyan tamsayı biçimlendirmesi kullan"
 
 #. i18n: ectx: property (text), widget (QLabel, unsigned_label)
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:73
 #, kde-format
 msgid "Unsigned values:"
-msgstr "İşaretsiz değerler:"
+msgstr "İmzasız değerler:"
 
 #. i18n: ectx: property (text), widget (QLabel, signed_label)
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:86
 #, kde-format
 msgid "Signed values:"
-msgstr "İşaretli değerler:"
+msgstr "İmzalı değerler:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_LocaleAwareFloatFormatting)
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:99
 #, kde-format
 msgid "Use locale-aware floating-point formatting"
-msgstr "Yerel-bağımlı kayan-noktalı biçimleme kullan"
+msgstr "Yerel ayarlara uyan kayan noktalı değer biçimlendirmesi kullan"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:106
@@ -2405,7 +2406,7 @@ msgstr "Doğrula"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Validate all structures."
-msgstr "Tüm yapılar doğrula."
+msgstr "Tüm yapıları doğrulayın."
 
 #: controllers/view/structures/structureview.cpp:121
 #, kde-format
@@ -2487,13 +2488,13 @@ msgstr "Gruplama yok."
 #, kde-format
 msgctxt "@label:spinbox number of bytes which are grouped"
 msgid "Bytes per Group:"
-msgstr "Grup başına Bayt:"
+msgstr "Grup başına bayt:"
 
 #: controllers/view/viewconfig/bytespergroupdialog.cpp:52
 #, kde-format
 msgctxt "@title:window"
 msgid "Bytes per Group"
-msgstr "Grup başına Bayt:"
+msgstr "Grup başına bayt:"
 
 #: controllers/view/viewconfig/bytesperlinedialog.cpp:34
 #: controllers/view/viewprofiles/viewprofileedit.cpp:126
@@ -2701,7 +2702,7 @@ msgstr "Görüntüle"
 #: controllers/view/viewprofiles/viewprofileedit.cpp:63
 #, kde-format
 msgid "Show Line Offset:"
-msgstr "Satır Ofsetini Göster:"
+msgstr "Satır ofsetini göster:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:67
 #, kde-format
@@ -2718,7 +2719,7 @@ msgstr "Ondalık"
 #: controllers/view/viewprofiles/viewprofileedit.cpp:71
 #, kde-format
 msgid "Offset Coding:"
-msgstr "Ofset Kodlaması:"
+msgstr "Ofset kodlaması:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:75
 #, kde-format
@@ -2741,13 +2742,13 @@ msgstr "Değerler & Karakterler"
 #: controllers/view/viewprofiles/viewprofileedit.cpp:80
 #, kde-format
 msgid "Show Values or Chars:"
-msgstr "Değerleri veya Karakterleri Göster:"
+msgstr "Değerleri veya karakterleri göster:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:84
 #, kde-format
 msgctxt "@label:listbox "
 msgid "Show with Rows or Columns:"
-msgstr "Satır veya Sütunlar ile göster:"
+msgstr "Satırlar veya sütunlar ile göster:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:87
 #, kde-format
@@ -2964,7 +2965,7 @@ msgstr "%1 Düzenlemesi"
 #, kde-format
 msgctxt "@window:title"
 msgid "\"%1\" View Profile"
-msgstr "\"%1\" Görünüm Profili"
+msgstr "“%1” Görünüm Profili"
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:41
 #, kde-format
@@ -3017,26 +3018,26 @@ msgstr "%1 bayt"
 #, kde-format
 msgctxt "@info:status selection: start offset - end offset ()"
 msgid "Selection: %1 - %2 (%3)"
-msgstr "Seçim: %1 - %2 (%3)"
+msgstr "Seçim: %1–%2 (%3)"
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:165
 #, kde-format
 msgctxt "@info:status offset value not available"
 msgid "Offset: -"
-msgstr "Ofset: -"
+msgstr "Ofset: —"
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:166
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:223
 #, kde-format
 msgctxt "@info:status offset value not available"
 msgid "Selection: -"
-msgstr "Seçim: -"
+msgstr "Seçim: —"
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:221
 #, kde-format
 msgctxt "@info:status selection: start offset - end offset (number of bytes)"
 msgid "Selection: %1 - %2 (%3)"
-msgstr "Seçim: %1 - %2 (%3)"
+msgstr "Seçim: %1–%2 (%3)"
 
 #: core/document/bytearraydocument.cpp:53
 #, kde-format
@@ -3081,7 +3082,7 @@ msgstr "Bu dosyayı yüklemek için yeterli çalışma belleği yok."
 #: core/io/filesystem/bytearrayrawfilereloadthread.cpp:58
 #, kde-format
 msgid "Support to load files larger than 2 GiB has not yet been implemented."
-msgstr "2 GiB'tan büyük dosyaları yükleme desteği henüz kullanılamıyor."
+msgstr "2 GiB’tan büyük dosyaları yükleme desteği henüz gerçeklenmedi."
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:108
 #, kde-format
