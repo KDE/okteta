@@ -14,11 +14,11 @@
 #include <Kasten/Okteta/ByteArrayComboBox>
 // Kasten core
 #include <Kasten/AbstractUserMessagesHandler>
+#include <Kasten/UserErrorReport>
 #include <Kasten/UserNotification>
 // Okteta core
 #include <Okteta/CharCodec>
 // KF
-#include <KMessageBox>
 #include <KComboBox>
 #include <KLocalizedString>
 // Qt
@@ -238,12 +238,12 @@ void CharsetConversionView::onConversionDone(bool success, int convertedBytesCou
         m_userMessagesHandler->postNotification(std::move(message));
     } else {
         // TODO: show/goto byte which on which conversion fails
-        KMessageBox::error(/*mParentWidget*/ nullptr,
-                           i18nc("@info",
+        const QString errorReportText = i18nc("@info",
                                  "Conversion cancelled because of chars which are not "
-                                 "in the target charset."),
-                           messageBoxTitle);
-
+                                 "in the target charset.");
+        auto message = std::make_unique<Kasten::UserErrorReport>(mTool->targetModel(), errorReportText,
+                                                                 messageBoxTitle);
+        m_userMessagesHandler->postErrorReport(std::move(message));
     }
 }
 
