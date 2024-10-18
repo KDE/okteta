@@ -16,6 +16,7 @@
 
 namespace Kasten {
 
+class UserErrorReport;
 class UserNotification;
 
 class KASTENCORE_EXPORT AbstractUserMessagesHandler
@@ -24,6 +25,7 @@ public:
     virtual ~AbstractUserMessagesHandler();
 
 public: // API to be implemented
+    virtual void postErrorReport(std::unique_ptr<UserErrorReport>&& errorReport) = 0;
     virtual void postNotification(std::unique_ptr<UserNotification>&& notification) = 0;
 
 };

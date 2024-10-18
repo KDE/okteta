@@ -31,6 +31,7 @@ public:
     UserMessagesHandler& operator=(const UserMessagesHandler&) = delete;
 
 public: // AbstractUserMessagesHandler API
+    void postErrorReport(std::unique_ptr<UserErrorReport>&& errorReport) override;
     void postNotification(std::unique_ptr<UserNotification>&& notification) override;
 
 public:

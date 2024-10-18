@@ -18,6 +18,13 @@ UserMessagesHandler::UserMessagesHandler(QWidget* widget)
 
 UserMessagesHandler::~UserMessagesHandler() = default;
 
+void UserMessagesHandler::postErrorReport(std::unique_ptr<UserErrorReport>&& errorReport)
+{
+    Q_D(UserMessagesHandler);
+
+    d->postErrorReport(std::move(errorReport));
+}
+
 void UserMessagesHandler::postNotification(std::unique_ptr<UserNotification>&& notification)
 {
     Q_D(UserMessagesHandler);

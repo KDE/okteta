@@ -11,11 +11,22 @@
 
 // lib
 #include "usermessageshandler.hpp"
+// Kasten Core
+#include <Kasten/UserErrorReport>
+// Qt
+#include <QObject>
+// Std
+#include <unordered_map>
+#include <vector>
 
 namespace Kasten {
 
-class UserMessagesHandlerPrivate
+class AbstractModel;
+
+class UserMessagesHandlerPrivate : public QObject
 {
+    Q_OBJECT
+
 public:
     explicit UserMessagesHandlerPrivate(QWidget* widget);
     UserMessagesHandlerPrivate(const UserMessagesHandlerPrivate&) = delete;
@@ -25,13 +36,23 @@ public:
     UserMessagesHandlerPrivate& operator=(const UserMessagesHandlerPrivate&) = delete;
 
 public:
+    void postErrorReport(std::unique_ptr<UserErrorReport>&& errorReport);
     void postNotification(std::unique_ptr<UserNotification>&& notification);
 
 public:
     void setWidget(QWidget* widget);
 
 private:
+    void enqueueErrorReport(AbstractModel* model, std::unique_ptr<UserErrorReport>&& errorReport);
+
+private Q_SLOTS:
+    void onErrorReportHidden();
+    void onModelDestroyed(QObject* object);
+
+private:
     QWidget* m_widget;
+
+    std::unordered_map<QObject*, std::vector<std::unique_ptr<UserErrorReport>>> m_enqueuedErrorReports;
 };
 
 inline UserMessagesHandlerPrivate::UserMessagesHandlerPrivate(QWidget* widget)
