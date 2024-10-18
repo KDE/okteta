@@ -24,9 +24,10 @@
 #include <Okteta/AbstractByteArrayModel>
 // Kasten core
 #include <Kasten/AbstractModelSynchronizer>
+#include <Kasten/AbstractUserMessagesHandler>
+#include <Kasten/UserErrorReport>
 // KF
 #include <KLocalizedString>
-#include <KMessageBox>
 #include <KConfigGroup>
 #include <KSharedConfig>
 // Qt
@@ -167,7 +168,10 @@ inline void KConfigGroup::writeEntry(const char *key, const QPageSize::PageSizeI
 
 namespace Kasten {
 
-PrintTool::PrintTool() = default;
+PrintTool::PrintTool(AbstractUserMessagesHandler* userMessagesHandler)
+    : m_userMessagesHandler(userMessagesHandler)
+{
+}
 
 PrintTool::~PrintTool() = default;
 
@@ -297,7 +301,11 @@ void PrintTool::triggerPrint(QPrinter* printer)
     if (!success) {
         const QString message = i18nc("@info", "Could not print.");
 
-        KMessageBox::error(QApplication::activeWindow(), message, i18nc("@title:window", "Print Byte Array %1", mDocument->title()));
+        auto errorMessage =
+            std::make_unique<Kasten::UserErrorReport>(mByteArrayView,
+                                                      message,
+                                                      i18nc("@title:window", "Print Byte Array %1", mDocument->title()));
+        m_userMessagesHandler->postErrorReport(std::move(errorMessage));
     }
 }
 

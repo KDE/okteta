@@ -13,13 +13,16 @@
 
 namespace Kasten {
 
-PrintControllerFactory::PrintControllerFactory() = default;
+PrintControllerFactory::PrintControllerFactory(AbstractUserMessagesHandler* userMessagesHandler)
+    : m_userMessagesHandler(userMessagesHandler)
+{
+}
 
 PrintControllerFactory::~PrintControllerFactory() = default;
 
 std::unique_ptr<AbstractXmlGuiController> PrintControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    return std::make_unique<PrintController>(guiClient);
+    return std::make_unique<PrintController>(guiClient, m_userMessagesHandler);
 }
 
 }

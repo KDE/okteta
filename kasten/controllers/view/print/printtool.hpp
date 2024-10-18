@@ -25,6 +25,7 @@ namespace Kasten {
 class ByteArrayView;
 class ByteArrayDocument;
 class AbstractModel;
+class AbstractUserMessagesHandler;
 
 /**
    This tool cares for the printing of the byte array to a series of papers.
@@ -73,7 +74,7 @@ private:
     static inline constexpr QPageSize::Unit DefaultPageSizeUnit = QPageSize::Millimeter;
 
 public:
-    PrintTool();
+    explicit PrintTool(AbstractUserMessagesHandler* userMessagesHandler);
     ~PrintTool() override;
 
 public:
@@ -100,6 +101,8 @@ private:
 
     ByteArrayView* mByteArrayView = nullptr;
     Okteta::AbstractByteArrayModel* mByteArrayModel = nullptr;
+
+    AbstractUserMessagesHandler* const m_userMessagesHandler;
 };
 
 }

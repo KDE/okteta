@@ -16,10 +16,12 @@
 
 namespace Kasten {
 
+class AbstractUserMessagesHandler;
+
 class OKTETAKASTENCONTROLLERS_EXPORT PrintControllerFactory : public AbstractXmlGuiControllerFactory
 {
 public:
-    PrintControllerFactory();
+    PrintControllerFactory(AbstractUserMessagesHandler* userMessagesHandler);
     PrintControllerFactory(const PrintControllerFactory&) = delete;
 
     ~PrintControllerFactory() override;
@@ -28,6 +30,9 @@ public:
 
 public: // AbstractXmlGuiControllerFactory API
     std::unique_ptr<AbstractXmlGuiController> create(KXMLGUIClient* guiClient) const override;
+
+private:
+    AbstractUserMessagesHandler* const m_userMessagesHandler;
 };
 
 }

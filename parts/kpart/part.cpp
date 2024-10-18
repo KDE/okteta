@@ -123,7 +123,7 @@ OktetaPart::OktetaPart(QObject* parent,
     addController(Kasten::GotoOffsetControllerFactory(mSingleViewArea.get()));
     addController(Kasten::SelectRangeControllerFactory(mSingleViewArea.get()));
 //     addController(Kasten::BookmarksControllerFactory());
-    addController(Kasten::PrintControllerFactory());
+    addController(Kasten::PrintControllerFactory(userMessagesHandler));
     addController(Kasten::ViewConfigControllerFactory());
     addController(Kasten::ViewModeControllerFactory());
     addController(Kasten::ViewContextMenuControllerFactory());

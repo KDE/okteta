@@ -20,13 +20,14 @@ class KXMLGUIClient;
 namespace Kasten {
 
 class PrintTool;
+class AbstractUserMessagesHandler;
 
 class PrintController : public AbstractXmlGuiController
 {
     Q_OBJECT
 
 public:
-    explicit PrintController(KXMLGUIClient* guiClient);
+    explicit PrintController(KXMLGUIClient* guiClient, AbstractUserMessagesHandler* userMessagesHandler);
     ~PrintController() override;
 
 public: // AbstractXmlGuiController API

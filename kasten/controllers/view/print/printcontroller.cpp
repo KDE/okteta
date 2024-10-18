@@ -19,8 +19,8 @@
 
 namespace Kasten {
 
-PrintController::PrintController(KXMLGUIClient* guiClient)
-    : mPrintTool(std::make_unique<PrintTool>())
+PrintController::PrintController(KXMLGUIClient* guiClient, AbstractUserMessagesHandler* userMessagesHandler)
+    : mPrintTool(std::make_unique<PrintTool>(userMessagesHandler))
 {
     mPrintAction = KStandardAction::print(mPrintTool.get(), &PrintTool::print, this);
     connect(mPrintTool.get(), &PrintTool::viewChanged,
