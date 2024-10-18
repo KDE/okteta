@@ -48,6 +48,7 @@ endmacro()
 kastencore_add_sublibrary(usermessages
     BUILD_INCLUDEDIR
     PUBLIC
+        UserErrorReport
         UserNotification
 )
 
