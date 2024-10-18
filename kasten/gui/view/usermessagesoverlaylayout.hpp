@@ -28,9 +28,11 @@ public: // QLayout API
     void setGeometry(const QRect& rect) override;
 
 public:
+    void setErrorReportWidget(QWidget* errorReportWidget);
     void setNotificationWidget(QWidget* notificationWidget);
 
 private:
+    QWidget* m_errorReportWidget = nullptr;
     QWidget* m_notificationWidget = nullptr;
 };
 

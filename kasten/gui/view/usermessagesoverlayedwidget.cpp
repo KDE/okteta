@@ -11,9 +11,12 @@
 // lib
 #include "usermessagesoverlaylayout.hpp"
 // Kasten Core
+#include <Kasten/UserErrorReport>
 #include <Kasten/UserNotification>
 // KF
 #include <KMessageWidget>
+// Qt
+#include <QIcon>
 
 namespace Kasten {
 
@@ -30,6 +33,20 @@ UserMessagesOverlayedWidget::UserMessagesOverlayedWidget(QWidget* parent)
 }
 
 UserMessagesOverlayedWidget::~UserMessagesOverlayedWidget() = default;
+
+void UserMessagesOverlayedWidget::createErrorReportWidget()
+{
+    m_errorReportWidget = new KMessageWidget(this);
+    m_errorReportWidget->setMessageType(KMessageWidget::Error);
+    m_errorReportWidget->setWordWrap(true);
+    m_errorReportWidget->setIcon(QIcon::fromTheme(QStringLiteral("dialog-error")));
+    m_errorReportWidget->hide();
+
+    m_layout->setErrorReportWidget(m_errorReportWidget);
+
+    connect(m_errorReportWidget, &KMessageWidget::hideAnimationFinished,
+            this, &UserMessagesOverlayedWidget::errorReportHidden);
+}
 
 void UserMessagesOverlayedWidget::createNotificationWidget()
 {
@@ -53,6 +70,19 @@ void UserMessagesOverlayedWidget::setMainWidget(QWidget* widget)
     if (m_notificationWidget) {
         m_notificationWidget->raise();
     }
+    if (m_errorReportWidget) {
+        m_errorReportWidget->raise();
+    }
+}
+
+void UserMessagesOverlayedWidget::showErrorReport(Kasten::UserErrorReport* errorReport)
+{
+    if (! m_errorReportWidget) {
+        createErrorReportWidget();
+    }
+
+    m_errorReportWidget->setText(errorReport->text());
+    m_errorReportWidget->animatedShow();
 }
 
 void UserMessagesOverlayedWidget::showNotification(UserNotification* notification)
@@ -64,6 +94,11 @@ void UserMessagesOverlayedWidget::showNotification(UserNotification* notificatio
     m_notificationWidget->setText(notification->text());
     m_notificationWidget->animatedShow();
     m_notificationAutoHideTimer.start();
+}
+
+bool UserMessagesOverlayedWidget::isErrorReportShown() const
+{
+    return m_errorReportWidget ? m_errorReportWidget->isVisible() : false;
 }
 
 }

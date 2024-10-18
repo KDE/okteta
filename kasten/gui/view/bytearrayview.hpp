@@ -19,6 +19,7 @@
 #include <Kasten/ZoomLevelsQueryable>
 #include <Kasten/DataSelectable>
 #include <Kasten/SelectedDataWriteable>
+#include <Kasten/UserErrorReportsInlineable>
 #include <Kasten/UserNotificationsInlineable>
 // Okteta core
 #include <Okteta/AddressRange>
@@ -40,6 +41,7 @@ class OKTETAKASTENGUI_EXPORT ByteArrayView : public AbstractView
                                            , public If::ZoomLevelsQueryable
                                            , public If::DataSelectable
                                            , public If::SelectedDataWriteable
+                                           , public If::UserErrorReportsInlineable
                                            , public If::UserNotificationsInlineable
 {
     Q_OBJECT
@@ -48,6 +50,7 @@ class OKTETAKASTENGUI_EXPORT ByteArrayView : public AbstractView
         Kasten::If::ZoomLevelsQueryable
         Kasten::If::DataSelectable
         Kasten::If::SelectedDataWriteable
+        Kasten::If::UserErrorReportsInlineable
         Kasten::If::UserNotificationsInlineable
     )
 
@@ -111,6 +114,13 @@ public: // If::SelectedDataWriteable API
     bool canCutSelectedData() const override;
 Q_SIGNALS:
     void canCutSelectedDataChanged(bool canCutSelectedData) override;
+
+public: // If::UserErrorReportsInlineable API
+    void showErrorReport(UserErrorReport* errorReport) override;
+    bool isErrorReportShown() const override;
+
+Q_SIGNALS:
+    void errorReportHidden() override;
 
 public: // If::UserNotificationsInlineable API
     void showNotification(UserNotification* notification) override;

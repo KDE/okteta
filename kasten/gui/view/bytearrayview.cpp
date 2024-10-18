@@ -134,6 +134,8 @@ void ByteArrayView::init()
     connect(mWidget.get(), &ByteArrayJanusView::zoomLevelsChanged, this, &ByteArrayView::zoomLevelsChanged);
     connect(mWidget.get(), &ByteArrayJanusView::viewModusChanged, this, &ByteArrayView::viewModusChanged);
 
+    connect(mWidget.get(), &ByteArrayJanusView::errorReportHidden, this, &ByteArrayView::errorReportHidden);
+
     connect(mWidget.get(), &ByteArrayJanusView::viewContextMenuRequested, this, &ByteArrayView::viewContextMenuRequested);
 }
 
@@ -237,6 +239,16 @@ void ByteArrayView::onSelectionChanged(const Okteta::AddressRange& selection)
 void ByteArrayView::onOverwriteModeChanged(bool overwriteMode)
 {
     Q_EMIT canCutSelectedDataChanged(!overwriteMode);
+}
+
+void ByteArrayView::showErrorReport(UserErrorReport* errorReport)
+{
+    mWidget->showErrorReport(errorReport);
+}
+
+bool ByteArrayView::isErrorReportShown() const
+{
+    return mWidget->isErrorReportShown();
 }
 
 void ByteArrayView::showNotification(UserNotification* notification)

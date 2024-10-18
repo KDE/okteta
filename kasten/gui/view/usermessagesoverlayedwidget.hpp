@@ -17,6 +17,7 @@ class KMessageWidget;
 
 namespace Kasten {
 
+class UserErrorReport;
 class UserNotification;
 class UserMessagesOverlayLayout;
 
@@ -29,15 +30,24 @@ public:
     ~UserMessagesOverlayedWidget() override;
 
 public:
+    void showErrorReport(Kasten::UserErrorReport* errorReport);
     void showNotification(Kasten::UserNotification* notification);
     // TODO: specify dealing with old main widget, right now relying on being killed
     void setMainWidget(QWidget* widget);
 
+    bool isErrorReportShown() const;
+
+Q_SIGNALS:
+    void errorReportHidden();
+
 private:
+    void createErrorReportWidget();
     void createNotificationWidget();
 
 private:
     UserMessagesOverlayLayout* m_layout;
+
+    KMessageWidget* m_errorReportWidget = nullptr;
 
     KMessageWidget* m_notificationWidget = nullptr;
     QTimer m_notificationAutoHideTimer;
