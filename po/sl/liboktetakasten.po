@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-17 01:50+0000\n"
+"POT-Creation-Date: 2024-10-19 01:53+0000\n"
 "PO-Revision-Date: 2024-10-17 07:03+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -480,7 +480,7 @@ msgstr[1] "Zamenjana %1 bajta."
 msgstr[2] "Zamenjani %1 bajti."
 msgstr[3] "Zamenjanih %1 bajtov."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:243
+#: controllers/view/charsetconversion/charsetconversionview.cpp:242
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -1398,26 +1398,26 @@ msgctxt "@action:button"
 msgid "&Select"
 msgstr "Izberi"
 
-#: controllers/view/print/printtool.cpp:273
-#: controllers/view/print/printtool.cpp:300
+#: controllers/view/print/printtool.cpp:277
+#: controllers/view/print/printtool.cpp:307
 #, kde-format
 msgctxt "@title:window"
 msgid "Print Byte Array %1"
 msgstr "Natisni polje bajtov %1"
 
-#: controllers/view/print/printtool.cpp:298
+#: controllers/view/print/printtool.cpp:302
 #, kde-format
 msgctxt "@info"
 msgid "Could not print."
 msgstr "Ni bilo mogoče tiskati."
 
-#: controllers/view/print/printtool.cpp:330
+#: controllers/view/print/printtool.cpp:338
 #, kde-format
 msgctxt "in the header of the printed page, e.g. Page 2 of 20"
 msgid "Page %p of %P"
 msgstr "Stran %p od %P"
 
-#: controllers/view/print/printtool.cpp:336
+#: controllers/view/print/printtool.cpp:344
 #, kde-format
 msgctxt "in the footer of the printed page, e.g. Printed by: Joe User"
 msgid "Printed by: %U"
