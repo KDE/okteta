@@ -35,6 +35,7 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QTreeView>
+#include <QLabel>
 #include <QPushButton>
 #include <QHeaderView>
 #include <QFocusEvent>
@@ -84,6 +85,21 @@ StructureView::StructureView(StructuresTool* tool, QWidget* parent)
     header->setSectionResizeMode(QHeaderView::Interactive);
     connect(mStructTreeView, &QWidget::customContextMenuRequested,
             this, &StructureView::onCustomContextMenuRequested);
+
+    // TODO. share code for all these empty-list placeholders
+    auto* structListViewViewPort = mStructTreeView->viewport();
+    m_emptyListOverlayLabel = new QLabel(structListViewViewPort);
+    m_emptyListOverlayLabel->setText(i18nc("@info", "No structure definitions"));
+    m_emptyListOverlayLabel->setAttribute(Qt::WA_TransparentForMouseEvents);
+    m_emptyListOverlayLabel->setEnabled(false);
+    m_emptyListOverlayLabel->setWordWrap(true);
+    m_emptyListOverlayLabel->setAlignment(Qt::AlignCenter);
+    m_emptyListOverlayLabel->setVisible(mTool->isStructureListEmpty());
+    auto* centeringLayout = new QVBoxLayout(structListViewViewPort);
+    centeringLayout->addWidget(m_emptyListOverlayLabel);
+    centeringLayout->setAlignment(m_emptyListOverlayLabel, Qt::AlignCenter);
+    connect(mTool, &StructuresTool::isStructureListEmptyChanged,
+            m_emptyListOverlayLabel, &QWidget::setVisible);
 
     baseLayout->addWidget(mStructTreeView, 10);
 

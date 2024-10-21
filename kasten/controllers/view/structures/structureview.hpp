@@ -19,6 +19,7 @@ class AbstractByteArrayModel;
 }
 
 class QTreeView;
+class QLabel;
 class QAction;
 
 namespace Kasten {
@@ -60,6 +61,7 @@ private:
     StructureViewItemDelegate* mDelegate;
 
     QTreeView* mStructTreeView;
+    QLabel* m_emptyListOverlayLabel;
 
     QAction* mValidateAction;
     QAction* mSettingsAction;

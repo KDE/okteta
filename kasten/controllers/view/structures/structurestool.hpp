@@ -62,6 +62,7 @@ public:
     QByteArray bytes(const DataInformation* data) const;
 
     void selectBytesInView(const QModelIndex& idx);
+    bool isStructureListEmpty() const;
 
     // interface for model
     QVariant headerData(int column, int role) const;
@@ -82,6 +83,7 @@ Q_SIGNALS:
     void childrenAboutToBeRemoved(DataInformation* sender, uint startIndex, uint endIndex);
     /** items are inserted before @p startIndex */
     void childrenRemoved(const DataInformation* sender, uint startIndex, uint endIndex);
+    void isStructureListEmptyChanged(bool isStructureListEmpty);
 
 public Q_SLOTS:
     void setByteOrder(int order);

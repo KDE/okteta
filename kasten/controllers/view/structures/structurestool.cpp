@@ -98,6 +98,11 @@ void StructuresTool::setTargetModel(AbstractModel* model)
     updateData(Okteta::ArrayChangeMetricsList());
 }
 
+bool StructuresTool::isStructureListEmpty() const
+{
+    return mData.isEmpty() && mInvalidData.isEmpty();
+}
+
 void StructuresTool::onCursorPositionChange(Okteta::Address pos)
 {
     if (mCursorIndex != pos) {
@@ -243,6 +248,8 @@ void StructuresTool::addChildItem(TopLevelDataInformation* child)
 
 void StructuresTool::setEnabledStructuresInView()
 {
+    const bool wasStructureListEmpty = isStructureListEmpty();
+
     mData.clear();
     mInvalidData.clear();
     Q_EMIT dataCleared();
@@ -288,6 +295,10 @@ void StructuresTool::setEnabledStructuresInView()
 
     updateData(Okteta::ArrayChangeMetricsList());
 
+    const bool isNowStructureListEmpty = isStructureListEmpty();
+    if (isNowStructureListEmpty != wasStructureListEmpty) {
+        Q_EMIT isStructureListEmptyChanged(isNowStructureListEmpty);
+    }
 }
 
 Okteta::Address StructuresTool::startAddress(const TopLevelDataInformation* data) const
