@@ -22,7 +22,7 @@ NoByteArrayFilterParameterSetEdit::NoByteArrayFilterParameterSetEdit(QWidget* pa
     auto* baseLayout = new QVBoxLayout(this);
     baseLayout->setContentsMargins(0, 0, 0, 0);
 
-    auto* label = new QLabel(i18nc("@info", "No parameters."), this);
+    auto* label = new QLabel(i18nc("@info", "No parameters"), this);
     label->setEnabled(false);
     baseLayout->addWidget(label, 0, Qt::AlignCenter);
 }
