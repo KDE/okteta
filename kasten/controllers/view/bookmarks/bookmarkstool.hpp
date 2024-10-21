@@ -37,7 +37,6 @@ public:
     ~BookmarksTool() override;
 
 public:
-    bool hasBookmarks() const;
     bool canCreateBookmark() const;
     const Okteta::Bookmark& bookmarkAt(unsigned int index) const;
     int indexOf(const Okteta::Bookmark& bookmark) const;
