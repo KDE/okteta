@@ -92,6 +92,7 @@ ChecksumView::ChecksumView(ChecksumTool* tool, QWidget* parent)
 
     mChecksumLabel = new QLineEdit(this);
     mChecksumLabel->setReadOnly(true);
+    mChecksumLabel->setPlaceholderText(i18nc("@info:placeholder", "No checksum calculated yet."));
     mChecksumLabel->setText(mTool->checkSum());
     connect(mTool, &ChecksumTool::checksumChanged, mChecksumLabel, &QLineEdit::setText);
     baseLayout->addWidget(mChecksumLabel, 10);
