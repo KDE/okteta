@@ -53,6 +53,11 @@ bool StringsExtractTool::canHighlightString() const
 
 QString StringsExtractTool::title() const { return i18nc("@title:window of the tool to extract strings", "Strings"); }
 
+AbstractModel* StringsExtractTool::targetModel() const
+{
+    return mByteArrayView;
+}
+
 // TODO: add model with offset and string
 // doubleclick moves cursor to offset
 // filter für Suche, inkl. Regulärausdrücke

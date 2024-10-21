@@ -13,6 +13,9 @@
 #include "stringsextracttool.hpp"
 // utils
 #include <labelledtoolbarwidget.hpp>
+// Kasten core
+#include <Kasten/AbstractUserMessagesHandler>
+#include <Kasten/UserNotification>
 // KF
 #include <KLocalizedString>
 // Qt
@@ -35,9 +38,12 @@ namespace Kasten {
 
 static constexpr int MinimumStringLength = 1;
 
-StringsExtractView::StringsExtractView(StringsExtractTool* tool, QWidget* parent)
+StringsExtractView::StringsExtractView(StringsExtractTool* tool,
+                                       AbstractUserMessagesHandler* userMessagseHandler,
+                                       QWidget* parent)
     : QWidget(parent)
     , mTool(tool)
+    , m_userMessagesHandler(userMessagseHandler)
 {
     auto* baseLayout = new QVBoxLayout(this);
     baseLayout->setContentsMargins(0, 0, 0, 0);
@@ -267,6 +273,14 @@ void StringsExtractView::onExtractionDone(int extractedStringSCount)
     const bool isEmptyList = (extractedStringSCount == 0);
 
     m_emptyListOverlayLabel->setVisible(isEmptyList);
+
+    const QString messageBoxTitle = mTool->title();
+    const QString extractionReport = isEmptyList ?
+        i18nc("@info", "No strings extracted.") :
+        i18ncp("@info", "1 string extracted.", "%1 strings extracted.", extractedStringSCount);
+    auto message = std::make_unique<Kasten::UserNotification>(mTool->targetModel(), extractionReport,
+                                                              messageBoxTitle);
+    m_userMessagesHandler->postNotification(std::move(message));
 }
 
 }

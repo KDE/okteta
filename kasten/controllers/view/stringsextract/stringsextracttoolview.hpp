@@ -16,6 +16,7 @@
 
 namespace Kasten {
 
+class AbstractUserMessagesHandler;
 class StringsExtractView;
 class StringsExtractTool;
 
@@ -24,7 +25,8 @@ class StringsExtractToolView : public AbstractToolView
     Q_OBJECT
 
 public:
-    explicit StringsExtractToolView(StringsExtractTool* tool);
+    explicit StringsExtractToolView(StringsExtractTool* tool,
+                                    AbstractUserMessagesHandler* userMessagseHandler);
     ~StringsExtractToolView() override;
 
 public: // AbstractToolView API

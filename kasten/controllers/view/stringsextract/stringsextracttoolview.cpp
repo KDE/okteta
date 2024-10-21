@@ -14,8 +14,9 @@
 
 namespace Kasten {
 
-StringsExtractToolView::StringsExtractToolView(StringsExtractTool* tool)
-    : mWidget(std::make_unique<StringsExtractView>(tool))
+StringsExtractToolView::StringsExtractToolView(StringsExtractTool* tool,
+                                               AbstractUserMessagesHandler* userMessagseHandler)
+    : mWidget(std::make_unique<StringsExtractView>(tool, userMessagseHandler))
 {
 }
 

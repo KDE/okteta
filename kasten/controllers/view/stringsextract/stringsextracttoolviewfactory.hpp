@@ -16,10 +16,12 @@
 
 namespace Kasten {
 
+class AbstractUserMessagesHandler;
+
 class OKTETAKASTENCONTROLLERS_EXPORT StringsExtractToolViewFactory : public AbstractToolViewFactory
 {
 public:
-    StringsExtractToolViewFactory();
+    StringsExtractToolViewFactory(AbstractUserMessagesHandler* userMessagesHandler);
     StringsExtractToolViewFactory(const StringsExtractToolViewFactory&) = delete;
 
     ~StringsExtractToolViewFactory() override;
@@ -33,6 +35,9 @@ public: // AbstractToolViewFactory API
     QString title() const override;
     QString id() const override;
     SidePosition defaultPosition() const override;
+
+private:
+    AbstractUserMessagesHandler* const m_userMessagesHandler;
 };
 
 }

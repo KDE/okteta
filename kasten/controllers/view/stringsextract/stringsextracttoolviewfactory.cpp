@@ -16,7 +16,10 @@
 
 namespace Kasten {
 
-StringsExtractToolViewFactory::StringsExtractToolViewFactory() = default;
+StringsExtractToolViewFactory::StringsExtractToolViewFactory(AbstractUserMessagesHandler* userMessagesHandler)
+    : m_userMessagesHandler(userMessagesHandler)
+{
+}
 
 StringsExtractToolViewFactory::~StringsExtractToolViewFactory() = default;
 
@@ -27,7 +30,7 @@ SidePosition StringsExtractToolViewFactory::defaultPosition() const { return Rig
 
 std::unique_ptr<AbstractToolView> StringsExtractToolViewFactory::create(AbstractTool* tool) const
 {
-    return std::make_unique<StringsExtractToolView>(qobject_cast<StringsExtractTool*>(tool));
+    return std::make_unique<StringsExtractToolView>(qobject_cast<StringsExtractTool*>(tool), m_userMessagesHandler);
 }
 
 }

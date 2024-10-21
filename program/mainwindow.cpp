@@ -234,7 +234,7 @@ void OktetaMainWindow::setupControllers()
     addToolFromFactory(ChecksumToolViewFactory(), ChecksumToolFactory());
     addToolFromFactory(FilterToolViewFactory(), FilterToolFactory());
     addToolFromFactory(CharsetConversionToolViewFactory(userMessagesHandler), CharsetConversionToolFactory());
-    addToolFromFactory(StringsExtractToolViewFactory(), StringsExtractToolFactory());
+    addToolFromFactory(StringsExtractToolViewFactory(userMessagesHandler), StringsExtractToolFactory());
     addToolFromFactory(ByteTableToolViewFactory(), ByteTableToolFactory());
     addToolFromFactory(InfoToolViewFactory(), InfoToolFactory());
     addToolFromFactory(PodDecoderToolViewFactory(), PodDecoderToolFactory());

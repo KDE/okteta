@@ -21,6 +21,7 @@ class QAction;
 
 namespace Kasten {
 
+class AbstractUserMessagesHandler;
 class StringsExtractTool;
 class ContainedStringTableModel;
 
@@ -29,7 +30,9 @@ class StringsExtractView : public QWidget
     Q_OBJECT
 
 public:
-    explicit StringsExtractView(StringsExtractTool* tool, QWidget* parent = nullptr);
+    explicit StringsExtractView(StringsExtractTool* tool,
+                                AbstractUserMessagesHandler* userMessagseHandler,
+                                QWidget* parent = nullptr);
     ~StringsExtractView() override;
 
 public:
@@ -52,6 +55,8 @@ private Q_SLOTS: // tool
 
 private:
     StringsExtractTool* const mTool;
+
+    AbstractUserMessagesHandler* const m_userMessagesHandler;
 
     ContainedStringTableModel* mContainedStringTableModel;
     QSortFilterProxyModel* mSortFilterProxyModel;

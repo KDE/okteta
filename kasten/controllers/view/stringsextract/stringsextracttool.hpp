@@ -57,6 +57,8 @@ public: // status
     bool canHighlightString() const;
     int offsetCoding() const;
 
+    AbstractModel* targetModel() const;
+
 public Q_SLOTS: // settings
     void setMinLength(int minLength);
     void markString(int stringId);
