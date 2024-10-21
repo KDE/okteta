@@ -68,6 +68,7 @@ public Q_SLOTS: // actions
 Q_SIGNALS:
     void uptodateChanged(bool isUptodate);
     void isApplyableChanged(bool isApplyable);    // candidate for AbstractTool API
+    void extractionDone(int extractedStringSCount);
     void canHighlightStringChanged(bool canHighlightString);
     void offsetCodingChanged(int offsetCoding);
 

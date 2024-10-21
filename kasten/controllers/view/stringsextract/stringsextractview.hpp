@@ -14,6 +14,7 @@
 
 class QTreeView;
 class QSortFilterProxyModel;
+class QLabel;
 class QModelIndex;
 class QSpinBox;
 class QAction;
@@ -46,6 +47,7 @@ private Q_SLOTS: // gui
 private Q_SLOTS: // tool
     void onStringsUptodateChanged(bool stringsUptodate);
     void onApplyableChanged(bool isApplyable);
+    void onExtractionDone(int extractedStringSCount);
     void onCanHighlightStringChanged(bool canHighlightString);
 
 private:
@@ -55,6 +57,7 @@ private:
     QSortFilterProxyModel* mSortFilterProxyModel;
 
     QTreeView* mContainedStringTableView;
+    QLabel* m_emptyListOverlayLabel;
     QSpinBox* mMinLengthSpinBox;
     QAction* mUpdateAction;
     QAction* mCopyAction;

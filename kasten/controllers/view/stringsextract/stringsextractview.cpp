@@ -19,6 +19,7 @@
 #include <QToolBar>
 #include <QLabel>
 #include <QVBoxLayout>
+#include <QHBoxLayout>
 #include <QLineEdit>
 #include <QSpinBox>
 #include <QSortFilterProxyModel>
@@ -127,6 +128,19 @@ StringsExtractView::StringsExtractView(StringsExtractTool* tool, QWidget* parent
             &QItemSelectionModel::selectionChanged,
             this, &StringsExtractView::onStringSelectionChanged);
 
+    // TODO. share code for all these empty-list placeholders
+    auto* stringTableViewViewPort = mContainedStringTableView->viewport();
+    m_emptyListOverlayLabel = new QLabel(stringTableViewViewPort);
+    m_emptyListOverlayLabel->setText(i18nc("@info", "No strings"));
+    m_emptyListOverlayLabel->setAttribute(Qt::WA_TransparentForMouseEvents);
+    m_emptyListOverlayLabel->setEnabled(false);
+    m_emptyListOverlayLabel->setWordWrap(true);
+    m_emptyListOverlayLabel->setAlignment(Qt::AlignCenter);
+    m_emptyListOverlayLabel->setVisible(mTool->containedStringList()->isEmpty());
+    auto* centeringLayout = new QVBoxLayout(stringTableViewViewPort);
+    centeringLayout->addWidget(m_emptyListOverlayLabel);
+    centeringLayout->setAlignment(m_emptyListOverlayLabel, Qt::AlignCenter);
+
     baseLayout->addWidget(mContainedStringTableView, 10);
 
     // actions
@@ -161,6 +175,8 @@ StringsExtractView::StringsExtractView(StringsExtractTool* tool, QWidget* parent
 
     connect(mTool, &StringsExtractTool::uptodateChanged, this, &StringsExtractView::onStringsUptodateChanged);
     connect(mTool, &StringsExtractTool::isApplyableChanged, this, &StringsExtractView::onApplyableChanged);
+    connect(mTool, &StringsExtractTool::extractionDone,
+            this, &StringsExtractView::onExtractionDone);
     connect(mTool, &StringsExtractTool::canHighlightStringChanged, this, &StringsExtractView::onCanHighlightStringChanged);
 
     onStringSelectionChanged();
@@ -244,6 +260,13 @@ void StringsExtractView::onStringDoubleClicked(const QModelIndex& index)
     if (mTool->canHighlightString()) {
         mTool->markString(mSortFilterProxyModel->mapToSource(index).row());
     }
+}
+
+void StringsExtractView::onExtractionDone(int extractedStringSCount)
+{
+    const bool isEmptyList = (extractedStringSCount == 0);
+
+    m_emptyListOverlayLabel->setVisible(isEmptyList);
 }
 
 }

@@ -210,6 +210,7 @@ void StringsExtractTool::extractStrings()
     Q_EMIT uptodateChanged(true);
     Q_EMIT canHighlightStringChanged(true);
     Q_EMIT offsetCodingChanged(mByteArrayView->offsetCoding());
+    Q_EMIT extractionDone(mContainedStringList.size());
 }
 
 }
