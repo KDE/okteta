@@ -29,6 +29,7 @@ DocumentsTool::DocumentsTool(DocumentManager* documentManager)
 
 DocumentsTool::~DocumentsTool() = default;
 
+bool DocumentsTool::isDocumentListEmpty() const { return mDocumentManager->documents().isEmpty(); }
 QVector<AbstractDocument*> DocumentsTool::documents() const { return mDocumentManager->documents(); }
 
 QString DocumentsTool::title() const { return i18nc("@title:window", "Documents"); }

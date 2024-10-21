@@ -27,6 +27,7 @@ public:
 
 public:
     AbstractDocument* focussedDocument() const;
+    bool isDocumentListEmpty() const;
     QVector<AbstractDocument*> documents() const;
 
 public:

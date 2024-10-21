@@ -13,6 +13,7 @@
 #include <QWidget>
 
 class QTreeView;
+class QLabel;
 class QModelIndex;
 
 namespace Kasten {
@@ -32,6 +33,8 @@ public:
     DocumentsTool* tool() const;
 
 private Q_SLOTS:
+    void updateEmptyListOverlayLabel();
+
     void onDocumentActivated(const QModelIndex& index);
 
 private:
@@ -40,6 +43,7 @@ private:
     DocumentListModel* mDocumentListModel;
 
     QTreeView* mDocumentListView;
+    QLabel* m_emptyListOverlayLabel;
 };
 
 inline DocumentsTool* DocumentsView::tool() const { return mTool; }
