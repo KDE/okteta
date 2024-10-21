@@ -55,6 +55,7 @@ int BookmarksTool::indexOf(const Okteta::Bookmark& bookmark) const
     }
     return result;
 }
+bool BookmarksTool::isBookmarkListEmpty()    const { return mBookmarks ? (mBookmarks->bookmarksCount() == 0) : true; }
 unsigned int BookmarksTool::bookmarksCount() const { return mBookmarks ? mBookmarks->bookmarksCount() : 0; }
 int BookmarksTool::offsetCoding()            const { return mByteArrayView ? mByteArrayView->offsetCoding() : 0; }
 

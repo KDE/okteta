@@ -41,6 +41,7 @@ public:
     bool canCreateBookmark() const;
     const Okteta::Bookmark& bookmarkAt(unsigned int index) const;
     int indexOf(const Okteta::Bookmark& bookmark) const;
+    bool isBookmarkListEmpty() const;
     unsigned int bookmarksCount() const;
     int offsetCoding() const;
 

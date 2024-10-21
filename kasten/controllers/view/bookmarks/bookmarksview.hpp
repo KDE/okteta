@@ -13,6 +13,7 @@
 #include <QWidget>
 
 class QTreeView;
+class QLabel;
 class QAction;
 class QModelIndex;
 
@@ -33,6 +34,8 @@ public:
     BookmarksTool* tool() const;
 
 private Q_SLOTS:
+    void updateEmptyListOverlayLabel();
+
     void onBookmarkDoubleClicked(const QModelIndex& index);
     void onBookmarkSelectionChanged();
     void onCreateBookmarkButtonClicked();
@@ -46,6 +49,7 @@ private:
     BookmarkListModel* mBookmarkListModel;
 
     QTreeView* mBookmarkListView;
+    QLabel* m_emptyListOverlayLabel;
     QAction* mCreateBookmarkAction;
     QAction* mDeleteBookmarksAction;
     QAction* mGotoBookmarkAction;

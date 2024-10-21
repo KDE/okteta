@@ -17,8 +17,10 @@
 #include <KLocalizedString>
 // Qt
 #include <QToolBar>
+#include <QLabel>
 #include <QAction>
 #include <QVBoxLayout>
+#include <QHBoxLayout>
 #include <QTreeView>
 #include <QHeaderView>
 #include <QIcon>
@@ -52,6 +54,25 @@ BookmarksView::BookmarksView(BookmarksTool* tool, QWidget* parent)
     connect(mBookmarkListView->selectionModel(),
             &QItemSelectionModel::selectionChanged,
             this, &BookmarksView::onBookmarkSelectionChanged);
+
+    // TODO. share code for all these empty-list placeholders
+    auto* bookmarkListViewViewPort = mBookmarkListView->viewport();
+    m_emptyListOverlayLabel = new QLabel(bookmarkListViewViewPort);
+    m_emptyListOverlayLabel->setText(i18nc("@info", "No bookmarks"));
+    m_emptyListOverlayLabel->setAttribute(Qt::WA_TransparentForMouseEvents);
+    m_emptyListOverlayLabel->setEnabled(false);
+    m_emptyListOverlayLabel->setWordWrap(true);
+    m_emptyListOverlayLabel->setAlignment(Qt::AlignCenter);
+    m_emptyListOverlayLabel->setVisible(mTool->isBookmarkListEmpty());
+    auto* centeringLayout = new QVBoxLayout(bookmarkListViewViewPort);
+    centeringLayout->addWidget(m_emptyListOverlayLabel);
+    centeringLayout->setAlignment(m_emptyListOverlayLabel, Qt::AlignCenter);
+    connect(mTool, &BookmarksTool::hasBookmarksChanged,
+            this, &BookmarksView::updateEmptyListOverlayLabel);
+    connect(mTool, &BookmarksTool::bookmarksAdded,
+            this, &BookmarksView::updateEmptyListOverlayLabel);
+    connect(mTool, &BookmarksTool::bookmarksRemoved,
+            this, &BookmarksView::updateEmptyListOverlayLabel);
 
     baseLayout->addWidget(mBookmarkListView, 10);
 
@@ -111,6 +132,11 @@ BookmarksView::BookmarksView(BookmarksTool* tool, QWidget* parent)
 }
 
 BookmarksView::~BookmarksView() = default;
+
+void BookmarksView::updateEmptyListOverlayLabel()
+{
+    m_emptyListOverlayLabel->setVisible(mTool->isBookmarkListEmpty());
+}
 
 void BookmarksView::onBookmarkDoubleClicked(const QModelIndex& index)
 {
