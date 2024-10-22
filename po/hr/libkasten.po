@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-02 01:51+0000\n"
+"POT-Creation-Date: 2024-10-22 01:49+0000\n"
 "PO-Revision-Date: 2009-09-04 22:35+0200\n"
 "Last-Translator: Zarko Pintar <zarko.pintar@gmail.com>\n"
 "Language-Team: Croatian <kde-croatia-list@lists.sourceforge.net>\n"
@@ -140,11 +140,17 @@ msgctxt "@info:tooltip"
 msgid "Title of the document"
 msgstr ""
 
-#: controllers/documentsystem/documentsbrowser/documentstool.cpp:34
+#: controllers/documentsystem/documentsbrowser/documentstool.cpp:35
 #: controllers/documentsystem/documentsbrowser/documentstoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
 msgid "Documents"
+msgstr ""
+
+#: controllers/documentsystem/documentsbrowser/documentsview.cpp:52
+#, kde-format
+msgctxt "@info"
+msgid "No documents"
 msgstr ""
 
 #: controllers/documentsystem/filesystembrowser/filesystembrowsertool.cpp:33

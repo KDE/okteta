@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: playground-utils/okteta.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-19 01:53+0000\n"
+"POT-Creation-Date: 2024-10-22 01:49+0000\n"
 "PO-Revision-Date: 2007-11-05 08:28-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -128,7 +128,7 @@ msgid "%1: %2"
 msgstr "%1: %2"
 
 #: controllers/view/bookmarks/bookmarkscontroller.cpp:241
-#: controllers/view/bookmarks/bookmarkstool.cpp:126
+#: controllers/view/bookmarks/bookmarkstool.cpp:127
 #, kde-format
 msgctxt "default name of a bookmark"
 msgid "Bookmark"
@@ -141,13 +141,21 @@ msgctxt "@title:window"
 msgid "Bookmarks"
 msgstr "Leabharmharcanna"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:66
+#: controllers/view/bookmarks/bookmarksview.cpp:61
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Bookmarks"
+msgctxt "@info"
+msgid "No bookmarks"
+msgstr "Leabharmharcanna"
+
+#: controllers/view/bookmarks/bookmarksview.cpp:87
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Creates a new bookmark for the current cursor position."
 msgstr "Cruthaíonn sé leabharmharc nua ag ionad reatha an chúrsóra."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:68
+#: controllers/view/bookmarks/bookmarksview.cpp:89
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -157,13 +165,13 @@ msgstr ""
 "Má bhrúnn tú an cnaipe seo, cruthófar leabharmharc nua ag ionad reatha an "
 "chúrsóra."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:79
+#: controllers/view/bookmarks/bookmarksview.cpp:100
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Deletes all the selected bookmarks."
 msgstr "Scrios na leabharmharcanna roghnaithe."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:81
+#: controllers/view/bookmarks/bookmarksview.cpp:102
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -171,13 +179,13 @@ msgid ""
 msgstr ""
 "Má bhrúnn tú an cnaipe seo, scriosfar gach leabharmharc atá roghnaithe."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:93
+#: controllers/view/bookmarks/bookmarksview.cpp:114
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Moves the cursor to the selected bookmark."
 msgstr "Bog an cúrsóir go dtí an leabharmharc roghnaithe."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:95
+#: controllers/view/bookmarks/bookmarksview.cpp:116
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -187,13 +195,13 @@ msgstr ""
 "Má bhrúnn tú an cnaipe seo, bogfar an cúrsóir go dtí ionad an leabharmhairc "
 "a bhí roghnaithe is déanaí."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:103
+#: controllers/view/bookmarks/bookmarksview.cpp:124
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enables renaming of the selected bookmark."
 msgstr "Cumasaíonn sé athainmniú an leabharmhairc roghnaithe."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:105
+#: controllers/view/bookmarks/bookmarksview.cpp:126
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -538,6 +546,12 @@ msgstr ""
 "liosta sa chaoi go mbeidh gach teaghrán sa raon roghnaithe atá níos faide ná "
 "an fad íosta ann."
 
+#: controllers/view/checksum/checksumview.cpp:95
+#, kde-format
+msgctxt "@info:placeholder"
+msgid "No checksum calculated yet."
+msgstr ""
+
 #: controllers/view/crop/cropcontroller.cpp:33
 #, kde-format
 msgctxt "@action:inmenu"
@@ -737,7 +751,7 @@ msgstr ""
 "minicíochta le haghaidh bearta sa raon roghnaithe."
 
 #: controllers/view/info/infoview.cpp:118
-#: controllers/view/stringsextract/stringsextractview.cpp:138
+#: controllers/view/stringsextract/stringsextractview.cpp:158
 #, kde-format
 msgid "C&opy"
 msgstr "&Cóipeáil"
@@ -890,7 +904,7 @@ msgstr ""
 #| msgctxt "@title:group"
 #| msgid "Parameters"
 msgctxt "@info"
-msgid "No parameters."
+msgid "No parameters"
 msgstr "Paraiméadair"
 
 #: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:48
@@ -1415,7 +1429,7 @@ msgid ""
 msgstr ""
 
 #: controllers/view/poddecoder/podtableview.cpp:240
-#: controllers/view/structures/structureview.cpp:338
+#: controllers/view/structures/structureview.cpp:354
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "&Edit..."
@@ -1425,7 +1439,7 @@ msgstr "&Eagar..."
 
 #: controllers/view/poddecoder/podtableview.cpp:254
 #: controllers/view/selectrange/selectrangeview.cpp:125
-#: controllers/view/structures/structureview.cpp:353
+#: controllers/view/structures/structureview.cpp:369
 #, kde-format
 msgctxt "@action:button"
 msgid "&Select"
@@ -1699,26 +1713,26 @@ msgctxt "@title:window of the tool to extract strings"
 msgid "Strings"
 msgstr "Teaghráin"
 
-#: controllers/view/stringsextract/stringsextracttoolviewfactory.cpp:24
+#: controllers/view/stringsextract/stringsextracttoolviewfactory.cpp:27
 #, kde-format
 msgctxt "@title:window"
 msgid "Strings"
 msgstr "Teaghráin"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:54
+#: controllers/view/stringsextract/stringsextractview.cpp:61
 #, kde-format
 msgctxt ""
 "@label:spinbox minimum length for consecutive chars to be seen as a string"
 msgid "Minimum length:"
 msgstr "Fad íosta:"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:66
+#: controllers/view/stringsextract/stringsextractview.cpp:73
 #, kde-format
 msgctxt "@action:button extract the strings from the byte array"
 msgid "&Extract"
 msgstr "&Bain amach"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:69
+#: controllers/view/stringsextract/stringsextractview.cpp:76
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1726,7 +1740,7 @@ msgid ""
 "below."
 msgstr ""
 
-#: controllers/view/stringsextract/stringsextractview.cpp:71
+#: controllers/view/stringsextract/stringsextractview.cpp:78
 #, fuzzy, kde-kuit-format
 #| msgctxt "@info:whatsthis"
 #| msgid ""
@@ -1743,24 +1757,32 @@ msgstr ""
 "liosta sa chaoi go mbeidh gach teaghrán sa raon roghnaithe atá níos faide ná "
 "an fad íosta ann."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:81
+#: controllers/view/stringsextract/stringsextractview.cpp:88
 #, kde-format
 msgctxt "@label:lineedit filter term for displayed strings"
 msgid "Filter:"
 msgstr "Scagaire:"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:85
+#: controllers/view/stringsextract/stringsextractview.cpp:92
 #, kde-format
 msgid "Enter a term to limit the list."
 msgstr "Iontráil téarma chun an liosta a theorannú."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:141
+#: controllers/view/stringsextract/stringsextractview.cpp:140
+#, fuzzy, kde-format
+#| msgctxt "@title:window of the tool to extract strings"
+#| msgid "Strings"
+msgctxt "@info"
+msgid "No strings"
+msgstr "Teaghráin"
+
+#: controllers/view/stringsextract/stringsextractview.cpp:161
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected strings to the clipboard."
 msgstr "Cuir cóip de na teaghráin roghnaithe sa ghearrthaisce."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:143
+#: controllers/view/stringsextract/stringsextractview.cpp:163
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1770,18 +1792,18 @@ msgstr ""
 "Má bhrúnn tú an cnaipe <interface>Cóipeáil</interface>, cóipeálfar gach "
 "teaghrán roghnaithe sa liosta go dtí an ghearrthaisce."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:152
+#: controllers/view/stringsextract/stringsextractview.cpp:172
 #, kde-format
 msgid "&Show"
 msgstr "&Taispeáin"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:155
+#: controllers/view/stringsextract/stringsextractview.cpp:175
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Shows the selected string in the view."
 msgstr "Taispeáin an teaghrán roghnaithe san amharc."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:157
+#: controllers/view/stringsextract/stringsextractview.cpp:177
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1790,6 +1812,23 @@ msgid ""
 msgstr ""
 "Má bhrúnn tú an cnaipe <interface>Téigh go</interface>, marcálfar an "
 "teaghrán a bhí roghnaithe is déanaí agus taispeánfar é san amharc."
+
+#: controllers/view/stringsextract/stringsextractview.cpp:279
+#, kde-format
+msgctxt "@info"
+msgid "No strings extracted."
+msgstr ""
+
+#: controllers/view/stringsextract/stringsextractview.cpp:280
+#, kde-format
+msgctxt "@info"
+msgid "1 string extracted."
+msgid_plural "%1 strings extracted."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
 
 #: controllers/view/structures/datatypes/array/complexarraydata.cpp:98
 #, kde-format
@@ -2503,84 +2542,91 @@ msgctxt "@title:window"
 msgid "Structures"
 msgstr "Struchtúir"
 
-#: controllers/view/structures/structurestool.cpp:188
+#: controllers/view/structures/structurestool.cpp:193
 #, kde-format
 msgctxt "name of a data structure"
 msgid "Name"
 msgstr "Ainm"
 
-#: controllers/view/structures/structurestool.cpp:190
+#: controllers/view/structures/structurestool.cpp:195
 #, kde-format
 msgctxt "type of a data structure"
 msgid "Type"
 msgstr "Cineál"
 
-#: controllers/view/structures/structurestool.cpp:192
+#: controllers/view/structures/structurestool.cpp:197
 #, kde-format
 msgctxt "value of a data structure (primitive type)"
 msgid "Value"
 msgstr "Luach"
 
-#: controllers/view/structures/structurestool.cpp:194
+#: controllers/view/structures/structurestool.cpp:199
 #, fuzzy, kde-format
 #| msgid "Size:"
 msgctxt "size of a data structure"
 msgid "Size"
 msgstr "Méid:"
 
-#: controllers/view/structures/structureview.cpp:96
+#: controllers/view/structures/structureview.cpp:92
+#, fuzzy, kde-format
+#| msgid "Structure Definitions"
+msgctxt "@info"
+msgid "No structure definitions"
+msgstr "Sainmhínithe ar Struchtúir"
+
+#: controllers/view/structures/structureview.cpp:112
 #, kde-format
 msgctxt "@action:button"
 msgid "Validate"
 msgstr "Bailíochtaigh"
 
-#: controllers/view/structures/structureview.cpp:98
+#: controllers/view/structures/structureview.cpp:114
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Validate all structures."
 msgstr "Bailíochtaigh gach struchtúr."
 
-#: controllers/view/structures/structureview.cpp:120
+#: controllers/view/structures/structureview.cpp:136
 #, kde-format
 msgctxt "@action:button"
 msgid "Script console"
 msgstr ""
 
-#: controllers/view/structures/structureview.cpp:122
+#: controllers/view/structures/structureview.cpp:138
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open script console."
 msgstr ""
 
-#: controllers/view/structures/structureview.cpp:126
+#: controllers/view/structures/structureview.cpp:142
 #, kde-format
 msgctxt "@action:button"
 msgid "Settings"
 msgstr "Socruithe"
 
-#: controllers/view/structures/structureview.cpp:128
+#: controllers/view/structures/structureview.cpp:144
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open settings."
 msgstr "Oscail socruithe."
 
-#: controllers/view/structures/structureview.cpp:159
+#: controllers/view/structures/structureview.cpp:175
 #, kde-format
 msgid "Value Display"
 msgstr ""
 
-#: controllers/view/structures/structureview.cpp:171
+#: controllers/view/structures/structureview.cpp:187
 #, kde-format
 msgid "Structures management"
 msgstr "Bainistíocht struchtúr"
 
-#: controllers/view/structures/structureview.cpp:258
+#: controllers/view/structures/structureview.cpp:274
 #, kde-format
 msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Unlock"
 msgstr ""
 
-#: controllers/view/structures/structureview.cpp:260
+#: controllers/view/structures/structureview.cpp:276
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -2588,19 +2634,19 @@ msgid ""
 "current cursor position."
 msgstr ""
 
-#: controllers/view/structures/structureview.cpp:265
+#: controllers/view/structures/structureview.cpp:281
 #, kde-format
 msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Lock"
 msgstr ""
 
-#: controllers/view/structures/structureview.cpp:267
+#: controllers/view/structures/structureview.cpp:283
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Lock selected structure to current offset."
 msgstr ""
 
-#: controllers/view/structures/structureview.cpp:300
+#: controllers/view/structures/structureview.cpp:316
 #, fuzzy, kde-format
 #| msgid "Structure Definitions"
 msgctxt "@title:window"

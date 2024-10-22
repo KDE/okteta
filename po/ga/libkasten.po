@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: playground-utils/okteta.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-02 01:51+0000\n"
+"POT-Creation-Date: 2024-10-22 01:49+0000\n"
 "PO-Revision-Date: 2007-11-05 08:28-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -145,11 +145,19 @@ msgctxt "@info:tooltip"
 msgid "Title of the document"
 msgstr "Teideal na cáipéise"
 
-#: controllers/documentsystem/documentsbrowser/documentstool.cpp:34
+#: controllers/documentsystem/documentsbrowser/documentstool.cpp:35
 #: controllers/documentsystem/documentsbrowser/documentstoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
 msgid "Documents"
+msgstr "Cáipéisí"
+
+#: controllers/documentsystem/documentsbrowser/documentsview.cpp:52
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Documents"
+msgctxt "@info"
+msgid "No documents"
 msgstr "Cáipéisí"
 
 #: controllers/documentsystem/filesystembrowser/filesystembrowsertool.cpp:33

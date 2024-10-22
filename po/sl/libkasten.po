@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-02 01:51+0000\n"
+"POT-Creation-Date: 2024-10-22 01:49+0000\n"
 "PO-Revision-Date: 2024-04-26 06:54+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -141,11 +141,19 @@ msgctxt "@info:tooltip"
 msgid "Title of the document"
 msgstr "Naslov dokumenta"
 
-#: controllers/documentsystem/documentsbrowser/documentstool.cpp:34
+#: controllers/documentsystem/documentsbrowser/documentstool.cpp:35
 #: controllers/documentsystem/documentsbrowser/documentstoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
 msgid "Documents"
+msgstr "Dokumenti"
+
+#: controllers/documentsystem/documentsbrowser/documentsview.cpp:52
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Documents"
+msgctxt "@info"
+msgid "No documents"
 msgstr "Dokumenti"
 
 #: controllers/documentsystem/filesystembrowser/filesystembrowsertool.cpp:33

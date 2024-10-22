@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-19 01:53+0000\n"
+"POT-Creation-Date: 2024-10-22 01:49+0000\n"
 "PO-Revision-Date: 2013-06-21 06:20+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -128,7 +128,7 @@ msgid "%1: %2"
 msgstr "%1: %2"
 
 #: controllers/view/bookmarks/bookmarkscontroller.cpp:241
-#: controllers/view/bookmarks/bookmarkstool.cpp:126
+#: controllers/view/bookmarks/bookmarkstool.cpp:127
 #, kde-format
 msgctxt "default name of a bookmark"
 msgid "Bookmark"
@@ -141,13 +141,21 @@ msgctxt "@title:window"
 msgid "Bookmarks"
 msgstr "Бетбелгілер"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:66
+#: controllers/view/bookmarks/bookmarksview.cpp:61
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Bookmarks"
+msgctxt "@info"
+msgid "No bookmarks"
+msgstr "Бетбелгілер"
+
+#: controllers/view/bookmarks/bookmarksview.cpp:87
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Creates a new bookmark for the current cursor position."
 msgstr "Меңзер тұрған жерді бетбелгілеу."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:68
+#: controllers/view/bookmarks/bookmarksview.cpp:89
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -155,26 +163,26 @@ msgid ""
 "cursor position."
 msgstr "Бұл батырманы басқанда, меңзер тұрған жерде бетбелгі қойылады."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:79
+#: controllers/view/bookmarks/bookmarksview.cpp:100
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Deletes all the selected bookmarks."
 msgstr "Барлық таңдалған бетбелгілерді өшіру."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:81
+#: controllers/view/bookmarks/bookmarksview.cpp:102
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
 "If you press this button, all bookmarks which are selected will be deleted."
 msgstr "Бұл батырманы басқанда, барлық таңдалған бетбелгілер өшіріледі."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:93
+#: controllers/view/bookmarks/bookmarksview.cpp:114
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Moves the cursor to the selected bookmark."
 msgstr "Таңдалған бетбелгінің жеріне меңзерді көшіру."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:95
+#: controllers/view/bookmarks/bookmarksview.cpp:116
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -183,13 +191,13 @@ msgid ""
 msgstr ""
 "Бұл батырманы басқанда, соңғы таңдалған бетбелгінің жеріне меңзер апарылады."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:103
+#: controllers/view/bookmarks/bookmarksview.cpp:124
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enables renaming of the selected bookmark."
 msgstr "Таңдалған бетбелгіні қайта атауын мүмкін қылу."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:105
+#: controllers/view/bookmarks/bookmarksview.cpp:126
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -521,6 +529,12 @@ msgstr ""
 "<interface>Есептеу</interface> батырмасын басқанда таңдалған ауқымынан "
 "барлық минималды ұзындығы сәйкес келетін мәтін жолдар тізімі жаңартылады."
 
+#: controllers/view/checksum/checksumview.cpp:95
+#, kde-format
+msgctxt "@info:placeholder"
+msgid "No checksum calculated yet."
+msgstr ""
+
 #: controllers/view/crop/cropcontroller.cpp:33
 #, kde-format
 msgctxt "@action:inmenu"
@@ -716,7 +730,7 @@ msgstr ""
 "ауқымындағы байттың жиілік статистикасын есептеледі."
 
 #: controllers/view/info/infoview.cpp:118
-#: controllers/view/stringsextract/stringsextractview.cpp:138
+#: controllers/view/stringsextract/stringsextractview.cpp:158
 #, kde-format
 msgid "C&opy"
 msgstr "К&өшіріп алу"
@@ -865,7 +879,7 @@ msgstr "Бүтін сандар кодының байттар реті."
 #| msgctxt "@title:group"
 #| msgid "Parameters"
 msgctxt "@info"
-msgid "No parameters."
+msgid "No parameters"
 msgstr "Параметрлері"
 
 #: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:48
@@ -1401,7 +1415,7 @@ msgstr ""
 "енгізіп жазайық па?"
 
 #: controllers/view/poddecoder/podtableview.cpp:240
-#: controllers/view/structures/structureview.cpp:338
+#: controllers/view/structures/structureview.cpp:354
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "&Edit..."
@@ -1411,7 +1425,7 @@ msgstr "&Өзгерту...."
 
 #: controllers/view/poddecoder/podtableview.cpp:254
 #: controllers/view/selectrange/selectrangeview.cpp:125
-#: controllers/view/structures/structureview.cpp:353
+#: controllers/view/structures/structureview.cpp:369
 #, kde-format
 msgctxt "@action:button"
 msgid "&Select"
@@ -1679,26 +1693,26 @@ msgctxt "@title:window of the tool to extract strings"
 msgid "Strings"
 msgstr "Мәтін жолдар"
 
-#: controllers/view/stringsextract/stringsextracttoolviewfactory.cpp:24
+#: controllers/view/stringsextract/stringsextracttoolviewfactory.cpp:27
 #, kde-format
 msgctxt "@title:window"
 msgid "Strings"
 msgstr "Жолдар"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:54
+#: controllers/view/stringsextract/stringsextractview.cpp:61
 #, kde-format
 msgctxt ""
 "@label:spinbox minimum length for consecutive chars to be seen as a string"
 msgid "Minimum length:"
 msgstr "Минимум ұзындығы:"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:66
+#: controllers/view/stringsextract/stringsextractview.cpp:73
 #, kde-format
 msgctxt "@action:button extract the strings from the byte array"
 msgid "&Extract"
 msgstr "Алып &шығу"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:69
+#: controllers/view/stringsextract/stringsextractview.cpp:76
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1706,7 +1720,7 @@ msgid ""
 "below."
 msgstr "Таңдалған ауқымдағы мәтін жолдарды тауып, оларды төменде тізімдеу."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:71
+#: controllers/view/stringsextract/stringsextractview.cpp:78
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1718,24 +1732,32 @@ msgstr ""
 "барлық минималды ұзындығы сәйкес келетін мәтін жолдар табылып, олар "
 "төмендегі өрісінде тізімдеп көрсетіледі."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:81
+#: controllers/view/stringsextract/stringsextractview.cpp:88
 #, kde-format
 msgctxt "@label:lineedit filter term for displayed strings"
 msgid "Filter:"
 msgstr "Сүзгісі:"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:85
+#: controllers/view/stringsextract/stringsextractview.cpp:92
 #, kde-format
 msgid "Enter a term to limit the list."
 msgstr "Тізімді шектейтін шартты келтіріңіз."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:141
+#: controllers/view/stringsextract/stringsextractview.cpp:140
+#, fuzzy, kde-format
+#| msgctxt "@title:window of the tool to extract strings"
+#| msgid "Strings"
+msgctxt "@info"
+msgid "No strings"
+msgstr "Мәтін жолдар"
+
+#: controllers/view/stringsextract/stringsextractview.cpp:161
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected strings to the clipboard."
 msgstr "Таңдалған жолдарды алмасу буферіне көшіріп алу."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:143
+#: controllers/view/stringsextract/stringsextractview.cpp:163
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1745,18 +1767,18 @@ msgstr ""
 "<interface>Көшіріп алу</interface> батырмасын басқанда барлық таңдалған "
 "мәтін жолдары алмасу буферіне көшіріп алынады."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:152
+#: controllers/view/stringsextract/stringsextractview.cpp:172
 #, kde-format
 msgid "&Show"
 msgstr "&Көрсету"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:155
+#: controllers/view/stringsextract/stringsextractview.cpp:175
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Shows the selected string in the view."
 msgstr "Таңдалған жолдарды өрісінде көрсету."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:157
+#: controllers/view/stringsextract/stringsextractview.cpp:177
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1765,6 +1787,21 @@ msgid ""
 msgstr ""
 "<interface>Аттау</interface> батырмасын басқанда соңғы таңдалған жолдары "
 "белгіленеді де өрісінде көрсетіледі."
+
+#: controllers/view/stringsextract/stringsextractview.cpp:279
+#, fuzzy, kde-format
+#| msgctxt "@info"
+#| msgid "No bytes converted."
+msgctxt "@info"
+msgid "No strings extracted."
+msgstr "Ешбір байт аударылған жоқ."
+
+#: controllers/view/stringsextract/stringsextractview.cpp:280
+#, kde-format
+msgctxt "@info"
+msgid "1 string extracted."
+msgid_plural "%1 strings extracted."
+msgstr[0] ""
 
 #: controllers/view/structures/datatypes/array/complexarraydata.cpp:98
 #, kde-format
@@ -2437,78 +2474,85 @@ msgctxt "@title:window"
 msgid "Structures"
 msgstr "Құрылымдар"
 
-#: controllers/view/structures/structurestool.cpp:188
+#: controllers/view/structures/structurestool.cpp:193
 #, kde-format
 msgctxt "name of a data structure"
 msgid "Name"
 msgstr "Атауы"
 
-#: controllers/view/structures/structurestool.cpp:190
+#: controllers/view/structures/structurestool.cpp:195
 #, kde-format
 msgctxt "type of a data structure"
 msgid "Type"
 msgstr "Түрі"
 
-#: controllers/view/structures/structurestool.cpp:192
+#: controllers/view/structures/structurestool.cpp:197
 #, kde-format
 msgctxt "value of a data structure (primitive type)"
 msgid "Value"
 msgstr "Мәні"
 
-#: controllers/view/structures/structurestool.cpp:194
+#: controllers/view/structures/structurestool.cpp:199
 #, fuzzy, kde-format
 #| msgid "Size:"
 msgctxt "size of a data structure"
 msgid "Size"
 msgstr "Өлшемі:"
 
-#: controllers/view/structures/structureview.cpp:96
+#: controllers/view/structures/structureview.cpp:92
+#, fuzzy, kde-format
+#| msgid "Structure Definitions"
+msgctxt "@info"
+msgid "No structure definitions"
+msgstr "Құрылым анықтаулары"
+
+#: controllers/view/structures/structureview.cpp:112
 #, kde-format
 msgctxt "@action:button"
 msgid "Validate"
 msgstr "Дұрыстығын тексеру"
 
-#: controllers/view/structures/structureview.cpp:98
+#: controllers/view/structures/structureview.cpp:114
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Validate all structures."
 msgstr "Барлық құрылымдардың дұрыстығын тексеру"
 
-#: controllers/view/structures/structureview.cpp:120
+#: controllers/view/structures/structureview.cpp:136
 #, kde-format
 msgctxt "@action:button"
 msgid "Script console"
 msgstr "Скрипт консолі"
 
-#: controllers/view/structures/structureview.cpp:122
+#: controllers/view/structures/structureview.cpp:138
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open script console."
 msgstr "Скрипт консолін ашу"
 
-#: controllers/view/structures/structureview.cpp:126
+#: controllers/view/structures/structureview.cpp:142
 #, kde-format
 msgctxt "@action:button"
 msgid "Settings"
 msgstr "Баптау"
 
-#: controllers/view/structures/structureview.cpp:128
+#: controllers/view/structures/structureview.cpp:144
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open settings."
 msgstr "Баптау параметрлерін ашу."
 
-#: controllers/view/structures/structureview.cpp:159
+#: controllers/view/structures/structureview.cpp:175
 #, kde-format
 msgid "Value Display"
 msgstr "Мәндерін көрсету"
 
-#: controllers/view/structures/structureview.cpp:171
+#: controllers/view/structures/structureview.cpp:187
 #, kde-format
 msgid "Structures management"
 msgstr "Құрылымдарды басқару"
 
-#: controllers/view/structures/structureview.cpp:258
+#: controllers/view/structures/structureview.cpp:274
 #, fuzzy, kde-format
 #| msgctxt ""
 #| "@action:pushbutton unlock the starting offset of the current structure"
@@ -2517,7 +2561,7 @@ msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Unlock"
 msgstr "Бұғатын шешу"
 
-#: controllers/view/structures/structureview.cpp:260
+#: controllers/view/structures/structureview.cpp:276
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -2527,7 +2571,7 @@ msgstr ""
 "Таңдалған құрылымының бұғатын шешу, яғни қазіргі меңзер орынан басталатын "
 "қылу."
 
-#: controllers/view/structures/structureview.cpp:265
+#: controllers/view/structures/structureview.cpp:281
 #, fuzzy, kde-format
 #| msgctxt ""
 #| "@action:pushbutton unlock the starting offset of the current structure"
@@ -2536,13 +2580,13 @@ msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Lock"
 msgstr "Бұғаттау"
 
-#: controllers/view/structures/structureview.cpp:267
+#: controllers/view/structures/structureview.cpp:283
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Lock selected structure to current offset."
 msgstr "Таңдалған құрылымының қазіргі орнында басталатын қылып қалдыру."
 
-#: controllers/view/structures/structureview.cpp:300
+#: controllers/view/structures/structureview.cpp:316
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "Script console"
