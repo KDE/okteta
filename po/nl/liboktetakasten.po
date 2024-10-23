@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-22 01:49+0000\n"
-"PO-Revision-Date: 2024-10-17 13:02+0200\n"
+"PO-Revision-Date: 2024-10-22 10:52+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -145,12 +145,10 @@ msgid "Bookmarks"
 msgstr "Bladwijzers"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:61
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Bookmarks"
+#, kde-format
 msgctxt "@info"
 msgid "No bookmarks"
-msgstr "Bladwijzers"
+msgstr "Geen bladwijzers"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:87
 #, kde-format
@@ -545,7 +543,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "No checksum calculated yet."
-msgstr ""
+msgstr "Nog geen controlesom berekend."
 
 #: controllers/view/crop/cropcontroller.cpp:33
 #, kde-format
@@ -883,9 +881,7 @@ msgstr ""
 
 #: controllers/view/libbytearraychecksum/algorithm/nobytearraychecksumparametersetedit.cpp:25
 #: controllers/view/libbytearrayfilter/filter/nobytearrayfilterparametersetedit.cpp:25
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "No parameters."
+#, kde-format
 msgctxt "@info"
 msgid "No parameters"
 msgstr "Geen parameters"
@@ -1738,12 +1734,10 @@ msgid "Enter a term to limit the list."
 msgstr "Voer een term in om de lijst te beperken."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:140
-#, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to extract strings"
-#| msgid "Strings"
+#, kde-format
 msgctxt "@info"
 msgid "No strings"
-msgstr "Tekenreeksen"
+msgstr "Geen tekenreeksen"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:161
 #, kde-format
@@ -1783,20 +1777,18 @@ msgstr ""
 "het laatst was geselecteerd worden gemarkeerd en getoond in het beeld."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:279
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "No bytes converted."
+#, kde-format
 msgctxt "@info"
 msgid "No strings extracted."
-msgstr "Geen bytes geconverteerd."
+msgstr "Geen tekenreeksen uitgepakt."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:280
 #, kde-format
 msgctxt "@info"
 msgid "1 string extracted."
 msgid_plural "%1 strings extracted."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "1 tekenreeks uitgepakt."
+msgstr[1] "%1 tekenreeksen uitgepakt."
 
 #: controllers/view/structures/datatypes/array/complexarraydata.cpp:98
 #, kde-format
@@ -2503,11 +2495,10 @@ msgid "Size"
 msgstr "Grootte"
 
 #: controllers/view/structures/structureview.cpp:92
-#, fuzzy, kde-format
-#| msgid "Structure Definitions"
+#, kde-format
 msgctxt "@info"
 msgid "No structure definitions"
-msgstr "Structuurdefinities"
+msgstr "Geen structuurdefinities"
 
 #: controllers/view/structures/structureview.cpp:112
 #, kde-format

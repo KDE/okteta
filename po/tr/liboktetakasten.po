@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: kdesdk-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-22 01:49+0000\n"
-"PO-Revision-Date: 2024-10-18 02:07+0300\n"
+"PO-Revision-Date: 2024-10-22 08:49+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -146,12 +146,10 @@ msgid "Bookmarks"
 msgstr "Yer İmleri"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:61
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Bookmarks"
+#, kde-format
 msgctxt "@info"
 msgid "No bookmarks"
-msgstr "Yer İmleri"
+msgstr "Yer imi yok"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:87
 #, kde-format
@@ -541,7 +539,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "No checksum calculated yet."
-msgstr ""
+msgstr "Henüz bir sağlama toplamı hesaplanmadı."
 
 #: controllers/view/crop/cropcontroller.cpp:33
 #, kde-format
@@ -874,12 +872,10 @@ msgstr "Baytları tamsayı değerlere çözmek için kullanılacak bayt sırası
 
 #: controllers/view/libbytearraychecksum/algorithm/nobytearraychecksumparametersetedit.cpp:25
 #: controllers/view/libbytearrayfilter/filter/nobytearrayfilterparametersetedit.cpp:25
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "No parameters."
+#, kde-format
 msgctxt "@info"
 msgid "No parameters"
-msgstr "Parametre yok."
+msgstr "Parametre yok"
 
 #: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:48
 #, kde-format
@@ -1720,12 +1716,10 @@ msgid "Enter a term to limit the list."
 msgstr "Listeyi sınırlamak için bir sınır girin."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:140
-#, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to extract strings"
-#| msgid "Strings"
+#, kde-format
 msgctxt "@info"
 msgid "No strings"
-msgstr "Diziler"
+msgstr "Dizi yok"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:161
 #, kde-format
@@ -1765,20 +1759,18 @@ msgstr ""
 "işaretlenir ve görüntülenir."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:279
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "No bytes converted."
+#, kde-format
 msgctxt "@info"
 msgid "No strings extracted."
-msgstr "Dönüştürülen bayt yok."
+msgstr "Çıkarılan dizi yok."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:280
 #, kde-format
 msgctxt "@info"
 msgid "1 string extracted."
 msgid_plural "%1 strings extracted."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "1 dizi çıkarıldı."
+msgstr[1] "%1 dizi çıkarıldı."
 
 #: controllers/view/structures/datatypes/array/complexarraydata.cpp:98
 #, kde-format
@@ -2479,11 +2471,10 @@ msgid "Size"
 msgstr "Boyut"
 
 #: controllers/view/structures/structureview.cpp:92
-#, fuzzy, kde-format
-#| msgid "Structure Definitions"
+#, kde-format
 msgctxt "@info"
 msgid "No structure definitions"
-msgstr "Yapı Tanımlamaları"
+msgstr "Yapı tanımlamaları yok"
 
 #: controllers/view/structures/structureview.cpp:112
 #, kde-format
