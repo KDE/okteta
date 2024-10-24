@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-22 01:49+0000\n"
-"PO-Revision-Date: 2024-10-17 13:10+0200\n"
+"PO-Revision-Date: 2024-10-22 09:48+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -145,12 +145,10 @@ msgid "Bookmarks"
 msgstr "Punts"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:61
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Bookmarks"
+#, kde-format
 msgctxt "@info"
 msgid "No bookmarks"
-msgstr "Punts"
+msgstr "Sense punts"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:87
 #, kde-format
@@ -554,7 +552,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "No checksum calculated yet."
-msgstr ""
+msgstr "Encara no s'ha calculat cap suma de verificació."
 
 #: controllers/view/crop/cropcontroller.cpp:33
 #, kde-format
@@ -897,12 +895,10 @@ msgstr ""
 
 #: controllers/view/libbytearraychecksum/algorithm/nobytearraychecksumparametersetedit.cpp:25
 #: controllers/view/libbytearrayfilter/filter/nobytearrayfilterparametersetedit.cpp:25
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "No parameters."
+#, kde-format
 msgctxt "@info"
 msgid "No parameters"
-msgstr "Sense paràmetres."
+msgstr "Sense paràmetres"
 
 #: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:48
 #, kde-format
@@ -1753,12 +1749,10 @@ msgid "Enter a term to limit the list."
 msgstr "Introduïu un terme per a limitar la llista."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:140
-#, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to extract strings"
-#| msgid "Strings"
+#, kde-format
 msgctxt "@info"
 msgid "No strings"
-msgstr "Cadenes"
+msgstr "Sense cap cadena"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:161
 #, kde-format
@@ -1798,20 +1792,18 @@ msgstr ""
 "seleccionada es marcarà i mostrarà a la visualització."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:279
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "No bytes converted."
+#, kde-format
 msgctxt "@info"
 msgid "No strings extracted."
-msgstr "No s'ha convertit cap byte."
+msgstr "No s'ha extret cap cadena."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:280
 #, kde-format
 msgctxt "@info"
 msgid "1 string extracted."
 msgid_plural "%1 strings extracted."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "S'ha extret 1 cadena."
+msgstr[1] "S'han extret %1 cadenes."
 
 #: controllers/view/structures/datatypes/array/complexarraydata.cpp:98
 #, kde-format
@@ -2515,11 +2507,10 @@ msgid "Size"
 msgstr "Mida"
 
 #: controllers/view/structures/structureview.cpp:92
-#, fuzzy, kde-format
-#| msgid "Structure Definitions"
+#, kde-format
 msgctxt "@info"
 msgid "No structure definitions"
-msgstr "Definicions d'estructura"
+msgstr "Sense definicions d'estructura"
 
 #: controllers/view/structures/structureview.cpp:112
 #, kde-format
