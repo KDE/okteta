@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-02 01:51+0000\n"
+"POT-Creation-Date: 2024-10-22 01:49+0000\n"
 "PO-Revision-Date: 2018-08-25 16:52+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -139,12 +139,18 @@ msgctxt "@info:tooltip"
 msgid "Title of the document"
 msgstr "Namnet på dokumentet"
 
-#: controllers/documentsystem/documentsbrowser/documentstool.cpp:34
+#: controllers/documentsystem/documentsbrowser/documentstool.cpp:35
 #: controllers/documentsystem/documentsbrowser/documentstoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
 msgid "Documents"
 msgstr "Dokument"
+
+#: controllers/documentsystem/documentsbrowser/documentsview.cpp:52
+#, kde-format
+msgctxt "@info"
+msgid "No documents"
+msgstr ""
 
 #: controllers/documentsystem/filesystembrowser/filesystembrowsertool.cpp:33
 #: controllers/documentsystem/filesystembrowser/filesystembrowsertoolviewfactory.cpp:24

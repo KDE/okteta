@@ -140,12 +140,10 @@ msgid "Bookmarks"
 msgstr "书签"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:61
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Bookmarks"
+#, kde-format
 msgctxt "@info"
 msgid "No bookmarks"
-msgstr "书签"
+msgstr ""
 
 #: controllers/view/bookmarks/bookmarksview.cpp:87
 #, kde-format
@@ -848,12 +846,10 @@ msgstr "用于将字节解码为整数值的字节顺序。"
 
 #: controllers/view/libbytearraychecksum/algorithm/nobytearraychecksumparametersetedit.cpp:25
 #: controllers/view/libbytearrayfilter/filter/nobytearrayfilterparametersetedit.cpp:25
-#, fuzzy, kde-format
-#| msgctxt "name of the encoding target"
-#| msgid "Characters"
+#, kde-format
 msgctxt "@info"
 msgid "No parameters"
-msgstr "字符"
+msgstr ""
 
 #: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:48
 #, kde-format
@@ -1676,12 +1672,10 @@ msgid "Enter a term to limit the list."
 msgstr "输入列表限制条件。"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:140
-#, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to extract strings"
-#| msgid "Strings"
+#, kde-format
 msgctxt "@info"
 msgid "No strings"
-msgstr "字符串"
+msgstr ""
 
 #: controllers/view/stringsextract/stringsextractview.cpp:161
 #, kde-format
@@ -1721,12 +1715,10 @@ msgstr ""
 "符串。"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:279
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "No bytes converted."
+#, kde-format
 msgctxt "@info"
 msgid "No strings extracted."
-msgstr "没有转换字节。"
+msgstr ""
 
 #: controllers/view/stringsextract/stringsextractview.cpp:280
 #, kde-format
@@ -2418,11 +2410,10 @@ msgid "Size"
 msgstr "大小"
 
 #: controllers/view/structures/structureview.cpp:92
-#, fuzzy, kde-format
-#| msgid "Structure Definitions"
+#, kde-format
 msgctxt "@info"
 msgid "No structure definitions"
-msgstr "结构定义"
+msgstr ""
 
 #: controllers/view/structures/structureview.cpp:112
 #, kde-format

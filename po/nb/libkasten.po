@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-02 01:51+0000\n"
+"POT-Creation-Date: 2024-10-22 01:49+0000\n"
 "PO-Revision-Date: 2010-03-28 13:37+0200\n"
 "Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -139,12 +139,18 @@ msgctxt "@info:tooltip"
 msgid "Title of the document"
 msgstr "Tittel på dokumentet"
 
-#: controllers/documentsystem/documentsbrowser/documentstool.cpp:34
+#: controllers/documentsystem/documentsbrowser/documentstool.cpp:35
 #: controllers/documentsystem/documentsbrowser/documentstoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
 msgid "Documents"
 msgstr "Dokumenter"
+
+#: controllers/documentsystem/documentsbrowser/documentsview.cpp:52
+#, kde-format
+msgctxt "@info"
+msgid "No documents"
+msgstr ""
 
 #: controllers/documentsystem/filesystembrowser/filesystembrowsertool.cpp:33
 #: controllers/documentsystem/filesystembrowser/filesystembrowsertoolviewfactory.cpp:24

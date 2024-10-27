@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-22 01:49+0000\n"
-"PO-Revision-Date: 2024-10-19 13:00+0200\n"
+"PO-Revision-Date: 2024-10-26 12:42+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -149,12 +149,10 @@ msgid "Bookmarks"
 msgstr "Zakładki"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:61
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Bookmarks"
+#, kde-format
 msgctxt "@info"
 msgid "No bookmarks"
-msgstr "Zakładki"
+msgstr "Brak zakładek"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:87
 #, kde-format
@@ -552,7 +550,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "No checksum calculated yet."
-msgstr ""
+msgstr "Nie obliczono jeszcze żadnych suma sprawdzających."
 
 #: controllers/view/crop/cropcontroller.cpp:33
 #, kde-format
@@ -888,12 +886,10 @@ msgstr ""
 
 #: controllers/view/libbytearraychecksum/algorithm/nobytearraychecksumparametersetedit.cpp:25
 #: controllers/view/libbytearrayfilter/filter/nobytearrayfilterparametersetedit.cpp:25
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "No parameters."
+#, kde-format
 msgctxt "@info"
 msgid "No parameters"
-msgstr "Bez parametrów."
+msgstr "Bez parametrów"
 
 #: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:48
 #, kde-format
@@ -1734,12 +1730,10 @@ msgid "Enter a term to limit the list."
 msgstr "Tu wprowadź filtr dla listy."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:140
-#, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to extract strings"
-#| msgid "Strings"
+#, kde-format
 msgctxt "@info"
 msgid "No strings"
-msgstr "Ciągi"
+msgstr "Bez ciągów"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:161
 #, kde-format
@@ -1779,21 +1773,19 @@ msgstr ""
 "ostatnio wybranego ciągu i pokazanie go w widoku."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:279
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "No bytes converted."
+#, kde-format
 msgctxt "@info"
 msgid "No strings extracted."
-msgstr "Nie przekształcono żadnych bajtów."
+msgstr "Nie wydobyto żadnego ciągu."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:280
 #, kde-format
 msgctxt "@info"
 msgid "1 string extracted."
 msgid_plural "%1 strings extracted."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Wydobyto 1 ciąg."
+msgstr[1] "Wydobyto %1 ciągi."
+msgstr[2] "Wydobyto %1 ciągów."
 
 #: controllers/view/structures/datatypes/array/complexarraydata.cpp:98
 #, kde-format
@@ -2495,11 +2487,10 @@ msgid "Size"
 msgstr "Rozmiar"
 
 #: controllers/view/structures/structureview.cpp:92
-#, fuzzy, kde-format
-#| msgid "Structure Definitions"
+#, kde-format
 msgctxt "@info"
 msgid "No structure definitions"
-msgstr "Definicje struktur"
+msgstr "Bez definicji struktur"
 
 #: controllers/view/structures/structureview.cpp:112
 #, kde-format
