@@ -18,13 +18,14 @@ namespace Kasten {
 
 class PODTableView;
 class PODDecoderTool;
+class AbstractUserMessagesHandler;
 
 class PODDecoderToolView : public AbstractToolView
 {
     Q_OBJECT
 
 public:
-    explicit PODDecoderToolView(PODDecoderTool* tool);
+    explicit PODDecoderToolView(PODDecoderTool* tool, AbstractUserMessagesHandler* userMessagesHandler);
     ~PODDecoderToolView() override;
 
 public: // AbstractToolView API

@@ -24,6 +24,7 @@ namespace Kasten {
 class PODDelegate;
 class PODTableModel;
 class PODDecoderTool;
+class AbstractUserMessagesHandler;
 
 class PODTableView : public QWidget
                    , public AbstractDifferentSizeDialog
@@ -31,7 +32,8 @@ class PODTableView : public QWidget
     Q_OBJECT
 
 public:
-    explicit PODTableView(PODDecoderTool* tool, QWidget* parent = nullptr);
+    explicit PODTableView(PODDecoderTool* tool, AbstractUserMessagesHandler* userMessagesHandler,
+                          QWidget* parent = nullptr);
     ~PODTableView() override;
 
 public:
@@ -52,6 +54,8 @@ private Q_SLOTS:
 
 private:
     PODDecoderTool* const mTool;
+
+    AbstractUserMessagesHandler* const m_userMessagesHandler;
 
     PODTableModel* mPODTableModel;
 

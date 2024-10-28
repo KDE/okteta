@@ -14,8 +14,8 @@
 
 namespace Kasten {
 
-PODDecoderToolView::PODDecoderToolView(PODDecoderTool* tool)
-    : mWidget(std::make_unique<PODTableView>(tool))
+PODDecoderToolView::PODDecoderToolView(PODDecoderTool* tool, AbstractUserMessagesHandler* userMessagesHandler)
+    : mWidget(std::make_unique<PODTableView>(tool, userMessagesHandler))
 {
 }
 

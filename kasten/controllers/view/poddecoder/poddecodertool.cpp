@@ -209,6 +209,11 @@ void PODDecoderTool::onContentsChange()
     updateData();
 }
 
+AbstractModel* PODDecoderTool::targetModel() const
+{
+    return mByteArrayView;
+}
+
 int PODDecoderTool::podCount() const { return mTypeCodecs.size(); }
 
 QString PODDecoderTool::nameOfPOD(int podId) const

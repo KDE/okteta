@@ -15,11 +15,15 @@
 #include "poddecodertool.hpp"
 // utils
 #include <labelledtoolbarwidget.hpp>
+// Kasten core
+#include <Kasten/AbstractUserMessagesHandler>
+#include <Kasten/UserResponseOption>
+#include <Kasten/UserQuery>
 // KF
 #include <KComboBox>
 #include <KLocalizedString>
-#include <KMessageBox>
 #include <KStandardAction>
+#include <KStandardGuiItem>
 // Qt
 #include <QToolBar>
 #include <QLabel>
@@ -37,9 +41,10 @@
 
 namespace Kasten {
 
-PODTableView::PODTableView(PODDecoderTool* tool, QWidget* parent)
+PODTableView::PODTableView(PODDecoderTool* tool, AbstractUserMessagesHandler* userMessagesHandler, QWidget* parent)
     : QWidget(parent)
     , mTool(tool)
+    , m_userMessagesHandler(userMessagesHandler)
 {
     auto* baseLayout = new QVBoxLayout(this);
     baseLayout->setContentsMargins(0, 0, 0, 0);
@@ -127,7 +132,6 @@ Answer PODTableView::query(int newValueSize, int oldValueSize, int sizeLeft)
 
     Answer answer;
 
-    int messageBoxAnswer;
     if (newValueSize < oldValueSize) {
         const QString message =
             xi18nc("@info",
@@ -141,25 +145,38 @@ Answer PODTableView::query(int newValueSize, int oldValueSize, int sizeLeft)
                      i18nc("@info:tooltip",
                            "Keep the unused bytes with their old values."));
 
-        messageBoxAnswer = KMessageBox::warningTwoActionsCancel(this,
-                                                                message, mTool->title(),
-                                                                keepGuiItem,
-                                                                KStandardGuiItem::remove());
+        auto query = std::make_unique<Kasten::UserQuery>(mTool->targetModel(), message, mTool->title(), Kasten::UserQueryWarningSeverity);
+        const QString keepResponseId = QStringLiteral("keep");
+        const QString removeResponseId = QStringLiteral("remove");
+        query->addResponseOption(keepGuiItem, keepResponseId);
+        query->addResponseOption(KStandardGuiItem::remove(), removeResponseId);
+        query->addResponseOption(KStandardGuiItem::cancel(), QStringLiteral("cancel"),
+                                 Kasten::UserResponseCancelHint | Kasten::UserResponseDefaultHint);
+
+        const QString reponse = m_userMessagesHandler->executeQuery(std::move(query));
+        answer = (reponse == keepResponseId) ?   Overwrite :
+                 (reponse == removeResponseId) ? AdaptSize :
+                                                 Cancel;
     } else {
         const QString message =
             xi18nc("@info",
                    "The new value needs <emphasis>more</emphasis> bytes (%1 instead of %2).<nl/>"
                    "Overwrite the following bytes or insert new ones as needed?", newValueSize, oldValueSize);
 
-        messageBoxAnswer = KMessageBox::warningTwoActionsCancel(this,
-                                                                message, mTool->title(),
-                                                                KStandardGuiItem::overwrite(),
-                                                                KStandardGuiItem::insert());
+        auto query = std::make_unique<Kasten::UserQuery>(mTool->targetModel(), message, mTool->title(), Kasten::UserQueryWarningSeverity);
+        const QString overwriteResponseId = QStringLiteral("overwrite");
+        const QString insertResponseId = QStringLiteral("insert");
+        query->addResponseOption(KStandardGuiItem::overwrite(), overwriteResponseId);
+        query->addResponseOption(KStandardGuiItem::insert(), insertResponseId);
+        query->addResponseOption(KStandardGuiItem::cancel(), QStringLiteral("cancel"),
+                                 Kasten::UserResponseCancelHint | Kasten::UserResponseDefaultHint);
+
+        const QString reponse = m_userMessagesHandler->executeQuery(std::move(query));
+        answer = (reponse == overwriteResponseId) ? Overwrite :
+                 (reponse == insertResponseId) ?    AdaptSize :
+                                                    Cancel;
     }
 
-    answer = (messageBoxAnswer == KMessageBox::PrimaryAction) ?   Overwrite :
-             (messageBoxAnswer == KMessageBox::SecondaryAction) ? AdaptSize :
-                                                                  Cancel;
     return answer;
 }
 

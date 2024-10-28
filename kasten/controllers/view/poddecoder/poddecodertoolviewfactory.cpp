@@ -16,7 +16,10 @@
 
 namespace Kasten {
 
-PodDecoderToolViewFactory::PodDecoderToolViewFactory() = default;
+PodDecoderToolViewFactory::PodDecoderToolViewFactory(AbstractUserMessagesHandler* userMessagesHandler)
+    : m_userMessagesHandler(userMessagesHandler)
+{
+}
 
 PodDecoderToolViewFactory::~PodDecoderToolViewFactory() = default;
 
@@ -27,7 +30,7 @@ SidePosition PodDecoderToolViewFactory::defaultPosition() const { return RightSi
 
 std::unique_ptr<AbstractToolView> PodDecoderToolViewFactory::create(AbstractTool* tool) const
 {
-    return std::make_unique<PODDecoderToolView>(qobject_cast<PODDecoderTool*>(tool));
+    return std::make_unique<PODDecoderToolView>(qobject_cast<PODDecoderTool*>(tool), m_userMessagesHandler);
 }
 
 }

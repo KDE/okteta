@@ -73,6 +73,8 @@ public:
     QSysInfo::Endian byteOrder() const;
     const Okteta::CharCodec* charCodec() const;
 
+    AbstractModel* targetModel() const;
+
 public:
     void setData(const QVariant& data, int podId);
     void selectBytesInView(int podId);
