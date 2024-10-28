@@ -9,22 +9,23 @@
 #include "dialoghandler.hpp"
 
 // Kasten core
+#include <Kasten/AbstractUserMessagesHandler>
+#include <Kasten/UserResponseOption>
+#include <Kasten/UserQuery>
 #include <Kasten/AbstractDocument>
 // KF
-#include <KMessageBox>
+#include <KStandardGuiItem>
 #include <KLocalizedString>
 // Qt
 #include <QUrl>
 
 namespace Kasten {
 
-DialogHandler::DialogHandler(QWidget* widget)
-    : mWidget(widget)
+DialogHandler::DialogHandler(AbstractUserMessagesHandler* userMessagesHandler)
+    : m_userMessagesHandler(userMessagesHandler)
 {}
 
 DialogHandler::~DialogHandler() = default;
-
-void DialogHandler::setWidget(QWidget* widget) { mWidget = widget; }
 
 Answer DialogHandler::queryOverwrite(const QUrl& url, const QString& title) const
 {
@@ -32,14 +33,20 @@ Answer DialogHandler::queryOverwrite(const QUrl& url, const QString& title) cons
         xi18nc("@info",
                "There is already a file at<nl/><filename>%1</filename>.<nl/>"
                "Overwrite?", url.url());
-    const int answer = KMessageBox::warningTwoActionsCancel(mWidget,
-                                                            message, title,
-                                                            KStandardGuiItem::overwrite(),
-                                                            KStandardGuiItem::back());
 
-    return (answer == KMessageBox::PrimaryAction) ?   Overwrite :
-           (answer == KMessageBox::SecondaryAction) ? PreviousQuestion :
-                                                      Cancel;
+    // TODO: get document model as context to use here
+    auto query = std::make_unique<Kasten::UserQuery>(nullptr, message, title, Kasten::UserQueryWarningSeverity);
+    const QString overwriteResponseId = QStringLiteral("overwrite");
+    const QString backResponseId = QStringLiteral("back");
+    query->addResponseOption(KStandardGuiItem::overwrite(), overwriteResponseId);
+    query->addResponseOption(KStandardGuiItem::back(), backResponseId); // make default somehow?
+    query->addResponseOption(KStandardGuiItem::cancel(), QStringLiteral("cancel"), UserResponseCancelHint | Kasten::UserResponseDefaultHint);
+
+    const QString reponse = m_userMessagesHandler->executeQuery(std::move(query));
+    return
+        (reponse == overwriteResponseId) ? Overwrite :
+        (reponse == backResponseId) ?      PreviousQuestion :
+                                           Cancel;
 }
 
 Answer DialogHandler::queryDiscardOnReload(const AbstractDocument* document, const QString& title) const
@@ -49,10 +56,14 @@ Answer DialogHandler::queryDiscardOnReload(const AbstractDocument* document, con
                                    "They will be lost if you reload the document.<nl/>"
                                    "Do you want to discard them?", document->title());
 
-    const int answer = KMessageBox::warningContinueCancel(mWidget, message, title,
-                                                          KStandardGuiItem::discard());
+    // TODO: reconsider constness of document
+    auto query = std::make_unique<Kasten::UserQuery>(const_cast<AbstractDocument*>(document), message, title, Kasten::UserQueryWarningSeverity);
+    const QString discardResponseId = QStringLiteral("discard");
+    query->addResponseOption(KStandardGuiItem::discard(), discardResponseId);
+    query->addResponseOption(KStandardGuiItem::cancel(), QStringLiteral("cancel"), UserResponseCancelHint | Kasten::UserResponseDefaultHint);
 
-    return (answer == KMessageBox::Cancel) ? Cancel : Discard;
+    const QString reponse = m_userMessagesHandler->executeQuery(std::move(query));
+    return (reponse == discardResponseId) ? Discard : Cancel;
 }
 
 Answer DialogHandler::querySaveDiscard(const AbstractDocument* document, const QString& title) const
@@ -61,13 +72,18 @@ Answer DialogHandler::querySaveDiscard(const AbstractDocument* document, const Q
                                    "<filename>%1</filename> has been modified.<nl/>"
                                    "Do you want to save your changes or discard them?", document->title());
 
-    const int answer = KMessageBox::warningTwoActionsCancel(mWidget,
-                                                            message, title,
-                                                            KStandardGuiItem::save(), KStandardGuiItem::discard());
+    auto query = std::make_unique<Kasten::UserQuery>(const_cast<AbstractDocument*>(document), message, title, Kasten::UserQueryWarningSeverity);
+    const QString saveResponseId = QStringLiteral("save");
+    const QString discardResponseId = QStringLiteral("discard");
+    query->addResponseOption(KStandardGuiItem::save(), saveResponseId);
+    query->addResponseOption(KStandardGuiItem::discard(), discardResponseId);
+    query->addResponseOption(KStandardGuiItem::cancel(), QStringLiteral("cancel"), UserResponseCancelHint | Kasten::UserResponseDefaultHint);
 
-    return (answer == KMessageBox::PrimaryAction) ?   Save :
-           (answer == KMessageBox::SecondaryAction) ? Discard :
-                                                      Cancel;
+    const QString reponse = m_userMessagesHandler->executeQuery(std::move(query));
+    return
+        (reponse == saveResponseId) ?    Save :
+        (reponse == discardResponseId) ? Discard :
+                                         Cancel;
 }
 
 Answer DialogHandler::queryDiscard(const AbstractDocument* document, const QString& title) const
@@ -76,10 +92,13 @@ Answer DialogHandler::queryDiscard(const AbstractDocument* document, const QStri
                                    "<filename>%1</filename> has been modified.<nl/>"
                                    "Do you want to discard your changes?", document->title());
 
-    const int answer = KMessageBox::warningContinueCancel(mWidget, message, title,
-                                                          KStandardGuiItem::discard());
+    auto query = std::make_unique<Kasten::UserQuery>(const_cast<AbstractDocument*>(document), message, title, Kasten::UserQueryWarningSeverity);
+    const QString discardResponseId = QStringLiteral("discard");
+    query->addResponseOption(KStandardGuiItem::discard(), discardResponseId);
+    query->addResponseOption(KStandardGuiItem::cancel(), QStringLiteral("cancel"), UserResponseCancelHint | Kasten::UserResponseDefaultHint);
 
-    return (answer == KMessageBox::Cancel) ? Cancel : Discard;
+    const QString reponse = m_userMessagesHandler->executeQuery(std::move(query));
+    return (reponse == discardResponseId) ? Discard : Cancel;
 }
 
 }

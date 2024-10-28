@@ -78,8 +78,8 @@ int OktetaProgram::execute()
     mDocumentManager = std::make_unique<DocumentManager>();
     mViewManager = std::make_unique<ViewManager>();
     mDocumentStrategy = std::make_unique<MultiDocumentStrategy>(mDocumentManager.get(), mViewManager.get());
-    mDialogHandler = std::make_unique<DialogHandler>();
     m_userMessagesHandler = std::make_unique<UserMessagesHandler>();
+    mDialogHandler = std::make_unique<DialogHandler>(m_userMessagesHandler.get());
 
     KAboutData aboutData = KAboutData::applicationData();
     QCommandLineParser parser;
@@ -125,7 +125,6 @@ int OktetaProgram::execute()
     mViewManager->codecViewManager()->setDataGeneratorConfigEditorFactories(std::move(generatorConfigEditorFactoryList));
 
     auto* mainWindow = new OktetaMainWindow(this);
-    mDialogHandler->setWidget(mainWindow);
     m_userMessagesHandler->setWidget(mainWindow);
 
     // started by session management?

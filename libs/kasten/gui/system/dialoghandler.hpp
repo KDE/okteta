@@ -15,15 +15,15 @@
 #include <Kasten/AbstractOverwriteDialog>
 #include <Kasten/AbstractSaveDiscardDialog>
 
-class QWidget;
-
 namespace Kasten {
+
+class AbstractUserMessagesHandler;
 
 class KASTENGUI_EXPORT DialogHandler : public AbstractOverwriteDialog
                                      , public AbstractSaveDiscardDialog
 {
 public:
-    explicit DialogHandler(QWidget* widget = nullptr);
+    explicit DialogHandler(AbstractUserMessagesHandler* userMessagesHandler);
     DialogHandler(const DialogHandler&) = delete;
 
     ~DialogHandler() override;
@@ -38,11 +38,8 @@ public: // AbstractSaveDiscardDialog API
     Answer querySaveDiscard(const AbstractDocument* document, const QString& title) const override;
     Answer queryDiscard(const AbstractDocument* document, const QString& title) const override;
 
-public:
-    void setWidget(QWidget* widget);
-
 private:
-    QWidget* mWidget;
+    AbstractUserMessagesHandler* const m_userMessagesHandler;
 };
 
 }
