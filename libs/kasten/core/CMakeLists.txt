@@ -50,6 +50,8 @@ kastencore_add_sublibrary(usermessages
     PUBLIC
         UserErrorReport
         UserNotification
+        UserResponseOption
+        UserQuery
 )
 
 kastencore_add_sublibrary(document
