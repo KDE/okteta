@@ -14,10 +14,13 @@
 // Std
 #include <memory>
 
+class QString;
+
 namespace Kasten {
 
 class UserErrorReport;
 class UserNotification;
+class UserQuery;
 
 class KASTENCORE_EXPORT AbstractUserMessagesHandler
 {
@@ -28,6 +31,8 @@ public: // API to be implemented
     virtual void postErrorReport(std::unique_ptr<UserErrorReport>&& errorReport) = 0;
     virtual void postNotification(std::unique_ptr<UserNotification>&& notification) = 0;
 
+    // TODO: make async
+    virtual QString executeQuery(std::unique_ptr<UserQuery>&& userQuery) = 0;
 };
 
 inline AbstractUserMessagesHandler::~AbstractUserMessagesHandler() = default;

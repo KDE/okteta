@@ -39,6 +39,8 @@ public:
     void postErrorReport(std::unique_ptr<UserErrorReport>&& errorReport);
     void postNotification(std::unique_ptr<UserNotification>&& notification);
 
+    QString executeQuery(std::unique_ptr<UserQuery>&& userQuery);
+
 public:
     void setWidget(QWidget* widget);
 

@@ -11,10 +11,14 @@
 // Kasten Core
 #include <Kasten/AbstractModel>
 #include <Kasten/UserNotification>
+#include <Kasten/UserResponseOption>
+#include <Kasten/UserQuery>
 #include <Kasten/UserErrorReportsInlineable>
 #include <Kasten/UserNotificationsInlineable>
 // KF
 #include <KMessageBox>
+// Qt
+#include <QDialog>
 
 namespace Kasten {
 
@@ -72,6 +76,78 @@ void UserMessagesHandlerPrivate::enqueueErrorReport(AbstractModel* model,
 
     }
     it->second.emplace_back(std::move(errorReport));
+}
+
+QString UserMessagesHandlerPrivate::executeQuery(std::unique_ptr<UserQuery>&& userQuery)
+{
+    auto* dialog = new QDialog(m_widget);
+    dialog->setWindowTitle(userQuery->title());
+    dialog->setModal(true);
+
+    auto* buttonBox = new QDialogButtonBox(dialog);
+
+    UserResponseOption* primaryResponseOption = nullptr;
+    UserResponseOption* secondaryResponseOption = nullptr;
+    UserResponseOption* cancelResponseOption = nullptr;
+    for (const auto& responseOption : userQuery->responseOptions()) {
+        if (responseOption->hints().testFlag(UserResponseCancelHint)) {
+            cancelResponseOption = responseOption.get();
+            continue;
+        }
+        if (!primaryResponseOption) {
+            primaryResponseOption = responseOption.get();
+            continue;
+        }
+        secondaryResponseOption = responseOption.get();;
+    }
+
+    std::unordered_map<QDialogButtonBox::StandardButton, UserResponseOption*> buttonTable;
+    if (primaryResponseOption) {
+        buttonTable.emplace(QDialogButtonBox::Yes, primaryResponseOption);
+    }
+    if (secondaryResponseOption) {
+        buttonTable.emplace(QDialogButtonBox::No, secondaryResponseOption);
+        if (cancelResponseOption) {
+            buttonTable.emplace(QDialogButtonBox::Cancel, cancelResponseOption);
+        }
+    } else if (cancelResponseOption) {
+        buttonTable.emplace(QDialogButtonBox::No, cancelResponseOption);
+    }
+    UserResponseOption* lastResponse = cancelResponseOption ? cancelResponseOption : secondaryResponseOption;
+    const bool isNonPrimaryDefault = (lastResponse && lastResponse->hints().testFlag(UserResponseDefaultHint));
+
+    for (const auto& buttonData : buttonTable) {
+        const QDialogButtonBox::StandardButton standardButton = buttonData.first;
+        UserResponseOption* const responseOption = buttonData.second;
+
+        QPushButton* button = buttonBox->addButton(standardButton);
+
+        const KGuiItem guiItem = responseOption->guiItem();
+        KGuiItem::assign(button, guiItem);
+    }
+
+    const UserQuerySeverity severity = userQuery->severity();
+    const QMessageBox::Icon messageBoxIcon =
+        (severity == UserQueryWarningSeverity) ? QMessageBox::Warning :
+        /* else */ QMessageBox::Question;
+
+    KMessageBox::Options messageBoxOptions = KMessageBox::Notify;
+    if (isNonPrimaryDefault) {
+        messageBoxOptions |= KMessageBox::Dangerous;
+    }
+
+    const int result = KMessageBox::createKMessageBox(dialog,
+                                                      buttonBox,
+                                                      messageBoxIcon,
+                                                      userQuery->text(),
+                                                      QStringList(),
+                                                      QString(),
+                                                      nullptr,
+                                                      messageBoxOptions);
+
+    auto it = buttonTable.find(static_cast<QDialogButtonBox::StandardButton>(result));
+
+    return (it != buttonTable.cend()) ? it->second->id() : QString();
 }
 
 void UserMessagesHandlerPrivate::onErrorReportHidden()

@@ -32,6 +32,13 @@ void UserMessagesHandler::postNotification(std::unique_ptr<UserNotification>&& n
     d->postNotification(std::move(notification));
 }
 
+QString UserMessagesHandler::executeQuery(std::unique_ptr<UserQuery>&& userQuery)
+{
+    Q_D(UserMessagesHandler);
+
+    return d->executeQuery(std::move(userQuery));
+}
+
 void UserMessagesHandler::setWidget(QWidget* widget)
 {
     Q_D(UserMessagesHandler);
