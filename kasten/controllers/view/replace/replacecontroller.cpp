@@ -15,12 +15,14 @@
 // Kasten core
 #include <Kasten/AbstractUserMessagesHandler>
 #include <Kasten/UserNotification>
+#include <Kasten/UserResponseOption>
+#include <Kasten/UserQuery>
 // KF
 #include <KXmlGuiWindow>
 #include <KLocalizedString>
 #include <KActionCollection>
 #include <KStandardAction>
-#include <KMessageBox>
+#include <KStandardGuiItem>
 // Qt
 #include <QAction>
 
@@ -94,11 +96,13 @@ void ReplaceController::queryContinue(FindDirection direction, int noOfReplaceme
                              xi18nc("@info", "Beginning of byte array reached.<nl/>Continue from the end?");
 
     const QString message = replacementReport + QLatin1String("<br /><br />") + question;
-    const int answer = KMessageBox::questionTwoActions(mParentWidget,
-                                                       message, messageBoxTitle,
-                                                       KStandardGuiItem::cont(), KStandardGuiItem::cancel());
 
-    const bool result = (answer != KMessageBox::SecondaryAction);
+    auto query = std::make_unique<Kasten::UserQuery>(mTool->targetModel(), message, messageBoxTitle);
+    const QString continueResponseId = QStringLiteral("continue");
+    query->addResponseOption(KStandardGuiItem::cont(), continueResponseId, Kasten::UserResponseDefaultHint);
+    query->addResponseOption(KStandardGuiItem::cancel(), QStringLiteral("cancel"), Kasten::UserResponseCancelHint);
+
+    const bool result = (m_userMessagesHandler->executeQuery(std::move(query)) == continueResponseId);
 
     Q_EMIT queryContinueFinished(result);
 }
