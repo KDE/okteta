@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-22 01:49+0000\n"
+"POT-Creation-Date: 2024-10-29 01:49+0000\n"
 "PO-Revision-Date: 2021-10-30 13:01+0200\n"
 "Last-Translator: Kristof Kiszel <kiszel.kristof@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -438,7 +438,7 @@ msgstr ""
 "Ha rákattint a <interface>Létrehozás</interface> gombra, a program a fent "
 "megadott beállításokkal beszúrja a létrejött adatokat egy új dokumentumba."
 
-#: gui/system/dialoghandler.cpp:33
+#: gui/system/dialoghandler.cpp:34
 #, kde-kuit-format
 msgctxt "@info"
 msgid "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
@@ -446,7 +446,7 @@ msgstr ""
 "Már létezik ilyen nevű fájl: <nl/><filename>%1</filename>.<nl/>Felül "
 "szeretné írni?"
 
-#: gui/system/dialoghandler.cpp:48
+#: gui/system/dialoghandler.cpp:55
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -456,7 +456,7 @@ msgstr ""
 "A dokumentum (<filename>%1</filename>) megváltozott, ha újratölti, a "
 "módosítások elvesznek.<nl/>Eldobja a változásokat?"
 
-#: gui/system/dialoghandler.cpp:61
+#: gui/system/dialoghandler.cpp:72
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -466,7 +466,7 @@ msgstr ""
 "Megváltozott ez a fájl: <filename>%1</filename>.<nl/>El szeretné menteni a "
 "változásokat?"
 
-#: gui/system/dialoghandler.cpp:76
+#: gui/system/dialoghandler.cpp:92
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""

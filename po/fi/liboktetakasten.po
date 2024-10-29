@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-22 01:49+0000\n"
+"POT-Creation-Date: 2024-10-29 01:49+0000\n"
 "PO-Revision-Date: 2024-02-14 19:07+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -841,14 +841,14 @@ msgid "Modular sum 8-bit"
 msgstr "8-bittinen modulaarinen summa"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:28
-#: controllers/view/poddecoder/podtableview.cpp:83
+#: controllers/view/poddecoder/podtableview.cpp:88
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Big-endian"
 msgstr "Big-endian"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:29
-#: controllers/view/poddecoder/podtableview.cpp:84
+#: controllers/view/poddecoder/podtableview.cpp:89
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Little-endian"
@@ -1208,8 +1208,8 @@ msgid "UTF-8"
 msgstr "UTF-8"
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:73
-#: controllers/view/search/searchcontroller.cpp:112
-#: controllers/view/search/searchcontroller.cpp:120
+#: controllers/view/search/searchcontroller.cpp:114
+#: controllers/view/search/searchcontroller.cpp:122
 #, kde-format
 msgctxt "@title:window"
 msgid "Find"
@@ -1296,13 +1296,13 @@ msgid ""
 msgstr "Lisätäänkö syöte tai korvataanko nykyinen data."
 
 #: controllers/view/poddecoder/poddecodertool.cpp:90
-#: controllers/view/poddecoder/poddecodertoolviewfactory.cpp:24
+#: controllers/view/poddecoder/poddecodertoolviewfactory.cpp:27
 #, kde-format
 msgctxt "@title:window"
 msgid "Decoding Table"
 msgstr "Dekoodaustaulukko"
 
-#: controllers/view/poddecoder/poddecodertool.cpp:295
+#: controllers/view/poddecoder/poddecodertool.cpp:300
 #, kde-format
 msgctxt "Edited as %datatype"
 msgid "Edited as %1"
@@ -1332,19 +1332,19 @@ msgctxt "@info:tooltip for column Value"
 msgid "The value of the bytes for the datatype"
 msgstr "Tavujen arvo tietotyypissä"
 
-#: controllers/view/poddecoder/podtableview.cpp:90
+#: controllers/view/poddecoder/podtableview.cpp:95
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte order to use for decoding the bytes."
 msgstr "Tavujärjestys tavuja dekoodattaessa"
 
-#: controllers/view/poddecoder/podtableview.cpp:94
+#: controllers/view/poddecoder/podtableview.cpp:99
 #, kde-format
 msgctxt "@option:check"
 msgid "Unsigned as hexadecimal:"
 msgstr "Etumerkittömät heksadesimaalisena:"
 
-#: controllers/view/poddecoder/podtableview.cpp:103
+#: controllers/view/poddecoder/podtableview.cpp:108
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1354,7 +1354,7 @@ msgstr ""
 "Määrää, näytetäänkö etumerkittömien kokonaislukutyyppien arvot "
 "heksadesimaalisena desimaaliesityksen sijaan"
 
-#: controllers/view/poddecoder/podtableview.cpp:134
+#: controllers/view/poddecoder/podtableview.cpp:138
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1364,19 +1364,19 @@ msgstr ""
 "Uusi arvo tarvitsee <emphasis>vähemmän</emphasis> tavuja (%1 %2:n sijaan)."
 "<nl/>Pidetäänkö käyttämättömät tavut vai poistetaanko ne?"
 
-#: controllers/view/poddecoder/podtableview.cpp:139
+#: controllers/view/poddecoder/podtableview.cpp:143
 #, kde-format
 msgctxt "@action:button keep the unused bytes"
 msgid "&Keep"
 msgstr "&Pidä"
 
-#: controllers/view/poddecoder/podtableview.cpp:142
+#: controllers/view/poddecoder/podtableview.cpp:146
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Keep the unused bytes with their old values."
 msgstr "Pidä käyttämättömät tavut alkuperäisissä arvoissaan"
 
-#: controllers/view/poddecoder/podtableview.cpp:151
+#: controllers/view/poddecoder/podtableview.cpp:163
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1386,14 +1386,14 @@ msgstr ""
 "Uusi arvo tarvitsee <emphasis>enemmän</emphasis> tavuja (%1 %2:n sijaan).<nl/"
 ">Korvataanko seuraavat tavut vai lisätäänkö tarpeen mukaan uusia?"
 
-#: controllers/view/poddecoder/podtableview.cpp:240
+#: controllers/view/poddecoder/podtableview.cpp:257
 #: controllers/view/structures/structureview.cpp:354
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit"
 msgstr "Muokkaa"
 
-#: controllers/view/poddecoder/podtableview.cpp:254
+#: controllers/view/poddecoder/podtableview.cpp:271
 #: controllers/view/selectrange/selectrangeview.cpp:125
 #: controllers/view/structures/structureview.cpp:369
 #, kde-format
@@ -1426,28 +1426,28 @@ msgctxt "in the footer of the printed page, e.g. Printed by: Joe User"
 msgid "Printed by: %U"
 msgstr "Tulostaja: %U"
 
-#: controllers/view/replace/replacecontroller.cpp:72
-#: controllers/view/replace/replacecontroller.cpp:88
+#: controllers/view/replace/replacecontroller.cpp:74
+#: controllers/view/replace/replacecontroller.cpp:90
 #, kde-format
 msgctxt "@title:window"
 msgid "Replace"
 msgstr "Korvaa"
 
-#: controllers/view/replace/replacecontroller.cpp:76
+#: controllers/view/replace/replacecontroller.cpp:78
 #, kde-format
 msgctxt "@info"
 msgid "Replace pattern not found in byte array."
 msgstr "Korvauskuviota ei löytynyt tavutaulukosta."
 
-#: controllers/view/replace/replacecontroller.cpp:79
-#: controllers/view/replace/replacecontroller.cpp:90
+#: controllers/view/replace/replacecontroller.cpp:81
+#: controllers/view/replace/replacecontroller.cpp:92
 #, kde-format
 msgctxt "@info"
 msgid "No replacements made."
 msgstr "Yhtään korvausta ei tehty."
 
-#: controllers/view/replace/replacecontroller.cpp:80
-#: controllers/view/replace/replacecontroller.cpp:91
+#: controllers/view/replace/replacecontroller.cpp:82
+#: controllers/view/replace/replacecontroller.cpp:93
 #, kde-format
 msgctxt "@info"
 msgid "1 replacement made."
@@ -1455,15 +1455,15 @@ msgid_plural "%1 replacements made."
 msgstr[0] "Yksi korvaus tehtiin."
 msgstr[1] "%1 korvausta tehtiin."
 
-#: controllers/view/replace/replacecontroller.cpp:93
-#: controllers/view/search/searchcontroller.cpp:122
+#: controllers/view/replace/replacecontroller.cpp:95
+#: controllers/view/search/searchcontroller.cpp:124
 #, kde-kuit-format
 msgctxt "@info"
 msgid "End of byte array reached.<nl/>Continue from the beginning?"
 msgstr "Saavutettiin tavutaulukon loppu.<nl/>Jatketaanko alusta?"
 
-#: controllers/view/replace/replacecontroller.cpp:94
-#: controllers/view/search/searchcontroller.cpp:123
+#: controllers/view/replace/replacecontroller.cpp:96
+#: controllers/view/search/searchcontroller.cpp:125
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Beginning of byte array reached.<nl/>Continue from the end?"
@@ -1554,7 +1554,7 @@ msgctxt "@title"
 msgid "Replace"
 msgstr "Korvaa"
 
-#: controllers/view/search/searchcontroller.cpp:113
+#: controllers/view/search/searchcontroller.cpp:115
 #, kde-format
 msgctxt "@info"
 msgid "Search key not found in byte array."

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-22 01:49+0000\n"
+"POT-Creation-Date: 2024-10-29 01:49+0000\n"
 "PO-Revision-Date: 2024-04-22 16:05\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -818,14 +818,14 @@ msgid "Modular sum 8-bit"
 msgstr "8 位 Modular"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:28
-#: controllers/view/poddecoder/podtableview.cpp:83
+#: controllers/view/poddecoder/podtableview.cpp:88
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Big-endian"
 msgstr "高位优先"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:29
-#: controllers/view/poddecoder/podtableview.cpp:84
+#: controllers/view/poddecoder/podtableview.cpp:89
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Little-endian"
@@ -1177,8 +1177,8 @@ msgid "UTF-8"
 msgstr "UTF-8"
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:73
-#: controllers/view/search/searchcontroller.cpp:112
-#: controllers/view/search/searchcontroller.cpp:120
+#: controllers/view/search/searchcontroller.cpp:114
+#: controllers/view/search/searchcontroller.cpp:122
 #, kde-format
 msgctxt "@title:window"
 msgid "Find"
@@ -1264,13 +1264,13 @@ msgid ""
 msgstr "选择插入或覆盖输入模式。"
 
 #: controllers/view/poddecoder/poddecodertool.cpp:90
-#: controllers/view/poddecoder/poddecodertoolviewfactory.cpp:24
+#: controllers/view/poddecoder/poddecodertoolviewfactory.cpp:27
 #, kde-format
 msgctxt "@title:window"
 msgid "Decoding Table"
 msgstr "解码表"
 
-#: controllers/view/poddecoder/poddecodertool.cpp:295
+#: controllers/view/poddecoder/poddecodertool.cpp:300
 #, kde-format
 msgctxt "Edited as %datatype"
 msgid "Edited as %1"
@@ -1300,19 +1300,19 @@ msgctxt "@info:tooltip for column Value"
 msgid "The value of the bytes for the datatype"
 msgstr "数据类型的字节值"
 
-#: controllers/view/poddecoder/podtableview.cpp:90
+#: controllers/view/poddecoder/podtableview.cpp:95
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte order to use for decoding the bytes."
 msgstr "用于字节解码的字节顺序。"
 
-#: controllers/view/poddecoder/podtableview.cpp:94
+#: controllers/view/poddecoder/podtableview.cpp:99
 #, kde-format
 msgctxt "@option:check"
 msgid "Unsigned as hexadecimal:"
 msgstr "将无符号数显示为十六进制数："
 
-#: controllers/view/poddecoder/podtableview.cpp:103
+#: controllers/view/poddecoder/podtableview.cpp:108
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1320,7 +1320,7 @@ msgid ""
 "hexadecimal instead of as decimal."
 msgstr "设定是否将无符号整型值按十六进制显示，而非按十进制显示。"
 
-#: controllers/view/poddecoder/podtableview.cpp:134
+#: controllers/view/poddecoder/podtableview.cpp:138
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1330,19 +1330,19 @@ msgstr ""
 "新的值需要<emphasis>更少</emphasis>的字节数(从 %2 缩小为 %1)。<nl/>是保留未使"
 "用的字节还是移除他们？"
 
-#: controllers/view/poddecoder/podtableview.cpp:139
+#: controllers/view/poddecoder/podtableview.cpp:143
 #, kde-format
 msgctxt "@action:button keep the unused bytes"
 msgid "&Keep"
 msgstr "保留(&K)"
 
-#: controllers/view/poddecoder/podtableview.cpp:142
+#: controllers/view/poddecoder/podtableview.cpp:146
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Keep the unused bytes with their old values."
 msgstr "保留未使用的字节为其原值。"
 
-#: controllers/view/poddecoder/podtableview.cpp:151
+#: controllers/view/poddecoder/podtableview.cpp:163
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1352,14 +1352,14 @@ msgstr ""
 "新的值需要<emphasis>更多</emphasis>的字节数(从 %2 增加到 %1)。<nl/>要覆盖后面"
 "的字节还是按需插入新字节？"
 
-#: controllers/view/poddecoder/podtableview.cpp:240
+#: controllers/view/poddecoder/podtableview.cpp:257
 #: controllers/view/structures/structureview.cpp:354
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit"
 msgstr "编辑"
 
-#: controllers/view/poddecoder/podtableview.cpp:254
+#: controllers/view/poddecoder/podtableview.cpp:271
 #: controllers/view/selectrange/selectrangeview.cpp:125
 #: controllers/view/structures/structureview.cpp:369
 #, kde-format
@@ -1392,43 +1392,43 @@ msgctxt "in the footer of the printed page, e.g. Printed by: Joe User"
 msgid "Printed by: %U"
 msgstr "打印者：%U"
 
-#: controllers/view/replace/replacecontroller.cpp:72
-#: controllers/view/replace/replacecontroller.cpp:88
+#: controllers/view/replace/replacecontroller.cpp:74
+#: controllers/view/replace/replacecontroller.cpp:90
 #, kde-format
 msgctxt "@title:window"
 msgid "Replace"
 msgstr "替换"
 
-#: controllers/view/replace/replacecontroller.cpp:76
+#: controllers/view/replace/replacecontroller.cpp:78
 #, kde-format
 msgctxt "@info"
 msgid "Replace pattern not found in byte array."
 msgstr "在字节数组中找不到替换内容表达式。"
 
-#: controllers/view/replace/replacecontroller.cpp:79
-#: controllers/view/replace/replacecontroller.cpp:90
+#: controllers/view/replace/replacecontroller.cpp:81
+#: controllers/view/replace/replacecontroller.cpp:92
 #, kde-format
 msgctxt "@info"
 msgid "No replacements made."
 msgstr "未实行替换。"
 
-#: controllers/view/replace/replacecontroller.cpp:80
-#: controllers/view/replace/replacecontroller.cpp:91
+#: controllers/view/replace/replacecontroller.cpp:82
+#: controllers/view/replace/replacecontroller.cpp:93
 #, kde-format
 msgctxt "@info"
 msgid "1 replacement made."
 msgid_plural "%1 replacements made."
 msgstr[0] "完成 %1 次替换。"
 
-#: controllers/view/replace/replacecontroller.cpp:93
-#: controllers/view/search/searchcontroller.cpp:122
+#: controllers/view/replace/replacecontroller.cpp:95
+#: controllers/view/search/searchcontroller.cpp:124
 #, kde-kuit-format
 msgctxt "@info"
 msgid "End of byte array reached.<nl/>Continue from the beginning?"
 msgstr "已到达字节数组末尾。<nl/>从开始处继续吗？"
 
-#: controllers/view/replace/replacecontroller.cpp:94
-#: controllers/view/search/searchcontroller.cpp:123
+#: controllers/view/replace/replacecontroller.cpp:96
+#: controllers/view/search/searchcontroller.cpp:125
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Beginning of byte array reached.<nl/>Continue from the end?"
@@ -1519,7 +1519,7 @@ msgctxt "@title"
 msgid "Replace"
 msgstr "替换"
 
-#: controllers/view/search/searchcontroller.cpp:113
+#: controllers/view/search/searchcontroller.cpp:115
 #, kde-format
 msgctxt "@info"
 msgid "Search key not found in byte array."

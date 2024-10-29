@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-22 01:49+0000\n"
+"POT-Creation-Date: 2024-10-29 01:49+0000\n"
 "PO-Revision-Date: 2024-04-27 10:21+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -440,14 +440,14 @@ msgstr ""
 "Se preme o botón <interface>Crear</interface>, xeraranse os datos coa "
 "configuración que indicase en riba e inserirase nun documento novo."
 
-#: gui/system/dialoghandler.cpp:33
+#: gui/system/dialoghandler.cpp:34
 #, kde-kuit-format
 msgctxt "@info"
 msgid "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
 msgstr ""
 "Xa hai un ficheiro en <nl/><filename>%1</filename>.<nl/>Desexa sobrescribilo?"
 
-#: gui/system/dialoghandler.cpp:48
+#: gui/system/dialoghandler.cpp:55
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -457,7 +457,7 @@ msgstr ""
 "Hai modificacións sen gardar en <filename>%1</filename>. Perderanse se carga "
 "de novo o documento.<nl/>Quere descartalas?"
 
-#: gui/system/dialoghandler.cpp:61
+#: gui/system/dialoghandler.cpp:72
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -467,7 +467,7 @@ msgstr ""
 "<filename>%1</filename> modificouse.<nl/>Quere gardar os cambios ou "
 "descartalos?"
 
-#: gui/system/dialoghandler.cpp:76
+#: gui/system/dialoghandler.cpp:92
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""

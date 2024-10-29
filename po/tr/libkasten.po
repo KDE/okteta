@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesdk-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-22 01:49+0000\n"
+"POT-Creation-Date: 2024-10-29 01:49+0000\n"
 "PO-Revision-Date: 2024-10-22 08:50+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -439,7 +439,7 @@ msgstr ""
 "<interface>Oluştur</interface> düğmesine basarsanız yukarıda girdiğiniz "
 "ayarlarla bir veri oluşturulacak ve yeni belgeye eklenecek."
 
-#: gui/system/dialoghandler.cpp:33
+#: gui/system/dialoghandler.cpp:34
 #, kde-kuit-format
 msgctxt "@info"
 msgid "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
@@ -447,7 +447,7 @@ msgstr ""
 "<nl/><filename>%1</filename> konumunda bir dosya var.<nl/>Üzerine yazılsın "
 "mı?"
 
-#: gui/system/dialoghandler.cpp:48
+#: gui/system/dialoghandler.cpp:55
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -458,7 +458,7 @@ msgstr ""
 "yeniden yüklerseniz bu değişiklikler kaybolacak.<nl/>Sürdürmek istiyor "
 "musunuz?"
 
-#: gui/system/dialoghandler.cpp:61
+#: gui/system/dialoghandler.cpp:72
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -468,7 +468,7 @@ msgstr ""
 "<filename>%1</filename> dosyası değiştirildi.<nl/>Kaydetmek mi yoksa "
 "değişiklikleri silmek mi istiyorsunuz?"
 
-#: gui/system/dialoghandler.cpp:76
+#: gui/system/dialoghandler.cpp:92
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""

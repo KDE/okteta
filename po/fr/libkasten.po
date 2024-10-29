@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-22 01:49+0000\n"
+"POT-Creation-Date: 2024-10-29 01:49+0000\n"
 "PO-Revision-Date: 2024-10-23 11:17+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -444,7 +444,7 @@ msgstr ""
 "seront générées a partir les paramètres que vous avez saisis ci-dessus et "
 "insérées dans un nouveau document."
 
-#: gui/system/dialoghandler.cpp:33
+#: gui/system/dialoghandler.cpp:34
 #, kde-kuit-format
 msgctxt "@info"
 msgid "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
@@ -452,7 +452,7 @@ msgstr ""
 "Il existe déjà un fichier à l'emplacement <nl/><filename>%1</filename>.<nl/"
 ">Écraser ce fichier ?"
 
-#: gui/system/dialoghandler.cpp:48
+#: gui/system/dialoghandler.cpp:55
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -463,7 +463,7 @@ msgstr ""
 "filename>. Elles seront perdues si vous rechargez ce document.<nl/>Voulez-"
 "vous les abandonner ?"
 
-#: gui/system/dialoghandler.cpp:61
+#: gui/system/dialoghandler.cpp:72
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -473,7 +473,7 @@ msgstr ""
 "<filename>%1</filename> a été modifié.<nl/>Voulez-vous enregistrer vos "
 "modifications ou les abandonner ?"
 
-#: gui/system/dialoghandler.cpp:76
+#: gui/system/dialoghandler.cpp:92
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""

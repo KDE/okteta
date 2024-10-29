@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-22 01:49+0000\n"
+"POT-Creation-Date: 2024-10-29 01:49+0000\n"
 "PO-Revision-Date: 2018-08-02 23:39+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -442,13 +442,13 @@ msgstr ""
 "Painaessasi tästä data generoidaan antamillasi asetuksilla ja lisätään "
 "uuteen tiedostoon."
 
-#: gui/system/dialoghandler.cpp:33
+#: gui/system/dialoghandler.cpp:34
 #, kde-kuit-format
 msgctxt "@info"
 msgid "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
 msgstr "Tiedosto <filename>%1</filename><nl/> on jo olemassa. Korvataanko?"
 
-#: gui/system/dialoghandler.cpp:48
+#: gui/system/dialoghandler.cpp:55
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -458,7 +458,7 @@ msgstr ""
 "Tiedostoa <filename>%1</filename> on muutettu. Jos lataat sen uudelleen, "
 "muutokset menetetään.<nl/>Hylätäänkö muutokset?"
 
-#: gui/system/dialoghandler.cpp:61
+#: gui/system/dialoghandler.cpp:72
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -468,7 +468,7 @@ msgstr ""
 "Tiedostoa <filename>%1</filename> on muutettu.<nl/>Haluatko tallentaa "
 "muutokset vai hylätä ne?"
 
-#: gui/system/dialoghandler.cpp:76
+#: gui/system/dialoghandler.cpp:92
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""

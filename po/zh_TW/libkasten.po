@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-22 01:49+0000\n"
+"POT-Creation-Date: 2024-10-29 01:49+0000\n"
 "PO-Revision-Date: 2024-05-09 06:42+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -438,13 +438,13 @@ msgstr ""
 "如果您按下<interface>建立</interface>按鍵，資料會依您上面輸入的設定產生，並插"
 "入一份新文件中。"
 
-#: gui/system/dialoghandler.cpp:33
+#: gui/system/dialoghandler.cpp:34
 #, kde-kuit-format
 msgctxt "@info"
 msgid "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
 msgstr "已經有一個檔案於<nl/><filename>%1</filename>。<nl/>要覆寫嗎？"
 
-#: gui/system/dialoghandler.cpp:48
+#: gui/system/dialoghandler.cpp:55
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -454,7 +454,7 @@ msgstr ""
 "檔案 <filename>%1</filename> 中有些未儲存的變更。若您重新載入文件，這些變更會"
 "遺失。<nl/>您要捨棄這些變更嗎？"
 
-#: gui/system/dialoghandler.cpp:61
+#: gui/system/dialoghandler.cpp:72
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -462,7 +462,7 @@ msgid ""
 "changes or discard them?"
 msgstr "<filename>%1</filename> 已變更。<nl/>您要儲存您的變更，還是要捨棄？"
 
-#: gui/system/dialoghandler.cpp:76
+#: gui/system/dialoghandler.cpp:92
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""

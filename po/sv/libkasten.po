@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-22 01:49+0000\n"
+"POT-Creation-Date: 2024-10-29 01:49+0000\n"
 "PO-Revision-Date: 2024-05-02 15:04+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -436,7 +436,7 @@ msgstr ""
 "Om du klickar på knappen <interface>Skapa</interface>, genereras data med "
 "inställningarna du matade in ovan, och infogas i ett nytt dokument."
 
-#: gui/system/dialoghandler.cpp:33
+#: gui/system/dialoghandler.cpp:34
 #, kde-kuit-format
 msgctxt "@info"
 msgid "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
@@ -444,7 +444,7 @@ msgstr ""
 "Det finns redan en fil med namnet <nl/><filename>%1</filename>.<nl/>Skriv "
 "över den?"
 
-#: gui/system/dialoghandler.cpp:48
+#: gui/system/dialoghandler.cpp:55
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -454,7 +454,7 @@ msgstr ""
 "Det finns osparade ändringar i <filename>%1</filename>. De kommer att gå "
 "förlorade om du uppdaterar dokumentet.<nl/>Vill du kasta dem?"
 
-#: gui/system/dialoghandler.cpp:61
+#: gui/system/dialoghandler.cpp:72
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -464,7 +464,7 @@ msgstr ""
 "Ändringar har gjorts av <filename>%1</filename><nl/>Vill du spara "
 "ändringarna eller kasta dem?"
 
-#: gui/system/dialoghandler.cpp:76
+#: gui/system/dialoghandler.cpp:92
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
