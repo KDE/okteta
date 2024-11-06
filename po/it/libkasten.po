@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-29 01:49+0000\n"
-"PO-Revision-Date: 2024-04-27 14:56+0200\n"
+"PO-Revision-Date: 2024-10-31 15:00+0100\n"
 "Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #: controllers/document/modified/modifiedbarcontroller.cpp:74
 #, kde-format
@@ -149,12 +149,10 @@ msgid "Documents"
 msgstr "Documenti"
 
 #: controllers/documentsystem/documentsbrowser/documentsview.cpp:52
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Documents"
+#, kde-format
 msgctxt "@info"
 msgid "No documents"
-msgstr "Documenti"
+msgstr "Nessun documento"
 
 #: controllers/documentsystem/filesystembrowser/filesystembrowsertool.cpp:33
 #: controllers/documentsystem/filesystembrowser/filesystembrowsertoolviewfactory.cpp:24
