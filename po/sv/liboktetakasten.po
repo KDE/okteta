@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-29 01:49+0000\n"
-"PO-Revision-Date: 2024-10-19 16:45+0200\n"
+"PO-Revision-Date: 2024-11-23 17:13+0100\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.08.2\n"
+"X-Generator: Lokalize 24.08.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -142,12 +142,10 @@ msgid "Bookmarks"
 msgstr "Bokmärken"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:61
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Bookmarks"
+#, kde-format
 msgctxt "@info"
 msgid "No bookmarks"
-msgstr "Bokmärken"
+msgstr "Inga bokmärken"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:87
 #, kde-format
@@ -542,7 +540,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "No checksum calculated yet."
-msgstr ""
+msgstr "Ingen checksumma beräknad ännu."
 
 #: controllers/view/crop/cropcontroller.cpp:33
 #, kde-format
@@ -876,12 +874,10 @@ msgstr "Byte-ordningen använd för att avkoda byte till heltalsvärden."
 
 #: controllers/view/libbytearraychecksum/algorithm/nobytearraychecksumparametersetedit.cpp:25
 #: controllers/view/libbytearrayfilter/filter/nobytearrayfilterparametersetedit.cpp:25
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "No parameters."
+#, kde-format
 msgctxt "@info"
 msgid "No parameters"
-msgstr "Inga parametrar."
+msgstr "Inga parametrar"
 
 #: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:48
 #, kde-format
@@ -1721,12 +1717,10 @@ msgid "Enter a term to limit the list."
 msgstr "Skriv in ett begrepp för att begränsa listan."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:140
-#, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to extract strings"
-#| msgid "Strings"
+#, kde-format
 msgctxt "@info"
 msgid "No strings"
-msgstr "Strängar"
+msgstr "Inga strängar"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:161
 #, kde-format
@@ -1766,20 +1760,18 @@ msgstr ""
 "som senast valdes, och visas i vyn."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:279
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "No bytes converted."
+#, kde-format
 msgctxt "@info"
 msgid "No strings extracted."
-msgstr "Inga byte konverterade."
+msgstr "Inga strängar extraherade."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:280
 #, kde-format
 msgctxt "@info"
 msgid "1 string extracted."
 msgid_plural "%1 strings extracted."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "1 sträng extraherad."
+msgstr[1] "%1 strängar extraherade."
 
 #: controllers/view/structures/datatypes/array/complexarraydata.cpp:98
 #, kde-format
@@ -2475,11 +2467,10 @@ msgid "Size"
 msgstr "Storlek"
 
 #: controllers/view/structures/structureview.cpp:92
-#, fuzzy, kde-format
-#| msgid "Structure Definitions"
+#, kde-format
 msgctxt "@info"
 msgid "No structure definitions"
-msgstr "Strukturdefinitioner"
+msgstr "Inga strukturdefinitioner"
 
 #: controllers/view/structures/structureview.cpp:112
 #, kde-format
