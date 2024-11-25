@@ -86,7 +86,7 @@ int OktetaProgram::execute()
     aboutData.setupCommandLine(&parser);
 
     // urls to open
-    parser.addPositionalArgument(QStringLiteral("urls"), i18n("File(s) to load."), QStringLiteral("[urls...]"));
+    parser.addPositionalArgument(QStringLiteral("URLs"), i18n("File(s) to load."), QStringLiteral("[URLs...]"));
 
     // offset option
 //     programOptions.add( OffsetOptionShortId );
