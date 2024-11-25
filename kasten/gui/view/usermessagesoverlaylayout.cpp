@@ -78,3 +78,5 @@ void UserMessagesOverlayLayout::setNotificationWidget(QWidget* notificationWidge
 }
 
 }
+
+#include "moc_usermessagesoverlaylayout.cpp"
