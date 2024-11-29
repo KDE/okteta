@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-29 01:49+0000\n"
-"PO-Revision-Date: 2024-08-19 23:37+0200\n"
+"PO-Revision-Date: 2024-11-29 00:31+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -141,12 +141,10 @@ msgid "Bookmarks"
 msgstr "책갈피"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:61
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Bookmarks"
+#, kde-format
 msgctxt "@info"
 msgid "No bookmarks"
-msgstr "책갈피"
+msgstr "책갈피 없음"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:87
 #, kde-format
@@ -208,7 +206,7 @@ msgstr "이 단추를 누르면 마지막으로 선택한 책갈피를 편집합
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Character not defined."
-msgstr ""
+msgstr "문자가 정의되지 않았습니다."
 
 #: controllers/view/bytetable/bytetablemodel.cpp:159
 #: controllers/view/info/statistictablemodel.cpp:216
@@ -521,19 +519,19 @@ msgstr ""
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "No checksum calculated yet."
-msgstr ""
+msgstr "체크섬을 계산하지 않았습니다."
 
 #: controllers/view/crop/cropcontroller.cpp:33
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Crop"
-msgstr ""
+msgstr "자르기"
 
 #: controllers/view/crop/cropcontroller.cpp:91
 #, kde-format
 msgctxt "name of the change"
 msgid "Crop"
-msgstr ""
+msgstr "자르기"
 
 #: controllers/view/filter/filtertool.cpp:59
 #: controllers/view/filter/filtertoolviewfactory.cpp:24
@@ -852,12 +850,10 @@ msgstr "바이트를 정수 값으로 변환할 때 사용할 순서입니다."
 
 #: controllers/view/libbytearraychecksum/algorithm/nobytearraychecksumparametersetedit.cpp:25
 #: controllers/view/libbytearrayfilter/filter/nobytearrayfilterparametersetedit.cpp:25
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "Parameters"
+#, kde-format
 msgctxt "@info"
 msgid "No parameters"
-msgstr "인자"
+msgstr "인자 없음"
 
 #: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:48
 #, kde-format
@@ -1690,12 +1686,10 @@ msgid "Enter a term to limit the list."
 msgstr "목록에서 필터할 항목을 입력하십시오."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:140
-#, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to extract strings"
-#| msgid "Strings"
+#, kde-format
 msgctxt "@info"
 msgid "No strings"
-msgstr "문자열"
+msgstr "문자열 없음"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:161
 #, kde-format
@@ -1735,19 +1729,17 @@ msgstr ""
 "서 강조해서 보여 줍니다."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:279
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "No bytes converted."
+#, kde-format
 msgctxt "@info"
 msgid "No strings extracted."
-msgstr "변환한 바이트가 없습니다."
+msgstr "추출한 문자열이 없습니다."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:280
 #, kde-format
 msgctxt "@info"
 msgid "1 string extracted."
 msgid_plural "%1 strings extracted."
-msgstr[0] ""
+msgstr[0] "문자열 %1개를 추출했습니다."
 
 #: controllers/view/structures/datatypes/array/complexarraydata.cpp:98
 #, kde-format
@@ -2433,11 +2425,10 @@ msgid "Size"
 msgstr "크기"
 
 #: controllers/view/structures/structureview.cpp:92
-#, fuzzy, kde-format
-#| msgid "Structure Definitions"
+#, kde-format
 msgctxt "@info"
 msgid "No structure definitions"
-msgstr "구조체 정의"
+msgstr "구조체 정의 없음"
 
 #: controllers/view/structures/structureview.cpp:112
 #, kde-format
