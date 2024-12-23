@@ -14,7 +14,6 @@
 // Kasten gui
 #include <Kasten/AbstractModelStreamEncoderConfigEditor>
 
-class KComboBox;
 class QLineEdit;
 
 namespace Kasten {

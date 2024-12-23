@@ -21,7 +21,6 @@
 
 namespace Kasten {
 class ViewManager;
-class MultiDocumentStrategy;
 
 class MultiDocumentStrategyPrivate : public AbstractDocumentStrategyPrivate
 {

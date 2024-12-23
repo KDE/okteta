@@ -13,7 +13,6 @@
 #include <Kasten/AbstractView>
 // KF
 #include <KXMLGUIClient>
-#include <KLocalizedString>
 #include <KActionCollection>
 #include <KStandardAction>
 // Qt

@@ -17,7 +17,6 @@
 // KF
 #include <kwidgetsaddons_version.h>
 #include <KXMLGUIClient>
-#include <KXMLGUIFactory>
 #include <KActionMenu>
 #include <KActionCollection>
 #include <KLocalizedString>

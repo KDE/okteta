@@ -11,8 +11,6 @@
 // parameterset
 #include "crc64bytearraychecksumparameterset.hpp"
 #include "crc64bytearraychecksumparametersetedit.hpp"
-// Okteta Kasten gui
-#include <Kasten/Okteta/ByteArrayComboBox>
 // KF
 #include <KLocalizedString>
 #include <KComboBox>

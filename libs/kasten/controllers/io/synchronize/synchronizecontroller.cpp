@@ -18,7 +18,6 @@
 #include <KXMLGUIClient>
 #include <KLocalizedString>
 // Qt
-#include <QUrl>
 #include <QAction>
 
 namespace Kasten {

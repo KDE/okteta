@@ -19,7 +19,6 @@
 #include <KSharedConfig>
 // Qt
 #include <QFileDialog>
-#include <QMimeDatabase>
 #include <QApplication>
 
 namespace Kasten {

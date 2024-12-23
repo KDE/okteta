@@ -8,9 +8,6 @@
 
 #include "filebytearraymodel_p.hpp"
 
-// Std
-#include <cstdlib>
-
 namespace Okteta {
 
 FileByteArrayModelPrivate::FileByteArrayModelPrivate(FileByteArrayModel* parent, int pageNumber, int pageSize)

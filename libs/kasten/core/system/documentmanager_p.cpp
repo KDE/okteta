@@ -11,9 +11,7 @@
 // lib
 #include <abstractdocument.hpp>
 // Qt
-#include <QUrl>
 #include <QMutableVectorIterator>
-#include <QStringList>
 
 // temporary
 #include "documentcreatemanager.hpp"

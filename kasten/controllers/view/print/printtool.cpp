@@ -32,8 +32,6 @@
 // Qt
 #include <QApplication>
 #include <QPrinter>
-#include <QFont>
-#include <QFontMetrics>
 
 namespace Kasten {
 

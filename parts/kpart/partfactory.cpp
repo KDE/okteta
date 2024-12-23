@@ -23,7 +23,6 @@
 #if KPARTS_VERSION >= QT_VERSION_CHECK(5, 77, 0)
 #include <KPluginMetaData>
 #endif
-#include <KLocalizedString>
 
 OktetaPartFactory::OktetaPartFactory()
 #if KPARTS_VERSION >= QT_VERSION_CHECK(5, 77, 0)

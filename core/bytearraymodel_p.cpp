@@ -10,7 +10,6 @@
 
 // Std
 #include <cstring>
-#include <cstdlib>
 
 static constexpr int minChunkSize = 512;
 static constexpr int maxChunkSize = 1024 * 10; // TODO: get max. memory page size

@@ -27,7 +27,6 @@
 // #include "modeltest.hpp"
 
 // KF
-#include <KComboBox>
 #include <KStandardAction>
 #include <KLocalizedString>
 #include <KConfigDialog>

@@ -14,8 +14,6 @@
 // KF
 #include <KXMLGUIClient>
 #include <KActionCollection>
-// Qt
-#include <QActionGroup>
 
 namespace Kasten {
 

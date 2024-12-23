@@ -12,8 +12,6 @@
 #include <oktetakastengui.hpp>
 // Okteta core
 #include <Okteta/ValueCodec>
-// KF
-#include <KLocalizedString>
 // Qt
 #include <QString>
 #include <QRegExp>

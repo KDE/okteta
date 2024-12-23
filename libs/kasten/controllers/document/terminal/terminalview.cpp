@@ -12,7 +12,6 @@
 #include "terminaltool.hpp"
 // KF
 #include <kcoreaddons_version.h>
-#include <KLocalizedString>
 #if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5, 86, 0)
 #include <KPluginFactory>
 #include <KPluginMetaData>

@@ -9,7 +9,6 @@
 #include "headerfooterframerenderer.hpp"
 
 // KF
-#include <KLocalizedString>
 #include <KUser>
 // Qt
 #include <QLocale>

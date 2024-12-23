@@ -20,7 +20,6 @@
 #include <KLocalizedString>
 // Qt
 #include <QToolBar>
-#include <QPushButton>
 #include <QFormLayout>
 #include <QVBoxLayout>
 #include <QCheckBox>

@@ -21,7 +21,6 @@
 #include <QFontDatabase>
 #include <QPainter>
 #include <QScrollBar>
-#include <QEvent>
 
 namespace Okteta {
 

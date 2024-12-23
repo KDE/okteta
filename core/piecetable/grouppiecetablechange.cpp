@@ -13,8 +13,6 @@
 //
 #include <addressrangelist.hpp>
 #include <arraychangemetricslist.hpp>
-// KF
-#include <KLocalizedString>
 
 namespace KPieceTable {
 

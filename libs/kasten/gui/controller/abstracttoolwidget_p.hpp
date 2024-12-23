@@ -16,8 +16,6 @@ class QShortcut;
 
 namespace Kasten {
 
-class AbstractToolWidget;
-
 class AbstractToolWidgetPrivate
 {
 public:

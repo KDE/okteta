@@ -16,7 +16,6 @@
 
 namespace Okteta {
 class AbstractByteArrayModel;
-class CharCodec;
 }
 template <class Key, class T> class QMap;
 

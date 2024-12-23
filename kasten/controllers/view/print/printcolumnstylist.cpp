@@ -8,9 +8,6 @@
 
 #include "printcolumnstylist.hpp"
 
-// Qt
-#include <QWidget>
-
 namespace Okteta {
 
 PrintColumnStylist::PrintColumnStylist() = default;

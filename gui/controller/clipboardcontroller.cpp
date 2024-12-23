@@ -11,7 +11,6 @@
 // lib
 #include <abstractbytearrayview.hpp>
 #include <abstractbytearraymodel.hpp>
-#include <versionable.hpp>
 // KF
 #include <KLocalizedString>
 // Qt

@@ -16,7 +16,6 @@
 // Okteta core
 #include <Okteta/AbstractByteArrayModel>
 // Qt
-#include <QApplication>
 #include <QDragEnterEvent>
 #include <QDragMoveEvent>
 #include <QDragLeaveEvent>

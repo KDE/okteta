@@ -22,7 +22,6 @@
 // KF
 #include <KLocalizedString>
 // Qt
-#include <QApplication>
 #include <QTimer>
 #include <QUrl>
 #include <QMimeDatabase>

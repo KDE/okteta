@@ -15,7 +15,6 @@
 #include <QObject>
 #include <QPoint>
 
-class QMouseEvent;
 class QTimer;
 
 namespace Okteta {

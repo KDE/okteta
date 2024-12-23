@@ -11,7 +11,6 @@
 // lib
 #include "touchonlytapandholdgesture.hpp"
 // Qt
-#include <QWidget>
 #include <QTouchEvent>
 
 namespace Okteta {

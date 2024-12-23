@@ -17,8 +17,6 @@
 #include <QColor>
 #include <QUrl>
 
-class QString;
-
 class PrintInfo
 {
 public:

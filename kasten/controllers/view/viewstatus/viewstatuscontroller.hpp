@@ -17,7 +17,6 @@
 #include <Okteta/Address>
 
 class KComboBox;
-class KSqueezedTextLabel;
 class QLabel;
 class QString;
 

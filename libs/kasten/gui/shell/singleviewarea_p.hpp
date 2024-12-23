@@ -15,9 +15,6 @@
 #include "viewareabox.hpp"
 #include "abstractview.hpp"
 
-class QDragMoveEvent;
-class QDropEvent;
-
 namespace Kasten {
 
 class SingleViewAreaPrivate : public AbstractViewAreaPrivate

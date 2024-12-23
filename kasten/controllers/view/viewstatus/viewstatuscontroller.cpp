@@ -17,7 +17,6 @@
 #include <Okteta/CharCodec>
 #include <Okteta/OktetaCore>
 // KF
-#include <KSqueezedTextLabel>
 #include <KComboBox>
 #include <KLocalizedString>
 // Qt
