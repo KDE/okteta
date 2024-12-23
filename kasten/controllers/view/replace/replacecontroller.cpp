@@ -14,7 +14,7 @@
 #include "replacetool.hpp"
 // KF
 #include <kwidgetsaddons_version.h>
-#include <KXmlGuiWindow>
+#include <KXMLGUIClient>
 #include <KLocalizedString>
 #include <KActionCollection>
 #include <KStandardAction>
