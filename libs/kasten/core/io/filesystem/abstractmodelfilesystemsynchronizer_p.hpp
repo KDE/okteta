@@ -16,6 +16,7 @@
 // Qt
 #include <QDateTime>
 
+class KDirWatch;
 class QNetworkConfigurationManager;
 
 namespace Kasten {

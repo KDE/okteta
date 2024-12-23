@@ -12,7 +12,6 @@
 // lib
 #include "abstractmodelsynchronizer.hpp"
 
-class KDirWatch;
 class QDateTime;
 
 namespace Kasten {

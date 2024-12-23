@@ -15,7 +15,6 @@
 // library
 #include "abstractmodelfilesystemsynchronizer.hpp"
 // Qt
-#include <QUrl>
 #include <QTemporaryFile>
 
 namespace Kasten {

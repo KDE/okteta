@@ -14,6 +14,7 @@
 // Qt
 #include <QFileInfo>
 #include <QDateTime>
+#include <QUrl>
 
 namespace Kasten {
 
