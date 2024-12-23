@@ -13,6 +13,7 @@
 // Qt
 #include <QPainter>
 #include <QPaintEvent>
+#include <QStyle>
 // Std
 #include <vector>
 

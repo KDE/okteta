@@ -16,7 +16,6 @@
 #include <QAbstractScrollArea>
 #include <QEvent>
 #include <QScrollBar>
-#include <QStyle>
 // Std
 #include <memory>
 #include <utility>
