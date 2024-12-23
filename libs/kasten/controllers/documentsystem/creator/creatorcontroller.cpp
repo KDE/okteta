@@ -19,9 +19,6 @@
 #include <KActionMenu>
 #include <KStandardAction>
 #include <KXMLGUIClient>
-// Qt
-#include <QApplication>
-#include <QMimeData>
 
 namespace Kasten {
 

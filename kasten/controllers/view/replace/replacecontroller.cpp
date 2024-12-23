@@ -18,7 +18,7 @@
 #include <Kasten/UserResponseOption>
 #include <Kasten/UserQuery>
 // KF
-#include <KXmlGuiWindow>
+#include <KXMLGUIClient>
 #include <KLocalizedString>
 #include <KActionCollection>
 #include <KStandardAction>

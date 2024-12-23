@@ -21,7 +21,6 @@
 #include <QCheckBox>
 #include <QGroupBox>
 #include <QVBoxLayout>
-#include <QPushButton>
 
 
 namespace Kasten {

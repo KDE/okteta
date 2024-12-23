@@ -10,10 +10,8 @@
 
 // lib
 #include <abstractbytearrayview_p.hpp>
-#include <bytearraycolumnview.hpp>
 #include <bytearraytableranges.hpp>
 #include <bytearraytablecursor.hpp>
-#include <bytearraytablelayout.hpp>
 // Qt
 #include <QMouseEvent>
 

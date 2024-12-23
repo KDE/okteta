@@ -16,7 +16,6 @@
 #include <Kasten/Okteta/ByteArrayView>
 // KF
 #include <KXMLGUIClient>
-#include <KXMLGUIFactory>
 #include <KActionMenu>
 #include <KActionCollection>
 #include <KLocalizedString>

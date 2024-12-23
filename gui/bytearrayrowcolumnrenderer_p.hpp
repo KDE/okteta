@@ -27,8 +27,6 @@ class QBrush;
 
 namespace Okteta {
 
-class Bookmarkable;
-
 static constexpr AbstractByteArrayView::CodingTypes DefaultVisibleCodings =
     (AbstractByteArrayView::CodingTypes)(AbstractByteArrayView::ValueCodingId | AbstractByteArrayView::CharCodingId);
 

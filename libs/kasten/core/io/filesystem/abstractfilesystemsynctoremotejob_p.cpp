@@ -15,6 +15,7 @@
 #include <QFileInfo>
 #include <QDateTime>
 #include <QTemporaryFile>
+#include <QUrl>
 
 namespace Kasten {
 

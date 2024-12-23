@@ -11,7 +11,6 @@
 // Kasten core
 #include <Kasten/DocumentSyncManager>
 #include <Kasten/AbstractDocument>
-#include <Kasten/AbstractModelSynchronizer>
 
 // KF
 #include <KLocalizedString>

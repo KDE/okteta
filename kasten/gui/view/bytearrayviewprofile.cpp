@@ -9,7 +9,7 @@
 #include "bytearrayviewprofile.hpp"
 
 // Okteta Gui
-#include <Okteta/ByteArrayColumnView>
+#include <Okteta/AbstractByteArrayView>
 // Qt
 #include <QString>
 

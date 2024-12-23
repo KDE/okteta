@@ -16,7 +16,6 @@
 #include <QPoint>
 #include <QTimer>
 
-class QMouseEvent;
 
 namespace Okteta {
 

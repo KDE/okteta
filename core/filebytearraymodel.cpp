@@ -10,8 +10,6 @@
 
 // lib
 #include "filebytearraymodel_p.hpp"
-// Std
-#include <cstdlib>
 
 namespace Okteta {
 

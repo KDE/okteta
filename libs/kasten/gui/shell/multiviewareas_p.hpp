@@ -21,9 +21,6 @@
 #include <memory>
 #include <vector>
 
-class QDragMoveEvent;
-class QDropEvent;
-
 namespace Kasten {
 
 class TabbedViews;

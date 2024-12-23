@@ -17,7 +17,6 @@
 
 class KRecentFilesAction;
 class KXMLGUIClient;
-class QUrl;
 
 namespace Kasten {
 

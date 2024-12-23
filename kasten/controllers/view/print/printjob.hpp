@@ -20,8 +20,6 @@ class QPrinter;
 
 namespace Kasten {
 
-class PrintThread;
-
 class PrintJob : public QObject // not yet: KJob
 {
     Q_OBJECT

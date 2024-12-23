@@ -19,8 +19,6 @@ class KXMLGUIClient;
 
 namespace Kasten {
 
-class ViewManager;
-
 namespace If {
 class WidgetsDockable;
 }

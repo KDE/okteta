@@ -10,7 +10,6 @@
 
 // Kasten core
 #include <Kasten/DocumentSyncManager>
-#include <Kasten/Versionable>
 #include <Kasten/AbstractDocument>
 #include <Kasten/AbstractModelSynchronizer>
 

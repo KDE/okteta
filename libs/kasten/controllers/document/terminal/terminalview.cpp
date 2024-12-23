@@ -11,7 +11,6 @@
 // lib
 #include "terminaltool.hpp"
 // KF
-#include <KLocalizedString>
 #include <KPluginFactory>
 #include <KPluginMetaData>
 #include <KParts/ReadOnlyPart>

@@ -14,7 +14,6 @@
 #include <Kasten/AbstractModel>
 // KF
 #include <KXMLGUIClient>
-#include <KLocalizedString>
 #include <KActionCollection>
 #include <KStandardAction>
 // Qt

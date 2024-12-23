@@ -19,9 +19,6 @@
 #include <vector>
 #include <memory>
 
-class QDragMoveEvent;
-class QDropEvent;
-
 namespace Kasten {
 
 class SingleViewArea;

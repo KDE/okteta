@@ -22,7 +22,6 @@ class Bookmark;
 class AbstractByteArrayModel;
 }
 class KXMLGUIClient;
-class KAction;
 class QActionGroup;
 class QAction;
 

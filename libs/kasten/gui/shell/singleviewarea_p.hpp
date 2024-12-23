@@ -17,9 +17,6 @@
 // Std
 #include <memory>
 
-class QDragMoveEvent;
-class QDropEvent;
-
 namespace Kasten {
 
 class SingleViewAreaPrivate : public AbstractViewAreaPrivate

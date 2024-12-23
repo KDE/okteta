@@ -12,7 +12,6 @@
 #include <abstractcolumnstylist.hpp>
 // Qt
 #include <QPainter>
-#include <QStyle>
 
 namespace Okteta {
 

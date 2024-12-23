@@ -13,7 +13,6 @@
 // KF
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>
-#include <KLocalizedString>
 // Qt
 #include <QMenu>
 

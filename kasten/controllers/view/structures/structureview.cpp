@@ -25,7 +25,6 @@
 #include "script/scriptloggerview.hpp"
 
 // KF
-#include <KComboBox>
 #include <KStandardAction>
 #include <KLocalizedString>
 #include <KConfigDialog>

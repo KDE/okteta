@@ -15,7 +15,6 @@
 namespace Kasten {
 
 class ByteArrayRawFileSynchronizer;
-class ByteArrayDocument;
 // class ByteArrayRawFileWriteThread;
 
 class ByteArrayRawFileConnectJob : public AbstractFileSystemConnectJob

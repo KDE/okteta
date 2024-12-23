@@ -19,6 +19,8 @@
 // Std
 #include <memory>
 
+class KDirWatch;
+
 namespace Kasten {
 
 class AbstractModelFileSystemSynchronizerPrivate : public AbstractModelSynchronizerPrivate

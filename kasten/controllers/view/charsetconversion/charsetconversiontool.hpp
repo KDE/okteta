@@ -18,7 +18,6 @@
 
 namespace Okteta {
 class AbstractByteArrayModel;
-class CharCodec;
 }
 
 namespace Kasten {

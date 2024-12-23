@@ -12,7 +12,6 @@
 #include <Kasten/Okteta/ByteArrayViewProfileManager>
 // KF
 #include <KColorScheme>
-#include <KLocalizedString>
 // Qt
 #include <QApplication>
 #include <QVector>

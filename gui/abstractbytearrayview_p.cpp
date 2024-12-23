@@ -21,8 +21,6 @@
 #include <Okteta/Versionable>
 #include <Okteta/TextByteArrayAnalyzer>
 #include <Okteta/Bookmark>
-// KF
-#include <KLocalizedString>
 // Qt
 #include <QScroller>
 #include <QPainter>

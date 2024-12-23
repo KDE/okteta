@@ -27,7 +27,6 @@ class QBrush;
 
 namespace Okteta {
 
-class Bookmarkable;
 
 class AbstractByteArrayColumnRendererPrivate : public AbstractColumnRendererPrivate
 {
