@@ -9,12 +9,12 @@
 #ifndef KASTEN_BYTEARRAYVALIDATOR_HPP
 #define KASTEN_BYTEARRAYVALIDATOR_HPP
 
-// lib
-#include "abstractbytearraystringvalidator.hpp"
 // Qt
 #include <QValidator>
 
 namespace Okteta {
+
+class AbstractByteArrayStringValidator;
 
 class ByteArrayValidator : public QValidator
 {
