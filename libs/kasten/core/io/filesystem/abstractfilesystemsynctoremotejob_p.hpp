@@ -16,7 +16,6 @@
 #include "abstractmodelfilesystemsynchronizer.hpp"
 // Qt
 #include <QFile>
-#include <QUrl>
 // Std
 #include <memory>
 
