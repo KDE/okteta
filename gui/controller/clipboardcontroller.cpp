@@ -10,7 +10,6 @@
 
 // lib
 #include <abstractbytearrayview_p.hpp>
-#include <abstractbytearraymodel.hpp>
 // KF
 #include <KLocalizedString>
 // Qt

@@ -9,9 +9,6 @@
 #include "abstractcolumnrenderer.hpp"
 #include "abstractcolumnrenderer_p.hpp"
 
-// Qt
-#include <QPainter>
-
 namespace Okteta {
 
 AbstractColumnRenderer::AbstractColumnRenderer(std::unique_ptr<AbstractColumnRendererPrivate>&& dd)

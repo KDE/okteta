@@ -18,9 +18,6 @@
 // Std
 #include <memory>
 
-class QString;
-class QByteArray;
-
 namespace Okteta {
 
 class AddressComboBoxPrivate;

@@ -18,10 +18,9 @@
 #include <memory>
 
 class KGuiItem;
+class QString;
 
 namespace Kasten {
-
-class AbstractModel;
 
 enum UserResponseOptionHint {
     UserResponseNoHints = 0,

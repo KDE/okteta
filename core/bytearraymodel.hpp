@@ -12,7 +12,6 @@
 // lib
 #include "abstractbytearraymodel.hpp"
 #include "bookmarkable.hpp"
-#include "bookmarksconstiterator.hpp"
 
 namespace Okteta {
 

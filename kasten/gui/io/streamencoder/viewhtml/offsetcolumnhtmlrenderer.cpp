@@ -9,7 +9,6 @@
 #include "offsetcolumnhtmlrenderer.hpp"
 
 // Qt
-#include <QString>
 #include <QTextStream>
 
 namespace Kasten {

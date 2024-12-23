@@ -18,8 +18,6 @@
 // Qt
 #include <QApplication>
 #include <QFontDatabase>
-// Std
-#include <utility>
 
 namespace Kasten {
 
