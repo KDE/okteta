@@ -26,7 +26,6 @@ namespace Okteta {
 class Coord;
 class CharCodec;
 
-class ByteArrayTableRanges;
 class ByteArrayTableLayout;
 class AbstractByteArrayModel;
 

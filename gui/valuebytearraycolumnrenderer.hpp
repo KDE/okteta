@@ -16,6 +16,7 @@
 
 namespace Okteta {
 
+class ByteArrayTableRanges;
 class ValueCodec;
 
 class ValueByteArrayColumnRendererPrivate;

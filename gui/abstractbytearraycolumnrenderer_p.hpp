@@ -27,6 +27,7 @@ class QBrush;
 
 namespace Okteta {
 
+class ByteArrayTableRanges;
 
 class AbstractByteArrayColumnRendererPrivate : public AbstractColumnRendererPrivate
 {

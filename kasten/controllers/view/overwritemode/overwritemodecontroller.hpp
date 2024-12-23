@@ -13,6 +13,7 @@
 #include <Kasten/AbstractXmlGuiController>
 
 class KToggleAction;
+class KXMLGUIClient;
 
 namespace Kasten {
 

@@ -16,6 +16,7 @@ class QChar;
 
 namespace Okteta {
 
+class ByteArrayTableRanges;
 class CharByteArrayColumnRendererPrivate;
 
 /** buffer column that interprets the bytes as chars

@@ -16,8 +16,6 @@
 // Std
 #include <memory>
 
-class KXMLGUIClient;
-
 namespace Kasten {
 
 class AbstractModel;
