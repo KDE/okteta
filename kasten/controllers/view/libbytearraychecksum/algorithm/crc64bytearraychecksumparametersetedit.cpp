@@ -6,11 +6,10 @@
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
-#include "modsumbytearraychecksumparametersetedit.hpp"
+#include "crc64bytearraychecksumparametersetedit.hpp"
 
 // parameterset
 #include "crc64bytearraychecksumparameterset.hpp"
-#include "crc64bytearraychecksumparametersetedit.hpp"
 // KF
 #include <KLocalizedString>
 #include <KComboBox>
