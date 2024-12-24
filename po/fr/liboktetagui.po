@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetagui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-30 01:51+0000\n"
+"POT-Creation-Date: 2024-12-24 01:53+0000\n"
 "PO-Revision-Date: 2019-03-06 14:10+0800\n"
 "Last-Translator: Simon Depiets <sdepiets@gmail.com>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
@@ -22,19 +22,19 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Generator: Lokalize 19.03.70\n"
 
-#: controller/clipboardcontroller.cpp:57
+#: controller/clipboardcontroller.cpp:55
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Copy"
 msgstr "&Copier"
 
-#: controller/clipboardcontroller.cpp:67
+#: controller/clipboardcontroller.cpp:65
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Cu&t"
 msgstr "Cou&per"
 
-#: controller/clipboardcontroller.cpp:74
+#: controller/clipboardcontroller.cpp:72
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Paste"

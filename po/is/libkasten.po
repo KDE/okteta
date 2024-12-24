@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-29 01:49+0000\n"
+"POT-Creation-Date: 2024-12-24 01:53+0000\n"
 "PO-Revision-Date: 2011-08-16 08:06+0000\n"
 "Last-Translator: Sveinn í Felli <sveinki@nett.is>\n"
 "Language-Team: Icelandic <kde-isl@molar.is>\n"
@@ -57,7 +57,7 @@ msgctxt "@option:check set the document to read-write"
 msgid "Set Read-write"
 msgstr "Les-skrif"
 
-#: controllers/document/terminal/terminaltool.cpp:32
+#: controllers/document/terminal/terminaltool.cpp:31
 #: controllers/document/terminal/terminaltoolviewfactory.cpp:24
 #, fuzzy, kde-format
 msgctxt "@title:window"
@@ -113,13 +113,13 @@ msgctxt "@action:inmenu"
 msgid "Close All Other"
 msgstr "Loka öllum öðrum"
 
-#: controllers/documentsystem/creator/creatorcontroller.cpp:39
+#: controllers/documentsystem/creator/creatorcontroller.cpp:36
 #, kde-format
 msgctxt "@title:menu create new byte arrays from different sources"
 msgid "New"
 msgstr "Nýtt"
 
-#: controllers/documentsystem/creator/creatorcontroller.cpp:47
+#: controllers/documentsystem/creator/creatorcontroller.cpp:44
 #, fuzzy, kde-format
 #| msgctxt "@title:menu create a new empty document"
 #| msgid "Empty"
@@ -127,7 +127,7 @@ msgctxt "@item:inmenu create a new empty document"
 msgid "Empty"
 msgstr "Tómt"
 
-#: controllers/documentsystem/creator/creatorcontroller.cpp:58
+#: controllers/documentsystem/creator/creatorcontroller.cpp:55
 #, fuzzy, kde-format
 #| msgctxt "@title:menu create a new document from data in the clipboard"
 #| msgid "From Clipboard"
@@ -164,7 +164,7 @@ msgctxt "@info"
 msgid "No documents"
 msgstr "Skjöl"
 
-#: controllers/documentsystem/filesystembrowser/filesystembrowsertool.cpp:33
+#: controllers/documentsystem/filesystembrowser/filesystembrowsertool.cpp:32
 #: controllers/documentsystem/filesystembrowser/filesystembrowsertoolviewfactory.cpp:24
 #, fuzzy, kde-format
 msgctxt "@title:window"
@@ -301,7 +301,7 @@ msgid ""
 "at the cursor position."
 msgstr ""
 
-#: controllers/io/synchronize/synchronizecontroller.cpp:34
+#: controllers/io/synchronize/synchronizecontroller.cpp:33
 #: controllers/shellwindow/viewareacontextmenu/viewareacontextmenucontroller.cpp:38
 #, fuzzy, kde-format
 msgctxt "@action:inmenu"
@@ -356,28 +356,28 @@ msgctxt "@action Redo: [change]"
 msgid "Redo: %1"
 msgstr "Endurtaka: %1"
 
-#: controllers/view/zoom/zoomcontroller.cpp:42
+#: controllers/view/zoom/zoomcontroller.cpp:41
 #, fuzzy, kde-format
 msgid "Zoom"
 msgstr "Aðdráttur"
 
-#: controllers/view/zoom/zoomcontroller.cpp:51
+#: controllers/view/zoom/zoomcontroller.cpp:50
 #, fuzzy, kde-format
 msgctxt "zoom-factor (percentage)"
 msgid "%1%"
 msgstr "%1%"
 
-#: controllers/view/zoom/zoomcontroller.cpp:64
+#: controllers/view/zoom/zoomcontroller.cpp:63
 #, fuzzy, kde-format
 msgid "&Fit to Width"
 msgstr "&Passa á breidd"
 
-#: controllers/view/zoom/zoomcontroller.cpp:66
+#: controllers/view/zoom/zoomcontroller.cpp:65
 #, fuzzy, kde-format
 msgid "&Fit to Height"
 msgstr "&Passa á breidd"
 
-#: controllers/view/zoom/zoomcontroller.cpp:68
+#: controllers/view/zoom/zoomcontroller.cpp:67
 #, fuzzy, kde-format
 msgid "&Fit to Size"
 msgstr "&Passa á breidd"
@@ -388,19 +388,19 @@ msgctxt "@info:tooltip"
 msgid "Zoom: %1%"
 msgstr "Aðdráttur"
 
-#: core/system/documentsyncmanager_p.cpp:111
+#: core/system/documentsyncmanager_p.cpp:110
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Save As"
 msgstr "Vista sem"
 
-#: core/system/documentsyncmanager_p.cpp:210
+#: core/system/documentsyncmanager_p.cpp:209
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Close"
 msgstr "Loka"
 
-#: core/system/documentsyncmanager_p.cpp:245
+#: core/system/documentsyncmanager_p.cpp:244
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Reload"

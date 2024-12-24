@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-29 01:49+0000\n"
+"POT-Creation-Date: 2024-12-24 01:53+0000\n"
 "PO-Revision-Date: 2011-04-08 20:56-0700\n"
 "Last-Translator: Fumiaki Okushi <okushi@kde.gr.jp>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -57,7 +57,7 @@ msgctxt "@option:check set the document to read-write"
 msgid "Set Read-write"
 msgstr "読み書き可能"
 
-#: controllers/document/terminal/terminaltool.cpp:32
+#: controllers/document/terminal/terminaltool.cpp:31
 #: controllers/document/terminal/terminaltoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
@@ -113,13 +113,13 @@ msgctxt "@action:inmenu"
 msgid "Close All Other"
 msgstr "他をすべて閉じる"
 
-#: controllers/documentsystem/creator/creatorcontroller.cpp:39
+#: controllers/documentsystem/creator/creatorcontroller.cpp:36
 #, kde-format
 msgctxt "@title:menu create new byte arrays from different sources"
 msgid "New"
 msgstr "新規"
 
-#: controllers/documentsystem/creator/creatorcontroller.cpp:47
+#: controllers/documentsystem/creator/creatorcontroller.cpp:44
 #, fuzzy, kde-format
 #| msgctxt "@title:menu create a new empty document"
 #| msgid "Empty"
@@ -127,7 +127,7 @@ msgctxt "@item:inmenu create a new empty document"
 msgid "Empty"
 msgstr "空"
 
-#: controllers/documentsystem/creator/creatorcontroller.cpp:58
+#: controllers/documentsystem/creator/creatorcontroller.cpp:55
 #, fuzzy, kde-format
 #| msgctxt "@title:menu create a new document from data in the clipboard"
 #| msgid "From Clipboard"
@@ -164,7 +164,7 @@ msgctxt "@info"
 msgid "No documents"
 msgstr "文書"
 
-#: controllers/documentsystem/filesystembrowser/filesystembrowsertool.cpp:33
+#: controllers/documentsystem/filesystembrowser/filesystembrowsertool.cpp:32
 #: controllers/documentsystem/filesystembrowser/filesystembrowsertoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
@@ -311,7 +311,7 @@ msgstr ""
 "<interface>挿入</interface>ボタンを押すと、上で入力した設定に従ってデータを生"
 "成してカーソル位置に挿入されます。"
 
-#: controllers/io/synchronize/synchronizecontroller.cpp:34
+#: controllers/io/synchronize/synchronizecontroller.cpp:33
 #: controllers/shellwindow/viewareacontextmenu/viewareacontextmenucontroller.cpp:38
 #, fuzzy, kde-format
 #| msgctxt "@title:menu"
@@ -370,28 +370,28 @@ msgctxt "@action Redo: [change]"
 msgid "Redo: %1"
 msgstr "やり直す: %1"
 
-#: controllers/view/zoom/zoomcontroller.cpp:42
+#: controllers/view/zoom/zoomcontroller.cpp:41
 #, kde-format
 msgid "Zoom"
 msgstr "ズーム"
 
-#: controllers/view/zoom/zoomcontroller.cpp:51
+#: controllers/view/zoom/zoomcontroller.cpp:50
 #, kde-format
 msgctxt "zoom-factor (percentage)"
 msgid "%1%"
 msgstr "%1%"
 
-#: controllers/view/zoom/zoomcontroller.cpp:64
+#: controllers/view/zoom/zoomcontroller.cpp:63
 #, kde-format
 msgid "&Fit to Width"
 msgstr "幅に合わせる(&F)"
 
-#: controllers/view/zoom/zoomcontroller.cpp:66
+#: controllers/view/zoom/zoomcontroller.cpp:65
 #, kde-format
 msgid "&Fit to Height"
 msgstr "高さに合わせる(&F)"
 
-#: controllers/view/zoom/zoomcontroller.cpp:68
+#: controllers/view/zoom/zoomcontroller.cpp:67
 #, kde-format
 msgid "&Fit to Size"
 msgstr "ページに合わせる(&F)"
@@ -402,19 +402,19 @@ msgctxt "@info:tooltip"
 msgid "Zoom: %1%"
 msgstr "ズーム率: %1%"
 
-#: core/system/documentsyncmanager_p.cpp:111
+#: core/system/documentsyncmanager_p.cpp:110
 #, kde-format
 msgctxt "@title:window"
 msgid "Save As"
 msgstr "名前を付けて保存"
 
-#: core/system/documentsyncmanager_p.cpp:210
+#: core/system/documentsyncmanager_p.cpp:209
 #, kde-format
 msgctxt "@title:window"
 msgid "Close"
 msgstr "閉じる"
 
-#: core/system/documentsyncmanager_p.cpp:245
+#: core/system/documentsyncmanager_p.cpp:244
 #, kde-format
 msgctxt "@title:window"
 msgid "Reload"

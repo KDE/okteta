@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-30 01:51+0000\n"
+"POT-Creation-Date: 2024-12-24 01:53+0000\n"
 "PO-Revision-Date: 2020-01-23 15:54+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -21,19 +21,19 @@ msgstr ""
 "%100==4 ? 3 : 0);\n"
 "X-Generator: Poedit 2.2.4\n"
 
-#: controller/clipboardcontroller.cpp:57
+#: controller/clipboardcontroller.cpp:55
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Copy"
 msgstr "Kopiraj"
 
-#: controller/clipboardcontroller.cpp:67
+#: controller/clipboardcontroller.cpp:65
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Cu&t"
 msgstr "Izreži"
 
-#: controller/clipboardcontroller.cpp:74
+#: controller/clipboardcontroller.cpp:72
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Paste"

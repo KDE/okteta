@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-29 01:49+0000\n"
+"POT-Creation-Date: 2024-12-24 01:53+0000\n"
 "PO-Revision-Date: 2023-12-06 19:12+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -29,7 +29,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "wizzardsk@gmail.com"
 
-#: controllers/document/info/documentinfotool.cpp:46
+#: controllers/document/info/documentinfotool.cpp:45
 #: controllers/document/info/documentinfotoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
@@ -207,77 +207,77 @@ msgid ""
 "can be edited."
 msgstr "Ak stlačíte toto tlačidlo, môžete zmeniť meno vybranej záložky."
 
-#: controllers/view/bytetable/bytetablemodel.cpp:141
+#: controllers/view/bytetable/bytetablemodel.cpp:139
 #: controllers/view/info/statistictablemodel.cpp:170
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Character not defined."
 msgstr ""
 
-#: controllers/view/bytetable/bytetablemodel.cpp:159
+#: controllers/view/bytetable/bytetablemodel.cpp:157
 #: controllers/view/info/statistictablemodel.cpp:216
 #, kde-format
 msgctxt "@title:column short for Decimal"
 msgid "Dec"
 msgstr "Dec"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:160
+#: controllers/view/bytetable/bytetablemodel.cpp:158
 #: controllers/view/info/statistictablemodel.cpp:215
 #, kde-format
 msgctxt "@title:column short for Hexadecimal"
 msgid "Hex"
 msgstr "Hex"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:161
+#: controllers/view/bytetable/bytetablemodel.cpp:159
 #: controllers/view/info/statistictablemodel.cpp:217
 #, kde-format
 msgctxt "@title:column short for Octal"
 msgid "Oct"
 msgstr "Oct"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:162
+#: controllers/view/bytetable/bytetablemodel.cpp:160
 #: controllers/view/info/statistictablemodel.cpp:218
 #, kde-format
 msgctxt "@title:column short for Binary"
 msgid "Bin"
 msgstr "Bin"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:163
+#: controllers/view/bytetable/bytetablemodel.cpp:161
 #: controllers/view/info/statistictablemodel.cpp:220
 #, kde-format
 msgctxt "@title:column short for Character"
 msgid "Char"
 msgstr "Znak"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:169
+#: controllers/view/bytetable/bytetablemodel.cpp:167
 #: controllers/view/info/statistictablemodel.cpp:231
 #, kde-format
 msgctxt "@info:tooltip column contains the value in decimal format"
 msgid "Decimal"
 msgstr "Dekadický"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:171
+#: controllers/view/bytetable/bytetablemodel.cpp:169
 #: controllers/view/info/statistictablemodel.cpp:229
 #, kde-format
 msgctxt "@info:tooltip column contains the value in hexadecimal format"
 msgid "Hexadecimal"
 msgstr "Hexadecimálny"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:173
+#: controllers/view/bytetable/bytetablemodel.cpp:171
 #: controllers/view/info/statistictablemodel.cpp:233
 #, kde-format
 msgctxt "@info:tooltip column contains the value in octal format"
 msgid "Octal"
 msgstr "Osmičkový"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:175
+#: controllers/view/bytetable/bytetablemodel.cpp:173
 #: controllers/view/info/statistictablemodel.cpp:235
 #, kde-format
 msgctxt "@info:tooltip column contains the value in binary format"
 msgid "Binary"
 msgstr "Binárny"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:177
+#: controllers/view/bytetable/bytetablemodel.cpp:175
 #: controllers/view/info/statistictablemodel.cpp:239
 #, kde-format
 msgctxt "@info:tooltip column contains the character with the value"
@@ -339,27 +339,27 @@ msgctxt "@title:window"
 msgid "Charset Conversion"
 msgstr "Konverzia znakovej sady"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:53
+#: controllers/view/charsetconversion/charsetconversionview.cpp:52
 #, kde-format
 msgctxt ""
 "@item:inmenu Is converted _from_ charset (selected in combobox next to this)"
 msgid "From"
 msgstr "Od"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:55
+#: controllers/view/charsetconversion/charsetconversionview.cpp:54
 #, kde-format
 msgctxt ""
 "@item:inmenu Is converted _to_ charset (selected in combobox next to this)"
 msgid "To"
 msgstr "Do"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:62
+#: controllers/view/charsetconversion/charsetconversionview.cpp:61
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The direction the bytes are converted, to or from the selected charset."
 msgstr "Smer, v akom sa konvertujú bajty, do alebo z vybranej znakovej sady."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:66
+#: controllers/view/charsetconversion/charsetconversionview.cpp:65
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -368,26 +368,26 @@ msgid ""
 msgstr ""
 "Vybrať smer, v akom sa bajty konvertujú, do alebo z vybranej znakovej sady."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:82
+#: controllers/view/charsetconversion/charsetconversionview.cpp:81
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The charset the bytes are converted to."
 msgstr "Znaková sada, do ktorej konvertovať bajty."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:86
+#: controllers/view/charsetconversion/charsetconversionview.cpp:85
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Select the charset the bytes are converted to."
 msgstr "Vyberte znakovú sadu, do ktorej konvertovať bajty."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:102
+#: controllers/view/charsetconversion/charsetconversionview.cpp:101
 #, kde-format
 msgctxt ""
 "@option:check substitute bytes whose char is not part of the target charset"
 msgid "Substitute missing:"
 msgstr "Nahradiť chýbajúce:"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:107
+#: controllers/view/charsetconversion/charsetconversionview.cpp:106
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -397,7 +397,7 @@ msgstr ""
 "Vyberte, ak bajty majú byť nahradené predvoleným bajtom, ak jeho znak v "
 "zdrojovej znakovej sade nie je súčasťou cieľovej znakovej sady."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:111
+#: controllers/view/charsetconversion/charsetconversionview.cpp:110
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -407,14 +407,14 @@ msgstr ""
 "Nastavte na true, ak majú byť bajty nahradené predvoleným bajtom, ak jeho "
 "znak v zdrojovej znakovej sade nie je súčasťou cieľovej znakovej sady."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:127
+#: controllers/view/charsetconversion/charsetconversionview.cpp:126
 #, kde-format
 msgctxt ""
 "@label:textbox byte to use for chars which are not part of the target charset"
 msgid "Substitute byte:"
 msgstr "Nahradiť bajt:"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:134
+#: controllers/view/charsetconversion/charsetconversionview.cpp:133
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte to use for chars which are not part of the target charset."
@@ -422,7 +422,7 @@ msgstr ""
 "Bajt, ktorý sa použije pre znaky, ktoré nie sú súčasťou cieľovej znakovej "
 "sady."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:137
+#: controllers/view/charsetconversion/charsetconversionview.cpp:136
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -431,18 +431,18 @@ msgstr ""
 "Definovať bajt, ktorý sa má použiť pre znaky, ktoré nie sú súčasťou cieľovej "
 "znakovej sady."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:171
+#: controllers/view/charsetconversion/charsetconversionview.cpp:170
 #, kde-format
 msgid "Con&vert"
 msgstr "Previesť"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:174
+#: controllers/view/charsetconversion/charsetconversionview.cpp:173
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Converts the bytes in the selected range."
 msgstr "Konvertuje bajty vo vybranom rozsahu."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:176
+#: controllers/view/charsetconversion/charsetconversionview.cpp:175
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -454,13 +454,13 @@ msgstr ""
 "vybranom rozsahu budú nahradené bajtami, ktoré reprezentujú rovnaký znak vo "
 "vybranej cieľovej znakovej sade."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:222
+#: controllers/view/charsetconversion/charsetconversionview.cpp:221
 #, kde-format
 msgctxt "@info"
 msgid "No bytes converted."
 msgstr "Žiadne bajty neskonvertované."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:223
+#: controllers/view/charsetconversion/charsetconversionview.cpp:222
 #, kde-format
 msgctxt "@info"
 msgid "1 byte converted."
@@ -469,13 +469,13 @@ msgstr[0] "1 bajt skonvertovaný."
 msgstr[1] "%1 bajty skonvertované."
 msgstr[2] "%1 bajtov skonvertovaných."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:233
+#: controllers/view/charsetconversion/charsetconversionview.cpp:232
 #, kde-format
 msgctxt "@info"
 msgid "No bytes substituted."
 msgstr "Žiadne bajty nenahradené."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:234
+#: controllers/view/charsetconversion/charsetconversionview.cpp:233
 #, kde-format
 msgctxt "@info"
 msgid "1 byte substituted."
@@ -484,7 +484,7 @@ msgstr[0] "1 bajt nahradený."
 msgstr[1] "%1 bajty nahradené."
 msgstr[2] "%1 bajtov nahradených."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:242
+#: controllers/view/charsetconversion/charsetconversionview.cpp:241
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -498,31 +498,31 @@ msgctxt "@title:window of the tool to calculate checksums"
 msgid "Checksum"
 msgstr "Kontrolný súčet"
 
-#: controllers/view/checksum/checksumview.cpp:48
+#: controllers/view/checksum/checksumview.cpp:46
 #, kde-format
 msgctxt "@label:listbox algorithm to use for the checksum"
 msgid "Algorithm:"
 msgstr "Algoritmus:"
 
-#: controllers/view/checksum/checksumview.cpp:55
+#: controllers/view/checksum/checksumview.cpp:53
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Select the algorithm to use for the checksum."
 msgstr "Vybrať algoritmus pre prepočet kontrolného súčtu."
 
-#: controllers/view/checksum/checksumview.cpp:82
+#: controllers/view/checksum/checksumview.cpp:80
 #, kde-format
 msgctxt "@action:button calculate the checksum"
 msgid "&Calculate"
 msgstr "Prepočítať(&C)"
 
-#: controllers/view/checksum/checksumview.cpp:85
+#: controllers/view/checksum/checksumview.cpp:83
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Calculate the checksum for the bytes in the selected range."
 msgstr "Vypočítať kontrolný súčet bytov vo vybranom rozsahu."
 
-#: controllers/view/checksum/checksumview.cpp:87
+#: controllers/view/checksum/checksumview.cpp:85
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -534,7 +534,7 @@ msgstr ""
 "na všetky reťazce, ktoré obsahuje vybraný rozsah a má nastavenú minimálnu "
 "dĺžku."
 
-#: controllers/view/checksum/checksumview.cpp:95
+#: controllers/view/checksum/checksumview.cpp:93
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "No checksum calculated yet."
@@ -766,7 +766,7 @@ msgstr ""
 #: controllers/view/info/infoview.cpp:189
 #: controllers/view/structures/datatypes/datainformation.cpp:60
 #: controllers/view/structures/datatypes/datainformation.cpp:63
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:225
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:224
 #, kde-format
 msgid "1 byte"
 msgid_plural "%1 bytes"
@@ -804,25 +804,25 @@ msgctxt "name of the checksum algorithm, Cyclic Redundancy Check 64"
 msgid "CRC-64"
 msgstr "CRC-64"
 
-#: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:31
+#: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:28
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "ECMA-182"
 msgstr "ECMA-182"
 
-#: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:32
+#: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:29
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "ISO 3309"
 msgstr "ISO 3309"
 
-#: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:38
+#: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:35
 #, kde-format
 msgctxt "@label:listbox variant used to select the CRC-64 variant"
 msgid "CRC-64 variant:"
 msgstr "CRC-64 variant:"
 
-#: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:41
+#: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:38
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "CRC-64 variant used by calculation."
@@ -1399,7 +1399,7 @@ msgstr ""
 ">Prepísať nasledujúce byty alebo vložiť toľko nových koľko je potrebné?"
 
 #: controllers/view/poddecoder/podtableview.cpp:257
-#: controllers/view/structures/structureview.cpp:354
+#: controllers/view/structures/structureview.cpp:353
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "&Edit..."
@@ -1409,32 +1409,32 @@ msgstr "&Editovať..."
 
 #: controllers/view/poddecoder/podtableview.cpp:271
 #: controllers/view/selectrange/selectrangeview.cpp:125
-#: controllers/view/structures/structureview.cpp:369
+#: controllers/view/structures/structureview.cpp:368
 #, kde-format
 msgctxt "@action:button"
 msgid "&Select"
 msgstr "Vybrať(&S)"
 
-#: controllers/view/print/printtool.cpp:277
-#: controllers/view/print/printtool.cpp:307
+#: controllers/view/print/printtool.cpp:275
+#: controllers/view/print/printtool.cpp:305
 #, kde-format
 msgctxt "@title:window"
 msgid "Print Byte Array %1"
 msgstr "Vytlačiť bytové pole %1"
 
-#: controllers/view/print/printtool.cpp:302
+#: controllers/view/print/printtool.cpp:300
 #, kde-format
 msgctxt "@info"
 msgid "Could not print."
 msgstr "Nie je možné tlačiť."
 
-#: controllers/view/print/printtool.cpp:338
+#: controllers/view/print/printtool.cpp:336
 #, kde-format
 msgctxt "in the header of the printed page, e.g. Page 2 of 20"
 msgid "Page %p of %P"
 msgstr "Strana %p z %P"
 
-#: controllers/view/print/printtool.cpp:344
+#: controllers/view/print/printtool.cpp:342
 #, kde-format
 msgctxt "in the footer of the printed page, e.g. Printed by: Joe User"
 msgid "Printed by: %U"
@@ -1484,25 +1484,25 @@ msgctxt "@info"
 msgid "Beginning of byte array reached.<nl/>Continue from the end?"
 msgstr "Dosiahnutý začiatok bytového poľa.<nl/>Pokračovať od konca? "
 
-#: controllers/view/replace/replacedialog.cpp:49
+#: controllers/view/replace/replacedialog.cpp:48
 #, kde-format
 msgctxt "@title:window"
 msgid "Replace Bytes"
 msgstr "Zameniť byty"
 
-#: controllers/view/replace/replacedialog.cpp:51
+#: controllers/view/replace/replacedialog.cpp:50
 #, kde-format
 msgctxt "@action;button"
 msgid "&Replace"
 msgstr "Zameniť(&R)"
 
-#: controllers/view/replace/replacedialog.cpp:53
+#: controllers/view/replace/replacedialog.cpp:52
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Start replace"
 msgstr "Začať zámenu"
 
-#: controllers/view/replace/replacedialog.cpp:55
+#: controllers/view/replace/replacedialog.cpp:54
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1513,13 +1513,13 @@ msgstr ""
 "Ak stlačíte tlačidlo <interface>Zameniť</interface> ,v bytovom poli sa "
 "vyhľadajú byty podľa šablóny a každý výskyt je zamenený."
 
-#: controllers/view/replace/replacedialog.cpp:63
+#: controllers/view/replace/replacedialog.cpp:62
 #, kde-format
 msgctxt "@title:group"
 msgid "Replace With"
 msgstr "Zameniť s"
 
-#: controllers/view/replace/replacedialog.cpp:70
+#: controllers/view/replace/replacedialog.cpp:69
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1529,13 +1529,13 @@ msgstr ""
 "Zadajte byty za ktoré sa má zamieňať, alebo zadajte predchádzajúce zo "
 "zoznamu."
 
-#: controllers/view/replace/replacedialog.cpp:79
+#: controllers/view/replace/replacedialog.cpp:78
 #, kde-format
 msgctxt "@option:check"
 msgid "&Prompt on replace"
 msgstr "Upozorniť pri zámene(&P)"
 
-#: controllers/view/replace/replacedialog.cpp:80
+#: controllers/view/replace/replacedialog.cpp:79
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Ask before replacing each match found."
@@ -2493,66 +2493,66 @@ msgctxt "size of a data structure"
 msgid "Size"
 msgstr "Size"
 
-#: controllers/view/structures/structureview.cpp:92
+#: controllers/view/structures/structureview.cpp:91
 #, fuzzy, kde-format
 #| msgid "Structure Definitions"
 msgctxt "@info"
 msgid "No structure definitions"
 msgstr "Definície štruktúry"
 
-#: controllers/view/structures/structureview.cpp:112
+#: controllers/view/structures/structureview.cpp:111
 #, kde-format
 msgctxt "@action:button"
 msgid "Validate"
 msgstr "Skontrolovať"
 
-#: controllers/view/structures/structureview.cpp:114
+#: controllers/view/structures/structureview.cpp:113
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Validate all structures."
 msgstr "Skontrolovať všetky štruktúry."
 
-#: controllers/view/structures/structureview.cpp:136
+#: controllers/view/structures/structureview.cpp:135
 #, kde-format
 msgctxt "@action:button"
 msgid "Script console"
 msgstr "Skriptová konzola"
 
-#: controllers/view/structures/structureview.cpp:138
+#: controllers/view/structures/structureview.cpp:137
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open script console."
 msgstr "Otvoriť skriptovú konzolu."
 
-#: controllers/view/structures/structureview.cpp:142
+#: controllers/view/structures/structureview.cpp:141
 #, kde-format
 msgctxt "@action:button"
 msgid "Settings"
 msgstr "Nastavenia"
 
-#: controllers/view/structures/structureview.cpp:144
+#: controllers/view/structures/structureview.cpp:143
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open settings."
 msgstr "Otvoriť nastavenia"
 
-#: controllers/view/structures/structureview.cpp:175
+#: controllers/view/structures/structureview.cpp:174
 #, kde-format
 msgid "Value Display"
 msgstr "Zobrazenie hodnoty"
 
-#: controllers/view/structures/structureview.cpp:187
+#: controllers/view/structures/structureview.cpp:186
 #, kde-format
 msgid "Structures management"
 msgstr "menežment štruktúr"
 
-#: controllers/view/structures/structureview.cpp:274
+#: controllers/view/structures/structureview.cpp:273
 #, kde-format
 msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Unlock"
 msgstr "Odomknúť"
 
-#: controllers/view/structures/structureview.cpp:276
+#: controllers/view/structures/structureview.cpp:275
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -2562,19 +2562,19 @@ msgstr ""
 "Odomknúť vybranú štruktúru, napr. počiatočný posun je vždy nastavený na "
 "aktuálnu polohu kurzora."
 
-#: controllers/view/structures/structureview.cpp:281
+#: controllers/view/structures/structureview.cpp:280
 #, kde-format
 msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Lock"
 msgstr "Zamknúť"
 
-#: controllers/view/structures/structureview.cpp:283
+#: controllers/view/structures/structureview.cpp:282
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Lock selected structure to current offset."
 msgstr "Zamknúť vybranú štruktúru na vybranom posune."
 
-#: controllers/view/structures/structureview.cpp:316
+#: controllers/view/structures/structureview.cpp:315
 #, kde-format
 msgctxt "@title:window"
 msgid "Structures Script Console"
@@ -2772,13 +2772,13 @@ msgctxt "@item:inmenu"
 msgid "&Rows"
 msgstr "&Riadky"
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:37
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:36
 #, kde-format
 msgctxt "@title:menu submenu to select the view profile or change it"
 msgid "View Profile"
 msgstr "Profil pohľadu"
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:44
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:43
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu create a new view profile"
 #| msgid "Create New..."
@@ -2786,19 +2786,19 @@ msgctxt "@action:inmenu create a new view profile"
 msgid "Create New…"
 msgstr "Vytvoriť nový..."
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:51
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:50
 #, kde-format
 msgctxt "@action:inmenu save changed to the view profile to the base profile"
 msgid "Save Changes"
 msgstr "Uložiť zmeny"
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:58
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:57
 #, kde-format
 msgctxt "@action:inmenu reset settings back to those of the saved base profile"
 msgid "Reset Changes"
 msgstr "Vynulovať zmeny"
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:178
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:177
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:180
 #, kde-format
 msgctxt "@window:title"
@@ -2922,7 +2922,7 @@ msgid "Values"
 msgstr "Hodnoty"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:138
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:52
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:51
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:38
 #, kde-format
 msgctxt ""
@@ -2931,7 +2931,7 @@ msgid "Hexadecimal"
 msgstr "Hexadecimálny"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:140
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:53
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:52
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:39
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
@@ -2939,7 +2939,7 @@ msgid "Decimal"
 msgstr "Dekadický"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:142
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:54
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:53
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:40
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
@@ -2947,7 +2947,7 @@ msgid "Octal"
 msgstr "Osmičkový"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:144
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:55
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:54
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:41
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
@@ -3103,73 +3103,73 @@ msgctxt "@window:title"
 msgid "\"%1\" View Profile"
 msgstr "Profil pohľadu \"%1\""
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:41
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:40
 #, kde-format
 msgctxt "@info:status short for: Insert mode"
 msgid "INS"
 msgstr "INS"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:42
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:41
 #, kde-format
 msgctxt "@info:status short for: Overwrite mode"
 msgid "OVR"
 msgstr "OVR"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:43
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:42
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Insert mode"
 msgstr "Mód vkladania"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:44
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:43
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Overwrite mode"
 msgstr "Mód prepisovania"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:59
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:58
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Coding of the value interpretation in the current view."
 msgstr "Kódovanie interpretácie hodnoty v aktuálnom zobrazení"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:67
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:66
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Encoding in the character column of the current view."
 msgstr "Kódovanie v stĺpci znakov aktuálneho pohľadu."
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:111
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:208
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:110
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:207
 #, kde-format
 msgid "Offset: %1"
 msgstr "Ofset: %1"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:120
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:119
 #, kde-format
 msgid "%1 bytes"
 msgstr "%1 bytov"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:122
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:121
 #, kde-format
 msgctxt "@info:status selection: start offset - end offset ()"
 msgid "Selection: %1 - %2 (%3)"
 msgstr "Výber: %1 - %2 (%3)"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:171
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:170
 #, kde-format
 msgctxt "@info:status offset value not available"
 msgid "Offset: -"
 msgstr "Ofset: -"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:172
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:229
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:171
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:228
 #, kde-format
 msgctxt "@info:status offset value not available"
 msgid "Selection: -"
 msgstr "Výber: -"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:227
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:226
 #, kde-format
 msgctxt "@info:status selection: start offset - end offset (number of bytes)"
 msgid "Selection: %1 - %2 (%3)"
@@ -3488,7 +3488,7 @@ msgctxt "@label:textbox substring which separates the values"
 msgid "Separation:"
 msgstr "Oddelenie:"
 
-#: gui/io/streamencoder/viewhtml/bytearrayviewhtmlstreamencoder.cpp:38
+#: gui/io/streamencoder/viewhtml/bytearrayviewhtmlstreamencoder.cpp:37
 #, fuzzy, kde-format
 #| msgctxt "name of the encoding target"
 #| msgid "View in Plain Text"
@@ -3496,7 +3496,7 @@ msgctxt "name of the encoding target"
 msgid "View in HTML"
 msgstr "Zobraziť ako čistý text"
 
-#: gui/io/streamencoder/viewtext/bytearrayviewtextstreamencoder.cpp:43
+#: gui/io/streamencoder/viewtext/bytearrayviewtextstreamencoder.cpp:42
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "View in Plain Text"

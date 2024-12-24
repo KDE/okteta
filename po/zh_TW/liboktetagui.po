@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-30 01:51+0000\n"
+"POT-Creation-Date: 2024-12-24 01:53+0000\n"
 "PO-Revision-Date: 2019-02-23 21:22+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -18,19 +18,19 @@ msgstr ""
 "X-Generator: Lokalize 18.12.2\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: controller/clipboardcontroller.cpp:57
+#: controller/clipboardcontroller.cpp:55
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Copy"
 msgstr "複製(&C)"
 
-#: controller/clipboardcontroller.cpp:67
+#: controller/clipboardcontroller.cpp:65
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Cu&t"
 msgstr "剪下(&T)"
 
-#: controller/clipboardcontroller.cpp:74
+#: controller/clipboardcontroller.cpp:72
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Paste"

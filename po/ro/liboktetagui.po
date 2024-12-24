@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-30 01:51+0000\n"
+"POT-Creation-Date: 2024-12-24 01:53+0000\n"
 "PO-Revision-Date: 2014-10-03 11:02+0300\n"
 "Last-Translator: Sergiu Bivol <sergiu@ase.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -17,19 +17,19 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
 
-#: controller/clipboardcontroller.cpp:57
+#: controller/clipboardcontroller.cpp:55
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Copy"
 msgstr ""
 
-#: controller/clipboardcontroller.cpp:67
+#: controller/clipboardcontroller.cpp:65
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Cu&t"
 msgstr ""
 
-#: controller/clipboardcontroller.cpp:74
+#: controller/clipboardcontroller.cpp:72
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Paste"
