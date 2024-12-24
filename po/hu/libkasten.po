@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-02 03:20+0000\n"
+"POT-Creation-Date: 2024-12-24 03:20+0000\n"
 "PO-Revision-Date: 2021-10-30 13:01+0200\n"
 "Last-Translator: Kristof Kiszel <kiszel.kristof@gmail.com>\n"
 "Language-Team: Hungarian <kde-i18n-hu@kde.org>\n"
@@ -55,7 +55,7 @@ msgctxt "@option:check set the document to read-write"
 msgid "Set Read-write"
 msgstr "Írható-olvasható legyen"
 
-#: controllers/document/terminal/terminaltool.cpp:32
+#: controllers/document/terminal/terminaltool.cpp:31
 #: controllers/document/terminal/terminaltoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
@@ -107,19 +107,19 @@ msgctxt "@action:inmenu"
 msgid "Close All Other"
 msgstr "Többi bezárása"
 
-#: controllers/documentsystem/creator/creatorcontroller.cpp:40
+#: controllers/documentsystem/creator/creatorcontroller.cpp:37
 #, kde-format
 msgctxt "@title:menu create new byte arrays from different sources"
 msgid "New"
 msgstr "Új"
 
-#: controllers/documentsystem/creator/creatorcontroller.cpp:53
+#: controllers/documentsystem/creator/creatorcontroller.cpp:50
 #, kde-format
 msgctxt "@item:inmenu create a new empty document"
 msgid "Empty"
 msgstr "Üres"
 
-#: controllers/documentsystem/creator/creatorcontroller.cpp:64
+#: controllers/documentsystem/creator/creatorcontroller.cpp:61
 #, kde-format
 msgctxt "@item:inmenu create a new document from data in the clipboard"
 msgid "From Clipboard"
@@ -146,7 +146,7 @@ msgctxt "@title:window"
 msgid "Documents"
 msgstr "Dokumentumok"
 
-#: controllers/documentsystem/filesystembrowser/filesystembrowsertool.cpp:33
+#: controllers/documentsystem/filesystembrowser/filesystembrowsertool.cpp:32
 #: controllers/documentsystem/filesystembrowser/filesystembrowsertoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
@@ -289,7 +289,7 @@ msgstr ""
 "Ha rákattint a <interface>Beszúrás</interface> gombra, a program a fent "
 "megadott beállításokkal beszúrja a létrejött adatokat a dokumentumba."
 
-#: controllers/io/synchronize/synchronizecontroller.cpp:34
+#: controllers/io/synchronize/synchronizecontroller.cpp:33
 #: controllers/shellwindow/viewareacontextmenu/viewareacontextmenucontroller.cpp:38
 #, kde-format
 msgctxt "@action:inmenu"
@@ -344,28 +344,28 @@ msgctxt "@action Redo: [change]"
 msgid "Redo: %1"
 msgstr "Újra végrehajtás: %1"
 
-#: controllers/view/zoom/zoomcontroller.cpp:42
+#: controllers/view/zoom/zoomcontroller.cpp:41
 #, kde-format
 msgid "Zoom"
 msgstr "Nagyítás"
 
-#: controllers/view/zoom/zoomcontroller.cpp:51
+#: controllers/view/zoom/zoomcontroller.cpp:50
 #, kde-format
 msgctxt "zoom-factor (percentage)"
 msgid "%1%"
 msgstr "%1%"
 
-#: controllers/view/zoom/zoomcontroller.cpp:64
+#: controllers/view/zoom/zoomcontroller.cpp:63
 #, kde-format
 msgid "&Fit to Width"
 msgstr "&Teljes szélesség"
 
-#: controllers/view/zoom/zoomcontroller.cpp:66
+#: controllers/view/zoom/zoomcontroller.cpp:65
 #, kde-format
 msgid "&Fit to Height"
 msgstr "Teljes ma&gasság"
 
-#: controllers/view/zoom/zoomcontroller.cpp:68
+#: controllers/view/zoom/zoomcontroller.cpp:67
 #, kde-format
 msgid "&Fit to Size"
 msgstr "Teljes mé&ret"
@@ -376,19 +376,19 @@ msgctxt "@info:tooltip"
 msgid "Zoom: %1%"
 msgstr "Nagyítás: %1%"
 
-#: core/system/documentsyncmanager_p.cpp:115
+#: core/system/documentsyncmanager_p.cpp:114
 #, kde-format
 msgctxt "@title:window"
 msgid "Save As"
 msgstr "Mentés másként"
 
-#: core/system/documentsyncmanager_p.cpp:214
+#: core/system/documentsyncmanager_p.cpp:213
 #, kde-format
 msgctxt "@title:window"
 msgid "Close"
 msgstr "Bezárás"
 
-#: core/system/documentsyncmanager_p.cpp:249
+#: core/system/documentsyncmanager_p.cpp:248
 #, kde-format
 msgctxt "@title:window"
 msgid "Reload"

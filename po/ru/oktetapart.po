@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: khexedit2part\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2021-01-02 09:07+0100\n"
+"POT-Creation-Date: 2024-12-24 03:20+0000\n"
 "PO-Revision-Date: 2022-10-12 16:07+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -71,27 +71,27 @@ msgctxt "@title:menu"
 msgid "Permissions"
 msgstr "Права доступа"
 
-#: partfactory.cpp:33
+#: partfactory.cpp:32
 #, kde-format
 msgid "OktetaPart"
 msgstr "OktetaPart"
 
-#: partfactory.cpp:35
+#: partfactory.cpp:34
 #, kde-format
 msgid "Embedded hex editor"
 msgstr "Компонент просмотра двоичных данных"
 
-#: partfactory.cpp:37
+#: partfactory.cpp:36
 #, kde-format
 msgid "Copyright 2003-%1 Friedrich W. H. Kossebau"
 msgstr "© Friedrich W. H. Kossebau, 2003-%1"
 
-#: partfactory.cpp:39
+#: partfactory.cpp:38
 #, kde-format
 msgid "Friedrich W. H. Kossebau"
 msgstr "Friedrich W. H. Kossebau"
 
-#: partfactory.cpp:39
+#: partfactory.cpp:38
 #, kde-format
 msgid "Author"
 msgstr "Автор"

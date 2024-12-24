@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetagui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-30 03:19+0000\n"
+"POT-Creation-Date: 2024-12-24 03:20+0000\n"
 "PO-Revision-Date: 2019-08-30 21:04+0200\n"
 "Last-Translator: Roman Paholík <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -16,19 +16,19 @@ msgstr ""
 "X-Generator: Lokalize 18.12.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: controller/clipboardcontroller.cpp:57
+#: controller/clipboardcontroller.cpp:56
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Copy"
 msgstr "&Kopírovať"
 
-#: controller/clipboardcontroller.cpp:67
+#: controller/clipboardcontroller.cpp:66
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Cu&t"
 msgstr "Vys&trihnúť"
 
-#: controller/clipboardcontroller.cpp:74
+#: controller/clipboardcontroller.cpp:73
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Paste"

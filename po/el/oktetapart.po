@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: oktetapart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2021-01-02 09:07+0100\n"
+"POT-Creation-Date: 2024-12-24 03:20+0000\n"
 "PO-Revision-Date: 2020-09-13 13:14+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -66,28 +66,28 @@ msgctxt "@title:menu"
 msgid "Permissions"
 msgstr "Δικαιώματα"
 
-#: partfactory.cpp:33
+#: partfactory.cpp:32
 #, kde-format
 msgid "OktetaPart"
 msgstr "Τμήμα Okteta"
 
-#: partfactory.cpp:35
+#: partfactory.cpp:34
 #, kde-format
 msgid "Embedded hex editor"
 msgstr "Ενσωματωμένος δεκαεξαδικός επεξεργαστής"
 
-#: partfactory.cpp:37
+#: partfactory.cpp:36
 #, fuzzy, kde-format
 #| msgid "Copyright 2003-2020 Friedrich W. H. Kossebau"
 msgid "Copyright 2003-%1 Friedrich W. H. Kossebau"
 msgstr "Copyright 2003-2020 Friedrich W. H. Kossebau"
 
-#: partfactory.cpp:39
+#: partfactory.cpp:38
 #, kde-format
 msgid "Friedrich W. H. Kossebau"
 msgstr "Friedrich W. H. Kossebau"
 
-#: partfactory.cpp:39
+#: partfactory.cpp:38
 #, kde-format
 msgid "Author"
 msgstr "Συγγραφέας"

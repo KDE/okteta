@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-02 03:20+0000\n"
+"POT-Creation-Date: 2024-12-24 03:20+0000\n"
 "PO-Revision-Date: 2024-03-30 19:46\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -53,7 +53,7 @@ msgctxt "@option:check set the document to read-write"
 msgid "Set Read-write"
 msgstr "设为可读写"
 
-#: controllers/document/terminal/terminaltool.cpp:32
+#: controllers/document/terminal/terminaltool.cpp:31
 #: controllers/document/terminal/terminaltoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
@@ -105,19 +105,19 @@ msgctxt "@action:inmenu"
 msgid "Close All Other"
 msgstr "关闭其他"
 
-#: controllers/documentsystem/creator/creatorcontroller.cpp:40
+#: controllers/documentsystem/creator/creatorcontroller.cpp:37
 #, kde-format
 msgctxt "@title:menu create new byte arrays from different sources"
 msgid "New"
 msgstr "新建"
 
-#: controllers/documentsystem/creator/creatorcontroller.cpp:53
+#: controllers/documentsystem/creator/creatorcontroller.cpp:50
 #, kde-format
 msgctxt "@item:inmenu create a new empty document"
 msgid "Empty"
 msgstr "空文件"
 
-#: controllers/documentsystem/creator/creatorcontroller.cpp:64
+#: controllers/documentsystem/creator/creatorcontroller.cpp:61
 #, kde-format
 msgctxt "@item:inmenu create a new document from data in the clipboard"
 msgid "From Clipboard"
@@ -144,7 +144,7 @@ msgctxt "@title:window"
 msgid "Documents"
 msgstr "文件"
 
-#: controllers/documentsystem/filesystembrowser/filesystembrowsertool.cpp:33
+#: controllers/documentsystem/filesystembrowser/filesystembrowsertool.cpp:32
 #: controllers/documentsystem/filesystembrowser/filesystembrowsertoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
@@ -287,7 +287,7 @@ msgstr ""
 "如果您按下<interface>插入</interface>按钮，您在上面生成的数据将会被插入到文档"
 "的光标当前所在位置。"
 
-#: controllers/io/synchronize/synchronizecontroller.cpp:34
+#: controllers/io/synchronize/synchronizecontroller.cpp:33
 #: controllers/shellwindow/viewareacontextmenu/viewareacontextmenucontroller.cpp:38
 #, kde-format
 msgctxt "@action:inmenu"
@@ -342,28 +342,28 @@ msgctxt "@action Redo: [change]"
 msgid "Redo: %1"
 msgstr "重做：%1"
 
-#: controllers/view/zoom/zoomcontroller.cpp:42
+#: controllers/view/zoom/zoomcontroller.cpp:41
 #, kde-format
 msgid "Zoom"
 msgstr "缩放"
 
-#: controllers/view/zoom/zoomcontroller.cpp:51
+#: controllers/view/zoom/zoomcontroller.cpp:50
 #, kde-format
 msgctxt "zoom-factor (percentage)"
 msgid "%1%"
 msgstr "%1%"
 
-#: controllers/view/zoom/zoomcontroller.cpp:64
+#: controllers/view/zoom/zoomcontroller.cpp:63
 #, kde-format
 msgid "&Fit to Width"
 msgstr "适合宽度(&F)"
 
-#: controllers/view/zoom/zoomcontroller.cpp:66
+#: controllers/view/zoom/zoomcontroller.cpp:65
 #, kde-format
 msgid "&Fit to Height"
 msgstr "适合高度(&F)"
 
-#: controllers/view/zoom/zoomcontroller.cpp:68
+#: controllers/view/zoom/zoomcontroller.cpp:67
 #, kde-format
 msgid "&Fit to Size"
 msgstr "适合尺寸(&F)"
@@ -374,19 +374,19 @@ msgctxt "@info:tooltip"
 msgid "Zoom: %1%"
 msgstr "缩放：%1%"
 
-#: core/system/documentsyncmanager_p.cpp:115
+#: core/system/documentsyncmanager_p.cpp:114
 #, kde-format
 msgctxt "@title:window"
 msgid "Save As"
 msgstr "另存为"
 
-#: core/system/documentsyncmanager_p.cpp:214
+#: core/system/documentsyncmanager_p.cpp:213
 #, kde-format
 msgctxt "@title:window"
 msgid "Close"
 msgstr "关闭"
 
-#: core/system/documentsyncmanager_p.cpp:249
+#: core/system/documentsyncmanager_p.cpp:248
 #, kde-format
 msgctxt "@title:window"
 msgid "Reload"

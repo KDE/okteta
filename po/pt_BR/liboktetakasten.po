@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-07 03:15+0000\n"
+"POT-Creation-Date: 2024-12-24 03:20+0000\n"
 "PO-Revision-Date: 2020-01-11 13:24-0300\n"
 "Last-Translator: André Marcelo Alvarenga <alvarenga@kde.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Lokalize 19.04.3\n"
 
-#: controllers/document/info/documentinfotool.cpp:48
+#: controllers/document/info/documentinfotool.cpp:47
 #: controllers/document/info/documentinfotoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
@@ -328,21 +328,21 @@ msgctxt "@title:window"
 msgid "Charset Conversion"
 msgstr "Conversão de codificações"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:47
+#: controllers/view/charsetconversion/charsetconversionview.cpp:46
 #, kde-format
 msgctxt ""
 "@item:inmenu Is converted _from_ charset (selected in combobox next to this)"
 msgid "From"
 msgstr "De"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:49
+#: controllers/view/charsetconversion/charsetconversionview.cpp:48
 #, kde-format
 msgctxt ""
 "@item:inmenu Is converted _to_ charset (selected in combobox next to this)"
 msgid "To"
 msgstr "Para"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:56
+#: controllers/view/charsetconversion/charsetconversionview.cpp:55
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The direction the bytes are converted, to or from the selected charset."
@@ -350,7 +350,7 @@ msgstr ""
 "A direção com que os bytes são convertidos, de ou para a codificação "
 "selecionada."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:60
+#: controllers/view/charsetconversion/charsetconversionview.cpp:59
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -360,34 +360,34 @@ msgstr ""
 "Selecione a direção com que os bytes são convertidos, de ou para a "
 "codificação selecionada."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:76
+#: controllers/view/charsetconversion/charsetconversionview.cpp:75
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The charset the bytes are converted to."
 msgstr "A codificação para a qual os bytes são convertidos."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:80
+#: controllers/view/charsetconversion/charsetconversionview.cpp:79
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Select the charset the bytes are converted to."
 msgstr "Selecione a codificação para a qual os bytes são convertidos."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:95
-#: controllers/view/checksum/checksumview.cpp:64
+#: controllers/view/charsetconversion/charsetconversionview.cpp:94
+#: controllers/view/checksum/checksumview.cpp:62
 #: controllers/view/filter/filterview.cpp:64
 #, kde-format
 msgctxt "@title:group"
 msgid "Parameters"
 msgstr "Parâmetros"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:101
+#: controllers/view/charsetconversion/charsetconversionview.cpp:100
 #, kde-format
 msgctxt ""
 "@option:check substitute bytes whose char is not part of the target charset"
 msgid "Substitute missing:"
 msgstr "Substituir os faltantes:"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:106
+#: controllers/view/charsetconversion/charsetconversionview.cpp:105
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -397,7 +397,7 @@ msgstr ""
 "Seleciona se os bytes serão substituídos por um byte predefinido, caso o "
 "caractere na codificação de origem não exista na de destino."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:110
+#: controllers/view/charsetconversion/charsetconversionview.cpp:109
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -408,21 +408,21 @@ msgstr ""
 "predefinido, caso o caractere na codificação de origem não exista na de "
 "destino."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:126
+#: controllers/view/charsetconversion/charsetconversionview.cpp:125
 #, kde-format
 msgctxt ""
 "@label:textbox byte to use for chars which are not part of the target charset"
 msgid "Substitute byte:"
 msgstr "Substituir o byte:"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:133
+#: controllers/view/charsetconversion/charsetconversionview.cpp:132
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte to use for chars which are not part of the target charset."
 msgstr ""
 "O byte a ser usado nos caracteres que não existam na codificação de destino."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:136
+#: controllers/view/charsetconversion/charsetconversionview.cpp:135
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -431,18 +431,18 @@ msgstr ""
 "Define o byte a ser usado nos caracteres que não existam na codificação de "
 "destino."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:170
+#: controllers/view/charsetconversion/charsetconversionview.cpp:169
 #, kde-format
 msgid "Con&vert"
 msgstr "Con&verter"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:173
+#: controllers/view/charsetconversion/charsetconversionview.cpp:172
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Converts the bytes in the selected range."
 msgstr "Converte os bytes no intervalo selecionado."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:175
+#: controllers/view/charsetconversion/charsetconversionview.cpp:174
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -454,13 +454,13 @@ msgstr ""
 "intervalo selecionado serão substituídos por bytes que representam o mesmo "
 "caractere na codificação selecionada."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:221
+#: controllers/view/charsetconversion/charsetconversionview.cpp:220
 #, kde-format
 msgctxt "@info"
 msgid "No bytes converted."
 msgstr "Nenhum byte foi convertido."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:222
+#: controllers/view/charsetconversion/charsetconversionview.cpp:221
 #, kde-format
 msgctxt "@info"
 msgid "1 byte converted."
@@ -468,13 +468,13 @@ msgid_plural "%1 bytes converted."
 msgstr[0] "1 byte convertido."
 msgstr[1] "%1 bytes convertidos."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:232
+#: controllers/view/charsetconversion/charsetconversionview.cpp:231
 #, kde-format
 msgctxt "@info"
 msgid "No bytes substituted."
 msgstr "Nenhum byte foi substituído."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:233
+#: controllers/view/charsetconversion/charsetconversionview.cpp:232
 #, kde-format
 msgctxt "@info"
 msgid "1 byte substituted."
@@ -482,7 +482,7 @@ msgid_plural "%1 bytes substituted."
 msgstr[0] "1 byte substituído."
 msgstr[1] "%1 bytes substituídos."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:242
+#: controllers/view/charsetconversion/charsetconversionview.cpp:241
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -498,31 +498,31 @@ msgctxt "@title:window of the tool to calculate checksums"
 msgid "Checksum"
 msgstr "Soma de verificação"
 
-#: controllers/view/checksum/checksumview.cpp:48
+#: controllers/view/checksum/checksumview.cpp:46
 #, kde-format
 msgctxt "@label:listbox algorithm to use for the checksum"
 msgid "Algorithm:"
 msgstr "Algoritmo:"
 
-#: controllers/view/checksum/checksumview.cpp:55
+#: controllers/view/checksum/checksumview.cpp:53
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Select the algorithm to use for the checksum."
 msgstr "Selecione o algoritmo a ser usado para a soma de verificação."
 
-#: controllers/view/checksum/checksumview.cpp:82
+#: controllers/view/checksum/checksumview.cpp:80
 #, kde-format
 msgctxt "@action:button calculate the checksum"
 msgid "&Calculate"
 msgstr "&Calcular"
 
-#: controllers/view/checksum/checksumview.cpp:85
+#: controllers/view/checksum/checksumview.cpp:83
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Calculate the checksum for the bytes in the selected range."
 msgstr "Calcular a soma de verificação para os bytes no intervalo selecionado."
 
-#: controllers/view/checksum/checksumview.cpp:87
+#: controllers/view/checksum/checksumview.cpp:85
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -719,7 +719,7 @@ msgstr ""
 #: controllers/view/info/infoview.cpp:184
 #: controllers/view/structures/datatypes/datainformation.cpp:59
 #: controllers/view/structures/datatypes/datainformation.cpp:62
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:219
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:218
 #, kde-format
 msgid "1 byte"
 msgid_plural "%1 bytes"
@@ -757,25 +757,25 @@ msgid "CRC-64"
 msgstr "CRC-64"
 
 #. i18nc("@item:inlistbox", "Custom"));
-#: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:32
+#: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:29
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "ECMA-182"
 msgstr "ECMA-182"
 
-#: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:33
+#: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:30
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "ISO 3309"
 msgstr "ISO 3309"
 
-#: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:39
+#: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:36
 #, kde-format
 msgctxt "@label:listbox variant used to select the CRC-64 variant"
 msgid "CRC-64 variant:"
 msgstr "Variante CRC-64:"
 
-#: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:42
+#: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:39
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "CRC-64 variant used by calculation."
@@ -1234,7 +1234,7 @@ msgstr ""
 
 #: controllers/view/poddecoder/podtableview.cpp:257
 #: controllers/view/selectrange/selectrangeview.cpp:139
-#: controllers/view/structures/structureview.cpp:335
+#: controllers/view/structures/structureview.cpp:334
 #, kde-format
 msgctxt "@action:button"
 msgid "&Select"
@@ -1331,26 +1331,26 @@ msgctxt "@label:textbox"
 msgid "UTF-8"
 msgstr "UTF-8"
 
-#: controllers/view/print/printtool.cpp:299
-#: controllers/view/print/printtool.cpp:326
+#: controllers/view/print/printtool.cpp:297
+#: controllers/view/print/printtool.cpp:324
 #, kde-format
 msgctxt "@title:window"
 msgid "Print Byte Array %1"
 msgstr "Imprimir a lista de bytes %1"
 
-#: controllers/view/print/printtool.cpp:324
+#: controllers/view/print/printtool.cpp:322
 #, kde-format
 msgctxt "@info"
 msgid "Could not print."
 msgstr "Não foi possível imprimir."
 
-#: controllers/view/print/printtool.cpp:361
+#: controllers/view/print/printtool.cpp:359
 #, kde-format
 msgctxt "in the header of the printed page, e.g. Page 2 of 20"
 msgid "Page %p of %P"
 msgstr "Página %p de %P"
 
-#: controllers/view/print/printtool.cpp:367
+#: controllers/view/print/printtool.cpp:365
 #, kde-format
 msgctxt "in the footer of the printed page, e.g. Printed by: Joe User"
 msgid "Printed by: %U"
@@ -1403,25 +1403,25 @@ msgstr ""
 "O início da lista de bytes foi atingido.<nl/>Deseja continuar a partir do "
 "fim?"
 
-#: controllers/view/replace/replacedialog.cpp:49
+#: controllers/view/replace/replacedialog.cpp:48
 #, kde-format
 msgctxt "@title:window"
 msgid "Replace Bytes"
 msgstr "Substituir bytes"
 
-#: controllers/view/replace/replacedialog.cpp:51
+#: controllers/view/replace/replacedialog.cpp:50
 #, kde-format
 msgctxt "@action;button"
 msgid "&Replace"
 msgstr "Substitui&r"
 
-#: controllers/view/replace/replacedialog.cpp:53
+#: controllers/view/replace/replacedialog.cpp:52
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Start replace"
 msgstr "Iniciar substituição"
 
-#: controllers/view/replace/replacedialog.cpp:55
+#: controllers/view/replace/replacedialog.cpp:54
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1433,13 +1433,13 @@ msgstr ""
 "introduziu acima serão pesquisados dentro da lista de bytes, sendo que "
 "qualquer ocorrência será substituída pelos bytes de substituição."
 
-#: controllers/view/replace/replacedialog.cpp:63
+#: controllers/view/replace/replacedialog.cpp:62
 #, kde-format
 msgctxt "@title:group"
 msgid "Replace With"
 msgstr "Substituir por"
 
-#: controllers/view/replace/replacedialog.cpp:70
+#: controllers/view/replace/replacedialog.cpp:69
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1449,13 +1449,13 @@ msgstr ""
 "Informe os bytes a serem substituídos ou selecione os bytes anteriores na "
 "lista."
 
-#: controllers/view/replace/replacedialog.cpp:79
+#: controllers/view/replace/replacedialog.cpp:78
 #, kde-format
 msgctxt "@option:check"
 msgid "&Prompt on replace"
 msgstr "&Perguntar antes de substituir"
 
-#: controllers/view/replace/replacedialog.cpp:80
+#: controllers/view/replace/replacedialog.cpp:79
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Ask before replacing each match found."
@@ -2416,59 +2416,59 @@ msgctxt "value of a data structure (primitive type)"
 msgid "Value"
 msgstr "Valor"
 
-#: controllers/view/structures/structureview.cpp:97
+#: controllers/view/structures/structureview.cpp:96
 #, kde-format
 msgctxt "@action:button"
 msgid "Validate"
 msgstr "Validar"
 
-#: controllers/view/structures/structureview.cpp:99
+#: controllers/view/structures/structureview.cpp:98
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Validate all structures."
 msgstr "Validar todas as estruturas."
 
-#: controllers/view/structures/structureview.cpp:121
+#: controllers/view/structures/structureview.cpp:120
 #, kde-format
 msgctxt "@action:button"
 msgid "Script console"
 msgstr "Console do script"
 
-#: controllers/view/structures/structureview.cpp:123
+#: controllers/view/structures/structureview.cpp:122
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open script console."
 msgstr "Abrir console do script."
 
-#: controllers/view/structures/structureview.cpp:127
+#: controllers/view/structures/structureview.cpp:126
 #, kde-format
 msgctxt "@action:button"
 msgid "Settings"
 msgstr "Configurações"
 
-#: controllers/view/structures/structureview.cpp:129
+#: controllers/view/structures/structureview.cpp:128
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open settings."
 msgstr "Abrir configurações."
 
-#: controllers/view/structures/structureview.cpp:160
+#: controllers/view/structures/structureview.cpp:159
 #, kde-format
 msgid "Value Display"
 msgstr "Exibição dos valores"
 
-#: controllers/view/structures/structureview.cpp:172
+#: controllers/view/structures/structureview.cpp:171
 #, kde-format
 msgid "Structures management"
 msgstr "Gerenciamento de estruturas"
 
-#: controllers/view/structures/structureview.cpp:259
+#: controllers/view/structures/structureview.cpp:258
 #, kde-format
 msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Unlock"
 msgstr "Desbloquear"
 
-#: controllers/view/structures/structureview.cpp:261
+#: controllers/view/structures/structureview.cpp:260
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -2478,19 +2478,19 @@ msgstr ""
 "Desbloquear a estrutura selecionada, por ex., a posição inicial é sempre "
 "definida com a posição atual do cursor."
 
-#: controllers/view/structures/structureview.cpp:266
+#: controllers/view/structures/structureview.cpp:265
 #, kde-format
 msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Lock"
 msgstr "Bloquear"
 
-#: controllers/view/structures/structureview.cpp:268
+#: controllers/view/structures/structureview.cpp:267
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Lock selected structure to current offset."
 msgstr "Bloquear a estrutura selecionada na posição atual."
 
-#: controllers/view/structures/structureview.cpp:292
+#: controllers/view/structures/structureview.cpp:291
 #, kde-format
 msgctxt "@title:window"
 msgid "Structures Script Console"
@@ -2678,31 +2678,31 @@ msgctxt "@item:inmenu"
 msgid "&Rows"
 msgstr "&Linhas"
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:37
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:36
 #, kde-format
 msgctxt "@title:menu submenu to select the view profile or change it"
 msgid "View Profile"
 msgstr "Perfil de visualização"
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:48
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:47
 #, kde-format
 msgctxt "@action:inmenu create a new view profile"
 msgid "Create New..."
 msgstr "Criar novo..."
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:55
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:54
 #, kde-format
 msgctxt "@action:inmenu save changed to the view profile to the base profile"
 msgid "Save Changes"
 msgstr "Salvar alterações"
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:62
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:61
 #, kde-format
 msgctxt "@action:inmenu reset settings back to those of the saved base profile"
 msgid "Reset Changes"
 msgstr "Restaurar as alterações"
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:182
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:181
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:180
 #, kde-format
 msgctxt "@window:title"
@@ -2820,7 +2820,7 @@ msgid "Values"
 msgstr "Valores"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:137
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:52
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:51
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:38
 #, kde-format
 msgctxt ""
@@ -2829,7 +2829,7 @@ msgid "Hexadecimal"
 msgstr "Hexadecimal"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:139
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:53
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:52
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:39
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
@@ -2837,7 +2837,7 @@ msgid "Decimal"
 msgstr "Decimal"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:141
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:54
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:53
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:40
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
@@ -2845,7 +2845,7 @@ msgid "Octal"
 msgstr "Octal"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:143
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:55
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:54
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:41
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
@@ -2987,73 +2987,73 @@ msgctxt "@window:title"
 msgid "\"%1\" View Profile"
 msgstr "\"%1\" perfil de visualização"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:41
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:40
 #, kde-format
 msgctxt "@info:status short for: Insert mode"
 msgid "INS"
 msgstr "INS"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:42
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:41
 #, kde-format
 msgctxt "@info:status short for: Overwrite mode"
 msgid "OVR"
 msgstr "SOB"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:43
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:42
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Insert mode"
 msgstr "Modo de inserção"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:44
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:43
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Overwrite mode"
 msgstr "Modo de substituição"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:59
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:58
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Coding of the value interpretation in the current view."
 msgstr "A codificação na interpretação do valor do modo de exibição atual."
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:67
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:66
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Encoding in the character column of the current view."
 msgstr "A codificação na coluna de caracteres do modo de exibição atual."
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:105
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:202
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:104
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:201
 #, kde-format
 msgid "Offset: %1"
 msgstr "Posição: %1"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:114
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:113
 #, kde-format
 msgid "%1 bytes"
 msgstr "%1 bytes"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:116
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:115
 #, kde-format
 msgctxt "@info:status selection: start offset - end offset ()"
 msgid "Selection: %1 - %2 (%3)"
 msgstr "Seleção: %1 - %2 (%3)"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:165
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:164
 #, kde-format
 msgctxt "@info:status offset value not available"
 msgid "Offset: -"
 msgstr "Posição: -"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:166
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:223
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:165
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:222
 #, kde-format
 msgctxt "@info:status offset value not available"
 msgid "Selection: -"
 msgstr "Seleção: -"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:221
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:220
 #, kde-format
 msgctxt "@info:status selection: start offset - end offset (number of bytes)"
 msgid "Selection: %1 - %2 (%3)"

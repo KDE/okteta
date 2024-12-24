@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-02 03:20+0000\n"
+"POT-Creation-Date: 2024-12-24 03:20+0000\n"
 "PO-Revision-Date: 2018-05-28 13:52+0100\n"
 "Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -54,7 +54,7 @@ msgctxt "@option:check set the document to read-write"
 msgid "Set Read-write"
 msgstr "Lesen/Schreiben-Modus"
 
-#: controllers/document/terminal/terminaltool.cpp:32
+#: controllers/document/terminal/terminaltool.cpp:31
 #: controllers/document/terminal/terminaltoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
@@ -106,19 +106,19 @@ msgctxt "@action:inmenu"
 msgid "Close All Other"
 msgstr "Alle anderen schließen"
 
-#: controllers/documentsystem/creator/creatorcontroller.cpp:40
+#: controllers/documentsystem/creator/creatorcontroller.cpp:37
 #, kde-format
 msgctxt "@title:menu create new byte arrays from different sources"
 msgid "New"
 msgstr "Neu"
 
-#: controllers/documentsystem/creator/creatorcontroller.cpp:53
+#: controllers/documentsystem/creator/creatorcontroller.cpp:50
 #, kde-format
 msgctxt "@item:inmenu create a new empty document"
 msgid "Empty"
 msgstr "Leer"
 
-#: controllers/documentsystem/creator/creatorcontroller.cpp:64
+#: controllers/documentsystem/creator/creatorcontroller.cpp:61
 #, kde-format
 msgctxt "@item:inmenu create a new document from data in the clipboard"
 msgid "From Clipboard"
@@ -145,7 +145,7 @@ msgctxt "@title:window"
 msgid "Documents"
 msgstr "Dokumente"
 
-#: controllers/documentsystem/filesystembrowser/filesystembrowsertool.cpp:33
+#: controllers/documentsystem/filesystembrowser/filesystembrowsertool.cpp:32
 #: controllers/documentsystem/filesystembrowser/filesystembrowsertoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
@@ -291,7 +291,7 @@ msgstr ""
 "anhand der oben eingegebenen Einstellungen generiert und an der Cursor-"
 "Position im Dokument eingefügt."
 
-#: controllers/io/synchronize/synchronizecontroller.cpp:34
+#: controllers/io/synchronize/synchronizecontroller.cpp:33
 #: controllers/shellwindow/viewareacontextmenu/viewareacontextmenucontroller.cpp:38
 #, kde-format
 msgctxt "@action:inmenu"
@@ -346,28 +346,28 @@ msgctxt "@action Redo: [change]"
 msgid "Redo: %1"
 msgstr "Wiederherstellen: %1"
 
-#: controllers/view/zoom/zoomcontroller.cpp:42
+#: controllers/view/zoom/zoomcontroller.cpp:41
 #, kde-format
 msgid "Zoom"
 msgstr "Ansicht"
 
-#: controllers/view/zoom/zoomcontroller.cpp:51
+#: controllers/view/zoom/zoomcontroller.cpp:50
 #, kde-format
 msgctxt "zoom-factor (percentage)"
 msgid "%1%"
 msgstr "%1 %"
 
-#: controllers/view/zoom/zoomcontroller.cpp:64
+#: controllers/view/zoom/zoomcontroller.cpp:63
 #, kde-format
 msgid "&Fit to Width"
 msgstr "Auf &Breite einpassen"
 
-#: controllers/view/zoom/zoomcontroller.cpp:66
+#: controllers/view/zoom/zoomcontroller.cpp:65
 #, kde-format
 msgid "&Fit to Height"
 msgstr "Auf &Höhe einpassen"
 
-#: controllers/view/zoom/zoomcontroller.cpp:68
+#: controllers/view/zoom/zoomcontroller.cpp:67
 #, kde-format
 msgid "&Fit to Size"
 msgstr "Auf &Größe einpassen"
@@ -378,19 +378,19 @@ msgctxt "@info:tooltip"
 msgid "Zoom: %1%"
 msgstr "Vergrößerung: %1 %"
 
-#: core/system/documentsyncmanager_p.cpp:115
+#: core/system/documentsyncmanager_p.cpp:114
 #, kde-format
 msgctxt "@title:window"
 msgid "Save As"
 msgstr "Speichern unter ..."
 
-#: core/system/documentsyncmanager_p.cpp:214
+#: core/system/documentsyncmanager_p.cpp:213
 #, kde-format
 msgctxt "@title:window"
 msgid "Close"
 msgstr "Schließen"
 
-#: core/system/documentsyncmanager_p.cpp:249
+#: core/system/documentsyncmanager_p.cpp:248
 #, kde-format
 msgctxt "@title:window"
 msgid "Reload"

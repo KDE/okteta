@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: khexedit2part\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2021-01-02 09:07+0100\n"
+"POT-Creation-Date: 2024-12-24 03:20+0000\n"
 "PO-Revision-Date: 2007-08-20 13:27+0545\n"
 "Last-Translator: Nabin Gautam <nabin@mpp.org.np>\n"
 "Language-Team: Nepali <info@mpp.org.np>\n"
@@ -63,27 +63,27 @@ msgctxt "@title:menu"
 msgid "Permissions"
 msgstr ""
 
-#: partfactory.cpp:33
+#: partfactory.cpp:32
 #, kde-format
 msgid "OktetaPart"
 msgstr ""
 
-#: partfactory.cpp:35
+#: partfactory.cpp:34
 #, kde-format
 msgid "Embedded hex editor"
 msgstr "सम्मिलित हेक्स सम्पादक"
 
-#: partfactory.cpp:37
+#: partfactory.cpp:36
 #, kde-format
 msgid "Copyright 2003-%1 Friedrich W. H. Kossebau"
 msgstr ""
 
-#: partfactory.cpp:39
+#: partfactory.cpp:38
 #, kde-format
 msgid "Friedrich W. H. Kossebau"
 msgstr ""
 
-#: partfactory.cpp:39
+#: partfactory.cpp:38
 #, kde-format
 msgid "Author"
 msgstr "लेखक"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-30 03:19+0000\n"
+"POT-Creation-Date: 2024-12-24 03:20+0000\n"
 "PO-Revision-Date: 2024-03-30 19:46\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -17,19 +17,19 @@ msgstr ""
 "X-Crowdin-File: /kf5-stable/messages/okteta/liboktetagui.pot\n"
 "X-Crowdin-File-ID: 7163\n"
 
-#: controller/clipboardcontroller.cpp:57
+#: controller/clipboardcontroller.cpp:56
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Copy"
 msgstr "复制(&C)"
 
-#: controller/clipboardcontroller.cpp:67
+#: controller/clipboardcontroller.cpp:66
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Cu&t"
 msgstr "剪切(&T)"
 
-#: controller/clipboardcontroller.cpp:74
+#: controller/clipboardcontroller.cpp:73
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Paste"
