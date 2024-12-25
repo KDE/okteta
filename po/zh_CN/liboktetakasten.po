@@ -43,7 +43,7 @@ msgstr "类型："
 #: controllers/document/info/documentinfoview.cpp:81
 #, kde-format
 msgid "Location:"
-msgstr "饱和度："
+msgstr "位置："
 
 #: controllers/document/info/documentinfoview.cpp:86
 #: controllers/view/structures/datatypes/datainformation.cpp:237
@@ -341,7 +341,7 @@ msgstr "来源"
 msgctxt ""
 "@item:inmenu Is converted _to_ charset (selected in combobox next to this)"
 msgid "To"
-msgstr "收件人"
+msgstr "目标"
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:61
 #, kde-format
@@ -3365,7 +3365,7 @@ msgstr "数值编码："
 #, kde-format
 msgctxt "@label:textbox substring which separates the values"
 msgid "Separation:"
-msgstr "分离度："
+msgstr "分隔符："
 
 #: gui/io/streamencoder/viewhtml/bytearrayviewhtmlstreamencoder.cpp:37
 #, kde-format
