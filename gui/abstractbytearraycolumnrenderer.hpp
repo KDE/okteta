@@ -14,7 +14,6 @@
 #include "linepositionrange.hpp"
 #include "linerange.hpp"
 // Okteta core
-#include <Okteta/OktetaCore>
 #include <Okteta/Address>
 
 class QPainter;

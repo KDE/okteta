@@ -12,6 +12,7 @@
 // lib
 #include "abstractbytearraycolumnrenderer.hpp"
 // Okteta core
+#include <Okteta/OktetaCore>
 #include <Okteta/Byte>
 
 namespace Okteta {
