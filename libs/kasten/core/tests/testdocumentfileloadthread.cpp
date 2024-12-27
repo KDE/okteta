@@ -11,7 +11,6 @@
 // lib
 #include "testdocument.hpp"
 // Qt
-#include <QByteArray>
 #include <QDataStream>
 #include <QFile>
 #include <QCoreApplication>

@@ -9,8 +9,6 @@
 #ifndef KASTEN_CHAR8_HPP
 #define KASTEN_CHAR8_HPP
 
-// Okteta gui
-#include <Okteta/OktetaGui>
 // Okteta core
 #include <Okteta/Character>
 // Qt

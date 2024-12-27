@@ -11,6 +11,8 @@
 
 // Kasten core
 #include <Kasten/AbstractModelDataGenerator>
+// Qt
+#include <QByteArray>
 
 namespace Kasten {
 

@@ -14,7 +14,6 @@
 #include <KLocalizedString>
 // Qt
 #include <QMimeData>
-#include <QByteArray>
 
 namespace Kasten {
 

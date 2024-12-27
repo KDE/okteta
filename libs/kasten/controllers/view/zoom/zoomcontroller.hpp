@@ -11,7 +11,6 @@
 
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
-#include <Kasten/ZoomLevelsQueryable>
 
 class KXMLGUIClient;
 class QAction;
@@ -20,6 +19,7 @@ namespace Kasten {
 
 namespace If {
 class Zoomable;
+class ZoomLevelsQueryable;
 }
 
 class ZoomController : public AbstractXmlGuiController

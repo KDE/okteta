@@ -10,6 +10,7 @@
 #define KASTEN_TESTDOCUMENTFILELOADTHREAD_HPP
 
 // Qt
+#include <QByteArray>
 #include <QThread>
 
 class QFile;

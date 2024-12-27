@@ -10,6 +10,7 @@
 
 // Kasten gui
 #include <Kasten/Zoomable>
+#include <Kasten/ZoomLevelsQueryable>
 // Kasten core
 #include <Kasten/AbstractModel>
 // KF

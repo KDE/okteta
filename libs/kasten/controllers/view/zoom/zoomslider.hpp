@@ -9,8 +9,6 @@
 #ifndef KASTEN_ZOOMSLIDER_HPP
 #define KASTEN_ZOOMSLIDER_HPP
 
-// Kasten gui
-#include <Kasten/ZoomLevelsQueryable>
 // Qt
 #include <QWidget>
 
@@ -22,6 +20,7 @@ namespace Kasten {
 class AbstractModel;
 namespace If {
 class Zoomable;
+class ZoomLevelsQueryable;
 }
 
 class ZoomSlider : public QWidget
