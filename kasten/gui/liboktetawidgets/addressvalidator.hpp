@@ -10,7 +10,6 @@
 #define KASTEN_ADDRESSVALIDATOR_HPP
 
 // Okteta core
-#include <Okteta/OktetaCore>
 #include <Okteta/Address>
 // Qt
 #include <QValidator>

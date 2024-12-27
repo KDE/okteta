@@ -9,12 +9,11 @@
 #include "bytearraysequencegenerator.hpp"
 
 // Okteta core
-#include <Okteta/AbstractByteArrayModel>
+#include <Okteta/Byte>
 // KF
 #include <KLocalizedString>
 // Qt
 #include <QMimeData>
-#include <QByteArray>
 
 namespace Kasten {
 

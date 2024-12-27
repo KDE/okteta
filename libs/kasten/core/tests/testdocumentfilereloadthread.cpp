@@ -10,10 +10,7 @@
 
 // lib
 #include "testdocument.hpp"
-// KF
-#include <KLocalizedString>
 // Qt
-#include <QUrl>
 #include <QDataStream>
 #include <QFile>
 

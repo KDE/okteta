@@ -17,7 +17,6 @@
 #include <Kasten/Okteta/ByteArrayDocument>
 // Okteta core
 #include <Okteta/AbstractByteArrayModel>
-#include <Okteta/ArrayChangeMetricsList>
 // KF
 #include <KLocalizedString>
 // Qt

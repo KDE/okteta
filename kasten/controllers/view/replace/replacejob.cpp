@@ -12,10 +12,7 @@
 #include <bytearraysearchjob.hpp>
 // Okteta Kasten gui
 #include <Kasten/Okteta/ByteArrayView>
-// Okteta Kasten core
-#include <Kasten/Okteta/ByteArrayDocument>
 // Okteta core
-#include <Okteta/CharCodec>
 #include <Okteta/AbstractByteArrayModel>
 // Qt
 #include <QApplication>

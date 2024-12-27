@@ -13,8 +13,6 @@
 #include "removepiecetablechange.hpp"
 #include "replacepiecetablechange.hpp"
 #include "swaprangespiecetablechange.hpp"
-//
-#include <arraychangemetricslist.hpp>
 
 namespace KPieceTable {
 

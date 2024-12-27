@@ -22,7 +22,6 @@
 #include <Kasten/AbstractModel>
 // KF
 #include <KXMLGUIClient>
-#include <KXMLGUIFactory>
 #include <KActionCollection>
 #include <KLocalizedString>
 #include <KSelectAction>

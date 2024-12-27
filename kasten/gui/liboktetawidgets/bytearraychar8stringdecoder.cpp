@@ -10,7 +10,6 @@
 
 // Okteta core
 #include <Okteta/CharCodec>
-#include <Okteta/Character>
 // Qt
 #include <QString>
 // Std

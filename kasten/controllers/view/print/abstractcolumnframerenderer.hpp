@@ -14,8 +14,6 @@
 // Okteta gui
 #include <Okteta/PixelMetrics>
 #include <Okteta/Line>
-// Okteta core
-#include <Okteta/AddressRange>
 // Std
 #include <memory>
 

@@ -13,7 +13,6 @@
 // Okteta Kasten
 #include <Kasten/Okteta/ByteArrayViewProfileSynchronizer>
 #include <Kasten/Okteta/ByteArrayView>
-#include <Kasten/Okteta/ByteArrayDocument>
 // KF
 #include <KActionCollection>
 // Qt

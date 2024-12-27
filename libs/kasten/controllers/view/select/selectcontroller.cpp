@@ -10,7 +10,7 @@
 
 // Kasten gui
 #include <Kasten/DataSelectable>
-#include <Kasten/AbstractView>
+#include <Kasten/AbstractModel>
 // KF
 #include <KXMLGUIClient>
 #include <KActionCollection>

@@ -8,9 +8,6 @@
 
 #include "abstractpiecetablechange.hpp"
 
-// Qt
-#include <Qt>
-
 namespace KPieceTable {
 
 bool AbstractPieceTableChange::merge(const AbstractPieceTableChange* other)

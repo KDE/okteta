@@ -23,8 +23,6 @@
 
 namespace Kasten {
 
-class TabbedViews;
-
 class MultiViewAreasPrivate : public AbstractGroupedViewsPrivate
 {
 public:

@@ -9,8 +9,6 @@
 #include "multiviewareas_p.hpp"
 
 // lib
-#include "viewbox.hpp"
-#include "toolinlineviewwidget.hpp"
 #include <abstracttoolinlineview.hpp>
 #include <abstractview.hpp>
 // Kasten core

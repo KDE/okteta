@@ -11,9 +11,6 @@
 
 // Kasten core
 #include <Kasten/AbstractModelDataGenerator>
-// Qt
-#include <QObject>
-#include <QString>
 
 class KConfigGroup;
 

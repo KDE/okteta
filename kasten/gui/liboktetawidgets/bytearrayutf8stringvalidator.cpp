@@ -8,9 +8,6 @@
 
 #include "bytearrayutf8stringvalidator.hpp"
 
-// Okteta core
-#include <Okteta/Character>
-
 namespace Okteta {
 
 ByteArrayUtf8StringValidator::ByteArrayUtf8StringValidator() = default;

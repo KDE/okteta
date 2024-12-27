@@ -11,10 +11,6 @@
 
 // lib
 #include "abstractbytearraystreamencoder.hpp"
-// Okteta core
-#include <Okteta/OktetaCore>
-// Qt
-#include <QString>
 
 namespace Kasten {
 

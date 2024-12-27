@@ -14,7 +14,7 @@
 #include "bytearrayrawfilewritetojob.hpp"
 #include "bytearraydocument.hpp"
 // Okteta core
-#include <Okteta/PieceTableByteArrayModel>
+#include <Okteta/AbstractByteArrayModel>
 // Qt
 #include <QUrl>
 

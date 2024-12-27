@@ -19,7 +19,6 @@
 #include <Kasten/DocumentSyncManager>
 #include <Kasten/DocumentCreateManager>
 #include <Kasten/AbstractModelDataGenerator>
-#include <Kasten/AbstractModel>
 // KF
 #include <KProcess>
 // Qt

@@ -13,7 +13,6 @@
 #include <memory>
 
 class AbstractByteArrayFilterParameterSetEdit;
-class QByteArray;
 
 class ByteArrayFilterParameterSetEditFactory
 {

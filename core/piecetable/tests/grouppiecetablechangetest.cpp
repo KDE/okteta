@@ -13,8 +13,6 @@
 // test
 #include "testpiecetablechange.hpp"
 #include <piecetable/piecetable.hpp>
-//
-#include <arraychangemetricslist.hpp>
 // Qt
 #include <QTest>
 

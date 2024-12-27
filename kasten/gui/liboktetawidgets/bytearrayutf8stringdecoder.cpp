@@ -8,8 +8,6 @@
 
 #include "bytearrayutf8stringdecoder.hpp"
 
-// Okteta core
-#include <Okteta/Character>
 // Qt
 #include <QTextCodec>
 // Std

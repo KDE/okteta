@@ -12,6 +12,7 @@
 // lib
 #include "testdocument.hpp"
 // Qt
+#include <QByteArray>
 #include <QThread>
 // Std
 #include <memory>

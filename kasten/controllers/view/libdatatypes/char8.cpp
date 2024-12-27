@@ -8,6 +8,9 @@
 
 #include "char8.hpp"
 
+// Okteta gui
+#include <Okteta/OktetaGui>
+
 namespace Okteta {
 
 // TODO: add toDisplayString variant, tag /x and undefined for display formatting

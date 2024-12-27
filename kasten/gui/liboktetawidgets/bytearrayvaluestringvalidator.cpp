@@ -10,7 +10,6 @@
 
 // Okteta core
 #include <Okteta/ValueCodec>
-#include <Okteta/Character>
 
 namespace Okteta {
 

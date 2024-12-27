@@ -9,7 +9,6 @@
 #include "part.hpp"
 
 // part
-#include "partfactory.hpp"
 #include "browserextension.hpp"
 // Okteta Kasten controllers
 // #include <Kasten/Okteta/OverwriteOnlyControllerFactory>
@@ -19,12 +18,12 @@
 #include <Kasten/Okteta/SelectRangeControllerFactory>
 #include <Kasten/Okteta/SearchControllerFactory>
 #include <Kasten/Okteta/ReplaceControllerFactory>
-#include <Kasten/Okteta/BookmarksControllerFactory>
+// #include <Kasten/Okteta/BookmarksControllerFactory>
 #include <Kasten/Okteta/PrintControllerFactory>
 #include <Kasten/Okteta/ViewConfigControllerFactory>
 #include <Kasten/Okteta/ViewModeControllerFactory>
 #include <Kasten/Okteta/ViewContextMenuControllerFactory>
-#include <Kasten/Okteta/ViewStatusControllerFactory>
+// #include <Kasten/Okteta/ViewStatusControllerFactory>
 #include <Kasten/Okteta/ViewProfileControllerFactory>
 // Okteta Kasten
 #include <Kasten/Okteta/ByteArrayDocument>

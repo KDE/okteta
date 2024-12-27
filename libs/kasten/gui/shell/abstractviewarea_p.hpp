@@ -11,8 +11,6 @@
 
 // lib
 #include "abstractviewarea.hpp"
-// Qt
-#include <Qt>
 
 namespace Kasten {
 

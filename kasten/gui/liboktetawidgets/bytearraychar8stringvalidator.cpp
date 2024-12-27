@@ -11,7 +11,6 @@
 // lib
 #include "bytearraychar8stringdecoder.hpp"
 // Okteta core
-#include <Okteta/Character>
 #include <Okteta/CharCodec>
 
 namespace Okteta {
