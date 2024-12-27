@@ -16,7 +16,7 @@
 #include <Kasten/AbstractModelExporterConfigEditor>
 // Kasten core
 #include <Kasten/ModelCodecManager>
-#include <Kasten/AbstractDocument>
+#include <Kasten/AbstractModel>
 #include <Kasten/AbstractModelExporter>
 #include <Kasten/AbstractModelSelection>
 // KF
