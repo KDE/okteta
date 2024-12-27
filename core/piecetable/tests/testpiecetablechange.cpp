@@ -10,7 +10,6 @@
 
 // lib
 #include <piecetable/piecetable.hpp>
-#include <arraychangemetrics.hpp>
 // Qt
 #include <QString>
 

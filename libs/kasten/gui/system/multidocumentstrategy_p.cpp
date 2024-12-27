@@ -17,7 +17,6 @@
 // Kasten core
 #include <Kasten/ModelDataGenerateThread>
 #include <Kasten/AbstractModelDataGenerator>
-#include <Kasten/AbstractModel>
 // Qt
 #include <QClipboard>
 #include <QApplication>

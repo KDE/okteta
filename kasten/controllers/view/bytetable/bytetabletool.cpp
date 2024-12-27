@@ -15,8 +15,6 @@
 // Okteta Kasten core
 #include <Kasten/Okteta/ByteArrayDocument>
 // Okteta core
-#include <Okteta/Character>
-#include <Okteta/CharCodec>
 #include <Okteta/AbstractByteArrayModel>
 #include <Okteta/ChangesDescribable>
 // KF

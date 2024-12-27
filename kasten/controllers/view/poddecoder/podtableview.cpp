@@ -32,7 +32,6 @@
 #include <QMimeData>
 #include <QClipboard>
 #include <QApplication>
-#include <QFocusEvent>
 #include <QFontMetrics>
 #include <QIcon>
 

@@ -8,9 +8,6 @@
 
 #include "abstracttoolinlineview.hpp"
 
-// Qt
-#include <Qt>
-
 namespace Kasten {
 
 class AbstractToolInlineViewPrivate

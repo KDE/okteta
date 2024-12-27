@@ -14,8 +14,6 @@
 #include <Kasten/Okteta/ByteArrayDocument>
 // Kasten core
 #include <Kasten/AbstractModel>
-// Okteta gui
-#include <Okteta/OffsetFormat>
 // Okteta core
 #include <Okteta/TextByteArrayAnalyzer>
 #include <Okteta/CharCodec>

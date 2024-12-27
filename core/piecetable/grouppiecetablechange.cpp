@@ -8,8 +8,6 @@
 
 #include "grouppiecetablechange.hpp"
 
-// lib
-#include "piecetable.hpp"
 //
 #include <addressrangelist.hpp>
 #include <arraychangemetricslist.hpp>

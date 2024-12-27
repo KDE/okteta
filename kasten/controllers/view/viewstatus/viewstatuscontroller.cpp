@@ -15,7 +15,6 @@
 #include <Kasten/StatusBar>
 // Okteta core
 #include <Okteta/CharCodec>
-#include <Okteta/OktetaCore>
 // KF
 #include <KComboBox>
 #include <KLocalizedString>

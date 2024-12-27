@@ -11,7 +11,6 @@
 
 // Okteta core
 #include <Okteta/Byte>
-#include <Okteta/OktetaCore>
 // Qt
 #include <QSysInfo>
 

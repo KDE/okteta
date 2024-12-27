@@ -8,8 +8,6 @@
 
 #include "bytearrayutf8stringencoder.hpp"
 
-// Okteta core
-#include <Okteta/Character>
 // Qt
 #include <QByteArray>
 #include <QString>

@@ -15,9 +15,6 @@
 namespace Kasten {
 
 class ZoomSlider;
-namespace If {
-class Zoomable;
-}
 class StatusBar;
 
 class ZoomBarController : public AbstractXmlGuiController

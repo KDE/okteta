@@ -14,8 +14,6 @@
 // Okteta gui
 #include <Okteta/PixelMetrics>
 #include <Okteta/Line>
-// Okteta core
-#include <Okteta/AddressRange>
 
 namespace Okteta {
 class AbstractColumnRenderer;

@@ -11,12 +11,8 @@
 // Kasten gui
 #include <Kasten/AbstractGroupedViews>
 #include <Kasten/ViewManager>
-// Kasten core
-#include <Kasten/AbstractDocument>
 // KF
 #include <KXMLGUIClient>
-#include <KXMLGUIFactory>
-#include <KActionCollection>
 #include <KLocalizedString>
 #include <KStringHandler>
 // Qt

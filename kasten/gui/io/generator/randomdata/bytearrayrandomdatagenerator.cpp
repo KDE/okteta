@@ -8,8 +8,6 @@
 
 #include "bytearrayrandomdatagenerator.hpp"
 
-// Okteta core
-#include <Okteta/AbstractByteArrayModel>
 // KF
 #include <KConfigGroup>
 #include <KSharedConfig>

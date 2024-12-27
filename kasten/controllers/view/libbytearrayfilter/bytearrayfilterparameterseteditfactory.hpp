@@ -10,7 +10,6 @@
 #define KASTEN_BYTEARRAYFILTERPARAMETERSETEDITFACTORY_HPP
 
 class AbstractByteArrayFilterParameterSetEdit;
-class QByteArray;
 
 class ByteArrayFilterParameterSetEditFactory
 {

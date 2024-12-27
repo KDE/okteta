@@ -10,7 +10,6 @@
 
 // lib
 #include <multiviewareas.hpp>
-#include <tabbedviews.hpp>
 #include <viewmanager.hpp>
 #include <abstractview.hpp>
 #include <abstracttoolview.hpp>

@@ -20,7 +20,6 @@
 #include <Okteta/AbstractByteArrayView>
 // Okteta core
 #include <Okteta/AbstractByteArrayModel>
-#include <Okteta/Character>
 // KF
 #include <KLocalizedString>
 // Qt

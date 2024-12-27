@@ -8,8 +8,6 @@
 
 #include "abstractfinddialog.hpp"
 
-// Okteta core
-#include <Okteta/OktetaCore>
 // KF
 #include <KLocalizedString>
 // Qt

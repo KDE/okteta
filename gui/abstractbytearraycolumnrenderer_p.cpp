@@ -11,7 +11,6 @@
 // lib
 #include "oktetagui.hpp"
 #include "bytearraytableranges.hpp"
-#include "bytearraytablecursor.hpp"
 #include "bytearraytablelayout.hpp"
 #include "helper.hpp"
 // lib

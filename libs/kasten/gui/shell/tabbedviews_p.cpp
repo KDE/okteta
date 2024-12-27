@@ -9,10 +9,7 @@
 #include "tabbedviews_p.hpp"
 
 // lib
-#include "toolinlineviewwidget.hpp"
 #include <abstracttoolinlineview.hpp>
-// Kasten core
-#include <Kasten/AbstractDocument>
 // Qt
 #include <QDragMoveEvent>
 #include <QDropEvent>

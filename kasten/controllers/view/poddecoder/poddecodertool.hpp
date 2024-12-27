@@ -14,7 +14,6 @@
 // Kasten core
 #include <Kasten/AbstractTool>
 // Okteta core
-#include <Okteta/OktetaCore>
 #include <Okteta/Address>
 // Qt
 #include <QVector>

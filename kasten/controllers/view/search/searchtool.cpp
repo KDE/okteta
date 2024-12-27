@@ -20,7 +20,6 @@
 // Okteta Kasten core
 #include <Kasten/Okteta/ByteArrayDocument>
 // Okteta core
-#include <Okteta/CharCodec>
 #include <Okteta/AbstractByteArrayModel>
 // KF
 #include <KConfigGroup>

@@ -10,8 +10,6 @@
 
 // lib
 #include "piecetable.hpp"
-//
-#include <arraychangemetrics.hpp>
 // KF
 #include <KLocalizedString>
 

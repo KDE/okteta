@@ -18,7 +18,6 @@ class QMimeData;
 namespace Kasten {
 
 class OktetaProgram;
-class DocumentManager;
 class AbstractToolViewFactory;
 class AbstractToolFactory;
 class AbstractXmlGuiControllerFactory;

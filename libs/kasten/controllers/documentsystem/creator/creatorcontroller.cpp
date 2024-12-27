@@ -18,7 +18,6 @@
 #include <KLocalizedString>
 #include <KActionCollection>
 #include <KActionMenu>
-#include <KStandardAction>
 #include <KXMLGUIClient>
 
 namespace Kasten {
