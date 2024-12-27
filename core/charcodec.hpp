@@ -11,7 +11,6 @@
 
 // lib
 #include "oktetacore_export.hpp"
-#include "oktetacore.hpp"
 #include "byte.hpp"
 // Std
 #include <memory>

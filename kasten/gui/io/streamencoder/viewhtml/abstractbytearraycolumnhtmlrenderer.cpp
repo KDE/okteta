@@ -8,9 +8,6 @@
 
 #include "abstractbytearraycolumnhtmlrenderer.hpp"
 
-// Qt
-#include <QTextStream>
-
 namespace Kasten {
 
 AbstractByteArrayColumnHtmlRenderer::AbstractByteArrayColumnHtmlRenderer(const Okteta::AbstractByteArrayModel* byteArrayModel, Okteta::Address offset, const Okteta::CoordRange& coordRange,

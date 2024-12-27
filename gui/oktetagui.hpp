@@ -15,7 +15,6 @@
 #include "pixelmetrics.hpp"
 // Okteta core
 #include <Okteta/Byte>
-#include <Okteta/OktetaCore>
 // Qt
 #include <QChar>
 
