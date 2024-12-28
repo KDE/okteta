@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:41+0000\n"
+"POT-Creation-Date: 2024-12-28 02:06+0000\n"
 "PO-Revision-Date: 2019-08-12 18:24+0700\n"
 "Last-Translator: Wantoyo <wantoyek@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -17,25 +17,25 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: piecetable/insertpiecetablechange.cpp:26
+#: piecetable/insertpiecetablechange.cpp:24
 #, kde-format
 msgctxt "name of the change"
 msgid "Insert"
 msgstr "Sisip"
 
-#: piecetable/removepiecetablechange.cpp:26
+#: piecetable/removepiecetablechange.cpp:24
 #, kde-format
 msgctxt "name of the change"
 msgid "Remove"
 msgstr "Buang"
 
-#: piecetable/replacepiecetablechange.cpp:26
+#: piecetable/replacepiecetablechange.cpp:24
 #, kde-format
 msgctxt "name of the change"
 msgid "Replace"
 msgstr "Ganti"
 
-#: piecetable/swaprangespiecetablechange.cpp:26
+#: piecetable/swaprangespiecetablechange.cpp:24
 #, kde-format
 msgctxt "name of the change"
 msgid "Swap Ranges"

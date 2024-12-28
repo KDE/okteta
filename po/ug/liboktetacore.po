@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetacore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:41+0000\n"
+"POT-Creation-Date: 2024-12-28 02:06+0000\n"
 "PO-Revision-Date: 2013-09-08 07:05+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -17,25 +17,25 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: piecetable/insertpiecetablechange.cpp:26
+#: piecetable/insertpiecetablechange.cpp:24
 #, kde-format
 msgctxt "name of the change"
 msgid "Insert"
 msgstr "قىستۇر"
 
-#: piecetable/removepiecetablechange.cpp:26
+#: piecetable/removepiecetablechange.cpp:24
 #, kde-format
 msgctxt "name of the change"
 msgid "Remove"
 msgstr "چىقىرىۋەت"
 
-#: piecetable/replacepiecetablechange.cpp:26
+#: piecetable/replacepiecetablechange.cpp:24
 #, kde-format
 msgctxt "name of the change"
 msgid "Replace"
 msgstr "ئالماشتۇر"
 
-#: piecetable/swaprangespiecetablechange.cpp:26
+#: piecetable/swaprangespiecetablechange.cpp:24
 #, kde-format
 msgctxt "name of the change"
 msgid "Swap Ranges"

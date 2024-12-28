@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetacore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:41+0000\n"
+"POT-Creation-Date: 2024-12-28 02:06+0000\n"
 "PO-Revision-Date: 2008-12-28 00:25+0100\n"
 "Last-Translator: Friedrich W. H. Kossebau <kossebau@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -14,25 +14,25 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: piecetable/insertpiecetablechange.cpp:26
+#: piecetable/insertpiecetablechange.cpp:24
 #, kde-format
 msgctxt "name of the change"
 msgid "Insert"
 msgstr "Einfügen"
 
-#: piecetable/removepiecetablechange.cpp:26
+#: piecetable/removepiecetablechange.cpp:24
 #, kde-format
 msgctxt "name of the change"
 msgid "Remove"
 msgstr "Entfernen"
 
-#: piecetable/replacepiecetablechange.cpp:26
+#: piecetable/replacepiecetablechange.cpp:24
 #, kde-format
 msgctxt "name of the change"
 msgid "Replace"
 msgstr "Ersetzen"
 
-#: piecetable/swaprangespiecetablechange.cpp:26
+#: piecetable/swaprangespiecetablechange.cpp:24
 #, kde-format
 msgctxt "name of the change"
 msgid "Swap Ranges"
