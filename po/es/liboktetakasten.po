@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-24 03:20+0000\n"
+"POT-Creation-Date: 2024-12-28 03:37+0000\n"
 "PO-Revision-Date: 2023-06-14 19:51+0100\n"
 "Last-Translator: Sofía Priego <spriego@darksylvania.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -119,13 +119,13 @@ msgid "%1: %2"
 msgstr "%1: %2"
 
 #: controllers/view/bookmarks/bookmarkscontroller.cpp:240
-#: controllers/view/bookmarks/bookmarkstool.cpp:126
+#: controllers/view/bookmarks/bookmarkstool.cpp:124
 #, kde-format
 msgctxt "default name of a bookmark"
 msgid "Bookmark"
 msgstr "Marcador"
 
-#: controllers/view/bookmarks/bookmarkstool.cpp:40
+#: controllers/view/bookmarks/bookmarkstool.cpp:38
 #: controllers/view/bookmarks/bookmarkstoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
@@ -272,14 +272,14 @@ msgctxt "@info:tooltip column contains the character with the value"
 msgid "Character"
 msgstr "Carácter"
 
-#: controllers/view/bytetable/bytetabletool.cpp:35
+#: controllers/view/bytetable/bytetabletool.cpp:33
 #: controllers/view/bytetable/bytetabletoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
 msgid "Value/Char Table"
 msgstr "Tabla de valores/caracteres"
 
-#: controllers/view/bytetable/bytetabletool.cpp:89
+#: controllers/view/bytetable/bytetabletool.cpp:87
 #, kde-format
 msgid "Inserted 1 Byte"
 msgid_plural "Inserted %1 Bytes"
@@ -616,7 +616,7 @@ msgstr ""
 "lista."
 
 #: controllers/view/gotooffset/gotooffsetview.cpp:98
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:113
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:111
 #, kde-format
 msgctxt "@option:check"
 msgid "From c&ursor"
@@ -643,7 +643,7 @@ msgid "Extend the selection by the cursor move."
 msgstr "Extienda la selección moviendo el cursor."
 
 #: controllers/view/gotooffset/gotooffsetview.cpp:108
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:116
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:114
 #: controllers/view/selectrange/selectrangeview.cpp:115
 #, kde-format
 msgctxt "@option:check"
@@ -680,7 +680,7 @@ msgstr ""
 "documento hasta la posición indicada o, según su elección, el desplazamiento "
 "indicado arriba."
 
-#: controllers/view/info/infotool.cpp:37
+#: controllers/view/info/infotool.cpp:36
 #: controllers/view/info/infotoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
@@ -726,7 +726,7 @@ msgstr ""
 #: controllers/view/info/infoview.cpp:184
 #: controllers/view/structures/datatypes/datainformation.cpp:59
 #: controllers/view/structures/datatypes/datainformation.cpp:62
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:218
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:217
 #, kde-format
 msgid "1 byte"
 msgid_plural "%1 bytes"
@@ -813,14 +813,14 @@ msgid "Modular sum 8-bit"
 msgstr "Suma modular de 8 bits"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:28
-#: controllers/view/poddecoder/podtableview.cpp:84
+#: controllers/view/poddecoder/podtableview.cpp:83
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Big-endian"
 msgstr "Big endian"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:29
-#: controllers/view/poddecoder/podtableview.cpp:85
+#: controllers/view/poddecoder/podtableview.cpp:84
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Little-endian"
@@ -1050,7 +1050,7 @@ msgctxt "name of the filter; it does a logic XOR operation"
 msgid "operand XOR data"
 msgstr "operando XOR datos"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:73
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:71
 #: controllers/view/search/searchcontroller.cpp:112
 #: controllers/view/search/searchcontroller.cpp:118
 #, kde-format
@@ -1058,7 +1058,7 @@ msgctxt "@title:window"
 msgid "Find"
 msgstr "Buscar"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:85
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:83
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1068,19 +1068,19 @@ msgstr ""
 "Introduzca los bytes a buscar, o seleccione otros buscados previamente en la "
 "lista."
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:103
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:101
 #, kde-format
 msgctxt "@title:group"
 msgid "Options"
 msgstr "Opciones"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:108
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:106
 #, kde-format
 msgctxt "@option:check"
 msgid "C&ase sensitive"
 msgstr "Distinguir &mayúsculas"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:109
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:107
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1090,20 +1090,20 @@ msgstr ""
 "Realiza una búsqueda teniendo en cuenta mayúsculas y minúsculas: si "
 "introduce el patrón «Juan», no encontrará «juan» ni «JUAN», sino «Juan»."
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:111
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:109
 #, kde-format
 msgctxt "@option:check"
 msgid "&Whole words only"
 msgstr "Solo palabras comp&letas"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:112
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:110
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Require word boundaries in both ends of a match to succeed."
 msgstr ""
 "Solicitar límites de palabra en ambos extremos para satisfacer coincidencias."
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:114
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:112
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Start searching at the current cursor location rather than at the top."
@@ -1111,19 +1111,19 @@ msgstr ""
 "Comenzar a buscar a partir de la posición actual del cursor en lugar de "
 "desde el comienzo."
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:117
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:115
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Replace backwards."
 msgstr "Sustituir hacia atrás."
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:118
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:116
 #, kde-format
 msgctxt "@option:check"
 msgid "&Selected bytes"
 msgstr "Bytes &seleccionados"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:119
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:117
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Only search within the current selection."
@@ -1188,19 +1188,19 @@ msgctxt "@info:tooltip for column Value"
 msgid "The value of the bytes for the datatype"
 msgstr "El valor de los bytes del tipo de datos"
 
-#: controllers/view/poddecoder/podtableview.cpp:91
+#: controllers/view/poddecoder/podtableview.cpp:90
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte order to use for decoding the bytes."
 msgstr "El orden de bytes a usar para descodificar los bytes."
 
-#: controllers/view/poddecoder/podtableview.cpp:95
+#: controllers/view/poddecoder/podtableview.cpp:94
 #, kde-format
 msgctxt "@option:check"
 msgid "Unsigned as hexadecimal:"
 msgstr "Sin signo como hexadecimal:"
 
-#: controllers/view/poddecoder/podtableview.cpp:104
+#: controllers/view/poddecoder/podtableview.cpp:103
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1210,7 +1210,7 @@ msgstr ""
 "Establece si los valores de los tipos enteros sin signo se muestran en "
 "hexadecimal en lugar de en decimal."
 
-#: controllers/view/poddecoder/podtableview.cpp:140
+#: controllers/view/poddecoder/podtableview.cpp:139
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1220,19 +1220,19 @@ msgstr ""
 "El nuevo valor necesita <emphasis>menos</emphasis> bytes (%1 en lugar de %2)."
 "<nl/>¿Mantener los bytes no usados o eliminarlos?"
 
-#: controllers/view/poddecoder/podtableview.cpp:145
+#: controllers/view/poddecoder/podtableview.cpp:144
 #, kde-format
 msgctxt "@action:button keep the unused bytes"
 msgid "&Keep"
 msgstr "&Mantener"
 
-#: controllers/view/poddecoder/podtableview.cpp:148
+#: controllers/view/poddecoder/podtableview.cpp:147
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Keep the unused bytes with their old values."
 msgstr "Mantener los bytes no usados con sus valores anteriores."
 
-#: controllers/view/poddecoder/podtableview.cpp:161
+#: controllers/view/poddecoder/podtableview.cpp:160
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1243,7 +1243,7 @@ msgstr ""
 "<nl/>¿Sobrescribir los siguientes bytes o insertar otros nuevos si es "
 "necesario?"
 
-#: controllers/view/poddecoder/podtableview.cpp:257
+#: controllers/view/poddecoder/podtableview.cpp:256
 #: controllers/view/selectrange/selectrangeview.cpp:139
 #: controllers/view/structures/structureview.cpp:334
 #, kde-format
@@ -1535,7 +1535,7 @@ msgstr ""
 "Si pulsa el botón <interface>Buscar</interface>, los bytes introducidos "
 "arriba se buscarán en array de bytes."
 
-#: controllers/view/search/searchtool.cpp:61
+#: controllers/view/search/searchtool.cpp:60
 #, kde-format
 msgctxt "@title"
 msgid "Search"
@@ -2829,7 +2829,7 @@ msgid "Values"
 msgstr "Valores"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:137
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:51
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:50
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:38
 #, kde-format
 msgctxt ""
@@ -2838,7 +2838,7 @@ msgid "Hexadecimal"
 msgstr "Hexadecimal"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:139
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:52
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:51
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:39
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
@@ -2846,7 +2846,7 @@ msgid "Decimal"
 msgstr "Decimal"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:141
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:53
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:52
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:40
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
@@ -2854,7 +2854,7 @@ msgid "Octal"
 msgstr "Octal"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:143
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:54
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:53
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:41
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
@@ -2998,73 +2998,73 @@ msgctxt "@window:title"
 msgid "\"%1\" View Profile"
 msgstr "Perfil de vista «%1»"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:40
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:39
 #, kde-format
 msgctxt "@info:status short for: Insert mode"
 msgid "INS"
 msgstr "INS"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:41
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:40
 #, kde-format
 msgctxt "@info:status short for: Overwrite mode"
 msgid "OVR"
 msgstr "SOB"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:42
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:41
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Insert mode"
 msgstr "Modo insertar"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:43
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:42
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Overwrite mode"
 msgstr "Modo sobrescribir"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:58
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:57
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Coding of the value interpretation in the current view."
 msgstr "Codificación de la interpretación de valores de la vista actual."
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:66
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:65
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Encoding in the character column of the current view."
 msgstr "Codificación en la columna de caracteres de la vista actual."
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:104
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:201
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:103
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:200
 #, kde-format
 msgid "Offset: %1"
 msgstr "Desplazamiento: %1"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:113
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:112
 #, kde-format
 msgid "%1 bytes"
 msgstr "%1 bytes"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:115
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:114
 #, kde-format
 msgctxt "@info:status selection: start offset - end offset ()"
 msgid "Selection: %1 - %2 (%3)"
 msgstr "Selección: %1 - %2 (%3)"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:164
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:163
 #, kde-format
 msgctxt "@info:status offset value not available"
 msgid "Offset: -"
 msgstr "Desplazamiento: -"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:165
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:222
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:164
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:221
 #, kde-format
 msgctxt "@info:status offset value not available"
 msgid "Selection: -"
 msgstr "Selección: -"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:220
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:219
 #, kde-format
 msgctxt "@info:status selection: start offset - end offset (number of bytes)"
 msgid "Selection: %1 - %2 (%3)"
@@ -3158,13 +3158,13 @@ msgctxt "@item name of the generated data"
 msgid "Pattern"
 msgstr "Patrón"
 
-#: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:60
+#: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:58
 #, kde-format
 msgctxt "name of the generated data"
 msgid "Random Data..."
 msgstr "Datos aleatorios..."
 
-#: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:113
+#: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:111
 #, kde-format
 msgid "RandomData inserted."
 msgstr "Dato aleatorio insertado."
@@ -3187,13 +3187,13 @@ msgctxt "@item name of the generated data"
 msgid "Random Data"
 msgstr "Datos aleatorios"
 
-#: gui/io/generator/sequence/bytearraysequencegenerator.cpp:29
+#: gui/io/generator/sequence/bytearraysequencegenerator.cpp:28
 #, kde-format
 msgctxt "name of the generated data"
 msgid "Sequence"
 msgstr "Secuencia"
 
-#: gui/io/generator/sequence/bytearraysequencegenerator.cpp:59
+#: gui/io/generator/sequence/bytearraysequencegenerator.cpp:58
 #, kde-format
 msgid "Sequence inserted."
 msgstr "Secuencia insertada."
@@ -3378,7 +3378,7 @@ msgctxt "@label:textbox substring which separates the values"
 msgid "Separation:"
 msgstr "Separación:"
 
-#: gui/io/streamencoder/viewtext/bytearrayviewtextstreamencoder.cpp:39
+#: gui/io/streamencoder/viewtext/bytearrayviewtextstreamencoder.cpp:38
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "View in Plain Text"

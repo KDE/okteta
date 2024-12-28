@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-24 03:20+0000\n"
+"POT-Creation-Date: 2024-12-28 03:37+0000\n"
 "PO-Revision-Date: 2018-05-24 00:19+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
@@ -109,19 +109,19 @@ msgctxt "@action:inmenu"
 msgid "Close All Other"
 msgstr "Alle anderen sluiten"
 
-#: controllers/documentsystem/creator/creatorcontroller.cpp:37
+#: controllers/documentsystem/creator/creatorcontroller.cpp:36
 #, kde-format
 msgctxt "@title:menu create new byte arrays from different sources"
 msgid "New"
 msgstr "Nieuw"
 
-#: controllers/documentsystem/creator/creatorcontroller.cpp:50
+#: controllers/documentsystem/creator/creatorcontroller.cpp:49
 #, kde-format
 msgctxt "@item:inmenu create a new empty document"
 msgid "Empty"
 msgstr "Leeg"
 
-#: controllers/documentsystem/creator/creatorcontroller.cpp:61
+#: controllers/documentsystem/creator/creatorcontroller.cpp:60
 #, kde-format
 msgctxt "@item:inmenu create a new document from data in the clipboard"
 msgid "From Clipboard"
@@ -161,13 +161,13 @@ msgctxt "@action:intoolbar"
 msgid "Folder of Current Document"
 msgstr "Map van het huidige document"
 
-#: controllers/io/copyas/copyascontroller.cpp:44
+#: controllers/io/copyas/copyascontroller.cpp:43
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy As"
 msgstr "Kopiëren als"
 
-#: controllers/io/copyas/copyascontroller.cpp:91
+#: controllers/io/copyas/copyascontroller.cpp:90
 #, kde-format
 msgctxt "@item There are no encoders."
 msgid "Not available."
@@ -210,13 +210,13 @@ msgstr ""
 "de geselecteerde data naar het klembord worden gekopieerd met de hierboven "
 "ingevoerde instellingen."
 
-#: controllers/io/export/exportcontroller.cpp:40
+#: controllers/io/export/exportcontroller.cpp:39
 #, kde-format
 msgctxt "@title:menu"
 msgid "Export"
 msgstr "Exporteren"
 
-#: controllers/io/export/exportcontroller.cpp:87
+#: controllers/io/export/exportcontroller.cpp:86
 #, kde-format
 msgctxt "@item There are no exporters."
 msgid "Not available."
@@ -252,13 +252,13 @@ msgstr ""
 "zullen de geselecteerde data naar een bestand worden geëxporteerd met de "
 "hierboven ingevoerde instellingen."
 
-#: controllers/io/insert/insertcontroller.cpp:40
+#: controllers/io/insert/insertcontroller.cpp:39
 #, kde-format
 msgctxt "@title:menu"
 msgid "Insert"
 msgstr "Invoegen"
 
-#: controllers/io/insert/insertcontroller.cpp:90
+#: controllers/io/insert/insertcontroller.cpp:89
 #, kde-format
 msgctxt "@item There are no generators."
 msgid "Not available."
@@ -319,7 +319,7 @@ msgctxt "@action:inmenu"
 msgid "Close View Area"
 msgstr "Weergavegebied sluiten"
 
-#: controllers/shellwindow/viewlistmenu/viewlistmenucontroller.cpp:77
+#: controllers/shellwindow/viewlistmenu/viewlistmenucontroller.cpp:73
 #, kde-format
 msgctxt "@item There are no windows."
 msgid "None."
@@ -349,33 +349,33 @@ msgctxt "@action Redo: [change]"
 msgid "Redo: %1"
 msgstr "Opnieuw: %1"
 
-#: controllers/view/zoom/zoomcontroller.cpp:41
+#: controllers/view/zoom/zoomcontroller.cpp:42
 #, kde-format
 msgid "Zoom"
 msgstr "Zoomen"
 
-#: controllers/view/zoom/zoomcontroller.cpp:50
+#: controllers/view/zoom/zoomcontroller.cpp:51
 #, kde-format
 msgctxt "zoom-factor (percentage)"
 msgid "%1%"
 msgstr "%1%"
 
-#: controllers/view/zoom/zoomcontroller.cpp:63
+#: controllers/view/zoom/zoomcontroller.cpp:64
 #, kde-format
 msgid "&Fit to Width"
 msgstr "Passend in &breedte"
 
-#: controllers/view/zoom/zoomcontroller.cpp:65
+#: controllers/view/zoom/zoomcontroller.cpp:66
 #, kde-format
 msgid "&Fit to Height"
 msgstr "In hoogte &passend maken"
 
-#: controllers/view/zoom/zoomcontroller.cpp:67
+#: controllers/view/zoom/zoomcontroller.cpp:68
 #, kde-format
 msgid "&Fit to Size"
 msgstr "&Passend in grootte"
 
-#: controllers/view/zoom/zoomslider.cpp:136
+#: controllers/view/zoom/zoomslider.cpp:137
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Zoom: %1%"

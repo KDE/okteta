@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-24 03:20+0000\n"
+"POT-Creation-Date: 2024-12-28 03:37+0000\n"
 "PO-Revision-Date: 2012-04-23 18:03+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
@@ -111,13 +111,13 @@ msgctxt "@action:inmenu"
 msgid "Close All Other"
 msgstr "Luk alle andre"
 
-#: controllers/documentsystem/creator/creatorcontroller.cpp:37
+#: controllers/documentsystem/creator/creatorcontroller.cpp:36
 #, kde-format
 msgctxt "@title:menu create new byte arrays from different sources"
 msgid "New"
 msgstr "Nyt"
 
-#: controllers/documentsystem/creator/creatorcontroller.cpp:50
+#: controllers/documentsystem/creator/creatorcontroller.cpp:49
 #, fuzzy, kde-format
 #| msgctxt "@title:menu create a new empty document"
 #| msgid "Empty"
@@ -125,7 +125,7 @@ msgctxt "@item:inmenu create a new empty document"
 msgid "Empty"
 msgstr "Tomt"
 
-#: controllers/documentsystem/creator/creatorcontroller.cpp:61
+#: controllers/documentsystem/creator/creatorcontroller.cpp:60
 #, fuzzy, kde-format
 #| msgctxt "@title:menu create a new document from data in the clipboard"
 #| msgid "From Clipboard"
@@ -167,13 +167,13 @@ msgctxt "@action:intoolbar"
 msgid "Folder of Current Document"
 msgstr "Dette dokuments mappe"
 
-#: controllers/io/copyas/copyascontroller.cpp:44
+#: controllers/io/copyas/copyascontroller.cpp:43
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy As"
 msgstr "Kopiér som"
 
-#: controllers/io/copyas/copyascontroller.cpp:91
+#: controllers/io/copyas/copyascontroller.cpp:90
 #, kde-format
 msgctxt "@item There are no encoders."
 msgid "Not available."
@@ -216,13 +216,13 @@ msgstr ""
 "markerede data blive kopieret til udklipsholderen med de indstillinger du "
 "har angivet ovenfor."
 
-#: controllers/io/export/exportcontroller.cpp:40
+#: controllers/io/export/exportcontroller.cpp:39
 #, kde-format
 msgctxt "@title:menu"
 msgid "Export"
 msgstr "Eksportér"
 
-#: controllers/io/export/exportcontroller.cpp:87
+#: controllers/io/export/exportcontroller.cpp:86
 #, kde-format
 msgctxt "@item There are no exporters."
 msgid "Not available."
@@ -257,13 +257,13 @@ msgstr ""
 "Hvis du trykker på <interface>Eksportér til fil</interface>, vil markerede "
 "data blive kopieret til en vil med de indstillinger du har angivet ovenfor."
 
-#: controllers/io/insert/insertcontroller.cpp:40
+#: controllers/io/insert/insertcontroller.cpp:39
 #, kde-format
 msgctxt "@title:menu"
 msgid "Insert"
 msgstr "Indsæt"
 
-#: controllers/io/insert/insertcontroller.cpp:90
+#: controllers/io/insert/insertcontroller.cpp:89
 #, kde-format
 msgctxt "@item There are no generators."
 msgid "Not available."
@@ -332,7 +332,7 @@ msgctxt "@action:inmenu"
 msgid "Close View Area"
 msgstr "Luk visningsområdet"
 
-#: controllers/shellwindow/viewlistmenu/viewlistmenucontroller.cpp:77
+#: controllers/shellwindow/viewlistmenu/viewlistmenucontroller.cpp:73
 #, kde-format
 msgctxt "@item There are no windows."
 msgid "None."
@@ -362,33 +362,33 @@ msgctxt "@action Redo: [change]"
 msgid "Redo: %1"
 msgstr "Omgør: %1"
 
-#: controllers/view/zoom/zoomcontroller.cpp:41
+#: controllers/view/zoom/zoomcontroller.cpp:42
 #, kde-format
 msgid "Zoom"
 msgstr "Zoom"
 
-#: controllers/view/zoom/zoomcontroller.cpp:50
+#: controllers/view/zoom/zoomcontroller.cpp:51
 #, kde-format
 msgctxt "zoom-factor (percentage)"
 msgid "%1%"
 msgstr "%1%"
 
-#: controllers/view/zoom/zoomcontroller.cpp:63
+#: controllers/view/zoom/zoomcontroller.cpp:64
 #, kde-format
 msgid "&Fit to Width"
 msgstr "&Tilpas til bredden"
 
-#: controllers/view/zoom/zoomcontroller.cpp:65
+#: controllers/view/zoom/zoomcontroller.cpp:66
 #, kde-format
 msgid "&Fit to Height"
 msgstr "&Tilpas til højden"
 
-#: controllers/view/zoom/zoomcontroller.cpp:67
+#: controllers/view/zoom/zoomcontroller.cpp:68
 #, kde-format
 msgid "&Fit to Size"
 msgstr "&Tilpas til størrelsen"
 
-#: controllers/view/zoom/zoomslider.cpp:136
+#: controllers/view/zoom/zoomslider.cpp:137
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Zoom: %1%"
