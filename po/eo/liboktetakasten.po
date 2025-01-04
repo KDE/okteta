@@ -2,15 +2,15 @@
 # Copyright (C) 2009 Free Software Foundation, Inc.
 # This file is distributed under the same license as the okteta package.
 # Axel Rousseau <axel@esperanto-jeunes.org>, 2009.
-# Oliver Kellogg <okellogg@users.sourceforge.net>, 2023.
+# Oliver Kellogg <olivermkellogg@gmail.com>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-28 02:06+0000\n"
-"PO-Revision-Date: 2024-04-27 22:48+0100\n"
-"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
+"PO-Revision-Date: 2025-01-03 21:16+0100\n"
+"Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
@@ -27,7 +27,7 @@ msgstr "Axel Rousseau,Oliver Kellogg"
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "axel@esperanto-jeunes.org,okellogg@users.sourceforge.net"
+msgstr "axel@esperanto-jeunes.org,olivermkellogg@gmail.com"
 
 #: controllers/document/info/documentinfotool.cpp:45
 #: controllers/document/info/documentinfotoolviewfactory.cpp:24
@@ -142,12 +142,10 @@ msgid "Bookmarks"
 msgstr "Legosignoj"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:61
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Bookmarks"
+#, kde-format
 msgctxt "@info"
 msgid "No bookmarks"
-msgstr "Legosignoj"
+msgstr "Neniuj legosignoj"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:87
 #, kde-format
@@ -217,7 +215,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Character not defined."
-msgstr ""
+msgstr "Signo ne difinita."
 
 #: controllers/view/bytetable/bytetablemodel.cpp:157
 #: controllers/view/info/statistictablemodel.cpp:216
@@ -539,19 +537,19 @@ msgstr ""
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "No checksum calculated yet."
-msgstr ""
+msgstr "Kalkuliĝis ankoraŭ neniu kontrolsumo."
 
 #: controllers/view/crop/cropcontroller.cpp:33
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Crop"
-msgstr ""
+msgstr "Pritondi"
 
 #: controllers/view/crop/cropcontroller.cpp:91
 #, kde-format
 msgctxt "name of the change"
 msgid "Crop"
-msgstr ""
+msgstr "Pritondi"
 
 #: controllers/view/filter/filtertool.cpp:59
 #: controllers/view/filter/filtertoolviewfactory.cpp:24
@@ -600,7 +598,7 @@ msgid ""
 msgstr ""
 "Se vi premas la butonon <interface>Filtrilo</interface>, la operacio, kiun "
 "vi elektis supre, estas efektivigita por la bajtoj en la elektita gamo kun "
-"la donitaj opcioj."
+"la donitaj elektebloj."
 
 #: controllers/view/gotooffset/gotooffsetcontroller.cpp:32
 #, kde-format
@@ -874,12 +872,10 @@ msgstr "La bajta ordo por uzi por malkodi la bajtojn en entjervalorojn."
 
 #: controllers/view/libbytearraychecksum/algorithm/nobytearraychecksumparametersetedit.cpp:25
 #: controllers/view/libbytearrayfilter/filter/nobytearrayfilterparametersetedit.cpp:25
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "Parameters"
+#, kde-format
 msgctxt "@info"
 msgid "No parameters"
-msgstr "Parametroj"
+msgstr "Neniuj parametroj"
 
 #: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:48
 #, kde-format
@@ -1233,7 +1229,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:group"
 msgid "Options"
-msgstr "Opcioj"
+msgstr "Elektebloj"
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:106
 #, kde-format
@@ -1723,12 +1719,10 @@ msgid "Enter a term to limit the list."
 msgstr "Enigu terminon por limigi la liston."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:140
-#, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to extract strings"
-#| msgid "Strings"
+#, kde-format
 msgctxt "@info"
 msgid "No strings"
-msgstr "Kordoj"
+msgstr "Neniuj ĉenoj"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:161
 #, kde-format
@@ -1768,20 +1762,18 @@ msgstr ""
 "laste elektita estas markita kaj montrata en la vido."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:279
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "No bytes converted."
+#, kde-format
 msgctxt "@info"
 msgid "No strings extracted."
-msgstr "Neniuj bajtoj konvertitaj."
+msgstr "Neniuj ĉenoj eltiriĝis."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:280
 #, kde-format
 msgctxt "@info"
 msgid "1 string extracted."
 msgid_plural "%1 strings extracted."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "1 ĉeno eltiriĝis."
+msgstr[1] "%1 ĉenoj eltiriĝis."
 
 #: controllers/view/structures/datatypes/array/complexarraydata.cpp:98
 #, kde-format
@@ -2476,11 +2468,10 @@ msgid "Size"
 msgstr "Grandeco"
 
 #: controllers/view/structures/structureview.cpp:91
-#, fuzzy, kde-format
-#| msgid "Structure Definitions"
+#, kde-format
 msgctxt "@info"
 msgid "No structure definitions"
-msgstr "Strukturaj Difinoj"
+msgstr "Neniuj strukturaj difinoj"
 
 #: controllers/view/structures/structureview.cpp:111
 #, kde-format
@@ -3527,7 +3518,3 @@ msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"
 msgid "UTF-8"
 msgstr "UTF-8"
-
-#~ msgctxt "@item:intable character is not defined"
-#~ msgid "undef."
-#~ msgstr "nedif."
