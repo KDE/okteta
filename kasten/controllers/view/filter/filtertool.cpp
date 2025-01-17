@@ -17,6 +17,9 @@
 #include <Kasten/Okteta/ByteArrayView>
 // Okteta Kasten core
 #include <Kasten/Okteta/ByteArrayDocument>
+// Kasten core
+#include <Kasten/AbstractUserMessagesHandler>
+#include <Kasten/UserNotification>
 // Okteta core
 #include <Okteta/AbstractByteArrayModel>
 #include <Okteta/ChangesDescribable>
@@ -31,7 +34,8 @@
 
 namespace Kasten {
 
-FilterTool::FilterTool()
+FilterTool::FilterTool(AbstractUserMessagesHandler* userMessagesHandler)
+    : m_userMessagesHandler(userMessagesHandler)
 {
     setObjectName(QStringLiteral("BinaryFilter"));
 
@@ -159,6 +163,11 @@ void FilterTool::filter() const
             changesDescribable->closeGroupedChange();
         }
     }
+
+    const QString notificationTitle = title();
+    const QString notificationText = i18ncp("@info", "1 byte filtered with %2.", "%1 bytes filtered with %2.", filterResult.size(), byteArrayFilter->name());
+    auto message = std::make_unique<Kasten::UserNotification>(mByteArrayView, notificationText, notificationTitle);
+    m_userMessagesHandler->postNotification(std::move(message));
 
     mByteArrayView->setFocus();
 }

@@ -26,6 +26,7 @@ class QString;
 namespace Kasten {
 
 class ByteArrayView;
+class AbstractUserMessagesHandler;
 
 class FilterTool : public AbstractTool
 {
@@ -36,7 +37,7 @@ private:
     static inline constexpr char OperationConfigKey[] = "Operation";
 
 public:
-    FilterTool();
+    explicit FilterTool(AbstractUserMessagesHandler* userMessagesHandler);
     ~FilterTool() override;
 
 public: // AbstractTool API
@@ -71,6 +72,8 @@ private:
     ByteArrayView* mByteArrayView = nullptr;
     Okteta::AbstractByteArrayModel* mByteArrayModel = nullptr;
     bool mHasWritable = false;
+
+    AbstractUserMessagesHandler* const m_userMessagesHandler;
 
     std::vector<std::unique_ptr<AbstractByteArrayFilter>> mFilterList;
 

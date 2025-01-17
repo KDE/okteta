@@ -13,13 +13,16 @@
 
 namespace Kasten {
 
-FilterToolFactory::FilterToolFactory() = default;
+FilterToolFactory::FilterToolFactory(AbstractUserMessagesHandler* userMessagesHandler)
+    : m_userMessagesHandler(userMessagesHandler)
+{
+}
 
 FilterToolFactory::~FilterToolFactory() = default;
 
 std::unique_ptr<AbstractTool> FilterToolFactory::create() const
 {
-    return std::make_unique<FilterTool>();
+    return std::make_unique<FilterTool>(m_userMessagesHandler);
 }
 
 }
