@@ -13,13 +13,16 @@
 
 namespace Kasten {
 
-ByteTableToolFactory::ByteTableToolFactory() = default;
+ByteTableToolFactory::ByteTableToolFactory(AbstractUserMessagesHandler* userMessagesHandler)
+    : m_userMessagesHandler(userMessagesHandler)
+{
+}
 
 ByteTableToolFactory::~ByteTableToolFactory() = default;
 
 std::unique_ptr<AbstractTool> ByteTableToolFactory::create() const
 {
-    return std::make_unique<ByteTableTool>();
+    return std::make_unique<ByteTableTool>(m_userMessagesHandler);
 }
 
 }

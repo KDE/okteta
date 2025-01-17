@@ -14,6 +14,9 @@
 #include <Kasten/Okteta/ByteArrayView>
 // Okteta Kasten core
 #include <Kasten/Okteta/ByteArrayDocument>
+// Kasten core
+#include <Kasten/AbstractUserMessagesHandler>
+#include <Kasten/UserNotification>
 // Okteta core
 #include <Okteta/AbstractByteArrayModel>
 #include <Okteta/ChangesDescribable>
@@ -22,8 +25,9 @@
 
 namespace Kasten {
 
-ByteTableTool::ByteTableTool()
+ByteTableTool::ByteTableTool(AbstractUserMessagesHandler* userMessagesHandler)
     : mByteTableModel(new ByteTableModel(this))
+    , m_userMessagesHandler(userMessagesHandler)
 {
     setObjectName(QStringLiteral("ByteTable"));
 }
@@ -82,7 +86,7 @@ void ByteTableTool::insert(unsigned char byte, int count)
     auto* changesDescribable = qobject_cast<Okteta::ChangesDescribable*>(mByteArrayModel);
 
     if (changesDescribable) {
-        // TODO: how to note the byte? charcoding might change...
+        // TODO: how to note the byte? charcoding might change... cmp. below notification
         const QString changeDescription =
             i18np("Inserted 1 Byte", "Inserted %1 Bytes", count);
 
@@ -99,6 +103,13 @@ void ByteTableTool::insert(unsigned char byte, int count)
 //     if( HexEdit && ByteArray )
 //         ByteArray->insert( HexEdit->cursorPosition(), Data );
 // }
+
+    const QString notificationTitle = title();
+    // TODO: how to note the byte? charcoding might change... cmp. above changedescription
+    const QString notificationText = i18ncp("@info", "1 byte inserted.", "%1 bytes inserted.", count);
+    auto message = std::make_unique<Kasten::UserNotification>(mByteArrayView, notificationText, notificationTitle);
+    m_userMessagesHandler->postNotification(std::move(message));
+
     mByteArrayView->setFocus();
 }
 

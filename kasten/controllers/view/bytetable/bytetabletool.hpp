@@ -20,6 +20,7 @@ namespace Kasten {
 
 class ByteTableModel;
 class ByteArrayView;
+class AbstractUserMessagesHandler;
 
 /**
  */
@@ -28,7 +29,7 @@ class ByteTableTool : public AbstractTool
     Q_OBJECT
 
 public:
-    ByteTableTool();
+    explicit ByteTableTool(AbstractUserMessagesHandler* userMessagesHandler);
     ~ByteTableTool() override;
 
 public: // AbstractTool API
@@ -52,6 +53,8 @@ private Q_SLOTS:
 
 private:
     ByteTableModel* mByteTableModel;
+
+    AbstractUserMessagesHandler* const m_userMessagesHandler;
 
     ByteArrayView* mByteArrayView = nullptr;
     Okteta::AbstractByteArrayModel* mByteArrayModel = nullptr;

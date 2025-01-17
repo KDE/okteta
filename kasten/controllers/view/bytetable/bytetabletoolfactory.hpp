@@ -16,10 +16,12 @@
 
 namespace Kasten {
 
+class AbstractUserMessagesHandler;
+
 class OKTETAKASTENCONTROLLERS_EXPORT ByteTableToolFactory : public AbstractToolFactory
 {
 public:
-    ByteTableToolFactory();
+    explicit ByteTableToolFactory(AbstractUserMessagesHandler* userMessagesHandler);
     ByteTableToolFactory(const ByteTableToolFactory&) = delete;
 
     ~ByteTableToolFactory() override;
@@ -28,6 +30,9 @@ public:
 
 public: // AbstractToolFactory API
     std::unique_ptr<AbstractTool> create() const override;
+
+private:
+    AbstractUserMessagesHandler* const m_userMessagesHandler;
 };
 
 }
