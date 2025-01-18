@@ -49,9 +49,9 @@ public: // AbstractByteArrayModel API
     void setReadOnly(bool readOnly = true) override;
 
 public:
-    int compare(const AbstractByteArrayModel& other, const AddressRange& otherRange, Address offset = 0);
-    int compare(const AbstractByteArrayModel& other, Address otherOffset, Size otherLength, Address offset = 0);
-    int compare(const AbstractByteArrayModel& other);
+    int compare(const AbstractByteArrayModel& other, const AddressRange& otherRange, Address offset = 0) const;
+    int compare(const AbstractByteArrayModel& other, Address otherOffset, Size otherLength, Address offset = 0) const;
+    int compare(const AbstractByteArrayModel& other) const;
 
 public:
     Byte* rawData() const;
@@ -83,10 +83,10 @@ inline bool FixedSizeByteArrayModel::isModified()   const { return mModified; }
 inline void FixedSizeByteArrayModel::setReadOnly(bool readOnly)  { mReadOnly = readOnly; }
 inline void FixedSizeByteArrayModel::setModified(bool modified)   { mModified = modified; }
 
-inline int FixedSizeByteArrayModel::compare(const AbstractByteArrayModel& other)
+inline int FixedSizeByteArrayModel::compare(const AbstractByteArrayModel& other) const
 { return compare(other, AddressRange::fromWidth(0, other.size()), 0); }
 
-inline int FixedSizeByteArrayModel::compare(const AbstractByteArrayModel& other, Address otherOffset, Size otherLength, Address offset)
+inline int FixedSizeByteArrayModel::compare(const AbstractByteArrayModel& other, Address otherOffset, Size otherLength, Address offset) const
 { return compare(other, AddressRange::fromWidth(otherOffset, otherLength), offset); }
 
 inline Byte* FixedSizeByteArrayModel::rawData() const { return mData; }
