@@ -33,6 +33,9 @@
 #include <Kasten/Okteta/ByteArrayView>
 // Okteta Kasten core
 #include <Kasten/Okteta/ByteArrayDocument>
+// Kasten core
+#include <Kasten/AbstractUserMessagesHandler>
+#include <Kasten/UserNotification>
 // Okteta core
 #include <Okteta/CharCodec>
 #include <Okteta/AbstractByteArrayModel>
@@ -67,8 +70,9 @@ enum PODTypes
     PODTypeCount
 };
 
-PODDecoderTool::PODDecoderTool()
-    : mReadOnly(true)
+PODDecoderTool::PODDecoderTool(AbstractUserMessagesHandler* userMessagesHandler)
+    : m_userMessagesHandler(userMessagesHandler)
+    , mReadOnly(true)
     , mIsPodMarked(false)
     , mCharCodec(Okteta::CharCodec::createCodecForLocale())
 {
@@ -303,6 +307,12 @@ void PODDecoderTool::setData(const QVariant& data, int podId)
     if (changesDescribable) {
         changesDescribable->closeGroupedChange();
     }
+
+    const QString notificationTitle = title();
+    // TODO: mention number of bytes before/after
+    const QString notificationText = i18nc("Edited as %datatype", "Edited as %1", typeCodec->name());
+    auto message = std::make_unique<Kasten::UserNotification>(mByteArrayView, notificationText, notificationTitle);
+    m_userMessagesHandler->postNotification(std::move(message));
 }
 
 void PODDecoderTool::updateData()

@@ -30,6 +30,7 @@ class QByteArray;
 namespace Kasten {
 class AbstractDifferentSizeDialog;
 class ByteArrayView;
+class AbstractUserMessagesHandler;
 
 class PODDecoderTool : public AbstractTool
 {
@@ -49,7 +50,7 @@ private:
     static inline constexpr bool DefaultUnsignedAsHex = true;
 
 public:
-    PODDecoderTool();
+    explicit PODDecoderTool(AbstractUserMessagesHandler* userMessagesHandler);
 
     ~PODDecoderTool() override;
 
@@ -102,6 +103,9 @@ private Q_SLOTS:
 
     void onCharCodecChange(const QString& codecName);
 //     void onUndefinedCharChanged(QChar undefinedChar);
+
+private:
+    AbstractUserMessagesHandler* const m_userMessagesHandler;
 
 private: // source
     ByteArrayView* mByteArrayView = nullptr;

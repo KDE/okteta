@@ -16,10 +16,12 @@
 
 namespace Kasten {
 
+class AbstractUserMessagesHandler;
+
 class OKTETAKASTENCONTROLLERS_EXPORT PodDecoderToolFactory : public AbstractToolFactory
 {
 public:
-    PodDecoderToolFactory();
+    explicit PodDecoderToolFactory(AbstractUserMessagesHandler* userMessagesHandler);
     PodDecoderToolFactory(const PodDecoderToolFactory&) = delete;
 
     ~PodDecoderToolFactory() override;
@@ -28,6 +30,9 @@ public:
 
 public: // AbstractToolFactory API
     std::unique_ptr<AbstractTool> create() const override;
+
+private:
+    AbstractUserMessagesHandler* const m_userMessagesHandler;
 };
 
 }

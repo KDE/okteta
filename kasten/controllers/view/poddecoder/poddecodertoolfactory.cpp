@@ -13,13 +13,16 @@
 
 namespace Kasten {
 
-PodDecoderToolFactory::PodDecoderToolFactory() = default;
+PodDecoderToolFactory::PodDecoderToolFactory(AbstractUserMessagesHandler* userMessagesHandler)
+    : m_userMessagesHandler(userMessagesHandler)
+{
+}
 
 PodDecoderToolFactory::~PodDecoderToolFactory() = default;
 
 std::unique_ptr<AbstractTool> PodDecoderToolFactory::create() const
 {
-    return std::make_unique<PODDecoderTool>();
+    return std::make_unique<PODDecoderTool>(m_userMessagesHandler);
 }
 
 }
