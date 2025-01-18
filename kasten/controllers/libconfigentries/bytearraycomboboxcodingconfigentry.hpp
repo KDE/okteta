@@ -15,9 +15,10 @@
 #include <Kasten/Okteta/ByteArrayComboBox>
 
 template <>
+inline
 Okteta::ByteArrayComboBox::Coding
-inline KConfigGroup::readEntry(const char *key,
-                               const Okteta::ByteArrayComboBox::Coding &defaultValue) const
+KConfigGroup::readEntry(const char *key,
+                        const Okteta::ByteArrayComboBox::Coding &defaultValue) const
 {
     return static_cast<Okteta::ByteArrayComboBox::Coding>(KConfigGroup::readEntry(key, static_cast<Kasten::ByteArrayCoding>(defaultValue)));
 }
