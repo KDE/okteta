@@ -141,6 +141,8 @@ if(BUILD_TESTING)
     target_compile_definitions(testoktetacore
         PUBLIC
             OKTETACORE_STATICLIB
+        PRIVATE
+            TRANSLATION_DOMAIN=\"liboktetacore\"
     )
     target_include_directories(testoktetacore
         PUBLIC
