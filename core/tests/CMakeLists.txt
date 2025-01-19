@@ -50,7 +50,7 @@ ecm_add_test(
   fixedsizebytearraymodeltest.cpp
   TEST_NAME fixedsizebytearraymodeltest
   NAME_PREFIX libokteta-core-
-  LINK_LIBRARIES testoktetacore Qt5::Test KF5::I18n
+  LINK_LIBRARIES testoktetacore Qt5::Test
 )
 
 
@@ -59,7 +59,7 @@ ecm_add_test(
   fixedsizebytearraymodelabstractbytearraymodeliftest.cpp
   TEST_NAME fixedsizebytearraymodelabstractbytearraymodeliftest
   NAME_PREFIX libokteta-core-
-  LINK_LIBRARIES oktetacoretestutil testoktetacore Qt5::Test KF5::I18n
+  LINK_LIBRARIES oktetacoretestutil testoktetacore Qt5::Test
 )
 
 
@@ -76,7 +76,7 @@ ecm_add_test(
   bytearraymodelabstractbytearraymodeliftest.cpp
   TEST_NAME bytearraymodelabstractbytearraymodeliftest
   NAME_PREFIX libokteta-core-
-  LINK_LIBRARIES oktetacoretestutil testoktetacore Qt5::Test KF5::I18n
+  LINK_LIBRARIES oktetacoretestutil testoktetacore Qt5::Test
 )
 
 
@@ -85,7 +85,7 @@ ecm_add_test(
   piecetablebytearraymodelabstractbytearraymodeliftest.cpp
   TEST_NAME piecetablebytearraymodelabstractbytearraymodeliftest
   NAME_PREFIX libokteta-core-
-  LINK_LIBRARIES oktetacoretestutil testoktetacore Qt5::Test KF5::I18n
+  LINK_LIBRARIES oktetacoretestutil testoktetacore Qt5::Test
 )
 
 
@@ -110,7 +110,7 @@ ecm_add_test(
   charcodectest.cpp
   TEST_NAME charcodectest
   NAME_PREFIX libokteta-core-
-  LINK_LIBRARIES OktetaCore Qt5::Test KF5::I18n
+  LINK_LIBRARIES OktetaCore Qt5::Test
 )
 
 
@@ -118,7 +118,7 @@ ecm_add_test(
   textcharcodectest.cpp
   TEST_NAME textcharcodectest
   NAME_PREFIX libokteta-core-
-  LINK_LIBRARIES testoktetacore Qt5::Test KF5::I18n KF5::Codecs
+  LINK_LIBRARIES testoktetacore Qt5::Test KF5::Codecs
 )
 
 
@@ -127,7 +127,7 @@ ecm_add_test(
   textcharcodeccharcodeciftest.cpp
   TEST_NAME textcharcodeccharcodeciftest
   NAME_PREFIX libokteta-core-
-  LINK_LIBRARIES testoktetacore Qt5::Test KF5::I18n KF5::Codecs
+  LINK_LIBRARIES testoktetacore Qt5::Test KF5::Codecs
 )
 
 
@@ -151,7 +151,7 @@ ecm_add_test(
   bookmarklisttest.cpp
   TEST_NAME bookmarklisttest
   NAME_PREFIX libokteta-core-
-  LINK_LIBRARIES testoktetacore Qt5::Test KF5::I18n
+  LINK_LIBRARIES testoktetacore Qt5::Test
 )
 
 
