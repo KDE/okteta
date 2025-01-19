@@ -25,10 +25,7 @@ class ByteArrayViewProfileLock;
 class ByteArrayViewProfileFileInfo
 {
 public:
-    ByteArrayViewProfileFileInfo(const QDateTime& lastModified, bool locked)
-        : mLastModified(lastModified)
-        , mLocked(locked)
-    {}
+    ByteArrayViewProfileFileInfo(const QDateTime& lastModified, bool locked);
     ByteArrayViewProfileFileInfo(const ByteArrayViewProfileFileInfo&) = default;
 
     ~ByteArrayViewProfileFileInfo() = default;
@@ -36,17 +33,29 @@ public:
     ByteArrayViewProfileFileInfo& operator=(const ByteArrayViewProfileFileInfo&) = default;
 
 public:
-    const QDateTime& lastModified() const { return mLastModified; }
-    bool isLocked()                 const { return mLocked; }
+    const QDateTime& lastModified() const;
+    bool isLocked() const;
 
-    void setLastModified(const QDateTime& lastModified)  { mLastModified = lastModified; }
-    void setLocked(bool isLocked) { mLocked = isLocked; }
+    void setLastModified(const QDateTime& lastModified);
+    void setLocked(bool isLocked);
 
 private:
     QDateTime mLastModified;
     bool mLocked;
 //     bool mUserOwned;
 };
+
+inline ByteArrayViewProfileFileInfo::ByteArrayViewProfileFileInfo(const QDateTime& lastModified, bool locked)
+    : mLastModified(lastModified)
+    , mLocked(locked)
+{}
+
+inline const QDateTime& ByteArrayViewProfileFileInfo::lastModified() const { return mLastModified; }
+inline bool ByteArrayViewProfileFileInfo::isLocked()                 const { return mLocked; }
+
+inline void ByteArrayViewProfileFileInfo::setLastModified(const QDateTime& lastModified)  { mLastModified = lastModified; }
+inline void ByteArrayViewProfileFileInfo::setLocked(bool isLocked) { mLocked = isLocked; }
+
 
 using ByteArrayViewProfileFileInfoLookup = QHash<ByteArrayViewProfile::Id, ByteArrayViewProfileFileInfo>;
 
