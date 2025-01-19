@@ -1,8 +1,8 @@
-add_definitions(-DTRANSLATION_DOMAIN=\"oktetapart\")
-
 configure_file(oktetapart.desktop.in ${CMAKE_CURRENT_BINARY_DIR}/oktetapart.desktop @ONLY)
 
 add_library(oktetapart MODULE)
+
+target_compile_definitions(oktetapart PRIVATE -DTRANSLATION_DOMAIN=\"oktetapart\")
 
 target_link_libraries(oktetapart
     OktetaKastenControllers

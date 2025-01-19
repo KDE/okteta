@@ -31,5 +31,7 @@ ecm_add_test(
   Qt5::Test
 )
 
+target_compile_definitions(oktetaparttest PRIVATE TRANSLATION_DOMAIN=\"oktetapart\")
+
 kcoreaddons_desktop_to_json(oktetaparttest ${CMAKE_CURRENT_BINARY_DIR}/../oktetapart.desktop)
 
