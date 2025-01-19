@@ -26,8 +26,7 @@ public:
 
     StructuresToolFactory& operator=(const StructuresToolFactory&) = delete;
 
-public:
-    // AbstractToolFactory API
+public: // AbstractToolFactory API
     AbstractTool* create() const override;
 };
 
