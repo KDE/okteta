@@ -125,14 +125,16 @@ void AbstractByteArrayModelIfTest::testCopyTo()
 
     FixedSizeByteArrayModel copy(size, BlankChar);
     // copyTo() all
-    mByteArrayModel->copyTo(copy.rawData(), 0, size);
+    Size copiedSize = mByteArrayModel->copyTo(copy.rawData(), 0, size);
+    QCOMPARE(copiedSize, size);
     QCOMPARE(copy.compare(*mByteArrayModel), 0);
 
     // copyTo() at begin
     copy.fill(BlankChar);
 
-    mByteArrayModel->copyTo(copy.rawData(), copyRange);
+    copiedSize = mByteArrayModel->copyTo(copy.rawData(), copyRange);
 
+    QCOMPARE(copiedSize, copyRange.width());
     QCOMPARE(copy.compare(*mByteArrayModel, copyRange), 0);
     QCOMPARE(copy.byte(copyRange.nextBehindEnd()), BlankChar);
     QVERIFY(!mByteArrayModel->isModified());
@@ -141,8 +143,9 @@ void AbstractByteArrayModelIfTest::testCopyTo()
     copy.fill(BlankChar);
     copyRange.moveToEnd(size - 1);
 
-    mByteArrayModel->copyTo(&copy.rawData()[copyRange.start()], copyRange);
+    copiedSize = mByteArrayModel->copyTo(&copy.rawData()[copyRange.start()], copyRange);
 
+    QCOMPARE(copiedSize, copyRange.width());
     QCOMPARE(copy.byte(copyRange.nextBeforeStart()), BlankChar);
     QCOMPARE(copy.compare(*mByteArrayModel, copyRange, copyRange.start()), 0);
     QVERIFY(!mByteArrayModel->isModified());
@@ -151,8 +154,9 @@ void AbstractByteArrayModelIfTest::testCopyTo()
     copy.fill(BlankChar);
     copyRange.moveToStart(size / 2);
 
-    mByteArrayModel->copyTo(&copy.rawData()[copyRange.start()], copyRange);
+    copiedSize = mByteArrayModel->copyTo(&copy.rawData()[copyRange.start()], copyRange);
 
+    QCOMPARE(copiedSize, copyRange.width());
     QCOMPARE(copy.byte(copyRange.nextBeforeStart()), BlankChar);
     QCOMPARE(copy.compare(*mByteArrayModel, copyRange, copyRange.start()), 0);
     QCOMPARE(copy.byte(copyRange.nextBehindEnd()), BlankChar);
