@@ -41,7 +41,7 @@ bool QCryptographicByteArrayChecksumAlgorithm::calculateChecksum(QString* result
         if (range.end() < i + CalculatedByteCountSignalLimit) {
             bufferLength = range.end() - i + 1;
         }
-        model->copyTo(reinterpret_cast<Okteta::Byte*>(buffer), i, bufferLength);
+        std::ignore = model->copyTo(reinterpret_cast<Okteta::Byte*>(buffer), i, bufferLength);
         hash.addData(buffer, bufferLength);
 
         if (i >= nextBlockEnd) {

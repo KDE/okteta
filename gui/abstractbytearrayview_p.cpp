@@ -742,7 +742,7 @@ QByteArray AbstractByteArrayViewPrivate::selectedData() const
     const AddressRange selection = mTableRanges.selection();
     QByteArray data;
     data.resize(selection.width());
-    byteArrayModel()->copyTo(reinterpret_cast<Byte*>(data.data()), selection.start(), selection.width());
+    std::ignore = byteArrayModel()->copyTo(reinterpret_cast<Byte*>(data.data()), selection.start(), selection.width());
     return data;
 }
 

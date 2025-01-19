@@ -73,7 +73,7 @@ void ReplaceJobTest::compare(const Okteta::PieceTableByteArrayModel* byteArrayMo
                              const QByteArray& expectedData)
 {
     QByteArray actualData(byteArrayModel->size(), 'd');
-    byteArrayModel->copyTo(reinterpret_cast<Okteta::Byte*>(actualData.data()), 0, byteArrayModel->size());
+    std::ignore = byteArrayModel->copyTo(reinterpret_cast<Okteta::Byte*>(actualData.data()), 0, byteArrayModel->size());
 
     QCOMPARE(actualData, expectedData);
 }

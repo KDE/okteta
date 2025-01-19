@@ -364,7 +364,7 @@ QByteArray StructuresTool::bytes(const DataInformation* data) const
     const Okteta::AddressRange range = dataRange(data);
     QByteArray bytes;
     bytes.resize(range.width());
-    mByteArrayModel->copyTo(reinterpret_cast<Okteta::Byte*>(bytes.data()), range.start(), range.width());
+    std::ignore = mByteArrayModel->copyTo(reinterpret_cast<Okteta::Byte*>(bytes.data()), range.start(), range.width());
     return bytes;
 }
 

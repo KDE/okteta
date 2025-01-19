@@ -302,7 +302,7 @@ void AbstractByteArrayModelIfTest::testRemove()
     // create copy
     Size size = mByteArrayModel->size();
     FixedSizeByteArrayModel copy(size);
-    mByteArrayModel->copyTo(copy.rawData(), 0, size);
+    std::ignore = mByteArrayModel->copyTo(copy.rawData(), 0, size);
 
     // remove() at end
     mByteArrayModel->setModified(false);
@@ -319,7 +319,7 @@ void AbstractByteArrayModelIfTest::testRemove()
     // remove() at mid
     mByteArrayModel->setModified(false);
     size = mByteArrayModel->size();
-    mByteArrayModel->copyTo(copy.rawData(), 0, size);
+    std::ignore = mByteArrayModel->copyTo(copy.rawData(), 0, size);
     removeRange.setByWidth(size / 2, removeSize);
     clearSignalSpys();
 
@@ -334,7 +334,7 @@ void AbstractByteArrayModelIfTest::testRemove()
     // remove() at start
     mByteArrayModel->setModified(false);
     size = mByteArrayModel->size();
-    mByteArrayModel->copyTo(copy.rawData(), 0, size);
+    std::ignore = mByteArrayModel->copyTo(copy.rawData(), 0, size);
     removeRange.setByWidth(0, removeSize);
     clearSignalSpys();
 
@@ -368,7 +368,7 @@ std::unique_ptr<KTestData> AbstractByteArrayModelIfTest::prepareTestInsert() con
     textureByteArrayModel(&testData->insertData, 10, 99);
 
     textureByteArrayModel(mByteArrayModel.get(), 100, 255);
-    mByteArrayModel->copyTo(testData->copy.rawData(), 0, size);
+    std::ignore = mByteArrayModel->copyTo(testData->copy.rawData(), 0, size);
     mByteArrayModel->setModified(false);
 
     return testData;
@@ -479,7 +479,7 @@ void AbstractByteArrayModelIfTest::testSwap()
     mByteArrayModel->setModified(false);
 
     // create copy
-    mByteArrayModel->copyTo(copy.rawData(), 0, size);
+    std::ignore = mByteArrayModel->copyTo(copy.rawData(), 0, size);
 
     // Action: move to middle (to left)
     Address destOffset = size / 2;
@@ -575,7 +575,7 @@ void AbstractByteArrayModelIfTest::testReplaceEqual()
 
     // create copy
     FixedSizeByteArrayModel copy(size);
-    mByteArrayModel->copyTo(copy.rawData(), 0, size);
+    std::ignore = mByteArrayModel->copyTo(copy.rawData(), 0, size);
 
     // Action: move to begin again (to left)
     AddressRange targetRange = AddressRange::fromWidth(0, removeSize);
@@ -592,7 +592,7 @@ void AbstractByteArrayModelIfTest::testReplaceEqual()
 
     // clean
     textureByteArrayModel(mByteArrayModel.get(), 100, 255);
-    mByteArrayModel->copyTo(copy.rawData(), 0, size);
+    std::ignore = mByteArrayModel->copyTo(copy.rawData(), 0, size);
     mByteArrayModel->setModified(false);
 
     // Action: replace at middle
@@ -611,7 +611,7 @@ void AbstractByteArrayModelIfTest::testReplaceEqual()
 
     // clean
     textureByteArrayModel(mByteArrayModel.get(), 100, 255);
-    mByteArrayModel->copyTo(copy.rawData(), 0, size);
+    std::ignore = mByteArrayModel->copyTo(copy.rawData(), 0, size);
     mByteArrayModel->setModified(false);
 
     // Action: replace at end
@@ -650,7 +650,7 @@ void AbstractByteArrayModelIfTest::testReplaceLess()
 
     // create copy
     FixedSizeByteArrayModel copy(size);
-    mByteArrayModel->copyTo(copy.rawData(), 0, size);
+    std::ignore = mByteArrayModel->copyTo(copy.rawData(), 0, size);
 
     // Action: replace at begin
     AddressRange removeRange = AddressRange::fromWidth(0, removeSize);
@@ -668,7 +668,7 @@ void AbstractByteArrayModelIfTest::testReplaceLess()
     // clean
     size = mByteArrayModel->size();
     textureByteArrayModel(mByteArrayModel.get(), 100, 255);
-    mByteArrayModel->copyTo(copy.rawData(), 0, size);
+    std::ignore = mByteArrayModel->copyTo(copy.rawData(), 0, size);
     mByteArrayModel->setModified(false);
 
     // Action: replace at middle
@@ -688,7 +688,7 @@ void AbstractByteArrayModelIfTest::testReplaceLess()
     // clean
     size = mByteArrayModel->size();
     textureByteArrayModel(mByteArrayModel.get(), 100, 255);
-    mByteArrayModel->copyTo(copy.rawData(), 0, size);
+    std::ignore = mByteArrayModel->copyTo(copy.rawData(), 0, size);
     mByteArrayModel->setModified(false);
 
     // Action: replace at end
@@ -727,7 +727,7 @@ void AbstractByteArrayModelIfTest::testReplaceMore()
 
     // create copy
     FixedSizeByteArrayModel copy(size + 2 * insertSize);
-    mByteArrayModel->copyTo(copy.rawData(), 0, size);
+    std::ignore = mByteArrayModel->copyTo(copy.rawData(), 0, size);
 
     // Action: replace at begin
     AddressRange removeRange = AddressRange::fromWidth(0, removeSize);
@@ -745,7 +745,7 @@ void AbstractByteArrayModelIfTest::testReplaceMore()
     // clean
     size = mByteArrayModel->size();
     textureByteArrayModel(mByteArrayModel.get(), 100, 255);
-    mByteArrayModel->copyTo(copy.rawData(), 0, size);
+    std::ignore = mByteArrayModel->copyTo(copy.rawData(), 0, size);
     mByteArrayModel->setModified(false);
     // Action: replace at middle
     removeRange.moveToStart(size / 2);
@@ -764,7 +764,7 @@ void AbstractByteArrayModelIfTest::testReplaceMore()
     // clean
     size = mByteArrayModel->size();
     textureByteArrayModel(mByteArrayModel.get(), 100, 255);
-    mByteArrayModel->copyTo(copy.rawData(), 0, size);
+    std::ignore = mByteArrayModel->copyTo(copy.rawData(), 0, size);
     mByteArrayModel->setModified(false);
 
     // Action: replace at end

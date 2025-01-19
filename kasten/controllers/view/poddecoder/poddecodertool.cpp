@@ -331,7 +331,7 @@ void PODDecoderTool::updateData()
 
     const bool hasDataSet = (dataSize > 0);
     if (hasDataSet) {
-        mByteArrayModel->copyTo(mPODData.rawData(), mCursorIndex, Okteta::PODData::Size);
+        std::ignore = mByteArrayModel->copyTo(mPODData.rawData(), mCursorIndex, Okteta::PODData::Size);
     }
 
     const bool hasChanged = mPODData.updateRawData(dataSize);
