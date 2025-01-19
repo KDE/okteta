@@ -217,7 +217,7 @@ bool MouseNavigator::handleMouseDoubleClickEvent(QMouseEvent* mouseEvent)
         const Address index = tableCursor->validIndex();
 
         if (mView->activeCoding() == AbstractByteArrayView::CharCodingId) {
-            mView->selectWord(index);
+            std::ignore = mView->selectWord(index);
 
             // as we already have a doubleclick maybe it is a tripple click
             mTrippleClickTimer.start(qApp->doubleClickInterval());

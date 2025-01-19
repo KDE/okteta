@@ -17,7 +17,7 @@ ByteArrayModelIoDevice::ByteArrayModelIoDevice(AbstractByteArrayModel* byteArray
     : QIODevice(parent)
     , mByteArrayModel(byteArrayModel)
 {
-    open(ReadOnly);   // krazy:exclude=syscalls
+    std::ignore = open(ReadOnly);   // krazy:exclude=syscalls
 }
 
 ByteArrayModelIoDevice::~ByteArrayModelIoDevice() = default;

@@ -44,7 +44,7 @@ QByteArray ByteArrayUtf8StringValidator::toByteArray(const QString& string) cons
 {
     QByteArray result;
 
-    m_decoder.decode(&result, string, minLength(), maxLength());
+    std::ignore = m_decoder.decode(&result, string, minLength(), maxLength());
 
     if (result.size() < minLength()) {
         result.append(QByteArray(minLength() - result.size(), '\0'));

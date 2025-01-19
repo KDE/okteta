@@ -25,7 +25,7 @@ FileByteArrayModelPrivate::FileByteArrayModelPrivate(FileByteArrayModel* parent,
 FileByteArrayModelPrivate::~FileByteArrayModelPrivate()
 {
     if (mFile.isOpen()) {
-        close();
+        std::ignore = close();
     }
 }
 

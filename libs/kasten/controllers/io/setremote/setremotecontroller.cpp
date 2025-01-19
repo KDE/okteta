@@ -44,7 +44,7 @@ void SetRemoteController::setTargetModel(AbstractModel* model)
 
 void SetRemoteController::saveAs()
 {
-    mSyncManager->setSynchronizer(mDocument);
+    std::ignore = mSyncManager->setSynchronizer(mDocument);
 }
 
 }

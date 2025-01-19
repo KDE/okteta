@@ -309,7 +309,7 @@ void PrintTool::triggerPrint(QPrinter* printer)
 
 void PrintTool::triggerPrintPreview(QPrinter* printer)
 {
-    doPrint(printer);
+    std::ignore = doPrint(printer);
 }
 
 bool PrintTool::doPrint(QPrinter* printer)
