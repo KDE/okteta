@@ -26,6 +26,7 @@ ecm_add_test(
         KF5::I18n
         Qt5::Test
 )
+target_compile_definitions(bytearraydocumenttest PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")
 
 
 ########### bytearraydocumentfactorytest ###############
@@ -43,3 +44,4 @@ ecm_add_test(
         KF5::I18n
         Qt5::Test
 )
+target_compile_definitions(bytearraydocumentfactorytest PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")

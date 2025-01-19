@@ -36,6 +36,8 @@ target_link_libraries(oktetakastenio
 target_compile_definitions(oktetakastenio
     PUBLIC
         OKTETAKASTENCORE_STATICLIB
+    PRIVATE
+        TRANSLATION_DOMAIN=\"liboktetakasten\"
 )
 
 ########### bytearrayrawfilesynchronizertest ###############
@@ -56,6 +58,7 @@ ecm_add_test(
         KF5::Bookmarks
         Qt5::Test
 )
+target_compile_definitions(bytearrayrawfilesynchronizertest PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")
 
 ########### bytearrayrawfilesynchronizerfactorytest ###############
 
@@ -76,3 +79,4 @@ ecm_add_test(
         KF5::Bookmarks
         Qt5::Test
 )
+target_compile_definitions(bytearrayrawfilesynchronizerfactorytest PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")
