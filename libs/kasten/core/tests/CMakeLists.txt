@@ -26,6 +26,7 @@ target_link_libraries(kastencoretestutil
 ########### io ###############
 
 add_library(kastencoretestio STATIC)
+target_compile_definitions(kastencoretestio PRIVATE -DTRANSLATION_DOMAIN=\"libkasten\")
 target_link_libraries(kastencoretestio
     PUBLIC
         Qt5::Core
