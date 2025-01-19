@@ -17,6 +17,7 @@ target_link_libraries(datatypeeditors
 
 add_library(structureview-tested-srcs STATIC)
 set_target_properties(structureview-tested-srcs PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
+target_compile_definitions(structureview-tested-srcs PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")
 target_link_libraries(structureview-tested-srcs
     PUBLIC
         OktetaCore
@@ -743,6 +744,7 @@ if(BUILD_TESTING)
             view/libfinddialog
             view/libbytearraysearch
     )
+    target_compile_definitions(searchtooltest PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")
 
     #replace tool unit tests
     ecm_add_test(
@@ -820,6 +822,8 @@ target_include_directories(OktetaKastenControllersTemplates
 target_compile_definitions(OktetaKastenControllersTemplates
     PUBLIC
         OKTETAKASTENCONTROLLERS_STATICLIB
+    PRIVATE
+        TRANSLATION_DOMAIN=\"liboktetakasten\"
 )
 target_link_libraries(OktetaKastenControllersTemplates
     PUBLIC
