@@ -184,11 +184,11 @@ bool OktetaPart::openFile()
     Kasten::AbstractLoadJob* loadJob = synchronizer->startLoad(QUrl::fromLocalFile(localFilePath()));
     connect(loadJob, &Kasten::AbstractLoadJob::documentLoaded,
             this, &OktetaPart::onDocumentLoaded);
-    Kasten::JobManager::executeJob(loadJob);
+    const bool loadSuccess = Kasten::JobManager::executeJob(loadJob);
 
     delete synchronizerFactory;
 
-    return true;
+    return loadSuccess;
 }
 
 bool OktetaPart::saveFile()
