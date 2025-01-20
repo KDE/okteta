@@ -38,6 +38,7 @@ public:
 
 public: // KPluginFactory API
     using KPluginFactory::create;
+    [[nodiscard]]
     QObject* create(const char* iface,
                     QWidget* parentWidget,
                     QObject* parent,
