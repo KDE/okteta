@@ -49,6 +49,7 @@ public:
     ~ByteArrayViewHtmlStreamEncoder() override;
 
 protected: // AbstractByteArrayStreamEncoder API
+    [[nodiscard]]
     bool encodeDataToStream(QIODevice* device,
                             const ByteArrayView* byteArrayView,
                             const Okteta::AbstractByteArrayModel* byteArrayModel,

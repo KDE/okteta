@@ -38,6 +38,7 @@ public:
     ~AbstractByteArrayStreamEncoder() override;
 
 public: // AbstractModelStreamEncoder API
+    [[nodiscard]]
     bool encodeToStream(QIODevice* device, AbstractModel* model, const AbstractModelSelection* selection) override;
     [[nodiscard]]
     QString modelTypeName(AbstractModel* model, const AbstractModelSelection* selection) const override;
@@ -50,6 +51,7 @@ Q_SIGNALS:
     void settingsChanged();
 
 protected: // API to be implemented
+    [[nodiscard]]
     virtual bool encodeDataToStream(QIODevice* device,
                                     const ByteArrayView* byteArrayView,
                                     const Okteta::AbstractByteArrayModel* byteArrayModel,
