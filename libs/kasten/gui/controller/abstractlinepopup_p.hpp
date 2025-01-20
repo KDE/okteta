@@ -36,6 +36,7 @@ public:
     void setWidget(QWidget* widget);
 
     void setResult(int result);
+    [[nodiscard]]
     int exec();
     void open();
     void accept();

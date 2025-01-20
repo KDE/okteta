@@ -46,6 +46,7 @@ public:
     void setPosition(QPoint globalPosition);
     void setWidget(QWidget* widget);
 
+    [[nodiscard]]
     int exec();
     void open();
     [[nodiscard]]
@@ -59,6 +60,7 @@ public Q_SLOTS:
     void reject(); // TODO: virtual
 
 protected: // QObject API
+    [[nodiscard]]
     bool eventFilter(QObject* object, QEvent* event) override;
 
 protected: // QWidget API
