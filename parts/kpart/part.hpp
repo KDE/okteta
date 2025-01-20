@@ -64,9 +64,11 @@ Q_SIGNALS:
     void hasSelectedDataChanged(bool hasSelectedData);
 
 protected: // KParts::ReadWritePart API
+    [[nodiscard]]
     bool saveFile() override;
 
 protected: // KParts::ReadOnlyPart API
+    [[nodiscard]]
     bool openFile() override;
 
 private:
