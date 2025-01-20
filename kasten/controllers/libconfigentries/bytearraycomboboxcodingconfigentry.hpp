@@ -15,6 +15,7 @@
 #include <Kasten/Okteta/ByteArrayComboBox>
 
 template <>
+[[nodiscard]]
 inline
 Okteta::ByteArrayComboBox::Coding
 KConfigGroup::readEntry(const char *key,

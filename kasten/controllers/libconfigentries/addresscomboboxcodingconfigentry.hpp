@@ -15,6 +15,7 @@
 #include <Kasten/Okteta/AddressComboBox>
 
 template <>
+[[nodiscard]]
 Okteta::AddressComboBox::Coding
 KConfigGroup::readEntry(const char *key,
                         const Okteta::AddressComboBox::Coding &defaultValue) const;

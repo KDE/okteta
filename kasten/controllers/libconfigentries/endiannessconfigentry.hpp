@@ -15,6 +15,7 @@
 #include <QSysInfo>
 
 template <>
+[[nodiscard]]
 inline QSysInfo::Endian KConfigGroup::readEntry(const char *key, const QSysInfo::Endian &defaultValue) const
 {
     const QString entry = readEntry(key, QString());

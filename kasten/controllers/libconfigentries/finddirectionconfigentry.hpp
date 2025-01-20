@@ -15,6 +15,7 @@
 #include <finddirection.hpp>
 
 template <>
+[[nodiscard]]
 inline Kasten::FindDirection KConfigGroup::readEntry(const char *key, const Kasten::FindDirection &defaultValue) const
 {
     return static_cast<Kasten::FindDirection>(KConfigGroup::readEntry(key, static_cast<Kasten::Direction>(defaultValue)));

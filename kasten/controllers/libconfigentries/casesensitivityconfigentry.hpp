@@ -15,6 +15,7 @@
 #include <Qt>
 
 template <>
+[[nodiscard]]
 inline Qt::CaseSensitivity KConfigGroup::readEntry(const char *key, const Qt::CaseSensitivity &defaultValue) const
 {
     const QString entry = readEntry(key, QString());

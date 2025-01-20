@@ -28,6 +28,7 @@ enum ByteArrayCoding
 }
 
 template <>
+[[nodiscard]]
 Kasten::ByteArrayCoding
 KConfigGroup::readEntry(const char *key,
                         const Kasten::ByteArrayCoding &defaultValue) const;

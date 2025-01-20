@@ -23,6 +23,7 @@ enum Direction
 }
 
 template <>
+[[nodiscard]]
 inline Kasten::Direction KConfigGroup::readEntry(const char *key, const Kasten::Direction &defaultValue) const
 {
     const QString entry = readEntry(key, QString());
