@@ -23,6 +23,7 @@ public:
     ~Crc32ByteArrayChecksumAlgorithm() override;
 
 public: // AbstractByteArrayChecksumAlgorithm API
+    [[nodiscard]]
     bool calculateChecksum(QString* result, const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const override;
     [[nodiscard]]
     AbstractByteArrayChecksumParameterSet* parameterSet() override;
