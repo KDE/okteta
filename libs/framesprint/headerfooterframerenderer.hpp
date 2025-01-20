@@ -26,7 +26,9 @@ public:
     PrintInfo& operator=(const PrintInfo&) = delete;
 
 public:
+    [[nodiscard]]
     QUrl url() const;
+    [[nodiscard]]
     int noOfPages() const;
 
 public:
@@ -64,7 +66,9 @@ public: // AbstractFrameRenderer API
     // make this flags?
 //     virtual bool hasFixedWidth() const;
 //     virtual bool hasFixedHeight() const;
+    [[nodiscard]]
     int height() const override;
+    [[nodiscard]]
     int width() const override;
 //     virtual QSize sizeHint( const QSize &maxSize ) const;
     // only vertical for now...

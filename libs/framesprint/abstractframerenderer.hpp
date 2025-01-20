@@ -32,7 +32,9 @@ public: // API to be implemented
     // make this flags?
 //     virtual bool hasFixedWidth() const = 0;
 //     virtual bool hasFixedHeight() const = 0;
+    [[nodiscard]]
     virtual int height() const = 0;
+    [[nodiscard]]
     virtual int width() const = 0;
 //     virtual QSize sizeHint( const QSize &maxSize ) const = 0;
     // only vertical for now...
@@ -47,10 +49,15 @@ public:
     void setPos(QPoint point);
 
 public:
+    [[nodiscard]]
     QPoint pos () const;
+    [[nodiscard]]
     QRect rect () const;
+    [[nodiscard]]
     QSize size () const;
+    [[nodiscard]]
     int x() const;
+    [[nodiscard]]
     int y() const;
 
 private:

@@ -37,8 +37,11 @@ public:
     bool print(QPrinter* printer, int firstPageIndex, int lastPageIndex);
 
 public:
+    [[nodiscard]]
     QRect pageRect() const;
+    [[nodiscard]]
     QMargins pageMargins() const;
+    [[nodiscard]]
     QRect contentsRect() const;
 
 Q_SIGNALS:
