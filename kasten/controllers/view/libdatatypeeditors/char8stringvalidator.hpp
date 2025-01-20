@@ -26,6 +26,7 @@ public:
     ~Char8StringValidator() override;
 
 public: // QValidator API
+    [[nodiscard]]
     QValidator::State validate(QString& input, int& pos) const override;
 
 private:

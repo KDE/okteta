@@ -29,9 +29,12 @@ public:
     ~AbstractValue8Editor() override;
 
 protected: // QSpinBox API
+    [[nodiscard]]
     QString textFromValue(int value) const override;
+    [[nodiscard]]
     int valueFromText(const QString& text) const override;
 
+    [[nodiscard]]
     QValidator::State validate(QString& text, int& pos) const override;
 
 protected:

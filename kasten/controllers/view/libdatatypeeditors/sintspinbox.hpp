@@ -37,12 +37,17 @@ public:
     void setRange(qint64 minimum, qint64 maximum);
     void setBase(int base);
 
+    [[nodiscard]]
     static SIntSpinBox* createSInt64Spinbox(QWidget* parent = nullptr);
+    [[nodiscard]]
     static SIntSpinBox* createSInt32Spinbox(QWidget* parent = nullptr);
+    [[nodiscard]]
     static SIntSpinBox* createSInt16Spinbox(QWidget* parent = nullptr);
+    [[nodiscard]]
     static SIntSpinBox* createSInt8Spinbox(QWidget* parent = nullptr);
 
 protected: // QAbstractSpinBox API
+    [[nodiscard]]
     QValidator::State validate(QString& input, int& pos) const override;
     void stepBy(int steps) override;
     void fixup(QString& input) const override;

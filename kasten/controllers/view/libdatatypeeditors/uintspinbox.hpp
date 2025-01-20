@@ -39,12 +39,17 @@ public:
     void setMaximum(quint64 max);
     void setBase(int base);
 
+    [[nodiscard]]
     static UIntSpinBox* createUInt64Spinbox(QWidget* parent = nullptr);
+    [[nodiscard]]
     static UIntSpinBox* createUInt32Spinbox(QWidget* parent = nullptr);
+    [[nodiscard]]
     static UIntSpinBox* createUInt16Spinbox(QWidget* parent = nullptr);
+    [[nodiscard]]
     static UIntSpinBox* createUInt8Spinbox(QWidget* parent = nullptr);
 
 protected: // QAbstractSpinBox API
+    [[nodiscard]]
     QValidator::State validate(QString& input, int& pos) const override;
     void stepBy(int steps) override;
     void fixup(QString& input) const override;
