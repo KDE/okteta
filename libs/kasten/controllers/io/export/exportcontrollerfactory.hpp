@@ -31,6 +31,7 @@ public:
     ExportControllerFactory& operator=(const ExportControllerFactory&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
+    [[nodiscard]]
     std::unique_ptr<AbstractXmlGuiController> create(KXMLGUIClient* guiClient) const override;
 
 private:

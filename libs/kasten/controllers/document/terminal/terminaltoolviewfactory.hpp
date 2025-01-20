@@ -27,6 +27,7 @@ public:
     TerminalToolViewFactory& operator=(const TerminalToolViewFactory&) = delete;
 
 public: // AbstractToolViewFactory API
+    [[nodiscard]]
     std::unique_ptr<AbstractToolView> create(AbstractTool* tool) const override;
 
     [[nodiscard]]

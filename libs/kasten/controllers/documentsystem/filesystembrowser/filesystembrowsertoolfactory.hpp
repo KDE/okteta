@@ -29,6 +29,7 @@ public:
     FileSystemBrowserToolFactory& operator=(const FileSystemBrowserToolFactory&) = delete;
 
 public: // AbstractToolFactory API
+    [[nodiscard]]
     std::unique_ptr<AbstractTool> create() const override;
 
 private:

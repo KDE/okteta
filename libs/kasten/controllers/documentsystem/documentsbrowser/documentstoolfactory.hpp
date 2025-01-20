@@ -29,6 +29,7 @@ public:
     DocumentsToolFactory& operator=(const DocumentsToolFactory&) = delete;
 
 public: // AbstractToolFactory API
+    [[nodiscard]]
     std::unique_ptr<AbstractTool> create() const override;
 
 private:

@@ -30,6 +30,7 @@ public:
     ViewAreaSplitControllerFactory& operator=(const ViewAreaSplitControllerFactory&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
+    [[nodiscard]]
     std::unique_ptr<AbstractXmlGuiController> create(KXMLGUIClient* guiClient) const override;
 
 private:
