@@ -25,6 +25,7 @@ public:
     ByteArrayPatternGeneratorConfigEditorFactory& operator=(const ByteArrayPatternGeneratorConfigEditorFactory&) = delete;
 
 public:
+    [[nodiscard]]
     std::unique_ptr<AbstractModelDataGeneratorConfigEditor> tryCreateConfigEditor(AbstractModelDataGenerator* generator) const override;
 };
 

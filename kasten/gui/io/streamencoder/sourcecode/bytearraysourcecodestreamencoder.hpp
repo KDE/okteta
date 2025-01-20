@@ -101,6 +101,7 @@ protected: // AbstractByteArrayStreamEncoder API
                             const Okteta::AddressRange& range) override;
 
 private:
+    [[nodiscard]]
     QString printFormatted(const Okteta::AbstractByteArrayModel* byteArrayModel, Okteta::Address offset, unsigned int dataSize) const;
 
 private:

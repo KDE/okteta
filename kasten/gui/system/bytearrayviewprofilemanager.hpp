@@ -89,6 +89,7 @@ public:
     void removeViewProfiles(const QVector<ByteArrayViewProfile::Id>& viewProfileIds);
     void setDefaultViewProfile(const ByteArrayViewProfile::Id& viewProfileId);
 
+    [[nodiscard]]
     ByteArrayViewProfileLock createLock(const ByteArrayViewProfile::Id& viewProfileId);
 
 Q_SIGNALS:

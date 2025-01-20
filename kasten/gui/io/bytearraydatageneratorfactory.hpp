@@ -27,6 +27,7 @@ public:
     ByteArrayDataGeneratorFactory& operator=(const ByteArrayDataGeneratorFactory&) = delete;
 
 public:
+    [[nodiscard]]
     static std::vector<std::unique_ptr<AbstractModelDataGenerator>> createDataGenerators();
 };
 

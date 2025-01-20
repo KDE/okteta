@@ -28,7 +28,9 @@ public:
     ByteArrayViewFactory& operator=(const ByteArrayViewFactory&) = delete;
 
 public:
+    [[nodiscard]]
     std::unique_ptr<AbstractView> createViewFor(AbstractDocument* document) override;
+    [[nodiscard]]
     std::unique_ptr<AbstractView> createCopyOfView(AbstractView* view, Qt::Alignment alignment) override;
 
 private:

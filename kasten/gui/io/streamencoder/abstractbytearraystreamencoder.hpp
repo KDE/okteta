@@ -43,6 +43,7 @@ public: // AbstractModelStreamEncoder API
     QString modelTypeName(AbstractModel* model, const AbstractModelSelection* selection) const override;
 
 public:
+    [[nodiscard]]
     QString previewData(AbstractModel* model, const AbstractModelSelection* selection);
 
 Q_SIGNALS:

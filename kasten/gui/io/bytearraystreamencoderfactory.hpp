@@ -27,6 +27,7 @@ public:
     ByteArrayStreamEncoderFactory& operator=(const ByteArrayStreamEncoderFactory&) = delete;
 
 public:
+    [[nodiscard]]
     static std::vector<std::unique_ptr<AbstractModelStreamEncoder>> createStreamEncoders();
 
 };

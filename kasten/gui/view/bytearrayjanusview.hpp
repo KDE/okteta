@@ -79,6 +79,7 @@ public:
     void insert(const QByteArray& byteArray);
     [[nodiscard]]
     bool hasSelectedData() const;
+    [[nodiscard]]
     std::unique_ptr<QMimeData> selectionAsMimeData() const;
     [[nodiscard]]
     bool canReadData(const QMimeData* data) const;

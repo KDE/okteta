@@ -27,6 +27,7 @@ public:
     ~ByteArrayValuesStreamEncoderConfigEditor() override;
 
 public: // AbstractModelStreamEncoderConfigEditor API
+    [[nodiscard]]
     std::unique_ptr<AbstractSelectionView> createPreviewView() const override;
 
 private Q_SLOTS:

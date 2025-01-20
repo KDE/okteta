@@ -24,8 +24,11 @@ private:
     static inline constexpr int DefaultNoOfSublines = 1;
 
 protected:
+    [[nodiscard]]
     static QString whiteSpace(unsigned int length);
+    [[nodiscard]]
     static QString emptyCells(unsigned int length, unsigned int codingWidth);
+    [[nodiscard]]
     static QString htmlEscaped(QChar c);
 
 protected:

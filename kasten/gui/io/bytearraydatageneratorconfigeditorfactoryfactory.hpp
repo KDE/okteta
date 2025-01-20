@@ -27,6 +27,7 @@ public:
     ByteArrayDataGeneratorConfigEditorFactoryFactory& operator=(const ByteArrayDataGeneratorConfigEditorFactoryFactory&) = delete;
 
 public:
+    [[nodiscard]]
     static std::vector<std::unique_ptr<AbstractModelDataGeneratorConfigEditorFactory>> createFactorys();
 
 };

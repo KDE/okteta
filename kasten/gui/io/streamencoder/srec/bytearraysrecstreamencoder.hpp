@@ -88,10 +88,15 @@ private:
     static inline constexpr char ConfigGroupId[] = "ByteArraySRecordStreamEncoder";
 
 private:
+    [[nodiscard]]
     static RecordType dataSequenceRecordType(SRecStreamEncoderSettings::AddressSizeId id);
+    [[nodiscard]]
     static RecordType endOfBlockRecordType(SRecStreamEncoderSettings::AddressSizeId id);
+    [[nodiscard]]
     static int endOfBlockAddressSize(RecordType type);
+    [[nodiscard]]
     static char charOfRecordType(RecordType type);
+    [[nodiscard]]
     static char hexValueOfNibble(int nibble);
     static void writeBigEndian(unsigned char* line, quint32 value, int byteSize);
     static void streamLine(QTextStream& textStream, RecordType recordType,

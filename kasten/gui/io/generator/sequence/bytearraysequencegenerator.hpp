@@ -41,6 +41,7 @@ public:
     ~ByteArraySequenceGenerator() override;
 
 public: // AbstractModelDataGenerator API
+    [[nodiscard]]
     std::unique_ptr<QMimeData> generateData() override;
 
 public:

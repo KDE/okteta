@@ -76,6 +76,7 @@ public:
     ~ByteArrayPatternGenerator() override;
 
 public: // AbstractModelDataGenerator API
+    [[nodiscard]]
     std::unique_ptr<QMimeData> generateData() override;
 
 public:

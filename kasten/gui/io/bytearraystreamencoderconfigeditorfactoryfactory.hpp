@@ -27,6 +27,7 @@ public:
     ByteArrayStreamEncoderConfigEditorFactoryFactory& operator=(const ByteArrayStreamEncoderConfigEditorFactoryFactory&) = delete;
 
 public:
+    [[nodiscard]]
     static std::vector<std::unique_ptr<AbstractModelStreamEncoderConfigEditorFactory>> createFactorys();
 
 };

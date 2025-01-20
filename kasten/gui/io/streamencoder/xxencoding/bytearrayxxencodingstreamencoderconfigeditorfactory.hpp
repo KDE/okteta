@@ -25,6 +25,7 @@ public:
     ByteArrayXxencodingStreamEncoderConfigEditorFactory& operator=(const ByteArrayXxencodingStreamEncoderConfigEditorFactory&) = delete;
 
 public:
+    [[nodiscard]]
     std::unique_ptr<AbstractModelStreamEncoderConfigEditor> tryCreateConfigEditor(AbstractModelStreamEncoder* encoder) const override;
 };
 
