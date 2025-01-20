@@ -42,6 +42,7 @@ public:
     /// Sets the char codec to use. Does not change the current codec.
     void setCharCodec(const QString& charCodecName);
 
+    [[nodiscard]]
     const CharCodec* charCodec() const;
 
 private:

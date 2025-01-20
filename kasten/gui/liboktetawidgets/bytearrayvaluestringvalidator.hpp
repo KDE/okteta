@@ -45,6 +45,7 @@ public:
     void setCoding(Coding valueCodingId);
 
 public:
+    [[nodiscard]]
     Coding coding() const;
 
 private:

@@ -57,8 +57,11 @@ public:
     void setMinLength(int minLength);
 
 public:
+    [[nodiscard]]
     int maxLength() const;
+    [[nodiscard]]
     int minLength() const;
+    [[nodiscard]]
     ByteArrayValidator::Coding coding() const;
 
     QByteArray toByteArray(const QString& string) const;

@@ -28,8 +28,11 @@ public:
     AddressComboBoxPrivate& operator=(const AddressComboBoxPrivate&) = delete;
 
 public:
+    [[nodiscard]]
     Address address() const;
+    [[nodiscard]]
     int format() const;
+    [[nodiscard]]
     AddressValidator::AddressType addressType() const;
 
 public:

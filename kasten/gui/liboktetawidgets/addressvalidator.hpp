@@ -52,6 +52,7 @@ public: // QValidator API
     QValidator::State validate(QString& string, int& pos) const override;
 
 public:
+    [[nodiscard]]
     AddressType addressType() const;
     /** Sets one of the value codecs or any char codec */
     void setCodec(Coding codecId);

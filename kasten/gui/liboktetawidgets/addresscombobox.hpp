@@ -48,9 +48,12 @@ public: // set
     void rememberCurrentAddress();
 
 public: // get
+    [[nodiscard]]
     Address address() const;
+    [[nodiscard]]
     int format() const;
     /** Is actually of type AddressValidator::AddressType */
+    [[nodiscard]]
     int addressType() const;
 
 Q_SIGNALS:

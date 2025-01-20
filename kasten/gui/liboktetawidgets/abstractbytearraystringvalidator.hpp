@@ -40,7 +40,9 @@ public:
      */
     void setMinLength(int minLength);
 
+    [[nodiscard]]
     int maxLength() const;
+    [[nodiscard]]
     int minLength() const;
 
 private:

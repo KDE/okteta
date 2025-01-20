@@ -53,9 +53,13 @@ public: // set
     void rememberCurrentByteArray();
 
 public: // get
+    [[nodiscard]]
     QByteArray byteArray() const;
+    [[nodiscard]]
     int format() const;
+    [[nodiscard]]
     int maxLength() const;
+    [[nodiscard]]
     int minLength() const;
 
 Q_SIGNALS:

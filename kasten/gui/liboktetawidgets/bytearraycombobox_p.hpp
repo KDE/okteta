@@ -30,9 +30,13 @@ public:
     ByteArrayComboBoxPrivate& operator=(const ByteArrayComboBoxPrivate&) = delete;
 
 public:
+    [[nodiscard]]
     QByteArray byteArray() const;
+    [[nodiscard]]
     int format() const;
+    [[nodiscard]]
     int maxLength() const;
+    [[nodiscard]]
     int minLength() const;
 
 public:

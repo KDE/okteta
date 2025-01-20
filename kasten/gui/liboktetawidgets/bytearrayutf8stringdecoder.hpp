@@ -35,6 +35,7 @@ public:
     CodeState validate(int* resultSize, const QString& string,
                        int minResultSize = 0, int maxResultSize = -1, int* usedStringSize = nullptr) const;
 
+    [[nodiscard]]
     QTextCodec* textCodec() const;
 
 private:
