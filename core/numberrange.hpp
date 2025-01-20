@@ -25,7 +25,9 @@ public:
      * @param startIndex starting index
      * @param width width of the range
      */
+    [[nodiscard]]
     static NumberRange fromWidth(N startIndex, S width);
+    [[nodiscard]]
     static NumberRange fromWidth(S width);
 
 public:
@@ -75,7 +77,9 @@ public:
 
     void adaptToReplacement(N offset, S removedLength, S insertedLength);
 
+    [[nodiscard]]
     NumberRange splitAt(N index);
+    [[nodiscard]]
     NumberRange splitAtLocal(N index);
     NumberRange remove(const NumberRange& removeRange);
     NumberRange removeLocal(const NumberRange& removeRange);

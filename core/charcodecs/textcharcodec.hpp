@@ -32,7 +32,9 @@ class TextCharCodec : public CharCodec
     };
 
 public:
+    [[nodiscard]]
     static std::unique_ptr<TextCharCodec> createCodec(const QString& codecName);
+    [[nodiscard]]
     static std::unique_ptr<TextCharCodec> createLocalCodec();
 
     [[nodiscard]]
@@ -46,6 +48,7 @@ public:
     TextCharCodec& operator=(const TextCharCodec&) = delete;
 
 public: // CharCodec API
+    [[nodiscard]]
     Character decode(Byte byte) const override;
     bool encode(Byte* byte, QChar _char) const override;
     [[nodiscard]]

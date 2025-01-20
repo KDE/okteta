@@ -29,6 +29,7 @@ public:
     EBCDIC1047CharCodec& operator=(const EBCDIC1047CharCodec&) = delete;
 
 public: // CharCodec API
+    [[nodiscard]]
     Character decode(Byte byte) const override;
     bool encode(Byte* byte, QChar _char) const override;
     [[nodiscard]]
@@ -37,6 +38,7 @@ public: // CharCodec API
     QString name() const override;
 
 public:
+    [[nodiscard]]
     static std::unique_ptr<EBCDIC1047CharCodec> create();
     [[nodiscard]]
     static const QString& codecName();

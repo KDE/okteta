@@ -136,6 +136,7 @@ public: // logic access
 
 protected:
     /** delivers a null element. Should be specialiced for complexer types. */
+    [[nodiscard]]
     const T null() const { return T(-1);}
 
 protected:

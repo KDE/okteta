@@ -29,6 +29,7 @@ public:
     JISX0201CharCodec& operator=(const JISX0201CharCodec&) = delete;
 
 public: // CharCodec API
+    [[nodiscard]]
     Character decode(Byte byte) const override;
     bool encode(Byte* byte, QChar _char) const override;
     [[nodiscard]]
@@ -37,6 +38,7 @@ public: // CharCodec API
     QString name() const override;
 
 public:
+    [[nodiscard]]
     static std::unique_ptr<JISX0201CharCodec> create();
     [[nodiscard]]
     static const QString& codecName();

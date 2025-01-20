@@ -20,7 +20,9 @@ namespace Okteta {
 class ArrayChangeMetricsList : public QVector<ArrayChangeMetrics>
 {
 public:
+    [[nodiscard]]
     static ArrayChangeMetricsList oneReplacement(Address offset, Size removeLength, Size insertLength);
+    [[nodiscard]]
     static ArrayChangeMetricsList oneSwapping(Address firstOffset, Size secondOffset, Size secondLength);
 
 public:

@@ -42,7 +42,9 @@ public:
 
 public:
     void setStorageId(int storageId);
+    [[nodiscard]]
     Piece splitAt(Address storageOffset);
+    [[nodiscard]]
     Piece splitAtLocal(Address localStorageOffset);
     Piece remove(const AddressRange& removeStorageRange);
     Piece removeLocal(const AddressRange& localRemoveStorageRange);
@@ -52,6 +54,7 @@ public:
     bool append(const Piece& other);
 
 public:
+    [[nodiscard]]
     Piece subPiece(const AddressRange& local) const;
 
 private:

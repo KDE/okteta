@@ -40,7 +40,9 @@ public:
     };
 
 public:
+    [[nodiscard]]
     static constexpr ArrayChangeMetrics asReplacement(Address offset, Size removeLength, Size insertLength);
+    [[nodiscard]]
     static constexpr ArrayChangeMetrics asSwapping(Address firstOffset, Address secondOffset, Size secondLength);
 
 public:

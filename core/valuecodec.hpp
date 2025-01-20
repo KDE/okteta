@@ -31,6 +31,7 @@ namespace Okteta {
 class OKTETACORE_EXPORT ValueCodec
 {
 public:
+    [[nodiscard]]
     static std::unique_ptr<ValueCodec> createCodec(ValueCoding valueCoding);
 
 public:

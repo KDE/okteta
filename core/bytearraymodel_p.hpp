@@ -77,6 +77,7 @@ public: // Bookmarkable API
     void removeAllBookmarks();
     void setBookmark(unsigned int index, const Bookmark& bookmark);
 
+    [[nodiscard]]
     BookmarksConstIterator createBookmarksConstIterator() const;
     [[nodiscard]]
     const Bookmark& bookmarkAt(unsigned int index) const;

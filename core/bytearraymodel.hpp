@@ -64,6 +64,7 @@ public: // Okteta::Bookmarkable API
     void removeAllBookmarks() override;
     void setBookmark(unsigned int index, const Okteta::Bookmark& bookmark) override;
 
+    [[nodiscard]]
     Okteta::BookmarksConstIterator createBookmarksConstIterator() const override;
     [[nodiscard]]
     const Okteta::Bookmark& bookmarkAt(unsigned int index) const override;

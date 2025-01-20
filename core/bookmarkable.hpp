@@ -32,6 +32,7 @@ public: // set/action
     virtual void setBookmark(unsigned int index, const Okteta::Bookmark& bookmark) = 0;
 
 public: // get
+    [[nodiscard]]
     virtual Okteta::BookmarksConstIterator createBookmarksConstIterator() const = 0;
 //     virtual BookmarksMutableIterator createBookmarksMutableIterator() const = 0;
     [[nodiscard]]
