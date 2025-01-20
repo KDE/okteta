@@ -30,6 +30,7 @@ public:
 
 public:
     CodeState evaluate(QChar* result, const QString& string) const;
+    [[nodiscard]]
     const Okteta::CharCodec* charCodec() const;
 
 private:

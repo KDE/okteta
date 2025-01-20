@@ -28,6 +28,7 @@ public:
 
 public:
     void setData(Binary8 data);
+    [[nodiscard]]
     Binary8 data() const;
 };
 

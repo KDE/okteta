@@ -28,6 +28,7 @@ public:
 
 public:
     void setData(Octal8 data);
+    [[nodiscard]]
     Octal8 data() const;
 };
 

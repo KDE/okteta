@@ -33,9 +33,11 @@ public:
 
 public:
     void setByte(quint8 byte);
+    [[nodiscard]]
     std::optional<quint8> byte() const;
 
     void setData(Char8 data);
+    [[nodiscard]]
     Char8 data() const;
 
 private:

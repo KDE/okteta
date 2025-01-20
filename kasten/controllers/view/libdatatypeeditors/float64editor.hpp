@@ -28,6 +28,7 @@ public:
 
 public:
     void setData(Float64 data);
+    [[nodiscard]]
     Float64 data() const;
 };
 

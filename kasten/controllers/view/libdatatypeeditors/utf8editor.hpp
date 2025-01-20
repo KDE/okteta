@@ -28,6 +28,7 @@ public:
 
 public:
     void setData(Utf8 data);
+    [[nodiscard]]
     Utf8 data() const;
 };
 

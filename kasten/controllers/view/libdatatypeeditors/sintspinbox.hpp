@@ -27,6 +27,7 @@ public:
     ~SIntSpinBox() override;
 
 public:
+    [[nodiscard]]
     qint64 value() const;
 
 public:
@@ -45,6 +46,7 @@ protected: // QAbstractSpinBox API
     QValidator::State validate(QString& input, int& pos) const override;
     void stepBy(int steps) override;
     void fixup(QString& input) const override;
+    [[nodiscard]]
     StepEnabled stepEnabled() const override;
 
 private:

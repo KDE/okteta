@@ -28,6 +28,7 @@ public:
 
 public:
     void setData(Hexadecimal8 data);
+    [[nodiscard]]
     Hexadecimal8 data() const;
 };
 
