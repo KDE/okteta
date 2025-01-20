@@ -24,8 +24,11 @@ public:
     virtual ~AbstractSaveDiscardDialog();
 
 public: // API to be implemented
+    [[nodiscard]]
     virtual Answer queryDiscardOnReload(const AbstractDocument* document, const QString& title) const = 0;
+    [[nodiscard]]
     virtual Answer querySaveDiscard(const AbstractDocument* document, const QString& title) const = 0;
+    [[nodiscard]]
     virtual Answer queryDiscard(const AbstractDocument* document, const QString& title) const = 0;
 };
 

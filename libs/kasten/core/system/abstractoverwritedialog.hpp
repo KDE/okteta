@@ -24,6 +24,7 @@ public:
     virtual ~AbstractOverwriteDialog();
 
 public: // API to be implemented
+    [[nodiscard]]
     virtual Answer queryOverwrite(const QUrl& url, const QString& title) const = 0;
 };
 

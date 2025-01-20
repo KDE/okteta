@@ -82,11 +82,14 @@ public: // API to be implemented
 //     virtual void copyTo( const QUrl& url, AbstractDocument* document, int* success ) const = 0;
 
     /** overwrite remote with local (save) */
+    [[nodiscard]]
     virtual AbstractSyncToRemoteJob* startSyncToRemote() = 0;
     /** overwrite local with remote (reload) */
+    [[nodiscard]]
     virtual AbstractSyncFromRemoteJob* startSyncFromRemote() = 0;
 
     /** changes the  */ // TODO: better name for replace: overwrite?
+    [[nodiscard]]
     virtual AbstractSyncWithRemoteJob* startSyncWithRemote(const QUrl& url, AbstractModelSynchronizer::ConnectOption option) = 0;
 
 //    virtual AbstractConnectJob* startConnect(AbstractDocument* document,

@@ -24,6 +24,7 @@ public:
     virtual ~AbstractToolFactory();
 
 public: // API to be implemented
+    [[nodiscard]]
     virtual std::unique_ptr<AbstractTool> create() const = 0;
 };
 

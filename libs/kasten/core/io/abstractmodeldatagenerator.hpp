@@ -43,6 +43,7 @@ public:
     ~AbstractModelDataGenerator() override;
 
 public: // API to be implemented
+    [[nodiscard]]
     virtual std::unique_ptr<QMimeData> generateData() = 0;
 
 public:

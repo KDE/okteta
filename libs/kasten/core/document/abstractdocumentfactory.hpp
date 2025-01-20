@@ -34,8 +34,10 @@ public: // API to be implemented
     [[nodiscard]]
     virtual bool canCreateFromData(const QMimeData* mimeData);
 
+    [[nodiscard]]
     virtual std::unique_ptr<AbstractDocument> create() = 0;
     /// default returns 0
+    [[nodiscard]]
     virtual std::unique_ptr<AbstractDocument> createFromData(const QMimeData* mimeData, bool setModified);
 };
 

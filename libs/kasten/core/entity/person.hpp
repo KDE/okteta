@@ -22,6 +22,7 @@ namespace Kasten {
 class KASTENCORE_EXPORT Person
 {
 public: // TODO: remove me again, hack!
+    [[nodiscard]]
     static Person createEgo();
     static void setEgoId(int egoId);
 

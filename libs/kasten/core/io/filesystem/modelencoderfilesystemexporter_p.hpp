@@ -27,6 +27,7 @@ public:
     ~ModelEncoderFileSystemExporterPrivate() override;
 
 public: // AbstractModelExporter API
+    [[nodiscard]]
     AbstractExportJob* startExport(AbstractModel* model, const AbstractModelSelection* selection,
                                    const QUrl& url);
     [[nodiscard]]

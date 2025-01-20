@@ -32,6 +32,7 @@ public: // API to be implemented
     virtual void postNotification(std::unique_ptr<UserNotification>&& notification) = 0;
 
     // TODO: make async
+    [[nodiscard]]
     virtual QString executeQuery(std::unique_ptr<UserQuery>&& userQuery) = 0;
 };
 

@@ -40,6 +40,7 @@ public:
     ~AbstractModelExporter() override;
 
 public: // API to be implemented
+    [[nodiscard]]
     virtual AbstractExportJob* startExport(AbstractModel* model, const AbstractModelSelection* selection,
                                            const QUrl& url) = 0;
     [[nodiscard]]

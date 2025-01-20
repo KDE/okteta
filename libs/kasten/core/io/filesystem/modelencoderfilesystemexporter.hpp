@@ -32,6 +32,7 @@ public:
     AbstractModelStreamEncoder* encoder() const;
 
 public: // AbstractModelExporter API
+    [[nodiscard]]
     AbstractExportJob* startExport(AbstractModel* model, const AbstractModelSelection* selection,
                                    const QUrl& url) override;
     [[nodiscard]]
