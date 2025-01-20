@@ -28,10 +28,12 @@ public:
     ~TerminalTool() override;
 
 public:
+    [[nodiscard]]
     QUrl currentUrl() const;
 
 public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
+    [[nodiscard]]
     QString title() const override;
 
     void setTargetModel(AbstractModel* model) override;

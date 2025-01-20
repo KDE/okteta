@@ -31,6 +31,7 @@ public:
     ~TerminalView() override;
 
 public:
+    [[nodiscard]]
     TerminalTool* tool() const;
 
 private Q_SLOTS:

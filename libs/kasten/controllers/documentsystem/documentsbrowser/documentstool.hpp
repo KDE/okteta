@@ -26,15 +26,20 @@ public:
     ~DocumentsTool() override;
 
 public:
+    [[nodiscard]]
     AbstractDocument* focussedDocument() const;
+    [[nodiscard]]
     bool isDocumentListEmpty() const;
+    [[nodiscard]]
     QVector<AbstractDocument*> documents() const;
 
 public:
     void setFocussedDocument(AbstractDocument* document);
 
 public: // AbstractTool API
+    [[nodiscard]]
     QString title() const override;
+
     void setTargetModel(AbstractModel* model) override;
 
 Q_SIGNALS:

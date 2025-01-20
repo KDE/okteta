@@ -32,6 +32,7 @@ protected:
 private:
     void updatePixmap();
     void updateSize();
+    [[nodiscard]]
     QSize iconSize() const;
 
 private:

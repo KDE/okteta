@@ -31,11 +31,14 @@ public:
     void open(const QUrl& url);
 
 public:
+    [[nodiscard]]
     QUrl currentUrl() const;
+    [[nodiscard]]
     bool hasCurrentUrl() const;
 
 public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
+    [[nodiscard]]
     QString title() const override;
 
     void setTargetModel(AbstractModel* model) override;

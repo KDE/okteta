@@ -32,6 +32,7 @@ public:
     ~FileSystemBrowserView() override;
 
 public:
+    [[nodiscard]]
     FileSystemBrowserTool* tool() const;
 
 private Q_SLOTS:

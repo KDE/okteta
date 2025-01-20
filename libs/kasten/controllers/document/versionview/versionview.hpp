@@ -29,6 +29,7 @@ public:
     ~VersionView() override;
 
 public:
+    [[nodiscard]]
     VersionViewTool* tool() const;
 
 public Q_SLOTS:

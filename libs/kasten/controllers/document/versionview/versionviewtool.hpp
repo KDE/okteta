@@ -25,10 +25,12 @@ public:
     ~VersionViewTool() override;
 
 public:
+    [[nodiscard]]
     AbstractModel* model() const;
 
 public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
+    [[nodiscard]]
     QString title() const override;
 
     void setTargetModel(AbstractModel* model) override;
