@@ -24,6 +24,7 @@ namespace Kasten {
 
 namespace ByteArraySearchUtils {
 
+[[nodiscard]]
 bool getSearchIndexes(Okteta::Address* searchFirstIndex, Okteta::Address* searchLastIndex,
                       const Okteta::AbstractByteArrayModel* byteArrayModel,
                       Okteta::AddressRange selection,

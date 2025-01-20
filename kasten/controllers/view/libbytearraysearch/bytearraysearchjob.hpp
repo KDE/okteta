@@ -37,6 +37,7 @@ public:
     ~ByteArraySearchJob() override;
 
 public:
+    [[nodiscard]]
     Okteta::AddressRange exec();
     void start();
 
