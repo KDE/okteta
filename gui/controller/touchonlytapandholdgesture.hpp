@@ -24,17 +24,21 @@ public:
     TouchOnlyTapAndHoldGesture() = default;
 
 public:
-    QPointF position() const { return m_position; }
-    void setPosition(const QPointF &pos) { m_position = pos; }
+    QPointF position() const;
+    void setPosition(const QPointF &pos);
     void beginHoldTimeer();
     void cancelHoldTimer();
-    bool isHoldTimerActive() const { return (m_timerId != 0); }
+    bool isHoldTimerActive() const;
     void reset();
 
 private:
     int m_timerId = 0;
     QPointF m_position;
 };
+
+inline QPointF TouchOnlyTapAndHoldGesture::position() const { return m_position; }
+inline void TouchOnlyTapAndHoldGesture::setPosition(const QPointF &pos) { m_position = pos; }
+inline bool TouchOnlyTapAndHoldGesture::isHoldTimerActive() const { return (m_timerId != 0); }
 
 }
 
