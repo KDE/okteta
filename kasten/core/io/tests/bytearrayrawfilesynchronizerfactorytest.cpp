@@ -41,7 +41,8 @@ void ByteArrayRawFileSynchronizerFactoryTest::initTestCase()
     const QString filePath = mFileSystem->createFilePath(QLatin1String(TestFileName));
     QFile file;
     file.setFileName(filePath);
-    file.open(QIODevice::WriteOnly);
+    const bool openSuccess = file.open(QIODevice::WriteOnly);
+    QVERIFY(openSuccess);
 
     QDataStream outStream(&file);
     outStream.writeRawData(byteArray.data(), byteArray.size());
