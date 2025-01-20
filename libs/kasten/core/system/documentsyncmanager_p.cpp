@@ -89,7 +89,7 @@ void DocumentSyncManagerPrivate::load(const QUrl& url)
     QObject::connect(loadJob, &KJob::result,
                      q, [this](KJob* job) { onDocumentLoadJobResult(job); });
 
-    JobManager::executeJob(loadJob);   // TODO: pass a ui handler to jobmanager
+    std::ignore = JobManager::executeJob(loadJob);   // TODO: pass a ui handler to jobmanager
 
     // store path
 //     mWorkingUrl = url.upUrl();
@@ -252,14 +252,14 @@ void DocumentSyncManagerPrivate::reload(AbstractDocument* document)
     }
 
     AbstractSyncFromRemoteJob* syncJob = synchronizer->startSyncFromRemote();
-    JobManager::executeJob(syncJob);
+    std::ignore = JobManager::executeJob(syncJob);
 }
 
 void DocumentSyncManagerPrivate::save(AbstractDocument* document)
 {
     AbstractModelSynchronizer* synchronizer = document->synchronizer();
     AbstractSyncToRemoteJob* syncJob = synchronizer->startSyncToRemote();
-    JobManager::executeJob(syncJob);
+    std::ignore = JobManager::executeJob(syncJob);
 }
 
 void DocumentSyncManagerPrivate::onDocumentLoadJobResult(KJob* job)
