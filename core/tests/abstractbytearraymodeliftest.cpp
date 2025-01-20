@@ -130,7 +130,7 @@ void AbstractByteArrayModelIfTest::testCopyTo()
     QCOMPARE(copy.compare(*mByteArrayModel), 0);
 
     // copyTo() at begin
-    copy.fill(BlankChar);
+    std::ignore = copy.fill(BlankChar);
 
     copiedSize = mByteArrayModel->copyTo(copy.rawData(), copyRange);
 
@@ -140,7 +140,7 @@ void AbstractByteArrayModelIfTest::testCopyTo()
     QVERIFY(!mByteArrayModel->isModified());
 
     // copyTo() at end
-    copy.fill(BlankChar);
+    std::ignore = copy.fill(BlankChar);
     copyRange.moveToEnd(size - 1);
 
     copiedSize = mByteArrayModel->copyTo(&copy.rawData()[copyRange.start()], copyRange);
@@ -151,7 +151,7 @@ void AbstractByteArrayModelIfTest::testCopyTo()
     QVERIFY(!mByteArrayModel->isModified());
 
     // copyTo() at mid
-    copy.fill(BlankChar);
+    std::ignore = copy.fill(BlankChar);
     copyRange.moveToStart(size / 2);
 
     copiedSize = mByteArrayModel->copyTo(&copy.rawData()[copyRange.start()], copyRange);

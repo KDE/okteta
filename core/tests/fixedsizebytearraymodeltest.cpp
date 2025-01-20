@@ -24,7 +24,7 @@ void FixedSizeByteArrayModelTest::testCompare()
     // create a working buffer
     FixedSizeByteArrayModel Buffer(BaseSize, 'b');
     FixedSizeByteArrayModel OtherBuffer(BaseSize);
-    OtherBuffer.fill('b');
+    std::ignore = OtherBuffer.fill('b');
 
     const Address Last = BaseSize - 1;
     AddressRange FullRange(0, Last);
