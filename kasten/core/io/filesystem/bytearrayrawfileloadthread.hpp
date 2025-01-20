@@ -33,6 +33,7 @@ public: // QThread API
     void run() override;
 
 public:
+    [[nodiscard]]
     std::unique_ptr<ByteArrayDocument> releaseDocument();
 
     [[nodiscard]]
