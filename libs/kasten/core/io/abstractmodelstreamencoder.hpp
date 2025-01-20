@@ -46,6 +46,7 @@ public:
     ~AbstractModelStreamEncoder() override;
 
 public: // API to be implemented
+    [[nodiscard]]
     virtual bool encodeToStream(QIODevice* device, AbstractModel* model, const AbstractModelSelection* selection) = 0;
     [[nodiscard]]
     virtual QString modelTypeName(AbstractModel* model, const AbstractModelSelection* selection) const = 0;

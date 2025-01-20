@@ -41,6 +41,7 @@ public:
 public:
     void load(const QUrl& url);
 // TODO: better name
+    [[nodiscard]]
     bool setSynchronizer(AbstractDocument* document);
     [[nodiscard]]
     bool canClose(AbstractDocument* document);

@@ -20,6 +20,7 @@ class KASTENCORE_EXPORT JobManager
 {
 public:
     // temporary, remove quickly
+    [[nodiscard]]
     static bool executeJob(KJob* job);
 
 public:

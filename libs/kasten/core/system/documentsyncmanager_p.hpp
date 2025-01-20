@@ -30,6 +30,7 @@ public:
 
 public:
     void load(const QUrl& url);
+    [[nodiscard]]
     bool setSynchronizer(AbstractDocument* document);
     [[nodiscard]]
     bool canClose(AbstractDocument* document);
