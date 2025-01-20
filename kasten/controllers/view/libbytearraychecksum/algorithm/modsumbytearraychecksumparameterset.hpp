@@ -23,12 +23,14 @@ public:
     ~ModSumByteArrayChecksumParameterSet() override;
 
 public: // AbstractByteArrayChecksumParameterSet API
+    [[nodiscard]]
     const char* id() const override;
 
 public:
     void setEndianness(QSysInfo::Endian endianness);
 
 public:
+    [[nodiscard]]
     QSysInfo::Endian endianness() const;
 
 public:

@@ -25,6 +25,7 @@ public:
     AbstractByteArrayChecksumParameterSet& operator=(const AbstractByteArrayChecksumParameterSet&) = delete;
 
 public:
+    [[nodiscard]]
     virtual const char* id() const = 0;
 
 private:

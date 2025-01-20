@@ -24,6 +24,7 @@ public:
 
 public: // AbstractByteArrayChecksumAlgorithm API
     bool calculateChecksum(QString* result, const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const override;
+    [[nodiscard]]
     AbstractByteArrayChecksumParameterSet* parameterSet() override;
     void loadConfig(const KConfigGroup& configGroup) override;
     void saveConfig(KConfigGroup& configGroup) const override;

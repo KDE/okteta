@@ -28,12 +28,14 @@ public:
     ~Template_ByteArrayChecksumParameterSet() override;
 
 public: // AbstractByteArrayChecksumParameterSet API
+    [[nodiscard]]
     const char* id() const override;
 
 //// ADAPT(start)
 //// declare the parameters and the corresponding getters and setters
 
 public: // getters
+    [[nodiscard]]
     int bitNumber() const;
 
 public: // setters

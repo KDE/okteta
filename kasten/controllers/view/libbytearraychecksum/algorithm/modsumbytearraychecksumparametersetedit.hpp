@@ -28,6 +28,7 @@ public:
 public: // AbstractByteArrayFilterParameterSetEdit API
     void setParameterSet(const AbstractByteArrayChecksumParameterSet* parameterSet) override;
     void getParameterSet(AbstractByteArrayChecksumParameterSet* parameterSet) const override;
+    [[nodiscard]]
     bool isValid() const override;
 
 private:

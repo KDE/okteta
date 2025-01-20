@@ -43,6 +43,7 @@ public: // AbstractByteArrayFilterParameterSetEdit API
 //// ADAPT(start)
 //// if the values in the widget can reach invalid states, which should not be used for the parameters,
 //// keep the declaration of "isValid()", otherwise remove the next line
+    [[nodiscard]]
     bool isValid() const override;
 //// ADAPT(end)
 

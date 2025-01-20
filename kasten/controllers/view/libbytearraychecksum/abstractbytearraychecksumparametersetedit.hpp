@@ -31,6 +31,7 @@ public: // API to be implemented
     /// default does nothing
     virtual void getParameterSet(AbstractByteArrayChecksumParameterSet* parameterSet) const = 0;
     /// default returns true
+    [[nodiscard]]
     virtual bool isValid() const;
 
 Q_SIGNALS:

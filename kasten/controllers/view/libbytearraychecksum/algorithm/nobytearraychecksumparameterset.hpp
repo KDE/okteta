@@ -19,6 +19,7 @@ public:
     ~NoByteArrayChecksumParameterSet() override;
 
 public: // AbstractByteArrayChecksumParameterSet API
+    [[nodiscard]]
     const char* id() const override;
 };
 

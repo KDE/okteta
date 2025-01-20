@@ -27,12 +27,14 @@ public:
     ~Crc64ByteArrayChecksumParameterSet() override;
 
 public: // AbstractByteArrayChecksumParameterSet API
+    [[nodiscard]]
     const char* id() const override;
 
 public:
     void setCrc64Variant(Crc64Variant variant);
 
 public:
+    [[nodiscard]]
     Crc64Variant crc64Variant() const;
 
 public:

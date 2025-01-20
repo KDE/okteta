@@ -39,12 +39,15 @@ public:
 public: // API to be implemented
     virtual bool calculateChecksum(QString* result, const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const = 0;
     /** used by the editor to get write access to the parameters */
+    [[nodiscard]]
     virtual AbstractByteArrayChecksumParameterSet* parameterSet() = 0;
     virtual void loadConfig(const KConfigGroup& configGroup);
     virtual void saveConfig(KConfigGroup& configGroup) const;
 
 public:
+    [[nodiscard]]
     QString name() const;
+    [[nodiscard]]
     QString id() const;
 
 Q_SIGNALS: // TODO: add check for signal to tests
