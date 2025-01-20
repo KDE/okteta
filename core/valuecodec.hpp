@@ -43,10 +43,12 @@ public: // API to be implemented
     /**
      * @return number of digits the greatest byte gets decoded into
      */
+    [[nodiscard]]
     virtual unsigned int encodingWidth() const = 0;
     /**
      * @return largest value which could get another digit appended and stay below 256.
      */
+    [[nodiscard]]
     virtual Byte digitsFilledLimit() const = 0;
 
     /**
@@ -84,6 +86,7 @@ public: // API to be implemented
      * @param digit value to check
      * @return true if digit is valid, false otherwise
      */
+    [[nodiscard]]
     virtual bool isValidDigit(unsigned char digit) const = 0;
     /**
      * Turns the digit into a byte with the value of the digit.

@@ -25,16 +25,20 @@ public:
 
 public:
     bool setLowerCaseDigits(bool lowerCaseDigits);
+    [[nodiscard]]
     bool isLowerCaseDigits() const;
 
 public: // ValueCodec API
+    [[nodiscard]]
     unsigned int encodingWidth() const override;
+    [[nodiscard]]
     Byte digitsFilledLimit() const override;
 
     void encode(QString* digits, unsigned int pos, Byte byte) const override;
     void encodeShort(QString* digits, unsigned int pos, Byte byte) const override;
     bool appendDigit(Byte* byte, unsigned char digit) const override;
     void removeLastDigit(Byte* byte) const override;
+    [[nodiscard]]
     bool isValidDigit(unsigned char digit) const override;
     bool turnToValue(unsigned char* digit) const override;
 

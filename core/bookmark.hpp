@@ -34,11 +34,15 @@ public:
     Bookmark& operator=(const Bookmark&) = default;
 
 public:
+    [[nodiscard]]
     bool operator==(const Bookmark& other) const;
 
 public:
+    [[nodiscard]]
     Address offset() const;
+    [[nodiscard]]
     QString name() const;
+    [[nodiscard]]
     bool isValid() const;
 
 public:

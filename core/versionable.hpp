@@ -22,8 +22,11 @@ public:
     virtual ~Versionable();
 
 public: // get
+    [[nodiscard]]
     virtual int versionIndex() const = 0;
+    [[nodiscard]]
     virtual int versionCount() const = 0;
+    [[nodiscard]]
     virtual QString versionDescription(int versionIndex) const = 0;
 
 public: // set/action

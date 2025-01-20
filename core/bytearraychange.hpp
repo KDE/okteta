@@ -35,7 +35,9 @@ public:
     ByteArrayChange& operator=(const ByteArrayChange&) = default;
 
 public:
+    [[nodiscard]]
     const ArrayChangeMetrics& metrics() const;
+    [[nodiscard]]
     const QByteArray& data() const;
 
 private:

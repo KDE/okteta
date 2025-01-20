@@ -31,11 +31,14 @@ public:
 public: // CharCodec API
     Character decode(Byte byte) const override;
     bool encode(Byte* byte, QChar _char) const override;
+    [[nodiscard]]
     bool canEncode(QChar _char) const override;
+    [[nodiscard]]
     QString name() const override;
 
 public:
     static std::unique_ptr<JISX0201CharCodec> create();
+    [[nodiscard]]
     static const QString& codecName();
 };
 

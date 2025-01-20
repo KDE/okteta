@@ -47,9 +47,13 @@ public:
     ~PieceTableByteArrayModel() override;
 
 public: // AbstractByteArrayModel API
+    [[nodiscard]]
     Byte byte(Address offset) const override;
+    [[nodiscard]]
     Size size() const override;
+    [[nodiscard]]
     bool isReadOnly() const override;
+    [[nodiscard]]
     bool isModified() const override;
 
     Size insert(Address offset, const Byte* insertData, int insertLength) override;
@@ -66,8 +70,11 @@ public: // AbstractByteArrayModel API
 //     virtual int lastIndexOf( const char *searchString, int length, int from = -1 ) const;
 
 public: // Versionable API
+    [[nodiscard]]
     int versionIndex() const override;
+    [[nodiscard]]
     int versionCount() const override;
+    [[nodiscard]]
     QString versionDescription(int versionIndex) const override;
 
 public: // set/action
@@ -80,9 +87,13 @@ public: // Bookmarkable API
     void setBookmark(unsigned int index, const Okteta::Bookmark& bookmark) override;
 
     Okteta::BookmarksConstIterator createBookmarksConstIterator() const override;
+    [[nodiscard]]
     const Okteta::Bookmark& bookmarkAt(unsigned int index) const override;
+    [[nodiscard]]
     const Okteta::Bookmark& bookmarkFor(int offset) const override;
+    [[nodiscard]]
     bool containsBookmarkFor(int offset) const override;
+    [[nodiscard]]
     unsigned int bookmarksCount() const override;
 
 public: // ChangesDescribable API
@@ -91,7 +102,9 @@ public: // ChangesDescribable API
     void closeGroupedChange(const QString& description) override;
 
 public: // ChangeHistory API
+    [[nodiscard]]
     QVector<ByteArrayChange> changes(int firstVersionIndex, int lastVersionIndex) const override;
+    [[nodiscard]]
     QByteArray initialData() const override;
     void doChanges(const QVector<Okteta::ByteArrayChange>& changes,
                    int oldVersionIndex, int newVersionIndex) override;

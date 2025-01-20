@@ -34,9 +34,13 @@ public: // set/action
 public: // get
     virtual Okteta::BookmarksConstIterator createBookmarksConstIterator() const = 0;
 //     virtual BookmarksMutableIterator createBookmarksMutableIterator() const = 0;
+    [[nodiscard]]
     virtual const Okteta::Bookmark& bookmarkAt(unsigned int index) const = 0;
+    [[nodiscard]]
     virtual const Okteta::Bookmark& bookmarkFor(int offset) const = 0;
+    [[nodiscard]]
     virtual bool containsBookmarkFor(int offset) const = 0;
+    [[nodiscard]]
     virtual unsigned int bookmarksCount() const = 0;
 
 public: // signal

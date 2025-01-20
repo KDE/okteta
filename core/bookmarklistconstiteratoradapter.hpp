@@ -24,16 +24,26 @@ public:
     ~BookmarkListConstIteratorAdapter() override;
 
 public: // BookmarksConstIteratorAdapter API
+    [[nodiscard]]
     bool hasNext() const override;
+    [[nodiscard]]
     bool hasPrevious() const override;
+    [[nodiscard]]
     const Bookmark& peekNext() const override;
+    [[nodiscard]]
     const Bookmark& peekPrevious() const override;
 
+    [[nodiscard]]
     bool findNext(const Bookmark& bookmark) override;
+    [[nodiscard]]
     bool findPrevious(const Bookmark& bookmark) override;
+    [[nodiscard]]
     bool findNextFrom(Address offset) override;
+    [[nodiscard]]
     bool findPreviousFrom(Address offset) override;
+    [[nodiscard]]
     const Bookmark& next() override;
+    [[nodiscard]]
     const Bookmark& previous() override;
     void toBack() override;
     void toFront() override;

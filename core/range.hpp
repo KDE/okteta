@@ -37,8 +37,10 @@ public:
     Range& operator=(const Range& R) = default;
 
 public:
+    [[nodiscard]]
     bool operator==(const Range& R) const
     { return (Start == R.Start && End == R.End) || (!isValid() && !R.isValid()); }
+    [[nodiscard]]
     bool operator!=(const Range& R) const
     { return ((Start != R.Start) || (End != R.End)) && (isValid() || R.isValid()); }
 
@@ -76,43 +78,60 @@ public: // modification access
 
 public: // value access
     /** @return start */
+    [[nodiscard]]
     T start() const { return Start; }
     /** @return end */
+    [[nodiscard]]
     T end()   const { return End; }
 
 public: // logic access
     /** returns true if Value is covered */
+    [[nodiscard]]
     bool includes(T Value)       const { return Start <= Value && Value <= End; }
     /** returns true if Value is covered and not at a side */
+    [[nodiscard]]
     bool includesInside(T Value) const { return Start < Value && Value < End; }
     /** returns true if range is behind index. if range is invalid the behaviour is undefined */
+    [[nodiscard]]
     bool startsBehind(T Value)   const { return Value < Start; }
     /** returns true is the range starts before index. If the range is invalid the behaviour is undefined */
+    [[nodiscard]]
     bool startsBefore(T Value)   const { return Start < Value; }
     /** returns true if the range ends later than index. If the range is invalid the behaviour is undefined */
+    [[nodiscard]]
     bool endsBehind(T Value)     const { return Value < End; }
     /** returns true if range is before index. if range is invalid the behaviour is undefined */
+    [[nodiscard]]
     bool endsBefore(T Value)     const { return End < Value; }
 
     /** returns true is the range covers R. If one of both is invalid the behaviour is undefined */
+    [[nodiscard]]
     bool includes(const Range& R)       const { return R.End <= End && Start <= R.Start; }
     /** returns true is the range covers R. If one of both is invalid the behaviour is undefined */
+    [[nodiscard]]
     bool includesInside(const Range& R) const { return R.End < End && Start < R.Start; }
     /** returns true is the range ends before R starts. If one of both is invalid the behaviour is undefined */
+    [[nodiscard]]
     bool endsBefore(const Range& R)     const { return End < R.Start; }
     /** returns true is the range starts later than R ends. If one of both is invalid the behaviour is undefined */
+    [[nodiscard]]
     bool startsBehind(const Range& R) const { return R.End < Start; }
     /** returns true is the range starts prior than R. If one of both is invalid the behaviour is undefined */
+    [[nodiscard]]
     bool startsBefore(const Range& R) const { return Start < R.Start; }
     /** returns true is the range ends later than R. If one of both is invalid the behaviour is undefined */
+    [[nodiscard]]
     bool endsBehind(const Range& R)   const { return R.End < End; }
     /** returns true is the range shares at least one index with R. If one of both is invalid the behaviour is undefined */
+    [[nodiscard]]
     bool overlaps(const Range& R) const { return Start <= R.End && R.Start <= End; }
 
     // TODO: this is wrong, a empty range is valid, too
     /** returns true if the range covers at least one index */
+    [[nodiscard]]
     bool isValid() const { return Start != null() && Start <= End; }
     /** returns true if the range has not been set */
+    [[nodiscard]]
     bool isEmpty() const { return Start == null() && End == null(); }
 
 protected:

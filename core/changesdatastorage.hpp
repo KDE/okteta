@@ -32,7 +32,9 @@ public: // set/action
     void clear();
 
 public: // get
+    [[nodiscard]]
     QByteArray data(int offset, int length) const;
+    [[nodiscard]]
     char operator[](int offset) const;
 
 private:

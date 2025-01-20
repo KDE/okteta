@@ -44,11 +44,14 @@ public:
     virtual ~AbstractPieceTableChange();
 
 public: // API to be implemented
+    [[nodiscard]]
     virtual int type() const = 0;
 
+    [[nodiscard]]
     virtual QString description() const = 0;
 
     /// returns the storageOffset. Default returns -1.
+    [[nodiscard]]
     virtual Address storageOffset() const;
 
     /// returns true if successful, false otherwise. Default returns false.
@@ -57,8 +60,10 @@ public: // API to be implemented
     virtual AddressRange apply(PieceTable* pieceTable) const = 0;
     virtual AddressRange revert(PieceTable* pieceTable) const = 0;
 
+    [[nodiscard]]
     virtual ArrayChangeMetrics metrics() const = 0;
     /// returns the size of the added data. Default returns 0.
+    [[nodiscard]]
     virtual Size dataSize() const;
 };
 

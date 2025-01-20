@@ -31,9 +31,13 @@ public:
     ~ByteArrayModelPrivate() override;
 
 public: // AbstractByteArrayModel API
+    [[nodiscard]]
     Byte byte(Address offset) const;
+    [[nodiscard]]
     Size size() const;
+    [[nodiscard]]
     bool isReadOnly() const;
+    [[nodiscard]]
     bool isModified() const;
 
     Size insert(Address offset, const Byte* insertData, int insertLength);
@@ -55,12 +59,16 @@ public:
     void setData(Byte* data, int size, int rawSize = -1, bool keepMemory = true);
 
 public:
+    [[nodiscard]]
     Byte* data() const;
+    [[nodiscard]]
     int maxSize() const;
     /** returns whether the memory of the byte array is kept on resize */
+    [[nodiscard]]
     bool keepsMemory() const;
     // TODO 0.10: turn this bool flag into a real flag which also tells how to free the memory if "autodeleted"
     // perhaps merge keepsMemory flag into that new flag as well
+    [[nodiscard]]
     bool autoDelete() const;
 
 public: // Bookmarkable API
@@ -70,9 +78,13 @@ public: // Bookmarkable API
     void setBookmark(unsigned int index, const Bookmark& bookmark);
 
     BookmarksConstIterator createBookmarksConstIterator() const;
+    [[nodiscard]]
     const Bookmark& bookmarkAt(unsigned int index) const;
+    [[nodiscard]]
     const Bookmark& bookmarkFor(int offset) const;
+    [[nodiscard]]
     bool containsBookmarkFor(int offset) const;
+    [[nodiscard]]
     unsigned int bookmarksCount() const;
 
 private:

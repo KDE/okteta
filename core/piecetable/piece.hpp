@@ -37,6 +37,7 @@ public:
     Piece& operator=(const Piece&) = default;
 
 public:
+    [[nodiscard]]
     int storageId() const;
 
 public:

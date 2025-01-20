@@ -29,17 +29,27 @@ public:
     virtual ~BookmarksConstIteratorAdapter();
 
 public:
+    [[nodiscard]]
     virtual bool hasNext() const = 0;
+    [[nodiscard]]
     virtual bool hasPrevious() const = 0;
+    [[nodiscard]]
     virtual const Bookmark& peekNext() const = 0;
+    [[nodiscard]]
     virtual const Bookmark& peekPrevious() const = 0;
 
 public:
+    [[nodiscard]]
     virtual bool findNext(const Bookmark& bookmark) = 0;
+    [[nodiscard]]
     virtual bool findPrevious(const Bookmark& bookmark) = 0;
+    [[nodiscard]]
     virtual bool findNextFrom(Address offset) = 0;
+    [[nodiscard]]
     virtual bool findPreviousFrom(Address offset) = 0;
+    [[nodiscard]]
     virtual const Bookmark& next() = 0;
+    [[nodiscard]]
     virtual const Bookmark& previous() = 0;
     virtual void toBack() = 0;
     virtual void toFront() = 0;

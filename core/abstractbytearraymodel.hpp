@@ -104,11 +104,13 @@ public: // data access API
      * if the offset is not valid the behaviour is undefined
      * @param offset offset of the datum requested
      */
+    [[nodiscard]]
     virtual Byte byte(Address offset) const = 0;
 
     /**
      * @return the size of the data
      */
+    [[nodiscard]]
     virtual Size size() const = 0;
 
 public: // state read API
@@ -116,10 +118,12 @@ public: // state read API
      * Default returns @c true.
      * @return @c true if the buffer can only be read, @c false if writing is allowed
      */
+    [[nodiscard]]
     virtual bool isReadOnly() const;
     /**
      * @return @c true if the buffer has been modified, @c false otherwise
      */
+    [[nodiscard]]
     virtual bool isModified() const = 0;
 
 // TODO: for data outside the model using char* and int as well as QByteArray should always work, no?
@@ -214,8 +218,11 @@ public: // finding API
      * @param toOffset the position to end the search (-1 is to the end of the data stream)
      * @return index of the first or -1
      */
+    [[nodiscard]]
     virtual Address indexOf(const Byte* pattern, int patternLength, Address fromOffset = 0, Address toOffset = -1) const;
+    [[nodiscard]]
     Address indexOf(const QByteArray& pattern, Address fromOffset = 0, Address toOffset = -1) const;
+    [[nodiscard]]
     Address indexOfCaseInsensitive(const CharCodec* charCodec, const QByteArray& pattern, Address fromOffset = 0, Address toOffset = -1) const;
 
     /** searches for a given data string
@@ -233,8 +240,11 @@ public: // finding API
      * @param fromOffset the position to start the search. If -1 the search starts at the end.
      * @return index of the first  or -1
      */
+    [[nodiscard]]
     virtual Address lastIndexOf(const Byte* pattern, int patternLength, Address fromOffset = -1, Address toOffset = 0) const;
+    [[nodiscard]]
     Address lastIndexOf(const QByteArray& pattern, Address fromOffset = -1, Address toOffset = 0) const;
+    [[nodiscard]]
     Address lastIndexOfCaseInsensitive(const CharCodec* charCodec, const QByteArray& pattern, Address fromOffset = -1, Address toOffset = 0) const;
 
 /*     virtual int find( const QString &expr, bool cs, bool wo, bool forward = true, int *index = 0 ); */

@@ -28,20 +28,31 @@ public:
     BookmarksConstIterator& operator=(const BookmarksConstIterator&) = default;
 
 public:
+    [[nodiscard]]
     bool hasList() const;
 
 public:
+    [[nodiscard]]
     bool hasNext() const;
+    [[nodiscard]]
     bool hasPrevious() const;
+    [[nodiscard]]
     const Okteta::Bookmark& peekNext() const;
+    [[nodiscard]]
     const Okteta::Bookmark& peekPrevious() const;
 
 public:
+    [[nodiscard]]
     bool findNext(const Okteta::Bookmark& bookmark);
+    [[nodiscard]]
     bool findPrevious(const Okteta::Bookmark& bookmark);
+    [[nodiscard]]
     bool findNextFrom(unsigned int offset);
+    [[nodiscard]]
     bool findPreviousFrom(unsigned int offset);
+    [[nodiscard]]
     const Okteta::Bookmark& next();
+    [[nodiscard]]
     const Okteta::Bookmark& previous();
     void toBack();
     void toFront();

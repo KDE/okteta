@@ -33,9 +33,13 @@ public:
     ~PieceTableByteArrayModelPrivate() override;
 
 public: // AbstractByteArrayModel API
+    [[nodiscard]]
     Byte byte(Address offset) const;
+    [[nodiscard]]
     Size size() const;
+    [[nodiscard]]
     bool isReadOnly() const;
+    [[nodiscard]]
     bool isModified() const;
 
     Size insert(Address offset, const Byte* insertData, int insertLength);
@@ -49,8 +53,11 @@ public: // AbstractByteArrayModel API
     void setReadOnly(bool isReadOnly = true);
 
 public: // Versionable API
+    [[nodiscard]]
     int versionIndex() const;
+    [[nodiscard]]
     int versionCount() const;
+    [[nodiscard]]
     QString versionDescription(int versionIndex) const;
 
 public: // set/action
@@ -63,9 +70,13 @@ public:
     void setBookmark(unsigned int index, const Bookmark& bookmark);
 
     BookmarksConstIterator createBookmarksConstIterator() const;
+    [[nodiscard]]
     const Bookmark& bookmarkAt(unsigned int index) const;
+    [[nodiscard]]
     const Bookmark& bookmarkFor(int offset) const;
+    [[nodiscard]]
     bool containsBookmarkFor(int offset) const;
+    [[nodiscard]]
     unsigned int bookmarksCount() const;
 
 public: // ChangesDescribable API
@@ -74,7 +85,9 @@ public: // ChangesDescribable API
     void closeGroupedChange(const QString& description);
 
 public: // ChangeHistory API
+    [[nodiscard]]
     QVector<ByteArrayChange> changes(int firstVersionIndex, int lastVersionIndex) const;
+    [[nodiscard]]
     const QByteArray& initialData() const;
     void doChanges(const QVector<Okteta::ByteArrayChange>& changes,
                    int oldVersionIndex, int newVersionIndex);

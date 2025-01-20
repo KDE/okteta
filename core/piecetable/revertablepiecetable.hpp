@@ -73,14 +73,20 @@ public:
 
 public:
     bool getStorageData(int* storageId, Address* storageOffset, Address dataOffset) const;
+    [[nodiscard]]
     Size size() const;
     void getChangeData(ArrayChangeMetrics* metrics, Address* storageOffset, int versionIndex) const;
 
 public:
+    [[nodiscard]]
     int changesCount() const;
+    [[nodiscard]]
     int appliedChangesCount() const;
+    [[nodiscard]]
     QString changeDescription(int change) const;
+    [[nodiscard]]
     QString headChangeDescription() const;
+    [[nodiscard]]
     bool isAtBase() const;
 
 private:

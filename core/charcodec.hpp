@@ -35,12 +35,15 @@ public:
     static std::unique_ptr<CharCodec> createCodec(const QString& name);
     static std::unique_ptr<CharCodec> createCodecForLocale();
 
+    [[nodiscard]]
     static QStringList codecNames();
 
 public: // API to be implemented
     virtual Character decode(Byte byte) const = 0;
     virtual bool encode(Byte* byte, QChar _char) const = 0;
+    [[nodiscard]]
     virtual bool canEncode(QChar _char) const = 0;
+    [[nodiscard]]
     virtual QString name() const = 0;
 };
 

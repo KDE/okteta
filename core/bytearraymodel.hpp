@@ -39,9 +39,13 @@ public:
     ~ByteArrayModel() override;
 
 public: // AbstractByteArrayModel API
+    [[nodiscard]]
     Byte byte(Address offset) const override;
+    [[nodiscard]]
     Size size() const override;
+    [[nodiscard]]
     bool isReadOnly() const override;
+    [[nodiscard]]
     bool isModified() const override;
 
     Size insert(Address offset, const Byte* insertData, int insertLength) override;
@@ -61,9 +65,13 @@ public: // Okteta::Bookmarkable API
     void setBookmark(unsigned int index, const Okteta::Bookmark& bookmark) override;
 
     Okteta::BookmarksConstIterator createBookmarksConstIterator() const override;
+    [[nodiscard]]
     const Okteta::Bookmark& bookmarkAt(unsigned int index) const override;
+    [[nodiscard]]
     const Okteta::Bookmark& bookmarkFor(int offset) const override;
+    [[nodiscard]]
     bool containsBookmarkFor(int offset) const override;
+    [[nodiscard]]
     unsigned int bookmarksCount() const override;
 
 Q_SIGNALS: // Okteta::Bookmarkable API
@@ -85,10 +93,14 @@ public:
     void signalContentsChanged(int start, int end);
 
 public:
+    [[nodiscard]]
     Byte* data() const;
+    [[nodiscard]]
     int maxSize() const;
     /** returns whether the memory of the byte array is kept on resize */
+    [[nodiscard]]
     bool keepsMemory() const;
+    [[nodiscard]]
     bool autoDelete() const;
 
 private:

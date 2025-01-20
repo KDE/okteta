@@ -43,6 +43,7 @@ public:
 
 public:
     bool getStorageData(int* storageId, Address* storageOffset, Address dataOffset) const;
+    [[nodiscard]]
     Size size() const;
 
 private:

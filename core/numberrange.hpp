@@ -87,21 +87,29 @@ public:
     /**
      * @return the numbered of included indizes or 0, if the range is invalid
      */
+    [[nodiscard]]
     S width() const;
+    [[nodiscard]]
     N nextBeforeStart() const;
+    [[nodiscard]]
     N nextBehindEnd() const;
 
 public:
     /** @return index relative to the start */
+    [[nodiscard]]
     N localIndex(N index) const;
+    [[nodiscard]]
     NumberRange localRange(const NumberRange& other) const;
     /** @return range given by local  */
+    [[nodiscard]]
     NumberRange subRange(const NumberRange& localRange) const;
     /**
      * @return the needed start so that other gets included, undefined if any is invalid
      */
+    [[nodiscard]]
     N startForInclude(const NumberRange& other) const;
     /** @returns true if both range . If one of both is invalid the behaviour is undefined */
+    [[nodiscard]]
     bool isJoinable(const NumberRange& other) const;
 };
 

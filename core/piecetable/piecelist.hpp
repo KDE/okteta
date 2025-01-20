@@ -28,9 +28,13 @@ public:
     PieceList& operator=(const PieceList&) = default;
 
 public:
+    [[nodiscard]]
     int size() const;
+    [[nodiscard]]
     bool isEmpty() const;
+    [[nodiscard]]
     Size totalLength() const;
+    [[nodiscard]]
     const Piece& at(int i) const;
 
 public:

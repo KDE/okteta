@@ -35,9 +35,13 @@ public:
     ~FixedSizeByteArrayModel() override;
 
 public: // AbstractByteArrayModel API
+    [[nodiscard]]
     Byte byte(Address offset) const override;
+    [[nodiscard]]
     Size size() const override;
+    [[nodiscard]]
     bool isReadOnly() const override;
+    [[nodiscard]]
     bool isModified() const override;
 
     Size insert(Address offset, const Byte* insertData, int insertLength) override;
@@ -51,11 +55,15 @@ public: // AbstractByteArrayModel API
     void setReadOnly(bool readOnly = true) override;
 
 public:
+    [[nodiscard]]
     int compare(const AbstractByteArrayModel& other, const AddressRange& otherRange, Address offset = 0) const;
+    [[nodiscard]]
     int compare(const AbstractByteArrayModel& other, Address otherOffset, Size otherLength, Address offset = 0) const;
+    [[nodiscard]]
     int compare(const AbstractByteArrayModel& other) const;
 
 public:
+    [[nodiscard]]
     Byte* rawData() const;
 
 private:

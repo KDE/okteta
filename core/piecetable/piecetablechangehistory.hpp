@@ -63,16 +63,22 @@ public:
 
 public:
     /// @return number of changes in the history
+    [[nodiscard]]
     int count() const;
     /// @return number of changes currently applied
+    [[nodiscard]]
     int appliedChangesCount() const;
     /// @return description of the change with the id changeId
+    [[nodiscard]]
     QString changeDescription(int changeId) const;
     /// @return description of the change at the head, empty if there is none
+    [[nodiscard]]
     QString headChangeDescription() const;
     /// @return true if the current change is the base
+    [[nodiscard]]
     bool isAtBase() const;
     /// @return size of the data used by the applied changes
+    [[nodiscard]]
     Size appliedChangesDataSize() const;
 
     void getChangeData(ArrayChangeMetrics* metrics, Address* storageOffset, int versionIndex) const;

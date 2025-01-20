@@ -26,7 +26,9 @@ public:
     virtual ~ChangeHistory();
 
 public: // get
+    [[nodiscard]]
     virtual QVector<ByteArrayChange> changes(int firstVersionIndex, int lastVersionIndex) const = 0;
+    [[nodiscard]]
     virtual QByteArray initialData() const = 0;
 
 public: // set

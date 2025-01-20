@@ -32,9 +32,13 @@ public:
     ~FileByteArrayModel() override;
 
 public: // AbstractByteArrayModel API
+    [[nodiscard]]
     Byte byte(Address offset) const override;
+    [[nodiscard]]
     Size size() const override;
+    [[nodiscard]]
     bool isReadOnly() const override;
+    [[nodiscard]]
     bool isModified() const override;
 
     Size insert(Address offset, const Byte* insertData, int insertLength) override;
@@ -48,6 +52,7 @@ public: // AbstractByteArrayModel API
 
 public:
     void setReadOnly(bool readOnly = true) override;
+    [[nodiscard]]
     bool isOpen() const;
     bool open(const QString& filename);
     bool close();

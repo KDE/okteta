@@ -30,11 +30,14 @@ public:
     RemovePieceTableChange& operator=(const RemovePieceTableChange&) = delete;
 
 public: // AbstractPieceTableChange API
+    [[nodiscard]]
     int type() const override;
+    [[nodiscard]]
     QString description() const override;
     bool merge(const AbstractPieceTableChange* other) override;
     AddressRange apply(PieceTable* pieceTable) const override;
     AddressRange revert(PieceTable* pieceTable) const override;
+    [[nodiscard]]
     ArrayChangeMetrics metrics() const override;
 
 private:

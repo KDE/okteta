@@ -28,6 +28,7 @@ public:
     Character& operator=(const Character&) = default;
 
 public:
+    [[nodiscard]]
     constexpr bool isUndefined() const;
 
 private:

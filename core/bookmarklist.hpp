@@ -44,10 +44,14 @@ public:
 public:
     // TODO: this function needs to be called with a valid offset, will return a reference to a zero pointer else
     // want a reference for speed, perhaps need a global static dummy invalid bookmark
+    [[nodiscard]]
     const Bookmark& bookmark(Address offset) const;
+    [[nodiscard]]
     bool contains(Address offset) const;
     using QLinkedList<Bookmark>::contains;
+    [[nodiscard]]
     const Bookmark& at(unsigned int index) const;
+    [[nodiscard]]
     QVector<Okteta::Bookmark> list() const;
 };
 

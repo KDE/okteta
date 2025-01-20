@@ -28,12 +28,17 @@ public:
     ~FileByteArrayModelPrivate() override;
 
 public:
+    [[nodiscard]]
     Byte byte(Address offset) const;
+    [[nodiscard]]
     Size size() const;
+    [[nodiscard]]
     bool isReadOnly() const;
+
     void setReadOnly(bool readonly);
 
 public:
+    [[nodiscard]]
     bool isOpen() const;
     bool open(const QString& fileName);
     bool close();

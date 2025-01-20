@@ -41,12 +41,16 @@ public:
     GroupPieceTableChange& operator=(const GroupPieceTableChange&) = delete;
 
 public: // AbstractPieceTableChange API
+    [[nodiscard]]
     int type() const override;
+    [[nodiscard]]
     QString description() const override;
     bool merge(const AbstractPieceTableChange* other) override;
     AddressRange apply(PieceTable* pieceTable) const override;
     AddressRange revert(PieceTable* pieceTable) const override;
+    [[nodiscard]]
     ArrayChangeMetrics metrics() const override;
+    [[nodiscard]]
     Size dataSize() const override;
 
 public:
@@ -58,7 +62,9 @@ public:
 public:
     AddressRangeList applyGroup(PieceTable* pieceTable) const;
     AddressRangeList revertGroup(PieceTable* pieceTable) const;
+    [[nodiscard]]
     ArrayChangeMetricsList groupMetrics(bool reverted = false) const;
+    [[nodiscard]]
     GroupPieceTableChange* parent() const;
 
 public: // TODO: this interface part is shared with PieceTableChangeHistory, try to use this fact
@@ -67,16 +73,21 @@ public: // TODO: this interface part is shared with PieceTableChangeHistory, try
 
 public:
     /// @return number of changes in the history
+    [[nodiscard]]
     int count() const;
     /// @return number of changes currently applied
+    [[nodiscard]]
     int appliedChangesCount() const;
     /// @return description of the change with the id changeId
+    [[nodiscard]]
     QString changeDescription(int changeId) const;
     /// @return description of the change at the head, empty if there is none
+    [[nodiscard]]
     QString headChangeDescription() const;
     /// @return true if the current change is the base
 //     bool isAtBase() const;
     /// @return size of the data used by the applied changes
+    [[nodiscard]]
     int appliedChangesDataSize() const;
 
 private:

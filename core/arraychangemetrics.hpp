@@ -53,25 +53,36 @@ public:
     ArrayChangeMetrics& operator=(const ArrayChangeMetrics&) = default;
 
 public:
+    [[nodiscard]]
     constexpr bool operator==(const ArrayChangeMetrics& other) const;
 
 public:
     void revert();
 
 public:
+    [[nodiscard]]
     constexpr int type() const;
+    [[nodiscard]]
     constexpr Address offset() const;
+    [[nodiscard]]
     constexpr bool isValid() const;
 
 public: // Replacement properties
+    [[nodiscard]]
     constexpr Size removeLength() const;
+    [[nodiscard]]
     constexpr Size insertLength() const;
+    [[nodiscard]]
     constexpr Size lengthChange() const;
 
 public: // Swapping properties
+    [[nodiscard]]
     constexpr Size firstLength() const;
+    [[nodiscard]]
     constexpr Address secondStart() const;
+    [[nodiscard]]
     constexpr Address secondEnd() const;
+    [[nodiscard]]
     constexpr Size secondLength() const;
 
 private:
