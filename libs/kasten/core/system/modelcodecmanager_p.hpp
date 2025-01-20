@@ -41,12 +41,15 @@ public:
                         AbstractModel* model, const AbstractModelSelection* selection);
 
 public:
+    [[nodiscard]]
     std::vector<AbstractModelStreamEncoder*> streamEncoders(AbstractModel* model, const AbstractModelSelection* selection) const;
 #if 0
     std::vector<AbstractModelStreamDecoder*> streamDecoders() const;
 #endif
+    [[nodiscard]]
     std::vector<AbstractModelDataGenerator*> dataGenerators() const;
 
+    [[nodiscard]]
     std::vector<AbstractModelExporter*> exporters(AbstractModel* model, const AbstractModelSelection* selection) const;
 
 public:

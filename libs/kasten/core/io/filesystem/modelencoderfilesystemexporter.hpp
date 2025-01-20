@@ -28,11 +28,13 @@ public:
     ~ModelEncoderFileSystemExporter() override;
 
 public:
+    [[nodiscard]]
     AbstractModelStreamEncoder* encoder() const;
 
 public: // AbstractModelExporter API
     AbstractExportJob* startExport(AbstractModel* model, const AbstractModelSelection* selection,
                                    const QUrl& url) override;
+    [[nodiscard]]
     QString modelTypeName(AbstractModel* model, const AbstractModelSelection* selection) const override;
 
 private:

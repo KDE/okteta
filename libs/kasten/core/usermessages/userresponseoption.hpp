@@ -43,8 +43,11 @@ public:
     UserResponseOption& operator=(const UserResponseOption&) = delete;
 
 public:
+    [[nodiscard]]
     KGuiItem guiItem() const;
+    [[nodiscard]]
     QString id() const;
+    [[nodiscard]]
     UserResponseOptionHints hints() const;
 
 private:

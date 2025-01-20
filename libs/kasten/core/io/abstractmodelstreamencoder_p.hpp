@@ -26,8 +26,11 @@ public:
     AbstractModelStreamEncoderPrivate& operator=(const AbstractModelStreamEncoderPrivate&) = delete;
 
 public:
+    [[nodiscard]]
     const QString& remoteTypeName() const;
+    [[nodiscard]]
     const QString& remoteMimeType() const;
+    [[nodiscard]]
     const QString& remoteClipboardMimeType() const;
 
 protected:

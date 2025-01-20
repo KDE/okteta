@@ -26,8 +26,11 @@ public:
     AbstractModelDataGeneratorPrivate& operator=(const AbstractModelDataGeneratorPrivate&) = delete;
 
 public:
+    [[nodiscard]]
     const QString& typeName() const;
+    [[nodiscard]]
     const QString& mimeType() const;
+    [[nodiscard]]
     AbstractModelDataGenerator::Flags flags() const;
 
 protected:

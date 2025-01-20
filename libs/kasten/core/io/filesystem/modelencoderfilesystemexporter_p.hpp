@@ -29,9 +29,11 @@ public:
 public: // AbstractModelExporter API
     AbstractExportJob* startExport(AbstractModel* model, const AbstractModelSelection* selection,
                                    const QUrl& url);
+    [[nodiscard]]
     QString modelTypeName(AbstractModel* model, const AbstractModelSelection* selection) const;
 
 public:
+    [[nodiscard]]
     AbstractModelStreamEncoder* encoder() const;
 
 private:

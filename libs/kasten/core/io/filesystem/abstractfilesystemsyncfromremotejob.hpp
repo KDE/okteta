@@ -36,7 +36,9 @@ protected: // API to be implemented
     virtual void startReadFromFile() = 0;
 
 protected:
+    [[nodiscard]]
     AbstractModelFileSystemSynchronizer* synchronizer() const;
+    [[nodiscard]]
     QFile* file() const;
 
 protected:

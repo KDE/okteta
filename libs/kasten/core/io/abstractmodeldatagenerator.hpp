@@ -46,8 +46,11 @@ public: // API to be implemented
     virtual std::unique_ptr<QMimeData> generateData() = 0;
 
 public:
+    [[nodiscard]]
     QString typeName() const;
+    [[nodiscard]]
     QString mimeType() const;
+    [[nodiscard]]
     Flags flags() const;
 
 protected:

@@ -37,15 +37,20 @@ public:
 
 public: // API to be implemented
     // TODO: what about plurals?
+    [[nodiscard]]
     virtual QString typeName() const = 0;
+    [[nodiscard]]
     virtual QString mimeType() const = 0;
+    [[nodiscard]]
     virtual ContentFlags contentFlags() const = 0;
 
 public:
     void setSynchronizer(std::unique_ptr<AbstractModelSynchronizer>&& synchronizer);
 
 public: // helper or basic?
+    [[nodiscard]]
     AbstractModelSynchronizer* synchronizer() const;
+    [[nodiscard]]
     QString id() const;
 
 Q_SIGNALS:

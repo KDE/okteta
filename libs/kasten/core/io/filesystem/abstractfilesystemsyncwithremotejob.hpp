@@ -38,7 +38,9 @@ protected: // API to be implemented
     virtual void startSyncWithRemote() = 0;
 
 protected:
+    [[nodiscard]]
     AbstractModelFileSystemSynchronizer* synchronizer() const;
+    [[nodiscard]]
     QFile* file() const;
 
 protected:

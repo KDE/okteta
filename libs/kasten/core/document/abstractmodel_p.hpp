@@ -24,6 +24,7 @@ public:
     AbstractModelPrivate& operator=(const AbstractModelPrivate&) = delete;
 
 public:
+    [[nodiscard]]
     AbstractModel* baseModel() const;
 
 public:

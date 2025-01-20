@@ -35,26 +35,32 @@ public:
 
 public:
 // TODO: just one baseModel, or can there be multiple? Better name?
+    [[nodiscard]]
     AbstractModel* baseModel() const;
     /**
      * returns the first baseModel which is of type T, or null if none is found.
      * The search is started with the model itself
      */
     template <typename T>
+    [[nodiscard]]
     T findBaseModel() const;
     /**
      * returns the first baseModel which is of type T, or null if none is found.
      * The search is started with the model itself
      */
     template <typename T>
+    [[nodiscard]]
     AbstractModel* findBaseModelWithInterface() const;
 
 public: // API to be implemented
+    [[nodiscard]]
     virtual QString title() const = 0;
 
     /** Default returns false */
+    [[nodiscard]]
     virtual bool isModifiable() const;
     /** default returns true */
+    [[nodiscard]]
     virtual bool isReadOnly() const;
     /** default does nothing */
     virtual void setReadOnly(bool isReadOnly);

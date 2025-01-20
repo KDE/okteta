@@ -27,6 +27,7 @@ public:
     AbstractModelSynchronizerPrivate& operator=(const AbstractModelSynchronizerPrivate&) = delete;
 
 public:
+    [[nodiscard]]
     const QUrl& url() const;
 
 public:

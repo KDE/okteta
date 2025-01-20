@@ -43,10 +43,15 @@ public:
     UserQuery& operator=(const UserQuery&) = delete;
 
 public:
+    [[nodiscard]]
     AbstractModel* targetModel() const;
+    [[nodiscard]]
     QString text() const;
+    [[nodiscard]]
     QString title() const;
+    [[nodiscard]]
     UserQuerySeverity severity() const;
+    [[nodiscard]]
     const std::vector<std::unique_ptr<UserResponseOption>>& responseOptions() const;
 
     void addResponseOption(const KGuiItem& guiItem, const QString& id, UserResponseOptionHints hints = UserResponseNoHints);

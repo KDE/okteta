@@ -31,6 +31,7 @@ public:
     ~AbstractModelFileSystemSynchronizerPrivate() override;
 
 public:
+    [[nodiscard]]
     RemoteSyncState remoteSyncState() const;
 
 public:

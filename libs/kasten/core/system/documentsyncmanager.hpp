@@ -42,13 +42,17 @@ public:
     void load(const QUrl& url);
 // TODO: better name
     bool setSynchronizer(AbstractDocument* document);
+    [[nodiscard]]
     bool canClose(AbstractDocument* document);
     void reload(AbstractDocument* document);
     void save(AbstractDocument* document);
 
 public:
+    [[nodiscard]]
     QStringList supportedRemoteTypes() const;
+    [[nodiscard]]
     bool hasSynchronizerForLocal(const QString& workDocumentType) const;
+    [[nodiscard]]
     QUrl urlOf(AbstractDocument* document) const;
 
 public:

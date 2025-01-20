@@ -26,7 +26,9 @@ public:
     ~AbstractDocumentPrivate() override;
 
 public:
+    [[nodiscard]]
     const QString& id() const;
+    [[nodiscard]]
     AbstractModelSynchronizer* synchronizer() const;
 
 public:

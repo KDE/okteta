@@ -36,6 +36,7 @@ public:
     ~AbstractModelFileSystemSynchronizer() override;
 
 public: // AbstractModelSynchronizer API
+    [[nodiscard]]
     RemoteSyncState remoteSyncState() const override;
 
 protected:

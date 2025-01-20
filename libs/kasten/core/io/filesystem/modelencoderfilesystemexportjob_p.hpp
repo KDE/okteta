@@ -30,6 +30,7 @@ public: // AbstractFileSystemExportJob API
     void startExportToFile();
 
 public:
+    [[nodiscard]]
     AbstractModelStreamEncoder* encoder() const;
 
 private:

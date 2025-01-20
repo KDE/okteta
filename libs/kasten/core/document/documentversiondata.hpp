@@ -27,7 +27,9 @@ public:
     DocumentVersionData& operator=(const DocumentVersionData&) = default;
 
 public:
+    [[nodiscard]]
     DocumentVersionId id() const;
+    [[nodiscard]]
     QString changeComment() const;
 
 private:

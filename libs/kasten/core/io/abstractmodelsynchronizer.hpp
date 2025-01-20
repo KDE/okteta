@@ -63,6 +63,7 @@ public:
     ~AbstractModelSynchronizer() override;
 
 public:
+    [[nodiscard]]
     QUrl url() const;
 
 public: // API to be implemented
@@ -94,8 +95,11 @@ public: // API to be implemented
 //     virtual bool canSyncBiDirectly() const = 0;
 //     virtual bool deleteDocument();
 
+    [[nodiscard]]
     virtual AbstractDocument* document() const = 0;
+    [[nodiscard]]
     virtual LocalSyncState localSyncState() const = 0;
+    [[nodiscard]]
     virtual RemoteSyncState remoteSyncState() const = 0;
 
 Q_SIGNALS:

@@ -56,7 +56,9 @@ public:
 
 public: // get
 //     virtual KDocumentVersionId versionId() const = 0;
+    [[nodiscard]]
     virtual int versionIndex() const = 0;
+    [[nodiscard]]
     virtual DocumentVersionData versionData(int versionIndex) const = 0;
 //     virtual KDocumentVersionIterator currentVersion() const = 0;
 //     virtual KDocumentVersionIterator rootVersion() const = 0;
@@ -64,6 +66,7 @@ public: // get
 // for those with multiple branches:
 //     virtual KDocumentVersionIterator headVersion( const KDocumentVersionBranchId& id) const = 0;
 //     virtual QList<KDocumentVersionBranchId> heads() const = 0;
+    [[nodiscard]]
     virtual int versionCount() const = 0;
 
 public: // set/action

@@ -44,20 +44,29 @@ public:
     void closeAllOther(AbstractDocument* document);
 
     // TODO: what to do for documents not added?
+    [[nodiscard]]
     bool canClose(AbstractDocument* document) const;
+    [[nodiscard]]
     bool canClose(const QVector<AbstractDocument*>& documents) const;
+    [[nodiscard]]
     bool canCloseAll() const;
+    [[nodiscard]]
     bool canCloseAllOther(AbstractDocument* document) const;
 
     void requestFocus(AbstractDocument* document);
 
 public:
+    [[nodiscard]]
     QVector<AbstractDocument*> documents() const;
+    [[nodiscard]]
     bool isEmpty() const;
 
 public:
+    [[nodiscard]]
     DocumentCreateManager* createManager() const;
+    [[nodiscard]]
     DocumentSyncManager* syncManager() const;
+    [[nodiscard]]
     ModelCodecManager* codecManager() const;
 
 private:

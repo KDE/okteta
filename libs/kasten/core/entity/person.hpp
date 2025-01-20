@@ -35,10 +35,13 @@ public:
     Person& operator=(const Person& other);
 
 public:
+    [[nodiscard]]
     bool operator==(const Person& other) const;
 
 public:
+    [[nodiscard]]
     QString name() const;
+    [[nodiscard]]
     QIcon faceIcon() const;
 
 private:

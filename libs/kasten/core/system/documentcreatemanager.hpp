@@ -35,6 +35,7 @@ public:
     ~DocumentCreateManager() override;
 
 public:
+    [[nodiscard]]
     bool canCreateNewFromData(const QMimeData* mimeData) const;
 
 public:

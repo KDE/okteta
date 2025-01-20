@@ -40,8 +40,11 @@ protected: // API to be implemented
     virtual void startLoadFromFile() = 0;
 
 protected:
+    [[nodiscard]]
     AbstractModelFileSystemSynchronizer* synchronizer() const;
+    [[nodiscard]]
     QUrl url() const;
+    [[nodiscard]]
     QFile* file() const;
 
 private:

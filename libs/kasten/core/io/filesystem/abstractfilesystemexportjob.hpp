@@ -45,8 +45,11 @@ protected:
     void completeExport(bool success);
 
 protected:
+    [[nodiscard]]
     AbstractModel* model() const;
+    [[nodiscard]]
     const AbstractModelSelection* selection() const;
+    [[nodiscard]]
     QFile* file() const;
 
 private:

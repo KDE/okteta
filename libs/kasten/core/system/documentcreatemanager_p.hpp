@@ -28,6 +28,7 @@ public:
     DocumentCreateManagerPrivate& operator=(const DocumentCreateManagerPrivate&) = delete;
 
 public:
+    [[nodiscard]]
     bool canCreateNewFromData(const QMimeData* mimeData) const;
 
 public:

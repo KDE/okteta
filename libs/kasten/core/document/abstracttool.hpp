@@ -36,6 +36,7 @@ public:
 
 public: // API to be implemented
 //     virtual AbstractModel* targetModel() const = 0;
+    [[nodiscard]]
     virtual QString title() const = 0;
 
     virtual void setTargetModel(AbstractModel* model) = 0;

@@ -27,7 +27,9 @@ public:
     virtual ~UserListable();
 
 public: // get
+    [[nodiscard]]
     virtual Person owner() const = 0;
+    [[nodiscard]]
     virtual QVector<Person> userList() const = 0;
 
 public: // set/action

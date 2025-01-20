@@ -29,8 +29,11 @@ public:
     UserResponseOptionPrivate& operator=(const UserResponseOptionPrivate&) = delete;
 
 public:
+    [[nodiscard]]
     const KGuiItem& guiItem() const;
+    [[nodiscard]]
     const QString& id() const;
+    [[nodiscard]]
     UserResponseOptionHints hints() const;
 
 private:

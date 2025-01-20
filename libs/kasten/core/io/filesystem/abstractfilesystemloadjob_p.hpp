@@ -36,8 +36,11 @@ public: // AbstractLoadJob API
     void setDocument(std::unique_ptr<AbstractDocument>&& document);
 
 public:
+    [[nodiscard]]
     AbstractModelFileSystemSynchronizer* synchronizer() const;
+    [[nodiscard]]
     const QUrl& url() const;
+    [[nodiscard]]
     QFile* file() const;
 
 public: // slots

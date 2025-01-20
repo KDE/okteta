@@ -25,8 +25,11 @@ public:
     UserNotificationPrivate& operator=(const UserNotificationPrivate&) = delete;
 
 public:
+    [[nodiscard]]
     AbstractModel* targetModel() const;
+    [[nodiscard]]
     const QString& text() const;
+    [[nodiscard]]
     const QString& title() const;
 
 private:

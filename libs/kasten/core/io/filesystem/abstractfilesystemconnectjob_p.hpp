@@ -38,8 +38,11 @@ public:
     void complete(bool success);
 
 public:
+    [[nodiscard]]
     AbstractModelFileSystemSynchronizer* synchronizer() const;
+    [[nodiscard]]
     AbstractDocument* document() const;
+    [[nodiscard]]
     QFile* file() const;
 
 public:

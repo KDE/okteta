@@ -42,8 +42,11 @@ protected:
     void complete(bool success);
 
 protected:
+    [[nodiscard]]
     AbstractModelFileSystemSynchronizer* synchronizer() const;
+    [[nodiscard]]
     AbstractDocument* document() const;
+    [[nodiscard]]
     QFile* file() const;
 
 private:

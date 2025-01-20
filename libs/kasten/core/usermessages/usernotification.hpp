@@ -33,8 +33,11 @@ public:
     UserNotification& operator=(const UserNotification&) = delete;
 
 public:
+    [[nodiscard]]
     AbstractModel* targetModel() const;
+    [[nodiscard]]
     QString text() const;
+    [[nodiscard]]
     QString title() const;
 
 private:

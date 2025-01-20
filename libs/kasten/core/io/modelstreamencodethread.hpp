@@ -39,6 +39,7 @@ public: // QThread API
     void run() override;
 
 public:
+    [[nodiscard]]
     bool success() const;
 
 Q_SIGNALS:

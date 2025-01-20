@@ -42,10 +42,13 @@ public:
 public: // API to be implemented
     virtual AbstractExportJob* startExport(AbstractModel* model, const AbstractModelSelection* selection,
                                            const QUrl& url) = 0;
+    [[nodiscard]]
     virtual QString modelTypeName(AbstractModel* model, const AbstractModelSelection* selection) const = 0;
 
 public:
+    [[nodiscard]]
     QString remoteTypeName() const;
+    [[nodiscard]]
     QString remoteMimeType() const;
 
 protected:

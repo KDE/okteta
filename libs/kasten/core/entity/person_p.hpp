@@ -25,7 +25,9 @@ public:
     ~PersonPrivate();
 
 public:
+    [[nodiscard]]
     const QString& name() const;
+    [[nodiscard]]
     const QIcon& faceIcon() const;
 
 private:

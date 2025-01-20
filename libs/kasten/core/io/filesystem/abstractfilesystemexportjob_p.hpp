@@ -35,8 +35,11 @@ public:
     void completeExport(bool success);
 
 public:
+    [[nodiscard]]
     AbstractModel* model() const;
+    [[nodiscard]]
     const AbstractModelSelection* selection() const;
+    [[nodiscard]]
     QFile* file() const;
 
 public: // slot

@@ -47,12 +47,16 @@ public:
 
 public: // API to be implemented
     virtual bool encodeToStream(QIODevice* device, AbstractModel* model, const AbstractModelSelection* selection) = 0;
+    [[nodiscard]]
     virtual QString modelTypeName(AbstractModel* model, const AbstractModelSelection* selection) const = 0;
 
 public:
+    [[nodiscard]]
     QString remoteTypeName() const;
+    [[nodiscard]]
     QString remoteMimeType() const;
     // the clipboard does not yet understand mimetype inheritance
+    [[nodiscard]]
     QString remoteClipboardMimeType() const;
 
 protected:

@@ -25,7 +25,9 @@ public:
     AbstractModelExporterPrivate& operator=(const AbstractModelExporterPrivate&) = delete;
 
 public:
+    [[nodiscard]]
     const QString& remoteTypeName() const;
+    [[nodiscard]]
     const QString& remoteMimeType() const;
 
 protected:

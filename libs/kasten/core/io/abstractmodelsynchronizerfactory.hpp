@@ -54,8 +54,10 @@ public: // API to be implemented
 
     /** returns the id of the work model type */
     // TODO: is QByteArray enough?
+    [[nodiscard]]
     virtual QString supportedWorkType() const = 0;
     /** returns the id of the remote model type */
+    [[nodiscard]]
     virtual QString supportedRemoteType() const = 0;
 };
 

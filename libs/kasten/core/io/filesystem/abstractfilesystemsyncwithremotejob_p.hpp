@@ -33,7 +33,9 @@ public: // KJob API
     void start();
 
 protected:
+    [[nodiscard]]
     AbstractModelFileSystemSynchronizer* synchronizer() const;
+    [[nodiscard]]
     QFile* file() const;
 
 protected:
