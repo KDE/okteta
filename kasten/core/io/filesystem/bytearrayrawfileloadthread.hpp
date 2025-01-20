@@ -35,6 +35,7 @@ public: // QThread API
 public:
     std::unique_ptr<ByteArrayDocument> releaseDocument();
 
+    [[nodiscard]]
     const QString& errorString() const;
 
 private:

@@ -45,23 +45,35 @@ public:
     ~ByteArrayDocument() override;
 
 public: // AbstractModel API
+    [[nodiscard]]
     QString title() const override;
+    [[nodiscard]]
     bool isModifiable() const override;
+    [[nodiscard]]
     bool isReadOnly() const override;
+
     void setReadOnly(bool isReadOnly) override;
 
 public: // AbstractDocument API
+    [[nodiscard]]
     QString typeName() const override;
+    [[nodiscard]]
     QString mimeType() const override;
+    [[nodiscard]]
     ContentFlags contentFlags() const override;
 
 public: // If::Versionable
+    [[nodiscard]]
     int versionIndex() const override;
+    [[nodiscard]]
     DocumentVersionData versionData(int versionIndex) const override;
+    [[nodiscard]]
     int versionCount() const override;
+
     void revertToVersionByIndex(int versionIndex) override;
 
 public: // If::ByteArray
+    [[nodiscard]]
     virtual Okteta::AbstractByteArrayModel* content() const;
 
 public:

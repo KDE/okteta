@@ -33,8 +33,10 @@ public: // AbstractModelSynchronizer API
     AbstractSyncFromRemoteJob* startSyncFromRemote() override;
     AbstractSyncWithRemoteJob* startSyncWithRemote(const QUrl& url, AbstractModelSynchronizer::ConnectOption option) override;
 
+    [[nodiscard]]
     AbstractDocument* document() const override;
 
+    [[nodiscard]]
     LocalSyncState localSyncState() const override;
 
 protected:

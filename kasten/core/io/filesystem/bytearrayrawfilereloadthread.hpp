@@ -30,9 +30,12 @@ public: // QThread API
     void run() override;
 
 public:
+    [[nodiscard]]
     bool success() const;
+    [[nodiscard]]
     const QString& errorString() const;
 
+    [[nodiscard]]
     const QByteArray& data() const;
 
 Q_SIGNALS:

@@ -28,7 +28,9 @@ public:
     void setRange(const Okteta::AddressRange& range);
 
 public:
+    [[nodiscard]]
     Okteta::AddressRange range() const;
+    [[nodiscard]]
     bool isValid() const;
 
 private:

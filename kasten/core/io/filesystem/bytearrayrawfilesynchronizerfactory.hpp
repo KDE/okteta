@@ -29,7 +29,9 @@ public: // AbstractModelSynchronizerFactory API
     AbstractConnectJob* startConnect(AbstractDocument* document,
                                      const QUrl& url, AbstractModelSynchronizer::ConnectOption option) override;
 
+    [[nodiscard]]
     QString supportedWorkType() const override;
+    [[nodiscard]]
     QString supportedRemoteType() const override;
 };
 

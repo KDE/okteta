@@ -21,6 +21,7 @@ class OKTETAKASTENCORE_EXPORT ByteArrayDocumentFactory : public AbstractDocument
     Q_OBJECT
 
 public: // AbstractDocumentFactory API
+    [[nodiscard]]
     bool canCreateFromData(const QMimeData* mimeData) override;
 
     std::unique_ptr<AbstractDocument> create() override;
