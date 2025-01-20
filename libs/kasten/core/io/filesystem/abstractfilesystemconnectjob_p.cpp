@@ -50,18 +50,22 @@ void AbstractFileSystemConnectJobPrivate::connectWithFile()
         } else {
             QTemporaryFile tmpFile;
             tmpFile.setAutoRemove(false);
-            tmpFile.open();
+            isWorkFileOk = tmpFile.open();
 
             mWorkFilePath = tmpFile.fileName();
             mTempFilePath = mWorkFilePath;
 
-            KIO::FileCopyJob* fileCopyJob =
-                KIO::file_copy(mUrl, QUrl::fromLocalFile(mWorkFilePath), -1, KIO::Overwrite);
-            KJobWidgets::setWindow(fileCopyJob, /*mWidget*/ nullptr);
-
-            isWorkFileOk = fileCopyJob->exec();
             if (!isWorkFileOk) {
-                q->setErrorText(fileCopyJob->errorString());
+                q->setErrorText(tmpFile.errorString());
+            } else {
+                KIO::FileCopyJob* fileCopyJob =
+                    KIO::file_copy(mUrl, QUrl::fromLocalFile(mWorkFilePath), -1, KIO::Overwrite);
+                KJobWidgets::setWindow(fileCopyJob, /*mWidget*/ nullptr);
+
+                isWorkFileOk = fileCopyJob->exec();
+                if (!isWorkFileOk) {
+                    q->setErrorText(fileCopyJob->errorString());
+                }
             }
         }
 
