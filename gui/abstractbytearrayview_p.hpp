@@ -110,6 +110,7 @@ public: // value access
     AddressRange selection() const;
     [[nodiscard]]
     QByteArray selectedData() const;
+    [[nodiscard]]
     std::unique_ptr<QMimeData> selectionAsMimeData() const;
 
     [[nodiscard]]
@@ -197,6 +198,7 @@ public: // interaction
     void setSelectionCursorPosition(Address index);
 
 public:
+    [[nodiscard]]
     QMenu* createStandardContextMenu(QPoint position);
 
 public: // API to be implemented

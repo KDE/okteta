@@ -23,7 +23,9 @@ public:
     TouchOnlyTapAndHoldGestureRecognizer& operator=(const TouchOnlyTapAndHoldGestureRecognizer&) = delete;
 
 public:
+    [[nodiscard]]
     QGesture* create(QObject* target) override;
+    [[nodiscard]]
     QGestureRecognizer::Result recognize(QGesture* state, QObject* object, QEvent* event) override;
     void reset(QGesture* state) override;
 };

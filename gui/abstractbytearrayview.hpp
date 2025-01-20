@@ -309,7 +309,9 @@ public:
     /**
      * @return deep copy of the selected data
      */
+    [[nodiscard]]
     QByteArray selectedData() const;
+    [[nodiscard]]
     std::unique_ptr<QMimeData> selectionAsMimeData() const;
 
 public: // modification access
@@ -380,6 +382,7 @@ public:
 public:
     [[nodiscard]]
     QRect cursorRect() const;
+    [[nodiscard]]
     QMenu* createStandardContextMenu(QPoint position);
 
 public: // QWidget API
