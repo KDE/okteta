@@ -32,6 +32,7 @@ public: // API to be implemented
     virtual void setCharCodec(const QString& charCodecName);
     virtual void getParameterSet(AbstractByteArrayFilterParameterSet* parameterSet) const = 0;
     /// default returns true
+    [[nodiscard]]
     virtual bool isValid() const;
     /// default is a noop
     virtual void rememberCurrentSettings();

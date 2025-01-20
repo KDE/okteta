@@ -47,6 +47,7 @@ public:
     ~OperandByteArrayFilterParameterSet() override;
 
 public: // AbstractByteArrayFilterParameterSet API
+    [[nodiscard]]
     const char* id() const override;
 
 public:
@@ -55,8 +56,11 @@ public:
     void setAlignAtEnd(bool alignAtEnd);
 
 public:
+    [[nodiscard]]
     QByteArray operand() const;
+    [[nodiscard]]
     Coding operandFormat() const;
+    [[nodiscard]]
     bool alignAtEnd() const;
 
 public:

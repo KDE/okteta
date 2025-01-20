@@ -28,6 +28,7 @@ public:
 public: // AbstractByteArrayFilterParameterSetEdit API
     void setValues(const AbstractByteArrayFilterParameterSet* parameterSet) override;
     void getParameterSet(AbstractByteArrayFilterParameterSet* parameterSet) const override;
+    [[nodiscard]]
     bool isValid() const override;
 
 private Q_SLOTS:

@@ -25,6 +25,7 @@ public:
     AbstractByteArrayFilterParameterSet& operator=(const AbstractByteArrayFilterParameterSet&) = delete;
 
 public:
+    [[nodiscard]]
     virtual const char* id() const = 0;
 
 private:

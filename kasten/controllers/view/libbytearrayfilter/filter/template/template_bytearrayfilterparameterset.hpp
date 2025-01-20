@@ -28,12 +28,14 @@ public:
     ~Template_ByteArrayFilterParameterSet() override;
 
 public: // AbstractByteArrayFilterParameterSet API
+    [[nodiscard]]
     const char* id() const override;
 
 //// ADAPT(start)
 //// declare the parameters and the corresponding getters and setters
 
 public: // getters
+    [[nodiscard]]
     unsigned char level() const;
 
 public: // setters

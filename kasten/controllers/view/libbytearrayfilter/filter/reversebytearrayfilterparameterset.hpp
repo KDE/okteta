@@ -26,12 +26,14 @@ public:
     ~ReverseByteArrayFilterParameterSet() override;
 
 public: // AbstractByteArrayFilterParameterSet API
+    [[nodiscard]]
     const char* id() const override;
 
 public:
     void setInvertsBits(bool invertsBits);
 
 public:
+    [[nodiscard]]
     bool invertsBits() const;
 
 public:

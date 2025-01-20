@@ -32,6 +32,7 @@ public: // AbstractByteArrayFilterParameterSetEdit API
     void setValues(const AbstractByteArrayFilterParameterSet* parameterSet) override;
     void setCharCodec(const QString& charCodecName) override;
     void getParameterSet(AbstractByteArrayFilterParameterSet* parameterSet) const override;
+    [[nodiscard]]
     bool isValid() const override;
     void rememberCurrentSettings() override;
 

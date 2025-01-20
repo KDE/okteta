@@ -28,6 +28,7 @@ public:
     ~RotateByteArrayFilterParameterSet() override;
 
 public: // AbstractByteArrayFilterParameterSet API
+    [[nodiscard]]
     const char* id() const override;
 
 public:
@@ -35,7 +36,9 @@ public:
     void setMoveBitWidth(int moveBitWidth);
 
 public:
+    [[nodiscard]]
     int groupSize() const;
+    [[nodiscard]]
     int moveBitWidth() const;
 
 public:

@@ -19,6 +19,7 @@ public:
     ~NoByteArrayFilterParameterSet() override;
 
 public: // AbstractByteArrayFilterParameterSet API
+    [[nodiscard]]
     const char* id() const override;
 };
 
