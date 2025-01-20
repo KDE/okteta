@@ -38,6 +38,7 @@ public: // QLayout API
     int indexOf(QWidget* widget) const override;
 
     void addItem(QLayoutItem* item) override;
+    [[nodiscard]]
     QLayoutItem* takeAt(int index) override;
 
 public: // QLayoutItem API
