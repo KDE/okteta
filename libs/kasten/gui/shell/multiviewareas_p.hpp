@@ -58,6 +58,7 @@ public: // If::ToolInlineViewable API
     AbstractToolInlineView* currentToolInlineView() const;
 
 public: // If::ViewAreaSplitable API
+    [[nodiscard]]
     AbstractViewArea* splitViewArea(AbstractViewArea* viewArea, Qt::Orientation orientation);
     void closeViewArea(AbstractViewArea* viewArea);
     void setViewAreaFocus(AbstractViewArea* viewArea);

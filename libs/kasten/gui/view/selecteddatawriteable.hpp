@@ -33,6 +33,7 @@ public:
 public: // operate
     // TODO: inserting works on selection if available
     virtual void insertData(const QMimeData* data) = 0;
+    [[nodiscard]]
     virtual std::unique_ptr<QMimeData> cutSelectedData() = 0;
     virtual void deleteSelectedData() = 0;
 

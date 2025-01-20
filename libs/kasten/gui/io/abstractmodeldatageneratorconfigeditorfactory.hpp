@@ -25,6 +25,7 @@ public:
     virtual ~AbstractModelDataGeneratorConfigEditorFactory();
 
 public:
+    [[nodiscard]]
     virtual std::unique_ptr<AbstractModelDataGeneratorConfigEditor> tryCreateConfigEditor(AbstractModelDataGenerator* generator) const = 0;
 };
 

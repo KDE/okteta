@@ -26,6 +26,7 @@ public:
     virtual ~AbstractXmlGuiControllerFactory();
 
 public: // API to be implemented
+    [[nodiscard]]
     virtual std::unique_ptr<AbstractXmlGuiController> create(KXMLGUIClient* guiClient) const = 0;
 };
 

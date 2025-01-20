@@ -34,6 +34,7 @@ public: // AbstractUserMessagesHandler API
     void postErrorReport(std::unique_ptr<UserErrorReport>&& errorReport) override;
     void postNotification(std::unique_ptr<UserNotification>&& notification) override;
 
+    [[nodiscard]]
     QString executeQuery(std::unique_ptr<UserQuery>&& userQuery) override;
 
 public:

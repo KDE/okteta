@@ -36,8 +36,11 @@ public:
     ModelCodecViewManagerPrivate& operator=(const ModelCodecViewManagerPrivate&) = delete;
 
 public:
+    [[nodiscard]]
     std::unique_ptr<AbstractModelStreamEncoderConfigEditor> createConfigEditor(AbstractModelStreamEncoder* encoder) const;
+    [[nodiscard]]
     std::unique_ptr<AbstractModelExporterConfigEditor> createConfigEditor(AbstractModelExporter* exporter) const;
+    [[nodiscard]]
     std::unique_ptr<AbstractModelDataGeneratorConfigEditor> createConfigEditor(AbstractModelDataGenerator* generator) const;
 
 public:

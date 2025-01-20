@@ -23,6 +23,7 @@ public:
     ~ModelEncoderFileSystemExporterConfigEditorFactory() override;
 
 public:
+    [[nodiscard]]
     std::unique_ptr<AbstractModelExporterConfigEditor> tryCreateConfigEditor(AbstractModelExporter* exporter) const override;
 
 private:

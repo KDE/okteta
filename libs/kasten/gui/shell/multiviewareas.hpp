@@ -60,6 +60,7 @@ public: // If::ToolInlineViewable API
     AbstractToolInlineView* currentToolInlineView() const override;
 
 public: // If::ViewAreaSplitable API
+    [[nodiscard]]
     AbstractViewArea* splitViewArea(AbstractViewArea* viewArea, Qt::Orientation orientation) override;
     void closeViewArea(AbstractViewArea* viewArea) override;
     void setViewAreaFocus(AbstractViewArea* viewArea) override;

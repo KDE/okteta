@@ -29,6 +29,7 @@ public:
 public: // AbstractModelExporterConfigEditor API
     [[nodiscard]]
     bool isValid() const override;
+    [[nodiscard]]
     std::unique_ptr<AbstractSelectionView> createPreviewView() const override;
 
 private:

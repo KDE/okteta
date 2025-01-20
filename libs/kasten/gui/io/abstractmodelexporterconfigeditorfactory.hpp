@@ -25,6 +25,7 @@ public:
     virtual ~AbstractModelExporterConfigEditorFactory();
 
 public:
+    [[nodiscard]]
     virtual std::unique_ptr<AbstractModelExporterConfigEditor> tryCreateConfigEditor(AbstractModelExporter* exporter) const = 0;
 };
 

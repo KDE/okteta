@@ -25,6 +25,7 @@ public:
     virtual ~AbstractToolViewFactory();
 
 public: // API to be implemented
+    [[nodiscard]]
     virtual std::unique_ptr<AbstractToolView> create(AbstractTool* tool) const = 0;
 
     // TODO: find out of iconName an id can be QByteArray

@@ -25,6 +25,7 @@ public:
     virtual ~AbstractModelStreamEncoderConfigEditorFactory();
 
 public:
+    [[nodiscard]]
     virtual std::unique_ptr<AbstractModelStreamEncoderConfigEditor> tryCreateConfigEditor(AbstractModelStreamEncoder* encoder) const = 0;
 };
 

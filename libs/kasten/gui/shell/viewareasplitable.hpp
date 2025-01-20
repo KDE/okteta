@@ -33,6 +33,7 @@ public:
 
 public: // set/action
     /// returns the new view area
+    [[nodiscard]]
     virtual AbstractViewArea* splitViewArea(AbstractViewArea* viewArea, Qt::Orientation orientation) = 0;
     virtual void closeViewArea(AbstractViewArea* viewArea) = 0;   // TODO: or report success with bool?
     virtual void setViewAreaFocus(AbstractViewArea* viewArea) = 0;

@@ -31,11 +31,15 @@ public:
     DialogHandler& operator=(const DialogHandler&) = delete;
 
 public: // AbstractOverwriteDialog API
+    [[nodiscard]]
     Answer queryOverwrite(const QUrl& url, const QString& title) const override;
 
 public: // AbstractSaveDiscardDialog API
+    [[nodiscard]]
     Answer queryDiscardOnReload(const AbstractDocument* document, const QString& title) const override;
+    [[nodiscard]]
     Answer querySaveDiscard(const AbstractDocument* document, const QString& title) const override;
+    [[nodiscard]]
     Answer queryDiscard(const AbstractDocument* document, const QString& title) const override;
 
 private:

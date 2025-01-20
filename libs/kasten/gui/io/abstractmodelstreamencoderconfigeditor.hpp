@@ -35,6 +35,7 @@ public: // API to be implemented
     [[nodiscard]]
     virtual bool isValid() const;
     /// default returns none
+    [[nodiscard]]
     virtual std::unique_ptr<AbstractSelectionView> createPreviewView() const;
 
 Q_SIGNALS:
