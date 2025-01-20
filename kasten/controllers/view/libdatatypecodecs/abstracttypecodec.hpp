@@ -37,6 +37,7 @@ public: // API to be implemented
     virtual bool areEqual(const QVariant& value, QVariant& otherValue) const = 0;
 
 public:
+    [[nodiscard]]
     const QString& name() const;
 
 private:

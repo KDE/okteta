@@ -32,16 +32,23 @@ public:
 public:
     void setByteOrder(QSysInfo::Endian byteOrder);
     bool updateRawData(int size);
+    [[nodiscard]]
     Byte* rawData();
 
 public:
+    [[nodiscard]]
     const Byte* originalData() const;
+    [[nodiscard]]
     const Byte* byteOrderSetData() const;
+    [[nodiscard]]
     QSysInfo::Endian byteOrder() const;
 
+    [[nodiscard]]
     unsigned long bitValue(int noOfBitsToRead) const;
     void getPointers(const void** P8Bit, const void** P16Bit, const void** P32Bit, const void** P64Bit) const;
+    [[nodiscard]]
     const void* pointer(int byteCount) const;
+    [[nodiscard]]
     int size() const;
 
 private:
