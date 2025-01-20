@@ -48,8 +48,11 @@ public:
     void cancelEdit(bool undoChanges = true);
 
 public:
+    [[nodiscard]]
     bool isInEditMode() const;
+    [[nodiscard]]
     Byte value() const;
+    [[nodiscard]]
     QString valueAsString() const;
 
 private:

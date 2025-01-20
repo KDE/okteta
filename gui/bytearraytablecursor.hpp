@@ -55,35 +55,45 @@ public: // modificator
 
 public: // state value access
     /** the index that is drawn at the actual coord */
+    [[nodiscard]]
     Address index() const;
     /** the pos of the actual coord */
+    [[nodiscard]]
     LinePosition pos() const;
     /** the line of the actual coord */
+    [[nodiscard]]
     Line line() const;
     /** the actual coord */
+    [[nodiscard]]
     Coord coord() const;
     /** true if the cursor is located to the right of the actual coord but still shown at the coord */
+    [[nodiscard]]
     bool isBehind() const;
     /** returns the real index. That is if the cursor is tagged as "behind" the current index
      * it's real index is the next one.
      * Attention: this could be outside the data's range if the cursor is behind the last byte!
      */
+    [[nodiscard]]
     Address realIndex() const;
     /** returns the true index if it is valid index that is it is inside the data's range.
      * Otherwise -1 is returned
      */
+    [[nodiscard]]
     Address validIndex() const;
 
     // bool isValid() const;
     /**
      *  Default is false.
      */
+    [[nodiscard]]
     bool appendPosEnabled() const;
 
 public: // index calculation service
     /** returns the index at the start of the cursor's line */
+    [[nodiscard]]
     Address indexAtLineStart() const;
     /** returns the index at the end of the cursor's line */
+    [[nodiscard]]
     Address indexAtLineEnd() const;
 
 public: // navigation commands
@@ -120,11 +130,16 @@ public: // navigation commands
     void adaptToChanges(const ArrayChangeMetricsList& changeList, Size oldLength);
 
 public: // logical state access
+    [[nodiscard]]
     bool atStart() const;
+    [[nodiscard]]
     bool atEnd() const;
     /** could only be true in InsertMode: Cursor is behind the last byte */
+    [[nodiscard]]
     bool atAppendPos() const;
+    [[nodiscard]]
     bool atLineStart() const;
+    [[nodiscard]]
     bool atLineEnd() const;
 
 private:

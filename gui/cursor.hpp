@@ -36,10 +36,15 @@ public:
     void setShape(PixelX X, PixelX W, qreal devicePixelRatio);
 
 public: // access
+    [[nodiscard]]
     QPixmap& onPixmap();
+    [[nodiscard]]
     QPixmap& offPixmap();
+    [[nodiscard]]
     PixelX cursorX() const;
+    [[nodiscard]]
     PixelX shapeX() const;
+    [[nodiscard]]
     PixelX shapeW() const;
 
 private:

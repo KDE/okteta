@@ -24,6 +24,7 @@ public: // AbstractController API
     bool handleKeyPress(QKeyEvent* keyEvent) override;
 
 public:
+    [[nodiscard]]
     bool tabChangesFocus() const;
     /// default is true
     void setTabChangesFocus(bool tabChangesFocus);

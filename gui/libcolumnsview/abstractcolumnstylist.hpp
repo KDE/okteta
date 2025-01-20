@@ -36,6 +36,7 @@ public:
     AbstractColumnStylist& operator=(const AbstractColumnStylist&) = delete;
 
 public: // API to be reimplemented in the subclasses
+    [[nodiscard]]
     virtual const QPalette& palette() const = 0;
 
 protected:

@@ -63,59 +63,95 @@ public:
     ~AbstractByteArrayViewPrivate() override;
 
 public: // value access
+    [[nodiscard]]
     AbstractByteArrayModel* byteArrayModel() const;
 
     // TODO: needed?
+    [[nodiscard]]
     bool isModified() const;
 
+    [[nodiscard]]
     bool isOverwriteMode() const;
+    [[nodiscard]]
     bool isOverwriteOnly() const;
+    [[nodiscard]]
     bool isViewReadOnly() const;
+    [[nodiscard]]
     bool isEffectiveReadOnly() const;
 
     /** returns the index of the cursor position */
+    [[nodiscard]]
     Address cursorPosition() const;
     /***/
+    [[nodiscard]]
     bool isCursorBehind() const;
 
+    [[nodiscard]]
     bool offsetColumnVisible() const;
+    [[nodiscard]]
     AbstractByteArrayView::OffsetCoding offsetCoding() const;
 
+    [[nodiscard]]
     int noOfBytesPerLine() const;
+    [[nodiscard]]
     Address startOffset() const;
+    [[nodiscard]]
     Address firstLineOffset() const;
 
+    [[nodiscard]]
     AbstractByteArrayView::LayoutStyle layoutStyle() const;
 
+    [[nodiscard]]
     bool tabChangesFocus() const;
 
+    [[nodiscard]]
     bool hasSelectedData() const;
+    [[nodiscard]]
     AddressRange selection() const;
+    [[nodiscard]]
     QByteArray selectedData() const;
     std::unique_ptr<QMimeData> selectionAsMimeData() const;
 
+    [[nodiscard]]
     AddressRange marking() const;
 
+    [[nodiscard]]
     AbstractController* controller() const;
+    [[nodiscard]]
     AbstractWheelController* wheelController() const;
 
+    [[nodiscard]]
     ByteArrayTableLayout* tableLayout();
+    [[nodiscard]]
     const ByteArrayTableLayout* tableLayout() const;
+    [[nodiscard]]
     ByteArrayTableCursor* tableCursor();
+    [[nodiscard]]
     const ByteArrayTableCursor* tableCursor() const;
+    [[nodiscard]]
     ByteArrayTableRanges* tableRanges();
+    [[nodiscard]]
     const ByteArrayTableRanges* tableRanges() const;
 
+    [[nodiscard]]
     const ValueCodec* valueCodec() const;
+    [[nodiscard]]
     AbstractByteArrayView::ValueCoding valueCoding() const;
+    [[nodiscard]]
     const CharCodec* charCodec() const;
+    [[nodiscard]]
     QString charCodingName() const;
 
 public: // zooming values
+    [[nodiscard]]
     double zoomScale() const;
+    [[nodiscard]]
     int zoomInLevelsSize() const;
+    [[nodiscard]]
     int zoomOutLevelsSize() const;
+    [[nodiscard]]
     double zoomScaleForLevel(int zoomLevel) const;
+    [[nodiscard]]
     int zoomLevelForScale(double zoomScale) const;
 
 public:
@@ -167,7 +203,9 @@ public: // API to be implemented
     virtual void ensureVisible(const AddressRange& range, bool ensureStartVisible) = 0;
     virtual void ensureCursorVisible() = 0;
     virtual void placeCursor(QPoint point) = 0;
+    [[nodiscard]]
     virtual QRect cursorRect() const = 0;
+    [[nodiscard]]
     virtual Address indexByPoint(QPoint point) const = 0;
     virtual void blinkCursor() = 0;
 
@@ -212,12 +250,14 @@ protected:
 
 protected:
     bool getNextChangedRange(CoordRange* changedRange, const CoordRange& visibleRange) const;
+    [[nodiscard]]
     bool isByteEditorActive() const;
 
 protected:
     void removeSelectedData();
     void insert(const QByteArray& data);
     void pasteData(const QMimeData* data);
+    [[nodiscard]]
     bool canReadData(const QMimeData* data) const;
 
 protected: // clipboard interaction
@@ -239,8 +279,11 @@ protected: // API to be implemented
     virtual void setVisibleCodings(int visibleCodings) = 0;
 
 protected: // API to be implemented
+    [[nodiscard]]
     virtual AbstractByteArrayView::CodingTypeId activeCoding() const = 0;
+    [[nodiscard]]
     virtual AbstractByteArrayView::CodingTypes visibleCodings() const = 0;
+    [[nodiscard]]
     virtual int fittingBytesPerLine() const = 0;
     /** recalcs all dependent values with the actual NoOfBytesPerLine  */
     virtual void adjustToLayoutNoOfBytesPerLine() = 0;
@@ -252,6 +295,8 @@ protected:
     void emitDoubleClicked(Address index);
     void emitCursorPositionChanged();
     void setMouseCursor(Qt::CursorShape cursorShape);
+
+    [[nodiscard]]
     QPoint mapViewportFromGlobal(QPoint pos) const;
 
 private:

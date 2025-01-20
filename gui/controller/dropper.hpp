@@ -37,6 +37,7 @@ public: // AbstractMouseController API
     bool handleDropEvent(QDropEvent* dropEvent);
 
 public:
+    [[nodiscard]]
     bool isActive() const;
 
 private:

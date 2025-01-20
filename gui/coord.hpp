@@ -47,32 +47,45 @@ public:
     ~Coord() = default;
 
 public: // logic
+    [[nodiscard]]
     constexpr bool operator==(const Coord& other) const;
+    [[nodiscard]]
     constexpr bool operator!=(const Coord& other) const;
+    [[nodiscard]]
     constexpr bool operator<(const Coord& other) const;
+    [[nodiscard]]
     constexpr bool operator<=(const Coord& other) const;
+    [[nodiscard]]
     constexpr bool operator>(const Coord& other) const;
+    [[nodiscard]]
     constexpr bool operator>=(const Coord& other) const;
 
     /** tests if the coord is prior in the same line than the given coord.
      * If at least one of both is invalid the result is undefined.
      * @return true if the pos is left to the pos of other and both are in the same line, otherwise false.
      */
+    [[nodiscard]]
     constexpr bool isPriorInLineThan(Coord other) const;
     /** tests if the coord is later in the same line than the given coord.
      * If at least one of both is invalid the result is undefined.
      * @return true if the pos is right to the pos of other and both are in the same line, otherwise false
      */
+    [[nodiscard]]
     constexpr bool isLaterInLineThan(Coord other) const;
     /** @return true if the line is below lines, otherwise false */
+    [[nodiscard]]
     constexpr bool isBelow(Line line) const;
     /** @return true if the line is above lines, otherwise false */
+    [[nodiscard]]
     constexpr bool isAbove(Line line) const;
     /** @return true if the coord is at (0,0) */
+    [[nodiscard]]
     constexpr bool isAtStart() const;
     /** @return true if the pos is greater than 0, otherwise false */
+    [[nodiscard]]
     constexpr bool isBehindLineStart() const;
     /** @return true if the pos is smaller than maxPos, otherwise false */
+    [[nodiscard]]
     constexpr bool isBeforeLineEnd(LinePosition maxPos) const;
 
     /** calculates the index the coord is at with a given line width
@@ -80,6 +93,7 @@ public: // logic
      * @param lineWidth given width of line
      * @return index the coord is at
      */
+    [[nodiscard]]
     constexpr Address indexByLineWidth(LinePositionSize lineWidth) const;
 
 public:
@@ -154,10 +168,13 @@ public:
 
 public: // state value access
     /** @return the pos in the line */
+    [[nodiscard]]
     constexpr LinePosition pos() const;
     /** @return the line number */
+    [[nodiscard]]
     constexpr Line line() const;
     /** @return true if the coord is valid */
+    [[nodiscard]]
     constexpr bool isValid() const;
 
 private: // member variables

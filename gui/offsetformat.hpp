@@ -42,8 +42,10 @@ public:
 
 public:
     /** */
+    [[nodiscard]]
     static unsigned int codingWidth(int i);
     /** */
+    [[nodiscard]]
     static print printFunction(int i);
 
 public:

@@ -44,6 +44,7 @@ public:
 
 public: // read access
 //     int delta() const;
+    [[nodiscard]]
     OffsetFormat::Format format() const;
 
 private:

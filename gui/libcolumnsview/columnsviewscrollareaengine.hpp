@@ -44,47 +44,61 @@ public:
 
 public: // data-wise sizes
     /** returns the number of all lines */
+    [[nodiscard]]
     LineSize noOfLines() const;
     /** returns number of fully visible lines, at least 1 (as needed by page down/up)
      * doesn't care about the total height being smaller than the display height
      */
+    [[nodiscard]]
     LineSize noOfLinesPerPage() const;
 
 public: // pixel-wise sizes
     /** returns the height of each line */
+    [[nodiscard]]
     PixelY lineHeight() const;
     /** returns the width of all visible columns together */
+    [[nodiscard]]
     PixelX columnsWidth() const;
     /** returns the height of all lines together */
+    [[nodiscard]]
     PixelY columnsHeight() const;
 
 public: // services
     /** gives the index of the line that would include y in pixel coord.
      * y is not forced to be inside the total height.
      */
+    [[nodiscard]]
     Line lineAt(PixelY y) const;
     /** gives the index of the first and the last line that would be visible
      * these lines might not contain anything
      */
+    [[nodiscard]]
     LineRange visibleLines() const;
     /** gives the index of the first and the last line that would be visible in the given pixel range
      * these lines might not contain anything
      */
+    [[nodiscard]]
     LineRange visibleLines(const PixelYRange& yPixels) const;
 
     /** @return visible width of the current view */
+    [[nodiscard]]
     PixelX visibleWidth() const;
     /** @return visible height of the current view */
+    [[nodiscard]]
     PixelY visibleHeight() const;
     /** @return x offset of the current view */
+    [[nodiscard]]
     PixelX xOffset() const;
     /** @return y offset of the current view */
+    [[nodiscard]]
     PixelY yOffset() const;
 
     /** @return y offset of the current view */
+    [[nodiscard]]
     PixelY yOffsetOfLine(Line lineIndex) const;
 
     /** translates the point to coordinates in the columns */
+    [[nodiscard]]
     QPoint viewportToColumns(QPoint point) const;
 
 public:

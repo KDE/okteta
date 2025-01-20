@@ -17,6 +17,7 @@
 #include <QColor>
 
 // temporary solution until syntax highlighting is implemented
+[[nodiscard]]
 static inline QColor colorForChar(const Okteta::Character byteChar)
 {
     return byteChar.isUndefined() ? Qt::yellow :
@@ -27,6 +28,7 @@ static inline QColor colorForChar(const Okteta::Character byteChar)
                                     Qt::blue;
 }
 
+[[nodiscard]]
 static inline KColorScheme::ForegroundRole foregroundRoleForChar(const Okteta::Character byteChar)
 {
     return byteChar.isUndefined() ? KColorScheme::NegativeText :

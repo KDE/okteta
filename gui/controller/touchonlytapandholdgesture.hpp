@@ -24,10 +24,12 @@ public:
     TouchOnlyTapAndHoldGesture() = default;
 
 public:
+    [[nodiscard]]
     QPointF position() const;
     void setPosition(const QPointF &pos);
     void beginHoldTimeer();
     void cancelHoldTimer();
+    [[nodiscard]]
     bool isHoldTimerActive() const;
     void reset();
 

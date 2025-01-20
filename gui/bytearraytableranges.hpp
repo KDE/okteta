@@ -66,31 +66,52 @@ public: // modifcation access
     void reset();
 
 public: // value access
+    [[nodiscard]]
     int noOfSelections() const;
+    [[nodiscard]]
     Address selectionStart() const;
+    [[nodiscard]]
     Address selectionEnd() const;
+    [[nodiscard]]
     AddressRange selection() const;
+    [[nodiscard]]
     AddressRange firstWordSelection() const;
+    [[nodiscard]]
     Size selectionLength() const;
+    [[nodiscard]]
     AddressRange marking() const;
+    [[nodiscard]]
     bool isModified() const;
+    [[nodiscard]]
     LineRange changedOffsetLines() const;
 
 public: // calculated logic access
+    [[nodiscard]]
     bool hasSelection() const;
+    [[nodiscard]]
     bool hasMarking() const;
+    [[nodiscard]]
     bool selectionStarted() const;
+    [[nodiscard]]
     bool selectionJustStarted() const;
+    [[nodiscard]]
     bool hasFirstWordSelection() const;
+    [[nodiscard]]
     bool selectionIncludes(Address index) const;
+    [[nodiscard]]
     bool markingIncludes(Address index) const;
     // TODO: next three are deprecated
+    [[nodiscard]]
     bool overlapsSelection(Address FirstIndex, Address LastIndex, Address* startIndex, Address* endIndex) const;
+    [[nodiscard]]
     bool overlapsMarking(Address FirstIndex, Address LastIndex, Address* startIndex, Address* endIndex) const;
 //    bool overlapsChanges( int FirstIndex, int LastIndex, int *SI, int *EI ) const;
 //    bool overlapsChanges( AddressRange Indizes, AddressRange *ChangedRange ) const;
+    [[nodiscard]]
     bool overlapsChanges(const CoordRange& range, CoordRange* ChangedRange) const;
+    [[nodiscard]]
     const AddressRange* firstOverlappingSelection(const AddressRange& range) const;
+    [[nodiscard]]
     const AddressRange* overlappingMarking(const AddressRange& range) const;
 
 private:

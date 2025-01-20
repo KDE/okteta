@@ -49,6 +49,7 @@ public:
     CoordRange& operator=(const CoordRange& other);
 
 public:
+    [[nodiscard]]
     bool operator==(const CoordRange& other) const;
 
 public:
@@ -57,17 +58,20 @@ public:
      * @param lineWidth
      * @return the number of points covered if a line has a length of LineLength.
      */
+    [[nodiscard]]
     Size width(LinePositionSize lineWidth) const;
     /** calculates the number of lines that are covered by the range.
      * If the range is invalid the behaviour is undefined.
      * @return number of lines covered
      */
+    [[nodiscard]]
     LineSize lines() const;
     /** tests if the given line is included by the range.
      * If the range is invalid or the line < 0 the behaviour is undefined.
      * @param line index of line
      * @return @c true if Line is included, otherwise @c false
      */
+    [[nodiscard]]
     bool includesLine(Line line) const;
 };
 

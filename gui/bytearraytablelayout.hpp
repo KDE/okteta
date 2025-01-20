@@ -55,31 +55,45 @@ public:
 
 public: // given values
     /** */
+    [[nodiscard]]
     Address startOffset() const;
     /** */
+    [[nodiscard]]
     Address firstLineOffset() const;
     /** returns number of bytes per line */
+    [[nodiscard]]
     Size noOfBytesPerLine() const;
     /** returns the offset of the start of the displayed byte array section */
+    [[nodiscard]]
     Address byteArrayOffset() const;
     /** returns the length of the displayed byte array section */
+    [[nodiscard]]
     Size length() const;
     /** returns number of lines per visual page */
+    [[nodiscard]]
     LineSize noOfLinesPerPage() const;
 
 public: // calculated values
+    [[nodiscard]]
     Line startLine() const;
+    [[nodiscard]]
     LinePosition firstStartLinePosition() const;
     /** returns the coord of the start */
+    [[nodiscard]]
     Coord startCoord() const;
 
+    [[nodiscard]]
     Line finalLine() const;
+    [[nodiscard]]
     LinePosition lastFinalLinePosition() const;
     /** returns the coord of the end */
+    [[nodiscard]]
     Coord finalCoord() const;
 
+    [[nodiscard]]
     Address lastByteArrayOffset() const;
     /** tells how much lines this layout needs (incl. blank leading lines due to mStartOffset and mFirstLineOffset) */
+    [[nodiscard]]
     LineSize noOfLines() const;
 
 public: // value calculation service
@@ -87,61 +101,82 @@ public: // value calculation service
      * If the coord is before the first coord the first index is returned,
      * if the coord is behind the last coord the last index is returned
      */
+    [[nodiscard]]
     Address indexAtCCoord(Coord coord) const;
     /** calculates the index of the first pos in line.
      * If the line is below the first line the first index is returned,
      * if the line is above the last line the last index is returned
      */
+    [[nodiscard]]
     Address indexAtCFirstLinePosition(Line line) const;
     /** calculates the index of last pos in line
      * If the line is below the first line the first index is returned,
      * if the line is above the last line the last index is returned
      */
+    [[nodiscard]]
     Address indexAtCLastLinePosition(Line line) const;
     /** calculates the line in which index is found
      * If the index is below the first index the first line is returned,
      * if the index is above the last index the last line is returned
      */
+    [[nodiscard]]
     Line lineAtCIndex(Address index) const;
     /** calculates the coord in which index is found
      * If the index is below the first index the first coord is returned,
      * if the index is above the last index the last coord is returned
      */
+    [[nodiscard]]
     Coord coordOfCIndex(Address index) const;
 
     /** calculates the index of coord. if coord is invalid the behaviour is undefinded */
+    [[nodiscard]]
     Address indexAtCoord(Coord coord) const;
     /** calculates the index of the first pos in line. if line is invalid the behaviour is undefinded */
+    [[nodiscard]]
     Address indexAtFirstLinePosition(Line line) const;
     /** calculates the index of last pos in line. if line is invalid the behaviour is undefinded */
+    [[nodiscard]]
     Address indexAtLastLinePosition(Line line) const;
     /** calculates the line in which index is found. if index is invalid the behaviour is undefinded */
+    [[nodiscard]]
     Line lineAtIndex(Address index) const;
     /** calculates the coord in which index is found. if index is invalid the behaviour is undefinded */
+    [[nodiscard]]
     Coord coordOfIndex(Address index) const;
     /** calculates the range of coords in which the indizes are found. if indizes are invalid the behaviour is undefinded */
+    [[nodiscard]]
     CoordRange coordRangeOfIndizes(const AddressRange& indizes) const;
 
     /** returns the used positions in line */
+    [[nodiscard]]
     LinePositionRange linePositions(Line line) const;
     /** returns the first Pos in line. if line is invalid the behaviour is undefinded */
+    [[nodiscard]]
     LinePosition firstLinePosition(Line line) const;
     /** returns the last Pos in line. if line is invalid the behaviour is undefinded */
+    [[nodiscard]]
     LinePosition lastLinePosition(Line line) const;
     /** returns the valid Pos or the first Pos in line. if coord is invalid the behaviour is undefinded */
+    [[nodiscard]]
     LinePosition firstLinePosition(Coord coord) const;
     /** returns the valid Pos or the last Pos in line. if coord is invalid the behaviour is undefinded */
+    [[nodiscard]]
     LinePosition lastLinePosition(Coord coord) const;
     /** returns true if the line has content */
+    [[nodiscard]]
     bool hasContent(Line line) const;
     /** returns true if the coord is the first in it's line. if coord is invalid the behaviour is undefinded */
+    [[nodiscard]]
     bool atFirstLinePosition(Coord coord) const;
     /** returns true if the coord is the last in it's line. if coord is invalid the behaviour is undefinded */
+    [[nodiscard]]
     bool atLastLinePosition(Coord coord) const;
 
     /** returns the index if valid or the nearest valid index */
+    [[nodiscard]]
     Address correctIndex(Address index) const;
     /** returns the coord if valid or the nearest valid coord */
+    [[nodiscard]]
     Coord correctCoord(Coord coord) const;
 
 public: // modification access; return true if changes

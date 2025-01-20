@@ -25,16 +25,24 @@ public:
 
 public: // AbstractByteArrayView API
     // value column
+    [[nodiscard]]
     int /*PixelX*/ byteSpacingWidth() const override;
+    [[nodiscard]]
     int noOfGroupedBytes() const override;
+    [[nodiscard]]
     int /*PixelX*/ groupSpacingWidth() const override;
+    [[nodiscard]]
     int /*PixelX*/ binaryGapWidth() const override;
 
     // char column
+    [[nodiscard]]
     bool showsNonprinting() const override;
+    [[nodiscard]]
     QChar substituteChar() const override;
+    [[nodiscard]]
     QChar undefinedChar() const override;
 
+    [[nodiscard]]
     bool isByteTypeColored() const override;
 
     void setByteSpacingWidth(int /*PixelX*/ byteSpacingWidth) override;
@@ -51,6 +59,7 @@ public: // AbstractByteArrayView API
     void setByteTypeColored(bool isColored) override;
 
 public: // QWidget API
+    [[nodiscard]]
     QSize minimumSizeHint() const override;
 
 public: // logic value service

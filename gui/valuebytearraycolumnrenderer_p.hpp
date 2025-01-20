@@ -39,6 +39,7 @@ public: // modification access
     bool setBinaryGapWidth(PixelX binaryGapWidth);
 
 public: // value access
+    [[nodiscard]]
     PixelX binaryGapWidth() const;
 
 protected: // AbstractByteArrayColumnRendererPrivate API

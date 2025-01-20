@@ -21,6 +21,7 @@ public:
     ~WidgetColumnStylistPrivate() override;
 
 public:
+    [[nodiscard]]
     QWidget* widget() const;
 
 private:

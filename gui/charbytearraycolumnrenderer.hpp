@@ -50,10 +50,13 @@ public: // value access
     /** returns true if "unprintable" chars (>32) are displayed in the char column
      * with their corresponding character, default is false
      */
+    [[nodiscard]]
     bool isShowingNonprinting() const;
     /** returns the actually used substitute character for "unprintable" chars, default is '.' */
+    [[nodiscard]]
     QChar substituteChar() const;
     /** returns the actually used undefined character for "undefined" chars, default is '?' */
+    [[nodiscard]]
     QChar undefinedChar() const;
 
 private:

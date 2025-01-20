@@ -110,56 +110,86 @@ public:
     ~AbstractByteArrayView() override;
 
 public: // value access
+    [[nodiscard]]
     Okteta::AbstractByteArrayModel* byteArrayModel() const;
+    [[nodiscard]]
     bool isModified() const;
 
+    [[nodiscard]]
     bool isOverwriteMode() const;
+    [[nodiscard]]
     bool isOverwriteOnly() const;
+    [[nodiscard]]
     bool isReadOnly() const;
 
     /** returns the index of the cursor position */
+    [[nodiscard]]
     Address cursorPosition() const;
     /***/
+    [[nodiscard]]
     bool isCursorBehind() const;
 
+    [[nodiscard]]
     Address startOffset() const;
+    [[nodiscard]]
     Address firstLineOffset() const;
+    [[nodiscard]]
     int noOfBytesPerLine() const;
 
+    [[nodiscard]]
     LayoutStyle layoutStyle() const;
 
+    [[nodiscard]]
     bool tabChangesFocus() const;
 
+    [[nodiscard]]
     CodingTypes visibleCodings() const;
+    [[nodiscard]]
     CodingTypeId activeCoding() const;
 
+    [[nodiscard]]
     bool offsetColumnVisible() const;
+    [[nodiscard]]
     OffsetCoding offsetCoding() const;
 
     /** returns true if there is a selected range in the array */
+    [[nodiscard]]
     bool hasSelectedData() const;
+    [[nodiscard]]
     AddressRange selection() const;
 
+    [[nodiscard]]
     AddressRange marking() const;
 
+    [[nodiscard]]
     ValueCoding valueCoding() const;
     /**
      * @return name of the encoding used for the chars
      */
+    [[nodiscard]]
     QString charCodingName() const;
 
 public: // zooming values
+    [[nodiscard]]
     double zoomScale() const;
+    [[nodiscard]]
     int zoomInLevelsSize() const;
+    [[nodiscard]]
     int zoomOutLevelsSize() const;
+    [[nodiscard]]
     double zoomScaleForLevel(int zoomLevel) const;
+    [[nodiscard]]
     int zoomLevelForScale(double zoomScale) const;
 
 public: // value access API
     // value column
+    [[nodiscard]]
     virtual int /*PixelX*/ byteSpacingWidth() const = 0;
+    [[nodiscard]]
     virtual int noOfGroupedBytes() const = 0;
+    [[nodiscard]]
     virtual int /*PixelX*/ groupSpacingWidth() const = 0;
+    [[nodiscard]]
     virtual int /*PixelX*/ binaryGapWidth() const = 0;
 
     // char column
@@ -167,14 +197,18 @@ public: // value access API
      * with their original character. Default is false
      * @return @c true if original chars are displayed, otherwise @c false
      */
+    [[nodiscard]]
     virtual bool showsNonprinting() const = 0;
     /** gives the used substitute character for "unprintable" chars, default is '.'
      * @return substitute character
      */
+    [[nodiscard]]
     virtual QChar substituteChar() const = 0;
     /** returns the actually used undefined character for "undefined" chars, default is '?' */
+    [[nodiscard]]
     virtual QChar undefinedChar() const = 0;
 
+    [[nodiscard]]
     virtual bool isByteTypeColored() const = 0;
 
 public:
@@ -315,6 +349,7 @@ public: // modification access
     void placeCursor(QPoint point);
 
 public:
+    [[nodiscard]]
     bool canReadData(const QMimeData* data) const;
 
 public: // zooming
@@ -343,10 +378,12 @@ public:
     void paste();
 
 public:
+    [[nodiscard]]
     QRect cursorRect() const;
     QMenu* createStandardContextMenu(QPoint position);
 
 public: // QWidget API
+    [[nodiscard]]
     QSize sizeHint() const override;
 
 public: // logic value service
@@ -354,6 +391,7 @@ public: // logic value service
      * @param point in viewport coordinate system
      * @return index of the byte that covers the point
      */
+    [[nodiscard]]
     Address indexByPoint(QPoint point) const;
 
 Q_SIGNALS:
@@ -394,7 +432,9 @@ Q_SIGNALS:
     void zoomLevelsChanged();
 
 protected:
+    [[nodiscard]]
     const Okteta::ValueCodec* valueCodec() const;
+    [[nodiscard]]
     const Okteta::CharCodec* charCodec() const;
 
 protected: // QWidget API

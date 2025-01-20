@@ -36,8 +36,11 @@ public: // modification access
     bool setUndefinedChar(QChar undefinedChar);
 
 public: // value access
+    [[nodiscard]]
     bool isShowingNonprinting() const;
+    [[nodiscard]]
     QChar substituteChar() const;
+    [[nodiscard]]
     QChar undefinedChar() const;
 
 protected: // AbstractByteArrayColumnRendererPrivate API

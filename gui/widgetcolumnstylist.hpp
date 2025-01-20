@@ -25,6 +25,7 @@ public:
     ~WidgetColumnStylist() override;
 
 public: // AbstractColumnStylist API
+    [[nodiscard]]
     const QPalette& palette() const override;
 
 private:

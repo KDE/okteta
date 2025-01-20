@@ -78,22 +78,30 @@ public: // modification access
 
 public: // value access
     /** */
+    [[nodiscard]]
     AbstractColumnStylist* stylist() const;
     /** left offset x in pixel */
+    [[nodiscard]]
     PixelX x() const;
     /** total width in pixel */
+    [[nodiscard]]
     PixelX width() const;
     /** right offset x in pixel */
+    [[nodiscard]]
     PixelX rightX() const;
     /** should Column be displayed? */
+    [[nodiscard]]
     bool isVisible() const;
     /** convenience: returns width if visible else 0 */
+    [[nodiscard]]
     PixelX visibleWidth() const;
     /** */
+    [[nodiscard]]
     PixelY lineHeight() const;
 
 public: // functional logic
     /** true if column overlaps with pixels between x-positions x1, x2 */
+    [[nodiscard]]
     bool overlaps(const PixelXRange& xSpan) const;
 
 protected:

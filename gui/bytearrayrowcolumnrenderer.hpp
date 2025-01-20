@@ -146,62 +146,95 @@ public: // modification access
 
 public: // functional logic
     /** returns byte linePositions covered by pixels with absolute x-coord x */
+    [[nodiscard]]
     LinePositionRange linePositionsOfX(PixelX x, PixelX width) const;
     /** returns byte pos at pixel with absolute x-coord x */
+    [[nodiscard]]
     LinePosition linePositionOfX(PixelX x) const;
     /** returns byte pos at pixel with absolute x-coord x, and sets the flag to true if we are closer to the right */
+    [[nodiscard]]
     LinePosition magneticLinePositionOfX(PixelX x) const;
     /** returns absolute x-coord of byte at position linePosition */
+    [[nodiscard]]
     PixelX xOfLinePosition(LinePosition linePosition) const;
     /** returns right absolute x-coord of byte at position linePosition */
+    [[nodiscard]]
     PixelX rightXOfLinePosition(LinePosition linePosition) const;
     /** returns byte pos at pixel with relative x-coord x */
+    [[nodiscard]]
     LinePosition linePositionOfColumnX(PixelX x) const;
     /** returns byte linePositions covered by pixels with relative x-coord x */
+    [[nodiscard]]
     LinePositionRange linePositionsOfColumnXs(PixelX x, PixelX width) const;
     /** returns relative x-coord of byte at position linePosition */
+    [[nodiscard]]
     PixelX columnXOfLinePosition(LinePosition linePosition) const;
     /** returns right relative x-coord of byte at position linePosition */
+    [[nodiscard]]
     PixelX columnRightXOfLinePosition(LinePosition linePosition) const;
     /** returns the linePositions that overlap with the x-coords relative to the view */
+    [[nodiscard]]
     LinePositionRange visibleLinePositions(PixelX x, PixelX width) const;
     /** returns the */
+    [[nodiscard]]
     PixelXRange xsOfLinePositionsInclSpaces(const LinePositionRange& linePositions) const;
     /** */
+    [[nodiscard]]
     PixelXRange columnXsOfLinePositionsInclSpaces(const LinePositionRange& linePositions) const;
 
+    [[nodiscard]]
     QRect byteRect(Coord coord) const;
+    [[nodiscard]]
     QRect byteRect(Coord coord, AbstractByteArrayView::CodingTypeId codingId) const;
 
+    [[nodiscard]]
     AbstractByteArrayView::CodingTypeId codingIdofY(PixelY y) const;
+    [[nodiscard]]
     PixelY yOfCodingId(AbstractByteArrayView::CodingTypeId codingId) const;
 
 public: // value access
+    [[nodiscard]]
     PixelX byteWidth() const;
+    [[nodiscard]]
     PixelX digitWidth() const;
+    [[nodiscard]]
     PixelX groupSpacingWidth() const;
+    [[nodiscard]]
     PixelX byteSpacingWidth() const;
+    [[nodiscard]]
     Size noOfGroupedBytes() const;
+    [[nodiscard]]
     PixelY digitHeight() const;
+    [[nodiscard]]
     PixelY rowHeight() const;
 
+    [[nodiscard]]
     PixelX binaryGapWidth() const;
 
     /** returns true if "unprintable" chars (>32) are displayed in the char column
      * with their corresponding character, default is false
      */
+    [[nodiscard]]
     bool isShowingNonprinting() const;
     /** returns the actually used substitute character for "unprintable" chars, default is '.' */
+    [[nodiscard]]
     QChar substituteChar() const;
     /** returns the actually used undefined character for "undefined" chars, default is '?' */
+    [[nodiscard]]
     QChar undefinedChar() const;
 
+    [[nodiscard]]
     LinePosition firstLinePos() const;
+    [[nodiscard]]
     LinePosition lastLinePos()  const;
+    [[nodiscard]]
     LinePositionRange visibleLinePositions() const;
+    [[nodiscard]]
     const ByteArrayTableLayout* tableLayout() const;
+    [[nodiscard]]
     bool isByteTypeColored() const;
 
+    [[nodiscard]]
     AbstractByteArrayView::CodingTypes visibleCodings() const;
 
 private:

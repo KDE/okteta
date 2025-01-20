@@ -31,19 +31,28 @@ public:
 
 public:
     // value column
+    [[nodiscard]]
     int /*PixelX*/ byteSpacingWidth() const;
+    [[nodiscard]]
     int noOfGroupedBytes() const;
+    [[nodiscard]]
     int /*PixelX*/ groupSpacingWidth() const;
+    [[nodiscard]]
     int /*PixelX*/ binaryGapWidth() const;
 
     // char column
+    [[nodiscard]]
     bool showsNonprinting() const;
+    [[nodiscard]]
     QChar substituteChar() const;
+    [[nodiscard]]
     QChar undefinedChar() const;
 
+    [[nodiscard]]
     bool isByteTypeColored() const;
 
 public: // logic value service
+    [[nodiscard]]
     QSize minimumSizeHint() const;
 
 public: // modification access
@@ -56,7 +65,9 @@ public: // AbstractByteArrayViewPrivate API
     void ensureVisible(const AddressRange& range, bool ensureStartVisible) override;
     void ensureCursorVisible() override;
     void placeCursor(QPoint point) override;
+    [[nodiscard]]
     QRect cursorRect() const override;
+    [[nodiscard]]
     Address indexByPoint(QPoint point) const override;
     void blinkCursor() override;
 
@@ -99,9 +110,13 @@ protected: // AbstractByteArrayViewPrivate API
     void setVisibleCodings(int visibleCodings) override;
 
 protected: // AbstractByteArrayViewPrivate API
+    [[nodiscard]]
     AbstractByteArrayView::CodingTypeId activeCoding() const override;
+    [[nodiscard]]
     AbstractByteArrayView::CodingTypes visibleCodings() const override;
+    [[nodiscard]]
     int fittingBytesPerLine() const override;
+
     void adjustToLayoutNoOfBytesPerLine() override;
     void adjustTToScaledFont() override;
     void updateChanged() override;

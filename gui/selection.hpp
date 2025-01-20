@@ -42,7 +42,9 @@ public:
     Selection& operator=(const Selection& other);
     Selection& operator=(const AddressRange& range);
 
+    [[nodiscard]]
     bool operator==(const Selection& other) const;
+    [[nodiscard]]
     bool operator!=(const Selection& other) const;
 
 public: // modification access
@@ -77,29 +79,39 @@ public: // value access
     /**
      * @return anchor value
      */
+    [[nodiscard]]
     Address anchor() const;
+    [[nodiscard]]
     Address start() const;
+    [[nodiscard]]
     Address end() const;
+    [[nodiscard]]
     Address nextBeforeStart() const;
+    [[nodiscard]]
     Address nextBehindEnd() const;
     /**
      * @return range
      */
+    [[nodiscard]]
     const AddressRange& range() const;
 
 public: // logic access
+    [[nodiscard]]
     bool isValid() const;
     /**
      * @return @c true if the anchor has been set, otherwise @c false.
      */
+    [[nodiscard]]
     bool started() const;
     /**
      * @return @c true if the anchor has been set and the selection is empty, otherwise @c false.
      */
+    [[nodiscard]]
     bool justStarted() const;
     /**
      * @return @c true if the anchor is at the begin of the selection
      */
+    [[nodiscard]]
     bool isForward() const;
 
 private:
