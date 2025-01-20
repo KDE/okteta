@@ -31,6 +31,7 @@ public:
 
 public:
     void setByteOrder(QSysInfo::Endian byteOrder);
+    [[nodiscard]]
     bool updateRawData(int size);
     [[nodiscard]]
     Byte* rawData();
