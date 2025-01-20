@@ -29,6 +29,7 @@ public:
     QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const override;
 
 protected:
+    [[nodiscard]]
     QList<QWidget*> createItemWidgets(const QModelIndex& index) const override;
     void updateItemWidgets(const QList<QWidget*> widgets, const QStyleOptionViewItem& option, const QPersistentModelIndex& index) const override;
 

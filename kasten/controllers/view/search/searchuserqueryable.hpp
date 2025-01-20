@@ -24,6 +24,7 @@ public:
     virtual ~SearchUserQueryable();
 
 public: // API to be implemented
+    [[nodiscard]]
     virtual bool queryContinue(FindDirection direction) const = 0;
 };
 

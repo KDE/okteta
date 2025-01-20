@@ -44,6 +44,7 @@ public: // QObject API
     bool eventFilter(QObject* object, QEvent* event) override;
 
 public: // AbstractDifferentSizeDialog API
+    [[nodiscard]]
     Answer query(int newValueSize, int oldValueSize, int sizeLeft) override;
 
 private Q_SLOTS:

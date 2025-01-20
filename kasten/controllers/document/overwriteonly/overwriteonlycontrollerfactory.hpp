@@ -27,6 +27,7 @@ public:
     OverwriteOnlyControllerFactory& operator=(const OverwriteOnlyControllerFactory&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
+    [[nodiscard]]
     std::unique_ptr<AbstractXmlGuiController> create(KXMLGUIClient* guiClient) const override;
 };
 

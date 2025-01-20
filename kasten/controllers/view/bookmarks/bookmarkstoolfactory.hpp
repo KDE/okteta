@@ -27,6 +27,7 @@ public:
     BookmarksToolFactory& operator=(const BookmarksToolFactory&) = delete;
 
 public: // AbstractToolFactory API
+    [[nodiscard]]
     std::unique_ptr<AbstractTool> create() const override;
 };
 

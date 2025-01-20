@@ -41,6 +41,7 @@ public: // AbstractXmlGuiController API
     void setTargetModel(AbstractModel* model) override;
 
 public: // SearchUserQueryable API
+    [[nodiscard]]
     bool queryContinue(FindDirection direction) const override;
 
 private:

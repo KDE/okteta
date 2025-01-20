@@ -27,6 +27,7 @@ public:
     StringsExtractToolFactory& operator=(const StringsExtractToolFactory&) = delete;
 
 public: // AbstractToolFactory API
+    [[nodiscard]]
     std::unique_ptr<AbstractTool> create() const override;
 };
 

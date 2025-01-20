@@ -27,6 +27,7 @@ public:
     ByteTableToolViewFactory& operator=(const ByteTableToolViewFactory&) = delete;
 
 public: // AbstractToolViewFactory API
+    [[nodiscard]]
     std::unique_ptr<AbstractToolView> create(AbstractTool* tool) const override;
 
     [[nodiscard]]

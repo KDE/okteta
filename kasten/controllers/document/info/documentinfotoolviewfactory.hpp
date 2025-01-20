@@ -27,6 +27,7 @@ public:
     DocumentInfoToolViewFactory& operator=(const DocumentInfoToolViewFactory&) = delete;
 
 public: // AbstractToolViewFactory API
+    [[nodiscard]]
     std::unique_ptr<AbstractToolView> create(AbstractTool* tool) const override;
 
     [[nodiscard]]

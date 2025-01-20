@@ -27,6 +27,7 @@ public:
     StructuresToolFactory& operator=(const StructuresToolFactory&) = delete;
 
 public: // AbstractToolFactory API
+    [[nodiscard]]
     std::unique_ptr<AbstractTool> create() const override;
 };
 

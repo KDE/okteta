@@ -27,6 +27,7 @@ public:
     InfoToolFactory& operator=(const InfoToolFactory&) = delete;
 
 public: // AbstractToolFactory API
+    [[nodiscard]]
     std::unique_ptr<AbstractTool> create() const override;
 };
 

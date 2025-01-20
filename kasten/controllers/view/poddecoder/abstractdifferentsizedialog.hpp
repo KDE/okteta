@@ -23,6 +23,7 @@ public:
     virtual ~AbstractDifferentSizeDialog();
 
 public: // API to be implemented
+    [[nodiscard]]
     virtual Answer query(int newValueSize, int oldValueSize, int sizeLeft) = 0;
 };
 

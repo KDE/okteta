@@ -29,6 +29,7 @@ public:
     PodDecoderToolFactory& operator=(const PodDecoderToolFactory&) = delete;
 
 public: // AbstractToolFactory API
+    [[nodiscard]]
     std::unique_ptr<AbstractTool> create() const override;
 
 private:

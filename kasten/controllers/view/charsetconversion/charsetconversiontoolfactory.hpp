@@ -27,6 +27,7 @@ public:
     CharsetConversionToolFactory& operator=(const CharsetConversionToolFactory&) = delete;
 
 public: // AbstractToolFactory API
+    [[nodiscard]]
     std::unique_ptr<AbstractTool> create() const override;
 };
 

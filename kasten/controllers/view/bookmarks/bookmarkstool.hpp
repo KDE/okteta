@@ -58,6 +58,7 @@ public: // AbstractTool API
     void setTargetModel(AbstractModel* model) override;
 
 public:
+    [[nodiscard]]
     Okteta::Bookmark createBookmark();
     void gotoBookmark(const Okteta::Bookmark& bookmark);
     void setBookmarkName(unsigned int bookmarkIndex, const QString& name);

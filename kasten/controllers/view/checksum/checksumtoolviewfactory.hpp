@@ -27,6 +27,7 @@ public:
     ChecksumToolViewFactory& operator=(const ChecksumToolViewFactory&) = delete;
 
 public: // AbstractToolViewFactory API
+    [[nodiscard]]
     std::unique_ptr<AbstractToolView> create(AbstractTool* tool) const override;
 
     [[nodiscard]]

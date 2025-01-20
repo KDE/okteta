@@ -54,6 +54,7 @@ public:
 
     [[nodiscard]]
     bool isEnabled(const QString& id) const;
+    [[nodiscard]]
     QStringList toQStringList() const;
 
     [[nodiscard]]

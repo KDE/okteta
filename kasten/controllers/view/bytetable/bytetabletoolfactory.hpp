@@ -29,6 +29,7 @@ public:
     ByteTableToolFactory& operator=(const ByteTableToolFactory&) = delete;
 
 public: // AbstractToolFactory API
+    [[nodiscard]]
     std::unique_ptr<AbstractTool> create() const override;
 
 private:
