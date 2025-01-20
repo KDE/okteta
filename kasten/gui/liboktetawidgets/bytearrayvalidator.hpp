@@ -42,6 +42,7 @@ public:
     ~ByteArrayValidator() override;
 
 public: // QValidator API
+    [[nodiscard]]
     QValidator::State validate(QString& string, int& pos) const override;
 
 public:
@@ -64,7 +65,9 @@ public:
     [[nodiscard]]
     ByteArrayValidator::Coding coding() const;
 
+    [[nodiscard]]
     QByteArray toByteArray(const QString& string) const;
+    [[nodiscard]]
     QString toString(const QByteArray& byteArray) const;
 
 private:

@@ -49,6 +49,7 @@ public:
     ~AddressValidator() override;
 
 public: // QValidator API
+    [[nodiscard]]
     QValidator::State validate(QString& string, int& pos) const override;
 
 public:
@@ -58,7 +59,9 @@ public:
     void setCodec(Coding codecId);
 
 public:
+    [[nodiscard]]
     Address toAddress(const QString& string, AddressType* type = nullptr) const;
+    [[nodiscard]]
     QString toString(Address address, AddressType addressType) const;
 
 private:

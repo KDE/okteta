@@ -21,10 +21,13 @@ class Character;
 class ByteArrayChar8StringEncoder
 {
 public:
+    [[nodiscard]]
     QString encodeAsString(const char* byteArrayData, int byteArraySize, const CharCodec* charCodec) const;
+    [[nodiscard]]
     QString encodeAsString(const QByteArray& byteArray, const CharCodec* charCodec) const;
 
 private:
+    [[nodiscard]]
     static QLatin1String encodeAsControlString(Character character);
 };
 

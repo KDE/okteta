@@ -34,8 +34,10 @@ public:
     ~ByteArrayChar8StringDecoder();
 
 public:
+    [[nodiscard]]
     CodeState decode(QByteArray* result, const QString& string,
                      int minResultSize = 0, int maxResultSize = -1, int* usedStringSize = nullptr) const;
+    [[nodiscard]]
     CodeState validate(int* resultSize, const QString& string,
                        int minResultSize = 0, int maxResultSize = -1, int* usedStringSize = nullptr) const;
 
@@ -46,9 +48,12 @@ public:
     const CharCodec* charCodec() const;
 
 private:
+    [[nodiscard]]
     static int valueFromOctalDigit(QChar character);
+    [[nodiscard]]
     static int valueFromHexDigit(QChar character);
 
+    [[nodiscard]]
     CodeState doDecode(QByteArray* result, int* resultSize, const QString& string,
                        int minResultSize = 0, int maxResultSize = -1, int* usedStringSize = nullptr) const;
 

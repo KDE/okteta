@@ -20,10 +20,13 @@ namespace Okteta {
 class ByteArrayUtf8StringEncoder
 {
 public:
+    [[nodiscard]]
     QString encodeAsString(const char* byteArrayData, int byteArraySize, QTextCodec* utf8Codec) const;
+    [[nodiscard]]
     QString encodeAsString(const QByteArray& byteArray, QTextCodec* utf8Codec) const;
 
 private:
+    [[nodiscard]]
     static QLatin1String encodeAsControlString(QChar character);
 };
 

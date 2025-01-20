@@ -24,9 +24,12 @@ public:
     ~ByteArrayChar8StringValidator() override;
 
 public: // AbstractByteArrayStringValidator API
+    [[nodiscard]]
     QValidator::State validate(QString& input, int& pos) const override;
 
+    [[nodiscard]]
     QByteArray toByteArray(const QString& string) const override;
+    [[nodiscard]]
     QString toString(const QByteArray& byteArray) const override;
 
 public:

@@ -23,9 +23,12 @@ public:
     virtual ~AbstractByteArrayStringValidator() = default;
 
 public: // API to implement
+    [[nodiscard]]
     virtual  QValidator::State validate(QString& input, int& pos) const = 0;
 
+    [[nodiscard]]
     virtual  QByteArray toByteArray(const QString& string) const = 0;
+    [[nodiscard]]
     virtual  QString toString(const QByteArray& byteArray) const = 0;
 
 public:
