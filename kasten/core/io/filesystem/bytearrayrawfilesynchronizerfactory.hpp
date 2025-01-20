@@ -25,7 +25,9 @@ public:
     ~ByteArrayRawFileSynchronizerFactory() override;
 
 public: // AbstractModelSynchronizerFactory API
+    [[nodiscard]]
     AbstractLoadJob* startLoad(const QUrl& url) override;
+    [[nodiscard]]
     AbstractConnectJob* startConnect(AbstractDocument* document,
                                      const QUrl& url, AbstractModelSynchronizer::ConnectOption option) override;
 

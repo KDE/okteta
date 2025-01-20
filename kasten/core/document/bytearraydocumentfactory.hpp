@@ -24,7 +24,9 @@ public: // AbstractDocumentFactory API
     [[nodiscard]]
     bool canCreateFromData(const QMimeData* mimeData) override;
 
+    [[nodiscard]]
     std::unique_ptr<AbstractDocument> create() override;
+    [[nodiscard]]
     std::unique_ptr<AbstractDocument> createFromData(const QMimeData* mimeData, bool setModified) override;
 };
 
