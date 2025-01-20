@@ -34,18 +34,26 @@ public:
 
 public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
+    [[nodiscard]]
     QString title() const override;
 
     void setTargetModel(AbstractModel* model) override;
 
 public: // status
+    [[nodiscard]]
     int currentOffset() const;
+    [[nodiscard]]
     int targetOffset() const;
+    [[nodiscard]]
     bool isRelative() const;
+    [[nodiscard]]
     bool isSelectionToExtent() const;
+    [[nodiscard]]
     bool isBackwards() const;
 
+    [[nodiscard]]
     bool isUsable() const;
+    [[nodiscard]]
     bool isApplyable() const; // candidate for AbstractTool API
 
 public Q_SLOTS: // settings
@@ -66,6 +74,7 @@ private Q_SLOTS:
     void onContentsChanged();
 
 private:
+    [[nodiscard]]
     int finalTargetOffset() const;
 
 private: // settings

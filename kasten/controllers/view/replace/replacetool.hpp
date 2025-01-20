@@ -47,20 +47,29 @@ public:
 
 public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
+    [[nodiscard]]
     QString title() const override;
 
     void setTargetModel(AbstractModel* model) override;
 
 public: // status
+    [[nodiscard]]
     QByteArray searchData() const;
+    [[nodiscard]]
     QByteArray replaceData() const;
+    [[nodiscard]]
     Qt::CaseSensitivity caseSensitivity() const;
+    [[nodiscard]]
     bool isDoPrompt() const;
+    [[nodiscard]]
     bool hasSelectedData() const;
+    [[nodiscard]]
     QString charCodingName() const;
 
+    [[nodiscard]]
     AbstractModel* targetModel() const;
 
+    [[nodiscard]]
     bool isApplyable() const; // candidate for AbstractTool API
 
 public: // actions

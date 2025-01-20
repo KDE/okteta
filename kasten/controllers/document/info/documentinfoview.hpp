@@ -30,6 +30,7 @@ public:
     ~DocumentInfoView() override;
 
 public:
+    [[nodiscard]]
     DocumentInfoTool* tool() const;
 
 private Q_SLOTS:

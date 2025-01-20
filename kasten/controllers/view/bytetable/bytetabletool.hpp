@@ -34,6 +34,7 @@ public:
 
 public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
+    [[nodiscard]]
     QString title() const override;
 
     void setTargetModel(AbstractModel* model) override;
@@ -42,7 +43,9 @@ public:
     void insert(unsigned char byte, int count);
 
 public:
+    [[nodiscard]]
     ByteTableModel* byteTableModel() const;
+    [[nodiscard]]
     bool hasWriteable() const;
 
 Q_SIGNALS:

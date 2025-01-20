@@ -29,6 +29,7 @@ public:
     ~InfoView() override;
 
 public:
+    [[nodiscard]]
     InfoTool* tool() const;
 
 public Q_SLOTS:

@@ -28,7 +28,9 @@ public:
     ~ByteArrayModelIoDevice() override;
 
 public: // QIODevice API
+    [[nodiscard]]
     qint64 size() const override;
+    [[nodiscard]]
     bool canReadLine() const override;
 
     bool open(OpenMode openMode) override;

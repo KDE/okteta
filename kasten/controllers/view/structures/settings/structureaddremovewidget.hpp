@@ -30,6 +30,7 @@ public:
     ~StructureAddRemoveWidget() override;
 
 public:
+    [[nodiscard]]
     QStringList values() const;
 
 private Q_SLOTS:

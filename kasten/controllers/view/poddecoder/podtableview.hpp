@@ -37,6 +37,7 @@ public:
     ~PODTableView() override;
 
 public:
+    [[nodiscard]]
     PODDecoderTool* tool() const;
 
 public: // QObject API

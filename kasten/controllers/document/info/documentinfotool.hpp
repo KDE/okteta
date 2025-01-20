@@ -37,14 +37,19 @@ public:
 
 public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
+    [[nodiscard]]
     QString title() const override;
 
     void setTargetModel(AbstractModel* model) override;
 
 public:
+    [[nodiscard]]
     QString documentTitle() const;
+    [[nodiscard]]
     QMimeType mimeType() const;
+    [[nodiscard]]
     QString location() const;
+    [[nodiscard]]
     int documentSize() const;
 
 Q_SIGNALS:

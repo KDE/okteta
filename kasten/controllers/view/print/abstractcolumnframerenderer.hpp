@@ -40,18 +40,23 @@ public: // AbstractFrameRenderer API
 
 public: // data-wise sizes
     /** returns the number of all lines */
+    [[nodiscard]]
     Okteta::LineSize noOfLines() const;
     /** returns number of fully visible lines, at least 1 (as needed by page down/up)
      * doesn't care about the total height being smaller than the display height
      */
+    [[nodiscard]]
     Okteta::LineSize noOfLinesPerFrame() const;
 
 public: // pixel-wise sizes
     /** returns the height of each line */
+    [[nodiscard]]
     Okteta::PixelY lineHeight() const;
     /** returns the width of all visible columns together */
+    [[nodiscard]]
     Okteta::PixelX columnsWidth() const;
     /** returns the height of all lines together */
+    [[nodiscard]]
     Okteta::PixelY columnsHeight() const;
 
 public:

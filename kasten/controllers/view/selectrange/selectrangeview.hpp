@@ -52,6 +52,7 @@ public:
     ~SelectRangeView() override;
 
 public:
+    [[nodiscard]]
     SelectRangeTool* tool() const;
 
 private Q_SLOTS: // gui

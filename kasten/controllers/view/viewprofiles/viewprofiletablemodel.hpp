@@ -37,12 +37,17 @@ public:
     ~ViewProfileTableModel() override;
 
 public: // QAbstractTableModel API
+    [[nodiscard]]
     int rowCount(const QModelIndex& parent) const override;
+    [[nodiscard]]
     int columnCount(const QModelIndex& parent) const override;
+    [[nodiscard]]
     QVariant data(const QModelIndex& index, int role) const override;
 
 public:
+    [[nodiscard]]
     ByteArrayViewProfile::Id viewProfileId(const QModelIndex& index) const;
+    [[nodiscard]]
     int row(const ByteArrayViewProfile::Id& viewProfileId) const;
 
 private Q_SLOTS:

@@ -39,6 +39,7 @@ public:
     ~CharsetConversionView() override;
 
 public:
+    [[nodiscard]]
     CharsetConversionTool* tool() const;
 
 private Q_SLOTS: // gui

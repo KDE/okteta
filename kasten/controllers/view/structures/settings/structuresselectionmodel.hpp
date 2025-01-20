@@ -35,14 +35,18 @@ public:
     ~StructuresSelectionModel() override;
 
 public:
+    [[nodiscard]]
     QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
     bool setData(const QModelIndex& index, const QVariant &value, int role = Qt::EditRole) override;
+    [[nodiscard]]
     int rowCount(const QModelIndex& parent = QModelIndex()) const override;
 
 public:
     void setStructures(const QMap<QString, Kasten::StructureDefinitionFile*>& structureDefs);
     void setEnabledStructures(const QStringList& enabledStructures);
+    [[nodiscard]]
     QStringList enabledStructures() const;
+    [[nodiscard]]
     const StructureEnabledList& enabledList() const;
 
 Q_SIGNALS:

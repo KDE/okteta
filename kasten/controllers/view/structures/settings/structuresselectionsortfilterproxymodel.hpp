@@ -25,7 +25,9 @@ public Q_SLOTS:
     void setFilterString(const QString& filterString);
     
 protected:
+    [[nodiscard]]
     bool filterAcceptsRow(int sourceRow, const QModelIndex& sourceParent) const override;
+    [[nodiscard]]
     bool subSortLessThan(const QModelIndex& left, const QModelIndex& right) const override;
 
 private:

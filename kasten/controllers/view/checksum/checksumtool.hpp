@@ -42,19 +42,26 @@ public:
 
 public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
+    [[nodiscard]]
     QString title() const override;
 
     void setTargetModel(AbstractModel* model) override;
 
 public: // status
+    [[nodiscard]]
     QString checkSum() const;
+    [[nodiscard]]
     int algorithmId() const;
+    [[nodiscard]]
     bool isApplyable() const; // candidate for AbstractTool API
+    [[nodiscard]]
     bool isUptodate() const;
 
+    [[nodiscard]]
     const std::vector<std::unique_ptr<AbstractByteArrayChecksumAlgorithm>>& algorithmList() const;
 
 public:
+    [[nodiscard]]
     AbstractByteArrayChecksumParameterSet* parameterSet();
 
 public Q_SLOTS: // actions

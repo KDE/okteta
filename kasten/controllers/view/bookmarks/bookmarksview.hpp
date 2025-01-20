@@ -31,6 +31,7 @@ public:
     ~BookmarksView() override;
 
 public:
+    [[nodiscard]]
     BookmarksTool* tool() const;
 
 private Q_SLOTS:

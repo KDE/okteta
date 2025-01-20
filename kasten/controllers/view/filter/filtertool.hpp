@@ -42,18 +42,25 @@ public:
 
 public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
+    [[nodiscard]]
     QString title() const override;
 
     void setTargetModel(AbstractModel* model) override;
 
 public:
+    [[nodiscard]]
     int filterId() const;
+    [[nodiscard]]
     bool hasWriteable() const;
+    [[nodiscard]]
     const std::vector<std::unique_ptr<AbstractByteArrayFilter>>& filterList() const;
 
 public:
+    [[nodiscard]]
     QString charCodecName() const;
+    [[nodiscard]]
     AbstractByteArrayFilterParameterSet* parameterSet(int filterId);
+
     void saveParameterSet(int filterId);
 
 public Q_SLOTS:

@@ -29,6 +29,7 @@ public:
     void setGroupedBytesCount(int groupedBytesCount);
 
 public:
+    [[nodiscard]]
     int groupedBytesCount() const;
 
 Q_SIGNALS:

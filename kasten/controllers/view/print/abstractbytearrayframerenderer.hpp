@@ -61,7 +61,9 @@ public: // AbstractFrameRenderer API
     // make this flags?
 //     virtual bool hasFixedWidth() const;
 //     virtual bool hasFixedHeight() const;
+    [[nodiscard]]
     int height() const override;
+    [[nodiscard]]
     int width() const override;
 //     virtual QSize sizeHint( const QSize &maxSize ) const;
 
@@ -70,6 +72,7 @@ public: // AbstractFrameRenderer API
 
 public: // AbstractSerialFramePrinter
     // only vertical for now...
+    [[nodiscard]]
     virtual int framesCount() const;
 
 public: // API to implement
@@ -90,15 +93,24 @@ public: // API to implement
     virtual void setOffsetCoding(Okteta::OffsetFormat::Format offsetCoding) = 0;
 
 public:
+    [[nodiscard]]
     Okteta::AbstractByteArrayModel* byteArrayModel() const;
+    [[nodiscard]]
     Okteta::Address offset() const;
+    [[nodiscard]]
     Okteta::Size length() const;
 
+    [[nodiscard]]
     int noOfBytesPerLine() const;
+    [[nodiscard]]
     Okteta::Address firstLineOffset() const;
+    [[nodiscard]]
     Okteta::Address startOffset() const;
+    [[nodiscard]]
     LayoutStyle layoutStyle() const;
+    [[nodiscard]]
     Okteta::ValueCoding valueCoding() const;
+    [[nodiscard]]
     QString charCodingName() const;
 
 public:
@@ -116,6 +128,7 @@ protected:
 protected:
     virtual void adjustToLayoutNoOfBytesPerLine() = 0;
 
+    [[nodiscard]]
     virtual int fittingBytesPerLine() const = 0;
 
 protected:

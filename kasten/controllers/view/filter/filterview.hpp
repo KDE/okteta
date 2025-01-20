@@ -33,6 +33,7 @@ public:
     ~FilterView() override;
 
 public:
+    [[nodiscard]]
     FilterTool* tool() const;
 
 private: // get

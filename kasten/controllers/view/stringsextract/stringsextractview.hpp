@@ -36,6 +36,7 @@ public:
     ~StringsExtractView() override;
 
 public:
+    [[nodiscard]]
     StringsExtractTool* tool() const;
 
 public: // QObject API

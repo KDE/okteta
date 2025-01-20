@@ -35,6 +35,7 @@ public:
     ~StructureView() override;
 
 public:
+    [[nodiscard]]
     StructuresTool* tool() const;
     bool eventFilter(QObject* object, QEvent* event) override;
 

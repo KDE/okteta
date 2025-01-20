@@ -25,17 +25,27 @@ public:
     ~ByteArrayRowFrameRenderer() override;
 
 public:
+    [[nodiscard]]
     Okteta::PixelX byteSpacingWidth() const;
+    [[nodiscard]]
     int noOfGroupedBytes() const;
+    [[nodiscard]]
     Okteta::PixelX groupSpacingWidth() const;
+    [[nodiscard]]
     Okteta::PixelX binaryGapWidth() const;
+    [[nodiscard]]
     bool showsNonprinting() const;
+    [[nodiscard]]
     QChar substituteChar() const;
+    [[nodiscard]]
     QChar undefinedChar() const;
 
+    [[nodiscard]]
     bool offsetColumnVisible() const;
+    [[nodiscard]]
     Okteta::OffsetFormat::Format offsetCoding() const;
 
+    [[nodiscard]]
     int visibleByteArrayCodings() const;
 
 public: // AbstractByteArrayFrameRenderer API
@@ -61,6 +71,7 @@ protected: // AbstractColumnFrameRenderer API
 protected:
     void adjustToLayoutNoOfBytesPerLine() override;
 
+    [[nodiscard]]
     int fittingBytesPerLine() const override;
 
 private:

@@ -51,6 +51,7 @@ public:
     ~GotoOffsetView() override;
 
 public:
+    [[nodiscard]]
     GotoOffsetTool* tool() const;
 
 private Q_SLOTS: // gui

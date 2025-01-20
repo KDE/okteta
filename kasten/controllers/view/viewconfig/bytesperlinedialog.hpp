@@ -29,6 +29,7 @@ public:
     void setBytesPerLine(int bytesPerLine);
 
 public:
+    [[nodiscard]]
     int bytesPerLine() const;
 
 Q_SIGNALS:

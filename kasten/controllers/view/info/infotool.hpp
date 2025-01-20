@@ -35,13 +35,18 @@ public:
     ~InfoTool() override;
 
 public:
+    [[nodiscard]]
     StatisticTableModel* statisticTableModel() const;
+    [[nodiscard]]
     int size() const;
+    [[nodiscard]]
     bool isApplyable() const;
+    [[nodiscard]]
     bool isStatisticUptodate() const;
 
 public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
+    [[nodiscard]]
     QString title() const override;
 
     void setTargetModel(AbstractModel* model) override;

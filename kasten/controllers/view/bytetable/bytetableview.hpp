@@ -37,6 +37,7 @@ public:
     ~ByteTableView() override;
 
 public:
+    [[nodiscard]]
     ByteTableTool* tool() const;
 
 public Q_SLOTS:

@@ -37,15 +37,22 @@ public:
     ~BookmarksTool() override;
 
 public:
+    [[nodiscard]]
     bool canCreateBookmark() const;
+    [[nodiscard]]
     const Okteta::Bookmark& bookmarkAt(unsigned int index) const;
+    [[nodiscard]]
     int indexOf(const Okteta::Bookmark& bookmark) const;
+    [[nodiscard]]
     bool isBookmarkListEmpty() const;
+    [[nodiscard]]
     unsigned int bookmarksCount() const;
+    [[nodiscard]]
     int offsetCoding() const;
 
 public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
+    [[nodiscard]]
     QString title() const override;
 
     void setTargetModel(AbstractModel* model) override;

@@ -28,8 +28,11 @@ public:
     ~FilterToolView() override;
 
 public: // AbstractToolView API
+    [[nodiscard]]
     QWidget* widget() const override;
+    [[nodiscard]]
     QString title() const override;
+    [[nodiscard]]
     AbstractTool* tool() const override;
 
 private:

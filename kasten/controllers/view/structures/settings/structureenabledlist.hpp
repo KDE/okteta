@@ -52,10 +52,13 @@ public:
 
     void setEnabled(const QString& id, bool  isEnabled);
 
+    [[nodiscard]]
     bool isEnabled(const QString& id) const;
     QStringList toQStringList() const;
 
+    [[nodiscard]]
     QVector<StructureEnabledData>::ConstIterator begin() const;
+    [[nodiscard]]
     QVector<StructureEnabledData>::ConstIterator end() const;
 
 private:

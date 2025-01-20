@@ -26,6 +26,7 @@ public:
     ~BookmarkEditPopup() override;
 
 public:
+    [[nodiscard]]
     QString name() const;
 
 public:

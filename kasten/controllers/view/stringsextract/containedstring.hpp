@@ -29,7 +29,9 @@ public:
     void move(Okteta::Size offset);
 
 public:
+    [[nodiscard]]
     const QString& string() const;
+    [[nodiscard]]
     Okteta::Address offset() const;
 
 private:

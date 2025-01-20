@@ -41,7 +41,9 @@ public:
     void setStructures(const QMap<QString, Kasten::StructureDefinitionFile*>& structureDefs);
     void setEnabledStructures(const QStringList& enabledStructures);
 
+    [[nodiscard]]
     QStringList enabledStructures() const;
+    [[nodiscard]]
     const StructureEnabledList& enabledList() const;
 
 Q_SIGNALS:

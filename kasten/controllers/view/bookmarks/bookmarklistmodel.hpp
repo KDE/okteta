@@ -41,15 +41,22 @@ public:
     ~BookmarkListModel() override;
 
 public: // QAbstractTableModel API
+    [[nodiscard]]
     int rowCount(const QModelIndex& parent) const override;
+    [[nodiscard]]
     int columnCount(const QModelIndex& parent) const override;
+    [[nodiscard]]
     QVariant data(const QModelIndex& index, int role) const override;
+    [[nodiscard]]
     Qt::ItemFlags flags(const QModelIndex& index) const override;
+    [[nodiscard]]
     QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
     bool setData(const QModelIndex& index, const QVariant& value, int role) override;
 
 public:
+    [[nodiscard]]
     const Okteta::Bookmark& bookmark(const QModelIndex& index) const;
+    [[nodiscard]]
     QModelIndex index(const Okteta::Bookmark& bookmark, int column = BookmarkListModel::TitleColumnId) const;
     using QAbstractTableModel::index;
 

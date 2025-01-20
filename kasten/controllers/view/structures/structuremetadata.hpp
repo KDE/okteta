@@ -31,23 +31,39 @@ public:
     StructureMetaData& operator=(const StructureMetaData& rhs);
 
 public:
+    [[nodiscard]]
     bool isValid() const;
 
+    [[nodiscard]]
     QString id() const;
+    [[nodiscard]]
     QString name() const;
+    [[nodiscard]]
     QString comment() const;
+    [[nodiscard]]
     QString categoryId() const;
+    [[nodiscard]]
     QString version() const;
+    [[nodiscard]]
     bool hasAuthorName() const;
+    [[nodiscard]]
     QString authorName() const;
+    [[nodiscard]]
     bool hasAuthorEmailAddress() const;
+    [[nodiscard]]
     QString authorEmailAddress() const;
+    [[nodiscard]]
     bool hasIconName() const;
+    [[nodiscard]]
     QString iconName() const;
+    [[nodiscard]]
     bool hasWebsite() const;
+    [[nodiscard]]
     QString website() const;
+    [[nodiscard]]
     QString entryPath() const;
 
+    [[nodiscard]]
     const KAboutLicense& license() const;
 
 private:

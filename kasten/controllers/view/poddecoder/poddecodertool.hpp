@@ -56,23 +56,34 @@ public:
 
 public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
+    [[nodiscard]]
     QString title() const override;
 
     void setTargetModel(AbstractModel* model) override;
 
 public:
+    [[nodiscard]]
     bool isApplyable() const; // candidate for AbstractTool API
+    [[nodiscard]]
     bool isReadOnly() const;
+    [[nodiscard]]
     QVariant value(int podId) const;
+    [[nodiscard]]
     QByteArray bytes(int podId) const;
+    [[nodiscard]]
     QString nameOfPOD(int podId) const;
+    [[nodiscard]]
     int podCount() const;
 
     // TODO: add option to display & edit data in locale
+    [[nodiscard]]
     bool isUnsignedAsHex() const;
+    [[nodiscard]]
     QSysInfo::Endian byteOrder() const;
+    [[nodiscard]]
     const Okteta::CharCodec* charCodec() const;
 
+    [[nodiscard]]
     AbstractModel* targetModel() const;
 
 public:

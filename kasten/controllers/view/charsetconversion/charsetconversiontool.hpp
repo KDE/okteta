@@ -68,23 +68,32 @@ public:
     ~CharsetConversionTool() override;
 
 public: // AbstractTool API
+    [[nodiscard]]
     QString title() const override;
 
     void setTargetModel(AbstractModel* model) override;
 
 public: // status
+    [[nodiscard]]
     bool isApplyable() const; // candidate for AbstractTool API
 
+    [[nodiscard]]
     QString targetCharCodecName() const;
+    [[nodiscard]]
     QString otherCharCodecName() const;
+    [[nodiscard]]
     ConversionDirection conversionDirection() const;
+    [[nodiscard]]
     bool isSubstitutingMissingChars() const;
+    [[nodiscard]]
     Okteta::Byte substituteByte() const;
+    [[nodiscard]]
     Coding substituteByteCoding() const;
 
     /// AbstractTool API candidate
     /// most outer model which is used
     /// what if multiple models are touched?
+    [[nodiscard]]
     AbstractModel* targetModel() const;
 
 public Q_SLOTS: // settings

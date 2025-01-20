@@ -46,12 +46,18 @@ public:
     StructureDefinitionFile& operator=(const StructureDefinitionFile&) = delete;
 
 public:
+    [[nodiscard]]
     QVector<TopLevelDataInformation*> structures() const;
+    [[nodiscard]]
     QStringList structureNames() const;
+    [[nodiscard]]
     TopLevelDataInformation* structure(const QString& name) const;
     /** @return the absolute path to the directory containing the .desktop file */
+    [[nodiscard]]
     QString absolutePath() const;
+    [[nodiscard]]
     StructureMetaData metaData() const;
+    [[nodiscard]]
     bool isValid() const;
 
 private:

@@ -46,7 +46,9 @@ public: // set
     void setCharCodec(const QString& codecName);
 
 public: // get
+    [[nodiscard]]
     QByteArray replaceData() const;
+    [[nodiscard]]
     bool prompt() const;
 
 protected: // AbstractFindDialog API
@@ -58,6 +60,7 @@ protected: // QWidget API
 
 private:
     void setReplaceDataCoding(Okteta::ByteArrayComboBox::Coding replaceDataCoding);
+    [[nodiscard]]
     Okteta::ByteArrayComboBox::Coding replaceDataCoding() const;
 
 private:

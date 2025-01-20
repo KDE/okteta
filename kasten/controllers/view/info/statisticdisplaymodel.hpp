@@ -26,9 +26,13 @@ public:
     ~StatisticDisplayModel() override;
 
 public: // QAbstractItemModel API
+    [[nodiscard]]
     QVariant data(const QModelIndex& index, int role) const override;
+    [[nodiscard]]
     Qt::ItemFlags flags(const QModelIndex& index) const override;
+    [[nodiscard]]
     QMimeData* mimeData(const QModelIndexList& indexes) const override;
+    [[nodiscard]]
     QStringList mimeTypes() const override;
 
 private:

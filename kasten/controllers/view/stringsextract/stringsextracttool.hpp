@@ -44,18 +44,26 @@ public:
 
 public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
+    [[nodiscard]]
     QString title() const override;
 
     void setTargetModel(AbstractModel* model) override;
 
 public: // status
+    [[nodiscard]]
     const QList<ContainedString>* containedStringList() const;
+    [[nodiscard]]
     int minLength() const;
+    [[nodiscard]]
     bool isApplyable() const; // candidate for AbstractTool API
+    [[nodiscard]]
     bool isUptodate() const;
+    [[nodiscard]]
     bool canHighlightString() const;
+    [[nodiscard]]
     int offsetCoding() const;
 
+    [[nodiscard]]
     AbstractModel* targetModel() const;
 
 public Q_SLOTS: // settings

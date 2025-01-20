@@ -34,19 +34,28 @@ public:
 
 public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
+    [[nodiscard]]
     QString title() const override;
 
     void setTargetModel(AbstractModel* model) override;
 
 public: // status
+    [[nodiscard]]
     int currentSelectionStart() const;
+    [[nodiscard]]
     int currentSelectionEnd() const;
+    [[nodiscard]]
     int targetSelectionStart() const;
+    [[nodiscard]]
     int targetSelectionEnd() const;
+    [[nodiscard]]
     bool isEndRelative() const;
+    [[nodiscard]]
     bool isEndBackwards() const;
 
+    [[nodiscard]]
     bool isUsable() const;
+    [[nodiscard]]
     bool isApplyable() const; // candidate for AbstractTool API
 
 public Q_SLOTS: // settings
@@ -64,7 +73,9 @@ Q_SIGNALS:
     // TODO: isAtLine useful, to prevent noop actions, or should they be allowed, too?
 
 private:
+    [[nodiscard]]
     int finalTargetSelectionStart() const;
+    [[nodiscard]]
     int finalTargetSelectionEnd() const;
 
 private Q_SLOTS:

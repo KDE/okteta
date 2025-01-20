@@ -33,6 +33,7 @@ public:
     ~ChecksumView() override;
 
 public:
+    [[nodiscard]]
     ChecksumTool* tool() const;
 
 private:

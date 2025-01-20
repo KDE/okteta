@@ -33,10 +33,13 @@ public Q_SLOTS:
     void reloadPaths();
 
 public:
+    [[nodiscard]]
     QMap<QString, StructureDefinitionFile*> structureDefs() const;
 
+    [[nodiscard]]
     KSharedConfig::Ptr config() const;
 
+    [[nodiscard]]
     StructureDefinitionFile* definition(const QString& pluginName) const;
 
 private:

@@ -28,6 +28,7 @@ public:
     ~ViewProfileEditDialog() override;
 
 public:
+    [[nodiscard]]
     ByteArrayViewProfile viewProfile() const;
 
 public:

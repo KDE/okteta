@@ -31,19 +31,30 @@ public:
     ~StructureTreeModel() override;
 
 public: // QAbstractItemModel API
+    [[nodiscard]]
     QVariant data(const QModelIndex& index, int role) const override;
+    [[nodiscard]]
     Qt::ItemFlags flags(const QModelIndex& index) const override;
+    [[nodiscard]]
     QMimeData* mimeData(const QModelIndexList& indexes) const override;
+    [[nodiscard]]
     QStringList mimeTypes() const override;
+    [[nodiscard]]
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
+    [[nodiscard]]
     QModelIndex index(int row, int column, const QModelIndex& parent = QModelIndex()) const override;
+    [[nodiscard]]
     QModelIndex parent(const QModelIndex& index) const override;
+    [[nodiscard]]
     int rowCount(const QModelIndex& parent = QModelIndex()) const override;
+    [[nodiscard]]
     int columnCount(const QModelIndex& parent = QModelIndex()) const override;
     bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) override;
+    [[nodiscard]]
     bool hasChildren(const QModelIndex& parent = QModelIndex()) const override;
 
 private:
+    [[nodiscard]]
     QModelIndex findItemInModel(DataInformationBase* data) const;
 
 private Q_SLOTS:

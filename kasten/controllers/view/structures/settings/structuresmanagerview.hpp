@@ -37,6 +37,7 @@ public:
     ~StructuresManagerView() override;
 
 public:
+    [[nodiscard]]
     QStringList values() const;
 
 public Q_SLOTS:

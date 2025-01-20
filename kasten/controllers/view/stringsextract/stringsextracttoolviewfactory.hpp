@@ -31,9 +31,13 @@ public:
 public: // AbstractToolViewFactory API
     std::unique_ptr<AbstractToolView> create(AbstractTool* tool) const override;
 
+    [[nodiscard]]
     QString iconName() const override;
+    [[nodiscard]]
     QString title() const override;
+    [[nodiscard]]
     QString id() const override;
+    [[nodiscard]]
     SidePosition defaultPosition() const override;
 
 private:

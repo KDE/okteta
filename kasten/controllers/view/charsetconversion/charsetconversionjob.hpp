@@ -41,7 +41,9 @@ public:
     bool exec();
 
 public:
+    [[nodiscard]]
     int convertedBytesCount() const;
+    [[nodiscard]]
     const std::map<Okteta::Byte, int>& failedPerByteCount() const;
 
 private:

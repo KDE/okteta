@@ -44,30 +44,43 @@ public:
 
 public: // AbstractTool API
     // virtual AbstractModel* targetModel() const;
+    [[nodiscard]]
     QString title() const override;
     void setTargetModel(AbstractModel* model) override;
 
 public:
+    [[nodiscard]]
     QSysInfo::Endian byteOrder() const;
     void setByteOrder(QSysInfo::Endian order);
     bool setData(const QVariant& value, int role, DataInformation* item, uint row);
+    [[nodiscard]]
     Okteta::AbstractByteArrayModel* byteArrayModel() const;
+    [[nodiscard]]
     StructuresManager* manager() const;
     void lockStructure(const QModelIndex& idx);
     void unlockStructure(const QModelIndex& idx);
+    [[nodiscard]]
     bool isStructureLocked(const QModelIndex& idx) const;
     /** check if there is any ByteArrayModel available to lock the structure */
+    [[nodiscard]]
     bool canStructureBeLocked(const QModelIndex& idx) const;
+    [[nodiscard]]
     bool isFileLoaded() const;
+    [[nodiscard]]
     QByteArray bytes(const DataInformation* data) const;
 
     void selectBytesInView(const QModelIndex& idx);
+    [[nodiscard]]
     bool isStructureListEmpty() const;
 
     // interface for model
+    [[nodiscard]]
     QVariant headerData(int column, int role) const;
+    [[nodiscard]]
     int childCount() const;
+    [[nodiscard]]
     DataInformation* childAt(int idx) const;
+    [[nodiscard]]
     TopLevelDataInformation::List allData() const;
 
 Q_SIGNALS:
@@ -101,7 +114,9 @@ private Q_SLOTS:
     void onChildItemDataChanged();
 
 private:
+    [[nodiscard]]
     Okteta::Address startAddress(const TopLevelDataInformation* data) const;
+    [[nodiscard]]
     Okteta::AddressRange dataRange(const DataInformation* data) const;
 
 private:
