@@ -23,6 +23,7 @@ public:
     ByteArrayFilterParameterSetEditFactory& operator=(const ByteArrayFilterParameterSetEditFactory&) = delete;
 
 public:
+    [[nodiscard]]
     static std::unique_ptr<AbstractByteArrayFilterParameterSetEdit> createEdit(const char* id);
 };
 

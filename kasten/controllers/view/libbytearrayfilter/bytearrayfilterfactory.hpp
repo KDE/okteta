@@ -24,6 +24,7 @@ public:
     ByteArrayFilterFactory& operator=(const ByteArrayFilterFactory&) = delete;
 
 public:
+    [[nodiscard]]
     static std::vector<std::unique_ptr<AbstractByteArrayFilter>> createFilters();
 
 };
