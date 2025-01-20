@@ -52,6 +52,7 @@ public:
     [[nodiscard]]
     QSysInfo::Endian byteOrder() const;
     void setByteOrder(QSysInfo::Endian order);
+    [[nodiscard]]
     bool setData(const QVariant& value, int role, DataInformation* item, uint row);
     [[nodiscard]]
     Okteta::AbstractByteArrayModel* byteArrayModel() const;

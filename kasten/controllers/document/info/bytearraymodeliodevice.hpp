@@ -33,11 +33,15 @@ public: // QIODevice API
     [[nodiscard]]
     bool canReadLine() const override;
 
+    [[nodiscard]]
     bool open(OpenMode openMode) override;
+    [[nodiscard]]
     bool seek(qint64 pos) override;
 
 protected:
+    [[nodiscard]]
     qint64 readData(char* data, qint64 maxlength) override;
+    [[nodiscard]]
     qint64 writeData(const char* data, qint64 length) override;
 
 private:

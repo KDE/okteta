@@ -49,6 +49,7 @@ public: // QAbstractItemModel API
     int rowCount(const QModelIndex& parent = QModelIndex()) const override;
     [[nodiscard]]
     int columnCount(const QModelIndex& parent = QModelIndex()) const override;
+    [[nodiscard]]
     bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) override;
     [[nodiscard]]
     bool hasChildren(const QModelIndex& parent = QModelIndex()) const override;

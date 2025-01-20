@@ -38,6 +38,7 @@ public:
                          Okteta::Byte substituteByte);
 
 public:
+    [[nodiscard]]
     bool exec();
 
 public:

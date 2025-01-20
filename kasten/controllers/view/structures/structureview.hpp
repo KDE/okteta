@@ -37,6 +37,9 @@ public:
 public:
     [[nodiscard]]
     StructuresTool* tool() const;
+
+public: // QObject
+    [[nodiscard]]
     bool eventFilter(QObject* object, QEvent* event) override;
 
 private Q_SLOTS:

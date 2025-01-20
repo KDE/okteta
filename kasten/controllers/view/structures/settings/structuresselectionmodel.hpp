@@ -37,6 +37,7 @@ public:
 public:
     [[nodiscard]]
     QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
+    [[nodiscard]]
     bool setData(const QModelIndex& index, const QVariant &value, int role = Qt::EditRole) override;
     [[nodiscard]]
     int rowCount(const QModelIndex& parent = QModelIndex()) const override;

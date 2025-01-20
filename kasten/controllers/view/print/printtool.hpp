@@ -92,6 +92,7 @@ private Q_SLOTS:
     void triggerPrintPreview(QPrinter* printer);
 
 private:
+    [[nodiscard]]
     bool doPrint(QPrinter* printer);
     void loadConfig(QPrinter* printer) const;
     void storeConfig(const QPrinter* printer);

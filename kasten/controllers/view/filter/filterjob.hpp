@@ -32,6 +32,7 @@ public:
               Okteta::Byte* result, Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range);
 
 public:
+    [[nodiscard]]
     bool exec();
 
 private Q_SLOTS:

@@ -30,6 +30,7 @@ public:
 
 public:
     // return size of selected byte array
+    [[nodiscard]]
     int exec();
 
 private:

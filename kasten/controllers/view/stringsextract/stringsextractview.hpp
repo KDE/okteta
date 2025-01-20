@@ -40,6 +40,7 @@ public:
     StringsExtractTool* tool() const;
 
 public: // QObject API
+    [[nodiscard]]
     bool eventFilter(QObject* object, QEvent* event) override;
 
 private Q_SLOTS: // gui

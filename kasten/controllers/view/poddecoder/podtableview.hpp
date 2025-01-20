@@ -41,6 +41,7 @@ public:
     PODDecoderTool* tool() const;
 
 public: // QObject API
+    [[nodiscard]]
     bool eventFilter(QObject* object, QEvent* event) override;
 
 public: // AbstractDifferentSizeDialog API

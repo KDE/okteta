@@ -31,6 +31,7 @@ public: // KJob API
 //     virtual void start();
 
 public:
+    [[nodiscard]]
     bool exec();
 
 private Q_SLOTS:
