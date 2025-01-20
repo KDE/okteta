@@ -21,6 +21,7 @@ public:
     TabController(AbstractByteArrayViewPrivate* view, AbstractController* parent);
 
 public: // AbstractController API
+    [[nodiscard]]
     bool handleKeyPress(QKeyEvent* keyEvent) override;
 
 public:

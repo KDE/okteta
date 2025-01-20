@@ -31,9 +31,13 @@ public:
     Dropper& operator=(const Dropper&) = delete;
 
 public: // AbstractMouseController API
+    [[nodiscard]]
     bool handleDragEnterEvent(QDragEnterEvent* dragEnterEvent);
+    [[nodiscard]]
     bool handleDragMoveEvent(QDragMoveEvent* dragMoveEvent);
+    [[nodiscard]]
     bool handleDragLeaveEvent(QDragLeaveEvent* dragLeaveEvent);
+    [[nodiscard]]
     bool handleDropEvent(QDropEvent* dropEvent);
 
 public:

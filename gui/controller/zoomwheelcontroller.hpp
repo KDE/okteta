@@ -22,6 +22,7 @@ public:
     ~ZoomWheelController() override;
 
 public: // AbstractWheelController API
+    [[nodiscard]]
     bool handleWheelEvent(QWheelEvent* wheelEvent) override;
 
 private:

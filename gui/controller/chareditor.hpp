@@ -21,6 +21,7 @@ public:
     ~CharEditor() override;
 
 public: // AbstractController API
+    [[nodiscard]]
     bool handleKeyPress(QKeyEvent* keyEvent) override;
 };
 

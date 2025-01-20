@@ -26,6 +26,7 @@ public:
     AbstractWheelController& operator=(const AbstractWheelController&) = delete;
 
 public: // API to be implemented
+    [[nodiscard]]
     virtual bool handleWheelEvent(QWheelEvent* wheelEvent);
 
 protected:

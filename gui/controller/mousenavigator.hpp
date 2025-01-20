@@ -30,9 +30,13 @@ public:
     ~MouseNavigator() override;
 
 public: // AbstractMouseController API
+    [[nodiscard]]
     bool handleMousePressEvent(QMouseEvent* mouseEvent) override;
+    [[nodiscard]]
     bool handleMouseMoveEvent(QMouseEvent* mouseEvent) override;
+    [[nodiscard]]
     bool handleMouseReleaseEvent(QMouseEvent* mouseEvent) override;
+    [[nodiscard]]
     bool handleMouseDoubleClickEvent(QMouseEvent* mouseEvent) override;
 
 private:

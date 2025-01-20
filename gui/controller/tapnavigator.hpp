@@ -25,6 +25,7 @@ public:
     TapNavigator& operator=(const TapNavigator&) = delete;
 
 public:
+    [[nodiscard]]
     bool handleTapGesture(QTapGesture* tapGesture);
 
 private:

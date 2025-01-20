@@ -38,6 +38,7 @@ public:
     ~ValueEditor() override;
 
 public: // AbstractController API
+    [[nodiscard]]
     bool handleKeyPress(QKeyEvent* keyEvent) override;
 
 public:

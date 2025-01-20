@@ -28,9 +28,13 @@ public:
     AbstractMouseController& operator=(const AbstractMouseController&) = delete;
 
 public: // API to be implemented
+    [[nodiscard]]
     virtual bool handleMousePressEvent(QMouseEvent* mouseEvent);
+    [[nodiscard]]
     virtual bool handleMouseMoveEvent(QMouseEvent* mouseEvent);
+    [[nodiscard]]
     virtual bool handleMouseReleaseEvent(QMouseEvent* mouseEvent);
+    [[nodiscard]]
     virtual bool handleMouseDoubleClickEvent(QMouseEvent* mouseEvent);
 
 protected:

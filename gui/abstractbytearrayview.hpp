@@ -334,6 +334,7 @@ public: // modification access
     void setSelection(Address start, Address end);
     void setSelection(const AddressRange& selection);
     /** selects word at index, returns true if there is one */
+    [[nodiscard]]
     bool selectWord(/*unsigned*/ Address index /*, Chartype*/);
 
     void setMarking(Address start, Address end);
@@ -447,6 +448,7 @@ protected: // QWidget API
     void mouseMoveEvent(QMouseEvent* mouseMoveEvent) override;
     void mouseDoubleClickEvent(QMouseEvent* mouseDoubleClickEvent) override;
     /// reimplemented to catch Tab and BackTab keys, which otherwise gets stolen
+    [[nodiscard]]
     bool event(QEvent* event) override;
     void showEvent(QShowEvent* showEvent) override;
     void focusInEvent(QFocusEvent* focusEvent) override;
@@ -462,6 +464,7 @@ protected: // QWidget API
 
 protected: // QAbstractScrollArea API
     void wheelEvent(QWheelEvent* wheelEvent) override;
+    [[nodiscard]]
     bool viewportEvent(QEvent* event) override;
     void scrollContentsBy(int dx, int dy) override;
 

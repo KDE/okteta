@@ -25,13 +25,16 @@ public:
     ~UndoRedoController() override;
 
 public: // AbstractController API
+    [[nodiscard]]
     bool handleKeyPress(QKeyEvent* keyEvent) override;
 
 public:
     int addContextMenuActions(QMenu* menu);
 
 private:
+    [[nodiscard]]
     bool undo();
+    [[nodiscard]]
     bool redo();
 
 private:

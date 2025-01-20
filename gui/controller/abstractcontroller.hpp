@@ -26,6 +26,7 @@ public:
     AbstractController& operator=(const AbstractController&) = delete;
 
 public: // API to be implemented
+    [[nodiscard]]
     virtual bool handleKeyPress(QKeyEvent* keyEvent);
 
 protected:

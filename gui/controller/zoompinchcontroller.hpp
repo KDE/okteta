@@ -25,6 +25,7 @@ public:
     ZoomPinchController& operator=(const ZoomPinchController&) = delete;
 
 public:
+    [[nodiscard]]
     bool handlePinchGesture(QPinchGesture* pinchGesture);
 
 private:

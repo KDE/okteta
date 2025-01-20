@@ -191,6 +191,7 @@ public: // zooming
 
 public: // interaction
     void selectAll(bool select);
+    [[nodiscard]]
     bool selectWord(Address index /*, Chartype*/);
     void setSelection(const AddressRange& selection);
 
@@ -215,6 +216,7 @@ public: // ColumnsViewScrollAreaEngine API
     void setNoOfLines(int newNoOfLines) override;
 
 public: // events
+    [[nodiscard]]
     bool event(QEvent* event);
     void changeEvent(QEvent* event);
     void resizeEvent(QResizeEvent* resizeEvent);
@@ -226,6 +228,7 @@ public: // events
     void dropEvent(QDropEvent* dropEvent);
     void contextMenuEvent(QContextMenuEvent* contextMenuEvent);
     void timerEvent(QTimerEvent* timerEvent);
+    [[nodiscard]]
     bool viewportEvent(QEvent* event);
 
     void mousePressEvent(QMouseEvent* mousePressEvent);
@@ -251,6 +254,7 @@ protected:
     void initPainterFromWidget(QPainter* painter) const;
 
 protected:
+    [[nodiscard]]
     bool getNextChangedRange(CoordRange* changedRange, const CoordRange& visibleRange) const;
     [[nodiscard]]
     bool isByteEditorActive() const;

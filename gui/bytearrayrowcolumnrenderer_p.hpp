@@ -244,7 +244,9 @@ private:
 
     void recalcX();
 
+    [[nodiscard]]
     bool getNextSelectedAddressRange(AddressRange* selectedRange, unsigned int* flag, const AddressRange& range) const;
+    [[nodiscard]]
     bool getNextMarkedAddressRange(AddressRange* markedRange, unsigned int* flag, const AddressRange& range) const;
 
 private:
