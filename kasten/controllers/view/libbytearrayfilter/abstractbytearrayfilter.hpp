@@ -38,6 +38,7 @@ public:
     ~AbstractByteArrayFilter() override;
 
 public: // API to be implemented
+    [[nodiscard]]
     virtual bool filter(Okteta::Byte* result, Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const = 0;
     /** used by the editor to get write access to the parameters */
     [[nodiscard]]

@@ -35,6 +35,7 @@ public:
     ~Template_ByteArrayFilter() override;
 
 public: // AbstractByteArrayFilter API
+    [[nodiscard]]
     bool filter(Okteta::Byte* result, Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const override;
     [[nodiscard]]
     AbstractByteArrayFilterParameterSet* parameterSet() override;
