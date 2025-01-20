@@ -40,6 +40,7 @@ public:
 
     Base32StreamEncoderSettings& operator=(const Base32StreamEncoderSettings&) = default;
 
+    [[nodiscard]]
     bool operator==(const Base32StreamEncoderSettings& other) const;
 
 public:
@@ -78,6 +79,7 @@ public:
     ~ByteArrayBase32StreamEncoder() override;
 
 public:
+    [[nodiscard]]
     Base32StreamEncoderSettings settings() const;
     void setSettings(const Base32StreamEncoderSettings& settings);
 

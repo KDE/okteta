@@ -31,7 +31,9 @@ public:
     ~ByteArrayPatternGeneratorConfigEditor() override;
 
 public: // AbstractModelDataGeneratorConfigEditor API
+    [[nodiscard]]
     bool isValid() const override;
+    [[nodiscard]]
     QString name() const override;
 
 private Q_SLOTS:

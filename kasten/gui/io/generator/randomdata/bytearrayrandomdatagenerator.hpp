@@ -31,6 +31,7 @@ public:
 
     ByteArrayRandomDataGeneratorSettings& operator=(const ByteArrayRandomDataGeneratorSettings&) = default;
 
+    [[nodiscard]]
     bool operator==(const ByteArrayRandomDataGeneratorSettings& other) const;
 
 public:
@@ -57,6 +58,7 @@ public: // AbstractModelDataGenerator API
     std::unique_ptr<QMimeData> generateData() override;
 
 public:
+    [[nodiscard]]
     ByteArrayRandomDataGeneratorSettings settings() const;
     void setSettings(const ByteArrayRandomDataGeneratorSettings& settings);
 

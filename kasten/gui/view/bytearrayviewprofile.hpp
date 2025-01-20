@@ -36,42 +36,56 @@ public:
 
 public:
     void setId(const Id& id);
+    [[nodiscard]]
     Id id() const;
 
 public: // AbstractModel API
     void setViewProfileTitle(const QString& title);
+    [[nodiscard]]
     QString viewProfileTitle() const;
 
 public: // codings
     void setOffsetCoding(int offsetCoding);
+    [[nodiscard]]
     int offsetCoding() const;
     void setValueCoding(int valueCoding);
     void setCharCoding(const QString& charCodingName);
+    [[nodiscard]]
     int valueCoding() const;
+    [[nodiscard]]
     QString charCodingName() const;
     void setShowsNonprinting(bool showsNonprinting);
+    [[nodiscard]]
     bool showsNonprinting() const;
     void setSubstituteChar(QChar substituteChar);
     void setUndefinedChar(QChar undefinedChar);
+    [[nodiscard]]
     QChar substituteChar() const;
+    [[nodiscard]]
     QChar undefinedChar() const;
 
 public: // elements
     void setOffsetColumnVisible(bool visible);
     void setVisibleByteArrayCodings(int columns);
+    [[nodiscard]]
     bool offsetColumnVisible() const;
+    [[nodiscard]]
     int visibleByteArrayCodings() const;
 
 public: // table layout
     void setLayoutStyle(int layoutStyle);
     void setNoOfBytesPerLine(int noOfBytesPerLine);
     void setNoOfGroupedBytes(int noOfGroupedBytes);
+    [[nodiscard]]
     int noOfBytesPerLine() const;
+    [[nodiscard]]
     int layoutStyle() const;
+    [[nodiscard]]
     int noOfGroupedBytes() const;
 
 public:
     void setViewModus(int viewModus);
+    [[nodiscard]]
     int viewModus() const;
 
 private:

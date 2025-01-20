@@ -39,6 +39,7 @@ public:
 
 public: // AbstractModelStreamEncoder API
     bool encodeToStream(QIODevice* device, AbstractModel* model, const AbstractModelSelection* selection) override;
+    [[nodiscard]]
     QString modelTypeName(AbstractModel* model, const AbstractModelSelection* selection) const override;
 
 public:

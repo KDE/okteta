@@ -33,6 +33,7 @@ public:
 
     XxencodingStreamEncoderSettings& operator=(const XxencodingStreamEncoderSettings&) = default;
 
+    [[nodiscard]]
     bool operator==(const XxencodingStreamEncoderSettings& other) const;
 
 public:
@@ -67,6 +68,7 @@ public:
     ~ByteArrayXxencodingStreamEncoder() override;
 
 public:
+    [[nodiscard]]
     XxencodingStreamEncoderSettings settings() const;
     void setSettings(const XxencodingStreamEncoderSettings& settings);
 

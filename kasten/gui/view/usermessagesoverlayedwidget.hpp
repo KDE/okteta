@@ -35,6 +35,7 @@ public:
     // TODO: specify dealing with old main widget, right now relying on being killed
     void setMainWidget(QWidget* widget);
 
+    [[nodiscard]]
     bool isErrorReportShown() const;
 
 Q_SIGNALS:

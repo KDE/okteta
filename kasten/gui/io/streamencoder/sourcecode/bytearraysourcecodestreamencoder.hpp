@@ -56,6 +56,7 @@ public:
 
     SourceCodeStreamEncoderSettings& operator=(const SourceCodeStreamEncoderSettings&) = default;
 
+    [[nodiscard]]
     bool operator==(const SourceCodeStreamEncoderSettings& other) const;
 
 public:
@@ -83,11 +84,14 @@ public:
     ~ByteArraySourceCodeStreamEncoder() override;
 
 public:
+    [[nodiscard]]
     SourceCodeStreamEncoderSettings settings() const;
     void setSettings(const SourceCodeStreamEncoderSettings& settings);
 
 public:
+    [[nodiscard]]
     const char* const* dataTypeNames() const;
+    [[nodiscard]]
     int dataTypesCount() const;
 
 protected: // AbstractByteArrayStreamEncoder API

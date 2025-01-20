@@ -52,12 +52,15 @@ public:
 //     AbstractConnectJob *startConnect( AbstractDocument* document,
 //                                               const QUrl& url, AbstractModelSynchronizer::ConnectOption option );
 
+    [[nodiscard]]
     ByteArrayView* view() const;
+    [[nodiscard]]
     ByteArrayViewProfile::Id viewProfileId() const;
 
     void setView(ByteArrayView* view);
     void setViewProfileId(const ByteArrayViewProfile::Id& viewProfileId);
 
+    [[nodiscard]]
     LocalSyncState localSyncState() const;
 
 Q_SIGNALS:

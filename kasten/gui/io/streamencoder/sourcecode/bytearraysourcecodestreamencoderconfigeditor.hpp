@@ -30,6 +30,7 @@ public:
     ~ByteArraySourceCodeStreamEncoderConfigEditor() override;
 
 public: // AbstractModelStreamEncoderConfigEditor API
+    [[nodiscard]]
     bool isValid() const override;
     std::unique_ptr<AbstractSelectionView> createPreviewView() const override;
 

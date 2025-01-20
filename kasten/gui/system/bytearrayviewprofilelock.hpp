@@ -37,7 +37,9 @@ public:
 
 public:
     void unlock();
+    [[nodiscard]]
     bool isLocked() const;
+    [[nodiscard]]
     ByteArrayViewProfile::Id viewProfileId() const;
 
 private:

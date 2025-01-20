@@ -39,26 +39,36 @@ public:
     void setByteArrayModel(AbstractByteArrayModel* byteArrayModel);
 
     void setZoomScale(double zoomScale);
+    [[nodiscard]]
     double zoomScale() const;
+    [[nodiscard]]
     int zoomInLevelsSize() const;
+    [[nodiscard]]
     int zoomOutLevelsSize() const;
+    [[nodiscard]]
     double zoomScaleForLevel(int zoomLevel) const;
+    [[nodiscard]]
     int zoomLevelForScale(double zoomScale) const;
 
 public:
     void setReadOnly(bool isReadOnly);
+    [[nodiscard]]
     bool isReadOnly() const;
 
 public: // cursor API
     void setCursorPosition(Address cursorPosition);
     void setSelectionCursorPosition(Address index);
+    [[nodiscard]]
     Address cursorPosition() const;
+    [[nodiscard]]
     QRect cursorRect() const;
 
 public: // codings
     void setValueCoding(int valueCoding);
     void setCharCoding(const QString& charCodingName);
+    [[nodiscard]]
     QString charCodingName() const;
+    [[nodiscard]]
     int valueCoding() const;
 
 public:
@@ -67,9 +77,12 @@ public:
     void removeSelectedData();
     void pasteData(const QMimeData* data);
     void insert(const QByteArray& byteArray);
+    [[nodiscard]]
     bool hasSelectedData() const;
     std::unique_ptr<QMimeData> selectionAsMimeData() const;
+    [[nodiscard]]
     bool canReadData(const QMimeData* data) const;
+    [[nodiscard]]
     AddressRange selection() const;
 
     void setMarking(const AddressRange& marking);
@@ -77,15 +90,20 @@ public:
 
 public: // overwrite
     void setOverwriteMode(bool overwriteMode);
+    [[nodiscard]]
     bool isOverwriteMode() const;
+    [[nodiscard]]
     bool isOverwriteOnly() const;
 
 public: // elements
     void toggleOffsetColumn(bool offsetColumnVisible);
     void setOffsetCoding(int offsetCoding);
     void setVisibleCodings(int columns);
+    [[nodiscard]]
     bool offsetColumnVisible() const;
+    [[nodiscard]]
     int offsetCoding() const;
+    [[nodiscard]]
     int visibleCodings() const;
 
 public: // table layout
@@ -93,9 +111,13 @@ public: // table layout
     void setStartOffset(Address startOffset);
     void setFirstLineOffset(Address firstLineOffset);
     void setNoOfBytesPerLine(int noOfBytesPerLine);
+    [[nodiscard]]
     Address startOffset() const;
+    [[nodiscard]]
     Address firstLineOffset() const;
+    [[nodiscard]]
     int noOfBytesPerLine() const;
+    [[nodiscard]]
     int layoutStyle() const;
 
 public: // layout settings
@@ -103,20 +125,29 @@ public: // layout settings
     void setNoOfGroupedBytes(int noOfGroupedBytes);
     void setSubstituteChar(QChar substituteChar);
     void setUndefinedChar(QChar undefinedChar);
+    [[nodiscard]]
     QChar substituteChar() const;
+    [[nodiscard]]
     QChar undefinedChar() const;
+    [[nodiscard]]
     bool showsNonprinting() const;
 
+    [[nodiscard]]
     int byteSpacingWidth() const;
+    [[nodiscard]]
     int noOfGroupedBytes() const;
+    [[nodiscard]]
     int groupSpacingWidth() const;
+    [[nodiscard]]
     int binaryGapWidth() const;
 
 public:
     void setViewModus(int viewModus);
+    [[nodiscard]]
     int viewModus() const;
 
     void setViewPos(QPoint pos);
+    [[nodiscard]]
     QRect viewRect() const;
 
     // needed, as the zooming logic currently changes the font for the real view,

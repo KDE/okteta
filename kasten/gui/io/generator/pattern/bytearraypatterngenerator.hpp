@@ -50,6 +50,7 @@ public:
 
     ByteArrayPatternGeneratorSettings& operator=(const ByteArrayPatternGeneratorSettings&) = default;
 
+    [[nodiscard]]
     bool operator==(const ByteArrayPatternGeneratorSettings& other) const;
 
 public:
@@ -78,6 +79,7 @@ public: // AbstractModelDataGenerator API
     std::unique_ptr<QMimeData> generateData() override;
 
 public:
+    [[nodiscard]]
     ByteArrayPatternGeneratorSettings settings() const;
     void setSettings(const ByteArrayPatternGeneratorSettings& settings);
 

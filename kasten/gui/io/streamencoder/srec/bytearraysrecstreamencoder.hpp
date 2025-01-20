@@ -49,6 +49,7 @@ public:
 
     SRecStreamEncoderSettings& operator=(const SRecStreamEncoderSettings&) = default;
 
+    [[nodiscard]]
     bool operator==(const SRecStreamEncoderSettings& other) const;
 
 public:
@@ -106,6 +107,7 @@ public:
     ~ByteArraySRecStreamEncoder() override;
 
 public:
+    [[nodiscard]]
     SRecStreamEncoderSettings settings() const;
     void setSettings(const SRecStreamEncoderSettings& settings);
 

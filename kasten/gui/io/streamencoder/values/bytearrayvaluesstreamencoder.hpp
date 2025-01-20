@@ -35,6 +35,7 @@ public:
 
     ValuesStreamEncoderSettings& operator=(const ValuesStreamEncoderSettings&) = default;
 
+    [[nodiscard]]
     bool operator==(const ValuesStreamEncoderSettings& other) const;
 
 public:
@@ -60,6 +61,7 @@ public:
     ~ByteArrayValuesStreamEncoder() override;
 
 public:
+    [[nodiscard]]
     ValuesStreamEncoderSettings settings() const;
     void setSettings(const ValuesStreamEncoderSettings& settings);
 

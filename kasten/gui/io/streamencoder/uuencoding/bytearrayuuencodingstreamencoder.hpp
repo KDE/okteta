@@ -41,6 +41,7 @@ public:
 
     UuencodingStreamEncoderSettings& operator=(const UuencodingStreamEncoderSettings&) = default;
 
+    [[nodiscard]]
     bool operator==(const UuencodingStreamEncoderSettings& other) const;
 
 public:
@@ -77,6 +78,7 @@ public:
     ~ByteArrayUuencodingStreamEncoder() override;
 
 public:
+    [[nodiscard]]
     UuencodingStreamEncoderSettings settings() const;
     void setSettings(const UuencodingStreamEncoderSettings& settings);
 

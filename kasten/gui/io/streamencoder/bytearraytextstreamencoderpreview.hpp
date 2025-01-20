@@ -31,6 +31,7 @@ public:
     ~ByteArrayTextStreamEncoderPreview() override;
 
 public: // AbstractSelectionView API
+    [[nodiscard]]
     QWidget* widget() const override;
     void setData(AbstractModel* model, const AbstractModelSelection* selection) override;
 

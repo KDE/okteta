@@ -72,34 +72,46 @@ public:
 //     KCursorObject *cursor() const;
 
 public: // AbstractModel API
+    [[nodiscard]]
     QString title() const override;
+    [[nodiscard]]
     bool isModifiable() const override;
+    [[nodiscard]]
     bool isReadOnly() const override;
     void setReadOnly(bool isReadOnly) override;
 
 public: // AbstractView API
     void setFocus() override;
+    [[nodiscard]]
     QWidget* widget() const override;
+    [[nodiscard]]
     bool hasFocus() const override;
 
 public: // If::Zoomable API TODO: make all such methods slots?
     void setZoomScale(double zoomScale) override;
+    [[nodiscard]]
     double zoomScale() const override;
 Q_SIGNALS:
     void zoomScaleChanged(double zoomScale) override;
 
 public: // If::ZoomLevelsQueryable API
+    [[nodiscard]]
     int zoomInLevelsSize() const override;
+    [[nodiscard]]
     int zoomOutLevelsSize() const override;
+    [[nodiscard]]
     double zoomScaleForLevel(int zoomLevel) const override;
+    [[nodiscard]]
     int zoomLevelForScale(double zoomScale) const override;
 Q_SIGNALS:
     void zoomLevelsChanged() override;
 
 public: // If::DataSelectable API
     void selectAllData(bool selectAll) override;
+    [[nodiscard]]
     bool hasSelectedData() const override;
     std::unique_ptr<QMimeData> copySelectedData() const override;
+    [[nodiscard]]
     const AbstractModelSelection* modelSelection() const override;
 //     virtual void setSelection();
 Q_SIGNALS:
@@ -110,13 +122,16 @@ public: // If::SelectedDataWriteable API
     void insertData(const QMimeData* data) override;
     std::unique_ptr<QMimeData> cutSelectedData() override;
     void deleteSelectedData() override;
+    [[nodiscard]]
     bool canReadData(const QMimeData* data) const override;
+    [[nodiscard]]
     bool canCutSelectedData() const override;
 Q_SIGNALS:
     void canCutSelectedDataChanged(bool canCutSelectedData) override;
 
 public: // If::UserErrorReportsInlineable API
     void showErrorReport(UserErrorReport* errorReport) override;
+    [[nodiscard]]
     bool isErrorReportShown() const override;
 
 Q_SIGNALS:
@@ -128,6 +143,7 @@ public: // If::UserNotificationsInlineable API
 public: // cursor API
     void setCursorPosition(Okteta::Address cursorPosition);
     void setSelectionCursorPosition(Okteta::Address index);
+    [[nodiscard]]
     Okteta::Address cursorPosition() const;
 Q_SIGNALS:
     void cursorPositionChanged(Okteta::Address cursorPosition);
@@ -135,7 +151,9 @@ Q_SIGNALS:
 public: // codings
     void setValueCoding(int valueCoding);
     void setCharCoding(const QString& charCodingName);
+    [[nodiscard]]
     QString charCodingName() const;
+    [[nodiscard]]
     int valueCoding() const;
 Q_SIGNALS:
     void charCodecChanged(const QString& charCodingName);
@@ -143,9 +161,11 @@ Q_SIGNALS:
 
 public:
     // TODO: see how this can be solved by modelSelection
+    [[nodiscard]]
     Okteta::AddressRange selection() const;
     void setSelection(Okteta::Address start, Okteta::Address end);
     void insert(const QByteArray& byteArray);
+    [[nodiscard]]
     QRect cursorRect() const;
 
 public: // overwrite
@@ -160,8 +180,11 @@ public: // elements
     void setOffsetCoding(int offsetCoding);
     void setVisibleByteArrayCodings(int columns);
     void setMarking(const Okteta::AddressRange& range, bool ensureVisible = false);
+    [[nodiscard]]
     bool offsetColumnVisible() const;
+    [[nodiscard]]
     int offsetCoding() const;
+    [[nodiscard]]
     int visibleByteArrayCodings() const;
 Q_SIGNALS:
     void offsetColumnVisibleChanged(bool visible);
@@ -171,9 +194,13 @@ Q_SIGNALS:
 public: // table layout
     void setLayoutStyle(int layoutStyle);
     void setNoOfBytesPerLine(int noOfBytesPerLine);
+    [[nodiscard]]
     Okteta::Address startOffset() const;
+    [[nodiscard]]
     Okteta::Address firstLineOffset() const;
+    [[nodiscard]]
     int noOfBytesPerLine() const;
+    [[nodiscard]]
     int layoutStyle() const;
 Q_SIGNALS:
     void layoutStyleChanged(int layoutStyle);
@@ -184,13 +211,20 @@ public: // layout settings
     void setNoOfGroupedBytes(int noOfGroupedBytes);
     void setSubstituteChar(QChar substituteChar);
     void setUndefinedChar(QChar undefinedChar);
+    [[nodiscard]]
     QChar substituteChar() const;
+    [[nodiscard]]
     QChar undefinedChar() const;
+    [[nodiscard]]
     bool showsNonprinting() const;
 
+    [[nodiscard]]
     int byteSpacingWidth() const;
+    [[nodiscard]]
     int noOfGroupedBytes() const;
+    [[nodiscard]]
     int groupSpacingWidth() const;
+    [[nodiscard]]
     int binaryGapWidth() const;
 Q_SIGNALS:
     void showsNonprintingChanged(bool showsNonprinting);
@@ -200,6 +234,7 @@ Q_SIGNALS:
 
 public:
     void setViewModus(int viewModus);
+    [[nodiscard]]
     int viewModus() const;
 Q_SIGNALS:
     void viewModusChanged(int viewModus);
@@ -208,6 +243,7 @@ Q_SIGNALS:
     void viewContextMenuRequested(QPoint pos);
 
 public:
+    [[nodiscard]]
     ByteArrayViewProfileSynchronizer* synchronizer() const;
 
 private:

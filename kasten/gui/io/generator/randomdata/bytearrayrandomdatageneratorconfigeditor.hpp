@@ -28,6 +28,7 @@ public:
     ~ByteArrayRandomDataGeneratorConfigEditor() override;
 
 public: // AbstractModelDataGeneratorConfigEditor API
+    [[nodiscard]]
     QString name() const override;
 
 private Q_SLOTS:

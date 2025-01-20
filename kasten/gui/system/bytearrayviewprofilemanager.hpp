@@ -34,7 +34,9 @@ public:
     ByteArrayViewProfileFileInfo& operator=(const ByteArrayViewProfileFileInfo&) = default;
 
 public:
+    [[nodiscard]]
     const QDateTime& lastModified() const;
+    [[nodiscard]]
     bool isLocked() const;
 
     void setLastModified(const QDateTime& lastModified);
@@ -69,11 +71,17 @@ public:
     ~ByteArrayViewProfileManager() override;
 
 public:
+    [[nodiscard]]
     QVector<ByteArrayViewProfile> viewProfiles() const;
+    [[nodiscard]]
     int viewProfilesCount() const;
+    [[nodiscard]]
     ByteArrayViewProfile viewProfile(const ByteArrayViewProfile::Id& id) const;
+    [[nodiscard]]
     ByteArrayViewProfile::Id defaultViewProfileId() const;
+    [[nodiscard]]
     ByteArrayViewProfile defaultViewProfile() const;
+    [[nodiscard]]
     bool isViewProfileLocked(const ByteArrayViewProfile::Id& id) const;
 
 public:

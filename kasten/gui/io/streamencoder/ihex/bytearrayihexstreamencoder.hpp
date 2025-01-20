@@ -49,6 +49,7 @@ public:
 
     IHexStreamEncoderSettings& operator=(const IHexStreamEncoderSettings&) = default;
 
+    [[nodiscard]]
     bool operator==(const IHexStreamEncoderSettings& other) const;
 
 public:
@@ -85,6 +86,7 @@ private:
     static const char hexDigits[16];
 
 private:
+    [[nodiscard]]
     static char hexValueOfNibble(int nibble);
     static void writeBigEndian(unsigned char* line, quint32 value, int byteSize);
 
@@ -101,6 +103,7 @@ public:
     ~ByteArrayIHexStreamEncoder() override;
 
 public:
+    [[nodiscard]]
     IHexStreamEncoderSettings settings() const;
     void setSettings(const IHexStreamEncoderSettings& settings);
 

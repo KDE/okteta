@@ -39,6 +39,7 @@ public: // API to be implemented
     virtual void renderFirstLine(QTextStream* stream, int lineIndex) const = 0;
     virtual void renderNextLine(QTextStream* stream, bool isSubline = false) const = 0;
     /// default returns 1
+    [[nodiscard]]
     virtual int noOfSublinesNeeded() const;
 };
 
