@@ -24,6 +24,7 @@ public:
     ByteArrayChecksumAlgorithmFactory& operator=(const ByteArrayChecksumAlgorithmFactory&) = delete;
 
 public:
+    [[nodiscard]]
     static std::vector<std::unique_ptr<AbstractByteArrayChecksumAlgorithm>> createAlgorithms();
 
 };

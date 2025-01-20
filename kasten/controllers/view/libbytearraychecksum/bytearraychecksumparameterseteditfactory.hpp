@@ -23,6 +23,7 @@ public:
     ByteArrayChecksumParameterSetEditFactory& operator=(const ByteArrayChecksumParameterSetEditFactory&) = delete;
 
 public:
+    [[nodiscard]]
     static std::unique_ptr<AbstractByteArrayChecksumParameterSetEdit> createEdit(const char* id);
 };
 

@@ -30,7 +30,9 @@ public: // AbstractByteArrayChecksumAlgorithm API
     void saveConfig(KConfigGroup& configGroup) const override;
 
 private:
+    [[nodiscard]]
     quint16 calculateModSumWithBigEndian(const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const;
+    [[nodiscard]]
     quint16 calculateModSumWithLittleEndian(const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const;
 
 private:
