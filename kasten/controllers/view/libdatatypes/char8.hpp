@@ -29,6 +29,7 @@ public:
     Char8& operator=(const Char8&) = default;
 
 public:
+    [[nodiscard]]
     QString toString(/** TODO: undefinedChar */) const;
 
 public:

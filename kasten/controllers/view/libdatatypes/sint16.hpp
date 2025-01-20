@@ -28,7 +28,9 @@ public:
     SInt16& operator=(const SInt16&) = default;
 
 public:
+    [[nodiscard]]
     QString toString() const;
+    [[nodiscard]]
     QString toString(const QLocale& locale) const;
 
 public:

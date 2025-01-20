@@ -27,6 +27,7 @@ public:
     Utf16& operator=(const Utf16&) = default;
 
 public:
+    [[nodiscard]]
     QString toString() const;
 
 public:

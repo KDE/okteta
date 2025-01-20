@@ -27,6 +27,7 @@ public:
     Binary8& operator=(const Binary8&) = default;
 
 public:
+    [[nodiscard]]
     QString toString() const;
 
 public:

@@ -28,7 +28,9 @@ public:
     UInt16& operator=(const UInt16&) = default;
 
 public:
+    [[nodiscard]]
     QString toString(bool asHex) const;
+    [[nodiscard]]
     QString toString(bool asHex, const QLocale& locale) const;
 
 public:

@@ -28,7 +28,9 @@ public:
     UInt8& operator=(const UInt8&) = default;
 
 public:
+    [[nodiscard]]
     QString toString(bool asHex) const;
+    [[nodiscard]]
     QString toString(bool asHex, const QLocale& locale) const;
 
 public:

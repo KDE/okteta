@@ -27,6 +27,7 @@ public:
     Octal8& operator=(const Octal8&) = default;
 
 public:
+    [[nodiscard]]
     QString toString() const;
 
 public:

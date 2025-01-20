@@ -27,6 +27,7 @@ public:
     Hexadecimal8& operator=(const Hexadecimal8&) = default;
 
 public:
+    [[nodiscard]]
     QString toString() const;
 
 public:

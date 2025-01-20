@@ -28,7 +28,9 @@ public:
     Float64& operator=(const Float64&) = default;
 
 public:
+    [[nodiscard]]
     QString toString() const;
+    [[nodiscard]]
     QString toString(const QLocale& locale) const;
 
 public:
