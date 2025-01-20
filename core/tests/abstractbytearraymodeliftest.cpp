@@ -175,10 +175,12 @@ void AbstractByteArrayModelIfTest::testFill()
 
     // fill() all
     mByteArrayModel->setModified(false);
-    mByteArrayModel->fill(BlankChar);
+    Size filledSize = mByteArrayModel->fill(BlankChar);
+    QCOMPARE(filledSize, size);
     clearSignalSpys();
 
-    mByteArrayModel->fill(PaintChar);
+    filledSize = mByteArrayModel->fill(PaintChar);
+    QCOMPARE(filledSize, size);
     QCOMPARE(copy.compare(*mByteArrayModel), 0);
     QVERIFY(mByteArrayModel->isModified());
     checkContentsReplaced(fillRange, fillRange.width());
@@ -186,10 +188,12 @@ void AbstractByteArrayModelIfTest::testFill()
     // fill() at begin
     fillRange.set(0, fillSize);
     mByteArrayModel->setModified(false);
-    mByteArrayModel->fill(BlankChar);
+    filledSize = mByteArrayModel->fill(BlankChar);
+    QCOMPARE(filledSize, size);
     clearSignalSpys();
 
-    mByteArrayModel->fill(PaintChar, fillRange);
+    filledSize = mByteArrayModel->fill(PaintChar, fillRange);
+    QCOMPARE(filledSize, fillRange.width());
     QCOMPARE(copy.compare(*mByteArrayModel, fillRange), 0);
     QCOMPARE(mByteArrayModel->byte(fillRange.nextBehindEnd()), BlankChar);
     QVERIFY(mByteArrayModel->isModified());
@@ -197,11 +201,13 @@ void AbstractByteArrayModelIfTest::testFill()
 
     // fill() at end
     mByteArrayModel->setModified(false);
-    mByteArrayModel->fill(BlankChar);
+    filledSize = mByteArrayModel->fill(BlankChar);
+    QCOMPARE(filledSize, size);
     fillRange.moveToEnd(size - 1);
     clearSignalSpys();
 
-    mByteArrayModel->fill(PaintChar, fillRange);
+    filledSize = mByteArrayModel->fill(PaintChar, fillRange);
+    QCOMPARE(filledSize, fillRange.width());
     QCOMPARE(mByteArrayModel->byte(fillRange.nextBeforeStart()), BlankChar);
     QCOMPARE(copy.compare(*mByteArrayModel, fillRange, fillRange.start()), 0);
     QVERIFY(mByteArrayModel->isModified());
@@ -210,13 +216,15 @@ void AbstractByteArrayModelIfTest::testFill()
     // fill() at end with length reaching behind end
     constexpr Size behindEndSize = 2;
     mByteArrayModel->setModified(false);
-    mByteArrayModel->fill(BlankChar);
+    filledSize = mByteArrayModel->fill(BlankChar);
+    QCOMPARE(filledSize, size);
     fillRange.moveToEnd(size - 1 + behindEndSize);
     clearSignalSpys();
 
-    mByteArrayModel->fill(PaintChar, fillRange.start(), fillRange.width());
+    filledSize = mByteArrayModel->fill(PaintChar, fillRange.start(), fillRange.width());
     const AddressRange removedRange(fillRange.start(), size - 1);
     const AddressRange insertedRange = byteArrayModelSizeCanBeChanged() ? fillRange : removedRange;
+    QCOMPARE(filledSize, insertedRange.width());
     QCOMPARE(mByteArrayModel->byte(insertedRange.nextBeforeStart()), BlankChar);
     QCOMPARE(copy.compare(*mByteArrayModel, insertedRange, insertedRange.start() - behindEndSize), 0);
     QVERIFY(mByteArrayModel->isModified());
@@ -225,11 +233,13 @@ void AbstractByteArrayModelIfTest::testFill()
 
     // fill() at mid
     mByteArrayModel->setModified(false);
-    mByteArrayModel->fill(BlankChar);
+    filledSize = mByteArrayModel->fill(BlankChar);
+    QCOMPARE(filledSize, insertedRange.nextBehindEnd());
     fillRange.moveToStart(size / 2);
     clearSignalSpys();
 
-    mByteArrayModel->fill(PaintChar, fillRange);
+    filledSize = mByteArrayModel->fill(PaintChar, fillRange);
+    QCOMPARE(filledSize, fillRange.width());
     QCOMPARE(mByteArrayModel->byte(fillRange.nextBeforeStart()), BlankChar);
     QCOMPARE(copy.compare(*mByteArrayModel, fillRange, fillRange.start()), 0);
     QCOMPARE(mByteArrayModel->byte(fillRange.nextBehindEnd()), BlankChar);
