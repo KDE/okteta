@@ -34,6 +34,7 @@ public:
 
     void addFrameRenderer(std::unique_ptr<AbstractFrameRenderer>&& frameRenderer);
 
+    [[nodiscard]]
     bool print(QPrinter* printer, int firstPageIndex, int lastPageIndex);
 
 public:
