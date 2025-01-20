@@ -31,6 +31,7 @@ public:
 public: // CharCodec API
     [[nodiscard]]
     Character decode(Byte byte) const override;
+    [[nodiscard]]
     bool encode(Byte* byte, QChar _char) const override;
     [[nodiscard]]
     bool canEncode(QChar _char) const override;

@@ -75,6 +75,7 @@ public: // API to be implemented
      * @param byte offset in digits where to write the code to
      * @return true if successful, false otherwise
      */
+    [[nodiscard]]
     virtual bool appendDigit(Byte* byte, unsigned char digit) const = 0;
     /**
      * Tries to remove the last (least significant) digit from byte.
@@ -94,6 +95,7 @@ public: // API to be implemented
      * @param digit digit to turn into the value
      * @return true if successful, false otherwise
      */
+    [[nodiscard]]
     virtual bool turnToValue(unsigned char* digit) const = 0;
 
 public:

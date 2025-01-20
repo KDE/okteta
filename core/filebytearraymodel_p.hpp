@@ -40,7 +40,9 @@ public:
 public:
     [[nodiscard]]
     bool isOpen() const;
+    [[nodiscard]]
     bool open(const QString& fileName);
+    [[nodiscard]]
     bool close();
 
 private:

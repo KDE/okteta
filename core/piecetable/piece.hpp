@@ -50,7 +50,9 @@ public:
     Piece removeLocal(const AddressRange& localRemoveStorageRange);
     Piece removeStartBeforeLocal(Address storageOffset);
     Piece removeEndBehindLocal(Address storageOffset);
+    [[nodiscard]]
     bool prepend(const Piece& other);
+    [[nodiscard]]
     bool append(const Piece& other);
 
 public:

@@ -40,10 +40,15 @@ public: // AbstractByteArrayModel API
     [[nodiscard]]
     bool isModified() const;
 
+    [[nodiscard]]
     Size insert(Address offset, const Byte* insertData, int insertLength);
+    [[nodiscard]]
     Size remove(const AddressRange& removeRange);
+    [[nodiscard]]
     Size replace(const AddressRange& removeRange, const Byte* insertData, int insertLength);
+    [[nodiscard]]
     bool swap(Address firstStart, const AddressRange& secondRange);
+    [[nodiscard]]
     Size fill(Byte fillByte, Address offset = 0, Size fillLength = -1);
     void setByte(Address offset, Byte byte);
 

@@ -37,6 +37,7 @@ public: // AbstractPieceTableChange API
     QString description() const override;
     [[nodiscard]]
     Address storageOffset() const override;
+    [[nodiscard]]
     bool merge(const AbstractPieceTableChange* other) override;
     AddressRange apply(PieceTable* pieceTable) const override;
     AddressRange revert(PieceTable* pieceTable) const override;

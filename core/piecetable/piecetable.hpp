@@ -42,6 +42,7 @@ public:
 //     int fill( const char FillChar, unsigned int Pos = 0, int Length = -1 ); TODO: filter change, calculated
 
 public:
+    [[nodiscard]]
     bool getStorageData(int* storageId, Address* storageOffset, Address dataOffset) const;
     [[nodiscard]]
     Size size() const;

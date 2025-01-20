@@ -45,6 +45,7 @@ public: // AbstractPieceTableChange API
     int type() const override;
     [[nodiscard]]
     QString description() const override;
+    [[nodiscard]]
     bool merge(const AbstractPieceTableChange* other) override;
     AddressRange apply(PieceTable* pieceTable) const override;
     AddressRange revert(PieceTable* pieceTable) const override;

@@ -138,15 +138,19 @@ public: // modification API
      * @param insertLength number of bytes to copy
      * @return length of inserted data
      */
+    [[nodiscard]]
     virtual Size insert(Address offset, const Byte* insertData, int insertLength);
+    [[nodiscard]]
     Size insert(Address offset, const QByteArray& insertData);
 
     /** removes beginning with position as much as possible
      * @param removeRange
      * @return length of removed data
      */
+    [[nodiscard]]
     virtual Size remove(const AddressRange& removeRange);
     /** convenience function, behaves as above */
+    [[nodiscard]]
     Size remove(Address offset, Size removeLength);
 
     /** replaces as much as possible
@@ -155,10 +159,13 @@ public: // modification API
      * @param insertLength
      * @return length of inserted data
      */
+    [[nodiscard]]
     virtual Size replace(const AddressRange& removeRange, const Byte* insertData, int insertLength) = 0;
     /** convenience function, behaves as above */
+    [[nodiscard]]
     Size replace(const AddressRange& removeRange, const QByteArray& insertData);
     /** convenience function, behaves as above */
+    [[nodiscard]]
     Size replace(Address offset, Size removeLength,
                  const Byte* insertData, Size insertLength);
 
@@ -169,6 +176,7 @@ public: // modification API
      * @param secondRange data range to be moved
      * @return @p true if operation was successful, @p false otherwise
      */
+    [[nodiscard]]
     virtual bool swap(Address firstStart, const AddressRange& secondRange) = 0;
 
     /**
@@ -178,7 +186,9 @@ public: // modification API
      * @param fillLength number of bytes to fill. If Length is -1, the buffer is filled till the end.
      * @return number of filled bytes
      */
+    [[nodiscard]]
     virtual Size fill(Byte fillByte, Address offset = 0, Size fillLength = -1) = 0;
+    [[nodiscard]]
     Size fill(Byte fillChar, const AddressRange& fillRange);
 
     /** sets a single byte
@@ -206,8 +216,10 @@ public: // service functions
      * @param copyRange
      * @return number of copied bytes
      */
+    [[nodiscard]]
     virtual Size copyTo(Byte* dest, const AddressRange& copyRange) const;
     /** convenience function, behaves as above */
+    [[nodiscard]]
     Size copyTo(Byte* dest, Address offset, Size copyLength) const;
 
 public: // finding API

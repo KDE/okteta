@@ -84,7 +84,9 @@ public:
     NumberRange remove(const NumberRange& removeRange);
     NumberRange removeLocal(const NumberRange& removeRange);
 
+    [[nodiscard]]
     bool prepend(const NumberRange& other);
+    [[nodiscard]]
     bool append(const NumberRange& other);
 
 public:

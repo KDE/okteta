@@ -43,6 +43,7 @@ public:
 public: // API to be implemented
     [[nodiscard]]
     virtual Character decode(Byte byte) const = 0;
+    [[nodiscard]]
     virtual bool encode(Byte* byte, QChar _char) const = 0;
     [[nodiscard]]
     virtual bool canEncode(QChar _char) const = 0;

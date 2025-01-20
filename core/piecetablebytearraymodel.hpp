@@ -56,10 +56,15 @@ public: // AbstractByteArrayModel API
     [[nodiscard]]
     bool isModified() const override;
 
+    [[nodiscard]]
     Size insert(Address offset, const Byte* insertData, int insertLength) override;
+    [[nodiscard]]
     Size remove(const AddressRange& removeRange) override;
+    [[nodiscard]]
     Size replace(const AddressRange& removeRange, const Byte* insertData, int insertLength) override;
+    [[nodiscard]]
     bool swap(Address firstStart, const AddressRange& secondRange) override;
+    [[nodiscard]]
     Size fill(Byte fillByte, Address offset = 0, Size fillLength = -1) override;
     void setByte(Address offset, Byte byte) override;
 

@@ -36,10 +36,12 @@ public: // ValueCodec API
 
     void encode(QString* digits, unsigned int pos, Byte byte) const override;
     void encodeShort(QString* digits, unsigned int pos, Byte byte) const override;
+    [[nodiscard]]
     bool appendDigit(Byte* byte, unsigned char digit) const override;
     void removeLastDigit(Byte* byte) const override;
     [[nodiscard]]
     bool isValidDigit(unsigned char digit) const override;
+    [[nodiscard]]
     bool turnToValue(unsigned char* digit) const override;
 
 private:

@@ -55,6 +55,7 @@ public: // API to be implemented
     virtual Address storageOffset() const;
 
     /// returns true if successful, false otherwise. Default returns false.
+    [[nodiscard]]
     virtual bool merge(const AbstractPieceTableChange* other);
 
     virtual AddressRange apply(PieceTable* pieceTable) const = 0;
