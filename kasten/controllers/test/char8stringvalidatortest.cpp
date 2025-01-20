@@ -94,8 +94,9 @@ void Char8StringValidatorTest::testValidate()
 
     if (validateResult == QValidator::Acceptable) {
         QChar parseResult;
-        parser.evaluate(&parseResult, string);
+        Okteta::Char8StringParser::CodeState evaluateState = parser.evaluate(&parseResult, string);
 
+        QCOMPARE(evaluateState, Okteta::Char8StringParser::CodeAcceptable);
         QCOMPARE(parseResult, expectedParseResult);
     }
 }

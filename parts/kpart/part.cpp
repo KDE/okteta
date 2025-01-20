@@ -175,9 +175,9 @@ bool OktetaPart::openFile()
     Kasten::AbstractLoadJob* loadJob = synchronizerFactory->startLoad(QUrl::fromLocalFile(localFilePath()));
     connect(loadJob, &KJob::result,
             this, &OktetaPart::onDocumentLoadJobResult);
-    Kasten::JobManager::executeJob(loadJob);
+    const bool loadSuccess = Kasten::JobManager::executeJob(loadJob);
 
-    return true;
+    return loadSuccess;
 }
 
 bool OktetaPart::saveFile()

@@ -41,7 +41,8 @@ void TestDocumentFileSynchronizerFactoryTest::writeToFile(const QString& filePat
 {
     QFile file;
     file.setFileName(filePath);
-    file.open(QIODevice::WriteOnly);
+    const bool openSuccess = file.open(QIODevice::WriteOnly);
+    QVERIFY(openSuccess);
 
     QDataStream outStream(&file);
     outStream.writeRawData(header.data(), header.size());

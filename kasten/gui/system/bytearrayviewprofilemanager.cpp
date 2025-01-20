@@ -231,7 +231,12 @@ void
 ByteArrayViewProfileManager::setDefaultViewProfile(const ByteArrayViewProfile::Id& viewProfileId)
 {
     QFile defaultViewProfileFile(defaultViewProfileFilePath());
-    defaultViewProfileFile.open(QIODevice::WriteOnly);
+    const bool openSuccess = defaultViewProfileFile.open(QIODevice::WriteOnly);
+
+    if (!openSuccess) {
+        qCWarning(LOG_KASTEN_OKTETA_GUI) << "Failed to open default view profile id file " << defaultViewProfileFile.fileName();
+        return;
+    }
 
     defaultViewProfileFile.write(viewProfileId.toUtf8());
     defaultViewProfileFile.close();

@@ -26,8 +26,7 @@ public:
 
     StructuresToolViewFactory& operator=(const StructuresToolViewFactory&) = delete;
 
-public:
-    // AbstractToolViewFactory API
+public: // AbstractToolViewFactory API
     std::unique_ptr<AbstractToolView> create(AbstractTool* tool) const override;
 
     QString iconName() const override;

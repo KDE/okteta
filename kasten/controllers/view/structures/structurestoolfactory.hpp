@@ -26,8 +26,7 @@ public:
 
     StructuresToolFactory& operator=(const StructuresToolFactory&) = delete;
 
-public:
-    // AbstractToolFactory API
+public: // AbstractToolFactory API
     std::unique_ptr<AbstractTool> create() const override;
 };
 

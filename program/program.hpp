@@ -38,11 +38,11 @@ public:
     void quit();
 
 public:
-    UserMessagesHandler* userMessagesHandler();
-    DocumentManager* documentManager();
-    ViewManager* viewManager();
-    MultiDocumentStrategy* documentStrategy();
-    ByteArrayViewProfileManager* byteArrayViewProfileManager();
+    UserMessagesHandler* userMessagesHandler() const;
+    DocumentManager* documentManager() const;
+    ViewManager* viewManager() const;
+    MultiDocumentStrategy* documentStrategy() const;
+    ByteArrayViewProfileManager* byteArrayViewProfileManager() const;
 
 private:
     QApplication mApp;
@@ -58,11 +58,11 @@ private:
     std::unique_ptr<MultiDocumentStrategy> mDocumentStrategy;
 };
 
-inline UserMessagesHandler* OktetaProgram::userMessagesHandler() { return m_userMessagesHandler.get(); }
-inline DocumentManager* OktetaProgram::documentManager() { return mDocumentManager.get(); }
-inline ViewManager* OktetaProgram::viewManager()         { return mViewManager.get(); }
-inline MultiDocumentStrategy* OktetaProgram::documentStrategy() { return mDocumentStrategy.get(); }
-inline ByteArrayViewProfileManager* OktetaProgram::byteArrayViewProfileManager() { return mByteArrayViewProfileManager.get(); }
+inline UserMessagesHandler* OktetaProgram::userMessagesHandler() const { return m_userMessagesHandler.get(); }
+inline DocumentManager* OktetaProgram::documentManager() const { return mDocumentManager.get(); }
+inline ViewManager* OktetaProgram::viewManager() const { return mViewManager.get(); }
+inline MultiDocumentStrategy* OktetaProgram::documentStrategy() const { return mDocumentStrategy.get(); }
+inline ByteArrayViewProfileManager* OktetaProgram::byteArrayViewProfileManager() const { return mByteArrayViewProfileManager.get(); }
 
 }
 

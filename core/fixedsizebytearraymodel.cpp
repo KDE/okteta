@@ -263,7 +263,7 @@ Size FixedSizeByteArrayModel::fill(Byte fillByte, Address offset, Size fillLengt
     return fillLength;
 }
 
-int FixedSizeByteArrayModel::compare(const AbstractByteArrayModel& other, const AddressRange& _otherRange, Address offset)
+int FixedSizeByteArrayModel::compare(const AbstractByteArrayModel& other, const AddressRange& _otherRange, Address offset) const
 {
     AddressRange otherRange(_otherRange);
     // qCDebug(LOG_OKTETA_CORE) << QString("offset: %1, otherRange: (%3/%4)" ).arg(offset).arg(otherRange.start()).arg(otherRange.end())
