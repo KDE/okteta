@@ -37,6 +37,7 @@ public: // QThread API
 
 public:
     /// the result of the thread, if successful
+    [[nodiscard]]
     std::unique_ptr<QMimeData> releaseData();
 
 Q_SIGNALS:

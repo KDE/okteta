@@ -26,6 +26,7 @@ public:
     AbstractLoadJobPrivate& operator=(const AbstractLoadJobPrivate&) = delete;
 
 public:
+    [[nodiscard]]
     std::unique_ptr<AbstractDocument> releaseDocument();
 
 public:

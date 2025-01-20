@@ -35,6 +35,7 @@ public:
     ~AbstractLoadJob() override;
 
 public:
+    [[nodiscard]]
     std::unique_ptr<AbstractDocument> releaseDocument();
 
 protected:
