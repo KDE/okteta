@@ -31,9 +31,12 @@ public:
     AbstractTypeCodec& operator=(const AbstractTypeCodec&) = delete;
 
 public: // API to be implemented
+    [[nodiscard]]
     virtual QVariant value(const PODData& data, int* byteCount) const = 0;
+    [[nodiscard]]
     virtual QByteArray valueToBytes(const QVariant& value) const = 0;
 
+    [[nodiscard]]
     virtual bool areEqual(const QVariant& value, QVariant& otherValue) const = 0;
 
 public:

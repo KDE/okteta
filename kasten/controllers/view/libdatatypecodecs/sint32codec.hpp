@@ -22,9 +22,12 @@ public:
     ~SInt32Codec() override;
 
 public: // AbstractTypeCodec API
+    [[nodiscard]]
     QVariant value(const PODData& data, int* byteCount) const override;
+    [[nodiscard]]
     QByteArray valueToBytes(const QVariant& value) const override;
 
+    [[nodiscard]]
     bool areEqual(const QVariant& value, QVariant& otherValue) const override;
 };
 
