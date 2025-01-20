@@ -262,7 +262,7 @@ void ValueEditor::doValueEditAction(ValueEditAction Action, int input)
         // sync value
         mEditValue = newValue;
         valueCodec->encode(&mValueString, 0, mEditValue);
-        mView->byteArrayModel()->replace(tableCursor->index(), 1, &mEditValue, 1);
+        std::ignore = mView->byteArrayModel()->replace(tableCursor->index(), 1, &mEditValue, 1);
     }
 
 //     mView->updateCursors();

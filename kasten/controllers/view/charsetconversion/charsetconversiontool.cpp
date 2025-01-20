@@ -299,7 +299,7 @@ void CharsetConversionTool::convertChars()
                       "%1 to %2", fromCharCodec->name(), toCharCodec->name());
             changesDescribable->openGroupedChange(description);
         }
-        mByteArrayModel->replace(convertedSection, conversionResult);
+        std::ignore = mByteArrayModel->replace(convertedSection, conversionResult);
         if (changesDescribable) {
             changesDescribable->closeGroupedChange();
         }
