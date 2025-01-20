@@ -21,6 +21,7 @@ public:
     virtual ~AbstractDataTypeDisplayStringifier() = default;
 
 public:
+    [[nodiscard]]
     virtual QString displayText(const QVariant& data, const QLocale& locale, bool asHex) const = 0;
 };
 

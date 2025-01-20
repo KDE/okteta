@@ -28,6 +28,7 @@ public:
     DataTypeDisplayStringifierManager& operator=(const DataTypeDisplayStringifierManager&) = delete;
 
 public:
+    [[nodiscard]]
     AbstractDataTypeDisplayStringifier* stringifier(int metaTypeId) const;
 
 private:
