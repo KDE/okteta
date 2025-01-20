@@ -42,12 +42,19 @@ public: // set
     void setFromCursor(bool fromCursor);
 
 public: // get
+    [[nodiscard]]
     QByteArray searchData() const;
+    [[nodiscard]]
     Okteta::ByteArrayComboBox::Coding searchDataCoding() const;
+    [[nodiscard]]
     bool fromCursor() const;
+    [[nodiscard]]
     bool inSelection() const;
+    [[nodiscard]]
     bool persistentInSelection() const;
+    [[nodiscard]]
     Qt::CaseSensitivity caseSensitivity() const;
+    [[nodiscard]]
     FindDirection direction() const;
 
 public Q_SLOTS:
