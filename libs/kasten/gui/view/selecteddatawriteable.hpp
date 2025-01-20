@@ -37,9 +37,11 @@ public: // operate
     virtual void deleteSelectedData() = 0;
 
 public: // get
+    [[nodiscard]]
     virtual bool canReadData(const QMimeData* data) const = 0;
     // reports principle ability to cut selecteed data if there is some, also if currently there is none
     // TODO; does that make sense, or should be changed to also match only if there is selected data?
+    [[nodiscard]]
     virtual bool canCutSelectedData() const = 0;
 
 public: // signal

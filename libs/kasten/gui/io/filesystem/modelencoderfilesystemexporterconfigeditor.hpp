@@ -27,6 +27,7 @@ public:
     ~ModelEncoderFileSystemExporterConfigEditor() override;
 
 public: // AbstractModelExporterConfigEditor API
+    [[nodiscard]]
     bool isValid() const override;
     std::unique_ptr<AbstractSelectionView> createPreviewView() const override;
 

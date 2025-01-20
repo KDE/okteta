@@ -30,8 +30,10 @@ public:
 
 public: // API to be implemented
     /// default returns true
+    [[nodiscard]]
     virtual bool isValid() const;
 
+    [[nodiscard]]
     virtual QString name() const = 0;
 
 Q_SIGNALS:

@@ -35,8 +35,11 @@ public:
     ~AbstractToolInlineView() override;
 
 public: // API to be implemented
+    [[nodiscard]]
     virtual QWidget* widget() const = 0;
+    [[nodiscard]]
     virtual QString title() const = 0;
+    [[nodiscard]]
     virtual AbstractTool* tool() const = 0;
 
 public:

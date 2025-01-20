@@ -41,12 +41,14 @@ public:
     void accept();
     void reject();
 
+    [[nodiscard]]
     int result() const;
 
 public: // QWidget API
     void setVisible(bool visible);
 
 public:
+    [[nodiscard]]
     bool isOrContainsObject(QObject* object) const;
 
 private:

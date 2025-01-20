@@ -31,7 +31,9 @@ public:
     ~ToolViewDockWidget() override;
 
 public:
+    [[nodiscard]]
     AbstractToolView* toolView() const;
+    [[nodiscard]]
     bool isShown() const;
 
 private:

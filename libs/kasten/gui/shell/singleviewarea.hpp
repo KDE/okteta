@@ -35,11 +35,14 @@ public:
 
 public: // AbstractViewArea API
     void setFocus() override;
+    [[nodiscard]]
     QWidget* widget() const override;
+    [[nodiscard]]
     bool hasFocus() const override;
 
 public: // If::ToolInlineViewable API
     void setCurrentToolInlineView(AbstractToolInlineView* view) override;
+    [[nodiscard]]
     AbstractToolInlineView* currentToolInlineView() const override;
 
 public:

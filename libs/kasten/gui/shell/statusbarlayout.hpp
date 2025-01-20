@@ -30,17 +30,24 @@ public:
     void addWidget(QWidget* widget);
 
 public: // QLayout API
+    [[nodiscard]]
     int count() const override;
+    [[nodiscard]]
     QLayoutItem* itemAt(int index) const override;
+    [[nodiscard]]
     int indexOf(QWidget* widget) const override;
 
     void addItem(QLayoutItem* item) override;
     QLayoutItem* takeAt(int index) override;
 
 public: // QLayoutItem API
+    [[nodiscard]]
     Qt::Orientations expandingDirections() const override;
+    [[nodiscard]]
     bool isEmpty() const override;
+    [[nodiscard]]
     QSize sizeHint() const override;
+    [[nodiscard]]
     QSize minimumSize () const override;
 
     void invalidate() override;

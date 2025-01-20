@@ -49,10 +49,13 @@ public:
     void addTool(std::unique_ptr<AbstractTool>&& tool, std::unique_ptr<AbstractToolView>&& toolView);
 
 public: // If::WidgetsDockable API
+    [[nodiscard]]
     QVector<ToolViewDockWidget*> dockWidgets() const override;
 
 protected:
+    [[nodiscard]]
     MultiViewAreas* viewArea() const;
+    [[nodiscard]]
     ViewManager* viewManager() const;
 
 protected:

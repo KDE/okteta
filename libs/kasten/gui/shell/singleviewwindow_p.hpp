@@ -46,10 +46,13 @@ public:
     void addTool(std::unique_ptr<AbstractTool>&& tool, std::unique_ptr<AbstractToolView>&& toolView);
 
 public: // If::WidgetsDockable API
+    [[nodiscard]]
     QVector<ToolViewDockWidget*> dockWidgets() const;
 
 private:
+    [[nodiscard]]
     AbstractView* view() const;
+    [[nodiscard]]
     SingleViewArea* viewArea() const;
 
 private: // Q_SLOTS

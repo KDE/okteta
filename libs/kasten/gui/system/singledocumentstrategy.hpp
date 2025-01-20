@@ -38,11 +38,16 @@ public: // AbstractDocumentStrategy API
     void closeAllOther(AbstractDocument* document) override;
 
 public: // const AbstractDocumentStrategy API
+    [[nodiscard]]
     QVector<AbstractDocument*> documents() const override;
+    [[nodiscard]]
     QStringList supportedRemoteTypes() const override;
 
+    [[nodiscard]]
     bool canClose(AbstractDocument* document) const override;
+    [[nodiscard]]
     bool canCloseAll() const override;
+    [[nodiscard]]
     bool canCloseAllOther(AbstractDocument* document) const override;
 
 private:

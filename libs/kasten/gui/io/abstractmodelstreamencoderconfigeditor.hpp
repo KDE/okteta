@@ -32,6 +32,7 @@ public:
 
 public: // API to be implemented
     /// default returns true
+    [[nodiscard]]
     virtual bool isValid() const;
     /// default returns none
     virtual std::unique_ptr<AbstractSelectionView> createPreviewView() const;

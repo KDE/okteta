@@ -22,9 +22,13 @@ public:
     virtual ~ZoomLevelsQueryable();
 
 public: // get
+    [[nodiscard]]
     virtual int zoomInLevelsSize() const = 0;
+    [[nodiscard]]
     virtual int zoomOutLevelsSize() const = 0;
+    [[nodiscard]]
     virtual double zoomScaleForLevel(int zoomLevel) const = 0;
+    [[nodiscard]]
     virtual int zoomLevelForScale(double zoomScale) const = 0;
 
 public: // signal

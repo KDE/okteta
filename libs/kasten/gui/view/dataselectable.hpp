@@ -32,8 +32,10 @@ public: // set
     virtual void selectAllData(bool selectAll) = 0;
 
 public: // get
+    [[nodiscard]]
     virtual bool hasSelectedData() const = 0;
     virtual std::unique_ptr<QMimeData> copySelectedData() const = 0; // TODO: move into AbstractModelSelection
+    [[nodiscard]]
     virtual const AbstractModelSelection* modelSelection() const = 0;
 
 public: // signal

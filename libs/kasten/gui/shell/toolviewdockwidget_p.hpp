@@ -30,7 +30,9 @@ public:
     void init(ToolViewDockWidget* q);
 
 public:
+    [[nodiscard]]
     AbstractToolView* toolView() const;
+    [[nodiscard]]
     bool isShown() const;
 
 private: // slots

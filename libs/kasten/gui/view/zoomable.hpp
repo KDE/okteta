@@ -27,6 +27,7 @@ public: // set/action
     virtual void setZoomScale(double zoomScale) = 0;
 
 public: // get
+    [[nodiscard]]
     virtual double zoomScale() const = 0;
 
 public: // signal

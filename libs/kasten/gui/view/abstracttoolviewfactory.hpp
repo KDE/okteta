@@ -28,9 +28,13 @@ public: // API to be implemented
     virtual std::unique_ptr<AbstractToolView> create(AbstractTool* tool) const = 0;
 
     // TODO: find out of iconName an id can be QByteArray
+    [[nodiscard]]
     virtual QString iconName() const = 0;
+    [[nodiscard]]
     virtual QString title() const = 0;
+    [[nodiscard]]
     virtual QString id() const = 0;
+    [[nodiscard]]
     virtual SidePosition defaultPosition() const = 0;
 };
 

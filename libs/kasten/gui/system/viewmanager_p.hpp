@@ -33,10 +33,13 @@ public:
     void removeViews(const QVector<AbstractView*>& views);
 
 public:
+    [[nodiscard]]
     QVector<AbstractView*> views() const;
+    [[nodiscard]]
     AbstractView* viewByWidget(QWidget* widget) const;
 
 public:
+    [[nodiscard]]
     ModelCodecViewManager* codecViewManager() const;
 
 public:

@@ -53,13 +53,18 @@ public: // API to be implemented
 public: // const API to be implemented
     /// Returns \c true if there
 //     virtual bool allowsMultipleDocuments() const = 0;
+    [[nodiscard]]
     virtual QVector<AbstractDocument*> documents() const = 0;
+    [[nodiscard]]
     virtual QStringList supportedRemoteTypes() const = 0;
 
     // TODO: what to do for documents not added?
+    [[nodiscard]]
     virtual bool canClose(AbstractDocument* document) const = 0;
 //     virtual bool canClose( const QVector<AbstractDocument*>& documents ) const = 0;
+    [[nodiscard]]
     virtual bool canCloseAll() const = 0;
+    [[nodiscard]]
     virtual bool canCloseAllOther(AbstractDocument* document) const = 0;
 
 Q_SIGNALS:

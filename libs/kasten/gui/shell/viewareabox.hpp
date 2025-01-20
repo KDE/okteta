@@ -35,7 +35,9 @@ public:
     ~ViewAreaBox() override;
 
 public:
+    [[nodiscard]]
     QWidget* centralWidget() const;
+    [[nodiscard]]
     QWidget* bottomToolWidget() const;
 
 public:

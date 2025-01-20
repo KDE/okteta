@@ -29,6 +29,7 @@ public: // actions
     virtual void showErrorReport(UserErrorReport* errorReport) = 0;
 
 public: // get
+    [[nodiscard]]
     virtual bool isErrorReportShown() const = 0;
 
 public: // signal

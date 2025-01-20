@@ -29,6 +29,7 @@ public: // set/action
 //     virtual void setViewFocus( AbstractView *view ) = 0;
 
 public: // get
+    [[nodiscard]]
     virtual QVector<ToolViewDockWidget*> dockWidgets() const = 0;
 
 public: // signal

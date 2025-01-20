@@ -36,7 +36,9 @@ public:
     ShellWindowPrivate& operator=(const ShellWindowPrivate&) = delete;
 
 public:
+    [[nodiscard]]
     MultiViewAreas* viewArea() const;
+    [[nodiscard]]
     ViewManager* viewManager() const;
 
 public:
@@ -46,6 +48,7 @@ public:
     void showDocument(AbstractDocument* document);
 
 public: // If::WidgetsDockable API
+    [[nodiscard]]
     QVector<ToolViewDockWidget*> dockWidgets() const;
 
 private: // Q_SLOTS

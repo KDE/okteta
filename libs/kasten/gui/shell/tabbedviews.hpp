@@ -37,7 +37,9 @@ public:
 
 public: // AbstractViewArea API
     void setFocus() override;
+    [[nodiscard]]
     QWidget* widget() const override;
+    [[nodiscard]]
     bool hasFocus() const override;
 
 public: // AbstractGroupedViews API
@@ -45,15 +47,20 @@ public: // AbstractGroupedViews API
     void removeViews(const QVector<AbstractView*>& views) override;
     void setViewFocus(AbstractView* view) override;
 
+    [[nodiscard]]
     QVector<AbstractView*> viewList() const override;
+    [[nodiscard]]
     int viewCount() const override;
+    [[nodiscard]]
     AbstractView* viewFocus() const override;
 
 public: // If::ToolInlineViewable API
     void setCurrentToolInlineView(AbstractToolInlineView* view) override;
+    [[nodiscard]]
     AbstractToolInlineView* currentToolInlineView() const override;
 
 public:
+    [[nodiscard]]
     int indexOf(AbstractView* view) const;
 
 Q_SIGNALS:

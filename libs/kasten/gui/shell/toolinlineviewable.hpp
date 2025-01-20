@@ -27,6 +27,7 @@ public: // set/action
     virtual void setCurrentToolInlineView(AbstractToolInlineView* view) = 0;
 
 public: // get
+    [[nodiscard]]
     virtual AbstractToolInlineView* currentToolInlineView() const = 0;
 
 public: // signal

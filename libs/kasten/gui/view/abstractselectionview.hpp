@@ -34,7 +34,9 @@ public:
     ~AbstractSelectionView() override;
 
 public: // API to be implemented
+    [[nodiscard]]
     virtual QWidget* widget() const = 0;
+
     virtual void setData(AbstractModel* model, const AbstractModelSelection* selection) = 0;
 
 private:

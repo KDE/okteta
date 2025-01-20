@@ -48,6 +48,7 @@ public:
 
     int exec();
     void open();
+    [[nodiscard]]
     int result() const;
 
 Q_SIGNALS:

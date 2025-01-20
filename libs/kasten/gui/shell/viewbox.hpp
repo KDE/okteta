@@ -32,6 +32,7 @@ public:
     ~ViewBox() override;
 
 public:
+    [[nodiscard]]
     AbstractView* view() const;
 
 public:

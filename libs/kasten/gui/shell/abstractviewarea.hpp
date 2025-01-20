@@ -37,9 +37,11 @@ public:
 public: // API to be implemented
     virtual void setFocus() = 0;
 
+    [[nodiscard]]
     virtual QWidget* widget() const = 0;
 //     virtual QString title() const = 0;
 //     virtual AbstractTool* tool() const = 0;
+    [[nodiscard]]
     virtual bool hasFocus() const = 0;
 
 Q_SIGNALS:

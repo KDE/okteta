@@ -37,8 +37,11 @@ public Q_SLOTS: // set/action API to be implemented
 
 public: // get API to be implemented
     // returns the list in the order of display
+    [[nodiscard]]
     virtual QVector<AbstractView*> viewList() const = 0;
+    [[nodiscard]]
     virtual int viewCount() const = 0;
+    [[nodiscard]]
     virtual AbstractView* viewFocus() const = 0;
 
 Q_SIGNALS:

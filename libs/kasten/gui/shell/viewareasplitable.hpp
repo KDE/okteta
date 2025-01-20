@@ -38,8 +38,10 @@ public: // set/action
     virtual void setViewAreaFocus(AbstractViewArea* viewArea) = 0;
 
 public: // get
+    [[nodiscard]]
     virtual AbstractViewArea* viewAreaFocus() const = 0;
 //     virtual QVector<Kasten::AbstractViewArea*> viewAreas() const = 0;
+    [[nodiscard]]
     virtual int viewAreasCount() const = 0;
 
 public: // signal

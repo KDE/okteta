@@ -31,11 +31,14 @@ public:
 //     KCursorObject *cursor() const;
 
 public: // AbstractModel API
+    [[nodiscard]]
     QString title() const override;
 
 public: // AbstractView API
     void setFocus() override;
+    [[nodiscard]]
     QWidget* widget() const override;
+    [[nodiscard]]
     bool hasFocus() const override;
 
 private Q_SLOTS:
