@@ -74,6 +74,7 @@ private:
     void addController(const Kasten::AbstractXmlGuiControllerFactory& factory);
 
 private:
+    [[nodiscard]]
     Kasten::ByteArrayView* byteArrayView() const;
 
 private Q_SLOTS:
