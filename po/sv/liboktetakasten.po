@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-28 02:06+0000\n"
+"POT-Creation-Date: 2025-01-21 01:53+0000\n"
 "PO-Revision-Date: 2024-11-23 17:13+0100\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -285,19 +285,30 @@ msgctxt "@info:tooltip column contains the character with the value"
 msgid "Character"
 msgstr "Tecken"
 
-#: controllers/view/bytetable/bytetabletool.cpp:33
+#: controllers/view/bytetable/bytetabletool.cpp:37
 #: controllers/view/bytetable/bytetabletoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
 msgid "Value/Char Table"
 msgstr "Värde- eller teckentabell"
 
-#: controllers/view/bytetable/bytetabletool.cpp:87
+#: controllers/view/bytetable/bytetabletool.cpp:91
 #, kde-format
 msgid "Inserted 1 Byte"
 msgid_plural "Inserted %1 Bytes"
 msgstr[0] "Infogade 1 byte"
 msgstr[1] "Infogade %1 byte"
+
+#: controllers/view/bytetable/bytetabletool.cpp:109
+#, fuzzy, kde-format
+#| msgctxt "@info"
+#| msgid "1 byte converted."
+#| msgid_plural "%1 bytes converted."
+msgctxt "@info"
+msgid "1 byte inserted."
+msgid_plural "%1 bytes inserted."
+msgstr[0] "1 byte konverterad."
+msgstr[1] "%1 byte konverterade."
 
 #: controllers/view/bytetable/bytetableview.cpp:74
 #, kde-format
@@ -554,12 +565,20 @@ msgctxt "name of the change"
 msgid "Crop"
 msgstr "Beskär"
 
-#: controllers/view/filter/filtertool.cpp:59
+#: controllers/view/filter/filtertool.cpp:63
 #: controllers/view/filter/filtertoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
 msgid "Binary Filter"
 msgstr "Binärfilter"
+
+#: controllers/view/filter/filtertool.cpp:168
+#, kde-format
+msgctxt "@info"
+msgid "1 byte filtered with %2."
+msgid_plural "%1 bytes filtered with %2."
+msgstr[0] ""
+msgstr[1] ""
 
 #: controllers/view/filter/filterview.cpp:45
 #, kde-format
@@ -1299,14 +1318,15 @@ msgid ""
 msgstr ""
 "Välj om du vill inmatning ska infogas eller skriva över befintlig data."
 
-#: controllers/view/poddecoder/poddecodertool.cpp:90
+#: controllers/view/poddecoder/poddecodertool.cpp:94
 #: controllers/view/poddecoder/poddecodertoolviewfactory.cpp:27
 #, kde-format
 msgctxt "@title:window"
 msgid "Decoding Table"
 msgstr "Avkodningstabell"
 
-#: controllers/view/poddecoder/poddecodertool.cpp:300
+#: controllers/view/poddecoder/poddecodertool.cpp:304
+#: controllers/view/poddecoder/poddecodertool.cpp:313
 #, kde-format
 msgctxt "Edited as %datatype"
 msgid "Edited as %1"

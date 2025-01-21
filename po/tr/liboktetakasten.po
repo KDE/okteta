@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesdk-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-28 02:06+0000\n"
+"POT-Creation-Date: 2025-01-21 01:53+0000\n"
 "PO-Revision-Date: 2024-10-22 08:49+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -284,19 +284,30 @@ msgctxt "@info:tooltip column contains the character with the value"
 msgid "Character"
 msgstr "Karakter"
 
-#: controllers/view/bytetable/bytetabletool.cpp:33
+#: controllers/view/bytetable/bytetabletool.cpp:37
 #: controllers/view/bytetable/bytetabletoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
 msgid "Value/Char Table"
 msgstr "Değer/Karakter Tablosu"
 
-#: controllers/view/bytetable/bytetabletool.cpp:87
+#: controllers/view/bytetable/bytetabletool.cpp:91
 #, kde-format
 msgid "Inserted 1 Byte"
 msgid_plural "Inserted %1 Bytes"
 msgstr[0] "1 bayt eklendi"
 msgstr[1] "%1 bayt eklendi"
+
+#: controllers/view/bytetable/bytetabletool.cpp:109
+#, fuzzy, kde-format
+#| msgctxt "@info"
+#| msgid "1 byte converted."
+#| msgid_plural "%1 bytes converted."
+msgctxt "@info"
+msgid "1 byte inserted."
+msgid_plural "%1 bytes inserted."
+msgstr[0] "1 bayt dönüştürüldü."
+msgstr[1] "%1 bayt dönüştürüldü."
 
 #: controllers/view/bytetable/bytetableview.cpp:74
 #, kde-format
@@ -553,12 +564,20 @@ msgctxt "name of the change"
 msgid "Crop"
 msgstr "Kırp"
 
-#: controllers/view/filter/filtertool.cpp:59
+#: controllers/view/filter/filtertool.cpp:63
 #: controllers/view/filter/filtertoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
 msgid "Binary Filter"
 msgstr "İkilik Süzgeci"
+
+#: controllers/view/filter/filtertool.cpp:168
+#, kde-format
+msgctxt "@info"
+msgid "1 byte filtered with %2."
+msgid_plural "%1 bytes filtered with %2."
+msgstr[0] ""
+msgstr[1] ""
 
 #: controllers/view/filter/filterview.cpp:45
 #, kde-format
@@ -1299,14 +1318,15 @@ msgstr ""
 "Girdinin araya mı yerleştirileceğini yoksa var olan veriyi mi ezeceğini "
 "seçin."
 
-#: controllers/view/poddecoder/poddecodertool.cpp:90
+#: controllers/view/poddecoder/poddecodertool.cpp:94
 #: controllers/view/poddecoder/poddecodertoolviewfactory.cpp:27
 #, kde-format
 msgctxt "@title:window"
 msgid "Decoding Table"
 msgstr "Kod Açma Tablosu"
 
-#: controllers/view/poddecoder/poddecodertool.cpp:300
+#: controllers/view/poddecoder/poddecodertool.cpp:304
+#: controllers/view/poddecoder/poddecodertool.cpp:313
 #, kde-format
 msgctxt "Edited as %datatype"
 msgid "Edited as %1"
