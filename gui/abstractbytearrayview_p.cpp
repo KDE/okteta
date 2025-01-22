@@ -337,17 +337,21 @@ void AbstractByteArrayViewPrivate::changeEvent(QEvent* event)
     q->ColumnsView::changeEvent(event);
 
     if (event->type() == QEvent::FontChange) {
-        // remember current state
-        const int currentScaledPointSize = m_scaledFont.pointSize();
-
-        // set new font to current fontsize
+        // update rendering font to new font, using current scaling
         m_scaledFont = q->font();
         mDefaultFontSize = m_scaledFont.pointSize();
         m_zoomOutLevels = (MinFontPointSize < mDefaultFontSize) ? mDefaultFontSize - MinFontPointSize : 0;
         m_zoomInLevels = (mDefaultFontSize < MaxFontPointSize) ? MaxFontPointSize - mDefaultFontSize : 0;
 
-        m_scaledFont.setPointSize(currentScaledPointSize);
-        m_zoomScale = (double)currentScaledPointSize / mDefaultFontSize;
+        int newPointSize = (int)(m_zoomScale * mDefaultFontSize);
+        if (newPointSize < MinFontPointSize) {
+            newPointSize = MinFontPointSize;
+        } else if (newPointSize > MaxFontPointSize) {
+            newPointSize = MaxFontPointSize;
+        }
+
+        m_scaledFont.setPointSize(newPointSize);
+        m_zoomScale = (double)newPointSize / mDefaultFontSize;
 
         adjustTToScaledFont();
 
