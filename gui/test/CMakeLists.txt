@@ -55,3 +55,19 @@ ecm_add_test(
   TEST_NAME bytearraytablecursortest
   NAME_PREFIX libokteta-gui-
   LINK_LIBRARIES OktetaCore Qt5::Test )
+
+ecm_add_test(
+    abstractbytearrayviewiftest.cpp
+    bytearrayrowviewabstractbytearrayviewiftest.cpp
+    TEST_NAME bytearrayrowviewabstractbytearrayviewiftest
+    NAME_PREFIX libokteta-gui-
+    LINK_LIBRARIES OktetaGui Qt5::Test
+)
+
+ecm_add_test(
+    abstractbytearrayviewiftest.cpp
+    bytearraycolumnviewabstractbytearrayviewiftest.cpp
+    TEST_NAME bytearraycolumnviewabstractbytearrayviewiftest
+    NAME_PREFIX libokteta-gui-
+    LINK_LIBRARIES OktetaGui Qt5::Test
+)
