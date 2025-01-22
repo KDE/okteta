@@ -18,6 +18,7 @@
 #include "controller/valueeditor.hpp"
 #include "controller/tabcontroller.hpp"
 #include "offsetcolumnrenderer.hpp"
+#include "fontscalingzoomstate.hpp"
 // Okteta core
 #include <Okteta/AbstractByteArrayModel>
 #include <Okteta/CharCodec>
@@ -197,6 +198,9 @@ protected:
     void adaptController();
     void cancelByteEditor();
     void finishByteEditor();
+
+protected:
+    const QFont& renderingFont() const;
     void initPainterFromWidget(QPainter* painter) const;
 
 protected:
@@ -294,8 +298,6 @@ protected:
     /** object to store the blinking cursor pixmaps */
     Cursor* mCursorPixmaps;
 
-    QFont m_scaledFont;
-
 protected:
     /** flag whether the widget is set to readonly. Cannot override the databuffer's setting, of course. */
     bool mReadOnly : 1;
@@ -310,12 +312,6 @@ protected:
     /** flag if the cursor is visible */
     bool mCursorVisible : 1;
 
-    /** font size as set by user (used for zooming) */
-    int mDefaultFontSize;
-    double m_zoomScale = 1.0;
-    int m_zoomInLevels = 0;
-    int m_zoomOutLevels = 0;
-
     // parameters
     /** */
     ValueCodec* mValueCodec;
@@ -329,6 +325,9 @@ protected:
     AbstractByteArrayView::LayoutStyle mResizeStyle;
 
 private:
+    FontScalingZoomState m_fontScalingZoomState;
+
+private:
     Q_DECLARE_PUBLIC(AbstractByteArrayView)
 };
 
@@ -340,9 +339,9 @@ inline bool AbstractByteArrayViewPrivate::isOverwriteMode() const { return mOver
 inline bool AbstractByteArrayViewPrivate::isOverwriteOnly() const { return mOverWriteOnly; }
 inline bool AbstractByteArrayViewPrivate::isViewReadOnly()      const { return mReadOnly; }
 inline bool AbstractByteArrayViewPrivate::isEffectiveReadOnly() const { return mReadOnly || mByteArrayModel->isReadOnly(); }
-inline double AbstractByteArrayViewPrivate::zoomScale()         const { return m_zoomScale; }
-inline int AbstractByteArrayViewPrivate::zoomInLevelsSize()     const { return m_zoomInLevels; }
-inline int AbstractByteArrayViewPrivate::zoomOutLevelsSize()    const { return m_zoomOutLevels; }
+inline double AbstractByteArrayViewPrivate::zoomScale()         const { return m_fontScalingZoomState.scale(); }
+inline int AbstractByteArrayViewPrivate::zoomInLevelsSize()     const { return m_fontScalingZoomState.inLevelsSize(); }
+inline int AbstractByteArrayViewPrivate::zoomOutLevelsSize()    const { return m_fontScalingZoomState.outLevelsSize(); }
 
 inline ByteArrayTableLayout* AbstractByteArrayViewPrivate::layout()      const { return mTableLayout; }
 inline ByteArrayTableCursor* AbstractByteArrayViewPrivate::tableCursor() const { return mTableCursor; }
@@ -387,6 +386,12 @@ inline void AbstractByteArrayViewPrivate::finishByteEditor()
 {
     mValueEditor->finishEdit();
 }
+
+inline const QFont& AbstractByteArrayViewPrivate::renderingFont() const
+{
+    return m_fontScalingZoomState.font();
+}
+
 inline void AbstractByteArrayViewPrivate::setTabChangesFocus(bool tabChangesFocus)
 {
     mTabController->setTabChangesFocus(tabChangesFocus);

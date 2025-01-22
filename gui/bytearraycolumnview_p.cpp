@@ -272,7 +272,7 @@ void ByteArrayColumnViewPrivate::adjustTToScaledFont()
     Q_Q(ByteArrayColumnView);
 
     // get new values
-    const QFontMetrics newFontMetrics(m_scaledFont);
+    const QFontMetrics newFontMetrics(renderingFont());
     const PixelY digitHeight = newFontMetrics.height();
 
     mOffsetColumn->setFontMetrics(newFontMetrics);
@@ -706,7 +706,7 @@ void ByteArrayColumnViewPrivate::renderColumns(QPainter* painter, int cx, int cy
     Q_Q(ByteArrayColumnView);
 
     // TODO: consider moving font zooming into ColumnsView
-    painter->setFont(m_scaledFont);
+    painter->setFont(renderingFont());
 
     q->AbstractByteArrayView::renderColumns(painter, cx, cy, cw, ch);
     // TODO: update non blinking cursors. Should this perhaps be done in the buffercolumn?
