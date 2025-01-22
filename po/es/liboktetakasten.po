@@ -2,8 +2,8 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# SPDX-FileCopyrightText: 2024 Sofía Priego <spriego@darksylvania.net>
-# SPDX-FileCopyrightText: 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2018, 2019, 2020, 2022, 2023, 2024 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2024, 2025 Sofía Priego <spriego@darksylvania.net>
+# SPDX-FileCopyrightText: 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2018, 2019, 2020, 2022, 2023, 2024, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 # SPDX-FileCopyrightText: 2011 Ricardo Varas Santana <ricardoivaras@gmail.com>
 # SPDX-FileCopyrightText: 2013 Javier Viñal <fjvinal@gmail.com>
 msgid ""
@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-21 01:53+0000\n"
-"PO-Revision-Date: 2024-10-22 12:33+0100\n"
+"PO-Revision-Date: 2025-01-21 22:40+0100\n"
 "Last-Translator: Sofía Priego <spriego@darksylvania.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.08.2\n"
+"X-Generator: Lokalize 24.12.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -304,15 +304,12 @@ msgstr[0] "1 byte insertado"
 msgstr[1] "%1 bytes insertados"
 
 #: controllers/view/bytetable/bytetabletool.cpp:109
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "1 byte converted."
-#| msgid_plural "%1 bytes converted."
+#, kde-format
 msgctxt "@info"
 msgid "1 byte inserted."
 msgid_plural "%1 bytes inserted."
-msgstr[0] "1 byte convertido."
-msgstr[1] "%1 bytes convertidos."
+msgstr[0] "1 byte insertado."
+msgstr[1] "%1 bytes insertados."
 
 #: controllers/view/bytetable/bytetableview.cpp:74
 #, kde-format
@@ -588,8 +585,8 @@ msgstr "Filtro binario"
 msgctxt "@info"
 msgid "1 byte filtered with %2."
 msgid_plural "%1 bytes filtered with %2."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "1 byte filtrado con %2."
+msgstr[1] "%1 bytes filtrados con %2."
 
 #: controllers/view/filter/filterview.cpp:45
 #, kde-format

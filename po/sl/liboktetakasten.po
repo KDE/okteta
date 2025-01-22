@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-21 01:53+0000\n"
-"PO-Revision-Date: 2024-10-22 06:28+0200\n"
+"PO-Revision-Date: 2025-01-21 07:27+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -301,17 +301,14 @@ msgstr[2] "Vstavljeni %1 bajti"
 msgstr[3] "Vstavljenih %1 bajtov"
 
 #: controllers/view/bytetable/bytetabletool.cpp:109
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "1 byte converted."
-#| msgid_plural "%1 bytes converted."
+#, kde-format
 msgctxt "@info"
 msgid "1 byte inserted."
 msgid_plural "%1 bytes inserted."
-msgstr[0] "Pretvorjenih %1 bajtov."
-msgstr[1] "Pretvorjen %1 bajt."
-msgstr[2] "Pretvorjena %1 bajta."
-msgstr[3] "Pretvorjeni %1 bajti."
+msgstr[0] "Vstavljenih %1 bajtov."
+msgstr[1] "Vstavljen %1 bajt."
+msgstr[2] "Vstavljena %1 bajta."
+msgstr[3] "Vstavljeni %1 bajti."
 
 #: controllers/view/bytetable/bytetableview.cpp:74
 #, kde-format
@@ -581,10 +578,10 @@ msgstr "Dvojiški filter"
 msgctxt "@info"
 msgid "1 byte filtered with %2."
 msgid_plural "%1 bytes filtered with %2."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1 bajtov filtriranih z %2."
+msgstr[1] "%1 bajt filtriran z %2."
+msgstr[2] "%1 bajta filtrirana z %2."
+msgstr[3] "%1 bajti filtrirani z %2."
 
 #: controllers/view/filter/filterview.cpp:45
 #, kde-format

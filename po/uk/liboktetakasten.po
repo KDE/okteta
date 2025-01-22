@@ -3,13 +3,13 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2018, 2019, 2020, 2022, 2023, 2024.
+# Yuri Chornoivan <yurchor@ukr.net>, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2018, 2019, 2020, 2022, 2023, 2024, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-21 01:53+0000\n"
-"PO-Revision-Date: 2024-10-22 17:23+0300\n"
+"PO-Revision-Date: 2025-01-21 14:37+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -305,17 +305,14 @@ msgstr[2] "Вставлено %1 байтів"
 msgstr[3] "Вставлено %1 байт"
 
 #: controllers/view/bytetable/bytetabletool.cpp:109
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "1 byte converted."
-#| msgid_plural "%1 bytes converted."
+#, kde-format
 msgctxt "@info"
 msgid "1 byte inserted."
 msgid_plural "%1 bytes inserted."
-msgstr[0] "Перетворено %1 байт."
-msgstr[1] "Перетворено %1 байти."
-msgstr[2] "Перетворено %1 байтів."
-msgstr[3] "Перетворено один байт."
+msgstr[0] "Вставлено %1 байт."
+msgstr[1] "Вставлено %1 байт."
+msgstr[2] "Вставлено %1 байт."
+msgstr[3] "Вставлено %1 байт."
 
 #: controllers/view/bytetable/bytetableview.cpp:74
 #, kde-format
@@ -590,10 +587,10 @@ msgstr "Двійковий фільтр"
 msgctxt "@info"
 msgid "1 byte filtered with %2."
 msgid_plural "%1 bytes filtered with %2."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Відфільтровано %1 байт за допомогою %2."
+msgstr[1] "Відфільтровано %1 байт за допомогою %2."
+msgstr[2] "Відфільтровано %1 байт за допомогою %2."
+msgstr[3] "Відфільтровано %1 байт за допомогою %2."
 
 #: controllers/view/filter/filterview.cpp:45
 #, kde-format

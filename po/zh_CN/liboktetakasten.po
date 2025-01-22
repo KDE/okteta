@@ -291,14 +291,11 @@ msgid_plural "Inserted %1 Bytes"
 msgstr[0] "插入了 %1 字节"
 
 #: controllers/view/bytetable/bytetabletool.cpp:109
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "1 byte converted."
-#| msgid_plural "%1 bytes converted."
+#, kde-format
 msgctxt "@info"
 msgid "1 byte inserted."
 msgid_plural "%1 bytes inserted."
-msgstr[0] "已转换 %1 字节。"
+msgstr[0] ""
 
 #: controllers/view/bytetable/bytetableview.cpp:74
 #, kde-format

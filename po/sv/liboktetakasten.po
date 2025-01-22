@@ -2,21 +2,21 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# SPDX-FileCopyrightText: 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2018, 2019, 2020, 2023, 2024 Stefan Asserhäll <stefan.asserhall@gmail.com>
+# SPDX-FileCopyrightText: 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2018, 2019, 2020, 2023, 2024, 2025 Stefan Asserhäll <stefan.asserhall@gmail.com>
 # Arve Eriksson <031299870@telia.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-21 01:53+0000\n"
-"PO-Revision-Date: 2024-11-23 17:13+0100\n"
+"PO-Revision-Date: 2025-01-21 20:28+0100\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.08.3\n"
+"X-Generator: Lokalize 24.12.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -300,15 +300,12 @@ msgstr[0] "Infogade 1 byte"
 msgstr[1] "Infogade %1 byte"
 
 #: controllers/view/bytetable/bytetabletool.cpp:109
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "1 byte converted."
-#| msgid_plural "%1 bytes converted."
+#, kde-format
 msgctxt "@info"
 msgid "1 byte inserted."
 msgid_plural "%1 bytes inserted."
-msgstr[0] "1 byte konverterad."
-msgstr[1] "%1 byte konverterade."
+msgstr[0] "1 byte infogad."
+msgstr[1] "%1 byte infogade."
 
 #: controllers/view/bytetable/bytetableview.cpp:74
 #, kde-format
@@ -577,8 +574,8 @@ msgstr "Binärfilter"
 msgctxt "@info"
 msgid "1 byte filtered with %2."
 msgid_plural "%1 bytes filtered with %2."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "1 byte filtrerad med %2."
+msgstr[1] "%1 byte filtrerade med %2."
 
 #: controllers/view/filter/filterview.cpp:45
 #, kde-format
