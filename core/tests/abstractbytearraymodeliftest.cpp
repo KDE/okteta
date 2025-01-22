@@ -42,9 +42,9 @@ void AbstractByteArrayModelIfTest::init()
 
 void AbstractByteArrayModelIfTest::cleanup()
 {
-    deleteByteArrayModel(std::move(mByteArrayModel));
-
     ContentsChangeListSpy.reset();
+
+    deleteByteArrayModel(std::move(mByteArrayModel));
 }
 
 void AbstractByteArrayModelIfTest::clearSignalSpys()

@@ -37,11 +37,11 @@ void VersionableIfTest::init()
 
 void VersionableIfTest::cleanup()
 {
-    deleteVersionable(std::move(mObject));
-
     mRevertedToVersionIndexSpy.reset();
     mHeadVersionDescriptionChangedSpy.reset();
     mHeadVersionChangedSpy.reset();
+
+    deleteVersionable(std::move(mObject));
 }
 
 void VersionableIfTest::clearSignalSpys()

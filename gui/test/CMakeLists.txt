@@ -57,3 +57,27 @@ ecm_add_test(
     NAME_PREFIX libokteta-gui-
     LINK_LIBRARIES OktetaCore Qt5::Test
 )
+
+ecm_add_test(
+    ${SUTDIR}/fontscalingzoomstate.cpp
+    fontscalingzoomstatetest.cpp
+    TEST_NAME fontscalingzoomstatetest
+    NAME_PREFIX libokteta-gui-
+    LINK_LIBRARIES Qt5::Gui Qt5::Test
+)
+
+ecm_add_test(
+    abstractbytearrayviewiftest.cpp
+    bytearrayrowviewabstractbytearrayviewiftest.cpp
+    TEST_NAME bytearrayrowviewabstractbytearrayviewiftest
+    NAME_PREFIX libokteta-gui-
+    LINK_LIBRARIES OktetaGui Qt5::Test
+)
+
+ecm_add_test(
+    abstractbytearrayviewiftest.cpp
+    bytearraycolumnviewabstractbytearrayviewiftest.cpp
+    TEST_NAME bytearraycolumnviewabstractbytearrayviewiftest
+    NAME_PREFIX libokteta-gui-
+    LINK_LIBRARIES OktetaGui Qt5::Test
+)

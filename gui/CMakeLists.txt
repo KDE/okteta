@@ -102,6 +102,7 @@ okteta_add_sublibrary(Gui  NAMESPACE Okteta
     PRIVATE
         ByteArrayTableCursor
         Cursor
+        FontScalingZoomState
 )
 
 okteta_add_cmakeconfig(Gui NAMESPACE Okteta
