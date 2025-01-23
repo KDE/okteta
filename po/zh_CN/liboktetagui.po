@@ -57,7 +57,7 @@ msgstr "恢复(&D)"
 #, kde-format
 msgctxt "name of the change"
 msgid "Insert"
-msgstr "Insert"
+msgstr "插入"
 
 #: controller/valueeditor.cpp:200
 #, kde-format

@@ -21,7 +21,7 @@ msgstr ""
 #, kde-format
 msgctxt "name of the change"
 msgid "Insert"
-msgstr "Insert"
+msgstr "插入"
 
 #: piecetable/removepiecetablechange.cpp:24
 #, kde-format

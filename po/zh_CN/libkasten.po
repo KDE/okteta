@@ -148,7 +148,7 @@ msgstr "文件"
 #, kde-format
 msgctxt "@info"
 msgid "No documents"
-msgstr ""
+msgstr "没有文档"
 
 #: controllers/documentsystem/filesystembrowser/filesystembrowsertool.cpp:32
 #: controllers/documentsystem/filesystembrowser/filesystembrowsertoolviewfactory.cpp:24

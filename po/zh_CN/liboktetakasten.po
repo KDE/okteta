@@ -143,7 +143,7 @@ msgstr "书签"
 #, kde-format
 msgctxt "@info"
 msgid "No bookmarks"
-msgstr ""
+msgstr "没有书签"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:87
 #, kde-format
@@ -295,7 +295,7 @@ msgstr[0] "插入了 %1 字节"
 msgctxt "@info"
 msgid "1 byte inserted."
 msgid_plural "%1 bytes inserted."
-msgstr[0] ""
+msgstr[0] "已插入 %1 字节。"
 
 #: controllers/view/bytetable/bytetableview.cpp:74
 #, kde-format
@@ -522,19 +522,19 @@ msgstr ""
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "No checksum calculated yet."
-msgstr ""
+msgstr "尚未计算校验和。"
 
 #: controllers/view/crop/cropcontroller.cpp:33
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Crop"
-msgstr ""
+msgstr "裁剪"
 
 #: controllers/view/crop/cropcontroller.cpp:91
 #, kde-format
 msgctxt "name of the change"
 msgid "Crop"
-msgstr ""
+msgstr "裁剪"
 
 #: controllers/view/filter/filtertool.cpp:63
 #: controllers/view/filter/filtertoolviewfactory.cpp:24
@@ -548,7 +548,7 @@ msgstr "二进制过滤器"
 msgctxt "@info"
 msgid "1 byte filtered with %2."
 msgid_plural "%1 bytes filtered with %2."
-msgstr[0] ""
+msgstr[0] "使用 %2 过滤了 %1 字节。"
 
 #: controllers/view/filter/filterview.cpp:45
 #, kde-format
@@ -595,7 +595,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Go to Offset…"
-msgstr ""
+msgstr "跳转到偏移量(&G)…"
 
 #: controllers/view/gotooffset/gotooffsettool.cpp:50
 #, kde-format
@@ -863,7 +863,7 @@ msgstr "用于将字节解码为整数值的字节顺序。"
 #, kde-format
 msgctxt "@info"
 msgid "No parameters"
-msgstr ""
+msgstr "没有参数"
 
 #: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:48
 #, kde-format
@@ -1578,7 +1578,7 @@ msgstr "查找"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Select Range…"
-msgstr ""
+msgstr "选择范围(&S)…"
 
 #: controllers/view/selectrange/selectrangetool.cpp:61
 #, kde-format
@@ -1690,7 +1690,7 @@ msgstr "输入列表限制条件。"
 #, kde-format
 msgctxt "@info"
 msgid "No strings"
-msgstr ""
+msgstr "没有字符串"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:161
 #, kde-format
@@ -1733,14 +1733,14 @@ msgstr ""
 #, kde-format
 msgctxt "@info"
 msgid "No strings extracted."
-msgstr ""
+msgstr "没有提取到字符串。"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:280
 #, kde-format
 msgctxt "@info"
 msgid "1 string extracted."
 msgid_plural "%1 strings extracted."
-msgstr[0] ""
+msgstr[0] "提取了 %1 条字符串。"
 
 #: controllers/view/structures/datatypes/array/complexarraydata.cpp:98
 #, kde-format
@@ -2186,13 +2186,13 @@ msgstr "关于"
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Structures…"
-msgstr ""
+msgstr "获取新结构…"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:52
 #, kde-format
 msgctxt "@action:button"
 msgid "Advanced Selection…"
-msgstr ""
+msgstr "高级选择…"
 
 #: controllers/view/structures/settings/structuresselectiondialog.cpp:28
 #, kde-format
@@ -2214,7 +2214,7 @@ msgstr "结构定义"
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Search…"
-msgstr ""
+msgstr "搜索…"
 
 #. i18n: ectx: tooltip, entry (UnsignedDisplayBase), group (ValueDisplay)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:9
@@ -2428,7 +2428,7 @@ msgstr "大小"
 #, kde-format
 msgctxt "@info"
 msgid "No structure definitions"
-msgstr ""
+msgstr "没有结构定义"
 
 #: controllers/view/structures/structureview.cpp:111
 #, kde-format
@@ -2612,13 +2612,13 @@ msgstr "显示不可打印字符(&N)"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Set Bytes per Line…"
-msgstr ""
+msgstr "设置每行字节数…"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:82
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Set Bytes per Group…"
-msgstr ""
+msgstr "设置每组字节数…"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:88
 #, kde-format
@@ -2700,13 +2700,13 @@ msgstr "行(&R)"
 #, kde-format
 msgctxt "@title:menu submenu to select the view profile or change it"
 msgid "View Profile"
-msgstr "查看模式"
+msgstr "视图配置方案"
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:43
 #, kde-format
 msgctxt "@action:inmenu create a new view profile"
 msgid "Create New…"
-msgstr ""
+msgstr "新建…"
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:50
 #, kde-format
@@ -2725,7 +2725,7 @@ msgstr "重置更改"
 #, kde-format
 msgctxt "@window:title"
 msgid "New View Profile"
-msgstr "新建查看模式"
+msgstr "新建视图配置方案"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:55
 #, kde-format
@@ -2901,25 +2901,25 @@ msgstr "用于显示未定义字节的字符："
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage View Profiles…"
-msgstr ""
+msgstr "管理视图配置方案…"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:36
 #, kde-format
 msgctxt "@title:window"
 msgid "View Profiles"
-msgstr "查看模式"
+msgstr "视图配置方案"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:63
 #, kde-format
 msgctxt "@action:button"
 msgid "&Create New…"
-msgstr ""
+msgstr "新建(&C)…"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:66
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Opens an editor for a new view profile."
-msgstr "用新建查看模式打开编辑器。"
+msgstr "打开编辑器以创建新的视图配置方案。"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:68
 #, kde-kuit-format
@@ -2929,18 +2929,20 @@ msgid ""
 "opened where you can create and edit a new view profile. The values will be "
 "based on the ones of the view profile you selected in the list."
 msgstr ""
+"如果您按下<interface>新建…</interface>按钮，程序打开编辑器让您创建和编辑新的"
+"视图配置方案，它的值将基于您在列表中选择的视图配置方案。"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:77
 #, kde-format
 msgctxt "@action:button"
 msgid "&Edit…"
-msgstr ""
+msgstr "编辑(&E)…"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:80
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Opens an editor for the view profile."
-msgstr "用查看模式打开编辑器。"
+msgstr "打开编辑器以编辑此视图配置方案。"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:82
 #, kde-kuit-format
@@ -2949,6 +2951,8 @@ msgid ""
 "If you press the <interface>Edit…</interface> button, an editor will be "
 "opened for the view profile you selected in the list."
 msgstr ""
+"如果您按下<interface>复制…</interface>按钮，您选中的所有字符串将被复制到剪贴"
+"板。"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:90
 #, kde-format
@@ -2960,7 +2964,7 @@ msgstr "设为默认(&S)"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets the selected view profile as default for all views."
-msgstr "将所选查看模式设定为默认查看模式。"
+msgstr "将所选视图配置方案设置为所有视图的默认方案。"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:95
 #, kde-kuit-format
@@ -2969,8 +2973,8 @@ msgid ""
 "If you press the <interface>Set as Default</interface> button, the view "
 "profile you selected in the list is set as default for all views."
 msgstr ""
-"如果您按下<interface>设为默认</interface>按钮，您列表中所选的查看模式将设定为"
-"默认查看模式。"
+"如果您按下<interface>设为默认</interface>按钮，您在列表中选择的视图配置方案将"
+"被设置为所有视图的默认方案。"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:102
 #, kde-format
@@ -2982,7 +2986,7 @@ msgstr "删除(&D)"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Deletes the selected view profile."
-msgstr "删除选中的查看模式。"
+msgstr "删除选中的视图配置方案。"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:107
 #, kde-kuit-format
@@ -2991,7 +2995,8 @@ msgid ""
 "If you press the <interface>Delete</interface> button, the view profile you "
 "selected in the list is deleted."
 msgstr ""
-"如果您按下<interface>删除</interface>按钮，将删除您列表中所选的查看模式。"
+"如果您按下<interface>删除</interface>按钮，将删除您在列表中选择的视图配置方"
+"案。"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:174
 #, kde-format
@@ -3002,7 +3007,7 @@ msgstr "%1 的更改"
 #, kde-format
 msgctxt "@window:title"
 msgid "\"%1\" View Profile"
-msgstr "“%1”查看模式"
+msgstr "“%1”视图配置方案"
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:39
 #, kde-format
@@ -3124,7 +3129,7 @@ msgstr "尚未实现加载超过 2 GiB 的文件支持。"
 #, kde-format
 msgctxt "name of the generated data"
 msgid "Pattern…"
-msgstr ""
+msgstr "模式…"
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:148
 #, kde-format
@@ -3166,7 +3171,7 @@ msgstr "表达式"
 #, kde-format
 msgctxt "name of the generated data"
 msgid "Random Data…"
-msgstr ""
+msgstr "随机数据…"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:88
 #, kde-format

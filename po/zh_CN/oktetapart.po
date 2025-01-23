@@ -36,7 +36,7 @@ msgstr "编辑(&E)"
 #: oktetapartreadwriteui.rc:41
 #, kde-format
 msgid "&View"
-msgstr "查看(&V)"
+msgstr "视图(&V)"
 
 #. i18n: ectx: ToolBar (mainToolBar)
 #: oktetapartbrowserui.rc:43 oktetapartreadonlyui.rc:47
