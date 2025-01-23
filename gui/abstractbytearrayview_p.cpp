@@ -1080,6 +1080,15 @@ void AbstractByteArrayViewPrivate::mouseDoubleClickEvent(QMouseEvent* mouseEvent
     }
 }
 
+void AbstractByteArrayViewPrivate::wheelEvent(QWheelEvent* wheelEvent)
+{
+    Q_Q(AbstractByteArrayView);
+
+    if (!wheelController()->handleWheelEvent(wheelEvent)) {
+        q->ColumnsView::wheelEvent(wheelEvent);
+    }
+}
+
 bool AbstractByteArrayViewPrivate::event(QEvent* event)
 {
     Q_Q(AbstractByteArrayView);

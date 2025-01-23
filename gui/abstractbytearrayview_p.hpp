@@ -183,6 +183,7 @@ public: // events
     void mouseReleaseEvent(QMouseEvent* mouseReleaseEvent);
     void mouseMoveEvent(QMouseEvent* mouseMoveEvent);
     void mouseDoubleClickEvent(QMouseEvent* mouseDoubleClickEvent);
+    void wheelEvent(QWheelEvent* wheelEvent);
 
 public: // slots
     void onContentsChanged(const ArrayChangeMetricsList& changeList);

@@ -10,7 +10,6 @@
 #include "abstractbytearrayview_p.hpp"
 
 // lib
-#include "controller/abstractwheelcontroller.hpp"
 #include "bytearraytablelayout.hpp"
 
 namespace Okteta {
@@ -591,9 +590,7 @@ void AbstractByteArrayView::mouseDoubleClickEvent(QMouseEvent* mouseEvent)
 void AbstractByteArrayView::wheelEvent(QWheelEvent* wheelEvent)
 {
     Q_D(AbstractByteArrayView);
-    if (!d->wheelController()->handleWheelEvent(wheelEvent)) {
-        ColumnsView::wheelEvent(wheelEvent);
-    }
+    d->wheelEvent(wheelEvent);
 }
 
 void AbstractByteArrayView::dragEnterEvent(QDragEnterEvent* dragEnterEvent)
