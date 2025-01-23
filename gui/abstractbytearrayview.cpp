@@ -10,7 +10,6 @@
 #include "abstractbytearrayview_p.hpp"
 
 // lib
-#include "controller/abstractcontroller.hpp"
 #include "controller/abstractwheelcontroller.hpp"
 #include "bytearraytablelayout.hpp"
 
@@ -561,9 +560,7 @@ void AbstractByteArrayView::focusOutEvent(QFocusEvent* focusEvent)
 void AbstractByteArrayView::keyPressEvent(QKeyEvent* keyEvent)
 {
     Q_D(AbstractByteArrayView);
-    if (!d->controller()->handleKeyPress(keyEvent)) {
-        ColumnsView::keyPressEvent(keyEvent);
-    }
+    d->keyPressEvent(keyEvent);
 }
 
 void AbstractByteArrayView::mousePressEvent(QMouseEvent* mouseEvent)

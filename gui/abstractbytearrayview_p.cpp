@@ -1026,6 +1026,15 @@ QMenu* AbstractByteArrayViewPrivate::createStandardContextMenu(QPoint position)
     return menu;
 }
 
+void AbstractByteArrayViewPrivate::keyPressEvent(QKeyEvent* keyEvent)
+{
+    Q_Q(AbstractByteArrayView);
+
+    if (!controller()->handleKeyPress(keyEvent)) {
+        q->ColumnsView::keyPressEvent(keyEvent);
+    }
+}
+
 void AbstractByteArrayViewPrivate::mousePressEvent(QMouseEvent* mouseEvent)
 {
     Q_Q(AbstractByteArrayView);

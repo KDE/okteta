@@ -178,6 +178,7 @@ public: // events
     void timerEvent(QTimerEvent* timerEvent);
     bool viewportEvent(QEvent* event);
 
+    void keyPressEvent(QKeyEvent* keyEvent);
     void mousePressEvent(QMouseEvent* mousePressEvent);
     void mouseReleaseEvent(QMouseEvent* mouseReleaseEvent);
     void mouseMoveEvent(QMouseEvent* mouseMoveEvent);
