@@ -9,7 +9,7 @@
 # Simon Depiets <sdepiets@gmail.com>, 2018, 2019.
 # Vincent Pinon <vpinon@kde.org>, 2019.
 # Johnny Jazeix <jazeix@gmail.com>, 2020.
-# SPDX-FileCopyrightText: 2021, 2022, 2023, 2024 Xavier Besnard <xavier.besnard@kde.org>
+# SPDX-FileCopyrightText: 2021, 2022, 2023, 2024, 2025 Xavier Besnard <xavier.besnard@kde.org>
 # Xavier Besnard <xavier.besnard@kde.org>, 2023.
 #
 msgid ""
@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-21 01:53+0000\n"
-"PO-Revision-Date: 2024-10-23 11:19+0200\n"
+"PO-Revision-Date: 2025-01-22 09:23+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -27,7 +27,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Accelerator-Marker: &\n"
 "X-Environment: kde\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.12.1\n"
 "X-Text-Markup: kde4\n"
 
 #, kde-format
@@ -313,15 +313,12 @@ msgstr[0] "Un octet inséré"
 msgstr[1] "%1 octets insérés"
 
 #: controllers/view/bytetable/bytetabletool.cpp:109
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "1 byte converted."
-#| msgid_plural "%1 bytes converted."
+#, kde-format
 msgctxt "@info"
 msgid "1 byte inserted."
 msgid_plural "%1 bytes inserted."
-msgstr[0] "Un octet converti."
-msgstr[1] "%1 octets convertis."
+msgstr[0] "Un octet inséré."
+msgstr[1] "%1 octets insérés."
 
 #: controllers/view/bytetable/bytetableview.cpp:74
 #, kde-format
@@ -598,8 +595,8 @@ msgstr "Filtre binaire"
 msgctxt "@info"
 msgid "1 byte filtered with %2."
 msgid_plural "%1 bytes filtered with %2."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Un octet filtré avec %2."
+msgstr[1] "%1 octets filtrés avec %2."
 
 #: controllers/view/filter/filterview.cpp:45
 #, kde-format
