@@ -232,10 +232,12 @@ public: // events
     [[nodiscard]]
     bool viewportEvent(QEvent* event);
 
+    void keyPressEvent(QKeyEvent* keyEvent);
     void mousePressEvent(QMouseEvent* mousePressEvent);
     void mouseReleaseEvent(QMouseEvent* mouseReleaseEvent);
     void mouseMoveEvent(QMouseEvent* mouseMoveEvent);
     void mouseDoubleClickEvent(QMouseEvent* mouseDoubleClickEvent);
+    void wheelEvent(QWheelEvent* wheelEvent);
 
 public: // slots
     void onContentsChanged(const ArrayChangeMetricsList& changeList);
@@ -380,6 +382,8 @@ protected:
     bool mBlinkCursorVisible : 1;
     /** flag if the cursor is visible */
     bool mCursorVisible : 1;
+    /** flag if the current focus was received by a mouse click */
+    bool m_wasFocussedByMouseClick : 1;
 
     // parameters
     /** */

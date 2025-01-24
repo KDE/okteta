@@ -32,7 +32,9 @@
 #include <QGestureEvent>
 #include <QTapGesture>
 #include <QPinchGesture>
+#include <QStyle>
 #include <QStyleHints>
+#include <QInputMethod>
 #include <QApplication>
 #include <QToolTip>
 #include <QMimeData>
@@ -144,6 +146,7 @@ AbstractByteArrayViewPrivate::AbstractByteArrayViewPrivate(AbstractByteArrayView
     , mCursorPaused(false)
     , mBlinkCursorVisible(false)
     , mCursorVisible(false)
+    , m_wasFocussedByMouseClick(false)
     , mResizeStyle(DefaultResizeStyle)
 {
 }
@@ -184,6 +187,9 @@ void AbstractByteArrayViewPrivate::init()
     mCharCodec = CharCodec::createCodec(DefaultCharCoding());
 
     mWheelController = &mZoomWheelController;
+
+    q->setAttribute(Qt::WA_InputMethodEnabled);
+    q->setInputMethodHints(Qt::ImhNoAutoUppercase | Qt::ImhNoPredictiveText);
 
     QObject::connect(QGuiApplication::styleHints(), &QStyleHints::cursorFlashTimeChanged,
                      q, [this](int flashTime) { onCursorFlashTimeChanged(flashTime); });
@@ -977,6 +983,15 @@ QMenu* AbstractByteArrayViewPrivate::createStandardContextMenu(QPoint position)
     return menu;
 }
 
+void AbstractByteArrayViewPrivate::keyPressEvent(QKeyEvent* keyEvent)
+{
+    Q_Q(AbstractByteArrayView);
+
+    if (!controller()->handleKeyPress(keyEvent)) {
+        q->QAbstractScrollArea::keyPressEvent(keyEvent);
+    }
+}
+
 void AbstractByteArrayViewPrivate::mousePressEvent(QMouseEvent* mousePressEvent)
 {
     Q_Q(AbstractByteArrayView);
@@ -999,6 +1014,14 @@ void AbstractByteArrayViewPrivate::mouseMoveEvent(QMouseEvent* mouseMoveEvent)
     }
 }
 
+[[nodiscard]]
+bool isStyleRequestingSoftwareInputPanelOnMouseClick(QWidget* widget)
+{
+    const QStyle::RequestSoftwareInputPanel behavior = QStyle::RequestSoftwareInputPanel(
+                    widget->style()->styleHint(QStyle::SH_RequestSoftwareInputPanel));
+    return (behavior == QStyle::RSIP_OnMouseClick);
+}
+
 void AbstractByteArrayViewPrivate::mouseReleaseEvent(QMouseEvent* mouseReleaseEvent)
 {
     Q_Q(AbstractByteArrayView);
@@ -1008,6 +1031,16 @@ void AbstractByteArrayViewPrivate::mouseReleaseEvent(QMouseEvent* mouseReleaseEv
     } else {
         q->QAbstractScrollArea::mouseReleaseEvent(mouseReleaseEvent);
     }
+
+    if (!isEffectiveReadOnly() && q->rect().contains(mouseReleaseEvent->pos())) {
+        if (mouseReleaseEvent->button() == Qt::LeftButton && qApp->autoSipEnabled()) {
+            if (!m_wasFocussedByMouseClick || isStyleRequestingSoftwareInputPanelOnMouseClick(q)) {
+                QGuiApplication::inputMethod()->show();
+            }
+        }
+    }
+
+    m_wasFocussedByMouseClick = false;
 }
 
 // gets called after press and release instead of a plain press event (?)
@@ -1019,6 +1052,15 @@ void AbstractByteArrayViewPrivate::mouseDoubleClickEvent(QMouseEvent* mouseDoubl
         mouseDoubleClickEvent->accept();
     } else {
         q->QAbstractScrollArea::mouseDoubleClickEvent(mouseDoubleClickEvent);
+    }
+}
+
+void AbstractByteArrayViewPrivate::wheelEvent(QWheelEvent* wheelEvent)
+{
+    Q_Q(AbstractByteArrayView);
+
+    if (!wheelController()->handleWheelEvent(wheelEvent)) {
+        q->QAbstractScrollArea::wheelEvent(wheelEvent);
     }
 }
 
@@ -1160,10 +1202,14 @@ void AbstractByteArrayViewPrivate::focusInEvent(QFocusEvent* focusEvent)
 {
     Q_Q(AbstractByteArrayView);
 
+    const Qt::FocusReason focusReason = focusEvent->reason();
+    if (focusReason == Qt::MouseFocusReason) {
+        m_wasFocussedByMouseClick = true;
+    }
+
     q->QAbstractScrollArea::focusInEvent(focusEvent);
     startCursor();
 
-    const Qt::FocusReason focusReason = focusEvent->reason();
     if (focusReason != Qt::ActiveWindowFocusReason
         && focusReason != Qt::PopupFocusReason) {
         Q_EMIT q->focusChanged(true);

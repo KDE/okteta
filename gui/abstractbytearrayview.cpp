@@ -10,7 +10,6 @@
 #include "abstractbytearrayview_p.hpp"
 
 // lib
-#include "controller/abstractwheelcontroller.hpp"
 #include "bytearraytablelayout.hpp"
 // Qt
 #include <QMimeData>
@@ -525,9 +524,7 @@ void AbstractByteArrayView::focusOutEvent(QFocusEvent* focusEvent)
 void AbstractByteArrayView::keyPressEvent(QKeyEvent* keyEvent)
 {
     Q_D(AbstractByteArrayView);
-    if (!d->controller()->handleKeyPress(keyEvent)) {
-        QAbstractScrollArea::keyPressEvent(keyEvent);
-    }
+    d->keyPressEvent(keyEvent);
 }
 
 void AbstractByteArrayView::mousePressEvent(QMouseEvent* mousePressEvent)
@@ -558,9 +555,7 @@ void AbstractByteArrayView::mouseDoubleClickEvent(QMouseEvent* mouseDoubleClickE
 void AbstractByteArrayView::wheelEvent(QWheelEvent* wheelEvent)
 {
     Q_D(AbstractByteArrayView);
-    if (!d->wheelController()->handleWheelEvent(wheelEvent)) {
-        QAbstractScrollArea::wheelEvent(wheelEvent);
-    }
+    d->wheelEvent(wheelEvent);
 }
 
 void AbstractByteArrayView::dragEnterEvent(QDragEnterEvent* dragEnterEvent)
