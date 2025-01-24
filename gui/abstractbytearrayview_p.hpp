@@ -313,6 +313,8 @@ protected:
     bool mBlinkCursorVisible : 1;
     /** flag if the cursor is visible */
     bool mCursorVisible : 1;
+    /** flag if the current focus was received by a mouse click */
+    bool m_wasFocussedByMouseClick : 1;
 
     // parameters
     /** */

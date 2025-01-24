@@ -43,7 +43,9 @@
 #include <QGestureEvent>
 #include <QTapGesture>
 #include <QPinchGesture>
+#include <QStyle>
 #include <QStyleHints>
+#include <QInputMethod>
 #include <QApplication>
 #include <QToolTip>
 #include <QMimeData>
@@ -142,6 +144,7 @@ AbstractByteArrayViewPrivate::AbstractByteArrayViewPrivate(AbstractByteArrayView
     , mCursorPaused(false)
     , mBlinkCursorVisible(false)
     , mCursorVisible(false)
+    , m_wasFocussedByMouseClick(false)
     , mResizeStyle(DefaultResizeStyle)
 {
 }
@@ -217,6 +220,9 @@ void AbstractByteArrayViewPrivate::init()
     mZoomPinchController = new ZoomPinchController(q);
 
     setWheelController(mZoomWheelController);
+
+    q->setAttribute(Qt::WA_InputMethodEnabled);
+    q->setInputMethodHints(Qt::ImhNoAutoUppercase | Qt::ImhNoPredictiveText);
 
     QObject::connect(QGuiApplication::styleHints(), &QStyleHints::cursorFlashTimeChanged,
                      q, [this](int flashTime) { onCursorFlashTimeChanged(flashTime); });
@@ -1057,6 +1063,13 @@ void AbstractByteArrayViewPrivate::mouseMoveEvent(QMouseEvent* mouseEvent)
     }
 }
 
+bool isStyleRequestingSoftwareInputPanelOnMouseClick(QWidget* widget)
+{
+    const QStyle::RequestSoftwareInputPanel behavior = QStyle::RequestSoftwareInputPanel(
+                    widget->style()->styleHint(QStyle::SH_RequestSoftwareInputPanel));
+    return (behavior == QStyle::RSIP_OnMouseClick);
+}
+
 void AbstractByteArrayViewPrivate::mouseReleaseEvent(QMouseEvent* mouseEvent)
 {
     Q_Q(AbstractByteArrayView);
@@ -1066,6 +1079,16 @@ void AbstractByteArrayViewPrivate::mouseReleaseEvent(QMouseEvent* mouseEvent)
     } else {
         q->ColumnsView::mouseReleaseEvent(mouseEvent);
     }
+
+    if (!isEffectiveReadOnly() && q->rect().contains(mouseEvent->pos())) {
+        if (mouseEvent->button() == Qt::LeftButton && qApp->autoSipEnabled()) {
+            if (!m_wasFocussedByMouseClick || isStyleRequestingSoftwareInputPanelOnMouseClick(q)) {
+                QGuiApplication::inputMethod()->show();
+            }
+        }
+    }
+
+    m_wasFocussedByMouseClick = false;
 }
 
 // gets called after press and release instead of a plain press event (?)
@@ -1223,10 +1246,14 @@ void AbstractByteArrayViewPrivate::focusInEvent(QFocusEvent* focusEvent)
 {
     Q_Q(AbstractByteArrayView);
 
+    const Qt::FocusReason focusReason = focusEvent->reason();
+    if (focusReason == Qt::MouseFocusReason) {
+        m_wasFocussedByMouseClick = true;
+    }
+
     q->ColumnsView::focusInEvent(focusEvent);
     startCursor();
 
-    const Qt::FocusReason focusReason = focusEvent->reason();
     if (focusReason != Qt::ActiveWindowFocusReason
         && focusReason != Qt::PopupFocusReason) {
         emit q->focusChanged(true);
