@@ -37,6 +37,7 @@ public: // setters/actions
 
 public: // query
     double scale() const;
+    int fontSize() const;
     int defaultFontSize() const;
     int minimumFontSize() const;
     int maximumFontSize() const;
@@ -61,6 +62,7 @@ private:
 // , m_defaultFontSize(m_font.pointSize() ) crashes in font()
 
 inline const QFont& FontScalingZoomState::font() const { return m_font; }
+inline int FontScalingZoomState::fontSize() const { return m_font.pointSize(); }
 inline int FontScalingZoomState::defaultFontSize() const { return m_defaultFontSize; }
 inline int FontScalingZoomState::minimumFontSize() const { return MinFontPointSize; }
 inline int FontScalingZoomState::maximumFontSize() const { return MaxFontPointSize; }
