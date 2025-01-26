@@ -2,20 +2,20 @@
 # translation of okteta.po to
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-#
 # Łukasz  Sliwa <everth@interia.pl>, 2007.
 # Marta Rybczyńska <kde-i18n@rybczynska.net>, 2007, 2008, 2010.
 # Maciej Wikło <maciej.wiklo@wp.pl>, 2008, 2009.
 # Michał Lachowski <michal@lachowski.info>, 2010.
 # Michał Zając <michal.zajac@gmail.com>, 2010.
 # Artur Chłond <eugenewolfe@o2.pl>, 2011.
-# SPDX-FileCopyrightText: 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2021, 2022, 2023, 2024 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+# SPDX-FileCopyrightText: 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2021, 2022, 2023, 2024, 2025 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-21 01:53+0000\n"
-"PO-Revision-Date: 2024-10-26 12:42+0200\n"
+"PO-Revision-Date: 2025-01-25 11:58+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.12.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -309,16 +309,13 @@ msgstr[1] "Wstawiono %1 bajty"
 msgstr[2] "Wstawiono %1 bajtów"
 
 #: controllers/view/bytetable/bytetabletool.cpp:109
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "1 byte converted."
-#| msgid_plural "%1 bytes converted."
+#, kde-format
 msgctxt "@info"
 msgid "1 byte inserted."
 msgid_plural "%1 bytes inserted."
-msgstr[0] "Przekształcono 1 bajt."
-msgstr[1] "Przekształcono %1 bajty."
-msgstr[2] "Przekształcono %1 bajtów."
+msgstr[0] "Wstawiono 1 bajt."
+msgstr[1] "Wstawiono %1 bajty."
+msgstr[2] "Wstawiono %1 bajtów."
 
 #: controllers/view/bytetable/bytetableview.cpp:74
 #, kde-format
@@ -588,9 +585,9 @@ msgstr "Filtr dwójkowy"
 msgctxt "@info"
 msgid "1 byte filtered with %2."
 msgid_plural "%1 bytes filtered with %2."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Odfiltrowano 1 bajt przy użyciu %2."
+msgstr[1] "Odfiltrowano %1 bajty przy użyciu %2."
+msgstr[2] "Odfiltrowano %1 bajtów przy użyciu %2."
 
 #: controllers/view/filter/filterview.cpp:45
 #, kde-format
