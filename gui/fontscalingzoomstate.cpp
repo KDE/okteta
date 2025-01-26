@@ -8,6 +8,9 @@
 
 #include "fontscalingzoomstate.hpp"
 
+// Std
+#include <cmath>
+
 namespace Okteta {
 
 void FontScalingZoomState::initFont(const QFont& font)
@@ -24,7 +27,7 @@ void FontScalingZoomState::setFont(const QFont& font)
     m_outLevelsSize = (MinFontPointSize < m_defaultFontSize) ? m_defaultFontSize - MinFontPointSize : 0;
     m_inLevelsSize = (m_defaultFontSize < MaxFontPointSize) ? MaxFontPointSize - m_defaultFontSize : 0;
 
-    int newPointSize = static_cast<int>(m_scale * m_defaultFontSize);
+    int newPointSize = static_cast<int>(std::round(m_scale * m_defaultFontSize));
     if (newPointSize < MinFontPointSize) {
         newPointSize = MinFontPointSize;
     } else if (newPointSize > MaxFontPointSize) {
@@ -49,8 +52,8 @@ double FontScalingZoomState::scaleForLevel(int level)  const
 
 int FontScalingZoomState::levelForScale(double zoomScale) const
 {
-    const double pointSize = zoomScale * m_defaultFontSize;
-    int level = static_cast<int>(pointSize - m_defaultFontSize);
+    const int pointSize = static_cast<int>(std::round(zoomScale * m_defaultFontSize));
+    int level = pointSize - m_defaultFontSize;
     if (m_outLevelsSize < -level) {
         level = -m_outLevelsSize;
     } else if (m_inLevelsSize < level) {
@@ -111,7 +114,7 @@ bool FontScalingZoomState::setScale(double zoomScale)
         return false;
     }
 
-    int newPointSize = static_cast<int>(zoomScale * m_defaultFontSize);
+    int newPointSize = static_cast<int>(std::round(zoomScale * m_defaultFontSize));
     if (newPointSize < MinFontPointSize) {
         newPointSize = MinFontPointSize;
     } else if (newPointSize > MaxFontPointSize) {
