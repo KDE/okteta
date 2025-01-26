@@ -40,6 +40,46 @@ void FontScalingZoomStateTest::testNormalZoomScale()
     QCOMPARE(zoomScale, 1.0);
 }
 
+void FontScalingZoomStateTest::testSetFontSize()
+{
+    FontScalingZoomState fontScalingZoomState;
+
+    const int minimumFontSize = fontScalingZoomState.minimumFontSize();
+    const int maximumFontSize = fontScalingZoomState.maximumFontSize();
+
+    // assumption: default font is not matching the smallest zoom state
+    QVERIFY(minimumFontSize < fontScalingZoomState.fontSize());
+
+    for (int fontSize = minimumFontSize; fontSize <= maximumFontSize; ++fontSize) {
+        const bool hasFontSizeChanged = fontScalingZoomState.zoomTo(fontSize);
+        QVERIFY(hasFontSizeChanged);
+        const int currentFontSize = fontScalingZoomState.fontSize();
+        QCOMPARE(currentFontSize, fontSize);
+    }
+
+    // try setting too small size, from non-minimum one
+    bool hasFontSizeChanged = fontScalingZoomState.zoomTo(minimumFontSize - 1);
+    QVERIFY(hasFontSizeChanged);
+    int currentFontSize = fontScalingZoomState.fontSize();
+    QCOMPARE(currentFontSize, minimumFontSize);
+    // try setting too small size, from minimum one
+    hasFontSizeChanged = fontScalingZoomState.zoomTo(minimumFontSize - 1);
+    QVERIFY(!hasFontSizeChanged);
+    currentFontSize = fontScalingZoomState.fontSize();
+    QCOMPARE(currentFontSize, minimumFontSize);
+
+    // try setting too big size, from non-minimum one
+    hasFontSizeChanged = fontScalingZoomState.zoomTo(maximumFontSize + 1);
+    QVERIFY(hasFontSizeChanged);
+    currentFontSize = fontScalingZoomState.fontSize();
+    QCOMPARE(currentFontSize, maximumFontSize);
+    // try setting too small size, from minimum one
+    hasFontSizeChanged = fontScalingZoomState.zoomTo(maximumFontSize + 1);
+    QVERIFY(!hasFontSizeChanged);
+    currentFontSize = fontScalingZoomState.fontSize();
+    QCOMPARE(currentFontSize, maximumFontSize);
+}
+
 void FontScalingZoomStateTest::testZoomLevels()
 {
     FontScalingZoomState fontScalingZoomState;

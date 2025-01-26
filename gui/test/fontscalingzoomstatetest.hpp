@@ -21,6 +21,7 @@ class FontScalingZoomStateTest : public QObject
 private Q_SLOTS: // test functions
     void testNormalZoomScale();
     void testZoomLevels();
+    void testSetFontSize();
 };
 
 }

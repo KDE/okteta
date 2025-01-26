@@ -41,7 +41,13 @@ public: // query
     [[nodiscard]]
     double scale() const;
     [[nodiscard]]
+    int fontSize() const;
+    [[nodiscard]]
     int defaultFontSize() const;
+    [[nodiscard]]
+    int minimumFontSize() const;
+    [[nodiscard]]
+    int maximumFontSize() const;
     [[nodiscard]]
     int inLevelsSize() const;
     [[nodiscard]]
@@ -67,7 +73,10 @@ private:
 // , m_defaultFontSize(m_font.pointSize() ) crashes in font()
 
 inline const QFont& FontScalingZoomState::font() const { return m_font; }
+inline int FontScalingZoomState::fontSize() const { return m_font.pointSize(); }
 inline int FontScalingZoomState::defaultFontSize() const { return m_defaultFontSize; }
+inline int FontScalingZoomState::minimumFontSize() const { return MinFontPointSize; }
+inline int FontScalingZoomState::maximumFontSize() const { return MaxFontPointSize; }
 inline double FontScalingZoomState::scale() const { return m_scale; }
 inline int FontScalingZoomState::inLevelsSize() const { return m_inLevelsSize; }
 inline int FontScalingZoomState::outLevelsSize() const { return m_outLevelsSize; }

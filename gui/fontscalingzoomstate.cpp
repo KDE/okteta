@@ -8,6 +8,9 @@
 
 #include "fontscalingzoomstate.hpp"
 
+// Std
+#include <cmath>
+
 namespace Okteta {
 
 void FontScalingZoomState::initFont(const QFont& font)
@@ -21,18 +24,18 @@ void FontScalingZoomState::setFont(const QFont& font)
     m_font = font;
     m_defaultFontSize = m_font.pointSize();
 
-    m_outLevelsSize = (MinFontPointSize < m_defaultFontSize) ? m_defaultFontSize - MinFontPointSize : 0;
-    m_inLevelsSize = (m_defaultFontSize < MaxFontPointSize) ? MaxFontPointSize - m_defaultFontSize : 0;
+    m_outLevelsSize = (minimumFontSize() < m_defaultFontSize) ? m_defaultFontSize - minimumFontSize() : 0;
+    m_inLevelsSize = (m_defaultFontSize < maximumFontSize()) ? maximumFontSize() - m_defaultFontSize : 0;
 
-    int newPointSize = static_cast<int>(m_scale * m_defaultFontSize);
-    if (newPointSize < MinFontPointSize) {
-        newPointSize = MinFontPointSize;
-    } else if (newPointSize > MaxFontPointSize) {
-        newPointSize = MaxFontPointSize;
+    int newPointSize = static_cast<int>(std::round(m_scale * m_defaultFontSize));
+    if (newPointSize < minimumFontSize()) {
+        newPointSize = minimumFontSize();
+    } else if (newPointSize > maximumFontSize()) {
+        newPointSize = maximumFontSize();
     }
 
     m_font.setPointSize(newPointSize);
-    m_scale = static_cast<double>(newPointSize / m_defaultFontSize);
+    m_scale = static_cast<double>(newPointSize) / m_defaultFontSize;
 }
 
 double FontScalingZoomState::scaleForLevel(int level)  const
@@ -49,8 +52,8 @@ double FontScalingZoomState::scaleForLevel(int level)  const
 
 int FontScalingZoomState::levelForScale(double zoomScale) const
 {
-    const double pointSize = zoomScale * m_defaultFontSize;
-    int level = static_cast<int>(pointSize - m_defaultFontSize);
+    const int pointSize = static_cast<int>(std::round(zoomScale * m_defaultFontSize));
+    int level = pointSize - m_defaultFontSize;
     if (m_outLevelsSize < -level) {
         level = -m_outLevelsSize;
     } else if (m_inLevelsSize < level) {
@@ -62,31 +65,31 @@ int FontScalingZoomState::levelForScale(double zoomScale) const
 void FontScalingZoomState::zoomIn(int pointIncrement)
 {
     int newPointSize = m_font.pointSize() + pointIncrement;
-    if (newPointSize > MaxFontPointSize) {
-        newPointSize = MaxFontPointSize;
+    if (newPointSize > maximumFontSize()) {
+        newPointSize = maximumFontSize();
     }
 
     m_font.setPointSize(newPointSize);
-    m_scale = static_cast<double>(newPointSize / m_defaultFontSize);
+    m_scale = static_cast<double>(newPointSize) / m_defaultFontSize;
 }
 
 void FontScalingZoomState::zoomOut(int pointDecrement)
 {
     int newPointSize = m_font.pointSize() - pointDecrement;
-    if (newPointSize < MinFontPointSize) {
-        newPointSize = MinFontPointSize;
+    if (newPointSize < minimumFontSize()) {
+        newPointSize = minimumFontSize();
     }
 
     m_font.setPointSize(newPointSize);
-    m_scale = static_cast<double>(newPointSize / m_defaultFontSize);
+    m_scale = static_cast<double>(newPointSize) / m_defaultFontSize;
 }
 
 bool FontScalingZoomState::zoomTo(int newPointSize)
 {
-    if (newPointSize < MinFontPointSize) {
-        newPointSize = MinFontPointSize;
-    } else if (newPointSize > MaxFontPointSize) {
-        newPointSize = MaxFontPointSize;
+    if (newPointSize < minimumFontSize()) {
+        newPointSize = minimumFontSize();
+    } else if (newPointSize > maximumFontSize()) {
+        newPointSize = maximumFontSize();
     }
 
     if (m_font.pointSize() == newPointSize) {
@@ -94,7 +97,7 @@ bool FontScalingZoomState::zoomTo(int newPointSize)
     }
 
     m_font.setPointSize(newPointSize);
-    m_scale = static_cast<double>(newPointSize / m_defaultFontSize);
+    m_scale = static_cast<double>(newPointSize) / m_defaultFontSize;
 
     return true;
 }
@@ -104,18 +107,18 @@ bool FontScalingZoomState::setScale(double zoomScale)
     const int currentPointSize = m_font.pointSize();
 
     // TODO: here we catch any new zoom scales which are out of bounds and the zoom already at that bound
-    if ((currentPointSize <= MinFontPointSize &&
-         zoomScale < static_cast<double>(MinFontPointSize / m_defaultFontSize)) ||
-        (MaxFontPointSize <= currentPointSize &&
-         static_cast<double>(MaxFontPointSize / m_defaultFontSize) < zoomScale)) {
+    if ((currentPointSize <= minimumFontSize() &&
+         zoomScale < (static_cast<double>(minimumFontSize()) / m_defaultFontSize)) ||
+        (maximumFontSize() <= currentPointSize &&
+         (static_cast<double>(maximumFontSize()) / m_defaultFontSize) < zoomScale)) {
         return false;
     }
 
-    int newPointSize = static_cast<int>(zoomScale * m_defaultFontSize);
-    if (newPointSize < MinFontPointSize) {
-        newPointSize = MinFontPointSize;
-    } else if (newPointSize > MaxFontPointSize) {
-        newPointSize = MaxFontPointSize;
+    int newPointSize = static_cast<int>(std::round(zoomScale * m_defaultFontSize));
+    if (newPointSize < minimumFontSize()) {
+        newPointSize = minimumFontSize();
+    } else if (newPointSize > maximumFontSize()) {
+        newPointSize = maximumFontSize();
     }
 
     // other than in zoomTo(), where the new zoom scale is calculated from the integers, here
