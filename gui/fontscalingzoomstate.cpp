@@ -32,7 +32,7 @@ void FontScalingZoomState::setFont(const QFont& font)
     }
 
     m_font.setPointSize(newPointSize);
-    m_scale = static_cast<double>(newPointSize / m_defaultFontSize);
+    m_scale = static_cast<double>(newPointSize) / m_defaultFontSize;
 }
 
 double FontScalingZoomState::scaleForLevel(int level)  const
@@ -67,7 +67,7 @@ void FontScalingZoomState::zoomIn(int pointIncrement)
     }
 
     m_font.setPointSize(newPointSize);
-    m_scale = static_cast<double>(newPointSize / m_defaultFontSize);
+    m_scale = static_cast<double>(newPointSize) / m_defaultFontSize;
 }
 
 void FontScalingZoomState::zoomOut(int pointDecrement)
@@ -78,7 +78,7 @@ void FontScalingZoomState::zoomOut(int pointDecrement)
     }
 
     m_font.setPointSize(newPointSize);
-    m_scale = static_cast<double>(newPointSize / m_defaultFontSize);
+    m_scale = static_cast<double>(newPointSize) / m_defaultFontSize;
 }
 
 bool FontScalingZoomState::zoomTo(int newPointSize)
@@ -94,7 +94,7 @@ bool FontScalingZoomState::zoomTo(int newPointSize)
     }
 
     m_font.setPointSize(newPointSize);
-    m_scale = static_cast<double>(newPointSize / m_defaultFontSize);
+    m_scale = static_cast<double>(newPointSize) / m_defaultFontSize;
 
     return true;
 }
@@ -105,9 +105,9 @@ bool FontScalingZoomState::setScale(double zoomScale)
 
     // TODO: here we catch any new zoom scales which are out of bounds and the zoom already at that bound
     if ((currentPointSize <= MinFontPointSize &&
-         zoomScale < static_cast<double>(MinFontPointSize / m_defaultFontSize)) ||
+         zoomScale < (static_cast<double>(MinFontPointSize) / m_defaultFontSize)) ||
         (MaxFontPointSize <= currentPointSize &&
-         static_cast<double>(MaxFontPointSize / m_defaultFontSize) < zoomScale)) {
+         (static_cast<double>(MaxFontPointSize) / m_defaultFontSize) < zoomScale)) {
         return false;
     }
 
