@@ -28,7 +28,7 @@ class OKTETAKASTENGUI_EXPORT AddressComboBox : public QWidget
     Q_OBJECT
 
 public:
-    // TODO: same as in kbytearrayvalidator.h, we need a global enum containing both value and char codings...
+    // TODO: same as in AddressValidator, we need a global enum containing both value and char codings...
     // matching Okteta::ValueCoding
     // TODO: turn into flags, so the codings to be used can be defined
     enum Coding
