@@ -61,11 +61,11 @@ public: // get
     [[nodiscard]]
     int format() const;
     [[nodiscard]]
-    int addressType() const;
+    AddressType addressType() const;
 
 Q_SIGNALS:
     void addressChanged(Okteta::Address address);
-    void addressTypeChanged(int newAddressType);
+    void addressTypeChanged(Okteta::AddressComboBox::AddressType addressType);
     void formatChanged(int index);
 
 protected:

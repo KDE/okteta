@@ -57,7 +57,7 @@ public:
 private Q_SLOTS: // gui
     void onGotoButtonClicked();
     void onFormatChanged(int index);
-    void onAddressTypeChanged(int addressType);
+    void onAddressTypeChanged(Okteta::AddressComboBox::AddressType addressType);
 
 private Q_SLOTS: // tool
     void onApplyableChanged(bool isApplyable);

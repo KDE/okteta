@@ -171,7 +171,7 @@ void GotoOffsetView::onGotoButtonClicked()
 //     Q_EMIT toolUsed();
 }
 
-void GotoOffsetView::onAddressTypeChanged(int addressType)
+void GotoOffsetView::onAddressTypeChanged(Okteta::AddressComboBox::AddressType addressType)
 {
     const bool isNotExpression = (mAddressEdit->format() != Okteta::AddressComboBox::ExpressionCoding);
     if (isNotExpression

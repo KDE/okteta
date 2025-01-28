@@ -116,7 +116,7 @@ void AddressComboBoxPrivate::onFormatChanged(int formatIndex)
 
     if (mAddressType != addressType) {
         mAddressType = addressType;
-        Q_EMIT q->addressTypeChanged(mAddressType);
+        Q_EMIT q->addressTypeChanged(static_cast<AddressComboBox::AddressType>(mAddressType));
     }
     Q_EMIT q->formatChanged(formatIndex);
 }
@@ -130,7 +130,7 @@ void AddressComboBoxPrivate::onValueEdited(const QString& value)
 
     if (mAddressType != addressType) {
         mAddressType = addressType;
-        Q_EMIT q->addressTypeChanged(mAddressType);
+        Q_EMIT q->addressTypeChanged(static_cast<AddressComboBox::AddressType>(mAddressType));
     }
     Q_EMIT q->addressChanged(address);
 }
@@ -156,7 +156,7 @@ void AddressComboBoxPrivate::onValueActivated(int index)
 
         if (mAddressType != addressType) {
             mAddressType = addressType;
-            Q_EMIT q->addressTypeChanged(mAddressType);
+            Q_EMIT q->addressTypeChanged(static_cast<AddressComboBox::AddressType>(mAddressType));
         }
         Q_EMIT q->addressChanged(address);
         if (isOtherFormat) {

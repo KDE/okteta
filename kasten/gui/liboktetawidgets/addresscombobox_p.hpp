@@ -33,7 +33,7 @@ public:
     [[nodiscard]]
     int format() const;
     [[nodiscard]]
-    AddressValidator::AddressType addressType() const;
+    AddressComboBox::AddressType addressType() const;
 
 public:
     void init();
@@ -66,9 +66,9 @@ inline int AddressComboBoxPrivate::format() const
 {
     return mFormatComboBox->currentIndex();
 }
-inline AddressValidator::AddressType AddressComboBoxPrivate::addressType() const
+inline AddressComboBox::AddressType AddressComboBoxPrivate::addressType() const
 {
-    return mAddressType;
+    return static_cast<AddressComboBox::AddressType>(mAddressType);
 }
 
 }
