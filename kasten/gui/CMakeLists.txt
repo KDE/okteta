@@ -42,10 +42,10 @@ endmacro()
 oktetakastengui_add_sublibrary(liboktetawidgets
     BUILD_INCLUDEDIR
     PUBLIC
-        AddressValidator
         AddressComboBox
         ByteArrayComboBox
     PRIVATE
+        AddressValidator
         AbstractByteArrayStringValidator
         ByteArrayChar8StringDecoder
         ByteArrayChar8StringEncoder
