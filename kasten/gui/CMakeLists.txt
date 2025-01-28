@@ -13,7 +13,7 @@ endmacro()
 
 oktetakastengui_add_sublibrary(liboktetawidgets
     PUBLIC
-        AddressValidator
+        AddressValidator # TODO: on next ABI break, move to PRIVATE
         AddressComboBox
         ByteArrayComboBox
     PRIVATE

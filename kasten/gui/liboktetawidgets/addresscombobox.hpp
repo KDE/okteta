@@ -44,6 +44,14 @@ public:
         /// Not used
         CharCoding = 4
     };
+    // TODO: same as in AddressValidator, we need a global enum
+    enum AddressType
+    {
+        InvalidAddressType = -1,
+        AbsoluteAddress = 0,
+        RelativeForwards,
+        RelativeBackwards
+    };
 
 public:
     explicit AddressComboBox(QWidget* parent = nullptr);
@@ -56,7 +64,6 @@ public: // set
 public: // get
     Address address() const;
     int format() const;
-    /** Is actually of type AddressValidator::AddressType */
     int addressType() const;
 
 Q_SIGNALS:

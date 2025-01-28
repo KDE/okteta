@@ -13,8 +13,6 @@
 // libconfigentries
 #include <addresscomboboxcodingconfigentry.hpp>
 #include <directionconfigentry.hpp>
-// Okteta Kasten gui
-#include <Kasten/Okteta/AddressValidator>
 // KF
 #include <KGuiItem>
 #include <KConfigGroup>
@@ -191,20 +189,20 @@ void GotoOffsetView::onAddressTypeChanged(int addressType)
 {
     const bool isNotExpression = (mAddressEdit->format() != Okteta::AddressComboBox::ExpressionCoding);
     if (isNotExpression
-        || addressType == Okteta::AddressValidator::InvalidAddressType) {
+        || addressType == Okteta::AddressComboBox::InvalidAddressType) {
         return;
     }
 
     bool fromCursor = false;
     bool backwards = false;
 
-    if (addressType == Okteta::AddressValidator::AbsoluteAddress) {
+    if (addressType == Okteta::AddressComboBox::AbsoluteAddress) {
         fromCursor = false;
         backwards = false; // TODO: there is no way yet for: absolute from end
-    } else if (addressType == Okteta::AddressValidator::RelativeForwards) {
+    } else if (addressType == Okteta::AddressComboBox::RelativeForwards) {
         fromCursor = true;
         backwards = false;
-    } else if (addressType == Okteta::AddressValidator::RelativeBackwards) {
+    } else if (addressType == Okteta::AddressComboBox::RelativeBackwards) {
         fromCursor = true;
         backwards = true;
     }
