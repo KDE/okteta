@@ -599,94 +599,6 @@ PRIVATE
   KF5::ConfigWidgets
 )
 
-if(BUILD_TESTING)
-  # poddecoder typeeditors unit tests
-  ecm_add_test(
-    view/poddecoder/typeeditors/char8stringvalidator.cpp
-    view/poddecoder/typeeditors/char8stringparser.cpp
-    test/char8stringvalidatortest.cpp
-
-    TEST_NAME char8stringvalidatortest
-    LINK_LIBRARIES
-      OktetaCore
-      Qt5::Gui
-      Qt5::Test
-  )
-  target_include_directories(char8stringvalidatortest
-    PUBLIC
-      view/poddecoder/typeeditors
-  )
-
-  #structures view unit tests
-  ecm_add_tests(
-    test/primitivearraytest.cpp
-    test/arraydatainformationtest.cpp
-    test/basicdatainformationtest.cpp
-    test/primitivedatainformationtest.cpp
-    test/scriptclassestest.cpp
-    test/uniondatainformationtest.cpp
-    test/allprimitivetypestest.cpp
-    test/scriptvalueconvertertest.cpp
-    test/osdparsertest.cpp
-    test/commonparsertest.cpp
-    test/jsparsertest.cpp
-    test/customtostringtest.cpp
-    test/locktooffsettest.cpp
-
-    NAME_PREFIX structures-
-    LINK_LIBRARIES structureview-tested-srcs Qt5::Test poddecoder-typeeditors
-  )
-
-  # remove useless default definition of QT_TESTCASE_BUILDDIR in interface from imported target Qt5::Test
-  get_target_property(qttestdefs Qt5::Test INTERFACE_COMPILE_DEFINITIONS)
-  list(FILTER qttestdefs EXCLUDE REGEX [[^QT_TESTCASE_BUILDDIR=]])
-  set_property(TARGET Qt5::Test PROPERTY INTERFACE_COMPILE_DEFINITIONS ${qttestdefs})
-  # set the definition as needed for our tests
-  target_compile_definitions(customtostringtest PRIVATE QT_TESTCASE_BUILDDIR="${CMAKE_CURRENT_BINARY_DIR}")
-  target_compile_definitions(jsparsertest       PRIVATE QT_TESTCASE_BUILDDIR="${CMAKE_CURRENT_BINARY_DIR}")
-  # TODO: still fragile once __FILE__ is neither absolute or full relative path to this build dir
-  # look into using custom code intead of simple QFINDTESTDATA usage
-
-  # search tool unit tests
-  ecm_add_test(
-    view/libbytearraysearch/bytearraysearchutils.cpp
-    view/libbytearraysearch/bytearraysearchjob.cpp
-    view/search/searchtool.cpp
-    test/searchtooltest.cpp
-
-    TEST_NAME searchtooltest
-    LINK_LIBRARIES
-      OktetaKastenGui
-      OktetaKastenCore
-      KF5::I18n
-      Qt5::Test
-  )
-  target_include_directories(searchtooltest
-    PUBLIC
-      libconfigentries
-      view/libfinddialog
-      view/libbytearraysearch
-  )
-
-  #replace tool unit tests
-  ecm_add_test(
-    view/libbytearraysearch/bytearraysearchjob.cpp
-    view/replace/replacejob.cpp
-    test/replacejobtest.cpp
-
-    TEST_NAME replacejobtest
-    LINK_LIBRARIES
-        OktetaKastenGui
-        OktetaKastenCore
-        Qt5::Test
-  )
-  target_include_directories(replacejobtest
-        PUBLIC
-            view/libfinddialog
-            view/libbytearraysearch
-  )
-endif()
-
 list(APPEND oktetakastencontrollers_LIB_HDRS
     ${CMAKE_CURRENT_BINARY_DIR}/config-qca2.hpp
 )
@@ -807,4 +719,11 @@ target_link_libraries( oktetakastencontrollertemplates
         KF5::I18n
 )
 
+endif()
+
+if(BUILD_TESTING)
+    add_subdirectory(view/poddecoder/tests)
+    add_subdirectory(view/replace/tests)
+    add_subdirectory(view/search/tests)
+    add_subdirectory(view/structures/tests)
 endif()
