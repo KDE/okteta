@@ -8,6 +8,7 @@ ecm_add_test(
     searchtooltest.cpp
 
     TEST_NAME searchtooltest
+    NAME_PREFIX oktetakasten-controllers-search-
     LINK_LIBRARIES
         OktetaKastenGui
         OktetaKastenCore

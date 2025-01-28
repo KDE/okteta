@@ -13,7 +13,7 @@ ecm_add_tests(
     customtostringtest.cpp
     locktooffsettest.cpp
 
-    NAME_PREFIX structures-
+    NAME_PREFIX oktetakasten-controllers-structures-
     LINK_LIBRARIES
         structureview-tested-srcs
         poddecoder-typeeditors

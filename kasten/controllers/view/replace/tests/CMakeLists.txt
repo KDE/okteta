@@ -7,6 +7,7 @@ ecm_add_test(
     replacejobtest.cpp
 
     TEST_NAME replacejobtest
+    NAME_PREFIX oktetakasten-controllers-replace-
     LINK_LIBRARIES
         OktetaKastenGui
         OktetaKastenCore
