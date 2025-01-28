@@ -4,14 +4,14 @@
 # Federico Zenith <federico.zenith@member.fsf.org>, 2008.
 # Federico Zenith <federico.zenith@member.fsf.org>, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015.
 # Nicola Ruggero <nicola@nxnt.org>, 2010.
-# Luigi Toscano <luigi.toscano@tiscali.it>, 2016, 2018, 2019, 2020, 2022, 2023, 2024.
+# SPDX-FileCopyrightText: 2016, 2018, 2019, 2020, 2022, 2023, 2024, 2025 Luigi Toscano <luigi.toscano@tiscali.it>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-21 01:53+0000\n"
-"PO-Revision-Date: 2024-10-24 23:30+0200\n"
+"PO-Revision-Date: 2025-01-23 16:23+0100\n"
 "Last-Translator: Luigi Toscano <luigi.toscano@tiscali.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 25.03.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -303,15 +303,12 @@ msgstr[0] "Inserito 1 byte"
 msgstr[1] "Inseriti %1 byte"
 
 #: controllers/view/bytetable/bytetabletool.cpp:109
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "1 byte converted."
-#| msgid_plural "%1 bytes converted."
+#, kde-format
 msgctxt "@info"
 msgid "1 byte inserted."
 msgid_plural "%1 bytes inserted."
-msgstr[0] "1 byte convertito."
-msgstr[1] "%1 byte convertiti."
+msgstr[0] "1 byte inserito."
+msgstr[1] "%1 byte inseriti."
 
 #: controllers/view/bytetable/bytetableview.cpp:74
 #, kde-format
@@ -584,8 +581,8 @@ msgstr "Filtro binario"
 msgctxt "@info"
 msgid "1 byte filtered with %2."
 msgid_plural "%1 bytes filtered with %2."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "1 byte filtrato da %2."
+msgstr[1] "%1 byte filtrati da %2."
 
 #: controllers/view/filter/filterview.cpp:45
 #, kde-format
