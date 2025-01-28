@@ -120,7 +120,7 @@ void JsParserTest::initTestCase()
 
     // needed so that imports can be resolved
     QString resources = QFINDTESTDATA("resources");
-    QString examples = QFINDTESTDATA("../view/structures/examples");
+    QString examples = QFINDTESTDATA("../examples");
     QVERIFY2(!resources.isEmpty(), "Test data must exist!");
     QVERIFY2(!examples.isEmpty(), "Test data must exist!");
     qputenv("XDG_DATA_DIRS",

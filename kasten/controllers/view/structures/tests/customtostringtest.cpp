@@ -43,7 +43,7 @@ static uchar nullUuid[16] =
 void CustomToStringTest::initTestCase()
 {
     // needed so that imports can be resolved
-    QString examples = QFINDTESTDATA("../view/structures/examples");
+    QString examples = QFINDTESTDATA("../examples");
     QVERIFY2(!examples.isEmpty(), "Test data must exist!");
     qputenv("XDG_DATA_DIRS", QFile::encodeName(QFileInfo(examples).absoluteFilePath()));
 }

@@ -9,8 +9,8 @@
 #include "replacejobtest.hpp"
 
 // test object
-#include "../view/replace/replacejob.hpp"
-#include "../view/replace/replaceuserqueryable.hpp"
+#include "replacejob.hpp"
+#include "replaceuserqueryable.hpp"
 // Okteta Kasten gui
 #include <Kasten/Okteta/ByteArrayView>
 #include <Kasten/Okteta/ByteArrayViewProfileSynchronizer>

@@ -9,8 +9,8 @@
 #include "searchtooltest.hpp"
 
 // test object
-#include <view/search/searchtool.hpp>
-#include <view/search/searchuserqueryable.hpp>
+#include "searchtool.hpp"
+#include "searchuserqueryable.hpp"
 // Okteta Kasten gui
 #include <Kasten/Okteta/ByteArrayView>
 #include <Kasten/Okteta/ByteArrayViewProfileSynchronizer>
