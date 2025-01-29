@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-28 03:37+0000\n"
+"POT-Creation-Date: 2025-01-29 03:22+0000\n"
 "PO-Revision-Date: 2016-07-11 21:35+0100\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -583,13 +583,13 @@ msgctxt "@title:window of the tool to set a new offset for the cursor"
 msgid "Goto"
 msgstr "Gå til"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:72
+#: controllers/view/gotooffset/gotooffsetview.cpp:70
 #, kde-format
 msgctxt "@label:listbox"
 msgid "O&ffset:"
 msgstr "&Forskydning:"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:82
+#: controllers/view/gotooffset/gotooffsetview.cpp:80
 #: controllers/view/selectrange/selectrangeview.cpp:81
 #: controllers/view/selectrange/selectrangeview.cpp:101
 #, kde-format
@@ -599,33 +599,33 @@ msgstr ""
 "Indtast en forskydning at gå til, eller vælg en tidligere anvendt "
 "forskydning i listen."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:98
+#: controllers/view/gotooffset/gotooffsetview.cpp:96
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:111
 #, kde-format
 msgctxt "@option:check"
 msgid "From c&ursor"
 msgstr "Fra m&arkør"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:100
+#: controllers/view/gotooffset/gotooffsetview.cpp:98
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Go relative from the current cursor location and not absolute."
 msgstr "Gå relativt fra nuværende markørposition og ikke absolut."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:103
+#: controllers/view/gotooffset/gotooffsetview.cpp:101
 #, kde-format
 msgctxt "@option:check"
 msgid "&Extend selection"
 msgstr "&Udvid markering"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:105
+#: controllers/view/gotooffset/gotooffsetview.cpp:103
 #: controllers/view/selectrange/selectrangeview.cpp:123
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Extend the selection by the cursor move."
 msgstr "Udvid markeringen når markøren flyttes."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:108
+#: controllers/view/gotooffset/gotooffsetview.cpp:106
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:114
 #: controllers/view/selectrange/selectrangeview.cpp:115
 #, kde-format
@@ -633,26 +633,26 @@ msgctxt "@option:check"
 msgid "&Backwards"
 msgstr "Til&bage"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:110
+#: controllers/view/gotooffset/gotooffsetview.cpp:108
 #: controllers/view/selectrange/selectrangeview.cpp:117
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Go backwards from the end or the current cursor location."
 msgstr "Gå tilbage fra slutningen eller nuværende markørposition."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:125
+#: controllers/view/gotooffset/gotooffsetview.cpp:123
 #, kde-format
 msgctxt "@action:button"
 msgid "&Go"
 msgstr "&Gå til"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:128
+#: controllers/view/gotooffset/gotooffsetview.cpp:126
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Go to the Offset"
 msgstr "Gå til forskydningen"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:130
+#: controllers/view/gotooffset/gotooffsetview.cpp:128
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""

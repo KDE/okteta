@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-28 03:37+0000\n"
+"POT-Creation-Date: 2025-01-29 03:22+0000\n"
 "PO-Revision-Date: 2024-04-27 22:48+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -584,13 +584,13 @@ msgctxt "@title:window of the tool to set a new offset for the cursor"
 msgid "Goto"
 msgstr "Iri al"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:72
+#: controllers/view/gotooffset/gotooffsetview.cpp:70
 #, kde-format
 msgctxt "@label:listbox"
 msgid "O&ffset:"
 msgstr "Deŝo&vo:"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:82
+#: controllers/view/gotooffset/gotooffsetview.cpp:80
 #: controllers/view/selectrange/selectrangeview.cpp:81
 #: controllers/view/selectrange/selectrangeview.cpp:101
 #, kde-format
@@ -598,33 +598,33 @@ msgctxt "@info:whatsthis"
 msgid "Enter an offset to go to, or select a previous offset from the list."
 msgstr "Enigu deŝovon al kiu iri, aŭ elektu antaŭan deŝovon el la listo."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:98
+#: controllers/view/gotooffset/gotooffsetview.cpp:96
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:111
 #, kde-format
 msgctxt "@option:check"
 msgid "From c&ursor"
 msgstr "De k&ursoro"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:100
+#: controllers/view/gotooffset/gotooffsetview.cpp:98
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Go relative from the current cursor location and not absolute."
 msgstr "Iri relative de la nuna kursora loko kaj ne absolute."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:103
+#: controllers/view/gotooffset/gotooffsetview.cpp:101
 #, kde-format
 msgctxt "@option:check"
 msgid "&Extend selection"
 msgstr "&Etendi elekton"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:105
+#: controllers/view/gotooffset/gotooffsetview.cpp:103
 #: controllers/view/selectrange/selectrangeview.cpp:123
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Extend the selection by the cursor move."
 msgstr "Etendi la elekton per la movo de la kursoro."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:108
+#: controllers/view/gotooffset/gotooffsetview.cpp:106
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:114
 #: controllers/view/selectrange/selectrangeview.cpp:115
 #, kde-format
@@ -632,26 +632,26 @@ msgctxt "@option:check"
 msgid "&Backwards"
 msgstr "&Malantaŭen"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:110
+#: controllers/view/gotooffset/gotooffsetview.cpp:108
 #: controllers/view/selectrange/selectrangeview.cpp:117
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Go backwards from the end or the current cursor location."
 msgstr "Iri malantaŭen de la fino aŭ la nuna kursora loko."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:125
+#: controllers/view/gotooffset/gotooffsetview.cpp:123
 #, kde-format
 msgctxt "@action:button"
 msgid "&Go"
 msgstr "&Iri"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:128
+#: controllers/view/gotooffset/gotooffsetview.cpp:126
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Go to the Offset"
 msgstr "Iri al la deŝovo"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:130
+#: controllers/view/gotooffset/gotooffsetview.cpp:128
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
