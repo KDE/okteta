@@ -1,5 +1,4 @@
 set(SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/..)
-set(CONTROLLERSDIR ${SUTDIR}/../..)
 
 ecm_add_test(
     ${SUTDIR}/char8stringvalidator.cpp
