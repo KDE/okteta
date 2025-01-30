@@ -1,6 +1,8 @@
+set(SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/..)
+
 include_directories(
+  ${SUTDIR}
   ${CMAKE_CURRENT_BINARY_DIR}/.. # for oktetacore_export.hpp
-  ${CMAKE_CURRENT_SOURCE_DIR}/.. # okteta core includes
 )
 
 # Configure export macros to be setup as with a static lib
