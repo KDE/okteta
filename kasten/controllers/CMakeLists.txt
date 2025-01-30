@@ -4,13 +4,89 @@ set(OKTETAKASTENCONTROLLERS_SO_VERSION ${OKTETAKASTEN_LIB_SOVERSION})
 # create static libraries for sharing between unit tests and actual library product
 # This means we don't have to compile the sources twice
 
-add_library(datatypeeditors STATIC)
-set_target_properties(datatypeeditors PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
-target_link_libraries(datatypeeditors
+add_library(configentries STATIC)
+set_target_properties(configentries PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
+target_link_libraries(configentries
+    PUBLIC
+        OktetaKastenGui
+        KF5::ConfigCore
+)
+
+add_library(datatypes STATIC)
+set_target_properties(datatypes PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
+target_link_libraries(datatypes
     PUBLIC
         OktetaGui
     PRIVATE
         KF5::Completion
+)
+
+add_library(datatypecodecs STATIC)
+set_target_properties(datatypecodecs PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
+target_compile_definitions(datatypecodecs PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")
+target_link_libraries(datatypecodecs
+    PUBLIC
+        datatypes
+    PRIVATE
+        KF5::I18n
+)
+
+add_library(datatypedisplaystringifiers STATIC)
+set_target_properties(datatypedisplaystringifiers PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
+target_link_libraries(datatypedisplaystringifiers
+    PUBLIC
+        datatypes
+)
+
+add_library(datatypeeditors STATIC)
+set_target_properties(datatypeeditors PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
+target_link_libraries(datatypeeditors
+    PUBLIC
+        datatypes
+    PRIVATE
+        KF5::Completion
+)
+
+add_library(bytearraychecksum STATIC)
+set_target_properties(bytearraychecksum PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
+target_compile_definitions(bytearraychecksum PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")
+target_link_libraries(bytearraychecksum
+    PUBLIC
+        OktetaCore
+        Qt5::Widgets
+    PRIVATE
+        configentries
+        KF5::Completion
+        KF5::I18n
+)
+
+add_library(bytearrayfilter STATIC)
+set_target_properties(bytearrayfilter PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
+target_compile_definitions(bytearrayfilter PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")
+target_link_libraries(bytearrayfilter
+    PUBLIC
+        OktetaCore
+        Qt5::Widgets
+    PRIVATE
+        configentries
+        KF5::I18n
+)
+
+add_library(finddialog STATIC)
+set_target_properties(finddialog PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
+target_compile_definitions(finddialog PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")
+target_link_libraries(finddialog
+    PUBLIC
+        OktetaKastenGui
+    PRIVATE
+        KF5::I18n
+)
+
+add_library(bytearraysearch STATIC)
+set_target_properties(bytearraysearch PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
+target_link_libraries(bytearraysearch
+    PUBLIC
+        finddialog
 )
 
 add_library(structureview-tested-srcs STATIC)
@@ -26,6 +102,7 @@ target_link_libraries(structureview-tested-srcs
         Qt5::Xml
         Qt5::Widgets
     PRIVATE
+        configentries
         datatypeeditors
         KF5::Completion
         KF5::ConfigWidgets
@@ -47,7 +124,14 @@ okteta_add_library(Controllers NAMESPACE Okteta Kasten
         KastenCore
     PRIVATE
         structureview-tested-srcs
+        bytearraychecksum
+        bytearrayfilter
         datatypeeditors
+        datatypedisplaystringifiers
+        datatypecodecs
+        configentries
+        finddialog
+        bytearraysearch
         framesprint
         KF5::NewStuffWidgets
         KF5::I18n
@@ -98,6 +182,7 @@ endmacro()
 
 oktetakastencontrollers_add_sublibrary(libconfigentries
     BUILD_INCLUDEDIR
+    LIBRARY configentries
     PRIVATE
         AddressComboBoxCodingConfigEntry
         ByteArrayCodingConfigEntry
@@ -165,6 +250,7 @@ oktetakastencontrollers_add_sublibrary(view/stringsextract
 
 oktetakastencontrollers_add_sublibrary(view/libbytearraychecksum
     BUILD_INCLUDEDIR
+    LIBRARY bytearraychecksum
     PRIVATE
         AbstractByteArrayChecksumAlgorithm
         AbstractByteArrayChecksumParameterSet
@@ -174,6 +260,7 @@ oktetakastencontrollers_add_sublibrary(view/libbytearraychecksum
 )
 
 oktetakastencontrollers_add_sublibrary(view/libbytearraychecksum/algorithm
+    LIBRARY bytearraychecksum
     PRIVATE
         Crc32ByteArrayChecksumAlgorithm
         Crc64ByteArrayChecksumAlgorithm
@@ -216,6 +303,7 @@ oktetakastencontrollers_add_sublibrary(view/checksum
 
 oktetakastencontrollers_add_sublibrary(view/libfinddialog
     BUILD_INCLUDEDIR
+    LIBRARY finddialog
     PRIVATE
         AbstractFindDialog
         FindDirection
@@ -223,6 +311,7 @@ oktetakastencontrollers_add_sublibrary(view/libfinddialog
 
 oktetakastencontrollers_add_sublibrary(view/libbytearraysearch
     BUILD_INCLUDEDIR
+    LIBRARY bytearraysearch
     PRIVATE
         ByteArraySearchJob
         ByteArraySearchUtils
@@ -230,7 +319,7 @@ oktetakastencontrollers_add_sublibrary(view/libbytearraysearch
 
 oktetakastencontrollers_add_sublibrary(view/libdatatypes
     BUILD_INCLUDEDIR
-    LIBRARY datatypeeditors
+    LIBRARY datatypes
     PRIVATE
         Binary8
         Octal8
@@ -252,7 +341,7 @@ oktetakastencontrollers_add_sublibrary(view/libdatatypes
 
 oktetakastencontrollers_add_sublibrary(view/libdatatypedisplaystringifiers
     BUILD_INCLUDEDIR
-    LIBRARY datatypeeditors
+    LIBRARY datatypedisplaystringifiers
     PRIVATE
         AbstractDataTypeDisplayStringifier
         DataTypeDisplayStringifierManager
@@ -279,6 +368,7 @@ oktetakastencontrollers_add_sublibrary(view/libdatatypeeditors
 
 oktetakastencontrollers_add_sublibrary(view/libdatatypecodecs
     BUILD_INCLUDEDIR
+    LIBRARY datatypecodecs
     PRIVATE
         PODData
         AbstractTypeCodec
@@ -357,6 +447,7 @@ oktetakastencontrollers_add_sublibrary(view/replace
 
 oktetakastencontrollers_add_sublibrary(view/libbytearrayfilter
     BUILD_INCLUDEDIR
+    LIBRARY bytearrayfilter
     PRIVATE
         AbstractByteArrayFilter
         AbstractByteArrayFilterParameterSet
@@ -366,6 +457,7 @@ oktetakastencontrollers_add_sublibrary(view/libbytearrayfilter
 )
 
 oktetakastencontrollers_add_sublibrary(view/libbytearrayfilter/filter
+    LIBRARY bytearrayfilter
     PRIVATE
         NoByteArrayFilterParameterSet
         OperandByteArrayFilterParameterSet
