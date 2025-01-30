@@ -9,7 +9,7 @@ include_directories(
 # as the source files are reused for the tests.
 # Saves doing a separate export header.
 add_definitions(
-    -DOKTETAKASTENGUI_STATIC_DEFINE
+    -DOKTETAKASTENGUI_STATICLIB
 )
 
 ecm_add_test(
