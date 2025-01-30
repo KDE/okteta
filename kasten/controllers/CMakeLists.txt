@@ -1,8 +1,6 @@
 set(OKTETAKASTENCONTROLLERS_VERSION ${OKTETAKASTEN_LIB_VERSION})
 set(OKTETAKASTENCONTROLLERS_SO_VERSION ${OKTETAKASTEN_LIB_SOVERSION})
 
-set( LIBFRAMESPRINT_REL_DIR ../../libs/framesprint )
-
 # create static libraries for sharing between unit tests and actual library product
 # This means we don't have to compile the sources twice
 
@@ -50,6 +48,7 @@ okteta_add_library(Controllers NAMESPACE Okteta Kasten
     PRIVATE
         structureview-tested-srcs
         datatypeeditors
+        framesprint
         KF5::NewStuffWidgets
         KF5::I18n
         KF5::ConfigWidgets
@@ -594,14 +593,6 @@ oktetakastencontrollers_add_sublibrary(view/structures
         StructureView
         StructuresToolView
         StructureViewItemDelegate
-)
-
-oktetakastencontrollers_add_sublibrary(${LIBFRAMESPRINT_REL_DIR}
-    BUILD_INCLUDEDIR
-    PRIVATE
-        AbstractFrameRenderer
-        FramesToPaperPrinter
-        HeaderFooterFrameRenderer
 )
 
 oktetakastencontrollers_add_sublibrary(view/print
