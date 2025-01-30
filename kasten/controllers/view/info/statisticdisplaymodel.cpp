@@ -7,6 +7,7 @@
 */
 
 #include "statisticdisplaymodel.hpp"
+#include "statisticdisplaymodel-config.hpp"
 
 // tool
 #include "statistictablemodel.hpp"

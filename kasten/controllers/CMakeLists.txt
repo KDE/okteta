@@ -78,6 +78,7 @@ oktetakastencontrollers_add_sublibrary(view/info
     KCFG
         infoviewsettings.kcfgc
 )
+configure_file(view/info/statisticdisplaymodel-config.hpp.in ${CMAKE_CURRENT_BINARY_DIR}/statisticdisplaymodel-config.hpp @ONLY)
 
 oktetakastencontrollers_add_sublibrary(view/stringsextract
     PUBLIC
@@ -513,13 +514,7 @@ oktetakastencontrollers_add_sublibrary(view/print
         PrintPreviewDialog
         PrintController
 )
-set_source_files_properties(view/print/printtool.cpp PROPERTIES
-    COMPILE_FLAGS -DOKTETA_VERSION=\\\"${Okteta_VERSION}\\\"
-)
-set_source_files_properties(view/info/statisticdisplaymodel.cpp PROPERTIES
-    COMPILE_FLAGS -DOKTETA_VERSION=\\\"${Okteta_VERSION}\\\"
-)
-
+configure_file(view/print/printtool-config.hpp.in ${CMAKE_CURRENT_BINARY_DIR}/printtool-config.hpp @ONLY)
 
 oktetakastencontrollers_add_sublibrary(view/viewconfig
     PUBLIC

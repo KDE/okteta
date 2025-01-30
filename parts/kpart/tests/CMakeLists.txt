@@ -1,15 +1,9 @@
 include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}/..
+  ${CMAKE_CURRENT_BINARY_DIR}/..
 )
 
-add_definitions(
-    -DTESTPATH1=\"${CMAKE_CURRENT_SOURCE_DIR}/oktetaparttest.hpp\"
-    -DTESTPATH2=\"${CMAKE_CURRENT_SOURCE_DIR}/oktetaparttest.cpp\"
-)
-
-set_source_files_properties(../partfactory.cpp PROPERTIES
-    COMPILE_FLAGS -DOKTETA_VERSION=\\\"${Okteta_VERSION}\\\"
-)
+configure_file(oktetaparttest-config.hpp.in ${CMAKE_CURRENT_BINARY_DIR}/oktetaparttest-config.hpp @ONLY)
 
 # TODO: deduplicate object file generation of
 ecm_add_test(

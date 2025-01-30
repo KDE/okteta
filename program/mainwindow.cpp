@@ -7,6 +7,7 @@
 */
 
 #include "mainwindow.hpp"
+#include "mainwindow-config.hpp"
 
 // program
 #include "program.hpp"
