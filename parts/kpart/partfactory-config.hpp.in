@@ -1,0 +1,14 @@
+/*
+    This file is part of the Okteta Kasten module, made within the KDE community.
+
+    SPDX-FileCopyrightText: 2025 Friedrich W. H. Kossebau <kossebau@kde.org>
+
+    SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
+*/
+
+#ifndef OKTETAPARTFACTORY_CONFIG_HPP
+#define OKTETAPARTFACTORY_CONFIG_HPP
+
+#define OKTETA_VERSION "@Okteta_VERSION@"
+
+#endif

@@ -619,10 +619,7 @@ oktetakastencontrollers_add_sublibrary(view/print
         PrintPreviewDialog
         PrintController
 )
-set_source_files_properties(view/print/printtool.cpp PROPERTIES
-    COMPILE_FLAGS -DOKTETA_VERSION=\\\"${Okteta_VERSION}\\\"
-)
-
+configure_file(view/print/printtool-config.hpp.in ${CMAKE_CURRENT_BINARY_DIR}/printtool-config.hpp @ONLY)
 
 oktetakastencontrollers_add_sublibrary(view/viewconfig
     PUBLIC

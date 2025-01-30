@@ -7,6 +7,7 @@
 */
 
 #include "about.hpp"
+#include "about-config.hpp"
 
 // KF
 #include <KLocalizedString>

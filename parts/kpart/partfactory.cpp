@@ -7,6 +7,7 @@
 */
 
 #include "partfactory.hpp"
+#include "partfactory-config.hpp"
 
 // part
 #include "part.hpp"

@@ -24,9 +24,7 @@ target_sources(oktetapart
         oktetapart.qrc
 )
 
-set_source_files_properties(partfactory.cpp PROPERTIES
-    COMPILE_FLAGS -DOKTETA_VERSION=\\\"${Okteta_VERSION}\\\"
-)
+configure_file(partfactory-config.hpp.in ${CMAKE_CURRENT_BINARY_DIR}/partfactory-config.hpp @ONLY)
 
 install( TARGETS oktetapart  DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf5/parts)
 kcoreaddons_desktop_to_json(oktetapart ${CMAKE_CURRENT_BINARY_DIR}/oktetapart.desktop)

@@ -24,13 +24,9 @@ target_sources(okteta
         okteta.qrc
 )
 
-set_source_files_properties(about.cpp PROPERTIES
-    COMPILE_FLAGS -DOKTETA_VERSION=\\\"${Okteta_VERSION}\\\"
-)
-
-set_source_files_properties(mainwindow.cpp PROPERTIES
-    COMPILE_FLAGS -DKASTEN_BUILD_TERMINALTOOL=$<BOOL:${BUILD_TERMINALTOOL}>
-)
+configure_file(about-config.hpp.in ${CMAKE_CURRENT_BINARY_DIR}/about-config.hpp @ONLY)
+set(KASTEN_BUILD_TERMINALTOOL ${BUILD_TERMINALTOOL})
+configure_file(mainwindow-config.hpp.in ${CMAKE_CURRENT_BINARY_DIR}/mainwindow-config.hpp @ONLY)
 
 ecm_add_app_icon(okteta
     ICONS

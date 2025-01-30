@@ -7,6 +7,7 @@
 */
 
 #include "oktetaparttest.hpp"
+#include "oktetaparttest-config.hpp"
 
 // test object
 #include <partfactory.hpp>

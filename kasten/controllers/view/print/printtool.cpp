@@ -7,6 +7,7 @@
 */
 
 #include "printtool.hpp"
+#include "printtool-config.hpp"
 
 // controller
 #include "printjob.hpp"
