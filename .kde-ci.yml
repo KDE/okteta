@@ -2,8 +2,8 @@
 # SPDX-License-Identifier: CC0-1.0
 
 Dependencies:
-- 'on': ['@all']
-  'require':
+ - 'on': ['@all']
+   'require':
     'frameworks/extra-cmake-modules': '@stable'
     'frameworks/kbookmarks': '@stable'
     'frameworks/kcompletion': '@stable'
@@ -23,4 +23,4 @@ Dependencies:
     'frameworks/ki18n': '@stable'
 
 Options:
-  require-passing-tests-on: [ 'Linux', 'FreeBSD' ]
+ require-passing-tests-on: ['Linux', 'FreeBSD']
