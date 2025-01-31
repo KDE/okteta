@@ -1,14 +1,3 @@
-set( SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/.. )
-
-include_directories(
-  ${CMAKE_CURRENT_BINARY_DIR}/..
-  ${SUTDIR}/..
-  ${SUTDIR}/document
-  ${SUTDIR}/io
-  ${SUTDIR}/io/filesystem
-  ${SUTDIR}
-)
-
 ########### util ###############
 
 set( kastencoretestutil_LIB_SRCS
@@ -39,7 +28,7 @@ set( kastencoretestio_LIB_SRCS
 add_library( kastencoretestio  STATIC ${kastencoretestio_LIB_SRCS} )
 target_link_libraries( kastencoretestio
 PUBLIC
-  Qt5::Core
+  KastenCore
 PRIVATE
   KF5::CoreAddons
 )
