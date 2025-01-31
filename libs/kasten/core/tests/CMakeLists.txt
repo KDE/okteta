@@ -41,7 +41,6 @@ target_link_libraries( kastencoretestio
 PUBLIC
   Qt5::Core
 PRIVATE
-  KF5::I18n
   KF5::CoreAddons
 )
 
