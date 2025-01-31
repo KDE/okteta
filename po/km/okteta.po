@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-17 01:50+0000\n"
+"POT-Creation-Date: 2025-01-31 01:56+0000\n"
 "PO-Revision-Date: 2010-06-09 14:56+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -30,45 +30,45 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "khoemsokhem@khmeros.info,​​evannak@khmeros.info,piseth_dv@khmeros.info"
 
-#: about.cpp:16
+#: about.cpp:17
 #, kde-format
 msgid "Okteta"
 msgstr "Okteta"
 
-#: about.cpp:18
+#: about.cpp:19
 #, fuzzy, kde-format
 #| msgid "KDE byte editor"
 msgid "Hex editor"
 msgstr "កម្មវិធី​កែសម្រួល​បៃ​របស់ KDE"
 
-#: about.cpp:20
+#: about.cpp:21
 #, fuzzy, kde-format
 #| msgid "Copyright 2006-2010 Friedrich W. H. Kossebau"
 msgid "2006-%1 Friedrich W. H. Kossebau"
 msgstr "រក្សាសិទ្ធិ​ឆ្នាំ ២០០៦-២០១០ ដោយ Friedrich W. H. Kossebau"
 
-#: about.cpp:21
+#: about.cpp:22
 #, kde-format
 msgid "Edit the raw data of files"
 msgstr "កែសម្រួល​ទិន្នន័យ​ដើម​របស់​ឯកសារ"
 
-#: about.cpp:26
+#: about.cpp:27
 #, kde-format
 msgid "Friedrich W. H. Kossebau"
 msgstr "Friedrich W. H. Kossebau"
 
-#: about.cpp:27
+#: about.cpp:28
 #, kde-format
 msgid "Author"
 msgstr "អ្នក​និពន្ធ"
 
-#: about.cpp:29
+#: about.cpp:30
 #, kde-format
 msgctxt "Author"
 msgid "Alexander Richardson"
 msgstr "Alexander Richardson"
 
-#: about.cpp:30
+#: about.cpp:31
 #, kde-format
 msgctxt "Task description"
 msgid "Structures tool"

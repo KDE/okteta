@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-29 01:55+0000\n"
+"POT-Creation-Date: 2025-01-31 01:56+0000\n"
 "PO-Revision-Date: 2022-06-10 00:48+0000\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -1369,26 +1369,26 @@ msgctxt "@action:button"
 msgid "&Select"
 msgstr ""
 
-#: controllers/view/print/printtool.cpp:275
-#: controllers/view/print/printtool.cpp:305
+#: controllers/view/print/printtool.cpp:276
+#: controllers/view/print/printtool.cpp:306
 #, kde-format
 msgctxt "@title:window"
 msgid "Print Byte Array %1"
 msgstr ""
 
-#: controllers/view/print/printtool.cpp:300
+#: controllers/view/print/printtool.cpp:301
 #, kde-format
 msgctxt "@info"
 msgid "Could not print."
 msgstr ""
 
-#: controllers/view/print/printtool.cpp:336
+#: controllers/view/print/printtool.cpp:337
 #, kde-format
 msgctxt "in the header of the printed page, e.g. Page 2 of 20"
 msgid "Page %p of %P"
 msgstr ""
 
-#: controllers/view/print/printtool.cpp:342
+#: controllers/view/print/printtool.cpp:343
 #, kde-format
 msgctxt "in the footer of the printed page, e.g. Printed by: Joe User"
 msgid "Printed by: %U"

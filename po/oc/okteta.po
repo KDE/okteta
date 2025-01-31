@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-17 01:50+0000\n"
+"POT-Creation-Date: 2025-01-31 01:56+0000\n"
 "PO-Revision-Date: 2008-08-05 22:28+0200\n"
 "Last-Translator: Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>\n"
 "Language-Team: Occitan (lengadocian) <ubuntu-l10n-oci@lists.ubuntu.com>\n"
@@ -28,43 +28,43 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "yannig@marchegay.org"
 
-#: about.cpp:16
+#: about.cpp:17
 #, kde-format
 msgid "Okteta"
 msgstr ""
 
-#: about.cpp:18
+#: about.cpp:19
 #, kde-format
 msgid "Hex editor"
 msgstr ""
 
-#: about.cpp:20
+#: about.cpp:21
 #, kde-format
 msgid "2006-%1 Friedrich W. H. Kossebau"
 msgstr ""
 
-#: about.cpp:21
+#: about.cpp:22
 #, kde-format
 msgid "Edit the raw data of files"
 msgstr ""
 
-#: about.cpp:26
+#: about.cpp:27
 #, kde-format
 msgid "Friedrich W. H. Kossebau"
 msgstr ""
 
-#: about.cpp:27
+#: about.cpp:28
 #, kde-format
 msgid "Author"
 msgstr "Autor"
 
-#: about.cpp:29
+#: about.cpp:30
 #, kde-format
 msgctxt "Author"
 msgid "Alexander Richardson"
 msgstr ""
 
-#: about.cpp:30
+#: about.cpp:31
 #, kde-format
 msgctxt "Task description"
 msgid "Structures tool"
