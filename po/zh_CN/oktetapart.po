@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-24 03:20+0000\n"
+"POT-Creation-Date: 2025-01-31 03:26+0000\n"
 "PO-Revision-Date: 2024-03-30 19:46\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -62,27 +62,27 @@ msgctxt "@title:menu"
 msgid "Permissions"
 msgstr "权限"
 
-#: partfactory.cpp:32
+#: partfactory.cpp:33
 #, kde-format
 msgid "OktetaPart"
 msgstr "Okteta 组件"
 
-#: partfactory.cpp:34
+#: partfactory.cpp:35
 #, kde-format
 msgid "Embedded hex editor"
 msgstr "嵌入的十六进制编辑器"
 
-#: partfactory.cpp:36
+#: partfactory.cpp:37
 #, kde-format
 msgid "Copyright 2003-%1 Friedrich W. H. Kossebau"
 msgstr "版权所有 2003-%1 Friedrich W. H. Kossebau"
 
-#: partfactory.cpp:38
+#: partfactory.cpp:39
 #, kde-format
 msgid "Friedrich W. H. Kossebau"
 msgstr "Friedrich W. H. Kossebau"
 
-#: partfactory.cpp:38
+#: partfactory.cpp:39
 #, kde-format
 msgid "Author"
 msgstr "作者"

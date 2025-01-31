@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: oktetapart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-24 03:20+0000\n"
+"POT-Creation-Date: 2025-01-31 03:26+0000\n"
 "PO-Revision-Date: 2021-03-01 12:55+0100\n"
 "Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -63,27 +63,27 @@ msgctxt "@title:menu"
 msgid "Permissions"
 msgstr "Berechtigungen"
 
-#: partfactory.cpp:32
+#: partfactory.cpp:33
 #, kde-format
 msgid "OktetaPart"
 msgstr "OktetaPart"
 
-#: partfactory.cpp:34
+#: partfactory.cpp:35
 #, kde-format
 msgid "Embedded hex editor"
 msgstr "Eingebetteter Editor für Binärdateien"
 
-#: partfactory.cpp:36
+#: partfactory.cpp:37
 #, kde-format
 msgid "Copyright 2003-%1 Friedrich W. H. Kossebau"
 msgstr "Copyright 2003-%1 Friedrich W. H. Kossebau"
 
-#: partfactory.cpp:38
+#: partfactory.cpp:39
 #, kde-format
 msgid "Friedrich W. H. Kossebau"
 msgstr "Friedrich W. H. Kossebau"
 
-#: partfactory.cpp:38
+#: partfactory.cpp:39
 #, kde-format
 msgid "Author"
 msgstr "Autor"

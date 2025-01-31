@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Mimos\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-24 03:20+0000\n"
+"POT-Creation-Date: 2025-01-31 03:26+0000\n"
 "PO-Revision-Date: 2005-11-17 09:34+0800\n"
 "Last-Translator: junetazawawi <junetazawawi@yahoo.com>\n"
 "Language-Team: Malay <kedidiemas@yahoogroups.com>\n"
@@ -61,27 +61,27 @@ msgctxt "@title:menu"
 msgid "Permissions"
 msgstr ""
 
-#: partfactory.cpp:32
+#: partfactory.cpp:33
 #, kde-format
 msgid "OktetaPart"
 msgstr ""
 
-#: partfactory.cpp:34
+#: partfactory.cpp:35
 #, kde-format
 msgid "Embedded hex editor"
 msgstr "Pengarang heks terbenam"
 
-#: partfactory.cpp:36
+#: partfactory.cpp:37
 #, kde-format
 msgid "Copyright 2003-%1 Friedrich W. H. Kossebau"
 msgstr ""
 
-#: partfactory.cpp:38
+#: partfactory.cpp:39
 #, kde-format
 msgid "Friedrich W. H. Kossebau"
 msgstr ""
 
-#: partfactory.cpp:38
+#: partfactory.cpp:39
 #, kde-format
 msgid "Author"
 msgstr "Pengarang"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-24 03:20+0000\n"
+"POT-Creation-Date: 2025-01-31 03:26+0000\n"
 "PO-Revision-Date: 2020-03-21 19:55+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -66,28 +66,28 @@ msgctxt "@title:menu"
 msgid "Permissions"
 msgstr "Baimenak"
 
-#: partfactory.cpp:32
+#: partfactory.cpp:33
 #, kde-format
 msgid "OktetaPart"
 msgstr "OktetaPart"
 
-#: partfactory.cpp:34
+#: partfactory.cpp:35
 #, kde-format
 msgid "Embedded hex editor"
 msgstr "Txertatutako editore hamaseitarra"
 
-#: partfactory.cpp:36
+#: partfactory.cpp:37
 #, fuzzy, kde-format
 #| msgid "Copyright 2003-2020 Friedrich W. H. Kossebau"
 msgid "Copyright 2003-%1 Friedrich W. H. Kossebau"
 msgstr "Copyright 2003-2020 Friedrich W. H. Kossebau"
 
-#: partfactory.cpp:38
+#: partfactory.cpp:39
 #, kde-format
 msgid "Friedrich W. H. Kossebau"
 msgstr "Friedrich W. H. Kossebau"
 
-#: partfactory.cpp:38
+#: partfactory.cpp:39
 #, kde-format
 msgid "Author"
 msgstr "Egilea"

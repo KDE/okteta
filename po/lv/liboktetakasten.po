@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-29 03:22+0000\n"
+"POT-Creation-Date: 2025-01-31 03:26+0000\n"
 "PO-Revision-Date: 2010-01-09 18:03+0200\n"
 "Last-Translator: Viesturs Zarins <viesturs.zarins@mii.lu.lv>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -1338,26 +1338,26 @@ msgctxt "@label:textbox"
 msgid "UTF-8"
 msgstr "UTF-8"
 
-#: controllers/view/print/printtool.cpp:297
-#: controllers/view/print/printtool.cpp:324
+#: controllers/view/print/printtool.cpp:298
+#: controllers/view/print/printtool.cpp:325
 #, kde-format
 msgctxt "@title:window"
 msgid "Print Byte Array %1"
 msgstr "Drukāt baitu masīvu %1"
 
-#: controllers/view/print/printtool.cpp:322
+#: controllers/view/print/printtool.cpp:323
 #, kde-format
 msgctxt "@info"
 msgid "Could not print."
 msgstr "Neizdevās izdrukāt."
 
-#: controllers/view/print/printtool.cpp:359
+#: controllers/view/print/printtool.cpp:360
 #, kde-format
 msgctxt "in the header of the printed page, e.g. Page 2 of 20"
 msgid "Page %p of %P"
 msgstr "Lapa %p no %P"
 
-#: controllers/view/print/printtool.cpp:365
+#: controllers/view/print/printtool.cpp:366
 #, kde-format
 msgctxt "in the footer of the printed page, e.g. Printed by: Joe User"
 msgid "Printed by: %U"
