@@ -22,6 +22,8 @@
 #include "../script/scriptengineinitializer.hpp"
 #include "../structlogging.hpp"
 
+#include <KLocalizedString>
+
 #include <QFile>
 #include <QFileInfo>
 

@@ -11,7 +11,6 @@
 
 #include <QDebug>
 #include <QStringList>
-#include <KLocalizedString>
 
 #include "../datatypes/datainformation.hpp"
 #include "../datatypes/strings/stringdatainformation.hpp"
