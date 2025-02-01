@@ -16,7 +16,6 @@ ecm_add_tests(
     NAME_PREFIX oktetakasten-controllers-structures-
     LINK_LIBRARIES
         structureview-tested-srcs
-        poddecoder-typeeditors
         Qt5::Test
 )
 

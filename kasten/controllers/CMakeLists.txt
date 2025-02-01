@@ -590,6 +590,7 @@ PUBLIC
   Qt5::Xml
   Qt5::Widgets
 PRIVATE
+  poddecoder-typeeditors
   KF5::Completion
   KF5::ConfigWidgets
 )
@@ -612,7 +613,6 @@ okteta_add_library(Controllers NAMESPACE Okteta Kasten
         KastenCore
     PRIVATE
         structureview-tested-srcs
-        poddecoder-typeeditors
         KF5::NewStuff
         KF5::I18n
         KF5::ConfigWidgets
