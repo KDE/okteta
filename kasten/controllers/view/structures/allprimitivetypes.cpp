@@ -7,7 +7,6 @@
 */
 
 #include "allprimitivetypes.hpp"
-#include "datatypes/primitive/primitivedatainformation.hpp"
 
 #include <Okteta/AbstractByteArrayModel>
 

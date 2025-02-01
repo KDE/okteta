@@ -21,6 +21,8 @@
 #include "../script/scriptlogger.hpp"
 #include "../script/scriptengineinitializer.hpp"
 #include <structureslogging.hpp>
+// KF
+#include <KLocalizedString>
 // Qt
 #include <QFile>
 #include <QFileInfo>

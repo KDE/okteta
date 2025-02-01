@@ -89,26 +89,22 @@ target_link_libraries(bytearraysearch
         finddialog
 )
 
-add_library(structureview-tested-srcs STATIC)
-set_target_properties(structureview-tested-srcs PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
-target_compile_definitions(structureview-tested-srcs PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")
-target_link_libraries(structureview-tested-srcs
+add_library(structuresdatatypes STATIC)
+set_target_properties(structuresdatatypes PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
+target_compile_definitions(structuresdatatypes PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")
+target_link_libraries(structuresdatatypes
     PUBLIC
         OktetaCore
         KF5::ConfigGui
-        KF5::I18n
-        KF5::Service
         Qt5::Script
-        Qt5::Xml
-        Qt5::Widgets
     PRIVATE
         configentries
         datatypeeditors
         KF5::Completion
-        KF5::ConfigWidgets
+        KF5::I18n
 )
 
-ecm_qt_declare_logging_category(structureview-tested-srcs
+ecm_qt_declare_logging_category(structuresdatatypes
     HEADER "structureslogging.hpp"
     IDENTIFIER "LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES"
     CATEGORY_NAME "kasten.okteta.controllers.structures"
@@ -123,7 +119,7 @@ okteta_add_library(Controllers NAMESPACE Okteta Kasten
         KastenGui
         KastenCore
     PRIVATE
-        structureview-tested-srcs
+        structuresdatatypes
         bytearraychecksum
         bytearrayfilter
         datatypeeditors
@@ -140,6 +136,7 @@ okteta_add_library(Controllers NAMESPACE Okteta Kasten
         KF5::Completion
         Qt5::PrintSupport
         Qt5::Script
+        Qt5::Xml
 #         Qt5::Test # QAbstractItemModelTester
     VERSION     ${OKTETAKASTENCONTROLLERS_VERSION}
     SOVERSION   ${OKTETAKASTENCONTROLLERS_SO_VERSION}
@@ -169,16 +166,6 @@ macro(OKTETAKASTENCONTROLLERS_ADD_SUBLIBRARY _subdir)
         ${ARGN}
     )
 endmacro()
-
-macro(OKTETAKASTENCONTROLLERS_ADD_SUBLIBRARY_STRUCTURES_TESTED _subdir)
-    okteta_add_sublibrary(Controllers NAMESPACE Okteta Kasten
-        REVERSE_NAMESPACE_INCLUDEDIR
-        LIBRARY structureview-tested-srcs
-        SUBDIR ${_subdir}
-        ${ARGN}
-    )
-endmacro()
-
 
 oktetakastencontrollers_add_sublibrary(libconfigentries
     BUILD_INCLUDEDIR
@@ -552,7 +539,8 @@ oktetakastencontrollers_add_sublibrary(view/bookmarks
 )
 
 
-oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/datatypes
+oktetakastencontrollers_add_sublibrary(view/structures/datatypes
+    LIBRARY structuresdatatypes
     PRIVATE
         TopLevelDataInformation
         DataInformation
@@ -566,7 +554,8 @@ oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/datatyp
         PrimitiveDataType
 )
 
-oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/datatypes/array
+oktetakastencontrollers_add_sublibrary(view/structures/datatypes/array
+    LIBRARY structuresdatatypes
     PRIVATE
         ArrayDataInformation
         AbstractArrayData
@@ -574,7 +563,8 @@ oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/datatyp
         PrimitiveArrayData
 )
 
-oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/datatypes/primitive
+oktetakastencontrollers_add_sublibrary(view/structures/datatypes/primitive
+    LIBRARY structuresdatatypes
     PRIVATE
         PointerDataInformation
         CharDataInformation
@@ -590,7 +580,8 @@ oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/datatyp
         EnumDefinition
 )
 
-oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/datatypes/primitive/bitfield
+oktetakastencontrollers_add_sublibrary(view/structures/datatypes/primitive/bitfield
+    LIBRARY structuresdatatypes
     PRIVATE
         AbstractBitfieldDataInformation
         BoolBitfieldDataInformation
@@ -598,7 +589,8 @@ oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/datatyp
         UnsignedBitfieldDataInformation
 )
 
-oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/datatypes/strings
+oktetakastencontrollers_add_sublibrary(view/structures/datatypes/strings
+    LIBRARY structuresdatatypes
     PRIVATE
         StringDataInformation
         StringData
@@ -609,12 +601,15 @@ oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/datatyp
         Utf32StringData
         EbcdicStringData
 )
-oktetakastencontrollers_add_sublibrary_structures_tested(../../core/charcodecs
+
+oktetakastencontrollers_add_sublibrary(../../core/charcodecs
+    LIBRARY structuresdatatypes
     PRIVATE
         Ebcdic1047CharCodec
 )
 
-oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/script
+oktetakastencontrollers_add_sublibrary(view/structures/script
+    LIBRARY structuresdatatypes
     PRIVATE
         ScriptEngineInitializer
         ScriptHandler
@@ -624,7 +619,8 @@ oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/script
         SafeReference
 )
 
-oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/script/classes
+oktetakastencontrollers_add_sublibrary(view/structures/script/classes
+    LIBRARY structuresdatatypes
     PRIVATE
         DefaultScriptClass
         ArrayScriptClass
@@ -636,7 +632,8 @@ oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/script/
         StructUnionScriptClass
 )
 
-oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/parsers
+oktetakastencontrollers_add_sublibrary(view/structures/parsers
+    LIBRARY structuresdatatypes
     PRIVATE
         AbstractStructureParser
         OsdParser
@@ -646,12 +643,14 @@ oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/parsers
         ParserUtils
 )
 
-oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/settings
+oktetakastencontrollers_add_sublibrary(view/structures/settings
+    LIBRARY structuresdatatypes
     KCFG
         structureviewpreferences.kcfgc
 )
 
-oktetakastencontrollers_add_sublibrary_structures_tested(view/structures
+oktetakastencontrollers_add_sublibrary(view/structures
+    LIBRARY structuresdatatypes
     PRIVATE
         AllPrimitiveTypes
 )
