@@ -16,16 +16,6 @@ macro(OKTETAKASTENCONTROLLERS_ADD_SUBLIBRARY _subdir)
     )
 endmacro()
 
-macro(OKTETAKASTENCONTROLLERS_ADD_SUBLIBRARY_STRUCTURES_TESTED _subdir)
-    okteta_add_sublibrary(Controllers NAMESPACE Okteta Kasten
-        REVERSE_NAMESPACE_INCLUDEDIR
-        SOURCE_TAG structures_tested
-        SUBDIR ${_subdir}
-        ${ARGN}
-    )
-endmacro()
-
-
 oktetakastencontrollers_add_sublibrary(libconfigentries
     PRIVATE
         AddressComboBoxCodingConfigEntry
@@ -356,7 +346,8 @@ oktetakastencontrollers_add_sublibrary(view/bookmarks
 )
 
 
-oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/datatypes
+oktetakastencontrollers_add_sublibrary(view/structures/datatypes
+    SOURCE_TAG structuresdatatypes
     PRIVATE
         TopLevelDataInformation
         DataInformation
@@ -370,7 +361,8 @@ oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/datatyp
         PrimitiveDataType
 )
 
-oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/datatypes/array
+oktetakastencontrollers_add_sublibrary(view/structures/datatypes/array
+    SOURCE_TAG structuresdatatypes
     PRIVATE
         ArrayDataInformation
         AbstractArrayData
@@ -378,7 +370,8 @@ oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/datatyp
         PrimitiveArrayData
 )
 
-oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/datatypes/primitive
+oktetakastencontrollers_add_sublibrary(view/structures/datatypes/primitive
+    SOURCE_TAG structuresdatatypes
     PRIVATE
         PointerDataInformation
         CharDataInformation
@@ -394,7 +387,8 @@ oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/datatyp
         EnumDefinition
 )
 
-oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/datatypes/primitive/bitfield
+oktetakastencontrollers_add_sublibrary(view/structures/datatypes/primitive/bitfield
+    SOURCE_TAG structuresdatatypes
     PRIVATE
         AbstractBitfieldDataInformation
         BoolBitfieldDataInformation
@@ -402,7 +396,8 @@ oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/datatyp
         UnsignedBitfieldDataInformation
 )
 
-oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/datatypes/strings
+oktetakastencontrollers_add_sublibrary(view/structures/datatypes/strings
+    SOURCE_TAG structuresdatatypes
     PRIVATE
         StringDataInformation
         StringData
@@ -413,12 +408,14 @@ oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/datatyp
         Utf32StringData
         EbcdicStringData
 )
-oktetakastencontrollers_add_sublibrary_structures_tested(../../core/codecs
+oktetakastencontrollers_add_sublibrary(../../core/codecs
+    SOURCE_TAG structuresdatatypes
     PRIVATE
         Ebcdic1047CharCodec
 )
 
-oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/script
+oktetakastencontrollers_add_sublibrary(view/structures/script
+    SOURCE_TAG structuresdatatypes
     PRIVATE
         ScriptEngineInitializer
         ScriptHandler
@@ -428,7 +425,8 @@ oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/script
         SafeReference
 )
 
-oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/script/classes
+oktetakastencontrollers_add_sublibrary(view/structures/script/classes
+    SOURCE_TAG structuresdatatypes
     PRIVATE
         DefaultScriptClass
         ArrayScriptClass
@@ -440,7 +438,8 @@ oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/script/
         StructUnionScriptClass
 )
 
-oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/parsers
+oktetakastencontrollers_add_sublibrary(view/structures/parsers
+    SOURCE_TAG structuresdatatypes
     PRIVATE
         AbstractStructureParser
         OsdParser
@@ -450,12 +449,14 @@ oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/parsers
         ParserUtils
 )
 
-oktetakastencontrollers_add_sublibrary_structures_tested(view/structures/settings
+oktetakastencontrollers_add_sublibrary(view/structures/settings
+    SOURCE_TAG structuresdatatypes
     KCFG
         structureviewpreferences.kcfgc
 )
 
-oktetakastencontrollers_add_sublibrary_structures_tested(view/structures
+oktetakastencontrollers_add_sublibrary(view/structures
+    SOURCE_TAG structuresdatatypes
     PRIVATE
         AllPrimitiveTypes
         StructLogging
@@ -578,9 +579,9 @@ PRIVATE
   KF5::Completion
 )
 
-add_library( structureview-tested-srcs STATIC ${oktetakastencontrollers_structures_tested_LIB_SRCS} )
-set_target_properties( structureview-tested-srcs PROPERTIES POSITION_INDEPENDENT_CODE TRUE )
-target_link_libraries( structureview-tested-srcs
+add_library( structuresdatatypes STATIC ${oktetakastencontrollers_structuresdatatypes_LIB_SRCS} )
+set_target_properties( structuresdatatypes PROPERTIES POSITION_INDEPENDENT_CODE TRUE )
+target_link_libraries( structuresdatatypes
 PUBLIC
   OktetaCore
   KF5::ConfigGui
@@ -610,7 +611,7 @@ okteta_add_library(Controllers NAMESPACE Okteta Kasten
         KastenGui
         KastenCore
     PRIVATE
-        structureview-tested-srcs
+        structuresdatatypes
         KF5::NewStuff
         KF5::I18n
         KF5::ConfigWidgets
