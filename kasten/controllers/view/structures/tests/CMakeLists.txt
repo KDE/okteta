@@ -2,7 +2,6 @@ ecm_add_tests(
     primitivearraytest.cpp
     arraydatainformationtest.cpp
     basicdatainformationtest.cpp
-    primitivedatainformationtest.cpp
     scriptclassestest.cpp
     uniondatainformationtest.cpp
     allprimitivetypestest.cpp
@@ -16,6 +15,15 @@ ecm_add_tests(
     NAME_PREFIX oktetakasten-controllers-structures-
     LINK_LIBRARIES
         structureview-tested-srcs
+        Qt5::Test
+)
+
+ecm_add_test(
+    primitivedatainformationtest.cpp
+    NAME_PREFIX oktetakasten-controllers-structures-
+    LINK_LIBRARIES
+        structureview-tested-srcs
+        KF5::I18n
         Qt5::Test
 )
 
