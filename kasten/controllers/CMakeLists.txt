@@ -584,15 +584,13 @@ target_link_libraries( structureview-tested-srcs
 PUBLIC
   OktetaCore
   KF5::ConfigGui
-  KF5::I18n
-  KF5::Service
   Qt5::Script
-  Qt5::Xml
-  Qt5::Widgets
 PRIVATE
   poddecoder-typeeditors
   KF5::Completion
   KF5::ConfigWidgets
+  KF5::I18n
+  KF5::Service
 )
 
 list(APPEND oktetakastencontrollers_LIB_HDRS
