@@ -675,14 +675,36 @@ okteta_add_cmakeconfig(Controllers NAMESPACE Okteta Kasten
 
 if( KASTEN_BUILD_INTERNAL_TEMPLATES )
 
-okteta_add_sublibrary(ControllersTemplates NAMESPACE Okteta Kasten
+okteta_add_sublibrary(ByteArrayFilterTemplates
     SUBDIR view/libbytearrayfilter/filter/template
     PRIVATE
         Template_ByteArrayFilter
         Template_ByteArrayFilterParameterSet
         Template_ByteArrayFilterParameterSetEdit
 )
-okteta_add_sublibrary(ControllersTemplates NAMESPACE Okteta Kasten
+
+add_library(ByteArrayFilterTemplates  STATIC ${bytearrayfiltertemplates_LIB_SRCS})
+target_include_directories(ByteArrayFilterTemplates
+    PRIVATE
+        view/libbytearrayfilter
+        view/libbytearrayfilter/filter
+)
+# Configure export macros to be setup as with a static lib
+# as the source files are reused for static ByteArrayFilterTemplates
+# Saves doing a separate export header.
+target_compile_definitions(ByteArrayFilterTemplates
+    PUBLIC
+        OKTETAKASTENCONTROLLERS_STATIC_DEFINE
+)
+target_link_libraries(ByteArrayFilterTemplates
+    PUBLIC
+        OktetaCore
+        Qt5::Widgets
+    PRIVATE
+        KF5::I18n
+)
+
+okteta_add_sublibrary(ByteArrayCheckSumTemplates
     SUBDIR view/libbytearraychecksum/algorithm/template
     PRIVATE
         Template_ByteArrayCheckSumAlgorithm
@@ -690,8 +712,8 @@ okteta_add_sublibrary(ControllersTemplates NAMESPACE Okteta Kasten
         Template_ByteArrayChecksumParameterSetEdit
 )
 
-add_library( oktetakastencontrollertemplates  STATIC ${oktetakastencontrollerstemplates_LIB_SRCS} )
-target_include_directories(oktetakastencontrollertemplates
+add_library(ByteArrayCheckSumTemplates  STATIC ${bytearraychecksumtemplates_LIB_SRCS})
+target_include_directories(ByteArrayCheckSumTemplates
     PRIVATE
         view/libbytearrayfilter
         view/libbytearrayfilter/filter
@@ -699,13 +721,13 @@ target_include_directories(oktetakastencontrollertemplates
         view/libbytearraychecksum/algorithm
 )
 # Configure export macros to be setup as with a static lib
-# as the source files are reused for static oktetakastencontrollertemplates
+# as the source files are reused for static ByteArrayCheckSumTemplates
 # Saves doing a separate export header.
-target_compile_definitions(oktetakastencontrollertemplates
+target_compile_definitions(ByteArrayCheckSumTemplates
     PUBLIC
         OKTETAKASTENCONTROLLERS_STATIC_DEFINE
 )
-target_link_libraries( oktetakastencontrollertemplates
+target_link_libraries(ByteArrayCheckSumTemplates
     PUBLIC
         OktetaCore
         Qt5::Widgets
