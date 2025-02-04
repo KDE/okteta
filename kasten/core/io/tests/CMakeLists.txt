@@ -48,7 +48,7 @@ ecm_add_test(
   LINK_LIBRARIES
   oktetakastenio
   KastenCore
-  kastencoretestutil
+  KastenCoreTestUtil
   OktetaCoreTestUtil
   KF5::I18n
   KF5::Bookmarks
@@ -68,7 +68,7 @@ ecm_add_test(
   LINK_LIBRARIES
   oktetakastenio
   KastenCore
-  kastencoretestutil
+  KastenCoreTestUtil
   OktetaCoreTestUtil
   KF5::I18n
   KF5::Bookmarks

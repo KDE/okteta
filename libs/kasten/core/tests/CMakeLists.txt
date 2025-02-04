@@ -1,11 +1,11 @@
 ########### util ###############
 
-set( kastencoretestutil_LIB_SRCS
+set( KastenCoreTestUtil_LIB_SRCS
   util/filesystem.cpp
 )
 
-add_library( kastencoretestutil  STATIC ${kastencoretestutil_LIB_SRCS} )
-target_link_libraries( kastencoretestutil
+add_library( KastenCoreTestUtil  STATIC ${KastenCoreTestUtil_LIB_SRCS} )
+target_link_libraries( KastenCoreTestUtil
   PUBLIC
     Qt5::Core
   PRIVATE
@@ -56,7 +56,7 @@ ecm_add_test(
   LINK_LIBRARIES
   kastencoretestio
   KastenCore
-  kastencoretestutil
+  KastenCoreTestUtil
   Qt5::Test
 )
 
@@ -72,7 +72,7 @@ ecm_add_test(
   LINK_LIBRARIES
   kastencoretestio
   KastenCore
-  kastencoretestutil
+  KastenCoreTestUtil
   Qt5::Test
 )
 
