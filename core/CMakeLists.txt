@@ -132,7 +132,6 @@ if(BUILD_TESTING)
     PUBLIC
       OKTETACORE_STATIC_DEFINE
   )
-  target_include_directories( testoktetacore PUBLIC ${CMAKE_CURRENT_BINARY_DIR} )
   target_link_libraries( testoktetacore
     PUBLIC
       Qt5::Core
