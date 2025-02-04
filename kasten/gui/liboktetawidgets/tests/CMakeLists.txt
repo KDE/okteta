@@ -1,14 +1,14 @@
 set(SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/..)
 
-include_directories(
-    ${CMAKE_CURRENT_BINARY_DIR}/../..
+add_library(OktetaWidgetsSourcesTestShim INTERFACE)
+target_include_directories(OktetaWidgetsSourcesTestShim INTERFACE
     ${SUTDIR}
+    ${CMAKE_CURRENT_BINARY_DIR}/../..
 )
-
 # Configure export macros to be setup as with a static lib
 # as the source files are reused for the tests.
 # Saves doing a separate export header.
-add_definitions(
+target_compile_definitions(OktetaWidgetsSourcesTestShim INTERFACE
     -DOKTETAKASTENGUI_STATIC_DEFINE
 )
 
@@ -18,6 +18,7 @@ ecm_add_test(
     TEST_NAME bytearraychar8stringencodertest
     NAME_PREFIX oktetakasten-oktetawidgets-
     LINK_LIBRARIES
+        OktetaWidgetsSourcesTestShim
         TestOktetaCore
         Qt5::Test
 )
@@ -28,6 +29,7 @@ ecm_add_test(
     TEST_NAME bytearraychar8stringdecodertest
     NAME_PREFIX oktetakasten-oktetawidgets-
     LINK_LIBRARIES
+        OktetaWidgetsSourcesTestShim
         TestOktetaCore
         Qt5::Test
 )
@@ -39,6 +41,7 @@ ecm_add_test(
     TEST_NAME bytearraychar8stringcodecroundtriptest
     NAME_PREFIX oktetakasten-oktetawidgets-
     LINK_LIBRARIES
+        OktetaWidgetsSourcesTestShim
         TestOktetaCore
         Qt5::Test
 )
@@ -78,6 +81,7 @@ ecm_add_test(
     TEST_NAME bytearrayvalidatortest
     NAME_PREFIX oktetakasten-oktetawidgets-
     LINK_LIBRARIES
+        OktetaWidgetsSourcesTestShim
         TestOktetaCore
         Qt5::Gui
         Qt5::Test
