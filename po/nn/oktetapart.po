@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: oktetapart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-24 03:20+0000\n"
+"POT-Creation-Date: 2025-01-31 03:26+0000\n"
 "PO-Revision-Date: 2021-01-04 21:03+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -65,27 +65,27 @@ msgctxt "@title:menu"
 msgid "Permissions"
 msgstr "Løyve"
 
-#: partfactory.cpp:32
+#: partfactory.cpp:33
 #, kde-format
 msgid "OktetaPart"
 msgstr "OktetaDel"
 
-#: partfactory.cpp:34
+#: partfactory.cpp:35
 #, kde-format
 msgid "Embedded hex editor"
 msgstr "Innebygd heksadesimal-redigering"
 
-#: partfactory.cpp:36
+#: partfactory.cpp:37
 #, kde-format
 msgid "Copyright 2003-%1 Friedrich W. H. Kossebau"
 msgstr "© 2003–%1 Friedrich W.H. Kossebau"
 
-#: partfactory.cpp:38
+#: partfactory.cpp:39
 #, kde-format
 msgid "Friedrich W. H. Kossebau"
 msgstr "Friedrich W.H. Kossebau"
 
-#: partfactory.cpp:38
+#: partfactory.cpp:39
 #, kde-format
 msgid "Author"
 msgstr "Opphavsperson"
