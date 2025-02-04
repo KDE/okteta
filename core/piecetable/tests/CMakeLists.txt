@@ -36,42 +36,42 @@ ecm_add_test( piecetabletest.cpp
 
 ecm_add_test( testpiecetablechangetest.cpp
   NAME_PREFIX "libpiecetable-"
-  LINK_LIBRARIES oktetacoretestutil testpiecetablechangelib Qt5::Test
+  LINK_LIBRARIES testoktetacoretestutil testpiecetablechangelib Qt5::Test
 )
 
 ########### testpiecetablechangeabstractpiecetablechangeiftest ###############
 
 ecm_add_test( testpiecetablechangeabstractpiecetablechangeiftest.cpp
   NAME_PREFIX "libpiecetable-"
-  LINK_LIBRARIES oktetacoretestutil testoktetacore testpiecetablechangelib Qt5::Test
+  LINK_LIBRARIES testoktetacoretestutil testoktetacore testpiecetablechangelib Qt5::Test
 )
 
 ########### insertpiecetablechangeabstractpiecetablechangeiftest ###############
 
 ecm_add_test( insertpiecetablechangeabstractpiecetablechangeiftest.cpp
   NAME_PREFIX "libpiecetable-"
-  LINK_LIBRARIES oktetacoretestutil testoktetacore testpiecetablechangelib Qt5::Test
+  LINK_LIBRARIES testoktetacoretestutil testoktetacore testpiecetablechangelib Qt5::Test
 )
 
 ########### removepiecetablechangeabstractpiecetablechangeiftest ###############
 
 ecm_add_test( removepiecetablechangeabstractpiecetablechangeiftest.cpp
   NAME_PREFIX "libpiecetable-"
-  LINK_LIBRARIES oktetacoretestutil testoktetacore testpiecetablechangelib Qt5::Test
+  LINK_LIBRARIES testoktetacoretestutil testoktetacore testpiecetablechangelib Qt5::Test
 )
 
 ########### replacepiecetablechangeabstractpiecetablechangeiftest ###############
 
 ecm_add_test( replacepiecetablechangeabstractpiecetablechangeiftest.cpp
   NAME_PREFIX "libpiecetable-"
-  LINK_LIBRARIES oktetacoretestutil testoktetacore testpiecetablechangelib Qt5::Test
+  LINK_LIBRARIES testoktetacoretestutil testoktetacore testpiecetablechangelib Qt5::Test
 )
 
 ########### swaprangespiecetablechangeabstractpiecetablechangeiftest ###############
 
 ecm_add_test( swaprangespiecetablechangeabstractpiecetablechangeiftest.cpp
   NAME_PREFIX "libpiecetable-"
-  LINK_LIBRARIES oktetacoretestutil testoktetacore testpiecetablechangelib Qt5::Test
+  LINK_LIBRARIES testoktetacoretestutil testoktetacore testpiecetablechangelib Qt5::Test
 )
 
 ########### grouppiecetablechangeabstractpiecetablechangeiftest ###############
@@ -80,7 +80,7 @@ ecm_add_test( swaprangespiecetablechangeabstractpiecetablechangeiftest.cpp
 if(IWILLPICKUPWORKONOKTETACORE)
 ecm_add_test( grouppiecetablechangeabstractpiecetablechangeiftest.cpp
   NAME_PREFIX "libpiecetable-"
-  LINK_LIBRARIES oktetacoretestutil testoktetacore testpiecetablechangelib Qt5::Test
+  LINK_LIBRARIES testoktetacoretestutil testoktetacore testpiecetablechangelib Qt5::Test
 )
 endif()
 

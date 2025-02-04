@@ -23,6 +23,13 @@ target_link_libraries( oktetacoretestutil
     Qt5::Core
 )
 
+# variant for static version of OktetaCore
+add_library(testoktetacoretestutil STATIC ${oktetacoretestutil_LIB_SRCS})
+target_link_libraries(testoktetacoretestutil
+  PUBLIC
+    Qt5::Core
+)
+
 ecm_add_test(
   arraychangemetricstest.cpp
 #  ${CMAKE_CURRENT_SOURCE_DIR}/../arraychangemetrics.cpp
@@ -61,7 +68,7 @@ ecm_add_test(
   fixedsizebytearraymodelabstractbytearraymodeliftest.cpp
   TEST_NAME fixedsizebytearraymodelabstractbytearraymodeliftest
   NAME_PREFIX libokteta-core-
-  LINK_LIBRARIES oktetacoretestutil testoktetacore Qt5::Test
+  LINK_LIBRARIES testoktetacoretestutil testoktetacore Qt5::Test
 )
 
 
@@ -78,7 +85,7 @@ ecm_add_test(
   bytearraymodelabstractbytearraymodeliftest.cpp
   TEST_NAME bytearraymodelabstractbytearraymodeliftest
   NAME_PREFIX libokteta-core-
-  LINK_LIBRARIES oktetacoretestutil testoktetacore Qt5::Test
+  LINK_LIBRARIES testoktetacoretestutil testoktetacore Qt5::Test
 )
 
 
@@ -87,7 +94,7 @@ ecm_add_test(
   piecetablebytearraymodelabstractbytearraymodeliftest.cpp
   TEST_NAME piecetablebytearraymodelabstractbytearraymodeliftest
   NAME_PREFIX libokteta-core-
-  LINK_LIBRARIES oktetacoretestutil testoktetacore Qt5::Test
+  LINK_LIBRARIES testoktetacoretestutil testoktetacore Qt5::Test
 )
 
 
