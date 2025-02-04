@@ -24,11 +24,13 @@ void OktetaPartTest::testPartReuseWithAnotherUrl()
     QVERIFY(part != nullptr);
 
     const QUrl url1 = QUrl::fromLocalFile(QStringLiteral(TESTPATH1));
-    part->openUrl(url1);
+    bool openSuccess = part->openUrl(url1);
+    QVERIFY(openSuccess);
     QCOMPARE(part->url(), url1);
 
     const QUrl url2 = QUrl::fromLocalFile(QStringLiteral(TESTPATH2));
-    part->openUrl(url2);
+    openSuccess = part->openUrl(url2);
+    QVERIFY(openSuccess);
     QCOMPARE(part->url(), url2);
 }
 

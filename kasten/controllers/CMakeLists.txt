@@ -783,42 +783,40 @@ okteta_add_cmakeconfig(Controllers NAMESPACE Okteta Kasten
 
 if( KASTEN_BUILD_INTERNAL_TEMPLATES )
 
-add_library(OktetaKastenControllersTemplates  STATIC)
-okteta_add_sublibrary(ControllersTemplates NAMESPACE Okteta Kasten
+add_library(ByteArrayFilterTemplates STATIC)
+okteta_add_sublibrary(ByteArrayFilterTemplates
     SUBDIR view/libbytearrayfilter/filter/template
     PRIVATE
         Template_ByteArrayFilter
         Template_ByteArrayFilterParameterSet
         Template_ByteArrayFilterParameterSetEdit
 )
-okteta_add_sublibrary(ControllersTemplates NAMESPACE Okteta Kasten
+target_compile_definitions(ByteArrayFilterTemplates
+    PRIVATE
+        TRANSLATION_DOMAIN=\"liboktetakasten\"
+)
+target_link_libraries(ByteArrayFilterTemplates
+    PUBLIC
+        bytearrayfilter
+    PRIVATE
+        KF5::I18n
+)
+
+add_library(ByteArrayCheckSumTemplates STATIC)
+okteta_add_sublibrary(ByteArrayCheckSumTemplates
     SUBDIR view/libbytearraychecksum/algorithm/template
     PRIVATE
         Template_ByteArrayCheckSumAlgorithm
         Template_ByteArrayChecksumParameterSet
         Template_ByteArrayChecksumParameterSetEdit
 )
-
-target_include_directories(OktetaKastenControllersTemplates
-    PRIVATE
-        view/libbytearrayfilter
-        view/libbytearrayfilter/filter
-        view/libbytearraychecksum
-        view/libbytearraychecksum/algorithm
-)
-# Configure export macros to be setup as with a static lib
-# as the source files are reused for static OktetaKastenControllersTemplates
-# Saves doing a separate export header.
-target_compile_definitions(OktetaKastenControllersTemplates
-    PUBLIC
-        OKTETAKASTENCONTROLLERS_STATICLIB
+target_compile_definitions(ByteArrayCheckSumTemplates
     PRIVATE
         TRANSLATION_DOMAIN=\"liboktetakasten\"
 )
-target_link_libraries(OktetaKastenControllersTemplates
+target_link_libraries(ByteArrayCheckSumTemplates
     PUBLIC
-        OktetaCore
-        Qt5::Widgets
+        bytearraychecksum
     PRIVATE
         KF5::I18n
 )

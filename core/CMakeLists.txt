@@ -132,23 +132,19 @@ if(BUILD_TESTING)
 
     # compile flags don't get set for object libraries, since cannot link to target
     #TODO: find out how to properly use targets for object libraries
-    add_library( testoktetacore STATIC)
+    add_library(TestOktetaCore STATIC)
     get_property(oktetacore_LIB_OBJS TARGET OktetaCore PROPERTY SOURCES)
-    target_sources(testoktetacore PRIVATE ${oktetacore_LIB_OBJS})
+    target_sources(TestOktetaCore PRIVATE ${oktetacore_LIB_OBJS})
     # Configure export macros to be setup as with a static lib
-    # as the source files are reused for static testoktetacore
+    # as the source files are reused for static TestOktetaCore
     # Saves doing a separate export header.
-    target_compile_definitions(testoktetacore
+    target_compile_definitions(TestOktetaCore
         PUBLIC
             OKTETACORE_STATICLIB
         PRIVATE
             TRANSLATION_DOMAIN=\"liboktetacore\"
     )
-    target_include_directories(testoktetacore
-        PUBLIC
-            ${CMAKE_CURRENT_BINARY_DIR}
-    )
-    target_link_libraries(testoktetacore
+    target_link_libraries(TestOktetaCore
         PUBLIC
             Qt5::Core
         PRIVATE

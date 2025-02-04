@@ -1,11 +1,11 @@
 ########### util ###############
 
-add_library(kastencoretestutil STATIC)
-target_sources(kastencoretestutil
+add_library(KastenCoreTestUtil STATIC)
+target_sources(KastenCoreTestUtil
     PRIVATE
         util/filesystem.cpp
 )
-target_link_libraries(kastencoretestutil
+target_link_libraries(KastenCoreTestUtil
     PUBLIC
         Qt5::Core
     PRIVATE
@@ -55,8 +55,8 @@ ecm_add_test(
     NAME_PREFIX libkasten-core-
     LINK_LIBRARIES
         kastencoretestio
+        KastenCoreTestUtil
         KastenCore
-        kastencoretestutil
         Qt5::Test
 )
 
@@ -71,8 +71,8 @@ ecm_add_test(
     NAME_PREFIX libkasten-core-
     LINK_LIBRARIES
         kastencoretestio
+        KastenCoreTestUtil
         KastenCore
-        kastencoretestutil
         Qt5::Test
 )
 

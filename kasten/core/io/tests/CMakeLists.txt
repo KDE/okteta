@@ -1,15 +1,5 @@
 set( SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/.. )
 
-include_directories(
-    ${CMAKE_CURRENT_BINARY_DIR}/../..
-    ${SUTDIR}
-    ${SUTDIR}/..
-    ${SUTDIR}/../document
-    ${SUTDIR}/filesystem
-)
-
-########### io ###############
-
 add_library(oktetakastenio STATIC)
 target_sources(oktetakastenio
     PRIVATE
@@ -29,6 +19,13 @@ target_link_libraries(oktetakastenio
     PRIVATE
         KF5::I18n
         KF5::CoreAddons
+)
+target_include_directories(oktetakastenio PUBLIC
+    ${CMAKE_CURRENT_BINARY_DIR}/../..
+    ${SUTDIR}
+    ${SUTDIR}/..
+    ${SUTDIR}/../document
+    ${SUTDIR}/filesystem
 )
 # Configure export macros to be setup as with a static lib
 # as the source files are reused for static oktetakastenio
@@ -51,9 +48,9 @@ ecm_add_test(
     NAME_PREFIX oktetakasten-io-
     LINK_LIBRARIES
         oktetakastenio
+        KastenCoreTestUtil
         KastenCore
-        kastencoretestutil
-        oktetacoretestutil
+        OktetaCoreTestUtil
         KF5::I18n
         KF5::Bookmarks
         Qt5::Test
@@ -72,9 +69,9 @@ ecm_add_test(
     NAME_PREFIX oktetakasten-io-
     LINK_LIBRARIES
         oktetakastenio
+        KastenCoreTestUtil
         KastenCore
-        kastencoretestutil
-        oktetacoretestutil
+        OktetaCoreTestUtil
         KF5::I18n
         KF5::Bookmarks
         Qt5::Test
