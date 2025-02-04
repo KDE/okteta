@@ -18,7 +18,7 @@ ecm_add_test(
     TEST_NAME bytearraychar8stringencodertest
     NAME_PREFIX oktetakasten-oktetawidgets-
     LINK_LIBRARIES
-        testoktetacore
+        TestOktetaCore
         Qt5::Test
 )
 
@@ -28,7 +28,7 @@ ecm_add_test(
     TEST_NAME bytearraychar8stringdecodertest
     NAME_PREFIX oktetakasten-oktetawidgets-
     LINK_LIBRARIES
-        testoktetacore
+        TestOktetaCore
         Qt5::Test
 )
 
@@ -39,7 +39,7 @@ ecm_add_test(
     TEST_NAME bytearraychar8stringcodecroundtriptest
     NAME_PREFIX oktetakasten-oktetawidgets-
     LINK_LIBRARIES
-        testoktetacore
+        TestOktetaCore
         Qt5::Test
 )
 
@@ -49,7 +49,8 @@ ecm_add_test(
     TEST_NAME bytearrayutf8stringencodertest
     NAME_PREFIX oktetakasten-oktetawidgets-
     LINK_LIBRARIES
-        testoktetacore
+        OktetaWidgetsSourcesTestShim
+        TestOktetaCore
         Qt5::Test
 )
 
@@ -59,7 +60,8 @@ ecm_add_test(
     TEST_NAME bytearrayutf8stringdecodertest
     NAME_PREFIX oktetakasten-oktetawidgets-
     LINK_LIBRARIES
-        testoktetacore
+        OktetaWidgetsSourcesTestShim
+        TestOktetaCore
         Qt5::Test
 )
 
@@ -76,7 +78,7 @@ ecm_add_test(
     TEST_NAME bytearrayvalidatortest
     NAME_PREFIX oktetakasten-oktetawidgets-
     LINK_LIBRARIES
-        testoktetacore
+        TestOktetaCore
         Qt5::Gui
         Qt5::Test
 )

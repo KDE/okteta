@@ -22,7 +22,7 @@ ecm_add_test(
   NAME_PREFIX oktetakasten-document-
   LINK_LIBRARIES
   KastenCore
-  testoktetacore
+  TestOktetaCore
   Qt5::Test
   KF5::I18n
 )
@@ -38,8 +38,8 @@ ecm_add_test(
   NAME_PREFIX oktetakasten-document-
   LINK_LIBRARIES
   KastenCore
-  testoktetacoretestutil
-  testoktetacore
+  TestOktetaCoreTestUtil
+  TestOktetaCore
   Qt5::Test
   KF5::I18n
 )

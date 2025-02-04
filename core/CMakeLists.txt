@@ -124,15 +124,15 @@ okteta_add_pkgconfig(Core NAMESPACE Okteta
 
 
 if(BUILD_TESTING)
-  add_library( testoktetacore STATIC ${oktetacore_LIB_OBJS} )
+  add_library( TestOktetaCore STATIC ${oktetacore_LIB_OBJS} )
   # Configure export macros to be setup as with a static lib
-  # as the source files are reused for static testoktetacore
+  # as the source files are reused for static TestOktetaCore
   # Saves doing a separate export header.
-  target_compile_definitions( testoktetacore
+  target_compile_definitions( TestOktetaCore
     PUBLIC
       OKTETACORE_STATIC_DEFINE
   )
-  target_link_libraries( testoktetacore
+  target_link_libraries( TestOktetaCore
     PUBLIC
       Qt5::Core
     PRIVATE
