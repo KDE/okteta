@@ -1,14 +1,14 @@
 set(SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/..)
 
-include_directories(
+add_library(OktetaCoreSourcesTestShim INTERFACE)
+target_include_directories(OktetaCoreSourcesTestShim INTERFACE
   ${SUTDIR}
   ${CMAKE_CURRENT_BINARY_DIR}/.. # for oktetacore_export.hpp
 )
-
 # Configure export macros to be setup as with a static lib
 # as the source files are reused for the tests.
 # Saves doing a separate export header.
-add_definitions(
+target_compile_definitions(OktetaCoreSourcesTestShim INTERFACE
   -DOKTETACORE_STATIC_DEFINE
 )
 
@@ -20,6 +20,7 @@ set( OktetaCoreTestUtil_LIB_SRCS
 add_library( OktetaCoreTestUtil  STATIC ${OktetaCoreTestUtil_LIB_SRCS} )
 target_link_libraries( OktetaCoreTestUtil
   PUBLIC
+    OktetaCore
     Qt5::Core
 )
 
@@ -36,7 +37,7 @@ ecm_add_test(
 #  ${CMAKE_CURRENT_SOURCE_DIR}/../arraychangemetrics.cpp
   TEST_NAME arraychangemetricstest
   NAME_PREFIX libokteta-core-
-  LINK_LIBRARIES Qt5::Test
+  LINK_LIBRARIES OktetaCoreSourcesTestShim Qt5::Test
 )
 
 
@@ -153,7 +154,7 @@ ecm_add_test(
   bookmarktest.cpp
   TEST_NAME bookmarktest
   NAME_PREFIX libokteta-core-
-  LINK_LIBRARIES Qt5::Test
+  LINK_LIBRARIES OktetaCoreSourcesTestShim Qt5::Test
 )
 
 
