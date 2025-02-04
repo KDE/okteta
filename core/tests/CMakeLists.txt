@@ -13,18 +13,18 @@ add_definitions(
 )
 
 # helper
-set( oktetacoretestutil_LIB_SRCS
+set( OktetaCoreTestUtil_LIB_SRCS
   util/fill.cpp
 )
 
-add_library( oktetacoretestutil  STATIC ${oktetacoretestutil_LIB_SRCS} )
-target_link_libraries( oktetacoretestutil
+add_library( OktetaCoreTestUtil  STATIC ${OktetaCoreTestUtil_LIB_SRCS} )
+target_link_libraries( OktetaCoreTestUtil
   PUBLIC
     Qt5::Core
 )
 
 # variant for static version of OktetaCore
-add_library(TestOktetaCoreTestUtil STATIC ${oktetacoretestutil_LIB_SRCS})
+add_library(TestOktetaCoreTestUtil STATIC ${OktetaCoreTestUtil_LIB_SRCS})
 target_link_libraries(TestOktetaCoreTestUtil
   PUBLIC
     OktetaCoreSourcesTestShim
@@ -104,7 +104,7 @@ ecm_add_test(
   piecetablebytearraymodelversionableiftest.cpp
   TEST_NAME piecetablebytearraymodelversionableiftest
   NAME_PREFIX libokteta-core-
-  LINK_LIBRARIES oktetacoretestutil OktetaCore Qt5::Test
+  LINK_LIBRARIES OktetaCoreTestUtil OktetaCore Qt5::Test
 )
 
 

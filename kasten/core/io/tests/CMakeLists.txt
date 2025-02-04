@@ -52,7 +52,7 @@ ecm_add_test(
   oktetakastenio
   KastenCore
   kastencoretestutil
-  oktetacoretestutil
+  OktetaCoreTestUtil
   KF5::I18n
   KF5::Bookmarks
   Qt5::Test
@@ -72,7 +72,7 @@ ecm_add_test(
   oktetakastenio
   KastenCore
   kastencoretestutil
-  oktetacoretestutil
+  OktetaCoreTestUtil
   KF5::I18n
   KF5::Bookmarks
   Qt5::Test
