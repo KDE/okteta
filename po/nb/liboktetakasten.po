@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-28 02:06+0000\n"
+"POT-Creation-Date: 2025-02-02 01:59+0000\n"
 "PO-Revision-Date: 2013-02-19 20:33+0100\n"
 "Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -285,19 +285,27 @@ msgctxt "@info:tooltip column contains the character with the value"
 msgid "Character"
 msgstr "Tegn"
 
-#: controllers/view/bytetable/bytetabletool.cpp:33
+#: controllers/view/bytetable/bytetabletool.cpp:37
 #: controllers/view/bytetable/bytetabletoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
 msgid "Value/Char Table"
 msgstr "Verdi/tegn-tabell"
 
-#: controllers/view/bytetable/bytetabletool.cpp:87
+#: controllers/view/bytetable/bytetabletool.cpp:91
 #, kde-format
 msgid "Inserted 1 Byte"
 msgid_plural "Inserted %1 Bytes"
 msgstr[0] "Satt inn én byte"
 msgstr[1] "Satt inn %1 byte"
+
+#: controllers/view/bytetable/bytetabletool.cpp:109
+#, kde-format
+msgctxt "@info"
+msgid "1 byte inserted."
+msgid_plural "%1 bytes inserted."
+msgstr[0] ""
+msgstr[1] ""
 
 #: controllers/view/bytetable/bytetableview.cpp:74
 #, kde-format
@@ -547,12 +555,20 @@ msgctxt "name of the change"
 msgid "Crop"
 msgstr ""
 
-#: controllers/view/filter/filtertool.cpp:59
+#: controllers/view/filter/filtertool.cpp:63
 #: controllers/view/filter/filtertoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
 msgid "Binary Filter"
 msgstr "Binærfilter"
+
+#: controllers/view/filter/filtertool.cpp:168
+#, kde-format
+msgctxt "@info"
+msgid "1 byte filtered with %2."
+msgid_plural "%1 bytes filtered with %2."
+msgstr[0] ""
+msgstr[1] ""
 
 #: controllers/view/filter/filterview.cpp:45
 #, kde-format
@@ -607,13 +623,13 @@ msgctxt "@title:window of the tool to set a new offset for the cursor"
 msgid "Goto"
 msgstr "Gå til"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:58
+#: controllers/view/gotooffset/gotooffsetview.cpp:56
 #, kde-format
 msgctxt "@label:listbox"
 msgid "O&ffset:"
 msgstr "&Forskyvning:"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:68
+#: controllers/view/gotooffset/gotooffsetview.cpp:66
 #: controllers/view/selectrange/selectrangeview.cpp:67
 #: controllers/view/selectrange/selectrangeview.cpp:87
 #, kde-format
@@ -622,33 +638,33 @@ msgid "Enter an offset to go to, or select a previous offset from the list."
 msgstr ""
 "Oppgi en forskyvning å gå til, eller velg en tidligere forskyvning fra lista."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:84
+#: controllers/view/gotooffset/gotooffsetview.cpp:82
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:111
 #, kde-format
 msgctxt "@option:check"
 msgid "From c&ursor"
 msgstr "Fra skri&vemerket"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:86
+#: controllers/view/gotooffset/gotooffsetview.cpp:84
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Go relative from the current cursor location and not absolute."
 msgstr "Gå relativt fra gjeldende markørposisjon og ikke absolutt."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:89
+#: controllers/view/gotooffset/gotooffsetview.cpp:87
 #, kde-format
 msgctxt "@option:check"
 msgid "&Extend selection"
 msgstr "&Utvid utvalget"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:91
+#: controllers/view/gotooffset/gotooffsetview.cpp:89
 #: controllers/view/selectrange/selectrangeview.cpp:109
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Extend the selection by the cursor move."
 msgstr "Utvid utvalget med markørflyttingen."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:94
+#: controllers/view/gotooffset/gotooffsetview.cpp:92
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:114
 #: controllers/view/selectrange/selectrangeview.cpp:101
 #, kde-format
@@ -656,26 +672,26 @@ msgctxt "@option:check"
 msgid "&Backwards"
 msgstr "&Bakover"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:96
+#: controllers/view/gotooffset/gotooffsetview.cpp:94
 #: controllers/view/selectrange/selectrangeview.cpp:103
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Go backwards from the end or the current cursor location."
 msgstr "Gå bakover fra slutten eller gjeldende markørposisjon."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:111
+#: controllers/view/gotooffset/gotooffsetview.cpp:109
 #, kde-format
 msgctxt "@action:button"
 msgid "&Go"
 msgstr "&Gå"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:114
+#: controllers/view/gotooffset/gotooffsetview.cpp:112
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Go to the Offset"
 msgstr "Gå til forskyvningen"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:116
+#: controllers/view/gotooffset/gotooffsetview.cpp:114
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1293,14 +1309,15 @@ msgstr ""
 "Velg om du vil at inndata legges til det som er oppgitt, eller skriver over "
 "eksisterende data."
 
-#: controllers/view/poddecoder/poddecodertool.cpp:90
+#: controllers/view/poddecoder/poddecodertool.cpp:94
 #: controllers/view/poddecoder/poddecodertoolviewfactory.cpp:27
 #, kde-format
 msgctxt "@title:window"
 msgid "Decoding Table"
 msgstr "Dekodingstabell"
 
-#: controllers/view/poddecoder/poddecodertool.cpp:300
+#: controllers/view/poddecoder/poddecodertool.cpp:304
+#: controllers/view/poddecoder/poddecodertool.cpp:313
 #, kde-format
 msgctxt "Edited as %datatype"
 msgid "Edited as %1"
@@ -1400,26 +1417,26 @@ msgctxt "@action:button"
 msgid "&Select"
 msgstr "&Velg"
 
-#: controllers/view/print/printtool.cpp:275
-#: controllers/view/print/printtool.cpp:305
+#: controllers/view/print/printtool.cpp:276
+#: controllers/view/print/printtool.cpp:306
 #, kde-format
 msgctxt "@title:window"
 msgid "Print Byte Array %1"
 msgstr "Skriv ut byte-streng %1"
 
-#: controllers/view/print/printtool.cpp:300
+#: controllers/view/print/printtool.cpp:301
 #, kde-format
 msgctxt "@info"
 msgid "Could not print."
 msgstr "Kunne ikke skrive ut."
 
-#: controllers/view/print/printtool.cpp:336
+#: controllers/view/print/printtool.cpp:337
 #, kde-format
 msgctxt "in the header of the printed page, e.g. Page 2 of 20"
 msgid "Page %p of %P"
 msgstr "Side %p av %P"
 
-#: controllers/view/print/printtool.cpp:342
+#: controllers/view/print/printtool.cpp:343
 #, kde-format
 msgctxt "in the footer of the printed page, e.g. Printed by: Joe User"
 msgid "Printed by: %U"
@@ -2127,8 +2144,8 @@ msgctxt "data type in C/C++, then name"
 msgid "union %1"
 msgstr "union %1"
 
-#: controllers/view/structures/parsers/osdparser.cpp:118
-#: controllers/view/structures/parsers/osdparser.cpp:200
+#: controllers/view/structures/parsers/osdparser.cpp:120
+#: controllers/view/structures/parsers/osdparser.cpp:202
 #, kde-format
 msgid "<invalid name>"
 msgstr "<ugyldig navn>"
