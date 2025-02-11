@@ -142,12 +142,10 @@ msgid "Bookmarks"
 msgstr "Záložky"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:61
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Bookmarks"
+#, kde-format
 msgctxt "@info"
 msgid "No bookmarks"
-msgstr "Záložky"
+msgstr ""
 
 #: controllers/view/bookmarks/bookmarksview.cpp:87
 #, kde-format
@@ -862,12 +860,10 @@ msgstr ""
 
 #: controllers/view/libbytearraychecksum/algorithm/nobytearraychecksumparametersetedit.cpp:25
 #: controllers/view/libbytearrayfilter/filter/nobytearrayfilterparametersetedit.cpp:25
-#, fuzzy, kde-format
-#| msgctxt "name of the encoding target"
-#| msgid "Characters"
+#, kde-format
 msgctxt "@info"
 msgid "No parameters"
-msgstr "Znaky"
+msgstr ""
 
 #: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:48
 #, kde-format
@@ -1683,12 +1679,10 @@ msgid "Enter a term to limit the list."
 msgstr ""
 
 #: controllers/view/stringsextract/stringsextractview.cpp:140
-#, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to extract strings"
-#| msgid "Strings"
+#, kde-format
 msgctxt "@info"
 msgid "No strings"
-msgstr "Řetězce"
+msgstr ""
 
 #: controllers/view/stringsextract/stringsextractview.cpp:161
 #, kde-format

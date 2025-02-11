@@ -147,12 +147,10 @@ msgid "Documents"
 msgstr "Dokumenty"
 
 #: controllers/documentsystem/documentsbrowser/documentsview.cpp:52
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Documents"
+#, kde-format
 msgctxt "@info"
 msgid "No documents"
-msgstr "Dokumenty"
+msgstr ""
 
 #: controllers/documentsystem/filesystembrowser/filesystembrowsertool.cpp:32
 #: controllers/documentsystem/filesystembrowser/filesystembrowsertoolviewfactory.cpp:24
