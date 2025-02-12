@@ -65,6 +65,7 @@ void ShellWindowPrivate::addTool(std::unique_ptr<AbstractTool>&& tool, std::uniq
 
     auto* dockWidget = new ToolViewDockWidget(std::move(toolView), q);
     // TODO: where to set the initial area?
+    q->addDockWidget(Qt::RightDockWidgetArea, dockWidget);
     // For now hide initially, to avoid triggering bug 462703
     // as currently (KF 5.116) in KXmlGuiWindow::setupGUI()
     // window size is still restored before the dock widgets' visibilty state.
