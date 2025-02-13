@@ -176,7 +176,7 @@ ViewProfilesManageDialog::onCreateNewButtonClicked()
         }
 
         dialog->setViewProfile(newByteArrayViewProfile);
-        const QString dialogTitle = i18nc("@window:title",
+        const QString dialogTitle = i18nc("@title:window",
                                           "New View Profile");
         dialog->setWindowTitle(dialogTitle);
 
@@ -207,7 +207,7 @@ ViewProfilesManageDialog::onEditButtonClicked()
         mViewProfileManager->viewProfile(mCurrentViewProfileId);
     auto* dialog = new ViewProfileEditDialog(this);
     dialog->setViewProfile(viewProfile);
-    const QString dialogTitle = i18nc("@window:title",
+    const QString dialogTitle = i18nc("@title:window",
                                       "\"%1\" View Profile", viewProfile.viewProfileTitle());
     dialog->setWindowTitle(dialogTitle);
     connect(dialog, &ViewProfileEditDialog::viewProfileAccepted,

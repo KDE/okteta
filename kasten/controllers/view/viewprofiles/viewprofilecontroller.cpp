@@ -173,7 +173,7 @@ void ViewProfileController::onLocalSyncStateChanged(Kasten::LocalSyncState local
 void ViewProfileController::onCreateNewActionTriggered()
 {
     auto* dialog = new ViewProfileEditDialog(mParentWidget);
-    const QString dialogTitle = i18nc("@window:title",
+    const QString dialogTitle = i18nc("@title:window",
                                       "New View Profile");
     dialog->setWindowTitle(dialogTitle);
 
