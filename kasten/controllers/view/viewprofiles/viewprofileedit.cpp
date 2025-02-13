@@ -73,9 +73,9 @@ ViewProfileEdit::ViewProfileEdit(QWidget* parent)
     // values or char shown
     mValuesCharsShownComboBox = new KComboBox(displayBox);
     const QStringList valuesCharsList {
-        i18nc("@item:", "Values"),
-        i18nc("@item:", "Chars"),
-        i18nc("@item:", "Values & Chars"),
+        i18nc("@item:inmenu", "Values"),
+        i18nc("@item:inmenu", "Chars"),
+        i18nc("@item:inmenu", "Values & Chars"),
     };
     mValuesCharsShownComboBox->addItems(valuesCharsList);
     displayBoxFormLayout->addRow(i18nc("@option:check", "Show values or chars:"), mValuesCharsShownComboBox);
@@ -85,8 +85,8 @@ ViewProfileEdit::ViewProfileEdit(QWidget* parent)
               "Show with rows or columns:");
     mDisplayModeComboBox = new KComboBox(displayBox);
     const QStringList displayModeList {
-        i18nc("@item:", "Columns"),
-        i18nc("@item:", "Rows"),
+        i18nc("@item:inmenu", "Columns"),
+        i18nc("@item:inmenu", "Rows"),
     };
     mDisplayModeComboBox->addItems(displayModeList);
     displayBoxFormLayout->addRow(displayModeLabel, mDisplayModeComboBox);
