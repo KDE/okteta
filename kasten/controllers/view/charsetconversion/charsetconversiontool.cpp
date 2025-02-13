@@ -295,7 +295,7 @@ void CharsetConversionTool::convertChars()
 
         if (changesDescribable) {
             const QString description =
-                i18nc("Converted from charset 1 to charset 2",
+                i18nc("@item Converted from charset 1 to charset 2",
                       "%1 to %2", fromCharCodec->name(), toCharCodec->name());
             changesDescribable->openGroupedChange(description);
         }

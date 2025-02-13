@@ -88,7 +88,7 @@ void CropController::crop()
     const Okteta::AddressRange endSection(m_byteArrayView->selection().nextBehindEnd(), m_byteArrayModel->size() - 1);
 
     if (changesDescribable) {
-        const QString changeDescription = i18nc("name of the change", "Crop");
+        const QString changeDescription = i18nc("@item name of the change", "Crop");
 
         changesDescribable->openGroupedChange(changeDescription);
     }

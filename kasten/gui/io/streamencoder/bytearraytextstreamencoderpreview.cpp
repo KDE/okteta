@@ -24,7 +24,7 @@ ByteArrayTextStreamEncoderPreview::ByteArrayTextStreamEncoderPreview(AbstractByt
 {
     mWidget->setReadOnly(true);
     mWidget->setLineWrapMode(QTextEdit::NoWrap);
-    mWidget->setToolTip(i18n("The preview uses maximal the first 100 bytes."));
+    mWidget->setToolTip(i18nc("@info:tooltip", "The preview uses maximally the first 100 bytes."));
 
     // TODO: find a signal/event emitted when fixedfont changes
 //     connect( KGlobalSettings::self(), &KGlobalSettings::kdisplayFontChanged,

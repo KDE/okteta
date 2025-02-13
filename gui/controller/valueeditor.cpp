@@ -155,7 +155,7 @@ bool ValueEditor::handleKeyPress(QKeyEvent* keyEvent)
                             ByteArrayTableCursor* const tableCursor = mView->tableCursor();
                             const Address index = tableCursor->realIndex();
 
-                            startEdit(i18nc("name of the change", "Insert"));
+                            startEdit(i18nc("@item name of the change", "Insert"));
                             if (mView->byteArrayModel()->insert(index, &inputValue, 1) > 0) {
                                 mEditModeByInsert = true;
                                 mOldValue = mEditValue = inputValue;
@@ -197,7 +197,7 @@ void ValueEditor::doValueEditAction(ValueEditAction Action, int input)
             return;
         }
 
-        startEdit(i18nc("name of the change", "Replace"));
+        startEdit(i18nc("@item name of the change", "Replace"));
         mEditModeByInsert = false; // default, to be overwritten if so
 
         // save old value

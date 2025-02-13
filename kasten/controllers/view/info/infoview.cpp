@@ -115,7 +115,7 @@ InfoView::InfoView(InfoTool* tool, QWidget* parent)
 
     mCopyAction =
         actionsToolBar->addAction(QIcon::fromTheme(QStringLiteral("edit-copy")),
-                                  i18n("C&opy"),
+                                  i18nc("@action:button", "Copy"),
                                   this, &InfoView::onCopyButtonClicked);
     mCopyAction->setToolTip(i18nc("@info:tooltip",
                                   "Copies the selected statistic lines to the clipboard."));

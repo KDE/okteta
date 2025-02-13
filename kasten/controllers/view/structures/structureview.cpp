@@ -171,7 +171,7 @@ void StructureView::openSettingsDlg()
                                      StructureViewPreferences::self());
 
     auto* displaySettings = new StructureViewSettingsWidget();
-    KPageWidgetItem* displ = dialog->addPage(displaySettings, i18n("Value Display"),
+    KPageWidgetItem* displ = dialog->addPage(displaySettings, i18nc("@title:tab", "Value Display"),
                                              QStringLiteral("configure"));
 
     // cannot use StructuresManagerView directly as page even if the only element
@@ -183,7 +183,7 @@ void StructureView::openSettingsDlg()
     auto* structureSettings = new StructuresManagerView(mTool, this);
     structureSettings->setObjectName(QStringLiteral("kcfg_LoadedStructures"));
     hbox->addWidget(structureSettings);
-    dialog->addPage(structSelectionPage, i18n("Structures management"),
+    dialog->addPage(structSelectionPage, i18nc("@title:tab", "Structures management"),
                     QStringLiteral("preferences-plugin"));
 
     // User edited the configuration - update your local copies of the configuration data

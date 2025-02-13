@@ -301,7 +301,7 @@ void PODDecoderTool::setData(const QVariant& data, int podId)
     auto* changesDescribable = qobject_cast<Okteta::ChangesDescribable*>(mByteArrayModel);
 
     if (changesDescribable) {
-        changesDescribable->openGroupedChange(i18nc("Edited as %datatype", "Edited as %1", typeCodec->name()));
+        changesDescribable->openGroupedChange(i18nc("@item Edited as datatype", "Edited as %1", typeCodec->name()));
     }
     std::ignore = mByteArrayModel->replace(Okteta::AddressRange::fromWidth(mCursorIndex, removedBytesSize), bytes);
     if (changesDescribable) {
@@ -310,7 +310,7 @@ void PODDecoderTool::setData(const QVariant& data, int podId)
 
     const QString notificationTitle = title();
     // TODO: mention number of bytes before/after
-    const QString notificationText = i18nc("Edited as %datatype", "Edited as %1", typeCodec->name());
+    const QString notificationText = i18nc("@info Edited as datatype", "Edited as %1", typeCodec->name());
     auto message = std::make_unique<Kasten::UserNotification>(mByteArrayView, notificationText, notificationTitle);
     m_userMessagesHandler->postNotification(std::move(message));
 }

@@ -89,7 +89,7 @@ StringsExtractView::StringsExtractView(StringsExtractTool* tool,
 
     auto* mFilterEdit = new QLineEdit(this);
     mFilterEdit->setClearButtonEnabled(true);
-    mFilterEdit->setPlaceholderText(i18n("Enter a term to limit the list."));
+    mFilterEdit->setPlaceholderText(i18nc("@info:placeholder", "Enter a term to limit the list."));
     mFilterEdit->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     auto* labelledFilterEdit = new LabelledToolBarWidget(label, mFilterEdit, this);
     filterToolBar->addWidget(labelledFilterEdit);
@@ -155,7 +155,7 @@ StringsExtractView::StringsExtractView(StringsExtractTool* tool,
 
     mCopyAction =
         actionsToolBar->addAction(QIcon::fromTheme(QStringLiteral("edit-copy")),
-                                  i18n("C&opy"),
+                                  i18nc("@action:button", "Copy"),
                                   this, &StringsExtractView::onCopyButtonClicked);
     mCopyAction->setToolTip(i18nc("@info:tooltip",
                                   "Copies the selected strings to the clipboard."));
@@ -169,7 +169,7 @@ StringsExtractView::StringsExtractView(StringsExtractTool* tool,
 
     mGotoAction =
         actionsToolBar->addAction(QIcon::fromTheme(QStringLiteral("go-jump")),
-                                  i18n("&Show"),
+                                  i18nc("@action:button", "Show"),
                                   this, &StringsExtractView::onGotoButtonClicked);
     mGotoAction->setToolTip(i18nc("@info:tooltip",
                                   "Shows the selected string in the view."));

@@ -167,7 +167,7 @@ CharsetConversionView::CharsetConversionView(CharsetConversionTool* tool,
 
     mConvertAction =
         actionToolBar->addAction(QIcon::fromTheme(QStringLiteral("run-build")),
-                                 i18n("Con&vert"),
+                                 i18nc("@action:button", "Convert"),
                                  this, &CharsetConversionView::onConvertButtonClicked);
     mConvertAction->setToolTip(i18nc("@info:tooltip",
                        "Converts the bytes in the selected range."));

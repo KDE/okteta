@@ -52,15 +52,15 @@ ViewProfileEdit::ViewProfileEdit(QWidget* parent)
     mTitleEdit->setClearButtonEnabled(true);
     connect(mTitleEdit, &QLineEdit::textChanged,
             this, &ViewProfileEdit::profileTitleChanged);
-    titleFormLayout->addRow(i18n("Title:"), mTitleEdit);
+    titleFormLayout->addRow(i18nc("@label:textbox", "Title:"), mTitleEdit);
 
     // display settings
     auto* displayBox = new QGroupBox(this);
-    displayBox->setTitle(i18n("Display"));
+    displayBox->setTitle(i18nc("@title:group", "Display"));
     auto* displayBoxFormLayout = new QFormLayout(displayBox);
     // line offset shown
     mLineOffsetShownCheckBox = new QCheckBox(displayBox);
-    displayBoxFormLayout->addRow(i18n("Show Line Offset:"), mLineOffsetShownCheckBox);
+    displayBoxFormLayout->addRow(i18nc("@option:check", "Show line offset:"), mLineOffsetShownCheckBox);
     // offset coding
     mOffsetCodingComboBox = new KComboBox(displayBox);
     const QStringList offsetCodingList {
@@ -69,7 +69,7 @@ ViewProfileEdit::ViewProfileEdit(QWidget* parent)
         i18nc("@item:inmenu offset in the octal format", "Octal"),
     };
     mOffsetCodingComboBox->addItems(offsetCodingList);
-    displayBoxFormLayout->addRow(i18n("Offset Coding:"), mOffsetCodingComboBox);
+    displayBoxFormLayout->addRow(i18nc("@label:listbox", "Offset coding:"), mOffsetCodingComboBox);
     // values or char shown
     mValuesCharsShownComboBox = new KComboBox(displayBox);
     const QStringList valuesCharsList {
@@ -78,7 +78,7 @@ ViewProfileEdit::ViewProfileEdit(QWidget* parent)
         i18nc("@item:", "Values & Chars"),
     };
     mValuesCharsShownComboBox->addItems(valuesCharsList);
-    displayBoxFormLayout->addRow(i18n("Show Values or Chars:"), mValuesCharsShownComboBox);
+    displayBoxFormLayout->addRow(i18nc("@option:check", "Show values or chars:"), mValuesCharsShownComboBox);
     // display mode
     const QString displayModeLabel =
         i18nc("@label:listbox ",
@@ -93,7 +93,7 @@ ViewProfileEdit::ViewProfileEdit(QWidget* parent)
 
     // layout settings
     auto* layoutBox = new QGroupBox(this);
-    layoutBox->setTitle(i18n("Layout"));
+    layoutBox->setTitle(i18nc("@title:group", "Layout"));
     auto* layoutBoxFormLayout = new QFormLayout(layoutBox);
     // line break
     mLineBreakComboBox = new KComboBox(layoutBox);
@@ -108,7 +108,7 @@ ViewProfileEdit::ViewProfileEdit(QWidget* parent)
     mLineBreakComboBox->addItems(lineBreakList);
     connect(mLineBreakComboBox, qOverload<int>(&KComboBox::currentIndexChanged),
             this, &ViewProfileEdit::onLineBreakIndexChanged);
-    layoutBoxFormLayout->addRow(i18n("Break lines:"), mLineBreakComboBox);
+    layoutBoxFormLayout->addRow(i18nc("@label:listbox", "Break lines:"), mLineBreakComboBox);
     // bytes per group
     mGroupedBytesCountEdit = new QSpinBox(this);
     mGroupedBytesCountEdit->setRange(0, std::numeric_limits<int>::max());
@@ -129,7 +129,7 @@ ViewProfileEdit::ViewProfileEdit(QWidget* parent)
 
     // value settings
     auto* valuesBox = new QGroupBox(this);
-    valuesBox->setTitle(i18n("Values"));
+    valuesBox->setTitle(i18nc("@title:group", "Values"));
     auto* valuesBoxFormLayout = new QFormLayout(valuesBox);
     // coding
     mValueCodingComboBox = new KComboBox(valuesBox);
@@ -144,31 +144,31 @@ ViewProfileEdit::ViewProfileEdit(QWidget* parent)
               "Binary"),
     };
     mValueCodingComboBox->addItems(valueCodingList);
-    valuesBoxFormLayout->addRow(i18n("Coding:"), mValueCodingComboBox);
+    valuesBoxFormLayout->addRow(i18nc("@label:listbox", "Coding:"), mValueCodingComboBox);
 
     // char settings
     auto* charsBox = new QGroupBox(this);
-    charsBox->setTitle(i18n("Chars"));
+    charsBox->setTitle(i18nc("@title:group", "Chars"));
     auto* charsBoxFormLayout = new QFormLayout(charsBox);
     // coding
     mCharCodingComboBox = new KComboBox(charsBox);
     mCharCodingComboBox->addItems(Okteta::CharCodec::codecNames());
-    charsBoxFormLayout->addRow(i18n("Coding:"), mCharCodingComboBox);
+    charsBoxFormLayout->addRow(i18nc("@label:listbox", "Coding:"), mCharCodingComboBox);
     // line offset shown
     mNonPrintableShownCheckBox = new QCheckBox(charsBox);
     // TODOSHOWNONPRINTING hide from UI for now
     mNonPrintableShownCheckBox->hide();
-    // charsBoxFormLayout->addRow(i18n("Show Non-printable:"), mNonPrintableShownCheckBox);
+    // charsBoxFormLayout->addRow(i18nc("@option:check", "Show Non-printable:"), mNonPrintableShownCheckBox);
     // char for non-printable bytes
     mNonPrintableCharEdit = new QLineEdit(charsBox);   // TODO: use a validator to ensure always one char
     mNonPrintableCharEdit->setClearButtonEnabled(true);
     mNonPrintableCharEdit->setMaxLength(1);
-    charsBoxFormLayout->addRow(i18n("Char for non-printable bytes:"), mNonPrintableCharEdit);
+    charsBoxFormLayout->addRow(i18nc("@label:chooser", "Char for non-printable bytes:"), mNonPrintableCharEdit);
     // char for undefined bytes
     mUndefinedCharEdit = new QLineEdit(charsBox);   // TODO: use a validator to ensure always one char
     mUndefinedCharEdit->setClearButtonEnabled(true);
     mUndefinedCharEdit->setMaxLength(1);
-    charsBoxFormLayout->addRow(i18n("Char for undefined bytes:"), mUndefinedCharEdit);
+    charsBoxFormLayout->addRow(i18nc("@label:chooser", "Char for undefined bytes:"), mUndefinedCharEdit);
 
     layout->addLayout(titleFormLayout);
     layout->addWidget(displayBox);

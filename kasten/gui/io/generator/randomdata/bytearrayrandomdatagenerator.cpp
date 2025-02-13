@@ -85,7 +85,7 @@ std::unique_ptr<QMimeData> ByteArrayRandomDataGenerator::generateData()
     auto* changesDescribable = qobject_cast<Okteta::ChangesDescribable*>(mByteArrayModel);
 
     if (changesDescribable) {
-        changesDescribable->openGroupedChange(i18n("RandomData inserted."));
+        changesDescribable->openGroupedChange(i18nc("@item", "RandomData Inserted"));
     }
     mByteArrayView->insert(insertData);
 //     mByteArrayModel->replace( filteredSection, filterResult );

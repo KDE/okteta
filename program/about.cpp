@@ -16,19 +16,19 @@ OktetaAboutData::OktetaAboutData()
     : KAboutData(QStringLiteral("okteta"),
                  i18n("Okteta"), // name
                  QStringLiteral(OKTETA_VERSION),
-                 i18n("Hex editor"), // description
+                 i18nc("@info", "Hex editor"), // description
                  KAboutLicense::GPL_V2,
-                 i18n("2006-%1 Friedrich W. H. Kossebau", QStringLiteral("2025")), // copyright
-                 i18n("Edit the raw data of files"), // comment
+                 i18nc("@info", "2006-%1 Friedrich W. H. Kossebau", QStringLiteral("2025")), // copyright
+                 i18nc("@info", "Edit the raw data of files"), // comment
                  QStringLiteral("https://userbase.kde.org/Okteta"))
 {
     addLicense(KAboutLicense::GPL_V3);
     setOrganizationDomain("kde.org");
-    addAuthor(i18n("Friedrich W. H. Kossebau"), // name
-              i18n("Author"), // task
+    addAuthor(i18nc("@info:credit", "Friedrich W. H. Kossebau"), // name
+              i18nc("@info:credit", "Author"), // task
               QStringLiteral("kossebau@kde.org"));
-    addAuthor(i18nc("Author", "Alexander Richardson"), // name
-              i18nc("Task description", "Structures tool"), // task
+    addAuthor(i18nc("@info:credit", "Alexander Richardson"), // name
+              i18nc("@info:credit", "Structures tool"), // task
               QStringLiteral("alex.richardson@gmx.de"));
     setDesktopFileName(QStringLiteral("org.kde.okteta"));
 }

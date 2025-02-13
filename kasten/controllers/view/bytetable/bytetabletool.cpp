@@ -88,7 +88,7 @@ void ByteTableTool::insert(unsigned char byte, int count)
     if (changesDescribable) {
         // TODO: how to note the byte? charcoding might change... cmp. below notification
         const QString changeDescription =
-            i18np("Inserted 1 Byte", "Inserted %1 Bytes", count);
+            i18ncp("@item", "Inserted 1 Byte", "Inserted %1 Bytes", count);
 
         changesDescribable->openGroupedChange(changeDescription);
     }

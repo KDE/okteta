@@ -55,7 +55,7 @@ std::unique_ptr<QMimeData> ByteArraySequenceGenerator::generateData()
     auto* changesDescribable = qobject_cast<Okteta::ChangesDescribable*>(mByteArrayModel);
 
     if (changesDescribable) {
-        changesDescribable->openGroupedChange(i18n("Sequence inserted."));
+        changesDescribable->openGroupedChange(i18nc("@item", "Sequence Inserted"));
     }
     mByteArrayView->insert(insertData);
 //     mByteArrayModel->replace( filteredSection, filterResult );

@@ -64,7 +64,7 @@ DocumentInfoView::DocumentInfoView(DocumentInfoTool* tool, QWidget* parent)
     // type property
     mMimeTypeLabel = new QLabel(QString(), this);
     mMimeTypeLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
-    propertyGrid->addRow(i18n("Type:"), mMimeTypeLabel);
+    propertyGrid->addRow(i18nc("@label", "Type:"), mMimeTypeLabel);
 
     // location property
     mLocationLabel = new KSqueezedTextLabel(this);
@@ -78,30 +78,30 @@ DocumentInfoView::DocumentInfoView(DocumentInfoTool* tool, QWidget* parent)
     // TODO: for some reason if building with enable_final flag the compiler sees
     // an ambiguous conversion without the explicit Qt::TextInteractionFlags(...)
     mLocationLabel->setTextInteractionFlags(Qt::TextInteractionFlags(Qt::TextSelectableByMouse | Qt::TextSelectableByKeyboard));
-    propertyGrid->addRow(i18n("Location:"), mLocationLabel);
+    propertyGrid->addRow(i18nc("@label", "Location:"), mLocationLabel);
 
     // size property
     mSizeLabel = new QLabel(this);
     mSizeLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
-    propertyGrid->addRow(i18n("Size:"), mSizeLabel);
+    propertyGrid->addRow(i18nc("@label", "Size:"), mSizeLabel);
 
 #if 0
-    label = new QLabel(i18n("Created/Loaded:"), this);   // TODO: make adjustable depending on document
+    label = new QLabel(i18nc("@label", "Created/Loaded:"), this);   // TODO: make adjustable depending on document
     propertyGrid->addWidget(label, currentPropertyRow, 0, Qt::AlignRight);
     currentPropertyRow++;
 
-    label = new QLabel(i18n("Last modified:"), this);
+    label = new QLabel(i18nc("@label", "Last modified:"), this);
     propertyGrid->addWidget(label, currentPropertyRow, 0, Qt::AlignRight);
     currentPropertyRow++;
 
-    label = new QLabel(i18n("Last synchronized:"), this);
+    label = new QLabel(i18nc("@label", "Last synchronized:"), this);
     propertyGrid->addWidget(label, currentPropertyRow, 0, Qt::AlignRight);
     currentPropertyRow++;
 // last accessed from remote
 
     KDateTime dt;// = item.time(KFileItem::CreationTime);
     if (!dt.isNull()) {
-        label = new QLabel(i18n("Created:"), this);
+        label = new QLabel(i18nc("@label", "Created:"), this);
         propertyGrid->addWidget(label, currentPropertyRow, 0, Qt::AlignRight);
 
         label = new QLabel(KLocale::global()->formatDateTime(dt), this);
