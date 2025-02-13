@@ -112,8 +112,7 @@ ViewProfileEdit::ViewProfileEdit(QWidget* parent)
     // bytes per group
     mGroupedBytesCountEdit = new QSpinBox(this);
     mGroupedBytesCountEdit->setRange(0, std::numeric_limits<int>::max());
-    const QString noGroupingText = i18nc("@label",
-                                         "No grouping.");
+    const QString noGroupingText = i18nc("@item", "No Grouping");
     mGroupedBytesCountEdit->setSpecialValueText(noGroupingText);
     const QString groupedBytesCountLabel =
         i18nc("@label:spinbox number of bytes which are grouped",
