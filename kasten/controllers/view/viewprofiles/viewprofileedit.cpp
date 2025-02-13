@@ -82,7 +82,7 @@ ViewProfileEdit::ViewProfileEdit(QWidget* parent)
     // display mode
     const QString displayModeLabel =
         i18nc("@label:listbox ",
-              "Show with Rows or Columns:");
+              "Show with rows or columns:");
     mDisplayModeComboBox = new KComboBox(displayBox);
     const QStringList displayModeList {
         i18nc("@item:", "Columns"),
@@ -117,14 +117,14 @@ ViewProfileEdit::ViewProfileEdit(QWidget* parent)
     mGroupedBytesCountEdit->setSpecialValueText(noGroupingText);
     const QString groupedBytesCountLabel =
         i18nc("@label:spinbox number of bytes which are grouped",
-              "Bytes per Group:");
+              "Bytes per group:");
     layoutBoxFormLayout->addRow(groupedBytesCountLabel, mGroupedBytesCountEdit);
     // bytes per group
     mBytesPerLineEdit = new QSpinBox(this);
     mBytesPerLineEdit->setRange(1, std::numeric_limits<int>::max());
     const QString bytesPerLineLabel =
         i18nc("@label:spinbox number of bytes which are shown per line",
-              "Bytes per Line:");
+              "Bytes per line:");
     layoutBoxFormLayout->addRow(bytesPerLineLabel, mBytesPerLineEdit);
 
     // value settings
