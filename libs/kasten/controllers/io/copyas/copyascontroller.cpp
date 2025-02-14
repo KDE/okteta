@@ -53,11 +53,16 @@ CopyAsController::CopyAsController(ModelCodecViewManager* modelCodecViewManager,
 
 void CopyAsController::setTargetModel(AbstractModel* model)
 {
+    AbstractModel* const dataSelectableModel = model ? model->findBaseModelWithInterface<If::DataSelectable*>() : nullptr;
+    if (dataSelectableModel == mModel) {
+        return;
+    }
+
     if (mModel) {
         mModel->disconnect(this);
     }
 
-    mModel = model ? model->findBaseModelWithInterface<If::DataSelectable*>() : nullptr;
+    mModel = dataSelectableModel;
     mSelectionControl = mModel ? qobject_cast<If::DataSelectable*>(mModel) : nullptr;
 
     if (mSelectionControl) {

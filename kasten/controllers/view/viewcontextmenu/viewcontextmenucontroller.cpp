@@ -26,11 +26,16 @@ ViewContextMenuController::ViewContextMenuController(KXMLGUIClient* guiClient)
 
 void ViewContextMenuController::setTargetModel(AbstractModel* model)
 {
+    ByteArrayView* const byteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
+    if (byteArrayView == mByteArrayView) {
+        return;
+    }
+
     if (mByteArrayView) {
         mByteArrayView->disconnect(this);
     }
 
-    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
+    mByteArrayView = byteArrayView;
 
     if (mByteArrayView) {
         connect(mByteArrayView, &ByteArrayView::viewContextMenuRequested,

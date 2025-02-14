@@ -49,9 +49,14 @@ bool FileSystemBrowserTool::hasCurrentUrl() const
 
 void FileSystemBrowserTool::setTargetModel(AbstractModel* model)
 {
+    AbstractDocument* const document = model ? model->findBaseModel<AbstractDocument*>() : nullptr;
+    if (document == mDocument) {
+        return;
+    }
+
     const bool oldHasCurrentUrl = hasCurrentUrl();
 
-    mDocument = model ? model->findBaseModel<AbstractDocument*>() : nullptr;
+    mDocument = document;
 
     const bool newHasCurrentUrl = hasCurrentUrl();
 

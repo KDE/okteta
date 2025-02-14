@@ -50,11 +50,16 @@ InsertController::InsertController(ModelCodecViewManager* modelCodecViewManager,
 
 void InsertController::setTargetModel(AbstractModel* model)
 {
+    AbstractModel* const selectedDataWriteableModel = model ? model->findBaseModelWithInterface<If::SelectedDataWriteable*>() : nullptr;
+    if (selectedDataWriteableModel == mModel) {
+        return;
+    }
+
     if (mModel) {
         mModel->disconnect(this);
     }
 
-    mModel = model ? model->findBaseModelWithInterface<If::SelectedDataWriteable*>() : nullptr;
+    mModel = selectedDataWriteableModel;
     mSelectedDataWriteableControl = mModel ? qobject_cast<If::SelectedDataWriteable*>(mModel) : nullptr;
 
     if (mSelectedDataWriteableControl) {

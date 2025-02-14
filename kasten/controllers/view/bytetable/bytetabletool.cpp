@@ -39,12 +39,17 @@ bool ByteTableTool::hasWriteable() const
 
 void ByteTableTool::setTargetModel(AbstractModel* model)
 {
+    ByteArrayView* const byteArrayView = model ? qobject_cast<ByteArrayView*>(model) : nullptr;
+    if (byteArrayView == mByteArrayView) {
+        return;
+    }
+
     if (mByteArrayView) {
         mByteArrayView->disconnect(mByteTableModel);
         mByteArrayView->disconnect(this);
     }
 
-    mByteArrayView = model ? qobject_cast<ByteArrayView*>(model) : nullptr;
+    mByteArrayView = byteArrayView;
 
     ByteArrayDocument* document =
         mByteArrayView ? qobject_cast<ByteArrayDocument*>(mByteArrayView->baseModel()) : nullptr;

@@ -70,6 +70,11 @@ QString StructuresTool::title() const
 
 void StructuresTool::setTargetModel(AbstractModel* model)
 {
+    ByteArrayView* const byteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
+    if (byteArrayView == mByteArrayView) {
+        return;
+    }
+
     // just a copy of the code in poddecodertool.h
     if (mByteArrayView) {
         mByteArrayView->disconnect(this);
@@ -81,7 +86,8 @@ void StructuresTool::setTargetModel(AbstractModel* model)
         mByteArrayModel->disconnect(this);
     }
 
-    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
+    mByteArrayView = byteArrayView;
+    // TODO; check if already same document used before
     ByteArrayDocument* document = mByteArrayView ?
                                   qobject_cast<ByteArrayDocument*>(mByteArrayView->baseModel()) : nullptr;
     mByteArrayModel = document ? document->content() : nullptr;

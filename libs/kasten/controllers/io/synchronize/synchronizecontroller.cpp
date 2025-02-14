@@ -43,11 +43,16 @@ SynchronizeController::SynchronizeController(DocumentSyncManager* syncManager, K
 
 void SynchronizeController::setTargetModel(AbstractModel* model)
 {
+    AbstractDocument* const document = model ? model->findBaseModel<AbstractDocument*>() : nullptr;
+    if (document == mDocument) {
+        return;
+    }
+
     if (mDocument) {
         mDocument->disconnect(this);
     }
 
-    mDocument = model ? model->findBaseModel<AbstractDocument*>() : nullptr;
+    mDocument = document;
 
     if (mDocument) {
         connect(mDocument, &AbstractDocument::synchronizerChanged,

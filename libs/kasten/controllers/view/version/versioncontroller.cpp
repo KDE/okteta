@@ -56,6 +56,10 @@ VersionController::VersionController(KXMLGUIClient* guiClient)
 
 void VersionController::setTargetModel(AbstractModel* model)
 {
+    if (model == mModel) {
+        return;
+    }
+
     if (mModel) {
         mModel->disconnect(this);
         AbstractModel* versionedModel = mModel->findBaseModelWithInterface<If::Versionable*>();

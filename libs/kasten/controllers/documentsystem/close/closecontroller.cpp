@@ -64,7 +64,12 @@ CloseController::~CloseController() = default;
 
 void CloseController::setTargetModel(AbstractModel* model)
 {
-    mDocument = model ? model->findBaseModel<AbstractDocument*>() : nullptr;
+    AbstractDocument* const document = model ? model->findBaseModel<AbstractDocument*>() : nullptr;
+    if (document == mDocument) {
+        return;
+    }
+
+    mDocument = document;
     const bool hasDocument = (mDocument != nullptr);
 
     mCloseAction->setEnabled(hasDocument);

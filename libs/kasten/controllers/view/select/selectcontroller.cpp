@@ -34,11 +34,16 @@ SelectController::SelectController(KXMLGUIClient* guiClient)
 
 void SelectController::setTargetModel(AbstractModel* model)
 {
+    AbstractModel* const dataSelectableModel = model ? model->findBaseModelWithInterface<If::DataSelectable*>() : nullptr;
+    if (dataSelectableModel == mModel) {
+        return;
+    }
+
     if (mModel) {
         mModel->disconnect(this);
     }
 
-    mModel = model ? model->findBaseModelWithInterface<If::DataSelectable*>() : nullptr;
+    mModel = dataSelectableModel;
     mSelectControl = mModel ? qobject_cast<If::DataSelectable*>(mModel) : nullptr;
 
     const bool hasSelectionControl = (mSelectControl != nullptr);

@@ -72,6 +72,11 @@ int DocumentInfoTool::documentSize() const
 
 void DocumentInfoTool::setTargetModel(AbstractModel* model)
 {
+    ByteArrayDocument* const document = model ? model->findBaseModel<ByteArrayDocument*>() : nullptr;
+    if (document == mDocument) {
+        return;
+    }
+
     if (mSynchronizer) {
         mSynchronizer->disconnect(this);
     }
@@ -82,7 +87,7 @@ void DocumentInfoTool::setTargetModel(AbstractModel* model)
         mByteArrayModel->disconnect(this);
     }
 
-    mDocument = model ? model->findBaseModel<ByteArrayDocument*>() : nullptr;
+    mDocument = document;
     mByteArrayModel = mDocument ? mDocument->content() : nullptr;
 
     const bool hasDocument = (mDocument != nullptr);

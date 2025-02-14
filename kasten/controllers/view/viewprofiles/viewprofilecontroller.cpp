@@ -86,11 +86,16 @@ ViewProfileController::ViewProfileController(ByteArrayViewProfileManager* viewPr
 
 void ViewProfileController::setTargetModel(AbstractModel* model)
 {
+    ByteArrayView* const  byteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
+    if (byteArrayView == mByteArrayView) {
+        return;
+    }
+
     if (mByteArrayViewProfileSynchronizer) {
         mByteArrayViewProfileSynchronizer->disconnect(this);
     }
 
-    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
+    mByteArrayView = byteArrayView;
     mByteArrayViewProfileSynchronizer = mByteArrayView ? mByteArrayView->synchronizer() : nullptr;
 
     const bool hasSynchronizer = (mByteArrayViewProfileSynchronizer != nullptr);

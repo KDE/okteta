@@ -37,11 +37,16 @@ ReadOnlyController::ReadOnlyController(KXMLGUIClient* guiClient)
 
 void ReadOnlyController::setTargetModel(AbstractModel* model)
 {
+    AbstractDocument* const document = model ? model->findBaseModel<AbstractDocument*>() : nullptr;
+    if (document == mDocument) {
+        return;
+    }
+
     if (mDocument) {
         mDocument->disconnect(mSetReadOnlyAction);
     }
 
-    mDocument = model ? model->findBaseModel<AbstractDocument*>() : nullptr;
+    mDocument = document;
 
     if (mDocument) {
         mSetReadOnlyAction->setChecked(mDocument->isReadOnly());

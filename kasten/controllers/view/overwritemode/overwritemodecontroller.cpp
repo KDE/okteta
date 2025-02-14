@@ -38,11 +38,16 @@ OverwriteModeController::OverwriteModeController(KXMLGUIClient* guiClient)
 
 void OverwriteModeController::setTargetModel(AbstractModel* model)
 {
+    ByteArrayView* const byteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
+    if (byteArrayView == mByteArrayView) {
+        return;
+    }
+
     if (mByteArrayView) {
         mByteArrayView->disconnect(mSetOverWriteAction);
     }
 
-    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
+    mByteArrayView = byteArrayView;
 
     if (mByteArrayView) {
         mSetOverWriteAction->setChecked(mByteArrayView->isOverwriteMode());

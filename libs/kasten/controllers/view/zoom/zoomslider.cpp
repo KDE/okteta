@@ -83,11 +83,16 @@ ZoomSlider::~ZoomSlider() = default;
 
 void ZoomSlider::setTargetModel(AbstractModel* model)
 {
+    AbstractModel* const zoomableModel = model ? model->findBaseModelWithInterface<If::Zoomable*>() : nullptr;
+    if (zoomableModel == mModel) {
+        return;
+    }
+
     if (mModel) {
         mModel->disconnect(this);
     }
 
-    mModel = model ? model->findBaseModelWithInterface<If::Zoomable*>() : nullptr;
+    mModel = zoomableModel;
     mZoomControl = mModel ? qobject_cast<If::Zoomable*>(mModel) : nullptr;
     m_zoomLevelsControl = nullptr;
 
