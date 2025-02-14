@@ -81,7 +81,7 @@ void StringsExtractTool::setTargetModel(AbstractModel* model)
                    this, &StringsExtractTool::offsetCodingChanged);
     }
 
-    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
+    mByteArrayView = byteArrayView;
 
     ByteArrayDocument* document =
         mByteArrayView ? qobject_cast<ByteArrayDocument*>(mByteArrayView->baseModel()) : nullptr;
