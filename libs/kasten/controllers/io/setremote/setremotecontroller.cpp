@@ -32,7 +32,12 @@ SetRemoteController::SetRemoteController(DocumentSyncManager* syncManager, KXMLG
 
 void SetRemoteController::setTargetModel(AbstractModel* model)
 {
-    mDocument = model ? model->findBaseModel<AbstractDocument*>() : nullptr;
+    AbstractDocument* const document = model ? model->findBaseModel<AbstractDocument*>() : nullptr;
+    if (document == mDocument) {
+        return;
+    }
+
+    mDocument = document;
 
     const bool canBeSaved = mDocument ?
                             (mDocument->synchronizer() ||

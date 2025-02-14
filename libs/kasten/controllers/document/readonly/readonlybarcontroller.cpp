@@ -33,11 +33,16 @@ ReadOnlyBarController::ReadOnlyBarController(StatusBar* statusBar)
 
 void ReadOnlyBarController::setTargetModel(AbstractModel* model)
 {
+    AbstractDocument* const document = model ? model->findBaseModel<AbstractDocument*>() : nullptr;
+    if (document == mDocument) {
+        return;
+    }
+
     if (mDocument) {
         mDocument->disconnect(mReadOnlyButton);
     }
 
-    mDocument = model ? model->findBaseModel<AbstractDocument*>() : nullptr;
+    mDocument = document;
 
     if (mDocument) {
         mReadOnlyButton->setChecked(mDocument->isReadOnly());

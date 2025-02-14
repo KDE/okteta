@@ -62,6 +62,11 @@ QString SelectRangeTool::title() const { return i18nc("@title:window of the tool
 
 void SelectRangeTool::setTargetModel(AbstractModel* model)
 {
+    ByteArrayView* const byteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
+    if (byteArrayView == mByteArrayView) {
+        return;
+    }
+
     const bool oldIsUsable = isUsable();
     const bool oldIsApplyable = isApplyable();
 
@@ -72,8 +77,9 @@ void SelectRangeTool::setTargetModel(AbstractModel* model)
         mByteArrayModel->disconnect(this);
     }
 
-    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
+    mByteArrayView = byteArrayView;
 
+    // TODO; check if already same document used before
     ByteArrayDocument* document =
         mByteArrayView ? qobject_cast<ByteArrayDocument*>(mByteArrayView->baseModel()) : nullptr;
     mByteArrayModel = document ? document->content() : nullptr;

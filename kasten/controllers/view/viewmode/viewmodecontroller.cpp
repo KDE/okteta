@@ -36,11 +36,16 @@ ViewModeController::ViewModeController(KXMLGUIClient* guiClient)
 
 void ViewModeController::setTargetModel(AbstractModel* model)
 {
+    ByteArrayView* const byteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
+    if (byteArrayView == mByteArrayView) {
+        return;
+    }
+
     if (mByteArrayView) {
         mByteArrayView->disconnect(this);
     }
 
-    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
+    mByteArrayView = byteArrayView;
 
     const bool hasView = (mByteArrayView != nullptr);
     if (hasView) {

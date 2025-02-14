@@ -65,6 +65,11 @@ AbstractModel* StringsExtractTool::targetModel() const
 // voll strings, auch mit Leerzeichen
 void StringsExtractTool::setTargetModel(AbstractModel* model)
 {
+    ByteArrayView* const byteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
+    if (byteArrayView == mByteArrayView) {
+        return;
+    }
+
     if (mByteArrayView) {
         // disconnect explicitly from all connects but QObject::detroyed,
         // for the case mSourceByteArrayView is mByteArrayView

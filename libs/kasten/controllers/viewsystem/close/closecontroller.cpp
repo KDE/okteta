@@ -31,7 +31,12 @@ CloseController::CloseController(ViewManager* viewManager, KXMLGUIClient* guiCli
 
 void CloseController::setTargetModel(AbstractModel* model)
 {
-    mView = model ? model->findBaseModel<AbstractView*>() : 0;
+    AbstractView* const view = model ? model->findBaseModel<AbstractView*>() : nullptr;
+    if (view == mView) {
+        return;
+    }
+
+    mView = view;
 
     const bool hasView = (mView != 0);
 

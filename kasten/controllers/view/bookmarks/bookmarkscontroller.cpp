@@ -91,6 +91,11 @@ BookmarksController::~BookmarksController() = default;
 
 void BookmarksController::setTargetModel(AbstractModel* model)
 {
+    ByteArrayView* const byteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
+    if (byteArrayView == mByteArrayView) {
+        return;
+    }
+
     if (mByteArrayView) {
         mByteArrayView->disconnect(this);
     }
@@ -98,8 +103,9 @@ void BookmarksController::setTargetModel(AbstractModel* model)
         mByteArray->disconnect(this);
     }
 
-    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
+    mByteArrayView = byteArrayView;
 
+    // TODO; check if already same document used before
     ByteArrayDocument* document =
         mByteArrayView ? qobject_cast<ByteArrayDocument*>(mByteArrayView->baseModel()) : nullptr;
     mByteArray = document ? document->content() : nullptr;

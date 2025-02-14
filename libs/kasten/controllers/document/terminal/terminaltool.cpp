@@ -43,9 +43,14 @@ QUrl TerminalTool::currentUrl() const
 
 void TerminalTool::setTargetModel(AbstractModel* model)
 {
+    AbstractDocument* const document = model ? model->findBaseModel<AbstractDocument*>() : nullptr;
+    if (document == mDocument) {
+        return;
+    }
+
     const QUrl oldCurrentUrl = currentUrl();
 
-    mDocument = model ? model->findBaseModel<AbstractDocument*>() : nullptr;
+    mDocument = document;
 
     const QUrl newCurrentUrl = currentUrl();
 
