@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-31 01:56+0000\n"
+"POT-Creation-Date: 2025-02-14 02:06+0000\n"
 "PO-Revision-Date: 2013-10-18 20:13+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: bosanski <bs@li.org>\n"
@@ -38,39 +38,52 @@ msgid "Okteta"
 msgstr "Okteta"
 
 #: about.cpp:19
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Hex editor"
+msgctxt "@info"
 msgid "Hex editor"
 msgstr "Heksadekadni editor"
 
 #: about.cpp:21
 #, fuzzy, kde-format
+msgctxt "@info"
 msgid "2006-%1 Friedrich W. H. Kossebau"
 msgstr "Autorska prava 2006-2013 Friedrich W. H. Kossebau"
 
 #: about.cpp:22
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Edit the raw data of files"
+msgctxt "@info"
 msgid "Edit the raw data of files"
 msgstr "Uređujte sirove podatke datoteka"
 
 #: about.cpp:27
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Friedrich W. H. Kossebau"
+msgctxt "@info:credit"
 msgid "Friedrich W. H. Kossebau"
 msgstr "Fridrih V.H. Kosebau"
 
 #: about.cpp:28
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Author"
+msgctxt "@info:credit"
 msgid "Author"
 msgstr "Autor"
 
 #: about.cpp:30
-#, kde-format
-msgctxt "Author"
+#, fuzzy, kde-format
+#| msgctxt "Author"
+#| msgid "Alexander Richardson"
+msgctxt "@info:credit"
 msgid "Alexander Richardson"
 msgstr "Alexander Richardson"
 
 #: about.cpp:31
-#, kde-format
-msgctxt "Task description"
+#, fuzzy, kde-format
+#| msgctxt "Task description"
+#| msgid "Structures tool"
+msgctxt "@info:credit"
 msgid "Structures tool"
 msgstr "Alatka za strukture"
 
@@ -95,5 +108,6 @@ msgstr "Glavna alatna traka"
 
 #: program.cpp:89
 #, fuzzy, kde-format
+msgctxt "@info"
 msgid "File(s) to load."
 msgstr "Datoteke za učitavanje"

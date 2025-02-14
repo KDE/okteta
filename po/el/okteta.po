@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-31 01:56+0000\n"
+"POT-Creation-Date: 2025-02-14 02:06+0000\n"
 "PO-Revision-Date: 2021-06-30 10:00+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -37,39 +37,53 @@ msgid "Okteta"
 msgstr "Okteta"
 
 #: about.cpp:19
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Hex editor"
+msgctxt "@info"
 msgid "Hex editor"
 msgstr "Επεξεργαστής δεκαεξαδικών"
 
 #: about.cpp:21
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "2006-%1 Friedrich W. H. Kossebau"
+msgctxt "@info"
 msgid "2006-%1 Friedrich W. H. Kossebau"
 msgstr "2006-%1 Friedrich W. H. Kossebau"
 
 #: about.cpp:22
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Edit the raw data of files"
+msgctxt "@info"
 msgid "Edit the raw data of files"
 msgstr "Εξαγωγή των ακατέργαστων δεδομένων αρχείων."
 
 #: about.cpp:27
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Friedrich W. H. Kossebau"
+msgctxt "@info:credit"
 msgid "Friedrich W. H. Kossebau"
 msgstr "Friedrich W. H. Kossebau"
 
 #: about.cpp:28
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Author"
+msgctxt "@info:credit"
 msgid "Author"
 msgstr "Συγγραφέας"
 
 #: about.cpp:30
-#, kde-format
-msgctxt "Author"
+#, fuzzy, kde-format
+#| msgctxt "Author"
+#| msgid "Alexander Richardson"
+msgctxt "@info:credit"
 msgid "Alexander Richardson"
 msgstr "Alexander Richardson"
 
 #: about.cpp:31
-#, kde-format
-msgctxt "Task description"
+#, fuzzy, kde-format
+#| msgctxt "Task description"
+#| msgid "Structures tool"
+msgctxt "@info:credit"
 msgid "Structures tool"
 msgstr "Δομικό εργαλείο"
 
@@ -93,7 +107,9 @@ msgid "Main Toolbar"
 msgstr "Κύρια γραμμή εργαλείων"
 
 #: program.cpp:89
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "File(s) to load."
+msgctxt "@info"
 msgid "File(s) to load."
 msgstr "Αρχείο(α) για φόρτωση."
 

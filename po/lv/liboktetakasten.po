@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-02 01:59+0000\n"
+"POT-Creation-Date: 2025-02-14 02:06+0000\n"
 "PO-Revision-Date: 2010-01-09 18:03+0200\n"
 "Last-Translator: Viesturs Zarins <viesturs.zarins@mii.lu.lv>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -36,39 +36,51 @@ msgid "File Info"
 msgstr "Faila informācija"
 
 #: controllers/document/info/documentinfoview.cpp:67
-#: controllers/view/structures/datatypes/datainformation.cpp:235
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Type:"
+msgctxt "@label"
 msgid "Type:"
 msgstr "Tips:"
 
 #: controllers/document/info/documentinfoview.cpp:81
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Location:"
+msgctxt "@label"
 msgid "Location:"
 msgstr "Vieta:"
 
 #: controllers/document/info/documentinfoview.cpp:86
-#: controllers/view/structures/datatypes/datainformation.cpp:237
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Size:"
+msgctxt "@label"
 msgid "Size:"
 msgstr "Izmērs:"
 
 #: controllers/document/info/documentinfoview.cpp:89
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Created/Loaded:"
+msgctxt "@label"
 msgid "Created/Loaded:"
 msgstr "Izveidots/Ielasīts:"
 
 #: controllers/document/info/documentinfoview.cpp:93
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Last modified:"
+msgctxt "@label"
 msgid "Last modified:"
 msgstr "Pēdējoreiz mainīts:"
 
 #: controllers/document/info/documentinfoview.cpp:97
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Last synchronized:"
+msgctxt "@label"
 msgid "Last synchronized:"
 msgstr "Pēdējoreiz sinhronizēts:"
 
 #: controllers/document/info/documentinfoview.cpp:104
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Created:"
+msgctxt "@label"
 msgid "Created:"
 msgstr "Izveidots:"
 
@@ -291,7 +303,10 @@ msgid "Value/Char Table"
 msgstr ""
 
 #: controllers/view/bytetable/bytetabletool.cpp:91
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Inserted 1 Byte"
+#| msgid_plural "Inserted %1 Bytes"
+msgctxt "@item"
 msgid "Inserted 1 Byte"
 msgid_plural "Inserted %1 Bytes"
 msgstr[0] "Ievietots %1 baits"
@@ -348,7 +363,7 @@ msgstr ""
 #, fuzzy, kde-format
 #| msgctxt "@item description of bookmark"
 #| msgid "%1: %2"
-msgctxt "Converted from charset 1 to charset 2"
+msgctxt "@item Converted from charset 1 to charset 2"
 msgid "%1 to %2"
 msgstr "%1: %2"
 
@@ -449,7 +464,8 @@ msgstr ""
 #, fuzzy, kde-format
 #| msgctxt "@title:column count of characters"
 #| msgid "Count"
-msgid "Con&vert"
+msgctxt "@action:button"
+msgid "Convert"
 msgstr "Skaits"
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:173
@@ -569,7 +585,7 @@ msgstr ""
 
 #: controllers/view/crop/cropcontroller.cpp:91
 #, kde-format
-msgctxt "name of the change"
+msgctxt "@item name of the change"
 msgid "Crop"
 msgstr ""
 
@@ -768,9 +784,12 @@ msgstr ""
 
 #: controllers/view/info/infoview.cpp:118
 #: controllers/view/stringsextract/stringsextractview.cpp:158
-#, kde-format
-msgid "C&opy"
-msgstr "&Kopēt"
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Copy As"
+msgctxt "@action:button"
+msgid "Copy"
+msgstr "Kopēt kā"
 
 #: controllers/view/info/infoview.cpp:121
 #, fuzzy, kde-format
@@ -1368,9 +1387,18 @@ msgid "Decoding Table"
 msgstr "Dekodēšanas tabula"
 
 #: controllers/view/poddecoder/poddecodertool.cpp:304
+#, fuzzy, kde-format
+#| msgctxt "Edited as %datatype"
+#| msgid "Edited as %1"
+msgctxt "@item Edited as datatype"
+msgid "Edited as %1"
+msgstr "Rediģēts kā %1"
+
 #: controllers/view/poddecoder/poddecodertool.cpp:313
-#, kde-format
-msgctxt "Edited as %datatype"
+#, fuzzy, kde-format
+#| msgctxt "Edited as %datatype"
+#| msgid "Edited as %1"
+msgctxt "@info Edited as datatype"
 msgid "Edited as %1"
 msgstr "Rediģēts kā %1"
 
@@ -1776,7 +1804,9 @@ msgid "Filter:"
 msgstr "Filtrs:"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:92
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Enter a term to limit the list."
+msgctxt "@info:placeholder"
 msgid "Enter a term to limit the list."
 msgstr "Šeit ievadiet filtra tekstu."
 
@@ -1805,8 +1835,10 @@ msgstr ""
 "iekopētas starpliktuvē."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:172
-#, kde-format
-msgid "&Show"
+#, fuzzy, kde-format
+#| msgid "&Show"
+msgctxt "@action:button"
+msgid "Show"
 msgstr "&Rādīt"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:175
@@ -1879,12 +1911,22 @@ msgstr ""
 msgid "Name:"
 msgstr "Nosaukums"
 
+#: controllers/view/structures/datatypes/datainformation.cpp:235
+#, kde-format
+msgid "Type:"
+msgstr "Tips:"
+
 #: controllers/view/structures/datatypes/datainformation.cpp:236
 #, fuzzy, kde-format
 #| msgctxt "@title:column value of the bytes for the datatype"
 #| msgid "Value"
 msgid "Value:"
 msgstr "Vērtība"
+
+#: controllers/view/structures/datatypes/datainformation.cpp:237
+#, kde-format
+msgid "Size:"
+msgstr "Izmērs:"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:243
 #, kde-format
@@ -2698,12 +2740,16 @@ msgid "Open settings."
 msgstr "Atvērt iestatījumus."
 
 #: controllers/view/structures/structureview.cpp:174
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Value Display"
+msgctxt "@title:tab"
 msgid "Value Display"
 msgstr "Vērtību attēlošana"
 
 #: controllers/view/structures/structureview.cpp:186
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Structures management"
+msgctxt "@title:tab"
 msgid "Structures management"
 msgstr "Struktūru pārvaldība"
 
@@ -2741,14 +2787,12 @@ msgid "Structures Script Console"
 msgstr "Struktūras definīcijas"
 
 #: controllers/view/viewconfig/bytespergroupdialog.cpp:33
-#: controllers/view/viewprofiles/viewprofileedit.cpp:116
 #, kde-format
 msgctxt "@label"
 msgid "No grouping."
 msgstr ""
 
 #: controllers/view/viewconfig/bytespergroupdialog.cpp:37
-#: controllers/view/viewprofiles/viewprofileedit.cpp:120
 #, fuzzy, kde-format
 #| msgctxt "@label:textbox to define after how many items the list is wrapped"
 #| msgid "Items per line:"
@@ -2763,7 +2807,6 @@ msgid "Bytes per Group"
 msgstr ""
 
 #: controllers/view/viewconfig/bytesperlinedialog.cpp:34
-#: controllers/view/viewprofiles/viewprofileedit.cpp:127
 #, fuzzy, kde-format
 #| msgctxt "@label:textbox to define after how many items the list is wrapped"
 #| msgid "Items per line:"
@@ -2984,7 +3027,7 @@ msgstr "Saglabāt kā"
 #, fuzzy, kde-format
 #| msgctxt "@title:menu"
 #| msgid "&View Mode"
-msgctxt "@window:title"
+msgctxt "@title:window"
 msgid "New View Profile"
 msgstr "&Skata režīms"
 
@@ -2992,12 +3035,14 @@ msgstr "&Skata režīms"
 #, fuzzy, kde-format
 #| msgctxt "@title:column title of the bookmark"
 #| msgid "Title"
+msgctxt "@label:textbox"
 msgid "Title:"
 msgstr "Nosaukums"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:59
 #, fuzzy, kde-format
 #| msgid "Value Display"
+msgctxt "@title:group"
 msgid "Display"
 msgstr "Vērtību attēlošana"
 
@@ -3005,7 +3050,8 @@ msgstr "Vērtību attēlošana"
 #, fuzzy, kde-format
 #| msgctxt "@option:check"
 #| msgid "Show &Line Offset"
-msgid "Show Line Offset:"
+msgctxt "@option:check"
+msgid "Show line offset:"
 msgstr "Rādīt &rindas nobīdi"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:67
@@ -3033,14 +3079,15 @@ msgstr "Oktāli"
 #: controllers/view/viewprofiles/viewprofileedit.cpp:72
 #, fuzzy, kde-format
 #| msgid "Value coding:"
-msgid "Offset Coding:"
+msgctxt "@label:listbox"
+msgid "Offset coding:"
 msgstr "Vērtības kodējums:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:76
 #, fuzzy, kde-format
 #| msgctxt "@item name of the encoding result"
 #| msgid "Values"
-msgctxt "@item:"
+msgctxt "@item:inmenu"
 msgid "Values"
 msgstr "Vērtības"
 
@@ -3048,7 +3095,7 @@ msgstr "Vērtības"
 #, fuzzy, kde-format
 #| msgctxt "@item:inmenu"
 #| msgid "&Chars"
-msgctxt "@item:"
+msgctxt "@item:inmenu"
 msgid "Chars"
 msgstr "&Rakstzīmes"
 
@@ -3056,7 +3103,7 @@ msgstr "&Rakstzīmes"
 #, fuzzy, kde-format
 #| msgctxt "@item:inmenu"
 #| msgid "Values && Chars"
-msgctxt "@item:"
+msgctxt "@item:inmenu"
 msgid "Values & Chars"
 msgstr "Vērtības un rakstzīmes"
 
@@ -3064,20 +3111,21 @@ msgstr "Vērtības un rakstzīmes"
 #, fuzzy, kde-format
 #| msgctxt "@title:menu"
 #| msgid "&Show Values or Chars"
-msgid "Show Values or Chars:"
+msgctxt "@option:check"
+msgid "Show values or chars:"
 msgstr "Rā&dīt vērtības vai rakstzīmes"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:85
 #, kde-format
 msgctxt "@label:listbox "
-msgid "Show with Rows or Columns:"
+msgid "Show with rows or columns:"
 msgstr ""
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:88
 #, fuzzy, kde-format
 #| msgctxt "@item:inmenu"
 #| msgid "&Columns"
-msgctxt "@item:"
+msgctxt "@item:inmenu"
 msgid "Columns"
 msgstr "&Kolonas"
 
@@ -3085,12 +3133,13 @@ msgstr "&Kolonas"
 #, fuzzy, kde-format
 #| msgctxt "@item:inmenu"
 #| msgid "&Rows"
-msgctxt "@item:"
+msgctxt "@item:inmenu"
 msgid "Rows"
 msgstr "&Rindas"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:96
 #, kde-format
+msgctxt "@title:group"
 msgid "Layout"
 msgstr ""
 
@@ -3128,17 +3177,43 @@ msgstr "&Ieslēgts"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:111
 #, kde-format
+msgctxt "@label:listbox"
 msgid "Break lines:"
 msgstr ""
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:132
+#: controllers/view/viewprofiles/viewprofileedit.cpp:115
+#, fuzzy, kde-format
+#| msgctxt "@item:inmenu"
+#| msgid "&Lock Groups"
+msgctxt "@item"
+msgid "No Grouping"
+msgstr "&Slēgt grupas"
+
+#: controllers/view/viewprofiles/viewprofileedit.cpp:119
+#, fuzzy, kde-format
+#| msgctxt "@label:textbox to define after how many items the list is wrapped"
+#| msgid "Items per line:"
+msgctxt "@label:spinbox number of bytes which are grouped"
+msgid "Bytes per group:"
+msgstr "Ieraksti rindā:"
+
+#: controllers/view/viewprofiles/viewprofileedit.cpp:126
+#, fuzzy, kde-format
+#| msgctxt "@label:textbox to define after how many items the list is wrapped"
+#| msgid "Items per line:"
+msgctxt "@label:spinbox number of bytes which are shown per line"
+msgid "Bytes per line:"
+msgstr "Ieraksti rindā:"
+
+#: controllers/view/viewprofiles/viewprofileedit.cpp:131
 #, fuzzy, kde-format
 #| msgctxt "@item name of the encoding result"
 #| msgid "Values"
+msgctxt "@title:group"
 msgid "Values"
 msgstr "Vērtības"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:138
+#: controllers/view/viewprofiles/viewprofileedit.cpp:137
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:50
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:38
 #, kde-format
@@ -3147,7 +3222,7 @@ msgctxt ""
 msgid "Hexadecimal"
 msgstr "Heksadecimāls"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:140
+#: controllers/view/viewprofiles/viewprofileedit.cpp:139
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:51
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:39
 #, kde-format
@@ -3155,7 +3230,7 @@ msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
 msgid "Decimal"
 msgstr "Decimāls"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:142
+#: controllers/view/viewprofiles/viewprofileedit.cpp:141
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:52
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:40
 #, kde-format
@@ -3163,7 +3238,7 @@ msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
 msgid "Octal"
 msgstr "Oktāls"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:144
+#: controllers/view/viewprofiles/viewprofileedit.cpp:143
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:53
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:41
 #, kde-format
@@ -3171,27 +3246,33 @@ msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
 msgid "Binary"
 msgstr "Binārs"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:147
-#: controllers/view/viewprofiles/viewprofileedit.cpp:156
+#: controllers/view/viewprofiles/viewprofileedit.cpp:146
+#: controllers/view/viewprofiles/viewprofileedit.cpp:155
 #, fuzzy, kde-format
 #| msgid "Value coding:"
+msgctxt "@label:listbox"
 msgid "Coding:"
 msgstr "Vērtības kodējums:"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:151
+#: controllers/view/viewprofiles/viewprofileedit.cpp:150
 #, fuzzy, kde-format
 #| msgctxt "@item:inmenu"
 #| msgid "&Chars"
+msgctxt "@title:group"
 msgid "Chars"
 msgstr "&Rakstzīmes"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:166
-#, kde-format
+#: controllers/view/viewprofiles/viewprofileedit.cpp:165
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Show &Non-printing Chars"
+msgctxt "@label:chooser"
 msgid "Char for non-printable bytes:"
-msgstr ""
+msgstr "Rādīt &nedrukājamās rakstzīmes"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:171
+#: controllers/view/viewprofiles/viewprofileedit.cpp:170
 #, kde-format
+msgctxt "@label:chooser"
 msgid "Char for undefined bytes:"
 msgstr ""
 
@@ -3331,7 +3412,7 @@ msgstr ""
 #, fuzzy, kde-format
 #| msgctxt "@title:menu"
 #| msgid "&View Mode"
-msgctxt "@window:title"
+msgctxt "@title:window"
 msgid "\"%1\" View Profile"
 msgstr "&Skata režīms"
 
@@ -3465,8 +3546,10 @@ msgid "Pattern…"
 msgstr "Paraugs"
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:148
-#, kde-format
-msgid "Pattern inserted."
+#, fuzzy, kde-format
+#| msgid "Pattern inserted."
+msgctxt "@item"
+msgid "Pattern Inserted"
 msgstr "Paraugs ievietots."
 
 #: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:35
@@ -3511,8 +3594,10 @@ msgid "Random Data…"
 msgstr "Nejauši dati"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:88
-#, kde-format
-msgid "RandomData inserted."
+#, fuzzy, kde-format
+#| msgid "RandomData inserted."
+msgctxt "@item"
+msgid "RandomData Inserted"
 msgstr "Nejauši dati ievietots."
 
 #: gui/io/generator/randomdata/bytearrayrandomdatageneratorconfigeditor.cpp:33
@@ -3544,8 +3629,10 @@ msgid "Sequence"
 msgstr "Secība"
 
 #: gui/io/generator/sequence/bytearraysequencegenerator.cpp:58
-#, kde-format
-msgid "Sequence inserted."
+#, fuzzy, kde-format
+#| msgid "Sequence inserted."
+msgctxt "@item"
+msgid "Sequence Inserted"
 msgstr "Secība ievietota."
 
 #: gui/io/streamencoder/base32/bytearraybase32streamencoder.cpp:131
@@ -3599,7 +3686,8 @@ msgstr ""
 #, fuzzy, kde-format
 #| msgctxt "@title:group"
 #| msgid "Preview (max. first 100 bytes)"
-msgid "The preview uses maximal the first 100 bytes."
+msgctxt "@info:tooltip"
+msgid "The preview uses maximally the first 100 bytes."
 msgstr "Priekšskatījums (maks. pirmie 100 baiti)"
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoder.cpp:27
@@ -3840,6 +3928,23 @@ msgctxt ""
 msgid "UTF-8"
 msgstr "UTF-8"
 
+#~ msgid "C&opy"
+#~ msgstr "&Kopēt"
+
+#, fuzzy
+#~| msgctxt "@item name of the encoding result"
+#~| msgid "Values"
+#~ msgctxt "@item:"
+#~ msgid "Values"
+#~ msgstr "Vērtības"
+
+#, fuzzy
+#~| msgctxt "@item:inmenu"
+#~| msgid "&Chars"
+#~ msgctxt "@item:"
+#~ msgid "Chars"
+#~ msgstr "&Rakstzīmes"
+
 #~ msgctxt "@item:intable character is not defined"
 #~ msgid "undef."
 #~ msgstr "nedef."
@@ -3992,12 +4097,6 @@ msgstr "UTF-8"
 #~ "\n"
 #~ "Tips: %4\n"
 #~ "Izmērs: %5 (%1 bērnu)"
-
-#, fuzzy
-#~| msgctxt "@option:check"
-#~| msgid "Show &Non-printing Chars"
-#~ msgid "Show Non-printable:"
-#~ msgstr "Rādīt &nedrukājamās rakstzīmes"
 
 #~ msgctxt "@label:spinbox number of bytes to insert"
 #~ msgid "Number:"
@@ -4364,10 +4463,6 @@ msgstr "UTF-8"
 #~ msgstr ""
 #~ "<filename>%1</filename> ir mainīts.<nl/>Vai vēlaties izmest izmaiņas?"
 
-#~ msgctxt "@title:window"
-#~ msgid "Copy As"
-#~ msgstr "Kopēt kā"
-
 #~ msgctxt "@action:button"
 #~ msgid "&Copy to clipboard"
 #~ msgstr "&Kopēt uz starpliktuvi"
@@ -4578,10 +4673,6 @@ msgstr "UTF-8"
 #~ msgctxt "@item:inmenu"
 #~ msgid "&No Resize"
 #~ msgstr "&Nemainīt izmēru"
-
-#~ msgctxt "@item:inmenu"
-#~ msgid "&Lock Groups"
-#~ msgstr "&Slēgt grupas"
 
 #~ msgctxt "@item:inmenu"
 #~ msgid "&Full Size Usage"

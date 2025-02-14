@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-31 01:56+0000\n"
+"POT-Creation-Date: 2025-02-14 02:06+0000\n"
 "PO-Revision-Date: 2008-08-05 22:28+0200\n"
 "Last-Translator: Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>\n"
 "Language-Team: Occitan (lengadocian) <ubuntu-l10n-oci@lists.ubuntu.com>\n"
@@ -35,38 +35,44 @@ msgstr ""
 
 #: about.cpp:19
 #, kde-format
+msgctxt "@info"
 msgid "Hex editor"
 msgstr ""
 
 #: about.cpp:21
 #, kde-format
+msgctxt "@info"
 msgid "2006-%1 Friedrich W. H. Kossebau"
 msgstr ""
 
 #: about.cpp:22
 #, kde-format
+msgctxt "@info"
 msgid "Edit the raw data of files"
 msgstr ""
 
 #: about.cpp:27
 #, kde-format
+msgctxt "@info:credit"
 msgid "Friedrich W. H. Kossebau"
 msgstr ""
 
 #: about.cpp:28
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Author"
+msgctxt "@info:credit"
 msgid "Author"
 msgstr "Autor"
 
 #: about.cpp:30
 #, kde-format
-msgctxt "Author"
+msgctxt "@info:credit"
 msgid "Alexander Richardson"
 msgstr ""
 
 #: about.cpp:31
 #, kde-format
-msgctxt "Task description"
+msgctxt "@info:credit"
 msgid "Structures tool"
 msgstr ""
 
@@ -92,6 +98,7 @@ msgstr "Barra d'espleches principala"
 
 #: program.cpp:89
 #, kde-format
+msgctxt "@info"
 msgid "File(s) to load."
 msgstr ""
 

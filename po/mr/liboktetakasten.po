@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-02 01:59+0000\n"
+"POT-Creation-Date: 2025-02-14 02:06+0000\n"
 "PO-Revision-Date: 2013-03-28 14:37+0530\n"
 "Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
 "Language-Team: Marathi <kde-i18n-doc@kde.org>\n"
@@ -35,39 +35,49 @@ msgid "File Info"
 msgstr ""
 
 #: controllers/document/info/documentinfoview.cpp:67
-#: controllers/view/structures/datatypes/datainformation.cpp:235
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Type:"
+msgctxt "@label"
 msgid "Type:"
 msgstr "प्रकार :"
 
 #: controllers/document/info/documentinfoview.cpp:81
 #, fuzzy, kde-format
+msgctxt "@label"
 msgid "Location:"
 msgstr "स्थान :"
 
 #: controllers/document/info/documentinfoview.cpp:86
-#: controllers/view/structures/datatypes/datainformation.cpp:237
 #, fuzzy, kde-format
+msgctxt "@label"
 msgid "Size:"
 msgstr "आकार :"
 
 #: controllers/document/info/documentinfoview.cpp:89
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Created:"
+msgctxt "@label"
 msgid "Created/Loaded:"
-msgstr ""
+msgstr "तयार केले :"
 
 #: controllers/document/info/documentinfoview.cpp:93
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Last modified:"
+msgctxt "@label"
 msgid "Last modified:"
 msgstr "शेवटी केलेला बदल :"
 
 #: controllers/document/info/documentinfoview.cpp:97
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Last modified:"
+msgctxt "@label"
 msgid "Last synchronized:"
-msgstr ""
+msgstr "शेवटी केलेला बदल :"
 
 #: controllers/document/info/documentinfoview.cpp:104
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Created:"
+msgctxt "@label"
 msgid "Created:"
 msgstr "तयार केले :"
 
@@ -286,6 +296,7 @@ msgstr ""
 
 #: controllers/view/bytetable/bytetabletool.cpp:91
 #, kde-format
+msgctxt "@item"
 msgid "Inserted 1 Byte"
 msgid_plural "Inserted %1 Bytes"
 msgstr[0] ""
@@ -329,8 +340,10 @@ msgid "Charset Conversion"
 msgstr ""
 
 #: controllers/view/charsetconversion/charsetconversiontool.cpp:299
-#, kde-format
-msgctxt "Converted from charset 1 to charset 2"
+#, fuzzy, kde-format
+#| msgctxt "Converted from charset 1 to charset 2"
+#| msgid "%1 to %2"
+msgctxt "@item Converted from charset 1 to charset 2"
 msgid "%1 to %2"
 msgstr "%1 ते %2"
 
@@ -425,7 +438,8 @@ msgstr ""
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:170
 #, kde-format
-msgid "Con&vert"
+msgctxt "@action:button"
+msgid "Convert"
 msgstr ""
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:173
@@ -532,7 +546,7 @@ msgstr ""
 
 #: controllers/view/crop/cropcontroller.cpp:91
 #, kde-format
-msgctxt "name of the change"
+msgctxt "@item name of the change"
 msgid "Crop"
 msgstr ""
 
@@ -719,9 +733,10 @@ msgstr ""
 
 #: controllers/view/info/infoview.cpp:118
 #: controllers/view/stringsextract/stringsextractview.cpp:158
-#, fuzzy, kde-format
-msgid "C&opy"
-msgstr "प्रत करा"
+#, kde-format
+msgctxt "@action:button"
+msgid "Copy"
+msgstr ""
 
 #: controllers/view/info/infoview.cpp:121
 #, kde-format
@@ -1280,9 +1295,14 @@ msgid "Decoding Table"
 msgstr ""
 
 #: controllers/view/poddecoder/poddecodertool.cpp:304
+#, kde-format
+msgctxt "@item Edited as datatype"
+msgid "Edited as %1"
+msgstr ""
+
 #: controllers/view/poddecoder/poddecodertool.cpp:313
 #, kde-format
-msgctxt "Edited as %datatype"
+msgctxt "@info Edited as datatype"
 msgid "Edited as %1"
 msgstr ""
 
@@ -1670,6 +1690,7 @@ msgstr "गाळणी :"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:92
 #, kde-format
+msgctxt "@info:placeholder"
 msgid "Enter a term to limit the list."
 msgstr ""
 
@@ -1697,7 +1718,8 @@ msgstr ""
 
 #: controllers/view/stringsextract/stringsextractview.cpp:172
 #, fuzzy, kde-format
-msgid "&Show"
+msgctxt "@action:button"
+msgid "Show"
 msgstr "%1 दर्शवा"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:175
@@ -1760,12 +1782,22 @@ msgstr ""
 msgid "Name:"
 msgstr "नाव"
 
+#: controllers/view/structures/datatypes/datainformation.cpp:235
+#, kde-format
+msgid "Type:"
+msgstr "प्रकार :"
+
 #: controllers/view/structures/datatypes/datainformation.cpp:236
 #, fuzzy, kde-format
 #| msgctxt "@title:column value of the bytes for the datatype"
 #| msgid "Value"
 msgid "Value:"
 msgstr "मूल्य"
+
+#: controllers/view/structures/datatypes/datainformation.cpp:237
+#, fuzzy, kde-format
+msgid "Size:"
+msgstr "आकार :"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:243
 #, kde-format
@@ -2463,12 +2495,14 @@ msgid "Open settings."
 msgstr ""
 
 #: controllers/view/structures/structureview.cpp:174
-#, kde-format
+#, fuzzy, kde-format
+msgctxt "@title:tab"
 msgid "Value Display"
-msgstr ""
+msgstr "दर्शवा"
 
 #: controllers/view/structures/structureview.cpp:186
 #, kde-format
+msgctxt "@title:tab"
 msgid "Structures management"
 msgstr ""
 
@@ -2508,14 +2542,12 @@ msgid "Structures Script Console"
 msgstr ""
 
 #: controllers/view/viewconfig/bytespergroupdialog.cpp:33
-#: controllers/view/viewprofiles/viewprofileedit.cpp:116
 #, kde-format
 msgctxt "@label"
 msgid "No grouping."
 msgstr ""
 
 #: controllers/view/viewconfig/bytespergroupdialog.cpp:37
-#: controllers/view/viewprofiles/viewprofileedit.cpp:120
 #, kde-format
 msgctxt "@label:spinbox number of bytes which are grouped"
 msgid "Bytes per Group:"
@@ -2528,7 +2560,6 @@ msgid "Bytes per Group"
 msgstr ""
 
 #: controllers/view/viewconfig/bytesperlinedialog.cpp:34
-#: controllers/view/viewprofiles/viewprofileedit.cpp:127
 #, kde-format
 msgctxt "@label:spinbox number of bytes which are shown per line"
 msgid "Bytes per Line:"
@@ -2726,23 +2757,26 @@ msgstr "बदल साठवा"
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:177
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:180
 #, kde-format
-msgctxt "@window:title"
+msgctxt "@title:window"
 msgid "New View Profile"
 msgstr ""
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:55
 #, fuzzy, kde-format
+msgctxt "@label:textbox"
 msgid "Title:"
 msgstr "शिर्षक :"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:59
 #, fuzzy, kde-format
+msgctxt "@title:group"
 msgid "Display"
 msgstr "दर्शवा"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:63
 #, kde-format
-msgid "Show Line Offset:"
+msgctxt "@option:check"
+msgid "Show line offset:"
 msgstr ""
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:67
@@ -2766,53 +2800,63 @@ msgid "Octal"
 msgstr "ऑक्टल"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:72
-#, kde-format
-msgid "Offset Coding:"
-msgstr ""
+#, fuzzy, kde-format
+msgctxt "@label:listbox"
+msgid "Offset coding:"
+msgstr "ऑफसेट"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:76
-#, kde-format
-msgctxt "@item:"
+#, fuzzy, kde-format
+#| msgid "Values"
+msgctxt "@item:inmenu"
 msgid "Values"
 msgstr "मूल्य"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:77
-#, kde-format
-msgctxt "@item:"
+#, fuzzy, kde-format
+msgctxt "@item:inmenu"
 msgid "Chars"
-msgstr ""
+msgstr " अक्षरे"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:78
-#, kde-format
-msgctxt "@item:"
+#, fuzzy, kde-format
+#| msgid "Values"
+msgctxt "@item:inmenu"
 msgid "Values & Chars"
-msgstr ""
+msgstr "मूल्य"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:81
 #, kde-format
-msgid "Show Values or Chars:"
+msgctxt "@option:check"
+msgid "Show values or chars:"
 msgstr ""
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:85
 #, kde-format
 msgctxt "@label:listbox "
-msgid "Show with Rows or Columns:"
+msgid "Show with rows or columns:"
 msgstr ""
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:88
-#, kde-format
-msgctxt "@item:"
+#, fuzzy, kde-format
+#| msgctxt "@item:"
+#| msgid "Columns"
+msgctxt "@item:inmenu"
 msgid "Columns"
 msgstr "स्थंभ"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:89
-#, kde-format
-msgctxt "@item:"
+#, fuzzy, kde-format
+#| msgctxt "@item:"
+#| msgid "Rows"
+msgctxt "@item:inmenu"
 msgid "Rows"
 msgstr "ओळी"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:96
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Layout"
+msgctxt "@title:group"
 msgid "Layout"
 msgstr "रचना"
 
@@ -2840,15 +2884,36 @@ msgstr "चालू"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:111
 #, kde-format
+msgctxt "@label:listbox"
 msgid "Break lines:"
 msgstr ""
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:132
+#: controllers/view/viewprofiles/viewprofileedit.cpp:115
 #, kde-format
+msgctxt "@item"
+msgid "No Grouping"
+msgstr ""
+
+#: controllers/view/viewprofiles/viewprofileedit.cpp:119
+#, kde-format
+msgctxt "@label:spinbox number of bytes which are grouped"
+msgid "Bytes per group:"
+msgstr ""
+
+#: controllers/view/viewprofiles/viewprofileedit.cpp:126
+#, kde-format
+msgctxt "@label:spinbox number of bytes which are shown per line"
+msgid "Bytes per line:"
+msgstr ""
+
+#: controllers/view/viewprofiles/viewprofileedit.cpp:131
+#, fuzzy, kde-format
+#| msgid "Values"
+msgctxt "@title:group"
 msgid "Values"
 msgstr "मूल्य"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:138
+#: controllers/view/viewprofiles/viewprofileedit.cpp:137
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:50
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:38
 #, kde-format
@@ -2857,7 +2922,7 @@ msgctxt ""
 msgid "Hexadecimal"
 msgstr "हेक्साडेसिमल"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:140
+#: controllers/view/viewprofiles/viewprofileedit.cpp:139
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:51
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:39
 #, kde-format
@@ -2865,7 +2930,7 @@ msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
 msgid "Decimal"
 msgstr ""
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:142
+#: controllers/view/viewprofiles/viewprofileedit.cpp:141
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:52
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:40
 #, kde-format
@@ -2873,7 +2938,7 @@ msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
 msgid "Octal"
 msgstr "ऑक्टल"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:144
+#: controllers/view/viewprofiles/viewprofileedit.cpp:143
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:53
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:41
 #, kde-format
@@ -2881,24 +2946,32 @@ msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
 msgid "Binary"
 msgstr "बायनरी"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:147
-#: controllers/view/viewprofiles/viewprofileedit.cpp:156
-#, kde-format
+#: controllers/view/viewprofiles/viewprofileedit.cpp:146
+#: controllers/view/viewprofiles/viewprofileedit.cpp:155
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "@label:listbox the type of the used encoding: Classic, Base32hex or z-"
+#| "base-32."
+#| msgid "Encoding:"
+msgctxt "@label:listbox"
 msgid "Coding:"
-msgstr ""
+msgstr "एन्कोडिंग :"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:151
-#, kde-format
+#: controllers/view/viewprofiles/viewprofileedit.cpp:150
+#, fuzzy, kde-format
+msgctxt "@title:group"
 msgid "Chars"
-msgstr ""
+msgstr " अक्षरे"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:166
+#: controllers/view/viewprofiles/viewprofileedit.cpp:165
 #, kde-format
+msgctxt "@label:chooser"
 msgid "Char for non-printable bytes:"
 msgstr ""
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:171
+#: controllers/view/viewprofiles/viewprofileedit.cpp:170
 #, kde-format
+msgctxt "@label:chooser"
 msgid "Char for undefined bytes:"
 msgstr ""
 
@@ -3002,7 +3075,7 @@ msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:211
 #, kde-format
-msgctxt "@window:title"
+msgctxt "@title:window"
 msgid "\"%1\" View Profile"
 msgstr ""
 
@@ -3130,9 +3203,10 @@ msgid "Pattern…"
 msgstr "नमूना"
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:148
-#, kde-format
-msgid "Pattern inserted."
-msgstr ""
+#, fuzzy, kde-format
+msgctxt "@item"
+msgid "Pattern Inserted"
+msgstr "नमूना"
 
 #: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:35
 #, kde-format
@@ -3172,9 +3246,10 @@ msgid "Random Data…"
 msgstr "विनाक्रम डेटा"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:88
-#, kde-format
-msgid "RandomData inserted."
-msgstr ""
+#, fuzzy, kde-format
+msgctxt "@item"
+msgid "RandomData Inserted"
+msgstr "विनाक्रम डेटा"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatageneratorconfigeditor.cpp:33
 #, kde-format
@@ -3202,7 +3277,8 @@ msgstr ""
 
 #: gui/io/generator/sequence/bytearraysequencegenerator.cpp:58
 #, kde-format
-msgid "Sequence inserted."
+msgctxt "@item"
+msgid "Sequence Inserted"
 msgstr ""
 
 #: gui/io/streamencoder/base32/bytearraybase32streamencoder.cpp:131
@@ -3251,7 +3327,8 @@ msgstr "&ASCII"
 
 #: gui/io/streamencoder/bytearraytextstreamencoderpreview.cpp:27
 #, kde-format
-msgid "The preview uses maximal the first 100 bytes."
+msgctxt "@info:tooltip"
+msgid "The preview uses maximally the first 100 bytes."
 msgstr ""
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoder.cpp:27
@@ -3468,6 +3545,14 @@ msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"
 msgid "UTF-8"
 msgstr "UTF-8"
+
+#, fuzzy
+#~ msgid "C&opy"
+#~ msgstr "प्रत करा"
+
+#~ msgctxt "@item:"
+#~ msgid "Values"
+#~ msgstr "मूल्य"
 
 #, fuzzy
 #~ msgctxt "@info:placeholder"

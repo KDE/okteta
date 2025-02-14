@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-31 01:56+0000\n"
+"POT-Creation-Date: 2025-02-14 02:06+0000\n"
 "PO-Revision-Date: 2010-01-09 16:09+0200\n"
 "Last-Translator: Viesturs Zarins <viesturs.zarins@mii.lu.lv>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -37,39 +37,51 @@ msgstr "Okteta"
 #: about.cpp:19
 #, fuzzy, kde-format
 #| msgid "KDE byte editor"
+msgctxt "@info"
 msgid "Hex editor"
 msgstr "KDE baitu redaktors"
 
 #: about.cpp:21
 #, fuzzy, kde-format
 #| msgid "Copyright 2006-2009 Friedrich W. H. Kossebau"
+msgctxt "@info"
 msgid "2006-%1 Friedrich W. H. Kossebau"
 msgstr "Autortiesības 2006-2009 Friedrich W. H. Kossebau"
 
 #: about.cpp:22
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Edit the raw data of files"
+msgctxt "@info"
 msgid "Edit the raw data of files"
 msgstr "Rediģē failu jēldatus"
 
 #: about.cpp:27
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Friedrich W. H. Kossebau"
+msgctxt "@info:credit"
 msgid "Friedrich W. H. Kossebau"
 msgstr "Friedrich W. H. Kossebau"
 
 #: about.cpp:28
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Author"
+msgctxt "@info:credit"
 msgid "Author"
 msgstr "Autors"
 
 #: about.cpp:30
-#, kde-format
-msgctxt "Author"
+#, fuzzy, kde-format
+#| msgctxt "Author"
+#| msgid "Alexander Richardson"
+msgctxt "@info:credit"
 msgid "Alexander Richardson"
 msgstr "Alexander Richardson"
 
 #: about.cpp:31
-#, kde-format
-msgctxt "Task description"
+#, fuzzy, kde-format
+#| msgctxt "Task description"
+#| msgid "Structures tool"
+msgctxt "@info:credit"
 msgid "Structures tool"
 msgstr "Struktūru rīks"
 
@@ -95,6 +107,7 @@ msgstr "Galvenā rīkjosla "
 #: program.cpp:89
 #, fuzzy, kde-format
 #| msgid "File(s) to load"
+msgctxt "@info"
 msgid "File(s) to load."
 msgstr "Ielādējamie faili"
 

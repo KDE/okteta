@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetagui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-24 01:53+0000\n"
+"POT-Creation-Date: 2025-02-14 02:06+0000\n"
 "PO-Revision-Date: 2019-05-12 18:13+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -55,13 +55,17 @@ msgid "Re&do"
 msgstr "&Tee uudelleen"
 
 #: controller/valueeditor.cpp:158
-#, kde-format
-msgctxt "name of the change"
+#, fuzzy, kde-format
+#| msgctxt "name of the change"
+#| msgid "Insert"
+msgctxt "@item name of the change"
 msgid "Insert"
 msgstr "Lisäys"
 
 #: controller/valueeditor.cpp:200
-#, kde-format
-msgctxt "name of the change"
+#, fuzzy, kde-format
+#| msgctxt "name of the change"
+#| msgid "Replace"
+msgctxt "@item name of the change"
 msgid "Replace"
 msgstr "Korvaus"
