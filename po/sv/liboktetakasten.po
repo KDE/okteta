@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-14 02:06+0000\n"
-"PO-Revision-Date: 2025-01-21 20:28+0100\n"
+"POT-Creation-Date: 2025-02-15 02:16+0000\n"
+"PO-Revision-Date: 2025-02-14 08:30+0100\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -37,50 +37,43 @@ msgid "File Info"
 msgstr "Filinformation"
 
 #: controllers/document/info/documentinfoview.cpp:67
-#, fuzzy, kde-format
-#| msgid "Type:"
+#, kde-format
 msgctxt "@label"
 msgid "Type:"
 msgstr "Typ:"
 
 #: controllers/document/info/documentinfoview.cpp:81
-#, fuzzy, kde-format
-#| msgid "Location:"
+#, kde-format
 msgctxt "@label"
 msgid "Location:"
 msgstr "Plats:"
 
 #: controllers/document/info/documentinfoview.cpp:86
-#, fuzzy, kde-format
-#| msgid "Size:"
+#, kde-format
 msgctxt "@label"
 msgid "Size:"
 msgstr "Storlek:"
 
 #: controllers/document/info/documentinfoview.cpp:89
-#, fuzzy, kde-format
-#| msgid "Created/Loaded:"
+#, kde-format
 msgctxt "@label"
 msgid "Created/Loaded:"
 msgstr "Skapad eller inläst:"
 
 #: controllers/document/info/documentinfoview.cpp:93
-#, fuzzy, kde-format
-#| msgid "Last modified:"
+#, kde-format
 msgctxt "@label"
 msgid "Last modified:"
 msgstr "Senast ändrad:"
 
 #: controllers/document/info/documentinfoview.cpp:97
-#, fuzzy, kde-format
-#| msgid "Last synchronized:"
+#, kde-format
 msgctxt "@label"
 msgid "Last synchronized:"
 msgstr "Senast synkroniserad:"
 
 #: controllers/document/info/documentinfoview.cpp:104
-#, fuzzy, kde-format
-#| msgid "Created:"
+#, kde-format
 msgctxt "@label"
 msgid "Created:"
 msgstr "Skapad:"
@@ -133,14 +126,14 @@ msgctxt "@action:inmenu"
 msgid "Go to Previous Bookmark"
 msgstr "Gå till föregående bokmärke"
 
-#: controllers/view/bookmarks/bookmarkscontroller.cpp:162
+#: controllers/view/bookmarks/bookmarkscontroller.cpp:168
 #, kde-format
 msgctxt "@item description of bookmark"
 msgid "%1: %2"
 msgstr "%1: %2"
 
-#: controllers/view/bookmarks/bookmarkscontroller.cpp:241
-#: controllers/view/bookmarks/bookmarkstool.cpp:125
+#: controllers/view/bookmarks/bookmarkscontroller.cpp:247
+#: controllers/view/bookmarks/bookmarkstool.cpp:131
 #, kde-format
 msgctxt "default name of a bookmark"
 msgid "Bookmark"
@@ -304,17 +297,15 @@ msgctxt "@title:window"
 msgid "Value/Char Table"
 msgstr "Värde- eller teckentabell"
 
-#: controllers/view/bytetable/bytetabletool.cpp:91
-#, fuzzy, kde-format
-#| msgid "Inserted 1 Byte"
-#| msgid_plural "Inserted %1 Bytes"
+#: controllers/view/bytetable/bytetabletool.cpp:96
+#, kde-format
 msgctxt "@item"
 msgid "Inserted 1 Byte"
 msgid_plural "Inserted %1 Bytes"
 msgstr[0] "Infogade 1 byte"
 msgstr[1] "Infogade %1 byte"
 
-#: controllers/view/bytetable/bytetabletool.cpp:109
+#: controllers/view/bytetable/bytetabletool.cpp:114
 #, kde-format
 msgctxt "@info"
 msgid "1 byte inserted."
@@ -353,10 +344,8 @@ msgctxt "@title:window of the tool to convert between charsets"
 msgid "Charset Conversion"
 msgstr "Konvertering av teckensnitt"
 
-#: controllers/view/charsetconversion/charsetconversiontool.cpp:299
-#, fuzzy, kde-format
-#| msgctxt "Converted from charset 1 to charset 2"
-#| msgid "%1 to %2"
+#: controllers/view/charsetconversion/charsetconversiontool.cpp:304
+#, kde-format
 msgctxt "@item Converted from charset 1 to charset 2"
 msgid "%1 to %2"
 msgstr "%1 till %2"
@@ -459,11 +448,10 @@ msgstr ""
 "målteckenuppsättningen."
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:170
-#, fuzzy, kde-format
-#| msgid "Con&vert"
+#, kde-format
 msgctxt "@action:button"
 msgid "Convert"
-msgstr "Kon&vertera"
+msgstr "Konvertera"
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:173
 #, kde-format
@@ -576,9 +564,7 @@ msgid "Crop"
 msgstr "Beskär"
 
 #: controllers/view/crop/cropcontroller.cpp:91
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Crop"
+#, kde-format
 msgctxt "@item name of the change"
 msgid "Crop"
 msgstr "Beskär"
@@ -590,7 +576,7 @@ msgctxt "@title:window"
 msgid "Binary Filter"
 msgstr "Binärfilter"
 
-#: controllers/view/filter/filtertool.cpp:168
+#: controllers/view/filter/filtertool.cpp:173
 #, kde-format
 msgctxt "@info"
 msgid "1 byte filtered with %2."
@@ -774,12 +760,10 @@ msgstr ""
 
 #: controllers/view/info/infoview.cpp:118
 #: controllers/view/stringsextract/stringsextractview.cpp:158
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Copy As"
+#, kde-format
 msgctxt "@action:button"
 msgid "Copy"
-msgstr "Kopiera som"
+msgstr "Kopiera"
 
 #: controllers/view/info/infoview.cpp:121
 #, kde-format
@@ -800,7 +784,7 @@ msgstr ""
 #: controllers/view/info/infoview.cpp:189
 #: controllers/view/structures/datatypes/datainformation.cpp:60
 #: controllers/view/structures/datatypes/datainformation.cpp:63
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:223
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:228
 #, kde-format
 msgid "1 byte"
 msgid_plural "%1 bytes"
@@ -1346,18 +1330,14 @@ msgctxt "@title:window"
 msgid "Decoding Table"
 msgstr "Avkodningstabell"
 
-#: controllers/view/poddecoder/poddecodertool.cpp:304
-#, fuzzy, kde-format
-#| msgctxt "Edited as %datatype"
-#| msgid "Edited as %1"
+#: controllers/view/poddecoder/poddecodertool.cpp:309
+#, kde-format
 msgctxt "@item Edited as datatype"
 msgid "Edited as %1"
 msgstr "Redigerad som %1"
 
-#: controllers/view/poddecoder/poddecodertool.cpp:313
-#, fuzzy, kde-format
-#| msgctxt "Edited as %datatype"
-#| msgid "Edited as %1"
+#: controllers/view/poddecoder/poddecodertool.cpp:318
+#, kde-format
 msgctxt "@info Edited as datatype"
 msgid "Edited as %1"
 msgstr "Redigerad som %1"
@@ -1455,26 +1435,26 @@ msgctxt "@action:button"
 msgid "&Select"
 msgstr "&Markera"
 
-#: controllers/view/print/printtool.cpp:276
-#: controllers/view/print/printtool.cpp:306
+#: controllers/view/print/printtool.cpp:280
+#: controllers/view/print/printtool.cpp:310
 #, kde-format
 msgctxt "@title:window"
 msgid "Print Byte Array %1"
 msgstr "Skriv ut byte-fält %1"
 
-#: controllers/view/print/printtool.cpp:301
+#: controllers/view/print/printtool.cpp:305
 #, kde-format
 msgctxt "@info"
 msgid "Could not print."
 msgstr "Kunde inte skriva ut."
 
-#: controllers/view/print/printtool.cpp:337
+#: controllers/view/print/printtool.cpp:341
 #, kde-format
 msgctxt "in the header of the printed page, e.g. Page 2 of 20"
 msgid "Page %p of %P"
 msgstr "Sida %p av %P"
 
-#: controllers/view/print/printtool.cpp:343
+#: controllers/view/print/printtool.cpp:347
 #, kde-format
 msgctxt "in the footer of the printed page, e.g. Printed by: Joe User"
 msgid "Printed by: %U"
@@ -1762,8 +1742,7 @@ msgid "Filter:"
 msgstr "Filter:"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:92
-#, fuzzy, kde-format
-#| msgid "Enter a term to limit the list."
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter a term to limit the list."
 msgstr "Skriv in ett begrepp för att begränsa listan."
@@ -1791,11 +1770,10 @@ msgstr ""
 "strängar du har markerat i listan dill klippbordet."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:172
-#, fuzzy, kde-format
-#| msgid "&Show"
+#, kde-format
 msgctxt "@action:button"
 msgid "Show"
-msgstr "&Visa"
+msgstr "Visa"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:175
 #, kde-format
@@ -2506,25 +2484,25 @@ msgctxt "@title:window"
 msgid "Structures"
 msgstr "Strukturer"
 
-#: controllers/view/structures/structurestool.cpp:193
+#: controllers/view/structures/structurestool.cpp:199
 #, kde-format
 msgctxt "name of a data structure"
 msgid "Name"
 msgstr "Namn"
 
-#: controllers/view/structures/structurestool.cpp:195
+#: controllers/view/structures/structurestool.cpp:201
 #, kde-format
 msgctxt "type of a data structure"
 msgid "Type"
 msgstr "Typ"
 
-#: controllers/view/structures/structurestool.cpp:197
+#: controllers/view/structures/structurestool.cpp:203
 #, kde-format
 msgctxt "value of a data structure (primitive type)"
 msgid "Value"
 msgstr "Värde"
 
-#: controllers/view/structures/structurestool.cpp:199
+#: controllers/view/structures/structurestool.cpp:205
 #, kde-format
 msgctxt "size of a data structure"
 msgid "Size"
@@ -2573,15 +2551,13 @@ msgid "Open settings."
 msgstr "Öppningsinställningar"
 
 #: controllers/view/structures/structureview.cpp:174
-#, fuzzy, kde-format
-#| msgid "Value Display"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Value Display"
 msgstr "Visning av värden"
 
 #: controllers/view/structures/structureview.cpp:186
-#, fuzzy, kde-format
-#| msgid "Structures management"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Structures management"
 msgstr "Strukturhantering"
@@ -2829,32 +2805,27 @@ msgctxt "@action:inmenu reset settings back to those of the saved base profile"
 msgid "Reset Changes"
 msgstr "Återställ ändringar"
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:177
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:182
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:180
-#, fuzzy, kde-format
-#| msgctxt "@window:title"
-#| msgid "New View Profile"
+#, kde-format
 msgctxt "@title:window"
 msgid "New View Profile"
 msgstr "Ny vyprofil"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:55
-#, fuzzy, kde-format
-#| msgid "Title:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Title:"
 msgstr "Titel:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:59
-#, fuzzy, kde-format
-#| msgid "Display"
+#, kde-format
 msgctxt "@title:group"
 msgid "Display"
 msgstr "Visning"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:63
-#, fuzzy, kde-format
-#| msgid "Show Line Offset:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show line offset:"
 msgstr "Visa radposition:"
@@ -2878,71 +2849,58 @@ msgid "Octal"
 msgstr "Oktal"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:72
-#, fuzzy, kde-format
-#| msgid "Offset Coding:"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Offset coding:"
 msgstr "Position för kodning:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:76
-#, fuzzy, kde-format
-#| msgid "Values"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Values"
 msgstr "Värden"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:77
-#, fuzzy, kde-format
-#| msgid "Chars"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Chars"
 msgstr "Tecken"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:78
-#, fuzzy, kde-format
-#| msgctxt "@item:"
-#| msgid "Values & Chars"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Values & Chars"
 msgstr "Värden och tecken"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:81
-#, fuzzy, kde-format
-#| msgid "Show Values or Chars:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show values or chars:"
-msgstr "Visa värden eller tecken:"
+msgstr "Vi&sa värden eller tecken:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:85
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox "
-#| msgid "Show with Rows or Columns:"
+#, kde-format
 msgctxt "@label:listbox "
 msgid "Show with rows or columns:"
-msgstr "Visa med rader och kolumner:"
+msgstr "Visa med rader eller kolumner:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:88
-#, fuzzy, kde-format
-#| msgctxt "@item:"
-#| msgid "Columns"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Columns"
 msgstr "Kolumner"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:89
-#, fuzzy, kde-format
-#| msgctxt "@item:"
-#| msgid "Rows"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Rows"
 msgstr "Rader"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:96
-#, fuzzy, kde-format
-#| msgid "Layout"
+#, kde-format
 msgctxt "@title:group"
 msgid "Layout"
-msgstr "Utläggning"
+msgstr "Layout"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:102
 #, kde-format
@@ -2967,39 +2925,31 @@ msgid "On"
 msgstr "På"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:111
-#, fuzzy, kde-format
-#| msgid "Break lines:"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Break lines:"
 msgstr "Bryt rader:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:115
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "No grouping."
+#, kde-format
 msgctxt "@item"
 msgid "No Grouping"
-msgstr "Ingen gruppering."
+msgstr "Ingen gruppering"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:119
-#, fuzzy, kde-format
-#| msgctxt "@label:spinbox number of bytes which are grouped"
-#| msgid "Bytes per Group:"
+#, kde-format
 msgctxt "@label:spinbox number of bytes which are grouped"
 msgid "Bytes per group:"
 msgstr "Byte per grupp:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:126
-#, fuzzy, kde-format
-#| msgctxt "@label:spinbox number of bytes which are shown per line"
-#| msgid "Bytes per Line:"
+#, kde-format
 msgctxt "@label:spinbox number of bytes which are shown per line"
 msgid "Bytes per line:"
 msgstr "Byte per rad:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:131
-#, fuzzy, kde-format
-#| msgid "Values"
+#, kde-format
 msgctxt "@title:group"
 msgid "Values"
 msgstr "Värden"
@@ -3039,29 +2989,25 @@ msgstr "Binär"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:146
 #: controllers/view/viewprofiles/viewprofileedit.cpp:155
-#, fuzzy, kde-format
-#| msgid "Coding:"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Coding:"
 msgstr "Kodning:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:150
-#, fuzzy, kde-format
-#| msgid "Chars"
+#, kde-format
 msgctxt "@title:group"
 msgid "Chars"
 msgstr "Tecken"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:165
-#, fuzzy, kde-format
-#| msgid "Char for non-printable bytes:"
+#, kde-format
 msgctxt "@label:chooser"
 msgid "Char for non-printable bytes:"
 msgstr "Tecken för byte som inte är utskrivbara:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:170
-#, fuzzy, kde-format
-#| msgid "Char for undefined bytes:"
+#, kde-format
 msgctxt "@label:chooser"
 msgid "Char for undefined bytes:"
 msgstr "Tecken för odefinierade bytes:"
@@ -3175,9 +3121,7 @@ msgid "Modification of %1"
 msgstr "Ändringar av %1"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:211
-#, fuzzy, kde-format
-#| msgctxt "@window:title"
-#| msgid "\"%1\" View Profile"
+#, kde-format
 msgctxt "@title:window"
 msgid "\"%1\" View Profile"
 msgstr "Vyprofil \"%1\""
@@ -3219,7 +3163,7 @@ msgid "Encoding in the character column of the current view."
 msgstr "Kodning av teckenkolumnen i nuvarande vy."
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:109
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:206
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:211
 #, kde-format
 msgid "Offset: %1"
 msgstr "Position: %1"
@@ -3235,20 +3179,20 @@ msgctxt "@info:status selection: start offset - end offset ()"
 msgid "Selection: %1 - %2 (%3)"
 msgstr "Markering: %1 - %2 (%3)"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:169
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:174
 #, kde-format
 msgctxt "@info:status offset value not available"
 msgid "Offset: -"
 msgstr "Position: -"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:170
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:227
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:175
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:232
 #, kde-format
 msgctxt "@info:status offset value not available"
 msgid "Selection: -"
 msgstr "Markering: -"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:225
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:230
 #, kde-format
 msgctxt "@info:status selection: start offset - end offset (number of bytes)"
 msgid "Selection: %1 - %2 (%3)"
@@ -3308,11 +3252,10 @@ msgid "Pattern…"
 msgstr "Mönster…"
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:148
-#, fuzzy, kde-format
-#| msgid "Pattern inserted."
+#, kde-format
 msgctxt "@item"
 msgid "Pattern Inserted"
-msgstr "Mönster infogat."
+msgstr "Mönster infogat"
 
 #: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:35
 #, kde-format
@@ -3354,11 +3297,10 @@ msgid "Random Data…"
 msgstr "Slumpmässig data…"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:88
-#, fuzzy, kde-format
-#| msgid "RandomData inserted."
+#, kde-format
 msgctxt "@item"
 msgid "RandomData Inserted"
-msgstr "Slumpmässig data infogad."
+msgstr "Slumpmässig data infogad"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatageneratorconfigeditor.cpp:33
 #, kde-format
@@ -3385,11 +3327,10 @@ msgid "Sequence"
 msgstr "Följd"
 
 #: gui/io/generator/sequence/bytearraysequencegenerator.cpp:58
-#, fuzzy, kde-format
-#| msgid "Sequence inserted."
+#, kde-format
 msgctxt "@item"
 msgid "Sequence Inserted"
-msgstr "Infogade följd."
+msgstr "Följd infogad"
 
 #: gui/io/streamencoder/base32/bytearraybase32streamencoder.cpp:131
 #, kde-format
@@ -3436,11 +3377,10 @@ msgid "Ascii85"
 msgstr "Ascii85"
 
 #: gui/io/streamencoder/bytearraytextstreamencoderpreview.cpp:27
-#, fuzzy, kde-format
-#| msgid "The preview uses maximal the first 100 bytes."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "The preview uses maximally the first 100 bytes."
-msgstr "Förhandsgranskning använder maximalt första 100 byte"
+msgstr "Förhandsgranskning använder maximalt första 100 byte."
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoder.cpp:27
 #, kde-format
