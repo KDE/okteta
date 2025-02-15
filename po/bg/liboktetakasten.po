@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-02 03:28+0000\n"
+"POT-Creation-Date: 2025-02-15 04:00+0000\n"
 "PO-Revision-Date: 2022-06-10 00:48+0000\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -107,14 +107,14 @@ msgctxt "@action:inmenu"
 msgid "Go to Previous Bookmark"
 msgstr ""
 
-#: controllers/view/bookmarks/bookmarkscontroller.cpp:161
+#: controllers/view/bookmarks/bookmarkscontroller.cpp:167
 #, kde-format
 msgctxt "@item description of bookmark"
 msgid "%1: %2"
 msgstr ""
 
-#: controllers/view/bookmarks/bookmarkscontroller.cpp:240
-#: controllers/view/bookmarks/bookmarkstool.cpp:124
+#: controllers/view/bookmarks/bookmarkscontroller.cpp:246
+#: controllers/view/bookmarks/bookmarkstool.cpp:130
 #, kde-format
 msgctxt "default name of a bookmark"
 msgid "Bookmark"
@@ -266,7 +266,7 @@ msgctxt "@title:window"
 msgid "Value/Char Table"
 msgstr ""
 
-#: controllers/view/bytetable/bytetabletool.cpp:87
+#: controllers/view/bytetable/bytetabletool.cpp:92
 #, kde-format
 msgid "Inserted 1 Byte"
 msgid_plural "Inserted %1 Bytes"
@@ -300,7 +300,7 @@ msgctxt "@title:window of the tool to convert between charsets"
 msgid "Charset Conversion"
 msgstr ""
 
-#: controllers/view/charsetconversion/charsetconversiontool.cpp:308
+#: controllers/view/charsetconversion/charsetconversiontool.cpp:313
 #, kde-format
 msgctxt "Converted from charset 1 to charset 2"
 msgid "%1 to %2"
@@ -674,7 +674,7 @@ msgstr ""
 #: controllers/view/info/infoview.cpp:184
 #: controllers/view/structures/datatypes/datainformation.cpp:59
 #: controllers/view/structures/datatypes/datainformation.cpp:62
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:217
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:222
 #, kde-format
 msgid "1 byte"
 msgid_plural "%1 bytes"
@@ -1084,13 +1084,13 @@ msgctxt "@title:window"
 msgid "Decoding Table"
 msgstr ""
 
-#: controllers/view/poddecoder/poddecodertool.cpp:166
+#: controllers/view/poddecoder/poddecodertool.cpp:171
 #, kde-format
 msgctxt "@label:textbox"
 msgid "UTF-16:"
 msgstr ""
 
-#: controllers/view/poddecoder/poddecodertool.cpp:311
+#: controllers/view/poddecoder/poddecodertool.cpp:316
 #, kde-format
 msgctxt "Edited as %datatype"
 msgid "Edited as %1"
@@ -1267,26 +1267,26 @@ msgctxt "@label:textbox"
 msgid "UTF-8"
 msgstr ""
 
-#: controllers/view/print/printtool.cpp:298
-#: controllers/view/print/printtool.cpp:325
+#: controllers/view/print/printtool.cpp:302
+#: controllers/view/print/printtool.cpp:329
 #, kde-format
 msgctxt "@title:window"
 msgid "Print Byte Array %1"
 msgstr ""
 
-#: controllers/view/print/printtool.cpp:323
+#: controllers/view/print/printtool.cpp:327
 #, kde-format
 msgctxt "@info"
 msgid "Could not print."
 msgstr ""
 
-#: controllers/view/print/printtool.cpp:360
+#: controllers/view/print/printtool.cpp:364
 #, kde-format
 msgctxt "in the header of the printed page, e.g. Page 2 of 20"
 msgid "Page %p of %P"
 msgstr ""
 
-#: controllers/view/print/printtool.cpp:366
+#: controllers/view/print/printtool.cpp:370
 #, kde-format
 msgctxt "in the footer of the printed page, e.g. Printed by: Joe User"
 msgid "Printed by: %U"
@@ -2265,19 +2265,19 @@ msgctxt "@title:window"
 msgid "Structures"
 msgstr ""
 
-#: controllers/view/structures/structurestool.cpp:187
+#: controllers/view/structures/structurestool.cpp:193
 #, kde-format
 msgctxt "name of a data structure"
 msgid "Name"
 msgstr ""
 
-#: controllers/view/structures/structurestool.cpp:189
+#: controllers/view/structures/structurestool.cpp:195
 #, kde-format
 msgctxt "type of a data structure"
 msgid "Type"
 msgstr ""
 
-#: controllers/view/structures/structurestool.cpp:191
+#: controllers/view/structures/structurestool.cpp:197
 #, kde-format
 msgctxt "value of a data structure (primitive type)"
 msgid "Value"
@@ -2567,7 +2567,7 @@ msgctxt "@action:inmenu reset settings back to those of the saved base profile"
 msgid "Reset Changes"
 msgstr ""
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:181
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:186
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:180
 #, kde-format
 msgctxt "@window:title"
@@ -2879,7 +2879,7 @@ msgid "Encoding in the character column of the current view."
 msgstr ""
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:103
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:200
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:205
 #, kde-format
 msgid "Offset: %1"
 msgstr ""
@@ -2895,20 +2895,20 @@ msgctxt "@info:status selection: start offset - end offset ()"
 msgid "Selection: %1 - %2 (%3)"
 msgstr ""
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:163
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:168
 #, kde-format
 msgctxt "@info:status offset value not available"
 msgid "Offset: -"
 msgstr ""
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:164
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:221
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:169
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:226
 #, kde-format
 msgctxt "@info:status offset value not available"
 msgid "Selection: -"
 msgstr ""
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:219
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:224
 #, kde-format
 msgctxt "@info:status selection: start offset - end offset (number of bytes)"
 msgid "Selection: %1 - %2 (%3)"

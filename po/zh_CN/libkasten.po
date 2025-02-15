@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-28 03:37+0000\n"
+"POT-Creation-Date: 2025-02-15 04:00+0000\n"
 "PO-Revision-Date: 2024-03-30 19:46\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -17,13 +17,13 @@ msgstr ""
 "X-Crowdin-File: /kf5-stable/messages/okteta/libkasten.pot\n"
 "X-Crowdin-File-ID: 7161\n"
 
-#: controllers/document/modified/modifiedbarcontroller.cpp:74
+#: controllers/document/modified/modifiedbarcontroller.cpp:73
 #, kde-format
 msgctxt "@tooltip the document is modified"
 msgid "Modified."
 msgstr "已修改。"
 
-#: controllers/document/modified/modifiedbarcontroller.cpp:75
+#: controllers/document/modified/modifiedbarcontroller.cpp:74
 #, kde-format
 msgctxt "@tooltip the document is not modified"
 msgid "Not modified."
@@ -163,7 +163,7 @@ msgctxt "@title:menu"
 msgid "Copy As"
 msgstr "复制为"
 
-#: controllers/io/copyas/copyascontroller.cpp:90
+#: controllers/io/copyas/copyascontroller.cpp:95
 #, kde-format
 msgctxt "@item There are no encoders."
 msgid "Not available."
@@ -211,7 +211,7 @@ msgctxt "@title:menu"
 msgid "Export"
 msgstr "导出"
 
-#: controllers/io/export/exportcontroller.cpp:86
+#: controllers/io/export/exportcontroller.cpp:91
 #, kde-format
 msgctxt "@item There are no exporters."
 msgid "Not available."
@@ -252,7 +252,7 @@ msgctxt "@title:menu"
 msgid "Insert"
 msgstr "Insert"
 
-#: controllers/io/insert/insertcontroller.cpp:89
+#: controllers/io/insert/insertcontroller.cpp:94
 #, kde-format
 msgctxt "@item There are no generators."
 msgid "Not available."
@@ -330,13 +330,13 @@ msgctxt "@action:inmenu"
 msgid "Redo"
 msgstr "重做"
 
-#: controllers/view/version/versioncontroller.cpp:130
+#: controllers/view/version/versioncontroller.cpp:134
 #, kde-format
 msgctxt "@action Undo: [change]"
 msgid "Undo: %1"
 msgstr "撤销：%1"
 
-#: controllers/view/version/versioncontroller.cpp:150
+#: controllers/view/version/versioncontroller.cpp:154
 #, kde-format
 msgctxt "@action Redo: [change]"
 msgid "Redo: %1"
@@ -368,7 +368,7 @@ msgstr "适合高度(&F)"
 msgid "&Fit to Size"
 msgstr "适合尺寸(&F)"
 
-#: controllers/view/zoom/zoomslider.cpp:137
+#: controllers/view/zoom/zoomslider.cpp:142
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Zoom: %1%"

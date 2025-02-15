@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-28 03:37+0000\n"
+"POT-Creation-Date: 2025-02-15 04:00+0000\n"
 "PO-Revision-Date: 2010-04-11 06:23+0200\n"
 "Last-Translator: Manfred Wiese <m.j.wiese@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -20,13 +20,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 1.0\n"
 
-#: controllers/document/modified/modifiedbarcontroller.cpp:74
+#: controllers/document/modified/modifiedbarcontroller.cpp:73
 #, kde-format
 msgctxt "@tooltip the document is modified"
 msgid "Modified."
 msgstr "Ännert."
 
-#: controllers/document/modified/modifiedbarcontroller.cpp:75
+#: controllers/document/modified/modifiedbarcontroller.cpp:74
 #, kde-format
 msgctxt "@tooltip the document is not modified"
 msgid "Not modified."
@@ -174,7 +174,7 @@ msgctxt "@title:menu"
 msgid "Copy As"
 msgstr "Koperen as"
 
-#: controllers/io/copyas/copyascontroller.cpp:90
+#: controllers/io/copyas/copyascontroller.cpp:95
 #, kde-format
 msgctxt "@item There are no encoders."
 msgid "Not available."
@@ -222,7 +222,7 @@ msgctxt "@title:menu"
 msgid "Export"
 msgstr "Exporteren"
 
-#: controllers/io/export/exportcontroller.cpp:86
+#: controllers/io/export/exportcontroller.cpp:91
 #, kde-format
 msgctxt "@item There are no exporters."
 msgid "Not available."
@@ -263,7 +263,7 @@ msgctxt "@title:menu"
 msgid "Insert"
 msgstr "Infögen"
 
-#: controllers/io/insert/insertcontroller.cpp:89
+#: controllers/io/insert/insertcontroller.cpp:94
 #, kde-format
 msgctxt "@item There are no generators."
 msgid "Not available."
@@ -350,13 +350,13 @@ msgctxt "@action:inmenu"
 msgid "Redo"
 msgstr "Wedderhalen"
 
-#: controllers/view/version/versioncontroller.cpp:130
+#: controllers/view/version/versioncontroller.cpp:134
 #, kde-format
 msgctxt "@action Undo: [change]"
 msgid "Undo: %1"
 msgstr "Torüchnehmen: %1"
 
-#: controllers/view/version/versioncontroller.cpp:150
+#: controllers/view/version/versioncontroller.cpp:154
 #, kde-format
 msgctxt "@action Redo: [change]"
 msgid "Redo: %1"
@@ -388,7 +388,7 @@ msgstr "Op Hööchd &topassen"
 msgid "&Fit to Size"
 msgstr "Op Grött &topassen"
 
-#: controllers/view/zoom/zoomslider.cpp:137
+#: controllers/view/zoom/zoomslider.cpp:142
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Zoom: %1%"
