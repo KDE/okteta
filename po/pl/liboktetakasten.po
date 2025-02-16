@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-15 04:00+0000\n"
-"PO-Revision-Date: 2024-02-11 11:31+0100\n"
+"PO-Revision-Date: 2025-02-15 11:19+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -321,7 +321,7 @@ msgstr "Przekształcanie zestawu znaków"
 #, kde-format
 msgctxt "Converted from charset 1 to charset 2"
 msgid "%1 to %2"
-msgstr "%1 do %2"
+msgstr "%1 na %2"
 
 #: controllers/view/charsetconversion/charsetconversiontoolviewfactory.cpp:24
 #, kde-format
@@ -2943,7 +2943,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button"
 msgid "&Set as Default"
-msgstr "&Ustaw jako domyślny"
+msgstr "U&staw jako domyślny"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:93
 #, kde-format
