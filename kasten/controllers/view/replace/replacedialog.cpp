@@ -25,22 +25,6 @@
 
 namespace Kasten {
 
-// C++11 needs a definition for static constexpr members
-constexpr char ReplaceDialog::ConfigGroupId[];
-
-constexpr char ReplaceDialog::FromCursorConfigKey[];
-constexpr char ReplaceDialog::DirectionConfigKey[];
-constexpr char ReplaceDialog::InSelectionConfigKey[];
-constexpr char ReplaceDialog::ReplaceDataCodingConfigKey[];
-constexpr char ReplaceDialog::SearchDataCodingConfigKey[];
-
-constexpr bool ReplaceDialog::DefaultFromCursor;
-constexpr Kasten::FindDirection ReplaceDialog::DefaultDirection;
-constexpr bool ReplaceDialog::DefaultInSelection;
-constexpr Okteta::ByteArrayComboBox::Coding ReplaceDialog::DefaultReplaceDataCoding;
-constexpr Okteta::ByteArrayComboBox::Coding ReplaceDialog::DefaultSearchDataCoding;
-
-
 ReplaceDialog::ReplaceDialog(ReplaceTool* tool, QWidget* parent)
     : AbstractFindDialog(parent)
     , mTool(tool)
