@@ -1,15 +1,15 @@
 # Translation of okteta into esperanto.
 # Copyright (C) 2009 Free Software Foundation, Inc.
 # Axel Rousseau <axel@esperanto-jeunes.org>, 2009.
-# Oliver Kellogg <okellogg@users.sourceforge.net>, 2023.
+# Oliver Kellogg <olivermkellogg@gmail.com>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-14 02:06+0000\n"
-"PO-Revision-Date: 2023-05-06 16:20+0100\n"
-"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
+"PO-Revision-Date: 2025-02-15 14:15+0100\n"
+"Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
@@ -26,7 +26,7 @@ msgstr "Axel Rousseau, Oliver Kellogg"
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "axel@esperanto-jeunes.org, okellogg@users.sourceforge.net"
+msgstr "axel@esperanto-jeunes.org, olivermkellogg@gmail.com"
 
 #: about.cpp:17
 #, kde-format
@@ -34,52 +34,43 @@ msgid "Okteta"
 msgstr "Okteta"
 
 #: about.cpp:19
-#, fuzzy, kde-format
-#| msgid "Hex editor"
+#, kde-format
 msgctxt "@info"
 msgid "Hex editor"
 msgstr "Deksesuma redaktilo"
 
 #: about.cpp:21
-#, fuzzy, kde-format
-#| msgid "2006-%1 Friedrich W. H. Kossebau"
+#, kde-format
 msgctxt "@info"
 msgid "2006-%1 Friedrich W. H. Kossebau"
 msgstr "2006-%1 Friedrich W. H. Kossebau"
 
 #: about.cpp:22
-#, fuzzy, kde-format
-#| msgid "Edit the raw data of files"
+#, kde-format
 msgctxt "@info"
 msgid "Edit the raw data of files"
 msgstr "Redakti la krudajn datumojn de dosieroj"
 
 #: about.cpp:27
-#, fuzzy, kde-format
-#| msgid "Friedrich W. H. Kossebau"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Friedrich W. H. Kossebau"
 msgstr "Friedrich W. H. Kossebau"
 
 #: about.cpp:28
-#, fuzzy, kde-format
-#| msgid "Author"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Author"
 msgstr "Aŭtoro"
 
 #: about.cpp:30
-#, fuzzy, kde-format
-#| msgctxt "Author"
-#| msgid "Alexander Richardson"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Alexander Richardson"
 msgstr "Alexander Richardson"
 
 #: about.cpp:31
-#, fuzzy, kde-format
-#| msgctxt "Task description"
-#| msgid "Structures tool"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Structures tool"
 msgstr "Ilo por strukturoj"
@@ -104,8 +95,7 @@ msgid "Main Toolbar"
 msgstr "Ĉefa ilobreto"
 
 #: program.cpp:89
-#, fuzzy, kde-format
-#| msgid "File(s) to load."
+#, kde-format
 msgctxt "@info"
 msgid "File(s) to load."
 msgstr "Dosiero(j) ŝargenda(j)."

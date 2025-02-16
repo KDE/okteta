@@ -2,17 +2,16 @@
 # Copyright (C) 2008-2025 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2 or later.
 #
-# SPDX-FileCopyrightText: 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 Josep M. Ferrer <txemaq@gmail.com>
 # Joan Maspons <joanmaspons@gmail.com>, 2009.
 # Manuel Tortosa <manutortosa@chakra-project.org>, 2010, 2011, 2012.
 # Antoni Bella Pérez <antonibella5@yahoo.com>, 2012, 2014, 2015, 2016, 2020, 2022.
-# Josep M. Ferrer <txemaq@gmail.com>, 2025.
+# Josep M. Ferrer <txemaq@gmail.com>, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-15 02:16+0000\n"
-"PO-Revision-Date: 2025-01-21 10:23+0100\n"
+"PO-Revision-Date: 2025-02-14 12:18+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -41,50 +40,43 @@ msgid "File Info"
 msgstr "Informació del fitxer"
 
 #: controllers/document/info/documentinfoview.cpp:67
-#, fuzzy, kde-format
-#| msgid "Type:"
+#, kde-format
 msgctxt "@label"
 msgid "Type:"
 msgstr "Tipus:"
 
 #: controllers/document/info/documentinfoview.cpp:81
-#, fuzzy, kde-format
-#| msgid "Location:"
+#, kde-format
 msgctxt "@label"
 msgid "Location:"
 msgstr "Ubicació:"
 
 #: controllers/document/info/documentinfoview.cpp:86
-#, fuzzy, kde-format
-#| msgid "Size:"
+#, kde-format
 msgctxt "@label"
 msgid "Size:"
 msgstr "Mida:"
 
 #: controllers/document/info/documentinfoview.cpp:89
-#, fuzzy, kde-format
-#| msgid "Created/Loaded:"
+#, kde-format
 msgctxt "@label"
 msgid "Created/Loaded:"
 msgstr "Creat/Carregat:"
 
 #: controllers/document/info/documentinfoview.cpp:93
-#, fuzzy, kde-format
-#| msgid "Last modified:"
+#, kde-format
 msgctxt "@label"
 msgid "Last modified:"
 msgstr "Última modificació:"
 
 #: controllers/document/info/documentinfoview.cpp:97
-#, fuzzy, kde-format
-#| msgid "Last synchronized:"
+#, kde-format
 msgctxt "@label"
 msgid "Last synchronized:"
 msgstr "Última sincronització:"
 
 #: controllers/document/info/documentinfoview.cpp:104
-#, fuzzy, kde-format
-#| msgid "Created:"
+#, kde-format
 msgctxt "@label"
 msgid "Created:"
 msgstr "Creat:"
@@ -311,9 +303,7 @@ msgid "Value/Char Table"
 msgstr "Taula de valor/caràcter"
 
 #: controllers/view/bytetable/bytetabletool.cpp:96
-#, fuzzy, kde-format
-#| msgid "Inserted 1 Byte"
-#| msgid_plural "Inserted %1 Bytes"
+#, kde-format
 msgctxt "@item"
 msgid "Inserted 1 Byte"
 msgid_plural "Inserted %1 Bytes"
@@ -360,9 +350,7 @@ msgid "Charset Conversion"
 msgstr "Conversió del joc de caràcters"
 
 #: controllers/view/charsetconversion/charsetconversiontool.cpp:304
-#, fuzzy, kde-format
-#| msgctxt "Converted from charset 1 to charset 2"
-#| msgid "%1 to %2"
+#, kde-format
 msgctxt "@item Converted from charset 1 to charset 2"
 msgid "%1 to %2"
 msgstr "%1 a %2"
@@ -471,8 +459,7 @@ msgstr ""
 "joc de caràcters de destinació."
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:170
-#, fuzzy, kde-format
-#| msgid "Con&vert"
+#, kde-format
 msgctxt "@action:button"
 msgid "Convert"
 msgstr "Con&vertix"
@@ -589,12 +576,10 @@ msgid "Crop"
 msgstr "Escapça"
 
 #: controllers/view/crop/cropcontroller.cpp:91
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Crop"
+#, kde-format
 msgctxt "@item name of the change"
 msgid "Crop"
-msgstr "Escapça"
+msgstr "Escapçat"
 
 #: controllers/view/filter/filtertool.cpp:63
 #: controllers/view/filter/filtertoolviewfactory.cpp:24
@@ -795,7 +780,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy"
-msgstr ""
+msgstr "Copia"
 
 #: controllers/view/info/infoview.cpp:121
 #, kde-format
@@ -1371,17 +1356,13 @@ msgid "Decoding Table"
 msgstr "Taula de descodificació"
 
 #: controllers/view/poddecoder/poddecodertool.cpp:309
-#, fuzzy, kde-format
-#| msgctxt "Edited as %datatype"
-#| msgid "Edited as %1"
+#, kde-format
 msgctxt "@item Edited as datatype"
 msgid "Edited as %1"
 msgstr "Editat com a %1"
 
 #: controllers/view/poddecoder/poddecodertool.cpp:318
-#, fuzzy, kde-format
-#| msgctxt "Edited as %datatype"
-#| msgid "Edited as %1"
+#, kde-format
 msgctxt "@info Edited as datatype"
 msgid "Edited as %1"
 msgstr "Editat com a %1"
@@ -1793,8 +1774,7 @@ msgid "Filter:"
 msgstr "Filtre:"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:92
-#, fuzzy, kde-format
-#| msgid "Enter a term to limit the list."
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter a term to limit the list."
 msgstr "Introduïu un terme per a limitar la llista."
@@ -1822,11 +1802,10 @@ msgstr ""
 "seleccionat de la llista es copiaran a dins del porta-retalls."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:172
-#, fuzzy, kde-format
-#| msgid "&Show"
+#, kde-format
 msgctxt "@action:button"
 msgid "Show"
-msgstr "&Mostra"
+msgstr "Mostra"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:175
 #, kde-format
@@ -2612,15 +2591,13 @@ msgid "Open settings."
 msgstr "Obri la configuració."
 
 #: controllers/view/structures/structureview.cpp:174
-#, fuzzy, kde-format
-#| msgid "Value Display"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Value Display"
 msgstr "Visualització dels valors"
 
 #: controllers/view/structures/structureview.cpp:186
-#, fuzzy, kde-format
-#| msgid "Structures management"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Structures management"
 msgstr "Gestioneu les estructures"
@@ -2870,30 +2847,25 @@ msgstr "Reinicia els canvis"
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:182
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:180
-#, fuzzy, kde-format
-#| msgctxt "@window:title"
-#| msgid "New View Profile"
+#, kde-format
 msgctxt "@title:window"
 msgid "New View Profile"
 msgstr "Perfil de vista nou"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:55
-#, fuzzy, kde-format
-#| msgid "Title:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Title:"
 msgstr "Títol:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:59
-#, fuzzy, kde-format
-#| msgid "Display"
+#, kde-format
 msgctxt "@title:group"
 msgid "Display"
 msgstr "Visualització"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:63
-#, fuzzy, kde-format
-#| msgid "Show Line Offset:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show line offset:"
 msgstr "Mostra el desplaçament de la línia:"
@@ -2917,68 +2889,55 @@ msgid "Octal"
 msgstr "Octal"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:72
-#, fuzzy, kde-format
-#| msgid "Offset Coding:"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Offset coding:"
 msgstr "Codificació del desplaçament:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:76
-#, fuzzy, kde-format
-#| msgid "Values"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Values"
 msgstr "Valors"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:77
-#, fuzzy, kde-format
-#| msgid "Chars"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Chars"
 msgstr "Caràcters"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:78
-#, fuzzy, kde-format
-#| msgctxt "@item:"
-#| msgid "Values & Chars"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Values & Chars"
 msgstr "Valors i caràcters"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:81
-#, fuzzy, kde-format
-#| msgid "Show Values or Chars:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show values or chars:"
 msgstr "Mostra els valors o els caràcters:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:85
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox "
-#| msgid "Show with Rows or Columns:"
+#, kde-format
 msgctxt "@label:listbox "
 msgid "Show with rows or columns:"
 msgstr "Mostra amb files o columnes:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:88
-#, fuzzy, kde-format
-#| msgctxt "@item:"
-#| msgid "Columns"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Columns"
 msgstr "Columnes"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:89
-#, fuzzy, kde-format
-#| msgctxt "@item:"
-#| msgid "Rows"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Rows"
 msgstr "Files"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:96
-#, fuzzy, kde-format
-#| msgid "Layout"
+#, kde-format
 msgctxt "@title:group"
 msgid "Layout"
 msgstr "Disposició"
@@ -3006,39 +2965,31 @@ msgid "On"
 msgstr "Activa"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:111
-#, fuzzy, kde-format
-#| msgid "Break lines:"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Break lines:"
 msgstr "Trenca les línies:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:115
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "No grouping."
+#, kde-format
 msgctxt "@item"
 msgid "No Grouping"
-msgstr "Sense agrupament."
+msgstr "Sense agrupament"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:119
-#, fuzzy, kde-format
-#| msgctxt "@label:spinbox number of bytes which are grouped"
-#| msgid "Bytes per Group:"
+#, kde-format
 msgctxt "@label:spinbox number of bytes which are grouped"
 msgid "Bytes per group:"
 msgstr "Bytes per grup:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:126
-#, fuzzy, kde-format
-#| msgctxt "@label:spinbox number of bytes which are shown per line"
-#| msgid "Bytes per Line:"
+#, kde-format
 msgctxt "@label:spinbox number of bytes which are shown per line"
 msgid "Bytes per line:"
 msgstr "Bytes per línia:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:131
-#, fuzzy, kde-format
-#| msgid "Values"
+#, kde-format
 msgctxt "@title:group"
 msgid "Values"
 msgstr "Valors"
@@ -3078,29 +3029,25 @@ msgstr "Binari"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:146
 #: controllers/view/viewprofiles/viewprofileedit.cpp:155
-#, fuzzy, kde-format
-#| msgid "Coding:"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Coding:"
 msgstr "Codificació:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:150
-#, fuzzy, kde-format
-#| msgid "Chars"
+#, kde-format
 msgctxt "@title:group"
 msgid "Chars"
 msgstr "Caràcters"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:165
-#, fuzzy, kde-format
-#| msgid "Char for non-printable bytes:"
+#, kde-format
 msgctxt "@label:chooser"
 msgid "Char for non-printable bytes:"
 msgstr "Caràcters per als bytes no imprimibles:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:170
-#, fuzzy, kde-format
-#| msgid "Char for undefined bytes:"
+#, kde-format
 msgctxt "@label:chooser"
 msgid "Char for undefined bytes:"
 msgstr "Caràcters per als bytes indefinits:"
@@ -3216,9 +3163,7 @@ msgid "Modification of %1"
 msgstr "Modificació de %1"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:211
-#, fuzzy, kde-format
-#| msgctxt "@window:title"
-#| msgid "\"%1\" View Profile"
+#, kde-format
 msgctxt "@title:window"
 msgid "\"%1\" View Profile"
 msgstr "Perfil de vista «%1»"
@@ -3348,11 +3293,10 @@ msgid "Pattern…"
 msgstr "Patró…"
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:148
-#, fuzzy, kde-format
-#| msgid "Pattern inserted."
+#, kde-format
 msgctxt "@item"
 msgid "Pattern Inserted"
-msgstr "S'ha inserit el patró."
+msgstr "S'ha inserit el patró"
 
 #: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:35
 #, kde-format
@@ -3395,11 +3339,10 @@ msgid "Random Data…"
 msgstr "Dades aleatòries…"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:88
-#, fuzzy, kde-format
-#| msgid "RandomData inserted."
+#, kde-format
 msgctxt "@item"
 msgid "RandomData Inserted"
-msgstr "S'han inserit les dades aleatòries."
+msgstr "S'han inserit les dades aleatòries"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatageneratorconfigeditor.cpp:33
 #, kde-format
@@ -3426,11 +3369,10 @@ msgid "Sequence"
 msgstr "Seqüència"
 
 #: gui/io/generator/sequence/bytearraysequencegenerator.cpp:58
-#, fuzzy, kde-format
-#| msgid "Sequence inserted."
+#, kde-format
 msgctxt "@item"
 msgid "Sequence Inserted"
-msgstr "S'ha inserit la seqüència."
+msgstr "S'ha inserit la seqüència"
 
 #: gui/io/streamencoder/base32/bytearraybase32streamencoder.cpp:131
 #, kde-format
@@ -3477,8 +3419,7 @@ msgid "Ascii85"
 msgstr "ASCII85"
 
 #: gui/io/streamencoder/bytearraytextstreamencoderpreview.cpp:27
-#, fuzzy, kde-format
-#| msgid "The preview uses maximal the first 100 bytes."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "The preview uses maximally the first 100 bytes."
 msgstr "La vista prèvia utilitza els 100 primers bytes com a màxim."
@@ -3699,18 +3640,3 @@ msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"
 msgid "UTF-8"
 msgstr "UTF-8"
-
-#~ msgctxt "name of the change"
-#~ msgid "Crop"
-#~ msgstr "Escapça"
-
-#~ msgid "C&opy"
-#~ msgstr "Co&pia"
-
-#~ msgctxt "@item:"
-#~ msgid "Values"
-#~ msgstr "Valors"
-
-#~ msgctxt "@item:"
-#~ msgid "Chars"
-#~ msgstr "Caràcters"

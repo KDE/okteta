@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
+# SPDX-FileCopyrightText: 2011, 2019, 2021, 2025 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 #
-# Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2011, 2019, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-14 02:06+0000\n"
-"PO-Revision-Date: 2021-01-03 10:10+0100\n"
+"PO-Revision-Date: 2025-02-15 11:17+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
+"X-Generator: Lokalize 24.12.1\n"
 
 #: controller/clipboardcontroller.cpp:55
 #, kde-format
@@ -54,17 +55,13 @@ msgid "Re&do"
 msgstr "&Przywróć"
 
 #: controller/valueeditor.cpp:158
-#, fuzzy, kde-format
-#| msgctxt "name of the change"
-#| msgid "Insert"
+#, kde-format
 msgctxt "@item name of the change"
 msgid "Insert"
 msgstr "Wstaw"
 
 #: controller/valueeditor.cpp:200
-#, fuzzy, kde-format
-#| msgctxt "name of the change"
-#| msgid "Replace"
+#, kde-format
 msgctxt "@item name of the change"
 msgid "Replace"
 msgstr "Zastąp"

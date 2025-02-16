@@ -1,15 +1,15 @@
 # Translation of liboktetagui into esperanto.
 # Copyright (C) 2009 Free Software Foundation, Inc.
 # This file is distributed under the same license as the okteta package.
-# Oliver Kellogg <okellogg@users.sourceforge.net>, 2023.
+# Oliver Kellogg <olivermkellogg@gmail.com>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-14 02:06+0000\n"
-"PO-Revision-Date: 2023-05-06 16:20+0100\n"
-"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
+"PO-Revision-Date: 2025-02-15 14:15+0100\n"
+"Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
@@ -54,17 +54,13 @@ msgid "Re&do"
 msgstr "&Refari"
 
 #: controller/valueeditor.cpp:158
-#, fuzzy, kde-format
-#| msgctxt "name of the change"
-#| msgid "Insert"
+#, kde-format
 msgctxt "@item name of the change"
 msgid "Insert"
-msgstr "Enigi"
+msgstr "Enigo"
 
 #: controller/valueeditor.cpp:200
-#, fuzzy, kde-format
-#| msgctxt "name of the change"
-#| msgid "Replace"
+#, kde-format
 msgctxt "@item name of the change"
 msgid "Replace"
-msgstr "Anstataŭigi"
+msgstr "Anstataŭigo"

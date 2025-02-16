@@ -37,22 +37,19 @@ msgid "File Info"
 msgstr "Info o souboru"
 
 #: controllers/document/info/documentinfoview.cpp:67
-#, fuzzy, kde-format
-#| msgid "Type:"
+#, kde-format
 msgctxt "@label"
 msgid "Type:"
 msgstr "Typ:"
 
 #: controllers/document/info/documentinfoview.cpp:81
-#, fuzzy, kde-format
-#| msgid "Location:"
+#, kde-format
 msgctxt "@label"
 msgid "Location:"
 msgstr "Umístění:"
 
 #: controllers/document/info/documentinfoview.cpp:86
-#, fuzzy, kde-format
-#| msgid "Size:"
+#, kde-format
 msgctxt "@label"
 msgid "Size:"
 msgstr "Velikost:"
@@ -443,11 +440,10 @@ msgid ""
 msgstr ""
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:170
-#, fuzzy, kde-format
-#| msgid "Con&vert"
+#, kde-format
 msgctxt "@action:button"
 msgid "Convert"
-msgstr "Pře&vést"
+msgstr "Převést"
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:173
 #, kde-format
@@ -748,7 +744,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy"
-msgstr ""
+msgstr "Kopírovat"
 
 #: controllers/view/info/infoview.cpp:121
 #, kde-format
@@ -1727,11 +1723,10 @@ msgid ""
 msgstr ""
 
 #: controllers/view/stringsextract/stringsextractview.cpp:172
-#, fuzzy, kde-format
-#| msgid "&Show"
+#, kde-format
 msgctxt "@action:button"
 msgid "Show"
-msgstr "Zob&razit"
+msgstr "Zobrazit"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:175
 #, kde-format
@@ -2772,18 +2767,16 @@ msgid "New View Profile"
 msgstr "Prohlížet profil"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:55
-#, fuzzy, kde-format
-#| msgid "Title:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Title:"
 msgstr "Název:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:59
-#, fuzzy, kde-format
-#| msgid "Display"
+#, kde-format
 msgctxt "@title:group"
 msgid "Display"
-msgstr "Zobrazit"
+msgstr "Zobrazení"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:63
 #, fuzzy, kde-format
@@ -2868,8 +2861,7 @@ msgid "Rows"
 msgstr "Řádky"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:96
-#, fuzzy, kde-format
-#| msgid "Layout"
+#, kde-format
 msgctxt "@title:group"
 msgid "Layout"
 msgstr "Rozvržení"

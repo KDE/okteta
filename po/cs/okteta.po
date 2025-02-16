@@ -62,8 +62,7 @@ msgid "Friedrich W. H. Kossebau"
 msgstr "Friedrich W. H. Kossebau"
 
 #: about.cpp:28
-#, fuzzy, kde-format
-#| msgid "Author"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Author"
 msgstr "Autor"
