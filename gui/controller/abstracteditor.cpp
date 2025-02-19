@@ -96,7 +96,7 @@ void AbstractEditor::doEditAction(EditAction action)
         if (!mView->isOverwriteMode()) {
             const Address index = tableCursor->realIndex();
             if (index < mView->tableLayout()->length()) {
-                byteArrayModel->remove(AddressRange::fromWidth(index, 1));
+                std::ignore = byteArrayModel->remove(AddressRange::fromWidth(index, 1));
             }
         }
         break;
@@ -106,7 +106,7 @@ void AbstractEditor::doEditAction(EditAction action)
             if (index < mView->tableLayout()->length()) {
                 const TextByteArrayAnalyzer textAnalyzer(byteArrayModel, mView->charCodec());
                 const Address end = textAnalyzer.indexOfBeforeNextWordStart(index);
-                byteArrayModel->remove(AddressRange(index, end));
+                std::ignore = byteArrayModel->remove(AddressRange(index, end));
             }
         }
         break;
@@ -119,7 +119,7 @@ void AbstractEditor::doEditAction(EditAction action)
         } else {
             const Address deleteIndex = tableCursor->realIndex() - 1;
             if (deleteIndex >= 0) {
-                byteArrayModel->remove(AddressRange::fromWidth(deleteIndex, 1));
+                std::ignore = byteArrayModel->remove(AddressRange::fromWidth(deleteIndex, 1));
             }
         }
         break;
@@ -130,7 +130,7 @@ void AbstractEditor::doEditAction(EditAction action)
             const TextByteArrayAnalyzer textAnalyzer(byteArrayModel, mView->charCodec());
             const Address wordStart = textAnalyzer.indexOfPreviousWordStart(leftIndex);
             if (!mView->isOverwriteMode()) {
-                byteArrayModel->remove(AddressRange(wordStart, leftIndex));
+                std::ignore = byteArrayModel->remove(AddressRange(wordStart, leftIndex));
             }
         }
     }

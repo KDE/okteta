@@ -95,10 +95,10 @@ void CropController::crop()
 
     // first remove stuff at the end, so its values would not be messed up on removing the begin first
     if (endSection.isValid()) {
-        m_byteArrayModel->remove(endSection);
+        std::ignore = m_byteArrayModel->remove(endSection);
     }
     if (beginSection.isValid()) {
-        m_byteArrayModel->remove(beginSection);
+        std::ignore = m_byteArrayModel->remove(beginSection);
     }
 
     if (changesDescribable) {
