@@ -65,7 +65,7 @@ public:
     QString toString(Address address, AddressType addressType) const;
 
 private:
-    Coding mCodecId;
+    Coding mCodecId = InvalidCoding;
     std::unique_ptr<const ValueCodec> mValueCodec;
 
     static const QRegularExpression expressionRegex;

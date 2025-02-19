@@ -21,8 +21,6 @@ namespace Okteta {
 
 AddressValidator::AddressValidator(QObject* parent, Coding codecId)
     : QValidator(parent)
-    , mCodecId(InvalidCoding)
-    , mValueCodec(nullptr)
 {
     setCodec(codecId);
 }
