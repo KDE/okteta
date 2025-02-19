@@ -164,7 +164,8 @@ void ValueCodecTest::testAppendDigit()
 
     Byte decodedByte = 0;
     for (auto d : qAsConst(digits)) {
-        codec->appendDigit(&decodedByte, d.toLatin1());
+        const bool success = codec->appendDigit(&decodedByte, d.toLatin1());
+        QVERIFY(success);
     }
 
     QCOMPARE(decodedByte, byte);
