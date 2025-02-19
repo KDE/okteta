@@ -25,7 +25,7 @@ class VersionableIfTest : public QObject
     Q_OBJECT
 
 public:
-    ~VersionableIfTest();
+    ~VersionableIfTest() override;
 
 protected:
     VersionableIfTest();

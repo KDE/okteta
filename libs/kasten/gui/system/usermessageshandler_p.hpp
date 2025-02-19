@@ -31,7 +31,7 @@ public:
     explicit UserMessagesHandlerPrivate(QWidget* widget);
     UserMessagesHandlerPrivate(const UserMessagesHandlerPrivate&) = delete;
 
-    ~UserMessagesHandlerPrivate();
+    ~UserMessagesHandlerPrivate() override;
 
     UserMessagesHandlerPrivate& operator=(const UserMessagesHandlerPrivate&) = delete;
 

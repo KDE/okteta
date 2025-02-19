@@ -27,7 +27,7 @@ class AbstractByteArrayModelIfTest : public QObject
     Q_OBJECT
 
 public:
-    ~AbstractByteArrayModelIfTest();
+    ~AbstractByteArrayModelIfTest() override;
 
 protected:
     AbstractByteArrayModelIfTest();
