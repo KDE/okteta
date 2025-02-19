@@ -38,7 +38,7 @@ bool BookmarkListConstIteratorAdapter::findNextFrom(Address offset)
             result = true;
             break;
         }
-        next();
+        std::ignore = next();
     }
 
     return result;
@@ -54,7 +54,7 @@ bool BookmarkListConstIteratorAdapter::findPreviousFrom(Address offset)
             result = true;
             break;
         }
-        previous();
+        std::ignore = previous();
     }
 
     return result;
