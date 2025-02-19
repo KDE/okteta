@@ -30,7 +30,7 @@ void AbstractByteArrayViewIfTest::init()
     constexpr Size fillSize = 10;
 
     m_byteArrayModel = std::make_unique<ByteArrayModel>(fillSize);
-    m_byteArrayModel->fill(BlankChar);
+    std::ignore = m_byteArrayModel->fill(BlankChar);
 
     m_byteArrayView = createByteArrayView();
     m_byteArrayView->setByteArrayModel(m_byteArrayModel.get());

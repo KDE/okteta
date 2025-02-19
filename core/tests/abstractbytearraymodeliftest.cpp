@@ -261,7 +261,7 @@ void AbstractByteArrayModelIfTest::testSetGet()
 
     // prepare buffer
     Size size = mByteArrayModel->size();
-    mByteArrayModel->fill(BlankChar);
+    std::ignore = mByteArrayModel->fill(BlankChar);
 
     // test
     for (Address i = 0; i < size; ++i) {
