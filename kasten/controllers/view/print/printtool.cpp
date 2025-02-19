@@ -147,7 +147,7 @@ inline QPageSize::PageSizeId KConfigGroup::readEntry(const char *key, const QPag
 
     if (!entry.isEmpty()) {
         for (int i = 0; i < QPageSize::LastPageSize; ++i) {
-            const QPageSize::PageSizeId id = static_cast<QPageSize::PageSizeId>(i);
+            const auto id = static_cast<QPageSize::PageSizeId>(i);
             const QString pageSizekey = QPageSize::key(id);
             if (pageSizekey == entry) {
                 return id;

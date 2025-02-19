@@ -1017,7 +1017,7 @@ void AbstractByteArrayViewPrivate::mouseMoveEvent(QMouseEvent* mouseMoveEvent)
 [[nodiscard]]
 bool isStyleRequestingSoftwareInputPanelOnMouseClick(QWidget* widget)
 {
-    const QStyle::RequestSoftwareInputPanel behavior = QStyle::RequestSoftwareInputPanel(
+    const auto behavior = QStyle::RequestSoftwareInputPanel(
                     widget->style()->styleHint(QStyle::SH_RequestSoftwareInputPanel));
     return (behavior == QStyle::RSIP_OnMouseClick);
 }
@@ -1107,7 +1107,8 @@ bool AbstractByteArrayViewPrivate::event(QEvent* event)
         auto* gestureEvent = static_cast<QGestureEvent*>(event);
         if (auto* tapGesture = static_cast<QTapGesture*>(gestureEvent->gesture(Qt::TapGesture))) {
             return mTapNavigator.handleTapGesture(tapGesture);
-        } else if (auto* tapAndHoldGesture = static_cast<TouchOnlyTapAndHoldGesture*>(gestureEvent->gesture(touchOnlyTapAndHoldGestureType()))) {
+        }
+        if (auto* tapAndHoldGesture = static_cast<TouchOnlyTapAndHoldGesture*>(gestureEvent->gesture(touchOnlyTapAndHoldGestureType()))) {
             if (tapAndHoldGesture->state() == Qt::GestureFinished) {
                 const QPoint viewPortPos = tapAndHoldGesture->position().toPoint();
                 const QPoint pos = viewPortPos + q->viewport()->pos();
@@ -1165,9 +1166,10 @@ bool AbstractByteArrayViewPrivate::viewportEvent(QEvent* event)
         }
 
         return true;
-    } else if ((event->type() == QEvent::MouseMove) ||
-               (event->type() == QEvent::MouseButtonPress) ||
-               (event->type() == QEvent::MouseButtonRelease)) {
+    }
+    if ((event->type() == QEvent::MouseMove) ||
+        (event->type() == QEvent::MouseButtonPress) ||
+        (event->type() == QEvent::MouseButtonRelease)) {
         // discard any events synthesized from touch input
         auto* mouseEvent = static_cast<QMouseEvent*>(event);
         if (mouseEvent->source() == Qt::MouseEventSynthesizedByQt) {

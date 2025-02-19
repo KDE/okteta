@@ -160,7 +160,8 @@ void ValueCodecTest::testAppendDigit()
 
     Byte decodedByte = 0;
     for (auto d : std::as_const(digits)) {
-        codec->appendDigit(&decodedByte, d.toLatin1());
+        const bool success = codec->appendDigit(&decodedByte, d.toLatin1());
+        QVERIFY(success);
     }
 
     QCOMPARE(decodedByte, byte);
@@ -221,11 +222,10 @@ void ValueCodecTest::testIsValidDigit_data()
 
     for (const auto& valueCodecDescription : valueCodecDescriptions) {
         QBitArray validnessPerDigitField = QBitArray(digitCount, false);
-        const QByteArray validDigits =
-            QByteArray(valueCodecDescription.validDigits);
+        const auto validDigits = QByteArray(valueCodecDescription.validDigits);
 
-        for (int j = 0; j < validDigits.size(); ++j) {
-            validnessPerDigitField.setBit(validDigits[j], true);
+        for (const char digit : validDigits) {
+            validnessPerDigitField.setBit(digit, true);
         }
 
         for (int j = 0; j < validnessPerDigitField.size(); ++j) {

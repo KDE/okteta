@@ -212,9 +212,7 @@ void StatusBarLayout::updateLayoutStructs() const
     QSize sizeHint(0, 0);
 
     int visibleCount = 0;
-    for (int i = 0; i < static_cast<int>(mWidgetList.size()); ++i) {
-        QWidgetItem* const item = mWidgetList[i];
-
+    for (QWidgetItem* const item : mWidgetList) {
         if (!item->isEmpty()) {
             const QSize itemSizeHint = item->sizeHint();
 

@@ -52,7 +52,7 @@ void AbstractByteArrayViewIfTest::checkZoomScaleChanged(double zoomScaleExpected
     QVERIFY(m_zoomScaleSpy->isValid());
     QCOMPARE(m_zoomScaleSpy->count(), 1);
     const QList<QVariant> arguments = m_zoomScaleSpy->takeFirst();
-    const double zoomScale = qvariant_cast<double>(arguments.at(0));
+    const auto zoomScale = qvariant_cast<double>(arguments.at(0));
     QCOMPARE(zoomScale, zoomScaleExpected);
 }
 

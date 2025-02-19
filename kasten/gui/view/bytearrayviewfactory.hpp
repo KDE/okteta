@@ -23,7 +23,7 @@ public:
     explicit ByteArrayViewFactory(ByteArrayViewProfileManager* byteArrayViewProfileManager);
     ByteArrayViewFactory(const ByteArrayViewFactory&) = delete;
 
-    ~ByteArrayViewFactory() = default;
+    ~ByteArrayViewFactory() override = default;
 
     ByteArrayViewFactory& operator=(const ByteArrayViewFactory&) = delete;
 
