@@ -95,7 +95,7 @@ void ViewAreaSplitController::splitViewArea(Qt::Orientation orientation)
 {
     AbstractView* currentView = mCurrentViewArea->viewFocus();
 
-    mViewAreaSplitable->splitViewArea(mCurrentViewArea, orientation);
+    std::ignore = mViewAreaSplitable->splitViewArea(mCurrentViewArea, orientation);
 
     // TODO: ideal would be a new view which copies the existing one
     // and starts visually where the old one stops after the resize
