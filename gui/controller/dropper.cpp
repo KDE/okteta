@@ -167,7 +167,7 @@ void Dropper::handleInternalDrag(QDropEvent* dropEvent, AbstractByteArrayViewPri
                     AddressRange overwriteRange = AddressRange::fromWidth(insertIndex, data.size());
                     overwriteRange.restrictEndTo(length - 1);
                     if (overwriteRange.isValid()) {
-                        byteArrayModel->replace(overwriteRange, reinterpret_cast<const Byte*>(data.constData()), overwriteRange.width());
+                        std::ignore = byteArrayModel->replace(overwriteRange, reinterpret_cast<const Byte*>(data.constData()), overwriteRange.width());
                     }
                 }
             } else {
