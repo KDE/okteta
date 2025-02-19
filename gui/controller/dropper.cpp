@@ -171,7 +171,7 @@ void Dropper::handleInternalDrag(QDropEvent* dropEvent, AbstractByteArrayViewPri
                     }
                 }
             } else {
-                byteArrayModel->insert(insertIndex, reinterpret_cast<const Byte*>(data.constData()), data.size());
+                std::ignore = byteArrayModel->insert(insertIndex, reinterpret_cast<const Byte*>(data.constData()), data.size());
             }
         }
     }
