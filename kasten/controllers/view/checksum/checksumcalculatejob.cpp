@@ -31,7 +31,8 @@ void ChecksumCalculateJob::exec()
 
     connect(mAlgorithm, &AbstractByteArrayChecksumAlgorithm::calculatedBytes, this, &ChecksumCalculateJob::onCalculatedBytes);
 
-    mAlgorithm->calculateChecksum(mChecksum, mByteArrayModel, mSelection);
+    // TODO: report any error
+    std::ignore = mAlgorithm->calculateChecksum(mChecksum, mByteArrayModel, mSelection);
 
     deleteLater(); // TODO: could be reused on next operation
 }
