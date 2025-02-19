@@ -19,7 +19,7 @@ class JISX0201CharCodec : public CharCodec
 {
     struct ConstructorTag
     {
-        ConstructorTag() {}
+        ConstructorTag() = default;
         ConstructorTag(const ConstructorTag&) = default;
     };
 

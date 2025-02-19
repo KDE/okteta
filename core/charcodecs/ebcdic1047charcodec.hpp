@@ -19,7 +19,7 @@ class EBCDIC1047CharCodec : public CharCodec
 {
     struct ConstructorTag
     {
-        ConstructorTag() {}
+        ConstructorTag() = default;
         ConstructorTag(const ConstructorTag&) = default;
     };
 
