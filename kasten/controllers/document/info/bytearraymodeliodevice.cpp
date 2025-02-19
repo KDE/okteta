@@ -46,7 +46,9 @@ bool ByteArrayModelIoDevice::open(OpenMode openMode)
         return false;
     }
 
-    seek(0);
+    if (!seek(0)) {
+        return false;
+    }
 
     return true;
 }
