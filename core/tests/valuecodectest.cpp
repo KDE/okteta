@@ -229,8 +229,7 @@ void ValueCodecTest::testIsValidDigit_data()
 
     for (auto& valueCodecDescription : valueCodecDescriptions) {
         QBitArray validnessPerDigitField = QBitArray(digitCount, false);
-        const QByteArray validDigits =
-            QByteArray(valueCodecDescription.validDigits);
+        const auto validDigits = QByteArray(valueCodecDescription.validDigits);
 
         for (const char digit : validDigits) {
             validnessPerDigitField.setBit(digit, true);

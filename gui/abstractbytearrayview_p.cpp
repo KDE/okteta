@@ -1065,7 +1065,7 @@ void AbstractByteArrayViewPrivate::mouseMoveEvent(QMouseEvent* mouseEvent)
 
 bool isStyleRequestingSoftwareInputPanelOnMouseClick(QWidget* widget)
 {
-    const QStyle::RequestSoftwareInputPanel behavior = QStyle::RequestSoftwareInputPanel(
+    const auto behavior = QStyle::RequestSoftwareInputPanel(
                     widget->style()->styleHint(QStyle::SH_RequestSoftwareInputPanel));
     return (behavior == QStyle::RSIP_OnMouseClick);
 }
