@@ -118,7 +118,7 @@ void ByteArrayComboBoxPrivate::setMaxLength(int maxLength)
     if (oldMaxLength > maxLength) {
         QString currentText = mValueComboBox->currentText();
         int dummyPos;
-        mValidator->validate(currentText, dummyPos);
+        std::ignore = mValidator->validate(currentText, dummyPos);
         mValueComboBox->setEditText(currentText);
     }
 }
@@ -135,7 +135,7 @@ void ByteArrayComboBoxPrivate::setMinLength(int minLength)
     if (oldMinLength < minLength) {
         QString currentText = mValueComboBox->currentText();
         int dummyPos;
-        mValidator->validate(currentText, dummyPos);
+        std::ignore = mValidator->validate(currentText, dummyPos);
         mValueComboBox->setEditText(currentText);
     }
 }
