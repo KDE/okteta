@@ -147,7 +147,7 @@ static QByteArray toLower(const QByteArray& _pattern, const CharCodec* charCodec
             continue;
         }
 
-        charCodec->encode(reinterpret_cast<Byte*>(&pattern[i]), decodedChar.toLower());
+        std::ignore = charCodec->encode(reinterpret_cast<Byte*>(&pattern[i]), decodedChar.toLower());
     }
 
     return result;
@@ -177,7 +177,7 @@ Address AbstractByteArrayModel::indexOfCaseInsensitive(const CharCodec* charCode
             // TODO: optimize, like caching and not reencoding chars without a lower letter
             const Okteta::Character decodedChar = charCodec->decode(_byte);
             if (!decodedChar.isUndefined()) {
-                charCodec->encode(&_byte, decodedChar.toLower());
+                std::ignore = charCodec->encode(&_byte, decodedChar.toLower());
             }
 
             if (_byte != pattern[c]) {
@@ -229,7 +229,7 @@ Address AbstractByteArrayModel::lastIndexOfCaseInsensitive(const CharCodec* char
             // TODO: optimize, like caching and not reencoding chars without a lower letter
             const Okteta::Character decodedChar = charCodec->decode(_byte);
             if (!decodedChar.isUndefined()) {
-                charCodec->encode(&_byte, decodedChar.toLower());
+                std::ignore = charCodec->encode(&_byte, decodedChar.toLower());
             }
 
             if (_byte != pattern[c]) {
