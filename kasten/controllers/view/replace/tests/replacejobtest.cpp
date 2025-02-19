@@ -271,7 +271,7 @@ void ReplaceJobTest::testReplace()
     QSignalSpy finishedSpy(job, &Kasten::ReplaceJob::finished);
 
     job->start();
-    if (finishedSpy.count() == 0) {
+    if (finishedSpy.isEmpty()) {
         QVERIFY(finishedSpy.wait());
     }
 
