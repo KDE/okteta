@@ -36,9 +36,6 @@ void ByteArrayUtf8StringDecoderTest::testDecode_data()
     QTest::addColumn<Okteta::ByteArrayUtf8StringDecoder::CodeState>("expectedDecodeStateResult");
     QTest::addColumn<QByteArray>("expectedDecodeResult");
 
-    const QString iso8859_1 = QStringLiteral("ISO-8859-1");
-    const QString usAscii = QStringLiteral("US-ASCII");
-
     QTest::newRow("emptystring")
         << QString()
         << Okteta::ByteArrayUtf8StringDecoder::CodeAcceptable << QByteArray();
