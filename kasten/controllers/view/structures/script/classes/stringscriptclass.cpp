@@ -39,7 +39,6 @@ StringScriptClass::~StringScriptClass() = default;
 
 bool StringScriptClass::queryAdditionalProperty(const DataInformation* data, const QScriptString& name, QScriptClass::QueryFlags* flags, uint* id)
 {
-    Q_UNUSED(data)
     // no need to modify flags since both read and write are handled
     if (name == s_maxByteCount || name == s_maxCharCount || name == s_terminatedBy
         || name == s_encoding) {

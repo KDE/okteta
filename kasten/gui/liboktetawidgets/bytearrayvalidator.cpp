@@ -114,8 +114,6 @@ void ByteArrayValidator::setMinLength(int minLength)
 
 QValidator::State ByteArrayValidator::validate(QString& string, int& pos) const
 {
-    Q_UNUSED(pos)
-
     const State result = m_stringValidator->validate(string, pos);
 
     return result;
