@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-15 02:16+0000\n"
+"POT-Creation-Date: 2025-02-20 01:55+0000\n"
 "PO-Revision-Date: 2024-11-29 00:31+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -1496,25 +1496,25 @@ msgid "Beginning of byte array reached.<nl/>Continue from the end?"
 msgstr ""
 "바이트 배열의 시작에 도달했습니다.<nl/>끝에서부터 다시 시작하시겠습니까?"
 
-#: controllers/view/replace/replacedialog.cpp:48
+#: controllers/view/replace/replacedialog.cpp:32
 #, kde-format
 msgctxt "@title:window"
 msgid "Replace Bytes"
 msgstr "바이트 바꾸기"
 
-#: controllers/view/replace/replacedialog.cpp:50
+#: controllers/view/replace/replacedialog.cpp:34
 #, kde-format
 msgctxt "@action;button"
 msgid "&Replace"
 msgstr "바꾸기(&R)"
 
-#: controllers/view/replace/replacedialog.cpp:52
+#: controllers/view/replace/replacedialog.cpp:36
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Start replace"
 msgstr "바꾸기 시작"
 
-#: controllers/view/replace/replacedialog.cpp:54
+#: controllers/view/replace/replacedialog.cpp:38
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1525,13 +1525,13 @@ msgstr ""
 "<interface>바꾸기</interface> 단추를 누르면 바이트 배열에서 입력한 바이트를 "
 "찾은 다음, 바꿀 바이트로 바꿉니다."
 
-#: controllers/view/replace/replacedialog.cpp:62
+#: controllers/view/replace/replacedialog.cpp:46
 #, kde-format
 msgctxt "@title:group"
 msgid "Replace With"
 msgstr "바꿀 문자열"
 
-#: controllers/view/replace/replacedialog.cpp:69
+#: controllers/view/replace/replacedialog.cpp:53
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1539,13 +1539,13 @@ msgid ""
 "from the list."
 msgstr "바꿀 패턴을 입력하거나, 예전에 사용했던 패턴을 목록에서 선택하십시오."
 
-#: controllers/view/replace/replacedialog.cpp:78
+#: controllers/view/replace/replacedialog.cpp:62
 #, kde-format
 msgctxt "@option:check"
 msgid "&Prompt on replace"
 msgstr "바꿀 때 물어보기(&P)"
 
-#: controllers/view/replace/replacedialog.cpp:79
+#: controllers/view/replace/replacedialog.cpp:63
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Ask before replacing each match found."

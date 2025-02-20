@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-15 02:16+0000\n"
+"POT-Creation-Date: 2025-02-20 01:55+0000\n"
 "PO-Revision-Date: 2014-09-08 14:28+0200\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -1566,25 +1566,25 @@ msgid "Beginning of byte array reached.<nl/>Continue from the end?"
 msgstr ""
 "A kijelölt rész elejéhez ért a keresés.<nl/>Folytatni szeretné a végétől?"
 
-#: controllers/view/replace/replacedialog.cpp:48
+#: controllers/view/replace/replacedialog.cpp:32
 #, kde-format
 msgctxt "@title:window"
 msgid "Replace Bytes"
 msgstr "Bájtcsere"
 
-#: controllers/view/replace/replacedialog.cpp:50
+#: controllers/view/replace/replacedialog.cpp:34
 #, kde-format
 msgctxt "@action;button"
 msgid "&Replace"
 msgstr "&Csere"
 
-#: controllers/view/replace/replacedialog.cpp:52
+#: controllers/view/replace/replacedialog.cpp:36
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Start replace"
 msgstr "Cserélés"
 
-#: controllers/view/replace/replacedialog.cpp:54
+#: controllers/view/replace/replacedialog.cpp:38
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1596,13 +1596,13 @@ msgstr ""
 "elkezdi keresni a program a kijelölt tartományban. Minden találatnál "
 "lecseréli az eredeti sorozatot a megadott újra."
 
-#: controllers/view/replace/replacedialog.cpp:62
+#: controllers/view/replace/replacedialog.cpp:46
 #, kde-format
 msgctxt "@title:group"
 msgid "Replace With"
 msgstr "Csere ezzel"
 
-#: controllers/view/replace/replacedialog.cpp:69
+#: controllers/view/replace/replacedialog.cpp:53
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1612,13 +1612,13 @@ msgstr ""
 "Adja meg a cseremintát, vagy válasszon egyet a korábban használtak közül a "
 "listából."
 
-#: controllers/view/replace/replacedialog.cpp:78
+#: controllers/view/replace/replacedialog.cpp:62
 #, kde-format
 msgctxt "@option:check"
 msgid "&Prompt on replace"
 msgstr "Me&gerősítés kérése minden csere előtt"
 
-#: controllers/view/replace/replacedialog.cpp:79
+#: controllers/view/replace/replacedialog.cpp:63
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Ask before replacing each match found."

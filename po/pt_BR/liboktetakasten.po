@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-15 02:16+0000\n"
+"POT-Creation-Date: 2025-02-20 01:55+0000\n"
 "PO-Revision-Date: 2024-01-11 21:01-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -1545,25 +1545,25 @@ msgstr ""
 "O início da lista de bytes foi atingido.<nl/>Deseja continuar a partir do "
 "fim?"
 
-#: controllers/view/replace/replacedialog.cpp:48
+#: controllers/view/replace/replacedialog.cpp:32
 #, kde-format
 msgctxt "@title:window"
 msgid "Replace Bytes"
 msgstr "Substituir bytes"
 
-#: controllers/view/replace/replacedialog.cpp:50
+#: controllers/view/replace/replacedialog.cpp:34
 #, kde-format
 msgctxt "@action;button"
 msgid "&Replace"
 msgstr "Substitui&r"
 
-#: controllers/view/replace/replacedialog.cpp:52
+#: controllers/view/replace/replacedialog.cpp:36
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Start replace"
 msgstr "Iniciar substituição"
 
-#: controllers/view/replace/replacedialog.cpp:54
+#: controllers/view/replace/replacedialog.cpp:38
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1575,13 +1575,13 @@ msgstr ""
 "introduziu acima serão pesquisados dentro da lista de bytes, sendo que "
 "qualquer ocorrência será substituída pelos bytes de substituição."
 
-#: controllers/view/replace/replacedialog.cpp:62
+#: controllers/view/replace/replacedialog.cpp:46
 #, kde-format
 msgctxt "@title:group"
 msgid "Replace With"
 msgstr "Substituir por"
 
-#: controllers/view/replace/replacedialog.cpp:69
+#: controllers/view/replace/replacedialog.cpp:53
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1591,13 +1591,13 @@ msgstr ""
 "Informe os bytes a serem substituídos ou selecione os bytes anteriores na "
 "lista."
 
-#: controllers/view/replace/replacedialog.cpp:78
+#: controllers/view/replace/replacedialog.cpp:62
 #, kde-format
 msgctxt "@option:check"
 msgid "&Prompt on replace"
 msgstr "&Perguntar antes de substituir"
 
-#: controllers/view/replace/replacedialog.cpp:79
+#: controllers/view/replace/replacedialog.cpp:63
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Ask before replacing each match found."

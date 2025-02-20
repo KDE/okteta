@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-15 02:16+0000\n"
+"POT-Creation-Date: 2025-02-20 01:55+0000\n"
 "PO-Revision-Date: 2010-01-09 18:03+0200\n"
 "Last-Translator: Viesturs Zarins <viesturs.zarins@mii.lu.lv>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -1564,25 +1564,25 @@ msgctxt "@info"
 msgid "Beginning of byte array reached.<nl/>Continue from the end?"
 msgstr "Sasniegts baitu masīva sākums.<nl/>Turpināt no beigām?"
 
-#: controllers/view/replace/replacedialog.cpp:48
+#: controllers/view/replace/replacedialog.cpp:32
 #, kde-format
 msgctxt "@title:window"
 msgid "Replace Bytes"
 msgstr "Aizvietot baitus"
 
-#: controllers/view/replace/replacedialog.cpp:50
+#: controllers/view/replace/replacedialog.cpp:34
 #, kde-format
 msgctxt "@action;button"
 msgid "&Replace"
 msgstr "&Aizvietot"
 
-#: controllers/view/replace/replacedialog.cpp:52
+#: controllers/view/replace/replacedialog.cpp:36
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Start replace"
 msgstr "Sākt aizvietošanu"
 
-#: controllers/view/replace/replacedialog.cpp:54
+#: controllers/view/replace/replacedialog.cpp:38
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1593,13 +1593,13 @@ msgstr ""
 "Nospiežot pogu <b>Aizvietot</b>, tiks veikta ievadīo baitu  meklēšana un "
 "visi atrastie eksemplāri tiks aizvietoti ar aizvietošanas baitiem."
 
-#: controllers/view/replace/replacedialog.cpp:62
+#: controllers/view/replace/replacedialog.cpp:46
 #, kde-format
 msgctxt "@title:group"
 msgid "Replace With"
 msgstr "Aizvietot ar"
 
-#: controllers/view/replace/replacedialog.cpp:69
+#: controllers/view/replace/replacedialog.cpp:53
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1609,13 +1609,13 @@ msgstr ""
 "Ievadiet baitus ar kuriem aizvietot vai arī izvēlieties iepriekš lietotus no "
 "saraksta."
 
-#: controllers/view/replace/replacedialog.cpp:78
+#: controllers/view/replace/replacedialog.cpp:62
 #, kde-format
 msgctxt "@option:check"
 msgid "&Prompt on replace"
 msgstr "&Pārprasīt pie aizvietošanas"
 
-#: controllers/view/replace/replacedialog.cpp:79
+#: controllers/view/replace/replacedialog.cpp:63
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Ask before replacing each match found."
