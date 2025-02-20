@@ -11,6 +11,8 @@
 
 // lib
 #include "range.hpp"
+// Qt
+#include <QTypeInfo>
 
 namespace Okteta {
 
@@ -271,6 +273,12 @@ inline void NumberRange<N, S>::adaptToReplacement(N offset, S removedLength, S i
     }
 }
 
+// generic declaration, for AddressRange, LineRange, LinePositionRange, PixelXRange, PixelYRange
+// which use template args of typedefs of int and qint32
+using IntegerRange = NumberRange<int, int>;
+
 }
+
+Q_DECLARE_TYPEINFO(Okteta::IntegerRange, Q_MOVABLE_TYPE);
 
 #endif

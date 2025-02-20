@@ -15,6 +15,8 @@
 #include "linerange.hpp"
 // Okteta core
 #include <Okteta/Range>
+// Qt
+#include <QTypeInfo>
 
 namespace Okteta {
 
@@ -93,5 +95,7 @@ inline LineSize CoordRange::lines()                         const { return end()
 inline bool CoordRange::includesLine(Line line)             const { return (start().line() <= line && line <= end().line()); }
 
 }
+
+Q_DECLARE_TYPEINFO(Okteta::CoordRange, Q_MOVABLE_TYPE);
 
 #endif

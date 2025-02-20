@@ -220,4 +220,6 @@ inline void Selection::adaptToSwap(Address firstOffset, Address secondOffset, Si
 
 }
 
+Q_DECLARE_TYPEINFO(Okteta::Selection, Q_MOVABLE_TYPE);
+
 #endif

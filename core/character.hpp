@@ -51,4 +51,6 @@ inline constexpr bool Character::isUndefined() const { return mIsUndefined; }
 
 }
 
+Q_DECLARE_TYPEINFO(Okteta::Character, Q_MOVABLE_TYPE);
+
 #endif

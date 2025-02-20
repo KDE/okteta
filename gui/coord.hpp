@@ -15,6 +15,8 @@
 // Okteta core
 #include <Okteta/Address>
 #include <Okteta/Size>
+// Qt
+#include <QTypeInfo>
 
 namespace Okteta {
 
@@ -306,5 +308,7 @@ inline Coord operator+(Coord other, LinePosition pos)
 }
 
 }
+
+Q_DECLARE_TYPEINFO(Okteta::Coord, Q_MOVABLE_TYPE);
 
 #endif
