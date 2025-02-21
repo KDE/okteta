@@ -52,6 +52,17 @@ private:
     bool mIsActive : 1;
 };
 
+inline Dropper::Dropper(AbstractByteArrayView* view)
+    : mByteArrayView(view)
+    , mIsActive(false)
+{
+}
+
+inline bool Dropper::isActive() const
+{
+    return mIsActive;
+}
+
 }
 
 #endif
