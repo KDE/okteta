@@ -130,8 +130,8 @@ void PrimitiveDataInformationTest::initTestCase()
 
 namespace {
 template <PrimitiveDataType Type>
-void valueCompareHelper(typename PrimitiveInfo<Type>::valueType value, QString bin,
-                        QString hex, QString dec, QString oct)
+void valueCompareHelper(typename PrimitiveInfo<Type>::valueType value, const QString& bin,
+                        const QString& hex, const QString& dec, const QString& oct)
 {
     QCOMPARE(PrimitiveInfo<Type>::Methods::staticValueString(value, 2), bin);
     QCOMPARE(PrimitiveInfo<Type>::Methods::staticValueString(value, 16), hex);
