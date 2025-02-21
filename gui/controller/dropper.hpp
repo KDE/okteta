@@ -26,7 +26,7 @@ public:
     explicit Dropper(AbstractByteArrayView* view);
     Dropper(const Dropper&) = delete;
 
-    ~Dropper();
+    ~Dropper() = default; // trivial
 
     Dropper& operator=(const Dropper&) = delete;
 

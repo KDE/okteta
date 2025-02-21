@@ -32,8 +32,6 @@ Dropper::Dropper(AbstractByteArrayView* view)
 {
 }
 
-Dropper::~Dropper() = default;
-
 bool Dropper::isActive() const { return mIsActive; }
 
 bool Dropper::handleDragEnterEvent(QDragEnterEvent* dragEnterEvent)

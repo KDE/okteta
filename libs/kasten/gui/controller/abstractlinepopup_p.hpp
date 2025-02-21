@@ -24,7 +24,7 @@ public:
     explicit AbstractLinePopupPrivate(AbstractLinePopup* parent);
     AbstractLinePopupPrivate(const AbstractLinePopupPrivate&) = delete;
 
-    ~AbstractLinePopupPrivate();
+    ~AbstractLinePopupPrivate() = default; // trivial
 
     AbstractLinePopupPrivate& operator=(const AbstractLinePopupPrivate&) = delete;
 
@@ -67,8 +67,6 @@ inline AbstractLinePopupPrivate::AbstractLinePopupPrivate(AbstractLinePopup* par
     : p(parent)
 {
 }
-
-inline AbstractLinePopupPrivate::~AbstractLinePopupPrivate() = default;
 
 inline int AbstractLinePopupPrivate::result() const { return mResult; }
 inline void AbstractLinePopupPrivate::setResult(int result) { mResult = result; }

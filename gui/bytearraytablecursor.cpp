@@ -24,8 +24,6 @@ ByteArrayTableCursor::ByteArrayTableCursor(const ByteArrayTableLayout* layout)
 {
 }
 
-ByteArrayTableCursor::~ByteArrayTableCursor() = default;
-
 void ByteArrayTableCursor::setAppendPosEnabled(bool appendPosEnabled)
 {
     if (mAppendPosEnabled == appendPosEnabled) {

@@ -46,7 +46,7 @@ public:
     explicit ByteArrayTableCursor(const ByteArrayTableLayout* layout);
     ByteArrayTableCursor(const ByteArrayTableCursor&) = delete;
 
-    ~ByteArrayTableCursor();
+    ~ByteArrayTableCursor() = default; // trivial
 
     ByteArrayTableCursor& operator=(const ByteArrayTableCursor&) = delete;
 

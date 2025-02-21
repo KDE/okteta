@@ -21,8 +21,6 @@ ByteArrayUtf8StringDecoder::ByteArrayUtf8StringDecoder()
 {
 }
 
-ByteArrayUtf8StringDecoder::~ByteArrayUtf8StringDecoder() = default;
-
 int ByteArrayUtf8StringDecoder::valueFromOctalDigit(QChar character)
 {
     return
