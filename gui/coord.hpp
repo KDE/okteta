@@ -44,7 +44,7 @@ public:
     Coord(const Coord& other) = default;
     Coord& operator=(const Coord& other) = default;
 
-    ~Coord() = default;
+    ~Coord() = default; // trivial
 
 public: // logic
     constexpr bool operator==(const Coord& other) const;
