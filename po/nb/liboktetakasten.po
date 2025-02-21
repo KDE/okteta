@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-15 02:16+0000\n"
+"POT-Creation-Date: 2025-02-20 01:55+0000\n"
 "PO-Revision-Date: 2013-02-19 20:33+0100\n"
 "Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -1498,25 +1498,25 @@ msgctxt "@info"
 msgid "Beginning of byte array reached.<nl/>Continue from the end?"
 msgstr "Kom til begynnelsen av strengen.<nl/> Fortsett fra slutten?"
 
-#: controllers/view/replace/replacedialog.cpp:48
+#: controllers/view/replace/replacedialog.cpp:32
 #, kde-format
 msgctxt "@title:window"
 msgid "Replace Bytes"
 msgstr "Erstatt byte"
 
-#: controllers/view/replace/replacedialog.cpp:50
+#: controllers/view/replace/replacedialog.cpp:34
 #, kde-format
 msgctxt "@action;button"
 msgid "&Replace"
 msgstr "&Erstatt"
 
-#: controllers/view/replace/replacedialog.cpp:52
+#: controllers/view/replace/replacedialog.cpp:36
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Start replace"
 msgstr "Start erstatning"
 
-#: controllers/view/replace/replacedialog.cpp:54
+#: controllers/view/replace/replacedialog.cpp:38
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1528,13 +1528,13 @@ msgstr ""
 "strengen etter de bytene du oppga over, og om de finnes blir de erstattet "
 "med erstatnings-bytene."
 
-#: controllers/view/replace/replacedialog.cpp:62
+#: controllers/view/replace/replacedialog.cpp:46
 #, kde-format
 msgctxt "@title:group"
 msgid "Replace With"
 msgstr "Erstatt med"
 
-#: controllers/view/replace/replacedialog.cpp:69
+#: controllers/view/replace/replacedialog.cpp:53
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1544,13 +1544,13 @@ msgstr ""
 "Oppgi byter å erstatte med, eller velg byter som tidligere er satt inn fra "
 "lista."
 
-#: controllers/view/replace/replacedialog.cpp:78
+#: controllers/view/replace/replacedialog.cpp:62
 #, kde-format
 msgctxt "@option:check"
 msgid "&Prompt on replace"
 msgstr "S&pør ved erstatning"
 
-#: controllers/view/replace/replacedialog.cpp:79
+#: controllers/view/replace/replacedialog.cpp:63
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Ask before replacing each match found."
