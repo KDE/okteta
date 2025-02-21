@@ -295,7 +295,7 @@ void StructureView::editData()
 void StructureView::selectBytesInView()
 {
     auto* action = static_cast<QAction*>(sender());
-    const QModelIndex index = action->data().value<QModelIndex>();
+    const QModelIndex index = action->data().toModelIndex();
 
     mTool->selectBytesInView(index);
 }
@@ -303,7 +303,7 @@ void StructureView::selectBytesInView()
 void StructureView::copyToClipboard()
 {
     auto* action = static_cast<QAction*>(sender());
-    const QModelIndex index = action->data().value<QModelIndex>();
+    const QModelIndex index = action->data().toModelIndex();
     QMimeData* mimeData = mStructTreeView->model()->mimeData({index});
 
     QApplication::clipboard()->setMimeData(mimeData);

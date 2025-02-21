@@ -46,7 +46,7 @@ public:
     Coord(const Coord& other) = default;
     Coord& operator=(const Coord& other) = default;
 
-    ~Coord() = default;
+    ~Coord() = default; // trivial
 
 public: // logic
     [[nodiscard]]

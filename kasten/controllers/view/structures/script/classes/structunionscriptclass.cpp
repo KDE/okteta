@@ -33,7 +33,6 @@ StructUnionScriptClass::~StructUnionScriptClass() = default;
 
 bool StructUnionScriptClass::queryAdditionalProperty(const DataInformation* data, const QScriptString& name, QScriptClass::QueryFlags* flags, uint* id)
 {
-    Q_UNUSED(data)
     // no need to modify flags since both read and write are handled
     if (name == s_childCount) {
         *flags &= ~HandlesWriteAccess;
@@ -72,7 +71,6 @@ bool StructUnionScriptClass::queryAdditionalProperty(const DataInformation* data
 
 bool StructUnionScriptClass::additionalPropertyFlags(const DataInformation* data, const QScriptString& name, uint id, QScriptValue::PropertyFlags* flags)
 {
-    Q_UNUSED(data)
     // no need to modify flags since both read and write are handled
     if (id != 0) {
         *flags |= QScriptValue::ReadOnly;

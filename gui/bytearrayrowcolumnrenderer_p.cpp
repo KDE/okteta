@@ -843,7 +843,6 @@ void ByteArrayRowColumnRendererPrivate::renderFramedByte(QPainter* painter,
 
 void ByteArrayRowColumnRendererPrivate::renderCursor(QPainter* painter, Address byteIndex, AbstractByteArrayView::CodingTypeId codingId)
 {
-    Q_UNUSED(codingId)
     const Byte byte = (byteIndex > -1) ? mByteArrayModel->byte(byteIndex) : EmptyByte;
     const Character byteChar = mCharCodec->decode(byte);
 

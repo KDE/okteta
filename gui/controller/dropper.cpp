@@ -27,16 +27,6 @@ namespace Okteta {
 
 static constexpr char DropperOctetStreamFormatName[] = "application/octet-stream";
 
-Dropper::Dropper(AbstractByteArrayViewPrivate* view)
-    : mByteArrayView(view)
-    , mIsActive(false)
-{
-}
-
-Dropper::~Dropper() = default;
-
-bool Dropper::isActive() const { return mIsActive; }
-
 bool Dropper::handleDragEnterEvent(QDragEnterEvent* dragEnterEvent)
 {
     bool eventUsed = false;

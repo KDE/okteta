@@ -84,14 +84,12 @@ void AbstractModelFileSystemSynchronizerPrivate::stopNetworkWatching()
 void AbstractModelFileSystemSynchronizerPrivate::onFileDirty(const QString& fileName)
 {
     Q_UNUSED(fileName)
-    qCDebug(LOG_KASTEN_CORE) << fileName;
     setRemoteState(RemoteHasChanges);
 }
 
 void AbstractModelFileSystemSynchronizerPrivate::onFileCreated(const QString& fileName)
 {
     Q_UNUSED(fileName)
-    qCDebug(LOG_KASTEN_CORE) << fileName;
     // TODO: could happen after a delete, what to do?
     setRemoteState(RemoteHasChanges);
 }
@@ -99,7 +97,6 @@ void AbstractModelFileSystemSynchronizerPrivate::onFileCreated(const QString& fi
 void AbstractModelFileSystemSynchronizerPrivate::onFileDeleted(const QString& fileName)
 {
     Q_UNUSED(fileName)
-    qCDebug(LOG_KASTEN_CORE) << fileName;
     setRemoteState(RemoteDeleted);
 }
 

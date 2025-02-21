@@ -27,7 +27,7 @@ public:
 
 public:
     ByteArrayUtf8StringDecoder();
-    ~ByteArrayUtf8StringDecoder();
+    ~ByteArrayUtf8StringDecoder() = default; // trivial
 
 public:
     [[nodiscard]]

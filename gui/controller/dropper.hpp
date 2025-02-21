@@ -26,7 +26,7 @@ public:
     explicit Dropper(AbstractByteArrayViewPrivate* view);
     Dropper(const Dropper&) = delete;
 
-    ~Dropper();
+    ~Dropper() = default; // trivial
 
     Dropper& operator=(const Dropper&) = delete;
 
@@ -56,6 +56,17 @@ private:
 
     bool mIsActive : 1;
 };
+
+inline Dropper::Dropper(AbstractByteArrayViewPrivate* view)
+    : mByteArrayView(view)
+    , mIsActive(false)
+{
+}
+
+inline bool Dropper::isActive() const
+{
+    return mIsActive;
+}
 
 }
 

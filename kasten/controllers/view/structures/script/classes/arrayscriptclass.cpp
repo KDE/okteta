@@ -31,7 +31,6 @@ ArrayScriptClass::~ArrayScriptClass() = default;
 
 bool ArrayScriptClass::queryAdditionalProperty(const DataInformation* data, const QScriptString& name, QScriptClass::QueryFlags* flags, uint* id)
 {
-    Q_UNUSED(data)
     // no need to modify flags since both read and write are handled
     if (name == s_length) {
         return true;
@@ -53,7 +52,6 @@ bool ArrayScriptClass::queryAdditionalProperty(const DataInformation* data, cons
 bool ArrayScriptClass::additionalPropertyFlags(const DataInformation* data, const QScriptString& name, uint id, QScriptValue::PropertyFlags* flags)
 {
     Q_UNUSED(data)
-    Q_UNUSED(name)
     if (name == s_childType) {
         return true; // undeleteable is on by default
     }

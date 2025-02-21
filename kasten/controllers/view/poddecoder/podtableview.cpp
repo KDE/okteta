@@ -199,7 +199,7 @@ void PODTableView::selectBytesInView()
 void PODTableView::copyToClipboard()
 {
     auto* action = static_cast<QAction*>(sender());
-    const QModelIndex index = action->data().value<QModelIndex>();
+    const QModelIndex index = action->data().toModelIndex();
 
     QMimeData* mimeData = mPODTableView->model()->mimeData({index});
 
