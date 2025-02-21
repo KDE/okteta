@@ -182,7 +182,7 @@ Answer PODTableView::query(int newValueSize, int oldValueSize, int sizeLeft)
 void PODTableView::editData()
 {
     auto* action = static_cast<QAction*>(sender());
-    const QModelIndex index = action->data().value<QModelIndex>();
+    const QModelIndex index = action->data().toModelIndex();
 
     mPODTableView->setCurrentIndex(index);
     mPODTableView->edit(index);

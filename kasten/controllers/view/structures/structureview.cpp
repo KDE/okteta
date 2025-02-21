@@ -286,7 +286,7 @@ void StructureView::onLockButtonToggled(bool structureLocked)
 void StructureView::editData()
 {
     auto* action = static_cast<QAction*>(sender());
-    const QModelIndex index = action->data().value<QModelIndex>();
+    const QModelIndex index = action->data().toModelIndex();
 
     mStructTreeView->setCurrentIndex(index);
     mStructTreeView->edit(index);
