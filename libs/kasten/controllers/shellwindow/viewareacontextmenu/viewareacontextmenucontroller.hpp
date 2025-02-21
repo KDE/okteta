@@ -37,7 +37,7 @@ public: // AbstractXmlGuiController API
     void setTargetModel(AbstractModel* model) override;
 
 private Q_SLOTS: // slots
-    void showContextMenu(AbstractGroupedViews* viewArea, AbstractView* view, QPoint pos);
+    void showContextMenu(Kasten::AbstractGroupedViews* viewArea, Kasten::AbstractView* view, QPoint pos);
 
     void reload();
     void close();
