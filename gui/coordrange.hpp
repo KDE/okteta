@@ -45,7 +45,7 @@ public:
     CoordRange(const LinePositionRange& posRange, const LineRange& lineRange);
     CoordRange(const CoordRange& other);
     CoordRange();
-    ~CoordRange();
+    ~CoordRange() = default; // trivial
 
 public:
     CoordRange& operator=(const CoordRange& other);
@@ -83,8 +83,6 @@ inline CoordRange::CoordRange(const LinePositionRange& posRange, const LineRange
 {}
 inline CoordRange::CoordRange(const CoordRange& other) = default;
 inline CoordRange::CoordRange() = default;
-
-inline CoordRange::~CoordRange() = default;
 
 inline CoordRange& CoordRange::operator=(const CoordRange& other) = default;
 
