@@ -38,7 +38,7 @@ public:
      * @param endIndex end index
      */
     NumberRange(N startIndex, N endIndex);
-    NumberRange(const NumberRange& other);
+    NumberRange(const NumberRange& other) = default; // trivial
     NumberRange();
 
     ~NumberRange() = default; // trivial
@@ -124,8 +124,6 @@ public:
 
 template <typename N, typename S>
 NumberRange<N, S>::NumberRange(N startIndex, N endIndex) : Range<N>(startIndex, endIndex) {}
-template <typename N, typename S>
-NumberRange<N, S>::NumberRange(const NumberRange& other) : Range<N>(other.start(), other.end()) {}
 template <typename N, typename S>
 NumberRange<N, S>::NumberRange() = default;
 

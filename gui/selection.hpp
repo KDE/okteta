@@ -32,7 +32,7 @@ public:
      * @param index index in front of which the selection begins
      */
     explicit Selection(Address index);
-    Selection(const Selection& other);
+    Selection(const Selection& other) = default; // trivial
     /** creates an invalid selection */
     Selection();
 
@@ -122,7 +122,6 @@ private:
 };
 
 inline Selection::Selection() = default;
-inline Selection::Selection(const Selection& other) = default;
 inline Selection::Selection(Address index) : mAnchor(index)  {}
 
 inline Selection& Selection::operator=(const Selection& other) = default;

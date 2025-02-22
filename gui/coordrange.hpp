@@ -43,7 +43,7 @@ public:
      * @param lineRange start and end line
      */
     CoordRange(const LinePositionRange& posRange, const LineRange& lineRange);
-    CoordRange(const CoordRange& other);
+    CoordRange(const CoordRange& other) = default; // trivial
     CoordRange();
     ~CoordRange() = default; // trivial
 
@@ -81,7 +81,6 @@ inline CoordRange::CoordRange(Coord start, Coord end) : BaseCoordRange(start, en
 inline CoordRange::CoordRange(const LinePositionRange& posRange, const LineRange& lineRange)
     : BaseCoordRange(Coord(posRange.start(), lineRange.start()), Coord(posRange.end(), lineRange.end()))
 {}
-inline CoordRange::CoordRange(const CoordRange& other) = default;
 inline CoordRange::CoordRange() = default;
 
 inline CoordRange& CoordRange::operator=(const CoordRange& other) = default;
