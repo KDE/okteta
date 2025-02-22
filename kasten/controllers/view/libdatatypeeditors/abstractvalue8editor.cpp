@@ -40,7 +40,7 @@ QString AbstractValue8Editor::textFromValue(int value) const
 int AbstractValue8Editor::valueFromText(const QString& text) const
 {
     Okteta::Byte byte;
-    mValueCodec->decode(&byte, text);
+    std::ignore = mValueCodec->decode(&byte, text);
 
     return byte;
 }
