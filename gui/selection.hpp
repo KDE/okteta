@@ -36,7 +36,7 @@ public:
     /** creates an invalid selection */
     Selection();
 
-    ~Selection();
+    ~Selection() = default;
 
 public:
     Selection& operator=(const Selection& other);
@@ -124,7 +124,6 @@ private:
 inline Selection::Selection() = default;
 inline Selection::Selection(const Selection& other) = default;
 inline Selection::Selection(Address index) : mAnchor(index)  {}
-inline Selection::~Selection() = default;
 
 inline Selection& Selection::operator=(const Selection& other) = default;
 

@@ -32,7 +32,7 @@ public:
     Piece();
     Piece(const Piece&);
 
-    ~Piece();
+    ~Piece() = default;
 
     Piece& operator=(const Piece&) = default;
 
@@ -73,7 +73,6 @@ inline Piece::Piece(const AddressRange& storageRange, int storageId)
 {}
 inline Piece::Piece() = default;
 inline Piece::Piece(const Piece&) = default;
-inline Piece::~Piece() = default;
 
 inline int Piece::storageId() const { return mStorageId; }
 
