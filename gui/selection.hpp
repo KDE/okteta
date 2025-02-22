@@ -39,7 +39,7 @@ public:
     ~Selection() = default; // trivial
 
 public:
-    Selection& operator=(const Selection& other);
+    Selection& operator=(const Selection& other) = default; // trivial
     Selection& operator=(const AddressRange& range);
 
     [[nodiscard]]
@@ -123,8 +123,6 @@ private:
 
 inline Selection::Selection() = default;
 inline Selection::Selection(Address index) : mAnchor(index)  {}
-
-inline Selection& Selection::operator=(const Selection& other) = default;
 
 inline Selection& Selection::operator=(const AddressRange& range)
 {

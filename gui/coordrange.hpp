@@ -48,7 +48,7 @@ public:
     ~CoordRange() = default; // trivial
 
 public:
-    CoordRange& operator=(const CoordRange& other);
+    CoordRange& operator=(const CoordRange& other) = default; // trivial
 
 public:
     [[nodiscard]]
@@ -82,8 +82,6 @@ inline CoordRange::CoordRange(const LinePositionRange& posRange, const LineRange
     : BaseCoordRange(Coord(posRange.start(), lineRange.start()), Coord(posRange.end(), lineRange.end()))
 {}
 inline CoordRange::CoordRange() = default;
-
-inline CoordRange& CoordRange::operator=(const CoordRange& other) = default;
 
 inline bool CoordRange::operator==(const CoordRange& other) const { return BaseCoordRange::operator==(other); }
 

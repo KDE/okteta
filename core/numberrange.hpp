@@ -45,7 +45,7 @@ public:
 
 
 public:
-    NumberRange& operator=(const NumberRange& other);
+    NumberRange& operator=(const NumberRange& other) = default; // trivial
 
 public:
     void setByWidth(N other, S width);
@@ -133,9 +133,6 @@ template <typename N, typename S>
 inline NumberRange<N, S> NumberRange<N, S>::fromWidth(N startIndex, S width) { return NumberRange(startIndex, startIndex + width - 1); }
 template <typename N, typename S>
 inline NumberRange<N, S> NumberRange<N, S>::fromWidth(S width) { return NumberRange<N, S>(0, width - 1); }
-
-template <typename N, typename S>
-inline NumberRange<N, S>& NumberRange<N, S>::operator=(const NumberRange<N, S>& other) { Range<N>::operator=(other); return *this; }
 
 template <typename N, typename S>
 inline S NumberRange<N, S>::width()       const { return Range<N>::isValid() ? Range<N>::end() - Range<N>::start() + 1 : 0; }
