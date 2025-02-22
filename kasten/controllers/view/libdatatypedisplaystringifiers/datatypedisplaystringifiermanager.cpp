@@ -37,6 +37,7 @@ namespace Okteta {
 class Binary8DisplayStringifier : public AbstractDataTypeDisplayStringifier
 {
 public:
+    [[nodiscard]]
     QString displayText(const QVariant& data, const QLocale& locale, bool asHex) const override
     {
         Q_UNUSED(locale)
@@ -50,6 +51,7 @@ public:
 class Octal8DisplayStringifier : public AbstractDataTypeDisplayStringifier
 {
 public:
+    [[nodiscard]]
     QString displayText(const QVariant& data, const QLocale& locale, bool asHex) const override
     {
         Q_UNUSED(locale)
@@ -63,6 +65,7 @@ public:
 class Hexadecimal8DisplayStringifier : public AbstractDataTypeDisplayStringifier
 {
 public:
+    [[nodiscard]]
     QString displayText(const QVariant& data, const QLocale& locale, bool asHex) const override
     {
         Q_UNUSED(locale)
@@ -76,6 +79,7 @@ public:
 class SInt8DisplayStringifier : public AbstractDataTypeDisplayStringifier
 {
 public:
+    [[nodiscard]]
     QString displayText(const QVariant& data, const QLocale& locale, bool asHex) const override
     {
         Q_UNUSED(asHex)
@@ -88,6 +92,7 @@ public:
 class SInt16DisplayStringifier : public AbstractDataTypeDisplayStringifier
 {
 public:
+    [[nodiscard]]
     QString displayText(const QVariant& data, const QLocale& locale, bool asHex) const override
     {
         Q_UNUSED(asHex)
@@ -100,6 +105,7 @@ public:
 class SInt32DisplayStringifier : public AbstractDataTypeDisplayStringifier
 {
 public:
+    [[nodiscard]]
     QString displayText(const QVariant& data, const QLocale& locale, bool asHex) const override
     {
         Q_UNUSED(asHex)
@@ -112,6 +118,7 @@ public:
 class SInt64DisplayStringifier : public AbstractDataTypeDisplayStringifier
 {
 public:
+    [[nodiscard]]
     QString displayText(const QVariant& data, const QLocale& locale, bool asHex) const override
     {
         Q_UNUSED(asHex)
@@ -124,6 +131,7 @@ public:
 class UInt8DisplayStringifier : public AbstractDataTypeDisplayStringifier
 {
 public:
+    [[nodiscard]]
     QString displayText(const QVariant& data, const QLocale& locale, bool asHex) const override
     {
         const Okteta::UInt8 uInt8 = data.value<Okteta::UInt8>();
@@ -134,6 +142,7 @@ public:
 class UInt16DisplayStringifier : public AbstractDataTypeDisplayStringifier
 {
 public:
+    [[nodiscard]]
     QString displayText(const QVariant& data, const QLocale& locale, bool asHex) const override
     {
         const Okteta::UInt16 uInt16 = data.value<Okteta::UInt16>();
@@ -144,6 +153,7 @@ public:
 class UInt32DisplayStringifier : public AbstractDataTypeDisplayStringifier
 {
 public:
+    [[nodiscard]]
     QString displayText(const QVariant& data, const QLocale& locale, bool asHex) const override
     {
         const Okteta::UInt32 uInt32 = data.value<Okteta::UInt32>();
@@ -154,6 +164,7 @@ public:
 class UInt64DisplayStringifier : public AbstractDataTypeDisplayStringifier
 {
 public:
+    [[nodiscard]]
     QString displayText(const QVariant& data, const QLocale& locale, bool asHex) const override
     {
         const Okteta::UInt64 uInt64 = data.value<Okteta::UInt64>();
@@ -164,6 +175,7 @@ public:
 class Float32DisplayStringifier : public AbstractDataTypeDisplayStringifier
 {
 public:
+    [[nodiscard]]
     QString displayText(const QVariant& data, const QLocale& locale, bool asHex) const override
     {
         Q_UNUSED(asHex)
@@ -176,6 +188,7 @@ public:
 class Float64DisplayStringifier : public AbstractDataTypeDisplayStringifier
 {
 public:
+    [[nodiscard]]
     QString displayText(const QVariant& data, const QLocale& locale, bool asHex) const override
     {
         Q_UNUSED(asHex)
@@ -188,6 +201,7 @@ public:
 class Char8DisplayStringifier : public AbstractDataTypeDisplayStringifier
 {
 public:
+    [[nodiscard]]
     QString displayText(const QVariant& data, const QLocale& locale, bool asHex) const override
     {
         Q_UNUSED(locale)
@@ -201,6 +215,7 @@ public:
 class Utf8DisplayStringifier : public AbstractDataTypeDisplayStringifier
 {
 public:
+    [[nodiscard]]
     QString displayText(const QVariant& data, const QLocale& locale, bool asHex) const override
     {
         Q_UNUSED(locale)
@@ -214,6 +229,7 @@ public:
 class Utf16DisplayStringifier : public AbstractDataTypeDisplayStringifier
 {
 public:
+    [[nodiscard]]
     QString displayText(const QVariant& data, const QLocale& locale, bool asHex) const override
     {
         Q_UNUSED(locale)
