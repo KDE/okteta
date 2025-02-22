@@ -17,7 +17,9 @@ public:
     explicit AbstractByteArrayFilterPrivate(const QString& name, const QString& id);
 
 public:
+    [[nodiscard]]
     const QString& name() const;
+    [[nodiscard]]
     const QString& id() const;
 
 private:
