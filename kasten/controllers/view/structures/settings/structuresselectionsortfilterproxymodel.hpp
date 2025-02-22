@@ -17,6 +17,8 @@
 
 class StructuresSelectionSortFilterProxyModel : public KCategorizedSortFilterProxyModel
 {
+    Q_OBJECT
+
 public:
     explicit StructuresSelectionSortFilterProxyModel(QObject* parent);
     ~StructuresSelectionSortFilterProxyModel() override;
