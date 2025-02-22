@@ -34,6 +34,7 @@ public:
     OktetaProgram& operator=(const OktetaProgram&) = delete;
 
 public:
+    [[nodiscard]]
     int execute();
     void quit();
 
