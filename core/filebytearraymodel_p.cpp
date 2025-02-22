@@ -40,7 +40,7 @@ Byte FileByteArrayModelPrivate::byte(Address offset) const
 
     // load the page
     unsigned int pageIndex = offset / mPageSize;
-    ensurePageLoaded(pageIndex);
+    std::ignore = ensurePageLoaded(pageIndex);
 
     return mActualPage[offset - mOffsetOfActualPage];
 }
