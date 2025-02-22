@@ -60,6 +60,7 @@ struct UumapEncodeData
     const char* paddingData[2];
     bool hasLength;
 
+    [[nodiscard]]
     inline const char* padding(ByteArrayUuencodingStreamEncoder::InputByteIndex index) const
     {
         return paddingData[static_cast<int>(index) - 1];

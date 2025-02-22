@@ -172,7 +172,9 @@ public:
 
 public: // overwrite
     void setOverwriteMode(bool overwriteMode);
+    [[nodiscard]]
     bool isOverwriteMode() const;
+    [[nodiscard]]
     bool isOverwriteOnly() const;
 Q_SIGNALS:
     void overwriteModeChanged(bool overwriteMode);
