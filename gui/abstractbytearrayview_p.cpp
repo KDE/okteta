@@ -68,10 +68,13 @@ public:
     ~NullModel() override;
 
 public: // data access API
+    [[nodiscard]]
     Byte byte(Address offset) const override;
+    [[nodiscard]]
     Size size() const override;
 
 public: // state read API
+    [[nodiscard]]
     bool isModified() const override;
 
 public: // modification API
