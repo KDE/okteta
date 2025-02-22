@@ -43,7 +43,7 @@ public:
     /** creates a coord with 0,0 */
     Coord() = default;
     constexpr Coord(LinePosition pos, Line line);
-    Coord(const Coord& other) = default;
+    Coord(const Coord& other) = default; // trivial
     Coord& operator=(const Coord& other) = default;
 
     ~Coord() = default; // trivial
