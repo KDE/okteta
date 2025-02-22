@@ -84,7 +84,9 @@ public:
     NumberRange splitAt(N index);
     [[nodiscard]]
     NumberRange splitAtLocal(N index);
+    [[nodiscard]]
     NumberRange remove(const NumberRange& removeRange);
+    [[nodiscard]]
     NumberRange removeLocal(const NumberRange& removeRange);
 
     [[nodiscard]]
