@@ -36,7 +36,7 @@ public:
     /** creates an invalid selection */
     Selection();
 
-    ~Selection() = default;
+    ~Selection() = default; // trivial
 
 public:
     Selection& operator=(const Selection& other);

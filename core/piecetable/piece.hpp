@@ -32,7 +32,7 @@ public:
     Piece();
     Piece(const Piece&);
 
-    ~Piece() = default;
+    ~Piece() = default; // trivial
 
     Piece& operator=(const Piece&) = default;
 
