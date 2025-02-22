@@ -84,8 +84,8 @@ void CropController::crop()
     auto* changesDescribable = qobject_cast<Okteta::ChangesDescribable*>(m_byteArrayModel);
 
     const Okteta::AddressRange keptSection = m_byteArrayView->selection();
-    const Okteta::AddressRange beginSection(0, m_byteArrayView->selection().nextBeforeStart());
-    const Okteta::AddressRange endSection(m_byteArrayView->selection().nextBehindEnd(), m_byteArrayModel->size() - 1);
+    const Okteta::AddressRange beginSection(0, keptSection.nextBeforeStart());
+    const Okteta::AddressRange endSection(keptSection.nextBehindEnd(), m_byteArrayModel->size() - 1);
 
     if (changesDescribable) {
         const QString changeDescription = i18nc("@item name of the change", "Crop");
