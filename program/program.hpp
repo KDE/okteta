@@ -38,10 +38,15 @@ public:
     void quit();
 
 public:
+    [[nodiscard]]
     UserMessagesHandler* userMessagesHandler() const;
+    [[nodiscard]]
     DocumentManager* documentManager() const;
+    [[nodiscard]]
     ViewManager* viewManager() const;
+    [[nodiscard]]
     MultiDocumentStrategy* documentStrategy() const;
+    [[nodiscard]]
     ByteArrayViewProfileManager* byteArrayViewProfileManager() const;
 
 private:
