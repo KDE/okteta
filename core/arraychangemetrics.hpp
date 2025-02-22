@@ -50,7 +50,7 @@ public:
 
     ~ArrayChangeMetrics() = default; // trivial
 
-    ArrayChangeMetrics& operator=(const ArrayChangeMetrics&) = default;
+    ArrayChangeMetrics& operator=(const ArrayChangeMetrics&) = default; // trivial
 
 public:
     constexpr bool operator==(const ArrayChangeMetrics& other) const;

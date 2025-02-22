@@ -34,7 +34,7 @@ public:
 
     ~Piece() = default; // trivial
 
-    Piece& operator=(const Piece&) = default;
+    Piece& operator=(const Piece&) = default; // trivial
 
 public:
     int storageId() const;

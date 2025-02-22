@@ -42,7 +42,7 @@ public:
     Coord() = default;
     constexpr Coord(LinePosition pos, Line line);
     Coord(const Coord& other) = default; // trivial
-    Coord& operator=(const Coord& other) = default;
+    Coord& operator=(const Coord& other) = default; // trivial
 
     ~Coord() = default; // trivial
 
