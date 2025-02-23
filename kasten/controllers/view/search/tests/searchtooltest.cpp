@@ -428,8 +428,6 @@ void SearchToolTest::testSearch()
         view->setCursorPosition(viewData.cursorPosition);
     }
 
-    const Okteta::AddressRange beforeMatch = view->selection();
-
     tool->search(direction, true, false);
 
     const Okteta::AddressRange match = view->selection();

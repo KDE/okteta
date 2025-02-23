@@ -47,12 +47,12 @@ public:
 
 public:
     ArrayChangeMetrics() = default;
-    ArrayChangeMetrics(const ArrayChangeMetrics&) = default;
+    ArrayChangeMetrics(const ArrayChangeMetrics&) = default; // trivial
     constexpr ArrayChangeMetrics(Type type, Address offset, qint32 secondArgument, qint32 thirdArgument);
 
-    ~ArrayChangeMetrics() = default;
+    ~ArrayChangeMetrics() = default; // trivial
 
-    ArrayChangeMetrics& operator=(const ArrayChangeMetrics&) = default;
+    ArrayChangeMetrics& operator=(const ArrayChangeMetrics&) = default; // trivial
 
 public:
     [[nodiscard]]
