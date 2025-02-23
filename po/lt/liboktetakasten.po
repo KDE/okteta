@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-20 01:55+0000\n"
+"POT-Creation-Date: 2025-02-23 01:52+0000\n"
 "PO-Revision-Date: 2017-06-25 15:12+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -2492,25 +2492,25 @@ msgctxt "@title:window"
 msgid "Structures"
 msgstr "Struktūros"
 
-#: controllers/view/structures/structurestool.cpp:199
+#: controllers/view/structures/structurestool.cpp:198
 #, kde-format
 msgctxt "name of a data structure"
 msgid "Name"
 msgstr "Pavadinimas"
 
-#: controllers/view/structures/structurestool.cpp:201
+#: controllers/view/structures/structurestool.cpp:200
 #, kde-format
 msgctxt "type of a data structure"
 msgid "Type"
 msgstr "Tipas"
 
-#: controllers/view/structures/structurestool.cpp:203
+#: controllers/view/structures/structurestool.cpp:202
 #, kde-format
 msgctxt "value of a data structure (primitive type)"
 msgid "Value"
 msgstr "Reikšmė"
 
-#: controllers/view/structures/structurestool.cpp:205
+#: controllers/view/structures/structurestool.cpp:204
 #, fuzzy, kde-format
 #| msgid "Size:"
 msgctxt "size of a data structure"
@@ -3509,7 +3509,7 @@ msgctxt "@item:inmenu address size"
 msgid "24-bit"
 msgstr "24-bitų"
 
-#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoder.cpp:108
+#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoder.cpp:109
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "Uuencoding"

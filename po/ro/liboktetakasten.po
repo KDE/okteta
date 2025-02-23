@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-20 01:55+0000\n"
+"POT-Creation-Date: 2025-02-23 01:52+0000\n"
 "PO-Revision-Date: 2012-12-22 11:55+0200\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -2648,13 +2648,13 @@ msgctxt "@title:window"
 msgid "Structures"
 msgstr ""
 
-#: controllers/view/structures/structurestool.cpp:199
+#: controllers/view/structures/structurestool.cpp:198
 #, kde-format
 msgctxt "name of a data structure"
 msgid "Name"
 msgstr ""
 
-#: controllers/view/structures/structurestool.cpp:201
+#: controllers/view/structures/structurestool.cpp:200
 #, fuzzy, kde-format
 #| msgctxt "@title:column name of the datatype"
 #| msgid "Type"
@@ -2662,7 +2662,7 @@ msgctxt "type of a data structure"
 msgid "Type"
 msgstr "Tip"
 
-#: controllers/view/structures/structurestool.cpp:203
+#: controllers/view/structures/structurestool.cpp:202
 #, fuzzy, kde-format
 #| msgctxt "@title:column value of the bytes for the datatype"
 #| msgid "Value"
@@ -2670,7 +2670,7 @@ msgctxt "value of a data structure (primitive type)"
 msgid "Value"
 msgstr "Valoare"
 
-#: controllers/view/structures/structurestool.cpp:205
+#: controllers/view/structures/structurestool.cpp:204
 #, fuzzy, kde-format
 #| msgid "Size:"
 msgctxt "size of a data structure"
@@ -3731,7 +3731,7 @@ msgctxt "@item:inmenu address size"
 msgid "24-bit"
 msgstr "1 octet"
 
-#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoder.cpp:108
+#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoder.cpp:109
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "Uuencoding"

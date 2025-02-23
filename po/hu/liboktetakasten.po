@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-20 01:55+0000\n"
+"POT-Creation-Date: 2025-02-23 01:52+0000\n"
 "PO-Revision-Date: 2014-09-08 14:28+0200\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -2567,25 +2567,25 @@ msgctxt "@title:window"
 msgid "Structures"
 msgstr "Struktúrák"
 
-#: controllers/view/structures/structurestool.cpp:199
+#: controllers/view/structures/structurestool.cpp:198
 #, kde-format
 msgctxt "name of a data structure"
 msgid "Name"
 msgstr "Név"
 
-#: controllers/view/structures/structurestool.cpp:201
+#: controllers/view/structures/structurestool.cpp:200
 #, kde-format
 msgctxt "type of a data structure"
 msgid "Type"
 msgstr "Típus"
 
-#: controllers/view/structures/structurestool.cpp:203
+#: controllers/view/structures/structurestool.cpp:202
 #, kde-format
 msgctxt "value of a data structure (primitive type)"
 msgid "Value"
 msgstr "Érték"
 
-#: controllers/view/structures/structurestool.cpp:205
+#: controllers/view/structures/structurestool.cpp:204
 #, fuzzy, kde-format
 #| msgid "Size:"
 msgctxt "size of a data structure"
@@ -3624,7 +3624,7 @@ msgctxt "@item:inmenu address size"
 msgid "24-bit"
 msgstr "24-bit"
 
-#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoder.cpp:108
+#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoder.cpp:109
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "Uuencoding"
