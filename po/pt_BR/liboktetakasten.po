@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-15 04:00+0000\n"
+"POT-Creation-Date: 2025-02-23 03:18+0000\n"
 "PO-Revision-Date: 2020-01-11 13:24-0300\n"
 "Last-Translator: André Marcelo Alvarenga <alvarenga@kde.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -2398,19 +2398,19 @@ msgctxt "@title:window"
 msgid "Structures"
 msgstr "Estruturas"
 
-#: controllers/view/structures/structurestool.cpp:193
+#: controllers/view/structures/structurestool.cpp:192
 #, kde-format
 msgctxt "name of a data structure"
 msgid "Name"
 msgstr "Nome"
 
-#: controllers/view/structures/structurestool.cpp:195
+#: controllers/view/structures/structurestool.cpp:194
 #, kde-format
 msgctxt "type of a data structure"
 msgid "Type"
 msgstr "Tipo"
 
-#: controllers/view/structures/structurestool.cpp:197
+#: controllers/view/structures/structurestool.cpp:196
 #, kde-format
 msgctxt "value of a data structure (primitive type)"
 msgid "Value"
