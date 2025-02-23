@@ -125,8 +125,7 @@ void StructuresTool::setByteOrder(int order)
 void StructuresTool::onContentsChange(const Okteta::ArrayChangeMetricsList& list)
 {
     qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "contents changed";
-    for (int i = 0; i < list.size(); ++i) {
-        const Okteta::ArrayChangeMetrics& acm = list.at(i);
+    for (const Okteta::ArrayChangeMetrics& acm : list) {
         qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "change: t=" << acm.type() << "o=" << acm.offset() << "a2=" << acm.removeLength() << "a3=" << acm.insertLength();
     }
 
@@ -251,10 +250,9 @@ void StructuresTool::setSelectedStructuresInView()
     emit dataCleared();
 
     QRegExp regex(QStringLiteral("'(.+)':'(.+)'"));
-    QStringList loadedStructs = StructureViewPreferences::loadedStructures();
+    const QStringList loadedStructs = StructureViewPreferences::loadedStructures();
     qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "loadedStructs " << loadedStructs;
-    for (int i = 0; i < loadedStructs.size(); ++i) {
-        const QString& s = loadedStructs.at(i);
+    for (const QString& s : loadedStructs) {
         int pos = regex.indexIn(s);
         if (pos > -1) {
             QString pluginName = regex.cap(1);
