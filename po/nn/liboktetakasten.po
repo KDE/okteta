@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-15 04:00+0000\n"
+"POT-Creation-Date: 2025-02-23 03:18+0000\n"
 "PO-Revision-Date: 2020-05-02 23:21+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -2376,19 +2376,19 @@ msgctxt "@title:window"
 msgid "Structures"
 msgstr "Strukturar"
 
-#: controllers/view/structures/structurestool.cpp:193
+#: controllers/view/structures/structurestool.cpp:192
 #, kde-format
 msgctxt "name of a data structure"
 msgid "Name"
 msgstr "Namn"
 
-#: controllers/view/structures/structurestool.cpp:195
+#: controllers/view/structures/structurestool.cpp:194
 #, kde-format
 msgctxt "type of a data structure"
 msgid "Type"
 msgstr "Type"
 
-#: controllers/view/structures/structurestool.cpp:197
+#: controllers/view/structures/structurestool.cpp:196
 #, kde-format
 msgctxt "value of a data structure (primitive type)"
 msgid "Value"
