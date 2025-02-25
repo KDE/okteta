@@ -27,7 +27,11 @@ public:
 
 public:
     ByteArrayUtf8StringDecoder();
+    ByteArrayUtf8StringDecoder(const ByteArrayUtf8StringDecoder&) = delete;
+
     ~ByteArrayUtf8StringDecoder() = default; // trivial
+
+    ByteArrayUtf8StringDecoder& operator=(const ByteArrayUtf8StringDecoder&) = delete;
 
 public:
     CodeState decode(QByteArray* result, const QString& string,
