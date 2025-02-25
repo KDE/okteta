@@ -10,38 +10,12 @@
 #define FRAMESPRINT_HEADERFOOTERFRAMERENDERER_HPP
 
 // lib
+#include "printinfo.hpp"
 #include "abstractframerenderer.hpp"
 // Qt
 #include <QStringList>
 #include <QFont>
 #include <QColor>
-#include <QUrl>
-
-class PrintInfo
-{
-public:
-    PrintInfo() = default;
-    PrintInfo(const PrintInfo&) = delete;
-
-    PrintInfo& operator=(const PrintInfo&) = delete;
-
-public:
-    QUrl url() const;
-    int noOfPages() const;
-
-public:
-    void setUrl(const QUrl& url);
-    void setNoOfPages(int noOfPages);
-
-private:
-    QUrl mUrl;
-    int mNoOfPages;
-};
-
-inline QUrl PrintInfo::url()      const { return mUrl; }
-inline int PrintInfo::noOfPages() const { return mNoOfPages; }
-inline void PrintInfo::setUrl(const QUrl& url) { mUrl = url; }
-inline void PrintInfo::setNoOfPages(int noOfPages) { mNoOfPages = noOfPages; }
 
 class HeaderFooterFrameRenderer : public AbstractFrameRenderer
 {

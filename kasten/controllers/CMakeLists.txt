@@ -495,6 +495,7 @@ oktetakastencontrollers_add_sublibrary(view/structures
 
 oktetakastencontrollers_add_sublibrary(${LIBFRAMESPRINT_REL_DIR}
     PRIVATE
+        PrintInfo
         AbstractFrameRenderer
         FramesToPaperPrinter
         HeaderFooterFrameRenderer
