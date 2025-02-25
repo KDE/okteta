@@ -27,8 +27,8 @@ namespace Kasten {
 
 static constexpr int ZoomSliderWidth = 150;
 
-static constexpr double DefaultZoomSliderZoomOutLevelsSize = 49;
-static constexpr double DefaultZoomSliderZoomInLevelsSize = 50;
+static constexpr int DefaultZoomSliderZoomOutLevelsSize = 49;
+static constexpr int DefaultZoomSliderZoomInLevelsSize = 50;
 
 // TODO: look at Dolphin/Krita/KOffice zoom tool
 

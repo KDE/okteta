@@ -23,8 +23,8 @@
 namespace Kasten {
 
 // same as ZoomSlider
-static constexpr double DefaultZoomControllerZoomOutLevelsSize = 49;
-static constexpr double DefaultZoomControllerZoomInLevelsSize = 50;
+static constexpr int DefaultZoomControllerZoomOutLevelsSize = 49;
+static constexpr int DefaultZoomControllerZoomInLevelsSize = 50;
 
 ZoomController::ZoomController(KXMLGUIClient* guiClient)
 {
