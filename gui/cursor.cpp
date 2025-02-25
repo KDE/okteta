@@ -10,10 +10,6 @@
 
 namespace Okteta {
 
-Cursor::Cursor() = default;
-
-Cursor::~Cursor() = default;
-
 void Cursor::setSize(PixelX Width, PixelY Height, qreal devicePixelRatio)
 {
     const int scaledWidth = Width * devicePixelRatio;

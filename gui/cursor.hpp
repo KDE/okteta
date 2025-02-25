@@ -51,6 +51,9 @@ private:
     PixelX ShapeW = -1;
 };
 
+inline Cursor::Cursor() = default;
+inline Cursor::~Cursor() = default;
+
 inline QPixmap& Cursor::onPixmap()  { return OnPixmap; }
 inline QPixmap& Cursor::offPixmap() { return OffPixmap; }
 
