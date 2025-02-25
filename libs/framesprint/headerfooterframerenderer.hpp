@@ -17,6 +17,8 @@
 #include <QFont>
 #include <QColor>
 
+namespace FramesPrint {
+
 class HeaderFooterFrameRenderer : public AbstractFrameRenderer
 {
 public:
@@ -72,5 +74,7 @@ private:
     QStringList mOriginalTextList = {QString(), QString(), QString()};
     QStringList mGloballyReplacedTextList;
 };
+
+}
 
 #endif

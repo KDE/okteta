@@ -17,6 +17,8 @@
 #include <QPainter>
 #include <QFontMetrics>
 
+namespace FramesPrint {
+
 HeaderFooterFrameRenderer::HeaderFooterFrameRenderer(const PrintInfo* info)
     : mInfo(info)
 {
@@ -144,4 +146,6 @@ void HeaderFooterFrameRenderer::renderFrame(QPainter* painter, int frameIndex)
 //         painter->drawRect( 0, 0, pdmWidth, pdmHeight);
 //             paint.drawLine(0, headerHeight, headerWidth, headerHeight);
     }
+}
+
 }

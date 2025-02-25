@@ -14,7 +14,9 @@
 // Qt
 #include <QObject>
 
+namespace FramesPrint {
 class FramesToPaperPrinter;
+}
 
 class QPrinter;
 
@@ -25,7 +27,7 @@ class PrintJob : public QObject // not yet: KJob
     Q_OBJECT
 
 public:
-    PrintJob(FramesToPaperPrinter* framesPrinter, int firstPage, int lastPage, QPrinter* printer);
+    PrintJob(FramesPrint::FramesToPaperPrinter* framesPrinter, int firstPage, int lastPage, QPrinter* printer);
 
 public: // KJob API
 //     virtual void start();
@@ -39,14 +41,14 @@ private Q_SLOTS:
 
 private:
 //     PrintThread *mPrintThread;
-    FramesToPaperPrinter* mFramesPrinter;
+    FramesPrint::FramesToPaperPrinter* mFramesPrinter;
     const int mFirstPage;
     const int mLastPage;
 
     QPrinter* mPrinter;
 };
 
-inline PrintJob::PrintJob(FramesToPaperPrinter* framesPrinter, int firstPage, int lastPage, QPrinter* printer)
+inline PrintJob::PrintJob(FramesPrint::FramesToPaperPrinter* framesPrinter, int firstPage, int lastPage, QPrinter* printer)
     : mFramesPrinter(framesPrinter)
     , mFirstPage(firstPage)
     , mLastPage(lastPage)

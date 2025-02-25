@@ -12,6 +12,8 @@
 // Qt
 #include <QUrl>
 
+namespace FramesPrint {
+
 class PrintInfo
 {
 public:
@@ -39,5 +41,7 @@ inline QUrl PrintInfo::url()      const { return mUrl; }
 inline int PrintInfo::noOfPages() const { return mNoOfPages; }
 inline void PrintInfo::setUrl(const QUrl& url) { mUrl = url; }
 inline void PrintInfo::setNoOfPages(int noOfPages) { mNoOfPages = noOfPages; }
+
+}
 
 #endif

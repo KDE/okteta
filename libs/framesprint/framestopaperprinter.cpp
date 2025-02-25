@@ -14,6 +14,8 @@
 #include <QPainter>
 #include <QPrinter>
 
+namespace FramesPrint {
+
 FramesToPaperPrinter::FramesToPaperPrinter() = default;
 
 FramesToPaperPrinter::~FramesToPaperPrinter()
@@ -63,6 +65,8 @@ bool FramesToPaperPrinter::print(QPrinter* printer, int firstPageIndex, int last
     }
 
     return success;
+}
+
 }
 
 #include "moc_framestopaperprinter.cpp"

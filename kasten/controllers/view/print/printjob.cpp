@@ -34,7 +34,7 @@ void PrintJob::start()
 
 bool PrintJob::exec()
 {
-    connect(mFramesPrinter, &FramesToPaperPrinter::printedPage, this, &PrintJob::onPagePrinted);
+    connect(mFramesPrinter, &FramesPrint::FramesToPaperPrinter::printedPage, this, &PrintJob::onPagePrinted);
 
     const bool result = mFramesPrinter->print(mPrinter, mFirstPage, mLastPage);
 

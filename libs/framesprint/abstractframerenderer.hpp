@@ -16,6 +16,8 @@ class QPoint;
 class QRect;
 class QPainter;
 
+namespace FramesPrint {
+
 // frame only horizontal duplicated or also vertical?
 class AbstractFrameRenderer
 {
@@ -55,5 +57,7 @@ public:
 private:
     QScopedPointer<class AbstractFrameRendererPrivate> const d;
 };
+
+}
 
 #endif
