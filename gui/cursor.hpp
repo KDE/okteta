@@ -25,7 +25,7 @@ public:
     Cursor();
     Cursor(const Cursor&) = delete;
 
-    virtual ~Cursor();
+    ~Cursor();
 
     Cursor& operator=(const Cursor&) = delete;
 
