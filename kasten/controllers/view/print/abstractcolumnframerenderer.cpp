@@ -19,7 +19,11 @@ class AbstractColumnFrameRendererPrivate
 {
 public:
     AbstractColumnFrameRendererPrivate();
+    AbstractColumnFrameRendererPrivate(const AbstractColumnFrameRendererPrivate&) = delete;
+
     ~AbstractColumnFrameRendererPrivate();
+
+    AbstractColumnFrameRendererPrivate& operator=(const AbstractColumnFrameRendererPrivate&) = delete;
 
 public:
     void updateWidths();
