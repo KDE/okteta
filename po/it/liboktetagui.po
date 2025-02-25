@@ -1,14 +1,14 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the okteta package.
 # Federico Zenith <federico.zenith@member.fsf.org>, 2010.
-# Luigi Toscano <luigi.toscano@tiscali.it>, 2019.
+# SPDX-FileCopyrightText: 2019, 2025 Luigi Toscano <luigi.toscano@tiscali.it>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: liboktetagui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-14 02:06+0000\n"
-"PO-Revision-Date: 2019-03-01 23:27+0100\n"
+"PO-Revision-Date: 2025-02-14 13:40+0100\n"
 "Last-Translator: Luigi Toscano <luigi.toscano@tiscali.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Lokalize 25.03.70\n"
 
 #: controller/clipboardcontroller.cpp:55
 #, kde-format
@@ -55,17 +55,13 @@ msgid "Re&do"
 msgstr "Ri&fai"
 
 #: controller/valueeditor.cpp:158
-#, fuzzy, kde-format
-#| msgctxt "name of the change"
-#| msgid "Insert"
+#, kde-format
 msgctxt "@item name of the change"
 msgid "Insert"
 msgstr "Inserisci"
 
 #: controller/valueeditor.cpp:200
-#, fuzzy, kde-format
-#| msgctxt "name of the change"
-#| msgid "Replace"
+#, kde-format
 msgctxt "@item name of the change"
 msgid "Replace"
 msgstr "Sostituisci"
