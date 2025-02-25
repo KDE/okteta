@@ -86,7 +86,7 @@ void ByteTableTool::setTargetModel(AbstractModel* model)
 
 void ByteTableTool::insert(unsigned char byte, int count)
 {
-    const QByteArray data(count, byte);
+    const QByteArray data(count, static_cast<char>(byte));
 
     auto* changesDescribable = qobject_cast<Okteta::ChangesDescribable*>(mByteArrayModel);
 

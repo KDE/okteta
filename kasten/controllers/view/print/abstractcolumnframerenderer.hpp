@@ -27,7 +27,7 @@ class AbstractColumnRenderer;
  * @author Friedrich W. H. Kossebau
  */
 
-class AbstractColumnFrameRenderer : public AbstractFrameRenderer
+class AbstractColumnFrameRenderer : public FramesPrint::AbstractFrameRenderer
 {
 public:
     AbstractColumnFrameRenderer();

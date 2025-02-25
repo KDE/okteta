@@ -10,6 +10,7 @@ target_link_libraries(framesprint
 
 okteta_add_sublibrary(framesprint
     PRIVATE
+        PrintInfo
         AbstractFrameRenderer
         FramesToPaperPrinter
         HeaderFooterFrameRenderer

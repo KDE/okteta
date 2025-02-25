@@ -172,9 +172,9 @@ protected: // API to be redefined
 
 protected:
     void renderPlain(QPainter* painter, const LinePositionRange& linePositions, Address byteIndex);
-    void renderSelection(QPainter* painter, const LinePositionRange& linePositions, Address byteIndex, int flag);
-    void renderMarking(QPainter* painter, const LinePositionRange& linePositions, Address byteIndex, int flag);
-    void renderRange(QPainter* painter, const QBrush& brush, const LinePositionRange& linePositions, int flag);
+    void renderSelection(QPainter* painter, const LinePositionRange& linePositions, Address byteIndex, unsigned int flag);
+    void renderMarking(QPainter* painter, const LinePositionRange& linePositions, Address byteIndex, unsigned int flag);
+    void renderRange(QPainter* painter, const QBrush& brush, const LinePositionRange& linePositions, unsigned int flag);
     void renderSelectionSpaceBehind(QPainter* painter, LinePosition linePosition);
     void renderSpaceBehind(QPainter* painter, const QBrush& brush, LinePosition linePosition);
     void renderBookmark(QPainter* painter, const QBrush& brush);

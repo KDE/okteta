@@ -17,6 +17,9 @@
 #include <vector>
 
 class QPrinter;
+
+namespace FramesPrint {
+
 class AbstractFrameRenderer;
 
 class FramesToPaperPrinter : public QObject
@@ -54,5 +57,7 @@ private:
     QRect mPageRect;
     QMargins mPageMargins;
 };
+
+}
 
 #endif

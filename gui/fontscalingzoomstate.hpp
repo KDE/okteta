@@ -22,7 +22,11 @@ private:
 
 public:
     FontScalingZoomState() = default;
+    FontScalingZoomState(const FontScalingZoomState&) = delete;
+
     ~FontScalingZoomState() = default;
+
+    FontScalingZoomState& operator=(const FontScalingZoomState&) = delete;
 
 public: // setters/actions
     void initFont(const QFont& font);

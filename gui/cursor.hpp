@@ -25,7 +25,7 @@ public:
     Cursor();
     Cursor(const Cursor&) = delete;
 
-    virtual ~Cursor();
+    ~Cursor();
 
     Cursor& operator=(const Cursor&) = delete;
 
@@ -55,6 +55,9 @@ private:
     PixelX ShapeX = -1;
     PixelX ShapeW = -1;
 };
+
+inline Cursor::Cursor() = default;
+inline Cursor::~Cursor() = default;
 
 inline QPixmap& Cursor::onPixmap()  { return OnPixmap; }
 inline QPixmap& Cursor::offPixmap() { return OffPixmap; }

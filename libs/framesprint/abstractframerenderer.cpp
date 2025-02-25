@@ -13,6 +13,8 @@
 #include <QSize>
 #include <QRect>
 
+namespace FramesPrint {
+
 class AbstractFrameRendererPrivate
 {
 public:
@@ -37,3 +39,4 @@ int AbstractFrameRenderer::y() const { return d->mY; }
 void AbstractFrameRenderer::setPos(int x, int y) { d->mX = x; d->mY = y; }
 void AbstractFrameRenderer::setPos(QPoint point) { d->mX = point.x(); d->mY = point.y(); }
 
+}

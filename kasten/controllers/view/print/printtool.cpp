@@ -322,7 +322,7 @@ bool PrintTool::doPrint(QPrinter* printer)
     const QString creator = QStringLiteral("Print Plugin for Okteta " OKTETA_VERSION);   // no i18n(), keep space at end as separator
     printer->setCreator(creator);
 
-    FramesToPaperPrinter framesPrinter;
+    FramesPrint::FramesToPaperPrinter framesPrinter;
     const QPageLayout pageLayout = printer->pageLayout();
     const int printerResolution = printer->resolution();
     framesPrinter.setPaperRect(pageLayout.fullRectPixels(printerResolution));
@@ -330,19 +330,19 @@ bool PrintTool::doPrint(QPrinter* printer)
     framesPrinter.setPageMargins(pageLayout.marginsPixels(printerResolution));
     printer->setFullPage(true);
 
-    PrintInfo info;
+    FramesPrint::PrintInfo info;
     const QRect pageRect = framesPrinter.contentsRect();
     const int left = pageRect.left();
     const int width = pageRect.width();
 
-    auto headerFrameRenderer = std::make_unique<HeaderFooterFrameRenderer>(&info);
+    auto headerFrameRenderer = std::make_unique<FramesPrint::HeaderFooterFrameRenderer>(&info);
     headerFrameRenderer->setTexts(QStringLiteral("%d"),
                                     QStringLiteral("%f"),
                                     i18nc("in the header of the printed page, e.g. Page 2 of 20", "Page %p of %P"));
     headerFrameRenderer->setWidth(width);
     headerFrameRenderer->setPos(pageRect.topLeft());
 
-    auto footerFrameRenderer = std::make_unique<HeaderFooterFrameRenderer>(&info);
+    auto footerFrameRenderer = std::make_unique<FramesPrint::HeaderFooterFrameRenderer>(&info);
     footerFrameRenderer->setTexts(i18nc("in the footer of the printed page, e.g. Printed by: Joe User",
                                         "Printed by: %U"),
                                     QString(),
