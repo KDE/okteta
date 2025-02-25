@@ -52,7 +52,7 @@ QByteArray Char8Codec::valueToBytes(const QVariant& value) const
         success = mCharCodec->encode(&byte, character);
     }
 
-    return success ? QByteArray(1, byte) : QByteArray();
+    return success ? QByteArray(1, static_cast<char>(byte)) : QByteArray();
 }
 
 bool Char8Codec::areEqual(const QVariant& value, QVariant& otherValue) const
