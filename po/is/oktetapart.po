@@ -1,19 +1,19 @@
 # translation of oktetapart.po to Icelandic
 #
-# Sveinn í Felli <sveinki@nett.is>, 2009, 2010.
+# SPDX-FileCopyrightText: 2009, 2010, 2025 Sveinn í Felli <sveinki@nett.is>
 msgid ""
 msgstr ""
 "Project-Id-Version: oktetapart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-30 01:51+0000\n"
-"PO-Revision-Date: 2010-05-31 12:30+0000\n"
-"Last-Translator: Sveinn í Felli <sveinki@nett.is>\n"
-"Language-Team: Icelandic <kde-isl@molar.is>\n"
+"PO-Revision-Date: 2025-02-25 09:21+0000\n"
+"Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
+"Language-Team: Icelandic\n"
 "Language: is\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Lokalize 23.08.5\n"
 "Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
 "\n"
 "\n"
@@ -24,35 +24,35 @@ msgstr ""
 #: oktetapartreadwriteui.rc:5
 #, kde-format
 msgid "&File"
-msgstr ""
+msgstr "&Skrá"
 
 #. i18n: ectx: Menu (edit)
 #: oktetapartbrowserui.rc:8 oktetapartreadonlyui.rc:10
 #: oktetapartreadwriteui.rc:16
 #, kde-format
 msgid "&Edit"
-msgstr ""
+msgstr "Br&eyta"
 
 #. i18n: ectx: Menu (view)
 #: oktetapartbrowserui.rc:21 oktetapartreadonlyui.rc:26
 #: oktetapartreadwriteui.rc:41
 #, kde-format
 msgid "&View"
-msgstr ""
+msgstr "S&koða"
 
 #. i18n: ectx: ToolBar (mainToolBar)
 #: oktetapartbrowserui.rc:43 oktetapartreadonlyui.rc:47
 #: oktetapartreadwriteui.rc:62
 #, kde-format
 msgid "Main Toolbar"
-msgstr "Aðaltækjaslá"
+msgstr "Aðalverkfærastika"
 
 #. i18n: ectx: Menu (permission)
 #: oktetapartreadwriteui.rc:11
 #, kde-format
 msgctxt "@title:menu"
 msgid "Permissions"
-msgstr "Heimildir"
+msgstr "Aðgangsheimildir"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"
