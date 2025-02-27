@@ -61,7 +61,7 @@ public:
     void prepareRendering(const PixelXRange& Xs);
 
 public:
-    void renderLinePositions(QPainter* painter, Line lineIndex, const LinePositionRange& linePositions);
+    void renderLinePositions(QPainter* painter, Line lineIndex, LinePositionRange linePositions);
     /** paints a cursor based on the type of the byte.
      * @param painter The QPainter
      * @param byteIndex Index of the byte to paint the cursor for. If -1 a space is used as char.
@@ -147,10 +147,10 @@ public: // functional logic
     LinePositionRange visibleLinePositions(PixelX x, PixelX width) const;
     /** returns the */
     [[nodiscard]]
-    PixelXRange xsOfLinePositionsInclSpaces(const LinePositionRange& linePositions) const;
+    PixelXRange xsOfLinePositionsInclSpaces(LinePositionRange linePositions) const;
     /** */
     [[nodiscard]]
-    PixelXRange columnXsOfLinePositionsInclSpaces(const LinePositionRange& linePositions) const;
+    PixelXRange columnXsOfLinePositionsInclSpaces(LinePositionRange linePositions) const;
 
     [[nodiscard]]
     QRect byteRect(Coord coord) const;

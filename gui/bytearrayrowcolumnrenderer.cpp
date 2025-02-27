@@ -333,14 +333,14 @@ PixelX ByteArrayRowColumnRenderer::columnRightXOfLinePosition(LinePosition lineP
     return d->columnRightXOfLinePosition(linePosition);
 }
 
-PixelXRange ByteArrayRowColumnRenderer::xsOfLinePositionsInclSpaces(const LinePositionRange& linePositions) const
+PixelXRange ByteArrayRowColumnRenderer::xsOfLinePositionsInclSpaces(LinePositionRange linePositions) const
 {
     Q_D(const ByteArrayRowColumnRenderer);
 
     return d->xsOfLinePositionsInclSpaces(linePositions);
 }
 
-PixelXRange ByteArrayRowColumnRenderer::columnXsOfLinePositionsInclSpaces(const LinePositionRange& linePositions) const
+PixelXRange ByteArrayRowColumnRenderer::columnXsOfLinePositionsInclSpaces(LinePositionRange linePositions) const
 {
     Q_D(const ByteArrayRowColumnRenderer);
 

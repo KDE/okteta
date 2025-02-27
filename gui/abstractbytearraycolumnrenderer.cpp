@@ -217,14 +217,14 @@ PixelX AbstractByteArrayColumnRenderer::columnRightXOfLinePosition(LinePosition 
     return d->columnRightXOfLinePosition(linePosition);
 }
 
-PixelXRange AbstractByteArrayColumnRenderer::xsOfLinePositionsInclSpaces(const LinePositionRange& linePositions) const
+PixelXRange AbstractByteArrayColumnRenderer::xsOfLinePositionsInclSpaces(LinePositionRange linePositions) const
 {
     Q_D(const AbstractByteArrayColumnRenderer);
 
     return d->xsOfLinePositionsInclSpaces(linePositions);
 }
 
-PixelXRange AbstractByteArrayColumnRenderer::columnXsOfLinePositionsInclSpaces(const LinePositionRange& linePositions) const
+PixelXRange AbstractByteArrayColumnRenderer::columnXsOfLinePositionsInclSpaces(LinePositionRange linePositions) const
 {
     Q_D(const AbstractByteArrayColumnRenderer);
 
@@ -259,7 +259,7 @@ void AbstractByteArrayColumnRenderer::renderNextLine(QPainter* painter)
     d->renderNextLine(painter);
 }
 
-void AbstractByteArrayColumnRenderer::renderLinePositions(QPainter* painter, Line lineIndex, const LinePositionRange& linePositions)
+void AbstractByteArrayColumnRenderer::renderLinePositions(QPainter* painter, Line lineIndex, LinePositionRange linePositions)
 {
     Q_D(AbstractByteArrayColumnRenderer);
 

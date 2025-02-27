@@ -177,10 +177,10 @@ public: // functional logic
     LinePositionRange visibleLinePositions(PixelX x, PixelX width) const;
     /** returns the */
     [[nodiscard]]
-    PixelXRange xsOfLinePositionsInclSpaces(const LinePositionRange& linePositions) const;
+    PixelXRange xsOfLinePositionsInclSpaces(LinePositionRange linePositions) const;
     /** */
     [[nodiscard]]
-    PixelXRange columnXsOfLinePositionsInclSpaces(const LinePositionRange& linePositions) const;
+    PixelXRange columnXsOfLinePositionsInclSpaces(LinePositionRange linePositions) const;
 
     [[nodiscard]]
     QRect byteRect(Coord coord) const;

@@ -306,7 +306,7 @@ PixelX AbstractByteArrayColumnRendererPrivate::columnRightXOfLinePosition(LinePo
     return mLinePosRightPixelX.empty() ? 0 : mLinePosRightPixelX[linePosition];
 }
 
-PixelXRange AbstractByteArrayColumnRendererPrivate::xsOfLinePositionsInclSpaces(const LinePositionRange& linePositions) const
+PixelXRange AbstractByteArrayColumnRendererPrivate::xsOfLinePositionsInclSpaces(LinePositionRange linePositions) const
 {
     const PixelX x = (linePositions.start() > 0) ? rightXOfLinePosition(linePositions.nextBeforeStart()) + 1 :
                      xOfLinePosition(linePositions.start());
@@ -315,7 +315,7 @@ PixelXRange AbstractByteArrayColumnRendererPrivate::xsOfLinePositionsInclSpaces(
     return PixelXRange(x, rightX);
 }
 
-PixelXRange AbstractByteArrayColumnRendererPrivate::columnXsOfLinePositionsInclSpaces(const LinePositionRange& linePositions) const
+PixelXRange AbstractByteArrayColumnRendererPrivate::columnXsOfLinePositionsInclSpaces(LinePositionRange linePositions) const
 {
     const PixelX x = (linePositions.start() > 0) ? columnRightXOfLinePosition(linePositions.nextBeforeStart()) + 1 :
                      columnXOfLinePosition(linePositions.start());
@@ -371,14 +371,14 @@ void AbstractByteArrayColumnRendererPrivate::renderNextLine(QPainter* painter)
     renderLinePositions(painter, mRenderLine++, mRenderLinePositions);
 }
 
-void AbstractByteArrayColumnRendererPrivate::renderLinePositions(QPainter* painter, Line lineIndex, const LinePositionRange& _linePositions)
+void AbstractByteArrayColumnRendererPrivate::renderLinePositions(QPainter* painter, Line lineIndex, LinePositionRange linePositions)
 {
     // clear background
     const unsigned int blankFlag =
-        (_linePositions.start() != 0 ? StartsBefore : 0) | (_linePositions.end() != mLastLinePos ? EndsLater : 0);
+        (linePositions.start() != 0 ? StartsBefore : 0) | (linePositions.end() != mLastLinePos ? EndsLater : 0);
     const QBrush& backgroundBrush = mStylist->palette().brush(QPalette::Base);
 
-    renderRange(painter, backgroundBrush, _linePositions, blankFlag);
+    renderRange(painter, backgroundBrush, linePositions, blankFlag);
 
     // no bytes to paint?
     if (!mLayout->hasContent(lineIndex)) {
@@ -389,7 +389,6 @@ void AbstractByteArrayColumnRendererPrivate::renderLinePositions(QPainter* paint
     // check for leading and trailing spaces
     const LinePositionRange existingLinePositions = mLayout->linePositions(lineIndex);
 
-    LinePositionRange linePositions = _linePositions;
     linePositions.restrictTo(existingLinePositions);
     const int firstLinePosition = linePositions.start();
 
@@ -486,7 +485,7 @@ void AbstractByteArrayColumnRendererPrivate::renderLinePositions(QPainter* paint
     }
 }
 
-void AbstractByteArrayColumnRendererPrivate::renderPlain(QPainter* painter, const LinePositionRange& linePositions, Address byteIndex)
+void AbstractByteArrayColumnRendererPrivate::renderPlain(QPainter* painter, LinePositionRange linePositions, Address byteIndex)
 {
     BookmarksConstIterator bit;
     Address nextBookmarkOffset = -1;
@@ -528,7 +527,7 @@ void AbstractByteArrayColumnRendererPrivate::renderPlain(QPainter* painter, cons
     }
 }
 
-void AbstractByteArrayColumnRendererPrivate::renderSelection(QPainter* painter, const LinePositionRange& linePositions, Address byteIndex, unsigned int flag)
+void AbstractByteArrayColumnRendererPrivate::renderSelection(QPainter* painter, LinePositionRange linePositions, Address byteIndex, unsigned int flag)
 {
     BookmarksConstIterator bit;
     Address nextBookmarkOffset = -1;
@@ -580,7 +579,7 @@ void AbstractByteArrayColumnRendererPrivate::renderSelectionSpaceBehind(QPainter
     renderSpaceBehind(painter, colorScheme.background(), linePosition);
 }
 
-void AbstractByteArrayColumnRendererPrivate::renderMarking(QPainter* painter, const LinePositionRange& linePositions, Address byteIndex, unsigned int flag)
+void AbstractByteArrayColumnRendererPrivate::renderMarking(QPainter* painter, LinePositionRange linePositions, Address byteIndex, unsigned int flag)
 {
     const QPalette& palette = mStylist->palette();
 
@@ -609,7 +608,7 @@ void AbstractByteArrayColumnRendererPrivate::renderBookmark(QPainter* painter, c
     painter->fillRect(1, 1, mByteWidth - 2, q->lineHeight() - 2, brush);
 }
 
-void AbstractByteArrayColumnRendererPrivate::renderRange(QPainter* painter, const QBrush& brush, const LinePositionRange& linePositions, unsigned int flag)
+void AbstractByteArrayColumnRendererPrivate::renderRange(QPainter* painter, const QBrush& brush, LinePositionRange linePositions, unsigned int flag)
 {
     Q_Q(AbstractByteArrayColumnRenderer);
 
