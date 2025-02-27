@@ -29,7 +29,7 @@ OffsetFormat::Format OffsetColumnRenderer::format() const
     return d->mFormat;
 }
 
-void OffsetColumnRenderer::renderFirstLine(QPainter* painter, const PixelXRange& Xs, Line firstLineIndex)
+void OffsetColumnRenderer::renderFirstLine(QPainter* painter, PixelXRange Xs, Line firstLineIndex)
 {
     Q_D(OffsetColumnRenderer);
 
@@ -43,14 +43,14 @@ void OffsetColumnRenderer::renderNextLine(QPainter* painter)
     d->renderNextLine(painter);
 }
 
-void OffsetColumnRenderer::renderColumn(QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys)
+void OffsetColumnRenderer::renderColumn(QPainter* painter, PixelXRange Xs, const PixelYRange& Ys)
 {
     Q_D(OffsetColumnRenderer);
 
     d->renderColumn(painter, Xs, Ys);
 }
 
-void OffsetColumnRenderer::renderEmptyColumn(QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys)
+void OffsetColumnRenderer::renderEmptyColumn(QPainter* painter, PixelXRange Xs, const PixelYRange& Ys)
 {
     Q_D(OffsetColumnRenderer);
 

@@ -33,10 +33,10 @@ public:
     ~OffsetColumnRenderer() override;
 
 public:    // AbstractColumnRenderer API
-    void renderFirstLine(QPainter* painter, const PixelXRange& Xs, Line firstLineIndex) override;
+    void renderFirstLine(QPainter* painter, PixelXRange Xs, Line firstLineIndex) override;
     void renderNextLine(QPainter* painter) override;
-    void renderColumn(QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys) override;
-    void renderEmptyColumn(QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys) override;
+    void renderColumn(QPainter* painter, PixelXRange Xs, const PixelYRange& Ys) override;
+    void renderEmptyColumn(QPainter* painter, PixelXRange Xs, const PixelYRange& Ys) override;
 
 public:
     void setFormat(OffsetFormat::Format format, const QFontMetrics& fontMetrics);

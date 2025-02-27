@@ -478,11 +478,10 @@ QRect ByteArrayRowColumnRendererPrivate::byteRect(Coord coord, AbstractByteArray
     return result;
 }
 
-void ByteArrayRowColumnRendererPrivate::prepareRendering(const PixelXRange& _Xs)
+void ByteArrayRowColumnRendererPrivate::prepareRendering(PixelXRange Xs)
 {
     Q_Q(ByteArrayRowColumnRenderer);
 
-    PixelXRange Xs(_Xs);
     q->restrictToXSpan(&Xs);
     // translate
     Xs.moveBy(-q->x());
@@ -495,7 +494,7 @@ void ByteArrayRowColumnRendererPrivate::prepareRendering(const PixelXRange& _Xs)
     mRenderLinePositions = linePositionsOfColumnXs(mRenderX, mRenderWidth);
 }
 
-void ByteArrayRowColumnRendererPrivate::renderFirstLine(QPainter* painter, const PixelXRange& Xs, Line firstLineIndex)
+void ByteArrayRowColumnRendererPrivate::renderFirstLine(QPainter* painter, PixelXRange Xs, Line firstLineIndex)
 {
     prepareRendering(Xs);
 

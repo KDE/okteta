@@ -27,10 +27,10 @@ public:
     void init();
     
 public: // AbstractColumnRenderer API
-    void renderFirstLine(QPainter* painter, const PixelXRange& Xs, Line firstLineIndex);
+    void renderFirstLine(QPainter* painter, PixelXRange Xs, Line firstLineIndex);
     void renderNextLine(QPainter* painter);
-    void renderColumn(QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys);
-    void renderEmptyColumn(QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys);
+    void renderColumn(QPainter* painter, PixelXRange Xs, const PixelYRange& Ys);
+    void renderEmptyColumn(QPainter* painter, PixelXRange Xs, const PixelYRange& Ys);
 
 public:
     void setFormat(OffsetFormat::Format format, const QFontMetrics& fontMetrics);
@@ -42,7 +42,7 @@ private:
     /** paints full line */
     void renderLine(QPainter* painter, Line lineIndex);
     /** */
-    void renderColumnBackground(QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys);
+    void renderColumnBackground(QPainter* painter, PixelXRange Xs, const PixelYRange& Ys);
 
 public: // user settings
     ByteArrayTableLayout* const mLayout;

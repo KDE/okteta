@@ -57,16 +57,16 @@ public: // API to be reimplemented in the subclasses
      * @param xSpan
      * @param firstLineIndex no of the first of the range of lines to paint
      */
-    virtual void renderFirstLine(QPainter* painter, const PixelXRange& xSpan, Line firstLineIndex);
+    virtual void renderFirstLine(QPainter* painter, PixelXRange xSpan, Line firstLineIndex);
     /** the actual painting call for a column's line.
      * The default implementation simply paints the background
      */
     virtual void renderNextLine(QPainter* painter);
 
     /** */
-    virtual void renderColumn(QPainter* painter, const PixelXRange& xSpan, const PixelYRange& ySpan);
+    virtual void renderColumn(QPainter* painter, PixelXRange xSpan, const PixelYRange& ySpan);
     /** */
-    virtual void renderEmptyColumn(QPainter* painter, const PixelXRange& xSpan, const PixelYRange& ySpan);
+    virtual void renderEmptyColumn(QPainter* painter, PixelXRange xSpan, const PixelYRange& ySpan);
 
 public: // modification access
     /** sets starting point of the column */
@@ -102,7 +102,7 @@ public: // value access
 public: // functional logic
     /** true if column overlaps with pixels between x-positions x1, x2 */
     [[nodiscard]]
-    bool overlaps(const PixelXRange& xSpan) const;
+    bool overlaps(PixelXRange xSpan) const;
 
 protected:
     /** sets width of the column */

@@ -56,11 +56,11 @@ public:
     ~ByteArrayRowColumnRenderer() override;
 
 public: // AbstractColumnRenderer API
-    void renderFirstLine(QPainter* painter, const PixelXRange& Xs, Line firstLineIndex) override;
+    void renderFirstLine(QPainter* painter, PixelXRange Xs, Line firstLineIndex) override;
     void renderNextLine(QPainter* painter) override;
 
 public:
-    void prepareRendering(const PixelXRange& Xs);
+    void prepareRendering(PixelXRange Xs);
 
 public:
     /** paints a cursor based on the type of the byte.

@@ -107,14 +107,14 @@ void AbstractColumnRenderer::restrictToXSpan(PixelXRange* xSpan) const
     xSpan->restrictTo(d->mXSpan);
 }
 
-bool AbstractColumnRenderer::overlaps(const PixelXRange& xSpan) const
+bool AbstractColumnRenderer::overlaps(PixelXRange xSpan) const
 {
     Q_D(const AbstractColumnRenderer);
 
     return d->mXSpan.overlaps(xSpan);
 }
 
-void AbstractColumnRenderer::renderFirstLine(QPainter* painter, const PixelXRange& xSpan, Line firstLineIndex)
+void AbstractColumnRenderer::renderFirstLine(QPainter* painter, PixelXRange xSpan, Line firstLineIndex)
 {
     Q_UNUSED(xSpan)
     Q_UNUSED(firstLineIndex)
@@ -135,14 +135,14 @@ void AbstractColumnRenderer::renderBlankLine(QPainter* painter) const
     d->renderBlankLine(painter);
 }
 
-void AbstractColumnRenderer::renderColumn(QPainter* painter, const PixelXRange& xSpan, const PixelYRange& ySpan)
+void AbstractColumnRenderer::renderColumn(QPainter* painter, PixelXRange xSpan, const PixelYRange& ySpan)
 {
     Q_D(AbstractColumnRenderer);
 
     d->renderEmptyColumn(painter, xSpan, ySpan);
 }
 
-void AbstractColumnRenderer::renderEmptyColumn(QPainter* painter, const PixelXRange& xSpan, const PixelYRange& ySpan)
+void AbstractColumnRenderer::renderEmptyColumn(QPainter* painter, PixelXRange xSpan, const PixelYRange& ySpan)
 {
     Q_D(AbstractColumnRenderer);
 

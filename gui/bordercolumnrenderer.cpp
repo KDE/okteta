@@ -22,14 +22,14 @@ BorderColumnRenderer::BorderColumnRenderer(AbstractColumnStylist* stylist, bool 
 
 BorderColumnRenderer::~BorderColumnRenderer() = default;
 
-void BorderColumnRenderer::renderColumn(QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys)
+void BorderColumnRenderer::renderColumn(QPainter* painter, PixelXRange Xs, const PixelYRange& Ys)
 {
     Q_D(BorderColumnRenderer);
 
     d->renderColumn(painter, Xs, Ys);
 }
 
-void BorderColumnRenderer::renderEmptyColumn(QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys)
+void BorderColumnRenderer::renderEmptyColumn(QPainter* painter, PixelXRange Xs, const PixelYRange& Ys)
 {
     Q_D(BorderColumnRenderer);
 

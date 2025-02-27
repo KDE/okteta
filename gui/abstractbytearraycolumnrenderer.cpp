@@ -238,14 +238,14 @@ QRect AbstractByteArrayColumnRenderer::byteRect(Coord coord) const
     return d->byteRect(coord);
 }
 
-void AbstractByteArrayColumnRenderer::prepareRendering(const PixelXRange& Xs)
+void AbstractByteArrayColumnRenderer::prepareRendering(PixelXRange Xs)
 {
     Q_D(AbstractByteArrayColumnRenderer);
 
     d->prepareRendering(Xs);
 }
 
-void AbstractByteArrayColumnRenderer::renderFirstLine(QPainter* painter, const PixelXRange& Xs, Line firstLineIndex)
+void AbstractByteArrayColumnRenderer::renderFirstLine(QPainter* painter, PixelXRange Xs, Line firstLineIndex)
 {
     Q_D(AbstractByteArrayColumnRenderer);
 

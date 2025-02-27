@@ -27,7 +27,7 @@ void BorderColumnRendererPrivate::init()
     q->setWidth(m_lineDrawn ? BorderWidth : BorderMargin);
 }
 
-void BorderColumnRendererPrivate::renderColumn(QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys)
+void BorderColumnRendererPrivate::renderColumn(QPainter* painter, PixelXRange Xs, const PixelYRange& Ys)
 {
     Q_Q(BorderColumnRenderer);
 
@@ -36,7 +36,7 @@ void BorderColumnRendererPrivate::renderColumn(QPainter* painter, const PixelXRa
     renderBorderLine(painter, Xs, Ys);
 }
 
-void BorderColumnRendererPrivate::renderEmptyColumn(QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys)
+void BorderColumnRendererPrivate::renderEmptyColumn(QPainter* painter, PixelXRange Xs, const PixelYRange& Ys)
 {
     Q_Q(BorderColumnRenderer);
 
@@ -47,7 +47,7 @@ void BorderColumnRendererPrivate::renderEmptyColumn(QPainter* painter, const Pix
     }
 }
 
-void BorderColumnRendererPrivate::renderBorderLine(QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys)
+void BorderColumnRendererPrivate::renderBorderLine(QPainter* painter, PixelXRange Xs, const PixelYRange& Ys)
 {
     Q_Q(BorderColumnRenderer);
 

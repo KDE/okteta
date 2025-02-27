@@ -42,11 +42,11 @@ public:
     ~ByteArrayRowColumnRendererPrivate() override;
 
 public: // AbstractColumnRenderer API
-    void renderFirstLine(QPainter* painter, const PixelXRange& Xs, Line firstLineIndex);
+    void renderFirstLine(QPainter* painter, PixelXRange Xs, Line firstLineIndex);
     void renderNextLine(QPainter* painter);
 
 public:
-    void prepareRendering(const PixelXRange& Xs);
+    void prepareRendering(PixelXRange Xs);
 
 public:
     // void renderLine( QPainter* painter, int lineIndex );
