@@ -26,11 +26,11 @@ public:
     void init();
 
 public: // AbstractColumnRenderer-API
-    void renderColumn(QPainter* painter, PixelXRange Xs, const PixelYRange& Ys);
-    void renderEmptyColumn(QPainter* painter, PixelXRange Xs, const PixelYRange& Ys);
+    void renderColumn(QPainter* painter, PixelXRange Xs, PixelYRange Ys);
+    void renderEmptyColumn(QPainter* painter, PixelXRange Xs, PixelYRange Ys);
 
 private:
-    void renderBorderLine(QPainter* painter, PixelXRange Xs, const PixelYRange& Ys);
+    void renderBorderLine(QPainter* painter, PixelXRange Xs, PixelYRange Ys);
 
 private:
     /** true if we are between two columns and should show a line */

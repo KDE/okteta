@@ -28,8 +28,8 @@ public:
     ~BorderColumnRenderer() override;
 
 public: // AbstractColumnRenderer-API
-    void renderColumn(QPainter* painter, PixelXRange Xs, const PixelYRange& Ys) override;
-    void renderEmptyColumn(QPainter* painter, PixelXRange Xs, const PixelYRange& Ys) override;
+    void renderColumn(QPainter* painter, PixelXRange Xs, PixelYRange Ys) override;
+    void renderEmptyColumn(QPainter* painter, PixelXRange Xs, PixelYRange Ys) override;
 
 private:
     Q_DECLARE_PRIVATE(BorderColumnRenderer)

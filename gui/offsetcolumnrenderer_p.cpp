@@ -34,7 +34,7 @@ void OffsetColumnRendererPrivate::renderLine(QPainter* painter, Line lineIndex)
     painter->drawText(leftOffsetMargin, mDigitBaseLine, QLatin1String(mCodedOffset));
 }
 
-void OffsetColumnRendererPrivate::renderColumnBackground(QPainter* painter, PixelXRange Xs, const PixelYRange& Ys)
+void OffsetColumnRendererPrivate::renderColumnBackground(QPainter* painter, PixelXRange Xs, PixelYRange Ys)
 {
     Q_Q(OffsetColumnRenderer);
 
@@ -57,12 +57,12 @@ void OffsetColumnRendererPrivate::renderNextLine(QPainter* painter)
     renderLine(painter, mRenderLineIndex++);
 }
 
-void OffsetColumnRendererPrivate::renderColumn(QPainter* painter, PixelXRange Xs, const PixelYRange& Ys)
+void OffsetColumnRendererPrivate::renderColumn(QPainter* painter, PixelXRange Xs, PixelYRange Ys)
 {
     renderColumnBackground(painter, Xs, Ys);
 }
 
-void OffsetColumnRendererPrivate::renderEmptyColumn(QPainter* painter, PixelXRange Xs, const PixelYRange& Ys)
+void OffsetColumnRendererPrivate::renderEmptyColumn(QPainter* painter, PixelXRange Xs, PixelYRange Ys)
 {
     renderColumnBackground(painter, Xs, Ys);
 }

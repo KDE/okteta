@@ -135,14 +135,14 @@ void AbstractColumnRenderer::renderBlankLine(QPainter* painter) const
     d->renderBlankLine(painter);
 }
 
-void AbstractColumnRenderer::renderColumn(QPainter* painter, PixelXRange xSpan, const PixelYRange& ySpan)
+void AbstractColumnRenderer::renderColumn(QPainter* painter, PixelXRange xSpan, PixelYRange ySpan)
 {
     Q_D(AbstractColumnRenderer);
 
     d->renderEmptyColumn(painter, xSpan, ySpan);
 }
 
-void AbstractColumnRenderer::renderEmptyColumn(QPainter* painter, PixelXRange xSpan, const PixelYRange& ySpan)
+void AbstractColumnRenderer::renderEmptyColumn(QPainter* painter, PixelXRange xSpan, PixelYRange ySpan)
 {
     Q_D(AbstractColumnRenderer);
 

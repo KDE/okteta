@@ -43,14 +43,14 @@ void OffsetColumnRenderer::renderNextLine(QPainter* painter)
     d->renderNextLine(painter);
 }
 
-void OffsetColumnRenderer::renderColumn(QPainter* painter, PixelXRange Xs, const PixelYRange& Ys)
+void OffsetColumnRenderer::renderColumn(QPainter* painter, PixelXRange Xs, PixelYRange Ys)
 {
     Q_D(OffsetColumnRenderer);
 
     d->renderColumn(painter, Xs, Ys);
 }
 
-void OffsetColumnRenderer::renderEmptyColumn(QPainter* painter, PixelXRange Xs, const PixelYRange& Ys)
+void OffsetColumnRenderer::renderEmptyColumn(QPainter* painter, PixelXRange Xs, PixelYRange Ys)
 {
     Q_D(OffsetColumnRenderer);
 

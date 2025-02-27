@@ -64,9 +64,9 @@ public: // API to be reimplemented in the subclasses
     virtual void renderNextLine(QPainter* painter);
 
     /** */
-    virtual void renderColumn(QPainter* painter, PixelXRange xSpan, const PixelYRange& ySpan);
+    virtual void renderColumn(QPainter* painter, PixelXRange xSpan, PixelYRange ySpan);
     /** */
-    virtual void renderEmptyColumn(QPainter* painter, PixelXRange xSpan, const PixelYRange& ySpan);
+    virtual void renderEmptyColumn(QPainter* painter, PixelXRange xSpan, PixelYRange ySpan);
 
 public: // modification access
     /** sets starting point of the column */

@@ -78,7 +78,7 @@ public: // services
      * these lines might not contain anything
      */
     [[nodiscard]]
-    LineRange visibleLines(const PixelYRange& yPixels) const;
+    LineRange visibleLines(PixelYRange yPixels) const;
 
     /** @return visible width of the current view */
     [[nodiscard]]
@@ -203,7 +203,7 @@ inline LineRange ColumnsViewScrollAreaEngine::visibleLines() const
     return LineRange(lineAt(ySpan.start()), lineAt(ySpan.end()));
 }
 
-inline LineRange ColumnsViewScrollAreaEngine::visibleLines(const PixelYRange& yPixels) const
+inline LineRange ColumnsViewScrollAreaEngine::visibleLines(PixelYRange yPixels) const
 {
     return LineRange(lineAt(yPixels.start()), lineAt(yPixels.end()));
 }
