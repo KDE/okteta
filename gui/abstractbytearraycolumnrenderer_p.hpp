@@ -48,7 +48,7 @@ public:
     void prepareRendering(const PixelXRange& Xs);
 
 public:
-    void renderLinePositions(QPainter* painter, Line lineIndex, const LineRange& linePositions);
+    void renderLinePositions(QPainter* painter, Line lineIndex, const LinePositionRange& linePositions);
     /** paints a cursor based on the type of the byte.
      * @param painter The QPainter
      * @param byteIndex Index of the byte to paint the cursor for. If -1 a space is used as char.
