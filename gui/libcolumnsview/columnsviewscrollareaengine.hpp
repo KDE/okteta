@@ -140,7 +140,7 @@ public: // recalculations
     /** calls updateContent for the Column */
     void updateColumn(AbstractColumnRenderer& columnRenderer);
     /** calls updateContent for the Column for the given lines, if needed */
-    void updateColumn(AbstractColumnRenderer& columnRenderer, const LineRange& lines);
+    void updateColumn(AbstractColumnRenderer& columnRenderer, LineRange lines);
 
 public: // calculated
     /** collection of all the columns. All columns will be autodeleted. */
@@ -284,7 +284,7 @@ inline void ColumnsViewScrollAreaEngine::updateColumn(AbstractColumnRenderer& co
     }
 }
 
-inline void ColumnsViewScrollAreaEngine::updateColumn(AbstractColumnRenderer& columnRenderer, const LineRange& lines)
+inline void ColumnsViewScrollAreaEngine::updateColumn(AbstractColumnRenderer& columnRenderer, LineRange lines)
 {
     Q_Q(QAbstractScrollArea);
 

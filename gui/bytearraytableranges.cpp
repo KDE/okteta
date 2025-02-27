@@ -225,7 +225,7 @@ bool ByteArrayTableRanges::overlapsChanges(const CoordRange& Range, CoordRange* 
     });
 }
 
-void ByteArrayTableRanges::addChangedOffsetLines(const LineRange& changedLines)
+void ByteArrayTableRanges::addChangedOffsetLines(LineRange changedLines)
 {
     if (mChangedOffsetLines.isEmpty()) {
         mChangedOffsetLines = changedLines;

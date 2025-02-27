@@ -52,7 +52,7 @@ public: // modifcation access
     void removeFurtherSelections();
 
     /** assumes all added lines to overlap */
-    void addChangedOffsetLines(const LineRange& changedLines);
+    void addChangedOffsetLines(LineRange changedLines);
 
     void addChangedRange(const AddressRange& range);
     void addChangedRange(Address start, Address end);
