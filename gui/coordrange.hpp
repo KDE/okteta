@@ -20,17 +20,20 @@
 
 namespace Okteta {
 
-using BaseCoordRange = Range<Coord>;
-
-template <>
-inline const Coord BaseCoordRange::null() const
-{ return Coord(-1, -1); }
+template<>
+struct RangeNullValue<Coord>
+{
+    constexpr Coord operator()() const
+    {
+        return Coord(-1, -1);
+    }
+};
 
 
 /** describes a range in the buffercoord
  * @author Friedrich W. H.  Kossebau
  */
-class CoordRange : public BaseCoordRange
+class CoordRange : public Range<Coord>
 {
 public:
     /**
@@ -77,13 +80,13 @@ public:
     bool includesLine(Line line) const;
 };
 
-inline CoordRange::CoordRange(Coord start, Coord end) : BaseCoordRange(start, end) {}
+inline CoordRange::CoordRange(Coord start, Coord end) : Range<Coord>(start, end) {}
 inline CoordRange::CoordRange(LinePositionRange posRange, LineRange lineRange)
-    : BaseCoordRange(Coord(posRange.start(), lineRange.start()), Coord(posRange.end(), lineRange.end()))
+    : Range<Coord>(Coord(posRange.start(), lineRange.start()), Coord(posRange.end(), lineRange.end()))
 {}
 inline CoordRange::CoordRange() = default;
 
-inline bool CoordRange::operator==(const CoordRange& other) const { return BaseCoordRange::operator==(other); }
+inline bool CoordRange::operator==(const CoordRange& other) const { return Range<Coord>::operator==(other); }
 
 inline Size CoordRange::width(LinePositionSize lineWidth)   const { return lineWidth * (lines() - 1) + end().pos() - start().pos() + 1; }
 inline LineSize CoordRange::lines()                         const { return end().line() - start().line() + 1; }

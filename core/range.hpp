@@ -11,6 +11,15 @@
 
 namespace Okteta {
 
+template<typename T>
+struct RangeNullValue
+{
+    constexpr T operator()() const
+    {
+        return T{-1};
+    }
+};
+
 /** This template describes a range.
  * A range is something with a start and an end.
  * The start is a value relative before the end.
@@ -18,7 +27,10 @@ namespace Okteta {
  *
  * @author Friedrich W. H.  Kossebau
 */
-template <typename T>
+template<
+    typename T,
+    class NullValue = RangeNullValue<T>
+>
 class Range
 {
 public:
@@ -137,7 +149,7 @@ public: // logic access
 protected:
     /** delivers a null element. Should be specialiced for complexer types. */
     [[nodiscard]]
-    const T null() const { return T(-1);}
+    constexpr T null() const { return NullValue{}(); }
 
 protected:
     /** first value of the range */
