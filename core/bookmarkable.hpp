@@ -9,6 +9,8 @@
 #ifndef OKTETA_BOOKMARKABLE_HPP
 #define OKTETA_BOOKMARKABLE_HPP
 
+// lib
+#include "address.hpp"
 // Qt
 #include <QtPlugin>
 
@@ -38,7 +40,7 @@ public: // get
     [[nodiscard]]
     virtual const Okteta::Bookmark& bookmarkAt(unsigned int index) const = 0;
     [[nodiscard]]
-    virtual const Okteta::Bookmark& bookmarkFor(int offset) const = 0;
+    virtual const Okteta::Bookmark& bookmarkFor(Address offset) const = 0;
     [[nodiscard]]
     virtual bool containsBookmarkFor(int offset) const = 0;
     [[nodiscard]]

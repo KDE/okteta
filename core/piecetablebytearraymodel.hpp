@@ -96,7 +96,7 @@ public: // Bookmarkable API
     [[nodiscard]]
     const Okteta::Bookmark& bookmarkAt(unsigned int index) const override;
     [[nodiscard]]
-    const Okteta::Bookmark& bookmarkFor(int offset) const override;
+    const Okteta::Bookmark& bookmarkFor(Address offset) const override;
     [[nodiscard]]
     bool containsBookmarkFor(int offset) const override;
     [[nodiscard]]

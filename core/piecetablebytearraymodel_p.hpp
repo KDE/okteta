@@ -79,7 +79,7 @@ public:
     [[nodiscard]]
     const Bookmark& bookmarkAt(unsigned int index) const;
     [[nodiscard]]
-    const Bookmark& bookmarkFor(int offset) const;
+    const Bookmark& bookmarkFor(Address offset) const;
     [[nodiscard]]
     bool containsBookmarkFor(int offset) const;
     [[nodiscard]]
@@ -210,7 +210,7 @@ inline const Bookmark& PieceTableByteArrayModelPrivate::bookmarkAt(unsigned int 
 {
     return mBookmarks.at(index);
 }
-inline const Bookmark& PieceTableByteArrayModelPrivate::bookmarkFor(int offset) const
+inline const Bookmark& PieceTableByteArrayModelPrivate::bookmarkFor(Address offset) const
 {
     return mBookmarks.bookmark(offset);
 }

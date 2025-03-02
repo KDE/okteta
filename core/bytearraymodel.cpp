@@ -209,7 +209,7 @@ Okteta::BookmarksConstIterator ByteArrayModel::createBookmarksConstIterator() co
     return d->createBookmarksConstIterator();
 }
 
-const Okteta::Bookmark& ByteArrayModel::bookmarkFor(int offset) const
+const Okteta::Bookmark& ByteArrayModel::bookmarkFor(Address offset) const
 {
     Q_D(const ByteArrayModel);
 

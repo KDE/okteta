@@ -193,7 +193,7 @@ const Okteta::Bookmark& PieceTableByteArrayModel::bookmarkAt(unsigned int index)
     return d->bookmarkAt(index);
 }
 
-const Okteta::Bookmark& PieceTableByteArrayModel::bookmarkFor(int offset) const
+const Okteta::Bookmark& PieceTableByteArrayModel::bookmarkFor(Address offset) const
 {
     Q_D(const PieceTableByteArrayModel);
 

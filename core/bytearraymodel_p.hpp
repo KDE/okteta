@@ -87,7 +87,7 @@ public: // Bookmarkable API
     [[nodiscard]]
     const Bookmark& bookmarkAt(unsigned int index) const;
     [[nodiscard]]
-    const Bookmark& bookmarkFor(int offset) const;
+    const Bookmark& bookmarkFor(Address offset) const;
     [[nodiscard]]
     bool containsBookmarkFor(int offset) const;
     [[nodiscard]]
@@ -216,7 +216,7 @@ inline BookmarksConstIterator ByteArrayModelPrivate::createBookmarksConstIterato
     return BookmarksConstIterator(new BookmarkListConstIteratorAdapter(m_bookmarks));
 }
 
-inline const Bookmark& ByteArrayModelPrivate::bookmarkFor(int offset) const
+inline const Bookmark& ByteArrayModelPrivate::bookmarkFor(Address offset) const
 {
     return m_bookmarks.bookmark(offset);
 }
