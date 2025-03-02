@@ -25,14 +25,101 @@ ecm_qt_declare_logging_category(OktetaCore
     EXPORT OKTETA
 )
 
-macro(OKTETACORE_LIBRARY_SOURCES _subdir)
-    okteta_library_sources(Core NAMESPACE Okteta
+macro(OKTETACORE_ADD_SUBLIBRARY _library_name)
+    okteta_add_sublibrary(Core NAMESPACE Okteta
+        SUBLIBRARY ${_library_name}
+        ${ARGN}
+    )
+endmacro()
+
+macro(OKTETACORE_SUBLIBRARY_SOURCES _subdir)
+    okteta_sublibrary_sources(Core NAMESPACE Okteta
         SUBDIR ${_subdir}
         ${ARGN}
     )
 endmacro()
 
-oktetacore_library_sources(charcodecs
+oktetacore_add_sublibrary(coretypes
+    PUBLIC
+        Qt5::Core
+    PRIVATE
+        KF5::I18n
+)
+okteta_sublibrary_compile_definitions(Core NAMESPACE Okteta
+    SUBLIBRARY coretypes
+    PRIVATE
+        TRANSLATION_DOMAIN=\"liboktetacore\"
+)
+
+oktetacore_add_sublibrary(bookmark
+    PUBLIC
+        coretypes
+)
+
+oktetacore_add_sublibrary(charcodecs
+    PUBLIC
+        coretypes
+)
+
+oktetacore_add_sublibrary(valuecodecs
+    PUBLIC
+        coretypes
+)
+
+oktetacore_add_sublibrary(piecetable
+    PUBLIC
+        coretypes
+    PRIVATE
+        KF5::I18n
+)
+okteta_sublibrary_compile_definitions(Core NAMESPACE Okteta
+    SUBLIBRARY piecetable
+    PRIVATE
+        TRANSLATION_DOMAIN=\"liboktetacore\"
+)
+
+oktetacore_add_sublibrary(bytearraymodels
+    PUBLIC
+        bookmark
+        piecetable
+)
+
+okteta_sublibrary_sources(Core NAMESPACE Okteta
+    SUBLIBRARY coretypes
+    PUBLIC
+        OktetaCore
+        Range
+        NumberRange
+
+        Address
+        AddressRange
+        Size
+        Byte
+
+        ArrayChangeMetrics
+        ArrayChangeMetricsList
+
+        Character
+        ByteArrayChange
+
+    PRIVATE
+        AddressRangeList
+)
+
+okteta_sublibrary_sources(Core NAMESPACE Okteta
+    SUBLIBRARY bookmark
+    PUBLIC
+        Bookmark
+        BookmarksConstIteratorAdapter # TODO: make private or move adapter class to iterator
+        BookmarksConstIterator
+
+    PRIVATE
+        BookmarkListConstIteratorAdapter
+        BookmarkList
+)
+
+oktetacore_sublibrary_sources(charcodecs
+    SUBLIBRARY charcodecs
     PRIVATE
         CharCodec
         USASCIICharCodec
@@ -42,7 +129,8 @@ oktetacore_library_sources(charcodecs
         TextCharCodec
 )
 
-oktetacore_library_sources(valuecodecs
+oktetacore_sublibrary_sources(valuecodecs
+    SUBLIBRARY valuecodecs
     PRIVATE
         BinaryByteCodec
         ValueCodec
@@ -51,7 +139,8 @@ oktetacore_library_sources(valuecodecs
         OctalByteCodec
 )
 
-oktetacore_library_sources(piecetable
+oktetacore_sublibrary_sources(piecetable
+    SUBLIBRARY piecetable
     PRIVATE
         PieceList
         PieceTable
@@ -66,16 +155,9 @@ oktetacore_library_sources(piecetable
         RevertablePiecetable
 )
 
-okteta_library_sources(Core NAMESPACE Okteta
+okteta_sublibrary_sources(Core NAMESPACE Okteta
+    SUBLIBRARY bytearraymodels
     PUBLIC
-        OktetaCore
-        Range
-        NumberRange
-
-        Address
-        AddressRange
-        Size
-        Byte
         AbstractByteArrayModel
         Versionable
         Bookmarkable
@@ -86,27 +168,19 @@ okteta_library_sources(Core NAMESPACE Okteta
         #FileByteArrayModel
         PieceTableByteArrayModel
 
-        Character
-        ArrayChangeMetrics
-        ArrayChangeMetricsList
-        ByteArrayChange
-
-        Bookmark
-        BookmarksConstIteratorAdapter # TODO: make private or move adapter class to iterator
-        BookmarksConstIterator
-
-        TextByteArrayAnalyzer
-        ValueCodec
-        CharCodec
-
     PRIVATE
         FileByteArrayModel
         FixedSizeByteArrayModel
+)
 
-        BookmarkListConstIteratorAdapter
-        AddressRangeList
-        BookmarkList
-
+okteta_library_sources(Core NAMESPACE Okteta
+    PUBLIC
+        TextByteArrayAnalyzer
+        # TODO: both repeated here as the headers are in the toplevel-dir
+        # to hide the headers of the concrete implementations from include dirs
+        # Should get a better approach.
+        ValueCodec
+        CharCodec
 )
 
 okteta_add_cmakeconfig(Core NAMESPACE Okteta
@@ -125,32 +199,6 @@ okteta_add_pkgconfig(Core NAMESPACE Okteta
 
 
 if(BUILD_TESTING)
-    #don't compile sources twice by using object libraries
-    #add_library( oktetacore_objs OBJECT ${oktetacore_LIB_SRCS} )
-    #target_include_directories( oktetacore_objs PUBLIC $<TARGET_PROPERTY:Qt5::Core,INTERFACE_INCLUDE_DIRECTORIES> )
-    #set( oktetacore_LIB_OBJS $<TARGET_OBJECTS:oktetacore_objs>)
-
-    # compile flags don't get set for object libraries, since cannot link to target
-    #TODO: find out how to properly use targets for object libraries
-    add_library(TestOktetaCore STATIC)
-    get_property(oktetacore_LIB_OBJS TARGET OktetaCore PROPERTY SOURCES)
-    target_sources(TestOktetaCore PRIVATE ${oktetacore_LIB_OBJS})
-    # Configure export macros to be setup as with a static lib
-    # as the source files are reused for static TestOktetaCore
-    # Saves doing a separate export header.
-    target_compile_definitions(TestOktetaCore
-        PUBLIC
-            OKTETACORE_STATICLIB
-        PRIVATE
-            TRANSLATION_DOMAIN=\"liboktetacore\"
-    )
-    target_link_libraries(TestOktetaCore
-        PUBLIC
-            Qt5::Core
-        PRIVATE
-            KF5::I18n
-    )
-
     add_subdirectory(piecetable/tests)
     add_subdirectory(tests)
 endif()

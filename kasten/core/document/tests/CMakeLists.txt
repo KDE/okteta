@@ -23,7 +23,7 @@ ecm_add_test(
     LINK_LIBRARIES
         OktetaKastenCoreDocumentSourcesTestShim
         KastenCore
-        TestOktetaCore
+        OktetaCore
         KF5::I18n
         Qt5::Test
 )
@@ -42,7 +42,7 @@ ecm_add_test(
         OktetaKastenCoreDocumentSourcesTestShim
         KastenCore
         TestOktetaCoreTestUtil
-        TestOktetaCore
+        bytearraymodels
         KF5::I18n
         Qt5::Test
 )
