@@ -81,7 +81,6 @@ QString AbstractByteArrayStreamEncoder::previewData(AbstractModel* model, const 
     Okteta::AddressRange range = byteArraySelection && byteArraySelection->isValid() ?
                                  byteArraySelection->range() :
                                  Okteta::AddressRange::fromWidth(0, byteArray->size());
-    range.restrictEndByWidth(MaxPreviewSize);
 
     QByteArray data;
     QBuffer dataBuffer(&data);
