@@ -30,14 +30,14 @@ ecm_qt_declare_logging_category(KastenCore
     EXPORT OKTETA
 )
 
-macro(KASTENCORE_ADD_SUBLIBRARY _subdir)
-    okteta_add_sublibrary(Core  NAMESPACE Kasten
+macro(KASTENCORE_LIBRARY_SOURCES _subdir)
+    okteta_library_sources(Core NAMESPACE Kasten
         SUBDIR ${_subdir}
         ${ARGN}
     )
 endmacro()
 
-# kastencore_add_sublibrary(entity
+# kastencore_library_sources(entity
 #     BUILD_INCLUDEDIR
 #     PUBLIC
 #         AbstractEntity
@@ -45,7 +45,7 @@ endmacro()
 #         Person
 # )
 
-kastencore_add_sublibrary(usermessages
+kastencore_library_sources(usermessages
     BUILD_INCLUDEDIR
     PUBLIC
         UserErrorReport
@@ -54,7 +54,7 @@ kastencore_add_sublibrary(usermessages
         UserQuery
 )
 
-kastencore_add_sublibrary(document
+kastencore_library_sources(document
     BUILD_INCLUDEDIR
     PUBLIC
         Versionable
@@ -71,7 +71,7 @@ kastencore_add_sublibrary(document
         DocumentVersionData
 )
 
-kastencore_add_sublibrary(io
+kastencore_library_sources(io
     BUILD_INCLUDEDIR
     PUBLIC
         AbstractSyncToRemoteJob
@@ -89,7 +89,7 @@ kastencore_add_sublibrary(io
         AbstractModelSynchronizerFactory
 )
 
-kastencore_add_sublibrary(io/filesystem
+kastencore_library_sources(io/filesystem
     BUILD_INCLUDEDIR
     PUBLIC
         AbstractFileSystemSyncWithRemoteJob
@@ -103,7 +103,7 @@ kastencore_add_sublibrary(io/filesystem
         ModelEncoderFileSystemExportJob
 )
 
-kastencore_add_sublibrary(system
+kastencore_library_sources(system
     BUILD_INCLUDEDIR
     PUBLIC
         AbstractUserMessagesHandler
@@ -118,7 +118,7 @@ kastencore_add_sublibrary(system
         ModelCodecManager
 )
 
-okteta_add_sublibrary(Core  NAMESPACE Kasten
+okteta_library_sources(Core NAMESPACE Kasten
     PUBLIC
         KastenCore
 )

@@ -1,117 +1,6 @@
 set(OKTETAKASTENCONTROLLERS_VERSION ${OKTETAKASTEN_LIB_VERSION})
 set(OKTETAKASTENCONTROLLERS_SO_VERSION ${OKTETAKASTEN_LIB_SOVERSION})
 
-# create static libraries for sharing between unit tests and actual library product
-# This means we don't have to compile the sources twice
-
-add_library(configentries STATIC)
-set_target_properties(configentries PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
-target_link_libraries(configentries
-    PUBLIC
-        OktetaKastenGui
-        KF5::ConfigCore
-)
-
-add_library(datatypes STATIC)
-set_target_properties(datatypes PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
-target_link_libraries(datatypes
-    PUBLIC
-        OktetaGui
-    PRIVATE
-        KF5::Completion
-)
-
-add_library(datatypecodecs STATIC)
-set_target_properties(datatypecodecs PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
-target_compile_definitions(datatypecodecs PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")
-target_link_libraries(datatypecodecs
-    PUBLIC
-        datatypes
-    PRIVATE
-        KF5::I18n
-)
-
-add_library(datatypedisplaystringifiers STATIC)
-set_target_properties(datatypedisplaystringifiers PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
-target_link_libraries(datatypedisplaystringifiers
-    PUBLIC
-        datatypes
-)
-
-add_library(datatypeeditors STATIC)
-set_target_properties(datatypeeditors PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
-target_link_libraries(datatypeeditors
-    PUBLIC
-        datatypes
-    PRIVATE
-        KF5::Completion
-)
-
-add_library(bytearraychecksum STATIC)
-set_target_properties(bytearraychecksum PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
-target_compile_definitions(bytearraychecksum PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")
-target_link_libraries(bytearraychecksum
-    PUBLIC
-        OktetaCore
-        Qt5::Widgets
-    PRIVATE
-        configentries
-        KF5::Completion
-        KF5::I18n
-)
-
-add_library(bytearrayfilter STATIC)
-set_target_properties(bytearrayfilter PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
-target_compile_definitions(bytearrayfilter PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")
-target_link_libraries(bytearrayfilter
-    PUBLIC
-        OktetaCore
-        Qt5::Widgets
-    PRIVATE
-        configentries
-        KF5::I18n
-)
-
-add_library(finddialog STATIC)
-set_target_properties(finddialog PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
-target_compile_definitions(finddialog PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")
-target_link_libraries(finddialog
-    PUBLIC
-        OktetaKastenGui
-    PRIVATE
-        KF5::I18n
-)
-
-add_library(bytearraysearch STATIC)
-set_target_properties(bytearraysearch PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
-target_link_libraries(bytearraysearch
-    PUBLIC
-        finddialog
-)
-
-add_library(structuresdatatypes STATIC)
-set_target_properties(structuresdatatypes PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
-target_compile_definitions(structuresdatatypes PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")
-target_link_libraries(structuresdatatypes
-    PUBLIC
-        OktetaCore
-        KF5::ConfigGui
-        Qt5::Script
-    PRIVATE
-        configentries
-        datatypeeditors
-        KF5::Completion
-        KF5::I18n
-)
-
-ecm_qt_declare_logging_category(structuresdatatypes
-    HEADER "structureslogging.hpp"
-    IDENTIFIER "LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES"
-    CATEGORY_NAME "kasten.okteta.controllers.structures"
-    DESCRIPTION "Okteta Structures tool"
-    EXPORT OKTETA
-)
-
 okteta_add_library(Controllers NAMESPACE Okteta Kasten
     PUBLIC
         OktetaKastenGui
@@ -119,15 +8,6 @@ okteta_add_library(Controllers NAMESPACE Okteta Kasten
         KastenGui
         KastenCore
     PRIVATE
-        structuresdatatypes
-        bytearraychecksum
-        bytearrayfilter
-        datatypeeditors
-        datatypedisplaystringifiers
-        datatypecodecs
-        configentries
-        finddialog
-        bytearraysearch
         framesprint
         KF5::NewStuffWidgets
         KF5::I18n
@@ -159,17 +39,152 @@ ecm_qt_declare_logging_category(OktetaKastenControllers
     EXPORT OKTETA
 )
 
-macro(OKTETAKASTENCONTROLLERS_ADD_SUBLIBRARY _subdir)
-    okteta_add_sublibrary(Controllers NAMESPACE Okteta Kasten
+macro(OKTETAKASTENCONTROLLERS_LIBRARY_SOURCES _subdir)
+    okteta_library_sources(Controllers NAMESPACE Okteta Kasten
         REVERSE_NAMESPACE_INCLUDEDIR
         SUBDIR ${_subdir}
         ${ARGN}
     )
 endmacro()
 
-oktetakastencontrollers_add_sublibrary(libconfigentries
+macro(OKTETAKASTENCONTROLLERS_ADD_SUBLIBRARY _library_name)
+    okteta_add_sublibrary(Controllers NAMESPACE Okteta Kasten
+        SUBLIBRARY ${_library_name}
+        ${ARGN}
+    )
+endmacro()
+
+macro(OKTETAKASTENCONTROLLERS_SUBLIBRARY_SOURCES _subdir)
+    okteta_sublibrary_sources(Controllers NAMESPACE Okteta Kasten
+        REVERSE_NAMESPACE_INCLUDEDIR
+        SUBDIR ${_subdir}
+        ${ARGN}
+    )
+endmacro()
+
+oktetakastencontrollers_add_sublibrary(configentries
+    NO_EXPORTS
+    PUBLIC
+        OktetaKastenGui
+        KF5::ConfigCore
+)
+
+oktetakastencontrollers_add_sublibrary(datatypes
+    NO_EXPORTS
+    PUBLIC
+        OktetaGui
+    PRIVATE
+        KF5::Completion
+)
+
+oktetakastencontrollers_add_sublibrary(datatypecodecs
+    NO_EXPORTS
+    PUBLIC
+        datatypes
+    PRIVATE
+        KF5::I18n
+)
+okteta_sublibrary_compile_definitions(Controllers NAMESPACE Okteta Kasten
+    SUBLIBRARY datatypecodecs
+    PRIVATE
+        TRANSLATION_DOMAIN=\"liboktetakasten\"
+)
+
+oktetakastencontrollers_add_sublibrary(datatypedisplaystringifiers
+    NO_EXPORTS
+    PUBLIC
+        datatypes
+)
+
+oktetakastencontrollers_add_sublibrary(datatypeeditors
+    NO_EXPORTS
+    PUBLIC
+        datatypes
+    PRIVATE
+        KF5::Completion
+)
+
+oktetakastencontrollers_add_sublibrary(bytearraychecksum
+    NO_EXPORTS
+    PUBLIC
+        OktetaCore
+        Qt5::Widgets
+    PRIVATE
+        configentries
+        KF5::Completion
+        KF5::I18n
+)
+okteta_sublibrary_compile_definitions(Controllers NAMESPACE Okteta Kasten
+    SUBLIBRARY bytearraychecksum
+    PRIVATE
+        TRANSLATION_DOMAIN=\"liboktetakasten\"
+)
+
+oktetakastencontrollers_add_sublibrary(bytearrayfilter
+    NO_EXPORTS
+    PUBLIC
+        OktetaCore
+        Qt5::Widgets
+    PRIVATE
+        configentries
+        KF5::I18n
+)
+okteta_sublibrary_compile_definitions(Controllers NAMESPACE Okteta Kasten
+    SUBLIBRARY bytearrayfilter
+    PRIVATE
+        TRANSLATION_DOMAIN=\"liboktetakasten\"
+)
+
+oktetakastencontrollers_add_sublibrary(finddialog
+    NO_EXPORTS
+    PUBLIC
+        OktetaKastenGui
+    PRIVATE
+        KF5::I18n
+)
+okteta_sublibrary_compile_definitions(Controllers NAMESPACE Okteta Kasten
+    SUBLIBRARY finddialog
+    PRIVATE
+        TRANSLATION_DOMAIN=\"liboktetakasten\"
+)
+
+oktetakastencontrollers_add_sublibrary(bytearraysearch
+    NO_EXPORTS
+    PUBLIC
+        finddialog
+)
+
+oktetakastencontrollers_add_sublibrary(structuresdatatypes
+    NO_EXPORTS
+    PUBLIC
+        OktetaCore
+        KF5::ConfigGui
+        Qt5::Script
+    PRIVATE
+        configentries
+        datatypeeditors
+        KF5::Completion
+        KF5::I18n
+)
+okteta_sublibrary_compile_definitions(Controllers NAMESPACE Okteta Kasten
+    SUBLIBRARY structuresdatatypes
+    PRIVATE
+        TRANSLATION_DOMAIN=\"liboktetakasten\"
+)
+
+# ecm_qt_declare_logging_category(structuresdatatypes
+okteta_qt_declare_logging_category(Controllers NAMESPACE Okteta Kasten
+    SUBLIBRARY structuresdatatypes
+    HEADER "structureslogging.hpp"
+    IDENTIFIER "LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES"
+    CATEGORY_NAME "kasten.okteta.controllers.structures"
+    DESCRIPTION "Okteta Structures tool"
+    EXPORT OKTETA
+)
+
+oktetakastencontrollers_sublibrary_sources(libconfigentries
+    SUBLIBRARY configentries
     BUILD_INCLUDEDIR
-    LIBRARY configentries
     PRIVATE
         AddressComboBoxCodingConfigEntry
         ByteArrayCodingConfigEntry
@@ -180,7 +195,7 @@ oktetakastencontrollers_add_sublibrary(libconfigentries
         FindDirectionConfigEntry
 )
 
-oktetakastencontrollers_add_sublibrary(document/info
+oktetakastencontrollers_library_sources(document/info
     PUBLIC
         DocumentInfoToolFactory
         DocumentInfoToolViewFactory
@@ -193,7 +208,7 @@ oktetakastencontrollers_add_sublibrary(document/info
 
 # unused, TODO: remove?
 if (FALSE)
-oktetakastencontrollers_add_sublibrary(document/overwriteonly
+oktetakastencontrollers_library_sources(document/overwriteonly
     PUBLIC
         OverwriteOnlyControllerFactory
     PRIVATE
@@ -201,13 +216,13 @@ oktetakastencontrollers_add_sublibrary(document/overwriteonly
 )
 endif()
 
-oktetakastencontrollers_add_sublibrary(view/overwritemode
+oktetakastencontrollers_library_sources(view/overwritemode
     PUBLIC
         OverwriteModeControllerFactory
     PRIVATE
         OverwriteModeController
 )
-oktetakastencontrollers_add_sublibrary(view/info
+oktetakastencontrollers_library_sources(view/info
     PUBLIC
         InfoToolFactory
         InfoToolViewFactory
@@ -222,7 +237,7 @@ oktetakastencontrollers_add_sublibrary(view/info
         infoviewsettings.kcfgc
 )
 
-oktetakastencontrollers_add_sublibrary(view/stringsextract
+oktetakastencontrollers_library_sources(view/stringsextract
     PUBLIC
         StringsExtractToolFactory
         StringsExtractToolViewFactory
@@ -235,9 +250,9 @@ oktetakastencontrollers_add_sublibrary(view/stringsextract
         StringsExtractToolView
 )
 
-oktetakastencontrollers_add_sublibrary(view/libbytearraychecksum
+oktetakastencontrollers_sublibrary_sources(view/libbytearraychecksum
     BUILD_INCLUDEDIR
-    LIBRARY bytearraychecksum
+    SUBLIBRARY bytearraychecksum
     PRIVATE
         AbstractByteArrayChecksumAlgorithm
         AbstractByteArrayChecksumParameterSet
@@ -246,8 +261,8 @@ oktetakastencontrollers_add_sublibrary(view/libbytearraychecksum
         ByteArrayChecksumParameterSetEditFactory
 )
 
-oktetakastencontrollers_add_sublibrary(view/libbytearraychecksum/algorithm
-    LIBRARY bytearraychecksum
+oktetakastencontrollers_sublibrary_sources(view/libbytearraychecksum/algorithm
+    SUBLIBRARY bytearraychecksum
     PRIVATE
         Crc32ByteArrayChecksumAlgorithm
         Crc64ByteArrayChecksumAlgorithm
@@ -277,7 +292,7 @@ oktetakastencontrollers_add_sublibrary(view/libbytearraychecksum/algorithm
 ## NEWCHECKSUMPARAMETERSET(end)
 )
 
-oktetakastencontrollers_add_sublibrary(view/checksum
+oktetakastencontrollers_library_sources(view/checksum
     PUBLIC
         ChecksumToolFactory
         ChecksumToolViewFactory
@@ -288,25 +303,25 @@ oktetakastencontrollers_add_sublibrary(view/checksum
         ChecksumToolView
 )
 
-oktetakastencontrollers_add_sublibrary(view/libfinddialog
+oktetakastencontrollers_sublibrary_sources(view/libfinddialog
     BUILD_INCLUDEDIR
-    LIBRARY finddialog
+    SUBLIBRARY finddialog
     PRIVATE
         AbstractFindDialog
         FindDirection
 )
 
-oktetakastencontrollers_add_sublibrary(view/libbytearraysearch
+oktetakastencontrollers_sublibrary_sources(view/libbytearraysearch
     BUILD_INCLUDEDIR
-    LIBRARY bytearraysearch
+    SUBLIBRARY bytearraysearch
     PRIVATE
         ByteArraySearchJob
         ByteArraySearchUtils
 )
 
-oktetakastencontrollers_add_sublibrary(view/libdatatypes
+oktetakastencontrollers_sublibrary_sources(view/libdatatypes
     BUILD_INCLUDEDIR
-    LIBRARY datatypes
+    SUBLIBRARY datatypes
     PRIVATE
         Binary8
         Octal8
@@ -326,17 +341,17 @@ oktetakastencontrollers_add_sublibrary(view/libdatatypes
         Utf16
 )
 
-oktetakastencontrollers_add_sublibrary(view/libdatatypedisplaystringifiers
+oktetakastencontrollers_sublibrary_sources(view/libdatatypedisplaystringifiers
     BUILD_INCLUDEDIR
-    LIBRARY datatypedisplaystringifiers
+    SUBLIBRARY datatypedisplaystringifiers
     PRIVATE
         AbstractDataTypeDisplayStringifier
         DataTypeDisplayStringifierManager
 )
 
-oktetakastencontrollers_add_sublibrary(view/libdatatypeeditors
+oktetakastencontrollers_sublibrary_sources(view/libdatatypeeditors
     BUILD_INCLUDEDIR
-    LIBRARY datatypeeditors
+    SUBLIBRARY datatypeeditors
     PRIVATE
         AbstractValue8Editor
         Binary8Editor
@@ -353,9 +368,9 @@ oktetakastencontrollers_add_sublibrary(view/libdatatypeeditors
         Utf16Editor
 )
 
-oktetakastencontrollers_add_sublibrary(view/libdatatypecodecs
+oktetakastencontrollers_sublibrary_sources(view/libdatatypecodecs
     BUILD_INCLUDEDIR
-    LIBRARY datatypecodecs
+    SUBLIBRARY datatypecodecs
     PRIVATE
         PODData
         AbstractTypeCodec
@@ -377,7 +392,7 @@ oktetakastencontrollers_add_sublibrary(view/libdatatypecodecs
         Utf16Codec
 )
 
-oktetakastencontrollers_add_sublibrary(view/poddecoder
+oktetakastencontrollers_library_sources(view/poddecoder
     PUBLIC
         PODDecoderToolFactory
         PODDecoderToolViewFactory
@@ -390,7 +405,7 @@ oktetakastencontrollers_add_sublibrary(view/poddecoder
         PODDecoderToolView
 )
 
-oktetakastencontrollers_add_sublibrary(view/bytetable
+oktetakastencontrollers_library_sources(view/bytetable
     PUBLIC
         ByteTableToolFactory
         ByteTableToolViewFactory
@@ -403,14 +418,14 @@ oktetakastencontrollers_add_sublibrary(view/bytetable
         bytetableviewsettings.kcfgc
 )
 
-oktetakastencontrollers_add_sublibrary(view/crop
+oktetakastencontrollers_library_sources(view/crop
     PUBLIC
         CropControllerFactory
     PRIVATE
         CropController
 )
 
-oktetakastencontrollers_add_sublibrary(view/search
+oktetakastencontrollers_library_sources(view/search
     PUBLIC
         SearchControllerFactory
     PRIVATE
@@ -420,7 +435,7 @@ oktetakastencontrollers_add_sublibrary(view/search
         SearchController
 )
 
-oktetakastencontrollers_add_sublibrary(view/replace
+oktetakastencontrollers_library_sources(view/replace
     PUBLIC
         ReplaceControllerFactory
     PRIVATE
@@ -432,9 +447,9 @@ oktetakastencontrollers_add_sublibrary(view/replace
         ReplaceTool
 )
 
-oktetakastencontrollers_add_sublibrary(view/libbytearrayfilter
+oktetakastencontrollers_sublibrary_sources(view/libbytearrayfilter
     BUILD_INCLUDEDIR
-    LIBRARY bytearrayfilter
+    SUBLIBRARY bytearrayfilter
     PRIVATE
         AbstractByteArrayFilter
         AbstractByteArrayFilterParameterSet
@@ -443,8 +458,8 @@ oktetakastencontrollers_add_sublibrary(view/libbytearrayfilter
         ByteArrayFilterParameterSetEditFactory
 )
 
-oktetakastencontrollers_add_sublibrary(view/libbytearrayfilter/filter
-    LIBRARY bytearrayfilter
+oktetakastencontrollers_sublibrary_sources(view/libbytearrayfilter/filter
+    SUBLIBRARY bytearrayfilter
     PRIVATE
         NoByteArrayFilterParameterSet
         OperandByteArrayFilterParameterSet
@@ -477,7 +492,7 @@ oktetakastencontrollers_add_sublibrary(view/libbytearrayfilter/filter
 ##         MyByteArrayFilterParameterSetedit
 ## NEWFILTERPARAMETERSET(end)
 )
-oktetakastencontrollers_add_sublibrary(view/filter
+oktetakastencontrollers_library_sources(view/filter
     PUBLIC
         FilterToolFactory
         FilterToolViewFactory
@@ -488,7 +503,7 @@ oktetakastencontrollers_add_sublibrary(view/filter
         FilterToolView
 )
 
-oktetakastencontrollers_add_sublibrary(view/charsetconversion
+oktetakastencontrollers_library_sources(view/charsetconversion
     PUBLIC
         CharsetConversionToolFactory
         CharsetConversionToolViewFactory
@@ -499,7 +514,7 @@ oktetakastencontrollers_add_sublibrary(view/charsetconversion
         CharsetConversionToolView
 )
 
-oktetakastencontrollers_add_sublibrary(view/gotooffset
+oktetakastencontrollers_library_sources(view/gotooffset
     PUBLIC
         GotoOffsetControllerFactory
     PRIVATE
@@ -509,7 +524,7 @@ oktetakastencontrollers_add_sublibrary(view/gotooffset
         GotoOffsetController
 )
 
-oktetakastencontrollers_add_sublibrary(view/selectrange
+oktetakastencontrollers_library_sources(view/selectrange
     PUBLIC
         SelectRangeControllerFactory
     PRIVATE
@@ -519,7 +534,7 @@ oktetakastencontrollers_add_sublibrary(view/selectrange
         SelectRangeController
 )
 
-oktetakastencontrollers_add_sublibrary(view/bookmarks
+oktetakastencontrollers_library_sources(view/bookmarks
     PUBLIC
         BookmarksControllerFactory
     PRIVATE
@@ -527,7 +542,7 @@ oktetakastencontrollers_add_sublibrary(view/bookmarks
         BookmarksController
 )
 
-oktetakastencontrollers_add_sublibrary(view/bookmarks
+oktetakastencontrollers_library_sources(view/bookmarks
     PUBLIC
         BookmarksToolFactory
         BookmarksToolViewFactory
@@ -539,8 +554,8 @@ oktetakastencontrollers_add_sublibrary(view/bookmarks
 )
 
 
-oktetakastencontrollers_add_sublibrary(view/structures/datatypes
-    LIBRARY structuresdatatypes
+oktetakastencontrollers_sublibrary_sources(view/structures/datatypes
+    SUBLIBRARY structuresdatatypes
     PRIVATE
         TopLevelDataInformation
         DataInformation
@@ -554,8 +569,8 @@ oktetakastencontrollers_add_sublibrary(view/structures/datatypes
         PrimitiveDataType
 )
 
-oktetakastencontrollers_add_sublibrary(view/structures/datatypes/array
-    LIBRARY structuresdatatypes
+oktetakastencontrollers_sublibrary_sources(view/structures/datatypes/array
+    SUBLIBRARY structuresdatatypes
     PRIVATE
         ArrayDataInformation
         AbstractArrayData
@@ -563,8 +578,8 @@ oktetakastencontrollers_add_sublibrary(view/structures/datatypes/array
         PrimitiveArrayData
 )
 
-oktetakastencontrollers_add_sublibrary(view/structures/datatypes/primitive
-    LIBRARY structuresdatatypes
+oktetakastencontrollers_sublibrary_sources(view/structures/datatypes/primitive
+    SUBLIBRARY structuresdatatypes
     PRIVATE
         PointerDataInformation
         CharDataInformation
@@ -580,8 +595,8 @@ oktetakastencontrollers_add_sublibrary(view/structures/datatypes/primitive
         EnumDefinition
 )
 
-oktetakastencontrollers_add_sublibrary(view/structures/datatypes/primitive/bitfield
-    LIBRARY structuresdatatypes
+oktetakastencontrollers_sublibrary_sources(view/structures/datatypes/primitive/bitfield
+    SUBLIBRARY structuresdatatypes
     PRIVATE
         AbstractBitfieldDataInformation
         BoolBitfieldDataInformation
@@ -589,8 +604,8 @@ oktetakastencontrollers_add_sublibrary(view/structures/datatypes/primitive/bitfi
         UnsignedBitfieldDataInformation
 )
 
-oktetakastencontrollers_add_sublibrary(view/structures/datatypes/strings
-    LIBRARY structuresdatatypes
+oktetakastencontrollers_sublibrary_sources(view/structures/datatypes/strings
+    SUBLIBRARY structuresdatatypes
     PRIVATE
         StringDataInformation
         StringData
@@ -602,14 +617,14 @@ oktetakastencontrollers_add_sublibrary(view/structures/datatypes/strings
         EbcdicStringData
 )
 
-oktetakastencontrollers_add_sublibrary(../../core/charcodecs
-    LIBRARY structuresdatatypes
+oktetakastencontrollers_sublibrary_sources(../../core/charcodecs
+    SUBLIBRARY structuresdatatypes
     PRIVATE
         Ebcdic1047CharCodec
 )
 
-oktetakastencontrollers_add_sublibrary(view/structures/script
-    LIBRARY structuresdatatypes
+oktetakastencontrollers_sublibrary_sources(view/structures/script
+    SUBLIBRARY structuresdatatypes
     PRIVATE
         ScriptEngineInitializer
         ScriptHandler
@@ -619,8 +634,8 @@ oktetakastencontrollers_add_sublibrary(view/structures/script
         SafeReference
 )
 
-oktetakastencontrollers_add_sublibrary(view/structures/script/classes
-    LIBRARY structuresdatatypes
+oktetakastencontrollers_sublibrary_sources(view/structures/script/classes
+    SUBLIBRARY structuresdatatypes
     PRIVATE
         DefaultScriptClass
         ArrayScriptClass
@@ -632,8 +647,8 @@ oktetakastencontrollers_add_sublibrary(view/structures/script/classes
         StructUnionScriptClass
 )
 
-oktetakastencontrollers_add_sublibrary(view/structures/parsers
-    LIBRARY structuresdatatypes
+oktetakastencontrollers_sublibrary_sources(view/structures/parsers
+    SUBLIBRARY structuresdatatypes
     PRIVATE
         AbstractStructureParser
         OsdParser
@@ -643,20 +658,20 @@ oktetakastencontrollers_add_sublibrary(view/structures/parsers
         ParserUtils
 )
 
-oktetakastencontrollers_add_sublibrary(view/structures/settings
-    LIBRARY structuresdatatypes
+oktetakastencontrollers_sublibrary_sources(view/structures/settings
+    SUBLIBRARY structuresdatatypes
     KCFG
         structureviewpreferences.kcfgc
 )
 
-oktetakastencontrollers_add_sublibrary(view/structures
-    LIBRARY structuresdatatypes
+oktetakastencontrollers_sublibrary_sources(view/structures
+    SUBLIBRARY structuresdatatypes
     PRIVATE
         AllPrimitiveTypes
 )
 
 #these source files are not needed by the static library for unit tests, therefore keep them separate
-oktetakastencontrollers_add_sublibrary(view/structures/settings
+oktetakastencontrollers_library_sources(view/structures/settings
     PRIVATE
         StructureAddRemoveWidget
         StructureItemDelegate
@@ -671,7 +686,7 @@ oktetakastencontrollers_add_sublibrary(view/structures/settings
         LicenseDialog
     UI structureviewsettingswidget.ui
 )
-oktetakastencontrollers_add_sublibrary(view/structures
+oktetakastencontrollers_library_sources(view/structures
     PUBLIC
         StructuresToolFactory
         StructuresToolViewFactory
@@ -686,7 +701,7 @@ oktetakastencontrollers_add_sublibrary(view/structures
         StructureViewItemDelegate
 )
 
-oktetakastencontrollers_add_sublibrary(view/print
+oktetakastencontrollers_library_sources(view/print
     PUBLIC
         PrintControllerFactory
     PRIVATE
@@ -703,7 +718,7 @@ oktetakastencontrollers_add_sublibrary(view/print
 )
 configure_file(view/print/printtool-config.hpp.in ${CMAKE_CURRENT_BINARY_DIR}/printtool-config.hpp @ONLY)
 
-oktetakastencontrollers_add_sublibrary(view/viewconfig
+oktetakastencontrollers_library_sources(view/viewconfig
     PUBLIC
         ViewConfigControllerFactory
     PRIVATE
@@ -712,21 +727,21 @@ oktetakastencontrollers_add_sublibrary(view/viewconfig
         ViewConfigController
 )
 
-oktetakastencontrollers_add_sublibrary(view/viewstatus
+oktetakastencontrollers_library_sources(view/viewstatus
     PUBLIC
         ViewStatusControllerFactory
     PRIVATE
         ViewStatusController
 )
 
-oktetakastencontrollers_add_sublibrary(view/viewmode
+oktetakastencontrollers_library_sources(view/viewmode
     PUBLIC
         ViewModeControllerFactory
     PRIVATE
         ViewModeController
 )
 
-oktetakastencontrollers_add_sublibrary(view/viewprofiles
+oktetakastencontrollers_library_sources(view/viewprofiles
     PUBLIC
         ViewProfilesManageControllerFactory
         # TODO: two controllers in one subdir
@@ -742,14 +757,14 @@ oktetakastencontrollers_add_sublibrary(view/viewprofiles
         ViewProfilesManageController
 )
 
-oktetakastencontrollers_add_sublibrary(view/viewcontextmenu
+oktetakastencontrollers_library_sources(view/viewcontextmenu
     PUBLIC
         ViewContextMenuControllerFactory
     PRIVATE
         ViewContextMenuController
 )
 
-oktetakastencontrollers_add_sublibrary(utils
+oktetakastencontrollers_library_sources(utils
     BUILD_INCLUDEDIR
     PRIVATE
         LabelledToolBarWidget
@@ -784,7 +799,7 @@ okteta_add_cmakeconfig(Controllers NAMESPACE Okteta Kasten
 if( KASTEN_BUILD_INTERNAL_TEMPLATES )
 
 add_library(ByteArrayFilterTemplates STATIC)
-okteta_add_sublibrary(ByteArrayFilterTemplates
+okteta_library_sources(ByteArrayFilterTemplates
     SUBDIR view/libbytearrayfilter/filter/template
     PRIVATE
         Template_ByteArrayFilter
@@ -803,7 +818,7 @@ target_link_libraries(ByteArrayFilterTemplates
 )
 
 add_library(ByteArrayCheckSumTemplates STATIC)
-okteta_add_sublibrary(ByteArrayCheckSumTemplates
+okteta_library_sources(ByteArrayCheckSumTemplates
     SUBDIR view/libbytearraychecksum/algorithm/template
     PRIVATE
         Template_ByteArrayCheckSumAlgorithm

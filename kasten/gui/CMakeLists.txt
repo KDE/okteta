@@ -31,15 +31,15 @@ ecm_qt_declare_logging_category(OktetaKastenGui
     EXPORT OKTETA
 )
 
-macro(OKTETAKASTENGUI_ADD_SUBLIBRARY _subdir)
-    okteta_add_sublibrary(Gui NAMESPACE Okteta Kasten
+macro(OKTETAKASTENGUI_LIBRARY_SOURCES _subdir)
+    okteta_library_sources(Gui NAMESPACE Okteta Kasten
         REVERSE_NAMESPACE_INCLUDEDIR
         SUBDIR ${_subdir}
         ${ARGN}
     )
 endmacro()
 
-oktetakastengui_add_sublibrary(liboktetawidgets
+oktetakastengui_library_sources(liboktetawidgets
     BUILD_INCLUDEDIR
     PUBLIC
         AddressComboBox
@@ -57,56 +57,56 @@ oktetakastengui_add_sublibrary(liboktetawidgets
         ByteArrayValueStringValidator
 )
 
-oktetakastengui_add_sublibrary(io/streamencoder/values
+oktetakastengui_library_sources(io/streamencoder/values
     PRIVATE
         ByteArrayValuesStreamEncoderConfigEditor
         ByteArrayValuesStreamEncoderConfigEditorFactory
         ByteArrayValuesStreamEncoder
 )
 
-oktetakastengui_add_sublibrary(io/streamencoder/base32
+oktetakastengui_library_sources(io/streamencoder/base32
     PRIVATE
         ByteArrayBase32StreamEncoderConfigEditor
         ByteArrayBase32StreamEncoderConfigEditorFactory
         ByteArrayBase32StreamEncoder
 )
 
-oktetakastengui_add_sublibrary(io/streamencoder/uuencoding
+oktetakastengui_library_sources(io/streamencoder/uuencoding
     PRIVATE
         ByteArrayUuencodingStreamEncoderConfigEditor
         ByteArrayUuencodingStreamEncoderConfigEditorFactory
         ByteArrayUuencodingStreamEncoder
 )
 
-oktetakastengui_add_sublibrary(io/streamencoder/xxencoding
+oktetakastengui_library_sources(io/streamencoder/xxencoding
     PRIVATE
         ByteArrayXxencodingStreamEncoderConfigEditor
         ByteArrayXxencodingStreamEncoderConfigEditorFactory
         ByteArrayXxencodingStreamEncoder
 )
 
-oktetakastengui_add_sublibrary(io/streamencoder/sourcecode
+oktetakastengui_library_sources(io/streamencoder/sourcecode
     PRIVATE
         ByteArraySourceCodeStreamEncoderConfigEditor
         ByteArraySourceCodeStreamEncoderConfigEditorFactory
         ByteArraySourceCodeStreamEncoder
 )
 
-oktetakastengui_add_sublibrary(io/streamencoder/srec
+oktetakastengui_library_sources(io/streamencoder/srec
     PRIVATE
         ByteArraySRecStreamEncoderConfigEditor
         ByteArraySRecStreamEncoderConfigEditorFactory
         ByteArraySRecStreamEncoder
 )
 
-oktetakastengui_add_sublibrary(io/streamencoder/ihex
+oktetakastengui_library_sources(io/streamencoder/ihex
     PRIVATE
         ByteArrayIHexStreamEncoderConfigEditor
         ByteArrayIHexStreamEncoderConfigEditorFactory
         ByteArrayIHexStreamEncoder
 )
 
-oktetakastengui_add_sublibrary(io/streamencoder/viewhtml
+oktetakastengui_library_sources(io/streamencoder/viewhtml
     PRIVATE
         AbstractColumnHtmlRenderer
         OffsetColumnHtmlRenderer
@@ -117,7 +117,7 @@ oktetakastengui_add_sublibrary(io/streamencoder/viewhtml
         ByteArrayViewHtmlStreamEncoder
 )
 
-oktetakastengui_add_sublibrary(io/streamencoder/viewtext
+oktetakastengui_library_sources(io/streamencoder/viewtext
     PRIVATE
         AbstractColumnTextRenderer
         OffsetColumnTextRenderer
@@ -129,20 +129,20 @@ oktetakastengui_add_sublibrary(io/streamencoder/viewtext
         ByteArrayViewTextStreamEncoder
 )
 
-oktetakastengui_add_sublibrary(io/streamencoder/chars
+oktetakastengui_library_sources(io/streamencoder/chars
     PRIVATE
         ByteArrayCharsStreamEncoder
 )
-oktetakastengui_add_sublibrary(io/streamencoder/base64
+oktetakastengui_library_sources(io/streamencoder/base64
     PRIVATE
         ByteArrayBase64StreamEncoder
 )
-oktetakastengui_add_sublibrary(io/streamencoder/base85
+oktetakastengui_library_sources(io/streamencoder/base85
     PRIVATE
         ByteArrayBase85StreamEncoder
 )
 
-oktetakastengui_add_sublibrary(io/streamencoder
+oktetakastengui_library_sources(io/streamencoder
     BUILD_INCLUDEDIR
     PUBLIC
         AbstractByteArrayStreamEncoder
@@ -150,26 +150,26 @@ oktetakastengui_add_sublibrary(io/streamencoder
         ByteArrayTextStreamEncoderPreview
 )
 
-oktetakastengui_add_sublibrary(io/generator/pattern
+oktetakastengui_library_sources(io/generator/pattern
     PRIVATE
         ByteArrayPatternGeneratorconfigEditor
         ByteArrayPatternGeneratorconfigEditorFactory
         ByteArrayPatternGenerator
 )
 
-oktetakastengui_add_sublibrary(io/generator/randomdata
+oktetakastengui_library_sources(io/generator/randomdata
     PRIVATE
         ByteArrayRandomDataGeneratorconfigEditor
         ByteArrayRandomDataGeneratorconfigEditorFactory
         ByteArrayRandomDataGenerator
 )
 
-oktetakastengui_add_sublibrary(io/generator/sequence
+oktetakastengui_library_sources(io/generator/sequence
     PRIVATE
         ByteArraySequenceGenerator
 )
 
-oktetakastengui_add_sublibrary(io
+oktetakastengui_library_sources(io
     BUILD_INCLUDEDIR
     PUBLIC
         ByteArrayStreamEncoderFactory
@@ -181,7 +181,7 @@ oktetakastengui_add_sublibrary(io
         ByteArrayViewProfileSynchronizer
 )
 
-oktetakastengui_add_sublibrary(view
+oktetakastengui_library_sources(view
     BUILD_INCLUDEDIR
     PUBLIC
         ByteArrayView
@@ -193,14 +193,14 @@ oktetakastengui_add_sublibrary(view
         UserMessagesOverlayedWidget
 )
 
-oktetakastengui_add_sublibrary(system
+oktetakastengui_library_sources(system
     BUILD_INCLUDEDIR
     PUBLIC
         ByteArrayViewProfileLock
         ByteArrayViewProfileManager
 )
 
-okteta_add_sublibrary(Gui NAMESPACE Okteta Kasten
+okteta_library_sources(Gui NAMESPACE Okteta Kasten
     REVERSE_NAMESPACE_INCLUDEDIR
     PUBLIC
         OktetaKastenGui

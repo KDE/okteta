@@ -27,14 +27,14 @@ ecm_qt_declare_logging_category(KastenGui
 
 target_compile_definitions(KastenGui PRIVATE -DTRANSLATION_DOMAIN=\"libkasten\")
 
-macro(KASTENGUI_ADD_SUBLIBRARY _subdir)
-    okteta_add_sublibrary(Gui  NAMESPACE Kasten
+macro(KASTENGUI_LIBRARY_SOURCES _subdir)
+    okteta_library_sources(Gui NAMESPACE Kasten
         SUBDIR ${_subdir}
         ${ARGN}
     )
 endmacro()
 
-kastengui_add_sublibrary(view
+kastengui_library_sources(view
     BUILD_INCLUDEDIR
     PUBLIC
         SelectedDataWriteable
@@ -53,13 +53,13 @@ kastengui_add_sublibrary(view
         AbstractToolInlineView
 )
 
-kastengui_add_sublibrary(io/filesystem
+kastengui_library_sources(io/filesystem
     PUBLIC
         ModelEncoderFileSystemExporterConfigEditor
         ModelEncoderFileSystemExporterConfigEditorFactory
 )
 
-kastengui_add_sublibrary(io
+kastengui_library_sources(io
     BUILD_INCLUDEDIR
     PUBLIC
         AbstractModelStreamEncoderConfigEditor
@@ -72,7 +72,7 @@ kastengui_add_sublibrary(io
         AbstractModelDataGeneratorConfigEditorFactory
 )
 
-kastengui_add_sublibrary(system
+kastengui_library_sources(system
     BUILD_INCLUDEDIR
     PUBLIC
         AbstractDocumentStrategy
@@ -90,7 +90,7 @@ kastengui_add_sublibrary(system
         CreateDialog
 )
 
-kastengui_add_sublibrary(shell
+kastengui_library_sources(shell
     BUILD_INCLUDEDIR
     PUBLIC
         ToolInlineViewable
@@ -119,7 +119,7 @@ kastengui_add_sublibrary(shell
         ViewBox
 )
 
-kastengui_add_sublibrary(controller
+kastengui_library_sources(controller
     BUILD_INCLUDEDIR
     PUBLIC
         AbstractXmlGuiController
@@ -130,7 +130,7 @@ kastengui_add_sublibrary(controller
         ToggleButton
 )
 
-okteta_add_sublibrary(Gui  NAMESPACE Kasten
+okteta_library_sources(Gui  NAMESPACE Kasten
     PUBLIC
         KastenGui
 )

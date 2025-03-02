@@ -25,14 +25,14 @@ ecm_qt_declare_logging_category(OktetaCore
     EXPORT OKTETA
 )
 
-macro(OKTETACORE_ADD_SUBLIBRARY _subdir)
-    okteta_add_sublibrary(Core NAMESPACE Okteta
+macro(OKTETACORE_LIBRARY_SOURCES _subdir)
+    okteta_library_sources(Core NAMESPACE Okteta
         SUBDIR ${_subdir}
         ${ARGN}
     )
 endmacro()
 
-oktetacore_add_sublibrary(charcodecs
+oktetacore_library_sources(charcodecs
     PRIVATE
         CharCodec
         USASCIICharCodec
@@ -42,7 +42,7 @@ oktetacore_add_sublibrary(charcodecs
         TextCharCodec
 )
 
-oktetacore_add_sublibrary(valuecodecs
+oktetacore_library_sources(valuecodecs
     PRIVATE
         BinaryByteCodec
         ValueCodec
@@ -51,7 +51,7 @@ oktetacore_add_sublibrary(valuecodecs
         OctalByteCodec
 )
 
-oktetacore_add_sublibrary(piecetable
+oktetacore_library_sources(piecetable
     PRIVATE
         PieceList
         PieceTable
@@ -66,7 +66,7 @@ oktetacore_add_sublibrary(piecetable
         RevertablePiecetable
 )
 
-okteta_add_sublibrary(Core  NAMESPACE Okteta
+okteta_library_sources(Core NAMESPACE Okteta
     PUBLIC
         OktetaCore
         Range

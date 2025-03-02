@@ -20,6 +20,32 @@ function(_okteta_target_name _varName _baseName)
     set(${_varName} "${_namespacePrefix}${_baseName}" PARENT_SCOPE)
 endfunction()
 
+function(_okteta_object_and_static_library_names _objectLibTargetVarName _staticLibTargetVarName _targetName _staticLibTargetName)
+    set(_objectLibTargetName "${_staticLibTargetName}_objects")
+    if (TARGET ${_objectLibTargetName})
+        set(${_objectLibTargetVarName} "${_objectLibTargetName}" PARENT_SCOPE)
+    else()
+        set(${_objectLibTargetVarName} PARENT_SCOPE)
+    endif()
+    if (TARGET ${_staticLibTargetName})
+        set(${_staticLibTargetVarName} "${_staticLibTargetName}" PARENT_SCOPE)
+    else()
+        set(${_staticLibTargetVarName} PARENT_SCOPE)
+    endif()
+endfunction()
+
+function(_okteta_library_target_name _varName)
+    set(_library_targets)
+    foreach(_library_target ${ARGN})
+        set(_object_library_target "${_library_target}_objects")
+        if (TARGET ${_object_library_target})
+            list(APPEND _library_targets ${_object_library_target})
+        else()
+            list(APPEND _library_targets ${_library_target})
+        endif()
+    endforeach()
+    set(${_varName} ${_library_targets}  PARENT_SCOPE)
+endfunction()
 
 function(_okteta_setup_namespace)
     set(options
@@ -194,8 +220,39 @@ ${ARGS_CODE}
     )
 endfunction()
 
-# TODO: consider renaming to okteta_add_classes
-macro(okteta_add_sublibrary _baseName)
+function(okteta_qt_declare_logging_category _baseName)
+    set(options
+    )
+    set(oneValueArgs
+        SUBLIBRARY
+    )
+    set(multiValueArgs
+        NAMESPACE
+    )
+    cmake_parse_arguments(ARG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+
+    _okteta_target_name(_targetName ${_baseName} ${ARG_NAMESPACE})
+
+    set(_src)
+    ecm_qt_declare_logging_category(_src ${ARG_UNPARSED_ARGUMENTS})
+    if (ARG_SUBLIBRARY)
+        set(_library_target ${ARG_SUBLIBRARY})
+
+        _okteta_object_and_static_library_names(_object_library_target _static_library_target ${_targetName} ${_library_target})
+
+        if (_static_library_target)
+            target_sources(${_static_library_target} PRIVATE ${_src})
+        endif()
+
+        if (_object_library_target)
+            target_sources(${_object_library_target} PRIVATE ${_src})
+        endif()
+    else()
+        target_sources(${_targetName} PRIVATE ${_src})
+    endif()
+endfunction()
+
+macro(okteta_library_sources _baseName)
     set(options
         NO_VERSIONED_INCLUDEDIR
         REVERSE_NAMESPACE_INCLUDEDIR
@@ -203,7 +260,6 @@ macro(okteta_add_sublibrary _baseName)
     )
     set(oneValueArgs
         SUBDIR
-        LIBRARY
     )
     set(multiValueArgs
         NAMESPACE
@@ -213,27 +269,21 @@ macro(okteta_add_sublibrary _baseName)
         UI
         QRC
     )
-    cmake_parse_arguments(OKTETA_ADD_SUBLIBRARY "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+    cmake_parse_arguments(ARG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
-    _okteta_target_name(_targetName ${_baseName} ${OKTETA_ADD_SUBLIBRARY_NAMESPACE})
+    _okteta_target_name(_targetName ${_baseName} ${ARG_NAMESPACE})
 
-    string(CONCAT _namespaceConcat ${OKTETA_ADD_SUBLIBRARY_NAMESPACE})
-    string(TOLOWER "${_namespaceConcat}${_baseName}" _libname)
-    if (OKTETA_ADD_SUBLIBRARY_LIBRARY)
-        set(_library_target ${OKTETA_ADD_SUBLIBRARY_LIBRARY})
-    else()
-        set(_library_target ${_targetName})
-    endif()
-    if (OKTETA_ADD_SUBLIBRARY_SUBDIR)
-        set(_relativePath "${OKTETA_ADD_SUBLIBRARY_SUBDIR}/")
-        set(_egh_relative_param RELATIVE ${OKTETA_ADD_SUBLIBRARY_SUBDIR})
+    set(_library_target ${_targetName})
+    if (ARG_SUBDIR)
+        set(_relativePath "${ARG_SUBDIR}/")
+        set(_egh_relative_param RELATIVE ${ARG_SUBDIR})
     else()
         set(_relativePath)
         set(_egh_relative_param)
     endif()
     set(_srcs )
 
-    foreach(_classname ${OKTETA_ADD_SUBLIBRARY_PUBLIC} ${OKTETA_ADD_SUBLIBRARY_PRIVATE})
+    foreach(_classname ${ARG_PUBLIC} ${ARG_PRIVATE})
         string(TOLOWER "${_classname}" _lc_classname)
 
         set(_source "${_relativePath}${_lc_classname}.cpp")
@@ -249,29 +299,29 @@ macro(okteta_add_sublibrary _baseName)
         endif()
     endforeach()
 
-    foreach(_kcfg ${OKTETA_ADD_SUBLIBRARY_KCFG})
+    foreach(_kcfg ${ARG_KCFG})
         kconfig_add_kcfg_files(${_library_target} "${_relativePath}${_kcfg}")
     endforeach()
 
-    foreach(_ui ${OKTETA_ADD_SUBLIBRARY_UI})
+    foreach(_ui ${ARG_UI})
         ki18n_wrap_ui(${_library_target} "${_relativePath}${_ui}")
     endforeach()
 
-    foreach(_qrc ${OKTETA_ADD_SUBLIBRARY_QRC})
+    foreach(_qrc ${ARG_QRC})
         qt5_add_resources(_srcs "${_relativePath}${_qrc}")
     endforeach()
 
     target_sources(${_library_target} PRIVATE ${_srcs})
-    if (OKTETA_ADD_SUBLIBRARY_PUBLIC)
-        set(_cc_include_dir ${OKTETA_ADD_SUBLIBRARY_NAMESPACE})
-        if (OKTETA_ADD_SUBLIBRARY_REVERSE_NAMESPACE_INCLUDEDIR)
+    if (ARG_PUBLIC)
+        set(_cc_include_dir ${ARG_NAMESPACE})
+        if (ARG_REVERSE_NAMESPACE_INCLUDEDIR)
             list(REVERSE _cc_include_dir)
         endif()
         string(REPLACE ";" "/" _cc_include_dir "${_cc_include_dir}")
 
         ecm_generate_headers(_cchdrs
             HEADER_NAMES
-                ${OKTETA_ADD_SUBLIBRARY_PUBLIC}
+                ${ARG_PUBLIC}
             ${_egh_relative_param}
             HEADER_EXTENSION hpp
             PREFIX ${_cc_include_dir}
@@ -279,7 +329,7 @@ macro(okteta_add_sublibrary _baseName)
         )
     endif()
 
-    if (OKTETA_ADD_SUBLIBRARY_BUILD_INCLUDEDIR)
+    if (ARG_BUILD_INCLUDEDIR)
         target_include_directories( ${_library_target}
             PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/${_relativePath}>
         )
@@ -301,6 +351,230 @@ macro(okteta_add_sublibrary _baseName)
     endif()
 endmacro()
 
+function(okteta_add_sublibrary _baseName)
+    set(options
+        UNTESTED # means "unused by tests", does not need separate lib
+        NO_EXPORTS
+    )
+    set(oneValueArgs
+        SUBLIBRARY
+    )
+    set(multiValueArgs
+        NAMESPACE
+        PUBLIC
+        PRIVATE
+    )
+    cmake_parse_arguments(ARG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+
+    _okteta_target_name(_targetName ${_baseName} ${ARG_NAMESPACE})
+    set(_library_target ${ARG_SUBLIBRARY})
+
+    get_target_property(_library_type ${_targetName} TYPE)
+    if (_library_type STREQUAL "STATIC_LIBRARY" OR ARG_NO_EXPORTS)
+        set(_object_library_target)
+        set(_static_library_target "${_library_target}")
+    else()
+        set(_object_library_target "${_library_target}_objects")
+        if (BUILD_TESTING AND NOT ARG_UNTESTED)
+            set(_static_library_target "${_library_target}")
+        else()
+            set(_static_library_target)
+        endif()
+    endif()
+
+    get_target_property(_staticlib_define ${_targetName} OKTETA_STATICLIB_DEFINE)
+
+    if(_static_library_target)
+        add_library(${_static_library_target} STATIC)
+        set_target_properties(${_static_library_target} PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
+        # avoid mixing the define into linkage where other sources do/use exported symbols
+        if(NOT ARG_NO_EXPORTS) # TODO: could this be checked for not accidentally including export macros
+            target_compile_definitions(${_static_library_target} PUBLIC ${_staticlib_define})
+        endif()
+        target_link_libraries(${_static_library_target}
+            PUBLIC
+                ${ARG_PUBLIC}
+            PRIVATE
+                ${ARG_PRIVATE}
+        )
+    endif()
+    if (_object_library_target)
+        add_library(${_object_library_target} OBJECT)
+        set_target_properties(${_object_library_target} PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
+        _okteta_library_target_name(_public_linkage ${ARG_PUBLIC})
+        _okteta_library_target_name(_private_linkage ${ARG_PRIVATE})
+        target_link_libraries(${_object_library_target}
+            PUBLIC
+                ${_public_linkage}
+            PRIVATE
+                ${_private_linkage}
+        )
+        target_link_libraries(${_targetName}
+            PRIVATE
+                ${_object_library_target}
+        )
+    else()
+        target_link_libraries(${_targetName}
+            PRIVATE
+                ${_static_library_target}
+        )
+    endif()
+endfunction()
+
+function(okteta_sublibrary_compile_definitions _baseName)
+    set(options
+    )
+    set(oneValueArgs
+        SUBLIBRARY
+    )
+    set(multiValueArgs
+        NAMESPACE
+        PUBLIC
+        PRIVATE
+    )
+    cmake_parse_arguments(ARG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+
+    _okteta_target_name(_targetName ${_baseName} ${ARG_NAMESPACE})
+    set(_library_target ${ARG_SUBLIBRARY})
+
+    _okteta_object_and_static_library_names(_object_library_target _static_library_target ${_targetName} ${_library_target})
+
+    if(_static_library_target)
+        target_compile_definitions(${_static_library_target}
+            PUBLIC
+                ${ARG_PUBLIC}
+            PRIVATE
+                ${ARG_PRIVATE}
+        )
+    endif()
+    if(_object_library_target)
+        target_compile_definitions(${_object_library_target}
+            PUBLIC
+                ${ARG_PUBLIC}
+            PRIVATE
+                ${ARG_PRIVATE}
+        )
+    endif()
+endfunction()
+
+macro(okteta_sublibrary_sources _baseName)
+    set(options
+        NO_VERSIONED_INCLUDEDIR
+        REVERSE_NAMESPACE_INCLUDEDIR
+        BUILD_INCLUDEDIR
+    )
+    set(oneValueArgs
+        SUBDIR
+        SUBLIBRARY
+    )
+    set(multiValueArgs
+        NAMESPACE
+        PUBLIC
+        PRIVATE
+        KCFG
+        UI
+        QRC
+    )
+    cmake_parse_arguments(ARG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+
+    _okteta_target_name(_targetName ${_baseName} ${ARG_NAMESPACE})
+    set(_library_target ${ARG_SUBLIBRARY})
+
+    _okteta_object_and_static_library_names(_object_library_target _static_library_target ${_targetName} ${_library_target})
+
+    if (ARG_SUBDIR)
+        set(_relativePath "${ARG_SUBDIR}/")
+        set(_egh_relative_param RELATIVE ${ARG_SUBDIR})
+    else()
+        set(_relativePath)
+        set(_egh_relative_param)
+    endif()
+    set(_srcs )
+
+    foreach(_classname ${ARG_PUBLIC} ${ARG_PRIVATE})
+        string(TOLOWER "${_classname}" _lc_classname)
+
+        set(_source "${_relativePath}${_lc_classname}.cpp")
+        set(_actualsource "${CMAKE_CURRENT_SOURCE_DIR}/${_source}")
+        if (EXISTS ${_actualsource})
+            list(APPEND _srcs "${_source}")
+        endif()
+
+        set(_source "${_relativePath}${_lc_classname}_p.cpp")
+        set(_actualsource "${CMAKE_CURRENT_SOURCE_DIR}/${_source}")
+        if (EXISTS ${_actualsource})
+            list(APPEND _srcs "${_source}")
+        endif()
+    endforeach()
+
+    foreach(_kcfg ${ARG_KCFG})
+        kconfig_add_kcfg_files(_srcs "${_relativePath}${_kcfg}")
+    endforeach()
+
+    foreach(_ui ${ARG_UI})
+        ki18n_wrap_ui(_srcs "${_relativePath}${_ui}")
+    endforeach()
+
+    foreach(_qrc ${ARG_QRC})
+        qt5_add_resources(_srcs "${_relativePath}${_qrc}")
+    endforeach()
+
+    if (_static_library_target)
+        target_sources(${_static_library_target} PRIVATE ${_srcs})
+    endif()
+    if (_object_library_target)
+        target_sources(${_object_library_target} PRIVATE ${_srcs})
+    endif()
+    if (ARG_PUBLIC)
+        set(_cc_include_dir ${ARG_NAMESPACE})
+        if (ARG_REVERSE_NAMESPACE_INCLUDEDIR)
+            list(REVERSE _cc_include_dir)
+        endif()
+        string(REPLACE ";" "/" _cc_include_dir "${_cc_include_dir}")
+
+        ecm_generate_headers(_cchdrs
+            HEADER_NAMES
+                ${ARG_PUBLIC}
+            ${_egh_relative_param}
+            HEADER_EXTENSION hpp
+            PREFIX ${_cc_include_dir}
+            REQUIRED_HEADERS _hdrs
+        )
+    endif()
+
+    if (ARG_BUILD_INCLUDEDIR)
+        # add also to actual library, as the sublibary cannot be added to the public linkage
+        # and thus transfer the include dir over as needed
+        target_include_directories( ${_targetName}
+            PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/${_relativePath}>
+        )
+        if(_static_library_target)
+            target_include_directories( ${_static_library_target}
+                PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/${_relativePath}>
+            )
+        endif()
+        if (_object_library_target)
+            target_include_directories( ${_object_library_target}
+                PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/${_relativePath}>
+            )
+        endif()
+    endif()
+
+    # install
+    get_property(_include_install_dir TARGET ${_targetName} PROPERTY OKTETA_INSTALL_INCLUDEDIR)
+    if (_include_install_dir)
+        get_property(_include_dir TARGET ${_targetName} PROPERTY OKTETA_INSTALL_NORMAL_HEADERS_SUBDIR)
+        get_property(_cc_include_dir TARGET ${_targetName} PROPERTY OKTETA_INSTALL_CAMELCASE_HEADERS_SUBDIR)
+        install( FILES ${_hdrs}
+            DESTINATION "${_include_install_dir}/${_include_dir}"
+            COMPONENT Devel
+        )
+        install( FILES ${_cchdrs}
+            DESTINATION "${_include_install_dir}/${_cc_include_dir}"
+            COMPONENT Devel
+        )
+    endif()
+endmacro()
 
 function(okteta_add_library _baseName)
     set(options
@@ -438,6 +712,7 @@ function(okteta_add_library _baseName)
         VERSION     ${OKTETA_ADD_LIBRARY_VERSION}
         SOVERSION   ${OKTETA_ADD_LIBRARY_SOVERSION}
     )
+    set_property(TARGET ${_targetName} PROPERTY OKTETA_STATICLIB_DEFINE "${_definitions_prefix}_STATICLIB")
     set_property(TARGET ${_targetName} PROPERTY OKTETA_FULLNAME ${_fullName})
     set_property(TARGET ${_targetName} PROPERTY OKTETA_FULLVERSIONEDNAME ${_fullVersionedName})
     set_property(TARGET ${_targetName} PROPERTY OKTETA_NO_TARGETNAMESPACE ${OKTETA_ADD_LIBRARY_NO_TARGET_NAMESPACE})

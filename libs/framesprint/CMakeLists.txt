@@ -8,7 +8,7 @@ target_link_libraries(framesprint
         Qt5::PrintSupport
 )
 
-okteta_add_sublibrary(framesprint
+okteta_library_sources(framesprint
     PRIVATE
         PrintInfo
         AbstractFrameRenderer

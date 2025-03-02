@@ -21,15 +21,15 @@ okteta_add_library(Core NAMESPACE Okteta Kasten
 
 target_compile_definitions(OktetaKastenCore PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")
 
-macro(OKTETAKASTENCORE_ADD_SUBLIBRARY _subdir)
-    okteta_add_sublibrary(Core NAMESPACE Okteta Kasten
+macro(OKTETAKASTENCORE_LIBRARY_SOURCES _subdir)
+    okteta_library_sources(Core NAMESPACE Okteta Kasten
         REVERSE_NAMESPACE_INCLUDEDIR
         SUBDIR ${_subdir}
         ${ARGN}
     )
 endmacro()
 
-oktetakastencore_add_sublibrary(document
+oktetakastencore_library_sources(document
     BUILD_INCLUDEDIR
     PUBLIC
         ByteArrayDocument
@@ -37,7 +37,7 @@ oktetakastencore_add_sublibrary(document
         ByteArraySelection
 )
 
-oktetakastencore_add_sublibrary(io/filesystem
+oktetakastencore_library_sources(io/filesystem
     PUBLIC
         ByteArrayRawFileSynchronizer
         ByteArrayRawFileSynchronizerFactory

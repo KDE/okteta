@@ -27,14 +27,31 @@ ecm_qt_declare_logging_category(OktetaGui
     EXPORT OKTETA
 )
 
-macro(OKTETAGUI_ADD_SUBLIBRARY _subdir)
-    okteta_add_sublibrary(Gui NAMESPACE Okteta
-        SUBDIR ${_subdir}
-        ${ARGN}
-    )
-endmacro()
+okteta_add_sublibrary(Gui NAMESPACE Okteta
+    SUBLIBRARY columnsview
+    UNTESTED
+    PUBLIC
+        OktetaCore
+        Qt5::Widgets
+    PRIVATE
+        KF5::I18n
+)
 
-oktetagui_add_sublibrary(controller
+okteta_sublibrary_sources(Gui NAMESPACE Okteta
+    SUBLIBRARY columnsview
+    SUBDIR libcolumnsview
+    BUILD_INCLUDEDIR
+    PUBLIC
+        AbstractColumnStylist
+        AbstractColumnRenderer
+        PixelMetrics # TODO: this header needs to be redone
+
+    PRIVATE
+        ColumnsViewScrollAreaEngine
+)
+
+okteta_library_sources(Gui NAMESPACE Okteta
+    SUBDIR controller
     PRIVATE
         AbstractController
         AbstractMouseController
@@ -58,18 +75,7 @@ oktetagui_add_sublibrary(controller
         TouchOnlyTapAndHoldGestureRecognizer
 )
 
-oktetagui_add_sublibrary(libcolumnsview
-    BUILD_INCLUDEDIR
-    PUBLIC
-        AbstractColumnStylist
-        AbstractColumnRenderer
-        PixelMetrics # TODO: this header needs to be redone
-
-    PRIVATE
-        ColumnsViewScrollAreaEngine
-)
-
-okteta_add_sublibrary(Gui  NAMESPACE Okteta
+okteta_library_sources(Gui NAMESPACE Okteta
     PUBLIC
         OktetaGui
 
