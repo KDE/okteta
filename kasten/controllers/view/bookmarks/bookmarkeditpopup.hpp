@@ -11,6 +11,8 @@
 
 // Kasten gui
 #include <Kasten/AbstractLinePopup>
+// Okteta core
+#include <Okteta/Address>
 
 // class Bookmark;
 class QLineEdit;
@@ -30,17 +32,17 @@ public:
 
 public:
     void setName(const QString& name);
-    void setCursorPosition(int cursorPosition);
+    void setCursorPosition(Okteta::Address cursorPosition);
 
 Q_SIGNALS:
-    void bookmarkAccepted(int cursorPosition, const QString& name);
+    void bookmarkAccepted(Okteta::Address cursorPosition, const QString& name);
 
 private Q_SLOTS:
     void onFinished(int result);
 
 private:
     QLineEdit* mBookmarkNameLineEdit;
-    int m_cursorPosition;
+    Okteta::Address m_cursorPosition;
 };
 
 }
