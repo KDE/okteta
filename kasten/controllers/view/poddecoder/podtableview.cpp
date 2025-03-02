@@ -105,6 +105,7 @@ PODTableView::PODTableView(PODDecoderTool* tool, AbstractUserMessagesHandler* us
     const QString unsignedAsHexToolTip =
         i18nc("@info:tooltip",
               "Sets whether the values of the unsigned integer types are shown as hexadecimal instead of as decimal.");
+    labelledUnsignedAsHexCheck->setContentsMargins(style()->pixelMetric(QStyle::PM_ToolBarItemMargin), 0, 0, 0);
     unsignedAsHexLabel->setToolTip(unsignedAsHexToolTip);
     mUnsignedAsHexCheck->setToolTip(unsignedAsHexToolTip);
     settingsToolBar->addWidget(labelledUnsignedAsHexCheck);
