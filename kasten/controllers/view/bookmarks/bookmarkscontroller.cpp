@@ -295,7 +295,7 @@ void BookmarksController::gotoNextBookmark()
 
 void BookmarksController::gotoPreviousBookmark()
 {
-    const int positionBefore = mByteArrayView->cursorPosition() - 1;
+    const Okteta::Address positionBefore = mByteArrayView->cursorPosition() - 1;
 
     Okteta::BookmarksConstIterator bookmarksIterator = mBookmarks->createBookmarksConstIterator();
     const bool hasPrevious = bookmarksIterator.findPreviousFrom(positionBefore);

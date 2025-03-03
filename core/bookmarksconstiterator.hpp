@@ -49,7 +49,7 @@ public:
     [[nodiscard]]
     bool findNextFrom(Address offset);
     [[nodiscard]]
-    bool findPreviousFrom(unsigned int offset);
+    bool findPreviousFrom(Address offset);
     [[nodiscard]]
     const Okteta::Bookmark& next();
     [[nodiscard]]
@@ -73,7 +73,7 @@ inline const Okteta::Bookmark& BookmarksConstIterator::peekPrevious() const { re
 inline bool BookmarksConstIterator::findNext(const Okteta::Bookmark& bookmark)     { return mAdapter->findNext(bookmark); }
 inline bool BookmarksConstIterator::findPrevious(const Okteta::Bookmark& bookmark) { return mAdapter->findPrevious(bookmark); }
 inline bool BookmarksConstIterator::findNextFrom(Address offset)     { return mAdapter->findNextFrom(offset); }
-inline bool BookmarksConstIterator::findPreviousFrom(unsigned int offset) { return mAdapter->findPreviousFrom(offset); }
+inline bool BookmarksConstIterator::findPreviousFrom(Address offset) { return mAdapter->findPreviousFrom(offset); }
 inline const Okteta::Bookmark& BookmarksConstIterator::next()     { return mAdapter->next(); }
 inline const Okteta::Bookmark& BookmarksConstIterator::previous() { return mAdapter->previous(); }
 inline void BookmarksConstIterator::toBack()  { mAdapter->toBack(); }
