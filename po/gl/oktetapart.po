@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: oktetapart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-30 01:51+0000\n"
-"PO-Revision-Date: 2019-02-15 16:39+0100\n"
+"PO-Revision-Date: 2023-05-02 20:34+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -47,7 +47,7 @@ msgstr "&Vista"
 #: oktetapartreadwriteui.rc:62
 #, kde-format
 msgid "Main Toolbar"
-msgstr "Barra de ferramentas Principal"
+msgstr "Barra de ferramentas principal"
 
 #. i18n: ectx: Menu (permission)
 #: oktetapartreadwriteui.rc:11

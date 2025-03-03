@@ -95,7 +95,7 @@ msgstr "&Xanelas"
 #: oktetaui.rc:80
 #, kde-format
 msgid "Main Toolbar"
-msgstr "Barra de ferramentas Principal"
+msgstr "Barra de ferramentas principal"
 
 #: program.cpp:89
 #, kde-format
