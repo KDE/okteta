@@ -76,7 +76,7 @@ public: // Okteta::Bookmarkable API
     [[nodiscard]]
     const Okteta::Bookmark& bookmarkFor(Address offset) const override;
     [[nodiscard]]
-    bool containsBookmarkFor(int offset) const override;
+    bool containsBookmarkFor(Address offset) const override;
     [[nodiscard]]
     unsigned int bookmarksCount() const override;
 

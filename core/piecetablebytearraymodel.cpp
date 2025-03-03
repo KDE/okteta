@@ -200,7 +200,7 @@ const Okteta::Bookmark& PieceTableByteArrayModel::bookmarkFor(Address offset) co
     return d->bookmarkFor(offset);
 }
 
-bool PieceTableByteArrayModel::containsBookmarkFor(int offset) const
+bool PieceTableByteArrayModel::containsBookmarkFor(Address offset) const
 {
     Q_D(const PieceTableByteArrayModel);
 

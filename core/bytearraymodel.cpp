@@ -223,7 +223,7 @@ const Okteta::Bookmark& ByteArrayModel::bookmarkAt(unsigned int index) const
     return d->bookmarkAt(index);
 }
 
-bool ByteArrayModel::containsBookmarkFor(int offset) const
+bool ByteArrayModel::containsBookmarkFor(Address offset) const
 {
     Q_D(const ByteArrayModel);
 

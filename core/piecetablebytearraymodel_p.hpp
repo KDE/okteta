@@ -81,7 +81,7 @@ public:
     [[nodiscard]]
     const Bookmark& bookmarkFor(Address offset) const;
     [[nodiscard]]
-    bool containsBookmarkFor(int offset) const;
+    bool containsBookmarkFor(Address offset) const;
     [[nodiscard]]
     unsigned int bookmarksCount() const;
 
@@ -214,7 +214,7 @@ inline const Bookmark& PieceTableByteArrayModelPrivate::bookmarkFor(Address offs
 {
     return mBookmarks.bookmark(offset);
 }
-inline bool PieceTableByteArrayModelPrivate::containsBookmarkFor(int offset) const { return mBookmarks.contains(offset); }
+inline bool PieceTableByteArrayModelPrivate::containsBookmarkFor(Address offset) const { return mBookmarks.contains(offset); }
 inline unsigned int PieceTableByteArrayModelPrivate::bookmarksCount() const { return mBookmarks.size(); }
 
 }

@@ -42,7 +42,7 @@ public: // get
     [[nodiscard]]
     virtual const Okteta::Bookmark& bookmarkFor(Address offset) const = 0;
     [[nodiscard]]
-    virtual bool containsBookmarkFor(int offset) const = 0;
+    virtual bool containsBookmarkFor(Address offset) const = 0;
     [[nodiscard]]
     virtual unsigned int bookmarksCount() const = 0;
 

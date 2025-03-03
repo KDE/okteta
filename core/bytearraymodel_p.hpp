@@ -89,7 +89,7 @@ public: // Bookmarkable API
     [[nodiscard]]
     const Bookmark& bookmarkFor(Address offset) const;
     [[nodiscard]]
-    bool containsBookmarkFor(int offset) const;
+    bool containsBookmarkFor(Address offset) const;
     [[nodiscard]]
     unsigned int bookmarksCount() const;
 
@@ -224,7 +224,7 @@ inline const Bookmark& ByteArrayModelPrivate::bookmarkAt(unsigned int index) con
 {
     return m_bookmarks.at(index);
 }
-inline bool ByteArrayModelPrivate::containsBookmarkFor(int offset) const { return m_bookmarks.contains(offset); }
+inline bool ByteArrayModelPrivate::containsBookmarkFor(Address offset) const { return m_bookmarks.contains(offset); }
 inline unsigned int ByteArrayModelPrivate::bookmarksCount() const { return m_bookmarks.size(); }
 
 }
