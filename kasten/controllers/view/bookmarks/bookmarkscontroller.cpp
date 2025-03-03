@@ -283,7 +283,7 @@ void BookmarksController::deleteAllBookmarks()
 
 void BookmarksController::gotoNextBookmark()
 {
-    const int positionAfter = mByteArrayView->cursorPosition() + 1;
+    const Okteta::Address positionAfter = mByteArrayView->cursorPosition() + 1;
 
     Okteta::BookmarksConstIterator bookmarksIterator = mBookmarks->createBookmarksConstIterator();
     const bool hasNext = bookmarksIterator.findNextFrom(positionAfter);
