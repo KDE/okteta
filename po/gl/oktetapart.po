@@ -57,7 +57,7 @@ msgstr "&Vista"
 #: oktetapartreadwriteui.rc:60
 #, kde-format
 msgid "Main Toolbar"
-msgstr "Barra de ferramentas Principal"
+msgstr "Barra de ferramentas principal"
 
 #. i18n: ectx: Menu (permission)
 #: oktetapartreadwriteui.rc:11
