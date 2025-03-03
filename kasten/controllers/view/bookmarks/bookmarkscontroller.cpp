@@ -151,7 +151,7 @@ void BookmarksController::updateBookmarks()
         return;
     }
 
-    const int startOffset = mByteArrayView->startOffset();
+    const Okteta::Address startOffset = mByteArrayView->startOffset();
     Okteta::OffsetFormat::print printFunction =
         Okteta::OffsetFormat::printFunction((Okteta::OffsetFormat::Format)mByteArrayView->offsetCoding());
 
@@ -183,7 +183,7 @@ void BookmarksController::updateBookmarks()
 void BookmarksController::onBookmarksAdded(const QVector<Okteta::Bookmark>& bookmarks)
 {
     Q_UNUSED(bookmarks)
-    const int currentPosition = mByteArrayView->cursorPosition();
+    const Okteta::Address currentPosition = mByteArrayView->cursorPosition();
     onCursorPositionChanged(currentPosition);
 
     const int bookmarksCount = mBookmarks->bookmarksCount();
@@ -197,7 +197,7 @@ void BookmarksController::onBookmarksAdded(const QVector<Okteta::Bookmark>& book
 void BookmarksController::onBookmarksRemoved(const QVector<Okteta::Bookmark>& bookmarks)
 {
     Q_UNUSED(bookmarks)
-    const int currentPosition = mByteArrayView->cursorPosition();
+    const Okteta::Address currentPosition = mByteArrayView->cursorPosition();
     onCursorPositionChanged(currentPosition);
 
     const int bookmarksCount = mBookmarks->bookmarksCount();
@@ -235,7 +235,7 @@ void BookmarksController::onCursorPositionChanged(Okteta::Address newPosition)
 
 void BookmarksController::createBookmark()
 {
-    const int cursorPosition = mByteArrayView->cursorPosition();
+    const Okteta::Address cursorPosition = mByteArrayView->cursorPosition();
 
     // search for text at cursor
     std::unique_ptr<const Okteta::CharCodec> charCodec(Okteta::CharCodec::createCodec(mByteArrayView->charCodingName()));
@@ -260,7 +260,7 @@ void BookmarksController::createBookmark()
     bookmarkEditPopup->open();
 }
 
-void BookmarksController::addBookmark(int cursorPosition, const QString& name)
+void BookmarksController::addBookmark(Okteta::Address cursorPosition, const QString& name)
 {
     Okteta::Bookmark bookmark(cursorPosition);
     bookmark.setName(name);
@@ -271,7 +271,7 @@ void BookmarksController::addBookmark(int cursorPosition, const QString& name)
 
 void BookmarksController::deleteBookmark()
 {
-    const int cursorPosition = mByteArrayView->cursorPosition();
+    const Okteta::Address cursorPosition = mByteArrayView->cursorPosition();
     const QVector<Okteta::Bookmark> bookmarks { cursorPosition };
     mBookmarks->removeBookmarks(bookmarks);
 }
@@ -288,7 +288,7 @@ void BookmarksController::gotoNextBookmark()
     Okteta::BookmarksConstIterator bookmarksIterator = mBookmarks->createBookmarksConstIterator();
     const bool hasNext = bookmarksIterator.findNextFrom(positionAfter);
     if (hasNext) {
-        const int newPosition = bookmarksIterator.next().offset();
+        const Okteta::Address newPosition = bookmarksIterator.next().offset();
         mByteArrayView->setCursorPosition(newPosition);
     }
 }
@@ -300,14 +300,14 @@ void BookmarksController::gotoPreviousBookmark()
     Okteta::BookmarksConstIterator bookmarksIterator = mBookmarks->createBookmarksConstIterator();
     const bool hasPrevious = bookmarksIterator.findPreviousFrom(positionBefore);
     if (hasPrevious) {
-        const int newPosition = bookmarksIterator.previous().offset();
+        const Okteta::Address newPosition = bookmarksIterator.previous().offset();
         mByteArrayView->setCursorPosition(newPosition);
     }
 }
 
 void BookmarksController::onBookmarkTriggered(QAction* action)
 {
-    const int newPosition = action->data().toInt();
+    const Okteta::Address newPosition = action->data().toInt();
     mByteArrayView->setCursorPosition(newPosition);
 }
 

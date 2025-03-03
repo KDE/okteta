@@ -119,7 +119,7 @@ Okteta::Bookmark BookmarksTool::createBookmark()
     Okteta::Bookmark bookmark;
 
     if (mBookmarks) {
-        const int cursorPosition = mByteArrayView->cursorPosition();
+        const Okteta::Address cursorPosition = mByteArrayView->cursorPosition();
 
         // search for text at cursor
         std::unique_ptr<const Okteta::CharCodec> charCodec(Okteta::CharCodec::createCodec(mByteArrayView->charCodingName()));
@@ -186,7 +186,7 @@ void BookmarksTool::onCursorPositionChanged(Okteta::Address newPosition)
 // better just only check for the added and removed, if they include the current position, then change mCanCreateBookmark
 void BookmarksTool::onBookmarksModified()
 {
-    const int cursorPosition = mByteArrayView->cursorPosition();
+    const Okteta::Address cursorPosition = mByteArrayView->cursorPosition();
     onCursorPositionChanged(cursorPosition);
 }
 

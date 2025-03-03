@@ -41,13 +41,13 @@ public: // AbstractTool API
 
 public: // status
     [[nodiscard]]
-    int currentSelectionStart() const;
+    Okteta::Address currentSelectionStart() const;
     [[nodiscard]]
-    int currentSelectionEnd() const;
+    Okteta::Address currentSelectionEnd() const;
     [[nodiscard]]
-    int targetSelectionStart() const;
+    Okteta::Address targetSelectionStart() const;
     [[nodiscard]]
-    int targetSelectionEnd() const;
+    Okteta::Address targetSelectionEnd() const;
     [[nodiscard]]
     bool isEndRelative() const;
     [[nodiscard]]
@@ -74,16 +74,16 @@ Q_SIGNALS:
 
 private:
     [[nodiscard]]
-    int finalTargetSelectionStart() const;
+    Okteta::Address finalTargetSelectionStart() const;
     [[nodiscard]]
-    int finalTargetSelectionEnd() const;
+    Okteta::Address finalTargetSelectionEnd() const;
 
 private Q_SLOTS:
     void onContentsChanged();
 
 private: // settings
-    int mTargetStart = 0;
-    int mTargetEnd = -1;
+    Okteta::Address mTargetStart = 0;
+    Okteta::Address mTargetEnd = -1;
     bool mIsEndRelative : 1;
     bool mIsEndBackwards : 1;
 
@@ -92,8 +92,8 @@ private: // target
     Okteta::AbstractByteArrayModel* mByteArrayModel = nullptr;
 };
 
-inline int SelectRangeTool::targetSelectionStart()   const { return mTargetStart; }
-inline int SelectRangeTool::targetSelectionEnd()     const { return mTargetEnd; }
+inline Okteta::Address SelectRangeTool::targetSelectionStart() const { return mTargetStart; }
+inline Okteta::Address SelectRangeTool::targetSelectionEnd()   const { return mTargetEnd; }
 inline bool SelectRangeTool::isEndRelative() const { return mIsEndRelative; }
 inline bool SelectRangeTool::isEndBackwards() const { return mIsEndBackwards; }
 
