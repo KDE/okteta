@@ -39,10 +39,10 @@ public: // AbstractTool API
     void setTargetModel(AbstractModel* model) override;
 
 public: // status
-    int currentSelectionStart() const;
-    int currentSelectionEnd() const;
-    int targetSelectionStart() const;
-    int targetSelectionEnd() const;
+    Okteta::Address currentSelectionStart() const;
+    Okteta::Address currentSelectionEnd() const;
+    Okteta::Address targetSelectionStart() const;
+    Okteta::Address targetSelectionEnd() const;
     bool isEndRelative() const;
     bool isEndBackwards() const;
 
@@ -64,15 +64,15 @@ Q_SIGNALS:
     // TODO: isAtLine useful, to prevent noop actions, or should they be allowed, too?
 
 private:
-    int finalTargetSelectionStart() const;
-    int finalTargetSelectionEnd() const;
+    Okteta::Address finalTargetSelectionStart() const;
+    Okteta::Address finalTargetSelectionEnd() const;
 
 private Q_SLOTS:
     void onContentsChanged();
 
 private: // settings
-    int mTargetStart = 0;
-    int mTargetEnd = -1;
+    Okteta::Address mTargetStart = 0;
+    Okteta::Address mTargetEnd = -1;
     bool mIsEndRelative : 1;
     bool mIsEndBackwards : 1;
 
@@ -81,8 +81,8 @@ private: // target
     Okteta::AbstractByteArrayModel* mByteArrayModel = nullptr;
 };
 
-inline int SelectRangeTool::targetSelectionStart()   const { return mTargetStart; }
-inline int SelectRangeTool::targetSelectionEnd()     const { return mTargetEnd; }
+inline Okteta::Address SelectRangeTool::targetSelectionStart() const { return mTargetStart; }
+inline Okteta::Address SelectRangeTool::targetSelectionEnd()   const { return mTargetEnd; }
 inline bool SelectRangeTool::isEndRelative() const { return mIsEndRelative; }
 inline bool SelectRangeTool::isEndBackwards() const { return mIsEndBackwards; }
 
