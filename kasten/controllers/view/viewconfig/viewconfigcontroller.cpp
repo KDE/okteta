@@ -46,6 +46,7 @@ ViewConfigController::ViewConfigController(KXMLGUIClient* guiClient)
     connect(mOffsetCodingAction, QOverload<int>::of(&KSelectAction::triggered),
 #endif
             this, &ViewConfigController::setOffsetCoding);
+    mOffsetCodingAction->setEnabled(false);
 
     // value valueCoding
     mCodingAction = new KSelectAction(i18nc("@title:menu", "&Value Coding"), this);
@@ -66,6 +67,7 @@ ViewConfigController::ViewConfigController(KXMLGUIClient* guiClient)
     connect(mCodingAction, QOverload<int>::of(&KSelectAction::triggered),
 #endif
             this, &ViewConfigController::setValueCoding);
+    mCodingAction->setEnabled(false);
 
     // char valueCoding
     mEncodingAction = new KSelectAction(i18nc("@title:menu", "&Char Coding"), this);
@@ -77,23 +79,27 @@ ViewConfigController::ViewConfigController(KXMLGUIClient* guiClient)
     connect(mEncodingAction, QOverload<int>::of(&KSelectAction::triggered),
 #endif
             this, &ViewConfigController::setCharCoding);
+    mEncodingAction->setEnabled(false);
 
     mShowsNonprintingAction = new KToggleAction(i18nc("@option:check", "Show &Non-printing Chars"), this);
     mShowsNonprintingAction->setObjectName(QStringLiteral("view_showsnonprinting"));
     connect(mShowsNonprintingAction, &KToggleAction::triggered,
             this, &ViewConfigController::setShowsNonprinting);
+    mShowsNonprintingAction->setEnabled(false);
 
     // bytes per line
     mSetBytesPerLineAction = new QAction(i18nc("@action:inmenu", "Set Bytes per Line..."), this);
     mSetBytesPerLineAction->setObjectName(QStringLiteral("view_bytesperline"));
     connect(mSetBytesPerLineAction, &QAction::triggered,
             this, &ViewConfigController::showBytesPerLineDialog);
+    mSetBytesPerLineAction->setEnabled(false);
 
     // byte groups size
     mSetBytesPerGroupAction = new QAction(i18nc("@action:inmenu", "Set Bytes per Group..."), this);
     mSetBytesPerGroupAction->setObjectName(QStringLiteral("view_bytespergroup"));
     connect(mSetBytesPerGroupAction, &QAction::triggered,
             this, &ViewConfigController::showBytesPerGroupDialog);
+    mSetBytesPerGroupAction->setEnabled(false);
 
     // resize style
     mResizeStyleAction = new KSelectAction(i18nc("@title:menu", "&Dynamic Layout"), this);
@@ -112,12 +118,14 @@ ViewConfigController::ViewConfigController(KXMLGUIClient* guiClient)
     connect(mResizeStyleAction, QOverload<int>::of(&KSelectAction::triggered),
 #endif
             this, &ViewConfigController::setLayoutStyle);
+    mResizeStyleAction->setEnabled(false);
 
     mShowOffsetColumnAction = new KToggleAction(i18nc("@option:check", "Show &Line Offset"), this);
     mShowOffsetColumnAction->setObjectName(QStringLiteral("view_lineoffset"));
     actionCollection->setDefaultShortcut(mShowOffsetColumnAction, Qt::Key_F11);
     connect(mShowOffsetColumnAction, &KToggleAction::triggered,
             this, &ViewConfigController::toggleOffsetColumn);
+    mShowOffsetColumnAction->setEnabled(false);
 
     // show buffer columns
     mToggleColumnsAction = new KSelectAction(i18nc("@title:menu", "&Show Values or Chars"), this);
@@ -133,6 +141,7 @@ ViewConfigController::ViewConfigController(KXMLGUIClient* guiClient)
     connect(mToggleColumnsAction, QOverload<int>::of(&KSelectAction::triggered),
 #endif
             this, &ViewConfigController::toggleValueCharColumns);
+    mToggleColumnsAction->setEnabled(false);
 
     actionCollection->addActions({
         mCodingAction,
@@ -145,8 +154,6 @@ ViewConfigController::ViewConfigController(KXMLGUIClient* guiClient)
         mOffsetCodingAction,
         mToggleColumnsAction,
     });
-
-    setTargetModel(nullptr);
 }
 
 void ViewConfigController::setTargetModel(AbstractModel* model)

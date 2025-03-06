@@ -22,10 +22,9 @@ OverwriteOnlyController::OverwriteOnlyController(KXMLGUIClient* guiClient)
 {
     mSetOverwriteOnlyAction = new KToggleAction(i18nc("@option:check", "Overwrite only"), this);
     connect(mSetOverwriteOnlyAction, &QAction::triggered, this, &OverwriteOnlyController::setOverwriteOnly);
+    mSetOverwriteOnlyAction->setEnabled(false);
 
     guiClient->actionCollection()->addAction(QStringLiteral("isoverwriteonly"), mSetOverwriteOnlyAction);
-
-    setTargetModel(nullptr);
 }
 
 void OverwriteOnlyController::setTargetModel(AbstractModel* model)

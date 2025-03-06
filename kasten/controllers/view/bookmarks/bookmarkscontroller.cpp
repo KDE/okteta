@@ -45,29 +45,34 @@ BookmarksController::BookmarksController(KXMLGUIClient* guiClient)
     KActionCollection* actionCollection = mGuiClient->actionCollection();
 
     mCreateAction = KStandardAction::addBookmark(this, &BookmarksController::createBookmark, this);
+    mCreateAction->setEnabled(false);
 
     mDeleteAction = new QAction(QIcon::fromTheme(QStringLiteral("bookmark-remove")),
                                 i18nc("@action:inmenu", "Remove Bookmark"), this);
     mDeleteAction->setObjectName(QStringLiteral("bookmark_remove"));
     connect(mDeleteAction, &QAction::triggered, this, &BookmarksController::deleteBookmark);
     actionCollection->setDefaultShortcut(mDeleteAction, Qt::CTRL | Qt::SHIFT | Qt::Key_B);
+    mDeleteAction->setEnabled(false);
 
     mDeleteAllAction = new QAction(QIcon::fromTheme(QStringLiteral("bookmark-remove")),
                                    i18nc("@action:inmenu", "Remove All Bookmarks"), this);
     mDeleteAllAction->setObjectName(QStringLiteral("bookmark_remove_all"));
     connect(mDeleteAllAction, &QAction::triggered, this, &BookmarksController::deleteAllBookmarks);
+    mDeleteAllAction->setEnabled(false);
 //     actionCollection->setDefaultShortcut( mDeleteAllAction, Qt::CTRL | Qt::Key_G );
 
     mGotoNextBookmarkAction = new QAction(QIcon::fromTheme(QStringLiteral("go-next")),
                                           i18nc("@action:inmenu", "Go to Next Bookmark"), this);
     mGotoNextBookmarkAction->setObjectName(QStringLiteral("bookmark_next"));
     connect(mGotoNextBookmarkAction, &QAction::triggered, this, &BookmarksController::gotoNextBookmark);
+    mGotoNextBookmarkAction->setEnabled(false);
     actionCollection->setDefaultShortcut(mGotoNextBookmarkAction, Qt::ALT | Qt::Key_Down);
 
     mGotoPreviousBookmarkAction = new QAction(QIcon::fromTheme(QStringLiteral("go-previous")),
                                               i18nc("@action:inmenu", "Go to Previous Bookmark"), this);
     mGotoPreviousBookmarkAction->setObjectName(QStringLiteral("bookmark_previous"));
     connect(mGotoPreviousBookmarkAction, &QAction::triggered, this, &BookmarksController::gotoPreviousBookmark);
+    mGotoPreviousBookmarkAction->setEnabled(false);
     actionCollection->setDefaultShortcut(mGotoPreviousBookmarkAction, Qt::ALT | Qt::Key_Up);
 
     mBookmarksActionGroup = new QActionGroup(this);   // TODO: do we use this only for the signal mapping?
@@ -82,8 +87,6 @@ BookmarksController::BookmarksController(KXMLGUIClient* guiClient)
         mGotoNextBookmarkAction,
         mGotoPreviousBookmarkAction
     });
-
-    setTargetModel(nullptr);
 }
 
 BookmarksController::~BookmarksController() = default;

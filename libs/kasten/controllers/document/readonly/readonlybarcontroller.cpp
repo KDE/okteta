@@ -27,8 +27,8 @@ ReadOnlyBarController::ReadOnlyBarController(StatusBar* statusBar)
     statusBar->addWidget(mReadOnlyButton);
     connect(mReadOnlyButton, &QAbstractButton::clicked,
             this, &ReadOnlyBarController::setReadOnly);
-
-    setTargetModel(nullptr);
+    mReadOnlyButton->setChecked(false);
+    mReadOnlyButton->setEnabled(false);
 }
 
 void ReadOnlyBarController::setTargetModel(AbstractModel* model)

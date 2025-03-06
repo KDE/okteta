@@ -44,7 +44,7 @@ ExportController::ExportController(ModelCodecViewManager* modelCodecViewManager,
 
     guiClient->actionCollection()->addAction(QStringLiteral("export"), mExportSelectAction);
 
-    setTargetModel(nullptr);
+    updateActions();
 }
 
 void ExportController::setTargetModel(AbstractModel* model)

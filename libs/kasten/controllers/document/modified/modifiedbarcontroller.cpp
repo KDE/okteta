@@ -24,12 +24,15 @@ namespace Kasten {
 ModifiedBarController::ModifiedBarController(StatusBar* statusBar)
 {
     mLocalStateLabel = new IconLabel(statusBar);
+    mLocalStateLabel->setEnabled(false);
     statusBar->addWidget(mLocalStateLabel);
 
     mRemoteStateLabel = new IconLabel(statusBar);
+    mRemoteStateLabel->setEnabled(false);
     statusBar->addWidget(mRemoteStateLabel);
 
-    setTargetModel(nullptr);
+    onLocalSyncStateChanged(LocalInSync);
+    onRemoteSyncStateChanged(RemoteInSync);
 }
 
 void ModifiedBarController::setTargetModel(AbstractModel* model)

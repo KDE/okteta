@@ -48,7 +48,7 @@ CopyAsController::CopyAsController(ModelCodecViewManager* modelCodecViewManager,
 
     guiClient->actionCollection()->addAction(QStringLiteral("copy_as"), mCopyAsSelectAction);
 
-    setTargetModel(nullptr);
+    updateActions();
 }
 
 void CopyAsController::setTargetModel(AbstractModel* model)

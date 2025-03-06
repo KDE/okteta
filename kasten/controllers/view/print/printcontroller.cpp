@@ -23,9 +23,11 @@ PrintController::PrintController(KXMLGUIClient* guiClient)
     : mPrintTool(new PrintTool())
 {
     mPrintAction = KStandardAction::print(mPrintTool, &PrintTool::print, this);
+    mPrintAction->setEnabled(false);
     connect(mPrintTool, &PrintTool::viewChanged,
             mPrintAction, &QAction::setEnabled);
     mPrintPreviewAction = KStandardAction::printPreview(mPrintTool, &PrintTool::printPreview, this);
+    mPrintPreviewAction->setEnabled(false);
     connect(mPrintTool, &PrintTool::viewChanged,
             mPrintPreviewAction, &QAction::setEnabled);
 
@@ -33,9 +35,6 @@ PrintController::PrintController(KXMLGUIClient* guiClient)
         mPrintAction,
         mPrintPreviewAction,
     });
-
-
-    setTargetModel(nullptr);
 }
 
 PrintController::~PrintController()
