@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-23 03:18+0000\n"
+"POT-Creation-Date: 2025-03-07 03:30+0000\n"
 "PO-Revision-Date: 2011-04-08 21:21-0700\n"
 "Last-Translator: Fumiaki Okushi <okushi@kde.gr.jp>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -90,41 +90,41 @@ msgid "Title"
 msgstr "タイトル"
 
 # ACCELERATOR added by translator
-#: controllers/view/bookmarks/bookmarkscontroller.cpp:50
+#: controllers/view/bookmarks/bookmarkscontroller.cpp:51
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Bookmark"
 msgstr "ブックマークを削除(&R)"
 
 # ACCELERATOR added by translator
-#: controllers/view/bookmarks/bookmarkscontroller.cpp:56
+#: controllers/view/bookmarks/bookmarkscontroller.cpp:58
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove All Bookmarks"
 msgstr "すべてのブックマークを削除(&B)"
 
 # ACCELERATOR added by translator
-#: controllers/view/bookmarks/bookmarkscontroller.cpp:62
+#: controllers/view/bookmarks/bookmarkscontroller.cpp:65
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Go to Next Bookmark"
 msgstr "次のブックマークに移動(&N)"
 
 # ACCELERATOR added by translator
-#: controllers/view/bookmarks/bookmarkscontroller.cpp:68
+#: controllers/view/bookmarks/bookmarkscontroller.cpp:72
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Go to Previous Bookmark"
 msgstr "前のブックマークに移動(&P)"
 
-#: controllers/view/bookmarks/bookmarkscontroller.cpp:167
+#: controllers/view/bookmarks/bookmarkscontroller.cpp:170
 #, kde-format
 msgctxt "@item description of bookmark"
 msgid "%1: %2"
 msgstr "%1: %2"
 
 # ACCELERATOR added by translator
-#: controllers/view/bookmarks/bookmarkscontroller.cpp:246
+#: controllers/view/bookmarks/bookmarkscontroller.cpp:249
 #: controllers/view/bookmarks/bookmarkstool.cpp:130
 #, kde-format
 msgctxt "default name of a bookmark"
@@ -700,7 +700,7 @@ msgstr "選択範囲に含まれる文字列のリストを更新します"
 #: controllers/view/info/infoview.cpp:184
 #: controllers/view/structures/datatypes/datainformation.cpp:59
 #: controllers/view/structures/datatypes/datainformation.cpp:62
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:222
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:232
 #, kde-format
 msgid "1 byte"
 msgid_plural "%1 bytes"
@@ -2564,57 +2564,57 @@ msgctxt "@item:inmenu offset in the decimal format"
 msgid "&Decimal"
 msgstr "十進(&D)"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:51
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:52
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Value Coding"
 msgstr "基数(&V)"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:55
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:56
 #, kde-format
 msgctxt ""
 "@item:inmenu encoding of the bytes as values in the hexadecimal format"
 msgid "&Hexadecimal"
 msgstr "十六進(&H)"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:57
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:58
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
 msgid "&Decimal"
 msgstr "十進(&D)"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:59
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:60
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
 msgid "&Octal"
 msgstr "八進(&O)"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:61
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:62
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
 msgid "&Binary"
 msgstr "二進(&B)"
 
 # ACCELERATOR changed by translator
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:71
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:73
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Char Coding"
 msgstr "文字コード(&E)"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:81
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:84
 #, kde-format
 msgctxt "@option:check"
 msgid "Show &Non-printing Chars"
 msgstr "印字不可能な文字を表示する(&N)"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:87
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:91
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Set Bytes per Line..."
 msgstr "1 行あたりのバイト数を設定..."
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:93
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:98
 #, fuzzy, kde-format
 #| msgctxt "@label:textbox to define after how many items the list is wrapped"
 #| msgid "Items per line:"
@@ -2622,19 +2622,19 @@ msgctxt "@action:inmenu"
 msgid "Set Bytes per Group..."
 msgstr "1 行あたりのアイテム数:"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:99
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:105
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Dynamic Layout"
 msgstr ""
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:103
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:109
 #, kde-format
 msgctxt "@item:inmenu  The layout will not change on size changes."
 msgid "&Off"
 msgstr ""
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:105
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:111
 #, kde-format
 msgctxt ""
 "@item:inmenu  The layout will adapt to the size, but only with complete "
@@ -2642,7 +2642,7 @@ msgctxt ""
 msgid "&Wrap Only Complete Byte Groups"
 msgstr ""
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:107
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:113
 #, kde-format
 msgctxt ""
 "@item:inmenu  The layout will adapt to the size and fit in as much bytes per "
@@ -2650,31 +2650,31 @@ msgctxt ""
 msgid "&On"
 msgstr ""
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:116
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:123
 #, kde-format
 msgctxt "@option:check"
 msgid "Show &Line Offset"
 msgstr "行オフセットを表示(&L)"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:123
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:131
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Show Values or Chars"
 msgstr "値と文字の表示(&S)"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:126
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:134
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "&Values"
 msgstr "値(&V)"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:127
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:135
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "&Chars"
 msgstr "文字(&C)"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:128
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:136
 #, fuzzy, kde-format
 #| msgctxt "@item:inmenu"
 #| msgid "Values &and Chars"
@@ -2708,7 +2708,7 @@ msgctxt "@title:menu submenu to select the view profile or change it"
 msgid "View Profile"
 msgstr "表示モード(&V)"
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:47
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:48
 #, fuzzy, kde-format
 #| msgctxt "@label:textbox"
 #| msgid "Pattern:"
@@ -2716,7 +2716,7 @@ msgctxt "@action:inmenu create a new view profile"
 msgid "Create New..."
 msgstr "パターン:"
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:54
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:56
 #, fuzzy, kde-format
 #| msgctxt "@title:menu "
 #| msgid "Save changes"
@@ -2724,7 +2724,7 @@ msgctxt "@action:inmenu save changed to the view profile to the base profile"
 msgid "Save Changes"
 msgstr "変更を保存"
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:61
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:64
 #, fuzzy, kde-format
 #| msgctxt "@title:menu "
 #| msgid "Save changes"
@@ -2732,7 +2732,7 @@ msgctxt "@action:inmenu reset settings back to those of the saved base profile"
 msgid "Reset Changes"
 msgstr "変更を保存"
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:186
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:188
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:180
 #, fuzzy, kde-format
 #| msgctxt "@title:menu"
@@ -2857,7 +2857,7 @@ msgid "Values"
 msgstr "値"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:137
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:50
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:53
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:38
 #, kde-format
 msgctxt ""
@@ -2866,7 +2866,7 @@ msgid "Hexadecimal"
 msgstr "十六進"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:139
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:51
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:54
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:39
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
@@ -2874,7 +2874,7 @@ msgid "Decimal"
 msgstr "十進"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:141
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:52
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:55
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:40
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
@@ -2883,7 +2883,7 @@ msgstr "八進"
 
 # skip-rule: binary3
 #: controllers/view/viewprofiles/viewprofileedit.cpp:143
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:53
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:56
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:41
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
@@ -3022,56 +3022,56 @@ msgctxt "@window:title"
 msgid "\"%1\" View Profile"
 msgstr "表示モード(&V)"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:39
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:41
 #, kde-format
 msgctxt "@info:status short for: Insert mode"
 msgid "INS"
 msgstr "挿入"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:40
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:42
 #, kde-format
 msgctxt "@info:status short for: Overwrite mode"
 msgid "OVR"
 msgstr "上書き"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:41
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:43
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Insert mode"
 msgstr "挿入モード"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:42
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:44
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Overwrite mode"
 msgstr "上書きモード"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:57
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:60
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Coding of the value interpretation in the current view."
 msgstr "現在のビューの値の基数"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:65
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:69
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Encoding in the character column of the current view."
 msgstr "現在のビューの文字カラムのエンコーディング"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:103
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:205
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:108
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:215
 #, kde-format
 msgid "Offset: %1"
 msgstr "オフセット: %1"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:112
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:117
 #, fuzzy, kde-format
 #| msgid " byte"
 #| msgid_plural " bytes"
 msgid "%1 bytes"
 msgstr " バイト"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:114
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:119
 #, fuzzy, kde-format
 #| msgctxt "@label:textbox substring which separates the values"
 #| msgid "Separation:"
@@ -3079,20 +3079,20 @@ msgctxt "@info:status selection: start offset - end offset ()"
 msgid "Selection: %1 - %2 (%3)"
 msgstr "区切り:"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:168
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:202
 #, kde-format
 msgctxt "@info:status offset value not available"
 msgid "Offset: -"
 msgstr "オフセット: -"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:169
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:226
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:203
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:236
 #, kde-format
 msgctxt "@info:status offset value not available"
 msgid "Selection: -"
 msgstr "選択: -"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:224
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:234
 #, kde-format
 msgctxt "@info:status selection: start offset - end offset (number of bytes)"
 msgid "Selection: %1 - %2 (%3)"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-15 04:00+0000\n"
+"POT-Creation-Date: 2025-03-07 03:30+0000\n"
 "PO-Revision-Date: 2018-06-01 12:07+0800\n"
 "Last-Translator: Simon Depiets <sdepiets@gmail.com>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -25,13 +25,13 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
-#: controllers/document/modified/modifiedbarcontroller.cpp:73
+#: controllers/document/modified/modifiedbarcontroller.cpp:76
 #, kde-format
 msgctxt "@tooltip the document is modified"
 msgid "Modified."
 msgstr "Modifié."
 
-#: controllers/document/modified/modifiedbarcontroller.cpp:74
+#: controllers/document/modified/modifiedbarcontroller.cpp:77
 #, kde-format
 msgctxt "@tooltip the document is not modified"
 msgid "Not modified."
@@ -298,7 +298,7 @@ msgstr ""
 "seront générées avec les paramètres que vous avez saisis ci-dessus et "
 "insérées dans le document à la position du curseur."
 
-#: controllers/io/synchronize/synchronizecontroller.cpp:33
+#: controllers/io/synchronize/synchronizecontroller.cpp:34
 #: controllers/shellwindow/viewareacontextmenu/viewareacontextmenucontroller.cpp:38
 #, kde-format
 msgctxt "@action:inmenu"
@@ -335,7 +335,7 @@ msgctxt "@action:inmenu"
 msgid "Undo"
 msgstr "Annuler"
 
-#: controllers/view/version/versioncontroller.cpp:43
+#: controllers/view/version/versioncontroller.cpp:44
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Redo"
@@ -353,33 +353,33 @@ msgctxt "@action Redo: [change]"
 msgid "Redo: %1"
 msgstr "Refaire : %1"
 
-#: controllers/view/zoom/zoomcontroller.cpp:42
+#: controllers/view/zoom/zoomcontroller.cpp:45
 #, kde-format
 msgid "Zoom"
 msgstr "Zoom"
 
-#: controllers/view/zoom/zoomcontroller.cpp:51
+#: controllers/view/zoom/zoomcontroller.cpp:54
 #, kde-format
 msgctxt "zoom-factor (percentage)"
 msgid "%1%"
 msgstr "%1 %"
 
-#: controllers/view/zoom/zoomcontroller.cpp:64
+#: controllers/view/zoom/zoomcontroller.cpp:67
 #, kde-format
 msgid "&Fit to Width"
 msgstr "Adapter à la &largeur"
 
-#: controllers/view/zoom/zoomcontroller.cpp:66
+#: controllers/view/zoom/zoomcontroller.cpp:69
 #, kde-format
 msgid "&Fit to Height"
 msgstr "Adapter à la &hauteur"
 
-#: controllers/view/zoom/zoomcontroller.cpp:68
+#: controllers/view/zoom/zoomcontroller.cpp:71
 #, kde-format
 msgid "&Fit to Size"
 msgstr "Adapter aux &dimensions"
 
-#: controllers/view/zoom/zoomslider.cpp:142
+#: controllers/view/zoom/zoomslider.cpp:150
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Zoom: %1%"
