@@ -23,9 +23,11 @@ PrintController::PrintController(KXMLGUIClient* guiClient, AbstractUserMessagesH
     : mPrintTool(std::make_unique<PrintTool>(userMessagesHandler))
 {
     mPrintAction = KStandardAction::print(mPrintTool.get(), &PrintTool::print, this);
+    mPrintAction->setEnabled(false);
     connect(mPrintTool.get(), &PrintTool::viewChanged,
             mPrintAction, &QAction::setEnabled);
     mPrintPreviewAction = KStandardAction::printPreview(mPrintTool.get(), &PrintTool::printPreview, this);
+    mPrintPreviewAction->setEnabled(false);
     connect(mPrintTool.get(), &PrintTool::viewChanged,
             mPrintPreviewAction, &QAction::setEnabled);
 
@@ -33,9 +35,6 @@ PrintController::PrintController(KXMLGUIClient* guiClient, AbstractUserMessagesH
         mPrintAction,
         mPrintPreviewAction,
     });
-
-
-    setTargetModel(nullptr);
 }
 
 PrintController::~PrintController() = default;

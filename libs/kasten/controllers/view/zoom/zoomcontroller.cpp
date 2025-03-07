@@ -29,8 +29,11 @@ static constexpr int DefaultZoomControllerZoomInLevelsSize = 50;
 ZoomController::ZoomController(KXMLGUIClient* guiClient)
 {
     mZoomInAction = KStandardAction::zoomIn(  this, &ZoomController::zoomIn,  this);
+    mZoomInAction->setEnabled(false);
     mZoomOutAction = KStandardAction::zoomOut(this, &ZoomController::zoomOut, this);
+    mZoomOutAction->setEnabled(false);
     mZoomNormalAction = KStandardAction::actualSize(this, &ZoomController::zoomNormal, this);
+    mZoomNormalAction->setEnabled(false);
 
     guiClient->actionCollection()->addActions({
         mZoomInAction,
@@ -68,7 +71,6 @@ ZoomController::ZoomController(KXMLGUIClient* guiClient)
     FitToSizeAction = new KAction(i18n("&Fit to Size"), ActionCollection, "fit_to_size");
     connect(FitToSizeAction, SIGNAL(triggered(bool)), SLOT(fitToSize()));
 #endif
-    setTargetModel(nullptr);
 }
 
 void ZoomController::setTargetModel(AbstractModel* model)

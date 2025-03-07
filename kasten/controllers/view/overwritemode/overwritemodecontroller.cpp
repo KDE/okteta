@@ -30,10 +30,9 @@ OverwriteModeController::OverwriteModeController(KXMLGUIClient* guiClient)
     // TODO: or should we catch the signal from the view (needs to be added)
     actionCollection->setDefaultShortcut(mSetOverWriteAction, QKeySequence(Qt::Key_Insert));
     connect(mSetOverWriteAction, &KToggleAction::triggered, this, &OverwriteModeController::setOverWrite);
+    mSetOverWriteAction->setEnabled(false);
 
     actionCollection->addAction(QStringLiteral("set_overwrite"), mSetOverWriteAction);
-
-    setTargetModel(nullptr);
 }
 
 void OverwriteModeController::setTargetModel(AbstractModel* model)

@@ -36,6 +36,7 @@ ViewProfileController::ViewProfileController(ByteArrayViewProfileManager* viewPr
                               "View Profile"),
                         this);
     mViewProfileActionMenu->setPopupMode(QToolButton::InstantPopup);
+    mViewProfileActionMenu->setEnabled(false);
 
     mCreateNewAction =
         new QAction(QIcon::fromTheme(QStringLiteral("document-new")),
@@ -43,6 +44,7 @@ ViewProfileController::ViewProfileController(ByteArrayViewProfileManager* viewPr
                           "Create New…"),
                     this);
     connect(mCreateNewAction, &QAction::triggered, this, &ViewProfileController::onCreateNewActionTriggered);
+    mCreateNewAction->setEnabled(false);
 
     mSaveChangesAction =
         new QAction(QIcon::fromTheme(QStringLiteral("document-save")),
@@ -50,6 +52,7 @@ ViewProfileController::ViewProfileController(ByteArrayViewProfileManager* viewPr
                           "Save Changes"),
                     this);
     connect(mSaveChangesAction, &QAction::triggered, this, &ViewProfileController::onSaveChangesActionTriggered);
+    mSaveChangesAction->setEnabled(false);
 
     mResetChangesAction =
         new QAction(QIcon::fromTheme(QStringLiteral("document-revert")),
@@ -57,6 +60,7 @@ ViewProfileController::ViewProfileController(ByteArrayViewProfileManager* viewPr
                           "Reset Changes"),
                     this);
     connect(mResetChangesAction, &QAction::triggered, this, &ViewProfileController::onResetChangesActionTriggered);
+    mResetChangesAction->setEnabled(false);
 
     mViewProfileActionMenu->addAction(mCreateNewAction);
     mViewProfileActionMenu->addSeparator();
@@ -76,8 +80,6 @@ ViewProfileController::ViewProfileController(ByteArrayViewProfileManager* viewPr
             this, &ViewProfileController::onViewProfilesChanged);
 
     onViewProfilesChanged();
-
-    setTargetModel(nullptr);
 }
 
 void ViewProfileController::setTargetModel(AbstractModel* model)

@@ -45,7 +45,7 @@ InsertController::InsertController(ModelCodecViewManager* modelCodecViewManager,
     // TODO: find better id
     guiClient->actionCollection()->addAction(QStringLiteral("insert"), mInsertSelectAction);
 
-    setTargetModel(nullptr);
+    updateActions();
 }
 
 void InsertController::setTargetModel(AbstractModel* model)

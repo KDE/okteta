@@ -21,7 +21,6 @@ namespace Kasten {
 ViewContextMenuController::ViewContextMenuController(KXMLGUIClient* guiClient)
     : mGuiClient(guiClient)
 {
-    setTargetModel(nullptr);
 }
 
 void ViewContextMenuController::setTargetModel(AbstractModel* model)

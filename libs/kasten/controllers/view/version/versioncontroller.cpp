@@ -30,6 +30,7 @@ VersionController::VersionController(KXMLGUIClient* guiClient)
     KActionCollection* actionCollection = guiClient->actionCollection();
 
     mSetToOlderVersionAction = new KToolBarPopupAction(QIcon::fromTheme(QStringLiteral("edit-undo")), i18nc("@action:inmenu", "Undo"), this);
+    mSetToOlderVersionAction->setEnabled(false);
     actionCollection->addAction(QStringLiteral("edit_undo"), mSetToOlderVersionAction);
     actionCollection->setDefaultShortcuts(mSetToOlderVersionAction, KStandardShortcut::undo());
 
@@ -41,6 +42,7 @@ VersionController::VersionController(KXMLGUIClient* guiClient)
             this, &VersionController::onOlderVersionMenuTriggered);
 
     mSetToNewerVersionAction = new KToolBarPopupAction(QIcon::fromTheme(QStringLiteral("edit-redo")), i18nc("@action:inmenu", "Redo"), this);
+    mSetToNewerVersionAction->setEnabled(false);
     actionCollection->addAction(QStringLiteral("edit_redo"), mSetToNewerVersionAction);
     actionCollection->setDefaultShortcuts(mSetToNewerVersionAction, KStandardShortcut::redo());
 
@@ -50,8 +52,6 @@ VersionController::VersionController(KXMLGUIClient* guiClient)
             this, &VersionController::onNewerVersionMenuAboutToShow);
     connect(mSetToNewerVersionAction->menu(), &QMenu::triggered,
             this, &VersionController::onNewerVersionMenuTriggered);
-
-    setTargetModel(nullptr);
 }
 
 void VersionController::setTargetModel(AbstractModel* model)

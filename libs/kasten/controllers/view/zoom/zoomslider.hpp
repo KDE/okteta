@@ -36,6 +36,7 @@ public:
 
 private:
     void updateToolTip(int sliderValue);
+    void clearDisplay();
 
 private Q_SLOTS: // action slots
     void zoomIn();

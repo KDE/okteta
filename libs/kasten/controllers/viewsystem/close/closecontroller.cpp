@@ -23,10 +23,9 @@ CloseController::CloseController(ViewManager* viewManager, KXMLGUIClient* guiCli
     : mViewManager(viewManager)
 {
     mCloseAction = KStandardAction::close(this, &CloseController::close, this);
+    mCloseAction->setEnabled(false);
 
     guiClient->actionCollection()->addAction(mCloseAction->objectName(), mCloseAction);
-
-    setTargetModel(0);
 }
 
 void CloseController::setTargetModel(AbstractModel* model)

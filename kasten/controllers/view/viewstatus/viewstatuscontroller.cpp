@@ -31,9 +31,11 @@ ViewStatusController::ViewStatusController(StatusBar* statusBar)
     mPrintFunction = Okteta::OffsetFormat::printFunction(Okteta::OffsetFormat::Hexadecimal);
 
     mOffsetLabel = new QLabel(statusBar);
+    mOffsetLabel->setEnabled(false);
     statusBar->addWidget(mOffsetLabel);
 
     mSelectionLabel = new QLabel(statusBar);
+    mSelectionLabel->setEnabled(false);
     statusBar->addWidget(mSelectionLabel);
 
     const QString insertModeText = i18nc("@info:status short for: Insert mode",    "INS");
@@ -44,6 +46,7 @@ ViewStatusController::ViewStatusController(StatusBar* statusBar)
     mOverwriteModeToggleButton->setCheckedState(overwriteModeText, overwriteModeTooltip);
     statusBar->addWidget(mOverwriteModeToggleButton);
     connect(mOverwriteModeToggleButton, &ToggleButton::clicked, this, &ViewStatusController::setOverwriteMode);
+    mOverwriteModeToggleButton->setEnabled(false);
 
     mValueCodingComboBox = new KComboBox(statusBar);
     const QStringList list {
@@ -57,6 +60,7 @@ ViewStatusController::ViewStatusController(StatusBar* statusBar)
         i18nc("@info:tooltip", "Coding of the value interpretation in the current view."));
     connect(mValueCodingComboBox, qOverload<int>(&KComboBox::activated),
             this, &ViewStatusController::setValueCoding);
+    mValueCodingComboBox->setEnabled(false);
     statusBar->addWidget(mValueCodingComboBox);
 
     mCharCodingComboBox = new KComboBox(statusBar);
@@ -65,11 +69,12 @@ ViewStatusController::ViewStatusController(StatusBar* statusBar)
         i18nc("@info:tooltip", "Encoding in the character column of the current view."));
     connect(mCharCodingComboBox, qOverload<int>(&KComboBox::activated),
             this, &ViewStatusController::setCharCoding);
+    mCharCodingComboBox->setEnabled(false);
     statusBar->addWidget(mCharCodingComboBox);
 
     fixWidths(Okteta::OffsetFormat::Hexadecimal);
 
-    setTargetModel(nullptr);
+    clearDisplay();
 }
 
 // the letter C can be very wide, that is why with proportional fonts there seems too much space used, but isn't
@@ -171,11 +176,7 @@ void ViewStatusController::setTargetModel(AbstractModel* model)
         connect(mByteArrayView, &ByteArrayView::charCodecChanged,
                 this, &ViewStatusController::onCharCodecChanged);
     } else {
-        mOffsetLabel->setText(i18nc("@info:status offset value not available", "Offset: -"));
-        mSelectionLabel->setText(i18nc("@info:status offset value not available", "Selection: -"));
-        mOverwriteModeToggleButton->setChecked(false);
-        mValueCodingComboBox->setCurrentIndex(0);
-        mCharCodingComboBox->setCurrentIndex(0);
+        clearDisplay();
     }
 
     mOffsetLabel->setEnabled(hasView);
@@ -200,6 +201,15 @@ void ViewStatusController::setCharCoding(int charCoding)
 {
     mByteArrayView->setCharCoding(Okteta::CharCodec::codecNames()[charCoding]);
     mByteArrayView->setFocus();
+}
+
+void ViewStatusController::clearDisplay()
+{
+    mOffsetLabel->setText(i18nc("@info:status offset value not available", "Offset: -"));
+    mSelectionLabel->setText(i18nc("@info:status offset value not available", "Selection: -"));
+    mOverwriteModeToggleButton->setChecked(false);
+    mValueCodingComboBox->setCurrentIndex(0);
+    mCharCodingComboBox->setCurrentIndex(0);
 }
 
 void ViewStatusController::onCursorPositionChanged(Okteta::Address offset)

@@ -28,10 +28,9 @@ ViewModeController::ViewModeController(KXMLGUIClient* guiClient)
     });
     connect(mViewModeAction, &KSelectAction::indexTriggered,
             this, &ViewModeController::setViewMode);
+    mViewModeAction->setEnabled(false);
 
     guiClient->actionCollection()->addAction(QStringLiteral("viewmode"), mViewModeAction);
-
-    setTargetModel(nullptr);
 }
 
 void ViewModeController::setTargetModel(AbstractModel* model)

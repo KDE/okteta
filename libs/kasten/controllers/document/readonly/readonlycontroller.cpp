@@ -29,10 +29,9 @@ ReadOnlyController::ReadOnlyController(KXMLGUIClient* guiClient)
     mSetReadOnlyAction->setCheckedState(checkedState);
     connect(mSetReadOnlyAction, &QAction::triggered,
             this, &ReadOnlyController::setReadOnly);
+    mSetReadOnlyAction->setEnabled(false);
 
     guiClient->actionCollection()->addAction(QStringLiteral("isreadonly"), mSetReadOnlyAction);
-
-    setTargetModel(nullptr);
 }
 
 void ReadOnlyController::setTargetModel(AbstractModel* model)

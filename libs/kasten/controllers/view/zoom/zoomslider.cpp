@@ -41,12 +41,14 @@ ZoomSlider::ZoomSlider(QWidget* parent)
     auto* zoomNormalButton = new QToolButton(this);
     m_zoomNormalAction = KStandardAction::actualSize(this, &ZoomSlider::zoomNormal, this);
     m_zoomNormalAction->setShortcut(QKeySequence()); // unset shortcut, here no integration into main menu
+    m_zoomNormalAction->setEnabled(false);
     zoomNormalButton->setDefaultAction(m_zoomNormalAction);
     zoomNormalButton->setAutoRaise(true);
 
     auto* zoomOutButton = new QToolButton(this);
     m_zoomOutAction = KStandardAction::zoomOut(this, &ZoomSlider::zoomOut, this);
     m_zoomOutAction->setShortcut(QKeySequence()); // unset shortcut, here no integration into main menu
+    m_zoomOutAction->setEnabled(false);
     zoomOutButton->setDefaultAction(m_zoomOutAction);
     zoomOutButton->setAutoRaise(true);
 
@@ -54,10 +56,12 @@ ZoomSlider::ZoomSlider(QWidget* parent)
     mSlider = new QSlider(Qt::Horizontal, this);
     mSlider->setSingleStep(1);   // mZoomControl->zoomLevelSingleStep()?
     mSlider->setPageStep(5);   // mZoomControl->zoomLevelPageStep()?
+    mSlider->setEnabled(false);
 
     auto* zoomInButton = new QToolButton(this);
     m_zoomInAction = KStandardAction::zoomIn(this, &ZoomSlider::zoomIn,  this);
     m_zoomInAction->setShortcut(QKeySequence()); // unset shortcut, here no integration into main menu
+    m_zoomInAction->setEnabled(false);
     zoomInButton->setDefaultAction(m_zoomInAction);
     zoomInButton->setAutoRaise(true);
 
@@ -75,8 +79,7 @@ ZoomSlider::ZoomSlider(QWidget* parent)
             this, &ZoomSlider::onSliderMoved);
 
     setFixedWidth(ZoomSliderWidth);
-
-    setTargetModel(nullptr);
+    clearDisplay();
 }
 
 ZoomSlider::~ZoomSlider() = default;
@@ -116,12 +119,17 @@ void ZoomSlider::setTargetModel(AbstractModel* model)
         m_zoomNormalAction->setEnabled(false);
         m_zoomOutAction->setEnabled(false);
         m_zoomInAction->setEnabled(false);
-        // put slider in the middle
-        mSlider->setRange(-DefaultZoomSliderZoomInLevelsSize, DefaultZoomSliderZoomOutLevelsSize);
-        mSlider->setValue(0);
+        clearDisplay();
     }
 
     mSlider->setEnabled(hasView);
+}
+
+void ZoomSlider::clearDisplay()
+{
+    // put slider in the middle
+    mSlider->setRange(-DefaultZoomSliderZoomInLevelsSize, DefaultZoomSliderZoomOutLevelsSize);
+    mSlider->setValue(0);
 }
 
 void ZoomSlider::updateToolTip(int sliderValue)
