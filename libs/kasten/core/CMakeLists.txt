@@ -3,14 +3,8 @@ set(KASTENCORE_SO_VERSION ${KASTEN_LIB_SOVERSION})
 
 okteta_add_library(Core NAMESPACE Kasten
     PUBLIC
-        KF5::KIOCore
+        KF5::CoreAddons
         Qt5::Core
-        Qt5::Gui
-    PRIVATE
-        KF5::I18n
-        KF5::JobWidgets
-        KF5::WidgetsAddons
-        Qt5::Network
     VERSION     ${KASTENCORE_VERSION}
     SOVERSION   ${KASTENCORE_SO_VERSION}
     ABIVERSION  ${KASTEN_ABI_VERSION}
@@ -30,8 +24,15 @@ ecm_qt_declare_logging_category(KastenCore
     EXPORT OKTETA
 )
 
-macro(KASTENCORE_LIBRARY_SOURCES _subdir)
-    okteta_library_sources(Core NAMESPACE Kasten
+macro(KASTENCORE_ADD_SUBLIBRARY _library_name)
+    okteta_add_sublibrary(Core NAMESPACE Kasten
+        SUBLIBRARY ${_library_name}
+        ${ARGN}
+    )
+endmacro()
+
+macro(KASTENCORE_SUBLIBRARY_SOURCES _subdir)
+    okteta_sublibrary_sources(Core NAMESPACE Kasten
         SUBDIR ${_subdir}
         ${ARGN}
     )
@@ -45,7 +46,16 @@ endmacro()
 #         Person
 # )
 
-kastencore_library_sources(usermessages
+kastencore_add_sublibrary(kastenusermessages
+    UNTESTED
+    PUBLIC
+        Qt5::Core
+    PRIVATE
+        KF5::WidgetsAddons
+)
+
+kastencore_sublibrary_sources(usermessages
+    SUBLIBRARY kastenusermessages
     BUILD_INCLUDEDIR
     PUBLIC
         UserErrorReport
@@ -54,7 +64,21 @@ kastencore_library_sources(usermessages
         UserQuery
 )
 
-kastencore_library_sources(document
+kastencore_add_sublibrary(kastendocument
+    UNTESTED
+    PUBLIC
+        KF5::CoreAddons
+        Qt5::Core
+)
+
+okteta_sublibrary_sources(Core NAMESPACE Kasten
+    SUBLIBRARY kastendocument
+    PUBLIC
+        KastenCore
+)
+
+kastencore_sublibrary_sources(document
+    SUBLIBRARY kastendocument
     BUILD_INCLUDEDIR
     PUBLIC
         Versionable
@@ -71,7 +95,8 @@ kastencore_library_sources(document
         DocumentVersionData
 )
 
-kastencore_library_sources(io
+kastencore_sublibrary_sources(io
+    SUBLIBRARY kastendocument
     BUILD_INCLUDEDIR
     PUBLIC
         AbstractSyncToRemoteJob
@@ -89,7 +114,18 @@ kastencore_library_sources(io
         AbstractModelSynchronizerFactory
 )
 
-kastencore_library_sources(io/filesystem
+kastencore_add_sublibrary(kastenfilesystemio
+    UNTESTED
+    PUBLIC
+        kastendocument
+    PRIVATE
+        KF5::JobWidgets
+        KF5::KIOCore
+        Qt5::Network
+)
+
+kastencore_sublibrary_sources(io/filesystem
+    SUBLIBRARY kastenfilesystemio
     BUILD_INCLUDEDIR
     PUBLIC
         AbstractFileSystemSyncWithRemoteJob
@@ -103,7 +139,25 @@ kastencore_library_sources(io/filesystem
         ModelEncoderFileSystemExportJob
 )
 
-kastencore_library_sources(system
+kastencore_add_sublibrary(kastencoresystem
+    UNTESTED
+    PUBLIC
+        kastendocument
+    PRIVATE
+        kastenfilesystemio
+        KF5::I18n
+        KF5::JobWidgets
+        KF5::KIOCore
+        KF5::WidgetsAddons
+)
+okteta_sublibrary_compile_definitions(Core NAMESPACE Kasten
+    SUBLIBRARY kastendocument
+    PRIVATE
+        TRANSLATION_DOMAIN=\"libkasten\"
+)
+
+kastencore_sublibrary_sources(system
+    SUBLIBRARY kastencoresystem
     BUILD_INCLUDEDIR
     PUBLIC
         AbstractUserMessagesHandler
@@ -118,15 +172,10 @@ kastencore_library_sources(system
         ModelCodecManager
 )
 
-okteta_library_sources(Core NAMESPACE Kasten
-    PUBLIC
-        KastenCore
-)
-
 okteta_add_cmakeconfig(Core NAMESPACE Kasten
     DEPS
-        Qt5Gui ${Qt5_VERSION}
-        KF5KIO ${KF5_VERSION}
+        KF5CoreAddons ${KF5_VERSION}
+        Qt5Core ${Qt5_VERSION}
 )
 
 if(BUILD_TESTING)
