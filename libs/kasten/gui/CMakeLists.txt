@@ -4,10 +4,8 @@ set(KASTENGUI_SO_VERSION ${KASTEN_LIB_SOVERSION})
 okteta_add_library(Gui NAMESPACE Kasten
     PUBLIC
         KastenCore
-        Qt5::Widgets
         KF5::XmlGui
-    PRIVATE
-        KF5::I18n
+        Qt5::Widgets
     VERSION     ${KASTENGUI_VERSION}
     SOVERSION   ${KASTENGUI_SO_VERSION}
     ABIVERSION  ${KASTEN_ABI_VERSION}
@@ -17,7 +15,29 @@ okteta_add_library(Gui NAMESPACE Kasten
     NO_VERSIONED_PACKAGE_NAME
 )
 
-ecm_qt_declare_logging_category(KastenGui
+target_compile_definitions(KastenGui PRIVATE -DTRANSLATION_DOMAIN=\"libkasten\")
+
+macro(KASTENGUI_ADD_SUBLIBRARY _library_name)
+    okteta_add_sublibrary(Gui NAMESPACE Kasten
+        SUBLIBRARY ${_library_name}
+        ${ARGN}
+    )
+endmacro()
+
+macro(KASTENGUI_SUBLIBRARY_SOURCES _subdir)
+    okteta_sublibrary_sources(Gui NAMESPACE Kasten
+        SUBDIR ${_subdir}
+        ${ARGN}
+    )
+endmacro()
+
+kastengui_add_sublibrary(kastenview
+    UNTESTED
+    PUBLIC
+        KastenCore
+        Qt5::Widgets
+)
+okteta_qt_declare_logging_category(KastenGui
     HEADER "logging.hpp"
     IDENTIFIER "LOG_KASTEN_GUI"
     CATEGORY_NAME "kasten.gui"
@@ -25,16 +45,14 @@ ecm_qt_declare_logging_category(KastenGui
     EXPORT OKTETA
 )
 
-target_compile_definitions(KastenGui PRIVATE -DTRANSLATION_DOMAIN=\"libkasten\")
+okteta_sublibrary_sources(Gui NAMESPACE Kasten
+    SUBLIBRARY kastenview
+    PUBLIC
+        KastenGui
+)
 
-macro(KASTENGUI_LIBRARY_SOURCES _subdir)
-    okteta_library_sources(Gui NAMESPACE Kasten
-        SUBDIR ${_subdir}
-        ${ARGN}
-    )
-endmacro()
-
-kastengui_library_sources(view
+kastengui_sublibrary_sources(view
+    SUBLIBRARY kastenview
     BUILD_INCLUDEDIR
     PUBLIC
         SelectedDataWriteable
@@ -53,13 +71,15 @@ kastengui_library_sources(view
         AbstractToolInlineView
 )
 
-kastengui_library_sources(io/filesystem
+kastengui_add_sublibrary(kastenguiio
+    UNTESTED
     PUBLIC
-        ModelEncoderFileSystemExporterConfigEditor
-        ModelEncoderFileSystemExporterConfigEditorFactory
+        KastenCore
+        Qt5::Widgets
 )
 
-kastengui_library_sources(io
+kastengui_sublibrary_sources(io
+    SUBLIBRARY kastenguiio
     BUILD_INCLUDEDIR
     PUBLIC
         AbstractModelStreamEncoderConfigEditor
@@ -72,7 +92,36 @@ kastengui_library_sources(io
         AbstractModelDataGeneratorConfigEditorFactory
 )
 
-kastengui_library_sources(system
+kastengui_add_sublibrary(kastenguifilesystemio
+    UNTESTED
+    PUBLIC
+        kastenguiio
+)
+
+kastengui_sublibrary_sources(io/filesystem
+    SUBLIBRARY kastenguifilesystemio
+    PUBLIC
+        ModelEncoderFileSystemExporterConfigEditor
+        ModelEncoderFileSystemExporterConfigEditorFactory
+)
+
+kastengui_add_sublibrary(kastenguisystem
+    UNTESTED
+    PUBLIC
+        kastenview
+        kastenguiio
+    PRIVATE
+        KF5::WidgetsAddons
+        KF5::I18n
+)
+okteta_sublibrary_compile_definitions(Gui NAMESPACE Kasten
+    SUBLIBRARY kastenguisystem
+    PRIVATE
+        TRANSLATION_DOMAIN=\"libkasten\"
+)
+
+kastengui_sublibrary_sources(system
+    SUBLIBRARY kastenguisystem
     BUILD_INCLUDEDIR
     PUBLIC
         AbstractDocumentStrategy
@@ -90,7 +139,36 @@ kastengui_library_sources(system
         CreateDialog
 )
 
-kastengui_library_sources(shell
+kastengui_add_sublibrary(kastenguicontroller
+    UNTESTED
+    PUBLIC
+        KastenCore
+        Qt5::Widgets
+)
+
+kastengui_sublibrary_sources(controller
+    SUBLIBRARY kastenguicontroller
+    BUILD_INCLUDEDIR
+    PUBLIC
+        AbstractXmlGuiController
+        AbstractXmlGuiControllerFactory
+
+        AbstractLinePopup
+        AbstractToolWidget
+        ToggleButton
+)
+
+kastengui_add_sublibrary(kastenguishell
+    UNTESTED
+    PUBLIC
+        kastenview
+        kastenguicontroller
+        kastenguisystem
+        KF5::XmlGui
+)
+
+kastengui_sublibrary_sources(shell
+    SUBLIBRARY kastenguishell
     BUILD_INCLUDEDIR
     PUBLIC
         ToolInlineViewable
@@ -119,21 +197,6 @@ kastengui_library_sources(shell
         ViewBox
 )
 
-kastengui_library_sources(controller
-    BUILD_INCLUDEDIR
-    PUBLIC
-        AbstractXmlGuiController
-        AbstractXmlGuiControllerFactory
-
-        AbstractLinePopup
-        AbstractToolWidget
-        ToggleButton
-)
-
-okteta_library_sources(Gui  NAMESPACE Kasten
-    PUBLIC
-        KastenGui
-)
 
 okteta_add_cmakeconfig(Gui NAMESPACE Kasten
     DEPS
