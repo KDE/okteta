@@ -41,6 +41,11 @@ CropController::CropController(KXMLGUIClient* guiClient)
 
 void CropController::setTargetModel(AbstractModel* model)
 {
+    ByteArrayView* const byteArrayView =  model ? model->findBaseModel<ByteArrayView*>() : nullptr;
+    if (byteArrayView == m_byteArrayView) {
+        return;
+    }
+
     if (m_byteArrayView) {
         m_byteArrayView->disconnect(this);
     }
@@ -48,8 +53,9 @@ void CropController::setTargetModel(AbstractModel* model)
         m_byteArrayModel->disconnect(this);
     }
 
-    m_byteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
+    m_byteArrayView = byteArrayView;
 
+    // TODO; check if already same document used before
     ByteArrayDocument* document =
         m_byteArrayView ? qobject_cast<ByteArrayDocument*>(m_byteArrayView->baseModel()) : nullptr;
     m_byteArrayModel = document ? document->content() : nullptr;
