@@ -22,10 +22,12 @@ protected:
 
 public:
     AbstractMouseController(const AbstractMouseController&) = delete;
+    AbstractMouseController(AbstractMouseController&&) = delete;
 
     virtual ~AbstractMouseController();
 
     AbstractMouseController& operator=(const AbstractMouseController&) = delete;
+    AbstractMouseController& operator=(AbstractMouseController&&) = delete;
 
 public: // API to be implemented
     [[nodiscard]]

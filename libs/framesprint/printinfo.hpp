@@ -19,10 +19,12 @@ class PrintInfo
 public:
     PrintInfo() = default;
     PrintInfo(const PrintInfo&) = delete;
+    PrintInfo(PrintInfo&&) = delete;
 
     ~PrintInfo() = default;
 
     PrintInfo& operator=(const PrintInfo&) = delete;
+    PrintInfo& operator=(PrintInfo&&) = delete;
 
 public:
     [[nodiscard]]

@@ -19,10 +19,12 @@ class UserNotificationPrivate
 public:
     explicit UserNotificationPrivate(AbstractModel* targetModel, const QString& text, const QString& title);
     UserNotificationPrivate(const UserNotificationPrivate&) = delete;
+    UserNotificationPrivate(UserNotificationPrivate&&) = delete;
 
     ~UserNotificationPrivate();
 
     UserNotificationPrivate& operator=(const UserNotificationPrivate&) = delete;
+    UserNotificationPrivate& operator=(UserNotificationPrivate&&) = delete;
 
 public:
     [[nodiscard]]

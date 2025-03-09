@@ -19,8 +19,10 @@ class ByteArrayFilterParameterSetEditFactory
 public:
     ByteArrayFilterParameterSetEditFactory() = delete;
     ByteArrayFilterParameterSetEditFactory(const ByteArrayFilterParameterSetEditFactory&) = delete;
+    ByteArrayFilterParameterSetEditFactory(ByteArrayFilterParameterSetEditFactory&&) = delete;
 
     ByteArrayFilterParameterSetEditFactory& operator=(const ByteArrayFilterParameterSetEditFactory&) = delete;
+    ByteArrayFilterParameterSetEditFactory& operator=(ByteArrayFilterParameterSetEditFactory&&) = delete;
 
 public:
     [[nodiscard]]

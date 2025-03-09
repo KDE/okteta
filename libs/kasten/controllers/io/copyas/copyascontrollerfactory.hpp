@@ -25,10 +25,12 @@ public:
     explicit CopyAsControllerFactory(ModelCodecViewManager* modelCodecViewManager,
                                      ModelCodecManager* modelCodecManager);
     CopyAsControllerFactory(const CopyAsControllerFactory&) = delete;
+    CopyAsControllerFactory(CopyAsControllerFactory&&) = delete;
 
     ~CopyAsControllerFactory() override;
 
     CopyAsControllerFactory& operator=(const CopyAsControllerFactory&) = delete;
+    CopyAsControllerFactory& operator=(CopyAsControllerFactory&&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     [[nodiscard]]

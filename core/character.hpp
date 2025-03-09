@@ -22,10 +22,12 @@ public:
     constexpr Character(QChar qchar);   // krazy:exclude=explicit
     constexpr Character(QChar qchar, bool isUndefined);
     Character(const Character&) = default;
+    Character(Character&&) = default;
 
     ~Character() = default;
 
     Character& operator=(const Character&) = default;
+    Character& operator=(Character&&) = default;
 
 public:
     [[nodiscard]]

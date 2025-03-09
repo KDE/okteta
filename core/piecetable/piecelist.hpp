@@ -22,10 +22,12 @@ public:
     PieceList();
     explicit PieceList(const Piece& piece);
     PieceList(const PieceList&);
+    PieceList(PieceList&&);
 
     ~PieceList();
 
     PieceList& operator=(const PieceList&) = default;
+    PieceList& operator=(PieceList&&) = default;
 
 public:
     [[nodiscard]]
@@ -53,6 +55,7 @@ inline PieceList::PieceList(const Piece& piece)
 {
     append(piece);
 }
+inline PieceList::PieceList(PieceList&&) = default;
 
 inline PieceList::~PieceList() = default;
 

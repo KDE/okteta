@@ -23,10 +23,12 @@ class KASTENCONTROLLERS_EXPORT SwitchViewControllerFactory : public AbstractXmlG
 public:
     explicit SwitchViewControllerFactory(AbstractGroupedViews* groupedViews);
     SwitchViewControllerFactory(const SwitchViewControllerFactory&) = delete;
+    SwitchViewControllerFactory(SwitchViewControllerFactory&&) = delete;
 
     ~SwitchViewControllerFactory() override;
 
     SwitchViewControllerFactory& operator=(const SwitchViewControllerFactory&) = delete;
+    SwitchViewControllerFactory& operator=(SwitchViewControllerFactory&&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     [[nodiscard]]

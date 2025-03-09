@@ -25,10 +25,12 @@ public:
     StructureMetaData();
     explicit StructureMetaData(const QString& filename);
     StructureMetaData(const StructureMetaData& rhs);
+    StructureMetaData(StructureMetaData&& rhs);
 
     ~StructureMetaData();
 
     StructureMetaData& operator=(const StructureMetaData& rhs);
+    StructureMetaData& operator=(StructureMetaData&& rhs);
 
 public:
     [[nodiscard]]

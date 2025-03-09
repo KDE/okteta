@@ -21,10 +21,12 @@ class OKTETAKASTENCONTROLLERS_EXPORT InfoToolFactory : public AbstractToolFactor
 public:
     InfoToolFactory();
     InfoToolFactory(const InfoToolFactory&) = delete;
+    InfoToolFactory(InfoToolFactory&&) = delete;
 
     ~InfoToolFactory() override;
 
     InfoToolFactory& operator=(const InfoToolFactory&) = delete;
+    InfoToolFactory& operator=(InfoToolFactory&&) = delete;
 
 public: // AbstractToolFactory API
     [[nodiscard]]

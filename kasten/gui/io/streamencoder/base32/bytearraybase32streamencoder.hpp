@@ -35,10 +35,12 @@ private:
 public:
     Base32StreamEncoderSettings();
     Base32StreamEncoderSettings(const Base32StreamEncoderSettings&) = default;
+    Base32StreamEncoderSettings(Base32StreamEncoderSettings&&) = default;
 
     ~Base32StreamEncoderSettings() = default;
 
     Base32StreamEncoderSettings& operator=(const Base32StreamEncoderSettings&) = default;
+    Base32StreamEncoderSettings& operator=(Base32StreamEncoderSettings&&) = default;
 
     [[nodiscard]]
     bool operator==(const Base32StreamEncoderSettings& other) const;

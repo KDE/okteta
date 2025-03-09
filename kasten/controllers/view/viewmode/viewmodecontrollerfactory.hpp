@@ -21,10 +21,12 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewModeControllerFactory : public Abstract
 public:
     ViewModeControllerFactory();
     ViewModeControllerFactory(const ViewModeControllerFactory&) = delete;
+    ViewModeControllerFactory(ViewModeControllerFactory&&) = delete;
 
     ~ViewModeControllerFactory() override;
 
     ViewModeControllerFactory& operator=(const ViewModeControllerFactory&) = delete;
+    ViewModeControllerFactory& operator=(ViewModeControllerFactory&&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     [[nodiscard]]

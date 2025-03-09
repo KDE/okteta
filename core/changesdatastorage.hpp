@@ -19,10 +19,12 @@ class ChangesDataStorage
 public:
     ChangesDataStorage();
     ChangesDataStorage(const ChangesDataStorage&) = delete;
+    ChangesDataStorage(ChangesDataStorage&&) = delete;
 
     ~ChangesDataStorage() = default;
 
     ChangesDataStorage& operator=(const ChangesDataStorage&) = delete;
+    ChangesDataStorage& operator=(ChangesDataStorage&&) = delete;
 
 public: // set/action
     void append(int from, char datum);

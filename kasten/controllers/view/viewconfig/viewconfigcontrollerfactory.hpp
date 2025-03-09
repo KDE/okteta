@@ -21,10 +21,12 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewConfigControllerFactory : public Abstra
 public:
     ViewConfigControllerFactory();
     ViewConfigControllerFactory(const ViewConfigControllerFactory&) = delete;
+    ViewConfigControllerFactory(ViewConfigControllerFactory&&) = delete;
 
     ~ViewConfigControllerFactory() override;
 
     ViewConfigControllerFactory& operator=(const ViewConfigControllerFactory&) = delete;
+    ViewConfigControllerFactory& operator=(ViewConfigControllerFactory&&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     [[nodiscard]]

@@ -30,10 +30,12 @@ public:
     ShellWindowPrivate(ShellWindow* parent,
                        ViewManager* viewManager);
     ShellWindowPrivate(const ShellWindowPrivate&) = delete;
+    ShellWindowPrivate(ShellWindowPrivate&&) = delete;
 
     ~ShellWindowPrivate();
 
     ShellWindowPrivate& operator=(const ShellWindowPrivate&) = delete;
+    ShellWindowPrivate& operator=(ShellWindowPrivate&&) = delete;
 
 public:
     [[nodiscard]]

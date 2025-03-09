@@ -19,10 +19,12 @@ class AbstractColumnStylistPrivate
 public:
     AbstractColumnStylistPrivate();
     AbstractColumnStylistPrivate(const AbstractColumnStylistPrivate&) = delete;
+    AbstractColumnStylistPrivate(AbstractColumnStylistPrivate&&) = delete;
 
     virtual ~AbstractColumnStylistPrivate();
 
     AbstractColumnStylistPrivate& operator=(const AbstractColumnStylistPrivate&) = delete;
+    AbstractColumnStylistPrivate& operator=(AbstractColumnStylistPrivate&&) = delete;
 
 public:
 

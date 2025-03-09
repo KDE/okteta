@@ -44,10 +44,12 @@ private:
 public:
     SRecStreamEncoderSettings();
     SRecStreamEncoderSettings(const SRecStreamEncoderSettings&) = default;
+    SRecStreamEncoderSettings(SRecStreamEncoderSettings&&) = default;
 
     ~SRecStreamEncoderSettings() = default;
 
     SRecStreamEncoderSettings& operator=(const SRecStreamEncoderSettings&) = default;
+    SRecStreamEncoderSettings& operator=(SRecStreamEncoderSettings&&) = default;
 
     [[nodiscard]]
     bool operator==(const SRecStreamEncoderSettings& other) const;

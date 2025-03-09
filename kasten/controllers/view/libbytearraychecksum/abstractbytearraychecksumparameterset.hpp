@@ -19,10 +19,12 @@ protected:
 
 public:
     AbstractByteArrayChecksumParameterSet(const AbstractByteArrayChecksumParameterSet&) = delete;
+    AbstractByteArrayChecksumParameterSet(AbstractByteArrayChecksumParameterSet&&) = delete;
 
     virtual ~AbstractByteArrayChecksumParameterSet();
 
     AbstractByteArrayChecksumParameterSet& operator=(const AbstractByteArrayChecksumParameterSet&) = delete;
+    AbstractByteArrayChecksumParameterSet& operator=(AbstractByteArrayChecksumParameterSet&&) = delete;
 
 public:
     [[nodiscard]]

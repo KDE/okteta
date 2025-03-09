@@ -20,11 +20,13 @@ struct Utf16
 public:
     Utf16(QChar v);
     Utf16(const Utf16&) = default;
+    Utf16(Utf16&&) = default;
     Utf16();
 
     ~Utf16() = default;
 
     Utf16& operator=(const Utf16&) = default;
+    Utf16& operator=(Utf16&&) = default;
 
 public:
     [[nodiscard]]

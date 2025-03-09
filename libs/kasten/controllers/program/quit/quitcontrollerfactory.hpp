@@ -23,10 +23,12 @@ class KASTENCONTROLLERS_EXPORT QuitControllerFactory : public AbstractXmlGuiCont
 public:
     explicit QuitControllerFactory(KXmlGuiWindow* window);
     QuitControllerFactory(const QuitControllerFactory&) = delete;
+    QuitControllerFactory(QuitControllerFactory&&) = delete;
 
     ~QuitControllerFactory() override;
 
     QuitControllerFactory& operator=(const QuitControllerFactory&) = delete;
+    QuitControllerFactory& operator=(QuitControllerFactory&&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     [[nodiscard]]

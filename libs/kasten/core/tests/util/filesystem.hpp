@@ -17,10 +17,12 @@ class TestFileSystem
 public:
     explicit TestFileSystem(const QString& name);
     TestFileSystem(const TestFileSystem& name) = delete;
+    TestFileSystem(TestFileSystem&& name) = delete;
     ~TestFileSystem();
 
 public:
     TestFileSystem& operator=(const TestFileSystem& name) = delete;
+    TestFileSystem& operator=(TestFileSystem&& name) = delete;
 
 public:
     /// tries to remove the given subPath

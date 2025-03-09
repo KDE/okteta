@@ -23,10 +23,12 @@ class OKTETAKASTENCONTROLLERS_EXPORT StringsExtractToolViewFactory : public Abst
 public:
     StringsExtractToolViewFactory(AbstractUserMessagesHandler* userMessagesHandler);
     StringsExtractToolViewFactory(const StringsExtractToolViewFactory&) = delete;
+    StringsExtractToolViewFactory(StringsExtractToolViewFactory&&) = delete;
 
     ~StringsExtractToolViewFactory() override;
 
     StringsExtractToolViewFactory& operator=(const StringsExtractToolViewFactory&) = delete;
+    StringsExtractToolViewFactory& operator=(StringsExtractToolViewFactory&&) = delete;
 
 public: // AbstractToolViewFactory API
     [[nodiscard]]

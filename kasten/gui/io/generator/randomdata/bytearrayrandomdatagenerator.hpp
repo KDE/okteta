@@ -26,10 +26,12 @@ private:
 public:
     ByteArrayRandomDataGeneratorSettings();
     ByteArrayRandomDataGeneratorSettings(const ByteArrayRandomDataGeneratorSettings&) = default;
+    ByteArrayRandomDataGeneratorSettings(ByteArrayRandomDataGeneratorSettings&&) = default;
 
     ~ByteArrayRandomDataGeneratorSettings() = default;
 
     ByteArrayRandomDataGeneratorSettings& operator=(const ByteArrayRandomDataGeneratorSettings&) = default;
+    ByteArrayRandomDataGeneratorSettings& operator=(ByteArrayRandomDataGeneratorSettings&&) = default;
 
     [[nodiscard]]
     bool operator==(const ByteArrayRandomDataGeneratorSettings& other) const;

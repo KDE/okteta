@@ -30,10 +30,12 @@ public:
     Person(const QString& name, const QIcon& faceIcon);
     Person();
     Person(const Person& other);
+    Person(Person&& other);
     ~Person();
 
 public:
     Person& operator=(const Person& other);
+    Person& operator=(Person&& other);
 
 public:
     [[nodiscard]]

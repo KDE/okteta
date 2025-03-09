@@ -26,7 +26,9 @@ class JISX0201CharCodec : public CharCodec
 public:
     explicit JISX0201CharCodec(ConstructorTag);
     JISX0201CharCodec(const JISX0201CharCodec&) = delete;
+    JISX0201CharCodec(JISX0201CharCodec&&) = delete;
     JISX0201CharCodec& operator=(const JISX0201CharCodec&) = delete;
+    JISX0201CharCodec& operator=(JISX0201CharCodec&&) = delete;
 
 public: // CharCodec API
     [[nodiscard]]

@@ -40,10 +40,12 @@ public:
      */
     explicit StructureDefinitionFile(const StructureMetaData& metaData);
     StructureDefinitionFile(const StructureDefinitionFile&) = delete;
+    StructureDefinitionFile(StructureDefinitionFile&&) = delete;
 
     virtual ~StructureDefinitionFile();
 
     StructureDefinitionFile& operator=(const StructureDefinitionFile&) = delete;
+    StructureDefinitionFile& operator=(StructureDefinitionFile&&) = delete;
 
 public:
     [[nodiscard]]

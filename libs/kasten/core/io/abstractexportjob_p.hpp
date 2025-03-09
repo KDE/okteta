@@ -18,10 +18,12 @@ class AbstractExportJobPrivate
 public:
     explicit AbstractExportJobPrivate(AbstractExportJob* parent);
     AbstractExportJobPrivate(const AbstractExportJobPrivate&) = delete;
+    AbstractExportJobPrivate(AbstractExportJobPrivate&&) = delete;
 
     virtual ~AbstractExportJobPrivate();
 
     AbstractExportJobPrivate& operator=(const AbstractExportJobPrivate&) = delete;
+    AbstractExportJobPrivate& operator=(AbstractExportJobPrivate&&) = delete;
 
 protected:
     AbstractExportJob* const q_ptr;

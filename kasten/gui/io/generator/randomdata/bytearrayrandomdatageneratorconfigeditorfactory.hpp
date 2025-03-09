@@ -19,10 +19,12 @@ class ByteArrayRandomDataGeneratorConfigEditorFactory : public AbstractModelData
 public:
     ByteArrayRandomDataGeneratorConfigEditorFactory();
     ByteArrayRandomDataGeneratorConfigEditorFactory(const ByteArrayRandomDataGeneratorConfigEditorFactory&) = delete;
+    ByteArrayRandomDataGeneratorConfigEditorFactory(ByteArrayRandomDataGeneratorConfigEditorFactory&&) = delete;
 
     ~ByteArrayRandomDataGeneratorConfigEditorFactory() override;
 
     ByteArrayRandomDataGeneratorConfigEditorFactory& operator=(const ByteArrayRandomDataGeneratorConfigEditorFactory&) = delete;
+    ByteArrayRandomDataGeneratorConfigEditorFactory& operator=(ByteArrayRandomDataGeneratorConfigEditorFactory&&) = delete;
 
 public:
     [[nodiscard]]

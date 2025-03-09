@@ -22,10 +22,12 @@ class OKTETACORE_EXPORT BookmarksConstIterator
 public:
     explicit BookmarksConstIterator(BookmarksConstIteratorAdapter* adapter = nullptr);
     BookmarksConstIterator(const BookmarksConstIterator&) = default;
+    BookmarksConstIterator(BookmarksConstIterator&&) = default;
 
     ~BookmarksConstIterator() = default;
 
     BookmarksConstIterator& operator=(const BookmarksConstIterator&) = default;
+    BookmarksConstIterator& operator=(BookmarksConstIterator&&) = default;
 
 public:
     [[nodiscard]]

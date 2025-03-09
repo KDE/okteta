@@ -23,10 +23,12 @@ class ByteArrayViewHtmlStreamEncoderSettings
 public:
     ByteArrayViewHtmlStreamEncoderSettings();
     ByteArrayViewHtmlStreamEncoderSettings(const ByteArrayViewHtmlStreamEncoderSettings&) = default;
+    ByteArrayViewHtmlStreamEncoderSettings(ByteArrayViewHtmlStreamEncoderSettings&&) = default;
 
     ~ByteArrayViewHtmlStreamEncoderSettings() = default;
 
     ByteArrayViewHtmlStreamEncoderSettings& operator=(const ByteArrayViewHtmlStreamEncoderSettings&) = default;
+    ByteArrayViewHtmlStreamEncoderSettings& operator=(ByteArrayViewHtmlStreamEncoderSettings&&) = default;
 
 public:
     int codingWidth;

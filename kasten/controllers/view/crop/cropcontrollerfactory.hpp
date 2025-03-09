@@ -21,10 +21,12 @@ class OKTETAKASTENCONTROLLERS_EXPORT CropControllerFactory : public AbstractXmlG
 public:
     CropControllerFactory();
     CropControllerFactory(const CropControllerFactory&) = delete;
+    CropControllerFactory(CropControllerFactory&&) = delete;
 
     ~CropControllerFactory() override;
 
     CropControllerFactory& operator=(const CropControllerFactory&) = delete;
+    CropControllerFactory& operator=(CropControllerFactory&&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     [[nodiscard]]

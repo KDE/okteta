@@ -43,10 +43,12 @@ public:
         , End(null())
     {}
     Range(const Range& R) = default;
+    Range(Range&& other) = default;
     ~Range() = default;
 
 public:
     Range& operator=(const Range& R) = default;
+    Range& operator=(Range&& other) = default;
 
 public:
     [[nodiscard]]

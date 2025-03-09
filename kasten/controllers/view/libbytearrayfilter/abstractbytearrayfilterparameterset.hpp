@@ -19,10 +19,12 @@ protected:
 
 public:
     AbstractByteArrayFilterParameterSet(const AbstractByteArrayFilterParameterSet&) = delete;
+    AbstractByteArrayFilterParameterSet(AbstractByteArrayFilterParameterSet&&) = delete;
 
     virtual ~AbstractByteArrayFilterParameterSet();
 
     AbstractByteArrayFilterParameterSet& operator=(const AbstractByteArrayFilterParameterSet&) = delete;
+    AbstractByteArrayFilterParameterSet& operator=(AbstractByteArrayFilterParameterSet&&) = delete;
 
 public:
     [[nodiscard]]

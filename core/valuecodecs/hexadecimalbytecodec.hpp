@@ -21,7 +21,9 @@ class HexadecimalByteCodec : public ValueCodec
 public:
     explicit HexadecimalByteCodec(bool lowerCaseDigits = false);
     HexadecimalByteCodec(const HexadecimalByteCodec&) = delete;
+    HexadecimalByteCodec(HexadecimalByteCodec&&) = delete;
     HexadecimalByteCodec& operator=(const HexadecimalByteCodec&) = delete;
+    HexadecimalByteCodec& operator=(HexadecimalByteCodec&&) = delete;
 
 public:
     bool setLowerCaseDigits(bool lowerCaseDigits);

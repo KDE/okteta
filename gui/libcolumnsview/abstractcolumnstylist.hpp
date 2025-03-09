@@ -30,10 +30,12 @@ protected:
 public:
     AbstractColumnStylist();
     AbstractColumnStylist(const AbstractColumnStylist&) = delete;
+    AbstractColumnStylist(AbstractColumnStylist&&) = delete;
 
     virtual ~AbstractColumnStylist();
 
     AbstractColumnStylist& operator=(const AbstractColumnStylist&) = delete;
+    AbstractColumnStylist& operator=(AbstractColumnStylist&&) = delete;
 
 public: // API to be reimplemented in the subclasses
     [[nodiscard]]

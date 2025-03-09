@@ -21,11 +21,13 @@ struct Float64
 public:
     Float64(double v);
     Float64(const Float64&) = default;
+    Float64(Float64&&) = default;
     Float64();
 
     ~Float64() = default;
 
     Float64& operator=(const Float64&) = default;
+    Float64& operator=(Float64&&) = default;
 
 public:
     [[nodiscard]]

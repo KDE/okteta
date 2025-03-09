@@ -23,10 +23,12 @@ class KASTENCONTROLLERS_EXPORT TerminalToolFactory : public AbstractToolFactory
 public:
     explicit TerminalToolFactory(DocumentSyncManager* documentSyncManager);
     TerminalToolFactory(const TerminalToolFactory&) = delete;
+    TerminalToolFactory(TerminalToolFactory&&) = delete;
 
     ~TerminalToolFactory() override;
 
     TerminalToolFactory& operator=(const TerminalToolFactory&) = delete;
+    TerminalToolFactory& operator=(TerminalToolFactory&&) = delete;
 
 public: // AbstractToolFactory API
     [[nodiscard]]

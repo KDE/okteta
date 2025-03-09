@@ -28,10 +28,12 @@ class ModelCodecManagerPrivate
 public:
     ModelCodecManagerPrivate();
     ModelCodecManagerPrivate(const ModelCodecManagerPrivate&) = delete;
+    ModelCodecManagerPrivate(ModelCodecManagerPrivate&&) = delete;
     ~ModelCodecManagerPrivate();
 
 public:
     ModelCodecManagerPrivate& operator=(const ModelCodecManagerPrivate&) = delete;
+    ModelCodecManagerPrivate& operator=(ModelCodecManagerPrivate&&) = delete;
 
 public:
     void encodeToStream(AbstractModelStreamEncoder* encoder,

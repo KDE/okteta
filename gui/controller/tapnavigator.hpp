@@ -19,10 +19,12 @@ class TapNavigator
 public:
     explicit TapNavigator(AbstractByteArrayViewPrivate* view);
     TapNavigator(const TapNavigator&) = delete;
+    TapNavigator(TapNavigator&&) = delete;
 
     ~TapNavigator() = default;
 
     TapNavigator& operator=(const TapNavigator&) = delete;
+    TapNavigator& operator=(TapNavigator&&) = delete;
 
 public:
     [[nodiscard]]

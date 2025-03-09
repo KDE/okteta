@@ -23,8 +23,10 @@ class OKTETAKASTENGUI_EXPORT ByteArrayDataGeneratorFactory
 public:
     ByteArrayDataGeneratorFactory() = delete;
     ByteArrayDataGeneratorFactory(const ByteArrayDataGeneratorFactory&) = delete;
+    ByteArrayDataGeneratorFactory(ByteArrayDataGeneratorFactory&&) = delete;
 
     ByteArrayDataGeneratorFactory& operator=(const ByteArrayDataGeneratorFactory&) = delete;
+    ByteArrayDataGeneratorFactory& operator=(ByteArrayDataGeneratorFactory&&) = delete;
 
 public:
     [[nodiscard]]

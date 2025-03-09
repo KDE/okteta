@@ -19,10 +19,12 @@ class AbstractByteArrayModelPrivate
 public:
     explicit AbstractByteArrayModelPrivate(AbstractByteArrayModel* parent);
     AbstractByteArrayModelPrivate(const AbstractByteArrayModelPrivate&) = delete;
+    AbstractByteArrayModelPrivate(AbstractByteArrayModelPrivate&&) = delete;
 
     virtual ~AbstractByteArrayModelPrivate();
 
     AbstractByteArrayModelPrivate& operator=(const AbstractByteArrayModelPrivate&) = delete;
+    AbstractByteArrayModelPrivate& operator=(AbstractByteArrayModelPrivate&&) = delete;
 
 protected:
     AbstractByteArrayModel* const q_ptr;

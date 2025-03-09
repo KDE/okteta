@@ -21,11 +21,13 @@ struct UInt32
 public:
     UInt32(quint32 v);
     UInt32(const UInt32&) = default;
+    UInt32(UInt32&&) = default;
     UInt32();
 
     ~UInt32() = default;
 
     UInt32& operator=(const UInt32&) = default;
+    UInt32& operator=(UInt32&&) = default;
 
 public:
     [[nodiscard]]

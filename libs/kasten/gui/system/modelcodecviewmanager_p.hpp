@@ -29,11 +29,13 @@ class ModelCodecViewManagerPrivate
 public:
     ModelCodecViewManagerPrivate();
     ModelCodecViewManagerPrivate(const ModelCodecViewManagerPrivate&) = delete;
+    ModelCodecViewManagerPrivate(ModelCodecViewManagerPrivate&&) = delete;
 
     ~ModelCodecViewManagerPrivate();
 
 public:
     ModelCodecViewManagerPrivate& operator=(const ModelCodecViewManagerPrivate&) = delete;
+    ModelCodecViewManagerPrivate& operator=(ModelCodecViewManagerPrivate&&) = delete;
 
 public:
     [[nodiscard]]

@@ -23,10 +23,12 @@ class OKTETAKASTENCONTROLLERS_EXPORT FilterToolFactory : public AbstractToolFact
 public:
     explicit FilterToolFactory(AbstractUserMessagesHandler* userMessagesHandler);
     FilterToolFactory(const FilterToolFactory&) = delete;
+    FilterToolFactory(FilterToolFactory&&) = delete;
 
     ~FilterToolFactory() override;
 
     FilterToolFactory& operator=(const FilterToolFactory&) = delete;
+    FilterToolFactory& operator=(FilterToolFactory&&) = delete;
 
 public: // AbstractToolFactory API
     [[nodiscard]]

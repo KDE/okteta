@@ -25,10 +25,12 @@ class OKTETAKASTENCONTROLLERS_EXPORT ReplaceControllerFactory : public AbstractX
 public:
     explicit ReplaceControllerFactory(AbstractUserMessagesHandler* userMessagesHandler, QWidget* parentWidget);
     ReplaceControllerFactory(const ReplaceControllerFactory&) = delete;
+    ReplaceControllerFactory(ReplaceControllerFactory&&) = delete;
 
     ~ReplaceControllerFactory() override;
 
     ReplaceControllerFactory& operator=(const ReplaceControllerFactory&) = delete;
+    ReplaceControllerFactory& operator=(ReplaceControllerFactory&&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     [[nodiscard]]

@@ -21,10 +21,12 @@ class OKTETAKASTENCONTROLLERS_EXPORT ChecksumToolViewFactory : public AbstractTo
 public:
     ChecksumToolViewFactory();
     ChecksumToolViewFactory(const ChecksumToolViewFactory&) = delete;
+    ChecksumToolViewFactory(ChecksumToolViewFactory&&) = delete;
 
     ~ChecksumToolViewFactory() override;
 
     ChecksumToolViewFactory& operator=(const ChecksumToolViewFactory&) = delete;
+    ChecksumToolViewFactory& operator=(ChecksumToolViewFactory&&) = delete;
 
 public: // AbstractToolViewFactory API
     [[nodiscard]]

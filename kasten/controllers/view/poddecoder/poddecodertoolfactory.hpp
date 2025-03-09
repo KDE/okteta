@@ -23,10 +23,12 @@ class OKTETAKASTENCONTROLLERS_EXPORT PodDecoderToolFactory : public AbstractTool
 public:
     explicit PodDecoderToolFactory(AbstractUserMessagesHandler* userMessagesHandler);
     PodDecoderToolFactory(const PodDecoderToolFactory&) = delete;
+    PodDecoderToolFactory(PodDecoderToolFactory&&) = delete;
 
     ~PodDecoderToolFactory() override;
 
     PodDecoderToolFactory& operator=(const PodDecoderToolFactory&) = delete;
+    PodDecoderToolFactory& operator=(PodDecoderToolFactory&&) = delete;
 
 public: // AbstractToolFactory API
     [[nodiscard]]

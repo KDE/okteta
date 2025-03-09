@@ -21,11 +21,13 @@ struct SInt16
 public:
     SInt16(qint16 v);
     SInt16(const SInt16&) = default;
+    SInt16(SInt16&&) = default;
     SInt16();
 
     ~SInt16() = default;
 
     SInt16& operator=(const SInt16&) = default;
+    SInt16& operator=(SInt16&&) = default;
 
 public:
     [[nodiscard]]

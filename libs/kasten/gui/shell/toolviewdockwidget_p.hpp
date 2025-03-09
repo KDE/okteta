@@ -21,10 +21,12 @@ class ToolViewDockWidgetPrivate
 public:
     explicit ToolViewDockWidgetPrivate(std::unique_ptr<AbstractToolView>&& toolView);
     ToolViewDockWidgetPrivate(const ToolViewDockWidgetPrivate&) = delete;
+    ToolViewDockWidgetPrivate(ToolViewDockWidgetPrivate&&) = delete;
 
     ~ToolViewDockWidgetPrivate();
 
     ToolViewDockWidgetPrivate& operator=(const ToolViewDockWidgetPrivate&) = delete;
+    ToolViewDockWidgetPrivate& operator=(ToolViewDockWidgetPrivate&&) = delete;
 
 public:
     void init(ToolViewDockWidget* q);

@@ -26,11 +26,13 @@ class KASTENCORE_EXPORT UserErrorReport
 public:
     explicit UserErrorReport(AbstractModel* targetModel, const QString& text, const QString& title = QString());
     UserErrorReport(const UserErrorReport&) = delete;
+    UserErrorReport(UserErrorReport&&) = delete;
 
     ~UserErrorReport();
 
 public:
     UserErrorReport& operator=(const UserErrorReport&) = delete;
+    UserErrorReport& operator=(UserErrorReport&&) = delete;
 
 public:
     [[nodiscard]]

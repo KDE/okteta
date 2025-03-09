@@ -28,10 +28,12 @@ public:
     Bookmark(Address offset);   // krazy:exclude=explicit
     Bookmark();
     Bookmark(const Bookmark&) = default;
+    Bookmark(Bookmark&&) = default;
 
     ~Bookmark() = default;
 
     Bookmark& operator=(const Bookmark&) = default;
+    Bookmark& operator=(Bookmark&&) = default;
 
 public:
     [[nodiscard]]

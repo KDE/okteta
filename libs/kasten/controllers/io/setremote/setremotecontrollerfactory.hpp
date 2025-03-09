@@ -23,10 +23,12 @@ class KASTENCONTROLLERS_EXPORT SetRemoteControllerFactory : public AbstractXmlGu
 public:
     explicit SetRemoteControllerFactory(DocumentSyncManager* syncManager);
     SetRemoteControllerFactory(const SetRemoteControllerFactory&) = delete;
+    SetRemoteControllerFactory(SetRemoteControllerFactory&&) = delete;
 
     ~SetRemoteControllerFactory() override;
 
     SetRemoteControllerFactory& operator=(const SetRemoteControllerFactory&) = delete;
+    SetRemoteControllerFactory& operator=(SetRemoteControllerFactory&&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     [[nodiscard]]

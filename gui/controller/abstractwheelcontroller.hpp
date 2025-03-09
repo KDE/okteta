@@ -20,10 +20,12 @@ protected:
 
 public:
     AbstractWheelController(const AbstractWheelController&) = delete;
+    AbstractWheelController(AbstractWheelController&&) = delete;
 
     virtual ~AbstractWheelController();
 
     AbstractWheelController& operator=(const AbstractWheelController&) = delete;
+    AbstractWheelController& operator=(AbstractWheelController&&) = delete;
 
 public: // API to be implemented
     [[nodiscard]]

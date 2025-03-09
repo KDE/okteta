@@ -23,10 +23,12 @@ class KASTENCONTROLLERS_EXPORT ModifiedBarControllerFactory : public AbstractXml
 public:
     explicit ModifiedBarControllerFactory(StatusBar* statusBar);
     ModifiedBarControllerFactory(const ModifiedBarControllerFactory&) = delete;
+    ModifiedBarControllerFactory(ModifiedBarControllerFactory&&) = delete;
 
     ~ModifiedBarControllerFactory() override;
 
     ModifiedBarControllerFactory& operator=(const ModifiedBarControllerFactory&) = delete;
+    ModifiedBarControllerFactory& operator=(ModifiedBarControllerFactory&&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     [[nodiscard]]

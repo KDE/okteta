@@ -20,10 +20,12 @@ class RevertablePieceTable
 public:
     RevertablePieceTable();
     RevertablePieceTable(const RevertablePieceTable&) = delete;
+    RevertablePieceTable(RevertablePieceTable&&) = delete;
 
     ~RevertablePieceTable();
 
     RevertablePieceTable& operator=(const RevertablePieceTable&) = delete;
+    RevertablePieceTable& operator=(RevertablePieceTable&&) = delete;
 
 public:
     void init(Size size);

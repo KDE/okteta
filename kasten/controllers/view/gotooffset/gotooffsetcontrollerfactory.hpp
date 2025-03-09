@@ -25,10 +25,12 @@ class OKTETAKASTENCONTROLLERS_EXPORT GotoOffsetControllerFactory : public Abstra
 public:
     explicit GotoOffsetControllerFactory(If::ToolInlineViewable* toolInlineViewable);
     GotoOffsetControllerFactory(const GotoOffsetControllerFactory&) = delete;
+    GotoOffsetControllerFactory(GotoOffsetControllerFactory&&) = delete;
 
     ~GotoOffsetControllerFactory() override;
 
     GotoOffsetControllerFactory& operator=(const GotoOffsetControllerFactory&) = delete;
+    GotoOffsetControllerFactory& operator=(GotoOffsetControllerFactory&&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     [[nodiscard]]

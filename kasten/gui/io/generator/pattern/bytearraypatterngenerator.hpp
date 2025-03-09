@@ -45,10 +45,12 @@ private:
 public:
     ByteArrayPatternGeneratorSettings();
     ByteArrayPatternGeneratorSettings(const ByteArrayPatternGeneratorSettings&) = default;
+    ByteArrayPatternGeneratorSettings(ByteArrayPatternGeneratorSettings&&) = default;
 
     ~ByteArrayPatternGeneratorSettings() = default;
 
     ByteArrayPatternGeneratorSettings& operator=(const ByteArrayPatternGeneratorSettings&) = default;
+    ByteArrayPatternGeneratorSettings& operator=(ByteArrayPatternGeneratorSettings&&) = default;
 
     [[nodiscard]]
     bool operator==(const ByteArrayPatternGeneratorSettings& other) const;

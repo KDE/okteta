@@ -31,10 +31,12 @@ public:
     Piece(const AddressRange& storageRange, int storageId);
     Piece();
     Piece(const Piece&) = default; // trivial
+    Piece(Piece&&) = default; // trivial
 
     ~Piece() = default; // trivial
 
     Piece& operator=(const Piece&) = default; // trivial
+    Piece& operator=(Piece&&) = default; // trivial
 
 public:
     [[nodiscard]]

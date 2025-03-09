@@ -28,11 +28,13 @@ public:
 public:
     explicit ByteArrayViewProfile();
     ByteArrayViewProfile(const ByteArrayViewProfile& other);
+    ByteArrayViewProfile(ByteArrayViewProfile&& other);
 
     ~ByteArrayViewProfile();
 
 public:
     ByteArrayViewProfile& operator=(const ByteArrayViewProfile& other);
+    ByteArrayViewProfile& operator=(ByteArrayViewProfile&& other);
 
 public:
     void setId(const Id& id);

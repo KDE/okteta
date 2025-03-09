@@ -30,10 +30,12 @@ class UserMessagesHandlerPrivate : public QObject
 public:
     explicit UserMessagesHandlerPrivate(QWidget* widget);
     UserMessagesHandlerPrivate(const UserMessagesHandlerPrivate&) = delete;
+    UserMessagesHandlerPrivate(UserMessagesHandlerPrivate&&) = delete;
 
     ~UserMessagesHandlerPrivate() override;
 
     UserMessagesHandlerPrivate& operator=(const UserMessagesHandlerPrivate&) = delete;
+    UserMessagesHandlerPrivate& operator=(UserMessagesHandlerPrivate&&) = delete;
 
 public:
     void postErrorReport(std::unique_ptr<UserErrorReport>&& errorReport);

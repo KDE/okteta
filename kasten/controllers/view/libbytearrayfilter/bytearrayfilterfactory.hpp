@@ -20,8 +20,10 @@ class ByteArrayFilterFactory
 public:
     ByteArrayFilterFactory() = delete;
     ByteArrayFilterFactory(const ByteArrayFilterFactory&) = delete;
+    ByteArrayFilterFactory(ByteArrayFilterFactory&&) = delete;
 
     ByteArrayFilterFactory& operator=(const ByteArrayFilterFactory&) = delete;
+    ByteArrayFilterFactory& operator=(ByteArrayFilterFactory&&) = delete;
 
 public:
     [[nodiscard]]

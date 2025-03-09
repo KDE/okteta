@@ -21,10 +21,12 @@ class KASTENCONTROLLERS_EXPORT TerminalToolViewFactory : public AbstractToolView
 public:
     TerminalToolViewFactory();
     TerminalToolViewFactory(const TerminalToolViewFactory&) = delete;
+    TerminalToolViewFactory(TerminalToolViewFactory&&) = delete;
 
     ~TerminalToolViewFactory() override;
 
     TerminalToolViewFactory& operator=(const TerminalToolViewFactory&) = delete;
+    TerminalToolViewFactory& operator=(TerminalToolViewFactory&&) = delete;
 
 public: // AbstractToolViewFactory API
     [[nodiscard]]

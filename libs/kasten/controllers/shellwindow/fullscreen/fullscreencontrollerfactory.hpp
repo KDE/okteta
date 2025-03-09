@@ -23,10 +23,12 @@ class KASTENCONTROLLERS_EXPORT FullScreenControllerFactory : public AbstractXmlG
 public:
     explicit FullScreenControllerFactory(KXmlGuiWindow* window);
     FullScreenControllerFactory(const FullScreenControllerFactory&) = delete;
+    FullScreenControllerFactory(FullScreenControllerFactory&&) = delete;
 
     ~FullScreenControllerFactory() override;
 
     FullScreenControllerFactory& operator=(const FullScreenControllerFactory&) = delete;
+    FullScreenControllerFactory& operator=(FullScreenControllerFactory&&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     [[nodiscard]]

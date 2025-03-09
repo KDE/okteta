@@ -44,10 +44,12 @@ private:
 public:
     IHexStreamEncoderSettings();
     IHexStreamEncoderSettings(const IHexStreamEncoderSettings&) = default;
+    IHexStreamEncoderSettings(IHexStreamEncoderSettings&&) = default;
 
     ~IHexStreamEncoderSettings() = default;
 
     IHexStreamEncoderSettings& operator=(const IHexStreamEncoderSettings&) = default;
+    IHexStreamEncoderSettings& operator=(IHexStreamEncoderSettings&&) = default;
 
     [[nodiscard]]
     bool operator==(const IHexStreamEncoderSettings& other) const;

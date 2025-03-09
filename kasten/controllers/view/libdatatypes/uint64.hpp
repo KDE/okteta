@@ -21,11 +21,13 @@ struct UInt64
 public:
     UInt64(quint64 v);
     UInt64(const UInt64&) = default;
+    UInt64(UInt64&&) = default;
     UInt64();
 
     ~UInt64() = default;
 
     UInt64& operator=(const UInt64&) = default;
+    UInt64& operator=(UInt64&&) = default;
 
 public:
     [[nodiscard]]

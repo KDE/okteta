@@ -24,10 +24,12 @@ class ByteArrayComboBoxPrivate
 public:
     explicit ByteArrayComboBoxPrivate(ByteArrayComboBox* parent);
     ByteArrayComboBoxPrivate(const ByteArrayComboBoxPrivate&) = delete;
+    ByteArrayComboBoxPrivate(ByteArrayComboBoxPrivate&&) = delete;
 
     ~ByteArrayComboBoxPrivate() = default;
 
     ByteArrayComboBoxPrivate& operator=(const ByteArrayComboBoxPrivate&) = delete;
+    ByteArrayComboBoxPrivate& operator=(ByteArrayComboBoxPrivate&&) = delete;
 
 public:
     [[nodiscard]]

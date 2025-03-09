@@ -19,10 +19,12 @@ class ByteArrayBase32StreamEncoderConfigEditorFactory : public AbstractModelStre
 public:
     ByteArrayBase32StreamEncoderConfigEditorFactory();
     ByteArrayBase32StreamEncoderConfigEditorFactory(const ByteArrayBase32StreamEncoderConfigEditorFactory&) = delete;
+    ByteArrayBase32StreamEncoderConfigEditorFactory(ByteArrayBase32StreamEncoderConfigEditorFactory&&) = delete;
 
     ~ByteArrayBase32StreamEncoderConfigEditorFactory() override;
 
     ByteArrayBase32StreamEncoderConfigEditorFactory& operator=(const ByteArrayBase32StreamEncoderConfigEditorFactory&) = delete;
+    ByteArrayBase32StreamEncoderConfigEditorFactory& operator=(ByteArrayBase32StreamEncoderConfigEditorFactory&&) = delete;
 
 public:
     [[nodiscard]]

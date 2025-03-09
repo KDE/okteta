@@ -24,10 +24,12 @@ class CoordRangeList : public QLinkedList<CoordRange>
 public:
     CoordRangeList();
     CoordRangeList(const CoordRangeList&) = delete;
+    CoordRangeList(CoordRangeList&&) = delete;
 
     ~CoordRangeList();
 
     CoordRangeList& operator=(const CoordRangeList&) = delete;
+    CoordRangeList& operator=(CoordRangeList&&) = delete;
 
 public:
     void addCoordRange(const CoordRange& coordRange);

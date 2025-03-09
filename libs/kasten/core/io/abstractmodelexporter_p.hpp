@@ -19,10 +19,12 @@ public:
     AbstractModelExporterPrivate(AbstractModelExporter* parent,
                                  const QString& remoteTypeName, const QString& remoteMimeType);
     AbstractModelExporterPrivate(const AbstractModelExporterPrivate&) = delete;
+    AbstractModelExporterPrivate(AbstractModelExporterPrivate&&) = delete;
 
     virtual ~AbstractModelExporterPrivate();
 
     AbstractModelExporterPrivate& operator=(const AbstractModelExporterPrivate&) = delete;
+    AbstractModelExporterPrivate& operator=(AbstractModelExporterPrivate&&) = delete;
 
 public:
     [[nodiscard]]

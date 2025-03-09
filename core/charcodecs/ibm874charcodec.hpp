@@ -26,7 +26,9 @@ class IBM874CharCodec : public CharCodec
 public:
     explicit IBM874CharCodec(ConstructorTag);
     IBM874CharCodec(const IBM874CharCodec&) = delete;
+    IBM874CharCodec(IBM874CharCodec&&) = delete;
     IBM874CharCodec& operator=(const IBM874CharCodec&) = delete;
+    IBM874CharCodec& operator=(IBM874CharCodec&&) = delete;
 
 public: // CharCodec API
     [[nodiscard]]

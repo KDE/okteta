@@ -22,10 +22,12 @@ class ToggleButtonPrivate
 public:
     explicit ToggleButtonPrivate(ToggleButton* parent);
     ToggleButtonPrivate(const ToggleButtonPrivate&) = delete;
+    ToggleButtonPrivate(ToggleButtonPrivate&&) = delete;
 
     ~ToggleButtonPrivate() = default;
 
     ToggleButtonPrivate& operator=(const ToggleButtonPrivate&) = delete;
+    ToggleButtonPrivate& operator=(ToggleButtonPrivate&&) = delete;
 
 public:
     void setOtherState(const QIcon& icon, const QString& text, const QString& toolTip);

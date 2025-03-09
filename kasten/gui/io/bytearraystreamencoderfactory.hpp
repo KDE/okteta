@@ -23,8 +23,10 @@ class OKTETAKASTENGUI_EXPORT ByteArrayStreamEncoderFactory
 public:
     ByteArrayStreamEncoderFactory() = delete;
     ByteArrayStreamEncoderFactory(const ByteArrayStreamEncoderFactory&) = delete;
+    ByteArrayStreamEncoderFactory(ByteArrayStreamEncoderFactory&&) = delete;
 
     ByteArrayStreamEncoderFactory& operator=(const ByteArrayStreamEncoderFactory&) = delete;
+    ByteArrayStreamEncoderFactory& operator=(ByteArrayStreamEncoderFactory&&) = delete;
 
 public:
     [[nodiscard]]

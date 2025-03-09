@@ -33,6 +33,7 @@ public:
      */
     explicit Selection(Address index);
     Selection(const Selection& other) = default; // trivial
+    Selection(Selection&& other) = default; // trivial
     /** creates an invalid selection */
     Selection();
 
@@ -40,6 +41,7 @@ public:
 
 public:
     Selection& operator=(const Selection& other) = default; // trivial
+    Selection& operator=(Selection&& other) = default; // trivial
     Selection& operator=(const AddressRange& range);
 
     [[nodiscard]]

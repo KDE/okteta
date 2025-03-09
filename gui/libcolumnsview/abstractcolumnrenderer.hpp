@@ -42,10 +42,12 @@ protected:
 public:
     explicit AbstractColumnRenderer(AbstractColumnStylist* stylist);
     AbstractColumnRenderer(const AbstractColumnRenderer&) = delete;
+    AbstractColumnRenderer(AbstractColumnRenderer&&) = delete;
 
     virtual ~AbstractColumnRenderer();
 
     AbstractColumnRenderer& operator=(const AbstractColumnRenderer&) = delete;
+    AbstractColumnRenderer& operator=(AbstractColumnRenderer&&) = delete;
 
 public: // API to be reimplemented in the subclasses
     /** Before an update of the columns view each column that intersects with the area to be painted

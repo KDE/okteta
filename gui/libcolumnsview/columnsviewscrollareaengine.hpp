@@ -34,10 +34,12 @@ class ColumnsViewScrollAreaEngine
 public:
     explicit ColumnsViewScrollAreaEngine(/*bool R,*/ QAbstractScrollArea* parent);
     ColumnsViewScrollAreaEngine(const ColumnsViewScrollAreaEngine&) = delete;
+    ColumnsViewScrollAreaEngine(ColumnsViewScrollAreaEngine&&) = delete;
 
     virtual ~ColumnsViewScrollAreaEngine();
 
     ColumnsViewScrollAreaEngine& operator=(const ColumnsViewScrollAreaEngine&) = delete;
+    ColumnsViewScrollAreaEngine& operator=(ColumnsViewScrollAreaEngine&&) = delete;
 
 public:
     void init();

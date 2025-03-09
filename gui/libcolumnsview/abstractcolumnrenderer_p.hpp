@@ -24,10 +24,12 @@ class AbstractColumnRendererPrivate
 public:
     explicit AbstractColumnRendererPrivate(AbstractColumnStylist* stylist);
     AbstractColumnRendererPrivate(const AbstractColumnRendererPrivate&) = delete;
+    AbstractColumnRendererPrivate(AbstractColumnRendererPrivate&&) = delete;
 
     virtual ~AbstractColumnRendererPrivate();
 
     AbstractColumnRendererPrivate& operator=(const AbstractColumnRendererPrivate&) = delete;
+    AbstractColumnRendererPrivate& operator=(AbstractColumnRendererPrivate&&) = delete;
 
 public:
     void renderBlankLine(QPainter* painter) const;

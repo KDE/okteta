@@ -28,10 +28,12 @@ class ByteArrayViewProfileFileInfo
 public:
     ByteArrayViewProfileFileInfo(const QDateTime& lastModified, bool locked);
     ByteArrayViewProfileFileInfo(const ByteArrayViewProfileFileInfo&) = default;
+    ByteArrayViewProfileFileInfo(ByteArrayViewProfileFileInfo&&) = default;
 
     ~ByteArrayViewProfileFileInfo() = default;
 
     ByteArrayViewProfileFileInfo& operator=(const ByteArrayViewProfileFileInfo&) = default;
+    ByteArrayViewProfileFileInfo& operator=(ByteArrayViewProfileFileInfo&&) = default;
 
 public:
     [[nodiscard]]

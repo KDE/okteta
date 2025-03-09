@@ -31,10 +31,12 @@ class OKTETAGUI_EXPORT ByteArrayTableRanges
 public:
     explicit ByteArrayTableRanges(ByteArrayTableLayout* layout);
     ByteArrayTableRanges(const ByteArrayTableRanges&) = delete;
+    ByteArrayTableRanges(ByteArrayTableRanges&&) = delete;
 
     ~ByteArrayTableRanges();
 
     ByteArrayTableRanges& operator=(const ByteArrayTableRanges&) = delete;
+    ByteArrayTableRanges& operator=(ByteArrayTableRanges&&) = delete;
 
 public: // modifcation access
     void setMarking(const AddressRange& marking);

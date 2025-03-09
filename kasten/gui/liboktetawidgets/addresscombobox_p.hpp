@@ -22,10 +22,12 @@ class AddressComboBoxPrivate
 public:
     explicit AddressComboBoxPrivate(AddressComboBox* parent);
     AddressComboBoxPrivate(const AddressComboBoxPrivate&) = delete;
+    AddressComboBoxPrivate(AddressComboBoxPrivate&&) = delete;
 
     ~AddressComboBoxPrivate() = default;
 
     AddressComboBoxPrivate& operator=(const AddressComboBoxPrivate&) = delete;
+    AddressComboBoxPrivate& operator=(AddressComboBoxPrivate&&) = delete;
 
 public:
     [[nodiscard]]

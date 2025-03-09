@@ -25,10 +25,12 @@ protected:
 
 public:
     AbstractTypeCodec(const AbstractTypeCodec&) = delete;
+    AbstractTypeCodec(AbstractTypeCodec&&) = delete;
 
     virtual ~AbstractTypeCodec();
 
     AbstractTypeCodec& operator=(const AbstractTypeCodec&) = delete;
+    AbstractTypeCodec& operator=(AbstractTypeCodec&&) = delete;
 
 public: // API to be implemented
     [[nodiscard]]

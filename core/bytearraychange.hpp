@@ -29,10 +29,12 @@ public:
     ByteArrayChange();
     explicit ByteArrayChange(const ArrayChangeMetrics& metrics, const QByteArray& data = QByteArray());
     ByteArrayChange(const ByteArrayChange&) = default;
+    ByteArrayChange(ByteArrayChange&&) = default;
 
     ~ByteArrayChange() = default;
 
     ByteArrayChange& operator=(const ByteArrayChange&) = default;
+    ByteArrayChange& operator=(ByteArrayChange&&) = default;
 
 public:
     [[nodiscard]]

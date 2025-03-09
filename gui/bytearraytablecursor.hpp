@@ -45,10 +45,12 @@ class ByteArrayTableCursor
 public:
     explicit ByteArrayTableCursor(const ByteArrayTableLayout* layout);
     ByteArrayTableCursor(const ByteArrayTableCursor&) = delete;
+    ByteArrayTableCursor(ByteArrayTableCursor&&) = delete;
 
     ~ByteArrayTableCursor() = default; // trivial
 
     ByteArrayTableCursor& operator=(const ByteArrayTableCursor&) = delete;
+    ByteArrayTableCursor& operator=(ByteArrayTableCursor&&) = delete;
 
 public: // modificator
     void setAppendPosEnabled(bool appendPosEnabled = true);

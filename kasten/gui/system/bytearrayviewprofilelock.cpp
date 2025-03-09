@@ -55,10 +55,12 @@ ByteArrayViewProfileLock::ByteArrayViewProfileLock(const QString& fileName,
 }
 
 ByteArrayViewProfileLock::ByteArrayViewProfileLock(const ByteArrayViewProfileLock& other) = default;
+ByteArrayViewProfileLock::ByteArrayViewProfileLock(ByteArrayViewProfileLock&& other) = default;
 
 ByteArrayViewProfileLock::~ByteArrayViewProfileLock() = default;
 
 ByteArrayViewProfileLock& ByteArrayViewProfileLock::operator=(const ByteArrayViewProfileLock& other) = default;
+ByteArrayViewProfileLock& ByteArrayViewProfileLock::operator=(ByteArrayViewProfileLock&& other) = default;
 
 void
 ByteArrayViewProfileLock::unlock()

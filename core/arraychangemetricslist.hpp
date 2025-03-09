@@ -29,10 +29,12 @@ public:
     ArrayChangeMetricsList();
     explicit ArrayChangeMetricsList(const ArrayChangeMetrics& metrics);
     ArrayChangeMetricsList(const ArrayChangeMetricsList&) = default;
+    ArrayChangeMetricsList(ArrayChangeMetricsList&&) = default;
 
     ~ArrayChangeMetricsList() = default;
 
     ArrayChangeMetricsList& operator=(const ArrayChangeMetricsList&) = delete;
+    ArrayChangeMetricsList& operator=(ArrayChangeMetricsList&&) = delete;
 };
 
 inline ArrayChangeMetricsList ArrayChangeMetricsList::oneReplacement(Address offset, Size removeLength, Size insertLength)

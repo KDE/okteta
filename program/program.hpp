@@ -29,9 +29,11 @@ class OktetaProgram
 public:
     OktetaProgram(int& argc, char* argv[]);
     OktetaProgram(const OktetaProgram&) = delete;
+    OktetaProgram(OktetaProgram&&) = delete;
     ~OktetaProgram();
 
     OktetaProgram& operator=(const OktetaProgram&) = delete;
+    OktetaProgram& operator=(OktetaProgram&&) = delete;
 
 public:
     [[nodiscard]]

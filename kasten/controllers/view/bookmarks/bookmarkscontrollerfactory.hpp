@@ -21,10 +21,12 @@ class OKTETAKASTENCONTROLLERS_EXPORT BookmarksControllerFactory : public Abstrac
 public:
     BookmarksControllerFactory();
     BookmarksControllerFactory(const BookmarksControllerFactory&) = delete;
+    BookmarksControllerFactory(BookmarksControllerFactory&&) = delete;
 
     ~BookmarksControllerFactory() override;
 
     BookmarksControllerFactory& operator=(const BookmarksControllerFactory&) = delete;
+    BookmarksControllerFactory& operator=(BookmarksControllerFactory&&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     [[nodiscard]]

@@ -26,7 +26,9 @@ class EBCDIC1047CharCodec : public CharCodec
 public:
     explicit EBCDIC1047CharCodec(ConstructorTag);
     EBCDIC1047CharCodec(const EBCDIC1047CharCodec&) = delete;
+    EBCDIC1047CharCodec(EBCDIC1047CharCodec&&) = delete;
     EBCDIC1047CharCodec& operator=(const EBCDIC1047CharCodec&) = delete;
+    EBCDIC1047CharCodec& operator=(EBCDIC1047CharCodec&&) = delete;
 
 public: // CharCodec API
     [[nodiscard]]

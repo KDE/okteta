@@ -23,9 +23,11 @@ protected:
 
 public:
     AbstractModelSelection(const AbstractModelSelection&) = delete;
+    AbstractModelSelection(AbstractModelSelection&&) = delete;
     virtual ~AbstractModelSelection();
 
     AbstractModelSelection& operator=(const AbstractModelSelection&) = delete;
+    AbstractModelSelection& operator=(AbstractModelSelection&&) = delete;
 
 public: // API to be implemented
 //     virtual bool isValid() const = 0;

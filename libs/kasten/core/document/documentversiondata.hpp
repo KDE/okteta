@@ -22,9 +22,11 @@ class KASTENCORE_EXPORT DocumentVersionData
 public:
     DocumentVersionData(DocumentVersionId id, const QString& changeComment);
     DocumentVersionData(const DocumentVersionData&) = default;
+    DocumentVersionData(DocumentVersionData&&) = default;
     ~DocumentVersionData() = default;
 
     DocumentVersionData& operator=(const DocumentVersionData&) = default;
+    DocumentVersionData& operator=(DocumentVersionData&&) = default;
 
 public:
     [[nodiscard]]

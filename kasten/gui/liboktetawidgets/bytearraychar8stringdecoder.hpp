@@ -32,10 +32,12 @@ public:
 public:
     ByteArrayChar8StringDecoder();
     ByteArrayChar8StringDecoder(const ByteArrayChar8StringDecoder&) = delete;
+    ByteArrayChar8StringDecoder(ByteArrayChar8StringDecoder&&) = delete;
 
     ~ByteArrayChar8StringDecoder();
 
     ByteArrayChar8StringDecoder& operator=(const ByteArrayChar8StringDecoder&) = delete;
+    ByteArrayChar8StringDecoder& operator=(ByteArrayChar8StringDecoder&&) = delete;
 
 public:
     [[nodiscard]]

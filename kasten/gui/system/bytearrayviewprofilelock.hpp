@@ -29,11 +29,13 @@ protected:
 
 public:
     ByteArrayViewProfileLock(const ByteArrayViewProfileLock& other);
+    ByteArrayViewProfileLock(ByteArrayViewProfileLock&& other);
 
     ~ByteArrayViewProfileLock();
 
 public:
     ByteArrayViewProfileLock& operator=(const ByteArrayViewProfileLock& other);
+    ByteArrayViewProfileLock& operator=(ByteArrayViewProfileLock&& other);
 
 public:
     void unlock();

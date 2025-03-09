@@ -23,10 +23,12 @@ class DocumentSyncManagerPrivate
 public:
     explicit DocumentSyncManagerPrivate(DocumentSyncManager* q, DocumentManager* manager);
     DocumentSyncManagerPrivate(const DocumentSyncManagerPrivate&) = delete;
+    DocumentSyncManagerPrivate(DocumentSyncManagerPrivate&&) = delete;
 
     ~DocumentSyncManagerPrivate();
 
     DocumentSyncManagerPrivate& operator=(const DocumentSyncManagerPrivate&) = delete;
+    DocumentSyncManagerPrivate& operator=(DocumentSyncManagerPrivate&&) = delete;
 
 public:
     void load(const QUrl& url);

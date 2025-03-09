@@ -36,9 +36,11 @@ public:
 public:
     OffsetFormat() = delete;
     OffsetFormat(const OffsetFormat&) = delete;
+    OffsetFormat(OffsetFormat&&) = delete;
     ~OffsetFormat() = delete;
 
     OffsetFormat& operator=(const OffsetFormat&) = delete;
+    OffsetFormat& operator=(OffsetFormat&&) = delete;
 
 public:
     /** */

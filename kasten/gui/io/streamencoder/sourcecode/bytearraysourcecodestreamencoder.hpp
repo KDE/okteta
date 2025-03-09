@@ -51,10 +51,12 @@ private:
 public:
     SourceCodeStreamEncoderSettings();
     SourceCodeStreamEncoderSettings(const SourceCodeStreamEncoderSettings&) = default;
+    SourceCodeStreamEncoderSettings(SourceCodeStreamEncoderSettings&&) = default;
 
     ~SourceCodeStreamEncoderSettings() = default;
 
     SourceCodeStreamEncoderSettings& operator=(const SourceCodeStreamEncoderSettings&) = default;
+    SourceCodeStreamEncoderSettings& operator=(SourceCodeStreamEncoderSettings&&) = default;
 
     [[nodiscard]]
     bool operator==(const SourceCodeStreamEncoderSettings& other) const;

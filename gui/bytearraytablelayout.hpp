@@ -48,10 +48,12 @@ public:
     ByteArrayTableLayout(Size noOfBytesPerLine, Address firstLineOffset, Address startOffset, Address byteArrayOffset, Size byteArrayLength);
     ByteArrayTableLayout() = delete;
     ByteArrayTableLayout(const ByteArrayTableLayout&) = delete;
+    ByteArrayTableLayout(ByteArrayTableLayout&&) = delete;
 
     ~ByteArrayTableLayout();
 
     ByteArrayTableLayout& operator=(const ByteArrayTableLayout&) = delete;
+    ByteArrayTableLayout& operator=(ByteArrayTableLayout&&) = delete;
 
 public: // given values
     /** */

@@ -21,11 +21,13 @@ struct UInt16
 public:
     UInt16(quint16 v);
     UInt16(const UInt16&) = default;
+    UInt16(UInt16&&) = default;
     UInt16();
 
     ~UInt16() = default;
 
     UInt16& operator=(const UInt16&) = default;
+    UInt16& operator=(UInt16&&) = default;
 
 public:
     [[nodiscard]]

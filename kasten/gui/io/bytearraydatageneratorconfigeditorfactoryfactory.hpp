@@ -23,8 +23,10 @@ class OKTETAKASTENGUI_EXPORT ByteArrayDataGeneratorConfigEditorFactoryFactory
 public:
     ByteArrayDataGeneratorConfigEditorFactoryFactory() = delete;
     ByteArrayDataGeneratorConfigEditorFactoryFactory(const ByteArrayDataGeneratorConfigEditorFactoryFactory&) = delete;
+    ByteArrayDataGeneratorConfigEditorFactoryFactory(ByteArrayDataGeneratorConfigEditorFactoryFactory&&) = delete;
 
     ByteArrayDataGeneratorConfigEditorFactoryFactory& operator=(const ByteArrayDataGeneratorConfigEditorFactoryFactory&) = delete;
+    ByteArrayDataGeneratorConfigEditorFactoryFactory& operator=(ByteArrayDataGeneratorConfigEditorFactoryFactory&&) = delete;
 
 public:
     [[nodiscard]]

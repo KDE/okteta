@@ -19,10 +19,12 @@ class ByteArrayPatternGeneratorConfigEditorFactory : public AbstractModelDataGen
 public:
     ByteArrayPatternGeneratorConfigEditorFactory();
     ByteArrayPatternGeneratorConfigEditorFactory(const ByteArrayPatternGeneratorConfigEditorFactory&) = delete;
+    ByteArrayPatternGeneratorConfigEditorFactory(ByteArrayPatternGeneratorConfigEditorFactory&&) = delete;
 
     ~ByteArrayPatternGeneratorConfigEditorFactory() override;
 
     ByteArrayPatternGeneratorConfigEditorFactory& operator=(const ByteArrayPatternGeneratorConfigEditorFactory&) = delete;
+    ByteArrayPatternGeneratorConfigEditorFactory& operator=(ByteArrayPatternGeneratorConfigEditorFactory&&) = delete;
 
 public:
     [[nodiscard]]

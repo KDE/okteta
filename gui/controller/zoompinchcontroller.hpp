@@ -19,10 +19,12 @@ class ZoomPinchController
 public:
     explicit ZoomPinchController(AbstractByteArrayViewPrivate* view);
     ZoomPinchController(const ZoomPinchController&) = delete;
+    ZoomPinchController(ZoomPinchController&&) = delete;
 
     ~ZoomPinchController() = default;
 
     ZoomPinchController& operator=(const ZoomPinchController&) = delete;
+    ZoomPinchController& operator=(ZoomPinchController&&) = delete;
 
 public:
     [[nodiscard]]

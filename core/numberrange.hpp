@@ -39,6 +39,7 @@ public:
      */
     NumberRange(N startIndex, N endIndex);
     NumberRange(const NumberRange& other) = default; // trivial
+    NumberRange(NumberRange&& other) = default; // trivial
     NumberRange();
 
     ~NumberRange() = default; // trivial
@@ -46,6 +47,7 @@ public:
 
 public:
     NumberRange& operator=(const NumberRange& other) = default; // trivial
+    NumberRange& operator=(NumberRange&& other) = default; // trivial
 
 public:
     void setByWidth(N other, S width);

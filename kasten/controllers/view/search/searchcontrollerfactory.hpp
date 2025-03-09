@@ -25,10 +25,12 @@ class OKTETAKASTENCONTROLLERS_EXPORT SearchControllerFactory : public AbstractXm
 public:
     explicit SearchControllerFactory(AbstractUserMessagesHandler* userMessagesHandler, QWidget* parentWidget);
     SearchControllerFactory(const SearchControllerFactory&) = delete;
+    SearchControllerFactory(SearchControllerFactory&&) = delete;
 
     ~SearchControllerFactory() override;
 
     SearchControllerFactory& operator=(const SearchControllerFactory&) = delete;
+    SearchControllerFactory& operator=(SearchControllerFactory&&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     [[nodiscard]]

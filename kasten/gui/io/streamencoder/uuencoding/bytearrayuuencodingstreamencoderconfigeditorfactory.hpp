@@ -19,10 +19,12 @@ class ByteArrayUuencodingStreamEncoderConfigEditorFactory : public AbstractModel
 public:
     ByteArrayUuencodingStreamEncoderConfigEditorFactory();
     ByteArrayUuencodingStreamEncoderConfigEditorFactory(const ByteArrayUuencodingStreamEncoderConfigEditorFactory&) = delete;
+    ByteArrayUuencodingStreamEncoderConfigEditorFactory(ByteArrayUuencodingStreamEncoderConfigEditorFactory&&) = delete;
 
     ~ByteArrayUuencodingStreamEncoderConfigEditorFactory() override;
 
     ByteArrayUuencodingStreamEncoderConfigEditorFactory& operator=(const ByteArrayUuencodingStreamEncoderConfigEditorFactory&) = delete;
+    ByteArrayUuencodingStreamEncoderConfigEditorFactory& operator=(ByteArrayUuencodingStreamEncoderConfigEditorFactory&&) = delete;
 
 public:
     [[nodiscard]]

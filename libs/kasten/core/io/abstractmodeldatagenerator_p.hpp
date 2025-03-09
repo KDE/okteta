@@ -20,10 +20,12 @@ public:
                                                const QString& typeName, const QString& mimeType,
                                                AbstractModelDataGenerator::Flags flags);
     AbstractModelDataGeneratorPrivate(const AbstractModelDataGeneratorPrivate&) = delete;
+    AbstractModelDataGeneratorPrivate(AbstractModelDataGeneratorPrivate&&) = delete;
 
     virtual ~AbstractModelDataGeneratorPrivate();
 
     AbstractModelDataGeneratorPrivate& operator=(const AbstractModelDataGeneratorPrivate&) = delete;
+    AbstractModelDataGeneratorPrivate& operator=(AbstractModelDataGeneratorPrivate&&) = delete;
 
 public:
     [[nodiscard]]

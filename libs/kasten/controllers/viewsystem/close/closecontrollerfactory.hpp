@@ -23,10 +23,12 @@ class KASTENCONTROLLERS_EXPORT CloseControllerFactory : public AbstractXmlGuiCon
 public:
     explicit CloseControllerFactory(ViewManager* viewManager);
     CloseControllerFactory(const CloseControllerFactory&) = delete;
+    CloseControllerFactory(CloseControllerFactory&&) = delete;
 
     ~CloseControllerFactory() override;
 
     CloseControllerFactory& operator=(const CloseControllerFactory&) = delete;
+    CloseControllerFactory& operator=(CloseControllerFactory&&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     [[nodiscard]]

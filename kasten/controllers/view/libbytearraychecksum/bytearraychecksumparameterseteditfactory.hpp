@@ -19,8 +19,10 @@ class ByteArrayChecksumParameterSetEditFactory
 public:
     ByteArrayChecksumParameterSetEditFactory() = delete;
     ByteArrayChecksumParameterSetEditFactory(const ByteArrayChecksumParameterSetEditFactory&) = delete;
+    ByteArrayChecksumParameterSetEditFactory(ByteArrayChecksumParameterSetEditFactory&&) = delete;
 
     ByteArrayChecksumParameterSetEditFactory& operator=(const ByteArrayChecksumParameterSetEditFactory&) = delete;
+    ByteArrayChecksumParameterSetEditFactory& operator=(ByteArrayChecksumParameterSetEditFactory&&) = delete;
 
 public:
     [[nodiscard]]

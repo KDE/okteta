@@ -20,8 +20,10 @@ class ByteArrayChecksumAlgorithmFactory
 public:
     ByteArrayChecksumAlgorithmFactory() = delete;
     ByteArrayChecksumAlgorithmFactory(const ByteArrayChecksumAlgorithmFactory&) = delete;
+    ByteArrayChecksumAlgorithmFactory(ByteArrayChecksumAlgorithmFactory&&) = delete;
 
     ByteArrayChecksumAlgorithmFactory& operator=(const ByteArrayChecksumAlgorithmFactory&) = delete;
+    ByteArrayChecksumAlgorithmFactory& operator=(ByteArrayChecksumAlgorithmFactory&&) = delete;
 
 public:
     [[nodiscard]]

@@ -32,9 +32,11 @@ protected:
 
 public:
     AbstractColumnTextRenderer(const AbstractColumnTextRenderer&) = delete;
+    AbstractColumnTextRenderer(AbstractColumnTextRenderer&&) = delete;
     virtual ~AbstractColumnTextRenderer();
 
     AbstractColumnTextRenderer& operator=(const AbstractColumnTextRenderer&) = delete;
+    AbstractColumnTextRenderer& operator=(AbstractColumnTextRenderer&&) = delete;
 
 public: // API to be implemented
     virtual void renderFirstLine(QTextStream* stream, int lineIndex) const = 0;

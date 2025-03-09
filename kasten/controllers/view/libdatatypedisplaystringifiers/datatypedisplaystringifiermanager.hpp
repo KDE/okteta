@@ -24,8 +24,10 @@ public:
     ~DataTypeDisplayStringifierManager();
 
     DataTypeDisplayStringifierManager(const DataTypeDisplayStringifierManager&) = delete;
+    DataTypeDisplayStringifierManager(DataTypeDisplayStringifierManager&&) = delete;
 
     DataTypeDisplayStringifierManager& operator=(const DataTypeDisplayStringifierManager&) = delete;
+    DataTypeDisplayStringifierManager& operator=(DataTypeDisplayStringifierManager&&) = delete;
 
 public:
     [[nodiscard]]

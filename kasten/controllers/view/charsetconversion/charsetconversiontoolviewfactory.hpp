@@ -23,10 +23,12 @@ class OKTETAKASTENCONTROLLERS_EXPORT CharsetConversionToolViewFactory : public A
 public:
     explicit CharsetConversionToolViewFactory(AbstractUserMessagesHandler* userMessagesHandler);
     CharsetConversionToolViewFactory(const CharsetConversionToolViewFactory&) = delete;
+    CharsetConversionToolViewFactory(CharsetConversionToolViewFactory&&) = delete;
 
     ~CharsetConversionToolViewFactory() override;
 
     CharsetConversionToolViewFactory& operator=(const CharsetConversionToolViewFactory&) = delete;
+    CharsetConversionToolViewFactory& operator=(CharsetConversionToolViewFactory&&) = delete;
 
 public: // AbstractToolViewFactory API
     [[nodiscard]]

@@ -24,10 +24,12 @@ class AddressRangeList : public QLinkedList<AddressRange>
 public:
     AddressRangeList();
     AddressRangeList(const AddressRangeList&);
+    AddressRangeList(AddressRangeList&&);
 
     ~AddressRangeList();
 
     AddressRangeList& operator=(const AddressRangeList&) = delete;
+    AddressRangeList& operator=(AddressRangeList&&) = delete;
 
 public:
     void addAddressRange(const AddressRange& addressRange);

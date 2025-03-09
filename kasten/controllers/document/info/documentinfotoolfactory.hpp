@@ -23,10 +23,12 @@ class OKTETAKASTENCONTROLLERS_EXPORT DocumentInfoToolFactory : public AbstractTo
 public:
     explicit DocumentInfoToolFactory(DocumentSyncManager* syncManager);
     DocumentInfoToolFactory(const DocumentInfoToolFactory&) = delete;
+    DocumentInfoToolFactory(DocumentInfoToolFactory&&) = delete;
 
     ~DocumentInfoToolFactory() override;
 
     DocumentInfoToolFactory& operator=(const DocumentInfoToolFactory&) = delete;
+    DocumentInfoToolFactory& operator=(DocumentInfoToolFactory&&) = delete;
 
 public: // AbstractToolFactory API
     [[nodiscard]]

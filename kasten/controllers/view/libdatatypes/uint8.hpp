@@ -21,11 +21,13 @@ struct UInt8
 public:
     UInt8(quint8 v);
     UInt8(const UInt8&) = default;
+    UInt8(UInt8&&) = default;
     UInt8();
 
     ~UInt8() = default;
 
     UInt8& operator=(const UInt8&) = default;
+    UInt8& operator=(UInt8&&) = default;
 
 public:
     [[nodiscard]]

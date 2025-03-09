@@ -24,10 +24,12 @@ class RemovePieceTableChange : public AbstractPieceTableChange
 public:
     RemovePieceTableChange(const AddressRange& removeRange, const PieceList& removedPieces);
     RemovePieceTableChange(const RemovePieceTableChange&) = delete;
+    RemovePieceTableChange(RemovePieceTableChange&&) = delete;
 
     ~RemovePieceTableChange() override;
 
     RemovePieceTableChange& operator=(const RemovePieceTableChange&) = delete;
+    RemovePieceTableChange& operator=(RemovePieceTableChange&&) = delete;
 
 public: // AbstractPieceTableChange API
     [[nodiscard]]

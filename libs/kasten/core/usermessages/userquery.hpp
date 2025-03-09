@@ -36,11 +36,13 @@ public:
     explicit UserQuery(AbstractModel* targetModel, const QString& text, const QString& title = QString(),
                        UserQuerySeverity severity = UserQueryInformationSeverity);
     UserQuery(const UserQuery&) = delete;
+    UserQuery(UserQuery&&) = delete;
 
     ~UserQuery();
 
 public:
     UserQuery& operator=(const UserQuery&) = delete;
+    UserQuery& operator=(UserQuery&&) = delete;
 
 public:
     [[nodiscard]]

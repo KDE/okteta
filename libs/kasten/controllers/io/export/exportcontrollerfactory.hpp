@@ -25,10 +25,12 @@ public:
     explicit ExportControllerFactory(ModelCodecViewManager* modelCodecViewManager,
                                      ModelCodecManager* modelCodecManager);
     ExportControllerFactory(const ExportControllerFactory&) = delete;
+    ExportControllerFactory(ExportControllerFactory&&) = delete;
 
     ~ExportControllerFactory() override;
 
     ExportControllerFactory& operator=(const ExportControllerFactory&) = delete;
+    ExportControllerFactory& operator=(ExportControllerFactory&&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     [[nodiscard]]

@@ -43,9 +43,11 @@ public:
 public:
     explicit TextCharCodec(QTextCodec* textCodec, ConstructorTag);
     TextCharCodec(const TextCharCodec&) = delete;
+    TextCharCodec(TextCharCodec&&) = delete;
     ~TextCharCodec() override;
 
     TextCharCodec& operator=(const TextCharCodec&) = delete;
+    TextCharCodec& operator=(TextCharCodec&&) = delete;
 
 public: // CharCodec API
     [[nodiscard]]

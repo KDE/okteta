@@ -21,10 +21,12 @@ class KASTENCONTROLLERS_EXPORT VersionControllerFactory : public AbstractXmlGuiC
 public:
     VersionControllerFactory();
     VersionControllerFactory(const VersionControllerFactory&) = delete;
+    VersionControllerFactory(VersionControllerFactory&&) = delete;
 
     ~VersionControllerFactory() override;
 
     VersionControllerFactory& operator=(const VersionControllerFactory&) = delete;
+    VersionControllerFactory& operator=(VersionControllerFactory&&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     [[nodiscard]]

@@ -25,10 +25,12 @@ class Dropper
 public:
     explicit Dropper(AbstractByteArrayViewPrivate* view);
     Dropper(const Dropper&) = delete;
+    Dropper(Dropper&&) = delete;
 
     ~Dropper() = default; // trivial
 
     Dropper& operator=(const Dropper&) = delete;
+    Dropper& operator=(Dropper&&) = delete;
 
 public: // AbstractMouseController API
     [[nodiscard]]

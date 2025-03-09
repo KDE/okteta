@@ -21,10 +21,12 @@ class KASTENCONTROLLERS_EXPORT VersionViewToolFactory : public AbstractToolFacto
 public:
     VersionViewToolFactory();
     VersionViewToolFactory(const VersionViewToolFactory&) = delete;
+    VersionViewToolFactory(VersionViewToolFactory&&) = delete;
 
     ~VersionViewToolFactory() override;
 
     VersionViewToolFactory& operator=(const VersionViewToolFactory&) = delete;
+    VersionViewToolFactory& operator=(VersionViewToolFactory&&) = delete;
 
 public: // AbstractToolFactory API
     [[nodiscard]]

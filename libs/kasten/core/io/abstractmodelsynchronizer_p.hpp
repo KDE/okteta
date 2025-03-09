@@ -21,10 +21,12 @@ class AbstractModelSynchronizerPrivate
 public:
     explicit AbstractModelSynchronizerPrivate(AbstractModelSynchronizer* parent);
     AbstractModelSynchronizerPrivate(const AbstractModelSynchronizerPrivate&) = delete;
+    AbstractModelSynchronizerPrivate(AbstractModelSynchronizerPrivate&&) = delete;
 
     virtual ~AbstractModelSynchronizerPrivate();
 
     AbstractModelSynchronizerPrivate& operator=(const AbstractModelSynchronizerPrivate&) = delete;
+    AbstractModelSynchronizerPrivate& operator=(AbstractModelSynchronizerPrivate&&) = delete;
 
 public:
     [[nodiscard]]

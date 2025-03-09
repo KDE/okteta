@@ -21,10 +21,12 @@ class OKTETAKASTENCONTROLLERS_EXPORT ByteTableToolViewFactory : public AbstractT
 public:
     ByteTableToolViewFactory();
     ByteTableToolViewFactory(const ByteTableToolViewFactory&) = delete;
+    ByteTableToolViewFactory(ByteTableToolViewFactory&&) = delete;
 
     ~ByteTableToolViewFactory() override;
 
     ByteTableToolViewFactory& operator=(const ByteTableToolViewFactory&) = delete;
+    ByteTableToolViewFactory& operator=(ByteTableToolViewFactory&&) = delete;
 
 public: // AbstractToolViewFactory API
     [[nodiscard]]

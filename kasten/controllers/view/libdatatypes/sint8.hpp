@@ -21,11 +21,13 @@ struct SInt8
 public:
     SInt8(qint8 v);
     SInt8(const SInt8&) = default;
+    SInt8(SInt8&&) = default;
     SInt8();
 
     ~SInt8() = default;
 
     SInt8& operator=(const SInt8&) = default;
+    SInt8& operator=(SInt8&&) = default;
 
 public:
     [[nodiscard]]

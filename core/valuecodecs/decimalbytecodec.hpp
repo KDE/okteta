@@ -19,7 +19,9 @@ class DecimalByteCodec : public ValueCodec
 public:
     DecimalByteCodec() = default;
     DecimalByteCodec(const DecimalByteCodec&) = delete;
+    DecimalByteCodec(DecimalByteCodec&&) = delete;
     DecimalByteCodec& operator=(const DecimalByteCodec&) = delete;
+    DecimalByteCodec& operator=(DecimalByteCodec&&) = delete;
 
 public: // ValueCodec API
     [[nodiscard]]

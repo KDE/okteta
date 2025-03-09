@@ -36,10 +36,12 @@ private:
 public:
     UuencodingStreamEncoderSettings();
     UuencodingStreamEncoderSettings(const UuencodingStreamEncoderSettings&) = default;
+    UuencodingStreamEncoderSettings(UuencodingStreamEncoderSettings&&) = default;
 
     ~UuencodingStreamEncoderSettings() = default;
 
     UuencodingStreamEncoderSettings& operator=(const UuencodingStreamEncoderSettings&) = default;
+    UuencodingStreamEncoderSettings& operator=(UuencodingStreamEncoderSettings&&) = default;
 
     [[nodiscard]]
     bool operator==(const UuencodingStreamEncoderSettings& other) const;

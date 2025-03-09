@@ -22,10 +22,12 @@ class OKTETAKASTENGUI_EXPORT ByteArrayViewFactory : public AbstractViewFactory
 public:
     explicit ByteArrayViewFactory(ByteArrayViewProfileManager* byteArrayViewProfileManager);
     ByteArrayViewFactory(const ByteArrayViewFactory&) = delete;
+    ByteArrayViewFactory(ByteArrayViewFactory&&) = delete;
 
     ~ByteArrayViewFactory() override = default;
 
     ByteArrayViewFactory& operator=(const ByteArrayViewFactory&) = delete;
+    ByteArrayViewFactory& operator=(ByteArrayViewFactory&&) = delete;
 
 public:
     [[nodiscard]]

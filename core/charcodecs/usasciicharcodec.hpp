@@ -26,7 +26,9 @@ class USASCIICharCodec : public CharCodec
 public:
     explicit USASCIICharCodec(ConstructorTag);
     USASCIICharCodec(const USASCIICharCodec&) = delete;
+    USASCIICharCodec(USASCIICharCodec&&) = delete;
     USASCIICharCodec& operator=(const USASCIICharCodec&) = delete;
+    USASCIICharCodec& operator=(USASCIICharCodec&&) = delete;
 
 public: // CharCodec API
     [[nodiscard]]

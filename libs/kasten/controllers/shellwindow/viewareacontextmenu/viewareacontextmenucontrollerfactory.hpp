@@ -25,10 +25,12 @@ public:
     ViewAreaContextMenuControllerFactory(MultiViewAreas* multiViewAreas,
                                          DocumentSyncManager* syncManager);
     ViewAreaContextMenuControllerFactory(const ViewAreaContextMenuControllerFactory&) = delete;
+    ViewAreaContextMenuControllerFactory(ViewAreaContextMenuControllerFactory&&) = delete;
 
     ~ViewAreaContextMenuControllerFactory() override;
 
     ViewAreaContextMenuControllerFactory& operator=(const ViewAreaContextMenuControllerFactory&) = delete;
+    ViewAreaContextMenuControllerFactory& operator=(ViewAreaContextMenuControllerFactory&&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     [[nodiscard]]

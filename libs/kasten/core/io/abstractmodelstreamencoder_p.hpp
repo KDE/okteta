@@ -20,10 +20,12 @@ public:
                                                const QString& remoteTypeName, const QString& remoteMimeType,
                                                const QString& remoteClipboardMimeType);
     AbstractModelStreamEncoderPrivate(const AbstractModelStreamEncoderPrivate&) = delete;
+    AbstractModelStreamEncoderPrivate(AbstractModelStreamEncoderPrivate&&) = delete;
 
     virtual ~AbstractModelStreamEncoderPrivate();
 
     AbstractModelStreamEncoderPrivate& operator=(const AbstractModelStreamEncoderPrivate&) = delete;
+    AbstractModelStreamEncoderPrivate& operator=(AbstractModelStreamEncoderPrivate&&) = delete;
 
 public:
     [[nodiscard]]

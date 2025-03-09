@@ -25,10 +25,12 @@ public:
     ReplacePieceTableChange(const AddressRange& removeRange, Size insertLength, Address storageOffset,
                             const PieceList& removedPieces);
     ReplacePieceTableChange(const ReplacePieceTableChange&) = delete;
+    ReplacePieceTableChange(ReplacePieceTableChange&&) = delete;
 
     ~ReplacePieceTableChange() override;
 
     ReplacePieceTableChange& operator=(const ReplacePieceTableChange&) = delete;
+    ReplacePieceTableChange& operator=(ReplacePieceTableChange&&) = delete;
 
 public: // AbstractPieceTableChange API
     [[nodiscard]]

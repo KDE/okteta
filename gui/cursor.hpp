@@ -24,10 +24,12 @@ class Cursor
 public:
     Cursor();
     Cursor(const Cursor&) = delete;
+    Cursor(Cursor&&) = delete;
 
     ~Cursor();
 
     Cursor& operator=(const Cursor&) = delete;
+    Cursor& operator=(Cursor&&) = delete;
 
 public:
     /** sets size of the full cursor */

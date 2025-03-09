@@ -76,10 +76,12 @@ StructureMetaData::StructureMetaData()
 
 
 StructureMetaData::StructureMetaData(const StructureMetaData &rhs) = default;
+StructureMetaData::StructureMetaData(StructureMetaData&& rhs) = default;
 
 StructureMetaData::~StructureMetaData() = default;
 
 StructureMetaData& StructureMetaData::operator=(const StructureMetaData& rhs) = default;
+StructureMetaData& StructureMetaData::operator=(StructureMetaData&& rhs) = default;
 
 bool StructureMetaData::isValid() const
 {

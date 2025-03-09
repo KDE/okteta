@@ -20,10 +20,12 @@ public:
     explicit UserQueryPrivate(AbstractModel* targetModel, const QString& text, const QString& title,
                               UserQuerySeverity severity);
     UserQueryPrivate(const UserQueryPrivate&) = delete;
+    UserQueryPrivate(UserQueryPrivate&&) = delete;
 
     ~UserQueryPrivate();
 
     UserQueryPrivate& operator=(const UserQueryPrivate&) = delete;
+    UserQueryPrivate& operator=(UserQueryPrivate&&) = delete;
 
 public:
     [[nodiscard]]

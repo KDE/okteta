@@ -18,10 +18,12 @@ class AbstractModelPrivate
 public:
     explicit AbstractModelPrivate(AbstractModel* parent, AbstractModel* baseModel = nullptr);
     AbstractModelPrivate(const AbstractModelPrivate&) = delete;
+    AbstractModelPrivate(AbstractModelPrivate&&) = delete;
 
     virtual ~AbstractModelPrivate();
 
     AbstractModelPrivate& operator=(const AbstractModelPrivate&) = delete;
+    AbstractModelPrivate& operator=(AbstractModelPrivate&&) = delete;
 
 public:
     [[nodiscard]]

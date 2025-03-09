@@ -26,10 +26,12 @@ class BookmarkList : public QLinkedList<Bookmark>
 public:
     BookmarkList();
     BookmarkList(const BookmarkList&) = default;
+    BookmarkList(BookmarkList&&) = default;
 
     ~BookmarkList();
 
     BookmarkList& operator=(const BookmarkList&) = delete;
+    BookmarkList& operator=(BookmarkList&&) = delete;
 
 public:
     void addBookmark(const Bookmark& bookmark);

@@ -18,10 +18,12 @@ class AbstractConnectJobPrivate
 public:
     explicit AbstractConnectJobPrivate(AbstractConnectJob* parent);
     AbstractConnectJobPrivate(const AbstractConnectJobPrivate&) = delete;
+    AbstractConnectJobPrivate(AbstractConnectJobPrivate&&) = delete;
 
     virtual ~AbstractConnectJobPrivate();
 
     AbstractConnectJobPrivate& operator=(const AbstractConnectJobPrivate&) = delete;
+    AbstractConnectJobPrivate& operator=(AbstractConnectJobPrivate&&) = delete;
 
 protected:
     AbstractConnectJob* const q_ptr;

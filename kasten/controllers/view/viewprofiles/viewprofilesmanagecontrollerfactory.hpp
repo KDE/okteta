@@ -26,10 +26,12 @@ public:
     ViewProfilesManageControllerFactory(ByteArrayViewProfileManager* viewProfileManager,
                                         QWidget* parentWidget);
     ViewProfilesManageControllerFactory(const ViewProfilesManageControllerFactory&) = delete;
+    ViewProfilesManageControllerFactory(ViewProfilesManageControllerFactory&&) = delete;
 
     ~ViewProfilesManageControllerFactory() override;
 
     ViewProfilesManageControllerFactory& operator=(const ViewProfilesManageControllerFactory&) = delete;
+    ViewProfilesManageControllerFactory& operator=(ViewProfilesManageControllerFactory&&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     [[nodiscard]]

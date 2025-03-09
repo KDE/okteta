@@ -23,10 +23,12 @@ private:
 public:
     FontScalingZoomState() = default;
     FontScalingZoomState(const FontScalingZoomState&) = delete;
+    FontScalingZoomState(FontScalingZoomState&&) = delete;
 
     ~FontScalingZoomState() = default;
 
     FontScalingZoomState& operator=(const FontScalingZoomState&) = delete;
+    FontScalingZoomState& operator=(FontScalingZoomState&&) = delete;
 
 public: // setters/actions
     void initFont(const QFont& font);

@@ -23,10 +23,12 @@ class KASTENCONTROLLERS_EXPORT ZoomBarControllerFactory : public AbstractXmlGuiC
 public:
     explicit ZoomBarControllerFactory(StatusBar* statusBar);
     ZoomBarControllerFactory(const ZoomBarControllerFactory&) = delete;
+    ZoomBarControllerFactory(ZoomBarControllerFactory&&) = delete;
 
     ~ZoomBarControllerFactory() override;
 
     ZoomBarControllerFactory& operator=(const ZoomBarControllerFactory&) = delete;
+    ZoomBarControllerFactory& operator=(ZoomBarControllerFactory&&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     [[nodiscard]]

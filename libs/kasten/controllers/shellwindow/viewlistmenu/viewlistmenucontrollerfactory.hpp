@@ -24,10 +24,12 @@ class KASTENCONTROLLERS_EXPORT ViewListMenuControllerFactory : public AbstractXm
 public:
     explicit ViewListMenuControllerFactory(ViewManager* viewManager, AbstractGroupedViews* groupedViews);
     ViewListMenuControllerFactory(const ViewListMenuControllerFactory&) = delete;
+    ViewListMenuControllerFactory(ViewListMenuControllerFactory&&) = delete;
 
     ~ViewListMenuControllerFactory() override;
 
     ViewListMenuControllerFactory& operator=(const ViewListMenuControllerFactory&) = delete;
+    ViewListMenuControllerFactory& operator=(ViewListMenuControllerFactory&&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     [[nodiscard]]

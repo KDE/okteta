@@ -19,8 +19,10 @@ class TouchOnlyTapAndHoldGestureRecognizer : public QGestureRecognizer
 public:
     TouchOnlyTapAndHoldGestureRecognizer();
     TouchOnlyTapAndHoldGestureRecognizer(const TouchOnlyTapAndHoldGestureRecognizer&) = delete;
+    TouchOnlyTapAndHoldGestureRecognizer(TouchOnlyTapAndHoldGestureRecognizer&&) = delete;
 
     TouchOnlyTapAndHoldGestureRecognizer& operator=(const TouchOnlyTapAndHoldGestureRecognizer&) = delete;
+    TouchOnlyTapAndHoldGestureRecognizer& operator=(TouchOnlyTapAndHoldGestureRecognizer&&) = delete;
 
 public:
     [[nodiscard]]

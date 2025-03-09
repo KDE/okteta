@@ -23,10 +23,12 @@ class KASTENCONTROLLERS_EXPORT UiColorSchemeControllerFactory : public AbstractX
 public:
     explicit UiColorSchemeControllerFactory(KXmlGuiWindow* window);
     UiColorSchemeControllerFactory(const UiColorSchemeControllerFactory&) = delete;
+    UiColorSchemeControllerFactory(UiColorSchemeControllerFactory&&) = delete;
 
     ~UiColorSchemeControllerFactory() override;
 
     UiColorSchemeControllerFactory& operator=(const UiColorSchemeControllerFactory&) = delete;
+    UiColorSchemeControllerFactory& operator=(UiColorSchemeControllerFactory&&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     [[nodiscard]]

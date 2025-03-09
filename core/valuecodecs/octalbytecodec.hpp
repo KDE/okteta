@@ -19,7 +19,9 @@ class OctalByteCodec : public ValueCodec
 public:
     OctalByteCodec() = default;
     OctalByteCodec(const OctalByteCodec&) = delete;
+    OctalByteCodec(OctalByteCodec&&) = delete;
     OctalByteCodec& operator=(const OctalByteCodec&) = delete;
+    OctalByteCodec& operator=(OctalByteCodec&&) = delete;
 
 public: // ValueCodec API
     [[nodiscard]]

@@ -25,10 +25,12 @@ public:
     explicit InsertControllerFactory(ModelCodecViewManager* modelCodecViewManager,
                                      ModelCodecManager* modelCodecManager);
     InsertControllerFactory(const InsertControllerFactory&) = delete;
+    InsertControllerFactory(InsertControllerFactory&&) = delete;
 
     ~InsertControllerFactory() override;
 
     InsertControllerFactory& operator=(const InsertControllerFactory&) = delete;
+    InsertControllerFactory& operator=(InsertControllerFactory&&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     [[nodiscard]]

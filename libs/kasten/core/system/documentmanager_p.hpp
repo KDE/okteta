@@ -29,10 +29,12 @@ class DocumentManagerPrivate
 public:
     explicit DocumentManagerPrivate(DocumentManager* q);
     DocumentManagerPrivate(const DocumentManagerPrivate&) = delete;
+    DocumentManagerPrivate(DocumentManagerPrivate&&) = delete;
 
     ~DocumentManagerPrivate();
 
     DocumentManagerPrivate& operator=(const DocumentManagerPrivate&) = delete;
+    DocumentManagerPrivate& operator=(DocumentManagerPrivate&&) = delete;
 
 public:
     void addDocument(std::unique_ptr<AbstractDocument>&& document);

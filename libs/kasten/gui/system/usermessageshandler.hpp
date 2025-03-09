@@ -25,10 +25,12 @@ class KASTENGUI_EXPORT UserMessagesHandler : public AbstractUserMessagesHandler
 public:
     explicit UserMessagesHandler(QWidget* widget = nullptr);
     UserMessagesHandler(const UserMessagesHandler&) = delete;
+    UserMessagesHandler(UserMessagesHandler&&) = delete;
 
     ~UserMessagesHandler() override;
 
     UserMessagesHandler& operator=(const UserMessagesHandler&) = delete;
+    UserMessagesHandler& operator=(UserMessagesHandler&&) = delete;
 
 public: // AbstractUserMessagesHandler API
     void postErrorReport(std::unique_ptr<UserErrorReport>&& errorReport) override;

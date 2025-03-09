@@ -19,7 +19,9 @@ class BinaryByteCodec : public ValueCodec
 public:
     BinaryByteCodec() = default;
     BinaryByteCodec(const BinaryByteCodec&) = delete;
+    BinaryByteCodec(BinaryByteCodec&&) = delete;
     BinaryByteCodec& operator=(const BinaryByteCodec&) = delete;
+    BinaryByteCodec& operator=(BinaryByteCodec&&) = delete;
 
 public: // ValueCodec API
     [[nodiscard]]

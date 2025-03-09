@@ -25,10 +25,12 @@ class KASTENGUI_EXPORT DialogHandler : public AbstractOverwriteDialog
 public:
     explicit DialogHandler(AbstractUserMessagesHandler* userMessagesHandler);
     DialogHandler(const DialogHandler&) = delete;
+    DialogHandler(DialogHandler&&) = delete;
 
     ~DialogHandler() override;
 
     DialogHandler& operator=(const DialogHandler&) = delete;
+    DialogHandler& operator=(DialogHandler&&) = delete;
 
 public: // AbstractOverwriteDialog API
     [[nodiscard]]

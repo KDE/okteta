@@ -19,10 +19,12 @@ class AbstractViewAreaPrivate
 public:
     explicit AbstractViewAreaPrivate(AbstractViewArea* parent);
     AbstractViewAreaPrivate(const AbstractViewAreaPrivate&) = delete;
+    AbstractViewAreaPrivate(AbstractViewAreaPrivate&&) = delete;
 
     virtual ~AbstractViewAreaPrivate();
 
     AbstractViewAreaPrivate& operator=(const AbstractViewAreaPrivate&) = delete;
+    AbstractViewAreaPrivate& operator=(AbstractViewAreaPrivate&&) = delete;
 
 protected:
     AbstractViewArea* const q_ptr;

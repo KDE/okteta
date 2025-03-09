@@ -30,10 +30,12 @@ private:
 public:
     ValuesStreamEncoderSettings();
     ValuesStreamEncoderSettings(const ValuesStreamEncoderSettings&) = default;
+    ValuesStreamEncoderSettings(ValuesStreamEncoderSettings&&) = default;
 
     ~ValuesStreamEncoderSettings() = default;
 
     ValuesStreamEncoderSettings& operator=(const ValuesStreamEncoderSettings&) = default;
+    ValuesStreamEncoderSettings& operator=(ValuesStreamEncoderSettings&&) = default;
 
     [[nodiscard]]
     bool operator==(const ValuesStreamEncoderSettings& other) const;

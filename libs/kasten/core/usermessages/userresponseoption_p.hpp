@@ -23,10 +23,12 @@ class UserResponseOptionPrivate
 public:
     explicit UserResponseOptionPrivate(const KGuiItem& guiItem, const QString& id, UserResponseOptionHints hints);
     UserResponseOptionPrivate(const UserResponseOptionPrivate&) = delete;
+    UserResponseOptionPrivate(UserResponseOptionPrivate&&) = delete;
 
     ~UserResponseOptionPrivate();
 
     UserResponseOptionPrivate& operator=(const UserResponseOptionPrivate&) = delete;
+    UserResponseOptionPrivate& operator=(UserResponseOptionPrivate&&) = delete;
 
 public:
     [[nodiscard]]

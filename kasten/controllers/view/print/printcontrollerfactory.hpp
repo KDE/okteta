@@ -23,10 +23,12 @@ class OKTETAKASTENCONTROLLERS_EXPORT PrintControllerFactory : public AbstractXml
 public:
     PrintControllerFactory(AbstractUserMessagesHandler* userMessagesHandler);
     PrintControllerFactory(const PrintControllerFactory&) = delete;
+    PrintControllerFactory(PrintControllerFactory&&) = delete;
 
     ~PrintControllerFactory() override;
 
     PrintControllerFactory& operator=(const PrintControllerFactory&) = delete;
+    PrintControllerFactory& operator=(PrintControllerFactory&&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     [[nodiscard]]

@@ -28,10 +28,12 @@ private:
 public:
     XxencodingStreamEncoderSettings();
     XxencodingStreamEncoderSettings(const XxencodingStreamEncoderSettings&) = default;
+    XxencodingStreamEncoderSettings(XxencodingStreamEncoderSettings&&) = default;
 
     ~XxencodingStreamEncoderSettings() = default;
 
     XxencodingStreamEncoderSettings& operator=(const XxencodingStreamEncoderSettings&) = default;
+    XxencodingStreamEncoderSettings& operator=(XxencodingStreamEncoderSettings&&) = default;
 
     [[nodiscard]]
     bool operator==(const XxencodingStreamEncoderSettings& other) const;

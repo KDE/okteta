@@ -26,11 +26,13 @@ class KASTENCORE_EXPORT UserNotification
 public:
     explicit UserNotification(AbstractModel* targetModel, const QString& text, const QString& title = QString());
     UserNotification(const UserNotification&) = delete;
+    UserNotification(UserNotification&&) = delete;
 
     ~UserNotification();
 
 public:
     UserNotification& operator=(const UserNotification&) = delete;
+    UserNotification& operator=(UserNotification&&) = delete;
 
 public:
     [[nodiscard]]

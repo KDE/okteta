@@ -25,10 +25,12 @@ class OKTETAKASTENCONTROLLERS_EXPORT SelectRangeControllerFactory : public Abstr
 public:
     explicit SelectRangeControllerFactory(If::ToolInlineViewable* toolInlineViewable);
     SelectRangeControllerFactory(const SelectRangeControllerFactory&) = delete;
+    SelectRangeControllerFactory(SelectRangeControllerFactory&&) = delete;
 
     ~SelectRangeControllerFactory() override;
 
     SelectRangeControllerFactory& operator=(const SelectRangeControllerFactory&) = delete;
+    SelectRangeControllerFactory& operator=(SelectRangeControllerFactory&&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     [[nodiscard]]

@@ -20,10 +20,12 @@ class AbstractLoadJobPrivate
 public:
     explicit AbstractLoadJobPrivate(AbstractLoadJob* parent);
     AbstractLoadJobPrivate(const AbstractLoadJobPrivate&) = delete;
+    AbstractLoadJobPrivate(AbstractLoadJobPrivate&&) = delete;
 
     virtual ~AbstractLoadJobPrivate();
 
     AbstractLoadJobPrivate& operator=(const AbstractLoadJobPrivate&) = delete;
+    AbstractLoadJobPrivate& operator=(AbstractLoadJobPrivate&&) = delete;
 
 public:
     [[nodiscard]]

@@ -21,10 +21,12 @@ class PieceTable
 public:
     explicit PieceTable(Size size = 0);
     PieceTable(const PieceTable&) = delete;
+    PieceTable(PieceTable&&) = delete;
 
     ~PieceTable();
 
     PieceTable& operator=(const PieceTable&) = delete;
+    PieceTable& operator=(PieceTable&&) = delete;
 
 public:
     void init(Size size);

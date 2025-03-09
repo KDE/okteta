@@ -20,10 +20,12 @@ protected:
 
 public:
     AbstractController(const AbstractController&) = delete;
+    AbstractController(AbstractController&&) = delete;
 
     virtual ~AbstractController();
 
     AbstractController& operator=(const AbstractController&) = delete;
+    AbstractController& operator=(AbstractController&&) = delete;
 
 public: // API to be implemented
     [[nodiscard]]

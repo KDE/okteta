@@ -25,10 +25,12 @@ public:
     explicit CreatorControllerFactory(ModelCodecManager* modelCodecManager,
                                       AbstractDocumentStrategy* documentStrategy);
     CreatorControllerFactory(const CreatorControllerFactory&) = delete;
+    CreatorControllerFactory(CreatorControllerFactory&&) = delete;
 
     ~CreatorControllerFactory() override;
 
     CreatorControllerFactory& operator=(const CreatorControllerFactory&) = delete;
+    CreatorControllerFactory& operator=(CreatorControllerFactory&&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     [[nodiscard]]

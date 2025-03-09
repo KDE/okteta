@@ -20,11 +20,13 @@ struct Binary8
 public:
     Binary8(quint8 v);
     Binary8(const Binary8&) = default;
+    Binary8(Binary8&&) = default;
     Binary8();
 
     ~Binary8() = default;
 
     Binary8& operator=(const Binary8&) = default;
+    Binary8& operator=(Binary8&&) = default;
 
 public:
     [[nodiscard]]

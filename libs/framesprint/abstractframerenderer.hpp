@@ -25,10 +25,12 @@ class AbstractFrameRenderer
 public:
     AbstractFrameRenderer();
     AbstractFrameRenderer(const AbstractFrameRenderer&) = delete;
+    AbstractFrameRenderer(AbstractFrameRenderer&&) = delete;
 
     virtual ~AbstractFrameRenderer();
 
     AbstractFrameRenderer& operator=(const AbstractFrameRenderer&) = delete;
+    AbstractFrameRenderer& operator=(AbstractFrameRenderer&&) = delete;
 
 public: // API to be implemented
     // make this flags?

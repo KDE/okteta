@@ -19,10 +19,12 @@ class UserErrorReportPrivate
 public:
     explicit UserErrorReportPrivate(AbstractModel* targetModel, const QString& text, const QString& title);
     UserErrorReportPrivate(const UserErrorReportPrivate&) = delete;
+    UserErrorReportPrivate(UserErrorReportPrivate&&) = delete;
 
     ~UserErrorReportPrivate();
 
     UserErrorReportPrivate& operator=(const UserErrorReportPrivate&) = delete;
+    UserErrorReportPrivate& operator=(UserErrorReportPrivate&&) = delete;
 
 public:
     [[nodiscard]]

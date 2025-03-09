@@ -36,11 +36,13 @@ class KASTENCORE_EXPORT UserResponseOption
 public:
     explicit UserResponseOption(const KGuiItem& guiItem, const QString& id, UserResponseOptionHints hints = UserResponseNoHints);
     UserResponseOption(const UserResponseOption&) = delete;
+    UserResponseOption(UserResponseOption&&) = delete;
 
     ~UserResponseOption();
 
 public:
     UserResponseOption& operator=(const UserResponseOption&) = delete;
+    UserResponseOption& operator=(UserResponseOption&&) = delete;
 
 public:
     [[nodiscard]]

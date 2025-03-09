@@ -21,10 +21,12 @@ class OKTETAKASTENCONTROLLERS_EXPORT StringsExtractToolFactory : public Abstract
 public:
     StringsExtractToolFactory();
     StringsExtractToolFactory(const StringsExtractToolFactory&) = delete;
+    StringsExtractToolFactory(StringsExtractToolFactory&&) = delete;
 
     ~StringsExtractToolFactory() override;
 
     StringsExtractToolFactory& operator=(const StringsExtractToolFactory&) = delete;
+    StringsExtractToolFactory& operator=(StringsExtractToolFactory&&) = delete;
 
 public: // AbstractToolFactory API
     [[nodiscard]]

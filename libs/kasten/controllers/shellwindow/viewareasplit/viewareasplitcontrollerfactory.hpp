@@ -24,10 +24,12 @@ class KASTENCONTROLLERS_EXPORT ViewAreaSplitControllerFactory : public AbstractX
 public:
     explicit ViewAreaSplitControllerFactory(ViewManager* viewManager, AbstractGroupedViews* groupedViews);
     ViewAreaSplitControllerFactory(const ViewAreaSplitControllerFactory&) = delete;
+    ViewAreaSplitControllerFactory(ViewAreaSplitControllerFactory&&) = delete;
 
     ~ViewAreaSplitControllerFactory() override;
 
     ViewAreaSplitControllerFactory& operator=(const ViewAreaSplitControllerFactory&) = delete;
+    ViewAreaSplitControllerFactory& operator=(ViewAreaSplitControllerFactory&&) = delete;
 
 public: // AbstractXmlGuiControllerFactory API
     [[nodiscard]]

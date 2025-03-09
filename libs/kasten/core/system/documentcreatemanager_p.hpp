@@ -21,11 +21,13 @@ class DocumentCreateManagerPrivate
 public:
     explicit DocumentCreateManagerPrivate(DocumentManager* manager);
     DocumentCreateManagerPrivate(const DocumentCreateManagerPrivate&) = delete;
+    DocumentCreateManagerPrivate(DocumentCreateManagerPrivate&&) = delete;
 
     ~DocumentCreateManagerPrivate();
 
 public:
     DocumentCreateManagerPrivate& operator=(const DocumentCreateManagerPrivate&) = delete;
+    DocumentCreateManagerPrivate& operator=(DocumentCreateManagerPrivate&&) = delete;
 
 public:
     [[nodiscard]]

@@ -23,10 +23,12 @@ class SwapRangesPieceTableChange : public AbstractPieceTableChange
 public:
     SwapRangesPieceTableChange(Address firstStart, const AddressRange& secondRange);
     SwapRangesPieceTableChange(const SwapRangesPieceTableChange&) = delete;
+    SwapRangesPieceTableChange(SwapRangesPieceTableChange&&) = delete;
 
     ~SwapRangesPieceTableChange() override;
 
     SwapRangesPieceTableChange& operator=(const SwapRangesPieceTableChange&) = delete;
+    SwapRangesPieceTableChange& operator=(SwapRangesPieceTableChange&&) = delete;
 
 public: // AbstractPieceTableChange API
     [[nodiscard]]

@@ -25,8 +25,10 @@ public:
 
 public:
     JobManager(const JobManager&) = delete;
+    JobManager(JobManager&&) = delete;
 
     JobManager& operator=(const JobManager&) = delete;
+    JobManager& operator=(JobManager&&) = delete;
 };
 
 }

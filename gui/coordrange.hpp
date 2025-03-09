@@ -47,11 +47,13 @@ public:
      */
     CoordRange(LinePositionRange posRange, LineRange lineRange);
     CoordRange(const CoordRange& other) = default; // trivial
+    CoordRange(CoordRange&& other) = default; // trivial
     CoordRange();
     ~CoordRange() = default; // trivial
 
 public:
     CoordRange& operator=(const CoordRange& other) = default; // trivial
+    CoordRange& operator=(CoordRange&& other) = default; // trivial
 
 public:
     [[nodiscard]]

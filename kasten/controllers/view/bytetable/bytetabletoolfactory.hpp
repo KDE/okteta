@@ -23,10 +23,12 @@ class OKTETAKASTENCONTROLLERS_EXPORT ByteTableToolFactory : public AbstractToolF
 public:
     explicit ByteTableToolFactory(AbstractUserMessagesHandler* userMessagesHandler);
     ByteTableToolFactory(const ByteTableToolFactory&) = delete;
+    ByteTableToolFactory(ByteTableToolFactory&&) = delete;
 
     ~ByteTableToolFactory() override;
 
     ByteTableToolFactory& operator=(const ByteTableToolFactory&) = delete;
+    ByteTableToolFactory& operator=(ByteTableToolFactory&&) = delete;
 
 public: // AbstractToolFactory API
     [[nodiscard]]
