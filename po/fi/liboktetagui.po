@@ -1,7 +1,7 @@
 # Copyright © 2011 This_file_is_part_of_KDE
 # This file is distributed under the same license as the kdesdk package.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2011.
-# Tommi Nieminen <translator@legisign.org>, 2019.
+# SPDX-FileCopyrightText: 2019, 2025 Tommi Nieminen <translator@legisign.org>
 #
 # KDE Finnish translation sprint participants:
 msgid ""
@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: liboktetagui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-14 02:06+0000\n"
-"PO-Revision-Date: 2019-05-12 18:13+0200\n"
+"PO-Revision-Date: 2025-02-16 10:59+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -17,6 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: controller/clipboardcontroller.cpp:55
 #, kde-format
@@ -55,17 +56,13 @@ msgid "Re&do"
 msgstr "&Tee uudelleen"
 
 #: controller/valueeditor.cpp:158
-#, fuzzy, kde-format
-#| msgctxt "name of the change"
-#| msgid "Insert"
+#, kde-format
 msgctxt "@item name of the change"
 msgid "Insert"
-msgstr "Lisäys"
+msgstr "Lisää"
 
 #: controller/valueeditor.cpp:200
-#, fuzzy, kde-format
-#| msgctxt "name of the change"
-#| msgid "Replace"
+#, kde-format
 msgctxt "@item name of the change"
 msgid "Replace"
-msgstr "Korvaus"
+msgstr "Korvaa"
