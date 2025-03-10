@@ -1,7 +1,7 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2011, 2012, 2013, 2014, 2015.
-# SPDX-FileCopyrightText: 2018, 2019, 2020, 2022, 2023, 2024 Tommi Nieminen <translator@legisign.org>
+# SPDX-FileCopyrightText: 2018, 2019, 2020, 2022, 2023, 2024, 2025 Tommi Nieminen <translator@legisign.org>
 #
 # KDE Finnish translation sprint participants:
 # Author: Artnay
@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-07 03:30+0000\n"
-"PO-Revision-Date: 2020-08-14 20:52+0300\n"
+"PO-Revision-Date: 2025-02-16 10:59+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -79,7 +79,7 @@ msgstr "Vain korvaus"
 #, kde-format
 msgctxt "@title:column offset of the bookmark"
 msgid "Offset"
-msgstr "Poikkeuma"
+msgstr "Poikkeama"
 
 #: controllers/view/bookmarks/bookmarklistmodel.cpp:127
 #, kde-format
@@ -569,7 +569,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Go to Offset..."
-msgstr "&Siirry poikkeumakohtaan…"
+msgstr "&Siirry poikkeamaan…"
 
 #: controllers/view/gotooffset/gotooffsettool.cpp:50
 #, kde-format
@@ -581,7 +581,7 @@ msgstr "Siirry"
 #, kde-format
 msgctxt "@label:listbox"
 msgid "O&ffset:"
-msgstr "P&oikkeuma:"
+msgstr "P&oikkeama:"
 
 #: controllers/view/gotooffset/gotooffsetview.cpp:80
 #: controllers/view/selectrange/selectrangeview.cpp:81
@@ -590,8 +590,7 @@ msgstr "P&oikkeuma:"
 msgctxt "@info:whatsthis"
 msgid "Enter an offset to go to, or select a previous offset from the list."
 msgstr ""
-"Anna poikkeuma, johon siirrytään, tai valitse viimeksi käytetty poikkeuma "
-"listalta."
+"Anna poikkeama, johon siirtyä, tai valitse luettelosta aiempi poikkeama."
 
 #: controllers/view/gotooffset/gotooffsetview.cpp:96
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:111
@@ -646,7 +645,7 @@ msgstr "&Siirry"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Go to the Offset"
-msgstr "Siirry poikkeumakohtaan"
+msgstr "Siirry poikkeamaan"
 
 #: controllers/view/gotooffset/gotooffsetview.cpp:128
 #, kde-kuit-format
@@ -655,8 +654,8 @@ msgid ""
 "If you press the <interface>Go</interface> button, the cursor will be moved "
 "in the document to or, on your option, by the offset you entered above."
 msgstr ""
-"Painaessasi tästä kohdistin joko siirretään antamaasi poikkeumakohtaan tai "
-"sitä siirretään poikkeuman verran haluamaasi suuntaan."
+"Jos napsautat <interface>Siirry</interface>, kohdistin liikkuu tiedostossa "
+"tai halutessasi yllä antamasi poikkeaman mukaan."
 
 #: controllers/view/info/infotool.cpp:36
 #: controllers/view/info/infotoolviewfactory.cpp:24
@@ -1515,13 +1514,13 @@ msgstr "Valitse"
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Start offset:"
-msgstr "Alkupoikkeuma:"
+msgstr "Poikkeaman alku:"
 
 #: controllers/view/selectrange/selectrangeview.cpp:95
 #, kde-format
 msgctxt "@label:listbox"
 msgid "End offset:"
-msgstr "Loppupoikkeuma:"
+msgstr "Poikkeaman loppu:"
 
 #: controllers/view/selectrange/selectrangeview.cpp:121
 #, kde-format
@@ -1542,14 +1541,14 @@ msgid ""
 "If you press the <interface>Select</interface> button, the cursor will be "
 "moved in the document to or, on your option, by the offset you entered above."
 msgstr ""
-"Painaessasi tästä kohdistin joko siirretään antamaasi poikkeumakohtaan tai "
-"sitä siirretään poikkeuman verran haluamaasi suuntaan."
+"Jos napsautat <interface>Valitse</interface>, kohdistin liikkuu tiedostossa "
+"tai halutessasi yllä antamasi poikkeaman mukaan."
 
 #: controllers/view/stringsextract/containedstringtablemodel.cpp:98
 #, kde-format
 msgctxt "@title:column offset of the extracted string"
 msgid "Offset"
-msgstr "Poikkeuma"
+msgstr "Poikkeama"
 
 #: controllers/view/stringsextract/containedstringtablemodel.cpp:99
 #, kde-format
@@ -2435,8 +2434,8 @@ msgid ""
 "Unlock selected structure, i.e. the starting offset is always set to the "
 "current cursor position."
 msgstr ""
-"Avaa valitun rakenteen lukitus eli aloituspoikkeuma on aina kohdistimen "
-"nykyinen sijainti"
+"Avaa valitun rakenteen lukitus, ts. poikkeaman alku asetetaan aina "
+"kohdistimen nykyiseen sijaintiin."
 
 #: controllers/view/structures/structureview.cpp:265
 #, kde-format
@@ -2448,7 +2447,7 @@ msgstr "Lukitse"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Lock selected structure to current offset."
-msgstr "Lukitse valittu rakenne nykyiseen poikkeumaan"
+msgstr "Lukitse valittu rakenne nykyiseen poikkeamaan."
 
 #: controllers/view/structures/structureview.cpp:291
 #, kde-format
@@ -2493,7 +2492,7 @@ msgstr "Tavuja rivillä"
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Offset Coding"
-msgstr "&Poikkeuman koodaus"
+msgstr "&Poikkeaman koodaus"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:39
 #, kde-format
@@ -2594,7 +2593,7 @@ msgstr "&Käytössä"
 #, kde-format
 msgctxt "@option:check"
 msgid "Show &Line Offset"
-msgstr "Näytä &rivipoikkeuma"
+msgstr "Näytä &rivipoikkeama"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:131
 #, kde-format
@@ -2682,7 +2681,7 @@ msgstr "Näyttö"
 #: controllers/view/viewprofiles/viewprofileedit.cpp:63
 #, kde-format
 msgid "Show Line Offset:"
-msgstr "Näytä rivipoikkeuma:"
+msgstr "Näytä rivipoikkeama:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:67
 #, kde-format
@@ -2699,7 +2698,7 @@ msgstr "Desimaali"
 #: controllers/view/viewprofiles/viewprofileedit.cpp:71
 #, kde-format
 msgid "Offset Coding:"
-msgstr "Poikkeuman koodaus:"
+msgstr "Poikkeaman koodaus:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:75
 #, kde-format
@@ -2983,7 +2982,7 @@ msgstr "Nykyisen näkymän merkkisarakkeen merkistö"
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:215
 #, kde-format
 msgid "Offset: %1"
-msgstr "Poikkeuma: %1"
+msgstr "Poikkeama: %1"
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:117
 #, kde-format
@@ -3000,7 +2999,7 @@ msgstr "Valinta: %1–%2 (%3)"
 #, kde-format
 msgctxt "@info:status offset value not available"
 msgid "Offset: -"
-msgstr "Poikkeuma: -"
+msgstr "Poikkeama: –"
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:203
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:236
@@ -3052,13 +3051,13 @@ msgstr "Ladattiin tiedostosta."
 #: core/io/filesystem/bytearrayrawfilereloadthread.cpp:55
 #, kde-format
 msgid "There is not enough free working memory to load this file."
-msgstr "Vapaata työmuistia ei ole tarpeeksi tämän tiedoston lataamiseen."
+msgstr "Vapaa työmuisti ei riitä tiedoston lataamiseen."
 
 #: core/io/filesystem/bytearrayrawfileloadthread.cpp:67
 #: core/io/filesystem/bytearrayrawfilereloadthread.cpp:58
 #, kde-format
 msgid "Support to load files larger than 2 GiB has not yet been implemented."
-msgstr "2 GiB suurempien tiedostojen latausta ei vielä tueta."
+msgstr "Yli 2 GiB tiedostojen latausta ei ole vielä toteutettu."
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:108
 #, kde-format
@@ -3135,12 +3134,12 @@ msgstr "Satunnaisdata"
 #, kde-format
 msgctxt "name of the generated data"
 msgid "Sequence"
-msgstr "Sarja"
+msgstr "Jakso"
 
 #: gui/io/generator/sequence/bytearraysequencegenerator.cpp:58
 #, kde-format
 msgid "Sequence inserted."
-msgstr "Lisättiin sarja."
+msgstr "Jakso lisätty."
 
 #: gui/io/streamencoder/base32/bytearraybase32streamencoder.cpp:137
 #, kde-format
