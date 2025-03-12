@@ -60,13 +60,13 @@ function(_okteta_setup_namespace)
         NAMESPACE
         ABIVERSION
     )
-    cmake_parse_arguments(OKTETA_SETUP_NAMESPACE "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+    cmake_parse_arguments(ARG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
-    string(CONCAT _namespacePrefix ${OKTETA_SETUP_NAMESPACE_NAMESPACE})
+    string(CONCAT _namespacePrefix ${ARG_NAMESPACE})
 
-    if (OKTETA_SETUP_NAMESPACE_ABIVERSION)
-        list(LENGTH OKTETA_SETUP_NAMESPACE_ABIVERSION _abiversionCount)
-        list(LENGTH OKTETA_SETUP_NAMESPACE_NAMESPACE _namespaceCount)
+    if (ARG_ABIVERSION)
+        list(LENGTH ARG_ABIVERSION _abiversionCount)
+        list(LENGTH ARG_NAMESPACE _namespaceCount)
         if (NOT _abiversionCount EQUAL _namespaceCount)
             message(FATAL_ERROR "ABIVERSION needs to have as many elements as NAMESPACE if used")
         endif()
@@ -74,24 +74,24 @@ function(_okteta_setup_namespace)
 
         set(_versioned_namespace)
         foreach(val RANGE ${_namespaceLastIndex})
-            list(GET OKTETA_SETUP_NAMESPACE_NAMESPACE ${val} _namespace)
-            list(GET OKTETA_SETUP_NAMESPACE_ABIVERSION ${val} _abiversion)
+            list(GET ARG_NAMESPACE ${val} _namespace)
+            list(GET ARG_ABIVERSION ${val} _abiversion)
             list(APPEND _versioned_namespace "${_namespace}${_abiversion}")
         endforeach()
         string(CONCAT _versionedNamespacePrefix ${_versioned_namespace})
     else()
-        set(_versioned_namespace ${OKTETA_SETUP_NAMESPACE_NAMESPACE})
+        set(_versioned_namespace ${ARG_NAMESPACE})
         set(_versionedNamespacePrefix "${_namespacePrefix}")
     endif()
 
-    if (OKTETA_SETUP_NAMESPACE_NAMESPACEPREFIX_VAR)
-        set(${OKTETA_SETUP_NAMESPACE_NAMESPACEPREFIX_VAR} ${_namespacePrefix} PARENT_SCOPE)
+    if (ARG_NAMESPACEPREFIX_VAR)
+        set(${ARG_NAMESPACEPREFIX_VAR} ${_namespacePrefix} PARENT_SCOPE)
     endif()
-    if (OKTETA_SETUP_NAMESPACE_VERSIONEDNAMESPACEPREFIX_VAR)
-        set(${OKTETA_SETUP_NAMESPACE_VERSIONEDNAMESPACEPREFIX_VAR} ${_versionedNamespacePrefix} PARENT_SCOPE)
+    if (ARG_VERSIONEDNAMESPACEPREFIX_VAR)
+        set(${ARG_VERSIONEDNAMESPACEPREFIX_VAR} ${_versionedNamespacePrefix} PARENT_SCOPE)
     endif()
-    if (OKTETA_SETUP_NAMESPACE_VERSIONEDNAMESPACE_VAR)
-        set(${OKTETA_SETUP_NAMESPACE_VERSIONEDNAMESPACE_VAR} ${_versioned_namespace} PARENT_SCOPE)
+    if (ARG_VERSIONEDNAMESPACE_VAR)
+        set(${ARG_VERSIONEDNAMESPACE_VAR} ${_versioned_namespace} PARENT_SCOPE)
     endif()
 endfunction()
 
@@ -105,23 +105,23 @@ function(_okteta_generate_version_code)
     )
     set(multiValueArgs
     )
-    cmake_parse_arguments(ARGS "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+    cmake_parse_arguments(ARG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
     # Omit any leading "0" in extraction, would otherwise yield an octal value string in C++ (08, 09)
-    string(REGEX REPLACE "^0*([0-9]+)\\.[0-9]+\\.[0-9]+.*" "\\1" _version_major "${ARGS_VERSION}")
-    string(REGEX REPLACE "^[0-9]+\\.0*([0-9]+)\\.[0-9]+.*" "\\1" _version_minor "${ARGS_VERSION}")
-    string(REGEX REPLACE "^[0-9]+\\.[0-9]+\\.0*([0-9]+).*" "\\1" _version_patch "${ARGS_VERSION}")
+    string(REGEX REPLACE "^0*([0-9]+)\\.[0-9]+\\.[0-9]+.*" "\\1" _version_major "${ARG_VERSION}")
+    string(REGEX REPLACE "^[0-9]+\\.0*([0-9]+)\\.[0-9]+.*" "\\1" _version_minor "${ARG_VERSION}")
+    string(REGEX REPLACE "^[0-9]+\\.[0-9]+\\.0*([0-9]+).*" "\\1" _version_patch "${ARG_VERSION}")
     math(EXPR _version_hexnumber "${_version_major}*65536 + ${_version_minor}*256 + ${_version_patch}" OUTPUT_FORMAT HEXADECIMAL)
 
     set(_content
-"#define ${ARGS_PREFIX}_VERSION_STRING \"${ARGS_VERSION}\"
-#define ${ARGS_PREFIX}_VERSION_MAJOR ${_version_major}
-#define ${ARGS_PREFIX}_VERSION_MINOR ${_version_minor}
-#define ${ARGS_PREFIX}_VERSION_PATCH ${_version_patch}
-#define ${ARGS_PREFIX}_VERSION ${_version_hexnumber}
+"#define ${ARG_PREFIX}_VERSION_STRING \"${ARG_VERSION}\"
+#define ${ARG_PREFIX}_VERSION_MAJOR ${_version_major}
+#define ${ARG_PREFIX}_VERSION_MINOR ${_version_minor}
+#define ${ARG_PREFIX}_VERSION_PATCH ${_version_patch}
+#define ${ARG_PREFIX}_VERSION ${_version_hexnumber}
 "
     )
-    set(${ARGS_CODE_VARIABLE} "${_content}" PARENT_SCOPE)
+    set(${ARG_CODE_VARIABLE} "${_content}" PARENT_SCOPE)
 endfunction()
 
 function(_okteta_generate_export_code)
@@ -134,15 +134,15 @@ function(_okteta_generate_export_code)
     )
     set(multiValueArgs
     )
-    cmake_parse_arguments(ARGS "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+    cmake_parse_arguments(ARG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
     if(NOT WIN32)
         check_cxx_compiler_flag("-fvisibility=hidden" COMPILER_SUPPORTS_HIDDEN_VISIBILITY)
     endif()
 
-    set(_staticlib_macro_name "${ARGS_PREFIX}_STATICLIB")
-    set(_export_macro_name "${ARGS_PREFIX}_EXPORT")
-    set(_no_export_macro_name "${ARGS_PREFIX}_NO_EXPORT")
+    set(_staticlib_macro_name "${ARG_PREFIX}_STATICLIB")
+    set(_export_macro_name "${ARG_PREFIX}_EXPORT")
+    set(_no_export_macro_name "${ARG_PREFIX}_NO_EXPORT")
     set(_content
 "#ifdef ${_staticlib_macro_name}
 #  define ${_export_macro_name}
@@ -152,11 +152,11 @@ function(_okteta_generate_export_code)
 "
     )
     if(WIN32)
-        get_target_property(_building_lib_flag ${ARGS_TARGET_NAME} DEFINE_SYMBOL)
+        get_target_property(_building_lib_flag ${ARG_TARGET_NAME} DEFINE_SYMBOL)
 
         if(NOT _building_lib_flag)
             # calculate cmake default preprocessor definition set when building a shared library
-            set(_building_lib_flag ${ARGS_TARGET_NAME}_EXPORTS)
+            set(_building_lib_flag ${ARG_TARGET_NAME}_EXPORTS)
             string(MAKE_C_IDENTIFIER ${_building_lib_flag} _building_lib_flag)
         endif()
 
@@ -195,7 +195,7 @@ function(_okteta_generate_export_code)
 "
     )
 
-    set(${ARGS_CODE_VARIABLE} "${_content}" PARENT_SCOPE)
+    set(${ARG_CODE_VARIABLE} "${_content}" PARENT_SCOPE)
 endfunction()
 
 function(_okteta_generate_header_file)
@@ -208,13 +208,13 @@ function(_okteta_generate_header_file)
     )
     set(multiValueArgs
     )
-    cmake_parse_arguments(ARGS "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+    cmake_parse_arguments(ARG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
-    file(GENERATE OUTPUT ${ARGS_EXPORT_FILE_NAME} CONTENT
-"#ifndef ${ARGS_INCLUDE_GUARD_NAME}
-#define ${ARGS_INCLUDE_GUARD_NAME}
+    file(GENERATE OUTPUT ${ARG_EXPORT_FILE_NAME} CONTENT
+"#ifndef ${ARG_INCLUDE_GUARD_NAME}
+#define ${ARG_INCLUDE_GUARD_NAME}
 
-${ARGS_CODE}
+${ARG_CODE}
 #endif
 "
     )
@@ -600,13 +600,13 @@ function(okteta_add_library _baseName)
         PUBLIC
         PRIVATE
     )
-    cmake_parse_arguments(OKTETA_ADD_LIBRARY "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+    cmake_parse_arguments(ARG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
-    if (NOT OKTETA_ADD_LIBRARY_NO_VERSIONED_PACKAGE_NAME)
+    if (NOT ARG_NO_VERSIONED_PACKAGE_NAME)
         set(_use_versioned_package_name TRUE)
     endif()
-    if (NOT OKTETA_ADD_LIBRARY_INTERNAL_BASENAME)
-        set(OKTETA_ADD_LIBRARY_INTERNAL_BASENAME ${_baseName})
+    if (NOT ARG_INTERNAL_BASENAME)
+        set(ARG_INTERNAL_BASENAME ${_baseName})
     endif()
 
     _okteta_setup_namespace(
@@ -614,33 +614,33 @@ function(okteta_add_library _baseName)
         VERSIONEDNAMESPACEPREFIX_VAR _versionedNamespacePrefix
         VERSIONEDNAMESPACE_VAR _versioned_namespace
         BASE_NAME ${_baseName}
-        NAMESPACE ${OKTETA_ADD_LIBRARY_NAMESPACE}
-        ABIVERSION ${OKTETA_ADD_LIBRARY_ABIVERSION}
+        NAMESPACE ${ARG_NAMESPACE}
+        ABIVERSION ${ARG_ABIVERSION}
     )
 
     set(_fullName "${_namespacePrefix}${_baseName}")
-    set(_fullInternalName "${_namespacePrefix}${OKTETA_ADD_LIBRARY_INTERNAL_BASENAME}")
+    set(_fullInternalName "${_namespacePrefix}${ARG_INTERNAL_BASENAME}")
     set(_fullVersionedName "${_versionedNamespacePrefix}${_baseName}")
 
     set(_targets_export_name "${_fullName}Targets")
 
     set(_libraryName ${_versioned_namespace})
-    if (OKTETA_ADD_LIBRARY_REVERSE_NAMESPACE_LIB)
+    if (ARG_REVERSE_NAMESPACE_LIB)
         list(REVERSE _libraryName)
     endif()
     string(CONCAT _libraryName ${_libraryName} ${_baseName})
-    if (OKTETA_ADD_LIBRARY_LOWERCASE_LIB)
+    if (ARG_LOWERCASE_LIB)
         string(TOLOWER ${_libraryName} _libraryName)
     endif()
 
     set(_targetName ${_fullName})
     string(TOLOWER ${_fullInternalName} _lc_fullInternalName)
-    if (OKTETA_ADD_LIBRARY_NO_VERSIONED_INCLUDEDIR)
-        set(_cc_include_dir ${OKTETA_ADD_LIBRARY_NAMESPACE})
+    if (ARG_NO_VERSIONED_INCLUDEDIR)
+        set(_cc_include_dir ${ARG_NAMESPACE})
     else()
         set(_cc_include_dir ${_versioned_namespace})
     endif()
-    if (OKTETA_ADD_LIBRARY_REVERSE_NAMESPACE_INCLUDEDIR)
+    if (ARG_REVERSE_NAMESPACE_INCLUDEDIR)
         list(REVERSE _cc_include_dir)
     endif()
     string(REPLACE ";" "/" _cc_include_dir "${_cc_include_dir}")
@@ -648,15 +648,15 @@ function(okteta_add_library _baseName)
 
     add_library(${_targetName} SHARED)
 
-    if (OKTETA_ADD_LIBRARY_NO_TARGET_NAMESPACE)
-        if (OKTETA_ADD_LIBRARY_NO_VERSIONED_EXPORTED_TARGET_NAME)
+    if (ARG_NO_TARGET_NAMESPACE)
+        if (ARG_NO_VERSIONED_EXPORTED_TARGET_NAME)
             set(_export_name_args)
         else()
             add_library("${_fullVersionedName}" ALIAS ${_targetName})
             set(_export_name_args EXPORT_NAME ${_fullVersionedName})
         endif()
     else()
-        if (OKTETA_ADD_LIBRARY_NO_VERSIONED_EXPORTED_TARGET_NAME)
+        if (ARG_NO_VERSIONED_EXPORTED_TARGET_NAME)
             set(_target_namespacePrefix ${_namespacePrefix})
         else()
             set(_target_namespacePrefix ${_versionedNamespacePrefix})
@@ -669,7 +669,7 @@ function(okteta_add_library _baseName)
     string(TOUPPER "${_fullInternalName}" _definitions_prefix)
     _okteta_generate_version_code(
         PREFIX        ${_definitions_prefix}
-        VERSION       ${OKTETA_ADD_LIBRARY_VERSION}
+        VERSION       ${ARG_VERSION}
         CODE_VARIABLE _version_code
     )
     _okteta_generate_export_code(
@@ -697,9 +697,9 @@ function(okteta_add_library _baseName)
 
     target_link_libraries(${_targetName}
         PUBLIC
-            ${OKTETA_ADD_LIBRARY_PUBLIC}
+            ${ARG_PUBLIC}
         PRIVATE
-            ${OKTETA_ADD_LIBRARY_PRIVATE}
+            ${ARG_PRIVATE}
     )
 
     target_include_directories(${_targetName}
@@ -709,20 +709,20 @@ function(okteta_add_library _baseName)
     set_target_properties(${_targetName} PROPERTIES
         ${_export_name_args}
         OUTPUT_NAME ${_libraryName}
-        VERSION     ${OKTETA_ADD_LIBRARY_VERSION}
-        SOVERSION   ${OKTETA_ADD_LIBRARY_SOVERSION}
+        VERSION     ${ARG_VERSION}
+        SOVERSION   ${ARG_SOVERSION}
     )
     set_property(TARGET ${_targetName} PROPERTY OKTETA_STATICLIB_DEFINE "${_definitions_prefix}_STATICLIB")
     set_property(TARGET ${_targetName} PROPERTY OKTETA_FULLNAME ${_fullName})
     set_property(TARGET ${_targetName} PROPERTY OKTETA_FULLVERSIONEDNAME ${_fullVersionedName})
-    set_property(TARGET ${_targetName} PROPERTY OKTETA_NO_TARGETNAMESPACE ${OKTETA_ADD_LIBRARY_NO_TARGET_NAMESPACE})
-    if (NOT OKTETA_ADD_LIBRARY_NO_TARGET_NAMESPACE)
+    set_property(TARGET ${_targetName} PROPERTY OKTETA_NO_TARGETNAMESPACE ${ARG_NO_TARGET_NAMESPACE})
+    if (NOT ARG_NO_TARGET_NAMESPACE)
         set_property(TARGET ${_targetName} PROPERTY OKTETA_TARGET_NAMESPACEPREFIX ${_target_namespacePrefix})
     endif()
     set_property(TARGET ${_targetName} PROPERTY OKTETA_USE_VERSIONED_PACKAGE_NAME ${_use_versioned_package_name})
 
     set(_other_install_targets_args)
-    if(OKTETA_ADD_LIBRARY_NAMELINK_SKIP)
+    if(ARG_NAMELINK_SKIP)
         list(APPEND _other_install_targets_args LIBRARY NAMELINK_SKIP)
     endif()
     install( TARGETS ${_targetName}
@@ -732,11 +732,11 @@ function(okteta_add_library _baseName)
     )
 
     # TODO: perhaps only do on first PUBLIC usage in okteta_add_sublibrary?
-    if (OKTETA_ADD_LIBRARY_NO_PACKAGE_NAMESPACED_INCLUDEDIR)
+    if (ARG_NO_PACKAGE_NAMESPACED_INCLUDEDIR)
         set(_include_install_dir "${KDE_INSTALL_INCLUDEDIR}")
     else()
-        if (OKTETA_ADD_LIBRARY_INCLUDEDIR_PACKAGE_NAMESPACE)
-            set(_include_dir_package_namespace "${OKTETA_ADD_LIBRARY_INCLUDEDIR_PACKAGE_NAMESPACE}")
+        if (ARG_INCLUDEDIR_PACKAGE_NAMESPACE)
+            set(_include_dir_package_namespace "${ARG_INCLUDEDIR_PACKAGE_NAMESPACE}")
         else()
             if (_use_versioned_package_name)
                 set(_include_dir_package_namespace "${_fullVersionedName}")
@@ -771,9 +771,9 @@ function(okteta_add_cmakeconfig _baseName)
         DEPS
         VARS
     )
-    cmake_parse_arguments(OKTETA_ADD_CMAKECONFIG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+    cmake_parse_arguments(ARG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
-    _okteta_target_name(_targetName ${_baseName} ${OKTETA_ADD_CMAKECONFIG_NAMESPACE})
+    _okteta_target_name(_targetName ${_baseName} ${ARG_NAMESPACE})
 
     get_property(_fullName TARGET ${_targetName} PROPERTY OKTETA_FULLNAME)
 
@@ -787,7 +787,7 @@ function(okteta_add_cmakeconfig _baseName)
     set(_configFileTemplatePath "${CMAKE_CURRENT_BINARY_DIR}/${_configName}Config.cmake.in")
     set(_configFileTemplate "@PACKAGE_INIT@\n\ninclude(CMakeFindDependencyMacro)\n\n")
     set(dep_package_name)
-    foreach (dep ${OKTETA_ADD_CMAKECONFIG_DEPS})
+    foreach (dep ${ARG_DEPS})
         if (dep_package_name)
             set (dep_package_version ${dep})
         else()
@@ -818,12 +818,12 @@ function(okteta_add_cmakeconfig _baseName)
         message(FATAL_ERROR "DEPS expected to have a version after ${dep_package_name}.")
     endif()
     string(APPEND _configFileTemplate "\ninclude(\"\${CMAKE_CURRENT_LIST_DIR}/${_configName}Targets.cmake\")\n")
-    foreach (_include ${OKTETA_ADD_CMAKECONFIG_INCLUDES})
+    foreach (_include ${ARG_INCLUDES})
         string(APPEND _configFileTemplate "include(\"\${CMAKE_CURRENT_LIST_DIR}/${_include}\")\n")
     endforeach()
-    if (OKTETA_ADD_CMAKECONFIG_VARS)
+    if (ARG_VARS)
         string(APPEND _configFileTemplate "\n")
-        foreach (_var ${OKTETA_ADD_CMAKECONFIG_VARS})
+        foreach (_var ${ARG_VARS})
             string(APPEND _configFileTemplate "@${_var}@\n")
         endforeach()
     endif()
@@ -837,12 +837,12 @@ function(okteta_add_cmakeconfig _baseName)
     get_target_property(_version ${_targetName} VERSION)
     if (_version)
         set(_configVersionFilePath "${CMAKE_CURRENT_BINARY_DIR}/${_configName}ConfigVersion.cmake")
-        if(NOT OKTETA_ADD_CMAKECONFIG_COMPATIBILITY)
-            set(OKTETA_ADD_CMAKECONFIG_COMPATIBILITY AnyNewerVersion)
+        if(NOT ARG_COMPATIBILITY)
+            set(ARG_COMPATIBILITY AnyNewerVersion)
         endif()
         write_basic_package_version_file("${_configVersionFilePath}"
             VERSION ${_version}
-            COMPATIBILITY ${OKTETA_ADD_CMAKECONFIG_COMPATIBILITY}
+            COMPATIBILITY ${ARG_COMPATIBILITY}
         )
     else()
         set(_configVersionFilePath)
@@ -884,9 +884,9 @@ function(okteta_add_qmakeconfig _baseName)
         NAMESPACE
         DEPS
     )
-    cmake_parse_arguments(OKTETA_ADD_QMAKECONFIG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+    cmake_parse_arguments(ARG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
-    _okteta_target_name(_targetName ${_baseName} ${OKTETA_ADD_QMAKECONFIG_NAMESPACE})
+    _okteta_target_name(_targetName ${_baseName} ${ARG_NAMESPACE})
 
     get_target_property(_libraryName ${_targetName} OUTPUT_NAME)
     get_property(_include_install_dir TARGET ${_targetName} PROPERTY OKTETA_INSTALL_INCLUDEDIR)
@@ -898,7 +898,7 @@ function(okteta_add_qmakeconfig _baseName)
         get_property(_configName TARGET ${_targetName} PROPERTY OKTETA_FULLNAME)
     endif()
 
-    string(REPLACE ";" " " _deps "${OKTETA_ADD_QMAKECONFIG_DEPS}")
+    string(REPLACE ";" " " _deps "${ARG_DEPS}")
 
     get_target_property(_version ${_targetName} VERSION)
 
@@ -926,9 +926,9 @@ function(okteta_add_pkgconfig _baseName)
         NAMESPACE
         DEPS
     )
-    cmake_parse_arguments(OKTETA_ADD_PKGCONFIG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+    cmake_parse_arguments(ARG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
-    _okteta_target_name(_targetName ${_baseName} ${OKTETA_ADD_PKGCONFIG_NAMESPACE})
+    _okteta_target_name(_targetName ${_baseName} ${ARG_NAMESPACE})
 
     get_target_property(_libraryName ${_targetName} OUTPUT_NAME)
     get_property(_include_install_dir TARGET ${_targetName} PROPERTY OKTETA_INSTALL_INCLUDEDIR)
@@ -939,7 +939,7 @@ function(okteta_add_pkgconfig _baseName)
         get_property(_configName TARGET ${_targetName} PROPERTY OKTETA_FULLNAME)
     endif()
 
-    string(REPLACE ";" " " _deps "${OKTETA_ADD_PKGCONFIG_DEPS}")
+    string(REPLACE ";" " " _deps "${ARG_DEPS}")
 
     get_target_property(PROJECT_VERSION ${_targetName} VERSION)
     ecm_generate_pkgconfig_file(
@@ -947,7 +947,7 @@ function(okteta_add_pkgconfig _baseName)
         LIB_NAME ${_libraryName}
         DEPS ${_deps}
         INCLUDE_INSTALL_DIR  ${_include_install_dir}
-        DESCRIPTION ${OKTETA_ADD_PKGCONFIG_DESCRIPTION}
+        DESCRIPTION ${ARG_DESCRIPTION}
         INSTALL
     )
 endfunction()
