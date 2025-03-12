@@ -13,9 +13,8 @@ okteta_add_library(Core NAMESPACE Okteta
     NO_VERSIONED_EXPORTED_TARGET_NAME
     NO_VERSIONED_INCLUDEDIR
     NO_VERSIONED_PACKAGE_NAME
+    KI18N_TRANSLATION_DOMAIN "liboktetacore"
 )
-
-target_compile_definitions(OktetaCore PRIVATE -DTRANSLATION_DOMAIN=\"liboktetacore\")
 
 ecm_qt_declare_logging_category(OktetaCore
     HEADER "logging.hpp"
@@ -44,11 +43,7 @@ oktetacore_add_sublibrary(coretypes
         Qt5::Core
     PRIVATE
         KF5::I18n
-)
-okteta_sublibrary_compile_definitions(Core NAMESPACE Okteta
-    SUBLIBRARY coretypes
-    PRIVATE
-        TRANSLATION_DOMAIN=\"liboktetacore\"
+    KI18N_TRANSLATION_DOMAIN "liboktetacore"
 )
 
 oktetacore_add_sublibrary(bookmark
@@ -71,11 +66,7 @@ oktetacore_add_sublibrary(piecetable
         coretypes
     PRIVATE
         KF5::I18n
-)
-okteta_sublibrary_compile_definitions(Core NAMESPACE Okteta
-    SUBLIBRARY piecetable
-    PRIVATE
-        TRANSLATION_DOMAIN=\"liboktetacore\"
+    KI18N_TRANSLATION_DOMAIN "liboktetacore"
 )
 
 oktetacore_add_sublibrary(bytearraymodels

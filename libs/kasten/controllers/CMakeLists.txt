@@ -17,13 +17,12 @@ okteta_add_library(Controllers NAMESPACE Kasten
     NO_VERSIONED_EXPORTED_TARGET_NAME
     NO_VERSIONED_INCLUDEDIR
     NO_VERSIONED_PACKAGE_NAME
+    KI18N_TRANSLATION_DOMAIN "libkasten"
 )
 
 if (BUILD_TERMINALTOOL)
     target_link_libraries(KastenControllers PRIVATE KF5::Parts)
 endif()
-
-target_compile_definitions(KastenControllers PRIVATE -DTRANSLATION_DOMAIN=\"libkasten\")
 
 macro(KASTENCONTROLLERS_LIBRARY_SOURCES _subdir)
     okteta_library_sources(Controllers NAMESPACE Kasten

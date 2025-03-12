@@ -17,9 +17,8 @@ okteta_add_library(Core NAMESPACE Okteta Kasten
     NO_VERSIONED_PACKAGE_NAME
     REVERSE_NAMESPACE_INCLUDEDIR
     REVERSE_NAMESPACE_LIB
+    KI18N_TRANSLATION_DOMAIN "liboktetakasten"
 )
-
-target_compile_definitions(OktetaKastenCore PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")
 
 macro(OKTETAKASTENCORE_LIBRARY_SOURCES _subdir)
     okteta_library_sources(Core NAMESPACE Okteta Kasten

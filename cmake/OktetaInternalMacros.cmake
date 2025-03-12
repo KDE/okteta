@@ -358,6 +358,7 @@ function(okteta_add_sublibrary _baseName)
     )
     set(oneValueArgs
         SUBLIBRARY
+        KI18N_TRANSLATION_DOMAIN
     )
     set(multiValueArgs
         NAMESPACE
@@ -397,6 +398,12 @@ function(okteta_add_sublibrary _baseName)
             PRIVATE
                 ${ARG_PRIVATE}
         )
+        if(ARG_KI18N_TRANSLATION_DOMAIN)
+            target_compile_definitions(${_static_library_target}
+                PRIVATE
+                    TRANSLATION_DOMAIN=\"${ARG_KI18N_TRANSLATION_DOMAIN}\"
+            )
+        endif()
     endif()
     if (_object_library_target)
         add_library(${_object_library_target} OBJECT)
@@ -413,6 +420,12 @@ function(okteta_add_sublibrary _baseName)
             PRIVATE
                 ${_object_library_target}
         )
+        if(ARG_KI18N_TRANSLATION_DOMAIN)
+            target_compile_definitions(${_object_library_target}
+                PRIVATE
+                    TRANSLATION_DOMAIN=\"${ARG_KI18N_TRANSLATION_DOMAIN}\"
+            )
+        endif()
     else()
         target_link_libraries(${_targetName}
             PRIVATE
@@ -593,6 +606,7 @@ function(okteta_add_library _baseName)
         INCLUDEDIR_PACKAGE_NAMESPACE
         VERSION
         SOVERSION
+        KI18N_TRANSLATION_DOMAIN
     )
     set(multiValueArgs
         NAMESPACE
@@ -705,6 +719,13 @@ function(okteta_add_library _baseName)
     target_include_directories(${_targetName}
         PUBLIC "$<BUILD_INTERFACE:${${_targetName}_BINARY_DIR};${CMAKE_CURRENT_BINARY_DIR}>"
     )
+
+    if(ARG_KI18N_TRANSLATION_DOMAIN)
+        target_compile_definitions(${_targetName}
+            PRIVATE
+                TRANSLATION_DOMAIN=\"${ARG_KI18N_TRANSLATION_DOMAIN}\"
+        )
+    endif()
 
     set_target_properties(${_targetName} PROPERTIES
         ${_export_name_args}

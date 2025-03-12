@@ -18,9 +18,8 @@ okteta_add_library(Gui NAMESPACE Okteta Kasten
     REVERSE_NAMESPACE_LIB
     NO_TARGET_NAMESPACE
     NO_VERSIONED_EXPORTED_TARGET_NAME
+    KI18N_TRANSLATION_DOMAIN "liboktetakasten"
 )
-
-target_compile_definitions(OktetaKastenGui PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")
 
 ecm_qt_declare_logging_category(OktetaKastenGui
     HEADER "logging.hpp"
@@ -56,11 +55,7 @@ okteta_add_sublibrary(Gui NAMESPACE Okteta Kasten
         KF5::Completion
         KF5::I18n
         Qt5::Qml
-)
-okteta_sublibrary_compile_definitions(Gui NAMESPACE Okteta Kasten
-    SUBLIBRARY oktetawidgets
-    PRIVATE
-        TRANSLATION_DOMAIN=\"liboktetakasten\"
+    KI18N_TRANSLATION_DOMAIN "liboktetakasten"
 )
 
 oktetakastengui_sublibrary_sources(liboktetawidgets
@@ -91,11 +86,7 @@ okteta_add_sublibrary(Gui NAMESPACE Okteta Kasten
         OktetaGui
     PRIVATE
         KF5::I18n
-)
-okteta_sublibrary_compile_definitions(Gui NAMESPACE Okteta Kasten
-    SUBLIBRARY bytearrayview
-    PRIVATE
-        TRANSLATION_DOMAIN=\"liboktetakasten\"
+    KI18N_TRANSLATION_DOMAIN "liboktetakasten"
 )
 
 oktetakastengui_sublibrary_sources(view
@@ -139,12 +130,9 @@ okteta_add_sublibrary(Gui NAMESPACE Okteta Kasten
         bytearrayview
         KF5::Completion
         KF5::I18n
+    KI18N_TRANSLATION_DOMAIN "liboktetakasten"
 )
-okteta_sublibrary_compile_definitions(Gui NAMESPACE Okteta Kasten
-    SUBLIBRARY bytearraystreamencoder
-    PRIVATE
-        TRANSLATION_DOMAIN=\"liboktetakasten\"
-)
+
 macro(OKTETAKASTENGUI_STREAMENCODER_SOURCES _subdir)
     okteta_sublibrary_sources(Gui NAMESPACE Okteta Kasten
         REVERSE_NAMESPACE_INCLUDEDIR
@@ -266,12 +254,9 @@ okteta_add_sublibrary(Gui NAMESPACE Okteta Kasten
         bytearrayview
         KF5::Completion
         KF5::I18n
+    KI18N_TRANSLATION_DOMAIN "liboktetakasten"
 )
-okteta_sublibrary_compile_definitions(Gui NAMESPACE Okteta Kasten
-    SUBLIBRARY bytearraygenerator
-    PRIVATE
-        TRANSLATION_DOMAIN=\"liboktetakasten\"
-)
+
 macro(OKTETAKASTENGUI_GENERATOR_SOURCES _subdir)
     okteta_sublibrary_sources(Gui NAMESPACE Okteta Kasten
         REVERSE_NAMESPACE_INCLUDEDIR

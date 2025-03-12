@@ -12,9 +12,8 @@ okteta_add_library(Core NAMESPACE Kasten
     NO_VERSIONED_EXPORTED_TARGET_NAME
     NO_VERSIONED_INCLUDEDIR
     NO_VERSIONED_PACKAGE_NAME
+    KI18N_TRANSLATION_DOMAIN "libkasten"
 )
-
-target_compile_definitions(KastenCore PRIVATE -DTRANSLATION_DOMAIN=\"libkasten\")
 
 ecm_qt_declare_logging_category(KastenCore
     HEADER "logging.hpp"
@@ -149,11 +148,7 @@ kastencore_add_sublibrary(kastencoresystem
         KF5::JobWidgets
         KF5::KIOCore
         KF5::WidgetsAddons
-)
-okteta_sublibrary_compile_definitions(Core NAMESPACE Kasten
-    SUBLIBRARY kastendocument
-    PRIVATE
-        TRANSLATION_DOMAIN=\"libkasten\"
+    KI18N_TRANSLATION_DOMAIN "libkasten"
 )
 
 kastencore_sublibrary_sources(system

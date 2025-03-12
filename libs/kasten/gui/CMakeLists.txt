@@ -13,9 +13,8 @@ okteta_add_library(Gui NAMESPACE Kasten
     NO_VERSIONED_EXPORTED_TARGET_NAME
     NO_VERSIONED_INCLUDEDIR
     NO_VERSIONED_PACKAGE_NAME
+    KI18N_TRANSLATION_DOMAIN "libkasten"
 )
-
-target_compile_definitions(KastenGui PRIVATE -DTRANSLATION_DOMAIN=\"libkasten\")
 
 macro(KASTENGUI_ADD_SUBLIBRARY _library_name)
     okteta_add_sublibrary(Gui NAMESPACE Kasten
@@ -113,11 +112,7 @@ kastengui_add_sublibrary(kastenguisystem
     PRIVATE
         KF5::WidgetsAddons
         KF5::I18n
-)
-okteta_sublibrary_compile_definitions(Gui NAMESPACE Kasten
-    SUBLIBRARY kastenguisystem
-    PRIVATE
-        TRANSLATION_DOMAIN=\"libkasten\"
+    KI18N_TRANSLATION_DOMAIN "libkasten"
 )
 
 kastengui_sublibrary_sources(system

@@ -28,9 +28,8 @@ okteta_add_library(Controllers NAMESPACE Okteta Kasten
     REVERSE_NAMESPACE_LIB
     NO_TARGET_NAMESPACE
     NO_VERSIONED_EXPORTED_TARGET_NAME
+    KI18N_TRANSLATION_DOMAIN "liboktetakasten"
 )
-
-target_compile_definitions(OktetaKastenControllers PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")
 
 ecm_qt_declare_logging_category(OktetaKastenControllers
     HEADER "checksumlogging.hpp"
@@ -84,11 +83,7 @@ oktetakastencontrollers_add_sublibrary(datatypecodecs
         datatypes
     PRIVATE
         KF5::I18n
-)
-okteta_sublibrary_compile_definitions(Controllers NAMESPACE Okteta Kasten
-    SUBLIBRARY datatypecodecs
-    PRIVATE
-        TRANSLATION_DOMAIN=\"liboktetakasten\"
+    KI18N_TRANSLATION_DOMAIN "liboktetakasten"
 )
 
 oktetakastencontrollers_add_sublibrary(datatypedisplaystringifiers
@@ -114,11 +109,7 @@ oktetakastencontrollers_add_sublibrary(bytearraychecksum
         configentries
         KF5::Completion
         KF5::I18n
-)
-okteta_sublibrary_compile_definitions(Controllers NAMESPACE Okteta Kasten
-    SUBLIBRARY bytearraychecksum
-    PRIVATE
-        TRANSLATION_DOMAIN=\"liboktetakasten\"
+    KI18N_TRANSLATION_DOMAIN "liboktetakasten"
 )
 
 oktetakastencontrollers_add_sublibrary(bytearrayfilter
@@ -129,11 +120,7 @@ oktetakastencontrollers_add_sublibrary(bytearrayfilter
     PRIVATE
         configentries
         KF5::I18n
-)
-okteta_sublibrary_compile_definitions(Controllers NAMESPACE Okteta Kasten
-    SUBLIBRARY bytearrayfilter
-    PRIVATE
-        TRANSLATION_DOMAIN=\"liboktetakasten\"
+    KI18N_TRANSLATION_DOMAIN "liboktetakasten"
 )
 
 oktetakastencontrollers_add_sublibrary(finddialog
@@ -142,11 +129,7 @@ oktetakastencontrollers_add_sublibrary(finddialog
         OktetaKastenGui
     PRIVATE
         KF5::I18n
-)
-okteta_sublibrary_compile_definitions(Controllers NAMESPACE Okteta Kasten
-    SUBLIBRARY finddialog
-    PRIVATE
-        TRANSLATION_DOMAIN=\"liboktetakasten\"
+    KI18N_TRANSLATION_DOMAIN "liboktetakasten"
 )
 
 oktetakastencontrollers_add_sublibrary(bytearraysearch
@@ -166,11 +149,7 @@ oktetakastencontrollers_add_sublibrary(structuresdatatypes
         datatypeeditors
         KF5::Completion
         KF5::I18n
-)
-okteta_sublibrary_compile_definitions(Controllers NAMESPACE Okteta Kasten
-    SUBLIBRARY structuresdatatypes
-    PRIVATE
-        TRANSLATION_DOMAIN=\"liboktetakasten\"
+    KI18N_TRANSLATION_DOMAIN "liboktetakasten"
 )
 
 # ecm_qt_declare_logging_category(structuresdatatypes

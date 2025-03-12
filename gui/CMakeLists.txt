@@ -15,9 +15,8 @@ okteta_add_library(Gui NAMESPACE Okteta
     NO_VERSIONED_EXPORTED_TARGET_NAME
     NO_VERSIONED_INCLUDEDIR
     NO_VERSIONED_PACKAGE_NAME
+    KI18N_TRANSLATION_DOMAIN "liboktetagui"
 )
-
-target_compile_definitions(OktetaGui PRIVATE -DTRANSLATION_DOMAIN=\"liboktetagui\")
 
 ecm_qt_declare_logging_category(OktetaGui
     HEADER "logging.hpp"
@@ -35,6 +34,7 @@ okteta_add_sublibrary(Gui NAMESPACE Okteta
         Qt5::Widgets
     PRIVATE
         KF5::I18n
+    KI18N_TRANSLATION_DOMAIN "liboktetagui"
 )
 
 okteta_sublibrary_sources(Gui NAMESPACE Okteta
