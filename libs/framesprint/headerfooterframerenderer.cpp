@@ -136,7 +136,7 @@ void HeaderFooterFrameRenderer::renderFrame(QPainter* painter, int frameIndex)
         if (text.indexOf(pageNumberTag) != -1) {
             text.replace(pageNumberTag, QString::number(frameIndex + 1)); // TODO: frameIndex != pageNumber in general
         }
-        int align = verticalAlign | horizontalAlign[i];
+        const int align = verticalAlign | horizontalAligns[i];
 
         painter->drawText(margin, 0, rightEnd, mHeight, align, text);
     }
