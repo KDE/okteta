@@ -13,14 +13,18 @@
 #include "printinfo.hpp"
 #include "abstractframerenderer.hpp"
 // Qt
-#include <QStringList>
 #include <QFont>
 #include <QColor>
+// Std
+#include <array>
 
 namespace FramesPrint {
 
 class HeaderFooterFrameRenderer : public AbstractFrameRenderer
 {
+private:
+    static constexpr int HorizontalPositionsSize = 3;
+
 public:
     enum BoxStyle
     {
@@ -73,8 +77,8 @@ private:
     QColor mFgColor = {Qt::black};
     QFont mFont;
 
-    QStringList mOriginalTextList = {QString(), QString(), QString()};
-    QStringList mGloballyReplacedTextList;
+    std::array<QString, HorizontalPositionsSize> mOriginalTextList;
+    std::array<QString, HorizontalPositionsSize> mGloballyReplacedTextList;
 };
 
 }

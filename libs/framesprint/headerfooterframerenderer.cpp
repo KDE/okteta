@@ -36,8 +36,11 @@ void HeaderFooterFrameRenderer::setWidth(int width) { mWidth = width; }
 
 void HeaderFooterFrameRenderer::setTexts(const QString& leftText, const QString& centerText, const QString& rightText)
 {
-    mOriginalTextList.clear();
-    mOriginalTextList << leftText << centerText << rightText;
+    mOriginalTextList = {
+        leftText,
+        centerText,
+        rightText,
+    };
 }
 
 void HeaderFooterFrameRenderer::setBoxStyle(int boxStyle)
@@ -95,9 +98,7 @@ void HeaderFooterFrameRenderer::prepare()
     const int sizeOfTag = 2;
     QRegularExpression tagsPattern(QStringLiteral("%([dDhyYuUfFP])"));
 
-    mGloballyReplacedTextList.clear();
-
-    for (int i = 0; i < 3; ++i) {
+    for (int i = 0; i < HorizontalPositionsSize; ++i) {
         QString text = mOriginalTextList.at(i);
         int pos = 0;
         while (true) {
@@ -109,7 +110,7 @@ void HeaderFooterFrameRenderer::prepare()
             text.replace((uint)pos, sizeOfTag, replacement);
             pos += replacement.length();
         }
-        mGloballyReplacedTextList << text;
+        mGloballyReplacedTextList[i] = text;
     }
 }
 
@@ -122,14 +123,18 @@ void HeaderFooterFrameRenderer::renderFrame(QPainter* painter, int frameIndex)
 
     const bool isTextFramed = false;// ( mBoxStyle & (Box|BackgroundDrawn) );
 
-    const int horizontalAlign[3] = { Qt::AlignLeft, Qt::AlignHCenter, Qt::AlignRight };
+    const std::array<Qt::AlignmentFlag, HorizontalPositionsSize> horizontalAligns = {
+        Qt::AlignLeft,
+        Qt::AlignHCenter,
+        Qt::AlignRight,
+    };
     const Qt::AlignmentFlag verticalAlign = isTextFramed ? Qt::AlignVCenter : Qt::AlignTop;
     int margin = 0;// ( mBoxStyle & (mBoxDrawn || mBackgroundDrawn ) ? mBoxMargin : 0;
 //     if ( mBoxStyle & LinesAtSide )
 //         margin += mLineWidth;
     const int rightEnd = mWidth - (margin * 2);
 
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < HorizontalPositionsSize; ++i) {
         QString text = mGloballyReplacedTextList[i];
         // substitute locally
         const QString pageNumberTag = QStringLiteral("%p");
