@@ -123,7 +123,7 @@ void HeaderFooterFrameRenderer::renderFrame(QPainter* painter, int frameIndex)
     const bool isTextFramed = false;// ( mBoxStyle & (Box|BackgroundDrawn) );
 
     const int horizontalAlign[3] = { Qt::AlignLeft, Qt::AlignHCenter, Qt::AlignRight };
-    int verticalAlign = isTextFramed ? Qt::AlignVCenter : Qt::AlignTop;
+    const Qt::AlignmentFlag verticalAlign = isTextFramed ? Qt::AlignVCenter : Qt::AlignTop;
     int margin = 0;// ( mBoxStyle & (mBoxDrawn || mBackgroundDrawn ) ? mBoxMargin : 0;
 //     if ( mBoxStyle & LinesAtSide )
 //         margin += mLineWidth;
