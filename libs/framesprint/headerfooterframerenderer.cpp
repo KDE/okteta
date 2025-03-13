@@ -138,9 +138,7 @@ void HeaderFooterFrameRenderer::renderFrame(QPainter* painter, int frameIndex)
         QString text = mGloballyReplacedTextList[i];
         // substitute locally
         const QString pageNumberTag = QStringLiteral("%p");
-        if (text.indexOf(pageNumberTag) != -1) {
-            text.replace(pageNumberTag, QString::number(frameIndex + 1)); // TODO: frameIndex != pageNumber in general
-        }
+        text.replace(pageNumberTag, QString::number(frameIndex + 1)); // TODO: frameIndex != pageNumber in general
         const int align = verticalAlign | horizontalAligns[i];
 
         painter->drawText(margin, 0, rightEnd, mHeight, align, text);
