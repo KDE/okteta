@@ -71,5 +71,11 @@ void OffsetColumnRenderer::setFontMetrics(const QFontMetrics& fontMetrics)
     d->setFontMetrics(fontMetrics);
 }
 
+void OffsetColumnRenderer::setMargin(PixelX margin)
+{
+    Q_D(OffsetColumnRenderer);
+
+    d->setMargin(margin);
+}
 
 }

@@ -41,6 +41,7 @@ public:    // AbstractColumnRenderer API
 public:
     void setFormat(OffsetFormat::Format format, const QFontMetrics& fontMetrics);
     void setFontMetrics(const QFontMetrics& fontMetrics);
+    void setMargin(PixelX margin);
 
 public: // read access
 //     int delta() const;

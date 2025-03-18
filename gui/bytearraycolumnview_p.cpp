@@ -599,12 +599,13 @@ void ByteArrayColumnViewPrivate::createCursorPixmaps()
     // calculat the shape
     PixelX cursorX;
     PixelX cursorW;
+    const int insertCursorWidth = q->style()->pixelMetric(QStyle::PM_TextCursorWidth);
     if (isCursorBehind()) {
-        cursorX = qMax(0, byteWidth - InsertCursorWidth);
-        cursorW = InsertCursorWidth;
+        cursorX = qMax(0, byteWidth - insertCursorWidth);
+        cursorW = insertCursorWidth;
     } else {
         cursorX = 0;
-        cursorW = mOverWrite ? -1 : InsertCursorWidth;
+        cursorW = mOverWrite ? -1 : insertCursorWidth;
     }
     mCursorPixmaps.setShape(cursorX, cursorW, q->devicePixelRatio());
 }

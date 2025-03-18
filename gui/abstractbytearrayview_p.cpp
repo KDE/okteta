@@ -177,6 +177,8 @@ void AbstractByteArrayViewPrivate::init()
     // TODO: here and in subclasses look for better pattern to refer to intsances owned by engine
     auto offsetColumn =
         std::make_unique<OffsetColumnRenderer>(mStylist.get(), &mTableLayout, OffsetFormat::Hexadecimal);
+    const int headerMargin = q->style()->pixelMetric(QStyle::PM_HeaderMargin);
+    offsetColumn->setMargin(headerMargin);
     mOffsetColumn = offsetColumn.get();
     auto offsetBorderColumn =
         std::make_unique<BorderColumnRenderer>(mStylist.get(), false);
@@ -323,6 +325,19 @@ void AbstractByteArrayViewPrivate::changeEvent(QEvent* event)
         // might this need atomic signalling rather?
         Q_EMIT q->zoomScaleChanged(m_fontScalingZoomState.scale());
         Q_EMIT q->zoomLevelsChanged();
+    } else if (event->type() == QEvent::StyleChange) {
+        // get new values
+        const int headerMargin = q->style()->pixelMetric(QStyle::PM_HeaderMargin);
+        mOffsetColumn->setMargin(headerMargin);
+
+        // update all dependent structures
+        mTableLayout.setNoOfLinesPerPage(noOfLinesPerPage());
+
+        updateViewByWidth();
+
+        if (mCursorVisible) {
+            updateCursors();
+        }
     }
 }
 

@@ -35,6 +35,7 @@ public: // AbstractColumnRenderer API
 public:
     void setFormat(OffsetFormat::Format format, const QFontMetrics& fontMetrics);
     void setFontMetrics(const QFontMetrics& fontMetrics);
+    void setMargin(PixelX margin);
 
 private:
     /** recalculates all x values */
@@ -52,6 +53,8 @@ public: // pixel related
     PixelX mOffsetTextWidth = 0;
     /** */
     PixelY mDigitBaseLine = 0;
+
+    PixelX mMargin = 2;
 
 public: // general layout
     OffsetFormat::Format mFormat;

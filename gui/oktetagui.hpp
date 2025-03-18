@@ -34,8 +34,6 @@ static constexpr int DefaultNoOfBytesPerLine =  16;
 
 static constexpr int DefaultBinaryGapWidth = 1;
 
-static constexpr int InsertCursorWidth = 2;
-
 static constexpr bool DefaultShowingNonprinting = false;
 static constexpr QChar DefaultSubstituteChar =  QLatin1Char('.');
 static constexpr QChar DefaultUndefinedChar =   QChar(QChar::ReplacementCharacter);

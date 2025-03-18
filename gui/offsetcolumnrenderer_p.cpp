@@ -20,10 +20,6 @@
 
 namespace Okteta {
 
-static constexpr PixelX leftOffsetMargin = 2;
-static constexpr PixelX rightOffsetMargin = 2;
-
-
 void OffsetColumnRendererPrivate::renderLine(QPainter* painter, Line lineIndex)
 {
     const PixelX offset = mLayout->firstLineOffset() + mLayout->noOfBytesPerLine() * lineIndex;
@@ -31,7 +27,7 @@ void OffsetColumnRendererPrivate::renderLine(QPainter* painter, Line lineIndex)
 
     const QColor& buttonColor = mStylist->palette().buttonText().color();
     painter->setPen(buttonColor);
-    painter->drawText(leftOffsetMargin, mDigitBaseLine, QLatin1String(mCodedOffset));
+    painter->drawText(mMargin, mDigitBaseLine, QLatin1String(mCodedOffset));
 }
 
 void OffsetColumnRendererPrivate::renderColumnBackground(QPainter* painter, PixelXRange Xs, PixelYRange Ys)
@@ -98,12 +94,24 @@ void OffsetColumnRendererPrivate::setFontMetrics(const QFontMetrics& fontMetrics
     recalcX();
 }
 
+void OffsetColumnRendererPrivate::setMargin(PixelX margin)
+{
+    // no changes?
+    if (mMargin == margin) {
+        return;
+    }
+
+    mMargin = margin;
+
+    recalcX();
+}
+
 void OffsetColumnRendererPrivate::recalcX()
 {
     Q_Q(OffsetColumnRenderer);
 
     // recalculate depend sizes
-    q->setWidth(mOffsetTextWidth + leftOffsetMargin + rightOffsetMargin);
+    q->setWidth(mOffsetTextWidth + 2 * mMargin);
 }
 
 }
