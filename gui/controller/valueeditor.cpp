@@ -130,7 +130,7 @@ bool ValueEditor::handleKeyPress(QKeyEvent* keyEvent)
         {
             // is plain char?
             const QString text = keyEvent->text();
-            if (text.length() > 0
+            if (!text.isEmpty()
                 && (!(keyEvent->modifiers() & (Qt::CTRL | Qt::ALT | Qt::META)))) {
                 const QChar enteredChar = text.at(0);
                 // no usable char?

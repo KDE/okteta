@@ -31,7 +31,7 @@ bool CharEditor::handleKeyPress(QKeyEvent* keyEvent)
     const QString text = keyEvent->text();
 
     // some input that should be inserted?
-    if (text.length() > 0
+    if (!text.isEmpty()
         && !(keyEvent->modifiers() & (Qt::CTRL | Qt::ALT | Qt::META))) {
 
         const QChar enteredChar = text.at(0);
