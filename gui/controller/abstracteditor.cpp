@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, made within the KDE community.
 
-    SPDX-FileCopyrightText: 2004, 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    SPDX-FileCopyrightText: 2004, 2008, 2025 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
@@ -28,58 +28,86 @@ AbstractEditor::AbstractEditor(AbstractByteArrayViewPrivate* view, AbstractContr
 
 AbstractEditor::~AbstractEditor() = default;
 
+void AbstractEditor::handleShortcutOverrideEvent(QKeyEvent* keyEvent) const
+{
+    bool isKeyToUse = false;
+
+    if (keyEvent->matches(QKeySequence::Delete) ||
+        keyEvent->matches(QKeySequence::DeleteStartOfWord) ||
+        keyEvent->matches(QKeySequence::DeleteEndOfWord)) {
+        isKeyToUse = true;
+    } else {
+        const Qt::KeyboardModifiers keyModifiers = keyEvent->modifiers() & ~(Qt::KeypadModifier | Qt::GroupSwitchModifier);;
+
+        if (keyModifiers == Qt::NoModifier) {
+            const int keyCode = keyEvent->key();
+            if ((keyCode == Qt::Key_Insert) ||
+                (keyCode == Qt::Key_Backspace)) {
+                isKeyToUse = true;
+            }
+        }
+    }
+
+    if (isKeyToUse) {
+        keyEvent->accept();
+    } else {
+        AbstractController::handleShortcutOverrideEvent(keyEvent);
+    }
+}
+
+
 bool AbstractEditor::handleKeyPress(QKeyEvent* keyEvent)
 {
-    const bool shiftPressed =   keyEvent->modifiers() & Qt::SHIFT;
-    const bool controlPressed = keyEvent->modifiers() & Qt::CTRL;
-    const bool altPressed =     keyEvent->modifiers() & Qt::ALT;
+    bool keyUsed = false;
 
-    bool keyUsed = true;
     // we only care for cursor keys and the like, won't hardcode any other keys
     // we also don't check whether the commands are allowed
     // as the commands are also available as API so the check has to be done
     // in each command anyway
-    switch (keyEvent->key())
-    {
-    case Qt::Key_Delete:
-        if (shiftPressed) {
-            mView->cutToClipboard();
-        } else if (mView->hasSelectedData()) {
+    if (keyEvent->matches(QKeySequence::Delete)) {
+        if (mView->hasSelectedData()) {
             mView->removeSelectedData();
         } else {
-            doEditAction(controlPressed ? WordDelete : CharDelete);
+            doEditAction(CharDelete);
         }
-        break;
-    case Qt::Key_Insert:
-        if (shiftPressed) {
-            mView->pasteFromClipboard();
-        } else if (controlPressed) {
-            mView->copyToClipboard();
-        } else {
-            mView->setOverwriteMode(!mView->isOverwriteMode());
-        }
-        break;
-    case Qt::Key_Backspace:
-        if (altPressed) {
-            break;
-        } else if (mView->hasSelectedData()) {
+        keyUsed = true;
+    } else if (keyEvent->matches(QKeySequence::DeleteStartOfWord)) {
+        // TODO: descide behaviour with selection, for now okteta legacy one
+        if (mView->hasSelectedData()) {
             mView->removeSelectedData();
-            break;
+        } else {
+            doEditAction(WordBackspace);
         }
+        keyUsed = true;
+    } else if (keyEvent->matches(QKeySequence::DeleteEndOfWord)) {
+        // TODO: descide behaviour with selection, for now okteta legacy one
+        if (mView->hasSelectedData()) {
+            mView->removeSelectedData();
+        } else {
+            doEditAction(WordDelete);
+        }
+        keyUsed = true;
+    } else {
+        const Qt::KeyboardModifiers keyModifiers = keyEvent->modifiers() & ~(Qt::KeypadModifier | Qt::GroupSwitchModifier);;
 
-        doEditAction(controlPressed ? WordBackspace : CharBackspace);
-        break;
-    case Qt::Key_F16: // "Copy" key on Sun keyboards
-        mView->copyToClipboard();
-        break;
-    case Qt::Key_F18: // "Paste" key on Sun keyboards
-        mView->pasteFromClipboard();
-        break;
-    case Qt::Key_F20: // "Cut" key on Sun keyboards
-        mView->cutToClipboard();
-        break;
-    default:
-        keyUsed = false;
+        if (keyModifiers == Qt::NoModifier) {
+            switch (keyEvent->key()) {
+            case Qt::Key_Insert:
+                mView->setOverwriteMode(!mView->isOverwriteMode());
+                keyUsed = true;
+                break;
+            case Qt::Key_Backspace:
+                if (mView->hasSelectedData()) {
+                    mView->removeSelectedData();
+                } else {
+                    doEditAction(CharBackspace);
+                }
+                keyUsed = true;
+                break;
+            default:
+                break;
+            }
+        }
     }
 
     return keyUsed ? true : AbstractController::handleKeyPress(keyEvent);

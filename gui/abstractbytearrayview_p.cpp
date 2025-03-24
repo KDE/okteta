@@ -316,7 +316,8 @@ void AbstractByteArrayViewPrivate::changeEvent(QEvent* event)
 
     q->QAbstractScrollArea::changeEvent(event);
 
-    if (event->type() == QEvent::FontChange) {
+    switch (event->type()) {
+    case QEvent::FontChange: {
         // update rendering font to new font, using current scaling
         m_fontScalingZoomState.setFont(q->font());
 
@@ -325,7 +326,9 @@ void AbstractByteArrayViewPrivate::changeEvent(QEvent* event)
         // might this need atomic signalling rather?
         Q_EMIT q->zoomScaleChanged(m_fontScalingZoomState.scale());
         Q_EMIT q->zoomLevelsChanged();
-    } else if (event->type() == QEvent::StyleChange) {
+        break;
+    }
+    case QEvent::StyleChange: {
         // get new values
         const int headerMargin = q->style()->pixelMetric(QStyle::PM_HeaderMargin);
         mOffsetColumn->setMargin(headerMargin);
@@ -338,6 +341,10 @@ void AbstractByteArrayViewPrivate::changeEvent(QEvent* event)
         if (mCursorVisible) {
             updateCursors();
         }
+        break;
+    }
+    default:
+        break;
     }
 }
 
@@ -1087,7 +1094,8 @@ bool AbstractByteArrayViewPrivate::event(QEvent* event)
     Q_Q(AbstractByteArrayView);
 
     //
-    if (event->type() == QEvent::KeyPress) {
+    switch (event->type()) {
+    case QEvent::KeyPress: {
         auto* keyEvent = static_cast<QKeyEvent*>(event);
         if (keyEvent->key() == Qt::Key_Tab || keyEvent->key() == Qt::Key_Backtab) {
             q->keyPressEvent(keyEvent);
@@ -1095,33 +1103,48 @@ bool AbstractByteArrayViewPrivate::event(QEvent* event)
                 return true;
             }
         }
-    } else if ((event->type() == QEvent::MouseMove) ||
-               (event->type() == QEvent::MouseButtonPress) ||
-               (event->type() == QEvent::MouseButtonRelease)) {
+        break;
+    }
+    case QEvent::ShortcutOverride: {
+        auto* const keyEvent = static_cast<QKeyEvent*>(event);
+        controller()->handleShortcutOverrideEvent(keyEvent);
+        break;
+    }
+    case QEvent::MouseMove:
+    case QEvent::MouseButtonPress:
+    case QEvent::MouseButtonRelease: {
         // discard any events synthesized from touch input
         auto* mouseEvent = static_cast<QMouseEvent*>(event);
         if (mouseEvent->source() == Qt::MouseEventSynthesizedByQt) {
             event->accept();
             return true;
         }
-    } else if ((event->type() == QEvent::PaletteChange)) {
+        break;
+    }
+    case QEvent::PaletteChange: {
         if (mCursorVisible) {
             updateCursors();
         }
-    } else if ((event->type() == QEvent::ContextMenu) &&
-               (static_cast<QContextMenuEvent*>(event)->reason() == QContextMenuEvent::Keyboard)) {
-        ensureCursorVisible();
+        break;
+    }
+    case QEvent::ContextMenu: {
+        auto* const contextMenuEvent = static_cast<QContextMenuEvent*>(event);
+        if (contextMenuEvent->reason() == QContextMenuEvent::Keyboard) {
+            ensureCursorVisible();
 
-        const QPoint cursorPos = cursorRect().center();
-        QContextMenuEvent adaptedContextMenuEvent(QContextMenuEvent::Keyboard, cursorPos,
-                                                  q->viewport()->mapToGlobal(cursorPos));
-        adaptedContextMenuEvent.setAccepted(event->isAccepted());
+            const QPoint cursorPos = cursorRect().center();
+            QContextMenuEvent adaptedContextMenuEvent(QContextMenuEvent::Keyboard, cursorPos,
+                                                    q->viewport()->mapToGlobal(cursorPos));
+            adaptedContextMenuEvent.setAccepted(event->isAccepted());
 
-        const bool result = q->QAbstractScrollArea::event(&adaptedContextMenuEvent);
-        event->setAccepted(adaptedContextMenuEvent.isAccepted());
+            const bool result = q->QAbstractScrollArea::event(&adaptedContextMenuEvent);
+            event->setAccepted(adaptedContextMenuEvent.isAccepted());
 
-        return result;
-    } else if (event->type() == QEvent::Gesture) {
+            return result;
+        }
+        break;
+    }
+    case QEvent::Gesture: {
         auto* gestureEvent = static_cast<QGestureEvent*>(event);
         if (auto* tapGesture = static_cast<QTapGesture*>(gestureEvent->gesture(Qt::TapGesture))) {
             return mTapNavigator.handleTapGesture(tapGesture);
@@ -1150,6 +1173,10 @@ bool AbstractByteArrayViewPrivate::event(QEvent* event)
         } else if (auto* pinchGesture = static_cast<QPinchGesture*>(gestureEvent->gesture(Qt::PinchGesture))) {
             return mZoomPinchController.handlePinchGesture(pinchGesture);
         };
+        break;
+    }
+    default:
+        break;
     }
 
     ColumnsViewScrollAreaEngine::event(event);
@@ -1161,7 +1188,8 @@ bool AbstractByteArrayViewPrivate::viewportEvent(QEvent* event)
 {
     Q_Q(AbstractByteArrayView);
 
-    if (event->type() == QEvent::ToolTip) {
+    switch (event->type()) {
+    case QEvent::ToolTip: {
         auto* helpEvent = static_cast<QHelpEvent*>(event);
 
         QString toolTip;
@@ -1185,15 +1213,18 @@ bool AbstractByteArrayViewPrivate::viewportEvent(QEvent* event)
 
         return true;
     }
-    if ((event->type() == QEvent::MouseMove) ||
-        (event->type() == QEvent::MouseButtonPress) ||
-        (event->type() == QEvent::MouseButtonRelease)) {
+    case QEvent::MouseMove:
+    case QEvent::MouseButtonPress:
+    case QEvent::MouseButtonRelease: {
         // discard any events synthesized from touch input
         auto* mouseEvent = static_cast<QMouseEvent*>(event);
         if (mouseEvent->source() == Qt::MouseEventSynthesizedByQt) {
             event->accept();
             return true;
         }
+    }
+    default:
+        break;
     }
 
     return q->QAbstractScrollArea::viewportEvent(event);

@@ -140,8 +140,8 @@ void ZoomSlider::updateToolTip(int sliderValue)
 
     m_toolTipSliderValue = sliderValue;
 
-    const float zoomScale = m_zoomLevelsControl ? m_zoomLevelsControl->zoomScaleForLevel(m_toolTipSliderValue) : 50.0 / (50 - m_toolTipSliderValue);
-    const int zoomPercent = static_cast<int>(zoomScale * 100 + 0.5);
+    const float zoomScale = m_zoomLevelsControl ? m_zoomLevelsControl->zoomScaleForLevel(m_toolTipSliderValue) : 50.0f / (50 - m_toolTipSliderValue);
+    const int zoomPercent = static_cast<int>(zoomScale * 100 + 0.5f);
     mSlider->setToolTip(i18nc("@info:tooltip", "Zoom: %1%", zoomPercent));
 // TODO: get the text by a signal toolTipNeeded( int zoomScale, QString* toolTipText ); ?
 }

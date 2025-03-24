@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, made within the KDE community.
 
-    SPDX-FileCopyrightText: 2019 Friedrich W. H. Kossebau <kossebau@kde.org>
+    SPDX-FileCopyrightText: 2019, 2025 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
@@ -27,20 +27,43 @@ ClipboardController::ClipboardController(AbstractByteArrayViewPrivate* view, Abs
 {
 }
 
+void ClipboardController::handleShortcutOverrideEvent(QKeyEvent* keyEvent) const
+{
+    bool isKeyToUse = false;
+
+    if (keyEvent->matches(QKeySequence::Copy)) {
+        isKeyToUse = true;
+    } else if (!mView->isEffectiveReadOnly()) {
+        if (keyEvent->matches(QKeySequence::Cut)) {
+            if (!mView->isOverwriteMode()) {
+                isKeyToUse = true;
+            }
+        } else if (keyEvent->matches(QKeySequence::Paste)) {
+            isKeyToUse = true;
+        }
+    }
+
+    if (isKeyToUse) {
+        keyEvent->accept();
+    } else {
+        AbstractController::handleShortcutOverrideEvent(keyEvent);
+    }
+}
+
 bool ClipboardController::handleKeyPress(QKeyEvent* keyEvent)
 {
     bool keyUsed = false;
 
-    if (keyEvent == QKeySequence::Copy) {
+    if (keyEvent->matches(QKeySequence::Copy)) {
         mView->copyToClipboard();
         keyUsed = true;
     } else if (!mView->isEffectiveReadOnly()) {
-        if (keyEvent == QKeySequence::Cut) {
+        if (keyEvent->matches(QKeySequence::Cut)) {
             if (!mView->isOverwriteMode()) {
                 mView->cutToClipboard();
                 keyUsed = true;
             }
-        } else if (keyEvent == QKeySequence::Paste) {
+        } else if (keyEvent->matches(QKeySequence::Paste)) {
             mView->pasteFromClipboard();
             keyUsed = true;
         }

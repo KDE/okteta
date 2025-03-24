@@ -66,14 +66,14 @@ BookmarksController::BookmarksController(KXMLGUIClient* guiClient)
                                           i18nc("@action:inmenu", "Go to Next Bookmark"), this);
     mGotoNextBookmarkAction->setObjectName(QStringLiteral("bookmark_next"));
     connect(mGotoNextBookmarkAction, &QAction::triggered, this, &BookmarksController::gotoNextBookmark);
-    actionCollection->setDefaultShortcut(mGotoNextBookmarkAction, QKeySequence(Qt::ALT | Qt::Key_Down));
+    actionCollection->setDefaultShortcut(mGotoNextBookmarkAction, QKeySequence(Qt::ALT | Qt::Key_PageDown));
     mGotoNextBookmarkAction->setEnabled(false);
 
     mGotoPreviousBookmarkAction = new QAction(QIcon::fromTheme(QStringLiteral("go-previous")),
                                               i18nc("@action:inmenu", "Go to Previous Bookmark"), this);
     mGotoPreviousBookmarkAction->setObjectName(QStringLiteral("bookmark_previous"));
     connect(mGotoPreviousBookmarkAction, &QAction::triggered, this, &BookmarksController::gotoPreviousBookmark);
-    actionCollection->setDefaultShortcut(mGotoPreviousBookmarkAction, QKeySequence(Qt::ALT | Qt::Key_Up));
+    actionCollection->setDefaultShortcut(mGotoPreviousBookmarkAction, QKeySequence(Qt::ALT | Qt::Key_PageUp));
     mGotoPreviousBookmarkAction->setEnabled(false);
 
     mBookmarksActionGroup = new QActionGroup(this);   // TODO: do we use this only for the signal mapping?

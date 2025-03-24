@@ -29,7 +29,7 @@ ViewAreaBox::ViewAreaBox(QWidget* centralWidget, QWidget* parent)
         layout->addWidget(mCentralWidget);
     }
 
-    mEscapeShortcut = new QShortcut(Qt::Key_Escape, this);
+    mEscapeShortcut = new QShortcut(QKeySequence::Cancel, this);
     mEscapeShortcut->setContext(Qt::WidgetWithChildrenShortcut);
     mEscapeShortcut->setEnabled(false);
     connect(mEscapeShortcut, &QShortcut::activated, this, &ViewAreaBox::onDone);   // TODO: better use onCancelled

@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, made within the KDE community.
 
-    SPDX-FileCopyrightText: 2004, 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    SPDX-FileCopyrightText: 2004, 2008, 2025 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
@@ -87,57 +87,138 @@ void ValueEditor::finishEdit()
     }
 }
 
-bool ValueEditor::handleKeyPress(QKeyEvent* keyEvent)
+void ValueEditor::handleShortcutOverrideEvent(QKeyEvent* keyEvent) const
 {
-    bool keyUsed = true;
+    bool isKeyToUse = false;
 
-    // TODO: for now we don't touch it if there are selections
     if (!mView->hasSelectedData()) {
-        //
-        switch (keyEvent->key())
-        {
-        case Qt::Key_Plus:
-            doValueEditAction(IncValue);
-            break;
-        case Qt::Key_Minus:
-            doValueEditAction(DecValue);
-            break;
-        case Qt::Key_Space:
-            if (!mInEditMode) {
-                keyUsed = false;
+        if (keyEvent->matches(QKeySequence::Cancel)) {
+            if (mInEditMode) {
+                isKeyToUse = true;
+            }
+        } else {
+            const Qt::KeyboardModifiers keyModifiers = keyEvent->modifiers() & ~(Qt::KeypadModifier | Qt::GroupSwitchModifier);;
+
+            switch (keyEvent->key()) {
+            case Qt::Key_Plus:
+                if (keyModifiers == Qt::NoModifier) {
+                    isKeyToUse = true;
+                }
                 break;
-            }
-            [[fallthrough]];
-        case Qt::Key_Enter:
-        case Qt::Key_Return:
-            doValueEditAction(mInEditMode ? LeaveValue : EnterValue);
-            break;
-        case Qt::Key_Escape:
-            if (mInEditMode) {
-                cancelEdit();
-            } else {
-                keyUsed = false;
-            }
-            break;
-        case Qt::Key_Backspace:
-            if (mInEditMode) {
-                doValueEditAction(ValueBackspace);
-            } else {
-                keyUsed = false;
-            }
-            break;
-        default:
-        {
-            // is plain char?
-            const QString text = keyEvent->text();
-            if (text.length() > 0
-                && (!(keyEvent->modifiers() & (Qt::CTRL | Qt::ALT | Qt::META)))) {
+            case Qt::Key_Minus:
+                if (keyModifiers == Qt::NoModifier) {
+                    isKeyToUse = true;
+                }
+                break;
+            case Qt::Key_Space:
+                if (!mInEditMode) {
+                    break;
+                }
+                [[fallthrough]];
+            case Qt::Key_Enter:
+            case Qt::Key_Return:
+                if (keyModifiers == Qt::NoModifier) {
+                    isKeyToUse = true;
+                }
+                break;
+            case Qt::Key_Backspace:
+                if ((keyModifiers == Qt::NoModifier) && mInEditMode) {
+                    isKeyToUse = true;
+                }
+                break;
+            default: {
+                // is plain char?
+                const QString text = keyEvent->text();
+                if (text.isEmpty()) {
+                    break;
+                }
+
+                const Qt::KeyboardModifiers shiftLessKeyModifiers = keyModifiers & ~Qt::ShiftModifier;
+                if (shiftLessKeyModifiers != Qt::NoModifier) {
+                    break;
+                }
+
                 const QChar enteredChar = text.at(0);
                 // no usable char?
                 if (!enteredChar.isPrint()) {
-                    keyUsed = false;
                     break;
                 }
+                isKeyToUse = true;
+            }
+            }
+        }
+    }
+
+    if (isKeyToUse) {
+        keyEvent->accept();
+    } else {
+        AbstractEditor::handleShortcutOverrideEvent(keyEvent);
+    }
+}
+
+bool ValueEditor::handleKeyPress(QKeyEvent* keyEvent)
+{
+    bool keyUsed = false;
+
+    // TODO: for now we don't touch it if there are selections
+    if (!mView->hasSelectedData()) {
+        if (keyEvent->matches(QKeySequence::Cancel)) {
+            if (mInEditMode) {
+                cancelEdit();
+                keyUsed = true;
+            }
+        } else {
+            const Qt::KeyboardModifiers keyModifiers = keyEvent->modifiers() & ~(Qt::KeypadModifier | Qt::GroupSwitchModifier);;
+
+            switch (keyEvent->key()) {
+            case Qt::Key_Plus:
+                if (keyModifiers == Qt::NoModifier) {
+                    doValueEditAction(IncValue);
+                    keyUsed = true;
+                }
+                break;
+            case Qt::Key_Minus:
+                if (keyModifiers == Qt::NoModifier) {
+                    doValueEditAction(DecValue);
+                    keyUsed = true;
+                }
+                break;
+            case Qt::Key_Space:
+                if (!mInEditMode) {
+                    break;
+                }
+            // fallthrough
+            case Qt::Key_Enter:
+            case Qt::Key_Return:
+                if (keyModifiers == Qt::NoModifier) {
+                    doValueEditAction(mInEditMode ? LeaveValue : EnterValue);
+                    keyUsed = true;
+                }
+                break;
+            case Qt::Key_Backspace:
+                if ((keyModifiers == Qt::NoModifier) && mInEditMode) {
+                    doValueEditAction(ValueBackspace);
+                    keyUsed = true;
+                }
+                break;
+            default: {
+                // is plain char?
+                const QString text = keyEvent->text();
+                if (text.isEmpty()) {
+                    break;
+                }
+
+                const Qt::KeyboardModifiers shiftLessKeyModifiers = keyModifiers & ~Qt::ShiftModifier;
+                if (shiftLessKeyModifiers != Qt::NoModifier) {
+                    break;
+                }
+
+                const QChar enteredChar = text.at(0);
+                // no usable char?
+                if (!enteredChar.isPrint()) {
+                    break;
+                }
+
                 const int input = enteredChar.toLatin1();
 
                 const Okteta::ValueCodec* valueCodec = mView->valueCodec();
@@ -172,13 +253,10 @@ bool ValueEditor::handleKeyPress(QKeyEvent* keyEvent)
                         }
                     }
                 }
-            } else {
-                keyUsed = false;
+                keyUsed = true;
+            }
             }
         }
-        }
-    } else {
-        keyUsed = false;
     }
 
     return keyUsed ? true : AbstractEditor::handleKeyPress(keyEvent);

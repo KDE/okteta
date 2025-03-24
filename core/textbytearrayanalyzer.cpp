@@ -71,7 +71,7 @@ Address TextByteArrayAnalyzer::indexOfPreviousWordStart(Address index) const
             if (!lookingForFirstWordChar) {
                 continue;
             }
-            return(index);
+            return index;
         }
         if (!lookingForFirstWordChar) {
             lookingForFirstWordChar = true;
@@ -129,7 +129,7 @@ Address TextByteArrayAnalyzer::indexOfWordStart(Address index) const
 {
     for (; index > 0; --index) {
         if (!isWordChar(index - 1)) {
-            return(index);
+            return index;
         }
     }
 
