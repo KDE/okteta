@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, made within the KDE community.
 
-    SPDX-FileCopyrightText: 2004, 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    SPDX-FileCopyrightText: 2004, 2008, 2025 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
@@ -28,20 +28,23 @@ bool CharEditor::handleKeyPress(QKeyEvent* keyEvent)
 {
     bool keyUsed = false;
 
-    const QString text = keyEvent->text();
+    const Qt::KeyboardModifiers keyModifiers = keyEvent->modifiers() & ~(Qt::KeypadModifier | Qt::GroupSwitchModifier);;
 
-    // some input that should be inserted?
-    if (!text.isEmpty()
-        && !(keyEvent->modifiers() & (Qt::CTRL | Qt::ALT | Qt::META))) {
+    const Qt::KeyboardModifiers shiftLessKeyModifiers = keyModifiers & ~Qt::ShiftModifier;
+    if (shiftLessKeyModifiers == Qt::NoModifier) {
+        const QString text = keyEvent->text();
 
-        const QChar enteredChar = text.at(0);
-        if (enteredChar.isPrint()) {
-            Byte byte;
-            if (mView->charCodec()->encode(&byte, enteredChar)) {
-                QByteArray data(1, byte);
-                mView->insert(data);
+        // some input that should be inserted?
+        if (!text.isEmpty()) {
+            const QChar enteredChar = text.at(0);
+            if (enteredChar.isPrint()) {
+                Byte byte;
+                if (mView->charCodec()->encode(&byte, enteredChar)) {
+                    QByteArray data(1, byte);
+                    mView->insert(data);
 
-                keyUsed = true;
+                    keyUsed = true;
+                }
             }
         }
     }

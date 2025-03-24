@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, made within the KDE community.
 
-    SPDX-FileCopyrightText: 2004, 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    SPDX-FileCopyrightText: 2004, 2008, 2025 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
@@ -32,59 +32,93 @@ KeyNavigator::KeyNavigator(AbstractByteArrayView* view, AbstractController* pare
 
 bool KeyNavigator::handleKeyPress(QKeyEvent* keyEvent)
 {
-    bool keyUsed;
+    bool keyUsed = false;
 
-    if (keyEvent == QKeySequence::SelectAll) {
+    // we only care for cursor keys and the like, won't hardcode any other keys
+    // we also don't check whether the commands are allowed
+    // as the commands are also available as API so the check has to be done
+    // in each command anyway
+    if (keyEvent->matches(QKeySequence::SelectAll)) {
         selectAll();
         keyUsed = true;
-    } else if (keyEvent->modifiers() & Qt::ALT) {
-        // currently there is no input with the Alt modifier used, so ignore them all
-        keyUsed = false;
-    } else {
+    } else if (keyEvent->matches(QKeySequence::MoveToPreviousChar)) {
+        moveCursor(MoveBackward, Unselect);
         keyUsed = true;
-
-        const bool shiftPressed =  keyEvent->modifiers() & Qt::SHIFT;
-        const bool controlPressed = keyEvent->modifiers() & Qt::CTRL;
-
-        // we only care for cursor keys and the like, won't hardcode any other keys
-        // we also don't check whether the commands are allowed
-        // as the commands are also available as API so the check has to be done
-        // in each command anyway
-        switch (keyEvent->key())
-        {
-        case Qt::Key_Left:
-            moveCursor(controlPressed ? MoveWordBackward : MoveBackward, shiftPressed);
-            break;
-        case Qt::Key_Right:
-            moveCursor(controlPressed ? MoveWordForward : MoveForward, shiftPressed);
-            break;
-        case Qt::Key_Up:
-            moveCursor(controlPressed ? MovePgUp : MoveUp, shiftPressed);
-            break;
-        case Qt::Key_Down:
-            moveCursor(controlPressed ? MovePgDown : MoveDown, shiftPressed);
-            break;
-        case Qt::Key_Home:
-            moveCursor(controlPressed ? MoveHome : MoveLineStart, shiftPressed);
-            break;
-        case Qt::Key_End:
-            moveCursor(controlPressed ? MoveEnd : MoveLineEnd, shiftPressed);
-            break;
-        case Qt::Key_PageUp:
-            moveCursor(MovePgUp, shiftPressed);
-            break;
-        case Qt::Key_PageDown:
-            moveCursor(MovePgDown, shiftPressed);
-            break;
-        default:
-            keyUsed = false;
-        }
+    } else if (keyEvent->matches(QKeySequence::SelectPreviousChar)) {
+        moveCursor(MoveBackward, Select);
+        keyUsed = true;
+    } else if (keyEvent->matches(QKeySequence::MoveToPreviousWord)) {
+        moveCursor(MoveWordBackward, Unselect);
+        keyUsed = true;
+    } else if (keyEvent->matches(QKeySequence::SelectPreviousWord)) {
+        moveCursor(MoveWordBackward, Select);
+        keyUsed = true;
+    } else if (keyEvent->matches(QKeySequence::MoveToNextChar)) {
+        moveCursor(MoveForward, Unselect);
+        keyUsed = true;
+    } else if (keyEvent->matches(QKeySequence::SelectNextChar)) {
+        moveCursor(MoveForward, Select);
+        keyUsed = true;
+    } else if (keyEvent->matches(QKeySequence::MoveToNextWord)) {
+        moveCursor(MoveWordForward, Unselect);
+        keyUsed = true;
+    } else if (keyEvent->matches(QKeySequence::SelectNextWord)) {
+        moveCursor(MoveWordForward, Select);
+        keyUsed = true;
+    } else if (keyEvent->matches(QKeySequence::MoveToStartOfLine)) {
+        moveCursor(MoveLineStart, Unselect);
+        keyUsed = true;
+    } else if (keyEvent->matches(QKeySequence::SelectStartOfLine)) {
+        moveCursor(MoveLineStart, Select);
+        keyUsed = true;
+    } else if (keyEvent->matches(QKeySequence::MoveToEndOfLine)) {
+        moveCursor(MoveLineEnd, Unselect);
+        keyUsed = true;
+    } else if (keyEvent->matches(QKeySequence::SelectEndOfLine)) {
+        moveCursor(MoveLineEnd, Select);
+        keyUsed = true;
+    } else if (keyEvent->matches(QKeySequence::MoveToPreviousLine)) {
+        moveCursor(MoveUp, Unselect);
+        keyUsed = true;
+    } else if (keyEvent->matches(QKeySequence::SelectPreviousLine)) {
+        moveCursor(MoveUp, Select);
+        keyUsed = true;
+    } else if (keyEvent->matches(QKeySequence::MoveToNextLine)) {
+        moveCursor(MoveDown, Unselect);
+        keyUsed = true;
+    } else if (keyEvent->matches(QKeySequence::SelectNextLine)) {
+        moveCursor(MoveDown, Select);
+        keyUsed = true;
+    } else if (keyEvent->matches(QKeySequence::MoveToPreviousPage)) {
+        moveCursor(MovePgUp, Unselect);
+        keyUsed = true;
+    } else if (keyEvent->matches(QKeySequence::SelectPreviousPage)) {
+        moveCursor(MovePgUp, Select);
+        keyUsed = true;
+    } else if (keyEvent->matches(QKeySequence::MoveToNextPage)) {
+        moveCursor(MovePgDown, Unselect);
+        keyUsed = true;
+    } else if (keyEvent->matches(QKeySequence::SelectNextPage)) {
+        moveCursor(MovePgDown, Select);
+        keyUsed = true;
+    } else if (keyEvent->matches(QKeySequence::MoveToStartOfDocument)) {
+        moveCursor(MoveHome, Unselect);
+        keyUsed = true;
+    } else if (keyEvent->matches(QKeySequence::SelectStartOfDocument)) {
+        moveCursor(MoveHome, Select);
+        keyUsed = true;
+    } else if (keyEvent->matches(QKeySequence::MoveToEndOfDocument)) {
+        moveCursor(MoveEnd, Unselect);
+        keyUsed = true;
+    } else if (keyEvent->matches(QKeySequence::SelectEndOfDocument)) {
+        moveCursor(MoveEnd, Select);
+        keyUsed = true;
     }
 
     return keyUsed ? true : AbstractController::handleKeyPress(keyEvent);
 }
 
-void KeyNavigator::moveCursor(MoveAction action, bool select)
+void KeyNavigator::moveCursor(MoveAction action, SelectAction selectAction)
 {
     mView->pauseCursor();
     mView->finishByteEdit();
@@ -92,7 +126,7 @@ void KeyNavigator::moveCursor(MoveAction action, bool select)
     ByteArrayTableCursor* tableCursor = mView->tableCursor();
     ByteArrayTableRanges* tableRanges = mView->tableRanges();
 
-    if (select) {
+    if (selectAction == Select) {
         if (!tableRanges->selectionStarted()) {
             tableRanges->setSelectionStart(tableCursor->realIndex());
         }
@@ -126,7 +160,7 @@ void KeyNavigator::moveCursor(MoveAction action, bool select)
     case MoveEnd:          tableCursor->gotoEnd();            break;
     }
 
-    if (select) {
+    if (selectAction == Select) {
         tableRanges->setSelectionEnd(tableCursor->realIndex());
     }
 

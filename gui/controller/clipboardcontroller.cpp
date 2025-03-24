@@ -32,16 +32,16 @@ bool ClipboardController::handleKeyPress(QKeyEvent* keyEvent)
 {
     bool keyUsed = false;
 
-    if (keyEvent == QKeySequence::Copy) {
+    if (keyEvent->matches(QKeySequence::Copy)) {
         mView->copy();
         keyUsed = true;
     } else if (!mView->isReadOnly()) {
-        if (keyEvent == QKeySequence::Cut) {
+        if (keyEvent->matches(QKeySequence::Cut)) {
             if (!mView->isOverwriteMode()) {
                 mView->cut();
                 keyUsed = true;
             }
-        } else if (keyEvent == QKeySequence::Paste) {
+        } else if (keyEvent->matches(QKeySequence::Paste)) {
             mView->paste();
             keyUsed = true;
         }

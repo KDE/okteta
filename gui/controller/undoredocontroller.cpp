@@ -35,9 +35,9 @@ bool UndoRedoController::handleKeyPress(QKeyEvent* keyEvent)
     bool keyUsed = false;
 
     if (!mView->isReadOnly()) {
-        if (keyEvent == QKeySequence::Undo) {
+        if (keyEvent->matches(QKeySequence::Undo)) {
             keyUsed = undo();
-        } else if (keyEvent == QKeySequence::Redo) {
+        } else if (keyEvent->matches(QKeySequence::Redo)) {
             keyUsed = redo();
         }
     }
