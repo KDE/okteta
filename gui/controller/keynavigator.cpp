@@ -30,6 +30,45 @@ KeyNavigator::KeyNavigator(AbstractByteArrayView* view, AbstractController* pare
 {
 }
 
+void KeyNavigator::handleShortcutOverrideEvent(QKeyEvent* keyEvent) const
+{
+    bool isKeyToUse = false;
+
+    if (keyEvent->matches(QKeySequence::SelectAll) ||
+        keyEvent->matches(QKeySequence::MoveToPreviousChar) ||
+        keyEvent->matches(QKeySequence::SelectPreviousChar) ||
+        keyEvent->matches(QKeySequence::MoveToPreviousWord) ||
+        keyEvent->matches(QKeySequence::SelectPreviousWord) ||
+        keyEvent->matches(QKeySequence::MoveToNextChar) ||
+        keyEvent->matches(QKeySequence::SelectNextChar) ||
+        keyEvent->matches(QKeySequence::MoveToNextWord) ||
+        keyEvent->matches(QKeySequence::SelectNextWord) ||
+        keyEvent->matches(QKeySequence::MoveToStartOfLine) ||
+        keyEvent->matches(QKeySequence::SelectStartOfLine)  ||
+        keyEvent->matches(QKeySequence::MoveToEndOfLine) ||
+        keyEvent->matches(QKeySequence::SelectEndOfLine) ||
+        keyEvent->matches(QKeySequence::MoveToPreviousLine) ||
+        keyEvent->matches(QKeySequence::SelectPreviousLine) ||
+        keyEvent->matches(QKeySequence::MoveToNextLine) ||
+        keyEvent->matches(QKeySequence::SelectNextLine) ||
+        keyEvent->matches(QKeySequence::MoveToPreviousPage) ||
+        keyEvent->matches(QKeySequence::SelectPreviousPage) ||
+        keyEvent->matches(QKeySequence::MoveToNextPage) ||
+        keyEvent->matches(QKeySequence::SelectNextPage) ||
+        keyEvent->matches(QKeySequence::MoveToStartOfDocument) ||
+        keyEvent->matches(QKeySequence::SelectStartOfDocument) ||
+        keyEvent->matches(QKeySequence::MoveToEndOfDocument) ||
+        keyEvent->matches(QKeySequence::SelectEndOfDocument)) {
+        isKeyToUse = true;
+    }
+
+    if (isKeyToUse) {
+        keyEvent->accept();
+    } else {
+        AbstractController::handleShortcutOverrideEvent(keyEvent);
+    }
+}
+
 bool KeyNavigator::handleKeyPress(QKeyEvent* keyEvent)
 {
     bool keyUsed = false;

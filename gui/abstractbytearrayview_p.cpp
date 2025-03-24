@@ -1150,6 +1150,11 @@ bool AbstractByteArrayViewPrivate::event(QEvent* event)
         }
         break;
     }
+    case QEvent::ShortcutOverride: {
+        auto* const keyEvent = static_cast<QKeyEvent*>(event);
+        controller()->handleShortcutOverrideEvent(keyEvent);
+        break;
+    }
     case QEvent::MouseMove:
     case QEvent::MouseButtonPress:
     case QEvent::MouseButtonRelease: {

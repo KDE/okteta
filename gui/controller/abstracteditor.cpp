@@ -29,6 +29,34 @@ AbstractEditor::AbstractEditor(ByteArrayTableCursor* cursor, AbstractByteArrayVi
 
 AbstractEditor::~AbstractEditor() = default;
 
+void AbstractEditor::handleShortcutOverrideEvent(QKeyEvent* keyEvent) const
+{
+    bool isKeyToUse = false;
+
+    if (keyEvent->matches(QKeySequence::Delete) ||
+        keyEvent->matches(QKeySequence::DeleteStartOfWord) ||
+        keyEvent->matches(QKeySequence::DeleteEndOfWord)) {
+        isKeyToUse = true;
+    } else {
+        const Qt::KeyboardModifiers keyModifiers = keyEvent->modifiers() & ~(Qt::KeypadModifier | Qt::GroupSwitchModifier);;
+
+        if (keyModifiers == Qt::NoModifier) {
+            const int keyCode = keyEvent->key();
+            if ((keyCode == Qt::Key_Insert) ||
+                (keyCode == Qt::Key_Backspace)) {
+                isKeyToUse = true;
+            }
+        }
+    }
+
+    if (isKeyToUse) {
+        keyEvent->accept();
+    } else {
+        AbstractController::handleShortcutOverrideEvent(keyEvent);
+    }
+}
+
+
 bool AbstractEditor::handleKeyPress(QKeyEvent* keyEvent)
 {
     bool keyUsed = false;

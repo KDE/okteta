@@ -22,6 +22,32 @@ TabController::TabController(AbstractByteArrayView* view, AbstractController* pa
 {
 }
 
+void TabController::handleShortcutOverrideEvent(QKeyEvent* keyEvent) const
+{
+    bool isKeyToUse = false;
+
+    const Qt::KeyboardModifiers keyModifiers = keyEvent->modifiers() & ~(Qt::KeypadModifier | Qt::GroupSwitchModifier);;
+
+    const bool isAtMostShiftModifier = !(keyModifiers & (Qt::ControlModifier | Qt::AltModifier | Qt::MetaModifier));
+
+    if (isAtMostShiftModifier) {
+        const int keyCode = keyEvent->key();
+        const bool backTabPressed = (keyCode == Qt::Key_Backtab) ||
+                                    ((keyCode == Qt::Key_Tab) && (keyModifiers & Qt::ShiftModifier));
+        const bool tabPressed = ((keyCode == Qt::Key_Tab) && !(keyModifiers & Qt::ShiftModifier));
+
+        if (tabPressed || backTabPressed) {
+            isKeyToUse = true;
+        }
+    }
+
+    if (isKeyToUse) {
+        keyEvent->accept();
+    } else {
+        AbstractController::handleShortcutOverrideEvent(keyEvent);
+    }
+}
+
 bool TabController::handleKeyPress(QKeyEvent* keyEvent)
 {
     bool keyUsed = false;

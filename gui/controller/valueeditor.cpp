@@ -87,6 +87,75 @@ void ValueEditor::finishEdit()
     }
 }
 
+void ValueEditor::handleShortcutOverrideEvent(QKeyEvent* keyEvent) const
+{
+    bool isKeyToUse = false;
+
+    if (!mView->hasSelectedData()) {
+        if (keyEvent->matches(QKeySequence::Cancel)) {
+            if (mInEditMode) {
+                isKeyToUse = true;
+            }
+        } else {
+            const Qt::KeyboardModifiers keyModifiers = keyEvent->modifiers() & ~(Qt::KeypadModifier | Qt::GroupSwitchModifier);;
+
+            switch (keyEvent->key()) {
+            case Qt::Key_Plus:
+                if (keyModifiers == Qt::NoModifier) {
+                    isKeyToUse = true;
+                }
+                break;
+            case Qt::Key_Minus:
+                if (keyModifiers == Qt::NoModifier) {
+                    isKeyToUse = true;
+                }
+                break;
+            case Qt::Key_Space:
+                if (!mInEditMode) {
+                    break;
+                }
+            // fallthrough
+            case Qt::Key_Enter:
+            case Qt::Key_Return:
+                if (keyModifiers == Qt::NoModifier) {
+                    isKeyToUse = true;
+                }
+                break;
+            case Qt::Key_Backspace:
+                if ((keyModifiers == Qt::NoModifier) && mInEditMode) {
+                    isKeyToUse = true;
+                }
+                break;
+            default: {
+                // is plain char?
+                const QString text = keyEvent->text();
+                if (text.isEmpty()) {
+                    break;
+                }
+
+                const Qt::KeyboardModifiers shiftLessKeyModifiers = keyModifiers & ~Qt::ShiftModifier;
+                if (shiftLessKeyModifiers != Qt::NoModifier) {
+                    break;
+                }
+
+                const QChar enteredChar = text.at(0);
+                // no usable char?
+                if (!enteredChar.isPrint()) {
+                    break;
+                }
+                isKeyToUse = true;
+            }
+            }
+        }
+    }
+
+    if (isKeyToUse) {
+        keyEvent->accept();
+    } else {
+        AbstractEditor::handleShortcutOverrideEvent(keyEvent);
+    }
+}
+
 bool ValueEditor::handleKeyPress(QKeyEvent* keyEvent)
 {
     bool keyUsed = false;

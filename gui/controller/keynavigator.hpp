@@ -46,6 +46,7 @@ public:
     KeyNavigator(AbstractByteArrayView* view, AbstractController* parent);
 
 public: // AbstractController API
+    void handleShortcutOverrideEvent(QKeyEvent* keyEvent) const override;
     bool handleKeyPress(QKeyEvent* keyEvent) override;
 
 public:

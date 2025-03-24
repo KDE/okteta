@@ -24,6 +24,32 @@ CharEditor::CharEditor(ByteArrayTableCursor* cursor, AbstractByteArrayView* view
 
 CharEditor::~CharEditor() = default;
 
+void CharEditor::handleShortcutOverrideEvent(QKeyEvent* keyEvent) const
+{
+    bool isKeyToUse = false;
+
+    const Qt::KeyboardModifiers keyModifiers = keyEvent->modifiers() & ~(Qt::KeypadModifier | Qt::GroupSwitchModifier);;
+
+    const Qt::KeyboardModifiers shiftLessKeyModifiers = keyModifiers & ~Qt::ShiftModifier;
+    if (shiftLessKeyModifiers == Qt::NoModifier) {
+        const QString text = keyEvent->text();
+
+        // some input that should be inserted?
+        if (!text.isEmpty()) {
+            const QChar enteredChar = text.at(0);
+            if (enteredChar.isPrint()) {
+                isKeyToUse = true;
+            }
+        }
+    }
+
+    if (isKeyToUse) {
+        keyEvent->accept();
+    } else {
+        AbstractEditor::handleShortcutOverrideEvent(keyEvent);
+    }
+}
+
 bool CharEditor::handleKeyPress(QKeyEvent* keyEvent)
 {
     bool keyUsed = false;
