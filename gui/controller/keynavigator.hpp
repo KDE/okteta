@@ -24,8 +24,10 @@ private:
     {
         MoveBackward,
         MoveWordBackward,
+        MoveNonZeroBackward,
         MoveForward,
         MoveWordForward,
+        MoveNonZeroForward,
         MoveUp,
         MovePgUp,
         MoveDown,

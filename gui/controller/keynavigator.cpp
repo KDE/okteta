@@ -60,6 +60,15 @@ void KeyNavigator::handleShortcutOverrideEvent(QKeyEvent* keyEvent) const
         keyEvent->matches(QKeySequence::MoveToEndOfDocument) ||
         keyEvent->matches(QKeySequence::SelectEndOfDocument)) {
         isKeyToUse = true;
+    } else {
+        const Qt::KeyboardModifiers shiftLessKeyModifiers = keyEvent->modifiers() & ~(Qt::KeypadModifier | Qt::GroupSwitchModifier | Qt::ShiftModifier);;
+        if (shiftLessKeyModifiers == (Qt::ControlModifier | Qt::AltModifier)) {
+            const int keyCode = keyEvent->key();
+            if ((keyCode == Qt::Key_Left) ||
+                (keyCode == Qt::Key_Right)) {
+                isKeyToUse = true;
+            }
+        }
     }
 
     if (isKeyToUse) {
@@ -152,9 +161,78 @@ bool KeyNavigator::handleKeyPress(QKeyEvent* keyEvent)
     } else if (keyEvent->matches(QKeySequence::SelectEndOfDocument)) {
         moveCursor(MoveEnd, Select);
         keyUsed = true;
+    } else {
+        const Qt::KeyboardModifiers keyModifiers = keyEvent->modifiers() & ~(Qt::KeypadModifier | Qt::GroupSwitchModifier);;
+
+        const Qt::KeyboardModifiers shiftLessKeyModifiers = keyModifiers & ~Qt::ShiftModifier;
+        if (shiftLessKeyModifiers == (Qt::ControlModifier | Qt::AltModifier)) {
+            const SelectAction selectAction = (keyModifiers & Qt::ShiftModifier) ? Select : Unselect;
+
+            switch (keyEvent->key()) {
+            case Qt::Key_Left:
+                moveCursor(MoveNonZeroBackward, selectAction);
+                keyUsed = true;
+                break;
+            case Qt::Key_Right:
+                moveCursor(MoveNonZeroForward, selectAction);
+                keyUsed = true;
+            default:
+                break;
+            }
+        }
     }
 
     return keyUsed ? true : AbstractController::handleKeyPress(keyEvent);
+}
+
+// following logic of TextByteArrayAnalyzer::indexOfPreviousWordStart(Address)
+Address indexOfPreviousNonZeroStart(AbstractByteArrayModel* byteArrayModel, Address index)
+{
+    const Size size = byteArrayModel->size();
+    // already at the start or can the result only be 0?
+    if (index == 0 || size < 3) {
+        return 0;
+    }
+
+    // search in two rounds: first for the next non-zero, than for the next zero
+    // after that return the index of the one before
+    bool lookingForFirstNonZero = false;
+    for (; index > 0; --index) {
+        const Byte byte = byteArrayModel->byte(index - 1);
+        if (byte != 0) {
+            if (!lookingForFirstNonZero) {
+                continue;
+            }
+            return index;
+        }
+        if (!lookingForFirstNonZero) {
+            lookingForFirstNonZero = true;
+        }
+    }
+
+    return 0;
+}
+
+// following logic of TextByteArrayAnalyzer::indexOfNextWordStart(Address)
+Address indexOfNextNonZeroStart(AbstractByteArrayModel* byteArrayModel, Address index)
+{
+    const Size size = byteArrayModel->size();
+    bool lookingForFirstNonZero = false;
+    for (; index < size; ++index) {
+        const Byte byte = byteArrayModel->byte(index);
+        if (byte != 0) {
+            if (!lookingForFirstNonZero) {
+                continue;
+            }
+            return index;
+        }
+        if (!lookingForFirstNonZero) {
+            lookingForFirstNonZero = true;
+        }
+    }
+
+    // if no more non-zero found, go to the end
+    return size;
 }
 
 void KeyNavigator::moveCursor(MoveAction action, SelectAction selectAction)
@@ -182,10 +260,20 @@ void KeyNavigator::moveCursor(MoveAction action, SelectAction selectAction)
         tableCursor->gotoIndex(newIndex);
         break;
     }
+    case MoveNonZeroBackward: {
+        const int newIndex = indexOfPreviousNonZeroStart(mView->byteArrayModel(), tableCursor->realIndex());
+        tableCursor->gotoIndex(newIndex);
+        break;
+    }
     case MoveForward:      tableCursor->gotoNextByte();     break;
     case MoveWordForward:  {
         const Okteta::TextByteArrayAnalyzer textAnalyzer(mView->byteArrayModel(), mView->charCodec());
         const int newIndex = textAnalyzer.indexOfNextWordStart(tableCursor->realIndex());
+        tableCursor->gotoCIndex(newIndex);
+        break;
+    }
+    case MoveNonZeroForward:  {
+        const int newIndex = indexOfNextNonZeroStart(mView->byteArrayModel(), tableCursor->realIndex());
         tableCursor->gotoCIndex(newIndex);
         break;
     }
