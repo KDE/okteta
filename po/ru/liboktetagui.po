@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-14 02:06+0000\n"
+"POT-Creation-Date: 2025-03-25 01:57+0000\n"
 "PO-Revision-Date: 2020-10-10 09:35+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -22,44 +22,44 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
-#: controller/clipboardcontroller.cpp:55
+#: controller/clipboardcontroller.cpp:78
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Copy"
 msgstr "&Копировать"
 
-#: controller/clipboardcontroller.cpp:65
+#: controller/clipboardcontroller.cpp:88
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Cu&t"
 msgstr "Вы&резать"
 
-#: controller/clipboardcontroller.cpp:72
+#: controller/clipboardcontroller.cpp:95
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Paste"
 msgstr "Вст&авить"
 
-#: controller/keynavigator.cpp:143
+#: controller/keynavigator.cpp:304
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Select &All"
 msgstr "Выделить &все"
 
-#: controller/undoredocontroller.cpp:64
+#: controller/undoredocontroller.cpp:83
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Undo"
 msgstr "&Отменить"
 
-#: controller/undoredocontroller.cpp:70
+#: controller/undoredocontroller.cpp:89
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Re&do"
 msgstr "&Повторить"
 
 # BUGME: где появляется эта строка? --aspotashev
-#: controller/valueeditor.cpp:158
+#: controller/valueeditor.cpp:239
 #, fuzzy, kde-format
 #| msgctxt "name of the change"
 #| msgid "Insert"
@@ -68,7 +68,7 @@ msgid "Insert"
 msgstr "вставка"
 
 # BUGME: где появляется эта строка? --aspotashev
-#: controller/valueeditor.cpp:200
+#: controller/valueeditor.cpp:278
 #, fuzzy, kde-format
 #| msgctxt "name of the change"
 #| msgid "Replace"

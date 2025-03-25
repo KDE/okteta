@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetagui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-14 02:06+0000\n"
+"POT-Creation-Date: 2025-03-25 01:57+0000\n"
 "PO-Revision-Date: 2019-02-25 00:30+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -17,43 +17,43 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: controller/clipboardcontroller.cpp:55
+#: controller/clipboardcontroller.cpp:78
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Copy"
 msgstr "&Copiar"
 
-#: controller/clipboardcontroller.cpp:65
+#: controller/clipboardcontroller.cpp:88
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Cu&t"
 msgstr "Cor&tar"
 
-#: controller/clipboardcontroller.cpp:72
+#: controller/clipboardcontroller.cpp:95
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Paste"
 msgstr "Co&lar"
 
-#: controller/keynavigator.cpp:143
+#: controller/keynavigator.cpp:304
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Select &All"
 msgstr "Seleccionar &Tudo"
 
-#: controller/undoredocontroller.cpp:64
+#: controller/undoredocontroller.cpp:83
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Undo"
 msgstr "&Desfazer"
 
-#: controller/undoredocontroller.cpp:70
+#: controller/undoredocontroller.cpp:89
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Re&do"
 msgstr "Re&fazer"
 
-#: controller/valueeditor.cpp:158
+#: controller/valueeditor.cpp:239
 #, fuzzy, kde-format
 #| msgctxt "name of the change"
 #| msgid "Insert"
@@ -61,7 +61,7 @@ msgctxt "@item name of the change"
 msgid "Insert"
 msgstr "Inserir"
 
-#: controller/valueeditor.cpp:200
+#: controller/valueeditor.cpp:278
 #, fuzzy, kde-format
 #| msgctxt "name of the change"
 #| msgid "Replace"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-14 02:06+0000\n"
+"POT-Creation-Date: 2025-03-25 01:57+0000\n"
 "PO-Revision-Date: 2019-02-23 21:22+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -18,43 +18,43 @@ msgstr ""
 "X-Generator: Lokalize 18.12.2\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: controller/clipboardcontroller.cpp:55
+#: controller/clipboardcontroller.cpp:78
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Copy"
 msgstr "複製(&C)"
 
-#: controller/clipboardcontroller.cpp:65
+#: controller/clipboardcontroller.cpp:88
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Cu&t"
 msgstr "剪下(&T)"
 
-#: controller/clipboardcontroller.cpp:72
+#: controller/clipboardcontroller.cpp:95
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Paste"
 msgstr "貼上(&P)"
 
-#: controller/keynavigator.cpp:143
+#: controller/keynavigator.cpp:304
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Select &All"
 msgstr "選取全部(&A)"
 
-#: controller/undoredocontroller.cpp:64
+#: controller/undoredocontroller.cpp:83
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Undo"
 msgstr "復原(&U)"
 
-#: controller/undoredocontroller.cpp:70
+#: controller/undoredocontroller.cpp:89
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Re&do"
 msgstr "重作(&D)"
 
-#: controller/valueeditor.cpp:158
+#: controller/valueeditor.cpp:239
 #, fuzzy, kde-format
 #| msgctxt "name of the change"
 #| msgid "Insert"
@@ -62,7 +62,7 @@ msgctxt "@item name of the change"
 msgid "Insert"
 msgstr "插入"
 
-#: controller/valueeditor.cpp:200
+#: controller/valueeditor.cpp:278
 #, fuzzy, kde-format
 #| msgctxt "name of the change"
 #| msgid "Replace"
