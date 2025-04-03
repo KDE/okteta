@@ -567,6 +567,7 @@ oktetakastencontrollers_add_sublibrary(view/viewcontextmenu
 oktetakastencontrollers_add_sublibrary(utils
     PRIVATE
         LabelledToolBarWidget
+        LabelledWidgetsToolBar
 )
 
 # create a static library for the unit tests. This means we don't have to compile the sources twice

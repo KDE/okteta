@@ -15,6 +15,7 @@
 #include "poddecodertool.hpp"
 // utils
 #include <labelledtoolbarwidget.hpp>
+#include <labelledwidgetstoolbar.hpp>
 // KF
 #include <kwidgetsaddons_version.h>
 #include <KComboBox>
@@ -77,7 +78,7 @@ PODTableView::PODTableView(PODDecoderTool* tool, QWidget* parent)
     baseLayout->addWidget(mPODTableView, 10);
 
     // settings
-    auto* settingsToolBar = new QToolBar(this);
+    auto* settingsToolBar = new LabelledWidgetsToolBar(this);
 
     mByteOrderSelection = new KComboBox(this);
     mByteOrderSelection->addItem(i18nc("@item:inlistbox", "Big-endian"));     // add first for index
