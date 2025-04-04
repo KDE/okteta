@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-07 03:30+0000\n"
+"POT-Creation-Date: 2025-04-04 03:35+0000\n"
 "PO-Revision-Date: 2024-03-30 19:46\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -769,14 +769,14 @@ msgid "Modular sum 8-bit"
 msgstr "8 位 Modular"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:28
-#: controllers/view/poddecoder/podtableview.cpp:83
+#: controllers/view/poddecoder/podtableview.cpp:84
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Big-endian"
 msgstr "高位优先"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:29
-#: controllers/view/poddecoder/podtableview.cpp:84
+#: controllers/view/poddecoder/podtableview.cpp:85
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Little-endian"
@@ -1129,19 +1129,19 @@ msgctxt "@info:tooltip for column Value"
 msgid "The value of the bytes for the datatype"
 msgstr "数据类型的字节值"
 
-#: controllers/view/poddecoder/podtableview.cpp:90
+#: controllers/view/poddecoder/podtableview.cpp:91
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte order to use for decoding the bytes."
 msgstr "用于字节解码的字节顺序。"
 
-#: controllers/view/poddecoder/podtableview.cpp:94
+#: controllers/view/poddecoder/podtableview.cpp:95
 #, kde-format
 msgctxt "@option:check"
 msgid "Unsigned as hexadecimal:"
 msgstr "将无符号数显示为十六进制数："
 
-#: controllers/view/poddecoder/podtableview.cpp:103
+#: controllers/view/poddecoder/podtableview.cpp:104
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1149,7 +1149,7 @@ msgid ""
 "hexadecimal instead of as decimal."
 msgstr "设定是否将无符号整型值按十六进制显示，而非按十进制显示。"
 
-#: controllers/view/poddecoder/podtableview.cpp:139
+#: controllers/view/poddecoder/podtableview.cpp:140
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1159,19 +1159,19 @@ msgstr ""
 "新的值需要<emphasis>更少</emphasis>的字节数(从 %2 缩小为 %1)。<nl/>是保留未使"
 "用的字节还是移除他们？"
 
-#: controllers/view/poddecoder/podtableview.cpp:144
+#: controllers/view/poddecoder/podtableview.cpp:145
 #, kde-format
 msgctxt "@action:button keep the unused bytes"
 msgid "&Keep"
 msgstr "保留(&K)"
 
-#: controllers/view/poddecoder/podtableview.cpp:147
+#: controllers/view/poddecoder/podtableview.cpp:148
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Keep the unused bytes with their old values."
 msgstr "保留未使用的字节为其原值。"
 
-#: controllers/view/poddecoder/podtableview.cpp:160
+#: controllers/view/poddecoder/podtableview.cpp:161
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1181,7 +1181,7 @@ msgstr ""
 "新的值需要<emphasis>更多</emphasis>的字节数(从 %2 增加到 %1)。<nl/>要覆盖后面"
 "的字节还是按需插入新字节？"
 
-#: controllers/view/poddecoder/podtableview.cpp:256
+#: controllers/view/poddecoder/podtableview.cpp:257
 #: controllers/view/selectrange/selectrangeview.cpp:139
 #: controllers/view/structures/structureview.cpp:334
 #, kde-format
