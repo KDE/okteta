@@ -24,6 +24,9 @@ public:
     LabelledToolBarWidget(QLabel* label,
                           QWidget* widget,
                           QWidget* parent);
+
+public:
+    void setHasLabelMargin(bool hasLabelMargin);
 };
 
 }

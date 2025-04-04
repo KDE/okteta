@@ -748,6 +748,7 @@ oktetakastencontrollers_library_sources(utils
     BUILD_INCLUDEDIR
     PRIVATE
         LabelledToolBarWidget
+        LabelledWidgetsToolBar
 )
 
 install(FILES view/structures/kns/okteta-structures.knsrc  DESTINATION ${KDE_INSTALL_KNSRCDIR})

@@ -15,6 +15,7 @@
 #include "poddecodertool.hpp"
 // utils
 #include <labelledtoolbarwidget.hpp>
+#include <labelledwidgetstoolbar.hpp>
 // Kasten core
 #include <Kasten/AbstractUserMessagesHandler>
 #include <Kasten/UserResponseOption>
@@ -81,7 +82,7 @@ PODTableView::PODTableView(PODDecoderTool* tool, AbstractUserMessagesHandler* us
     baseLayout->addWidget(mPODTableView, 10);
 
     // settings
-    auto* settingsToolBar = new QToolBar(this);
+    auto* settingsToolBar = new LabelledWidgetsToolBar(this);
 
     mByteOrderSelection = new KComboBox(this);
     mByteOrderSelection->addItem(i18nc("@item:inlistbox", "Big-endian"));     // add first for index

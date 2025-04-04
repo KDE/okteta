@@ -9,6 +9,7 @@
 #include "labelledtoolbarwidget.hpp"
 
 // Qt
+#include <QStyle>
 #include <QLabel>
 #include <QHBoxLayout>
 
@@ -28,6 +29,15 @@ LabelledToolBarWidget::LabelledToolBarWidget(QLabel* label,
     layout->addWidget(widget);
 
     setLayout(layout);
+}
+
+void LabelledToolBarWidget::setHasLabelMargin(bool hasLabelMargin)
+{
+    const int labelMargin = hasLabelMargin ? style()->pixelMetric(QStyle::PM_ButtonMargin) : 0;
+    const bool isLTR = (parentWidget()->layoutDirection() == Qt::LeftToRight);
+    const int leftMargin = isLTR ? labelMargin : 0;
+    const int rightMargin = isLTR ? 0 : labelMargin;
+    layout()->setContentsMargins(leftMargin, 0, rightMargin, 0);
 }
 
 }
