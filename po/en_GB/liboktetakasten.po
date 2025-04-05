@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-09 01:54+0000\n"
+"POT-Creation-Date: 2025-04-05 02:01+0000\n"
 "PO-Revision-Date: 2024-11-01 14:15+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -888,14 +888,14 @@ msgid "Modular sum 8-bit"
 msgstr "Modular sum 8-bit"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:28
-#: controllers/view/poddecoder/podtableview.cpp:87
+#: controllers/view/poddecoder/podtableview.cpp:88
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Big-endian"
 msgstr "Big-endian"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:29
-#: controllers/view/poddecoder/podtableview.cpp:88
+#: controllers/view/poddecoder/podtableview.cpp:89
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Little-endian"
@@ -1391,19 +1391,19 @@ msgctxt "@info:tooltip for column Value"
 msgid "The value of the bytes for the datatype"
 msgstr "The value of the bytes for the datatype"
 
-#: controllers/view/poddecoder/podtableview.cpp:94
+#: controllers/view/poddecoder/podtableview.cpp:95
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte order to use for decoding the bytes."
 msgstr "The byte order to use for decoding the bytes."
 
-#: controllers/view/poddecoder/podtableview.cpp:98
+#: controllers/view/poddecoder/podtableview.cpp:99
 #, kde-format
 msgctxt "@option:check"
 msgid "Unsigned as hexadecimal:"
 msgstr "Unsigned as hexadecimal:"
 
-#: controllers/view/poddecoder/podtableview.cpp:107
+#: controllers/view/poddecoder/podtableview.cpp:108
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1413,7 +1413,7 @@ msgstr ""
 "Sets whether the values of the unsigned integer types are shown as "
 "hexadecimal instead of as decimal."
 
-#: controllers/view/poddecoder/podtableview.cpp:137
+#: controllers/view/poddecoder/podtableview.cpp:138
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1423,19 +1423,19 @@ msgstr ""
 "The new value needs <emphasis>fewer</emphasis> bytes (%1 instead of %2).<nl/"
 ">Keep the unused bytes or remove them?"
 
-#: controllers/view/poddecoder/podtableview.cpp:142
+#: controllers/view/poddecoder/podtableview.cpp:143
 #, kde-format
 msgctxt "@action:button keep the unused bytes"
 msgid "&Keep"
 msgstr "&Keep"
 
-#: controllers/view/poddecoder/podtableview.cpp:145
+#: controllers/view/poddecoder/podtableview.cpp:146
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Keep the unused bytes with their old values."
 msgstr "Keep the unused bytes with their old values."
 
-#: controllers/view/poddecoder/podtableview.cpp:162
+#: controllers/view/poddecoder/podtableview.cpp:163
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1445,14 +1445,14 @@ msgstr ""
 "The new value needs <emphasis>more</emphasis> bytes (%1 instead of %2).<nl/"
 ">Overwrite the following bytes or insert new ones as needed?"
 
-#: controllers/view/poddecoder/podtableview.cpp:256
+#: controllers/view/poddecoder/podtableview.cpp:257
 #: controllers/view/structures/structureview.cpp:353
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit"
 msgstr "Edit"
 
-#: controllers/view/poddecoder/podtableview.cpp:270
+#: controllers/view/poddecoder/podtableview.cpp:271
 #: controllers/view/selectrange/selectrangeview.cpp:125
 #: controllers/view/structures/structureview.cpp:368
 #, kde-format

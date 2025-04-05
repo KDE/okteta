@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: khexedit\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-09 01:54+0000\n"
+"POT-Creation-Date: 2025-04-05 02:01+0000\n"
 "PO-Revision-Date: 2022-10-12 16:05+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -921,14 +921,14 @@ msgid "Modular sum 8-bit"
 msgstr "8-битная модульная сумма"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:28
-#: controllers/view/poddecoder/podtableview.cpp:87
+#: controllers/view/poddecoder/podtableview.cpp:88
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Big-endian"
 msgstr "От старшего к младшему"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:29
-#: controllers/view/poddecoder/podtableview.cpp:88
+#: controllers/view/poddecoder/podtableview.cpp:89
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Little-endian"
@@ -1436,19 +1436,19 @@ msgctxt "@info:tooltip for column Value"
 msgid "The value of the bytes for the datatype"
 msgstr "Значение байтов для соответствующего типа"
 
-#: controllers/view/poddecoder/podtableview.cpp:94
+#: controllers/view/poddecoder/podtableview.cpp:95
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte order to use for decoding the bytes."
 msgstr "Порядок байтов для декодирования."
 
-#: controllers/view/poddecoder/podtableview.cpp:98
+#: controllers/view/poddecoder/podtableview.cpp:99
 #, kde-format
 msgctxt "@option:check"
 msgid "Unsigned as hexadecimal:"
 msgstr "Беззнаковые как шестнадцатеричные:"
 
-#: controllers/view/poddecoder/podtableview.cpp:107
+#: controllers/view/poddecoder/podtableview.cpp:108
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1458,7 +1458,7 @@ msgstr ""
 "Определяет, будут ли значения беззнаковых целых чисел отображаться как "
 "шестнадцатеричные вместо десятичных."
 
-#: controllers/view/poddecoder/podtableview.cpp:137
+#: controllers/view/poddecoder/podtableview.cpp:138
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1468,19 +1468,19 @@ msgstr ""
 "Для нового значения необходимо <emphasis>меньше</emphasis> байтов (%1 вместо "
 "of %2).<nl/>Сохранить или удалить неиспользуемые байты?"
 
-#: controllers/view/poddecoder/podtableview.cpp:142
+#: controllers/view/poddecoder/podtableview.cpp:143
 #, kde-format
 msgctxt "@action:button keep the unused bytes"
 msgid "&Keep"
 msgstr "&Сохранить"
 
-#: controllers/view/poddecoder/podtableview.cpp:145
+#: controllers/view/poddecoder/podtableview.cpp:146
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Keep the unused bytes with their old values."
 msgstr "Сохранить неиспользуемые байты с их старыми значениями."
 
-#: controllers/view/poddecoder/podtableview.cpp:162
+#: controllers/view/poddecoder/podtableview.cpp:163
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1490,7 +1490,7 @@ msgstr ""
 "Для нового значения необходимо <emphasis>больше</emphasis> байтов (%1 вместо "
 "%2).<nl/>Заменить следующие байты или вставить новые в случае необходимости?"
 
-#: controllers/view/poddecoder/podtableview.cpp:256
+#: controllers/view/poddecoder/podtableview.cpp:257
 #: controllers/view/structures/structureview.cpp:353
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
@@ -1499,7 +1499,7 @@ msgctxt "@action:inmenu"
 msgid "Edit"
 msgstr "&Изменить..."
 
-#: controllers/view/poddecoder/podtableview.cpp:270
+#: controllers/view/poddecoder/podtableview.cpp:271
 #: controllers/view/selectrange/selectrangeview.cpp:125
 #: controllers/view/structures/structureview.cpp:368
 #, kde-format
