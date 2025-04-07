@@ -1,14 +1,14 @@
 # Translation of okteta to Korean.
 # Copyright (C) 2008 This_file_is_part_of_KDE
 # This file is distributed under the same license as the kdeutils package.
-# Shinjo Park <kde@peremen.name>, 2008, 2009, 2010, 2011, 2014, 2015, 2017, 2018, 2019, 2020, 2021.
+# SPDX-FileCopyrightText: 2008, 2009, 2010, 2011, 2014, 2015, 2017, 2018, 2019, 2020, 2021, 2025 Shinjo Park <kde@peremen.name>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-14 02:06+0000\n"
-"PO-Revision-Date: 2021-05-16 22:57+0200\n"
+"PO-Revision-Date: 2025-04-07 00:07+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 20.12.3\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -34,52 +34,43 @@ msgid "Okteta"
 msgstr "Okteta"
 
 #: about.cpp:19
-#, fuzzy, kde-format
-#| msgid "Hex editor"
+#, kde-format
 msgctxt "@info"
 msgid "Hex editor"
 msgstr "16진수 편집기"
 
 #: about.cpp:21
-#, fuzzy, kde-format
-#| msgid "2006-%1 Friedrich W. H. Kossebau"
+#, kde-format
 msgctxt "@info"
 msgid "2006-%1 Friedrich W. H. Kossebau"
 msgstr "2006-%1 Friedrich W. H. Kossebau"
 
 #: about.cpp:22
-#, fuzzy, kde-format
-#| msgid "Edit the raw data of files"
+#, kde-format
 msgctxt "@info"
 msgid "Edit the raw data of files"
 msgstr "파일의 데이터를 곧바로 편집합니다"
 
 #: about.cpp:27
-#, fuzzy, kde-format
-#| msgid "Friedrich W. H. Kossebau"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Friedrich W. H. Kossebau"
 msgstr "Friedrich W. H. Kossebau"
 
 #: about.cpp:28
-#, fuzzy, kde-format
-#| msgid "Author"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Author"
 msgstr "작성자"
 
 #: about.cpp:30
-#, fuzzy, kde-format
-#| msgctxt "Author"
-#| msgid "Alexander Richardson"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Alexander Richardson"
 msgstr "Alexander Richardson"
 
 #: about.cpp:31
-#, fuzzy, kde-format
-#| msgctxt "Task description"
-#| msgid "Structures tool"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Structures tool"
 msgstr "구조체 도구"
@@ -104,8 +95,7 @@ msgid "Main Toolbar"
 msgstr "주 도구 모음"
 
 #: program.cpp:89
-#, fuzzy, kde-format
-#| msgid "File(s) to load."
+#, kde-format
 msgctxt "@info"
 msgid "File(s) to load."
 msgstr "불러올 파일입니다."
