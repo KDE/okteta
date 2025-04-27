@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-05 02:01+0000\n"
-"PO-Revision-Date: 2024-07-07 10:30+0200\n"
+"PO-Revision-Date: 2025-04-26 10:14+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.5\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -36,50 +36,43 @@ msgid "File Info"
 msgstr "ფაილის ინფორმაცია"
 
 #: controllers/document/info/documentinfoview.cpp:67
-#, fuzzy, kde-format
-#| msgid "Type:"
+#, kde-format
 msgctxt "@label"
 msgid "Type:"
 msgstr "ტიპი:"
 
 #: controllers/document/info/documentinfoview.cpp:81
-#, fuzzy, kde-format
-#| msgid "Location:"
+#, kde-format
 msgctxt "@label"
 msgid "Location:"
 msgstr "მდებარეობა:"
 
 #: controllers/document/info/documentinfoview.cpp:86
-#, fuzzy, kde-format
-#| msgid "Size:"
+#, kde-format
 msgctxt "@label"
 msgid "Size:"
 msgstr "ზომა:"
 
 #: controllers/document/info/documentinfoview.cpp:89
-#, fuzzy, kde-format
-#| msgid "Created/Loaded:"
+#, kde-format
 msgctxt "@label"
 msgid "Created/Loaded:"
 msgstr "შეიქმნა/ჩაიტვირთა:"
 
 #: controllers/document/info/documentinfoview.cpp:93
-#, fuzzy, kde-format
-#| msgid "Last modified:"
+#, kde-format
 msgctxt "@label"
 msgid "Last modified:"
 msgstr "ბოლო ცვლილება:"
 
 #: controllers/document/info/documentinfoview.cpp:97
-#, fuzzy, kde-format
-#| msgid "Last synchronized:"
+#, kde-format
 msgctxt "@label"
 msgid "Last synchronized:"
 msgstr "ბოლო სინქრონიზაცია:"
 
 #: controllers/document/info/documentinfoview.cpp:104
-#, fuzzy, kde-format
-#| msgid "Created:"
+#, kde-format
 msgctxt "@label"
 msgid "Created:"
 msgstr "შექმნილია:"
@@ -112,7 +105,7 @@ msgstr "სათაური"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Bookmark"
-msgstr "სანიშნეების ამოღება"
+msgstr "სანიშნეს წაშლა"
 
 #: controllers/view/bookmarks/bookmarkscontroller.cpp:59
 #, kde-format
@@ -143,7 +136,7 @@ msgstr "%1: %2"
 #, kde-format
 msgctxt "default name of a bookmark"
 msgid "Bookmark"
-msgstr "სანიშნი"
+msgstr "სანიშნე"
 
 #: controllers/view/bookmarks/bookmarkstool.cpp:38
 #: controllers/view/bookmarks/bookmarkstoolviewfactory.cpp:24
@@ -153,12 +146,10 @@ msgid "Bookmarks"
 msgstr "სანიშნები"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:61
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Bookmarks"
+#, kde-format
 msgctxt "@info"
 msgid "No bookmarks"
-msgstr "სანიშნები"
+msgstr "სანიშნეების გარეშე"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:87
 #, kde-format
@@ -300,9 +291,7 @@ msgid "Value/Char Table"
 msgstr "მნიშვნელობა/სიმბოლოს ცხრილი"
 
 #: controllers/view/bytetable/bytetabletool.cpp:96
-#, fuzzy, kde-format
-#| msgid "Inserted 1 Byte"
-#| msgid_plural "Inserted %1 Bytes"
+#, kde-format
 msgctxt "@item"
 msgid "Inserted 1 Byte"
 msgid_plural "Inserted %1 Bytes"
@@ -310,15 +299,12 @@ msgstr[0] "ჩასმულია 1 ბაიტი"
 msgstr[1] "ჩასმულია %1 ბაიტი"
 
 #: controllers/view/bytetable/bytetabletool.cpp:114
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "1 byte converted."
-#| msgid_plural "%1 bytes converted."
+#, kde-format
 msgctxt "@info"
 msgid "1 byte inserted."
 msgid_plural "%1 bytes inserted."
-msgstr[0] "გადაყვანილია 1 ბაიტი."
-msgstr[1] "გადაყვანილია %1 ბაიტი."
+msgstr[0] "ჩასმულია 1 ბაიტი."
+msgstr[1] "ჩასმულია %1 ბაიტი."
 
 #: controllers/view/bytetable/bytetableview.cpp:74
 #, kde-format
@@ -348,9 +334,7 @@ msgid "Charset Conversion"
 msgstr "სიმბოლოების კოდირების გადაყვანა"
 
 #: controllers/view/charsetconversion/charsetconversiontool.cpp:304
-#, fuzzy, kde-format
-#| msgctxt "Converted from charset 1 to charset 2"
-#| msgid "%1 to %2"
+#, kde-format
 msgctxt "@item Converted from charset 1 to charset 2"
 msgid "%1 to %2"
 msgstr "%1-დან %2-მდე"
@@ -445,11 +429,10 @@ msgid ""
 msgstr ""
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:170
-#, fuzzy, kde-format
-#| msgid "Con&vert"
+#, kde-format
 msgctxt "@action:button"
 msgid "Convert"
-msgstr "&გადაყვანა"
+msgstr "გადაყვანა"
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:173
 #, kde-format
@@ -551,13 +534,13 @@ msgstr ""
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Crop"
-msgstr ""
+msgstr "ამოჭრა"
 
 #: controllers/view/crop/cropcontroller.cpp:96
 #, kde-format
 msgctxt "@item name of the change"
 msgid "Crop"
-msgstr ""
+msgstr "ამოჭრა"
 
 #: controllers/view/filter/filtertool.cpp:63
 #: controllers/view/filter/filtertoolviewfactory.cpp:24
@@ -745,7 +728,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy"
-msgstr ""
+msgstr "კოპირება"
 
 #: controllers/view/info/infoview.cpp:121
 #, kde-format
@@ -878,12 +861,10 @@ msgstr ""
 
 #: controllers/view/libbytearraychecksum/algorithm/nobytearraychecksumparametersetedit.cpp:25
 #: controllers/view/libbytearrayfilter/filter/nobytearrayfilterparametersetedit.cpp:25
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "Parameters"
+#, kde-format
 msgctxt "@info"
 msgid "No parameters"
-msgstr "პარამეტრები"
+msgstr "პარამეტრების გარეშე"
 
 #: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:48
 #, kde-format
@@ -1307,17 +1288,13 @@ msgid "Decoding Table"
 msgstr "ცხრილის დეკოდირება"
 
 #: controllers/view/poddecoder/poddecodertool.cpp:309
-#, fuzzy, kde-format
-#| msgctxt "Edited as %datatype"
-#| msgid "Edited as %1"
+#, kde-format
 msgctxt "@item Edited as datatype"
 msgid "Edited as %1"
 msgstr "ჩასწორდა, როგორც %1"
 
 #: controllers/view/poddecoder/poddecodertool.cpp:318
-#, fuzzy, kde-format
-#| msgctxt "Edited as %datatype"
-#| msgid "Edited as %1"
+#, kde-format
 msgctxt "@info Edited as datatype"
 msgid "Edited as %1"
 msgstr "ჩასწორდა, როგორც %1"
@@ -1709,12 +1686,10 @@ msgid "Enter a term to limit the list."
 msgstr ""
 
 #: controllers/view/stringsextract/stringsextractview.cpp:140
-#, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to extract strings"
-#| msgid "Strings"
+#, kde-format
 msgctxt "@info"
 msgid "No strings"
-msgstr "სტრიქონები"
+msgstr "სტრიქონების გარეშე"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:161
 #, kde-format
@@ -1731,11 +1706,10 @@ msgid ""
 msgstr ""
 
 #: controllers/view/stringsextract/stringsextractview.cpp:172
-#, fuzzy, kde-format
-#| msgid "&Show"
+#, kde-format
 msgctxt "@action:button"
 msgid "Show"
-msgstr "&ჩვენება"
+msgstr "ჩვენება"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:175
 #, kde-format
@@ -1752,12 +1726,10 @@ msgid ""
 msgstr ""
 
 #: controllers/view/stringsextract/stringsextractview.cpp:279
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "No bytes converted."
+#, kde-format
 msgctxt "@info"
 msgid "No strings extracted."
-msgstr "ბაიტები არ გადაყვანილა."
+msgstr "სტრიქონები არ ამომიღია."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:280
 #, kde-format
@@ -2466,11 +2438,10 @@ msgid "Size"
 msgstr "ზომა"
 
 #: controllers/view/structures/structureview.cpp:91
-#, fuzzy, kde-format
-#| msgid "Structure Definitions"
+#, kde-format
 msgctxt "@info"
 msgid "No structure definitions"
-msgstr "სტრუქტურის აღწერები"
+msgstr "სტრუქტურის აღწერების გარეშე"
 
 #: controllers/view/structures/structureview.cpp:111
 #, kde-format
@@ -2509,15 +2480,13 @@ msgid "Open settings."
 msgstr "პარამეტრების გახსნა."
 
 #: controllers/view/structures/structureview.cpp:174
-#, fuzzy, kde-format
-#| msgid "Value Display"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Value Display"
 msgstr "მნიშვნელობის ჩვენება"
 
 #: controllers/view/structures/structureview.cpp:186
-#, fuzzy, kde-format
-#| msgid "Structures management"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Structures management"
 msgstr "სტრუქტურების მართვა"
@@ -2765,33 +2734,28 @@ msgstr "ცვლილებების დაბრუნება"
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:184
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:180
-#, fuzzy, kde-format
-#| msgctxt "@window:title"
-#| msgid "New View Profile"
+#, kde-format
 msgctxt "@title:window"
 msgid "New View Profile"
-msgstr "ახალი პროფილის ნახვა"
+msgstr "ახალი ხედის პროფილი"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:55
-#, fuzzy, kde-format
-#| msgid "Title:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Title:"
 msgstr "სათაური:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:59
-#, fuzzy, kde-format
-#| msgid "Display"
+#, kde-format
 msgctxt "@title:group"
 msgid "Display"
-msgstr "ეკრანი"
+msgstr "ჩვენება"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:63
-#, fuzzy, kde-format
-#| msgid "Show Line Offset:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show line offset:"
-msgstr "ხაზის &წანაცვლების ჩვენება:"
+msgstr "ხაზის წანაცვლების ჩვენება:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:67
 #, kde-format
@@ -2812,42 +2776,34 @@ msgid "Octal"
 msgstr "რვაობითი"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:72
-#, fuzzy, kde-format
-#| msgctxt "@title:menu"
-#| msgid "&Offset Coding"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Offset coding:"
-msgstr "&წანაცვლებული კოდირება"
+msgstr "წანაცვლებული კოდირება:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:76
-#, fuzzy, kde-format
-#| msgid "Values"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Values"
 msgstr "მნიშვნელობები"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:77
-#, fuzzy, kde-format
-#| msgid "Chars"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Chars"
 msgstr "სიმბოლოები"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:78
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu"
-#| msgid "Values && Chars"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Values & Chars"
-msgstr "&მნიშვნელობები და სიმბოლოები"
+msgstr "მნიშვნელობები და სიმბოლოები"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:81
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu"
-#| msgid "Values && Chars"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show values or chars:"
-msgstr "&მნიშვნელობები და სიმბოლოები"
+msgstr "მნიშვნელობების ან სიმბოლოების ჩვენება:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:85
 #, kde-format
@@ -2856,24 +2812,19 @@ msgid "Show with rows or columns:"
 msgstr ""
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:88
-#, fuzzy, kde-format
-#| msgctxt "@item:"
-#| msgid "Columns"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Columns"
 msgstr "სვეტები"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:89
-#, fuzzy, kde-format
-#| msgctxt "@item:"
-#| msgid "Rows"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Rows"
-msgstr "სტრიქონები"
+msgstr "მწკრივები"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:96
-#, fuzzy, kde-format
-#| msgid "Layout"
+#, kde-format
 msgctxt "@title:group"
 msgid "Layout"
 msgstr "განლაგება"
@@ -2907,32 +2858,25 @@ msgid "Break lines:"
 msgstr ""
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:115
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "No grouping."
+#, kde-format
 msgctxt "@item"
 msgid "No Grouping"
-msgstr "დაჯგუფების გარეშე."
+msgstr "დაჯგუფების გარეშე"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:119
-#, fuzzy, kde-format
-#| msgctxt "@label:spinbox number of bytes which are grouped"
-#| msgid "Bytes per Group:"
+#, kde-format
 msgctxt "@label:spinbox number of bytes which are grouped"
 msgid "Bytes per group:"
 msgstr "ბაიტები თითოეულ ჯგუფში:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:126
-#, fuzzy, kde-format
-#| msgctxt "@label:spinbox number of bytes which are shown per line"
-#| msgid "Bytes per Line:"
+#, kde-format
 msgctxt "@label:spinbox number of bytes which are shown per line"
 msgid "Bytes per line:"
 msgstr "ბაიტები თითოეულ ხაზზე:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:131
-#, fuzzy, kde-format
-#| msgid "Values"
+#, kde-format
 msgctxt "@title:group"
 msgid "Values"
 msgstr "მნიშვნელობები"
@@ -2972,15 +2916,13 @@ msgstr "ბინარული"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:146
 #: controllers/view/viewprofiles/viewprofileedit.cpp:155
-#, fuzzy, kde-format
-#| msgid "Coding:"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Coding:"
 msgstr "კოდირება:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:150
-#, fuzzy, kde-format
-#| msgid "Chars"
+#, kde-format
 msgctxt "@title:group"
 msgid "Chars"
 msgstr "სიმბოლოები"
@@ -3096,9 +3038,7 @@ msgid "Modification of %1"
 msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:211
-#, fuzzy, kde-format
-#| msgctxt "@window:title"
-#| msgid "\"%1\" View Profile"
+#, kde-format
 msgctxt "@title:window"
 msgid "\"%1\" View Profile"
 msgstr "\"%1\" პროფილის ნახვა"
@@ -3227,11 +3167,10 @@ msgid "Pattern…"
 msgstr "შაბლონი…"
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:148
-#, fuzzy, kde-format
-#| msgid "Pattern inserted."
+#, kde-format
 msgctxt "@item"
 msgid "Pattern Inserted"
-msgstr "ნიმუში ჩასმულია."
+msgstr "ნიმუში ჩასმულია"
 
 #: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:35
 #, kde-format
@@ -3271,11 +3210,10 @@ msgid "Random Data…"
 msgstr "შემთხვევითი მონაცემები…"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:88
-#, fuzzy, kde-format
-#| msgid "RandomData inserted."
+#, kde-format
 msgctxt "@item"
 msgid "RandomData Inserted"
-msgstr "შემთხვევითი მონაცემები ჩასმულია."
+msgstr "შემთხვევითი მონაცემები ჩასმულია"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatageneratorconfigeditor.cpp:33
 #, kde-format
@@ -3302,11 +3240,10 @@ msgid "Sequence"
 msgstr "მიმდევრობა"
 
 #: gui/io/generator/sequence/bytearraysequencegenerator.cpp:58
-#, fuzzy, kde-format
-#| msgid "Sequence inserted."
+#, kde-format
 msgctxt "@item"
 msgid "Sequence Inserted"
-msgstr "მიმდევრომა ჩასმულია."
+msgstr "მიმდევრომა ჩასმულია"
 
 #: gui/io/streamencoder/base32/bytearraybase32streamencoder.cpp:131
 #, kde-format
