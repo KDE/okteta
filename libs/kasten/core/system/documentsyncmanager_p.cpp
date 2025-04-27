@@ -117,6 +117,9 @@ bool DocumentSyncManagerPrivate::setSynchronizer(AbstractDocument* document)
         saveAsFileDialog->setMimeTypeFilters(supportedRemoteTypes());
         saveAsFileDialog->setAcceptMode(QFileDialog::AcceptSave);
         saveAsFileDialog->setOption(QFileDialog::DontConfirmOverwrite);
+        if (currentSynchronizer) {
+            saveAsFileDialog->selectUrl(currentSynchronizer->url());
+        }
 
         if (saveAsFileDialog->exec() == QDialog::Rejected) {
             break;
