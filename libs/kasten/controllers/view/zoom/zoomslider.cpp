@@ -80,6 +80,8 @@ ZoomSlider::ZoomSlider(QWidget* parent)
 
     setFixedWidth(ZoomSliderWidth);
     clearDisplay();
+    // default value not changed by now, so need to explicitly set tooltip
+    updateToolTip(mSlider->value());
 }
 
 ZoomSlider::~ZoomSlider() = default;

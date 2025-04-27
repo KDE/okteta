@@ -25,6 +25,7 @@
 #include <KJobWidgets>
 #include <KLocalizedString>
 // Qt
+#include <QApplication>
 #include <QUrl>
 #include <QFileDialog>
 #include <QPointer>
@@ -109,10 +110,13 @@ bool DocumentSyncManagerPrivate::setSynchronizer(AbstractDocument* document)
     const QString processTitle =
         i18nc("@title:window", "Save As");
     do {
-        QPointer<QFileDialog> saveAsFileDialog = new QFileDialog(/*mWidget*/ nullptr, processTitle, /*mWorkingUrl.url()*/ QString());
+        QPointer<QFileDialog> saveAsFileDialog = new QFileDialog(QApplication::activeWindow(), processTitle);
         saveAsFileDialog->setMimeTypeFilters(supportedRemoteTypes());
         saveAsFileDialog->setAcceptMode(QFileDialog::AcceptSave);
         saveAsFileDialog->setOption(QFileDialog::DontConfirmOverwrite);
+        if (currentSynchronizer) {
+            saveAsFileDialog->selectUrl(currentSynchronizer->url());
+        }
 
         if (saveAsFileDialog->exec() == QDialog::Rejected) {
             break;
