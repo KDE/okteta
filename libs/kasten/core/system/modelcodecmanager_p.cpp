@@ -21,6 +21,7 @@
 #include <KJobWidgets>
 #include <KLocalizedString>
 // Qt
+#include <QApplication>
 #include <QFileDialog>
 #include <QPointer>
 #include <QUrl>
@@ -101,7 +102,7 @@ void ModelCodecManagerPrivate::exportDocument(AbstractModelExporter* exporter,
     const QString dialogTitle =
         i18nc("@title:window", "Export");
     do {
-        QPointer<QFileDialog> exportFileDialog = new QFileDialog(/*mWidget*/ nullptr, dialogTitle);
+        QPointer<QFileDialog> exportFileDialog = new QFileDialog(QApplication::activeWindow(), dialogTitle);
 
         exportFileDialog->setAcceptMode(QFileDialog::AcceptSave);
         exportFileDialog->setOption(QFileDialog::DontConfirmOverwrite);
