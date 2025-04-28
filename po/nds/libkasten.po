@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-07 03:30+0000\n"
+"POT-Creation-Date: 2025-04-28 03:27+0000\n"
 "PO-Revision-Date: 2010-04-11 06:23+0200\n"
 "Last-Translator: Manfred Wiese <m.j.wiese@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -229,7 +229,7 @@ msgid "Not available."
 msgstr "Nich verföögbor"
 
 #: controllers/io/export/exportdialog.cpp:40
-#: core/system/modelcodecmanager_p.cpp:102
+#: core/system/modelcodecmanager_p.cpp:103
 #, kde-format
 msgctxt "@title:window"
 msgid "Export"
@@ -388,31 +388,31 @@ msgstr "Op Hööchd &topassen"
 msgid "&Fit to Size"
 msgstr "Op Grött &topassen"
 
-#: controllers/view/zoom/zoomslider.cpp:150
+#: controllers/view/zoom/zoomslider.cpp:152
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Zoom: %1%"
 msgstr "Ansichtgrött: %1%"
 
-#: core/system/documentsyncmanager_p.cpp:114
+#: core/system/documentsyncmanager_p.cpp:115
 #, kde-format
 msgctxt "@title:window"
 msgid "Save As"
 msgstr "Sekern as"
 
-#: core/system/documentsyncmanager_p.cpp:213
+#: core/system/documentsyncmanager_p.cpp:217
 #, kde-format
 msgctxt "@title:window"
 msgid "Close"
 msgstr "Tomaken"
 
-#: core/system/documentsyncmanager_p.cpp:248
+#: core/system/documentsyncmanager_p.cpp:252
 #, kde-format
 msgctxt "@title:window"
 msgid "Reload"
 msgstr "Nieg laden"
 
-#: core/system/modelcodecmanager_p.cpp:112
+#: core/system/modelcodecmanager_p.cpp:113
 #, kde-format
 msgctxt "@action:button"
 msgid "&Export"
