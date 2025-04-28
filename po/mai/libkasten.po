@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-07 02:00+0000\n"
+"POT-Creation-Date: 2025-04-28 01:58+0000\n"
 "PO-Revision-Date: 2010-09-24 20:23+0530\n"
 "Last-Translator: Rajesh Ranjan <rajesh672@gmail.com>\n"
 "Language-Team: Maithili <bhashaghar@googlegroups.com>\n"
@@ -232,7 +232,7 @@ msgid "Not available."
 msgstr "उपलब्ध नहि"
 
 #: controllers/io/export/exportdialog.cpp:40
-#: core/system/modelcodecmanager_p.cpp:125
+#: core/system/modelcodecmanager_p.cpp:126
 #, kde-format
 msgctxt "@title:window"
 msgid "Export"
@@ -380,31 +380,31 @@ msgstr ""
 msgid "&Fit to Size"
 msgstr ""
 
-#: controllers/view/zoom/zoomslider.cpp:145
+#: controllers/view/zoom/zoomslider.cpp:147
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Zoom: %1%"
 msgstr ""
 
-#: core/system/documentsyncmanager_p.cpp:110
+#: core/system/documentsyncmanager_p.cpp:111
 #, kde-format
 msgctxt "@title:window"
 msgid "Save As"
 msgstr "एहिना सहेजू"
 
-#: core/system/documentsyncmanager_p.cpp:209
+#: core/system/documentsyncmanager_p.cpp:213
 #, kde-format
 msgctxt "@title:window"
 msgid "Close"
 msgstr "बन्न करू"
 
-#: core/system/documentsyncmanager_p.cpp:244
+#: core/system/documentsyncmanager_p.cpp:248
 #, kde-format
 msgctxt "@title:window"
 msgid "Reload"
 msgstr "पुनः लोड करू"
 
-#: core/system/modelcodecmanager_p.cpp:135
+#: core/system/modelcodecmanager_p.cpp:136
 #, kde-format
 msgctxt "@action:button"
 msgid "&Export"

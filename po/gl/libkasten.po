@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-07 02:00+0000\n"
+"POT-Creation-Date: 2025-04-28 01:58+0000\n"
 "PO-Revision-Date: 2024-11-09 15:59+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -229,7 +229,7 @@ msgid "Not available."
 msgstr "Non dispoñíbel."
 
 #: controllers/io/export/exportdialog.cpp:40
-#: core/system/modelcodecmanager_p.cpp:125
+#: core/system/modelcodecmanager_p.cpp:126
 #, kde-format
 msgctxt "@title:window"
 msgid "Export"
@@ -380,31 +380,31 @@ msgstr "Axustar á a&ltura"
 msgid "&Fit to Size"
 msgstr "Axustar ao tamaño"
 
-#: controllers/view/zoom/zoomslider.cpp:145
+#: controllers/view/zoom/zoomslider.cpp:147
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Zoom: %1%"
 msgstr "Ampliación: %1%."
 
-#: core/system/documentsyncmanager_p.cpp:110
+#: core/system/documentsyncmanager_p.cpp:111
 #, kde-format
 msgctxt "@title:window"
 msgid "Save As"
 msgstr "Gardar como"
 
-#: core/system/documentsyncmanager_p.cpp:209
+#: core/system/documentsyncmanager_p.cpp:213
 #, kde-format
 msgctxt "@title:window"
 msgid "Close"
 msgstr "Pechar"
 
-#: core/system/documentsyncmanager_p.cpp:244
+#: core/system/documentsyncmanager_p.cpp:248
 #, kde-format
 msgctxt "@title:window"
 msgid "Reload"
 msgstr "Cargar de novo"
 
-#: core/system/modelcodecmanager_p.cpp:135
+#: core/system/modelcodecmanager_p.cpp:136
 #, kde-format
 msgctxt "@action:button"
 msgid "&Export"

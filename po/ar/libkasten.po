@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-07 02:00+0000\n"
+"POT-Creation-Date: 2025-04-28 01:58+0000\n"
 "PO-Revision-Date: 2010-07-23 22:50+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: Arabic <linuxac-kde-arabic-team@googlegroups.com>\n"
@@ -235,7 +235,7 @@ msgid "Not available."
 msgstr "غير متوفر."
 
 #: controllers/io/export/exportdialog.cpp:40
-#: core/system/modelcodecmanager_p.cpp:125
+#: core/system/modelcodecmanager_p.cpp:126
 #, kde-format
 msgctxt "@title:window"
 msgid "Export"
@@ -395,31 +395,31 @@ msgstr "ملائمة للإ&رتفاع"
 msgid "&Fit to Size"
 msgstr "ملائمة لل&حجم"
 
-#: controllers/view/zoom/zoomslider.cpp:145
+#: controllers/view/zoom/zoomslider.cpp:147
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Zoom: %1%"
 msgstr "تحجيم: %1%"
 
-#: core/system/documentsyncmanager_p.cpp:110
+#: core/system/documentsyncmanager_p.cpp:111
 #, kde-format
 msgctxt "@title:window"
 msgid "Save As"
 msgstr "احفظ باسم"
 
-#: core/system/documentsyncmanager_p.cpp:209
+#: core/system/documentsyncmanager_p.cpp:213
 #, kde-format
 msgctxt "@title:window"
 msgid "Close"
 msgstr "أغلق"
 
-#: core/system/documentsyncmanager_p.cpp:244
+#: core/system/documentsyncmanager_p.cpp:248
 #, kde-format
 msgctxt "@title:window"
 msgid "Reload"
 msgstr "أعد تحميل"
 
-#: core/system/modelcodecmanager_p.cpp:135
+#: core/system/modelcodecmanager_p.cpp:136
 #, kde-format
 msgctxt "@action:button"
 msgid "&Export"

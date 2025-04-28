@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-07 02:00+0000\n"
+"POT-Creation-Date: 2025-04-28 01:58+0000\n"
 "PO-Revision-Date: 2020-09-26 20:13+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian\n"
@@ -239,7 +239,7 @@ msgid "Not available."
 msgstr "Nu este disponibil."
 
 #: controllers/io/export/exportdialog.cpp:40
-#: core/system/modelcodecmanager_p.cpp:125
+#: core/system/modelcodecmanager_p.cpp:126
 #, kde-format
 msgctxt "@title:window"
 msgid "Export"
@@ -395,25 +395,25 @@ msgstr "&Potrivește la înălțime"
 msgid "&Fit to Size"
 msgstr "&Potrivește la dimensiune"
 
-#: controllers/view/zoom/zoomslider.cpp:145
+#: controllers/view/zoom/zoomslider.cpp:147
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Zoom: %1%"
 msgstr "Apropiere: %1%"
 
-#: core/system/documentsyncmanager_p.cpp:110
+#: core/system/documentsyncmanager_p.cpp:111
 #, kde-format
 msgctxt "@title:window"
 msgid "Save As"
 msgstr "Salvează ca"
 
-#: core/system/documentsyncmanager_p.cpp:209
+#: core/system/documentsyncmanager_p.cpp:213
 #, kde-format
 msgctxt "@title:window"
 msgid "Close"
 msgstr "Închide"
 
-#: core/system/documentsyncmanager_p.cpp:244
+#: core/system/documentsyncmanager_p.cpp:248
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Replace"
@@ -421,7 +421,7 @@ msgctxt "@title:window"
 msgid "Reload"
 msgstr "Înlocuiește"
 
-#: core/system/modelcodecmanager_p.cpp:135
+#: core/system/modelcodecmanager_p.cpp:136
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Export"
