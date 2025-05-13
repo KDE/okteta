@@ -54,17 +54,13 @@ msgid "Re&do"
 msgstr "Zno&vu"
 
 #: controller/valueeditor.cpp:239
-#, fuzzy, kde-format
-#| msgctxt "name of the change"
-#| msgid "Insert"
+#, kde-format
 msgctxt "@item name of the change"
 msgid "Insert"
-msgstr "Vložit"
+msgstr ""
 
 #: controller/valueeditor.cpp:278
-#, fuzzy, kde-format
-#| msgctxt "name of the change"
-#| msgid "Replace"
+#, kde-format
 msgctxt "@item name of the change"
 msgid "Replace"
-msgstr "Nahradit"
+msgstr ""

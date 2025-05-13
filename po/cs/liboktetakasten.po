@@ -55,32 +55,28 @@ msgid "Size:"
 msgstr "Velikost:"
 
 #: controllers/document/info/documentinfoview.cpp:89
-#, fuzzy, kde-format
-#| msgid "Created:"
+#, kde-format
 msgctxt "@label"
 msgid "Created/Loaded:"
-msgstr "Vytvořený:"
+msgstr ""
 
 #: controllers/document/info/documentinfoview.cpp:93
-#, fuzzy, kde-format
-#| msgid "Last modified:"
+#, kde-format
 msgctxt "@label"
 msgid "Last modified:"
-msgstr "Poslední změna:"
+msgstr ""
 
 #: controllers/document/info/documentinfoview.cpp:97
-#, fuzzy, kde-format
-#| msgid "Last modified:"
+#, kde-format
 msgctxt "@label"
 msgid "Last synchronized:"
-msgstr "Poslední změna:"
+msgstr ""
 
 #: controllers/document/info/documentinfoview.cpp:104
-#, fuzzy, kde-format
-#| msgid "Created:"
+#, kde-format
 msgctxt "@label"
 msgid "Created:"
-msgstr "Vytvořený:"
+msgstr ""
 
 #: controllers/document/info/documentinfoview.cpp:156
 #, kde-format
@@ -296,15 +292,13 @@ msgid "Value/Char Table"
 msgstr ""
 
 #: controllers/view/bytetable/bytetabletool.cpp:96
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Insert mode"
+#, kde-format
 msgctxt "@item"
 msgid "Inserted 1 Byte"
 msgid_plural "Inserted %1 Bytes"
-msgstr[0] "Režim vkládání"
-msgstr[1] "Režim vkládání"
-msgstr[2] "Režim vkládání"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #: controllers/view/bytetable/bytetabletool.cpp:114
 #, kde-format
@@ -343,12 +337,10 @@ msgid "Charset Conversion"
 msgstr ""
 
 #: controllers/view/charsetconversion/charsetconversiontool.cpp:304
-#, fuzzy, kde-format
-#| msgctxt "Converted from charset 1 to charset 2"
-#| msgid "%1 to %2"
+#, kde-format
 msgctxt "@item Converted from charset 1 to charset 2"
 msgid "%1 to %2"
-msgstr "%1 do %2"
+msgstr ""
 
 #: controllers/view/charsetconversion/charsetconversiontoolviewfactory.cpp:27
 #, kde-format
@@ -550,12 +542,10 @@ msgid "Crop"
 msgstr "Oříznout"
 
 #: controllers/view/crop/cropcontroller.cpp:96
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Crop"
+#, kde-format
 msgctxt "@item name of the change"
 msgid "Crop"
-msgstr "Oříznout"
+msgstr ""
 
 #: controllers/view/filter/filtertool.cpp:63
 #: controllers/view/filter/filtertoolviewfactory.cpp:24
@@ -2502,19 +2492,16 @@ msgid "Open settings."
 msgstr "Otevřít nastavení."
 
 #: controllers/view/structures/structureview.cpp:174
-#, fuzzy, kde-format
-#| msgid "Display"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Value Display"
-msgstr "Zobrazit"
+msgstr ""
 
 #: controllers/view/structures/structureview.cpp:186
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Structures"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Structures management"
-msgstr "Struktury"
+msgstr ""
 
 #: controllers/view/structures/structureview.cpp:273
 #, kde-format
@@ -2759,12 +2746,10 @@ msgstr "Vrátit změny"
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:184
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:180
-#, fuzzy, kde-format
-#| msgctxt "@title:menu submenu to select the view profile or change it"
-#| msgid "View Profile"
+#, kde-format
 msgctxt "@title:window"
 msgid "New View Profile"
-msgstr "Prohlížet profil"
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:55
 #, kde-format
@@ -2779,12 +2764,10 @@ msgid "Display"
 msgstr "Zobrazení"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:63
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox"
-#| msgid "End offset:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show line offset:"
-msgstr "Konec posunu:"
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:67
 #, kde-format
@@ -2805,32 +2788,28 @@ msgid "Octal"
 msgstr "Osmičková"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:72
-#, fuzzy, kde-format
-#| msgid "Value coding:"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Offset coding:"
-msgstr "Kódování hodnot:"
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:76
-#, fuzzy, kde-format
-#| msgid "Values"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Values"
-msgstr "Hodnoty"
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:77
-#, fuzzy, kde-format
-#| msgid "Chars"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Chars"
-msgstr "Znaky"
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:78
-#, fuzzy, kde-format
-#| msgid "Values"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Values & Chars"
-msgstr "Hodnoty"
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:81
 #, kde-format
@@ -2845,20 +2824,16 @@ msgid "Show with rows or columns:"
 msgstr ""
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:88
-#, fuzzy, kde-format
-#| msgctxt "@item:"
-#| msgid "Columns"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Columns"
-msgstr "Sloupce"
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:89
-#, fuzzy, kde-format
-#| msgctxt "@item:"
-#| msgid "Rows"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Rows"
-msgstr "Řádky"
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:96
 #, kde-format
@@ -2889,19 +2864,16 @@ msgid "On"
 msgstr "Zapnuto"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:111
-#, fuzzy, kde-format
-#| msgid "Break lines:"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Break lines:"
-msgstr "Zalomit řádky:"
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:115
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "No grouping."
+#, kde-format
 msgctxt "@item"
 msgid "No Grouping"
-msgstr "Žádné seskupování."
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:119
 #, kde-format
@@ -2910,18 +2882,16 @@ msgid "Bytes per group:"
 msgstr ""
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:126
-#, fuzzy, kde-format
-#| msgid "Byte order:"
+#, kde-format
 msgctxt "@label:spinbox number of bytes which are shown per line"
 msgid "Bytes per line:"
-msgstr "Pořadí bajtů:"
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:131
-#, fuzzy, kde-format
-#| msgid "Values"
+#, kde-format
 msgctxt "@title:group"
 msgid "Values"
-msgstr "Hodnoty"
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:137
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:53
@@ -2958,18 +2928,16 @@ msgstr "Binární"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:146
 #: controllers/view/viewprofiles/viewprofileedit.cpp:155
-#, fuzzy, kde-format
-#| msgid "Coding:"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Coding:"
-msgstr "Kódování:"
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:150
-#, fuzzy, kde-format
-#| msgid "Chars"
+#, kde-format
 msgctxt "@title:group"
 msgid "Chars"
-msgstr "Znaky"
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:165
 #, kde-format
@@ -3084,12 +3052,10 @@ msgid "Modification of %1"
 msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:211
-#, fuzzy, kde-format
-#| msgctxt "@window:title"
-#| msgid "\"%1\" View Profile"
+#, kde-format
 msgctxt "@title:window"
 msgid "\"%1\" View Profile"
-msgstr "\"%1\" Prohlížet profil"
+msgstr ""
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:41
 #, kde-format
@@ -3216,12 +3182,10 @@ msgid "Pattern…"
 msgstr "Vzorek…"
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:148
-#, fuzzy, kde-format
-#| msgctxt "@item name of the generated data"
-#| msgid "Pattern"
+#, kde-format
 msgctxt "@item"
 msgid "Pattern Inserted"
-msgstr "Vzorek"
+msgstr ""
 
 #: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:35
 #, kde-format
@@ -3261,12 +3225,10 @@ msgid "Random Data…"
 msgstr "Náhodná data…"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:88
-#, fuzzy, kde-format
-#| msgctxt "@item name of the generated data"
-#| msgid "Random Data"
+#, kde-format
 msgctxt "@item"
 msgid "RandomData Inserted"
-msgstr "Náhodná data"
+msgstr ""
 
 #: gui/io/generator/randomdata/bytearrayrandomdatageneratorconfigeditor.cpp:33
 #, kde-format
@@ -3293,12 +3255,10 @@ msgid "Sequence"
 msgstr "Pořadí"
 
 #: gui/io/generator/sequence/bytearraysequencegenerator.cpp:58
-#, fuzzy, kde-format
-#| msgctxt "name of the generated data"
-#| msgid "Sequence"
+#, kde-format
 msgctxt "@item"
 msgid "Sequence Inserted"
-msgstr "Pořadí"
+msgstr ""
 
 #: gui/io/streamencoder/base32/bytearraybase32streamencoder.cpp:131
 #, kde-format
@@ -3562,18 +3522,3 @@ msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"
 msgid "UTF-8"
 msgstr "UTF-8"
-
-#~ msgctxt "name of the change"
-#~ msgid "Crop"
-#~ msgstr "Oříznout"
-
-#~ msgid "C&opy"
-#~ msgstr "&Kopírovat"
-
-#~ msgctxt "@item:"
-#~ msgid "Values"
-#~ msgstr "Hodnoty"
-
-#~ msgctxt "@item:"
-#~ msgid "Chars"
-#~ msgstr "Znaky"
