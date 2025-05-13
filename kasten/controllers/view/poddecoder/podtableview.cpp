@@ -261,14 +261,14 @@ void PODTableView::onCustomContextMenuRequested(QPoint pos)
     menu->addAction(editAction);
 
     // TODO: split into explicit "Copy As Data" and "Copy As Text"
-    auto* copyAction =  KStandardAction::copy(this, &PODTableView::copyToClipboard,  this);
+    auto* copyAction =  KStandardAction::copy(this, &PODTableView::copyToClipboard,  menu);
     copyAction->setShortcut(QKeySequence());
     copyAction->setData(index);
     menu->addAction(copyAction);
 
     // TODO: reusing string due to string freeze
     auto* selectAction = new QAction(QIcon::fromTheme(QStringLiteral("select-rectangular")),
-                                     i18nc("@action:button", "&Select"), this);
+                                     i18nc("@action:button", "&Select"), menu);
     connect(selectAction, &QAction::triggered,
             this, &PODTableView::selectBytesInView);
     selectAction->setData(podId);
