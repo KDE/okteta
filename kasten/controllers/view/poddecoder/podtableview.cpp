@@ -252,6 +252,7 @@ void PODTableView::onCustomContextMenuRequested(QPoint pos)
     }
 
     auto* menu = new QMenu(this);
+    menu->setAttribute(Qt::WA_DeleteOnClose);
 
     auto* editAction = new QAction(QIcon::fromTheme(QStringLiteral("document-edit")),
                                    i18nc("@action:inmenu", "Edit"), this);

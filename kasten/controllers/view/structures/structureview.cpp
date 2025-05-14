@@ -346,6 +346,7 @@ void StructureView::onCustomContextMenuRequested(QPoint pos)
     }
 
     auto* menu = new QMenu(this);
+    menu->setAttribute(Qt::WA_DeleteOnClose);
 
     const QModelIndex valueIndex = index.siblingAtColumn(DataInformation::ColumnValue);
     if (valueIndex.flags() & Qt::ItemIsEditable) {
