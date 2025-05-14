@@ -322,6 +322,7 @@ void StructureView::onCustomContextMenuRequested(QPoint pos)
     }
 
     auto* menu = new QMenu(this);
+    menu->setAttribute(Qt::WA_DeleteOnClose);
 
     // TODO: split into explicit "Copy As Data" and "Copy As Text"
     auto* copyAction =  KStandardAction::copy(this, &StructureView::copyToClipboard,  menu);
