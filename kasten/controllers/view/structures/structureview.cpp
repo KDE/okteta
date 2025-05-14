@@ -351,7 +351,7 @@ void StructureView::onCustomContextMenuRequested(QPoint pos)
     const QModelIndex valueIndex = index.siblingAtColumn(DataInformation::ColumnValue);
     if (valueIndex.flags() & Qt::ItemIsEditable) {
         auto* editAction = new QAction(QIcon::fromTheme(QStringLiteral("document-edit")),
-                                    i18nc("@action:inmenu", "Edit"), this);
+                                    i18nc("@action:inmenu", "Edit"), menu);
         connect(editAction, &QAction::triggered,
                 this, &StructureView::editData);
         editAction->setData(valueIndex);
