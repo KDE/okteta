@@ -255,7 +255,7 @@ void PODTableView::onCustomContextMenuRequested(QPoint pos)
     menu->setAttribute(Qt::WA_DeleteOnClose);
 
     auto* editAction = new QAction(QIcon::fromTheme(QStringLiteral("document-edit")),
-                                   i18nc("@action:inmenu", "Edit"), this);
+                                   i18nc("@action:inmenu", "Edit"), menu);
     connect(editAction, &QAction::triggered,
             this, &PODTableView::editData);
     editAction->setData(index.siblingAtColumn(PODTableModel::ValueId));
