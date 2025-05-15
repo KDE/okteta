@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-05 02:01+0000\n"
+"POT-Creation-Date: 2025-05-15 02:03+0000\n"
 "PO-Revision-Date: 2013-09-08 07:05+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -1393,8 +1393,8 @@ msgid ""
 ">Overwrite the following bytes or insert new ones as needed?"
 msgstr ""
 
-#: controllers/view/poddecoder/podtableview.cpp:257
-#: controllers/view/structures/structureview.cpp:353
+#: controllers/view/poddecoder/podtableview.cpp:258
+#: controllers/view/structures/structureview.cpp:354
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "&Edit..."
@@ -1402,9 +1402,9 @@ msgctxt "@action:inmenu"
 msgid "Edit"
 msgstr "تەھرىر(&E)…"
 
-#: controllers/view/poddecoder/podtableview.cpp:271
+#: controllers/view/poddecoder/podtableview.cpp:272
 #: controllers/view/selectrange/selectrangeview.cpp:125
-#: controllers/view/structures/structureview.cpp:368
+#: controllers/view/structures/structureview.cpp:369
 #, kde-format
 msgctxt "@action:button"
 msgid "&Select"

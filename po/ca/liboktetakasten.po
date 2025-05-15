@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-05 02:01+0000\n"
+"POT-Creation-Date: 2025-05-15 02:03+0000\n"
 "PO-Revision-Date: 2025-02-14 12:18+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -1443,16 +1443,16 @@ msgstr ""
 "El nou valor necessita <emphasis>més</emphasis> bytes (%1 en lloc de %2).<nl/"
 ">Sobreescric els bytes següents o n'insereixo de nous segons es necessiti?"
 
-#: controllers/view/poddecoder/podtableview.cpp:257
-#: controllers/view/structures/structureview.cpp:353
+#: controllers/view/poddecoder/podtableview.cpp:258
+#: controllers/view/structures/structureview.cpp:354
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit"
 msgstr "Edita"
 
-#: controllers/view/poddecoder/podtableview.cpp:271
+#: controllers/view/poddecoder/podtableview.cpp:272
 #: controllers/view/selectrange/selectrangeview.cpp:125
-#: controllers/view/structures/structureview.cpp:368
+#: controllers/view/structures/structureview.cpp:369
 #, kde-format
 msgctxt "@action:button"
 msgid "&Select"

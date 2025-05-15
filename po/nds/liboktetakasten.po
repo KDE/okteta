@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-05 02:01+0000\n"
+"POT-Creation-Date: 2025-05-15 02:03+0000\n"
 "PO-Revision-Date: 2011-09-05 22:16+0200\n"
 "Last-Translator: Manfred Wiese <m.j.wiese@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -1491,8 +1491,8 @@ msgstr ""
 "De niege Weert bruukt <emphasis>mehr</emphasis> Bytes (%1 ansteed vun %2)."
 "<nl/>Wullt Du disse Bytes överschrieven oder niege infögen, wenn nödig?"
 
-#: controllers/view/poddecoder/podtableview.cpp:257
-#: controllers/view/structures/structureview.cpp:353
+#: controllers/view/poddecoder/podtableview.cpp:258
+#: controllers/view/structures/structureview.cpp:354
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "&Edit..."
@@ -1500,9 +1500,9 @@ msgctxt "@action:inmenu"
 msgid "Edit"
 msgstr "B&ewerken..."
 
-#: controllers/view/poddecoder/podtableview.cpp:271
+#: controllers/view/poddecoder/podtableview.cpp:272
 #: controllers/view/selectrange/selectrangeview.cpp:125
-#: controllers/view/structures/structureview.cpp:368
+#: controllers/view/structures/structureview.cpp:369
 #, kde-format
 msgctxt "@action:button"
 msgid "&Select"

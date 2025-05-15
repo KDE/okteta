@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-05 02:01+0000\n"
+"POT-Creation-Date: 2025-05-15 02:03+0000\n"
 "PO-Revision-Date: 2025-02-14 12:40+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -1442,16 +1442,16 @@ msgstr ""
 "Для нового значення потрібно <emphasis>більше</emphasis> байтів (%1 замість "
 "%2).<nl/>Перезаписати надлишкові байти чи просто посунути наступні байти?"
 
-#: controllers/view/poddecoder/podtableview.cpp:257
-#: controllers/view/structures/structureview.cpp:353
+#: controllers/view/poddecoder/podtableview.cpp:258
+#: controllers/view/structures/structureview.cpp:354
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit"
 msgstr "Змінити"
 
-#: controllers/view/poddecoder/podtableview.cpp:271
+#: controllers/view/poddecoder/podtableview.cpp:272
 #: controllers/view/selectrange/selectrangeview.cpp:125
-#: controllers/view/structures/structureview.cpp:368
+#: controllers/view/structures/structureview.cpp:369
 #, kde-format
 msgctxt "@action:button"
 msgid "&Select"

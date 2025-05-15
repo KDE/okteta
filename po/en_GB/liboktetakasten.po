@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-05 02:01+0000\n"
+"POT-Creation-Date: 2025-05-15 02:03+0000\n"
 "PO-Revision-Date: 2024-11-01 14:15+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -1445,16 +1445,16 @@ msgstr ""
 "The new value needs <emphasis>more</emphasis> bytes (%1 instead of %2).<nl/"
 ">Overwrite the following bytes or insert new ones as needed?"
 
-#: controllers/view/poddecoder/podtableview.cpp:257
-#: controllers/view/structures/structureview.cpp:353
+#: controllers/view/poddecoder/podtableview.cpp:258
+#: controllers/view/structures/structureview.cpp:354
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit"
 msgstr "Edit"
 
-#: controllers/view/poddecoder/podtableview.cpp:271
+#: controllers/view/poddecoder/podtableview.cpp:272
 #: controllers/view/selectrange/selectrangeview.cpp:125
-#: controllers/view/structures/structureview.cpp:368
+#: controllers/view/structures/structureview.cpp:369
 #, kde-format
 msgctxt "@action:button"
 msgid "&Select"
