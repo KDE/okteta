@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-04 03:35+0000\n"
+"POT-Creation-Date: 2025-05-15 03:31+0000\n"
 "PO-Revision-Date: 2024-03-30 19:46\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -1181,9 +1181,9 @@ msgstr ""
 "新的值需要<emphasis>更多</emphasis>的字节数(从 %2 增加到 %1)。<nl/>要覆盖后面"
 "的字节还是按需插入新字节？"
 
-#: controllers/view/poddecoder/podtableview.cpp:257
+#: controllers/view/poddecoder/podtableview.cpp:258
 #: controllers/view/selectrange/selectrangeview.cpp:139
-#: controllers/view/structures/structureview.cpp:334
+#: controllers/view/structures/structureview.cpp:335
 #, kde-format
 msgctxt "@action:button"
 msgid "&Select"
