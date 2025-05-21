@@ -21,16 +21,19 @@ ContainedStringTableModel::ContainedStringTableModel(const QList<ContainedString
                                                      QObject* parent)
     : QAbstractTableModel(parent)
     , mContainedStringList(containedStringList)
+    , mOffsetCodingId(static_cast<Okteta::OffsetFormat::Format>(offsetCoding))
     , mFixedFont(QFontDatabase::systemFont(QFontDatabase::FixedFont))
 {
-    mPrintFunction = Okteta::OffsetFormat::printFunction((Okteta::OffsetFormat::Format)offsetCoding);
+    mPrintFunction = Okteta::OffsetFormat::printFunction(mOffsetCodingId);
 }
 
 ContainedStringTableModel::~ContainedStringTableModel() = default;
 
 void ContainedStringTableModel::setOffsetCoding(int offsetCoding)
 {
-    mPrintFunction = Okteta::OffsetFormat::printFunction((Okteta::OffsetFormat::Format)offsetCoding);
+    mOffsetCodingId = static_cast<Okteta::OffsetFormat::Format>(offsetCoding);
+
+    mPrintFunction = Okteta::OffsetFormat::printFunction(mOffsetCodingId);
     beginResetModel();
     endResetModel();
 }
@@ -84,6 +87,23 @@ QVariant ContainedStringTableModel::data(const QModelIndex& index, int role) con
         }
     } else if (role == Qt::FontRole) {
         result = mFixedFont;
+    } else if (role == OffsetStringRole) {
+        const int stringIndex = index.row();
+
+        if (0 <= stringIndex && stringIndex < mContainedStringList->size()) {
+            const ContainedString& string = mContainedStringList->at(stringIndex);
+
+            struct ValueCoding {
+                int base;
+                int width;
+            };
+            const ValueCoding coding =
+                (mOffsetCodingId == Okteta::OffsetFormat::Hexadecimal) ? ValueCoding{16,  8} :
+                (mOffsetCodingId == Okteta::OffsetFormat::Decimal) ?     ValueCoding{10, 10} :
+                /* else */                                               ValueCoding{ 8, 11};
+
+            result = QStringLiteral("%1").arg(string.offset(), coding.width, coding.base, QLatin1Char('0')).toUpper();
+        }
     }
 
     return result;

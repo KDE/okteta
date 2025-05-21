@@ -187,6 +187,13 @@ StringsExtractView::StringsExtractView(StringsExtractTool* tool,
 
     baseLayout->addWidget(actionsToolBar);
 
+    mCopyOffsetAction =new QAction(QIcon::fromTheme(QStringLiteral("edit-copy")),
+                                    i18nc("@action", "Copy Offset"), this);
+    mCopyOffsetAction->setToolTip(i18nc("@info:tooltip",
+                                         "Copies the offset to the clipboard."));
+    connect(mCopyOffsetAction, &QAction::triggered,
+            this, &StringsExtractView::onCopyOffsetTriggered);
+
     connect(mTool, &StringsExtractTool::uptodateChanged, this, &StringsExtractView::onStringsUptodateChanged);
     connect(mTool, &StringsExtractTool::isApplyableChanged, this, &StringsExtractView::onApplyableChanged);
     connect(mTool, &StringsExtractTool::extractionDone,
@@ -228,6 +235,7 @@ void StringsExtractView::onCustomContextMenuRequested(QPoint pos)
     menu->addAction(mGotoAction);
     menu->addSeparator();
     menu->addAction(mCopyAction);
+    menu->addAction(mCopyOffsetAction);
 
     menu->popup(mContainedStringTableView->viewport()->mapToGlobal(pos));
 }
@@ -271,6 +279,15 @@ void StringsExtractView::onCopyButtonClicked()
     QMimeData* mimeData = mContainedStringTableView->model()->mimeData(selectedIndexes);
 
     QApplication::clipboard()->setMimeData(mimeData);
+}
+
+void StringsExtractView::onCopyOffsetTriggered()
+{
+    const QModelIndex index = mContainedStringTableView->selectionModel()->currentIndex();
+    if (index.isValid()) {
+        const QString offsetText = index.data(ContainedStringTableModel::OffsetStringRole).toString();
+        QApplication::clipboard()->setText(offsetText);
+    }
 }
 
 void StringsExtractView::onStringSelectionChanged()

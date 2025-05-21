@@ -49,6 +49,7 @@ private Q_SLOTS: // gui
     void onStringSelectionChanged();
     void onGotoButtonClicked();
     void onCopyButtonClicked();
+    void onCopyOffsetTriggered();
 
 private Q_SLOTS: // tool
     void onStringsUptodateChanged(bool stringsUptodate);
@@ -69,6 +70,7 @@ private:
     QSpinBox* mMinLengthSpinBox;
     QAction* mUpdateAction;
     QAction* mCopyAction;
+    QAction* mCopyOffsetAction;
     QAction* mGotoAction;
 };
 

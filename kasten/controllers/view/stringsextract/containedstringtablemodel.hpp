@@ -32,6 +32,10 @@ public:
         NoOfColumnIds = 2 // TODO: what pattern is usually used to mark number of ids?
     };
 
+    enum Roles {
+        OffsetStringRole = Qt::UserRole,
+    };
+
 public:
     ContainedStringTableModel(const QList<ContainedString>* containedStringList, int offsetCoding,
                               QObject* parent = nullptr);
@@ -59,7 +63,7 @@ public Q_SLOTS:
 
 private:
     const QList<ContainedString>* const mContainedStringList;
-
+    Okteta::OffsetFormat::Format mOffsetCodingId;
     Okteta::OffsetFormat::print mPrintFunction;
     mutable char mCodedOffset[Okteta::OffsetFormat::MaxFormatWidth + 1];
     QFont mFixedFont;
