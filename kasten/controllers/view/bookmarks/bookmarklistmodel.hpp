@@ -36,6 +36,10 @@ public:
         NoOfColumnIds = 2 // TODO: what pattern is usually used to mark number of ids?
     };
 
+    enum Roles {
+        OffsetStringRole = Qt::UserRole,
+    };
+
 public:
     explicit BookmarkListModel(BookmarksTool* tool, QObject* parent = nullptr);
     ~BookmarkListModel() override;

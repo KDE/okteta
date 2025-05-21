@@ -16,6 +16,8 @@
 // KF
 #include <KLocalizedString>
 // Qt
+#include <QApplication>
+#include <QClipboard>
 #include <QToolBar>
 #include <QLabel>
 #include <QAction>
@@ -138,6 +140,12 @@ BookmarksView::BookmarksView(BookmarksTool* tool, QWidget* parent)
 
     baseLayout->addWidget(actionsToolBar);
 
+    mCopyOffsetAction =new QAction(QIcon::fromTheme(QStringLiteral("edit-copy")),
+                                i18nc("@action", "Copy Offset"), this);
+    mCopyOffsetAction->setToolTip(i18nc("@info:tooltip",
+                                        "Copies the offset to the clipboard."));
+    connect(mCopyOffsetAction, &QAction::triggered,
+            this, &BookmarksView::onCopyOffsetTriggered);
     onBookmarkSelectionChanged();
 }
 
@@ -167,6 +175,8 @@ void BookmarksView::onCustomContextMenuRequested(QPoint pos)
     if (index.isValid()) {
         menu->addAction(mGotoBookmarkAction);
         menu->addAction(mRenameBookmarkAction);
+        menu->addSeparator();
+        menu->addAction(mCopyOffsetAction);
         menu->addSeparator();
         menu->addAction(mDeleteBookmarksAction);
         menu->addSeparator();
@@ -230,6 +240,15 @@ void BookmarksView::onRenameBookmarkButtonClicked()
     const QModelIndex nameIndex = index.sibling(index.row(), BookmarkListModel::TitleColumnId);
     if (nameIndex.isValid()) {
         mBookmarkListView->edit(nameIndex);
+    }
+}
+
+void BookmarksView::onCopyOffsetTriggered()
+{
+    const QModelIndex index = mBookmarkListView->selectionModel()->currentIndex();
+    if (index.isValid()) {
+        const QString offsetText = index.data(BookmarkListModel::OffsetStringRole).toString();
+        QApplication::clipboard()->setText(offsetText);
     }
 }
 

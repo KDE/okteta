@@ -44,6 +44,7 @@ private Q_SLOTS:
     void onDeleteBookmarkButtonClicked();
     void onGotoBookmarkButtonClicked();
     void onRenameBookmarkButtonClicked();
+    void onCopyOffsetTriggered();
 
 private:
     BookmarksTool* const mTool;
@@ -56,6 +57,7 @@ private:
     QAction* mDeleteBookmarksAction;
     QAction* mGotoBookmarkAction;
     QAction* mRenameBookmarkAction;
+    QAction* mCopyOffsetAction;
 };
 
 inline BookmarksTool* BookmarksView::tool() const { return mTool; }

@@ -99,6 +99,25 @@ QVariant BookmarkListModel::data(const QModelIndex& index, int role) const
         }
         break;
     }
+    case OffsetStringRole:
+    {
+        const int bookmarkIndex = index.row();
+        const Okteta::Bookmark& bookmark = mTool->bookmarkAt(bookmarkIndex);
+
+        const auto codingId = static_cast<Okteta::OffsetFormat::Format>(mTool->offsetCoding());
+
+        struct ValueCoding {
+            int base;
+            int width;
+        };
+        const ValueCoding coding =
+            (codingId == Okteta::OffsetFormat::Hexadecimal) ? ValueCoding{16,  8} :
+            (codingId == Okteta::OffsetFormat::Decimal) ?     ValueCoding{10, 10} :
+            /* else */                                        ValueCoding{ 8, 11};
+
+        result = QStringLiteral("%1").arg(bookmark.offset(), coding.width, coding.base, QLatin1Char('0')).toUpper();
+        break;
+    }
     default:
         break;
     }
