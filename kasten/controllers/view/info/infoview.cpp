@@ -70,6 +70,7 @@ InfoView::InfoView(InfoTool* tool, QWidget* parent)
     mUpdateAction->setWhatsThis(xi18nc("@info:whatsthis",
                                        "If you press the <interface>Build</interface> button,"
                                        " the byte frequency statistic is built for the bytes in the selected range."));
+    mUpdateAction->setPriority(QAction::HighPriority);
     mUpdateAction->setEnabled(mTool->isApplyable());
     connect(mTool, &InfoTool::isApplyableChanged, mUpdateAction, &QAction::setEnabled);
 

@@ -84,6 +84,7 @@ ChecksumView::ChecksumView(ChecksumTool* tool, QWidget* parent)
     mCalculateAction->setWhatsThis(xi18nc("@info:whatsthis",
                                           "If you press the <interface>Calculate</interface> button, the list will be updated "
                                           "to all strings which are contained in the selected range and have the set minimum length."));
+    mCalculateAction->setPriority(QAction::HighPriority);
     mCalculateAction->setEnabled(mTool->isApplyable());
 
     baseLayout->addWidget(actionToolBar);

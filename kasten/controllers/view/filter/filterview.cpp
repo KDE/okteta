@@ -89,6 +89,7 @@ FilterView::FilterView(FilterTool* tool, QWidget* parent)
     mFilterAction->setWhatsThis(xi18nc("@info:whatsthis",
                                        "If you press the <interface>Filter</interface> button, the operation you selected "
                                        "above is executed for the bytes in the selected range with the given options."));
+    mFilterAction->setPriority(QAction::HighPriority);
     mFilterAction->setEnabled(mTool->hasWriteable());
     connect(mTool, &FilterTool::filterChanged, this, &FilterView::onFilterChanged);
     connect(mTool, &FilterTool::hasWriteableChanged, this, &FilterView::onHasWriteableChanged);

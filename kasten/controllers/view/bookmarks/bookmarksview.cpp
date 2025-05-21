@@ -115,6 +115,7 @@ BookmarksView::BookmarksView(BookmarksTool* tool, QWidget* parent)
     mGotoBookmarkAction->setWhatsThis(i18nc("@info:whatsthis",
                                             "If you press this button, the cursor is moved to the position "
                                             "of the bookmark which has been last selected."));
+    mGotoBookmarkAction->setPriority(QAction::HighPriority);
 
     mRenameBookmarkAction =
         actionsToolBar->addAction(QIcon::fromTheme(QStringLiteral("edit-rename")),

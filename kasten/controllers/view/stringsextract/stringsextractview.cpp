@@ -78,6 +78,7 @@ StringsExtractView::StringsExtractView(StringsExtractTool* tool,
                                         "If you press the <interface>Extract</interface> button, "
                                         "the selected range is searched for all strings which have the set minimum length. "
                                         "This strings found will be listed in the view below."));
+    mUpdateAction->setPriority(QAction::HighPriority);
     mUpdateAction->setEnabled(mTool->isApplyable());
 
     baseLayout->addWidget(updateToolBar);

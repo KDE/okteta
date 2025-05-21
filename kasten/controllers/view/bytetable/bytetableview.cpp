@@ -97,6 +97,7 @@ ByteTableView::ByteTableView(ByteTableTool* tool, QWidget* parent)
         i18nc("@info:tooltip",
               "Insert the currently selected byte in the table repeated the given number of times.");
     mInsertAction->setToolTip(insertButtonToolTip);
+    mInsertAction->setPriority(QAction::HighPriority);
     mInsertAction->setEnabled(mTool->hasWriteable());
     connect(mTool, &ByteTableTool::hasWriteableChanged, mInsertAction, &QAction::setEnabled);
 
