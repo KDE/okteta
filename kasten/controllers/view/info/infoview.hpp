@@ -38,6 +38,7 @@ public Q_SLOTS:
 
 private Q_SLOTS:
     void resizeColumnsWidth();
+    void onCustomContextMenuRequested(QPoint pos);
     void onCopyButtonClicked();
     void onTableSelectionChanged();
 

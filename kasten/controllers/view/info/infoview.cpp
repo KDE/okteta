@@ -19,6 +19,7 @@
 #include <KLocalizedString>
 // Qt
 #include <QApplication>
+#include <QMenu>
 #include <QClipboard>
 #include <QSortFilterProxyModel>
 #include <QToolBar>
@@ -93,6 +94,7 @@ InfoView::InfoView(InfoTool* tool, QWidget* parent)
     mStatisticTableView->setDragEnabled(true);
     mStatisticTableView->setDragDropMode(QAbstractItemView::DragOnly);
     mStatisticTableView->setSortingEnabled(true);
+    mStatisticTableView->setContextMenuPolicy(Qt::CustomContextMenu);
     QHeaderView* header = mStatisticTableView->header();
     header->setSectionResizeMode(QHeaderView::Interactive);
     header->setStretchLastSection(false);
@@ -107,6 +109,8 @@ InfoView::InfoView(InfoTool* tool, QWidget* parent)
     connect(mTool->statisticTableModel(), &StatisticTableModel::headerChanged, this, &InfoView::updateHeader);
     connect(mStatisticTableView->selectionModel(), &QItemSelectionModel::selectionChanged,
             this, &InfoView::onTableSelectionChanged);
+    connect(mStatisticTableView, &QWidget::customContextMenuRequested,
+            this, &InfoView::onCustomContextMenuRequested);
 
     baseLayout->addWidget(mStatisticTableView, 10);
 
@@ -114,15 +118,15 @@ InfoView::InfoView(InfoTool* tool, QWidget* parent)
     auto* actionsToolBar = new QToolBar(this);
     actionsToolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
 
-    mCopyAction =
-        actionsToolBar->addAction(QIcon::fromTheme(QStringLiteral("edit-copy")),
-                                  i18nc("@action:button", "Copy"),
-                                  this, &InfoView::onCopyButtonClicked);
+    mCopyAction = new QAction(QIcon::fromTheme(QStringLiteral("edit-copy")),
+                              i18nc("@action:button", "Copy"), this);
     mCopyAction->setToolTip(i18nc("@info:tooltip",
                                   "Copies the selected statistic lines to the clipboard."));
     mCopyAction->setWhatsThis(xi18nc("@info:whatsthis",
                                      "If you press the <interface>Copy</interface> button, all statistic lines you selected "
                                      "in the list are copied to the clipboard."));
+    connect(mCopyAction, &QAction::triggered,
+            this, &InfoView::onCopyButtonClicked);
 
     actionsToolBar->addAction(mCopyAction);
 
@@ -190,6 +194,22 @@ void InfoView::setByteArraySize(int size)
                              i18np("1 byte", "%1 bytes", size);
 
     mSizeLabel->setText(sizeText);
+}
+
+void InfoView::onCustomContextMenuRequested(QPoint pos)
+{
+    const QModelIndex index = mStatisticTableView->indexAt(pos);
+
+    if (!index.isValid()) {
+        return;
+    }
+
+    auto* menu = new QMenu(this);
+    menu->setAttribute(Qt::WA_DeleteOnClose);
+
+    menu->addAction(mCopyAction);
+
+    menu->popup(mStatisticTableView->viewport()->mapToGlobal(pos));
 }
 
 void InfoView::onCopyButtonClicked()
