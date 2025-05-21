@@ -19,6 +19,7 @@
 // KF
 #include <KLocalizedString>
 // Qt
+#include <QMenu>
 #include <QToolBar>
 #include <QLabel>
 #include <QVBoxLayout>
@@ -124,6 +125,7 @@ StringsExtractView::StringsExtractView(StringsExtractTool* tool,
     mContainedStringTableView->setDragEnabled(true);
     mContainedStringTableView->setDragDropMode(QAbstractItemView::DragOnly);
     mContainedStringTableView->setSortingEnabled(true);
+    mContainedStringTableView->setContextMenuPolicy(Qt::CustomContextMenu);
     mContainedStringTableView->installEventFilter(this);
     QHeaderView* header = mContainedStringTableView->header();
     header->setSectionResizeMode(QHeaderView::Interactive);
@@ -134,6 +136,8 @@ StringsExtractView::StringsExtractView(StringsExtractTool* tool,
     connect(mContainedStringTableView->selectionModel(),
             &QItemSelectionModel::selectionChanged,
             this, &StringsExtractView::onStringSelectionChanged);
+    connect(mContainedStringTableView, &QWidget::customContextMenuRequested,
+            this, &StringsExtractView::onCustomContextMenuRequested);
 
     // TODO. share code for all these empty-list placeholders
     auto* stringTableViewViewPort = mContainedStringTableView->viewport();
@@ -144,6 +148,7 @@ StringsExtractView::StringsExtractView(StringsExtractTool* tool,
     m_emptyListOverlayLabel->setWordWrap(true);
     m_emptyListOverlayLabel->setAlignment(Qt::AlignCenter);
     m_emptyListOverlayLabel->setVisible(mTool->containedStringList()->isEmpty());
+    m_emptyListOverlayLabel->setContextMenuPolicy(Qt::NoContextMenu);
     auto* centeringLayout = new QVBoxLayout(stringTableViewViewPort);
     centeringLayout->addWidget(m_emptyListOverlayLabel);
     centeringLayout->setAlignment(m_emptyListOverlayLabel, Qt::AlignCenter);
@@ -154,29 +159,31 @@ StringsExtractView::StringsExtractView(StringsExtractTool* tool,
     auto* actionsToolBar = new QToolBar(this);
     actionsToolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
 
-    mCopyAction =
-        actionsToolBar->addAction(QIcon::fromTheme(QStringLiteral("edit-copy")),
-                                  i18nc("@action:button", "Copy"),
-                                  this, &StringsExtractView::onCopyButtonClicked);
+    mCopyAction = new QAction(QIcon::fromTheme(QStringLiteral("edit-copy")),
+                              i18nc("@action:button", "Copy"), this);
     mCopyAction->setToolTip(i18nc("@info:tooltip",
                                   "Copies the selected strings to the clipboard."));
     mCopyAction->setWhatsThis(xi18nc("@info:whatsthis",
                                      "If you press the <interface>Copy</interface> button, all strings you selected "
                                      "in the list are copied to the clipboard."));
+    connect(mCopyAction, &QAction::triggered,
+            this, &StringsExtractView::onCopyButtonClicked);
+    actionsToolBar->addAction(mCopyAction);
 
     auto* actionsStretcher = new QWidget(this);
     actionsStretcher->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     actionsToolBar->addWidget(actionsStretcher);
 
-    mGotoAction =
-        actionsToolBar->addAction(QIcon::fromTheme(QStringLiteral("go-jump")),
-                                  i18nc("@action:button", "Show"),
-                                  this, &StringsExtractView::onGotoButtonClicked);
+    mGotoAction = new QAction(QIcon::fromTheme(QStringLiteral("go-jump")),
+                              i18nc("@action:button", "Show"), this);
     mGotoAction->setToolTip(i18nc("@info:tooltip",
                                   "Shows the selected string in the view."));
     mGotoAction->setWhatsThis(xi18nc("@info:whatsthis",
                                      "If you press the <interface>Go to</interface> button, the string which was last "
                                      "selected is marked and shown in the view."));
+    connect(mGotoAction, &QAction::triggered,
+            this, &StringsExtractView::onGotoButtonClicked);
+    actionsToolBar->addAction(mGotoAction);
 
     baseLayout->addWidget(actionsToolBar);
 
@@ -205,6 +212,24 @@ bool StringsExtractView::eventFilter(QObject* object, QEvent* event)
     }
 
     return QWidget::eventFilter(object, event);
+}
+
+void StringsExtractView::onCustomContextMenuRequested(QPoint pos)
+{
+    const QModelIndex index = mContainedStringTableView->indexAt(pos);
+
+    if (!index.isValid()) {
+        return;
+    }
+
+    auto* menu = new QMenu(this);
+    menu->setAttribute(Qt::WA_DeleteOnClose);
+
+    menu->addAction(mGotoAction);
+    menu->addSeparator();
+    menu->addAction(mCopyAction);
+
+    menu->popup(mContainedStringTableView->viewport()->mapToGlobal(pos));
 }
 
 void StringsExtractView::onStringsUptodateChanged(bool stringsUptodate)

@@ -45,6 +45,7 @@ public: // QObject API
 
 private Q_SLOTS: // gui
     void onStringDoubleClicked(const QModelIndex& index);
+    void onCustomContextMenuRequested(QPoint pos);
     void onStringSelectionChanged();
     void onGotoButtonClicked();
     void onCopyButtonClicked();
