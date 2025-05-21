@@ -50,6 +50,7 @@ private Q_SLOTS: // gui
     void onGotoButtonClicked();
     void onCopyButtonClicked();
     void onCopyOffsetTriggered();
+    void onSelectStringTriggered();
 
 private Q_SLOTS: // tool
     void onStringsUptodateChanged(bool stringsUptodate);
@@ -72,6 +73,7 @@ private:
     QAction* mCopyAction;
     QAction* mCopyOffsetAction;
     QAction* mGotoAction;
+    QAction* mSelectAction;
 };
 
 inline StringsExtractTool* StringsExtractView::tool() const { return mTool; }

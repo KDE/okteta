@@ -70,6 +70,7 @@ public Q_SLOTS: // settings
     void setMinLength(int minLength);
     void markString(int stringId);
     void unmarkString();
+    void selectString(int stringId);
 
 public Q_SLOTS: // actions
     void extractStrings();

@@ -194,6 +194,12 @@ StringsExtractView::StringsExtractView(StringsExtractTool* tool,
     connect(mCopyOffsetAction, &QAction::triggered,
             this, &StringsExtractView::onCopyOffsetTriggered);
 
+    mSelectAction = new QAction(QIcon::fromTheme(QStringLiteral("select-rectangular")),
+                                i18nc("@action", "Select"), this);
+    mSelectAction->setToolTip(i18nc("@info:tooltip",
+                                    "Selects the selected string in the view."));
+    connect(mSelectAction, &QAction::triggered,
+            this, &StringsExtractView::onSelectStringTriggered);
     connect(mTool, &StringsExtractTool::uptodateChanged, this, &StringsExtractView::onStringsUptodateChanged);
     connect(mTool, &StringsExtractTool::isApplyableChanged, this, &StringsExtractView::onApplyableChanged);
     connect(mTool, &StringsExtractTool::extractionDone,
@@ -236,6 +242,8 @@ void StringsExtractView::onCustomContextMenuRequested(QPoint pos)
     menu->addSeparator();
     menu->addAction(mCopyAction);
     menu->addAction(mCopyOffsetAction);
+    menu->addSeparator();
+    menu->addAction(mSelectAction);
 
     menu->popup(mContainedStringTableView->viewport()->mapToGlobal(pos));
 }
@@ -258,7 +266,9 @@ void StringsExtractView::onApplyableChanged(bool isApplyable)
 void StringsExtractView::onCanHighlightStringChanged(bool canHighlightString)
 {
     const bool stringSelected = mContainedStringTableView->selectionModel()->currentIndex().isValid();
-    mGotoAction->setEnabled(canHighlightString && stringSelected);
+    const bool isStringToMarkOrSelect = (canHighlightString && stringSelected);
+    mGotoAction->setEnabled(isStringToMarkOrSelect);
+    mSelectAction->setEnabled(isStringToMarkOrSelect);
 }
 
 void StringsExtractView::onGotoButtonClicked()
@@ -290,6 +300,16 @@ void StringsExtractView::onCopyOffsetTriggered()
     }
 }
 
+void StringsExtractView::onSelectStringTriggered()
+{
+    const QModelIndex index = mContainedStringTableView->selectionModel()->currentIndex();
+    if (index.isValid()) {
+        if (mTool->canHighlightString()) {
+            mTool->selectString(mSortFilterProxyModel->mapToSource(index).row());
+        }
+    }
+}
+
 void StringsExtractView::onStringSelectionChanged()
 {
     const QItemSelectionModel* selectionModel = mContainedStringTableView->selectionModel();
@@ -301,7 +321,9 @@ void StringsExtractView::onStringSelectionChanged()
 
     const bool stringSelected = selectionModel->isSelected(selectionModel->currentIndex());
     const bool canHighlightString = mTool->canHighlightString();
-    mGotoAction->setEnabled(canHighlightString && stringSelected);
+    const bool isStringToMarkOrSelect = (canHighlightString && stringSelected);
+    mGotoAction->setEnabled(isStringToMarkOrSelect);
+    mSelectAction->setEnabled(isStringToMarkOrSelect);
 }
 
 void StringsExtractView::onStringDoubleClicked(const QModelIndex& index)

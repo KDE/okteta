@@ -158,6 +158,24 @@ void StringsExtractTool::unmarkString()
     }
 }
 
+void StringsExtractTool::selectString(int stringId)
+{
+    if (mSourceByteArrayView != mByteArrayView) {
+        if (mSourceByteArrayView) {
+            mSourceByteArrayView->disconnect(this);
+        }
+        mSourceByteArrayView = mByteArrayView;
+        connect(mSourceByteArrayView,  &ByteArrayView::destroyed,
+                this, &StringsExtractTool::onSourceViewDestroyed);
+    }
+    const ContainedString& containedString = mContainedStringList.at(stringId);
+    const Okteta::Address offset = containedString.offset();
+    const int length = containedString.string().length();
+    const Okteta::AddressRange selection = Okteta::AddressRange::fromWidth(offset, length);
+    mSourceByteArrayView->setSelection(selection.start(), selection.end());
+    mSourceByteArrayView->setFocus();
+}
+
 void StringsExtractTool::onSelectionChanged()
 {
 // TODO: could be quicker using the selection data
