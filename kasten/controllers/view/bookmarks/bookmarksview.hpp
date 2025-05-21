@@ -38,6 +38,7 @@ private Q_SLOTS:
     void updateEmptyListOverlayLabel();
 
     void onBookmarkDoubleClicked(const QModelIndex& index);
+    void onCustomContextMenuRequested(QPoint pos);
     void onBookmarkSelectionChanged();
     void onCreateBookmarkButtonClicked();
     void onDeleteBookmarkButtonClicked();
