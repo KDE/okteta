@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-15 02:03+0000\n"
+"POT-Creation-Date: 2025-05-22 02:03+0000\n"
 "PO-Revision-Date: 2020-03-21 21:45+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -98,13 +98,13 @@ msgctxt "@option:check"
 msgid "Overwrite only"
 msgstr "Gainidazteko solik"
 
-#: controllers/view/bookmarks/bookmarklistmodel.cpp:126
+#: controllers/view/bookmarks/bookmarklistmodel.cpp:145
 #, kde-format
 msgctxt "@title:column offset of the bookmark"
 msgid "Offset"
 msgstr "Jatorri-aldaketa"
 
-#: controllers/view/bookmarks/bookmarklistmodel.cpp:127
+#: controllers/view/bookmarks/bookmarklistmodel.cpp:146
 #, kde-format
 msgctxt "@title:column title of the bookmark"
 msgid "Title"
@@ -154,7 +154,7 @@ msgctxt "@title:window"
 msgid "Bookmarks"
 msgstr "Laster-markak"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:61
+#: controllers/view/bookmarks/bookmarksview.cpp:67
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Bookmarks"
@@ -162,13 +162,21 @@ msgctxt "@info"
 msgid "No bookmarks"
 msgstr "Laster-markak"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:87
+#: controllers/view/bookmarks/bookmarksview.cpp:90
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu create a new view profile"
+#| msgid "Create New..."
+msgctxt "@action"
+msgid "Create New"
+msgstr "Sortu... berria"
+
+#: controllers/view/bookmarks/bookmarksview.cpp:92
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Creates a new bookmark for the current cursor position."
 msgstr "Laster-marka berri bat sortzen du kurtsorearen uneko kokalekurako."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:89
+#: controllers/view/bookmarks/bookmarksview.cpp:94
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -178,13 +186,21 @@ msgstr ""
 "Botoi hau sakatzen baduzu, laster-marka berri bat sortuko da kurtsorearen "
 "uneko kokalekurako."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:100
+#: controllers/view/bookmarks/bookmarksview.cpp:104
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "&Delete"
+msgctxt "@action"
+msgid "Delete"
+msgstr "E&zabatu"
+
+#: controllers/view/bookmarks/bookmarksview.cpp:106
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Deletes all the selected bookmarks."
 msgstr "Hautatutako laster-marka guztiak ezabatzen ditu."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:102
+#: controllers/view/bookmarks/bookmarksview.cpp:108
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -193,13 +209,21 @@ msgstr ""
 "Botoi hau sakatzen baduzu, hautatuta dauden laster-marka guztiak ezabatuko "
 "dira."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:114
+#: controllers/view/bookmarks/bookmarksview.cpp:119
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "&Go to Offset..."
+msgctxt "@action"
+msgid "Go to Offset"
+msgstr "&Joan ... desplazamendura"
+
+#: controllers/view/bookmarks/bookmarksview.cpp:121
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Moves the cursor to the selected bookmark."
 msgstr "Kurtsorea hautatutako laster-markara eramaten du."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:116
+#: controllers/view/bookmarks/bookmarksview.cpp:123
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -209,13 +233,19 @@ msgstr ""
 "Botoi hau sakatzen baduzu, kurtsorea hautatu den azken laster-markako "
 "kokalekura mugituko da."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:124
+#: controllers/view/bookmarks/bookmarksview.cpp:131
+#, kde-format
+msgctxt "@action"
+msgid "Rename"
+msgstr ""
+
+#: controllers/view/bookmarks/bookmarksview.cpp:133
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enables renaming of the selected bookmark."
 msgstr "Hautatutako laster-marka berrizendatzea gaitzen du."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:126
+#: controllers/view/bookmarks/bookmarksview.cpp:135
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -224,6 +254,24 @@ msgid ""
 msgstr ""
 "Botoi hau sakatzen baduzu, hautatutako azken laster-markaren izena editatu "
 "daiteke."
+
+#: controllers/view/bookmarks/bookmarksview.cpp:144
+#: controllers/view/stringsextract/stringsextractview.cpp:191
+#, fuzzy, kde-format
+#| msgctxt "@title:column offset of the bookmark"
+#| msgid "Offset"
+msgctxt "@action"
+msgid "Copy Offset"
+msgstr "Jatorri-aldaketa"
+
+#: controllers/view/bookmarks/bookmarksview.cpp:146
+#: controllers/view/stringsextract/stringsextractview.cpp:193
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
+#| msgid "Copies the selected strings to the clipboard."
+msgctxt "@info:tooltip"
+msgid "Copies the offset to the clipboard."
+msgstr "Hautatutako kateak arbelara kopiatzen ditu."
 
 #: controllers/view/bytetable/bytetablemodel.cpp:139
 #: controllers/view/info/statistictablemodel.cpp:170
@@ -483,13 +531,13 @@ msgstr ""
 "<interface>Eguneratu</interface> botoia sakatzen baduzu, byte maiztasunaren "
 "estatistika eguneratzen da."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:221
+#: controllers/view/charsetconversion/charsetconversionview.cpp:223
 #, kde-format
 msgctxt "@info"
 msgid "No bytes converted."
 msgstr "Ez da byterik bihurtu."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:222
+#: controllers/view/charsetconversion/charsetconversionview.cpp:224
 #, kde-format
 msgctxt "@info"
 msgid "1 byte converted."
@@ -497,13 +545,13 @@ msgid_plural "%1 bytes converted."
 msgstr[0] "Byte 1 bihurtu da."
 msgstr[1] "%1 byte bihurtu dira."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:232
+#: controllers/view/charsetconversion/charsetconversionview.cpp:234
 #, kde-format
 msgctxt "@info"
 msgid "No bytes substituted."
 msgstr "Ez da byterik ordezkatu."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:233
+#: controllers/view/charsetconversion/charsetconversionview.cpp:235
 #, kde-format
 msgctxt "@info"
 msgid "1 byte substituted."
@@ -511,7 +559,7 @@ msgid_plural "%1 bytes substituted."
 msgstr[0] "Byte 1 ordezkatu da."
 msgstr[1] "%1 byte ordezkatu dira."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:241
+#: controllers/view/charsetconversion/charsetconversionview.cpp:243
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -565,7 +613,7 @@ msgstr ""
 "<interface>Arbelara kopiatu</interface> botoia sakatzen baduzu, hautatutako "
 "datuak arbelara kopiatuko dira gainean sartu dituzun ezarpenekin."
 
-#: controllers/view/checksum/checksumview.cpp:93
+#: controllers/view/checksum/checksumview.cpp:94
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "No checksum calculated yet."
@@ -744,25 +792,25 @@ msgctxt "@title:window"
 msgid "Statistics"
 msgstr "Estatistikak"
 
-#: controllers/view/info/infoview.cpp:46
+#: controllers/view/info/infoview.cpp:47
 #, kde-format
 msgctxt "@label size of selected bytes"
 msgid "Size:"
 msgstr "Neurria:"
 
-#: controllers/view/info/infoview.cpp:51
+#: controllers/view/info/infoview.cpp:52
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The number of the bytes the statistic was built for."
 msgstr ""
 
-#: controllers/view/info/infoview.cpp:66
+#: controllers/view/info/infoview.cpp:67
 #, kde-format
 msgctxt "@action:button build the statistic of the byte frequency"
 msgid "&Build"
 msgstr "&Eraiki"
 
-#: controllers/view/info/infoview.cpp:69
+#: controllers/view/info/infoview.cpp:70
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Updates the statistic of the byte frequency."
@@ -771,7 +819,7 @@ msgid ""
 "Builds the byte frequency statistic for the bytes in the selected range."
 msgstr "Byte maiztasunaren estatistika eguneratzen du."
 
-#: controllers/view/info/infoview.cpp:71
+#: controllers/view/info/infoview.cpp:72
 #, fuzzy, kde-kuit-format
 #| msgctxt "@info:whatsthis"
 #| msgid ""
@@ -785,8 +833,8 @@ msgstr ""
 "<interface>Eguneratu</interface> botoia sakatzen baduzu, byte maiztasunaren "
 "estatistika eguneratzen da."
 
-#: controllers/view/info/infoview.cpp:118
-#: controllers/view/stringsextract/stringsextractview.cpp:158
+#: controllers/view/info/infoview.cpp:122
+#: controllers/view/stringsextract/stringsextractview.cpp:163
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Copy As"
@@ -794,7 +842,7 @@ msgctxt "@action:button"
 msgid "Copy"
 msgstr "Kopiatu honela"
 
-#: controllers/view/info/infoview.cpp:121
+#: controllers/view/info/infoview.cpp:124
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Copies the selected strings to the clipboard."
@@ -802,7 +850,7 @@ msgctxt "@info:tooltip"
 msgid "Copies the selected statistic lines to the clipboard."
 msgstr "Hautatutako kateak arbelara kopiatzen ditu."
 
-#: controllers/view/info/infoview.cpp:123
+#: controllers/view/info/infoview.cpp:126
 #, fuzzy, kde-kuit-format
 #| msgctxt "@info:whatsthis"
 #| msgid ""
@@ -816,7 +864,7 @@ msgstr ""
 "<interface>Kopiatu</interface> botoia sakatzen baduzu, zerrendan hautatu "
 "dituzun karaktere-kate guztiak arbelara kopiatuko dira."
 
-#: controllers/view/info/infoview.cpp:189
+#: controllers/view/info/infoview.cpp:194
 #: controllers/view/structures/datatypes/datainformation.cpp:60
 #: controllers/view/structures/datatypes/datainformation.cpp:63
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:238
@@ -1736,13 +1784,13 @@ msgstr ""
 "<interface>Fitxategira esportatu</interface> botoia sakatzen baduzu, "
 "hautatutako data gainean sartutako ezarpenak dituen fitxategira kopiatuko da."
 
-#: controllers/view/stringsextract/containedstringtablemodel.cpp:98
+#: controllers/view/stringsextract/containedstringtablemodel.cpp:118
 #, kde-format
 msgctxt "@title:column offset of the extracted string"
 msgid "Offset"
 msgstr "Jatorri-aldaketa"
 
-#: controllers/view/stringsextract/containedstringtablemodel.cpp:99
+#: controllers/view/stringsextract/containedstringtablemodel.cpp:119
 #, kde-format
 msgctxt "@title:column string extracted from the byte array"
 msgid "String"
@@ -1760,20 +1808,20 @@ msgctxt "@title:window"
 msgid "Strings"
 msgstr "Kateak"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:61
+#: controllers/view/stringsextract/stringsextractview.cpp:62
 #, kde-format
 msgctxt ""
 "@label:spinbox minimum length for consecutive chars to be seen as a string"
 msgid "Minimum length:"
 msgstr "Luzera minimoa:"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:73
+#: controllers/view/stringsextract/stringsextractview.cpp:74
 #, kde-format
 msgctxt "@action:button extract the strings from the byte array"
 msgid "&Extract"
 msgstr "&Erauzi"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:76
+#: controllers/view/stringsextract/stringsextractview.cpp:77
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1783,7 +1831,7 @@ msgstr ""
 "Hautatutako barrutian dauden karaktere-kateak aurkitu eta azpiko ikuspegian "
 "zerrendatzen ditu."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:78
+#: controllers/view/stringsextract/stringsextractview.cpp:79
 #, fuzzy, kde-kuit-format
 #| msgctxt "@info:whatsthis"
 #| msgid ""
@@ -1799,20 +1847,20 @@ msgstr ""
 "<interface>Fitxategira esportatu</interface> botoia sakatzen baduzu, "
 "hautatutako data gainean sartutako ezarpenak dituen fitxategira kopiatuko da."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:88
+#: controllers/view/stringsextract/stringsextractview.cpp:90
 #, kde-format
 msgctxt "@label:lineedit filter term for displayed strings"
 msgid "Filter:"
 msgstr "Iragazkia:"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:92
+#: controllers/view/stringsextract/stringsextractview.cpp:94
 #, fuzzy, kde-format
 #| msgid "Enter a term to limit the list."
 msgctxt "@info:placeholder"
 msgid "Enter a term to limit the list."
 msgstr "Sartu termino bat zerrenda mugatzeko."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:140
+#: controllers/view/stringsextract/stringsextractview.cpp:145
 #, fuzzy, kde-format
 #| msgctxt "@title:window of the tool to extract strings"
 #| msgid "Strings"
@@ -1820,13 +1868,13 @@ msgctxt "@info"
 msgid "No strings"
 msgstr "Kateak"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:161
+#: controllers/view/stringsextract/stringsextractview.cpp:165
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected strings to the clipboard."
 msgstr "Hautatutako kateak arbelara kopiatzen ditu."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:163
+#: controllers/view/stringsextract/stringsextractview.cpp:167
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1836,20 +1884,20 @@ msgstr ""
 "<interface>Kopiatu</interface> botoia sakatzen baduzu, zerrendan hautatu "
 "dituzun karaktere-kate guztiak arbelara kopiatuko dira."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:172
+#: controllers/view/stringsextract/stringsextractview.cpp:178
 #, fuzzy, kde-format
 #| msgid "&Show"
 msgctxt "@action:button"
 msgid "Show"
 msgstr "&Erakutsi"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:175
+#: controllers/view/stringsextract/stringsextractview.cpp:180
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Shows the selected string in the view."
 msgstr "Ikuspegian hautatutako karaktere-katea erakusten du."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:177
+#: controllers/view/stringsextract/stringsextractview.cpp:182
 #, fuzzy, kde-kuit-format
 #| msgctxt "@info:whatsthis"
 #| msgid ""
@@ -1863,7 +1911,23 @@ msgstr ""
 "<interface>Eguneratu</interface> botoia sakatzen baduzu, byte maiztasunaren "
 "estatistika eguneratzen da."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:279
+#: controllers/view/stringsextract/stringsextractview.cpp:198
+#, fuzzy, kde-format
+#| msgctxt "@title:window of the tool to select a range"
+#| msgid "Select"
+msgctxt "@action"
+msgid "Select"
+msgstr "Hautatu"
+
+#: controllers/view/stringsextract/stringsextractview.cpp:200
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
+#| msgid "Shows the selected string in the view."
+msgctxt "@info:tooltip"
+msgid "Selects the selected string in the view."
+msgstr "Ikuspegian hautatutako karaktere-katea erakusten du."
+
+#: controllers/view/stringsextract/stringsextractview.cpp:344
 #, fuzzy, kde-format
 #| msgctxt "@info"
 #| msgid "No bytes converted."
@@ -1871,7 +1935,7 @@ msgctxt "@info"
 msgid "No strings extracted."
 msgstr "Ez da byterik bihurtu."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:280
+#: controllers/view/stringsextract/stringsextractview.cpp:345
 #, kde-format
 msgctxt "@info"
 msgid "1 string extracted."

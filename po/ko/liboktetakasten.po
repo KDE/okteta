@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-15 02:03+0000\n"
+"POT-Creation-Date: 2025-05-22 02:03+0000\n"
 "PO-Revision-Date: 2025-04-07 00:07+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -89,13 +89,13 @@ msgctxt "@option:check"
 msgid "Overwrite only"
 msgstr "덮어쓰기만 하기"
 
-#: controllers/view/bookmarks/bookmarklistmodel.cpp:126
+#: controllers/view/bookmarks/bookmarklistmodel.cpp:145
 #, kde-format
 msgctxt "@title:column offset of the bookmark"
 msgid "Offset"
 msgstr "위치"
 
-#: controllers/view/bookmarks/bookmarklistmodel.cpp:127
+#: controllers/view/bookmarks/bookmarklistmodel.cpp:146
 #, kde-format
 msgctxt "@title:column title of the bookmark"
 msgid "Title"
@@ -145,19 +145,27 @@ msgctxt "@title:window"
 msgid "Bookmarks"
 msgstr "책갈피"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:61
+#: controllers/view/bookmarks/bookmarksview.cpp:67
 #, kde-format
 msgctxt "@info"
 msgid "No bookmarks"
 msgstr "책갈피 없음"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:87
+#: controllers/view/bookmarks/bookmarksview.cpp:90
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu create a new view profile"
+#| msgid "Create New…"
+msgctxt "@action"
+msgid "Create New"
+msgstr "새로 만들기…"
+
+#: controllers/view/bookmarks/bookmarksview.cpp:92
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Creates a new bookmark for the current cursor position."
 msgstr "현재 커서 위치를 기억하는 책갈피를 만듭니다."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:89
+#: controllers/view/bookmarks/bookmarksview.cpp:94
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -165,26 +173,42 @@ msgid ""
 "cursor position."
 msgstr "이 단추를 누르면 현재 커서 위치를 기억하는 책갈피를 만듭니다."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:100
+#: controllers/view/bookmarks/bookmarksview.cpp:104
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "&Delete"
+msgctxt "@action"
+msgid "Delete"
+msgstr "삭제(&D)"
+
+#: controllers/view/bookmarks/bookmarksview.cpp:106
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Deletes all the selected bookmarks."
 msgstr "모든 선택한 책갈피를 삭제합니다."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:102
+#: controllers/view/bookmarks/bookmarksview.cpp:108
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
 "If you press this button, all bookmarks which are selected will be deleted."
 msgstr "이 단추를 누르면 선택한 모든 책갈피를 삭제합니다."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:114
+#: controllers/view/bookmarks/bookmarksview.cpp:119
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "&Go to Offset…"
+msgctxt "@action"
+msgid "Go to Offset"
+msgstr "위치로 이동(&G)…"
+
+#: controllers/view/bookmarks/bookmarksview.cpp:121
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Moves the cursor to the selected bookmark."
 msgstr "선택한 책갈피로 커서를 이동합니다."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:116
+#: controllers/view/bookmarks/bookmarksview.cpp:123
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -192,19 +216,43 @@ msgid ""
 "bookmark which has been last selected."
 msgstr "이 단추를 누르면 마지막으로 선택한 책갈피 위치로 커서를 이동합니다."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:124
+#: controllers/view/bookmarks/bookmarksview.cpp:131
+#, kde-format
+msgctxt "@action"
+msgid "Rename"
+msgstr ""
+
+#: controllers/view/bookmarks/bookmarksview.cpp:133
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enables renaming of the selected bookmark."
 msgstr "선택한 책갈피의 이름 변경을 활성화합니다."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:126
+#: controllers/view/bookmarks/bookmarksview.cpp:135
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
 "If you press this button, the name of the bookmark which was last selected "
 "can be edited."
 msgstr "이 단추를 누르면 마지막으로 선택한 책갈피를 편집합니다."
+
+#: controllers/view/bookmarks/bookmarksview.cpp:144
+#: controllers/view/stringsextract/stringsextractview.cpp:191
+#, fuzzy, kde-format
+#| msgctxt "@title:column offset of the bookmark"
+#| msgid "Offset"
+msgctxt "@action"
+msgid "Copy Offset"
+msgstr "위치"
+
+#: controllers/view/bookmarks/bookmarksview.cpp:146
+#: controllers/view/stringsextract/stringsextractview.cpp:193
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
+#| msgid "Copies the selected strings to the clipboard."
+msgctxt "@info:tooltip"
+msgid "Copies the offset to the clipboard."
+msgstr "선택한 문자열을 클립보드에 복사합니다."
 
 #: controllers/view/bytetable/bytetablemodel.cpp:139
 #: controllers/view/info/statistictablemodel.cpp:170
@@ -454,33 +502,33 @@ msgstr ""
 "<interface>변환</interface> 단추를 누르면 선택한 범위에 있는 모든 바이트를 대"
 "상 문자 인코딩에서 같은 글자를 나타내는 바이트로 변환합니다."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:221
+#: controllers/view/charsetconversion/charsetconversionview.cpp:223
 #, kde-format
 msgctxt "@info"
 msgid "No bytes converted."
 msgstr "변환한 바이트가 없습니다."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:222
+#: controllers/view/charsetconversion/charsetconversionview.cpp:224
 #, kde-format
 msgctxt "@info"
 msgid "1 byte converted."
 msgid_plural "%1 bytes converted."
 msgstr[0] "%1바이트를 변환했습니다."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:232
+#: controllers/view/charsetconversion/charsetconversionview.cpp:234
 #, kde-format
 msgctxt "@info"
 msgid "No bytes substituted."
 msgstr "대체한 바이트가 없습니다."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:233
+#: controllers/view/charsetconversion/charsetconversionview.cpp:235
 #, kde-format
 msgctxt "@info"
 msgid "1 byte substituted."
 msgid_plural "%1 bytes substituted."
 msgstr[0] "%1바이트를 대체했습니다."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:241
+#: controllers/view/charsetconversion/charsetconversionview.cpp:243
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -529,7 +577,7 @@ msgstr ""
 "<interface>계산</interface> 단추를 누르면 선택한 범위 안에 있는 지정한 길이 "
 "이상의 문자열로 목록을 업데이트합니다."
 
-#: controllers/view/checksum/checksumview.cpp:93
+#: controllers/view/checksum/checksumview.cpp:94
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "No checksum calculated yet."
@@ -698,32 +746,32 @@ msgctxt "@title:window"
 msgid "Statistics"
 msgstr "통계"
 
-#: controllers/view/info/infoview.cpp:46
+#: controllers/view/info/infoview.cpp:47
 #, kde-format
 msgctxt "@label size of selected bytes"
 msgid "Size:"
 msgstr "크기:"
 
-#: controllers/view/info/infoview.cpp:51
+#: controllers/view/info/infoview.cpp:52
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The number of the bytes the statistic was built for."
 msgstr "통계를 생성한 바이트 수입니다."
 
-#: controllers/view/info/infoview.cpp:66
+#: controllers/view/info/infoview.cpp:67
 #, kde-format
 msgctxt "@action:button build the statistic of the byte frequency"
 msgid "&Build"
 msgstr "계산(&B)"
 
-#: controllers/view/info/infoview.cpp:69
+#: controllers/view/info/infoview.cpp:70
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "Builds the byte frequency statistic for the bytes in the selected range."
 msgstr "선택한 범위에 포함된 바이트 빈도수를 계산합니다."
 
-#: controllers/view/info/infoview.cpp:71
+#: controllers/view/info/infoview.cpp:72
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -733,20 +781,20 @@ msgstr ""
 "<interface>계산</interface> 단추를 누르면 선택한 범위에 포함된 바이트 빈도수"
 "를 계산합니다."
 
-#: controllers/view/info/infoview.cpp:118
-#: controllers/view/stringsextract/stringsextractview.cpp:158
+#: controllers/view/info/infoview.cpp:122
+#: controllers/view/stringsextract/stringsextractview.cpp:163
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy"
 msgstr "복사"
 
-#: controllers/view/info/infoview.cpp:121
+#: controllers/view/info/infoview.cpp:124
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected statistic lines to the clipboard."
 msgstr "선택한 통계 줄을 클립보드에 복사합니다."
 
-#: controllers/view/info/infoview.cpp:123
+#: controllers/view/info/infoview.cpp:126
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -756,7 +804,7 @@ msgstr ""
 "<interface>복사</interface> 단추를 누르면 목록에서 선택한 모든 통계 줄을 클립"
 "보드에 복사합니다."
 
-#: controllers/view/info/infoview.cpp:189
+#: controllers/view/info/infoview.cpp:194
 #: controllers/view/structures/datatypes/datainformation.cpp:60
 #: controllers/view/structures/datatypes/datainformation.cpp:63
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:238
@@ -1646,13 +1694,13 @@ msgstr ""
 "<interface>선택</interface> 단추를 누르면 위에 지정한 위치와 옵션에 따라 커서"
 "를 이동합니다."
 
-#: controllers/view/stringsextract/containedstringtablemodel.cpp:98
+#: controllers/view/stringsextract/containedstringtablemodel.cpp:118
 #, kde-format
 msgctxt "@title:column offset of the extracted string"
 msgid "Offset"
 msgstr "위치"
 
-#: controllers/view/stringsextract/containedstringtablemodel.cpp:99
+#: controllers/view/stringsextract/containedstringtablemodel.cpp:119
 #, kde-format
 msgctxt "@title:column string extracted from the byte array"
 msgid "String"
@@ -1670,20 +1718,20 @@ msgctxt "@title:window"
 msgid "Strings"
 msgstr "문자열"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:61
+#: controllers/view/stringsextract/stringsextractview.cpp:62
 #, kde-format
 msgctxt ""
 "@label:spinbox minimum length for consecutive chars to be seen as a string"
 msgid "Minimum length:"
 msgstr "최소 길이:"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:73
+#: controllers/view/stringsextract/stringsextractview.cpp:74
 #, kde-format
 msgctxt "@action:button extract the strings from the byte array"
 msgid "&Extract"
 msgstr "추출(&E)"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:76
+#: controllers/view/stringsextract/stringsextractview.cpp:77
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1691,7 +1739,7 @@ msgid ""
 "below."
 msgstr "선택한 범위에 포함된 문자열을 찾아서 아래 화면에 표시합니다."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:78
+#: controllers/view/stringsextract/stringsextractview.cpp:79
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1702,31 +1750,31 @@ msgstr ""
 "<interface>추출</interface> 단추를 누르면 선택한 범위 내에서 지정한 최소 길"
 "이 이상의 문자열을 찾습니다. 찾은 문자열은 아래 목록에 표시됩니다."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:88
+#: controllers/view/stringsextract/stringsextractview.cpp:90
 #, kde-format
 msgctxt "@label:lineedit filter term for displayed strings"
 msgid "Filter:"
 msgstr "필터:"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:92
+#: controllers/view/stringsextract/stringsextractview.cpp:94
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter a term to limit the list."
 msgstr "목록에서 필터할 항목을 입력하십시오."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:140
+#: controllers/view/stringsextract/stringsextractview.cpp:145
 #, kde-format
 msgctxt "@info"
 msgid "No strings"
 msgstr "문자열 없음"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:161
+#: controllers/view/stringsextract/stringsextractview.cpp:165
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected strings to the clipboard."
 msgstr "선택한 문자열을 클립보드에 복사합니다."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:163
+#: controllers/view/stringsextract/stringsextractview.cpp:167
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1736,19 +1784,19 @@ msgstr ""
 "<interface>복사</interface> 단추를 누르면 목록에서 선택한 모든 문자열을 클립"
 "보드에 복사합니다."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:172
+#: controllers/view/stringsextract/stringsextractview.cpp:178
 #, kde-format
 msgctxt "@action:button"
 msgid "Show"
 msgstr "표시"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:175
+#: controllers/view/stringsextract/stringsextractview.cpp:180
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Shows the selected string in the view."
 msgstr "선택한 문자열을 보여 줍니다."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:177
+#: controllers/view/stringsextract/stringsextractview.cpp:182
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1758,13 +1806,29 @@ msgstr ""
 "<interface>이동</interface> 단추를 누르면 마지막으로 선택한 문자열을 보기에"
 "서 강조해서 보여 줍니다."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:279
+#: controllers/view/stringsextract/stringsextractview.cpp:198
+#, fuzzy, kde-format
+#| msgctxt "@title:window of the tool to select a range"
+#| msgid "Select"
+msgctxt "@action"
+msgid "Select"
+msgstr "선택"
+
+#: controllers/view/stringsextract/stringsextractview.cpp:200
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
+#| msgid "Shows the selected string in the view."
+msgctxt "@info:tooltip"
+msgid "Selects the selected string in the view."
+msgstr "선택한 문자열을 보여 줍니다."
+
+#: controllers/view/stringsextract/stringsextractview.cpp:344
 #, kde-format
 msgctxt "@info"
 msgid "No strings extracted."
 msgstr "추출한 문자열이 없습니다."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:280
+#: controllers/view/stringsextract/stringsextractview.cpp:345
 #, kde-format
 msgctxt "@info"
 msgid "1 string extracted."
