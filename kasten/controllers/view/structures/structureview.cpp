@@ -341,35 +341,49 @@ void StructureView::onCustomContextMenuRequested(QPoint pos)
     if (!data) {
         return;
     }
-    if (!data->wasAbleToRead()) {
+
+    const bool isStructureRoot = data->parent()->isTopLevel();
+
+    if (!isStructureRoot && !data->wasAbleToRead()) {
         return;
     }
 
     auto* menu = new QMenu(this);
     menu->setAttribute(Qt::WA_DeleteOnClose);
 
-    const QModelIndex valueIndex = index.siblingAtColumn(DataInformation::ColumnValue);
-    if (valueIndex.flags() & Qt::ItemIsEditable) {
-        auto* editAction = new QAction(QIcon::fromTheme(QStringLiteral("document-edit")),
-                                    i18nc("@action:inmenu", "Edit"), menu);
-        connect(editAction, &QAction::triggered,
-                this, &StructureView::editData);
-        editAction->setData(valueIndex);
-        menu->addAction(editAction);
+    if (data->wasAbleToRead()) {
+        const QModelIndex valueIndex = index.siblingAtColumn(DataInformation::ColumnValue);
+        if (valueIndex.flags() & Qt::ItemIsEditable) {
+            auto* editAction = new QAction(QIcon::fromTheme(QStringLiteral("document-edit")),
+                                           i18nc("@action:inmenu", "Edit"), menu);
+            connect(editAction, &QAction::triggered,
+                    this, &StructureView::editData);
+            editAction->setData(valueIndex);
+            menu->addAction(editAction);
+        }
+
+        // TODO: split into explicit "Copy As Data" and "Copy As Text"
+        auto* copyAction =  KStandardAction::copy(this, &StructureView::copyToClipboard,  menu);
+        copyAction->setShortcut(QKeySequence());
+        copyAction->setData(index);
+        menu->addAction(copyAction);
+
+        auto* copyOffsetAction = new QAction(QIcon::fromTheme(QStringLiteral("edit-copy")),
+                                             i18nc("@action", "Copy Offset"), this);
+        copyOffsetAction->setToolTip(i18nc("@info:tooltip",
+                                            "Copies the offset to the clipboard."));
+        connect(copyOffsetAction, &QAction::triggered,
+                this, &StructureView::copyOffsetToClipboard);
+        copyOffsetAction->setData(index);
+        menu->addAction(copyOffsetAction);
     }
 
-    // TODO: split into explicit "Copy As Data" and "Copy As Text"
-    auto* copyAction =  KStandardAction::copy(this, &StructureView::copyToClipboard,  menu);
-    copyAction->setShortcut(QKeySequence());
-    copyAction->setData(index);
-    menu->addAction(copyAction);
-
-    auto* selectAction = new QAction(QIcon::fromTheme(QStringLiteral("select-rectangular")),
-                                     i18nc("@action:inmenu", "Select"), menu);
-    connect(selectAction, &QAction::triggered,
-            this, &StructureView::selectBytesInView);
-    selectAction->setData(index);
-    menu->addAction(selectAction);
+    if (isStructureRoot) {
+        if (!menu->isEmpty()) {
+            menu->addSeparator();
+        }
+        menu->addAction(mLockStructureAction);
+    }
 
     menu->popup(mStructTreeView->viewport()->mapToGlobal(pos));
 }
