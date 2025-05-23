@@ -187,10 +187,10 @@ StringsExtractView::StringsExtractView(StringsExtractTool* tool,
 
     baseLayout->addWidget(actionsToolBar);
 
-    mCopyOffsetAction =new QAction(QIcon::fromTheme(QStringLiteral("edit-copy")),
+    mCopyOffsetAction = new QAction(QIcon::fromTheme(QStringLiteral("edit-copy")),
                                     i18nc("@action", "Copy Offset"), this);
     mCopyOffsetAction->setToolTip(i18nc("@info:tooltip",
-                                         "Copies the offset to the clipboard."));
+                                        "Copies the offset to the clipboard."));
     connect(mCopyOffsetAction, &QAction::triggered,
             this, &StringsExtractView::onCopyOffsetTriggered);
 
