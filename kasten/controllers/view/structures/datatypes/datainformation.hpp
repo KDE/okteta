@@ -11,7 +11,6 @@
 
 // Qt core
 #include <QString>
-#include <QPair>
 #include <QMetaType>
 
 // Okteta
