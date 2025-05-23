@@ -1,15 +1,16 @@
-# Copyright (C) YEAR This_file_is_part_of_KDE
-# This file is distributed under the same license as the PACKAGE package.
+# Spanish translations for liboktetagui.po package.
+# Copyright (C) 2010-2025 This file is copyright:
+# This file is distributed under the same license as the okteta package.
 #
-# Eloy Cuadra <ecuadra@eloihr.net>, 2010, 2019.
-# Sofia Priego <spriego@darksylvania.net>, %Y.
+# SPDX-FileCopyrightText: 2010, 2019 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2024, 2025 Sofía Priego <spriego@darksylvania.net>
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: liboktetagui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-25 03:24+0000\n"
-"PO-Revision-Date: 2019-03-03 11:11+0100\n"
-"Last-Translator: Sofia Priego <spriego@darksylvania.net>\n"
+"PO-Revision-Date: 2025-05-22 12:40+0100\n"
+"Last-Translator: Sofía Priego <spriego@darksylvania.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
