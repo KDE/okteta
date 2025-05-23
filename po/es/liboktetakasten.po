@@ -1,25 +1,25 @@
-# Translation of liboktetakasten to Spanish
-# Copyright (C) 2009-2025 This_file_is_part_of_KDE
+# Spanish translations for liboktetakasten.po package.
+# Copyright (C) 2009-2025 This file is copyright:
 # This file is distributed under the same license as the okteta package.
 #
-# SPDX-FileCopyrightText: 2024, 2025 Sofía Priego <spriego@darksylvania.net>
-# SPDX-FileCopyrightText: 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2018, 2019, 2020, 2022, 2023, 2024 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2018, 2019, 2020, 2022, 2023, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 # SPDX-FileCopyrightText: 2011 Ricardo Varas Santana <ricardoivaras@gmail.com>
 # SPDX-FileCopyrightText: 2013 Javier Viñal <fjvinal@gmail.com>
+# SPDX-FileCopyrightText: 2024, 2025 Sofía Priego <spriego@darksylvania.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-22 02:03+0000\n"
-"PO-Revision-Date: 2025-02-14 19:45+0100\n"
-"Last-Translator: Sofía Priego <spriego@darksylvania.net>\n"
+"PO-Revision-Date: 2025-05-22 12:43+0100\n"
+"Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.12.2\n"
+"X-Generator: Lokalize 25.04.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -155,12 +155,10 @@ msgid "No bookmarks"
 msgstr "No hay marcadores"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:90
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu create a new view profile"
-#| msgid "Create New…"
+#, kde-format
 msgctxt "@action"
 msgid "Create New"
-msgstr "Crear nuevo..."
+msgstr "Crear nuevo"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:92
 #, kde-format
@@ -179,12 +177,10 @@ msgstr ""
 "cursor."
 
 #: controllers/view/bookmarks/bookmarksview.cpp:104
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Delete"
+#, kde-format
 msgctxt "@action"
 msgid "Delete"
-msgstr "&Borrar"
+msgstr "Borrar"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:106
 #, kde-format
@@ -202,12 +198,10 @@ msgstr ""
 "actualmente."
 
 #: controllers/view/bookmarks/bookmarksview.cpp:119
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Go to Offset…"
+#, kde-format
 msgctxt "@action"
 msgid "Go to Offset"
-msgstr "&Ir al desplazamiento..."
+msgstr "Ir a desplazamiento"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:121
 #, kde-format
@@ -229,7 +223,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action"
 msgid "Rename"
-msgstr ""
+msgstr "Cambiar nombre"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:133
 #, kde-format
@@ -249,21 +243,17 @@ msgstr ""
 
 #: controllers/view/bookmarks/bookmarksview.cpp:144
 #: controllers/view/stringsextract/stringsextractview.cpp:191
-#, fuzzy, kde-format
-#| msgctxt "@title:column offset of the bookmark"
-#| msgid "Offset"
+#, kde-format
 msgctxt "@action"
 msgid "Copy Offset"
-msgstr "Desplazamiento"
+msgstr "Copiar desplazamiento"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:146
 #: controllers/view/stringsextract/stringsextractview.cpp:193
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Copies the selected strings to the clipboard."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the offset to the clipboard."
-msgstr "Copia las cadenas seleccionadas en el portapapeles."
+msgstr "Copia el desplazamiento en el portapapeles."
 
 #: controllers/view/bytetable/bytetablemodel.cpp:139
 #: controllers/view/info/statistictablemodel.cpp:170
@@ -689,7 +679,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Go to Offset…"
-msgstr "&Ir al desplazamiento..."
+msgstr "&Ir al desplazamiento…"
 
 #: controllers/view/gotooffset/gotooffsettool.cpp:50
 #, kde-format
@@ -1709,7 +1699,7 @@ msgstr "Buscar"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Select Range…"
-msgstr "&Seleccionar intervalo..."
+msgstr "&Seleccionar intervalo…"
 
 #: controllers/view/selectrange/selectrangetool.cpp:61
 #, kde-format
@@ -1869,20 +1859,16 @@ msgstr ""
 "seleccionado en último lugar será marcada y mostrada en la vista."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:198
-#, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to select a range"
-#| msgid "Select"
+#, kde-format
 msgctxt "@action"
 msgid "Select"
 msgstr "Seleccionar"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:200
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Shows the selected string in the view."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Selects the selected string in the view."
-msgstr "Muestra la cadena seleccionada en la vista."
+msgstr "Selecciona la cadena seleccionada en la vista."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:344
 #, kde-format
@@ -2358,19 +2344,19 @@ msgstr "Acerca de"
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Structures…"
-msgstr "Obtener nuevas estructuras..."
+msgstr "Obtener nuevas estructuras…"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:52
 #, kde-format
 msgctxt "@action:button"
 msgid "Advanced Selection…"
-msgstr "Selección avanzada..."
+msgstr "Selección avanzada…"
 
 #: controllers/view/structures/settings/structuresselectiondialog.cpp:28
 #, kde-format
 msgctxt "@title:window"
 msgid "Advanced Structures Selection"
-msgstr "Selección avanzada de estructuras..."
+msgstr "Selección avanzada de estructuras…"
 
 #: controllers/view/structures/settings/structuresselectionmodel.cpp:107
 #, kde-format
@@ -2386,7 +2372,7 @@ msgstr "Definiciones de estructuras"
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Search…"
-msgstr "Buscar..."
+msgstr "Buscar…"
 
 #. i18n: ectx: tooltip, entry (UnsignedDisplayBase), group (ValueDisplay)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:9
@@ -2793,13 +2779,13 @@ msgstr "Mostrar caracteres &no imprimibles"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Set Bytes per Line…"
-msgstr "Fijar bytes por línea..."
+msgstr "Fijar bytes por línea…"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:87
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Set Bytes per Group…"
-msgstr "Fijar bytes por grupo..."
+msgstr "Fijar bytes por grupo…"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:94
 #, kde-format
@@ -2887,7 +2873,7 @@ msgstr "Perfil de vista"
 #, kde-format
 msgctxt "@action:inmenu create a new view profile"
 msgid "Create New…"
-msgstr "Crear nuevo..."
+msgstr "Crear nuevo…"
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:52
 #, kde-format
@@ -3112,7 +3098,7 @@ msgstr "Carácter para bytes no definidos:"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage View Profiles…"
-msgstr "Gestión de perfiles de vista..."
+msgstr "Gestión de perfiles de vista…"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:36
 #, kde-format
@@ -3124,7 +3110,7 @@ msgstr "Perfiles de vista"
 #, kde-format
 msgctxt "@action:button"
 msgid "&Create New…"
-msgstr "&Crear nuevo..."
+msgstr "&Crear nuevo…"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:66
 #, kde-format
@@ -3140,7 +3126,7 @@ msgid ""
 "opened where you can create and edit a new view profile. The values will be "
 "based on the ones of the view profile you selected in the list."
 msgstr ""
-"Si pulsa el botón <interface>Crear nuevo...</interface>, se abrirá un editor "
+"Si pulsa el botón <interface>Crear nuevo…</interface>, se abrirá un editor "
 "donde podrá crear y editar un nuevo perfil de vista. Los valores se basarán "
 "en los del perfil de vista que haya seleccionado en la lista."
 
@@ -3163,7 +3149,7 @@ msgid ""
 "If you press the <interface>Edit…</interface> button, an editor will be "
 "opened for the view profile you selected in the list."
 msgstr ""
-"Si pulsa el botón <interface>Editar...</interface>, se abrirá un editor para "
+"Si pulsa el botón <interface>Editar…</interface>, se abrirá un editor para "
 "el perfil de vista que haya seleccionado en la lista."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:90
@@ -3346,7 +3332,7 @@ msgstr ""
 #, kde-format
 msgctxt "name of the generated data"
 msgid "Pattern…"
-msgstr "Patrón..."
+msgstr "Patrón…"
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:148
 #, kde-format
@@ -3389,7 +3375,7 @@ msgstr "Patrón"
 #, kde-format
 msgctxt "name of the generated data"
 msgid "Random Data…"
-msgstr "Datos aleatorios..."
+msgstr "Datos aleatorios…"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:88
 #, kde-format
@@ -3689,175 +3675,3 @@ msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"
 msgid "UTF-8"
 msgstr "UTF-8"
-
-#~ msgctxt "name of the change"
-#~ msgid "Crop"
-#~ msgstr "Recortar"
-
-#~ msgid "C&opy"
-#~ msgstr "C&opiar"
-
-#~ msgctxt "@item:"
-#~ msgid "Values"
-#~ msgstr "Valores"
-
-#~ msgctxt "@item:"
-#~ msgid "Chars"
-#~ msgstr "Caracteres"
-
-#~ msgctxt "@item:intable character is not defined"
-#~ msgid "undef."
-#~ msgstr "sin def."
-
-#~ msgctxt "@info:placeholder"
-#~ msgid "Search..."
-#~ msgstr "Buscar..."
-
-#~ msgctxt "@action:button"
-#~ msgid "&Create new..."
-#~ msgstr "&Crear nuevo..."
-
-#~ msgctxt "@action:button"
-#~ msgid "&Edit..."
-#~ msgstr "&Editar..."
-
-#~ msgctxt "name of the generated data"
-#~ msgid "Pattern..."
-#~ msgstr "Patrón..."
-
-#~ msgctxt "name of the generated data"
-#~ msgid "Random Data..."
-#~ msgstr "Datos aleatorios..."
-
-#~ msgctxt "name of the hash algorithm"
-#~ msgid "SHA-0"
-#~ msgstr "SHA-0"
-
-#~ msgctxt "name of the hash algorithm"
-#~ msgid "MD2"
-#~ msgstr "MD2"
-
-#~ msgctxt "name of the hash algorithm"
-#~ msgid "RIPEMD160"
-#~ msgstr "RIPEMD160"
-
-#~ msgctxt "name of the hash algorithm"
-#~ msgid "Whirlpool"
-#~ msgstr "Whirlpool"
-
-#~ msgid ""
-#~ "Name: %1\n"
-#~ "Value: %2\n"
-#~ "\n"
-#~ "Type: %3\n"
-#~ "Size: %4"
-#~ msgstr ""
-#~ "Nombre: %1\n"
-#~ "Valor: %2\n"
-#~ "\n"
-#~ "Tipo: %3\n"
-#~ "Tamaño: %4"
-
-#~ msgid ""
-#~ "Name: %1\n"
-#~ "Value: %2\n"
-#~ "\n"
-#~ "Type: %3\n"
-#~ "Size: %4\n"
-#~ "\n"
-#~ "%5"
-#~ msgstr ""
-#~ "Nombre: %1\n"
-#~ "Valor: %2\n"
-#~ "\n"
-#~ "Tipo: %3\n"
-#~ "Tamaño: %4\n"
-#~ "\n"
-#~ "%5"
-
-#~ msgid ""
-#~ "Name: %2\n"
-#~ "Value: %3\n"
-#~ "\n"
-#~ "Type: %4\n"
-#~ "Size: %5 (%1 child)\n"
-#~ "\n"
-#~ " %6"
-#~ msgid_plural ""
-#~ "Name: %2\n"
-#~ "Value: %3\n"
-#~ "\n"
-#~ "Type: %4\n"
-#~ "Size: %5 (%1 children)\n"
-#~ "\n"
-#~ " %6"
-#~ msgstr[0] ""
-#~ "Nombre: %2\n"
-#~ "Valor: %3\n"
-#~ "\n"
-#~ "Tipo: %4\n"
-#~ "Tamaño: %5 (%1 hijo)\n"
-#~ "\n"
-#~ " %6"
-#~ msgstr[1] ""
-#~ "Nombre: %2\n"
-#~ "Valor: %3\n"
-#~ "\n"
-#~ "Tipo: %4\n"
-#~ "Tamaño: %5 (%1 hijos)\n"
-#~ "\n"
-#~ " %6"
-
-#~ msgid ""
-#~ "Name: %2\n"
-#~ "Value: %3\n"
-#~ "\n"
-#~ "Type: %4\n"
-#~ "Size: %5 (%1 child)"
-#~ msgid_plural ""
-#~ "Name: %2\n"
-#~ "Value: %3\n"
-#~ "\n"
-#~ "Type: %4\n"
-#~ "Size: %5 (%1 children)"
-#~ msgstr[0] ""
-#~ "Nombre: %2\n"
-#~ "Valor: %3\n"
-#~ "\n"
-#~ "Tipo: %4\n"
-#~ "Tamaño: %5 (%1 hijo)"
-#~ msgstr[1] ""
-#~ "Nombre: %2\n"
-#~ "Valor: %3\n"
-#~ "\n"
-#~ "Tipo: %4\n"
-#~ "Tamaño: %5 (%1 hijos)"
-
-#~ msgid "Show Non-printable:"
-#~ msgstr "Mostrar no imprimibles:"
-
-#~ msgid " byte"
-#~ msgid_plural " bytes"
-#~ msgstr[0] " byte"
-#~ msgstr[1] " bytes"
-
-#~ msgid " bit"
-#~ msgid_plural " bits"
-#~ msgstr[0] " bit"
-#~ msgstr[1] " bits"
-
-#~ msgctxt "advertizer in the footer of the printed page"
-#~ msgid "Okteta, built on KDE4"
-#~ msgstr "Okteta, construido sobre KDE4"
-
-#~ msgctxt "@label:spinbox number of bytes which are grouped"
-#~ msgid "Per Group:"
-#~ msgstr "Por grupo:"
-
-#~ msgctxt "@label:spinbox number of bytes which are shown per line"
-#~ msgid "Per Line:"
-#~ msgstr "Por línea:"
-
-#~ msgctxt "@label:spinbox size of the bytes to generate"
-#~ msgid "&Size:"
-#~ msgstr "&Tamaño:"

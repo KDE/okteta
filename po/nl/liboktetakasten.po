@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-22 02:03+0000\n"
-"PO-Revision-Date: 2025-02-14 12:36+0100\n"
+"PO-Revision-Date: 2025-05-22 12:31+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.12.2\n"
+"X-Generator: Lokalize 25.04.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -156,12 +156,10 @@ msgid "No bookmarks"
 msgstr "Geen bladwijzers"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:90
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu create a new view profile"
-#| msgid "Create New…"
+#, kde-format
 msgctxt "@action"
 msgid "Create New"
-msgstr "Nieuwe aanmaken…"
+msgstr "Nieuwe aanmaken"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:92
 #, kde-format
@@ -180,12 +178,10 @@ msgstr ""
 "huidige cursorpositie."
 
 #: controllers/view/bookmarks/bookmarksview.cpp:104
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Delete"
+#, kde-format
 msgctxt "@action"
 msgid "Delete"
-msgstr "Verwij&deren"
+msgstr "Verwijderen"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:106
 #, kde-format
@@ -202,12 +198,10 @@ msgstr ""
 "Als u op deze knop drukt worden alle geselecteerde bladwijzers verwijderd."
 
 #: controllers/view/bookmarks/bookmarksview.cpp:119
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Go to Offset…"
+#, kde-format
 msgctxt "@action"
 msgid "Go to Offset"
-msgstr "&Ga naar offset…"
+msgstr "Ga naar offset"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:121
 #, kde-format
@@ -229,7 +223,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action"
 msgid "Rename"
-msgstr ""
+msgstr "Hernoemen"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:133
 #, kde-format
@@ -249,21 +243,17 @@ msgstr ""
 
 #: controllers/view/bookmarks/bookmarksview.cpp:144
 #: controllers/view/stringsextract/stringsextractview.cpp:191
-#, fuzzy, kde-format
-#| msgctxt "@title:column offset of the bookmark"
-#| msgid "Offset"
+#, kde-format
 msgctxt "@action"
 msgid "Copy Offset"
-msgstr "Offset"
+msgstr "Offset kopiëren"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:146
 #: controllers/view/stringsextract/stringsextractview.cpp:193
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Copies the selected strings to the clipboard."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the offset to the clipboard."
-msgstr "Kopieert de geselecteerde tekenreeksen naar het klembord."
+msgstr "Kopieert de offset naar het klembord."
 
 #: controllers/view/bytetable/bytetablemodel.cpp:139
 #: controllers/view/info/statistictablemodel.cpp:170
@@ -1857,20 +1847,16 @@ msgstr ""
 "het laatst was geselecteerd worden gemarkeerd en getoond in het beeld."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:198
-#, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to select a range"
-#| msgid "Select"
+#, kde-format
 msgctxt "@action"
 msgid "Select"
 msgstr "Selecteren"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:200
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Shows the selected string in the view."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Selects the selected string in the view."
-msgstr "Toont de geselecteerde tekenreeks in het beeld."
+msgstr "Selecteert de geselecteerde tekenreeks in het beeld."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:344
 #, kde-format

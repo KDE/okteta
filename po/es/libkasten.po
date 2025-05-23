@@ -1,17 +1,17 @@
-# translation of libkasten.po to Spanish
-# Copyright (C) YEAR This_file_is_part_of_KDE
-# This file is distributed under the same license as the PACKAGE package.
+# Spanish translations for libkasten.po package.
+# Copyright (C) 2009-2025 This file is copyright:
+# This file is distributed under the same license as the okteta package.
 #
-# SPDX-FileCopyrightText: 2009, 2010, 2018 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2009, 2010, 2018, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 # SPDX-FileCopyrightText: 2013 Javier Viñal <fjvinal@gmail.com>
-# SPDX-FileCopyrightText: 2024 Sofía Priego <spriego@darksylvania.net>
+# SPDX-FileCopyrightText: 2024, 2025 Sofía Priego <spriego@darksylvania.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: libkasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-28 01:58+0000\n"
-"PO-Revision-Date: 2024-10-22 12:30+0100\n"
-"Last-Translator: Sofía Priego <spriego@darksylvania.net>\n"
+"PO-Revision-Date: 2025-05-22 12:43+0100\n"
+"Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -238,7 +238,7 @@ msgstr "Exportar"
 #, kde-format
 msgctxt "@action:button"
 msgid "&Export to File…"
-msgstr "&Exportar a archivo..."
+msgstr "&Exportar a archivo…"
 
 #: controllers/io/export/exportdialog.cpp:75
 #, kde-format
@@ -474,7 +474,3 @@ msgid ""
 "changes?"
 msgstr ""
 "<filename>%1</filename> ha sido modificado.<nl/>¿Desea descartar los cambios?"
-
-#~ msgctxt "@info:tooltip"
-#~ msgid "Export the data into the file with the entered name."
-#~ msgstr "Exportar los datos al archivo con el nombre introducido."

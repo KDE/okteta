@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-22 02:03+0000\n"
-"PO-Revision-Date: 2025-02-14 12:18+0100\n"
+"PO-Revision-Date: 2025-05-22 09:27+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -156,12 +156,10 @@ msgid "No bookmarks"
 msgstr "Sense punts"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:90
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu create a new view profile"
-#| msgid "Create New…"
+#, kde-format
 msgctxt "@action"
 msgid "Create New"
-msgstr "Crea nou…"
+msgstr "Crea nou"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:92
 #, kde-format
@@ -180,12 +178,10 @@ msgstr ""
 "cursor."
 
 #: controllers/view/bookmarks/bookmarksview.cpp:104
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Delete"
+#, kde-format
 msgctxt "@action"
 msgid "Delete"
-msgstr "Su&primeix"
+msgstr "Suprimeix"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:106
 #, kde-format
@@ -201,12 +197,10 @@ msgid ""
 msgstr "Si premeu aquest botó, se suprimiran tots els punts seleccionats."
 
 #: controllers/view/bookmarks/bookmarksview.cpp:119
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Go to Offset…"
+#, kde-format
 msgctxt "@action"
 msgid "Go to Offset"
-msgstr "&Ves al desplaçament…"
+msgstr "Ves al desplaçament"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:121
 #, kde-format
@@ -228,7 +222,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action"
 msgid "Rename"
-msgstr ""
+msgstr "Canvia el nom"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:133
 #, kde-format
@@ -248,21 +242,17 @@ msgstr ""
 
 #: controllers/view/bookmarks/bookmarksview.cpp:144
 #: controllers/view/stringsextract/stringsextractview.cpp:191
-#, fuzzy, kde-format
-#| msgctxt "@title:column offset of the bookmark"
-#| msgid "Offset"
+#, kde-format
 msgctxt "@action"
 msgid "Copy Offset"
-msgstr "Desplaçament"
+msgstr "Copia el desplaçament"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:146
 #: controllers/view/stringsextract/stringsextractview.cpp:193
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Copies the selected strings to the clipboard."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the offset to the clipboard."
-msgstr "Copia les cadenes seleccionades al porta-retalls."
+msgstr "Copia el desplaçament al porta-retalls."
 
 #: controllers/view/bytetable/bytetablemodel.cpp:139
 #: controllers/view/info/statistictablemodel.cpp:170
@@ -1867,20 +1857,16 @@ msgstr ""
 "seleccionada es marcarà i mostrarà a la visualització."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:198
-#, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to select a range"
-#| msgid "Select"
+#, kde-format
 msgctxt "@action"
 msgid "Select"
-msgstr "Selecció"
+msgstr "Selecciona"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:200
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Shows the selected string in the view."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Selects the selected string in the view."
-msgstr "Mostra la cadena seleccionada en la visualització."
+msgstr "Selecciona la cadena seleccionada en la visualització."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:344
 #, kde-format
@@ -3695,42 +3681,3 @@ msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"
 msgid "UTF-8"
 msgstr "UTF-8"
-
-#~ msgctxt "name of the change"
-#~ msgid "Crop"
-#~ msgstr "Escapça"
-
-#~ msgid "C&opy"
-#~ msgstr "Co&pia"
-
-#~ msgctxt "@item:"
-#~ msgid "Values"
-#~ msgstr "Valors"
-
-#~ msgctxt "@item:"
-#~ msgid "Chars"
-#~ msgstr "Caràcters"
-
-#~ msgctxt "@item:intable character is not defined"
-#~ msgid "undef."
-#~ msgstr "no def."
-
-#~ msgctxt "@info:placeholder"
-#~ msgid "Search..."
-#~ msgstr "Cerca..."
-
-#~ msgctxt "@action:button"
-#~ msgid "&Create new..."
-#~ msgstr "&Crea nou..."
-
-#~ msgctxt "@action:button"
-#~ msgid "&Edit..."
-#~ msgstr "&Edita..."
-
-#~ msgctxt "name of the generated data"
-#~ msgid "Pattern..."
-#~ msgstr "Patró..."
-
-#~ msgctxt "name of the generated data"
-#~ msgid "Random Data..."
-#~ msgstr "Dades aleatòries..."

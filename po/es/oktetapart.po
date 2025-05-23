@@ -1,17 +1,16 @@
-# translation of oktetapart.po to Spanish
-# Copyright (C) YEAR This_file_is_part_of_KDE
-# This file is distributed under the same license as the PACKAGE package.
+# Spanish translations for oktetapart.po package.
+# Copyright (C) 2007-2025 This file is copyright:
+# This file is distributed under the same license as the okteta package.
 #
-# Sofia Priego <spriego@darksylvania.net>, %Y.
-# Sofía Priego <spriego@darksylvania.net>, %Y.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2007, 2008, 2009, 2014, 2019, 2021.
+# SPDX-FileCopyrightText: 2007, 2008, 2009, 2014, 2019, 2021 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2024, 2025 Sofía Priego <spriego@darksylvania.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: oktetapart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-30 01:51+0000\n"
-"PO-Revision-Date: 2021-01-29 16:38+0100\n"
-"Last-Translator: Sofia Priego <spriego@darksylvania.net>\n"
+"PO-Revision-Date: 2025-05-22 12:39+0100\n"
+"Last-Translator: Sofía Priego <spriego@darksylvania.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -54,26 +53,3 @@ msgstr "Barra de herramientas principal"
 msgctxt "@title:menu"
 msgid "Permissions"
 msgstr "Permisos"
-
-#~ msgctxt "NAME OF TRANSLATORS"
-#~ msgid "Your names"
-#~ msgstr "Sofía Priego,Eloy Cuadra"
-
-#~ msgctxt "EMAIL OF TRANSLATORS"
-#~ msgid "Your emails"
-#~ msgstr "spriego@darksylvania.net,ecuadra@eloihr.net"
-
-#~ msgid "OktetaPart"
-#~ msgstr "OktetaPart"
-
-#~ msgid "Embedded hex editor"
-#~ msgstr "Editor hexadecimal empotrado"
-
-#~ msgid "Copyright 2003-%1 Friedrich W. H. Kossebau"
-#~ msgstr "Copyright 2003-%1 Friedrich W. H. Kossebau"
-
-#~ msgid "Friedrich W. H. Kossebau"
-#~ msgstr "Friedrich W. H. Kossebau"
-
-#~ msgid "Author"
-#~ msgstr "Autor"

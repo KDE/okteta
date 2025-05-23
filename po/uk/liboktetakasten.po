@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-22 02:03+0000\n"
-"PO-Revision-Date: 2025-02-14 12:40+0200\n"
+"PO-Revision-Date: 2025-05-22 18:46+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -154,12 +154,10 @@ msgid "No bookmarks"
 msgstr "Немає закладок"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:90
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu create a new view profile"
-#| msgid "Create New…"
+#, kde-format
 msgctxt "@action"
 msgid "Create New"
-msgstr "Створити…"
+msgstr "Створити"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:92
 #, kde-format
@@ -178,12 +176,10 @@ msgstr ""
 "курсора."
 
 #: controllers/view/bookmarks/bookmarksview.cpp:104
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Delete"
+#, kde-format
 msgctxt "@action"
 msgid "Delete"
-msgstr "Ви&лучити"
+msgstr "Вилучити"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:106
 #, kde-format
@@ -201,12 +197,10 @@ msgstr ""
 "вибрано."
 
 #: controllers/view/bookmarks/bookmarksview.cpp:119
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Go to Offset…"
+#, kde-format
 msgctxt "@action"
 msgid "Go to Offset"
-msgstr "З&сув переходу…"
+msgstr "Перейти за зміщенням"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:121
 #, kde-format
@@ -228,7 +222,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action"
 msgid "Rename"
-msgstr ""
+msgstr "Перейменувати"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:133
 #, kde-format
@@ -248,21 +242,17 @@ msgstr ""
 
 #: controllers/view/bookmarks/bookmarksview.cpp:144
 #: controllers/view/stringsextract/stringsextractview.cpp:191
-#, fuzzy, kde-format
-#| msgctxt "@title:column offset of the bookmark"
-#| msgid "Offset"
+#, kde-format
 msgctxt "@action"
 msgid "Copy Offset"
-msgstr "Зміщення"
+msgstr "Копіювати зміщення"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:146
 #: controllers/view/stringsextract/stringsextractview.cpp:193
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Copies the selected strings to the clipboard."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the offset to the clipboard."
-msgstr "Копіює вибрані рядки до буфера клавіатури."
+msgstr "Копіює зміщення до буфера обміну даними."
 
 #: controllers/view/bytetable/bytetablemodel.cpp:139
 #: controllers/view/info/statistictablemodel.cpp:170
@@ -1866,20 +1856,16 @@ msgstr ""
 "показано у області перегляду останній вибраний рядок."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:198
-#, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to select a range"
-#| msgid "Select"
+#, kde-format
 msgctxt "@action"
 msgid "Select"
 msgstr "Вибрати"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:200
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Shows the selected string in the view."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Selects the selected string in the view."
-msgstr "Показує вибраний рядок у області перегляду."
+msgstr "Позначає вибраний рядок у області перегляду."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:344
 #, kde-format
