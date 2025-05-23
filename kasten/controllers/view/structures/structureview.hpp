@@ -56,6 +56,7 @@ private:
     void editData();
     void selectBytesInView();
     void copyToClipboard();
+    void copyOffsetToClipboard();
 
 private:
     StructuresTool* const mTool;

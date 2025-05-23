@@ -309,6 +309,20 @@ void StructureView::copyToClipboard()
     QApplication::clipboard()->setMimeData(mimeData);
 }
 
+void StructureView::copyOffsetToClipboard()
+{
+    auto* action = static_cast<QAction*>(sender());
+    const QModelIndex index = action->data().toModelIndex();
+
+    const auto* data = index.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
+    if (!data) {
+        return;
+    }
+
+    const QString offsetText = mTool->dataAddressAsString(data);
+    QApplication::clipboard()->setText(offsetText);
+}
+
 void StructureView::openScriptConsole()
 {
     auto* dialog = new QDialog(this);
@@ -376,6 +390,13 @@ void StructureView::onCustomContextMenuRequested(QPoint pos)
                 this, &StructureView::copyOffsetToClipboard);
         copyOffsetAction->setData(index);
         menu->addAction(copyOffsetAction);
+
+        auto* selectAction = new QAction(QIcon::fromTheme(QStringLiteral("select-rectangular")),
+                                         i18nc("@action:inmenu", "Select"), menu);
+        connect(selectAction, &QAction::triggered,
+                this, &StructureView::selectBytesInView);
+        selectAction->setData(index);
+        menu->addAction(selectAction);
     }
 
     if (isStructureRoot) {

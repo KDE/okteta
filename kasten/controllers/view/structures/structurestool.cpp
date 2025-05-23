@@ -17,6 +17,7 @@
 // Okteta core
 #include <Okteta/Character>
 #include <Okteta/CharCodec>
+#include <Okteta/OffsetFormat>
 #include <Okteta/AbstractByteArrayModel>
 // KF
 #include <KLocalizedString>
@@ -312,6 +313,27 @@ Okteta::Address StructuresTool::startAddress(const TopLevelDataInformation* data
     }
 
     return mCursorIndex;
+}
+
+QString StructuresTool::dataAddressAsString(const DataInformation* data) const
+{
+    Q_CHECK_PTR(data->topLevelDataInformation());
+    const Okteta::Address baseAddress = startAddress(data->topLevelDataInformation());
+    const Okteta::Address dataOffset = Okteta::Address(data->positionInFile(baseAddress) / 8);
+
+    const auto codingId = static_cast<Okteta::OffsetFormat::Format>(mByteArrayView->offsetCoding());
+
+    struct ValueCoding {
+        int base;
+        int width;
+    };
+    const ValueCoding coding =
+        (codingId == Okteta::OffsetFormat::Hexadecimal) ? ValueCoding{16,  8} :
+        (codingId == Okteta::OffsetFormat::Decimal) ?     ValueCoding{10, 10} :
+        /* else */                                        ValueCoding{ 8, 11};
+
+    const QString offsetText = QStringLiteral("%1").arg(dataOffset, coding.width, coding.base, QLatin1Char('0')).toUpper();
+    return offsetText;
 }
 
 Okteta::AddressRange StructuresTool::dataRange(const DataInformation* data) const

@@ -69,6 +69,8 @@ public:
     bool isFileLoaded() const;
     [[nodiscard]]
     QByteArray bytes(const DataInformation* data) const;
+    [[nodiscard]]
+    QString dataAddressAsString(const DataInformation* data) const;
 
     void selectBytesInView(const QModelIndex& idx);
     [[nodiscard]]
