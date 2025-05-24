@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-22 02:03+0000\n"
+"POT-Creation-Date: 2025-05-24 02:00+0000\n"
 "PO-Revision-Date: 2023-06-14 12:13+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: pt <kde-i18n-pt@kde.org>\n"
@@ -252,6 +252,7 @@ msgstr ""
 
 #: controllers/view/bookmarks/bookmarksview.cpp:144
 #: controllers/view/stringsextract/stringsextractview.cpp:191
+#: controllers/view/structures/structureview.cpp:386
 #, fuzzy, kde-format
 #| msgctxt "@title:column offset of the bookmark"
 #| msgid "Offset"
@@ -261,6 +262,7 @@ msgstr "Posição"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:146
 #: controllers/view/stringsextract/stringsextractview.cpp:193
+#: controllers/view/structures/structureview.cpp:388
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Copies the selected strings to the clipboard."
@@ -1515,7 +1517,7 @@ msgstr ""
 "<nl/>Deseja substituir os 'bytes' ou inserir novos, se necessário?"
 
 #: controllers/view/poddecoder/podtableview.cpp:258
-#: controllers/view/structures/structureview.cpp:354
+#: controllers/view/structures/structureview.cpp:372
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "&Edit..."
@@ -1523,13 +1525,14 @@ msgctxt "@action:inmenu"
 msgid "Edit"
 msgstr "&Editar..."
 
-#: controllers/view/poddecoder/podtableview.cpp:272
-#: controllers/view/selectrange/selectrangeview.cpp:125
-#: controllers/view/structures/structureview.cpp:369
-#, kde-format
-msgctxt "@action:button"
-msgid "&Select"
-msgstr "&Seleccionar"
+#: controllers/view/poddecoder/podtableview.cpp:271
+#: controllers/view/structures/structureview.cpp:395
+#, fuzzy, kde-format
+#| msgctxt "@title:window of the tool to select a range"
+#| msgid "Select"
+msgctxt "@action:inmenu"
+msgid "Select"
+msgstr "Seleccionar"
 
 #: controllers/view/print/printtool.cpp:280
 #: controllers/view/print/printtool.cpp:310
@@ -1760,6 +1763,12 @@ msgstr "Posição final:"
 msgctxt "@option:check"
 msgid "End relative"
 msgstr "Fim relativo"
+
+#: controllers/view/selectrange/selectrangeview.cpp:125
+#, kde-format
+msgctxt "@action:button"
+msgid "&Select"
+msgstr "&Seleccionar"
 
 #: controllers/view/selectrange/selectrangeview.cpp:128
 #, kde-format
@@ -2607,32 +2616,32 @@ msgstr "Mostrar o valor numérico dos caracteres"
 msgid "Character value:"
 msgstr "Valor do carácter:"
 
-#: controllers/view/structures/structurestool.cpp:69
+#: controllers/view/structures/structurestool.cpp:70
 #: controllers/view/structures/structurestoolviewfactory.cpp:29
 #, kde-format
 msgctxt "@title:window"
 msgid "Structures"
 msgstr "Estruturas"
 
-#: controllers/view/structures/structurestool.cpp:198
+#: controllers/view/structures/structurestool.cpp:199
 #, kde-format
 msgctxt "name of a data structure"
 msgid "Name"
 msgstr "Nome"
 
-#: controllers/view/structures/structurestool.cpp:200
+#: controllers/view/structures/structurestool.cpp:201
 #, kde-format
 msgctxt "type of a data structure"
 msgid "Type"
 msgstr "Tipo"
 
-#: controllers/view/structures/structurestool.cpp:202
+#: controllers/view/structures/structurestool.cpp:203
 #, kde-format
 msgctxt "value of a data structure (primitive type)"
 msgid "Value"
 msgstr "Valor"
 
-#: controllers/view/structures/structurestool.cpp:204
+#: controllers/view/structures/structurestool.cpp:205
 #, kde-format
 msgctxt "size of a data structure"
 msgid "Size"
@@ -2723,7 +2732,7 @@ msgctxt "@info:tooltip"
 msgid "Lock selected structure to current offset."
 msgstr "Bloquear a estrutura seleccionada na posição actual."
 
-#: controllers/view/structures/structureview.cpp:315
+#: controllers/view/structures/structureview.cpp:329
 #, kde-format
 msgctxt "@title:window"
 msgid "Structures Script Console"

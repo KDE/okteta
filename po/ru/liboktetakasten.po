@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: khexedit\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-22 02:03+0000\n"
+"POT-Creation-Date: 2025-05-24 02:00+0000\n"
 "PO-Revision-Date: 2022-10-12 16:05+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -268,6 +268,7 @@ msgstr ""
 
 #: controllers/view/bookmarks/bookmarksview.cpp:144
 #: controllers/view/stringsextract/stringsextractview.cpp:191
+#: controllers/view/structures/structureview.cpp:386
 #, fuzzy, kde-format
 #| msgctxt "@title:column offset of the bookmark"
 #| msgid "Offset"
@@ -277,6 +278,7 @@ msgstr "Позиция"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:146
 #: controllers/view/stringsextract/stringsextractview.cpp:193
+#: controllers/view/structures/structureview.cpp:388
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Copies the selected strings to the clipboard."
@@ -1539,7 +1541,7 @@ msgstr ""
 "%2).<nl/>Заменить следующие байты или вставить новые в случае необходимости?"
 
 #: controllers/view/poddecoder/podtableview.cpp:258
-#: controllers/view/structures/structureview.cpp:354
+#: controllers/view/structures/structureview.cpp:372
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "&Edit..."
@@ -1547,13 +1549,14 @@ msgctxt "@action:inmenu"
 msgid "Edit"
 msgstr "&Изменить..."
 
-#: controllers/view/poddecoder/podtableview.cpp:272
-#: controllers/view/selectrange/selectrangeview.cpp:125
-#: controllers/view/structures/structureview.cpp:369
-#, kde-format
-msgctxt "@action:button"
-msgid "&Select"
-msgstr "&Выбрать"
+#: controllers/view/poddecoder/podtableview.cpp:271
+#: controllers/view/structures/structureview.cpp:395
+#, fuzzy, kde-format
+#| msgctxt "@title:window of the tool to select a range"
+#| msgid "Select"
+msgctxt "@action:inmenu"
+msgid "Select"
+msgstr "Выбор диапазона"
 
 #: controllers/view/print/printtool.cpp:280
 #: controllers/view/print/printtool.cpp:310
@@ -1782,6 +1785,12 @@ msgstr "Конечное смещение:"
 msgctxt "@option:check"
 msgid "End relative"
 msgstr "Относительно конца"
+
+#: controllers/view/selectrange/selectrangeview.cpp:125
+#, kde-format
+msgctxt "@action:button"
+msgid "&Select"
+msgstr "&Выбрать"
 
 #: controllers/view/selectrange/selectrangeview.cpp:128
 #, kde-format
@@ -2644,32 +2653,32 @@ msgstr "Показывать численные значения символо�
 msgid "Character value:"
 msgstr "Система счисления:"
 
-#: controllers/view/structures/structurestool.cpp:69
+#: controllers/view/structures/structurestool.cpp:70
 #: controllers/view/structures/structurestoolviewfactory.cpp:29
 #, kde-format
 msgctxt "@title:window"
 msgid "Structures"
 msgstr "Структуры данных"
 
-#: controllers/view/structures/structurestool.cpp:198
+#: controllers/view/structures/structurestool.cpp:199
 #, kde-format
 msgctxt "name of a data structure"
 msgid "Name"
 msgstr "Название"
 
-#: controllers/view/structures/structurestool.cpp:200
+#: controllers/view/structures/structurestool.cpp:201
 #, kde-format
 msgctxt "type of a data structure"
 msgid "Type"
 msgstr "Тип"
 
-#: controllers/view/structures/structurestool.cpp:202
+#: controllers/view/structures/structurestool.cpp:203
 #, kde-format
 msgctxt "value of a data structure (primitive type)"
 msgid "Value"
 msgstr "Значение"
 
-#: controllers/view/structures/structurestool.cpp:204
+#: controllers/view/structures/structurestool.cpp:205
 #, fuzzy, kde-format
 #| msgid "Size:"
 msgctxt "size of a data structure"
@@ -2761,7 +2770,7 @@ msgctxt "@info:tooltip"
 msgid "Lock selected structure to current offset."
 msgstr "Привязать выбранную структуру к текущему смещению."
 
-#: controllers/view/structures/structureview.cpp:315
+#: controllers/view/structures/structureview.cpp:329
 #, kde-format
 msgctxt "@title:window"
 msgid "Structures Script Console"

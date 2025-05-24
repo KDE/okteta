@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-22 02:03+0000\n"
+"POT-Creation-Date: 2025-05-24 02:00+0000\n"
 "PO-Revision-Date: 2025-05-22 18:46+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -242,6 +242,7 @@ msgstr ""
 
 #: controllers/view/bookmarks/bookmarksview.cpp:144
 #: controllers/view/stringsextract/stringsextractview.cpp:191
+#: controllers/view/structures/structureview.cpp:386
 #, kde-format
 msgctxt "@action"
 msgid "Copy Offset"
@@ -249,6 +250,7 @@ msgstr "Копіювати зміщення"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:146
 #: controllers/view/stringsextract/stringsextractview.cpp:193
+#: controllers/view/structures/structureview.cpp:388
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the offset to the clipboard."
@@ -1481,19 +1483,20 @@ msgstr ""
 "%2).<nl/>Перезаписати надлишкові байти чи просто посунути наступні байти?"
 
 #: controllers/view/poddecoder/podtableview.cpp:258
-#: controllers/view/structures/structureview.cpp:354
+#: controllers/view/structures/structureview.cpp:372
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit"
 msgstr "Змінити"
 
-#: controllers/view/poddecoder/podtableview.cpp:272
-#: controllers/view/selectrange/selectrangeview.cpp:125
-#: controllers/view/structures/structureview.cpp:369
-#, kde-format
-msgctxt "@action:button"
-msgid "&Select"
-msgstr "Ви&брати"
+#: controllers/view/poddecoder/podtableview.cpp:271
+#: controllers/view/structures/structureview.cpp:395
+#, fuzzy, kde-format
+#| msgctxt "@title:window of the tool to select a range"
+#| msgid "Select"
+msgctxt "@action:inmenu"
+msgid "Select"
+msgstr "Вибрати"
 
 #: controllers/view/print/printtool.cpp:280
 #: controllers/view/print/printtool.cpp:310
@@ -1721,6 +1724,12 @@ msgstr "Відступ від кінця:"
 msgctxt "@option:check"
 msgid "End relative"
 msgstr "Відносно кінця"
+
+#: controllers/view/selectrange/selectrangeview.cpp:125
+#, kde-format
+msgctxt "@action:button"
+msgid "&Select"
+msgstr "Ви&брати"
 
 #: controllers/view/selectrange/selectrangeview.cpp:128
 #, kde-format
@@ -2577,32 +2586,32 @@ msgstr "Показувати числові значення символів"
 msgid "Character value:"
 msgstr "Значення символу:"
 
-#: controllers/view/structures/structurestool.cpp:69
+#: controllers/view/structures/structurestool.cpp:70
 #: controllers/view/structures/structurestoolviewfactory.cpp:29
 #, kde-format
 msgctxt "@title:window"
 msgid "Structures"
 msgstr "Структури"
 
-#: controllers/view/structures/structurestool.cpp:198
+#: controllers/view/structures/structurestool.cpp:199
 #, kde-format
 msgctxt "name of a data structure"
 msgid "Name"
 msgstr "Назва"
 
-#: controllers/view/structures/structurestool.cpp:200
+#: controllers/view/structures/structurestool.cpp:201
 #, kde-format
 msgctxt "type of a data structure"
 msgid "Type"
 msgstr "Тип"
 
-#: controllers/view/structures/structurestool.cpp:202
+#: controllers/view/structures/structurestool.cpp:203
 #, kde-format
 msgctxt "value of a data structure (primitive type)"
 msgid "Value"
 msgstr "Значення"
 
-#: controllers/view/structures/structurestool.cpp:204
+#: controllers/view/structures/structurestool.cpp:205
 #, kde-format
 msgctxt "size of a data structure"
 msgid "Size"
@@ -2690,7 +2699,7 @@ msgctxt "@info:tooltip"
 msgid "Lock selected structure to current offset."
 msgstr "Заблокувати позначену структуру за поточним зсувом."
 
-#: controllers/view/structures/structureview.cpp:315
+#: controllers/view/structures/structureview.cpp:329
 #, kde-format
 msgctxt "@title:window"
 msgid "Structures Script Console"

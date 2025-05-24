@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-22 02:03+0000\n"
+"POT-Creation-Date: 2025-05-24 02:00+0000\n"
 "PO-Revision-Date: 2020-01-03 20:25+0200\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -248,6 +248,7 @@ msgstr "Sellele nupule klõpsates saab muuta viimati valitud järjehoidja nime."
 
 #: controllers/view/bookmarks/bookmarksview.cpp:144
 #: controllers/view/stringsextract/stringsextractview.cpp:191
+#: controllers/view/structures/structureview.cpp:386
 #, fuzzy, kde-format
 #| msgctxt "@title:column offset of the bookmark"
 #| msgid "Offset"
@@ -257,6 +258,7 @@ msgstr "Suhtaadress"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:146
 #: controllers/view/stringsextract/stringsextractview.cpp:193
+#: controllers/view/structures/structureview.cpp:388
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Copies the selected strings to the clipboard."
@@ -1499,7 +1501,7 @@ msgstr ""
 "kirjutada järgmised baidid üle või lisada vajadusel uusi?"
 
 #: controllers/view/poddecoder/podtableview.cpp:258
-#: controllers/view/structures/structureview.cpp:354
+#: controllers/view/structures/structureview.cpp:372
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "&Edit..."
@@ -1507,13 +1509,14 @@ msgctxt "@action:inmenu"
 msgid "Edit"
 msgstr "&Muuda..."
 
-#: controllers/view/poddecoder/podtableview.cpp:272
-#: controllers/view/selectrange/selectrangeview.cpp:125
-#: controllers/view/structures/structureview.cpp:369
-#, kde-format
-msgctxt "@action:button"
-msgid "&Select"
-msgstr "&Vali"
+#: controllers/view/poddecoder/podtableview.cpp:271
+#: controllers/view/structures/structureview.cpp:395
+#, fuzzy, kde-format
+#| msgctxt "@title:window of the tool to select a range"
+#| msgid "Select"
+msgctxt "@action:inmenu"
+msgid "Select"
+msgstr "Valimine"
 
 #: controllers/view/print/printtool.cpp:280
 #: controllers/view/print/printtool.cpp:310
@@ -1741,6 +1744,12 @@ msgstr "Lõpu suhtaadress:"
 msgctxt "@option:check"
 msgid "End relative"
 msgstr "Suhteline lõpp"
+
+#: controllers/view/selectrange/selectrangeview.cpp:125
+#, kde-format
+msgctxt "@action:button"
+msgid "&Select"
+msgstr "&Vali"
 
 #: controllers/view/selectrange/selectrangeview.cpp:128
 #, kde-format
@@ -2587,32 +2596,32 @@ msgstr "Märkide arvväärtuste näitamine"
 msgid "Character value:"
 msgstr "Märgi väärtus:"
 
-#: controllers/view/structures/structurestool.cpp:69
+#: controllers/view/structures/structurestool.cpp:70
 #: controllers/view/structures/structurestoolviewfactory.cpp:29
 #, kde-format
 msgctxt "@title:window"
 msgid "Structures"
 msgstr "Struktuurid"
 
-#: controllers/view/structures/structurestool.cpp:198
+#: controllers/view/structures/structurestool.cpp:199
 #, kde-format
 msgctxt "name of a data structure"
 msgid "Name"
 msgstr "Nimi"
 
-#: controllers/view/structures/structurestool.cpp:200
+#: controllers/view/structures/structurestool.cpp:201
 #, kde-format
 msgctxt "type of a data structure"
 msgid "Type"
 msgstr "Tüüp"
 
-#: controllers/view/structures/structurestool.cpp:202
+#: controllers/view/structures/structurestool.cpp:203
 #, kde-format
 msgctxt "value of a data structure (primitive type)"
 msgid "Value"
 msgstr "Väärtus"
 
-#: controllers/view/structures/structurestool.cpp:204
+#: controllers/view/structures/structurestool.cpp:205
 #, fuzzy, kde-format
 #| msgid "Size:"
 msgctxt "size of a data structure"
@@ -2704,7 +2713,7 @@ msgctxt "@info:tooltip"
 msgid "Lock selected structure to current offset."
 msgstr "Valitud struktuuri aktiivse suhtaadressi lukustamine"
 
-#: controllers/view/structures/structureview.cpp:315
+#: controllers/view/structures/structureview.cpp:329
 #, kde-format
 msgctxt "@title:window"
 msgid "Structures Script Console"

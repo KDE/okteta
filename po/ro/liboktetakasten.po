@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-22 02:03+0000\n"
+"POT-Creation-Date: 2025-05-24 02:00+0000\n"
 "PO-Revision-Date: 2012-12-22 11:55+0200\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -256,6 +256,7 @@ msgstr ""
 
 #: controllers/view/bookmarks/bookmarksview.cpp:144
 #: controllers/view/stringsextract/stringsextractview.cpp:191
+#: controllers/view/structures/structureview.cpp:386
 #, fuzzy, kde-format
 #| msgctxt "@title:column offset of the extracted string"
 #| msgid "Offset"
@@ -265,6 +266,7 @@ msgstr "Deplasare"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:146
 #: controllers/view/stringsextract/stringsextractview.cpp:193
+#: controllers/view/structures/structureview.cpp:388
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Export the selected data to a file."
@@ -1529,20 +1531,19 @@ msgid ""
 msgstr ""
 
 #: controllers/view/poddecoder/podtableview.cpp:258
-#: controllers/view/structures/structureview.cpp:354
+#: controllers/view/structures/structureview.cpp:372
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit"
 msgstr ""
 
-#: controllers/view/poddecoder/podtableview.cpp:272
-#: controllers/view/selectrange/selectrangeview.cpp:125
-#: controllers/view/structures/structureview.cpp:369
+#: controllers/view/poddecoder/podtableview.cpp:271
+#: controllers/view/structures/structureview.cpp:395
 #, fuzzy, kde-format
 #| msgctxt "@info:status offset value not available"
 #| msgid "Selection: -"
-msgctxt "@action:button"
-msgid "&Select"
+msgctxt "@action:inmenu"
+msgid "Select"
 msgstr "Selecție: -"
 
 #: controllers/view/print/printtool.cpp:280
@@ -1777,6 +1778,14 @@ msgstr "Deplasare"
 msgctxt "@option:check"
 msgid "End relative"
 msgstr ""
+
+#: controllers/view/selectrange/selectrangeview.cpp:125
+#, fuzzy, kde-format
+#| msgctxt "@info:status offset value not available"
+#| msgid "Selection: -"
+msgctxt "@action:button"
+msgid "&Select"
+msgstr "Selecție: -"
 
 #: controllers/view/selectrange/selectrangeview.cpp:128
 #, kde-format
@@ -2705,20 +2714,20 @@ msgstr ""
 msgid "Character value:"
 msgstr "Caracter"
 
-#: controllers/view/structures/structurestool.cpp:69
+#: controllers/view/structures/structurestool.cpp:70
 #: controllers/view/structures/structurestoolviewfactory.cpp:29
 #, kde-format
 msgctxt "@title:window"
 msgid "Structures"
 msgstr ""
 
-#: controllers/view/structures/structurestool.cpp:198
+#: controllers/view/structures/structurestool.cpp:199
 #, kde-format
 msgctxt "name of a data structure"
 msgid "Name"
 msgstr ""
 
-#: controllers/view/structures/structurestool.cpp:200
+#: controllers/view/structures/structurestool.cpp:201
 #, fuzzy, kde-format
 #| msgctxt "@title:column name of the datatype"
 #| msgid "Type"
@@ -2726,7 +2735,7 @@ msgctxt "type of a data structure"
 msgid "Type"
 msgstr "Tip"
 
-#: controllers/view/structures/structurestool.cpp:202
+#: controllers/view/structures/structurestool.cpp:203
 #, fuzzy, kde-format
 #| msgctxt "@title:column value of the bytes for the datatype"
 #| msgid "Value"
@@ -2734,7 +2743,7 @@ msgctxt "value of a data structure (primitive type)"
 msgid "Value"
 msgstr "Valoare"
 
-#: controllers/view/structures/structurestool.cpp:204
+#: controllers/view/structures/structurestool.cpp:205
 #, fuzzy, kde-format
 #| msgid "Size:"
 msgctxt "size of a data structure"
@@ -2829,7 +2838,7 @@ msgctxt "@info:tooltip"
 msgid "Lock selected structure to current offset."
 msgstr ""
 
-#: controllers/view/structures/structureview.cpp:315
+#: controllers/view/structures/structureview.cpp:329
 #, kde-format
 msgctxt "@title:window"
 msgid "Structures Script Console"

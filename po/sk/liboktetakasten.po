@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-22 02:03+0000\n"
+"POT-Creation-Date: 2025-05-24 02:00+0000\n"
 "PO-Revision-Date: 2023-12-06 19:12+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -251,6 +251,7 @@ msgstr "Ak stlačíte toto tlačidlo, môžete zmeniť meno vybranej záložky."
 
 #: controllers/view/bookmarks/bookmarksview.cpp:144
 #: controllers/view/stringsextract/stringsextractview.cpp:191
+#: controllers/view/structures/structureview.cpp:386
 #, fuzzy, kde-format
 #| msgctxt "@title:column offset of the bookmark"
 #| msgid "Offset"
@@ -260,6 +261,7 @@ msgstr "Ofset"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:146
 #: controllers/view/stringsextract/stringsextractview.cpp:193
+#: controllers/view/structures/structureview.cpp:388
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Copies the selected strings to the clipboard."
@@ -1498,7 +1500,7 @@ msgstr ""
 ">Prepísať nasledujúce byty alebo vložiť toľko nových koľko je potrebné?"
 
 #: controllers/view/poddecoder/podtableview.cpp:258
-#: controllers/view/structures/structureview.cpp:354
+#: controllers/view/structures/structureview.cpp:372
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "&Edit..."
@@ -1506,13 +1508,14 @@ msgctxt "@action:inmenu"
 msgid "Edit"
 msgstr "&Editovať..."
 
-#: controllers/view/poddecoder/podtableview.cpp:272
-#: controllers/view/selectrange/selectrangeview.cpp:125
-#: controllers/view/structures/structureview.cpp:369
-#, kde-format
-msgctxt "@action:button"
-msgid "&Select"
-msgstr "Vybrať(&S)"
+#: controllers/view/poddecoder/podtableview.cpp:271
+#: controllers/view/structures/structureview.cpp:395
+#, fuzzy, kde-format
+#| msgctxt "@title:window of the tool to select a range"
+#| msgid "Select"
+msgctxt "@action:inmenu"
+msgid "Select"
+msgstr "Vybrať"
 
 #: controllers/view/print/printtool.cpp:280
 #: controllers/view/print/printtool.cpp:310
@@ -1741,6 +1744,12 @@ msgstr "Koniec ofsetu:"
 msgctxt "@option:check"
 msgid "End relative"
 msgstr "Relatívny koniec"
+
+#: controllers/view/selectrange/selectrangeview.cpp:125
+#, kde-format
+msgctxt "@action:button"
+msgid "&Select"
+msgstr "Vybrať(&S)"
 
 #: controllers/view/selectrange/selectrangeview.cpp:128
 #, kde-format
@@ -2591,32 +2600,32 @@ msgstr "Ukáž číselnú hodnotu znaku"
 msgid "Character value:"
 msgstr "Hodnota znaku:"
 
-#: controllers/view/structures/structurestool.cpp:69
+#: controllers/view/structures/structurestool.cpp:70
 #: controllers/view/structures/structurestoolviewfactory.cpp:29
 #, kde-format
 msgctxt "@title:window"
 msgid "Structures"
 msgstr "Štruktúry"
 
-#: controllers/view/structures/structurestool.cpp:198
+#: controllers/view/structures/structurestool.cpp:199
 #, kde-format
 msgctxt "name of a data structure"
 msgid "Name"
 msgstr "Meno"
 
-#: controllers/view/structures/structurestool.cpp:200
+#: controllers/view/structures/structurestool.cpp:201
 #, kde-format
 msgctxt "type of a data structure"
 msgid "Type"
 msgstr "Typ"
 
-#: controllers/view/structures/structurestool.cpp:202
+#: controllers/view/structures/structurestool.cpp:203
 #, kde-format
 msgctxt "value of a data structure (primitive type)"
 msgid "Value"
 msgstr "Hodnota"
 
-#: controllers/view/structures/structurestool.cpp:204
+#: controllers/view/structures/structurestool.cpp:205
 #, kde-format
 msgctxt "size of a data structure"
 msgid "Size"
@@ -2707,7 +2716,7 @@ msgctxt "@info:tooltip"
 msgid "Lock selected structure to current offset."
 msgstr "Zamknúť vybranú štruktúru na vybranom posune."
 
-#: controllers/view/structures/structureview.cpp:315
+#: controllers/view/structures/structureview.cpp:329
 #, kde-format
 msgctxt "@title:window"
 msgid "Structures Script Console"
