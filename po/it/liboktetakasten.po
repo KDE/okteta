@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-24 02:00+0000\n"
-"PO-Revision-Date: 2025-02-14 13:47+0100\n"
+"PO-Revision-Date: 2025-05-24 11:30+0200\n"
 "Last-Translator: Luigi Toscano <luigi.toscano@tiscali.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.03.70\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -155,12 +155,10 @@ msgid "No bookmarks"
 msgstr "Nessun segnalibro"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:90
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu create a new view profile"
-#| msgid "Create New…"
+#, kde-format
 msgctxt "@action"
 msgid "Create New"
-msgstr "Crea nuovo…"
+msgstr "Crea nuovo"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:92
 #, kde-format
@@ -179,12 +177,10 @@ msgstr ""
 "attuale del cursore."
 
 #: controllers/view/bookmarks/bookmarksview.cpp:104
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Delete"
+#, kde-format
 msgctxt "@action"
 msgid "Delete"
-msgstr "&Elimina"
+msgstr "Elimina"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:106
 #, kde-format
@@ -201,12 +197,10 @@ msgstr ""
 "Se premi questo pulsante, tutti i segnalibri selezionati saranno eliminati."
 
 #: controllers/view/bookmarks/bookmarksview.cpp:119
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Go to Offset…"
+#, kde-format
 msgctxt "@action"
 msgid "Go to Offset"
-msgstr "&Vai allo slittamento…"
+msgstr "Vai allo slittamento"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:121
 #, kde-format
@@ -228,7 +222,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action"
 msgid "Rename"
-msgstr ""
+msgstr "Rinomina"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:133
 #, kde-format
@@ -249,22 +243,18 @@ msgstr ""
 #: controllers/view/bookmarks/bookmarksview.cpp:144
 #: controllers/view/stringsextract/stringsextractview.cpp:191
 #: controllers/view/structures/structureview.cpp:386
-#, fuzzy, kde-format
-#| msgctxt "@title:column offset of the bookmark"
-#| msgid "Offset"
+#, kde-format
 msgctxt "@action"
 msgid "Copy Offset"
-msgstr "Slittamento"
+msgstr "Copia slittamento"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:146
 #: controllers/view/stringsextract/stringsextractview.cpp:193
 #: controllers/view/structures/structureview.cpp:388
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Copies the selected strings to the clipboard."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the offset to the clipboard."
-msgstr "Copia le stringhe selezionate negli appunti."
+msgstr "Copia lo slittamento negli appunti."
 
 #: controllers/view/bytetable/bytetablemodel.cpp:139
 #: controllers/view/info/statistictablemodel.cpp:170
@@ -1493,9 +1483,7 @@ msgstr "Modifica"
 
 #: controllers/view/poddecoder/podtableview.cpp:271
 #: controllers/view/structures/structureview.cpp:395
-#, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to select a range"
-#| msgid "Select"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Select"
 msgstr "Seleziona"
@@ -1865,20 +1853,16 @@ msgstr ""
 "selezionato verrà segnata e mostrata nella vista."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:198
-#, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to select a range"
-#| msgid "Select"
+#, kde-format
 msgctxt "@action"
 msgid "Select"
 msgstr "Seleziona"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:200
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Shows the selected string in the view."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Selects the selected string in the view."
-msgstr "Mostra la stringa selezionata nella vista."
+msgstr "Seleziona la stringa selezionata nella vista."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:344
 #, kde-format
