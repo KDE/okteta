@@ -175,12 +175,10 @@ msgid ""
 msgstr ""
 
 #: controllers/view/bookmarks/bookmarksview.cpp:104
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Delete"
+#, kde-format
 msgctxt "@action"
 msgid "Delete"
-msgstr "&Smazat"
+msgstr "Smazat"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:106
 #, kde-format
@@ -1788,9 +1786,7 @@ msgid ""
 msgstr ""
 
 #: controllers/view/stringsextract/stringsextractview.cpp:198
-#, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to select a range"
-#| msgid "Select"
+#, kde-format
 msgctxt "@action"
 msgid "Select"
 msgstr "Vybrat"

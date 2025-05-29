@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-24 02:00+0000\n"
-"PO-Revision-Date: 2025-02-16 10:59+0200\n"
+"PO-Revision-Date: 2025-05-27 23:28+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -155,12 +155,10 @@ msgid "No bookmarks"
 msgstr "Ei kirjanmerkkejä"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:90
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu create a new view profile"
-#| msgid "Create New…"
+#, kde-format
 msgctxt "@action"
 msgid "Create New"
-msgstr "Luo uusi…"
+msgstr "Luo uusi"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:92
 #, kde-format
@@ -178,12 +176,10 @@ msgstr ""
 "Painamalla tästä luodaan uusi kirjanmerkki kohdistimen nykyiseen sijaintiin."
 
 #: controllers/view/bookmarks/bookmarksview.cpp:104
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Delete"
+#, kde-format
 msgctxt "@action"
 msgid "Delete"
-msgstr "&Poista"
+msgstr "Poista"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:106
 #, kde-format
@@ -199,12 +195,10 @@ msgid ""
 msgstr "Painamalla tästä kaikki valitut kirjanmerkit poistetaan."
 
 #: controllers/view/bookmarks/bookmarksview.cpp:119
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Go to Offset…"
+#, kde-format
 msgctxt "@action"
 msgid "Go to Offset"
-msgstr "Siirry &poikkeamaan…"
+msgstr "Siirry poikkeamaan…"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:121
 #, kde-format
@@ -226,7 +220,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action"
 msgid "Rename"
-msgstr ""
+msgstr "Muuta nimeä"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:133
 #, kde-format
@@ -245,22 +239,18 @@ msgstr "Painamalla tästä viimeksi valitun kirjanmerkin nimeä voidaan muuttaa.
 #: controllers/view/bookmarks/bookmarksview.cpp:144
 #: controllers/view/stringsextract/stringsextractview.cpp:191
 #: controllers/view/structures/structureview.cpp:386
-#, fuzzy, kde-format
-#| msgctxt "@title:column offset of the bookmark"
-#| msgid "Offset"
+#, kde-format
 msgctxt "@action"
 msgid "Copy Offset"
-msgstr "Poikkeama"
+msgstr "Kopioi poikkeama"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:146
 #: controllers/view/stringsextract/stringsextractview.cpp:193
 #: controllers/view/structures/structureview.cpp:388
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Copies the selected strings to the clipboard."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the offset to the clipboard."
-msgstr "Kopioi valitut merkkijonot leikepöydälle"
+msgstr "Kopioi poikkeaman leikepöydälle."
 
 #: controllers/view/bytetable/bytetablemodel.cpp:139
 #: controllers/view/info/statistictablemodel.cpp:170
@@ -1467,9 +1457,7 @@ msgstr "Muokkaa"
 
 #: controllers/view/poddecoder/podtableview.cpp:271
 #: controllers/view/structures/structureview.cpp:395
-#, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to select a range"
-#| msgid "Select"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Select"
 msgstr "Valitse"
@@ -1831,20 +1819,16 @@ msgstr ""
 "näkymässä."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:198
-#, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to select a range"
-#| msgid "Select"
+#, kde-format
 msgctxt "@action"
 msgid "Select"
 msgstr "Valitse"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:200
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Shows the selected string in the view."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Selects the selected string in the view."
-msgstr "Näytä valittu merkkijono näkymässä"
+msgstr "Valitsee valitun merkkijonon näkymään."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:344
 #, kde-format
