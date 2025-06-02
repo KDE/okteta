@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-24 02:00+0000\n"
-"PO-Revision-Date: 2025-02-14 08:30+0100\n"
+"PO-Revision-Date: 2025-06-01 11:12+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.12.0\n"
+"X-Generator: Lokalize 25.04.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -153,12 +153,10 @@ msgid "No bookmarks"
 msgstr "Inga bokmärken"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:90
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu create a new view profile"
-#| msgid "Create New…"
+#, kde-format
 msgctxt "@action"
 msgid "Create New"
-msgstr "Skapa ny..."
+msgstr "Skapa ny"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:92
 #, kde-format
@@ -177,12 +175,10 @@ msgstr ""
 "markörposition."
 
 #: controllers/view/bookmarks/bookmarksview.cpp:104
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Delete"
+#, kde-format
 msgctxt "@action"
 msgid "Delete"
-msgstr "&Ta bort"
+msgstr "Ta bort"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:106
 #, kde-format
@@ -198,12 +194,10 @@ msgid ""
 msgstr "Om du klickar på knappen tas alla bokmärken som är markerade bort."
 
 #: controllers/view/bookmarks/bookmarksview.cpp:119
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Go to Offset…"
+#, kde-format
 msgctxt "@action"
 msgid "Go to Offset"
-msgstr "&Gå till position..."
+msgstr "Gå till position"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:121
 #, kde-format
@@ -225,7 +219,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action"
 msgid "Rename"
-msgstr ""
+msgstr "Byt namn"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:133
 #, kde-format
@@ -246,22 +240,18 @@ msgstr ""
 #: controllers/view/bookmarks/bookmarksview.cpp:144
 #: controllers/view/stringsextract/stringsextractview.cpp:191
 #: controllers/view/structures/structureview.cpp:386
-#, fuzzy, kde-format
-#| msgctxt "@title:column offset of the bookmark"
-#| msgid "Offset"
+#, kde-format
 msgctxt "@action"
 msgid "Copy Offset"
-msgstr "Position"
+msgstr "Kopiera position"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:146
 #: controllers/view/stringsextract/stringsextractview.cpp:193
 #: controllers/view/structures/structureview.cpp:388
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Copies the selected strings to the clipboard."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the offset to the clipboard."
-msgstr "Kopierar markerade strängar till klippbordet."
+msgstr "Kopierar positionen till klippbordet."
 
 #: controllers/view/bytetable/bytetablemodel.cpp:139
 #: controllers/view/info/statistictablemodel.cpp:170
@@ -1479,9 +1469,7 @@ msgstr "Redigera"
 
 #: controllers/view/poddecoder/podtableview.cpp:271
 #: controllers/view/structures/structureview.cpp:395
-#, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to select a range"
-#| msgid "Select"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Select"
 msgstr "Markera"
@@ -1849,20 +1837,16 @@ msgstr ""
 "som senast valdes, och visas i vyn."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:198
-#, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to select a range"
-#| msgid "Select"
+#, kde-format
 msgctxt "@action"
 msgid "Select"
 msgstr "Markera"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:200
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Shows the selected string in the view."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Selects the selected string in the view."
-msgstr "Visar den markerade strängen i vyn."
+msgstr "Markerar den valda strängen i vyn."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:344
 #, kde-format
