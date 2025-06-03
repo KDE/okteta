@@ -167,7 +167,7 @@ msgstr "Aucun signet"
 #, kde-format
 msgctxt "@action"
 msgid "Create New"
-msgstr "Créer un nouveau..."
+msgstr "Créer un nouveau"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:92
 #, kde-format
@@ -299,7 +299,7 @@ msgstr "Oct."
 #, kde-format
 msgctxt "@title:column short for Binary"
 msgid "Bin"
-msgstr "Dossier"
+msgstr "Bin."
 
 #: controllers/view/bytetable/bytetablemodel.cpp:161
 #: controllers/view/info/statistictablemodel.cpp:220
@@ -370,7 +370,7 @@ msgstr[1] "%1 octets insérés."
 #, kde-format
 msgctxt "@label:spinbox number of bytes to insert"
 msgid "Number (bytes):"
-msgstr "Nombre (octets) :"
+msgstr "Nombre (octets) :"
 
 #: controllers/view/bytetable/bytetableview.cpp:82
 #, kde-format
@@ -691,7 +691,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Go to Offset…"
-msgstr "Se dé&caler de..."
+msgstr "A&ller à l'offset…"
 
 #: controllers/view/gotooffset/gotooffsettool.cpp:50
 #, kde-format
@@ -1144,7 +1144,7 @@ msgstr "Inverser aussi les bits :"
 msgctxt "@info:whatsthis"
 msgid "If set, the bits are arranged in reverse order as well."
 msgstr ""
-"Si cette case est cochée, les bits sont disposé dans l'ordre inverse "
+"Si cette case est cochée, les bits sont disposés dans l'ordre inverse "
 "également."
 
 #: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilter.cpp:26
@@ -1720,7 +1720,7 @@ msgstr "Chercher"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Select Range…"
-msgstr "&Sélectionner un intervalle..."
+msgstr "&Sélectionner un intervalle…"
 
 #: controllers/view/selectrange/selectrangetool.cpp:61
 #, kde-format
@@ -3706,7 +3706,7 @@ msgstr "Oct."
 #, kde-format
 msgctxt "@item:inlistbox coding of the bytes as values in the binary format"
 msgid "Bin"
-msgstr "Dossier"
+msgstr "Bin."
 
 #: gui/liboktetawidgets/bytearraycombobox_p.cpp:29
 #, kde-format

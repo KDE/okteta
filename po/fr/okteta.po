@@ -51,7 +51,7 @@ msgstr "Éditeur hexadécimal"
 #, kde-format
 msgctxt "@info"
 msgid "2006-%1 Friedrich W. H. Kossebau"
-msgstr "2006 - %1 par Friedrich W. H. Kossebau"
+msgstr "2006 - %1 par Friedrich W. H. Kossebau"
 
 #: about.cpp:22
 #, kde-format

@@ -243,7 +243,7 @@ msgstr "Exporter"
 #, kde-format
 msgctxt "@action:button"
 msgid "&Export to File…"
-msgstr "&Exporter vers un fichier...."
+msgstr "&Exporter vers un fichier…"
 
 #: controllers/io/export/exportdialog.cpp:75
 #, kde-format
