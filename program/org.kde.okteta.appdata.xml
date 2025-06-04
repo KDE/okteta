@@ -365,7 +365,7 @@
       <li xml:lang="et">Märgikodeeringud: kõik 8-bitised kodeeringud, mida toetab Qt, EBCDIC</li>
       <li xml:lang="eu">Karaktere kodeketa: Qt bidez hornitutako 8-biteko kodeketa guztiak, EBCDIC</li>
       <li xml:lang="fi">Merkkikoodaukset: Kaikki Qt:n tarjoamat 8-bittiset koodaukset sekä EBCDIC</li>
-      <li xml:lang="fr">Codage des caractères : tout les codages 8 bits fournis par Qt, EBCDIC</li>
+      <li xml:lang="fr">Codage des caractères : tous les codages 8 bits fournis par Qt, EBCDIC</li>
       <li xml:lang="gl">Pode amosar os caracteres en todas as codificacións baseadas en 8 bits que fornece Qt, así como en EBCDIC.</li>
       <li xml:lang="hu">Karakterkódolások: minden, a Qt és EBCDIC által biztosított 8 bites kódolás</li>
       <li xml:lang="ia">Codificationes de character: Omne codificationes de 8bits como fornite per Qt, EBCDIC</li>
@@ -519,7 +519,7 @@
       <li xml:lang="et">Struktuuride tööriist analüüsimiseks ja muutmiseks vastavalt kasutaja loodud struktuuridefinitsioonidele</li>
       <li xml:lang="eu">Aztertzeko eta editatzeko egituren tresna, erabiltzaileak sor ditzakeen egitura definizioetan oinarritua</li>
       <li xml:lang="fi">Rakennetyökalu datan analysointiin ja muokkaamiseen; perustuu rakennemääritelmiin, joita käyttäjät voivat luoda</li>
-      <li xml:lang="fr">Outil de structures pour l'analyse et l'édition basé des définitions de structures créées par l'utilisateur</li>
+      <li xml:lang="fr">Outil de structures pour l'analyse et l'édition des définitions de structures créées par l'utilisateur</li>
       <li xml:lang="gl">Ferramenta de estruturas para analizar e editar baseándose en definicións de estruturas creadas polo usuario.</li>
       <li xml:lang="hu">Struktúra eszközök a felhasználó által létrehozott struktúradefiníciók elemzésére és szerkesztésére</li>
       <li xml:lang="ia">Instrumento de structuras per analysar e modificar basate sur definitiones de structure creabile de usator (user-creatable structure)</li>
