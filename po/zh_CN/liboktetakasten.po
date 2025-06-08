@@ -151,12 +151,10 @@ msgid "No bookmarks"
 msgstr "没有书签"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:90
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu create a new view profile"
-#| msgid "Create New…"
+#, kde-format
 msgctxt "@action"
 msgid "Create New"
-msgstr "新建…"
+msgstr ""
 
 #: controllers/view/bookmarks/bookmarksview.cpp:92
 #, kde-format
@@ -173,12 +171,10 @@ msgid ""
 msgstr "如果您按下此按钮，程序将在光标当前所在位置处新建一个书签。"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:104
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Delete"
+#, kde-format
 msgctxt "@action"
 msgid "Delete"
-msgstr "删除(&D)"
+msgstr ""
 
 #: controllers/view/bookmarks/bookmarksview.cpp:106
 #, kde-format
@@ -194,12 +190,10 @@ msgid ""
 msgstr "如果您按下此按钮，程序将删除所有选中的书签。"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:119
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Go to Offset…"
+#, kde-format
 msgctxt "@action"
 msgid "Go to Offset"
-msgstr "跳转到偏移量(&G)…"
+msgstr ""
 
 #: controllers/view/bookmarks/bookmarksview.cpp:121
 #, kde-format
@@ -238,22 +232,18 @@ msgstr "如果您按下此按钮，可以编辑您上一次选中的书签的名
 #: controllers/view/bookmarks/bookmarksview.cpp:144
 #: controllers/view/stringsextract/stringsextractview.cpp:191
 #: controllers/view/structures/structureview.cpp:386
-#, fuzzy, kde-format
-#| msgctxt "@title:column offset of the bookmark"
-#| msgid "Offset"
+#, kde-format
 msgctxt "@action"
 msgid "Copy Offset"
-msgstr "偏移量"
+msgstr ""
 
 #: controllers/view/bookmarks/bookmarksview.cpp:146
 #: controllers/view/stringsextract/stringsextractview.cpp:193
 #: controllers/view/structures/structureview.cpp:388
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Copies the selected strings to the clipboard."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the offset to the clipboard."
-msgstr "将所选字符串复制到剪贴板。"
+msgstr ""
 
 #: controllers/view/bytetable/bytetablemodel.cpp:139
 #: controllers/view/info/statistictablemodel.cpp:170
@@ -1439,12 +1429,10 @@ msgstr "编辑"
 
 #: controllers/view/poddecoder/podtableview.cpp:271
 #: controllers/view/structures/structureview.cpp:395
-#, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to select a range"
-#| msgid "Select"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Select"
-msgstr "选择"
+msgstr ""
 
 #: controllers/view/print/printtool.cpp:280
 #: controllers/view/print/printtool.cpp:310
@@ -1802,20 +1790,16 @@ msgstr ""
 "符串。"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:198
-#, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to select a range"
-#| msgid "Select"
+#, kde-format
 msgctxt "@action"
 msgid "Select"
-msgstr "选择"
+msgstr ""
 
 #: controllers/view/stringsextract/stringsextractview.cpp:200
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Shows the selected string in the view."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Selects the selected string in the view."
-msgstr "在视图中显示所选字符串。"
+msgstr ""
 
 #: controllers/view/stringsextract/stringsextractview.cpp:344
 #, kde-format
