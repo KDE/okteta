@@ -231,7 +231,7 @@ FIXME
 >Filtro binario</term>
     <listitem
 ><para
->El filtro realiza operaciones binarias en los bytes seleccionados. Después de elegir la operación (AND, OR, ROTATE...), los parámetros, si hay alguno, pueden ser configurados en el cuadro de diálogo que se muestra debajo. El filtro se ejecuta al usar el botón <guibutton
+>El filtro realiza operaciones binarias en los bytes seleccionados. Después de elegir la operación (AND, OR, ROTATE…), los parámetros, si hay alguno, pueden ser configurados en el cuadro de diálogo que se muestra debajo. El filtro se ejecuta al usar el botón <guibutton
 >Filtro</guibutton
 >.</para
 ></listitem>
@@ -403,7 +403,7 @@ Support for strings (various Unicode encodings) in definitions
 >El modo más fácil para instalar nuevas definiciones de estructuras consiste en usar la utilidad KNewStuff integrada en &okteta;. Para instalar una estructura existente, abra el diálogo de preferencias de la herramienta «Estructuras». Seleccione ahí la pestaña <guilabel
 >Gestión de estructuras</guilabel
 > y pulse el botón <guibutton
->Obtener nuevas estructuras...</guibutton
+>Obtener nuevas estructuras…</guibutton
 >. El diálogo que se muestra a continuación le permite instalar y desinstalar estructuras.</para>
       </sect3>
       <sect3>
@@ -1161,38 +1161,38 @@ Structures Script Console-->
     <listitem
 ><para
 ><action
->Crear un nuevo array de bytes...</action
+>Crear un nuevo array de bytes…</action
 ></para>
     <itemizedlist>
     <listitem
 ><para
 ><guimenuitem
 >Vacío</guimenuitem
->: ... como vacío.</para>
+>: … como vacío.</para>
     </listitem>
     <listitem
 ><para
 ><guimenuitem
 >Desde el portapapeles</guimenuitem
->: ... con el contenido actual del portapapeles.</para
+>: … con el contenido actual del portapapeles.</para
 ></listitem>
     <listitem
 ><para
 ><guimenuitem
->Patrón...</guimenuitem
->: ... con un patrón determinado.</para>
+>Patrón…</guimenuitem
+>: … con un patrón determinado.</para>
     </listitem>
     <listitem
 ><para
 ><guimenuitem
->Datos aleatorios...</guimenuitem
->: ... con datos aleatorios.</para
+>Datos aleatorios…</guimenuitem
+>: … con datos aleatorios.</para
 ></listitem>
     <listitem
 ><para
 ><guimenuitem
 >Secuencia</guimenuitem
->: ... con todos los bytes desde 0 a 255.</para
+>: … con todos los bytes desde 0 a 255.</para
 ></listitem>
     </itemizedlist>
     </listitem>
@@ -1209,13 +1209,13 @@ Structures Script Console-->
 ></term>
     <listitem
 ><para
->Exporta los bytes seleccionados a un archivo...</para>
+>Exporta los bytes seleccionados a un archivo…</para>
     <itemizedlist>
     <listitem
 ><para
 ><guimenuitem
 >Valores</guimenuitem
->: ... codificados como valores de bytes. Por omisión, los valores se separan con un espacio en blanco. Los caracteres de <guilabel
+>: … codificados como valores de bytes. Por omisión, los valores se separan con un espacio en blanco. Los caracteres de <guilabel
 >separación</guilabel
 > se pueden cambiar en el diálogo de <guilabel
 >Exportar</guilabel
@@ -1225,13 +1225,13 @@ Structures Script Console-->
 ><para
 ><guimenuitem
 >Caracteres</guimenuitem
->: ... codificados como texto sin formato. </para
+>: … codificados como texto sin formato. </para
 ></listitem>
     <listitem
 ><para
 ><guimenuitem
 >Base64</guimenuitem
->: ... codificado en formato <ulink url="https://es.wikipedia.org/wiki/Base64"
+>: … codificado en formato <ulink url="https://es.wikipedia.org/wiki/Base64"
 >Base64</ulink
 >.</para
 ></listitem>
@@ -1239,7 +1239,7 @@ Structures Script Console-->
 ><para
 ><guimenuitem
 >Base32</guimenuitem
->: ... codificado en formato <ulink url="https://es.wikipedia.org/wiki/Base32"
+>: … codificado en formato <ulink url="https://es.wikipedia.org/wiki/Base32"
 >Base32</ulink
 >.</para
 ></listitem>
@@ -1255,7 +1255,7 @@ Structures Script Console-->
 ><para
 ><guimenuitem
 >Uuencode</guimenuitem
->: ... codificado en formato <ulink url="https://es.wikipedia.org/wiki/UUEncode"
+>: … codificado en formato <ulink url="https://es.wikipedia.org/wiki/UUEncode"
 >Uuencode</ulink
 >.</para
 ></listitem>
@@ -1263,7 +1263,7 @@ Structures Script Console-->
 ><para
 ><guimenuitem
 >Xxencoding</guimenuitem
->: ... codificado en formato <ulink url="https://en.wikipedia.org/wiki/Xxencoding"
+>: … codificado en formato <ulink url="https://en.wikipedia.org/wiki/Xxencoding"
 >Xxencoding</ulink
 >.</para
 ></listitem>
@@ -1271,7 +1271,7 @@ Structures Script Console-->
 ><para
 ><guimenuitem
 >Intel Hex</guimenuitem
->: ... codificado en formato <ulink url="https://es.wikipedia.org/wiki/Intel_HEX"
+>: … codificado en formato <ulink url="https://es.wikipedia.org/wiki/Intel_HEX"
 >Intel Hex</ulink
 >.</para
 ></listitem>
@@ -1279,7 +1279,7 @@ Structures Script Console-->
 ><para
 ><guimenuitem
 >S-Record</guimenuitem
->: ... codificado en formato <ulink url="https://es.wikipedia.org/wiki/SREC"
+>: … codificado en formato <ulink url="https://es.wikipedia.org/wiki/SREC"
 >S-Record</ulink
 >.</para
 ></listitem>
@@ -1287,13 +1287,13 @@ Structures Script Console-->
 ><para
 ><guimenuitem
 >Array de C</guimenuitem
->: ... definido como un array en el lenguaje de programación C.</para
+>: … definido como un array en el lenguaje de programación C.</para
 ></listitem>
     <listitem
 ><para
 ><guimenuitem
 >Ver en texto plano</guimenuitem
->: ... como en la vista de datos con desplazamiento, muestra valores de bytes y caracteres. </para
+>: … como en la vista de datos con desplazamiento, muestra valores de bytes y caracteres. </para
 ></listitem>
     </itemizedlist>
     </listitem>
@@ -1381,7 +1381,7 @@ Structures Script Console-->
     <term
 ><menuchoice>
     <guimenuitem
->Insertar patrón...</guimenuitem>
+>Insertar patrón…</guimenuitem>
     </menuchoice
 ></term>
     <listitem
@@ -1433,7 +1433,7 @@ Structures Script Console-->
 > <guimenu
 >Editar</guimenu
 > <guimenuitem
->Seleccionar intervalo...</guimenuitem
+>Seleccionar intervalo…</guimenuitem
 > </menuchoice
 ></term>
     <listitem
@@ -1483,7 +1483,7 @@ Structures Script Console-->
 > <guimenu
 >Edición</guimenu
 > <guimenuitem
->Encontrar...</guimenuitem
+>Encontrar…</guimenuitem
 > </menuchoice
 ></term>
     <listitem
@@ -1508,7 +1508,7 @@ Structures Script Console-->
 > <guimenu
 >Edición</guimenu
 > <guimenuitem
->Ir al desplazamiento...</guimenuitem
+>Ir al desplazamiento…</guimenuitem
 > </menuchoice
 ></term>
     <listitem
@@ -1847,7 +1847,7 @@ Structures Script Console-->
 ><guimenu
 >Preferencias</guimenu
 ><guimenuitem
->Gestionar perfiles de la vista...</guimenuitem
+>Gestionar perfiles de la vista…</guimenuitem
 ></menuchoice
 >.</para
 ></listitem>
@@ -2012,7 +2012,7 @@ Structures Script Console-->
 ><guimenu
 >Preferencias</guimenu
 > <guimenuitem
->Gestionar perfiles de vistas...</guimenuitem
+>Gestionar perfiles de vistas…</guimenuitem
 > </menuchoice
 ></term>
     <listitem
