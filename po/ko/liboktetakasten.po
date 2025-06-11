@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-24 02:00+0000\n"
-"PO-Revision-Date: 2025-04-07 00:07+0200\n"
+"PO-Revision-Date: 2025-06-10 22:40+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -152,12 +152,10 @@ msgid "No bookmarks"
 msgstr "책갈피 없음"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:90
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu create a new view profile"
-#| msgid "Create New…"
+#, kde-format
 msgctxt "@action"
 msgid "Create New"
-msgstr "새로 만들기…"
+msgstr "새로 만들기"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:92
 #, kde-format
@@ -174,12 +172,10 @@ msgid ""
 msgstr "이 단추를 누르면 현재 커서 위치를 기억하는 책갈피를 만듭니다."
 
 #: controllers/view/bookmarks/bookmarksview.cpp:104
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Delete"
+#, kde-format
 msgctxt "@action"
 msgid "Delete"
-msgstr "삭제(&D)"
+msgstr "삭제"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:106
 #, kde-format
@@ -195,12 +191,10 @@ msgid ""
 msgstr "이 단추를 누르면 선택한 모든 책갈피를 삭제합니다."
 
 #: controllers/view/bookmarks/bookmarksview.cpp:119
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Go to Offset…"
+#, kde-format
 msgctxt "@action"
 msgid "Go to Offset"
-msgstr "위치로 이동(&G)…"
+msgstr "위치로 이동"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:121
 #, kde-format
@@ -220,7 +214,7 @@ msgstr "이 단추를 누르면 마지막으로 선택한 책갈피 위치로 �
 #, kde-format
 msgctxt "@action"
 msgid "Rename"
-msgstr ""
+msgstr "이름 바꾸기"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:133
 #, kde-format
@@ -239,22 +233,18 @@ msgstr "이 단추를 누르면 마지막으로 선택한 책갈피를 편집합
 #: controllers/view/bookmarks/bookmarksview.cpp:144
 #: controllers/view/stringsextract/stringsextractview.cpp:191
 #: controllers/view/structures/structureview.cpp:386
-#, fuzzy, kde-format
-#| msgctxt "@title:column offset of the bookmark"
-#| msgid "Offset"
+#, kde-format
 msgctxt "@action"
 msgid "Copy Offset"
-msgstr "위치"
+msgstr "위치 복사"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:146
 #: controllers/view/stringsextract/stringsextractview.cpp:193
 #: controllers/view/structures/structureview.cpp:388
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Copies the selected strings to the clipboard."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the offset to the clipboard."
-msgstr "선택한 문자열을 클립보드에 복사합니다."
+msgstr "현재 위치를 클립보드에 복사합니다."
 
 #: controllers/view/bytetable/bytetablemodel.cpp:139
 #: controllers/view/info/statistictablemodel.cpp:170
@@ -1451,9 +1441,7 @@ msgstr "편집"
 
 #: controllers/view/poddecoder/podtableview.cpp:271
 #: controllers/view/structures/structureview.cpp:395
-#, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to select a range"
-#| msgid "Select"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Select"
 msgstr "선택"
@@ -1816,20 +1804,16 @@ msgstr ""
 "서 강조해서 보여 줍니다."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:198
-#, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to select a range"
-#| msgid "Select"
+#, kde-format
 msgctxt "@action"
 msgid "Select"
 msgstr "선택"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:200
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Shows the selected string in the view."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Selects the selected string in the view."
-msgstr "선택한 문자열을 보여 줍니다."
+msgstr "보기에서 선택한 문자열을 선택합니다."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:344
 #, kde-format
