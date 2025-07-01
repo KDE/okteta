@@ -23,9 +23,9 @@ macro(KASTENGUI_ADD_SUBLIBRARY _library_name)
     )
 endmacro()
 
-macro(KASTENGUI_SUBLIBRARY_SOURCES _subdir)
+macro(KASTENGUI_SUBLIBRARY_SOURCES _library_name)
     okteta_sublibrary_sources(Gui NAMESPACE Kasten
-        SUBDIR ${_subdir}
+        SUBLIBRARY ${_library_name}
         ${ARGN}
     )
 endmacro()
@@ -50,8 +50,8 @@ okteta_sublibrary_sources(Gui NAMESPACE Kasten
         KastenGui
 )
 
-kastengui_sublibrary_sources(view
-    SUBLIBRARY kastenview
+kastengui_sublibrary_sources(kastenview
+    SUBDIR view
     BUILD_INCLUDEDIR
     PUBLIC
         SelectedDataWriteable
@@ -77,8 +77,8 @@ kastengui_add_sublibrary(kastenguiio
         Qt5::Widgets
 )
 
-kastengui_sublibrary_sources(io
-    SUBLIBRARY kastenguiio
+kastengui_sublibrary_sources(kastenguiio
+    SUBDIR io
     BUILD_INCLUDEDIR
     PUBLIC
         AbstractModelStreamEncoderConfigEditor
@@ -97,8 +97,8 @@ kastengui_add_sublibrary(kastenguifilesystemio
         kastenguiio
 )
 
-kastengui_sublibrary_sources(io/filesystem
-    SUBLIBRARY kastenguifilesystemio
+kastengui_sublibrary_sources(kastenguifilesystemio
+    SUBDIR io/filesystem
     PUBLIC
         ModelEncoderFileSystemExporterConfigEditor
         ModelEncoderFileSystemExporterConfigEditorFactory
@@ -115,8 +115,8 @@ kastengui_add_sublibrary(kastenguisystem
     KI18N_TRANSLATION_DOMAIN "libkasten"
 )
 
-kastengui_sublibrary_sources(system
-    SUBLIBRARY kastenguisystem
+kastengui_sublibrary_sources(kastenguisystem
+    SUBDIR system
     BUILD_INCLUDEDIR
     PUBLIC
         AbstractDocumentStrategy
@@ -141,8 +141,8 @@ kastengui_add_sublibrary(kastenguicontroller
         Qt5::Widgets
 )
 
-kastengui_sublibrary_sources(controller
-    SUBLIBRARY kastenguicontroller
+kastengui_sublibrary_sources(kastenguicontroller
+    SUBDIR controller
     BUILD_INCLUDEDIR
     PUBLIC
         AbstractXmlGuiController
@@ -162,8 +162,8 @@ kastengui_add_sublibrary(kastenguishell
         KF5::XmlGui
 )
 
-kastengui_sublibrary_sources(shell
-    SUBLIBRARY kastenguishell
+kastengui_sublibrary_sources(kastenguishell
+    SUBDIR shell
     BUILD_INCLUDEDIR
     PUBLIC
         ToolInlineViewable
