@@ -38,7 +38,7 @@ macro(OKTETACORE_SUBLIBRARY_SOURCES _library_name)
     )
 endmacro()
 
-oktetacore_add_sublibrary(coretypes
+oktetacore_add_sublibrary(OktetaCoreTypes
     PUBLIC
         Qt5::Core
     PRIVATE
@@ -46,36 +46,36 @@ oktetacore_add_sublibrary(coretypes
     KI18N_TRANSLATION_DOMAIN "liboktetacore"
 )
 
-oktetacore_add_sublibrary(bookmark
+oktetacore_add_sublibrary(OktetaCoreBookmark
     PUBLIC
-        coretypes
+        OktetaCoreTypes
 )
 
-oktetacore_add_sublibrary(charcodecs
+oktetacore_add_sublibrary(OktetaCoreCharCodecs
     PUBLIC
-        coretypes
+        OktetaCoreTypes
 )
 
-oktetacore_add_sublibrary(valuecodecs
+oktetacore_add_sublibrary(OktetaCoreValueCodecs
     PUBLIC
-        coretypes
+        OktetaCoreTypes
 )
 
-oktetacore_add_sublibrary(piecetable
+oktetacore_add_sublibrary(OktetaCorePieceTable
     PUBLIC
-        coretypes
+        OktetaCoreTypes
     PRIVATE
         KF5::I18n
     KI18N_TRANSLATION_DOMAIN "liboktetacore"
 )
 
-oktetacore_add_sublibrary(bytearraymodels
+oktetacore_add_sublibrary(OktetaCoreByteArrayModels
     PUBLIC
-        bookmark
-        piecetable
+        OktetaCoreBookmark
+        OktetaCorePieceTable
 )
 
-oktetacore_sublibrary_sources(coretypes
+oktetacore_sublibrary_sources(OktetaCoreTypes
     PUBLIC
         OktetaCore
         Range
@@ -96,7 +96,7 @@ oktetacore_sublibrary_sources(coretypes
         AddressRangeList
 )
 
-oktetacore_sublibrary_sources(bookmark
+oktetacore_sublibrary_sources(OktetaCoreBookmark
     PUBLIC
         Bookmark
         BookmarksConstIteratorAdapter # TODO: make private or move adapter class to iterator
@@ -107,7 +107,7 @@ oktetacore_sublibrary_sources(bookmark
         BookmarkList
 )
 
-oktetacore_sublibrary_sources(charcodecs
+oktetacore_sublibrary_sources(OktetaCoreCharCodecs
     SUBDIR charcodecs
     PRIVATE
         CharCodec
@@ -118,7 +118,7 @@ oktetacore_sublibrary_sources(charcodecs
         TextCharCodec
 )
 
-oktetacore_sublibrary_sources(valuecodecs
+oktetacore_sublibrary_sources(OktetaCoreValueCodecs
     SUBDIR valuecodecs
     PRIVATE
         BinaryByteCodec
@@ -128,7 +128,7 @@ oktetacore_sublibrary_sources(valuecodecs
         OctalByteCodec
 )
 
-oktetacore_sublibrary_sources(piecetable
+oktetacore_sublibrary_sources(OktetaCorePieceTable
     SUBDIR piecetable
     PRIVATE
         PieceList
@@ -144,7 +144,7 @@ oktetacore_sublibrary_sources(piecetable
         RevertablePiecetable
 )
 
-oktetacore_sublibrary_sources(bytearraymodels
+oktetacore_sublibrary_sources(OktetaCoreByteArrayModels
     PUBLIC
         AbstractByteArrayModel
         Versionable

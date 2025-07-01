@@ -42,7 +42,7 @@ ecm_add_test(
         OktetaKastenCoreDocumentSourcesTestShim
         KastenCore
         TestOktetaCoreTestUtil
-        bytearraymodels
+        OktetaCoreByteArrayModels
         KF5::I18n
         Qt5::Test
 )

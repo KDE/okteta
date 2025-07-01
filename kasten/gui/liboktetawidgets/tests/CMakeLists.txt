@@ -19,7 +19,7 @@ ecm_add_test(
     NAME_PREFIX oktetakasten-oktetawidgets-
     LINK_LIBRARIES
         OktetaWidgetsSourcesTestShim
-        charcodecs
+        OktetaCoreCharCodecs
         Qt5::Test
 )
 
@@ -30,7 +30,7 @@ ecm_add_test(
     NAME_PREFIX oktetakasten-oktetawidgets-
     LINK_LIBRARIES
         OktetaWidgetsSourcesTestShim
-        charcodecs
+        OktetaCoreCharCodecs
         Qt5::Test
 )
 
@@ -42,7 +42,7 @@ ecm_add_test(
     NAME_PREFIX oktetakasten-oktetawidgets-
     LINK_LIBRARIES
         OktetaWidgetsSourcesTestShim
-        charcodecs
+        OktetaCoreCharCodecs
         Qt5::Test
 )
 
@@ -53,7 +53,7 @@ ecm_add_test(
     NAME_PREFIX oktetakasten-oktetawidgets-
     LINK_LIBRARIES
         OktetaWidgetsSourcesTestShim
-        charcodecs
+        OktetaCoreCharCodecs
         Qt5::Test
 )
 
@@ -64,7 +64,7 @@ ecm_add_test(
     NAME_PREFIX oktetakasten-oktetawidgets-
     LINK_LIBRARIES
         OktetaWidgetsSourcesTestShim
-        charcodecs
+        OktetaCoreCharCodecs
         Qt5::Test
 )
 
@@ -82,8 +82,8 @@ ecm_add_test(
     NAME_PREFIX oktetakasten-oktetawidgets-
     LINK_LIBRARIES
         OktetaWidgetsSourcesTestShim
-        charcodecs
-        valuecodecs
+        OktetaCoreCharCodecs
+        OktetaCoreValueCodecs
         Qt5::Gui
         Qt5::Test
 )
