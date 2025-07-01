@@ -30,9 +30,9 @@ macro(KASTENCORE_ADD_SUBLIBRARY _library_name)
     )
 endmacro()
 
-macro(KASTENCORE_SUBLIBRARY_SOURCES _subdir)
+macro(KASTENCORE_SUBLIBRARY_SOURCES _library_name)
     okteta_sublibrary_sources(Core NAMESPACE Kasten
-        SUBDIR ${_subdir}
+        SUBLIBRARY ${_library_name}
         ${ARGN}
     )
 endmacro()
@@ -53,8 +53,8 @@ kastencore_add_sublibrary(kastenusermessages
         KF5::WidgetsAddons
 )
 
-kastencore_sublibrary_sources(usermessages
-    SUBLIBRARY kastenusermessages
+kastencore_sublibrary_sources(kastenusermessages
+    SUBDIR usermessages
     BUILD_INCLUDEDIR
     PUBLIC
         UserErrorReport
@@ -76,8 +76,8 @@ okteta_sublibrary_sources(Core NAMESPACE Kasten
         KastenCore
 )
 
-kastencore_sublibrary_sources(document
-    SUBLIBRARY kastendocument
+kastencore_sublibrary_sources(kastendocument
+    SUBDIR document
     BUILD_INCLUDEDIR
     PUBLIC
         Versionable
@@ -94,8 +94,8 @@ kastencore_sublibrary_sources(document
         DocumentVersionData
 )
 
-kastencore_sublibrary_sources(io
-    SUBLIBRARY kastendocument
+kastencore_sublibrary_sources(kastendocument
+    SUBDIR io
     BUILD_INCLUDEDIR
     PUBLIC
         AbstractSyncToRemoteJob
@@ -123,8 +123,8 @@ kastencore_add_sublibrary(kastenfilesystemio
         Qt5::Network
 )
 
-kastencore_sublibrary_sources(io/filesystem
-    SUBLIBRARY kastenfilesystemio
+kastencore_sublibrary_sources(kastenfilesystemio
+    SUBDIR io/filesystem
     BUILD_INCLUDEDIR
     PUBLIC
         AbstractFileSystemSyncWithRemoteJob
@@ -151,8 +151,8 @@ kastencore_add_sublibrary(kastencoresystem
     KI18N_TRANSLATION_DOMAIN "libkasten"
 )
 
-kastencore_sublibrary_sources(system
-    SUBLIBRARY kastencoresystem
+kastencore_sublibrary_sources(kastencoresystem
+    SUBDIR system
     BUILD_INCLUDEDIR
     PUBLIC
         AbstractUserMessagesHandler
