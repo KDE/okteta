@@ -27,7 +27,7 @@ ecm_qt_declare_logging_category(OktetaGui
 )
 
 okteta_add_sublibrary(Gui NAMESPACE Okteta
-    SUBLIBRARY columnsview
+    SUBLIBRARY OktetaGuiColumnsView
     UNTESTED
     PUBLIC
         OktetaCore
@@ -38,7 +38,7 @@ okteta_add_sublibrary(Gui NAMESPACE Okteta
 )
 
 okteta_sublibrary_sources(Gui NAMESPACE Okteta
-    SUBLIBRARY columnsview
+    SUBLIBRARY OktetaGuiColumnsView
     SUBDIR libcolumnsview
     BUILD_INCLUDEDIR
     PUBLIC
