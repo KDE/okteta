@@ -30,7 +30,7 @@ macro(KASTENGUI_SUBLIBRARY_SOURCES _library_name)
     )
 endmacro()
 
-kastengui_add_sublibrary(kastenview
+kastengui_add_sublibrary(KastenGuiView
     UNTESTED
     PUBLIC
         KastenCore
@@ -44,12 +44,12 @@ okteta_qt_declare_logging_category(KastenGui
     EXPORT OKTETA
 )
 
-kastengui_sublibrary_sources(kastenview
+kastengui_sublibrary_sources(KastenGuiView
     PUBLIC
         KastenGui
 )
 
-kastengui_sublibrary_sources(kastenview
+kastengui_sublibrary_sources(KastenGuiView
     SUBDIR view
     BUILD_INCLUDEDIR
     PUBLIC
@@ -69,14 +69,14 @@ kastengui_sublibrary_sources(kastenview
         AbstractToolInlineView
 )
 
-kastengui_add_sublibrary(kastenguiio
+kastengui_add_sublibrary(KastenGuiIo
     UNTESTED
     PUBLIC
         KastenCore
         Qt5::Widgets
 )
 
-kastengui_sublibrary_sources(kastenguiio
+kastengui_sublibrary_sources(KastenGuiIo
     SUBDIR io
     BUILD_INCLUDEDIR
     PUBLIC
@@ -90,31 +90,31 @@ kastengui_sublibrary_sources(kastenguiio
         AbstractModelDataGeneratorConfigEditorFactory
 )
 
-kastengui_add_sublibrary(kastenguifilesystemio
+kastengui_add_sublibrary(KastenGuiFileSystemIo
     UNTESTED
     PUBLIC
-        kastenguiio
+        KastenGuiIo
 )
 
-kastengui_sublibrary_sources(kastenguifilesystemio
+kastengui_sublibrary_sources(KastenGuiFileSystemIo
     SUBDIR io/filesystem
     PUBLIC
         ModelEncoderFileSystemExporterConfigEditor
         ModelEncoderFileSystemExporterConfigEditorFactory
 )
 
-kastengui_add_sublibrary(kastenguisystem
+kastengui_add_sublibrary(KastenGuiSystem
     UNTESTED
     PUBLIC
-        kastenview
-        kastenguiio
+        KastenGuiView
+        KastenGuiIo
     PRIVATE
         KF5::WidgetsAddons
         KF5::I18n
     KI18N_TRANSLATION_DOMAIN "libkasten"
 )
 
-kastengui_sublibrary_sources(kastenguisystem
+kastengui_sublibrary_sources(KastenGuiSystem
     SUBDIR system
     BUILD_INCLUDEDIR
     PUBLIC
@@ -133,14 +133,14 @@ kastengui_sublibrary_sources(kastenguisystem
         CreateDialog
 )
 
-kastengui_add_sublibrary(kastenguicontroller
+kastengui_add_sublibrary(KastenGuiController
     UNTESTED
     PUBLIC
         KastenCore
         Qt5::Widgets
 )
 
-kastengui_sublibrary_sources(kastenguicontroller
+kastengui_sublibrary_sources(KastenGuiController
     SUBDIR controller
     BUILD_INCLUDEDIR
     PUBLIC
@@ -152,16 +152,16 @@ kastengui_sublibrary_sources(kastenguicontroller
         ToggleButton
 )
 
-kastengui_add_sublibrary(kastenguishell
+kastengui_add_sublibrary(KastenGuiShell
     UNTESTED
     PUBLIC
-        kastenview
-        kastenguicontroller
-        kastenguisystem
+        KastenGuiView
+        KastenGuiController
+        KastenGuiSystem
         KF5::XmlGui
 )
 
-kastengui_sublibrary_sources(kastenguishell
+kastengui_sublibrary_sources(KastenGuiShell
     SUBDIR shell
     BUILD_INCLUDEDIR
     PUBLIC
