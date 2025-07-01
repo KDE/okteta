@@ -44,8 +44,7 @@ okteta_qt_declare_logging_category(KastenGui
     EXPORT OKTETA
 )
 
-okteta_sublibrary_sources(Gui NAMESPACE Kasten
-    SUBLIBRARY kastenview
+kastengui_sublibrary_sources(kastenview
     PUBLIC
         KastenGui
 )
