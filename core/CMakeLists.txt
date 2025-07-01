@@ -31,9 +31,9 @@ macro(OKTETACORE_ADD_SUBLIBRARY _library_name)
     )
 endmacro()
 
-macro(OKTETACORE_SUBLIBRARY_SOURCES _subdir)
+macro(OKTETACORE_SUBLIBRARY_SOURCES _library_name)
     okteta_sublibrary_sources(Core NAMESPACE Okteta
-        SUBDIR ${_subdir}
+        SUBLIBRARY ${_library_name}
         ${ARGN}
     )
 endmacro()
@@ -110,7 +110,7 @@ okteta_sublibrary_sources(Core NAMESPACE Okteta
 )
 
 oktetacore_sublibrary_sources(charcodecs
-    SUBLIBRARY charcodecs
+    SUBDIR charcodecs
     PRIVATE
         CharCodec
         USASCIICharCodec
@@ -121,7 +121,7 @@ oktetacore_sublibrary_sources(charcodecs
 )
 
 oktetacore_sublibrary_sources(valuecodecs
-    SUBLIBRARY valuecodecs
+    SUBDIR valuecodecs
     PRIVATE
         BinaryByteCodec
         ValueCodec
@@ -131,7 +131,7 @@ oktetacore_sublibrary_sources(valuecodecs
 )
 
 oktetacore_sublibrary_sources(piecetable
-    SUBLIBRARY piecetable
+    SUBDIR piecetable
     PRIVATE
         PieceList
         PieceTable
