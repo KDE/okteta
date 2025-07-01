@@ -54,10 +54,10 @@ macro(OKTETAKASTENCONTROLLERS_ADD_SUBLIBRARY _library_name)
     )
 endmacro()
 
-macro(OKTETAKASTENCONTROLLERS_SUBLIBRARY_SOURCES _subdir)
+macro(OKTETAKASTENCONTROLLERS_SUBLIBRARY_SOURCES _library_name)
     okteta_sublibrary_sources(Controllers NAMESPACE Okteta Kasten
         REVERSE_NAMESPACE_INCLUDEDIR
-        SUBDIR ${_subdir}
+        SUBLIBRARY ${_library_name}
         ${ARGN}
     )
 endmacro()
@@ -162,8 +162,8 @@ okteta_qt_declare_logging_category(Controllers NAMESPACE Okteta Kasten
     EXPORT OKTETA
 )
 
-oktetakastencontrollers_sublibrary_sources(libconfigentries
-    SUBLIBRARY configentries
+oktetakastencontrollers_sublibrary_sources(configentries
+    SUBDIR libconfigentries
     BUILD_INCLUDEDIR
     PRIVATE
         AddressComboBoxCodingConfigEntry
@@ -230,9 +230,9 @@ oktetakastencontrollers_library_sources(view/stringsextract
         StringsExtractToolView
 )
 
-oktetakastencontrollers_sublibrary_sources(view/libbytearraychecksum
+oktetakastencontrollers_sublibrary_sources(bytearraychecksum
+    SUBDIR view/libbytearraychecksum
     BUILD_INCLUDEDIR
-    SUBLIBRARY bytearraychecksum
     PRIVATE
         AbstractByteArrayChecksumAlgorithm
         AbstractByteArrayChecksumParameterSet
@@ -241,8 +241,8 @@ oktetakastencontrollers_sublibrary_sources(view/libbytearraychecksum
         ByteArrayChecksumParameterSetEditFactory
 )
 
-oktetakastencontrollers_sublibrary_sources(view/libbytearraychecksum/algorithm
-    SUBLIBRARY bytearraychecksum
+oktetakastencontrollers_sublibrary_sources(bytearraychecksum
+    SUBDIR view/libbytearraychecksum/algorithm
     PRIVATE
         Crc32ByteArrayChecksumAlgorithm
         Crc64ByteArrayChecksumAlgorithm
@@ -283,25 +283,25 @@ oktetakastencontrollers_library_sources(view/checksum
         ChecksumToolView
 )
 
-oktetakastencontrollers_sublibrary_sources(view/libfinddialog
+oktetakastencontrollers_sublibrary_sources(finddialog
+    SUBDIR view/libfinddialog
     BUILD_INCLUDEDIR
-    SUBLIBRARY finddialog
     PRIVATE
         AbstractFindDialog
         FindDirection
 )
 
-oktetakastencontrollers_sublibrary_sources(view/libbytearraysearch
+oktetakastencontrollers_sublibrary_sources(bytearraysearch
+    SUBDIR view/libbytearraysearch
     BUILD_INCLUDEDIR
-    SUBLIBRARY bytearraysearch
     PRIVATE
         ByteArraySearchJob
         ByteArraySearchUtils
 )
 
-oktetakastencontrollers_sublibrary_sources(view/libdatatypes
+oktetakastencontrollers_sublibrary_sources(datatypes
+    SUBDIR view/libdatatypes
     BUILD_INCLUDEDIR
-    SUBLIBRARY datatypes
     PRIVATE
         Binary8
         Octal8
@@ -321,17 +321,17 @@ oktetakastencontrollers_sublibrary_sources(view/libdatatypes
         Utf16
 )
 
-oktetakastencontrollers_sublibrary_sources(view/libdatatypedisplaystringifiers
+oktetakastencontrollers_sublibrary_sources(datatypedisplaystringifiers
+    SUBDIR view/libdatatypedisplaystringifiers
     BUILD_INCLUDEDIR
-    SUBLIBRARY datatypedisplaystringifiers
     PRIVATE
         AbstractDataTypeDisplayStringifier
         DataTypeDisplayStringifierManager
 )
 
-oktetakastencontrollers_sublibrary_sources(view/libdatatypeeditors
+oktetakastencontrollers_sublibrary_sources(datatypeeditors
+    SUBDIR view/libdatatypeeditors
     BUILD_INCLUDEDIR
-    SUBLIBRARY datatypeeditors
     PRIVATE
         AbstractValue8Editor
         Binary8Editor
@@ -348,9 +348,9 @@ oktetakastencontrollers_sublibrary_sources(view/libdatatypeeditors
         Utf16Editor
 )
 
-oktetakastencontrollers_sublibrary_sources(view/libdatatypecodecs
+oktetakastencontrollers_sublibrary_sources(datatypecodecs
+    SUBDIR view/libdatatypecodecs
     BUILD_INCLUDEDIR
-    SUBLIBRARY datatypecodecs
     PRIVATE
         PODData
         AbstractTypeCodec
@@ -427,9 +427,9 @@ oktetakastencontrollers_library_sources(view/replace
         ReplaceTool
 )
 
-oktetakastencontrollers_sublibrary_sources(view/libbytearrayfilter
+oktetakastencontrollers_sublibrary_sources(bytearrayfilter
+    SUBDIR view/libbytearrayfilter
     BUILD_INCLUDEDIR
-    SUBLIBRARY bytearrayfilter
     PRIVATE
         AbstractByteArrayFilter
         AbstractByteArrayFilterParameterSet
@@ -438,8 +438,8 @@ oktetakastencontrollers_sublibrary_sources(view/libbytearrayfilter
         ByteArrayFilterParameterSetEditFactory
 )
 
-oktetakastencontrollers_sublibrary_sources(view/libbytearrayfilter/filter
-    SUBLIBRARY bytearrayfilter
+oktetakastencontrollers_sublibrary_sources(bytearrayfilter
+    SUBDIR view/libbytearrayfilter/filter
     PRIVATE
         NoByteArrayFilterParameterSet
         OperandByteArrayFilterParameterSet
@@ -534,8 +534,8 @@ oktetakastencontrollers_library_sources(view/bookmarks
 )
 
 
-oktetakastencontrollers_sublibrary_sources(view/structures/datatypes
-    SUBLIBRARY structuresdatatypes
+oktetakastencontrollers_sublibrary_sources(structuresdatatypes
+    SUBDIR view/structures/datatypes
     PRIVATE
         TopLevelDataInformation
         DataInformation
@@ -549,8 +549,8 @@ oktetakastencontrollers_sublibrary_sources(view/structures/datatypes
         PrimitiveDataType
 )
 
-oktetakastencontrollers_sublibrary_sources(view/structures/datatypes/array
-    SUBLIBRARY structuresdatatypes
+oktetakastencontrollers_sublibrary_sources(structuresdatatypes
+    SUBDIR view/structures/datatypes/array
     PRIVATE
         ArrayDataInformation
         AbstractArrayData
@@ -558,8 +558,8 @@ oktetakastencontrollers_sublibrary_sources(view/structures/datatypes/array
         PrimitiveArrayData
 )
 
-oktetakastencontrollers_sublibrary_sources(view/structures/datatypes/primitive
-    SUBLIBRARY structuresdatatypes
+oktetakastencontrollers_sublibrary_sources(structuresdatatypes
+    SUBDIR view/structures/datatypes/primitive
     PRIVATE
         PointerDataInformation
         CharDataInformation
@@ -575,8 +575,8 @@ oktetakastencontrollers_sublibrary_sources(view/structures/datatypes/primitive
         EnumDefinition
 )
 
-oktetakastencontrollers_sublibrary_sources(view/structures/datatypes/primitive/bitfield
-    SUBLIBRARY structuresdatatypes
+oktetakastencontrollers_sublibrary_sources(structuresdatatypes
+    SUBDIR view/structures/datatypes/primitive/bitfield
     PRIVATE
         AbstractBitfieldDataInformation
         BoolBitfieldDataInformation
@@ -584,8 +584,8 @@ oktetakastencontrollers_sublibrary_sources(view/structures/datatypes/primitive/b
         UnsignedBitfieldDataInformation
 )
 
-oktetakastencontrollers_sublibrary_sources(view/structures/datatypes/strings
-    SUBLIBRARY structuresdatatypes
+oktetakastencontrollers_sublibrary_sources(structuresdatatypes
+    SUBDIR view/structures/datatypes/strings
     PRIVATE
         StringDataInformation
         StringData
@@ -597,14 +597,14 @@ oktetakastencontrollers_sublibrary_sources(view/structures/datatypes/strings
         EbcdicStringData
 )
 
-oktetakastencontrollers_sublibrary_sources(../../core/charcodecs
-    SUBLIBRARY structuresdatatypes
+oktetakastencontrollers_sublibrary_sources(structuresdatatypes
+    SUBDIR ../../core/charcodecs
     PRIVATE
         Ebcdic1047CharCodec
 )
 
-oktetakastencontrollers_sublibrary_sources(view/structures/script
-    SUBLIBRARY structuresdatatypes
+oktetakastencontrollers_sublibrary_sources(structuresdatatypes
+    SUBDIR view/structures/script
     PRIVATE
         ScriptEngineInitializer
         ScriptHandler
@@ -614,8 +614,8 @@ oktetakastencontrollers_sublibrary_sources(view/structures/script
         SafeReference
 )
 
-oktetakastencontrollers_sublibrary_sources(view/structures/script/classes
-    SUBLIBRARY structuresdatatypes
+oktetakastencontrollers_sublibrary_sources(structuresdatatypes
+    SUBDIR view/structures/script/classes
     PRIVATE
         DefaultScriptClass
         ArrayScriptClass
@@ -627,8 +627,8 @@ oktetakastencontrollers_sublibrary_sources(view/structures/script/classes
         StructUnionScriptClass
 )
 
-oktetakastencontrollers_sublibrary_sources(view/structures/parsers
-    SUBLIBRARY structuresdatatypes
+oktetakastencontrollers_sublibrary_sources(structuresdatatypes
+    SUBDIR view/structures/parsers
     PRIVATE
         AbstractStructureParser
         OsdParser
@@ -638,14 +638,14 @@ oktetakastencontrollers_sublibrary_sources(view/structures/parsers
         ParserUtils
 )
 
-oktetakastencontrollers_sublibrary_sources(view/structures/settings
-    SUBLIBRARY structuresdatatypes
+oktetakastencontrollers_sublibrary_sources(structuresdatatypes
+    SUBDIR view/structures/settings
     KCFG
         structureviewpreferences.kcfgc
 )
 
-oktetakastencontrollers_sublibrary_sources(view/structures
-    SUBLIBRARY structuresdatatypes
+oktetakastencontrollers_sublibrary_sources(structuresdatatypes
+    SUBDIR view/structures
     PRIVATE
         AllPrimitiveTypes
 )
