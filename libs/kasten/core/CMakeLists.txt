@@ -45,7 +45,7 @@ endmacro()
 #         Person
 # )
 
-kastencore_add_sublibrary(kastenusermessages
+kastencore_add_sublibrary(KastenCoreUserMessages
     UNTESTED
     PUBLIC
         Qt5::Core
@@ -53,7 +53,7 @@ kastencore_add_sublibrary(kastenusermessages
         KF5::WidgetsAddons
 )
 
-kastencore_sublibrary_sources(kastenusermessages
+kastencore_sublibrary_sources(KastenCoreUserMessages
     SUBDIR usermessages
     BUILD_INCLUDEDIR
     PUBLIC
@@ -63,19 +63,19 @@ kastencore_sublibrary_sources(kastenusermessages
         UserQuery
 )
 
-kastencore_add_sublibrary(kastendocument
+kastencore_add_sublibrary(KastenCoreDocument
     UNTESTED
     PUBLIC
         KF5::CoreAddons
         Qt5::Core
 )
 
-kastencore_sublibrary_sources(kastendocument
+kastencore_sublibrary_sources(KastenCoreDocument
     PUBLIC
         KastenCore
 )
 
-kastencore_sublibrary_sources(kastendocument
+kastencore_sublibrary_sources(KastenCoreDocument
     SUBDIR document
     BUILD_INCLUDEDIR
     PUBLIC
@@ -93,7 +93,7 @@ kastencore_sublibrary_sources(kastendocument
         DocumentVersionData
 )
 
-kastencore_sublibrary_sources(kastendocument
+kastencore_sublibrary_sources(KastenCoreDocument
     SUBDIR io
     BUILD_INCLUDEDIR
     PUBLIC
@@ -112,17 +112,17 @@ kastencore_sublibrary_sources(kastendocument
         AbstractModelSynchronizerFactory
 )
 
-kastencore_add_sublibrary(kastenfilesystemio
+kastencore_add_sublibrary(KastenCoreFileSystemIo
     UNTESTED
     PUBLIC
-        kastendocument
+        KastenCoreDocument
     PRIVATE
         KF5::JobWidgets
         KF5::KIOCore
         Qt5::Network
 )
 
-kastencore_sublibrary_sources(kastenfilesystemio
+kastencore_sublibrary_sources(KastenCoreFileSystemIo
     SUBDIR io/filesystem
     BUILD_INCLUDEDIR
     PUBLIC
@@ -137,12 +137,12 @@ kastencore_sublibrary_sources(kastenfilesystemio
         ModelEncoderFileSystemExportJob
 )
 
-kastencore_add_sublibrary(kastencoresystem
+kastencore_add_sublibrary(KastenCoreSystem
     UNTESTED
     PUBLIC
-        kastendocument
+        KastenCoreDocument
     PRIVATE
-        kastenfilesystemio
+        KastenCoreFileSystemIo
         KF5::I18n
         KF5::JobWidgets
         KF5::KIOCore
@@ -150,7 +150,7 @@ kastencore_add_sublibrary(kastencoresystem
     KI18N_TRANSLATION_DOMAIN "libkasten"
 )
 
-kastencore_sublibrary_sources(kastencoresystem
+kastencore_sublibrary_sources(KastenCoreSystem
     SUBDIR system
     BUILD_INCLUDEDIR
     PUBLIC
