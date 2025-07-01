@@ -70,8 +70,7 @@ kastencore_add_sublibrary(kastendocument
         Qt5::Core
 )
 
-okteta_sublibrary_sources(Core NAMESPACE Kasten
-    SUBLIBRARY kastendocument
+kastencore_sublibrary_sources(kastendocument
     PUBLIC
         KastenCore
 )
