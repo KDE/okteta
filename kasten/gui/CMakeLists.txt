@@ -37,6 +37,13 @@ macro(OKTETAKASTENGUI_LIBRARY_SOURCES _subdir)
     )
 endmacro()
 
+macro(OKTETAKASTENGUI_ADD_SUBLIBRARY _library_name)
+    okteta_add_sublibrary(Gui NAMESPACE Okteta Kasten
+        SUBLIBRARY ${_library_name}
+        ${ARGN}
+    )
+endmacro()
+
 macro(OKTETAKASTENGUI_SUBLIBRARY_SOURCES _subdir)
     okteta_sublibrary_sources(Gui NAMESPACE Okteta Kasten
         REVERSE_NAMESPACE_INCLUDEDIR
@@ -45,8 +52,7 @@ macro(OKTETAKASTENGUI_SUBLIBRARY_SOURCES _subdir)
     )
 endmacro()
 
-okteta_add_sublibrary(Gui NAMESPACE Okteta Kasten
-    SUBLIBRARY oktetawidgets
+oktetakastengui_add_sublibrary(oktetawidgets
     UNTESTED
     PUBLIC
         OktetaCore
@@ -77,8 +83,7 @@ oktetakastengui_sublibrary_sources(liboktetawidgets
         ByteArrayValueStringValidator
 )
 
-okteta_add_sublibrary(Gui NAMESPACE Okteta Kasten
-    SUBLIBRARY bytearrayview
+oktetakastengui_add_sublibrary(bytearrayview
     UNTESTED
     PUBLIC
         OktetaKastenCore
@@ -118,8 +123,7 @@ oktetakastengui_sublibrary_sources(io
 )
 
 
-okteta_add_sublibrary(Gui NAMESPACE Okteta Kasten
-    SUBLIBRARY bytearraystreamencoder
+oktetakastengui_add_sublibrary(bytearraystreamencoder
     UNTESTED
     PUBLIC
         OktetaKastenCore
@@ -242,8 +246,7 @@ oktetakastengui_streamencoder_sources(io
         ByteArrayStreamEncoderConfigEditorFactoryFactory
 )
 
-okteta_add_sublibrary(Gui NAMESPACE Okteta Kasten
-    SUBLIBRARY bytearraygenerator
+oktetakastengui_add_sublibrary(bytearraygenerator
     UNTESTED
     PUBLIC
         OktetaKastenCore
