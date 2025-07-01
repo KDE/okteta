@@ -75,8 +75,7 @@ oktetacore_add_sublibrary(bytearraymodels
         piecetable
 )
 
-okteta_sublibrary_sources(Core NAMESPACE Okteta
-    SUBLIBRARY coretypes
+oktetacore_sublibrary_sources(coretypes
     PUBLIC
         OktetaCore
         Range
@@ -97,8 +96,7 @@ okteta_sublibrary_sources(Core NAMESPACE Okteta
         AddressRangeList
 )
 
-okteta_sublibrary_sources(Core NAMESPACE Okteta
-    SUBLIBRARY bookmark
+oktetacore_sublibrary_sources(bookmark
     PUBLIC
         Bookmark
         BookmarksConstIteratorAdapter # TODO: make private or move adapter class to iterator
@@ -146,8 +144,7 @@ oktetacore_sublibrary_sources(piecetable
         RevertablePiecetable
 )
 
-okteta_sublibrary_sources(Core NAMESPACE Okteta
-    SUBLIBRARY bytearraymodels
+oktetacore_sublibrary_sources(bytearraymodels
     PUBLIC
         AbstractByteArrayModel
         Versionable
