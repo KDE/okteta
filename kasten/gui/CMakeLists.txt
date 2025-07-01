@@ -44,10 +44,10 @@ macro(OKTETAKASTENGUI_ADD_SUBLIBRARY _library_name)
     )
 endmacro()
 
-macro(OKTETAKASTENGUI_SUBLIBRARY_SOURCES _subdir)
+macro(OKTETAKASTENGUI_SUBLIBRARY_SOURCES _library_name)
     okteta_sublibrary_sources(Gui NAMESPACE Okteta Kasten
         REVERSE_NAMESPACE_INCLUDEDIR
-        SUBDIR ${_subdir}
+        SUBLIBRARY ${_library_name}
         ${ARGN}
     )
 endmacro()
@@ -64,8 +64,8 @@ oktetakastengui_add_sublibrary(oktetawidgets
     KI18N_TRANSLATION_DOMAIN "liboktetakasten"
 )
 
-oktetakastengui_sublibrary_sources(liboktetawidgets
-    SUBLIBRARY oktetawidgets
+oktetakastengui_sublibrary_sources(oktetawidgets
+    SUBDIR liboktetawidgets
     BUILD_INCLUDEDIR
     PUBLIC
         AddressComboBox
@@ -94,8 +94,8 @@ oktetakastengui_add_sublibrary(bytearrayview
     KI18N_TRANSLATION_DOMAIN "liboktetakasten"
 )
 
-oktetakastengui_sublibrary_sources(view
-    SUBLIBRARY bytearrayview
+oktetakastengui_sublibrary_sources(bytearrayview
+    SUBDIR view
     BUILD_INCLUDEDIR
     PUBLIC
         ByteArrayView
@@ -107,16 +107,16 @@ oktetakastengui_sublibrary_sources(view
         UserMessagesOverlayedWidget
 )
 
-oktetakastengui_sublibrary_sources(system
-    SUBLIBRARY bytearrayview
+oktetakastengui_sublibrary_sources(bytearrayview
+    SUBDIR system
     BUILD_INCLUDEDIR
     PUBLIC
         ByteArrayViewProfileLock
         ByteArrayViewProfileManager
 )
 
-oktetakastengui_sublibrary_sources(io
-    SUBLIBRARY bytearrayview
+oktetakastengui_sublibrary_sources(bytearrayview
+    SUBDIR io
     BUILD_INCLUDEDIR
     PUBLIC
         ByteArrayViewProfileSynchronizer
