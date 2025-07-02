@@ -24,11 +24,11 @@ target_link_libraries(OktetaCoreTestUtil
 )
 
 # variant for static version of OktetaCore
-add_library(TestOktetaCoreTestUtil STATIC)
-target_sources(TestOktetaCoreTestUtil PRIVATE
+add_library(OktetaCoreSourcesShimTestUtil STATIC)
+target_sources(OktetaCoreSourcesShimTestUtil PRIVATE
     util/fill.cpp
 )
-target_link_libraries(TestOktetaCoreTestUtil
+target_link_libraries(OktetaCoreSourcesShimTestUtil
     PUBLIC
       OktetaCoreSourcesTestShim
       Qt5::Core
@@ -78,7 +78,10 @@ ecm_add_test(
     fixedsizebytearraymodelabstractbytearraymodeliftest.cpp
     TEST_NAME fixedsizebytearraymodelabstractbytearraymodeliftest
     NAME_PREFIX libokteta-core-
-    LINK_LIBRARIES TestOktetaCoreTestUtil OktetaCoreByteArrayModels Qt5::Test
+    LINK_LIBRARIES
+        OktetaCoreSourcesShimTestUtil
+        OktetaCoreByteArrayModels
+        Qt5::Test
 )
 
 
@@ -95,7 +98,10 @@ ecm_add_test(
     bytearraymodelabstractbytearraymodeliftest.cpp
     TEST_NAME bytearraymodelabstractbytearraymodeliftest
     NAME_PREFIX libokteta-core-
-    LINK_LIBRARIES TestOktetaCoreTestUtil OktetaCoreByteArrayModels Qt5::Test
+    LINK_LIBRARIES
+        OktetaCoreSourcesShimTestUtil
+        OktetaCoreByteArrayModels
+        Qt5::Test
 )
 
 
@@ -104,7 +110,10 @@ ecm_add_test(
     piecetablebytearraymodelabstractbytearraymodeliftest.cpp
     TEST_NAME piecetablebytearraymodelabstractbytearraymodeliftest
     NAME_PREFIX libokteta-core-
-    LINK_LIBRARIES TestOktetaCoreTestUtil OktetaCoreByteArrayModels Qt5::Test
+    LINK_LIBRARIES
+        OktetaCoreSourcesShimTestUtil
+        OktetaCoreByteArrayModels
+        Qt5::Test
 )
 
 
