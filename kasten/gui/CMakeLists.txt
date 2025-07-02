@@ -52,7 +52,7 @@ macro(OKTETAKASTENGUI_SUBLIBRARY_SOURCES _library_name)
     )
 endmacro()
 
-oktetakastengui_add_sublibrary(oktetawidgets
+oktetakastengui_add_sublibrary(OktetaKastenGuiWidgets
     UNTESTED
     PUBLIC
         OktetaCore
@@ -64,7 +64,7 @@ oktetakastengui_add_sublibrary(oktetawidgets
     KI18N_TRANSLATION_DOMAIN "liboktetakasten"
 )
 
-oktetakastengui_sublibrary_sources(oktetawidgets
+oktetakastengui_sublibrary_sources(OktetaKastenGuiWidgets
     SUBDIR liboktetawidgets
     BUILD_INCLUDEDIR
     PUBLIC
@@ -83,7 +83,7 @@ oktetakastengui_sublibrary_sources(oktetawidgets
         ByteArrayValueStringValidator
 )
 
-oktetakastengui_add_sublibrary(bytearrayview
+oktetakastengui_add_sublibrary(OktetaKastenGuiView
     UNTESTED
     PUBLIC
         OktetaKastenCore
@@ -94,7 +94,7 @@ oktetakastengui_add_sublibrary(bytearrayview
     KI18N_TRANSLATION_DOMAIN "liboktetakasten"
 )
 
-oktetakastengui_sublibrary_sources(bytearrayview
+oktetakastengui_sublibrary_sources(OktetaKastenGuiView
     SUBDIR view
     BUILD_INCLUDEDIR
     PUBLIC
@@ -107,7 +107,7 @@ oktetakastengui_sublibrary_sources(bytearrayview
         UserMessagesOverlayedWidget
 )
 
-oktetakastengui_sublibrary_sources(bytearrayview
+oktetakastengui_sublibrary_sources(OktetaKastenGuiView
     SUBDIR system
     BUILD_INCLUDEDIR
     PUBLIC
@@ -115,7 +115,7 @@ oktetakastengui_sublibrary_sources(bytearrayview
         ByteArrayViewProfileManager
 )
 
-oktetakastengui_sublibrary_sources(bytearrayview
+oktetakastengui_sublibrary_sources(OktetaKastenGuiView
     SUBDIR io
     BUILD_INCLUDEDIR
     PUBLIC
@@ -123,15 +123,15 @@ oktetakastengui_sublibrary_sources(bytearrayview
 )
 
 
-oktetakastengui_add_sublibrary(bytearraystreamencoder
+oktetakastengui_add_sublibrary(OktetaKastenGuiStreamEncoder
     UNTESTED
     PUBLIC
         OktetaKastenCore
         KastenGui
         OktetaGui
     PRIVATE
-        oktetawidgets
-        bytearrayview
+        OktetaKastenGuiWidgets
+        OktetaKastenGuiView
         KF5::Completion
         KF5::I18n
     KI18N_TRANSLATION_DOMAIN "liboktetakasten"
@@ -140,7 +140,7 @@ oktetakastengui_add_sublibrary(bytearraystreamencoder
 macro(OKTETAKASTENGUI_STREAMENCODER_SOURCES _subdir)
     okteta_sublibrary_sources(Gui NAMESPACE Okteta Kasten
         REVERSE_NAMESPACE_INCLUDEDIR
-        SUBLIBRARY bytearraystreamencoder
+        SUBLIBRARY OktetaKastenGuiStreamEncoder
         SUBDIR ${_subdir}
         ${ARGN}
     )
@@ -246,15 +246,15 @@ oktetakastengui_streamencoder_sources(io
         ByteArrayStreamEncoderConfigEditorFactoryFactory
 )
 
-oktetakastengui_add_sublibrary(bytearraygenerator
+oktetakastengui_add_sublibrary(OktetaKastenGuiGenerator
     UNTESTED
     PUBLIC
         OktetaKastenCore
         KastenGui
         OktetaGui
     PRIVATE
-        oktetawidgets
-        bytearrayview
+        OktetaKastenGuiWidgets
+        OktetaKastenGuiView
         KF5::Completion
         KF5::I18n
     KI18N_TRANSLATION_DOMAIN "liboktetakasten"
@@ -263,7 +263,7 @@ oktetakastengui_add_sublibrary(bytearraygenerator
 macro(OKTETAKASTENGUI_GENERATOR_SOURCES _subdir)
     okteta_sublibrary_sources(Gui NAMESPACE Okteta Kasten
         REVERSE_NAMESPACE_INCLUDEDIR
-        SUBLIBRARY bytearraygenerator
+        SUBLIBRARY OktetaKastenGuiGenerator
         SUBDIR ${_subdir}
         ${ARGN}
     )
