@@ -14,7 +14,7 @@ ecm_add_tests(
 
     NAME_PREFIX oktetakasten-controllers-structures-
     LINK_LIBRARIES
-        structuresdatatypes
+        OktetaKastenControllersStructuresDataTypes
         Qt5::Test
 )
 
@@ -22,7 +22,7 @@ ecm_add_test(
     primitivedatainformationtest.cpp
     NAME_PREFIX oktetakasten-controllers-structures-
     LINK_LIBRARIES
-        structuresdatatypes
+        OktetaKastenControllersStructuresDataTypes
         KF5::I18n
         Qt5::Test
 )

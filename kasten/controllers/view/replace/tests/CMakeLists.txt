@@ -7,7 +7,7 @@ ecm_add_test(
     TEST_NAME replacejobtest
     NAME_PREFIX oktetakasten-controllers-replace-
     LINK_LIBRARIES
-        bytearraysearch
+        OktetaKastenControllersByteArraySearch
         OktetaKastenGui
         OktetaKastenCore
         Qt5::Test

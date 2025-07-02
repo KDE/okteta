@@ -7,8 +7,8 @@ ecm_add_test(
     TEST_NAME searchtooltest
     NAME_PREFIX oktetakasten-controllers-search-
     LINK_LIBRARIES
-        configentries
-        bytearraysearch
+        OktetaKastenControllersConfigEntries
+        OktetaKastenControllersByteArraySearch
         OktetaKastenGui
         OktetaKastenCore
         KF5::I18n
