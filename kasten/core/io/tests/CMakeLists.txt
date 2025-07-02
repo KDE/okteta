@@ -1,7 +1,7 @@
 set( SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/.. )
 
-add_library(oktetakastenio STATIC)
-target_sources(oktetakastenio
+add_library(OktetaKastenCoreIoSut STATIC)
+target_sources(OktetaKastenCoreIoSut
     PRIVATE
         ${SUTDIR}/filesystem/bytearrayrawfileloadthread.cpp
         ${SUTDIR}/filesystem/bytearrayrawfilereloadthread.cpp
@@ -12,7 +12,7 @@ target_sources(oktetakastenio
         ${SUTDIR}/filesystem/bytearrayrawfilereloadjob.cpp
         ${SUTDIR}/filesystem/bytearrayrawfilewritetojob.cpp
 )
-target_link_libraries(oktetakastenio
+target_link_libraries(OktetaKastenCoreIoSut
     PUBLIC
         KastenCore
         OktetaCore
@@ -20,7 +20,7 @@ target_link_libraries(oktetakastenio
         KF5::I18n
         KF5::CoreAddons
 )
-target_include_directories(oktetakastenio PUBLIC
+target_include_directories(OktetaKastenCoreIoSut PUBLIC
     ${CMAKE_CURRENT_BINARY_DIR}/../..
     ${SUTDIR}
     ${SUTDIR}/..
@@ -28,9 +28,9 @@ target_include_directories(oktetakastenio PUBLIC
     ${SUTDIR}/filesystem
 )
 # Configure export macros to be setup as with a static lib
-# as the source files are reused for static oktetakastenio
+# as the source files are reused for static OktetaKastenCoreIoSut
 # Saves doing a separate export header.
-target_compile_definitions(oktetakastenio
+target_compile_definitions(OktetaKastenCoreIoSut
     PUBLIC
         OKTETAKASTENCORE_STATICLIB
     PRIVATE
@@ -47,7 +47,7 @@ ecm_add_test(
     TEST_NAME bytearrayrawfilesynchronizertest
     NAME_PREFIX oktetakasten-io-
     LINK_LIBRARIES
-        oktetakastenio
+        OktetaKastenCoreIoSut
         KastenCoreTestUtil
         KastenCore
         OktetaCoreTestUtil
@@ -68,7 +68,7 @@ ecm_add_test(
     TEST_NAME bytearrayrawfilesynchronizerfactorytest
     NAME_PREFIX oktetakasten-io-
     LINK_LIBRARIES
-        oktetakastenio
+        OktetaKastenCoreIoSut
         KastenCoreTestUtil
         KastenCore
         OktetaCoreTestUtil
