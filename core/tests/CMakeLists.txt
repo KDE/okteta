@@ -39,7 +39,9 @@ ecm_add_test(
     #  ${CMAKE_CURRENT_SOURCE_DIR}/../arraychangemetrics.cpp
     TEST_NAME arraychangemetricstest
     NAME_PREFIX libokteta-core-
-    LINK_LIBRARIES OktetaCoreSourcesTestShim Qt5::Test
+    LINK_LIBRARIES
+        OktetaCoreSourcesTestShim
+        Qt5::Test
 )
 
 
@@ -89,7 +91,9 @@ ecm_add_test(
     bytearraymodeltest.cpp
     TEST_NAME bytearraymodeltest
     NAME_PREFIX libokteta-core-
-    LINK_LIBRARIES OktetaCore Qt5::Test
+    LINK_LIBRARIES
+        OktetaCore
+        Qt5::Test
 )
 
 
@@ -122,7 +126,10 @@ ecm_add_test(
     piecetablebytearraymodelversionableiftest.cpp
     TEST_NAME piecetablebytearraymodelversionableiftest
     NAME_PREFIX libokteta-core-
-    LINK_LIBRARIES OktetaCoreTestUtil OktetaCore Qt5::Test
+    LINK_LIBRARIES
+        OktetaCoreTestUtil
+        OktetaCore
+        Qt5::Test
 )
 
 
@@ -182,7 +189,9 @@ ecm_add_test(
     bookmarktest.cpp
     TEST_NAME bookmarktest
     NAME_PREFIX libokteta-core-
-    LINK_LIBRARIES OktetaCoreSourcesTestShim Qt5::Test
+    LINK_LIBRARIES
+        OktetaCoreSourcesTestShim
+        Qt5::Test
 )
 
 
