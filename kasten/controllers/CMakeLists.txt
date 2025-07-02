@@ -779,38 +779,38 @@ okteta_add_cmakeconfig(Controllers NAMESPACE Okteta Kasten
 
 if( KASTEN_BUILD_INTERNAL_TEMPLATES )
 
-add_library(ByteArrayFilterTemplates STATIC)
-okteta_library_sources(ByteArrayFilterTemplates
+add_library(OktetaKastenControllersByteArrayFilterTemplates STATIC)
+okteta_library_sources(OktetaKastenControllersByteArrayFilterTemplates
     SUBDIR view/libbytearrayfilter/filter/template
     PRIVATE
         Template_ByteArrayFilter
         Template_ByteArrayFilterParameterSet
         Template_ByteArrayFilterParameterSetEdit
 )
-target_compile_definitions(ByteArrayFilterTemplates
+target_compile_definitions(OktetaKastenControllersByteArrayFilterTemplates
     PRIVATE
         TRANSLATION_DOMAIN=\"liboktetakasten\"
 )
-target_link_libraries(ByteArrayFilterTemplates
+target_link_libraries(OktetaKastenControllersByteArrayFilterTemplates
     PUBLIC
         OktetaKastenControllersByteArrayFilter
     PRIVATE
         KF5::I18n
 )
 
-add_library(ByteArrayCheckSumTemplates STATIC)
-okteta_library_sources(ByteArrayCheckSumTemplates
+add_library(OktetaKastenControllersByteArrayCheckSumTemplates STATIC)
+okteta_library_sources(OktetaKastenControllersByteArrayCheckSumTemplates
     SUBDIR view/libbytearraychecksum/algorithm/template
     PRIVATE
         Template_ByteArrayCheckSumAlgorithm
         Template_ByteArrayChecksumParameterSet
         Template_ByteArrayChecksumParameterSetEdit
 )
-target_compile_definitions(ByteArrayCheckSumTemplates
+target_compile_definitions(OktetaKastenControllersByteArrayCheckSumTemplates
     PRIVATE
         TRANSLATION_DOMAIN=\"liboktetakasten\"
 )
-target_link_libraries(ByteArrayCheckSumTemplates
+target_link_libraries(OktetaKastenControllersByteArrayCheckSumTemplates
     PUBLIC
         OktetaKastenControllersByteArrayChecksum
     PRIVATE
