@@ -19,7 +19,7 @@ ecm_add_test(
     bytearraydocumenttest.cpp
     ${SUTDIR}/bytearraydocument.cpp
     TEST_NAME bytearraydocumenttest
-    NAME_PREFIX oktetakasten-document-
+    NAME_PREFIX oktetakasten-core-document-
     LINK_LIBRARIES
         OktetaKastenCoreDocumentSourcesTestShim
         KastenCore
@@ -37,7 +37,7 @@ ecm_add_test(
     ${SUTDIR}/bytearraydocument.cpp
     ${SUTDIR}/bytearraydocumentfactory.cpp
     TEST_NAME bytearraydocumentfactorytest
-    NAME_PREFIX oktetakasten-document-
+    NAME_PREFIX oktetakasten-core-document-
     LINK_LIBRARIES
         OktetaKastenCoreDocumentSourcesTestShim
         KastenCore
