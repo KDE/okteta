@@ -8,7 +8,7 @@ okteta_add_library(Controllers NAMESPACE Okteta Kasten
         KastenGui
         KastenCore
     PRIVATE
-        framesprint
+        OktetaFramesPrint
         KF5::NewStuffWidgets
         KF5::I18n
         KF5::ConfigWidgets

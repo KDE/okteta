@@ -1,6 +1,6 @@
-add_library(framesprint STATIC)
-set_target_properties(framesprint PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
-target_link_libraries(framesprint
+add_library(OktetaFramesPrint STATIC)
+set_target_properties(OktetaFramesPrint PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
+target_link_libraries(OktetaFramesPrint
     PUBLIC
         Qt5::Gui
     PRIVATE
@@ -8,7 +8,7 @@ target_link_libraries(framesprint
         Qt5::PrintSupport
 )
 
-okteta_library_sources(framesprint
+okteta_library_sources(OktetaFramesPrint
     PRIVATE
         PrintInfo
         AbstractFrameRenderer
