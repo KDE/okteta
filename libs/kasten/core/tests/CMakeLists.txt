@@ -14,14 +14,14 @@ target_link_libraries(KastenCoreTestUtil
 
 ########### io ###############
 
-add_library(kastencoretestio STATIC)
-target_link_libraries(kastencoretestio
+add_library(KastenCoreTestIo STATIC)
+target_link_libraries(KastenCoreTestIo
     PUBLIC
         KastenCore
     PRIVATE
         KF5::CoreAddons
 )
-target_sources(kastencoretestio
+target_sources(KastenCoreTestIo
     PRIVATE
         testdocumentfileloadthread.cpp
         testdocumentfilereloadthread.cpp
@@ -54,7 +54,7 @@ ecm_add_test(
     TEST_NAME testdocumentfilesynchronizertest
     NAME_PREFIX libkasten-core-
     LINK_LIBRARIES
-        kastencoretestio
+        KastenCoreTestIo
         KastenCoreTestUtil
         KastenCore
         Qt5::Test
@@ -70,7 +70,7 @@ ecm_add_test(
     TEST_NAME testdocumentfilesynchronizerfactorytest
     NAME_PREFIX libkasten-core-
     LINK_LIBRARIES
-        kastencoretestio
+        KastenCoreTestIo
         KastenCoreTestUtil
         KastenCore
         Qt5::Test
