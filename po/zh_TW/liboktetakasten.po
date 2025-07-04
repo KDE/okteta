@@ -5,20 +5,20 @@
 # Jeff Huang <s8321414@gmail.com>, 2016.
 #
 # Frank Weng (a.k.a. Franklin) <franklin at goodhorse dot idv dot tw>, 2008, 2009, 2010.
-# SPDX-FileCopyrightText: 2024 Kisaragi Hiu <mail@kisaragi-hiu.com>
+# SPDX-FileCopyrightText: 2024, 2025 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-15 03:31+0000\n"
-"PO-Revision-Date: 2024-03-20 18:22+0900\n"
+"PO-Revision-Date: 2025-07-03 23:42+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.04.70\n"
+"X-Generator: Lokalize 25.07.70\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: controllers/document/info/documentinfotool.cpp:47
@@ -109,7 +109,7 @@ msgstr "跳到下一個書籤"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Go to Previous Bookmark"
-msgstr "跳到前一個書籤"
+msgstr "跳到上一個書籤"
 
 #: controllers/view/bookmarks/bookmarkscontroller.cpp:170
 #, kde-format
@@ -176,7 +176,7 @@ msgstr "若您按下此鍵，游標將會移動到上次選取的書籤的位置
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enables renaming of the selected bookmark."
-msgstr "允許選取的書籤重新命名。"
+msgstr "允許重新命名所選的書籤。"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:105
 #, kde-format
