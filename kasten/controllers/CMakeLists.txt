@@ -39,10 +39,9 @@ ecm_qt_declare_logging_category(OktetaKastenControllers
     EXPORT OKTETA
 )
 
-macro(OKTETAKASTENCONTROLLERS_LIBRARY_SOURCES _subdir)
+macro(OKTETAKASTENCONTROLLERS_SOURCES)
     okteta_library_sources(Controllers NAMESPACE Okteta Kasten
         REVERSE_NAMESPACE_INCLUDEDIR
-        SUBDIR ${_subdir}
         ${ARGN}
     )
 endmacro()
@@ -175,7 +174,8 @@ oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersConfigEntries
         FindDirectionConfigEntry
 )
 
-oktetakastencontrollers_library_sources(document/info
+oktetakastencontrollers_sources(
+    SUBDIR document/info
     PUBLIC
         DocumentInfoToolFactory
         DocumentInfoToolViewFactory
@@ -188,7 +188,8 @@ oktetakastencontrollers_library_sources(document/info
 
 # unused, TODO: remove?
 if (FALSE)
-oktetakastencontrollers_library_sources(document/overwriteonly
+oktetakastencontrollers_sources(
+    SUBDIR document/overwriteonly
     PUBLIC
         OverwriteOnlyControllerFactory
     PRIVATE
@@ -196,13 +197,15 @@ oktetakastencontrollers_library_sources(document/overwriteonly
 )
 endif()
 
-oktetakastencontrollers_library_sources(view/overwritemode
+oktetakastencontrollers_sources(
+    SUBDIR view/overwritemode
     PUBLIC
         OverwriteModeControllerFactory
     PRIVATE
         OverwriteModeController
 )
-oktetakastencontrollers_library_sources(view/info
+oktetakastencontrollers_sources(
+    SUBDIR view/info
     PUBLIC
         InfoToolFactory
         InfoToolViewFactory
@@ -217,7 +220,8 @@ oktetakastencontrollers_library_sources(view/info
         infoviewsettings.kcfgc
 )
 
-oktetakastencontrollers_library_sources(view/stringsextract
+oktetakastencontrollers_sources(
+    SUBDIR view/stringsextract
     PUBLIC
         StringsExtractToolFactory
         StringsExtractToolViewFactory
@@ -272,7 +276,8 @@ oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersByteArrayCheck
 ## NEWCHECKSUMPARAMETERSET(end)
 )
 
-oktetakastencontrollers_library_sources(view/checksum
+oktetakastencontrollers_sources(
+    SUBDIR view/checksum
     PUBLIC
         ChecksumToolFactory
         ChecksumToolViewFactory
@@ -372,7 +377,8 @@ oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersDataTypeCodecs
         Utf16Codec
 )
 
-oktetakastencontrollers_library_sources(view/poddecoder
+oktetakastencontrollers_sources(
+    SUBDIR view/poddecoder
     PUBLIC
         PODDecoderToolFactory
         PODDecoderToolViewFactory
@@ -385,7 +391,8 @@ oktetakastencontrollers_library_sources(view/poddecoder
         PODDecoderToolView
 )
 
-oktetakastencontrollers_library_sources(view/bytetable
+oktetakastencontrollers_sources(
+    SUBDIR view/bytetable
     PUBLIC
         ByteTableToolFactory
         ByteTableToolViewFactory
@@ -398,14 +405,16 @@ oktetakastencontrollers_library_sources(view/bytetable
         bytetableviewsettings.kcfgc
 )
 
-oktetakastencontrollers_library_sources(view/crop
+oktetakastencontrollers_sources(
+    SUBDIR view/crop
     PUBLIC
         CropControllerFactory
     PRIVATE
         CropController
 )
 
-oktetakastencontrollers_library_sources(view/search
+oktetakastencontrollers_sources(
+    SUBDIR view/search
     PUBLIC
         SearchControllerFactory
     PRIVATE
@@ -415,7 +424,8 @@ oktetakastencontrollers_library_sources(view/search
         SearchController
 )
 
-oktetakastencontrollers_library_sources(view/replace
+oktetakastencontrollers_sources(
+    SUBDIR view/replace
     PUBLIC
         ReplaceControllerFactory
     PRIVATE
@@ -472,7 +482,8 @@ oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersByteArrayFilte
 ##         MyByteArrayFilterParameterSetedit
 ## NEWFILTERPARAMETERSET(end)
 )
-oktetakastencontrollers_library_sources(view/filter
+oktetakastencontrollers_sources(
+    SUBDIR view/filter
     PUBLIC
         FilterToolFactory
         FilterToolViewFactory
@@ -483,7 +494,8 @@ oktetakastencontrollers_library_sources(view/filter
         FilterToolView
 )
 
-oktetakastencontrollers_library_sources(view/charsetconversion
+oktetakastencontrollers_sources(
+    SUBDIR view/charsetconversion
     PUBLIC
         CharsetConversionToolFactory
         CharsetConversionToolViewFactory
@@ -494,7 +506,8 @@ oktetakastencontrollers_library_sources(view/charsetconversion
         CharsetConversionToolView
 )
 
-oktetakastencontrollers_library_sources(view/gotooffset
+oktetakastencontrollers_sources(
+    SUBDIR view/gotooffset
     PUBLIC
         GotoOffsetControllerFactory
     PRIVATE
@@ -504,7 +517,8 @@ oktetakastencontrollers_library_sources(view/gotooffset
         GotoOffsetController
 )
 
-oktetakastencontrollers_library_sources(view/selectrange
+oktetakastencontrollers_sources(
+    SUBDIR view/selectrange
     PUBLIC
         SelectRangeControllerFactory
     PRIVATE
@@ -514,7 +528,8 @@ oktetakastencontrollers_library_sources(view/selectrange
         SelectRangeController
 )
 
-oktetakastencontrollers_library_sources(view/bookmarks
+oktetakastencontrollers_sources(
+    SUBDIR view/bookmarks
     PUBLIC
         BookmarksControllerFactory
     PRIVATE
@@ -522,7 +537,8 @@ oktetakastencontrollers_library_sources(view/bookmarks
         BookmarksController
 )
 
-oktetakastencontrollers_library_sources(view/bookmarks
+oktetakastencontrollers_sources(
+    SUBDIR view/bookmarks
     PUBLIC
         BookmarksToolFactory
         BookmarksToolViewFactory
@@ -651,7 +667,8 @@ oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersStructuresData
 )
 
 #these source files are not needed by the static library for unit tests, therefore keep them separate
-oktetakastencontrollers_library_sources(view/structures/settings
+oktetakastencontrollers_sources(
+    SUBDIR view/structures/settings
     PRIVATE
         StructureAddRemoveWidget
         StructureItemDelegate
@@ -666,7 +683,8 @@ oktetakastencontrollers_library_sources(view/structures/settings
         LicenseDialog
     UI structureviewsettingswidget.ui
 )
-oktetakastencontrollers_library_sources(view/structures
+oktetakastencontrollers_sources(
+    SUBDIR view/structures
     PUBLIC
         StructuresToolFactory
         StructuresToolViewFactory
@@ -681,7 +699,8 @@ oktetakastencontrollers_library_sources(view/structures
         StructureViewItemDelegate
 )
 
-oktetakastencontrollers_library_sources(view/print
+oktetakastencontrollers_sources(
+    SUBDIR view/print
     PUBLIC
         PrintControllerFactory
     PRIVATE
@@ -698,7 +717,8 @@ oktetakastencontrollers_library_sources(view/print
 )
 configure_file(view/print/printtool-config.hpp.in ${CMAKE_CURRENT_BINARY_DIR}/printtool-config.hpp @ONLY)
 
-oktetakastencontrollers_library_sources(view/viewconfig
+oktetakastencontrollers_sources(
+    SUBDIR view/viewconfig
     PUBLIC
         ViewConfigControllerFactory
     PRIVATE
@@ -707,21 +727,24 @@ oktetakastencontrollers_library_sources(view/viewconfig
         ViewConfigController
 )
 
-oktetakastencontrollers_library_sources(view/viewstatus
+oktetakastencontrollers_sources(
+    SUBDIR view/viewstatus
     PUBLIC
         ViewStatusControllerFactory
     PRIVATE
         ViewStatusController
 )
 
-oktetakastencontrollers_library_sources(view/viewmode
+oktetakastencontrollers_sources(
+    SUBDIR view/viewmode
     PUBLIC
         ViewModeControllerFactory
     PRIVATE
         ViewModeController
 )
 
-oktetakastencontrollers_library_sources(view/viewprofiles
+oktetakastencontrollers_sources(
+    SUBDIR view/viewprofiles
     PUBLIC
         ViewProfilesManageControllerFactory
         # TODO: two controllers in one subdir
@@ -737,14 +760,16 @@ oktetakastencontrollers_library_sources(view/viewprofiles
         ViewProfilesManageController
 )
 
-oktetakastencontrollers_library_sources(view/viewcontextmenu
+oktetakastencontrollers_sources(
+    SUBDIR view/viewcontextmenu
     PUBLIC
         ViewContextMenuControllerFactory
     PRIVATE
         ViewContextMenuController
 )
 
-oktetakastencontrollers_library_sources(utils
+oktetakastencontrollers_sources(
+    SUBDIR utils
     BUILD_INCLUDEDIR
     PRIVATE
         LabelledToolBarWidget

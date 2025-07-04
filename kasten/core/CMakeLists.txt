@@ -20,15 +20,15 @@ okteta_add_library(Core NAMESPACE Okteta Kasten
     KI18N_TRANSLATION_DOMAIN "liboktetakasten"
 )
 
-macro(OKTETAKASTENCORE_LIBRARY_SOURCES _subdir)
+macro(OKTETAKASTENCORE_SOURCES)
     okteta_library_sources(Core NAMESPACE Okteta Kasten
         REVERSE_NAMESPACE_INCLUDEDIR
-        SUBDIR ${_subdir}
         ${ARGN}
     )
 endmacro()
 
-oktetakastencore_library_sources(document
+oktetakastencore_sources(
+    SUBDIR document
     BUILD_INCLUDEDIR
     PUBLIC
         ByteArrayDocument
@@ -36,7 +36,8 @@ oktetakastencore_library_sources(document
         ByteArraySelection
 )
 
-oktetakastencore_library_sources(io/filesystem
+oktetakastencore_sources(
+    SUBDIR io/filesystem
     PUBLIC
         ByteArrayRawFileSynchronizer
         ByteArrayRawFileSynchronizerFactory

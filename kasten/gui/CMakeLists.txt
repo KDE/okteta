@@ -29,10 +29,9 @@ ecm_qt_declare_logging_category(OktetaKastenGui
     EXPORT OKTETA
 )
 
-macro(OKTETAKASTENGUI_LIBRARY_SOURCES _subdir)
+macro(OKTETAKASTENGUI_SOURCES)
     okteta_library_sources(Gui NAMESPACE Okteta Kasten
         REVERSE_NAMESPACE_INCLUDEDIR
-        SUBDIR ${_subdir}
         ${ARGN}
     )
 endmacro()
@@ -137,65 +136,72 @@ oktetakastengui_add_sublibrary(OktetaKastenGuiStreamEncoder
     KI18N_TRANSLATION_DOMAIN "liboktetakasten"
 )
 
-macro(OKTETAKASTENGUI_STREAMENCODER_SOURCES _subdir)
+macro(OKTETAKASTENGUI_STREAMENCODER_SOURCES)
     okteta_sublibrary_sources(Gui NAMESPACE Okteta Kasten
         REVERSE_NAMESPACE_INCLUDEDIR
         SUBLIBRARY OktetaKastenGuiStreamEncoder
-        SUBDIR ${_subdir}
         ${ARGN}
     )
 endmacro()
 
-oktetakastengui_streamencoder_sources(io/streamencoder/values
+oktetakastengui_streamencoder_sources(
+    SUBDIR io/streamencoder/values
     PRIVATE
         ByteArrayValuesStreamEncoderConfigEditor
         ByteArrayValuesStreamEncoderConfigEditorFactory
         ByteArrayValuesStreamEncoder
 )
 
-oktetakastengui_streamencoder_sources(io/streamencoder/base32
+oktetakastengui_streamencoder_sources(
+    SUBDIR io/streamencoder/base32
     PRIVATE
         ByteArrayBase32StreamEncoderConfigEditor
         ByteArrayBase32StreamEncoderConfigEditorFactory
         ByteArrayBase32StreamEncoder
 )
 
-oktetakastengui_streamencoder_sources(io/streamencoder/uuencoding
+oktetakastengui_streamencoder_sources(
+    SUBDIR io/streamencoder/uuencoding
     PRIVATE
         ByteArrayUuencodingStreamEncoderConfigEditor
         ByteArrayUuencodingStreamEncoderConfigEditorFactory
         ByteArrayUuencodingStreamEncoder
 )
 
-oktetakastengui_streamencoder_sources(io/streamencoder/xxencoding
+oktetakastengui_streamencoder_sources(
+    SUBDIR io/streamencoder/xxencoding
     PRIVATE
         ByteArrayXxencodingStreamEncoderConfigEditor
         ByteArrayXxencodingStreamEncoderConfigEditorFactory
         ByteArrayXxencodingStreamEncoder
 )
 
-oktetakastengui_streamencoder_sources(io/streamencoder/sourcecode
+oktetakastengui_streamencoder_sources(
+    SUBDIR io/streamencoder/sourcecode
     PRIVATE
         ByteArraySourceCodeStreamEncoderConfigEditor
         ByteArraySourceCodeStreamEncoderConfigEditorFactory
         ByteArraySourceCodeStreamEncoder
 )
 
-oktetakastengui_streamencoder_sources(io/streamencoder/srec
+oktetakastengui_streamencoder_sources(
+    SUBDIR io/streamencoder/srec
     PRIVATE
         ByteArraySRecStreamEncoderConfigEditor
         ByteArraySRecStreamEncoderConfigEditorFactory
         ByteArraySRecStreamEncoder
 )
 
-oktetakastengui_streamencoder_sources(io/streamencoder/ihex
+oktetakastengui_streamencoder_sources(
+    SUBDIR io/streamencoder/ihex
     PRIVATE
         ByteArrayIHexStreamEncoderConfigEditor
         ByteArrayIHexStreamEncoderConfigEditorFactory
         ByteArrayIHexStreamEncoder
 )
 
-oktetakastengui_streamencoder_sources(io/streamencoder/viewhtml
+oktetakastengui_streamencoder_sources(
+    SUBDIR io/streamencoder/viewhtml
     PRIVATE
         AbstractColumnHtmlRenderer
         OffsetColumnHtmlRenderer
@@ -206,7 +212,8 @@ oktetakastengui_streamencoder_sources(io/streamencoder/viewhtml
         ByteArrayViewHtmlStreamEncoder
 )
 
-oktetakastengui_streamencoder_sources(io/streamencoder/viewtext
+oktetakastengui_streamencoder_sources(
+    SUBDIR io/streamencoder/viewtext
     PRIVATE
         AbstractColumnTextRenderer
         OffsetColumnTextRenderer
@@ -218,20 +225,24 @@ oktetakastengui_streamencoder_sources(io/streamencoder/viewtext
         ByteArrayViewTextStreamEncoder
 )
 
-oktetakastengui_streamencoder_sources(io/streamencoder/chars
+oktetakastengui_streamencoder_sources(
+    SUBDIR io/streamencoder/chars
     PRIVATE
         ByteArrayCharsStreamEncoder
 )
-oktetakastengui_streamencoder_sources(io/streamencoder/base64
+oktetakastengui_streamencoder_sources(
+    SUBDIR io/streamencoder/base64
     PRIVATE
         ByteArrayBase64StreamEncoder
 )
-oktetakastengui_streamencoder_sources(io/streamencoder/base85
+oktetakastengui_streamencoder_sources(
+    SUBDIR io/streamencoder/base85
     PRIVATE
         ByteArrayBase85StreamEncoder
 )
 
-oktetakastengui_streamencoder_sources(io/streamencoder
+oktetakastengui_streamencoder_sources(
+    SUBDIR io/streamencoder
     BUILD_INCLUDEDIR
     PUBLIC
         AbstractByteArrayStreamEncoder
@@ -239,7 +250,8 @@ oktetakastengui_streamencoder_sources(io/streamencoder
         ByteArrayTextStreamEncoderPreview
 )
 
-oktetakastengui_streamencoder_sources(io
+oktetakastengui_streamencoder_sources(
+    SUBDIR io
     BUILD_INCLUDEDIR
     PUBLIC
         ByteArrayStreamEncoderFactory
@@ -260,35 +272,38 @@ oktetakastengui_add_sublibrary(OktetaKastenGuiGenerator
     KI18N_TRANSLATION_DOMAIN "liboktetakasten"
 )
 
-macro(OKTETAKASTENGUI_GENERATOR_SOURCES _subdir)
+macro(OKTETAKASTENGUI_GENERATOR_SOURCES)
     okteta_sublibrary_sources(Gui NAMESPACE Okteta Kasten
         REVERSE_NAMESPACE_INCLUDEDIR
         SUBLIBRARY OktetaKastenGuiGenerator
-        SUBDIR ${_subdir}
         ${ARGN}
     )
 endmacro()
 
-oktetakastengui_generator_sources(io/generator/pattern
+oktetakastengui_generator_sources(
+    SUBDIR io/generator/pattern
     PRIVATE
         ByteArrayPatternGeneratorconfigEditor
         ByteArrayPatternGeneratorconfigEditorFactory
         ByteArrayPatternGenerator
 )
 
-oktetakastengui_generator_sources(io/generator/randomdata
+oktetakastengui_generator_sources(
+    SUBDIR io/generator/randomdata
     PRIVATE
         ByteArrayRandomDataGeneratorconfigEditor
         ByteArrayRandomDataGeneratorconfigEditorFactory
         ByteArrayRandomDataGenerator
 )
 
-oktetakastengui_generator_sources(io/generator/sequence
+oktetakastengui_generator_sources(
+    SUBDIR io/generator/sequence
     PRIVATE
         ByteArraySequenceGenerator
 )
 
-oktetakastengui_generator_sources(io
+oktetakastengui_generator_sources(
+    SUBDIR io
     BUILD_INCLUDEDIR
     PUBLIC
         ByteArrayDataGeneratorFactory

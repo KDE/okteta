@@ -24,49 +24,54 @@ if (BUILD_TERMINALTOOL)
     target_link_libraries(KastenControllers PRIVATE KF5::Parts)
 endif()
 
-macro(KASTENCONTROLLERS_LIBRARY_SOURCES _subdir)
+macro(KASTENCONTROLLERS_SOURCES)
     okteta_library_sources(Controllers NAMESPACE Kasten
-        SUBDIR ${_subdir}
         ${ARGN}
     )
 endmacro()
 
-kastencontrollers_library_sources(io/synchronize
+kastencontrollers_sources(
+    SUBDIR io/synchronize
     PUBLIC
         SynchronizeControllerFactory
     PRIVATE
         SynchronizeController
 )
 
-kastencontrollers_library_sources(io/setremote
+kastencontrollers_sources(
+    SUBDIR io/setremote
     PUBLIC
         SetRemoteControllerFactory
     PRIVATE
         SetRemoteController
 )
 
-kastencontrollers_library_sources(documentsystem/creator
+kastencontrollers_sources(
+    SUBDIR documentsystem/creator
     PUBLIC
         CreatorControllerFactory
     PRIVATE
         CreatorController
 )
 
-kastencontrollers_library_sources(documentsystem/loader
+kastencontrollers_sources(
+    SUBDIR documentsystem/loader
     PUBLIC
         LoaderControllerFactory
     PRIVATE
         LoaderController
 )
 
-kastencontrollers_library_sources(documentsystem/close
+kastencontrollers_sources(
+    SUBDIR documentsystem/close
     PUBLIC
         CloseControllerFactory
     PRIVATE
         CloseController
 )
 
-kastencontrollers_library_sources(documentsystem/filesystembrowser
+kastencontrollers_sources(
+    SUBDIR documentsystem/filesystembrowser
     PUBLIC
         FileSystemBrowserToolFactory
         FileSystemBrowserToolViewFactory
@@ -76,7 +81,8 @@ kastencontrollers_library_sources(documentsystem/filesystembrowser
         FileSystemBrowserToolView
 )
 
-kastencontrollers_library_sources(documentsystem/documentsbrowser
+kastencontrollers_sources(
+    SUBDIR documentsystem/documentsbrowser
     PUBLIC
         DocumentsToolFactory
         DocumentsToolViewFactory
@@ -88,7 +94,8 @@ kastencontrollers_library_sources(documentsystem/documentsbrowser
 )
 
 if (BUILD_TERMINALTOOL)
-kastencontrollers_library_sources(document/terminal
+kastencontrollers_sources(
+    SUBDIR document/terminal
     PUBLIC
         TerminalToolFactory
         TerminalToolViewFactory
@@ -99,7 +106,8 @@ kastencontrollers_library_sources(document/terminal
 )
 endif()
 
-kastencontrollers_library_sources(document/modified
+kastencontrollers_sources(
+    SUBDIR document/modified
     PUBLIC
         ModifiedBarControllerFactory
     PRIVATE
@@ -107,7 +115,8 @@ kastencontrollers_library_sources(document/modified
         IconLabel
 )
 
-kastencontrollers_library_sources(document/readonly
+kastencontrollers_sources(
+    SUBDIR document/readonly
     PUBLIC
         ReadOnlyControllerFactory
         # TODO: two plugins in one subdir
@@ -118,7 +127,8 @@ kastencontrollers_library_sources(document/readonly
 )
 
 if(NOT CMAKE_BUILD_TYPE_TOLOWER MATCHES release)
-kastencontrollers_library_sources(document/versionview
+kastencontrollers_sources(
+    SUBDIR document/versionview
     PUBLIC
         VersionViewToolFactory
         VersionViewToolViewFactory
@@ -130,14 +140,16 @@ kastencontrollers_library_sources(document/versionview
 )
 endif()
 
-kastencontrollers_library_sources(view/version
+kastencontrollers_sources(
+    SUBDIR view/version
     PUBLIC
         VersionControllerFactory
     PRIVATE
         VersionController
 )
 
-kastencontrollers_library_sources(view/zoom
+kastencontrollers_sources(
+    SUBDIR view/zoom
     PUBLIC
         ZoomControllerFactory
         # TODO: two plugins in one subdir
@@ -148,21 +160,24 @@ kastencontrollers_library_sources(view/zoom
         ZoomBarController
 )
 
-kastencontrollers_library_sources(view/select
+kastencontrollers_sources(
+    SUBDIR view/select
     PUBLIC
         SelectControllerFactory
     PRIVATE
         SelectController
 )
 
-kastencontrollers_library_sources(io/clipboard
+kastencontrollers_sources(
+    SUBDIR io/clipboard
     PUBLIC
         ClipboardControllerFactory
     PRIVATE
         ClipboardController
 )
 
-kastencontrollers_library_sources(io/insert
+kastencontrollers_sources(
+    SUBDIR io/insert
     PUBLIC
         InsertControllerFactory
     PRIVATE
@@ -170,7 +185,8 @@ kastencontrollers_library_sources(io/insert
         InsertController
 )
 
-kastencontrollers_library_sources(io/copyas
+kastencontrollers_sources(
+    SUBDIR io/copyas
     PUBLIC
         CopyAsControllerFactory
     PRIVATE
@@ -178,7 +194,8 @@ kastencontrollers_library_sources(io/copyas
         CopyAsController
 )
 
-kastencontrollers_library_sources(io/export
+kastencontrollers_sources(
+    SUBDIR io/export
     PUBLIC
         ExportControllerFactory
     PRIVATE
@@ -189,56 +206,64 @@ kastencontrollers_library_sources(io/export
 # set( CLOSECONTROLLER_SRCS
 #   viewsystem/close/closecontroller.cpp
 # )
-kastencontrollers_library_sources(shellwindow/viewareacontextmenu
+kastencontrollers_sources(
+    SUBDIR shellwindow/viewareacontextmenu
     PUBLIC
         ViewAreaContextMenuControllerFactory
     PRIVATE
         ViewAreaContextMenuController
 )
 
-kastencontrollers_library_sources(shellwindow/switchview
+kastencontrollers_sources(
+    SUBDIR shellwindow/switchview
     PUBLIC
         SwitchViewControllerFactory
     PRIVATE
         SwitchViewController
 )
 
-kastencontrollers_library_sources(shellwindow/viewlistmenu
+kastencontrollers_sources(
+    SUBDIR shellwindow/viewlistmenu
     PUBLIC
         ViewListMenuControllerFactory
     PRIVATE
         ViewListMenuController
 )
 
-kastencontrollers_library_sources(shellwindow/viewareasplit
+kastencontrollers_sources(
+    SUBDIR shellwindow/viewareasplit
     PUBLIC
         ViewAreaSplitControllerFactory
     PRIVATE
         ViewAreaSplitController
 )
 
-kastencontrollers_library_sources(shellwindow/toollistmenu
+kastencontrollers_sources(
+    SUBDIR shellwindow/toollistmenu
     PUBLIC
         ToolListMenuControllerFactory
     PRIVATE
         ToolListMenuController
 )
 
-kastencontrollers_library_sources(shellwindow/fullscreen
+kastencontrollers_sources(
+    SUBDIR shellwindow/fullscreen
     PUBLIC
         FullScreenControllerFactory
     PRIVATE
         FullScreenController
 )
 
-kastencontrollers_library_sources(program/uicolorscheme
+kastencontrollers_sources(
+    SUBDIR program/uicolorscheme
     PUBLIC
         UiColorSchemeControllerFactory
     PRIVATE
         UiColorSchemeController
 )
 
-kastencontrollers_library_sources(program/quit
+kastencontrollers_sources(
+    SUBDIR program/quit
     PUBLIC
         QuitControllerFactory
     PRIVATE
