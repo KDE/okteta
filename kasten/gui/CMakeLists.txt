@@ -311,8 +311,7 @@ oktetakastengui_generator_sources(
 )
 
 
-okteta_library_sources(Gui NAMESPACE Okteta Kasten
-    REVERSE_NAMESPACE_INCLUDEDIR
+oktetakastengui_sources(
     PUBLIC
         OktetaKastenGui
 )

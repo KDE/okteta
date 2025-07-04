@@ -18,6 +18,12 @@ okteta_add_library(Gui NAMESPACE Okteta
     KI18N_TRANSLATION_DOMAIN "liboktetagui"
 )
 
+macro(OKTETAGUI_SOURCES)
+    okteta_library_sources(Gui NAMESPACE Okteta
+        ${ARGN}
+    )
+endmacro()
+
 ecm_qt_declare_logging_category(OktetaGui
     HEADER "logging.hpp"
     IDENTIFIER "LOG_OKTETA_GUI"
@@ -50,7 +56,7 @@ okteta_sublibrary_sources(Gui NAMESPACE Okteta
         ColumnsViewScrollAreaEngine
 )
 
-okteta_library_sources(Gui NAMESPACE Okteta
+oktetagui_sources(
     SUBDIR controller
     PRIVATE
         AbstractController
@@ -75,7 +81,7 @@ okteta_library_sources(Gui NAMESPACE Okteta
         TouchOnlyTapAndHoldGestureRecognizer
 )
 
-okteta_library_sources(Gui NAMESPACE Okteta
+oktetagui_sources(
     PUBLIC
         OktetaGui
 

@@ -16,6 +16,12 @@ okteta_add_library(Core NAMESPACE Okteta
     KI18N_TRANSLATION_DOMAIN "liboktetacore"
 )
 
+macro(OKTETACORE_SOURCES)
+    okteta_library_sources(Core NAMESPACE Okteta
+        ${ARGN}
+    )
+endmacro()
+
 ecm_qt_declare_logging_category(OktetaCore
     HEADER "logging.hpp"
     IDENTIFIER "LOG_OKTETA_CORE"
@@ -161,7 +167,7 @@ oktetacore_sublibrary_sources(OktetaCoreByteArrayModels
         FixedSizeByteArrayModel
 )
 
-okteta_library_sources(Core NAMESPACE Okteta
+oktetacore_sources(
     PUBLIC
         TextByteArrayAnalyzer
         # TODO: both repeated here as the headers are in the toplevel-dir
