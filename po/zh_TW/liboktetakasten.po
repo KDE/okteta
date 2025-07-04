@@ -6,20 +6,20 @@
 # Jeff Huang <s8321414@gmail.com>, 2016.
 # pan93412 <pan93412@gmail.com>, 2019.
 # Frank Weng (a.k.a. Franklin) <franklin at goodhorse dot idv dot tw>, 2008, 2009, 2010.
-# SPDX-FileCopyrightText: 2023, 2024 Kisaragi Hiu <mail@kisaragi-hiu.com>
+# SPDX-FileCopyrightText: 2023, 2024, 2025 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-24 02:00+0000\n"
-"PO-Revision-Date: 2024-05-06 09:52+0900\n"
+"PO-Revision-Date: 2025-07-03 23:46+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.04.70\n"
+"X-Generator: Lokalize 25.07.70\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #, kde-format
@@ -42,50 +42,43 @@ msgid "File Info"
 msgstr "檔案資訊"
 
 #: controllers/document/info/documentinfoview.cpp:67
-#, fuzzy, kde-format
-#| msgid "Type:"
+#, kde-format
 msgctxt "@label"
 msgid "Type:"
 msgstr "型態："
 
 #: controllers/document/info/documentinfoview.cpp:81
-#, fuzzy, kde-format
-#| msgid "Location:"
+#, kde-format
 msgctxt "@label"
 msgid "Location:"
 msgstr "位置："
 
 #: controllers/document/info/documentinfoview.cpp:86
-#, fuzzy, kde-format
-#| msgid "Size:"
+#, kde-format
 msgctxt "@label"
 msgid "Size:"
 msgstr "大小："
 
 #: controllers/document/info/documentinfoview.cpp:89
-#, fuzzy, kde-format
-#| msgid "Created/Loaded:"
+#, kde-format
 msgctxt "@label"
 msgid "Created/Loaded:"
 msgstr "已建立/已載入："
 
 #: controllers/document/info/documentinfoview.cpp:93
-#, fuzzy, kde-format
-#| msgid "Last modified:"
+#, kde-format
 msgctxt "@label"
 msgid "Last modified:"
 msgstr "最後變更："
 
 #: controllers/document/info/documentinfoview.cpp:97
-#, fuzzy, kde-format
-#| msgid "Last synchronized:"
+#, kde-format
 msgctxt "@label"
 msgid "Last synchronized:"
 msgstr "上次同步："
 
 #: controllers/document/info/documentinfoview.cpp:104
-#, fuzzy, kde-format
-#| msgid "Created:"
+#, kde-format
 msgctxt "@label"
 msgid "Created:"
 msgstr "建立時間："
@@ -136,7 +129,7 @@ msgstr "跳到下一個書籤"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Go to Previous Bookmark"
-msgstr "跳到前一個書籤"
+msgstr "跳到上一個書籤"
 
 #: controllers/view/bookmarks/bookmarkscontroller.cpp:171
 #, kde-format
@@ -159,20 +152,16 @@ msgid "Bookmarks"
 msgstr "書籤"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:67
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Bookmarks"
+#, kde-format
 msgctxt "@info"
 msgid "No bookmarks"
-msgstr "書籤"
+msgstr "沒有書籤"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:90
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu create a new view profile"
-#| msgid "Create New…"
+#, kde-format
 msgctxt "@action"
 msgid "Create New"
-msgstr "建立新的…"
+msgstr "建立新的"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:92
 #, kde-format
@@ -189,12 +178,10 @@ msgid ""
 msgstr "若您按下此鍵，會在游標目前的位置建立新的書籤。"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:104
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Delete"
+#, kde-format
 msgctxt "@action"
 msgid "Delete"
-msgstr "刪除(&D)"
+msgstr "刪除"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:106
 #, kde-format
@@ -210,12 +197,10 @@ msgid ""
 msgstr "若您按下此鍵，則會刪除所有選取的書籤。"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:119
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Go to Offset…"
+#, kde-format
 msgctxt "@action"
 msgid "Go to Offset"
-msgstr "跳到位移(&G)…"
+msgstr "跳到位移"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:121
 #, kde-format
@@ -235,13 +220,13 @@ msgstr "若您按下此鍵，游標將會移動到上次選取的書籤的位置
 #, kde-format
 msgctxt "@action"
 msgid "Rename"
-msgstr ""
+msgstr "重新命名"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:133
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enables renaming of the selected bookmark."
-msgstr "允許選取的書籤重新命名。"
+msgstr "允許重新命名所選的書籤。"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:135
 #, kde-format
@@ -254,29 +239,25 @@ msgstr "若您按下此鍵，則可以編輯上次選取的書籤的名稱。"
 #: controllers/view/bookmarks/bookmarksview.cpp:144
 #: controllers/view/stringsextract/stringsextractview.cpp:191
 #: controllers/view/structures/structureview.cpp:386
-#, fuzzy, kde-format
-#| msgctxt "@title:column offset of the bookmark"
-#| msgid "Offset"
+#, kde-format
 msgctxt "@action"
 msgid "Copy Offset"
-msgstr "位移"
+msgstr "複製位移"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:146
 #: controllers/view/stringsextract/stringsextractview.cpp:193
 #: controllers/view/structures/structureview.cpp:388
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Copies the selected strings to the clipboard."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the offset to the clipboard."
-msgstr "複製選取的字串到剪貼簿中。"
+msgstr "複製位移到剪貼簿中。"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:139
 #: controllers/view/info/statistictablemodel.cpp:170
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Character not defined."
-msgstr ""
+msgstr "字元未定義。"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:157
 #: controllers/view/info/statistictablemodel.cpp:216
@@ -356,23 +337,18 @@ msgid "Value/Char Table"
 msgstr "數值/字元表"
 
 #: controllers/view/bytetable/bytetabletool.cpp:96
-#, fuzzy, kde-format
-#| msgid "Inserted 1 Byte"
-#| msgid_plural "Inserted %1 Bytes"
+#, kde-format
 msgctxt "@item"
 msgid "Inserted 1 Byte"
 msgid_plural "Inserted %1 Bytes"
-msgstr[0] "插入 %1 個位元組"
+msgstr[0] "已插入 %1 個位元組"
 
 #: controllers/view/bytetable/bytetabletool.cpp:114
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "1 byte converted."
-#| msgid_plural "%1 bytes converted."
+#, kde-format
 msgctxt "@info"
 msgid "1 byte inserted."
 msgid_plural "%1 bytes inserted."
-msgstr[0] "轉換了 %1 個位元組。"
+msgstr[0] "插入了 %1 個位元組。"
 
 #: controllers/view/bytetable/bytetableview.cpp:74
 #, kde-format
@@ -402,9 +378,7 @@ msgid "Charset Conversion"
 msgstr "字元集轉換"
 
 #: controllers/view/charsetconversion/charsetconversiontool.cpp:304
-#, fuzzy, kde-format
-#| msgctxt "Converted from charset 1 to charset 2"
-#| msgid "%1 to %2"
+#, kde-format
 msgctxt "@item Converted from charset 1 to charset 2"
 msgid "%1 to %2"
 msgstr "%1 到 %2"
@@ -503,11 +477,10 @@ msgid ""
 msgstr "定義若是目標位元組裡沒有該字元時，要用哪個位元組替代。"
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:170
-#, fuzzy, kde-format
-#| msgid "Con&vert"
+#, kde-format
 msgctxt "@action:button"
 msgid "Convert"
-msgstr "轉換(&V)"
+msgstr "轉換"
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:173
 #, kde-format
@@ -605,19 +578,19 @@ msgstr ""
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "No checksum calculated yet."
-msgstr ""
+msgstr "尚未計算檢查碼。"
 
 #: controllers/view/crop/cropcontroller.cpp:33
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Crop"
-msgstr ""
+msgstr "裁剪"
 
 #: controllers/view/crop/cropcontroller.cpp:96
 #, kde-format
 msgctxt "@item name of the change"
 msgid "Crop"
-msgstr ""
+msgstr "裁剪"
 
 #: controllers/view/filter/filtertool.cpp:63
 #: controllers/view/filter/filtertoolviewfactory.cpp:24
@@ -631,7 +604,7 @@ msgstr "二進位過濾器"
 msgctxt "@info"
 msgid "1 byte filtered with %2."
 msgid_plural "%1 bytes filtered with %2."
-msgstr[0] ""
+msgstr[0] "%1 個位元組已用 %2 過濾。"
 
 #: controllers/view/filter/filterview.cpp:45
 #, kde-format
@@ -810,7 +783,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy"
-msgstr ""
+msgstr "複製"
 
 #: controllers/view/info/infoview.cpp:124
 #, kde-format
@@ -943,12 +916,10 @@ msgstr "用於將位元組解為整數值時的位元組順序。"
 
 #: controllers/view/libbytearraychecksum/algorithm/nobytearraychecksumparametersetedit.cpp:25
 #: controllers/view/libbytearrayfilter/filter/nobytearrayfilterparametersetedit.cpp:25
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "Parameters"
+#, kde-format
 msgctxt "@info"
 msgid "No parameters"
-msgstr "參數"
+msgstr "沒有參數"
 
 #: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:48
 #, kde-format
@@ -1369,17 +1340,13 @@ msgid "Decoding Table"
 msgstr "解碼表"
 
 #: controllers/view/poddecoder/poddecodertool.cpp:309
-#, fuzzy, kde-format
-#| msgctxt "Edited as %datatype"
-#| msgid "Edited as %1"
+#, kde-format
 msgctxt "@item Edited as datatype"
 msgid "Edited as %1"
 msgstr "編輯為 %1"
 
 #: controllers/view/poddecoder/poddecodertool.cpp:318
-#, fuzzy, kde-format
-#| msgctxt "Edited as %datatype"
-#| msgid "Edited as %1"
+#, kde-format
 msgctxt "@info Edited as datatype"
 msgid "Edited as %1"
 msgstr "編輯為 %1"
@@ -1468,12 +1435,10 @@ msgstr "編輯"
 
 #: controllers/view/poddecoder/podtableview.cpp:271
 #: controllers/view/structures/structureview.cpp:395
-#, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to select a range"
-#| msgid "Select"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Select"
-msgstr "選擇"
+msgstr "選取"
 
 #: controllers/view/print/printtool.cpp:280
 #: controllers/view/print/printtool.cpp:310
@@ -1780,19 +1745,16 @@ msgid "Filter:"
 msgstr "過濾器："
 
 #: controllers/view/stringsextract/stringsextractview.cpp:94
-#, fuzzy, kde-format
-#| msgid "Enter a term to limit the list."
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter a term to limit the list."
 msgstr "在此輸入過濾清單的字串。"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:145
-#, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to extract strings"
-#| msgid "Strings"
+#, kde-format
 msgctxt "@info"
 msgid "No strings"
-msgstr "字串集"
+msgstr "沒有字串"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:165
 #, kde-format
@@ -1810,11 +1772,10 @@ msgstr ""
 "如果您按下<interface>複製</interface>按鍵，則會將選取的字串複製到剪貼簿中。"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:178
-#, fuzzy, kde-format
-#| msgid "&Show"
+#, kde-format
 msgctxt "@action:button"
 msgid "Show"
-msgstr "顯示(&S)"
+msgstr "顯示"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:180
 #, kde-format
@@ -1831,35 +1792,29 @@ msgid ""
 msgstr "如果您按下<interface>跳到</interface>按鍵，字串會標記並顯示在檢視中。"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:198
-#, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to select a range"
-#| msgid "Select"
+#, kde-format
 msgctxt "@action"
 msgid "Select"
-msgstr "選擇"
+msgstr "選取"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:200
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Shows the selected string in the view."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Selects the selected string in the view."
-msgstr "在檢視中顯示選取的字串。"
+msgstr "在檢視中顯示已選的字串。"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:344
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "No bytes converted."
+#, kde-format
 msgctxt "@info"
 msgid "No strings extracted."
-msgstr "沒有轉換任何位元組。"
+msgstr "沒有取出任何字串。"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:345
 #, kde-format
 msgctxt "@info"
 msgid "1 string extracted."
 msgid_plural "%1 strings extracted."
-msgstr[0] ""
+msgstr[0] "取出了 %1 個字串。"
 
 #: controllers/view/structures/datatypes/array/complexarraydata.cpp:98
 #, kde-format
@@ -2554,11 +2509,10 @@ msgid "Size"
 msgstr "大小"
 
 #: controllers/view/structures/structureview.cpp:91
-#, fuzzy, kde-format
-#| msgid "Structure Definitions"
+#, kde-format
 msgctxt "@info"
 msgid "No structure definitions"
-msgstr "結構定義"
+msgstr "沒有結構定義"
 
 #: controllers/view/structures/structureview.cpp:111
 #, kde-format
@@ -2597,15 +2551,13 @@ msgid "Open settings."
 msgstr "開啟設定。"
 
 #: controllers/view/structures/structureview.cpp:174
-#, fuzzy, kde-format
-#| msgid "Value Display"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Value Display"
 msgstr "數值顯示"
 
 #: controllers/view/structures/structureview.cpp:186
-#, fuzzy, kde-format
-#| msgid "Structures management"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Structures management"
 msgstr "結構管理"
@@ -2853,30 +2805,25 @@ msgstr "重設變更"
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:184
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:180
-#, fuzzy, kde-format
-#| msgctxt "@window:title"
-#| msgid "New View Profile"
+#, kde-format
 msgctxt "@title:window"
 msgid "New View Profile"
 msgstr "新增檢視設定檔"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:55
-#, fuzzy, kde-format
-#| msgid "Title:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Title:"
 msgstr "標題："
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:59
-#, fuzzy, kde-format
-#| msgid "Display"
+#, kde-format
 msgctxt "@title:group"
 msgid "Display"
 msgstr "顯示"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:63
-#, fuzzy, kde-format
-#| msgid "Show Line Offset:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show line offset:"
 msgstr "顯示行位移："
@@ -2900,68 +2847,55 @@ msgid "Octal"
 msgstr "八進位"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:72
-#, fuzzy, kde-format
-#| msgid "Offset Coding:"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Offset coding:"
 msgstr "位移編碼："
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:76
-#, fuzzy, kde-format
-#| msgid "Values"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Values"
 msgstr "數值"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:77
-#, fuzzy, kde-format
-#| msgid "Chars"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Chars"
 msgstr "字元"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:78
-#, fuzzy, kde-format
-#| msgctxt "@item:"
-#| msgid "Values & Chars"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Values & Chars"
 msgstr "數值與字元"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:81
-#, fuzzy, kde-format
-#| msgid "Show Values or Chars:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show values or chars:"
 msgstr "顯示數值或字元"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:85
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox "
-#| msgid "Show with Rows or Columns:"
+#, kde-format
 msgctxt "@label:listbox "
 msgid "Show with rows or columns:"
 msgstr "顯示列或欄："
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:88
-#, fuzzy, kde-format
-#| msgctxt "@item:"
-#| msgid "Columns"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Columns"
 msgstr "欄"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:89
-#, fuzzy, kde-format
-#| msgctxt "@item:"
-#| msgid "Rows"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Rows"
 msgstr "列"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:96
-#, fuzzy, kde-format
-#| msgid "Layout"
+#, kde-format
 msgctxt "@title:group"
 msgid "Layout"
 msgstr "佈局"
@@ -2989,39 +2923,31 @@ msgid "On"
 msgstr "開"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:111
-#, fuzzy, kde-format
-#| msgid "Break lines:"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Break lines:"
-msgstr "中斷行"
+msgstr "斷開行數："
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:115
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "No grouping."
+#, kde-format
 msgctxt "@item"
 msgid "No Grouping"
-msgstr "無群組"
+msgstr "未群組"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:119
-#, fuzzy, kde-format
-#| msgctxt "@label:spinbox number of bytes which are grouped"
-#| msgid "Bytes per Group:"
+#, kde-format
 msgctxt "@label:spinbox number of bytes which are grouped"
 msgid "Bytes per group:"
 msgstr "每群組位元組數："
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:126
-#, fuzzy, kde-format
-#| msgctxt "@label:spinbox number of bytes which are shown per line"
-#| msgid "Bytes per Line:"
+#, kde-format
 msgctxt "@label:spinbox number of bytes which are shown per line"
 msgid "Bytes per line:"
 msgstr "每行位元組數："
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:131
-#, fuzzy, kde-format
-#| msgid "Values"
+#, kde-format
 msgctxt "@title:group"
 msgid "Values"
 msgstr "數值"
@@ -3061,29 +2987,25 @@ msgstr "二進位"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:146
 #: controllers/view/viewprofiles/viewprofileedit.cpp:155
-#, fuzzy, kde-format
-#| msgid "Coding:"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Coding:"
 msgstr "編碼："
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:150
-#, fuzzy, kde-format
-#| msgid "Chars"
+#, kde-format
 msgctxt "@title:group"
 msgid "Chars"
 msgstr "字元"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:165
-#, fuzzy, kde-format
-#| msgid "Char for non-printable bytes:"
+#, kde-format
 msgctxt "@label:chooser"
 msgid "Char for non-printable bytes:"
 msgstr "不可列印位元組字元："
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:170
-#, fuzzy, kde-format
-#| msgid "Char for undefined bytes:"
+#, kde-format
 msgctxt "@label:chooser"
 msgid "Char for undefined bytes:"
 msgstr "未定義位元組字元："
@@ -3194,9 +3116,7 @@ msgid "Modification of %1"
 msgstr "%1 的變種"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:211
-#, fuzzy, kde-format
-#| msgctxt "@window:title"
-#| msgid "\"%1\" View Profile"
+#, kde-format
 msgctxt "@title:window"
 msgid "\"%1\" View Profile"
 msgstr "檢視設定檔 %1"
@@ -3324,11 +3244,10 @@ msgid "Pattern…"
 msgstr "樣式…"
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:148
-#, fuzzy, kde-format
-#| msgid "Pattern inserted."
+#, kde-format
 msgctxt "@item"
 msgid "Pattern Inserted"
-msgstr "樣式已插入。"
+msgstr "樣式已插入"
 
 #: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:35
 #, kde-format
@@ -3368,11 +3287,10 @@ msgid "Random Data…"
 msgstr "隨機資料…"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:88
-#, fuzzy, kde-format
-#| msgid "RandomData inserted."
+#, kde-format
 msgctxt "@item"
 msgid "RandomData Inserted"
-msgstr "隨機資料已插入。"
+msgstr "隨機資料已插入"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatageneratorconfigeditor.cpp:33
 #, kde-format
@@ -3399,11 +3317,10 @@ msgid "Sequence"
 msgstr "序列"
 
 #: gui/io/generator/sequence/bytearraysequencegenerator.cpp:58
-#, fuzzy, kde-format
-#| msgid "Sequence inserted."
+#, kde-format
 msgctxt "@item"
 msgid "Sequence Inserted"
-msgstr "序列已插入。"
+msgstr "序列已插入"
 
 #: gui/io/streamencoder/base32/bytearraybase32streamencoder.cpp:131
 #, kde-format
@@ -3450,11 +3367,10 @@ msgid "Ascii85"
 msgstr "Ascii"
 
 #: gui/io/streamencoder/bytearraytextstreamencoderpreview.cpp:27
-#, fuzzy, kde-format
-#| msgid "The preview uses maximal the first 100 bytes."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "The preview uses maximally the first 100 bytes."
-msgstr "預覽最多前一百位元。"
+msgstr "預覽最多只使用前一百個位元組。"
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoder.cpp:27
 #, kde-format
