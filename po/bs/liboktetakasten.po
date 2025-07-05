@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-15 03:31+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2015-02-04 16:00+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: bosanski <bs@li.org>\n"
@@ -2225,98 +2225,6 @@ msgctxt "@title:window"
 msgid "Advanced Structures Selection"
 msgstr "Napredna selekcija..."
 
-#. i18n: ectx: tooltip, entry (UnsignedDisplayBase), group (ValueDisplay)
-#: controllers/view/structures/settings/structureviewpreferences.kcfg:9
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "The base to use when converting unsigned numbers to a string."
-msgstr "Baza koja se koristi pri pretvaranju nepredznačenih brojeva u string."
-
-#. i18n: ectx: tooltip, entry (SignedDisplayBase), group (ValueDisplay)
-#: controllers/view/structures/settings/structureviewpreferences.kcfg:13
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "The base to use when converting signed numbers to a string."
-msgstr "Baza koja se koristi pri pretvaranju predznačenih brojeva u string."
-
-#. i18n: ectx: tooltip, entry (CharDisplayBase), group (ValueDisplay)
-#: controllers/view/structures/settings/structureviewpreferences.kcfg:17
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "The base to use when converting characters to a value string."
-msgstr "Baza koja se koristi pri pretvaranju znakova u vrijednosni string."
-
-#. i18n: ectx: tooltip, entry (ShowCharNumericalValue), group (ValueDisplay)
-#: controllers/view/structures/settings/structureviewpreferences.kcfg:21
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Whether to show the numerical value of chars"
-msgstr "Da li prikazivati brojevne vrednosti znakova"
-
-#. i18n: ectx: tooltip, entry (LocaleAwareFloatFormatting), group (ValueDisplay)
-#: controllers/view/structures/settings/structureviewpreferences.kcfg:25
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Whether to format floating point values according to the current locale"
-msgstr ""
-"Da li formatirati vrijednosti u pokretnom zarezu prema tekućem lokalitetu"
-
-#. i18n: ectx: tooltip, entry (ShortTypeNames), group (ValueDisplay)
-#: controllers/view/structures/settings/structureviewpreferences.kcfg:29
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Whether to use short type names (i.e. uint32 instead of unsigned int)"
-msgstr "Da li koristiti kratka imena tipova (tj. uint32 umjesto unsigned int)"
-
-#. i18n: ectx: tooltip, entry (LocaleAwareDecimalFormatting), group (ValueDisplay)
-#: controllers/view/structures/settings/structureviewpreferences.kcfg:33
-#, kde-format
-msgctxt "@info:tooltip"
-msgid ""
-"If true, integers being displayed in decimal format will be formatted "
-"according to the current locale settings"
-msgstr ""
-"Ako je tačno, cijeli brojevi prikazani dekadno biće formatirani prema "
-"postavkama tekućeg lokaliteta"
-
-#. i18n: ectx: whatsthis, entry (LocaleAwareDecimalFormatting), group (ValueDisplay)
-#: controllers/view/structures/settings/structureviewpreferences.kcfg:34
-#, kde-format
-msgid "Whether to format integer values according to the current locale"
-msgstr "Da li formatirati cjelobrojne vrijednosti prema tekućem lokalitetu"
-
-#. i18n: ectx: tooltip, entry (FloatPrecision), group (ValueDisplay)
-#: controllers/view/structures/settings/structureviewpreferences.kcfg:38
-#, kde-format
-msgctxt "@info:tooltip"
-msgid ""
-"The precision used for converting floating-point numbers to strings (number "
-"of decimal digits)"
-msgstr ""
-"Tačnost pri pretvaranju brojeva u pokretnom zarezu u stringove (broj "
-"decimalnih cifara)"
-
-#. i18n: ectx: label, entry (ByteOrder), group (StructureSettings)
-#: controllers/view/structures/settings/structureviewpreferences.kcfg:47
-#, kde-format
-msgctxt "@label:listbox"
-msgid "Byte order"
-msgstr "Poredak bita"
-
-#. i18n: ectx: label, entry (ByteOrder), group (StructureSettings)
-#: controllers/view/structures/settings/structureviewpreferences.kcfg:49
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Big endian"
-msgstr "Važniji bajt na nižoj adresi"
-
-#. i18n: ectx: label, entry (ByteOrder), group (StructureSettings)
-#: controllers/view/structures/settings/structureviewpreferences.kcfg:50
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Little endian"
-msgstr "Važniji bajt na višoj adresi"
-
 #: controllers/view/structures/settings/structureviewsettingswidget.cpp:49
 #, kde-format
 msgctxt "@item:inlistbox"
@@ -2340,72 +2248,6 @@ msgstr "Decimalni"
 msgctxt "@item:inlistbox"
 msgid "Hexadecimal"
 msgstr "Heksadecimalni"
-
-#. i18n: ectx: property (text), widget (QLabel, byteOrderLabel)
-#: controllers/view/structures/settings/structureviewsettingswidget.ui:32
-#, kde-format
-msgid "Byte order:"
-msgstr "poredak bita:"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ByteOrder)
-#: controllers/view/structures/settings/structureviewsettingswidget.ui:46
-#, kde-format
-msgid "Big endian"
-msgstr "Big endian"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ByteOrder)
-#: controllers/view/structures/settings/structureviewsettingswidget.ui:51
-#, kde-format
-msgid "Little endian"
-msgstr "Little endian"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShortTypeNames)
-#: controllers/view/structures/settings/structureviewsettingswidget.ui:59
-#, kde-format
-msgid "Use short type names"
-msgstr "Koristi kratka imena tipova"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_LocaleAwareDecimalFormatting)
-#: controllers/view/structures/settings/structureviewsettingswidget.ui:66
-#, kde-format
-msgid "Use locale-aware integer formatting"
-msgstr "Formatiranje cjelobrojnih po lokalitetu"
-
-#. i18n: ectx: property (text), widget (QLabel, unsigned_label)
-#: controllers/view/structures/settings/structureviewsettingswidget.ui:73
-#, kde-format
-msgid "Unsigned values:"
-msgstr "Nepredznačene vrednosti:"
-
-#. i18n: ectx: property (text), widget (QLabel, signed_label)
-#: controllers/view/structures/settings/structureviewsettingswidget.ui:86
-#, kde-format
-msgid "Signed values:"
-msgstr "Predznačene vrednosti:"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_LocaleAwareFloatFormatting)
-#: controllers/view/structures/settings/structureviewsettingswidget.ui:99
-#, kde-format
-msgid "Use locale-aware floating-point formatting"
-msgstr "Formatiranje pokretnog zareza po lokalitetu"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: controllers/view/structures/settings/structureviewsettingswidget.ui:106
-#, kde-format
-msgid "Floating-point precision:"
-msgstr "Tačnost pokretnog zareza:"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowCharNumericalValue)
-#: controllers/view/structures/settings/structureviewsettingswidget.ui:119
-#, kde-format
-msgid "Show numerical value of chars"
-msgstr "Brojevne vrijednosti znakova"
-
-#. i18n: ectx: property (text), widget (QLabel, char_label)
-#: controllers/view/structures/settings/structureviewsettingswidget.ui:126
-#, kde-format
-msgid "Character value:"
-msgstr "Znakovna vrijednost:"
 
 #: controllers/view/structures/structurestool.cpp:68
 #: controllers/view/structures/structurestoolviewfactory.cpp:29
@@ -3461,6 +3303,99 @@ msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"
 msgid "UTF-8"
 msgstr "UTF-8"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "The base to use when converting unsigned numbers to a string."
+#~ msgstr ""
+#~ "Baza koja se koristi pri pretvaranju nepredznačenih brojeva u string."
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "The base to use when converting signed numbers to a string."
+#~ msgstr "Baza koja se koristi pri pretvaranju predznačenih brojeva u string."
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "The base to use when converting characters to a value string."
+#~ msgstr "Baza koja se koristi pri pretvaranju znakova u vrijednosni string."
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Whether to show the numerical value of chars"
+#~ msgstr "Da li prikazivati brojevne vrednosti znakova"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid ""
+#~ "Whether to format floating point values according to the current locale"
+#~ msgstr ""
+#~ "Da li formatirati vrijednosti u pokretnom zarezu prema tekućem lokalitetu"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid ""
+#~ "Whether to use short type names (i.e. uint32 instead of unsigned int)"
+#~ msgstr ""
+#~ "Da li koristiti kratka imena tipova (tj. uint32 umjesto unsigned int)"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid ""
+#~ "If true, integers being displayed in decimal format will be formatted "
+#~ "according to the current locale settings"
+#~ msgstr ""
+#~ "Ako je tačno, cijeli brojevi prikazani dekadno biće formatirani prema "
+#~ "postavkama tekućeg lokaliteta"
+
+#~ msgid "Whether to format integer values according to the current locale"
+#~ msgstr "Da li formatirati cjelobrojne vrijednosti prema tekućem lokalitetu"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid ""
+#~ "The precision used for converting floating-point numbers to strings "
+#~ "(number of decimal digits)"
+#~ msgstr ""
+#~ "Tačnost pri pretvaranju brojeva u pokretnom zarezu u stringove (broj "
+#~ "decimalnih cifara)"
+
+#~ msgctxt "@label:listbox"
+#~ msgid "Byte order"
+#~ msgstr "Poredak bita"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Big endian"
+#~ msgstr "Važniji bajt na nižoj adresi"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Little endian"
+#~ msgstr "Važniji bajt na višoj adresi"
+
+#~ msgid "Byte order:"
+#~ msgstr "poredak bita:"
+
+#~ msgid "Big endian"
+#~ msgstr "Big endian"
+
+#~ msgid "Little endian"
+#~ msgstr "Little endian"
+
+#~ msgid "Use short type names"
+#~ msgstr "Koristi kratka imena tipova"
+
+#~ msgid "Use locale-aware integer formatting"
+#~ msgstr "Formatiranje cjelobrojnih po lokalitetu"
+
+#~ msgid "Unsigned values:"
+#~ msgstr "Nepredznačene vrednosti:"
+
+#~ msgid "Signed values:"
+#~ msgstr "Predznačene vrednosti:"
+
+#~ msgid "Use locale-aware floating-point formatting"
+#~ msgstr "Formatiranje pokretnog zareza po lokalitetu"
+
+#~ msgid "Floating-point precision:"
+#~ msgstr "Tačnost pokretnog zareza:"
+
+#~ msgid "Show numerical value of chars"
+#~ msgstr "Brojevne vrijednosti znakova"
+
+#~ msgid "Character value:"
+#~ msgstr "Znakovna vrijednost:"
 
 #~ msgid "Show Non-printable:"
 #~ msgstr "Prikaži neprikazive:"

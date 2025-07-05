@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-15 03:31+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2025-02-14 13:47+0100\n"
 "Last-Translator: Luigi Toscano <luigi.toscano@tiscali.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -2201,106 +2201,6 @@ msgctxt "@title:window"
 msgid "Advanced Structures Selection"
 msgstr "Selezione avanzata delle strutture"
 
-#. i18n: ectx: tooltip, entry (UnsignedDisplayBase), group (ValueDisplay)
-#: controllers/view/structures/settings/structureviewpreferences.kcfg:9
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "The base to use when converting unsigned numbers to a string."
-msgstr ""
-"La base da usare durante la conversione di numeri senza segno in una stringa."
-
-#. i18n: ectx: tooltip, entry (SignedDisplayBase), group (ValueDisplay)
-#: controllers/view/structures/settings/structureviewpreferences.kcfg:13
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "The base to use when converting signed numbers to a string."
-msgstr ""
-"La base da usare durante la conversione di numeri con segno in una stringa."
-
-#. i18n: ectx: tooltip, entry (CharDisplayBase), group (ValueDisplay)
-#: controllers/view/structures/settings/structureviewpreferences.kcfg:17
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "The base to use when converting characters to a value string."
-msgstr ""
-"La base da usare durante la conversione di caratteri in una stringa con "
-"valore."
-
-#. i18n: ectx: tooltip, entry (ShowCharNumericalValue), group (ValueDisplay)
-#: controllers/view/structures/settings/structureviewpreferences.kcfg:21
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Whether to show the numerical value of chars"
-msgstr "Se mostrare o meno il valore numerico dei caratteri"
-
-#. i18n: ectx: tooltip, entry (LocaleAwareFloatFormatting), group (ValueDisplay)
-#: controllers/view/structures/settings/structureviewpreferences.kcfg:25
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Whether to format floating point values according to the current locale"
-msgstr ""
-"Se formattare i valori a virgola mobile secondo le proprie impostazioni di "
-"localizzazione"
-
-#. i18n: ectx: tooltip, entry (ShortTypeNames), group (ValueDisplay)
-#: controllers/view/structures/settings/structureviewpreferences.kcfg:29
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Whether to use short type names (i.e. uint32 instead of unsigned int)"
-msgstr ""
-"Se usare i nomi di tipo brevi, come uint32 invece di intero senza segno"
-
-#. i18n: ectx: tooltip, entry (LocaleAwareDecimalFormatting), group (ValueDisplay)
-#: controllers/view/structures/settings/structureviewpreferences.kcfg:33
-#, kde-format
-msgctxt "@info:tooltip"
-msgid ""
-"If true, integers being displayed in decimal format will be formatted "
-"according to the current locale settings"
-msgstr ""
-"Se vero, gli interi mostrati in formato decimale verranno formattato secondo "
-"le impostazioni di localizzazione attuali"
-
-#. i18n: ectx: whatsthis, entry (LocaleAwareDecimalFormatting), group (ValueDisplay)
-#: controllers/view/structures/settings/structureviewpreferences.kcfg:34
-#, kde-format
-msgid "Whether to format integer values according to the current locale"
-msgstr ""
-"Se formattare i valori interi secondo le impostazioni di localizzazione "
-"attuali"
-
-#. i18n: ectx: tooltip, entry (FloatPrecision), group (ValueDisplay)
-#: controllers/view/structures/settings/structureviewpreferences.kcfg:38
-#, kde-format
-msgctxt "@info:tooltip"
-msgid ""
-"The precision used for converting floating-point numbers to strings (number "
-"of decimal digits)"
-msgstr ""
-"La precisione usata per convertire numeri a virgola mobile in stringhe "
-"(numero di cifre decimali)"
-
-#. i18n: ectx: label, entry (ByteOrder), group (StructureSettings)
-#: controllers/view/structures/settings/structureviewpreferences.kcfg:47
-#, kde-format
-msgctxt "@label:listbox"
-msgid "Byte order"
-msgstr "Ordine dei byte"
-
-#. i18n: ectx: label, entry (ByteOrder), group (StructureSettings)
-#: controllers/view/structures/settings/structureviewpreferences.kcfg:49
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Big endian"
-msgstr "Big endian"
-
-#. i18n: ectx: label, entry (ByteOrder), group (StructureSettings)
-#: controllers/view/structures/settings/structureviewpreferences.kcfg:50
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Little endian"
-msgstr "Little endian"
-
 #: controllers/view/structures/settings/structureviewsettingswidget.cpp:49
 #, kde-format
 msgctxt "@item:inlistbox"
@@ -2324,72 +2224,6 @@ msgstr "Decimale"
 msgctxt "@item:inlistbox"
 msgid "Hexadecimal"
 msgstr "Esadecimale"
-
-#. i18n: ectx: property (text), widget (QLabel, byteOrderLabel)
-#: controllers/view/structures/settings/structureviewsettingswidget.ui:32
-#, kde-format
-msgid "Byte order:"
-msgstr "Ordine dei byte:"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ByteOrder)
-#: controllers/view/structures/settings/structureviewsettingswidget.ui:46
-#, kde-format
-msgid "Big endian"
-msgstr "Big endian"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ByteOrder)
-#: controllers/view/structures/settings/structureviewsettingswidget.ui:51
-#, kde-format
-msgid "Little endian"
-msgstr "Little endian"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShortTypeNames)
-#: controllers/view/structures/settings/structureviewsettingswidget.ui:59
-#, kde-format
-msgid "Use short type names"
-msgstr "Usa nomi di tipo brevi"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_LocaleAwareDecimalFormatting)
-#: controllers/view/structures/settings/structureviewsettingswidget.ui:66
-#, kde-format
-msgid "Use locale-aware integer formatting"
-msgstr "Usa formattazione interi secondo propria localizzazione"
-
-#. i18n: ectx: property (text), widget (QLabel, unsigned_label)
-#: controllers/view/structures/settings/structureviewsettingswidget.ui:73
-#, kde-format
-msgid "Unsigned values:"
-msgstr "Valori senza segno:"
-
-#. i18n: ectx: property (text), widget (QLabel, signed_label)
-#: controllers/view/structures/settings/structureviewsettingswidget.ui:86
-#, kde-format
-msgid "Signed values:"
-msgstr "Valori con segno:"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_LocaleAwareFloatFormatting)
-#: controllers/view/structures/settings/structureviewsettingswidget.ui:99
-#, kde-format
-msgid "Use locale-aware floating-point formatting"
-msgstr "Usa formattazione virgola mobile secondo propria localizzazione"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: controllers/view/structures/settings/structureviewsettingswidget.ui:106
-#, kde-format
-msgid "Floating-point precision:"
-msgstr "Precisione virgola mobile:"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowCharNumericalValue)
-#: controllers/view/structures/settings/structureviewsettingswidget.ui:119
-#, kde-format
-msgid "Show numerical value of chars"
-msgstr "Mostra valore numerico dei caratteri"
-
-#. i18n: ectx: property (text), widget (QLabel, char_label)
-#: controllers/view/structures/settings/structureviewsettingswidget.ui:126
-#, kde-format
-msgid "Character value:"
-msgstr "Valore carattere:"
 
 #: controllers/view/structures/structurestool.cpp:68
 #: controllers/view/structures/structurestoolviewfactory.cpp:29
@@ -3439,6 +3273,107 @@ msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"
 msgid "UTF-8"
 msgstr "UTF-8"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "The base to use when converting unsigned numbers to a string."
+#~ msgstr ""
+#~ "La base da usare durante la conversione di numeri senza segno in una "
+#~ "stringa."
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "The base to use when converting signed numbers to a string."
+#~ msgstr ""
+#~ "La base da usare durante la conversione di numeri con segno in una "
+#~ "stringa."
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "The base to use when converting characters to a value string."
+#~ msgstr ""
+#~ "La base da usare durante la conversione di caratteri in una stringa con "
+#~ "valore."
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Whether to show the numerical value of chars"
+#~ msgstr "Se mostrare o meno il valore numerico dei caratteri"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid ""
+#~ "Whether to format floating point values according to the current locale"
+#~ msgstr ""
+#~ "Se formattare i valori a virgola mobile secondo le proprie impostazioni "
+#~ "di localizzazione"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid ""
+#~ "Whether to use short type names (i.e. uint32 instead of unsigned int)"
+#~ msgstr ""
+#~ "Se usare i nomi di tipo brevi, come uint32 invece di intero senza segno"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid ""
+#~ "If true, integers being displayed in decimal format will be formatted "
+#~ "according to the current locale settings"
+#~ msgstr ""
+#~ "Se vero, gli interi mostrati in formato decimale verranno formattato "
+#~ "secondo le impostazioni di localizzazione attuali"
+
+#~ msgid "Whether to format integer values according to the current locale"
+#~ msgstr ""
+#~ "Se formattare i valori interi secondo le impostazioni di localizzazione "
+#~ "attuali"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid ""
+#~ "The precision used for converting floating-point numbers to strings "
+#~ "(number of decimal digits)"
+#~ msgstr ""
+#~ "La precisione usata per convertire numeri a virgola mobile in stringhe "
+#~ "(numero di cifre decimali)"
+
+#~ msgctxt "@label:listbox"
+#~ msgid "Byte order"
+#~ msgstr "Ordine dei byte"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Big endian"
+#~ msgstr "Big endian"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Little endian"
+#~ msgstr "Little endian"
+
+#~ msgid "Byte order:"
+#~ msgstr "Ordine dei byte:"
+
+#~ msgid "Big endian"
+#~ msgstr "Big endian"
+
+#~ msgid "Little endian"
+#~ msgstr "Little endian"
+
+#~ msgid "Use short type names"
+#~ msgstr "Usa nomi di tipo brevi"
+
+#~ msgid "Use locale-aware integer formatting"
+#~ msgstr "Usa formattazione interi secondo propria localizzazione"
+
+#~ msgid "Unsigned values:"
+#~ msgstr "Valori senza segno:"
+
+#~ msgid "Signed values:"
+#~ msgstr "Valori con segno:"
+
+#~ msgid "Use locale-aware floating-point formatting"
+#~ msgstr "Usa formattazione virgola mobile secondo propria localizzazione"
+
+#~ msgid "Floating-point precision:"
+#~ msgstr "Precisione virgola mobile:"
+
+#~ msgid "Show numerical value of chars"
+#~ msgstr "Mostra valore numerico dei caratteri"
+
+#~ msgid "Character value:"
+#~ msgstr "Valore carattere:"
 
 #~ msgid "Show Non-printable:"
 #~ msgstr "Mostra non stampabili:"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: oktetapart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-31 03:26+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2008-12-19 10:26+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -29,41 +29,6 @@ msgstr "ខឹម សុខែម, ​អេង វណ្ណៈ, អោក ព�
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "khoemsokhem@khmeros.info,​​evannak@khmeros.info,piseth_dv@khmeros.info"
-
-#. i18n: ectx: Menu (file)
-#: oktetapartbrowserui.rc:5 oktetapartreadonlyui.rc:5
-#: oktetapartreadwriteui.rc:5
-#, kde-format
-msgid "&File"
-msgstr ""
-
-#. i18n: ectx: Menu (edit)
-#: oktetapartbrowserui.rc:8 oktetapartreadonlyui.rc:10
-#: oktetapartreadwriteui.rc:16
-#, kde-format
-msgid "&Edit"
-msgstr ""
-
-#. i18n: ectx: Menu (view)
-#: oktetapartbrowserui.rc:21 oktetapartreadonlyui.rc:26
-#: oktetapartreadwriteui.rc:39
-#, kde-format
-msgid "&View"
-msgstr ""
-
-#. i18n: ectx: ToolBar (mainToolBar)
-#: oktetapartbrowserui.rc:43 oktetapartreadonlyui.rc:47
-#: oktetapartreadwriteui.rc:60
-#, kde-format
-msgid "Main Toolbar"
-msgstr "របារ​ឧបករណ៍​មេ"
-
-#. i18n: ectx: Menu (permission)
-#: oktetapartreadwriteui.rc:11
-#, kde-format
-msgctxt "@title:menu"
-msgid "Permissions"
-msgstr ""
 
 #: partfactory.cpp:33
 #, kde-format
@@ -89,6 +54,9 @@ msgstr ""
 #, kde-format
 msgid "Author"
 msgstr "អ្នក​និពន្ធ"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "របារ​ឧបករណ៍​មេ"
 
 #~ msgctxt "@title:menu"
 #~ msgid "&Value Coding"

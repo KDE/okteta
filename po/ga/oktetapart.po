@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeutils/oktetapart.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-31 03:26+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2007-06-27 10:27-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -26,41 +26,6 @@ msgstr "Kevin Scannell"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "kscanne@gmail.com"
-
-#. i18n: ectx: Menu (file)
-#: oktetapartbrowserui.rc:5 oktetapartreadonlyui.rc:5
-#: oktetapartreadwriteui.rc:5
-#, kde-format
-msgid "&File"
-msgstr ""
-
-#. i18n: ectx: Menu (edit)
-#: oktetapartbrowserui.rc:8 oktetapartreadonlyui.rc:10
-#: oktetapartreadwriteui.rc:16
-#, kde-format
-msgid "&Edit"
-msgstr ""
-
-#. i18n: ectx: Menu (view)
-#: oktetapartbrowserui.rc:21 oktetapartreadonlyui.rc:26
-#: oktetapartreadwriteui.rc:39
-#, kde-format
-msgid "&View"
-msgstr ""
-
-#. i18n: ectx: ToolBar (mainToolBar)
-#: oktetapartbrowserui.rc:43 oktetapartreadonlyui.rc:47
-#: oktetapartreadwriteui.rc:60
-#, kde-format
-msgid "Main Toolbar"
-msgstr "Príomhbharra Uirlisí"
-
-#. i18n: ectx: Menu (permission)
-#: oktetapartreadwriteui.rc:11
-#, kde-format
-msgctxt "@title:menu"
-msgid "Permissions"
-msgstr "Ceadanna"
 
 #: partfactory.cpp:33
 #, kde-format
@@ -86,6 +51,13 @@ msgstr ""
 #, kde-format
 msgid "Author"
 msgstr "Údar"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "Príomhbharra Uirlisí"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Permissions"
+#~ msgstr "Ceadanna"
 
 #~ msgctxt "@title:menu"
 #~ msgid "&Value Coding"

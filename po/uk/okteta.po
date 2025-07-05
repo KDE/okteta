@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-31 03:26+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2021-01-02 11:20+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -72,29 +72,20 @@ msgctxt "Task description"
 msgid "Structures tool"
 msgstr "Інструмент структур"
 
-#. i18n: ectx: Menu (permission)
-#: oktetaui.rc:15
-#, kde-format
-msgctxt "@title:menu"
-msgid "Permissions"
-msgstr "Дозволи"
-
-#. i18n: ectx: Menu (windows)
-#: oktetaui.rc:65
-#, kde-format
-msgid "&Windows"
-msgstr "&Вікна"
-
-#. i18n: ectx: ToolBar (mainToolBar)
-#: oktetaui.rc:78
-#, kde-format
-msgid "Main Toolbar"
-msgstr "Головна панель"
-
 #: program.cpp:91
 #, kde-format
 msgid "File(s) to load."
 msgstr "Файли, які слід завантажити."
+
+#~ msgctxt "@title:menu"
+#~ msgid "Permissions"
+#~ msgstr "Дозволи"
+
+#~ msgid "&Windows"
+#~ msgstr "&Вікна"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "Головна панель"
 
 #~| msgid "Copyright 2006-2020 Friedrich W. H. Kossebau"
 #~ msgid "SPDX-FileCopyrightText: 2006-2020 Friedrich W. H. Kossebau "

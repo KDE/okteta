@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: khexedit2part\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-31 03:26+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2021-03-20 17:36+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -30,41 +30,6 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr ""
 "gregor.rakar@kiss.si,jlp@holodeck1.com,miles@filmsi.net,andrejm@ubuntu.si"
-
-#. i18n: ectx: Menu (file)
-#: oktetapartbrowserui.rc:5 oktetapartreadonlyui.rc:5
-#: oktetapartreadwriteui.rc:5
-#, kde-format
-msgid "&File"
-msgstr "Datoteka"
-
-#. i18n: ectx: Menu (edit)
-#: oktetapartbrowserui.rc:8 oktetapartreadonlyui.rc:10
-#: oktetapartreadwriteui.rc:16
-#, kde-format
-msgid "&Edit"
-msgstr "Uredi"
-
-#. i18n: ectx: Menu (view)
-#: oktetapartbrowserui.rc:21 oktetapartreadonlyui.rc:26
-#: oktetapartreadwriteui.rc:39
-#, kde-format
-msgid "&View"
-msgstr "Pogled"
-
-#. i18n: ectx: ToolBar (mainToolBar)
-#: oktetapartbrowserui.rc:43 oktetapartreadonlyui.rc:47
-#: oktetapartreadwriteui.rc:60
-#, kde-format
-msgid "Main Toolbar"
-msgstr "Glavna orodna vrstica"
-
-#. i18n: ectx: Menu (permission)
-#: oktetapartreadwriteui.rc:11
-#, kde-format
-msgctxt "@title:menu"
-msgid "Permissions"
-msgstr "Dovoljenja"
 
 #: partfactory.cpp:33
 #, kde-format
@@ -90,3 +55,19 @@ msgstr "Friedrich W. H. Kossebau"
 #, kde-format
 msgid "Author"
 msgstr "Avtor"
+
+#~ msgid "&File"
+#~ msgstr "Datoteka"
+
+#~ msgid "&Edit"
+#~ msgstr "Uredi"
+
+#~ msgid "&View"
+#~ msgstr "Pogled"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "Glavna orodna vrstica"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Permissions"
+#~ msgstr "Dovoljenja"

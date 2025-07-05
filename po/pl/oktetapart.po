@@ -1,5 +1,5 @@
 # translation of oktetapart.po to
-# Version: $Revision: 1701613 $
+# Version: $Revision: 1712705 $
 # Major part translated by Piotr Roszatycki <dexter@fnet.pl>
 # Minor latest updates by Jacek Stolarczyk <jacek@mer.chemia.polsl.gliwice.pl>
 # Michal Rudolf <mrudolf@kdewebdev.org>, 2003.
@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: oktetapart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-31 03:26+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2021-01-02 11:31+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -31,41 +31,6 @@ msgstr "Mikołaj Zalewski"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "M.Zalewski@pegaz.if.uj.edu.pl"
-
-#. i18n: ectx: Menu (file)
-#: oktetapartbrowserui.rc:5 oktetapartreadonlyui.rc:5
-#: oktetapartreadwriteui.rc:5
-#, kde-format
-msgid "&File"
-msgstr "&Plik"
-
-#. i18n: ectx: Menu (edit)
-#: oktetapartbrowserui.rc:8 oktetapartreadonlyui.rc:10
-#: oktetapartreadwriteui.rc:16
-#, kde-format
-msgid "&Edit"
-msgstr "&Edycja"
-
-#. i18n: ectx: Menu (view)
-#: oktetapartbrowserui.rc:21 oktetapartreadonlyui.rc:26
-#: oktetapartreadwriteui.rc:39
-#, kde-format
-msgid "&View"
-msgstr "&Widok"
-
-#. i18n: ectx: ToolBar (mainToolBar)
-#: oktetapartbrowserui.rc:43 oktetapartreadonlyui.rc:47
-#: oktetapartreadwriteui.rc:60
-#, kde-format
-msgid "Main Toolbar"
-msgstr "Główny pasek narzędzi"
-
-#. i18n: ectx: Menu (permission)
-#: oktetapartreadwriteui.rc:11
-#, kde-format
-msgctxt "@title:menu"
-msgid "Permissions"
-msgstr "Uprawnienia"
 
 #: partfactory.cpp:33
 #, kde-format
@@ -91,6 +56,22 @@ msgstr "Friedrich W. H. Kossebau"
 #, kde-format
 msgid "Author"
 msgstr "Autor"
+
+#~ msgid "&File"
+#~ msgstr "&Plik"
+
+#~ msgid "&Edit"
+#~ msgstr "&Edycja"
+
+#~ msgid "&View"
+#~ msgstr "&Widok"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "Główny pasek narzędzi"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Permissions"
+#~ msgstr "Uprawnienia"
 
 #~ msgctxt "@title:menu"
 #~ msgid "&Value Coding"

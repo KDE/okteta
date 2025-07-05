@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-15 03:31+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2024-03-30 19:46\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -2119,93 +2119,6 @@ msgctxt "@title:window"
 msgid "Advanced Structures Selection"
 msgstr "高级结构选择"
 
-#. i18n: ectx: tooltip, entry (UnsignedDisplayBase), group (ValueDisplay)
-#: controllers/view/structures/settings/structureviewpreferences.kcfg:9
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "The base to use when converting unsigned numbers to a string."
-msgstr "将无符号数转换为字符串时的基准值。"
-
-#. i18n: ectx: tooltip, entry (SignedDisplayBase), group (ValueDisplay)
-#: controllers/view/structures/settings/structureviewpreferences.kcfg:13
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "The base to use when converting signed numbers to a string."
-msgstr "将有符号数转换为字符串时的基准值。"
-
-#. i18n: ectx: tooltip, entry (CharDisplayBase), group (ValueDisplay)
-#: controllers/view/structures/settings/structureviewpreferences.kcfg:17
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "The base to use when converting characters to a value string."
-msgstr "将字符转换为有值字符串时的基准值。"
-
-#. i18n: ectx: tooltip, entry (ShowCharNumericalValue), group (ValueDisplay)
-#: controllers/view/structures/settings/structureviewpreferences.kcfg:21
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Whether to show the numerical value of chars"
-msgstr "是否显示字符的数值"
-
-#. i18n: ectx: tooltip, entry (LocaleAwareFloatFormatting), group (ValueDisplay)
-#: controllers/view/structures/settings/structureviewpreferences.kcfg:25
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Whether to format floating point values according to the current locale"
-msgstr "是否根据当前的区域设定格式化浮点值"
-
-#. i18n: ectx: tooltip, entry (ShortTypeNames), group (ValueDisplay)
-#: controllers/view/structures/settings/structureviewpreferences.kcfg:29
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Whether to use short type names (i.e. uint32 instead of unsigned int)"
-msgstr "是否使用简短类型名称(例如 uint32 代替 unsigned int)"
-
-#. i18n: ectx: tooltip, entry (LocaleAwareDecimalFormatting), group (ValueDisplay)
-#: controllers/view/structures/settings/structureviewpreferences.kcfg:33
-#, kde-format
-msgctxt "@info:tooltip"
-msgid ""
-"If true, integers being displayed in decimal format will be formatted "
-"according to the current locale settings"
-msgstr "如果启用此项，将根据当前的区域设定格式化十进制整数的显示方式"
-
-#. i18n: ectx: whatsthis, entry (LocaleAwareDecimalFormatting), group (ValueDisplay)
-#: controllers/view/structures/settings/structureviewpreferences.kcfg:34
-#, kde-format
-msgid "Whether to format integer values according to the current locale"
-msgstr "是否根据当前区域设定格式化整数值"
-
-#. i18n: ectx: tooltip, entry (FloatPrecision), group (ValueDisplay)
-#: controllers/view/structures/settings/structureviewpreferences.kcfg:38
-#, kde-format
-msgctxt "@info:tooltip"
-msgid ""
-"The precision used for converting floating-point numbers to strings (number "
-"of decimal digits)"
-msgstr "浮点数转换时所用的精度(小数位)"
-
-#. i18n: ectx: label, entry (ByteOrder), group (StructureSettings)
-#: controllers/view/structures/settings/structureviewpreferences.kcfg:47
-#, kde-format
-msgctxt "@label:listbox"
-msgid "Byte order"
-msgstr "字节顺序"
-
-#. i18n: ectx: label, entry (ByteOrder), group (StructureSettings)
-#: controllers/view/structures/settings/structureviewpreferences.kcfg:49
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Big endian"
-msgstr "高位优先"
-
-#. i18n: ectx: label, entry (ByteOrder), group (StructureSettings)
-#: controllers/view/structures/settings/structureviewpreferences.kcfg:50
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Little endian"
-msgstr "低位优先"
-
 #: controllers/view/structures/settings/structureviewsettingswidget.cpp:49
 #, kde-format
 msgctxt "@item:inlistbox"
@@ -2229,72 +2142,6 @@ msgstr "十进制"
 msgctxt "@item:inlistbox"
 msgid "Hexadecimal"
 msgstr "十六进制"
-
-#. i18n: ectx: property (text), widget (QLabel, byteOrderLabel)
-#: controllers/view/structures/settings/structureviewsettingswidget.ui:32
-#, kde-format
-msgid "Byte order:"
-msgstr "字节顺序："
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ByteOrder)
-#: controllers/view/structures/settings/structureviewsettingswidget.ui:46
-#, kde-format
-msgid "Big endian"
-msgstr "高位优先"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ByteOrder)
-#: controllers/view/structures/settings/structureviewsettingswidget.ui:51
-#, kde-format
-msgid "Little endian"
-msgstr "低位优先"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShortTypeNames)
-#: controllers/view/structures/settings/structureviewsettingswidget.ui:59
-#, kde-format
-msgid "Use short type names"
-msgstr "使用简短类型名称"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_LocaleAwareDecimalFormatting)
-#: controllers/view/structures/settings/structureviewsettingswidget.ui:66
-#, kde-format
-msgid "Use locale-aware integer formatting"
-msgstr "是否本地区域相关的整数格式"
-
-#. i18n: ectx: property (text), widget (QLabel, unsigned_label)
-#: controllers/view/structures/settings/structureviewsettingswidget.ui:73
-#, kde-format
-msgid "Unsigned values:"
-msgstr "无符号值："
-
-#. i18n: ectx: property (text), widget (QLabel, signed_label)
-#: controllers/view/structures/settings/structureviewsettingswidget.ui:86
-#, kde-format
-msgid "Signed values:"
-msgstr "有符号值："
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_LocaleAwareFloatFormatting)
-#: controllers/view/structures/settings/structureviewsettingswidget.ui:99
-#, kde-format
-msgid "Use locale-aware floating-point formatting"
-msgstr "使用本地区域相关的浮点数格式"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: controllers/view/structures/settings/structureviewsettingswidget.ui:106
-#, kde-format
-msgid "Floating-point precision:"
-msgstr "浮点数精度："
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowCharNumericalValue)
-#: controllers/view/structures/settings/structureviewsettingswidget.ui:119
-#, kde-format
-msgid "Show numerical value of chars"
-msgstr "显示字符的数字值"
-
-#. i18n: ectx: property (text), widget (QLabel, char_label)
-#: controllers/view/structures/settings/structureviewsettingswidget.ui:126
-#, kde-format
-msgid "Character value:"
-msgstr "字符数值："
 
 #: controllers/view/structures/structurestool.cpp:68
 #: controllers/view/structures/structurestoolviewfactory.cpp:29
@@ -3334,3 +3181,89 @@ msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"
 msgid "UTF-8"
 msgstr "UTF-8"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "The base to use when converting unsigned numbers to a string."
+#~ msgstr "将无符号数转换为字符串时的基准值。"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "The base to use when converting signed numbers to a string."
+#~ msgstr "将有符号数转换为字符串时的基准值。"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "The base to use when converting characters to a value string."
+#~ msgstr "将字符转换为有值字符串时的基准值。"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Whether to show the numerical value of chars"
+#~ msgstr "是否显示字符的数值"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid ""
+#~ "Whether to format floating point values according to the current locale"
+#~ msgstr "是否根据当前的区域设定格式化浮点值"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid ""
+#~ "Whether to use short type names (i.e. uint32 instead of unsigned int)"
+#~ msgstr "是否使用简短类型名称(例如 uint32 代替 unsigned int)"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid ""
+#~ "If true, integers being displayed in decimal format will be formatted "
+#~ "according to the current locale settings"
+#~ msgstr "如果启用此项，将根据当前的区域设定格式化十进制整数的显示方式"
+
+#~ msgid "Whether to format integer values according to the current locale"
+#~ msgstr "是否根据当前区域设定格式化整数值"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid ""
+#~ "The precision used for converting floating-point numbers to strings "
+#~ "(number of decimal digits)"
+#~ msgstr "浮点数转换时所用的精度(小数位)"
+
+#~ msgctxt "@label:listbox"
+#~ msgid "Byte order"
+#~ msgstr "字节顺序"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Big endian"
+#~ msgstr "高位优先"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Little endian"
+#~ msgstr "低位优先"
+
+#~ msgid "Byte order:"
+#~ msgstr "字节顺序："
+
+#~ msgid "Big endian"
+#~ msgstr "高位优先"
+
+#~ msgid "Little endian"
+#~ msgstr "低位优先"
+
+#~ msgid "Use short type names"
+#~ msgstr "使用简短类型名称"
+
+#~ msgid "Use locale-aware integer formatting"
+#~ msgstr "是否本地区域相关的整数格式"
+
+#~ msgid "Unsigned values:"
+#~ msgstr "无符号值："
+
+#~ msgid "Signed values:"
+#~ msgstr "有符号值："
+
+#~ msgid "Use locale-aware floating-point formatting"
+#~ msgstr "使用本地区域相关的浮点数格式"
+
+#~ msgid "Floating-point precision:"
+#~ msgstr "浮点数精度："
+
+#~ msgid "Show numerical value of chars"
+#~ msgstr "显示字符的数字值"
+
+#~ msgid "Character value:"
+#~ msgstr "字符数值："
