@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:55+0000\n"
 "PO-Revision-Date: 2016-04-08 22:57+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic <translation-team-is@lists.sourceforge.net>\n"
@@ -72,23 +72,29 @@ msgctxt "Task description"
 msgid "Structures tool"
 msgstr ""
 
+#. i18n: ectx: Menu (permission)
+#: oktetaui.rc:15
+#, fuzzy, kde-format
+msgctxt "@title:menu"
+msgid "Permissions"
+msgstr "Heimildir"
+
+#. i18n: ectx: Menu (windows)
+#: oktetaui.rc:65
+#, fuzzy, kde-format
+msgid "&Windows"
+msgstr "&Windows"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: oktetaui.rc:78
+#, fuzzy, kde-format
+msgid "Main Toolbar"
+msgstr "Aðaltækjaslá"
+
 #: program.cpp:91
 #, kde-format
 msgid "File(s) to load."
 msgstr ""
-
-#, fuzzy
-#~ msgctxt "@title:menu"
-#~ msgid "Permissions"
-#~ msgstr "Heimildir"
-
-#, fuzzy
-#~ msgid "&Windows"
-#~ msgstr "&Windows"
-
-#, fuzzy
-#~ msgid "Main Toolbar"
-#~ msgstr "Aðaltækjaslá"
 
 #, fuzzy
 #~ msgid "SPDX-FileCopyrightText: 2006-2020 Friedrich W. H. Kossebau "

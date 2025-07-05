@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:55+0000\n"
 "PO-Revision-Date: 2023-05-06 16:20+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -70,17 +70,26 @@ msgctxt "Task description"
 msgid "Structures tool"
 msgstr "Ilo por strukturoj"
 
+#. i18n: ectx: Menu (permission)
+#: oktetaui.rc:15
+#, kde-format
+msgctxt "@title:menu"
+msgid "Permissions"
+msgstr "Permesoj"
+
+#. i18n: ectx: Menu (windows)
+#: oktetaui.rc:65
+#, kde-format
+msgid "&Windows"
+msgstr "&Fenestroj"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: oktetaui.rc:78
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Ĉefa ilobreto"
+
 #: program.cpp:91
 #, kde-format
 msgid "File(s) to load."
 msgstr "Dosiero(j) ŝargenda(j)."
-
-#~ msgctxt "@title:menu"
-#~ msgid "Permissions"
-#~ msgstr "Permesoj"
-
-#~ msgid "&Windows"
-#~ msgstr "&Fenestroj"
-
-#~ msgid "Main Toolbar"
-#~ msgstr "Ĉefa ilobreto"

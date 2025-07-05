@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:55+0000\n"
 "PO-Revision-Date: 2020-03-21 21:45+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -2248,6 +2248,103 @@ msgctxt "@title:window"
 msgid "Advanced Structures Selection"
 msgstr "Egitura definizio dinamikoak"
 
+#. i18n: ectx: tooltip, entry (UnsignedDisplayBase), group (ValueDisplay)
+#: controllers/view/structures/settings/structureviewpreferences.kcfg:9
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "The base to use when converting unsigned numbers to a string."
+msgstr ""
+
+#. i18n: ectx: tooltip, entry (SignedDisplayBase), group (ValueDisplay)
+#: controllers/view/structures/settings/structureviewpreferences.kcfg:13
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "The base to use when converting signed numbers to a string."
+msgstr ""
+
+#. i18n: ectx: tooltip, entry (CharDisplayBase), group (ValueDisplay)
+#: controllers/view/structures/settings/structureviewpreferences.kcfg:17
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "The base to use when converting characters to a value string."
+msgstr ""
+
+#. i18n: ectx: tooltip, entry (ShowCharNumericalValue), group (ValueDisplay)
+#: controllers/view/structures/settings/structureviewpreferences.kcfg:21
+#, fuzzy, kde-format
+#| msgctxt "@title:menu"
+#| msgid "&Show Values or Chars"
+msgctxt "@info:tooltip"
+msgid "Whether to show the numerical value of chars"
+msgstr "Balioak eta karaktereak &erakutsi"
+
+#. i18n: ectx: tooltip, entry (LocaleAwareFloatFormatting), group (ValueDisplay)
+#: controllers/view/structures/settings/structureviewpreferences.kcfg:25
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Whether to format floating point values according to the current locale"
+msgstr ""
+
+#. i18n: ectx: tooltip, entry (ShortTypeNames), group (ValueDisplay)
+#: controllers/view/structures/settings/structureviewpreferences.kcfg:29
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Whether to use short type names (i.e. uint32 instead of unsigned int)"
+msgstr ""
+
+#. i18n: ectx: tooltip, entry (LocaleAwareDecimalFormatting), group (ValueDisplay)
+#: controllers/view/structures/settings/structureviewpreferences.kcfg:33
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"If true, integers being displayed in decimal format will be formatted "
+"according to the current locale settings"
+msgstr ""
+
+#. i18n: ectx: whatsthis, entry (LocaleAwareDecimalFormatting), group (ValueDisplay)
+#: controllers/view/structures/settings/structureviewpreferences.kcfg:34
+#, kde-format
+msgid "Whether to format integer values according to the current locale"
+msgstr ""
+
+#. i18n: ectx: tooltip, entry (FloatPrecision), group (ValueDisplay)
+#: controllers/view/structures/settings/structureviewpreferences.kcfg:38
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"The precision used for converting floating-point numbers to strings (number "
+"of decimal digits)"
+msgstr ""
+
+#. i18n: ectx: label, entry (ByteOrder), group (StructureSettings)
+#: controllers/view/structures/settings/structureviewpreferences.kcfg:47
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "@label:listbox byte order to use for decoding the bytes into integer "
+#| "values"
+#| msgid "Byte Order:"
+msgctxt "@label:listbox"
+msgid "Byte order"
+msgstr "Byten ordena:"
+
+#. i18n: ectx: label, entry (ByteOrder), group (StructureSettings)
+#: controllers/view/structures/settings/structureviewpreferences.kcfg:49
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "Big-endian"
+msgctxt "@item:inlistbox"
+msgid "Big endian"
+msgstr "Big-endian"
+
+#. i18n: ectx: label, entry (ByteOrder), group (StructureSettings)
+#: controllers/view/structures/settings/structureviewpreferences.kcfg:50
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "Little-endian"
+msgctxt "@item:inlistbox"
+msgid "Little endian"
+msgstr "Little-endian"
+
 #: controllers/view/structures/settings/structureviewsettingswidget.cpp:49
 #, fuzzy, kde-format
 #| msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
@@ -2280,6 +2377,92 @@ msgstr "Hamartarra"
 msgctxt "@item:inlistbox"
 msgid "Hexadecimal"
 msgstr "Hamaseitarra"
+
+#. i18n: ectx: property (text), widget (QLabel, byteOrderLabel)
+#: controllers/view/structures/settings/structureviewsettingswidget.ui:32
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "@label:listbox byte order to use for decoding the bytes into integer "
+#| "values"
+#| msgid "Byte Order:"
+msgid "Byte order:"
+msgstr "Byten ordena:"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ByteOrder)
+#: controllers/view/structures/settings/structureviewsettingswidget.ui:46
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "Big-endian"
+msgid "Big endian"
+msgstr "Big-endian"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ByteOrder)
+#: controllers/view/structures/settings/structureviewsettingswidget.ui:51
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "Little-endian"
+msgid "Little endian"
+msgstr "Little-endian"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShortTypeNames)
+#: controllers/view/structures/settings/structureviewsettingswidget.ui:59
+#, kde-format
+msgid "Use short type names"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_LocaleAwareDecimalFormatting)
+#: controllers/view/structures/settings/structureviewsettingswidget.ui:66
+#, kde-format
+msgid "Use locale-aware integer formatting"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, unsigned_label)
+#: controllers/view/structures/settings/structureviewsettingswidget.ui:73
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "@option:check Encode the values in hexadecimal instead of decimal, if the "
+#| "datatype has the property Unsigned"
+#| msgid "Unsigned as hexadecimal:"
+msgid "Unsigned values:"
+msgstr "Zeinugabe hamaseitarra:"
+
+#. i18n: ectx: property (text), widget (QLabel, signed_label)
+#: controllers/view/structures/settings/structureviewsettingswidget.ui:86
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "@option:check Encode the values in hexadecimal instead of decimal, if the "
+#| "datatype has the property Unsigned"
+#| msgid "Unsigned as hexadecimal:"
+msgid "Signed values:"
+msgstr "Zeinugabe hamaseitarra:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_LocaleAwareFloatFormatting)
+#: controllers/view/structures/settings/structureviewsettingswidget.ui:99
+#, kde-format
+msgid "Use locale-aware floating-point formatting"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: controllers/view/structures/settings/structureviewsettingswidget.ui:106
+#, kde-format
+msgid "Floating-point precision:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowCharNumericalValue)
+#: controllers/view/structures/settings/structureviewsettingswidget.ui:119
+#, fuzzy, kde-format
+#| msgctxt "@title:menu"
+#| msgid "&Show Values or Chars"
+msgid "Show numerical value of chars"
+msgstr "Balioak eta karaktereak &erakutsi"
+
+#. i18n: ectx: property (text), widget (QLabel, char_label)
+#: controllers/view/structures/settings/structureviewsettingswidget.ui:126
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip column contains the character with the value"
+#| msgid "Character"
+msgid "Character value:"
+msgstr "Karakterea"
 
 #: controllers/view/structures/structurestool.cpp:68
 #: controllers/view/structures/structurestoolviewfactory.cpp:29
@@ -3405,84 +3588,6 @@ msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"
 msgid "UTF-8"
 msgstr "UTF-8"
-
-#, fuzzy
-#~| msgctxt "@title:menu"
-#~| msgid "&Show Values or Chars"
-#~ msgctxt "@info:tooltip"
-#~ msgid "Whether to show the numerical value of chars"
-#~ msgstr "Balioak eta karaktereak &erakutsi"
-
-#, fuzzy
-#~| msgctxt ""
-#~| "@label:listbox byte order to use for decoding the bytes into integer "
-#~| "values"
-#~| msgid "Byte Order:"
-#~ msgctxt "@label:listbox"
-#~ msgid "Byte order"
-#~ msgstr "Byten ordena:"
-
-#, fuzzy
-#~| msgctxt "@item:inlistbox"
-#~| msgid "Big-endian"
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Big endian"
-#~ msgstr "Big-endian"
-
-#, fuzzy
-#~| msgctxt "@item:inlistbox"
-#~| msgid "Little-endian"
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Little endian"
-#~ msgstr "Little-endian"
-
-#, fuzzy
-#~| msgctxt ""
-#~| "@label:listbox byte order to use for decoding the bytes into integer "
-#~| "values"
-#~| msgid "Byte Order:"
-#~ msgid "Byte order:"
-#~ msgstr "Byten ordena:"
-
-#, fuzzy
-#~| msgctxt "@item:inlistbox"
-#~| msgid "Big-endian"
-#~ msgid "Big endian"
-#~ msgstr "Big-endian"
-
-#, fuzzy
-#~| msgctxt "@item:inlistbox"
-#~| msgid "Little-endian"
-#~ msgid "Little endian"
-#~ msgstr "Little-endian"
-
-#, fuzzy
-#~| msgctxt ""
-#~| "@option:check Encode the values in hexadecimal instead of decimal, if "
-#~| "the datatype has the property Unsigned"
-#~| msgid "Unsigned as hexadecimal:"
-#~ msgid "Unsigned values:"
-#~ msgstr "Zeinugabe hamaseitarra:"
-
-#, fuzzy
-#~| msgctxt ""
-#~| "@option:check Encode the values in hexadecimal instead of decimal, if "
-#~| "the datatype has the property Unsigned"
-#~| msgid "Unsigned as hexadecimal:"
-#~ msgid "Signed values:"
-#~ msgstr "Zeinugabe hamaseitarra:"
-
-#, fuzzy
-#~| msgctxt "@title:menu"
-#~| msgid "&Show Values or Chars"
-#~ msgid "Show numerical value of chars"
-#~ msgstr "Balioak eta karaktereak &erakutsi"
-
-#, fuzzy
-#~| msgctxt "@info:tooltip column contains the character with the value"
-#~| msgid "Character"
-#~ msgid "Character value:"
-#~ msgstr "Karakterea"
 
 #, fuzzy
 #~| msgctxt "@label:spinbox number of times to insert the pattern"

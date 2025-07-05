@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:55+0000\n"
 "PO-Revision-Date: 2013-09-08 07:05+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -70,21 +70,30 @@ msgctxt "Task description"
 msgid "Structures tool"
 msgstr ""
 
+#. i18n: ectx: Menu (permission)
+#: oktetaui.rc:15
+#, kde-format
+msgctxt "@title:menu"
+msgid "Permissions"
+msgstr "ئىمتىيازلار"
+
+#. i18n: ectx: Menu (windows)
+#: oktetaui.rc:65
+#, kde-format
+msgid "&Windows"
+msgstr "كۆزنەكلەر(&W)"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: oktetaui.rc:78
+#, kde-format
+msgid "Main Toolbar"
+msgstr "ئاساسىي قورال بالداق"
+
 #: program.cpp:91
 #, fuzzy, kde-format
 #| msgid "File(s) to load"
 msgid "File(s) to load."
 msgstr "ئوقۇيدىغان ھۆججەتلەر"
-
-#~ msgctxt "@title:menu"
-#~ msgid "Permissions"
-#~ msgstr "ئىمتىيازلار"
-
-#~ msgid "&Windows"
-#~ msgstr "كۆزنەكلەر(&W)"
-
-#~ msgid "Main Toolbar"
-#~ msgstr "ئاساسىي قورال بالداق"
 
 #, fuzzy
 #~| msgid "Friedrich W. H. Kossebau"
