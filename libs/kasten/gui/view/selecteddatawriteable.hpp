@@ -39,7 +39,7 @@ public: // operate
 
 public: // get
     [[nodiscard]]
-    virtual bool canReadData(const QMimeData* data) const = 0;
+    virtual bool canInsertData(const QMimeData* data) const = 0;
     // reports principle ability to cut selecteed data if there is some, also if currently there is none
     // TODO; does that make sense, or should be changed to also match only if there is selected data?
     [[nodiscard]]

@@ -77,7 +77,7 @@ void ClipboardController::setTargetModel(AbstractModel* model)
     const bool hasSelectedData = mSelectionControl ? mSelectionControl->hasSelectedData() : false;
     const bool isWriteable = (mMimeDataControl && !mModel->isReadOnly());
     const bool isCutable = (hasSelectedData && isWriteable && (!mMimeDataControl || mMimeDataControl->canCutSelectedData()));
-    const bool isPastable = isWriteable && !mimeData->formats().isEmpty() && mMimeDataControl->canReadData(mimeData);
+    const bool isPastable = isWriteable && !mimeData->formats().isEmpty() && mMimeDataControl->canInsertData(mimeData);
 
     mCopyAction->setEnabled(hasSelectedData);
     mCutAction->setEnabled(isCutable);
@@ -120,7 +120,7 @@ void ClipboardController::onReadOnlyChanged(bool isReadOnly)
     // backward compatibility: assume true by default
     const bool canCutSelectedData = mMimeDataControl ? mMimeDataControl->canCutSelectedData() : true;
     const bool isCutable = (hasSelectedData && isWriteable && canCutSelectedData);
-    const bool isPastable = isWriteable && !mimeData->formats().isEmpty() && mMimeDataControl->canReadData(mimeData);
+    const bool isPastable = isWriteable && !mimeData->formats().isEmpty() && mMimeDataControl->canInsertData(mimeData);
 
     mCutAction->setEnabled(isCutable);
     mPasteAction->setEnabled(isPastable);
@@ -151,7 +151,7 @@ void ClipboardController::onClipboardDataChanged()
     const QMimeData* mimeData = QApplication::clipboard()->mimeData(QClipboard::Clipboard);
 
     const bool isWriteable = (mMimeDataControl && !mModel->isReadOnly());
-    const bool isPastable = isWriteable && !mimeData->formats().isEmpty() && mMimeDataControl->canReadData(mimeData);
+    const bool isPastable = isWriteable && !mimeData->formats().isEmpty() && mMimeDataControl->canInsertData(mimeData);
 
     mPasteAction->setEnabled(isPastable);
 }

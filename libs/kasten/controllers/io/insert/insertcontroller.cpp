@@ -76,7 +76,7 @@ void InsertController::updateActions()
     mInsertSelectAction->removeAllActions();
 
     // TODO: pass model to find which mimetypes it can read
-    // mSelectedDataWriteableControl->canReadData( QMimeData() ) needs already data
+    // mSelectedDataWriteableControl->canInsertData( QMimeData() ) needs already data
     // TODO: it this depend on the current selection/focus? So it needs to be updated on every change?
     const auto generatorList = mModelCodecManager->dataGenerators();
     const bool hasGenerators = (!generatorList.empty());

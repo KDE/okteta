@@ -125,7 +125,7 @@ public: // If::SelectedDataWriteable API
     std::unique_ptr<QMimeData> cutSelectedData() override;
     void deleteSelectedData() override;
     [[nodiscard]]
-    bool canReadData(const QMimeData* data) const override;
+    bool canInsertData(const QMimeData* data) const override;
     [[nodiscard]]
     bool canCutSelectedData() const override;
 Q_SIGNALS:

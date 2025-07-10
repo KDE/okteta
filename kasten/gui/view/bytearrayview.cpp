@@ -219,7 +219,7 @@ void ByteArrayView::deleteSelectedData()
     mWidget->removeSelectedBytes();
 }
 
-bool ByteArrayView::canReadData(const QMimeData* data) const
+bool ByteArrayView::canInsertData(const QMimeData* data) const
 {
     return mWidget->canInsertBytesFromMimeData(data);
 }
