@@ -308,7 +308,7 @@ void MouseNavigator::startDrag()
     mDragStartPossible = false;
 
     // create data
-    auto dragData = mView->selectionAsMimeData();
+    auto dragData = mView->selectedBytesAsMimeData();
     if (!dragData) {
         return;
     }

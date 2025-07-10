@@ -112,7 +112,7 @@ public: // value access
     [[nodiscard]]
     QByteArray selectedData() const;
     [[nodiscard]]
-    std::unique_ptr<QMimeData> selectionAsMimeData() const;
+    std::unique_ptr<QMimeData> selectedBytesAsMimeData() const;
 
     [[nodiscard]]
     AddressRange marking() const;

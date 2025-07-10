@@ -152,9 +152,9 @@ bool ByteArrayJanusView::hasSelectedData() const
     return mView->hasSelectedData();
 }
 
-std::unique_ptr<QMimeData> ByteArrayJanusView::selectionAsMimeData() const
+std::unique_ptr<QMimeData> ByteArrayJanusView::selectedBytesAsMimeData() const
 {
-    return mView->selectionAsMimeData();
+    return mView->selectedBytesAsMimeData();
 }
 
 void ByteArrayJanusView::insertBytesFromMimeData(const QMimeData* data)

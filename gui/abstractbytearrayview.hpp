@@ -312,7 +312,7 @@ public:
     [[nodiscard]]
     QByteArray selectedData() const;
     [[nodiscard]]
-    std::unique_ptr<QMimeData> selectionAsMimeData() const;
+    std::unique_ptr<QMimeData> selectedBytesAsMimeData() const;
 
 public: // modification access
     void insertBytesFromMimeData(const QMimeData* data);

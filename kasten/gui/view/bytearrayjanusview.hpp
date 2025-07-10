@@ -80,7 +80,7 @@ public:
     [[nodiscard]]
     bool hasSelectedData() const;
     [[nodiscard]]
-    std::unique_ptr<QMimeData> selectionAsMimeData() const;
+    std::unique_ptr<QMimeData> selectedBytesAsMimeData() const;
     [[nodiscard]]
     bool canReadData(const QMimeData* data) const;
     [[nodiscard]]

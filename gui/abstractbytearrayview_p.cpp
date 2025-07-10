@@ -712,7 +712,7 @@ QByteArray AbstractByteArrayViewPrivate::selectedData() const
     return data;
 }
 
-std::unique_ptr<QMimeData> AbstractByteArrayViewPrivate::selectionAsMimeData() const
+std::unique_ptr<QMimeData> AbstractByteArrayViewPrivate::selectedBytesAsMimeData() const
 {
     if (!mTableRanges.hasSelection()) {
         return {};
@@ -729,7 +729,7 @@ void AbstractByteArrayViewPrivate::cutToClipboard(QClipboard::Mode mode)
         return;
     }
 
-    auto cutData = selectionAsMimeData();
+    auto cutData = selectedBytesAsMimeData();
     if (!cutData) {
         return;
     }
@@ -741,7 +741,7 @@ void AbstractByteArrayViewPrivate::cutToClipboard(QClipboard::Mode mode)
 
 void AbstractByteArrayViewPrivate::copyToClipboard(QClipboard::Mode mode) const
 {
-    auto cutData = selectionAsMimeData();
+    auto cutData = selectedBytesAsMimeData();
     if (!cutData) {
         return;
     }
