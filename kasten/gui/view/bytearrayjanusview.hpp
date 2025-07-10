@@ -75,7 +75,7 @@ public:
     void setSelection(Address start, Address end);
     void selectAll(bool selectAll);
     void removeSelectedData();
-    void pasteData(const QMimeData* data);
+    void insertBytesFromMimeData(const QMimeData* data);
     void insert(const QByteArray& byteArray);
     [[nodiscard]]
     bool hasSelectedData() const;

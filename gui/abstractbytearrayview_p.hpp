@@ -269,7 +269,7 @@ protected:
 protected:
     void removeSelectedData();
     void insert(const QByteArray& data);
-    void pasteData(const QMimeData* data);
+    void insertBytesFromMimeData(const QMimeData* data);
     [[nodiscard]]
     bool canReadData(const QMimeData* data) const;
 

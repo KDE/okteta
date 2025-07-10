@@ -204,7 +204,7 @@ std::unique_ptr<QMimeData> ByteArrayView::copySelectedData() const
 
 void ByteArrayView::insertData(const QMimeData* data)
 {
-    mWidget->pasteData(data);
+    mWidget->insertBytesFromMimeData(data);
 }
 
 std::unique_ptr<QMimeData> ByteArrayView::cutSelectedData()

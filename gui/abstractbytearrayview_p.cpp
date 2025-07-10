@@ -763,10 +763,10 @@ void AbstractByteArrayViewPrivate::pasteFromClipboard(QClipboard::Mode mode)
     }
 
     const QMimeData* data = QApplication::clipboard()->mimeData(mode);
-    pasteData(data);
+    insertBytesFromMimeData(data);
 }
 
-void AbstractByteArrayViewPrivate::pasteData(const QMimeData* data)
+void AbstractByteArrayViewPrivate::insertBytesFromMimeData(const QMimeData* data)
 {
     if (!data || data->formats().isEmpty()) {
         return;
@@ -793,7 +793,7 @@ void AbstractByteArrayViewPrivate::pasteData(const QMimeData* data)
 bool AbstractByteArrayViewPrivate::canReadData(const QMimeData* data) const
 {
     Q_UNUSED(data)
-    // taking all for now, see comment in pasteData above
+    // taking all for now, see comment in insertBytesFromMimeData above
     return true;// data->hasFormat( OctetStreamFormatName );
 }
 

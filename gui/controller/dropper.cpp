@@ -105,7 +105,7 @@ bool Dropper::handleDropEvent(QDropEvent* dropEvent)
             handleInternalDrag(dropEvent, sourceByteArrayView->d_func());
         } else {
             // mByteArrayView->tableRanges()->removeSelection();
-            mByteArrayView->pasteData(dropEvent->mimeData());
+            mByteArrayView->insertBytesFromMimeData(dropEvent->mimeData());
         }
     }
 

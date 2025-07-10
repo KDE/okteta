@@ -157,9 +157,9 @@ std::unique_ptr<QMimeData> ByteArrayJanusView::selectionAsMimeData() const
     return mView->selectionAsMimeData();
 }
 
-void ByteArrayJanusView::pasteData(const QMimeData* data)
+void ByteArrayJanusView::insertBytesFromMimeData(const QMimeData* data)
 {
-    mView->pasteData(data);
+    mView->insertBytesFromMimeData(data);
 }
 
 void ByteArrayJanusView::removeSelectedData()

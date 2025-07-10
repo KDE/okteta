@@ -172,10 +172,10 @@ AddressRange AbstractByteArrayView::marking() const
     return d->marking();
 }
 
-void AbstractByteArrayView::pasteData(const QMimeData* data)
+void AbstractByteArrayView::insertBytesFromMimeData(const QMimeData* data)
 {
     Q_D(AbstractByteArrayView);
-    d->pasteData(data);
+    d->insertBytesFromMimeData(data);
 }
 
 bool AbstractByteArrayView::canReadData(const QMimeData* data) const

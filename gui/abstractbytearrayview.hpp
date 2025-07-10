@@ -315,7 +315,7 @@ public:
     std::unique_ptr<QMimeData> selectionAsMimeData() const;
 
 public: // modification access
-    void pasteData(const QMimeData* data);
+    void insertBytesFromMimeData(const QMimeData* data);
     /** removes the selected data, takes care of the cursor */
     void removeSelectedData();
     /** inserts */
