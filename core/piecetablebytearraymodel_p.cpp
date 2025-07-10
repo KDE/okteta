@@ -107,7 +107,7 @@ void PieceTableByteArrayModelPrivate::setByte(Address offset, Byte byte)
     }
 }
 
-Size PieceTableByteArrayModelPrivate::insert(Address offset, const Byte* insertData, int insertLength)
+Size PieceTableByteArrayModelPrivate::insertBytes(Address offset, const Byte* insertData, int insertLength)
 {
     // correct parameters
     const int oldSize = mPieceTable.size();

@@ -41,7 +41,7 @@ public: // AbstractByteArrayModel API
     bool isModified() const;
 
     [[nodiscard]]
-    Size insert(Address offset, const Byte* insertData, int insertLength);
+    Size insertBytes(Address offset, const Byte* insertData, int insertLength);
     [[nodiscard]]
     Size remove(const AddressRange& removeRange);
     [[nodiscard]]

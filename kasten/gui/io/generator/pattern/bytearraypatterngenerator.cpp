@@ -147,7 +147,7 @@ std::unique_ptr<QMimeData> ByteArrayPatternGenerator::generateData()
     if (changesDescribable) {
         changesDescribable->openGroupedChange(i18nc("@item", "Pattern Inserted"));
     }
-    mByteArrayView->insert(insertData);
+    mByteArrayView->insertBytes(insertData);
 //     mByteArrayModel->replace( filteredSection, filterResult );
     if (changesDescribable) {
         changesDescribable->closeGroupedChange();

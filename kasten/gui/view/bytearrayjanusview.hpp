@@ -76,7 +76,7 @@ public:
     void selectAll(bool selectAll);
     void removeSelectedData();
     void insertBytesFromMimeData(const QMimeData* data);
-    void insert(const QByteArray& byteArray);
+    void insertBytes(const QByteArray& byteArray);
     [[nodiscard]]
     bool hasSelectedData() const;
     [[nodiscard]]

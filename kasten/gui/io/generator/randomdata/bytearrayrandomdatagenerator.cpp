@@ -87,7 +87,7 @@ std::unique_ptr<QMimeData> ByteArrayRandomDataGenerator::generateData()
     if (changesDescribable) {
         changesDescribable->openGroupedChange(i18nc("@item", "RandomData Inserted"));
     }
-    mByteArrayView->insert(insertData);
+    mByteArrayView->insertBytes(insertData);
 //     mByteArrayModel->replace( filteredSection, filterResult );
     if (changesDescribable) {
         changesDescribable->closeGroupedChange();

@@ -98,7 +98,7 @@ void ByteTableTool::insert(unsigned char byte, int count)
         changesDescribable->openGroupedChange(changeDescription);
     }
 
-    mByteArrayView->insert(data);
+    mByteArrayView->insertBytes(data);
 
     if (changesDescribable) {
         changesDescribable->closeGroupedChange();
@@ -106,7 +106,7 @@ void ByteTableTool::insert(unsigned char byte, int count)
 // void ByteTableController::fill( const QByteArray &Data )
 // {
 //     if( HexEdit && ByteArray )
-//         ByteArray->insert( HexEdit->cursorPosition(), Data );
+//         ByteArray->insertBytes( HexEdit->cursorPosition(), Data );
 // }
 
     const QString notificationTitle = title();

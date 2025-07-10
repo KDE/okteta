@@ -202,10 +202,10 @@ void AbstractByteArrayView::paste()
     d->pasteFromClipboard();
 }
 
-void AbstractByteArrayView::insert(const QByteArray& data)
+void AbstractByteArrayView::insertBytes(const QByteArray& bytes)
 {
     Q_D(AbstractByteArrayView);
-    d->insert(data);
+    d->insertBytes(bytes);
 }
 
 void AbstractByteArrayView::removeSelectedData()

@@ -36,7 +36,7 @@ void AbstractByteArrayModel::setReadOnly(bool isReadOnly)
     Q_UNUSED(isReadOnly)
 }
 
-Size AbstractByteArrayModel::insert(Address offset, const Byte* insertData, int insertLength)
+Size AbstractByteArrayModel::insertBytes(Address offset, const Byte* insertData, int insertLength)
 {
     return replace(offset, 0, insertData, insertLength);
 }

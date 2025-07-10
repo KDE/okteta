@@ -80,7 +80,7 @@ void ByteArrayModelPrivate::setData(Byte* data, int size, int rawSize, bool keep
     Q_EMIT q->modifiedChanged(false);
 }
 
-Size ByteArrayModelPrivate::insert(Address offset, const Byte* insertData, int insertLength)
+Size ByteArrayModelPrivate::insertBytes(Address offset, const Byte* insertData, int insertLength)
 {
     Q_Q(ByteArrayModel);
 

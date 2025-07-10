@@ -319,7 +319,7 @@ public: // modification access
     /** removes the selected data, takes care of the cursor */
     void removeSelectedData();
     /** inserts */
-    void insert(const QByteArray& data);
+    void insertBytes(const QByteArray& bytes);
 
     /** puts the cursor to the position of index, handles all drawing
      * @param index

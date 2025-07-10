@@ -139,11 +139,11 @@ void ByteArrayModel::setByte(Address offset, Byte byte)
     d->setByte(offset, byte);
 }
 
-Size ByteArrayModel::insert(Address offset, const Byte* insertData, int insertLength)
+Size ByteArrayModel::insertBytes(Address offset, const Byte* insertData, int insertLength)
 {
     Q_D(ByteArrayModel);
 
-    return d->insert(offset, insertData, insertLength);
+    return d->insertBytes(offset, insertData, insertLength);
 }
 
 Size ByteArrayModel::remove(const AddressRange& removeRange)

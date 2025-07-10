@@ -49,7 +49,7 @@ public: // AbstractByteArrayModel API
     bool isModified() const override;
 
     [[nodiscard]]
-    Size insert(Address offset, const Byte* insertData, int insertLength) override;
+    Size insertBytes(Address offset, const Byte* insertData, int insertLength) override;
     [[nodiscard]]
     Size remove(const AddressRange& removeRange) override;
     [[nodiscard]]

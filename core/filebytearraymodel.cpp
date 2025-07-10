@@ -64,7 +64,7 @@ Byte FileByteArrayModel::byte(Address offset) const
     return d->byte(offset);
 }
 
-Size FileByteArrayModel::insert(Address /*Pos*/, const Byte*, int /*Length*/) {  return 0; }
+Size FileByteArrayModel::insertBytes(Address /*Pos*/, const Byte*, int /*Length*/) {  return 0; }
 Size FileByteArrayModel::remove(const AddressRange& /*Section*/) {  return 0; }
 Size FileByteArrayModel::replace(const AddressRange& /*Section*/, const Byte*, int /*Length*/) {  return 0; }
 Size FileByteArrayModel::fill(Byte /*FillChar*/, Address /*Pos*/, Size /*Length*/) {  return 0; }

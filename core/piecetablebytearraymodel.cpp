@@ -78,11 +78,11 @@ void PieceTableByteArrayModel::setByte(Address offset, Byte byte)
     d->setByte(offset, byte);
 }
 
-Size PieceTableByteArrayModel::insert(Address offset, const Byte* insertData, int insertLength)
+Size PieceTableByteArrayModel::insertBytes(Address offset, const Byte* insertData, int insertLength)
 {
     Q_D(PieceTableByteArrayModel);
 
-    return d->insert(offset, insertData, insertLength);
+    return d->insertBytes(offset, insertData, insertLength);
 }
 
 Size PieceTableByteArrayModel::remove(const AddressRange& removeRange)

@@ -318,9 +318,9 @@ void ByteArrayView::setSelection(Okteta::Address start, Okteta::Address end)
     mWidget->setSelection(start, end);
 }
 
-void ByteArrayView::insert(const QByteArray& byteArray)
+void ByteArrayView::insertBytes(const QByteArray& byteArray)
 {
-    mWidget->insert(byteArray);
+    mWidget->insertBytes(byteArray);
 }
 
 bool ByteArrayView::showsNonprinting() const

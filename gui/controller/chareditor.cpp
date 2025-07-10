@@ -66,8 +66,8 @@ bool CharEditor::handleKeyPress(QKeyEvent* keyEvent)
             if (enteredChar.isPrint()) {
                 Byte byte;
                 if (mView->charCodec()->encode(&byte, enteredChar)) {
-                    QByteArray data(1, byte);
-                    mView->insert(data);
+                    const QByteArray bytes(1, byte);
+                    mView->insertBytes(bytes);
 
                     keyUsed = true;
                 }

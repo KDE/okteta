@@ -268,7 +268,7 @@ protected:
 
 protected:
     void removeSelectedData();
-    void insert(const QByteArray& data);
+    void insertBytes(const QByteArray& bytes);
     void insertBytesFromMimeData(const QMimeData* data);
     [[nodiscard]]
     bool canReadData(const QMimeData* data) const;

@@ -259,9 +259,9 @@ void ByteArrayJanusView::ensureVisible(const AddressRange& range)
     mView->ensureVisible(range);
 }
 
-void ByteArrayJanusView::insert(const QByteArray& byteArray)
+void ByteArrayJanusView::insertBytes(const QByteArray& byteArray)
 {
-    mView->insert(byteArray);
+    mView->insertBytes(byteArray);
 }
 
 bool ByteArrayJanusView::showsNonprinting() const

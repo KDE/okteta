@@ -139,9 +139,9 @@ public: // modification API
      * @return length of inserted data
      */
     [[nodiscard]]
-    virtual Size insert(Address offset, const Byte* insertData, int insertLength);
+    virtual Size insertBytes(Address offset, const Byte* insertData, int insertLength);
     [[nodiscard]]
-    Size insert(Address offset, const QByteArray& insertData);
+    Size insertBytes(Address offset, const QByteArray& insertData);
 
     /** removes beginning with position as much as possible
      * @param removeRange
@@ -279,8 +279,8 @@ private:
 };
 
 // TODO: find why static_cast fails
-inline Size AbstractByteArrayModel::insert(Address offset, const QByteArray& insertData)
-{ return insert(offset, reinterpret_cast<const Byte*>(insertData.constData()), insertData.size()); }
+inline Size AbstractByteArrayModel::insertBytes(Address offset, const QByteArray& insertData)
+{ return insertBytes(offset, reinterpret_cast<const Byte*>(insertData.constData()), insertData.size()); }
 
 inline Size AbstractByteArrayModel::remove(Address offset, Size removeLength)
 { return remove(AddressRange::fromWidth(offset, removeLength)); }

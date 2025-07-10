@@ -166,7 +166,7 @@ public:
     [[nodiscard]]
     Okteta::AddressRange selection() const;
     void setSelection(Okteta::Address start, Okteta::Address end);
-    void insert(const QByteArray& byteArray);
+    void insertBytes(const QByteArray& byteArray);
     [[nodiscard]]
     QRect cursorRect() const;
 

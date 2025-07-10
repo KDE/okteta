@@ -59,7 +59,7 @@ void FixedSizeByteArrayModel::setByte(Address offset, Byte byte)
     }
 }
 
-Size FixedSizeByteArrayModel::insert(Address offset, const Byte* insertData, int insertLength)
+Size FixedSizeByteArrayModel::insertBytes(Address offset, const Byte* insertData, int insertLength)
 {
     // check all parameters
     if (offset >= mSize || insertLength == 0) {

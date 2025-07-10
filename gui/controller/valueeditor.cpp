@@ -237,7 +237,7 @@ bool ValueEditor::handleKeyPress(QKeyEvent* keyEvent)
                             const Address index = tableCursor->realIndex();
 
                             startEdit(i18nc("@item name of the change", "Insert"));
-                            if (mView->byteArrayModel()->insert(index, &inputValue, 1) > 0) {
+                            if (mView->byteArrayModel()->insertBytes(index, &inputValue, 1) > 0) {
                                 mEditModeByInsert = true;
                                 mOldValue = mEditValue = inputValue;
                                 mInsertedDigitsCount = 1;

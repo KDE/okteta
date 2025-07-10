@@ -57,7 +57,7 @@ std::unique_ptr<QMimeData> ByteArraySequenceGenerator::generateData()
     if (changesDescribable) {
         changesDescribable->openGroupedChange(i18nc("@item", "Sequence Inserted"));
     }
-    mByteArrayView->insert(insertData);
+    mByteArrayView->insertBytes(insertData);
 //     mByteArrayModel->replace( filteredSection, filterResult );
     if (changesDescribable) {
         changesDescribable->closeGroupedChange();
