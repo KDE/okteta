@@ -271,7 +271,7 @@ protected:
     void insertBytes(const QByteArray& bytes);
     void insertBytesFromMimeData(const QMimeData* data);
     [[nodiscard]]
-    bool canReadData(const QMimeData* data) const;
+    bool canInsertBytesFromMimeData(const QMimeData* data) const;
 
 protected: // clipboard interaction
     void cutToClipboard(QClipboard::Mode mode = QClipboard::Clipboard);

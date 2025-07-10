@@ -353,7 +353,7 @@ public: // modification access
 
 public:
     [[nodiscard]]
-    bool canReadData(const QMimeData* data) const;
+    bool canInsertBytesFromMimeData(const QMimeData* data) const;
 
 public: // zooming
     void zoomIn(int pointInc);

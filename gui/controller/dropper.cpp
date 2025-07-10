@@ -32,7 +32,7 @@ bool Dropper::handleDragEnterEvent(QDragEnterEvent* dragEnterEvent)
     bool eventUsed = false;
 
     if (!mByteArrayView->isEffectiveReadOnly()
-        && mByteArrayView->canReadData(dragEnterEvent->mimeData())) {
+        && mByteArrayView->canInsertBytesFromMimeData(dragEnterEvent->mimeData())) {
         mIsActive = true;
         // TODO: store value edit data
         const ByteArrayTableCursor* const tableCursor = mByteArrayView->tableCursor();
@@ -52,7 +52,7 @@ bool Dropper::handleDragMoveEvent(QDragMoveEvent* dragMoveEvent)
     bool eventUsed = false;
 
     if (!mByteArrayView->isEffectiveReadOnly()
-        && mByteArrayView->canReadData(dragMoveEvent->mimeData())) {
+        && mByteArrayView->canInsertBytesFromMimeData(dragMoveEvent->mimeData())) {
         mCursorIsMovedByDrag = true;
 
         // let text cursor follow mouse
@@ -94,7 +94,7 @@ bool Dropper::handleDropEvent(QDropEvent* dropEvent)
     bool eventUsed = false;
 
     if (!mByteArrayView->isEffectiveReadOnly()
-        && mByteArrayView->canReadData(dropEvent->mimeData())) {
+        && mByteArrayView->canInsertBytesFromMimeData(dropEvent->mimeData())) {
         // leave state
         mIsActive = false;
 

@@ -95,8 +95,8 @@ int ClipboardController::addContextMenuActions(QMenu* menu)
                                            i18nc("@action:inmenu", "&Paste") + QLatin1Char('\t') + QKeySequence(QKeySequence::Paste).toString(QKeySequence::NativeText),
                                            mView->q_func(), [this] { mView->pasteFromClipboard(); });
     const QMimeData* clipboardMimeData = QApplication::clipboard()->mimeData(QClipboard::Clipboard);
-    const bool canReadData = mView->canReadData(clipboardMimeData);
-    pasteAction->setEnabled(canReadData);
+    const bool canInsertBytesFromMimeData = mView->canInsertBytesFromMimeData(clipboardMimeData);
+    pasteAction->setEnabled(canInsertBytesFromMimeData);
     pasteAction->setObjectName(QStringLiteral("edit-paste"));
 
     return 3;

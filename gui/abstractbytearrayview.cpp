@@ -178,10 +178,10 @@ void AbstractByteArrayView::insertBytesFromMimeData(const QMimeData* data)
     d->insertBytesFromMimeData(data);
 }
 
-bool AbstractByteArrayView::canReadData(const QMimeData* data) const
+bool AbstractByteArrayView::canInsertBytesFromMimeData(const QMimeData* data) const
 {
     Q_D(const AbstractByteArrayView);
-    return d->canReadData(data);
+    return d->canInsertBytesFromMimeData(data);
 }
 
 void AbstractByteArrayView::cut()

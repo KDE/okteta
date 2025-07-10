@@ -167,9 +167,9 @@ void ByteArrayJanusView::removeSelectedBytes()
     mView->removeSelectedBytes();
 }
 
-bool ByteArrayJanusView::canReadData(const QMimeData* data) const
+bool ByteArrayJanusView::canInsertBytesFromMimeData(const QMimeData* data) const
 {
-    return mView->canReadData(data);
+    return mView->canInsertBytesFromMimeData(data);
 }
 
 void ByteArrayJanusView::setCursorPosition(Address cursorPosition)

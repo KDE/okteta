@@ -790,7 +790,7 @@ void AbstractByteArrayViewPrivate::insertBytesFromMimeData(const QMimeData* data
     }
 }
 
-bool AbstractByteArrayViewPrivate::canReadData(const QMimeData* data) const
+bool AbstractByteArrayViewPrivate::canInsertBytesFromMimeData(const QMimeData* data) const
 {
     Q_UNUSED(data)
     // taking all for now, see comment in insertBytesFromMimeData above
