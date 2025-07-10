@@ -118,7 +118,7 @@ Size FixedSizeByteArrayModel::removeBytes(const AddressRange& _removeRange)
     return removeLength;
 }
 
-Size FixedSizeByteArrayModel::replace(const AddressRange& _removeRange, const Byte* insertData, int insertLength)
+Size FixedSizeByteArrayModel::replaceBytes(const AddressRange& _removeRange, const Byte* insertData, int insertLength)
 {
     AddressRange removeRange(_removeRange);
     // check all parameters

@@ -308,7 +308,7 @@ void PODDecoderTool::setData(const QVariant& data, int podId)
     if (changesDescribable) {
         changesDescribable->openGroupedChange(i18nc("@item Edited as datatype", "Edited as %1", typeCodec->name()));
     }
-    std::ignore = mByteArrayModel->replace(Okteta::AddressRange::fromWidth(mCursorIndex, removedBytesSize), bytes);
+    std::ignore = mByteArrayModel->replaceBytes(Okteta::AddressRange::fromWidth(mCursorIndex, removedBytesSize), bytes);
     if (changesDescribable) {
         changesDescribable->closeGroupedChange();
     }

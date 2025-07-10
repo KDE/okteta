@@ -156,7 +156,7 @@ Size ByteArrayModelPrivate::removeBytes(const AddressRange& _removeRange)
     return removeRange.width();
 }
 
-Size ByteArrayModelPrivate::replace(const AddressRange& _removeRange, const Byte* insertData, int insertLength)
+Size ByteArrayModelPrivate::replaceBytes(const AddressRange& _removeRange, const Byte* insertData, int insertLength)
 {
     Q_Q(ByteArrayModel);
 

@@ -163,7 +163,7 @@ void FilterTool::filter() const
         if (changesDescribable) {
             changesDescribable->openGroupedChange(byteArrayFilter->name());
         }
-        std::ignore = mByteArrayModel->replace(filteredSection, filterResult);
+        std::ignore = mByteArrayModel->replaceBytes(filteredSection, filterResult);
         if (changesDescribable) {
             changesDescribable->closeGroupedChange();
         }

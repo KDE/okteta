@@ -62,9 +62,9 @@ private Q_SLOTS: // test functions
     void testInsertAtEnd();
     // void testReplace();
     void testSwap();
-    void testReplaceEqual();
-    void testReplaceLess();
-    void testReplaceMore();
+    void testReplaceBytesEqual();
+    void testReplaceBytesLess();
+    void testReplaceBytesMore();
 
 private: // used in all tests
     /** the model to test */

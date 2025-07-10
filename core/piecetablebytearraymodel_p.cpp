@@ -149,7 +149,7 @@ Size PieceTableByteArrayModelPrivate::removeBytes(const AddressRange& _removeRan
     return removeRange.width();
 }
 
-Size PieceTableByteArrayModelPrivate::replace(const AddressRange& _removeRange, const Byte* insertData, int insertLength)
+Size PieceTableByteArrayModelPrivate::replaceBytes(const AddressRange& _removeRange, const Byte* insertData, int insertLength)
 {
     AddressRange removeRange(_removeRange);
     // correct parameters

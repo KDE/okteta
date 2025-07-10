@@ -38,12 +38,12 @@ void AbstractByteArrayModel::setReadOnly(bool isReadOnly)
 
 Size AbstractByteArrayModel::insertBytes(Address offset, const Byte* insertData, int insertLength)
 {
-    return replace(offset, 0, insertData, insertLength);
+    return replaceBytes(offset, 0, insertData, insertLength);
 }
 
 Size AbstractByteArrayModel::removeBytes(const AddressRange& removeRange)
 {
-    std::ignore = replace(removeRange, nullptr, 0);
+    std::ignore = replaceBytes(removeRange, nullptr, 0);
     return removeRange.width(); // TODO: check if this is true
 }
 

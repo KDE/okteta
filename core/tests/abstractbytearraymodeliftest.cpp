@@ -554,7 +554,7 @@ void AbstractByteArrayModelIfTest::testSwap()
 #endif
 }
 
-void AbstractByteArrayModelIfTest::testReplaceEqual()
+void AbstractByteArrayModelIfTest::testReplaceBytesEqual()
 {
     // can we alter the buffer at all?
     if (mByteArrayModel->isReadOnly()) {
@@ -581,7 +581,7 @@ void AbstractByteArrayModelIfTest::testReplaceEqual()
     AddressRange targetRange = AddressRange::fromWidth(0, removeSize);
     clearSignalSpys();
 
-    Size inserted = mByteArrayModel->replace(targetRange, insertData.rawData(), insertSize);
+    Size inserted = mByteArrayModel->replaceBytes(targetRange, insertData.rawData(), insertSize);
 
     QCOMPARE(inserted, insertSize);
     QCOMPARE(insertData.compare(*mByteArrayModel, targetRange, 0), 0);
@@ -599,7 +599,7 @@ void AbstractByteArrayModelIfTest::testReplaceEqual()
     targetRange.moveToStart(size / 2);
     clearSignalSpys();
 
-    inserted = mByteArrayModel->replace(targetRange, insertData.rawData(), insertSize);
+    inserted = mByteArrayModel->replaceBytes(targetRange, insertData.rawData(), insertSize);
 
     QCOMPARE(inserted, insertSize);
     QCOMPARE(copy.compare(*mByteArrayModel, AddressRange(0, targetRange.nextBeforeStart()), 0), 0);
@@ -618,7 +618,7 @@ void AbstractByteArrayModelIfTest::testReplaceEqual()
     targetRange.moveToEnd(size - 1);
     clearSignalSpys();
 
-    inserted = mByteArrayModel->replace(targetRange, insertData.rawData(), insertSize);
+    inserted = mByteArrayModel->replaceBytes(targetRange, insertData.rawData(), insertSize);
 
     QCOMPARE(inserted, insertSize);
     QCOMPARE(copy.compare(*mByteArrayModel, AddressRange(0, targetRange.nextBeforeStart()), 0), 0);
@@ -628,7 +628,7 @@ void AbstractByteArrayModelIfTest::testReplaceEqual()
     checkContentsReplaced(targetRange, inserted);
 }
 
-void AbstractByteArrayModelIfTest::testReplaceLess()
+void AbstractByteArrayModelIfTest::testReplaceBytesLess()
 {
     // can we alter the buffer at all?
     if (mByteArrayModel->isReadOnly()) {
@@ -657,7 +657,7 @@ void AbstractByteArrayModelIfTest::testReplaceLess()
     AddressRange insertRange = AddressRange::fromWidth(0, insertSize);
     clearSignalSpys();
 
-    Size inserted = mByteArrayModel->replace(removeRange, insertData.rawData(), insertSize);
+    Size inserted = mByteArrayModel->replaceBytes(removeRange, insertData.rawData(), insertSize);
 
     QCOMPARE(inserted, insertSize);
     QCOMPARE(insertData.compare(*mByteArrayModel, insertRange, 0), 0);
@@ -676,7 +676,7 @@ void AbstractByteArrayModelIfTest::testReplaceLess()
     insertRange.moveToStart(removeRange.start());
     clearSignalSpys();
 
-    inserted = mByteArrayModel->replace(removeRange, insertData.rawData(), insertSize);
+    inserted = mByteArrayModel->replaceBytes(removeRange, insertData.rawData(), insertSize);
 
     QCOMPARE(inserted, insertSize);
     QCOMPARE(copy.compare(*mByteArrayModel, AddressRange(0, insertRange.nextBeforeStart()), 0), 0);
@@ -696,7 +696,7 @@ void AbstractByteArrayModelIfTest::testReplaceLess()
     insertRange.moveToStart(removeRange.start());
     clearSignalSpys();
 
-    inserted = mByteArrayModel->replace(removeRange, insertData.rawData(), insertSize);
+    inserted = mByteArrayModel->replaceBytes(removeRange, insertData.rawData(), insertSize);
 
     QCOMPARE(inserted, insertSize);
     QCOMPARE(copy.compare(*mByteArrayModel, AddressRange(0, insertRange.nextBeforeStart()), 0), 0);
@@ -705,7 +705,7 @@ void AbstractByteArrayModelIfTest::testReplaceLess()
     checkContentsReplaced(removeRange, inserted);
 }
 
-void AbstractByteArrayModelIfTest::testReplaceMore()
+void AbstractByteArrayModelIfTest::testReplaceBytesMore()
 {
     // can we alter the buffer at all?
     if (mByteArrayModel->isReadOnly()) {
@@ -734,7 +734,7 @@ void AbstractByteArrayModelIfTest::testReplaceMore()
     AddressRange insertRange = AddressRange::fromWidth(0, insertSize);
     clearSignalSpys();
 
-    Size inserted = mByteArrayModel->replace(removeRange, insertData.rawData(), insertSize);
+    Size inserted = mByteArrayModel->replaceBytes(removeRange, insertData.rawData(), insertSize);
 
     QCOMPARE(inserted, insertSize);
     QCOMPARE(insertData.compare(*mByteArrayModel, insertRange, 0), 0);
@@ -752,7 +752,7 @@ void AbstractByteArrayModelIfTest::testReplaceMore()
     insertRange.moveToStart(removeRange.start());
     clearSignalSpys();
 
-    inserted = mByteArrayModel->replace(removeRange, insertData.rawData(), insertSize);
+    inserted = mByteArrayModel->replaceBytes(removeRange, insertData.rawData(), insertSize);
 
     QCOMPARE(inserted, insertSize);
     QCOMPARE(copy.compare(*mByteArrayModel, AddressRange(0, insertRange.nextBeforeStart()), 0), 0);
@@ -772,7 +772,7 @@ void AbstractByteArrayModelIfTest::testReplaceMore()
     insertRange.moveToStart(removeRange.start());
     clearSignalSpys();
 
-    inserted = mByteArrayModel->replace(removeRange, insertData.rawData(), insertSize);
+    inserted = mByteArrayModel->replaceBytes(removeRange, insertData.rawData(), insertSize);
 
     QCOMPARE(removeSize <= inserted && inserted <= insertSize, true);
     QCOMPARE(copy.compare(*mByteArrayModel, AddressRange(0, insertRange.nextBeforeStart()), 0), 0);

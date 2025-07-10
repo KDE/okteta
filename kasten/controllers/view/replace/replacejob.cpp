@@ -177,9 +177,9 @@ void ReplaceJob::handleReplaceCurrentFinished(ReplaceBehaviour replaceBehaviour)
 void ReplaceJob::replaceCurrent()
 {
     ++m_noOfReplacements;
-    const Okteta::Size inserted = m_byteArrayModel->replace(m_currentIndex, m_currentMatchWidth,
-                                                            reinterpret_cast<const Okteta::Byte*>(m_replaceData.constData()),
-                                                            m_replaceData.size());
+    const Okteta::Size inserted = m_byteArrayModel->replaceBytes(m_currentIndex, m_currentMatchWidth,
+                                                                 reinterpret_cast<const Okteta::Byte*>(m_replaceData.constData()),
+                                                                 m_replaceData.size());
     const Okteta::Size sizeDiff = inserted - m_currentMatchWidth;
 
     // TODO: cursors being automatically updated by the model would be nice to have here

@@ -160,14 +160,14 @@ public: // modification API
      * @return length of inserted data
      */
     [[nodiscard]]
-    virtual Size replace(const AddressRange& removeRange, const Byte* insertData, int insertLength) = 0;
+    virtual Size replaceBytes(const AddressRange& removeRange, const Byte* insertData, int insertLength) = 0;
     /** convenience function, behaves as above */
     [[nodiscard]]
-    Size replace(const AddressRange& removeRange, const QByteArray& insertData);
+    Size replaceBytes(const AddressRange& removeRange, const QByteArray& insertData);
     /** convenience function, behaves as above */
     [[nodiscard]]
-    Size replace(Address offset, Size removeLength,
-                 const Byte* insertData, Size insertLength);
+    Size replaceBytes(Address offset, Size removeLength,
+                      const Byte* insertData, Size insertLength);
 
     // todo use parameters grouped differrently?
     /** moves the second section before the start of the first
@@ -285,12 +285,12 @@ inline Size AbstractByteArrayModel::insertBytes(Address offset, const QByteArray
 inline Size AbstractByteArrayModel::removeBytes(Address offset, Size removeLength)
 { return removeBytes(AddressRange::fromWidth(offset, removeLength)); }
 
-inline Size AbstractByteArrayModel::replace(const AddressRange& removeRange, const QByteArray& insertData)
-{ return replace(removeRange, reinterpret_cast<const Byte*>(insertData.constData()), insertData.size());}
+inline Size AbstractByteArrayModel::replaceBytes(const AddressRange& removeRange, const QByteArray& insertData)
+{ return replaceBytes(removeRange, reinterpret_cast<const Byte*>(insertData.constData()), insertData.size());}
 
-inline Size AbstractByteArrayModel::replace(Address offset, Size removeLength,
-                                            const Byte* insertData, Size insertLength)
-{ return replace(AddressRange::fromWidth(offset, removeLength), insertData, insertLength); }
+inline Size AbstractByteArrayModel::replaceBytes(Address offset, Size removeLength,
+                                                 const Byte* insertData, Size insertLength)
+{ return replaceBytes(AddressRange::fromWidth(offset, removeLength), insertData, insertLength); }
 
 inline Size AbstractByteArrayModel::fill(const Byte fillChar, const AddressRange& fillRange)
 { return fill(fillChar, fillRange.start(), fillRange.width()); }

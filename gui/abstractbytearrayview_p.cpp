@@ -78,7 +78,7 @@ public: // state read API
     bool isModified() const override;
 
 public: // modification API
-    Size replace(const AddressRange& removeSection, const Byte* insertData, int insertLength) override;
+    Size replaceBytes(const AddressRange& removeSection, const Byte* insertData, int insertLength) override;
     bool swap(Address firstStart, const AddressRange& secondRange) override;
     Size fill(Byte fillByte, Address offset = 0, Size fillLength = -1) override;
     void setByte(Address offset, Byte byte) override;
@@ -91,7 +91,7 @@ NullModel::~NullModel() = default;
 Byte NullModel::byte(Address offset) const { Q_UNUSED(offset) return 0; }
 Size NullModel::size() const { return 0; }
 bool NullModel::isModified() const { return false; }
-Size NullModel::replace(const AddressRange& removeSection, const Byte* insertData, int insertLength)
+Size NullModel::replaceBytes(const AddressRange& removeSection, const Byte* insertData, int insertLength)
 {
     Q_UNUSED(removeSection) Q_UNUSED(insertData) Q_UNUSED(insertLength)
     return 0;
@@ -810,7 +810,7 @@ void AbstractByteArrayViewPrivate::insertBytes(const QByteArray& bytes)
             AddressRange selection = mTableRanges.removeSelection();
             selection.restrictEndByWidth(bytes.size());
             insertionOffset = selection.start();
-            lengthOfInserted = mByteArrayModel->replace(selection, reinterpret_cast<const Byte*>(bytes.constData()), selection.width());
+            lengthOfInserted = mByteArrayModel->replaceBytes(selection, reinterpret_cast<const Byte*>(bytes.constData()), selection.width());
         } else {
             const Size length = mTableLayout.length();
             if (!isCursorBehind() && length > 0) {
@@ -818,7 +818,7 @@ void AbstractByteArrayViewPrivate::insertBytes(const QByteArray& bytes)
                 AddressRange insertRange = AddressRange::fromWidth(cursorPosition(), bytes.size());
                 insertRange.restrictEndTo(length - 1);
                 insertionOffset = insertRange.start();
-                lengthOfInserted = mByteArrayModel->replace(insertRange, reinterpret_cast<const Byte*>(bytes.constData()), insertRange.width());
+                lengthOfInserted = mByteArrayModel->replaceBytes(insertRange, reinterpret_cast<const Byte*>(bytes.constData()), insertRange.width());
             } else {
                 lengthOfInserted = 0;
             }
@@ -828,7 +828,7 @@ void AbstractByteArrayViewPrivate::insertBytes(const QByteArray& bytes)
             // replacing the selection
             const AddressRange selection = mTableRanges.removeSelection();
             insertionOffset = selection.start();
-            lengthOfInserted = mByteArrayModel->replace(selection, bytes);
+            lengthOfInserted = mByteArrayModel->replaceBytes(selection, bytes);
         } else {
             insertionOffset = cursorPosition();
             lengthOfInserted = mByteArrayModel->insertBytes(insertionOffset, bytes);

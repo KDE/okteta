@@ -92,11 +92,11 @@ Size PieceTableByteArrayModel::removeBytes(const AddressRange& removeRange)
     return d->removeBytes(removeRange);
 }
 
-Size PieceTableByteArrayModel::replace(const AddressRange& removeRange, const Byte* insertData, int insertLength)
+Size PieceTableByteArrayModel::replaceBytes(const AddressRange& removeRange, const Byte* insertData, int insertLength)
 {
     Q_D(PieceTableByteArrayModel);
 
-    return d->replace(removeRange, insertData, insertLength);
+    return d->replaceBytes(removeRange, insertData, insertLength);
 }
 
 bool PieceTableByteArrayModel::swap(Address firstStart, const AddressRange& secondRange)
