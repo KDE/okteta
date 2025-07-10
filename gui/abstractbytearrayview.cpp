@@ -155,10 +155,10 @@ bool AbstractByteArrayView::hasSelectedData() const
     return d->hasSelectedData();
 }
 
-QByteArray AbstractByteArrayView::selectedData() const
+QByteArray AbstractByteArrayView::selectedBytes() const
 {
     Q_D(const AbstractByteArrayView);
-    return d->selectedData();
+    return d->selectedBytes();
 }
 std::unique_ptr<QMimeData> AbstractByteArrayView::selectedBytesAsMimeData() const
 {

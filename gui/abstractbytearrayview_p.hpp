@@ -110,7 +110,7 @@ public: // value access
     [[nodiscard]]
     AddressRange selection() const;
     [[nodiscard]]
-    QByteArray selectedData() const;
+    QByteArray selectedBytes() const;
     [[nodiscard]]
     std::unique_ptr<QMimeData> selectedBytesAsMimeData() const;
 

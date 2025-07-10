@@ -699,7 +699,7 @@ void AbstractByteArrayViewPrivate::setSelection(const AddressRange& _selection)
     endViewUpdate();
 }
 
-QByteArray AbstractByteArrayViewPrivate::selectedData() const
+QByteArray AbstractByteArrayViewPrivate::selectedBytes() const
 {
     if (!mTableRanges.hasSelection()) {
         return {};
@@ -719,7 +719,7 @@ std::unique_ptr<QMimeData> AbstractByteArrayViewPrivate::selectedBytesAsMimeData
     }
 
     auto mimeData = std::make_unique<QMimeData>();
-    mimeData->setData(octetStreamFormatName(), selectedData());
+    mimeData->setData(octetStreamFormatName(), selectedBytes());
     return mimeData;
 }
 
