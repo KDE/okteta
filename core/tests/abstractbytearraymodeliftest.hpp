@@ -56,7 +56,7 @@ private Q_SLOTS: // test functions
     void testFill();
     void testSetGet();
 
-    void testRemove();
+    void testRemoveBytes();
     void testInsertAtBegin();
     void testInsertAtMid();
     void testInsertAtEnd();

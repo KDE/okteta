@@ -289,7 +289,7 @@ void AbstractByteArrayModelIfTest::testSetGet()
 
 // as some buffers might be restricted in growing
 // we test for the success of some operations
-void AbstractByteArrayModelIfTest::testRemove()
+void AbstractByteArrayModelIfTest::testRemoveBytes()
 {
     // can we alter the buffer at all?
     if (mByteArrayModel->isReadOnly()) {
@@ -304,26 +304,26 @@ void AbstractByteArrayModelIfTest::testRemove()
     FixedSizeByteArrayModel copy(size);
     std::ignore = mByteArrayModel->copyTo(copy.rawData(), 0, size);
 
-    // remove() at end
+    // removeBytes() at end
     mByteArrayModel->setModified(false);
     AddressRange removeRange(size - removeSize, size - 1);
     clearSignalSpys();
 
-    Size removed = mByteArrayModel->remove(removeRange);
+    Size removed = mByteArrayModel->removeBytes(removeRange);
     removeRange.setEndByWidth(removed);
 
     QCOMPARE(copy.compare(*mByteArrayModel, 0, removeRange.nextBeforeStart(), 0), 0);
     QCOMPARE(mByteArrayModel->isModified(), removed > 0);
     checkContentsReplaced(removeRange, 0);
 
-    // remove() at mid
+    // removeBytes() at mid
     mByteArrayModel->setModified(false);
     size = mByteArrayModel->size();
     std::ignore = mByteArrayModel->copyTo(copy.rawData(), 0, size);
     removeRange.setByWidth(size / 2, removeSize);
     clearSignalSpys();
 
-    removed = mByteArrayModel->remove(removeRange);
+    removed = mByteArrayModel->removeBytes(removeRange);
     removeRange.setEndByWidth(removed);
 
     QCOMPARE(copy.compare(*mByteArrayModel, 0, removeRange.nextBeforeStart(), 0), 0);
@@ -331,14 +331,14 @@ void AbstractByteArrayModelIfTest::testRemove()
     QCOMPARE(mByteArrayModel->isModified(), removed > 0);
     checkContentsReplaced(removeRange, 0);
 
-    // remove() at start
+    // removeBytes() at start
     mByteArrayModel->setModified(false);
     size = mByteArrayModel->size();
     std::ignore = mByteArrayModel->copyTo(copy.rawData(), 0, size);
     removeRange.setByWidth(0, removeSize);
     clearSignalSpys();
 
-    removed = mByteArrayModel->remove(removeRange);
+    removed = mByteArrayModel->removeBytes(removeRange);
     removeRange.setEndByWidth(removed);
 
     QCOMPARE(copy.compare(*mByteArrayModel, AddressRange(removeRange.start(), size - removed - 1), removeRange.nextBehindEnd()), 0);

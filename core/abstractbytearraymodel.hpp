@@ -148,10 +148,10 @@ public: // modification API
      * @return length of removed data
      */
     [[nodiscard]]
-    virtual Size remove(const AddressRange& removeRange);
+    virtual Size removeBytes(const AddressRange& removeRange);
     /** convenience function, behaves as above */
     [[nodiscard]]
-    Size remove(Address offset, Size removeLength);
+    Size removeBytes(Address offset, Size removeLength);
 
     /** replaces as much as possible
      * @param removeRange
@@ -282,8 +282,8 @@ private:
 inline Size AbstractByteArrayModel::insertBytes(Address offset, const QByteArray& insertData)
 { return insertBytes(offset, reinterpret_cast<const Byte*>(insertData.constData()), insertData.size()); }
 
-inline Size AbstractByteArrayModel::remove(Address offset, Size removeLength)
-{ return remove(AddressRange::fromWidth(offset, removeLength)); }
+inline Size AbstractByteArrayModel::removeBytes(Address offset, Size removeLength)
+{ return removeBytes(AddressRange::fromWidth(offset, removeLength)); }
 
 inline Size AbstractByteArrayModel::replace(const AddressRange& removeRange, const QByteArray& insertData)
 { return replace(removeRange, reinterpret_cast<const Byte*>(insertData.constData()), insertData.size());}

@@ -85,11 +85,11 @@ Size PieceTableByteArrayModel::insertBytes(Address offset, const Byte* insertDat
     return d->insertBytes(offset, insertData, insertLength);
 }
 
-Size PieceTableByteArrayModel::remove(const AddressRange& removeRange)
+Size PieceTableByteArrayModel::removeBytes(const AddressRange& removeRange)
 {
     Q_D(PieceTableByteArrayModel);
 
-    return d->remove(removeRange);
+    return d->removeBytes(removeRange);
 }
 
 Size PieceTableByteArrayModel::replace(const AddressRange& removeRange, const Byte* insertData, int insertLength)

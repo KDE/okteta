@@ -41,7 +41,7 @@ Size AbstractByteArrayModel::insertBytes(Address offset, const Byte* insertData,
     return replace(offset, 0, insertData, insertLength);
 }
 
-Size AbstractByteArrayModel::remove(const AddressRange& removeRange)
+Size AbstractByteArrayModel::removeBytes(const AddressRange& removeRange)
 {
     std::ignore = replace(removeRange, nullptr, 0);
     return removeRange.width(); // TODO: check if this is true

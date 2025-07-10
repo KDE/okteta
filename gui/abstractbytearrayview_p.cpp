@@ -855,7 +855,7 @@ void AbstractByteArrayViewPrivate::removeSelectedBytes()
 
     const AddressRange selection = mTableRanges.removeSelection();
 
-    std::ignore = mByteArrayModel->remove(selection);
+    std::ignore = mByteArrayModel->removeBytes(selection);
 
 //     clearUndoRedo();
 }

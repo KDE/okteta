@@ -146,11 +146,11 @@ Size ByteArrayModel::insertBytes(Address offset, const Byte* insertData, int ins
     return d->insertBytes(offset, insertData, insertLength);
 }
 
-Size ByteArrayModel::remove(const AddressRange& removeRange)
+Size ByteArrayModel::removeBytes(const AddressRange& removeRange)
 {
     Q_D(ByteArrayModel);
 
-    return d->remove(removeRange);
+    return d->removeBytes(removeRange);
 }
 
 Size ByteArrayModel::replace(const AddressRange& removeRange, const Byte* insertData, int insertLength)

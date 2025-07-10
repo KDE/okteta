@@ -118,7 +118,7 @@ Size ByteArrayModelPrivate::insertBytes(Address offset, const Byte* insertData, 
     return insertLength;
 }
 
-Size ByteArrayModelPrivate::remove(const AddressRange& _removeRange)
+Size ByteArrayModelPrivate::removeBytes(const AddressRange& _removeRange)
 {
     Q_Q(ByteArrayModel);
 

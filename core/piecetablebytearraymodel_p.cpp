@@ -129,7 +129,7 @@ Size PieceTableByteArrayModelPrivate::insertBytes(Address offset, const Byte* in
 }
 
 // TODO: is anyone interested in the removed data? so we need a signal beforeRemoving(section)?
-Size PieceTableByteArrayModelPrivate::remove(const AddressRange& _removeRange)
+Size PieceTableByteArrayModelPrivate::removeBytes(const AddressRange& _removeRange)
 {
     AddressRange removeRange(_removeRange);
     // correct parameters

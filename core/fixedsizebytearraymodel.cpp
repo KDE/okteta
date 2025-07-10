@@ -89,7 +89,7 @@ Size FixedSizeByteArrayModel::insertBytes(Address offset, const Byte* insertData
     return insertLength;
 }
 
-Size FixedSizeByteArrayModel::remove(const AddressRange& _removeRange)
+Size FixedSizeByteArrayModel::removeBytes(const AddressRange& _removeRange)
 {
     AddressRange removeRange(_removeRange);
     if (removeRange.start() >= mSize || removeRange.width() == 0) {

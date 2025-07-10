@@ -45,7 +45,7 @@ public: // AbstractByteArrayModel API
     [[nodiscard]]
     Size insertBytes(Address offset, const Byte* insertData, int insertLength);
     [[nodiscard]]
-    Size remove(const AddressRange& removeRange);
+    Size removeBytes(const AddressRange& removeRange);
     [[nodiscard]]
     Size replace(const AddressRange& removeRange, const Byte* insertData, int insertLength);
     [[nodiscard]]
