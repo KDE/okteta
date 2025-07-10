@@ -111,7 +111,7 @@ void ByteArrayView::init()
     // propagate signals
     using Okteta::ByteArrayJanusView;
     connect(mDocument, &ByteArrayDocument::titleChanged, this, &ByteArrayView::titleChanged);
-    connect(mWidget.get(), &ByteArrayJanusView::hasSelectedDataChanged, this, &ByteArrayView::hasSelectedDataChanged);
+    connect(mWidget.get(), &ByteArrayJanusView::hasSelectedBytesChanged, this, &ByteArrayView::hasSelectedDataChanged);
     connect(mWidget.get(), &ByteArrayJanusView::readOnlyChanged, this, &ByteArrayView::readOnlyChanged);
     connect(mWidget.get(), &ByteArrayJanusView::overwriteModeChanged, this, &ByteArrayView::overwriteModeChanged);
     connect(mWidget.get(), &ByteArrayJanusView::overwriteModeChanged, this, &ByteArrayView::onOverwriteModeChanged);
@@ -194,7 +194,7 @@ void ByteArrayView::selectAllData(bool selectAll)
 
 bool ByteArrayView::hasSelectedData() const
 {
-    return mWidget->hasSelectedData();
+    return mWidget->hasSelectedBytes();
 }
 
 std::unique_ptr<QMimeData> ByteArrayView::copySelectedData() const
@@ -231,7 +231,7 @@ bool ByteArrayView::canCutSelectedData() const
 
 void ByteArrayView::onSelectionChanged(const Okteta::AddressRange& selection)
 {
-    // TODO: how to make sure the signal hasSelectedDataChanged() is not emitted before?
+    // TODO: how to make sure the signal hasSelectedBytesChanged() is not emitted before?
     mSelection.setRange(selection);
     Q_EMIT selectedDataChanged(&mSelection);
 }

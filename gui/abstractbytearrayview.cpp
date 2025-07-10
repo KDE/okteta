@@ -149,10 +149,10 @@ AddressRange AbstractByteArrayView::selection() const
     Q_D(const AbstractByteArrayView);
     return d->selection();
 }
-bool AbstractByteArrayView::hasSelectedData() const
+bool AbstractByteArrayView::hasSelectedBytes() const
 {
     Q_D(const AbstractByteArrayView);
-    return d->hasSelectedData();
+    return d->hasSelectedBytes();
 }
 
 QByteArray AbstractByteArrayView::selectedBytes() const

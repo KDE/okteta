@@ -85,7 +85,7 @@ void ByteArrayJanusView::setViewModus(int viewModus)
     mView->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(mView, &QWidget::customContextMenuRequested, this, &ByteArrayJanusView::viewContextMenuRequested);
 
-    connect(mView, &AbstractByteArrayView::hasSelectedDataChanged, this, &ByteArrayJanusView::hasSelectedDataChanged);
+    connect(mView, &AbstractByteArrayView::hasSelectedBytesChanged, this, &ByteArrayJanusView::hasSelectedBytesChanged);
     connect(mView, &AbstractByteArrayView::selectionChanged, this, &ByteArrayJanusView::selectionChanged);
     connect(mView, &AbstractByteArrayView::readOnlyChanged, this, &ByteArrayJanusView::readOnlyChanged);
     connect(mView, &AbstractByteArrayView::overwriteModeChanged, this, &ByteArrayJanusView::overwriteModeChanged);
@@ -147,9 +147,9 @@ void ByteArrayJanusView::selectAll(bool selectAll)
     mView->selectAll(selectAll);
 }
 
-bool ByteArrayJanusView::hasSelectedData() const
+bool ByteArrayJanusView::hasSelectedBytes() const
 {
-    return mView->hasSelectedData();
+    return mView->hasSelectedBytes();
 }
 
 std::unique_ptr<QMimeData> ByteArrayJanusView::selectedBytesAsMimeData() const

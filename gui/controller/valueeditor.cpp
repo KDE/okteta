@@ -91,7 +91,7 @@ void ValueEditor::handleShortcutOverrideEvent(QKeyEvent* keyEvent) const
 {
     bool isKeyToUse = false;
 
-    if (!mView->hasSelectedData()) {
+    if (!mView->hasSelectedBytes()) {
         if (keyEvent->matches(QKeySequence::Cancel)) {
             if (mInEditMode) {
                 isKeyToUse = true;
@@ -161,7 +161,7 @@ bool ValueEditor::handleKeyPress(QKeyEvent* keyEvent)
     bool keyUsed = false;
 
     // TODO: for now we don't touch it if there are selections
-    if (!mView->hasSelectedData()) {
+    if (!mView->hasSelectedBytes()) {
         if (keyEvent->matches(QKeySequence::Cancel)) {
             if (mInEditMode) {
                 cancelEdit();

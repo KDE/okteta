@@ -77,7 +77,7 @@ int ClipboardController::addContextMenuActions(QMenu* menu)
     QAction* copyAction = menu->addAction(QIcon::fromTheme(QStringLiteral("edit-copy")),
                                           i18nc("@action:inmenu", "&Copy") + QLatin1Char('\t') + QKeySequence(QKeySequence::Copy).toString(QKeySequence::NativeText),
                                           mView->q_func(), [this] { mView->copyToClipboard(); });
-    copyAction->setEnabled(mView->hasSelectedData());
+    copyAction->setEnabled(mView->hasSelectedBytes());
     copyAction->setObjectName(QStringLiteral("edit-copy"));
 
     if (mView->isEffectiveReadOnly()) {
@@ -87,7 +87,7 @@ int ClipboardController::addContextMenuActions(QMenu* menu)
     QAction* cutAction = menu->addAction(QIcon::fromTheme(QStringLiteral("edit-cut")),
                                          i18nc("@action:inmenu", "Cu&t") + QLatin1Char('\t') + QKeySequence(QKeySequence::Cut).toString(QKeySequence::NativeText),
                                          mView->q_func(), [this] { mView->cutToClipboard(); });
-    const bool canCutData = mView->hasSelectedData() && !mView->isOverwriteMode();
+    const bool canCutData = mView->hasSelectedBytes() && !mView->isOverwriteMode();
     cutAction->setEnabled(canCutData);
     cutAction->setObjectName(QStringLiteral("edit-cut"));
 

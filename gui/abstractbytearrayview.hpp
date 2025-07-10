@@ -40,7 +40,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public QAbstractScrollArea
     Q_PROPERTY(bool modified READ isModified WRITE setModified DESIGNABLE false)
     Q_PROPERTY(bool readOnly READ isReadOnly WRITE setReadOnly NOTIFY readOnlyChanged)
 
-    // Q_PROPERTY( bool hasSelectedData READ hasSelectedData )
+    // Q_PROPERTY( bool hasSelectedBytes READ hasSelectedBytes )
     // Q_PROPERTY( QByteArray selectedData READ selectedData )
     Q_PROPERTY(bool tabChangesFocus READ tabChangesFocus WRITE setTabChangesFocus)
     Q_PROPERTY(LayoutStyle layoutStyle READ layoutStyle WRITE setLayoutStyle NOTIFY layoutStyleChanged)
@@ -154,7 +154,7 @@ public: // value access
 
     /** returns true if there is a selected range in the array */
     [[nodiscard]]
-    bool hasSelectedData() const;
+    bool hasSelectedBytes() const;
     [[nodiscard]]
     AddressRange selection() const;
 
@@ -410,7 +410,7 @@ Q_SIGNALS:
     /** */
     void readOnlyChanged(bool isReadOnly);
     /** selection has changed */
-    void hasSelectedDataChanged(bool hasSelectedData);
+    void hasSelectedBytesChanged(bool hasSelectedBytes);
     void selectionChanged(const Okteta::AddressRange& selection);
     /** there is a cut available or not */
     void cutAvailable(bool Really);

@@ -1424,7 +1424,7 @@ void AbstractByteArrayViewPrivate::emitSelectionUpdates()
             Q_EMIT q->cutAvailable(hasSelection);
         }
         Q_EMIT q->copyAvailable(hasSelection);
-        Q_EMIT q->hasSelectedDataChanged(hasSelection);
+        Q_EMIT q->hasSelectedBytesChanged(hasSelection);
     }
     Q_EMIT q->cursorPositionChanged(cursorPosition());
 }

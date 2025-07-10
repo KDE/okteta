@@ -78,7 +78,7 @@ public:
     void insertBytesFromMimeData(const QMimeData* data);
     void insertBytes(const QByteArray& byteArray);
     [[nodiscard]]
-    bool hasSelectedData() const;
+    bool hasSelectedBytes() const;
     [[nodiscard]]
     std::unique_ptr<QMimeData> selectedBytesAsMimeData() const;
     [[nodiscard]]
@@ -158,7 +158,7 @@ public:
 Q_SIGNALS:
     void readOnlyChanged(bool);
     void overwriteModeChanged(bool overwriteMode);
-    void hasSelectedDataChanged(bool hasSelectedData);
+    void hasSelectedBytesChanged(bool hasSelectedBytes);
     void selectionChanged(const Okteta::AddressRange& selection);
     void cursorPositionChanged(Okteta::Address cursorPosition);
     void valueCodingChanged(int valueCoding);

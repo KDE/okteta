@@ -106,7 +106,7 @@ public: // value access
     bool tabChangesFocus() const;
 
     [[nodiscard]]
-    bool hasSelectedData() const;
+    bool hasSelectedBytes() const;
     [[nodiscard]]
     AddressRange selection() const;
     [[nodiscard]]
@@ -434,7 +434,7 @@ inline Address AbstractByteArrayViewPrivate::firstLineOffset() const { return mT
 inline Address AbstractByteArrayViewPrivate::startOffset()     const { return mTableLayout.startOffset(); }
 
 inline AddressRange AbstractByteArrayViewPrivate::selection() const { return mTableRanges.selection(); }
-inline bool AbstractByteArrayViewPrivate::hasSelectedData()   const { return mTableRanges.hasSelection(); }
+inline bool AbstractByteArrayViewPrivate::hasSelectedBytes()  const { return mTableRanges.hasSelection(); }
 
 inline AddressRange AbstractByteArrayViewPrivate::marking() const { return mTableRanges.marking(); }
 
