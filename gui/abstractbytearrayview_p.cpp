@@ -736,7 +736,7 @@ void AbstractByteArrayViewPrivate::cutToClipboard(QClipboard::Mode mode)
 
     QApplication::clipboard()->setMimeData(cutData.release(), mode);
 
-    removeSelectedData();
+    removeSelectedBytes();
 }
 
 void AbstractByteArrayViewPrivate::copyToClipboard(QClipboard::Mode mode) const
@@ -846,7 +846,7 @@ void AbstractByteArrayViewPrivate::insertBytes(const QByteArray& bytes)
     }
 }
 
-void AbstractByteArrayViewPrivate::removeSelectedData()
+void AbstractByteArrayViewPrivate::removeSelectedBytes()
 {
     // Can't we do this?
     if (isEffectiveReadOnly() || mOverWrite) { // TODO: || mValueEditor->isInEditMode() )

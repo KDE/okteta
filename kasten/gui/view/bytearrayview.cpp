@@ -210,13 +210,13 @@ void ByteArrayView::insertData(const QMimeData* data)
 std::unique_ptr<QMimeData> ByteArrayView::cutSelectedData()
 {
     auto result = mWidget->selectedBytesAsMimeData();
-    mWidget->removeSelectedData();
+    mWidget->removeSelectedBytes();
     return result;
 }
 
 void ByteArrayView::deleteSelectedData()
 {
-    mWidget->removeSelectedData();
+    mWidget->removeSelectedBytes();
 }
 
 bool ByteArrayView::canReadData(const QMimeData* data) const

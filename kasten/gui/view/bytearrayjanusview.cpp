@@ -162,9 +162,9 @@ void ByteArrayJanusView::insertBytesFromMimeData(const QMimeData* data)
     mView->insertBytesFromMimeData(data);
 }
 
-void ByteArrayJanusView::removeSelectedData()
+void ByteArrayJanusView::removeSelectedBytes()
 {
-    mView->removeSelectedData();
+    mView->removeSelectedBytes();
 }
 
 bool ByteArrayJanusView::canReadData(const QMimeData* data) const

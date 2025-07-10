@@ -317,7 +317,7 @@ public:
 public: // modification access
     void insertBytesFromMimeData(const QMimeData* data);
     /** removes the selected data, takes care of the cursor */
-    void removeSelectedData();
+    void removeSelectedBytes();
     /** inserts */
     void insertBytes(const QByteArray& bytes);
 

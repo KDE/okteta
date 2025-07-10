@@ -74,7 +74,7 @@ public: // codings
 public:
     void setSelection(Address start, Address end);
     void selectAll(bool selectAll);
-    void removeSelectedData();
+    void removeSelectedBytes();
     void insertBytesFromMimeData(const QMimeData* data);
     void insertBytes(const QByteArray& byteArray);
     [[nodiscard]]

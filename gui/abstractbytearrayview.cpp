@@ -208,10 +208,10 @@ void AbstractByteArrayView::insertBytes(const QByteArray& bytes)
     d->insertBytes(bytes);
 }
 
-void AbstractByteArrayView::removeSelectedData()
+void AbstractByteArrayView::removeSelectedBytes()
 {
     Q_D(AbstractByteArrayView);
-    d->removeSelectedData();
+    d->removeSelectedBytes();
 }
 
 void AbstractByteArrayView::setByteArrayModel(Okteta::AbstractByteArrayModel* byteArrayModel)

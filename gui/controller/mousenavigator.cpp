@@ -325,7 +325,7 @@ void MouseNavigator::startDrag()
         // Not inside this widget itself?
         if (!targetByteArrayView
             || targetByteArrayView->byteArrayModel() != mView->byteArrayModel()) {
-            mView->removeSelectedData();
+            mView->removeSelectedBytes();
         }
     }
 }

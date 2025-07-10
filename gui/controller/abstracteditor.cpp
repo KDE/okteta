@@ -66,7 +66,7 @@ bool AbstractEditor::handleKeyPress(QKeyEvent* keyEvent)
     // in each command anyway
     if (keyEvent->matches(QKeySequence::Delete)) {
         if (mView->hasSelectedData()) {
-            mView->removeSelectedData();
+            mView->removeSelectedBytes();
         } else {
             doEditAction(CharDelete);
         }
@@ -74,7 +74,7 @@ bool AbstractEditor::handleKeyPress(QKeyEvent* keyEvent)
     } else if (keyEvent->matches(QKeySequence::DeleteStartOfWord)) {
         // TODO: descide behaviour with selection, for now okteta legacy one
         if (mView->hasSelectedData()) {
-            mView->removeSelectedData();
+            mView->removeSelectedBytes();
         } else {
             doEditAction(WordBackspace);
         }
@@ -82,7 +82,7 @@ bool AbstractEditor::handleKeyPress(QKeyEvent* keyEvent)
     } else if (keyEvent->matches(QKeySequence::DeleteEndOfWord)) {
         // TODO: descide behaviour with selection, for now okteta legacy one
         if (mView->hasSelectedData()) {
-            mView->removeSelectedData();
+            mView->removeSelectedBytes();
         } else {
             doEditAction(WordDelete);
         }
@@ -98,7 +98,7 @@ bool AbstractEditor::handleKeyPress(QKeyEvent* keyEvent)
                 break;
             case Qt::Key_Backspace:
                 if (mView->hasSelectedData()) {
-                    mView->removeSelectedData();
+                    mView->removeSelectedBytes();
                 } else {
                     doEditAction(CharBackspace);
                 }

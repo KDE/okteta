@@ -267,7 +267,7 @@ protected:
     bool isByteEditorActive() const;
 
 protected:
-    void removeSelectedData();
+    void removeSelectedBytes();
     void insertBytes(const QByteArray& bytes);
     void insertBytesFromMimeData(const QMimeData* data);
     [[nodiscard]]
