@@ -61,7 +61,7 @@ private Q_SLOTS: // test functions
     void testInsertAtMid();
     void testInsertAtEnd();
     // void testReplace();
-    void testSwap();
+    void testSwapBytes();
     void testReplaceBytesEqual();
     void testReplaceBytesLess();
     void testReplaceBytesMore();

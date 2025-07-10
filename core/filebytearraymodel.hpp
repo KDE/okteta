@@ -48,7 +48,7 @@ public: // AbstractByteArrayModel API
     [[nodiscard]]
     Size replaceBytes(const AddressRange& removeRange, const Byte* insertData, int insertLength) override;
     [[nodiscard]]
-    bool swap(Address firstStart, const AddressRange& secondRange) override;
+    bool swapBytes(Address firstStart, const AddressRange& secondRange) override;
     [[nodiscard]]
     Size fill(Byte fillByte, Address offset = 0, Size fillLength = -1) override;
     void setByte(Address offset, Byte byte) override;

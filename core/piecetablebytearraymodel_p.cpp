@@ -170,7 +170,7 @@ Size PieceTableByteArrayModelPrivate::replaceBytes(const AddressRange& _removeRa
     return insertLength;
 }
 
-bool PieceTableByteArrayModelPrivate::swap(Address firstStart, const AddressRange& _secondRange)
+bool PieceTableByteArrayModelPrivate::swapBytes(Address firstStart, const AddressRange& _secondRange)
 {
     AddressRange secondRange(_secondRange);
     // correct parameters

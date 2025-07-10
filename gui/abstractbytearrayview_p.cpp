@@ -79,7 +79,7 @@ public: // state read API
 
 public: // modification API
     Size replaceBytes(const AddressRange& removeSection, const Byte* insertData, int insertLength) override;
-    bool swap(Address firstStart, const AddressRange& secondRange) override;
+    bool swapBytes(Address firstStart, const AddressRange& secondRange) override;
     Size fill(Byte fillByte, Address offset = 0, Size fillLength = -1) override;
     void setByte(Address offset, Byte byte) override;
     void setModified(bool modified) override;
@@ -96,7 +96,7 @@ Size NullModel::replaceBytes(const AddressRange& removeSection, const Byte* inse
     Q_UNUSED(removeSection) Q_UNUSED(insertData) Q_UNUSED(insertLength)
     return 0;
 }
-bool NullModel::swap(Address firstStart, const AddressRange& secondRange)
+bool NullModel::swapBytes(Address firstStart, const AddressRange& secondRange)
 {
     Q_UNUSED(firstStart) Q_UNUSED(secondRange)
     return false;

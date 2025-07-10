@@ -177,7 +177,7 @@ public: // modification API
      * @return @p true if operation was successful, @p false otherwise
      */
     [[nodiscard]]
-    virtual bool swap(Address firstStart, const AddressRange& secondRange) = 0;
+    virtual bool swapBytes(Address firstStart, const AddressRange& secondRange) = 0;
 
     /**
      * fills the buffer with the FillChar. If the buffer is to small it will be extended as much as possible.

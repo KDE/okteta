@@ -163,7 +163,7 @@ Size FixedSizeByteArrayModel::replaceBytes(const AddressRange& _removeRange, con
     return insertLength;
 }
 
-bool FixedSizeByteArrayModel::swap(Address firstStart, const AddressRange& _secondRange)
+bool FixedSizeByteArrayModel::swapBytes(Address firstStart, const AddressRange& _secondRange)
 {
     AddressRange secondRange(_secondRange);
     // check all parameters

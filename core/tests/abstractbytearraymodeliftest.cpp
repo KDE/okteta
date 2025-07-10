@@ -458,7 +458,7 @@ void AbstractByteArrayModelIfTest::testInsertAtEnd()
 // copies data
 // moves the data to the mid, then the start.
 // tests for correct data, modified flag and size
-void AbstractByteArrayModelIfTest::testSwap()
+void AbstractByteArrayModelIfTest::testSwapBytes()
 {
     // can we alter the buffer at all?
     if (mByteArrayModel->isReadOnly()) {
@@ -486,7 +486,7 @@ void AbstractByteArrayModelIfTest::testSwap()
     AddressRange targetRange = AddressRange::fromWidth(destOffset, Source.width());
     clearSignalSpys();
 
-    bool success = mByteArrayModel->swap(destOffset, Source);
+    bool success = mByteArrayModel->swapBytes(destOffset, Source);
 
     QVERIFY(success);
     QCOMPARE(copy.compare(*mByteArrayModel, AddressRange(0, targetRange.nextBeforeStart()), 0), 0);
@@ -505,7 +505,7 @@ void AbstractByteArrayModelIfTest::testSwap()
     targetRange.moveToStart(destOffset);
     clearSignalSpys();
 
-    success = mByteArrayModel->swap(destOffset, Source);
+    success = mByteArrayModel->swapBytes(destOffset, Source);
 
     QVERIFY(success);
     QCOMPARE(copy.compare(*mByteArrayModel, AddressRange(0, targetRange.nextBeforeStart()), 0), 0);
@@ -524,7 +524,7 @@ void AbstractByteArrayModelIfTest::testSwap()
     targetRange.moveToStart(destOffset);
     clearSignalSpys();
 
-    success = mByteArrayModel->swap(destOffset, Source);
+    success = mByteArrayModel->swapBytes(destOffset, Source);
 
     QVERIFY(success);
     QCOMPARE(copy.compare(*mByteArrayModel, targetRange, origin.start()), 0);

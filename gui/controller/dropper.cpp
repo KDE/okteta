@@ -136,7 +136,7 @@ void Dropper::handleInternalDrag(QDropEvent* dropEvent, AbstractByteArrayViewPri
             newCursorIndex = insertIndex + selection.width();
         }
 
-        const bool success = byteArrayModel->swap(insertIndex, selection);
+        const bool success = byteArrayModel->swapBytes(insertIndex, selection);
         if (success) {
             tableCursor->gotoCIndex(newCursorIndex);
             mByteArrayView->emitCursorPositionChanged();

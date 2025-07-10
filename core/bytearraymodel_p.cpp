@@ -234,7 +234,7 @@ Size ByteArrayModelPrivate::replaceBytes(const AddressRange& _removeRange, const
     return insertLength;
 }
 
-bool ByteArrayModelPrivate::swap(Address firstStart, const AddressRange& _secondRange)
+bool ByteArrayModelPrivate::swapBytes(Address firstStart, const AddressRange& _secondRange)
 {
     Q_Q(ByteArrayModel);
 

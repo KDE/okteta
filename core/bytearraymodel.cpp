@@ -160,11 +160,11 @@ Size ByteArrayModel::replaceBytes(const AddressRange& removeRange, const Byte* i
     return d->replaceBytes(removeRange, insertData, insertLength);
 }
 
-bool ByteArrayModel::swap(Address firstStart, const AddressRange& secondRange)
+bool ByteArrayModel::swapBytes(Address firstStart, const AddressRange& secondRange)
 {
     Q_D(ByteArrayModel);
 
-    return d->swap(firstStart, secondRange);
+    return d->swapBytes(firstStart, secondRange);
 }
 
 Size ByteArrayModel::fill(Byte fillByte, Address offset, Size fillLength)
