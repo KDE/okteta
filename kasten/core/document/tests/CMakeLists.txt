@@ -1,4 +1,5 @@
 set( SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/.. )
+set(LIBOKTETAWIDGETS_REL_DIR ../../../gui/liboktetawidgets)
 
 add_library(OktetaKastenCoreDocumentSourcesTestShim INTERFACE)
 target_include_directories(OktetaKastenCoreDocumentSourcesTestShim INTERFACE
@@ -35,6 +36,8 @@ ecm_add_test(
   bytearraydocumentfactorytest.cpp
   ${SUTDIR}/bytearraydocument.cpp
   ${SUTDIR}/bytearraydocumentfactory.cpp
+  ${LIBOKTETAWIDGETS_REL_DIR}/bytearraychar8stringdecoder.cpp
+  ${LIBOKTETAWIDGETS_REL_DIR}/bytearrayvaluestringdecoder.cpp
   TEST_NAME bytearraydocumentfactorytest
   NAME_PREFIX oktetakasten-document-
   LINK_LIBRARIES
@@ -44,4 +47,8 @@ ecm_add_test(
   TestOktetaCore
   Qt5::Test
   KF5::I18n
+)
+target_include_directories(bytearraydocumentfactorytest
+    PRIVATE
+        ${LIBOKTETAWIDGETS_REL_DIR}
 )

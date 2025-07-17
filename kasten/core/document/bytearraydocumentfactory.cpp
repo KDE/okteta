@@ -10,8 +10,12 @@
 
 // lib
 #include "bytearraydocument.hpp"
+// liboktetawidgets
+#include <bytearraychar8stringdecoder.hpp>
+#include <bytearrayvaluestringdecoder.hpp>
 // Okteta core
 #include <Okteta/PieceTableByteArrayModel>
+#include <Okteta/ValueCodec>
 // Kasten core
 // #include <Kasten/Person>
 // KF
@@ -54,19 +58,58 @@ AbstractDocument* ByteArrayDocumentFactory::createFromData(const QMimeData* mime
     }
 
     // SYNC: with abstractbytearrayview_p.cpp
-    // if there is a octet stream, use it, otherwise take the dump of the format
-    // with the highest priority
-    // TODO: this may not be, what is expected, think about it, if we just
-    // take byte array descriptions, like encodings in chars or values
+    // If there is an octet stream, use it, otherwise try to decode values or chars,
+    // assuming byte array descriptions by text.
+    // If that fails, take the dump of the format with the highest priority.
+    // TODO: instead of guessing, ask user for the decoding to try.
     // would need the movement of the encoders into the core library
+    QByteArray bytes;
+
     const QString octetStreamFormatName = QStringLiteral("application/octet-stream");
-    const QString dataFormatName = (mimeData->hasFormat(octetStreamFormatName)) ?
-                                   octetStreamFormatName :
-                                   mimeData->formats()[0];
+    if (mimeData->hasFormat(octetStreamFormatName)) {
+        bytes = mimeData->data(octetStreamFormatName);
+    } else {
+        // try to parse any encoding in text
+        if (mimeData->hasText()) {
+            const QString text = mimeData->text();
+            // first try values
+            // for now hard-code support only for hexadecimal codes
+            // TODO: query user for format to try, or perhaps do auto-detect where feasible?
+            auto* const valueCodec = Okteta::ValueCodec::createCodec(Okteta::HexadecimalCoding);
 
-    const QByteArray data = mimeData->data(dataFormatName);
+            Okteta::ByteArrayValueStringDecoder valueStringDecoder(valueCodec);
+            const Okteta::ByteArrayValueStringDecoder::CodeState evalResult = valueStringDecoder.decode(&bytes, text);
+            if (evalResult != Okteta::ByteArrayValueStringDecoder::CodeAcceptable) {
+                bytes.clear();
+            }
 
-    auto* byteArray = new Okteta::PieceTableByteArrayModel(data);
+            delete valueCodec;
+
+            // then try escaped text
+            // for now hard-code support only for local 8-bit/ISO-8859-1 charset
+            if (bytes.isEmpty()) {
+                Okteta::ByteArrayChar8StringDecoder char8StringDecoder;
+                int usedTextSize = -1;
+                const Okteta::ByteArrayChar8StringDecoder::CodeState evalResult = char8StringDecoder.decode(&bytes, text, 0, -1, &usedTextSize);
+                if ((evalResult != Okteta::ByteArrayChar8StringDecoder::CodeAcceptable) ||
+                    (usedTextSize != text.size())) {
+                    bytes.clear();
+                }
+            }
+        }
+
+        // nothing decoded (for now empty -> failed)? fall back to raw data of first format
+        if (bytes.isEmpty()) {
+            const QString firstDataFormatName = mimeData->formats()[0];
+            bytes = mimeData->data(firstDataFormatName);
+        }
+    }
+
+    if (bytes.isEmpty()) {
+        return nullptr;
+    }
+
+    auto* byteArray = new Okteta::PieceTableByteArrayModel(bytes);
     byteArray->setModified(setModified);
 
     // TODO: pass name of generator

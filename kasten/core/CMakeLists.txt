@@ -1,6 +1,8 @@
 set(OKTETAKASTENCORE_VERSION ${OKTETAKASTEN_LIB_VERSION})
 set(OKTETAKASTENCORE_SO_VERSION ${OKTETAKASTEN_LIB_SOVERSION})
 
+set(LIBOKTETAWIDGETS_REL_DIR ../gui/liboktetawidgets)
+
 add_definitions(-DTRANSLATION_DOMAIN=\"liboktetakasten\")
 
 macro(OKTETAKASTENCORE_ADD_SUBLIBRARY _subdir)
@@ -34,6 +36,12 @@ oktetakastencore_add_sublibrary(io/filesystem
         ByteArrayRawFileWriteToJob
 )
 
+# TODO: move to oktetacore, no longer duplicate
+oktetakastencore_add_sublibrary(${LIBOKTETAWIDGETS_REL_DIR}
+    PRIVATE
+        ByteArrayChar8StringDecoder
+        ByteArrayValueStringDecoder
+)
 
 okteta_add_library(Core NAMESPACE Okteta Kasten
     PUBLIC
@@ -57,6 +65,8 @@ okteta_add_library(Core NAMESPACE Okteta Kasten
 target_include_directories(OktetaKastenCore
     PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/document>
+    PRIVATE
+        ${LIBOKTETAWIDGETS_REL_DIR}
 )
 
 
