@@ -1,6 +1,8 @@
 set(OKTETAGUI_VERSION ${OKTETALIBS_LIB_VERSION})
 set(OKTETAGUI_SO_VERSION ${OKTETALIBS_LIB_SOVERSION})
 
+set(LIBOKTETAWIDGETS_REL_DIR ../kasten/gui/liboktetawidgets)
+
 add_definitions(-DTRANSLATION_DOMAIN=\"liboktetagui\")
 
 macro(OKTETAGUI_ADD_SUBLIBRARY _subdir)
@@ -40,6 +42,13 @@ oktetagui_add_sublibrary(libcolumnsview
         AbstractColumnRenderer
         ColumnsView
         PixelMetrics # TODO: this header needs to be redone
+)
+
+# TODO: move to oktetacore, no longer duplicate
+oktetagui_add_sublibrary(${LIBOKTETAWIDGETS_REL_DIR}
+    PRIVATE
+        ByteArrayChar8StringDecoder
+        ByteArrayValueStringDecoder
 )
 
 okteta_add_sublibrary(Gui  NAMESPACE Okteta
@@ -99,6 +108,8 @@ okteta_add_library(Gui NAMESPACE Okteta
 
 target_include_directories(OktetaGui
     PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/libcolumnsview>
+    PRIVATE
+        ${LIBOKTETAWIDGETS_REL_DIR}
 )
 
 okteta_add_cmakeconfig(Gui NAMESPACE Okteta

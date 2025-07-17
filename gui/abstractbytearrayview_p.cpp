@@ -26,6 +26,9 @@
 #include "cursor.hpp"
 #include "bordercolumnrenderer.hpp"
 #include "oktetagui.hpp"
+// liboktetawidgets
+#include <bytearraychar8stringdecoder.hpp>
+#include <bytearrayvaluestringdecoder.hpp>
 // Okteta core
 #include <Okteta/ValueCodec>
 #include <Okteta/Bookmarkable>
@@ -818,17 +821,42 @@ void AbstractByteArrayViewPrivate::pasteData(const QMimeData* data)
     }
 
     // SYNC: with bytearraydocumentfactory.cpp
-    // if there is a octet stream, use it, otherwise take the dump of the format
-    // with the highest priority
-    // TODO: this may not be, what is expected, think about it, if we just
-    // take byte array descriptions, like encodings in chars or values
+    // If there is an octet stream, use it, otherwise  try to decode values or chars,
+    // assuming byte array descriptions by text.
+    // If that fails, take the dump of the format with the highest priority.
+    // TODO: instead of guessing, ask user for the decoding to try.
     // would need the movement of the encoders into the core library
-    QString dataFormatName = octetStreamFormatName();
-    if (!data->hasFormat(dataFormatName)) {
-        dataFormatName = data->formats()[0];
+    QByteArray byteArray;
+    const QString dataFormatName = octetStreamFormatName();
+    if (data->hasFormat(dataFormatName)) {
+        byteArray = data->data(dataFormatName);
+    } else {
+        // try to parse any encoding in text
+        if (data->hasText()) {
+            const QString text = data->text();
+            if (activeCoding() == AbstractByteArrayView::CharCodingId) {
+                ByteArrayChar8StringDecoder char8StringDecoder;
+                char8StringDecoder.setCharCodec(charCodingName());
+                int usedTextSize = -1;
+                const ByteArrayChar8StringDecoder::CodeState evalResult = char8StringDecoder.decode(&byteArray, text, 0, -1, &usedTextSize);
+                if ((evalResult != ByteArrayChar8StringDecoder::CodeAcceptable) ||
+                    (usedTextSize != text.size())) {
+                    byteArray.clear();
+                }
+            } else {
+                ByteArrayValueStringDecoder valueStringDecoder(mValueCodec);
+                const ByteArrayValueStringDecoder::CodeState evalResult = valueStringDecoder.decode(&byteArray, text);
+                if (evalResult != ByteArrayValueStringDecoder::CodeAcceptable) {
+                    byteArray.clear();
+                }
+            }
+        }
+        // nothing decoded (for now empty -> failed)? fall back to raw data of first format
+        if (byteArray.isEmpty()) {
+            const QString firstDataFormatName = data->formats()[0];
+            byteArray = data->data(firstDataFormatName);
+        }
     }
-
-    const QByteArray byteArray = data->data(dataFormatName);
 
     if (!byteArray.isEmpty()) {
         insert(byteArray);
