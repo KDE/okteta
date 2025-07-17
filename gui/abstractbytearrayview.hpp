@@ -312,10 +312,14 @@ public:
     [[nodiscard]]
     QByteArray selectedBytes() const;
     [[nodiscard]]
-    std::unique_ptr<QMimeData> selectedBytesAsMimeData() const;
+    virtual std::unique_ptr<QMimeData> selectedBytesAsMimeData() const;
+
+public:
+    [[nodiscard]]
+    virtual bool canInsertBytesFromMimeData(const QMimeData* data) const;
 
 public: // modification access
-    void insertBytesFromMimeData(const QMimeData* data);
+    virtual void insertBytesFromMimeData(const QMimeData* data);
     /** removes the selected data, takes care of the cursor */
     void removeSelectedBytes();
     /** inserts */
@@ -350,10 +354,6 @@ public: // modification access
     void ensureCursorVisible();
     /** puts the cursor in the column at the pos of Point (in absolute coord), does not handle the drawing */
     void placeCursor(QPoint point);
-
-public:
-    [[nodiscard]]
-    bool canInsertBytesFromMimeData(const QMimeData* data) const;
 
 public: // zooming
     void zoomIn(int pointInc);
