@@ -1,6 +1,8 @@
 set(OKTETAGUI_VERSION ${OKTETALIBS_LIB_VERSION})
 set(OKTETAGUI_SO_VERSION ${OKTETALIBS_LIB_SOVERSION})
 
+set(LIBOKTETAWIDGETS_REL_DIR ../kasten/gui/liboktetawidgets)
+
 okteta_add_library(Gui NAMESPACE Okteta
     PUBLIC
         OktetaCore
@@ -54,6 +56,15 @@ okteta_sublibrary_sources(Gui NAMESPACE Okteta
 
     PRIVATE
         ColumnsViewScrollAreaEngine
+)
+
+# TODO: move to oktetacore, no longer duplicate
+oktetagui_sources(
+    SUBDIR ${LIBOKTETAWIDGETS_REL_DIR}
+    BUILD_INCLUDEDIR
+    PRIVATE
+        ByteArrayChar8StringDecoder
+        ByteArrayValueStringDecoder
 )
 
 oktetagui_sources(

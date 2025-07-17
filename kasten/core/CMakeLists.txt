@@ -1,6 +1,8 @@
 set(OKTETAKASTENCORE_VERSION ${OKTETAKASTEN_LIB_VERSION})
 set(OKTETAKASTENCORE_SO_VERSION ${OKTETAKASTEN_LIB_SOVERSION})
 
+set(LIBOKTETAWIDGETS_REL_DIR ../gui/liboktetawidgets)
+
 okteta_add_library(Core NAMESPACE Okteta Kasten
     PUBLIC
         KastenCore
@@ -26,6 +28,15 @@ macro(OKTETAKASTENCORE_SOURCES)
         ${ARGN}
     )
 endmacro()
+
+# TODO: move to oktetacore, no longer duplicate
+oktetakastencore_sources(
+    SUBDIR ${LIBOKTETAWIDGETS_REL_DIR}
+    BUILD_INCLUDEDIR
+    PRIVATE
+        ByteArrayChar8StringDecoder
+        ByteArrayValueStringDecoder
+)
 
 oktetakastencore_sources(
     SUBDIR document
