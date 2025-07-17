@@ -69,6 +69,17 @@ ecm_add_test(
 )
 
 ecm_add_test(
+    bytearrayvaluestringdecodertest.cpp
+    ${SUTDIR}/bytearrayvaluestringdecoder.cpp
+    TEST_NAME bytearrayvaluestringdecodertest
+    NAME_PREFIX oktetakasten-oktetawidgets-
+    LINK_LIBRARIES
+        OktetaWidgetsSourcesTestShim
+        TestOktetaCore
+        Qt5::Test
+)
+
+ecm_add_test(
     bytearrayvalidatortest.cpp
     ${SUTDIR}/bytearraychar8stringdecoder.cpp
     ${SUTDIR}/bytearraychar8stringencoder.cpp
