@@ -63,11 +63,11 @@ void CharByteArrayColumnTextRenderer::renderLine(QTextStream* stream, bool isSub
         // print char
         const Okteta::Character byteChar = mCharCodec->decode(mByteArrayModel->byte(mOffset));
 
-        const QChar streamChar = byteChar.isUndefined() ?      Okteta::Character(mUndefinedChar) :
+        const QChar streamChar = byteChar.isUndefined() ?      mUndefinedChar :
                                  (!byteChar.isPrint()
                                   || byteChar == tabChar
-                                  || byteChar == returnChar) ? Okteta::Character(mSubstituteChar) :
-                                                               byteChar;
+                                  || byteChar == returnChar) ? mSubstituteChar :
+                                                               static_cast<QChar>(byteChar);
         *stream << streamChar;
 
         e = t + 1;
