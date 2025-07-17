@@ -35,6 +35,7 @@
 #include <Okteta/Versionable>
 #include <Okteta/TextByteArrayAnalyzer>
 #include <Okteta/Bookmark>
+#include <Okteta/Character>
 // Qt
 #include <QScroller>
 #include <QPainter>
@@ -762,12 +763,62 @@ QByteArray AbstractByteArrayViewPrivate::selectedData() const
 
 QMimeData* AbstractByteArrayViewPrivate::selectionAsMimeData() const
 {
+    Q_Q(const AbstractByteArrayView);
+
     if (!mTableRanges->hasSelection()) {
         return nullptr;
     }
 
+    const QByteArray bytes = selectedData();
+
     auto* mimeData = new QMimeData;
-    mimeData->setData(octetStreamFormatName(), selectedData());
+    mimeData->setData(octetStreamFormatName(), bytes);
+
+    QString displayedText;
+    if (activeCoding() == AbstractByteArrayView::CharCodingId) {
+        const QChar undefinedChar = q->undefinedChar();
+        const QChar substituteChar = q->substituteChar();
+
+        const Okteta::CharCodec* const charCodec = this->charCodec();
+        const QChar tabChar = QLatin1Char('\t');
+        const QChar returnChar = QLatin1Char('\n');
+
+        displayedText.reserve(bytes.size());
+
+        for (const auto byte : bytes) {
+            const Okteta::Character byteChar = charCodec->decode(byte);
+
+            const QChar streamChar = byteChar.isUndefined() ?      undefinedChar :
+                                     (!byteChar.isPrint()
+                                      || byteChar == tabChar
+                                      || byteChar == returnChar) ? substituteChar :
+                                                                   static_cast<QChar>(byteChar);
+            displayedText.append(streamChar);
+        }
+    } else {
+        // prepare
+        QString valueString;
+        valueString.resize(mValueCodec->encodingWidth());
+
+        const QChar separator = QLatin1Char(' ');
+        const int separatorSize = 1;
+        displayedText.reserve((valueString.size() + separatorSize) * bytes.size() - separatorSize);
+
+        bool isFirst = true;
+        for (const auto byte : bytes) {
+            if (Q_LIKELY(!isFirst)) {
+                displayedText.append(separator);
+            } else {
+                isFirst = false;
+            }
+
+            mValueCodec->encode(&valueString, 0, byte);
+
+            displayedText.append(valueString);
+        }
+    }
+    mimeData->setText(displayedText);
+
     return mimeData;
 }
 
