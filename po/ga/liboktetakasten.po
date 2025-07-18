@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: playground-utils/okteta.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 05:55+0000\n"
+"POT-Creation-Date: 2025-07-18 03:22+0000\n"
 "PO-Revision-Date: 2007-11-05 08:28-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -3123,14 +3123,14 @@ msgctxt "name of the data type"
 msgid "Byte Array"
 msgstr "Eagar Beart"
 
-#: core/document/bytearraydocumentfactory.cpp:36
+#: core/document/bytearraydocumentfactory.cpp:40
 #, kde-format
 msgctxt "The byte array was new created."
 msgid "New created."
 msgstr "Cruthaigh as an nua."
 
-#: core/document/bytearraydocumentfactory.cpp:43
-#: core/document/bytearraydocumentfactory.cpp:80
+#: core/document/bytearraydocumentfactory.cpp:47
+#: core/document/bytearraydocumentfactory.cpp:123
 #, kde-format
 msgctxt "numbered title for a created document without a filename"
 msgid "[New Byte Array]"
@@ -3141,7 +3141,7 @@ msgstr[2] "[Eagar Nua Beart %1]"
 msgstr[3] "[Eagar Nua Beart %1]"
 msgstr[4] "[Eagar Nua Beart %1]"
 
-#: core/document/bytearraydocumentfactory.cpp:73
+#: core/document/bytearraydocumentfactory.cpp:116
 #, kde-format
 msgctxt "origin of the byte array"
 msgid "Created from data."

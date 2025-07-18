@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 05:55+0000\n"
+"POT-Creation-Date: 2025-07-18 03:22+0000\n"
 "PO-Revision-Date: 2020-01-03 18:24+0100\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -3041,14 +3041,14 @@ msgctxt "name of the data type"
 msgid "Byte Array"
 msgstr "Byte-fält"
 
-#: core/document/bytearraydocumentfactory.cpp:36
+#: core/document/bytearraydocumentfactory.cpp:40
 #, kde-format
 msgctxt "The byte array was new created."
 msgid "New created."
 msgstr "Nyskapat."
 
-#: core/document/bytearraydocumentfactory.cpp:43
-#: core/document/bytearraydocumentfactory.cpp:80
+#: core/document/bytearraydocumentfactory.cpp:47
+#: core/document/bytearraydocumentfactory.cpp:123
 #, kde-format
 msgctxt "numbered title for a created document without a filename"
 msgid "[New Byte Array]"
@@ -3056,7 +3056,7 @@ msgid_plural "[New Byte Array %1]"
 msgstr[0] "[Nytt byte-fält]"
 msgstr[1] "[Nytt byte-fält %1]"
 
-#: core/document/bytearraydocumentfactory.cpp:73
+#: core/document/bytearraydocumentfactory.cpp:116
 #, kde-format
 msgctxt "origin of the byte array"
 msgid "Created from data."

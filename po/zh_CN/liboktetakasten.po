@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 05:55+0000\n"
+"POT-Creation-Date: 2025-07-18 03:22+0000\n"
 "PO-Revision-Date: 2024-03-30 19:46\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -2965,21 +2965,21 @@ msgctxt "name of the data type"
 msgid "Byte Array"
 msgstr "字节数组"
 
-#: core/document/bytearraydocumentfactory.cpp:36
+#: core/document/bytearraydocumentfactory.cpp:40
 #, kde-format
 msgctxt "The byte array was new created."
 msgid "New created."
 msgstr "已新建。"
 
-#: core/document/bytearraydocumentfactory.cpp:43
-#: core/document/bytearraydocumentfactory.cpp:80
+#: core/document/bytearraydocumentfactory.cpp:47
+#: core/document/bytearraydocumentfactory.cpp:123
 #, kde-format
 msgctxt "numbered title for a created document without a filename"
 msgid "[New Byte Array]"
 msgid_plural "[New Byte Array %1]"
 msgstr[0] "[新建字节数组 %1]"
 
-#: core/document/bytearraydocumentfactory.cpp:73
+#: core/document/bytearraydocumentfactory.cpp:116
 #, kde-format
 msgctxt "origin of the byte array"
 msgid "Created from data."
