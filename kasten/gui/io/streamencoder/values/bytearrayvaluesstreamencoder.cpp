@@ -72,8 +72,6 @@ bool ByteArrayValuesStreamEncoder::encodeDataToStream(QIODevice* device,
     bool success = true;
 
     // settings
-    mSettings.undefinedChar = byteArrayView->undefinedChar();
-    mSettings.substituteChar = byteArrayView->substituteChar();
     mSettings.valueCoding = (Okteta::ValueCoding)byteArrayView->valueCoding();
 
     // encode

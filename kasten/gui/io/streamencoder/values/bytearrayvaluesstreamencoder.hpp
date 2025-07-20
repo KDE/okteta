@@ -47,8 +47,6 @@ public:
 public:
     Okteta::ValueCoding valueCoding = Okteta::HexadecimalCoding;
     QString separation;
-    QChar undefinedChar;
-    QChar substituteChar;
 };
 
 class ByteArrayValuesStreamEncoder : public AbstractByteArrayStreamEncoder
