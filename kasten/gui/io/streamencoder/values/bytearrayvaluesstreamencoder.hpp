@@ -23,8 +23,12 @@ namespace Kasten {
 class ValuesStreamEncoderSettings
 {
 private:
+    static inline constexpr char PrefixConfigKey[] = "Prefix";
+    static inline constexpr char PostfixConfigKey[] = "Postfix";
     static inline constexpr char SeparatorConfigKey[] = "Separator";
 
+    static const QString DefaultPrefix;
+    static const QString DefaultPostfix;
     static const QString DefaultSeparator;
 
 public:
@@ -46,6 +50,8 @@ public:
 
 public:
     Okteta::ValueCoding valueCoding = Okteta::HexadecimalCoding;
+    QString prefix;
+    QString postfix;
     QString separation;
 };
 

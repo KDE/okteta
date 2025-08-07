@@ -53,6 +53,28 @@ ByteArrayValuesStreamEncoderConfigEditor::ByteArrayValuesStreamEncoderConfigEdit
     mSeparationEdit->setText(mSettings.separation);
     connect(mSeparationEdit, &QLineEdit::textChanged, this, &ByteArrayValuesStreamEncoderConfigEditor::onSettingsChanged);
     pageLayout->addRow(separationLabel, mSeparationEdit);
+
+    // prefix string
+    const QString prefixLabel =
+        i18nc("@label:textbox substring which prefixes each value", "Prefix:");
+
+    m_prefixEdit = new QLineEdit(this);
+    m_prefixEdit->setClearButtonEnabled(true);
+    m_prefixEdit->setText(mSettings.prefix);
+    connect(m_prefixEdit, &QLineEdit::textChanged,
+            this, &ByteArrayValuesStreamEncoderConfigEditor::onSettingsChanged);
+    pageLayout->addRow(prefixLabel, m_prefixEdit);
+
+    // postfix string
+    const QString postfixLabel =
+        i18nc("@label:textbox substring which postfixes each value", "Postfix:");
+
+    m_postfixEdit = new QLineEdit(this);
+    m_postfixEdit->setClearButtonEnabled(true);
+    m_postfixEdit->setText(mSettings.postfix);
+    connect(m_postfixEdit, &QLineEdit::textChanged,
+            this, &ByteArrayValuesStreamEncoderConfigEditor::onSettingsChanged);
+    pageLayout->addRow(postfixLabel, m_postfixEdit);
 }
 
 ByteArrayValuesStreamEncoderConfigEditor::~ByteArrayValuesStreamEncoderConfigEditor() = default;
@@ -66,6 +88,8 @@ void ByteArrayValuesStreamEncoderConfigEditor::onSettingsChanged()
 {
 //     mSettings.valueCoding = (Okteta::ValueCoding) mValueCodingSelect->currentIndex();
     mSettings.separation = mSeparationEdit->text();
+    mSettings.prefix = m_prefixEdit->text();
+    mSettings.postfix = m_postfixEdit->text();
 
     mEncoder->setSettings(mSettings);
 }

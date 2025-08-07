@@ -22,6 +22,8 @@
 
 namespace Kasten {
 
+const QString ValuesStreamEncoderSettings::DefaultPrefix = QString();
+const QString ValuesStreamEncoderSettings::DefaultPostfix = QString();
 const QString ValuesStreamEncoderSettings::DefaultSeparator = QStringLiteral(" ");
 
 ValuesStreamEncoderSettings::ValuesStreamEncoderSettings() = default;
@@ -29,16 +31,23 @@ ValuesStreamEncoderSettings::ValuesStreamEncoderSettings() = default;
 bool ValuesStreamEncoderSettings::operator==(const ValuesStreamEncoderSettings& other) const
 {
     // the only user-edited value
-    return (separation == other.separation);
+    return
+        (prefix == other.prefix) &&
+        (postfix == other.postfix) &&
+        (separation == other.separation);
 }
 
 void ValuesStreamEncoderSettings::loadConfig(const KConfigGroup& configGroup)
 {
+    prefix = configGroup.readEntry(PrefixConfigKey, DefaultPrefix);
+    postfix = configGroup.readEntry(PostfixConfigKey, DefaultPostfix);
     separation = configGroup.readEntry(SeparatorConfigKey, DefaultSeparator);
 }
 
 void ValuesStreamEncoderSettings::saveConfig(KConfigGroup& configGroup) const
 {
+    configGroup.writeEntry(PrefixConfigKey, prefix);
+    configGroup.writeEntry(PostfixConfigKey, postfix);
     configGroup.writeEntry(SeparatorConfigKey, separation);
 }
 
@@ -90,7 +99,7 @@ bool ByteArrayValuesStreamEncoder::encodeDataToStream(QIODevice* device,
 
         valueCodec->encode(&valueString, 0, byteArrayModel->byte(i));
 
-        textStream << valueString;
+        textStream << mSettings.prefix << valueString << mSettings.postfix;
     }
 
     return success;

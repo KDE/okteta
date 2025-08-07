@@ -39,6 +39,8 @@ private:
 
 //     KComboBox* mValueCodingSelect;
     QLineEdit* mSeparationEdit;
+    QLineEdit* m_prefixEdit;
+    QLineEdit* m_postfixEdit;
 };
 
 }
