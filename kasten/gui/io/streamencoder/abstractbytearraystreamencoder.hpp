@@ -45,7 +45,7 @@ public: // AbstractModelStreamEncoder API
 
 public:
     [[nodiscard]]
-    QString previewData(AbstractModel* model, const AbstractModelSelection* selection);
+    QByteArray previewData(AbstractModel* model, const AbstractModelSelection* selection);
 
 Q_SIGNALS:
     void settingsChanged();

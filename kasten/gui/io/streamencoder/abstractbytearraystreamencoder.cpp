@@ -63,7 +63,7 @@ bool AbstractByteArrayStreamEncoder::encodeToStream(QIODevice* device,
     return success;
 }
 
-QString AbstractByteArrayStreamEncoder::previewData(AbstractModel* model, const AbstractModelSelection* selection)
+QByteArray AbstractByteArrayStreamEncoder::previewData(AbstractModel* model, const AbstractModelSelection* selection)
 {
     const auto* byteArrayView = qobject_cast<const ByteArrayView*>(model);
 
@@ -90,7 +90,7 @@ QString AbstractByteArrayStreamEncoder::previewData(AbstractModel* model, const 
     const bool success = encodeDataToStream(&dataBuffer, byteArrayView, byteArray, range);
     dataBuffer.close();
 
-    return success ? QString::fromLatin1(data) : QString();
+    return success ? data : QByteArray();
 }
 
 }

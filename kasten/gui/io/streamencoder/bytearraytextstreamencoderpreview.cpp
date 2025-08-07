@@ -49,7 +49,11 @@ void ByteArrayTextStreamEncoderPreview::setData(AbstractModel* model, const Abst
 void ByteArrayTextStreamEncoderPreview::update()
 {
     if (mModel) {
-        mWidget->setText(mEncoder->previewData(mModel, mSelection));
+        const QByteArray data = mEncoder->previewData(mModel, mSelection);
+        // TODO: assuming text streams for now
+        // encoders use QTextStream with default local codecs, so use fromLocal8Bit here
+        const QString text = QString::fromLocal8Bit(data);
+        mWidget->setText(text);
     }
 }
 
