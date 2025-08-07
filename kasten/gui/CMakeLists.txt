@@ -144,6 +144,13 @@ macro(OKTETAKASTENGUI_STREAMENCODER_SOURCES)
     )
 endmacro()
 
+macro(OKTETAKASTENGUI_STREAMCOMPRESSOR_SOURCES)
+    # for now handle as stream encoders
+    oktetakastengui_streamencoder_sources(
+        ${ARGN}
+    )
+endmacro()
+
 oktetakastengui_streamencoder_sources(
     SUBDIR io/streamencoder/values
     PRIVATE
@@ -239,6 +246,16 @@ oktetakastengui_streamencoder_sources(
     SUBDIR io/streamencoder/base85
     PRIVATE
         ByteArrayBase85StreamEncoder
+)
+
+oktetakastengui_streamcompressor_sources(
+    SUBDIR io/streamcompressor
+    BUILD_INCLUDEDIR
+    PRIVATE
+        AbstractByteArrayOutput
+        IoDeviceByteArrayOutput
+        AbstractCompressionStream
+        AbstractByteArrayStreamCompressor
 )
 
 oktetakastengui_streamencoder_sources(
