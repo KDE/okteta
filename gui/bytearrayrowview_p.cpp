@@ -445,11 +445,11 @@ void ByteArrayRowViewPrivate::setVisibleCodings(int newCodings)
     // active coding not visible anymore?
     const bool isActiveStillVisible = (mActiveCoding & newCodings);
     if (!isActiveStillVisible) {
-        mActiveCoding = (AbstractByteArrayView::CodingTypeId)newCodings;
+        mActiveCoding = static_cast<AbstractByteArrayView::CodingTypeId>(newCodings);
         mInactiveCoding = AbstractByteArrayView::NoCodingId;
         adaptController();
     } else {
-        mInactiveCoding = (AbstractByteArrayView::CodingTypeId)(newCodings ^ mActiveCoding);
+        mInactiveCoding = static_cast<AbstractByteArrayView::CodingTypeId>(newCodings ^ mActiveCoding);
     }
 
     const int rowHeight = mByteArrayColumn->rowHeight();
@@ -471,7 +471,8 @@ void ByteArrayRowViewPrivate::setActiveCoding(AbstractByteArrayView::CodingTypeI
     mValueEditor->finishEdit();
 
     mActiveCoding = codingId;
-    mInactiveCoding = (AbstractByteArrayView::CodingTypeId)(visibleCodings() ^ codingId);
+    // TODO: rework enum juggling with CodingTypeId & CodingTypes
+    mInactiveCoding = static_cast<AbstractByteArrayView::CodingTypeId>(visibleCodings() ^ static_cast<AbstractByteArrayView::CodingTypes>(codingId));
 
     adaptController();
 
@@ -563,7 +564,7 @@ void ByteArrayRowViewPrivate::updateCursor(const ByteArrayRowColumnRenderer& col
 {
     Q_Q(ByteArrayRowView);
 
-    const bool isCodingVisible = (column.visibleCodings() & codingId);
+    const bool isCodingVisible = (column.visibleCodings() & static_cast<AbstractByteArrayView::CodingTypes>(codingId));
     if (!isCodingVisible) {
         return;
     }

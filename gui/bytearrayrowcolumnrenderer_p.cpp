@@ -31,7 +31,7 @@ AbstractByteArrayView::CodingTypeId ByteArrayRowColumnRendererPrivate::codingIdo
 {
     return
         (mVisibleCodings != AbstractByteArrayView::ValueAndCharCodings) ?
-            (AbstractByteArrayView::CodingTypeId)mVisibleCodings :
+            static_cast<AbstractByteArrayView::CodingTypeId>(mVisibleCodings) :
         (y < mDigitHeight) ?
             AbstractByteArrayView::ValueCodingId :
             AbstractByteArrayView::CharCodingId;
@@ -74,7 +74,7 @@ void ByteArrayRowColumnRendererPrivate::resetXBuffer()
 
 void ByteArrayRowColumnRendererPrivate::setVisibleCodings(int visibleCodings)
 {
-    mVisibleCodings = (AbstractByteArrayView::CodingTypes)(visibleCodings);
+    mVisibleCodings = static_cast<AbstractByteArrayView::CodingTypes>(visibleCodings);
 }
 
 void ByteArrayRowColumnRendererPrivate::setFontMetrics(const QFontMetrics& fontMetrics)

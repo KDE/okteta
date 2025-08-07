@@ -73,7 +73,7 @@ AbstractByteArrayView::CodingTypeId ByteArrayColumnViewPrivate::activeCoding() c
 AbstractByteArrayView::CodingTypes ByteArrayColumnViewPrivate::visibleCodings() const
 {
     // TODO: try to improve this code
-    return (AbstractByteArrayView::CodingTypes)
+    return static_cast<AbstractByteArrayView::CodingTypes>
            ((mValueColumn->isVisible() ? AbstractByteArrayView::ValueCodingId : 0)
             | (mCharColumn->isVisible() ? AbstractByteArrayView::CharCodingId : 0));
 }
