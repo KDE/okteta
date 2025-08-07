@@ -91,7 +91,8 @@ QString AbstractByteArrayStreamEncoder::previewData(AbstractModel* model, const 
     const bool success = encodeDataToStream(&dataBuffer, byteArrayView, byteArray, range);
     dataBuffer.close();
 
-    return success ? QString::fromLatin1(data) : QString();
+    // encoders use QTextStream with default local codecs, so use fromLocal8Bit here
+    return success ? QString::fromLocal8Bit(data) : QString();
 }
 
 }
