@@ -252,6 +252,15 @@ oktetakastengui_streamencoder_sources(
 )
 
 oktetakastengui_streamcompressor_sources(
+    SUBDIR io/streamcompressor/deflate
+    PRIVATE
+        ByteArrayDeflateStreamCompressorConfigEditor
+        ByteArrayDeflateStreamCompressorConfigEditorFactory
+        ByteArrayDeflateStreamCompressor
+        DeflateCompressionStream
+)
+
+oktetakastengui_streamcompressor_sources(
     SUBDIR io/streamcompressor/gzip
     PRIVATE
         ByteArrayGZipStreamCompressorConfigEditor
