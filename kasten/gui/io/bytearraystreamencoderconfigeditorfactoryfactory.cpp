@@ -16,6 +16,7 @@
 #include "streamencoder/xxencoding/bytearrayxxencodingstreamencoderconfigeditorfactory.hpp"
 #include "streamencoder/srec/bytearraysrecstreamencoderconfigeditorfactory.hpp"
 #include "streamencoder/ihex/bytearrayihexstreamencoderconfigeditorfactory.hpp"
+#include "streamcompressor/bzip2/bytearraybzip2streamcompressorconfigeditorfactory.hpp"
 #include "streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditorfactory.hpp"
 #include "streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditorfactory.hpp"
 #include "streamcompressor/xz/bytearrayxzstreamcompressorconfigeditorfactory.hpp"
@@ -51,6 +52,7 @@ std::vector<std::unique_ptr<AbstractModelStreamEncoderConfigEditorFactory>> Byte
         new ByteArrayIHexStreamEncoderConfigEditorFactory(),
         new ByteArrayUuencodingStreamEncoderConfigEditorFactory(),
         new ByteArrayXxencodingStreamEncoderConfigEditorFactory(),
+        new ByteArrayBZip2StreamCompressorConfigEditorFactory(),
         new ByteArrayDeflateStreamCompressorConfigEditorFactory(),
         new ByteArrayGZipStreamCompressorConfigEditorFactory(),
         new ByteArrayXzStreamCompressorConfigEditorFactory(),

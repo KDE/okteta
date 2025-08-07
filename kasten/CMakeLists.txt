@@ -10,6 +10,12 @@ set( OKTETAKASTEN_ABI_VERSION 2 )
 set( OKTETAKASTEN_LIB_SOVERSION 0 )
 set( OKTETAKASTEN_LIB_VERSION ${OKTETAKASTEN_VERSION} )
 
+find_package(BZip2 1.0)
+set_package_properties(BZip2 PROPERTIES
+    TYPE REQUIRED
+    PURPOSE "BZip2 compressed stream encoding"
+)
+
 find_package(LibLZMA)
 set_package_properties(LibLZMA PROPERTIES
     TYPE REQUIRED
