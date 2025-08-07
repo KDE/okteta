@@ -55,7 +55,7 @@ bool ByteArrayCharsStreamEncoder::encodeDataToStream(QIODevice* device,
                                  (!byteChar.isPrint()
                                   || byteChar == tabChar
                                   || byteChar == returnChar) ? mSettings.substituteChar :
-                                                               (QChar)byteChar;
+                                                               static_cast<QChar>(byteChar);
         textStream << streamChar;
     }
 
