@@ -16,6 +16,11 @@ set_package_properties(LibLZMA PROPERTIES
     PURPOSE "xz compressed stream encoding"
 )
 
+find_package(ZLIB)
+set_package_properties(ZLIB PROPERTIES
+    TYPE REQUIRED
+    PURPOSE "gzip/deflate compressed stream encoding"
+)
 
 find_package(zstd 1.4)
 set_package_properties(zstd PROPERTIES

@@ -134,6 +134,7 @@ oktetakastengui_add_sublibrary(OktetaKastenGuiStreamEncoder
         KF5::Completion
         KF5::I18n
         LibLZMA::LibLZMA
+        ZLIB::ZLIB
         zstd::libzstd
     KI18N_TRANSLATION_DOMAIN "liboktetakasten"
 )
@@ -248,6 +249,16 @@ oktetakastengui_streamencoder_sources(
     SUBDIR io/streamencoder/base85
     PRIVATE
         ByteArrayBase85StreamEncoder
+)
+
+oktetakastengui_streamcompressor_sources(
+    SUBDIR io/streamcompressor/gzip
+    PRIVATE
+        ByteArrayGZipStreamCompressorConfigEditor
+        ByteArrayGZipStreamCompressorConfigEditorFactory
+        ByteArrayGZipStreamCompressor
+        GZipCompressionStream
+        Iso8859_1StringValidator
 )
 
 oktetakastengui_streamcompressor_sources(

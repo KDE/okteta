@@ -21,6 +21,7 @@
 #include "streamencoder/xxencoding/bytearrayxxencodingstreamencoder.hpp"
 #include "streamencoder/srec/bytearraysrecstreamencoder.hpp"
 #include "streamencoder/ihex/bytearrayihexstreamencoder.hpp"
+#include "streamcompressor/gzip/bytearraygzipstreamcompressor.hpp"
 #include "streamcompressor/xz/bytearrayxzstreamcompressor.hpp"
 #include "streamcompressor/zstd/bytearrayzstdstreamcompressor.hpp"
 //// NEWBYTEARRAYSTREAMENCODER(start)
@@ -60,6 +61,7 @@ ByteArrayStreamEncoderFactory::createStreamEncoders()
         new ByteArraySourceCodeStreamEncoder(),
         new ByteArrayViewTextStreamEncoder(),
         new ByteArrayViewHtmlStreamEncoder(),
+        new ByteArrayGZipStreamCompressor(),
         new ByteArrayXzStreamCompressor(),
         new ByteArrayZStdStreamCompressor()
 //// NEWBYTEARRAYSTREAMENCODER(start)
