@@ -26,7 +26,7 @@ class QBrush;
 namespace Okteta {
 
 static constexpr AbstractByteArrayView::CodingTypes DefaultVisibleCodings =
-    (AbstractByteArrayView::CodingTypes)(AbstractByteArrayView::ValueCodingId | AbstractByteArrayView::CharCodingId);
+    AbstractByteArrayView::ValueAndCharCodings;
 
 
 class ByteArrayRowColumnRendererPrivate : public AbstractColumnRendererPrivate
