@@ -10,6 +10,12 @@ set( OKTETAKASTEN_ABI_VERSION 2 )
 set( OKTETAKASTEN_LIB_SOVERSION 0 )
 set( OKTETAKASTEN_LIB_VERSION ${OKTETAKASTEN_VERSION} )
 
+find_package(LibLZMA)
+set_package_properties(LibLZMA PROPERTIES
+    TYPE REQUIRED
+    PURPOSE "xz compressed stream encoding"
+)
+
 
 find_package(zstd 1.4)
 set_package_properties(zstd PROPERTIES

@@ -16,6 +16,7 @@
 #include "streamencoder/xxencoding/bytearrayxxencodingstreamencoderconfigeditorfactory.hpp"
 #include "streamencoder/srec/bytearraysrecstreamencoderconfigeditorfactory.hpp"
 #include "streamencoder/ihex/bytearrayihexstreamencoderconfigeditorfactory.hpp"
+#include "streamcompressor/xz/bytearrayxzstreamcompressorconfigeditorfactory.hpp"
 #include "streamcompressor/zstd/bytearrayzstdstreamcompressorconfigeditorfactory.hpp"
 //// NEWBYTEARRAYSTREAMENCODERCONFIGEDITORFACTORY(start)
 //// Here add the name of your header file of your streamencoder,
@@ -48,6 +49,7 @@ std::vector<std::unique_ptr<AbstractModelStreamEncoderConfigEditorFactory>> Byte
         new ByteArrayIHexStreamEncoderConfigEditorFactory(),
         new ByteArrayUuencodingStreamEncoderConfigEditorFactory(),
         new ByteArrayXxencodingStreamEncoderConfigEditorFactory(),
+        new ByteArrayXzStreamCompressorConfigEditorFactory(),
         new ByteArrayZStdStreamCompressorConfigEditorFactory()
 //// NEWBYTEARRAYSTREAMENCODERCONFIGEDITORFACTORY(start)
 //// Here add the creation of an object of your streamencoder class and add it to the list,

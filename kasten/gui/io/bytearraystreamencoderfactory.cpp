@@ -21,6 +21,7 @@
 #include "streamencoder/xxencoding/bytearrayxxencodingstreamencoder.hpp"
 #include "streamencoder/srec/bytearraysrecstreamencoder.hpp"
 #include "streamencoder/ihex/bytearrayihexstreamencoder.hpp"
+#include "streamcompressor/xz/bytearrayxzstreamcompressor.hpp"
 #include "streamcompressor/zstd/bytearrayzstdstreamcompressor.hpp"
 //// NEWBYTEARRAYSTREAMENCODER(start)
 //// Here add the name of your header file of your streamencoder,
@@ -59,6 +60,7 @@ ByteArrayStreamEncoderFactory::createStreamEncoders()
         new ByteArraySourceCodeStreamEncoder(),
         new ByteArrayViewTextStreamEncoder(),
         new ByteArrayViewHtmlStreamEncoder(),
+        new ByteArrayXzStreamCompressor(),
         new ByteArrayZStdStreamCompressor()
 //// NEWBYTEARRAYSTREAMENCODER(start)
 //// Here add the creation of an object of your streamencoder class and add it to the list,
