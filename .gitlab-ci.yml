@@ -5,6 +5,6 @@ include:
   - project: sysadmin/ci-utilities
     file:
       - /gitlab-templates/linux.yml
-      - /gitlab-templates/flatpak.yml
+      # - /gitlab-templates/flatpak.yml needs update to compress libraries
       - /gitlab-templates/xml-lint.yml
       - /gitlab-templates/yaml-lint.yml

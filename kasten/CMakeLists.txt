@@ -11,6 +11,12 @@ set( OKTETAKASTEN_LIB_SOVERSION 0 )
 set( OKTETAKASTEN_LIB_VERSION ${OKTETAKASTEN_VERSION} )
 
 
+find_package(zstd 1.4)
+set_package_properties(zstd PROPERTIES
+    TYPE REQUIRED
+    PURPOSE "zstd compressed stream encoding"
+)
+
 add_subdirectory( core )
 add_subdirectory( gui )
 add_subdirectory( controllers )
