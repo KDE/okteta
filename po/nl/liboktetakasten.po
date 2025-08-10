@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-09 01:59+0000\n"
-"PO-Revision-Date: 2025-05-24 11:22+0200\n"
+"PO-Revision-Date: 2025-08-09 09:14+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.04.1\n"
+"X-Generator: Lokalize 25.04.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3423,35 +3423,35 @@ msgstr "Sequentie ingevoegd"
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "bzip2"
-msgstr ""
+msgstr "bzip2"
 
 #: gui/io/streamcompressor/bzip2/bytearraybzip2streamcompressorconfigeditor.cpp:31
 #, kde-format
 msgctxt "@label:spinbox bzip2 "
 msgid "Block size:"
-msgstr ""
+msgstr "Blokgrootte:"
 
 #: gui/io/streamcompressor/bzip2/bytearraybzip2streamcompressorconfigeditor.cpp:49
 #, kde-format
 msgid "%1 kB"
-msgstr ""
+msgstr "%1 kB"
 
 #: gui/io/streamcompressor/bzip2/bzip2compressionstream.cpp:35
 #, kde-format
 msgid "Internal bzip2 error: %1"
-msgstr ""
+msgstr "Interne bzip2-fout: %1"
 
 #: gui/io/streamcompressor/bzip2/bzip2compressionstream.cpp:49
 #, kde-format
 msgid "Error code %1"
-msgstr ""
+msgstr "Foutcode %1"
 
 #: gui/io/streamcompressor/bzip2/bzip2compressionstream.cpp:68
 #: gui/io/streamcompressor/deflate/deflatecompressionstream.cpp:71
 #: gui/io/streamcompressor/gzip/gzipcompressionstream.cpp:73
 #, kde-format
 msgid "Internal zlib error when compressing: %1"
-msgstr ""
+msgstr "Interne zlib-fout bij comprimeren: %1"
 
 #: gui/io/streamcompressor/bzip2/bzip2compressionstream.cpp:77
 #: gui/io/streamcompressor/deflate/deflatecompressionstream.cpp:81
@@ -3460,15 +3460,13 @@ msgstr ""
 #: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:93
 #, kde-format
 msgid "Error writing to output: %1"
-msgstr ""
+msgstr "Fout bij het schrijven naar uitvoer: %1"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressor.cpp:119
-#, fuzzy, kde-format
-#| msgctxt "@title:window prompt for iterative replacement"
-#| msgid "Replace"
+#, kde-format
 msgctxt "name of the encoding target"
 msgid "deflate"
-msgstr "Vervangen"
+msgstr "deflate"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:31
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:33
@@ -3476,146 +3474,132 @@ msgstr "Vervangen"
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Compression level:"
-msgstr ""
+msgstr "Compressieniveau:"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:35
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:37
 #: gui/io/streamcompressor/zstd/bytearrayzstdstreamcompressorconfigeditor.cpp:34
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Set as Default"
+#, kde-format
 msgctxt "@item:inmenu compression level"
 msgid "Default"
-msgstr "Als &standaard instellen"
+msgstr "Standaard"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:43
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:45
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Compression strategy:"
-msgstr ""
+msgstr "Compressiestrategie:"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:48
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:50
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Set as Default"
+#, kde-format
 msgctxt "@item:inmenu compression strategy"
 msgid "Default"
-msgstr "Als &standaard instellen"
+msgstr "Standaard"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:50
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:52
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Filter"
+#, kde-format
 msgctxt "@item:inmenu compression strategy"
 msgid "Filter"
-msgstr "&Filter"
+msgstr "Filter"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:52
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:54
 #, kde-format
 msgctxt "@item:inmenu compression strategy"
 msgid "Huffman Encoding Only"
-msgstr ""
+msgstr "Alleen Huffman-codering"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:54
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:56
-#, fuzzy, kde-format
-#| msgctxt "name of the encoding target"
-#| msgid "Uuencoding"
+#, kde-format
 msgctxt "@item:inmenu compression strategy"
 msgid "Run-Length Encoding"
-msgstr "Uuencoding"
+msgstr "Run-lengte codering"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:56
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:58
 #, kde-format
 msgctxt "@item:inmenu compression strategy"
 msgid "Fixed Huffman Encoding"
-msgstr ""
+msgstr "Vaste Huffman-codering"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:67
 #, kde-format
 msgctxt "@option:check Create deflate stream without headers or footers"
 msgid "Create raw variant:"
-msgstr ""
+msgstr "Ruwe variant maken:"
 
 #: gui/io/streamcompressor/deflate/deflatecompressionstream.cpp:34
 #: gui/io/streamcompressor/gzip/gzipcompressionstream.cpp:36
 #: gui/io/streamcompressor/gzip/gzipcompressionstream.cpp:114
 #, kde-format
 msgid "Internal zlib error: %1"
-msgstr ""
+msgstr "Interne zlib-fout: %1"
 
 #: gui/io/streamcompressor/deflate/deflatecompressionstream.cpp:52
 #: gui/io/streamcompressor/gzip/gzipcompressionstream.cpp:54
 #, kde-format
 msgid "Unknown zlib error, code %1"
-msgstr ""
+msgstr "Onbekende zlib-fout, code %1"
 
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressor.cpp:89
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "gzip"
-msgstr ""
+msgstr "gzip"
 
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:67
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "File Info"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "File name:"
-msgstr "Bestandsinformatie"
+msgstr "Bestandsnaam:"
 
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:79
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Comment:"
-msgstr ""
+msgstr "Toelichting:"
 
 #: gui/io/streamcompressor/iodevicebytearrayoutput.cpp:21
 #, kde-format
 msgid "Error writing to underlying device: %1"
-msgstr ""
+msgstr "Fout bij schrijven naar onderliggend apparaat: %1"
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressor.cpp:118
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "xz"
-msgstr ""
+msgstr "xz"
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:31
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Compression preset level:"
-msgstr ""
+msgstr "Vooraf ingestelde compressieniveau:"
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:35
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Set as Default"
+#, kde-format
 msgctxt "@item:inmenu compression preset level"
 msgid "Default"
-msgstr "Als &standaard instellen"
+msgstr "Standaard"
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:44
 #, kde-format
 msgctxt "@option:check Use extreme variant of compression preset level"
 msgid "Use extreme variant:"
-msgstr ""
+msgstr "Extreme variant gebruiken:"
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:54
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Integrity check:"
-msgstr ""
+msgstr "Integriteitscontrole:"
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:59
-#, fuzzy, kde-format
-#| msgctxt "@item There are no windows."
-#| msgid "None."
+#, kde-format
 msgctxt "@item:inmenu integrity check"
 msgid "None"
 msgstr "Geen"
@@ -3624,18 +3608,16 @@ msgstr "Geen"
 #, kde-format
 msgctxt "@item:inmenu integrity check"
 msgid "CRC32"
-msgstr ""
+msgstr "CRC32"
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:63
 #, kde-format
 msgctxt "@item:inmenu integrity check"
 msgid "CRC64"
-msgstr ""
+msgstr "CRC64"
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:65
-#, fuzzy, kde-format
-#| msgctxt "name of the hash algorithm"
-#| msgid "SHA-256"
+#, kde-format
 msgctxt "@item:inmenu integrity check"
 msgid "SHA-256"
 msgstr "SHA-256"
@@ -3643,57 +3625,57 @@ msgstr "SHA-256"
 #: gui/io/streamcompressor/xz/xzcompressionstream.cpp:30
 #, kde-format
 msgid "Could not initialize lzma stream."
-msgstr ""
+msgstr "Kon lzma-stream niet initialiseren."
 
 #: gui/io/streamcompressor/xz/xzcompressionstream.cpp:48
 #, kde-format
 msgid "Unknown lzma error, code %1"
-msgstr ""
+msgstr "Onbekende lzma-fout, code %1"
 
 #: gui/io/streamcompressor/xz/xzcompressionstream.cpp:67
 #, kde-format
 msgid "Internal lzma error when compressing: %1"
-msgstr ""
+msgstr "Interne lzma-fout bij comprimeren: %1"
 
 #: gui/io/streamcompressor/zstd/bytearrayzstdstreamcompressor.cpp:48
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "ZStandard"
-msgstr ""
+msgstr "ZStandard"
 
 #: gui/io/streamcompressor/zstd/bytearrayzstdstreamcompressorconfigeditor.cpp:41
 #, kde-format
 msgctxt "@option:check"
 msgid "Content size in frame header:"
-msgstr ""
+msgstr "Grootte van de inhoud in framekop:"
 
 #: gui/io/streamcompressor/zstd/bytearrayzstdstreamcompressorconfigeditor.cpp:49
 #, kde-format
 msgctxt "@option:check"
 msgid "Content checksum at frame end:"
-msgstr ""
+msgstr "Inhoud controlesom aan frame-einde:"
 
 #: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:26
 #, kde-format
 msgid "Could not create zstd stream context."
-msgstr ""
+msgstr "Kon zstd-streamcontext niet aanmaken."
 
 #: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:31
 #: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:37
 #: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:45
 #, kde-format
 msgid "Internal zstd error on setup: %1"
-msgstr ""
+msgstr "Interne zstd-fout bij opzetten: %1"
 
 #: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:67
 #, kde-format
 msgid "Unknown zstd error, code %1"
-msgstr ""
+msgstr "Onbekende zstd-fout, code %1"
 
 #: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:86
 #, kde-format
 msgid "Internal zstd error when compressing: %1"
-msgstr ""
+msgstr "Interne zstd-fout bij comprimeren: %1"
 
 #: gui/io/streamencoder/base32/bytearraybase32streamencoder.cpp:131
 #, kde-format
@@ -3880,13 +3862,13 @@ msgstr "Scheiding:"
 #, kde-format
 msgctxt "@label:textbox substring which prefixes each value"
 msgid "Prefix:"
-msgstr ""
+msgstr "Voorvoegsel:"
 
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:70
 #, kde-format
 msgctxt "@label:textbox substring which postfixes each value"
 msgid "Postfix:"
-msgstr ""
+msgstr "Achtervoegsel:"
 
 #: gui/io/streamencoder/viewhtml/bytearrayviewhtmlstreamencoder.cpp:36
 #, kde-format

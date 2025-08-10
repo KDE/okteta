@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-09 01:59+0000\n"
-"PO-Revision-Date: 2025-08-03 12:10+0400\n"
+"PO-Revision-Date: 2025-08-09 15:19+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -37,53 +37,46 @@ msgid "File Info"
 msgstr "معلومات الملف"
 
 #: controllers/document/info/documentinfoview.cpp:67
-#, fuzzy, kde-format
-#| msgid "Type:"
+#, kde-format
 msgctxt "@label"
 msgid "Type:"
 msgstr "النوع:"
 
 #: controllers/document/info/documentinfoview.cpp:81
-#, fuzzy, kde-format
-#| msgid "Location:"
+#, kde-format
 msgctxt "@label"
 msgid "Location:"
-msgstr "الموقع:"
+msgstr "المكان:"
 
 #: controllers/document/info/documentinfoview.cpp:86
-#, fuzzy, kde-format
-#| msgid "Size:"
+#, kde-format
 msgctxt "@label"
 msgid "Size:"
 msgstr "الحجم:"
 
 #: controllers/document/info/documentinfoview.cpp:89
-#, fuzzy, kde-format
-#| msgid "Created/Loaded:"
+#, kde-format
 msgctxt "@label"
 msgid "Created/Loaded:"
 msgstr "أنشئ/محمل:"
 
 #: controllers/document/info/documentinfoview.cpp:93
-#, fuzzy, kde-format
-#| msgid "Last modified:"
+#, kde-format
 msgctxt "@label"
 msgid "Last modified:"
 msgstr "آخر تعديل:"
 
 #: controllers/document/info/documentinfoview.cpp:97
-#, fuzzy, kde-format
-#| msgid "Last synchronized:"
+#, kde-format
 msgctxt "@label"
 msgid "Last synchronized:"
 msgstr "آخر مزامنة:"
 
 #: controllers/document/info/documentinfoview.cpp:104
-#, fuzzy, kde-format
-#| msgid "Created:"
+#, kde-format
 msgctxt "@label"
 msgid "Created:"
-msgstr "تم إنشاؤه:"
+msgstr "أُنشئ في:"
 
 #: controllers/document/info/documentinfoview.cpp:156
 #, kde-format
@@ -164,11 +157,10 @@ msgid "No bookmarks"
 msgstr "العلامات"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:90
-#, fuzzy, kde-format
-#| msgid "Created:"
+#, kde-format
 msgctxt "@action"
 msgid "Create New"
-msgstr "تم إنشاؤه:"
+msgstr "أنشئ جديدًا"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:92
 #, kde-format
@@ -1590,7 +1582,12 @@ msgid "Start replace"
 msgstr "إبدأ التعويض"
 
 #: controllers/view/replace/replacedialog.cpp:38
-#, kde-kuit-format
+#, fuzzy, kde-kuit-format
+#| msgctxt "@info:whatsthis"
+#| msgid ""
+#| "If you press the <interface>Replace</interface> button, the bytes you "
+#| "entered above are searched for within the byte array and any occurrence "
+#| "is replaced with the replacement bytes."
 msgctxt "@info:whatsthis"
 msgid ""
 "If you press the <interface>Replace</interface> button, the bytes you "
