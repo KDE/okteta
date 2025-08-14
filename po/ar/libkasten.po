@@ -204,7 +204,7 @@ msgid ""
 "selected data will be copied to the clipboard with the settings you entered "
 "above."
 msgstr ""
-"إذا ضغطت على زر <interface>انسخ إلى الحافظة</interface> ؛ فإن البيانات "
+"إذا ضغطت على زر <interface>انسخ إلى الحافظة</interface>؛ فإن البيانات "
 "المختارة ستنسخ إلى الحافظة بالإعدادات التي أدخلتها في الأعلى."
 
 #: controllers/io/export/exportcontroller.cpp:39
@@ -245,7 +245,7 @@ msgid ""
 "If you press the <interface>Export to file</interface> button, the selected "
 "data will be copied to a file with the settings you entered above."
 msgstr ""
-"إذا ضغطت على زر <interface>صدر إلى ملف</interface> ؛ فإن البيانات المختارة "
+"إذا ضغطت على زر <interface>صدر إلى ملف</interface>؛ فإن البيانات المختارة "
 "ستنسخ إلى ملف بالإعدادات التي أدخلتها في الأعلى."
 
 #: controllers/io/insert/insertcontroller.cpp:39
@@ -286,8 +286,8 @@ msgid ""
 "generated with the settings you entered above and inserted into the document "
 "at the cursor position."
 msgstr ""
-"إذا ضغطت على زر <interface>أدرج</interface> ؛ فإن البيانات المولدة "
-"بالإعدادات التي أدخلتها في الأعلى في المستند عند موضع المؤشر."
+"إذا ضغطت على زر <interface>أدرج</interface>؛ فإن البيانات المولدة بالإعدادات "
+"التي أدخلتها في الأعلى في المستند عند موضع المؤشر."
 
 #: controllers/io/synchronize/synchronizecontroller.cpp:34
 #: controllers/shellwindow/viewareacontextmenu/viewareacontextmenucontroller.cpp:38
@@ -425,8 +425,8 @@ msgid ""
 "If you press the <interface>Create</interface> button, the data will be "
 "generated with the settings you entered above and inserted in a new document."
 msgstr ""
-"إذا ضغطت على زر <interface>أنشئ</interface> ؛ ستُولد بيانات بالإعدادات "
-"المدخلة في الأعلى ، و ستوضع في مستند جديد."
+"إذا ضغطت على زر <interface>أنشئ</interface>؛ ستُولد بيانات بالإعدادات المدخلة "
+"في الأعلى، و ستوضع في مستند جديد."
 
 #: gui/system/dialoghandler.cpp:34
 #, kde-kuit-format
