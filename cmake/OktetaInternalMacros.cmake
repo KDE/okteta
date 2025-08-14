@@ -260,10 +260,6 @@ function(okteta_add_library _baseName)
             ${OKTETA_ADD_LIBRARY_PRIVATE}
     )
 
-    target_include_directories(${_targetName}
-        PUBLIC "$<BUILD_INTERFACE:${${_targetName}_BINARY_DIR};${CMAKE_CURRENT_BINARY_DIR}>"
-    )
-
     set_target_properties(${_targetName} PROPERTIES
         ${_export_name_args}
         OUTPUT_NAME ${_libraryName}
