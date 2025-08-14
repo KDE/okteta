@@ -716,10 +716,6 @@ function(okteta_add_library _baseName)
             ${ARG_PRIVATE}
     )
 
-    target_include_directories(${_targetName}
-        PUBLIC "$<BUILD_INTERFACE:${${_targetName}_BINARY_DIR};${CMAKE_CURRENT_BINARY_DIR}>"
-    )
-
     if(ARG_KI18N_TRANSLATION_DOMAIN)
         target_compile_definitions(${_targetName}
             PRIVATE
