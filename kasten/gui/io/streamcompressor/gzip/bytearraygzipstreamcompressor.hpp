@@ -44,6 +44,8 @@ private:
 
     static inline constexpr int DefaultCompressionLevel = -1;
     static inline constexpr StrategyId DefaultStrategy = StrategyId::Default;
+    static const QString DefaultFileName;
+    static const QString DefaultComment;
 
 public:
     GZipStreamCompressorSettings();
@@ -65,8 +67,8 @@ public:
 public:
     int compressionLevel = DefaultCompressionLevel;
     StrategyId strategyId = DefaultStrategy;
-    QString fileName;
-    QString comment;
+    QString fileName = DefaultFileName;
+    QString comment = DefaultComment;
 };
 
 class ByteArrayGZipStreamCompressor : public AbstractByteArrayStreamCompressor

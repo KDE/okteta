@@ -55,6 +55,9 @@ inline void KConfigGroup::writeEntry(const char *key,
 
 namespace Kasten {
 
+const QString GZipStreamCompressorSettings::DefaultFileName = QString();
+const QString GZipStreamCompressorSettings::DefaultComment = QString();
+
 GZipStreamCompressorSettings::GZipStreamCompressorSettings() = default;
 
 bool GZipStreamCompressorSettings::operator==(const GZipStreamCompressorSettings& other) const
@@ -73,8 +76,8 @@ void GZipStreamCompressorSettings::loadConfig(const KConfigGroup& configGroup)
         compressionLevel = DefaultCompressionLevel;
     }
     strategyId = configGroup.readEntry(StrategyConfigKey, DefaultStrategy);
-    fileName = configGroup.readEntry(FileNameConfigKey, QString());
-    comment = configGroup.readEntry(CommentConfigKey, QString());
+    fileName = configGroup.readEntry(FileNameConfigKey, DefaultFileName);
+    comment = configGroup.readEntry(CommentConfigKey, DefaultComment);
 }
 
 void GZipStreamCompressorSettings::saveConfig(KConfigGroup& configGroup) const
