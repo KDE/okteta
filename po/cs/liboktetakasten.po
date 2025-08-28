@@ -2270,11 +2270,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, char_label)
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:126
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip column contains the character with the value"
-#| msgid "Character"
+#, kde-format
 msgid "Character value:"
-msgstr "Znak"
+msgstr ""
 
 #: controllers/view/structures/structurestool.cpp:68
 #: controllers/view/structures/structurestoolviewfactory.cpp:29
