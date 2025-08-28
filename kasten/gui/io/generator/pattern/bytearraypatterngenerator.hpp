@@ -57,9 +57,9 @@ public:
     void saveConfig(KConfigGroup& configGroup) const;
 
 public:
-    QByteArray pattern = QByteArray(1, 0);
-    Coding patternCoding = HexadecimalCoding;
-    int count = 1;
+    QByteArray pattern = DefaultPattern;
+    Coding patternCoding = DefaultPatternCoding;
+    int count = DefaultCount;
 };
 
 class ByteArrayPatternGenerator : public AbstractModelDataGenerator
