@@ -30,6 +30,7 @@ private:
     static const QString DefaultPrefix;
     static const QString DefaultPostfix;
     static const QString DefaultSeparator;
+    static constexpr Okteta::ValueCoding DefaultValueCoding = Okteta::HexadecimalCoding;
 
 public:
     ValuesStreamEncoderSettings();
@@ -49,10 +50,10 @@ public:
     void saveConfig(KConfigGroup& configGroup) const;
 
 public:
-    Okteta::ValueCoding valueCoding = Okteta::HexadecimalCoding;
-    QString prefix;
-    QString postfix;
-    QString separation;
+    Okteta::ValueCoding valueCoding = DefaultValueCoding;
+    QString prefix = DefaultPrefix;
+    QString postfix = DefaultPrefix;
+    QString separation = DefaultSeparator;
 };
 
 class ByteArrayValuesStreamEncoder : public AbstractByteArrayStreamEncoder

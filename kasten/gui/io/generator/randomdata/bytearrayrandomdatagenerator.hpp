@@ -41,7 +41,7 @@ public:
     void saveConfig(KConfigGroup& configGroup) const;
 
 public:
-    int size = 256;
+    int size = DefaultSize;
 };
 
 class ByteArrayRandomDataGenerator : public AbstractModelDataGenerator

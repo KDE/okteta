@@ -51,8 +51,8 @@ public:
     void saveConfig(KConfigGroup& configGroup) const;
 
 public:
-    QString fileName;
-    EncodingType encodingType = EncodingType::Base64;
+    QString fileName = DefaultFileName;
+    EncodingType encodingType = DefaultEncodingType;
 };
 
 class ByteArrayUuencodingStreamEncoder : public AbstractByteArrayStreamEncoder
