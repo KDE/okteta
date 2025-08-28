@@ -56,7 +56,7 @@ public:
     void saveConfig(KConfigGroup& configGroup) const;
 
 public:
-    AddressSizeId addressSizeId = AddressSizeId::FourBytes;
+    AddressSizeId addressSizeId = DefaultAddressSize;
 };
 
 class ByteArraySRecStreamEncoder : public AbstractByteArrayStreamEncoder

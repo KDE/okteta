@@ -63,10 +63,10 @@ public:
     void saveConfig(KConfigGroup& configGroup) const;
 
 public:
-    QString variableName;
-    PrimitiveDataType dataType = PrimitiveDataType::UnsignedChar;
-    int elementsPerLine = 4;
-    bool unsignedAsHexadecimal = true;
+    QString variableName = DefaultVariableName;
+    PrimitiveDataType dataType = DefaultDataType;
+    int elementsPerLine = DefaultElementsPerLine;
+    bool unsignedAsHexadecimal = DefaultUnsignedAsHexadecimal;
 };
 
 // TODO: General synchronizer would load matching encoder and decoder

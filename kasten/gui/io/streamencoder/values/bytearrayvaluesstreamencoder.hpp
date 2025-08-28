@@ -26,6 +26,7 @@ private:
     static constexpr char SeparatorConfigKey[] = "Separator";
 
     static const QString DefaultSeparator;
+    static constexpr Okteta::ValueCoding DefaultValueCoding = Okteta::HexadecimalCoding;
 
 public:
     ValuesStreamEncoderSettings();
@@ -42,8 +43,8 @@ public:
     void saveConfig(KConfigGroup& configGroup) const;
 
 public:
-    Okteta::ValueCoding valueCoding = Okteta::HexadecimalCoding;
-    QString separation;
+    Okteta::ValueCoding valueCoding = DefaultValueCoding;
+    QString separation = DefaultSeparator;
 };
 
 class ByteArrayValuesStreamEncoder : public AbstractByteArrayStreamEncoder

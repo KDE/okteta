@@ -47,7 +47,7 @@ public:
     void saveConfig(KConfigGroup& configGroup) const;
 
 public:
-    EncodingType encodingType = EncodingType::Classic;
+    EncodingType encodingType = DefaultEncodingType;
 };
 
 class ByteArrayBase32StreamEncoder : public AbstractByteArrayStreamEncoder

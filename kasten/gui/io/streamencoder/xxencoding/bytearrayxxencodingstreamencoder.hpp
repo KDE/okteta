@@ -40,7 +40,7 @@ public:
     void saveConfig(KConfigGroup& configGroup) const;
 
 public:
-    QString fileName;
+    QString fileName = DefaultFileName;
 };
 
 class ByteArrayXxencodingStreamEncoder : public AbstractByteArrayStreamEncoder
