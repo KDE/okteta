@@ -153,12 +153,10 @@ msgid "No bookmarks"
 msgstr ""
 
 #: controllers/view/bookmarks/bookmarksview.cpp:90
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu create a new view profile"
-#| msgid "Create New…"
+#, kde-format
 msgctxt "@action"
 msgid "Create New"
-msgstr "Vytvořit novou…"
+msgstr ""
 
 #: controllers/view/bookmarks/bookmarksview.cpp:92
 #, kde-format
@@ -194,12 +192,10 @@ msgid ""
 msgstr ""
 
 #: controllers/view/bookmarks/bookmarksview.cpp:119
-#, fuzzy, kde-format
-#| msgctxt "@title:column offset of the bookmark"
-#| msgid "Offset"
+#, kde-format
 msgctxt "@action"
 msgid "Go to Offset"
-msgstr "Posuv"
+msgstr ""
 
 #: controllers/view/bookmarks/bookmarksview.cpp:121
 #, kde-format
@@ -238,12 +234,10 @@ msgstr ""
 #: controllers/view/bookmarks/bookmarksview.cpp:144
 #: controllers/view/stringsextract/stringsextractview.cpp:191
 #: controllers/view/structures/structureview.cpp:386
-#, fuzzy, kde-format
-#| msgctxt "@title:column offset of the bookmark"
-#| msgid "Offset"
+#, kde-format
 msgctxt "@action"
 msgid "Copy Offset"
-msgstr "Posuv"
+msgstr ""
 
 #: controllers/view/bookmarks/bookmarksview.cpp:146
 #: controllers/view/stringsextract/stringsextractview.cpp:193
@@ -1432,12 +1426,10 @@ msgstr "Upravit"
 
 #: controllers/view/poddecoder/podtableview.cpp:271
 #: controllers/view/structures/structureview.cpp:395
-#, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to select a range"
-#| msgid "Select"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Select"
-msgstr "Vybrat"
+msgstr ""
 
 #: controllers/view/print/printtool.cpp:280
 #: controllers/view/print/printtool.cpp:310
@@ -3340,7 +3332,7 @@ msgstr ""
 #: gui/io/streamcompressor/bzip2/bytearraybzip2streamcompressorconfigeditor.cpp:49
 #, kde-format
 msgid "%1 kB"
-msgstr ""
+msgstr "%1 kB"
 
 #: gui/io/streamcompressor/bzip2/bzip2compressionstream.cpp:35
 #, kde-format
@@ -3385,12 +3377,10 @@ msgstr ""
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:35
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:37
 #: gui/io/streamcompressor/zstd/bytearrayzstdstreamcompressorconfigeditor.cpp:34
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Set as Default"
+#, kde-format
 msgctxt "@item:inmenu compression level"
 msgid "Default"
-msgstr "Na&stavit jako výchozí"
+msgstr ""
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:43
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:45
@@ -3401,21 +3391,17 @@ msgstr ""
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:48
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:50
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Set as Default"
+#, kde-format
 msgctxt "@item:inmenu compression strategy"
 msgid "Default"
-msgstr "Na&stavit jako výchozí"
+msgstr ""
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:50
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:52
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Filter"
+#, kde-format
 msgctxt "@item:inmenu compression strategy"
 msgid "Filter"
-msgstr "&Filtr"
+msgstr ""
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:52
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:54
@@ -3464,18 +3450,16 @@ msgid "gzip"
 msgstr ""
 
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:67
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "File Info"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "File name:"
-msgstr "Info o souboru"
+msgstr "Název souboru:"
 
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:79
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Comment:"
-msgstr ""
+msgstr "Komentář:"
 
 #: gui/io/streamcompressor/iodevicebytearrayoutput.cpp:21
 #, kde-format
@@ -3495,12 +3479,10 @@ msgid "Compression preset level:"
 msgstr ""
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:35
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Set as Default"
+#, kde-format
 msgctxt "@item:inmenu compression preset level"
 msgid "Default"
-msgstr "Na&stavit jako výchozí"
+msgstr ""
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:44
 #, kde-format
@@ -3515,12 +3497,10 @@ msgid "Integrity check:"
 msgstr ""
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:59
-#, fuzzy, kde-format
-#| msgctxt "There is no storage location assigned to yet."
-#| msgid "[None]"
+#, kde-format
 msgctxt "@item:inmenu integrity check"
 msgid "None"
-msgstr "[Žádný]"
+msgstr ""
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:61
 #, kde-format
@@ -3535,12 +3515,10 @@ msgid "CRC64"
 msgstr ""
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:65
-#, fuzzy, kde-format
-#| msgctxt "name of the hash algorithm"
-#| msgid "SHA-256"
+#, kde-format
 msgctxt "@item:inmenu integrity check"
 msgid "SHA-256"
-msgstr "SHA-256"
+msgstr ""
 
 #: gui/io/streamcompressor/xz/xzcompressionstream.cpp:30
 #, kde-format
