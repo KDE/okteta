@@ -49,7 +49,9 @@ public: // AbstractPieceTableChange API
     QString description() const override;
     [[nodiscard]]
     bool merge(const AbstractPieceTableChange* other) override;
+    [[nodiscard]]
     AddressRange apply(PieceTable* pieceTable) const override;
+    [[nodiscard]]
     AddressRange revert(PieceTable* pieceTable) const override;
     [[nodiscard]]
     ArrayChangeMetrics metrics() const override;
@@ -63,7 +65,9 @@ public:
 // e.g. several replaces of the same byte or an insert and replace of the inserted data
 
 public:
+    [[nodiscard]]
     AddressRangeList applyGroup(PieceTable* pieceTable) const;
+    [[nodiscard]]
     AddressRangeList revertGroup(PieceTable* pieceTable) const;
     [[nodiscard]]
     ArrayChangeMetricsList groupMetrics(bool reverted = false) const;
@@ -71,6 +75,7 @@ public:
     GroupPieceTableChange* parent() const;
 
 public: // TODO: this interface part is shared with PieceTableChangeHistory, try to use this fact
+    [[nodiscard]]
     bool appendChange(std::unique_ptr<AbstractPieceTableChange>&& change);
     void finishChange();
 

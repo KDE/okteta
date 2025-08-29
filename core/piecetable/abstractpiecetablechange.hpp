@@ -58,7 +58,9 @@ public: // API to be implemented
     [[nodiscard]]
     virtual bool merge(const AbstractPieceTableChange* other);
 
+    [[nodiscard]]
     virtual AddressRange apply(PieceTable* pieceTable) const = 0;
+    [[nodiscard]]
     virtual AddressRange revert(PieceTable* pieceTable) const = 0;
 
     [[nodiscard]]

@@ -23,6 +23,7 @@ public:
     ~Utf16CharValidator() override;
 
 public: // QValidator API
+    [[nodiscard]]
     QValidator::State validate(QString& input, int& pos) const override;
 };
 

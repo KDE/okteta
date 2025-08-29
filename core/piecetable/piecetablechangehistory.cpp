@@ -87,7 +87,7 @@ bool PieceTableChangeHistory::appendChange(std::unique_ptr<AbstractPieceTableCha
 
     bool isNotMerged = true;
     if (mActiveGroupChange) {
-        mActiveGroupChange->appendChange(std::move(change));
+        std::ignore = mActiveGroupChange->appendChange(std::move(change));
         isNotMerged = false; // TODO: hack for as long as subgroups are not undoable
     } else {
         if (mTryToMergeAppendedChange && mAppliedChangesCount > 0) {
