@@ -34,7 +34,8 @@ private Q_SLOTS:
     void onSettingsChanged();
 
 private:
-    ByteArrayValuesStreamEncoder* mEncoder;
+    ByteArrayValuesStreamEncoder* const mEncoder;
+
     ValuesStreamEncoderSettings mSettings;
 
 //     KComboBox* mValueCodingSelect;
