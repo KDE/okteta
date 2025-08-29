@@ -101,7 +101,7 @@ public Q_SLOTS: // settings
     void setOtherCharCodecName(const QString& codecName);
     void setSubstitutingMissingChars(bool isSubstitutingMissingChars);
     void setSubstituteByte(Okteta::Byte byte);
-    void setSubstituteByteCoding(Coding coding);
+    void setSubstituteByteCoding(Kasten::CharsetConversionTool::Coding coding);
 
 public Q_SLOTS: // actions
     void convertChars();
