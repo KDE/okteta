@@ -35,6 +35,7 @@ private Q_SLOTS: // test functions
     void testSearch();
 
 private:
+    [[nodiscard]]
     ViewData parseToViewData(const QByteArray& viewMarkup) const;
 };
 

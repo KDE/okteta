@@ -29,15 +29,21 @@ public:
     explicit TestDocumentFileSynchronizer(const QByteArray& header = QByteArray());
 
 public: // AbstractModelSynchronizer API
+    [[nodiscard]]
     AbstractSyncToRemoteJob* startSyncToRemote() override;
+    [[nodiscard]]
     AbstractSyncFromRemoteJob* startSyncFromRemote() override;
+    [[nodiscard]]
     AbstractSyncWithRemoteJob* startSyncWithRemote(const QUrl& url, AbstractModelSynchronizer::ConnectOption option) override;
 
+    [[nodiscard]]
     AbstractDocument* document() const override;
 
+    [[nodiscard]]
     LocalSyncState localSyncState() const override;
 
 public:
+    [[nodiscard]]
     const QByteArray& header() const;
 
 protected:

@@ -33,8 +33,10 @@ protected:
     AbstractByteArrayModelIfTest();
 
 protected: // our API
+    [[nodiscard]]
     virtual std::unique_ptr<AbstractByteArrayModel> createByteArrayModel() = 0;
     virtual void deleteByteArrayModel(std::unique_ptr<AbstractByteArrayModel>&& byteArrayModel) = 0;
+    [[nodiscard]]
     virtual bool byteArrayModelSizeCanBeChanged() const;
 
 private:
@@ -44,6 +46,7 @@ private:
     void checkContentsSwapped(Address firstStart, const AddressRange& secondSection);
     void clearSignalSpys();
 
+    [[nodiscard]]
     std::unique_ptr<KTestData> prepareTestInsert() const;
 
 private Q_SLOTS: // test functions

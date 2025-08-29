@@ -28,12 +28,19 @@ public:
     ~TestPieceTableChange() override;
 
 public: // AbstractPieceTableChange API
+    [[nodiscard]]
     int type() const override;
+    [[nodiscard]]
     QString description() const override;
+    [[nodiscard]]
     bool merge(const AbstractPieceTableChange* other) override;
+    [[nodiscard]]
     AddressRange apply(PieceTable* pieceTable) const override;
+    [[nodiscard]]
     AddressRange revert(PieceTable* pieceTable) const override;
+    [[nodiscard]]
     ArrayChangeMetrics metrics() const override;
+    [[nodiscard]]
     int dataSize() const override;
 
 private:

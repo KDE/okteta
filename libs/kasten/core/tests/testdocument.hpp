@@ -27,12 +27,17 @@ public:
     ~TestDocument() override;
 
 public: // API to be implemented
+    [[nodiscard]]
     QString title() const override;
+    [[nodiscard]]
     QString typeName() const override;
+    [[nodiscard]]
     QString mimeType() const override;
+    [[nodiscard]]
     ContentFlags contentFlags() const override;
 
 public:
+    [[nodiscard]]
     const QByteArray* data() const;
     void setData(const QByteArray& data);
 

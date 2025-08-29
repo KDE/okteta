@@ -19,8 +19,10 @@ class FixedSizeByteArrayModelAbstractByteArrayModelIfTest : public AbstractByteA
     Q_OBJECT
 
 protected: // AbstractByteArrayModelIfTest API
+    [[nodiscard]]
     std::unique_ptr<AbstractByteArrayModel> createByteArrayModel() override;
     void deleteByteArrayModel(std::unique_ptr<AbstractByteArrayModel>&& byteArrayModel) override;
+    [[nodiscard]]
     bool byteArrayModelSizeCanBeChanged() const override;
 };
 

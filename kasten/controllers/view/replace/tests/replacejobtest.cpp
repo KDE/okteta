@@ -40,6 +40,7 @@ public:
     {}
 
 public:
+    [[nodiscard]]
     int noOfReplacements() const { return m_noOfReplacements; }
 
 public: // If::ReplaceUserQueryable API

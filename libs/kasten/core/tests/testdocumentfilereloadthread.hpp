@@ -30,7 +30,9 @@ public: // QThread API
     void run() override;
 
 public:
+    [[nodiscard]]
     bool success() const;
+    [[nodiscard]]
     QByteArray byteArray() const;
 
 Q_SIGNALS:
