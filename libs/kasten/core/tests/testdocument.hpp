@@ -26,9 +26,11 @@ public:
     explicit TestDocument(const QByteArray& data);
     ~TestDocument() override;
 
-public: // API to be implemented
+public: // AbstractModel API
     [[nodiscard]]
     QString title() const override;
+
+public: // AbstractDocument API
     [[nodiscard]]
     QString typeName() const override;
     [[nodiscard]]
