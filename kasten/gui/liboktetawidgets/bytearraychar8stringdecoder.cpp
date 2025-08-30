@@ -145,6 +145,7 @@ ByteArrayChar8StringDecoder::CodeState ByteArrayChar8StringDecoder::doDecode(QBy
             } else if (character == QLatin1Char('a')) {
                 escapedChar = QLatin1Char('\a'); // audible bell
             }
+            // \0 is handled below as part of octal values
             if (!escapedChar.isNull()) {
                 Byte byte;
                 const bool success = m_charCodec->encode(&byte, escapedChar);
