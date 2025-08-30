@@ -9,9 +9,11 @@
 #ifndef OKTETA_BYTEARRAYCHAR8STRINGENCODER_HPP
 #define OKTETA_BYTEARRAYCHAR8STRINGENCODER_HPP
 
+// Okteta core
+#include <Okteta/Byte>
+
 class QByteArray;
 class QString;
-class QLatin1String;
 
 namespace Okteta {
 
@@ -21,14 +23,25 @@ class Character;
 class ByteArrayChar8StringEncoder
 {
 public:
+    /// Beware, not compatible with other enums
+    enum class ValueCoding
+    {
+        Hexadecimal = 0,
+        Octal = 1,
+    };
+
+public:
     [[nodiscard]]
     QString encodeAsString(const char* byteArrayData, int byteArraySize, const CharCodec* charCodec) const;
     [[nodiscard]]
     QString encodeAsString(const QByteArray& byteArray, const CharCodec* charCodec) const;
+    [[nodiscard]]
+    QString encodeAsString(Byte byte, const CharCodec* charCodec,
+                           ValueCoding escapeValueCoding) const;
 
 private:
     [[nodiscard]]
-    static QLatin1String encodeAsControlString(Character character);
+    static QString encodeAsControlString(Character character);
 };
 
 }

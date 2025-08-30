@@ -17,21 +17,18 @@
 
 namespace Okteta {
 
-QLatin1String ByteArrayChar8StringEncoder::encodeAsControlString(Character character)
+QString ByteArrayChar8StringEncoder::encodeAsControlString(Character character)
 {
-    const char* string;
     switch (character.unicode()) {
-    case '\a': string = "\\a"; break;
-    case '\b': string = "\\b"; break;
-    case '\f': string = "\\f"; break;
-    case '\n': string = "\\n"; break;
-    case '\r': string = "\\r"; break;
-    case '\t': string = "\\t"; break;
-    case '\v': string = "\\v"; break;
-    default: string = nullptr; break;
+    case '\a': return QStringLiteral("\\a"); break;
+    case '\b': return QStringLiteral("\\b"); break;
+    case '\f': return QStringLiteral("\\f"); break;
+    case '\n': return QStringLiteral("\\n"); break;
+    case '\r': return QStringLiteral("\\r"); break;
+    case '\t': return QStringLiteral("\\t"); break;
+    case '\v': return QStringLiteral("\\v"); break;
+    default: return QString(); break;
     }
-
-    return QLatin1String(string);
 }
 
 QString ByteArrayChar8StringEncoder::encodeAsString(const QByteArray& byteArray, const CharCodec* charCodec) const
@@ -56,8 +53,8 @@ QString ByteArrayChar8StringEncoder::encodeAsString(const char* byteArrayData, i
                 }
                 continue;
             }
-            const QLatin1String controlString = encodeAsControlString(character);
-            if (controlString.data() != nullptr) {
+            const QString controlString = encodeAsControlString(character);
+            if (!controlString.isEmpty()) {
                 result.append(controlString);
                 continue;
             }
@@ -68,6 +65,33 @@ QString ByteArrayChar8StringEncoder::encodeAsString(const char* byteArrayData, i
     }
 
     return result;
+}
+
+QString ByteArrayChar8StringEncoder::encodeAsString(Byte byte,
+                                                    const CharCodec* charCodec,
+                                                    ValueCoding escapeValueCoding) const
+{
+    const Character character = charCodec->decode(byte);
+    if (!character.isUndefined()) {
+        if (character.isPrint()) {
+            if (character == QLatin1Char('\\')) {
+                return QStringLiteral("\\\\");
+            }
+
+            return QString(character);
+        }
+        const QString controlString = encodeAsControlString(character);
+        if (!controlString.isEmpty()) {
+            return controlString;
+        }
+    }
+    const unsigned int numericValue = static_cast<unsigned char>(byte);
+    if (escapeValueCoding == ValueCoding::Hexadecimal) {
+        // TODO: \X vs. \x?
+        return QStringLiteral("\\x%1").arg(numericValue, 2, 16, QLatin1Char('0'));
+    }
+
+    return QStringLiteral("\\%1").arg(numericValue, 3, 8, QLatin1Char('0'));
 }
 
 }

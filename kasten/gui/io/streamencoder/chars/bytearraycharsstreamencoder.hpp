@@ -11,13 +11,46 @@
 
 // lib
 #include "abstractbytearraystreamencoder.hpp"
+// Okteta core
+#include <Okteta/OktetaCore>
 // Qt
 #include <QString>
+
+class KConfigGroup;
 
 namespace Kasten {
 
 class CharsStreamEncoderSettings
 {
+public:
+    enum class EncodeMode
+    {
+        Substitute = 0,
+        EscapeCStyle = 1,
+        _Count,
+    };
+
+    static inline constexpr int EncodeModeCount = static_cast<int>(EncodeMode::_Count);
+    static const std::array<QString, EncodeModeCount> encodeModeConfigValueList;
+
+    /// Beware, not compatible with other enums
+    enum class EscapedValueCoding
+    {
+        Hexadecimal = 0,
+        Octal = 1,
+        _Count,
+    };
+
+    static inline constexpr int EscapedValueCodingCount = static_cast<int>(EscapedValueCoding::_Count);
+    static const std::array<QString, EscapedValueCodingCount> escapedValueCodingConfigValueList;
+
+private:
+    static inline constexpr char EncodeModeConfigKey[] = "EncodeMode";
+    static inline constexpr char EscapedValueCodingConfigKey[] = "EscapedValueCoding";
+
+    static inline constexpr EncodeMode DefaultEncodeMode = EncodeMode::Substitute;
+    static inline constexpr EscapedValueCoding DefaultEscapedValueCoding = EscapedValueCoding::Hexadecimal;
+
 public:
     CharsStreamEncoderSettings();
     CharsStreamEncoderSettings(const CharsStreamEncoderSettings&) = default;
@@ -28,8 +61,17 @@ public:
     CharsStreamEncoderSettings& operator=(const CharsStreamEncoderSettings&) = default;
     CharsStreamEncoderSettings& operator=(CharsStreamEncoderSettings&&) = default;
 
+    [[nodiscard]]
+    bool operator==(const CharsStreamEncoderSettings& other) const;
+
+public:
+    void loadConfig(const KConfigGroup& configGroup);
+    void saveConfig(KConfigGroup& configGroup) const;
+
 public:
     QString codecName;
+    EncodeMode encodeMode = DefaultEncodeMode;
+    EscapedValueCoding escapedValueCoding = DefaultEscapedValueCoding;
     QChar undefinedChar = {QLatin1Char('?')};
     QChar substituteChar = {QLatin1Char('.')};
 };
@@ -39,9 +81,17 @@ class ByteArrayCharsStreamEncoder : public AbstractByteArrayStreamEncoder
 {
     Q_OBJECT
 
+private:
+    static inline constexpr char ConfigGroupId[] = "ByteArrayCharsStreamEncoder";
+
 public:
     ByteArrayCharsStreamEncoder();
     ~ByteArrayCharsStreamEncoder() override;
+
+public:
+    [[nodiscard]]
+    CharsStreamEncoderSettings settings() const;
+    void setSettings(const CharsStreamEncoderSettings& settings);
 
 protected: // AbstractByteArrayStreamEncoder API
     [[nodiscard]]
@@ -53,6 +103,8 @@ protected: // AbstractByteArrayStreamEncoder API
 private:
     CharsStreamEncoderSettings mSettings;
 };
+
+inline CharsStreamEncoderSettings ByteArrayCharsStreamEncoder::settings() const { return mSettings; }
 
 }
 

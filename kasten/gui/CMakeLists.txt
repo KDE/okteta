@@ -239,6 +239,8 @@ oktetakastengui_streamencoder_sources(
 oktetakastengui_streamencoder_sources(
     SUBDIR io/streamencoder/chars
     PRIVATE
+        ByteArrayCharsStreamEncoderConfigEditor
+        ByteArrayCharsStreamEncoderConfigEditorFactory
         ByteArrayCharsStreamEncoder
 )
 oktetakastengui_streamencoder_sources(

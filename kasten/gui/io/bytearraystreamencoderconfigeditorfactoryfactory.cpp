@@ -11,6 +11,7 @@
 // lib
 #include "streamencoder/sourcecode//bytearraysourcecodestreamencoderconfigeditorfactory.hpp"
 #include "streamencoder/values/bytearrayvaluesstreamencoderconfigeditorfactory.hpp"
+#include "streamencoder/chars/bytearraycharsstreamencoderconfigeditorfactory.hpp"
 #include "streamencoder/base32/bytearraybase32streamencoderconfigeditorfactory.hpp"
 #include "streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditorfactory.hpp"
 #include "streamencoder/xxencoding/bytearrayxxencodingstreamencoderconfigeditorfactory.hpp"
@@ -47,6 +48,7 @@ std::vector<std::unique_ptr<AbstractModelStreamEncoderConfigEditorFactory>> Byte
     auto result = ByteArrayStreamEncoderConfigEditorFactory::make_unique_vector<AbstractModelStreamEncoderConfigEditorFactory>(
         new ByteArraySourceCodeStreamEncoderConfigEditorFactory(),
         new ByteArrayValuesStreamEncoderConfigEditorFactory(),
+        new ByteArrayCharsStreamEncoderConfigEditorFactory(),
         new ByteArrayBase32StreamEncoderConfigEditorFactory(),
         new ByteArraySRecStreamEncoderConfigEditorFactory(),
         new ByteArrayIHexStreamEncoderConfigEditorFactory(),
