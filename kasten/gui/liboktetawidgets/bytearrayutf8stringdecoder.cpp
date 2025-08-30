@@ -135,6 +135,7 @@ ByteArrayUtf8StringDecoder::CodeState ByteArrayUtf8StringDecoder::doDecode(QByte
             } else if (character == QLatin1Char('a')) {
                 escapedChar = QLatin1Char('\a'); // audible bell
             }
+            // \0 is handled below as part of octal values
             if (!escapedChar.isNull()) {
                 const QByteArray bytes = m_utf8Codec->fromUnicode(&escapedChar, 1);
                 if (resultSize + bytes.size() <= maxResultSize) {
