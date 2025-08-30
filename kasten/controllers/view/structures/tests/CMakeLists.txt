@@ -1,3 +1,5 @@
+set(SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/../parsers)
+
 ecm_add_tests(
     primitivearraytest.cpp
     arraydatainformationtest.cpp
@@ -6,7 +8,6 @@ ecm_add_tests(
     uniondatainformationtest.cpp
     allprimitivetypestest.cpp
     scriptvalueconvertertest.cpp
-    osdparsertest.cpp
     commonparsertest.cpp
     jsparsertest.cpp
     customtostringtest.cpp
@@ -26,6 +27,20 @@ ecm_add_test(
         KF5::I18n
         Qt5::Test
 )
+
+ecm_add_test(
+    ${SUTDIR}/abstractstructureparser.cpp
+    ${SUTDIR}/osdparser.cpp
+    osdparsertest.cpp
+
+    TEST_NAME osdparsertest
+    NAME_PREFIX oktetakasten-controllers-structures-
+    LINK_LIBRARIES
+        OktetaKastenControllersStructuresDataTypes
+        KF5::I18n
+        Qt5::Test
+)
+target_compile_definitions(osdparsertest PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")
 
 # remove useless default definition of QT_TESTCASE_BUILDDIR in interface from imported target Qt5::Test
 get_target_property(qttestdefs Qt5::Test INTERFACE_COMPILE_DEFINITIONS)
