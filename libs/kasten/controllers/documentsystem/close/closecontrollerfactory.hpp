@@ -21,7 +21,7 @@ class AbstractDocumentStrategy;
 class KASTENCONTROLLERS_EXPORT CloseControllerFactory : public AbstractXmlGuiControllerFactory
 {
 public:
-    explicit CloseControllerFactory(AbstractDocumentStrategy* documentStrategy);
+    explicit CloseControllerFactory(AbstractDocumentStrategy* documentStrategy, bool supportMultiple = true);
     CloseControllerFactory(const CloseControllerFactory&) = delete;
     CloseControllerFactory(CloseControllerFactory&&) = delete;
 
@@ -36,6 +36,7 @@ public: // AbstractXmlGuiControllerFactory API
 
 private:
     AbstractDocumentStrategy* const m_documentStrategy;
+    const bool m_supportMultiple;
 };
 
 }

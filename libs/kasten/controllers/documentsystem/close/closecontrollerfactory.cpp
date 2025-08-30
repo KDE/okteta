@@ -13,8 +13,9 @@
 
 namespace Kasten {
 
-CloseControllerFactory::CloseControllerFactory(AbstractDocumentStrategy* documentStrategy)
+CloseControllerFactory::CloseControllerFactory(AbstractDocumentStrategy* documentStrategy, bool supportMultiple)
     : m_documentStrategy(documentStrategy)
+    , m_supportMultiple(supportMultiple)
 {
 }
 
@@ -22,7 +23,7 @@ CloseControllerFactory::~CloseControllerFactory() = default;
 
 std::unique_ptr<AbstractXmlGuiController> CloseControllerFactory::create(KXMLGUIClient* guiClient) const
 {
-    return std::make_unique<CloseController>(m_documentStrategy, guiClient);
+    return std::make_unique<CloseController>(m_documentStrategy, guiClient, m_supportMultiple);
 }
 
 }
