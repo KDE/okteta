@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-29 02:01+0000\n"
+"POT-Creation-Date: 2025-08-31 02:05+0000\n"
 "PO-Revision-Date: 2010-09-24 20:24+0530\n"
 "Last-Translator: Rajesh Ranjan <rajesh672@gmail.com>\n"
 "Language-Team: Maithili <bhashaghar@googlegroups.com>\n"
@@ -3722,11 +3722,49 @@ msgctxt "@info:tooltip"
 msgid "The preview uses maximally the first 100 bytes."
 msgstr ""
 
-#: gui/io/streamencoder/chars/bytearraycharsstreamencoder.cpp:27
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoder.cpp:118
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "Characters"
 msgstr "संप्रतीक"
+
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:34
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Non-printable encode mode:"
+msgstr ""
+
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:38
+#, kde-format
+msgctxt "@item:inmenu encode mode"
+msgid "Substitute"
+msgstr ""
+
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:40
+#, kde-format
+msgctxt "@item:inmenu encode mode"
+msgid "Escape C-Style"
+msgstr ""
+
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:53
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Encoding for escaped chars:"
+msgstr ""
+
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:57
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip column contains the value in hexadecimal format"
+#| msgid "Hexadecimal"
+msgctxt "@item:inmenu escape value encoding"
+msgid "Hexadecimal"
+msgstr "हेक्साडेसीमल"
+
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:59
+#, kde-format
+msgctxt "@item:inmenu escape value encoding"
+msgid "Octal"
+msgstr ""
 
 #: gui/io/streamencoder/ihex/bytearrayihexstreamencoder.cpp:151
 #, kde-format

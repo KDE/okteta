@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-29 02:01+0000\n"
+"POT-Creation-Date: 2025-08-31 02:05+0000\n"
 "PO-Revision-Date: 2013-06-21 06:20+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -3859,11 +3859,56 @@ msgctxt "@info:tooltip"
 msgid "The preview uses maximally the first 100 bytes."
 msgstr "Қарап-шығу үшін ең көбі 100 байт алынсын"
 
-#: gui/io/streamencoder/chars/bytearraycharsstreamencoder.cpp:27
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoder.cpp:118
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "Characters"
 msgstr "Таңбалар"
+
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:34
+#, fuzzy, kde-format
+#| msgid "Show Non-printable:"
+msgctxt "@label:listbox"
+msgid "Non-printable encode mode:"
+msgstr "Таңбасы жоқтарын көрсету:"
+
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:38
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "@label:textbox byte to use for chars which are not part of the target "
+#| "charset"
+#| msgid "Substitute byte:"
+msgctxt "@item:inmenu encode mode"
+msgid "Substitute"
+msgstr "Ауыстыратын байт:"
+
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:40
+#, kde-format
+msgctxt "@item:inmenu encode mode"
+msgid "Escape C-Style"
+msgstr ""
+
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:53
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Encoding for escaped chars:"
+msgstr ""
+
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:57
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip column contains the value in hexadecimal format"
+#| msgid "Hexadecimal"
+msgctxt "@item:inmenu escape value encoding"
+msgid "Hexadecimal"
+msgstr "Оналтылық"
+
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:59
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip column contains the value in octal format"
+#| msgid "Octal"
+msgctxt "@item:inmenu escape value encoding"
+msgid "Octal"
+msgstr "Сегіздік"
 
 #: gui/io/streamencoder/ihex/bytearrayihexstreamencoder.cpp:151
 #, kde-format
@@ -4215,9 +4260,6 @@ msgstr "UTF-8"
 #~ "\n"
 #~ "Түрі: %4\n"
 #~ "Өшемі: %5 (%1 еншілесі)"
-
-#~ msgid "Show Non-printable:"
-#~ msgstr "Таңбасы жоқтарын көрсету:"
 
 #~ msgid " byte"
 #~ msgid_plural " bytes"

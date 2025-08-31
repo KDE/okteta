@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-29 02:01+0000\n"
+"POT-Creation-Date: 2025-08-31 02:05+0000\n"
 "PO-Revision-Date: 2016-07-11 21:35+0100\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -3888,11 +3888,56 @@ msgctxt "@info:tooltip"
 msgid "The preview uses maximally the first 100 bytes."
 msgstr "Forhåndsvisningen bruger maksimalt de første 100 bytes."
 
-#: gui/io/streamencoder/chars/bytearraycharsstreamencoder.cpp:27
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoder.cpp:118
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "Characters"
 msgstr "Tegn"
+
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:34
+#, fuzzy, kde-format
+#| msgid "Show Non-printable:"
+msgctxt "@label:listbox"
+msgid "Non-printable encode mode:"
+msgstr "Vis alle tegn:"
+
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:38
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "@label:textbox byte to use for chars which are not part of the target "
+#| "charset"
+#| msgid "Substitute byte:"
+msgctxt "@item:inmenu encode mode"
+msgid "Substitute"
+msgstr "Erstat byte:"
+
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:40
+#, kde-format
+msgctxt "@item:inmenu encode mode"
+msgid "Escape C-Style"
+msgstr ""
+
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:53
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Encoding for escaped chars:"
+msgstr ""
+
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:57
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip column contains the value in hexadecimal format"
+#| msgid "Hexadecimal"
+msgctxt "@item:inmenu escape value encoding"
+msgid "Hexadecimal"
+msgstr "Hexadecimal"
+
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:59
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip column contains the value in octal format"
+#| msgid "Octal"
+msgctxt "@item:inmenu escape value encoding"
+msgid "Octal"
+msgstr "Oktal"
 
 #: gui/io/streamencoder/ihex/bytearrayihexstreamencoder.cpp:151
 #, kde-format
@@ -4262,9 +4307,6 @@ msgstr "UTF-8:"
 #~ "\n"
 #~ "Type: %4\n"
 #~ "Størrelse: %5 (%1 børn)"
-
-#~ msgid "Show Non-printable:"
-#~ msgstr "Vis alle tegn:"
 
 #~ msgctxt "@label:spinbox number of bytes to insert"
 #~ msgid "Number:"

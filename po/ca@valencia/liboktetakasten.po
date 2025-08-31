@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-29 02:01+0000\n"
+"POT-Creation-Date: 2025-08-31 02:05+0000\n"
 "PO-Revision-Date: 2025-08-09 09:03+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -430,7 +430,7 @@ msgid ""
 "Select the direction the bytes are converted, to or from the selected "
 "charset."
 msgstr ""
-"Seleccioneu la direcció de conversió dels bits, a o des del joc de caràcters "
+"Trieu la direcció de conversió dels bits, a o des del joc de caràcters "
 "seleccionat."
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:81
@@ -443,7 +443,7 @@ msgstr "El joc de caràcters al que es convertixen els bits."
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Select the charset the bytes are converted to."
-msgstr "Seleccioneu el joc de caràcters al que es convertixen els bits."
+msgstr "Trieu el joc de caràcters al que es convertixen els bits."
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:101
 #, kde-format
@@ -459,9 +459,9 @@ msgid ""
 "Selects if bytes should be substituted with a default byte if its char in "
 "the source charset is not part of the target charset."
 msgstr ""
-"Seleccioneu si els bytes s'han de substituir amb un byte predeterminat si el "
-"seu caràcter en el joc de caràcters origen no és part del joc de caràcters "
-"de destinació."
+"Trieu si els bytes s'han de substituir amb un byte predeterminat si el seu "
+"caràcter en el joc de caràcters origen no és part del joc de caràcters de "
+"destinació."
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:110
 #, kde-format
@@ -576,7 +576,7 @@ msgstr "Algorisme:"
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Select the algorithm to use for the checksum."
-msgstr "Seleccioneu l'algorisme que s'utilitzarà per a la suma de verificació."
+msgstr "Trieu l'algorisme que s'utilitzarà per a la suma de verificació."
 
 #: controllers/view/checksum/checksumview.cpp:80
 #, kde-format
@@ -646,13 +646,13 @@ msgstr "Operació:"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The operation to use for the filter."
-msgstr "Seleccioneu l'operació que s'utilitzarà amb el filtre."
+msgstr "Trieu l'operació que s'utilitzarà amb el filtre."
 
 #: controllers/view/filter/filterview.cpp:56
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Select the operation to use for the filter."
-msgstr "Seleccioneu l'operació que s'utilitzarà amb el filtre."
+msgstr "Trieu l'operació que s'utilitzarà amb el filtre."
 
 #: controllers/view/filter/filterview.cpp:85
 #, kde-format
@@ -703,8 +703,8 @@ msgstr "Des&plaçament:"
 msgctxt "@info:whatsthis"
 msgid "Enter an offset to go to, or select a previous offset from the list."
 msgstr ""
-"Introduïu un desplaçament cap a on anar, o seleccioneu un desplaçament "
-"anterior de la llista."
+"Introduïu un desplaçament cap a on anar, o trieu un desplaçament anterior de "
+"la llista."
 
 #: controllers/view/gotooffset/gotooffsetview.cpp:82
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:111
@@ -1084,7 +1084,7 @@ msgstr "L'operand amb el qual es fa l'operació."
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Enter an operand, or select a previous operand from the list."
-msgstr "Introduïu un operand, o seleccioneu un operand previ de la llista."
+msgstr "Introduïu un operand, o trieu un operand previ de la llista."
 
 #: controllers/view/libbytearrayfilter/filter/operandbytearrayfilterparametersetedit.cpp:52
 #, kde-format
@@ -1310,8 +1310,8 @@ msgid ""
 "Enter the bytes to search for, or select bytes previously searched for from "
 "the list."
 msgstr ""
-"Introduïu els bytes que es buscaran, o seleccioneu els bytes buscats "
-"anteriorment de la llista."
+"Introduïu els bytes que es buscaran, o trieu els bytes buscats anteriorment "
+"de la llista."
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:101
 #, kde-format
@@ -1385,7 +1385,7 @@ msgid ""
 "Choose whether you want the input to be inserted or to overwrite existing "
 "data."
 msgstr ""
-"Seleccioneu si voleu que l'entrada s'inserisca o que sobreescriga les dades "
+"Trieu si voleu que l'entrada s'inserisca o que sobreescriga les dades "
 "existents."
 
 #: controllers/view/poddecoder/poddecodertool.cpp:94
@@ -1498,7 +1498,7 @@ msgstr "Edita"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Select"
-msgstr "Selecciona"
+msgstr "Tria"
 
 #: controllers/view/print/printtool.cpp:280
 #: controllers/view/print/printtool.cpp:310
@@ -1615,8 +1615,8 @@ msgid ""
 "Enter the bytes to replace with, or select bytes previously replaced with "
 "from the list."
 msgstr ""
-"Introduïu els bytes amb els quals substituir, o seleccioneu els bytes previs "
-"de substitució de la llista."
+"Introduïu els bytes amb els quals substituir, o trieu els bytes previs de "
+"substitució de la llista."
 
 #: controllers/view/replace/replacedialog.cpp:62
 #, kde-format
@@ -1704,7 +1704,7 @@ msgstr "Busca"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Select Range…"
-msgstr "&Selecciona l'interval…"
+msgstr "&Tria l'interval…"
 
 #: controllers/view/selectrange/selectrangetool.cpp:61
 #, kde-format
@@ -1734,13 +1734,13 @@ msgstr "Final relatiu"
 #, kde-format
 msgctxt "@action:button"
 msgid "&Select"
-msgstr "&Selecciona"
+msgstr "&Tria"
 
 #: controllers/view/selectrange/selectrangeview.cpp:128
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the range."
-msgstr "Seleccioneu l'interval."
+msgstr "Trieu l'interval."
 
 #: controllers/view/selectrange/selectrangeview.cpp:130
 #, kde-kuit-format
@@ -1749,9 +1749,9 @@ msgid ""
 "If you press the <interface>Select</interface> button, the cursor will be "
 "moved in the document to or, on your option, by the offset you entered above."
 msgstr ""
-"Si premeu el botó <interface>Selecciona</interface>, el cursor es mourà en "
-"el document, o de manera opcional, segons el desplaçament que heu indicat "
-"més amunt."
+"Si premeu el botó <interface>Tria</interface>, el cursor es mourà en el "
+"document, o de manera opcional, segons el desplaçament que heu indicat més "
+"amunt."
 
 #: controllers/view/stringsextract/containedstringtablemodel.cpp:118
 #, kde-format
@@ -1872,13 +1872,13 @@ msgstr ""
 #, kde-format
 msgctxt "@action"
 msgid "Select"
-msgstr "Selecciona"
+msgstr "Tria"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:200
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Selects the selected string in the view."
-msgstr "Selecciona la cadena seleccionada en la visualització."
+msgstr "Tria la cadena seleccionada en la visualització."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:344
 #, kde-format
@@ -3368,8 +3368,7 @@ msgctxt "@info:whatsthis"
 msgid ""
 "Enter a pattern to search for, or select a previous pattern from the list."
 msgstr ""
-"Introduïu un patró que es buscarà, o seleccioneu un patró anterior de la "
-"llista."
+"Introduïu un patró que es buscarà, o trieu un patró anterior de la llista."
 
 #: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:52
 #, kde-format
@@ -3739,11 +3738,55 @@ msgctxt "@info:tooltip"
 msgid "The preview uses maximally the first 100 bytes."
 msgstr "La vista prèvia utilitza els 100 primers bytes com a màxim."
 
-#: gui/io/streamencoder/chars/bytearraycharsstreamencoder.cpp:27
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoder.cpp:118
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "Characters"
 msgstr "Caràcters"
+
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:34
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Non-printable encode mode:"
+msgstr ""
+
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:38
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "@label:textbox byte to use for chars which are not part of the target "
+#| "charset"
+#| msgid "Substitute byte:"
+msgctxt "@item:inmenu encode mode"
+msgid "Substitute"
+msgstr "Byte de substitució:"
+
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:40
+#, kde-format
+msgctxt "@item:inmenu encode mode"
+msgid "Escape C-Style"
+msgstr ""
+
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:53
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Encoding for escaped chars:"
+msgstr ""
+
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:57
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip column contains the value in hexadecimal format"
+#| msgid "Hexadecimal"
+msgctxt "@item:inmenu escape value encoding"
+msgid "Hexadecimal"
+msgstr "Hexadecimal"
+
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:59
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip column contains the value in octal format"
+#| msgid "Octal"
+msgctxt "@item:inmenu escape value encoding"
+msgid "Octal"
+msgstr "Octal"
 
 #: gui/io/streamencoder/ihex/bytearrayihexstreamencoder.cpp:151
 #, kde-format

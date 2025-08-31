@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-29 02:01+0000\n"
+"POT-Creation-Date: 2025-08-31 02:05+0000\n"
 "PO-Revision-Date: 2025-08-09 19:35+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -3747,11 +3747,55 @@ msgctxt "@info:tooltip"
 msgid "The preview uses maximally the first 100 bytes."
 msgstr "У перегляді не більше перших 100 байтів."
 
-#: gui/io/streamencoder/chars/bytearraycharsstreamencoder.cpp:27
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoder.cpp:118
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "Characters"
 msgstr "Символи"
+
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:34
+#, fuzzy, kde-format
+#| msgid "Show Non-printable:"
+msgctxt "@label:listbox"
+msgid "Non-printable encode mode:"
+msgstr "Показ недрукованих символів:"
+
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:38
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "@label:textbox byte to use for chars which are not part of the target "
+#| "charset"
+#| msgid "Substitute byte:"
+msgctxt "@item:inmenu encode mode"
+msgid "Substitute"
+msgstr "Байт-замінник:"
+
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:40
+#, kde-format
+msgctxt "@item:inmenu encode mode"
+msgid "Escape C-Style"
+msgstr ""
+
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:53
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Encoding for escaped chars:"
+msgstr ""
+
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:57
+#, fuzzy, kde-format
+#| msgid "Hexadecimal"
+msgctxt "@item:inmenu escape value encoding"
+msgid "Hexadecimal"
+msgstr "Шістнадцяткове"
+
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:59
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip column contains the value in octal format"
+#| msgid "Octal"
+msgctxt "@item:inmenu escape value encoding"
+msgid "Octal"
+msgstr "Вісімкове"
 
 #: gui/io/streamencoder/ihex/bytearrayihexstreamencoder.cpp:151
 #, kde-format
@@ -4143,9 +4187,6 @@ msgstr "UTF-8"
 #~ "Тип: %4\n"
 #~ "Розмір: %5 (%1 дочірній об’єкт)"
 
-#~ msgid "Show Non-printable:"
-#~ msgstr "Показ недрукованих символів:"
-
 #~ msgctxt "@label:spinbox number of bytes to insert"
 #~ msgid "Number:"
 #~ msgstr "Номер:"
@@ -4191,9 +4232,6 @@ msgstr "UTF-8"
 
 #~ msgid "Decimal"
 #~ msgstr "Десяткове"
-
-#~ msgid "Hexadecimal"
-#~ msgstr "Шістнадцяткове"
 
 #~ msgid "Unsigned values display"
 #~ msgstr "Показ значень без знаку"
