@@ -703,8 +703,8 @@ msgstr "Des&plaçament:"
 msgctxt "@info:whatsthis"
 msgid "Enter an offset to go to, or select a previous offset from the list."
 msgstr ""
-"Introduïu un desplaçament cap a on anar, o trieu un desplaçament anterior de "
-"la llista."
+"Introduïu un desplaçament cap a on anar o trieu-ne un anterior des de la "
+"llista."
 
 #: controllers/view/gotooffset/gotooffsetview.cpp:82
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:111
@@ -3367,8 +3367,7 @@ msgstr "Patró:"
 msgctxt "@info:whatsthis"
 msgid ""
 "Enter a pattern to search for, or select a previous pattern from the list."
-msgstr ""
-"Introduïu un patró que es buscarà, o trieu un patró anterior de la llista."
+msgstr "Introduïu un patró de busca o trieu-ne un anterior des de la llista."
 
 #: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:52
 #, kde-format

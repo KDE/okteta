@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: kdesdk-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-31 02:05+0000\n"
-"PO-Revision-Date: 2025-08-09 21:56+0300\n"
+"PO-Revision-Date: 2025-08-31 17:45+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.04.3\n"
+"X-Generator: Lokalize 25.08.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2784,7 +2784,7 @@ msgctxt ""
 "@item:inmenu  The layout will adapt to the size, but only with complete "
 "groups of bytes."
 msgid "&Wrap Only Complete Byte Groups"
-msgstr "Yalnızca Tam Bayt Gruplarını &Kaydır"
+msgstr "Yalnızca tam bayt gruplarını &kaydır"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:102
 #, kde-format
@@ -2822,7 +2822,7 @@ msgstr "&Karakterler"
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Values && Chars"
-msgstr "Değerler ve Karakterler"
+msgstr "Değerler ve karakterler"
 
 #: controllers/view/viewmode/viewmodecontroller.cpp:24
 #, kde-format
@@ -2975,7 +2975,7 @@ msgctxt ""
 "@item:inmenu  The layout will adapt to the size, but only with complete "
 "groups of bytes."
 msgid "Wrap Only Complete Byte Groups"
-msgstr "Yalnızca Tam Bayt Gruplarını Kaydır"
+msgstr "Yalnızca tam bayt gruplarını kaydır"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:106
 #, kde-format
@@ -3482,21 +3482,21 @@ msgstr "Süz"
 #, kde-format
 msgctxt "@item:inmenu compression strategy"
 msgid "Huffman Encoding Only"
-msgstr "Yalnızca Huffman Kodlaması"
+msgstr "Yalnızca Huffman kodlaması"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:54
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:56
 #, kde-format
 msgctxt "@item:inmenu compression strategy"
 msgid "Run-Length Encoding"
-msgstr "Tam Boyutlu Kodlama"
+msgstr "Tam boyutlu kodlama"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:56
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:58
 #, kde-format
 msgctxt "@item:inmenu compression strategy"
 msgid "Fixed Huffman Encoding"
-msgstr "Sabit Huffman Kodlaması"
+msgstr "Sabit Huffman kodlaması"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:67
 #, kde-format
@@ -3709,42 +3709,34 @@ msgstr "Karakterler"
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Non-printable encode mode:"
-msgstr ""
+msgstr "Yazdırılamaz kodlama kipi:"
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:38
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@label:textbox byte to use for chars which are not part of the target "
-#| "charset"
-#| msgid "Substitute byte:"
+#, kde-format
 msgctxt "@item:inmenu encode mode"
 msgid "Substitute"
-msgstr "Yedek bayt:"
+msgstr "İkâme"
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:40
 #, kde-format
 msgctxt "@item:inmenu encode mode"
 msgid "Escape C-Style"
-msgstr ""
+msgstr "C tarzı kaçış"
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:53
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Encoding for escaped chars:"
-msgstr ""
+msgstr "Kaçırılan karakterler kodlaması:"
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:57
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip column contains the value in hexadecimal format"
-#| msgid "Hexadecimal"
+#, kde-format
 msgctxt "@item:inmenu escape value encoding"
 msgid "Hexadecimal"
 msgstr "Onaltılık"
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:59
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip column contains the value in octal format"
-#| msgid "Octal"
+#, kde-format
 msgctxt "@item:inmenu escape value encoding"
 msgid "Octal"
 msgstr "Sekizlik"
