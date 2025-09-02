@@ -3656,20 +3656,16 @@ msgid "Encoding for escaped chars:"
 msgstr ""
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:57
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip column contains the value in hexadecimal format"
-#| msgid "Hexadecimal"
+#, kde-format
 msgctxt "@item:inmenu escape value encoding"
 msgid "Hexadecimal"
-msgstr "Šestnáctková"
+msgstr ""
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:59
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip column contains the value in octal format"
-#| msgid "Octal"
+#, kde-format
 msgctxt "@item:inmenu escape value encoding"
 msgid "Octal"
-msgstr "Osmičková"
+msgstr ""
 
 #: gui/io/streamencoder/ihex/bytearrayihexstreamencoder.cpp:151
 #, kde-format

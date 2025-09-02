@@ -6,22 +6,22 @@
 # André Marcelo Alvarenga <alvarenga@kde.org>, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2018, 2020.
 # Andre Paulo Machado <andre.panm@gmail.com>, 2008.
 # Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2009, 2010, 2012, 2017, 2018, 2019, 2022, 2023, 2024.
-# Marcus Gama <marcus.gama@gmail.com>, 2011, 2012.
+# SPDX-FileCopyrightText: 2011, 2012, 2025 Marcus Gama <marcus.gama@gmail.com>
 # Aracele Torres <araceletorres@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-31 02:05+0000\n"
-"PO-Revision-Date: 2024-01-11 21:01-0300\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
+"PO-Revision-Date: 2025-09-01 08:41-0300\n"
+"Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 25.08.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -41,50 +41,43 @@ msgid "File Info"
 msgstr "Informações do arquivo"
 
 #: controllers/document/info/documentinfoview.cpp:67
-#, fuzzy, kde-format
-#| msgid "Type:"
+#, kde-format
 msgctxt "@label"
 msgid "Type:"
 msgstr "Tipo:"
 
 #: controllers/document/info/documentinfoview.cpp:81
-#, fuzzy, kde-format
-#| msgid "Location:"
+#, kde-format
 msgctxt "@label"
 msgid "Location:"
 msgstr "Localização:"
 
 #: controllers/document/info/documentinfoview.cpp:86
-#, fuzzy, kde-format
-#| msgid "Size:"
+#, kde-format
 msgctxt "@label"
 msgid "Size:"
 msgstr "Tamanho:"
 
 #: controllers/document/info/documentinfoview.cpp:89
-#, fuzzy, kde-format
-#| msgid "Created/Loaded:"
+#, kde-format
 msgctxt "@label"
 msgid "Created/Loaded:"
 msgstr "Criado/carregado:"
 
 #: controllers/document/info/documentinfoview.cpp:93
-#, fuzzy, kde-format
-#| msgid "Last modified:"
+#, kde-format
 msgctxt "@label"
 msgid "Last modified:"
 msgstr "Última modificação:"
 
 #: controllers/document/info/documentinfoview.cpp:97
-#, fuzzy, kde-format
-#| msgid "Last synchronized:"
+#, kde-format
 msgctxt "@label"
 msgid "Last synchronized:"
 msgstr "Última sincronização:"
 
 #: controllers/document/info/documentinfoview.cpp:104
-#, fuzzy, kde-format
-#| msgid "Created:"
+#, kde-format
 msgctxt "@label"
 msgid "Created:"
 msgstr "Criado em:"
@@ -158,20 +151,16 @@ msgid "Bookmarks"
 msgstr "Favoritos"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:67
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Bookmarks"
+#, kde-format
 msgctxt "@info"
 msgid "No bookmarks"
-msgstr "Favoritos"
+msgstr "Nenhum favorito"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:90
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu create a new view profile"
-#| msgid "Create New..."
+#, kde-format
 msgctxt "@action"
 msgid "Create New"
-msgstr "Criar novo..."
+msgstr "Criar novo"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:92
 #, kde-format
@@ -190,12 +179,10 @@ msgstr ""
 "cursor."
 
 #: controllers/view/bookmarks/bookmarksview.cpp:104
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Delete"
+#, kde-format
 msgctxt "@action"
 msgid "Delete"
-msgstr "E&xcluir"
+msgstr "Excluir"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:106
 #, kde-format
@@ -212,12 +199,10 @@ msgstr ""
 "Se pressionar este botão, todos os favoritos selecionados serão excluídos."
 
 #: controllers/view/bookmarks/bookmarksview.cpp:119
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Go to Offset..."
+#, kde-format
 msgctxt "@action"
 msgid "Go to Offset"
-msgstr "&Ir para a posição..."
+msgstr "Ir para a posição"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:121
 #, kde-format
@@ -239,7 +224,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action"
 msgid "Rename"
-msgstr ""
+msgstr "Renomear"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:133
 #, kde-format
@@ -260,29 +245,25 @@ msgstr ""
 #: controllers/view/bookmarks/bookmarksview.cpp:144
 #: controllers/view/stringsextract/stringsextractview.cpp:191
 #: controllers/view/structures/structureview.cpp:386
-#, fuzzy, kde-format
-#| msgctxt "@title:column offset of the bookmark"
-#| msgid "Offset"
+#, kde-format
 msgctxt "@action"
 msgid "Copy Offset"
-msgstr "Deslocamento"
+msgstr "Copiar deslocamento"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:146
 #: controllers/view/stringsextract/stringsextractview.cpp:193
 #: controllers/view/structures/structureview.cpp:388
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Copies the selected strings to the clipboard."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the offset to the clipboard."
-msgstr "Copia as strings selecionadas para a área de transferência."
+msgstr "Copia o deslocamento para a área de transferência."
 
 #: controllers/view/bytetable/bytetablemodel.cpp:139
 #: controllers/view/info/statistictablemodel.cpp:170
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Character not defined."
-msgstr ""
+msgstr "Caractere não definido."
 
 #: controllers/view/bytetable/bytetablemodel.cpp:157
 #: controllers/view/info/statistictablemodel.cpp:216
@@ -362,25 +343,20 @@ msgid "Value/Char Table"
 msgstr "Tabela de valores/caracteres"
 
 #: controllers/view/bytetable/bytetabletool.cpp:96
-#, fuzzy, kde-format
-#| msgid "Inserted 1 Byte"
-#| msgid_plural "Inserted %1 Bytes"
+#, kde-format
 msgctxt "@item"
 msgid "Inserted 1 Byte"
 msgid_plural "Inserted %1 Bytes"
-msgstr[0] "1 byte inserido"
-msgstr[1] "%1 bytes inseridos"
+msgstr[0] "Inserido 1 byte"
+msgstr[1] "Inseridos %1 bytes"
 
 #: controllers/view/bytetable/bytetabletool.cpp:114
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "1 byte converted."
-#| msgid_plural "%1 bytes converted."
+#, kde-format
 msgctxt "@info"
 msgid "1 byte inserted."
 msgid_plural "%1 bytes inserted."
-msgstr[0] "1 byte convertido."
-msgstr[1] "%1 bytes convertidos."
+msgstr[0] "1 byte inserido."
+msgstr[1] "%1 bytes inseridos."
 
 #: controllers/view/bytetable/bytetableview.cpp:74
 #, kde-format
@@ -413,9 +389,7 @@ msgid "Charset Conversion"
 msgstr "Conversão de codificações"
 
 #: controllers/view/charsetconversion/charsetconversiontool.cpp:304
-#, fuzzy, kde-format
-#| msgctxt "Converted from charset 1 to charset 2"
-#| msgid "%1 to %2"
+#, kde-format
 msgctxt "@item Converted from charset 1 to charset 2"
 msgid "%1 to %2"
 msgstr "%1 para %2"
@@ -522,11 +496,10 @@ msgstr ""
 "destino."
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:170
-#, fuzzy, kde-format
-#| msgid "Con&vert"
+#, kde-format
 msgctxt "@action:button"
 msgid "Convert"
-msgstr "Con&verter"
+msgstr "Converter"
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:173
 #, kde-format
@@ -630,19 +603,19 @@ msgstr ""
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "No checksum calculated yet."
-msgstr ""
+msgstr "Nenhuma soma de verificação calculada ainda."
 
 #: controllers/view/crop/cropcontroller.cpp:33
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Crop"
-msgstr ""
+msgstr "Cortar"
 
 #: controllers/view/crop/cropcontroller.cpp:96
 #, kde-format
 msgctxt "@item name of the change"
 msgid "Crop"
-msgstr ""
+msgstr "Cortar"
 
 #: controllers/view/filter/filtertool.cpp:63
 #: controllers/view/filter/filtertoolviewfactory.cpp:24
@@ -656,8 +629,8 @@ msgstr "Filtro binário"
 msgctxt "@info"
 msgid "1 byte filtered with %2."
 msgid_plural "%1 bytes filtered with %2."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "1 byte filtrado com %2."
+msgstr[1] "%1 bytes filtrados com %2."
 
 #: controllers/view/filter/filterview.cpp:45
 #, kde-format
@@ -702,12 +675,10 @@ msgstr ""
 "opções indicadas."
 
 #: controllers/view/gotooffset/gotooffsetcontroller.cpp:32
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Go to Offset..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Go to Offset…"
-msgstr "&Ir para a posição..."
+msgstr "&Ir para a posição…"
 
 #: controllers/view/gotooffset/gotooffsettool.cpp:50
 #, kde-format
@@ -841,7 +812,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy"
-msgstr ""
+msgstr "Copiar"
 
 #: controllers/view/info/infoview.cpp:124
 #, kde-format
@@ -977,12 +948,10 @@ msgstr ""
 
 #: controllers/view/libbytearraychecksum/algorithm/nobytearraychecksumparametersetedit.cpp:25
 #: controllers/view/libbytearrayfilter/filter/nobytearrayfilterparametersetedit.cpp:25
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "Parameters"
+#, kde-format
 msgctxt "@info"
 msgid "No parameters"
-msgstr "Parâmetros"
+msgstr "Nenhum parâmetro"
 
 #: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:48
 #, kde-format
@@ -1415,17 +1384,13 @@ msgid "Decoding Table"
 msgstr "Tabela de descodificação"
 
 #: controllers/view/poddecoder/poddecodertool.cpp:309
-#, fuzzy, kde-format
-#| msgctxt "Edited as %datatype"
-#| msgid "Edited as %1"
+#, kde-format
 msgctxt "@item Edited as datatype"
 msgid "Edited as %1"
 msgstr "Editado como %1"
 
 #: controllers/view/poddecoder/poddecodertool.cpp:318
-#, fuzzy, kde-format
-#| msgctxt "Edited as %datatype"
-#| msgid "Edited as %1"
+#, kde-format
 msgctxt "@info Edited as datatype"
 msgid "Edited as %1"
 msgstr "Editado como %1"
@@ -1517,9 +1482,7 @@ msgstr "Editar "
 
 #: controllers/view/poddecoder/podtableview.cpp:271
 #: controllers/view/structures/structureview.cpp:395
-#, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to select a range"
-#| msgid "Select"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Select"
 msgstr "Selecionar"
@@ -1725,12 +1688,10 @@ msgid "Search"
 msgstr "Pesquisar"
 
 #: controllers/view/selectrange/selectrangecontroller.cpp:33
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Select Range..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Select Range…"
-msgstr "&Selecionar intervalo..."
+msgstr "&Selecionar intervalo…"
 
 #: controllers/view/selectrange/selectrangetool.cpp:61
 #, kde-format
@@ -1844,19 +1805,16 @@ msgid "Filter:"
 msgstr "Filtro:"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:94
-#, fuzzy, kde-format
-#| msgid "Enter a term to limit the list."
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter a term to limit the list."
 msgstr "Digite um termo para limitar a lista."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:145
-#, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to extract strings"
-#| msgid "Strings"
+#, kde-format
 msgctxt "@info"
 msgid "No strings"
-msgstr "Strings"
+msgstr "Nenhuma string"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:165
 #, kde-format
@@ -1875,11 +1833,10 @@ msgstr ""
 "selecionadas na lista serão copiadas para a área de transferência."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:178
-#, fuzzy, kde-format
-#| msgid "&Show"
+#, kde-format
 msgctxt "@action:button"
 msgid "Show"
-msgstr "Mo&strar"
+msgstr "Mostrar"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:180
 #, kde-format
@@ -1898,36 +1855,30 @@ msgstr ""
 "selecionada será marcada e apresentada na janela."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:198
-#, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to select a range"
-#| msgid "Select"
+#, kde-format
 msgctxt "@action"
 msgid "Select"
 msgstr "Selecionar"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:200
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Shows the selected string in the view."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Selects the selected string in the view."
-msgstr "Mostra a string selecionada na visão."
+msgstr "Seleciona a string selecionada na visão."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:344
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "No bytes converted."
+#, kde-format
 msgctxt "@info"
 msgid "No strings extracted."
-msgstr "Nenhum byte foi convertido."
+msgstr "Nenhuma string extraída."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:345
 #, kde-format
 msgctxt "@info"
 msgid "1 string extracted."
 msgid_plural "%1 strings extracted."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "1 string extraída."
+msgstr[1] "%1 strings extraídas."
 
 #: controllers/view/structures/datatypes/array/complexarraydata.cpp:98
 #, kde-format
@@ -2386,18 +2337,16 @@ msgid "About"
 msgstr "Sobre"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:46
-#, fuzzy, kde-format
-#| msgid "Get New Structures..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Get New Structures…"
-msgstr "Baixar novas estruturas..."
+msgstr "Baixar novas estruturas…"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:52
-#, fuzzy, kde-format
-#| msgid "Advanced Selection..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Advanced Selection…"
-msgstr "Seleção avançada..."
+msgstr "Seleção avançada…"
 
 #: controllers/view/structures/settings/structuresselectiondialog.cpp:28
 #, kde-format
@@ -2416,12 +2365,10 @@ msgid "Structure Definitions"
 msgstr "Definições de estruturas"
 
 #: controllers/view/structures/settings/structuresselector.cpp:40
-#, fuzzy, kde-format
-#| msgctxt "@title"
-#| msgid "Search"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Search…"
-msgstr "Pesquisar"
+msgstr "Pesquisar…"
 
 #. i18n: ectx: tooltip, entry (UnsignedDisplayBase), group (ValueDisplay)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:9
@@ -2643,11 +2590,10 @@ msgid "Size"
 msgstr "Tamanho"
 
 #: controllers/view/structures/structureview.cpp:91
-#, fuzzy, kde-format
-#| msgid "Structure Definitions"
+#, kde-format
 msgctxt "@info"
 msgid "No structure definitions"
-msgstr "Definições de estruturas"
+msgstr "Nenhuma definição de estrutura"
 
 #: controllers/view/structures/structureview.cpp:111
 #, kde-format
@@ -2686,15 +2632,13 @@ msgid "Open settings."
 msgstr "Abrir configurações."
 
 #: controllers/view/structures/structureview.cpp:174
-#, fuzzy, kde-format
-#| msgid "Value Display"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Value Display"
 msgstr "Exibição dos valores"
 
 #: controllers/view/structures/structureview.cpp:186
-#, fuzzy, kde-format
-#| msgid "Structures management"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Structures management"
 msgstr "Gerenciamento de estruturas"
@@ -2831,20 +2775,16 @@ msgid "Show &Non-printing Chars"
 msgstr "Mostrar caracteres &não-imprimíveis"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:80
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Set Bytes per Line..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Set Bytes per Line…"
-msgstr "Definir os bytes por linha..."
+msgstr "Definir os bytes por linha…"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:87
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Set Bytes per Group..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Set Bytes per Group…"
-msgstr "Definir os bytes por grupo..."
+msgstr "Definir os bytes por grupo…"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:94
 #, kde-format
@@ -2929,12 +2869,10 @@ msgid "View Profile"
 msgstr "Perfil de visualização"
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:44
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu create a new view profile"
-#| msgid "Create New..."
+#, kde-format
 msgctxt "@action:inmenu create a new view profile"
 msgid "Create New…"
-msgstr "Criar novo..."
+msgstr "Criar novo…"
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:52
 #, kde-format
@@ -2950,30 +2888,25 @@ msgstr "Restaurar as alterações"
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:184
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:180
-#, fuzzy, kde-format
-#| msgctxt "@window:title"
-#| msgid "New View Profile"
+#, kde-format
 msgctxt "@title:window"
 msgid "New View Profile"
 msgstr "Novo perfil de visualização"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:55
-#, fuzzy, kde-format
-#| msgid "Title:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Title:"
 msgstr "Título:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:59
-#, fuzzy, kde-format
-#| msgid "Display"
+#, kde-format
 msgctxt "@title:group"
 msgid "Display"
 msgstr "Visualização"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:63
-#, fuzzy, kde-format
-#| msgid "Show Line Offset:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show line offset:"
 msgstr "Mostrar a posição da linha:"
@@ -2997,68 +2930,55 @@ msgid "Octal"
 msgstr "Octal"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:72
-#, fuzzy, kde-format
-#| msgid "Offset Coding:"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Offset coding:"
 msgstr "Deslocamento da codificação:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:76
-#, fuzzy, kde-format
-#| msgid "Values"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Values"
 msgstr "Valores"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:77
-#, fuzzy, kde-format
-#| msgid "Chars"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Chars"
 msgstr "Caracteres"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:78
-#, fuzzy, kde-format
-#| msgctxt "@item:"
-#| msgid "Values & Chars"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Values & Chars"
 msgstr "Valores e caracteres"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:81
-#, fuzzy, kde-format
-#| msgid "Show Values or Chars:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show values or chars:"
 msgstr "Mostrar os valores ou caracteres:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:85
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox "
-#| msgid "Show with Rows or Columns:"
+#, kde-format
 msgctxt "@label:listbox "
 msgid "Show with rows or columns:"
 msgstr "Mostrar com linhas ou colunas:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:88
-#, fuzzy, kde-format
-#| msgctxt "@item:"
-#| msgid "Columns"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Columns"
 msgstr "Colunas"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:89
-#, fuzzy, kde-format
-#| msgctxt "@item:"
-#| msgid "Rows"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Rows"
 msgstr "Linhas"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:96
-#, fuzzy, kde-format
-#| msgid "Layout"
+#, kde-format
 msgctxt "@title:group"
 msgid "Layout"
 msgstr "Layout"
@@ -3086,39 +3006,31 @@ msgid "On"
 msgstr "Ligado"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:111
-#, fuzzy, kde-format
-#| msgid "Break lines:"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Break lines:"
 msgstr "Quebrar as linhas:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:115
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "No grouping."
+#, kde-format
 msgctxt "@item"
 msgid "No Grouping"
-msgstr "Sem agrupamento."
+msgstr "Sem agrupamento"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:119
-#, fuzzy, kde-format
-#| msgctxt "@label:spinbox number of bytes which are grouped"
-#| msgid "Bytes per Group:"
+#, kde-format
 msgctxt "@label:spinbox number of bytes which are grouped"
 msgid "Bytes per group:"
 msgstr "Bytes por grupo:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:126
-#, fuzzy, kde-format
-#| msgctxt "@label:spinbox number of bytes which are shown per line"
-#| msgid "Bytes per Line:"
+#, kde-format
 msgctxt "@label:spinbox number of bytes which are shown per line"
 msgid "Bytes per line:"
 msgstr "Bytes por linha:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:131
-#, fuzzy, kde-format
-#| msgid "Values"
+#, kde-format
 msgctxt "@title:group"
 msgid "Values"
 msgstr "Valores"
@@ -3158,40 +3070,34 @@ msgstr "Executável"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:146
 #: controllers/view/viewprofiles/viewprofileedit.cpp:155
-#, fuzzy, kde-format
-#| msgid "Coding:"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Coding:"
 msgstr "Codificação:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:150
-#, fuzzy, kde-format
-#| msgid "Chars"
+#, kde-format
 msgctxt "@title:group"
 msgid "Chars"
 msgstr "Caracteres"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:165
-#, fuzzy, kde-format
-#| msgid "Char for non-printable bytes:"
+#, kde-format
 msgctxt "@label:chooser"
 msgid "Char for non-printable bytes:"
 msgstr "Caractere para bytes não-visíveis:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:170
-#, fuzzy, kde-format
-#| msgid "Char for undefined bytes:"
+#, kde-format
 msgctxt "@label:chooser"
 msgid "Char for undefined bytes:"
 msgstr "Caractere para bytes indefinidos:"
 
 #: controllers/view/viewprofiles/viewprofilesmanagecontroller.cpp:31
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Manage View Profiles..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage View Profiles…"
-msgstr "Gerenciar os perfis de visualização..."
+msgstr "Gerenciar os perfis de visualização…"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:36
 #, kde-format
@@ -3200,12 +3106,10 @@ msgid "View Profiles"
 msgstr "Perfis de visualização"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:63
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu create a new view profile"
-#| msgid "Create New..."
+#, kde-format
 msgctxt "@action:button"
 msgid "&Create New…"
-msgstr "Criar novo..."
+msgstr "&Criar novo…"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:66
 #, kde-format
@@ -3214,29 +3118,22 @@ msgid "Opens an editor for a new view profile."
 msgstr "Abre um editor para um novo perfil de exibição."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:68
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info:whatsthis"
-#| msgid ""
-#| "If you press the <interface>Create new...</interface> button, an editor "
-#| "is opened where you can create and edit a new view profile. The values "
-#| "will be based on the ones of the view profile you selected in the list."
+#, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
 "If you press the <interface>Create New…</interface> button, an editor is "
 "opened where you can create and edit a new view profile. The values will be "
 "based on the ones of the view profile you selected in the list."
 msgstr ""
-"Se clicar no botão <interface>Criar novo...</interface>, será aberto um "
-"editor onde você poderá criar e editar um novo perfil de visualização. Os "
-"valores serão baseados no perfil de visualização selecionado na lista."
+"Se clicar no botão <interface>Criar novo…</interface>, será aberto um editor "
+"onde você poderá criar e editar um novo perfil de visualização. Os valores "
+"serão baseados no perfil de visualização selecionado na lista."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:77
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Edit"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Edit…"
-msgstr "Editar "
+msgstr "&Editar…"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:80
 #, kde-format
@@ -3245,17 +3142,13 @@ msgid "Opens an editor for the view profile."
 msgstr "Abre um editor para o perfil de exibição."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:82
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info:whatsthis"
-#| msgid ""
-#| "If you press the <interface>Edit...</interface> button, an editor will be "
-#| "opened for the view profile you selected in the list."
+#, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
 "If you press the <interface>Edit…</interface> button, an editor will be "
 "opened for the view profile you selected in the list."
 msgstr ""
-"Se clicar no botão <interface>Editar...</interface>, será aberto um editor "
+"Se clicar no botão <interface>Editar…</interface>, será aberto um editor "
 "para o perfil de visualização selecionado na lista."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:90
@@ -3309,9 +3202,7 @@ msgid "Modification of %1"
 msgstr "Modificação do %1"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:211
-#, fuzzy, kde-format
-#| msgctxt "@window:title"
-#| msgid "\"%1\" View Profile"
+#, kde-format
 msgctxt "@title:window"
 msgid "\"%1\" View Profile"
 msgstr "\"%1\" perfil de visualização"
@@ -3436,19 +3327,16 @@ msgstr ""
 "implementado."
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:99
-#, fuzzy, kde-format
-#| msgctxt "@item name of the generated data"
-#| msgid "Pattern"
+#, kde-format
 msgctxt "name of the generated data"
 msgid "Pattern…"
-msgstr "Padrão"
+msgstr "Padrão…"
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:148
-#, fuzzy, kde-format
-#| msgid "Pattern inserted."
+#, kde-format
 msgctxt "@item"
 msgid "Pattern Inserted"
-msgstr "Padrão inserido."
+msgstr "Padrão inserido"
 
 #: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:35
 #, kde-format
@@ -3483,19 +3371,16 @@ msgid "Pattern"
 msgstr "Padrão"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:45
-#, fuzzy, kde-format
-#| msgctxt "@item name of the generated data"
-#| msgid "Random Data"
+#, kde-format
 msgctxt "name of the generated data"
 msgid "Random Data…"
-msgstr "Dados aleatórios"
+msgstr "Dados aleatórios…"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:88
-#, fuzzy, kde-format
-#| msgid "RandomData inserted."
+#, kde-format
 msgctxt "@item"
 msgid "RandomData Inserted"
-msgstr "Dados aleatórios inseridos."
+msgstr "Dados aleatórios inseridos"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatageneratorconfigeditor.cpp:33
 #, kde-format
@@ -3522,45 +3407,44 @@ msgid "Sequence"
 msgstr "Sequência"
 
 #: gui/io/generator/sequence/bytearraysequencegenerator.cpp:58
-#, fuzzy, kde-format
-#| msgid "Sequence inserted."
+#, kde-format
 msgctxt "@item"
 msgid "Sequence Inserted"
-msgstr "Inserir um padrão."
+msgstr "Sequência inserida"
 
 #: gui/io/streamcompressor/bzip2/bytearraybzip2streamcompressor.cpp:42
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "bzip2"
-msgstr ""
+msgstr "bzip2"
 
 #: gui/io/streamcompressor/bzip2/bytearraybzip2streamcompressorconfigeditor.cpp:31
 #, kde-format
 msgctxt "@label:spinbox bzip2 "
 msgid "Block size:"
-msgstr ""
+msgstr "Tamanho do bloco:"
 
 #: gui/io/streamcompressor/bzip2/bytearraybzip2streamcompressorconfigeditor.cpp:49
 #, kde-format
 msgid "%1 kB"
-msgstr ""
+msgstr "%1 kB"
 
 #: gui/io/streamcompressor/bzip2/bzip2compressionstream.cpp:35
 #, kde-format
 msgid "Internal bzip2 error: %1"
-msgstr ""
+msgstr "Erro interno bzip2: %1"
 
 #: gui/io/streamcompressor/bzip2/bzip2compressionstream.cpp:49
 #, kde-format
 msgid "Error code %1"
-msgstr ""
+msgstr "Código de erro %1"
 
 #: gui/io/streamcompressor/bzip2/bzip2compressionstream.cpp:68
 #: gui/io/streamcompressor/deflate/deflatecompressionstream.cpp:71
 #: gui/io/streamcompressor/gzip/gzipcompressionstream.cpp:73
 #, kde-format
 msgid "Internal zlib error when compressing: %1"
-msgstr ""
+msgstr "Erro interno do zlib ao compactar: ​​%1"
 
 #: gui/io/streamcompressor/bzip2/bzip2compressionstream.cpp:77
 #: gui/io/streamcompressor/deflate/deflatecompressionstream.cpp:81
@@ -3569,13 +3453,13 @@ msgstr ""
 #: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:93
 #, kde-format
 msgid "Error writing to output: %1"
-msgstr ""
+msgstr "Erro ao gravar na saída: %1"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressor.cpp:119
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "deflate"
-msgstr ""
+msgstr "deflação"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:31
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:33
@@ -3583,166 +3467,150 @@ msgstr ""
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Compression level:"
-msgstr ""
+msgstr "Nível de compressão:"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:35
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:37
 #: gui/io/streamcompressor/zstd/bytearrayzstdstreamcompressorconfigeditor.cpp:34
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Set as Default"
+#, kde-format
 msgctxt "@item:inmenu compression level"
 msgid "Default"
-msgstr "&Definir como padrão"
+msgstr "Padrão"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:43
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:45
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Compression strategy:"
-msgstr ""
+msgstr "Estratégia de compressão:"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:48
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:50
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Set as Default"
+#, kde-format
 msgctxt "@item:inmenu compression strategy"
 msgid "Default"
-msgstr "&Definir como padrão"
+msgstr "Padrão"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:50
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:52
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Filter"
+#, kde-format
 msgctxt "@item:inmenu compression strategy"
 msgid "Filter"
-msgstr "&Filtrar"
+msgstr "Filtro"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:52
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:54
 #, kde-format
 msgctxt "@item:inmenu compression strategy"
 msgid "Huffman Encoding Only"
-msgstr ""
+msgstr "Codificação Huffman somente"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:54
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:56
-#, fuzzy, kde-format
-#| msgctxt "name of the encoding target"
-#| msgid "Uuencoding"
+#, kde-format
 msgctxt "@item:inmenu compression strategy"
 msgid "Run-Length Encoding"
-msgstr "Codificação UU"
+msgstr "Codificação de comprimento de execução"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:56
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:58
 #, kde-format
 msgctxt "@item:inmenu compression strategy"
 msgid "Fixed Huffman Encoding"
-msgstr ""
+msgstr "Codificação corrigida de Huffman"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:67
 #, kde-format
 msgctxt "@option:check Create deflate stream without headers or footers"
 msgid "Create raw variant:"
-msgstr ""
+msgstr "Criar variante bruta:"
 
 #: gui/io/streamcompressor/deflate/deflatecompressionstream.cpp:34
 #: gui/io/streamcompressor/gzip/gzipcompressionstream.cpp:36
 #: gui/io/streamcompressor/gzip/gzipcompressionstream.cpp:114
 #, kde-format
 msgid "Internal zlib error: %1"
-msgstr ""
+msgstr "Erro interno do zlib: %1"
 
 #: gui/io/streamcompressor/deflate/deflatecompressionstream.cpp:52
 #: gui/io/streamcompressor/gzip/gzipcompressionstream.cpp:54
 #, kde-format
 msgid "Unknown zlib error, code %1"
-msgstr ""
+msgstr "Erro desconhecido do zlib, código %1"
 
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressor.cpp:92
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "gzip"
-msgstr ""
+msgstr "gzip"
 
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:67
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "File Info"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "File name:"
-msgstr "Informações do arquivo"
+msgstr "Nome do arquivo:"
 
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:79
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Comment:"
-msgstr ""
+msgstr "Comentário:"
 
 #: gui/io/streamcompressor/iodevicebytearrayoutput.cpp:21
 #, kde-format
 msgid "Error writing to underlying device: %1"
-msgstr ""
+msgstr "Erro ao gravar no dispositivo subjacente: %1"
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressor.cpp:118
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "xz"
-msgstr ""
+msgstr "xz"
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:31
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Compression preset level:"
-msgstr ""
+msgstr "Nível predefinido de compressão:"
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:35
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Set as Default"
+#, kde-format
 msgctxt "@item:inmenu compression preset level"
 msgid "Default"
-msgstr "&Definir como padrão"
+msgstr "Padrão"
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:44
 #, kde-format
 msgctxt "@option:check Use extreme variant of compression preset level"
 msgid "Use extreme variant:"
-msgstr ""
+msgstr "Usar variante extrema:"
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:54
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Integrity check:"
-msgstr ""
+msgstr "Verificação de integridade:"
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:59
-#, fuzzy, kde-format
-#| msgctxt "There is no storage location assigned to yet."
-#| msgid "[None]"
+#, kde-format
 msgctxt "@item:inmenu integrity check"
 msgid "None"
-msgstr "[Nenhuma]"
+msgstr "Nenhuma"
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:61
 #, kde-format
 msgctxt "@item:inmenu integrity check"
 msgid "CRC32"
-msgstr ""
+msgstr "CRC32"
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:63
 #, kde-format
 msgctxt "@item:inmenu integrity check"
 msgid "CRC64"
-msgstr ""
+msgstr "CRC64"
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:65
-#, fuzzy, kde-format
-#| msgctxt "name of the hash algorithm"
-#| msgid "SHA-256"
+#, kde-format
 msgctxt "@item:inmenu integrity check"
 msgid "SHA-256"
 msgstr "SHA-256"
@@ -3750,57 +3618,57 @@ msgstr "SHA-256"
 #: gui/io/streamcompressor/xz/xzcompressionstream.cpp:30
 #, kde-format
 msgid "Could not initialize lzma stream."
-msgstr ""
+msgstr "Não foi possível inicializar o fluxo lzma."
 
 #: gui/io/streamcompressor/xz/xzcompressionstream.cpp:48
 #, kde-format
 msgid "Unknown lzma error, code %1"
-msgstr ""
+msgstr "Erro lzma desconhecido, código %1"
 
 #: gui/io/streamcompressor/xz/xzcompressionstream.cpp:67
 #, kde-format
 msgid "Internal lzma error when compressing: %1"
-msgstr ""
+msgstr "Erro interno de lzma ao compactar: ​​%1"
 
 #: gui/io/streamcompressor/zstd/bytearrayzstdstreamcompressor.cpp:48
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "ZStandard"
-msgstr ""
+msgstr "ZStandard"
 
 #: gui/io/streamcompressor/zstd/bytearrayzstdstreamcompressorconfigeditor.cpp:41
 #, kde-format
 msgctxt "@option:check"
 msgid "Content size in frame header:"
-msgstr ""
+msgstr "Tamanho do conteúdo no cabeçalho do quadro:"
 
 #: gui/io/streamcompressor/zstd/bytearrayzstdstreamcompressorconfigeditor.cpp:49
 #, kde-format
 msgctxt "@option:check"
 msgid "Content checksum at frame end:"
-msgstr ""
+msgstr "Soma de verificação do conteúdo no final do quadro:"
 
 #: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:26
 #, kde-format
 msgid "Could not create zstd stream context."
-msgstr ""
+msgstr "Não foi possível criar o contexto do fluxo zstd."
 
 #: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:31
 #: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:37
 #: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:45
 #, kde-format
 msgid "Internal zstd error on setup: %1"
-msgstr ""
+msgstr "Erro interno do zstd na configuração: %1"
 
 #: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:67
 #, kde-format
 msgid "Unknown zstd error, code %1"
-msgstr ""
+msgstr "Erro zstd desconhecido, código %1"
 
 #: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:86
 #, kde-format
 msgid "Internal zstd error when compressing: %1"
-msgstr ""
+msgstr "Erro interno do zstd ao compactar: ​​%1"
 
 #: gui/io/streamencoder/base32/bytearraybase32streamencoder.cpp:131
 #, kde-format
@@ -3847,8 +3715,7 @@ msgid "Ascii85"
 msgstr "Ascii85"
 
 #: gui/io/streamencoder/bytearraytextstreamencoderpreview.cpp:27
-#, fuzzy, kde-format
-#| msgid "The preview uses maximal the first 100 bytes."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "The preview uses maximally the first 100 bytes."
 msgstr "A visualização usa no máximo os primeiros 100 bytes."
@@ -3863,42 +3730,34 @@ msgstr "Caracteres"
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Non-printable encode mode:"
-msgstr ""
+msgstr "Modo de codificação não imprimível:"
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:38
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@label:textbox byte to use for chars which are not part of the target "
-#| "charset"
-#| msgid "Substitute byte:"
+#, kde-format
 msgctxt "@item:inmenu encode mode"
 msgid "Substitute"
-msgstr "Substituir o byte:"
+msgstr "Substituir"
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:40
 #, kde-format
 msgctxt "@item:inmenu encode mode"
 msgid "Escape C-Style"
-msgstr ""
+msgstr "Escape no estilo C"
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:53
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Encoding for escaped chars:"
-msgstr ""
+msgstr "Codificação para caracteres de escape:"
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:57
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip column contains the value in hexadecimal format"
-#| msgid "Hexadecimal"
+#, kde-format
 msgctxt "@item:inmenu escape value encoding"
 msgid "Hexadecimal"
 msgstr "Hexadecimal"
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:59
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip column contains the value in octal format"
-#| msgid "Octal"
+#, kde-format
 msgctxt "@item:inmenu escape value encoding"
 msgid "Octal"
 msgstr "Octal"
@@ -4032,13 +3891,13 @@ msgstr "Separação:"
 #, kde-format
 msgctxt "@label:textbox substring which prefixes each value"
 msgid "Prefix:"
-msgstr ""
+msgstr "Prefixo:"
 
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:70
 #, kde-format
 msgctxt "@label:textbox substring which postfixes each value"
 msgid "Postfix:"
-msgstr ""
+msgstr "Sufixo:"
 
 #: gui/io/streamencoder/viewhtml/bytearrayviewhtmlstreamencoder.cpp:36
 #, kde-format
