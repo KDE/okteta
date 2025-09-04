@@ -13,6 +13,8 @@
 #include "../scriptlogger.hpp"
 #include <structureslogging.hpp>
 
+#include <QScriptContext>
+
 ArrayScriptClass::ArrayScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : DefaultScriptClass(engine, handlerInfo)
 {

@@ -15,6 +15,7 @@
 #include <QScriptValue>
 #include <QScriptEngine>
 #include <QScriptContext>
+#include <QScriptString>
 #include <QScriptValueIterator>
 #include <QStandardPaths>
 

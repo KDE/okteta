@@ -10,6 +10,8 @@
 #include "../../datatypes/primitive/bitfield/abstractbitfielddatainformation.hpp"
 #include "../../parsers/parserutils.hpp"
 
+#include <QScriptContext>
+
 BitfieldScriptClass::BitfieldScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : PrimitiveScriptClass(engine, handlerInfo)
 {

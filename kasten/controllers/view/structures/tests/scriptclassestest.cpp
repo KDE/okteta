@@ -38,6 +38,7 @@
 #include <QObject>
 #include <QScriptValueIterator>
 #include <QScriptEngine>
+#include <QScriptContext>
 // Std
 #include <memory>
 #include <utility>

@@ -19,6 +19,8 @@
 #include "../scripthandlerinfo.hpp"
 #include "../safereference.hpp"
 #include <structureslogging.hpp>
+
+#include <QScriptContext>
 // Std
 #include <utility>
 

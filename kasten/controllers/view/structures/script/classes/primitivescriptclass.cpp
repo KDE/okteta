@@ -12,6 +12,8 @@
 #include "../../allprimitivetypes.hpp"
 #include <structureslogging.hpp>
 
+#include <QScriptContext>
+
 PrimitiveScriptClass::PrimitiveScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : DefaultScriptClass(engine, handlerInfo)
 {

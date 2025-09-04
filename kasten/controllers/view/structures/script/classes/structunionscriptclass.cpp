@@ -13,6 +13,8 @@
 #include "../scriptlogger.hpp"
 #include <structureslogging.hpp>
 
+#include <QScriptContext>
+
 StructUnionScriptClass::StructUnionScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : DefaultScriptClass(engine, handlerInfo)
 {

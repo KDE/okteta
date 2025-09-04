@@ -11,6 +11,8 @@
 #include "../../parsers/parserutils.hpp"
 #include <structureslogging.hpp>
 
+#include <QScriptContext>
+
 StringScriptClass::StringScriptClass(QScriptEngine* eng, ScriptHandlerInfo* handlerInfo)
     : DefaultScriptClass(eng, handlerInfo)
 {
