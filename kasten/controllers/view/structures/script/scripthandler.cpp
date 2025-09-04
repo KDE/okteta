@@ -67,7 +67,7 @@ void ScriptHandler::validateData(DataInformation* data)
                                      + result.toString());
             mEngine->clearExceptions();
         }
-        if (result.isBool() || result.isBoolean()) {
+        if (result.isBool()) {
             data->mValidationSuccessful = result.toBool();
         }
         if (result.isString()) {
