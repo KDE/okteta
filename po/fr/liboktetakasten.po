@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-31 02:05+0000\n"
-"PO-Revision-Date: 2025-08-10 09:28+0200\n"
+"PO-Revision-Date: 2025-09-01 18:53+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -27,7 +27,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Accelerator-Marker: &\n"
 "X-Environment: kde\n"
-"X-Generator: Lokalize 25.07.90\n"
+"X-Generator: Lokalize 25.08.0\n"
 "X-Text-Markup: kde4\n"
 
 #, kde-format
@@ -3773,46 +3773,37 @@ msgid "Characters"
 msgstr "Caractères"
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:34
-#, fuzzy, kde-format
-#| msgid "Show Non-printable:"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Non-printable encode mode:"
-msgstr "Afficher les caractères non imprimables :"
+msgstr "Mode d'encodage des caractères non imprimables :"
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:38
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@label:textbox byte to use for chars which are not part of the target "
-#| "charset"
-#| msgid "Substitute byte:"
+#, kde-format
 msgctxt "@item:inmenu encode mode"
 msgid "Substitute"
-msgstr "Octet de substitution :"
+msgstr "Substituer"
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:40
 #, kde-format
 msgctxt "@item:inmenu encode mode"
 msgid "Escape C-Style"
-msgstr ""
+msgstr "Échappement en C-Style"
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:53
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Encoding for escaped chars:"
-msgstr ""
+msgstr "Encodage pour les caractères avec échappement :"
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:57
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip column contains the value in hexadecimal format"
-#| msgid "Hexadecimal"
+#, kde-format
 msgctxt "@item:inmenu escape value encoding"
 msgid "Hexadecimal"
 msgstr "Hexadécimal"
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:59
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip column contains the value in octal format"
-#| msgid "Octal"
+#, kde-format
 msgctxt "@item:inmenu escape value encoding"
 msgid "Octal"
 msgstr "Octal"
