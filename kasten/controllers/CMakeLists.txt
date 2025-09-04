@@ -645,9 +645,6 @@ oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersStructuresData
 oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersStructuresDataTypes
     SUBDIR view/structures/parsers
     PRIVATE
-        AbstractStructureParser
-        OsdParser
-        ScriptFileParser
         ScriptValueConverter
         DataInformationFactory
         ParserUtils
@@ -665,7 +662,15 @@ oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersStructuresData
         AllPrimitiveTypes
 )
 
+
 #these source files are not needed by the static library for unit tests, therefore keep them separate
+oktetakastencontrollers_sources(
+    SUBDIR view/structures/parsers
+    PRIVATE
+        AbstractStructureParser
+        OsdParser
+        ScriptFileParser
+)
 oktetakastencontrollers_sources(
     SUBDIR view/structures/settings
     PRIVATE
