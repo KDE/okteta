@@ -27,6 +27,7 @@ ecm_add_test(
         KF5::I18n
         Qt5::Test
 )
+target_compile_definitions(primitivedatainformationtest PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")
 
 ecm_add_test(
     ${SUTDIR}/abstractstructureparser.cpp
