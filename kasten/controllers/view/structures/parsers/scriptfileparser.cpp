@@ -74,7 +74,7 @@ QScriptValue ScriptFileParser::loadScriptValue(ScriptLogger* logger, QScriptEngi
     QTextStream stream(&scriptFile);
     QString contents = stream.readAll();
     scriptFile.close();
-    engine->evaluate(contents, mAbsolutePath);
+    std::ignore = engine->evaluate(contents, mAbsolutePath);
     if (engine->hasUncaughtException()) {
         // check if it was a syntax error:
         QScriptSyntaxCheckResult syntaxError = QScriptEngine::checkSyntax(contents);

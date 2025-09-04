@@ -166,14 +166,14 @@ QScriptValue StructUnionScriptClass::StructUnion_proto_toString(QScriptContext* 
 QScriptValue StructUnionScriptClass::StructUnion_proto_child(QScriptContext* ctx, QScriptEngine* eng)
 {
     if (ctx->argumentCount() < 1) {
-        ctx->throwError(QScriptContext::RangeError,
-                        QStringLiteral("(struct/union).child(name) needs at least one argument"));
+        std::ignore = ctx->throwError(QScriptContext::RangeError,
+                                      QStringLiteral("(struct/union).child(name) needs at least one argument"));
         return eng->undefinedValue();
     }
     QScriptValue arg = ctx->argument(0);
     if (!arg.isString()) {
-        ctx->throwError(QScriptContext::TypeError,
-                        QStringLiteral("(struct/union).child(name) argument has to be a string"));
+        std::ignore = ctx->throwError(QScriptContext::TypeError,
+                                      QStringLiteral("(struct/union).child(name) argument has to be a string"));
         return QScriptValue::UndefinedValue;
     }
     DataInformation* data = toDataInformation(ctx->thisObject());

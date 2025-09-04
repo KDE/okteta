@@ -387,7 +387,7 @@ void ScriptClassesTest::testSafePrimitiveArrayReference()
     QVERIFY(arrayData->length() > 2);
     arrayDataTop->logger()->setLogToStdOut(true);
     QScriptEngine* eng = arrayDataTop->scriptEngine();
-    eng->pushContext();
+    std::ignore = eng->pushContext();
     eng->currentContext()->activationObject().setProperty(QStringLiteral("myArray"),
                                                           arrayData->toScriptValue(arrayDataTop.get()));
     arrayDataTop->scriptHandler()->handlerInfo()->setMode(ScriptHandlerInfo::Mode::Updating);

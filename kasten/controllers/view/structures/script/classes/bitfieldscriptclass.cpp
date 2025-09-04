@@ -46,13 +46,14 @@ bool BitfieldScriptClass::setAdditionalProperty(DataInformation* data, const QSc
 {
     if (name == s_width) {
         if (!value.isNumber()) {
-            engine()->currentContext()->throwError(QScriptContext::TypeError, QStringLiteral("bitfield.width must be an integer!"));
+            std::ignore = engine()->currentContext()->throwError(QScriptContext::TypeError,
+                                                                 QStringLiteral("bitfield.width must be an integer!"));
             return true;
         }
         BitCount32 width = value.toUInt32();
         if (width <= 0 || width > 64) {
-            engine()->currentContext()->throwError(QScriptContext::RangeError,
-                                                   QStringLiteral("bitfield.width must be between 1 and 64! Given: %1").arg(width));
+            std::ignore = engine()->currentContext()->throwError(QScriptContext::RangeError,
+                                                                 QStringLiteral("bitfield.width must be between 1 and 64! Given: %1").arg(width));
             return true;
         }
         AbstractBitfieldDataInformation* pData = data->asBitfield();
