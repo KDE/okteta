@@ -16,7 +16,6 @@ okteta_add_library(Controllers NAMESPACE Okteta Kasten
         KF5::Completion
         KF5::KIOCore
         Qt5::PrintSupport
-        Qt5::Script
         Qt5::Xml
 #         Qt5::Test # QAbstractItemModelTester
     VERSION     ${OKTETAKASTENCONTROLLERS_VERSION}
