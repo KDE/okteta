@@ -43,6 +43,7 @@ Notes:
     <comment xml:lang="sv">Motorola S-Records</comment>
     <comment xml:lang="tr">Motorola S-Kayıtları</comment>
     <comment xml:lang="uk">S-записи Motorola</comment>
+    <comment xml:lang="x_test">xxMotorola S-Recordsxx</comment>
     <comment xml:lang="zh_CN">Motorola S-Record</comment>
     <comment xml:lang="zh_TW">Motorola S-Records</comment>
     <magic priority="70">
@@ -87,6 +88,7 @@ Notes:
     <comment xml:lang="sv">Intel hexadecimal objektfil</comment>
     <comment xml:lang="tr">Intel onaltılık nesne dosyası</comment>
     <comment xml:lang="uk">шістнадцятковий об’єктний файл Intel®</comment>
+    <comment xml:lang="x_test">xxIntel hexadecimal object filexx</comment>
     <comment xml:lang="zh_CN">Intel 十六进制对象文件</comment>
     <comment xml:lang="zh_TW">Intel® hexadecimal 物件檔</comment>
 <!--  Intel MCS-86 Object is alternative name?  -->
@@ -128,6 +130,7 @@ Notes:
     <comment xml:lang="sv">Base64-kodad data</comment>
     <comment xml:lang="tr">Base64 kodlanmış veri</comment>
     <comment xml:lang="uk">дані у кодуванні Base64</comment>
+    <comment xml:lang="x_test">xxBase64 encoded dataxx</comment>
     <comment xml:lang="zh_CN">Base64 编码的数据</comment>
     <comment xml:lang="zh_TW">Base64 編碼資料</comment>
     <glob pattern="*.base64"/>
@@ -163,6 +166,7 @@ Notes:
     <comment xml:lang="sv">Base32-kodad data</comment>
     <comment xml:lang="tr">Base32 kodlanmış veri</comment>
     <comment xml:lang="uk">дані у кодуванні Base32</comment>
+    <comment xml:lang="x_test">xxBase32 encoded dataxx</comment>
     <comment xml:lang="zh_CN">Base32 编码的数据</comment>
     <comment xml:lang="zh_TW">Base32 編碼資料</comment>
     <glob pattern="*.base32"/>
@@ -197,6 +201,7 @@ Notes:
     <comment xml:lang="sv">BTOA-kodad data</comment>
     <comment xml:lang="tr">Btoa Kodlanmış Dosya</comment>
     <comment xml:lang="uk">файл у кодуванні Btoa</comment>
+    <comment xml:lang="x_test">xxBtoa Encoded Filexx</comment>
     <comment xml:lang="zh_CN">Btoa 编码的文件</comment>
     <comment xml:lang="zh_TW">Btoa 編碼檔案</comment>
     <magic priority="50">
@@ -235,6 +240,7 @@ Notes:
     <comment xml:lang="sv">ASCII85-kodad data</comment>
     <comment xml:lang="tr">Ascii85 kodlanmış veri</comment>
     <comment xml:lang="uk">дані у кодуванні Ascii85</comment>
+    <comment xml:lang="x_test">xxAscii85 encoded dataxx</comment>
     <comment xml:lang="zh_CN">Ascii85 编码的数据</comment>
     <comment xml:lang="zh_TW">Ascii85 編碼資料</comment>
     <magic priority="50">
@@ -271,6 +277,7 @@ Notes:
     <comment xml:lang="sv">Uuencoded fil</comment>
     <comment xml:lang="tr">Uuencoded dosya</comment>
     <comment xml:lang="uk">файл даних у форматі UUE</comment>
+    <comment xml:lang="x_test">xxUuencoded filexx</comment>
     <comment xml:lang="zh_CN">Uuencoding 编码的文件</comment>
     <comment xml:lang="zh_TW">Uuencoded 檔案</comment>
     <magic priority="50">
@@ -310,6 +317,7 @@ Notes:
     <comment xml:lang="sv">Xxencoded fil</comment>
     <comment xml:lang="tr">Xxencoded dosya</comment>
     <comment xml:lang="uk">файл даних у форматі xxe</comment>
+    <comment xml:lang="x_test">xxXxencoded filexx</comment>
     <comment xml:lang="zh_CN">Xxencoding 编码的文件</comment>
     <comment xml:lang="zh_TW">Xxencoded 檔案</comment>
     <magic priority="50">
@@ -346,6 +354,7 @@ Notes:
     <comment xml:lang="sv">Okteta strukturdefinition</comment>
     <comment xml:lang="tr">Okteta Yapı Tanımı</comment>
     <comment xml:lang="uk">визначення структури Okteta</comment>
+    <comment xml:lang="x_test">xxOkteta Structure definitionxx</comment>
     <comment xml:lang="zh_CN">Okteta 结构体定义</comment>
     <comment xml:lang="zh_TW">Okteta 結構定義</comment>
     <glob pattern="*.osd"/>
