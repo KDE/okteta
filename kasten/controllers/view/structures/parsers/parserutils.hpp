@@ -187,8 +187,8 @@ ParsedNumber<uint> uintFromScriptValue(const QScriptValue& val);
 /** @see ParserUtils::intFromScriptValue() */
 ParsedNumber<quint64> uint64FromScriptValue(const QScriptValue& val);
 
-DataInformation::DataInformationEndianess byteOrderFromString(const QString& string, const LoggerWithContext& logger);
-QString byteOrderToString(DataInformation::DataInformationEndianess order);
+DataInformation::DataInformationEndianness byteOrderFromString(const QString& string, const LoggerWithContext& logger);
+QString byteOrderToString(DataInformation::DataInformationEndianness order);
 
 StringDataInformation::StringType toStringEncoding(const QString& str, const LoggerWithContext& logger);
 

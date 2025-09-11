@@ -285,7 +285,7 @@ public:
 
     /** sets the number of bytes per line, switching the resize style to Okteta::FixedLayoutStyle */
     void setNoOfBytesPerLine(int noOfBytesPerLine);
-    /** sets absolut offset of the data */
+    /** sets absolute offset of the data */
     void setStartOffset(Address startOffset);
     /** sets offset of the char in the upper left corner */
     void setFirstLineOffset(Address firstLineOffset);
@@ -401,7 +401,7 @@ public: // logic value service
 Q_SIGNALS:
     /** Index of the byte that was clicked */
     void clicked(Okteta::Address index);
-    /** Index of the byte that was double clicked */
+    /** Index of the byte that was double-clicked */
     void doubleClicked(Okteta::Address index);
 
     void cursorPositionChanged(Okteta::Address index);

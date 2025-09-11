@@ -59,10 +59,10 @@ AbstractModel* StringsExtractTool::targetModel() const
 }
 
 // TODO: add model with offset and string
-// doubleclick moves cursor to offset
-// filter für Suche, inkl. Regulärausdrücke
-// groß/kleinschreibung
-// voll strings, auch mit Leerzeichen
+// double-click moves cursor to offset
+// filter for search, incl. regular expressions
+// case-insensitivity
+// full strings, also with spaces
 void StringsExtractTool::setTargetModel(AbstractModel* model)
 {
     ByteArrayView* const byteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
@@ -71,7 +71,7 @@ void StringsExtractTool::setTargetModel(AbstractModel* model)
     }
 
     if (mByteArrayView) {
-        // disconnect explicitly from all connects but QObject::detroyed,
+        // disconnect explicitly from all connects but QObject::destroyed,
         // for the case mSourceByteArrayView is mByteArrayView
         disconnect(mByteArrayView,  &ByteArrayView::selectedDataChanged,
                    this, &StringsExtractTool::onSelectionChanged);

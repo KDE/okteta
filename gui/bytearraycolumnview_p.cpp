@@ -596,7 +596,7 @@ void ByteArrayColumnViewPrivate::createCursorPixmaps()
     mActiveColumn->renderCursor(&painter, index);
     painter.end();
 
-    // calculat the shape
+    // calculate the shape
     PixelX cursorX;
     PixelX cursorW;
     const int insertCursorWidth = q->style()->pixelMetric(QStyle::PM_TextCursorWidth);

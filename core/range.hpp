@@ -149,7 +149,7 @@ public: // logic access
     bool isEmpty() const { return Start == null() && End == null(); }
 
 protected:
-    /** delivers a null element. Should be specialiced for complexer types. */
+    /** delivers a null element. Should be specialized for complexer types. */
     [[nodiscard]]
     constexpr T null() const { return NullValue{}(); }
 

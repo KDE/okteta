@@ -55,13 +55,13 @@ private:
 /*     QTimer *ChangeIntervalTimer, */
     /** Timer to start a drag */
     QTimer mDragStartTimer;
-    /** timer to measure whether the time between a double click and the following counts for a tripleclick */
-    QTimer mTrippleClickTimer;
+    /** timer to measure whether the time between a double-click and the following counts for a triple-click */
+    QTimer m_tripleClickTimer;
 
 private:
-    /** point at which the current double click happended (used by TrippleClick) */
+    /** point at which the current double-click happened (used by triple-click) */
     QPoint mDoubleClickPoint;
-    /** line in which the current double click happended (used by TrippleClick) */
+    /** line in which the current double-click happened (used by triple-click) */
     int mDoubleClickLine;
     /** point at which the current dragging started */
     QPoint mDragStartPoint;
@@ -69,7 +69,7 @@ private:
 private: // parameters
     /** flag if the left mouse button is pressed */
     bool mLMBPressed : 1;
-    /** flag if a double click is happening */
+    /** flag if a double-click is happening */
     bool mInLMBDoubleClick : 1;
     /** flag if a drag might have started */
     bool mDragStartPossible : 1;

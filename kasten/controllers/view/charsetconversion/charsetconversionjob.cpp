@@ -60,7 +60,7 @@ bool CharsetConversionJob::exec()
                 convertedByte = mSubstituteByte;
             }
 
-            // TODO: means if the default byte equals a not convertable original
+            // TODO: means if the default byte equals a not convertible original
             // byte that one is not counted. okay, or should be made explicit to user?
             if (originalByte != convertedByte) {
                 mConvertedBytesCount++;

@@ -155,7 +155,7 @@ void ByteArrayRawFileSynchronizerFactoryTest::testSaveToFile()
     // save
     document->setLocalFilePath(filePath);
     document->save();
-TODO: save mit path als Parameter ? Oder separat setzen ? Wie Kopie speichern ?
+TODO: save with path as parameter? or set separately? save as copy?
 
     // load into other and...
     ByteArrayDocument * otherDocument = new ByteArrayDocument(filePath);

@@ -419,7 +419,7 @@ void CoordRangeTest::testIsJoinable()
     otherCoordRange.set( Start-1, End+1 );
     QVERIFY( coordRange.isJoinable(otherCoordRange) );
 
-    // Overlapping, identic
+    // Overlapping, identical
     otherCoordRange.set( coordRange );
     QVERIFY( coordRange.isJoinable(otherCoordRange) );
 

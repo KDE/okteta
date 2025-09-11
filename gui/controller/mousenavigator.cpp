@@ -35,7 +35,7 @@ MouseNavigator::MouseNavigator(AbstractByteArrayViewPrivate* view, AbstractMouse
     connect(&mScrollTimer,      &QTimer::timeout, this, &MouseNavigator::autoScrollTimerDone);
     connect(&mDragStartTimer,   &QTimer::timeout, this, &MouseNavigator::startDrag);
     mDragStartTimer.setSingleShot(true);
-    mTrippleClickTimer.setSingleShot(true);
+    m_tripleClickTimer.setSingleShot(true);
 }
 
 MouseNavigator::~MouseNavigator() = default;
@@ -55,9 +55,9 @@ bool MouseNavigator::handleMousePressEvent(QMouseEvent* mouseEvent)
         mLMBPressed = true;
 
         // select whole line?
-        if (mTrippleClickTimer.isActive()
+        if (m_tripleClickTimer.isActive()
             && (mouseEvent->globalPos() - mDoubleClickPoint).manhattanLength() < QApplication::startDragDistance()) {
-            mTrippleClickTimer.stop();
+            m_tripleClickTimer.stop();
             const Address indexAtFirstDoubleClickLinePosition = tableLayout->indexAtFirstLinePosition(mDoubleClickLine);
             tableRanges->setSelectionStart(indexAtFirstDoubleClickLinePosition);
             tableCursor->gotoIndex(indexAtFirstDoubleClickLinePosition);
@@ -156,7 +156,7 @@ bool MouseNavigator::handleMouseReleaseEvent(QMouseEvent* mouseEvent)
 
 //         const QPoint releasePoint = mView->viewportToColumns( mouseEvent->pos() );
 
-        // this is not the release of a doubleclick so we need to process it?
+        // this is not the release of a double-click so we need to process it?
         if (!mInLMBDoubleClick) {
 //             const int line = mView->lineAt( releasePoint.y() );
 //             const int pos = mActiveColumn->linePositionOfX( releasePoint.x() ); // TODO: can we be sure here about the active column?
@@ -219,8 +219,8 @@ bool MouseNavigator::handleMouseDoubleClickEvent(QMouseEvent* mouseEvent)
         if (mView->activeCoding() == AbstractByteArrayView::CharCodingId) {
             std::ignore = mView->selectWord(index);
 
-            // as we already have a doubleclick maybe it is a tripple click
-            mTrippleClickTimer.start(qApp->doubleClickInterval());
+            // as we already have a double-click maybe it is a triple-click
+            m_tripleClickTimer.start(qApp->doubleClickInterval());
             mDoubleClickPoint = mouseEvent->globalPos();
         }
         //  else

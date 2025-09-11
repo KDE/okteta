@@ -61,7 +61,7 @@
 		<entry value="1" name="32 bit" />
 		<entry value="2" name="64 bit" />
 	</enumDef>
-	<enumDef name="EndianessEnum" type="UInt8">
+	<enumDef name="EndiannessEnum" type="UInt8">
 		<entry value="0" name="None" />
 		<entry value="1" name="little endian" />
 		<entry value="2" name="big endian" />
@@ -87,7 +87,7 @@
 				<primitive name="magic" type="Char" />
 			</array>
 			<enum name="arch class" enum="ClassEnum" type="UInt8" />
-			<enum name="endianess" enum="EndianessEnum" type="UInt8" />
+			<enum name="endianness" enum="EndiannessEnum" type="UInt8" />
 			<primitive name="version" type="UInt8" />
 			<enum name="ABI" enum="ABIEnum" type="UInt8" />
 			<primitive name="ABI version" type="UInt8" />

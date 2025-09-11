@@ -33,7 +33,7 @@ struct CommonParsedData : public ParserInfo
 {
     inline explicit CommonParsedData(const ParserInfo& i)
         : ParserInfo(i)
-        , endianess(DataInformation::DataInformationEndianess::EndianessInherit)
+        , endianness(DataInformation::DataInformationEndianness::EndiannessInherit)
     {}
     CommonParsedData(const CommonParsedData&) = delete;
 
@@ -45,7 +45,7 @@ struct CommonParsedData : public ParserInfo
     QScriptValue validationFunc;
     QScriptValue toStringFunc;
     QString customTypeName;
-    DataInformation::DataInformationEndianess endianess;
+    DataInformation::DataInformationEndianness endianness;
 };
 
 struct BitfieldParsedData : public ParserInfo

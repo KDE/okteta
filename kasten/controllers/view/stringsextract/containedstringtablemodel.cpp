@@ -114,11 +114,11 @@ QVariant ContainedStringTableModel::headerData(int section, Qt::Orientation orie
     QVariant result;
 
     if (role == Qt::DisplayRole) {
-        const QString titel =
+        const QString title =
             section == OffsetColumnId ? i18nc("@title:column offset of the extracted string",       "Offset") :
             section == StringColumnId ? i18nc("@title:column string extracted from the byte array", "String") :
                                         QString();
-        result = titel;
+        result = title;
     } else {
         result = QAbstractTableModel::headerData(section, orientation, role);
     }

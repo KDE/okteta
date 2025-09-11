@@ -27,7 +27,7 @@ public:
     {
         None = 0x0,
         Sequence = 0x1, // termination sequence (i.e. '\0')
-        CharCount = 0x2, // numer of unicode code points
+        CharCount = 0x2, // number of unicode code points
         ByteCount = 0x4, // maximum number of bytes
         SeqOrCharCount = CharCount + Sequence, // whatever comes first
         SeqOrByteCount = ByteCount + Sequence // whatever comes first

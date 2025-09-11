@@ -72,7 +72,7 @@ bool AbstractEditor::handleKeyPress(QKeyEvent* keyEvent)
         }
         keyUsed = true;
     } else if (keyEvent->matches(QKeySequence::DeleteStartOfWord)) {
-        // TODO: descide behaviour with selection, for now okteta legacy one
+        // TODO: decide behaviour with selection, for now okteta legacy one
         if (mView->hasSelectedBytes()) {
             mView->removeSelectedBytes();
         } else {
@@ -80,7 +80,7 @@ bool AbstractEditor::handleKeyPress(QKeyEvent* keyEvent)
         }
         keyUsed = true;
     } else if (keyEvent->matches(QKeySequence::DeleteEndOfWord)) {
-        // TODO: descide behaviour with selection, for now okteta legacy one
+        // TODO: decide behaviour with selection, for now okteta legacy one
         if (mView->hasSelectedBytes()) {
             mView->removeSelectedBytes();
         } else {

@@ -5,7 +5,7 @@
     <array name="signature" length="length">
       <primitive name="val" type="Char" />
     </array>
-    <!-- exactly the same, just explictly specify the function -->
+    <!-- exactly the same, just explicitly specify the function -->
     <!-- above the function is created dynamically when loading -->
     <array name="signature2" length="function() { return this.parent.length.value; }">
       <primitive name="val" type="Char" />

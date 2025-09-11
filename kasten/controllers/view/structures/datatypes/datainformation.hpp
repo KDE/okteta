@@ -72,12 +72,12 @@ public:
         ColumnSize,
         COLUMN_COUNT
     };
-    enum class DataInformationEndianess
+    enum class DataInformationEndianness
     {
-        EndianessFromSettings = 0,
-        EndianessInherit,
-        EndianessLittle,
-        EndianessBig
+        EndiannessFromSettings = 0,
+        EndiannessInherit,
+        EndiannessLittle,
+        EndiannessBig
     };
 
     // methods for children:
@@ -168,9 +168,9 @@ public:
 
     bool hasBeenUpdated() const;
     bool hasBeenValidated() const;
-    DataInformationEndianess byteOrder() const;
+    DataInformationEndianness byteOrder() const;
     QSysInfo::Endian effectiveByteOrder() const;
-    void setByteOrder(DataInformationEndianess newByteOrder);
+    void setByteOrder(DataInformationEndianness newByteOrder);
     QString fullObjectPath() const;
 
     virtual void resetValidationState(); // virtual for DataInformationWithChildren
@@ -241,7 +241,7 @@ protected:
     bool mHasBeenUpdated : 1;
     bool mWasAbleToRead : 1;
     bool mWasAbleToReadBefore : 1;
-    DataInformationEndianess mByteOrder = DataInformationEndianess::EndianessInherit;
+    DataInformationEndianness mByteOrder = DataInformationEndianness::EndiannessInherit;
     mutable ScriptLogger::LogLevel mLoggedData : 2; // mutable is ugly but i guess it is the best solution
 };
 
@@ -280,12 +280,12 @@ inline bool DataInformation::wasAbleToRead() const
     return mWasAbleToRead;
 }
 
-inline DataInformation::DataInformationEndianess DataInformation::byteOrder() const
+inline DataInformation::DataInformationEndianness DataInformation::byteOrder() const
 {
     return mByteOrder;
 }
 
-inline void DataInformation::setByteOrder(DataInformation::DataInformationEndianess newByteOrder)
+inline void DataInformation::setByteOrder(DataInformation::DataInformationEndianness newByteOrder)
 {
     mByteOrder = newByteOrder;
 }
@@ -385,11 +385,11 @@ inline QSysInfo::Endian DataInformation::effectiveByteOrder() const
 {
     switch (mByteOrder)
     {
-    case DataInformationEndianess::EndianessBig:
+    case DataInformationEndianness::EndiannessBig:
         return QSysInfo::BigEndian;
-    case DataInformationEndianess::EndianessLittle:
+    case DataInformationEndianness::EndiannessLittle:
         return QSysInfo::LittleEndian;
-    case DataInformationEndianess::EndianessFromSettings:
+    case DataInformationEndianness::EndiannessFromSettings:
         return byteOrderFromSettings();
     default: // inherit
         if (mParent && !mParent->isTopLevel()) {

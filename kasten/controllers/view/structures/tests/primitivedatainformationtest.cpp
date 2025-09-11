@@ -251,7 +251,7 @@ void PrimitiveDataInformationTest::testValueStringInt_data()
                             << "-0xc510" << "-50448" << "-0o142420";
     QTest::newRow("-126832") << qint64(-126832) << "-0b1 11101111 01110000"
                              << "-0x1ef70" << "-126832" << "-0o367560";
-    // -1 * postive maximum
+    // -1 * positive maximum
     QTest::newRow("-qint8::max()") << qint64(-std::numeric_limits<qint8>::max())
                                    << "-0b1111111" << "-0x7f" << "-127" << "-0o177";
     QTest::newRow("-qint16::max()") << qint64(-std::numeric_limits<qint16>::max())

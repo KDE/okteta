@@ -176,7 +176,7 @@ Size ByteArrayModelPrivate::replaceBytes(const AddressRange& _removeRange, const
 
     const Size sizeDiff = insertLength - removeRange.width();
     int newSize = mSize + sizeDiff;
-    // check if buffer does not get to big TODO: make algo simplier and less if else
+    // check if buffer does not get to big TODO: make algo simpler and less if else
     if (mMaxSize != -1 && newSize > mMaxSize) {
         if (mSize == mMaxSize) {
             return 0;

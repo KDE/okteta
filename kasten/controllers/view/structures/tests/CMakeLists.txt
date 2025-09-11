@@ -51,4 +51,4 @@ set_property(TARGET Qt5::Test PROPERTY INTERFACE_COMPILE_DEFINITIONS ${qttestdef
 target_compile_definitions(customtostringtest PRIVATE QT_TESTCASE_BUILDDIR="${CMAKE_CURRENT_BINARY_DIR}")
 target_compile_definitions(jsparsertest       PRIVATE QT_TESTCASE_BUILDDIR="${CMAKE_CURRENT_BINARY_DIR}")
 # TODO: still fragile once __FILE__ is neither absolute or full relative path to this build dir
-# look into using custom code intead of simple QFINDTESTDATA usage
+# look into using custom code instead of simple QFINDTESTDATA usage

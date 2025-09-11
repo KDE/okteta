@@ -73,7 +73,7 @@ public: // API to be reimplemented in the subclasses
 public: // modification access
     /** sets starting point of the column */
     void setX(PixelX x);
-    /** sets visibily */
+    /** sets visibility */
     void setVisible(bool isVisible);
     /** buffer actual line height in column */
     void setLineHeight(PixelY lineHeight);

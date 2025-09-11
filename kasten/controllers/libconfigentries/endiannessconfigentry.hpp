@@ -19,11 +19,11 @@ template <>
 inline QSysInfo::Endian KConfigGroup::readEntry(const char *key, const QSysInfo::Endian &defaultValue) const
 {
     const QString entry = readEntry(key, QString());
-    const QSysInfo::Endian endianess =
+    const QSysInfo::Endian endianness =
         (entry == QLatin1String("BigEndian")) ?    QSysInfo::BigEndian :
         (entry == QLatin1String("LittleEndian")) ? QSysInfo::LittleEndian :
         /* else */                                 defaultValue;
-    return endianess;
+    return endianness;
 }
 
 template <>

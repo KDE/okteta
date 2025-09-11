@@ -174,7 +174,7 @@ void ChecksumTool::setAlgorithm(int algorithmId)
 
 // TODO: hack!
 // better would be to store the parameter set used for the source and compare if equal
-// this hack does the same, except for that the source will never be uptodate
+// this hack does the same, except for that the source will never be up-to-date
 void ChecksumTool::resetSourceTool()
 {
     mSourceAlgorithmId = -1;

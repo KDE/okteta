@@ -20,11 +20,11 @@ template <>
 inline Crc64Variant KConfigGroup::readEntry(const char *key, const Crc64Variant &defaultValue) const
 {
     const QString entry = readEntry(key, QString());
-    const Crc64Variant endianess =
+    const Crc64Variant variant =
         (entry == QLatin1String("ECMA182")) ? Crc64Variant::ECMA182 :
         (entry == QLatin1String("ISO3309")) ? Crc64Variant::ISO3309 :
         /* else */                            defaultValue;
-    return endianess;
+    return variant;
 }
 
 template <>

@@ -21,7 +21,7 @@
 // Qt
 #include <QLabel>
 
-// TODO: make status bar capable to hide entries if size is too small, use priorisation
+// TODO: make status bar capable to hide entries if size is too small, use prioritization
 
 namespace Kasten {
 

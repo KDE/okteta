@@ -54,7 +54,7 @@ private Q_SLOTS: // action slots
     void updateBookmarks();
     void onBookmarkTriggered(QAction*);
 
-private Q_SLOTS: // exectute slots
+private Q_SLOTS: // execute slots
     void addBookmark(Okteta::Address cursorPosition, const QString& name);
 
 private Q_SLOTS:

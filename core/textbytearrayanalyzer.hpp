@@ -41,7 +41,7 @@ public:
 
 public:
     /** searches for the start of the word including the given index.
-     * if no other nonwordchar preceds this is 0;
+     * if no other nonwordchar precedes this is 0;
      * If the byte at the given index is already a nonword char the given index is returned.
      * @param index index to start with
      * @return index of the first char of the current word or the given index if there is none

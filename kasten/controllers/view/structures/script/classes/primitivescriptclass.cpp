@@ -69,7 +69,7 @@ PrimitiveScriptClass::~PrimitiveScriptClass() = default;
 bool PrimitiveScriptClass::queryAdditionalProperty(const DataInformation* data, const QScriptString& name, QScriptClass::QueryFlags* flags, uint*)
 {
     Q_UNUSED(data)
-    // TODO assign ids to improve speed? cant have children, so it won't conflict
+    // TODO assign ids to improve speed? can't have children, so it won't conflict
     // no need to modify flags since both read and write are handled
     if (name == s_value || name == s_type) {
         *flags &= ~HandlesWriteAccess;

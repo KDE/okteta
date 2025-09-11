@@ -162,25 +162,25 @@ ParsedNumber<quint64> ParserUtils::uint64FromString(const QString& str)
     return ParsedNumber<quint64>(value, str, okay);
 }
 
-DataInformation::DataInformationEndianess ParserUtils::byteOrderFromString(const QString& string,
-                                                                           const LoggerWithContext& logger)
+DataInformation::DataInformationEndianness ParserUtils::byteOrderFromString(const QString& string,
+                                                                            const LoggerWithContext& logger)
 {
     const QString lower = string.toLower();
     if (lower == QLatin1String("bigendian") || lower == QLatin1String("big-endian")) {
-        return DataInformation::DataInformationEndianess::EndianessBig;
+        return DataInformation::DataInformationEndianness::EndiannessBig;
     }
     if (lower == QLatin1String("littleendian") || lower == QLatin1String("little-endian")) {
-        return DataInformation::DataInformationEndianess::EndianessLittle;
+        return DataInformation::DataInformationEndianness::EndiannessLittle;
     }
     if (lower == QLatin1String("fromsettings") || lower == QLatin1String("from-settings")) {
-        return DataInformation::DataInformationEndianess::EndianessFromSettings;
+        return DataInformation::DataInformationEndianness::EndiannessFromSettings;
     }
     if (lower == QLatin1String("inherit")) {
-        return DataInformation::DataInformationEndianess::EndianessInherit;
+        return DataInformation::DataInformationEndianness::EndiannessInherit;
     }
 
     logger.warn().nospace() << "Unrecognized byte order '" << string << "', defaulting to 'inherit'";
-    return DataInformation::DataInformationEndianess::EndianessInherit;
+    return DataInformation::DataInformationEndianness::EndiannessInherit;
 }
 
 ParsedNumber<int> ParserUtils::intFromScriptValue(const QScriptValue& val)
@@ -234,15 +234,15 @@ ParsedNumber<quint64> ParserUtils::uint64FromScriptValue(const QScriptValue& val
     return ParsedNumber<quint64>::badInput(val.toString());
 }
 
-QString ParserUtils::byteOrderToString(DataInformation::DataInformationEndianess order)
+QString ParserUtils::byteOrderToString(DataInformation::DataInformationEndianness order)
 {
-    if (order == DataInformation::DataInformationEndianess::EndianessLittle) {
+    if (order == DataInformation::DataInformationEndianness::EndiannessLittle) {
         return QStringLiteral("littleEndian");
     }
-    if (order == DataInformation::DataInformationEndianess::EndianessBig) {
+    if (order == DataInformation::DataInformationEndianness::EndiannessBig) {
         return QStringLiteral("bigEndian");
     }
-    if (order == DataInformation::DataInformationEndianess::EndianessFromSettings) {
+    if (order == DataInformation::DataInformationEndianness::EndiannessFromSettings) {
         return QStringLiteral("fromSettings");
     }
     return QStringLiteral("inherit");

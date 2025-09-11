@@ -210,7 +210,7 @@ QVariant StatisticTableModel::headerData(int section, Qt::Orientation orientatio
     QVariant result;
 
     if (role == Qt::DisplayRole) {
-        const QString titel =
+        const QString title =
             section == ValueId ? (
                 mValueCoding == Okteta::HexadecimalCoding ? i18nc("@title:column short for Hexadecimal", "Hex") :
                 mValueCoding == Okteta::DecimalCoding ?     i18nc("@title:column short for Decimal",    "Dec") :
@@ -221,9 +221,9 @@ QVariant StatisticTableModel::headerData(int section, Qt::Orientation orientatio
             section == CountId ?       i18nc("@title:column count of characters",      "Count") :
             section == PercentId ?     i18nc("@title:column Percent of byte in total", "Percent") :
                                        QString();
-        result = titel;
+        result = title;
     } else if (role == Qt::ToolTipRole) {
-        const QString titel =
+        const QString title =
             section == ValueId ? (
                 mValueCoding == Okteta::HexadecimalCoding ?
                     i18nc("@info:tooltip column contains the value in hexadecimal format", "Hexadecimal") :
@@ -240,7 +240,7 @@ QVariant StatisticTableModel::headerData(int section, Qt::Orientation orientatio
 //             section == CountId ?       i18nc("@info:tooltip count of characters",      "Count") :
 //             section == PercentId ?     i18nc("@info:tooltip Percent of byte in total", "Percent") :
                 QString();
-        result = titel;
+        result = title;
     } else {
         result = QAbstractTableModel::headerData(section, orientation, role);
     }

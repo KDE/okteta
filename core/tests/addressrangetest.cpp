@@ -725,7 +725,7 @@ void AddressRangeTest::testIsJoinable()
     otherAddressRange.set(Start - 1, End + 1);
     QVERIFY(addressRange.isJoinable(otherAddressRange));
 
-    // Overlapping, identic
+    // Overlapping, identical
     otherAddressRange.set(addressRange);
     QVERIFY(addressRange.isJoinable(otherAddressRange));
 

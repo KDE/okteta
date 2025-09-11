@@ -38,7 +38,7 @@ public:
     ByteArrayTableRanges& operator=(const ByteArrayTableRanges&) = delete;
     ByteArrayTableRanges& operator=(ByteArrayTableRanges&&) = delete;
 
-public: // modifcation access
+public: // modification access
     void setMarking(const AddressRange& marking);
     void setSelectionStart(Address startIndex);
     void setSelectionEnd(Address endIndex);

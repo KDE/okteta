@@ -21,7 +21,7 @@ TabBar::TabBar(QWidget* parent)
     setAcceptDrops(true);
     setChangeCurrentOnDrag(true);
 
-    // catch non-LMB double clicks
+    // catch non-LMB double-clicks
     installEventFilter(this);
 
     connect(this, &QTabBar::tabBarDoubleClicked,
