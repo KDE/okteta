@@ -153,10 +153,10 @@ Answer PODTableView::query(int newValueSize, int oldValueSize, int sizeLeft)
         query->addResponseOption(KStandardGuiItem::cancel(), QStringLiteral("cancel"),
                                  Kasten::UserResponseCancelHint | Kasten::UserResponseDefaultHint);
 
-        const QString reponse = m_userMessagesHandler->executeQuery(std::move(query));
-        answer = (reponse == keepResponseId) ?   Overwrite :
-                 (reponse == removeResponseId) ? AdaptSize :
-                                                 Cancel;
+        const QString response = m_userMessagesHandler->executeQuery(std::move(query));
+        answer = (response == keepResponseId) ?   Overwrite :
+                 (response == removeResponseId) ? AdaptSize :
+                                                  Cancel;
     } else {
         const QString message =
             xi18nc("@info",
@@ -171,10 +171,10 @@ Answer PODTableView::query(int newValueSize, int oldValueSize, int sizeLeft)
         query->addResponseOption(KStandardGuiItem::cancel(), QStringLiteral("cancel"),
                                  Kasten::UserResponseCancelHint | Kasten::UserResponseDefaultHint);
 
-        const QString reponse = m_userMessagesHandler->executeQuery(std::move(query));
-        answer = (reponse == overwriteResponseId) ? Overwrite :
-                 (reponse == insertResponseId) ?    AdaptSize :
-                                                    Cancel;
+        const QString response = m_userMessagesHandler->executeQuery(std::move(query));
+        answer = (response == overwriteResponseId) ? Overwrite :
+                 (response == insertResponseId) ?    AdaptSize :
+                                                     Cancel;
     }
 
     return answer;

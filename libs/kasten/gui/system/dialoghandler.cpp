@@ -42,11 +42,11 @@ Answer DialogHandler::queryOverwrite(const QUrl& url, const QString& title) cons
     query->addResponseOption(KStandardGuiItem::back(), backResponseId); // make default somehow?
     query->addResponseOption(KStandardGuiItem::cancel(), QStringLiteral("cancel"), UserResponseCancelHint | Kasten::UserResponseDefaultHint);
 
-    const QString reponse = m_userMessagesHandler->executeQuery(std::move(query));
+    const QString response = m_userMessagesHandler->executeQuery(std::move(query));
     return
-        (reponse == overwriteResponseId) ? Overwrite :
-        (reponse == backResponseId) ?      PreviousQuestion :
-                                           Cancel;
+        (response == overwriteResponseId) ? Overwrite :
+        (response == backResponseId) ?      PreviousQuestion :
+                                            Cancel;
 }
 
 Answer DialogHandler::queryDiscardOnReload(const AbstractDocument* document, const QString& title) const
@@ -62,8 +62,8 @@ Answer DialogHandler::queryDiscardOnReload(const AbstractDocument* document, con
     query->addResponseOption(KStandardGuiItem::discard(), discardResponseId);
     query->addResponseOption(KStandardGuiItem::cancel(), QStringLiteral("cancel"), UserResponseCancelHint | Kasten::UserResponseDefaultHint);
 
-    const QString reponse = m_userMessagesHandler->executeQuery(std::move(query));
-    return (reponse == discardResponseId) ? Discard : Cancel;
+    const QString response = m_userMessagesHandler->executeQuery(std::move(query));
+    return (response == discardResponseId) ? Discard : Cancel;
 }
 
 Answer DialogHandler::querySaveDiscard(const AbstractDocument* document, const QString& title) const
@@ -79,11 +79,11 @@ Answer DialogHandler::querySaveDiscard(const AbstractDocument* document, const Q
     query->addResponseOption(KStandardGuiItem::discard(), discardResponseId);
     query->addResponseOption(KStandardGuiItem::cancel(), QStringLiteral("cancel"), UserResponseCancelHint | Kasten::UserResponseDefaultHint);
 
-    const QString reponse = m_userMessagesHandler->executeQuery(std::move(query));
+    const QString response = m_userMessagesHandler->executeQuery(std::move(query));
     return
-        (reponse == saveResponseId) ?    Save :
-        (reponse == discardResponseId) ? Discard :
-                                         Cancel;
+        (response == saveResponseId) ?    Save :
+        (response == discardResponseId) ? Discard :
+                                          Cancel;
 }
 
 Answer DialogHandler::queryDiscard(const AbstractDocument* document, const QString& title) const
@@ -97,8 +97,8 @@ Answer DialogHandler::queryDiscard(const AbstractDocument* document, const QStri
     query->addResponseOption(KStandardGuiItem::discard(), discardResponseId);
     query->addResponseOption(KStandardGuiItem::cancel(), QStringLiteral("cancel"), UserResponseCancelHint | Kasten::UserResponseDefaultHint);
 
-    const QString reponse = m_userMessagesHandler->executeQuery(std::move(query));
-    return (reponse == discardResponseId) ? Discard : Cancel;
+    const QString response = m_userMessagesHandler->executeQuery(std::move(query));
+    return (response == discardResponseId) ? Discard : Cancel;
 }
 
 }
