@@ -84,11 +84,11 @@ void VersionableIfTest::testBegin()
 void VersionableIfTest::testFill()
 {
 
-    weiter an ende
-    1. neue Version
-    2. Versionsänderung
-    weiter in mitte
-    weiter an anfang
+    continue at end
+    1. new version
+    2. change of version
+    continue in middle
+    continue at begin
 
     // can we alter the buffer at all?
     if (mVersionable->isReadOnly()) {

@@ -61,10 +61,10 @@ bool StringsExtractTool::canHighlightString() const
 QString StringsExtractTool::title() const { return i18nc("@title:window of the tool to extract strings", "Strings"); }
 
 // TODO: add model with offset and string
-// doubleclick moves cursor to offset
-// filter für Suche, inkl. Regulärausdrücke
-// groß/kleinschreibung
-// voll strings, auch mit Leerzeichen
+// double-click moves cursor to offset
+// filter for search, incl. regular expressions
+// case-insensitivity
+// full strings, also with spaces
 void StringsExtractTool::setTargetModel(AbstractModel* model)
 {
     ByteArrayView* const byteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;

@@ -37,7 +37,7 @@ namespace Kasten {
 
 static constexpr char BookmarkListActionListId[] = "bookmark_list";
 
-// TODO: Sortieren nach Offset oder Zeit
+// TODO: sort by offset or time
 
 BookmarksController::BookmarksController(KXMLGUIClient* guiClient)
     : mGuiClient(guiClient)
