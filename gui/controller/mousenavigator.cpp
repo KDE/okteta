@@ -33,12 +33,12 @@ MouseNavigator::MouseNavigator(AbstractByteArrayView* view, AbstractMouseControl
 {
     mScrollTimer = new QTimer(this);
     mDragStartTimer = new QTimer(this);
-    mTrippleClickTimer = new QTimer(this);
+    m_tripleClickTimer = new QTimer(this);
 
     connect(mScrollTimer,      &QTimer::timeout, this, &MouseNavigator::autoScrollTimerDone);
     connect(mDragStartTimer,   &QTimer::timeout, this, &MouseNavigator::startDrag);
     mDragStartTimer->setSingleShot(true);
-    mTrippleClickTimer->setSingleShot(true);
+    m_tripleClickTimer->setSingleShot(true);
 }
 
 MouseNavigator::~MouseNavigator() = default;
@@ -58,9 +58,9 @@ bool MouseNavigator::handleMousePressEvent(QMouseEvent* mouseEvent)
         mLMBPressed = true;
 
         // select whole line?
-        if (mTrippleClickTimer->isActive()
+        if (m_tripleClickTimer->isActive()
             && (mouseEvent->globalPos() - mDoubleClickPoint).manhattanLength() < QApplication::startDragDistance()) {
-            mTrippleClickTimer->stop();
+            m_tripleClickTimer->stop();
             const Address indexAtFirstDoubleClickLinePosition = tableLayout->indexAtFirstLinePosition(mDoubleClickLine);
             tableRanges->setSelectionStart(indexAtFirstDoubleClickLinePosition);
             tableCursor->gotoIndex(indexAtFirstDoubleClickLinePosition);
@@ -223,7 +223,7 @@ bool MouseNavigator::handleMouseDoubleClickEvent(QMouseEvent* mouseEvent)
             mView->selectWord(index);
 
             // as we already have a double-click maybe it is a triple-click
-            mTrippleClickTimer->start(qApp->doubleClickInterval());
+            m_tripleClickTimer->start(qApp->doubleClickInterval());
             mDoubleClickPoint = mouseEvent->globalPos();
         }
         //  else

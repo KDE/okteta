@@ -52,7 +52,7 @@ private:
     /** Timer to start a drag */
     QTimer* mDragStartTimer;
     /** timer to measure whether the time between a double-click and the following counts for a triple-click */
-    QTimer* mTrippleClickTimer;
+    QTimer* m_tripleClickTimer;
 
 private:
     /** point at which the current double-click happened (used by triple-click) */
