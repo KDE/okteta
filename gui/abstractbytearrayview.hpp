@@ -394,7 +394,7 @@ public: // logic value service
 Q_SIGNALS:
     /** Index of the byte that was clicked */
     void clicked(Okteta::Address index);
-    /** Index of the byte that was double clicked */
+    /** Index of the byte that was double-clicked */
     void doubleClicked(Okteta::Address index);
 
     void cursorPositionChanged(Okteta::Address index);

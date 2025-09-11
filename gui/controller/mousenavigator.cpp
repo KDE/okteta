@@ -222,7 +222,7 @@ bool MouseNavigator::handleMouseDoubleClickEvent(QMouseEvent* mouseEvent)
         if (mView->activeCoding() == AbstractByteArrayView::CharCodingId) {
             mView->selectWord(index);
 
-            // as we already have a double-click maybe it is a triple click
+            // as we already have a double-click maybe it is a triple-click
             mTrippleClickTimer->start(qApp->doubleClickInterval());
             mDoubleClickPoint = mouseEvent->globalPos();
         }
