@@ -55,9 +55,9 @@ private:
     QTimer* mTrippleClickTimer;
 
 private:
-    /** point at which the current double click happended (used by TrippleClick) */
+    /** point at which the current double click happened (used by TrippleClick) */
     QPoint mDoubleClickPoint;
-    /** line in which the current double click happended (used by TrippleClick) */
+    /** line in which the current double click happened (used by TrippleClick) */
     int mDoubleClickLine;
     /** point at which the current dragging started */
     QPoint mDragStartPoint;

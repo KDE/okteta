@@ -27,7 +27,7 @@ public:
     SafeReferenceHolder& operator=(const SafeReferenceHolder&) = delete;
 
 public:
-    /** sets all refereces to this object to null */
+    /** sets all references to this object to null */
     void invalidateAll(DataInformation* data);
     void safeReferenceDestroyed(SafeReference* ref);
     void registerSafeReference(SafeReference* ref, DataInformation* data);

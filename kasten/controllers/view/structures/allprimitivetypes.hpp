@@ -148,8 +148,8 @@ public:
      * Read data of type @p T from the model. Range checking must have been performed before
      * @param input the input to read from
      * @param address the starting address
-     * @param endianess the endianess to use when reading
-     * @param bitOffset the number of bits into the first byte (different depending on endianess)
+     * @param endianess the endianness to use when reading
+     * @param bitOffset the number of bits into the first byte (different depending on endianness)
      * @return the read value
      */
     // TODO bool* ok parameter for when reading from model can cause errors (or exceptions sometime?)

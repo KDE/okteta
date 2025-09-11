@@ -20,7 +20,7 @@
    versions in the storing (like revision control systems) are not supported/integrated,
    needs a more general approach to input, synchronizer, changesets and such.
 
-   A model/document can be versioned if the changes to it are traced and reversable.
+   A model/document can be versioned if the changes to it are traced and reversible.
 
    Addressing:
    While we don't do a distributed model and concurrent changes we use simple

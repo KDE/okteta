@@ -32,7 +32,7 @@ The foundation of the framework Kasten itself is currently found within the
 Okteta sources, in the subdirectory [libs/kasten/](libs/kasten/).
 
 The end-user products are the stand-alone program also named Okteta and a KPart
-useable e.g. for Konqueror. These are in the subdirs [program/](program/)and [parts/](parts/).
+usable e.g. for Konqueror. These are in the subdirs [program/](program/)and [parts/](parts/).
 
 
 What to find in which subdirectory

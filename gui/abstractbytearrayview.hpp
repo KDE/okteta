@@ -284,7 +284,7 @@ public:
 
     /** sets the number of bytes per line, switching the resize style to Okteta::FixedLayoutStyle */
     void setNoOfBytesPerLine(int noOfBytesPerLine);
-    /** sets absolut offset of the data */
+    /** sets absolute offset of the data */
     void setStartOffset(Address startOffset);
     /** sets offset of the char in the upper left corner */
     void setFirstLineOffset(Address firstLineOffset);
