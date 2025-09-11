@@ -113,8 +113,8 @@ DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& 
         CommonParsedData cpd(info);
         QString byteOrderStr = value.property(PROPERTY_BYTEORDER()).toString();
         if (!byteOrderStr.isEmpty()) {
-            cpd.endianess = ParserUtils::byteOrderFromString(byteOrderStr,
-                                                             LoggerWithContext(info.logger, info.context()));
+            cpd.endianness = ParserUtils::byteOrderFromString(byteOrderStr,
+                                                              LoggerWithContext(info.logger, info.context()));
         }
         cpd.updateFunc = value.property(PROPERTY_UPDATE_FUNC());
         cpd.validationFunc = value.property(PROPERTY_VALIDATION_FUNC());

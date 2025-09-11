@@ -148,19 +148,19 @@ public:
      * Read data of type @p T from the model. Range checking must have been performed before
      * @param input the input to read from
      * @param address the starting address
-     * @param endianess the endianness to use when reading
+     * @param endianness the endianness to use when reading
      * @param bitOffset the number of bits into the first byte (different depending on endianness)
      * @return the read value
      */
     // TODO bool* ok parameter for when reading from model can cause errors (or exceptions sometime?)
     template <typename T> static T readValue(const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
-        QSysInfo::Endian endianess, quint8 bitOffset);
+        QSysInfo::Endian endianness, quint8 bitOffset);
     // TODO add writeValue
 
 private:
     template <int size> static typename QIntegerForSize<size>::Unsigned readValuePrivate(
         const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
-        QSysInfo::Endian endianess, quint8 bitOffset);
+        QSysInfo::Endian endianness, quint8 bitOffset);
     template <int size> static typename QIntegerForSize<size>::Unsigned readRawBytes(
         const Okteta::AbstractByteArrayModel* input, Okteta::Address address);
 
@@ -195,7 +195,7 @@ template <> inline double AllPrimitiveTypes::value<double>() const { return _dou
 
 template <typename T>
 inline T AllPrimitiveTypes::readValue(const Okteta::AbstractByteArrayModel* input,
-                                      Okteta::Address address, QSysInfo::Endian endianess, quint8 bitOffset)
+                                      Okteta::Address address, QSysInfo::Endian endianness, quint8 bitOffset)
 {
     // check for out of bounds
     Q_ASSERT(BitCount64(input->size() - address) * 8 - bitOffset >= sizeof(T) * 8);
@@ -205,24 +205,24 @@ inline T AllPrimitiveTypes::readValue(const Okteta::AbstractByteArrayModel* inpu
         T value;
         typename QIntegerForSizeof<T>::Unsigned unsignedValue;
     } u;
-    u.unsignedValue = readValuePrivate<sizeof(T)>(input, address, endianess, bitOffset);
+    u.unsignedValue = readValuePrivate<sizeof(T)>(input, address, endianness, bitOffset);
     return u.value;
 }
 
 template <int size>
 inline typename QIntegerForSize<size>::Unsigned AllPrimitiveTypes::readValuePrivate(
     const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
-    QSysInfo::Endian endianess, quint8 bitOffset)
+    QSysInfo::Endian endianness, quint8 bitOffset)
 {
     typename QIntegerForSize<size>::Unsigned unsignedValue = readRawBytes<size>(input, address);
-    if (endianess != QSysInfo::ByteOrder) {
+    if (endianness != QSysInfo::ByteOrder) {
         // swap the byte order if machine endianness does not match requested endianness
         unsignedValue = qbswap(unsignedValue);
     }
     if (Q_UNLIKELY(bitOffset != 0)) {
         quint8 lastByte = input->byte(address + size);
         // handle the remaining bits
-        if (endianess == QSysInfo::BigEndian) {
+        if (endianness == QSysInfo::BigEndian) {
             // the coming bits are the least significant, and range from bit (8-bitOffset)..7
             unsignedValue <<= bitOffset;
             lastByte >>= 8 - bitOffset; // unsigned shift

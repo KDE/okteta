@@ -74,7 +74,7 @@ function init() {
         "64 bit" : 2,
     };
 
-    var endianessEnumValues = {
+    var endiannessEnumValues = {
         "None" : 0,
         "little endian" : 1,
         "big endian" : 2,
@@ -106,7 +106,7 @@ function init() {
             Magic4 : char(),
         }),
         ArchitectureClass : enumeration("ClassEnum", uint8(), classEnumValues),
-        Endianess : enumeration("EndianessEnum", "UInt8", endianessEnumValues),
+        Endianness : enumeration("EndiannessEnum", "UInt8", endiannessEnumValues),
         Version : enumeration("ElfVersionEnum", uint8(), { NONE : 0, CURRENT : 1, NUM : 2}),
         ABI : enumeration("ABIEnum", uint8(), ABIEnumValues),
         ABI_Version : uint8(),

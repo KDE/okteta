@@ -263,7 +263,7 @@ StructureDataInformation* DataInformationFactory::newStruct(const StructOrUnionP
 
 bool DataInformationFactory::commonInitialization(DataInformation* data, const CommonParsedData& pd)
 {
-    data->setByteOrder(pd.endianess);
+    data->setByteOrder(pd.endianness);
 
     if (data->name().isEmpty()) {
         pd.warn() << "Name is empty!";

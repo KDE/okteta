@@ -73,7 +73,7 @@ void UnionDataInformationTest::testReadData1()
     QVector<DataInformation*> children;
     children << b8 << u32 << i16 << u54;
     auto* un = new UnionDataInformation(QStringLiteral("un"), children);
-    un->setByteOrder(DataInformation::DataInformationEndianess::EndianessLittle);
+    un->setByteOrder(DataInformation::DataInformationEndianness::EndiannessLittle);
     TopLevelDataInformation top(un);
     // read from bit 0
     QFETCH(uint, address);
