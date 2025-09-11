@@ -156,7 +156,7 @@ public: // modification API
     Size replace(Address offset, Size removeLength,
                  const Byte* insertData, Size insertLength);
 
-    // todo use parameters grouped differrently?
+    // TODO: use parameters grouped differently?
     /** moves the second section before the start of the first
      * which is the same as moving the first behind the second.
      * @param firstStart position of the data where the section should be moved behind

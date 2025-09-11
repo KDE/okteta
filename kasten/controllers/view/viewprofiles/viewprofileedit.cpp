@@ -45,7 +45,7 @@ ViewProfileEdit::ViewProfileEdit(QWidget* parent)
     auto* layout = new QVBoxLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
 
-    // titel
+    // title
     auto* titleFormLayout = new QFormLayout;
     // char for non-printable bytes
     mTitleEdit = new QLineEdit(this);

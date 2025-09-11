@@ -28,7 +28,7 @@ Address InsertPieceTableChange::storageOffset() const { return mStorageOffset; }
 
 bool InsertPieceTableChange::merge(const AbstractPieceTableChange* other)
 {
-// TODO: remove me again after synching solved
+// TODO: remove me again after syncing solved
 // return false;
     bool result = false;
 

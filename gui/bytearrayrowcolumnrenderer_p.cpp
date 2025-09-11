@@ -533,7 +533,7 @@ void ByteArrayRowColumnRendererPrivate::renderLinePositions(QPainter* painter, L
         return;
     }
 
-    // Go through the lines TODO: handle first and last line more effeciently
+    // Go through the lines TODO: handle first and last line more efficiently
     // check for leading and trailing spaces
     const LinePositionRange existingLinePositions = mLayout->linePositions(lineIndex);
 

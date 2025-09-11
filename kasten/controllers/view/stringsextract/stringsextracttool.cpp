@@ -73,7 +73,7 @@ void StringsExtractTool::setTargetModel(AbstractModel* model)
     }
 
     if (mByteArrayView) {
-        // disconnect explicitly from all connects but QObject::detroyed,
+        // disconnect explicitly from all connects but QObject::destroyed,
         // for the case mSourceByteArrayView is mByteArrayView
         disconnect(mByteArrayView,  &ByteArrayView::selectedDataChanged,
                    this, &StringsExtractTool::onSelectionChanged);

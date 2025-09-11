@@ -29,7 +29,7 @@
 #include "types/uint64.hpp"
 
 // TODO: Stranger that you are reading this: please help out and show how to add QVariant::Types for custom datatypes,
-// so that instead of this unflexible maintanance mess^WWWunlooped code QItemEditorCreator can be used!
+// so that instead of this inflexible maintenance mess^WWWunlooped code QItemEditorCreator can be used!
 
 namespace Kasten {
 

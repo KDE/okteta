@@ -185,11 +185,11 @@ void StringDataInformation::setEncoding(StringDataInformation::StringType encodi
     }
     if (mData && ((mEncoding == StringType::UTF16_LE && encoding == StringType::UTF16_BE) ||
                   (mEncoding == StringType::UTF16_BE && encoding == StringType::UTF16_LE))) {
-        // only set endianess, since is already utf 16
+        // only set endianness, since is already utf 16
         mData->setEndianness((encoding == StringType::UTF16_LE) ? QSysInfo::LittleEndian : QSysInfo::BigEndian);
     } else if (mData && ((mEncoding == StringType::UTF32_LE && encoding == StringType::UTF32_BE) ||
                          (mEncoding == StringType::UTF32_BE && encoding == StringType::UTF32_LE))) {
-        // only set endianess, since is already utf 32
+        // only set endianness, since is already utf 32
         mData->setEndianness((encoding == StringType::UTF32_LE) ? QSysInfo::LittleEndian : QSysInfo::BigEndian);
     } else {
         StringData* data = nullptr;

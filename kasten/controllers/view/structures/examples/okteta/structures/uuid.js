@@ -17,7 +17,7 @@ function UUID() {
         }
         return ret + "}";
     }
-    //TODO endianess
+    //TODO endianness
     var ret = struct({data1: uint32(), data2: uint16(), data3: uint16(), data4: array(uint8(), 8)});
     ret.byteOrder = "bigEndian";
     ret.toStringFunc = uuidToString;

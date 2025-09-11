@@ -232,7 +232,7 @@ void PieceTableByteArrayModelPrivate::revertToVersionByIndex(int versionIndex)
     const bool isModificationChanged = (oldModified != newModified);
 
 // TODO: what about the bookmarks? They need version support, too.
-// Modell of the bookmarks. But shouldn't they be independent?
+// Model of the bookmarks. But shouldn't they be independent?
 
     emit q->contentsChanged(changeList);
     if (isModificationChanged) {

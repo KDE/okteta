@@ -159,7 +159,7 @@ bool MouseNavigator::handleMouseReleaseEvent(QMouseEvent* mouseEvent)
 
 //         const QPoint releasePoint = mView->viewportToColumns( mouseEvent->pos() );
 
-        // this is not the release of a doubleclick so we need to process it?
+        // this is not the release of a double-click so we need to process it?
         if (!mInLMBDoubleClick) {
 //             const int line = mView->lineAt( releasePoint.y() );
 //             const int pos = mActiveColumn->linePositionOfX( releasePoint.x() ); // TODO: can we be sure here about the active column?
@@ -222,7 +222,7 @@ bool MouseNavigator::handleMouseDoubleClickEvent(QMouseEvent* mouseEvent)
         if (mView->activeCoding() == AbstractByteArrayView::CharCodingId) {
             mView->selectWord(index);
 
-            // as we already have a doubleclick maybe it is a tripple click
+            // as we already have a double-click maybe it is a triple click
             mTrippleClickTimer->start(qApp->doubleClickInterval());
             mDoubleClickPoint = mouseEvent->globalPos();
         }

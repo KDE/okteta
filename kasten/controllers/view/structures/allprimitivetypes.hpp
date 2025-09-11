@@ -216,7 +216,7 @@ inline typename QIntegerForSize<size>::Unsigned AllPrimitiveTypes::readValuePriv
 {
     typename QIntegerForSize<size>::Unsigned unsignedValue = readRawBytes<size>(input, address);
     if (endianess != QSysInfo::ByteOrder) {
-        // swap the byte order if machine endianess does not match requested endianess
+        // swap the byte order if machine endianness does not match requested endianness
         unsignedValue = qbswap(unsignedValue);
     }
     if (Q_UNLIKELY(bitOffset != 0)) {
