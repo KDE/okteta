@@ -622,6 +622,7 @@ okteta_add_library(Controllers NAMESPACE Okteta Kasten
         KF5::Completion
         Qt5::PrintSupport
         Qt5::Script
+        Qt5::Xml
         ${OPTIONAL_PRIVATE}
     VERSION     ${OKTETAKASTENCONTROLLERS_VERSION}
     SOVERSION   ${OKTETAKASTENCONTROLLERS_SO_VERSION}
