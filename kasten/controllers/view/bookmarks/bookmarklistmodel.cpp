@@ -122,11 +122,11 @@ QVariant BookmarkListModel::headerData(int section, Qt::Orientation orientation,
     QVariant result;
 
     if (role == Qt::DisplayRole) {
-        const QString titel =
+        const QString title =
             section == OffsetColumnId ?  i18nc("@title:column offset of the bookmark",     "Offset") :
             section == TitleColumnId ?   i18nc("@title:column title of the bookmark", "Title") :
             QString();
-        result = titel;
+        result = title;
     } else {
         result = QAbstractTableModel::headerData(section, orientation, role);
     }

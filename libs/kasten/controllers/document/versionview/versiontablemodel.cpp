@@ -104,17 +104,17 @@ QVariant VersionTableModel::headerData(int section, Qt::Orientation orientation,
     QVariant result;
 
     if (role == Qt::DisplayRole) {
-        const QString titel =
+        const QString title =
             section == IdColumnId ?                i18nc("@title:column Id of the version",         "Id") :
             section == ChangeDescriptionColumnId ? i18nc("@title:column description of the change", "Changes") :
             QString();
-        result = titel;
+        result = title;
     } else if (role == Qt::ToolTipRole) {
-        const QString titel =
+        const QString title =
             section == IdColumnId ?                i18nc("@info:tooltip", "Id of the version") :
             section == ChangeDescriptionColumnId ? i18nc("@info:tooltip", "Description of what changed") :
             QString();
-        result = titel;
+        result = title;
     } else {
         result = QAbstractTableModel::headerData(section, orientation, role);
     }

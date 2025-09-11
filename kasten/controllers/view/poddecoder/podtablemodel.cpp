@@ -146,19 +146,19 @@ QVariant PODTableModel::headerData(int section, Qt::Orientation orientation, int
     QVariant result;
 
     if (role == Qt::DisplayRole) {
-        const QString titel =
+        const QString title =
             section == NameId ?   i18nc("@title:column name of the datatype",                "Type") :
             section == ValueId ?  i18nc("@title:column value of the bytes for the datatype", "Value") :
                                   QString();
-        result = titel;
+        result = title;
     } else if (role == Qt::ToolTipRole) {
-        const QString titel =
+        const QString title =
             section == NameId ?
                 i18nc("@info:tooltip for column Type",    "The type of data") :
             section == ValueId ?
                 i18nc("@info:tooltip for column Value",   "The value of the bytes for the datatype") :
                 QString();
-        result = titel;
+        result = title;
     } else {
         result = QAbstractTableModel::headerData(section, orientation, role);
     }

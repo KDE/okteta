@@ -109,17 +109,17 @@ QVariant DocumentListModel::headerData(int section, Qt::Orientation orientation,
     QVariant result;
 
     if (role == Qt::DisplayRole) {
-        const QString titel =
+        const QString title =
 //             section == LocalStateColumnId ?  i18nc("@title:column Id of the version",         "Id") :
             section == TitleColumnId ?     i18nc("@title:column description of the change", "Title") :
             QString();
-        result = titel;
+        result = title;
     } else if (role == Qt::ToolTipRole) {
-        const QString titel =
+        const QString title =
 //             section == LocalStateColumnId ?                i18nc("@info:tooltip","Id of the version") :
             section == TitleColumnId ? i18nc("@info:tooltip", "Title of the document") :
             QString();
-        result = titel;
+        result = title;
     } else {
         result = QAbstractTableModel::headerData(section, orientation, role);
     }

@@ -162,16 +162,16 @@ QVariant ByteTableModel::headerData(int section, Qt::Orientation orientation, in
     QVariant result;
 
     if (role == Qt::DisplayRole) {
-        const QString titel =
+        const QString title =
             section == DecimalId ?     i18nc("@title:column short for Decimal",     "Dec") :
             section == HexadecimalId ? i18nc("@title:column short for Hexadecimal", "Hex") :
             section == OctalId ?       i18nc("@title:column short for Octal",       "Oct") :
             section == BinaryId ?      i18nc("@title:column short for Binary",      "Bin") :
             section == CharacterId ?   i18nc("@title:column short for Character",   "Char") :
             QString();
-        result = titel;
+        result = title;
     } else if (role == Qt::ToolTipRole) {
-        const QString titel =
+        const QString title =
             section == DecimalId ?
                 i18nc("@info:tooltip column contains the value in decimal format",     "Decimal") :
             section == HexadecimalId ?
@@ -183,7 +183,7 @@ QVariant ByteTableModel::headerData(int section, Qt::Orientation orientation, in
             section == CharacterId ?
                 i18nc("@info:tooltip column contains the character with the value",    "Character") :
                 QString();
-        result = titel;
+        result = title;
     } else {
         result = QAbstractTableModel::headerData(section, orientation, role);
     }
