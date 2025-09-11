@@ -178,7 +178,7 @@ void AbstractByteArrayViewPrivate::init()
 
     // TODO: on destruction, columns are destructed after mStylist instance in ~ColumnsViewScrollAreaEngine
     // small window of dangling pointer
-    // TODO: here and in subclasses look for better pattern to refer to intsances owned by engine
+    // TODO: here and in subclasses look for better pattern to refer to instances owned by engine
     auto offsetColumn =
         std::make_unique<OffsetColumnRenderer>(mStylist.get(), &mTableLayout, OffsetFormat::Hexadecimal);
     const int headerMargin = q->style()->pixelMetric(QStyle::PM_HeaderMargin);

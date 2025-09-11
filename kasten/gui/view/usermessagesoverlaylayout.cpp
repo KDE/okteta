@@ -30,7 +30,7 @@ void UserMessagesOverlayLayout::setGeometry(const QRect& rect)
         return;
     }
 
-    // using style margins for now, perhaps should use separate matrics?
+    // using style margins for now, perhaps should use separate metrics?
     QWidget* const widget = parentWidget();
     QStyle* const style = widget ? widget->style() : qApp->style();
     const int leftMargin = style->pixelMetric(QStyle::PM_LayoutLeftMargin, nullptr, widget);

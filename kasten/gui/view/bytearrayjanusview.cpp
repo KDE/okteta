@@ -388,7 +388,7 @@ QRect ByteArrayJanusView::viewRect() const
 void ByteArrayJanusView::propagateFont(const QFont& font)
 {
     // TODO: nothing currently queries the font, so okay to not set it on the wrapper
-    // Though message widgets use the parent wigdet, i.e. this, to take the font.
+    // Though message widgets use the parent widget, i.e. this, to take the font.
     // Needs some way to specify the font used in the message displays.
     // setFont(font);
     mView->setFont(font);

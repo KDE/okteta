@@ -34,7 +34,7 @@ public:
     ~AbstractModelSynchronizerFactory() override;
 
 public: // API to be implemented
-    // TODO: perhaps restore again to aloow 3rd-party juggling with synchronizers
+    // TODO: perhaps restore again to allow 3rd-party juggling with synchronizers
     // possibly together with some concept with pre-creation document types for loading
     // virtual AbstractModelSynchronizer* createSynchronizer() const = 0;
 
