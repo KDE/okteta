@@ -1,6 +1,4 @@
 /*
-    This file is part of the Okteta program, made within the KDE community.
-
     SPDX-FileCopyrightText: 2006-2009, 2011, 2014 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL

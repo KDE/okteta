@@ -1,6 +1,4 @@
 /*
-    This file is part of the Okteta Kasten module, made within the KDE community.
-
     SPDX-FileCopyrightText: 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     Public domain.

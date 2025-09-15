@@ -1,6 +1,4 @@
 /*
-    This file is part of the Okteta Kasten Framework, made within the KDE community.
-
     SPDX-FileCopyrightText: 2009, 2012 Alex Richardson <alex.richardson@gmx.de>
     SPDX-FileCopyrightText: 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 

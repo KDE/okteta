@@ -1,6 +1,4 @@
 /*
- *  This file is part of the Okteta Kasten module, made within the KDE community.
- *
  *  SPDX-FileCopyrightText: 2011, 2012 Alex Richardson <alex.richardson@gmx.de>
  *
  *  SPDX-License-Identifier: LGPL-2.1-or-later
