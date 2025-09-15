@@ -5,8 +5,9 @@
 */
 
 #include "safereference.hpp"
+
+// lib
 #include <structureslogging.hpp>
-// #include "../datatypes/datainformation.hpp"
 // Std
 #include <cstdio>
 

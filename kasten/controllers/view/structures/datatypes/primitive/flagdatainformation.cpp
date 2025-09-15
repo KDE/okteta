@@ -5,8 +5,11 @@
 */
 
 #include "flagdatainformation.hpp"
-#include <QVarLengthArray>
+
+// KF
 #include <KLocalizedString>
+// Qt
+#include <QVarLengthArray>
 
 FlagDataInformation::FlagDataInformation(const QString& name, PrimitiveDataInformation* type,
                                          const EnumDefinition::Ptr& enumDef, DataInformation* parent)

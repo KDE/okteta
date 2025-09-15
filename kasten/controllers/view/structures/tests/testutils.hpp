@@ -7,9 +7,7 @@
 #ifndef KASTEN_TESTUTILS_HPP
 #define KASTEN_TESTUTILS_HPP
 
-#include <QString>
-#include <QTest>
-#include <QScriptEngine>
+// sut
 #include "view/structures/datatypes/primitivedatatype.hpp"
 #include "view/structures/datatypes/datainformation.hpp"
 #include "view/structures/datatypes/primitive/primitivedatainformation.hpp"
@@ -19,6 +17,10 @@
 #include "view/structures/datatypes/topleveldatainformation.hpp"
 #include "view/structures/parsers/scriptvalueconverter.hpp"
 #include "view/structures/script/scriptengineinitializer.hpp"
+// Qt
+#include <QString>
+#include <QTest>
+#include <QScriptEngine>
 
 namespace Utils {
 

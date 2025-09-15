@@ -8,6 +8,7 @@
 #ifndef KASTEN_STRUCTUREVIEW_HPP
 #define KASTEN_STRUCTUREVIEW_HPP
 
+// tool
 #include "structureviewitemdelegate.hpp"
 // Qt
 #include <QWidget>

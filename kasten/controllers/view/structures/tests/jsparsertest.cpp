@@ -7,9 +7,11 @@
 // TODO: find better way to work-around simple name creation for QTest::newRow
 #undef QT_USE_QSTRINGBUILDER
 
+// test
+#include "testutils.hpp"
+// sut
 #include "view/structures/script/scriptengineinitializer.hpp"
 #include "view/structures/parsers/scriptvalueconverter.hpp"
-#include "testutils.hpp"
 // Qt
 #include <QTest>
 #include <QScriptEngine>

@@ -7,6 +7,7 @@
 #ifndef KASTEN_DUMMYDATAINFORMATION_HPP
 #define KASTEN_DUMMYDATAINFORMATION_HPP
 
+// lib
 #include "datainformation.hpp"
 
 class DataInformationWithDummyChildren;

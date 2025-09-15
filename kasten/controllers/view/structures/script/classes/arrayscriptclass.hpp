@@ -7,6 +7,7 @@
 #ifndef KASTEN_ARRAYSCRIPTCLASS_HPP
 #define KASTEN_ARRAYSCRIPTCLASS_HPP
 
+// lib
 #include "defaultscriptclass.hpp"
 
 class ArrayScriptClass : public DefaultScriptClass

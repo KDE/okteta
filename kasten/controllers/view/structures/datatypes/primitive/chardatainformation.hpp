@@ -7,6 +7,7 @@
 #ifndef KASTEN_CHARDATAINFORMATION_HPP
 #define KASTEN_CHARDATAINFORMATION_HPP
 
+// lib
 #include "primitivedatainformation.hpp"
 
 class CharDataInformationMethods

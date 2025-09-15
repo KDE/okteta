@@ -4,6 +4,7 @@
     SPDX-License-Identifier: LGPL-2.1-or-later
 */
 
+// sut
 #include "view/structures/datatypes/primitive/primitivetemplateinfo.hpp"
 #include "view/structures/datatypes/primitive/primitivedatainformation.hpp"
 #include "view/structures/datatypes/primitive/bitfield/signedbitfielddatainformation.hpp"
@@ -11,7 +12,7 @@
 #include "view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.hpp"
 #include "view/structures/datatypes/primitivefactory.hpp"
 #include "structureviewpreferences.hpp"
-// Okteta
+// Okteta core
 #include <Okteta/ByteArrayModel>
 // KF
 #include <KLocalizedString>

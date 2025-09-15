@@ -7,6 +7,7 @@
 #ifndef KASTEN_STRUCTUREVIEWITEMDELEGATE_HPP
 #define KASTEN_STRUCTUREVIEWITEMDELEGATE_HPP
 
+// Qt
 #include <QStyledItemDelegate>
 
 namespace Kasten {

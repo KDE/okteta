@@ -6,14 +6,17 @@
 
 #include "complexarraydata.hpp"
 
-#include <QScriptValue>
-#include <QVariant>
-#include <KLocalizedString>
+// lib
 #include "arraydatainformation.hpp"
 #include "../topleveldatainformation.hpp"
 #include "../structuredatainformation.hpp"
 #include "../../script/scripthandlerinfo.hpp"
 #include "../../script/scriptlogger.hpp"
+// KF
+#include <KLocalizedString>
+// Qt
+#include <QScriptValue>
+#include <QVariant>
 // Std
 #include <utility>
 

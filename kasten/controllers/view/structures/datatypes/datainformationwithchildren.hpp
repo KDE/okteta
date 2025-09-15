@@ -7,8 +7,9 @@
 #ifndef KASTEN_DATAINFORMATIONWITHCHILDREN_HPP
 #define KASTEN_DATAINFORMATIONWITHCHILDREN_HPP
 
+// lib
 #include "datainformation.hpp"
-
+// Qt
 #include <QVector>
 
 class DataInformationWithChildren : public DataInformation

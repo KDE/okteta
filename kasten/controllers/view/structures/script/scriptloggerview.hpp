@@ -7,8 +7,10 @@
 #ifndef KASTEN_SCRIPTLOGGERVIEW_HPP
 #define KASTEN_SCRIPTLOGGERVIEW_HPP
 
-#include <QWidget>
+// lib
 #include "../datatypes/topleveldatainformation.hpp"
+// Qt
+#include <QWidget>
 
 class QTableView;
 class KComboBox;

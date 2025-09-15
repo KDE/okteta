@@ -7,6 +7,7 @@
 #ifndef KASTEN_ENUMDATAINFORMATION_HPP
 #define KASTEN_ENUMDATAINFORMATION_HPP
 
+// lib
 #include "primitivedatainformation.hpp"
 #include "enumdefinition.hpp"
 

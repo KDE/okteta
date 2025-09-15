@@ -7,8 +7,9 @@
 #ifndef KASTEN_ASCIISTRINGDATA_HPP
 #define KASTEN_ASCIISTRINGDATA_HPP
 
+// lib
 #include "stringdata.hpp"
-
+// Qt
 #include <QVector>
 
 class AsciiStringData : public StringData

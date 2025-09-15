@@ -5,20 +5,21 @@
 */
 
 #include "topleveldatainformation.hpp"
+
+// lib
 #include "datainformation.hpp"
 #include "primitive/pointerdatainformation.hpp"
 #include "datainformationwithchildren.hpp"
-
 #include "../script/scripthandler.hpp"
 #include "../script/scriptlogger.hpp"
 #include "../script/scriptengineinitializer.hpp"
 #include "primitivefactory.hpp"
 #include <structureslogging.hpp>
-
+// Okteta core
 #include <Okteta/AbstractByteArrayModel>
-
+// Qt
 #include <QScriptEngine>
-
+// Std
 #include <limits>
 
 const Okteta::Address TopLevelDataInformation::INVALID_OFFSET = std::numeric_limits<Okteta::Address>::max();

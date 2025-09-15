@@ -7,6 +7,7 @@
 #ifndef KASTEN_DEFAULTSCRIPTCLASS_HPP
 #define KASTEN_DEFAULTSCRIPTCLASS_HPP
 
+// Qt
 #include <QVector>
 #include <QScriptClass>
 #include <QScriptValue>

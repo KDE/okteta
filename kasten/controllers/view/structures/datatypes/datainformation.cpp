@@ -6,19 +6,20 @@
 
 #include "datainformation.hpp"
 
+// lib
 #include "topleveldatainformation.hpp"
 #include "additionaldata.hpp"
 #include "structureviewpreferences.hpp"
 #include "../script/scriptlogger.hpp"
 #include "../script/safereference.hpp"
-
+// KF
+#include <KLocalizedString>
+#include <KColorScheme>
+// Qt
 #include <QApplication>
 #include <QScriptValue>
 #include <QScriptEngine>
 #include <QIcon>
-
-#include <KLocalizedString>
-#include <KColorScheme>
 
 DataInformation::DataInformation(const QString& name, DataInformationBase* parent)
     : mParent(parent)

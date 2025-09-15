@@ -12,16 +12,14 @@
 #include "structurestool.hpp"
 #include "structuresmanager.hpp"
 #include "structureviewitemdelegate.hpp"
+#include "datatypes/datainformation.hpp"
+#include "script/scriptloggerview.hpp"
 #include <structureslogging.hpp>
 // settings
 #include "structureviewpreferences.hpp"
 #include "settings/structureviewsettingswidget.hpp"
 #include "settings/structuresmanagerview.hpp"
 #include "settings/structureaddremovewidget.hpp"
-
-#include "datatypes/datainformation.hpp"
-#include "script/scriptloggerview.hpp"
-
 // KF
 #include <KStandardAction>
 #include <KLocalizedString>

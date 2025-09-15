@@ -7,6 +7,7 @@
 #ifndef KASTEN_STRUCTUNIONSCRIPTCLASS_HPP
 #define KASTEN_STRUCTUNIONSCRIPTCLASS_HPP
 
+// lib
 #include "defaultscriptclass.hpp"
 
 class StructUnionScriptClass : public DefaultScriptClass

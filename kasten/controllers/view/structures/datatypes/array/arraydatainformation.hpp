@@ -7,6 +7,7 @@
 #ifndef KASTEN_ARRAYDATAINFORMATION_HPP
 #define KASTEN_ARRAYDATAINFORMATION_HPP
 
+// lib
 #include "../dummydatainformation.hpp"
 #include "abstractarraydata.hpp"
 // Qt

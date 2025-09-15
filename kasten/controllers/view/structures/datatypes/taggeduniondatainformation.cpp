@@ -6,11 +6,12 @@
 
 #include "taggeduniondatainformation.hpp"
 
+// lib
 #include "topleveldatainformation.hpp"
 #include "structuredatainformation.hpp"
 #include "primitive/primitivedatainformation.hpp"
 #include "../parsers/parserutils.hpp"
-
+// KF
 #include <KLocalizedString>
 // Std
 #include <utility>

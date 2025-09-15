@@ -7,6 +7,7 @@
 #ifndef KASTEN_DOUBLEDATAINFORMATION_HPP
 #define KASTEN_DOUBLEDATAINFORMATION_HPP
 
+// lib
 #include "primitivedatainformation.hpp"
 
 class DoubleDataInformationMethods

@@ -7,6 +7,7 @@
 #ifndef KASTEN_ABSTRACTSTRUCTUREPARSER_HPP
 #define KASTEN_ABSTRACTSTRUCTUREPARSER_HPP
 
+// Qt
 #include <QVector>
 #include <QStringList>
 

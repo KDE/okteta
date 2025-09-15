@@ -5,10 +5,13 @@
 */
 
 #include "primitivedatatype.hpp"
-#include "structureviewpreferences.hpp"
 
+// lib
+#include "structureviewpreferences.hpp"
+// KF
 #include <KLazyLocalizedString>
 #include <KLocalizedString>
+// Qt
 #include <QDebug>
 
 static constexpr const KLazyLocalizedString longTypeNames[static_cast<int>(PrimitiveDataType::END) + 1] = {

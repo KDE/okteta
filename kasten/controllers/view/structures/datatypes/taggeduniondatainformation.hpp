@@ -7,9 +7,10 @@
 #ifndef KASTEN_TAGGEDUNIONDATAINFORMATION_HPP
 #define KASTEN_TAGGEDUNIONDATAINFORMATION_HPP
 
+// lib
 #include "datainformationwithchildren.hpp"
 #include "../allprimitivetypes.hpp"
-
+// Qt
 #include <QScriptValue>
 
 /** A class holding the data of a struct for Okteta*/

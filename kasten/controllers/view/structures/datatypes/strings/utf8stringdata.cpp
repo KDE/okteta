@@ -6,17 +6,17 @@
 
 #include "utf8stringdata.hpp"
 
-#include <structureslogging.hpp>
-
-#include <QVarLengthArray>
-
-#include <KLocalizedString>
-
-#include <Okteta/AbstractByteArrayModel>
-
+// lib
 #include "../topleveldatainformation.hpp"
 #include "../dummydatainformation.hpp"
 #include "stringdatainformation.hpp"
+#include <structureslogging.hpp>
+// Okteta core
+#include <Okteta/AbstractByteArrayModel>
+// KF
+#include <KLocalizedString>
+// Qt
+#include <QVarLengthArray>
 
 Utf8StringData::Utf8StringData(StringDataInformation* parent)
     : StringData(parent)

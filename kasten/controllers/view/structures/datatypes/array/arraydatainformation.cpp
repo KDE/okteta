@@ -6,13 +6,13 @@
 
 #include "arraydatainformation.hpp"
 
+// lib
 #include "../primitivefactory.hpp"
 #include "../dummydatainformation.hpp"
 #include "../../parsers/scriptvalueconverter.hpp"
 #include "../../script/classes/arrayscriptclass.hpp"
 #include "../../script/scripthandlerinfo.hpp"
 #include "../../script/scriptlogger.hpp"
-
 #include "complexarraydata.hpp"
 #include "primitivearraydata.hpp"
 

@@ -7,8 +7,9 @@
 #ifndef KASTEN_UTF32STRINGDATA_HPP
 #define KASTEN_UTF32STRINGDATA_HPP
 
+// lib
 #include "stringdata.hpp"
-
+// Qt
 #include <QVector>
 
 class Utf32StringData : public StringData

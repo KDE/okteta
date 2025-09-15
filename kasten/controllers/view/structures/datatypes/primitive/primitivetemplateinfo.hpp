@@ -7,6 +7,7 @@
 #ifndef KASTEN_PRIMITIVETEMPLATEINFO_HPP
 #define KASTEN_PRIMITIVETEMPLATEINFO_HPP
 
+// lib
 #include "../primitivedatatype.hpp"
 #include "booldatainformation.hpp"
 #include "floatdatainformation.hpp"

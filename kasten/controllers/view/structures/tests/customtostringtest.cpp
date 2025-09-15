@@ -4,14 +4,17 @@
     SPDX-License-Identifier: LGPL-2.1-or-later
 */
 
-#include <QTest>
-#include <QScriptEngine>
-
+// test
+#include "testutils.hpp"
+// sut
 #include "view/structures/script/scriptengineinitializer.hpp"
 #include "view/structures/parsers/scriptvalueconverter.hpp"
 #include "view/structures/datatypes/topleveldatainformation.hpp"
-#include "testutils.hpp"
+// Okteta core
 #include <Okteta/ByteArrayModel>
+// Qt
+#include <QTest>
+#include <QScriptEngine>
 
 class CustomToStringTest : public QObject
 {

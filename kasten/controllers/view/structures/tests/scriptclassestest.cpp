@@ -4,6 +4,9 @@
     SPDX-License-Identifier: LGPL-2.1-or-later
 */
 
+// test
+#include "testutils.hpp"
+// sut
 #include "view/structures/datatypes/primitive/primitivetemplateinfo.hpp"
 #include "view/structures/datatypes/primitive/primitivedatainformation.hpp"
 #include "view/structures/datatypes/primitive/enumdatainformation.hpp"
@@ -30,7 +33,6 @@
 #include "view/structures/script/classes/defaultscriptclass.hpp"
 #include "view/structures/script/safereference.hpp"
 #include "view/structures/parsers/scriptvalueconverter.hpp"
-#include "testutils.hpp"
 // Qt
 #include <QTest>
 #include <QObject>

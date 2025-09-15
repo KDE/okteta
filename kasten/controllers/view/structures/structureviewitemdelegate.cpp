@@ -6,9 +6,9 @@
 
 #include "structureviewitemdelegate.hpp"
 
+// tool
 #include "structuretreemodel.hpp"
 #include "datatypes/datainformation.hpp"
-
 
 namespace Kasten {
 

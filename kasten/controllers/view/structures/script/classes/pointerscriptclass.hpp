@@ -7,6 +7,7 @@
 #ifndef KASTEN_POINTERSCRIPTCLASS_HPP
 #define KASTEN_POINTERSCRIPTCLASS_HPP
 
+// lib
 #include "primitivescriptclass.hpp"
 
 class PointerScriptClass : public PrimitiveScriptClass

@@ -7,9 +7,11 @@
 #ifndef KASTEN_ABSTRACTARRAYDATA_HPP
 #define KASTEN_ABSTRACTARRAYDATA_HPP
 
-#include <Okteta/Address>
+// lib
 #include "../datainformationbase.hpp"
 #include "../primitivedatatype.hpp"
+// Okteta core
+#include <Okteta/Address>
 // Qt
 #include <Qt>
 // Std

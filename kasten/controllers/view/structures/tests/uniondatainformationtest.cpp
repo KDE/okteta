@@ -4,17 +4,18 @@
     SPDX-License-Identifier: LGPL-2.1-or-later
 */
 
-#include <QTest>
-
-#include <Okteta/ByteArrayModel>
-#include <Okteta/Byte>
-
+// test
 #include "testutils.hpp"
-
+// sut
 #include "view/structures/datatypes/uniondatainformation.hpp"
 #include "view/structures/datatypes/topleveldatainformation.hpp"
 #include "view/structures/datatypes/primitivefactory.hpp"
 #include "view/structures/datatypes/primitive/bitfield/unsignedbitfielddatainformation.hpp"
+// Okteta core
+#include <Okteta/ByteArrayModel>
+#include <Okteta/Byte>
+// Qt
+#include <QTest>
 // Std
 #include <memory>
 

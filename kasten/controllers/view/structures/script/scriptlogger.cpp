@@ -5,9 +5,12 @@
 */
 
 #include "scriptlogger.hpp"
-#include "../datatypes/datainformation.hpp"
 
+// lib
+#include "../datatypes/datainformation.hpp"
+// KF
 #include <KLocalizedString>
+// Qt
 #include <QIcon>
 
 QIcon ScriptLogger::iconForLevel(ScriptLogger::LogLevel level)

@@ -5,11 +5,13 @@
 */
 
 #include "primitivescriptclass.hpp"
+
+// lib
 #include "../../datatypes/primitive/primitivedatainformation.hpp"
 #include "../../parsers/parserutils.hpp"
 #include "../../allprimitivetypes.hpp"
 #include <structureslogging.hpp>
-
+// Qt
 #include <QScriptContext>
 
 PrimitiveScriptClass::PrimitiveScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)

@@ -7,8 +7,9 @@
 #ifndef KASTEN_SCRIPTVALUECONVERTER_P_HPP
 #define KASTEN_SCRIPTVALUECONVERTER_P_HPP
 
+// lib
 #include "../parsers/parserutils.hpp"
-
+// Qt
 #include <QScriptValue>
 #include <QScriptValueIterator>
 

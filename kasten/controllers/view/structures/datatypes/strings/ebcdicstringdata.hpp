@@ -8,8 +8,9 @@
 #ifndef KASTEN_EBCDICSTRINGDATA_HPP
 #define KASTEN_EBCDICSTRINGDATA_HPP
 
+// lib
 #include "stringdata.hpp"
-
+// Qt
 #include <QVector>
 // Std
 #include <memory>

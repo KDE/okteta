@@ -8,10 +8,10 @@
 #ifndef KASTEN_STRUCTURESTOOL_HPP
 #define KASTEN_STRUCTURESTOOL_HPP
 
-// Okteta Kasten gui
-#include <Kasten/Okteta/ByteArrayView>
 // tool
 #include "datatypes/topleveldatainformation.hpp"
+// Okteta Kasten gui
+#include <Kasten/Okteta/ByteArrayView>
 // Kasten core
 #include <Kasten/AbstractTool>
 // Okteta core

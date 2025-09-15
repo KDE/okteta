@@ -4,14 +4,16 @@
     SPDX-License-Identifier: LGPL-2.1-or-later
 */
 
-#include <QTest>
-
-#include <limits>
-
-#include <Okteta/ByteArrayModel>
+// sut
 #include "view/structures/datatypes/topleveldatainformation.hpp"
 #include "view/structures/datatypes/structuredatainformation.hpp"
 #include "view/structures/datatypes/primitive/primitivetemplateinfo.hpp"
+// Okteta core
+#include <Okteta/ByteArrayModel>
+// Qt
+#include <QTest>
+// Std
+#include <limits>
 
 class LockToOffsetTest : public QObject
 {

@@ -6,16 +6,18 @@
 
 #include "primitivearraydata.hpp"
 
+// lib
 #include "arraydatainformation.hpp"
 #include "../primitive/primitivedatainformation.hpp"
 #include "../../script/scriptlogger.hpp"
 #include "../../script/safereference.hpp"
 #include <structureslogging.hpp>
-
+// Okteta core
 #include <Okteta/AbstractByteArrayModel>
-
-#include <limits>
+// KF
 #include <KLocalizedString>
+// Std
+#include <limits>
 
 template <PrimitiveDataType type>
 inline PrimitiveArrayData<type>::PrimitiveArrayData(unsigned int initialLength, PrimitiveDataInformation* childType,

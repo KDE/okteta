@@ -7,8 +7,9 @@
 #ifndef KASTEN_LATIN1STRINGDATA_HPP
 #define KASTEN_LATIN1STRINGDATA_HPP
 
+// lib
 #include "stringdata.hpp"
-
+// Qt
 #include <QVector>
 
 class Latin1StringData : public StringData

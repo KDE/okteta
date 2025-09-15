@@ -7,8 +7,9 @@
 #ifndef KASTEN_COMPLEXARRAYDATA_HPP
 #define KASTEN_COMPLEXARRAYDATA_HPP
 
+// lib
 #include "abstractarraydata.hpp"
-
+// Qt
 #include <QVector>
 
 class DataInformation;

@@ -8,7 +8,10 @@
 #define KASTEN_TOPLEVELDATAINFORMATION_HPP
 
 #include "datainformationbase.hpp"
+
+// lib
 #include "../script/scripthandler.hpp"
+// Okteta core
 #include <Okteta/ArrayChangeMetricsList>
 // Qt
 #include <QHash>

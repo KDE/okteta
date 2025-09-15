@@ -7,14 +7,15 @@
 #ifndef KASTEN_ALLPRIMITIVETYPES_HPP
 #define KASTEN_ALLPRIMITIVETYPES_HPP
 
-#include <QSysInfo>
-#include <QtEndian>
-
-#include <size.hpp>
+// lib
+#include "datatypes/datainformationbase.hpp"
+// Okteta core
+#include <Okteta/Size>
 #include <Okteta/Address>
 #include <Okteta/AbstractByteArrayModel>
-
-#include "datatypes/datainformationbase.hpp"
+// Qt
+#include <QSysInfo>
+#include <QtEndian>
 
 namespace Okteta {
 class AbstractByteArrayModel;

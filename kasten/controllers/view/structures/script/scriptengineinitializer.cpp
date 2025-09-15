@@ -6,8 +6,10 @@
 
 #include "scriptengineinitializer.hpp"
 
+// lib
 #include "../datatypes/primitivefactory.hpp"
 #include "../parsers/parserutils.hpp"
+// Qt
 #include <QStringList>
 #include <QFile>
 #include <QScriptValue>

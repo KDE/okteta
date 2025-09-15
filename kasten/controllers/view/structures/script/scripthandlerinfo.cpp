@@ -5,6 +5,8 @@
 */
 
 #include "scripthandlerinfo.hpp"
+
+// lib
 #include "classes/arrayscriptclass.hpp"
 #include "classes/primitivescriptclass.hpp"
 #include "classes/structunionscriptclass.hpp"

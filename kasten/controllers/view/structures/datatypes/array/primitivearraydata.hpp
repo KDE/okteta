@@ -7,6 +7,7 @@
 #ifndef KASTEN_PRIMITIVEARRAYDATA_HPP
 #define KASTEN_PRIMITIVEARRAYDATA_HPP
 
+// lib
 #include "abstractarraydata.hpp"
 #include "../datainformation.hpp"
 #include "../dummydatainformation.hpp"

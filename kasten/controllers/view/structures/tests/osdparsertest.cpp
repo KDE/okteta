@@ -4,13 +4,15 @@
     SPDX-License-Identifier: LGPL-2.1-or-later
 */
 
+// sut
+#include "view/structures/parsers/osdparser.hpp"
+#include "view/structures/datatypes/primitive/primitivedatainformation.hpp"
+#include "view/structures/datatypes/topleveldatainformation.hpp"
+// Qt
 #include <QTest>
 #include <QString>
 #include <QScriptEngine>
 #include <QScriptValue>
-#include "view/structures/parsers/osdparser.hpp"
-#include "view/structures/datatypes/primitive/primitivedatainformation.hpp"
-#include "view/structures/datatypes/topleveldatainformation.hpp"
 
 class OsdParserTest : public QObject
 {

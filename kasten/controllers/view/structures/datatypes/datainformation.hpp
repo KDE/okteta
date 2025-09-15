@@ -7,18 +7,17 @@
 #ifndef KASTEN_DATAINFORMATION_HPP
 #define KASTEN_DATAINFORMATION_HPP
 
-// Qt core
-#include <QString>
-#include <QMetaType>
-
-// Okteta
-#include <Okteta/Size>
-#include <Okteta/Address>
-
+// lib
 #include "datainformationbase.hpp"
 #include "additionaldata.hpp"
 #include "../script/scriptlogger.hpp"
 #include "primitivedatatype.hpp"
+// Okteta core
+#include <Okteta/Size>
+#include <Okteta/Address>
+// Qt
+#include <QString>
+#include <QMetaType>
 
 /** Implement the clone() method and add the copy constructor declaration
  * After this macro visibility will be set to protected */

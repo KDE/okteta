@@ -6,7 +6,7 @@
 
 #include "boolbitfielddatainformation.hpp"
 
-// controller
+// lib
 #include "../booldatainformation.hpp"
 // libdatatypeeditors
 #include <uintspinbox.hpp>

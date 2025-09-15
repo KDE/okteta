@@ -6,13 +6,15 @@
 
 #include "latin1stringdata.hpp"
 
+// lib
 #include "../topleveldatainformation.hpp"
 #include "stringdatainformation.hpp"
 #include <structureslogging.hpp>
-
+// Okteta core
 #include <Okteta/AbstractByteArrayModel>
-
+// KF
 #include <KLocalizedString>
+// Qt
 #include <QVarLengthArray>
 
 Latin1StringData::Latin1StringData(StringDataInformation* parent)

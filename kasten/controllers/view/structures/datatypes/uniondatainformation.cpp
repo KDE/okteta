@@ -5,8 +5,10 @@
 */
 
 #include "uniondatainformation.hpp"
-#include "topleveldatainformation.hpp"
 
+// lib
+#include "topleveldatainformation.hpp"
+// KF
 #include <KLocalizedString>
 
 UnionDataInformation::UnionDataInformation(const QString& name, const QVector<DataInformation*>& children,

@@ -8,6 +8,7 @@
 #ifndef KASTEN_POINTERDATAINFORMATION_HPP
 #define KASTEN_POINTERDATAINFORMATION_HPP
 
+// lib
 #include "primitivedatainformation.hpp"
 // Std
 #include <memory>

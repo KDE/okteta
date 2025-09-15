@@ -6,13 +6,14 @@
 
 #include "scriptfileparser.hpp"
 
+// lib
 #include "scriptvalueconverter.hpp"
 #include "parserutils.hpp"
 #include "../datatypes/topleveldatainformation.hpp"
 #include "../datatypes/dummydatainformation.hpp"
 #include "../script/scriptengineinitializer.hpp"
 #include "../script/scriptlogger.hpp"
-
+// Qt
 #include <QScriptEngine>
 
 ScriptFileParser::ScriptFileParser(const QString& pluginName, const QString& absolutePath)

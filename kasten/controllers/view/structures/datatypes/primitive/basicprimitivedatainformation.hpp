@@ -7,6 +7,7 @@
 #ifndef KASTEN_BASICPRIMITIVEDATAINFORMATION_HPP
 #define KASTEN_BASICPRIMITIVEDATAINFORMATION_HPP
 
+// lib
 #include "primitivedatainformation.hpp"
 #include "../../allprimitivetypes.hpp"
 

@@ -6,14 +6,16 @@
 
 #include "scriptloggerview.hpp"
 
+// lib
+#include "scriptlogger.hpp"
+// KF
 #include <KComboBox>
+// Qt
 #include <QTableView>
 #include <QHeaderView>
 #include <QVBoxLayout>
 // Std
 #include <utility>
-
-#include "scriptlogger.hpp"
 
 ScriptLoggerView::ScriptLoggerView(const TopLevelDataInformation::List& data, QWidget* parent)
     : QWidget(parent)

@@ -7,6 +7,7 @@
 #ifndef KASTEN_ADDITIONALDATA_HPP
 #define KASTEN_ADDITIONALDATA_HPP
 
+// Qt
 #include <QScriptValue>
 #include <QVariant>
 

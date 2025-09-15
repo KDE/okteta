@@ -5,6 +5,7 @@
 */
 
 #include "structurestoolview.hpp"
+
 // tool
 #include "structureview.hpp"
 #include "structurestool.hpp"

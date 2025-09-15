@@ -6,8 +6,10 @@
 
 #include "scriptvalueconverter.hpp"
 #include "scriptvalueconverter_p.hpp"
-#include "../script/scriptlogger.hpp"
 
+// lib
+#include "../script/scriptlogger.hpp"
+// Qt
 #include <QString>
 #include <QVector>
 #include <QScriptValue>

@@ -4,15 +4,16 @@
     SPDX-License-Identifier: LGPL-2.1-or-later
 */
 
-#include <QTest>
-#include <QSignalSpy>
-
+// sut
 #include "view/structures/datatypes/array/arraydatainformation.hpp"
 #include "view/structures/datatypes/array/primitivearraydata.hpp"
 #include "view/structures/datatypes/topleveldatainformation.hpp"
 #include "view/structures/datatypes/primitive/primitivetemplateinfo.hpp"
 #include "view/structures/datatypes/primitivefactory.hpp"
 #include "view/structures/datatypes/structuredatainformation.hpp"
+// Qt
+#include <QTest>
+#include <QSignalSpy>
 
 class ArrayDataInformationTest : public QObject
 {

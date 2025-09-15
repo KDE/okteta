@@ -6,10 +6,11 @@
 
 #include "abstractstructureparser.hpp"
 
+// lib
 #include "../structuredefinitionfile.hpp"
 #include "../script/scriptlogger.hpp"
 #include <structureslogging.hpp>
-
+// Qt
 #include <QFile>
 
 AbstractStructureParser::AbstractStructureParser(const QString& pluginName, const QString& absolutePath)

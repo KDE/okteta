@@ -7,8 +7,9 @@
 #ifndef KASTEN_UTF8STRINGDATA_HPP
 #define KASTEN_UTF8STRINGDATA_HPP
 
+// lib
 #include "stringdata.hpp"
-
+// Qt
 #include <QVector>
 #include <QHash>
 

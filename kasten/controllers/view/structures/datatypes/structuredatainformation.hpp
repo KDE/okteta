@@ -7,6 +7,7 @@
 #ifndef KASTEN_STRUCTUREDATAINFORMATION_HPP
 #define KASTEN_STRUCTUREDATAINFORMATION_HPP
 
+// lib
 #include "datainformationwithchildren.hpp"
 
 /** A class holding the data of a struct for Okteta*/

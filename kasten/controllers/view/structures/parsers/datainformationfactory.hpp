@@ -7,6 +7,7 @@
 #ifndef KASTEN_DATAINFORMATIONFACTORY_HPP
 #define KASTEN_DATAINFORMATIONFACTORY_HPP
 
+// lib
 #include "../datatypes/primitive/bitfield/abstractbitfielddatainformation.hpp"
 #include "../datatypes/primitive/primitivedatainformation.hpp"
 #include "../datatypes/primitive/enumdefinition.hpp"
@@ -18,7 +19,6 @@
 #include "../datatypes/taggeduniondatainformation.hpp"
 #include "../datatypes/uniondatainformation.hpp"
 #include "../datatypes/structuredatainformation.hpp"
-
 #include "../script/scriptlogger.hpp"
 #include "parserutils.hpp"
 // Qt

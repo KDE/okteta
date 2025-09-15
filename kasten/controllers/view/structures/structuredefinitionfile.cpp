@@ -6,17 +6,16 @@
 
 #include "structuredefinitionfile.hpp"
 
-#include <structureslogging.hpp>
-
-#include <QFile>
-#include <QDir>
-#include <QStringList>
-
+// lib
 #include "datatypes/topleveldatainformation.hpp"
-
 #include "parsers/abstractstructureparser.hpp"
 #include "parsers/osdparser.hpp"
 #include "parsers/scriptfileparser.hpp"
+#include <structureslogging.hpp>
+// Qt
+#include <QFile>
+#include <QDir>
+#include <QStringList>
 
 namespace Kasten {
 

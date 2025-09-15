@@ -6,6 +6,8 @@
 */
 
 #include "stringdatainformation.hpp"
+
+// lib
 #include "../dummydatainformation.hpp"
 #include "../topleveldatainformation.hpp"
 #include "utf32stringdata.hpp"
@@ -17,12 +19,12 @@
 #include "../../script/classes/stringscriptclass.hpp"
 #include "../../script/scripthandlerinfo.hpp"
 #include "../../script/scriptlogger.hpp"
-
+// KF
+#include <KLocalizedString>
+// Qt
 #include <QScriptEngine>
 #include <QBrush>
 #include <QString>
-
-#include <KLocalizedString>
 
 const QString StringDataInformation::encodingNames[static_cast<int>(StringDataInformation::StringType::EBCDIC)+2] = {
     QStringLiteral("<invalid>"), // -1

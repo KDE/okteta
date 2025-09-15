@@ -7,6 +7,7 @@
 #ifndef KASTEN_ENUMSCRIPTCLASS_HPP
 #define KASTEN_ENUMSCRIPTCLASS_HPP
 
+// lib
 #include "primitivescriptclass.hpp"
 
 class EnumScriptClass : public PrimitiveScriptClass

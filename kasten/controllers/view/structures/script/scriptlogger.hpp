@@ -7,6 +7,7 @@
 #ifndef KASTEN_SCRIPTLOGGER_HPP
 #define KASTEN_SCRIPTLOGGER_HPP
 
+// Qt
 #include <QAbstractTableModel>
 #include <QVector>
 #include <QDebug>

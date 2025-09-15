@@ -6,6 +6,7 @@
 
 #include "booldatainformation.hpp"
 
+// KF
 #include <KLocalizedString>
 
 template <typename T>

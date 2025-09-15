@@ -7,6 +7,7 @@
 #ifndef KASTEN_FLOATDATAINFORMATION_HPP
 #define KASTEN_FLOATDATAINFORMATION_HPP
 
+// lib
 #include "primitivedatainformation.hpp"
 
 class FloatDataInformationMethods

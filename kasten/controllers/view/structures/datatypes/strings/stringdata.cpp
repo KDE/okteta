@@ -5,6 +5,8 @@
 */
 
 #include "stringdata.hpp"
+
+// lib
 #include "stringdatainformation.hpp"
 
 StringData::StringData(StringDataInformation* parent)

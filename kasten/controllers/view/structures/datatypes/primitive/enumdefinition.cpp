@@ -6,11 +6,13 @@
 
 #include "enumdefinition.hpp"
 
+// lib
+#include "../../script/scriptlogger.hpp"
+// Qt
 #include <QScriptValue>
 #include <QScriptValueIterator>
+// Std
 #include <limits>
-
-#include "../../script/scriptlogger.hpp"
 
 QMap<AllPrimitiveTypes, QString> EnumDefinition::parseEnumValues(const QScriptValue& val,
                                                                  const LoggerWithContext& logger, PrimitiveDataType type)

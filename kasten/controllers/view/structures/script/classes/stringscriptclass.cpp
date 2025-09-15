@@ -5,10 +5,12 @@
 */
 
 #include "stringscriptclass.hpp"
+
+// lib
 #include "../../datatypes/strings/stringdatainformation.hpp"
 #include "../../parsers/parserutils.hpp"
 #include <structureslogging.hpp>
-
+// Qt
 #include <QScriptContext>
 
 StringScriptClass::StringScriptClass(QScriptEngine* eng, ScriptHandlerInfo* handlerInfo)

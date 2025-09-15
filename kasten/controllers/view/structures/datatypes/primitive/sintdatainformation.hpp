@@ -7,6 +7,7 @@
 #ifndef KASTEN_SINTDATAINFORMATION_HPP
 #define KASTEN_SINTDATAINFORMATION_HPP
 
+// lib
 #include "primitivedatainformation.hpp"
 #include "structureviewpreferences.hpp"
 #include "../../allprimitivetypes.hpp"

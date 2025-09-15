@@ -4,6 +4,7 @@
     SPDX-License-Identifier: LGPL-2.1-or-later
 */
 
+// sut
 #include "view/structures/datatypes/array/arraydatainformation.hpp"
 #include "view/structures/datatypes/array/primitivearraydata.hpp"
 #include "view/structures/datatypes/strings/stringdatainformation.hpp"

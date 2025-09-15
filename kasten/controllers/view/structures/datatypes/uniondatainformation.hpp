@@ -7,6 +7,7 @@
 #ifndef KASTEN_UNIONDATAINFORMATION_HPP
 #define KASTEN_UNIONDATAINFORMATION_HPP
 
+// lib
 #include "datainformationwithchildren.hpp"
 
 /** A class holding the data of a union for Okteta*/

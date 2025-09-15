@@ -6,6 +6,7 @@
 
 #include "defaultscriptclass.hpp"
 
+// lib
 #include "../../datatypes/datainformation.hpp"
 #include "../../datatypes/topleveldatainformation.hpp"
 #include "../../datatypes/uniondatainformation.hpp"
@@ -17,7 +18,7 @@
 #include "../scripthandlerinfo.hpp"
 #include "../safereference.hpp"
 #include <structureslogging.hpp>
-
+// Qt
 #include <QScriptContext>
 // Std
 #include <utility>

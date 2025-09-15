@@ -6,9 +6,10 @@
 
 #include "structureviewsettingswidget.hpp"
 
+// tool
 #include "structureviewpreferences.hpp"
 #include <structureslogging.hpp>
-
+// KF
 #include <KLocalizedString>
 
 StructureViewSettingsWidget::StructureViewSettingsWidget()

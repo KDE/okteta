@@ -6,6 +6,8 @@
 
 #ifndef KASTEN_ENUMDEFINITION_HPP
 #define KASTEN_ENUMDEFINITION_HPP
+
+// lib
 #include "../../allprimitivetypes.hpp"
 #include "../primitivedatatype.hpp"
 // Qt core

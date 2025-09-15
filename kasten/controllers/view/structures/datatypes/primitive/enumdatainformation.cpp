@@ -5,13 +5,14 @@
 */
 
 #include "enumdatainformation.hpp"
+
+// lib
 #include "../topleveldatainformation.hpp"
-
-#include <KComboBox>
-#include <KLocalizedString>
-
 #include "../../script/classes/enumscriptclass.hpp"
 #include "../../script/scriptlogger.hpp"
+// KF
+#include <KComboBox>
+#include <KLocalizedString>
 
 EnumDataInformation::EnumDataInformation(const QString& name, PrimitiveDataInformation* type,
                                          const EnumDefinition::Ptr& enumDef, DataInformation* parent)

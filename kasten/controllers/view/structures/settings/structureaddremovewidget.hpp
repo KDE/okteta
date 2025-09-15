@@ -7,6 +7,7 @@
 #ifndef KASTEN_STRUCTUREADDREMOVEWIDGET_HPP
 #define KASTEN_STRUCTUREADDREMOVEWIDGET_HPP
 
+// Qt
 #include <QWidget>
 
 class QPushButton;

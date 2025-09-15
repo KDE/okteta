@@ -7,6 +7,7 @@
 #ifndef KASTEN_UNSIGNEDBITFIELDDATAINFORMATION_HPP
 #define KASTEN_UNSIGNEDBITFIELDDATAINFORMATION_HPP
 
+// lib
 #include "abstractbitfielddatainformation.hpp"
 
 class UnsignedBitfieldDataInformation : public AbstractBitfieldDataInformation

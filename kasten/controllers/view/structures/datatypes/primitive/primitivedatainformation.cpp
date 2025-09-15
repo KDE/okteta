@@ -5,6 +5,8 @@
 */
 
 #include "primitivedatainformation.hpp"
+
+// lib
 #include "../datainformation.hpp"
 #include "../topleveldatainformation.hpp"
 #include "structureviewpreferences.hpp"

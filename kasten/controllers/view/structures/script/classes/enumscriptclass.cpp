@@ -6,6 +6,7 @@
 
 #include "enumscriptclass.hpp"
 
+// lib
 #include "../../datatypes/primitive/enumdatainformation.hpp"
 #include "../../parsers/parserutils.hpp"
 #include "../scriptlogger.hpp"

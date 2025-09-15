@@ -5,9 +5,11 @@
 */
 
 #include "bitfieldscriptclass.hpp"
+
+// lib
 #include "../../datatypes/primitive/bitfield/abstractbitfielddatainformation.hpp"
 #include "../../parsers/parserutils.hpp"
-
+// Qt
 #include <QScriptContext>
 
 BitfieldScriptClass::BitfieldScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)

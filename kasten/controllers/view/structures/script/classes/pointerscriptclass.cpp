@@ -6,6 +6,7 @@
 
 #include "pointerscriptclass.hpp"
 
+// lib
 #include "../../datatypes/primitive/pointerdatainformation.hpp"
 #include "../../parsers/parserutils.hpp"
 #include "../../parsers/scriptvalueconverter.hpp"

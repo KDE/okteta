@@ -7,8 +7,9 @@
 #ifndef KASTEN_SCRIPTFILEPARSER_HPP
 #define KASTEN_SCRIPTFILEPARSER_HPP
 
+// lib
 #include "abstractstructureparser.hpp"
-
+// Qt
 #include <QScriptValue>
 
 class ScriptLogger;

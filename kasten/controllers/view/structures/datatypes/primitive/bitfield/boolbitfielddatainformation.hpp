@@ -7,6 +7,7 @@
 #ifndef KASTEN_BOOLBITFIELDDATAINFORMATION_HPP
 #define KASTEN_BOOLBITFIELDDATAINFORMATION_HPP
 
+// lib
 #include "abstractbitfielddatainformation.hpp"
 
 class BoolBitfieldDataInformation : public AbstractBitfieldDataInformation

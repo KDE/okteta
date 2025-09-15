@@ -8,6 +8,7 @@
 #ifndef KASTEN_STRINGDATAINFORMATION_HPP
 #define KASTEN_STRINGDATAINFORMATION_HPP
 
+// lib
 #include "../datainformation.hpp"
 #include "../dummydatainformation.hpp"
 #include "stringdata.hpp"

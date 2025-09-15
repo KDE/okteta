@@ -5,12 +5,14 @@
 */
 
 #include "arrayscriptclass.hpp"
+
+// lib
 #include "../../datatypes/array/arraydatainformation.hpp"
 #include "../../parsers/parserutils.hpp"
 #include "../../parsers/scriptvalueconverter.hpp"
 #include "../scriptlogger.hpp"
 #include <structureslogging.hpp>
-
+// Qt
 #include <QScriptContext>
 
 ArrayScriptClass::ArrayScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)

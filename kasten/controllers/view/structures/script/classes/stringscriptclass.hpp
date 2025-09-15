@@ -7,6 +7,7 @@
 #ifndef KASTEN_STRINGSCRIPTCLASS_HPP
 #define KASTEN_STRINGSCRIPTCLASS_HPP
 
+// lib
 #include "defaultscriptclass.hpp"
 
 class StringScriptClass : public DefaultScriptClass

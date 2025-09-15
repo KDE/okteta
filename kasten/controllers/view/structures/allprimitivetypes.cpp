@@ -6,6 +6,7 @@
 
 #include "allprimitivetypes.hpp"
 
+// Okteta core
 #include <Okteta/AbstractByteArrayModel>
 
 Q_STATIC_ASSERT(sizeof(double) == 8);

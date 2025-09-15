@@ -5,6 +5,8 @@
 */
 
 #include "structuretreemodel.hpp"
+
+// tool
 #include "structurestool.hpp"
 #include <structureslogging.hpp>
 #include "datatypes/datainformationwithchildren.hpp"

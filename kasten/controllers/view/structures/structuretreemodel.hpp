@@ -7,6 +7,7 @@
 #ifndef KASTEN_STRUCTURETREEMODEL_HPP
 #define KASTEN_STRUCTURETREEMODEL_HPP
 
+// Qt
 #include <QAbstractItemModel>
 
 class DataInformationBase;

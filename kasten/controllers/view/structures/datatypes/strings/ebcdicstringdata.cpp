@@ -6,15 +6,19 @@
 */
 
 #include "ebcdicstringdata.hpp"
+
+// lib
 #include "stringdatainformation.hpp"
 #include "../topleveldatainformation.hpp"
 #include <structureslogging.hpp>
-
-#include <Okteta/Character>
+// Okteta core sources
 #include <charcodecs/ebcdic1047charcodec.hpp>
+// Okteta core
+#include <Okteta/Character>
 #include <Okteta/AbstractByteArrayModel>
-
+// KF
 #include <KLocalizedString>
+// Qt
 #include <QVarLengthArray>
 
 EbcdicStringData::EbcdicStringData(StringDataInformation* parent)

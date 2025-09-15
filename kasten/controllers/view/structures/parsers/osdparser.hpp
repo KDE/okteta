@@ -7,10 +7,11 @@
 #ifndef KASTEN_OSDPARSER_HPP
 #define KASTEN_OSDPARSER_HPP
 
+// lib
 #include "abstractstructureparser.hpp"
 #include "parserutils.hpp"
 #include "../datatypes/primitive/enumdefinition.hpp"
-
+// Qt
 #include <QDomElement>
 
 class QDomDocument;

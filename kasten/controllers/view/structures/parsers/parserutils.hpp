@@ -7,12 +7,13 @@
 #ifndef KASTEN_PARSERUTILS_HPP
 #define KASTEN_PARSERUTILS_HPP
 
-#include <QDebug>
-#include <QStringList>
-
+// lib
 #include "../datatypes/datainformation.hpp"
 #include "../datatypes/strings/stringdatainformation.hpp"
 #include "../script/scriptlogger.hpp"
+// Qt
+#include <QDebug>
+#include <QStringList>
 
 // forward declare so I don't have to repeat in all the parsers
 class ArrayDataInformation;

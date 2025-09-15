@@ -6,10 +6,15 @@
 */
 
 #include "structurestool.hpp"
+
+// lib
 #include "structuredefinitionfile.hpp"
 #include "structuresmanager.hpp"
 #include <structureslogging.hpp>
 #include "structuretreemodel.hpp"
+#include "script/scripthandler.hpp"
+#include "datatypes/datainformation.hpp"
+#include "structureviewpreferences.hpp"
 // Okteta Kasten core
 #include <Kasten/Okteta/ByteArrayDocument>
 // Okteta core
@@ -23,10 +28,6 @@
 #include <QModelIndex>
 #include <QRegularExpression>
 #include <QByteArray>
-
-#include "script/scripthandler.hpp"
-#include "datatypes/datainformation.hpp"
-#include "structureviewpreferences.hpp"
 
 namespace Kasten {
 

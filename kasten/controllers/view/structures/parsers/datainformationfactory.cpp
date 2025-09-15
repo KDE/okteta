@@ -6,12 +6,13 @@
 
 #include "datainformationfactory.hpp"
 
+// lib
 #include "../datatypes/primitive/bitfield/boolbitfielddatainformation.hpp"
 #include "../datatypes/primitive/bitfield/unsignedbitfielddatainformation.hpp"
 #include "../datatypes/primitive/bitfield/signedbitfielddatainformation.hpp"
 #include "../datatypes/primitivefactory.hpp"
-
 #include "../script/scriptlogger.hpp"
+// Qt
 #include <QScriptEngine>
 // Std
 #include <utility>

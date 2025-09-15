@@ -7,7 +7,9 @@
 #ifndef KASTEN_STRUCTUREVIEWSETTINGSWIDGET_HPP
 #define KASTEN_STRUCTUREVIEWSETTINGSWIDGET_HPP
 
+// lib
 #include <ui_structureviewsettingswidget.h>
+// Qt
 #include <QWidget>
 
 class KConfigSkeletonItem;

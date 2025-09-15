@@ -6,9 +6,11 @@
 
 #include "structuredatainformation.hpp"
 
+// lib
 #include "topleveldatainformation.hpp"
-
+// KF
 #include <KLocalizedString>
+// Std
 #include <limits>
 
 StructureDataInformation::StructureDataInformation(const QString& name,

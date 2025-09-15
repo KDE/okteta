@@ -7,9 +7,10 @@
 #ifndef KASTEN_BOOLDATAINFORMATION_HPP
 #define KASTEN_BOOLDATAINFORMATION_HPP
 
-#include <QScriptValue>
-
+// lib
 #include "uintdatainformation.hpp"
+// Qt
+#include <QScriptValue>
 
 template <typename T>
 class BoolDataInformationMethods

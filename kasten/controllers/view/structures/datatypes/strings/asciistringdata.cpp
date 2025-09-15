@@ -5,13 +5,16 @@
 */
 
 #include "asciistringdata.hpp"
+
+// lib
 #include "stringdatainformation.hpp"
 #include "../topleveldatainformation.hpp"
 #include <structureslogging.hpp>
-
+// Okteta core
 #include <Okteta/AbstractByteArrayModel>
-
+// KF
 #include <KLocalizedString>
+// Qt
 #include <QVarLengthArray>
 
 AsciiStringData::AsciiStringData(StringDataInformation* parent)

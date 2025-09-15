@@ -6,6 +6,7 @@
 
 #include "structureaddremovewidget.hpp"
 
+// tool
 #include "../structuresmanager.hpp"
 #include "../structuredefinitionfile.hpp"
 #include "structureenabledlist.hpp"

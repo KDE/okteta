@@ -7,6 +7,7 @@
 #ifndef KASTEN_FLAGDATAINFORMATION_HPP
 #define KASTEN_FLAGDATAINFORMATION_HPP
 
+// lib
 #include "enumdatainformation.hpp"
 
 class FlagDataInformation : public EnumDataInformation

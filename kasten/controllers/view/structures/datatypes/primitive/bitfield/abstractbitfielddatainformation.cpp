@@ -6,12 +6,12 @@
 
 #include "abstractbitfielddatainformation.hpp"
 
-#include <KLocalizedString>
-
+// lib
 #include "../../topleveldatainformation.hpp"
-
 #include "../../../script/classes/bitfieldscriptclass.hpp"
 #include "../../../script/scripthandlerinfo.hpp"
+// KF
+#include <KLocalizedString>
 
 AbstractBitfieldDataInformation::AbstractBitfieldDataInformation(const QString& name, BitCount32 width,
                                                                  DataInformation* parent)
