@@ -1,8 +1,8 @@
 /*
- *  SPDX-FileCopyrightText: 2013 Alex Richardson <alex.richardson@gmx.de>
- *
- *  SPDX-License-Identifier: LGPL-2.1-or-later
- */
+    SPDX-FileCopyrightText: 2013 Alex Richardson <alex.richardson@gmx.de>
+
+    SPDX-License-Identifier: LGPL-2.1-or-later
+*/
 
 // TODO: find better way to work-around simple name creation for QTest::newRow
 #undef QT_USE_QSTRINGBUILDER
