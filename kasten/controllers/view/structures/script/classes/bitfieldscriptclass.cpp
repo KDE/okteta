@@ -13,7 +13,7 @@
 #include <QScriptContext>
 
 BitfieldScriptClass::BitfieldScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
-    : PrimitiveScriptClass(engine, handlerInfo)
+    : PrimitiveScriptClass(engine, handlerInfo, 1)
     , s_width(engine->toStringHandle(ParserStrings::PROPERTY_WIDTH()))
 {
     mIterableProperties.append(qMakePair(s_width, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));

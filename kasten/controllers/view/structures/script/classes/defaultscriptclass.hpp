@@ -27,7 +27,7 @@ public:
     using PropertyInfoList = QVector<QPair<QScriptString, QScriptValue::PropertyFlags>>;
 
 public:
-    DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
+    DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo, int propertiesSize);
     ~DefaultScriptClass() override;
 
 public: // QScriptClass API

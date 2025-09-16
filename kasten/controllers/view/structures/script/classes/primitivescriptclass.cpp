@@ -14,8 +14,8 @@
 // Qt
 #include <QScriptContext>
 
-PrimitiveScriptClass::PrimitiveScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
-    : DefaultScriptClass(engine, handlerInfo)
+PrimitiveScriptClass::PrimitiveScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo, int propertiesSize)
+    : DefaultScriptClass(engine, handlerInfo, propertiesSize + 20)
     , s_value(engine->toStringHandle(QStringLiteral("value")))
     , s_type(engine->toStringHandle(QStringLiteral("type")))
     , s_bool(engine->toStringHandle(QStringLiteral("bool")))
@@ -37,7 +37,6 @@ PrimitiveScriptClass::PrimitiveScriptClass(QScriptEngine* engine, ScriptHandlerI
     , s_uint64high32(engine->toStringHandle(QStringLiteral("uint64high32")))
     , s_uint64(engine->toStringHandle(QStringLiteral("uint64")))
 {
-    mIterableProperties.reserve(mIterableProperties.size() + 20);
     mIterableProperties.append(qMakePair(s_value, QScriptValue::ReadOnly | QScriptValue::Undeletable));
     mIterableProperties.append(qMakePair(s_type, QScriptValue::ReadOnly | QScriptValue::Undeletable));
 

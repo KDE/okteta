@@ -13,7 +13,7 @@
 class PrimitiveScriptClass : public DefaultScriptClass
 {
 public:
-    PrimitiveScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
+    PrimitiveScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo, int propertiesSize = 0);
     ~PrimitiveScriptClass() override;
 
 public: // QScriptClass API

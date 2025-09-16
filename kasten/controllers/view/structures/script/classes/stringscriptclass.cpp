@@ -14,7 +14,7 @@
 #include <QScriptContext>
 
 StringScriptClass::StringScriptClass(QScriptEngine* eng, ScriptHandlerInfo* handlerInfo)
-    : DefaultScriptClass(eng, handlerInfo)
+    : DefaultScriptClass(eng, handlerInfo, 6)
     , s_lengthInCodepoints(eng->toStringHandle(ParserStrings::PROPERTY_CHAR_COUNT()))
     , s_lengthInBytes(eng->toStringHandle(ParserStrings::PROPERTY_BYTE_COUNT()))
     , s_maxByteCount(eng->toStringHandle(ParserStrings::PROPERTY_MAX_BYTE_COUNT()))
@@ -22,7 +22,6 @@ StringScriptClass::StringScriptClass(QScriptEngine* eng, ScriptHandlerInfo* hand
     , s_terminatedBy(eng->toStringHandle(ParserStrings::PROPERTY_TERMINATED_BY()))
     , s_encoding(eng->toStringHandle(ParserStrings::PROPERTY_ENCODING()))
 {
-    mIterableProperties.reserve(mIterableProperties.size() + 6);
     // read-only properties
     mIterableProperties.append(qMakePair(s_lengthInCodepoints, QScriptValue::ReadOnly | QScriptValue::Undeletable));
     mIterableProperties.append(qMakePair(s_lengthInBytes, QScriptValue::ReadOnly | QScriptValue::Undeletable));

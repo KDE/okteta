@@ -16,7 +16,7 @@
 #include <QScriptContext>
 
 ArrayScriptClass::ArrayScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
-    : DefaultScriptClass(engine, handlerInfo)
+    : DefaultScriptClass(engine, handlerInfo, 2)
     , s_length(engine->toStringHandle(ParserStrings::PROPERTY_LENGTH()))
     , s_childType(engine->toStringHandle(QStringLiteral("childType")))
     , s_type(engine->toStringHandle(ParserStrings::PROPERTY_TYPE()))

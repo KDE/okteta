@@ -16,7 +16,7 @@
 #include <QScriptContext>
 
 StructUnionScriptClass::StructUnionScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
-    : DefaultScriptClass(engine, handlerInfo)
+    : DefaultScriptClass(engine, handlerInfo, 1)
     , s_childCount(engine->toStringHandle(ParserStrings::PROPERTY_CHILD_COUNT())) // read-only
     , s_children(engine->toStringHandle(ParserStrings::PROPERTY_CHILDREN())) // write-only
 {

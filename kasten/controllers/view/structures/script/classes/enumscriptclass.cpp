@@ -12,7 +12,7 @@
 #include <scriptlogger.hpp>
 
 EnumScriptClass::EnumScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
-    : PrimitiveScriptClass(engine, handlerInfo)
+    : PrimitiveScriptClass(engine, handlerInfo, 1)
     , s_values(engine->toStringHandle(ParserStrings::PROPERTY_ENUM_VALUES()))
 {
     mIterableProperties.append(qMakePair(s_values, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));

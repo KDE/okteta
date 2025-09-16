@@ -12,7 +12,7 @@
 #include <scriptvalueconverter.hpp>
 
 PointerScriptClass::PointerScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
-    : PrimitiveScriptClass(engine, handlerInfo)
+    : PrimitiveScriptClass(engine, handlerInfo, 4)
     , s_type(engine->toStringHandle(ParserStrings::PROPERTY_TYPE()))
     , s_target(engine->toStringHandle(ParserStrings::PROPERTY_TARGET()))
     , s_scale(engine->toStringHandle(ParserStrings::PROPERTY_SCALE()))

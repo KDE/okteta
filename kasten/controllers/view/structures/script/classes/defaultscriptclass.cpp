@@ -23,7 +23,8 @@
 // Std
 #include <utility>
 
-DefaultScriptClass::DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
+DefaultScriptClass::DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo,
+                                       int propertiesSize)
     : QScriptClass(engine)
     , s_valid(engine->toStringHandle(ParserStrings::PROPERTY_VALID()))
     , s_wasAbleToRead(engine->toStringHandle(ParserStrings::PROPERTY_ABLE_TO_READ()))
@@ -44,7 +45,8 @@ DefaultScriptClass::DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo*
     mDefaultPrototype.setProperty(QStringLiteral("toString"), engine->newFunction(Default_proto_toString));
 
     // add all our properties
-    mIterableProperties.reserve(11);
+    // TODO: find a pattern to set this (with proper size) in one go with properties from all subclasses
+    mIterableProperties.reserve(11 + propertiesSize);
     mIterableProperties.append(qMakePair(s_parent, QScriptValue::ReadOnly | QScriptValue::Undeletable));
     mIterableProperties.append(qMakePair(s_name, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
     mIterableProperties.append(qMakePair(s_wasAbleToRead, QScriptValue::ReadOnly | QScriptValue::Undeletable));
