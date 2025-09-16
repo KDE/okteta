@@ -18,24 +18,31 @@ class SafeReference;
 
 class SafeReferenceHolder
 {
+private:
     SafeReferenceHolder();
     ~SafeReferenceHolder();
 
 public:
     SafeReferenceHolder(const SafeReferenceHolder&) = delete;
+    SafeReferenceHolder(SafeReferenceHolder&&) = delete;
+
     SafeReferenceHolder& operator=(const SafeReferenceHolder&) = delete;
+    SafeReferenceHolder& operator=(SafeReferenceHolder&&) = delete;
 
 public:
     /** sets all references to this object to null */
     void invalidateAll(DataInformation* data);
     void safeReferenceDestroyed(SafeReference* ref);
     void registerSafeReference(SafeReference* ref, DataInformation* data);
+
     static SafeReferenceHolder instance;
 
 private:
     using Container = QMultiHash<DataInformation*, SafeReference*>;
+
     int safeRefDestroyCnt = 0;
     int safeRefRegisterCnt = 0;
+
     Container mRefs;
 };
 
@@ -50,8 +57,12 @@ public:
     SafeReference(const SafeReference& other);
     ~SafeReference();
 
+public:
     SafeReference& operator=(const SafeReference& other) = delete;
+    SafeReference& operator=(SafeReference&& other) = delete;
 
+public:
+    [[nodiscard]]
     inline DataInformation* data() const;
 
 private:

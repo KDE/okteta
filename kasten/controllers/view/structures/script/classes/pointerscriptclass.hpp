@@ -16,12 +16,15 @@ public:
     PointerScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
     ~PointerScriptClass() override;
 
-protected:
+protected: // DefaultScriptClass API
+    [[nodiscard]]
     bool queryAdditionalProperty(const DataInformation* data, const QScriptString& name, QScriptClass::QueryFlags* flags, uint* id) override;
+    [[nodiscard]]
     QScriptValue additionalProperty(const DataInformation* data, const QScriptString& name, uint id) override;
+    [[nodiscard]]
     bool setAdditionalProperty(DataInformation* data, const QScriptString& name, uint id, const QScriptValue& value) override;
 
-protected:
+private:
     QScriptString s_target;
     QScriptString s_type;
     QScriptString s_scale;

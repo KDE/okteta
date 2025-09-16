@@ -166,7 +166,7 @@ bool ArrayDataInformation::setData(const QVariant&, Okteta::AbstractByteArrayMod
 
 QScriptClass* ArrayDataInformation::scriptClass(ScriptHandlerInfo* handlerInfo) const
 {
-    return handlerInfo->mArrayClass.get();
+    return handlerInfo->arrayClass();
 }
 
 QScriptValue ArrayDataInformation::childToScriptValue(uint index, QScriptEngine* engine,

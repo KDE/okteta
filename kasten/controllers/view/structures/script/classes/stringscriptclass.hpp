@@ -15,23 +15,33 @@ class StringScriptClass : public DefaultScriptClass
 public:
     StringScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
     ~StringScriptClass() override;
+
+public: // QScriptClass API
+    [[nodiscard]]
     QScriptValue prototype() const override;
 
-protected:
+protected: // DefaultScriptClass API
+    [[nodiscard]]
     bool queryAdditionalProperty(const DataInformation* data, const QScriptString& name, QScriptClass::QueryFlags* flags, uint* id) override;
+    [[nodiscard]]
     bool additionalPropertyFlags(const DataInformation* data, const QScriptString& name, uint, QScriptValue::PropertyFlags* flags) override;
+    [[nodiscard]]
     QScriptValue additionalProperty(const DataInformation* data, const QScriptString& name, uint id) override;
+    [[nodiscard]]
     bool setAdditionalProperty(DataInformation* data, const QScriptString& name, uint id, const QScriptValue& value) override;
 
+private:
+    [[nodiscard]]
     static QScriptValue String_proto_toString(QScriptContext* ctx, QScriptEngine* eng);
 
-protected:
+private:
     QScriptString s_lengthInCodepoints;
     QScriptString s_lengthInBytes;
     QScriptString s_encoding;
     QScriptString s_terminatedBy;
     QScriptString s_maxCharCount;
     QScriptString s_maxByteCount;
+
     QScriptValue mStringPrototype;
 };
 

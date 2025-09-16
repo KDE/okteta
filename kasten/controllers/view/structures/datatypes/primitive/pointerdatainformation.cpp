@@ -153,7 +153,7 @@ bool PointerDataInformation::setPointerType(DataInformation* type)
 
 QScriptClass* PointerDataInformation::scriptClass(ScriptHandlerInfo* handlerInfo) const
 {
-    return handlerInfo->mPointerClass.get();
+    return handlerInfo->pointerClass();
 }
 
 bool PointerDataInformation::isPointer() const

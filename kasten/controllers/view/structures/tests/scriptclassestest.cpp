@@ -208,13 +208,13 @@ void ScriptClassesTest::testScriptValueContents_data()
     QTest::addColumn<QScriptClass*>("scriptClass");
 
     scriptValueContentsAddRow("struct", structData,
-                              structDataTop->scriptHandler()->handlerInfo()->mStructUnionClass.get());
+                              structDataTop->scriptHandler()->handlerInfo()->structUnionClass());
     scriptValueContentsAddRow("union", unionData,
-                              unionDataTop->scriptHandler()->handlerInfo()->mStructUnionClass.get());
+                              unionDataTop->scriptHandler()->handlerInfo()->structUnionClass());
     scriptValueContentsAddRow("array", arrayData,
-                              arrayDataTop->scriptHandler()->handlerInfo()->mArrayClass.get());
+                              arrayDataTop->scriptHandler()->handlerInfo()->arrayClass());
     scriptValueContentsAddRow("string", stringData,
-                              stringDataTop->scriptHandler()->handlerInfo()->mStringClass.get());
+                              stringDataTop->scriptHandler()->handlerInfo()->stringClass());
 }
 
 void ScriptClassesTest::testScriptValueContents()

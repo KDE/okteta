@@ -16,14 +16,14 @@
 #include <pointerscriptclass.hpp>
 
 ScriptHandlerInfo::ScriptHandlerInfo(QScriptEngine* engine, ScriptLogger* logger)
-    : mArrayClass(new ArrayScriptClass(engine, this))
+    : mLogger(logger)
+    , mArrayClass(new ArrayScriptClass(engine, this))
     , mPrimitiveClass(new PrimitiveScriptClass(engine, this))
     , mEnumClass(new EnumScriptClass(engine, this))
     , mStructUnionClass(new StructUnionScriptClass(engine, this))
     , mStringClass(new StringScriptClass(engine, this))
     , mBitfieldClass(new BitfieldScriptClass(engine, this))
     , mPointerClass(new PointerScriptClass(engine, this))
-    , mLogger(logger)
 {
     Q_CHECK_PTR(mLogger);
 }

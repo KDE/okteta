@@ -77,7 +77,7 @@ QScriptValue ArrayScriptClass::additionalProperty(const DataInformation* data, c
                                                               QString::number(pos), QString::number(data->childCount())));
         }
 
-        return aData->childToScriptValue(pos, engine(), mHandlerInfo);
+        return aData->childToScriptValue(pos, engine(), handlerInfo());
     }
     if (name == s_length) {
         return aData->length();

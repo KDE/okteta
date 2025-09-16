@@ -15,14 +15,23 @@ class PrimitiveScriptClass : public DefaultScriptClass
 public:
     PrimitiveScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
     ~PrimitiveScriptClass() override;
+
+public: // QScriptClass API
+    [[nodiscard]]
     QScriptValue prototype() const override;
 
-protected:
+protected: // DefaultScriptClass API
+    [[nodiscard]]
     bool queryAdditionalProperty(const DataInformation* data, const QScriptString& name, QScriptClass::QueryFlags* flags, uint* id) override;
+    [[nodiscard]]
     bool additionalPropertyFlags(const DataInformation* data, const QScriptString& name, uint, QScriptValue::PropertyFlags* flags) override;
+    [[nodiscard]]
     QScriptValue additionalProperty(const DataInformation* data, const QScriptString& name, uint id) override;
+    [[nodiscard]]
     bool setAdditionalProperty(DataInformation* data, const QScriptString& name, uint id, const QScriptValue& value) override;
 
+private:
+    [[nodiscard]]
     static QScriptValue Primitive_proto_toString(QScriptContext* ctx, QScriptEngine* eng);
 
 protected:
@@ -48,6 +57,7 @@ protected:
     QScriptString s_char;
     // TODO Bitfields probably better in own class?
 
+private:
     QScriptValue mPrimitivePrototype;
 };
 

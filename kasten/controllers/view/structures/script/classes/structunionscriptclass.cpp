@@ -110,7 +110,7 @@ QScriptValue StructUnionScriptClass::additionalProperty(const DataInformation* d
                                                               QString::number(pos), QString::number(data->childCount())));
         }
         Q_CHECK_PTR(data->childAt(pos));
-        return data->childAt(pos)->toScriptValue(engine(), mHandlerInfo);
+        return data->childAt(pos)->toScriptValue(engine(), handlerInfo());
     }
     if (name == s_childCount) {
         return dataW->childCount();
@@ -128,7 +128,7 @@ QScriptValue StructUnionScriptClass::additionalProperty(const DataInformation* d
         DataInformation* child = data->childAt(i);
         Q_CHECK_PTR(child);
         if (objName == child->name()) {
-            return child->toScriptValue(engine(), mHandlerInfo);
+            return child->toScriptValue(engine(), handlerInfo());
         }
     }
     return {};

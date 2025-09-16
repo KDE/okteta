@@ -93,7 +93,7 @@ AllPrimitiveTypes AbstractBitfieldDataInformation::fromVariant(const QVariant& v
 
 QScriptClass* AbstractBitfieldDataInformation::scriptClass(ScriptHandlerInfo* handlerInfo) const
 {
-    return handlerInfo->mBitfieldClass.get();
+    return handlerInfo->bitfieldClass();
 }
 
 BitCount32 AbstractBitfieldDataInformation::size() const

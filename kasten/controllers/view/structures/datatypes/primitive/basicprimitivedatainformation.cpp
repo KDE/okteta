@@ -27,7 +27,7 @@
 template <typename T, class C>
 inline QScriptClass* BasicPrimitiveDataInformation<T, C>::scriptClass(ScriptHandlerInfo* handlerInfo) const
 {
-    return handlerInfo->mPrimitiveClass.get();
+    return handlerInfo->primitiveClass();
 }
 
 template <typename T, typename C>

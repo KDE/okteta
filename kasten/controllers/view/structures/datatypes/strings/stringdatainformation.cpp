@@ -334,5 +334,5 @@ void StringDataInformation::unsetTerminationMode(StringData::TerminationMode mod
 
 QScriptClass* StringDataInformation::scriptClass(ScriptHandlerInfo* handlerInfo) const
 {
-    return handlerInfo->mStringClass.get();
+    return handlerInfo->stringClass();
 }

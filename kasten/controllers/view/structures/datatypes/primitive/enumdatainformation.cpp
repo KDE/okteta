@@ -88,7 +88,7 @@ QString EnumDataInformation::typeNameImpl() const
 
 QScriptClass* EnumDataInformation::scriptClass(ScriptHandlerInfo* handlerInfo) const
 {
-    return handlerInfo->mEnumClass.get();
+    return handlerInfo->enumClass();
 }
 
 bool EnumDataInformation::isEnum() const

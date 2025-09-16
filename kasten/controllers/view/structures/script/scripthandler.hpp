@@ -24,27 +24,35 @@ class ScriptHandler
 {
 public:
     ScriptHandler(QScriptEngine* engine, TopLevelDataInformation* topLevel);
+
     ScriptHandler(const ScriptHandler&) = delete;
+    ScriptHandler(ScriptHandler&&) = delete;
 
-    virtual ~ScriptHandler();
+    ~ScriptHandler();
 
+public:
     ScriptHandler& operator=(const ScriptHandler&) = delete;
+    ScriptHandler& operator=(ScriptHandler&&) = delete;
 
 public:
     void validateData(DataInformation* data);
     /** The pointer may be changed while updating, CHECK AS SOON AS FUNCTION RETURNS! */
     void updateDataInformation(DataInformation* data);
     void updateLength(ArrayDataInformation* array);
+    [[nodiscard]]
     QString customToString(const DataInformation* data, const QScriptValue& func);
 
+    [[nodiscard]]
     QScriptEngine* engine() const;
+    [[nodiscard]]
     ScriptHandlerInfo* handlerInfo();
 
+    [[nodiscard]]
     QScriptValue callFunction(QScriptValue func, DataInformation* data, ScriptHandlerInfo::Mode mode);
 
 private:
-    std::unique_ptr<QScriptEngine> mEngine;
-    TopLevelDataInformation* mTopLevel;
+    const std::unique_ptr<QScriptEngine> mEngine;
+    TopLevelDataInformation* const mTopLevel;
     ScriptHandlerInfo mHandlerInfo;
 };
 
