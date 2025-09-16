@@ -74,17 +74,17 @@ private:
     void setDataType(const QScriptValue& value, DataInformation* data);
 
 protected:
-    QScriptString s_valid;
-    QScriptString s_wasAbleToRead;
-    QScriptString s_validationError;
-    QScriptString s_parent;
-    QScriptString s_byteOrder;
-    QScriptString s_name;
-    QScriptString s_datatype;
-    QScriptString s_updateFunc;
-    QScriptString s_validationFunc;
-    QScriptString s_customTypeName;
-    QScriptString s_asStringFunc;
+    const QScriptString s_valid;
+    const QScriptString s_wasAbleToRead;
+    const QScriptString s_validationError;
+    const QScriptString s_parent;
+    const QScriptString s_byteOrder;
+    const QScriptString s_name;
+    const QScriptString s_datatype;
+    const QScriptString s_updateFunc;
+    const QScriptString s_validationFunc;
+    const QScriptString s_customTypeName;
+    const QScriptString s_asStringFunc;
 
     /** Contains all properties of this class, classes inheriting should add their own properties to this list */
     PropertyInfoList mIterableProperties;

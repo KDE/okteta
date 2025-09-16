@@ -25,7 +25,7 @@ protected: // DefaultScriptClass API
     bool setAdditionalProperty(DataInformation* data, const QScriptString& name, uint id, const QScriptValue& value) override;
 
 private:
-    QScriptString s_width;
+    const QScriptString s_width;
 };
 
 #endif // KASTEN_BITFIELDSCRIPTCLASS_HPP

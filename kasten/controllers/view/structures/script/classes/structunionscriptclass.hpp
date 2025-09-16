@@ -39,8 +39,8 @@ private:
     static QScriptValue StructUnion_proto_child(QScriptContext* ctx, QScriptEngine* eng);
 
 private:
-    QScriptString s_childCount;
-    QScriptString s_children;
+    const QScriptString s_childCount;
+    const QScriptString s_children;
 
     QScriptValue mStructUnionPrototype;
 };

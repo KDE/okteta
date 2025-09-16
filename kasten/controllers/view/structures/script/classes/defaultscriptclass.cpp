@@ -25,23 +25,24 @@
 
 DefaultScriptClass::DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : QScriptClass(engine)
+    , s_valid(engine->toStringHandle(ParserStrings::PROPERTY_VALID()))
+    , s_wasAbleToRead(engine->toStringHandle(ParserStrings::PROPERTY_ABLE_TO_READ()))
+    , s_validationError(engine->toStringHandle(ParserStrings::PROPERTY_VALIDATION_ERROR()))
+    , s_parent(engine->toStringHandle(ParserStrings::PROPERTY_PARENT()))
+    , s_byteOrder(engine->toStringHandle(ParserStrings::PROPERTY_BYTEORDER()))
+    , s_name(engine->toStringHandle(ParserStrings::PROPERTY_NAME()))
+    , s_datatype(engine->toStringHandle(ParserStrings::PROPERTY_DATATYPE()))
+    , s_updateFunc(engine->toStringHandle(ParserStrings::PROPERTY_UPDATE_FUNC()))
+    , s_validationFunc(engine->toStringHandle(ParserStrings::PROPERTY_VALIDATION_FUNC()))
+    , s_customTypeName(engine->toStringHandle(ParserStrings::PROPERTY_CUSTOM_TYPE_NAME()))
+    , s_asStringFunc(engine->toStringHandle(ParserStrings::PROPERTY_TO_STRING_FUNC()))
     , mHandlerInfo(handlerInfo)
 {
-    s_valid = engine->toStringHandle(ParserStrings::PROPERTY_VALID());
-    s_wasAbleToRead = engine->toStringHandle(ParserStrings::PROPERTY_ABLE_TO_READ());
-    s_validationError = engine->toStringHandle(ParserStrings::PROPERTY_VALIDATION_ERROR());
-    s_parent = engine->toStringHandle(ParserStrings::PROPERTY_PARENT());
-    s_byteOrder = engine->toStringHandle(ParserStrings::PROPERTY_BYTEORDER());
-    s_name = engine->toStringHandle(ParserStrings::PROPERTY_NAME());
-    s_datatype = engine->toStringHandle(ParserStrings::PROPERTY_DATATYPE());
-    s_updateFunc = engine->toStringHandle(ParserStrings::PROPERTY_UPDATE_FUNC());
-    s_validationFunc = engine->toStringHandle(ParserStrings::PROPERTY_VALIDATION_FUNC());
-    s_customTypeName = engine->toStringHandle(ParserStrings::PROPERTY_CUSTOM_TYPE_NAME());
-    s_asStringFunc = engine->toStringHandle(ParserStrings::PROPERTY_TO_STRING_FUNC());
 
     // TODO remove, every subclass should have proto
     mDefaultPrototype = engine->newObject();
     mDefaultPrototype.setProperty(QStringLiteral("toString"), engine->newFunction(Default_proto_toString));
+
     // add all our properties
     mIterableProperties.reserve(11);
     mIterableProperties.append(qMakePair(s_parent, QScriptValue::ReadOnly | QScriptValue::Undeletable));

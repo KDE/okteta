@@ -25,7 +25,7 @@ protected: // DefaultScriptClass API
     bool setAdditionalProperty(DataInformation* data, const QScriptString& name, uint id, const QScriptValue& value) override;
 
 private:
-    QScriptString s_values;
+    const QScriptString s_values;
 };
 
 #endif // KASTEN_ENUMSCRIPTCLASS_HPP

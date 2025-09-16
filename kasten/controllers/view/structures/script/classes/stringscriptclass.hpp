@@ -35,12 +35,12 @@ private:
     static QScriptValue String_proto_toString(QScriptContext* ctx, QScriptEngine* eng);
 
 private:
-    QScriptString s_lengthInCodepoints;
-    QScriptString s_lengthInBytes;
-    QScriptString s_encoding;
-    QScriptString s_terminatedBy;
-    QScriptString s_maxCharCount;
-    QScriptString s_maxByteCount;
+    const QScriptString s_lengthInCodepoints;
+    const QScriptString s_lengthInBytes;
+    const QScriptString s_maxByteCount;
+    const QScriptString s_maxCharCount;
+    const QScriptString s_terminatedBy;
+    const QScriptString s_encoding;
 
     QScriptValue mStringPrototype;
 };

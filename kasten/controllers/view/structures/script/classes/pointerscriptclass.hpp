@@ -25,10 +25,10 @@ protected: // DefaultScriptClass API
     bool setAdditionalProperty(DataInformation* data, const QScriptString& name, uint id, const QScriptValue& value) override;
 
 private:
-    QScriptString s_target;
-    QScriptString s_type;
-    QScriptString s_scale;
-    QScriptString s_interpretFunc;
+    const QScriptString s_type;
+    const QScriptString s_target;
+    const QScriptString s_scale;
+    const QScriptString s_interpretFunc;
 };
 
 #endif // KASTEN_POINTERSCRIPTCLASS_HPP

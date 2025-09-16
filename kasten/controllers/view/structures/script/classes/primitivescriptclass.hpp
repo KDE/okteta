@@ -35,26 +35,26 @@ private:
     static QScriptValue Primitive_proto_toString(QScriptContext* ctx, QScriptEngine* eng);
 
 protected:
-    QScriptString s_value;
-    QScriptString s_type;
-    QScriptString s_int;
-    QScriptString s_int8;
-    QScriptString s_int16;
-    QScriptString s_int32;
-    QScriptString s_int64;
-    QScriptString s_int64high32;
-    QScriptString s_int64low32;
-    QScriptString s_uint;
-    QScriptString s_uint8;
-    QScriptString s_uint16;
-    QScriptString s_uint32;
-    QScriptString s_uint64;
-    QScriptString s_uint64high32;
-    QScriptString s_uint64low32;
-    QScriptString s_bool;
-    QScriptString s_float;
-    QScriptString s_double;
-    QScriptString s_char;
+    const QScriptString s_value;
+    const QScriptString s_type;
+    const QScriptString s_bool;
+    const QScriptString s_char;
+    const QScriptString s_double;
+    const QScriptString s_float;
+    const QScriptString s_int;
+    const QScriptString s_int8;
+    const QScriptString s_int16;
+    const QScriptString s_int32;
+    const QScriptString s_int64low32;
+    const QScriptString s_int64high32;
+    const QScriptString s_int64;
+    const QScriptString s_uint;
+    const QScriptString s_uint8;
+    const QScriptString s_uint16;
+    const QScriptString s_uint32;
+    const QScriptString s_uint64low32;
+    const QScriptString s_uint64high32;
+    const QScriptString s_uint64;
     // TODO Bitfields probably better in own class?
 
 private:

@@ -35,9 +35,9 @@ private:
     static QScriptValue Array_proto_toString(QScriptContext* ctx, QScriptEngine* eng);
 
 private:
-    QScriptString s_length;
-    QScriptString s_childType; // deprecated
-    QScriptString s_type;
+    const QScriptString s_length;
+    const QScriptString s_childType; // deprecated
+    const QScriptString s_type;
 
     QScriptValue mArrayPrototype;
 };

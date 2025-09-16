@@ -13,14 +13,14 @@
 
 PointerScriptClass::PointerScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : PrimitiveScriptClass(engine, handlerInfo)
+    , s_type(engine->toStringHandle(ParserStrings::PROPERTY_TYPE()))
+    , s_target(engine->toStringHandle(ParserStrings::PROPERTY_TARGET()))
+    , s_scale(engine->toStringHandle(ParserStrings::PROPERTY_SCALE()))
+    , s_interpretFunc(engine->toStringHandle(ParserStrings::PROPERTY_INTERPRET_FUNC()))
 {
-    s_type = engine->toStringHandle(ParserStrings::PROPERTY_TYPE());
     mIterableProperties.append(qMakePair(s_type, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
-    s_target = engine->toStringHandle(ParserStrings::PROPERTY_TARGET());
     mIterableProperties.append(qMakePair(s_target, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
-    s_scale = engine->toStringHandle(ParserStrings::PROPERTY_SCALE());
     mIterableProperties.append(qMakePair(s_scale, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
-    s_interpretFunc = engine->toStringHandle(ParserStrings::PROPERTY_INTERPRET_FUNC());
     mIterableProperties.append(qMakePair(s_interpretFunc, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
 }
 
