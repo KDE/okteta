@@ -7,9 +7,9 @@
 #include "abstractbitfielddatainformation.hpp"
 
 // lib
-#include "../../topleveldatainformation.hpp"
-#include "../../../script/classes/bitfieldscriptclass.hpp"
-#include "../../../script/scripthandlerinfo.hpp"
+#include <topleveldatainformation.hpp>
+#include <bitfieldscriptclass.hpp>
+#include <scripthandlerinfo.hpp>
 // KF
 #include <KLocalizedString>
 

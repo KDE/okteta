@@ -7,8 +7,8 @@
 #include "bitfieldscriptclass.hpp"
 
 // lib
-#include "../../datatypes/primitive/bitfield/abstractbitfielddatainformation.hpp"
-#include "../../parsers/parserutils.hpp"
+#include <abstractbitfielddatainformation.hpp>
+#include <parserutils.hpp>
 // Qt
 #include <QScriptContext>
 

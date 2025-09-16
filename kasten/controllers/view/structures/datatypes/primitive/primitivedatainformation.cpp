@@ -7,9 +7,9 @@
 #include "primitivedatainformation.hpp"
 
 // lib
-#include "../datainformation.hpp"
-#include "../topleveldatainformation.hpp"
-#include "structureviewpreferences.hpp"
+#include <datainformation.hpp>
+#include <topleveldatainformation.hpp>
+#include <structureviewpreferences.hpp>
 
 PrimitiveDataInformationWrapper::PrimitiveDataInformationWrapper(const PrimitiveDataInformationWrapper& d)
     : PrimitiveDataInformation(d)

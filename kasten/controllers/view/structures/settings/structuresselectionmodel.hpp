@@ -8,8 +8,8 @@
 #define STRUCTURESSELECTIONMODEL_HPP
 
 // tool
-#include "../structuremetadata.hpp"
 #include "structureenabledlist.hpp"
+#include <structuremetadata.hpp>
 // Qt
 #include <QAbstractListModel>
 #include <QVector>

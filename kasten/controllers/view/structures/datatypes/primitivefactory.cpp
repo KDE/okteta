@@ -7,8 +7,8 @@
 #include "primitivefactory.hpp"
 
 // lib
-#include "primitive/primitivetemplateinfo.hpp"
-#include "../script/scriptlogger.hpp"
+#include <primitivetemplateinfo.hpp>
+#include <scriptlogger.hpp>
 
 namespace PrimitiveFactory {
 

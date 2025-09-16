@@ -9,9 +9,9 @@
 // tool
 #include "structurestool.hpp"
 #include <structureslogging.hpp>
-#include "datatypes/datainformationwithchildren.hpp"
-#include "datatypes/topleveldatainformation.hpp"
-#include "datatypes/array/arraydatainformation.hpp"
+#include <datainformationwithchildren.hpp>
+#include <topleveldatainformation.hpp>
+#include <arraydatainformation.hpp>
 // Qt
 #include <QFont>
 #include <QMimeData>

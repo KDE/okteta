@@ -7,10 +7,10 @@
 #include "structunionscriptclass.hpp"
 
 // lib
-#include "../../datatypes/datainformationwithchildren.hpp"
-#include "../../datatypes/topleveldatainformation.hpp"
-#include "../../parsers/parserutils.hpp"
-#include "../scriptlogger.hpp"
+#include <datainformationwithchildren.hpp>
+#include <topleveldatainformation.hpp>
+#include <parserutils.hpp>
+#include <scriptlogger.hpp>
 #include <structureslogging.hpp>
 // Qt
 #include <QScriptContext>

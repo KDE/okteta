@@ -7,14 +7,14 @@
 #include "arraydatainformation.hpp"
 
 // lib
-#include "../primitivefactory.hpp"
-#include "../dummydatainformation.hpp"
-#include "../../parsers/scriptvalueconverter.hpp"
-#include "../../script/classes/arrayscriptclass.hpp"
-#include "../../script/scripthandlerinfo.hpp"
-#include "../../script/scriptlogger.hpp"
 #include "complexarraydata.hpp"
 #include "primitivearraydata.hpp"
+#include <primitivefactory.hpp>
+#include <dummydatainformation.hpp>
+#include <scriptvalueconverter.hpp>
+#include <arrayscriptclass.hpp>
+#include <scripthandlerinfo.hpp>
+#include <scriptlogger.hpp>
 
 ArrayDataInformation::ArrayDataInformation(const QString& name, uint length, DataInformation* childType,
                                            DataInformation* parent, const QScriptValue& lengthFunction)

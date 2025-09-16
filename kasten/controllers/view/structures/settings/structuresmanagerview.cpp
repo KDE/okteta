@@ -10,8 +10,8 @@
 // controller
 #include "structuresselectiondialog.hpp"
 #include "structuresselector.hpp"
-#include "../structuresmanager.hpp"
-#include "../structurestool.hpp"
+#include <structuresmanager.hpp>
+#include <structurestool.hpp>
 #include <structureslogging.hpp>
 // KF
 #include <KConfigDialogManager>

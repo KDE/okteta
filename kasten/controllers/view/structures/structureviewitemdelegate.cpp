@@ -8,7 +8,7 @@
 
 // tool
 #include "structuretreemodel.hpp"
-#include "datatypes/datainformation.hpp"
+#include <datainformation.hpp>
 
 namespace Kasten {
 

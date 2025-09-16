@@ -9,7 +9,7 @@
 
 // lib
 #include "primitivedatainformation.hpp"
-#include "../../allprimitivetypes.hpp"
+#include <allprimitivetypes.hpp>
 
 /** A basic implementation for all primitive types.
  *  T is the data type (e.g. quint8 or float)

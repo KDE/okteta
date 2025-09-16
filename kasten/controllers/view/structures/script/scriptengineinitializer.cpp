@@ -7,8 +7,8 @@
 #include "scriptengineinitializer.hpp"
 
 // lib
-#include "../datatypes/primitivefactory.hpp"
-#include "../parsers/parserutils.hpp"
+#include <primitivefactory.hpp>
+#include <parserutils.hpp>
 // Qt
 #include <QStringList>
 #include <QFile>

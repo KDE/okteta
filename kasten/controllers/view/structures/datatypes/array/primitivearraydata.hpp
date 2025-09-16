@@ -9,10 +9,10 @@
 
 // lib
 #include "abstractarraydata.hpp"
-#include "../datainformation.hpp"
-#include "../dummydatainformation.hpp"
-#include "../topleveldatainformation.hpp"
-#include "../primitive/primitivetemplateinfo.hpp"
+#include <datainformation.hpp>
+#include <dummydatainformation.hpp>
+#include <topleveldatainformation.hpp>
+#include <primitivetemplateinfo.hpp>
 
 template <PrimitiveDataType type>
 class PrimitiveArrayData : public AbstractArrayData

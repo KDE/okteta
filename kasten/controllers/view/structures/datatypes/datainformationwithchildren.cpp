@@ -8,10 +8,10 @@
 
 // lib
 #include "topleveldatainformation.hpp"
-#include "../parsers/scriptvalueconverter.hpp"
-#include "../script/scripthandlerinfo.hpp"
-#include "../script/classes/structunionscriptclass.hpp"
-#include "../script/scriptlogger.hpp"
+#include <scriptvalueconverter.hpp>
+#include <scripthandlerinfo.hpp>
+#include <structunionscriptclass.hpp>
+#include <scriptlogger.hpp>
 // KF
 #include <KLocalizedString>
 // Qt

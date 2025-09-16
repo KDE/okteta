@@ -5,12 +5,12 @@
 */
 
 // sut
-#include "view/structures/datatypes/array/arraydatainformation.hpp"
-#include "view/structures/datatypes/array/primitivearraydata.hpp"
-#include "view/structures/datatypes/topleveldatainformation.hpp"
-#include "view/structures/datatypes/primitive/primitivetemplateinfo.hpp"
-#include "view/structures/datatypes/primitivefactory.hpp"
-#include "view/structures/script/scriptengineinitializer.hpp"
+#include <primitivearraydata.hpp>
+#include <arraydatainformation.hpp>
+#include <topleveldatainformation.hpp>
+#include <primitivetemplateinfo.hpp>
+#include <primitivefactory.hpp>
+#include <scriptengineinitializer.hpp>
 // Okteta core
 #include <Okteta/ByteArrayModel>
 // Qt

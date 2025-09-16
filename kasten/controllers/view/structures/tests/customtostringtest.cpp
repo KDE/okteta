@@ -7,9 +7,9 @@
 // test
 #include "testutils.hpp"
 // sut
-#include "view/structures/script/scriptengineinitializer.hpp"
-#include "view/structures/parsers/scriptvalueconverter.hpp"
-#include "view/structures/datatypes/topleveldatainformation.hpp"
+#include <scriptengineinitializer.hpp>
+#include <scriptvalueconverter.hpp>
+#include <topleveldatainformation.hpp>
 // Okteta core
 #include <Okteta/ByteArrayModel>
 // Qt

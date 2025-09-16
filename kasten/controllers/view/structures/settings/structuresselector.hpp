@@ -8,7 +8,7 @@
 #define STRUCTURESSELECTOR_HPP
 
 // tool
-#include "../structuremetadata.hpp"
+#include <structuremetadata.hpp>
 // Qt
 #include <QWidget>
 #include <QMap>

@@ -13,10 +13,10 @@
 #include "floatdatainformation.hpp"
 #include "sintdatainformation.hpp"
 #include "uintdatainformation.hpp"
-#include "../topleveldatainformation.hpp"
-#include "../../script/scripthandlerinfo.hpp"
-#include "../../script/scriptlogger.hpp"
-#include "../../script/classes/primitivescriptclass.hpp"
+#include <topleveldatainformation.hpp>
+#include <scripthandlerinfo.hpp>
+#include <scriptlogger.hpp>
+#include <primitivescriptclass.hpp>
 // Okteta core
 #include <Okteta/AbstractByteArrayModel>
 // KF

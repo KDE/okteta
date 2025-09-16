@@ -7,7 +7,7 @@
 #include "enumdefinition.hpp"
 
 // lib
-#include "../../script/scriptlogger.hpp"
+#include <scriptlogger.hpp>
 // Qt
 #include <QScriptValue>
 #include <QScriptValueIterator>

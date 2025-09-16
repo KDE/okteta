@@ -7,10 +7,10 @@
 #include "structuredefinitionfile.hpp"
 
 // lib
-#include "datatypes/topleveldatainformation.hpp"
-#include "parsers/abstractstructureparser.hpp"
-#include "parsers/osdparser.hpp"
-#include "parsers/scriptfileparser.hpp"
+#include <topleveldatainformation.hpp>
+#include <abstractstructureparser.hpp>
+#include <osdparser.hpp>
+#include <scriptfileparser.hpp>
 #include <structureslogging.hpp>
 // Qt
 #include <QFile>

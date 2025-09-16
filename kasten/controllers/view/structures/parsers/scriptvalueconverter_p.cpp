@@ -10,11 +10,11 @@
 // lib
 #include "datainformationfactory.hpp"
 #include "parserutils.hpp"
-#include "../datatypes/uniondatainformation.hpp"
-#include "../datatypes/structuredatainformation.hpp"
-#include "../datatypes/strings/stringdata.hpp"
-#include "../datatypes/strings/stringdatainformation.hpp"
-#include "../script/scriptlogger.hpp"
+#include <uniondatainformation.hpp>
+#include <structuredatainformation.hpp>
+#include <stringdata.hpp>
+#include <stringdatainformation.hpp>
+#include <scriptlogger.hpp>
 
 using namespace ParserStrings;
 

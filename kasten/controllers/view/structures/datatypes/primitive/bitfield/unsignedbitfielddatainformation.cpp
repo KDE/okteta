@@ -7,7 +7,7 @@
 #include "unsignedbitfielddatainformation.hpp"
 
 // controller
-#include "../uintdatainformation.hpp"
+#include <uintdatainformation.hpp>
 // libdatatypeeditors
 #include <uintspinbox.hpp>
 // KF

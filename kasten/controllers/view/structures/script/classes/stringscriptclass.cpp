@@ -7,8 +7,8 @@
 #include "stringscriptclass.hpp"
 
 // lib
-#include "../../datatypes/strings/stringdatainformation.hpp"
-#include "../../parsers/parserutils.hpp"
+#include <stringdatainformation.hpp>
+#include <parserutils.hpp>
 #include <structureslogging.hpp>
 // Qt
 #include <QScriptContext>

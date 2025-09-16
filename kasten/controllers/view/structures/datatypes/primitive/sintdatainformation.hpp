@@ -9,8 +9,8 @@
 
 // lib
 #include "primitivedatainformation.hpp"
-#include "structureviewpreferences.hpp"
-#include "../../allprimitivetypes.hpp"
+#include <structureviewpreferences.hpp>
+#include <allprimitivetypes.hpp>
 
 template <typename T>
 class SIntDataInformationMethods

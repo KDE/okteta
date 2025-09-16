@@ -5,12 +5,12 @@
 */
 
 // sut
-#include "view/structures/datatypes/array/arraydatainformation.hpp"
-#include "view/structures/datatypes/array/primitivearraydata.hpp"
-#include "view/structures/datatypes/topleveldatainformation.hpp"
-#include "view/structures/datatypes/primitive/primitivetemplateinfo.hpp"
-#include "view/structures/datatypes/primitivefactory.hpp"
-#include "view/structures/datatypes/structuredatainformation.hpp"
+#include <arraydatainformation.hpp>
+#include <primitivearraydata.hpp>
+#include <topleveldatainformation.hpp>
+#include <primitivetemplateinfo.hpp>
+#include <primitivefactory.hpp>
+#include <structuredatainformation.hpp>
 // Qt
 #include <QTest>
 #include <QSignalSpy>

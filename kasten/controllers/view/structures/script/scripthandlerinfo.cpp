@@ -7,13 +7,13 @@
 #include "scripthandlerinfo.hpp"
 
 // lib
-#include "classes/arrayscriptclass.hpp"
-#include "classes/primitivescriptclass.hpp"
-#include "classes/structunionscriptclass.hpp"
-#include "classes/stringscriptclass.hpp"
-#include "classes/enumscriptclass.hpp"
-#include "classes/bitfieldscriptclass.hpp"
-#include "classes/pointerscriptclass.hpp"
+#include <arrayscriptclass.hpp>
+#include <primitivescriptclass.hpp>
+#include <structunionscriptclass.hpp>
+#include <stringscriptclass.hpp>
+#include <enumscriptclass.hpp>
+#include <bitfieldscriptclass.hpp>
+#include <pointerscriptclass.hpp>
 
 ScriptHandlerInfo::ScriptHandlerInfo(QScriptEngine* engine, ScriptLogger* logger)
     : mArrayClass(new ArrayScriptClass(engine, this))

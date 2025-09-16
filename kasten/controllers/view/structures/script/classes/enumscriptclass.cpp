@@ -7,9 +7,9 @@
 #include "enumscriptclass.hpp"
 
 // lib
-#include "../../datatypes/primitive/enumdatainformation.hpp"
-#include "../../parsers/parserutils.hpp"
-#include "../scriptlogger.hpp"
+#include <enumdatainformation.hpp>
+#include <parserutils.hpp>
+#include <scriptlogger.hpp>
 
 EnumScriptClass::EnumScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : PrimitiveScriptClass(engine, handlerInfo)

@@ -7,7 +7,7 @@
 #include "scriptlogger.hpp"
 
 // lib
-#include "../datatypes/datainformation.hpp"
+#include <datainformation.hpp>
 // KF
 #include <KLocalizedString>
 // Qt

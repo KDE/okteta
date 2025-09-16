@@ -9,9 +9,9 @@
 #define KASTEN_STRINGDATAINFORMATION_HPP
 
 // lib
-#include "../datainformation.hpp"
-#include "../dummydatainformation.hpp"
 #include "stringdata.hpp"
+#include <datainformation.hpp>
+#include <dummydatainformation.hpp>
 // Std
 #include <memory>
 

@@ -8,17 +8,17 @@
 #include "stringdatainformation.hpp"
 
 // lib
-#include "../dummydatainformation.hpp"
-#include "../topleveldatainformation.hpp"
-#include "utf32stringdata.hpp"
-#include "utf16stringdata.hpp"
-#include "utf8stringdata.hpp"
 #include "asciistringdata.hpp"
 #include "ebcdicstringdata.hpp"
 #include "latin1stringdata.hpp"
-#include "../../script/classes/stringscriptclass.hpp"
-#include "../../script/scripthandlerinfo.hpp"
-#include "../../script/scriptlogger.hpp"
+#include "utf8stringdata.hpp"
+#include "utf16stringdata.hpp"
+#include "utf32stringdata.hpp"
+#include <dummydatainformation.hpp>
+#include <topleveldatainformation.hpp>
+#include <stringscriptclass.hpp>
+#include <scripthandlerinfo.hpp>
+#include <scriptlogger.hpp>
 // KF
 #include <KLocalizedString>
 // Qt

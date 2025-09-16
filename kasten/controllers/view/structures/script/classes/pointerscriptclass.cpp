@@ -7,9 +7,9 @@
 #include "pointerscriptclass.hpp"
 
 // lib
-#include "../../datatypes/primitive/pointerdatainformation.hpp"
-#include "../../parsers/parserutils.hpp"
-#include "../../parsers/scriptvalueconverter.hpp"
+#include <pointerdatainformation.hpp>
+#include <parserutils.hpp>
+#include <scriptvalueconverter.hpp>
 
 PointerScriptClass::PointerScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : PrimitiveScriptClass(engine, handlerInfo)

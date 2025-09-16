@@ -7,9 +7,9 @@
 #include "utf8stringdata.hpp"
 
 // lib
-#include "../topleveldatainformation.hpp"
-#include "../dummydatainformation.hpp"
 #include "stringdatainformation.hpp"
+#include <topleveldatainformation.hpp>
+#include <dummydatainformation.hpp>
 #include <structureslogging.hpp>
 // Okteta core
 #include <Okteta/AbstractByteArrayModel>

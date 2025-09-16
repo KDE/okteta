@@ -7,7 +7,7 @@
 #include "chardatainformation.hpp"
 
 // lib
-#include "structureviewpreferences.hpp"
+#include <structureviewpreferences.hpp>
 // libdatatypeeditors
 #include <char8editor.hpp>
 // Okteta core

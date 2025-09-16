@@ -5,19 +5,19 @@
 */
 
 // sut
-#include "view/structures/datatypes/array/arraydatainformation.hpp"
-#include "view/structures/datatypes/array/primitivearraydata.hpp"
-#include "view/structures/datatypes/strings/stringdatainformation.hpp"
-#include "view/structures/datatypes/topleveldatainformation.hpp"
-#include "view/structures/datatypes/primitive/primitivetemplateinfo.hpp"
-#include "view/structures/datatypes/primitive/enumdatainformation.hpp"
-#include "view/structures/datatypes/primitive/flagdatainformation.hpp"
-#include "view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.hpp"
-#include "view/structures/datatypes/primitive/bitfield/signedbitfielddatainformation.hpp"
-#include "view/structures/datatypes/primitive/bitfield/unsignedbitfielddatainformation.hpp"
-#include "view/structures/datatypes/primitivefactory.hpp"
-#include "view/structures/datatypes/uniondatainformation.hpp"
-#include "view/structures/datatypes/structuredatainformation.hpp"
+#include <arraydatainformation.hpp>
+#include <primitivearraydata.hpp>
+#include <stringdatainformation.hpp>
+#include <topleveldatainformation.hpp>
+#include <primitivetemplateinfo.hpp>
+#include <enumdatainformation.hpp>
+#include <flagdatainformation.hpp>
+#include <boolbitfielddatainformation.hpp>
+#include <signedbitfielddatainformation.hpp>
+#include <unsignedbitfielddatainformation.hpp>
+#include <primitivefactory.hpp>
+#include <uniondatainformation.hpp>
+#include <structuredatainformation.hpp>
 // Qt
 #include <QTest>
 // Std

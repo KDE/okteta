@@ -9,9 +9,9 @@
 
 // lib
 #include "datainformationbase.hpp"
-#include "additionaldata.hpp"
-#include "../script/scriptlogger.hpp"
 #include "primitivedatatype.hpp"
+#include "additionaldata.hpp"
+#include <scriptlogger.hpp>
 // Okteta core
 #include <Okteta/Size>
 #include <Okteta/Address>

@@ -7,7 +7,7 @@
 #include "doubledatainformation.hpp"
 
 // tool
-#include "structureviewpreferences.hpp"
+#include <structureviewpreferences.hpp>
 // libdatatypeeditors
 #include <float64editor.hpp>
 // KF

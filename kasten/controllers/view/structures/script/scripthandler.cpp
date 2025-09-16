@@ -9,11 +9,11 @@
 // lib
 #include "scriptengineinitializer.hpp"
 #include "scriptlogger.hpp"
-#include "classes/defaultscriptclass.hpp"
-#include "../datatypes/datainformation.hpp"
-#include "../datatypes/topleveldatainformation.hpp"
-#include "../datatypes/array/arraydatainformation.hpp"
-#include "../parsers/parserutils.hpp"
+#include <defaultscriptclass.hpp>
+#include <datainformation.hpp>
+#include <topleveldatainformation.hpp>
+#include <arraydatainformation.hpp>
+#include <parserutils.hpp>
 // Qt
 #include <QStringList>
 #include <QScriptValue>

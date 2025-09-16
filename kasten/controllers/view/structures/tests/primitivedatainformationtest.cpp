@@ -5,13 +5,13 @@
 */
 
 // sut
-#include "view/structures/datatypes/primitive/primitivetemplateinfo.hpp"
-#include "view/structures/datatypes/primitive/primitivedatainformation.hpp"
-#include "view/structures/datatypes/primitive/bitfield/signedbitfielddatainformation.hpp"
-#include "view/structures/datatypes/primitive/bitfield/unsignedbitfielddatainformation.hpp"
-#include "view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.hpp"
-#include "view/structures/datatypes/primitivefactory.hpp"
-#include "structureviewpreferences.hpp"
+#include <primitivetemplateinfo.hpp>
+#include <primitivedatainformation.hpp>
+#include <signedbitfielddatainformation.hpp>
+#include <unsignedbitfielddatainformation.hpp>
+#include <boolbitfielddatainformation.hpp>
+#include <primitivefactory.hpp>
+#include <structureviewpreferences.hpp>
 // Okteta core
 #include <Okteta/ByteArrayModel>
 // KF

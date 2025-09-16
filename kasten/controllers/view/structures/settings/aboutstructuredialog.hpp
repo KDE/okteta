@@ -8,7 +8,7 @@
 #define ABOUTSTRUCTUREDIALOG_HPP
 
 // tool
-#include "../structuremetadata.hpp"
+#include <structuremetadata.hpp>
 // Qt
 #include <QDialog>
 

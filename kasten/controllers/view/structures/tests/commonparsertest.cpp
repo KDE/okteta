@@ -6,7 +6,7 @@
 */
 
 // sut
-#include "view/structures/parsers/parserutils.hpp"
+#include <parserutils.hpp>
 // Qt
 #include <QTest>
 #include <QScriptValue>

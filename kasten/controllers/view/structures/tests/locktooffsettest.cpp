@@ -5,9 +5,9 @@
 */
 
 // sut
-#include "view/structures/datatypes/topleveldatainformation.hpp"
-#include "view/structures/datatypes/structuredatainformation.hpp"
-#include "view/structures/datatypes/primitive/primitivetemplateinfo.hpp"
+#include <topleveldatainformation.hpp>
+#include <structuredatainformation.hpp>
+#include <primitivetemplateinfo.hpp>
 // Okteta core
 #include <Okteta/ByteArrayModel>
 // Qt

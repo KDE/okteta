@@ -9,8 +9,8 @@
 // lib
 #include "topleveldatainformation.hpp"
 #include "structuredatainformation.hpp"
-#include "primitive/primitivedatainformation.hpp"
-#include "../parsers/parserutils.hpp"
+#include <primitivedatainformation.hpp>
+#include <parserutils.hpp>
 // KF
 #include <KLocalizedString>
 // Std

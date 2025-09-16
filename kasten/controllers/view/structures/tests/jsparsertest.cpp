@@ -10,8 +10,8 @@
 // test
 #include "testutils.hpp"
 // sut
-#include "view/structures/script/scriptengineinitializer.hpp"
-#include "view/structures/parsers/scriptvalueconverter.hpp"
+#include <scriptengineinitializer.hpp>
+#include <scriptvalueconverter.hpp>
 // Qt
 #include <QTest>
 #include <QScriptEngine>

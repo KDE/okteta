@@ -8,7 +8,7 @@
 #define KASTEN_SCRIPTLOGGERVIEW_HPP
 
 // lib
-#include "../datatypes/topleveldatainformation.hpp"
+#include <topleveldatainformation.hpp>
 // Qt
 #include <QWidget>
 

@@ -551,7 +551,8 @@ oktetakastencontrollers_sources(
 
 oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersStructuresDataTypes
     SUBDIR view/structures/datatypes
-    PRIVATE
+    BUILD_INCLUDEDIR
+    SUBPUBLIC
         TopLevelDataInformation
         DataInformation
         DataInformationbase
@@ -566,7 +567,8 @@ oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersStructuresData
 
 oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersStructuresDataTypes
     SUBDIR view/structures/datatypes/array
-    PRIVATE
+    BUILD_INCLUDEDIR
+    SUBPUBLIC
         ArrayDataInformation
         AbstractArrayData
         ComplexArrayData
@@ -575,7 +577,8 @@ oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersStructuresData
 
 oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersStructuresDataTypes
     SUBDIR view/structures/datatypes/primitive
-    PRIVATE
+    BUILD_INCLUDEDIR
+    SUBPUBLIC
         PointerDataInformation
         CharDataInformation
         DoubleDataInformation
@@ -592,7 +595,8 @@ oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersStructuresData
 
 oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersStructuresDataTypes
     SUBDIR view/structures/datatypes/primitive/bitfield
-    PRIVATE
+    BUILD_INCLUDEDIR
+    SUBPUBLIC
         AbstractBitfieldDataInformation
         BoolBitfieldDataInformation
         SignedBitfieldDataInformation
@@ -601,7 +605,8 @@ oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersStructuresData
 
 oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersStructuresDataTypes
     SUBDIR view/structures/datatypes/strings
-    PRIVATE
+    BUILD_INCLUDEDIR
+    SUBPUBLIC
         StringDataInformation
         StringData
         AsciiStringData
@@ -620,7 +625,8 @@ oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersStructuresData
 
 oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersStructuresDataTypes
     SUBDIR view/structures/script
-    PRIVATE
+    BUILD_INCLUDEDIR
+    SUBPUBLIC
         ScriptEngineInitializer
         ScriptHandler
         ScriptHandlerInfo
@@ -631,7 +637,8 @@ oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersStructuresData
 
 oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersStructuresDataTypes
     SUBDIR view/structures/script/classes
-    PRIVATE
+    BUILD_INCLUDEDIR
+    SUBPUBLIC
         DefaultScriptClass
         ArrayScriptClass
         PrimitiveScriptClass
@@ -644,7 +651,8 @@ oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersStructuresData
 
 oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersStructuresDataTypes
     SUBDIR view/structures/parsers
-    PRIVATE
+    BUILD_INCLUDEDIR
+    SUBPUBLIC
         ScriptValueConverter
         DataInformationFactory
         ParserUtils
@@ -652,13 +660,15 @@ oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersStructuresData
 
 oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersStructuresDataTypes
     SUBDIR view/structures/settings
+    BUILD_INCLUDEDIR
     KCFG
         structureviewpreferences.kcfgc
 )
 
 oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersStructuresDataTypes
     SUBDIR view/structures
-    PRIVATE
+    BUILD_INCLUDEDIR
+    SUBPUBLIC
         AllPrimitiveTypes
 )
 
@@ -666,6 +676,7 @@ oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersStructuresData
 #these source files are not needed by the static library for unit tests, therefore keep them separate
 oktetakastencontrollers_sources(
     SUBDIR view/structures/parsers
+    BUILD_INCLUDEDIR
     PRIVATE
         AbstractStructureParser
         OsdParser
@@ -673,6 +684,7 @@ oktetakastencontrollers_sources(
 )
 oktetakastencontrollers_sources(
     SUBDIR view/structures/settings
+    BUILD_INCLUDEDIR
     PRIVATE
         StructureAddRemoveWidget
         StructureItemDelegate

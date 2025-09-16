@@ -9,7 +9,7 @@
 
 // lib
 #include "datainformationwithchildren.hpp"
-#include "../allprimitivetypes.hpp"
+#include <allprimitivetypes.hpp>
 // Qt
 #include <QScriptValue>
 

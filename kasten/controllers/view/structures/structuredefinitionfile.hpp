@@ -8,8 +8,8 @@
 #define KASTEN_STRUCTUREDEFINITIONFILE_HPP
 
 // tool
-#include "datatypes/primitive/enumdefinition.hpp"
 #include "structuremetadata.hpp"
+#include <enumdefinition.hpp>
 // Qt
 #include <QString>
 #include <QVector>

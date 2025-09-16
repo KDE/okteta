@@ -8,9 +8,9 @@
 #define KASTEN_PRIMITIVEDATAINFORMATION_HPP
 
 // lib
-#include "../datainformation.hpp"
-#include "../primitivedatatype.hpp"
-#include "../../allprimitivetypes.hpp"
+#include <datainformation.hpp>
+#include <primitivedatatype.hpp>
+#include <allprimitivetypes.hpp>
 // Std
 #include <memory>
 

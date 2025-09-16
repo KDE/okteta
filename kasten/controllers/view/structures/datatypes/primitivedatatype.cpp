@@ -7,7 +7,7 @@
 #include "primitivedatatype.hpp"
 
 // lib
-#include "structureviewpreferences.hpp"
+#include <structureviewpreferences.hpp>
 // KF
 #include <KLazyLocalizedString>
 #include <KLocalizedString>

@@ -7,7 +7,7 @@
 #include "structuresselectionmodel.hpp"
 
 // tool
-#include "../structuredefinitionfile.hpp"
+#include <structuredefinitionfile.hpp>
 // KF
 #include <KCategorizedSortFilterProxyModel>
 #include <KLocalizedString>

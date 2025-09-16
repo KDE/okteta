@@ -7,7 +7,7 @@
 #include "signedbitfielddatainformation.hpp"
 
 // controller
-#include "../sintdatainformation.hpp"
+#include <sintdatainformation.hpp>
 // libdatatypeeditors
 #include <sintspinbox.hpp>
 // KF

@@ -7,9 +7,9 @@
 #include "enumdatainformation.hpp"
 
 // lib
-#include "../topleveldatainformation.hpp"
-#include "../../script/classes/enumscriptclass.hpp"
-#include "../../script/scriptlogger.hpp"
+#include <topleveldatainformation.hpp>
+#include <classes/enumscriptclass.hpp>
+#include <scriptlogger.hpp>
 // KF
 #include <KComboBox>
 #include <KLocalizedString>

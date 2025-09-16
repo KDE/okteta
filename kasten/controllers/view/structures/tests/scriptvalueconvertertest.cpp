@@ -5,14 +5,14 @@
 */
 
 // sut
-#include "view/structures/script/scriptengineinitializer.hpp"
-#include "view/structures/allprimitivetypes.hpp"
-#include "view/structures/parsers/scriptvalueconverter.hpp"
-#include "view/structures/datatypes/datainformation.hpp"
-#include "view/structures/datatypes/primitive/primitivedatainformation.hpp"
-#include "view/structures/datatypes/primitive/enumdatainformation.hpp"
-#include "view/structures/script/scriptlogger.hpp"
-#include "view/structures/parsers/parserutils.hpp"
+#include <scriptengineinitializer.hpp>
+#include <allprimitivetypes.hpp>
+#include <scriptvalueconverter.hpp>
+#include <parserutils.hpp>
+#include <datainformation.hpp>
+#include <primitivedatainformation.hpp>
+#include <enumdatainformation.hpp>
+#include <scriptlogger.hpp>
 // Qt
 #include <QTest>
 #include <QString>

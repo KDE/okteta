@@ -8,15 +8,15 @@
 #define KASTEN_TESTUTILS_HPP
 
 // sut
-#include "view/structures/datatypes/primitivedatatype.hpp"
-#include "view/structures/datatypes/datainformation.hpp"
-#include "view/structures/datatypes/primitive/primitivedatainformation.hpp"
-#include "view/structures/datatypes/primitive/bitfield/signedbitfielddatainformation.hpp"
-#include "view/structures/datatypes/primitive/bitfield/unsignedbitfielddatainformation.hpp"
-#include "view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.hpp"
-#include "view/structures/datatypes/topleveldatainformation.hpp"
-#include "view/structures/parsers/scriptvalueconverter.hpp"
-#include "view/structures/script/scriptengineinitializer.hpp"
+#include <primitivedatatype.hpp>
+#include <datainformation.hpp>
+#include <primitivedatainformation.hpp>
+#include <signedbitfielddatainformation.hpp>
+#include <unsignedbitfielddatainformation.hpp>
+#include <boolbitfielddatainformation.hpp>
+#include <topleveldatainformation.hpp>
+#include <scriptvalueconverter.hpp>
+#include <scriptengineinitializer.hpp>
 // Qt
 #include <QString>
 #include <QTest>

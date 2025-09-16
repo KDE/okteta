@@ -7,11 +7,11 @@
 #include "datainformation.hpp"
 
 // lib
-#include "topleveldatainformation.hpp"
 #include "additionaldata.hpp"
-#include "structureviewpreferences.hpp"
-#include "../script/scriptlogger.hpp"
-#include "../script/safereference.hpp"
+#include "topleveldatainformation.hpp"
+#include <structureviewpreferences.hpp>
+#include <scriptlogger.hpp>
+#include <safereference.hpp>
 // KF
 #include <KLocalizedString>
 #include <KColorScheme>

@@ -8,12 +8,12 @@
 
 // lib
 #include "datainformation.hpp"
-#include "primitive/pointerdatainformation.hpp"
 #include "datainformationwithchildren.hpp"
-#include "../script/scripthandler.hpp"
-#include "../script/scriptlogger.hpp"
-#include "../script/scriptengineinitializer.hpp"
-#include "primitivefactory.hpp"
+#include <pointerdatainformation.hpp>
+#include <scripthandler.hpp>
+#include <scriptlogger.hpp>
+#include <scriptengineinitializer.hpp>
+#include <primitivefactory.hpp>
 #include <structureslogging.hpp>
 // Okteta core
 #include <Okteta/AbstractByteArrayModel>

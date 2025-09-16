@@ -5,9 +5,9 @@
 */
 
 // sut
-#include "view/structures/parsers/osdparser.hpp"
-#include "view/structures/datatypes/primitive/primitivedatainformation.hpp"
-#include "view/structures/datatypes/topleveldatainformation.hpp"
+#include <osdparser.hpp>
+#include <primitivedatainformation.hpp>
+#include <topleveldatainformation.hpp>
 // Qt
 #include <QTest>
 #include <QString>

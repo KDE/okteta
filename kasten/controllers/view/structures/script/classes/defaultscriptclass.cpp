@@ -7,16 +7,16 @@
 #include "defaultscriptclass.hpp"
 
 // lib
-#include "../../datatypes/datainformation.hpp"
-#include "../../datatypes/topleveldatainformation.hpp"
-#include "../../datatypes/uniondatainformation.hpp"
-#include "../../datatypes/structuredatainformation.hpp"
-#include "../../datatypes/primitive/pointerdatainformation.hpp"
-#include "../../parsers/parserutils.hpp"
-#include "../../parsers/scriptvalueconverter.hpp"
-#include "../scriptlogger.hpp"
-#include "../scripthandlerinfo.hpp"
-#include "../safereference.hpp"
+#include <datainformation.hpp>
+#include <topleveldatainformation.hpp>
+#include <uniondatainformation.hpp>
+#include <structuredatainformation.hpp>
+#include <pointerdatainformation.hpp>
+#include <parserutils.hpp>
+#include <scriptvalueconverter.hpp>
+#include <scriptlogger.hpp>
+#include <scripthandlerinfo.hpp>
+#include <safereference.hpp>
 #include <structureslogging.hpp>
 // Qt
 #include <QScriptContext>

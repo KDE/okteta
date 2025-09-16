@@ -7,7 +7,7 @@
 #include "floatdatainformation.hpp"
 
 // tool
-#include "structureviewpreferences.hpp"
+#include <structureviewpreferences.hpp>
 // libdatatypeeditors
 #include <float32editor.hpp>
 // KF

@@ -8,10 +8,10 @@
 
 // lib
 #include "arraydatainformation.hpp"
-#include "../topleveldatainformation.hpp"
-#include "../structuredatainformation.hpp"
-#include "../../script/scripthandlerinfo.hpp"
-#include "../../script/scriptlogger.hpp"
+#include <topleveldatainformation.hpp>
+#include <structuredatainformation.hpp>
+#include <scripthandlerinfo.hpp>
+#include <scriptlogger.hpp>
 // KF
 #include <KLocalizedString>
 // Qt

@@ -8,8 +8,8 @@
 #define KASTEN_ENUMDEFINITION_HPP
 
 // lib
-#include "../../allprimitivetypes.hpp"
-#include "../primitivedatatype.hpp"
+#include <allprimitivetypes.hpp>
+#include <primitivedatatype.hpp>
 // Qt core
 #include <QMap>
 #include <QSharedData>

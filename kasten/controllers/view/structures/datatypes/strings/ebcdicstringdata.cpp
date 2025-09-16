@@ -9,7 +9,7 @@
 
 // lib
 #include "stringdatainformation.hpp"
-#include "../topleveldatainformation.hpp"
+#include <topleveldatainformation.hpp>
 #include <structureslogging.hpp>
 // Okteta core sources
 #include <charcodecs/ebcdic1047charcodec.hpp>

@@ -5,7 +5,7 @@
 */
 
 // sut
-#include "view/structures/allprimitivetypes.hpp"
+#include <allprimitivetypes.hpp>
 // Okteta core
 #include <Okteta/ByteArrayModel>
 // Qt

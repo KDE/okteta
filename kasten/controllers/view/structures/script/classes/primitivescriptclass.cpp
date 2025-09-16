@@ -7,9 +7,9 @@
 #include "primitivescriptclass.hpp"
 
 // lib
-#include "../../datatypes/primitive/primitivedatainformation.hpp"
-#include "../../parsers/parserutils.hpp"
-#include "../../allprimitivetypes.hpp"
+#include <primitivedatainformation.hpp>
+#include <parserutils.hpp>
+#include <allprimitivetypes.hpp>
 #include <structureslogging.hpp>
 // Qt
 #include <QScriptContext>

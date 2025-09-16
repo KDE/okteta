@@ -9,10 +9,10 @@
 // lib
 #include "scriptvalueconverter.hpp"
 #include "parserutils.hpp"
-#include "../datatypes/topleveldatainformation.hpp"
-#include "../datatypes/dummydatainformation.hpp"
-#include "../script/scriptengineinitializer.hpp"
-#include "../script/scriptlogger.hpp"
+#include <topleveldatainformation.hpp>
+#include <dummydatainformation.hpp>
+#include <scriptengineinitializer.hpp>
+#include <scriptlogger.hpp>
 // Qt
 #include <QScriptEngine>
 

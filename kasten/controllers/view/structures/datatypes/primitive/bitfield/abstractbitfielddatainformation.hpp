@@ -8,8 +8,8 @@
 #define KASTEN_ABSTRACTBITFIELDDATAINFORMATION_HPP
 
 // lib
-#include "../primitivedatainformation.hpp"
-#include "../../../allprimitivetypes.hpp"
+#include <primitivedatainformation.hpp>
+#include <allprimitivetypes.hpp>
 
 class AbstractBitfieldDataInformation : public PrimitiveDataInformation
 {

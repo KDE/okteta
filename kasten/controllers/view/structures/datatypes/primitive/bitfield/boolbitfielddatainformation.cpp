@@ -7,7 +7,7 @@
 #include "boolbitfielddatainformation.hpp"
 
 // lib
-#include "../booldatainformation.hpp"
+#include <booldatainformation.hpp>
 // libdatatypeeditors
 #include <uintspinbox.hpp>
 // KF

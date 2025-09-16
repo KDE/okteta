@@ -7,7 +7,7 @@
 #include "uintdatainformation.hpp"
 
 // controller
-#include "structureviewpreferences.hpp"
+#include <structureviewpreferences.hpp>
 #include <structureslogging.hpp>
 // libdatatypeeditors
 #include <uintspinbox.hpp>

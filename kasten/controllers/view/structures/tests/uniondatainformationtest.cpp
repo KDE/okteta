@@ -7,10 +7,10 @@
 // test
 #include "testutils.hpp"
 // sut
-#include "view/structures/datatypes/uniondatainformation.hpp"
-#include "view/structures/datatypes/topleveldatainformation.hpp"
-#include "view/structures/datatypes/primitivefactory.hpp"
-#include "view/structures/datatypes/primitive/bitfield/unsignedbitfielddatainformation.hpp"
+#include <uniondatainformation.hpp>
+#include <topleveldatainformation.hpp>
+#include <primitivefactory.hpp>
+#include <unsignedbitfielddatainformation.hpp>
 // Okteta core
 #include <Okteta/ByteArrayModel>
 #include <Okteta/Byte>

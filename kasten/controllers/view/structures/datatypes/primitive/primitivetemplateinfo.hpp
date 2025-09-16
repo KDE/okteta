@@ -8,14 +8,14 @@
 #define KASTEN_PRIMITIVETEMPLATEINFO_HPP
 
 // lib
-#include "../primitivedatatype.hpp"
+#include "basicprimitivedatainformation.hpp"
 #include "booldatainformation.hpp"
 #include "floatdatainformation.hpp"
 #include "doubledatainformation.hpp"
 #include "uintdatainformation.hpp"
 #include "sintdatainformation.hpp"
 #include "chardatainformation.hpp"
-#include "basicprimitivedatainformation.hpp"
+#include <primitivedatatype.hpp>
 
 using UInt8DataInformation =  BasicPrimitiveDataInformation<quint8,  UIntDataInformationMethods<quint8>>;
 using UInt16DataInformation = BasicPrimitiveDataInformation<quint16, UIntDataInformationMethods<quint16>>;

@@ -10,7 +10,7 @@
 // lib
 #include "abstractstructureparser.hpp"
 #include "parserutils.hpp"
-#include "../datatypes/primitive/enumdefinition.hpp"
+#include <enumdefinition.hpp>
 // Qt
 #include <QDomElement>
 

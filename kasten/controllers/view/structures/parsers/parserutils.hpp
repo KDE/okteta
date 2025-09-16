@@ -8,9 +8,9 @@
 #define KASTEN_PARSERUTILS_HPP
 
 // lib
-#include "../datatypes/datainformation.hpp"
-#include "../datatypes/strings/stringdatainformation.hpp"
-#include "../script/scriptlogger.hpp"
+#include <datainformation.hpp>
+#include <stringdatainformation.hpp>
+#include <scriptlogger.hpp>
 // Qt
 #include <QDebug>
 #include <QStringList>

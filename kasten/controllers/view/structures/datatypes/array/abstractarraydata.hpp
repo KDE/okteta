@@ -8,8 +8,8 @@
 #define KASTEN_ABSTRACTARRAYDATA_HPP
 
 // lib
-#include "../datainformationbase.hpp"
-#include "../primitivedatatype.hpp"
+#include <datainformationbase.hpp>
+#include <primitivedatatype.hpp>
 // Okteta core
 #include <Okteta/Address>
 // Qt

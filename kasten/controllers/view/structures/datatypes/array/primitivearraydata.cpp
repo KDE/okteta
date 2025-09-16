@@ -8,9 +8,9 @@
 
 // lib
 #include "arraydatainformation.hpp"
-#include "../primitive/primitivedatainformation.hpp"
-#include "../../script/scriptlogger.hpp"
-#include "../../script/safereference.hpp"
+#include <primitivedatainformation.hpp>
+#include <scriptlogger.hpp>
+#include <safereference.hpp>
 #include <structureslogging.hpp>
 // Okteta core
 #include <Okteta/AbstractByteArrayModel>

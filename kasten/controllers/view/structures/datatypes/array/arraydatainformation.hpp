@@ -8,8 +8,8 @@
 #define KASTEN_ARRAYDATAINFORMATION_HPP
 
 // lib
-#include "../dummydatainformation.hpp"
 #include "abstractarraydata.hpp"
+#include <dummydatainformation.hpp>
 // Qt
 #include <QVariant>
 #include <QScriptValue>

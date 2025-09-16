@@ -8,7 +8,7 @@
 #define KASTEN_STRINGDATA_HPP
 
 // lib
-#include "../datainformationbase.hpp"
+#include <datainformationbase.hpp>
 // Okteta core
 #include <Okteta/Address>
 // Qt

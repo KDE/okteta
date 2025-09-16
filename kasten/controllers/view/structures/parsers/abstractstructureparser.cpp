@@ -7,8 +7,8 @@
 #include "abstractstructureparser.hpp"
 
 // lib
-#include "../structuredefinitionfile.hpp"
-#include "../script/scriptlogger.hpp"
+#include <structuredefinitionfile.hpp>
+#include <scriptlogger.hpp>
 #include <structureslogging.hpp>
 // Qt
 #include <QFile>

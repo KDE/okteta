@@ -8,7 +8,7 @@
 
 // lib
 #include "stringdatainformation.hpp"
-#include "../topleveldatainformation.hpp"
+#include <topleveldatainformation.hpp>
 #include <structureslogging.hpp>
 // Okteta core
 #include <Okteta/AbstractByteArrayModel>

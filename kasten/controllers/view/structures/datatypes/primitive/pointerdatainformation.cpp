@@ -8,13 +8,13 @@
 #include "pointerdatainformation.hpp"
 
 // lib
-#include "../topleveldatainformation.hpp"
-#include "../primitivedatatype.hpp"
-#include "../../allprimitivetypes.hpp"
-#include "../../script/scripthandlerinfo.hpp"
-#include "../../script/classes/pointerscriptclass.hpp"
-#include "../../script/scriptlogger.hpp"
-#include "../../parsers/parserutils.hpp"
+#include <topleveldatainformation.hpp>
+#include <primitivedatatype.hpp>
+#include <allprimitivetypes.hpp>
+#include <scripthandlerinfo.hpp>
+#include <pointerscriptclass.hpp>
+#include <scriptlogger.hpp>
+#include <parserutils.hpp>
 // KF
 #include <KLocalizedString>
 // Std

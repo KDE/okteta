@@ -7,9 +7,9 @@
 #include "structureaddremovewidget.hpp"
 
 // tool
-#include "../structuresmanager.hpp"
-#include "../structuredefinitionfile.hpp"
 #include "structureenabledlist.hpp"
+#include <structuresmanager.hpp>
+#include <structuredefinitionfile.hpp>
 #include <structureslogging.hpp>
 // KF
 #include <KLocalizedString>

@@ -10,7 +10,7 @@
 #include "datainformationbase.hpp"
 
 // lib
-#include "../script/scripthandler.hpp"
+#include <scripthandler.hpp>
 // Okteta core
 #include <Okteta/ArrayChangeMetricsList>
 // Qt

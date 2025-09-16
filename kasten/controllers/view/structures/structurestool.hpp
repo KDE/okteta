@@ -9,7 +9,7 @@
 #define KASTEN_STRUCTURESTOOL_HPP
 
 // tool
-#include "datatypes/topleveldatainformation.hpp"
+#include <topleveldatainformation.hpp>
 // Okteta Kasten gui
 #include <Kasten/Okteta/ByteArrayView>
 // Kasten core

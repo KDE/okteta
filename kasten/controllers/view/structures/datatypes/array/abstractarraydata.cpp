@@ -10,7 +10,7 @@
 #include "arraydatainformation.hpp"
 #include "primitivearraydata.hpp"
 #include "complexarraydata.hpp"
-#include "../primitive/primitivedatainformation.hpp"
+#include <primitivedatainformation.hpp>
 
 AbstractArrayData::AbstractArrayData(DataInformation* childType, ArrayDataInformation* parent)
     : mParent(parent)
