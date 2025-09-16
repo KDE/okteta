@@ -23,68 +23,70 @@ namespace ScriptEngineInitializer {
 
 void addFuctionsToScriptEngine(QScriptEngine* engine)
 {
-    engine->globalObject().setProperty(QStringLiteral("uint8"),
-                                       engine->newFunction(Private::scriptNewUInt8));
-    engine->globalObject().setProperty(QStringLiteral("uint16"),
-                                       engine->newFunction(Private::scriptNewUInt16));
-    engine->globalObject().setProperty(QStringLiteral("uint32"),
-                                       engine->newFunction(Private::scriptNewUInt32));
-    engine->globalObject().setProperty(QStringLiteral("uint64"),
-                                       engine->newFunction(Private::scriptNewUInt64));
+    QScriptValue globalObject = engine->globalObject();
 
-    engine->globalObject().setProperty(QStringLiteral("int8"),
-                                       engine->newFunction(Private::scriptNewInt8));
-    engine->globalObject().setProperty(QStringLiteral("int16"),
-                                       engine->newFunction(Private::scriptNewInt16));
-    engine->globalObject().setProperty(QStringLiteral("int32"),
-                                       engine->newFunction(Private::scriptNewInt32));
-    engine->globalObject().setProperty(QStringLiteral("int64"),
-                                       engine->newFunction(Private::scriptNewInt64));
+    globalObject.setProperty(QStringLiteral("uint8"),
+                             engine->newFunction(Private::scriptNewUInt8));
+    globalObject.setProperty(QStringLiteral("uint16"),
+                             engine->newFunction(Private::scriptNewUInt16));
+    globalObject.setProperty(QStringLiteral("uint32"),
+                             engine->newFunction(Private::scriptNewUInt32));
+    globalObject.setProperty(QStringLiteral("uint64"),
+                             engine->newFunction(Private::scriptNewUInt64));
 
-    engine->globalObject().setProperty(QStringLiteral("bool8"),
-                                       engine->newFunction(Private::scriptNewBool8));
-    engine->globalObject().setProperty(QStringLiteral("bool16"),
-                                       engine->newFunction(Private::scriptNewBool16));
-    engine->globalObject().setProperty(QStringLiteral("bool32"),
-                                       engine->newFunction(Private::scriptNewBool32));
-    engine->globalObject().setProperty(QStringLiteral("bool64"),
-                                       engine->newFunction(Private::scriptNewBool64));
+    globalObject.setProperty(QStringLiteral("int8"),
+                             engine->newFunction(Private::scriptNewInt8));
+    globalObject.setProperty(QStringLiteral("int16"),
+                             engine->newFunction(Private::scriptNewInt16));
+    globalObject.setProperty(QStringLiteral("int32"),
+                             engine->newFunction(Private::scriptNewInt32));
+    globalObject.setProperty(QStringLiteral("int64"),
+                             engine->newFunction(Private::scriptNewInt64));
 
-    engine->globalObject().setProperty(QStringLiteral("float"),
-                                       engine->newFunction(Private::scriptNewFloat));
-    engine->globalObject().setProperty(QStringLiteral("double"),
-                                       engine->newFunction(Private::scriptNewDouble));
+    globalObject.setProperty(QStringLiteral("bool8"),
+                             engine->newFunction(Private::scriptNewBool8));
+    globalObject.setProperty(QStringLiteral("bool16"),
+                             engine->newFunction(Private::scriptNewBool16));
+    globalObject.setProperty(QStringLiteral("bool32"),
+                             engine->newFunction(Private::scriptNewBool32));
+    globalObject.setProperty(QStringLiteral("bool64"),
+                             engine->newFunction(Private::scriptNewBool64));
 
-    engine->globalObject().setProperty(QStringLiteral("char"),
-                                       engine->newFunction(Private::scriptNewChar));
+    globalObject.setProperty(QStringLiteral("float"),
+                             engine->newFunction(Private::scriptNewFloat));
+    globalObject.setProperty(QStringLiteral("double"),
+                             engine->newFunction(Private::scriptNewDouble));
 
-    engine->globalObject().setProperty(QStringLiteral("bitfield"),
-                                       engine->newFunction(Private::scriptNewBitfield));
+    globalObject.setProperty(QStringLiteral("char"),
+                             engine->newFunction(Private::scriptNewChar));
 
-    engine->globalObject().setProperty(QStringLiteral("array"),
-                                       engine->newFunction(Private::scriptNewArray));
-    engine->globalObject().setProperty(QStringLiteral("struct"),
-                                       engine->newFunction(Private::scriptNewStruct));
-    engine->globalObject().setProperty(QStringLiteral("union"),
-                                       engine->newFunction(Private::scriptNewUnion));
+    globalObject.setProperty(QStringLiteral("bitfield"),
+                             engine->newFunction(Private::scriptNewBitfield));
+
+    globalObject.setProperty(QStringLiteral("array"),
+                             engine->newFunction(Private::scriptNewArray));
+    globalObject.setProperty(QStringLiteral("struct"),
+                             engine->newFunction(Private::scriptNewStruct));
+    globalObject.setProperty(QStringLiteral("union"),
+                             engine->newFunction(Private::scriptNewUnion));
 
     // enum is a reserved keyword in JavaScript, cannot use it
-    engine->globalObject().setProperty(QStringLiteral("enumeration"),
-                                       engine->newFunction(Private::scriptNewEnum));
-    engine->globalObject().setProperty(QStringLiteral("flags"),
-                                       engine->newFunction(Private::scriptNewFlags));
-    engine->globalObject().setProperty(QStringLiteral("string"),
-                                       engine->newFunction(Private::scriptNewString));
-    engine->globalObject().setProperty(QStringLiteral("pointer"),
-                                       engine->newFunction(Private::scriptNewPointer));
-    engine->globalObject().setProperty(QStringLiteral("taggedUnion"),
-                                       engine->newFunction(Private::scriptNewTaggedUnion));
+    globalObject.setProperty(QStringLiteral("enumeration"),
+                             engine->newFunction(Private::scriptNewEnum));
+    globalObject.setProperty(QStringLiteral("flags"),
+                             engine->newFunction(Private::scriptNewFlags));
+    globalObject.setProperty(QStringLiteral("string"),
+                             engine->newFunction(Private::scriptNewString));
+    globalObject.setProperty(QStringLiteral("pointer"),
+                             engine->newFunction(Private::scriptNewPointer));
+    globalObject.setProperty(QStringLiteral("taggedUnion"),
+                             engine->newFunction(Private::scriptNewTaggedUnion));
 
-    engine->globalObject().setProperty(QStringLiteral("alternative"),
-                                       engine->newFunction(Private::alternativeFunc));
+    globalObject.setProperty(QStringLiteral("alternative"),
+                             engine->newFunction(Private::alternativeFunc));
 
-    engine->globalObject().setProperty(QStringLiteral("importScript"),
-                                       engine->newFunction(Private::importScriptFunc));
+    globalObject.setProperty(QStringLiteral("importScript"),
+                             engine->newFunction(Private::importScriptFunc));
 }
 
 QScriptEngine* newEngine()
