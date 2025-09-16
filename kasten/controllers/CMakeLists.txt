@@ -163,7 +163,7 @@ okteta_qt_declare_logging_category(Controllers NAMESPACE Okteta Kasten
 oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersConfigEntries
     SUBDIR libconfigentries
     BUILD_INCLUDEDIR
-    PRIVATE
+    SUBPUBLIC
         AddressComboBoxCodingConfigEntry
         ByteArrayCodingConfigEntry
         ByteArrayComboBoxCodingConfigEntry
@@ -236,7 +236,7 @@ oktetakastencontrollers_sources(
 oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersByteArrayChecksum
     SUBDIR view/libbytearraychecksum
     BUILD_INCLUDEDIR
-    PRIVATE
+    SUBPUBLIC
         AbstractByteArrayChecksumAlgorithm
         AbstractByteArrayChecksumParameterSet
         AbstractByteArrayChecksumParameterSetEdit
@@ -290,7 +290,7 @@ oktetakastencontrollers_sources(
 oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersFindDialog
     SUBDIR view/libfinddialog
     BUILD_INCLUDEDIR
-    PRIVATE
+    SUBPUBLIC
         AbstractFindDialog
         FindDirection
 )
@@ -298,7 +298,7 @@ oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersFindDialog
 oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersByteArraySearch
     SUBDIR view/libbytearraysearch
     BUILD_INCLUDEDIR
-    PRIVATE
+    SUBPUBLIC
         ByteArraySearchJob
         ByteArraySearchUtils
 )
@@ -306,7 +306,7 @@ oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersByteArraySearc
 oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersDataTypes
     SUBDIR view/libdatatypes
     BUILD_INCLUDEDIR
-    PRIVATE
+    SUBPUBLIC
         Binary8
         Octal8
         Hexadecimal8
@@ -328,7 +328,7 @@ oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersDataTypes
 oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersDataTypeDisplayStringifiers
     SUBDIR view/libdatatypedisplaystringifiers
     BUILD_INCLUDEDIR
-    PRIVATE
+    SUBPUBLIC
         AbstractDataTypeDisplayStringifier
         DataTypeDisplayStringifierManager
 )
@@ -336,7 +336,7 @@ oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersDataTypeDispla
 oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersDataTypeEditors
     SUBDIR view/libdatatypeeditors
     BUILD_INCLUDEDIR
-    PRIVATE
+    SUBPUBLIC
         AbstractValue8Editor
         Binary8Editor
         Octal8Editor
@@ -355,7 +355,7 @@ oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersDataTypeEditor
 oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersDataTypeCodecs
     SUBDIR view/libdatatypecodecs
     BUILD_INCLUDEDIR
-    PRIVATE
+    SUBPUBLIC
         PODData
         AbstractTypeCodec
         Binary8Codec
@@ -439,7 +439,7 @@ oktetakastencontrollers_sources(
 oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersByteArrayFilter
     SUBDIR view/libbytearrayfilter
     BUILD_INCLUDEDIR
-    PRIVATE
+    SUBPUBLIC
         AbstractByteArrayFilter
         AbstractByteArrayFilterParameterSet
         AbstractByteArrayFilterParameterSetEdit

@@ -330,8 +330,14 @@ macro(okteta_library_sources _baseName)
     endif()
 
     if (ARG_BUILD_INCLUDEDIR)
+        if (ARG_PUBLIC)
+            set(_includedir_exposure "PUBLIC")
+        else()
+            set(_includedir_exposure "PRIVATE")
+        endif()
+
         target_include_directories( ${_library_target}
-            PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/${_relativePath}>
+            ${_includedir_exposure} $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/${_relativePath}>
         )
     endif()
 
@@ -483,6 +489,7 @@ macro(okteta_sublibrary_sources _baseName)
     set(multiValueArgs
         NAMESPACE
         PUBLIC
+        SUBPUBLIC # classes are used from other sibling sublibraries
         PRIVATE
         KCFG
         UI
@@ -504,7 +511,7 @@ macro(okteta_sublibrary_sources _baseName)
     endif()
     set(_srcs )
 
-    foreach(_classname ${ARG_PUBLIC} ${ARG_PRIVATE})
+    foreach(_classname ${ARG_PUBLIC} ${ARG_SUBPUBLIC} ${ARG_PRIVATE})
         string(TOLOWER "${_classname}" _lc_classname)
 
         set(_source "${_relativePath}${_lc_classname}.cpp")
@@ -556,19 +563,27 @@ macro(okteta_sublibrary_sources _baseName)
     endif()
 
     if (ARG_BUILD_INCLUDEDIR)
+        # If there are public classes,
         # add also to actual library, as the sublibary cannot be added to the public linkage
         # and thus transfer the include dir over as needed
-        target_include_directories( ${_targetName}
-            PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/${_relativePath}>
-        )
+        if (ARG_PUBLIC)
+            target_include_directories( ${_targetName}
+                PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/${_relativePath}>
+            )
+        endif()
+        if (ARG_PUBLIC OR ARG_SUBPUBLIC)
+            set(_includedir_exposure "PUBLIC")
+        else()
+            set(_includedir_exposure "PRIVATE")
+        endif()
         if(_static_library_target)
             target_include_directories( ${_static_library_target}
-                PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/${_relativePath}>
+                ${_includedir_exposure} $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/${_relativePath}>
             )
         endif()
         if (_object_library_target)
             target_include_directories( ${_object_library_target}
-                PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/${_relativePath}>
+                ${_includedir_exposure} $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/${_relativePath}>
             )
         endif()
     endif()
