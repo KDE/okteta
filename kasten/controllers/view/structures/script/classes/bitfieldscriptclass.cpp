@@ -16,7 +16,7 @@ BitfieldScriptClass::BitfieldScriptClass(QScriptEngine* engine, ScriptHandlerInf
     : PrimitiveScriptClass(engine, handlerInfo, 1)
     , s_width(engine->toStringHandle(ParserStrings::PROPERTY_WIDTH()))
 {
-    mIterableProperties.append(ScriptValuePropertyInfo{s_width, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
+    mIterableProperties.emplace_back(ScriptValuePropertyInfo{s_width, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
 }
 
 BitfieldScriptClass::~BitfieldScriptClass() = default;

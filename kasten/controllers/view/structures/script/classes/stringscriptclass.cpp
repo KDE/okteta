@@ -23,14 +23,14 @@ StringScriptClass::StringScriptClass(QScriptEngine* eng, ScriptHandlerInfo* hand
     , s_encoding(eng->toStringHandle(ParserStrings::PROPERTY_ENCODING()))
 {
     // read-only properties
-    mIterableProperties.append(ScriptValuePropertyInfo{s_lengthInCodepoints, QScriptValue::ReadOnly | QScriptValue::Undeletable});
-    mIterableProperties.append(ScriptValuePropertyInfo{s_lengthInBytes, QScriptValue::ReadOnly | QScriptValue::Undeletable});
+    mIterableProperties.emplace_back(ScriptValuePropertyInfo{s_lengthInCodepoints, QScriptValue::ReadOnly | QScriptValue::Undeletable});
+    mIterableProperties.emplace_back(ScriptValuePropertyInfo{s_lengthInBytes, QScriptValue::ReadOnly | QScriptValue::Undeletable});
 
     // read-write properties
-    mIterableProperties.append(ScriptValuePropertyInfo{s_maxByteCount, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
-    mIterableProperties.append(ScriptValuePropertyInfo{s_maxCharCount, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
-    mIterableProperties.append(ScriptValuePropertyInfo{s_terminatedBy, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
-    mIterableProperties.append(ScriptValuePropertyInfo{s_encoding, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
+    mIterableProperties.emplace_back(ScriptValuePropertyInfo{s_maxByteCount, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
+    mIterableProperties.emplace_back(ScriptValuePropertyInfo{s_maxCharCount, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
+    mIterableProperties.emplace_back(ScriptValuePropertyInfo{s_terminatedBy, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
+    mIterableProperties.emplace_back(ScriptValuePropertyInfo{s_encoding, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
 
     mStringPrototype = eng->newObject();
     mStringPrototype.setProperty(QStringLiteral("toString"), eng->newFunction(String_proto_toString));

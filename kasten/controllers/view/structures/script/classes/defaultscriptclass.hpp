@@ -8,12 +8,13 @@
 #define KASTEN_DEFAULTSCRIPTCLASS_HPP
 
 // Qt
-#include <QVector>
 #include <QScriptClass>
 #include <QScriptValue>
 #include <QScriptEngine>
 #include <QScriptString>
 #include <QScriptClassPropertyIterator>
+// Std
+#include <vector>
 
 class DataInformation;
 class ScriptHandlerInfo;
@@ -92,7 +93,7 @@ protected:
     const QScriptString s_asStringFunc;
 
     /** Contains all properties of this class, classes inheriting should add their own properties to this list */
-    QVector<ScriptValuePropertyInfo> mIterableProperties;
+    std::vector<ScriptValuePropertyInfo> mIterableProperties;
 
 private:
     QScriptValue mDefaultPrototype;

@@ -47,17 +47,17 @@ DefaultScriptClass::DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo*
     // add all our properties
     // TODO: find a pattern to set this (with proper size) in one go with properties from all subclasses
     mIterableProperties.reserve(11 + propertiesSize);
-    mIterableProperties.append(ScriptValuePropertyInfo{s_parent, QScriptValue::ReadOnly | QScriptValue::Undeletable});
-    mIterableProperties.append(ScriptValuePropertyInfo{s_name, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
-    mIterableProperties.append(ScriptValuePropertyInfo{s_wasAbleToRead, QScriptValue::ReadOnly | QScriptValue::Undeletable});
-    mIterableProperties.append(ScriptValuePropertyInfo{s_byteOrder, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
-    mIterableProperties.append(ScriptValuePropertyInfo{s_valid, QScriptValue::ReadOnly | QScriptValue::Undeletable});
-    mIterableProperties.append(ScriptValuePropertyInfo{s_validationError, QScriptValue::ReadOnly | QScriptValue::Undeletable});
-    mIterableProperties.append(ScriptValuePropertyInfo{s_validationFunc, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
-    mIterableProperties.append(ScriptValuePropertyInfo{s_updateFunc, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
-    mIterableProperties.append(ScriptValuePropertyInfo{s_datatype, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
-    mIterableProperties.append(ScriptValuePropertyInfo{s_customTypeName, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
-    mIterableProperties.append(ScriptValuePropertyInfo{s_asStringFunc, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
+    mIterableProperties.emplace_back(ScriptValuePropertyInfo{s_parent, QScriptValue::ReadOnly | QScriptValue::Undeletable});
+    mIterableProperties.emplace_back(ScriptValuePropertyInfo{s_name, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
+    mIterableProperties.emplace_back(ScriptValuePropertyInfo{s_wasAbleToRead, QScriptValue::ReadOnly | QScriptValue::Undeletable});
+    mIterableProperties.emplace_back(ScriptValuePropertyInfo{s_byteOrder, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
+    mIterableProperties.emplace_back(ScriptValuePropertyInfo{s_valid, QScriptValue::ReadOnly | QScriptValue::Undeletable});
+    mIterableProperties.emplace_back(ScriptValuePropertyInfo{s_validationError, QScriptValue::ReadOnly | QScriptValue::Undeletable});
+    mIterableProperties.emplace_back(ScriptValuePropertyInfo{s_validationFunc, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
+    mIterableProperties.emplace_back(ScriptValuePropertyInfo{s_updateFunc, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
+    mIterableProperties.emplace_back(ScriptValuePropertyInfo{s_datatype, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
+    mIterableProperties.emplace_back(ScriptValuePropertyInfo{s_customTypeName, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
+    mIterableProperties.emplace_back(ScriptValuePropertyInfo{s_asStringFunc, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
 }
 
 DefaultScriptClass::~DefaultScriptClass() = default;
@@ -364,7 +364,7 @@ DefaultscriptClassIterator::~DefaultscriptClassIterator() = default;
 
 bool DefaultscriptClassIterator::hasNext() const
 {
-    return mCurrent < mClass->mIterableProperties.size() - 1;
+    return mCurrent < static_cast<int>(mClass->mIterableProperties.size()) - 1;
 }
 
 bool DefaultscriptClassIterator::hasPrevious() const
@@ -374,11 +374,11 @@ bool DefaultscriptClassIterator::hasPrevious() const
 
 QScriptString DefaultscriptClassIterator::name() const
 {
-    Q_ASSERT(mCurrent >= 0 && (uint)mCurrent < mClass->mIterableProperties.size() + mData->childCount());
-    if (mCurrent < 0 || (uint)mCurrent >= mClass->mIterableProperties.size() + mData->childCount()) {
+    Q_ASSERT(mCurrent >= 0 && mCurrent < static_cast<int>(mClass->mIterableProperties.size() + mData->childCount()));
+    if (mCurrent < 0 || mCurrent >= static_cast<int>(mClass->mIterableProperties.size() + mData->childCount())) {
         return {};
     }
-    if (mCurrent < mClass->mIterableProperties.size()) {
+    if (mCurrent < static_cast<int>(mClass->mIterableProperties.size())) {
         return mClass->mIterableProperties.at(mCurrent).name;
     }
     int index = mCurrent - mClass->mIterableProperties.size();
@@ -389,11 +389,11 @@ QScriptString DefaultscriptClassIterator::name() const
 
 QScriptValue::PropertyFlags DefaultscriptClassIterator::flags() const
 {
-    Q_ASSERT(mCurrent >= 0 && (uint)mCurrent < mClass->mIterableProperties.size() + mData->childCount());
-    if (mCurrent < 0 || (uint)mCurrent >= mClass->mIterableProperties.size() + mData->childCount()) {
+    Q_ASSERT(mCurrent >= 0 && mCurrent < static_cast<int>(mClass->mIterableProperties.size() + mData->childCount()));
+    if (mCurrent < 0 || mCurrent >= static_cast<int>(mClass->mIterableProperties.size() + mData->childCount())) {
         return {};
     }
-    if (mCurrent < mClass->mIterableProperties.size()) {
+    if (mCurrent < static_cast<int>(mClass->mIterableProperties.size())) {
         return mClass->propertyFlags(object(), mClass->mIterableProperties.at(mCurrent).name, id());
     }
     return QScriptValue::ReadOnly;
@@ -401,12 +401,12 @@ QScriptValue::PropertyFlags DefaultscriptClassIterator::flags() const
 
 uint DefaultscriptClassIterator::id() const
 {
-    Q_ASSERT(mCurrent >= 0 && (uint)mCurrent < mClass->mIterableProperties.size() + mData->childCount());
-    if (mCurrent < 0 || (uint)mCurrent >= mClass->mIterableProperties.size() + mData->childCount()) {
+    Q_ASSERT(mCurrent >= 0 && mCurrent < static_cast<int>(mClass->mIterableProperties.size() + mData->childCount()));
+    if (mCurrent < 0 || mCurrent >= static_cast<int>(mClass->mIterableProperties.size() + mData->childCount())) {
         return 0;
     }
     // only children have an id assigned
-    if (mCurrent < mClass->mIterableProperties.size()) {
+    if (mCurrent < static_cast<int>(mClass->mIterableProperties.size())) {
         return 0;
     }
     return mCurrent - mClass->mIterableProperties.size() + 1;
@@ -414,7 +414,7 @@ uint DefaultscriptClassIterator::id() const
 
 void DefaultscriptClassIterator::next()
 {
-    Q_ASSERT(mCurrent == -1 || (uint)mCurrent < mClass->mIterableProperties.size() + mData->childCount());
+    Q_ASSERT(mCurrent == -1 || mCurrent < static_cast<int>(mClass->mIterableProperties.size() + mData->childCount()));
     mCurrent++;
 }
 
