@@ -18,13 +18,18 @@
 class DataInformation;
 class ScriptHandlerInfo;
 
+struct ScriptValuePropertyInfo
+{
+    QScriptString name;
+    QScriptValue::PropertyFlags propertyFlags;
+};
+
 class DefaultScriptClass : public QScriptClass
 {
     friend class DefaultscriptClassIterator;
 
 public:
     using DataInfPtr = DataInformation*;
-    using PropertyInfoList = QVector<QPair<QScriptString, QScriptValue::PropertyFlags>>;
 
 public:
     DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo, int propertiesSize);
@@ -87,7 +92,7 @@ protected:
     const QScriptString s_asStringFunc;
 
     /** Contains all properties of this class, classes inheriting should add their own properties to this list */
-    PropertyInfoList mIterableProperties;
+    QVector<ScriptValuePropertyInfo> mIterableProperties;
 
 private:
     QScriptValue mDefaultPrototype;

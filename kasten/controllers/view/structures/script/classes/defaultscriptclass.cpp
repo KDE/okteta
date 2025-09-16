@@ -47,17 +47,17 @@ DefaultScriptClass::DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo*
     // add all our properties
     // TODO: find a pattern to set this (with proper size) in one go with properties from all subclasses
     mIterableProperties.reserve(11 + propertiesSize);
-    mIterableProperties.append(qMakePair(s_parent, QScriptValue::ReadOnly | QScriptValue::Undeletable));
-    mIterableProperties.append(qMakePair(s_name, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
-    mIterableProperties.append(qMakePair(s_wasAbleToRead, QScriptValue::ReadOnly | QScriptValue::Undeletable));
-    mIterableProperties.append(qMakePair(s_byteOrder, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
-    mIterableProperties.append(qMakePair(s_valid, QScriptValue::ReadOnly | QScriptValue::Undeletable));
-    mIterableProperties.append(qMakePair(s_validationError, QScriptValue::ReadOnly | QScriptValue::Undeletable));
-    mIterableProperties.append(qMakePair(s_validationFunc, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
-    mIterableProperties.append(qMakePair(s_updateFunc, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
-    mIterableProperties.append(qMakePair(s_datatype, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
-    mIterableProperties.append(qMakePair(s_customTypeName, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
-    mIterableProperties.append(qMakePair(s_asStringFunc, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
+    mIterableProperties.append(ScriptValuePropertyInfo{s_parent, QScriptValue::ReadOnly | QScriptValue::Undeletable});
+    mIterableProperties.append(ScriptValuePropertyInfo{s_name, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
+    mIterableProperties.append(ScriptValuePropertyInfo{s_wasAbleToRead, QScriptValue::ReadOnly | QScriptValue::Undeletable});
+    mIterableProperties.append(ScriptValuePropertyInfo{s_byteOrder, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
+    mIterableProperties.append(ScriptValuePropertyInfo{s_valid, QScriptValue::ReadOnly | QScriptValue::Undeletable});
+    mIterableProperties.append(ScriptValuePropertyInfo{s_validationError, QScriptValue::ReadOnly | QScriptValue::Undeletable});
+    mIterableProperties.append(ScriptValuePropertyInfo{s_validationFunc, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
+    mIterableProperties.append(ScriptValuePropertyInfo{s_updateFunc, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
+    mIterableProperties.append(ScriptValuePropertyInfo{s_datatype, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
+    mIterableProperties.append(ScriptValuePropertyInfo{s_customTypeName, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
+    mIterableProperties.append(ScriptValuePropertyInfo{s_asStringFunc, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
 }
 
 DefaultScriptClass::~DefaultScriptClass() = default;
@@ -319,8 +319,8 @@ QScriptValue::PropertyFlags DefaultScriptClass::propertyFlags(const QScriptValue
     }
 
     for (const auto& property : std::as_const(mIterableProperties)) {
-        if (property.first == name) {
-            return result | property.second;
+        if (property.name == name) {
+            return result | property.propertyFlags;
         }
     }
 
@@ -379,7 +379,7 @@ QScriptString DefaultscriptClassIterator::name() const
         return {};
     }
     if (mCurrent < mClass->mIterableProperties.size()) {
-        return mClass->mIterableProperties.at(mCurrent).first;
+        return mClass->mIterableProperties.at(mCurrent).name;
     }
     int index = mCurrent - mClass->mIterableProperties.size();
     Q_ASSERT(index >= 0);
@@ -394,7 +394,7 @@ QScriptValue::PropertyFlags DefaultscriptClassIterator::flags() const
         return {};
     }
     if (mCurrent < mClass->mIterableProperties.size()) {
-        return mClass->propertyFlags(object(), mClass->mIterableProperties.at(mCurrent).first, id());
+        return mClass->propertyFlags(object(), mClass->mIterableProperties.at(mCurrent).name, id());
     }
     return QScriptValue::ReadOnly;
 }

@@ -20,7 +20,7 @@ StructUnionScriptClass::StructUnionScriptClass(QScriptEngine* engine, ScriptHand
     , s_childCount(engine->toStringHandle(ParserStrings::PROPERTY_CHILD_COUNT())) // read-only
     , s_children(engine->toStringHandle(ParserStrings::PROPERTY_CHILDREN())) // write-only
 {
-    mIterableProperties.append(qMakePair(s_childCount, QScriptValue::ReadOnly | QScriptValue::Undeletable));
+    mIterableProperties.append(ScriptValuePropertyInfo{s_childCount, QScriptValue::ReadOnly | QScriptValue::Undeletable});
 
     mStructUnionPrototype = engine->newObject();
     mStructUnionPrototype.setProperty(QStringLiteral("toString"),

@@ -18,10 +18,10 @@ PointerScriptClass::PointerScriptClass(QScriptEngine* engine, ScriptHandlerInfo*
     , s_scale(engine->toStringHandle(ParserStrings::PROPERTY_SCALE()))
     , s_interpretFunc(engine->toStringHandle(ParserStrings::PROPERTY_INTERPRET_FUNC()))
 {
-    mIterableProperties.append(qMakePair(s_type, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
-    mIterableProperties.append(qMakePair(s_target, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
-    mIterableProperties.append(qMakePair(s_scale, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
-    mIterableProperties.append(qMakePair(s_interpretFunc, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
+    mIterableProperties.append(ScriptValuePropertyInfo{s_type, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
+    mIterableProperties.append(ScriptValuePropertyInfo{s_target, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
+    mIterableProperties.append(ScriptValuePropertyInfo{s_scale, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
+    mIterableProperties.append(ScriptValuePropertyInfo{s_interpretFunc, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
 }
 
 PointerScriptClass::~PointerScriptClass() = default;
