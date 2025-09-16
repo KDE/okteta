@@ -21,9 +21,9 @@ ArrayScriptClass::ArrayScriptClass(QScriptEngine* engine, ScriptHandlerInfo* han
     , s_childType(engine->toStringHandle(QStringLiteral("childType")))
     , s_type(engine->toStringHandle(ParserStrings::PROPERTY_TYPE()))
 {
-    mIterableProperties.emplace_back(ScriptValuePropertyInfo{s_length, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
+    appendProperty(s_length, QScriptValue::Undeletable);
     // the preferred property (the same as childType)
-    mIterableProperties.emplace_back(ScriptValuePropertyInfo{s_type, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
+    appendProperty(s_type, QScriptValue::Undeletable);
 
     mArrayPrototype = engine->newObject();
     mArrayPrototype.setProperty(QStringLiteral("toString"), engine->newFunction(Array_proto_toString));

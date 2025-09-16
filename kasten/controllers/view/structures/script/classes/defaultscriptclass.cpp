@@ -47,17 +47,17 @@ DefaultScriptClass::DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo*
     // add all our properties
     // TODO: find a pattern to set this (with proper size) in one go with properties from all subclasses
     mIterableProperties.reserve(11 + propertiesSize);
-    mIterableProperties.emplace_back(ScriptValuePropertyInfo{s_parent, QScriptValue::ReadOnly | QScriptValue::Undeletable});
-    mIterableProperties.emplace_back(ScriptValuePropertyInfo{s_name, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
-    mIterableProperties.emplace_back(ScriptValuePropertyInfo{s_wasAbleToRead, QScriptValue::ReadOnly | QScriptValue::Undeletable});
-    mIterableProperties.emplace_back(ScriptValuePropertyInfo{s_byteOrder, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
-    mIterableProperties.emplace_back(ScriptValuePropertyInfo{s_valid, QScriptValue::ReadOnly | QScriptValue::Undeletable});
-    mIterableProperties.emplace_back(ScriptValuePropertyInfo{s_validationError, QScriptValue::ReadOnly | QScriptValue::Undeletable});
-    mIterableProperties.emplace_back(ScriptValuePropertyInfo{s_validationFunc, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
-    mIterableProperties.emplace_back(ScriptValuePropertyInfo{s_updateFunc, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
-    mIterableProperties.emplace_back(ScriptValuePropertyInfo{s_datatype, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
-    mIterableProperties.emplace_back(ScriptValuePropertyInfo{s_customTypeName, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
-    mIterableProperties.emplace_back(ScriptValuePropertyInfo{s_asStringFunc, QScriptValue::PropertyFlags(QScriptValue::Undeletable)});
+    appendProperty(s_parent, QScriptValue::ReadOnly | QScriptValue::Undeletable);
+    appendProperty(s_name, QScriptValue::Undeletable);
+    appendProperty(s_wasAbleToRead, QScriptValue::ReadOnly | QScriptValue::Undeletable);
+    appendProperty(s_byteOrder, QScriptValue::Undeletable);
+    appendProperty(s_valid, QScriptValue::ReadOnly | QScriptValue::Undeletable);
+    appendProperty(s_validationError, QScriptValue::ReadOnly | QScriptValue::Undeletable);
+    appendProperty(s_validationFunc, QScriptValue::Undeletable);
+    appendProperty(s_updateFunc, QScriptValue::Undeletable);
+    appendProperty(s_datatype, QScriptValue::Undeletable);
+    appendProperty(s_customTypeName, QScriptValue::Undeletable);
+    appendProperty(s_asStringFunc, QScriptValue::Undeletable);
 }
 
 DefaultScriptClass::~DefaultScriptClass() = default;

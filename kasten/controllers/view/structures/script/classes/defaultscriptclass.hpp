@@ -72,6 +72,8 @@ protected:
     [[nodiscard]]
     ScriptHandlerInfo* handlerInfo() const;
 
+    void appendProperty(const QScriptString& name, QScriptValue::PropertyFlags propertyFlags);
+
 private:
     [[nodiscard]]
     static QScriptValue Default_proto_toString(QScriptContext* ctx, QScriptEngine* eng);
@@ -92,10 +94,10 @@ protected:
     const QScriptString s_customTypeName;
     const QScriptString s_asStringFunc;
 
+private:
     /** Contains all properties of this class, classes inheriting should add their own properties to this list */
     std::vector<ScriptValuePropertyInfo> mIterableProperties;
 
-private:
     QScriptValue mDefaultPrototype;
     ScriptHandlerInfo* const mHandlerInfo;
 };
@@ -104,6 +106,12 @@ inline
 ScriptHandlerInfo* DefaultScriptClass::handlerInfo() const
 {
     return mHandlerInfo;
+}
+
+inline
+void DefaultScriptClass::appendProperty(const QScriptString& name, QScriptValue::PropertyFlags propertyFlags)
+{
+    mIterableProperties.emplace_back(ScriptValuePropertyInfo{name, propertyFlags});
 }
 
 /** Provide a default iterator for all properties. This should suffice for all classes that don't have children */
