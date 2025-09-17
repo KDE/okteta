@@ -23,7 +23,7 @@ class QString;
 class ScriptHandler
 {
 public:
-    ScriptHandler(QScriptEngine* engine, TopLevelDataInformation* topLevel);
+    ScriptHandler(std::unique_ptr<QScriptEngine>&& engine, TopLevelDataInformation* topLevel);
 
     ScriptHandler(const ScriptHandler&) = delete;
     ScriptHandler(ScriptHandler&&) = delete;

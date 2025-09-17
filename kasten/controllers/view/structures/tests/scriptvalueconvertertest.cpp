@@ -60,7 +60,7 @@ QScriptValue ScriptValueConverterTest::evaluate(const char* code)
 
 void ScriptValueConverterTest::initTestCase()
 {
-    engine.reset(ScriptEngineInitializer::newEngine());
+    engine = ScriptEngineInitializer::newEngine();
     logger = std::make_unique<ScriptLogger>();
 }
 

@@ -182,7 +182,7 @@ template <PrimitiveDataType primType, typename T>
 void PrimitiveArrayTest::testReadCustomizedPrimitiveInternal()
 {
     LoggerWithContext lwc(nullptr, QString());
-    QScriptEngine* engine = ScriptEngineInitializer::newEngine();
+    std::unique_ptr<QScriptEngine> engine = ScriptEngineInitializer::newEngine();
 
     PrimitiveDataInformation* primInfo(PrimitiveFactory::newInstance(QStringLiteral("value"), primType, lwc));
     primInfo->setByteOrder(NON_CURRENT_BYTE_ORDER);
@@ -192,7 +192,7 @@ void PrimitiveArrayTest::testReadCustomizedPrimitiveInternal()
     auto* dataInf = new ArrayDataInformation(QStringLiteral("values"),
                                              endianModel->size() / sizeof(T),
                                              primInfo);
-    const auto top = std::make_unique<TopLevelDataInformation>(dataInf, nullptr, engine);
+    const auto top = std::make_unique<TopLevelDataInformation>(dataInf, nullptr, std::move(engine));
 
     QCOMPARE(dataInf->childCount(), uint(ENDIAN_SIZE / sizeof(T)));
     quint8 bitOffs = 0;

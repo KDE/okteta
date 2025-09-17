@@ -7,6 +7,9 @@
 #ifndef KASTEN_SCRIPTENGINEINITIALIZER_HPP
 #define KASTEN_SCRIPTENGINEINITIALIZER_HPP
 
+// Std
+#include <memory>
+
 class QScriptEngine;
 class QScriptContext;
 class QScriptValue;
@@ -29,7 +32,7 @@ namespace ScriptEngineInitializer {
 
 /** @return a new QScriptEngine with the functions added to the global object */
 [[nodiscard]]
-QScriptEngine* newEngine();
+std::unique_ptr<QScriptEngine> newEngine();
 /** add the necessary functions to the QScriptEngine */
 void addFuctionsToScriptEngine(QScriptEngine* engine);
 

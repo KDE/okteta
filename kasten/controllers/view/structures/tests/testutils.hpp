@@ -58,10 +58,10 @@ TopLevelDataInformation* evalAndParse(const QString& code)
 {
     auto* l = new ScriptLogger();
     l->setLogToStdOut(true);
-    QScriptEngine* engine = ScriptEngineInitializer::newEngine();
-    DataInformation* inf = evalAndParse(engine, code, l);
+    std::unique_ptr<QScriptEngine> engine = ScriptEngineInitializer::newEngine();
+    DataInformation* inf = evalAndParse(engine.get(), code, l);
     QTEST_ASSERT(inf);
-    return new TopLevelDataInformation(inf, l, engine);
+    return new TopLevelDataInformation(inf, l, std::move(engine));
 }
 
 TopLevelDataInformation* evalAndParse(const char* code)

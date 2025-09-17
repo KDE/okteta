@@ -154,10 +154,10 @@ QVector<TopLevelDataInformation*> OsdParser::parseStructures() const
             continue; // skip enum defs
 
         }
-        QScriptEngine* eng = ScriptEngineInitializer::newEngine(); // we need this for dynamic arrays
+        std::unique_ptr<QScriptEngine> eng = ScriptEngineInitializer::newEngine(); // we need this for dynamic arrays
         auto* logger = new ScriptLogger();
         QVector<EnumDefinition::Ptr> enums = parseEnums(rootElem, logger);
-        OsdParserInfo info(QString(), logger, nullptr, eng, enums);
+        OsdParserInfo info(QString(), logger, nullptr, eng.get(), enums);
 
         DataInformation* data = parseElement(elem, info);
 
@@ -170,7 +170,7 @@ QVector<TopLevelDataInformation*> OsdParser::parseStructures() const
             qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "Parsing messages were:" << logger->messages();
             data = new DummyDataInformation(nullptr, name);
         }
-        auto* topData = new TopLevelDataInformation(data, logger, eng, fileInfo);
+        auto* topData = new TopLevelDataInformation(data, logger, std::move(eng), fileInfo);
         QString lockOffsetStr = readProperty(elem, PROPERTY_DEFAULT_LOCK_OFFSET());
         if (!lockOffsetStr.isEmpty()) {
             ParsedNumber<quint64> offset = ParserUtils::uint64FromString(lockOffsetStr);

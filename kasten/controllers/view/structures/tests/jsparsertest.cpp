@@ -330,7 +330,7 @@ void JsParserTest::testCustomTypeName()
 
 void JsParserTest::testImport()
 {
-    std::unique_ptr<QScriptEngine> eng(ScriptEngineInitializer::newEngine());
+    std::unique_ptr<QScriptEngine> eng = ScriptEngineInitializer::newEngine();
 #if defined(Q_OS_MACOS) || defined(Q_OS_WINDOWS)
     QEXPECT_FAIL("", "QStandardPaths::GenericDataLocation can't be modified on macOS/Windows", Continue);
 #endif
@@ -340,7 +340,7 @@ void JsParserTest::testImport()
 
 void JsParserTest::testImportPathTraversal()
 {
-    std::unique_ptr<QScriptEngine> eng(ScriptEngineInitializer::newEngine());
+    std::unique_ptr<QScriptEngine> eng = ScriptEngineInitializer::newEngine();
     QScriptValue val = eng->evaluate(QStringLiteral("s = importScript('../../pathtraversal.js');s.foo()"));
     QVERIFY(val.isError());
     QCOMPARE(val.toString(), QStringLiteral("Error: importScript(): You may only access installed structure files! Path traversal detected."));

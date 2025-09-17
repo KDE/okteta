@@ -19,10 +19,10 @@
 #include <QScriptValue>
 #include <QScriptEngine>
 
-ScriptHandler::ScriptHandler(QScriptEngine* engine, TopLevelDataInformation* topLevel)
-    : mEngine(engine)
+ScriptHandler::ScriptHandler(std::unique_ptr<QScriptEngine>&& engine, TopLevelDataInformation* topLevel)
+    : mEngine(std::move(engine))
     , mTopLevel(topLevel)
-    , mHandlerInfo(engine, topLevel->logger())
+    , mHandlerInfo(mEngine.get(), topLevel->logger())
 {
 }
 

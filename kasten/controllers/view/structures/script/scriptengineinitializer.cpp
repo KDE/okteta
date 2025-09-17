@@ -89,10 +89,10 @@ void addFuctionsToScriptEngine(QScriptEngine* engine)
                              engine->newFunction(Private::importScriptFunc));
 }
 
-QScriptEngine* newEngine()
+std::unique_ptr<QScriptEngine> newEngine()
 {
-    auto* ret = new QScriptEngine();
-    addFuctionsToScriptEngine(ret);
+    auto ret = std::make_unique<QScriptEngine>();
+    addFuctionsToScriptEngine(ret.get());
     return ret;
 }
 

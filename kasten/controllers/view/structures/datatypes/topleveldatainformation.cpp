@@ -25,7 +25,7 @@
 const Okteta::Address TopLevelDataInformation::INVALID_OFFSET = std::numeric_limits<Okteta::Address>::max();
 
 TopLevelDataInformation::TopLevelDataInformation(DataInformation* data, ScriptLogger* logger,
-                                                 QScriptEngine* engine, const QFileInfo& structureFile)
+                                                 std::unique_ptr<QScriptEngine>&& engine, const QFileInfo& structureFile)
     : QObject(nullptr)
     , mData(data)
     , mLogger(logger)
@@ -41,10 +41,11 @@ TopLevelDataInformation::TopLevelDataInformation(DataInformation* data, ScriptLo
         mLogger = std::make_unique<ScriptLogger>();
     }
 
-    if (!engine) {
-        engine = ScriptEngineInitializer::newEngine();
+    std::unique_ptr<QScriptEngine> eng = std::move(engine);
+    if (!eng) {
+        eng = ScriptEngineInitializer::newEngine();
     }
-    mScriptHandler = std::make_unique<ScriptHandler>(engine, this);
+    mScriptHandler = std::make_unique<ScriptHandler>(std::move(eng), this);
 }
 
 TopLevelDataInformation::~TopLevelDataInformation() = default;

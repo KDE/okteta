@@ -32,10 +32,10 @@ QVector<TopLevelDataInformation*> ScriptFileParser::parseStructures() const
 {
     QVector<TopLevelDataInformation*> ret;
 
-    QScriptEngine* engine = ScriptEngineInitializer::newEngine();
+    std::unique_ptr<QScriptEngine> engine = ScriptEngineInitializer::newEngine();
     auto* logger = new ScriptLogger();
 
-    QScriptValue value = loadScriptValue(logger, engine);
+    QScriptValue value = loadScriptValue(logger, engine.get());
     DataInformation* dataInf;
     if (!value.isValid()) {
         dataInf = new DummyDataInformation(nullptr, mPluginName);
@@ -47,7 +47,7 @@ QVector<TopLevelDataInformation*> ScriptFileParser::parseStructures() const
         dataInf = new DummyDataInformation(nullptr, mPluginName);
     }
     const QFileInfo fileInfo(mAbsolutePath);
-    auto* top = new TopLevelDataInformation(dataInf, logger, engine, fileInfo);
+    auto* top = new TopLevelDataInformation(dataInf, logger, std::move(engine), fileInfo);
     // handle default lock offset
     QScriptValue lockOffset = value.property(ParserStrings::PROPERTY_DEFAULT_LOCK_OFFSET());
     if (lockOffset.isValid()) {

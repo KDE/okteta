@@ -294,7 +294,7 @@ void ScriptClassesTest::checkIterators()
 
 void ScriptClassesTest::testReplaceObject()
 {
-    QScriptEngine* eng = ScriptEngineInitializer::newEngine();
+    std::unique_ptr<QScriptEngine> ownedEngine = ScriptEngineInitializer::newEngine();
     auto* logger = new ScriptLogger();
     logger->setLogToStdOut(true);
     QString unionDef = QStringLiteral(
@@ -303,12 +303,14 @@ void ScriptClassesTest::testReplaceObject()
         QT_UNICODE_LITERAL("    innerArray : array(uint8(), 5),\n")
         QT_UNICODE_LITERAL("    innerPointer : pointer(uint8(), double())\n")
         QT_UNICODE_LITERAL("});\n"));
-    QScriptValue val = eng->evaluate(unionDef);
+    QScriptValue val = ownedEngine->evaluate(unionDef);
     QVERIFY(val.isObject());
     DataInformation* main = ScriptValueConverter::convert(val, QStringLiteral("container"), logger, nullptr);
     QVERIFY(main);
     QCOMPARE(logger->rowCount(), 0);
-    TopLevelDataInformation top(main, logger, eng);
+
+    QScriptEngine* const eng = ownedEngine.get();
+    TopLevelDataInformation top(main, logger, std::move(ownedEngine));
 
     // first we read the struct, which changes the type of the first child
     // access it again after changing to ensure it was set properly

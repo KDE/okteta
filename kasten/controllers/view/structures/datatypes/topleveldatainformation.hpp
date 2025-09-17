@@ -18,6 +18,7 @@
 #include <QFileInfo>
 #include <QSharedPointer>
 #include <QQueue>
+#include <QScriptEngine>
 // Std
 #include <memory>
 
@@ -27,7 +28,6 @@ class AbstractByteArrayModel;
 
 class ScriptLogger;
 class ScriptHandlerInfo;
-class QScriptEngine;
 class ScriptHandler;
 class DataInformation;
 class PointerDataInformation;
@@ -45,7 +45,8 @@ public:
      *  @param structureFile the file which this was loaded from
      */
     explicit TopLevelDataInformation(DataInformation* data, ScriptLogger* logger = nullptr,
-                                     QScriptEngine* engine = nullptr, const QFileInfo& structureFile = QFileInfo());
+                                     std::unique_ptr<QScriptEngine>&& engine = nullptr,
+                                     const QFileInfo& structureFile = QFileInfo());
     ~TopLevelDataInformation() override;
 
     using Ptr = QSharedPointer<TopLevelDataInformation>;
