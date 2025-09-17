@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-14 02:06+0000\n"
+"POT-Creation-Date: 2025-09-17 01:57+0000\n"
 "PO-Revision-Date: 2025-09-01 08:43-0300\n"
 "Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -36,48 +36,48 @@ msgstr ""
 "diniz.bortolotto@gmail.com, andre.panm@gmail.com, alvarenga@kde.org, "
 "elchevive@opensuse.org"
 
-#: about.cpp:17
+#: about.cpp:15
 #, kde-format
 msgid "Okteta"
 msgstr "Okteta"
 
-#: about.cpp:19
+#: about.cpp:17
 #, kde-format
 msgctxt "@info"
 msgid "Hex editor"
 msgstr "Editor hexadecimal"
 
-#: about.cpp:21
+#: about.cpp:19
 #, kde-format
 msgctxt "@info"
 msgid "2006-%1 Friedrich W. H. Kossebau"
 msgstr "2006-%1 Friedrich W. H. Kossebau"
 
-#: about.cpp:22
+#: about.cpp:20
 #, kde-format
 msgctxt "@info"
 msgid "Edit the raw data of files"
 msgstr "Editar os dados brutos dos arquivos"
 
-#: about.cpp:27
+#: about.cpp:25
 #, kde-format
 msgctxt "@info:credit"
 msgid "Friedrich W. H. Kossebau"
 msgstr "Friedrich W. H. Kossebau"
 
-#: about.cpp:28
+#: about.cpp:26
 #, kde-format
 msgctxt "@info:credit"
 msgid "Author"
 msgstr "Autor"
 
-#: about.cpp:30
+#: about.cpp:28
 #, kde-format
 msgctxt "@info:credit"
 msgid "Alexander Richardson"
 msgstr "Alexander Richardson"
 
-#: about.cpp:31
+#: about.cpp:29
 #, kde-format
 msgctxt "@info:credit"
 msgid "Structures tool"
@@ -102,7 +102,7 @@ msgstr "&Janelas"
 msgid "Main Toolbar"
 msgstr "Barra de ferramentas principal"
 
-#: program.cpp:89
+#: program.cpp:87
 #, kde-format
 msgctxt "@info"
 msgid "File(s) to load."

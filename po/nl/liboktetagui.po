@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-25 01:57+0000\n"
+"POT-Creation-Date: 2025-09-17 01:57+0000\n"
 "PO-Revision-Date: 2025-02-14 12:32+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -17,49 +17,49 @@ msgstr ""
 "X-Generator: Lokalize 24.12.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: controller/clipboardcontroller.cpp:78
+#: controller/clipboardcontroller.cpp:76
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Copy"
 msgstr "&Kopiëren"
 
-#: controller/clipboardcontroller.cpp:88
+#: controller/clipboardcontroller.cpp:86
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Cu&t"
 msgstr "Kni&ppen"
 
-#: controller/clipboardcontroller.cpp:95
+#: controller/clipboardcontroller.cpp:93
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Paste"
 msgstr "P&lakken"
 
-#: controller/keynavigator.cpp:304
+#: controller/keynavigator.cpp:302
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Select &All"
 msgstr "&Alles selecteren"
 
-#: controller/undoredocontroller.cpp:83
+#: controller/undoredocontroller.cpp:81
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Undo"
 msgstr "&Ongedaan maken"
 
-#: controller/undoredocontroller.cpp:89
+#: controller/undoredocontroller.cpp:87
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Re&do"
 msgstr "Opnie&uw"
 
-#: controller/valueeditor.cpp:239
+#: controller/valueeditor.cpp:237
 #, kde-format
 msgctxt "@item name of the change"
 msgid "Insert"
 msgstr "Invoegen"
 
-#: controller/valueeditor.cpp:278
+#: controller/valueeditor.cpp:276
 #, kde-format
 msgctxt "@item name of the change"
 msgid "Replace"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-31 02:05+0000\n"
+"POT-Creation-Date: 2025-09-17 01:57+0000\n"
 "PO-Revision-Date: 2011-09-05 22:16+0200\n"
 "Last-Translator: Manfred Wiese <m.j.wiese@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -30,69 +30,69 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "m.j.wiese@web.de, s_dibbern@web.de"
 
-#: controllers/document/info/documentinfotool.cpp:45
-#: controllers/document/info/documentinfotoolviewfactory.cpp:24
+#: controllers/document/info/documentinfotool.cpp:43
+#: controllers/document/info/documentinfotoolviewfactory.cpp:22
 #, kde-format
 msgctxt "@title:window"
 msgid "File Info"
 msgstr "Datei-Info"
 
-#: controllers/document/info/documentinfoview.cpp:67
+#: controllers/document/info/documentinfoview.cpp:65
 #, fuzzy, kde-format
 #| msgid "Type:"
 msgctxt "@label"
 msgid "Type:"
 msgstr "Typ:"
 
-#: controllers/document/info/documentinfoview.cpp:81
+#: controllers/document/info/documentinfoview.cpp:79
 #, fuzzy, kde-format
 #| msgid "Location:"
 msgctxt "@label"
 msgid "Location:"
 msgstr "Steed:"
 
-#: controllers/document/info/documentinfoview.cpp:86
+#: controllers/document/info/documentinfoview.cpp:84
 #, fuzzy, kde-format
 #| msgid "Size:"
 msgctxt "@label"
 msgid "Size:"
 msgstr "Grött:"
 
-#: controllers/document/info/documentinfoview.cpp:89
+#: controllers/document/info/documentinfoview.cpp:87
 #, fuzzy, kde-format
 #| msgid "Created/Loaded:"
 msgctxt "@label"
 msgid "Created/Loaded:"
 msgstr "Opstellt/Laadt:"
 
-#: controllers/document/info/documentinfoview.cpp:93
+#: controllers/document/info/documentinfoview.cpp:91
 #, fuzzy, kde-format
 #| msgid "Last modified:"
 msgctxt "@label"
 msgid "Last modified:"
 msgstr "Tolest ännert:"
 
-#: controllers/document/info/documentinfoview.cpp:97
+#: controllers/document/info/documentinfoview.cpp:95
 #, fuzzy, kde-format
 #| msgid "Last synchronized:"
 msgctxt "@label"
 msgid "Last synchronized:"
 msgstr "Tolest synkroniseert:"
 
-#: controllers/document/info/documentinfoview.cpp:104
+#: controllers/document/info/documentinfoview.cpp:102
 #, fuzzy, kde-format
 #| msgid "Created:"
 msgctxt "@label"
 msgid "Created:"
 msgstr "Opstellt:"
 
-#: controllers/document/info/documentinfoview.cpp:156
+#: controllers/document/info/documentinfoview.cpp:154
 #, kde-format
 msgctxt "There is no storage location assigned to yet."
 msgid "[None]"
 msgstr "[Keen]"
 
-#: controllers/document/overwriteonly/overwriteonlycontroller.cpp:23
+#: controllers/document/overwriteonly/overwriteonlycontroller.cpp:21
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Overwrite only"
@@ -100,63 +100,63 @@ msgctxt "@option:check"
 msgid "Overwrite only"
 msgstr "Bloots överschrieven"
 
-#: controllers/view/bookmarks/bookmarklistmodel.cpp:145
+#: controllers/view/bookmarks/bookmarklistmodel.cpp:143
 #, kde-format
 msgctxt "@title:column offset of the bookmark"
 msgid "Offset"
 msgstr "Versetten:"
 
-#: controllers/view/bookmarks/bookmarklistmodel.cpp:146
+#: controllers/view/bookmarks/bookmarklistmodel.cpp:144
 #, kde-format
 msgctxt "@title:column title of the bookmark"
 msgid "Title"
 msgstr "Titel"
 
-#: controllers/view/bookmarks/bookmarkscontroller.cpp:52
+#: controllers/view/bookmarks/bookmarkscontroller.cpp:50
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Bookmark"
 msgstr "Leesteken wegdoon"
 
-#: controllers/view/bookmarks/bookmarkscontroller.cpp:59
+#: controllers/view/bookmarks/bookmarkscontroller.cpp:57
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove All Bookmarks"
 msgstr "All Leestekens wegdoon"
 
-#: controllers/view/bookmarks/bookmarkscontroller.cpp:66
+#: controllers/view/bookmarks/bookmarkscontroller.cpp:64
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Go to Next Bookmark"
 msgstr "Na nakamen Leesteken gahn"
 
-#: controllers/view/bookmarks/bookmarkscontroller.cpp:73
+#: controllers/view/bookmarks/bookmarkscontroller.cpp:71
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Go to Previous Bookmark"
 msgstr "Na verleden Leesteken gahn"
 
-#: controllers/view/bookmarks/bookmarkscontroller.cpp:171
+#: controllers/view/bookmarks/bookmarkscontroller.cpp:169
 #, kde-format
 msgctxt "@item description of bookmark"
 msgid "%1: %2"
 msgstr "%1: %2"
 
-#: controllers/view/bookmarks/bookmarkscontroller.cpp:250
-#: controllers/view/bookmarks/bookmarkstool.cpp:131
+#: controllers/view/bookmarks/bookmarkscontroller.cpp:248
+#: controllers/view/bookmarks/bookmarkstool.cpp:129
 #, kde-format
 msgctxt "default name of a bookmark"
 msgid "Bookmark"
 msgstr "Leesteken"
 
-#: controllers/view/bookmarks/bookmarkstool.cpp:38
-#: controllers/view/bookmarks/bookmarkstoolviewfactory.cpp:24
+#: controllers/view/bookmarks/bookmarkstool.cpp:36
+#: controllers/view/bookmarks/bookmarkstoolviewfactory.cpp:22
 #, kde-format
 msgctxt "@title:window"
 msgid "Bookmarks"
 msgstr "Leestekens"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:67
+#: controllers/view/bookmarks/bookmarksview.cpp:65
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Bookmarks"
@@ -164,7 +164,7 @@ msgctxt "@info"
 msgid "No bookmarks"
 msgstr "Leestekens"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:90
+#: controllers/view/bookmarks/bookmarksview.cpp:88
 #, fuzzy, kde-format
 #| msgctxt "@title:menu create a new view profile"
 #| msgid "Create new..."
@@ -172,13 +172,13 @@ msgctxt "@action"
 msgid "Create New"
 msgstr "Nieg opstellen..."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:92
+#: controllers/view/bookmarks/bookmarksview.cpp:90
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Creates a new bookmark for the current cursor position."
 msgstr "Stellt för de aktuelle Blinkersteed en nieg Leesteken op"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:94
+#: controllers/view/bookmarks/bookmarksview.cpp:92
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -188,7 +188,7 @@ msgstr ""
 "Klickst Du op dissen Knoop, warrt för de aktuelle Steed vun den Blinker en "
 "nieg Leesteken opstellt."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:104
+#: controllers/view/bookmarks/bookmarksview.cpp:102
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "&Delete"
@@ -196,13 +196,13 @@ msgctxt "@action"
 msgid "Delete"
 msgstr "&Wegmaken"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:106
+#: controllers/view/bookmarks/bookmarksview.cpp:104
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Deletes all the selected bookmarks."
 msgstr "Deit all utsöchte Leestekens weg."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:108
+#: controllers/view/bookmarks/bookmarksview.cpp:106
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -210,7 +210,7 @@ msgid ""
 msgstr ""
 "Klickst Du op dissen Knoop, warrt all opstunns utsöchte Leestekens wegdaan."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:119
+#: controllers/view/bookmarks/bookmarksview.cpp:117
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Go to Offset"
@@ -218,13 +218,13 @@ msgctxt "@action"
 msgid "Go to Offset"
 msgstr "Na Versetten gahn"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:121
+#: controllers/view/bookmarks/bookmarksview.cpp:119
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Moves the cursor to the selected bookmark."
 msgstr "Verschufft den Blinker na't utsöchte Leesteken."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:123
+#: controllers/view/bookmarks/bookmarksview.cpp:121
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -234,19 +234,19 @@ msgstr ""
 "Klickst Du op dissen Knoop, warrt de Blinker na de Steed vun dat tolest "
 "utsöchte Leesteken verschaven."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:131
+#: controllers/view/bookmarks/bookmarksview.cpp:129
 #, kde-format
 msgctxt "@action"
 msgid "Rename"
 msgstr ""
 
-#: controllers/view/bookmarks/bookmarksview.cpp:133
+#: controllers/view/bookmarks/bookmarksview.cpp:131
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enables renaming of the selected bookmark."
 msgstr "Dat utsöchte Leesteken ümnömen"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:135
+#: controllers/view/bookmarks/bookmarksview.cpp:133
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -256,9 +256,9 @@ msgstr ""
 "Klickst Du op dissen Knoop, kannst Du den Naam vun dat tolest utsöchte "
 "Leesteken bewerken."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:144
-#: controllers/view/stringsextract/stringsextractview.cpp:191
-#: controllers/view/structures/structureview.cpp:386
+#: controllers/view/bookmarks/bookmarksview.cpp:142
+#: controllers/view/stringsextract/stringsextractview.cpp:189
+#: controllers/view/structures/structureview.cpp:382
 #, fuzzy, kde-format
 #| msgctxt "@title:column offset of the bookmark"
 #| msgid "Offset"
@@ -266,9 +266,9 @@ msgctxt "@action"
 msgid "Copy Offset"
 msgstr "Versetten:"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:146
-#: controllers/view/stringsextract/stringsextractview.cpp:193
-#: controllers/view/structures/structureview.cpp:388
+#: controllers/view/bookmarks/bookmarksview.cpp:144
+#: controllers/view/stringsextract/stringsextractview.cpp:191
+#: controllers/view/structures/structureview.cpp:384
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Copies the selected strings to the clipboard."
@@ -276,91 +276,91 @@ msgctxt "@info:tooltip"
 msgid "Copies the offset to the clipboard."
 msgstr "Kopeert markeert Tekenkeden na de Twischenaflaag."
 
-#: controllers/view/bytetable/bytetablemodel.cpp:139
-#: controllers/view/info/statistictablemodel.cpp:170
+#: controllers/view/bytetable/bytetablemodel.cpp:137
+#: controllers/view/info/statistictablemodel.cpp:168
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Character not defined."
 msgstr ""
 
-#: controllers/view/bytetable/bytetablemodel.cpp:157
-#: controllers/view/info/statistictablemodel.cpp:216
+#: controllers/view/bytetable/bytetablemodel.cpp:155
+#: controllers/view/info/statistictablemodel.cpp:214
 #, kde-format
 msgctxt "@title:column short for Decimal"
 msgid "Dec"
 msgstr "Dez"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:158
-#: controllers/view/info/statistictablemodel.cpp:215
+#: controllers/view/bytetable/bytetablemodel.cpp:156
+#: controllers/view/info/statistictablemodel.cpp:213
 #, kde-format
 msgctxt "@title:column short for Hexadecimal"
 msgid "Hex"
 msgstr "Hex"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:159
-#: controllers/view/info/statistictablemodel.cpp:217
+#: controllers/view/bytetable/bytetablemodel.cpp:157
+#: controllers/view/info/statistictablemodel.cpp:215
 #, kde-format
 msgctxt "@title:column short for Octal"
 msgid "Oct"
 msgstr "Okt"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:160
-#: controllers/view/info/statistictablemodel.cpp:218
+#: controllers/view/bytetable/bytetablemodel.cpp:158
+#: controllers/view/info/statistictablemodel.cpp:216
 #, kde-format
 msgctxt "@title:column short for Binary"
 msgid "Bin"
 msgstr "Bin"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:161
-#: controllers/view/info/statistictablemodel.cpp:220
+#: controllers/view/bytetable/bytetablemodel.cpp:159
+#: controllers/view/info/statistictablemodel.cpp:218
 #, kde-format
 msgctxt "@title:column short for Character"
 msgid "Char"
 msgstr "Teken"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:167
-#: controllers/view/info/statistictablemodel.cpp:231
+#: controllers/view/bytetable/bytetablemodel.cpp:165
+#: controllers/view/info/statistictablemodel.cpp:229
 #, kde-format
 msgctxt "@info:tooltip column contains the value in decimal format"
 msgid "Decimal"
 msgstr "Dezimaal"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:169
-#: controllers/view/info/statistictablemodel.cpp:229
+#: controllers/view/bytetable/bytetablemodel.cpp:167
+#: controllers/view/info/statistictablemodel.cpp:227
 #, kde-format
 msgctxt "@info:tooltip column contains the value in hexadecimal format"
 msgid "Hexadecimal"
 msgstr "Hexadezimaal"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:171
-#: controllers/view/info/statistictablemodel.cpp:233
+#: controllers/view/bytetable/bytetablemodel.cpp:169
+#: controllers/view/info/statistictablemodel.cpp:231
 #, kde-format
 msgctxt "@info:tooltip column contains the value in octal format"
 msgid "Octal"
 msgstr "Oktaal"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:173
-#: controllers/view/info/statistictablemodel.cpp:235
+#: controllers/view/bytetable/bytetablemodel.cpp:171
+#: controllers/view/info/statistictablemodel.cpp:233
 #, kde-format
 msgctxt "@info:tooltip column contains the value in binary format"
 msgid "Binary"
 msgstr "Bineer"
 
-#: controllers/view/bytetable/bytetablemodel.cpp:175
-#: controllers/view/info/statistictablemodel.cpp:239
+#: controllers/view/bytetable/bytetablemodel.cpp:173
+#: controllers/view/info/statistictablemodel.cpp:237
 #, kde-format
 msgctxt "@info:tooltip column contains the character with the value"
 msgid "Character"
 msgstr "Teken"
 
-#: controllers/view/bytetable/bytetabletool.cpp:37
-#: controllers/view/bytetable/bytetabletoolviewfactory.cpp:24
+#: controllers/view/bytetable/bytetabletool.cpp:35
+#: controllers/view/bytetable/bytetabletoolviewfactory.cpp:22
 #, kde-format
 msgctxt "@title:window"
 msgid "Value/Char Table"
 msgstr "Weert-/Teken-Tabell"
 
-#: controllers/view/bytetable/bytetabletool.cpp:96
+#: controllers/view/bytetable/bytetabletool.cpp:94
 #, fuzzy, kde-format
 #| msgid "Inserted 1 Byte"
 #| msgid_plural "Inserted %1 Bytes"
@@ -370,7 +370,7 @@ msgid_plural "Inserted %1 Bytes"
 msgstr[0] "1 Byte inföögt"
 msgstr[1] "%1 Bytes inföögt"
 
-#: controllers/view/bytetable/bytetabletool.cpp:114
+#: controllers/view/bytetable/bytetabletool.cpp:112
 #, fuzzy, kde-format
 #| msgctxt "@info"
 #| msgid "1 byte converted."
@@ -381,7 +381,7 @@ msgid_plural "%1 bytes inserted."
 msgstr[0] "1 Byte wannelt"
 msgstr[1] "%1 Bytes wannelt"
 
-#: controllers/view/bytetable/bytetableview.cpp:74
+#: controllers/view/bytetable/bytetableview.cpp:72
 #, fuzzy, kde-format
 #| msgctxt "@label:spinbox number of the bit to use"
 #| msgid "Number of bit:"
@@ -389,7 +389,7 @@ msgctxt "@label:spinbox number of bytes to insert"
 msgid "Number (bytes):"
 msgstr "Bit-Tall:"
 
-#: controllers/view/bytetable/bytetableview.cpp:82
+#: controllers/view/bytetable/bytetableview.cpp:80
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid ""
@@ -400,7 +400,7 @@ msgid ""
 "Number of repeats of the currently selected byte in the table to be inserted."
 msgstr "De Tall vun Maal, de dat binnen de Tabell utsöchte Byte inföögt warrt"
 
-#: controllers/view/bytetable/bytetableview.cpp:98
+#: controllers/view/bytetable/bytetableview.cpp:96
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid ""
@@ -413,13 +413,13 @@ msgstr ""
 "Föögt dat opstunns binnen de Tabell utsöchte Byte so faken is, as de Tall "
 "angifft."
 
-#: controllers/view/charsetconversion/charsetconversiontool.cpp:127
+#: controllers/view/charsetconversion/charsetconversiontool.cpp:125
 #, kde-format
 msgctxt "@title:window of the tool to convert between charsets"
 msgid "Charset Conversion"
 msgstr "Tekensett-Wanneln"
 
-#: controllers/view/charsetconversion/charsetconversiontool.cpp:304
+#: controllers/view/charsetconversion/charsetconversiontool.cpp:302
 #, fuzzy, kde-format
 #| msgctxt "Converted from charset 1 to charset 2"
 #| msgid "%1 to %2"
@@ -427,27 +427,27 @@ msgctxt "@item Converted from charset 1 to charset 2"
 msgid "%1 to %2"
 msgstr "%1 na %2"
 
-#: controllers/view/charsetconversion/charsetconversiontoolviewfactory.cpp:27
+#: controllers/view/charsetconversion/charsetconversiontoolviewfactory.cpp:25
 #, kde-format
 msgctxt "@title:window"
 msgid "Charset Conversion"
 msgstr "Tekensett-Wanneln"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:52
+#: controllers/view/charsetconversion/charsetconversionview.cpp:50
 #, kde-format
 msgctxt ""
 "@item:inmenu Is converted _from_ charset (selected in combobox next to this)"
 msgid "From"
 msgstr "Vun"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:54
+#: controllers/view/charsetconversion/charsetconversionview.cpp:52
 #, kde-format
 msgctxt ""
 "@item:inmenu Is converted _to_ charset (selected in combobox next to this)"
 msgid "To"
 msgstr "Na"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:61
+#: controllers/view/charsetconversion/charsetconversionview.cpp:59
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The direction the bytes are converted, to or from the selected charset."
@@ -455,7 +455,7 @@ msgstr ""
 "De Richt, na de de Bytes wannelt warrt, d.h. na oder ut den utsöchten "
 "Tekensett."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:65
+#: controllers/view/charsetconversion/charsetconversionview.cpp:63
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -465,26 +465,26 @@ msgstr ""
 "Söök de Richt ut, na de de Bytes wannelt warrt, d.h. na oder ut den "
 "utsöchten Tekensett."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:81
+#: controllers/view/charsetconversion/charsetconversionview.cpp:79
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The charset the bytes are converted to."
 msgstr "De Tekensett, na den de Bytes wannelt warrt"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:85
+#: controllers/view/charsetconversion/charsetconversionview.cpp:83
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Select the charset the bytes are converted to."
 msgstr "Söök den Tekensett ut, na den de Bytes wannelt warrt."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:101
+#: controllers/view/charsetconversion/charsetconversionview.cpp:99
 #, kde-format
 msgctxt ""
 "@option:check substitute bytes whose char is not part of the target charset"
 msgid "Substitute missing:"
 msgstr "Fehlen inwesseln:"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:106
+#: controllers/view/charsetconversion/charsetconversionview.cpp:104
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -494,7 +494,7 @@ msgstr ""
 "Leggt fast, wat en Standardbyte för de Bytes inwesselt warrt, de ehr Born-"
 "Tekens de Teel-Tekensett nich bargt."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:110
+#: controllers/view/charsetconversion/charsetconversionview.cpp:108
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -504,20 +504,20 @@ msgstr ""
 "Maak dit an, dormit en Standardbyte för de Bytes inwesselt warrt, de ehr "
 "Born-Tekens de Teel-Tekensett nich bargt."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:126
+#: controllers/view/charsetconversion/charsetconversionview.cpp:124
 #, kde-format
 msgctxt ""
 "@label:textbox byte to use for chars which are not part of the target charset"
 msgid "Substitute byte:"
 msgstr "Inwessel-Byte"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:133
+#: controllers/view/charsetconversion/charsetconversionview.cpp:131
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte to use for chars which are not part of the target charset."
 msgstr "Dat Byte, dat för Tekens inwesselt warrt, de de Tekensett nich bargt."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:136
+#: controllers/view/charsetconversion/charsetconversionview.cpp:134
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -526,20 +526,20 @@ msgstr ""
 "Legg dat Byte fast, dat för Tekens inwesselt warrt, de de Tekensett nich "
 "bargt."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:170
+#: controllers/view/charsetconversion/charsetconversionview.cpp:168
 #, fuzzy, kde-format
 #| msgid "Con&vert"
 msgctxt "@action:button"
 msgid "Convert"
 msgstr "&Wanneln"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:173
+#: controllers/view/charsetconversion/charsetconversionview.cpp:171
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Converts the bytes in the selected range."
 msgstr "Wannelt de Bytes binnen dat utsöchte Rebeet."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:175
+#: controllers/view/charsetconversion/charsetconversionview.cpp:173
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -551,13 +551,13 @@ msgstr ""
 "binnen dat utsöchte Rebeet mit de Bytes för dat sülvige Teken ut den "
 "utsöchten Teeltekensett utwesselt."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:223
+#: controllers/view/charsetconversion/charsetconversionview.cpp:221
 #, kde-format
 msgctxt "@info"
 msgid "No bytes converted."
 msgstr "Keen Bytes wannelt"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:224
+#: controllers/view/charsetconversion/charsetconversionview.cpp:222
 #, kde-format
 msgctxt "@info"
 msgid "1 byte converted."
@@ -565,13 +565,13 @@ msgid_plural "%1 bytes converted."
 msgstr[0] "1 Byte wannelt"
 msgstr[1] "%1 Bytes wannelt"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:234
+#: controllers/view/charsetconversion/charsetconversionview.cpp:232
 #, kde-format
 msgctxt "@info"
 msgid "No bytes substituted."
 msgstr "Keen Bytes utwesselt"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:235
+#: controllers/view/charsetconversion/charsetconversionview.cpp:233
 #, kde-format
 msgctxt "@info"
 msgid "1 byte substituted."
@@ -579,45 +579,45 @@ msgid_plural "%1 bytes substituted."
 msgstr[0] "1 Byte utwesselt"
 msgstr[1] "%1 Bytes utwesselt"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:243
+#: controllers/view/charsetconversion/charsetconversionview.cpp:241
 #, kde-format
 msgctxt "@info"
 msgid ""
 "Conversion cancelled because of chars which are not in the target charset."
 msgstr "Wanneln afbraken, wiel de Teeltekensett nich all bruukt Tekens bargt."
 
-#: controllers/view/checksum/checksumtool.cpp:71
-#: controllers/view/checksum/checksumtoolviewfactory.cpp:24
+#: controllers/view/checksum/checksumtool.cpp:69
+#: controllers/view/checksum/checksumtoolviewfactory.cpp:22
 #, kde-format
 msgctxt "@title:window of the tool to calculate checksums"
 msgid "Checksum"
 msgstr "Pröövsumm"
 
-#: controllers/view/checksum/checksumview.cpp:46
+#: controllers/view/checksum/checksumview.cpp:44
 #, kde-format
 msgctxt "@label:listbox algorithm to use for the checksum"
 msgid "Algorithm:"
 msgstr "Algoritmus:"
 
-#: controllers/view/checksum/checksumview.cpp:53
+#: controllers/view/checksum/checksumview.cpp:51
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Select the algorithm to use for the checksum."
 msgstr "Den Algoritmus för de Pröövsumm utsöken"
 
-#: controllers/view/checksum/checksumview.cpp:80
+#: controllers/view/checksum/checksumview.cpp:78
 #, kde-format
 msgctxt "@action:button calculate the checksum"
 msgid "&Calculate"
 msgstr "&Utreken"
 
-#: controllers/view/checksum/checksumview.cpp:83
+#: controllers/view/checksum/checksumview.cpp:81
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Calculate the checksum for the bytes in the selected range."
 msgstr "De Pröövsumm för de Bytes binnen dat utsöchte Rebeet utreken."
 
-#: controllers/view/checksum/checksumview.cpp:85
+#: controllers/view/checksum/checksumview.cpp:83
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -629,32 +629,32 @@ msgstr ""
 "List op all Tekenkeden opfrischt, de dat köörte Rebeet bargt un de tominnst "
 "de fastleggt Längde hebbt."
 
-#: controllers/view/checksum/checksumview.cpp:94
+#: controllers/view/checksum/checksumview.cpp:92
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "No checksum calculated yet."
 msgstr ""
 
-#: controllers/view/crop/cropcontroller.cpp:33
+#: controllers/view/crop/cropcontroller.cpp:31
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Crop"
 msgstr ""
 
-#: controllers/view/crop/cropcontroller.cpp:96
+#: controllers/view/crop/cropcontroller.cpp:94
 #, kde-format
 msgctxt "@item name of the change"
 msgid "Crop"
 msgstr ""
 
-#: controllers/view/filter/filtertool.cpp:63
-#: controllers/view/filter/filtertoolviewfactory.cpp:24
+#: controllers/view/filter/filtertool.cpp:61
+#: controllers/view/filter/filtertoolviewfactory.cpp:22
 #, kde-format
 msgctxt "@title:window"
 msgid "Binary Filter"
 msgstr "Bineerfilter"
 
-#: controllers/view/filter/filtertool.cpp:173
+#: controllers/view/filter/filtertool.cpp:171
 #, kde-format
 msgctxt "@info"
 msgid "1 byte filtered with %2."
@@ -662,37 +662,37 @@ msgid_plural "%1 bytes filtered with %2."
 msgstr[0] ""
 msgstr[1] ""
 
-#: controllers/view/filter/filterview.cpp:45
+#: controllers/view/filter/filterview.cpp:43
 #, kde-format
 msgctxt "@label:listbox operation to use by the filter"
 msgid "Operation:"
 msgstr "Akschoon:"
 
-#: controllers/view/filter/filterview.cpp:52
+#: controllers/view/filter/filterview.cpp:50
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The operation to use for the filter."
 msgstr "De Akschoon för den Filter."
 
-#: controllers/view/filter/filterview.cpp:56
+#: controllers/view/filter/filterview.cpp:54
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Select the operation to use for the filter."
 msgstr "Köör de Filterakschoon."
 
-#: controllers/view/filter/filterview.cpp:85
+#: controllers/view/filter/filterview.cpp:83
 #, kde-format
 msgctxt "@action:button"
 msgid "&Filter"
 msgstr "&Filter"
 
-#: controllers/view/filter/filterview.cpp:88
+#: controllers/view/filter/filterview.cpp:86
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Executes the filter for the bytes in the selected range."
 msgstr "Bruukt den Filter för de Bytes binnen dat utsöchte Rebeet."
 
-#: controllers/view/filter/filterview.cpp:90
+#: controllers/view/filter/filterview.cpp:88
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -704,7 +704,7 @@ msgstr ""
 "utsöchte Akschoon mit de angeven Optschonen för de Bytes binnen dat utsöchte "
 "Rebeet bruukt."
 
-#: controllers/view/gotooffset/gotooffsetcontroller.cpp:32
+#: controllers/view/gotooffset/gotooffsetcontroller.cpp:30
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Go to Offset"
@@ -712,21 +712,21 @@ msgctxt "@action:inmenu"
 msgid "&Go to Offset…"
 msgstr "Na Versetten gahn"
 
-#: controllers/view/gotooffset/gotooffsettool.cpp:50
+#: controllers/view/gotooffset/gotooffsettool.cpp:48
 #, kde-format
 msgctxt "@title:window of the tool to set a new offset for the cursor"
 msgid "Goto"
 msgstr "Gahn"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:56
+#: controllers/view/gotooffset/gotooffsetview.cpp:54
 #, kde-format
 msgctxt "@label:listbox"
 msgid "O&ffset:"
 msgstr "&Versatz:"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:66
-#: controllers/view/selectrange/selectrangeview.cpp:67
-#: controllers/view/selectrange/selectrangeview.cpp:87
+#: controllers/view/gotooffset/gotooffsetview.cpp:64
+#: controllers/view/selectrange/selectrangeview.cpp:65
+#: controllers/view/selectrange/selectrangeview.cpp:85
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Enter an offset to go to, or select a previous offset from the list."
@@ -734,60 +734,60 @@ msgstr ""
 "Giff en Versetten as Jumpteel in, oder köör en verleden Versetten vun de "
 "List."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:82
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:111
+#: controllers/view/gotooffset/gotooffsetview.cpp:80
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:109
 #, kde-format
 msgctxt "@option:check"
 msgid "From c&ursor"
 msgstr "Vun den &Blinker af"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:84
+#: controllers/view/gotooffset/gotooffsetview.cpp:82
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Go relative from the current cursor location and not absolute."
 msgstr "Vun de aktuelle Blinkerpositschoon an relativ gahn, un nich afsoluut."
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:87
+#: controllers/view/gotooffset/gotooffsetview.cpp:85
 #, kde-format
 msgctxt "@option:check"
 msgid "&Extend selection"
 msgstr "Köör &verwiedern"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:89
-#: controllers/view/selectrange/selectrangeview.cpp:109
+#: controllers/view/gotooffset/gotooffsetview.cpp:87
+#: controllers/view/selectrange/selectrangeview.cpp:107
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Extend the selection by the cursor move."
 msgstr "Köör mit Blinkerbewegen verwiedern"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:92
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:114
-#: controllers/view/selectrange/selectrangeview.cpp:101
+#: controllers/view/gotooffset/gotooffsetview.cpp:90
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:112
+#: controllers/view/selectrange/selectrangeview.cpp:99
 #, kde-format
 msgctxt "@option:check"
 msgid "&Backwards"
 msgstr "&Torüch"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:94
-#: controllers/view/selectrange/selectrangeview.cpp:103
+#: controllers/view/gotooffset/gotooffsetview.cpp:92
+#: controllers/view/selectrange/selectrangeview.cpp:101
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Go backwards from the end or the current cursor location."
 msgstr "Vun't Enn oder vun de aktuelle Blinkerpositschoon af torüchgahn"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:109
+#: controllers/view/gotooffset/gotooffsetview.cpp:107
 #, kde-format
 msgctxt "@action:button"
 msgid "&Go"
 msgstr "&Gahn"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:112
+#: controllers/view/gotooffset/gotooffsetview.cpp:110
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Go to the Offset"
 msgstr "Na de Versetten gahn"
 
-#: controllers/view/gotooffset/gotooffsetview.cpp:114
+#: controllers/view/gotooffset/gotooffsetview.cpp:112
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -798,32 +798,32 @@ msgstr ""
 "Blinker binnen dat Dokment na, oder wenn Du dat wullt, üm de baven angeven "
 "Versetten."
 
-#: controllers/view/info/infotool.cpp:36
-#: controllers/view/info/infotoolviewfactory.cpp:24
+#: controllers/view/info/infotool.cpp:34
+#: controllers/view/info/infotoolviewfactory.cpp:22
 #, kde-format
 msgctxt "@title:window"
 msgid "Statistics"
 msgstr "Statistik"
 
-#: controllers/view/info/infoview.cpp:47
+#: controllers/view/info/infoview.cpp:45
 #, kde-format
 msgctxt "@label size of selected bytes"
 msgid "Size:"
 msgstr "Grött:"
 
-#: controllers/view/info/infoview.cpp:52
+#: controllers/view/info/infoview.cpp:50
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The number of the bytes the statistic was built for."
 msgstr "De Tall vun Bytes, för de de Statistik utreekt wöör"
 
-#: controllers/view/info/infoview.cpp:67
+#: controllers/view/info/infoview.cpp:65
 #, kde-format
 msgctxt "@action:button build the statistic of the byte frequency"
 msgid "&Build"
 msgstr "&Utreken"
 
-#: controllers/view/info/infoview.cpp:70
+#: controllers/view/info/infoview.cpp:68
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -831,7 +831,7 @@ msgid ""
 msgstr ""
 "Reekt de Byte-Vörkamenstatistik för de Bytes binnen dat utsöchte Rebeet ut"
 
-#: controllers/view/info/infoview.cpp:72
+#: controllers/view/info/infoview.cpp:70
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -841,8 +841,8 @@ msgstr ""
 "Klickst Du op den Knoop <interface>Utreken</interface>, warrt de Byte-"
 "Vörkamenstatistik för de Bytes binnen dat utsöchte Rebeet utreekt."
 
-#: controllers/view/info/infoview.cpp:122
-#: controllers/view/stringsextract/stringsextractview.cpp:163
+#: controllers/view/info/infoview.cpp:120
+#: controllers/view/stringsextract/stringsextractview.cpp:161
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Copy As"
@@ -850,7 +850,7 @@ msgctxt "@action:button"
 msgid "Copy"
 msgstr "Koperen as"
 
-#: controllers/view/info/infoview.cpp:124
+#: controllers/view/info/infoview.cpp:122
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Copies the selected strings to the clipboard."
@@ -858,7 +858,7 @@ msgctxt "@info:tooltip"
 msgid "Copies the selected statistic lines to the clipboard."
 msgstr "Kopeert markeert Tekenkeden na de Twischenaflaag."
 
-#: controllers/view/info/infoview.cpp:126
+#: controllers/view/info/infoview.cpp:124
 #, fuzzy, kde-kuit-format
 #| msgctxt "@info:whatsthis"
 #| msgid ""
@@ -872,41 +872,41 @@ msgstr ""
 "Wenn Du den Knoop \"<interface>Koperen</interface>\" anklickst, warrt all "
 "köört Tekenkeden vun de List na de Twischenaflaag kopeert."
 
-#: controllers/view/info/infoview.cpp:194
-#: controllers/view/structures/datatypes/datainformation.cpp:60
-#: controllers/view/structures/datatypes/datainformation.cpp:63
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:238
+#: controllers/view/info/infoview.cpp:192
+#: controllers/view/structures/datatypes/datainformation.cpp:59
+#: controllers/view/structures/datatypes/datainformation.cpp:62
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:236
 #, kde-format
 msgid "1 byte"
 msgid_plural "%1 bytes"
 msgstr[0] "1 Byte"
 msgstr[1] "%1 Bytes"
 
-#: controllers/view/info/statistictablemodel.cpp:221
+#: controllers/view/info/statistictablemodel.cpp:219
 #, kde-format
 msgctxt "@title:column count of characters"
 msgid "Count"
 msgstr "Tall"
 
-#: controllers/view/info/statistictablemodel.cpp:222
+#: controllers/view/info/statistictablemodel.cpp:220
 #, kde-format
 msgctxt "@title:column Percent of byte in total"
 msgid "Percent"
 msgstr "Perzent"
 
-#: controllers/view/libbytearraychecksum/algorithm/adler32bytearraychecksumalgorithm.cpp:20
+#: controllers/view/libbytearraychecksum/algorithm/adler32bytearraychecksumalgorithm.cpp:18
 #, kde-format
 msgctxt "name of the checksum algorithm"
 msgid "Adler-32"
 msgstr "Adler-32"
 
-#: controllers/view/libbytearraychecksum/algorithm/crc32bytearraychecksumalgorithm.cpp:67
+#: controllers/view/libbytearraychecksum/algorithm/crc32bytearraychecksumalgorithm.cpp:65
 #, kde-format
 msgctxt "name of the checksum algorithm, Cyclic Redundancy Check 32"
 msgid "CRC-32"
 msgstr "CRC-32"
 
-#: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumalgorithm.cpp:82
+#: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumalgorithm.cpp:80
 #, fuzzy, kde-format
 #| msgctxt "name of the checksum algorithm, Cyclic Redundancy Check 32"
 #| msgid "CRC-32"
@@ -914,84 +914,84 @@ msgctxt "name of the checksum algorithm, Cyclic Redundancy Check 64"
 msgid "CRC-64"
 msgstr "CRC-32"
 
-#: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:28
+#: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:26
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "ECMA-182"
 msgstr ""
 
-#: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:29
+#: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:27
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "ISO 3309"
 msgstr ""
 
-#: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:35
+#: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:33
 #, kde-format
 msgctxt "@label:listbox variant used to select the CRC-64 variant"
 msgid "CRC-64 variant:"
 msgstr ""
 
-#: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:38
+#: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:36
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "CRC-64 variant used by calculation."
 msgstr ""
 
-#: controllers/view/libbytearraychecksum/algorithm/modsum16bytearraychecksumalgorithm.cpp:23
+#: controllers/view/libbytearraychecksum/algorithm/modsum16bytearraychecksumalgorithm.cpp:21
 #, kde-format
 msgctxt "name of the checksum algorithm"
 msgid "Modular sum 16-bit"
 msgstr "Modulo-Summ 16 Bits"
 
-#: controllers/view/libbytearraychecksum/algorithm/modsum32bytearraychecksumalgorithm.cpp:23
+#: controllers/view/libbytearraychecksum/algorithm/modsum32bytearraychecksumalgorithm.cpp:21
 #, kde-format
 msgctxt "name of the checksum algorithm"
 msgid "Modular sum 32-bit"
 msgstr "Modulo-Summ 32 Bits"
 
-#: controllers/view/libbytearraychecksum/algorithm/modsum64bytearraychecksumalgorithm.cpp:23
+#: controllers/view/libbytearraychecksum/algorithm/modsum64bytearraychecksumalgorithm.cpp:21
 #, kde-format
 msgctxt "name of the checksum algorithm"
 msgid "Modular sum 64-bit"
 msgstr "Modulo-Summ 64 Bits"
 
-#: controllers/view/libbytearraychecksum/algorithm/modsum8bytearraychecksumalgorithm.cpp:20
+#: controllers/view/libbytearraychecksum/algorithm/modsum8bytearraychecksumalgorithm.cpp:18
 #, kde-format
 msgctxt "name of the checksum algorithm"
 msgid "Modular sum 8-bit"
 msgstr "Modulo-Summ 8 Bits"
 
-#: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:28
-#: controllers/view/poddecoder/podtableview.cpp:88
+#: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:26
+#: controllers/view/poddecoder/podtableview.cpp:86
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Big-endian"
 msgstr "Big-Endian"
 
-#: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:29
-#: controllers/view/poddecoder/podtableview.cpp:89
+#: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:27
+#: controllers/view/poddecoder/podtableview.cpp:87
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Little-endian"
 msgstr "Little-Endian"
 
-#: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:35
+#: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:33
 #, kde-format
 msgctxt ""
 "@label:listbox byte order to use for decoding the bytes into integer values"
 msgid "Byte Order:"
 msgstr "Byte-Reeg:"
 
-#: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:38
+#: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:36
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte order to use for decoding the bytes into integer values."
 msgstr ""
 "De Byte-Reeg, de Du bi't Dekoderen vun Bytes as Heeltallen bruken wullt."
 
-#: controllers/view/libbytearraychecksum/algorithm/nobytearraychecksumparametersetedit.cpp:25
-#: controllers/view/libbytearrayfilter/filter/nobytearrayfilterparametersetedit.cpp:25
+#: controllers/view/libbytearraychecksum/algorithm/nobytearraychecksumparametersetedit.cpp:23
+#: controllers/view/libbytearrayfilter/filter/nobytearrayfilterparametersetedit.cpp:23
 #, fuzzy, kde-format
 #| msgctxt "@title:group"
 #| msgid "Parameters"
@@ -999,49 +999,49 @@ msgctxt "@info"
 msgid "No parameters"
 msgstr "Parameters"
 
-#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:48
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:46
 #, kde-format
 msgctxt "name of the hash algorithm"
 msgid "MD4"
 msgstr "MD4"
 
-#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:50
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:48
 #, kde-format
 msgctxt "name of the hash algorithm"
 msgid "MD5"
 msgstr "MD5"
 
-#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:53
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:51
 #, kde-format
 msgctxt "name of the hash algorithm"
 msgid "SHA-1"
 msgstr "SHA-1"
 
-#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:56
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:54
 #, kde-format
 msgctxt "name of the hash algorithm"
 msgid "SHA-224"
 msgstr "SHA-224"
 
-#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:58
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:56
 #, kde-format
 msgctxt "name of the hash algorithm"
 msgid "SHA-256"
 msgstr "SHA-256"
 
-#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:60
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:58
 #, kde-format
 msgctxt "name of the hash algorithm"
 msgid "SHA-384"
 msgstr "SHA-384"
 
-#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:62
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:60
 #, kde-format
 msgctxt "name of the hash algorithm"
 msgid "SHA-512"
 msgstr "SHA-512"
 
-#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:64
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:62
 #, fuzzy, kde-format
 #| msgctxt "name of the hash algorithm"
 #| msgid "SHA-224"
@@ -1049,7 +1049,7 @@ msgctxt "name of the hash algorithm"
 msgid "SHA3-224"
 msgstr "SHA-224"
 
-#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:66
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:64
 #, fuzzy, kde-format
 #| msgctxt "name of the hash algorithm"
 #| msgid "SHA-256"
@@ -1057,7 +1057,7 @@ msgctxt "name of the hash algorithm"
 msgid "SHA3-256"
 msgstr "SHA-256"
 
-#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:68
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:66
 #, fuzzy, kde-format
 #| msgctxt "name of the hash algorithm"
 #| msgid "SHA-384"
@@ -1065,7 +1065,7 @@ msgctxt "name of the hash algorithm"
 msgid "SHA3-384"
 msgstr "SHA-384"
 
-#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:70
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:68
 #, fuzzy, kde-format
 #| msgctxt "name of the hash algorithm"
 #| msgid "SHA-512"
@@ -1073,37 +1073,37 @@ msgctxt "name of the hash algorithm"
 msgid "SHA3-512"
 msgstr "SHA-512"
 
-#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:72
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:70
 #, kde-format
 msgctxt "name of the hash algorithm"
 msgid "Keccak-224"
 msgstr ""
 
-#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:74
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:72
 #, kde-format
 msgctxt "name of the hash algorithm"
 msgid "Keccak-256"
 msgstr ""
 
-#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:76
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:74
 #, kde-format
 msgctxt "name of the hash algorithm"
 msgid "Keccak-384"
 msgstr ""
 
-#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:78
+#: controllers/view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp:76
 #, kde-format
 msgctxt "name of the hash algorithm"
 msgid "Keccak-512"
 msgstr ""
 
-#: controllers/view/libbytearrayfilter/filter/andbytearrayfilter.cpp:22
+#: controllers/view/libbytearrayfilter/filter/andbytearrayfilter.cpp:20
 #, kde-format
 msgctxt "name of the filter; it does a logic AND operation"
 msgid "operand AND data"
 msgstr "Operand AND Daten"
 
-#: controllers/view/libbytearrayfilter/filter/invertbytearrayfilter.cpp:19
+#: controllers/view/libbytearrayfilter/filter/invertbytearrayfilter.cpp:17
 #, fuzzy, kde-format
 #| msgctxt ""
 #| "name of the filter; it switches all bits from 0 to 1 and 1 to 0 "
@@ -1115,31 +1115,31 @@ msgctxt ""
 msgid "INVERT data"
 msgstr "Daten ümkehren"
 
-#: controllers/view/libbytearrayfilter/filter/operandbytearrayfilterparametersetedit.cpp:31
+#: controllers/view/libbytearrayfilter/filter/operandbytearrayfilterparametersetedit.cpp:29
 #, kde-format
 msgctxt "@label:textbox operand to the arithmetic filter function"
 msgid "Operand:"
 msgstr "Operand:"
 
-#: controllers/view/libbytearrayfilter/filter/operandbytearrayfilterparametersetedit.cpp:41
+#: controllers/view/libbytearrayfilter/filter/operandbytearrayfilterparametersetedit.cpp:39
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The operand to do the operation with."
 msgstr "De Operand för de Akschoon"
 
-#: controllers/view/libbytearrayfilter/filter/operandbytearrayfilterparametersetedit.cpp:44
+#: controllers/view/libbytearrayfilter/filter/operandbytearrayfilterparametersetedit.cpp:42
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Enter an operand, or select a previous operand from the list."
 msgstr "Giff en Operand in, oder köör en verleden Operand vun de List."
 
-#: controllers/view/libbytearrayfilter/filter/operandbytearrayfilterparametersetedit.cpp:52
+#: controllers/view/libbytearrayfilter/filter/operandbytearrayfilterparametersetedit.cpp:50
 #, kde-format
 msgctxt "@option:check"
 msgid "Align at end:"
 msgstr "Na't Enn utrichten:"
 
-#: controllers/view/libbytearrayfilter/filter/operandbytearrayfilterparametersetedit.cpp:59
+#: controllers/view/libbytearrayfilter/filter/operandbytearrayfilterparametersetedit.cpp:57
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1149,19 +1149,19 @@ msgstr ""
 "Leggt fast, wat de Akschoon sik na't Enn vun de Daten utricht, oder na den "
 "Anfang."
 
-#: controllers/view/libbytearrayfilter/filter/operandbytearrayfilterparametersetedit.cpp:62
+#: controllers/view/libbytearrayfilter/filter/operandbytearrayfilterparametersetedit.cpp:60
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "If set, the operation will be aligned to the end of the data."
 msgstr "Wenn anmaakt, richt sik de Akschoon na't Enn vun de Daten ut."
 
-#: controllers/view/libbytearrayfilter/filter/orbytearrayfilter.cpp:22
+#: controllers/view/libbytearrayfilter/filter/orbytearrayfilter.cpp:20
 #, kde-format
 msgctxt "name of the filter; it does a logic OR operation"
 msgid "operand OR data"
 msgstr "Operand OR Daten"
 
-#: controllers/view/libbytearrayfilter/filter/reversebytearrayfilter.cpp:22
+#: controllers/view/libbytearrayfilter/filter/reversebytearrayfilter.cpp:20
 #, kde-format
 msgctxt ""
 "name of the filter; it changes the order of the bytes/bits to backwards, so "
@@ -1169,19 +1169,19 @@ msgctxt ""
 msgid "REVERSE data"
 msgstr "Daten ümdreihen"
 
-#: controllers/view/libbytearrayfilter/filter/reversebytearrayfilterparametersetedit.cpp:29
+#: controllers/view/libbytearrayfilter/filter/reversebytearrayfilterparametersetedit.cpp:27
 #, kde-format
 msgctxt "@option:check"
 msgid "Reverse also bits:"
 msgstr "Ok Bits ümdreihen:"
 
-#: controllers/view/libbytearrayfilter/filter/reversebytearrayfilterparametersetedit.cpp:36
+#: controllers/view/libbytearrayfilter/filter/reversebytearrayfilterparametersetedit.cpp:34
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "If set, the bits are arranged in reverse order as well."
 msgstr "Wenn anmaakt, warrt ok de Bitreeg ümdreiht."
 
-#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilter.cpp:26
+#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilter.cpp:24
 #, kde-format
 msgctxt ""
 "name of the filter; it moves the bits and pushes the ones over the end to "
@@ -1189,7 +1189,7 @@ msgctxt ""
 msgid "ROTATE data"
 msgstr "Daten dreihen"
 
-#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilterparametersetedit.cpp:36
+#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilterparametersetedit.cpp:34
 #, fuzzy, kde-format
 #| msgctxt "@label:spinbox number of bytes the movement is done within"
 #| msgid "&Group size:"
@@ -1197,19 +1197,19 @@ msgctxt "@label:spinbox number of bytes the movement is done within"
 msgid "&Group size (bytes):"
 msgstr "&Koppelgrött:"
 
-#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilterparametersetedit.cpp:39
+#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilterparametersetedit.cpp:37
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The number of bytes within which each movement is made."
 msgstr "De Tall vun Bytes, binnen de elkeen Verschuven utföhrt warrt."
 
-#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilterparametersetedit.cpp:43
+#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilterparametersetedit.cpp:41
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Control the number of bytes within which each movement is made."
 msgstr "De Tall vun Bytes stüern, binnen de elkeen Verschuven utföhrt warrt."
 
-#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilterparametersetedit.cpp:57
+#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilterparametersetedit.cpp:55
 #, fuzzy, kde-format
 #| msgctxt "@label:spinbox width (in number of bits) the bits are moved"
 #| msgid "S&hift width:"
@@ -1217,7 +1217,7 @@ msgctxt "@label:spinbox width (in number of bits) the bits are moved"
 msgid "S&hift width (bits):"
 msgstr "&Verschuuv-Breed:"
 
-#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilterparametersetedit.cpp:60
+#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilterparametersetedit.cpp:58
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1227,7 +1227,7 @@ msgstr ""
 "De Verschuven-Breed. Positiev Tallen verschuuvt de Bits na rechts, negatiev "
 "Tallen na links."
 
-#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilterparametersetedit.cpp:64
+#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilterparametersetedit.cpp:62
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1237,104 +1237,104 @@ msgstr ""
 "Verschuven-Breed stüern. Positiv Tallen verschuuvt de Bits na rechts, "
 "negativ Tallen na links."
 
-#: controllers/view/libbytearrayfilter/filter/shiftbytearrayfilter.cpp:27
+#: controllers/view/libbytearrayfilter/filter/shiftbytearrayfilter.cpp:25
 #, kde-format
 msgctxt "name of the filter; it moves the bits, setting freed ones to zero"
 msgid "SHIFT data"
 msgstr "Daten verschuven"
 
-#: controllers/view/libbytearrayfilter/filter/xorbytearrayfilter.cpp:22
+#: controllers/view/libbytearrayfilter/filter/xorbytearrayfilter.cpp:20
 #, kde-format
 msgctxt "name of the filter; it does a logic XOR operation"
 msgid "operand XOR data"
 msgstr "Operand XOR Daten"
 
-#: controllers/view/libdatatypecodecs/binary8codec.cpp:21
+#: controllers/view/libdatatypecodecs/binary8codec.cpp:19
 #, kde-format
 msgctxt "@label:textbox encoding of one byte as value in the binary format"
 msgid "Binary 8-bit"
 msgstr "8 Bits bineer"
 
-#: controllers/view/libdatatypecodecs/char8codec.cpp:24
+#: controllers/view/libdatatypecodecs/char8codec.cpp:22
 #, kde-format
 msgctxt "@label:textbox encoding of one byte as character"
 msgid "Character 8-bit"
 msgstr "8 Bits Teken"
 
-#: controllers/view/libdatatypecodecs/float32codec.cpp:21
+#: controllers/view/libdatatypecodecs/float32codec.cpp:19
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Float 32-bit"
 msgstr "32 Bits Fleetkomma"
 
-#: controllers/view/libdatatypecodecs/float64codec.cpp:21
+#: controllers/view/libdatatypecodecs/float64codec.cpp:19
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Float 64-bit"
 msgstr "64 Bits Fleetkomma"
 
-#: controllers/view/libdatatypecodecs/hexadecimal8codec.cpp:21
+#: controllers/view/libdatatypecodecs/hexadecimal8codec.cpp:19
 #, kde-format
 msgctxt ""
 "@label:textbox encoding of one byte as value in the hexadecimal format"
 msgid "Hexadecimal 8-bit"
 msgstr "8 Bits hexadezimaal"
 
-#: controllers/view/libdatatypecodecs/octal8codec.cpp:21
+#: controllers/view/libdatatypecodecs/octal8codec.cpp:19
 #, kde-format
 msgctxt "@label:textbox encoding of one byte as value in the octal format"
 msgid "Octal 8-bit"
 msgstr "8 Bits oktaal"
 
-#: controllers/view/libdatatypecodecs/sint16codec.cpp:21
+#: controllers/view/libdatatypecodecs/sint16codec.cpp:19
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Signed 16-bit"
 msgstr "16 Bits mit Vörteken"
 
-#: controllers/view/libdatatypecodecs/sint32codec.cpp:21
+#: controllers/view/libdatatypecodecs/sint32codec.cpp:19
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Signed 32-bit"
 msgstr "32 Bits mit Vörteken"
 
-#: controllers/view/libdatatypecodecs/sint64codec.cpp:21
+#: controllers/view/libdatatypecodecs/sint64codec.cpp:19
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Signed 64-bit"
 msgstr "64 Bits mit Vörteken"
 
-#: controllers/view/libdatatypecodecs/sint8codec.cpp:21
+#: controllers/view/libdatatypecodecs/sint8codec.cpp:19
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Signed 8-bit"
 msgstr "8 Bits mit Vörteken"
 
-#: controllers/view/libdatatypecodecs/uint16codec.cpp:21
+#: controllers/view/libdatatypecodecs/uint16codec.cpp:19
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Unsigned 16-bit"
 msgstr "16 Bits ahn Vörteken"
 
-#: controllers/view/libdatatypecodecs/uint32codec.cpp:21
+#: controllers/view/libdatatypecodecs/uint32codec.cpp:19
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Unsigned 32-bit"
 msgstr "32 Bits ahn Vörteken"
 
-#: controllers/view/libdatatypecodecs/uint64codec.cpp:21
+#: controllers/view/libdatatypecodecs/uint64codec.cpp:19
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Unsigned 64-bit"
 msgstr "64 Bits ahn Vörteken"
 
-#: controllers/view/libdatatypecodecs/uint8codec.cpp:21
+#: controllers/view/libdatatypecodecs/uint8codec.cpp:19
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Unsigned 8-bit"
 msgstr "8 Bits ahn Vörteken"
 
-#: controllers/view/libdatatypecodecs/utf16codec.cpp:25
+#: controllers/view/libdatatypecodecs/utf16codec.cpp:23
 #, fuzzy, kde-format
 #| msgctxt "@label:textbox"
 #| msgid "UTF-16:"
@@ -1342,21 +1342,21 @@ msgctxt "@label:textbox"
 msgid "UTF-16"
 msgstr "UTF-16:"
 
-#: controllers/view/libdatatypecodecs/utf8codec.cpp:23
+#: controllers/view/libdatatypecodecs/utf8codec.cpp:21
 #, kde-format
 msgctxt "@label:textbox"
 msgid "UTF-8"
 msgstr "UTF-8"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:71
-#: controllers/view/search/searchcontroller.cpp:114
-#: controllers/view/search/searchcontroller.cpp:122
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:69
+#: controllers/view/search/searchcontroller.cpp:112
+#: controllers/view/search/searchcontroller.cpp:120
 #, kde-format
 msgctxt "@title:window"
 msgid "Find"
 msgstr "Söken"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:83
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:81
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1365,19 +1365,19 @@ msgid ""
 msgstr ""
 "Giff de Bytes för de Söök in, oder köör verleden bruukt Bytes vun de List."
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:101
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:99
 #, kde-format
 msgctxt "@title:group"
 msgid "Options"
 msgstr "Optschonen"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:106
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:104
 #, kde-format
 msgctxt "@option:check"
 msgid "C&ase sensitive"
 msgstr "Grootschrieven be&achten"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:107
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:105
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1387,43 +1387,43 @@ msgstr ""
 "Bi't Söken op Grootschrieven oppassen: Dat Muster \"Klaas\" passt nich op "
 "\"klaas\" oder op \"KLAAS\", bloots op \"Klaas\"."
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:109
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:107
 #, kde-format
 msgctxt "@option:check"
 msgid "&Whole words only"
 msgstr "&Bloots hele Wöör"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:110
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:108
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Require word boundaries in both ends of a match to succeed."
 msgstr "Woortgrenzen deit op beed Sieden vun en passen Steed noot."
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:112
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:110
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Start searching at the current cursor location rather than at the top."
 msgstr "De Söök bi de aktuelle Blinkerpositschoon starten, nich an'n Anfang."
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:115
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:113
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Replace backwards."
 msgstr "Na baven utwesseln"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:116
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:114
 #, kde-format
 msgctxt "@option:check"
 msgid "&Selected bytes"
 msgstr "&Utsöcht Bytes"
 
-#: controllers/view/libfinddialog/abstractfinddialog.cpp:117
+#: controllers/view/libfinddialog/abstractfinddialog.cpp:115
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Only search within the current selection."
 msgstr "Bloots binnen de aktuelle Markeren söken."
 
-#: controllers/view/overwritemode/overwritemodecontroller.cpp:26
+#: controllers/view/overwritemode/overwritemodecontroller.cpp:24
 #, fuzzy, kde-format
 #| msgctxt "@option:check"
 #| msgid "Overwrite Mode"
@@ -1431,7 +1431,7 @@ msgctxt "@option:check set the view into overwrite mode"
 msgid "Overwr&ite Mode"
 msgstr "Överschrievbedrief"
 
-#: controllers/view/overwritemode/overwritemodecontroller.cpp:29
+#: controllers/view/overwritemode/overwritemodecontroller.cpp:27
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1440,14 +1440,14 @@ msgid ""
 msgstr ""
 "Utsöken, wat Du de Ingaav infögen oder vörhannen Daten överschrieven wullt."
 
-#: controllers/view/poddecoder/poddecodertool.cpp:94
-#: controllers/view/poddecoder/poddecodertoolviewfactory.cpp:27
+#: controllers/view/poddecoder/poddecodertool.cpp:92
+#: controllers/view/poddecoder/poddecodertoolviewfactory.cpp:25
 #, kde-format
 msgctxt "@title:window"
 msgid "Decoding Table"
 msgstr "Dekodeertabell"
 
-#: controllers/view/poddecoder/poddecodertool.cpp:309
+#: controllers/view/poddecoder/poddecodertool.cpp:307
 #, fuzzy, kde-format
 #| msgctxt "Edited as %datatype"
 #| msgid "Edited as %1"
@@ -1455,7 +1455,7 @@ msgctxt "@item Edited as datatype"
 msgid "Edited as %1"
 msgstr "Bewerkt as %1"
 
-#: controllers/view/poddecoder/poddecodertool.cpp:318
+#: controllers/view/poddecoder/poddecodertool.cpp:316
 #, fuzzy, kde-format
 #| msgctxt "Edited as %datatype"
 #| msgid "Edited as %1"
@@ -1463,43 +1463,43 @@ msgctxt "@info Edited as datatype"
 msgid "Edited as %1"
 msgstr "Bewerkt as %1"
 
-#: controllers/view/poddecoder/podtablemodel.cpp:150
+#: controllers/view/poddecoder/podtablemodel.cpp:148
 #, kde-format
 msgctxt "@title:column name of the datatype"
 msgid "Type"
 msgstr "Typ"
 
-#: controllers/view/poddecoder/podtablemodel.cpp:151
+#: controllers/view/poddecoder/podtablemodel.cpp:149
 #, kde-format
 msgctxt "@title:column value of the bytes for the datatype"
 msgid "Value"
 msgstr "Weert"
 
-#: controllers/view/poddecoder/podtablemodel.cpp:157
+#: controllers/view/poddecoder/podtablemodel.cpp:155
 #, kde-format
 msgctxt "@info:tooltip for column Type"
 msgid "The type of data"
 msgstr "De Datentyp"
 
-#: controllers/view/poddecoder/podtablemodel.cpp:159
+#: controllers/view/poddecoder/podtablemodel.cpp:157
 #, kde-format
 msgctxt "@info:tooltip for column Value"
 msgid "The value of the bytes for the datatype"
 msgstr "De Bytes ehr Weert för den Datentyp"
 
-#: controllers/view/poddecoder/podtableview.cpp:95
+#: controllers/view/poddecoder/podtableview.cpp:93
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte order to use for decoding the bytes."
 msgstr "De Byte-Reeg, de Du bi't Dekoderen vun de Bytes bruken wullt."
 
-#: controllers/view/poddecoder/podtableview.cpp:99
+#: controllers/view/poddecoder/podtableview.cpp:97
 #, kde-format
 msgctxt "@option:check"
 msgid "Unsigned as hexadecimal:"
 msgstr "Ahn Vörteken as Hexadezimaal:"
 
-#: controllers/view/poddecoder/podtableview.cpp:108
+#: controllers/view/poddecoder/podtableview.cpp:106
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1509,7 +1509,7 @@ msgstr ""
 "Leggt fast, wat de Weerten vun de Heeltall-Typen ahn Vörteken as Hex-Tallen "
 "ansteed vun Dezimaaltallen wiest warrt."
 
-#: controllers/view/poddecoder/podtableview.cpp:138
+#: controllers/view/poddecoder/podtableview.cpp:136
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1519,19 +1519,19 @@ msgstr ""
 "De niege Weert bruukt <emphasis>weniger</emphasis> Bytes (%1 ansteed vun %2)."
 "<nl/>Wullt Du nich bruukt Bytes wohren oder wegdoon?"
 
-#: controllers/view/poddecoder/podtableview.cpp:143
+#: controllers/view/poddecoder/podtableview.cpp:141
 #, kde-format
 msgctxt "@action:button keep the unused bytes"
 msgid "&Keep"
 msgstr "&Wohren"
 
-#: controllers/view/poddecoder/podtableview.cpp:146
+#: controllers/view/poddecoder/podtableview.cpp:144
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Keep the unused bytes with their old values."
 msgstr "Nich bruukt Bytes un ehr ole Weerten wohren"
 
-#: controllers/view/poddecoder/podtableview.cpp:163
+#: controllers/view/poddecoder/podtableview.cpp:161
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1541,8 +1541,8 @@ msgstr ""
 "De niege Weert bruukt <emphasis>mehr</emphasis> Bytes (%1 ansteed vun %2)."
 "<nl/>Wullt Du disse Bytes överschrieven oder niege infögen, wenn nödig?"
 
-#: controllers/view/poddecoder/podtableview.cpp:258
-#: controllers/view/structures/structureview.cpp:372
+#: controllers/view/poddecoder/podtableview.cpp:256
+#: controllers/view/structures/structureview.cpp:368
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "&Edit..."
@@ -1550,8 +1550,8 @@ msgctxt "@action:inmenu"
 msgid "Edit"
 msgstr "B&ewerken..."
 
-#: controllers/view/poddecoder/podtableview.cpp:271
-#: controllers/view/structures/structureview.cpp:395
+#: controllers/view/poddecoder/podtableview.cpp:269
+#: controllers/view/structures/structureview.cpp:391
 #, fuzzy, kde-format
 #| msgctxt "@title:window of the tool to select a range"
 #| msgid "Select"
@@ -1559,53 +1559,53 @@ msgctxt "@action:inmenu"
 msgid "Select"
 msgstr "Utsöken"
 
-#: controllers/view/print/printtool.cpp:280
-#: controllers/view/print/printtool.cpp:310
+#: controllers/view/print/printtool.cpp:278
+#: controllers/view/print/printtool.cpp:308
 #, kde-format
 msgctxt "@title:window"
 msgid "Print Byte Array %1"
 msgstr "Byte-Rebeet \"%1\" drucken"
 
-#: controllers/view/print/printtool.cpp:305
+#: controllers/view/print/printtool.cpp:303
 #, kde-format
 msgctxt "@info"
 msgid "Could not print."
 msgstr "Drucken nich mööglich."
 
-#: controllers/view/print/printtool.cpp:341
+#: controllers/view/print/printtool.cpp:339
 #, kde-format
 msgctxt "in the header of the printed page, e.g. Page 2 of 20"
 msgid "Page %p of %P"
 msgstr "Siet %p vun %P"
 
-#: controllers/view/print/printtool.cpp:347
+#: controllers/view/print/printtool.cpp:345
 #, kde-format
 msgctxt "in the footer of the printed page, e.g. Printed by: Joe User"
 msgid "Printed by: %U"
 msgstr "Druckt vun: %U"
 
-#: controllers/view/replace/replacecontroller.cpp:74
-#: controllers/view/replace/replacecontroller.cpp:90
+#: controllers/view/replace/replacecontroller.cpp:72
+#: controllers/view/replace/replacecontroller.cpp:88
 #, kde-format
 msgctxt "@title:window"
 msgid "Replace"
 msgstr "Utwesseln"
 
-#: controllers/view/replace/replacecontroller.cpp:78
+#: controllers/view/replace/replacecontroller.cpp:76
 #, kde-format
 msgctxt "@info"
 msgid "Replace pattern not found in byte array."
 msgstr "Utwesselmuster nich binnen Byte-Rebeet funnen."
 
-#: controllers/view/replace/replacecontroller.cpp:81
-#: controllers/view/replace/replacecontroller.cpp:92
+#: controllers/view/replace/replacecontroller.cpp:79
+#: controllers/view/replace/replacecontroller.cpp:90
 #, kde-format
 msgctxt "@info"
 msgid "No replacements made."
 msgstr "Nix utwesselt."
 
-#: controllers/view/replace/replacecontroller.cpp:82
-#: controllers/view/replace/replacecontroller.cpp:93
+#: controllers/view/replace/replacecontroller.cpp:80
+#: controllers/view/replace/replacecontroller.cpp:91
 #, kde-format
 msgctxt "@info"
 msgid "1 replacement made."
@@ -1613,39 +1613,39 @@ msgid_plural "%1 replacements made."
 msgstr[0] "1 Vörkamen utwesselt."
 msgstr[1] "%1 Vörkamen utwesselt."
 
-#: controllers/view/replace/replacecontroller.cpp:95
-#: controllers/view/search/searchcontroller.cpp:124
+#: controllers/view/replace/replacecontroller.cpp:93
+#: controllers/view/search/searchcontroller.cpp:122
 #, kde-kuit-format
 msgctxt "@info"
 msgid "End of byte array reached.<nl/>Continue from the beginning?"
 msgstr "Bi't Enn vun't Byterebeet anlangt.<nl/>Bi den Anfang wiedermaken?"
 
-#: controllers/view/replace/replacecontroller.cpp:96
-#: controllers/view/search/searchcontroller.cpp:125
+#: controllers/view/replace/replacecontroller.cpp:94
+#: controllers/view/search/searchcontroller.cpp:123
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Beginning of byte array reached.<nl/>Continue from the end?"
 msgstr "Bi den Anfang vun't Byterebeet anlangt.<nl/>Bi't Enn wiedermaken?"
 
-#: controllers/view/replace/replacedialog.cpp:32
+#: controllers/view/replace/replacedialog.cpp:30
 #, kde-format
 msgctxt "@title:window"
 msgid "Replace Bytes"
 msgstr "Bytes utwesseln"
 
-#: controllers/view/replace/replacedialog.cpp:34
+#: controllers/view/replace/replacedialog.cpp:32
 #, kde-format
 msgctxt "@action;button"
 msgid "&Replace"
 msgstr "&Utwesseln"
 
-#: controllers/view/replace/replacedialog.cpp:36
+#: controllers/view/replace/replacedialog.cpp:34
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Start replace"
 msgstr "Utwesseln starten"
 
-#: controllers/view/replace/replacedialog.cpp:38
+#: controllers/view/replace/replacedialog.cpp:36
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1657,13 +1657,13 @@ msgstr ""
 "dat Byterebeet na de baven ingeven Bytes söcht, un elk Vörkamen dör de "
 "Tuuschbytes utwesselt."
 
-#: controllers/view/replace/replacedialog.cpp:46
+#: controllers/view/replace/replacedialog.cpp:44
 #, kde-format
 msgctxt "@title:group"
 msgid "Replace With"
 msgstr "Utwesseln mit"
 
-#: controllers/view/replace/replacedialog.cpp:53
+#: controllers/view/replace/replacedialog.cpp:51
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1673,73 +1673,73 @@ msgstr ""
 "Giff de Bytes för't Inwesseln in, oder köör vördem för't Inwesseln bruukt "
 "Bytes vun de List."
 
-#: controllers/view/replace/replacedialog.cpp:62
+#: controllers/view/replace/replacedialog.cpp:60
 #, kde-format
 msgctxt "@option:check"
 msgid "&Prompt on replace"
 msgstr "&Ehr't Utwesseln nafragen"
 
-#: controllers/view/replace/replacedialog.cpp:63
+#: controllers/view/replace/replacedialog.cpp:61
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Ask before replacing each match found."
 msgstr "Fraagt na, wat en passen Steed utwesselt warrn schall."
 
-#: controllers/view/replace/replaceprompt.cpp:24
+#: controllers/view/replace/replaceprompt.cpp:22
 #, kde-format
 msgctxt "@title:window prompt for iterative replacement"
 msgid "Replace"
 msgstr "Utwesseln"
 
-#: controllers/view/replace/replaceprompt.cpp:28
+#: controllers/view/replace/replaceprompt.cpp:26
 #, kde-format
 msgctxt "@action:button"
 msgid "Replace &All"
 msgstr "&All utwesseln"
 
-#: controllers/view/replace/replaceprompt.cpp:31
+#: controllers/view/replace/replaceprompt.cpp:29
 #, kde-format
 msgctxt "@action:button"
 msgid "&Skip"
 msgstr "Ö&vergahn"
 
-#: controllers/view/replace/replaceprompt.cpp:34
+#: controllers/view/replace/replaceprompt.cpp:32
 #, kde-format
 msgctxt "@action:button"
 msgid "Replace"
 msgstr "Utwesseln"
 
-#: controllers/view/replace/replacetool.cpp:51
+#: controllers/view/replace/replacetool.cpp:49
 #, kde-format
 msgctxt "@title"
 msgid "Replace"
 msgstr "Utwesseln"
 
-#: controllers/view/search/searchcontroller.cpp:115
+#: controllers/view/search/searchcontroller.cpp:113
 #, kde-format
 msgctxt "@info"
 msgid "Search key not found in byte array."
 msgstr "Söökslötel binnen dat Byte-Rebeet nich funnen."
 
-#: controllers/view/search/searchdialog.cpp:28
+#: controllers/view/search/searchdialog.cpp:26
 #, kde-format
 msgctxt "@title:window"
 msgid "Find Bytes"
 msgstr "Bytes söken"
 
-#: controllers/view/search/searchdialog.cpp:30
+#: controllers/view/search/searchdialog.cpp:28
 #, kde-format
 msgctxt "@action:button"
 msgid "&Find"
 msgstr "&Söken"
 
-#: controllers/view/search/searchdialog.cpp:32
+#: controllers/view/search/searchdialog.cpp:30
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Start searching"
 msgstr "Söök starten"
 
-#: controllers/view/search/searchdialog.cpp:34
+#: controllers/view/search/searchdialog.cpp:32
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1749,13 +1749,13 @@ msgstr ""
 "Wenn Du den Knoop \"<interface>Söken</interface>\" anklickst, warrt de baven "
 "ingeven Bytes binnen dat Byte-Rebeet söcht."
 
-#: controllers/view/search/searchtool.cpp:53
+#: controllers/view/search/searchtool.cpp:51
 #, kde-format
 msgctxt "@title"
 msgid "Search"
 msgstr "Söken"
 
-#: controllers/view/selectrange/selectrangecontroller.cpp:33
+#: controllers/view/selectrange/selectrangecontroller.cpp:31
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "&Select range..."
@@ -1763,43 +1763,43 @@ msgctxt "@action:inmenu"
 msgid "&Select Range…"
 msgstr "Rebeet &utsöken..."
 
-#: controllers/view/selectrange/selectrangetool.cpp:61
+#: controllers/view/selectrange/selectrangetool.cpp:59
 #, kde-format
 msgctxt "@title:window of the tool to select a range"
 msgid "Select"
 msgstr "Utsöken"
 
-#: controllers/view/selectrange/selectrangeview.cpp:61
+#: controllers/view/selectrange/selectrangeview.cpp:59
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Start offset:"
 msgstr "Start-Versetten:"
 
-#: controllers/view/selectrange/selectrangeview.cpp:81
+#: controllers/view/selectrange/selectrangeview.cpp:79
 #, kde-format
 msgctxt "@label:listbox"
 msgid "End offset:"
 msgstr "Enn-Versetten:"
 
-#: controllers/view/selectrange/selectrangeview.cpp:107
+#: controllers/view/selectrange/selectrangeview.cpp:105
 #, kde-format
 msgctxt "@option:check"
 msgid "End relative"
 msgstr "Relatiev Enn"
 
-#: controllers/view/selectrange/selectrangeview.cpp:125
+#: controllers/view/selectrange/selectrangeview.cpp:123
 #, kde-format
 msgctxt "@action:button"
 msgid "&Select"
 msgstr "&Utsöken"
 
-#: controllers/view/selectrange/selectrangeview.cpp:128
+#: controllers/view/selectrange/selectrangeview.cpp:126
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the range."
 msgstr "Dat Rebeet utsöken"
 
-#: controllers/view/selectrange/selectrangeview.cpp:130
+#: controllers/view/selectrange/selectrangeview.cpp:128
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1810,44 +1810,44 @@ msgstr ""
 "Blinker binnen dat Dokment na, oder wenn Du dat wullt, üm de baven angeven "
 "Versetten."
 
-#: controllers/view/stringsextract/containedstringtablemodel.cpp:118
+#: controllers/view/stringsextract/containedstringtablemodel.cpp:116
 #, kde-format
 msgctxt "@title:column offset of the extracted string"
 msgid "Offset"
 msgstr "Versetten:"
 
-#: controllers/view/stringsextract/containedstringtablemodel.cpp:119
+#: controllers/view/stringsextract/containedstringtablemodel.cpp:117
 #, kde-format
 msgctxt "@title:column string extracted from the byte array"
 msgid "String"
 msgstr "Tekenkeed"
 
-#: controllers/view/stringsextract/stringsextracttool.cpp:54
+#: controllers/view/stringsextract/stringsextracttool.cpp:52
 #, kde-format
 msgctxt "@title:window of the tool to extract strings"
 msgid "Strings"
 msgstr "Tekenkeden"
 
-#: controllers/view/stringsextract/stringsextracttoolviewfactory.cpp:27
+#: controllers/view/stringsextract/stringsextracttoolviewfactory.cpp:25
 #, kde-format
 msgctxt "@title:window"
 msgid "Strings"
 msgstr "Tekenkeden"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:62
+#: controllers/view/stringsextract/stringsextractview.cpp:60
 #, kde-format
 msgctxt ""
 "@label:spinbox minimum length for consecutive chars to be seen as a string"
 msgid "Minimum length:"
 msgstr "Lüttst Längde:"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:74
+#: controllers/view/stringsextract/stringsextractview.cpp:72
 #, kde-format
 msgctxt "@action:button extract the strings from the byte array"
 msgid "&Extract"
 msgstr "&Ruttrecken"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:77
+#: controllers/view/stringsextract/stringsextractview.cpp:75
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1855,7 +1855,7 @@ msgid ""
 "below."
 msgstr "Söcht de Tekenkeden binnen dat köört Rebeet un list de nerrn op."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:79
+#: controllers/view/stringsextract/stringsextractview.cpp:77
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1867,20 +1867,20 @@ msgstr ""
 "utsöchte Rebeet na all Tekenkeden mit de angeven Minimaallängde keken. De "
 "funnen Tekenkeden warrt nerrn oplist."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:90
+#: controllers/view/stringsextract/stringsextractview.cpp:88
 #, kde-format
 msgctxt "@label:lineedit filter term for displayed strings"
 msgid "Filter:"
 msgstr "&Filter:"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:94
+#: controllers/view/stringsextract/stringsextractview.cpp:92
 #, fuzzy, kde-format
 #| msgid "Enter a term to limit the list."
 msgctxt "@info:placeholder"
 msgid "Enter a term to limit the list."
 msgstr "Giff hier en Filterutdruck in, de de List ingrenzt."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:145
+#: controllers/view/stringsextract/stringsextractview.cpp:143
 #, fuzzy, kde-format
 #| msgctxt "@title:window of the tool to extract strings"
 #| msgid "Strings"
@@ -1888,13 +1888,13 @@ msgctxt "@info"
 msgid "No strings"
 msgstr "Tekenkeden"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:165
+#: controllers/view/stringsextract/stringsextractview.cpp:163
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected strings to the clipboard."
 msgstr "Kopeert markeert Tekenkeden na de Twischenaflaag."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:167
+#: controllers/view/stringsextract/stringsextractview.cpp:165
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1904,20 +1904,20 @@ msgstr ""
 "Wenn Du den Knoop \"<interface>Koperen</interface>\" anklickst, warrt all "
 "köört Tekenkeden vun de List na de Twischenaflaag kopeert."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:178
+#: controllers/view/stringsextract/stringsextractview.cpp:176
 #, fuzzy, kde-format
 #| msgid "&Show"
 msgctxt "@action:button"
 msgid "Show"
 msgstr "&Wiesen"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:180
+#: controllers/view/stringsextract/stringsextractview.cpp:178
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Shows the selected string in the view."
 msgstr "Wiest de köört Tekenkeed in de Ansicht."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:182
+#: controllers/view/stringsextract/stringsextractview.cpp:180
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1927,7 +1927,7 @@ msgstr ""
 "Wenn Du den Knoop \"<interface>Gah na</interface>\" anklickst, warrt de "
 "tolest köört Tekenkeed markeert un in de Ansicht wiest."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:198
+#: controllers/view/stringsextract/stringsextractview.cpp:196
 #, fuzzy, kde-format
 #| msgctxt "@title:window of the tool to select a range"
 #| msgid "Select"
@@ -1935,7 +1935,7 @@ msgctxt "@action"
 msgid "Select"
 msgstr "Utsöken"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:200
+#: controllers/view/stringsextract/stringsextractview.cpp:198
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Shows the selected string in the view."
@@ -1943,7 +1943,7 @@ msgctxt "@info:tooltip"
 msgid "Selects the selected string in the view."
 msgstr "Wiest de köört Tekenkeed in de Ansicht."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:344
+#: controllers/view/stringsextract/stringsextractview.cpp:342
 #, fuzzy, kde-format
 #| msgctxt "@info"
 #| msgid "No bytes converted."
@@ -1951,7 +1951,7 @@ msgctxt "@info"
 msgid "No strings extracted."
 msgstr "Keen Bytes wannelt"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:345
+#: controllers/view/stringsextract/stringsextractview.cpp:343
 #, kde-format
 msgctxt "@info"
 msgid "1 string extracted."
@@ -1959,56 +1959,56 @@ msgid_plural "%1 strings extracted."
 msgstr[0] ""
 msgstr[1] ""
 
-#: controllers/view/structures/datatypes/array/complexarraydata.cpp:98
+#: controllers/view/structures/datatypes/array/complexarraydata.cpp:99
 #, kde-format
 msgctxt "type name, then array length"
 msgid "%1[%2]"
 msgstr "%1[%2]"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:64
+#: controllers/view/structures/datatypes/datainformation.cpp:63
 #, kde-format
 msgid "1 bit"
 msgid_plural "%1 bits"
 msgstr[0] "1 Bit"
 msgstr[1] "%1 Bits"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:65
+#: controllers/view/structures/datatypes/datainformation.cpp:64
 #, kde-format
 msgctxt "number of bytes, then number of bits"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:205
+#: controllers/view/structures/datatypes/datainformation.cpp:204
 #, kde-format
 msgctxt "invalid value (End of file reached)"
 msgid "<EOF reached>"
 msgstr ""
 
-#: controllers/view/structures/datatypes/datainformation.cpp:234
+#: controllers/view/structures/datatypes/datainformation.cpp:233
 #, fuzzy, kde-format
 #| msgctxt "name of a data structure"
 #| msgid "Name"
 msgid "Name:"
 msgstr "Naam"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:235
+#: controllers/view/structures/datatypes/datainformation.cpp:234
 #, kde-format
 msgid "Type:"
 msgstr "Typ:"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:236
+#: controllers/view/structures/datatypes/datainformation.cpp:235
 #, fuzzy, kde-format
 #| msgctxt "@title:column value of the bytes for the datatype"
 #| msgid "Value"
 msgid "Value:"
 msgstr "Weert"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:237
+#: controllers/view/structures/datatypes/datainformation.cpp:236
 #, kde-format
 msgid "Size:"
 msgstr "Grött:"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:243
+#: controllers/view/structures/datatypes/datainformation.cpp:242
 #, kde-format
 msgctxt "size (elements)"
 msgid "%2 (%1 child)"
@@ -2016,42 +2016,42 @@ msgid_plural "%2 (%1 children)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: controllers/view/structures/datatypes/datainformation.cpp:268
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:233
+#: controllers/view/structures/datatypes/datainformation.cpp:267
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:232
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed."
 msgstr "Överpröven fehlslaan."
 
-#: controllers/view/structures/datatypes/datainformation.cpp:271
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:236
+#: controllers/view/structures/datatypes/datainformation.cpp:270
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:235
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed: \"%1\""
 msgstr "Överpröven fehlslaan: \"%1\""
 
-#: controllers/view/structures/datatypes/primitive/bitfield/abstractbitfielddatainformation.cpp:32
+#: controllers/view/structures/datatypes/primitive/bitfield/abstractbitfielddatainformation.cpp:30
 #, kde-format
 msgid "%1 bit"
 msgid_plural "%1 bits"
 msgstr[0] "%1 Bit"
 msgstr[1] "%1 Bits"
 
-#: controllers/view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.cpp:49
-#: controllers/view/structures/datatypes/primitive/booldatainformation.cpp:17
+#: controllers/view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.cpp:47
+#: controllers/view/structures/datatypes/primitive/booldatainformation.cpp:16
 #, kde-format
 msgctxt "boolean value"
 msgid "false"
 msgstr "falsch"
 
-#: controllers/view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.cpp:50
-#: controllers/view/structures/datatypes/primitive/booldatainformation.cpp:20
+#: controllers/view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.cpp:48
+#: controllers/view/structures/datatypes/primitive/booldatainformation.cpp:19
 #, kde-format
 msgctxt "boolean value"
 msgid "true"
 msgstr "wohr"
 
-#: controllers/view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.cpp:95
+#: controllers/view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.cpp:93
 #, fuzzy, kde-format
 #| msgctxt "Data type"
 #| msgid "bitfield (%1 bit wide)"
@@ -2062,7 +2062,7 @@ msgid_plural "boolean bitfield (%1 bits wide)"
 msgstr[0] "Bitfeld (%1 Bit breed)"
 msgstr[1] "Bitfeld (%1 Bits breed)"
 
-#: controllers/view/structures/datatypes/primitive/bitfield/signedbitfielddatainformation.cpp:97
+#: controllers/view/structures/datatypes/primitive/bitfield/signedbitfielddatainformation.cpp:95
 #, fuzzy, kde-format
 #| msgctxt "Data type"
 #| msgid "bitfield (%1 bit wide)"
@@ -2073,7 +2073,7 @@ msgid_plural "signed bitfield (%1 bits wide)"
 msgstr[0] "Bitfeld (%1 Bit breed)"
 msgstr[1] "Bitfeld (%1 Bits breed)"
 
-#: controllers/view/structures/datatypes/primitive/bitfield/unsignedbitfielddatainformation.cpp:78
+#: controllers/view/structures/datatypes/primitive/bitfield/unsignedbitfielddatainformation.cpp:76
 #, fuzzy, kde-format
 #| msgctxt "Data type"
 #| msgid "bitfield (%1 bit wide)"
@@ -2084,25 +2084,25 @@ msgid_plural "unsigned bitfield (%1 bits wide)"
 msgstr[0] "Bitfeld (%1 Bit breed)"
 msgstr[1] "Bitfeld (%1 Bits breed)"
 
-#: controllers/view/structures/datatypes/primitive/booldatainformation.cpp:24
+#: controllers/view/structures/datatypes/primitive/booldatainformation.cpp:23
 #, kde-format
 msgctxt "boolean value with actual value"
 msgid "true (%1)"
 msgstr "wohr (%1)"
 
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:41
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:80
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:40
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:79
 #, kde-format
 msgid "%1 (value not in enum)"
 msgstr "%1 (Weert nich in Optellen)"
 
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:49
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:77
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:48
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:76
 #, kde-format
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:87
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:86
 #, fuzzy, kde-format
 #| msgid "enum (%1)"
 msgctxt ""
@@ -2111,12 +2111,12 @@ msgctxt ""
 msgid "enum %1 (%2)"
 msgstr "Optellen (%1)"
 
-#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:75
+#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:76
 #, kde-format
 msgid "0x%1 (no matching flags)"
 msgstr ""
 
-#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:105
+#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:106
 #, fuzzy, kde-format
 #| msgid "%1 (%2)"
 msgctxt ""
@@ -2131,77 +2131,77 @@ msgctxt "memory pointer with underlying type"
 msgid "%1 pointer"
 msgstr ""
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:17
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:18
 msgctxt "data type"
 msgid "bool (1 byte)"
 msgstr "boolsch (1 Byte)"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:18
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:19
 msgctxt "data type"
 msgid "signed byte"
 msgstr "Byte mit Vörteken"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:19
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:20
 msgctxt "data type"
 msgid "unsigned byte"
 msgstr "Byte ahn Vörteken"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:20
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:21
 msgctxt "data type"
 msgid "char"
 msgstr "Teken"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:21
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:22
 msgctxt "data type"
 msgid "bool (2 bytes)"
 msgstr "boolsch (2 Bytes)"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:22
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:23
 msgctxt "data type"
 msgid "signed short"
 msgstr "\"short\" mit Vörteken"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:23
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:24
 msgctxt "data type"
 msgid "unsigned short"
 msgstr "\"short\" ahn Vörteken"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:24
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:25
 msgctxt "data type"
 msgid "bool (4 bytes)"
 msgstr "boolsch (4 Bytes)"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:25
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:26
 msgctxt "data type"
 msgid "signed int"
 msgstr "\"int\" mit Vörteken"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:26
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:27
 msgctxt "data type"
 msgid "unsigned int"
 msgstr "\"int\" ahn Vörteken"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:27
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:28
 msgctxt "data type"
 msgid "bool (8 bytes)"
 msgstr "boolsch (8 Bytes)"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:28
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:29
 msgctxt "data type"
 msgid "signed long"
 msgstr "\"long\" mit Vörteken"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:29
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:30
 msgctxt "data type"
 msgid "unsigned long"
 msgstr "\"long\" ahn Vörteken"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:30
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:31
 msgctxt "data type"
 msgid "float"
 msgstr "Fleetkomma"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:31
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:32
 #, fuzzy
 #| msgctxt "Data type"
 #| msgid "double"
@@ -2209,39 +2209,39 @@ msgctxt "data type"
 msgid "double"
 msgstr "dubbelt"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:32
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:33
 msgctxt "data type"
 msgid "bitfield"
 msgstr "Bitfeld"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:78
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:79
 #, fuzzy, kde-format
 #| msgid "<invalid name>"
 msgid "invalid type"
 msgstr "<leeg Naam>"
 
-#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:135
+#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:136
 #, kde-format
 msgid "Non-ASCII char: 0x%1"
 msgstr "Nich-ASCII-Teken: 0x%1"
 
-#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:143
+#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:144
 #, kde-format
 msgid "ASCII char"
 msgstr "ASCII-Teken"
 
-#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:153
+#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:154
 #, kde-format
 msgid "ASCII string"
 msgstr "ASCII-Tekenkeed"
 
-#: controllers/view/structures/datatypes/strings/ebcdicstringdata.cpp:134
+#: controllers/view/structures/datatypes/strings/ebcdicstringdata.cpp:136
 #, fuzzy, kde-format
 #| msgid "ASCII char"
 msgid "EBCDIC char"
 msgstr "ASCII-Teken"
 
-#: controllers/view/structures/datatypes/strings/ebcdicstringdata.cpp:144
+#: controllers/view/structures/datatypes/strings/ebcdicstringdata.cpp:146
 #, fuzzy, kde-format
 #| msgid "ASCII string"
 msgid "EBCDIC string"
@@ -2262,75 +2262,75 @@ msgstr "Latin1-Tekenkeed"
 msgid "End of file reached prematurely"
 msgstr "Vörtiets bi't Enn vun de Datei anlangt"
 
-#: controllers/view/structures/datatypes/strings/utf16stringdata.cpp:32
+#: controllers/view/structures/datatypes/strings/utf16stringdata.cpp:30
 #, kde-format
 msgid "UTF16-LE char"
 msgstr "UTF16-LE-Teken"
 
-#: controllers/view/structures/datatypes/strings/utf16stringdata.cpp:32
+#: controllers/view/structures/datatypes/strings/utf16stringdata.cpp:30
 #, kde-format
 msgid "UTF16-BE char"
 msgstr "UTF16-BE-Teken"
 
-#: controllers/view/structures/datatypes/strings/utf16stringdata.cpp:37
+#: controllers/view/structures/datatypes/strings/utf16stringdata.cpp:35
 #, kde-format
 msgid "UTF16-LE string"
 msgstr "UTF16-LE-Tekenkeed"
 
-#: controllers/view/structures/datatypes/strings/utf16stringdata.cpp:37
+#: controllers/view/structures/datatypes/strings/utf16stringdata.cpp:35
 #, kde-format
 msgid "UTF16-BE string"
 msgstr "UTF16-BE-Tekenkeed"
 
-#: controllers/view/structures/datatypes/strings/utf16stringdata.cpp:56
-#: controllers/view/structures/datatypes/strings/utf32stringdata.cpp:56
-#: controllers/view/structures/datatypes/strings/utf8stringdata.cpp:55
+#: controllers/view/structures/datatypes/strings/utf16stringdata.cpp:54
+#: controllers/view/structures/datatypes/strings/utf32stringdata.cpp:54
+#: controllers/view/structures/datatypes/strings/utf8stringdata.cpp:53
 #, kde-format
 msgid "Value too big: 0x%1"
 msgstr "Weert to groot: 0x%1"
 
-#: controllers/view/structures/datatypes/strings/utf16stringdata.cpp:62
-#: controllers/view/structures/datatypes/strings/utf16stringdata.cpp:65
-#: controllers/view/structures/datatypes/strings/utf32stringdata.cpp:62
-#: controllers/view/structures/datatypes/strings/utf32stringdata.cpp:65
-#: controllers/view/structures/datatypes/strings/utf8stringdata.cpp:61
-#: controllers/view/structures/datatypes/strings/utf8stringdata.cpp:64
+#: controllers/view/structures/datatypes/strings/utf16stringdata.cpp:60
+#: controllers/view/structures/datatypes/strings/utf16stringdata.cpp:63
+#: controllers/view/structures/datatypes/strings/utf32stringdata.cpp:60
+#: controllers/view/structures/datatypes/strings/utf32stringdata.cpp:63
+#: controllers/view/structures/datatypes/strings/utf8stringdata.cpp:59
+#: controllers/view/structures/datatypes/strings/utf8stringdata.cpp:62
 #, kde-format
 msgid "%1 (U+%2)"
 msgstr "%1 (U+%2)"
 
-#: controllers/view/structures/datatypes/strings/utf32stringdata.cpp:32
+#: controllers/view/structures/datatypes/strings/utf32stringdata.cpp:30
 #, kde-format
 msgid "UTF32-LE char"
 msgstr "UTF32-LE-Teken"
 
-#: controllers/view/structures/datatypes/strings/utf32stringdata.cpp:32
+#: controllers/view/structures/datatypes/strings/utf32stringdata.cpp:30
 #, kde-format
 msgid "UTF32-BE char"
 msgstr "UTF32-BE-Teken"
 
-#: controllers/view/structures/datatypes/strings/utf32stringdata.cpp:37
+#: controllers/view/structures/datatypes/strings/utf32stringdata.cpp:35
 #, kde-format
 msgid "UTF32-LE string"
 msgstr "UTF32-LE-Tekenkeed"
 
-#: controllers/view/structures/datatypes/strings/utf32stringdata.cpp:37
+#: controllers/view/structures/datatypes/strings/utf32stringdata.cpp:35
 #, kde-format
 msgid "UTF32-BE string"
 msgstr "UTF32-BE-Tekenkeed"
 
-#: controllers/view/structures/datatypes/strings/utf8stringdata.cpp:32
+#: controllers/view/structures/datatypes/strings/utf8stringdata.cpp:30
 #, kde-format
 msgid "UTF8 char"
 msgstr "UTF8-Teken"
 
-#: controllers/view/structures/datatypes/strings/utf8stringdata.cpp:37
+#: controllers/view/structures/datatypes/strings/utf8stringdata.cpp:35
 #, kde-format
 msgid "UTF8 string"
 msgstr "UTF8-Tekenkeed"
 
 #: controllers/view/structures/datatypes/structuredatainformation.cpp:26
-#: controllers/view/structures/datatypes/taggeduniondatainformation.cpp:47
+#: controllers/view/structures/datatypes/taggeduniondatainformation.cpp:46
 #, fuzzy, kde-format
 #| msgctxt "data type in C/C++"
 #| msgid "struct"
@@ -2338,7 +2338,7 @@ msgctxt "data type in C/C++, then name"
 msgid "struct %1"
 msgstr "struct"
 
-#: controllers/view/structures/datatypes/taggeduniondatainformation.cpp:50
+#: controllers/view/structures/datatypes/taggeduniondatainformation.cpp:49
 #, fuzzy, kde-format
 #| msgctxt "data type in C/C++"
 #| msgid "union"
@@ -2354,37 +2354,37 @@ msgctxt "data type in C/C++, then name"
 msgid "union %1"
 msgstr "union"
 
-#: controllers/view/structures/parsers/osdparser.cpp:120
-#: controllers/view/structures/parsers/osdparser.cpp:202
+#: controllers/view/structures/parsers/osdparser.cpp:119
+#: controllers/view/structures/parsers/osdparser.cpp:201
 #, fuzzy, kde-format
 msgid "<invalid name>"
 msgstr "<leeg Naam>"
 
-#: controllers/view/structures/script/scriptlogger.cpp:83
+#: controllers/view/structures/script/scriptlogger.cpp:84
 #, kde-format
 msgctxt "@title:column"
 msgid "Time"
 msgstr ""
 
-#: controllers/view/structures/script/scriptlogger.cpp:85
+#: controllers/view/structures/script/scriptlogger.cpp:86
 #, kde-format
 msgctxt "@title:column"
 msgid "Origin"
 msgstr ""
 
-#: controllers/view/structures/script/scriptlogger.cpp:87
+#: controllers/view/structures/script/scriptlogger.cpp:88
 #, kde-format
 msgctxt "@title:column"
 msgid "Message"
 msgstr ""
 
-#: controllers/view/structures/settings/aboutstructuredialog.cpp:36
+#: controllers/view/structures/settings/aboutstructuredialog.cpp:34
 #, kde-format
 msgctxt "@title:window"
 msgid "About %1"
 msgstr ""
 
-#: controllers/view/structures/settings/aboutstructuredialog.cpp:44
+#: controllers/view/structures/settings/aboutstructuredialog.cpp:42
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Versions"
@@ -2392,19 +2392,19 @@ msgctxt "Version version-number"
 msgid "Version %1"
 msgstr "Verschonen"
 
-#: controllers/view/structures/settings/aboutstructuredialog.cpp:81
-#: controllers/view/structures/settings/aboutstructuredialog.cpp:86
+#: controllers/view/structures/settings/aboutstructuredialog.cpp:79
+#: controllers/view/structures/settings/aboutstructuredialog.cpp:84
 #, kde-format
 msgid "License: %1"
 msgstr ""
 
-#: controllers/view/structures/settings/aboutstructuredialog.cpp:92
+#: controllers/view/structures/settings/aboutstructuredialog.cpp:90
 #, kde-format
 msgctxt "@title:tab"
 msgid "About"
 msgstr ""
 
-#: controllers/view/structures/settings/aboutstructuredialog.cpp:107
+#: controllers/view/structures/settings/aboutstructuredialog.cpp:105
 #, kde-format
 msgctxt "@info:tooltip Send an email to the author"
 msgid ""
@@ -2412,69 +2412,69 @@ msgid ""
 "%1"
 msgstr ""
 
-#: controllers/view/structures/settings/aboutstructuredialog.cpp:116
+#: controllers/view/structures/settings/aboutstructuredialog.cpp:114
 #, fuzzy, kde-format
 #| msgid "Author"
 msgctxt "@title:tab"
 msgid "Author"
 msgstr "Autor"
 
-#: controllers/view/structures/settings/licensedialog.cpp:29
+#: controllers/view/structures/settings/licensedialog.cpp:27
 #, kde-format
 msgctxt "@title:window"
 msgid "License Agreement"
 msgstr ""
 
-#: controllers/view/structures/settings/structureaddremovewidget.cpp:48
+#: controllers/view/structures/settings/structureaddremovewidget.cpp:47
 #, kde-format
 msgctxt "@info:label"
 msgid "Installed structures:"
 msgstr "Leeg Strukturen:"
 
-#: controllers/view/structures/settings/structureaddremovewidget.cpp:58
+#: controllers/view/structures/settings/structureaddremovewidget.cpp:57
 #, kde-format
 msgctxt "@info:label"
 msgid "Used structures:"
 msgstr "Bruukt Strukturen:"
 
-#: controllers/view/structures/settings/structureitemdelegate.cpp:114
+#: controllers/view/structures/settings/structureitemdelegate.cpp:112
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "About"
 msgstr ""
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:46
+#: controllers/view/structures/settings/structuresmanagerview.cpp:44
 #, fuzzy, kde-format
 #| msgid "Get New Structures..."
 msgctxt "@action:button"
 msgid "Get New Structures…"
 msgstr "Niege Strukturen halen..."
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:52
+#: controllers/view/structures/settings/structuresmanagerview.cpp:50
 #, fuzzy, kde-format
 #| msgid "Dynamic Structure Definitions"
 msgctxt "@action:button"
 msgid "Advanced Selection…"
 msgstr "Dünaamsch Struktuurdefinitschonen"
 
-#: controllers/view/structures/settings/structuresselectiondialog.cpp:28
+#: controllers/view/structures/settings/structuresselectiondialog.cpp:26
 #, fuzzy, kde-format
 #| msgid "Dynamic Structure Definitions"
 msgctxt "@title:window"
 msgid "Advanced Structures Selection"
 msgstr "Dünaamsch Struktuurdefinitschonen"
 
-#: controllers/view/structures/settings/structuresselectionmodel.cpp:107
+#: controllers/view/structures/settings/structuresselectionmodel.cpp:105
 #, kde-format
 msgid "Dynamic Structure Definitions"
 msgstr "Dünaamsch Struktuurdefinitschonen"
 
-#: controllers/view/structures/settings/structuresselectionmodel.cpp:109
+#: controllers/view/structures/settings/structuresselectionmodel.cpp:107
 #, kde-format
 msgid "Structure Definitions"
 msgstr "Struktuurdefinitschonen"
 
-#: controllers/view/structures/settings/structuresselector.cpp:40
+#: controllers/view/structures/settings/structuresselector.cpp:38
 #, fuzzy, kde-format
 #| msgctxt "@title"
 #| msgid "Search"
@@ -2581,14 +2581,14 @@ msgctxt "@item:inlistbox"
 msgid "Little endian"
 msgstr "Little-Endian"
 
-#: controllers/view/structures/settings/structureviewsettingswidget.cpp:49
+#: controllers/view/structures/settings/structureviewsettingswidget.cpp:48
 #, fuzzy, kde-format
 #| msgid "Binary"
 msgctxt "@item:inlistbox"
 msgid "Binary"
 msgstr "Bineer"
 
-#: controllers/view/structures/settings/structureviewsettingswidget.cpp:50
+#: controllers/view/structures/settings/structureviewsettingswidget.cpp:49
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip column contains the value in octal format"
 #| msgid "Octal"
@@ -2596,14 +2596,14 @@ msgctxt "@item:inlistbox"
 msgid "Octal"
 msgstr "Oktaal"
 
-#: controllers/view/structures/settings/structureviewsettingswidget.cpp:51
+#: controllers/view/structures/settings/structureviewsettingswidget.cpp:50
 #, fuzzy, kde-format
 #| msgid "Decimal"
 msgctxt "@item:inlistbox"
 msgid "Decimal"
 msgstr "Dezimaal"
 
-#: controllers/view/structures/settings/structureviewsettingswidget.cpp:52
+#: controllers/view/structures/settings/structureviewsettingswidget.cpp:51
 #, fuzzy, kde-format
 #| msgid "Hexadecimal"
 msgctxt "@item:inlistbox"
@@ -2684,98 +2684,98 @@ msgstr "Numeersch Tekenweerten wiesen"
 msgid "Character value:"
 msgstr "Tekenweert:"
 
-#: controllers/view/structures/structurestool.cpp:70
-#: controllers/view/structures/structurestoolviewfactory.cpp:29
+#: controllers/view/structures/structurestool.cpp:69
+#: controllers/view/structures/structurestoolviewfactory.cpp:27
 #, kde-format
 msgctxt "@title:window"
 msgid "Structures"
 msgstr "Strukturen"
 
-#: controllers/view/structures/structurestool.cpp:199
+#: controllers/view/structures/structurestool.cpp:198
 #, kde-format
 msgctxt "name of a data structure"
 msgid "Name"
 msgstr "Naam"
 
-#: controllers/view/structures/structurestool.cpp:201
+#: controllers/view/structures/structurestool.cpp:200
 #, kde-format
 msgctxt "type of a data structure"
 msgid "Type"
 msgstr "Typ"
 
-#: controllers/view/structures/structurestool.cpp:203
+#: controllers/view/structures/structurestool.cpp:202
 #, kde-format
 msgctxt "value of a data structure (primitive type)"
 msgid "Value"
 msgstr "Weert"
 
-#: controllers/view/structures/structurestool.cpp:205
+#: controllers/view/structures/structurestool.cpp:204
 #, fuzzy, kde-format
 #| msgid "Size:"
 msgctxt "size of a data structure"
 msgid "Size"
 msgstr "Grött:"
 
-#: controllers/view/structures/structureview.cpp:91
+#: controllers/view/structures/structureview.cpp:87
 #, fuzzy, kde-format
 #| msgid "Structure Definitions"
 msgctxt "@info"
 msgid "No structure definitions"
 msgstr "Struktuurdefinitschonen"
 
-#: controllers/view/structures/structureview.cpp:111
+#: controllers/view/structures/structureview.cpp:107
 #, fuzzy, kde-format
 #| msgid "Validate"
 msgctxt "@action:button"
 msgid "Validate"
 msgstr "Pröven"
 
-#: controllers/view/structures/structureview.cpp:113
+#: controllers/view/structures/structureview.cpp:109
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Validate all structures."
 msgstr "All Strukturen pröven"
 
-#: controllers/view/structures/structureview.cpp:135
+#: controllers/view/structures/structureview.cpp:131
 #, kde-format
 msgctxt "@action:button"
 msgid "Script console"
 msgstr ""
 
-#: controllers/view/structures/structureview.cpp:137
+#: controllers/view/structures/structureview.cpp:133
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open script console."
 msgstr ""
 
-#: controllers/view/structures/structureview.cpp:141
+#: controllers/view/structures/structureview.cpp:137
 #, fuzzy, kde-format
 #| msgid "Settings"
 msgctxt "@action:button"
 msgid "Settings"
 msgstr "Instellen"
 
-#: controllers/view/structures/structureview.cpp:143
+#: controllers/view/structures/structureview.cpp:139
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open settings."
 msgstr "Instellen opmaken"
 
-#: controllers/view/structures/structureview.cpp:174
+#: controllers/view/structures/structureview.cpp:170
 #, fuzzy, kde-format
 #| msgid "Value Display"
 msgctxt "@title:tab"
 msgid "Value Display"
 msgstr "Weertdorstellen"
 
-#: controllers/view/structures/structureview.cpp:186
+#: controllers/view/structures/structureview.cpp:182
 #, fuzzy, kde-format
 #| msgid "Structures management"
 msgctxt "@title:tab"
 msgid "Structures management"
 msgstr "Strukturen plegen"
 
-#: controllers/view/structures/structureview.cpp:273
+#: controllers/view/structures/structureview.cpp:269
 #, fuzzy, kde-format
 #| msgctxt ""
 #| "@action:pushbutton unlock the starting offset of the current structure"
@@ -2784,7 +2784,7 @@ msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Unlock"
 msgstr "Opsluten"
 
-#: controllers/view/structures/structureview.cpp:275
+#: controllers/view/structures/structureview.cpp:271
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -2794,7 +2794,7 @@ msgstr ""
 "Köört Struktuur opsluten, d.h., de Startversetten warrt jümmers op de "
 "aktuelle Blinkerpositschoon sett."
 
-#: controllers/view/structures/structureview.cpp:280
+#: controllers/view/structures/structureview.cpp:276
 #, fuzzy, kde-format
 #| msgctxt ""
 #| "@action:pushbutton unlock the starting offset of the current structure"
@@ -2803,50 +2803,50 @@ msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Lock"
 msgstr "Afsluten"
 
-#: controllers/view/structures/structureview.cpp:282
+#: controllers/view/structures/structureview.cpp:278
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Lock selected structure to current offset."
 msgstr "Köört Struktuur op aktuell Versetten afsluten"
 
-#: controllers/view/structures/structureview.cpp:329
+#: controllers/view/structures/structureview.cpp:325
 #, fuzzy, kde-format
 #| msgid "Structure Definitions"
 msgctxt "@title:window"
 msgid "Structures Script Console"
 msgstr "Struktuurdefinitschonen"
 
-#: controllers/view/viewconfig/bytespergroupdialog.cpp:33
+#: controllers/view/viewconfig/bytespergroupdialog.cpp:31
 #, kde-format
 msgctxt "@label"
 msgid "No grouping."
 msgstr "Nich tosamenkoppeln."
 
-#: controllers/view/viewconfig/bytespergroupdialog.cpp:37
+#: controllers/view/viewconfig/bytespergroupdialog.cpp:35
 #, kde-format
 msgctxt "@label:spinbox number of bytes which are grouped"
 msgid "Bytes per Group:"
 msgstr "Bytes per Koppel:"
 
-#: controllers/view/viewconfig/bytespergroupdialog.cpp:52
+#: controllers/view/viewconfig/bytespergroupdialog.cpp:50
 #, kde-format
 msgctxt "@title:window"
 msgid "Bytes per Group"
 msgstr "Bytes per Koppel"
 
-#: controllers/view/viewconfig/bytesperlinedialog.cpp:34
+#: controllers/view/viewconfig/bytesperlinedialog.cpp:32
 #, kde-format
 msgctxt "@label:spinbox number of bytes which are shown per line"
 msgid "Bytes per Line:"
 msgstr "Bytes per Reeg:"
 
-#: controllers/view/viewconfig/bytesperlinedialog.cpp:49
+#: controllers/view/viewconfig/bytesperlinedialog.cpp:47
 #, kde-format
 msgctxt "@title:window"
 msgid "Bytes per Line"
 msgstr "Bytes per Reeg:"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:34
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:32
 #, fuzzy, kde-format
 #| msgctxt "@title:menu"
 #| msgid "&Value Coding"
@@ -2854,7 +2854,7 @@ msgctxt "@title:menu"
 msgid "&Offset Coding"
 msgstr "&Weert-Koderen"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:38
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:36
 #, fuzzy, kde-format
 #| msgctxt ""
 #| "@item:inmenu encoding of the bytes as values in the hexadecimal format"
@@ -2863,7 +2863,7 @@ msgctxt "@item:inmenu offset in the hexadecimal format"
 msgid "&Hexadecimal"
 msgstr "&Hexadezimaal"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:40
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:38
 #, fuzzy, kde-format
 #| msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
 #| msgid "&Decimal"
@@ -2871,7 +2871,7 @@ msgctxt "@item:inmenu offset in the decimal format"
 msgid "&Decimal"
 msgstr "&Dezimaal"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:42
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:40
 #, fuzzy, kde-format
 #| msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
 #| msgid "&Octal"
@@ -2879,50 +2879,50 @@ msgctxt "@item:inmenu offset in the octal format"
 msgid "&Octal"
 msgstr "&Oktaal"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:49
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:47
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Value Coding"
 msgstr "&Weert-Koderen"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:53
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:51
 #, kde-format
 msgctxt ""
 "@item:inmenu encoding of the bytes as values in the hexadecimal format"
 msgid "&Hexadecimal"
 msgstr "&Hexadezimaal"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:55
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:53
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
 msgid "&Decimal"
 msgstr "&Dezimaal"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:57
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:55
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
 msgid "&Octal"
 msgstr "&Oktaal"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:59
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:57
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
 msgid "&Binary"
 msgstr "&Bineer"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:66
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:64
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Char Coding"
 msgstr "&Teken-Koderen"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:73
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:71
 #, kde-format
 msgctxt "@option:check"
 msgid "Show &Non-printing Chars"
 msgstr "&Nich-druckbor Tekens wiesen"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:80
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:78
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Set Bytes per Line..."
@@ -2930,7 +2930,7 @@ msgctxt "@action:inmenu"
 msgid "Set Bytes per Line…"
 msgstr "Bytes per Reeg fastleggen..."
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:87
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:85
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Set Bytes per Group..."
@@ -2938,19 +2938,19 @@ msgctxt "@action:inmenu"
 msgid "Set Bytes per Group…"
 msgstr "Bytes per Koppel fastleggen..."
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:94
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:92
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Dynamic Layout"
 msgstr "&Dünaamsch Anornen"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:98
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:96
 #, kde-format
 msgctxt "@item:inmenu  The layout will not change on size changes."
 msgid "&Off"
 msgstr "&Ut"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:100
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:98
 #, kde-format
 msgctxt ""
 "@item:inmenu  The layout will adapt to the size, but only with complete "
@@ -2958,7 +2958,7 @@ msgctxt ""
 msgid "&Wrap Only Complete Byte Groups"
 msgstr "Bloots heel Bytekoppeln ü&mbreken"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:102
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:100
 #, kde-format
 msgctxt ""
 "@item:inmenu  The layout will adapt to the size and fit in as much bytes per "
@@ -2966,61 +2966,61 @@ msgctxt ""
 msgid "&On"
 msgstr "&An"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:108
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:106
 #, kde-format
 msgctxt "@option:check"
 msgid "Show &Line Offset"
 msgstr "&Reeg-Versatz wiesen"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:116
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:114
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Show Values or Chars"
 msgstr "&Weerten oder Tekens wiesen"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:119
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:117
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "&Values"
 msgstr "&Weerten"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:120
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:118
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "&Chars"
 msgstr "&Tekens"
 
-#: controllers/view/viewconfig/viewconfigcontroller.cpp:121
+#: controllers/view/viewconfig/viewconfigcontroller.cpp:119
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Values && Chars"
 msgstr "Weerten un Bookstaven"
 
-#: controllers/view/viewmode/viewmodecontroller.cpp:24
+#: controllers/view/viewmode/viewmodecontroller.cpp:22
 #, kde-format
 msgctxt "@title:menu"
 msgid "&View Mode"
 msgstr "&Ansichttyp"
 
-#: controllers/view/viewmode/viewmodecontroller.cpp:26
+#: controllers/view/viewmode/viewmodecontroller.cpp:24
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "&Columns"
 msgstr "S&triepen"
 
-#: controllers/view/viewmode/viewmodecontroller.cpp:27
+#: controllers/view/viewmode/viewmodecontroller.cpp:25
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "&Rows"
 msgstr "&Regen"
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:36
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:34
 #, kde-format
 msgctxt "@title:menu submenu to select the view profile or change it"
 msgid "View Profile"
 msgstr "Ansichtprofil"
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:44
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:42
 #, fuzzy, kde-format
 #| msgctxt "@title:menu create a new view profile"
 #| msgid "Create new..."
@@ -3028,7 +3028,7 @@ msgctxt "@action:inmenu create a new view profile"
 msgid "Create New…"
 msgstr "Nieg opstellen..."
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:52
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:50
 #, fuzzy, kde-format
 #| msgctxt "@title:menu "
 #| msgid "Save changes"
@@ -3036,7 +3036,7 @@ msgctxt "@action:inmenu save changed to the view profile to the base profile"
 msgid "Save Changes"
 msgstr "Ännern sekern"
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:60
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:58
 #, fuzzy, kde-format
 #| msgctxt "@title:menu "
 #| msgid "Reset changes"
@@ -3044,8 +3044,8 @@ msgctxt "@action:inmenu reset settings back to those of the saved base profile"
 msgid "Reset Changes"
 msgstr "Ännern torüchsetten"
 
-#: controllers/view/viewprofiles/viewprofilecontroller.cpp:184
-#: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:180
+#: controllers/view/viewprofiles/viewprofilecontroller.cpp:182
+#: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:178
 #, fuzzy, kde-format
 #| msgctxt "@title:menu submenu to select the view profile or change it"
 #| msgid "View Profile"
@@ -3053,42 +3053,42 @@ msgctxt "@title:window"
 msgid "New View Profile"
 msgstr "Ansichtprofil"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:55
+#: controllers/view/viewprofiles/viewprofileedit.cpp:53
 #, fuzzy, kde-format
 #| msgid "Title:"
 msgctxt "@label:textbox"
 msgid "Title:"
 msgstr "Titel:"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:59
+#: controllers/view/viewprofiles/viewprofileedit.cpp:57
 #, fuzzy, kde-format
 #| msgid "Display"
 msgctxt "@title:group"
 msgid "Display"
 msgstr "Dorstellen"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:63
+#: controllers/view/viewprofiles/viewprofileedit.cpp:61
 #, fuzzy, kde-format
 #| msgid "Show Line Offset:"
 msgctxt "@option:check"
 msgid "Show line offset:"
 msgstr "Reeg-Versatz wiesen:"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:67
+#: controllers/view/viewprofiles/viewprofileedit.cpp:65
 #, fuzzy, kde-format
 #| msgid "Hexadecimal"
 msgctxt "@item:inmenu offset in the hexadecimal format"
 msgid "Hexadecimal"
 msgstr "Hexadezimaal"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:68
+#: controllers/view/viewprofiles/viewprofileedit.cpp:66
 #, fuzzy, kde-format
 #| msgid "Decimal"
 msgctxt "@item:inmenu offset in the decimal format"
 msgid "Decimal"
 msgstr "Dezimaal"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:69
+#: controllers/view/viewprofiles/viewprofileedit.cpp:67
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip column contains the value in octal format"
 #| msgid "Octal"
@@ -3096,28 +3096,28 @@ msgctxt "@item:inmenu offset in the octal format"
 msgid "Octal"
 msgstr "Oktaal"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:72
+#: controllers/view/viewprofiles/viewprofileedit.cpp:70
 #, fuzzy, kde-format
 #| msgid "Coding:"
 msgctxt "@label:listbox"
 msgid "Offset coding:"
 msgstr "Koderen:"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:76
+#: controllers/view/viewprofiles/viewprofileedit.cpp:74
 #, fuzzy, kde-format
 #| msgid "Values"
 msgctxt "@item:inmenu"
 msgid "Values"
 msgstr "Weerten"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:77
+#: controllers/view/viewprofiles/viewprofileedit.cpp:75
 #, fuzzy, kde-format
 #| msgid "Chars"
 msgctxt "@item:inmenu"
 msgid "Chars"
 msgstr "Tekens"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:78
+#: controllers/view/viewprofiles/viewprofileedit.cpp:76
 #, fuzzy, kde-format
 #| msgctxt "@item:"
 #| msgid "Values & Chars"
@@ -3125,14 +3125,14 @@ msgctxt "@item:inmenu"
 msgid "Values & Chars"
 msgstr "Weerten un Tekens"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:81
+#: controllers/view/viewprofiles/viewprofileedit.cpp:79
 #, fuzzy, kde-format
 #| msgid "Show Values or Chars:"
 msgctxt "@option:check"
 msgid "Show values or chars:"
 msgstr "Weerten oder Tekens wiesen:"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:85
+#: controllers/view/viewprofiles/viewprofileedit.cpp:83
 #, fuzzy, kde-format
 #| msgctxt "@label:listbox "
 #| msgid "Show with Rows or Columns::"
@@ -3140,7 +3140,7 @@ msgctxt "@label:listbox "
 msgid "Show with rows or columns:"
 msgstr "Mit Regen oder Striepen wiesen:"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:88
+#: controllers/view/viewprofiles/viewprofileedit.cpp:86
 #, fuzzy, kde-format
 #| msgctxt "@item:"
 #| msgid "Columns"
@@ -3148,7 +3148,7 @@ msgctxt "@item:inmenu"
 msgid "Columns"
 msgstr "Striepen"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:89
+#: controllers/view/viewprofiles/viewprofileedit.cpp:87
 #, fuzzy, kde-format
 #| msgctxt "@item:"
 #| msgid "Rows"
@@ -3156,20 +3156,20 @@ msgctxt "@item:inmenu"
 msgid "Rows"
 msgstr "Regen"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:96
+#: controllers/view/viewprofiles/viewprofileedit.cpp:94
 #, fuzzy, kde-format
 #| msgid "Layout"
 msgctxt "@title:group"
 msgid "Layout"
 msgstr "Utsehn"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:102
+#: controllers/view/viewprofiles/viewprofileedit.cpp:100
 #, kde-format
 msgctxt "@item:inmenu  The layout will not change on size changes."
 msgid "Off"
 msgstr "Ut"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:104
+#: controllers/view/viewprofiles/viewprofileedit.cpp:102
 #, kde-format
 msgctxt ""
 "@item:inmenu  The layout will adapt to the size, but only with complete "
@@ -3177,7 +3177,7 @@ msgctxt ""
 msgid "Wrap Only Complete Byte Groups"
 msgstr "Bloots heel Bytekoppeln ümbreken"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:106
+#: controllers/view/viewprofiles/viewprofileedit.cpp:104
 #, kde-format
 msgctxt ""
 "@item:inmenu  The layout will adapt to the size and fit in as much bytes per "
@@ -3185,14 +3185,14 @@ msgctxt ""
 msgid "On"
 msgstr "An"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:111
+#: controllers/view/viewprofiles/viewprofileedit.cpp:109
 #, fuzzy, kde-format
 #| msgid "Break lines:"
 msgctxt "@label:listbox"
 msgid "Break lines:"
 msgstr "Regen ümbreken:"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:115
+#: controllers/view/viewprofiles/viewprofileedit.cpp:113
 #, fuzzy, kde-format
 #| msgctxt "@label"
 #| msgid "No grouping."
@@ -3200,7 +3200,7 @@ msgctxt "@item"
 msgid "No Grouping"
 msgstr "Nich tosamenkoppeln."
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:119
+#: controllers/view/viewprofiles/viewprofileedit.cpp:117
 #, fuzzy, kde-format
 #| msgctxt "@label:spinbox number of bytes which are grouped"
 #| msgid "Bytes per Group:"
@@ -3208,7 +3208,7 @@ msgctxt "@label:spinbox number of bytes which are grouped"
 msgid "Bytes per group:"
 msgstr "Bytes per Koppel:"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:126
+#: controllers/view/viewprofiles/viewprofileedit.cpp:124
 #, fuzzy, kde-format
 #| msgctxt "@label:spinbox number of bytes which are shown per line"
 #| msgid "Bytes per Line:"
@@ -3216,76 +3216,76 @@ msgctxt "@label:spinbox number of bytes which are shown per line"
 msgid "Bytes per line:"
 msgstr "Bytes per Reeg:"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:131
+#: controllers/view/viewprofiles/viewprofileedit.cpp:129
 #, fuzzy, kde-format
 #| msgid "Values"
 msgctxt "@title:group"
 msgid "Values"
 msgstr "Weerten"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:137
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:53
-#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:38
+#: controllers/view/viewprofiles/viewprofileedit.cpp:135
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:51
+#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:36
 #, kde-format
 msgctxt ""
 "@item:inmenu encoding of the bytes as values in the hexadecimal format"
 msgid "Hexadecimal"
 msgstr "Hexadezimaal"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:139
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:54
-#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:39
+#: controllers/view/viewprofiles/viewprofileedit.cpp:137
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:52
+#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:37
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the decimal format"
 msgid "Decimal"
 msgstr "Dezimaal"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:141
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:55
-#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:40
+#: controllers/view/viewprofiles/viewprofileedit.cpp:139
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:53
+#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:38
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the octal format"
 msgid "Octal"
 msgstr "Oktaal"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:143
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:56
-#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:41
+#: controllers/view/viewprofiles/viewprofileedit.cpp:141
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:54
+#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:39
 #, kde-format
 msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
 msgid "Binary"
 msgstr "Bineer"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:146
-#: controllers/view/viewprofiles/viewprofileedit.cpp:155
+#: controllers/view/viewprofiles/viewprofileedit.cpp:144
+#: controllers/view/viewprofiles/viewprofileedit.cpp:153
 #, fuzzy, kde-format
 #| msgid "Coding:"
 msgctxt "@label:listbox"
 msgid "Coding:"
 msgstr "Koderen:"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:150
+#: controllers/view/viewprofiles/viewprofileedit.cpp:148
 #, fuzzy, kde-format
 #| msgid "Chars"
 msgctxt "@title:group"
 msgid "Chars"
 msgstr "Tekens"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:165
+#: controllers/view/viewprofiles/viewprofileedit.cpp:163
 #, fuzzy, kde-format
 #| msgid "Char for non-printable bytes:"
 msgctxt "@label:chooser"
 msgid "Char for non-printable bytes:"
 msgstr "Teken för nich-druckbor Bytes:"
 
-#: controllers/view/viewprofiles/viewprofileedit.cpp:170
+#: controllers/view/viewprofiles/viewprofileedit.cpp:168
 #, fuzzy, kde-format
 #| msgid "Char for undefined bytes:"
 msgctxt "@label:chooser"
 msgid "Char for undefined bytes:"
 msgstr "Teken för nich-defineert Bytes:"
 
-#: controllers/view/viewprofiles/viewprofilesmanagecontroller.cpp:31
+#: controllers/view/viewprofiles/viewprofilesmanagecontroller.cpp:29
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Manage View Profiles..."
@@ -3293,7 +3293,7 @@ msgctxt "@action:inmenu"
 msgid "Manage View Profiles…"
 msgstr "Ansichtprofilen plegen..."
 
-#: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:36
+#: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:34
 #, fuzzy, kde-format
 #| msgctxt "@title:menu submenu to select the view profile or change it"
 #| msgid "View Profile"
@@ -3301,7 +3301,7 @@ msgctxt "@title:window"
 msgid "View Profiles"
 msgstr "Ansichtprofil"
 
-#: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:63
+#: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:61
 #, fuzzy, kde-format
 #| msgctxt "@title:menu create a new view profile"
 #| msgid "Create new..."
@@ -3309,7 +3309,7 @@ msgctxt "@action:button"
 msgid "&Create New…"
 msgstr "Nieg opstellen..."
 
-#: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:66
+#: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:64
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Opens an editor for the view profile as default for all views."
@@ -3318,7 +3318,7 @@ msgid "Opens an editor for a new view profile."
 msgstr ""
 "Maakt en Editor för dat Ansichtprofil as Standard för all Ansichten op."
 
-#: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:68
+#: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:66
 #, fuzzy, kde-kuit-format
 #| msgctxt "@info:whatsthis"
 #| msgid ""
@@ -3333,7 +3333,7 @@ msgstr ""
 "Wenn Du den Knoop \"<interface>Wegmaken</interface>\" anklickst, warrt dat "
 "in de List utsöchte Ansichtprofil wegdaan."
 
-#: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:77
+#: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:75
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "&Edit..."
@@ -3341,7 +3341,7 @@ msgctxt "@action:button"
 msgid "&Edit…"
 msgstr "B&ewerken..."
 
-#: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:80
+#: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:78
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Opens an editor for the view profile as default for all views."
@@ -3350,7 +3350,7 @@ msgid "Opens an editor for the view profile."
 msgstr ""
 "Maakt en Editor för dat Ansichtprofil as Standard för all Ansichten op."
 
-#: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:82
+#: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:80
 #, fuzzy, kde-kuit-format
 #| msgctxt "@info:whatsthis"
 #| msgid ""
@@ -3364,19 +3364,19 @@ msgstr ""
 "Wenn Du den Knoop \"<interface>Wegmaken</interface>\" anklickst, warrt dat "
 "in de List utsöchte Ansichtprofil wegdaan."
 
-#: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:90
+#: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:88
 #, kde-format
 msgctxt "@action:button"
 msgid "&Set as Default"
 msgstr "As Standard &fastleggen"
 
-#: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:93
+#: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:91
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets the selected view profile as default for all views."
 msgstr "Leggt dat utsöchte Ansichtprofil as Standard för all Ansichten fast."
 
-#: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:95
+#: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:93
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -3387,19 +3387,19 @@ msgstr ""
 "anklickst, warrt dat in de List utsöchte Ansichtprofil as Standard för all "
 "Ansichten fastleggt."
 
-#: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:102
+#: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:100
 #, kde-format
 msgctxt "@action:button"
 msgid "&Delete"
 msgstr "&Wegmaken"
 
-#: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:105
+#: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:103
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Deletes the selected view profile."
 msgstr "Deit dat utsöchte Ansichtprofil weg."
 
-#: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:107
+#: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:105
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -3409,13 +3409,13 @@ msgstr ""
 "Wenn Du den Knoop \"<interface>Wegmaken</interface>\" anklickst, warrt dat "
 "in de List utsöchte Ansichtprofil wegdaan."
 
-#: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:174
+#: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:172
 #, fuzzy, kde-format
 #| msgid "Modification of X"
 msgid "Modification of %1"
 msgstr "Ännern vun X"
 
-#: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:211
+#: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:209
 #, fuzzy, kde-format
 #| msgctxt "@title:menu submenu to select the view profile or change it"
 #| msgid "View Profile"
@@ -3423,92 +3423,92 @@ msgctxt "@title:window"
 msgid "\"%1\" View Profile"
 msgstr "Ansichtprofil"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:41
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:39
 #, kde-format
 msgctxt "@info:status short for: Insert mode"
 msgid "INS"
 msgstr "Inf"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:42
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:40
 #, kde-format
 msgctxt "@info:status short for: Overwrite mode"
 msgid "OVR"
 msgstr " Övr "
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:43
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:41
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Insert mode"
 msgstr "Inföögbedrief"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:44
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:42
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Overwrite mode"
 msgstr "Överschrievbedrief"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:60
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:58
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Coding of the value interpretation in the current view."
 msgstr "Koderen för de Weerten binnen de aktuelle Ansicht"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:69
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:67
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Encoding in the character column of the current view."
 msgstr "Koderen för den Tekens-Striep vun de aktuelle Ansicht"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:114
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:221
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:112
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:219
 #, kde-format
 msgid "Offset: %1"
 msgstr "Versatz: %1"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:123
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:121
 #, kde-format
 msgid "%1 bytes"
 msgstr "%1 Bytes"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:125
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:123
 #, kde-format
 msgctxt "@info:status selection: start offset - end offset ()"
 msgid "Selection: %1 - %2 (%3)"
 msgstr "Köör: %1 - %2 (%3)"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:208
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:206
 #, kde-format
 msgctxt "@info:status offset value not available"
 msgid "Offset: -"
 msgstr "Versatz: -"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:209
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:242
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:207
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:240
 #, kde-format
 msgctxt "@info:status offset value not available"
 msgid "Selection: -"
 msgstr "Köör: -"
 
-#: controllers/view/viewstatus/viewstatuscontroller.cpp:240
+#: controllers/view/viewstatus/viewstatuscontroller.cpp:238
 #, kde-format
 msgctxt "@info:status selection: start offset - end offset (number of bytes)"
 msgid "Selection: %1 - %2 (%3)"
 msgstr "Köör: %1 - %2 (%3)"
 
-#: core/document/bytearraydocument.cpp:50
+#: core/document/bytearraydocument.cpp:48
 #, kde-format
 msgctxt "name of the data type"
 msgid "Byte Array"
 msgstr "Byte-Rebeet"
 
-#: core/document/bytearraydocumentfactory.cpp:40
+#: core/document/bytearraydocumentfactory.cpp:38
 #, kde-format
 msgctxt "The byte array was new created."
 msgid "New created."
 msgstr "Nieg opstellt"
 
-#: core/document/bytearraydocumentfactory.cpp:47
-#: core/document/bytearraydocumentfactory.cpp:121
+#: core/document/bytearraydocumentfactory.cpp:45
+#: core/document/bytearraydocumentfactory.cpp:119
 #, kde-format
 msgctxt "numbered title for a created document without a filename"
 msgid "[New Byte Array]"
@@ -3516,31 +3516,31 @@ msgid_plural "[New Byte Array %1]"
 msgstr[0] "[Nieg Byte-Rebeet]"
 msgstr[1] "[Nieg Byte-Rebeet %1]"
 
-#: core/document/bytearraydocumentfactory.cpp:114
+#: core/document/bytearraydocumentfactory.cpp:112
 #, kde-format
 msgctxt "origin of the byte array"
 msgid "Created from data."
 msgstr "Ut Daten opstellen"
 
-#: core/io/filesystem/bytearrayrawfileloadthread.cpp:55
+#: core/io/filesystem/bytearrayrawfileloadthread.cpp:53
 #, kde-format
 msgctxt "destination of the byte array"
 msgid "Loaded from file."
 msgstr "Ut Datei laadt."
 
-#: core/io/filesystem/bytearrayrawfileloadthread.cpp:62
-#: core/io/filesystem/bytearrayrawfilereloadthread.cpp:55
+#: core/io/filesystem/bytearrayrawfileloadthread.cpp:60
+#: core/io/filesystem/bytearrayrawfilereloadthread.cpp:53
 #, kde-format
 msgid "There is not enough free working memory to load this file."
 msgstr "Nich noog free Arbeitspieker för't Laden vun disse Datei verföögbor."
 
-#: core/io/filesystem/bytearrayrawfileloadthread.cpp:65
-#: core/io/filesystem/bytearrayrawfilereloadthread.cpp:58
+#: core/io/filesystem/bytearrayrawfileloadthread.cpp:63
+#: core/io/filesystem/bytearrayrawfilereloadthread.cpp:56
 #, kde-format
 msgid "Support to load files larger than 2 GiB has not yet been implemented."
 msgstr ""
 
-#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:99
+#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:97
 #, fuzzy, kde-format
 #| msgctxt "@item name of the generated data"
 #| msgid "Pattern"
@@ -3548,20 +3548,20 @@ msgctxt "name of the generated data"
 msgid "Pattern…"
 msgstr "Muster"
 
-#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:148
+#: gui/io/generator/pattern/bytearraypatterngenerator.cpp:146
 #, fuzzy, kde-format
 #| msgid "Pattern inserted."
 msgctxt "@item"
 msgid "Pattern Inserted"
 msgstr "Muster inföögt."
 
-#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:35
+#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:33
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Pattern:"
 msgstr "Muster:"
 
-#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:44
+#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:42
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -3569,25 +3569,25 @@ msgid ""
 msgstr ""
 "Giff en Muster för de Söök in, oder köör en verleden Muster vun de List."
 
-#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:52
+#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:50
 #, kde-format
 msgctxt "@label:spinbox number of times to insert the pattern"
 msgid "&Number:"
 msgstr "&Tall:"
 
-#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:60
+#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:58
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Enter the number of times the pattern should be inserted."
 msgstr "Giff in, wo faken Du dat Muster infögen wullt."
 
-#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:72
+#: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:70
 #, kde-format
 msgctxt "@item name of the generated data"
 msgid "Pattern"
 msgstr "Muster"
 
-#: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:45
+#: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:43
 #, fuzzy, kde-format
 #| msgctxt "@item name of the generated data"
 #| msgid "Random Data"
@@ -3595,14 +3595,14 @@ msgctxt "name of the generated data"
 msgid "Random Data…"
 msgstr "Tofällig Daten"
 
-#: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:88
+#: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:86
 #, fuzzy, kde-format
 #| msgid "RandomData inserted."
 msgctxt "@item"
 msgid "RandomData Inserted"
 msgstr "Tofällig Daten inföögt."
 
-#: gui/io/generator/randomdata/bytearrayrandomdatageneratorconfigeditor.cpp:33
+#: gui/io/generator/randomdata/bytearrayrandomdatageneratorconfigeditor.cpp:31
 #, fuzzy, kde-format
 #| msgctxt "@label"
 #| msgid "Size [bytes]: "
@@ -3610,7 +3610,7 @@ msgctxt "@label:spinbox size of the bytearray to generate"
 msgid "&Size (bytes):"
 msgstr "Grött [Bytes]: "
 
-#: gui/io/generator/randomdata/bytearrayrandomdatageneratorconfigeditor.cpp:41
+#: gui/io/generator/randomdata/bytearrayrandomdatageneratorconfigeditor.cpp:39
 #, fuzzy, kde-format
 #| msgctxt "@info:whatsthis"
 #| msgid "Enter the size of the byte to generate."
@@ -3618,69 +3618,69 @@ msgctxt "@info:whatsthis"
 msgid "Enter the size of the bytearray to generate."
 msgstr "Giff de Grött vun dat Byte in, dat Du opstellen wullt."
 
-#: gui/io/generator/randomdata/bytearrayrandomdatageneratorconfigeditor.cpp:51
+#: gui/io/generator/randomdata/bytearrayrandomdatageneratorconfigeditor.cpp:49
 #, kde-format
 msgctxt "@item name of the generated data"
 msgid "Random Data"
 msgstr "Tofällig Daten"
 
-#: gui/io/generator/sequence/bytearraysequencegenerator.cpp:28
+#: gui/io/generator/sequence/bytearraysequencegenerator.cpp:26
 #, kde-format
 msgctxt "name of the generated data"
 msgid "Sequence"
 msgstr "Folg"
 
-#: gui/io/generator/sequence/bytearraysequencegenerator.cpp:58
+#: gui/io/generator/sequence/bytearraysequencegenerator.cpp:56
 #, fuzzy, kde-format
 #| msgid "Sequence inserted."
 msgctxt "@item"
 msgid "Sequence Inserted"
 msgstr "Folg inföögt."
 
-#: gui/io/streamcompressor/bzip2/bytearraybzip2streamcompressor.cpp:42
+#: gui/io/streamcompressor/bzip2/bytearraybzip2streamcompressor.cpp:40
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "bzip2"
 msgstr ""
 
-#: gui/io/streamcompressor/bzip2/bytearraybzip2streamcompressorconfigeditor.cpp:31
+#: gui/io/streamcompressor/bzip2/bytearraybzip2streamcompressorconfigeditor.cpp:29
 #, kde-format
 msgctxt "@label:spinbox bzip2 "
 msgid "Block size:"
 msgstr ""
 
-#: gui/io/streamcompressor/bzip2/bytearraybzip2streamcompressorconfigeditor.cpp:49
+#: gui/io/streamcompressor/bzip2/bytearraybzip2streamcompressorconfigeditor.cpp:47
 #, kde-format
 msgid "%1 kB"
 msgstr ""
 
-#: gui/io/streamcompressor/bzip2/bzip2compressionstream.cpp:35
+#: gui/io/streamcompressor/bzip2/bzip2compressionstream.cpp:33
 #, kde-format
 msgid "Internal bzip2 error: %1"
 msgstr ""
 
-#: gui/io/streamcompressor/bzip2/bzip2compressionstream.cpp:49
+#: gui/io/streamcompressor/bzip2/bzip2compressionstream.cpp:47
 #, kde-format
 msgid "Error code %1"
 msgstr ""
 
-#: gui/io/streamcompressor/bzip2/bzip2compressionstream.cpp:68
-#: gui/io/streamcompressor/deflate/deflatecompressionstream.cpp:71
-#: gui/io/streamcompressor/gzip/gzipcompressionstream.cpp:73
+#: gui/io/streamcompressor/bzip2/bzip2compressionstream.cpp:66
+#: gui/io/streamcompressor/deflate/deflatecompressionstream.cpp:69
+#: gui/io/streamcompressor/gzip/gzipcompressionstream.cpp:71
 #, kde-format
 msgid "Internal zlib error when compressing: %1"
 msgstr ""
 
-#: gui/io/streamcompressor/bzip2/bzip2compressionstream.cpp:77
-#: gui/io/streamcompressor/deflate/deflatecompressionstream.cpp:81
-#: gui/io/streamcompressor/gzip/gzipcompressionstream.cpp:83
-#: gui/io/streamcompressor/xz/xzcompressionstream.cpp:77
-#: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:93
+#: gui/io/streamcompressor/bzip2/bzip2compressionstream.cpp:75
+#: gui/io/streamcompressor/deflate/deflatecompressionstream.cpp:79
+#: gui/io/streamcompressor/gzip/gzipcompressionstream.cpp:81
+#: gui/io/streamcompressor/xz/xzcompressionstream.cpp:75
+#: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:91
 #, kde-format
 msgid "Error writing to output: %1"
 msgstr ""
 
-#: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressor.cpp:119
+#: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressor.cpp:117
 #, fuzzy, kde-format
 #| msgctxt "name of the checksum algorithm"
 #| msgid "Template"
@@ -3688,17 +3688,17 @@ msgctxt "name of the encoding target"
 msgid "deflate"
 msgstr "Vörlaag"
 
-#: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:31
-#: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:33
-#: gui/io/streamcompressor/zstd/bytearrayzstdstreamcompressorconfigeditor.cpp:30
+#: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:29
+#: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:31
+#: gui/io/streamcompressor/zstd/bytearrayzstdstreamcompressorconfigeditor.cpp:28
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Compression level:"
 msgstr ""
 
-#: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:35
-#: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:37
-#: gui/io/streamcompressor/zstd/bytearrayzstdstreamcompressorconfigeditor.cpp:34
+#: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:33
+#: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:35
+#: gui/io/streamcompressor/zstd/bytearrayzstdstreamcompressorconfigeditor.cpp:32
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "&Set as Default"
@@ -3706,15 +3706,15 @@ msgctxt "@item:inmenu compression level"
 msgid "Default"
 msgstr "As Standard &fastleggen"
 
-#: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:43
-#: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:45
+#: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:41
+#: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:43
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Compression strategy:"
 msgstr ""
 
-#: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:48
-#: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:50
+#: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:46
+#: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:48
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "&Set as Default"
@@ -3722,8 +3722,8 @@ msgctxt "@item:inmenu compression strategy"
 msgid "Default"
 msgstr "As Standard &fastleggen"
 
-#: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:50
-#: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:52
+#: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:48
+#: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:50
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "&Filter"
@@ -3731,15 +3731,15 @@ msgctxt "@item:inmenu compression strategy"
 msgid "Filter"
 msgstr "&Filter"
 
-#: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:52
-#: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:54
+#: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:50
+#: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:52
 #, kde-format
 msgctxt "@item:inmenu compression strategy"
 msgid "Huffman Encoding Only"
 msgstr ""
 
-#: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:54
-#: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:56
+#: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:52
+#: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:54
 #, fuzzy, kde-format
 #| msgctxt "name of the encoding target"
 #| msgid "Uuencoding"
@@ -3747,39 +3747,39 @@ msgctxt "@item:inmenu compression strategy"
 msgid "Run-Length Encoding"
 msgstr "UUencode"
 
-#: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:56
-#: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:58
+#: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:54
+#: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:56
 #, kde-format
 msgctxt "@item:inmenu compression strategy"
 msgid "Fixed Huffman Encoding"
 msgstr ""
 
-#: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:67
+#: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:65
 #, kde-format
 msgctxt "@option:check Create deflate stream without headers or footers"
 msgid "Create raw variant:"
 msgstr ""
 
-#: gui/io/streamcompressor/deflate/deflatecompressionstream.cpp:34
-#: gui/io/streamcompressor/gzip/gzipcompressionstream.cpp:36
-#: gui/io/streamcompressor/gzip/gzipcompressionstream.cpp:114
+#: gui/io/streamcompressor/deflate/deflatecompressionstream.cpp:32
+#: gui/io/streamcompressor/gzip/gzipcompressionstream.cpp:34
+#: gui/io/streamcompressor/gzip/gzipcompressionstream.cpp:112
 #, kde-format
 msgid "Internal zlib error: %1"
 msgstr ""
 
-#: gui/io/streamcompressor/deflate/deflatecompressionstream.cpp:52
-#: gui/io/streamcompressor/gzip/gzipcompressionstream.cpp:54
+#: gui/io/streamcompressor/deflate/deflatecompressionstream.cpp:50
+#: gui/io/streamcompressor/gzip/gzipcompressionstream.cpp:52
 #, kde-format
 msgid "Unknown zlib error, code %1"
 msgstr ""
 
-#: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressor.cpp:92
+#: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressor.cpp:90
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "gzip"
 msgstr ""
 
-#: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:67
+#: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:65
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "File Info"
@@ -3787,30 +3787,30 @@ msgctxt "@label:textbox"
 msgid "File name:"
 msgstr "Datei-Info"
 
-#: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:79
+#: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:77
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Comment:"
 msgstr ""
 
-#: gui/io/streamcompressor/iodevicebytearrayoutput.cpp:21
+#: gui/io/streamcompressor/iodevicebytearrayoutput.cpp:19
 #, kde-format
 msgid "Error writing to underlying device: %1"
 msgstr ""
 
-#: gui/io/streamcompressor/xz/bytearrayxzstreamcompressor.cpp:118
+#: gui/io/streamcompressor/xz/bytearrayxzstreamcompressor.cpp:116
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "xz"
 msgstr ""
 
-#: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:31
+#: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:29
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Compression preset level:"
 msgstr ""
 
-#: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:35
+#: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:33
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "&Set as Default"
@@ -3818,19 +3818,19 @@ msgctxt "@item:inmenu compression preset level"
 msgid "Default"
 msgstr "As Standard &fastleggen"
 
-#: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:44
+#: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:42
 #, kde-format
 msgctxt "@option:check Use extreme variant of compression preset level"
 msgid "Use extreme variant:"
 msgstr ""
 
-#: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:54
+#: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:52
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Integrity check:"
 msgstr ""
 
-#: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:59
+#: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:57
 #, fuzzy, kde-format
 #| msgctxt "@item There are no windows."
 #| msgid "None."
@@ -3838,19 +3838,19 @@ msgctxt "@item:inmenu integrity check"
 msgid "None"
 msgstr "Keen."
 
-#: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:61
+#: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:59
 #, kde-format
 msgctxt "@item:inmenu integrity check"
 msgid "CRC32"
 msgstr ""
 
-#: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:63
+#: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:61
 #, kde-format
 msgctxt "@item:inmenu integrity check"
 msgid "CRC64"
 msgstr ""
 
-#: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:65
+#: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:63
 #, fuzzy, kde-format
 #| msgctxt "name of the hash algorithm"
 #| msgid "SHA-256"
@@ -3858,68 +3858,68 @@ msgctxt "@item:inmenu integrity check"
 msgid "SHA-256"
 msgstr "SHA-256"
 
-#: gui/io/streamcompressor/xz/xzcompressionstream.cpp:30
+#: gui/io/streamcompressor/xz/xzcompressionstream.cpp:28
 #, kde-format
 msgid "Could not initialize lzma stream."
 msgstr ""
 
-#: gui/io/streamcompressor/xz/xzcompressionstream.cpp:48
+#: gui/io/streamcompressor/xz/xzcompressionstream.cpp:46
 #, kde-format
 msgid "Unknown lzma error, code %1"
 msgstr ""
 
-#: gui/io/streamcompressor/xz/xzcompressionstream.cpp:67
+#: gui/io/streamcompressor/xz/xzcompressionstream.cpp:65
 #, kde-format
 msgid "Internal lzma error when compressing: %1"
 msgstr ""
 
-#: gui/io/streamcompressor/zstd/bytearrayzstdstreamcompressor.cpp:48
+#: gui/io/streamcompressor/zstd/bytearrayzstdstreamcompressor.cpp:46
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "ZStandard"
 msgstr ""
 
-#: gui/io/streamcompressor/zstd/bytearrayzstdstreamcompressorconfigeditor.cpp:41
+#: gui/io/streamcompressor/zstd/bytearrayzstdstreamcompressorconfigeditor.cpp:39
 #, kde-format
 msgctxt "@option:check"
 msgid "Content size in frame header:"
 msgstr ""
 
-#: gui/io/streamcompressor/zstd/bytearrayzstdstreamcompressorconfigeditor.cpp:49
+#: gui/io/streamcompressor/zstd/bytearrayzstdstreamcompressorconfigeditor.cpp:47
 #, kde-format
 msgctxt "@option:check"
 msgid "Content checksum at frame end:"
 msgstr ""
 
-#: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:26
+#: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:24
 #, kde-format
 msgid "Could not create zstd stream context."
 msgstr ""
 
-#: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:31
-#: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:37
-#: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:45
+#: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:29
+#: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:35
+#: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:43
 #, kde-format
 msgid "Internal zstd error on setup: %1"
 msgstr ""
 
-#: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:67
+#: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:65
 #, kde-format
 msgid "Unknown zstd error, code %1"
 msgstr ""
 
-#: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:86
+#: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:84
 #, kde-format
 msgid "Internal zstd error when compressing: %1"
 msgstr ""
 
-#: gui/io/streamencoder/base32/bytearraybase32streamencoder.cpp:131
+#: gui/io/streamencoder/base32/bytearraybase32streamencoder.cpp:129
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "Base32"
 msgstr "Base32"
 
-#: gui/io/streamencoder/base32/bytearraybase32streamencoderconfigeditor.cpp:33
+#: gui/io/streamencoder/base32/bytearraybase32streamencoderconfigeditor.cpp:31
 #, kde-format
 msgctxt ""
 "@label:listbox the type of the used encoding: Classic, Base32hex or z-"
@@ -3927,57 +3927,57 @@ msgctxt ""
 msgid "Encoding:"
 msgstr "Koderen:"
 
-#: gui/io/streamencoder/base32/bytearraybase32streamencoderconfigeditor.cpp:38
+#: gui/io/streamencoder/base32/bytearraybase32streamencoderconfigeditor.cpp:36
 #, kde-format
 msgctxt "@item:inmenu Doing the base32 using the classical encoding"
 msgid "Classic"
 msgstr "Klass'sch"
 
-#: gui/io/streamencoder/base32/bytearraybase32streamencoderconfigeditor.cpp:40
+#: gui/io/streamencoder/base32/bytearraybase32streamencoderconfigeditor.cpp:38
 #, kde-format
 msgctxt "@item:inmenu Doing the base32 using the Base32hex encoding"
 msgid "Base32hex"
 msgstr "Base32hex"
 
-#: gui/io/streamencoder/base32/bytearraybase32streamencoderconfigeditor.cpp:42
+#: gui/io/streamencoder/base32/bytearraybase32streamencoderconfigeditor.cpp:40
 #, kde-format
 msgctxt "@item:inmenu Doing the base32 using the z-base-32 encoding"
 msgid "z-base-32"
 msgstr "z-base-32"
 
-#: gui/io/streamencoder/base64/bytearraybase64streamencoder.cpp:41
+#: gui/io/streamencoder/base64/bytearraybase64streamencoder.cpp:39
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "Base64"
 msgstr "Base64"
 
-#: gui/io/streamencoder/base85/bytearraybase85streamencoder.cpp:46
+#: gui/io/streamencoder/base85/bytearraybase85streamencoder.cpp:44
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "Ascii85"
 msgstr "ASCII85"
 
-#: gui/io/streamencoder/bytearraytextstreamencoderpreview.cpp:27
+#: gui/io/streamencoder/bytearraytextstreamencoderpreview.cpp:25
 #, fuzzy, kde-format
 #| msgid "The preview uses maximal the first 100 bytes."
 msgctxt "@info:tooltip"
 msgid "The preview uses maximally the first 100 bytes."
 msgstr "De Vöransicht bruukt tohööchst de vörst 100 Bytes."
 
-#: gui/io/streamencoder/chars/bytearraycharsstreamencoder.cpp:118
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoder.cpp:116
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "Characters"
 msgstr "Teken"
 
-#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:34
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:32
 #, fuzzy, kde-format
 #| msgid "Show Non-printable:"
 msgctxt "@label:listbox"
 msgid "Non-printable encode mode:"
 msgstr "Nich-druckbor Tekens wiesen:"
 
-#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:38
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:36
 #, fuzzy, kde-format
 #| msgctxt ""
 #| "@label:textbox byte to use for chars which are not part of the target "
@@ -3987,19 +3987,19 @@ msgctxt "@item:inmenu encode mode"
 msgid "Substitute"
 msgstr "Inwessel-Byte"
 
-#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:40
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:38
 #, kde-format
 msgctxt "@item:inmenu encode mode"
 msgid "Escape C-Style"
 msgstr ""
 
-#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:53
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:51
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Encoding for escaped chars:"
 msgstr ""
 
-#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:57
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:55
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip column contains the value in hexadecimal format"
 #| msgid "Hexadecimal"
@@ -4007,7 +4007,7 @@ msgctxt "@item:inmenu escape value encoding"
 msgid "Hexadecimal"
 msgstr "Hexadezimaal"
 
-#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:59
+#: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:57
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip column contains the value in octal format"
 #| msgid "Octal"
@@ -4015,64 +4015,64 @@ msgctxt "@item:inmenu escape value encoding"
 msgid "Octal"
 msgstr "Oktaal"
 
-#: gui/io/streamencoder/ihex/bytearrayihexstreamencoder.cpp:151
+#: gui/io/streamencoder/ihex/bytearrayihexstreamencoder.cpp:149
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "Intel Hex"
 msgstr "Intel Hex"
 
-#: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:33
-#: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:33
+#: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:31
+#: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:31
 #, kde-format
 msgctxt "@label:listbox the size in bits of the addresses."
 msgid "Address size:"
 msgstr "Adressgrött:"
 
-#: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:39
-#: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:38
+#: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:37
+#: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:36
 #, kde-format
 msgctxt "@item:inmenu address size"
 msgid "32-bit"
 msgstr "32-Bit"
 
-#: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:41
-#: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:42
+#: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:39
+#: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:40
 #, kde-format
 msgctxt "@item:inmenu address size"
 msgid "16-bit"
 msgstr "16-Bit"
 
-#: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:43
+#: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:41
 #, kde-format
 msgctxt "@item:inmenu address size"
 msgid "8-bit"
 msgstr "8-Bit"
 
-#: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoder.cpp:128
+#: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoder.cpp:126
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "C Array"
 msgstr "C-Feld"
 
-#: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoderconfigeditor.cpp:36
+#: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoderconfigeditor.cpp:34
 #, kde-format
 msgctxt "@label:textbox name of the created variable"
 msgid "Name of variable:"
 msgstr "Naam vun de Variabel:"
 
-#: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoderconfigeditor.cpp:47
+#: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoderconfigeditor.cpp:45
 #, kde-format
 msgctxt "@label:textbox to define after how many items the list is wrapped"
 msgid "Items per line:"
 msgstr "Indrääg per Reeg:"
 
-#: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoderconfigeditor.cpp:59
+#: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoderconfigeditor.cpp:57
 #, kde-format
 msgctxt "@label:listbox the type of the data: char, integer, etc."
 msgid "Data type:"
 msgstr "Datentyp:"
 
-#: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoderconfigeditor.cpp:80
+#: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoderconfigeditor.cpp:78
 #, kde-format
 msgctxt ""
 "@option:check Encode the values in hexadecimal instead of decimal, if the "
@@ -4080,79 +4080,79 @@ msgctxt ""
 msgid "Unsigned as hexadecimal:"
 msgstr "Ahn Vörteken as hexadezimaal:"
 
-#: gui/io/streamencoder/srec/bytearraysrecstreamencoder.cpp:171
+#: gui/io/streamencoder/srec/bytearraysrecstreamencoder.cpp:169
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "S-Record"
 msgstr "S-Record"
 
-#: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:40
+#: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:38
 #, kde-format
 msgctxt "@item:inmenu address size"
 msgid "24-bit"
 msgstr "24-Bit"
 
-#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoder.cpp:109
+#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoder.cpp:107
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "Uuencoding"
 msgstr "UUencode"
 
-#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:34
-#: gui/io/streamencoder/xxencoding/bytearrayxxencodingstreamencoderconfigeditor.cpp:33
+#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:32
+#: gui/io/streamencoder/xxencoding/bytearrayxxencodingstreamencoderconfigeditor.cpp:31
 #, kde-format
 msgctxt "@label:textbox file name internally given to the encoded data"
 msgid "Internal name of file:"
 msgstr "Intern Naam vun de Datei:"
 
-#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:45
+#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:43
 #, kde-format
 msgctxt "@label:listbox the type of the used encoding: historical or Base64."
 msgid "Encoding:"
 msgstr "Koderen:"
 
-#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:50
+#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:48
 #, kde-format
 msgctxt "@item:inmenu Doing the uuencoding using the historical encoding"
 msgid "Historical"
 msgstr "Histoorsch"
 
-#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:52
+#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:50
 #, kde-format
 msgctxt "@item:inmenu Doing the uuencoding using the base64 encoding"
 msgid "Base64"
 msgstr "Base64"
 
-#: gui/io/streamencoder/values/bytearrayvaluesstreamencoder.cpp:56
+#: gui/io/streamencoder/values/bytearrayvaluesstreamencoder.cpp:54
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "Values"
 msgstr "Weerten"
 
-#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:33
+#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:31
 #, kde-format
 msgid "Value coding:"
 msgstr "Weert-Koderen:"
 
-#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:49
+#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:47
 #, kde-format
 msgctxt "@label:textbox substring which separates the values"
 msgid "Separation:"
 msgstr "Trennen:"
 
-#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:59
+#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:57
 #, kde-format
 msgctxt "@label:textbox substring which prefixes each value"
 msgid "Prefix:"
 msgstr ""
 
-#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:70
+#: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:68
 #, kde-format
 msgctxt "@label:textbox substring which postfixes each value"
 msgid "Postfix:"
 msgstr ""
 
-#: gui/io/streamencoder/viewhtml/bytearrayviewhtmlstreamencoder.cpp:36
+#: gui/io/streamencoder/viewhtml/bytearrayviewhtmlstreamencoder.cpp:34
 #, fuzzy, kde-format
 #| msgctxt "name of the encoding target"
 #| msgid "View in Plain Text"
@@ -4160,32 +4160,32 @@ msgctxt "name of the encoding target"
 msgid "View in HTML"
 msgstr "As eenfach Text ankieken"
 
-#: gui/io/streamencoder/viewtext/bytearrayviewtextstreamencoder.cpp:41
+#: gui/io/streamencoder/viewtext/bytearrayviewtextstreamencoder.cpp:39
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "View in Plain Text"
 msgstr "As eenfach Text ankieken"
 
-#: gui/io/streamencoder/xxencoding/bytearrayxxencodingstreamencoder.cpp:62
+#: gui/io/streamencoder/xxencoding/bytearrayxxencodingstreamencoder.cpp:60
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "Xxencoding"
 msgstr "XXencode:"
 
 #. i18nc("@item:inlistbox guessing the format of the address by the input",      "Auto"),
-#: gui/liboktetawidgets/addresscombobox_p.cpp:30
+#: gui/liboktetawidgets/addresscombobox_p.cpp:28
 #, kde-format
 msgctxt "@item:inlistbox coding of offset in the hexadecimal format"
 msgid "Hex"
 msgstr "Hex"
 
-#: gui/liboktetawidgets/addresscombobox_p.cpp:31
+#: gui/liboktetawidgets/addresscombobox_p.cpp:29
 #, kde-format
 msgctxt "@item:inlistbox coding of offset in the decimal format"
 msgid "Dec"
 msgstr "Dez"
 
-#: gui/liboktetawidgets/addresscombobox_p.cpp:32
+#: gui/liboktetawidgets/addresscombobox_p.cpp:30
 #, fuzzy, kde-format
 #| msgctxt "@title:column short for Octal"
 #| msgid "Oct"
@@ -4193,45 +4193,45 @@ msgctxt "@item:inlistbox coding of offset in the octal format"
 msgid "Oct"
 msgstr "Okt"
 
-#: gui/liboktetawidgets/addresscombobox_p.cpp:33
+#: gui/liboktetawidgets/addresscombobox_p.cpp:31
 #, kde-format
 msgctxt "@item:inlistbox coding of offset in the expression format"
 msgid "Expr"
 msgstr "Utdr"
 
 #. i18nc("@item:inlistbox guessing the coding of the bytes by the input",       "Auto"),
-#: gui/liboktetawidgets/bytearraycombobox_p.cpp:25
+#: gui/liboktetawidgets/bytearraycombobox_p.cpp:23
 #, kde-format
 msgctxt ""
 "@item:inlistbox coding of the bytes as values in the hexadecimal format"
 msgid "Hex"
 msgstr "Hex"
 
-#: gui/liboktetawidgets/bytearraycombobox_p.cpp:26
+#: gui/liboktetawidgets/bytearraycombobox_p.cpp:24
 #, kde-format
 msgctxt "@item:inlistbox coding of the bytes as values in the decimal format"
 msgid "Dec"
 msgstr "Dez"
 
-#: gui/liboktetawidgets/bytearraycombobox_p.cpp:27
+#: gui/liboktetawidgets/bytearraycombobox_p.cpp:25
 #, kde-format
 msgctxt "@item:inlistbox coding of the bytes as values in the octal format"
 msgid "Oct"
 msgstr "Okt"
 
-#: gui/liboktetawidgets/bytearraycombobox_p.cpp:28
+#: gui/liboktetawidgets/bytearraycombobox_p.cpp:26
 #, kde-format
 msgctxt "@item:inlistbox coding of the bytes as values in the binary format"
 msgid "Bin"
 msgstr "Bin"
 
-#: gui/liboktetawidgets/bytearraycombobox_p.cpp:29
+#: gui/liboktetawidgets/bytearraycombobox_p.cpp:27
 #, kde-format
 msgctxt "@item:inlistbox coding of the bytes as characters with the values"
 msgid "Char"
 msgstr "Teken"
 
-#: gui/liboktetawidgets/bytearraycombobox_p.cpp:30
+#: gui/liboktetawidgets/bytearraycombobox_p.cpp:28
 #, kde-format
 msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"

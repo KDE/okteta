@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-14 02:06+0000\n"
+"POT-Creation-Date: 2025-09-17 01:57+0000\n"
 "PO-Revision-Date: 2022-09-27 17:35+0700\n"
 "Last-Translator: Wantoyèk <wantoyek@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -28,47 +28,47 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "dirgitadevina@yahoo.co.id"
 
-#: about.cpp:17
+#: about.cpp:15
 #, kde-format
 msgid "Okteta"
 msgstr "Okteta"
 
-#: about.cpp:19
+#: about.cpp:17
 #, fuzzy, kde-format
 #| msgid "Hex editor"
 msgctxt "@info"
 msgid "Hex editor"
 msgstr "Penyunting Hex"
 
-#: about.cpp:21
+#: about.cpp:19
 #, fuzzy, kde-format
 #| msgid "Copyright 2006-2018 Friedrich W. H. Kossebau"
 msgctxt "@info"
 msgid "2006-%1 Friedrich W. H. Kossebau"
 msgstr "Hak Cipta 2006-2018 Friedrich W. H. Kossebau"
 
-#: about.cpp:22
+#: about.cpp:20
 #, fuzzy, kde-format
 #| msgid "Edit the raw data of files"
 msgctxt "@info"
 msgid "Edit the raw data of files"
 msgstr "Mengedit data mentah sebuah file"
 
-#: about.cpp:27
+#: about.cpp:25
 #, fuzzy, kde-format
 #| msgid "Friedrich W. H. Kossebau"
 msgctxt "@info:credit"
 msgid "Friedrich W. H. Kossebau"
 msgstr "Friedrich W. H. Kossebau"
 
-#: about.cpp:28
+#: about.cpp:26
 #, fuzzy, kde-format
 #| msgid "Author"
 msgctxt "@info:credit"
 msgid "Author"
 msgstr "Penulis"
 
-#: about.cpp:30
+#: about.cpp:28
 #, fuzzy, kde-format
 #| msgctxt "Author"
 #| msgid "Alexander Richardson"
@@ -76,7 +76,7 @@ msgctxt "@info:credit"
 msgid "Alexander Richardson"
 msgstr "Alexander Richardson"
 
-#: about.cpp:31
+#: about.cpp:29
 #, fuzzy, kde-format
 #| msgctxt "Task description"
 #| msgid "Structures tool"
@@ -103,7 +103,7 @@ msgstr "&Jendela"
 msgid "Main Toolbar"
 msgstr "Bilah Alat Utama"
 
-#: program.cpp:89
+#: program.cpp:87
 #, fuzzy, kde-format
 #| msgid "File(s) to load."
 msgctxt "@info"

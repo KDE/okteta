@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-14 02:06+0000\n"
+"POT-Creation-Date: 2025-09-17 01:57+0000\n"
 "PO-Revision-Date: 2025-02-14 12:37+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -30,48 +30,48 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "yurchor@ukr.net"
 
-#: about.cpp:17
+#: about.cpp:15
 #, kde-format
 msgid "Okteta"
 msgstr "Okteta"
 
-#: about.cpp:19
+#: about.cpp:17
 #, kde-format
 msgctxt "@info"
 msgid "Hex editor"
 msgstr "Шістнадцятковий редактор"
 
-#: about.cpp:21
+#: about.cpp:19
 #, kde-format
 msgctxt "@info"
 msgid "2006-%1 Friedrich W. H. Kossebau"
 msgstr "© Friedrich W. H. Kossebau, 2006–%1"
 
-#: about.cpp:22
+#: about.cpp:20
 #, kde-format
 msgctxt "@info"
 msgid "Edit the raw data of files"
 msgstr "Редагування необроблених даних з файлів"
 
-#: about.cpp:27
+#: about.cpp:25
 #, kde-format
 msgctxt "@info:credit"
 msgid "Friedrich W. H. Kossebau"
 msgstr "Friedrich W. H. Kossebau"
 
-#: about.cpp:28
+#: about.cpp:26
 #, kde-format
 msgctxt "@info:credit"
 msgid "Author"
 msgstr "Автор"
 
-#: about.cpp:30
+#: about.cpp:28
 #, kde-format
 msgctxt "@info:credit"
 msgid "Alexander Richardson"
 msgstr "Alexander Richardson"
 
-#: about.cpp:31
+#: about.cpp:29
 #, kde-format
 msgctxt "@info:credit"
 msgid "Structures tool"
@@ -96,7 +96,7 @@ msgstr "&Вікна"
 msgid "Main Toolbar"
 msgstr "Головна панель"
 
-#: program.cpp:89
+#: program.cpp:87
 #, kde-format
 msgctxt "@info"
 msgid "File(s) to load."

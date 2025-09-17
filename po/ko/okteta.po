@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-14 02:06+0000\n"
+"POT-Creation-Date: 2025-09-17 01:57+0000\n"
 "PO-Revision-Date: 2025-04-07 00:07+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -28,48 +28,48 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "kde@peremen.name"
 
-#: about.cpp:17
+#: about.cpp:15
 #, kde-format
 msgid "Okteta"
 msgstr "Okteta"
 
-#: about.cpp:19
+#: about.cpp:17
 #, kde-format
 msgctxt "@info"
 msgid "Hex editor"
 msgstr "16진수 편집기"
 
-#: about.cpp:21
+#: about.cpp:19
 #, kde-format
 msgctxt "@info"
 msgid "2006-%1 Friedrich W. H. Kossebau"
 msgstr "2006-%1 Friedrich W. H. Kossebau"
 
-#: about.cpp:22
+#: about.cpp:20
 #, kde-format
 msgctxt "@info"
 msgid "Edit the raw data of files"
 msgstr "파일의 데이터를 곧바로 편집합니다"
 
-#: about.cpp:27
+#: about.cpp:25
 #, kde-format
 msgctxt "@info:credit"
 msgid "Friedrich W. H. Kossebau"
 msgstr "Friedrich W. H. Kossebau"
 
-#: about.cpp:28
+#: about.cpp:26
 #, kde-format
 msgctxt "@info:credit"
 msgid "Author"
 msgstr "작성자"
 
-#: about.cpp:30
+#: about.cpp:28
 #, kde-format
 msgctxt "@info:credit"
 msgid "Alexander Richardson"
 msgstr "Alexander Richardson"
 
-#: about.cpp:31
+#: about.cpp:29
 #, kde-format
 msgctxt "@info:credit"
 msgid "Structures tool"
@@ -94,7 +94,7 @@ msgstr "창(&W)"
 msgid "Main Toolbar"
 msgstr "주 도구 모음"
 
-#: program.cpp:89
+#: program.cpp:87
 #, kde-format
 msgctxt "@info"
 msgid "File(s) to load."

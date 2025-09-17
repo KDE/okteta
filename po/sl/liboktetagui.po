@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-25 01:57+0000\n"
+"POT-Creation-Date: 2025-09-17 01:57+0000\n"
 "PO-Revision-Date: 2025-02-14 07:09+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -21,49 +21,49 @@ msgstr ""
 "Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
 "X-Generator: Poedit 3.5\n"
 
-#: controller/clipboardcontroller.cpp:78
+#: controller/clipboardcontroller.cpp:76
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Copy"
 msgstr "Kopiraj"
 
-#: controller/clipboardcontroller.cpp:88
+#: controller/clipboardcontroller.cpp:86
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Cu&t"
 msgstr "Izreži"
 
-#: controller/clipboardcontroller.cpp:95
+#: controller/clipboardcontroller.cpp:93
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Paste"
 msgstr "Prilepi"
 
-#: controller/keynavigator.cpp:304
+#: controller/keynavigator.cpp:302
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Select &All"
 msgstr "Izberi vse"
 
-#: controller/undoredocontroller.cpp:83
+#: controller/undoredocontroller.cpp:81
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Undo"
 msgstr "Razveljavi"
 
-#: controller/undoredocontroller.cpp:89
+#: controller/undoredocontroller.cpp:87
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Re&do"
 msgstr "Uveljavi"
 
-#: controller/valueeditor.cpp:239
+#: controller/valueeditor.cpp:237
 #, kde-format
 msgctxt "@item name of the change"
 msgid "Insert"
 msgstr "Vstavi"
 
-#: controller/valueeditor.cpp:278
+#: controller/valueeditor.cpp:276
 #, kde-format
 msgctxt "@item name of the change"
 msgid "Replace"
