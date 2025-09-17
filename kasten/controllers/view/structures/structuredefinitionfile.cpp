@@ -28,14 +28,14 @@ StructureDefinitionFile::StructureDefinitionFile(const StructureMetaData& metaDa
     const QString categoryId = mMetaData.categoryId();
     if (categoryId == QLatin1String("structure/js")) {
         const QString filename = absoluteDir + QLatin1String("/main.js");
-        mParser.reset(new ScriptFileParser(mMetaData.id(), filename));
+        mParser = std::make_unique<ScriptFileParser>(mMetaData.id(), filename);
     } else if (categoryId == QLatin1String("structure")) {
         // by default use main.osd, only if it doesn't exist fall back to old behaviour
         QString filename = absoluteDir + QLatin1String("/main.osd");
         if (!QFile::exists(filename)) {
             filename = absoluteDir + QLatin1Char('/') + mMetaData.id() + QLatin1String(".osd");
         }
-        mParser.reset(new OsdParser(mMetaData.id(), filename));
+        mParser = std::make_unique<OsdParser>(mMetaData.id(), filename);
     } else {
         qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "no valid parser found for plugin category '" << categoryId << "'";
     }

@@ -240,7 +240,7 @@ inline void CommonParserTest::testToStringEncoding()
 {
     QFETCH(QString, str);
     QFETCH(int, expected);
-    std::unique_ptr<ScriptLogger> logger(new ScriptLogger());
+    const auto logger = std::make_unique<ScriptLogger>();
     StringDataInformation::StringType type =
         ParserUtils::toStringEncoding(str, LoggerWithContext(logger.get(), QString()));
     QCOMPARE((int)type, expected);

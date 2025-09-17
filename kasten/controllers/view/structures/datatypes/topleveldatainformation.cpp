@@ -38,13 +38,13 @@ TopLevelDataInformation::TopLevelDataInformation(DataInformation* data, ScriptLo
     setObjectName(mData->name());
 
     if (!mLogger) {
-        mLogger.reset(new ScriptLogger());
+        mLogger = std::make_unique<ScriptLogger>();
     }
 
     if (!engine) {
         engine = ScriptEngineInitializer::newEngine();
     }
-    mScriptHandler.reset(new ScriptHandler(engine, this));
+    mScriptHandler = std::make_unique<ScriptHandler>(engine, this);
 }
 
 TopLevelDataInformation::~TopLevelDataInformation() = default;

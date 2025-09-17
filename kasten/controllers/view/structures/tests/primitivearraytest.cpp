@@ -95,7 +95,7 @@ void PrimitiveArrayTest::initTestCase()
 
     auto* copy = new Okteta::Byte[SIZE];
     memcpy(copy, data.data(), SIZE);
-    model.reset(new Okteta::ByteArrayModel(copy, SIZE));
+    model = std::make_unique<Okteta::ByteArrayModel>(copy, SIZE);
     model->setAutoDelete(true);
     QCOMPARE(model->size(), Okteta::Size(SIZE));
 
@@ -106,7 +106,7 @@ void PrimitiveArrayTest::initTestCase()
 
     auto* endianCopy = new Okteta::Byte[SIZE];
     memcpy(endianCopy, endianData.data(), ENDIAN_SIZE);
-    endianModel.reset(new Okteta::ByteArrayModel(endianCopy, ENDIAN_SIZE));
+    endianModel = std::make_unique<Okteta::ByteArrayModel>(endianCopy, ENDIAN_SIZE);
     endianModel->setAutoDelete(true);
     QCOMPARE(endianModel->size(), Okteta::Size(ENDIAN_SIZE));
 }
@@ -192,7 +192,7 @@ void PrimitiveArrayTest::testReadCustomizedPrimitiveInternal()
     auto* dataInf = new ArrayDataInformation(QStringLiteral("values"),
                                              endianModel->size() / sizeof(T),
                                              primInfo);
-    std::unique_ptr<TopLevelDataInformation> top(new TopLevelDataInformation(dataInf, nullptr, engine));
+    const auto top = std::make_unique<TopLevelDataInformation>(dataInf, nullptr, engine);
 
     QCOMPARE(dataInf->childCount(), uint(ENDIAN_SIZE / sizeof(T)));
     quint8 bitOffs = 0;
@@ -233,8 +233,7 @@ void PrimitiveArrayTest::testReadPrimitiveInternal()
                                                              model->size() / sizeof(T),
                                                              PrimitiveFactory::newInstance(QStringLiteral("value"), primType, lwc));
     dataInf->setByteOrder(CURRENT_BYTE_ORDER);
-    std::unique_ptr<TopLevelDataInformation> top(new TopLevelDataInformation(dataInf, nullptr,
-                                                                            ScriptEngineInitializer::newEngine()));
+    const auto top = std::make_unique<TopLevelDataInformation>(dataInf, nullptr, ScriptEngineInitializer::newEngine());
     QCOMPARE(dataInf->childCount(), uint(SIZE / sizeof(T)));
     quint8 bitOffs = 0;
     qint64 result = dataInf->readData(model.get(), 0, model->size() * 8, &bitOffs);

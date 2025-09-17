@@ -330,7 +330,7 @@ PointerDataInformation* DataInformationFactory::newPointer(const PointerParsedDa
 
 TaggedUnionDataInformation* DataInformationFactory::newTaggedUnion(const TaggedUnionParsedData& pd)
 {
-    std::unique_ptr<TaggedUnionDataInformation> tagged(new TaggedUnionDataInformation(pd.name, pd.parent));
+    auto tagged = std::make_unique<TaggedUnionDataInformation>(pd.name, pd.parent);
     pd.children->setParent(tagged.get());
     while (pd.children->hasNext()) {
         DataInformation* data = pd.children->next();

@@ -100,7 +100,7 @@ QDomDocument OsdParser::openDocFromFile(ScriptLogger* logger) const
 QStringList OsdParser::parseStructureNames() const
 {
     QStringList ret;
-    std::unique_ptr<ScriptLogger> rootLogger(new ScriptLogger); // only needed if we get an error right now
+    auto rootLogger = std::make_unique<ScriptLogger>(); // only needed if we get an error right now
     rootLogger->setLogToStdOut(true); // we cannot get our messages into the script console, so do this instead
     QDomDocument document = openDoc(rootLogger.get());
     if (document.isNull()) {
@@ -133,7 +133,7 @@ QVector<TopLevelDataInformation*> OsdParser::parseStructures() const
     QFileInfo fileInfo(mAbsolutePath);
 
     QVector<TopLevelDataInformation*> structures;
-    std::unique_ptr<ScriptLogger> rootLogger(new ScriptLogger()); // only needed in we get an error right now
+    auto rootLogger = std::make_unique<ScriptLogger>(); // only needed in we get an error right now
     QDomDocument document = openDoc(rootLogger.get());
     if (document.isNull()) {
         structures.append(new TopLevelDataInformation(
@@ -362,14 +362,14 @@ AbstractBitfieldDataInformation* OsdParser::bitfieldFromXML(const QDomElement& x
 UnionDataInformation* OsdParser::unionFromXML(const QDomElement& xmlElem, const OsdParserInfo& info)
 {
     StructOrUnionParsedData supd(info);
-    supd.children.reset(new OsdChildrenParser(info, xmlElem.firstChildElement()));
+    supd.children = std::make_unique<OsdChildrenParser>(info, xmlElem.firstChildElement());
     return DataInformationFactory::newUnion(supd);
 }
 
 StructureDataInformation* OsdParser::structFromXML(const QDomElement& xmlElem, const OsdParserInfo& info)
 {
     StructOrUnionParsedData supd(info);
-    supd.children.reset(new OsdChildrenParser(info, xmlElem.firstChildElement()));
+    supd.children = std::make_unique<OsdChildrenParser>(info, xmlElem.firstChildElement());
     return DataInformationFactory::newStruct(supd);
 }
 
@@ -497,8 +497,8 @@ TaggedUnionDataInformation* OsdParser::taggedUnionFromXML(const QDomElement& xml
     if (defaultChildren.isNull()) {
         info.info() << "No default fields specified, defaulting to none.";
     }
-    tpd.defaultFields.reset(new OsdChildrenParser(info, defaultChildren));
-    tpd.children.reset(new OsdChildrenParser(info, xmlElem.firstChildElement()));
+    tpd.defaultFields = std::make_unique<OsdChildrenParser>(info, defaultChildren);
+    tpd.children = std::make_unique<OsdChildrenParser>(info, xmlElem.firstChildElement());
     // now handle alternatives
     QDomElement alternatives = xmlElem.firstChildElement(PROPERTY_ALTERNATIVES());
     if (alternatives.isNull()) {

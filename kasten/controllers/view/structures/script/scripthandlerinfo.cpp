@@ -17,13 +17,13 @@
 
 ScriptHandlerInfo::ScriptHandlerInfo(QScriptEngine* engine, ScriptLogger* logger)
     : mLogger(logger)
-    , mArrayClass(new ArrayScriptClass(engine, this))
-    , mPrimitiveClass(new PrimitiveScriptClass(engine, this))
-    , mEnumClass(new EnumScriptClass(engine, this))
-    , mStructUnionClass(new StructUnionScriptClass(engine, this))
-    , mStringClass(new StringScriptClass(engine, this))
-    , mBitfieldClass(new BitfieldScriptClass(engine, this))
-    , mPointerClass(new PointerScriptClass(engine, this))
+    , mArrayClass(std::make_unique<ArrayScriptClass>(engine, this))
+    , mPrimitiveClass(std::make_unique<PrimitiveScriptClass>(engine, this))
+    , mEnumClass(std::make_unique<EnumScriptClass>(engine, this))
+    , mStructUnionClass(std::make_unique<StructUnionScriptClass>(engine, this))
+    , mStringClass(std::make_unique<StringScriptClass>(engine, this))
+    , mBitfieldClass(std::make_unique<BitfieldScriptClass>(engine, this))
+    , mPointerClass(std::make_unique<PointerScriptClass>(engine, this))
 {
     Q_CHECK_PTR(mLogger);
 }

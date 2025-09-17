@@ -231,7 +231,7 @@ void BasicDataInformationTest::basicTest(DataInformationBase* data, const Expect
     QCOMPARE(dataInf->parent(), expected.parent);
 
     DataInformation* clone1 = (dataInf->clone());
-    std::unique_ptr<TopLevelDataInformation> top(new TopLevelDataInformation(clone1));
+    const auto top = std::make_unique<TopLevelDataInformation>(clone1);
     QCOMPARE(clone1->parent(), top.get()); // top takes ownership of clone1
     QCOMPARE(top->actualDataInformation(), clone1);
 

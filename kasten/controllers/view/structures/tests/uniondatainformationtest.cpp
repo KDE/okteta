@@ -43,7 +43,7 @@ static constexpr Okteta::Byte testData[8] = {
 
 void UnionDataInformationTest::initTestCase()
 {
-    model.reset(new Okteta::ByteArrayModel(testData, sizeof(testData)));
+    model = std::make_unique<Okteta::ByteArrayModel>(testData, sizeof(testData));
     model->setAutoDelete(false);
     QCOMPARE(model->size(), Okteta::Size(8));
 }

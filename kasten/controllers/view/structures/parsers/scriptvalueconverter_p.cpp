@@ -158,14 +158,14 @@ PrimitiveDataInformation* toPrimitive(const QScriptValue& value, const ParserInf
 StructureDataInformation* toStruct(const QScriptValue& value, const ParserInfo& info)
 {
     StructOrUnionParsedData supd(info);
-    supd.children.reset(new ScriptValueChildrenParser(info, value.property(PROPERTY_CHILDREN())));
+    supd.children = std::make_unique<ScriptValueChildrenParser>(info, value.property(PROPERTY_CHILDREN()));
     return DataInformationFactory::newStruct(supd);
 }
 
 UnionDataInformation* toUnion(const QScriptValue& value, const ParserInfo& info)
 {
     StructOrUnionParsedData supd(info);
-    supd.children.reset(new ScriptValueChildrenParser(info, value.property(PROPERTY_CHILDREN())));
+    supd.children = std::make_unique<ScriptValueChildrenParser>(info, value.property(PROPERTY_CHILDREN()));
     return DataInformationFactory::newUnion(supd);
 }
 
@@ -240,8 +240,8 @@ TaggedUnionDataInformation* toTaggedUnion(const QScriptValue& value, const Parse
         tpd.alternatives.append(alt);
     }
 
-    tpd.children.reset(new ScriptValueChildrenParser(info, value.property(PROPERTY_CHILDREN())));
-    tpd.defaultFields.reset(new ScriptValueChildrenParser(info, value.property(PROPERTY_DEFAULT_CHILDREN())));
+    tpd.children = std::make_unique<ScriptValueChildrenParser>(info, value.property(PROPERTY_CHILDREN()));
+    tpd.defaultFields = std::make_unique<ScriptValueChildrenParser>(info, value.property(PROPERTY_DEFAULT_CHILDREN()));
     return DataInformationFactory::newTaggedUnion(tpd);
 }
 
