@@ -39,10 +39,13 @@ QVariant ScriptLogger::data(const QModelIndex& index, int role) const
         return {};
     }
     int row = index.row();
-    Q_ASSERT(row < mData.size());
+    Q_ASSERT(row < static_cast<int>(mData.size()));
     Q_ASSERT(!index.parent().isValid());
+    if ((row < 0) || (static_cast<int>(mData.size()) <= row)) {
+        return {};
+    }
     if (role == Qt::DisplayRole) {
-        const Data& data = mData.at(row);
+        const Data& data = mData[row];
         switch (index.column())
         {
         case ColumnTime:
@@ -56,7 +59,7 @@ QVariant ScriptLogger::data(const QModelIndex& index, int role) const
         }
     }
     if (role == Qt::DecorationRole && index.column() == ColumnTime) {
-        return iconForLevel(mData.at(row).level);
+        return iconForLevel(mData[row].level);
     }
     return {};
 }
@@ -110,14 +113,14 @@ QDebug ScriptLogger::log(LogLevel level, const QString& origin)
     }
 
     beginInsertRows(QModelIndex(), mData.size(), mData.size());
-    mData.append(Data(level, origin));
+    mData.emplace_back(Data(level, origin));
     endInsertRows();
-    return QDebug(&mData.last().message);
+    return QDebug(&mData.back().message);
 }
 
 void ScriptLogger::clear()
 {
-    if (mData.isEmpty()) {
+    if (mData.empty()) {
         return;
     }
 

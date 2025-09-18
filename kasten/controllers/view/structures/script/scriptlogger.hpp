@@ -9,9 +9,10 @@
 
 // Qt
 #include <QAbstractTableModel>
-#include <QVector>
 #include <QDebug>
 #include <QTime>
+// Std
+#include <vector>
 
 class QIcon;
 
@@ -106,7 +107,7 @@ public:
     static QIcon iconForLevel(LogLevel level);
 
 private:
-    QVector<Data> mData;
+    std::vector<Data> mData;
     bool mLogToStdOut = false;
 };
 
