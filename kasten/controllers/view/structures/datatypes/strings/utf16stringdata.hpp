@@ -20,7 +20,7 @@ public:
     ~Utf16StringData() override;
 
     QString charType() const override;
-    QString completeString(bool skipInvalid = false) const override;
+    QString completeString() const override;
     uint count() const override;
     qint64 read(const Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining) override;
     BitCount32 size() const override;

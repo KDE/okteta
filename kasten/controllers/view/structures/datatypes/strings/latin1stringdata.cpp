@@ -106,9 +106,8 @@ BitCount32 Latin1StringData::size() const
     return mData.size() * 8;
 }
 
-QString Latin1StringData::completeString(bool skipInvalid) const
+QString Latin1StringData::completeString() const
 {
-    Q_UNUSED(skipInvalid) // all are valid
     int max = mData.size();
     QVarLengthArray<QChar> buf(max);
     for (int i = 0; i < max; ++i) {
