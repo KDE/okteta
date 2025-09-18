@@ -113,9 +113,9 @@ QDebug ScriptLogger::log(LogLevel level, const QString& origin)
     }
 
     beginInsertRows(QModelIndex(), mData.size(), mData.size());
-    mData.emplace_back(Data(level, origin));
+    auto& data = mData.emplace_back(Data(level, origin));
     endInsertRows();
-    return QDebug(&mData.back().message);
+    return QDebug(&data.message);
 }
 
 void ScriptLogger::clear()

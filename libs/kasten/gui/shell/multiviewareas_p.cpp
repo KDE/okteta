@@ -30,9 +30,9 @@ TabbedViews* MultiViewAreasPrivate::createViewArea(QSplitter* splitter)
 {
     Q_Q(MultiViewAreas);
 
-    mViewAreaList.emplace_back(std::make_unique<TabbedViews>());
+    const auto& managedviewArea = mViewAreaList.emplace_back(std::make_unique<TabbedViews>());
 
-    auto* viewArea = mViewAreaList.back().get();
+    auto* viewArea = managedviewArea.get();
 
     QObject::connect(viewArea, &AbstractViewArea::focusChanged,
                      q, [this](bool hasFocus) { onViewAreaFocusChanged(hasFocus); });

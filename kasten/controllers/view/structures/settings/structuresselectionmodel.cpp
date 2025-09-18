@@ -41,8 +41,8 @@ void StructuresSelectionModel::setStructures(const QMap<QString, Kasten::Structu
     m_metaDataList.reserve(structureDefs.size());
     // consider storing structureDefs directly in the model, but needs rework to not use raw pointers
     for (const Kasten::StructureDefinitionFile* def : structureDefs) {
-        m_metaDataList.emplace_back(def->metaData());
-        ids.insert(m_metaDataList.back().id(), def->structureNames());
+        const auto& metaData = m_metaDataList.emplace_back(def->metaData());
+        ids.insert(metaData.id(), def->structureNames());
     }
 
     // drop no longer existing ids from the enabled list
