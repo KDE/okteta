@@ -10,8 +10,9 @@
 // lib
 #include "stringdata.hpp"
 // Qt
-#include <QVector>
 #include <QHash>
+// Std
+#include <vector>
 
 class Utf8StringData : public StringData
 {
@@ -30,7 +31,7 @@ public:
 
 private:
     QHash<int, quint8> mErrorIndices;
-    QVector<quint32> mCodePoints;
+    std::vector<quint32> mCodePoints;
     uint mOneByteCount = 0;
     uint mTwoByteCount = 0;
     uint mThreeByteCount = 0;

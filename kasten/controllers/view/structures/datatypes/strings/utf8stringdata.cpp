@@ -44,7 +44,7 @@ QString Utf8StringData::stringValue(int row) const
 {
     Q_ASSERT((uint)row < count());
     // TODO show invalid values
-    uint val = mCodePoints.at(row);
+    const uint val = mCodePoints[row];
     QString number = QString::number(val, 16).toUpper();
     if (number.length() == 1) {
         number = QLatin1Char('0') + number;
@@ -59,16 +59,16 @@ QString Utf8StringData::stringValue(int row) const
         return i18n("%1 (U+%2)", ret, number);
     }
 
-    return i18n("%1 (U+%2)", QString(QChar(mCodePoints.at(row))), number);
+    return i18n("%1 (U+%2)", QString(QChar(val)), number);
 }
 
 QString Utf8StringData::completeString() const
 {
     QVarLengthArray<QChar> data(mCodePoints.size() + mNonBMPCount);
-    int codePointCount = mCodePoints.size();
+    const std::size_t codePointCount = mCodePoints.size();
     int i = 0;
-    for (int idx = 0; idx < codePointCount; ++idx) {
-        uint val = mCodePoints.at(idx);
+    for (std::size_t idx = 0; idx < codePointCount; ++idx) {
+        const uint val = mCodePoints[idx];
         // if error at idx is set also skip
         if (val > UNICODE_MAX || mErrorIndices.value(idx)) {
             data[i] = QChar::ReplacementCharacter;
@@ -103,7 +103,7 @@ qint64 Utf8StringData::read(const Okteta::AbstractByteArrayModel* input, Okteta:
     mParent->topLevelDataInformation()->_childCountAboutToChange(mParent, oldSize, 0);
     mParent->topLevelDataInformation()->_childCountChanged(mParent, oldSize, 0);
 
-    const uint oldMax = mCodePoints.size();
+    const std::size_t oldMax = mCodePoints.size();
     quint64 remaining = bitsRemaining;
     Okteta::Address addr = address;
     uint count = 0;
@@ -238,7 +238,7 @@ qint64 Utf8StringData::read(const Okteta::AbstractByteArrayModel* input, Okteta:
         if (count < oldMax) {
             mCodePoints[count] = codePoint;
         } else {
-            mCodePoints.append(codePoint);
+            mCodePoints.emplace_back(codePoint);
         }
 
         remaining -= 8;
@@ -292,7 +292,7 @@ BitCount32 Utf8StringData::sizeAt(uint i) const
     if (isError != 0) {
         return isError * 8; // error is number of bytes
     }
-    uint val = mCodePoints.at(i);
+    const uint val = mCodePoints[i];
     if (val < 0x80) {
         return 8;
     }
