@@ -13,6 +13,8 @@
 #include <dummydatainformation.hpp>
 #include <topleveldatainformation.hpp>
 #include <primitivetemplateinfo.hpp>
+// Std
+#include <vector>
 
 template <PrimitiveDataType type>
 class PrimitiveArrayData : public AbstractArrayData
@@ -68,7 +70,7 @@ protected:
     void readDataNonNativeOrder(uint numItems, const Okteta::AbstractByteArrayModel* input, Okteta::Address addr);
     void setNewParentForChildren() override;
 
-    QVector<T> mData;
+    std::vector<T> mData;
     uint mNumReadValues = 0; // the number of values read before EOF
     DummyDataInformation mDummy;
 };
@@ -116,7 +118,7 @@ template <PrimitiveDataType type>
 void PrimitiveArrayData<type>::setLength(uint newLength)
 {
     mData.resize(newLength);
-    mData.squeeze();
+    mData.shrink_to_fit();
 }
 
 template <PrimitiveDataType type>
@@ -154,8 +156,8 @@ bool PrimitiveArrayData<type>::isComplex() const
 template <PrimitiveDataType type>
 AllPrimitiveTypes PrimitiveArrayData<type>::valueAt(int index) const
 {
-    Q_ASSERT(index >= 0 && index < mData.size());
-    return AllPrimitiveTypes(mData.at(index));
+    Q_ASSERT(0 <= index && index < static_cast<int>(mData.size()));
+    return AllPrimitiveTypes(mData[index]);
 }
 
 #endif // KASTEN_PRIMITIVEARRAYDATA_HPP

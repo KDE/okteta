@@ -210,7 +210,7 @@ void PrimitiveArrayData<type>::activateIndex(uint index)
     // invalidate all previous references
     SafeReferenceHolder::instance.invalidateAll(mChildType.get());
     mChildType->mWasAbleToRead = mNumReadValues > index;
-    mChildType->asPrimitive()->setValue(mData.at(index));
+    mChildType->asPrimitive()->setValue(mData[index]);
     mChildType->setName(QString::number(index));
     mDummy.setDummyIndex(index);
 }
@@ -261,7 +261,7 @@ QString PrimitiveArrayData<type>::valueStringAt(uint index)
         activateIndex(index);
         return mChildType->valueString();
     }
-    return DisplayClass::staticValueString(mData.at(index));
+    return DisplayClass::staticValueString(mData[index]);
 }
 
 template <PrimitiveDataType type>
@@ -324,7 +324,7 @@ void PrimitiveArrayData<type>::setChildWidgetData(uint index, QWidget* w) const
 {
     Q_ASSERT(index < length());
     Q_UNUSED(index)
-    DisplayClass::staticSetWidgetData(mData.at(index), w);
+    DisplayClass::staticSetWidgetData(mData[index], w);
 }
 
 template <>
@@ -333,7 +333,7 @@ QString PrimitiveArrayData<PrimitiveDataType::Char>::valueString() const
     QString result;
     result.reserve(length());
     for (uint index = 0; index < length(); ++index) {
-        QChar qchar(mData.at(index), 0);
+        QChar qchar(mData[index], 0);
         if (!qchar.isPrint()) {
             qchar = QChar(QChar::ReplacementCharacter);
         }
