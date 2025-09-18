@@ -154,7 +154,7 @@ struct TaggedUnionParsedData : public ParserInfo
     TaggedUnionParsedData& operator=(const TaggedUnionParsedData&) = delete;
 
     std::unique_ptr<ChildrenParser> children;
-    QVector<Alternatives> alternatives;
+    std::vector<Alternatives> alternatives;
     std::unique_ptr<ChildrenParser> defaultFields;
 };
 

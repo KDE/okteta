@@ -505,8 +505,15 @@ TaggedUnionDataInformation* OsdParser::taggedUnionFromXML(const QDomElement& xml
         info.error() << "Missing <alternatives> element, tagged union cannot exist without at least one alternative";
         return nullptr;
     }
+
+    int alternativeCount = 0;
     for (QDomElement elem = alternatives.firstChildElement(); !elem.isNull(); elem = elem.nextSiblingElement()) {
-        TaggedUnionParsedData::Alternatives alt;
+        ++alternativeCount;
+    }
+    tpd.alternatives.reserve(alternativeCount);
+
+    for (QDomElement elem = alternatives.firstChildElement(); !elem.isNull(); elem = elem.nextSiblingElement()) {
+        auto& alt = tpd.alternatives.emplace_back(TaggedUnionParsedData::Alternatives());
         alt.name = readProperty(elem, PROPERTY_STRUCT_NAME());
         QString selectIfStr = readProperty(elem, PROPERTY_SELECT_IF());
         QScriptValue selectIf = ParserUtils::functionSafeEval(info.engine, selectIfStr);
@@ -519,7 +526,6 @@ TaggedUnionDataInformation* OsdParser::taggedUnionFromXML(const QDomElement& xml
         } else {
             alt.fields = QSharedPointer<ChildrenParser>(new SingleElementOsdChildrenParser(info, elem));
         }
-        tpd.alternatives.append(alt);
     }
 
     return DataInformationFactory::newTaggedUnion(tpd);

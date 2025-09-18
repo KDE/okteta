@@ -348,8 +348,8 @@ TaggedUnionDataInformation* DataInformationFactory::newTaggedUnion(const TaggedU
     bool alternativesValid = true;
     QVector<TaggedUnionDataInformation::FieldInfo> altInfo;
     altInfo.reserve(pd.alternatives.size());
-    for (int i = 0; i < pd.alternatives.size(); ++i) {
-        const TaggedUnionParsedData::Alternatives& fi = pd.alternatives.at(i);
+    for (std::size_t i = 0; i < pd.alternatives.size(); ++i) {
+        const auto& fi = pd.alternatives[i];
         if (!fi.selectIf.isFunction()) {
             ParsedNumber<quint64> number = ParserUtils::uint64FromScriptValue(fi.selectIf);
             if (!number.isValid) {

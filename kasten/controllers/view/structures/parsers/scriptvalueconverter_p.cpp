@@ -231,13 +231,12 @@ TaggedUnionDataInformation* toTaggedUnion(const QScriptValue& value, const Parse
     int length = alternatives.property(PROPERTY_LENGTH()).toInt32();
     tpd.alternatives.reserve(length);
     for (int i = 0; i < length; ++i) {
-        TaggedUnionParsedData::Alternatives alt;
+        auto& alt = tpd.alternatives.emplace_back(TaggedUnionParsedData::Alternatives());
         QScriptValue current = alternatives.property(i);
         alt.name = current.property(PROPERTY_STRUCT_NAME()).toString();
         alt.selectIf = current.property(PROPERTY_SELECT_IF());
         alt.fields = QSharedPointer<ChildrenParser>(
             new ScriptValueChildrenParser(info, current.property(PROPERTY_CHILDREN())));
-        tpd.alternatives.append(alt);
     }
 
     tpd.children = std::make_unique<ScriptValueChildrenParser>(info, value.property(PROPERTY_CHILDREN()));
