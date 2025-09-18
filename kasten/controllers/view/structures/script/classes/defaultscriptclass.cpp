@@ -318,7 +318,7 @@ QScriptValue::PropertyFlags DefaultScriptClass::propertyFlags(const QScriptValue
         result |= QScriptValue::ReadOnly;
     }
 
-    for (const auto& property : std::as_const(mIterableProperties)) {
+    for (const auto& property : mIterableProperties) {
         if (property.name == name) {
             return result | property.propertyFlags;
         }
