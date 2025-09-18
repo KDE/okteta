@@ -35,9 +35,9 @@ qint64 Latin1StringData::read(const Okteta::AbstractByteArrayModel* input, Oktet
 
     quint64 remaining = bitsRemaining;
     Okteta::Address addr = address;
-    int count = 0;
+    std::size_t count = 0;
     mEofReached = false;
-    const int oldMax = mData.size();
+    const std::size_t oldMax = mData.size();
     if (((mMode & CharCount) && mLength.maxChars == 0) || ((mMode & ByteCount) && mLength.maxBytes == 0)) {
         return 0; // nothing to read
 
@@ -58,7 +58,7 @@ qint64 Latin1StringData::read(const Okteta::AbstractByteArrayModel* input, Oktet
         if (count < oldMax) {
             mData[count] = val;
         } else {
-            mData.append(val);
+            mData.emplace_back(val);
         }
 
         remaining -= 8;
@@ -72,7 +72,7 @@ qint64 Latin1StringData::read(const Okteta::AbstractByteArrayModel* input, Oktet
             }
         }
         if ((mMode & CharCount)  || (mMode & ByteCount)) {
-            if ((unsigned)count >= mLength.maxChars) {
+            if (count >= mLength.maxChars) {
                 terminate = true;
             }
         }
@@ -108,10 +108,10 @@ BitCount32 Latin1StringData::size() const
 
 QString Latin1StringData::completeString() const
 {
-    int max = mData.size();
+    const std::size_t max = mData.size();
     QVarLengthArray<QChar> buf(max);
-    for (int i = 0; i < max; ++i) {
-        uchar val = mData.at(i);
+    for (std::size_t i = 0; i < max; ++i) {
+        const uchar val = mData[i];
         buf[i] = QChar::fromLatin1(val);
     }
 
@@ -120,8 +120,8 @@ QString Latin1StringData::completeString() const
 
 QString Latin1StringData::stringValue(int row) const
 {
-    Q_ASSERT(row >= 0 && row < mData.size());
-    uchar val = mData.at(row);
+    Q_ASSERT(0 <= row && row < static_cast<int>(mData.size()));
+    const uchar val = mData[row];
     return QChar::fromLatin1(val);
 }
 
