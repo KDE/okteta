@@ -18,8 +18,7 @@
 
 namespace Kasten {
 
-StructuresManager::StructuresManager(QObject* parent)
-    : QObject(parent)
+StructuresManager::StructuresManager()
 {
     mConfig = KSharedConfig::openConfig(QStringLiteral("oktetastructuresrc"),
                                         KSharedConfig::FullConfig, QStandardPaths::ConfigLocation);
@@ -93,5 +92,3 @@ KSharedConfig::Ptr StructuresManager::config() const
 }
 
 }
-
-#include "moc_structuresmanager.cpp"

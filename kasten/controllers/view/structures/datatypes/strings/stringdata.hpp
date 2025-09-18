@@ -46,7 +46,7 @@ public:
     virtual uint count() const = 0;
     virtual QString charType() const = 0;
     virtual QString stringValue(int row) const = 0;
-    virtual QString completeString(bool skipInvalid = false) const = 0;
+    virtual QString completeString() const = 0;
     virtual BitCount32 size() const = 0;
     virtual BitCount32 sizeAt(uint index) const = 0;
     virtual qint64 read(const Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining) = 0;

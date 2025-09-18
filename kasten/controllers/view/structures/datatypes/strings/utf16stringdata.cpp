@@ -63,7 +63,7 @@ QString Utf16StringData::stringValue(int row) const
     return i18n("%1 (U+%2)", QString(QChar(mCodePoints.at(row))), number);
 }
 
-QString Utf16StringData::completeString(bool skipInvalid) const
+QString Utf16StringData::completeString() const
 {
     QVarLengthArray<QChar> data(mCodePoints.size() + mNonBMPCount);
     int codePointCount = mCodePoints.size();
@@ -71,10 +71,6 @@ QString Utf16StringData::completeString(bool skipInvalid) const
     for (int idx = 0; idx < codePointCount; ++idx) {
         uint val = mCodePoints.at(idx);
         if (val > UNICODE_MAX) {
-            if (skipInvalid) {
-                continue;
-            }
-
             data[i] = QChar::ReplacementCharacter;
         } else if (val > BMP_MAX) {
             data[i] = QChar::highSurrogate(val);

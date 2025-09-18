@@ -33,7 +33,7 @@ namespace Kasten {
 
 StructuresTool::StructuresTool()
     : mByteOrder(StructureViewPreferences::byteOrder())
-    , mManager(new StructuresManager(this))
+    , mManager(std::make_unique<StructuresManager>())
     , mWritingData(false)
     , mCurrentItemDataChanged(false)
     , mIsStructureMarked(false)

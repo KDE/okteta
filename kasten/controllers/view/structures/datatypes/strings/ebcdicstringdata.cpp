@@ -112,7 +112,7 @@ BitCount32 EbcdicStringData::size() const
     return mData.size() * 8;
 }
 
-QString EbcdicStringData::completeString(bool) const
+QString EbcdicStringData::completeString() const
 {
     int max = mData.size();
     QVarLengthArray<QChar> buf(max);

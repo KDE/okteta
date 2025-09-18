@@ -30,9 +30,6 @@ class DefaultScriptClass : public QScriptClass
     friend class DefaultscriptClassIterator;
 
 public:
-    using DataInfPtr = DataInformation*;
-
-public:
     DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo, int propertiesSize);
     ~DefaultScriptClass() override;
 

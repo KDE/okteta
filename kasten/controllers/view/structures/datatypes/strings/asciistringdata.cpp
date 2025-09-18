@@ -106,19 +106,13 @@ BitCount32 AsciiStringData::size() const
     return mData.size() * 8;
 }
 
-QString AsciiStringData::completeString(bool skipInvalid) const
+QString AsciiStringData::completeString() const
 {
     int max = mData.size();
     QVarLengthArray<QChar> buf(max);
     for (int i = 0; i < max; ++i) {
         uchar val = mData.at(i);
         if (val > ASCII_MAX) {
-            if (skipInvalid) {
-                max--;
-                i--;
-                continue;
-            }
-
             buf[i] = QChar::ReplacementCharacter;
         } else {
             buf[i] = QChar::fromLatin1(val);
