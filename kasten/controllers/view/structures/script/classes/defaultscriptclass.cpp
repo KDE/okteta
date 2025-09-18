@@ -379,7 +379,7 @@ QScriptString DefaultscriptClassIterator::name() const
         return {};
     }
     if (mCurrent < static_cast<int>(mClass->mIterableProperties.size())) {
-        return mClass->mIterableProperties.at(mCurrent).name;
+        return mClass->mIterableProperties[mCurrent].name;
     }
     int index = mCurrent - mClass->mIterableProperties.size();
     Q_ASSERT(index >= 0);
@@ -394,7 +394,7 @@ QScriptValue::PropertyFlags DefaultscriptClassIterator::flags() const
         return {};
     }
     if (mCurrent < static_cast<int>(mClass->mIterableProperties.size())) {
-        return mClass->propertyFlags(object(), mClass->mIterableProperties.at(mCurrent).name, id());
+        return mClass->propertyFlags(object(), mClass->mIterableProperties[mCurrent].name, id());
     }
     return QScriptValue::ReadOnly;
 }
