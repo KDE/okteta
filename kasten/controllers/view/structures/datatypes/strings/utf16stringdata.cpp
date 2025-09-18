@@ -45,7 +45,7 @@ QString Utf16StringData::stringValue(int row) const
     // TODO details
     Q_ASSERT((uint)row < count());
     // TODO show invalid values
-    uint val = mCodePoints.at(row);
+    const uint val = mCodePoints[row];
     QString number = QString::number(val, 16).toUpper();
     if (number.length() == 1) {
         number = QLatin1Char('0') + number;
@@ -60,16 +60,16 @@ QString Utf16StringData::stringValue(int row) const
         return i18n("%1 (U+%2)", ret, number);
     }
 
-    return i18n("%1 (U+%2)", QString(QChar(mCodePoints.at(row))), number);
+    return i18n("%1 (U+%2)", QString(QChar(val)), number);
 }
 
 QString Utf16StringData::completeString() const
 {
     QVarLengthArray<QChar> data(mCodePoints.size() + mNonBMPCount);
-    int codePointCount = mCodePoints.size();
+    const std::size_t codePointCount = mCodePoints.size();
     int i = 0;
-    for (int idx = 0; idx < codePointCount; ++idx) {
-        uint val = mCodePoints.at(idx);
+    for (std::size_t idx = 0; idx < codePointCount; ++idx) {
+        const uint val = mCodePoints[idx];
         if (val > UNICODE_MAX) {
             data[i] = QChar::ReplacementCharacter;
         } else if (val > BMP_MAX) {
@@ -99,7 +99,7 @@ qint64 Utf16StringData::read(const Okteta::AbstractByteArrayModel* input, Okteta
     mParent->topLevelDataInformation()->_childCountAboutToChange(mParent, oldSize, 0);
     mParent->topLevelDataInformation()->_childCountChanged(mParent, oldSize, 0);
 
-    const uint oldMax = mCodePoints.size();
+    const std::size_t oldMax = mCodePoints.size();
     quint64 remaining = bitsRemaining;
     Okteta::Address addr = address;
     uint count = 0;
@@ -159,7 +159,7 @@ qint64 Utf16StringData::read(const Okteta::AbstractByteArrayModel* input, Okteta
         if (count < oldMax) {
             mCodePoints[count] = codePoint;
         } else {
-            mCodePoints.append(codePoint);
+            mCodePoints.emplace_back(codePoint);
         }
 
         remaining -= 16;
@@ -210,6 +210,6 @@ BitCount32 Utf16StringData::size() const
 BitCount32 Utf16StringData::sizeAt(uint i) const
 {
     Q_ASSERT(i <= count());
-    uint val = mCodePoints.at(i);
+    const uint val = mCodePoints[i];
     return val > 0xffff ? 32 : 16;
 }

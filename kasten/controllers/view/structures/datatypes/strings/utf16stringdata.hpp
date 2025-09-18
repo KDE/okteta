@@ -9,8 +9,8 @@
 
 // lib
 #include "stringdata.hpp"
-// Qt
-#include <QVector>
+// Std
+#include <vector>
 
 class Utf16StringData : public StringData
 {
@@ -28,7 +28,7 @@ public:
     QString typeName() const override;
 
 private:
-    QVector<quint32> mCodePoints;
+    std::vector<quint32> mCodePoints;
     int mNonBMPCount = 0;
 };
 
