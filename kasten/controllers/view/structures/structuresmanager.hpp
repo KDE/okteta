@@ -19,15 +19,13 @@
 
 namespace Kasten {
 
-class StructuresManager : public QObject
+class StructuresManager
 {
-    Q_OBJECT
+public:
+    StructuresManager();
+    ~StructuresManager();
 
 public:
-    explicit StructuresManager(QObject* parent = nullptr);
-    ~StructuresManager() override;
-
-public Q_SLOTS:
     void reloadPaths();
 
 public:
