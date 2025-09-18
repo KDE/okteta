@@ -41,9 +41,8 @@ void StructuresSelectionModel::setStructures(const QMap<QString, Kasten::Structu
     m_metaDataList.reserve(structureDefs.size());
     // consider storing structureDefs directly in the model, but needs rework to not use raw pointers
     for (const Kasten::StructureDefinitionFile* def : structureDefs) {
-        const StructureMetaData metaData = def->metaData();
-        m_metaDataList.append(metaData);
-        ids.insert(metaData.id(), def->structureNames());
+        m_metaDataList.emplace_back(def->metaData());
+        ids.insert(m_metaDataList.back().id(), def->structureNames());
     }
 
     // drop no longer existing ids from the enabled list
@@ -83,7 +82,7 @@ QVariant StructuresSelectionModel::data(const QModelIndex &index, int role) cons
     }
 
     const int row = index.row();
-    if (row >= m_metaDataList.size()) {
+    if ((row < 0) || (row >= static_cast<int>(m_metaDataList.size()))) {
         return QVariant();
     }
 
@@ -119,7 +118,7 @@ bool StructuresSelectionModel::setData(const QModelIndex& index, const QVariant&
     }
 
     const int row = index.row();
-    if (row >= m_metaDataList.size()) {
+    if ((row < 0) || (row >= static_cast<int>(m_metaDataList.size()))) {
         return false;
     }
 

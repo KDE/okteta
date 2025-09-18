@@ -12,8 +12,9 @@
 #include <structuremetadata.hpp>
 // Qt
 #include <QAbstractListModel>
-#include <QVector>
 #include <QMap>
+// Std
+#include <vector>
 
 namespace Kasten {
 class StructureDefinitionFile;
@@ -52,7 +53,7 @@ Q_SIGNALS:
     void enabledStructuresChanged();
 
 private:
-    QVector<StructureMetaData> m_metaDataList;
+    std::vector<StructureMetaData> m_metaDataList;
     StructureEnabledList m_enabledList;
 };
 
