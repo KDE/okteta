@@ -24,7 +24,6 @@ class DefaultScriptClass : public QScriptClass
     friend class DefaultscriptClassIterator;
 
 public:
-    using DataInfPtr = DataInformation*;
     using PropertyInfoList = QVector<QPair<QScriptString, QScriptValue::PropertyFlags>>;
 
     DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
