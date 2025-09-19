@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-18 03:22+0000\n"
+"POT-Creation-Date: 2025-09-19 03:35+0000\n"
 "PO-Revision-Date: 2025-05-25 11:31+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -2046,17 +2046,17 @@ msgstr "champ de bits"
 msgid "invalid type"
 msgstr "type non valable"
 
-#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:135
+#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:129
 #, kde-format
 msgid "Non-ASCII char: 0x%1"
 msgstr "Caractère non-ASCII : 0x%1"
 
-#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:143
+#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:137
 #, kde-format
 msgid "ASCII char"
 msgstr "Caractère ASCII"
 
-#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:153
+#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:147
 #, kde-format
 msgid "ASCII string"
 msgstr "Chaîne ASCII"
@@ -2071,12 +2071,12 @@ msgstr "Caractère EBCDIC"
 msgid "EBCDIC string"
 msgstr "Chaîne EBCDIC"
 
-#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:131
+#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:130
 #, kde-format
 msgid "Latin1 char"
 msgstr "Caractère « Latin1 »"
 
-#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:141
+#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:140
 #, kde-format
 msgid "Latin1 string"
 msgstr "Chaîne Latin1"

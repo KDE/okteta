@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-18 03:22+0000\n"
+"POT-Creation-Date: 2025-09-19 03:35+0000\n"
 "PO-Revision-Date: 2024-04-27 22:48+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -1963,17 +1963,17 @@ msgstr "bitkampo"
 msgid "invalid type"
 msgstr "nevalida tipo"
 
-#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:135
+#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:129
 #, kde-format
 msgid "Non-ASCII char: 0x%1"
 msgstr "Ne-ASCII-signo: 0x%1"
 
-#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:143
+#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:137
 #, kde-format
 msgid "ASCII char"
 msgstr "Askio-signo"
 
-#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:153
+#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:147
 #, kde-format
 msgid "ASCII string"
 msgstr "Askio-ĉeno"
@@ -1988,12 +1988,12 @@ msgstr "EBCDIC char"
 msgid "EBCDIC string"
 msgstr "EBCDIC kordo"
 
-#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:131
+#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:130
 #, kde-format
 msgid "Latin1 char"
 msgstr "Latina1 char"
 
-#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:141
+#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:140
 #, kde-format
 msgid "Latin1 string"
 msgstr "Latina1 ĉeno"

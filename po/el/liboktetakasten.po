@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-18 03:22+0000\n"
+"POT-Creation-Date: 2025-09-19 03:35+0000\n"
 "PO-Revision-Date: 2023-01-03 09:17+0200\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -2018,17 +2018,17 @@ msgstr "bitfield"
 msgid "invalid type"
 msgstr "μη έγκυρος τύπος"
 
-#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:135
+#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:129
 #, kde-format
 msgid "Non-ASCII char: 0x%1"
 msgstr "Χαρακτήρας εκτός ASCII: 0x%1"
 
-#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:143
+#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:137
 #, kde-format
 msgid "ASCII char"
 msgstr "ASCII char"
 
-#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:153
+#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:147
 #, kde-format
 msgid "ASCII string"
 msgstr "ASCII string"
@@ -2043,12 +2043,12 @@ msgstr "EBCDIC char"
 msgid "EBCDIC string"
 msgstr "EBCDIC string"
 
-#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:131
+#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:130
 #, kde-format
 msgid "Latin1 char"
 msgstr "Latin1 char"
 
-#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:141
+#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:140
 #, kde-format
 msgid "Latin1 string"
 msgstr "Latin1 string"

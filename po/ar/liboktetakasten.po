@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-18 03:22+0000\n"
+"POT-Creation-Date: 2025-09-19 03:35+0000\n"
 "PO-Revision-Date: 2025-08-09 15:19+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -1990,17 +1990,17 @@ msgstr "العد الثنائي"
 msgid "invalid type"
 msgstr ""
 
-#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:135
+#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:129
 #, kde-format
 msgid "Non-ASCII char: 0x%1"
 msgstr ""
 
-#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:143
+#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:137
 #, kde-format
 msgid "ASCII char"
 msgstr ""
 
-#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:153
+#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:147
 #, kde-format
 msgid "ASCII string"
 msgstr ""
@@ -2015,12 +2015,12 @@ msgstr ""
 msgid "EBCDIC string"
 msgstr ""
 
-#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:131
+#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:130
 #, kde-format
 msgid "Latin1 char"
 msgstr ""
 
-#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:141
+#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:140
 #, kde-format
 msgid "Latin1 string"
 msgstr ""

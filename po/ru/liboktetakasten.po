@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: khexedit\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-18 03:22+0000\n"
+"POT-Creation-Date: 2025-09-19 03:35+0000\n"
 "PO-Revision-Date: 2022-10-12 16:05+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -2058,17 +2058,17 @@ msgstr "bitfield"
 msgid "invalid type"
 msgstr "недействительный тип"
 
-#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:135
+#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:129
 #, kde-format
 msgid "Non-ASCII char: 0x%1"
 msgstr "Не-ASCII-символ: 0x%1"
 
-#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:143
+#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:137
 #, kde-format
 msgid "ASCII char"
 msgstr "Символ ASCII"
 
-#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:153
+#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:147
 #, kde-format
 msgid "ASCII string"
 msgstr "Строка ASCII"
@@ -2083,12 +2083,12 @@ msgstr "Символ EBCDIC"
 msgid "EBCDIC string"
 msgstr "Строка EBCDIC"
 
-#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:131
+#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:130
 #, kde-format
 msgid "Latin1 char"
 msgstr "Символ Latin1"
 
-#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:141
+#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:140
 #, kde-format
 msgid "Latin1 string"
 msgstr "Строка Latin1"
