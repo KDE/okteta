@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-17 01:57+0000\n"
+"POT-Creation-Date: 2025-09-19 02:03+0000\n"
 "PO-Revision-Date: 2025-05-27 23:28+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -2086,17 +2086,17 @@ msgstr "bittikenttä"
 msgid "invalid type"
 msgstr "virheellinen tyyppi"
 
-#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:136
+#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:130
 #, kde-format
 msgid "Non-ASCII char: 0x%1"
 msgstr "Ei-ASCII-merkki: 0x%1"
 
-#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:144
+#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:138
 #, kde-format
 msgid "ASCII char"
 msgstr "ASCII-merkki"
 
-#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:154
+#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:148
 #, kde-format
 msgid "ASCII string"
 msgstr "ASCII-merkkijono"
@@ -2111,12 +2111,12 @@ msgstr "EBCDIC-merkki"
 msgid "EBCDIC string"
 msgstr "EBCDIC-merkkijono"
 
-#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:131
+#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:130
 #, kde-format
 msgid "Latin1 char"
 msgstr "Latin1-merkki"
 
-#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:141
+#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:140
 #, kde-format
 msgid "Latin1 string"
 msgstr "Latin1-merkkijono"
@@ -2218,19 +2218,19 @@ msgstr "union %1"
 msgid "<invalid name>"
 msgstr "<virheellinen nimi>"
 
-#: controllers/view/structures/script/scriptlogger.cpp:84
+#: controllers/view/structures/script/scriptlogger.cpp:87
 #, kde-format
 msgctxt "@title:column"
 msgid "Time"
 msgstr "Aika"
 
-#: controllers/view/structures/script/scriptlogger.cpp:86
+#: controllers/view/structures/script/scriptlogger.cpp:89
 #, kde-format
 msgctxt "@title:column"
 msgid "Origin"
 msgstr "Alkuperä"
 
-#: controllers/view/structures/script/scriptlogger.cpp:88
+#: controllers/view/structures/script/scriptlogger.cpp:91
 #, kde-format
 msgctxt "@title:column"
 msgid "Message"
@@ -2318,12 +2318,12 @@ msgctxt "@title:window"
 msgid "Advanced Structures Selection"
 msgstr "Tarkempi rakennevalinta…"
 
-#: controllers/view/structures/settings/structuresselectionmodel.cpp:105
+#: controllers/view/structures/settings/structuresselectionmodel.cpp:104
 #, kde-format
 msgid "Dynamic Structure Definitions"
 msgstr "Dynaamiset rakennemääritelmät"
 
-#: controllers/view/structures/settings/structuresselectionmodel.cpp:107
+#: controllers/view/structures/settings/structuresselectionmodel.cpp:106
 #, kde-format
 msgid "Structure Definitions"
 msgstr "Rakennemääritelmät"

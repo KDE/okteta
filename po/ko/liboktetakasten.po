@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-17 01:57+0000\n"
+"POT-Creation-Date: 2025-09-19 02:03+0000\n"
 "PO-Revision-Date: 2025-06-10 22:40+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -2064,17 +2064,17 @@ msgstr "bitfield"
 msgid "invalid type"
 msgstr "잘못된 형식"
 
-#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:136
+#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:130
 #, kde-format
 msgid "Non-ASCII char: 0x%1"
 msgstr "비 ASCII 문자: 0x%1"
 
-#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:144
+#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:138
 #, kde-format
 msgid "ASCII char"
 msgstr "ASCII 문자"
 
-#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:154
+#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:148
 #, kde-format
 msgid "ASCII string"
 msgstr "ASCII 문자열"
@@ -2089,12 +2089,12 @@ msgstr "EBCDIC 문자"
 msgid "EBCDIC string"
 msgstr "EBCDIC 문자열"
 
-#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:131
+#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:130
 #, kde-format
 msgid "Latin1 char"
 msgstr "Latin1 문자"
 
-#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:141
+#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:140
 #, kde-format
 msgid "Latin1 string"
 msgstr "Latin1 문자열"
@@ -2196,19 +2196,19 @@ msgstr "공용체 %1"
 msgid "<invalid name>"
 msgstr "<잘못된 이름>"
 
-#: controllers/view/structures/script/scriptlogger.cpp:84
+#: controllers/view/structures/script/scriptlogger.cpp:87
 #, kde-format
 msgctxt "@title:column"
 msgid "Time"
 msgstr "시간"
 
-#: controllers/view/structures/script/scriptlogger.cpp:86
+#: controllers/view/structures/script/scriptlogger.cpp:89
 #, kde-format
 msgctxt "@title:column"
 msgid "Origin"
 msgstr "원본"
 
-#: controllers/view/structures/script/scriptlogger.cpp:88
+#: controllers/view/structures/script/scriptlogger.cpp:91
 #, kde-format
 msgctxt "@title:column"
 msgid "Message"
@@ -2296,12 +2296,12 @@ msgctxt "@title:window"
 msgid "Advanced Structures Selection"
 msgstr "고급 구조체 선택"
 
-#: controllers/view/structures/settings/structuresselectionmodel.cpp:105
+#: controllers/view/structures/settings/structuresselectionmodel.cpp:104
 #, kde-format
 msgid "Dynamic Structure Definitions"
 msgstr "동적 구조체 정의"
 
-#: controllers/view/structures/settings/structuresselectionmodel.cpp:107
+#: controllers/view/structures/settings/structuresselectionmodel.cpp:106
 #, kde-format
 msgid "Structure Definitions"
 msgstr "구조체 정의"

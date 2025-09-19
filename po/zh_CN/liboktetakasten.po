@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-17 01:57+0000\n"
+"POT-Creation-Date: 2025-09-19 02:03+0000\n"
 "PO-Revision-Date: 2024-04-22 16:05\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -2050,17 +2050,17 @@ msgstr "位域"
 msgid "invalid type"
 msgstr "无效的类型"
 
-#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:136
+#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:130
 #, kde-format
 msgid "Non-ASCII char: 0x%1"
 msgstr "非 ASCII 字符：0x%1"
 
-#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:144
+#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:138
 #, kde-format
 msgid "ASCII char"
 msgstr "ASCII 字符"
 
-#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:154
+#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:148
 #, kde-format
 msgid "ASCII string"
 msgstr "ASCII 字符串"
@@ -2075,12 +2075,12 @@ msgstr "EBCDIC 字符"
 msgid "EBCDIC string"
 msgstr "EBCDIC 字符串"
 
-#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:131
+#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:130
 #, kde-format
 msgid "Latin1 char"
 msgstr "Latin1 字符"
 
-#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:141
+#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:140
 #, kde-format
 msgid "Latin1 string"
 msgstr "Latin1 字符串"
@@ -2182,19 +2182,19 @@ msgstr "联合 %1"
 msgid "<invalid name>"
 msgstr "<无效的名称>"
 
-#: controllers/view/structures/script/scriptlogger.cpp:84
+#: controllers/view/structures/script/scriptlogger.cpp:87
 #, kde-format
 msgctxt "@title:column"
 msgid "Time"
 msgstr "时间"
 
-#: controllers/view/structures/script/scriptlogger.cpp:86
+#: controllers/view/structures/script/scriptlogger.cpp:89
 #, kde-format
 msgctxt "@title:column"
 msgid "Origin"
 msgstr "原始文件"
 
-#: controllers/view/structures/script/scriptlogger.cpp:88
+#: controllers/view/structures/script/scriptlogger.cpp:91
 #, kde-format
 msgctxt "@title:column"
 msgid "Message"
@@ -2282,12 +2282,12 @@ msgctxt "@title:window"
 msgid "Advanced Structures Selection"
 msgstr "高级结构选择"
 
-#: controllers/view/structures/settings/structuresselectionmodel.cpp:105
+#: controllers/view/structures/settings/structuresselectionmodel.cpp:104
 #, kde-format
 msgid "Dynamic Structure Definitions"
 msgstr "动态结构定义"
 
-#: controllers/view/structures/settings/structuresselectionmodel.cpp:107
+#: controllers/view/structures/settings/structuresselectionmodel.cpp:106
 #, kde-format
 msgid "Structure Definitions"
 msgstr "结构定义"

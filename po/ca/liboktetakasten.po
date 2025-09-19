@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-17 01:57+0000\n"
+"POT-Creation-Date: 2025-09-19 02:03+0000\n"
 "PO-Revision-Date: 2025-08-31 12:42+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -2131,17 +2131,17 @@ msgstr "camp de bits"
 msgid "invalid type"
 msgstr "tipus no vàlid"
 
-#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:136
+#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:130
 #, kde-format
 msgid "Non-ASCII char: 0x%1"
 msgstr "Caràcter no ASCII: 0x%1"
 
-#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:144
+#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:138
 #, kde-format
 msgid "ASCII char"
 msgstr "Caràcter ASCII"
 
-#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:154
+#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:148
 #, kde-format
 msgid "ASCII string"
 msgstr "Cadena ASCII"
@@ -2156,12 +2156,12 @@ msgstr "Caràcter EBCDIC"
 msgid "EBCDIC string"
 msgstr "Cadena EBCDIC"
 
-#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:131
+#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:130
 #, kde-format
 msgid "Latin1 char"
 msgstr "Caràcter Latin1"
 
-#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:141
+#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:140
 #, kde-format
 msgid "Latin1 string"
 msgstr "Cadena Latin1"
@@ -2263,19 +2263,19 @@ msgstr "unió %1"
 msgid "<invalid name>"
 msgstr "<nom no vàlid>"
 
-#: controllers/view/structures/script/scriptlogger.cpp:84
+#: controllers/view/structures/script/scriptlogger.cpp:87
 #, kde-format
 msgctxt "@title:column"
 msgid "Time"
 msgstr "Hora"
 
-#: controllers/view/structures/script/scriptlogger.cpp:86
+#: controllers/view/structures/script/scriptlogger.cpp:89
 #, kde-format
 msgctxt "@title:column"
 msgid "Origin"
 msgstr "Origen"
 
-#: controllers/view/structures/script/scriptlogger.cpp:88
+#: controllers/view/structures/script/scriptlogger.cpp:91
 #, kde-format
 msgctxt "@title:column"
 msgid "Message"
@@ -2363,12 +2363,12 @@ msgctxt "@title:window"
 msgid "Advanced Structures Selection"
 msgstr "Selecció avançada d'estructures"
 
-#: controllers/view/structures/settings/structuresselectionmodel.cpp:105
+#: controllers/view/structures/settings/structuresselectionmodel.cpp:104
 #, kde-format
 msgid "Dynamic Structure Definitions"
 msgstr "Definicions d'estructures dinàmiques"
 
-#: controllers/view/structures/settings/structuresselectionmodel.cpp:107
+#: controllers/view/structures/settings/structuresselectionmodel.cpp:106
 #, kde-format
 msgid "Structure Definitions"
 msgstr "Definicions d'estructura"
