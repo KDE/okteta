@@ -19,12 +19,26 @@
 // Std
 #include <utility>
 
+namespace {
+
+std::vector<std::unique_ptr<DataInformation>> toManagedVector(const QVector<DataInformation*>& other)
+{
+    std::vector<std::unique_ptr<DataInformation>> result;
+    result.reserve(other.size());
+    for (auto* info : other) {
+        result.emplace_back(std::unique_ptr<DataInformation>(info));
+    }
+    return result;
+}
+
+}
+
 DataInformationWithChildren::DataInformationWithChildren(const QString& name,
                                                          const QVector<DataInformation*>& children, DataInformation* parent)
     : DataInformation(name, parent)
-    , mChildren(children)
+    , mChildren(::toManagedVector(children))
 {
-    for (auto* child : std::as_const(mChildren)) {
+    for (const auto& child : mChildren) {
         child->setParent(this);
     }
 }
@@ -35,17 +49,14 @@ DataInformationWithChildren::DataInformationWithChildren(const DataInformationWi
 {
 }
 
-DataInformationWithChildren::~DataInformationWithChildren()
-{
-    qDeleteAll(mChildren);
-}
+DataInformationWithChildren::~DataInformationWithChildren() = default;
 
 DataInformation* DataInformationWithChildren::childAt(unsigned int index) const
 {
-    if (index >= (unsigned) mChildren.size()) {
+    if (index >= mChildren.size()) {
         return nullptr;
     }
-    return mChildren[index];
+    return mChildren[index].get();
 }
 
 bool DataInformationWithChildren::setData(const QVariant&, Okteta::AbstractByteArrayModel*,
@@ -89,7 +100,7 @@ BitCount32 DataInformationWithChildren::size() const
 void DataInformationWithChildren::resetValidationState()
 {
     DataInformation::resetValidationState();
-    for (auto* child : std::as_const(mChildren)) {
+    for (const auto& child : mChildren) {
         child->resetValidationState();
     }
 }
@@ -127,14 +138,13 @@ void DataInformationWithChildren::setChildren(const QVector<DataInformation*>& n
     // change to length zero and then to new length so that model gets updated correctly
     uint numChildren = childCount();
     topLevelDataInformation()->_childCountAboutToChange(this, numChildren, 0);
-    qDeleteAll(mChildren);
     mChildren.clear();
     topLevelDataInformation()->_childCountChanged(this, numChildren, 0);
 
     const uint count = newChildren.size();
     topLevelDataInformation()->_childCountAboutToChange(this, 0, count);
-    mChildren = newChildren;
-    for (auto* child : std::as_const(mChildren)) {
+    mChildren = ::toManagedVector(newChildren);
+    for (const auto& child : mChildren) {
         child->setParent(this);
     }
 
@@ -154,9 +164,9 @@ void DataInformationWithChildren::setChildren(const QScriptValue& children)
 
 int DataInformationWithChildren::indexOf(const DataInformation* const data) const
 {
-    const int size = mChildren.size();
-    for (int i = 0; i < size; ++i) {
-        if (mChildren.at(i) == data) {
+    const std::size_t size = mChildren.size();
+    for (std::size_t i = 0; i < size; ++i) {
+        if (mChildren[i].get() == data) {
             return i;
         }
     }
@@ -167,9 +177,9 @@ int DataInformationWithChildren::indexOf(const DataInformation* const data) cons
 
 QVariant DataInformationWithChildren::childData(int row, int column, int role) const
 {
-    Q_ASSERT(row >= 0 && row < mChildren.size());
+    Q_ASSERT(0 <= row && row < static_cast<int>(mChildren.size()));
     // just delegate to child
-    return mChildren.at(row)->data(column, role);
+    return mChildren[row]->data(column, role);
 }
 
 void DataInformationWithChildren::appendChild(DataInformation* newChild, bool emitSignal)
@@ -178,7 +188,7 @@ void DataInformationWithChildren::appendChild(DataInformation* newChild, bool em
         topLevelDataInformation()->_childCountAboutToChange(this, mChildren.size(), mChildren.size() + 1);
     }
     newChild->setParent(this);
-    mChildren.append(newChild);
+    mChildren.emplace_back(std::unique_ptr<DataInformation>(newChild));
     if (emitSignal) {
         topLevelDataInformation()->_childCountChanged(this, mChildren.size(), mChildren.size() + 1);
     }
@@ -197,7 +207,11 @@ void DataInformationWithChildren::appendChildren(const QVector<DataInformation*>
         child->setParent(this);
     }
 
-    mChildren << newChildren;
+    mChildren.reserve(mChildren.size() + newChildren.size());
+    for (auto* child : newChildren) {
+        mChildren.emplace_back(std::unique_ptr<DataInformation>(child));
+    }
+
     if (emitSignal) {
         topLevelDataInformation()->_childCountChanged(this, mChildren.size(), mChildren.size() + added);
     }
@@ -205,14 +219,13 @@ void DataInformationWithChildren::appendChildren(const QVector<DataInformation*>
 
 bool DataInformationWithChildren::replaceChildAt(unsigned int index, DataInformation* newChild)
 {
-    Q_ASSERT(index < uint(mChildren.size()));
+    Q_ASSERT(index < mChildren.size());
     Q_CHECK_PTR(newChild);
-    if (index >= uint(mChildren.size())) {
+    if (index >= mChildren.size()) {
         return false;
     }
 
-    delete mChildren.at(index);
-    mChildren[index] = newChild;
+    mChildren[index] = std::unique_ptr<DataInformation>(newChild);
     return true;
 }
 
@@ -240,17 +253,15 @@ QString DataInformationWithChildren::tooltipString() const
                                           validationMsg);
 }
 
-QVector<DataInformation*> DataInformationWithChildren::cloneList(const QVector<DataInformation*>& other,
-                                                                 DataInformation* parent)
+std::vector<std::unique_ptr<DataInformation>> DataInformationWithChildren::cloneList(const std::vector<std::unique_ptr<DataInformation>>& other,
+                                                                                     DataInformation* parent)
 {
-    int count = other.size();
-    QVector<DataInformation*> ret;
-    ret.reserve(count);
-    for (int i = 0; i < count; ++i) {
-        DataInformation* dat = other.at(i);
-        DataInformation* newChild = dat->clone();
+    std::vector<std::unique_ptr<DataInformation>> ret;
+    ret.reserve(other.size());
+    for (const auto& info : other) {
+        DataInformation* const newChild = info->clone();
         newChild->setParent(parent);
-        ret.append(newChild);
+        ret.emplace_back(std::unique_ptr<DataInformation>(newChild));
     }
 
     return ret;

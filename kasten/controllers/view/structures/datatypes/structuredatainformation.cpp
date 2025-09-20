@@ -44,8 +44,8 @@ BitCount64 StructureDataInformation::childPosition(const DataInformation* child,
 {
     BitCount64 offset = 0;
     // sum size of elements up to index
-    for (auto* current : mChildren) {
-        if (current == child) {
+    for (const auto& current : mChildren) {
+        if (current.get() == child) {
             break;
         }
         offset += current->size();

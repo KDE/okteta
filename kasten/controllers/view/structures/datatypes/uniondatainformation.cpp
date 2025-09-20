@@ -33,7 +33,7 @@ BitCount32 UnionDataInformation::size() const
 {
     // since this is a union return size of biggest element
     BitCount32 size = 0;
-    for (auto* child : mChildren) {
+    for (const auto& child : mChildren) {
         size = qMax(size, child->size());
     }
 
@@ -51,11 +51,11 @@ qint64 UnionDataInformation::readData(const Okteta::AbstractByteArrayModel* inpu
     const quint8 originalBitOffset = *bitOffset;
     quint8 bitOffsetAfterUnion = originalBitOffset;
     bool reachedEOF = false;
-    for (int i = 0; i < mChildren.size(); i++) {
-        DataInformation* next = mChildren.at(i);
+    for (std::size_t i = 0; i < mChildren.size(); ++i) {
+        DataInformation* next = mChildren[i].get();
         // first of all update the structure:
         top->scriptHandler()->updateDataInformation(next);
-        DataInformation* newNext = mChildren.at(i);
+        DataInformation* newNext = mChildren[i].get();
         if (next != newNext) {
             logInfo() << "Child at index " << i << " was replaced.";
             top->setChildDataChanged();

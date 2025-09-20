@@ -117,11 +117,11 @@ int TaggedUnionDataInformation::determineSelection(TopLevelDataInformation* top)
                 logError() << "Alternative number" << i << "is not valid. SelectIf is number, but there is not exactly one child!";
                 continue;
             }
-            if (!mChildren.at(0)->isPrimitive()) {
+            if (!mChildren.front()->isPrimitive()) {
                 logError() << "Alternative number" << i << "is not valid. SelectIf is number, but only child is not primitive!";
                 continue;
             }
-            if (mChildren.at(0)->asPrimitive()->value() == number.value) {
+            if (mChildren.front()->asPrimitive()->value() == number.value) {
                 return i; // found it
             }
         }
@@ -141,13 +141,12 @@ qint64 TaggedUnionDataInformation::readData(const Okteta::AbstractByteArrayModel
     const QVector<DataInformation*>& oldChildren = currentChildren();
 
     qint64 readBits = 0;
-    mWasAbleToRead = StructureDataInformation::readChildren(mChildren,
-                                                            input, address, bitsRemaining, bitOffset, &readBits, top);
+    mWasAbleToRead = readChildren(mChildren, input, address, bitsRemaining, bitOffset, &readBits, top);
     mLastIndex = determineSelection(top);
     const QVector<DataInformation*>& others = currentChildren();
     // check whether we have different children now, if yes we have to emit child count changed
     if (oldChildren != others) {
-        const int fixedSize = mChildren.size();
+        const std::size_t fixedSize = mChildren.size();
         // tell the model that all children have changed by setting to 0 and then to new size
         top->_childCountAboutToChange(this, fixedSize + oldChildren.size(), fixedSize);
         top->_childCountChanged(this, fixedSize + oldChildren.size(), fixedSize);
@@ -177,8 +176,8 @@ BitCount64 TaggedUnionDataInformation::childPosition(const DataInformation* chil
     BitCount64 offset = 0;
     bool found = false;
     // sum size of elements up to index
-    for (auto* current : mChildren) {
-        if (current == child) {
+    for (const auto& current : mChildren) {
+        if (current.get() == child) {
             found = true;
             break;
         }
@@ -206,7 +205,7 @@ BitCount64 TaggedUnionDataInformation::childPosition(const DataInformation* chil
 BitCount32 TaggedUnionDataInformation::size() const
 {
     BitCount32 total = 0;
-    for (auto* child : mChildren) {
+    for (const auto& child : mChildren) {
         total += child->size();
     }
 
@@ -229,8 +228,8 @@ bool TaggedUnionDataInformation::replaceChildAt(unsigned int index, DataInformat
 int TaggedUnionDataInformation::indexOf(const DataInformation* const data) const
 {
     int index = 0;
-    for (auto* child : mChildren) {
-        if (child == data) {
+    for (const auto& child : mChildren) {
+        if (child.get() == data) {
             return index;
         }
         index++;
@@ -250,9 +249,9 @@ int TaggedUnionDataInformation::indexOf(const DataInformation* const data) const
 
 DataInformation* TaggedUnionDataInformation::childAt(unsigned int index) const
 {
-    const uint permanentChildCount = uint(mChildren.size());
+    const std::size_t permanentChildCount = mChildren.size();
     if (index < permanentChildCount) {
-        return mChildren.at(index);
+        return mChildren[index].get();
     }
     const QVector<DataInformation*> others = currentChildren();
     if (index < permanentChildCount + others.size()) {
@@ -270,4 +269,20 @@ unsigned int TaggedUnionDataInformation::childCount() const
 bool TaggedUnionDataInformation::isTaggedUnion() const
 {
     return true;
+}
+
+QVector<DataInformation*> TaggedUnionDataInformation::cloneList(const QVector<DataInformation*>& other,
+                                                                DataInformation* parent)
+{
+    int count = other.size();
+    QVector<DataInformation*> ret;
+    ret.reserve(count);
+    for (int i = 0; i < count; ++i) {
+        DataInformation* dat = other.at(i);
+        DataInformation* newChild = dat->clone();
+        newChild->setParent(parent);
+        ret.append(newChild);
+    }
+
+    return ret;
 }

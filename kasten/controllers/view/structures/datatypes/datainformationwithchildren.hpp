@@ -11,11 +11,13 @@
 #include "datainformation.hpp"
 // Qt
 #include <QVector>
+// Std
+#include <memory>
+#include <vector>
 
 class DataInformationWithChildren : public DataInformation
 {
 protected:
-    QVector<DataInformation*> mChildren;
     explicit DataInformationWithChildren(const DataInformationWithChildren& d);
 
 public:
@@ -64,10 +66,13 @@ public:
                              TopLevelDataInformation* top);
 
 protected:
-    static QVector<DataInformation*> cloneList(const QVector<DataInformation*>& other, DataInformation* parent);
+    static std::vector<std::unique_ptr<DataInformation>> cloneList(const std::vector<std::unique_ptr<DataInformation>>& other, DataInformation* parent);
 
 protected:
     QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const override;
+
+protected:
+    std::vector<std::unique_ptr<DataInformation>> mChildren;
 };
 
 #endif /* KASTEN_DATAINFORMATIONWITHCHILDREN_HPP */

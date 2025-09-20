@@ -64,6 +64,9 @@ private:
     int determineSelection(TopLevelDataInformation* top);
 
 private:
+    static QVector<DataInformation*> cloneList(const QVector<DataInformation*>& other, DataInformation* parent);
+
+private:
     QVector<FieldInfo> mAlternatives;
     QVector<DataInformation*> mDefaultFields; // always sorted
     // TODO
