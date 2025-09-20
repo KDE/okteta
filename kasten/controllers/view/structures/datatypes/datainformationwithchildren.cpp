@@ -265,3 +265,44 @@ bool DataInformationWithChildren::isDataInformationWithChildren() const
 {
     return true;
 }
+
+bool DataInformationWithChildren::readChildren(const std::vector<std::unique_ptr<DataInformation>>& children,
+                                               const Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining,
+                                               quint8* bitOffset, qint64* readBitsPtr, TopLevelDataInformation* top)
+{
+    Q_CHECK_PTR(top);
+    Q_CHECK_PTR(readBitsPtr);
+    Q_ASSERT(*readBitsPtr >= 0); // otherwise we failed before
+
+    qint64 readBits = *readBitsPtr;
+    // prevent overflow
+    Q_ASSERT(sizeof(qint64) == sizeof(Okteta::Address) || readBits < (qint64(std::numeric_limits<qint32>::max()) * 8));
+
+    const quint8 origBitOffset = *bitOffset;
+    Okteta::Address readBytes = (readBits + origBitOffset) / 8;
+    for (std::size_t i = 0; i < children.size(); ++i) {
+        DataInformation* const child = children[i].get();
+        top->scriptHandler()->updateDataInformation(child);
+
+        // next may be a dangling pointer now, reset it
+        DataInformation* const newChild = children[i].get();
+        if (child != newChild) {
+            // logInfo() << "Child at index " << i << " was replaced.";
+            top->setChildDataChanged();
+        }
+
+        const qint64 currentReadBits = newChild->readData(input, address + readBytes,
+                                                          bitsRemaining - readBits, bitOffset);
+        if (currentReadBits == -1) {
+            *readBitsPtr = -1;
+            return false; // could not read one element -> whole structure could not be read
+        }
+
+        readBits += currentReadBits;
+        readBytes = (readBits + origBitOffset) / 8;
+    }
+
+    *readBitsPtr = readBits;
+
+    return true;
+}

@@ -27,6 +27,7 @@ public:
 
     BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const override;
 
+    using DataInformationWithChildren::readChildren;
     static bool readChildren(const QVector<DataInformation*>& children,
                              const Okteta::AbstractByteArrayModel* input,
                              Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset, qint64* readBitsPtr,

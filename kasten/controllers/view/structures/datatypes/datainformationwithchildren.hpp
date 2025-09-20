@@ -57,6 +57,13 @@ public:
     void setChildren(const QVector<DataInformation*>& newChildren);
     void setChildren(const QScriptValue& newChildren);
 
+public:
+    static bool readChildren(const std::vector<std::unique_ptr<DataInformation>>& children,
+                             const Okteta::AbstractByteArrayModel* input,
+                             Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset, qint64* readBitsPtr,
+                             TopLevelDataInformation* top);
+
+protected:
     static QVector<DataInformation*> cloneList(const QVector<DataInformation*>& other, DataInformation* parent);
 
 protected:
