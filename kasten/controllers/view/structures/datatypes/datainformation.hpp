@@ -88,12 +88,12 @@ public:
      *  @param name The name of the child to find
      *  @return the child with given @p name or @c NULL if none found with that name
      */
-    virtual DataInformation* child(const QString& name) const;
+    DataInformation* child(const QString& name) const;
     /**
      * @param start the starting address of the whole structure
      * @return the position in the file where this element is located
      */
-    virtual BitCount64 positionInFile(Okteta::Address start) const;
+    BitCount64 positionInFile(Okteta::Address start) const;
     /**
      * @param child the direct child we want to find the address for
      * @param start the start of the root element

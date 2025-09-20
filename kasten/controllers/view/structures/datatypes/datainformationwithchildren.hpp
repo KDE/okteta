@@ -24,7 +24,7 @@ public:
                                              = QVector<DataInformation*>(), DataInformation* parent = nullptr);
     ~DataInformationWithChildren() override;
 
-    virtual QVariant childData(int row, int column, int role) const;
+    QVariant childData(int row, int column, int role) const;
 
     BitCount32 size() const override;
     bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
@@ -47,7 +47,7 @@ public:
     QVariant dataFromWidget(const QWidget* w) const override;
     void setWidgetData(QWidget* w) const override;
     void resetValidationState() override;
-    virtual void calculateValidationState();
+    void calculateValidationState();
 
     bool isDataInformationWithChildren() const override;
 
