@@ -103,7 +103,7 @@ void ArrayDataInformationTest::testResizeHelper(ArrayDataInformation* array, Top
     QFETCH(bool, insertCalled);
     QFETCH(bool, removeCalled);
 
-    array->setArrayLength(newsize);
+    std::ignore = array->setArrayLength(newsize);
     QCOMPARE(array->length(), postsize);
     if (insertCalled) {
         QCOMPARE(spyAboutToInsert.size(), 1);

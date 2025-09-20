@@ -102,9 +102,9 @@ bool ArrayScriptClass::setAdditionalProperty(DataInformation* data, const QScrip
             ParsedNumber<uint> newLength = ParserUtils::uintFromScriptValue(value);
             if (!newLength.isValid) {
                 aData->logError() << "new length of array is invalid:" << newLength.string;
-                aData->setArrayLength(0);
+                std::ignore = aData->setArrayLength(0);
             } else {
-                aData->setArrayLength(newLength.value);
+                std::ignore = aData->setArrayLength(newLength.value);
             }
         }
         return true;

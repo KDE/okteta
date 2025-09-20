@@ -116,7 +116,7 @@ void ScriptHandler::updateLength(ArrayDataInformation* array)
         }
         ParsedNumber<uint> value = ParserUtils::uintFromScriptValue(result);
         if (value.isValid) {
-            array->setArrayLength(value.value);
+            std::ignore = array->setArrayLength(value.value);
         } else {
             array->logError() << "Length function did not return a valid number! Result was: " << result.toString();
         }
