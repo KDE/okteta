@@ -17,34 +17,56 @@
 template <typename T, class C>
 class BasicPrimitiveDataInformation : public PrimitiveDataInformation
 {
-public:
-    explicit BasicPrimitiveDataInformation(const QString& name, DataInformation* parent = nullptr);
-    ~BasicPrimitiveDataInformation() override;
-    PrimitiveDataType type() const override;
-    AllPrimitiveTypes value() const override;
-    void setValue(AllPrimitiveTypes newVal) override;
-    BasicPrimitiveDataInformation<T, C>* clone() const override;
-
-    QWidget* createEditWidget(QWidget* parent) const override;
-    QVariant dataFromWidget(const QWidget* w) const override;
-    void setWidgetData(QWidget* w) const override;
-
-    QScriptValue valueAsQScriptValue() const override;
-    QVariant valueToQVariant() const override;
-    QString valueToQString(AllPrimitiveTypes value) const override;
-    QVariant valueToQVariant(AllPrimitiveTypes value) const override;
-    BitCount32 size() const override; // TODO declare final with c++11 so it can be inlined
-    bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
-                 Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset) override;
-    qint64 readData(const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
-                    BitCount64 bitsRemaining, quint8* bitOffset) override;
-
 protected:
     BasicPrimitiveDataInformation(const BasicPrimitiveDataInformation<T, C>& d);
 
-private:
-    QString valueStringImpl() const override;
+public:
+    explicit BasicPrimitiveDataInformation(const QString& name, DataInformation* parent = nullptr);
+    ~BasicPrimitiveDataInformation() override;
+
+public: // PrimitiveDataInformation API
+    [[nodiscard]]
+    PrimitiveDataType type() const override;
+    [[nodiscard]]
+    AllPrimitiveTypes value() const override;
+    void setValue(AllPrimitiveTypes newVal) override;
+
+public: // PrimitiveDataInformation API
+    [[nodiscard]]
+    QScriptValue valueAsQScriptValue() const override;
+    [[nodiscard]]
+    QVariant valueToQVariant() const override;
+    [[nodiscard]]
+    QString valueToQString(AllPrimitiveTypes value) const override;
+    [[nodiscard]]
+    QVariant valueToQVariant(AllPrimitiveTypes value) const override;
+
+public: // DataInformation API
+    [[nodiscard]]
+    BasicPrimitiveDataInformation<T, C>* clone() const override;
+
+    [[nodiscard]]
+    QWidget* createEditWidget(QWidget* parent) const override;
+    [[nodiscard]]
+    QVariant dataFromWidget(const QWidget* w) const override;
+    void setWidgetData(QWidget* w) const override;
+
+    [[nodiscard]]
+    BitCount32 size() const override; // TODO declare final with c++11 so it can be inlined
+
+    [[nodiscard]]
+    qint64 readData(const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+                    BitCount64 bitsRemaining, quint8* bitOffset) override;
+    [[nodiscard]]
+    bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
+                 Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset) override;
+
+private: // DataInformation API
+    [[nodiscard]]
     QString typeNameImpl() const override;
+    [[nodiscard]]
+    QString valueStringImpl() const override;
+    [[nodiscard]]
     QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const override;
 
 protected:

@@ -38,6 +38,11 @@ class TopLevelDataInformation : public QObject
     Q_OBJECT
 
 public:
+    using Ptr = QSharedPointer<TopLevelDataInformation>;
+    using List = QVector<Ptr>;
+    static const Okteta::Address INVALID_OFFSET;
+
+public:
     /** create a new TopLevelDataInformation wrapping @p data
      *  @param data the object to wrap (takes ownership). If data is dummy then this object is invalid
      *  @param logger the logger to use (takes ownership). If null a new one is created
@@ -49,9 +54,9 @@ public:
                                      const QFileInfo& structureFile = QFileInfo());
     ~TopLevelDataInformation() override;
 
-    using Ptr = QSharedPointer<TopLevelDataInformation>;
-    using List = QVector<Ptr>;
-    static const Okteta::Address INVALID_OFFSET;
+public: // DataInformationBase API
+    [[nodiscard]]
+    bool isTopLevel() const override;
 
 public:
     void validate();
@@ -65,32 +70,44 @@ public:
      */
     void read(const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
               const Okteta::ArrayChangeMetricsList& changesList, bool forceRead);
+
+    [[nodiscard]]
     QScriptEngine* scriptEngine() const;
 
+    [[nodiscard]]
     DataInformation* actualDataInformation() const;
     void setActualDataInformation(DataInformation* newData);
+    [[nodiscard]]
     bool isValid() const;
     void lockPositionToOffset(Okteta::Address offset, const Okteta::AbstractByteArrayModel* model);
     void unlockPosition(const Okteta::AbstractByteArrayModel* model);
+    [[nodiscard]]
     bool isLockedFor(const Okteta::AbstractByteArrayModel* model) const;
+    [[nodiscard]]
     Okteta::Address lockPositionFor(const Okteta::AbstractByteArrayModel* model) const;
+    [[nodiscard]]
     bool isLockedByDefault() const;
     void setDefaultLockOffset(Okteta::Address offset);
+    [[nodiscard]]
     int indexOf(const DataInformation* const data) const;
+    [[nodiscard]]
     int index() const;
     void setIndex(int newIndex);
+
+    [[nodiscard]]
     ScriptHandler* scriptHandler() const;
+    [[nodiscard]]
     ScriptLogger* logger() const;
+
     void setChildDataChanged();
     void enqueueReadData(PointerDataInformation* toRead);
-
-    bool isTopLevel() const override;
 
     // only public so that DataInformation and subclasses can call them (TODO move)
     void _childCountAboutToChange(DataInformation* sender, uint oldCount, uint newCount);
     void _childCountChanged(DataInformation* sender, uint oldCount, uint newCount);
 
 private:
+    [[nodiscard]]
     bool isReadingNecessary(const Okteta::AbstractByteArrayModel* model, Okteta::Address address,
                             const Okteta::ArrayChangeMetricsList& changesList);
 

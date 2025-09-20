@@ -23,33 +23,59 @@ class PrimitiveDataInformation : public DataInformation
 {
     friend class PrimitiveDataInformationTest; // that unit test needs to change mWasAbleToRead
 
+protected:
+    PrimitiveDataInformation(const PrimitiveDataInformation& d);
+
 public:
     explicit PrimitiveDataInformation(const QString& name, DataInformation* parent = nullptr);
     ~PrimitiveDataInformation() override;
-    PrimitiveDataInformation* clone() const override = 0;
 
-    Qt::ItemFlags flags(int column, bool fileLoaded = true) const override;
+public: // API to implement
+    [[nodiscard]]
+    virtual PrimitiveDataType type() const = 0;
 
-    bool isPrimitive() const override;
+    [[nodiscard]]
     virtual AllPrimitiveTypes value() const = 0;
     virtual void setValue(AllPrimitiveTypes newValue) = 0;
+
+    [[nodiscard]]
     virtual QVariant valueToQVariant() const = 0;
+    [[nodiscard]]
     virtual QScriptValue valueAsQScriptValue() const = 0;
-    virtual PrimitiveDataType type() const = 0;
+    [[nodiscard]]
     virtual QString valueToQString(AllPrimitiveTypes value) const = 0;
+    [[nodiscard]]
     virtual QVariant valueToQVariant(AllPrimitiveTypes value) const = 0;
 
+public: // DataInformation API
+    [[nodiscard]]
+    PrimitiveDataInformation* clone() const override = 0;
+
+    [[nodiscard]]
     unsigned int childCount() const override;
+    [[nodiscard]]
     DataInformation* childAt(unsigned int) const override;
+    [[nodiscard]]
     BitCount64 childPosition(const DataInformation*, Okteta::Address) const override;
+
+    [[nodiscard]]
+    Qt::ItemFlags flags(int column, bool fileLoaded = true) const override;
+
+    [[nodiscard]]
     int indexOf(const DataInformation* const) const override;
 
+public: // DataInformationBase API
+    [[nodiscard]]
+    bool isPrimitive() const override;
+
+public:
     /** @return the matching prefix for the base (nothing, '0x', '0b' or '0o') */
+    [[nodiscard]]
     static QString basePrefix(int base);
 
-protected:
+protected: // API to implement
+    [[nodiscard]]
     virtual BitCount32 offset(unsigned int index) const;
-    PrimitiveDataInformation(const PrimitiveDataInformation& d);
 };
 
 /**
@@ -74,35 +100,30 @@ public:
     ~PrimitiveDataInformationWrapper() override = default;
 
     // delegate all these to the underlying object:
+public: // PrimitiveDataInformation API
+    PrimitiveDataType type() const override;
 
-    bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
-                 Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset) override;
+    AllPrimitiveTypes value() const override;
+    void setValue(AllPrimitiveTypes newValue) override;
 
+    QVariant valueToQVariant() const override;
+    QScriptValue valueAsQScriptValue() const override;
+    QString valueToQString(AllPrimitiveTypes value) const override;
+    QVariant valueToQVariant(AllPrimitiveTypes value) const override;
+
+public: // DataInformation API
     BitCount32 size() const override;
 
     void setWidgetData(QWidget* w) const override;
-
     QVariant dataFromWidget(const QWidget* w) const override;
-
     QWidget* createEditWidget(QWidget* parent) const override;
-
-    AllPrimitiveTypes value() const override;
-
-    void setValue(AllPrimitiveTypes newValue) override;
-
-    PrimitiveDataType type() const override;
-
-    QVariant valueToQVariant() const override;
-
-    QScriptValue valueAsQScriptValue() const override;
-
-    QString valueToQString(AllPrimitiveTypes value) const override;
-
-    QVariant valueToQVariant(AllPrimitiveTypes value) const override;
 
     // we have to do slightly more than just forward with this method
     qint64 readData(const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
                     BitCount64 bitsRemaining, quint8* bitOffset) override;
+
+    bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
+                 Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset) override;
 
 protected:
     std::unique_ptr<PrimitiveDataInformation> mValue;

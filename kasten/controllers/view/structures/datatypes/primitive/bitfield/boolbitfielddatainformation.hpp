@@ -20,19 +20,32 @@ public:
     {}
     ~BoolBitfieldDataInformation() override = default;
 
-    QVariant valueToQVariant() const override;
-    QScriptValue valueAsQScriptValue() const override;
-    QString valueToQString(AllPrimitiveTypes value) const override;
-    QVariant valueToQVariant(AllPrimitiveTypes value) const override;
-
-    QWidget* createEditWidget(QWidget* parent) const override;
-    QVariant dataFromWidget(const QWidget* w) const override;
-    void setWidgetData(QWidget* w) const override;
+public: // AbstractBitfieldDataInformation API
+    [[nodiscard]]
     Type bitfieldType() const override;
 
-private:
-    QString valueStringImpl() const override;
+public: // PrimitiveDataInformation API
+    [[nodiscard]]
+    QVariant valueToQVariant() const override;
+    [[nodiscard]]
+    QScriptValue valueAsQScriptValue() const override;
+    [[nodiscard]]
+    QString valueToQString(AllPrimitiveTypes value) const override;
+    [[nodiscard]]
+    QVariant valueToQVariant(AllPrimitiveTypes value) const override;
+
+public: // DataInformation API
+    [[nodiscard]]
+    QWidget* createEditWidget(QWidget* parent) const override;
+    [[nodiscard]]
+    QVariant dataFromWidget(const QWidget* w) const override;
+    void setWidgetData(QWidget* w) const override;
+
+private: // DataInformation API
+    [[nodiscard]]
     QString typeNameImpl() const override;
+    [[nodiscard]]
+    QString valueStringImpl() const override;
 };
 
 #endif /* KASTEN_BOOLBITFIELDDATAINFORMATION_HPP */

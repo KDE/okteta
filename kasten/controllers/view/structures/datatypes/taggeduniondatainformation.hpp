@@ -37,33 +37,52 @@ public:
         QVector<DataInformation*> fields;
     };
 
+public:
     explicit TaggedUnionDataInformation(const QString& name, DataInformation* parent = nullptr);
     ~TaggedUnionDataInformation() override;
 
-    qint64 readData(const Okteta::AbstractByteArrayModel* input,
-                    Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset) override;
-    bool isTaggedUnion() const override;
+public: // DataInformationWithChildren API
+    [[nodiscard]]
+    bool replaceChildAt(unsigned int index, DataInformation* newChild) override;
 
+public: // DataInformation API
+    [[nodiscard]]
+    unsigned int childCount() const override;
+    [[nodiscard]]
+    DataInformation* childAt(unsigned int index) const override;
+    [[nodiscard]]
     BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const override;
 
+    [[nodiscard]]
     BitCount32 size() const override;
 
-    bool replaceChildAt(unsigned int index, DataInformation* newChild) override;
+    [[nodiscard]]
+    qint64 readData(const Okteta::AbstractByteArrayModel* input,
+                    Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset) override;
+
+    [[nodiscard]]
     int indexOf(const DataInformation* const data) const override;
 
-    DataInformation* childAt(unsigned int index) const override;
-    unsigned int childCount() const override;
+public: // DataInformation API
+    [[nodiscard]]
+    bool isTaggedUnion() const override;
+
+public:
     void appendDefaultField(DataInformation* field, bool emitSignal);
     void setAlternatives(const QVector<FieldInfo>& alternatives, bool emitSignal);
 
-private:
+private: // DataInformation API
+    [[nodiscard]]
     QString typeNameImpl() const override;
 
 private:
+    [[nodiscard]]
     const QVector<DataInformation*>& currentChildren() const;
+    [[nodiscard]]
     int determineSelection(TopLevelDataInformation* top);
 
 private:
+    [[nodiscard]]
     static QVector<DataInformation*> cloneList(const QVector<DataInformation*>& other, DataInformation* parent);
 
 private:

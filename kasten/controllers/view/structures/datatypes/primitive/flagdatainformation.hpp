@@ -18,9 +18,11 @@ public:
     FlagDataInformation(const QString& name, PrimitiveDataInformation* type, const EnumDefinition::Ptr& enumDef,
                         DataInformation* parent = nullptr);
 
-private:
-    QString valueStringImpl() const override;
+private: // DataInformation API
+    [[nodiscard]]
     QString typeNameImpl() const override;
+    [[nodiscard]]
+    QString valueStringImpl() const override;
 };
 
 #endif // KASTEN_FLAGDATAINFORMATION_HPP

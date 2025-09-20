@@ -21,13 +21,21 @@ public:
                                   DataInformation* parent = nullptr);
     ~UnionDataInformation() override;
 
-    bool isUnion() const override;
+public: // DataInformation API
+    [[nodiscard]]
     BitCount32 size() const override;
+    [[nodiscard]]
+    BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const override;
+    [[nodiscard]]
     qint64 readData(const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
                     BitCount64 bitsRemaining, quint8* bitOffset) override;
-    BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const override;
 
-private:
+public: // DataInformationBase API
+    [[nodiscard]]
+    bool isUnion() const override;
+
+private: // DataInformation API
+    [[nodiscard]]
     QString typeNameImpl() const override;
 };
 

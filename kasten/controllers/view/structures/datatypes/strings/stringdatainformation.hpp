@@ -33,61 +33,104 @@ public:
         EBCDIC
     };
 
+public:
     StringDataInformation(const QString& name, StringType encoding, DataInformationBase* parent = nullptr);
     ~StringDataInformation() override;
 
-    DataInformation* childAt(unsigned int) const override;
+public: // DataInformationWithDummyChildren API
+    [[nodiscard]]
+    QVariant childData(int row, int column, int role) const override;
+    [[nodiscard]]
+    Qt::ItemFlags childFlags(int row, int column, bool fileLoaded = true) const override;
+    [[nodiscard]]
+    BitCount32 childSize(uint index) const override;
 
-    bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* input,
-                 Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset) override;
+    [[nodiscard]]
+    QWidget* createChildEditWidget(uint index, QWidget* parent) const override;
+    [[nodiscard]]
+    QVariant dataFromChildWidget(uint index, const QWidget* w) const override;
+    void setChildWidgetData(uint index, QWidget* w) const override;
+
+    [[nodiscard]]
+    QString childTypeName(uint index) const override;
+    [[nodiscard]]
+    QString childString(uint index) const override;
+    [[nodiscard]]
     bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
                       Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset) override;
-    qint64 readData(const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
-                    BitCount64 bitsRemaining, quint8* bitOffset) override;
-
-    BitCount32 size() const override;
-    void setWidgetData(QWidget* w) const override;
-    QVariant dataFromWidget(const QWidget* w) const override;
-    QWidget* createEditWidget(QWidget* parent) const override;
-    unsigned int childCount() const override;
-    Qt::ItemFlags flags(int column, bool fileLoaded = true) const override;
-    bool isString() const override;
-
-    QVariant data(int column, int role) const override;
-    QVariant childData(int row, int column, int role) const override;
-    Qt::ItemFlags childFlags(int row, int column, bool fileLoaded = true) const override;
-    BitCount32 childSize(uint index) const override;
-    QString childTypeName(uint index) const override;
-    QString childString(uint index) const override;
-    void setChildWidgetData(uint index, QWidget* w) const override;
-    QVariant dataFromChildWidget(uint index, const QWidget* w) const override;
-    QWidget* createChildEditWidget(uint index, QWidget* parent) const override;
+    [[nodiscard]]
     QScriptValue childToScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const override;
+
+public: // DataInformation API
+    [[nodiscard]]
+    unsigned int childCount() const override;
+    [[nodiscard]]
+    DataInformation* childAt(unsigned int) const override;
+    [[nodiscard]]
     BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const override;
 
+    [[nodiscard]]
+    Qt::ItemFlags flags(int column, bool fileLoaded = true) const override;
+    [[nodiscard]]
+    QVariant data(int column, int role) const override;
+
+    [[nodiscard]]
+    QWidget* createEditWidget(QWidget* parent) const override;
+    [[nodiscard]]
+    QVariant dataFromWidget(const QWidget* w) const override;
+    void setWidgetData(QWidget* w) const override;
+
+    [[nodiscard]]
+    BitCount32 size() const override;
+
+    [[nodiscard]]
+    qint64 readData(const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+                    BitCount64 bitsRemaining, quint8* bitOffset) override;
+    [[nodiscard]]
+    bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* input,
+                 Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset) override;
+
+public: // DataInformationBase API
+    [[nodiscard]]
+    bool isString() const override;
+
+public:
+    [[nodiscard]]
     StringType encoding() const;
+    [[nodiscard]]
     QString encodingName() const;
     void setEncoding(StringType encoding);
+    [[nodiscard]]
     uint terminationCodePoint() const;
     void setTerminationCodePoint(uint term);
+    [[nodiscard]]
     uint maxCharCount() const;
     void setMaxCharCount(uint count);
+    [[nodiscard]]
     uint maxByteCount() const;
     void setMaxByteCount(uint count);
+    [[nodiscard]]
     int stringLength() const;
+    [[nodiscard]]
     int stringByteLength() const;
+    [[nodiscard]]
     uint terminationMode() const;
+    [[nodiscard]]
     QString childNameAt(int index) const;
+    [[nodiscard]]
     QString valueAt(int index) const;
     /** Removes this mode from the termination modes. If none is left, changes string to null terminated
      * @param mode The mode to remove
      */
     void unsetTerminationMode(StringData::TerminationMode mode);
 
-private:
-    QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const override;
+private: // DataInformation API
+    [[nodiscard]]
     QString typeNameImpl() const override;
+    [[nodiscard]]
     QString valueStringImpl() const override;
+    [[nodiscard]]
+    QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const override;
 
 private:
     mutable DummyDataInformation mDummy;

@@ -20,30 +20,59 @@ public:
         Boolean
     };
 
+protected:
+    AbstractBitfieldDataInformation(const AbstractBitfieldDataInformation& d);
+
+public:
     AbstractBitfieldDataInformation(const QString& name, BitCount32 width, DataInformation* parent = nullptr);
     ~AbstractBitfieldDataInformation() override;
 
-    BitCount32 width() const;
-    void setWidth(BitCount32 newWidth);
-    BitCount32 size() const override;
-    quint64 mask() const;
-    AllPrimitiveTypes value() const override;
-    void setValue(AllPrimitiveTypes newVal) override;
-    PrimitiveDataType type() const override;
-    QString sizeString() const override;
-    bool isBitfield() const override;
+public: // API to implement
+    [[nodiscard]]
     virtual Type bitfieldType() const = 0;
+
+public: // PrimitiveDataInformation API
+    [[nodiscard]]
+    PrimitiveDataType type() const override;
+    [[nodiscard]]
+    AllPrimitiveTypes value() const override;
+
+    void setValue(AllPrimitiveTypes newVal) override;
+
+public: // DataInformation API
+    [[nodiscard]]
     Qt::ItemFlags flags(int column, bool fileLoaded) const override;
+
+    [[nodiscard]]
+    QString sizeString() const override;
+
+    [[nodiscard]]
+    BitCount32 size() const override;
+
+    [[nodiscard]]
     qint64 readData(const Okteta::AbstractByteArrayModel* input,
                     Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset) override;
+    [[nodiscard]]
     bool setData(const QVariant& valueVariant, Okteta::AbstractByteArrayModel* out,
                  Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset) override;
 
-protected:
-    AbstractBitfieldDataInformation(const AbstractBitfieldDataInformation& d);
+public: // DataInformationBase API
+    [[nodiscard]]
+    bool isBitfield() const override;
+
+public:
+    [[nodiscard]]
+    BitCount32 width() const;
+    void setWidth(BitCount32 newWidth);
+    [[nodiscard]]
+    quint64 mask() const;
+
+protected: // API to implement
+    [[nodiscard]]
     virtual AllPrimitiveTypes fromVariant(const QVariant& variant, bool* ok) const;
 
-private:
+private: // DataInformation API
+    [[nodiscard]]
     QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const override;
 
 protected:

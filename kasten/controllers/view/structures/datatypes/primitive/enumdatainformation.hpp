@@ -21,19 +21,29 @@ public:
                         const EnumDefinition::Ptr& enumDef, DataInformation* parent = nullptr);
     ~EnumDataInformation() override;
 
+public: // DataInformation API
+    [[nodiscard]]
     QWidget* createEditWidget(QWidget* parent) const override;
+    [[nodiscard]]
     QVariant dataFromWidget(const QWidget* w) const override;
     void setWidgetData(QWidget* w) const override;
 
+public: // DataInformationBase API
+    [[nodiscard]]
     bool isEnum() const override;
 
+public:
+    [[nodiscard]]
     EnumDefinition::Ptr enumValues() const;
     void setEnumValues(const QMap<AllPrimitiveTypes, QString>& newValues);
 
-private:
-    QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const override;
-    QString valueStringImpl() const override;
+private: // DataInformation API
+    [[nodiscard]]
     QString typeNameImpl() const override;
+    [[nodiscard]]
+    QString valueStringImpl() const override;
+    [[nodiscard]]
+    QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const override;
 
 protected:
     EnumDefinition::Ptr mEnum;

@@ -32,53 +32,87 @@ public:
                          DataInformation* parent = nullptr, const QScriptValue& lengthFunction = QScriptValue());
     ~ArrayDataInformation() override;
 
-public:
-    uint length() const;
-    QWidget* createEditWidget(QWidget* parent) const override;
-    QVariant dataFromWidget(const QWidget* w) const override;
-    void setWidgetData(QWidget* w) const override;
-
+public: // DataInformationWithDummyChildren API
+    [[nodiscard]]
     QWidget* createChildEditWidget(uint index, QWidget* parent) const override;
+    [[nodiscard]]
     QVariant dataFromChildWidget(uint index, const QWidget* w) const override;
     void setChildWidgetData(uint index, QWidget* w) const override;
 
-    BitCount32 size() const override;
-
-    qint64 readData(const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
-                    BitCount64 bitsRemaining, quint8* bitOffset) override;
-    bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
-                 Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset) override;
+    [[nodiscard]]
     bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
                       Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset) override;
 
+    [[nodiscard]]
     Qt::ItemFlags childFlags(int row, int column, bool fileLoaded = true) const override;
+    [[nodiscard]]
     QVariant childData(int row, int column, int role) const override;
-    DataInformation* childAt(unsigned int idx) const override;
-    unsigned int childCount() const override;
+
+    [[nodiscard]]
     QString childTypeName(uint index) const override;
+    [[nodiscard]]
     QString childString(uint index) const override;
+    [[nodiscard]]
     int indexOf(const DataInformation* const data) const override;
+    [[nodiscard]]
     BitCount32 childSize(uint index) const override;
 
+    [[nodiscard]]
+    QScriptValue childToScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const override;
+
+public: // DataInformation API
+    [[nodiscard]]
+    unsigned int childCount() const override;
+    [[nodiscard]]
+    DataInformation* childAt(unsigned int idx) const override;
+    [[nodiscard]]
+    BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const override;
+
+    [[nodiscard]]
+    QWidget* createEditWidget(QWidget* parent) const override;
+    [[nodiscard]]
+    QVariant dataFromWidget(const QWidget* w) const override;
+    void setWidgetData(QWidget* w) const override;
+
+    [[nodiscard]]
+    BitCount32 size() const override;
+
+    [[nodiscard]]
+    qint64 readData(const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+                    BitCount64 bitsRemaining, quint8* bitOffset) override;
+    [[nodiscard]]
+    bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
+                 Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset) override;
+
+public: // DataInformationBase API
+    [[nodiscard]]
     bool isArray() const override;
 
+public:
+    [[nodiscard]]
+    uint length() const;
+    [[nodiscard]]
     bool setArrayLength(uint newLength);
     /** Sets the new array type
      * @param newChildtype the new type (ownership is always taken, do not use anymore after this call!)
      */
     void setArrayType(DataInformation* newChildtype);
+    [[nodiscard]]
     DataInformation* arrayType() const;
 
+    [[nodiscard]]
     QScriptValue childType() const;
+    [[nodiscard]]
     QScriptValue lengthFunction() const;
     void setLengthFunction(const QScriptValue& newFunc);
-    QScriptValue childToScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const override;
-    BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const override;
 
-private:
-    QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const override;
+private: // DataInformation API
+    [[nodiscard]]
     QString typeNameImpl() const override;
+    [[nodiscard]]
     QString valueStringImpl() const override;
+    [[nodiscard]]
+    QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const override;
 
 private:
     std::unique_ptr<AbstractArrayData> mData;

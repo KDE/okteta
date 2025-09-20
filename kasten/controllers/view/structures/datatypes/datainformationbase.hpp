@@ -34,52 +34,98 @@ class DataInformationBase
 public:
     DataInformationBase();
     DataInformationBase(const DataInformationBase&) = delete;
+    DataInformationBase(DataInformationBase&&) = delete;
 
     virtual ~DataInformationBase();
 
+public:
     DataInformationBase& operator=(const DataInformationBase&) = delete;
+    DataInformationBase& operator=(DataInformationBase&&) = delete;
+
+public: // API to implement
+    [[nodiscard]]
+    virtual bool isTopLevel() const = 0;
+    [[nodiscard]]
+    virtual bool isArray() const;
+    [[nodiscard]]
+    virtual bool isPrimitive() const;
+    [[nodiscard]]
+    virtual bool isEnum() const;
+    [[nodiscard]]
+    virtual bool isBitfield() const;
+    [[nodiscard]]
+    virtual bool isStruct() const;
+    [[nodiscard]]
+    virtual bool isUnion() const;
+    [[nodiscard]]
+    virtual bool isString() const;
+    [[nodiscard]]
+    virtual bool isPointer() const;
+    [[nodiscard]]
+    virtual bool isTaggedUnion() const;
+    [[nodiscard]]
+    virtual bool isDataInformationWithChildren() const;
+    [[nodiscard]]
+    virtual bool isDataInformationWithDummyChildren() const;
+    [[nodiscard]]
+    virtual bool isDummy() const;
 
 public:
-    virtual bool isTopLevel() const = 0;
+    [[nodiscard]]
     TopLevelDataInformation* asTopLevel();
+    [[nodiscard]]
     DataInformation* asDataInformation();
+    [[nodiscard]]
     const TopLevelDataInformation* asTopLevel() const;
+    [[nodiscard]]
     const DataInformation* asDataInformation() const;
-    virtual bool isArray() const;
+    [[nodiscard]]
     ArrayDataInformation* asArray();
+    [[nodiscard]]
     const ArrayDataInformation* asArray() const;
-    virtual bool isPrimitive() const;
+    [[nodiscard]]
     PrimitiveDataInformation* asPrimitive();
+    [[nodiscard]]
     const PrimitiveDataInformation* asPrimitive() const;
-    virtual bool isEnum() const;
+    [[nodiscard]]
     EnumDataInformation* asEnum();
+    [[nodiscard]]
     const EnumDataInformation* asEnum() const;
-    virtual bool isBitfield() const;
+    [[nodiscard]]
     AbstractBitfieldDataInformation* asBitfield();
+    [[nodiscard]]
     const AbstractBitfieldDataInformation* asBitfield() const;
-    virtual bool isStruct() const;
+    [[nodiscard]]
     StructureDataInformation* asStruct();
+    [[nodiscard]]
     const StructureDataInformation* asStruct() const;
-    virtual bool isUnion() const;
+    [[nodiscard]]
     UnionDataInformation* asUnion();
+    [[nodiscard]]
     const UnionDataInformation* asUnion() const;
-    virtual bool isString() const;
+    [[nodiscard]]
     StringDataInformation* asString();
+    [[nodiscard]]
     const StringDataInformation* asString() const;
-    virtual bool isPointer() const;
+    [[nodiscard]]
     PointerDataInformation* asPointer();
+    [[nodiscard]]
     const PointerDataInformation* asPointer() const;
-    virtual bool isTaggedUnion() const;
+    [[nodiscard]]
     TaggedUnionDataInformation* asTaggedUnion();
+    [[nodiscard]]
     const TaggedUnionDataInformation* asTaggedUnion() const;
-    virtual bool isDataInformationWithChildren() const;
+    [[nodiscard]]
     DataInformationWithChildren* asDataInformationWithChildren();
+    [[nodiscard]]
     const DataInformationWithChildren* asDataInformationWithChildren() const;
-    virtual bool isDataInformationWithDummyChildren() const;
+    [[nodiscard]]
     DataInformationWithDummyChildren* asDataInformationWithDummyChildren();
+    [[nodiscard]]
     const DataInformationWithDummyChildren* asDataInformationWithDummyChildren() const;
-    virtual bool isDummy() const;
+    [[nodiscard]]
     DummyDataInformation* asDummy();
+    [[nodiscard]]
     const DummyDataInformation* asDummy() const;
 };
 

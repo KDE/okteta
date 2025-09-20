@@ -23,6 +23,7 @@
  * After this macro visibility will be set to protected */
 #define DATAINFORMATION_CLONE_DECL(type, supertype) \
     public: \
+        [[nodiscard]] \
         inline type* clone() const override { return new type(*this); } \
     protected: \
         type(const type& d)
@@ -53,14 +54,7 @@ class DataInformation : public DataInformationBase
     friend class DefaultScriptClass; // to set mValidationSucessful and validationError
     template <PrimitiveDataType type> friend class PrimitiveArrayData; // to set mWasAbleToRead (when returning a script value)
 
-protected:
-    explicit DataInformation(const DataInformation&);
-
 public:
-    virtual DataInformation* clone() const = 0;
-    explicit DataInformation(const QString& name, DataInformationBase* parent = nullptr);
-    ~DataInformation() override;
-
     enum Columns
     {
         ColumnName = 0,
@@ -77,51 +71,56 @@ public:
         EndiannessBig
     };
 
+protected:
+    explicit DataInformation(const DataInformation&);
+
+public:
+    explicit DataInformation(const QString& name, DataInformationBase* parent = nullptr);
+    ~DataInformation() override;
+
+public: // API to implement
+    [[nodiscard]]
+    virtual DataInformation* clone() const = 0;
+
     // methods for children:
+    [[nodiscard]]
     virtual unsigned int childCount() const = 0;
+    [[nodiscard]]
     virtual DataInformation* childAt(unsigned int) const = 0;
-    /** @brief Looks for a child of this object with given name
-     *  @param name The name of the child to find
-     *  @return the child with given @p name or @c NULL if none found with that name
-     */
-    DataInformation* child(const QString& name) const;
-    /**
-     * @param start the starting address of the whole structure
-     * @return the position in the file where this element is located
-     */
-    BitCount64 positionInFile(Okteta::Address start) const;
     /**
      * @param child the direct child we want to find the address for
      * @param start the start of the root element
      * @return the address of @p child in the file
      */
+    [[nodiscard]]
     virtual BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const = 0;
 
     // for the model:
+    [[nodiscard]]
     virtual Qt::ItemFlags flags(int column, bool fileLoaded = true) const;
-    int row() const;
     /** get the necessary data (for the model) */
+    [[nodiscard]]
     virtual QVariant data(int column, int role) const;
 
-    QString typeName() const;
-    /** by default just returns an empty QString */
-    QString valueString() const;
-    QString name() const;
-    void setName(const QString& newName);
+    [[nodiscard]]
     virtual QString tooltipString() const;
     /** needs to be virtual for bitfields */
+    [[nodiscard]]
     virtual QString sizeString() const;
 
     // delegate functions:
     /** create a QWidget for the QItemDelegate */
+    [[nodiscard]]
     virtual QWidget* createEditWidget(QWidget* parent) const = 0;
     /** get the needed data from the widget */
+    [[nodiscard]]
     virtual QVariant dataFromWidget(const QWidget* w) const = 0;
     /** initialize the delegate widget with the correct data */
     virtual void setWidgetData(QWidget* w) const = 0;
 
     // reading and writing
     /** the size in bits of this element */
+    [[nodiscard]]
     virtual BitCount32 size() const = 0;
 
     /** Reads the necessary data from @p input and returns the number of bytes read
@@ -134,11 +133,9 @@ public:
      *
      * @return the number of bits read or @c -1 if none were read
      */
+    [[nodiscard]]
     virtual qint64 readData(const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
                             BitCount64 bitsRemaining, quint8* bitOffset) = 0;
-    /** sets mWasAbleToRead to false for all children and this object.
-     *  Gets called once before the reading of the whole structure starts. */
-    void beginRead();
     /** Writes the current data contained in this object to out.
      *
      *  @param value a QVariant object holding the new data to write
@@ -149,29 +146,12 @@ public:
      *
      *  @return @c true on success, @c false otherwise
      */
+    [[nodiscard]]
     virtual bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
                          Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset) = 0;
 
-    bool isTopLevel() const override;
-    TopLevelDataInformation* topLevelDataInformation() const;
-    DataInformation* mainStructure();
-
-    QScriptValue updateFunc() const;
-    void setUpdateFunc(const QScriptValue& func);
-    QScriptValue validationFunc() const;
-    void setValidationFunc(const QScriptValue& func);
-    QString validationError() const;
-    bool validationSuccessful() const;
-
-    bool hasBeenUpdated() const;
-    bool hasBeenValidated() const;
-    DataInformationEndianness byteOrder() const;
-    QSysInfo::Endian effectiveByteOrder() const;
-    void setByteOrder(DataInformationEndianness newByteOrder);
-    QString fullObjectPath() const;
-
     virtual void resetValidationState(); // virtual for DataInformationWithChildren
-    bool wasAbleToRead() const;
+
     /**
      * This method is virtual since DummyDataInformation has to override it.
      *
@@ -179,54 +159,134 @@ public:
      * @param handlerInfo the object holding the script classes
      * @return a QScriptValue wrapping this object
      */
+    [[nodiscard]]
     virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
-    /** the same as above, just using the properties from TopLevelDataInformation */
-    QScriptValue toScriptValue(TopLevelDataInformation* top);
-    void setParent(DataInformationBase* newParent);
-    DataInformationBase* parent() const;
-    ScriptLogger* logger() const;
-    /** just a shorthand for logger->info(this) */
-    QDebug logInfo() const;
-    /** just a shorthand for logger->warn(this) */
-    QDebug logWarn() const;
-    /** just a shorthand for logger->error(this) */
-    QDebug logError() const;
-    /** whether data was logged from here (and which level it was)
-     * @return ScriptLogger::LogInvalid if no data was logged or the level of the most severe log
-     */
-    ScriptLogger::LogLevel loggedData() const;
-    void setLoggedData(ScriptLogger::LogLevel lvl) const;
-
     /**
      * Find the index of a DataInformation in this object, needed to calculate the row
      * @return the index of @p data or -1 if not found
      */
+    [[nodiscard]]
     virtual int indexOf(const DataInformation* const data) const = 0;
+
+public: // DataInformationBase API
+    [[nodiscard]]
+    bool isTopLevel() const override;
+
+public:
+    [[nodiscard]]
+    int row() const;
+    [[nodiscard]]
+    QString typeName() const;
+    /** by default just returns an empty QString */
+    [[nodiscard]]
+    QString valueString() const;
+    [[nodiscard]]
+    QString name() const;
+    void setName(const QString& newName);
+
+    /** @brief Looks for a child of this object with given name
+     *  @param name The name of the child to find
+     *  @return the child with given @p name or @c NULL if none found with that name
+     */
+    [[nodiscard]]
+    DataInformation* child(const QString& name) const;
+    /**
+     * @param start the starting address of the whole structure
+     * @return the position in the file where this element is located
+     */
+    [[nodiscard]]
+    BitCount64 positionInFile(Okteta::Address start) const;
+
+    /** sets mWasAbleToRead to false for all children and this object.
+     *  Gets called once before the reading of the whole structure starts. */
+    void beginRead();
+    [[nodiscard]]
+    TopLevelDataInformation* topLevelDataInformation() const;
+    [[nodiscard]]
+    DataInformation* mainStructure();
+
+    [[nodiscard]]
+    QScriptValue updateFunc() const;
+    void setUpdateFunc(const QScriptValue& func);
+    [[nodiscard]]
+    QScriptValue validationFunc() const;
+    void setValidationFunc(const QScriptValue& func);
+    [[nodiscard]]
+    QString validationError() const;
+    bool validationSuccessful() const;
+
+    [[nodiscard]]
+    bool hasBeenUpdated() const;
+    [[nodiscard]]
+    bool hasBeenValidated() const;
+    [[nodiscard]]
+    DataInformationEndianness byteOrder() const;
+    [[nodiscard]]
+    QSysInfo::Endian effectiveByteOrder() const;
+    void setByteOrder(DataInformationEndianness newByteOrder);
+    [[nodiscard]]
+    QString fullObjectPath() const;
+
+    [[nodiscard]]
+    bool wasAbleToRead() const;
+    /** the same as above, just using the properties from TopLevelDataInformation */
+    [[nodiscard]]
+    QScriptValue toScriptValue(TopLevelDataInformation* top);
+    void setParent(DataInformationBase* newParent);
+    [[nodiscard]]
+    DataInformationBase* parent() const;
+    [[nodiscard]]
+    ScriptLogger* logger() const;
+    /** just a shorthand for logger->info(this) */
+    [[nodiscard]]
+    QDebug logInfo() const;
+    /** just a shorthand for logger->warn(this) */
+    [[nodiscard]]
+    QDebug logWarn() const;
+    /** just a shorthand for logger->error(this) */
+    [[nodiscard]]
+    QDebug logError() const;
+    /** whether data was logged from here (and which level it was)
+     * @return ScriptLogger::LogInvalid if no data was logged or the level of the most severe log
+     */
+    [[nodiscard]]
+    ScriptLogger::LogLevel loggedData() const;
+    void setLoggedData(ScriptLogger::LogLevel lvl) const;
+
     /** Set a custom string to be used for typeName() instead of the default.
      * @param customTypeName the new name. Pass an empty or null string to revert to default behaviour
      */
     void setCustomTypeName(const QString& customTypeName);
+    [[nodiscard]]
     QScriptValue toStringFunction() const;
     void setToStringFunction(const QScriptValue& func);
 
 protected:
+    [[nodiscard]]
     static QString sizeString(BitCount32 size);
+    [[nodiscard]]
     static QString tooltipString(const QString& nameString, const QString& valueString,
                                  const QString& typeString, const QString& sizeString,
                                  unsigned int childCount = 0,
                                  const QString& validationMessage = QString());
+    [[nodiscard]]
     static QVariant eofReachedData(int role);
     void setAdditionalFunction(AdditionalData::AdditionalDataType entry, const QScriptValue& value, const char* name);
 
 private:
-    virtual QString valueStringImpl() const;
+    [[nodiscard]]
     virtual QString typeNameImpl() const = 0;
+    [[nodiscard]]
+    virtual QString valueStringImpl() const;
     /** So that this object can be wrapped by the correct javascript object*/
+    [[nodiscard]]
     virtual QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const = 0;
 
 private:
     void setValidationError(const QString& errorMessage); // only called by ScriptHandler
+    [[nodiscard]]
     QSysInfo::Endian byteOrderFromSettings() const; // so there is no need to include structureviewpreferences.hpp here
+    [[nodiscard]]
     QString customToString(const QScriptValue& func) const;
 
 protected:
