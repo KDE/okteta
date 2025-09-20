@@ -147,7 +147,7 @@ qint64 ComplexArrayData::readData(const Okteta::AbstractByteArrayModel* input, O
     qint64 readBits = 0;
     TopLevelDataInformation* top = mParent->topLevelDataInformation();
     quint8 bitOffset = 0; // FIXME no more padding before and after arrays!
-    DataInformationWithChildren::readChildren(mChildren, input, address, bitsRemaining, &bitOffset, &readBits, top);
+    std::ignore = DataInformationWithChildren::readChildren(mChildren, input, address, bitsRemaining, &bitOffset, &readBits, top);
     return readBits;
 }
 
