@@ -12,6 +12,7 @@
 #include <allprimitivetypes.hpp>
 // Qt
 #include <QScriptValue>
+#include <QVector>
 
 /** A class holding the data of a struct for Okteta*/
 class TaggedUnionDataInformation : public DataInformationWithChildren

@@ -132,7 +132,7 @@ void DataInformationWithChildren::calculateValidationState()
     }
 }
 
-void DataInformationWithChildren::setChildren(const QVector<DataInformation*>& newChildren)
+void DataInformationWithChildren::setChildren(std::vector<std::unique_ptr<DataInformation>>&& newChildren)
 {
     // since we are replacing the children and the first few may be different emit
     // change to length zero and then to new length so that model gets updated correctly
@@ -143,7 +143,7 @@ void DataInformationWithChildren::setChildren(const QVector<DataInformation*>& n
 
     const uint count = newChildren.size();
     topLevelDataInformation()->_childCountAboutToChange(this, 0, count);
-    mChildren = ::toManagedVector(newChildren);
+    mChildren = std::move(newChildren);
     for (const auto& child : mChildren) {
         child->setParent(this);
     }
@@ -159,7 +159,7 @@ void DataInformationWithChildren::setChildren(const QScriptValue& children)
     }
     QVector<DataInformation*> convertedVals =
         ScriptValueConverter::convertValues(children, topLevelDataInformation()->logger());
-    setChildren(convertedVals);
+    setChildren(::toManagedVector(convertedVals));
 }
 
 int DataInformationWithChildren::indexOf(const DataInformation* const data) const

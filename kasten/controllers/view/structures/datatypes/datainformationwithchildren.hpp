@@ -9,8 +9,6 @@
 
 // lib
 #include "datainformation.hpp"
-// Qt
-#include <QVector>
 // Std
 #include <memory>
 #include <vector>
@@ -74,7 +72,7 @@ public:
     /** Takes ownership! */
     void appendChild(std::unique_ptr<DataInformation>&& child, bool emitSignal = true);
     /** Takes ownership of all elements */
-    void setChildren(const QVector<DataInformation*>& newChildren);
+    void setChildren(std::vector<std::unique_ptr<DataInformation>>&& newChildren);
     void setChildren(const QScriptValue& newChildren);
 
 public:

@@ -9,6 +9,8 @@
 
 // lib
 #include "datainformationwithchildren.hpp"
+// Qt
+#include <QVector>
 
 /** A class holding the data of a struct for Okteta*/
 class StructureDataInformation : public DataInformationWithChildren
