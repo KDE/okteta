@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-19 02:03+0000\n"
+"POT-Creation-Date: 2025-09-21 02:04+0000\n"
 "PO-Revision-Date: 2025-08-31 19:06+0100\n"
 "Last-Translator: Sofía Priego <spriego@darksylvania.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -1891,7 +1891,7 @@ msgid_plural "%1 strings extracted."
 msgstr[0] "Se ha extraído 1 cadena."
 msgstr[1] "Se han extraído %1 cadenas."
 
-#: controllers/view/structures/datatypes/array/complexarraydata.cpp:99
+#: controllers/view/structures/datatypes/array/complexarraydata.cpp:94
 #, kde-format
 msgctxt "type name, then array length"
 msgid "%1[%2]"
@@ -1945,14 +1945,14 @@ msgstr[0] "%2 (%1 hijo)"
 msgstr[1] "%2 (%1 hijos)"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:267
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:232
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:245
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed."
 msgstr "Ha fallado la validación."
 
 #: controllers/view/structures/datatypes/datainformation.cpp:270
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:235
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:248
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed: \"%1\""

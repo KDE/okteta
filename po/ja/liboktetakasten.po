@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-19 02:03+0000\n"
+"POT-Creation-Date: 2025-09-21 02:04+0000\n"
 "PO-Revision-Date: 2011-04-08 21:21-0700\n"
 "Last-Translator: Fumiaki Okushi <okushi@kde.gr.jp>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -1899,7 +1899,7 @@ msgid "1 string extracted."
 msgid_plural "%1 strings extracted."
 msgstr[0] ""
 
-#: controllers/view/structures/datatypes/array/complexarraydata.cpp:99
+#: controllers/view/structures/datatypes/array/complexarraydata.cpp:94
 #, fuzzy, kde-format
 #| msgctxt "array type then length"
 #| msgid "%1[%2]"
@@ -1957,14 +1957,14 @@ msgid_plural "%2 (%1 children)"
 msgstr[0] ""
 
 #: controllers/view/structures/datatypes/datainformation.cpp:267
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:232
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:245
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed."
 msgstr ""
 
 #: controllers/view/structures/datatypes/datainformation.cpp:270
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:235
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:248
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed: \"%1\""

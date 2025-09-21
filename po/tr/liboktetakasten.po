@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesdk-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-19 02:03+0000\n"
+"POT-Creation-Date: 2025-09-21 02:04+0000\n"
 "PO-Revision-Date: 2025-08-31 17:45+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -1861,7 +1861,7 @@ msgid_plural "%1 strings extracted."
 msgstr[0] "1 dizi çıkarıldı."
 msgstr[1] "%1 dizi çıkarıldı."
 
-#: controllers/view/structures/datatypes/array/complexarraydata.cpp:99
+#: controllers/view/structures/datatypes/array/complexarraydata.cpp:94
 #, kde-format
 msgctxt "type name, then array length"
 msgid "%1[%2]"
@@ -1915,14 +1915,14 @@ msgstr[0] "%2 (%1 alt öge)"
 msgstr[1] "%2 (%1 alt öge)"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:267
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:232
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:245
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed."
 msgstr "Doğrulama başarısız."
 
 #: controllers/view/structures/datatypes/datainformation.cpp:270
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:235
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:248
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed: \"%1\""

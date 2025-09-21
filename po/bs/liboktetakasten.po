@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-19 02:03+0000\n"
+"POT-Creation-Date: 2025-09-21 02:04+0000\n"
 "PO-Revision-Date: 2015-02-04 16:00+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: bosanski <bs@li.org>\n"
@@ -1948,7 +1948,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: controllers/view/structures/datatypes/array/complexarraydata.cpp:99
+#: controllers/view/structures/datatypes/array/complexarraydata.cpp:94
 #, kde-format
 msgctxt "type name, then array length"
 msgid "%1[%2]"
@@ -2008,14 +2008,14 @@ msgstr[1] ""
 msgstr[2] ""
 
 #: controllers/view/structures/datatypes/datainformation.cpp:267
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:232
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:245
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed."
 msgstr "Ovjera nije prošla."
 
 #: controllers/view/structures/datatypes/datainformation.cpp:270
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:235
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:248
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed: \"%1\""
