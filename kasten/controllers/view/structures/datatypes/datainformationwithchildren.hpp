@@ -54,7 +54,6 @@ public:
     /** Takes ownership! */
     void appendChild(DataInformation* child, bool emitSignal = true);
     /** Takes ownership of all elements */
-    void appendChildren(const QVector<DataInformation*>& newChildren, bool emitSignal = true);
     void setChildren(const QVector<DataInformation*>& newChildren);
     void setChildren(const QScriptValue& newChildren);
 
