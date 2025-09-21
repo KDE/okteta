@@ -194,29 +194,6 @@ void DataInformationWithChildren::appendChild(DataInformation* newChild, bool em
     }
 }
 
-void DataInformationWithChildren::appendChildren(const QVector<DataInformation*>& newChildren, bool emitSignal)
-{
-    if (newChildren.isEmpty()) {
-        return;
-    }
-    const int added = newChildren.size();
-    if (emitSignal) {
-        topLevelDataInformation()->_childCountAboutToChange(this, mChildren.size(), mChildren.size() + added);
-    }
-    for (auto* child : newChildren) {
-        child->setParent(this);
-    }
-
-    mChildren.reserve(mChildren.size() + newChildren.size());
-    for (auto* child : newChildren) {
-        mChildren.emplace_back(std::unique_ptr<DataInformation>(child));
-    }
-
-    if (emitSignal) {
-        topLevelDataInformation()->_childCountChanged(this, mChildren.size(), mChildren.size() + added);
-    }
-}
-
 bool DataInformationWithChildren::replaceChildAt(unsigned int index, DataInformation* newChild)
 {
     Q_ASSERT(index < mChildren.size());
