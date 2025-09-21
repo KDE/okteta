@@ -265,16 +265,16 @@ void BasicDataInformationTest::initTestCase()
     bitfields.append(new SignedBitfieldDataInformation(QStringLiteral("bitfield"), 24));
 
     emptyStruct = new StructureDataInformation(QStringLiteral("emptyStruct"));
-    QVector<DataInformation*> structChildren;
-    structChildren << PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc)
-                   << PrimitiveFactory::newInstance(QStringLiteral("prim2"), PrimitiveDataType::UInt64, lwc);
-    structWithChildren = new StructureDataInformation(QStringLiteral("structWithChildren"), structChildren);
+    std::vector<std::unique_ptr<DataInformation>> structChildren;
+    structChildren.emplace_back(std::unique_ptr<DataInformation>(PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc)));
+    structChildren.emplace_back(std::unique_ptr<DataInformation>(PrimitiveFactory::newInstance(QStringLiteral("prim2"), PrimitiveDataType::UInt64, lwc)));
+    structWithChildren = new StructureDataInformation(QStringLiteral("structWithChildren"), std::move(structChildren));
 
     emptyUnion = new UnionDataInformation(QStringLiteral("emptyUnion"));
-    QVector<DataInformation*> unionChildren;
-    unionChildren << PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc)
-                  << PrimitiveFactory::newInstance(QStringLiteral("prim2"), PrimitiveDataType::UInt64, lwc);
-    unionWithChildren = new UnionDataInformation(QStringLiteral("unionWithChildren"), unionChildren);
+    std::vector<std::unique_ptr<DataInformation>> unionChildren;
+    unionChildren.emplace_back(std::unique_ptr<DataInformation>(PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc)));
+    unionChildren.emplace_back(std::unique_ptr<DataInformation>(PrimitiveFactory::newInstance(QStringLiteral("prim2"), PrimitiveDataType::UInt64, lwc)));
+    unionWithChildren = new UnionDataInformation(QStringLiteral("unionWithChildren"), std::move(unionChildren));
 
     emptyPrimitiveArray = new ArrayDataInformation(QStringLiteral("emptyPrimitiveArray"), 0, PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc));
     emptyComplexArray = new ArrayDataInformation(QStringLiteral("emptyComplexArray"), 0, structWithChildren->clone());

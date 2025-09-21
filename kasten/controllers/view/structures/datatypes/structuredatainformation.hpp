@@ -17,7 +17,7 @@ class StructureDataInformation : public DataInformationWithChildren
 
 public:
     explicit StructureDataInformation(const QString& name,
-                                      const QVector<DataInformation*>& children = QVector<DataInformation*>(),
+                                      std::vector<std::unique_ptr<DataInformation>>&& children = {},
                                       DataInformation* parent = nullptr);
     ~StructureDataInformation() override;
 

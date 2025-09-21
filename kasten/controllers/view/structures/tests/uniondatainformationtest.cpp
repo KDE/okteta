@@ -54,12 +54,12 @@ void UnionDataInformationTest::testSize()
 
     UnionDataInformation empty(QStringLiteral("empty"));
     QCOMPARE(empty.size(), BitCount32(0));
-    QVector<DataInformation*> size54;
-    size54 << PrimitiveFactory::newInstance(QStringLiteral("8"), PrimitiveDataType::Bool8, lwc);
-    size54 << PrimitiveFactory::newInstance(QStringLiteral("16"), PrimitiveDataType::Int16, lwc);
-    size54 << PrimitiveFactory::newInstance(QStringLiteral("32"), PrimitiveDataType::Float, lwc);
-    size54 << new UnsignedBitfieldDataInformation(QStringLiteral("54"), 54);
-    UnionDataInformation fourChildren(QStringLiteral("four"), size54);
+    std::vector<std::unique_ptr<DataInformation>> size54;
+    size54.emplace_back(std::unique_ptr<DataInformation>(PrimitiveFactory::newInstance(QStringLiteral("8"), PrimitiveDataType::Bool8, lwc)));
+    size54.emplace_back(std::unique_ptr<DataInformation>(PrimitiveFactory::newInstance(QStringLiteral("16"), PrimitiveDataType::Int16, lwc)));
+    size54.emplace_back(std::unique_ptr<DataInformation>(PrimitiveFactory::newInstance(QStringLiteral("32"), PrimitiveDataType::Float, lwc)));
+    size54.emplace_back(std::make_unique<UnsignedBitfieldDataInformation>(QStringLiteral("54"), 54));
+    UnionDataInformation fourChildren(QStringLiteral("four"), std::move(size54));
     QCOMPARE(fourChildren.size(), BitCount32(54));
 }
 
@@ -71,9 +71,12 @@ void UnionDataInformationTest::testReadData1()
     PrimitiveDataInformation* u32 = PrimitiveFactory::newInstance(QStringLiteral("32"), PrimitiveDataType::UInt32, lwc);
     PrimitiveDataInformation* i16 = PrimitiveFactory::newInstance(QStringLiteral("16"), PrimitiveDataType::Int16, lwc);
     auto* u54 = new UnsignedBitfieldDataInformation(QStringLiteral("54"), 54);
-    QVector<DataInformation*> children;
-    children << b8 << u32 << i16 << u54;
-    auto* un = new UnionDataInformation(QStringLiteral("un"), children);
+    std::vector<std::unique_ptr<DataInformation>>  children;
+    children.emplace_back(std::unique_ptr<DataInformation>(b8));
+    children.emplace_back(std::unique_ptr<DataInformation>(u32));
+    children.emplace_back(std::unique_ptr<DataInformation>(i16));
+    children.emplace_back(std::unique_ptr<DataInformation>(u54));
+    auto* un = new UnionDataInformation(QStringLiteral("un"), std::move(children));
     un->setByteOrder(DataInformation::DataInformationEndianness::EndiannessLittle);
     TopLevelDataInformation top(un);
     // read from bit 0

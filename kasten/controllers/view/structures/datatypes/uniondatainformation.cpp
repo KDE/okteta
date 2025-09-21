@@ -11,9 +11,10 @@
 // KF
 #include <KLocalizedString>
 
-UnionDataInformation::UnionDataInformation(const QString& name, const QVector<DataInformation*>& children,
+UnionDataInformation::UnionDataInformation(const QString& name,
+                                           std::vector<std::unique_ptr<DataInformation>>&& children,
                                            DataInformation* parent)
-    : DataInformationWithChildren(name, children, parent)
+    : DataInformationWithChildren(name, std::move(children), parent)
 {
 }
 

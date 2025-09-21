@@ -14,8 +14,9 @@
 #include <limits>
 
 StructureDataInformation::StructureDataInformation(const QString& name,
-                                                   const QVector<DataInformation*>& children, DataInformation* parent)
-    : DataInformationWithChildren(name, children, parent)
+                                                   std::vector<std::unique_ptr<DataInformation>>&& children,
+                                                   DataInformation* parent)
+    : DataInformationWithChildren(name, std::move(children), parent)
 {
 }
 

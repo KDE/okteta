@@ -21,8 +21,9 @@ protected:
     explicit DataInformationWithChildren(const DataInformationWithChildren& d);
 
 public:
-    explicit DataInformationWithChildren(const QString& name, const QVector<DataInformation*>& children
-                                             = QVector<DataInformation*>(), DataInformation* parent = nullptr);
+    explicit DataInformationWithChildren(const QString& name,
+                                         std::vector<std::unique_ptr<DataInformation>>&& children = {},
+                                         DataInformation* parent = nullptr);
     ~DataInformationWithChildren() override;
 
 public: // API to implement

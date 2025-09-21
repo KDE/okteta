@@ -64,11 +64,11 @@ void ArrayDataInformationTest::initTestCase()
     QCOMPARE(primitive->positionInFile(3), BitCount64(24));
     QCOMPARE(primitive->topLevelDataInformation(), primitiveTop);
 
-    QVector<DataInformation*> structsChildren;
-    structsChildren << PrimitiveFactory::newInstance(QStringLiteral("first"), PrimitiveDataType::UInt32, lwc)
-                    << PrimitiveFactory::newInstance(QStringLiteral("second"), PrimitiveDataType::UInt32, lwc);
+    std::vector<std::unique_ptr<DataInformation>> structsChildren;
+    structsChildren.emplace_back(std::unique_ptr<DataInformation>(PrimitiveFactory::newInstance(QStringLiteral("first"), PrimitiveDataType::UInt32, lwc)));
+    structsChildren.emplace_back(std::unique_ptr<DataInformation>(PrimitiveFactory::newInstance(QStringLiteral("second"), PrimitiveDataType::UInt32, lwc)));
 
-    auto* structs = new StructureDataInformation(QStringLiteral("vals"), structsChildren);
+    auto* structs = new StructureDataInformation(QStringLiteral("vals"), std::move(structsChildren));
 
     complexSize = 64;
     complex = new ArrayDataInformation(QStringLiteral("complex"), 0, structs);

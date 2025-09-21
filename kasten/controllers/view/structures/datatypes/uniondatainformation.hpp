@@ -17,7 +17,7 @@ class UnionDataInformation : public DataInformationWithChildren
 
 public:
     explicit UnionDataInformation(const QString& name,
-                                  const QVector<DataInformation*>& children = QVector<DataInformation*>(),
+                                  std::vector<std::unique_ptr<DataInformation>>&& children = {},
                                   DataInformation* parent = nullptr);
     ~UnionDataInformation() override;
 

@@ -17,7 +17,7 @@
 #include <utility>
 
 TaggedUnionDataInformation::TaggedUnionDataInformation(const QString& name, DataInformation* parent)
-    : DataInformationWithChildren(name, QVector<DataInformation*>(), parent)
+    : DataInformationWithChildren(name, std::vector<std::unique_ptr<DataInformation>>(), parent)
 {
 }
 

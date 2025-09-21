@@ -34,9 +34,9 @@ std::vector<std::unique_ptr<DataInformation>> toManagedVector(const QVector<Data
 }
 
 DataInformationWithChildren::DataInformationWithChildren(const QString& name,
-                                                         const QVector<DataInformation*>& children, DataInformation* parent)
+                                                         std::vector<std::unique_ptr<DataInformation>>&& children, DataInformation* parent)
     : DataInformation(name, parent)
-    , mChildren(::toManagedVector(children))
+    , mChildren(std::move(children))
 {
     for (const auto& child : mChildren) {
         child->setParent(this);
