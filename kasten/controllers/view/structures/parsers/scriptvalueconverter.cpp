@@ -11,7 +11,6 @@
 #include <scriptlogger.hpp>
 // Qt
 #include <QString>
-#include <QVector>
 #include <QScriptValue>
 #include <QScriptEngine>
 #include <QScriptValueIterator>
@@ -26,11 +25,11 @@ DataInformation* convert(const QScriptValue& value, const QString& name, ScriptL
     return toDataInformation(value, info); // could be NULL
 }
 
-QVector<DataInformation*> convertValues(const QScriptValue& value, ScriptLogger* logger,
-                                        DataInformation* parent)
+std::vector<std::unique_ptr<DataInformation>> convertValues(const QScriptValue& value, ScriptLogger* logger,
+                                                            DataInformation* parent)
 {
     // TODO Q_CHECK_PTR(parent);
-    QVector<DataInformation*> ret;
+    std::vector<std::unique_ptr<DataInformation>> ret;
     QScriptValueIterator it(value);
     const bool isArray = value.isArray();
     while (it.hasNext()) {
@@ -42,7 +41,7 @@ QVector<DataInformation*> convertValues(const QScriptValue& value, ScriptLogger*
         DataInformation* inf = toDataInformation(it.value(), info);
 
         if (inf) {
-            ret.append(inf);
+            ret.emplace_back(std::unique_ptr<DataInformation>(inf));
         } else { // TODO remove the null check once parent must be nonnull
             logger->info(parent ? parent->fullObjectPath() : QString()).nospace()
                 << "Could not convert property '" << it.name() << "'.";

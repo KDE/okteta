@@ -71,7 +71,7 @@ void ScriptValueConverterTest::basicConverterTest()
     QScriptValue sVal = evaluate("var foo = { value : uint8(),\n"
                                  " str : struct({first : uint8(), second : uint16()}),\n"
                                  " obj : array(uint32(), 10) \n}\n foo");
-    QVector<DataInformation*> converted = ScriptValueConverter::convertValues(sVal, logger.get());
+    std::vector<std::unique_ptr<DataInformation>> converted = ScriptValueConverter::convertValues(sVal, logger.get());
     QCOMPARE(converted.size(), 3);
     QVERIFY(converted[0]->isPrimitive());
     QCOMPARE(converted[0]->name(), QStringLiteral("value"));
@@ -84,7 +84,7 @@ void ScriptValueConverterTest::basicConverterTest()
 
     // test with an array now
     sVal = evaluate("var foo = [uint8(), uint16(), uint32()]; foo");
-    qDeleteAll(converted);
+    converted.clear();
     converted = ScriptValueConverter::convertValues(sVal, logger.get());
     QCOMPARE(converted.size(), 3);
     QVERIFY(converted[0]->isPrimitive());
@@ -149,14 +149,13 @@ void ScriptValueConverterTest::basicConverterTest()
     sVal = evaluate("var foo = { value : function() { return 1; },\n"
                     " str : struct({first : uint8(), second : uint16()}),\n"
                     " obj : array(uint32(), 10) \n}\n foo");
-    qDeleteAll(converted);
+    converted.clear();
     converted = ScriptValueConverter::convertValues(sVal, logger.get());
     QCOMPARE(converted.size(), 2);
     // first entry is invalid
     QCOMPARE(logger->rowCount(QModelIndex()), 11);
     // this should cause 2 error messages -> 11 now
     // qDebug() << logger->messages();
-    qDeleteAll(converted);
 }
 
 void ScriptValueConverterTest::testPrimitives_data()

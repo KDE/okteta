@@ -7,10 +7,13 @@
 #ifndef KASTEN_SCRIPTVALUECONVERTER_HPP
 #define KASTEN_SCRIPTVALUECONVERTER_HPP
 
+// Std
+#include <memory>
+#include <vector>
+
 class QString;
 class QScriptValue;
 class ScriptLogger;
-template <typename T> class QVector;
 class DataInformation;
 
 namespace ScriptValueConverter {
@@ -20,8 +23,8 @@ namespace ScriptValueConverter {
 DataInformation* convert(const QScriptValue& value, const QString& name, ScriptLogger* logger,
                          DataInformation* parent = nullptr);
 /** If the value is a list of elements or an object with many elements */
-QVector<DataInformation*> convertValues(const QScriptValue& value, ScriptLogger* logger,
-                                        DataInformation* parent = nullptr);
+std::vector<std::unique_ptr<DataInformation>> convertValues(const QScriptValue& value, ScriptLogger* logger,
+                                                            DataInformation* parent = nullptr);
 
 }
 

@@ -19,20 +19,6 @@
 // Std
 #include <utility>
 
-namespace {
-
-std::vector<std::unique_ptr<DataInformation>> toManagedVector(const QVector<DataInformation*>& other)
-{
-    std::vector<std::unique_ptr<DataInformation>> result;
-    result.reserve(other.size());
-    for (auto* info : other) {
-        result.emplace_back(std::unique_ptr<DataInformation>(info));
-    }
-    return result;
-}
-
-}
-
 DataInformationWithChildren::DataInformationWithChildren(const QString& name,
                                                          std::vector<std::unique_ptr<DataInformation>>&& children, DataInformation* parent)
     : DataInformation(name, parent)
@@ -157,9 +143,9 @@ void DataInformationWithChildren::setChildren(const QScriptValue& children)
         logError() << "attempting to set children to null/undefined.";
         return;
     }
-    QVector<DataInformation*> convertedVals =
+    std::vector<std::unique_ptr<DataInformation>> convertedVals =
         ScriptValueConverter::convertValues(children, topLevelDataInformation()->logger());
-    setChildren(::toManagedVector(convertedVals));
+    setChildren(std::move(convertedVals));
 }
 
 int DataInformationWithChildren::indexOf(const DataInformation* const data) const
