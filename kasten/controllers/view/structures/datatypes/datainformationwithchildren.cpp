@@ -182,13 +182,13 @@ QVariant DataInformationWithChildren::childData(int row, int column, int role) c
     return mChildren[row]->data(column, role);
 }
 
-void DataInformationWithChildren::appendChild(DataInformation* newChild, bool emitSignal)
+void DataInformationWithChildren::appendChild(std::unique_ptr<DataInformation>&& newChild, bool emitSignal)
 {
     if (emitSignal) {
         topLevelDataInformation()->_childCountAboutToChange(this, mChildren.size(), mChildren.size() + 1);
     }
     newChild->setParent(this);
-    mChildren.emplace_back(std::unique_ptr<DataInformation>(newChild));
+    mChildren.emplace_back(std::move(newChild));
     if (emitSignal) {
         topLevelDataInformation()->_childCountChanged(this, mChildren.size(), mChildren.size() + 1);
     }

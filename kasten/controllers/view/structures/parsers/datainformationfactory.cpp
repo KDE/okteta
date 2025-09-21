@@ -110,7 +110,7 @@ T* newStructOrUnion(const StructOrUnionParsedData& supd)
     while (supd.children->hasNext()) {
         DataInformation* data = supd.children->next();
         if (data) {
-            structOrUnion->appendChild(data, false);
+            structOrUnion->appendChild(std::unique_ptr<DataInformation>(data), false);
         } else {
             return nullptr; // error message should be logged already
         }
@@ -335,7 +335,7 @@ TaggedUnionDataInformation* DataInformationFactory::newTaggedUnion(const TaggedU
     while (pd.children->hasNext()) {
         DataInformation* data = pd.children->next();
         if (data) {
-            tagged->appendChild(data, false);
+            tagged->appendChild(std::unique_ptr<DataInformation>(data), false);
         } else {
             return nullptr; // error message should be logged already
         }

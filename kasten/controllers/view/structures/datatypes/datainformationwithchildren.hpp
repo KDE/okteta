@@ -72,7 +72,7 @@ public:
     [[nodiscard]]
     QVariant childData(int row, int column, int role) const;
     /** Takes ownership! */
-    void appendChild(DataInformation* child, bool emitSignal = true);
+    void appendChild(std::unique_ptr<DataInformation>&& child, bool emitSignal = true);
     /** Takes ownership of all elements */
     void setChildren(const QVector<DataInformation*>& newChildren);
     void setChildren(const QScriptValue& newChildren);
