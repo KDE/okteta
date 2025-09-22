@@ -19,9 +19,10 @@ class PointerDataInformation : public PrimitiveDataInformationWrapper
 
 public:
     /** creates a new pointer
-     *  takes ownership over @p childType and @p valueType
+     *  takes ownership over @p pointerTarget and @p valueType
      */
-    PointerDataInformation(const QString& name, DataInformation* childType,
+    PointerDataInformation(const QString& name,
+                           std::unique_ptr<DataInformation>&& pointerTarget,
                            PrimitiveDataInformation* valueType, DataInformation* parent,
                            qint64 pointerScale, const QScriptValue& interpretFunction);
     ~PointerDataInformation() override;
@@ -54,9 +55,9 @@ public:
     [[nodiscard]]
     DataInformation* pointerTarget() const;
     /** Set a new pointer target
-     * @param target the new target (ownership is taken)
+     * @param pointerTarget the new target (ownership is taken)
      */
-    void setPointerTarget(DataInformation* target);
+    void setPointerTarget(std::unique_ptr<DataInformation>&& pointerTarget);
 
     [[nodiscard]]
     PrimitiveDataInformation* pointerType() const;
@@ -99,10 +100,10 @@ inline DataInformation* PointerDataInformation::pointerTarget() const
     return mPointerTarget.get();
 }
 
-inline void PointerDataInformation::setPointerTarget(DataInformation* target)
+inline void PointerDataInformation::setPointerTarget(std::unique_ptr<DataInformation>&& pointerTarget)
 {
-    Q_CHECK_PTR(target);
-    mPointerTarget.reset(target);
+    Q_CHECK_PTR(pointerTarget);
+    mPointerTarget = std::move(pointerTarget);
     mPointerTarget->setParent(this);
 }
 

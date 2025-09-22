@@ -20,13 +20,15 @@
 // Std
 #include <limits>
 
-PointerDataInformation::PointerDataInformation(const QString& name, DataInformation* childType,
+PointerDataInformation::PointerDataInformation(const QString& name,
+                                               std::unique_ptr<DataInformation>&& pointerTarget,
                                                PrimitiveDataInformation* valueType, DataInformation* parent,
                                                qint64 pointerScale, const QScriptValue& interpretFunction)
     : PrimitiveDataInformationWrapper(name, valueType, parent)
-    , mPointerTarget(childType), mPointerScale(pointerScale)
+    , mPointerTarget(std::move(pointerTarget))
+    , mPointerScale(pointerScale)
 {
-    Q_CHECK_PTR(childType);
+    Q_CHECK_PTR(mPointerTarget);
 
     if (interpretFunction.isValid() && interpretFunction.isFunction()) {
         setInterpreterFunction(interpretFunction);

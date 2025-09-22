@@ -70,12 +70,12 @@ bool PointerScriptClass::setAdditionalProperty(DataInformation* data, const QScr
         return true;
     }
     if (name == s_target) {
-        DataInformation* newTarget = ScriptValueConverter::convert(value, QStringLiteral("(pointer value)"),
-                                                                   data->logger(), data);
+        auto newTarget = std::unique_ptr<DataInformation>(ScriptValueConverter::convert(value, QStringLiteral("(pointer value)"),
+                                                                                        data->logger(), data));
         if (!newTarget) {
             data->logError() << "Could not set new pointer target.";
         } else {
-            data->asPointer()->setPointerTarget(newTarget);
+            data->asPointer()->setPointerTarget(std::move(newTarget));
         }
         return true;
     }

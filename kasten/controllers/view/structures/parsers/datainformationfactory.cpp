@@ -324,7 +324,8 @@ PointerDataInformation* DataInformationFactory::newPointer(const PointerParsedDa
         pd.error() << "Bad pointer type, only unsigned integers are allowed"; // TODO offsets (signed int + bitfields)
         return nullptr;
     }
-    return new PointerDataInformation(pd.name, pd.pointerTarget, primValue, pd.parent,
+    return new PointerDataInformation(pd.name, std::unique_ptr<DataInformation>(pd.pointerTarget),
+                                      primValue, pd.parent,
                                       pd.pointerScale, pd.interpretFunc);
 }
 

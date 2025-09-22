@@ -183,12 +183,13 @@ void DefaultScriptClass::setDataType(const QScriptValue& value, DataInformation*
         return;
     }
     // change the type of the underlying object
-    DataInformation* newType = ScriptValueConverter::convert(value, data->name(), data->logger(), data);
+    auto newType = std::unique_ptr<DataInformation>(ScriptValueConverter::convert(value, data->name(), data->logger(), data));
     if (!newType) {
         data->logError() << "Failed to set new type, could not convert value!";
         return;
     }
 
+    DataInformation* const rawNewType = newType.get();
     DataInformationBase* parent = data->parent();
     Q_CHECK_PTR(parent);
     TopLevelDataInformation* top = data->topLevelDataInformation();
@@ -197,14 +198,14 @@ void DefaultScriptClass::setDataType(const QScriptValue& value, DataInformation*
     bool replaced = false;
     if (parent->isTopLevel()) {
         Q_ASSERT(isThisObj); // we can only do this if we are currently at the top level element
-        parent->asTopLevel()->setActualDataInformation(std::unique_ptr<DataInformation>(newType));
+        parent->asTopLevel()->setActualDataInformation(std::move(newType));
         replaced = true;
     } else if (parent->isStruct()) {
         StructureDataInformation* stru = parent->asStruct();
         int index = stru->indexOf(data);
         Q_ASSERT(index != -1);
         Q_ASSERT(uint(index) < stru->childCount());
-        replaced = stru->replaceChildAt(index, std::unique_ptr<DataInformation>(newType));
+        replaced = stru->replaceChildAt(index, std::move(newType));
         if (!replaced) {
             stru->logError() << "failed to replace child at index" << index;
         }
@@ -213,12 +214,12 @@ void DefaultScriptClass::setDataType(const QScriptValue& value, DataInformation*
         int index = un->indexOf(data);
         Q_ASSERT(index != -1);
         Q_ASSERT(uint(index) < un->childCount());
-        replaced = un->replaceChildAt(index, std::unique_ptr<DataInformation>(newType));
+        replaced = un->replaceChildAt(index, std::move(newType));
         if (!replaced) {
             un->logError() << "failed to replace child at index" << index;
         }
     } else if (parent->isPointer()) {
-        parent->asPointer()->setPointerTarget(newType);
+        parent->asPointer()->setPointerTarget(std::move(newType));
         replaced = true;
     } else {
         data->logError() << "Failed to set data type since element is not toplevel and parent"
@@ -228,11 +229,9 @@ void DefaultScriptClass::setDataType(const QScriptValue& value, DataInformation*
         top->setChildDataChanged();
         // if the current object was "this" in javascript we have to replace it
         if (isThisObj) {
-            engine()->currentContext()->setThisObject(newType->toScriptValue(engine(), mHandlerInfo));
+            engine()->currentContext()->setThisObject(rawNewType->toScriptValue(engine(), mHandlerInfo));
         }
-        newType->mHasBeenUpdated = true;
-    } else {
-        delete newType; // could not set new type
+        rawNewType->mHasBeenUpdated = true;
     }
 }
 
