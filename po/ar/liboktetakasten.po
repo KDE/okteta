@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-19 03:35+0000\n"
+"POT-Creation-Date: 2025-09-22 03:32+0000\n"
 "PO-Revision-Date: 2025-08-09 15:19+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -1724,20 +1724,20 @@ msgstr ""
 "%5"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:229
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:230
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:211
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed."
 msgstr ""
 
 #: controllers/view/structures/datatypes/datainformation.cpp:232
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:233
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:214
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed: \"%1\""
 msgstr ""
 
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:235
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:216
 #, kde-format
 msgid ""
 "Name: %2\n"
@@ -1762,7 +1762,7 @@ msgstr[3] ""
 msgstr[4] ""
 msgstr[5] ""
 
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:240
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:221
 #, kde-format
 msgid ""
 "Name: %2\n"

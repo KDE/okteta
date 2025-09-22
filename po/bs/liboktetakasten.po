@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-19 03:35+0000\n"
+"POT-Creation-Date: 2025-09-22 03:32+0000\n"
 "PO-Revision-Date: 2015-02-04 16:00+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: bosanski <bs@li.org>\n"
@@ -1750,20 +1750,20 @@ msgstr ""
 "%5"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:229
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:230
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:211
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed."
 msgstr "Ovjera nije prošla."
 
 #: controllers/view/structures/datatypes/datainformation.cpp:232
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:233
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:214
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed: \"%1\""
 msgstr "Ovjera nije prošla: „%1“"
 
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:235
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:216
 #, kde-format
 msgid ""
 "Name: %2\n"
@@ -1806,7 +1806,7 @@ msgstr[2] ""
 "\n"
 " %6"
 
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:240
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:221
 #, kde-format
 msgid ""
 "Name: %2\n"

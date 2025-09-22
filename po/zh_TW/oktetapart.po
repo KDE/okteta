@@ -4,20 +4,21 @@
 #
 # Franklin Weng <franklin at goodhorse dot idv dot tw>, 2007.
 # Frank Weng (a.k.a. Franklin) <franklin at goodhorse dot idv dot tw>, 2008, 2009, 2014.
+# SPDX-FileCopyrightText: 2025 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: oktetapart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-05 05:55+0000\n"
-"PO-Revision-Date: 2014-09-14 10:01+0800\n"
-"Last-Translator: Franklin\n"
-"Language-Team: Chinese Traditional <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2025-09-22 06:22+0900\n"
+"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
+"Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "dot tw>\n"
-"X-Generator: Lokalize 1.5\n"
+"X-Generator: Lokalize 25.07.70\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #, kde-format
@@ -35,21 +36,21 @@ msgstr "franklin@goodhorse.idv.tw"
 #: oktetapartreadwriteui.rc:5
 #, kde-format
 msgid "&File"
-msgstr ""
+msgstr "檔案(&F)"
 
 #. i18n: ectx: Menu (edit)
 #: oktetapartbrowserui.rc:8 oktetapartreadonlyui.rc:10
 #: oktetapartreadwriteui.rc:16
 #, kde-format
 msgid "&Edit"
-msgstr ""
+msgstr "編輯(&E)"
 
 #. i18n: ectx: Menu (view)
 #: oktetapartbrowserui.rc:21 oktetapartreadonlyui.rc:26
 #: oktetapartreadwriteui.rc:39
 #, kde-format
 msgid "&View"
-msgstr ""
+msgstr "檢視(&V)"
 
 #. i18n: ectx: ToolBar (mainToolBar)
 #: oktetapartbrowserui.rc:43 oktetapartreadonlyui.rc:47
@@ -76,10 +77,9 @@ msgid "Embedded hex editor"
 msgstr "內嵌式十六進位碼編輯器"
 
 #: partfactory.cpp:37
-#, fuzzy, kde-format
-#| msgid "2003-2014 Friedrich W. H. Kossebau"
+#, kde-format
 msgid "Copyright 2003-%1 Friedrich W. H. Kossebau"
-msgstr "2003-2014 Friedrich W. H. Kossebau"
+msgstr "版權所有 2003-%1 Friedrich W. H. Kossebau"
 
 #: partfactory.cpp:39
 #, kde-format

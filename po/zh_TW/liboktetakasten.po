@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-19 03:35+0000\n"
-"PO-Revision-Date: 2025-07-03 23:42+0900\n"
+"POT-Creation-Date: 2025-09-22 03:32+0000\n"
+"PO-Revision-Date: 2025-09-22 06:23+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -1475,9 +1475,7 @@ msgid "Search"
 msgstr "搜尋"
 
 #: controllers/view/selectrange/selectrangecontroller.cpp:33
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Select range..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Select Range..."
 msgstr "選擇範圍(&S)..."
@@ -1687,20 +1685,20 @@ msgstr ""
 "%5"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:229
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:230
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:211
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed."
 msgstr "確認失敗。"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:232
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:233
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:214
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed: \"%1\""
 msgstr "確認失敗：\"%1\""
 
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:235
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:216
 #, kde-format
 msgid ""
 "Name: %2\n"
@@ -1727,7 +1725,7 @@ msgstr[0] ""
 "\n"
 "%6"
 
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:240
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:221
 #, kde-format
 msgid ""
 "Name: %2\n"
@@ -2118,11 +2116,10 @@ msgid "Dynamic Structure Definitions"
 msgstr "動態結構定義"
 
 #: controllers/view/structures/settings/structuresselectiondialog.cpp:26
-#, fuzzy, kde-format
-#| msgid "Advanced Selection..."
+#, kde-format
 msgctxt "@title:window"
 msgid "Advanced Structures Selection"
-msgstr "進階選取..."
+msgstr "進階架構選取"
 
 #. i18n: ectx: tooltip, entry (UnsignedDisplayBase), group (ValueDisplay)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:9
@@ -2399,12 +2396,10 @@ msgid "Lock selected structure to current offset."
 msgstr "鎖定選取的結構到目前的位移。"
 
 #: controllers/view/structures/structureview.cpp:291
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Script console"
+#, kde-format
 msgctxt "@title:window"
 msgid "Structures Script Console"
-msgstr "文稿主控台"
+msgstr "架構腳本主控台"
 
 #: controllers/view/viewconfig/bytespergroupdialog.cpp:33
 #: controllers/view/viewprofiles/viewprofileedit.cpp:115
@@ -2595,30 +2590,22 @@ msgid "View Profile"
 msgstr "檢視設定檔"
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:48
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu create a new view profile"
-#| msgid "Create new..."
+#, kde-format
 msgctxt "@action:inmenu create a new view profile"
 msgid "Create New..."
-msgstr "新增..."
+msgstr "建立新的…"
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:56
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@action:inmenu save changed to the view profile to the base profile"
-#| msgid "Save changes"
+#, kde-format
 msgctxt "@action:inmenu save changed to the view profile to the base profile"
 msgid "Save Changes"
 msgstr "儲存變更"
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:64
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@action:inmenu reset settings back to those of the saved base profile"
-#| msgid "Reset changes"
+#, kde-format
 msgctxt "@action:inmenu reset settings back to those of the saved base profile"
 msgid "Reset Changes"
-msgstr "重置變更"
+msgstr "重設變更"
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:188
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:180
