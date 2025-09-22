@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-21 02:04+0000\n"
+"POT-Creation-Date: 2025-09-22 02:00+0000\n"
 "PO-Revision-Date: 2009-06-13 16:12+0000\n"
 "Last-Translator: Sveinn í Felli <sveinki@nett.is>\n"
 "Language-Team: Icelandic <kde-isl@molar.is>\n"
@@ -1851,14 +1851,14 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: controllers/view/structures/datatypes/datainformation.cpp:267
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:245
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:208
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed."
 msgstr ""
 
 #: controllers/view/structures/datatypes/datainformation.cpp:270
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:248
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:211
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed: \"%1\""
@@ -2156,7 +2156,7 @@ msgstr "Stafur"
 msgid "UTF8 string"
 msgstr "Strengur"
 
-#: controllers/view/structures/datatypes/structuredatainformation.cpp:26
+#: controllers/view/structures/datatypes/structuredatainformation.cpp:27
 #: controllers/view/structures/datatypes/taggeduniondatainformation.cpp:46
 #, kde-format
 msgctxt "data type in C/C++, then name"
@@ -2169,7 +2169,7 @@ msgctxt "data type, then name"
 msgid "tagged union %1"
 msgstr ""
 
-#: controllers/view/structures/datatypes/uniondatainformation.cpp:24
+#: controllers/view/structures/datatypes/uniondatainformation.cpp:25
 #, kde-format
 msgctxt "data type in C/C++, then name"
 msgid "union %1"

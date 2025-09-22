@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-21 02:04+0000\n"
+"POT-Creation-Date: 2025-09-22 02:00+0000\n"
 "PO-Revision-Date: 2017-06-25 15:12+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -1927,14 +1927,14 @@ msgstr[2] ""
 msgstr[3] ""
 
 #: controllers/view/structures/datatypes/datainformation.cpp:267
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:245
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:208
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed."
 msgstr "Tikrinimas nepavyko."
 
 #: controllers/view/structures/datatypes/datainformation.cpp:270
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:248
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:211
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed: \"%1\""
@@ -2231,7 +2231,7 @@ msgstr ""
 msgid "UTF8 string"
 msgstr ""
 
-#: controllers/view/structures/datatypes/structuredatainformation.cpp:26
+#: controllers/view/structures/datatypes/structuredatainformation.cpp:27
 #: controllers/view/structures/datatypes/taggeduniondatainformation.cpp:46
 #, fuzzy, kde-format
 msgctxt "data type in C/C++, then name"
@@ -2244,7 +2244,7 @@ msgctxt "data type, then name"
 msgid "tagged union %1"
 msgstr ""
 
-#: controllers/view/structures/datatypes/uniondatainformation.cpp:24
+#: controllers/view/structures/datatypes/uniondatainformation.cpp:25
 #, kde-format
 msgctxt "data type in C/C++, then name"
 msgid "union %1"
