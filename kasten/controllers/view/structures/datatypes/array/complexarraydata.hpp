@@ -20,7 +20,9 @@ class ComplexArrayData : public AbstractArrayData
 {
 public:
     /** Takes ownership of @p data !*/
-    ComplexArrayData(unsigned int initialLength, DataInformation* data, ArrayDataInformation* parent);
+    ComplexArrayData(unsigned int initialLength,
+                     std::unique_ptr<DataInformation>&& data,
+                     ArrayDataInformation* parent);
     ~ComplexArrayData() override;
 
 public:

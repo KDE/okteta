@@ -20,8 +20,10 @@
 // Std
 #include <utility>
 
-ComplexArrayData::ComplexArrayData(unsigned int initialLength, DataInformation* data,
-                                   ArrayDataInformation* parent) : AbstractArrayData(data, parent)
+ComplexArrayData::ComplexArrayData(unsigned int initialLength,
+                                   std::unique_ptr<DataInformation>&& data,
+                                   ArrayDataInformation* parent)
+    : AbstractArrayData(std::move(data), parent)
 {
     mChildren.reserve(initialLength);
     appendChildren(0, initialLength);

@@ -191,10 +191,12 @@ ArrayDataInformation* DataInformationFactory::newArray(const ArrayParsedData& pd
     }
     const ParsedNumber<uint> fixedLength = ParserUtils::uintFromScriptValue(pd.length);
     if (fixedLength.isValid) {
-        return new ArrayDataInformation(pd.name, fixedLength.value, pd.arrayType, pd.parent, QScriptValue());
+        return new ArrayDataInformation(pd.name, fixedLength.value,
+                                        std::unique_ptr<DataInformation>(pd.arrayType), pd.parent, QScriptValue());
     }
     if (pd.length.isFunction()) {
-        return new ArrayDataInformation(pd.name, 0, pd.arrayType, pd.parent, pd.length);
+        return new ArrayDataInformation(pd.name, 0,
+                                        std::unique_ptr<DataInformation>(pd.arrayType), pd.parent, pd.length);
     }
 
     // neither integer nor function, must be a string containing the name of another element.
@@ -214,7 +216,8 @@ ArrayDataInformation* DataInformationFactory::newArray(const ArrayParsedData& pd
         return nullptr;
     }
     QScriptValue lengthFunction = ParserUtils::functionSafeEval(pd.engine, lengthFunctionString);
-    return new ArrayDataInformation(pd.name, 0, pd.arrayType, pd.parent, lengthFunction);
+    return new ArrayDataInformation(pd.name, 0,
+                                    std::unique_ptr<DataInformation>(pd.arrayType), pd.parent, lengthFunction);
 }
 
 StringDataInformation* DataInformationFactory::newString(const StringParsedData& pd)

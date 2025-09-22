@@ -28,7 +28,8 @@ public:
      *  takes ownership over @p childType
      *  length should be > 0
      */
-    ArrayDataInformation(const QString& name, uint length, DataInformation* childType,
+    ArrayDataInformation(const QString& name, uint length,
+                         std::unique_ptr<DataInformation>&& childType,
                          DataInformation* parent = nullptr, const QScriptValue& lengthFunction = QScriptValue());
     ~ArrayDataInformation() override;
 
@@ -96,7 +97,7 @@ public:
     /** Sets the new array type
      * @param newChildtype the new type (ownership is always taken, do not use anymore after this call!)
      */
-    void setArrayType(DataInformation* newChildtype);
+    void setArrayType(std::unique_ptr<DataInformation>&& newChildtype);
     [[nodiscard]]
     DataInformation* arrayType() const;
 

@@ -20,12 +20,13 @@
 #include <limits>
 
 template <PrimitiveDataType type>
-inline PrimitiveArrayData<type>::PrimitiveArrayData(unsigned int initialLength, PrimitiveDataInformation* childType,
+inline PrimitiveArrayData<type>::PrimitiveArrayData(unsigned int initialLength,
+                                                    std::unique_ptr<PrimitiveDataInformation>&& childType,
                                                     ArrayDataInformation* parent)
-    : AbstractArrayData(childType, parent)
+    : AbstractArrayData(std::move(childType), parent)
     , mDummy(parent)
 {
-    Q_ASSERT(childType->type() == type);
+    Q_ASSERT(static_cast<PrimitiveDataInformation*>(this->childType())->type() == type);
     mData.reserve(initialLength);
     mData.resize(initialLength);
     mDummy.setWasAbleToRead(true);

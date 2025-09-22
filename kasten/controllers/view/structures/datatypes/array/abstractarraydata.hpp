@@ -32,7 +32,7 @@ class QVariant;
 class AbstractArrayData
 {
 public:
-    explicit AbstractArrayData(DataInformation* childType, ArrayDataInformation* parent);
+    explicit AbstractArrayData(std::unique_ptr<DataInformation>&& childType, ArrayDataInformation* parent);
     AbstractArrayData(const AbstractArrayData&) = delete;
 
     virtual ~AbstractArrayData();
@@ -74,7 +74,9 @@ public:
     virtual void setChildWidgetData(uint index, QWidget* w) const = 0;
 
     /** Takes ownership over @p type ! */
-    static AbstractArrayData* newArrayData(uint length, DataInformation* type, ArrayDataInformation* parent);
+    static AbstractArrayData* newArrayData(uint length,
+                                           std::unique_ptr<DataInformation>&& type,
+                                           ArrayDataInformation* parent);
 
 protected:
     virtual void setNewParentForChildren() = 0;

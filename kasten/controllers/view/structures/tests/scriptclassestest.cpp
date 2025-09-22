@@ -180,7 +180,7 @@ void ScriptClassesTest::initTestCase()
                     << pair("type", QScriptValue::Undeletable);
     std::sort(arrayProperties.begin(), arrayProperties.end());
     auto managedArrayData = std::make_unique<ArrayDataInformation>(QStringLiteral("array"), 20,
-                                                                   PrimitiveFactory::newInstance(QStringLiteral("inner"), PrimitiveDataType::Int32, lwc));
+                                                                   std::unique_ptr<DataInformation>(PrimitiveFactory::newInstance(QStringLiteral("inner"), PrimitiveDataType::Int32, lwc)));
     arrayData = managedArrayData.get();
     arrayDataTop = std::make_unique<TopLevelDataInformation>(std::move(managedArrayData), nullptr, ScriptEngineInitializer::newEngine());
 

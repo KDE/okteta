@@ -16,7 +16,8 @@
 #include <scripthandlerinfo.hpp>
 #include <scriptlogger.hpp>
 
-ArrayDataInformation::ArrayDataInformation(const QString& name, uint length, DataInformation* childType,
+ArrayDataInformation::ArrayDataInformation(const QString& name, uint length,
+                                           std::unique_ptr<DataInformation>&& childType,
                                            DataInformation* parent, const QScriptValue& lengthFunction)
     : DataInformationWithDummyChildren(name, parent)
 {
@@ -31,7 +32,7 @@ ArrayDataInformation::ArrayDataInformation(const QString& name, uint length, Dat
     }
     Q_CHECK_PTR(childType);
     childType->setParent(this);
-    mData.reset(AbstractArrayData::newArrayData(length, childType, this));
+    mData.reset(AbstractArrayData::newArrayData(length, std::move(childType), this));
 }
 
 ArrayDataInformation::ArrayDataInformation(const ArrayDataInformation& d)
@@ -40,7 +41,7 @@ ArrayDataInformation::ArrayDataInformation(const ArrayDataInformation& d)
 {
     uint length = d.mData->length();
     DataInformation* childType = d.mData->childType();
-    mData.reset(AbstractArrayData::newArrayData(length, childType->clone(), this));
+    mData.reset(AbstractArrayData::newArrayData(length, std::unique_ptr<DataInformation>(childType->clone()), this));
 }
 
 ArrayDataInformation::~ArrayDataInformation() = default;
@@ -59,13 +60,12 @@ bool ArrayDataInformation::setArrayLength(uint newLength)
     return true;
 }
 
-void ArrayDataInformation::setArrayType(DataInformation* newChildType)
+void ArrayDataInformation::setArrayType(std::unique_ptr<DataInformation>&& newChildType)
 {
     Q_CHECK_PTR(newChildType);
     if (newChildType->isPrimitive() && newChildType->asPrimitive()->type() == mData->primitiveType()) {
         // there is no need to change the type
         logInfo() << "New and old child type are identical, skipping: " << mData->primitiveType();
-        delete newChildType;
         return;
     }
     newChildType->setParent(this);
@@ -74,7 +74,7 @@ void ArrayDataInformation::setArrayType(DataInformation* newChildType)
     if (len > 0) {
         // first create with length of 0, then change length to actual length (to ensure model is correct)
         topLevel->_childCountAboutToChange(this, len, 0);
-        mData.reset(AbstractArrayData::newArrayData(0, newChildType, this));
+        mData.reset(AbstractArrayData::newArrayData(0, std::move(newChildType), this));
         topLevel->_childCountChanged(this, len, 0);
 
         topLevel->_childCountAboutToChange(this, 0, len);
@@ -82,7 +82,7 @@ void ArrayDataInformation::setArrayType(DataInformation* newChildType)
         topLevel->_childCountChanged(this, 0, len);
     } else {
         // no need to emit the signals, which cause expensive model update
-        mData.reset(AbstractArrayData::newArrayData(len, newChildType, this));
+        mData.reset(AbstractArrayData::newArrayData(len, std::move(newChildType), this));
         // only the type of the array changed -> emit that this has changed data
         topLevel->setChildDataChanged();
     }

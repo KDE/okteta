@@ -23,7 +23,8 @@ public:
     using T = typename PrimitiveInfo<type>::valueType;
     using DisplayClass = typename PrimitiveInfo<type>::Methods;
 
-    explicit PrimitiveArrayData(unsigned int initialLength, PrimitiveDataInformation* childType,
+    explicit PrimitiveArrayData(unsigned int initialLength,
+                                std::unique_ptr<PrimitiveDataInformation>&& childType,
                                 ArrayDataInformation* parent);
     ~PrimitiveArrayData() override;
 
