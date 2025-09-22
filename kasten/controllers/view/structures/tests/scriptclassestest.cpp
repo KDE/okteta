@@ -424,7 +424,7 @@ void ScriptClassesTest::testSafeReferenceDeleteObject()
     QVERIFY(name.isValid());
     QVERIFY(!name.isError());
     QCOMPARE(name.toString(), QStringLiteral("foo"));
-    top->setActualDataInformation(new DummyDataInformation(nullptr));
+    top->setActualDataInformation(std::make_unique<DummyDataInformation>(nullptr));
     // val should now point to an invalid reference -> accessing name should throw an error
     name = Utils::property(val, "name");
     QVERIFY(name.isValid());

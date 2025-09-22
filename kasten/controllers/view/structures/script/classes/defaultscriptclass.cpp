@@ -197,7 +197,7 @@ void DefaultScriptClass::setDataType(const QScriptValue& value, DataInformation*
     bool replaced = false;
     if (parent->isTopLevel()) {
         Q_ASSERT(isThisObj); // we can only do this if we are currently at the top level element
-        parent->asTopLevel()->setActualDataInformation(newType);
+        parent->asTopLevel()->setActualDataInformation(std::unique_ptr<DataInformation>(newType));
         replaced = true;
     } else if (parent->isStruct()) {
         StructureDataInformation* stru = parent->asStruct();

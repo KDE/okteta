@@ -254,10 +254,10 @@ int TopLevelDataInformation::indexOf(const DataInformation* const data) const
     return mIndex;
 }
 
-void TopLevelDataInformation::setActualDataInformation(DataInformation* newData)
+void TopLevelDataInformation::setActualDataInformation(std::unique_ptr<DataInformation>&& newData)
 {
     Q_ASSERT(newData);
-    mData.reset(newData);
+    mData = std::move(newData);
 }
 
 bool TopLevelDataInformation::isTopLevel() const

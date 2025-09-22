@@ -78,7 +78,7 @@ public:
 
     [[nodiscard]]
     DataInformation* actualDataInformation() const;
-    void setActualDataInformation(DataInformation* newData);
+    void setActualDataInformation(std::unique_ptr<DataInformation>&& newData);
     [[nodiscard]]
     bool isValid() const;
     void lockPositionToOffset(Okteta::Address offset, const Okteta::AbstractByteArrayModel* model);
