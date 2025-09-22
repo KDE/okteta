@@ -51,7 +51,7 @@ public:
     ~OsdParser() override;
 
     QStringList parseStructureNames() const override;
-    QVector<TopLevelDataInformation*> parseStructures() const override;
+    std::vector<std::unique_ptr<TopLevelDataInformation>> parseStructures() const override;
 
     static DataInformation* parseElement(const QDomElement& elem, const OsdParserInfo& oldInfo);
 

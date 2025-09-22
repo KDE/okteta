@@ -54,17 +54,17 @@ DataInformation* evalAndParse(QScriptEngine* eng, const char* code, ScriptLogger
     return evalAndParse(eng, QString::fromUtf8(code), logger);
 }
 
-TopLevelDataInformation* evalAndParse(const QString& code)
+std::unique_ptr<TopLevelDataInformation> evalAndParse(const QString& code)
 {
     auto* l = new ScriptLogger();
     l->setLogToStdOut(true);
     std::unique_ptr<QScriptEngine> engine = ScriptEngineInitializer::newEngine();
     DataInformation* inf = evalAndParse(engine.get(), code, l);
     QTEST_ASSERT(inf);
-    return new TopLevelDataInformation(inf, l, std::move(engine));
+    return std::make_unique<TopLevelDataInformation>(inf, l, std::move(engine));
 }
 
-TopLevelDataInformation* evalAndParse(const char* code)
+std::unique_ptr<TopLevelDataInformation> evalAndParse(const char* code)
 {
     return evalAndParse(QString::fromUtf8(code));
 }

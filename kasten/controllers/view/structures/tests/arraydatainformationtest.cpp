@@ -26,13 +26,12 @@ private Q_SLOTS:
     void initTestCase();
     void testResize();
     void testResize_data();
-    void cleanupTestCase();
 
 private:
     ArrayDataInformation* primitive;
     ArrayDataInformation* complex;
-    TopLevelDataInformation* primitiveTop;
-    TopLevelDataInformation* complexTop;
+    std::unique_ptr<TopLevelDataInformation> primitiveTop;
+    std::unique_ptr<TopLevelDataInformation> complexTop;
     uint primitiveSize;
     uint complexSize;
 };
@@ -46,7 +45,7 @@ void ArrayDataInformationTest::initTestCase()
     primitive = new ArrayDataInformation(QStringLiteral("primitives"), 0,
                                          PrimitiveFactory::newInstance(QStringLiteral("child"), PrimitiveDataType::UInt32, lwc));
     primitiveSize = 32;
-    primitiveTop = new TopLevelDataInformation(primitive);
+    primitiveTop = std::make_unique<TopLevelDataInformation>(primitive);
 
     QCOMPARE(primitive->isArray(), true);
     QCOMPARE(primitive->isBitfield(), false);
@@ -62,7 +61,7 @@ void ArrayDataInformationTest::initTestCase()
     QCOMPARE(primitive->isTopLevel(), false);
     QCOMPARE(primitiveTop->isTopLevel(), true);
     QCOMPARE(primitive->positionInFile(3), BitCount64(24));
-    QCOMPARE(primitive->topLevelDataInformation(), primitiveTop);
+    QCOMPARE(primitive->topLevelDataInformation(), primitiveTop.get());
 
     std::vector<std::unique_ptr<DataInformation>> structsChildren;
     structsChildren.emplace_back(std::unique_ptr<DataInformation>(PrimitiveFactory::newInstance(QStringLiteral("first"), PrimitiveDataType::UInt32, lwc)));
@@ -72,7 +71,7 @@ void ArrayDataInformationTest::initTestCase()
 
     complexSize = 64;
     complex = new ArrayDataInformation(QStringLiteral("complex"), 0, structs);
-    complexTop = new TopLevelDataInformation(complex);
+    complexTop = std::make_unique<TopLevelDataInformation>(complex);
 
     QCOMPARE(complex->isArray(), true);
     QCOMPARE(complex->isBitfield(), false);
@@ -88,7 +87,7 @@ void ArrayDataInformationTest::initTestCase()
     QCOMPARE(complex->isTopLevel(), false);
     QCOMPARE(complexTop->isTopLevel(), true);
     QCOMPARE(complex->positionInFile(3), BitCount64(24));
-    QCOMPARE(complex->topLevelDataInformation(), complexTop);
+    QCOMPARE(complex->topLevelDataInformation(), complexTop.get());
 }
 
 void ArrayDataInformationTest::testResizeHelper(ArrayDataInformation* array, TopLevelDataInformation* top)
@@ -133,8 +132,8 @@ void ArrayDataInformationTest::testResizeHelper(ArrayDataInformation* array, Top
 
 void ArrayDataInformationTest::testResize()
 {
-    testResizeHelper(primitive, primitiveTop);
-    testResizeHelper(complex, complexTop);
+    testResizeHelper(primitive, primitiveTop.get());
+    testResizeHelper(complex, complexTop.get());
 }
 
 void ArrayDataInformationTest::testResize_data()
@@ -156,12 +155,6 @@ void ArrayDataInformationTest::testResize_data()
     QTest::newRow("7. (0)") << 0U << 0U << false << -1U << -1U << true << 0U << 0U;
     QTest::newRow("8. (0)") << 0U << 0U << false << -1U << -1U << false << -1U << -1U;
 
-}
-
-void ArrayDataInformationTest::cleanupTestCase()
-{
-    delete complexTop;
-    delete primitiveTop;
 }
 
 QTEST_GUILESS_MAIN(ArrayDataInformationTest)

@@ -223,31 +223,32 @@ DataInformation* StructuresTool::childAt(int idx) const
     return mData.at(idx)->actualDataInformation();
 }
 
-void StructuresTool::addChildItem(TopLevelDataInformation* child)
+void StructuresTool::addChildItem(std::unique_ptr<TopLevelDataInformation>&& child)
 {
     Q_CHECK_PTR(child);
     child->setParent(this);
     if (child->isValid()) {
         child->setIndex(mData.size());
-        connect(child, &TopLevelDataInformation::dataChanged, this, &StructuresTool::onChildItemDataChanged);
-        connect(child, &TopLevelDataInformation::childrenAboutToBeInserted,
+        TopLevelDataInformation* const rawChild = child.get();
+        connect(rawChild, &TopLevelDataInformation::dataChanged, this, &StructuresTool::onChildItemDataChanged);
+        connect(rawChild, &TopLevelDataInformation::childrenAboutToBeInserted,
                 this, &StructuresTool::childrenAboutToBeInserted);
-        connect(child, &TopLevelDataInformation::childrenInserted,
+        connect(rawChild, &TopLevelDataInformation::childrenInserted,
                 this, &StructuresTool::childrenInserted);
-        connect(child, &TopLevelDataInformation::childrenAboutToBeRemoved,
+        connect(rawChild, &TopLevelDataInformation::childrenAboutToBeRemoved,
                 this, &StructuresTool::childrenAboutToBeRemoved);
-        connect(child, &TopLevelDataInformation::childrenRemoved,
+        connect(rawChild, &TopLevelDataInformation::childrenRemoved,
                 this, &StructuresTool::childrenRemoved);
         connect(this, &StructuresTool::byteArrayModelChanged,
-                child, &TopLevelDataInformation::newModelActivated);
-        mData.append(QSharedPointer<TopLevelDataInformation>(child));
+                rawChild, &TopLevelDataInformation::newModelActivated);
+        mData.append(QSharedPointer<TopLevelDataInformation>(child.release()));
         // ensure that locking gets set up properly
         if (mByteArrayModel) {
-            child->newModelActivated(mByteArrayModel);
+            rawChild->newModelActivated(mByteArrayModel);
         }
     } else {
         child->setIndex(mInvalidData.size());
-        mInvalidData.append(QSharedPointer<TopLevelDataInformation>(child));
+        mInvalidData.append(QSharedPointer<TopLevelDataInformation>(child.release()));
     }
 }
 
@@ -278,14 +279,14 @@ void StructuresTool::setEnabledStructuresInView()
             // should be valid now
             if (name == QLatin1String("*")) {
                 // add all of them
-                const QVector<TopLevelDataInformation*> structs = def->structures();
-                for (auto* structure : structs) {
-                    addChildItem(structure);
+                std::vector<std::unique_ptr<TopLevelDataInformation>> structs = def->structures();
+                for (auto& structure : structs) {
+                    addChildItem(std::move(structure));
                 }
             } else {
-                TopLevelDataInformation* data = def->structure(name);
+                std::unique_ptr<TopLevelDataInformation> data = def->structure(name);
                 if (data) {
-                    addChildItem(data);
+                    addChildItem(std::move(data));
                 } else {
                     qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "Could not find structure with name" << name << "in" << structureId;
                 }

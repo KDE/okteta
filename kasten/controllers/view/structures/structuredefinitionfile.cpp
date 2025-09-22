@@ -53,29 +53,28 @@ bool StructureDefinitionFile::isValid() const
     return (mParser.get() != nullptr);
 }
 
-QVector<TopLevelDataInformation*> StructureDefinitionFile::structures() const
+std::vector<std::unique_ptr<TopLevelDataInformation>> StructureDefinitionFile::structures() const
 {
     Q_CHECK_PTR(mParser);
     return mParser->parseStructures();
 }
 
-TopLevelDataInformation* StructureDefinitionFile::structure(const QString& name) const
+std::unique_ptr<TopLevelDataInformation> StructureDefinitionFile::structure(const QString& name) const
 {
     Q_CHECK_PTR(mParser);
-    const QVector<TopLevelDataInformation*> list = mParser->parseStructures();
-    TopLevelDataInformation* ret = nullptr;
-    for (auto* info : list) {
+    std::vector<std::unique_ptr<TopLevelDataInformation>> list = mParser->parseStructures();
+    std::unique_ptr<TopLevelDataInformation> ret;
+    for (auto& info : list) {
         if (info->actualDataInformation()->name() == name) {
-            ret = info;
-        } else {
-            delete info; // we have no use for this element
+            ret = std::move(info);
+            break;
         }
     }
 
     if (!ret) {
         qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "could not find structure with name=" << name;
     }
-    return ret; // not found
+    return ret;
 }
 
 QStringList StructureDefinitionFile::structureNames() const

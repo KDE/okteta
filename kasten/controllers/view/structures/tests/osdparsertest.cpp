@@ -63,27 +63,25 @@ void OsdParserTest::testPrimitive()
     auto type(static_cast<PrimitiveDataType>(expectedType));
 
     OsdParser parser(xml);
-    QVector<TopLevelDataInformation*> tds = parser.parseStructures();
+    std::vector<std::unique_ptr<TopLevelDataInformation>> tds = parser.parseStructures();
     QCOMPARE(tds.size(), 1);
-    const TopLevelDataInformation* td = tds.at(0);
+    const auto& td = tds.front();
     DataInformation* data = td->actualDataInformation();
     QCOMPARE(data->name(), QStringLiteral("foo"));
     PrimitiveDataInformation* prim = data->asPrimitive();
     QVERIFY(prim);
     QCOMPARE(prim->type(), type);
-    qDeleteAll(tds);
 
     // just to ensure comparison is case insensitive
     OsdParser parser2(secondXml);
-    QVector<TopLevelDataInformation*> tds2 = parser2.parseStructures();
+    std::vector<std::unique_ptr<TopLevelDataInformation>> tds2 = parser2.parseStructures();
     QCOMPARE(tds2.size(), 1);
-    const TopLevelDataInformation* td2 = tds2.at(0);
+    const auto& td2 = tds2.front();
     DataInformation* data2 = td2->actualDataInformation();
     QCOMPARE(data2->name(), QStringLiteral("foo"));
     PrimitiveDataInformation* prim2 = data2->asPrimitive();
     QVERIFY(prim2);
     QCOMPARE(prim2->type(), type);
-    qDeleteAll(tds2);
 }
 
 void OsdParserTest::testScriptFuntion()

@@ -128,15 +128,16 @@ QStringList OsdParser::parseStructureNames() const
     return ret;
 }
 
-QVector<TopLevelDataInformation*> OsdParser::parseStructures() const
+std::vector<std::unique_ptr<TopLevelDataInformation>> OsdParser::parseStructures() const
 {
+    std::vector<std::unique_ptr<TopLevelDataInformation>> structures;
+
     QFileInfo fileInfo(mAbsolutePath);
 
-    QVector<TopLevelDataInformation*> structures;
     auto rootLogger = std::make_unique<ScriptLogger>(); // only needed in we get an error right now
     QDomDocument document = openDoc(rootLogger.get());
     if (document.isNull()) {
-        structures.append(new TopLevelDataInformation(
+        structures.emplace_back(std::make_unique<TopLevelDataInformation>(
                               new DummyDataInformation(nullptr, fileInfo.fileName()), rootLogger.release(), nullptr, fileInfo));
         return structures;
     }
@@ -144,7 +145,7 @@ QVector<TopLevelDataInformation*> OsdParser::parseStructures() const
     QDomElement rootElem = document.firstChildElement(QStringLiteral("data"));
     if (rootElem.isNull()) {
         rootLogger->error() << "Missing top level <data> element!";
-        structures.append(new TopLevelDataInformation(
+        structures.emplace_back(std::make_unique<TopLevelDataInformation>(
                               new DummyDataInformation(nullptr, fileInfo.fileName()), rootLogger.release(), nullptr, fileInfo));
         return structures;
     }
@@ -170,7 +171,7 @@ QVector<TopLevelDataInformation*> OsdParser::parseStructures() const
             qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "Parsing messages were:" << logger->messages();
             data = new DummyDataInformation(nullptr, name);
         }
-        auto* topData = new TopLevelDataInformation(data, logger, std::move(eng), fileInfo);
+        auto& topData = structures.emplace_back(std::make_unique<TopLevelDataInformation>(data, logger, std::move(eng), fileInfo));
         QString lockOffsetStr = readProperty(elem, PROPERTY_DEFAULT_LOCK_OFFSET());
         if (!lockOffsetStr.isEmpty()) {
             ParsedNumber<quint64> offset = ParserUtils::uint64FromString(lockOffsetStr);
@@ -181,7 +182,6 @@ QVector<TopLevelDataInformation*> OsdParser::parseStructures() const
                 topData->setDefaultLockOffset(offset.value);
             }
         }
-        structures.append(topData);
         count++;
     }
 

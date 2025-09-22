@@ -12,13 +12,13 @@
 #include <enumdefinition.hpp>
 // Qt
 #include <QString>
-#include <QVector>
 #include <QDir>
 #include <QStringList>
 #include <QDomNodeList>
 #include <QFileInfo>
 // Std
 #include <memory>
+#include <vector>
 
 class TopLevelDataInformation;
 class AbstractStructureParser;
@@ -47,11 +47,11 @@ public:
 
 public:
     [[nodiscard]]
-    QVector<TopLevelDataInformation*> structures() const;
+    std::vector<std::unique_ptr<TopLevelDataInformation>> structures() const;
     [[nodiscard]]
     QStringList structureNames() const;
     [[nodiscard]]
-    TopLevelDataInformation* structure(const QString& name) const;
+    std::unique_ptr<TopLevelDataInformation> structure(const QString& name) const;
     /** @return the absolute path to the directory containing the .desktop file */
     [[nodiscard]]
     QString absolutePath() const;

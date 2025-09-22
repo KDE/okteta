@@ -104,7 +104,6 @@ public Q_SLOTS:
     void mark(const QModelIndex& idx);
     void unmark(/*const QModelIndex& idx*/);
     void updateData(const Okteta::ArrayChangeMetricsList& list);
-    void addChildItem(TopLevelDataInformation* child);
     void setEnabledStructuresInView();
     void validateAllStructures();
 
@@ -119,6 +118,8 @@ private:
     Okteta::Address startAddress(const TopLevelDataInformation* data) const;
     [[nodiscard]]
     Okteta::AddressRange dataRange(const DataInformation* data) const;
+
+    void addChildItem(std::unique_ptr<TopLevelDataInformation>&& child);
 
 private:
     // source

@@ -41,6 +41,7 @@
 #include <QScriptContext>
 // Std
 #include <memory>
+#include <vector>
 #include <utility>
 
 class ScriptClassesTest : public QObject
@@ -60,10 +61,10 @@ private:
 
 private Q_SLOTS:
     void initTestCase();
+
     // check that all properties are available in the iterator
     void checkIterators();
     void testReplaceObject(); // check replacing datatype
-    void cleanupTestCase();
     void testSafeReferenceDeleteObject();
     void testSafePrimitiveArrayReference();
     void testScriptValueContents_data();
@@ -72,7 +73,7 @@ private Q_SLOTS:
 private:
     QVector<PropertyPair> commonProperties;
     QVector<PropertyPair> primitiveProperties;
-    QVector<TopLevelDataInformation*> primitives;
+    std::vector<std::unique_ptr<TopLevelDataInformation>> primitives;
 
     QVector<PropertyPair> enumProperties;
     EnumDataInformation* enumData;
@@ -130,7 +131,7 @@ void ScriptClassesTest::initTestCase()
     while (type < PrimitiveDataType::Bitfield) {
         PrimitiveDataInformation* prim = PrimitiveFactory::newInstance(QStringLiteral("prim"), type, lwc);
         prim->setValue(10);
-        primitives << new TopLevelDataInformation(prim);
+        primitives.emplace_back(std::make_unique<TopLevelDataInformation>(prim));
         type = static_cast<PrimitiveDataType>(static_cast<int>(type) + 1);
     }
 
@@ -147,24 +148,19 @@ void ScriptClassesTest::initTestCase()
                                                    QStringLiteral("theEnum"), PrimitiveDataType::Int32));
     enumData = new EnumDataInformation(QStringLiteral("enumData"),
                                        PrimitiveFactory::newInstance(QStringLiteral("dummy"), PrimitiveDataType::Int32, lwc), enumDef);
-    enumDataTop.reset(
-        new TopLevelDataInformation(enumData, nullptr, ScriptEngineInitializer::newEngine()));
+    enumDataTop = std::make_unique<TopLevelDataInformation>(enumData, nullptr, ScriptEngineInitializer::newEngine());
     flagData = new FlagDataInformation(QStringLiteral("flagData"),
                                        PrimitiveFactory::newInstance(QStringLiteral("dummy"), PrimitiveDataType::Int32, lwc), enumDef);
-    flagDataTop.reset(
-        new TopLevelDataInformation(flagData, nullptr, ScriptEngineInitializer::newEngine()));
+    flagDataTop = std::make_unique<TopLevelDataInformation>(flagData, nullptr, ScriptEngineInitializer::newEngine());
 
     bitfieldProperties << primitiveProperties << pair("width", QScriptValue::Undeletable);
     std::sort(bitfieldProperties.begin(), bitfieldProperties.end());
     unsignedBitfield = new UnsignedBitfieldDataInformation(QStringLiteral("unsignedBit"), 42);
-    unsignedBitfieldTop.reset(
-        new TopLevelDataInformation(unsignedBitfield, nullptr, ScriptEngineInitializer::newEngine()));
+    unsignedBitfieldTop = std::make_unique<TopLevelDataInformation>(unsignedBitfield, nullptr, ScriptEngineInitializer::newEngine());
     signedBitfield = new SignedBitfieldDataInformation(QStringLiteral("signedBit"), 42);
-    signedBitfieldTop.reset(
-        new TopLevelDataInformation(signedBitfield, nullptr, ScriptEngineInitializer::newEngine()));
+    signedBitfieldTop = std::make_unique<TopLevelDataInformation>(signedBitfield, nullptr, ScriptEngineInitializer::newEngine());
     boolBitfield = new BoolBitfieldDataInformation(QStringLiteral("boolBit"), 42);
-    boolBitfieldTop.reset(
-        new TopLevelDataInformation(boolBitfield, nullptr, ScriptEngineInitializer::newEngine()));
+    boolBitfieldTop = std::make_unique<TopLevelDataInformation>(boolBitfield, nullptr, ScriptEngineInitializer::newEngine());
 
     stringProperties << commonProperties << pair("terminatedBy", QScriptValue::Undeletable)
                      << pair("byteCount") << pair("maxCharCount", QScriptValue::Undeletable)
@@ -172,25 +168,21 @@ void ScriptClassesTest::initTestCase()
                      << pair("maxByteCount", QScriptValue::Undeletable);
     std::sort(stringProperties.begin(), stringProperties.end());
     stringData = new StringDataInformation(QStringLiteral("string"), StringDataInformation::StringType::Latin1);
-    stringDataTop.reset(
-        new TopLevelDataInformation(stringData, nullptr, ScriptEngineInitializer::newEngine()));
+    stringDataTop = std::make_unique<TopLevelDataInformation>(stringData, nullptr, ScriptEngineInitializer::newEngine());
 
     arrayProperties << commonProperties << pair("length", QScriptValue::Undeletable)
                     << pair("type", QScriptValue::Undeletable);
     std::sort(arrayProperties.begin(), arrayProperties.end());
     arrayData = new ArrayDataInformation(QStringLiteral("array"), 20,
                                          PrimitiveFactory::newInstance(QStringLiteral("inner"), PrimitiveDataType::Int32, lwc));
-    arrayDataTop.reset(
-        new TopLevelDataInformation(arrayData, nullptr, ScriptEngineInitializer::newEngine()));
+    arrayDataTop = std::make_unique<TopLevelDataInformation>(arrayData, nullptr, ScriptEngineInitializer::newEngine());
 
     structUnionProperties << commonProperties << pair("childCount");
     // property children is only writable -> it is not in the iterator
     structData = new StructureDataInformation(QStringLiteral("struct"));
-    structDataTop.reset(
-        new TopLevelDataInformation(structData, nullptr, ScriptEngineInitializer::newEngine()));
+    structDataTop = std::make_unique<TopLevelDataInformation>(structData, nullptr, ScriptEngineInitializer::newEngine());
     unionData = new UnionDataInformation(QStringLiteral("union"));
-    unionDataTop.reset(
-        new TopLevelDataInformation(unionData, nullptr, ScriptEngineInitializer::newEngine()));
+    unionDataTop = std::make_unique<TopLevelDataInformation>(unionData, nullptr, ScriptEngineInitializer::newEngine());
     std::sort(structUnionProperties.begin(), structUnionProperties.end());
 
 }
@@ -273,7 +265,7 @@ void ScriptClassesTest::checkProperties(const QVector<PropertyPair>& expected,
 
 void ScriptClassesTest::checkIterators()
 {
-    for (auto* top : std::as_const(primitives)) {
+    for (const auto& top : primitives) {
         checkProperties(primitiveProperties, top->actualDataInformation(), "primitives");
     }
 
@@ -428,11 +420,6 @@ void ScriptClassesTest::testSafeReferenceDeleteObject()
     QVERIFY(name.isValid());
     QVERIFY(name.isError());
     QCOMPARE(name.toString(), invalidObjectError());
-}
-
-void ScriptClassesTest::cleanupTestCase()
-{
-    qDeleteAll(primitives);
 }
 
 QTEST_GUILESS_MAIN(ScriptClassesTest)

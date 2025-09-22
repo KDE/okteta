@@ -18,6 +18,7 @@
 #include <QFileInfo>
 #include <QSharedPointer>
 #include <QQueue>
+#include <QVector>
 #include <QScriptEngine>
 // Std
 #include <memory>

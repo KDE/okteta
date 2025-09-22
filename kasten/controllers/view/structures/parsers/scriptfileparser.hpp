@@ -23,7 +23,7 @@ public:
     ~ScriptFileParser() override;
 
     QStringList parseStructureNames() const override;
-    QVector<TopLevelDataInformation*> parseStructures() const override;
+    std::vector<std::unique_ptr<TopLevelDataInformation>> parseStructures() const override;
 
 private:
     QScriptValue loadScriptValue(ScriptLogger* logger, QScriptEngine* engine) const;

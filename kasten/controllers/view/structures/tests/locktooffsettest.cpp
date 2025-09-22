@@ -26,7 +26,7 @@ private Q_SLOTS:
     void cleanupTestCase();
 
 private:
-    TopLevelDataInformation* newStructure(Okteta::AbstractByteArrayModel* lastModel, Okteta::Address lastReadOffset);
+    std::unique_ptr<TopLevelDataInformation> newStructure(Okteta::AbstractByteArrayModel* lastModel, Okteta::Address lastReadOffset);
 
 private:
     Okteta::ByteArrayModel* model;
@@ -87,14 +87,14 @@ void LockToOffsetTest::cleanupTestCase()
     delete model2;
 }
 
-TopLevelDataInformation* LockToOffsetTest::newStructure(Okteta::AbstractByteArrayModel* lastModel, Okteta::Address lastReadOffset)
+std::unique_ptr<TopLevelDataInformation> LockToOffsetTest::newStructure(Okteta::AbstractByteArrayModel* lastModel, Okteta::Address lastReadOffset)
 {
     std::vector<std::unique_ptr<DataInformation>> children;
     children.emplace_back(std::make_unique<UInt16DataInformation>(QStringLiteral("first")));
     children.emplace_back(std::make_unique<UInt64DataInformation>(QStringLiteral("second")));
     DataInformation* data = new StructureDataInformation(QStringLiteral("container"), std::move(children));
     data->setByteOrder(DataInformation::DataInformationEndianness::EndiannessBig);
-    auto* top = new TopLevelDataInformation(data);
+    auto top = std::make_unique<TopLevelDataInformation>(data);
     top->mLastModel = lastModel;
     if (lastModel) {
         top->newModelActivated(lastModel);
@@ -103,12 +103,18 @@ TopLevelDataInformation* LockToOffsetTest::newStructure(Okteta::AbstractByteArra
     return top;
 }
 
+// work-around, see addRow()
+Q_DECLARE_METATYPE(std::shared_ptr<TopLevelDataInformation>)
 Q_DECLARE_METATYPE(Okteta::ArrayChangeMetricsList)
 
-static inline void addRow(const char* tag, TopLevelDataInformation* structure, Okteta::Address addr,
+static inline void addRow(const char* tag,
+                          std::unique_ptr<TopLevelDataInformation>&& structure,
+                          Okteta::Address addr,
                           Okteta::AbstractByteArrayModel* model, const Okteta::ArrayChangeMetricsList& changes, bool expected)
 {
-    QTest::newRow(tag) << structure << addr << model << changes << expected;
+    // work-around for QTest::newRow only supporting QMetaType-registered types, though needing a copy constructor
+    // turn into shared pointer to transport to test and have life-time still managed
+    QTest::newRow(tag) << std::shared_ptr<TopLevelDataInformation>(std::move(structure)) << addr << model << changes << expected;
 }
 
 static Okteta::ArrayChangeMetricsList oneReplacement(int start, int length, int replacementSize)
@@ -120,61 +126,61 @@ static Okteta::ArrayChangeMetricsList oneReplacement(int start, int length, int 
 
 void LockToOffsetTest::testReadingNecessary_data()
 {
-    QTest::addColumn<TopLevelDataInformation*>("structure");
+    QTest::addColumn<std::shared_ptr<TopLevelDataInformation>>("structure");
     QTest::addColumn<Okteta::Address>("address");
     QTest::addColumn<Okteta::AbstractByteArrayModel*>("model");
     QTest::addColumn<Okteta::ArrayChangeMetricsList>("changes");
     QTest::addColumn<bool>("expected");
     Okteta::ArrayChangeMetricsList noChanges;
 
-    TopLevelDataInformation* top = newStructure(nullptr, 5);
-    addRow("new model, same offset, no changes", top, 5, model, noChanges, true);
+    std::unique_ptr<TopLevelDataInformation> top = newStructure(nullptr, 5);
+    addRow("new model, same offset, no changes", std::move(top), 5, model, noChanges, true);
 
     top = newStructure(model, 5);
-    addRow("same model, different offset, no changes", top, 6, model, noChanges, true);
+    addRow("same model, different offset, no changes", std::move(top), 6, model, noChanges, true);
 
     top = newStructure(model, 5);
-    addRow("same model, same offset, no changes", top, 5, model, noChanges, false);
+    addRow("same model, same offset, no changes", std::move(top), 5, model, noChanges, false);
 
     top = newStructure(model, 5);
     top->lockPositionToOffset(5, model);
-    addRow("same model, same offset (because of locking), no changes", top, 50, model, noChanges, false);
+    addRow("same model, same offset (because of locking), no changes", std::move(top), 50, model, noChanges, false);
 
     top = newStructure(model, 5);
     top->newModelActivated(model2);
-    addRow("different model, same offset, no changes", top, 5, model2, noChanges, true);
+    addRow("different model, same offset, no changes", std::move(top), 5, model2, noChanges, true);
 
     top = newStructure(model, TopLevelDataInformation::INVALID_OFFSET);
-    addRow("same model, invalid offset before, no changes", top, 5, model2, noChanges, true);
+    addRow("same model, invalid offset before, no changes", std::move(top), 5, model2, noChanges, true);
 
     top = newStructure(model, 5);
-    addRow("same model, same offset, changes before", top, 5, model, oneReplacement(0, 4, 4), false);
+    addRow("same model, same offset, changes before", std::move(top), 5, model, oneReplacement(0, 4, 4), false);
 
     top = newStructure(model, 5);
-    addRow("same model, same offset, changes before (right until start)", top, 5, model, oneReplacement(0, 5, 5), false);
+    addRow("same model, same offset, changes before (right until start)", std::move(top), 5, model, oneReplacement(0, 5, 5), false);
 
     top = newStructure(model, 5);
-    addRow("same model, same offset, changes before (1 byte removed!)", top, 5, model, oneReplacement(0, 5, 4), true);
+    addRow("same model, same offset, changes before (1 byte removed!)", std::move(top), 5, model, oneReplacement(0, 5, 4), true);
 
     top = newStructure(model, 5);
-    addRow("same model, same offset, changes before (1 byte added!)", top, 5, model, oneReplacement(0, 1, 2), true);
+    addRow("same model, same offset, changes before (1 byte added!)", std::move(top), 5, model, oneReplacement(0, 1, 2), true);
 
     top = newStructure(model, 5);
-    addRow("same model, same offset, changes 2 bytes after (1 byte removed!)", top, 5, model, oneReplacement(16, 5, 4), false);
+    addRow("same model, same offset, changes 2 bytes after (1 byte removed!)", std::move(top), 5, model, oneReplacement(16, 5, 4), false);
     top = newStructure(model, 5);
-    addRow("same model, same offset, changes 1 byte after (1 byte removed!)", top, 5, model, oneReplacement(15, 5, 4), false);
+    addRow("same model, same offset, changes 1 byte after (1 byte removed!)", std::move(top), 5, model, oneReplacement(15, 5, 4), false);
 
     top = newStructure(model, 5);
-    addRow("same model, same offset, changes 2 bytes after (1 byte added!)", top, 5, model, oneReplacement(16, 1, 2), false);
+    addRow("same model, same offset, changes 2 bytes after (1 byte added!)", std::move(top), 5, model, oneReplacement(16, 1, 2), false);
     top = newStructure(model, 5);
-    addRow("same model, same offset, changes 1 byte after (1 byte added!)", top, 5, model, oneReplacement(15, 1, 2), false);
+    addRow("same model, same offset, changes 1 byte after (1 byte added!)", std::move(top), 5, model, oneReplacement(15, 1, 2), false);
 
 }
 
 void LockToOffsetTest::testReadingNecessary()
 {
     QFETCH(Okteta::AbstractByteArrayModel*, model);
-    QFETCH(TopLevelDataInformation*, structure);
+    QFETCH(std::shared_ptr<TopLevelDataInformation>, structure);
     QFETCH(Okteta::ArrayChangeMetricsList, changes);
     QFETCH(Okteta::Address, address);
     QFETCH(bool, expected);
@@ -185,7 +191,6 @@ void LockToOffsetTest::testReadingNecessary()
     structure->read(model, address, changes, false);
     // no changes after read -> no reading necessary
     QVERIFY(!structure->isReadingNecessary(model, address, Okteta::ArrayChangeMetricsList()));
-    delete structure;
 }
 
 QTEST_GUILESS_MAIN(LockToOffsetTest)
