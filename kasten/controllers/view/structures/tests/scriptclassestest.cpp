@@ -129,9 +129,9 @@ void ScriptClassesTest::initTestCase()
     LoggerWithContext lwc(nullptr, QString());
     PrimitiveDataType type = PrimitiveDataType::START;
     while (type < PrimitiveDataType::Bitfield) {
-        PrimitiveDataInformation* prim = PrimitiveFactory::newInstance(QStringLiteral("prim"), type, lwc);
+        auto prim = std::unique_ptr<PrimitiveDataInformation>(PrimitiveFactory::newInstance(QStringLiteral("prim"), type, lwc));
         prim->setValue(10);
-        primitives.emplace_back(std::make_unique<TopLevelDataInformation>(prim));
+        primitives.emplace_back(std::make_unique<TopLevelDataInformation>(std::move(prim)));
         type = static_cast<PrimitiveDataType>(static_cast<int>(type) + 1);
     }
 
@@ -146,43 +146,52 @@ void ScriptClassesTest::initTestCase()
     enumValues.insert(4, QStringLiteral("four"));
     EnumDefinition::Ptr enumDef(new EnumDefinition(enumValues,
                                                    QStringLiteral("theEnum"), PrimitiveDataType::Int32));
-    enumData = new EnumDataInformation(QStringLiteral("enumData"),
-                                       PrimitiveFactory::newInstance(QStringLiteral("dummy"), PrimitiveDataType::Int32, lwc), enumDef);
-    enumDataTop = std::make_unique<TopLevelDataInformation>(enumData, nullptr, ScriptEngineInitializer::newEngine());
-    flagData = new FlagDataInformation(QStringLiteral("flagData"),
-                                       PrimitiveFactory::newInstance(QStringLiteral("dummy"), PrimitiveDataType::Int32, lwc), enumDef);
-    flagDataTop = std::make_unique<TopLevelDataInformation>(flagData, nullptr, ScriptEngineInitializer::newEngine());
+    auto managedEnumData = std::make_unique<EnumDataInformation>(QStringLiteral("enumData"),
+                                                                 PrimitiveFactory::newInstance(QStringLiteral("dummy"), PrimitiveDataType::Int32, lwc), enumDef);
+    enumData = managedEnumData.get();
+    enumDataTop = std::make_unique<TopLevelDataInformation>(std::move(managedEnumData), nullptr, ScriptEngineInitializer::newEngine());
+    auto managedFlagData = std::make_unique<FlagDataInformation>(QStringLiteral("flagData"),
+                                                                 PrimitiveFactory::newInstance(QStringLiteral("dummy"), PrimitiveDataType::Int32, lwc), enumDef);
+    flagData = managedFlagData.get();
+    flagDataTop = std::make_unique<TopLevelDataInformation>(std::move(managedFlagData), nullptr, ScriptEngineInitializer::newEngine());
 
     bitfieldProperties << primitiveProperties << pair("width", QScriptValue::Undeletable);
     std::sort(bitfieldProperties.begin(), bitfieldProperties.end());
-    unsignedBitfield = new UnsignedBitfieldDataInformation(QStringLiteral("unsignedBit"), 42);
-    unsignedBitfieldTop = std::make_unique<TopLevelDataInformation>(unsignedBitfield, nullptr, ScriptEngineInitializer::newEngine());
-    signedBitfield = new SignedBitfieldDataInformation(QStringLiteral("signedBit"), 42);
-    signedBitfieldTop = std::make_unique<TopLevelDataInformation>(signedBitfield, nullptr, ScriptEngineInitializer::newEngine());
-    boolBitfield = new BoolBitfieldDataInformation(QStringLiteral("boolBit"), 42);
-    boolBitfieldTop = std::make_unique<TopLevelDataInformation>(boolBitfield, nullptr, ScriptEngineInitializer::newEngine());
+    auto managedUnsignedBitfield = std::make_unique<UnsignedBitfieldDataInformation>(QStringLiteral("unsignedBit"), 42);
+    unsignedBitfield = managedUnsignedBitfield.get();
+    unsignedBitfieldTop = std::make_unique<TopLevelDataInformation>(std::move(managedUnsignedBitfield), nullptr, ScriptEngineInitializer::newEngine());
+    auto managedSignedBitfield = std::make_unique<SignedBitfieldDataInformation>(QStringLiteral("signedBit"), 42);
+    signedBitfield = managedSignedBitfield.get();
+    signedBitfieldTop = std::make_unique<TopLevelDataInformation>(std::move(managedSignedBitfield), nullptr, ScriptEngineInitializer::newEngine());
+    auto managedBoolBitfield = std::make_unique<BoolBitfieldDataInformation>(QStringLiteral("boolBit"), 42);
+    boolBitfield = managedBoolBitfield.get();
+    boolBitfieldTop = std::make_unique<TopLevelDataInformation>(std::move(managedBoolBitfield), nullptr, ScriptEngineInitializer::newEngine());
 
     stringProperties << commonProperties << pair("terminatedBy", QScriptValue::Undeletable)
                      << pair("byteCount") << pair("maxCharCount", QScriptValue::Undeletable)
                      << pair("charCount") << pair("encoding", QScriptValue::Undeletable)
                      << pair("maxByteCount", QScriptValue::Undeletable);
     std::sort(stringProperties.begin(), stringProperties.end());
-    stringData = new StringDataInformation(QStringLiteral("string"), StringDataInformation::StringType::Latin1);
-    stringDataTop = std::make_unique<TopLevelDataInformation>(stringData, nullptr, ScriptEngineInitializer::newEngine());
+    auto managedStringData = std::make_unique<StringDataInformation>(QStringLiteral("string"), StringDataInformation::StringType::Latin1);
+    stringData = managedStringData.get();
+    stringDataTop = std::make_unique<TopLevelDataInformation>(std::move(managedStringData), nullptr, ScriptEngineInitializer::newEngine());
 
     arrayProperties << commonProperties << pair("length", QScriptValue::Undeletable)
                     << pair("type", QScriptValue::Undeletable);
     std::sort(arrayProperties.begin(), arrayProperties.end());
-    arrayData = new ArrayDataInformation(QStringLiteral("array"), 20,
-                                         PrimitiveFactory::newInstance(QStringLiteral("inner"), PrimitiveDataType::Int32, lwc));
-    arrayDataTop = std::make_unique<TopLevelDataInformation>(arrayData, nullptr, ScriptEngineInitializer::newEngine());
+    auto managedArrayData = std::make_unique<ArrayDataInformation>(QStringLiteral("array"), 20,
+                                                                   PrimitiveFactory::newInstance(QStringLiteral("inner"), PrimitiveDataType::Int32, lwc));
+    arrayData = managedArrayData.get();
+    arrayDataTop = std::make_unique<TopLevelDataInformation>(std::move(managedArrayData), nullptr, ScriptEngineInitializer::newEngine());
 
     structUnionProperties << commonProperties << pair("childCount");
     // property children is only writable -> it is not in the iterator
-    structData = new StructureDataInformation(QStringLiteral("struct"));
-    structDataTop = std::make_unique<TopLevelDataInformation>(structData, nullptr, ScriptEngineInitializer::newEngine());
-    unionData = new UnionDataInformation(QStringLiteral("union"));
-    unionDataTop = std::make_unique<TopLevelDataInformation>(unionData, nullptr, ScriptEngineInitializer::newEngine());
+    auto managedStructData = std::make_unique<StructureDataInformation>(QStringLiteral("struct"));
+    structData = managedStructData.get();
+    structDataTop = std::make_unique<TopLevelDataInformation>(std::move(managedStructData), nullptr, ScriptEngineInitializer::newEngine());
+    auto managedUnionData = std::make_unique<UnionDataInformation>(QStringLiteral("union"));
+    unionData = managedUnionData.get();
+    unionDataTop = std::make_unique<TopLevelDataInformation>(std::move(managedUnionData), nullptr, ScriptEngineInitializer::newEngine());
     std::sort(structUnionProperties.begin(), structUnionProperties.end());
 
 }
@@ -297,12 +306,13 @@ void ScriptClassesTest::testReplaceObject()
         QT_UNICODE_LITERAL("});\n"));
     QScriptValue val = ownedEngine->evaluate(unionDef);
     QVERIFY(val.isObject());
-    DataInformation* main = ScriptValueConverter::convert(val, QStringLiteral("container"), logger, nullptr);
-    QVERIFY(main);
+    auto managedMain = std::unique_ptr<DataInformation>(ScriptValueConverter::convert(val, QStringLiteral("container"), logger, nullptr));
+    QVERIFY(managedMain);
     QCOMPARE(logger->rowCount(), 0);
 
+    DataInformation* const main = managedMain.get();
     QScriptEngine* const eng = ownedEngine.get();
-    TopLevelDataInformation top(main, logger, std::move(ownedEngine));
+    TopLevelDataInformation top(std::move(managedMain), logger, std::move(ownedEngine));
 
     // first we read the struct, which changes the type of the first child
     // access it again after changing to ensure it was set properly
@@ -362,13 +372,13 @@ void ScriptClassesTest::testReplaceObject()
     QCOMPARE(main->name(), QStringLiteral("container"));
     top.scriptHandler()->updateDataInformation(main);
     // main is now a dangling pointer
-    main = top.actualDataInformation();
+    DataInformation* const newMain = top.actualDataInformation();
     QString nnnname = QStringLiteral("newContainer");
-    QCOMPARE(main->name(), nnnname);
-    QVERIFY(main->childAt(0)->isStruct());
-    QCOMPARE(main->childAt(0)->name(), QStringLiteral("innerStruct"));
-    QCOMPARE(main->childAt(1)->name(), QStringLiteral("innerArray"));
-    QCOMPARE(main->childAt(2)->name(), QStringLiteral("innerPointer"));
+    QCOMPARE(newMain->name(), nnnname);
+    QVERIFY(newMain->childAt(0)->isStruct());
+    QCOMPARE(newMain->childAt(0)->name(), QStringLiteral("innerStruct"));
+    QCOMPARE(newMain->childAt(1)->name(), QStringLiteral("innerArray"));
+    QCOMPARE(newMain->childAt(2)->name(), QStringLiteral("innerPointer"));
 }
 
 namespace {

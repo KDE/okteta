@@ -50,7 +50,8 @@ public:
      *  @param engine the script engine to use. If null this object contains no dynamic elements
      *  @param structureFile the file which this was loaded from
      */
-    explicit TopLevelDataInformation(DataInformation* data, ScriptLogger* logger = nullptr,
+    explicit TopLevelDataInformation(std::unique_ptr<DataInformation>&& data,
+                                     ScriptLogger* logger = nullptr,
                                      std::unique_ptr<QScriptEngine>&& engine = nullptr,
                                      const QFileInfo& structureFile = QFileInfo());
     ~TopLevelDataInformation() override;

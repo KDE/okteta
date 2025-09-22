@@ -36,24 +36,24 @@ std::vector<std::unique_ptr<TopLevelDataInformation>> ScriptFileParser::parseStr
     auto* logger = new ScriptLogger();
 
     QScriptValue value = loadScriptValue(logger, engine.get());
-    DataInformation* dataInf;
+    std::unique_ptr<DataInformation> dataInf;
     if (!value.isValid()) {
-        dataInf = new DummyDataInformation(nullptr, mPluginName);
+        dataInf = std::make_unique<DummyDataInformation>(nullptr, mPluginName);
     } else {
-        dataInf = ScriptValueConverter::convert(value, mPluginName, logger);
+        dataInf = std::unique_ptr<DataInformation>(ScriptValueConverter::convert(value, mPluginName, logger));
     }
 
     if (!dataInf) {
-        dataInf = new DummyDataInformation(nullptr, mPluginName);
+        dataInf = std::make_unique<DummyDataInformation>(nullptr, mPluginName);
     }
     const QFileInfo fileInfo(mAbsolutePath);
-    auto& top = ret.emplace_back(std::make_unique<TopLevelDataInformation>(dataInf, logger, std::move(engine), fileInfo));
+    auto& top = ret.emplace_back(std::make_unique<TopLevelDataInformation>(std::move(dataInf), logger, std::move(engine), fileInfo));
     // handle default lock offset
     QScriptValue lockOffset = value.property(ParserStrings::PROPERTY_DEFAULT_LOCK_OFFSET());
     if (lockOffset.isValid()) {
         ParsedNumber<quint64> offset = ParserUtils::uint64FromScriptValue(lockOffset);
         if (!offset.isValid) {
-            dataInf->logError() << "Default lock offset is not a valid number:" << offset.string;
+            top->actualDataInformation()->logError() << "Default lock offset is not a valid number:" << offset.string;
         } else {
             top->setDefaultLockOffset(offset.value);
         }

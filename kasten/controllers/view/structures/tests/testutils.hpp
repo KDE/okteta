@@ -40,16 +40,16 @@ T binary(const char* val)
     return static_cast<T>(result);
 }
 
-DataInformation* evalAndParse(QScriptEngine* eng, const QString& code, ScriptLogger* logger)
+std::unique_ptr<DataInformation> evalAndParse(QScriptEngine* eng, const QString& code, ScriptLogger* logger)
 {
     QScriptValue result = eng->evaluate(code);
     if (result.isError()) {
         qWarning() << "error parsing" << code << ":" << result.toString();
     }
-    return ScriptValueConverter::convert(result, QStringLiteral("result"), logger);
+    return std::unique_ptr<DataInformation>(ScriptValueConverter::convert(result, QStringLiteral("result"), logger));
 }
 
-DataInformation* evalAndParse(QScriptEngine* eng, const char* code, ScriptLogger* logger)
+std::unique_ptr<DataInformation> evalAndParse(QScriptEngine* eng, const char* code, ScriptLogger* logger)
 {
     return evalAndParse(eng, QString::fromUtf8(code), logger);
 }
@@ -59,9 +59,9 @@ std::unique_ptr<TopLevelDataInformation> evalAndParse(const QString& code)
     auto* l = new ScriptLogger();
     l->setLogToStdOut(true);
     std::unique_ptr<QScriptEngine> engine = ScriptEngineInitializer::newEngine();
-    DataInformation* inf = evalAndParse(engine.get(), code, l);
+    std::unique_ptr<DataInformation> inf = evalAndParse(engine.get(), code, l);
     QTEST_ASSERT(inf);
-    return std::make_unique<TopLevelDataInformation>(inf, l, std::move(engine));
+    return std::make_unique<TopLevelDataInformation>(std::move(inf), l, std::move(engine));
 }
 
 std::unique_ptr<TopLevelDataInformation> evalAndParse(const char* code)

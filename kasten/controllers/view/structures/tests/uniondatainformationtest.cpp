@@ -76,9 +76,10 @@ void UnionDataInformationTest::testReadData1()
     children.emplace_back(std::unique_ptr<DataInformation>(u32));
     children.emplace_back(std::unique_ptr<DataInformation>(i16));
     children.emplace_back(std::unique_ptr<DataInformation>(u54));
-    auto* un = new UnionDataInformation(QStringLiteral("un"), std::move(children));
-    un->setByteOrder(DataInformation::DataInformationEndianness::EndiannessLittle);
-    TopLevelDataInformation top(un);
+    auto managedUn = std::make_unique<UnionDataInformation>(QStringLiteral("un"), std::move(children));
+    managedUn->setByteOrder(DataInformation::DataInformationEndianness::EndiannessLittle);
+    UnionDataInformation* const un = managedUn.get();
+    TopLevelDataInformation top(std::move(managedUn));
     // read from bit 0
     QFETCH(uint, address);
     QFETCH(quint8, offset);

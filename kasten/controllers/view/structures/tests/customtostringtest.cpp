@@ -78,17 +78,18 @@ void CustomToStringTest::testUuid()
     std::unique_ptr<QScriptEngine> eng = ScriptEngineInitializer::newEngine();
     auto* logger = new ScriptLogger();
     logger->setLogToStdOut(true);
-    DataInformation* structure = nullptr;
+    std::unique_ptr<DataInformation> managedStructure;
     if (isGUID) {
-        structure = Utils::evalAndParse(eng.get(), "var u = importScript('uuid.js'); u.GUID();", logger);
+        managedStructure = Utils::evalAndParse(eng.get(), "var u = importScript('uuid.js'); u.GUID();", logger);
     } else {
-        structure = Utils::evalAndParse(eng.get(), "var u = importScript('uuid.js'); u.UUID();", logger);
+        managedStructure = Utils::evalAndParse(eng.get(), "var u = importScript('uuid.js'); u.UUID();", logger);
     }
 #if defined(Q_OS_MACOS) || defined(Q_OS_WINDOWS)
   QEXPECT_FAIL("", "QStandardPaths::GenericDataLocation can't be modified on macOS/Windows", Abort);
 #endif
-    QVERIFY(structure);
-    TopLevelDataInformation top(structure, logger, std::move(eng));
+    QVERIFY(managedStructure);
+    DataInformation* const structure = managedStructure.get();
+    TopLevelDataInformation top(std::move(managedStructure), logger, std::move(eng));
     QCOMPARE(structure->childCount(), 4U);
 
     QVERIFY(structure->toStringFunction().isFunction());

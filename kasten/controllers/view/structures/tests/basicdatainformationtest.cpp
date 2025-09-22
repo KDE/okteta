@@ -231,8 +231,9 @@ void BasicDataInformationTest::basicTest(DataInformationBase* data, const Expect
     QCOMPARE(dataInf->size(), expected.size);
     QCOMPARE(dataInf->parent(), expected.parent);
 
-    DataInformation* clone1 = (dataInf->clone());
-    const auto top = std::make_unique<TopLevelDataInformation>(clone1);
+    auto managedClone1 = std::unique_ptr<DataInformation>(dataInf->clone());
+    DataInformation* const clone1 = managedClone1.get();
+    const auto top = std::make_unique<TopLevelDataInformation>(std::move(managedClone1));
     QCOMPARE(clone1->parent(), top.get()); // top takes ownership of clone1
     QCOMPARE(top->actualDataInformation(), clone1);
 
@@ -291,7 +292,7 @@ void BasicDataInformationTest::initTestCase()
     enumData = std::make_unique<EnumDataInformation>(QStringLiteral("enumData"), PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc), edef);
     emptyString = std::make_unique<StringDataInformation>(QStringLiteral("string"), StringDataInformation::StringType::ASCII);
     dummy = std::make_unique<DummyDataInformation>(nullptr);
-    topLevel = std::make_unique<TopLevelDataInformation>(new DummyDataInformation(nullptr));
+    topLevel = std::make_unique<TopLevelDataInformation>(std::make_unique<DummyDataInformation>(nullptr));
 }
 
 void BasicDataInformationTest::testBitfields()

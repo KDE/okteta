@@ -92,9 +92,9 @@ std::unique_ptr<TopLevelDataInformation> LockToOffsetTest::newStructure(Okteta::
     std::vector<std::unique_ptr<DataInformation>> children;
     children.emplace_back(std::make_unique<UInt16DataInformation>(QStringLiteral("first")));
     children.emplace_back(std::make_unique<UInt64DataInformation>(QStringLiteral("second")));
-    DataInformation* data = new StructureDataInformation(QStringLiteral("container"), std::move(children));
+    auto data = std::make_unique<StructureDataInformation>(QStringLiteral("container"), std::move(children));
     data->setByteOrder(DataInformation::DataInformationEndianness::EndiannessBig);
-    auto top = std::make_unique<TopLevelDataInformation>(data);
+    auto top = std::make_unique<TopLevelDataInformation>(std::move(data));
     top->mLastModel = lastModel;
     if (lastModel) {
         top->newModelActivated(lastModel);

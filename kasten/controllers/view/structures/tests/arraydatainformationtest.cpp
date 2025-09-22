@@ -42,10 +42,11 @@ void ArrayDataInformationTest::initTestCase()
     qRegisterMetaType<DataInformation*>();
     LoggerWithContext lwc(nullptr, QString());
 
-    primitive = new ArrayDataInformation(QStringLiteral("primitives"), 0,
-                                         PrimitiveFactory::newInstance(QStringLiteral("child"), PrimitiveDataType::UInt32, lwc));
+    auto managedPrimitive = std::make_unique<ArrayDataInformation>(QStringLiteral("primitives"), 0,
+                                                                   PrimitiveFactory::newInstance(QStringLiteral("child"), PrimitiveDataType::UInt32, lwc));
+    primitive = managedPrimitive.get();
     primitiveSize = 32;
-    primitiveTop = std::make_unique<TopLevelDataInformation>(primitive);
+    primitiveTop = std::make_unique<TopLevelDataInformation>(std::move(managedPrimitive));
 
     QCOMPARE(primitive->isArray(), true);
     QCOMPARE(primitive->isBitfield(), false);
@@ -70,8 +71,9 @@ void ArrayDataInformationTest::initTestCase()
     auto* structs = new StructureDataInformation(QStringLiteral("vals"), std::move(structsChildren));
 
     complexSize = 64;
-    complex = new ArrayDataInformation(QStringLiteral("complex"), 0, structs);
-    complexTop = std::make_unique<TopLevelDataInformation>(complex);
+    auto managedComplex = std::make_unique<ArrayDataInformation>(QStringLiteral("complex"), 0, structs);
+    complex = managedComplex.get();
+    complexTop = std::make_unique<TopLevelDataInformation>(std::move(managedComplex));
 
     QCOMPARE(complex->isArray(), true);
     QCOMPARE(complex->isBitfield(), false);

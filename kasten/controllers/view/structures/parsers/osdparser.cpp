@@ -138,7 +138,7 @@ std::vector<std::unique_ptr<TopLevelDataInformation>> OsdParser::parseStructures
     QDomDocument document = openDoc(rootLogger.get());
     if (document.isNull()) {
         structures.emplace_back(std::make_unique<TopLevelDataInformation>(
-                              new DummyDataInformation(nullptr, fileInfo.fileName()), rootLogger.release(), nullptr, fileInfo));
+                                std::make_unique<DummyDataInformation>(nullptr, fileInfo.fileName()), rootLogger.release(), nullptr, fileInfo));
         return structures;
     }
 
@@ -146,7 +146,7 @@ std::vector<std::unique_ptr<TopLevelDataInformation>> OsdParser::parseStructures
     if (rootElem.isNull()) {
         rootLogger->error() << "Missing top level <data> element!";
         structures.emplace_back(std::make_unique<TopLevelDataInformation>(
-                              new DummyDataInformation(nullptr, fileInfo.fileName()), rootLogger.release(), nullptr, fileInfo));
+                                std::make_unique<DummyDataInformation>(nullptr, fileInfo.fileName()), rootLogger.release(), nullptr, fileInfo));
         return structures;
     }
     int count = 1;
@@ -160,7 +160,7 @@ std::vector<std::unique_ptr<TopLevelDataInformation>> OsdParser::parseStructures
         QVector<EnumDefinition::Ptr> enums = parseEnums(rootElem, logger);
         OsdParserInfo info(QString(), logger, nullptr, eng.get(), enums);
 
-        DataInformation* data = parseElement(elem, info);
+        auto data = std::unique_ptr<DataInformation>(parseElement(elem, info));
 
         if (!data) {
             QString name = readProperty(elem, PROPERTY_NAME());
@@ -169,9 +169,9 @@ std::vector<std::unique_ptr<TopLevelDataInformation>> OsdParser::parseStructures
             }
             qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "Failed to parse element" << elem.tagName() << name;
             qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "Parsing messages were:" << logger->messages();
-            data = new DummyDataInformation(nullptr, name);
+            data = std::make_unique<DummyDataInformation>(nullptr, name);
         }
-        auto& topData = structures.emplace_back(std::make_unique<TopLevelDataInformation>(data, logger, std::move(eng), fileInfo));
+        auto& topData = structures.emplace_back(std::make_unique<TopLevelDataInformation>(std::move(data), logger, std::move(eng), fileInfo));
         QString lockOffsetStr = readProperty(elem, PROPERTY_DEFAULT_LOCK_OFFSET());
         if (!lockOffsetStr.isEmpty()) {
             ParsedNumber<quint64> offset = ParserUtils::uint64FromString(lockOffsetStr);

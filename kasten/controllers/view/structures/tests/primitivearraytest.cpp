@@ -189,10 +189,11 @@ void PrimitiveArrayTest::testReadCustomizedPrimitiveInternal()
     primInfo->setCustomTypeName(QStringLiteral("mytype"));
     primInfo->setToStringFunction(engine->newFunction(customToStringFunc));
 
-    auto* dataInf = new ArrayDataInformation(QStringLiteral("values"),
-                                             endianModel->size() / sizeof(T),
-                                             primInfo);
-    const auto top = std::make_unique<TopLevelDataInformation>(dataInf, nullptr, std::move(engine));
+    auto managedDataInf = std::make_unique<ArrayDataInformation>(QStringLiteral("values"),
+                                                                 endianModel->size() / sizeof(T),
+                                                                 primInfo);
+    ArrayDataInformation* const dataInf = managedDataInf.get();
+    const auto top = std::make_unique<TopLevelDataInformation>(std::move(managedDataInf), nullptr, std::move(engine));
 
     QCOMPARE(dataInf->childCount(), uint(ENDIAN_SIZE / sizeof(T)));
     quint8 bitOffs = 0;
@@ -229,11 +230,12 @@ template <PrimitiveDataType primType, typename T>
 void PrimitiveArrayTest::testReadPrimitiveInternal()
 {
     LoggerWithContext lwc(nullptr, QString());
-    auto* dataInf = new ArrayDataInformation(QStringLiteral("values"),
-                                                             model->size() / sizeof(T),
-                                                             PrimitiveFactory::newInstance(QStringLiteral("value"), primType, lwc));
-    dataInf->setByteOrder(CURRENT_BYTE_ORDER);
-    const auto top = std::make_unique<TopLevelDataInformation>(dataInf, nullptr, ScriptEngineInitializer::newEngine());
+    auto managedDataInf = std::make_unique<ArrayDataInformation>(QStringLiteral("values"),
+                                                                 model->size() / sizeof(T),
+                                                                 PrimitiveFactory::newInstance(QStringLiteral("value"), primType, lwc));
+    managedDataInf->setByteOrder(CURRENT_BYTE_ORDER);
+    ArrayDataInformation* const dataInf = managedDataInf.get();
+    const auto top = std::make_unique<TopLevelDataInformation>(std::move(managedDataInf), nullptr, ScriptEngineInitializer::newEngine());
     QCOMPARE(dataInf->childCount(), uint(SIZE / sizeof(T)));
     quint8 bitOffs = 0;
     qint64 result = dataInf->readData(model.get(), 0, model->size() * 8, &bitOffs);
