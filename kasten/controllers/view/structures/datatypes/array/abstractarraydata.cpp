@@ -29,12 +29,13 @@ void AbstractArrayData::setParent(ArrayDataInformation* parent)
     setNewParentForChildren();
 }
 
-AbstractArrayData* AbstractArrayData::newArrayData(uint length, std::unique_ptr<DataInformation>&& type,
-                                                   ArrayDataInformation* parent)
+std::unique_ptr<AbstractArrayData> AbstractArrayData::newArrayData(uint length,
+                                                                   std::unique_ptr<DataInformation>&& type,
+                                                                   ArrayDataInformation* parent)
 {
     Q_CHECK_PTR(type);
     if (!type->isPrimitive()) {
-        return new ComplexArrayData(length, std::move(type), parent);
+        return std::make_unique<ComplexArrayData>(length, std::move(type), parent);
     }
     DataInformation* const rawTyoe = type.release();
     auto data = std::unique_ptr<PrimitiveDataInformation>(rawTyoe->asPrimitive());
@@ -42,37 +43,37 @@ AbstractArrayData* AbstractArrayData::newArrayData(uint length, std::unique_ptr<
     switch (data->type())
     {
     case PrimitiveDataType::Char:
-        return new PrimitiveArrayData<PrimitiveDataType::Char>(length, std::move(data), parent);
+        return std::make_unique<PrimitiveArrayData<PrimitiveDataType::Char>>(length, std::move(data), parent);
     case PrimitiveDataType::Int8:
-        return new PrimitiveArrayData<PrimitiveDataType::Int8>(length, std::move(data), parent);
+        return std::make_unique<PrimitiveArrayData<PrimitiveDataType::Int8>>(length, std::move(data), parent);
     case PrimitiveDataType::Int16:
-        return new PrimitiveArrayData<PrimitiveDataType::Int16>(length, std::move(data), parent);
+        return std::make_unique<PrimitiveArrayData<PrimitiveDataType::Int16>>(length, std::move(data), parent);
     case PrimitiveDataType::Int32:
-        return new PrimitiveArrayData<PrimitiveDataType::Int32>(length, std::move(data), parent);
+        return std::make_unique<PrimitiveArrayData<PrimitiveDataType::Int32>>(length, std::move(data), parent);
     case PrimitiveDataType::Int64:
-        return new PrimitiveArrayData<PrimitiveDataType::Int64>(length, std::move(data), parent);
+        return std::make_unique<PrimitiveArrayData<PrimitiveDataType::Int64>>(length, std::move(data), parent);
     case PrimitiveDataType::UInt8:
-        return new PrimitiveArrayData<PrimitiveDataType::UInt8>(length, std::move(data), parent);
+        return std::make_unique<PrimitiveArrayData<PrimitiveDataType::UInt8>>(length, std::move(data), parent);
     case PrimitiveDataType::UInt16:
-        return new PrimitiveArrayData<PrimitiveDataType::UInt16>(length, std::move(data), parent);
+        return std::make_unique<PrimitiveArrayData<PrimitiveDataType::UInt16>>(length, std::move(data), parent);
     case PrimitiveDataType::UInt32:
-        return new PrimitiveArrayData<PrimitiveDataType::UInt32>(length, std::move(data), parent);
+        return std::make_unique<PrimitiveArrayData<PrimitiveDataType::UInt32>>(length, std::move(data), parent);
     case PrimitiveDataType::UInt64:
-        return new PrimitiveArrayData<PrimitiveDataType::UInt64>(length, std::move(data), parent);
+        return std::make_unique<PrimitiveArrayData<PrimitiveDataType::UInt64>>(length, std::move(data), parent);
     case PrimitiveDataType::Bool8:
-        return new PrimitiveArrayData<PrimitiveDataType::Bool8>(length, std::move(data), parent);
+        return std::make_unique<PrimitiveArrayData<PrimitiveDataType::Bool8>>(length, std::move(data), parent);
     case PrimitiveDataType::Bool16:
-        return new PrimitiveArrayData<PrimitiveDataType::Bool16>(length, std::move(data), parent);
+        return std::make_unique<PrimitiveArrayData<PrimitiveDataType::Bool16>>(length, std::move(data), parent);
     case PrimitiveDataType::Bool32:
-        return new PrimitiveArrayData<PrimitiveDataType::Bool32>(length, std::move(data), parent);
+        return std::make_unique<PrimitiveArrayData<PrimitiveDataType::Bool32>>(length, std::move(data), parent);
     case PrimitiveDataType::Bool64:
-        return new PrimitiveArrayData<PrimitiveDataType::Bool64>(length, std::move(data), parent);
+        return std::make_unique<PrimitiveArrayData<PrimitiveDataType::Bool64>>(length, std::move(data), parent);
     case PrimitiveDataType::Float:
-        return new PrimitiveArrayData<PrimitiveDataType::Float>(length, std::move(data), parent);
+        return std::make_unique<PrimitiveArrayData<PrimitiveDataType::Float>>(length, std::move(data), parent);
     case PrimitiveDataType::Double:
-        return new PrimitiveArrayData<PrimitiveDataType::Double>(length, std::move(data), parent);
+        return std::make_unique<PrimitiveArrayData<PrimitiveDataType::Double>>(length, std::move(data), parent);
     default:
         // enum/bitfield/pointer need complex array data
-        return new ComplexArrayData(length, std::move(data), parent);
+        return std::make_unique<ComplexArrayData>(length, std::move(data), parent);
     }
 }

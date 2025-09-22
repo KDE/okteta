@@ -32,7 +32,7 @@ ArrayDataInformation::ArrayDataInformation(const QString& name, uint length,
     }
     Q_CHECK_PTR(childType);
     childType->setParent(this);
-    mData.reset(AbstractArrayData::newArrayData(length, std::move(childType), this));
+    mData = AbstractArrayData::newArrayData(length, std::move(childType), this);
 }
 
 ArrayDataInformation::ArrayDataInformation(const ArrayDataInformation& d)
@@ -41,7 +41,7 @@ ArrayDataInformation::ArrayDataInformation(const ArrayDataInformation& d)
 {
     uint length = d.mData->length();
     DataInformation* childType = d.mData->childType();
-    mData.reset(AbstractArrayData::newArrayData(length, std::unique_ptr<DataInformation>(childType->clone()), this));
+    mData = AbstractArrayData::newArrayData(length, std::unique_ptr<DataInformation>(childType->clone()), this);
 }
 
 ArrayDataInformation::~ArrayDataInformation() = default;
@@ -74,7 +74,7 @@ void ArrayDataInformation::setArrayType(std::unique_ptr<DataInformation>&& newCh
     if (len > 0) {
         // first create with length of 0, then change length to actual length (to ensure model is correct)
         topLevel->_childCountAboutToChange(this, len, 0);
-        mData.reset(AbstractArrayData::newArrayData(0, std::move(newChildType), this));
+        mData = AbstractArrayData::newArrayData(0, std::move(newChildType), this);
         topLevel->_childCountChanged(this, len, 0);
 
         topLevel->_childCountAboutToChange(this, 0, len);
@@ -82,7 +82,7 @@ void ArrayDataInformation::setArrayType(std::unique_ptr<DataInformation>&& newCh
         topLevel->_childCountChanged(this, 0, len);
     } else {
         // no need to emit the signals, which cause expensive model update
-        mData.reset(AbstractArrayData::newArrayData(len, std::move(newChildType), this));
+        mData = AbstractArrayData::newArrayData(len, std::move(newChildType), this);
         // only the type of the array changed -> emit that this has changed data
         topLevel->setChildDataChanged();
     }

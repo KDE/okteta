@@ -74,9 +74,9 @@ public:
     virtual void setChildWidgetData(uint index, QWidget* w) const = 0;
 
     /** Takes ownership over @p type ! */
-    static AbstractArrayData* newArrayData(uint length,
-                                           std::unique_ptr<DataInformation>&& type,
-                                           ArrayDataInformation* parent);
+    static std::unique_ptr<AbstractArrayData> newArrayData(uint length,
+                                                           std::unique_ptr<DataInformation>&& type,
+                                                           ArrayDataInformation* parent);
 
 protected:
     virtual void setNewParentForChildren() = 0;
