@@ -22,6 +22,7 @@
 #include <QTest>
 // Std
 #include <memory>
+#include <vector>
 #include <utility>
 
 struct ExpectedResults
@@ -70,6 +71,7 @@ private:
 
 private Q_SLOTS:
     void initTestCase();
+
     void testPrimitives();
     void testBitfields();
     void testStructs();
@@ -79,24 +81,23 @@ private Q_SLOTS:
     void testString();
     void testDummy();
     void testTopLevel();
-    void cleanupTestCase();
 
 private:
-    QVector<PrimitiveDataInformation*> primitives;
-    QVector<AbstractBitfieldDataInformation*> bitfields;
-    TopLevelDataInformation* topLevel;
-    StructureDataInformation* emptyStruct;
-    StructureDataInformation* structWithChildren;
-    UnionDataInformation* emptyUnion;
-    UnionDataInformation* unionWithChildren;
-    ArrayDataInformation* emptyPrimitiveArray;
-    ArrayDataInformation* emptyComplexArray;
-    ArrayDataInformation* primitiveArrayWithChildren;
-    ArrayDataInformation* complexArrayWithChildren;
-    StringDataInformation* emptyString;
-    DummyDataInformation* dummy;
-    FlagDataInformation* flagData;
-    EnumDataInformation* enumData;
+    std::unique_ptr<TopLevelDataInformation> topLevel;
+    std::unique_ptr<StructureDataInformation> emptyStruct;
+    std::unique_ptr<StructureDataInformation> structWithChildren;
+    std::unique_ptr<UnionDataInformation> emptyUnion;
+    std::unique_ptr<UnionDataInformation> unionWithChildren;
+    std::unique_ptr<ArrayDataInformation> emptyPrimitiveArray;
+    std::unique_ptr<ArrayDataInformation> emptyComplexArray;
+    std::unique_ptr<ArrayDataInformation> primitiveArrayWithChildren;
+    std::unique_ptr<ArrayDataInformation> complexArrayWithChildren;
+    std::unique_ptr<StringDataInformation> emptyString;
+    std::unique_ptr<DummyDataInformation> dummy;
+    std::unique_ptr<FlagDataInformation> flagData;
+    std::unique_ptr<EnumDataInformation> enumData;
+    std::vector<std::unique_ptr<AbstractBitfieldDataInformation>> bitfields;
+    std::vector<std::unique_ptr<PrimitiveDataInformation>> primitives;
 };
 
 #if 0
@@ -255,42 +256,42 @@ void BasicDataInformationTest::initTestCase()
 
     PrimitiveDataType type = PrimitiveDataType::START;
     while (type < PrimitiveDataType::Bitfield) {
-        primitives.append(PrimitiveFactory::newInstance(QStringLiteral("prim"), type, lwc));
+        primitives.emplace_back(std::unique_ptr<PrimitiveDataInformation>(PrimitiveFactory::newInstance(QStringLiteral("prim"), type, lwc)));
         type = static_cast<PrimitiveDataType>(static_cast<int>(type) + 1);
     }
     QCOMPARE(PrimitiveFactory::newInstance(QStringLiteral("invalid"), PrimitiveDataType::Bitfield, lwc), static_cast<PrimitiveDataInformation*>(nullptr));
     QCOMPARE(PrimitiveFactory::newInstance(QStringLiteral("invalid"), QStringLiteral("invalid_type"), lwc), static_cast<PrimitiveDataInformation*>(nullptr));
-    bitfields.append(new BoolBitfieldDataInformation(QStringLiteral("bitfield"), 24));
-    bitfields.append(new UnsignedBitfieldDataInformation(QStringLiteral("bitfield"), 24));
-    bitfields.append(new SignedBitfieldDataInformation(QStringLiteral("bitfield"), 24));
+    bitfields.emplace_back(std::make_unique<BoolBitfieldDataInformation>(QStringLiteral("bitfield"), 24));
+    bitfields.emplace_back(std::make_unique<UnsignedBitfieldDataInformation>(QStringLiteral("bitfield"), 24));
+    bitfields.emplace_back(std::make_unique<SignedBitfieldDataInformation>(QStringLiteral("bitfield"), 24));
 
-    emptyStruct = new StructureDataInformation(QStringLiteral("emptyStruct"));
+    emptyStruct = std::make_unique<StructureDataInformation>(QStringLiteral("emptyStruct"));
     std::vector<std::unique_ptr<DataInformation>> structChildren;
     structChildren.emplace_back(std::unique_ptr<DataInformation>(PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc)));
     structChildren.emplace_back(std::unique_ptr<DataInformation>(PrimitiveFactory::newInstance(QStringLiteral("prim2"), PrimitiveDataType::UInt64, lwc)));
-    structWithChildren = new StructureDataInformation(QStringLiteral("structWithChildren"), std::move(structChildren));
+    structWithChildren = std::make_unique<StructureDataInformation>(QStringLiteral("structWithChildren"), std::move(structChildren));
 
-    emptyUnion = new UnionDataInformation(QStringLiteral("emptyUnion"));
+    emptyUnion = std::make_unique<UnionDataInformation>(QStringLiteral("emptyUnion"));
     std::vector<std::unique_ptr<DataInformation>> unionChildren;
     unionChildren.emplace_back(std::unique_ptr<DataInformation>(PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc)));
     unionChildren.emplace_back(std::unique_ptr<DataInformation>(PrimitiveFactory::newInstance(QStringLiteral("prim2"), PrimitiveDataType::UInt64, lwc)));
-    unionWithChildren = new UnionDataInformation(QStringLiteral("unionWithChildren"), std::move(unionChildren));
+    unionWithChildren = std::make_unique<UnionDataInformation>(QStringLiteral("unionWithChildren"), std::move(unionChildren));
 
-    emptyPrimitiveArray = new ArrayDataInformation(QStringLiteral("emptyPrimitiveArray"), 0, PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc));
-    emptyComplexArray = new ArrayDataInformation(QStringLiteral("emptyComplexArray"), 0, structWithChildren->clone());
-    primitiveArrayWithChildren = new ArrayDataInformation(QStringLiteral("primitiveArrayWithChildren"), 2, PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc));
-    complexArrayWithChildren = new ArrayDataInformation(QStringLiteral("complexArrayWithChildren"), 2, structWithChildren->clone());
+    emptyPrimitiveArray = std::make_unique<ArrayDataInformation>(QStringLiteral("emptyPrimitiveArray"), 0, PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc));
+    emptyComplexArray = std::make_unique<ArrayDataInformation>(QStringLiteral("emptyComplexArray"), 0, structWithChildren->clone());
+    primitiveArrayWithChildren = std::make_unique<ArrayDataInformation>(QStringLiteral("primitiveArrayWithChildren"), 2, PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc));
+    complexArrayWithChildren = std::make_unique<ArrayDataInformation>(QStringLiteral("complexArrayWithChildren"), 2, structWithChildren->clone());
 
     QMap<AllPrimitiveTypes, QString> enumVals;
     enumVals[1] = QStringLiteral("one");
     enumVals[2] = QStringLiteral("two");
     enumVals[4] = QStringLiteral("four");
     EnumDefinition::Ptr edef(new EnumDefinition(enumVals, QStringLiteral("eDef"), PrimitiveDataType::UInt32));
-    flagData = new FlagDataInformation(QStringLiteral("flagData"), PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc), edef);
-    enumData = new EnumDataInformation(QStringLiteral("enumData"), PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc), edef);
-    emptyString = new StringDataInformation(QStringLiteral("string"), StringDataInformation::StringType::ASCII);
-    dummy = new DummyDataInformation(nullptr);
-    topLevel = new TopLevelDataInformation(new DummyDataInformation(nullptr));
+    flagData = std::make_unique<FlagDataInformation>(QStringLiteral("flagData"), PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc), edef);
+    enumData = std::make_unique<EnumDataInformation>(QStringLiteral("enumData"), PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc), edef);
+    emptyString = std::make_unique<StringDataInformation>(QStringLiteral("string"), StringDataInformation::StringType::ASCII);
+    dummy = std::make_unique<DummyDataInformation>(nullptr);
+    topLevel = std::make_unique<TopLevelDataInformation>(new DummyDataInformation(nullptr));
 }
 
 void BasicDataInformationTest::testBitfields()
@@ -300,8 +301,8 @@ void BasicDataInformationTest::testBitfields()
     exp.isBitfield = true;
     exp.size = 24;
     exp.columnFlags[DataInformation::ColumnValue] = Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable;
-    for (auto* bitField : std::as_const(bitfields)) {
-        basicTest(bitField, exp);
+    for (const auto& bitField : bitfields) {
+        basicTest(bitField.get(), exp);
     }
 }
 
@@ -310,8 +311,8 @@ void BasicDataInformationTest::testPrimitives()
     ExpectedResults exp;
     exp.isPrimitive = true;
     exp.columnFlags[DataInformation::ColumnValue] = Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable;
-    for (int i = 0; i < primitives.size(); ++i) {
-        PrimitiveDataInformation* data = primitives.at(i);
+    for (std::size_t i = 0; i < primitives.size(); ++i) {
+        PrimitiveDataInformation* const data = primitives[i].get();
         PrimitiveDataType t = data->type();
         QCOMPARE(t, PrimitiveDataType(static_cast<PrimitiveDataType>(i)));
         QCOMPARE(data->type(), PrimitiveDataType(static_cast<PrimitiveDataType>(i)));
@@ -335,13 +336,13 @@ void BasicDataInformationTest::testArrays()
     ExpectedResults exp;
     exp.isArray = true;
     exp.size = 0;
-    basicTest(emptyComplexArray, exp);
-    basicTest(emptyPrimitiveArray, exp);
+    basicTest(emptyComplexArray.get(), exp);
+    basicTest(emptyPrimitiveArray.get(), exp);
     exp.hasChildren = true;
     exp.size = 64;
-    basicTest(primitiveArrayWithChildren, exp);
+    basicTest(primitiveArrayWithChildren.get(), exp);
     exp.size = 96 * 2;
-    basicTest(complexArrayWithChildren, exp);
+    basicTest(complexArrayWithChildren.get(), exp);
 }
 
 void BasicDataInformationTest::testEnums()
@@ -351,8 +352,8 @@ void BasicDataInformationTest::testEnums()
     exp.isEnum = true;
     exp.size = 32;
     exp.columnFlags[DataInformation::ColumnValue] = Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable;
-    basicTest(enumData, exp);
-    basicTest(flagData, exp);
+    basicTest(enumData.get(), exp);
+    basicTest(flagData.get(), exp);
 }
 
 void BasicDataInformationTest::testStructs()
@@ -360,10 +361,10 @@ void BasicDataInformationTest::testStructs()
     ExpectedResults exp;
     exp.isStruct = true;
     exp.size = 0;
-    basicTest(emptyStruct, exp);
+    basicTest(emptyStruct.get(), exp);
     exp.hasChildren = true;
     exp.size = 96;
-    basicTest(structWithChildren, exp);
+    basicTest(structWithChildren.get(), exp);
 }
 
 void BasicDataInformationTest::testUnions()
@@ -371,10 +372,10 @@ void BasicDataInformationTest::testUnions()
     ExpectedResults exp;
     exp.isUnion = true;
     exp.size = 0;
-    basicTest(emptyUnion, exp);
+    basicTest(emptyUnion.get(), exp);
     exp.hasChildren = true;
     exp.size = 64;
-    basicTest(unionWithChildren, exp);
+    basicTest(unionWithChildren.get(), exp);
 }
 
 void BasicDataInformationTest::testDummy()
@@ -382,7 +383,7 @@ void BasicDataInformationTest::testDummy()
     ExpectedResults exp;
     exp.isDummy = true;
     exp.size = 0;
-    basicTest(dummy, exp);
+    basicTest(dummy.get(), exp);
 }
 
 void BasicDataInformationTest::testString()
@@ -390,33 +391,14 @@ void BasicDataInformationTest::testString()
     ExpectedResults exp;
     exp.isString = true;
     exp.size = 0;
-    basicTest(emptyString, exp);
+    basicTest(emptyString.get(), exp);
 }
 
 void BasicDataInformationTest::testTopLevel()
 {
     ExpectedResults exp;
     exp.isTopLevel = true;
-    basicTest(topLevel, exp);
-}
-
-void BasicDataInformationTest::cleanupTestCase()
-{
-    qDeleteAll(primitives);
-    qDeleteAll(bitfields);
-    delete emptyStruct;
-    delete structWithChildren;
-    delete emptyUnion;
-    delete unionWithChildren;
-    delete emptyPrimitiveArray;
-    delete emptyComplexArray;
-    delete primitiveArrayWithChildren;
-    delete complexArrayWithChildren;
-    delete flagData;
-    delete enumData;
-    delete emptyString;
-    delete dummy;
-    delete topLevel;
+    basicTest(topLevel.get(), exp);
 }
 
 QTEST_GUILESS_MAIN(BasicDataInformationTest)
