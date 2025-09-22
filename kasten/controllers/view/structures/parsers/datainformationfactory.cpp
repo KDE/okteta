@@ -93,13 +93,13 @@ T* newEnumOrFlags(const EnumParsedData& pd)
                              << ") do not match!";
         return nullptr;
     }
-    PrimitiveDataInformation* primData = PrimitiveFactory::newInstance(pd.name, primitiveType, lwc);
+    auto primData = std::unique_ptr<PrimitiveDataInformation>(PrimitiveFactory::newInstance(pd.name, primitiveType, lwc));
     // TODO allow bitfields?
     if (!primData) {
         pd.error() << "Could not create a value object for this enum!";
         return nullptr;
     }
-    return new T(pd.name, primData, definition, pd.parent);
+    return new T(pd.name, std::move(primData), definition, pd.parent);
 }
 
 template <class T>
@@ -328,7 +328,8 @@ PointerDataInformation* DataInformationFactory::newPointer(const PointerParsedDa
         return nullptr;
     }
     return new PointerDataInformation(pd.name, std::unique_ptr<DataInformation>(pd.pointerTarget),
-                                      primValue, pd.parent,
+                                      std::unique_ptr<PrimitiveDataInformation>(primValue),
+                                      pd.parent,
                                       pd.pointerScale, pd.interpretFunc);
 }
 

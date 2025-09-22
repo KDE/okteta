@@ -14,15 +14,16 @@
 #include <KComboBox>
 #include <KLocalizedString>
 
-EnumDataInformation::EnumDataInformation(const QString& name, PrimitiveDataInformation* type,
+EnumDataInformation::EnumDataInformation(const QString& name,
+                                         std::unique_ptr<PrimitiveDataInformation>&& type,
                                          const EnumDefinition::Ptr& enumDef, DataInformation* parent)
-    : PrimitiveDataInformationWrapper(name, type, parent)
+    : PrimitiveDataInformationWrapper(name, std::move(type), parent)
     , mEnum(enumDef)
 {
-    Q_CHECK_PTR(type);
-    if (enumDef->type() != type->type()) {
+    Q_CHECK_PTR(mValue);
+    if (enumDef->type() != mValue->type()) {
         logWarn() << "incompatible types in definition and value: "
-                  << enumDef->type() << "and " << type->type();
+                  << enumDef->type() << "and " << mValue->type();
     }
     mValue->setParent(this);
 }

@@ -22,9 +22,10 @@
 
 PointerDataInformation::PointerDataInformation(const QString& name,
                                                std::unique_ptr<DataInformation>&& pointerTarget,
-                                               PrimitiveDataInformation* valueType, DataInformation* parent,
+                                               std::unique_ptr<PrimitiveDataInformation>&& valueType,
+                                               DataInformation* parent,
                                                qint64 pointerScale, const QScriptValue& interpretFunction)
-    : PrimitiveDataInformationWrapper(name, valueType, parent)
+    : PrimitiveDataInformationWrapper(name, std::move(valueType), parent)
     , mPointerTarget(std::move(pointerTarget))
     , mPointerScale(pointerScale)
 {

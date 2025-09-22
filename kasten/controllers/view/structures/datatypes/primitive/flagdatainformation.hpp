@@ -15,7 +15,9 @@ class FlagDataInformation : public EnumDataInformation
     DATAINFORMATION_CLONE(FlagDataInformation, EnumDataInformation) {}
 
 public:
-    FlagDataInformation(const QString& name, PrimitiveDataInformation* type, const EnumDefinition::Ptr& enumDef,
+    FlagDataInformation(const QString& name,
+                        std::unique_ptr<PrimitiveDataInformation>&& type,
+                        const EnumDefinition::Ptr& enumDef,
                         DataInformation* parent = nullptr);
 
 private: // DataInformation API

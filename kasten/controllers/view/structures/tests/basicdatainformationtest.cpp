@@ -289,8 +289,8 @@ void BasicDataInformationTest::initTestCase()
     enumVals[2] = QStringLiteral("two");
     enumVals[4] = QStringLiteral("four");
     EnumDefinition::Ptr edef(new EnumDefinition(enumVals, QStringLiteral("eDef"), PrimitiveDataType::UInt32));
-    flagData = std::make_unique<FlagDataInformation>(QStringLiteral("flagData"), PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc), edef);
-    enumData = std::make_unique<EnumDataInformation>(QStringLiteral("enumData"), PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc), edef);
+    flagData = std::make_unique<FlagDataInformation>(QStringLiteral("flagData"), std::unique_ptr<PrimitiveDataInformation>(PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc)), edef);
+    enumData = std::make_unique<EnumDataInformation>(QStringLiteral("enumData"), std::unique_ptr<PrimitiveDataInformation>(PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc)), edef);
     emptyString = std::make_unique<StringDataInformation>(QStringLiteral("string"), StringDataInformation::StringType::ASCII);
     dummy = std::make_unique<DummyDataInformation>(nullptr);
     topLevel = std::make_unique<TopLevelDataInformation>(std::make_unique<DummyDataInformation>(nullptr));

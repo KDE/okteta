@@ -95,7 +95,8 @@ protected:
 
 public:
     /** takes ownership of @p valueType */
-    PrimitiveDataInformationWrapper(const QString& name, PrimitiveDataInformation* valueType,
+    PrimitiveDataInformationWrapper(const QString& name,
+                                    std::unique_ptr<PrimitiveDataInformation>&& valueType,
                                     DataInformation* parent = nullptr);
     ~PrimitiveDataInformationWrapper() override = default;
 

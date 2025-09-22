@@ -23,7 +23,8 @@ public:
      */
     PointerDataInformation(const QString& name,
                            std::unique_ptr<DataInformation>&& pointerTarget,
-                           PrimitiveDataInformation* valueType, DataInformation* parent,
+                           std::unique_ptr<PrimitiveDataInformation>&& valueType,
+                           DataInformation* parent,
                            qint64 pointerScale, const QScriptValue& interpretFunction);
     ~PointerDataInformation() override;
 

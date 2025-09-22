@@ -17,7 +17,8 @@ class EnumDataInformation : public PrimitiveDataInformationWrapper
 
 public:
     /** this object takes ownership of @p type */
-    EnumDataInformation(const QString& name, PrimitiveDataInformation* type,
+    EnumDataInformation(const QString& name,
+                        std::unique_ptr<PrimitiveDataInformation>&& type,
                         const EnumDefinition::Ptr& enumDef, DataInformation* parent = nullptr);
     ~EnumDataInformation() override;
 

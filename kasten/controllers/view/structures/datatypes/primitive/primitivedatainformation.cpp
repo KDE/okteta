@@ -19,13 +19,13 @@ PrimitiveDataInformationWrapper::PrimitiveDataInformationWrapper(const Primitive
 }
 
 PrimitiveDataInformationWrapper::PrimitiveDataInformationWrapper(const QString& name,
-                                                                 PrimitiveDataInformation* valueType, DataInformation* parent)
+                                                                 std::unique_ptr<PrimitiveDataInformation>&& valueType,
+                                                                 DataInformation* parent)
     : PrimitiveDataInformation(name, parent)
-    , mValue(valueType)
+    , mValue(std::move(valueType))
 {
-    Q_CHECK_PTR(valueType);
+    Q_CHECK_PTR(mValue);
     mValue->setParent(this);
-
 }
 
 // The inline destructor makes the compiler unhappy

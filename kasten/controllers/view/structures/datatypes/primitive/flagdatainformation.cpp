@@ -11,11 +11,12 @@
 // Qt
 #include <QVarLengthArray>
 
-FlagDataInformation::FlagDataInformation(const QString& name, PrimitiveDataInformation* type,
+FlagDataInformation::FlagDataInformation(const QString& name,
+                                         std::unique_ptr<PrimitiveDataInformation>&& type,
                                          const EnumDefinition::Ptr& enumDef, DataInformation* parent)
-    : EnumDataInformation(name, type, enumDef, parent)
+    : EnumDataInformation(name, std::move(type), enumDef, parent)
 {
-    Q_ASSERT_X(type->type() != PrimitiveDataType::Double && type->type() != PrimitiveDataType::Float && type->type() != PrimitiveDataType::Invalid,
+    Q_ASSERT_X(mValue->type() != PrimitiveDataType::Double && mValue->type() != PrimitiveDataType::Float && mValue->type() != PrimitiveDataType::Invalid,
                "FlagDataInformation::FlagDataInformation", "Bitflags only work with integers!");
 }
 

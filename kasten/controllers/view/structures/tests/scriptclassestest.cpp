@@ -147,11 +147,11 @@ void ScriptClassesTest::initTestCase()
     EnumDefinition::Ptr enumDef(new EnumDefinition(enumValues,
                                                    QStringLiteral("theEnum"), PrimitiveDataType::Int32));
     auto managedEnumData = std::make_unique<EnumDataInformation>(QStringLiteral("enumData"),
-                                                                 PrimitiveFactory::newInstance(QStringLiteral("dummy"), PrimitiveDataType::Int32, lwc), enumDef);
+                                                                 std::unique_ptr<PrimitiveDataInformation>(PrimitiveFactory::newInstance(QStringLiteral("dummy"), PrimitiveDataType::Int32, lwc)), enumDef);
     enumData = managedEnumData.get();
     enumDataTop = std::make_unique<TopLevelDataInformation>(std::move(managedEnumData), nullptr, ScriptEngineInitializer::newEngine());
     auto managedFlagData = std::make_unique<FlagDataInformation>(QStringLiteral("flagData"),
-                                                                 PrimitiveFactory::newInstance(QStringLiteral("dummy"), PrimitiveDataType::Int32, lwc), enumDef);
+                                                                 std::unique_ptr<PrimitiveDataInformation>(PrimitiveFactory::newInstance(QStringLiteral("dummy"), PrimitiveDataType::Int32, lwc)), enumDef);
     flagData = managedFlagData.get();
     flagDataTop = std::make_unique<TopLevelDataInformation>(std::move(managedFlagData), nullptr, ScriptEngineInitializer::newEngine());
 
