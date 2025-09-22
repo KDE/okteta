@@ -44,7 +44,7 @@ public:
 
 public: // DataInformationWithChildren API
     [[nodiscard]]
-    bool replaceChildAt(unsigned int index, DataInformation* newChild) override;
+    bool replaceChildAt(unsigned int index, std::unique_ptr<DataInformation>&& newChild) override;
 
 public: // DataInformation API
     [[nodiscard]]

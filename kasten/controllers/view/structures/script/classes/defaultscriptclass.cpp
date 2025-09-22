@@ -204,7 +204,7 @@ void DefaultScriptClass::setDataType(const QScriptValue& value, DataInformation*
         int index = stru->indexOf(data);
         Q_ASSERT(index != -1);
         Q_ASSERT(uint(index) < stru->childCount());
-        replaced = stru->replaceChildAt(index, newType);
+        replaced = stru->replaceChildAt(index, std::unique_ptr<DataInformation>(newType));
         if (!replaced) {
             stru->logError() << "failed to replace child at index" << index;
         }
@@ -213,7 +213,7 @@ void DefaultScriptClass::setDataType(const QScriptValue& value, DataInformation*
         int index = un->indexOf(data);
         Q_ASSERT(index != -1);
         Q_ASSERT(uint(index) < un->childCount());
-        replaced = un->replaceChildAt(index, newType);
+        replaced = un->replaceChildAt(index, std::unique_ptr<DataInformation>(newType));
         if (!replaced) {
             un->logError() << "failed to replace child at index" << index;
         }

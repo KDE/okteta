@@ -31,7 +31,7 @@ public: // API to implement
      *  otherwise it must be deleted)
      * @return true if replacing was successful, false otherwise */
     [[nodiscard]]
-    virtual bool replaceChildAt(unsigned int index, DataInformation* newChild);
+    virtual bool replaceChildAt(unsigned int index, std::unique_ptr<DataInformation>&& newChild);
 
 public: // DataInformation API
     [[nodiscard]]

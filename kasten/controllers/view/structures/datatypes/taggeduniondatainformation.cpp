@@ -217,7 +217,7 @@ BitCount32 TaggedUnionDataInformation::size() const
     return total;
 }
 
-bool TaggedUnionDataInformation::replaceChildAt(unsigned int index, DataInformation* newChild)
+bool TaggedUnionDataInformation::replaceChildAt(unsigned int index, std::unique_ptr<DataInformation>&& newChild)
 {
     Q_ASSERT(false); // TODO implement
     Q_UNUSED(index)

@@ -180,7 +180,7 @@ void DataInformationWithChildren::appendChild(std::unique_ptr<DataInformation>&&
     }
 }
 
-bool DataInformationWithChildren::replaceChildAt(unsigned int index, DataInformation* newChild)
+bool DataInformationWithChildren::replaceChildAt(unsigned int index, std::unique_ptr<DataInformation>&& newChild)
 {
     Q_ASSERT(index < mChildren.size());
     Q_CHECK_PTR(newChild);
@@ -188,7 +188,7 @@ bool DataInformationWithChildren::replaceChildAt(unsigned int index, DataInforma
         return false;
     }
 
-    mChildren[index] = std::unique_ptr<DataInformation>(newChild);
+    mChildren[index] = std::move(newChild);
     return true;
 }
 
