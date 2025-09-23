@@ -341,11 +341,11 @@ std::unique_ptr<PointerDataInformation> OsdParser::pointerFromXML(const QDomElem
     return std::unique_ptr<PointerDataInformation>(DataInformationFactory::newPointer(ppd));
 }
 
-PrimitiveDataInformation* OsdParser::primitiveFromXML(const QDomElement& xmlElem, const OsdParserInfo& info)
+std::unique_ptr<PrimitiveDataInformation> OsdParser::primitiveFromXML(const QDomElement& xmlElem, const OsdParserInfo& info)
 {
     PrimitiveParsedData ppd(info);
     ppd.type = readProperty(xmlElem, PROPERTY_TYPE());
-    return DataInformationFactory::newPrimitive(ppd);
+    return std::unique_ptr<PrimitiveDataInformation>(DataInformationFactory::newPrimitive(ppd));
 }
 
 std::unique_ptr<AbstractBitfieldDataInformation> OsdParser::bitfieldFromXML(const QDomElement& xmlElem,
@@ -419,7 +419,7 @@ std::unique_ptr<DataInformation> OsdParser::parseElement(const QDomElement& elem
     } else if (tag == TYPE_BITFIELD()) {
         data = bitfieldFromXML(elem, info);
     } else if (tag == TYPE_PRIMITIVE()) {
-        data = std::unique_ptr<DataInformation>(primitiveFromXML(elem, info));
+        data = primitiveFromXML(elem, info);
     } else if (tag == TYPE_UNION()) {
         data = unionFromXML(elem, info);
     } else if (tag == TYPE_ENUM()) {
