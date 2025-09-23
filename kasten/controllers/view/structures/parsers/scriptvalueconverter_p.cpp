@@ -204,7 +204,7 @@ std::unique_ptr<EnumDataInformation> toEnum(const QScriptValue& value, bool flag
     epd.enumValuesObject = value.property(PROPERTY_ENUM_VALUES());
 
     if (flags) {
-        return std::unique_ptr<EnumDataInformation>(DataInformationFactory::newFlags(epd));
+        return DataInformationFactory::newFlags(epd);
     }
 
     return std::unique_ptr<EnumDataInformation>(DataInformationFactory::newEnum(epd));

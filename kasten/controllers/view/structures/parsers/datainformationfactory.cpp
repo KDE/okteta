@@ -174,9 +174,9 @@ EnumDataInformation* DataInformationFactory::newEnum(const EnumParsedData& pd)
     return newEnumOrFlags<EnumDataInformation>(pd);
 }
 
-FlagDataInformation* DataInformationFactory::newFlags(const EnumParsedData& pd)
+std::unique_ptr<FlagDataInformation> DataInformationFactory::newFlags(const EnumParsedData& pd)
 {
-    return newEnumOrFlags<FlagDataInformation>(pd);
+    return std::unique_ptr<FlagDataInformation>(newEnumOrFlags<FlagDataInformation>(pd));
 }
 
 std::unique_ptr<ArrayDataInformation> DataInformationFactory::newArray(ArrayParsedData& pd)

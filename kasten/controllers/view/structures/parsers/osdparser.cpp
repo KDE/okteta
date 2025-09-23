@@ -388,7 +388,7 @@ std::unique_ptr<EnumDataInformation> OsdParser::enumFromXML(const QDomElement& x
     }
 
     if (isFlags) {
-        return std::unique_ptr<EnumDataInformation>(DataInformationFactory::newFlags(epd));
+        return DataInformationFactory::newFlags(epd);
     }
 
     return std::unique_ptr<EnumDataInformation>(DataInformationFactory::newEnum(epd));
