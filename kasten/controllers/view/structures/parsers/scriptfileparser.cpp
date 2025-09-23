@@ -33,21 +33,21 @@ std::vector<std::unique_ptr<TopLevelDataInformation>> ScriptFileParser::parseStr
     std::vector<std::unique_ptr<TopLevelDataInformation>> ret;
 
     std::unique_ptr<QScriptEngine> engine = ScriptEngineInitializer::newEngine();
-    auto* logger = new ScriptLogger();
+    auto logger = std::make_unique<ScriptLogger>();
 
-    QScriptValue value = loadScriptValue(logger, engine.get());
+    QScriptValue value = loadScriptValue(logger.get(), engine.get());
     std::unique_ptr<DataInformation> dataInf;
     if (!value.isValid()) {
         dataInf = std::make_unique<DummyDataInformation>(nullptr, mPluginName);
     } else {
-        dataInf = std::unique_ptr<DataInformation>(ScriptValueConverter::convert(value, mPluginName, logger));
+        dataInf = std::unique_ptr<DataInformation>(ScriptValueConverter::convert(value, mPluginName, logger.get()));
     }
 
     if (!dataInf) {
         dataInf = std::make_unique<DummyDataInformation>(nullptr, mPluginName);
     }
     const QFileInfo fileInfo(mAbsolutePath);
-    auto& top = ret.emplace_back(std::make_unique<TopLevelDataInformation>(std::move(dataInf), logger, std::move(engine), fileInfo));
+    auto& top = ret.emplace_back(std::make_unique<TopLevelDataInformation>(std::move(dataInf), std::move(logger), std::move(engine), fileInfo));
     // handle default lock offset
     QScriptValue lockOffset = value.property(ParserStrings::PROPERTY_DEFAULT_LOCK_OFFSET());
     if (lockOffset.isValid()) {

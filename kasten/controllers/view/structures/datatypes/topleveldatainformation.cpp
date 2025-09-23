@@ -25,11 +25,11 @@
 const Okteta::Address TopLevelDataInformation::INVALID_OFFSET = std::numeric_limits<Okteta::Address>::max();
 
 TopLevelDataInformation::TopLevelDataInformation(std::unique_ptr<DataInformation>&& data,
-                                                 ScriptLogger* logger,
+                                                 std::unique_ptr<ScriptLogger>&& logger,
                                                  std::unique_ptr<QScriptEngine>&& engine, const QFileInfo& structureFile)
     : QObject(nullptr)
     , mData(std::move(data))
-    , mLogger(logger)
+    , mLogger(std::move(logger))
     , mStructureFile(structureFile)
     , mValid(!mData->isDummy())
     , mChildDataChanged(false)

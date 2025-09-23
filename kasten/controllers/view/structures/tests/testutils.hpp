@@ -56,12 +56,12 @@ std::unique_ptr<DataInformation> evalAndParse(QScriptEngine* eng, const char* co
 
 std::unique_ptr<TopLevelDataInformation> evalAndParse(const QString& code)
 {
-    auto* l = new ScriptLogger();
+    auto l = std::make_unique<ScriptLogger>();
     l->setLogToStdOut(true);
     std::unique_ptr<QScriptEngine> engine = ScriptEngineInitializer::newEngine();
-    std::unique_ptr<DataInformation> inf = evalAndParse(engine.get(), code, l);
+    std::unique_ptr<DataInformation> inf = evalAndParse(engine.get(), code, l.get());
     QTEST_ASSERT(inf);
-    return std::make_unique<TopLevelDataInformation>(std::move(inf), l, std::move(engine));
+    return std::make_unique<TopLevelDataInformation>(std::move(inf), std::move(l), std::move(engine));
 }
 
 std::unique_ptr<TopLevelDataInformation> evalAndParse(const char* code)

@@ -51,7 +51,7 @@ public:
      *  @param structureFile the file which this was loaded from
      */
     explicit TopLevelDataInformation(std::unique_ptr<DataInformation>&& data,
-                                     ScriptLogger* logger = nullptr,
+                                     std::unique_ptr<ScriptLogger>&& logger = {},
                                      std::unique_ptr<QScriptEngine>&& engine = nullptr,
                                      const QFileInfo& structureFile = QFileInfo());
     ~TopLevelDataInformation() override;
