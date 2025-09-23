@@ -61,6 +61,9 @@ public:
 
     void selectBytesInView(const QModelIndex& idx);
 
+    void mark(const QModelIndex& idx);
+    void unmark(/*const QModelIndex& idx*/);
+
     // interface for model
     QVariant headerData(int column, int role) const;
     int childCount() const;
@@ -82,11 +85,6 @@ Q_SIGNALS:
     void childrenRemoved(const DataInformation* sender, uint startIndex, uint endIndex);
 
 public Q_SLOTS:
-    void setByteOrder(int order);
-    void mark(const QModelIndex& idx);
-    void unmark(/*const QModelIndex& idx*/);
-    void updateData(const Okteta::ArrayChangeMetricsList& list);
-    void addChildItem(TopLevelDataInformation* child);
     void setSelectedStructuresInView();
     void validateAllStructures();
 
@@ -99,6 +97,10 @@ private Q_SLOTS:
 private:
     Okteta::Address startAddress(const TopLevelDataInformation* data) const;
     Okteta::AddressRange dataRange(const DataInformation* data) const;
+
+    void setByteOrder(int order);
+    void updateData(const Okteta::ArrayChangeMetricsList& list);
+    void addChildItem(TopLevelDataInformation* child);
 
 private:
     // source
