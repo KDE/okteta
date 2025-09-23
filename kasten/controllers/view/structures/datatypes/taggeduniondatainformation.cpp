@@ -185,7 +185,7 @@ BitCount64 TaggedUnionDataInformation::childPosition(const DataInformation* chil
     }
 
     if (!found) {
-        const QVector<DataInformation*> others = currentChildren();
+        const QVector<DataInformation*>& others = currentChildren();
         for (auto* current : others) {
             if (current == child) {
                 found = true;
@@ -209,7 +209,7 @@ BitCount32 TaggedUnionDataInformation::size() const
         total += child->size();
     }
 
-    const QVector<DataInformation*> others = currentChildren();
+    const QVector<DataInformation*>& others = currentChildren();
     for (auto* other : others) {
         total += other->size();
     }
@@ -235,7 +235,7 @@ int TaggedUnionDataInformation::indexOf(const DataInformation* const data) const
         index++;
     }
 
-    const QVector<DataInformation*> others = currentChildren();
+    const QVector<DataInformation*>& others = currentChildren();
     for (auto* other : others) {
         if (other == data) {
             return index;
@@ -253,7 +253,7 @@ DataInformation* TaggedUnionDataInformation::childAt(unsigned int index) const
     if (index < permanentChildCount) {
         return mChildren.at(index);
     }
-    const QVector<DataInformation*> others = currentChildren();
+    const QVector<DataInformation*>& others = currentChildren();
     if (index < permanentChildCount + others.size()) {
         return others.at(index - permanentChildCount);
     }
