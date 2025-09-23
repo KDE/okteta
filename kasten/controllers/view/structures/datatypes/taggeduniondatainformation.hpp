@@ -75,7 +75,7 @@ public: // DataInformation API
     bool isTaggedUnion() const override;
 
 public:
-    void appendDefaultField(DataInformation* field, bool emitSignal);
+    void appendDefaultField(std::unique_ptr<DataInformation>&& field, bool emitSignal);
     void setAlternatives(std::vector<FieldInfo>&& alternatives, bool emitSignal);
 
 private: // DataInformation API

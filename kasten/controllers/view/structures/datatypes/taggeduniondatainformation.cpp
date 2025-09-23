@@ -43,13 +43,13 @@ QString TaggedUnionDataInformation::typeNameImpl() const
     return i18nc("data type, then name", "tagged union %1", name());
 }
 
-void TaggedUnionDataInformation::appendDefaultField(DataInformation* field, bool emitSignal)
+void TaggedUnionDataInformation::appendDefaultField(std::unique_ptr<DataInformation>&& field, bool emitSignal)
 {
     const uint oldCount = childCount();
     if (emitSignal && mLastIndex == -1) {
         topLevelDataInformation()->_childCountAboutToChange(this, oldCount, oldCount + 1);
     }
-    mDefaultFields.emplace_back(field);
+    mDefaultFields.emplace_back(std::move(field));
     if (emitSignal && mLastIndex == -1) {
         topLevelDataInformation()->_childCountChanged(this, oldCount, oldCount + 1);
     }

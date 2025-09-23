@@ -390,7 +390,7 @@ TaggedUnionDataInformation* DataInformationFactory::newTaggedUnion(const TaggedU
     while (pd.defaultFields->hasNext()) {
         DataInformation* data = pd.defaultFields->next();
         if (data) {
-            tagged->appendDefaultField(data, false);
+            tagged->appendDefaultField(std::unique_ptr<DataInformation>(data), false);
         } else {
             return nullptr; // error message should be logged already
         }
