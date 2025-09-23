@@ -241,7 +241,7 @@ std::unique_ptr<TaggedUnionDataInformation> toTaggedUnion(const QScriptValue& va
 
     tpd.children = std::make_unique<ScriptValueChildrenParser>(info, value.property(PROPERTY_CHILDREN()));
     tpd.defaultFields = std::make_unique<ScriptValueChildrenParser>(info, value.property(PROPERTY_DEFAULT_CHILDREN()));
-    return std::unique_ptr<TaggedUnionDataInformation>(DataInformationFactory::newTaggedUnion(tpd));
+    return DataInformationFactory::newTaggedUnion(tpd);
 }
 
 } // namespace ScriptValueConverter

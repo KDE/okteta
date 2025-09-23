@@ -332,7 +332,7 @@ PointerDataInformation* DataInformationFactory::newPointer(PointerParsedData& pd
                                       pd.pointerScale, pd.interpretFunc);
 }
 
-TaggedUnionDataInformation* DataInformationFactory::newTaggedUnion(const TaggedUnionParsedData& pd)
+std::unique_ptr<TaggedUnionDataInformation> DataInformationFactory::newTaggedUnion(const TaggedUnionParsedData& pd)
 {
     auto tagged = std::make_unique<TaggedUnionDataInformation>(pd.name, pd.parent);
     pd.children->setParent(tagged.get());
@@ -341,12 +341,12 @@ TaggedUnionDataInformation* DataInformationFactory::newTaggedUnion(const TaggedU
         if (data) {
             tagged->appendChild(std::move(data), false);
         } else {
-            return nullptr; // error message should be logged already
+            return {}; // error message should be logged already
         }
     }
     if (tagged->childCount() == 0) {
         pd.error() << "No children in tagged union. At least one is required so that tag can be evaluated.";
-        return nullptr;
+        return {};
     }
     // verify alternatives
     bool alternativesValid = true;
@@ -382,7 +382,7 @@ TaggedUnionDataInformation* DataInformationFactory::newTaggedUnion(const TaggedU
     }
 
     if (!alternativesValid) {
-        return nullptr;
+        return {};
     }
     tagged->setAlternatives(std::move(altInfo), false);
 
@@ -392,8 +392,8 @@ TaggedUnionDataInformation* DataInformationFactory::newTaggedUnion(const TaggedU
         if (data) {
             tagged->appendDefaultField(std::move(data), false);
         } else {
-            return nullptr; // error message should be logged already
+            return {}; // error message should be logged already
         }
     }
-    return tagged.release();
+    return tagged;
 }

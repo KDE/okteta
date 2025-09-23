@@ -527,7 +527,7 @@ std::unique_ptr<TaggedUnionDataInformation> OsdParser::taggedUnionFromXML(const 
         }
     }
 
-    return std::unique_ptr<TaggedUnionDataInformation>(DataInformationFactory::newTaggedUnion(tpd));
+    return DataInformationFactory::newTaggedUnion(tpd);
 }
 
 OsdChildrenParser::OsdChildrenParser(const OsdParserInfo& info, const QDomElement& firstChild)
