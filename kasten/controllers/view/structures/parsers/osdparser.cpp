@@ -372,8 +372,8 @@ std::unique_ptr<StructureDataInformation> OsdParser::structFromXML(const QDomEle
     return std::unique_ptr<StructureDataInformation>(DataInformationFactory::newStruct(supd));
 }
 
-EnumDataInformation* OsdParser::enumFromXML(const QDomElement& xmlElem, bool isFlags,
-                                            const OsdParserInfo& info)
+std::unique_ptr<EnumDataInformation> OsdParser::enumFromXML(const QDomElement& xmlElem, bool isFlags,
+                                                            const OsdParserInfo& info)
 {
     EnumParsedData epd(info);
     epd.type = readProperty(xmlElem, PROPERTY_TYPE());
@@ -384,14 +384,14 @@ EnumDataInformation* OsdParser::enumFromXML(const QDomElement& xmlElem, bool isF
     epd.enumDef = findEnum(epd.enumName, info);
     if (!epd.enumDef) {
         info.error().nospace() << "Enum definition '" << epd.enumName << "' does not exist!";
-        return nullptr;
+        return {};
     }
 
     if (isFlags) {
-        return DataInformationFactory::newFlags(epd);
+        return std::unique_ptr<EnumDataInformation>(DataInformationFactory::newFlags(epd));
     }
 
-    return DataInformationFactory::newEnum(epd);
+    return std::unique_ptr<EnumDataInformation>(DataInformationFactory::newEnum(epd));
 }
 
 std::unique_ptr<StringDataInformation> OsdParser::stringFromXML(const QDomElement& xmlElem,
@@ -423,9 +423,9 @@ std::unique_ptr<DataInformation> OsdParser::parseElement(const QDomElement& elem
     } else if (tag == TYPE_UNION()) {
         data = unionFromXML(elem, info);
     } else if (tag == TYPE_ENUM()) {
-        data = std::unique_ptr<DataInformation>(enumFromXML(elem, false, info));
+        data = enumFromXML(elem, false, info);
     } else if (tag == TYPE_FLAGS()) {
-        data = std::unique_ptr<DataInformation>(enumFromXML(elem, true, info));
+        data = enumFromXML(elem, true, info);
     } else if (tag == TYPE_STRING()) {
         data = stringFromXML(elem, info);
     } else if (tag == TYPE_POINTER()) {
