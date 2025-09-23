@@ -348,14 +348,14 @@ PrimitiveDataInformation* OsdParser::primitiveFromXML(const QDomElement& xmlElem
     return DataInformationFactory::newPrimitive(ppd);
 }
 
-AbstractBitfieldDataInformation* OsdParser::bitfieldFromXML(const QDomElement& xmlElem,
-                                                            const OsdParserInfo& info)
+std::unique_ptr<AbstractBitfieldDataInformation> OsdParser::bitfieldFromXML(const QDomElement& xmlElem,
+                                                                            const OsdParserInfo& info)
 {
     BitfieldParsedData bpd(info);
     bpd.type = readProperty(xmlElem, PROPERTY_TYPE());
     QString width = readProperty(xmlElem, PROPERTY_WIDTH());
     bpd.width = ParserUtils::intFromString(width);
-    return DataInformationFactory::newBitfield(bpd);
+    return std::unique_ptr<AbstractBitfieldDataInformation>(DataInformationFactory::newBitfield(bpd));
 }
 
 std::unique_ptr<UnionDataInformation> OsdParser::unionFromXML(const QDomElement& xmlElem, const OsdParserInfo& info)
@@ -417,7 +417,7 @@ std::unique_ptr<DataInformation> OsdParser::parseElement(const QDomElement& elem
     } else if (tag == TYPE_ARRAY()) {
         data = arrayFromXML(elem, info);
     } else if (tag == TYPE_BITFIELD()) {
-        data = std::unique_ptr<DataInformation>(bitfieldFromXML(elem, info));
+        data = bitfieldFromXML(elem, info);
     } else if (tag == TYPE_PRIMITIVE()) {
         data = std::unique_ptr<DataInformation>(primitiveFromXML(elem, info));
     } else if (tag == TYPE_UNION()) {
