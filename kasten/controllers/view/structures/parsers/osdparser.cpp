@@ -241,13 +241,13 @@ QVector<EnumDefinition::Ptr> OsdParser::parseEnums(const QDomElement& rootElem, 
 
 // Datatypes
 
-ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, const OsdParserInfo& info)
+std::unique_ptr<ArrayDataInformation> OsdParser::arrayFromXML(const QDomElement& xmlElem, const OsdParserInfo& info)
 {
     ArrayParsedData apd(info);
     QString lengthStr = readProperty(xmlElem, PROPERTY_LENGTH());
     if (lengthStr.isEmpty()) {
         info.error() << "No array length specified!";
-        return nullptr;
+        return {};
     }
     // must wrap in parentheses, cannot just evaluate. See https://bugreports.qt-project.org/browse/QTBUG-5757
     const QScriptValue lengthFunc = ParserUtils::functionSafeEval(info.engine, lengthStr);
@@ -269,11 +269,11 @@ ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, const 
             if (typeParser.hasNext()) {
                 info.error() << "More than one possible type for array!";
                 apd.arrayType.reset();
-                return nullptr;
+                return {};
             }
         }
     }
-    return DataInformationFactory::newArray(apd);
+    return std::unique_ptr<ArrayDataInformation>(DataInformationFactory::newArray(apd));
 }
 
 std::unique_ptr<DataInformation> OsdParser::parseChildElement(const QDomElement& xmlElem, const OsdParserInfo& info, const QString& name)
@@ -415,7 +415,7 @@ std::unique_ptr<DataInformation> OsdParser::parseElement(const QDomElement& elem
     if (tag == TYPE_STRUCT()) {
         data = std::unique_ptr<DataInformation>(structFromXML(elem, info));
     } else if (tag == TYPE_ARRAY()) {
-        data = std::unique_ptr<DataInformation>(arrayFromXML(elem, info));
+        data = arrayFromXML(elem, info);
     } else if (tag == TYPE_BITFIELD()) {
         data = std::unique_ptr<DataInformation>(bitfieldFromXML(elem, info));
     } else if (tag == TYPE_PRIMITIVE()) {
