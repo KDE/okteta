@@ -74,6 +74,9 @@ public:
     [[nodiscard]]
     bool isStructureListEmpty() const;
 
+    void mark(const QModelIndex& idx);
+    void unmark(/*const QModelIndex& idx*/);
+
     // interface for model
     [[nodiscard]]
     QVariant headerData(int column, int role) const;
@@ -100,10 +103,6 @@ Q_SIGNALS:
     void isStructureListEmptyChanged(bool isStructureListEmpty);
 
 public Q_SLOTS:
-    void setByteOrder(int order);
-    void mark(const QModelIndex& idx);
-    void unmark(/*const QModelIndex& idx*/);
-    void updateData(const Okteta::ArrayChangeMetricsList& list);
     void setEnabledStructuresInView();
     void validateAllStructures();
 
@@ -119,6 +118,8 @@ private:
     [[nodiscard]]
     Okteta::AddressRange dataRange(const DataInformation* data) const;
 
+    void setByteOrder(int order);
+    void updateData(const Okteta::ArrayChangeMetricsList& list);
     void addChildItem(std::unique_ptr<TopLevelDataInformation>&& child);
 
 private:
