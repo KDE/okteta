@@ -300,36 +300,36 @@ bool DataInformationFactory::commonInitialization(DataInformation* data, const C
 
 }
 
-PointerDataInformation* DataInformationFactory::newPointer(PointerParsedData& pd)
+std::unique_ptr<PointerDataInformation> DataInformationFactory::newPointer(PointerParsedData& pd)
 {
     if (!pd.pointerTarget) {
         pd.error() << "Missing pointer target";
-        return nullptr;
+        return {};
     }
     if (!pd.valueType) {
         pd.error() << "Missing pointer type";
-        return nullptr;
+        return {};
     }
     if (!pd.valueType->isPrimitive()) {
         pd.error() << "Bad pointer type, only unsigned integers are allowed";
-        return nullptr;
+        return {};
     }
     if (pd.interpretFunc.isValid() && !pd.interpretFunc.isFunction()) {
         pd.error() << "Bad pointer interpretation, only functions are allowed";
-        return nullptr;
+        return {};
     }
     DataInformation* const valueType = pd.valueType.release();
     auto primValue = std::unique_ptr<PrimitiveDataInformation>(valueType->asPrimitive());
     if (!(primValue->type() == PrimitiveDataType::UInt8 || primValue->type() == PrimitiveDataType::UInt16
           || primValue->type() == PrimitiveDataType::UInt32 || primValue->type() == PrimitiveDataType::UInt64)) {
         pd.error() << "Bad pointer type, only unsigned integers are allowed"; // TODO offsets (signed int + bitfields)
-        return nullptr;
+        return {};
     }
-    return new PointerDataInformation(pd.name,
-                                      std::move(pd.pointerTarget),
-                                      std::move(primValue),
-                                      pd.parent,
-                                      pd.pointerScale, pd.interpretFunc);
+    return std::make_unique<PointerDataInformation>(pd.name,
+                                                    std::move(pd.pointerTarget),
+                                                    std::move(primValue),
+                                                    pd.parent,
+                                                    pd.pointerScale, pd.interpretFunc);
 }
 
 std::unique_ptr<TaggedUnionDataInformation> DataInformationFactory::newTaggedUnion(const TaggedUnionParsedData& pd)

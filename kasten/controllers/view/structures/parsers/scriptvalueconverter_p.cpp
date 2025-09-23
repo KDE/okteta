@@ -187,7 +187,7 @@ std::unique_ptr<PointerDataInformation> toPointer(const QScriptValue& value, con
     childInfo.name = NAME_POINTER_VALUE_TYPE();
     ppd.valueType = toDataInformation(value.property(PROPERTY_TYPE()), childInfo);
 
-    return std::unique_ptr<PointerDataInformation>(DataInformationFactory::newPointer(ppd));
+    return DataInformationFactory::newPointer(ppd);
 }
 
 std::unique_ptr<EnumDataInformation> toEnum(const QScriptValue& value, bool flags, const ParserInfo& info)

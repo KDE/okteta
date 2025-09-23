@@ -338,7 +338,7 @@ std::unique_ptr<PointerDataInformation> OsdParser::pointerFromXML(const QDomElem
         }
     }
     ppd.pointerTarget = parseChildElement(childElement, info, NAME_POINTER_TARGET());
-    return std::unique_ptr<PointerDataInformation>(DataInformationFactory::newPointer(ppd));
+    return DataInformationFactory::newPointer(ppd);
 }
 
 std::unique_ptr<PrimitiveDataInformation> OsdParser::primitiveFromXML(const QDomElement& xmlElem, const OsdParserInfo& info)

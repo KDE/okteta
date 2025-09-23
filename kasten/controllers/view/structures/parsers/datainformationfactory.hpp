@@ -174,7 +174,7 @@ EnumDataInformation* newEnum(const EnumParsedData& pd);
 FlagDataInformation* newFlags(const EnumParsedData& pd);
 ArrayDataInformation* newArray(ArrayParsedData& pd);
 StringDataInformation* newString(const StringParsedData& pd);
-PointerDataInformation* newPointer(PointerParsedData& pd);
+std::unique_ptr<PointerDataInformation> newPointer(PointerParsedData& pd);
 std::unique_ptr<UnionDataInformation> newUnion(const StructOrUnionParsedData& pd);
 std::unique_ptr<StructureDataInformation> newStruct(const StructOrUnionParsedData& pd);
 std::unique_ptr<TaggedUnionDataInformation> newTaggedUnion(const TaggedUnionParsedData& pd);
