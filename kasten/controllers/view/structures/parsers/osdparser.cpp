@@ -369,7 +369,7 @@ std::unique_ptr<StructureDataInformation> OsdParser::structFromXML(const QDomEle
 {
     StructOrUnionParsedData supd(info);
     supd.children = std::make_unique<OsdChildrenParser>(info, xmlElem.firstChildElement());
-    return std::unique_ptr<StructureDataInformation>(DataInformationFactory::newStruct(supd));
+    return DataInformationFactory::newStruct(supd);
 }
 
 std::unique_ptr<EnumDataInformation> OsdParser::enumFromXML(const QDomElement& xmlElem, bool isFlags,

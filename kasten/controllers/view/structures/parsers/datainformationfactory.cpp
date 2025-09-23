@@ -257,9 +257,9 @@ UnionDataInformation* DataInformationFactory::newUnion(const StructOrUnionParsed
     return newStructOrUnion<UnionDataInformation>(pd);
 }
 
-StructureDataInformation* DataInformationFactory::newStruct(const StructOrUnionParsedData& pd)
+std::unique_ptr<StructureDataInformation> DataInformationFactory::newStruct(const StructOrUnionParsedData& pd)
 {
-    return newStructOrUnion<StructureDataInformation>(pd);
+    return std::unique_ptr<StructureDataInformation>(newStructOrUnion<StructureDataInformation>(pd));
 }
 
 bool DataInformationFactory::commonInitialization(DataInformation* data, const CommonParsedData& pd)
