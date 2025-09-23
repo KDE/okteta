@@ -315,7 +315,7 @@ std::unique_ptr<DataInformation> OsdParser::parseType(const QDomElement& xmlElem
     return ret;
 }
 
-PointerDataInformation* OsdParser::pointerFromXML(const QDomElement& xmlElem, const OsdParserInfo& info)
+std::unique_ptr<PointerDataInformation> OsdParser::pointerFromXML(const QDomElement& xmlElem, const OsdParserInfo& info)
 {
     PointerParsedData ppd(info);
 
@@ -328,17 +328,17 @@ PointerDataInformation* OsdParser::pointerFromXML(const QDomElement& xmlElem, co
         childElement = xmlElem.firstChildElement();
         if (childElement.isNull()) {
             info.error() << "Pointer target is missing! Please add a <target> child element.";
-            return nullptr;
+            return {};
         }
         if (childElement != xmlElem.lastChildElement()) {
             // there is more than one child element
             info.error() << "There is more than one child element, cannot determine which one "
                 "is the pointer target. Wrap the correct one in a <target> element.";
-            return nullptr;
+            return {};
         }
     }
     ppd.pointerTarget = parseChildElement(childElement, info, NAME_POINTER_TARGET());
-    return DataInformationFactory::newPointer(ppd);
+    return std::unique_ptr<PointerDataInformation>(DataInformationFactory::newPointer(ppd));
 }
 
 PrimitiveDataInformation* OsdParser::primitiveFromXML(const QDomElement& xmlElem, const OsdParserInfo& info)
@@ -429,7 +429,7 @@ std::unique_ptr<DataInformation> OsdParser::parseElement(const QDomElement& elem
     } else if (tag == TYPE_STRING()) {
         data = stringFromXML(elem, info);
     } else if (tag == TYPE_POINTER()) {
-        data = std::unique_ptr<DataInformation>(pointerFromXML(elem, info));
+        data = pointerFromXML(elem, info);
     } else if (tag == TYPE_TAGGED_UNION()) {
         data = taggedUnionFromXML(elem, info);
     } else {

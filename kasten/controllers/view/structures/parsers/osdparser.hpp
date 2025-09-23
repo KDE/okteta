@@ -57,7 +57,7 @@ public:
 
 private:
     static PrimitiveDataInformation* primitiveFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
-    static PointerDataInformation* pointerFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
+    static std::unique_ptr<PointerDataInformation> pointerFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
     static std::unique_ptr<AbstractBitfieldDataInformation> bitfieldFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
     static std::unique_ptr<EnumDataInformation> enumFromXML(const QDomElement& elem, bool isFlags, const OsdParserInfo& info);
     static std::unique_ptr<StringDataInformation> stringFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
