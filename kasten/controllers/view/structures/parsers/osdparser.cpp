@@ -362,7 +362,7 @@ std::unique_ptr<UnionDataInformation> OsdParser::unionFromXML(const QDomElement&
 {
     StructOrUnionParsedData supd(info);
     supd.children = std::make_unique<OsdChildrenParser>(info, xmlElem.firstChildElement());
-    return std::unique_ptr<UnionDataInformation>(DataInformationFactory::newUnion(supd));
+    return DataInformationFactory::newUnion(supd);
 }
 
 std::unique_ptr<StructureDataInformation> OsdParser::structFromXML(const QDomElement& xmlElem, const OsdParserInfo& info)

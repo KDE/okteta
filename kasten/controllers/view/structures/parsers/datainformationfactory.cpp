@@ -103,10 +103,10 @@ T* newEnumOrFlags(const EnumParsedData& pd)
 }
 
 template <class T>
-T* newStructOrUnion(const StructOrUnionParsedData& supd)
+std::unique_ptr<T> newStructOrUnion(const StructOrUnionParsedData& supd)
 {
-    auto* structOrUnion = new T(supd.name, std::vector<std::unique_ptr<DataInformation>>(), supd.parent);
-    supd.children->setParent(structOrUnion);
+    auto structOrUnion = std::make_unique<T>(supd.name, std::vector<std::unique_ptr<DataInformation>>(), supd.parent);
+    supd.children->setParent(structOrUnion.get());
     while (supd.children->hasNext()) {
         std::unique_ptr<DataInformation> data = supd.children->next();
         if (data) {
@@ -252,14 +252,14 @@ StringDataInformation* DataInformationFactory::newString(const StringParsedData&
     return data;
 }
 
-UnionDataInformation* DataInformationFactory::newUnion(const StructOrUnionParsedData& pd)
+std::unique_ptr<UnionDataInformation> DataInformationFactory::newUnion(const StructOrUnionParsedData& pd)
 {
     return newStructOrUnion<UnionDataInformation>(pd);
 }
 
 std::unique_ptr<StructureDataInformation> DataInformationFactory::newStruct(const StructOrUnionParsedData& pd)
 {
-    return std::unique_ptr<StructureDataInformation>(newStructOrUnion<StructureDataInformation>(pd));
+    return newStructOrUnion<StructureDataInformation>(pd);
 }
 
 bool DataInformationFactory::commonInitialization(DataInformation* data, const CommonParsedData& pd)

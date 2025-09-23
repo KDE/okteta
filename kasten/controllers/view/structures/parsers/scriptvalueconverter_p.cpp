@@ -166,7 +166,7 @@ std::unique_ptr<UnionDataInformation> toUnion(const QScriptValue& value, const P
 {
     StructOrUnionParsedData supd(info);
     supd.children = std::make_unique<ScriptValueChildrenParser>(info, value.property(PROPERTY_CHILDREN()));
-    return std::unique_ptr<UnionDataInformation>(DataInformationFactory::newUnion(supd));
+    return DataInformationFactory::newUnion(supd);
 }
 
 std::unique_ptr<PointerDataInformation> toPointer(const QScriptValue& value, const ParserInfo& info)
