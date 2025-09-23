@@ -179,22 +179,22 @@ FlagDataInformation* DataInformationFactory::newFlags(const EnumParsedData& pd)
     return newEnumOrFlags<FlagDataInformation>(pd);
 }
 
-ArrayDataInformation* DataInformationFactory::newArray(ArrayParsedData& pd)
+std::unique_ptr<ArrayDataInformation> DataInformationFactory::newArray(ArrayParsedData& pd)
 {
     if (!pd.arrayType) {
         pd.error() << "Failed to parse array type!";
-        return nullptr;
+        return {};
     }
     if (!pd.length.isValid()) {
         pd.error() << "No array length specified!";
-        return nullptr;
+        return {};
     }
     const ParsedNumber<uint> fixedLength = ParserUtils::uintFromScriptValue(pd.length);
     if (fixedLength.isValid) {
-        return new ArrayDataInformation(pd.name, fixedLength.value, std::move(pd.arrayType), pd.parent, QScriptValue());
+        return std::make_unique<ArrayDataInformation>(pd.name, fixedLength.value, std::move(pd.arrayType), pd.parent, QScriptValue());
     }
     if (pd.length.isFunction()) {
-        return new ArrayDataInformation(pd.name, 0, std::move(pd.arrayType), pd.parent, pd.length);
+        return std::make_unique<ArrayDataInformation>(pd.name, 0, std::move(pd.arrayType), pd.parent, pd.length);
     }
 
     // neither integer nor function, must be a string containing the name of another element.
@@ -202,19 +202,19 @@ ArrayDataInformation* DataInformationFactory::newArray(ArrayParsedData& pd)
     if (!pd.parent) {
         pd.error() << "Toplevel array has length depending on other field (" << lengthStr
                     << "). This is not possible.";
-        return nullptr;
+        return {};
     }
     if (lengthStr.contains(QLatin1Char('.'))) {
         pd.error() << "Referenced array length element (" << lengthStr << ") contains '.', this is not allowed!";
-        return nullptr; // TODO maybe add possible shorthand length="this.parent.length"
+        return {}; // TODO maybe add possible shorthand length="this.parent.length"
     }
     QString lengthFunctionString = generateLengthFunction(pd.parent, nullptr, lengthStr, QString(), pd);
     if (lengthFunctionString.isEmpty()) {
         pd.error() << "Could not find element " << lengthStr << " referenced as array length!";
-        return nullptr;
+        return {};
     }
     QScriptValue lengthFunction = ParserUtils::functionSafeEval(pd.engine, lengthFunctionString);
-    return new ArrayDataInformation(pd.name, 0, std::move(pd.arrayType), pd.parent, lengthFunction);
+    return std::make_unique<ArrayDataInformation>(pd.name, 0, std::move(pd.arrayType), pd.parent, lengthFunction);
 }
 
 std::unique_ptr<StringDataInformation> DataInformationFactory::newString(const StringParsedData& pd)

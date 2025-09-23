@@ -273,7 +273,7 @@ std::unique_ptr<ArrayDataInformation> OsdParser::arrayFromXML(const QDomElement&
             }
         }
     }
-    return std::unique_ptr<ArrayDataInformation>(DataInformationFactory::newArray(apd));
+    return DataInformationFactory::newArray(apd);
 }
 
 std::unique_ptr<DataInformation> OsdParser::parseChildElement(const QDomElement& xmlElem, const OsdParserInfo& info, const QString& name)

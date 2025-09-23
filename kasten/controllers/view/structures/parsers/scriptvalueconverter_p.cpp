@@ -137,7 +137,7 @@ std::unique_ptr<ArrayDataInformation> toArray(const QScriptValue& value, const P
     childInfo.parent = &dummy;
     apd.arrayType = toDataInformation(childType, childInfo);
 
-    return std::unique_ptr<ArrayDataInformation>(DataInformationFactory::newArray(apd));
+    return DataInformationFactory::newArray(apd);
 }
 
 std::unique_ptr<AbstractBitfieldDataInformation> toBitfield(const QScriptValue& value, const ParserInfo& info)
