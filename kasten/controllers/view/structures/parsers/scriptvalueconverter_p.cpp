@@ -152,7 +152,7 @@ std::unique_ptr<PrimitiveDataInformation> toPrimitive(const QScriptValue& value,
 {
     PrimitiveParsedData ppd(info);
     ppd.type = value.isString() ? value.toString() : value.property(PROPERTY_TYPE()).toString();
-    return std::unique_ptr<PrimitiveDataInformation>(DataInformationFactory::newPrimitive(ppd));
+    return DataInformationFactory::newPrimitive(ppd);
 }
 
 std::unique_ptr<StructureDataInformation> toStruct(const QScriptValue& value, const ParserInfo& info)

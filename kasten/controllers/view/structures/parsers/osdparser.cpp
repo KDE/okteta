@@ -345,7 +345,7 @@ std::unique_ptr<PrimitiveDataInformation> OsdParser::primitiveFromXML(const QDom
 {
     PrimitiveParsedData ppd(info);
     ppd.type = readProperty(xmlElem, PROPERTY_TYPE());
-    return std::unique_ptr<PrimitiveDataInformation>(DataInformationFactory::newPrimitive(ppd));
+    return DataInformationFactory::newPrimitive(ppd);
 }
 
 std::unique_ptr<AbstractBitfieldDataInformation> OsdParser::bitfieldFromXML(const QDomElement& xmlElem,

@@ -49,19 +49,19 @@ AbstractBitfieldDataInformation* DataInformationFactory::newBitfield(const Bitfi
     return bitf;
 }
 
-PrimitiveDataInformation* DataInformationFactory::newPrimitive(const PrimitiveParsedData& pd)
+std::unique_ptr<PrimitiveDataInformation> DataInformationFactory::newPrimitive(const PrimitiveParsedData& pd)
 {
     if (pd.type.isEmpty()) {
         pd.error() << "Type of primitive not specified, cannot create it!";
-        return nullptr;
+        return {};
     }
     LoggerWithContext lwc(pd.logger, pd.context());
     PrimitiveDataType primitiveType = PrimitiveFactory::typeStringToType(pd.type, lwc);
     if (primitiveType == PrimitiveDataType::Invalid || primitiveType == PrimitiveDataType::Bitfield) {
         pd.error() << "Unrecognized primitive type: " << pd.type;
-        return nullptr;
+        return {};
     }
-    return PrimitiveFactory::newInstance(pd.name, primitiveType, lwc, pd.parent);
+    return std::unique_ptr<PrimitiveDataInformation>(PrimitiveFactory::newInstance(pd.name, primitiveType, lwc, pd.parent));
 }
 
 namespace {
